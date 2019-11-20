@@ -19,8 +19,7 @@ ms.locfileid: "74122846"
 ---
 # <a name="what-is-azure-arc-for-servers"></a>Sunucular için Azure Arc nedir?
 
-Sunucular için Azure Arc, Azure dışındaki makineleri yönetmenizi sağlar.
-Azure olmayan bir makine Azure 'a bağlıyken **bağlı bir makine** olur ve Azure 'da kaynak olarak kabul edilir. Her **bağlı makinenin** BIR kaynak kimliği vardır, bir aboneliğin Içindeki bir kaynak grubunun parçası olarak yönetilir ve Azure ilkesi ve etiketleme gibi standart Azure yapılarından faydalanır.
+Sunucular için Azure Arc, Azure dışındaki makineleri yönetmenizi sağlar. Azure olmayan bir makine Azure'a bağlıyken, **Bağlı Makine** olur ve Azure'da bir kaynak olarak kabul edilir. Her **Bağlı Makine**'nin bir kaynak kimliği vardır, bir aboneliğin içindeki bir kaynak grubunun parçası olarak yönetilir, Azure ilkesi ve etiketleme gibi standart Azure yapılarından faydalanır.
 
 Her makineye Azure 'a bağlanmak için bir aracı paketinin yüklü olması gerekir. Bu belgenin geri kalanında işlem daha ayrıntılı olarak açıklanmaktadır.
 
