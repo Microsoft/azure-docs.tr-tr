@@ -1,6 +1,6 @@
 ---
-title: Azure Data factory'de etkinlik silme | Microsoft Docs
-description: Azure Data factory'de silme etkinliği ile çeşitli dosya depoları dosyaları silmeyi öğrenin.
+title: Azure Data Factory etkinliği silme
+description: Çeşitli dosya depolarındaki dosyaları Azure Data Factory silme etkinliğiyle silme hakkında bilgi edinin.
 services: data-factory
 documentationcenter: ''
 author: dearandyxu
@@ -12,38 +12,39 @@ ms.workload: data-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 02/25/2019
-ms.openlocfilehash: 00658b650cdc0b1752bb9f2f205420018c1d6edd
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/20/2019
+ms.openlocfilehash: 8efbf5cd6003781450afe70b8019b39d75290546
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61346352"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73675632"
 ---
-# <a name="delete-activity-in-azure-data-factory"></a>Azure Data factory'de etkinlik Sil
+# <a name="delete-activity-in-azure-data-factory"></a>Azure Data Factory etkinliği silme
 
-Sil etkinliği dosyaları silmek için Azure Data Factory'de kullanabilirsiniz veya şirket içi depolama klasörlerinden depolar veya Bulut depolama. Temizlemeye veya artık gerekli olmadığında dosyalarını arşivlemek için bu etkinliği kullanın.
+Şirket içi depolama mağazalarındaki veya bulut depolama mağazalarındaki dosyaları veya klasörleri silmek için Azure Data Factory silme etkinliğini kullanabilirsiniz. Artık gerekli olmadığında dosyaları temizlemek veya arşivlemek için bu etkinliği kullanın.
 
 > [!WARNING]
-> Silinen dosyaları veya klasörleri geri yüklenemez. Sil etkinliği dosyaları veya klasörleri silme için kullanırken dikkatli olun.
+> Silinen dosyalar veya klasörler geri yüklenemez. Dosya veya klasörleri silmek için Silme etkinliğini kullanırken dikkatli olun.
 
 ## <a name="best-practices"></a>En iyi uygulamalar
 
-Silme etkinliği kullanmak için bazı öneriler şunlardır:
+Silme etkinliğini kullanmaya yönelik bazı öneriler aşağıda verilmiştir:
 
--   Gelecekte geri yüklemeniz gereken durumunda silme etkinliği ile silmeden önce dosyalarınızı yedekleyin.
+-   Bunları gelecekte geri yüklemeniz gerekiyorsa, silme etkinliği ile silmeden önce dosyalarınızı yedekleyin.
 
--   Data Factory depolama Mağazası'ndan klasörleri veya dosyaları silmek için yazma izinlerine sahip olduğundan emin olun.
+-   Data Factory, depolama deposundan klasörleri veya dosyaları silmek için yazma izinlerine sahip olduğundan emin olun.
 
--   Aynı anda yazılmakta olan dosyaları silme değil emin olun. 
+-   Yazılmakta olan dosyaları aynı anda sildiğinizden emin olun. 
 
--   Dosya veya klasör bir şirket içi sisteminden silmek istiyorsanız, 3.14 büyük bir sürümle şirket içinde barındırılan Integration runtime'ı kullandığınızdan emin olun.
+-   Şirket içi bir sistemden dosya veya klasör silmek istiyorsanız, 3,14 'den büyük bir sürüme sahip şirket içinde barındırılan bir tümleştirme çalışma zamanı kullandığınızdan emin olun.
 
-## <a name="supported-data-stores"></a>Desteklenen veri depolar
+## <a name="supported-data-stores"></a>Desteklenen veri depoları
 
 -   [Azure Blob Depolama](connector-azure-blob-storage.md)
 -   [Azure Data Lake Storage Gen1](connector-azure-data-lake-store.md)
--   [Azure Data Lake depolama 2. nesil](connector-azure-data-lake-storage.md)
+-   [Azure Data Lake Storage 2.](connector-azure-data-lake-storage.md)
+-   [Azure Dosya Depolama](connector-azure-file-storage.md)
 
 ### <a name="file-system-data-stores"></a>Dosya sistemi veri depoları
 
@@ -51,6 +52,7 @@ Silme etkinliği kullanmak için bazı öneriler şunlardır:
 -   [FTP](connector-ftp.md)
 -   [SFTP](connector-sftp.md)
 -   [Amazon S3](connector-amazon-simple-storage-service.md)
+-   [Google bulut depolaması](connector-google-cloud-storage.md)
 
 ## <a name="syntax"></a>Sözdizimi
 
@@ -81,21 +83,21 @@ Silme etkinliği kullanmak için bazı öneriler şunlardır:
 
 | Özellik | Açıklama | Gerekli |
 | --- | --- | --- |
-| Veri kümesi | Hangi dosya veya klasör, silinecek belirlemek için veri kümesi başvurusu sağlar | Evet |
-| özyinelemeli | Dosya silinmiş yinelemeli olarak alt klasörleri veya yalnızca belirtilen klasör olup olmadığını gösterir.  | Hayır. Varsayılan değer: `false`. |
-| maxConcurrentConnections | Depolama deposu, klasör veya dosyaları silmek için eşzamanlı olarak bağlanmak için bağlantı sayısı.   |  Hayır. Varsayılan değer: `1`. |
-| EnableLogging | Silinmiş bir klasör veya dosya adlarını kaydedin gerekip gerekmediğini gösterir. TRUE ise silme etkinliği davranışlarını günlük dosyasını okuyarak izleyebilmeniz için daha fazla günlük dosyasını kaydetmek için bir depolama hesabı sağlamak gerekir. | Hayır |
-| logStorageSettings | Yalnızca uygun olduğunda enablelogging = true.<br/><br/>Silme etkinliği tarafından silinmiş klasör veya dosya adlarını içeren bir günlük dosyasını kaydetmek istediğiniz bir grup olabilir depolama özellik belirtilmiş. | Hayır |
-| linkedServiceName | Yalnızca uygun olduğunda enablelogging = true.<br/><br/>Bağlı hizmetin adı [Azure depolama](connector-azure-blob-storage.md#linked-service-properties), [Azure Data Lake depolama Gen1](connector-azure-data-lake-store.md#linked-service-properties), veya [Azure Data Lake depolama Gen2](connector-azure-data-lake-storage.md#linked-service-properties) günlük dosyasının depolanacağı klasörü içeren veya dosya adları Silme etkinliği tarafından silindi. | Hayır |
-| yol | Yalnızca uygun olduğunda enablelogging = true.<br/><br/>Günlük dosyasını depolama hesabınızdaki kaydetmek istediğiniz yola gözatın. Bir yol belirtmezseniz, hizmet sizin için bir kapsayıcı oluşturur. | Hayır |
+| Veri kümesi | Hangi dosya veya klasörün silineceğini belirleyen veri kümesi başvurusunu sağlar | Evet |
+| öz | Dosyaların alt klasörlerden veya yalnızca belirtilen klasörden yinelemeli olarak silinip silinmediğini belirtir.  | Hayır. Varsayılan değer: `false`. |
+| maxConcurrentConnections | Klasör veya dosyaları silmek için aynı anda depolama deposuna bağlanacak bağlantı sayısı.   |  Hayır. Varsayılan değer: `1`. |
+| enablelogging | Silinmiş olan klasörü veya dosya adlarını kaydetmeniz gerekip gerekmediğini belirtir. Doğru ise, günlük dosyasını okuyarak silme etkinliğinin davranışlarını izleyebilmeniz için günlük dosyasını kaydetmek üzere bir depolama hesabı sağlamanız gerekir. | Hayır |
+| logStorageSettings | Yalnızca EnableLogging = true olduğunda geçerlidir.<br/><br/>Silme etkinliği tarafından silinmiş klasörü veya dosya adlarını içeren günlük dosyasını kaydetmek istediğiniz yerde belirtilebileceği bir depolama özellikleri grubu. | Hayır |
+| linkedServiceName | Yalnızca EnableLogging = true olduğunda geçerlidir.<br/><br/>Silme etkinliği tarafından silinmiş klasörü veya dosya adlarını içeren günlük dosyasını depolamak için [Azure depolama](connector-azure-blob-storage.md#linked-service-properties)'nın bağlı hizmeti, [Azure Data Lake Storage 1.](connector-azure-data-lake-store.md#linked-service-properties)veya [Azure Data Lake Storage 2.](connector-azure-data-lake-storage.md#linked-service-properties) . Dosya silmek için silme etkinliği tarafından kullanılan Integration Runtime aynı türde bir yapılandırılmalıdır. | Hayır |
+| Yolun | Yalnızca EnableLogging = true olduğunda geçerlidir.<br/><br/>Günlük dosyasını depolama hesabınıza kaydetme yolu. Bir yol sağlamazsanız, hizmet sizin için bir kapsayıcı oluşturur. | Hayır |
 
 ## <a name="monitoring"></a>İzleme
 
-Burada görmek ve sonuçları Sil etkinliğinin izleme iki yerde vardır: 
--   Sil etkinliğinin çıktısı.
+Silme etkinliğinin sonuçlarını görebileceğiniz ve izleyebileceğiniz iki yer vardır: 
+-   Sil etkinliğinin çıktısından.
 -   Günlük dosyasından.
 
-### <a name="sample-output-of-the-delete-activity"></a>Örnek çıktı silme etkinliği
+### <a name="sample-output-of-the-delete-activity"></a>Delete etkinliğinin örnek çıktısı
 
 ```json
 { 
@@ -113,35 +115,35 @@ Burada görmek ve sonuçları Sil etkinliğinin izleme iki yerde vardır:
 }
 ```
 
-### <a name="sample-log-file-of-the-delete-activity"></a>Örnek günlük dosya silme etkinliği
+### <a name="sample-log-file-of-the-delete-activity"></a>Delete etkinliğinin örnek günlük dosyası
 
 | Ad | Kategori | Durum | Hata |
 |:--- |:--- |:--- |:--- |
-| Test1/yyy.JSON | Dosya | Silme |  |
-| Test2/hello789.txt | Dosya | Silme |  |
-| Test2/test3/hello000.txt | Dosya | Silme |  |
-| test2/test3/zzz.json | Dosya | Silme |  |
+| Test1/yyy. JSON | Dosya | Silme |  |
+| Test2/hello789. txt | Dosya | Silme |  |
+| Test2/test3/hello000. txt | Dosya | Silme |  |
+| Test2/test3/zzz. JSON | Dosya | Silme |  |
 
-## <a name="examples-of-using-the-delete-activity"></a>Silme etkinliği kullanma örnekleri
+## <a name="examples-of-using-the-delete-activity"></a>Delete etkinliğini kullanma örnekleri
 
-### <a name="delete-specific-folders-or-files"></a>Belirli klasörleri veya dosyaları silme
+### <a name="delete-specific-folders-or-files"></a>Belirli klasörleri veya dosyaları sil
 
-Deponun aşağıdaki klasör yapısına sahiptir:
+Mağaza aşağıdaki klasör yapısına sahiptir:
 
-Kök /<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_1 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_2 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_1 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6 txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_2 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8 txt
+Asıl<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_1/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_2/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_1/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_2/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8. txt
 
-Şimdi veri kümesinden farklı özellik değeri birleşimi tarafından klasör veya dosyaları silmek için Sil etkinliği ve silme etkinliği kullanıyorsanız:
+Artık, klasörü veya dosyaları veri kümesinden ve silme etkinliğinden farklı özellik değeri bileşimine göre silmek için Sil etkinliğini kullanıyorsunuz:
 
-| folderPath (veri kümesinden) | Dosya adı (veri kümesinden) | özyinelemeli (etkinliğinden Sil) | Çıktı |
+| folderPath (veri kümesi) | Dosya adı (veri kümesi) | özyinelemeli (silme etkinliğinden) | Çıktı |
 |:--- |:--- |:--- |:--- |
-| Kök / Folder_A_2 | NULL | False | Kök /<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_1 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_2 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>4 txt</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>5.csv</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_1 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6 txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_2 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8 txt |
-| Kök / Folder_A_2 | NULL | True | Kök /<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_1 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;<strike>Folder_A_2 /</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>4 txt</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>5.csv</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>Folder_B_1 /</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>6 txt</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>7.csv</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>Folder_B_2 /</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>8 txt</strike> |
-| Kök / Folder_A_2 | *.txt | False | Kök /<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_1 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_2 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>4 txt</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_1 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6 txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_2 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8 txt |
-| Kök / Folder_A_2 | *.txt | True | Kök /<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_1 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_2 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>4 txt</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_1 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>6 txt</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7.csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_2 /<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>8 txt</strike> |
+| Root/Folder_A_2 | NULL | False | Asıl<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_1/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_2/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>4. txt</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>5. csv</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_1/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_2/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8. txt |
+| Root/Folder_A_2 | NULL | True | Asıl<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_1/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;<strike>Folder_A_2/</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>4. txt</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>5. csv</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>Folder_B_1/</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>6. txt</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>7. csv</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>Folder_B_2/</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>8. txt</strike> |
+| Root/Folder_A_2 | *. txt | False | Asıl<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_1/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_2/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>4. txt</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_1/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_2/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8. txt |
+| Root/Folder_A_2 | *. txt | True | Asıl<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_1/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. txt<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;Folder_A_2/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>4. txt</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_1/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>6. txt</strike><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. csv<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder_B_2/<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strike>8. txt</strike> |
 
-### <a name="periodically-clean-up-the-time-partitioned-folder-or-files"></a>Zaman bölümlenmiş klasör veya dosyaları düzenli aralıklarla temizlemek
+### <a name="periodically-clean-up-the-time-partitioned-folder-or-files"></a>Zaman bölümlenmiş klasörü veya dosyaları düzenli aralıklarla Temizleme
 
-Saat bölümlenmiş klasör veya dosyaları düzenli aralıklarla temizlemek için bir işlem hattı oluşturabilirsiniz.  Örneğin, klasör yapısı olarak benzerdir: `/mycontainer/2018/12/14/*.csv`.  Zamanlama tetikleyicisi hangi klasöre veya dosyalara her işlem hattı silinmesi gerektiğini belirlemek için ADF sistem değişkeninden yararlanabilirsiniz. 
+Bölümlenmiş klasör veya dosyaları düzenli aralıklarla temizlemek için bir işlem hattı oluşturabilirsiniz.  Örneğin, klasör yapısı şöyle benzerdir: `/mycontainer/2018/12/14/*.csv`.  Her bir işlem hattı çalıştırmasında hangi klasör veya dosyaların silineceğini belirlemek için, zamanlama tetikleyicisinden ADF sistem değişkeninden yararlanabilirsiniz. 
 
 #### <a name="sample-pipeline"></a>Örnek işlem hattı
 
@@ -220,7 +222,7 @@ Saat bölümlenmiş klasör veya dosyaları düzenli aralıklarla temizlemek iç
 }
 ```
 
-#### <a name="sample-trigger"></a>Örnek tetikleyicisi
+#### <a name="sample-trigger"></a>Örnek tetikleyici
 
 ```json
 {
@@ -259,9 +261,9 @@ Saat bölümlenmiş klasör veya dosyaları düzenli aralıklarla temizlemek iç
 }
 ```
 
-### <a name="clean-up-the-expired-files-that-were-last-modified-before-201811"></a>2018\.1.1 önce en son değiştirilen süresi sona eren dosyaların Temizle
+### <a name="clean-up-the-expired-files-that-were-last-modified-before-201811"></a>2018.1.1 önce en son değiştirilen dosyaları temizle
 
-Dosya öznitelik filtresi yararlanarak eski veya süresi dolmuş dosyaları temizlemek için bir işlem hattı oluşturabilirsiniz: "Veri"LastModified.  
+Veri kümesindeki "LastModified" dosya özniteliği filtresinden yararlanarak eski veya süre dola dosyalarını temizlemek için bir işlem hattı oluşturabilirsiniz.  
 
 #### <a name="sample-pipeline"></a>Örnek işlem hattı
 
@@ -321,12 +323,12 @@ Dosya öznitelik filtresi yararlanarak eski veya süresi dolmuş dosyaları temi
 }
 ```
 
-### <a name="move-files-by-chaining-the-copy-activity-and-the-delete-activity"></a>Kopyalama etkinliği ve silme etkinliği zincirleme dosyaları taşıma
+### <a name="move-files-by-chaining-the-copy-activity-and-the-delete-activity"></a>Kopyalama etkinliğini ve silme etkinliğini zincirleyerek dosyaları taşıyın
 
-Bir dosyayı dosya kopyalamak için kopyalama etkinliği ve bir işlem hattındaki bir dosyayı silmek için Sil etkinliği kullanarak taşıyabilirsiniz.  Birden çok dosyayı taşımak istediğinizde, GetMetadata etkinliği + filtre etkinliği + Foreach etkinliği + kopyalama etkinliği kullanma + etkinlik aşağıdaki örnekte olduğu gibi silin:
+Bir dosyayı kopyalamak için kopyalama etkinliği kullanarak bir dosyayı taşıyabilir ve sonra bir işlem hattındaki dosyayı silebilirsiniz.  Birden çok dosyayı taşımak istediğinizde, aşağıdaki örnekte gösterildiği gibi GetMetadata etkinlik + Filtre etkinliği + ForEach etkinlik + kopyalama etkinliği + sil etkinliğini kullanabilirsiniz:
 
 > [!NOTE]
-> Yalnızca bir klasör yolu içeren bir veri kümesini tanımlama ve ardından bir kopyalama etkinliği'ni kullanarak tüm klasör taşımak istiyorsanız ve aynı veri kümesine bir klasörü temsil eden başvurmak için silme etkinliği çok dikkatli olmanız gerekir. Yeni dosyalar klasörüne silme işlemi ve kopyalama işlemi arasında gelen olmayacaktır emin olmak sahip olmasıdır.  Klasör kullandığınızda, kopyalama etkinliği yalnızca kopyalama işi tamamlandı ancak silme etkinliği değil stared şu anda gelen yeni dosyalar varsa destinati için kopyalanmaz bu gelen dosya silme etkinliği sileceğini mümkündür henüz klasörün tamamını silerek şirket. 
+> Tüm klasörü yalnızca bir klasör yolu içeren bir veri kümesi tanımlayarak ve sonra bir kopyalama etkinliği ve bir klasörü temsil eden aynı veri kümesine başvurmak için silme etkinliği kullanarak taşımak istiyorsanız, çok dikkatli olmanız gerekir. Bunun nedeni, kopyalama işlemi ve silme işlemi arasında klasöre ulaşan yeni dosyalar OLMADıĞıNDAN emin olmanızı sağlar.  Kopyalama etkinliğinizi kopyalama işini tamamlamış ancak silme etkinliği henüz tamamlanmadığında, klasörde klasöre ulaşan yeni dosyalar varsa, DELETE etkinliğinin destinati kopyalanmamış olan bu yeni gelen dosyayı silmesi mümkündür. henüz tüm klasörü silerek. 
 
 #### <a name="sample-pipeline"></a>Örnek işlem hattı
 
@@ -485,7 +487,7 @@ Bir dosyayı dosya kopyalamak için kopyalama etkinliği ve bir işlem hattında
 
 #### <a name="sample-datasets"></a>Örnek veri kümeleri
 
-Veri kümesi, GetMetadata etkinliği tarafından kullanılan dosya listesini numaralandırır.
+Dosya listesini numaralandırmak için GetMetadata etkinliği tarafından kullanılan veri kümesi.
 
 ```json
 {
@@ -537,7 +539,7 @@ Kopyalama etkinliği ve silme etkinliği tarafından kullanılan veri kaynağı 
 }
 ```
 
-Kopyalama etkinliği tarafından kullanılan verileri hedef veri kümesi.
+Kopyalama etkinliği tarafından kullanılan veri hedefi için veri kümesi.
 
 ```json
 {
@@ -563,14 +565,17 @@ Kopyalama etkinliği tarafından kullanılan verileri hedef veri kümesi.
     }
 }
 ```
+
+Ayrıca, dosyaları [buradan](solution-template-move-files.md)taşıyacağınız şablonu da alabilirsiniz.
+
 ## <a name="known-limitation"></a>Bilinen sınırlama
 
--   Silme etkinliği silme joker karakteri tarafından açıklanan klasörlerin listesini desteklemez.
+-   Silme etkinliği joker karakterle açıklanan klasörlerin listesini silmeyi desteklemez.
 
--   Dosya öznitelik Filtresi kullanırken: modifiedDatetimeStart ve modifiedDatetimeEnd Silinecek dosyalar seçmek için "dosya adı" ayarladığınızdan emin olun: "*" veri kümesindeki.
+-   Dosya özniteliği filtresi kullanılırken, silinecek dosyaları seçmek için modifiedDatetimeStart ve modifiedDatetimeEnd ' i, veri kümesinde "fileName": "*" ayarladığınızdan emin olun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure Data Factory'de dosyaları taşıma hakkında daha fazla bilgi edinin.
+Azure Data Factory dosyaları taşıma hakkında daha fazla bilgi edinin.
 
 -   [Azure Data Factory'deki Veri Kopyalama aracı](copy-data-tool.md)

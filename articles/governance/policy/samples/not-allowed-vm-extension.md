@@ -1,20 +1,16 @@
 ---
-title: Örnek - VM uzantıları izin verilmiyor
-description: Bu örnek ilke tanımını sanal makinelerde belirtilen uzantılara kullanımını engeller.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-izin verilmeyen VM uzantıları
+description: Bu örnek ilke tanımı, sanal makinelerde belirtilen uzantıların kullanımını yasaklar.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: 29ca02023eb06463962dd207ca74bc705069a3aa
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: 639a5dba7e33b9df51be1a7407ac5450af322e86
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60821478"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74069977"
 ---
-# <a name="sample---not-allowed-vm-extensions"></a>Örnek - VM uzantıları izin verilmiyor
+# <a name="sample---not-allowed-vm-extensions"></a>Örnek-izin verilmeyen VM uzantıları
 
 Belirtilen uzantıların kullanılmasını engeller. Yasaklanan uzantı türlerini içeren bir dizi belirtirsiniz.
 
@@ -28,7 +24,7 @@ Belirtilen uzantıların kullanılmasını engeller. Yasaklanan uzantı türleri
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FCompute%2Fnot-allowed-vmextension%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FCompute%2Fnot-allowed-vmextension%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

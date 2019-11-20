@@ -1,72 +1,67 @@
 ---
-title: Azure Application Insights ile web uygulamaları için kullanıcı saklama analizi | Microsoft docs
-description: Kaç kullanıcının uygulamanızı döndürür?
-services: application-insights
-documentationcenter: ''
-author: NumberByColors
-manager: carmonm
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights Web uygulamaları için Kullanıcı bekletme Analizi | Microsoft docs
+description: Uygulamanıza kaç Kullanıcı geri dönmeli?
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 05/03/2017
-ms.pm_owner: daviste;NumberByColors
-ms.reviewer: mbullwin
+author: NumberByColors
 ms.author: daviste
-ms.openlocfilehash: bda79520dd86cc14161f6f22cd24feb2e35849ab
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 05/03/2017
+ms.reviewer: mbullwin
+ms.openlocfilehash: 5f5f6235354adc565815ac2eab0a1c774267102d
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60372643"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899412"
 ---
-# <a name="user-retention-analysis-for-web-applications-with-application-insights"></a>Application Insights ile web uygulamaları için kullanıcı saklama analizi
+# <a name="user-retention-analysis-for-web-applications-with-application-insights"></a>Application Insights ile Web uygulamaları için Kullanıcı bekletme Analizi
 
-Saklama özelliği [Azure Application Insights](../../azure-monitor/app/app-insights-overview.md) kaç kullanıcının uygulamanıza dönün ve ne sıklıkta kullanıcılar belirli görevleri veya hedeflere ulaşmak analiz yardımcı olur. Örneğin, bir oyun site çalıştırırsanız, ödüllü sonra iade kimin numarası ile bir oyun kaybettikten sonra siteye geri dön kullanıcılar sayıda kıyaslayarak. Bu bilgi, hem kullanıcı deneyiminizi ve iş stratejinizin geliştirmeye yardımcı olabilir.
+[Azure Application Insights](../../azure-monitor/app/app-insights-overview.md) 'de bekletme özelliği, uygulamanıza kaç Kullanıcı dönmeli ve belirli görevleri ne sıklıkta gerçekleştirdikleri ve amaçları elde ettikleri hakkında analiz etmenize yardımcı olur. Örneğin, bir oyun sitesi çalıştırırsanız, kazandıktan sonra geri dönüş sayısı ile bir oyun kaybedildikten sonra siteye geri dönen Kullanıcı numaralarını karşılaştırabilirsiniz. Bu bilgi, hem Kullanıcı deneyiminizi hem de iş stratejinizi iyileştirmenize yardımcı olabilir.
 
-## <a name="get-started"></a>başlarken
+## <a name="get-started"></a>Kullanmaya Başlayın
 
-Application Insights portalında, elde tutma aracı verileri henüz göremiyorsanız [kullanım araçları ile çalışmaya başlama hakkında bilgi edinin](usage-overview.md).
+Application Insights portalında bekletme aracında verileri henüz görmüyorsanız, [kullanım araçlarını kullanmaya nasıl başlaleyeceğinizi öğrenin](usage-overview.md).
 
-## <a name="the-retention-tool"></a>Elde tutma aracı
+## <a name="the-retention-tool"></a>Bekletme aracı
 
 ![Elde tutma aracı](./media/usage-retention/retention.png)
 
-1. Araç çubuğunu yeni saklama raporlar oluşturun, mevcut bekletme raporları açın, geçerli bekletme raporu kaydedin veya kaydedilmiş raporları için yapılan değişiklikleri geri al, rapor veri yenileme, e-posta veya doğrudan bağlantı üzerinden raporu paylaşmak ve belgelerine erişmek olarak kaydedin açmasına izin verir. Sayfa. 
-2. Varsayılan olarak, bekletme şey tüm kullanıcılar daha sonra geri geldi ve diğer her şey bir dönem boyunca yaptığınız gösterir. Belirli kullanıcı etkinlikleri üzerinde odağını daraltmak için olayları farklı bir birleşimini seçebilirsiniz.
-3. Bir veya daha fazla filtre özellikleri ekleyin. Örneğin, belirli bir ülke veya bölgedeki kullanıcılar üzerinde odaklanabilirsiniz. Tıklayın **güncelleştirme** filtreleri ayarladıktan sonra. 
-4. Toplam elde tutma grafiğini, seçilen süre kullanıcı saklama bir özetini gösterir. 
-5. Izgara #2'de Sorgu Oluşturucu göre tutulan kullanıcı sayısını gösterir. Her satır, dönem gösterilen saat içinde herhangi bir olay gerçekleştiren bir kullanıcıların kohortu temsil eder. Sıradaki her hücre en az bir kez daha sonraki bir dönemde ne kadarının bu kohort döndürülen gösterir. Bazı kullanıcılar birden fazla dönemde döndürebilir. 
-6. Görüşler kartları, en çok beş başlatma olaylarını ve daha iyi anlamak, bekletme raporun kullanıcılara vermek için en çok beş döndürülen olayları gösterir. 
+1. Araç çubuğu, kullanıcıların yeni bekletme raporları oluşturmalarına, var olan bekletme raporlarını açmasına, geçerli bekletme raporunu kaydetmesine veya farklı kaydetmeye, kaydedilen raporlarda yapılan değişiklikleri geri almasına, rapordaki verileri yenilemesine, raporu e-posta veya doğrudan bağlantı ile paylaşmaya ve belgelere erişmesine olanak sağlar sayfasında. 
+2. Varsayılan olarak, saklama, daha sonra herhangi bir şeyi yapan tüm kullanıcıları gösterir ve bir süre içinde başka bir şey gerçekleştirdi. Belirli kullanıcı etkinliklerinde odağı daraltmak için farklı olay birleşimleri seçebilirsiniz.
+3. Özelliklere bir veya daha fazla filtre ekleyin. Örneğin, belirli bir ülke veya bölgedeki kullanıcılara odaklanırsınız. Filtreleri ayarladıktan sonra **Güncelleştir** ' e tıklayın. 
+4. Genel bekletme grafiğinde, seçilen dönemdeki Kullanıcı bekletmesinin bir özeti gösterilir. 
+5. Kılavuz, #2 ' deki sorgu oluşturucusuna göre tutulan kullanıcı sayısını gösterir. Her satır, gösterilen süre içinde herhangi bir olayı gerçekleştiren kullanıcıların kohortu temsil eder. Satırdaki her hücrede, bu kohortu sonraki bir dönemde en az bir kez döndürüldüğü gösterilmektedir. Bazı kullanıcılar birden fazla dönemde geri dönebilir. 
+6. Öngörüler kartları, kullanıcılara bekletme raporlarını daha iyi anlamak için en fazla beş başlatma olayı ve en fazla beş döndürülen olay gösterir. 
 
-![Bekletme fareyle üzerine gelindiğinde](./media/usage-retention/hover.png)
+![Bekletme fare üzerine gelme](./media/usage-retention/hover.png)
 
-Kullanıcılar hücre ne anlama geldiğini açıklayan analytics düğmesi ve araç ipuçları erişmek için elde tutma aracı hücreleri üzerine getirin. Analiz düğmesine hücreden kullanıcı oluşturmak için önceden doldurulmuş bir sorgu ile analiz aracı kullanıcılara alır. 
+Kullanıcılar, bir, hücrenin ne anlama geldiğini açıklayan analiz düğmesine ve araç ipuçlarına erişmek için bekletme aracında hücrelerin üzerine gelebilirler. Analiz düğmesi, kullanıcıları hücreden Kullanıcı oluşturmak için önceden doldurulmuş bir sorgu ile analiz aracına götürür. 
 
-## <a name="use-business-events-to-track-retention"></a>İş olayları, bekletme izlemek için kullanabilirsiniz.
+## <a name="use-business-events-to-track-retention"></a>Saklama izlemek için iş olaylarını kullanma
 
-En kullanışlı bekletme analiz almak için önemli iş etkinlikleri temsil eden olayları ölçün. 
+En kullanışlı bekletme analizini sağlamak için önemli iş etkinliklerini temsil eden olayları ölçün. 
 
-Örneğin, çok sayıda kullanıcı görüntülediği oyuna olmadan bir sayfa uygulamanızda açılabilir. Daha önce keyfini sonra oyuna kaç kişinin döndürür, yanlış tahmin yalnızca sayfa görünümleri izleme bu nedenle sağlar. Oyuncuların döndürme NET bir görüntüsünü almak için uygulamanızı bir kullanıcının gerçekten yürütüldüğünde bir özel olay göndermesi gerekir.  
+Örneğin, birçok kullanıcı, görüntülediği oyunu oynamadan uygulamanızdaki bir sayfayı açabilir. Bu nedenle, yalnızca sayfa görünümlerini izlemek, daha önce oynadıktan sonra oyunu çalmak için kaç kişinin geri döndürdüğü kesin bir tahmin sağlar. Oyuncu iadelerinin açık bir görüntüsünü almak için, bir kullanıcı aslında yürütüldüğünde uygulamanız özel bir olay göndermelidir.  
 
-Anahtar iş eylemleri temsil eden özel olaylar kodlayın ve bu bekletme çözümleme için iyi bir uygulamadır. Oyun sonucu yakalamak için bir özel olay Application Insights'a göndermek için kod satırı yazmanız gerekir. Web sayfası koduna veya Node.JS yazma, şöyle görünür:
+Önemli iş eylemlerini temsil eden özel olayları kodlayarak ve bunları bekletme analizinizi kullanacak şekilde kullanmak iyi bir uygulamadır. Oyunun sonucunu yakalamak için, Application Insights özel bir olay göndermek üzere bir kod satırı yazmanız gerekir. Web sayfası koduna veya Node. JS ' ye yazarsanız, şöyle görünür:
 
 ```JavaScript
     appinsights.trackEvent("won game");
 ```
 
-ASP.NET sunucusu kod:
+ASP.NET sunucu kodu:
 
 ```csharp
    telemetry.TrackEvent("won game");
 ```
 
-[Özel olaylar yazma hakkında daha fazla bilgi](../../azure-monitor/app/api-custom-events-metrics.md#trackevent).
+[Özel olayları yazma hakkında daha fazla bilgi edinin](../../azure-monitor/app/api-custom-events-metrics.md#trackevent).
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Kullanım deneyimlerini etkinleştirmek için göndermeye başlayın [özel olaylar](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackevent) veya [sayfa görünümleri](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#page-views).
-- Özel olay veya sayfa görüntülemesi zaten gönderirseniz, kullanıcıların hizmetinizin nasıl öğrenmek için kullanım araçları keşfedin.
+- Kullanım deneyimlerini etkinleştirmek için [özel olaylar](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackevent) veya [sayfa görünümleri](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#page-views)göndermeye başlayın.
+- Özel olayları veya sayfa görünümlerini zaten gönderirseniz, kullanıcıların hizmetinizi nasıl kullandığını öğrenmek için kullanım araçları ' nı araştırın.
     - [Kullanıcılar, Oturumlar, Etkinlikler](usage-segmentation.md)
     - [Huniler](usage-funnels.md)
     - [Kullanıcı Akışları](usage-flows.md)

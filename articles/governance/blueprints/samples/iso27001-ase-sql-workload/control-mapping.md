@@ -1,215 +1,212 @@
 ---
-title: Örnek - ISO 27001 ASE/SQL iş yükü şema - denetim eşleme
-description: Azure İlkesi ve RBAC ISO 27001 App Service ortamı/SQL veritabanı iş yükü şema örnek eşleme denetimi.
-author: DCtheGeek
-ms.author: dacoulte
+title: ISO 27001 AKEN/SQL iş yükü şeması örnek denetimi eşleme
+description: ISO 27001 App Service Ortamı/SQL veritabanı iş yükü şeması örneği Azure Ilkesi ve RBAC için denetim eşlemesi.
 ms.date: 03/14/2019
 ms.topic: sample
-ms.service: blueprints
-manager: carmonm
-ms.openlocfilehash: b0a2d81d2490ded460f4bbb98ebce0b943ba91df
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: ff27f0d2076fc86454f547aaa67a112ed3c30f73
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60876197"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74032176"
 ---
-# <a name="control-mapping-of-the-iso-27001-asesql-workload-blueprint-sample"></a>ISO 27001 ASE/SQL iş yükü şema örnek denetimi eşleme
+# <a name="control-mapping-of-the-iso-27001-asesql-workload-blueprint-sample"></a>ISO 27001 AKEN/SQL iş yükü şeması örneğinin denetim eşlemesi
 
-Aşağıdaki makalede, Azure şemaları ISO 27001 ASE/SQL iş yükü şema örnek ISO 27001 denetimlerinin nasıl eşlendiğini ayrıntıları. Denetimler hakkında daha fazla bilgi için bkz. [ISO 27001](https://www.iso.org/isoiec-27001-information-security.html).
+Aşağıdaki makalede, Azure şemaları ISO 27001 Ao/SQL Iş yükü şeması 'nın ISO 27001 denetimlerine nasıl eşlendiği açıklanır. Denetimler hakkında daha fazla bilgi için bkz. [ıso 27001](https://www.iso.org/isoiec-27001-information-security.html).
 
-Şu eşlemeler üzeresiniz **ISO 27001: 2013** kontrol eder. Gezinti, doğrudan bir özel denetim eşlemesi atlamak için sağ taraftaki kullanın. Eşlenen denetimleri birçoğu ile uygulanan bir [Azure İlkesi](../../../policy/overview.md) girişim. Tam girişim gözden geçirmek için açık **ilke** Azure portal ve select **tanımları** sayfası. Daha sonra bulmak ve seçmek  **[Önizleme] denetim ISO 27001: 2013 denetler ve denetim gereksinimlerini desteklemek için belirli VM uzantılarını dağıtma** yerleşik ilke girişimi.
+Aşağıdaki eşlemeler **ıso 27001:2013** denetimlerine göre yapılır. Sağ taraftaki gezinmeyi kullanarak doğrudan belirli bir denetim eşlemesine atlayın. Eşlenmiş denetimlerin birçoğu bir [Azure Policy](../../../policy/overview.md) girişimi ile uygulanır. Tüm girişimi gözden geçirmek için Azure portal **ilkeyi** açın ve **tanımlar** sayfasını seçin. Ardından,\[önizlemeyi bulun ve seçin **\] ıso 27001:2013 denetimlerini denetleyin ve denetim gereksinimleri yerleşik ilke girişimi ' ni desteklemek için belırlı VM uzantılarını dağıtın** .
 
-## <a name="a612-segregation-of-duties"></a>Görev ayrımı prensibini A.6.1.2
+> [!IMPORTANT]
+> Aşağıdaki her denetim bir veya daha fazla [Azure ilke](../../../policy/overview.md) tanımı ile ilişkilidir. Bu ilkeler, denetimiyle [uyumluluğu değerlendirmenize](../../../policy/how-to/get-compliance-data.md) yardımcı olabilir; Ancak, bir denetim ve bir veya daha fazla ilke arasında genellikle bir 1:1 veya bir eşleşme yoktur. Bu nedenle, Azure Ilkesi ile **uyumlu** , yalnızca ilkelerin kendilerine başvurur; Bu, bir denetimin tüm gereksinimleriyle tamamen uyumlu olduğunuzdan emin değildir. Buna ek olarak, uyumluluk standardı şu anda herhangi bir Azure Ilke tanımı tarafından açıklanmayan denetimler içerir. Bu nedenle, Azure Ilkesinde uyumluluk, genel uyumluluk durumunuzu yalnızca kısmi görünümüdür. Bu uyumluluk şeması örneği için denetimler ve Azure Ilke tanımları arasındaki ilişkilendirmeler zaman içinde değişebilir. Değişiklik geçmişini görüntülemek için [GitHub kayıt geçmişine](https://github.com/MicrosoftDocs/azure-docs/commits/master/articles/governance/blueprints/samples/iso27001-ase-sql-workload/control-mapping.md)bakın.
 
-Tek bir Azure aboneliği sahibi olan Yönetim yedeklilik için izin vermez. Buna karşılık, çok fazla Azure aboneliğine sahip olan, güvenliği aşılmış sahip hesabı aracılığıyla bir ihlal olasılığını artırabilir. Bu şema iki atayarak Azure abonelik sahipleri uygun sayıda tutmanıza yardımcı olur. [Azure İlkesi](../../../policy/overview.md) denetim sahipleri Azure aboneliklerinin sayısını tanımlar. Abonelik sahibi izinleri yönetme, uygun görev ayrımı uygulamak yardımcı olabilir.
+## <a name="a612-segregation-of-duties"></a>A. 6.1.2 ayrımı
 
-- [Önizleme]: Audit minimum number of owners for subscription
-- [Önizleme]: Audit maximum number of owners for a subscription
+Yalnızca bir Azure aboneliğinin sahibi, yönetici artıklığına izin vermez. Bunun tersine, çok fazla sayıda Azure aboneliği sahibi, güvenliği aşılmış bir sahip hesabı aracılığıyla ihlal olasılığını artırabilir. Bu şema, Azure abonelikleri için sahip sayısını denetleyen iki [Azure ilke](../../../policy/overview.md) tanımı atayarak uygun sayıda Azure abonelik sahibini korumanıza yardımcı olur. Abonelik sahibi izinlerinin yönetilmesi, görevlerin uygun bir şekilde ayrılmasını sağlamanıza yardımcı olabilir.
 
-## <a name="a821-classification-of-information"></a>A.8.2.1 sınıflandırması bilgileri
+- \[Preview\]: abonelik için en düşük sahip sayısını denetleyin
+- \[Preview\]: bir abonelik için en fazla sahip sayısını denetleme
 
-Azure'nın [SQL güvenlik açığı değerlendirme hizmeti](https://docs.microsoft.com/azure/sql-database/sql-vulnerability-assessment) veritabanınızda depolanan hassas verileri keşfetmenize yardımcı olabilir ve bu verileri sınıflandırmak için öneriler içerir. Bu şema atar bir [Azure İlkesi](../../../policy/overview.md) SQL güvenlik açığı değerlendirmesi taraması sırasında güvenlik açıkları düzeltildiğinden denetleme tanımı.
+## <a name="a821-classification-of-information"></a>A. 8.2.1 bilgi sınıflandırması
 
-- [Önizleme]: Monitor SQL vulnerability assessment results in Azure Security Center
+Azure 'un [SQL güvenlik açığı değerlendirme hizmeti](https://docs.microsoft.com/azure/sql-database/sql-vulnerability-assessment) , veritabanlarınızda depolanan hassas verileri bulmanıza yardımcı olabilir ve bu verileri sınıflandırmaya yönelik öneriler içerir. Bu şema, SQL güvenlik açığı değerlendirme taraması sırasında tanımlanan güvenlik açıklarını denetlemek için bir [Azure ilke](../../../policy/overview.md) tanımı atar.
 
-## <a name="a912-access-to-networks-and-network-services"></a>Ağ ve ağ hizmetlerini A.9.1.2 erişimi
+- \[Preview\]: Azure Güvenlik Merkezi 'nde SQL güvenlik açığı değerlendirmesi sonuçlarını Izleme
 
-Azure uygular [rol tabanlı erişim denetimi](../../../../role-based-access-control/overview.md) Azure kaynaklarına kimlerin erişebildiğini yönetmek için (RBAC). Bu şema yardımcı olan yedi atayarak Azure kaynaklarına erişimi denetlemek [Azure İlkesi](../../../policy/overview.md) tanımlar. Bu ilkeler kaynak türlerinin kullanımını denetleyin ve daha esnek olarak izin verebileceği yapılandırmaları kaynaklarına erişim.
-Yetkili kullanıcıların Azure kaynaklarına erişim sağlamak için düzeltici eylemleri Yardım kısıtlanmış, bu ilkeleri can ihlal anlama kaynaklar.
+## <a name="a912-access-to-networks-and-network-services"></a>A. 9.1.2, ağlara ve ağ hizmetlerine erişim
 
-- [Önizleme]: Deploy VM extension to audit Linux VM accounts with no passwords
-- [Önizleme]: Deploy VM extension to audit Linux VM allowing remote connections from accounts with no
-  Parolalars
-- [Önizleme]: Audit Linux VM accounts with no passwords
-- [Önizleme]: Audit Linux VM allowing remote connections from accounts with no passwords
-- Klasik depolama hesaplarının kullanımını denetleyin
-- Klasik sanal makinelerin kullanımını denetleyin
-- Yönetilen diskler kullanmayan VM'leri denetle
+Azure, Azure kaynaklarına kimlerin erişebileceğini yönetmek için [rol tabanlı erişim denetimi](../../../../role-based-access-control/overview.md) (RBAC) uygular. Bu şema yedi [Azure ilke](../../../policy/overview.md) tanımı atayarak Azure kaynaklarına erişimi denetlemenize yardımcı olur. Bu ilkeler, kaynaklara daha fazla izin vermeyi sağlayan kaynak türlerinin ve yapılandırmaların kullanımını denetler.
+Bu ilkeleri ihlal eden kaynakları anlamak, Azure kaynaklarının yetkili kullanıcılarla sınırlı olduğundan emin olmak için düzeltici eylemler almanıza yardımcı olabilir.
 
-## <a name="a923-management-of-privileged-access-rights"></a>A.9.2.3 Yönetimi ayrıcalıklı erişim hakları
+- \[Preview\]: parola olmadan Linux VM hesaplarını denetlemek için VM uzantısı dağıtma
+- \[Preview\]: bir parola içermeyen hesaplardan uzak bağlantılara izin veren Linux VM 'yi denetlemek için VM uzantısı dağıtma
+- \[Preview\]: parolasız Linux VM hesaplarını denetleme
+- \[Preview\]: parola içermeyen hesaplardan uzak bağlantılara izin veren Linux VM 'yi denetleme
+- Klasik depolama hesaplarının kullanımını denetleme
+- Klasik sanal makinelerin kullanımını denetleme
+- Yönetilen diskleri kullanmayan VM 'Leri denetleme
 
-Bu şema kısıtlamak ve ayrıcalıklı erişim hakları dört atayarak denetlemenize yardımcı olur. [Azure İlkesi](../../../policy/overview.md) sahip dış hesapların denetim ve/veya izinleri ve hesapları sahip yazma ve/veya yazma izinleri tanımları Bu, çok faktörlü kimlik doğrulaması etkin yok. Azure rol tabanlı erişim denetimi (RBAC) kimlerin erişebildiğini yönetmek için Azure kaynaklarına uygular. Bu şema SQL sunucuları ve Service Fabric için Azure Active Directory kimlik doğrulaması kullanımını denetlemek için üç Azure İlkesi tanım ayrıca atar. Azure Active Directory'yi kullanarak kimlik doğrulaması, Basitleştirilmiş izin yönetimi ve veritabanı kullanıcıları ve diğer Microsoft hizmetlerinde merkezi kimlik yönetimi sağlar. Bu plan, ayrıca özel bir RBAC kurallar kullanımını denetlemek için bir Azure İlkesi tanım atar. Özel bir RBAC kurallar hata yapmaya açık olarak özel bir RBAC kuralları uygulamak nerede anlama, gereksinim ve uygun uygulama doğrulamanıza yardımcı olabilir.
+## <a name="a923-management-of-privileged-access-rights"></a>A. 9.2.3 ayrıcalıklı erişim haklarının yönetimi
 
-- [Önizleme]: Audit accounts with owner permissions who are not MFA enabled on a subscription
-- [Önizleme]: Audit accounts with write permissions who are not MFA enabled on a subscription
-- [Önizleme]: Audit external accounts with owner permissions on a subscription
-- [Önizleme]: Audit external accounts with write permissions on a subscription
-- SQL sunucusuna Azure Active Directory Yöneticisi sağlanmasını denetleyin.
-- Service Fabric'te istemci kimlik doğrulaması için Azure Active Directory kullanımını denetleyin
-- Özel RBAC kurallarının kullanımını denetleyin
+Bu şema, sahip ve/veya yazma izinleri ve çok faktörlü kimlik doğrulaması etkinleştirilmemiş olan sahip ve/veya yazma izinlerine sahip olan dış hesapları denetlemek için dört [Azure ilke](../../../policy/overview.md) tanımı atayarak ayrıcalıklı erişim haklarını kısıtlayıp denetlemenize yardımcı olur. Azure, Azure kaynaklarına kimlerin erişebileceğini yönetmek için rol tabanlı erişim denetimi (RBAC) uygular. Bu şema Ayrıca, SQL Server ve Service Fabric için Azure Active Directory kimlik doğrulaması kullanımını denetlemek üzere üç Azure ilke tanımı da atar. Azure Active Directory kimlik doğrulaması kullanmak, veritabanı kullanıcıları ve diğer Microsoft Hizmetleri için Basitleştirilmiş izin yönetimi ve merkezi kimlik yönetimine izin verebilir. Bu şema ayrıca özel RBAC kurallarının kullanımını denetlemek için bir Azure ilke tanımı atar. Özel RBAC kurallarının hangi noktada uygulanacağını anlamak, özel RBAC kuralları hata durumunda olduğundan, gereksinimi ve uygun uygulamayı doğrulamanıza yardımcı olabilir.
 
-## <a name="a924-management-of-secret-authentication-information-of-users"></a>Kullanıcıların gizli kimlik bilgilerinin A.9.2.4 Yönetimi
+- \[Preview\]: bir abonelikte MFA etkinleştirilmemiş olan sahip izinlerine sahip olan denetim hesapları
+- \[Preview\]: bir abonelikte MFA etkinleştirilmemiş olan yazma izinleri olan hesapları denetleme
+- \[Preview\]: bir abonelikte sahip izinleri olan dış hesapları denetleme
+- \[Preview\]: bir abonelikte yazma izinleri olan dış hesapları denetleme
+- SQL Server için Azure Active Directory yöneticisinin sağlamasını denetleme
+- Service Fabric istemci kimlik doğrulaması için Azure Active Directory kullanımını denetleme
+- Özel RBAC kurallarının kullanımını denetleme
 
-Bu plan üç atar [Azure İlkesi](../../../policy/overview.md) çok faktörlü kimlik doğrulaması etkin olmayan hesaplar denetlemek için tanımları. Çok faktörlü kimlik doğrulaması, kimlik doğrulama bilgilerini bir parça tehlikede olsa bile hesapları korunmasına yardımcı olur. Çok faktörlü kimlik doğrulama etkin olmadan hesapları izleyerek, büyük olasılıkla tehlikeye hesapları tanımlayabilirsiniz. Bu şema, ayrıca Linux VM denetim iki Azure ilke tanımları yanlış ayarladıysanız, sizi uyarmak için parola dosya izinleri atar. Bu ayar, kimlik doğrulayıcılar tehlikede olmayan emin olmak için düzeltici eylemlerde sağlar.
+## <a name="a924-management-of-secret-authentication-information-of-users"></a>A. 9.2.4, kullanıcıların gizli kimlik doğrulama bilgilerinin yönetimi
 
-- [Önizleme]: Audit accounts with owner permissions who are not MFA enabled on a subscription
-- [Önizleme]: Audit accounts with read permissions who are not MFA enabled on a subscription
-- [Önizleme]: Audit accounts with write permissions who are not MFA enabled on a subscription
-- [Önizleme]: Deploy VM extension to audit Linux VM passwd file permissions
-- [Önizleme]: Audit Linux VM /etc/passwd file permissions are set to 0644
+Bu şema, Multi-Factor Authentication etkinleştirilmemiş hesapları denetlemek için üç [Azure ilke](../../../policy/overview.md) tanımı atar. Multi-Factor Authentication, bir dizi kimlik doğrulama bilgisinin tehlikeye düşmesi durumunda bile hesapların güvenli kalmasına yardımcı olur. Multi-Factor Authentication 'ı etkin olmayan hesapları izleyerek, tehlikeye geçmek daha olası olabilecek hesapları belirleyebilirsiniz. Bu şema Ayrıca, Linux VM parola dosyası izinlerinin yanlış ayarlandıklarında uyarı vermek üzere denetdukları iki Azure ilke tanımı da atar. Bu kurulum, kimlik doğrulayıcılar güvenliğinin aşılmadığından emin olmak için düzeltici eylem gerçekleştirmenizi sağlar.
 
-## <a name="a925-review-of-user-access-rights"></a>Kullanıcı erişim haklarını A.9.2.5 gözden geçirme
+- \[Preview\]: bir abonelikte MFA etkinleştirilmemiş olan sahip izinlerine sahip olan denetim hesapları
+- \[Preview\]: bir abonelikte MFA etkinleştirilmemiş okuma izinleri olan denetim hesapları
+- \[Preview\]: bir abonelikte MFA etkinleştirilmemiş olan yazma izinleri olan hesapları denetleme
+- \[Preview\]: Linux VM passwd dosya izinlerini denetlemek için VM uzantısı dağıtma
+- \[Preview\]: denetim Linux VM/etc/passwd dosyası izinleri 0644 olarak ayarlanmıştır
 
-Azure uygular [rol tabanlı erişim denetimi](../../../../role-based-access-control/overview.md) Azure'da kimlerin erişebileceğini kaynakları yönetmenize yardımcı olmak için (RBAC). Azure portalını kullanarak, kimlerin erişebileceğini Azure kaynaklarını ve izinlerini gözden geçirebilirsiniz. Bu şema dört atar [Azure İlkesi](../../../policy/overview.md) tanımlarını gözden geçirme için amorti edilmiş ve yükseltilmiş izinleri olan dış hesapları dahil olmak üzere, öncelik verilmesi gerektiği hesapları denetleme.
+## <a name="a925-review-of-user-access-rights"></a>A. 9.2.5 Kullanıcı erişimi haklarının Incelemesi
 
-- [Önizleme]: Audit deprecated accounts on a subscription
-- [Önizleme]: Audit deprecated accounts with owner permissions on a subscription
-- [Önizleme]: Audit external accounts with owner permissions on a subscription
-- [Önizleme]: Audit external accounts with write permissions on a subscription
+Azure, Azure 'daki kaynaklara kimlerin erişebileceğini yönetmenize yardımcı olmak için [rol tabanlı erişim denetimi](../../../../role-based-access-control/overview.md) (RBAC) uygular. Azure portal kullanarak, Azure kaynaklarına kimlerin erişebileceğini ve bunların izinlerini gözden geçirebilirsiniz. Bu şema, hesap ve yükseltilmiş izinlere sahip harici hesaplar dahil olmak üzere, gözden geçirme için öncelik verilmelidir, denetlenecek hesaplara dört adet [Azure ilke](../../../policy/overview.md) tanımı atar.
 
-## <a name="a926-removal-or-adjustment-of-access-rights"></a>A.9.2.6 kaldırma veya erişim haklarını ayarlama
+- \[Preview\]: bir abonelikte kullanımdan kaldırılan hesapları denetleme
+- \[önizleme\]: abonelik üzerinde sahip olan kullanım dışı hesapları denetleme
+- \[Preview\]: bir abonelikte sahip izinleri olan dış hesapları denetleme
+- \[Preview\]: bir abonelikte yazma izinleri olan dış hesapları denetleme
 
-Azure uygular [rol tabanlı erişim denetimi](../../../../role-based-access-control/overview.md) Azure'da kimlerin erişebileceğini kaynakları yönetmenize yardımcı olmak için (RBAC). Kullanarak [Azure Active Directory](../../../../active-directory/fundamentals/active-directory-whatis.md) ve RBAC, kullanıcı rolleri, kuruluş değişiklikleri yansıtacak şekilde güncelleştirebilirsiniz. Gerektiğinde, hesapları oturum açma engellendi (veya kaldırıldı) hangi Azure kaynakları için erişim haklarını hemen kaldırır. Bu şema iki atar [Azure İlkesi](../../../policy/overview.md) kaldırılmak üzere davranılacak amorti edilmiş hesabı denetlemek için tanımları.
+## <a name="a926-removal-or-adjustment-of-access-rights"></a>A. 9.2.6 kaldırma veya erişim hakları ayarlama
 
-- [Önizleme]: Audit deprecated accounts on a subscription
-- [Önizleme]: Audit deprecated accounts with owner permissions on a subscription
+Azure, Azure 'daki kaynaklara kimlerin erişebileceğini yönetmenize yardımcı olmak için [rol tabanlı erişim denetimi](../../../../role-based-access-control/overview.md) (RBAC) uygular. [Azure Active Directory](../../../../active-directory/fundamentals/active-directory-whatis.md) ve RBAC kullanarak, Kullanıcı rollerini kurumsal değişiklikleri yansıtacak şekilde güncelleştirebilirsiniz. Gerektiğinde, hesapların oturum açması (veya kaldırılması) engellenebilir ve bu da Azure kaynaklarına erişim haklarını hemen kaldırır. Bu şema, kaldırma için göz önünde bulundurmanız gereken amorti edilmiş hesabı denetlemek için iki [Azure ilke](../../../policy/overview.md) tanımı atar.
 
-## <a name="a942-secure-log-on-procedures"></a>Oturum açma A.9.4.2 güvenli yordamları
+- \[Preview\]: bir abonelikte kullanımdan kaldırılan hesapları denetleme
+- \[önizleme\]: abonelik üzerinde sahip olan kullanım dışı hesapları denetleme
 
-Bu plan, çok faktörlü kimlik doğrulaması etkin olmayan hesaplar denetlemek için üç Azure İlkesi tanım atar. Azure multi-Factor Authentication ikinci bir form kimlik doğrulaması gerektirerek ek güvenlik sağlar ve güçlü kimlik doğrulaması sunar. Çok faktörlü kimlik doğrulama etkin olmadan hesapları izleyerek, büyük olasılıkla tehlikeye hesapları tanımlayabilirsiniz.
+## <a name="a942-secure-log-on-procedures"></a>A. 9.4.2 Secure oturum açma yordamları
 
-- [Önizleme]: Audit accounts with owner permissions who are not MFA enabled on a subscription
-- [Önizleme]: Audit accounts with read permissions who are not MFA enabled on a subscription
-- [Önizleme]: Audit accounts with write permissions who are not MFA enabled on a subscription
+Bu şema, Multi-Factor Authentication etkinleştirilmemiş hesapları denetlemek için üç Azure Ilke tanımı atar. Azure Multi-Factor Authentication, ikinci bir kimlik doğrulama biçimi gerektirerek ek güvenlik sağlar ve güçlü kimlik doğrulaması sunar. Multi-Factor Authentication 'ı etkin olmayan hesapları izleyerek, tehlikeye geçmek daha olası olabilecek hesapları belirleyebilirsiniz.
 
-## <a name="a943-password-management-system"></a>A.9.4.3 parola yönetimi sistemi
+- \[Preview\]: bir abonelikte MFA etkinleştirilmemiş olan sahip izinlerine sahip olan denetim hesapları
+- \[Preview\]: bir abonelikte MFA etkinleştirilmemiş okuma izinleri olan denetim hesapları
+- \[Preview\]: bir abonelikte MFA etkinleştirilmemiş olan yazma izinleri olan hesapları denetleme
 
-Bu şema 10 atayarak güçlü parolalar zorunlu yardımcı olan [Azure İlkesi](../../../policy/overview.md) en az gücü ve diğer parola gereksinimlerini zorlamaz; Windows Vm'leri denetle tanımlar. Parola gücü ilkeyi ihlal VM'lerin tanıma tüm VM kullanıcı hesapları için parola ilkesiyle uyumlu olduğundan emin olmak için düzeltici eylemleri yardımcı olur.
+## <a name="a943-password-management-system"></a>A. 9.4.3 Password yönetim sistemi
 
-- [Önizleme]: Deploy VM extension to audit Windows VM enforces password complexity requirements
-- [Önizleme]: Deploy VM extension to audit Windows VM maximum password age 70 days
-- [Önizleme]: Deploy VM extension to audit Windows VM minimum password age 1 day
-- [Önizleme]: Deploy VM extension to audit Windows VM passwords must be at least 14 characters
-- [Önizleme]: Deploy VM extension to audit Windows VM should not allow previous 24 passwords
-- [Önizleme]: Audit Windows VM enforces password complexity requirements
-- [Önizleme]: Audit Windows VM maximum password age 70 days
-- [Önizleme]: Audit Windows VM minimum password age 1 day
-- [Önizleme]: Audit Windows VM passwords must be at least 14 characters
-- [Önizleme]: Audit Windows VM should not allow previous 24 passwords
+Bu şema, en düşük güç ve diğer parola gereksinimlerini zorlayamama Windows VM 'Leri denetleyen 10 [Azure ilke](../../../policy/overview.md) tanımı atayarak güçlü parolalar zorlamanıza yardımcı olur. Parola gücü ilkesini ihlal eden VM 'lerin farkında, tüm VM Kullanıcı hesaplarının parolalarının ilkeyle uyumlu olduğundan emin olmak için düzeltici eylemler almanıza yardımcı olur.
 
-## <a name="a1011-policy-on-the-use-of-cryptographic-controls"></a>A.10.1.1 İlkesi kullanımı için şifreleme denetimleri
+- \[Preview\]: Windows VM 'yi denetlemek için VM uzantısı dağıtma parola karmaşıklığı gereksinimlerini zorlar
+- \[Preview\]: Windows VM 'yi denetlemek için VM uzantısı dağıtma en fazla parola yaşı 70 gün
+- \[Preview\]: Windows VM 'yi denetlemek için VM uzantısı dağıtma en düşük parola yaşı 1 gün
+- \[Preview\]: Windows VM parolalarını denetlemek için VM uzantısı dağıtma en az 14 karakter olmalıdır
+- \[Preview\]: Windows VM 'yi denetlemek için VM uzantısı dağıtma önceki 24 parolalara izin vermiyor
+- \[Preview\]: Windows VM 'yi denetleme parola karmaşıklığı gereksinimlerini zorlar
+- \[Preview\]: Windows VM en fazla parola yaşı 70 gün
+- \[Preview\]: Windows VM en az parola yaşı 1 gün
+- \[Preview\]: Windows VM parolalarının denetimi en az 14 karakter olmalıdır
+- \[Preview\]: Windows VM 'nin önceki 24 parolalara izin vermemelidir.
 
-Bu şema 13 atayarak, politikasını cryptograph denetimlerin kullanımına yardımcı olan [Azure İlkesi](../../../policy/overview.md) belirli cryptograph denetimlerini ve denetim zorunlu tanımları zayıf şifreleme ayarları kullanın.
-Burada Azure kaynaklarınıza uygun olmayan şifreleme yapılandırmaları olabilir kaynakların, bilgi Güvenlik ilkenize uygun şekilde yapılandırıldığından emin olmak için düzeltici eylemleri yardımcı olabileceğini anlama. Özellikle, bu şema tarafından atanan ilkeler, blob depolama hesapları ve data lake depolama hesapları için şifreleme gerektiren; SQL veritabanlarında saydam veri şifrelemesi; Depolama hesapları, SQL veritabanları, sanal makine disklerini ve Otomasyon hesabı değişkenleri eksik şifrelemesini denetle; Depolama hesapları, işlev uygulamaları, Web uygulaması, API Apps ve Redis Cache için güvenli bağlantıları denetim; sanal makine zayıf parola şifrelemesini denetler; ve Service Fabric şifrelenmemiş iletişimin denetleyebilirsiniz.
+## <a name="a1011-policy-on-the-use-of-cryptographic-controls"></a>Şifreleme denetimlerinin kullanımıyla ilgili bir. 10.1.1 Ilkesi
 
-- [Önizleme]: Audit HTTPS only access for a Function App
-- [Önizleme]: Audit HTTPS only access for a Web Application
-- [Önizleme]: Audit HTTPS only access for an API App
-- [Önizleme]: Audit missing blob encryption for storage accounts
-- [Önizleme]: Deploy VM extension to audit Windows VM should not store passwords using reversible
-  şifrelemen
-- [Önizleme]: Audit Windows VM should not store passwords using reversible encryption
-- [Önizleme]: Monitor unencrypted SQL database in Azure Security Center
-- [Önizleme]: Monitor unencrypted VM Disks in Azure Security Center
-- Otomasyon hesabı değişkenlerinin şifrelemesinin etkinleştirilmesini denetleyin
-- Redis Cache önbelleğinizde yalnızca güvenli bağlantıların etkinleştirilmesini denetleyin
-- Depolama hesaplarına güvenli aktarımı denetleyin
-- Service Fabric'te ClusterProtectionLevel özelliğinin EncryptAndSign olarak ayarlanmasını denetleyin
+Bu şema, belirli bir cryptograph denetimi uygulayan ve zayıf şifreleme ayarlarının kullanımını kontrol eden 13 [Azure ilke](../../../policy/overview.md) tanımı atayarak, bu şemayı cryptograph denetimlerinin kullanımı üzerinde zorlamanıza yardımcı olur.
+Azure kaynaklarınızın en iyi durumda olmayan şifreleme yapılandırmalarının nerede olabileceğini anlamak, kaynakların bilgi güvenliği ilkenize uygun şekilde yapılandırıldığından emin olmak için düzeltici eylemler almanıza yardımcı olabilir. Özellikle, bu şema tarafından atanan ilkeler BLOB depolama hesapları ve Data Lake Storage hesapları için şifreleme gerektirir; SQL veritabanlarında saydam veri şifrelemesi gerektir; depolama hesaplarında, SQL veritabanlarında, sanal makine disklerinde ve Otomasyon hesabı değişkenlerinde eksik şifrelemeyi denetleyin; depolama hesaplarına, Işlev uygulamalarına, Web uygulamasına, API Apps ve Redis Cache yönelik güvenli olmayan bağlantıları denetleyin zayıf sanal makine parola şifrelemesini denetleme; ve şifrelenmemiş Service Fabric iletişimini denetleyin.
+
+- \[Preview\]: bir İşlev Uygulaması için yalnızca HTTPS erişimini denetle
+- \[Preview\]: bir Web uygulaması için yalnızca HTTPS erişimini denetle
+- \[Preview\]: bir API uygulaması için yalnızca HTTPS erişimini denetle
+- \[Preview\]: depolama hesapları için eksik blob şifrelemesini denetle
+- \[Preview\]: Windows VM 'yi denetlemek için VM Uzantısı 'nı dağıtma, parolaları ters çevrilebilir şifreleme kullanarak depolamamalıdır
+- \[önizleme\]: Windows VM 'nin parolaları, ters çevrilebilir şifreleme kullanarak depolamamalıdır
+- \[Preview\]: Azure Güvenlik Merkezi 'nde şifrelenmemiş VM disklerini Izleme
+- Otomasyon hesabı değişkenlerinin şifrelenme kullanımını denetleme
+- Redis Cache yalnızca güvenli bağlantıları etkinleştirme denetimi
+- Depolama hesaplarına Güvenli aktarım denetimi
+- ClusterProtectionLevel özelliğinin ayarını EncryptAndSign olarak denetleyin Service Fabric
 - Saydam veri şifreleme durumunu denetle
+- SQL veritabanlarındaki Saydam Veri Şifrelemesi etkinleştirilmelidir
 
-## <a name="a1241-event-logging"></a>A.12.4.1 olay günlüğü
+## <a name="a1241-event-logging"></a>A. 12.4.1 olay günlüğü
 
-Bu şema sistem olaylarını yedi atayarak kaydedilir olmanıza yardımcı olur. [Azure İlkesi](../../../policy/overview.md) Azure kaynaklarını denetim günlüğü ayarlarını tanımlar.
-Tanılama günlükleri, Azure kaynaklarını içinde gerçekleştirilen işlemler hakkında bilgi sağlar.
+Bu şema, Azure kaynaklarında günlük ayarlarını denetleyen yedi [Azure ilke](../../../policy/overview.md) tanımı atayarak sistem olaylarının günlüğe kaydedilmesini sağlamanıza yardımcı olur.
+Tanılama günlükleri, Azure kaynakları içinde gerçekleştirilen işlemlere ilişkin öngörüler sağlar.
 
-- [Önizleme]: Denetim bağımlılık Aracısı dağıtımı - VM görüntüsü (OS) listeden kaldırıldı
-- [Önizleme]: Bağımlılık Aracısı VMSS - VM görüntüsü (OS) listelenmemiş dağıtımda denetleme
-- [Önizleme]: Denetim günlüğü analiz aracı dağıtımı - VM görüntüsü (OS) listeden kaldırıldı
-- [Önizleme]: Denetim günlüğü analiz aracı dağıtım VMSS - VM görüntüsü (OS) listeden kaldırıldı
-- [Önizleme]: Monitor unaudited SQL database in Azure Security Center
+- \[Preview\]: denetim Dependency Agent dağıtımı-VM görüntüsü (OS) listelenmemiş
+- \[Preview\]: VMSS-VM görüntüsündeki (OS) denetim Dependency Agent dağıtımı listelenmemiş
+- \[Preview\]: denetim Log Analytics aracı dağıtımı-VM görüntüsü (OS) listelenmemiş
+- \[Preview\]: VMSS-VM görüntüsündeki (OS) denetim Log Analytics aracı dağıtımı listelenmemiş
 - Tanılama ayarını denetle
-- SQL sunucu düzeyi Denetim ayarlarını denetle
+- SQL Server Level denetim ayarlarını denetleme
+- SQL Server üzerindeki gelişmiş veri güvenliği ayarlarında denetim etkinleştirilmelidir
 
-## <a name="a1243-administrator-and-operator-logs"></a>Günlükleri A.12.4.3 yönetici and işleci
+## <a name="a1243-administrator-and-operator-logs"></a>A. 12.4.3 Yöneticisi ve işleç günlükleri
 
-Bu şema sistem olaylarını, Azure kaynaklarını denetim günlüğü ayarlarını yedi Azure ilke tanımları atayarak oturum açmış olmanıza yardımcı olur. Tanılama günlükleri, Azure kaynaklarını içinde gerçekleştirilen işlemler hakkında bilgi sağlar.
+Bu şema, Azure kaynaklarında günlük ayarlarını denetleyen yedi Azure ilke tanımı atayarak sistem olaylarının günlüğe kaydedilmesini sağlamanıza yardımcı olur. Tanılama günlükleri, Azure kaynakları içinde gerçekleştirilen işlemlere ilişkin öngörüler sağlar.
 
-- [Önizleme]: Denetim bağımlılık Aracısı dağıtımı - VM görüntüsü (OS) listeden kaldırıldı
-- [Önizleme]: Bağımlılık Aracısı VMSS - VM görüntüsü (OS) listelenmemiş dağıtımda denetleme
-- [Önizleme]: Denetim günlüğü analiz aracı dağıtımı - VM görüntüsü (OS) listeden kaldırıldı
-- [Önizleme]: Denetim günlüğü analiz aracı dağıtım VMSS - VM görüntüsü (OS) listeden kaldırıldı
-- [Önizleme]: Monitor unaudited SQL database in Azure Security Center
+- \[Preview\]: denetim Dependency Agent dağıtımı-VM görüntüsü (OS) listelenmemiş
+- \[Preview\]: VMSS-VM görüntüsündeki (OS) denetim Dependency Agent dağıtımı listelenmemiş
+- \[Preview\]: denetim Log Analytics aracı dağıtımı-VM görüntüsü (OS) listelenmemiş
+- \[Preview\]: VMSS-VM görüntüsündeki (OS) denetim Log Analytics aracı dağıtımı listelenmemiş
 - Tanılama ayarını denetle
-- SQL sunucu düzeyi Denetim ayarlarını denetle
+- SQL Server Level denetim ayarlarını denetleme
+- SQL Server üzerindeki gelişmiş veri güvenliği ayarlarında denetim etkinleştirilmelidir
 
-## <a name="a1244-clock-synchronization"></a>A.12.4.4 saati eşitleme
+## <a name="a1244-clock-synchronization"></a>A. 12.4.4 saat eşitleme
 
-Bu şema sistem olaylarını, Azure kaynaklarını denetim günlüğü ayarlarını yedi Azure ilke tanımları atayarak oturum açmış olmanıza yardımcı olur. Azure günlüklerini eşitlenmiş iç saat kaynakları genelinde olayların süresi bağıntılı bir kayıt oluşturmak için kullanır.
+Bu şema, Azure kaynaklarında günlük ayarlarını denetleyen yedi Azure ilke tanımı atayarak sistem olaylarının günlüğe kaydedilmesini sağlamanıza yardımcı olur. Azure günlükleri, kaynak genelinde olayların zaman bağıntılı bir kaydını oluşturmak için eşitlenmiş iç saatleri kullanır.
 
-- [Önizleme]: Denetim bağımlılık Aracısı dağıtımı - VM görüntüsü (OS) listeden kaldırıldı
-- [Önizleme]: Bağımlılık Aracısı VMSS - VM görüntüsü (OS) listelenmemiş dağıtımda denetleme
-- [Önizleme]: Denetim günlüğü analiz aracı dağıtımı - VM görüntüsü (OS) listeden kaldırıldı
-- [Önizleme]: Denetim günlüğü analiz aracı dağıtım VMSS - VM görüntüsü (OS) listeden kaldırıldı
-- [Önizleme]: Monitor unaudited SQL database in Azure Security Center
+- \[Preview\]: denetim Dependency Agent dağıtımı-VM görüntüsü (OS) listelenmemiş
+- \[Preview\]: VMSS-VM görüntüsündeki (OS) denetim Dependency Agent dağıtımı listelenmemiş
+- \[Preview\]: denetim Log Analytics aracı dağıtımı-VM görüntüsü (OS) listelenmemiş
+- \[Preview\]: VMSS-VM görüntüsündeki (OS) denetim Log Analytics aracı dağıtımı listelenmemiş
 - Tanılama ayarını denetle
-- SQL sunucu düzeyi Denetim ayarlarını denetle
+- SQL Server Level denetim ayarlarını denetleme
+- SQL Server üzerindeki gelişmiş veri güvenliği ayarlarında denetim etkinleştirilmelidir
 
-## <a name="a1251-installation-of-software-on-operational-systems"></a>İşletim sistemlerine yazılım A.12.5.1 yüklemesi
+## <a name="a1251-installation-of-software-on-operational-systems"></a>A. 12.5.1 işletimsel sistemlere yazılım yüklemesi
 
-Uyarlamalı uygulama denetimlerini, Azure Güvenlik Merkezi'nden, Azure'da yer alan sanal makineleriniz uygulamaları denetlemenize yardımcı çalıştırabilirsiniz çözümüdür. Bu plan için izin verilen uygulamalar yapılan değişiklikleri izleyen bir Azure İlkesi tanım atar. Bu özellik, yardımcı olur. Denetim, yazılım yüklemesini ve Azure vm'lerdeki uygulamalar.
+Uyarlamalı uygulama denetimi, Azure Güvenlik Merkezi 'nin Azure 'da bulunan sanal makinelerinizde hangi uygulamaların çalıştırılacağını denetlemenize yardımcı olan bir çözümdür. Bu şema, izin verilen uygulamalar kümesinde yapılan değişiklikleri izleyen bir Azure ilke tanımı atar. Bu özellik, Azure VM 'lerinde yazılım ve uygulama yüklemelerini denetlemenize yardımcı olur.
 
-- [Önizleme]: Monitor possible app Whitelisting in Azure Security Center
+- \[Preview\]: Azure Güvenlik Merkezi 'nde olası uygulama beyaz listesini Izleme
 
-## <a name="a1261-management-of-technical-vulnerabilities"></a>Teknik güvenlik açıklarının A.12.6.1 Yönetimi
+## <a name="a1261-management-of-technical-vulnerabilities"></a>A. 12.6.1 teknik güvenlik açıklarının yönetimi
 
-Bu şema beş atayarak bilgi sistemi güvenlik açıkları yönetmenize yardımcı olan [Azure İlkesi](../../../policy/overview.md) eksik sistem güncelleştirmeleri, işletim sistemi güvenlik açıkları, SQL güvenlik açıkları ve sanal makine izleyen tanımları Azure Güvenlik Merkezi'nde güvenlik açıklarını. Azure Güvenlik Merkezi, dağıtılan Azure kaynaklarınızın güvenlik durumunu gerçek zamanlı öngörülere sahip olmanıza olanak sağlayan bir raporlama yetenekleri sağlar.
+Bu şema, Azure Güvenlik Merkezi 'nde eksik sistem güncelleştirmelerini, işletim sistemi güvenlik açıklarını, SQL güvenlik açıklarını ve sanal makine güvenlik açıklarını izleyen beş [Azure ilke](../../../policy/overview.md) tanımı atayarak bilgi sistemi güvenlik açıklarını yönetmenize yardımcı olur. Azure Güvenlik Merkezi, dağıtılan Azure kaynaklarının güvenlik durumu hakkında gerçek zamanlı Öngörüler elde etme olanağı sunan raporlama özellikleri sağlar.
 
-- [Önizleme]: Monitor missing Endpoint Protection in Azure Security Center
-- [Önizleme]: Monitor missing system updates in Azure Security Center
-- [Önizleme]: Monitor OS vulnerabilities in Azure Security Center
-- [Önizleme]: Monitor SQL vulnerability assessment results in Azure Security Center
-- [Önizleme]: Monitor VM Vulnerabilities in Azure Security Center
+- \[Preview\]: Azure Güvenlik Merkezi 'nde eksik Endpoint Protection Izleme
+- \[Preview\]: Azure Güvenlik Merkezi 'nde eksik sistem güncelleştirmelerini Izleme
+- \[Preview\]: Azure Güvenlik Merkezi 'nde işletim sistemi güvenlik açıklarını Izleme
+- \[Preview\]: Azure Güvenlik Merkezi 'nde SQL güvenlik açığı değerlendirmesi sonuçlarını Izleme
+- \[Preview\]: Azure Güvenlik Merkezi 'nde VM güvenlik açıklarını Izleme
 
-## <a name="a1262-restrictions-on-software-installation"></a>Yazılım yükleme A.12.6.2 kısıtlamaları
+## <a name="a1262-restrictions-on-software-installation"></a>Yazılım yüklemesinde bir. 12.6.2 kısıtlamaları
 
-Uyarlamalı uygulama denetimlerini, Azure Güvenlik Merkezi'nden, Azure'da yer alan sanal makineleriniz uygulamaları denetlemenize yardımcı çalıştırabilirsiniz çözümüdür. Bu plan için izin verilen uygulamalar yapılan değişiklikleri izleyen bir Azure İlkesi tanım atar. Yazılım yükleme kısıtlamaları yazılım güvenlik açıklarından giriş olasılığını azaltmaya yardımcı olabilir.
+Uyarlamalı uygulama denetimi, Azure Güvenlik Merkezi 'nin Azure 'da bulunan sanal makinelerinizde hangi uygulamaların çalıştırılacağını denetlemenize yardımcı olan bir çözümdür. Bu şema, izin verilen uygulamalar kümesinde yapılan değişiklikleri izleyen bir Azure ilke tanımı atar. Yazılım yükleme kısıtlamaları, yazılım güvenlik açıklarına giriş olasılığını azaltmanıza yardımcı olabilir.
 
-- [Önizleme]: Monitor possible app Whitelisting in Azure Security Center
+- \[Preview\]: Azure Güvenlik Merkezi 'nde olası uygulama beyaz listesini Izleme
 
-## <a name="a1311-network-controls"></a>A.13.1.1 ağ denetimleri
+## <a name="a1311-network-controls"></a>A. 13.1.1 ağ denetimleri
 
-Bu şema yönetmenize ve denetlemenize ağları atayarak yardımcı olan bir [Azure İlkesi](../../../policy/overview.md) , esnek kurallara sahip ağ güvenlik grupları izleyen tanımı. Çok esnek olan kuralları istenmeyen ağ erişimini izin verebilir ve gözden geçirilmesi gerekir. Bu şema korumasız uç noktalar, uygulamaları ve depolama hesaplarına izleyen üç Azure İlkesi tanım ayrıca atar. Uç noktaları ve güvenlik duvarı ve depolama hesapları ile sınırsız erişim tarafından korunmayan uygulamalar bilgi sistemi içinde yer alan bilgileri istenmeyen erişime izin verebilir.
+Bu şema, ağ güvenlik gruplarını, izin veren kurallarla izleyen bir [Azure ilke](../../../policy/overview.md) tanımı atayarak ağları yönetmenize ve denetlemenize yardımcı olur. Çok izin verilen kurallar istenmeyen ağ erişimine izin verebilir ve incelenmelidir. Bu şema Ayrıca korumasız uç noktaları, uygulamalar ve depolama hesaplarını izleyen üç Azure ilke tanımı da atar. Bir güvenlik duvarı tarafından korunmayan uç noktalar ve uygulamalar ve Kısıtlanmamış erişimi olan depolama hesapları, bilgi sisteminde bulunan bilgilere istenmeden erişime izin verebilir.
 
-- [Önizleme]: Monitor permissive network access in Azure Security Center
-- [Önizleme]: Monitor unprotected network endpoints in Azure Security Center
-- [Önizleme]: Monitor unprotected web application in Azure Security Center
-- Depolama hesaplarına kısıtlanmamış ağ erişimini denetleyin
+- \[Preview\]: Azure Güvenlik Merkezi 'nde izin veren ağ erişimini Izleme
+- \[Preview\]: Azure Güvenlik Merkezi 'nde korumasız ağ uç noktalarını Izleme
+- \[Preview\]: Azure Güvenlik Merkezi 'nde korumasız Web uygulamasını Izleme
+- Depolama hesaplarına Kısıtlanmamış ağ erişimini denetleme
 
-## <a name="a1321-information-transfer-policies-and-procedures"></a>A.13.2.1 bilgi aktarımı politikaları ve yordamları
+## <a name="a1321-information-transfer-policies-and-procedures"></a>A. 13.2.1 Information transfer ilkeleri ve yordamları
 
-Blueprint bilgi aktarımı Azure Hizmetleri ile güvenli iki atayarak olmanıza yardımcı olur. [Azure İlkesi](../../../policy/overview.md) depolama hesapları ve Redis önbelleği için güvenli bağlantıları denetlemek için tanımları.
+Şema, depolama hesaplarına Güvenli olmayan bağlantıları denetlemek için iki [Azure ilke](../../../policy/overview.md) tanımı atayarak ve Redis Cache Azure hizmetleri ile bilgi aktarımını güvence altına almanıza yardımcı olur.
 
-- Redis Cache önbelleğinizde yalnızca güvenli bağlantıların etkinleştirilmesini denetleyin
-- Depolama hesaplarına güvenli aktarımı denetleyin
+- Redis Cache yalnızca güvenli bağlantıları etkinleştirme denetimi
+- Depolama hesaplarına Güvenli aktarım denetimi
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-ISO 27001 App Service ortamı/SQL veritabanı iş yükü şema örnek denetimi eşleme gözden geçirdikten sonra mimarisi ve bu örneğin nasıl dağıtılacağını öğrenmek için aşağıdaki makaleleri ziyaret edin:
+Artık ISO 27001 App Service Ortamı/SQL veritabanı iş yükü şeması 'nın denetim eşlemesini gözden geçirdiğinize göre, mimari ve bu örneğin nasıl dağıtılacağı hakkında bilgi edinmek için aşağıdaki makaleleri ziyaret edin:
 
 > [!div class="nextstepaction"]
-> [ISO 27001 App Service ortamı/SQL veritabanı iş yükü şema - genel bakış](./index.md)
-> [ISO 27001 App Service ortamı/SQL veritabanı iş yükü blueprint - adımları dağıtma](./deploy.md)
+> [ISO 27001 App Service ortamı/SQL veritabanı iş yükü şeması-genel bakış](./index.md)
+> [ISO 27001 App Service ortamı/SQL veritabanı iş yükü şema-Deploy adımları](./deploy.md)
 
 Şemalar ve bunların kullanımı hakkındaki diğer makaleler:
 

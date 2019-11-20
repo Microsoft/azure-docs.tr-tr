@@ -1,6 +1,6 @@
 ---
-title: SQL veri ambarı ile tümleşik çözümler oluşturma | Microsoft Docs
-description: 'Araçlar ve iş ortakları ile SQL veri ambarı ile tümleştirilen çözümler. '
+title: Tümleşik çözümler oluşturun
+description: Azure SQL veri ambarı ile tümleştirilen çözümler içeren araçlar ve iş ortakları.
 services: sql-data-warehouse
 author: mlee3gsd
 manager: craigg
@@ -10,52 +10,53 @@ ms.subservice: integration
 ms.date: 04/17/2018
 ms.author: martinle
 ms.reviewer: igorstan
-ms.openlocfilehash: 43a714ae175e0d60f20b5e7ad79e1fa90125b0f8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: seo-lt-2019
+ms.openlocfilehash: 6e159e0e254ae8b2515515dfaeb2c514e0f25e0b
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65873333"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73685632"
 ---
-# <a name="integrate-other-services-with-sql-data-warehouse"></a>SQL veri ambarı ile diğer Hizmetleri Tümleştirme
-Çekirdek işlevselliğini ek olarak, SQL veri ambarı birçok diğer Azure Hizmetleri ile tümleştirme olanağı sağlar. Bu hizmetlerden bazıları şunlardır:
+# <a name="integrate-other-services-with-sql-data-warehouse"></a>Diğer hizmetleri SQL veri ambarı ile tümleştirme
+Temel işlevlerine ek olarak, SQL veri ambarı, kullanıcıların Azure 'daki diğer birçok hizmet ile tümleşmesini sağlar. Bu hizmetlerden bazıları şunlardır:
 
 * Power BI
 * Azure Data Factory
 * Azure Machine Learning
 * Azure Stream Analytics
 
-SQL veri ambarı devam Azure ve daha fazlası konusunda daha fazla hizmetleriyle tümleştirmeye yönelik [tümleştirme iş ortaklarının](sql-data-warehouse-partner-data-integration.md).
+SQL veri ambarı, Azure üzerinde daha fazla hizmet ve daha fazla [Tümleştirme iş ortağı](sql-data-warehouse-partner-data-integration.md)ile tümleşmeye devam eder.
 
 ## <a name="power-bi"></a>Power BI
-Power BI tümleştirmesi, dinamik raporlama ve görselleştirme, Power BI ile SQL veri ambarı işlem gücüyle birleştirerek olanak tanır. Power BI tümleştirmesi şu anda içerir:
+Power BI tümleştirme, SQL veri ambarı 'nın işlem gücünü Power BI dinamik raporlama ve görselleştirmesiyle birleştirmenizi sağlar. Power BI tümleştirme Şu anda şunları içerir:
 
-* **Doğrudan bağlantı**: SQL veri ambarına karşı mantıksal itme ile daha gelişmiş bir bağlantı. İtme daha büyük bir ölçekte daha hızlı analizini sağlar.
-* **Power bı'da Aç**: "Power bı'da Aç" düğmesi Power bı'a bağlamak basitleştirilmiş bir yolu için örnek bilgisi geçirir.
+* **Doğrudan bağlantı**: SQL veri ambarı 'nda mantıksal olarak aşağı itme ile daha gelişmiş bir bağlantı. Aşağı itme daha büyük bir ölçekte daha hızlı analiz sağlar.
+* **Power BI açın**: ' Power BI aç ' düğmesi, bağlanmak için basitleştirilmiş bir yöntem için örnek bilgilerini Power BI geçirir.
 
-Daha fazla bilgi için [Power BI ile tümleştirme](sql-data-warehouse-get-started-visualize-with-power-bi.md), veya [Power BI belgeleri](https://powerbi.microsoft.com/blog/exploring-azure-sql-data-warehouse-with-power-bi/).
+Daha fazla bilgi için bkz. [Power BI Ile tümleştirme](sql-data-warehouse-get-started-visualize-with-power-bi.md)veya [Power BI belgeleri](https://powerbi.microsoft.com/blog/exploring-azure-sql-data-warehouse-with-power-bi/).
 
 ## <a name="azure-data-factory"></a>Azure Data Factory
-Azure Data Factory, kullanıcılara karmaşık ayıklama oluşturun ve işlem hatlarını yüklemek için yönetilen bir platform sağlar. Azure Data Factory ile SQL veri ambarı'nın tümleştirme içerir:
+Azure Data Factory, kullanıcılara karmaşık ayıklama ve yükleme işlem hatları oluşturmak için yönetilen bir platform sağlar. SQL veri ambarı 'nın Azure Data Factory tümleştirmesi şunları içerir:
 
-* **Saklı yordamları**: SQL veri ambarı saklı yordamlar yürütülemedi düzenleyin.
-* **Kopyalama**: SQL Data Warehouse'a veri taşımak için ADF kullanın. Bu işlem, perde ADF'nin standart veri taşıma mekanizması veya PolyBase kullanabilirsiniz. 
+* **Saklı yordamlar**: SQL veri ambarı 'nda saklı yordamların yürütülmesini düzenleyin.
+* **Kopyala**: SQL veri ambarı 'na veri TAŞıMAK için ADF kullanın. Bu işlem, tüm kapak altındaki ADF 'nin standart veri taşıma mekanizmasını veya PolyBase 'i kullanabilir. 
 
-Daha fazla bilgi için [Azure Data Factory ile tümleştir](https://docs.microsoft.com/azure/data-factory/load-azure-sql-data-warehouse?toc=/azure/sql-data-warehouse/toc.json).
+Daha fazla bilgi için bkz. [Azure Data Factory tümleştirme](https://docs.microsoft.com/azure/data-factory/load-azure-sql-data-warehouse?toc=/azure/sql-data-warehouse/toc.json).
 
 ## <a name="azure-machine-learning"></a>Azure Machine Learning
-Azure Machine Learning çok sayıda Tahmine dayalı araçlarını kullanarak karmaşık modeller oluşturmanızı sağlayan tam olarak yönetilen bir analiz hizmetidir. SQL veri ambarı, şu işlevleri kullanarak hem kaynak hem de bu modeller için hedef olarak desteklenir:
+Azure Machine Learning, büyük bir tahmine dayalı araç kümesi kullanarak karmaşık modeller oluşturmanıza olanak sağlayan, tam olarak yönetilen bir analiz hizmetidir. SQL veri ambarı, aşağıdaki işlevlere sahip bu modeller için hem kaynak hem de hedef olarak desteklenir:
 
-* **Okunan veriler:** T-SQL kullanarak SQL veri ambarına karşı ölçeğinde modeller sürücü.
-* **Veri yazma:** Değişiklikleri geri SQL veri ambarı için herhangi bir model uygulayın.
+* **Verileri oku:** SQL veri ambarı ile T-SQL kullanarak modelleri ölçeklendirin.
+* **Veri yaz:** Tüm modellerden SQL veri ambarı 'na geri değişiklikleri uygulayın.
 
-Daha fazla bilgi için [Azure Machine Learning ile tümleştir](sql-data-warehouse-get-started-analyze-with-azure-machine-learning.md).
+Daha fazla bilgi için bkz. [Azure Machine Learning tümleştirme](sql-data-warehouse-get-started-analyze-with-azure-machine-learning.md).
 
 ## <a name="azure-stream-analytics"></a>Azure Stream Analytics
-Azure Stream Analytics, işleme ve oluşturulan Azure olay Hub'ından olay verilerini kullanan karmaşık, tam olarak yönetilen bir altyapısıdır.  SQL veri ambarı ile tümleştirme, akış verileri etkili bir şekilde işlenen ve depolanan ilişkisel verileri daha ayrıntılı, daha gelişmiş analizi etkinleştirme yanı sıra sağlar.  
+Azure Stream Analytics, Azure Olay Hub 'ından oluşturulan olay verilerinin işlenmesi ve kullanılması için karmaşık, tam olarak yönetilen bir altyapısıdır.  SQL veri ambarı ile tümleştirme, akış verilerinin, daha derin ve daha gelişmiş analizler sağlayan ilişkisel verilerle birlikte etkili bir şekilde işlenmesini ve depolanmasını sağlar.  
 
-* **İş çıktısı:** Çıkış, Stream Analytics işlerinden doğrudan SQL veri ambarı'na gönderin.
+* **Iş çıkışı:** Stream Analytics işlerden çıktıyı doğrudan SQL veri ambarı 'na gönderin.
 
-Daha fazla bilgi için [Azure Stream Analytics ile tümleştirme](sql-data-warehouse-integrate-azure-stream-analytics.md).
+Daha fazla bilgi için bkz. [Azure Stream Analytics tümleştirme](sql-data-warehouse-integrate-azure-stream-analytics.md).
 
 

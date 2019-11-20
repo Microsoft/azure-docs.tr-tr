@@ -1,47 +1,46 @@
 ---
-title: Web kancaları - konuşma Hizmetleri
-titlesuffix: Azure Cognitive Services
-description: Web kancaları HTTP telefonla geri arama çözümünüzü uzun ilgilenirken iyileştirmek için ideal olan çalışan işlemleri içeri aktarmalar, uyarlaması, doğruluk testi veya uzun süre çalışan dosyalarının döküm gibi.
+title: Web kancaları-konuşma hizmeti
+titleSuffix: Azure Cognitive Services
+description: Web kancaları, içeri aktarmalar, uyarlama, doğruluk testleri veya uzun süre çalışan dosyaların dökümü gibi uzun süre çalışan işlemlerle ilgilenirken çözümünüzü iyileştirmek için ideal HTTP çağrılardır.
 services: cognitive-services
 author: PanosPeriorellis
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 04/11/2019
+ms.date: 07/05/2019
 ms.author: panosper
-ms.custom: seodec18
-ms.openlocfilehash: fbe6fe25b5ff0cd5148e3bba22dec4648399510d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3d07e540bf88c956f61b5d3b2a98702cad616985
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67072302"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68558803"
 ---
 # <a name="webhooks-for-speech-services"></a>Konuşma Hizmetleri için Web kancaları
 
-Web kancaları, uygulamanızın, kullanılabilir olduğunda konuşma Hizmetleri verileri kabul etmek HTTP geri çağırmalarıdır gibi ' dir. Web kancalarını kullanan, yanıt sürekli yoklama yapma ihtiyacını ortadan kaldırarak REST Apı'lerimizi kullanımını iyileştirebilirsiniz. Sonraki birkaç bölümde konuşma Hizmetleri ile Web kancalarını kullanma öğreneceksiniz.
+Web kancaları, uygulamanızın kullanılabilir hale geldiğinde konuşma hizmetlerinden verileri kabul etmesine izin veren HTTP geri çağırmaları gibidir. Web kancalarını kullanarak, yanıt için sürekli yoklama gereksinimini ortadan kaldırarak REST API 'lerimizin kullanımını iyileştirebilirsiniz. Sonraki birkaç bölümde, konuşma Hizmetleri ile Web kancalarını kullanmayı öğreneceksiniz.
 
 ## <a name="supported-operations"></a>Desteklenen işlemler
 
-Web kancaları, konuşma Hizmetleri tüm uzun süre çalışan işlemler için destekler. Aşağıda listelenen işlemlerin her biri, bir HTTP geri çağırma işlemi tamamlandıktan sonra tetikleyebilirsiniz. 
+Konuşma Hizmetleri, uzun süre çalışan tüm işlemler için Web kancalarını destekler. Aşağıda listelenen işlemlerin her biri, tamamlandıktan sonra HTTP geri çağırması tetikleyebilir.
 
-* DataImportCompletion
+* Dataımportcompletion
 * ModelAdaptationCompletion
 * AccuracyTestCompletion
-* TranscriptionCompletion
+* Döküm tamamlama
 * EndpointDeploymentCompletion
 * EndpointDataCollectionCompletion
 
-Ardından, bir Web kancası oluşturalım.
+Sonra bir Web kancası oluşturalım.
 
-## <a name="create-a-webhook"></a>Bir Web kancası oluştur
+## <a name="create-a-webhook"></a>Web kancası oluşturma
 
-Çevrimdışı bir döküm için bir Web kancası oluşturalım. Senaryo: bir kullanıcının zaman uyumsuz olarak Batch tanıma API'SİYLE konuşmaların istediğiniz bir uzun süre çalışan ses dosyası. 
+Çevrimdışı bir döküm için Web kancası oluşturalım. Senaryo: bir Kullanıcı, toplu Iş dökümü API 'SI ile zaman uyumsuz olarak almak istedikleri, uzun süre çalışan bir ses dosyasına sahiptir.
 
-Web kancaları oluşturulabilir bir POST isteğinin https:// yaparak\<bölge\>.cris.ai/api/speechtotext/v2.1/transcriptions/hooks.
+Web kancaları, https://\<Region\>. Cris.ai/api/speechtotext/v2.1/Transcriptions/Hooks öğesine bir post isteği yapılarak oluşturulabilir.
 
-İstek için yapılandırma parametreleri JSON olarak sağlanır:
+İsteğin yapılandırma parametreleri JSON olarak sağlanır:
 
 ```json
 {
@@ -61,17 +60,17 @@ Web kancaları oluşturulabilir bir POST isteğinin https:// yaparak\<bölge\>.c
 
 }
 ```
-Batch tanıma API'sine yapılan tüm POST isteklerinden gerektiren bir `name`. `description` Ve `properties` parametreler isteğe bağlıdır.
+Toplu Iş dökümü API 'sine gönderilen tüm POST istekleri bir `name`gerektirir. `description` Ve`properties` parametreleri isteğe bağlıdır.
 
-`Active` Özelliği, geri URL'nizi açıp silin ve Web kancası kaydını yeniden oluşturmak zorunda kalmadan çağırma geçiş yapmak için kullanılır. Yalnızca işlem sahip olduktan sonra geri kez tam çağırmak gerekiyorsa, anahtar ve Web kancası silme `Active` özelliğini false.
+`Active` Özelliği, Web kancası kaydını silip yeniden oluşturmaya gerek kalmadan URL 'nize geri çağırma ve kapatma yapmak için kullanılır. İşlem tamamlandıktan sonra yalnızca bir kez geri çağrı yapmanız gerekiyorsa, Web kancasını silip `Active` özelliği yanlış olarak değiştirin.
 
-Olay türü `TranscriptionCompletion` olayları dizide sağlanır. Bir döküm terminal durumuna ulaştığı zaman geri uç noktanıza çağırır (`Succeeded` veya `Failed`). İstek geri kayıtlı URL'sine çağırırken içerecek bir `X-MicrosoftSpeechServices-Event` kayıtlı olay türlerinden birini içeren üstbilgi. Kayıtlı olay türüne göre bir istek var. 
+Olay türü `TranscriptionCompletion` , olaylar dizisinde verilmiştir. Bir döküm bir Terminal durumuna (`Succeeded` veya `Failed`) geldiğinde uç noktanıza geri çağrı yapılır. Kayıtlı URL 'ye geri çağrılırken, istek kayıtlı olay türlerinden birini içeren bir `X-MicrosoftSpeechServices-Event` üst bilgi içerir. Kayıtlı olay türü başına bir istek vardır.
 
-Abone olunamıyor bir olay türü yoktur. Bu `Ping` olay türü. Bu tür bir istekle URL'ye ping URL (aşağıya bakın) kullanarak bir Web kancası oluşturma tamamlandığında gönderilir.  
+Abone olabileceğiniz bir olay türü vardır. `Ping` Bu olay türüdür. Bu türe sahip bir istek, ping URL 'SI kullanılırken Web kancası oluşturma işlemi tamamlandıktan sonra URL 'ye gönderilir (aşağıya bakın).  
 
-Yapılandırma `url` özelliği gereklidir. POST istekleri bu URL'ye gönderilir. `secret` HMAC anahtarı gizli dizi ile yükü SHA256 karmasını oluşturmak için kullanılır. Karma olarak ayarlandığından `X-MicrosoftSpeechServices-Signature` kayıtlı URL'ye geri çağrılırken başlığı. Base64 kodlu başlığıdır.
+Yapılandırmada, `url` özelliği gereklidir. POST istekleri bu URL 'ye gönderilir. , `secret` Bir SHA256 karması oluşturmak için, gizli anahtar olarak bir HMAC anahtarı olarak kullanılır. Karma, kayıtlı URL 'ye geri `X-MicrosoftSpeechServices-Signature` çağrılırken üst bilgi olarak ayarlanır. Bu üst bilgi Base64 kodlandı.
 
-Bu örnek, bir yük kullanarak doğrulamak verilmektedir C#:
+Bu örnek, kullanarak C#bir yükün nasıl doğrulandığını göstermektedir:
 
 ```csharp
 
@@ -94,7 +93,7 @@ public async Task<IActionResult> PostAsync([FromHeader(Name = EventTypeHeaderNam
             var validated = contentHash.SequenceEqual(storedHash);
         }
     }
- 
+
     switch (eventTypeHeader)
     {
         case WebHookEventType.Ping:
@@ -106,37 +105,37 @@ public async Task<IActionResult> PostAsync([FromHeader(Name = EventTypeHeaderNam
         default:
             break;
     }
- 
+
     return this.Ok();
 }
 
 ```
-Bu kod parçacığında `secret` çözülmüş ve doğrulandı. Ayrıca, Web kancası olay türü geçirildi görürsünüz. Şu anda tamamlanan döküm başına bir olay yok. Kod, vazgeçmeden önce (ile bir saniyelik bir gecikmenin) her olay için beş kez yeniden dener.
+Bu kod parçacığında `secret` , kodu çözülür ve onaylanır. Ayrıca, Web kancası olay türünün değiştirilmiş olduğunu fark edeceksiniz. Şu anda tamamlandı dökümü başına bir olay vardır. Kod, her olay için beş kez yeniden dener (bir ikinci gecikmeyle) ve vermeden önce.
 
 ### <a name="other-webhook-operations"></a>Diğer Web kancası işlemleri
 
-Tüm kayıtlı Web kancaları almak için: AL https://westus.cris.ai/api/speechtotext/v2.1/transcriptions/hooks
+Tüm kayıtlı Web kancalarını almak için: AL https://westus.cris.ai/api/speechtotext/v2.1/transcriptions/hooks
 
-Belirli bir Web kancası almak için: AL https://westus.cris.ai/api/speechtotext/v2.1/transcriptions/hooks/:id
+Belirli bir Web kancasını almak için: AL https://westus.cris.ai/api/speechtotext/v2.1/transcriptions/hooks/:id
 
-Belirli bir Web kancası kaldırmak için: DELETE https://westus.cris.ai/api/speechtotext/v2.1/transcriptions/hooks/:id
+Belirli bir Web kancasını kaldırmak için: SILMELI https://westus.cris.ai/api/speechtotext/v2.1/transcriptions/hooks/:id
 
-> [!Note] 
-> Yukarıdaki örnekte, 'westus' bölgedir. Bu konuşma Hizmetleri kaynağınızı Azure portalında nerede oluşturduğunuz bölge tarafından değiştirilmelidir.
+> [!Note]
+> Yukarıdaki örnekte, bölge ' westus ' olur. Bu, Azure portal konuşma Hizmetleri kaynağını oluşturduğunuz bölge ile değiştirilmelidir.
 
-POST https://westus.cris.ai/api/speechtotext/v2.1/transcriptions/hooks/:id/ping gövdesi: boş
+Posta https://westus.cris.ai/api/speechtotext/v2.1/transcriptions/hooks/:id/ping gövdesi: boş
 
-Kayıtlı URL'sine bir POST isteği gönderir. İstek içeren bir `X-MicrosoftSpeechServices-Event` üst bilgi değeri ping ile. Web kancası ile bir gizli dizi kaydettiyseniz, içerdiği bir `X-MicrosoftSpeechServices-Signature` bir SHA256 karma akıştaki HMAC anahtar olarak gizli olan üstbilgiyle. Base64 kodlu karmasıdır. 
+Kayıtlı URL 'ye bir POST isteği gönderir. İstek, ping değeri `X-MicrosoftSpeechServices-Event` olan bir üstbilgi içeriyor. Web kancası bir gizli dizi ile kaydedilmişse, gizliliğe sahip bir SHA256 `X-MicrosoftSpeechServices-Signature` karması ile HMAC anahtarı olarak gizli anahtar içeren bir üst bilgi içerecektir. Karma Base64 kodlandı.
 
-POST https://westus.cris.ai/api/speechtotext/v2.1/transcriptions/hooks/:id/test gövdesi: boş
+Posta https://westus.cris.ai/api/speechtotext/v2.1/transcriptions/hooks/:id/test gövdesi: boş
 
-Abone olunan olay türü (döküm) için bir varlık sistemde mevcut olduğundan ve uygun durumda kayıtlı URL'sine bir POST isteği gönderir. Web kancası çağırdığınız son varlık yükü oluşturulur. Varlık mevcutsa POST 204 ile yanıt verecektir. Bir testi isteği yapılabilir, 200 ile yanıt verecektir. Web kancası (örneğin, döküm için) abone GET isteği belirli bir varlığa ait olduğu gibi aynı şeklin istek gövdesidir. İsteğinin `X-MicrosoftSpeechServices-Event` ve `X-MicrosoftSpeechServices-Signature` önce anlatıldığı gibi üst bilgiler.
+Sistemde abone olan olay türü (döküm) için bir varlık varsa ve uygun durumdaysa, kayıtlı URL 'ye bir POST isteği gönderir. Yük, Web kancasını çağıran son varlıktan oluşturulacaktır. Hiçbir varlık yoksa GÖNDERI 204 ile yanıt verir. Bir test isteği yapılırsa, 200 ile yanıt verir. İstek gövdesi, Web kancası 'nun abone olduğu belirli bir varlık için GET isteğindeki ile aynı şekildir (örneğin, döküm için). İstek, `X-MicrosoftSpeechServices-Event` daha önce açıklandığı gibi `X-MicrosoftSpeechServices-Signature` ve üst bilgilerine sahip olacaktır.
 
 ### <a name="run-a-test"></a>Test çalıştırma
 
-Hızlı bir testi yapılabilir Web sitesini kullanarak https://bin.webhookrelay.com. Burada, çağrı edinebilirsiniz belgenin önceki bölümlerinde açıklanan bir Web kancası oluşturmak için HTTP POST için parametre olarak geçirmek için URL'leri yedekleyin.
+Web sitesi https://bin.webhookrelay.com kullanılarak hızlı bir test gerçekleştirilebilir. Buradan, belgede daha önce açıklanan bir Web kancası oluşturmak için HTTP GÖNDERISINI parametre olarak geçirmek üzere geri çağrı URL 'Leri elde edebilirsiniz.
 
-'Oluşturma demetinde' tıklayın ve izleyin ekrandaki bir kanca almak için yönergeler. Ardından kanca konuşma hizmeti sayesinde kaydetmek için bu sayfada sağlanan bilgileri kullanın. Bir geçiş iletisi – bir döküm tamamlanması için yanıt – yükü şu şekilde görünür:
+' Demet oluştur ' düğmesine tıklayın ve ekrandaki yönergeleri izleyerek bir kanca elde edin. Ardından bu sayfada sunulan bilgileri kullanarak konuşmayı konuşma hizmetine kaydedin. Geçiş iletisinin yükü: bir dökümü tamamlamaya yanıt olarak, aşağıdaki gibi görünür:
 
 ```json
 {
@@ -178,7 +177,7 @@ Hızlı bir testi yapılabilir Web sitesini kullanarak https://bin.webhookrelay.
     }
 }
 ```
-Kayıt URL'si ve modelleri kaydetme özelliği kullanılan ileti içerir.
+İleti, kayıt URL 'sini ve bu kaydı silmek için kullanılan modelleri içerir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

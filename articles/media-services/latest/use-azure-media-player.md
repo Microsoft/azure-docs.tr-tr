@@ -1,6 +1,6 @@
 ---
-title: Azure Media Player - Azure ile kayıttan yürütme | Microsoft Docs
-description: Bu konu Azure Media Player genel bir bakış sağlar.
+title: Azure Media Player-Azure ile kayıttan yürütme | Microsoft Docs
+description: Bu konu, Azure Media Player bir genel bakış sunar.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -9,44 +9,47 @@ editor: ''
 ms.service: media-services
 ms.workload: ''
 ms.topic: article
-ms.date: 01/03/2018
+ms.date: 07/17/2019
 ms.author: juliako
-ms.openlocfilehash: fd5bf9f7bca9c667191d0d3f83be6e29a96c8dbe
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6157f59d96770298d947a1cf6ca28aa343e1a0d4
+ms.sourcegitcommit: f5075cffb60128360a9e2e0a538a29652b409af9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64926523"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68311815"
 ---
 # <a name="azure-media-player-overview"></a>Azure Media Player genel bakış
 
-Azure Media Player, Microsoft Azure Media Services'den medya içeriği çok çeşitli tarayıcılar ve cihazlar üzerinde yürütme işlemi yerleşik web video oynatıcı ' dir. Azure Media Player, zenginleştirilmiş bir Uyarlamalı akış deneyimi sağlamak için HTML5, medya kaynağı Uzantıları (MSE) ve şifreli medya Uzantıları (EME) gibi endüstri standartlarından yararlanır. Bu standartlar, bir cihazda veya tarayıcıda mevcut olmadığı durumlarda, Azure Media Player, Flash ve Silverlight'a geri dönüş teknolojisi olarak kullanır. Kullanılan oynatma teknolojisinden bağımsız olarak geliştiriciler, API'lere birleştirilmiş bir JavaScript arabirimi gerekir. Bu Azure Media Services tarafından sunulan içerik için geniş aralığında cihazlar ve tarayıcılar herhangi ek bir çaba olmadan, yürütülecek sağlar.
+Azure Media Player, medya içeriğini çok çeşitli tarayıcılarda ve cihazlarda Microsoft Azure Media Services çalmak için oluşturulmuş bir web video oyuncusu. Azure Media Player HTML5, medya kaynağı uzantıları (MSE) ve şifreli Medya Uzantıları (EME) gibi sektör standartlarını, zenginleştirilmiş bir uyarlamalı akış deneyimi sağlamak için kullanır. Bu standartlar bir cihazda veya bir tarayıcıda kullanılabilir olmadığında, Azure Media Player Flash ve Silverlight 'ı geri dönüş teknolojisi olarak kullanır. Kullanılan kayıttan yürütme teknolojisinden bağımsız olarak, geliştiricilerin API 'Lere erişmek için birleştirilmiş bir JavaScript arabirimi olacaktır. Bu, Azure Media Services tarafından sunulan içeriğin ek bir çaba olmadan çok sayıda cihaz ve tarayıcıda yürütülebilmesini sağlar.
 
-Microsoft Azure Media Services içerik yürütürken HLS, DASH, kesintisiz akış biçimlerinde akış ile sunulan için içerik sağlar. Azure Media Player, aşağıdaki biçimlerde hesaba katar ve platformuna/tarayıcı özelliklerine en iyi bağlantıyı otomatik olarak yürütülür. Media Services PlayReady şifrelemesi ile varlıkları dinamik şifreleme için de tanır veya Zarf şifreleme AES-128 bit. Azure Media Player PlayReady şifre çözme için izin verir ve uygun şekilde yapılandırıldığında şifrelenmiş içerik AES 128 bit. 
+Microsoft Azure Media Services, içeriğin kayıttan yürütülmesi için HLS, DASH, Kesintisiz Akış akış biçimleriyle birlikte sunulmasını sağlar. Azure Media Player, bu çeşitli biçimleri dikkate alır ve platform/tarayıcı özelliklerine göre en iyi bağlantıyı otomatik olarak yürütür. Media Services Ayrıca, PlayReady şifrelemesi veya AES-128 bit zarfı Şifrelemeli varlıkların dinamik şifrelemesine olanak tanır. Azure Media Player, uygun şekilde yapılandırıldığında PlayReady ve AES-128 bit şifreli içeriğin şifresini çözmeye izin verir. 
 
-[Ücretsiz denemenizi başlatın](https://azure.microsoft.com/pricing/free-trial/)
+> [!NOTE]
+> Wdevine şifrelenmiş içerik için HTTPS kayıttan yürütme gereklidir.
 
-## <a name="use-azure-media-player-demo-page"></a>Azure Media Player tanıtım sayfasını kullanın
+[Ücretsiz deneme sürümünüzü başlatın](https://azure.microsoft.com/pricing/free-trial/)
+
+## <a name="use-azure-media-player-demo-page"></a>Azure Media Player demo sayfası kullanma
 
 ### <a name="start-using"></a>Kullanmaya başlayın
 
-Kullanabileceğiniz [Azure Media Player tanıtımını sayfa](https://aka.ms/amp) Azure Media Services örnekleri veya kendi akış yürütülecek.  
+[Azure Media Player Demo sayfasını](https://aka.ms/azuremediaplayer) kullanarak Azure Media Services örnekleri veya kendi akışınızı oynatabilirsiniz.  
 
-Yeni bir videoyu oynatmak için farklı bir URL ve ENTER tuşuna yapıştırın **güncelleştirme**.
+Yeni bir video oynatmak için, farklı bir URL yapıştırın ve **Güncelleştir**' e basın.
 
-(Örneğin, teknoloji, dil veya şifreleme) çeşitli kayıttan yürütme seçeneklerini yapılandırmak için basın **Gelişmiş Seçenekler**.
+Çeşitli kayıttan yürütme seçeneklerini yapılandırmak için (örneğin, teknik, dil veya şifreleme), **Gelişmiş Seçenekler**' e basın.
 
 ![Azure Media Player](./media/azure-media-player/home-page.png)
 
-### <a name="monitor-diagnostics-of-a-video-stream"></a>Video akışının Tanılama izleme
+### <a name="monitor-diagnostics-of-a-video-stream"></a>Video akışının tanılamalarını izleme
 
-Kullanabileceğiniz [Azure Media Player tanıtımını sayfa](https://aka.ms/amp) tanılama video akışının izlemek için. 
+Video akışının tanılamalarını izlemek için [Azure Media Player Demo sayfasını](https://aka.ms/azuremediaplayer) kullanabilirsiniz. 
 
 ![Azure Media Player tanılama](./media/azure-media-player/diagnostics.png)
 
-## <a name="set-up-azure-media-player-in-your-html"></a>Azure Media Player, HTML ayarlama
+## <a name="set-up-azure-media-player-in-your-html"></a>HTML 'inizdeki Azure Media Player ayarlama
 
-Azure Media Player, ayarlamak kolay bir işlemdir. Yalnızca Media Services hesabınızdan medya içeriklerinin temel kayıttan yürütme almak için birkaç dakika sürer. Bkz: [Azure Media Player belgeleri](https://aka.ms/ampdocs) ayarlama ve Azure Media Player'ı yapılandırma hakkında ayrıntılı bilgi için. 
+Azure Media Player kolayca ayarlanabilir. Media Services hesabınızdan medya içeriğinin temel oynatımını almak yalnızca birkaç dakika sürer. Azure Media Player ayarlama ve yapılandırma hakkında ayrıntılı bilgi için bkz. [Azure Media Player belgeleri](https://aka.ms/ampdocs) . 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

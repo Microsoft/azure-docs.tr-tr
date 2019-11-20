@@ -1,106 +1,117 @@
-### YamlMime:YamlDocument
-abstract:
-  description: 'Bu Azure Machine Learning ürünlerini kullanarak uygulamalara ve web sitelerine akıllı algoritma eklemeyi öğrenin.  Öğreticiler, hızlı başlangıçlar, API başvuruları ve örnekler size bunu nasıl yapacağınızı gösterir.'
-documentType: LandingData
+### YamlMime:Landing
+title: Azure Machine Learning belgeleri
+summary: Azure Machine Learning, makine öğrenimi modellerinizi ve işlem hatlarınızı ölçeğe uygun olarak hızlı bir şekilde eğitip dağıtabilmeniz için web arabirimleri ve SDK’lar sunar. PyTorch, TensorFlow ve scikit-learn gibi açık kaynak Python çerçeveleri aracılığıyla bu özellikleri kullanın.
 metadata:
-  author: j-martens
-  description: 'Uygulamalarınıza, web sitelerinize ve botlarınıza, kullanıcılarınızın ihtiyaçlarını görmek, duymak, dile getirmek ve anlamak için doğal iletişim yöntemlerinden yararlanan akıllı algoritmalar oluşturmayı öğrenin. Öğreticiler, hızlı başlangıçlar, API başvuruları ve örnekler size bunu nasıl yapacağınızı gösterir.'
-  ms.author: jmartens
-  ms.subservice: core
-  ms.date: 5/14/2019
-  ms.devlang: na
-  ms.service: machine-learning
-  ms.tgt_pltfrm: na
-  ms.topic: landing-page
+  title: Azure Machine Learning belgeleri
+  description: Azure Machine Learning, size makine öğrenimi modellerinizi ve işlem hatlarınızı ölçeğe uygun olarak hızlı bir şekilde eğitip dağıtmaya yönelik web arabirimleri ve SDK’lar sunar. PyTorch, TensorFlow ve scikit-learn gibi açık kaynak Python çerçeveleri aracılığıyla bu özellikleri kullanın.
   services: machine-learning
-  title: 'Azure Machine Learning Belgeleri - Öğreticiler, API başvurusu | Microsoft Docs'
-sections:
-  - items:
-      - className: cardsM
-        columns: 2
-        items:
-          - href: /azure/machine-learning/service/overview-what-is-azure-ml
-            html: <p>Bu hizmetin veri bilimcilerinin yapay zeka çözümlerini geliştirmesine ve yönetmesine nasıl yardımcı olduğunu keşfedin<br/> Azure CLI ve Python araçlarıyla kitaplıklarını çeşitli Azure veri ve işlem hizmetleriyle kullanın. Daha fazla bilgi edinin...</p>
-            image:
-              src: /azure/machine-learning/media/index/i_machine-learning.svg
-            title: Azure Machine Learning Hizmeti
-        style: cards
-        type: list
-  - items:
-      - text: 'Azure Machine Learning hizmetini ayarlayın ve kullanmaya başlayın:'
-        type: paragraph
-      - text: '<b>Hızlı Başlangıçlar:</b>'
-        type: paragraph
-      - items:
-          - html: <a href="service/quickstart-run-cloud-notebook">Bulutta bir deneme çalıştırma</a> (yükleme gerekmez)
-          - html: <a href="service/quickstart-run-local-notebook">Yerel not defteri sunucusu kullanarak bir deneme çalıştırma</a> (yerel SDK yüklemesi gerekir)
-          - html: <a href="service/ui-quickstart-run-experiment">Görsel arabirimde deneme çalıştırma</a> (kod gerekmez)
-        style: unordered
-        type: list
-      - text: '<b>Öğretici: SDK ile MNIST verilerinin görüntü sınıflandırması:</b>'
-        type: paragraph
-      - items:
-          - html: '1. Bölüm: <a href="service/tutorial-train-models-with-aml">Kendi modelinizi eğitme</a>'
-          - html: '2. Bölüm: <a href="service/tutorial-deploy-models-with-aml">Bu modeli dağıtma</a>'
-        style: unordered
-        type: list
-      - text: '<b>Öğretici: SDK''yı kullanarak taksi ücretini tahmin etme:</b>'
-        type: paragraph
-      - items:
-          - html: '1. Bölüm: <a href="service/tutorial-data-prep">Verileri modelleme için hazırlama</a>'
-          - html: '2. Bölüm: <a href="service/tutorial-auto-train-models">Otomatik ML''nin modelleri sizin için eğitmesine olanak tanıma</a>'
-        style: unordered
-        type: list
-      - text: '<b>Öğretici: Görsel arabirimi kullanarak otomobil fiyatını tahmin etme:</b>'
-        type: paragraph
-      - items:
-          - html: '1. Bölüm: <a href="service/ui-tutorial-automobile-price-train-score">Otomobil fiyatını tahmin etme</a>'
-          - html: '2. Bölüm: <a href="service/ui-tutorial-automobile-price-deploy">Regresyon modelini dağıtma</a>'
-        style: unordered
-        type: list
-      - text: '<b>Modellerinizi kullanma:</b>'
-        type: paragraph
-      - items:
-          - html: <a href="service/how-to-consume-web-service">İstek-yanıt modeli kullanma</a>
-          - html: <a href="service/how-to-run-batch-predictions">ML işlem hatlarıyla toplu tahminler</a>
-        style: unordered
-        type: list
-    title: Hızlı başlangıçlar ve öğreticiler
-  - items:
-      - className: cardsM
-        columns: 2
-        items:
-          - href: /azure/cognitive-services/
-            html: '<p>Uygulamalarınız, web siteleriniz ve botlarınız için akıllı algoritmalar sağlayan API’ler.</p>'
-            image:
-              src: /azure/machine-learning/media/index/cognitive-services.png
-            title: Bilişsel Hizmetler
-          - href: /azure/machine-learning/studio/
-            html: "<p>R veya Python ile verilerinizde tahmine dayalı analiz çözümleri oluşturmak, test etmek ve dağıtmak için işbirliğine dayalı, sürükle ve bırak özellikli bir araç.\_</p>"
-            image:
-              src: /azure/machine-learning/media/index/machine-learning-studio.svg
-            title: Azure Machine Learning Studio
-          - href: /sql/advanced-analytics/r/r-services
-            html: '<p>Hem R hem de Python desteği içeren, veritabanında analiz hizmetidir.</p>'
-            image:
-              src: /azure/machine-learning/media/index/logo_sql.png
-            title: SQL Server Machine Learning Hizmetleri
-          - href: /machine-learning-server/
-            html: '<p>Windows, Linux ve HDInsight Spark ile Hadoop kümelerinde R ve Python dağıtımlarını destekleyen esnek kurumsal makine öğrenimi platformudur.</p>'
-            image:
-              src: /azure/machine-learning/media/index/ml-server.png
-            title: Microsoft Machine Learning Sunucusu
-          - href: /azure/machine-learning/team-data-science-process
-            html: '<p>Takımların tahmine dayalı analiz çözümlerini ve akıllı uygulamaları etkili bir şekilde sunmasına yardımcı olan, işbirliğine dayalı bir veri bilimi metodolojisidir.</p>'
-            image:
-              src: /azure/machine-learning/media/index/tdsp.png
-            title: Team Data Science Process
-          - href: /azure/machine-learning/data-science-virtual-machine/
-            html: '<p>Veri Bilimi (DSVM) ve Derin Öğrenme (DLVM) sanal makinelerini kullanarak yazılım yüklemeden veya yapılandırmadan denemeler yapın. Popüler veri analizi, makine öğrenimi ve yapay zeka araçları önceden yüklenmiştir.</p>'
-            image:
-              src: /azure/machine-learning/media/index/virtualmachine.svg
-            title: Veri Bilimi Sanal Makinesi
-        style: cards
-        type: list
-    title: Diğer Microsoft makine öğrenmesi teknolojileri
-title: Azure Machine Learning Belgeleri
+  ms.service: machine-learning
+  ms.subservice: core
+  ms.topic: landing-page
+  ms.collection: collection
+  author: j-martens
+  ms.author: jmartens
+  ms.date: 10/29/2019
+  ms.openlocfilehash: c6b0b67f206ec335a5e30098dd75b7e71db5770f
+  ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/08/2019
+  ms.locfileid: "73828107"
+landingContent:
+- title: Azure ML’yi kullanmaya başlama
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Python not defterlerinde deneme
+      url: service/tutorial-1st-experiment-sdk-setup.md
+    - text: RStudio'da deneme
+      url: service/tutorial-1st-r-experiment.md
+    - text: Sürükle ve bırak tasarımcısını kullanarak deneme
+      url: service/tutorial-designer-automobile-price-train-score.md
+    - text: Otomatik ML ile deneme
+      url: service/tutorial-first-experiment-automated-ml.md
+  - linkListType: overview
+    links:
+    - text: Azure ML nedir?
+      url: service/overview-what-is-azure-ml.md
+    - text: Mimari ve kavramlar
+      url: service/concept-azure-machine-learning-architecture.md
+  - linkListType: how-to-guide
+    links:
+    - text: Ortamınızı ayarlama
+      url: service/how-to-configure-environment.md
+    - text: Eğitim işlem hedeflerini ayarlama
+      url: service/how-to-set-up-training-targets.md
+- title: "Deneme: Python SDK'sı"
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: İlk ML denemenizi oluşturma
+      url: service/tutorial-1st-experiment-sdk-setup.md
+    - text: Görüntüleri sınıflandırma
+      url: service/tutorial-train-models-with-aml.md
+    - text: Otomatik ML ile taksi ücretlerini tahmin etme
+      url: service/tutorial-auto-train-models.md
+  - linkListType: how-to-guide
+    links:
+    - text: Scikit-learn ile eğitme
+      url: service/how-to-train-scikit-learn.md
+    - text: TensorFlow ile eğitme
+      url: service/how-to-train-tensorflow.md
+    - text: PyTorch ile eğitme
+      url: service/how-to-train-pytorch.md
+    - text: Keras ile eğitme
+      url: service/how-to-train-keras.md
+- title: ML İşlem Hatlarını kullanma
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: ML işlem hatları nedir?
+      url: service/concept-ml-pipelines.md
+    - text: "'Sürükle-ve-bırak' tasarımcısı"
+      url: service/concept-designer.md
+  - linkListType: tutorial
+    links:
+    - text: Fiyatları tahmin etmek için doğrusal regresyon (tasarımcı)
+      url: service/tutorial-designer-automobile-price-train-score.md
+    - text: ML işlem hatları oluşturma (Python SDK'sı)
+      url: service/tutorial-pipeline-batch-scoring-classification.md
+  - linkListType: how-to-guide
+    links:
+    - text: İşlem hatlarını zamanlama (Python SDK'sı)
+      url: service/how-to-schedule-pipelines.md
+    - text: Gecikmeleri tahmin etme (tasarımcı)
+      url: service/how-to-designer-sample-classification-flight-delay.md
+    - text: Değişik sıklığını tahmin etme (tasarımcı)
+      url: service/how-to-designer-sample-classification-churn.md
+- title: Modelleri dağıtma ve yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: MLOps nedir?
+      url: service/concept-model-management-and-deployment.md
+    - text: Nasıl ve nerede dağıtılır?
+      url: service/how-to-deploy-and-where.md
+    - text: Gerçek zamanlı tahmin
+      url: service/how-to-consume-web-service.md
+    - text: Toplu tahmin
+      url: service/how-to-run-batch-predictions.md
+    - text: Uçtan uca örnekler (GitHub)
+      url: https://github.com/microsoft/MLOps
+- title: Başvuru belgelerine gitme
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Python için SDK
+      url: https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py
+    - text: R için SDK
+      url: https://azure.github.io/azureml-sdk-for-r/reference/index.html
+    - text: Machine learning CLI
+      url: https://docs.microsoft.com/cli/azure/ext/azure-cli-ml/ml?view=azure-cli-latest
+    - text: Tasarımcı algoritmaları ve modülleri
+      url: algorithm-module-reference/module-reference.md
+    - text: REST API
+      url: https://docs.microsoft.com/rest/api/azureml/
+    - text: AI referans mimarileri (GitHub)
+      url: https://github.com/Microsoft/AI

@@ -1,59 +1,59 @@
 ---
-title: Kapsayıcı - Form tanıyıcı yapılandırın
+title: Form tanıyıcı için kapsayıcı yapılandırma
 titleSuffix: Azure Cognitive Services
-description: Form ve tablo verilerini ayrıştırmak için Form tanıyıcı kapsayıcının nasıl yapılandırılacağını öğrenin.
+description: Form tanıyıcı kapsayıcısının form ve tablo verilerini ayrıştırmak için nasıl yapılandırılacağını öğrenin.
 author: IEvangelist
 manager: nitinme
 ms.service: cognitive-services
-ms.subservice: form-recognizer
+ms.subservice: forms-recognizer
 ms.topic: conceptual
-ms.date: 06/19/2019
+ms.date: 11/07/2019
 ms.author: dapine
-ms.openlocfilehash: 7e8e7a13cd02a6f3b109a84829dba2a81fd36aaa
-ms.sourcegitcommit: 2d3b1d7653c6c585e9423cf41658de0c68d883fa
+ms.openlocfilehash: a0b0d0d95e1ffd50faba19f1665ea5dae737b124
+ms.sourcegitcommit: 018e3b40e212915ed7a77258ac2a8e3a660aaef8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67296243"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73796145"
 ---
-# <a name="configure-form-recognizer-containers"></a>Form tanıyıcı kapsayıcılar'ı yapılandırma
+# <a name="configure-form-recognizer-containers"></a>Form tanıyıcı kapsayıcılarını yapılandırma
 
-Azure Form tanıyıcı kapsayıcıları kullanarak güçlü bulut özellikleri hem de edge yerleşim yeri yararlanmak için iyileştirilmiş bir uygulama mimarisi oluşturabilirsiniz.
+Azure form tanıyıcı kapsayıcıları kullanarak, hem güçlü bulut özellikleri hem de kenar yerinin avantajlarından yararlanmak için en iyi duruma getirilmiş bir uygulama mimarisi oluşturabilirsiniz.
 
-Form tanıyıcı kapsayıcı çalışma zamanı ortamı kullanarak yapılandırma `docker run` komut bağımsız değişkenleri. Bu kapsayıcı birkaç gerekli olan ayarları ve bazı isteğe bağlı ayarlar. Bazı örnekler için bkz. ["örnek docker komutlarını çalıştırın"](#example-docker-run-commands) bölümü. Kapsayıcı özgü ayarları faturalandırma ayarlarıdır.
+Form tanıyıcı kapsayıcısı çalışma zamanı ortamını `docker run` komutu bağımsız değişkenlerini kullanarak yapılandırırsınız. Bu kapsayıcıda birkaç gerekli ayar ve isteğe bağlı birkaç ayar vardır. Birkaç örnek için, ["örnek Docker Run komutları"](#example-docker-run-commands) bölümüne bakın. Kapsayıcıya özgü ayarlar faturalandırma ayarlardır.
 
 ## <a name="configuration-settings"></a>Yapılandırma ayarları
 
 [!INCLUDE [Container shared configuration settings table](../../../includes/cognitive-services-containers-configuration-shared-settings-table.md)]
 
 > [!IMPORTANT]
-> [ `ApiKey` ](#apikey-configuration-setting), [ `Billing` ](#billing-configuration-setting), Ve [ `Eula` ](#eula-setting) ayarları birlikte kullanılır. Ayarların için geçerli değerler sağlamanız gerekir; Aksi takdirde, kapsayıcınızın başlatılamıyor. Bir kapsayıcı örneği oluşturmak için bu yapılandırma ayarlarını kullanma hakkında daha fazla bilgi için bkz. [faturalama](form-recognizer-container-howto.md#billing).
+> [`ApiKey`](#apikey-configuration-setting), [`Billing`](#billing-configuration-setting)ve [`Eula`](#eula-setting) ayarları birlikte kullanılır. Üç ayar için geçerli değerler sağlamalısınız; Aksi takdirde, Kapsayıcınız başlatılmaz. Bir kapsayıcı oluşturmak için bu yapılandırma ayarlarını kullanma hakkında daha fazla bilgi için bkz. [faturalandırma](form-recognizer-container-howto.md#billing).
 
 ## <a name="apikey-configuration-setting"></a>ApiKey yapılandırma ayarı
 
-`ApiKey` Ayar kapsayıcısı için fatura bilgileri izlemek için kullanılan Azure kaynak anahtarını belirtir. ApiKey değeri için geçerli bir anahtar olmalıdır _Form tanıyıcı_ için belirtilen kaynak `Billing` "yapılandırma ayarı fatura" bölümünde.
+`ApiKey` ayarı, kapsayıcının fatura bilgilerini izlemek için kullanılan Azure Kaynak anahtarını belirtir. ApiKey değeri, "Faturalandırma yapılandırma ayarı" bölümünde `Billing` için belirtilen _form tanıyıcı_ kaynağı için geçerli bir anahtar olmalıdır.
 
-Bu Azure Portalı'nda ayarlamayı bulabilirsiniz **Form tanıyıcı kaynak yönetimi**altında **anahtarları**.
+Bu ayarı, Azure portal, **anahtarlar**altında, **form tanıyıcı kaynak yönetimi**' nde bulabilirsiniz.
 
-## <a name="applicationinsights-setting"></a>Applicationınsights ayarı
+## <a name="applicationinsights-setting"></a>ApplicationInsights ayarı
 
 [!INCLUDE [Container shared configuration ApplicationInsights settings](../../../includes/cognitive-services-containers-configuration-shared-settings-application-insights.md)]
 
-## <a name="billing-configuration-setting"></a>Yapılandırma ayarı faturalama
+## <a name="billing-configuration-setting"></a>Faturalandırma yapılandırma ayarı
 
-`Billing` Ayar uç noktası URI'si belirtir, _Form tanıyıcı_ kaynak kapsayıcısı için fatura bilgileri ölçmek için kullanılan Azure üzerinde. Bu yapılandırma ayarının değeri geçerli bir uç noktası URI'si olmalıdır için bir _Form tanıyıcı_ azure'da kaynak. Kapsayıcı yaklaşık her 10 ila 15 dakika kullanım raporları.
+`Billing` ayarı, Azure 'da kapsayıcının fatura bilgilerini ölçmek için kullanılan _form tanıyıcı_ kaynağının uç nokta URI 'sini belirtir. Bu yapılandırma ayarının değeri, Azure 'daki bir _form tanıyıcı_ kaynağı için geçerli bir uç nokta URI 'si olmalıdır. Kapsayıcı her 10 ila 15 dakikada bir kullanım raporu sağlar.
 
-Bu Azure Portalı'nda ayarlamayı bulabilirsiniz **Form tanıyıcı genel bakış**altında **uç nokta**.
+Bu ayarı, Azure portal, **uç nokta**altında **form tanıyıcıya genel bakış**' da bulabilirsiniz.
 
 |Gerekli| Ad | Veri türü | Açıklama |
 |--|------|-----------|-------------|
-|Evet| `Billing` | Dize | Faturalandırma uç noktası URI'si<br><br>Örnek:<br>`Billing=https://westus2.api.cognitive.microsoft.com/` |
+|Evet| `Billing` | Dize | Faturalama uç noktası URI 'SI. Faturalandırma URI 'sini alma hakkında daha fazla bilgi için bkz. [gerekli parametreleri toplama](form-recognizer-container-howto.md#gathering-required-parameters). Daha fazla bilgi ve bölgesel uç noktaların tamamen listesi için bkz. bilişsel [Hizmetler Için özel alt etki alanı adları](../cognitive-services-custom-subdomains.md). |
 
-## <a name="eula-setting"></a>EULA'yı ayarlama
+## <a name="eula-setting"></a>EULA ayarı
 
 [!INCLUDE [Container shared configuration eula settings](../../../includes/cognitive-services-containers-configuration-shared-settings-eula.md)]
 
-## <a name="fluentd-settings"></a>Fluentd ayarları
+## <a name="fluentd-settings"></a>Akışkan entd ayarları
 
 [!INCLUDE [Container shared configuration fluentd settings](../../../includes/cognitive-services-containers-configuration-shared-settings-fluentd.md)]
 
@@ -61,49 +61,50 @@ Bu Azure Portalı'nda ayarlamayı bulabilirsiniz **Form tanıyıcı genel bakı�
 
 [!INCLUDE [Container shared configuration fluentd settings](../../../includes/cognitive-services-containers-configuration-shared-settings-http-proxy.md)]
 
-## <a name="logging-settings"></a>Günlük ayarları
+## <a name="logging-settings"></a>Günlük kaydı ayarları
 
 [!INCLUDE [Container shared configuration logging settings](../../../includes/cognitive-services-containers-configuration-shared-settings-logging.md)]
 
 
 ## <a name="mount-settings"></a>Bağlama ayarları
 
-Kullanım bağlama okumak ve kapsayıcı gelen ve giden veri yazmak için bağlar. Bir giriş bağlama veya bir çıkış bağlama belirterek belirtebilirsiniz `--mount` seçeneğini [ `docker run` komut](https://docs.docker.com/engine/reference/commandline/run/).
+Kapsayıcıya ve kapsayıcılardan veri okumak ve buradan veri yazmak için BIND bağlama kullanın. [`docker run` komutundaki](https://docs.docker.com/engine/reference/commandline/run/)`--mount` seçeneğini belirterek bir giriş bağlama veya çıkış bağlama belirtebilirsiniz.
 
-Form tanıyıcı kapsayıcı, bir giriş bağlama ve bir çıkış bağlama gerektirir. Giriş bağlama salt okunur olabilir ve eğitim ve puanlama için kullanılan veri erişimi için zorunludur. Çıkış bağlama yazılabilir olması gerekir ve modelleri ve geçici verileri depolamak için kullanırsınız.
+Form tanıyıcı kapsayıcısı, bir giriş bağlama ve çıkış bağlama gerektirir. Giriş bağlama salt okunurdur ve eğitim ve Puanlama için kullanılan verilere erişim için gereklidir. Çıkış bağlaması yazılabilir olmalıdır ve modelleri ve geçici verileri depolamak için kullanılır.
 
-Konak bağlama konumu söz dizimi konak işletim sistemine göre değişir. Ayrıca, bağlama konumu [ana bilgisayar](form-recognizer-container-howto.md#the-host-computer) Docker hizmet hesabı izinleri ve ana bilgisayar bağlama konumu izinler arasında bir çakışma nedeniyle erişilebilir olmayabilir.
+Konak bağlama konumunun tam sözdizimi, ana bilgisayar işletim sistemine bağlı olarak değişir. Ayrıca, Docker hizmet hesabı izinleri ile konak bağlama konumu izinleri arasındaki bir çakışma nedeniyle [ana bilgisayarın](form-recognizer-container-howto.md#the-host-computer) bağlama konumuna erişilemiyor olabilir.
 
 |İsteğe bağlı| Ad | Veri türü | Açıklama |
 |-------|------|-----------|-------------|
-|Gerekli| `Input` | String | Giriş bağlama hedefi. Varsayılan değer `/input` şeklindedir.    <br><br>Örnek:<br>`--mount type=bind,src=c:\input,target=/input`|
-|Gerekli| `Output` | String | Çıkış bağlama hedefi. Varsayılan değer `/output` şeklindedir.  <br><br>Örnek:<br>`--mount type=bind,src=c:\output,target=/output`|
+|Gerekli| `Input` | Dize | Giriş bağlama hedefi. Varsayılan değer `/input` ' dır.    <br><br>Örnek:<br>`--mount type=bind,src=c:\input,target=/input`|
+|Gerekli| `Output` | Dize | Çıkış bağlama hedefi. Varsayılan değer `/output` ' dır.  <br><br>Örnek:<br>`--mount type=bind,src=c:\output,target=/output`|
 
-## <a name="example-docker-run-commands"></a>Örnek docker komutlarını çalıştırın
+## <a name="example-docker-run-commands"></a>Örnek Docker Run komutları
 
-Aşağıdaki örnekler, yazma ve kullanma göstermek için yapılandırma ayarlarını kullanır. `docker run` komutları. Kapsayıcı çalışırken, dek çalıştırmaya devam [durdurmak](form-recognizer-container-howto.md#stop-the-container).
+Aşağıdaki örnekler `docker run` komutlarının nasıl yazılacağını ve kullanılacağını göstermek için yapılandırma ayarlarını kullanır. Çalıştığında, kapsayıcı siz [durduruncaya](form-recognizer-container-howto.md#stop-the-container)kadar çalışmaya devam eder.
 
-* **Satır devamlılığı karakteri**: Aşağıdaki bölümlerde Docker komutları ters eğik çizgi kullanın (\\) satır devamı karakteri olarak. Konak işletim sisteminin gereksinimlerine bağlı olarak bu karakteri kaldırın veya değiştirin.
-* **Bağımsız değişken sırası**: Docker kapsayıcıları ile ilgili bilgi sahibi değilseniz, bağımsız değişkenlerin sırası değiştirmeyin.
+* **Satır devamlılık karakteri**: aşağıdaki bölümlerdeki Docker komutları, satır devamlılık karakteri olarak bir ters eğik çizgi (\\) kullanır. Ana bilgisayar işletim sisteminizin gereksinimlerine bağlı olarak bu karakteri değiştirin veya kaldırın.
+* **Bağımsız değişken sırası**: Docker Kapsayıcıları hakkında bilgi sahibi olmadığınız müddetçe bağımsız değişkenlerin sırasını değiştirmeyin.
 
-Yerine {_argument_name_} kendi değerlerinizle aşağıdaki tabloda:
+Aşağıdaki tablodaki {_argument_name_} değerlerini kendi değerlerinizle değiştirin:
 
 | Yer tutucu | Değer |
 |-------------|-------|
-|{BILLING_KEY} | Kapsayıcı başlatmak için kullanılan anahtar. Azure portalında Form tanıyıcı anahtarlar sayfasında kullanılabilir.  |
-|{BILLING_ENDPOINT_URI} | Fatura uç noktası URI değeri, Azure portalı Form tanıyıcı genel bakış sayfasında kullanılabilir.|
-|{COMPUTER_VISION_API_KEY}| Azure portalında bilgisayar görüntü işleme API'si anahtarlar sayfasında anahtarın kullanılabilir.|
-|{COMPUTER_VISION_ENDPOINT_URI}|Fatura uç noktası. Bulut tabanlı bir görüntü işleme kaynak kullanıyorsanız, URI değerini Azure portalı bilgisayar işleme API'sine genel bakış sayfasında kullanılabilir. Kullanıyorsanız, bir *bilişsel hizmetler-tanıma-metin* kapsayıcı, kapsayıcıda geçirilir fatura uç nokta URL'sini kullanın `docker run` komutu.|
+| **{FORM_RECOGNIZER_API_KEY}** | Kapsayıcıyı başlatmak için kullanılan anahtar. Azure portal form tanıyıcı anahtarları sayfasında kullanılabilir. |
+| **{FORM_RECOGNIZER_ENDPOINT_URI}** | Faturalandırma uç noktası URI değeri Azure portal form tanıyıcıya Genel Bakış sayfasında bulunur.|
+| **{COMPUTER_VISION_API_KEY}** | Anahtar, Azure portal Görüntü İşleme API'si anahtarlar sayfasında kullanılabilir.|
+| **{COMPUTER_VISION_ENDPOINT_URI}** | Faturalama uç noktası. Bulut tabanlı bir Görüntü İşleme kaynağı kullanıyorsanız URI değeri, Azure portal Görüntü İşleme API'si Genel Bakış sayfasında kullanılabilir. Bilişsel Hizmetler- *tanı-metin* kapsayıcısı kullanıyorsanız, `docker run` komutunda kapsayıcıya geçirilen faturalandırma uç nokta URL 'sini kullanın. |
+
+Bu değerleri alma hakkında ayrıntılar için bkz. [gerekli parametreleri toplama](form-recognizer-container-howto.md#gathering-required-parameters) .
+
+[!INCLUDE [cognitive-services-custom-subdomains-note](../../../includes/cognitive-services-custom-subdomains-note.md)]
 
 > [!IMPORTANT]
-> Kapsayıcıyı çalıştırmak üzere belirttiğiniz `Eula`, `Billing`, ve `ApiKey` seçenekleri; Aksi takdirde, kapsayıcı başlatılamıyor. Daha fazla bilgi için [faturalama](#billing-configuration-setting).
+> Kapsayıcıyı çalıştırmak için `Eula`, `Billing`ve `ApiKey` seçeneklerini belirtin; Aksi takdirde, kapsayıcı başlatılmaz. Daha fazla bilgi için bkz. [faturalandırma](#billing-configuration-setting).
 
-> [!NOTE] 
-> ApiKey değer **anahtar** Azure Form tanıyıcı kaynak anahtarlar sayfasındaki.
+## <a name="form-recognizer-container-docker-examples"></a>Form tanıyıcı kapsayıcısı Docker örnekleri
 
-## <a name="form-recognizer-container-docker-examples"></a>Form tanıyıcı kapsayıcı Docker örnekleri
-
-Aşağıdaki Docker için Form tanıyıcı kapsayıcı verilebilir.
+Aşağıdaki Docker örnekleri form tanıyıcı kapsayıcısı içindir.
 
 ### <a name="basic-example-for-form-recognizer"></a>Form tanıyıcı için temel örnek
 
@@ -113,13 +114,13 @@ docker run --rm -it -p 5000:5000 --memory 8g --cpus 2 \
 --mount type=bind,source=c:\output,target=/output \
 containerpreview.azurecr.io/microsoft/cognitive-services-form-recognizer \
 Eula=accept \
-Billing={BILLING_ENDPOINT_URI} \
-ApiKey={BILLING_KEY} \
+Billing={FORM_RECOGNIZER_ENDPOINT_URI} \
+ApiKey={FORM_RECOGNIZER_API_KEY} \
 FormRecognizer:ComputerVisionApiKey={COMPUTER_VISION_API_KEY} \
 FormRecognizer:ComputerVisionEndpointUri={COMPUTER_VISION_ENDPOINT_URI}
 ```
 
-### <a name="logging-example-for-form-recognizer"></a>Form tanıyıcı örneğin günlüğe kaydetme
+### <a name="logging-example-for-form-recognizer"></a>Form tanıyıcı için günlüğe kaydetme örneği
 
 ```Docker
 docker run --rm -it -p 5000:5000 --memory 8g --cpus 2 \
@@ -127,14 +128,13 @@ docker run --rm -it -p 5000:5000 --memory 8g --cpus 2 \
 --mount type=bind,source=c:\output,target=/output \
 containerpreview.azurecr.io/microsoft/cognitive-services-form-recognizer \
 Eula=accept \
-Billing={BILLING_ENDPOINT_URI} \
-ApiKey={BILLING_KEY} \
+Billing={FORM_RECOGNIZER_ENDPOINT_URI} \
+ApiKey={FORM_RECOGNIZER_API_KEY} \
 FormRecognizer:ComputerVisionApiKey={COMPUTER_VISION_API_KEY} \
 FormRecognizer:ComputerVisionEndpointUri={COMPUTER_VISION_ENDPOINT_URI}
 Logging:Console:LogLevel:Default=Information
 ```
 
-
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Gözden geçirme [yükleme ve çalıştırma kapsayıcıları](form-recognizer-container-howto.md).
+* [Kapsayıcıları yüklemeyi ve çalıştırmayı](form-recognizer-container-howto.md)gözden geçirin.

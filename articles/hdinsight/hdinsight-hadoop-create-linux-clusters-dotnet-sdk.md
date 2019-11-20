@@ -1,29 +1,29 @@
 ---
-title: .NET - Azure HDInsight'ı kullanarak Apache Hadoop kümeleri oluşturma
-description: Linux'ta HDInsight .NET SDK kullanarak HDInsight için Apache Hadoop, Apache HBase, Apache Storm veya Apache Spark küme oluşturma konusunda bilgi edinin.
-author: mamccrea
+title: .NET-Azure HDInsight kullanarak Apache Hadoop kümeleri oluşturma
+description: HDInsight .NET SDK kullanarak HDInsight için Linux üzerinde Apache Hadoop, Apache HBase, Apache Storm veya Apache Spark kümeleri oluşturmayı öğrenin.
+author: hrasheed-msft
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 08/16/2018
-ms.author: mamccrea
-ms.openlocfilehash: d560c61339bd608ab9385f99583613526156ca41
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.author: hrasheed
+ms.openlocfilehash: fccb29167dc04bf75a85935eeb57b0420b151f64
+ms.sourcegitcommit: 083aa7cc8fc958fc75365462aed542f1b5409623
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67508063"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "70916497"
 ---
-# <a name="create-linux-based-clusters-in-hdinsight-using-the-net-sdk"></a>Linux tabanlı kümeler .NET SDK kullanarak HDInsight oluşturma
+# <a name="create-linux-based-clusters-in-hdinsight-using-the-net-sdk"></a>.NET SDK kullanarak HDInsight 'ta Linux tabanlı kümeler oluşturma
 
 [!INCLUDE [selector](../../includes/hdinsight-create-linux-cluster-selector.md)]
 
 
-Oluşturmayı bir [Apache Hadoop](https://hadoop.apache.org/) .NET SDK kullanarak Azure HDInsight kümesinde Küme.
+.NET SDK kullanarak Azure HDInsight kümesinde bir [Apache Hadoop](https://hadoop.apache.org/) kümesi oluşturmayı öğrenin.
 
 > [!IMPORTANT]  
-> Bu belgede yer alan adımlar, bir çalışan düğümü ile bir küme oluşturun. 32'den fazla çalışan düğümleri, küme oluşturma sırasında veya Küme oluşturulduktan sonra ölçeklendirme planlıyorsanız, bir baş düğüm boyutu en az 8 çekirdek ve 14 GB ram ile seçmeniz gerekir.
+> Bu belgedeki adımlar, bir çalışan düğümü olan bir küme oluşturur. Küme oluşturma aşamasında veya oluşturulduktan sonra kümeyi ölçeklendirerek 32 ' den fazla çalışan düğümü planlıyorsanız, en az 8 çekirdek ve 14GB RAM içeren bir baş düğüm boyutu seçmeniz gerekir.
 >
 > Düğüm boyutları ve ilişkili maliyetler hakkında daha fazla bilgi için bkz. [HDInsight fiyatlandırması](https://azure.microsoft.com/pricing/details/hdinsight/).
 
@@ -32,15 +32,15 @@ Oluşturmayı bir [Apache Hadoop](https://hadoop.apache.org/) .NET SDK kullanara
 [!INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
 
 * **Bir Azure aboneliği**. Bkz. [Azure ücretsiz deneme sürümü alma](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/).
-* **Azure depolama hesabınız**. Bkz: [depolama hesabı oluşturma](../storage/common/storage-quickstart-create-account.md).
+* **Bir Azure depolama hesabı**. Bkz: [depolama hesabı oluşturma](../storage/common/storage-quickstart-create-account.md).
 * **Visual Studio**.
 
 ## <a name="create-clusters"></a>Küme oluşturma
 
 1. Visual Studio'yu açın.
-2. Yeni bir Visual C# konsol uygulaması oluşturun.
-3. Gelen **Araçları** menüsünü tıklatın **NuGet Paket Yöneticisi**ve ardından **Paket Yöneticisi Konsolu**.
-4. Konsolunda paketleri yüklemek için aşağıdaki komutu çalıştırın:
+2. Yeni bir görsel C# konsol uygulaması oluşturun.
+3. **Araçlar** menüsünde **NuGet Paket Yöneticisi**' ne ve ardından **Paket Yöneticisi konsolu**' na tıklayın.
+4. Paketleri yüklemek için konsolunda aşağıdaki komutu çalıştırın:
 
     ```powershell
     Install-Package Microsoft.Rest.ClientRuntime.Azure.Authentication -Pre
@@ -48,8 +48,8 @@ Oluşturmayı bir [Apache Hadoop](https://hadoop.apache.org/) .NET SDK kullanara
     Install-Package Microsoft.Azure.Management.HDInsight
     ```
 
-    Bu komutlar, geçerli Visual Studio projesine .NET kitaplıkları ve bunları başvurular ekleyin.
-5. Çözüm Gezgini'nden çift **Program.cs** açmak için aşağıdaki kodu yapıştırın ve değişkenleri değerleri sağlayın:
+    Bu komutlar, .NET kitaplıklarını ve bunlara yönelik başvuruları geçerli Visual Studio projesine ekler.
+5. Çözüm Gezgini, açmak için **program.cs** öğesine çift tıklayın, aşağıdaki kodu yapıştırın ve değişkenler için değerler sağlayın:
 
     ```csharp
     using System;
@@ -185,13 +185,13 @@ Oluşturmayı bir [Apache Hadoop](https://hadoop.apache.org/) .NET SDK kullanara
     ```
 
 6. Sınıf üyesi değerlerini değiştirin.
-7. Uygulamayı çalıştırmak için **F5**'e basın. Bir konsol penceresi, açın ve uygulama durumunu görüntüler. Azure hesabı kimlik bilgilerinizi girmeniz istenir. Uygulamanın, bir HDInsight kümesi, genellikle yaklaşık 15 oluşturulması birkaç dakika sürebilir.
+7. Uygulamayı çalıştırmak için **F5**'e basın. Bir konsol penceresi açılır ve uygulamanın durumunu görüntülemelidir. Azure hesabı kimlik bilgilerinizi girmeniz istenir. Genellikle 15 etrafında bir HDInsight kümesi oluşturulması birkaç dakika sürebilir.
 
-## <a name="use-bootstrap"></a>Kullanım önyükleme
+## <a name="use-bootstrap"></a>Önyükleme kullan
 
-Bootstrap ile küme oluşturma sırasında toplama ayarlarını yapılandırabilirsiniz.  Daha fazla bilgi için [özelleştirme HDInsight kümeleri Bootstrap ile](hdinsight-hadoop-customize-cluster-bootstrap.md).
+Önyükleme kullanarak, küme oluşturma sırasında ekleme ayarlarını yapılandırabilirsiniz.  Daha fazla bilgi için bkz. [önyükleme kullanarak HDInsight kümelerini özelleştirme](hdinsight-hadoop-customize-cluster-bootstrap.md).
 
-Aşağıdaki örnekte değiştirme [küme oluşturma](#create-clusters) bir Apache Hive ayarını yapılandırmak için:
+[Küme oluşturma](#create-clusters) ' da örneği değiştirerek bir Apache Hive ayarı yapılandırın:
 
 ```csharp
 static void Main(string[] args)
@@ -316,11 +316,11 @@ static void Main(string[] args)
 }
 ```
 
-## <a name="use-script-action"></a>Betik eylemi kullanın
+## <a name="use-script-action"></a>Betik eylemini kullan
 
-Betik eylemi kullanarak küme oluşturma sırasında ek ayarlar yapılandırabilirsiniz.  Daha fazla bilgi için [özelleştirme Linux tabanlı HDInsight kümelerini betik eylemi kullanarak](hdinsight-hadoop-customize-cluster-linux.md).
+Betik eylemi kullanarak, küme oluşturma sırasında ek ayarları yapılandırabilirsiniz.  Daha fazla bilgi için bkz. [betik eylemi kullanarak Linux tabanlı HDInsight kümelerini özelleştirme](hdinsight-hadoop-customize-cluster-linux.md).
 
-Aşağıdaki örnekte değiştirme [küme oluşturma](#create-clusters) R: yüklemek için betik eylemi çağırmak için
+R 'yi yüklemek için bir betik eylemi çağırmak üzere [kümeler oluştur](#create-clusters) bölümünde örneği değiştirin:
 
 ```csharp
 static void Main(string[] args)
@@ -369,30 +369,30 @@ static void Main(string[] args)
 HDInsight kümeleri oluştururken sorun yaşarsanız bkz. [erişim denetimi gereksinimleri](hdinsight-hadoop-create-linux-clusters-portal.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bir HDInsight kümesi başarıyla oluşturuldu, kümenizi ile çalışma hakkında bilgi almak için aşağıdakileri kullanın. 
+Artık bir HDInsight kümesini başarıyla oluşturduğunuza göre, kümenizle nasıl çalışacağınızı öğrenmek için aşağıdakileri kullanın. 
 
-### <a name="apache-hadoop-clusters"></a>Apache Hadoop kümelerini
-* [Apache Hive, HDInsight ile kullanma](hadoop/hdinsight-use-hive.md)
-* [Apache Pig, HDInsight ile kullanma](hadoop/hdinsight-use-pig.md)
+### <a name="apache-hadoop-clusters"></a>Apache Hadoop kümeleri
+* [HDInsight ile Apache Hive kullanma](hadoop/hdinsight-use-hive.md)
+* [HDInsight ile Apache Pig kullanma](hadoop/hdinsight-use-pig.md)
 * [HDInsight ile MapReduce kullanma](hadoop/hdinsight-use-mapreduce.md)
 
 ### <a name="apache-hbase-clusters"></a>Apache HBase kümeleri
-* [HDInsight üzerinde Apache HBase kullanmaya başlama](hbase/apache-hbase-tutorial-get-started-linux.md)
-* [HDInsight üzerinde Apache HBase için Java uygulamaları geliştirin](hbase/apache-hbase-build-java-maven-linux.md)
+* [HDInsight 'ta Apache HBase ile çalışmaya başlama](hbase/apache-hbase-tutorial-get-started-linux.md)
+* [HDInsight 'ta Apache HBase için Java uygulamaları geliştirme](hbase/apache-hbase-build-java-maven-linux.md)
 
 ### <a name="apache-storm-clusters"></a>Apache Storm kümeleri
 * [HDInsight üzerinde Apache Storm için Java topolojileri geliştirme](storm/apache-storm-develop-java-topology.md)
-* [HDInsight üzerinde Apache Storm, Python bileşenlerini kullanma](storm/apache-storm-develop-python-topology.md)
-* [HDInsight üzerinde Apache Storm topolojileri dağıtma ve izleme](storm/apache-storm-deploy-monitor-topology-linux.md)
+* [HDInsight üzerinde Apache Storm Python bileşenlerini kullanma](storm/apache-storm-develop-python-topology.md)
+* [HDInsight üzerinde Apache Storm topolojilerini dağıtma ve izleme](storm/apache-storm-deploy-monitor-topology-linux.md)
 
 ### <a name="apache-spark-clusters"></a>Apache Spark kümeleri
 * [Scala kullanarak tek başına uygulama oluşturma](spark/apache-spark-create-standalone-application.md)
-* [Apache Livy kullanarak bir Apache Spark kümesinde işleri uzaktan çalıştırma](spark/apache-spark-livy-rest-interface.md)
-* [Apache Spark ile BI: BI araçları ile HDInsight Spark kullanarak etkileşimli veri çözümlemesi gerçekleştirme](spark/apache-spark-use-bi-tools.md)
-* [Apache Spark Machine Learning ile: Gıda denetimi sonuçlarını tahmin etmek için HDInsight içindeki Spark kullanma](spark/apache-spark-machine-learning-mllib-ipython.md)
+* [Apache Livy kullanarak Apache Spark kümesinde işleri uzaktan çalıştırma](spark/apache-spark-livy-rest-interface.md)
+* [BI ile Apache Spark: Bı araçlarıyla HDInsight 'ta Spark kullanarak etkileşimli veri çözümlemesi gerçekleştirme](spark/apache-spark-use-bi-tools.md)
+* [Machine Learning Apache Spark: Yemek İnceleme sonuçlarını tahmin etmek için HDInsight 'ta Spark kullanma](spark/apache-spark-machine-learning-mllib-ipython.md)
 
 ### <a name="run-jobs"></a>İşleri çalıştırma
-* [.NET SDK kullanarak HDInsight Apache Hive işlerini çalıştırma](hadoop/apache-hadoop-use-hive-dotnet-sdk.md)
-* [.NET SDK kullanarak HDInsight Apache Sqoop işleri çalıştırma](hadoop/apache-hadoop-use-sqoop-dotnet-sdk.md)
-* [HDInsight Apache Oozie işleri çalıştırma](hdinsight-use-oozie-linux-mac.md)
+* [.NET SDK kullanarak HDInsight 'ta Apache Hive işleri çalıştırma](hadoop/apache-hadoop-use-hive-dotnet-sdk.md)
+* [.NET SDK kullanarak HDInsight 'ta Apache Sqoop işleri çalıştırma](hadoop/apache-hadoop-use-sqoop-dotnet-sdk.md)
+* [HDInsight 'ta Apache Oozie işleri çalıştırma](hdinsight-use-oozie-linux-mac.md)
 

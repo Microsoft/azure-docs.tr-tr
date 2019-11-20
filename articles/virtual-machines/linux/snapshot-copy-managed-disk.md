@@ -1,6 +1,6 @@
 ---
-title: Azure'da bir VHD anlık görüntüsünü oluşturma | Microsoft Docs
-description: Bir yedekleme ayarlamak veya ilgili sorunları gidermeye yönelik olarak Azure'da bir kopyasını bir VHD oluşturmayı öğrenin.
+title: Azure 'da bir VHD 'nin anlık görüntüsünü oluşturma
+description: Azure 'da bir VHD 'nin kopyasını bir yedekleme olarak veya sorun giderme sorunları için oluşturmayı öğrenin.
 documentationcenter: ''
 author: roygara
 manager: twooley
@@ -14,24 +14,24 @@ ms.topic: article
 ms.date: 07/11/2018
 ms.author: rogarana
 ms.subservice: disks
-ms.openlocfilehash: 9f2f3ac3668f0e48716fc30fb69cd1782dbd4e56
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 15696469ca3861586617e9f418f8a55a7ea90467
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64706978"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74034790"
 ---
 # <a name="create-a-snapshot"></a>Anlık görüntü oluşturma 
 
-Yedekleme için veya VM sorunlarını gidermek için bir işletim sistemi veya veri diski anlık görüntüsünü alın. Anlık görüntü, bir VHD, tam ve salt okunur bir kopyasıdır. 
+Yedekleme için bir işletim sistemi veya veri diskinin anlık görüntüsünü alın veya VM sorunlarını gidermek için. Anlık görüntü, bir VHD 'nin tam ve salt okunurdur kopyasıdır. 
 
 ## <a name="use-azure-cli"></a>Azure CLI kullanma 
 
-Aşağıdaki örnek kullanmanızı gerektirir. [Cloud Shell](https://shell.azure.com/bash) veya Azure CLI'ın yüklü olması gerekmektedir.
+Aşağıdaki örnek, [Cloud Shell](https://shell.azure.com/bash) kullanmanızı veya Azure CLI 'nın yüklü olmasını gerektirir.
 
-Aşağıdaki adımlarda bir anlık görüntü kullanarak nasıl **az anlık görüntü oluşturma** komutunu **--kaynak disk** parametresi. Aşağıdaki örnekte adlı bir VM olduğu varsayılmaktadır. *myVM* içinde *myResourceGroup* kaynak grubu.
+Aşağıdaki adımlarda, **--Source-Disk** parametresiyle **az Snapshot Create** komutunu kullanarak anlık görüntünün nasıl yapılacağı gösterilmektedir. Aşağıdaki örnek, *Myresourcegroup* kaynak grubunda *myvm* adlı bir VM olduğunu varsayar.
 
-Disk Kimliğini kullanarak alma [az vm show](/cli/azure/vm#az-vm-show).
+[Az VM Show](/cli/azure/vm#az-vm-show)kullanarak disk kimliğini alın.
 
 ```azurecli-interactive
 osDiskId=$(az vm show \
@@ -41,7 +41,7 @@ osDiskId=$(az vm show \
    -o tsv)
 ```
 
-Adlı bir anlık görüntüsünü alma *osDisk yedekleme* kullanarak [az anlık görüntü oluşturma](/cli/azure/snapshot#az-snapshot-create).
+[Az Snapshot Create](/cli/azure/snapshot#az-snapshot-create)kullanarak *OSDisk-Backup* adlı bir anlık görüntü alın.
 
 ```azurecli-interactive
 az snapshot create \
@@ -51,9 +51,9 @@ az snapshot create \
 ```
 
 > [!NOTE]
-> Bölge dayanıklı depolama, anlık görüntü depolamak istediğiniz desteklediği bir bölgede oluşturmanız gerekirse [kullanılabilirlik](../../availability-zones/az-overview.md) ve **--sku Standard_ZRS** parametresi.
+> Anlık görüntüsünü bölge dayanıklı depolamada depolamak isterseniz, bunu [kullanılabilirlik bölgelerini](../../availability-zones/az-overview.md) destekleyen bir bölgede oluşturmanız ve **--SKU Standard_ZRS** parametresini eklemeniz gerekir.
 
-Kullanarak anlık görüntülerin bir listesini görebilirsiniz [az anlık görüntü listesi](/cli/azure/snapshot#az-snapshot-list).
+[Az Snapshot List](/cli/azure/snapshot#az-snapshot-list)kullanarak anlık görüntülerin bir listesini görebilirsiniz.
 
 ```azurecli-interactive
 az snapshot list \
@@ -63,17 +63,17 @@ az snapshot list \
 
 ## <a name="use-azure-portal"></a>Azure portalı kullanma 
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Sol üstten başlayarak, tıklayın **kaynak Oluştur** araması **anlık görüntü**. Seçin **anlık görüntü** Arama sonuçlarından.
-3. İçinde **anlık görüntü** dikey penceresinde tıklayın **Oluştur**.
-4. Girin bir **adı** anlık görüntü.
-5. Mevcut bir kaynak grubunu seçin veya yeni bir ad yazın. 
-7. İçin **kaynak disk**, yönetilen diskin anlık görüntüsünü seçin.
-8. Seçin **hesap türü** anlık görüntü deposu için kullanılacak. Kullanım **standart HDD** yüksek performanslı SSD üzerinde depolanan gerekmedikçe.
-9. **Oluştur**’a tıklayın.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Sol üst taraftan başlayarak **kaynak oluştur ' a** tıklayın ve **anlık görüntü**arayın. Arama sonuçlarından **anlık görüntü** ' i seçin.
+3. **Anlık görüntü** dikey penceresinde **Oluştur**' a tıklayın.
+4. Anlık görüntü için bir **ad** girin.
+5. Var olan bir kaynak grubunu seçin veya yeni bir kaynak grubu adı yazın. 
+7. **Kaynak disk**için, anlık görüntü yapılacak yönetilen diski seçin.
+8. Anlık görüntüyü depolamak için kullanılacak **hesap türünü** seçin. Yüksek performanslı bir SSD üzerinde depolanmış olması gerekmedikçe **Standart HDD** kullanın.
+9. **Oluştur**’ tıklayın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
- Bir sanal makine anlık görüntüden yönetilen disk oluşturma ve ardından yeni bir yönetilen diski işletim sistemi diski olarak ekleyerek bir anlık görüntüden oluşturun. Daha fazla bilgi için [anlık görüntüden VM oluşturma](./../scripts/virtual-machines-linux-cli-sample-create-vm-from-snapshot.md?toc=%2fcli%2fmodule%2ftoc.json) betiği.
+ Anlık görüntüden yönetilen bir disk oluşturarak ve ardından yeni yönetilen diski işletim sistemi diski olarak ekleyerek bir anlık görüntüden sanal makine oluşturun. Daha fazla bilgi için [bir Snapshot betiğinin VM oluşturma](./../scripts/virtual-machines-linux-cli-sample-create-vm-from-snapshot.md?toc=%2fcli%2fmodule%2ftoc.json) bölümüne bakın.
 

@@ -1,118 +1,90 @@
 ---
-title: LUIS önceden oluşturulmuş varlıklarla e-posta başvuru - Azure | Microsoft Docs
-titleSuffix: Azure
-description: Bu makalede, e-posta içeren önceden oluşturulmuş varlık bilgilerini Language Understanding (LUIS).
+title: LUSıS önceden oluşturulmuş varlıklar e-posta başvurusu
+titleSuffix: Azure Cognitive Services
+description: Bu makale, Language Understanding (LUSıS) ' de e-posta önceden oluşturulmuş varlık bilgilerini içerir.
 services: cognitive-services
 author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
-ms.date: 05/07/2019
+ms.topic: conceptual
+ms.date: 09/27/2019
 ms.author: diberry
-ms.openlocfilehash: 2b11446c84ede0e8ecfce23eda1026919777fc66
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6f262752a50b58eae8ffbea81b8e7fc4d8c65b98
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65072065"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73464989"
 ---
-# <a name="email-prebuilt-entity-for-a-luis-app"></a>Bir LUIS uygulaması için önceden oluşturulmuş varlık e-posta
-Bir utterance tüm e-posta adresinden e-posta ayıklama içerir. Bu varlık zaten eğitildi çünkü içeren e-posta uygulaması hedefleri için örnek Konuşma ekleme gerekmez. E-posta varlık içerisinde desteklendiği `en-us` yalnızca kültür. 
+# <a name="email-prebuilt-entity-for-a-luis-app"></a>Bir LUSıS uygulaması için e-posta önceden oluşturulmuş varlık
+E-posta ayıklama, bir söyleyden tüm e-posta adresini içerir. Bu varlık zaten eğitiltiğinden, uygulama hedefleri için e-posta içeren örnek bir değer eklemeniz gerekmez. E-posta varlığı yalnızca `en-us` kültür içinde desteklenir. 
 
-## <a name="resolution-for-prebuilt-email"></a>Önceden oluşturulmuş bir e-posta için çözümleme
+## <a name="resolution-for-prebuilt-email"></a>Önceden oluşturulmuş e-posta için çözüm
 
-### <a name="api-version-2x"></a>API sürüm 2.x
+Sorgu için aşağıdaki varlık nesneleri döndürülür:
 
-Aşağıdaki örnek, çözünürlüğünü gösterir **builtin.email** varlık.
+`please send the information to patti@contoso.com`
+
+#### <a name="v3-responsetabv3"></a>[V3 yanıtı](#tab/V3)
+
+Aşağıdaki JSON, `verbose` parametresi `false`olarak ayarlanmıştır:
 
 ```json
-{
-  "query": "please send the information to patti.owens@microsoft.com",
-  "topScoringIntent": {
-    "intent": "None",
-    "score": 0.811592042
-  },
-  "intents": [
-    {
-      "intent": "None",
-      "score": 0.811592042
-    }
-  ],
-  "entities": [
-    {
-      "entity": "patti.owens@microsoft.com",
-      "type": "builtin.email",
-      "startIndex": 31,
-      "endIndex": 55,
-      "resolution": {
-        "value": "patti.owens@microsoft.com"
-      }
-    }
-  ]
+"entities": {
+    "email": [
+        "patti@contoso.com"
+    ]
 }
 ```
+#### <a name="v3-verbose-responsetabv3-verbose"></a>[V3 ayrıntılı yanıt](#tab/V3-verbose)
 
-### <a name="preview-api-version-3x"></a>Önizleme API sürümü 3.x
-
-Aşağıdaki JSON ile olan `verbose` parametresini `false`:
-
-```json
-{
-    "query": "please send the information to patti.owens@microsoft.com",
-    "prediction": {
-        "normalizedQuery": "please send the information to patti.owens@microsoft.com",
-        "topIntent": "None",
-        "intents": {
-            "None": {
-                "score": 0.5023781
-            }
-        },
-        "entities": {
-            "email": [
-                "patti.owens@microsoft.com"
-            ]
-        }
-    }
-}
-```
-
-
-Aşağıdaki JSON ile olan `verbose` parametresini `true`:
+Aşağıdaki JSON, `verbose` parametresi `true`olarak ayarlanmıştır:
 
 ```json
-{
-    "query": "please send the information to patti.owens@microsoft.com",
-    "prediction": {
-        "normalizedQuery": "please send the information to patti.owens@microsoft.com",
-        "topIntent": "None",
-        "intents": {
-            "None": {
-                "score": 0.5023781
-            }
-        },
-        "entities": {
-            "email": [
-                "patti.owens@microsoft.com"
-            ],
-            "$instance": {
-                "email": [
-                    {
-                        "type": "builtin.email",
-                        "text": "patti.owens@microsoft.com",
-                        "startIndex": 31,
-                        "length": 25,
-                        "modelTypeId": 2,
-                        "modelType": "Prebuilt Entity Extractor"
-                    }
+"entities": {
+    "email": [
+        "patti@contoso.com"
+    ],
+    "$instance": {
+        "email": [
+            {
+                "type": "builtin.email",
+                "text": "patti@contoso.com",
+                "startIndex": 31,
+                "length": 17,
+                "modelTypeId": 2,
+                "modelType": "Prebuilt Entity Extractor",
+                "recognitionSources": [
+                    "model"
                 ]
             }
-        }
+        ]
     }
 }
 ```
+#### <a name="v2-responsetabv2"></a>[V2 yanıtı](#tab/V2)
+
+Aşağıdaki örnekte, **yerleşik. e-posta** varlığının çözümlemesi gösterilmektedir.
+
+```json
+"entities": [
+    {
+        "entity": "patti@contoso.com",
+        "type": "builtin.email",
+        "startIndex": 31,
+        "endIndex": 55,
+        "resolution": {
+        "value": "patti@contoso.com"
+        }
+    }
+]
+```
+* * * 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Hakkında bilgi edinin [numarası](luis-reference-prebuilt-number.md), [sıralı](luis-reference-prebuilt-ordinal.md), ve [yüzdesi](luis-reference-prebuilt-percentage.md). 
+[V3 tahmin uç noktası](luis-migration-api-v3.md)hakkında daha fazla bilgi edinin.
+
+Sayı, sıra [sayısı](luis-reference-prebuilt-number.md)ve [](luis-reference-prebuilt-ordinal.md) [yüzde](luis-reference-prebuilt-percentage.md)bilgileri hakkında bilgi edinin. 

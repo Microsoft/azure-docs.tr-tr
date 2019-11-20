@@ -1,6 +1,6 @@
 ---
-title: Azure Service Fabric uygulama parolalarını yönetme | Microsoft Docs
-description: Gizli değer bir Service Fabric uygulamasında (platformdan) güvenli hale getirmeyi öğrenin.
+title: Azure Service Fabric uygulama gizli dizilerini yönetme | Microsoft Docs
+description: Service Fabric uygulamasındaki gizli değerlerin güvenliğini nasıl sağlayacağınızı öğrenin (platformdan bağımsız).
 services: service-fabric
 documentationcenter: .net
 author: vturecek
@@ -14,30 +14,30 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 01/04/2019
 ms.author: vturecek
-ms.openlocfilehash: d151dbf20e68a2152e9d886a74e51786bb8fbfa6
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a24f670314d2f6679e37b438a74421e0e84604e2
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60614474"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74075495"
 ---
-# <a name="manage-encrypted-secrets-in-service-fabric-applications"></a>Service Fabric uygulamaları şifrelenmiş gizli dizileri Yönet
-Bu kılavuzda, Service Fabric uygulaması gizli yönetme adımlarında size kılavuzluk eder. Gizli dizileri depolama bağlantı dizeleri, parolalar veya düz metin olarak işleneceğini değil diğer değerleri gibi herhangi bir önemli bilgi olabilir.
+# <a name="manage-encrypted-secrets-in-service-fabric-applications"></a>Service Fabric uygulamalarında şifreli gizli dizileri yönetme
+Bu kılavuz, Service Fabric uygulamasında gizli dizileri yönetme adımlarında size yol gösterir. Gizlilikler, depolama bağlantı dizeleri, parolalar veya düz metin olarak işlenmemelidir diğer değerler gibi herhangi bir hassas bilgi olabilir.
 
-Bir Service Fabric uygulamasında şifrelenmiş gizli dizileri kullanma üç adımdan oluşur:
-* Bir şifreleme sertifikası ayarlayın ve parolaları şifrelemek.
-* Şifrelenmiş parolalar uygulamayı belirtin.
-* Şifrelenmiş parolalar hizmet kodundan şifresini çözemez.
+Service Fabric uygulamasında şifrelenmiş gizli dizileri kullanmak üç adımdan oluşur:
+* Bir şifreleme sertifikası kurun ve gizli dizileri şifreleyin.
+* Bir uygulamada şifrelenmiş gizli dizileri belirtin.
+* Şifrelenmiş gizli dizileri hizmet kodundan çözün.
 
-## <a name="set-up-an-encryption-certificate-and-encrypt-secrets"></a>Bir şifreleme sertifikası ayarlayın ve parolaları şifrelemek
-Bir şifreleme sertifikasını ayarlama ve parolaları şifrelemek için kullanarak Windows ile Linux arasında farklılık gösterir.
-* [Bir şifreleme sertifikası ayarlayın ve Windows Küme parolaları şifrelemek.][secret-management-windows-specific-link]
-* [Bir şifreleme sertifikası ayarlayın ve Linux kümelerinde parolaları şifrelemek.][secret-management-linux-specific-link]
+## <a name="set-up-an-encryption-certificate-and-encrypt-secrets"></a>Şifreleme sertifikası ayarlama ve gizli dizileri şifreleme
+Şifreleme sertifikası ayarlama ve parolaları şifrelemek için kullanma, Windows ve Linux arasında farklılık gösterir.
+* [Windows kümelerinde şifreleme sertifikası ayarlayın ve gizli dizileri şifreleyin.][secret-management-windows-specific-link]
+* [Bir şifreleme sertifikası kurun ve Linux kümelerinde gizli dizileri şifreleyin.][secret-management-linux-specific-link]
 
-## <a name="specify-encrypted-secrets-in-an-application"></a>Bir uygulamada şifrelenmiş parolalar belirtin
-Önceki adımda, bir sertifika ile şifrelemek ve bir uygulamada kullanmak için base-64 kodlu bir dize üreten açıklar. Bu base-64 kodlama dizesi belirtilen bir şifrelenmiş olarak [parametre] [ parameters-link] bir hizmetin Settings.xml veya bir şifrelenmiş olarak [ortam değişkeni] [ environment-variables-link] bir hizmetin ServiceManifest.xml içinde.
+## <a name="specify-encrypted-secrets-in-an-application"></a>Bir uygulamada şifrelenmiş gizli dizileri belirtme
+Önceki adımda, bir sertifika ile gizli dizi şifrelemesini ve bir uygulamada kullanılmak üzere bir Base-64 kodlu dizeyi oluşturmayı açıklar. Bu Base-64 kodlu dize, bir hizmetin Settings. xml dosyasında şifrelenmiş bir [parametre][parameters-link] olarak veya bir hizmetin servicemanifest. xml dosyasında şifrelenmiş bir [ortam değişkeni][environment-variables-link] olarak belirtilebilir.
 
-Bir şifrelenmiş belirtin [parametre] [ parameters-link] hizmetinizin Settings.xml yapılandırma dosyası ile `IsEncrypted` özniteliğini `true`:
+Hizmetinizin Settings. xml yapılandırma dosyasında, `IsEncrypted` özniteliği `true`olarak ayarlanan şifreli bir [parametre][parameters-link] belirtin:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -47,7 +47,7 @@ Bir şifrelenmiş belirtin [parametre] [ parameters-link] hizmetinizin Settings.
   </Section>
 </Settings>
 ```
-Bir şifrelenmiş belirtin [ortam değişkeni] [ environment-variables-link] ile hizmetinizin ServiceManifest.xml dosyasındaki `Type` özniteliğini `Encrypted`:
+Hizmetinizin ServiceManifest. xml dosyasında `Type` özniteliği `Encrypted`olarak ayarlanan bir şifrelenmiş [ortam değişkeni][environment-variables-link] belirtin:
 ```xml
 <CodePackage Name="Code" Version="1.0.0">
   <EnvironmentVariables>
@@ -56,11 +56,22 @@ Bir şifrelenmiş belirtin [ortam değişkeni] [ environment-variables-link] ile
 </CodePackage>
 ```
 
-### <a name="inject-application-secrets-into-application-instances"></a>Uygulama örnekleri ile uygulama gizli dizilerini ekleme
-İdeal olarak, farklı ortamlar için dağıtım olarak otomatik olmalıdır. Bu, bir derleme ortamında gizli şifreleme gerçekleştirmek ve uygulama örnekleri oluşturulurken parametre olarak şifrelenmiş gizli dizileri sağlayarak gerçekleştirilebilir.
+Gizli dizi, uygulama bildiriminde bir sertifika belirtilerek Service Fabric uygulamanıza da eklenmelidir. **ApplicationManifest. xml** ' ye bir **Secretscercertificate** öğesi ekleyin ve istenen sertifikanın parmak izini ekleyin.
 
-#### <a name="use-overridable-parameters-in-settingsxml"></a>Geçersiz kılınabilir parametrelere Settings.xml dosyasında kullanın
-Settings.xml yapılandırma dosyası uygulama oluşturma zamanında sağlandığı geçersiz kılınabilir parametrelere izin verir. Kullanım `MustOverride` parametresi için bir değer sağlamak yerine özniteliği:
+```xml
+<ApplicationManifest … >
+  ...
+  <Certificates>
+    <SecretsCertificate Name="MyCert" X509FindType="FindByThumbprint" X509FindValue="[YourCertThumbrint]"/>
+  </Certificates>
+</ApplicationManifest>
+```
+
+### <a name="inject-application-secrets-into-application-instances"></a>Uygulama örneklerine uygulama gizli dizilerini Ekle
+İdeal olarak, farklı ortamlara dağıtım mümkün olduğunca otomatikleştirilebilir. Bu, bir derleme ortamında gizli şifreleme gerçekleştirerek ve uygulama örnekleri oluştururken şifreli gizli dizileri parametre olarak sağlayarak gerçekleştirilebilir.
+
+#### <a name="use-overridable-parameters-in-settingsxml"></a>Settings. xml dosyasında geçersiz kılınabilir parametreler kullan
+Settings. xml yapılandırma dosyası, uygulama oluşturma zamanında sağlanabilen geçersiz kılınabilir parametrelere izin verir. Bir parametre için değer sağlamak yerine `MustOverride` özniteliğini kullanın:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -71,7 +82,7 @@ Settings.xml yapılandırma dosyası uygulama oluşturma zamanında sağlandığ
 </Settings>
 ```
 
-Settings.xml değerleri geçersiz kılmak için bir geçersiz kılma parametresini ApplicationManifest.xml hizmetinin bildirin:
+Settings. xml ' deki değerleri geçersiz kılmak için, ApplicationManifest. xml dosyasında hizmet için bir geçersiz kılma parametresi bildirin:
 
 ```xml
 <ApplicationManifest ... >
@@ -92,15 +103,15 @@ Settings.xml değerleri geçersiz kılmak için bir geçersiz kılma parametresi
   </ServiceManifestImport>
  ```
 
-Değer olarak belirtilebilir şimdi bir *parametr aplikace* uygulamanın bir örneğini oluştururken. Bir uygulama örneği oluşturma Script, PowerShell kullanarak veya ile yazılmış C#, derleme sürecinde kolay tümleştirme için.
+Şimdi, uygulamanın bir örneği oluşturulurken değer bir *uygulama parametresi* olarak belirtilebilir. Bir yapı sürecinde kolay tümleştirme için, bir uygulama örneğinin oluşturulması PowerShell kullanılarak C#betiklenebilir veya içinde yazılabilir.
 
-PowerShell kullanarak, parametre için sağlanan `New-ServiceFabricApplication` olarak komutu bir [karma tablo](https://technet.microsoft.com/library/ee692803.aspx):
+PowerShell kullanarak, parametresi `New-ServiceFabricApplication` komutuna [karma tablo](https://technet.microsoft.com/library/ee692803.aspx)olarak sağlanır:
 
 ```powershell
 New-ServiceFabricApplication -ApplicationName fabric:/MyApp -ApplicationTypeName MyAppType -ApplicationTypeVersion 1.0.0 -ApplicationParameter @{"MySecret" = "I6jCCAeYCAxgFhBXABFxzAt ... gNBRyeWFXl2VydmjZNwJIM="}
 ```
 
-Kullanarak C#, uygulama parametreleri belirtilmiş bir `ApplicationDescription` olarak bir `NameValueCollection`:
+Kullanarak C#, uygulama parametreleri bir `ApplicationDescription` `NameValueCollection`olarak belirtilir:
 
 ```csharp
 FabricClient fabricClient = new FabricClient();
@@ -118,8 +129,8 @@ ApplicationDescription applicationDescription = new ApplicationDescription(
 await fabricClient.ApplicationManager.CreateApplicationAsync(applicationDescription);
 ```
 
-## <a name="decrypt-encrypted-secrets-from-service-code"></a>Hizmet kodundan şifrelenmiş gizli dizilerin şifresini çözmek
-Erişmek için API [parametreleri] [ parameters-link] ve [ortam değişkenlerini] [ environment-variables-link] için şifrelenmiş değer kolay şifre çözmesine izin verin. Şifreli dize şifreleme için kullanılan sertifikayla ilgili bilgileri içerdiğinden, sertifikayı el ile belirtmeniz gerekmez. Sertifika yalnızca hizmetin üzerinde çalıştığı düğüm üzerinde yüklü olması gerekir.
+## <a name="decrypt-encrypted-secrets-from-service-code"></a>Şifrelenmiş gizli dizileri hizmet kodundan çöz
+[Parametrelere][parameters-link] ve [ortam değişkenlerine][environment-variables-link] erişmek için API 'ler, şifrelenmiş değerlerin kolay bir şekilde çözülmesi için izin verir. Şifrelenmiş dize, şifreleme için kullanılan sertifikayla ilgili bilgiler içerdiğinden, sertifikayı el ile belirtmeniz gerekmez. Sertifikanın yalnızca hizmetin üzerinde çalıştığı düğüme yüklenmesi gerekir.
 
 ```csharp
 // Access decrypted parameters from Settings.xml
@@ -136,10 +147,12 @@ string MyEnvVariable = Environment.GetEnvironmentVariable("MyEnvVariable");
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Daha fazla bilgi edinin [uygulama ve hizmet güvenliği](service-fabric-application-and-service-security.md)
+* Service Fabric [gizli dizi deposu](service-fabric-application-secret-store.md) 
+* [Uygulama ve hizmet güvenliği](service-fabric-application-and-service-security.md) hakkında daha fazla bilgi edinin
 
 <!-- Links -->
 [parameters-link]:service-fabric-how-to-parameterize-configuration-files.md
 [environment-variables-link]: service-fabric-how-to-specify-environment-variables.md
 [secret-management-windows-specific-link]: service-fabric-application-secret-management-windows.md
 [secret-management-linux-specific-link]: service-fabric-application-secret-management-linux.md
+[service fabric secrets store]: service-fabric-application-secret-store.md

@@ -1,32 +1,31 @@
 ---
-title: Azure Batch analizi | Microsoft Docs
-description: Azure Batch analizi referansı.
+title: Azure Batch Analytics | Microsoft Docs
+description: Azure Batch Analytics başvurusu.
 services: batch
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 ms.assetid: ''
 ms.service: batch
-ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: ''
 ms.workload: big-compute
 ms.date: 04/20/2017
 ms.author: lahugh
-ms.openlocfilehash: 999c3037196044250b8a12d6b6b380553e58c6ba
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 03cb6231a42e27c474e20f4c6ae91095156bb766
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60721564"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70095510"
 ---
 # <a name="batch-analytics"></a>Batch Analizi
-Toplu analiz konularındaki olayları ve Uyarıları Batch hizmet kaynakları için kullanılabilir yönelik başvuru bilgileri içerir.
+Batch Analytics 'teki konular, Batch hizmeti kaynakları için kullanılabilen olaylar ve uyarılar için başvuru bilgileri içerir.
 
-Bkz: [Azure Batch tanılama günlüğüne kaydetme](https://azure.microsoft.com/documentation/articles/batch-diagnostics/) etkinleştirme ve Batch tanılama günlükleri'ni kullanma hakkında daha fazla bilgi.
+Batch tanılama günlüklerini etkinleştirme ve kullanma hakkında daha fazla bilgi için bkz. [Azure Batch tanılama günlüğü](https://azure.microsoft.com/documentation/articles/batch-diagnostics/) .
 
 ## <a name="diagnostic-logs"></a>Tanılama günlükleri
 
-Azure Batch hizmeti, belirli Batch kaynaklarını ömrü boyunca aşağıdaki tanılama günlüğü olaylar gönderir.
+Azure Batch hizmeti, belirli toplu kaynakların kullanım ömrü boyunca aşağıdaki tanılama günlüğü olaylarını yayar.
 
 **Hizmet günlüğü olayları**
 * [Havuz oluşturma](batch-pool-create-event.md)

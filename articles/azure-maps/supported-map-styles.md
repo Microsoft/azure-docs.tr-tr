@@ -1,6 +1,6 @@
 ---
-title: Eşleme stilleri Azure eşlemelerinde desteklenen | Microsoft Docs
-description: Azure haritalar tarafından desteklenen eşleme stilleri
+title: Azure haritalar 'da desteklenen harita stilleri | Microsoft Docs
+description: Azure haritalar tarafından desteklenen harita stilleri
 author: walsehgal
 ms.author: v-musehg
 ms.date: 05/06/2019
@@ -8,81 +8,99 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: timlt
-ms.openlocfilehash: db396ad06bf46cbbaf486696b68393a6a4214c2f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: cd16ee87b213c2bfa4c541c4d3c453a4499855d0
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65230837"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73887726"
 ---
-# <a name="azure-maps-supported-map-styles"></a>Azure haritalar desteklenen eşleme stilleri
-Azure haritalar, aşağıda açıklandığı gibi birçok farklı yerleşik eşleme stilleri destekler.
+# <a name="azure-maps-supported-map-styles"></a>Azure haritalar desteklenen harita stilleri
+Azure Maps, aşağıda açıklandığı gibi birkaç farklı yerleşik harita stilini destekler.
 
-## <a name="road"></a>Yol
-A **yol** haritasıdır yollar, doğal görüntüler standart bir harita ve bu özellikler için etiketlerin yanı sıra yapay özellikleri.
+## <a name="road"></a>Road
+**Yol** Haritası, bu özelliklerin etiketleriyle birlikte yollar, doğal ve yapay Özellikler görüntüleyen standart bir eşlemedir.
 
-![Yol](./media/supported-map-styles/road.png)
+![Road](./media/supported-map-styles/road.png)
 
-**İlgili API'ler:**
-* [Harita resminin](https://docs.microsoft.com/rest/api/maps/render/getmapimage)
-* [Harita kutucuğunu](https://docs.microsoft.com/rest/api/maps/render/getmaptile)
-* JS harita denetimi
+**Geçerli API 'Ler:**
+* [Harita resmi](https://docs.microsoft.com/rest/api/maps/render/getmapimage)
+* [Harita kutucuğu](https://docs.microsoft.com/rest/api/maps/render/getmaptile)
+* Web SDK eşlemesi denetimi
 * Android harita denetimi
 
-## <a name="satellite"></a>Uydu 
-**Uydu** stili, uydu ve hava gözünüzde bir birleşimi.
+## <a name="blank-and-blank_accessible"></a>boş ve blank_accessible
 
-![Uydu](./media/supported-map-styles/satellite.png)
+**Boş** ve **blank_accessible** harita stilleri üzerinde verilerin görselleştirilmesi için boş bir tuval sağlar. **Blank_accessible** stili, temel harita görüntülenmese de haritanın bulunduğu konum ayrıntıları ile ekran okuyucu güncelleştirmeleri sağlamaya devam edecektir.
 
-**İlgili API'ler:**
+> [!Note]
+> Web SDK 'sında harita DIV öğesinin CSS `background-color` stilini ayarlayarak haritanın arka plan rengini değiştirebilirsiniz.
+
+**Geçerli API 'Ler:**
+* Web SDK eşlemesi denetimi
+
+## <a name="satellite"></a>uydu 
+**Uydu** stili, uydu ve hava imasıy 'nin bir birleşimidir.
+
+![uydu](./media/supported-map-styles/satellite.png)
+
+**Geçerli API 'Ler:**
 * [Uydu kutucuğu](https://docs.microsoft.com/rest/api/maps/render/getmapimagerytilepreview)
-* JS harita denetimi
+* Web SDK eşlemesi denetimi
 * Android harita denetimi
 
-## <a name="satelliteroadlabels"></a>satellite_road_labels
-Yollar ve etiketleri uydu ve hava tanımayı üzerine yayılan karma bu harita stilidir.
+## <a name="satellite_road_labels"></a>satellite_road_labels
+Bu harita stili, uydu ve hava imakına göre popüler yollar ve Etiketler için bir karma değer.
 
 ![satellite_road_labels](./media/supported-map-styles/satellite_road_labels.png)
 
-**İlgili API'ler:**
-* JS harita denetimi
+**Geçerli API 'Ler:**
+* Web SDK eşlemesi denetimi
 * Android harita denetimi
 
-## <a name="grayscaledark"></a>grayscale_dark
-**Koyu gri tonlamalı** yol haritası Stili Koyu bir sürümüdür.
+## <a name="grayscale_dark"></a>grayscale_dark
+**gri tonlamalı koyu** , yol haritası stilinin karanlık bir sürümüdür.
 
 ![gray_scale](./media/supported-map-styles/grayscale_dark.png)
 
-**İlgili API'ler:**
-* JS harita denetimi 
+**Geçerli API 'Ler:**
+* Web SDK eşlemesi denetimi 
 * Android harita denetimi
 
 
-## <a name="grayscalelight"></a>grayscale_light
-**gri tonlamalı ışık** yol haritası stili hafif bir sürümüdür.
+## <a name="grayscale_light"></a>grayscale_light
+**gri tonlama ışığı** , yol haritası stilinin hafif bir sürümüdür.
 
-![gri tonlamalı açık](./media/supported-map-styles/grayscale_light.png)
+![gri tonlamalı hafif](./media/supported-map-styles/grayscale_light.png)
 
-**İlgili API'ler:**
-* JS harita denetimi
+**Geçerli API 'Ler:**
+* Web SDK eşlemesi denetimi
 * Android harita denetimi
 
 
-## <a name="night"></a>gece
-**gece** koyu renkli yollar ve semboller yol haritası stiliyle sürümüdür.
+## <a name="night"></a>gerçekleştirilmiştir
+**gece** , yol haritası stilinin renkli yollar ve semboller ile karanlık bir sürümüdür.
 
-![gece](./media/supported-map-styles/night.png)
+![gerçekleştirilmiştir](./media/supported-map-styles/night.png)
 
-**İlgili API'ler:**
-* JS harita denetimi
+**Geçerli API 'Ler:**
+* Web SDK eşlemesi denetimi
 * Android harita denetimi
 
-## <a name="roadshadedrelief"></a>road_shaded_relief
-**yol gölgeli Tahliye** olduğu bir Azure haritalar ana stili dağılımlarını dünya ile tamamlandı.
+## <a name="road_shaded_relief"></a>road_shaded_relief
+**trafik gölgeli tahliye** , dünya dağılımlarıyla birlikte tamamlanan bir Azure Maps ana stilidir.
 
-![Gölgeli Tahliye](./media/supported-map-styles/shaded-relief.png)
+![gölgeli tahliye](./media/supported-map-styles/shaded-relief.png)
 
-**İlgili API'ler:**
-* [Harita kutucuğunu](https://docs.microsoft.com/rest/api/maps/render/getmaptile)
-* JS harita denetimi
+**Geçerli API 'Ler:**
+* [Harita kutucuğu](https://docs.microsoft.com/rest/api/maps/render/getmaptile)
+* Web SDK eşlemesi denetimi
 * Android harita denetimi
+
+
+## <a name="next-steps"></a>Sonraki adımlar
+
+Azure haritalar 'da harita stili ayarlama hakkında bilgi edinin:
+
+> [!div class="nextstepaction"]
+> [Harita stili seçin](https://docs.microsoft.com/azure/azure-maps/choose-map-style)

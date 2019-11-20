@@ -1,0 +1,105 @@
+### YamlMime:Landing
+title: Perakende için Azure IoT Central belgeleri
+summary: IoT Central uygulama şablonlarını kullanarak perakende IoT çözümlerini oluşturmayı, özelleştirmeyi ve yönetmeyi öğrenin.
+metadata:
+  title: Perakende için Azure IoT Central belgeleri
+  description: IoT Central uygulama şablonlarını kullanarak perakende IoT çözümlerini oluşturmayı, özelleştirmeyi ve yönetmeyi öğrenin.
+  services: iot-central
+  ms.service: iot-central
+  ms.topic: landing-page
+  author: philmea
+  ms.author: philmea
+  ms.date: 10/25/2019
+  ms.openlocfilehash: 637da382af333d069161b25c6fcb5666f843a855
+  ms.sourcegitcommit: 39da2d9675c3a2ac54ddc164da4568cf341ddecf
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/12/2019
+  ms.locfileid: "73957957"
+landingContent:
+- title: Perakende çözümleri oluşturma
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Azure IoT Central için perakende çözümleri
+      url: overview-iot-central-retail-pnp.md
+  - linkListType: tutorial
+    links:
+    - text: 1- Perakende uygulaması oluşturma
+      url: tutorial-in-store-analytics-create-app-pnp.md
+    - text: 2 - Operatör panosunu özelleştirme
+      url: tutorial-in-store-analytics-customize-dashboard-pnp.md
+    - text: 3 - Verileri dışarı aktarma ve içgörüleri görselleştirme
+      url: tutorial-in-store-analytics-export-data-visualize-insights-pnp.md
+    - text: Akıllı envanter yönetimi uygulaması oluşturma
+      url: tutorial-iot-central-smart-inventory-management-pnp.md
+    - text: Bağlantılı lojistik uygulaması oluşturma
+      url: tutorial-iot-central-connected-logistics-pnp.md
+    - text: Dijital dağıtım merkezi uygulaması oluşturma
+      url: tutorial-iot-central-digital-distribution-center-pnp.md
+  - linkListType: how-to-guide
+    links:
+    - text: Rigado Cascade 500'ü bağlama
+      url: ../preview/howto-connect-rigado-cascade-500.md
+- title: Bağlanma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Cihaz şablonu ayarlama
+      url: ../preview/howto-set-up-template.md
+    - text: IoT Tak Çalıştır cihazını bağlama
+      url: ../preview/tutorial-connect-pnp-device.md
+  - linkListType: how-to-guide
+    links:
+    - text: MXChip IoT DevKit’i hazırlama ve bağlama
+      url: ../preview/howto-connect-devkit.md
+    - text: Diğer IoT bulutlarına bağlanma
+      url: ../core/howto-build-iotc-device-bridge.md
+- title: Bağlı kalma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Cihaz gruplarını kullanma
+      url: ../preview/tutorial-use-device-groups.md
+  - linkListType: how-to-guide
+    links:
+    - text: Cihazlarınızı yönetme
+      url: ../preview/howto-manage-devices.md
+    - text: İş çalıştırma
+      url: ../core/howto-run-a-job.md
+    - text: Cihaz verilerinizi analiz etme
+      url: ../preview/howto-create-analytics.md
+- title: Dönüşüm
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Kural oluşturma
+      url: ../preview/quick-configure-rules.md
+    - text: Telemetri kuralları oluşturma
+      url: ../preview/tutorial-create-telemetry-rules.md
+    - text: Blob Depolama'ya aktarma
+      url: ../preview/howto-export-data.md
+  - linkListType: how-to-guide
+    links:
+    - text: Özel kurallar oluşturma
+      url: ../preview/howto-create-custom-rules.md
+    - text: Özel analiz oluşturma
+      url: ../preview/howto-create-custom-analytics.md
+- title: Yönetim
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Uygulamanızı yönetme
+      url: ../preview/howto-administer.md
+    - text: Kullanıcıları ve rolleri yönetme
+      url: ../preview/howto-manage-users-roles.md
+    - text: Faturanızı görüntüleme
+      url: ../preview/howto-view-bill.md
+    - text: Uygulama kullanıcı arabirimini özelleştirme
+      url: ../preview/howto-customize-ui.md
+    - text: Kişisel panoları yapılandırma
+      url: ../core/howto-create-personal-dashboards.md
+    - text: Pano kutucukları kullanma
+      url: ../core/howto-add-tiles-to-your-dashboard.md
+    - text: Uygulama şablonlarını kullanma
+      url: ../preview/howto-use-app-templates.md

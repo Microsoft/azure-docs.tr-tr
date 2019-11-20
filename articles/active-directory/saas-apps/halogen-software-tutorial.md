@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Azure Active Directory tümleştirmesiyle halojensiz yazılım | Microsoft Docs'
-description: Azure Active Directory ve halojensiz yazılım arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Hagen yazılımıyla Azure Active Directory tümleştirme | Microsoft Docs'
+description: Azure Active Directory ve Hagen yazılımı arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -8,6 +8,7 @@ manager: mtillman
 ms.reviewer: barbkess
 ms.assetid: 2ca2298d-9a0c-4f14-925c-fa23f2659d28
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
@@ -15,99 +16,99 @@ ms.topic: tutorial
 ms.date: 02/15/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a8e1f4f0f2bd3521a312523fa9e36dcf14492862
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 220fa6bf16bf92f1907002100dc46895a9807251
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67101386"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73159150"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-halogen-software"></a>Öğretici: Halojensiz yazılım ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-halogen-software"></a>Öğretici: Hagen yazılımıyla Azure Active Directory tümleştirme
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile halojensiz yazılım tümleştirme konusunda bilgi edinin.
-Halojensiz yazılım Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, Hag yazılımlarını Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+Hagen yazılımlarını Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* Halojensiz yazılım erişimi, Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak (çoklu oturum açma) halojensiz yazılım için oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Hagen yazılımına erişimi olan Azure AD 'de denetim yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla Hagen yazılım (çoklu oturum açma) için otomatik olarak oturum açmasını sağlayabilirsiniz.
+* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD tümleştirmesi halojensiz yazılımıyla yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini Hagen yazılımıyla birlikte yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Abonelik halojensiz yazılım çoklu oturum açma etkin
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* Hagen yazılımı çoklu oturum açma etkin aboneliği
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Destekleyen halojensiz yazılımı **SP** tarafından başlatılan
+* Hagen yazılımı **SP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-halogen-software-from-the-gallery"></a>Galeriden halojensiz yazılım ekleme
+## <a name="adding-halogen-software-from-the-gallery"></a>Galeriden Hagen yazılım ekleme
 
-Azure AD'de halojensiz yazılım tümleştirmesini yapılandırmak için halojensiz yazılım Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Hagen yazılımlarının Azure AD ile tümleştirilmesini yapılandırmak için, Galeriden, yönetilen SaaS uygulamaları listenize Hagen yazılım eklemeniz gerekir.
 
-**Galeriden halojensiz yazılım eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden Hagen yazılımı eklemek için aşağıdaki adımları uygulayın:**
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+1. **[Azure Portal](https://portal.azure.com)** sol gezinti panelinde **Azure Active Directory** simgesine tıklayın.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+3. Yeni uygulama eklemek için, iletişim kutusunun üst kısmındaki **Yeni uygulama** düğmesine tıklayın.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **halojensiz yazılım**seçin **halojensiz yazılım** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **Hagen Software**yazın, sonuç panelinden **Hagen yazılımı** ' nı seçin ve ardından **Ekle** düğmesine tıklayarak uygulamayı ekleyin.
 
-     ![Sonuç listesinde halojensiz yazılım](common/search-new-app.png)
+     ![Sonuçlar listesinde Hagen yazılımı](common/search-new-app.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma halojensiz yazılım adlı bir test kullanıcı tabanlı test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısının halojensiz yazılımla ilgili kullanıcı arasında bir bağlantı ilişkisi kurulması gerekir.
+Bu bölümde, **Britta Simon**adlı bir test kullanıcısına göre Hagen YAZıLıMıYLA Azure AD çoklu oturum açmayı yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ile Hagen yazılım içindeki ilgili Kullanıcı arasındaki bağlantı ilişkisinin kurulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma halojensiz yazılım ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açma 'yı Hagen yazılımıyla birlikte yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Halojensiz yazılım çoklu oturum açmayı yapılandırma](#configure-halogen-software-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Halojensiz yazılım test kullanıcısı oluşturma](#create-halogen-software-test-user)**  - kullanıcı Azure AD gösterimini bağlı halojensiz yazılım Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD çoklu oturum açma özelliğini yapılandırarak](#configure-azure-ad-single-sign-on)** kullanıcılarınızın bu özelliği kullanmasına olanak sağlayın.
+2. **[Hagen yazılımlarını çoklu oturum açmayı yapılandırma](#configure-halogen-software-single-sign-on)** -uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
+5. Kullanıcının Azure AD gösterimine bağlı olan Hag tabanlı yazılımda Britta Simon 'un bir karşılığı olacak **[Hag yazılım test kullanıcısı oluşturun](#create-halogen-software-test-user)** .
+6. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[Çoklu oturum açmayı sınayın](#test-single-sign-on)** .
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma halojensiz yazılımıyla yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açmayı Hagen yazılımıyla yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **halojensiz yazılım** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/) **Hagen yazılım** uygulaması tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
+3. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları gerçekleştirin:
+4. **Temel SAML yapılandırması** bölümünde aşağıdaki adımları gerçekleştirin:
 
-    ![Halojensiz yazılım etki alanı ve URL'ler tek oturum açma bilgileri](common/sp-identifier.png)
+    ![Hagen yazılım etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/sp-identifier.png)
 
-    a. İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın: `https://global.hgncloud.com/<companyname>`
+    a. **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://global.hgncloud.com/<companyname>`
 
-    b. İçinde **tanımlayıcı (varlık kimliği)** metin kutusuna şu biçimi kullanarak bir URL yazın:
+    b. **Tanımlayıcı (VARLıK kimliği)** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:
 
     | |
     |--|
@@ -116,140 +117,140 @@ Azure AD çoklu oturum açma halojensiz yazılımıyla yapılandırmak için aş
     | |
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerler gerçek oturum açma URL ve tanımlayıcıdır ile güncelleştirin. İlgili kişi [halojensiz yazılım istemcisi Destek ekibine](https://support.halogensoftware.com/) bu değerleri almak için. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI ve tanımlayıcısı ile güncelleştirin. Bu değerleri almak için [Hagen yazılım istemci desteği ekibine](https://support.halogensoftware.com/) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-4. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **Federasyon meta veri XML**  bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+4. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imza sertifikası** bölümünde, **Federasyon meta veri XML** 'sini gereksiniminize göre belirtilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/metadataxml.png)
 
-6. Üzerinde **halojensiz yazılımını kurma** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+6. **Hagen yazılımlarını ayarla** bölümünde, uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+    a. Oturum açma URL 'SI
 
-    b. Azure Ad tanımlayıcısı
+    b. Azure AD tanımlayıcısı
 
-    c. Oturum Kapatma URL'si
+    c. Oturum kapatma URL 'SI
 
-### <a name="configure-halogen-software-single-sign-on"></a>Halojensiz yazılım çoklu oturum açmayı yapılandırın
+### <a name="configure-halogen-software-single-sign-on"></a>Hagen yazılım çoklu oturum açmayı yapılandırma
 
-1. Bir farklı bir tarayıcı penceresinde için oturum açma, **halojensiz yazılım** uygulamasını yönetici olarak.
+1. Farklı bir tarayıcı penceresinde, **Hagen yazılım** uygulamanızda yönetici olarak oturum açın.
 
-2. Tıklayın **seçenekleri** sekmesi.
+2. **Seçenekler** sekmesine tıklayın.
   
     ![Azure AD Connect nedir?](./media/halogen-software-tutorial/tutorial_halogen_12.png)
 
-3. Sol gezinti bölmesinden **SAML yapılandırma**.
+3. Sol gezinti bölmesinde **SAML yapılandırması**' na tıklayın.
   
     ![Azure AD Connect nedir?](./media/halogen-software-tutorial/tutorial_halogen_13.png)
 
-4. Üzerinde **SAML yapılandırma** sayfasında, aşağıdaki adımları gerçekleştirin:
+4. **SAML yapılandırması** sayfasında, aşağıdaki adımları gerçekleştirin:
 
     ![Azure AD Connect nedir?](./media/halogen-software-tutorial/tutorial_halogen_14.png)
 
-    a. Olarak **benzersiz tanımlayıcı**seçin **Nameıd**.
+    a. **Benzersiz tanımlayıcı**olarak, **NameID**' yi seçin.
 
-    b. Olarak **benzersiz tanımlayıcı eşlemeleri için**seçin **Username**.
+    b. **Benzersiz tanımlayıcı Ile eşleniyorsa** **Kullanıcı adı**' nı seçin.
   
-    c. İndirilen meta veri dosyası karşıya yüklemek için tıklayın **Gözat** dosyasını seçin ve ardından **dosyasını karşıya yükle**.
+    c. İndirilen meta veri dosyanızı karşıya yüklemek için, dosya ' ya ve ardından **dosyayı karşıya yüklemek**Için, **Araştır** ' a tıklayın.
 
-    d. Test yapılandırması için Yardım düğmesini tıklatın **Test çalıştırması**.
+    d. Yapılandırmayı test etmek için **Test Çalıştır**' a tıklayın.
 
     > [!NOTE]
-    > Öğesinin ileti beklemesi gerekiyor "*SAML sınav tamamlanana. Lütfen bu pencereyi kapatın*". Ardından, açılan tarayıcı penceresini kapatın. **Etkinleştirme SAML** onay kutusu yalnızca etkin olmadığını test tamamlandı.
+    > "SAML testi tamamlanmıştır" iletisini beklemeniz gerekir *. Lütfen bu pencereyi kapatın*. Sonra, açılan tarayıcı penceresini kapatın. **SAML etkinleştir** onay kutusu yalnızca test tamamlandıysa etkinleştirilir.
 
-    e. Seçin **etkinleştirme SAML**.
+    e. **SAML etkinleştir**' i seçin.
 
-    f. Tıklayın **değişiklikleri kaydetmek**.
+    f. **Değişiklikleri Kaydet**' e tıklayın.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümün amacı, Azure portal Britta Simon adlı bir test kullanıcısı oluşturmaktır.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
+3. Kullanıcı Özellikleri ' nde aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü **brittasimon\@yourcompanydomain.extension**  
+    b. **Kullanıcı adı** alanında **brittasıon\@yourşirketnotlarıetki alanı. Extension** yazın  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
     d. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, Azure çoklu oturum açma halojensiz yazılıma erişim vererek kullanmak Britta Simon etkinleştirin.
+Bu bölümde, hatta özellikli yazılıma erişim vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon özelliğini etkinleştirirsiniz.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **halojensiz yazılım**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **Hagen yazılımı**' nı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **halojensiz yazılım**.
+2. Uygulamalar listesinde **Hagen yazılımı**' nı seçin.
 
-    ![Uygulamalar listesinde halojensiz yazılım bağlantı](common/all-applications.png)
+    ![Uygulamalar listesindeki Hagen yazılım bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+5. **Kullanıcılar ve gruplar** Iletişim kutusunda kullanıcılar listesinde **Britta Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-halogen-software-test-user"></a>Halojensiz yazılım test kullanıcısı oluşturma
+### <a name="create-halogen-software-test-user"></a>Hagen yazılım test kullanıcısı oluşturma
 
-Bu bölümün amacı, Britta Simon halojensiz yazılım adlı bir kullanıcı oluşturmaktır.
+Bu bölümün amacı, Hag Software 'de Britta Simon adlı bir Kullanıcı oluşturmaktır.
 
-**Britta Simon halojensiz yazılım adlı bir kullanıcı oluşturmak için aşağıdaki adımları gerçekleştirin:**
+**Hagen yazılımda Britta Simon adlı bir kullanıcı oluşturmak için aşağıdaki adımları uygulayın:**
 
-1. Oturum açın, **halojensiz yazılım** uygulamasını yönetici olarak.
+1. **Hagen yazılım** uygulamanızda yönetici olarak oturum açın.
 
-2. Tıklayın **kullanıcı Merkezi** sekmesine ve ardından **Create User**.
+2. **Kullanıcı Merkezi** sekmesine tıklayın ve ardından **Kullanıcı oluştur**' a tıklayın.
 
     ![Azure AD Connect nedir?](./media/halogen-software-tutorial/tutorial_halogen_300.png)  
 
-3. Üzerinde **yeni kullanıcı** iletişim sayfasında, aşağıdaki adımları gerçekleştirin:
+3. **Yeni Kullanıcı** iletişim sayfasında, aşağıdaki adımları uygulayın:
 
     ![Azure AD Connect nedir?](./media/halogen-software-tutorial/tutorial_halogen_301.png)
 
-    a. İçinde **ad** metin adı gibi kullanıcı türü **Britta**.
+    a. **Ilk ad** metin kutusuna, **Britta**gibi kullanıcının adını yazın.
 
-    b. İçinde **Soyadı** metin türü Soyadı gibi kullanıcının **Simon**.
+    b. **Soyadı** metin kutusunda, **Simon**adlı kullanıcının soyadını yazın.
 
-    c. İçinde **kullanıcıadı** metin kutusuna **Britta Simon**, Azure portalında olduğu gibi kullanıcı adı.
+    c. **Kullanıcı adı metin kutusuna** , Azure portal olarak Kullanıcı adını **Britta Simon**yazın.
 
-    d. İçinde **parola** metin Britta parolasını yazın.
+    d. **Parola** metin kutusuna Britta parolasını yazın.
 
-    e. **Kaydet**’e tıklayın.
+    e. **Kaydet** düğmesine tıklayın.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-Erişim panelinde halojensiz yazılım kutucuğa tıkladığınızda, otomatik olarak SSO'yu ayarlama halojensiz yazılım için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde Hagen yazılım kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız Hagen yazılımında otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)

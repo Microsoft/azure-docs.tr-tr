@@ -1,6 +1,6 @@
 ---
-title: Özel bir ilke Azure Active Directory B2C, bir OAuth2 teknik profili tanımlamak | Microsoft Docs
-description: Azure Active Directory B2C, özel bir ilkede bir OAuth2 teknik profili tanımlayın.
+title: Azure Active Directory B2C bir özel ilkede bir OAuth2 Technical profile tanımlayın | Microsoft Docs
+description: Azure Active Directory B2C bir özel ilkede OAuth2 Technical profile tanımlayın.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,33 +10,33 @@ ms.topic: reference
 ms.date: 09/10/2018
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 80b196b34e8eee99ed77c3c8a914f89fa68d87b8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 63500c057b5c9f497e59589286a852a4394059ec
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66512944"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71063981"
 ---
-# <a name="define-an-oauth2-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Bir Azure Active Directory B2C özel İlkesi'nde bir OAuth2 teknik profili tanımlama
+# <a name="define-an-oauth2-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Azure Active Directory B2C özel ilkesinde bir OAuth2 teknik profili tanımlama
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-Azure Active Directory (Azure AD) B2C, OAuth2 protokolünü kimlik sağlayıcısı için destek sağlar. OAuth2 yetkilendirme ve temsilci seçilen kimlik doğrulaması için birincil protokolüdür. Daha fazla bilgi için [RFC 6749 OAuth 2.0 yetkilendirme Framework](https://tools.ietf.org/html/rfc6749). OAuth2 teknik profili ile Facebook gibi bir OAuth2 tabanlı kimlik sağlayıcısı ile ad'sini birleştirebilir. Bir kimlik sağlayıcısı ile Federasyon, kullanıcıların oturum sosyal var olan oturum veya Kurumsal kimlikleri sağlar.
+Azure Active Directory B2C (Azure AD B2C), OAuth2 protokol kimlik sağlayıcısı için destek sağlar. OAuth2, yetkilendirme ve temsilci kimlik doğrulaması için birincil protokoldür. Daha fazla bilgi için bkz. [RFC 2,0 6749 yetkilendirme çerçevesi](https://tools.ietf.org/html/rfc6749). OAuth2 teknik profiliyle, Facebook gibi bir OAuth2 tabanlı kimlik sağlayıcısıyla federasyona bağlayabilirsiniz. Bir kimlik sağlayıcısı ile federasyona eklemek, kullanıcıların mevcut sosyal veya kurumsal kimliklerinde oturum açmasına olanak tanır.
 
 ## <a name="protocol"></a>Protocol
 
-**Adı** özniteliği **Protokolü** öğesi ayarlanması gerekiyor `OAuth2`. Örneğin, protokol için **Facebook OAUTH** teknik profil `OAuth2`:
+**Protokol** öğesinin `OAuth2` **Name** özniteliğinin olarak ayarlanması gerekir. Örneğin, **Facebook-OAUTH** Technical profile `OAuth2`için protokol:
 
 ```XML
 <TechnicalProfile Id="Facebook-OAUTH">
   <DisplayName>Facebook</DisplayName>
   <Protocol Name="OAuth2" />
-  ...    
+  ...
 ```
 
 ## <a name="input-claims"></a>Giriş talepleri
 
-**InputClaims** ve **InputClaimsTransformations** öğeleri gerekli değildir. Ancak ek parametreler kimlik sağlayıcınız göndermek isteyebilirsiniz. Aşağıdaki örnek ekler **domain_hint** sorgu dizesi parametresi değeri ile `contoso.com` yetkilendirme isteği için.
+**Inputclaim** ve **ınputclaimstransformations** öğeleri gerekli değildir. Ancak kimlik sağlayıcınıza ek parametreler göndermek isteyebilirsiniz. Aşağıdaki örnek, değerini `contoso.com` yetkilendirme isteğine **domain_hint** sorgu dizesi parametresini ekler.
 
 ```XML
 <InputClaims>
@@ -44,23 +44,23 @@ Azure Active Directory (Azure AD) B2C, OAuth2 protokolünü kimlik sağlayıcıs
 </InputClaims>
 ```
 
-## <a name="output-claims"></a>Çıkış talep
+## <a name="output-claims"></a>Çıkış talepleri
 
-**OutputClaims** öğesi talep OAuth2 kimlik sağlayıcısı tarafından döndürülen bir listesini içerir. İlkeniz için tanımlanan kimlik sağlayıcısı adını tanımlanan talep eşleştirmek gerekebilir. Ayarladığınız sürece kimlik sağlayıcısı tarafından döndürülen olmayan talepleri de içerebilir `DefaultValue` özniteliği.
+**Outputclaim** öğesi, OAuth2 Identity provider tarafından döndürülen taleplerin bir listesini içerir. İlkenizde tanımlanan talebin adını kimlik sağlayıcısında tanımlanan adla eşlemeniz gerekebilir. `DefaultValue` Özniteliği ayarladığınız sürece, kimlik sağlayıcısı tarafından döndürülmeyen talepleri de ekleyebilirsiniz.
 
-**OutputClaimsTransformations** öğe koleksiyonu içerebilir **OutputClaimsTransformation** çıkış talep değiştirmek veya yenilerini oluşturmak için kullanılan öğeleri.
+**Outputclaimstransformations** öğesi, çıkış taleplerini değiştirmek veya yenilerini oluşturmak için kullanılan bir **outputclaimstransreference** öğeleri koleksiyonu içerebilir.
 
-Aşağıdaki örnek, Facebook kimlik sağlayıcısı tarafından döndürülen talepleri gösterir:
+Aşağıdaki örnekte, Facebook kimlik sağlayıcısı tarafından döndürülen talepler gösterilmektedir:
 
-- **First_name** talep eşlendi **givenName** talep.
-- **Soyadı** talep eşlendi **Soyadı** talep.
-- **DisplayName** adı eşleme talep.
-- **E-posta** Adı Eşleme olmadan talep.
+- **First_name** **talebi, bu talep ile** eşleştirilir.
+- **Last_name** talebi, **Soyadı** talebine eşlenir.
+- Ad eşleme olmadan **DisplayName** talebi.
+- Ad eşleştirmesi olmayan **e-posta** talebi.
 
-Teknik profil de kimlik sağlayıcısı tarafından döndürülen olmayan talepleri döndürür: 
+Teknik profil, kimlik sağlayıcısı tarafından döndürülmeyen talepleri de döndürür:
 
-- **Identityprovider** kimlik sağlayıcısının adını içeren talep.
-- **AuthenticationSource** varsayılan değeri olan talep **socialIdpAuthentication**.
+- Kimlik sağlayıcısının adını içeren **IdentityProvider** talebi.
+- Varsayılan bir **Socialidpauthentication**değeri olan **authenticationsource** talebi.
 
 ```xml
 <OutputClaims>
@@ -78,41 +78,41 @@ Teknik profil de kimlik sağlayıcısı tarafından döndürülen olmayan talepl
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| client_id | Evet | Kimlik sağlayıcısı uygulama tanımlayıcısı. |
-| IdTokenAudience | Hayır | İd_token İzleyici. Belirtilmişse, Azure AD B2C belirteç kimlik sağlayıcısı tarafından döndürülen bir talep ve belirtilen birine eşit olup olmadığını denetler. |
-| authorization_endpoint | Evet | RFC 6749 göre yetkilendirme uç noktasının URL'si. |
-| AccessTokenEndpoint | Evet | RFC 6749 göre belirteç uç noktası URL'si. |  
-| ClaimsEndpoint | Evet | RFC 6749 göre kullanıcı bilgileri uç noktasının URL'si. | 
-| AccessTokenResponseFormat | Hayır | Erişim belirteci uç noktası çağrısı biçimi. Örneğin, bir HTTP GET yöntemi Facebook gerektiriyor, ancak erişim belirteci yanıtı JSON biçimindedir. |
-| AdditionalRequestQueryParameters | Hayır | Ek istek sorgu parametreleri. Örneğin, ek parametreler kimlik sağlayıcınız göndermek isteyebilirsiniz. Virgül olan sınırlayıcıyı kullanarak birden çok parametre ekleyebilirsiniz. | 
-| ClaimsEndpointAccessTokenName | Hayır | Erişim belirteci sorgu dizesi parametresinin adı. Bazı kimlik sağlayıcıları talep uç noktaları destek GET HTTP isteği. Bu durumda, taşıyıcı belirteç yetkilendirme üst bilgisi yerine bir sorgu dizesi parametresi aracılığıyla gönderilir. |
-| ClaimsEndpointFormatName | Hayır | Biçim sorgu dizesi parametresinin adı. Örneğin, adı olarak ayarlayabilirsiniz `format` uç nokta bu LinkedIn talep `https://api.linkedin.com/v1/people/~?format=json`. | 
-| ClaimsEndpointFormat | Hayır | Biçim sorgu dizesi parametresinin değeri. Örneğin, değer olarak ayarlayabilirsiniz `json` uç nokta bu LinkedIn talep `https://api.linkedin.com/v1/people/~?format=json`. | 
-| ProviderName | Hayır | Kimlik sağlayıcısının adı. |
-| response_mode | Hayır | Kimlik sağlayıcısı sonucu Azure AD B2C geri göndermek için kullandığı yöntem. Olası değerler: `query`, `form_post` (varsayılan) veya `fragment`. |
-| scope | Hayır | OAuth2 kimlik sağlayıcısı belirtimine göre tanımlanan isteğinin kapsamı. Gibi `openid`, `profile`, ve `email`. |
-| HttpBinding | Hayır | Erişim belirteci ve taleplerin belirteci uç beklenen HTTP bağlama. Olası değerler: `GET` veya `POST`.  |
-| ResponseErrorCodeParamName | Hayır | HTTP 200 (Tamam) döndürülen hata iletisi içeren parametrenin adı. |
-| ExtraParamsInAccessTokenEndpointResponse | Hayır | Alınan yanıtta döndürülebilecek ek parametreleri içeren **AccessTokenEndpoint** bazı kimlik sağlayıcıları. Örneğin, gelen yanıt **AccessTokenEndpoint** gibi ek bir parametre içeren `openid`, zorunlu bir parametre access_token yanı sıra olduğu bir **ClaimsEndpoint** istek sorgu dize. Birden çok parametre adları kaçış verilecek ve virgülle ayrılmış ',' sınırlayıcısı. |
-| ExtraParamsInClaimsEndpointRequest | Hayır | İçinde döndürülen ek parametreleri içeren **ClaimsEndpoint** bazı kimlik sağlayıcıları tarafından istek. Birden çok parametre adları kaçış verilecek ve virgülle ayrılmış ',' sınırlayıcısı. |
+| client_id | Evet | Kimlik sağlayıcısının uygulama tanımlayıcısı. |
+| Idtokenaudience | Hayır | İd_token kitlesi. Belirtilmişse Azure AD B2C, belirtecin kimlik sağlayıcısı tarafından döndürülen bir talep içinde olup olmadığını denetler ve belirtilen değere eşittir. |
+| authorization_endpoint | Evet | RFC 6749 başına yetkilendirme uç noktasının URL 'SI. |
+| AccessTokenEndpoint | Evet | RFC 6749 başına belirteç uç noktasının URL 'SI. |
+| ClaimsEndpoint | Evet | RFC 6749 başına Kullanıcı bilgileri uç noktasının URL 'SI. |
+| Accesstokenresponsebiçimi | Hayır | Erişim belirteci uç noktası çağrısının biçimi. Örneğin, Facebook bir HTTP GET yöntemi gerektirir, ancak erişim belirteci yanıtı JSON biçimindedir. |
+| AdditionalRequestQueryParameters | Hayır | Ek istek sorgu parametreleri. Örneğin, kimlik sağlayıcınıza ek parametreler göndermek isteyebilirsiniz. Virgül sınırlayıcısı kullanarak birden çok parametre ekleyebilirsiniz. |
+| ClaimsEndpointAccessTokenName | Hayır | Erişim belirteci sorgu dizesi parametresinin adı. Bazı kimlik sağlayıcılarının talep uç noktaları HTTP isteği al 'ı destekler. Bu durumda, taşıyıcı belirteci Yetkilendirme üstbilgisi yerine bir sorgu dizesi parametresi kullanılarak gönderilir. |
+| ClaimsEndpointFormatName | Hayır | Biçim sorgu dizesi parametresinin adı. Örneğin, bu adı bu LinkedIn talep uç noktasında `format` `https://api.linkedin.com/v1/people/~?format=json`olduğu gibi ayarlayabilirsiniz. |
+| ClaimsEndpointFormat | Hayır | Biçim sorgusu dize parametresinin değeri. Örneğin, değeri bu LinkedIn talep uç noktasında `json` `https://api.linkedin.com/v1/people/~?format=json`olarak ayarlayabilirsiniz. |
+| Adı | Hayır | Kimlik sağlayıcısının adı. |
+| response_mode | Hayır | Kimlik sağlayıcısının sonucu Azure AD B2C geri göndermek için kullandığı yöntem. Olası değerler: `query`, `form_post` (varsayılan) veya `fragment`. |
+| scope | Hayır | OAuth2 Identity Provider belirtimine göre tanımlanan isteğin kapsamı. `openid` ,`profile`Ve gibi`email`. |
+| HttpBinding | Hayır | Erişim belirtecine ve talep belirteci uç noktalarına beklenen HTTP bağlaması. Olası değerler: `GET` veya `POST`.  |
+| ResponseErrorCodeParamName | Hayır | HTTP 200 (Tamam) üzerinden döndürülen hata iletisini içeren parametrenin adı. |
+| Extraparamsınaccesstokenendpointresponse | Hayır | Bazı kimlik sağlayıcıları tarafından **Accesstokenendpoint** yanıtı içinde döndürülebilecek ek parametreleri içerir. Örneğin, **accesstokenendpoint** yanıtı `openid`, bir **claimsendpoint** istek sorgu dizesinde access_token 'in yanı sıra zorunlu bir parametre olan gibi ek bir parametre içerir. Birden çok parametre adının kaçılması ve virgül ', ' sınırlayıcısı ile ayrılması gerekir. |
+| ExtraParamsInClaimsEndpointRequest | Hayır | Bazı kimlik sağlayıcıları tarafından **Claimsendpoint** isteğine döndürülebilecek ek parametreleri içerir. Birden çok parametre adının kaçılması ve virgül ', ' sınırlayıcısı ile ayrılması gerekir. |
 
 ## <a name="cryptographic-keys"></a>Şifreleme anahtarları
 
-**CryptographicKeys** öğesi aşağıdaki öznitelik içeriyor:
+**Cryptographickeys** öğesi aşağıdaki özniteliği içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| client_secret | Evet | Kimlik sağlayıcısı uygulama istemci gizli bilgisi. Yalnızca şifreleme anahtarı gereklidir **response_types** meta veri kümesine `code`. Bu durumda, Azure AD B2C, bir erişim belirteci için yetki kodunu değiştirmek için başka bir çağrı yapar. Meta veriler ayarlanırsa `id_token`, şifreleme anahtarını atlayabilirsiniz. |  
+| client_secret | Evet | Kimlik sağlayıcısı uygulamasının istemci gizli anahtarı. Şifreleme anahtarı yalnızca **response_types** meta verileri olarak `code`ayarlandıysa gereklidir. Bu durumda Azure AD B2C, bir erişim belirtecinin yetkilendirme kodunu Exchange için başka bir çağrı yapar. Meta veriler olarak `id_token`ayarlandıysa, şifreleme anahtarını atlayabilirsiniz. |
 
-## <a name="redirect-uri"></a>Yeniden yönlendirme URI'si
+## <a name="redirect-uri"></a>Yönlendirme URI'si
 
-Kimlik sağlayıcınızın yeniden yönlendirme URL'sini yapılandırırken girin `https://login.microsoftonline.com/te/tenant/policyId/oauth2/authresp`. Değiştirdiğinizden emin olun **Kiracı** kiracınızın adı (örneğin, contosob2c.onmicrosoft.com) ile ve **Policyıd** ilkenizin (örneğin, b2c_1a_policy) tanımlayıcısına sahip. Yeniden yönlendirme URI'si, tüm küçük harflerle olması gerekiyor.
+Kimlik sağlayıcınızın yeniden yönlendirme URL 'sini yapılandırdığınızda, girin `https://login.microsoftonline.com/te/tenant/policyId/oauth2/authresp`. **Kiracısı** kiracınızın adıyla (örneğin, contosob2c.onmicrosoft.com) ve **PolicyId** ile ilkenizin tanıtıcısına (örneğin, b2c_1a_policy) değiştirdiğinizden emin olun. Yeniden yönlendirme URI 'sinin tamamen küçük harfle olması gerekir.
 
-Kullanıyorsanız **b2clogin.com** etki alanı yerine **login.microsoftonline.com** b2clogin.com login.microsoftonline.com yerine kullandığınızdan emin olun.
+**Login.microsoftonline.com** yerine **b2clogin.com** etki alanını kullanıyorsanız Login.microsoftonline.com yerine b2clogin.com kullandığınızdan emin olun.
 
 Örnekler:
 
-- [Google + özel ilkeleri kullanarak OAuth2 kimlik sağlayıcısı olarak Ekle](active-directory-b2c-custom-setup-goog-idp.md)
+- [Özel ilkeleri kullanarak Google + OAuth2 Identity Provider olarak ekleme](active-directory-b2c-custom-setup-goog-idp.md)
 
 
 

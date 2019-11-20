@@ -1,9 +1,9 @@
 ---
-title: Azure Service Fabric CLI - sfctl olan | Microsoft Docs
-description: Service Fabric CLI'yı açıklar sfctl olan komutları.
+title: Azure Service Fabric CLı-sfctl | Microsoft Docs
+description: CLı sfctl komutlarının Service Fabric açıklar.
 services: service-fabric
 documentationcenter: na
-author: Christina-Kang
+author: jeffj6123
 manager: chackdan
 editor: ''
 ms.assetid: ''
@@ -12,72 +12,72 @@ ms.devlang: cli
 ms.topic: reference
 ms.tgt_pltfrm: na
 ms.workload: multiple
-ms.date: 12/06/2018
-ms.author: bikang
-ms.openlocfilehash: 2039dd9222809d2c05aaeaf01f9d38c51f3b3797
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 9/17/2019
+ms.author: jejarry
+ms.openlocfilehash: 9a09d8c36fd282450767880a9ad144e1192dcd2e
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60837342"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72901577"
 ---
 # <a name="sfctl-is"></a>sfctl is
-Sorgulamak ve hizmet için altyapı komutlar gönderebilirsiniz.
+Altyapı hizmetine komutları sorgulayın ve gönderin.
 
 ## <a name="commands"></a>Komutlar
 
 |Komut|Açıklama|
 | --- | --- |
-| Komutu | Verilen altyapı hizmeti örneği yönetimsel bir komutu çalıştırır. |
-| sorgu | Verilen altyapı hizmeti örneği üzerinde salt okunur bir sorguyu çağırır. |
+| command | Verilen altyapı hizmeti örneğinde bir yönetim komutu çağırır. |
+| sorgu | Verilen altyapı hizmeti örneğinde salt okunurdur bir sorgu çağırır. |
 
-## <a name="sfctl-is-command"></a>sfctl komutudur.
-Verilen altyapı hizmeti örneği yönetimsel bir komutu çalıştırır.
+## <a name="sfctl-is-command"></a>sfctl komutu
+Verilen altyapı hizmeti örneğinde bir yönetim komutu çağırır.
 
-Yapılandırılmış altyapı hizmeti bir veya daha fazla örneğe sahip kümeler için bu API, hizmet altyapı belirli bir örneğini altyapı özgü komutlar göndermek için bir yol sağlar. Kullanılabilir komutları ve bunların karşılık gelen yanıt biçimleri küme üzerinde çalıştığı altyapı bağlı olarak farklılık gösterir. Bu API, Service Fabric platform destekler. doğrudan sizin kodunuzdan kullanılmak üzere tasarlanmamıştır.
-
-### <a name="arguments"></a>Bağımsız Değişkenler
-
-|Bağımsız Değişken|Açıklama|
-| --- | --- |
-| --[gerekli] komutu | Çağrılacak komut metni. Komut içeriğini altyapı özeldir. |
-| --service-id | Altyapı hizmeti kimliği. <br><br> Bu hizmet altyapı tam adı, ' fabric\:' URI düzeni. Bu parametre yalnızca birden fazla örneğini çalıştıran hizmet altyapı sahip küme için gereklidir. |
-| --zaman aşımı -t | Sunucu zaman aşımı saniye.  Varsayılan\: 60. |
-
-### <a name="global-arguments"></a>Genel bağımsız değişkenleri
-
-|Bağımsız Değişken|Açıklama|
-| --- | --- |
-| --hata ayıklama | Tüm hata ayıklama günlüklerini göster için günlüğün ayrıntı düzeyini artırır. |
-| ---h Yardım | Bu yardım iletisini ve çıkış gösterir. |
-| --Çıktı -o | Çıkış biçimi.  İzin verilen değerler\: json, jsonc, tablo, tsv.  Varsayılan\: json. |
-| --Sorgu | JMESPath sorgu dizesi. HTTP bkz\://jmespath.org/ daha fazla bilgi ve örnekler. |
-| --verbose | Günlüğün ayrıntı düzeyini artırır. Kullanımı--tam hata ayıklama günlükleri için hata ayıklama. |
-
-## <a name="sfctl-is-query"></a>sfctl sorgudur.
-Verilen altyapı hizmeti örneği üzerinde salt okunur bir sorguyu çağırır.
-
-Yapılandırılmış altyapı hizmeti bir veya daha fazla örneğe sahip kümeler için bu API, hizmet altyapı belirli bir örneğini altyapı özgü sorguları göndermek için bir yol sağlar. Kullanılabilir komutları ve bunların karşılık gelen yanıt biçimleri küme üzerinde çalıştığı altyapı bağlı olarak farklılık gösterir. Bu API, Service Fabric platform destekler. doğrudan sizin kodunuzdan kullanılmak üzere tasarlanmamıştır.
+Altyapı hizmeti 'nin yapılandırılmış bir veya daha fazla örneği olan kümeler için bu API, altyapı hizmeti 'nin belirli bir örneğine altyapıya özgü komutlar göndermek için bir yol sağlar. Kullanılabilir komutlar ve bunlara karşılık gelen yanıt biçimleri, kümenin üzerinde çalıştığı altyapıya bağlı olarak değişiklik gösterir. Bu API Service Fabric platformunu destekler; doğrudan kodunuzdan kullanılması amaçlıyordu.
 
 ### <a name="arguments"></a>Bağımsız Değişkenler
 
 |Bağımsız Değişken|Açıklama|
 | --- | --- |
-| --[gerekli] komutu | Çağrılacak komut metni. Komut içeriğini altyapı özeldir. |
-| --service-id | Altyapı hizmeti kimliği. <br><br> Bu hizmet altyapı tam adı, ' fabric\:' URI düzeni. Bu parametre yalnızca birden fazla örneğini çalıştıran hizmet altyapı sahip küme için gereklidir. |
-| --zaman aşımı -t | Sunucu zaman aşımı saniye.  Varsayılan\: 60. |
+| --komut [gerekli] | Çağrılacak komutun metni. Komutun içeriği altyapıya özgüdür. |
+| --hizmet kimliği | Altyapı hizmetinin kimliği. <br><br> Bu, altyapı hizmetinin ' Fabric\:' URI düzeni olmadan tam adıdır. Bu parametre yalnızca, çalışan bir altyapı hizmeti örneğine sahip olan küme için gereklidir. |
+| --timeout-t | Varsayılan\: 60. |
 
-### <a name="global-arguments"></a>Genel bağımsız değişkenleri
+### <a name="global-arguments"></a>Genel bağımsız değişkenler
 
 |Bağımsız Değişken|Açıklama|
 | --- | --- |
-| --hata ayıklama | Tüm hata ayıklama günlüklerini göster için günlüğün ayrıntı düzeyini artırır. |
-| ---h Yardım | Bu yardım iletisini ve çıkış gösterir. |
-| --Çıktı -o | Çıkış biçimi.  İzin verilen değerler\: json, jsonc, tablo, tsv.  Varsayılan\: json. |
-| --Sorgu | JMESPath sorgu dizesi. HTTP bkz\://jmespath.org/ daha fazla bilgi ve örnekler. |
-| --verbose | Günlüğün ayrıntı düzeyini artırır. Kullanımı--tam hata ayıklama günlükleri için hata ayıklama. |
+| --Hata Ayıkla | Tüm hata ayıklama günlüklerini göstermek için günlük ayrıntı düzeyini artırın. |
+| --Yardım-h | Bu yardım iletisini gösterin ve çıkın. |
+| --çıkış-o | Çıkış biçimi.  İzin verilen değerler JSON, jsonc, tablo, TSV\:.  JSON\: varsayılan. |
+| --sorgu | JMESPath sorgu dizesi. Daha fazla bilgi ve örnek için bkz. http\://jmespath.org/. |
+| --ayrıntılı | Günlük ayrıntı düzeyini artırın. Tam hata ayıklama günlükleri için--Debug kullanın. |
+
+## <a name="sfctl-is-query"></a>sfctl sorgu
+Verilen altyapı hizmeti örneğinde salt okunurdur bir sorgu çağırır.
+
+Altyapı hizmeti 'nin yapılandırılmış bir veya daha fazla örneği olan kümeler için bu API, altyapı hizmeti 'nin belirli bir örneğine altyapıya özgü sorgular göndermek için bir yol sağlar. Kullanılabilir komutlar ve bunlara karşılık gelen yanıt biçimleri, kümenin üzerinde çalıştığı altyapıya bağlı olarak değişiklik gösterir. Bu API Service Fabric platformunu destekler; doğrudan kodunuzdan kullanılması amaçlıyordu.
+
+### <a name="arguments"></a>Bağımsız Değişkenler
+
+|Bağımsız Değişken|Açıklama|
+| --- | --- |
+| --komut [gerekli] | Çağrılacak komutun metni. Komutun içeriği altyapıya özgüdür. |
+| --hizmet kimliği | Altyapı hizmetinin kimliği. <br><br> Bu, altyapı hizmetinin ' Fabric\:' URI düzeni olmadan tam adıdır. Bu parametre yalnızca, çalışan bir altyapı hizmeti örneğine sahip olan küme için gereklidir. |
+| --timeout-t | Varsayılan\: 60. |
+
+### <a name="global-arguments"></a>Genel bağımsız değişkenler
+
+|Bağımsız Değişken|Açıklama|
+| --- | --- |
+| --Hata Ayıkla | Tüm hata ayıklama günlüklerini göstermek için günlük ayrıntı düzeyini artırın. |
+| --Yardım-h | Bu yardım iletisini gösterin ve çıkın. |
+| --çıkış-o | Çıkış biçimi.  İzin verilen değerler JSON, jsonc, tablo, TSV\:.  JSON\: varsayılan. |
+| --sorgu | JMESPath sorgu dizesi. Daha fazla bilgi ve örnek için bkz. http\://jmespath.org/. |
+| --ayrıntılı | Günlük ayrıntı düzeyini artırın. Tam hata ayıklama günlükleri için--Debug kullanın. |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- [Ayarlanan](service-fabric-cli.md) Service Fabric CLI.
-- Service Fabric CLI kullanarak kullanmayı öğrenin [örnek betikleri](/azure/service-fabric/scripts/sfctl-upgrade-application).
+- Service Fabric CLı 'yi [ayarlayın](service-fabric-cli.md) .
+- [Örnek betikleri](/azure/service-fabric/scripts/sfctl-upgrade-application)kullanarak Service Fabric CLI 'nın nasıl kullanılacağını öğrenin.

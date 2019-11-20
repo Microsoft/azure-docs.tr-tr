@@ -1,6 +1,6 @@
 ---
-title: Azure SQL veritabanı yönetilen örneği'nın yönetim uç noktası keşfedin | Microsoft Docs
-description: Azure SQL veritabanı yönetilen örneği'nın yönetim uç noktası genel IP adresini alın ve doğrulayın, yerleşik bir güvenlik duvarı koruması hakkında bilgi edinin
+title: Yönetilen örnek yönetimi uç noktasını bul
+description: Azure SQL veritabanı yönetilen örnek yönetimi uç noktası genel IP adresini almayı ve yerleşik güvenlik duvarı korumasını doğrulamayı öğrenin
 services: sql-database
 ms.service: sql-database
 ms.subservice: managed-instance
@@ -10,29 +10,25 @@ ms.topic: conceptual
 author: srdan-bozovic-msft
 ms.author: srbozovi
 ms.reviewer: sstein, carlrab
-manager: craigg
 ms.date: 12/04/2018
-ms.openlocfilehash: b7eb9ecd6b94aad263346ad6b5c45b694e0bd46f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 03cd89084c2bae3339311f2f684a0d5e7bac1f68
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60700030"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73825711"
 ---
-# <a name="determine-the-management-endpoint-ip-address"></a>Yönetim uç noktanın IP adresine belirleme
+# <a name="determine-the-management-endpoint-ip-address"></a>Yönetim uç noktası IP adresini belirleme
 
-Azure SQL veritabanı yönetilen örneği sanal küme yönetimi işlemleri için Microsoft'un kullandığı bir yönetim uç noktası içerir. Yönetim uç noktası, ağ düzeyinde ve karşılıklı sertifika doğrulamayı uygulama düzeyinde yerleşik bir güvenlik duvarı ile korunur. Yönetim uç noktası IP adresini belirleyebilirsiniz, ancak bu uç noktaya erişilemiyor.
+Azure SQL veritabanı yönetilen örneği sanal kümesi, Microsoft 'un yönetim işlemleri için kullandığı bir yönetim uç noktası içerir. Yönetim uç noktası, ağ düzeyinde yerleşik bir güvenlik duvarı ve uygulama düzeyinde karşılıklı sertifika doğrulaması ile korunur. Yönetim uç noktasının IP adresini belirleyebilirsiniz, ancak bu uç noktaya erişemezsiniz.
 
-## <a name="determine-ip-address"></a>IP adresini belirlemek
+Yönetim IP adresini öğrenmek için, yönetilen örnek FQDN 'niz üzerinde bir DNS araması yapın: `mi-name.zone_id.database.windows.net`. Bu, `trx.region-a.worker.vnet.database.windows.net`gibi bir DNS girişi döndürür. Daha sonra bu FQDN üzerinde ". VNET" kaldırılmış bir DNS araması yapabilirsiniz. Bu, yönetim IP adresini döndürür. 
 
-Yönetilen örnek konak olduğunu varsayalım `mi-demo.xxxxxx.database.windows.net`. Çalıştırma `nslookup` konak adını kullanarak.
+\<mı FQDN\> yönetilen örneğinizin DNS girdisiyle değiştirirseniz, bu PowerShell bunu sizin için bu şekilde yapacaktır: `mi-name.zone_id.database.windows.net`:
+  
+``` powershell
+  $MIFQDN = "<MI FQDN>"
+  resolve-dnsname $MIFQDN | select -first 1  | %{ resolve-dnsname $_.NameHost.Replace(".vnet","")}
+```
 
-![İç konak adı çözme](./media/sql-database-managed-instance-management-endpoint/01_find_internal_host.png)
-
-Şimdi başka yapmak `nslookup` vurgulanan adı kaldırma `.vnet.` kesimi. Bu komutu yürütürken genel IP adresini elde edersiniz.
-
-![Genel IP adresi çözümleme](./media/sql-database-managed-instance-management-endpoint/02_find_public_ip.png)
-
-## <a name="next-steps"></a>Sonraki adımlar
-
-Yönetilen örnekler ve bağlantı hakkında daha fazla bilgi için bkz: [Azure SQL veritabanı yönetilen örneği bağlantı mimarisi](sql-database-managed-instance-connectivity-architecture.md).
+Yönetilen örnekler ve bağlantı hakkında daha fazla bilgi için bkz. [Azure SQL veritabanı yönetilen örnek bağlantı mimarisi](sql-database-managed-instance-connectivity-architecture.md).

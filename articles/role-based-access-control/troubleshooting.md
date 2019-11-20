@@ -1,5 +1,5 @@
 ---
-title: RBAC, Azure kaynakları için sorun giderme | Microsoft Docs
+title: Azure kaynakları için RBAC sorunlarını giderme | Microsoft Docs
 description: Azure kaynakları için rol tabanlı erişim denetimi (RBAC) ile ilgili sorunları giderin.
 services: azure-portal
 documentationcenter: na
@@ -11,52 +11,52 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 06/12/2019
+ms.date: 08/22/2019
 ms.author: rolyon
 ms.reviewer: bagovind
 ms.custom: seohack1
-ms.openlocfilehash: 59ece9c37a563efba6329a30c06c1b596b1a5d57
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e8a5b8b5794687f9e3b1707fda4cbe381e277317
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67058162"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72819776"
 ---
-# <a name="troubleshoot-rbac-for-azure-resources"></a>RBAC, Azure kaynakları için sorun giderme
+# <a name="troubleshoot-rbac-for-azure-resources"></a>Azure kaynakları için RBAC sorunlarını giderme
 
-Azure portalı ve rolleri erişimi sorunlarını giderme kullanırken beklenmesi gerekenler öğrenmek için bu makalede, Azure kaynakları için rol tabanlı erişim denetimi (RBAC) hakkında sık sorulan sorular yanıtlanmaktadır.
+Bu makalede, Azure kaynakları için rol tabanlı erişim denetimi (RBAC) hakkında sık sorulan sorular yanıtlanmaktadır ve bu sayede Azure portal roller kullanılırken ne beklendiğini bilmeniz ve erişim sorunlarını giderebiliriz.
 
 ## <a name="problems-with-rbac-role-assignments"></a>RBAC rol atamalarıyla ilgili sorunlar
 
-- Şirket Azure portalındaki bir rol ataması ekleyemiyor **erişim denetimi (IAM)** çünkü **Ekle** > **rol ataması Ekle** seçeneği devre dışı bırakıldı veya "nesne kimliğine sahip istemci eylemi gerçekleştirme yetkisi yok" izinleri hata aldığından, şu anda sahip rolü atanmış bir kullanıcı hesabıyla oturum açtığınız denetleyin `Microsoft.Authorization/roleAssignments/write` izni gibi [sahibi](built-in-roles.md#owner) veya [kullanıcı erişimi Yöneticisi](built-in-roles.md#user-access-administrator) rol atamak için çalıştığınız kapsamında.
-- Hata iletisi alırsanız "daha fazla rol ataması oluşturulabilir (kod: RoleAssignmentLimitExceeded)" hatasını alıyorsanız, rolleri gruplara atayarak rol atamalarının sayısını azaltmaya çalışın. Azure, abonelik başına en fazla **2000** rol atamasını destekler.
+- Azure portal**rol** **ataması ekleme seçeneği** devre dışı bırakıldığından veya izinleri aldığınız için **erişim denetimi 'nde (IAM  > )** bir rol ataması ekleyemezse veya "nesne kimliği olan istemci eylem gerçekleştirme yetkilendirmesi ", şu anda, rolü atamaya çalıştığınız kapsamda [sahip](built-in-roles.md#owner) veya [Kullanıcı erişimi Yöneticisi](built-in-roles.md#user-access-administrator) gibi `Microsoft.Authorization/roleAssignments/write` iznine sahip bir kullanıcı ile oturum açtığınızdan emin olun.
+- "Daha fazla rol ataması oluşturuoluşturulamadığı (Code: Roleatamaadı)" hata iletisini alırsanız, rol atamayı denediğinizde, rol atamalarının sayısını azaltmayı deneyin. Azure, abonelik başına en fazla **2000** rol atamasını destekler. Bu rol atama sınırı düzeltildi ve artırılabilir.
 
 ## <a name="problems-with-custom-roles"></a>Özel rollerle ilgili sorunlar
 
-- Özel rol öğreticileri kullanarak özel bir rol oluşturmak için adımları gerekirse bkz [Azure PowerShell](tutorial-custom-role-powershell.md) veya [Azure CLI](tutorial-custom-role-cli.md).
-- Mevcut bir özel rolü güncelleştirme bulamıyorsanız, şu anda sahip rolü atanmış bir kullanıcı hesabıyla oturum açtığınız denetleyin `Microsoft.Authorization/roleDefinition/write` izni gibi [sahibi](built-in-roles.md#owner) veya [kullanıcı erişimi Yöneticisi](built-in-roles.md#user-access-administrator).
-- Özel rolü silemiyor ve "Role başvuran mevcut rol atamaları var (kod: RoleDefinitionHasAssignments)" hata iletisiyle karşılaşıyorsanız, özel rolü kullanan rol atamaları mevcuttur. Bu rol atamalarını kaldırın ve özel rolü silmeyi tekrar deneyin.
-- Yeni bir özel rol oluşturmaya çalıştığınızda "Rol tanımı sınırı aşıldı. Daha fazla hiçbir rol tanımları oluşturulabilir (kod: RoleDefinitionLimitExceeded) "yeni bir özel rol oluşturmaya çalıştığınızda, kullanılmayan herhangi bir özel rolü silme. Azure kadar destekler **5000** bir kiracıdaki özel roller. (Azure Kamu, Azure Almanya ve Azure Çin 21Vianet gibi özel Bulutlar için 2000 özel rol sınırı vardır.)
-- "İstemci bağlı abonelik bulunamadı ancak kapsamında '/ subscriptions / {subscriptionıd}', 'Microsoft.Authorization/roleDefinitions/write' eylemini gerçekleştirme izni olan" benzer bir hata alırsanız bir özel rol güncelleştirmeye çalıştığınızda, denetleyin olup olmadığını bir veya daha fazla [atanabilir kapsamlarla](role-definitions.md#assignablescopes) kiracıda silinmiş. Kapsam silinmişse, şu anda bir self servis çözüm olmadığı için destek bileti oluşturun.
+- Özel rol oluşturma için adımlara ihtiyacınız varsa, [Azure PowerShell](tutorial-custom-role-powershell.md) veya [Azure CLI](tutorial-custom-role-cli.md)kullanarak özel rol öğreticilerine bakın.
+- Mevcut bir özel rolü güncelleştireerişemiyorsanız, [sahip](built-in-roles.md#owner) veya [Kullanıcı erişimi Yöneticisi](built-in-roles.md#user-access-administrator)gibi `Microsoft.Authorization/roleDefinition/write` iznine sahip bir rol atanmış kullanıcıyla oturum açtığınızdan emin olun.
+- Özel bir rolü silemeyseniz ve "role başvuran mevcut rol atamaları var (kod: Roledefinitionhasas,)" hata iletisini alırsanız, hala özel rolü kullanan rol atamaları vardır. Bu rol atamalarını kaldırın ve özel rolü silmeyi tekrar deneyin.
+- Yeni bir özel rol oluşturmaya çalıştığınızda "Rol tanımı sınırı aşıldı. Başka rol tanımı oluşturulamaz (kod: Roledefinitionlimitexcelıo) "yeni bir özel rol oluşturmaya çalıştığınızda kullanılmayan tüm özel rolleri silin. Azure, bir kiracıda en fazla **5000** özel rolü destekler. (Azure Kamu, Azure Almanya ve Azure Çin 21Vianet gibi özel Bulutlar için 2000 özel rol sınırı vardır.)
+- "İstemcinin '/Subscriptions/{SubscriptionID} ' kapsamındaki ' Microsoft. Authorization/roleDefinitions/Write ' eylemini gerçekleştirme izni var, ancak bağlantılı abonelik bulunamadı" özel bir rolü güncelleştirmeye çalıştığınızda, ' i işaretleyin. kiracıya bir veya daha fazla [atanabilir kapsam](role-definitions.md#assignablescopes) silinip silinmediğini belirtir. Kapsam silinmişse, şu anda bir self servis çözüm olmadığı için destek bileti oluşturun.
 
 ## <a name="recover-rbac-when-subscriptions-are-moved-across-tenants"></a>Abonelikler kiracılar arasında taşınırken RBAC koşullarını kurtarma
 
-- Abonelik aktarımı adımlar ihtiyacınız varsa bkz farklı bir Azure AD kiracısına [bir Azure aboneliğinin sahipliğini başka bir hesaba](../billing/billing-subscription-transfer.md).
-- Bir aboneliği farklı bir Azure AD kiracısına aktardığınızda tüm rol atamaları kaynak Azure AD kiracısından kalıcı olarak silinir ve hedef Azure AD kiracısına geçirilmez. Rol atamalarınızı hedef kiracıda yeniden oluşturmanız gerekir. Ayrıca, Azure kaynakları için yönetilen kimlikleri el ile yeniden oluşturmanız gerekir. Daha fazla bilgi için [SSS ve bilinen sorunlar ile yönetilen kimlikleri](../active-directory/managed-identities-azure-resources/known-issues.md).
-- Azure AD'yi olduğunda kiracılar arasında taşındıktan sonra genel yönetici ve bir aboneliğe erişiminiz yoksa, kullanın **Azure kaynakları için Access management** geçici geçiş [erişiminiziYükselt](elevate-access-global-admin.md) aboneliğe erişim elde etmek için.
+- Aboneliği farklı bir Azure AD kiracısına aktarmaya yönelik adımlara ihtiyacınız varsa, bkz. [Azure aboneliğinin sahipliğini başka bir hesaba aktarma](../billing/billing-subscription-transfer.md).
+- Bir aboneliği farklı bir Azure AD kiracısına aktardığınızda tüm rol atamaları kaynak Azure AD kiracısından kalıcı olarak silinir ve hedef Azure AD kiracısına geçirilmez. Rol atamalarınızı hedef kiracıda yeniden oluşturmanız gerekir. Ayrıca, Azure kaynakları için yönetilen kimlikleri el ile yeniden oluşturmanız gerekir. Daha fazla bilgi için bkz. [SSS ve yönetilen kimliklerle ilgili bilinen sorunlar](../active-directory/managed-identities-azure-resources/known-issues.md).
+- Bir Azure AD Genel yöneticisiyseniz ve kiracılar arasında taşındıktan sonra bir aboneliğe erişiminiz yoksa, aboneliğe erişim sağlamak için erişiminizi geçici olarak [yükseltmek](elevate-access-global-admin.md) üzere **Azure kaynakları için erişim yönetimi** ' ni kullanın.
 
 ## <a name="issues-with-service-admins-or-co-admins"></a>Hizmet yöneticileri veya ortak yöneticilerle ilgili sorunlar
 
-- Hizmet Yöneticisi veya ortak yönetici ile ilgili sorunlar yaşıyorsanız bkz [ekleme veya değiştirme Azure aboneliği yöneticileri](../billing/billing-add-change-azure-subscription-administrator.md) ve [Klasik Abonelik Yöneticisi rolleri, Azure RBAC rolleri ve Azure AD yönetici rolleri](rbac-and-directory-admin-roles.md).
+- Hizmet Yöneticisi veya ortak yöneticilerle ilgili sorun yaşıyorsanız, bkz. [Azure abonelik yöneticileri](../billing/billing-add-change-azure-subscription-administrator.md) ve [Klasik abonelik Yöneticisi ROLLERI, Azure RBAC ROLLERI ve Azure AD yönetici rolleri](rbac-and-directory-admin-roles.md)ekleme veya değiştirme.
 
 ## <a name="access-denied-or-permission-errors"></a>Erişim engellendi veya izin hataları
 
-- "Nesne kimliğine sahip istemcinin kapsam üzerinde işlemi gerçekleştirme yetkisi yok (kod: AuthorizationFailed)" izin hatasını kaynak oluşturmaya çalıştığınızda alıyorsanız, seçilen kapsamda kaynak için yazma iznine sahip bir rolün atanmış olduğu kullanıcı hesabıyla oturum açmış olduğunuzdan emin olun. Örneğin bir kaynak grubundaki sanal makineleri yönetmek için kaynak grubunda (veya üst kapsamda) [Sanal Makine Katılımcısı](built-in-roles.md#virtual-machine-contributor) rolüne sahip olmanız gerekir. Yerleşik rollerin izinlerinin yer aldığı liste için bkz. [Azure kaynakları için yerleşik roller](built-in-roles.md).
-- "Bir destek isteği oluşturmak için izniniz yok" izinleri hata alırsanız, oluşturulacak veya güncelleştirilecek bir destek bileti çalıştığınızda şu anda sahip rolü atanmış bir kullanıcı hesabıyla oturum açtığınız denetleyin `Microsoft.Support/supportTickets/write` gibiizni[Destek isteği Katılımcısı](built-in-roles.md#support-request-contributor).
+- "Nesne kimliği olan istemci, kapsam üzerinde eylem gerçekleştirme yetkisine sahip değil (kod: AuthorizationFailed)" hatası alırsanız, bir kaynak oluşturmaya çalıştığınızda şu anda yazılan bir rolün atandığı kullanıcıyla oturum açtığınızdan emin olun. seçilen kapsamdaki kaynak için izin. Örneğin bir kaynak grubundaki sanal makineleri yönetmek için kaynak grubunda (veya üst kapsamda) [Sanal Makine Katılımcısı](built-in-roles.md#virtual-machine-contributor) rolüne sahip olmanız gerekir. Yerleşik rollerin izinlerinin yer aldığı liste için bkz. [Azure kaynakları için yerleşik roller](built-in-roles.md).
+- "Destek talebi oluşturma izniniz yok" hatasını alırsanız bir destek bileti oluşturmaya veya güncelleştirmeye çalıştığınızda, şu anda `Microsoft.Support/supportTickets/write` iznine sahip bir rolün atandığı kullanıcıyla oturum açtığınızdan emin olun. gibi, [destek Isteği katılımcısı](built-in-roles.md#support-request-contributor)gibi.
 
-## <a name="role-assignments-without-a-security-principal"></a>Bir güvenlik sorumlusu olmadan rol atamaları
+## <a name="role-assignments-with-unknown-security-principal"></a>Bilinmeyen güvenlik sorumlusu olan rol atamaları
 
-Rol atamalarınızı Azure PowerShell kullanarak listelediğinizde, boş bir atamaları görebileceğiniz `DisplayName` ve `ObjectType` bilinmeyen olarak ayarlayın. Örneğin, [Get-AzRoleAssignment](/powershell/module/az.resources/get-azroleassignment) aşağıdakine benzer bir rol ataması döndürür:
+Rol atamalarınızı Azure PowerShell kullanarak listeünüzde boş bir `DisplayName` ve `ObjectType` bilinmeyen olarak ayarlanan atamaları görebilirsiniz. Örneğin, [Get-Azroleatama](/powershell/module/az.resources/get-azroleassignment) aşağıdakine benzer bir rol ataması döndürür:
 
 ```azurepowershell
 RoleAssignmentId   : /subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Authorization/roleAssignments/22222222-2222-2222-2222-222222222222
@@ -70,7 +70,7 @@ ObjectType         : Unknown
 CanDelegate        : False
 ```
 
-Benzer şekilde, Azure CLI'yı kullanarak, rol atamalarını listeleme, boş bir atamaları görebilirsiniz `principalName`. Örneğin, [az rol ataması listesi](/cli/azure/role/assignment#az-role-assignment-list) aşağıdakine benzer bir rol ataması döndürür:
+Benzer şekilde, Azure CLı kullanarak rol atamalarınızı listelüünüzde boş bir `principalName` atamalar görebilirsiniz. Örneğin, [az role atama listesi](/cli/azure/role/assignment#az-role-assignment-list) aşağıdakilere benzer bir rol ataması döndürür:
 
 ```azurecli
 {
@@ -86,11 +86,11 @@ Benzer şekilde, Azure CLI'yı kullanarak, rol atamalarını listeleme, boş bir
 }
 ```
 
-Bu rol atamaları bir güvenlik sorumlusu (kullanıcı, Grup, hizmet sorumlusu veya yönetilen kimlik) rol atama ve daha sonra bu güvenlik sorumlusunun silmek ortaya çıkar. Bu rol atamaları Azure portalında görüntülenmez ve bunları bırakmak için bir sorun değildir. Ancak, isterseniz, bu rolü atamalarını kaldırabilirsiniz.
+Bu rol atamaları, bir güvenlik sorumlusu (Kullanıcı, Grup, hizmet sorumlusu veya yönetilen kimlik) için bir rol atadığınızda ve daha sonra bu güvenlik sorumlusunu sildikten sonra oluşur. Bu rol atamaları Azure portal gösterilmez ve bunlar ayrılmayan bir sorun değildir. Ancak isterseniz, bu rol atamalarını kaldırabilirsiniz.
 
-Bu rol atamalarını kaldırmak için [Remove-AzRoleAssignment](/powershell/module/az.resources/remove-azroleassignment) veya [az rol atamasını Sil](/cli/azure/role/assignment#az-role-assignment-delete) komutları.
+Bu rol atamalarını kaldırmak için [Remove-Azroleatama](/powershell/module/az.resources/remove-azroleassignment) veya [az role atama Delete](/cli/azure/role/assignment#az-role-assignment-delete) komutlarını kullanın.
 
-PowerShell'de, denerseniz nesne Kimliğini ve rol tanımı adı ve birden fazla rol ataması'nı kullanarak rol atamalarını kaldırmak için parametrelerinizi eşleşir, hata iletisi alırsınız: "Rol ataması için sağlanan bilgileri eşlenmiyor". Hata iletisi örneği aşağıda gösterilmiştir:
+PowerShell 'de, rol atamalarını nesne KIMLIĞI ve rol tanımı adı kullanarak kaldırmaya çalışırsanız ve parametreleriniz ile eşleşen birden fazla rol ataması varsa, şu hata iletisini alırsınız: "belirtilen bilgiler bir rol atamasıyla eşlenmiyor". Aşağıda, hata iletisinin bir örneği gösterilmektedir:
 
 ```Example
 PS C:\> Remove-AzRoleAssignment -ObjectId 33333333-3333-3333-3333-333333333333 -RoleDefinitionName "Storage Blob Data Contributor"
@@ -103,85 +103,87 @@ At line:1 char:1
 + FullyQualifiedErrorId : Microsoft.Azure.Commands.Resources.RemoveAzureRoleAssignmentCommand
 ```
 
-Bu hata iletisini alırsanız, ayrıca belirttiğinizden emin olun `-Scope` veya `-ResourceGroupName` parametreleri.
+Bu hata iletisini alırsanız, `-Scope` veya `-ResourceGroupName` parametrelerini de belirttiğinizden emin olun.
 
 ```Example
 PS C:\> Remove-AzRoleAssignment -ObjectId 33333333-3333-3333-3333-333333333333 -RoleDefinitionName "Storage Blob Data Contributor" - Scope /subscriptions/11111111-1111-1111-1111-111111111111
 ```
 
-## <a name="rbac-changes-are-not-being-detected"></a>RBAC değişikliklerin algılanmaz
+## <a name="rbac-changes-are-not-being-detected"></a>RBAC değişiklikleri algılanamadı
 
-Azure Resource Manager bazen yapılandırmaları ve performansı artırmak için verileri önbelleğe alır. Rol atamaları silmesini veya yaratmasını, değişikliklerin etkili olması için 30 dakikaya kadar sürebilir. Azure portalı, Azure PowerShell veya Azure CLI kullanıyorsanız kapatıp açtıktan rol ataması değişikliklerinizi yenilemeye zorlayabilirsiniz. REST API çağrıları ile rol atamasını değişiklikler yapıyorsanız, erişim belirtecinizin yenileyerek yenilemeye zorlayabilirsiniz.
+Azure Resource Manager bazen, performansı geliştirmek için yapılandırma ve verileri önbelleğe alır. Rol atamaları oluştururken veya silerken değişikliklerin etkili olması 30 dakika kadar sürebilir. Azure portal, Azure PowerShell veya Azure CLı kullanıyorsanız, oturum kapatarak ve oturum açarak rol atama yaptığınız değişiklikleri yenilemeye zorlayabilirsiniz. REST API çağrılarında rol ataması değişikliği yapıyorsanız, erişim belirtecinizi yenileyerek yenilemeye zorlayabilirsiniz.
 
-## <a name="web-app-features-that-require-write-access"></a>Yazma erişimi gerektiren bir web uygulaması özellikleri
+## <a name="web-app-features-that-require-write-access"></a>Yazma erişimi gerektiren Web uygulaması özellikleri
 
-Tek bir web uygulaması için kullanıcı salt okunur erişim sağlıyorsa, beklediğiniz değil, bazı özellikler devre dışı bırakılır. Aşağıdaki yönetim özelliklerini gerektiren **yazma** (Katkıda bulunan veya sahip) bir web uygulamasına erişim ve salt okunur senaryoda kullanılamaz.
+Bir kullanıcıya tek bir Web uygulamasına salt okuma erişimi verirseniz, beklememeniz gerekebilecek bazı özellikler devre dışı bırakılır. Aşağıdaki yönetim özellikleri bir Web uygulamasına **yazma** erişimi gerektirir (katkıda bulunan veya sahip) ve herhangi bir salt okuma senaryosunda kullanılamaz.
 
-* Komutlar (örneğin, başlatma, durdurma, vs.)
-* Genel yapılandırma, Ölçek ayarları, Yedekleme ayarlarını ve izleme ayarları gibi ayarlarını değiştirme
-* Yayımlama kimlik bilgileri ve diğer gizli dizileri uygulama ayarlarının ve bağlantı dizeleri gibi erişme
+* Komutlar (başlatma, durdurma vb. gibi)
+* Genel yapılandırma, ölçek ayarları, yedekleme ayarları ve izleme ayarları gibi ayarları değiştirme
+* Uygulama ayarları ve bağlantı dizeleri gibi diğer gizli bilgilere ve yayımlama kimlik bilgilerine erişme
 * Akış günlükleri
-* Tanılama günlüklerini yapılandırma
-* Konsolu (komut istemi)
-* Etkin ve son dağıtımları (için yerel git sürekli dağıtım)
+* Tanılama günlükleri yapılandırması
+* Konsol (komut istemi)
+* Etkin ve son dağıtımlar (yerel git sürekli dağıtımı için)
 * Tahmini harcama
 * Web testleri
-* Sanal ağ (yalnızca, bir sanal ağda yazma erişimine sahip bir kullanıcı tarafından önceden yapılandırılmış bir okuyucu için görünür).
+* Sanal ağ (yalnızca bir sanal ağ daha önce yazma erişimi olan bir kullanıcı tarafından yapılandırılmışsa görünebilir).
 
-Bu kutucuk erişemiyorsanız, web uygulamasına katkıda bulunan erişimi için yöneticinizden gerekir.
+Bu kutucukların herhangi birine erişemiyorsanız, yöneticinizden Web uygulamasına katkıda bulunan erişimi istemesi gerekir.
 
-## <a name="web-app-resources-that-require-write-access"></a>Yazma erişimi gerektiren bir web uygulama kaynakları
+## <a name="web-app-resources-that-require-write-access"></a>Yazma erişimi gerektiren Web uygulaması kaynakları
 
-Web apps, Etkileşim özelliği birkaç farklı kaynak varlığı karmaşık. Tipik bir kaynak grubu birkaç Web siteleri şu şekildedir:
+Web uygulamaları, çok sayıda farklı kaynağın varlığı tarafından karmaşıktır. Birkaç Web sitesi içeren tipik bir kaynak grubu aşağıda verilmiştir:
 
 ![Web uygulaması kaynak grubu](./media/troubleshooting/website-resource-model.png)
 
-Yalnızca web uygulaması, Azure portalında Web sitesi dikey penceresinde işlevselliğinin erişimi devre dışı vermeniz bir sonucu.
+Sonuç olarak, birine yalnızca Web uygulamasına erişim verirseniz, Azure portal web sitesi dikey penceresinde işlevselliğin çoğu devre dışıdır.
 
-Bu öğeleri gerektiren **yazma** erişim **App Service planı** sitenize karşılık gelir:  
+Bu öğeler, Web sitenize karşılık gelen **App Service planına** **yazma** erişimi gerektirir:  
 
-* Web uygulamasını görüntüleme (ücretsiz veya standart) katmanı fiyatlandırma  
-* Ölçek yapılandırma (örnekleri, sanal makine boyutu, otomatik ölçeklendirme ayarları sayısı)  
+* Web uygulamasının fiyatlandırma katmanını görüntüleme (ücretsiz veya standart)  
+* Ölçeği yapılandırma (örnek sayısı, sanal makine boyutu, otomatik ölçeklendirme ayarları)  
 * Kotalar (depolama, bant genişliği, CPU)  
 
-Bu öğeleri gerektiren **yazma** tam erişim **kaynak grubu** sitenizi içeren:  
+Bu öğeler, Web sitenizi içeren tüm **kaynak grubuna** **yazma** erişimi gerektirir:  
 
-* SSL sertifikaları ve bağlamaları (SSL sertifikaları, coğrafi konum ve aynı kaynak grubundaki siteler arasında paylaşılabilir)  
+* SSL sertifikaları ve bağlamaları (SSL sertifikaları aynı kaynak grubundaki ve coğrafi konumdaki siteler arasında paylaşılabilir)  
 * Uyarı kuralları  
 * Otomatik ölçeklendirme ayarları  
-* Application ınsights bileşenleri  
+* Application Insights bileşenleri  
 * Web testleri  
 
 ## <a name="virtual-machine-features-that-require-write-access"></a>Yazma erişimi gerektiren sanal makine özellikleri
 
-Benzer şekilde web uygulamaları, sanal makine dikey penceresinde bazı özellikler sanal makineye veya kaynak grubundaki diğer kaynaklara yazma erişimi gerektirir.
+Web uygulamalarına benzer şekilde, sanal makine dikey penceresindeki bazı özellikler sanal makineye veya kaynak grubundaki diğer kaynaklara yazma erişimi gerektirir.
 
-Sanal makineler, etki alanı adları, sanal ağlar, depolama hesapları ve uyarı kuralları ilgilidir.
+Sanal makineler, etki alanı adları, sanal ağlar, depolama hesapları ve uyarı kuralları ile ilgilidir.
 
-Bu öğeleri gerektiren **yazma** erişim **sanal makine**:
+Bu öğeler, **sanal makineye** **yazma** erişimi gerektirir:
 
 * Uç Noktalar  
 * IP adresleri  
 * Diskler  
 * Uzantılar  
 
-Bunlar gerektirir **yazma** hem erişim **sanal makine**ve **kaynak grubu** (etki alanı adı ile birlikte) BT'nin zamanı:  
+Bunlar, hem **sanal makineye**hem de **kaynak grubuna** (etki alanı adıyla birlikte) **yazma** erişimi gerektirir:  
 
 * Kullanılabilirlik kümesi  
 * Yük dengeli küme  
 * Uyarı kuralları  
 
-Bu kutucuk erişemiyorsanız, kaynak grubuna katkıda bulunan erişimi için yöneticinizden isteyin.
+Bu kutucukların herhangi birine erişemiyorsanız, yöneticinizden kaynak grubuna katkıda bulunan erişimi isteyin.
 
-## <a name="azure-functions-and-write-access"></a>Azure işlevleri ve yazma erişimi
+## <a name="azure-functions-and-write-access"></a>Azure Işlevleri ve yazma erişimi
 
-Bazı özellikleri [Azure işlevleri](../azure-functions/functions-overview.md) yazma erişimi gerektirir. Okuyucu rolü atanmış bir kullanıcı, örneğin, bunlar bir işlev uygulaması işlevlerinde görüntülemek mümkün olmayacaktır. Portal görüntüler **(erişim yok)** .
+[Azure işlevlerinin](../azure-functions/functions-overview.md) bazı özellikleri yazma erişimi gerektirir. Örneğin, bir kullanıcıya [okuyucu](built-in-roles.md#reader) rolü atanırsa, işlevleri bir işlev uygulamasında görüntüleyemeyecektir. Portal görüntülenir **(erişim yok)** .
 
-![Uygulama erişimi işlevi](./media/troubleshooting/functionapps-noaccess.png)
+![İşlev uygulamalarına erişim yok](./media/troubleshooting/functionapps-noaccess.png)
 
-Bağlanabilmesi **Platform özellikleri** sekmesine ve ardından **tüm ayarlar** bazı ayarları görüntülemek için ilgili bir işlev uygulaması (bir web app ile benzer), ancak bu ayarlardan herhangi birini değiştiremezler.
+Bir okuyucu, **platform özellikleri** sekmesine tıklayabilir ve ardından **Tüm ayarlar** ' a tıklayarak bir işlev uygulamasıyla ilgili bazı ayarları (bir Web uygulamasına benzer şekilde) görüntüleyebilir, ancak bu ayarlardan herhangi birini değiştiremezler. Bu özelliklere erişmek için [katkıda bulunan](built-in-roles.md#contributor) rolüne ihtiyacınız olacaktır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [RBAC ve Azure portalını kullanarak Azure kaynaklarına erişimi yönetme](role-assignments-portal.md)
-* [RBAC değişiklikler Azure kaynakları için etkinlik günlüklerini görüntüleme](change-history-report.md)
+
+- [Konuk kullanıcılar için sorun giderme](role-assignments-external-users.md#troubleshoot)
+- [RBAC ve Azure portalını kullanarak Azure kaynaklarına erişimi yönetme](role-assignments-portal.md)
+- [Azure kaynaklarında RBAC değişiklikleri için etkinlik günlüklerini görüntüleme](change-history-report.md)
 

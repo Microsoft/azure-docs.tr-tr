@@ -1,62 +1,64 @@
 ---
-title: Azure VPN ağ geçitleri ve şifreleme gereksinimleri hakkında | Microsoft Docs
-description: Bu makalede Azure VPN ağ geçitleri ve şifreleme gereksinimleri açıklanır
+title: 'Azure VPN Gateway: Şifreleme gereksinimleri'
+description: Bu makalede, şifreleme gereksinimleri ve Azure VPN ağ geçitleri açıklanmaktadır
 services: vpn-gateway
-documentationcenter: na
 author: yushwang
-manager: rossort
-editor: ''
-tags: azure-resource-manager
-ms.assetid: 238cd9b3-f1ce-4341-b18e-7390935604fa
 ms.service: vpn-gateway
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 05/22/2017
+ms.date: 10/17/2019
 ms.author: yushwang
-ms.openlocfilehash: 060e647badcc3bad7b44d7cef3530c36b8ecdf57
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: f18e5dbdc257aa1ae647505c323c17f9f197d360
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60648688"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74150975"
 ---
 # <a name="about-cryptographic-requirements-and-azure-vpn-gateways"></a>Şifreleme gereksinimleri ve Azure VPN ağ geçitleri hakkında
 
-Bu makalede, S2S VPN tünelinde şirketler arası hem de azure'da VNet-VNet bağlantıları için şifreleme gereksinimlerinizi karşılamak için Azure VPN ağ geçitleri nasıl yapılandırabileceğiniz açıklanmaktadır. 
+Bu makalede, Azure VPN ağ geçitlerini, hem şirket içi S2S VPN tünellerini hem de Azure 'daki VNet-VNet bağlantıları için şifreleme gereksinimlerinizi karşılayacak şekilde nasıl yapılandırabileceğiniz açıklanmaktadır.
 
-## <a name="about-ipsec-and-ike-policy-parameters-for-azure-vpn-gateways"></a>IPSec ve IKE ilke parametreleri hakkında Azure VPN ağ geçitleri
-IPSec ve IKE protokolü standart çeşitli birleşimler çok çeşitli şifreleme algoritmalarını destekler. Müşteriler, belirli bir şifreleme algoritmaları ve parametrelerle birleşimi istemeyen, Azure VPN ağ geçitlerine varsayılan teklifleri kümesi kullanın. Varsayılan ilke kümelerin, çok çeşitli üçüncü taraf VPN cihazları varsayılan yapılandırmaları ile birlikte çalışabilirlik en üst düzeye çıkarmak için seçilmiştir. Sonuç olarak, ilkeleri ve teklifler sayısını kullanılabilir şifreleme algoritmaları ve anahtar güçleriyle tüm olası eşleştirme birleşimlerini kapsamamaktadır.
+## <a name="about-ikev1-and-ikev2-for-azure-vpn-connections"></a>Azure VPN bağlantıları için IKEv1 ve IKEv2 hakkında
 
-Azure VPN ağ geçidi için varsayılan ilke belgeye listelenir: [VPN cihazları ve siteden siteye VPN Gateway bağlantıları için IPSec/IKE parametreleri hakkında](vpn-gateway-about-vpn-devices.md).
+Geleneksel olarak yalnızca temel SKU 'Lar için IKEv1 bağlantılara ve temel SKU 'Lardan başka tüm VPN Gateway SKU 'Larına izin verilen Ikev2 bağlantılarına izin verdik. Temel SKU 'Lar yalnızca 1 bağlantıya ve performans gibi diğer kısıtlamalarla birlikte yalnızca IKEv1 protokollerini destekleyen eski cihazları kullanan müşteriler sınırlı deneyimle izin veriyor. IKEv1 protokolleri kullanan müşterilerin deneyimini geliştirmek için artık tüm VPN Gateway SKU 'Larına yönelik IKEv1 bağlantılara izin veririz. Daha fazla bilgi için bkz. [VPN Gateway SKU 'lar](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpn-gateway-settings#gwsku).
+
+![Azure VPN Gateway IKEv1 ve IKEv2 bağlantıları](./media/vpn-gateway-about-compliance-crypto/ikev1-ikev2-connections.png)
+
+IKEv1 ve IKEv2 bağlantıları aynı VPN ağ geçidine uygulandığında, bu iki bağlantı arasındaki aktarım otomatik olarak etkinleştirilir.
+
+## <a name="about-ipsec-and-ike-policy-parameters-for-azure-vpn-gateways"></a>Azure VPN ağ geçitleri için IPSec ve ıKE ilke parametreleri hakkında
+
+IPSec ve ıKE protokol standardı çeşitli birleşimlerde çok sayıda şifreleme algoritmasını destekler. Şifreleme algoritmalarının ve parametrelerinin belirli bir birleşimini istemeyin, Azure VPN ağ geçitleri varsayılan bir teklif kümesi kullanır. Varsayılan ilke kümeleri, varsayılan yapılandırmalarda çok çeşitli üçüncü taraf VPN cihazlarıyla birlikte çalışabilirliği en üst düzeye çıkarmak üzere seçilmiştir. Sonuç olarak, ilkeler ve tekliflerin sayısı kullanılabilir şifreleme algoritmaları ve anahtar güçlerinin tüm olası birleşimlerini kapsayamaz.
+
+Azure VPN Gateway için ayarlanan varsayılan ilke, [siteden siteye VPN Gateway bağlantıları IÇIN VPN cihazları ve IPSec/IKE parametreleri hakkında](vpn-gateway-about-vpn-devices.md)makalesinde listelenmiştir.
 
 ## <a name="cryptographic-requirements"></a>Şifreleme gereksinimleri
-Belirli şifreleme algoritma veya parametre gerektiren iletişimleri için genellikle uyumluluk veya güvenlik gereksinimleri nedeniyle müşterileri artık, Azure VPN ağ geçitleri, özel şifreleme ile özel bir IPSec/IKE İlkesi kullanmak için yapılandırabilirsiniz algoritmalar ve anahtar güçleriyle yerine Azure varsayılan ilkesi ayarlar.
 
-Örneğin, müşterilerin gibi Grup 14 (2048-bit), Grup 24 (2048 bit MODP grubu) ya da ECP (Eliptik IKE kullanılmak üzere daha güçlü grupları belirtmeniz gerekebilir ancak Azure VPN ağ geçitlerinde Ikev2 ana mod ilkeler Diffie-Hellman grubu 2 (1024 bit), yalnızca kullanma Eğri grupları) 256 veya 384 bit (sırasıyla 19 ile 20 grubu, Grup). Benzer gereksinimleri de IPSec hızlı modunu ilkeleri için geçerlidir.
+Genellikle uyumluluk veya güvenlik gereksinimleri nedeniyle belirli şifreleme algoritmaları veya parametreleri gerektiren iletişimler için, Azure VPN ağ geçitlerini belirli şifreleme algoritmalarıyla özel bir IPSec/ıKE ilkesi kullanacak şekilde yapılandırabilirsiniz ve Azure varsayılan ilke kümeleri yerine anahtar güçleri.
 
-## <a name="custom-ipsecike-policy-with-azure-vpn-gateways"></a>Azure VPN gateways ile özel IPSec/IKE İlkesi
-Azure VPN ağ geçitleri, her bağlantı, özel IPSec/IKE İlkesi artık desteklenmektedir. Siteden siteye veya VNet-VNet bağlantısı için şifreleme algoritmaları belirli bir birleşimi IPSec ve IKE için istenen anahtar gücü ile aşağıdaki örnekte gösterildiği gibi seçebilirsiniz:
+Örneğin, Azure VPN ağ geçitlerinin Ikev2 ana mod ilkeleri yalnızca Diffie-Hellman grubu 2 ' yi (1024 bit) kullanır, ancak örneğin 14 (2048-bit), Grup 24 (2048-bit MODP grubu) veya ECP (Eliptik Eğri) gibi ıKE 'de kullanılacak daha güçlü gruplar belirtmeniz gerekebilir. gruplar) 256 veya 384 bit (sırasıyla grup 19 ve grup 20). Benzer gereksinimler IPSec hızlı mod ilkeleri için de geçerlidir.
 
-![IPSec IKE İlkesi](./media/vpn-gateway-about-compliance-crypto/ipsecikepolicy.png)
+## <a name="custom-ipsecike-policy-with-azure-vpn-gateways"></a>Azure VPN ağ geçitleri ile özel IPSec/ıKE ilkesi
 
-Bir IPSec/IKE ilkesi oluşturun ve yeni veya mevcut bir bağlantı için geçerlidir. 
+Azure VPN ağ geçitleri artık bağlantı başına özel IPSec/ıKE ilkesini desteklemektedir. Siteden siteye veya VNet 'ten VNet 'e bağlantı için, aşağıdaki örnekte gösterildiği gibi, IPSec ve ıKE için istenen anahtar gücüyle belirli bir şifreleme algoritmaları birleşimini seçebilirsiniz:
+
+![IPSec-IKE-Policy](./media/vpn-gateway-about-compliance-crypto/ipsecikepolicy.png)
+
+Bir IPSec/ıKE ilkesi oluşturabilir ve yeni veya mevcut bir bağlantıya uygulayabilirsiniz.
 
 ### <a name="workflow"></a>İş akışı
 
-1. Sanal ağlar, VPN ağ geçitleri veya diğer nasıl yapılır belgeleri açıklandığı gibi bağlantı topolojiniz için yerel ağ geçitleri oluşturma
-2. Bir IPSec/IKE ilkesi oluşturma
-3. Bir S2S veya VNet-VNet bağlantı oluşturduğunuzda ilke uygulayabilirsiniz.
-4. Bağlantıyı zaten oluşturduysanız, uygulama veya mevcut bir bağlantı ilkesini güncelleştirme
+1. Diğer nasıl yapılır belgelerinde açıklandığı gibi, bağlantı topolojiniz için sanal ağlar, VPN ağ geçitleri veya yerel ağ geçitleri oluşturun
+2. IPSec/ıKE ilkesi oluşturma
+3. Bir S2S veya VNet-VNet bağlantısı oluştururken ilkeyi uygulayabilirsiniz
+4. Bağlantı zaten oluşturulduysa, var olan bir bağlantıya ilke uygulayabilir veya ilkeyi güncelleştirebilirsiniz
 
-
-## <a name="ipsecike-policy-faq"></a>IPSec/IKE İlkesi hakkında SSS
+## <a name="ipsecike-policy-faq"></a>IPSec/ıKE ilkesi hakkında SSS
 
 [!INCLUDE [vpn-gateway-ipsecikepolicy-faq-include](../../includes/vpn-gateway-faq-ipsecikepolicy-include.md)]
 
-
 ## <a name="next-steps"></a>Sonraki adımlar
-Bkz: [yapılandırma IPSec/IKE İlkesi](vpn-gateway-ipsecikepolicy-rm-powershell.md) bir bağlantıda özel IPSec/IKE ilke yapılandırma hakkında adım adım yönergeler.
 
-Ayrıca bkz: [birden çok ilke tabanlı VPN cihazını bağlama](vpn-gateway-connect-multiple-policybased-rm-ps.md) UsePolicyBasedTrafficSelectors seçeneği hakkında daha fazla bilgi için.
+Bir bağlantıda özel IPSec/ıKE ilkesi yapılandırma hakkında adım adım yönergeler için bkz. [IPSec/IKE Ilkesini yapılandırma](vpn-gateway-ipsecikepolicy-rm-powershell.md) .
+
+Ayrıca, UsePolicyBasedTrafficSelectors seçeneği hakkında daha fazla bilgi edinmek için bkz. [birden çok ilke tabanlı VPN cihazını bağlama](vpn-gateway-connect-multiple-policybased-rm-ps.md) .

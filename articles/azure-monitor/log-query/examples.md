@@ -1,44 +1,38 @@
 ---
-title: Azure İzleyici günlük sorgu örnekleri | Microsoft Docs
-description: Azure Kusto sorgu dilini kullanarak izleme günlüğünü sorgularda örnekleri.
-services: log-analytics
-documentationcenter: ''
+title: Azure Izleyici günlüğü sorgu örnekleri | Microsoft Docs
+description: Azure Izleyici 'de kusto sorgu dilini kullanan günlük sorgularının örnekleri.
+ms.service: azure-monitor
+ms.subservice: logs
+ms.topic: conceptual
 author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.topic: article
-ms.date: 10/03/2018
 ms.author: bwren
-ms.openlocfilehash: 2c35bc4026c81cbc8b95225e688a3922bc320554
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/01/2019
+ms.openlocfilehash: 8850aef8b5d45f236385551a1455e6fe7b540340
+ms.sourcegitcommit: b2fb32ae73b12cf2d180e6e4ffffa13a31aa4c6f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60759920"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73614453"
 ---
-# <a name="azure-monitor-log-query-examples"></a>Azure İzleyici günlük sorgu örnekleri
-Bu makalede, çeşitli örneklerini içerir [sorguları](log-query-overview.md) kullanarak [Kusto sorgu dili](/azure/kusto/query/) Azure İzleyici'den farklı türde günlük verileri alınamadı. Farklı yöntemleri, birleştirmek ve bu örnekleri kendi gereksinimleriniz için kullanabileceğiniz farklı stratejiler tanımlamak için kullanabileceğiniz şekilde, verileri analiz etmek için kullanılır.  
+# <a name="azure-monitor-log-query-examples"></a>Azure Izleyici günlüğü sorgu örnekleri
+Bu makalede, Azure Izleyici 'den farklı günlük verisi türlerini almak için [kusto sorgu dilini](/azure/kusto/query/) kullanan çeşitli [sorgu](log-query-overview.md) örnekleri yer almaktadır. Verileri birleştirmek ve analiz etmek için farklı yöntemler kullanılır. bu sayede, kendi gereksinimleriniz için kullanabileceğiniz farklı stratejileri belirlemek için bu örnekleri kullanabilirsiniz.  
 
-Bkz: [Kusto dil başvurusu](https://docs.microsoft.com/azure/kusto/query/) Bu örneklerde kullanılan farklı anahtar sözcükler hakkında ayrıntılı bilgi için. Git aracılığıyla bir [sorguları oluşturma Ders](get-started-queries.md) Azure İzleyici yeniyseniz.
+Bu örneklerde kullanılan farklı anahtar sözcüklerle ilgili ayrıntılı bilgi için [kusto dil başvurusuna](https://docs.microsoft.com/azure/kusto/query/) bakın. Azure Izleyici 'de yeni başladıysanız [sorgu oluşturma konusunda bir derste](get-started-queries.md) ilerleyin.
 
-## <a name="events"></a>Events
+## <a name="events"></a>Olaylar
 
-### <a name="search-application-level-events-described-as-cryptographic"></a>Uygulama düzeyinde olaylar "Şifreli" açıklanan arama
-Bu örnekte arama **olayları** olduğu kayıtlar için tablo **EventLog** olduğu _uygulama_ ve **RenderedDescription** içerir _şifreleme_. Son 24 saat kayıtları içerir.
+### <a name="search-application-level-events-described-as-cryptographic"></a>"Şifreleme" olarak açıklanan uygulama düzeyi olayları ara
+Bu örnek, **olay** tablosunda **EventLog** 'ın _uygulama_ ve **rendereddescription** 'un _şifreleme_içerdiği kayıtlar için arama yapar. Son 24 saat içindeki kayıtları içerir.
 
 ```Kusto
 Event
 | where EventLog == "Application" 
 | where TimeGenerated > ago(24h) 
-| where RenderedDescription == "cryptographic"
+| where RenderedDescription contains "cryptographic"
 ```
 
-### <a name="search-events-related-to-unmarshaling"></a>Unmarshaling için ilgili arama olayları
-Arama tabloları **olay** ve **SecurityEvents** kayıtlarını bu Bahsetme _unmarshaling_.
+### <a name="search-events-related-to-unmarshaling"></a>Sıralama geri alma ile ilgili olayları ara
+_Sıralama geri alma_ile ilgili kayıtlar için **olayları** ve **securityevents** ' i arayın.
 
 ```Kusto
 search in (Event, SecurityEvent) "unmarshaling"
@@ -46,9 +40,9 @@ search in (Event, SecurityEvent) "unmarshaling"
 
 ## <a name="heartbeat"></a>Sinyal
 
-### <a name="chart-a-week-over-week-view-of-the-number-of-computers-sending-data"></a>Grafik bir hafta üzerinden Hafta görünümünü veri gönderen bilgisayarların sayısı
+### <a name="chart-a-week-over-week-view-of-the-number-of-computers-sending-data"></a>Veri gönderen bilgisayar sayısını haftalık olarak göster
 
-Aşağıdaki örnek, her hafta sinyal gönderilen farklı bilgisayarların sayısını grafikleri.
+Aşağıdaki örnek, her hafta sinyal gönderen ayrı bilgisayarların sayısını grafikler.
 
 ```Kusto
 Heartbeat
@@ -56,9 +50,9 @@ Heartbeat
 | summarize dcount(Computer) by endofweek(TimeGenerated) | render barchart kind=default
 ```
 
-### <a name="find-stale-computers"></a>Eski bilgisayarları Bul
+### <a name="find-stale-computers"></a>Eski bilgisayarları bul
 
-Aşağıdaki örnekte, son gün içinde etkin ancak son bir saat içinde sinyal göndermediği bilgisayarları bulur.
+Aşağıdaki örnek, son gün içinde etkin olan ancak son bir saat içinde sinyal göndermeyen bilgisayarları bulur.
 
 ```Kusto
 Heartbeat
@@ -68,18 +62,18 @@ Heartbeat
 | where LastHeartbeat < ago(1h)
 ```
 
-### <a name="get-the-latest-heartbeat-record-per-computer-ip"></a>Bilgisayar IP başına en son sinyal kayıt Al
+### <a name="get-the-latest-heartbeat-record-per-computer-ip"></a>Bilgisayar IP 'si başına en son sinyal kaydını al
 
-Bu örnekte, her bilgisayar IP adresi için son sinyal kaydı döndürür.
+Bu örnek her bilgisayar IP 'si için son sinyal kaydını döndürür.
 ```Kusto
 Heartbeat
 | summarize arg_max(TimeGenerated, *) by ComputerIP
 ```
 
-### <a name="match-protected-status-records-with-heartbeat-records"></a>Sinyal kayıtları ile korunan durum kayıt eşleşmesi
+### <a name="match-protected-status-records-with-heartbeat-records"></a>Korumalı durum kayıtlarını sinyal kayıtlarıyla Eşleştir
 
-Bu örnek, ilgili koruma durumu ve sinyal kayıtlarını, hem bilgisayar hem de saat eşleşen bulur.
-Not saat alanı için en yakın dakikaya yuvarlanır. Bunu yapmak için çalışma zamanı bin hesaplama kullandık: `round_time=bin(TimeGenerated, 1m)`.
+Bu örnek, hem bilgisayar hem de zaman ile eşleşen ilgili koruma durum kayıtlarını ve sinyal kayıtlarını bulur.
+Zaman alanı en yakın dakikaya yuvarlanır. Bunu yapmak için çalışma zamanı bölme hesaplamasını kullandık: `round_time=bin(TimeGenerated, 1m)`.
 
 ```Kusto
 let protection_data = ProtectionStatus
@@ -91,8 +85,8 @@ protection_data | join (heartbeat_data) on Computer, round_time
 
 ### <a name="server-availability-rate"></a>Sunucu kullanılabilirlik oranı
 
-Sinyal kayıtlarını temel alarak sunucusu kullanılabilirlik oranını hesaplayın. Kullanılabilirlik, "saat başına en az 1 sinyal" olarak tanımlanır.
-Bir sunucu kullanılabilir 98 100 saat ise, bu nedenle kullanılabilirlik %98 hızıdır.
+Sinyal kayıtlarına göre sunucu kullanılabilirlik oranını hesaplayın. Kullanılabilirlik, "saat başına en az 1 sinyal" olarak tanımlanır.
+Bu nedenle, bir sunucu 100 saat 98 ile kullanılabilirse, kullanılabilirlik oranı %98.
 
 ```Kusto
 let start_time=startofday(datetime("2018-03-01"));
@@ -109,8 +103,8 @@ Heartbeat
 
 ## <a name="multiple-data-types"></a>Birden çok veri türü
 
-### <a name="chart-the-record-count-per-table"></a>Tablo başına kayıt sayısı grafik
-Aşağıdaki örnekte, son beş saatten tüm tabloların tüm kayıtları toplar ve kaç tane kaydın her tabloda olan sayar. Sonuçlar içinde zaman grafiğini gösterilir.
+### <a name="chart-the-record-count-per-table"></a>Kayıt sayısını tablo başına grafik olarak
+Aşağıdaki örnek, son beş saatten tüm tabloların tüm kayıtlarını toplar ve her tabloda kaç kayıt olduğunu sayar. Sonuçlar bir timechart içinde gösterilir.
 
 ```Kusto
 union withsource=sourceTable *
@@ -119,8 +113,8 @@ union withsource=sourceTable *
 | render timechart
 ```
 
-### <a name="count-all-logs-collected-over-the-last-hour-by-type"></a>Son saat üzerinden türü tarafından toplanan tüm günlük sayısı
-Aşağıdaki örnekte, son bir saat içinde bildirilen her şeyi arar ve her tablo kayıtlarını sayar **türü**. Sonuçlar bir çubuk grafik olarak görüntülenir.
+### <a name="count-all-logs-collected-over-the-last-hour-by-type"></a>Son saate göre toplanan tüm günlükleri türe göre say
+Aşağıdaki örnek, son saat içinde raporlanan her şeyi arar ve her bir tablonun kayıtlarını **türe**göre sayar. Sonuçlar bir çubuk grafiğinde görüntülenir.
 
 ```Kusto
 search *
@@ -131,8 +125,8 @@ search *
 
 ## <a name="azurediagnostics"></a>AzureDiagnostics
 
-### <a name="count-azure-diagnostics-records-per-category"></a>Kategori başına Azure tanılama kayıt sayısı
-Bu örnekte benzersiz her kategori için tüm Azure tanılama kayıtlarını sayar.
+### <a name="count-azure-diagnostics-records-per-category"></a>Kategori başına Azure tanılama kayıtlarını say
+Bu örnek, her benzersiz kategori için tüm Azure tanılama kayıtlarını sayar.
 
 ```Kusto
 AzureDiagnostics 
@@ -140,8 +134,8 @@ AzureDiagnostics
 | summarize count() by Category
 ```
 
-### <a name="get-a-random-record-for-each-unique-category"></a>Benzersiz her kategori için rastgele bir kayıt Al
-Bu örnekte benzersiz her kategori için bir tek rastgele Azure tanılama kaydı alır.
+### <a name="get-a-random-record-for-each-unique-category"></a>Her benzersiz kategori için rastgele bir kayıt alın
+Bu örnek, her benzersiz kategori için tek bir rastgele Azure tanılama kaydı alır.
 
 ```Kusto
 AzureDiagnostics
@@ -149,8 +143,8 @@ AzureDiagnostics
 | summarize any(*) by Category
 ```
 
-### <a name="get-the-latest-record-per-category"></a>Kategori başına en son kayıt Al
-Bu örnekte, en son Azure tanılama kayıt her benzersiz bir kategoride yer alır.
+### <a name="get-the-latest-record-per-category"></a>Kategori başına en son kaydı al
+Bu örnek, her benzersiz kategoride en son Azure tanılama kaydını alır.
 
 ```Kusto
 AzureDiagnostics
@@ -161,7 +155,7 @@ AzureDiagnostics
 ## <a name="network-monitoring"></a>Ağ izleme
 
 ### <a name="computers-with-unhealthy-latency"></a>Sağlıksız gecikme süresi olan bilgisayarlar
-Bu örnek, sağlıksız gecikme süresiyle, farklı bilgisayarların bir listesini oluşturur.
+Bu örnek, sağlıksız gecikme süresi olan ayrı bilgisayarların bir listesini oluşturur.
 
 ```Kusto
 NetworkMonitoring 
@@ -172,8 +166,8 @@ NetworkMonitoring
 
 ## <a name="performance"></a>Performans
 
-### <a name="join-computer-perf-records-to-correlate-memory-and-cpu"></a>Bellek ve CPU ilişkilendirmek için bilgisayar performans kayıtlarını katılın
-Bu örnek, belirli bir bilgisayarın karşılık gelen **perf** kaydeder ve iki zaman grafiklerini, ortalama CPU ve en fazla bellek oluşturur.
+### <a name="join-computer-perf-records-to-correlate-memory-and-cpu"></a>Bellek ve CPU ile bağıntılı bilgisayar performans kayıtlarını birleştirin
+Bu örnek, belirli bir bilgisayarın **performans** kayıtlarını ilişkilendirir ve ortalama CPU ve maksimum bellek olmak üzere iki zaman grafiği oluşturur.
 
 ```Kusto
 let StartTime = now()-5d;
@@ -181,7 +175,6 @@ let EndTime = now()-4d;
 Perf
 | where CounterName == "% Processor Time"  
 | where TimeGenerated > StartTime and TimeGenerated < EndTime
-and TimeGenerated < EndTime
 | project TimeGenerated, Computer, cpu=CounterValue 
 | join kind= inner (
    Perf
@@ -193,8 +186,8 @@ and TimeGenerated < EndTime
 | render timechart
 ```
 
-### <a name="perf-cpu-utilization-graph-per-computer"></a>Bilgisayar başına performans CPU kullanım grafiği
-Bu örnekte, hesaplar ve grafikler ile başlayan bilgisayar CPU kullanımını _Contoso_.
+### <a name="perf-cpu-utilization-graph-per-computer"></a>Bilgisayar başına performans CPU kullanımı grafiği
+Bu örnek, _contoso_ile başlayan bilgisayarların CPU kullanımını hesaplar ve grafiklerini yapar.
 
 ```Kusto
 Perf
@@ -207,8 +200,8 @@ Perf
 
 ## <a name="protection-status"></a>Koruma durumu
 
-### <a name="computers-with-non-reporting-protection-status-duration"></a>Koruma durumu süresi raporlama yapmayan bilgisayarlar
-Bu örnekte koruma durumu olan bilgisayarları listeleyen _raporlama_ ve bu durumda oldukları süresi.
+### <a name="computers-with-non-reporting-protection-status-duration"></a>Raporlama dışı koruma durum süresi olan bilgisayarlar
+Bu örnekte, _Raporlama değil_ koruma durumuna sahip bilgisayarlar ve bu durumda oldukları süre listelenir.
 
 ```Kusto
 ProtectionStatus
@@ -219,9 +212,9 @@ ProtectionStatus
 | extend durationNotReporting = endNotReporting - startNotReporting
 ```
 
-### <a name="match-protected-status-records-with-heartbeat-records"></a>Sinyal kayıtları ile korunan durum kayıt eşleşmesi
-Bu örnek, ilgili koruma durumu ve hem bilgisayar hem de saat eşleşen sinyal kayıtlarını bulur.
-Zaman alan, en yakın dakika kullanarak yuvarlanır **bin**.
+### <a name="match-protected-status-records-with-heartbeat-records"></a>Korumalı durum kayıtlarını sinyal kayıtlarıyla Eşleştir
+Bu örnek, hem bilgisayar hem de zaman ile eşleşen ilgili koruma durumu kayıtlarını ve sinyal kayıtlarını bulur.
+Zaman alanı, **bin**kullanılarak en yakın dakikaya yuvarlanır.
 
 ```Kusto
 let protection_data = ProtectionStatus
@@ -234,11 +227,11 @@ protection_data | join (heartbeat_data) on Computer, round_time
 
 ## <a name="security-records"></a>Güvenlik kayıtları
 
-### <a name="count-security-events-by-activity-id"></a>Etkinlik Kimliğine göre güvenlik olay sayısı
+### <a name="count-security-events-by-activity-id"></a>Etkinlik KIMLIĞINE göre güvenlik olaylarını say
 
 
-Bu örnekte sabit yapısına bağlıdır **etkinlik** sütun: \<Kimliği\>-\<adı\>.
-Bunu ayrıştırır **etkinlik** iki yeni sütunlara, değer ve her oluşumu sayılarını **ActivityID**.
+Bu örnek, **etkinlik** sütununun sabit yapısına bağımlıdır: \<ıd\>-\<Name\>.
+**Etkinlik** değerini iki yeni sütuna ayrıştırır ve her bir **ActivityId**'nin oluşma sayısını sayar.
 
 ```Kusto
 SecurityEvent
@@ -248,8 +241,8 @@ SecurityEvent
 | summarize count() by activityID
 ```
 
-### <a name="count-security-events-related-to-permissions"></a>İzinlerle ilgili güvenlik olay sayısı
-Bu örnek sayısını gösterir **securityEvent** olan kayıtları **etkinlik** sütun içeren tüm terimi _izinleri_. Son 30 dakika boyunca oluşturulan kayıtları uygular.
+### <a name="count-security-events-related-to-permissions"></a>İzinlerle ilgili güvenlik olaylarını say
+Bu örnek, **etkinlik** sütununda tüm terim _Izinlerini_içeren **securityevent** kayıtlarının sayısını gösterir. Sorgu, son 30 dakika içinde oluşturulan kayıtlar için geçerlidir.
 
 ```Kusto
 SecurityEvent
@@ -257,8 +250,8 @@ SecurityEvent
 | summarize EventCount = countif(Activity has "Permissions")
 ```
 
-### <a name="find-accounts-that-failed-to-log-in-from-computers-with-a-security-detection"></a>Güvenlik algılama ile bilgisayarlardan oturum açılamadı Hesapla
-Bu örnekte bulur ve biz güvenlik algılama tanımlamak bilgisayarlardan oturum açılamadı hesapları sayar.
+### <a name="find-accounts-that-failed-to-log-in-from-computers-with-a-security-detection"></a>Güvenlik algılaması olan bilgisayarlardan oturum açma başarısız hesapları bulma
+Bu örnek, bir güvenlik algılamayı tespit ettiğimiz bilgisayarlardan oturum açma başarısız olan hesapları bulur ve sayar.
 
 ```Kusto
 let detections = toscalar(SecurityDetection
@@ -268,8 +261,8 @@ SecurityEvent
 | summarize count() by Account
 ```
 
-### <a name="is-my-security-data-available"></a>Güvenlik verilerimi kullanılabilir mi?
-Başlangıç veri araştırma genellikle veri kullanılabilirlik denetimi ile başlatır. Bu örnek sayısını gösterir **SecurityEvent** son 30 dakika içinde kaydeder.
+### <a name="is-my-security-data-available"></a>Güvenlik verilerim kullanılabilir mi?
+Veri araştırmasının başlaması genellikle veri kullanılabilirliği denetimi ile başlar. Bu örnek, son 30 dakika içinde **Securityevent** kayıtlarının sayısını gösterir.
 
 ```Kusto
 SecurityEvent 
@@ -277,8 +270,8 @@ SecurityEvent
 | count
 ```
 
-### <a name="parse-activity-name-and-id"></a>Etkinlik adı ve kimliği ayrıştırılamıyor
-Aşağıdaki iki örnek sabit yapısına kullanan **etkinlik** sütun: \<Kimliği\>-\<adı\>. İlk örnekte **ayrıştırma** iki yeni sütun için değer atamak için işleç: **ActivityID** ve **activityDesc**.
+### <a name="parse-activity-name-and-id"></a>Ayrıştırma etkinliği adı ve KIMLIĞI
+Aşağıdaki iki örnek, **etkinlik** sütununun sabit yapısına dayanır: \<kimliği\>-\<adı\>. İlk örnek, iki yeni sütuna değer atamak için **Parse** işlecini kullanır: **ActivityId** ve **activitydesc**.
 
 ```Kusto
 SecurityEvent
@@ -287,7 +280,7 @@ SecurityEvent
 | parse Activity with activityID " - " activityDesc
 ```
 
-Bu örnekte **bölme** ayrı değerler dizisi oluşturmak için işleç
+Bu örnek, ayrı değerlerden oluşan bir dizi oluşturmak için **split** işlecini kullanır
 ```Kusto
 SecurityEvent
 | take 100
@@ -296,8 +289,8 @@ SecurityEvent
 | project Activity , activityArr, activityId=activityArr[0]
 ```
 
-### <a name="explicit-credentials-processes"></a>Açık kimlik bilgileri işlemleri
-Aşağıdaki örnek, bir pasta grafiğinin geçen hafta açık kimlik bilgileri kullanılan işlemleri gösterir.
+### <a name="explicit-credentials-processes"></a>Açık kimlik bilgileri işlemi
+Aşağıdaki örnek, geçen hafta açık kimlik bilgilerini kullanan bir işlem Pasta grafiğini gösterir
 
 ```Kusto
 SecurityEvent
@@ -308,9 +301,9 @@ SecurityEvent
 | render piechart 
 ```
 
-### <a name="top-running-processes"></a>Çalışan işlemlerin üst
+### <a name="top-running-processes"></a>En iyi çalışan süreçler
 
-Aşağıdaki örnek, son üç günde beş en yaygın işlemler için etkinlik zaman çizelgesini gösterir.
+Aşağıdaki örnek, son üç gün içinde en yaygın beş işlem için etkinlik zaman satırını gösterir.
 
 ```Kusto
 // Find all processes that started in the last three days. ID 4688: A new process has been created.
@@ -331,9 +324,9 @@ RunProcesses
 ```
 
 
-### <a name="find-repeating-failed-login-attempts-by-the-same-account-from-different-ips"></a>Aynı hesabı ve farklı ıp'lerden başarısız oturum açma denemesi yinelenen Bul
+### <a name="find-repeating-failed-login-attempts-by-the-same-account-from-different-ips"></a>Farklı IP 'lerden aynı hesaba sahip başarısız oturum açma girişimlerini bulma
 
-Aşağıdaki örnekte son altı saat içinde beşten fazla farklı Ip'lerden aynı hesabı tarafından başarısız oturum açma denemesi bulur.
+Aşağıdaki örnek, son altı saatte beş ' den fazla farklı IP 'den aynı hesap tarafından başarısız oturum açma girişimlerini bulur.
 
 ```Kusto
 SecurityEvent 
@@ -343,8 +336,8 @@ SecurityEvent
 | sort by IPCount desc
 ```
 
-### <a name="find-user-accounts-that-failed-to-log-in"></a>Oturum açmak için başarısız olan kullanıcı hesaplarını bulmak 
-Aşağıdaki örnek, birden fazla beş kez son günü ve bunların en son oturum açmayı denediğinde oturum için başarısız olan kullanıcı hesaplarını tanımlar.
+### <a name="find-user-accounts-that-failed-to-log-in"></a>Oturum açma başarısız Kullanıcı hesaplarını bulma 
+Aşağıdaki örnek, son gün içinde beş kereden fazla oturum açma başarısız olan kullanıcı hesaplarını ve en son oturum açma zamanlarını tanımlar.
 
 ```Kusto
 let timeframe = 1d;
@@ -356,7 +349,7 @@ SecurityEvent
 | project-away Account1
 ```
 
-Kullanarak **birleştirme**, ve **izin** deyimleri biz aynı şüpheli hesapları daha sonra başarıyla oturum açamaz olup olmadığını kontrol edebilirsiniz.
+**JOIN**ve **Let** deyimlerini kullanarak aynı şüpheli hesapların daha sonra başarıyla oturum açabiliyor olup olmadığını kontrol edebiliyoruz.
 
 ```Kusto
 let timeframe = 1d;
@@ -383,10 +376,10 @@ suspicious_users_that_later_logged_in
 
 ## <a name="usage"></a>Kullanım
 
-### <a name="calculate-the-average-size-of-perf-usage-reports-per-computer"></a>İyileştirilmiş kullanım raporları, bilgisayar başına ortalama boyutunu Hesapla
+### <a name="calculate-the-average-size-of-perf-usage-reports-per-computer"></a>Bilgisayar başına performans kullanımı raporlarının ortalama boyutunu hesapla
 
-Bu örnekte, son 3 saat boyunca iyileştirilmiş kullanım raporları, bilgisayar başına ortalama boyutu hesaplar.
-Sonuçlar bir çubuk grafik olarak görüntülenir.
+Bu örnek, son 3 saat içinde bilgisayar başına performans kullanımı raporlarının ortalama boyutunu hesaplar.
+Sonuçlar bir çubuk grafiğinde gösterilir.
 ```Kusto
 Usage 
 | where TimeGenerated > ago(3h)
@@ -397,9 +390,9 @@ Usage
 | render barchart
 ```
 
-### <a name="timechart-latency-percentiles-50-and-95"></a>Zaman grafiğini gecikme yüzdebirliklerini 50 ila 95
+### <a name="timechart-latency-percentiles-50-and-95"></a>Timechart gecikme süresi yüzdebirlik değeri 50 ve 95
 
-Bu örnek hesaplar ve grafikler 50. ve 95. yüzdebirlik değerleri bildirilen **avgLatency** tarafından son 24 saat içinde saat.
+Bu örnek, son 24 saat içinde, saat bazında bildirilen **Avglatency** 'nin 50. ve 95. yüzdebirlik değeri ' ni hesaplar ve grafiğini hesaplıyor.
 
 ```Kusto
 Usage
@@ -408,8 +401,8 @@ Usage
 | render timechart
 ```
 
-### <a name="usage-of-specific-computers-today"></a>Bugün belirli bilgisayarlara kullanımı
-Bu örnek alır **kullanım** dizeyi içeren son gününden bilgisayar adları için veri _ContosoFile_. Sonuçlar göre sıralanır **TimeGenerated**.
+### <a name="usage-of-specific-computers-today"></a>Bugün belirli bilgisayarların kullanımı
+Bu örnek, _ContosoFile_dizesini içeren bilgisayar adları için son günden **kullanım** verilerini alır. Sonuçlar **TimeGenerated**'a göre sıralanır.
 
 ```Kusto
 Usage
@@ -420,18 +413,17 @@ Usage
 
 ## <a name="updates"></a>Güncelleştirmeler
 
-### <a name="computers-still-missing-updates"></a>Bilgisayarlar hala eksik güncelleştirmeler
-Bu örnek, bir veya daha fazla kritik güncelleştirmeler birkaç gün önce eksikti ve hala güncelleştirmeleri eksik olan bilgisayarların listesini gösterir.
+### <a name="computers-still-missing-updates"></a>Hala güncelleştirmeleri eksik olan bilgisayarlar
+Bu örnek, birkaç gün önce bir veya daha fazla kritik güncelleştirmenin eksik olduğu ve hala güncelleştirmeleri eksik olan bilgisayarların listesini gösterir.
 
 ```Kusto
 let ComputersMissingUpdates3DaysAgo = Update
-| where TimeGenerated between (ago(3d)..ago(2d))
-| where  Classification == "Critical Updates" and UpdateState != "Not needed" and UpdateState != "NotNeeded"
+| where TimeGenerated between (ago(30d)..ago(1h))
+| where Classification !has "Critical" and UpdateState =~ "Needed"
 | summarize makeset(Computer);
-
 Update
 | where TimeGenerated > ago(1d)
-| where  Classification == "Critical Updates" and UpdateState != "Not needed" and UpdateState != "NotNeeded"
+| where Classification has "Critical" and UpdateState =~ "Needed"
 | where Computer in (ComputersMissingUpdates3DaysAgo)
 | summarize UniqueUpdatesCount = dcount(Product) by Computer, OSType
 ```
@@ -439,5 +431,5 @@ Update
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Başvurmak [Kusto dil başvurusu](/azure/kusto/query) dili hakkında ayrıntılı bilgi için.
-- İzlenecek yol bir [Azure İzleyici'de günlük sorguları yazma Ders](get-started-queries.md).
+- Dil hakkındaki ayrıntılar için [kusto dil başvurusuna](/azure/kusto/query) bakın.
+- [Azure izleyici 'de günlük sorguları yazma konusunda bir dersi](get-started-queries.md)adım adım inceleyin.

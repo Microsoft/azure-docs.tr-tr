@@ -1,6 +1,6 @@
 ---
-title: Hızlı Başlangıç - Azure uzamsal Çıpasıyla HoloLens uygulaması oluşturma | Microsoft Docs
-description: Bu hızlı başlangıçta, uzamsal bağlayıcılarını kullanarak bir HoloLens uygulamasının nasıl oluşturulacağını öğrenin.
+title: Hızlı başlangıç-Azure uzamsal bağlayıcılarla HoloLens uygulaması oluşturma | Microsoft Docs
+description: Bu hızlı başlangıçta, uzamsal bağlayıcıları kullanarak bir HoloLens uygulaması oluşturmayı öğreneceksiniz.
 author: craigktreasure
 manager: aliemami
 services: azure-spatial-anchors
@@ -8,34 +8,33 @@ ms.author: crtreasu
 ms.date: 02/24/2019
 ms.topic: quickstart
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 80dcdd666c1067f2fc9415a663f26b82d1335d5f
-ms.sourcegitcommit: 009334a842d08b1c83ee183b5830092e067f4374
+ms.openlocfilehash: 7069a3c8b266938e974d1b7130a349e0c9b66b5c
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "67135272"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74111819"
 ---
-# <a name="quickstart-create-a-hololens-app-with-azure-spatial-anchors-in-cwinrt-and-directx"></a>Hızlı Başlangıç: C + Azure uzamsal bağlayıcıları ile bir HoloLens uygulaması oluşturma +/ WinRT ve DirectX
+# <a name="quickstart-create-a-hololens-app-with-azure-spatial-anchors-in-cwinrt-and-directx"></a>Hızlı başlangıç:/Wınrt ve DirectX 'te C++Azure uzamsal bağlayıcılarla bir HoloLens uygulaması oluşturma
 
-Bu hızlı başlangıçta HoloLens kullanarak uygulama oluşturma konusunu kapsar [Azure uzamsal bağlayıcılarını](../overview.md) içinde C++/WinRT ve DirectX. Azure uzamsal bağlayıcılarını konumlarına cihazlar arasında zaman içinde kalıcı nesneler kullanarak karma gerçeklik deneyimleri oluşturmanıza olanak tanıyan platformlar arası Geliştirici hizmetidir. İşlemi tamamladığınızda, kaydedebilir ve uzamsal bağlantı Hatırlayacağınız bir HoloLens uygulaması gerekir.
+Bu hızlı başlangıçta,/Wınrt ve DirectX 'teki C++ [Azure uzamsal bağlayıcılarını](../overview.md) kullanarak bir HoloLens uygulamasının nasıl oluşturulacağı ele alınmaktadır. Azure uzamsal bağlantıları, zaman içinde cihazlarda konumlarını sürekli tutan nesneleri kullanarak karma gerçeklik deneyimleri oluşturmanıza olanak sağlayan bir platformlar arası geliştirici hizmetidir. İşiniz bittiğinde, bir uzamsal bağlayıcıyı kaydedip geri çekebilmeniz için bir HoloLens uygulamanız olacaktır.
 
 Şunları öğrenirsiniz:
 
 > [!div class="checklist"]
-> * Uzamsal bağlayıcılarını hesabı oluşturma
-> * Uzamsal bağlayıcılarını hesap tanımlayıcısı ve hesap anahtarını yapılandırma
-> * Dağıtma ve HoloLens cihazda çalıştırma
+> * Uzamsal bağlayıcı hesabı oluşturma
+> * Uzamsal Tutturucuların hesap tanımlayıcısını ve hesap anahtarını yapılandırın
+> * HoloLens cihazında dağıtın ve çalıştırın
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Bu hızlı başlangıcı tamamlamak için aşağıdakileri yaptığınızdan emin olun:
-
-- Bir Windows makineyle <a href="https://www.visualstudio.com/downloads/" target="_blank">Visual Studio 2019</a> ile yüklenen **Evrensel Windows platformu geliştirme** iş yükü ve **Windows 10 SDK (10.0.17763.0 ya da daha yeni)** bileşeni ve <a href="https://git-scm.com/download/win" target="_blank">Git için Windows</a>.
-- [ C++WinRT Visual Studio Uzantısı (VSIX)](https://aka.ms/cppwinrt/vsix) for Visual Studio yüklü [Visual Studio Market](https://marketplace.visualstudio.com/).
-- HoloLens cihazla [Geliştirici modu](https://docs.microsoft.com/windows/mixed-reality/using-visual-studio) etkin. Bu makale gerekir HoloLens cihazla [Windows 10 Ekim 2018 güncelleştirmesi](https://docs.microsoft.com/windows/mixed-reality/release-notes-october-2018 ) (RS5 olarak da bilinir). HoloLens üzerinde en son sürümüne güncelleştirmek için **ayarları** uygulama, Git **güncelleştirme ve güvenlik**, ardından **Güncelleştirmeleri denetle** düğmesi.
-- Uygulamanızı ayarlamalısınız **spatialPerception** AppX bildirimi özelliği.
+- **Evrensel Windows platformu geliştirme** iş yükü ve **Windows 10 SDK (10.0.18362.0 veya üzeri)** bileşeni ve <a href="https://git-scm.com/download/win" target="_blank">Windows için git</a>Ile <a href="https://www.visualstudio.com/downloads/" target="_blank">Visual Studio 2019</a> yüklü bir Windows makinesi.
+- Visual Studio için [ C++/wınrt Visual Studio uzantısı (VSIX)](https://aka.ms/cppwinrt/vsix) [Visual Studio Market](https://marketplace.visualstudio.com/)yüklenmelidir.
+- [Geliştirici modu](https://docs.microsoft.com/windows/mixed-reality/using-visual-studio) etkin bir HoloLens cihazı. Bu makalede, [Windows 10 ekim 2018 güncelleştirmesi](https://docs.microsoft.com/windows/mixed-reality/release-notes-october-2018 ) (RS5 olarak da bilinir) Ile bir HoloLens cihazı gerekir. HoloLens 'te en son sürüme güncelleştirmek için **Ayarlar** uygulamasını açın, **güncelleştirme & güvenlik**' e gidin ve **Güncelleştirmeleri denetle** düğmesini seçin.
+- Uygulamanızın, AppX bildiriminde **Spatıalperception** özelliğini ayarlaması gerekir.
 
 [!INCLUDE [Create Spatial Anchors resource](../../../includes/spatial-anchors-get-started-create-resource.md)]
 
@@ -43,37 +42,37 @@ Bu hızlı başlangıcı tamamlamak için aşağıdakileri yaptığınızdan emi
 
 [!INCLUDE [Clone Sample Repo](../../../includes/spatial-anchors-clone-sample-repository.md)]
 
-Açık `HoloLens\DirectX\SampleHoloLens.sln` Visual Studio'da.
+Visual Studio 'da `HoloLens\DirectX\SampleHoloLens.sln` açın.
 
-## <a name="configure-account-identifier-and-key"></a>Hesap Kimliği ve anahtarını yapılandırma
+## <a name="configure-account-identifier-and-key"></a>Hesap tanımlayıcıyı ve anahtarı yapılandırın
 
-Sonraki adım uygulamayı hesap tanımlayıcısı ve hesap anahtarını kullanacak şekilde yapılandırmaktır. Bir metin düzenleyiciye kopyaladığınız zaman [uzamsal bağlayıcılarını kaynağı ayarı](#create-a-spatial-anchors-resource).
+Bir sonraki adım, uygulamayı hesap tanımlayıcıyı ve hesap anahtarınızı kullanacak şekilde yapılandırmaktır. [Uzamsal Tutturucuların kaynağını ayarlarken](#create-a-spatial-anchors-resource)bunları bir metin düzenleyicisine kopyaladınız.
 
 Açık `HoloLens\DirectX\SampleHoloLens\ViewController.cpp`.
 
-Bulun `SpatialAnchorsAccountKey` değiştirin ve alan `Set me` ile hesap anahtarı.
+`SpatialAnchorsAccountKey` alanını bulun ve `Set me` hesap anahtarıyla değiştirin.
 
-Bulun `SpatialAnchorsAccountId` değiştirin ve alan `Set me` hesap tanımlayıcı ile.
+`SpatialAnchorsAccountId` alanını bulun ve `Set me` hesap tanımlayıcısı ile değiştirin.
 
-## <a name="deploy-the-app-to-your-hololens"></a>HoloLens için uygulama dağıtma
+## <a name="deploy-the-app-to-your-hololens"></a>Uygulamayı HoloLens 'e dağıtın
 
-Değiştirme **çözüm yapılandırması** için **yayın**, değiştirme **çözüm platformu** için **x86**seçip **cihaz**  dağıtım hedef seçenekleri.
+**Çözüm yapılandırmasını** **yayın**olarak değiştirin, **çözüm platformunu** **x86**olarak değiştirin ve dağıtım hedefi seçeneklerinden **cihaz** ' ı seçin.
 
-HoloLens 2 kullanıyorsanız kullanın **ARM** olarak **çözüm platformu**, yerine **x86**.
+HoloLens 2 kullanıyorsanız, **x86**yerine **çözüm platformu**olarak **ARM64** kullanın.
 
 ![Visual Studio yapılandırması](./media/get-started-hololens/visual-studio-configuration.png)
 
-HoloLens cihazda güç, oturum açın ve bir USB kablosu kullanarak Bilgisayara bağlanın.
+HoloLens cihazında güç açın, oturum açın ve USB kablosu kullanarak BILGISAYARA bağlayın.
 
-Seçin **hata ayıklama** > **hata ayıklamayı Başlat** uygulamanızı dağıtma ve hata ayıklamaya başlayın.
+Uygulamanızı dağıtmak ve hata ayıklamayı başlatmak için hata **ayıklamayı başlat** > **Hata Ayıkla** ' yı seçin.
 
-Yerleştirin ve bir bağlantı geri çağırma uygulaması'ndaki yönergeleri izleyin.
+Bir bağlayıcıyı yerleştirmek ve geri çağırmak için uygulamadaki yönergeleri izleyin.
 
-Visual Studio'da seçerek uygulamayı durdurun **hata ayıklamayı Durdur** ya basarak **Shift + F5 tuşlarına basarak**.
+Visual Studio 'da, **hata ayıklamayı Durdur** ' u seçerek veya **SHIFT + F5**tuşlarına basarak uygulamayı durdurun.
 
 [!INCLUDE [Clean-up section](../../../includes/clean-up-section-portal.md)]
 
 [!INCLUDE [Next steps](../../../includes/spatial-anchors-quickstarts-nextsteps.md)]
 
 > [!div class="nextstepaction"]
-> [Öğretici: Cihazlar arasında paylaşımı uzamsal yer işaretleri](../tutorials/tutorial-share-anchors-across-devices.md)
+> [Öğretici: cihazlarda uzamsal bağlayıcıları paylaşma](../tutorials/tutorial-share-anchors-across-devices.md)

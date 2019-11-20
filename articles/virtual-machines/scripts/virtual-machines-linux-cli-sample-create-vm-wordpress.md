@@ -1,10 +1,10 @@
 ---
-title: Azure CLI Betik Örneği - WordPress ile Linux VM Oluşturma | Microsoft Docs
+title: Azure CLI Betik Örneği - WordPress ile Linux VM Oluşturma
 description: Azure CLI Betik Örneği - WordPress ile Linux VM Oluşturma
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-service-management
 ms.assetid: ''
@@ -16,12 +16,12 @@ ms.workload: infrastructure
 ms.date: 02/27/2017
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 3e4410a5acb852ea9cd7f5ca24e67e8335a45e30
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: b25dde1ee36d325585be427dbef04fb39755473e
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61462945"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037575"
 ---
 # <a name="create-a-vm-with-wordpress"></a>WordPress ile VM oluşturma
 

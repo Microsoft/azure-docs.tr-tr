@@ -1,13 +1,13 @@
 ---
-title: OData search.score işlevi başvuru - Azure Search
-description: Azure arama sorgularında OData search.score işlevi.
-ms.date: 06/13/2019
-services: search
-ms.service: search
-ms.topic: conceptual
+title: OData Search. Score işlev başvurusu
+titleSuffix: Azure Cognitive Search
+description: Azure Bilişsel Arama sorgularında Search. Score işlevinin kullanılmasına yönelik söz dizimi ve başvuru belgeleri.
+manager: nitinme
 author: brjohnstmsft
 ms.author: brjohnst
-ms.manager: cgronlun
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
 translation.priority.mt:
 - de-de
 - es-es
@@ -19,29 +19,29 @@ translation.priority.mt:
 - ru-ru
 - zh-cn
 - zh-tw
-ms.openlocfilehash: dc444216c4677b9970b867e92aa5ae259a197220
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 2439d4f03184f8dbb85b229b3908dff95013b4bc
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67079697"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74113129"
 ---
-# <a name="odata-searchscore-function-in-azure-search"></a>OData `search.score` Azure Search işlevi
+# <a name="odata-searchscore-function-in-azure-cognitive-search"></a>Azure Bilişsel Arama OData `search.score` işlevi
 
-Azure arama ' bir sorgu gönderdiğinizde [ **$orderby** parametre](search-query-odata-orderby.md), döndürülmesini sonuçları azalan sırada ilgi puanı göre sıralanır. Hatta kullandığınızda **$orderby**, ilgi puanı TIES ayırmak için varsayılan olarak kullanılacak. Ancak, bazen ilgi puanı giderici ilk sıralama ölçütleri ve bazı diğer ölçütlere kullanmak kullanışlıdır. `search.score` İşlevi, bunu yapmanızı sağlar.
+Azure Bilişsel Arama [ **$OrderBy** parametresi](search-query-odata-orderby.md)olmadan bir sorgu gönderdiğinizde, geri gelen sonuçlar ilgi puanı tarafından azalan düzende sıralanır. **$OrderBy**kullandığınızda bile, uygunluk puanı varsayılan olarak bu özellikleri bölmek için kullanılacaktır. Ancak, bazen bir ilk sıralama ölçütü olarak ilgi puanı ve diğer bazı kriterleri bağlama kesici olarak kullanmak faydalıdır. `search.score` işlevi bunu yapmanıza olanak sağlar.
 
 ## <a name="syntax"></a>Sözdizimi
 
-Sözdizimi `search.score` içinde **$orderby** olduğu `search.score()`. İşlev `search.score` herhangi bir parametre almaz. İle kullanılabilir `asc` veya `desc` gibi diğer yan tümcesinde sıralama düzeni belirticisi **$orderby** parametresi. Ayrıca, sıralama ölçütü listesinde her yerde görünebilir.
+**$Orderby** `search.score` söz dizimi `search.score()`. `search.score` işlevi herhangi bir parametre almaz. **$OrderBy** parametresindeki diğer yan tümcelerde olduğu gibi, `asc` veya `desc` sıralama düzeni belirticisi ile kullanılabilir. Sıralama ölçütü listesinde herhangi bir yerde görünebilir.
 
 ## <a name="example"></a>Örnek
 
-Hotels göre azalan düzende sıralamak `search.score` ve `rating`ve böylece aynı dereceye sahip iki hotels en yakındakine listede ilk sıradaysa ardından artan düzende uzaklık tarafından verilen koordinatlarından:
+Oteller `search.score` ve `rating`göre azalan sırada sıralayın, sonra da aynı derecelendirmelere sahip iki otel arasında, en yakın bir tane olmak üzere verilen koordinatlardan uzaklıktan artan sırada sıralama yapın:
 
     search.score() desc,rating desc,geo.distance(location, geography'POINT(-122.131577 47.678581)') asc
 
 ## <a name="next-steps"></a>Sonraki adımlar  
 
-- [Azure Search için OData ifade dili genel bakış](query-odata-filter-orderby-syntax.md)
-- [Azure Search için OData ifadesi söz dizimi başvurusu](search-query-odata-syntax-reference.md)
-- [Search belgeleri &#40;Azure arama hizmeti REST API'si&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)
+- [Azure Bilişsel Arama için OData ifade diline genel bakış](query-odata-filter-orderby-syntax.md)
+- [Azure Bilişsel Arama için OData ifadesi söz dizimi başvurusu](search-query-odata-syntax-reference.md)
+- [Belgeleri &#40;Azure bilişsel arama EST API 'sine arama&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)

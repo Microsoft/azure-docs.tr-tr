@@ -1,68 +1,75 @@
 ---
-title: Personalizer nedir
+title: Kişiselleştirme nedir?
 titleSuffix: Azure Cognitive Services
-description: Azure Personalizer, gerçek zamanlı davranışından öğrenme kullanıcılarınıza göstermek için en iyi deneyimi seçmenize olanak tanıyan bulut tabanlı bir API hizmetidir.
+description: Kişiselleştirici, gerçek zamanlı davranışlarından öğrenerek kullanıcılarınıza gösterilecek en iyi deneyimi seçmenize olanak tanıyan bulut tabanlı bir API hizmetidir.
 services: cognitive-services
-author: edjez
+author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
 ms.topic: overview
-ms.date: 05/07/2019
-ms.author: edjez
-ms.openlocfilehash: 7eb85aa38815b8fcdfbe68518122563e1b579e17
-ms.sourcegitcommit: f6ba5c5a4b1ec4e35c41a4e799fb669ad5099522
+ms.date: 10/23/2019
+ms.author: diberry
+ms.openlocfilehash: 6b55ce851bb12e37aed37039889aa8e69223a286
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65150406"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73467195"
 ---
-# <a name="what-is-personalizer"></a>Personalizer nedir?
+# <a name="what-is-personalizer"></a>Kişiselleştirme nedir?
 
-Azure Personalizer, gerçek zamanlı davranışından öğrenme kullanıcılarınıza göstermek için en iyi deneyimi seçmenize olanak tanıyan bulut tabanlı bir API hizmetidir.
+Azure kişiselleştirici, kendi gerçek zamanlı davranışlarından öğrenerek kullanıcılarınıza göstermek için en iyi deneyimi seçmenize olanak tanıyan bulut tabanlı bir API hizmetidir.
 
-* Kullanıcılar ve içeriği hakkında bilgi sağlar ve kullanıcılarınızın göstermek için en iyi eylemi alır. 
-* Temizleme ve veri Personalizer kullanmadan önce etiketi gerek yoktur.
-* Sizin için uygun olduğunda Personalizer için geri bildirim sağlayın. 
-* Gerçek zamanlı analiz görüntüleyin. 
-* Personalizer, var olan deneyimleri doğrulamak için daha büyük bir veri bilimi çaba bir parçası olarak kullanın.
+* Kullanıcılarınız ve içeriğiniz hakkında bilgi sağlayın ve kullanıcılarınızı göstermek için en iyi eylemi alın. 
+* Kişiselleştirici kullanılmadan önce verilerin temizlenmesi ve etiketlenmesi gerekmez.
+* Sizin için uygun olduğunda Kişiselleştiriciye geri bildirim sağlayın. 
+* Gerçek zamanlı analizi görüntüleyin. 
 
-## <a name="how-does-personalizer-work"></a>Personalizer nasıl çalışır?
+[Kişiselleştiriciye nasıl çalıştığına](https://personalizercontentdemo.azurewebsites.net/) ilişkin bir tanıtım görün
 
-Personalizer hangi eylemin bir bağlamda en yüksek boyut için keşfetmek için makine öğrenimi modelleri kullanır. İstemci uygulamanızı bunlarla ilgili bilgilerle eylemlerinin listesini sağlar. ve kullanıcı, cihaz, vb. hakkında bilgi içerebilecek bağlam hakkında bilgiler. Personalizer gerçekleştirilecek eylemi belirler. Seçilen eylem istemci uygulamanızın kullandığı sonra Personalizer biçiminde bir ödül puanı geri bildirim sağlar. Geri bildirim döngüsü tamamlandıktan sonra Personalizer kendi modeli gelecekteki sıralamalara sahip için kullanılan otomatik olarak güncelleştirir.
+## <a name="how-does-personalizer-work"></a>Kişiselleştirici nasıl çalışır?
 
-## <a name="how-do-i-use-the-personalizer"></a>Personalizer nasıl kullanabilirim?
+Kişiselleştirici, bir bağlamda en yüksek düzeyde sıralama eylemini saptamak için makine öğrenimi modellerini kullanır. İstemci uygulamanız, olası eylemlerin bir listesini, bunlarla ilgili bilgilerle birlikte sağlar; ve Kullanıcı, cihaz vb. hakkında bilgi içerebilen bağlam hakkındaki bilgileri içerir. Kişiselleştirici gerçekleştirilecek eylemi belirler. İstemci uygulamanız seçilen eylemi kullandığında, bir ödül puanı biçiminde Kişiselleştiriciye geri bildirim sağlar. Geri bildirim alındıktan sonra, kişiselleştirici, gelecekteki derecelendirmeler için kullanılan kendi modelini otomatik olarak güncelleştirir. Zaman içinde, kişiselleştirici, özelliklerine göre her bir bağlamda seçmek için en iyi eylemi öneren bir modeli eğitecektir.
 
-![Bir kullanıcıya göstermek için video seçmek için Personalizer kullanma](media/what-is-personalizer/personalizer-example-highlevel.png)
+## <a name="how-do-i-use-the-personalizer"></a>Kişiselleştirici kullanmak Nasıl yaparım? mı?
 
-1. Bir deneyiminizi kişiselleştirmek için uygulamanızı seçin.
-1. Oluşturma ve kişiselleştirme hizmeti, Azure portalında yapılandırma
-1. Personalizer bilgilerle çağırmak için SDK'sını kullanma (_özellikleri_) kullanıcılarınız ve içerik hakkında (_eylemleri_). Veri Personalizer kullanmadan önce etiketlenmiş temizleyen, girmeniz gerekmez. 
-1. İstemci uygulamasında kullanıcı Personalizer tarafından seçilen eylem gösterir.
-1. SDK, kullanıcının Personalizer'ın eylem seçtiyseniz belirten Personalizer için geri bildirim sağlamak için kullanın. Bu bir _puanı ödüllendirin_genellikle -1 ile 1 arasında.
-1. Analytics sistem nasıl çalıştığını ve kişiselleştirme verilerinizi nasıl yardımcı olduğunu değerlendirmek için Azure Portal'da görüntüleyin.
+![Bir kullanıcıya hangi videonun gösterileceğini seçmek için kişiselleştirici kullanma](media/what-is-personalizer/personalizer-example-highlevel.png)
 
-## <a name="where-can-i-use-personalizer"></a>Burada Personalizer kullanabilir miyim?
+1. Uygulamanızda kişiselleştirmek için bir deneyim seçin.
+1. Azure portal kişiselleştirme hizmeti örneğini oluşturun ve yapılandırın. Her örnek bir kişiselleştirici döngüdür.
+1. Kullanıcı ve içerik (_Eylemler_) hakkında bilgiler (_Özellikler_) ile kişiselleştirici çağırmak için [Rank API](https://westus2.dev.cognitive.microsoft.com/docs/services/personalizer-api/operations/Rank) 'yi kullanın. Kişiselleştirici kullanılmadan önce temiz, etiketli veriler sağlamanız gerekmez. API 'Ler doğrudan veya farklı programlama dilleri için kullanılabilir SDK 'Lar kullanılarak çağrılabilir.
+1. İstemci uygulamasında, kullanıcıya kişiselleştirici tarafından seçilen eylemi gösterin.
+1. Kullanıcının kişiselleştirici eyleminin seçili olup olmadığını gösteren Kişiselleştiriciye geri bildirim sağlamak için [Reward API](https://westus2.dev.cognitive.microsoft.com/docs/services/personalizer-api/operations/Reward) 'sini kullanın. Bu bir _[ödül puanı](concept-rewards.md)_ .
+1. Sistemin nasıl çalıştığını ve verilerinizin kişiselleştirmeye nasıl yardımcı olduğunu değerlendirmek için Azure portal analizlerini görüntüleyin.
 
-Örneğin, istemci uygulamanız için Personalizer ekleyebilirsiniz:
+## <a name="where-can-i-use-personalizer"></a>Kişiselleştiriciye nereden kullanabilirim?
 
-* Hangi makale haber Web sitesinde vurgulanır kişiselleştirin.    
-* Bir Web sitesinde ad yerleştirme iyileştirin.
-* Bir kişiselleştirilmiş "önerilen öğesi" bir alışveriş Web sitesinde görüntüler.
-* Belirli bir fotoğraf uygulanacak filtreler gibi kullanıcı arabirimi öğeleri önerin.
-* Kullanıcının amacını açıklamak veya bir eylem önermek için bir sohbet Robotu kişinin yanıt'ı seçin.
-* Bir kullanıcı bir iş işlemi bir sonraki adım olarak neler önerileri öncelik verin.
+Örneğin, istemci uygulamanız aşağıdakileri öğesine kişiselleştirici ekleyebilir:
+
+* Bir haber web sitesinde vurgulanan makaleyi kişiselleştirin.    
+* Web sitesinde ad yerleşimini iyileştirin.
+* Bir alışveriş web sitesinde kişiselleştirilmiş bir "önerilen öğe" görüntüleyin.
+* Belirli bir fotoğrafta uygulanacak filtreler gibi kullanıcı arabirimi öğelerini önerin.
+* Kullanıcı amacını açıklamak veya bir eylem önermek için bir sohbet bot 'un yanıtını seçin.
+* Bir kullanıcının iş sürecinde bir sonraki adım olarak ne yapması gerektiğine ilişkin önerilere öncelik verin.
+
+Kişiselleştirici Kullanıcı profili bilgilerini kalıcı hale getirmek ve yönetmek ya da bireysel kullanıcıların tercihlerini veya geçmişini günlüğe kaydetmek için bir hizmet değildir. Kişiselleştirici, benzer özellikler gerçekleştiğinde en yüksek yeniden ödüller elde eden tek bir modeldeki bir bağlam eyleminde her etkileşimin özelliklerinden öğrenir. 
 
 ## <a name="personalization-for-developers"></a>Geliştiriciler için kişiselleştirme
 
-İki API personalizer hizmet vardır:
+Kişiselleştirici hizmeti iki API 'ye sahiptir:
 
-* Bilgileri Gönder (_özellikleri_) kullanıcılarınız ve içerik hakkında (_eylemleri_) kişiselleştirmek için. Personalizer üst eylem ile yanıt verir.
-* Ne kadar iyi sıralama genellikle 0 ile 1 arasında bir sayı olarak çalışan hakkında Personalizer için geri bildirim gönder (önceki bölümde söylediğiniz -1 ve 1). 
+* Kullanıcılarınız ve kişiselleştirilmesi için içerik (_Eylemler_) hakkındaki bilgileri (_özellikleri_) gönderin. Kişiselleştirici, en üstteki eylemle yanıt verir.
+* Derecelendirmenin bir [geri alma puanı](concept-rewards.md)olarak ne kadar iyi çalıştığı hakkında kişiselleştiriciye geri bildirim gönderin. 
 
-![Kişiselleştirme için olayların temel sırası](media/what-is-personalizer/personalization-intro.png)
+![Kişiselleştirmeye yönelik temel olay sırası](media/what-is-personalizer/personalization-intro.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Hızlı Başlangıç: Bir geri bildirim döngüsü içinde oluşturmaC#](csharp-quickstart-commandline-feedback-loop.md)
-* [Etkileşimli tanıtım kullanın](https://personalizationdemo.azurewebsites.net/)
+* [Kişiselleştirici 'daki yenilikler nelerdir?](whats-new.md)
+* [Kişiselleştirici nasıl çalışıyor?](how-personalizer-works.md)
+* [Pekiştirmeye dayalı Learning nedir?](concepts-reinforcement-learning.md)
+* [Sıralama isteğine yönelik özellikler ve eylemler hakkında bilgi edinin](concepts-features.md)
+* [Reward isteği için puanı belirleme hakkında bilgi edinin](concept-rewards.md)
+* [Etkileşimli tanıtımı kullanma](https://personalizationdemo.azurewebsites.net/)

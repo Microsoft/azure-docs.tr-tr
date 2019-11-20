@@ -1,6 +1,6 @@
 ---
-title: TrustFrameworkPolicy - Azure Active Directory B2C | Microsoft Docs
-description: Azure Active Directory B2C'de özel bir ilkenin TrustFrameworkPolicy öğesi belirtin.
+title: TrustFrameworkPolicy-Azure Active Directory B2C | Microsoft Docs
+description: Azure Active Directory B2C özel bir ilkenin TrustFrameworkPolicy öğesini belirtin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 09/10/2018
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 5a0ba48acf6ec3d221d9c4b5e95b380a2154171f
-ms.sourcegitcommit: 084630bb22ae4cf037794923a1ef602d84831c57
+ms.openlocfilehash: 673807377914aabad5b90d1ac2ecc16623870d30
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67537052"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71063365"
 ---
 # <a name="trustframeworkpolicy"></a>TrustFrameworkPolicy
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-Özel bir ilke birbirleriyle hiyerarşik bir zincirinde başvuran bir veya daha fazla XML biçimli dosyaları olarak temsil edilir. XML öğeleri talep şema, talep dönüştürmeleri, içerik tanımları, talep sağlayıcıları, teknik profiller, kullanıcı yolculuğu ve düzenleme adımlarının gibi ilke öğelerini tanımlayın. Her ilke dosyasını en üst düzey içinde tanımlanan **TrustFrameworkPolicy** bir ilke dosyası öğesidir. 
+Özel bir ilke, bir veya daha fazla XML biçimli dosya olarak temsil edilir ve hiyerarşik bir zincirde birbirini ifade eder. XML öğeleri, ilke için talepler şeması, talep dönüştürmeleri, içerik tanımları, talep sağlayıcılar, teknik profiller, Kullanıcı yolculuğu ve düzenleme adımları gibi öğeleri tanımlar. Her ilke dosyası, bir ilke dosyasının en üst düzey **TrustFrameworkPolicy** öğesi içinde tanımlanır.
 
 ```XML
 <TrustFrameworkPolicy
@@ -36,20 +36,20 @@ ms.locfileid: "67537052"
 ```
 
 
-**TrustFrameworkPolicy** öğesi aşağıdaki öznitelikler içerir:
+**TrustFrameworkPolicy** öğesi aşağıdaki öznitelikleri içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 |---------- | -------- | ----------- |
-| PolicySchemaVersion | Evet | İlke yürütmek için kullanılacak olan şema sürümü. Değer olmalıdır `0.3.0.0` |
-| TenantObjectId | Hayır | Azure Active Directory (Azure AD) B2C kiracısının benzersiz nesne tanımlayıcısı. |
+| PolicySchemaVersion | Evet | İlkeyi yürütmek için kullanılacak şema sürümü. Değer şu şekilde olmalıdır`0.3.0.0` |
+| Tenantobjectıd | Hayır | Azure Active Directory B2C (Azure AD B2C) kiracının benzersiz nesne tanımlayıcısı. |
 | TenantId | Evet | Bu ilkenin ait olduğu kiracının benzersiz tanımlayıcısı. |
-| `PolicyId` | Evet | İlke için benzersiz tanımlayıcı. Bu tanımlayıcı getirilmeli *B2C_1A_* |
-| PublicPolicyUri | Evet | Kiracı kimliği ve ilke kimliğinin birleşimi İlkesi URI'si |
-| DeploymentMode | Hayır | Olası değerler: `Production`, `Debugging`, veya `Development`. `Production` varsayılan değerdir. İlkenizi hata ayıklamak için bu özelliği kullanın. Daha fazla bilgi için [günlüklerini toplama](active-directory-b2c-troubleshoot-custom.md). |
-| UserJourneyRecorderEndpoint | Hayır | Uç noktası yüklendiğinde **DeploymentMode** ayarlanır `Development`. Değer olmalıdır `urn:journeyrecorder:applicationinsights`. Daha fazla bilgi için [günlüklerini toplama](active-directory-b2c-troubleshoot-custom.md). |
+| `PolicyId` | Evet | İlke için benzersiz tanımlayıcı. Bu tanımlayıcının önüne *B2C_1A_* gelmelidir |
+| PublicPolicyUri | Evet | İlke için kiracı KIMLIĞI ve ilke KIMLIĞI birleşimi olan URI. |
+| DeploymentMode | Hayır | Olası değerler: `Production`, `Debugging`, veya `Development`. `Production` varsayılan değerdir. İlkenizde hata ayıklamak için bu özelliği kullanın. Daha fazla bilgi için bkz. [günlükleri toplama](active-directory-b2c-troubleshoot-custom.md). |
+| Kullanıcıbağlantısı Neyırecorderendpoint | Hayır | **DeploymentMode** olarak `Development`ayarlandığında kullanılan uç nokta. Değer olmalıdır `urn:journeyrecorder:applicationinsights`. Daha fazla bilgi için bkz. [günlükleri toplama](active-directory-b2c-troubleshoot-custom.md). |
 
 
-Aşağıdaki örnek nasıl belirtileceğini gösterir **TrustFrameworkPolicy** öğesi:
+Aşağıdaki örnek, **TrustFrameworkPolicy** öğesinin nasıl kullanılacağını gösterir:
 
 ``` XML
 <TrustFrameworkPolicy
@@ -64,37 +64,37 @@ Aşağıdaki örnek nasıl belirtileceğini gösterir **TrustFrameworkPolicy** �
 
 ## <a name="inheritance-model"></a>Devralma modeli
 
-Bu tür bir ilke dosyası genellikle bir kullanıcı yolculuğunda kullanılır:
+Bu ilke dosyası türleri genellikle Kullanıcı yolculuğunda kullanılır:
 
-- A **temel** tanımları çoğunu içeren dosya. İlkelerinizi sorun giderme ve uzun süreli bakım ile yardımcı olmak için bu dosyada en az bir dizi değişiklik yaptığınız önerilir.
-- Bir **uzantıları** kiracınız için benzersiz yapılandırma değişikliklerini içeren dosya. Bu ilke dosyası, temel dosyanın elde edilir. Yeni işlevler eklemek veya mevcut bir işlevi geçersiz kılma için bu dosyayı kullanın. Örneğin, yeni kimlik sağlayıcıları ile federasyona eklemek için bu dosyayı kullanın.
-- A **bağlı olan taraf (RP)** dosya doğrudan bağlı taraf uygulaması, web, mobil veya Masaüstü uygulamaları gibi tarafından çağrılan tek görev odaklı dosyası. Kaydolma veya oturum açma parolasını sıfırlama veya profil düzenleme gibi benzersiz her görev kendi RP ilkesi dosyası gerektirir. Bu ilke dosyası uzantıları dosyasından elde edilir. 
+- Tanımlarının çoğunu içeren bir **temel** dosya. İlkeleriniz için sorun giderme ve uzun süreli bakımla yardımcı olmak üzere bu dosyada en az sayıda değişiklik yapmanız önerilir.
+- Kiracınız için benzersiz yapılandırma değişikliklerini tutan bir **uzantı** dosyası. Bu ilke dosyası temel dosyadan türetilir. Yeni işlevsellik eklemek veya var olan işlevleri geçersiz kılmak için bu dosyayı kullanın. Örneğin, bu dosyayı yeni kimlik sağlayıcılarıyla federasyona eklemek için kullanın.
+- Web, mobil veya masaüstü uygulamalarınız gibi bağlı olan taraf uygulaması tarafından doğrudan çağrılan tek bir görev odaklı dosya olan bir **bağlı olan taraf (RP)** dosyası. Kaydolma veya oturum açma, parola sıfırlama veya profil düzenleme gibi her benzersiz görev kendi RP ilke dosyası gerektirir. Bu ilke dosyası, uzantılar dosyasından türetilir.
 
-Bir bağlı taraf uygulaması, RP ilke dosyası, belirli bir görevi çağırır. Örneğin, oturum açma akışını başlatmak için. Azure AD B2C'de kimlik deneyimi çerçevesi için tüm öğelere ilk temel dosyasından ve uzantıları dosyasından ekler ve son olarak geçerli ilke etkin derlemek için RP ilke dosyasından. Öğeleri aynı türde ve RP dosya adı uzantıları'nda bu öğeleri geçersiz kılabilir ve uzantıları temel geçersiz kılar. Aşağıdaki diyagramda, ilke dosyalarını ve bağlı olan taraf uygulamaları arasındaki ilişkiyi gösterir.
+Bağlı olan taraf uygulaması, belirli bir görevi yürütmek için RP ilke dosyasını çağırır. Örneğin, oturum açma akışını başlatmak için. Azure AD B2C ' deki kimlik deneyimi çerçevesi, ilk olarak tüm öğeleri temel dosyadan, ardından uzantı dosyasından ve son olarak geçerli ilkeyi birleştirmek için RP ilke dosyasından ekler. RP dosyasındaki aynı tür ve ad öğeleri, Uzantılardaki öğeleri geçersiz kılar ve uzantılar temeli geçersiz kılar. Aşağıdaki diyagramda, ilke dosyaları ve bağlı olan taraf uygulamaları arasındaki ilişki gösterilmektedir.
 
-![Devralma modeli](./media/trustframeworkpolicy/custom-policy-Inheritance-model.png)
+![Güven çerçevesi ilke devralma modelini gösteren diyagram](./media/trustframeworkpolicy/custom-policy-Inheritance-model.png)
 
 Devralma modeli aşağıdaki gibidir:
 
-- Aynı şemasını ilke üst ve alt ilke var.
-- Alt ilke herhangi bir düzeyde, üst ilkeden devralır ve genişletebileceğinizi yeni öğeler ekleyerek.
-- Düzey sayısına bir sınır yoktur.
+- Üst ilke ve alt ilke aynı şemadır.
+- Herhangi bir düzeydeki alt ilke üst ilkeden devralınabilir ve yeni öğeler ekleyerek genişletebilirler.
+- Düzey sayısı için bir sınır yoktur.
 
-Daha fazla bilgi için [özel ilkeleri kullanmaya başlama](active-directory-b2c-get-started-custom.md).
+Daha fazla bilgi için bkz. [özel ilkelerle çalışmaya başlama](active-directory-b2c-get-started-custom.md).
 
 ## <a name="base-policy"></a>Temel ilke
 
-Bir ilke başka bir ilkeden devralmak için bir **BasePolicy** öğesi bildirilmiş altında **TrustFrameworkPolicy** ilke öğesi. **BasePolicy** öğedir, bu ilke türetilmiştir temel ilke için bir başvuru.  
+Bir ilkeyi başka bir ilkeden devralması için bir **Basepolicy** öğesi, Ilke dosyasının **TrustFrameworkPolicy** öğesi altında bildirilmelidir. **Basepolicy** öğesi, bu ilkenin türetildiği temel ilkeye bir başvurudur.
 
-**BasePolicy** öğesi aşağıdaki öğeleri içerir:
+**Basepolicy** öğesi aşağıdaki öğeleri içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | --------|
-| TenantId | 1:1 | Azure AD B2C kiracınızı tanımlayıcısı. |
+| TenantId | 1:1 | Azure AD B2C kiracınızın tanımlayıcısı. |
 | `PolicyId` | 1:1 | Üst ilke tanımlayıcısı. |
 
 
-Aşağıdaki örnek, temel bir ilke belirtmek gösterilmektedir. Bu **B2C_1A_TrustFrameworkExtensions** İlkesi türetilen **B2C_1A_TrustFrameworkBase** ilkesi. 
+Aşağıdaki örnek, temel bir ilkenin nasıl ekleneceğini gösterir. Bu **B2C_1A_TrustFrameworkExtensions** ilkesi **B2C_1A_TrustFrameworkBase** ilkesinden türetilir.
 
 ``` XML
 <TrustFrameworkPolicy
@@ -114,13 +114,13 @@ Aşağıdaki örnek, temel bir ilke belirtmek gösterilmektedir. Bu **B2C_1A_Tru
 </TrustFrameworkPolicy>
 ```
 
-## <a name="policy-execution"></a>Yürütme İlkesi
+## <a name="policy-execution"></a>İlke yürütme
 
-Bir web, mobil veya masaüstü uygulaması gibi bir bağlı taraf uygulaması çağırır [bağlı olan taraf (RP) İlkesi](relyingparty.md). RP ilke dosyasını açarken, parola sıfırlama veya bir profil düzenleme gibi belirli bir görevi yürütür. RP ilke bağlı taraf uygulaması alan talepler listesinin verilen belirtecinin bir parçası yapılandırır. Birden çok uygulama aynı ilkesini kullanabilirsiniz. Tüm uygulamaları talepleri ile aynı belirteci alan ve kullanıcı aynı kullanıcı gezintisinde geçer. Tek bir uygulama birden çok ilke kullanabilirsiniz.
+Web, mobil veya masaüstü uygulaması gibi bir bağlı olan taraf uygulaması, [bağlı olan taraf (RP) ilkesini](relyingparty.md)çağırır. RP ilke dosyası, oturum açma, parola sıfırlama veya bir profili düzenlemeyle ilgili belirli bir görevi yürütür. RP ilkesi, bağlı olan taraf uygulamanın verilen belirtecin bir parçası olarak aldığı taleplerin listesini yapılandırır. Birden çok uygulama aynı ilkeyi kullanabilir. Tüm uygulamalar taleplerle aynı belirteci alır ve Kullanıcı aynı kullanıcı yolculuğuna gider. Tek bir uygulama, birden çok ilke kullanabilir.
 
-RP ilke dosyası içinde belirttiğiniz **DefaultUserJourney** işaret öğesi [UserJourney](userjourneys.md). Kullanıcı yolculuğu genellikle temel veya uzantıları ilkesinde tanımlanır.
+RP ilke dosyasında, [Kullanıcı yolculuğuna](userjourneys.md)Işaret eden **defaultuseryolculuney** öğesini belirtirsiniz. Kullanıcı yolculuğu genellikle temel veya uzantılar ilkesinde tanımlanmıştır.
 
-B2C_1A_signup_signin İlkesi:
+B2C_1A_signup_signin ilkesi:
 
 ```XML
 <RelyingParty>
@@ -136,24 +136,24 @@ B2C_1A_TrustFrameWorkBase veya B2C_1A_TrustFrameworkExtensionPolicy:
   ...
 ```
 
-Kullanıcı yolculuğu bir kullanıcı geçer, iş mantığı tanımlar. Her kullanıcı yolculuğu kimlik doğrulaması ve bilgi toplama açısından dizisindeki bir eylemler dizisi gerçekleştirir düzenleme adımlarının kümesidir. 
+Kullanıcı yolculuğu, kullanıcının ne kadar ilerreceğini belirleyen iş mantığını tanımlar. Her Kullanıcı yolculuğu, kimlik doğrulaması ve bilgi toplama açısından sırayla bir dizi eylem gerçekleştiren bir düzenleme adımları kümesidir.
 
-**SocialAndLocalAccounts** ilke dosyasında [başlangıç paketi](https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-get-started-custom#download-starter-pack-and-modify-policies) SignUpOrSignIn, ProfileEdit, PasswordReset kullanıcı yolculuklarından içerir. Bir e-posta adresini değiştirmek veya bağlama ve bir sosyal hesap kapatılmaz gibi diğer senaryolar için daha fazla kullanıcı yolculuklarından ekleyebilirsiniz. 
+[Başlangıç paketindeki](active-directory-b2c-get-started-custom.md#custom-policy-starter-pack) **SocialAndLocalAccounts** Ilke dosyası Signuporsignın, profileedit, passwordreset Kullanıcı bir bağlantı içerir. E-posta adresini değiştirme veya sosyal hesabın bağlantısını kaldırma gibi diğer senaryolar için daha fazla kullanıcı bağlantısı ekleyebilirsiniz.
 
-Düzenleme adımlarının çağırabilir bir [teknik profil](technicalprofiles.md). Teknik profili, farklı türlerde taraflar ile iletişim kurmak için yerleşik bir mekanizma ile bir çerçeve sunar. Örneğin, bir teknik profili, diğerlerinin yanı sıra bu eylemleri gerçekleştirebilirsiniz:
+Düzenleme adımları [Teknik bir profil](technicalprofiles.md)çağırabilir. Teknik bir profil, farklı türlerde taraflar ile iletişim kurmak için yerleşik mekanizmaya sahip bir çerçeve sağlar. Örneğin, teknik bir profil, diğerleri arasında bu eylemleri gerçekleştirebilir:
 
-- Bir kullanıcı deneyimi işleyin.
-- Sosyal veya Kurumsal hesabı, facebook gibi Microsoft hesabı, Google, Salesforce veya başka bir kimlik sağlayıcısı oturum açmasına imkan tanıyın.
-- Telefon doğrulama için mfa'yı ayarlayın.
-- Okuma ve bir Azure AD B2C kimlik deposu gelen ve giden veri yazma.
-- Özel bir Restful API hizmetini çağırın.
+- Kullanıcı deneyimini işleme.
+- Kullanıcıların Facebook, Microsoft hesabı, Google, Salesforce veya başka herhangi bir kimlik sağlayıcısı gibi sosyal veya kurumsal bir hesapla oturum açmalarına izin verin.
+- MFA için telefon doğrulamasını ayarlayın.
+- Azure AD B2C bir kimlik deposundan veri okuma ve yazma.
+- Özel bir yeniden deneme API hizmeti çağırın.
 
-![Yürütme İlkesi](./media/trustframeworkpolicy/custom-policy-execution.png)
+![İlke yürütme akışını gösteren diyagram](./media/trustframeworkpolicy/custom-policy-execution.png)
 
  **TrustFrameworkPolicy** öğesi aşağıdaki öğeleri içerir:
 
 - Yukarıda belirtildiği gibi BasePolicy
 - [BuildingBlocks](buildingblocks.md)
 - [ClaimsProviders](claimsproviders.md)
-- [UserJourneys](userjourneys.md)
+- [Kullanıcı, neys](userjourneys.md)
 - [RelyingParty](relyingparty.md)

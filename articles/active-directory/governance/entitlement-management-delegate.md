@@ -1,10 +1,10 @@
 ---
-title: Azure AD hak yönetimi (Önizleme) - Azure Active Directory içinde görevler için temsilci seçme
-description: Azure Active Directory Hak Yönetimi'nde Görevler için temsilci atadığınız rolleri hakkında bilgi edinin.
+title: Azure AD Yetkilendirme Yönetimi 'nde yetkilendirme ve roller-Azure Active Directory
+description: Erişim yönetimini, BT yöneticilerinden departman yöneticilerine ve proje yöneticilerine, erişimi yönetebilmeleri için nasıl atayacağınızı öğrenin.
 services: active-directory
 documentationCenter: ''
-author: rolyon
-manager: mtillman
+author: msaburnley
+manager: daveba
 editor: markwahl-msft
 ms.service: active-directory
 ms.workload: identity
@@ -12,143 +12,129 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.subservice: compliance
-ms.date: 06/07/2019
-ms.author: rolyon
+ms.date: 10/07/2019
+ms.author: ajburnle
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8fa0be8e2af7644564ba27e6d58fda09b1ae7bc7
-ms.sourcegitcommit: 156b313eec59ad1b5a820fabb4d0f16b602737fc
+ms.openlocfilehash: 6d68728c4ca4f9fe511faedcf2ca177b7160f112
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67191505"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73174265"
 ---
-# <a name="delegate-tasks-in-azure-ad-entitlement-management-preview"></a>Azure AD hak yönetimi (Önizleme) içinde görevler için temsilci seçme
+# <a name="delegation-and-roles-in-azure-ad-entitlement-management"></a>Azure AD yetkilendirme yönetiminde yetkilendirme ve roller
 
-> [!IMPORTANT]
-> Azure Active Directory (Azure AD) Yetkilendirme Yönetimi, şu anda genel Önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir.
-> Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+Varsayılan olarak, genel Yöneticiler ve Kullanıcı yöneticileri Azure AD yetkilendirme yönetiminin tüm yönlerini oluşturabilir ve yönetebilir. Ancak, bu rollerdeki kullanıcılar erişim paketlerinin gerekli olduğu tüm durumları bilmiyor olabilir. Genellikle, ilgili departmanlar, takımlar ya da kim ile birlikte çalıştıkları, hangi kaynakların ve ne kadar süreyle işbirliği yaptığını bilen kullanıcılardır. Yönetici olmayanlar için kısıtlanmamış izinler vermek yerine kullanıcılara, işlerini gerçekleştirmek için ihtiyaç duydukları en düşük izinleri verebilir ve çakışan veya uygunsuz erişim hakları oluşturmaktan kaçınabilirsiniz.
 
-Varsayılan olarak, genel Yöneticiler ve kullanıcı oluşturabilir ve Azure AD Hak Yönetimi'nin tüm özelliklerini yönetebilir. Ancak, bu rollerdeki kullanıcıların erişim paketleri gerekli olduğu senaryolar bilemeyebilirsiniz. Genellikle kullanıcılar bölümleri içinde olduğu işbirliği yapmak gereksinim duyan kim öğrenin.
+Bu videoda, BT yöneticisinden yönetici olmayan kullanıcılara erişim yönetimi atama hakkında genel bakış sunulmaktadır.
 
-Yönetici olmayanlar için sınırsız izinleri vermek yerine, kullanıcıların en az işini gerçekleştirmek ve çakışan oluşturmaktan kaçınmak için ihtiyaç duydukları izinleri veya uygunsuz erişim hakları verebilirsiniz. Bu makalede, Hak Yönetimi'nde çeşitli görevler için temsilci atadığınız rolleri açıklanır.
+> [!VIDEO https://www.microsoft.com/videoplayer/embed/RE3Lq00]
 
-## <a name="delegate-example-for-departmental-adoption"></a>Departman benimsenmesine yönelik temsilci örneği
+## <a name="delegate-example"></a>Temsilci örneği
 
-Hak Yönetimi'nde Görevler nasıl temsilci anlamak için bu örneği göz önünde bulundurun yardımcı olur. Aşağıdaki beş kullanıcılar, kuruluşunuzun sahip olduğunu varsayın:
+Yetkilendirme yönetiminde erişim yönetimini nasıl temsil edebileceğinizi anlamak için, bir örneği göz önünde bulundurmasına yardımcı olur. Kuruluşunuzun aşağıdaki yönetici ve yöneticilere sahip olduğunu varsayalım.
 
-| Kullanıcı | Departman | Notlar |
-| --- | --- | --- |
-| Alice | BT | Genel yönetici |
-| Bob | Araştırma | Bob ayrıca bir araştırma grubunun sahibi değil |
-| Ceren | Araştırma |  |
-| Dave | Pazarlama |  |
-| Elisa | Pazarlama | Elisa de pazarlama uygulamanın sahibi: |
+![BT yöneticisinden yöneticilere temsilci seçme](./media/entitlement-management-delegate/delegate-admin-dept-managers.png)
 
-Araştırma ve pazarlama departmanları kullanıcıları için hak yönetimi kullanmak istiyorsunuz. Alice henüz diğer bölümlerden hak yönetimi hazır değil. Alice araştırma ve pazarlama departmanları görevlere temsilci seçebilecek yöntemlerinden biri aşağıda verilmiştir.
+BT Yöneticisi olarak, Hana her bir departmanla ilgili kişiler, örneğin, pazarlama, finans ve ali olarak, departmanın ve iş açısından kritik içeriklerinden sorumlu olan her bir departmanda kişiye aittir.
 
-1. Alice oluşturur, yeni bir Azure AD güvenlik grubu için katalog creators ve Bob ve Carol, Dave ve Elisa o grubun üyesi olarak ekler.
+Yetkilendirme Yönetimi sayesinde, bu yönetici olmayan kullanıcılar için erişim gerektiren kullanıcıları, ne kadar süreyle, ne kadar süreyle erişmesi gerektiğini bilen kişiler olduklarından, bu yönetici olmayanlar için temsilci atayabilirsiniz. Bu, doğru kişilerin departmanlarına yönelik erişimi yönetmesini sağlar.
 
-1. Alice, katalog creators rolüne bu gruba eklemek için hak yönetimi ayarlarını kullanır.
+Bu, Hana 'nın pazarlama, finans ve hukuk departmanlarına erişim yönetimini temsilciliğini sağlamak için kullanabileceğiniz bir yoldur.
 
-1. Carol oluşturur bir **araştırma** katalog ve Bob kataloğu bir ortak sahip olarak ekler. Bob bir kaynak olarak Kataloğu'na sahip olan research grubu ekler; böylece bir erişim paketinde araştırma işbirliği için kullanılabilir.
+1. Hana yeni bir Azure AD güvenlik grubu oluşturur ve grubun üyesi olarak Mamta, Mark ve ali ekler.
 
-1. Dave oluşturur bir **pazarlama** katalog ve Elisa kataloğu bir ortak sahip olarak ekler. Elisa kendisi bir kaynak olarak Kataloğu'na sahip pazarlama uygulaması ekler; böylece işbirliği pazarlama için bir erişim paketinde kullanılabilir.
+1. Hana, bu grubu Katalog oluşturucuları rolüne ekler.
 
-Şimdi araştırma ve pazarlama departmanları hak yönetimi kullanabilir. Bob ve Carol, Dave ve Elisa oluşturabilir ve erişim paketleri kendi ilgili kataloglarını yönetmek.
+    Mamta, Mark ve ali artık departmanları için kataloglar oluşturabilir, departmanlarının ihtiyaç duyduğu kaynakları ekleyebilirler ve Katalog içinde daha fazla temsilciyi gerçekleştirebilir.
 
-![Hak Yönetimi temsilci örneği](./media/entitlement-management-delegate/elm-delegate.png)
+    Mamta, Mark ve ali 'nin her birinin kataloğunu göremediğini unutmayın.
 
-## <a name="entitlement-management-roles"></a>Hak yönetim rolleri
+1. Mamta, kaynakların kapsayıcısı olan bir **Pazarlama** kataloğu oluşturur.
 
-Hak Yönetimi, hak yönetimi için özel olan aşağıdaki rol yok.
+1. Mamta, pazarlama bölümünün sahip olduğu kaynakları bu kataloğa ekler.
 
-| Rol | Açıklama |
+1. Mamta, departmanından Bu Kataloğun Katalog sahipleri olarak ek kişiler ekleyebilir. Bu, katalog yönetimi sorumluluklarını paylaşmanıza yardımcı olur.
+
+1. Mamta, pazarlama kataloğundaki erişim paketlerinin oluşturulması ve yönetimi için pazarlama departmanındaki proje yöneticilerine daha fazla yetki verebilir. Bunu, erişim paketi Yöneticisi rolüne atayarak yapabilir. Erişim paketi Yöneticisi, erişim paketleri oluşturabilir ve yönetebilir. 
+
+Aşağıdaki diyagramda, pazarlama, finans ve hukuk departmanları için kaynakları içeren kataloglar gösterilmektedir. Proje yöneticileri, bu katalogları kullanarak ekiplerine veya projelerine yönelik erişim paketleri oluşturabilir.
+
+![Yetkilendirme Yönetimi temsilcisi örneği](./media/entitlement-management-delegate/elm-delegate.png)
+
+Temsilcinin ardından, pazarlama departmanı aşağıdaki tabloya benzer rollere sahip olabilir.
+
+| Kullanıcı | İş rolü | Azure AD rolü | Yetkilendirme Yönetimi rolü |
+| --- | --- | --- | --- |
+| Hana | BT Yöneticisi | Genel yönetici veya Kullanıcı Yöneticisi |  |
+| Mamta | Pazarlama Yöneticisi | Kullanıcı | Katalog Oluşturucu ve Katalog sahibi |
+| Olduğundan | Pazarlama lideri | Kullanıcı | Katalog sahibi |
+| Jessica | Pazarlama Projesi Yöneticisi | Kullanıcı | Paket Yöneticisi 'ne erişim |
+
+## <a name="entitlement-management-roles"></a>Yetkilendirme Yönetimi rolleri
+
+Yetkilendirme yönetiminin, yetkilendirme yönetimine özgü aşağıdaki rolleri vardır.
+
+| Yetkilendirme Yönetimi rolü | Açıklama |
 | --- | --- |
-| Katalog Oluşturucusu | Oluşturun ve kataloglarını yönetin. Bir genel yönetici veya bir kaynak koleksiyonu için bir kaynak sahibi olmayan genellikle BT yöneticisi. Katalog otomatik olarak oluşturan kişinin Kataloğu'nun ilk katalog sahibi olur ve ek katalog sahipleri ekleyebilirsiniz. |
-| Katalog sahibi | Düzenle ve mevcut kataloglarını yönetin. Genellikle BT yöneticisi veya kaynak sahiplerinin veya katalog sahibinin atadığı bir kullanıcı. |
-| Erişim Paket Yöneticisi | Düzenle ve Katalog içindeki tüm var olan erişim paketleri yönetin. |
+| Katalog Oluşturucu | Kataloglar oluşturun ve yönetin. Genellikle genel yönetici olmayan bir BT Yöneticisi veya bir kaynak koleksiyonu için kaynak sahibi. Katalog oluşturan kişi otomatik olarak kataloğun ilk katalog sahibi olur ve ek Katalog sahipleri ekleyebilir. Bir katalog Oluşturucu yönetmez veya sahip olmadıkları katalogları göremez ve bir kataloğa ait olmadıkları kaynakları ekleyemez. Katalog oluşturucunun başka bir kataloğu yönetmesi veya sahip olmadıkları kaynakları eklemesi gerekiyorsa, o kataloğun veya kaynağın ortak sahibi olmasını isteyebilir. |
+| Katalog sahibi | Mevcut katalogları düzenleyin ve yönetin. Genellikle bir BT Yöneticisi veya kaynak sahipleri veya kataloğun sahibi tarafından atanan bir kullanıcı. |
+| Paket Yöneticisi 'ne erişim | Bir kataloğun içindeki tüm mevcut erişim paketlerini düzenleyin ve yönetin. |
 
-Rol olmasa da ek olarak, belirlenen bir onaylayan ve bir istek sahibi, bir erişim paketinin da hakları vardır.
- 
-* Onaylayan: Onaylayın veya reddedin paketleri erişim istekleri için bir ilke tarafından yetkili, ancak bu erişim paket tanımlarını değiştiremez.
-* İstek sahibi: Bu erişim paket isteği için bir erişim paket İlkesi tarafından yetkili.
+Ayrıca, atanan bir onaylayan ve bir erişim paketinin istek sahibi de haklara sahiptir, ancak bu roller rol değildir.
 
-Aşağıdaki tabloda, bu rolleri gerçekleştirebileceğiniz görevler listelenmektedir.
+| Right | Açıklama |
+| --- | --- |
+| Kişi | Erişim paketi tanımlarını değiştiremese de, paketlere erişim isteklerini onaylamak veya reddetmek için bir ilke tarafından yetkilendirilmiştir. |
+| Sahibinin | Erişim paketi istemek için bir erişim paketi ilkesi tarafından yetkilendirilir. |
 
-| Görev | Katalog Oluşturucusu | Katalog sahibi | Erişim Paket Yöneticisi | Onaylayan |
+Aşağıdaki tabloda, Yetkilendirme Yönetimi rollerinin gerçekleştirebileceği görevler listelenmiştir.
+
+| Görev | Yöneticileri | Katalog Oluşturucu | Katalog sahibi | Paket Yöneticisi 'ne erişim |
 | --- | :---: | :---: | :---: | :---: |
-| [Yeni bir katalog oluşturun](entitlement-management-catalog-create.md) | :heavy_check_mark: |  |  |  |
-| [Katalog için bir kaynak ekleyin](entitlement-management-catalog-create.md#add-resources-to-a-catalog) | | :heavy_check_mark: | | |
-| [Katalog Düzenle](entitlement-management-catalog-create.md#edit-a-catalog) |  | :heavy_check_mark: |  |  |
-| [Katalog silme](entitlement-management-catalog-create.md#delete-a-catalog) |  | :heavy_check_mark: |  |  |
-| [Katalog sahibi veya bir erişim Paket Yöneticisi Kataloğu'na ekleyin.](#add-a-catalog-owner-or-an-access-package-manager) |  | :heavy_check_mark: |  |  |
-| [Bir katalogda yeni erişim paketi oluştur](entitlement-management-access-package-create.md) |  | :heavy_check_mark: |  |  |
-| [Bir erişim pakette kaynak rolleri yönetme](entitlement-management-access-package-edit.md) |  | :heavy_check_mark: | :heavy_check_mark: |  |
-| [Kimin bir erişim paketini talep edebilir belirtin](entitlement-management-access-package-edit.md#add-a-new-policy) |  | :heavy_check_mark: | :heavy_check_mark: |  |
-| [Doğrudan bir erişim paketi için kullanıcı atama](entitlement-management-access-package-edit.md#directly-assign-a-user) |  | :heavy_check_mark: | :heavy_check_mark: |  |
-| [Bir erişim paketi atamaya sahip görüntüle](entitlement-management-access-package-edit.md#view-who-has-an-assignment) |  | :heavy_check_mark: | :heavy_check_mark: |  |
-| [Bir erişim paketin istekleri görüntüleme](entitlement-management-access-package-edit.md#view-requests) |  | :heavy_check_mark: | :heavy_check_mark: |  |
-| [Bir isteğin teslim hataları görüntüleyin](entitlement-management-access-package-edit.md#view-a-requests-delivery-errors) |  | :heavy_check_mark: | :heavy_check_mark: |  |
-| [Bekleyen isteği iptal et](entitlement-management-access-package-edit.md#cancel-a-pending-request) |  | :heavy_check_mark: | :heavy_check_mark: |  |
-| [Bir access paketi Gizle](entitlement-management-access-package-edit.md#change-the-hidden-setting) |  | :heavy_check_mark: | :heavy_check_mark: |  |
-| [Bir erişim paketini Sil](entitlement-management-access-package-edit.md#delete) |  | :heavy_check_mark: | :heavy_check_mark: |  |
-| [Erişim isteği Onayla](entitlement-management-request-approve.md) |  |  |  | :heavy_check_mark: |
+| [Bir katalog oluşturucuya temsilci seçme](entitlement-management-delegate-catalog.md) | :heavy_check_mark: |  |  |  |
+| [Bağlı kuruluş ekleme](entitlement-management-organization.md) | :heavy_check_mark: |  |  |  |
+| [Yeni Katalog oluşturma](entitlement-management-catalog-create.md) | :heavy_check_mark: | :heavy_check_mark: |  |  |
+| [Kataloğa kaynak ekleme](entitlement-management-catalog-create.md#add-resources-to-a-catalog) | :heavy_check_mark: |  | :heavy_check_mark: |  |
+| [Katalog sahibi ekleme](entitlement-management-catalog-create.md#add-additional-catalog-owners) | :heavy_check_mark: |  | :heavy_check_mark: |  |
+| [Katalog düzenleme](entitlement-management-catalog-create.md#edit-a-catalog) | :heavy_check_mark: |  | :heavy_check_mark: |  |
+| [Katalog silme](entitlement-management-catalog-create.md#delete-a-catalog) | :heavy_check_mark: |  | :heavy_check_mark: |  |
+| [Erişim paketi yöneticisine temsilci seçme](entitlement-management-delegate-managers.md) | :heavy_check_mark: |  | :heavy_check_mark: |  |
+| [Erişim paketi yöneticisini kaldırma](entitlement-management-delegate-managers.md#remove-an-access-package-manager) | :heavy_check_mark: |  | :heavy_check_mark: |  |
+| [Bir katalogda yeni bir erişim paketi oluşturma](entitlement-management-access-package-create.md) | :heavy_check_mark: |  | :heavy_check_mark:  | :heavy_check_mark:  |
+| [Erişim paketindeki kaynak rollerini değiştirme](entitlement-management-access-package-resources.md) | :heavy_check_mark: |  | :heavy_check_mark: | :heavy_check_mark: |
+| [İlke oluşturma ve düzenleme](entitlement-management-access-package-request-policy.md) | :heavy_check_mark: |  | :heavy_check_mark: | :heavy_check_mark: |
+| [Bir kullanıcıyı doğrudan bir erişim paketine atama](entitlement-management-access-package-assignments.md#directly-assign-a-user) | :heavy_check_mark: |  | :heavy_check_mark: | :heavy_check_mark: |
+| [Erişim paketine kimin atanmasına sahip olduğunu görüntüleme](entitlement-management-access-package-assignments.md#view-who-has-an-assignment) | :heavy_check_mark: |  | :heavy_check_mark: | :heavy_check_mark: |
+| [Bir erişim paketinin isteklerini görüntüleme](entitlement-management-access-package-requests.md#view-requests) | :heavy_check_mark: |  | :heavy_check_mark: | :heavy_check_mark: |
+| [Bir isteğin teslim hatalarını görüntüleme](entitlement-management-troubleshoot.md#view-a-requests-delivery-errors) | :heavy_check_mark: |  | :heavy_check_mark: | :heavy_check_mark: |
+| [İsteği yeniden işleme](entitlement-management-troubleshoot.md#reprocess-a-request) | :heavy_check_mark: |  | :heavy_check_mark: | :heavy_check_mark: |
+| [Bekleyen bir isteği iptal etme](entitlement-management-troubleshoot.md#cancel-a-pending-request) | :heavy_check_mark: |  | :heavy_check_mark: | :heavy_check_mark: |
+| [Erişim paketini gizle](entitlement-management-access-package-edit.md#change-the-hidden-setting) | :heavy_check_mark: |  | :heavy_check_mark: | :heavy_check_mark: |
+| [Erişim paketini silme](entitlement-management-access-package-edit.md#delete-an-access-package) | :heavy_check_mark: |  | :heavy_check_mark: | :heavy_check_mark: |
 
-## <a name="required-roles-to-add-resources-to-a-catalog"></a>Gerekli rolleri için bir katalog kaynakları eklemek için
+## <a name="required-roles-to-add-resources-to-a-catalog"></a>Kataloğa kaynak eklemek için gerekli roller
 
-Genel yönetici ekleyebilir veya herhangi bir grubu (bulut oluşturduğunuz güvenlik gruplarını veya Office 365 grupları bulut oluşturulan), uygulama veya SharePoint Online sitesine bir katalogda kaldırabilirsiniz. Kullanıcı Yöneticisi ekleyebilir veya herhangi bir grup veya uygulama Kataloğu'nda kaldırabilirsiniz.
+Genel yönetici, bir katalogda herhangi bir grup (bulutta oluşturulan güvenlik grupları veya bulut tarafından oluşturulan Office 365 grupları), uygulama veya SharePoint Online sitesi ekleyebilir veya kaldırabilir. Bir Kullanıcı Yöneticisi, bir katalogda grup veya uygulama ekleyebilir veya kaldırabilir.
 
-Kullanıcı grupları, uygulamaları veya SharePoint Online siteleri bir Kataloğu'na eklemek için bir genel yönetici veya kullanıcı yönetici değil bir kullanıcı olmalıdır *hem* Azure AD dizini rol ve Katalog sahibi yetkilendirme gerekli Yönetim rolü. Aşağıdaki tabloda, kaynakların Kataloğu'na eklenmesi gereken rol birleşimlerini listelenmektedir. Kaynakların bir Kataloğu'ndan kaldırmak için aynı rolleri olması gerekir.
+Genel yönetici veya Kullanıcı Yöneticisi olmayan bir kullanıcı için bir kataloğa gruplar, uygulamalar veya SharePoint Online siteleri eklemek üzere, bu kullanıcının hem gerekli Azure AD dizin rolüne hem *de* Katalog sahibi yetkilendirme yönetimi rolüne sahip olması gerekir. Aşağıdaki tabloda, bir kataloğa kaynak eklemek için gereken rol birleşimleri listelenmektedir. Bir katalogdan kaynakları kaldırmak için aynı rollere sahip olmanız gerekir.
 
-| Azure AD dizin rolü | Hak Yönetimi rolü | Güvenlik grubuna ekleyebilirsiniz | Office 365 grup ekleyebilirsiniz | Uygulama eklemek için | SharePoint Online sitesine ekleyebilirsiniz |
+| Azure AD dizin rolü | Yetkilendirme Yönetimi rolü | Güvenlik grubu eklenebilir | Office 365 grubu eklenebilir | Uygulama eklenebilir | SharePoint Online sitesi eklenebilir |
 | --- | :---: | :---: | :---: | :---: | :---: |
-| [Genel yönetici](../users-groups-roles/directory-assign-admin-roles.md) | yok |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| [Kullanıcı Yöneticisi](../users-groups-roles/directory-assign-admin-roles.md) | yok |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |  |
+| [Genel yönetici](../users-groups-roles/directory-assign-admin-roles.md) | Yok |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| [Kullanıcı Yöneticisi](../users-groups-roles/directory-assign-admin-roles.md) | Yok |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |  |
 | [Intune Yöneticisi](../users-groups-roles/directory-assign-admin-roles.md) | Katalog sahibi | :heavy_check_mark: | :heavy_check_mark: |  |  |
 | [Exchange Yöneticisi](../users-groups-roles/directory-assign-admin-roles.md) | Katalog sahibi |  | :heavy_check_mark: |  |  |
 | [Takımlar Hizmet Yöneticisi](../users-groups-roles/directory-assign-admin-roles.md) | Katalog sahibi |  | :heavy_check_mark: |  |  |
 | [SharePoint Yöneticisi](../users-groups-roles/directory-assign-admin-roles.md) | Katalog sahibi |  | :heavy_check_mark: |  | :heavy_check_mark: |
 | [Uygulama Yöneticisi](../users-groups-roles/directory-assign-admin-roles.md) | Katalog sahibi |  |  | :heavy_check_mark: |  |
 | [Bulut uygulaması Yöneticisi](../users-groups-roles/directory-assign-admin-roles.md) | Katalog sahibi |  |  | :heavy_check_mark: |  |
-| Kullanıcı | Katalog sahibi | Yalnızca Grup sahibi | Yalnızca Grup sahibi | Yalnızca uygulama sahibi |  |
+| Kullanıcı | Katalog sahibi | Yalnızca Grup sahibi ise | Yalnızca Grup sahibi ise | Yalnızca uygulama sahibi ise |  |
 
-## <a name="add-a-catalog-creator"></a>Katalog Oluşturucu Ekle
-
-Katalog oluşturma temsilci seçmek istiyorsanız, katalog Oluşturucu rolüne kullanıcılar ekleyin.  Bireysel kullanıcılar ekleyebilirsiniz veya için kolaylık üyeleri kataloglar oluşturmak mümkün olan daha sonra bir grup ekleyebilirsiniz. Katalog Oluşturucu rolüne bir kullanıcı atamak için aşağıdaki adımları izleyin.
-
-**Önkoşul rolü:** Genel yönetici veya Kullanıcı Yöneticisi
-
-1. Azure portalında **Azure Active Directory** ve ardından **Kimlik Yönetimi**.
-
-1. Soldaki menüde içinde **hak yönetimi** bölümünde **ayarları**.
-
-1. **Düzenle**‘ye tıklayın.
-
-1. İçinde **temsilci yetkilendirme Yönetim** bölümünde **Kataloğu oluşturucular ekleme** kullanıcıları veya üyeleri için bu yetkilendirme yönetim rolü grupları seçin.
-
-1. **Seç**'e tıklayın.
-
-1. **Kaydet**’e tıklayın.
-
-## <a name="add-a-catalog-owner-or-an-access-package-manager"></a>Katalog sahibi veya bir erişim Paket Yöneticisi ekleme
-
-Bir katalog ya da erişim paketlerin katalogdaki yönetim temsilci seçmek istiyorsanız, Katalog sahibini veya erişim Paket Yöneticisi rolleri kullanıcılar ekleyin. Katalog kişi oluşturur, ilk katalog sahibi olur. Katalog sahibini veya erişim Paket Yöneticisi rolüne bir kullanıcı atamak için aşağıdaki adımları izleyin.
-
-**Önkoşul rolü:** Kullanıcı Yöneticisi veya sahibi Kataloğu
-
-1. Azure portalında **Azure Active Directory** ve ardından **Kimlik Yönetimi**.
-
-1. Sol menüde **katalogları** ve Yöneticiler için eklemek istediğiniz katalog açın.
-
-1. Sol menüde **roller ve yöneticiler**.
-
-1. Tıklayın **sahipler eklemeyi** veya **erişim paket yöneticilerini ekleme** bu rollerinin üyeleri seçin.
-
-1. Tıklayın **seçin** bu üyeleri eklemek için.
+Bir görev için en düşük ayrıcalıklı rolü öğrenmek için, [Azure Active Directory ' de yönetici görevine göre yönetici rollerine](../users-groups-roles/roles-delegate-by-task.md#entitlement-management)de başvurabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Onaylayan Ekle](entitlement-management-access-package-edit.md#policy-request)
-- [Katalog için kaynak ekleme](entitlement-management-catalog-create.md#add-resources-to-a-catalog)
+- [Katalog oluşturucuları için erişim yönetimini devretmek](entitlement-management-delegate-catalog.md)
+- [Kaynak kataloğu oluşturma ve yönetme](entitlement-management-catalog-create.md)

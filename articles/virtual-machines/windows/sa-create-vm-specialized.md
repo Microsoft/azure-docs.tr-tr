@@ -1,53 +1,52 @@
 ---
-title: Azure'da özel bir diskten VM oluşturma | Microsoft Docs
-description: Resource Manager dağıtım modelinde özel bir yönetilmeyen disk ekleyerek yeni bir VM oluşturun.
+title: Azure 'da özel bir diskten VM oluşturma
+description: Kaynak Yöneticisi dağıtım modelinde özelleştirilmiş bir yönetilmeyen disk ekleyerek yeni bir VM oluşturun.
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: 3b7d3cd5-e3d7-4041-a2a7-0290447458ea
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 05/23/2017
 ms.author: cynthn
 ROBOTS: NOINDEX
-ms.openlocfilehash: f2110a749c41f59b11a6d400faa2e42e751305fe
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d887ef2ef74bb433d6e8ae7f53cd0b77f5948303
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64693824"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74073343"
 ---
-# <a name="create-a-vm-from-a-specialized-vhd-in-a-storage-account"></a>Bir depolama hesabında özelleştirilmiş bir VHD'den VM oluşturma
+# <a name="create-a-vm-from-a-specialized-vhd-in-a-storage-account"></a>Depolama hesabındaki özelleştirilmiş bir VHD 'den VM oluşturma
 
-Özel bir yönetilmeyen disk Powershell kullanarak işletim sistemi diski ekleyerek yeni bir VM oluşturun. Özelleştirilmiş disk VHD kullanıcı hesaplarını, uygulamaları ve diğer Durum verilerini orijinal VM'yi korur mevcut bir VM'den bir kopyasıdır. 
+PowerShell kullanarak özel bir yönetilmeyen diski işletim sistemi diski olarak ekleyerek yeni bir VM oluşturun. Özel bir disk, mevcut bir VM 'den, özgün VM 'nizden Kullanıcı hesaplarını, uygulamaları ve diğer durum verilerini tutan bir kopyasıdır. 
 
 İki seçeneğiniz vardır:
 * [Bir VHD’yi karşıya yükleme](sa-create-vm-specialized.md#option-1-upload-a-specialized-vhd)
-* [Mevcut bir Azure VM'yi VHD'yi kopyalayın](sa-create-vm-specialized.md#option-2-copy-the-vhd-from-an-existing-azure-vm)
+* [Mevcut bir Azure VM 'nin VHD 'sini kopyalama](sa-create-vm-specialized.md#option-2-copy-the-vhd-from-an-existing-azure-vm)
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
 
-## <a name="option-1-upload-a-specialized-vhd"></a>1\. seçenek: Özelleştirilmiş bir VHD'yi karşıya yükleme
+## <a name="option-1-upload-a-specialized-vhd"></a>Seçenek 1: özelleştirilmiş bir VHD 'YI karşıya yükleme
 
-Hyper-V veya sanal makine başka bir buluttan dışarı gibi bir şirket içi sanallaştırma aracı ile oluşturulan özel bir VM VHD yükleyebilirsiniz.
+VHD 'yi Hyper-V gibi şirket içi bir sanallaştırma aracıyla oluşturulan özel bir VM 'den veya başka bir buluttan aktarılmış bir VM 'den karşıya yükleyebilirsiniz.
 
 ### <a name="prepare-the-vm"></a>VM’yi hazırlama
-Bir şirket içi VM veya başka bir buluttan dışarı aktarılan bir VHD kullanılarak oluşturulmuş özelleştirilmiş bir VHD'yi karşıya yükleyebilirsiniz. Özelleştirilmiş bir VHD'yi kullanıcı hesaplarını, uygulamaları ve orijinal VM'yi diğer Durum verilerini tutar. VHD olarak kullanmak istiyorsanız,-olan yeni bir VM oluşturmak için aşağıdaki adımları tamamlandığından emin olun. 
+Şirket içi bir VM veya başka bir buluttan aktarılmış bir VHD kullanılarak oluşturulmuş özel bir VHD 'YI karşıya yükleyebilirsiniz. Özelleştirilmiş bir VHD, özgün VM 'nizden Kullanıcı hesaplarını, uygulamaları ve diğer durum verilerini korur. Yeni bir VM oluşturmak için VHD 'YI kullanmak istiyorsanız, aşağıdaki adımların tamamlandığından emin olun. 
   
-  * [Windows Azure'a karşıya yüklenecek VHD'yi hazırlama](prepare-for-upload-vhd-image.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). **Sağlamadığı** Sysprep kullanarak VM'yi Genelleştirme.
-  * Herhangi bir konuk sanallaştırma araçları ve (yani, VMware araçları) VM'de yüklü aracıları kaldırın.
-  * VM, IP adresi ve DNS ayarlarını DHCP yoluyla çekmek için yapılandırılan emin olun. Bu, başladığında sunucunun sanal ağ içindeki bir IP adresi alacağını sağlar. 
+  * [Bir WINDOWS VHD 'Yi Azure 'a yüklemek Için hazırlayın](prepare-for-upload-vhd-image.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). Sysprep 'ı kullanarak VM 'yi **genelleştirmeyin** .
+  * VM 'de yüklü olan tüm konuk sanallaştırma araçlarını ve aracılarını (örneğin, VMware araçları) kaldırın.
+  * VM 'nin IP adresini ve DNS ayarlarını DHCP aracılığıyla çekmek üzere yapılandırıldığından emin olun. Bu, sunucu başlatıldığında sanal ağ içinde bir IP adresi elde edilmesini sağlar. 
 
 
-### <a name="get-the-storage-account"></a>Depolama hesabı edinin
-Karşıya yüklenen VM görüntüsü depolamak için Azure depolama hesabında ihtiyacınız var. Mevcut bir depolama hesabı kullanabilir veya yeni bir tane oluşturun. 
+### <a name="get-the-storage-account"></a>Depolama hesabını al
+Karşıya yüklenen VM görüntüsünü depolamak için Azure 'da bir depolama hesabı gerekir. Var olan bir depolama hesabı kullanabilir veya yeni bir tane oluşturabilirsiniz. 
 
 Kullanılabilir depolama hesaplarını göstermek için şunu yazın:
 
@@ -55,31 +54,31 @@ Kullanılabilir depolama hesaplarını göstermek için şunu yazın:
 Get-AzStorageAccount
 ```
 
-Karşıya yükleme için mevcut bir depolama hesabı kullanmak istiyorsanız, VM görüntü bölümü devam edin.
+Mevcut bir depolama hesabını kullanmak istiyorsanız, VM görüntüsünü karşıya yükleme bölümüne ilerleyin.
 
-Bir depolama hesabı oluşturmanız gerekiyorsa, aşağıdaki adımları izleyin:
+Bir depolama hesabı oluşturmanız gerekiyorsa, şu adımları izleyin:
 
-1. Burada depolama hesabının oluşturulması gereken kaynak grubunun adını ihtiyacınız vardır. Aboneliğinizdeki tüm kaynak gruplarını bulmak için şunu yazın:
+1. Depolama hesabının oluşturulması gereken kaynak grubunun adının olması gerekir. Aboneliğinizdeki tüm kaynak gruplarını bulmak için şunu yazın:
    
     ```powershell
     Get-AzResourceGroup
     ```
 
-    Adlı bir kaynak grubu oluşturmak için **myResourceGroup** içinde **Batı ABD** bölge, türü:
+    **Batı ABD** bölgesinde **myresourcegroup** adlı bir kaynak grubu oluşturmak için şunu yazın:
 
     ```powershell
     New-AzResourceGroup -Name myResourceGroup -Location "West US"
     ```
 
-2. Adlı bir depolama hesabı oluşturma **mystorageaccount** kullanarak bu kaynak grubundaki [yeni AzStorageAccount](https://docs.microsoft.com/powershell/module/az.storage/new-azstorageaccount) cmdlet:
+2. [New-AzStorageAccount](https://docs.microsoft.com/powershell/module/az.storage/new-azstorageaccount) cmdlet 'ini kullanarak bu kaynak grubunda **mystorageaccount** adlı bir depolama hesabı oluşturun:
    
     ```powershell
     New-AzStorageAccount -ResourceGroupName myResourceGroup -Name mystorageaccount -Location "West US" `
         -SkuName "Standard_LRS" -Kind "Storage"
     ```
    
-### <a name="upload-the-vhd-to-your-storage-account"></a>VHD, depolama hesabınıza yükleme
-Kullanım [Ekle AzVhd](https://docs.microsoft.com/powershell/module/az.compute/add-azvhd) görüntüyü depolama hesabınızdaki bir kapsayıcıya yüklemek için cmdlet'i. Bu örnek dosyayı yükler **myVHD.vhd** gelen `"C:\Users\Public\Documents\Virtual hard disks\"` adlı bir depolama hesabına **mystorageaccount** içinde **myResourceGroup** kaynak grubu. Dosya adlı bir kapsayıcının içine yerleştirilecek **mycontainer** ve yeni dosya adı **myUploadedVHD.vhd**.
+### <a name="upload-the-vhd-to-your-storage-account"></a>VHD 'YI depolama hesabınıza yükleyin
+Görüntüyü Depolama hesabınızdaki bir kapsayıcıya yüklemek için [Add-AzVhd](https://docs.microsoft.com/powershell/module/az.compute/add-azvhd) cmdlet 'ini kullanın. Bu örnekte, **Myvhd. vhd** dosyasını, **myresourcegroup** kaynak grubundaki **mystorageaccount** adlı bir depolama hesabına `"C:\Users\Public\Documents\Virtual hard disks\"` yükler. Dosya **myContainer** adlı kapsayıcıya yerleştirilecek ve yeni dosya adı **Myuploadedvhd. vhd**olacaktır.
 
 ```powershell
 $rgName = "myResourceGroup"
@@ -89,7 +88,7 @@ Add-AzVhd -ResourceGroupName $rgName -Destination $urlOfUploadedImageVhd `
 ```
 
 
-Başarılı olursa, şuna benzer bir yanıt alın:
+Başarılı olursa şuna benzer bir yanıt alırsınız:
 
 ```powershell
 MD5 hash is being calculated for the file C:\Users\Public\Documents\Virtual hard disks\myVHD.vhd.
@@ -103,59 +102,59 @@ LocalFilePath           DestinationUri
 C:\Users\Public\Doc...  https://mystorageaccount.blob.core.windows.net/mycontainer/myUploadedVHD.vhd
 ```
 
-Ağ bağlantınızı ve VHD dosyasının boyutuna bağlı olarak, bu komutun tamamlanması biraz sürebilir.
+Ağ bağlantınıza ve VHD dosyanızın boyutuna bağlı olarak, bu komutun tamamlanması biraz zaman alabilir.
 
 
-## <a name="option-2-copy-the-vhd-from-an-existing-azure-vm"></a>2\. seçenek: Mevcut bir Azure VM'den VHD'yi kopyalayın
+## <a name="option-2-copy-the-vhd-from-an-existing-azure-vm"></a>2\. seçenek: VHD 'yi mevcut bir Azure VM 'den kopyalama
 
-Yeni ve yinelenen bir VM oluşturulurken kullanılacak başka bir depolama hesabına VHD kopyalayabilirsiniz.
+Yeni, yinelenen bir VM oluştururken kullanmak üzere bir VHD 'yi başka bir depolama hesabına kopyalayabilirsiniz.
 
 ### <a name="before-you-begin"></a>Başlamadan önce
-Emin olun:
+Şunları yaptığınızdan emin olun:
 
-* Hakkında bilgilere sahip **kaynak ve hedef depolama hesapları**. Kaynak VM için depolama hesabı ve kapsayıcı adları olması gerekir. Genellikle, kapsayıcı adı olacaktır **VHD'ler**. Bir hedef depolama hesabının olması gerekir. Zaten yoksa, her iki portal kullanarak bir tane oluşturabilirsiniz (**tüm hizmetleri** > depolama hesapları > Ekle) veya bu adı kullanıyor [yeni AzStorageAccount](https://docs.microsoft.com/powershell/module/az.storage/new-azstorageaccount) cmdlet'i. 
-* İndirdiğinizi ve yüklediğinizi [AzCopy aracı](../../storage/common/storage-use-azcopy.md). 
+* **Kaynak ve hedef depolama hesapları**hakkında bilgi sahibi. Kaynak VM için, depolama hesabı ve kapsayıcı adlarına sahip olmanız gerekir. Genellikle kapsayıcı adı **VHD**'ler olur. Ayrıca bir hedef depolama hesabınız olması gerekir. Henüz bir hesabınız yoksa, portalı (**tüm hizmetler** > depolama hesapları > Ekle) veya [New-azstorageaccount](https://docs.microsoft.com/powershell/module/az.storage/new-azstorageaccount) cmdlet 'ini kullanarak bir tane oluşturabilirsiniz. 
+* [AzCopy aracını](../../storage/common/storage-use-azcopy.md)indirmiş ve yükledi. 
 
-### <a name="deallocate-the-vm"></a>VM'yi serbest bırakın
-Kopyalanacak VHD boşaltır VM'yi serbest bırakın. 
+### <a name="deallocate-the-vm"></a>VM 'yi serbest bırakma
+Kopyalanacak VHD 'yi serbest bırakma VM 'yi serbest bırakın. 
 
-* **Portal**: Tıklayın **sanal makineler** > **myVM** > Durdur
-* **PowerShell**: Kullanım [Stop-AzVM](https://docs.microsoft.com/powershell/module/az.compute/stop-azvm) durdurmak için (serbest bırakın) adlı bir sanal makine **myVM** kaynak grubundaki **myResourceGroup**.
+* **Portal**: **sanal makineler** > **myvm** > Durdur ' a tıklayın
+* **PowerShell**: **myresourcegroup**kaynak grubundaki **myvm** adlı VM 'yi durdurmak (serbest bırakmak) için [stop-azvm](https://docs.microsoft.com/powershell/module/az.compute/stop-azvm) kullanın.
 
 ```powershell
 Stop-AzVM -ResourceGroupName myResourceGroup -Name myVM
 ```
 
-**Durumu** Azure VM için portalı değişiklikleri **durduruldu** için **durduruldu (serbest bırakıldı)** .
+Azure portal sanal makinenin **durumu** durduruldu durumundan **durduruldu (serbest bırakıldı)** **olarak değişir** .
 
-### <a name="get-the-storage-account-urls"></a>Depolama hesabı URL'lerini alma
-Kaynak ve hedef depolama hesapları URL'lerini ihtiyacınız vardır. Aşağıdaki gibi URL'leri görünür: `https://<storageaccount>.blob.core.windows.net/<containerName>/`. Depolama hesabı ve kapsayıcı adını biliyorsanız, yalnızca URL'nizi oluşturmak için köşeli ayraçlar arasındaki bilgileri değiştirebilirsiniz. 
+### <a name="get-the-storage-account-urls"></a>Depolama hesabı URL 'Lerini al
+Kaynak ve hedef depolama hesaplarının URL 'Lerine ihtiyacınız vardır. URL 'Ler şöyle görünür: `https://<storageaccount>.blob.core.windows.net/<containerName>/`. Depolama hesabı ve kapsayıcı adını zaten biliyorsanız, URL 'nizi oluşturmak için köşeli ayraçları arasındaki bilgileri değiştirebilirsiniz. 
 
-URL almak için Azure portal veya Azure Powershell kullanabilirsiniz:
+URL 'YI almak için Azure portal veya Azure PowerShell kullanabilirsiniz:
 
-* **Portal**: Tıklayın **>** için **tüm hizmetleri** > **depolama hesapları** > *depolama hesabı*  >  **Blobları** ve kaynak VHD dosyanız büyük olasılıkla kullanımda **VHD'ler** kapsayıcı. Tıklayın **özellikleri** etiketli metni kopyalayın ve kapsayıcı **URL**. Kapsayıcılar kaynak ve hedef URL'leri gerekir. 
-* **PowerShell**: Kullanım [Get-AzVM](https://docs.microsoft.com/powershell/module/az.compute/get-azvm) adlı VM için bilgi almak için **myVM** kaynak grubundaki **myResourceGroup**. Sonuçlarda konum **depolama profili** bölümü **Vhd Uri'si**. URI'ın ilk bölümü URL'dir kapsayıcıya ve son bölümü VM için işletim sistemi VHD'si adıdır.
+* **Portal**: **tüm hizmetler** > **depolama hesapları** > *depolama hesabı* > **Blobları** ve kaynak VHD dosyanız büyük olasılıkla **VHD** kapsayıcısında **>** tıklayın. Kapsayıcının **Özellikler** ' e tıklayın ve **URL**etiketli metni kopyalayın. Kaynak ve hedef kapsayıcıların URL 'Lerine ihtiyacınız olacaktır. 
+* **PowerShell**: **myresourcegroup**kaynak GRUBUNDAKI **myvm** adlı VM 'Nin bilgilerini almak için [Get-azvm](https://docs.microsoft.com/powershell/module/az.compute/get-azvm) ' i kullanın. Sonuçlarda, **VHD URI 'si**için **depolama profili** bölümüne bakın. URI 'nin ilk bölümü kapsayıcının URL 'sidir ve son parça VM 'nin işletim sistemi VHD adıdır.
 
 ```powershell
 Get-AzVM -ResourceGroupName "myResourceGroup" -Name "myVM"
 ``` 
 
-## <a name="get-the-storage-access-keys"></a>Depolama erişim anahtarlarını alma
-Erişim anahtarları, depolama hesapları kaynak ve hedef için bulun. Erişim anahtarları hakkında daha fazla bilgi için bkz. [Azure depolama hesapları hakkında](../../storage/common/storage-create-storage-account.md).
+## <a name="get-the-storage-access-keys"></a>Depolama erişim anahtarlarını al
+Kaynak ve hedef depolama hesapları için erişim anahtarlarını bulun. Erişim anahtarları hakkında daha fazla bilgi için bkz. [Azure depolama hesapları hakkında](../../storage/common/storage-create-storage-account.md).
 
-* **Portal**: Tıklayın **tüm hizmetleri** > **depolama hesapları** > *depolama hesabı* > **erişim anahtarları**. Olarak etiketlenen tuşunu kopyalamak **key1**.
-* **PowerShell**: Kullanım [Get-AzStorageAccountKey](https://docs.microsoft.com/powershell/module/az.storage/get-azstorageaccountkey) depolama hesabı için depolama anahtarı almak için **mystorageaccount** kaynak grubundaki **myResourceGroup**. Etiketlenen tuşunu kopyalamak **key1**.
+* **Portal**: **tüm hizmetler** > depolama **hesapları** > *depolama hesabı* > **erişim anahtarları**' na tıklayın. **KEY1**olarak etiketlenen anahtarı kopyalayın.
+* **PowerShell**: **myresourcegroup**kaynak grubundaki depolama hesabı **Mystorageaccount** depolama anahtarını almak Için [Get-azstorageaccountkey](https://docs.microsoft.com/powershell/module/az.storage/get-azstorageaccountkey) komutunu kullanın. **KEY1**etiketli anahtarı kopyalayın.
 
 ```powershell
 Get-AzStorageAccountKey -Name mystorageaccount -ResourceGroupName myResourceGroup
 ```
 
-### <a name="copy-the-vhd"></a>VHD'yi kopyalayın
-AzCopy kullanarak depolama hesapları arasında dosya kopyalayabilirsiniz. Belirtilen kapsayıcı mevcut değilse hedef kapsayıcı için bunu sizin için oluşturulur. 
+### <a name="copy-the-vhd"></a>VHD 'YI kopyalama
+AzCopy kullanarak, depolama hesapları arasında dosya kopyalayabilirsiniz. Hedef kapsayıcı için, belirtilen kapsayıcı yoksa, sizin için oluşturulur. 
 
-AzCopy kullanmak için yerel makinenizde bir komut istemi açın ve AzCopy yüklü olduğu klasöre gidin. Benzer şekilde *C:\Program Files (x86) \Microsoft SDKs\Azure\AzCopy*. 
+AzCopy kullanmak için yerel makinenizde bir komut istemi açın ve AzCopy 'in yüklü olduğu klasöre gidin. Bu, *C:\Program Files (x86) \Microsoft SDKs\Azure\AzCopy*ile benzerdir. 
 
-Bir kapsayıcı içindeki dosyaların tümünü kopyalamak için kullandığınız **/S** geçin. Bu işletim sistemi VHD'si ile tüm veri disklerinin aynı kapsayıcıda olmaları durumunda kopyalamak için kullanılabilir. Bu örnek kapsayıcıda tüm dosyaları kopyalamak nasıl gösterir **mysourcecontainer** depolama hesabındaki **mysourcestorageaccount** kapsayıcıya **mydestinationcontainer**içinde **mydestinationstorageaccount** depolama hesabı. Depolama hesabı ve kapsayıcı adları kendi değerlerinizle değiştirin. Değiştirin `<sourceStorageAccountKey1>` ve `<destinationStorageAccountKey1>` kendi anahtarlarınızı ile.
+Bir kapsayıcı içindeki tüm dosyaları kopyalamak için **/s** anahtarını kullanın. Bu, işletim sistemi VHD 'sini ve aynı kapsayıcıda olmaları durumunda tüm veri disklerini kopyalamak için kullanılabilir. Bu örnek, **mysourcestorampaaccount** depolama hesabındaki **mysourcecontainer** kapsayıcısındaki tüm dosyaların **mydestinationstorageaccount** depolama hesabındaki Container **mydestinationcontainer** öğesine nasıl kopyalanacağını gösterir . Depolama hesaplarının ve kapsayıcıların adlarını kendi ile değiştirin. `<sourceStorageAccountKey1>` ve `<destinationStorageAccountKey1>` kendi anahtarlarınız ile değiştirin.
 
 ```
 AzCopy /Source:https://mysourcestorageaccount.blob.core.windows.net/mysourcecontainer `
@@ -163,7 +162,7 @@ AzCopy /Source:https://mysourcestorageaccount.blob.core.windows.net/mysourcecont
     /SourceKey:<sourceStorageAccountKey1> /DestKey:<destinationStorageAccountKey1> /S
 ```
 
-Yalnızca bir kapsayıcıdaki belirli bir VHD'yi sahip birden çok dosya kopyalamak isterseniz, /Pattern anahtarını kullanarak dosya adını belirtebilirsiniz. Bu örnekte, yalnızca adlı dosyayı **myFileName.vhd** kopyalanır.
+Yalnızca birden çok dosya içeren bir kapsayıcıda belirli bir VHD 'yi kopyalamak istiyorsanız,/model anahtarını kullanarak da dosya adını belirtebilirsiniz. Bu örnekte, yalnızca **Myfilename. vhd** adlı dosya kopyalanacaktır.
 
 ```
 AzCopy /Source:https://mysourcestorageaccount.blob.core.windows.net/mysourcecontainer `
@@ -173,7 +172,7 @@ AzCopy /Source:https://mysourcestorageaccount.blob.core.windows.net/mysourcecont
 ```
 
 
-Tamamlandığında, şuna benzer bir ileti alırsınız:
+İşlem tamamlandığında, şöyle bir ileti alırsınız:
 
 ```
 Finished 2 of total 2 file(s).
@@ -187,24 +186,24 @@ Elapsed time:            00.00:13:07
 ```
 
 ### <a name="troubleshooting"></a>Sorun giderme
-* AZCopy, emin olun "Server", isteğin kimliğini doğrulayamadı hata görürseniz kullandığınızda yetkilendirme üst bilgisi değeri doğru imza dahil olmak üzere oluşturulur. Anahtar 2 ya da ikincil depolama anahtarını kullanarak, birincil ya da 1. depolama anahtarı kullanmayı deneyin.
+* AZCopy kullandığınızda, "sunucu istek kimlik doğrulaması başarısız oldu" hatasını görürseniz, yetkilendirme üst bilgisinin değerinin imza dahil doğru biçimlendirildiğinden emin olun. Anahtar 2 veya ikincil depolama anahtarı kullanıyorsanız, birincil veya 1. depolama anahtarını kullanmayı deneyin.
 
 ## <a name="create-the-new-vm"></a>Yeni VM oluşturma 
 
-Kullanarak yeni sanal makine tarafından kullanılan ağ ve VM kaynakları oluşturmanız gerekir.
+Yeni VM tarafından kullanılmak üzere ağ ve diğer VM kaynakları oluşturmanız gerekir.
 
-### <a name="create-the-subnet-and-vnet"></a>VNet ve alt ağ oluşturma
+### <a name="create-the-subnet-and-vnet"></a>Alt ağ ve vNet oluşturma
 
-Sanal ağ oluşturup alt [sanal ağ](../../virtual-network/virtual-networks-overview.md).
+[Sanal ağın](../../virtual-network/virtual-networks-overview.md)VNET ve alt ağını oluşturun.
 
-1. Alt ağ oluşturun. Bu örnek adlı bir alt ağ oluşturur **mySubNet**, kaynak grubundaki **myResourceGroup**ve alt ağ adres ön eki ayarlar **10.0.0.0/24**.
+1. Alt ağı oluşturun. Bu örnek **Myresourcegroup**kaynak grubu Içinde **mysubnet**adlı bir alt ağ oluşturur ve alt ağ adres önekini **10.0.0.0/24**olarak ayarlar.
    
     ```powershell
     $rgName = "myResourceGroup"
     $subnetName = "mySubNet"
     $singleSubnet = New-AzVirtualNetworkSubnetConfig -Name $subnetName -AddressPrefix 10.0.0.0/24
     ```
-2. Sanal ağ oluşturun. Bu örnek, sanal ağ adı olacak şekilde ayarlar **myVnetName**, konuma **Batı ABD**ve sanal ağa ait adres ön ekini **10.0.0.0/16**. 
+2. VNet oluşturun. Bu örnek, sanal ağ adını **Myvağadı**, **Batı ABD**konumu ve sanal ağın adres önekini **10.0.0.0/16**olarak ayarlar. 
    
     ```powershell
     $location = "West US"
@@ -212,10 +211,10 @@ Sanal ağ oluşturup alt [sanal ağ](../../virtual-network/virtual-networks-over
     $vnet = New-AzVirtualNetwork -Name $vnetName -ResourceGroupName $rgName -Location $location `
         -AddressPrefix 10.0.0.0/16 -Subnet $singleSubnet
     ```    
-   ### <a name="create-the-network-security-group-and-an-rdp-rule"></a>Ağ güvenlik grubu ve bir RDP kuralı oluşturma
-   Sanal makinenizde RDP kullanarak oturum açmak 3389 numaralı bağlantı noktasında RDP erişimine izin veren bir güvenlik kuralı olması gerekir. Mevcut bir VHD için yeni bir VM oluşturulduğundan, VM oluşturulduktan sonra özel VM kaynak sanal makineden RDP kullanarak oturum açmasına izin olan mevcut bir hesap kullanabilirsiniz.
-   Bu ağ arabirimi ile ilişkilendirilecektir oluşturmadan önce tamamlanması gerekir.  
-   NSG adı Bu örnekte ayarlar **myNsg** ve RDP kuralının adını **myRdpRule**.
+   ### <a name="create-the-network-security-group-and-an-rdp-rule"></a>Ağ güvenlik grubu ve RDP kuralı oluşturma
+   RDP kullanarak sanal makinenizde oturum açabiliyor olması için 3389 numaralı bağlantı noktasında RDP erişimine izin veren bir güvenlik kuralına sahip olmanız gerekir. Yeni VM için VHD mevcut bir özelleştirilmiş VM 'den oluşturulduğundan, VM oluşturulduktan sonra, RDP kullanarak oturum açma izni olan kaynak sanal makineden mevcut bir hesabı kullanabilirsiniz.
+   Bu işlem, ile ilişkilendirilecek ağ arabirimi oluşturulmadan önce tamamlanmalıdır.  
+   Bu örnek NSG adını **Mynsg** olarak ve RDP kuralı adını **Myrdprule**olarak ayarlar.
 
 ```powershell
 $nsgName = "myNsg"
@@ -229,19 +228,19 @@ $nsg = New-AzNetworkSecurityGroup -ResourceGroupName $rgName -Location $location
     
 ```
 
-Uç noktaları ve NSG kuralları hakkında daha fazla bilgi için bkz: [PowerShell kullanarak Azure'da bağlantı noktalarını VM'ye açma](nsg-quickstart-powershell.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+Uç noktalar ve NSG kuralları hakkında daha fazla bilgi için bkz. [PowerShell kullanarak Azure 'DA VM 'ye bağlantı noktalarını açma](nsg-quickstart-powershell.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
-### <a name="create-a-public-ip-address-and-nic"></a>Bir genel IP adresi ve ağ Arabirimi oluşturma
+### <a name="create-a-public-ip-address-and-nic"></a>Genel IP adresi ve NIC oluşturma
 Sanal makinenin sanal ağda iletişimini etkinleştirmeniz için, [genel IP adresi](../../virtual-network/virtual-network-ip-addresses-overview-arm.md) ve ağ arabirimi gereklidir.
 
-1. Genel IP oluşturun. Bu örnekte, genel IP adresi adı kümesine **myIP**.
+1. Genel IP 'yi oluşturun. Bu örnekte, genel IP adresi adı **MYIP**olarak ayarlanır.
    
     ```powershell
     $ipName = "myIP"
     $pip = New-AzPublicIpAddress -Name $ipName -ResourceGroupName $rgName -Location $location `
         -AllocationMethod Dynamic
     ```       
-2. NIC oluşturma Bu örnekte, NIC adı kümesine **myNicName**. Bu adım Ayrıca bu NIC ile daha önce oluşturduğunuz ağ güvenlik grubu ilişkilendirir.
+2. NIC 'yi oluşturun. Bu örnekte, NIC adı **Mynicname**olarak ayarlanır. Bu adım Ayrıca, daha önce oluşturulan ağ güvenlik grubunu bu NIC ile ilişkilendirir.
    
     ```powershell
     $nicName = "myNicName"
@@ -249,15 +248,15 @@ Sanal makinenin sanal ağda iletişimini etkinleştirmeniz için, [genel IP adre
     -Location $location -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id -NetworkSecurityGroupId $nsg.Id
     ```
 
-### <a name="set-the-vm-name-and-size"></a>VM adını ve boyutunu ayarlayın
+### <a name="set-the-vm-name-and-size"></a>VM adı ve boyutunu ayarla
 
-Bu örnekte, "myVM" VM adına ve "Standard_a2 =" için VM boyutunu ayarlar.
+Bu örnek, VM adını "myVM" ve VM boyutu olarak "Standard_A2" olarak ayarlar.
 ```powershell
 $vmName = "myVM"
 $vmConfig = New-AzVMConfig -VMName $vmName -VMSize "Standard_A2"
 ```
 
-### <a name="add-the-nic"></a>NIC ekleme
+### <a name="add-the-nic"></a>NIC 'yi ekleme
     
 ```powershell
 $vm = Add-AzVMNetworkInterface -VM $vmConfig -Id $nic.Id
@@ -266,31 +265,31 @@ $vm = Add-AzVMNetworkInterface -VM $vmConfig -Id $nic.Id
     
 ### <a name="configure-the-os-disk"></a>İşletim sistemi diskini yapılandırma
 
-1. URI karşıya veya kopyalanan VHD için ayarlayın. Bu örnekte, VHD dosyasının adlı **myOsDisk.vhd** adlı bir depolama hesabında tutulur **myStorageAccount** adlı bir kapsayıcı içinde **myContainer**.
+1. Karşıya yüklediğiniz veya kopyaladığınız VHD için URI 'yi ayarlayın. Bu örnekte, **Myosdisk. vhd** adlı VHD dosyası **myContainer**adlı kapsayıcıda **mystorageaccount** adlı bir depolama hesabında tutulur.
 
     ```powershell
     $osDiskUri = "https://myStorageAccount.blob.core.windows.net/myContainer/myOsDisk.vhd"
     ```
-2. İşletim sistemi diskini ekleyin. İşletim sistemi diski oluşturulduğunda, bu örnekte, "osDisk" terimi işletim sistemi disk adı oluşturmak için VM adına eklenir. Bu örnek, ayrıca bu Windows tabanlı bir VHD VM işletim sistemi diski olarak eklenmesi belirtir.
+2. İşletim sistemi diskini ekleyin. Bu örnekte, işletim sistemi diski oluşturulduğunda "osDisk" terimi, işletim sistemi diski adını oluşturmak için VM adına eklenir. Bu örnek ayrıca, Windows tabanlı VHD 'nin VM 'ye işletim sistemi diski olarak eklenmesi gerektiğini belirtir.
     
     ```powershell
     $osDiskName = $vmName + "osDisk"
     $vm = Set-AzVMOSDisk -VM $vm -Name $osDiskName -VhdUri $osDiskUri -CreateOption attach -Windows
     ```
 
-İsteğe bağlı: VM'ye eklenmesine gerek veri diskleri varsa, veri VHD'leri URL'leri ve uygun mantıksal birim numarası (Lun) kullanarak veri diski ekleyin.
+İsteğe bağlı: VM 'ye bağlanması gereken veri disklerinizi varsa veri VHD 'Leri ve uygun mantıksal birim numarası (LUN) kullanarak veri disklerini ekleyin.
 
 ```powershell
 $dataDiskName = $vmName + "dataDisk"
 $vm = Add-AzVMDataDisk -VM $vm -Name $dataDiskName -VhdUri $dataDiskUri -Lun 1 -CreateOption attach
 ```
 
-Bir depolama hesabını kullanırken, veri ve işletim sistemi disk URL'leri aşağıdaki gibi görünmelidir: `https://StorageAccountName.blob.core.windows.net/BlobContainerName/DiskName.vhd`. Bunu portalı hedef depolama kapsayıcısına gözatma işletim sistemi veya veri kopyalanan VHD tıklayarak ve sonra URL'yi içeriğini kopyalamayı bulabilirsiniz.
+Bir depolama hesabı kullanırken, veri ve işletim sistemi disk URL 'Leri şuna benzer: `https://StorageAccountName.blob.core.windows.net/BlobContainerName/DiskName.vhd`. Bunu portalda, hedef depolama kapsayıcısına giderek, kopyalanan işletim sistemine veya veri VHD 'sine tıklayarak ve ardından URL 'nin içeriğini kopyalayarak bulabilirsiniz.
 
 
-### <a name="complete-the-vm"></a>VM tamamlayın 
+### <a name="complete-the-vm"></a>VM 'yi doldurun 
 
-Yeni oluşturduğumuz yapılandırmaları kullanarak VM oluşturun.
+Yeni oluşturduğumuz konfigürasyonları kullanarak VM 'yi oluşturun.
 
 ```powershell
 #Create the new VM
@@ -306,8 +305,8 @@ RequestId IsSuccessStatusCode StatusCode ReasonPhrase
 
 ```
 
-### <a name="verify-that-the-vm-was-created"></a>Sanal Makinenin oluşturulduğunu doğrulayın.
-Yeni oluşturulan VM ya da görmeniz gerekir, [Azure portalında](https://portal.azure.com)altında **tüm hizmetleri** > **sanal makineler**, veya aşağıdaki PowerShell kullanarak komutlar:
+### <a name="verify-that-the-vm-was-created"></a>VM 'nin oluşturulduğunu doğrulama
+Yeni oluşturulan VM 'yi [Azure Portal](https://portal.azure.com), **tüm hizmetler** > **sanal makineler**altında ya da aşağıdaki PowerShell komutlarını kullanarak görmeniz gerekir:
 
 ```powershell
 $vmList = Get-AzVM -ResourceGroupName $rgName
@@ -315,5 +314,5 @@ $vmList.Name
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Yeni sanal makinenize oturum açın. Daha fazla bilgi için [bağlanma ve bir Azure Windows çalıştıran sanal makine için oturum açma nasıl](connect-logon.md).
+Yeni sanal makinenizde oturum açın. Daha fazla bilgi için bkz. [Windows çalıştıran bir Azure sanal makinesine bağlanma ve oturum](connect-logon.md)açma.
 

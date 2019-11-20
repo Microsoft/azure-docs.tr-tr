@@ -1,6 +1,6 @@
 ---
-title: Görüntüleme ve bir sanal makinenin Azure Resource Manager şablonu kullanma | Microsoft Docs
-description: Azure Resource Manager şablonu bir sanal makineden diğer sanal makineler oluşturmak için kullanmayı öğrenin
+title: Bir sanal makinenin Azure Resource Manager şablonunu görüntüleyin ve kullanın | Microsoft Docs
+description: Diğer VM 'Ler oluşturmak için bir sanal makineden Azure Resource Manager şablonunu nasıl kullanacağınızı öğrenin
 services: devtest-lab,virtual-machines,lab-services
 documentationcenter: na
 author: spelluru
@@ -12,59 +12,63 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 03/18/2019
+ms.date: 07/12/2019
 ms.author: spelluru
-ms.openlocfilehash: 533770d98b146dea01e91e1249115c4b5c074b3c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c14abf3acce0084507a03f3d34fdd59566d88c28
+ms.sourcegitcommit: 470041c681719df2d4ee9b81c9be6104befffcea
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62101582"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67854285"
 ---
-# <a name="create-virtual-machines-using-an-azure-resource-manager-template"></a>Bir Azure Resource Manager şablonu kullanarak sanal makineleri oluşturma 
+# <a name="create-virtual-machines-using-an-azure-resource-manager-template"></a>Azure Resource Manager şablonu kullanarak sanal makineler oluşturma 
 
-Oluştururken bir sanal makine (VM) DevTest labs'deki [Azure portalında](https://go.microsoft.com/fwlink/p/?LinkID=525040), sanal Makineyi kaydetmeden önce Azure Resource Manager şablonu görüntüleyebilirsiniz. Şablon, ardından aynı ayarlara sahip VM'ler daha fazla Laboratuvar oluşturmak için temel olarak kullanılabilir.
+DevTest Labs 'de [Azure Portal](https://go.microsoft.com/fwlink/p/?LinkID=525040)aracılığıyla bir sanal makıne (VM) oluştururken, VM 'yi kaydetmeden önce Azure Resource Manager şablonunu görüntüleyebilirsiniz. Şablon daha sonra aynı ayarlarla daha fazla laboratuvar VM 'Leri oluşturmak için temel olarak kullanılabilir.
 
-Bu makalede tek VM Resource Manager şablonları ile çoklu VM açıklar ve görüntüleme ve bir VM oluşturulurken bir şablon kaydetme işlemi gösterilmektedir.
+Bu makalede çoklu VM ve tek VM Kaynak Yöneticisi şablonları açıklanmakta ve VM oluştururken bir şablonu nasıl görüntüleyebileceğiniz ve kaydedeceğiniz gösterilmektedir.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-## <a name="multi-vm-vs-single-vm-resource-manager-templates"></a>Tek VM Resource Manager şablonları ile çoklu VM
-Resource Manager şablonunu kullanarak DevTest Labs'de sanal makineler oluşturmak için iki yolu vardır: Microsoft.DevTestLab/labs/virtualmachines kaynak sağlamanız veya Microsoft.Compute/virtualmachines kaynak sağlayın. Her farklı senaryolarda kullanılır ve farklı izinleri gerektirir.
+## <a name="multi-vm-vs-single-vm-resource-manager-templates"></a>Çoklu VM ile tek VM Kaynak Yöneticisi şablonları
+Kaynak Yöneticisi şablonu kullanarak DevTest Labs 'de sanal makine oluşturmanın iki yolu vardır: Microsoft. DevTestLab/Labs/virtualmachines kaynağını sağlama veya Microsoft. COMPUTE/virtualmachines kaynağını sağlama. Her biri farklı senaryolarda kullanılır ve farklı izinler gerektirir.
 
-- ("Kaynak" özelliğinde şablonda bildirilen gibi) bir Microsoft.DevTestLab/labs/virtualmachines kaynak türünü kullanan resource Manager şablonları, tek tek Laboratuvar VM'ler sağlayabilirsiniz. Her VM ardından DevTest Labs sanal makineleri tek bir öğe olarak görünür:
+- Microsoft. DevTestLab/Labs/virtualmachines kaynak türü kullanan Kaynak Yöneticisi şablonlar (şablondaki "kaynak" özelliğinde bildirildiği gibi), tek tek Laboratuvar VM 'Leri sağlayabilir. Ardından her VM, DevTest Labs sanal makineler listesinde tek bir öğe olarak görünür:
 
-   ![DevTest Labs sanal makineleri listedeki tek öğe olarak VM'lerin listesini](./media/devtest-lab-use-arm-template/devtestlab-lab-vm-single-item.png)
+   ![DevTest Labs sanal makineler listesinde tek öğe olarak VM 'lerin listesi](./media/devtest-lab-use-arm-template/devtestlab-lab-vm-single-item.png)
 
-   Bu tür bir Resource Manager şablonu Azure PowerShell komutu aracılığıyla sağlanabilir **yeni AzResourceGroupDeployment** veya Azure CLI komutu aracılığıyla **az grubu dağıtım oluşturma**. DevTest Labs kullanıcı rolüyle ilişkilendirilen kullanıcılar dağıtım gerçekleştiremezler yönetici izinleri gerektirir. 
+   Bu tür Kaynak Yöneticisi şablonu, **New-AzResourceGroupDeployment** Azure PowerShell komutu ya da **az Group Deployment Create**Azure CLI komutu aracılığıyla sağlanabilir. Yönetici izinleri gerektirir, bu nedenle bir DevTest Labs kullanıcı rolüyle atanan kullanıcılar dağıtımı gerçekleştiremez. 
 
-- Microsoft.Compute/virtualmachines kaynak türünü kullanan resource Manager şablonları, DevTest Labs sanal makineler listesi tek bir ortamda olarak birden çok VM sağlayabilirsiniz:
+- Microsoft. COMPUTE/virtualmachines kaynak türü kullanan Kaynak Yöneticisi şablonlar, DevTest Labs sanal makineler listesinde tek bir ortam olarak birden çok VM sağlayabilir:
 
-   ![DevTest Labs sanal makineleri listedeki tek öğe olarak VM'lerin listesini](./media/devtest-lab-use-arm-template/devtestlab-lab-vm-single-environment.png)
+   ![DevTest Labs sanal makineler listesinde tek öğe olarak VM 'lerin listesi](./media/devtest-lab-use-arm-template/devtestlab-lab-vm-single-environment.png)
 
-   Aynı ortamda VM'ler birlikte yönetilebilir ve aynı yaşam döngüsünü. DevTest Labs kullanıcı rolüyle ilişkilendirilen kullanıcılar yönetici tarafından Laboratuvar bu şekilde yapılandırılmış olduğu sürece bu şablonları kullanarak ortamlar oluşturabilirsiniz.
+   Aynı ortamdaki VM 'Ler birlikte yönetilebilir ve aynı yaşam döngüsünü paylaşabilir. DevTest Labs kullanıcı rolüyle atanan kullanıcılar, yöneticinin bu şekilde Laboratuvarı yapılandırdığı sürece bu şablonları kullanarak ortamlar oluşturabilir.
 
-Bu makalenin geri kalanında Microsoft.DevTestLab/labs/virtualmachines kullanan Resource Manager şablonları açıklar. Laboratuvar VM oluşturma (örneğin, talep edilebilir VM'ler) veya altın görüntü oluşturma (örneğin, görüntü Fabrika) otomatik hale getirmek için bunlar Laboratuvar yöneticileri tarafından kullanılır.
+Bu makalenin geri kalanında, Microsoft. DevTestLab/Labs/virtualmachines kullanan Kaynak Yöneticisi şablonlar ele alınmaktadır. Bunlar, laboratuvar VM 'Leri oluşturmayı (örneğin, çakışan VM 'Ler) veya altın görüntü üretimini (örneğin, görüntü fabrikası) otomatik hale getirmek için laboratuar yöneticileri tarafından kullanılır.
 
-[Azure Resource Manager şablonları oluşturmaya yönelik en iyi uygulamalar](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-template-best-practices) birçok yönergeler ve öneriler, Azure Resource Manager şablonları oluşturmanıza yardımcı olması için, güvenilir ve kullanımı kolay sunar.
+[Azure Resource Manager şablonları oluşturmak Için en iyi uygulamalar](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-template-best-practices) , güvenilir ve kullanımı kolay Azure Resource Manager şablonlar oluşturmanıza yardımcı olacak birçok yönerge ve öneri sunar.
 
-## <a name="view-and-save-a-virtual-machines-resource-manager-template"></a>Görüntüleme ve bir sanal makinenin Resource Manager şablonu kaydetme
-1. Bölümündeki adımları [bir laboratuar ortamında ilk VM'nizi oluşturun](tutorial-create-custom-lab.md#add-a-vm-to-the-lab) bir sanal makine oluşturmaya başlayın.
-1. Sanal makineniz için gerekli bilgileri girin ve bu VM için istediğiniz herhangi bir yapıt ekleyin.
-1. Yapılandırma ayarları penceresinin en altında seçin **görünümü ARM şablonu**.
+## <a name="view-and-save-a-virtual-machines-resource-manager-template"></a>Bir sanal makinenin Kaynak Yöneticisi şablonunu görüntüleyin ve kaydedin
+1. Sanal makine oluşturmaya başlamak için [laboratuvara Ilk VM 'Nizi oluşturma bölümündeki](tutorial-create-custom-lab.md#add-a-vm-to-the-lab) adımları izleyin.
+1. Sanal makineniz için gerekli bilgileri girin ve bu VM için istediğiniz yapıtları ekleyin.
+1. **Gelişmiş ayarlar** sekmesine gidin. 
+1. Ayarları Yapılandır penceresinin en altında **ARM şablonunu görüntüle**' yi seçin.
+1. Daha sonra başka bir sanal makine oluşturmak için kullanmak üzere Kaynak Yöneticisi şablonunu kopyalayın ve kaydedin.
 
-   ![Görünüm ARM şablonu düğmesi](./media/devtest-lab-use-arm-template/devtestlab-lab-view-rm-template.png)
-1. Kopyalayın ve daha sonra başka bir sanal makine oluşturmak için kullanmak üzere Resource Manager şablonu kaydedin.
+   ![Daha sonra kullanılmak üzere kaydedilecek Kaynak Yöneticisi şablonu](./media/devtest-lab-use-arm-template/devtestlab-lab-copy-rm-template.png)
 
-   ![Daha sonra kullanmak üzere kaydetmek için resource Manager şablonu](./media/devtest-lab-use-arm-template/devtestlab-lab-copy-rm-template.png)
+Kaynak Yöneticisi şablonunu kaydettikten sonra, şablonu kullanmadan önce şablonun parametreler bölümünü güncelleştirmeniz gerekir. Gerçek Kaynak Yöneticisi şablonunun dışında yalnızca parametreleri özelleştiren Parameter. JSON oluşturabilirsiniz. 
 
-Resource Manager şablonu kaydettikten sonra kullanmadan önce şablon parametreleri bölümünü güncelleştirmeniz gerekir. Dışında gerçek Resource Manager şablon parametreleri yalnızca özelleştiren parameter.json oluşturabilirsiniz. 
+![JSON dosyası kullanarak parametreleri özelleştirme](./media/devtest-lab-use-arm-template/devtestlab-lab-custom-params.png)
 
-![Bir JSON dosyası kullanarak parametrelerini özelleştirme](./media/devtest-lab-use-arm-template/devtestlab-lab-custom-params.png)
+Kaynak Yöneticisi şablonu artık [VM oluşturmak](devtest-lab-create-environment-from-arm.md)için kullanıma hazırdır.
 
-Resource Manager şablonu için kullanılmaya hazırdır [VM oluşturma](devtest-lab-create-environment-from-arm.md).
+## <a name="set-expiration-date"></a>Sona erme tarihi ayarla
+Eğitim, tanıtımlar ve denemeler gibi senaryolarda, sanal makineler oluşturmak ve bunları sabit bir süreden sonra otomatik olarak silmek isteyebilirsiniz, böylece gereksiz maliyetlere tabi kalmazsınız. VM için **ExpirationDate** özelliğini belirterek, bir sona erme tarihi olan bir laboratuar sanal makinesi oluşturabilirsiniz. [GitHub deponuzda](https://github.com/Azure/azure-devtestlab/tree/master/samples/DevTestLabs/QuickStartTemplates/101-dtl-create-vm-username-pwd-customimage-with-expiration)aynı kaynak yöneticisi şablonuna göz atın.
+
+
 
 ### <a name="next-steps"></a>Sonraki adımlar
 * Bilgi edinmek için nasıl [Resource Manager şablonları ile çoklu VM ortamları oluşturma](devtest-lab-create-environment-from-arm.md).
-* [Bir VM oluşturmak için Resource Manager şablonu dağıtma](devtest-lab-create-environment-from-arm.md#automate-deployment-of-environments)
+* [VM oluşturmak için Kaynak Yöneticisi şablonu dağıtma](devtest-lab-create-environment-from-arm.md#automate-deployment-of-environments)
 * DevTest Labs Otomasyon için daha fazla hızlı başlangıç Resource Manager şablonları keşfedin [genel DevTest Labs GitHub deposunu](https://github.com/Azure/azure-quickstart-templates).

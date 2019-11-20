@@ -1,45 +1,38 @@
 ---
-title: Bir bulut hizmeti modeli ve paketi nedir | Microsoft Docs
-description: Bulut hizmeti modeli (.csdef, .cscfg) ve paket (.cspkg) azure'daki açıklar
+title: Bulut hizmeti modeli ve paketi nedir? | Microsoft Docs
+description: Azure 'da bulut hizmeti modelini (. csdef,. cscfg) ve paketi (. cspkg) açıklar
 services: cloud-services
-documentationcenter: ''
-author: jpconnock
-manager: timlt
-editor: ''
-ms.assetid: 4ce2feb5-0437-496c-98da-1fb6dcb7f59e
+author: georgewallace
 ms.service: cloud-services
-ms.workload: tbd
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 07/05/2017
-ms.author: jeconnoc
-ms.openlocfilehash: 6c8833dc0db80dde96dda92c426c7840c44c1f1b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: gwallace
+ms.openlocfilehash: 47d031e339b3677e0bf6ddcbad9456041c53c6e2
+ms.sourcegitcommit: 4b647be06d677151eb9db7dccc2bd7a8379e5871
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67080752"
+ms.lasthandoff: 07/19/2019
+ms.locfileid: "68359545"
 ---
-# <a name="what-is-the-cloud-service-model-and-how-do-i-package-it"></a>Bulut hizmeti modeli ve nasıl paketi nedir?
-Bir bulut hizmeti, üç bileşenlerini hizmet tanımı oluşturulur *(.csdef)* , hizmet yapılandırma *(.cscfg)* ve bir hizmet paketi *(.cspkg)* . Her iki **ServiceDefinition.csdef** ve **ServiceConfig.cscfg** dosyaları XML tabanlı ve topluca model adlı bulut hizmeti ve nasıl yapılandırıldığını; yapısını açıklar. **ServicePackage.cspkg** oluşturulduğu bir zip dosyası **ServiceDefinition.csdef** ve diğerlerinin yanı sıra ikili tabanlı tüm gerekli bağımlılıkları içerir. Azure hem de bulut hizmeti oluşturur **ServicePackage.cspkg** ve **ServiceConfig.cscfg**.
+# <a name="what-is-the-cloud-service-model-and-how-do-i-package-it"></a>Bulut hizmeti modeli nedir ve nasıl paketlarım?
+Üç bileşenden bir bulut hizmeti, hizmet tanımı *(. csdef)* , hizmet yapılandırma *(. cscfg)* ve bir hizmet paketi *(. cspkg)* oluşturulur. Hem **ServiceDefinition. csdef** hem de **ServiceConfig. cscfg** dosyaları XML tabanlıdır ve bulut hizmetinin yapısını ve nasıl yapılandırıldığını açıklamaktadır; toplu olarak model olarak adlandırılır. **Servicepackage. cspkg** , **ServiceDefinition. csdef** öğesinden ve diğer şeyler arasında oluşturulan ve tüm gerekli ikili tabanlı bağımlılıkları içeren bir zip dosyasıdır. Azure, hem **Servicepackage. cspkg** hem de **ServiceConfig. cscfg**öğesinden bir bulut hizmeti oluşturur.
 
-Azure'da bulut hizmeti çalışır duruma geçtikten sonra üzerinden yeniden yapılandırabilirsiniz **ServiceConfig.cscfg** dosyası, ancak tanım alter olamaz.
+Bulut hizmeti Azure 'da çalışmaya başladıktan sonra **ServiceConfig. cscfg** dosyası aracılığıyla yapılandırabilirsiniz, ancak tanımı değiştiremezsiniz.
 
-## <a name="what-would-you-like-to-know-more-about"></a>Ne hakkında daha fazla bilgi edinmek istiyorsunuz?
-* Daha fazla bilgi edinmek istiyorum [ServiceDefinition.csdef](#csdef) ve [ServiceConfig.cscfg](#cscfg) dosyaları.
-* Zaten bu konuda biliyorum ver [bazı örnekler](#next-steps) ne yapılandırabilirim üzerinde.
-* Oluşturmak istediğiniz [ServicePackage.cspkg](#cspkg).
-* Visual Studio kullanarak ve istiyorum...
+## <a name="what-would-you-like-to-know-more-about"></a>Hakkında daha fazla bilgi edinmek istiyor musunuz?
+* [ServiceDefinition. csdef](#csdef) ve [ServiceConfig. cscfg](#cscfg) dosyaları hakkında daha fazla bilgi edinmek istiyorum.
+* Bunu zaten öğrendim ve neleri yapılandıracağım hakkında [bazı örnekler](#next-steps) verin.
+* [Servicepackage. cspkg](#cspkg)oluşturmak istiyorum.
+* Visual Studio kullanıyorum ve şunu yapmak istiyorum...
   * [Bulut hizmeti oluşturma][vs_create]
-  * [Mevcut bir bulut hizmetinin yeniden yapılandırın][vs_reconfigure]
-  * [Bir bulut hizmeti projesini dağıtma][vs_deploy]
-  * [Uzak Masaüstü Bağlantısı bir bulut hizmeti örneği][remotedesktop]
+  * [Mevcut bir bulut hizmetini yeniden yapılandırın][vs_reconfigure]
+  * [Bulut hizmeti projesi dağıtma][vs_deploy]
+  * [Bir bulut hizmeti örneğine uzak masaüstü][remotedesktop]
 
 <a name="csdef"></a>
 
 ## <a name="servicedefinitioncsdef"></a>ServiceDefinition.csdef
-**ServiceDefinition.csdef** dosyasını bir bulut hizmeti yapılandırmak için Azure tarafından kullanılan ayarları belirtir. [Azure Hizmet tanım düzenini (.csdef dosyası)](/previous-versions/azure/reference/ee758711(v=azure.100)) Hizmet tanım dosyası için izin verilen biçimini sağlar. Aşağıdaki örnek Web ve çalışan rolleri için tanımlanan ayarları gösterilir:
+**ServiceDefinition. csdef** dosyası, Azure tarafından bir bulut hizmetini yapılandırmak için kullanılan ayarları belirtir. [Azure hizmet Tanım Şeması (. csdef dosyası)](/previous-versions/azure/reference/ee758711(v=azure.100)) , bir hizmet tanım dosyası için izin verilen biçim sağlar. Aşağıdaki örnek, Web ve çalışan rolleri için tanımlanabilen ayarları gösterir:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -90,38 +83,38 @@ Azure'da bulut hizmeti çalışır duruma geçtikten sonra üzerinden yeniden ya
 </ServiceDefinition>
 ```
 
-Başvurabilirsiniz [Hizmet tanım düzenini](/previous-versions/azure/reference/ee758711(v=azure.100)) bir daha iyi burada kullanılan XML Şeması anlamak için ancak burada, bazı öğeleri hızlı bir açıklaması:
+Burada kullanılan XML şemasını daha iyi anlamak için [hizmet tanımı şemasına](/previous-versions/azure/reference/ee758711(v=azure.100)) başvurabilirsiniz, ancak burada bazı öğelerin hızlı bir açıklaması verilmiştir:
 
-**Siteleri**  
-IIS7'de barındırılan Web siteleri veya web uygulamaları için tanımları içerir.
+**Barındıra**  
+IıS7 içinde barındırılan Web siteleri veya Web uygulamaları için tanımları içerir.
 
-**InputEndpoints**  
-Bulut hizmetiyle bağlantı kurmak için kullanılan uç noktaları için tanımları içerir.
+**Inputendpoints**  
+Bulut hizmetiyle iletişim kurmak için kullanılan uç noktalar için tanımları içerir.
 
 **InternalEndpoints**  
-Rol örnekleri tarafından birbirleri ile iletişim kurmak için kullanılan uç noktaları için tanımları içerir.
+Rol örnekleri tarafından birbirleriyle iletişim kurmak için kullanılan uç noktalar için tanımları içerir.
 
 **ConfigurationSettings**  
-Belirli bir rolü özelliklerinin ayarı tanımlarını içerir.
+Belirli bir rolün özellikleri için ayar tanımlarını içerir.
 
 **Sertifikalar**  
-Bir rol için gerekli sertifikaları için tanımları içerir. Önceki kod örneği, Azure Connect yapılandırma için kullanılan bir sertifika gösterir.
+Bir rol için gerekli olan sertifikalara yönelik tanımları içerir. Önceki kod örneğinde, Azure Connect yapılandırması için kullanılan bir sertifika gösterilmektedir.
 
 **LocalResources**  
-Yerel depolama kaynakları için tanımları içerir. Yerel depolama kaynağı, dosya sistemindeki bir rol örneği çalıştığı sanal makinenin ayrılmış bir dizindir.
+Yerel depolama kaynakları için tanımları içerir. Yerel depolama kaynağı, bir rolün bir örneğinin çalıştığı sanal makinenin dosya sistemindeki ayrılmış bir dizindir.
 
-**İçeri aktarmalar**  
-İçeri aktarılan modüller için tanımları içerir. Önceki kod örneğinde, Uzak Masaüstü Bağlantısı ve Azure Connect modülleri gösterir.
+**İşlemlerinin**  
+İçeri aktarılan modüller için tanımları içerir. Önceki kod örneğinde, Uzak Masaüstü Bağlantısı ve Azure Connect için modüller gösterilmektedir.
 
 **Başlangıç**  
-Rol başlatıldığında çalıştırılan görevleri içerir. Görevler, .cmd veya yürütülebilir dosya içinde tanımlanır.
+Rol başlatıldığında çalıştırılan görevleri içerir. Görevler bir. cmd veya yürütülebilir dosya içinde tanımlanır.
 
 <a name="cscfg"></a>
 
-## <a name="serviceconfigurationcscfg"></a>ServiceConfiguration.cscfg
-Bulut hizmetiniz için ayarları yapılandırma değerleri belirlenir **ServiceConfiguration.cscfg** dosya. Bu dosya her rol için dağıtmak istediğiniz örnek sayısını belirtin. Hizmet tanımı dosyasında tanımlanan yapılandırma ayarları için değerleri hizmet yapılandırma dosyasına eklenir. Bulut hizmeti ile ilişkili olan herhangi bir yönetim sertifika parmak izleri de dosyasına eklenir. [Azure hizmet yapılandırma şemasına (.cscfg dosyası)](/previous-versions/azure/reference/ee758710(v=azure.100)) hizmet yapılandırma dosyası için izin verilen biçimini sağlar.
+## <a name="serviceconfigurationcscfg"></a>ServiceConfiguration. cscfg
+Bulut hizmetinizin ayarlarının yapılandırması, **ServiceConfiguration. cscfg** dosyasındaki değerlere göre belirlenir. Bu dosyadaki her bir rol için dağıtmak istediğiniz örnek sayısını belirtirsiniz. Hizmet tanımı dosyasında tanımladığınız yapılandırma ayarlarının değerleri, hizmet yapılandırma dosyasına eklenir. Bulut hizmetiyle ilişkili tüm yönetim sertifikaları için parmak izleri dosyasına da eklenir. [Azure hizmet yapılandırma şeması (. cscfg dosyası)](/previous-versions/azure/reference/ee758710(v=azure.100)) , bir hizmet yapılandırma dosyası için izin verilen biçim sağlar.
 
-Hizmet yapılandırma dosyası uygulama ile birlikte paketlenmiştir değil, ancak ayrı bir dosya olarak azure'a yüklenir ve bulut hizmeti yapılandırmak için kullanılır. Bulut hizmetinizi yeniden dağıtmaya gerek kalmadan yeni hizmet yapılandırma dosyasını karşıya yükleyebilirsiniz. Bulut hizmet çalışırken, bulut hizmeti için yapılandırma değerlerini değiştirilebilir. Aşağıdaki örnek, Web ve çalışan rolleri için tanımlanan yapılandırma ayarlarını gösterir:
+Hizmet yapılandırma dosyası uygulamayla paketlenemez, ancak Azure 'a ayrı bir dosya olarak yüklenir ve bulut hizmetini yapılandırmak için kullanılır. Bulut hizmetinizi yeniden dağıtmaya gerek kalmadan yeni bir hizmet yapılandırma dosyasını karşıya yükleyebilirsiniz. Bulut hizmeti çalışırken bulut hizmeti yapılandırma değerleri değiştirilebilir. Aşağıdaki örnekte, Web ve çalışan rolleri için tanımlanabilen yapılandırma ayarları gösterilmektedir:
 
 ```xml
 <?xml version="1.0"?>
@@ -141,28 +134,28 @@ Hizmet yapılandırma dosyası uygulama ile birlikte paketlenmiştir değil, anc
 </ServiceConfiguration>
 ```
 
-Başvurabilirsiniz [hizmet yapılandırma şeması](/previous-versions/azure/reference/ee758710(v=azure.100)) burada kullanılan XML şemasını anlama daha iyi, ancak öğeleri hızlı bir açıklaması aşağıda verilmiştir:
+Burada kullanılan XML şemasını daha iyi anlamak için [hizmet yapılandırma şemasına](/previous-versions/azure/reference/ee758710(v=azure.100)) başvurabilirsiniz, ancak aşağıdaki öğelerin hızlı bir açıklaması aşağıda verilmiştir:
 
 **Örnekler**  
-Çalışan rolü örneklerinin sayısını yapılandırır. Bulut hizmetinizin potansiyel olarak yükseltmeler sırasında kullanılamaz hale gelmesini önlemek için web'e yönelik rollerinizin birden fazla örneğini dağıtmanız önerilir. Birden fazla örneğine dağıtarak, yönergeleri için karşıladığınızdan [Azure işlem hizmet düzeyi sözleşmesi (SLA)](https://azure.microsoft.com/support/legal/sla/), Internet'e yönelik rolleri, iki için % 99,95 harici bağlantı garanti eder veya daha fazla rol örnekleri bir hizmet için dağıtıldı.
+Rol için çalışan örneklerin sayısını yapılandırır. Bulut hizmetinizin yükseltmeler sırasında kullanılamaz duruma gelmesine engel olmak için, Web 'e yönelik rollerinizin birden fazla örneğini dağıtmanız önerilir. Birden fazla örnek dağıtarak, bir hizmet için iki veya daha fazla rol örneği dağıtıldığında, Internet 'e yönelik rollere yönelik% 99,95 dış bağlantıyı garanti eden [Azure işlem hizmet düzeyi sözleşmesi (SLA)](https://azure.microsoft.com/support/legal/sla/)yönergelerine bağlı olursunuz. .
 
 **ConfigurationSettings**  
-Bir rolün çalışan örneklerini ayarlarını yapılandırır. Adını `<Setting>` öğeleri Hizmet tanım dosyası ayarı tanımlarının eşleşmesi gerekir.
+Bir rol için çalışan örneklerin ayarlarını yapılandırır. `<Setting>` Öğelerin adı, hizmet tanımı dosyasındaki ayar tanımlarına uymalıdır.
 
 **Sertifikalar**  
-Hizmet tarafından kullanılan sertifikaları yapılandırır. Önceki kod örneğinde, RemoteAccess modülü için sertifika tanımlamak gösterilmektedir. Değerini *parmak izi* özniteliği kullanmak için sertifika parmak izi için ayarlanmalıdır.
+Hizmeti tarafından kullanılan sertifikaları yapılandırır. Önceki kod örneğinde, RemoteAccess modülünün sertifikasının nasıl tanımlanacağı gösterilmektedir. *Parmak izi* özniteliğinin değeri, kullanılacak sertifikanın parmak izine ayarlanmalıdır.
 
 <p/>
 
 > [!NOTE]
-> Sertifikanın parmak izi, bir metin düzenleyicisi kullanarak yapılandırma dosyasına eklenebilir. Veya, değer eklenebilir **sertifikaları** sekmesinde **özellikleri** Visual Studio'da rolünün sayfası.
+> Sertifika için parmak izi, bir metin Düzenleyicisi kullanılarak yapılandırma dosyasına eklenebilir. Ya da değer, Visual Studio 'daki rolün **Özellikler** sayfasının **Sertifikalar** sekmesine eklenebilir.
 > 
 > 
 
-## <a name="defining-ports-for-role-instances"></a>Rol örnekleri için bağlantı noktalarını tanımlama
-Azure web rolü için yalnızca bir giriş noktası sağlar. Tüm trafiği aracılığıyla bir IP adresi oluştuğunu anlamına gelir. İstek doğru konuma yönlendirmek için ana bilgisayar üstbilgisi yapılandırarak bir bağlantı noktasını paylaşmak için Web siteleri yapılandırabilirsiniz. Ayrıca uygulamalarınızın IP adresi bilinen bağlantı noktalarını dinlemek için yapılandırabilirsiniz.
+## <a name="defining-ports-for-role-instances"></a>Rol örnekleri için bağlantı noktaları tanımlama
+Azure, bir Web rolüne yalnızca bir giriş noktası sağlar. Tüm trafiğin bir IP adresi üzerinden gerçekleştiği anlamına gelir. Web sitelerinizi, isteği doğru konuma yönlendirmek için konak üstbilgisini yapılandırarak bir bağlantı noktası paylaşacak şekilde yapılandırabilirsiniz. Uygulamalarınızı IP adresindeki iyi bilinen bağlantı noktalarını dinleyecek şekilde de yapılandırabilirsiniz.
 
-Aşağıdaki örnek, bir Web sitesi ve web uygulaması ile bir web rolü için yapılandırmayı gösterir. Web sitesi bağlantı noktası 80 üzerinde varsayılan giriş konumu olarak yapılandırılmış ve web uygulamaları, "mail.mysite.cloudapp.net" adlı bir alternatif ana bilgisayar üst bilgisinden isteklerini alacak şekilde yapılandırılır.
+Aşağıdaki örnekte bir Web rolü için Web sitesi ve Web uygulaması yapılandırması gösterilmektedir. Web sitesi, bağlantı noktası 80 ' de varsayılan giriş konumu olarak yapılandırılır ve Web uygulamaları, "mail.mysite.cloudapp.net" adlı alternatif bir konak üstbilgisinden istekleri alacak şekilde yapılandırılmıştır.
 
 ```xml
 <WebRole>
@@ -197,55 +190,55 @@ Aşağıdaki örnek, bir Web sitesi ve web uygulaması ile bir web rolü için y
 ```
 
 
-## <a name="changing-the-configuration-of-a-role"></a>Bir rol yapılandırmasını değiştirme
-Hizmet çevrimdışı duruma getirmeden Azure üzerinde çalışırken, bulut hizmetinin yapılandırmasını güncelleştirebilirsiniz. Yapılandırma bilgilerini değiştirmek için yeni bir yapılandırma dosyasını karşıya yükleyin veya yerinde yapılandırma dosyasını düzenleyin ve çalışan hizmetiniz için geçerlidir. Aşağıdaki değişiklikler bir hizmetin yapılandırmaya hale getirilebilir:
+## <a name="changing-the-configuration-of-a-role"></a>Rolün yapılandırmasını değiştirme
+Hizmeti çevrimdışı yapmadan, Azure 'da çalışırken bulut hizmetinizin yapılandırmasını güncelleştirebilirsiniz. Yapılandırma bilgilerini değiştirmek için yeni bir yapılandırma dosyasını karşıya yükleyebilir veya yapılandırma dosyasını yerinde düzenleyip çalışan hizmetinize uygulayabilirsiniz. Bir hizmetin yapılandırmasında aşağıdaki değişiklikler yapılabilir:
 
-* **Yapılandırma ayarlarının değerleri değiştirme**  
-  Ne zaman yapılandırma değişiklikleri ayarı, bir rol örneği örneği çevrimiçi veya çevrimdışı olduğunda örneğini düzgün biçimde geri ve örneği değişikliği uygulamak için sırada değişikliği uygulamak seçebilirsiniz.
-* **Rol örneği service topolojisi değiştiriliyor**  
-  Topoloji değişiklikler örneği burada kaldırılıyor dışında çalışan örneklerini etkilemez. Kalan tüm örnekleri genellikle geri dönüştürülmesi gerekmez; Ancak, bir topoloji değişikliği yanıt rol örneğini geri dönüştürmek seçebilirsiniz.
+* **Yapılandırma ayarlarının değerlerini değiştirme**  
+  Bir yapılandırma ayarı değiştiğinde, örnek çevrimiçi olduğunda bir rol örneği değişikliği uygulayabilir ya da örneği düzgün şekilde geri dönüştürmek ve örnek çevrimdışıyken değişikliği uygulamak için seçim yapabilir.
+* **Rol örneklerinin hizmet topolojisini değiştirme**  
+  Bir örneğin kaldırılmakta olduğu durumlar dışında, topoloji değişiklikleri çalışan örnekleri etkilemez. Kalan tüm örneklerin genellikle geri dönüştürülmesi gerekmez; Ancak, bir topoloji değişikliğine yanıt olarak rol örneklerini geri dönüşüm seçebilirsiniz.
 * **Sertifika parmak izini değiştirme**  
-  Bir rol örneği çevrimdışı olduğunda, yalnızca bir sertifika güncelleştirebilirsiniz. Bir sertifika eklenir, silinmiş veya rol örneği çevrimiçi durumdayken değiştirildi, Azure düzgün bir şekilde örneği çevrimdışı bir sertifikayı güncelleştirmek ve değişiklik tamamlandıktan sonra yeniden çevrimiçi duruma getirmek için alır.
+  Yalnızca bir rol örneği çevrimdışı olduğunda bir sertifikayı güncelleştirebilirsiniz. Bir rol örneği çevrimiçi olduğunda bir sertifika eklendiyse, silinirse veya değiştirilirse, Azure düzgün şekilde sertifikayı güncelleştirmek ve değişiklik tamamlandıktan sonra yeniden çevrimiçi duruma getirmek için örneği çevrimdışı duruma getirir.
 
-### <a name="handling-configuration-changes-with-service-runtime-events"></a>Yapılandırma değişiklikleri ile hizmet çalışma zamanı olaylarını işleme
-[Azure çalışma zamanı kitaplığı](/previous-versions/azure/reference/mt419365(v=azure.100)) içerir [Microsoft.WindowsAzure.ServiceRuntime](/previous-versions/azure/reference/ee741722(v=azure.100)) ad alanı bir rolden Azure ortamı ile etkileşim kurmaya yönelik sınıflar sağlar. [RoleEnvironment](/previous-versions/azure/reference/ee773173(v=azure.100)) sınıfı önce ve sonra bir yapılandırma değişikliği başlatan aşağıdaki olaylar tanımlar:
+### <a name="handling-configuration-changes-with-service-runtime-events"></a>Hizmet çalışma zamanı olaylarıyla yapılandırma değişikliklerini işleme
+[Azure çalışma zamanı kitaplığı](/previous-versions/azure/reference/mt419365(v=azure.100)) , bir rolden Azure ortamıyla etkileşim kurmak için sınıflar sağlayan [Microsoft. WindowsAzure. ServiceRuntime](/previous-versions/azure/reference/ee741722(v=azure.100)) ad alanını içerir. [Roleenvironment](/previous-versions/azure/reference/ee773173(v=azure.100)) sınıfı, bir yapılandırma değişikliğinden önce ve sonra oluşturulan aşağıdaki olayları tanımlar:
 
-* **[Değiştirme](/previous-versions/azure/reference/ee758134(v=azure.100)) olay**  
-  Bu yapılandırma değişikliğini bir rol rol örnekleri gerekirse almak için bir fırsat vermek belirtilen bir örneğini uygulanmadan önce oluşur.
+* **Olayı [değiştirme](/previous-versions/azure/reference/ee758134(v=azure.100))**  
+  Bu durum, yapılandırma değişikliği bir rolün belirtilen örneğine uygulanmadan önce oluşur ve gerekirse rol örneklerini alma şansı verir.
 * **[Değiştirilen](/previous-versions/azure/reference/ee758129(v=azure.100)) olay**  
-  Belirtilen bir rol örneği için yapılandırma değişiklik uygulandıktan sonra gerçekleşir.
+  Yapılandırma değişikliği bir rolün belirtilen örneğine uygulandıktan sonra gerçekleşir.
 
 > [!NOTE]
-> Sertifika değişiklikleri her zaman bir rolün örnekleri çevrimdışı olduğundan RoleEnvironment.Changing veya RoleEnvironment.Changed olayları geçirmeyin.
+> Sertifika değişiklikleri her zaman bir rolün örneklerini çevrimdışı olarak alacak olduğundan, RoleEnvironment 'ı yükseltmez. veya RoleEnvironment. Changed olayları değiştiriliyor.
 > 
 > 
 
 <a name="cspkg"></a>
 
 ## <a name="servicepackagecspkg"></a>ServicePackage.cspkg
-Azure'daki bir bulut hizmeti olarak bir uygulamayı dağıtmak için uygun biçimde uygulama paketi gerekir. Kullanabileceğiniz **CSPack** komut satırı aracı (ile yüklenen [Azure SDK'sı](https://azure.microsoft.com/downloads/)) alternatif olarak, Visual Studio Paket dosyası oluşturmak için.
+Azure 'da bir uygulamayı bulut hizmeti olarak dağıtmak için, önce uygulamayı uygun biçimde paketetmeniz gerekir. Paket dosyasını Visual Studio 'ya alternatif olarak oluşturmak için **CSPack** komut satırı aracını ( [Azure SDK](https://azure.microsoft.com/downloads/)ile birlikte yüklenir) kullanabilirsiniz.
 
-**CSPack** Hizmet tanım dosyası ve hizmet yapılandırma dosyasının içeriği paket içeriğini tanımlamak için kullanır. **CSPack** kullanarak Azure'a yükleyebilirsiniz. bir uygulama paketi dosyası (.cspkg) oluşturur [Azure portalında](cloud-services-how-to-create-deploy-portal.md#create-and-deploy). Varsayılan olarak, adlı paket `[ServiceDefinitionFileName].cspkg`, ancak farklı bir ad kullanarak belirtebilirsiniz `/out` seçeneği **CSPack**.
+**CSPack** , paketin içeriğini tanımlamak için hizmet tanım dosyasının ve hizmet yapılandırma dosyasının içeriğini kullanır. **CSPack** , [Azure Portal](cloud-services-how-to-create-deploy-portal.md#create-and-deploy)kullanarak Azure 'a yükleyebileceğiniz bir uygulama paketi dosyası (. cspkg) oluşturur. Varsayılan olarak, paket adlandırılır `[ServiceDefinitionFileName].cspkg`, ancak **CSPack** `/out` seçeneğini kullanarak farklı bir ad belirtebilirsiniz.
 
-**CSPack** bulunur  
+**CSPack** şurada bulunur:  
 `C:\Program Files\Microsoft SDKs\Azure\.NET SDK\[sdk-version]\bin\`
 
 > [!NOTE]
-> (Windows'ta) CSPack.exe kullanılabilir çalıştırarak **Microsoft Azure komut istemi** SDK ile yüklenen bir kısayol.  
+> CSPack. exe (Windows üzerinde), SDK ile birlikte yüklenen **Microsoft Azure komut istemi** kısayolunu çalıştırılarak kullanılabilir.  
 > 
-> Tüm olası anahtarları ve komutlar hakkında belgeleri görmek için tek başına CSPack.exe programı çalıştırın.
+> Tüm olası anahtar ve komutlarla ilgili belgeleri görmek için CSPack. exe programını tek başına çalıştırın.
 > 
 > 
 
 <p />
 
 > [!TIP]
-> Bulut hizmetinizi yerel olarak çalıştırmanızı **Microsoft Azure işlem öykünücüsü**, kullanın **/copyonly** seçeneği. Bu seçenek, uygulama bir dizin düzenini içinden işlem öykünücüsünde çalıştırılabilmesi için ikili dosyaları kopyalar.
+> Bulut hizmetinizi **Microsoft Azure Işlem öykünücüsünde**yerel olarak çalıştırın, **/CopyOnly** seçeneğini kullanın. Bu seçenek, uygulamanın ikili dosyalarını, işlem öykünücüsünde çalıştırılabilecekleri bir dizin düzenine kopyalar.
 > 
 > 
 
-### <a name="example-command-to-package-a-cloud-service"></a>Örnek komut, bir bulut hizmeti paketlemek için
-Aşağıdaki örnek, bir web rolü bilgilerini içeren bir uygulama paketi oluşturur. Komut, ikili dosyaları burada bulunabilir, dizin kullanmak için hizmet tanımı dosyası ve paket dosyasının adını belirtir.
+### <a name="example-command-to-package-a-cloud-service"></a>Bulut hizmetini paketlemek için örnek komut
+Aşağıdaki örnek bir Web rolü için bilgi içeren bir uygulama paketi oluşturur. Komut kullanılacak hizmet tanımı dosyasını, ikili dosyaların bulunabileceği dizini ve paket dosyasının adını belirtir.
 
 ```cmd
 cspack [DirectoryName]\[ServiceDefinition]
@@ -254,7 +247,7 @@ cspack [DirectoryName]\[ServiceDefinition]
        /out:[OutputFileName]
 ```
 
-Uygulama hem bir web rolü ve çalışan rolü içeriyorsa, aşağıdaki komutu kullanılır:
+Uygulama hem bir Web rolü hem de bir çalışan rolü içeriyorsa, aşağıdaki komut kullanılır:
 
 ```cmd
 cspack [DirectoryName]\[ServiceDefinition]
@@ -264,31 +257,31 @@ cspack [DirectoryName]\[ServiceDefinition]
        /role:[RoleName];[RoleBinariesDirectory];[RoleAssemblyName]
 ```
 
-Burada değişkenleri şu şekilde tanımlanır:
+Değişkenlerin şu şekilde tanımlandığı yer:
 
 | Değişken | Değer |
 | --- | --- |
-| \[DizinAdı\] |Azure projesi .csdef dosyası içeren kök proje dizini altında alt dizini. |
-| \[ServiceDefinition\] |Hizmet tanım dosyası adı. Varsayılan olarak, bu dosya, ServiceDefinition.csdef adlandırılır. |
-| \[OutputFileName\] |Oluşturulan paket dosyasının adı. Genellikle, bu uygulamanın adına ayarlanır. Dosya adı belirtilirse, uygulama paketi olarak oluşturulur \[ApplicationName\].cspkg. |
-| \[Rol adı\] |Hizmet tanımı dosyasında tanımlanan bir rolün adı. |
-| \[RoleBinariesDirectory] |Rolü için ikili dosyalarının konumu. |
-| \[VirtualPath\] |Fiziksel dizinlerle hizmet tanımı siteler bölümünde tanımlanan her bir sanal yol. |
-| \[PhysicalPath\] |Hizmet tanımının site düğümde tanımlanan her bir sanal yol içeriğinin fiziksel dizinler. |
-| \[RoleAssemblyName\] |Rolü için ikili dosya adı. |
+| \[DirectoryName\] |Azure projesinin. csdef dosyasını içeren kök proje dizini altındaki alt dizin. |
+| \[ServiceDefinition\] |Hizmet tanım dosyasının adı. Varsayılan olarak, bu dosya ServiceDefinition. csdef olarak adlandırılır. |
+| \[OutputFilename & lt\] |Oluşturulan paket dosyasının adı. Genellikle bu, uygulamanın adına ayarlanır. Dosya adı belirtilmemişse, uygulama paketi ApplicationName \[\]. cspkg olarak oluşturulur. |
+| \[RoleName\] |Rolün hizmet tanım dosyasında tanımlanan adı. |
+| \[RoleBinariesDirectory] |Rolün ikili dosyalarının konumu. |
+| \[VirtualPath\] |Hizmet tanımının siteler bölümünde tanımlanan her bir sanal yol için fiziksel dizinler. |
+| \[PhysicalPath\] |Hizmet tanımının site düğümünde tanımlanan her bir sanal yol için içeriğin fiziksel dizinleri. |
+| \[RoleAssemblyName\] |Rol için ikili dosyanın adı. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bir bulut hizmeti paketi oluşturma ve istiyorum...
+Bir bulut hizmeti paketi oluşturuyor ve şunu yapmak istiyorum...
 
-* [Bir bulut hizmeti örneği için Kurulum Uzak Masaüstü][remotedesktop]
-* [Bir bulut hizmeti projesini dağıtma][deploy]
+* [Bir bulut hizmeti örneği için Uzak Masaüstü kurma][remotedesktop]
+* [Bulut hizmeti projesi dağıtma][deploy]
 
-Visual Studio kullanarak ve istiyorum...
+Visual Studio kullanıyorum ve şunu yapmak istiyorum...
 
-* [Yeni bir bulut hizmeti oluşturma][vs_create]
-* [Mevcut bir bulut hizmetinin yeniden yapılandırın][vs_reconfigure]
-* [Bir bulut hizmeti projesini dağıtma][vs_deploy]
-* [Bir bulut hizmeti örneği için Kurulum Uzak Masaüstü][vs_remote]
+* [Yeni bir bulut hizmeti oluşturun][vs_create]
+* [Mevcut bir bulut hizmetini yeniden yapılandırın][vs_reconfigure]
+* [Bulut hizmeti projesi dağıtma][vs_deploy]
+* [Bir bulut hizmeti örneği için Uzak Masaüstü kurma][vs_remote]
 
 [deploy]: cloud-services-how-to-create-deploy-portal.md
 [remotedesktop]: cloud-services-role-enable-remote-desktop-new-portal.md

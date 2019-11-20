@@ -1,31 +1,31 @@
 ---
-title: Azure Depolama Gezgini'ni kullanarak Azure Cosmos DB kaynaklarını yönetme
-description: Azure Cosmos DB'ye bağlanmak ve Azure Depolama Gezgini'ni kullanarak kaynaklarını yönetme hakkında bilgi edinin.
+title: Azure Depolama Gezgini kullanarak Azure Cosmos DB kaynaklarını yönetme
+description: Azure Depolama Gezgini kullanarak Azure Cosmos DB bağlanıp kaynaklarını yönetme hakkında bilgi edinin.
 author: deborahc
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 05/23/2019
+ms.date: 10/23/2019
 ms.author: dech
 ms.custom: seodec18
-ms.openlocfilehash: 6c3c8aee51a4484013126a5959d3d275a88aa1cc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fd044d4f32aefc00e1b04f7060e0fc0dc74fd6c7
+ms.sourcegitcommit: 7efb2a638153c22c93a5053c3c6db8b15d072949
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66242639"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72882360"
 ---
 # <a name="work-with-data-using-azure-storage-explorer"></a>Azure Depolama Gezgini'ni kullanarak verilerle çalışma
 
-Azure Depolama Gezgini’nde Azure Cosmos DB kullanılması, kullanıcıların Azure Cosmos DB varlıklarını yönetmesine, verileri düzenlemesine, saklı yordamların ve tetikleyicilerin yanı sıra Depolama blob’ları ve kuyrukları gibi diğer Azure varlıklarını güncelleştirmesine imkan tanır. Artık farklı Azure varlıklarını aynı aracı kullanarak tek bir yerde yönetebilirsiniz. Şu anda, Azure Depolama Gezgini SQL, MongoDB, graf ve tablo API'leri için yapılandırılmış Cosmos hesaplarını destekler.
+Azure Depolama Gezgini’nde Azure Cosmos DB kullanılması, kullanıcıların Azure Cosmos DB varlıklarını yönetmesine, verileri düzenlemesine, saklı yordamların ve tetikleyicilerin yanı sıra Depolama blob’ları ve kuyrukları gibi diğer Azure varlıklarını güncelleştirmesine imkan tanır. Artık farklı Azure varlıklarını aynı aracı kullanarak tek bir yerde yönetebilirsiniz. Şu anda Azure Depolama Gezgini SQL, MongoDB, Graph ve tablo API 'Leri için yapılandırılmış Cosmos hesaplarını destekler.
 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-SQL API veya Azure Cosmos DB'nin MongoDB API'si ile Cosmos hesabı. Bir hesabınız yoksa, Azure Portalı'nda açıklandığı gibi oluşturabileceğiniz [Azure Cosmos DB: .NET ve Azure portalı ile bir SQL API'si web uygulaması derleme](create-sql-api-dotnet.md).
+MongoDB için SQL API veya Azure Cosmos DB API 'SI ile Cosmos hesabı. Hesabınız yoksa, [Azure Cosmos DB: .NET ve Azure portalı ile bir SQL API'si web uygulaması derleme](create-sql-api-dotnet.md) bölümünde açıklandığı gibi Azure portalından bir hesap oluşturabilirsiniz.
 
 ## <a name="installation"></a>Yükleme
 
-Şuradan en yeni Azure Depolama Gezgini bileşenlerini yükleyin: [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer/)artık Windows, Linux ve MAC sürümlerini destekliyoruz.
+Şuradan en yeni Azure Depolama Gezgini bileşenlerini yükleyin: [Azure Depolama Gezgini](https://azure.microsoft.com/features/storage-explorer/) (Windows, Linux ve MAC sürümü artık desteklenmektedir).
 
 ## <a name="connect-to-an-azure-subscription"></a>Bir Azure aboneliğine Bağlanma
 
@@ -43,7 +43,7 @@ SQL API veya Azure Cosmos DB'nin MongoDB API'si ile Cosmos hesabı. Bir hesabın
 
 3. Listeden aboneliğinizi seçip **Uygula**’ya tıklayın.
 
-    ![Uygula](./media/storage-explorer/apply-subscription.png)
+    ![Başvurun](./media/storage-explorer/apply-subscription.png)
 
     Gezgin bölmesi güncelleştirilir ve seçili abonelikteki hesapları gösterir.
 
@@ -59,7 +59,7 @@ Azure Cosmos DB’ye bağlanmanın alternatif yollarından biri, bağlantı dize
 
     ![Bağlantı dizesiyle Cosmos DB’ye bağlanma](./media/storage-explorer/connect-to-db-by-connection-string.png)
 
-2. Yalnızca SQL ve Tablo API’sini destekler. API seçin, **Bağlantı Dizesini** yapıştırın, **Hesap etiketi** girin, **İleri**’ye tıklayın ve özeti denetleyin, ardından **Bağlan**’a tıklayarak Azure Cosmos DB hesabına bağlanın. Bağlantı dizesini alma hakkında daha fazla bilgi için bkz. [Bağlantı dizelerini edinme](https://docs.microsoft.com/azure/cosmos-db/manage-account).
+2. Yalnızca SQL ve Tablo API’sini destekler. API seçin, **Bağlantı Dizesini** yapıştırın, **Hesap etiketi** girin, **İleri**’ye tıklayın ve özeti denetleyin, ardından **Bağlan**’a tıklayarak Azure Cosmos DB hesabına bağlanın. Birincil bağlantı dizesini alma hakkında daha fazla bilgi için bkz. [bağlantı dizesini alma](manage-with-powershell.md#list-keys).
 
     ![Connection-string](./media/storage-explorer/connection-string.png)
 
@@ -73,7 +73,7 @@ Azure Cosmos DB’ye bağlanmanın alternatif yollarından biri, bağlantı dize
 
     ![Öykünücü ile Cosmos DB’ye bağlanma](./media/storage-explorer/emulator-entry.png)
 
-3. Şu anda yalnızca SQL API’si desteklenmektedir. **Bağlantı Dizesini** yapıştırın, **Hesap etiketi** girin, **İleri**’ye tıklayın ve özeti denetleyin, ardından **Bağlan**’a tıklayarak Azure Cosmos DB hesabına bağlanın. Bağlantı dizesini alma hakkında daha fazla bilgi için bkz. [Bağlantı dizelerini edinme](https://docs.microsoft.com/azure/cosmos-db/manage-account).
+3. Şu anda yalnızca SQL API’si desteklenmektedir. **Bağlantı Dizesini** yapıştırın, **Hesap etiketi** girin, **İleri**’ye tıklayın ve özeti denetleyin, ardından **Bağlan**’a tıklayarak Azure Cosmos DB hesabına bağlanın. Birincil bağlantı dizesini alma hakkında daha fazla bilgi için bkz. [bağlantı dizesini alma](manage-with-powershell.md#list-keys).
 
     ![Öykünücü ile Cosmos DB’ye bağlan iletişim kutusu](./media/storage-explorer/emulator-dialog.png)
 
@@ -103,7 +103,7 @@ Gezgin bölmesindeki bir aboneliğe sağ tıklayarak birçok hızlı eylem göre
     ![buradan arayın](./media/storage-explorer/search-from-here.png) 
 
 ### <a name="database-and-collection-management"></a>Veritabanı ve koleksiyon yönetimi
-#### <a name="create-a-database"></a>Veritabanı oluşturma 
+#### <a name="create-a-database"></a>Veritabanı oluşturun 
 -   Azure Cosmos DB hesabına sağ tıklayın, **Veritabanı Oluştur**’u seçin, veritabanı adını girin ve işlemi tamamlamak için **Enter** tuşuna basın.
        
     ![Veritabanı oluşturma](./media/storage-explorer/create-database.png) 
@@ -115,8 +115,8 @@ Gezgin bölmesindeki bir aboneliğe sağ tıklayarak birçok hızlı eylem göre
 
     ![Veritabanı silme2](./media/storage-explorer/delete-database2.png) 
 
-#### <a name="create-a-collection"></a>Koleksiyon oluşturma
-1. Veritabanınıza sağ tıklayın, seçin **Koleksiyonu Oluştur**ve ardından aşağıdaki gibi bilgiler **koleksiyon kimliği**, **depolama kapasitesi**, vb. Ayarlamayı bitirmek için **Tamam**'a tıklayın. 
+#### <a name="create-a-collection"></a>Koleksiyon oluşturun
+1. Veritabanınıza sağ tıklayın, **koleksiyon oluştur**' u seçin ve ardından **koleksiyon kimliği**, **depolama kapasitesi**vb. gibi aşağıdaki bilgileri sağlayın. **Tamam** ' a tıklayarak işlemi sona erdirin. 
 
     ![Koleksiyon oluşturma1](./media/storage-explorer/create-collection.png)
 
@@ -158,7 +158,7 @@ Gezgin bölmesindeki bir aboneliğe sağ tıklayarak birçok hızlı eylem göre
 1. Yeni bir köşe oluşturmak için sol pencereden **Graf**’ı açın, **Yeni Köşe**’ye tıklayın, ardından **Tamam**’a tıklayın.    
 2. Mevcut bir köşeyi değiştirmek için sağ bölmede kalem simgesine tıklayın.   
 
-    ![Graf](./media/storage-explorer/vertex.png)
+    ![Graph](./media/storage-explorer/vertex.png)
 
 #### <a name="delete-a-graph"></a>Graf silme
 - Bir köşeyi silmek için köşe adının yanındaki geri dönüşüm kutusu simgesine tıklayın.
@@ -213,7 +213,7 @@ Devam etmeden önce uygulamanızı yeniden başlatmayı deneyin ve sorunların d
 
 Bu hatayı görmenizin birkaç nedeni vardır. En yaygın iki neden şudur:
 
-+ Arkasında olduğunuz bir *saydam proxy*, deyişle birisi (örn. BT departmanınız) HTTPS trafiğini kesintiye, şifresini ve otomatik olarak imzalanan bir sertifika kullanarak şifreleme.
++ Bir saydam proxy 'nin arkasında olursunuz, yani birisi (BT departmanınız gibi) HTTPS trafiğini kesintiye *uğratır*, şifrelerini çözerek otomatik olarak imzalanan bir sertifika kullanarak şifreleniyor.
 
 + Aldığınız HTTPS iletilerine otomatik olarak imzalanan SSL sertifikaları ekleyen antivirüs yazılımı gibi bir yazılım çalıştırıyorsunuzdur.
 
@@ -221,9 +221,9 @@ Depolama Gezgini bu "otomatik olarak imzalanan sertifikalardan" biriyle karşıl
 
 1. Açık SSL yükleme
      - [Windows](https://slproweb.com/products/Win32OpenSSL.html) (basit sürümlerden herhangi biri olabilir)
-     - Mac ve Linux için: İşletim sisteminize eklenmelidir
+     - Mac ve Linux: İşletim sisteminize eklenmelidir
 2. Açık SSL çalıştırma
-    - Windows: Yükleme dizini Git **/bin/** , sonra çift tıklayarak **openssl.exe**.
+    - Windows: Yükleme dizinine gidin, ardından **/bin/** konumuna gidip **openssl.exe** dosyasına çift tıklayın.
     - Mac ve Linux: Bir terminalden **openssl** komutunu yürütün
 3. `s_client -showcerts -connect microsoft.com:443` yürütme
 4. Otomatik olarak imzalanan sertifikaları bulun. Hangisinin otomatik olarak imzalandığından emin değilseniz, konu ("s:") ve veren ("i:") aynı olan sertifikaları bulun.
@@ -240,7 +240,7 @@ Başarıyla oturum açtıktan sonra aboneliklerinizi alamıyorsanız:
 - Doğru ortamı kullanarak oturum açtığınızdan emin olun ([Azure](https://portal.azure.com/), [Azure Çin](https://portal.azure.cn/), [Azure Almanya](https://portal.microsoftazure.de/), [Azure ABD Kamu](https://portal.azure.us/) veya Özel Ortam/Azure Stack)
 - Bir ara sunucunun ardından değilseniz, Depolama Gezgini ara sunucusunu düzgün şekilde yapılandırdığınızdan emin olun
 - Hesabı kaldırıp yeniden eklemeyi deneyin
-- Aşağıdaki dosyaları giriş dizininizden silmeyi deneyin (örneğin: C:\Users\ContosoUser) ve sonra hesabı yeniden eklemeyi:
+- Aşağıdaki dosyaları giriş dizininizden (örn: C:\Users\ContosoUser) silmeyi ve sonra hesabı yeniden eklemeyi deneyin:
   - .adalcache
   - .devaccounts
   - .extaccounts
@@ -266,7 +266,7 @@ Bir hesabı kaldıramıyorsanız veya yeniden kimlik doğrulama bağlantısı bi
   - .extaccounts
 - SAS bağlı Depolama kaynaklarını kaldırmak istiyorsanız şunları silin:
   - Windows için %AppData%/StorageExplorer klasörü
-  - /Users/ < your_name >/Library/Application SUpport/StorageExplorer Mac için
+  - /Users/< your_name >/Library/Application Support desteği/Mac için StorageExplorer
   - Linux için ~/.config/StorageExplorer
   - Bu dosyaları silerseniz **tüm kimlik bilgilerinizi yeniden girmeniz gerekir**
 
@@ -298,12 +298,12 @@ Aşağıdaki önerileri deneyin:
 - Azure Cosmos DB hesabının, sağlama durumunda olup olmadığını denetleyin ve hesap başarıyla oluşturulduğunda yeniden deneyin.
 - Hesap, "Hızlı Erişim" düğümünün veya "Yerel ve Bağlı" düğümlerinin altındaysa, hesabın silinip silinmediğini denetleyin. Silindiyse, düğümü sizin kaldırmanız gerekir.
 
-## <a name="contact-us"></a>Bizimle iletişim kurun
+## <a name="contact-us"></a>Bize ulaşın
 
 Hiçbir çözüm işinize yaramazsa, sorunu düzeltmek için Azure Cosmos DB Geliştirme Araçları Ekibine ([cosmosdbtooling@microsoft.com](mailto:cosmosdbtooling@microsoft.com)) sorunun ayrıntılarını içeren bir e-posta gönderin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Azure depolama Gezgini'nde Azure Cosmos DB kullanmayı öğrenmek için aşağıdaki videoyu izleyin: [Azure depolama Gezgini'nde Azure Cosmos DB'yi kullanma](https://www.youtube.com/watch?v=iNIbg1DLgWo&feature=youtu.be).
+* Azure Depolama Gezgini’nde Azure Cosmos DB’yi kullanmayı öğrenmek için şu videoyu izleyin: [Azure Depolama Gezgini’nde Azure Cosmos DB kullanma](https://www.youtube.com/watch?v=iNIbg1DLgWo&feature=youtu.be).
 * [Depolama Gezgini ile çalışmaya başlama](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer) konusunda Depolama Gezgini hakkında daha fazla bilgi edinin ve daha fazla hizmet bağlayın.
 

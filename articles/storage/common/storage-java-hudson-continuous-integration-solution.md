@@ -1,97 +1,97 @@
 ---
-title: Hudson Blob Depolama ile kullanma | Microsoft Docs
-description: Hudson ile Azure Blob Depolama deposu olarak derleme yapıtları için nasıl kullanılacağını açıklar.
+title: Hudson 'U BLOB depolama ile kullanma | Microsoft Docs
+description: Hudson 'ın, derleme yapıtları için bir depo olarak Azure Blob depolama ile nasıl kullanılacağını açıklar.
 services: storage
 author: seguler
 ms.service: storage
 ms.devlang: Java
 ms.topic: article
-ms.date: 02/28/2017
-ms.author: seguler
+ms.date: 08/13/2019
+ms.author: tarcher
 ms.subservice: common
-ms.openlocfilehash: 4b47af857fada453e36fcb0c23e6d89e5ad90e42
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 75b0ea106be04cd77b18bfed8487edb6a7b7f65b
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65154353"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73839180"
 ---
 # <a name="using-azure-storage-with-a-hudson-continuous-integration-solution"></a>Hudson Sürekli Tümleştirme çözümüyle Azure Depolama'yı kullanma
 ## <a name="overview"></a>Genel Bakış
-Aşağıdaki bilgiler, bir yapı işleminde kullanılacak bir depo Hudson sürekli tümleştirme (CI) çözümü tarafından oluşturulan yapılar veya indirilebilir dosyaları için kaynak olarak Blob Depolama kullanma işlemi gösterilmektedir. Burada, bu kullanışlı olabilecek senaryoları biri, Çevik Geliştirme ortamında (Java veya diğer diller kullanılarak) kodlamaya, üzerinde sürekli tümleştirme yapıları çalıştırıyorsanız ve derleme yapıtları için bir depo ihtiyacınız olduğunda, böylelikle yapabilirsiniz, Örneğin, onları müşterilerinize, diğer kuruluşun üyeleriyle paylaşma veya bir arşiv tutmak.  Diğer dosyalar giriş yapının bir parçası indirmek için örneğin, bağımlılıkları, derleme işi gerektirdiğinde, başka bir senaryodur.
+Aşağıdaki bilgiler, bir Hudson sürekli tümleştirme (CI) çözümü tarafından oluşturulan derleme yapıtlarının bir deposu veya bir yapı işleminde kullanılacak indirilebilir dosyaların kaynağı olarak nasıl kullanılacağını gösterir. Bu faydalı bulduğunuz senaryolardan biri, çevik bir geliştirme ortamında (Java veya diğer diller kullanarak) kodlama yaparken, sürekli tümleştirmeye dayalı olarak çalışır ve derleme yapılarınız için bir depo gerekir, böylece Örneğin, bunları diğer kuruluş üyeleriyle, müşterilerinizle paylaşabilirsiniz veya bir arşivi saklayın.  Başka bir senaryo, derleme işinizin kendisi için başka dosyalar gerektirdiğinde, örneğin, derleme girişinin bir parçası olarak indirilecek bağımlılıklardır.
 
-Bu öğreticide, Azure depolama eklentisi için Microsoft tarafından sunulan Hudson CI kullanacaklardır.
+Bu öğreticide, Microsoft tarafından sağlanan Hudson CI için Azure Storage eklentisi 'ni kullanacaksınız.
 
-## <a name="introduction-to-hudson"></a>Hudson giriş
-Hudson kolayca kod değişikliklerini tümleştirmek geliştiricilere vererek bir yazılım projesi için sürekli tümleştirme sağlar ve derlemeler otomatik olarak ve sık, böylece geliştiricilerin üretkenliğini artırma üretti. Yapılar tutulur ve derleme yapıtları için çeşitli depoları karşıya yüklenebilir. Bu makale, derleme yapıtlarını bir deposu olarak Azure Blob Depolama kullanma işlemini gösterir. Ayrıca, Azure Blob depolama alanından bağımlılıklarını karşıdan yükleme de gösterilir.
+## <a name="introduction-to-hudson"></a>Hudson 'a giriş
+Hudson, geliştiricilerin kod değişikliklerini kolayca tümleştirmesini ve yapıların otomatik olarak ve sıklıkla üretilmiş olmasını sağlayarak geliştiricilerin verimliliğini artırarak bir yazılım projesinin sürekli tümleştirmesini sağlar. Derlemeler sürümlüdür ve derleme yapıtları çeşitli depolara yüklenebilir. Bu makalede, Azure Blob depolama 'nın derleme yapıtlarının deposu olarak nasıl kullanılacağı gösterilir. Ayrıca Azure Blob depolamadan bağımlılıkların nasıl indirileceği gösterilmektedir.
 
-Hudson hakkında daha fazla bilgi şu adreste bulunabilir: [karşılamak Hudson](https://wiki.eclipse.org/Hudson-ci/Meet_Hudson).
+Hudson ile ilgili daha fazla bilgi için bkz. [Hudson](https://wiki.eclipse.org/Hudson-ci/Meet_Hudson).
 
-## <a name="benefits-of-using-the-blob-service"></a>Blob hizmeti kullanmanın avantajları
-Çevik Geliştirme derleme yapıtlarınızı barındırmak için Blob hizmeti kullanmanın avantajları şunlardır:
+## <a name="benefits-of-using-the-blob-service"></a>Blob hizmetini kullanmanın avantajları
+Çevik geliştirme derlemesi yapıtlarınızı barındırmak için blob hizmetini kullanmanın avantajları şunlardır:
 
-* Yüksek kullanılabilirlik, yapılar ve/veya indirilebilir bağımlılıkları.
-* Derleme yapıtlarınızı Hudson CI çözümünüzü yüklediğinde performans.
-* Müşteriler ve iş ortakları, derleme yapıtları yüklediğinizde performans.
-* Kullanıcı erişim ilkeleri, anonim erişim, sona erme tabanlı paylaşılan erişim imzası erişim, özel arasından seçim yapma olanağıyla üzerinden erişim, vb. denetler.
+* Yapı yapılarınızın ve/veya indirilebilen bağımlılıkların yüksek kullanılabilirliği.
+* Hudson CI çözümünüz derleme yapıtlarınızı karşıya yüklerken performans.
+* Müşterilerinizin ve iş ortaklarınızın yapı yapıtlarınızı indirme performansı.
+* Anonim erişim, sona erme tabanlı paylaşılan erişim imzası erişimi, özel erişim vb. arasında seçim içeren Kullanıcı erişim ilkeleri üzerinde denetim.
 
-## <a name="prerequisites"></a>Önkoşullar
-Blob hizmeti Hudson CI çözümünüz ile kullanmak için aşağıdakilere ihtiyacınız olacak:
+## <a name="prerequisites"></a>Ön koşullar
+Blob hizmetini Hudson CI çözümünüz ile kullanmak için aşağıdakiler gerekir:
 
-* Hudson sürekli tümleştirme çözümü için.
+* Bir Hudson sürekli tümleştirme çözümü.
   
-    Hudson CI çözümü şu anda sahip değilseniz, aşağıdaki yöntemi kullanarak Hudson CI çözümü çalıştırabilirsiniz:
+    Şu anda bir Hudson CI çözümünüz yoksa, aşağıdaki tekniği kullanarak bir Hudson CI çözümü çalıştırabilirsiniz:
   
-  1. Bir Java özellikli makinede gelen Hudson WAR indirme <http://hudson-ci.org/>.
-  2. Bir komut isteminde, Hudson WAR çalıştırma Hudson WAR içeren klasöre açılır. Örneğin, sürüm 3.1.2 indirdiyseniz:
+  1. Java etkin bir makinede, <http://hudson-ci.org/>'den Hudson WAR 'i indirin.
+  2. Hudson WAR dosyasını içeren klasöre açılan bir komut isteminde, Hudson WAR ' ı çalıştırın. Örneğin, 3.1.2 sürümünü indirdiyseniz:
      
       `java -jar hudson-3.1.2.war`
 
-  3. Tarayıcınızda açın `http://localhost:8080/`. Bu, Hudson Pano açılır.
-  4. İlk kurulum sırasında ilk Hudson kullanımı sonucunda tamamlamak `http://localhost:8080/`.
-  5. Sonra ilk kurulumu tamamlamak, Hudson WAR çalışan örneği iptal, Hudson WAR yeniden başlatın ve Hudson Panoyu yeniden açın `http://localhost:8080/`, yüklemek ve Azure depolama eklentisi yapılandırmak için kullanacağınız.
+  3. Tarayıcınızda `http://localhost:8080/`açın. Bu işlem, Hudson panosunu açar.
+  4. Hudson ' u ilk kez kullandığınızda `http://localhost:8080/`ilk kurulumunu doldurun.
+  5. İlk kurulumu tamamladıktan sonra, Hudson WAR 'ın çalışan örneğini iptal edin, Hudson WAR ' ı yeniden başlatın ve Azure Storage eklentisini yüklemek ve yapılandırmak için kullanacağınız Hudson panosunu `http://localhost:8080/`yeniden açın.
      
-      Tipik bir Hudson CI çözüm Hudson war komut satırını çalıştıran, bir hizmet olarak çalıştırmak için ayarlanması ancak bu öğretici için yeterli olacaktır.
-* Bir Azure hesabı. Bir Azure hesabı için kaydolabilirsiniz <https://www.azure.com>.
-* Bir Azure depolama hesabı. Bir depolama hesabınız yoksa, adımları kullanarak bir tane oluşturabilirsiniz [depolama hesabı oluşturma](../common/storage-quickstart-create-account.md).
-* Hudson CI çözümüne konusunda önerilir, ancak aşağıdaki içeriği Blob hizmeti için Hudson CI deposu olarak kullanılırken gerekli olan adımları derleme yapıları göstermek için basit bir örneği kullanacağınız, gerekli değildir.
+      Tipik bir Hudson CI çözümü bir hizmet olarak çalışacak şekilde ayarlanacağından, komut satırında Hudson War çalıştırılması Bu öğretici için yeterli olacaktır.
+* Bir Azure hesabı. <https://www.azure.com>bir Azure hesabı için kaydolabilirsiniz.
+* Bir Azure depolama hesabı. Henüz bir depolama hesabınız yoksa [depolama hesabı oluşturma](../common/storage-quickstart-create-account.md)kısmındaki adımları kullanarak bir tane oluşturabilirsiniz.
+* Aşağıdaki içerik, Hudson CI derleme yapıtları için bir depo olarak blob hizmetini kullanırken gereken adımları göstermek üzere temel bir örnek kullanacağı için, Hudson CI çözümünün kullanılması önerilir, ancak gerekli değildir.
 
-## <a name="how-to-use-the-blob-service-with-hudson-ci"></a>Hudson CI ile Blob hizmetini kullanma
-Blob hizmeti ile Hudson kullanmak için Azure depolama eklentisini yükleme, depolama hesabınızı kullanmak için eklentiyi yapılandırmak ve ardından derleme yapıtları depolama hesabınıza yükleyen bir derleme sonrası eylem oluşturmak gerekir. Aşağıdaki bölümlerde bu adımlar açıklanmaktadır.
+## <a name="how-to-use-the-blob-service-with-hudson-ci"></a>Hudson CI ile blob hizmetini kullanma
+Blob hizmetini Hudson ile kullanmak için Azure Storage eklentisini yüklemeniz, eklentiyi depolama hesabınızı kullanacak şekilde yapılandırmanız ve ardından derleme yapılarınızı depolama hesabınıza yükleyen bir oluşturma sonrası eylemi oluşturmanız gerekir. Bu adımlar aşağıdaki bölümlerde açıklanmıştır.
 
-## <a name="how-to-install-the-azure-storage-plugin"></a>Azure depolama eklentisi yükleme
-1. Hudson panosunda tıklayın **yönetme Hudson**.
-2. Üzerinde **yönetme Hudson** sayfasında **Eklentileri Yönet**.
-3. Tıklayın **kullanılabilir** sekmesi.
-4. Tıklayın **başkalarının**.
-5. İçinde **Yapıt karşıya yükleme yapabilen kullanıcıları** bölümünden **Microsoft Azure depolama eklentisi**.
-6. **Yükle**'ye tıklatın.
-7. Yükleme tamamlandıktan sonra Hudson yeniden başlatın.
+## <a name="how-to-install-the-azure-storage-plugin"></a>Azure Storage eklentisini yüklemek
+1. Hudson panosu içinde, **Hudson**' u Yönet ' e tıklayın.
+2. **Hudson sayfasını yönet** sayfasında, **Eklentileri Yönet**' e tıklayın.
+3. **Kullanılabilir** sekmesine tıklayın.
+4. **Diğerleri**' e tıklayın.
+5. **Yapıt uploaders** bölümünde **Microsoft Azure depolama eklentisi**' ni seçin.
+6. **Yükle**'ye tıklayın.
+7. Yükleme tamamlandıktan sonra Hudson ' u yeniden başlatın.
 
-## <a name="how-to-configure-the-azure-storage-plugin-to-use-your-storage-account"></a>Azure depolama eklentisi, depolama hesabınızı kullanacak şekilde yapılandırma
-1. Hudson panosunda tıklayın **yönetme Hudson**.
-2. Üzerinde **yönetme Hudson** sayfasında **yapılandırma sistemi**.
-3. İçinde **Microsoft Azure depolama hesabı Yapılandırması** bölümü:
+## <a name="how-to-configure-the-azure-storage-plugin-to-use-your-storage-account"></a>Azure Storage eklentisini depolama hesabınızı kullanacak şekilde yapılandırma
+1. Hudson panosu içinde, **Hudson**' u Yönet ' e tıklayın.
+2. **Hudson sayfasını yönet** sayfasında **sistemi Yapılandır**' a tıklayın.
+3. **Microsoft Azure depolama hesap yapılandırması** bölümünde:
    
-    a. Elde edebileceğiniz, depolama hesabı adı girin [Azure portalı](https://portal.azure.com).
+    a. [Azure Portal](https://portal.azure.com)edinebilmeniz için depolama hesabınızın adını girin.
    
-    b. Depolama hesabı anahtarınızı, gelen da elde edilebilir girin [Azure portalı](https://portal.azure.com).
+    b. Depolama hesabı anahtarınızı, ayrıca [Azure Portal](https://portal.azure.com)bilgiler kişilerden girin.
    
-    c. Varsayılan değer **Blob Hizmeti uç noktası URL'si** Azure genel Bulutu kullanıyorsanız. Farklı Azure Bulutu kullanıyorsanız, belirtilen uç noktası kullanma [Azure portalı](https://portal.azure.com) depolama hesabınız için.
+    c. Genel Azure bulutu kullanıyorsanız, **BLOB hizmeti uç nokta URL 'si** için varsayılan değeri kullanın. Farklı bir Azure bulutu kullanıyorsanız, depolama hesabınız için [Azure Portal](https://portal.azure.com) belirtilen uç noktayı kullanın.
    
-    d. Tıklayın **depolama kimlik bilgilerini doğrulama** depolama hesabınızı doğrulamak için.
+    d. Depolama hesabınızı doğrulamak için **depolama kimlik bilgilerini doğrula** ' ya tıklayın.
    
-    e. [İsteğe bağlı] Ek varsa, kullanmak istediğiniz depolama hesapları için Hudson CI kullanılabilir hale ye **daha fazla depolama hesapları ekleme**.
+    e. Seçim Hudson CI 'niz için kullanılabilir hale getirdiğiniz ek depolama hesaplarınız varsa, **daha fazla depolama hesabı ekle**' ye tıklayın.
    
-    f. Tıklayın **Kaydet** ayarlarınızı kaydetmek için.
+    f. Ayarlarınızı kaydetmek için **Kaydet** ' e tıklayın.
 
-## <a name="how-to-create-a-post-build-action-that-uploads-your-build-artifacts-to-your-storage-account"></a>Derleme yapıtlarınızı depolama hesabınıza yükleyen bir derleme sonrası eylem oluşturma
-Yönerge amacıyla ilk biz birkaç dosya oluşturun ve dosyalarını depolama hesabınıza yüklemek için oluşturma sonrası eylem eklemek bir iş oluşturmanız gerekir.
+## <a name="how-to-create-a-post-build-action-that-uploads-your-build-artifacts-to-your-storage-account"></a>Derleme yapılarınızı depolama hesabınıza yükleyen bir oluşturma sonrası eylem oluşturma
+Yönergeler için, ilk olarak birkaç dosya oluşturacak bir iş oluşturmalı ve sonra dosyaları depolama hesabınıza yüklemek için derleme sonrası eylemini ekleyeceğiz.
 
-1. Hudson panosunda tıklayın **yeni iş**.
-2. İş adı **MyJob**, tıklayın **derleme serbest stil yazılım işi**ve ardından **Tamam**.
-3. İçinde **derleme** bölümü iş yapılandırması **derleme adımı Ekle** seçin **yürütme Windows toplu komutuyla**.
-4. İçinde **komut**, aşağıdaki komutları kullanın:
+1. Hudson panosu içinde **yeni iş**' a tıklayın.
+2. İşi **myjob**olarak adlandırın, **ücretsiz stil yazılım işi oluştur ' a**tıklayın ve ardından **Tamam**' a tıklayın.
+3. İş yapılandırmasının **derleme** bölümünde **derleme adımı ekle** ' ye tıklayın ve **Windows Batch komutunu Yürüt**' ü seçin.
+4. **Komut**' de aşağıdaki komutları kullanın:
 
     ```   
         md text
@@ -101,66 +101,66 @@ Yönerge amacıyla ilk biz birkaç dosya oluşturun ve dosyalarını depolama he
         time /t >> date.txt
     ```
 
-5. İçinde **derleme sonrası eylemlerde** bölümü iş yapılandırması **Microsoft Azure Blob depolama alanına yapıtları karşıya**.
-6. İçin **depolama hesabı adı**, kullanılacak depolama hesabını seçin.
-7. İçin **kapsayıcı adı**, kapsayıcı adı belirtin. (Derleme yapıtları karşıya yüklendiğinde zaten yoksa, bir kapsayıcı oluşturulur.) Ortam değişkenlerini kullanma, bu nedenle bu örnekte girin **${JOB_NAME}** kapsayıcı adı.
+5. İş yapılandırması **oluşturma sonrası eylemler** bölümünde, **BLOB depolama Microsoft Azure Için yapıtları karşıya yükle**' ye tıklayın.
+6. **Depolama hesabı adı**için kullanılacak depolama hesabını seçin.
+7. **Kapsayıcı adı**için kapsayıcı adını belirtin. (Kapsayıcı, derleme yapıtları karşıya yüklenirken henüz yoksa oluşturulur.) Bu örnekte ortam değişkenlerini kullanabilirsiniz. bu nedenle, kapsayıcı adı olarak **$ {JOB_NAME}** girin.
    
     **İpucu**
    
-    Aşağıda **komut** bölümü bir komut dosyası için girmiş olduğunuz **yürütme Windows toplu komutuyla** ortam değişkenlerini Hudson tarafından tanınan bir bağlantıdır. Ortam değişken adları ve açıklamaları öğrenmek için bu bağlantıyı tıklatın. Özel içeren ortam değişkenlerini olduğunu, gibi karakterler Not **BUILD_URL** ortam değişkeni, bir kapsayıcı adı veya ortak sanal yol olarak izin verilmez.
-8. Tıklayın **yeni kapsayıcı genel hale varsayılan olarak** bu örneğin. (Özel kapsayıcınızı kullanmak isterseniz, erişime izin vermek için paylaşılan erişim imzası oluşturmanız gerekir. Bu makalenin kapsamı dışındadır olmasıdır. Paylaşılan erişim imzaları hakkında daha fazla bilgi [kullanarak paylaşılan erişim imzaları (SAS)](../storage-dotnet-shared-access-signature-part-1.md).)
-9. [İsteğe bağlı] Tıklayın **karşıya yüklemeden önce temiz kapsayıcı** derleme yapıtları karşıya önce içeriğini temizlenmesi için kapsayıcıyı istiyorsanız (kapsayıcı içeriğini temizlemek istemiyorsanız, işaretsiz bırakın).
-10. İçin **yüklenecek yapıları listesi**, girin **metin/*.txt**.
-11. İçin **ortak sanal yol için karşıya yüklenen yapıtları**, girin **${yapı\_kimliği} / ${yapı\_numarası}** .
-12. Tıklayın **Kaydet** ayarlarınızı kaydetmek için.
-13. Hudson Panoda tıklayın **artık yapı** çalıştırılacak **MyJob**. Konsol çıktısı için durumu inceleyin. Oluşturma sonrası eylem derleme yapıtları karşıya başladığında durum iletilerini Azure depolama için konsol çıkışında dahil edilir.
-14. İşin işlemin başarıyla tamamlanmasından sonra ortak blob açarak derleme yapıtları inceleyebilirsiniz.
+    **Windows Batch komutu yürütme** için bir betik girdiğiniz **komut** bölümünün altında, Hudson tarafından tanınan ortam değişkenlerine yönelik bir bağlantı bulunur. Ortam değişkeni adlarını ve açıklamalarını öğrenmek için bu bağlantıya tıklayın. **BUILD_URL** ortam değişkeni gibi özel karakterler içeren ortam değişkenlerine kapsayıcı adı veya ortak sanal yol olarak izin verilmez.
+8. Bu örnek için **Varsayılan olarak yeni kapsayıcıyı genel yap** ' a tıklayın. (Özel bir kapsayıcı kullanmak istiyorsanız, erişime izin vermek için paylaşılan erişim imzası oluşturmanız gerekir. Bu makalenin kapsamı dışındadır. Paylaşılan erişim imzaları [(SAS) kullanarak](storage-sas-overview.md), paylaşılan erişim imzaları hakkında daha fazla bilgi edinebilirsiniz.)
+9. Seçim Kapsayıcının, derleme yapıtları karşıya yüklenmeden önce içeriğin temizlenmesini istiyorsanız **karşıya yüklemeden önce kapsayıcıyı temizle** ' ye tıklayın (kapsayıcının içeriğini temizlemek istemiyorsanız işaretini işaretsiz bırakın).
+10. **Karşıya yüklenecek yapıtların listesi**için **metin/*. txt**yazın.
+11. **Karşıya yüklenen yapıtlar Için ortak sanal yol**için, **$ {BUILD\_ID}/$ {BUILD\_Number}** girin.
+12. Ayarlarınızı kaydetmek için **Kaydet** ' e tıklayın.
+13. Hudson panosunda, **Myjob**'u çalıştırmak Için **Şimdi Oluştur** ' a tıklayın. Durum için konsol çıkışını inceleyin. Oluşturma sonrası eylemi, derleme yapılarını karşıya yüklemeye başladığında, Azure depolama için durum iletileri konsol çıktısına dahil edilir.
+14. İşi başarılı bir şekilde tamamladıktan sonra, genel blobu açarak derleme yapıtlarını inceleyebilirsiniz.
     
-    a. [Azure Portal](https://portal.azure.com)’da oturum açın.
+    a. [Azure portalında](https://portal.azure.com) oturum açın.
     
-    b. Tıklayın **depolama**.
+    b. **Depolama**' ya tıklayın.
     
-    c. Hudson için kullanılan depolama hesabının adına tıklayın.
+    c. Hudson için kullandığınız depolama hesabı adına tıklayın.
     
-    d. Tıklayın **kapsayıcıları**.
+    d. **Kapsayıcılar**' a tıklayın.
     
-    e. Adlandırılmış kapsayıcısını **myjob**, küçük harfli sürümünü Hudson iş oluşturduğunuzda, size atanan iş adı olduğu. Kapsayıcı ve blob adları, küçük harf (ve büyük küçük harfe duyarlı) Azure Depolama'daki. Adlı bir kapsayıcı için BLOB listesini içinde **myjob** görmelisiniz **hello.txt** ve **date.txt**. Bu öğelerden birini URL'sini kopyalayın ve tarayıcınızda açın. Karşıya yüklenen bir metin dosyası bir derleme yapıtı görürsünüz.
+    e. Hudson işini oluşturduğunuzda atadığınız iş adının küçük harfli sürümü olan **myjob**adlı kapsayıcıya tıklayın. Azure depolama 'da kapsayıcı adları ve BLOB adları küçük harfle (ve büyük/küçük harfe duyarlıdır). **Myjob** adlı kapsayıcının blob listesi içinde **Hello. txt** ve **date. txt**' i görmeniz gerekir. Bu öğelerin her biri için URL 'YI kopyalayın ve tarayıcınızda açın. Derleme yapıtı olarak karşıya yüklenen metin dosyasını görürsünüz.
 
-Yapıtları Azure Blob depolama alanına yükler. yalnızca bir derleme sonrası eylem iş başına oluşturulabilir. Yapıtları Azure Blob depolama alanına yüklemek için tek derleme sonrası eylem farklı dosya (joker karakterler dahil) ve dosyaların yollarını belirtebileceğinizi aklınızda bulundurun **yüklenecek yapıları listesi** ayırıcı olarak noktalı virgül kullanarak. Örneğin, yapı, Hudson JAR dosyaları ve çalışma alanınızın TXT dosyaları üretir **derleme** klasörünü açın ve istediğiniz her ikisi de Azure Blob depolama alanına yüklemek için aşağıdaki **yüklenecek yapıları listesi** değer: **derleme /\*.jar; derleme /\*.txt**. Çift iki nokta üst üste söz dizimi içinde blob adı kullanmak için bir yol belirtmek için de kullanabilirsiniz. Jar dosyaları dışındaki kullanarak karşıya istiyorsanız, örneğin, **ikili dosyaları** blob yolu ve TXT dosyaları kullanarak karşıya **bildirimler** blob yolu için aşağıdakileri kullanın **listesi, yapılar Karşıya yüklenecek** değer: **derleme /\*. jar::binaries; derleme /\*. txt::notices**.
+İş başına yapıtları Azure Blob depolamaya yükleyen bir oluşturma sonrası eylem oluşturulabilir. Yapıtları Azure Blob depolamaya yüklemeye yönelik tek derleme sonrası eylemi, ayırıcı olarak noktalı virgül kullanarak **karşıya yüklenecek yapıt listesi** içinde farklı dosyalar (joker karakterler dahil) ve dosya yolları belirtebilir. Örneğin, Hudson derlemeniz, çalışma alanınızın **derleme** klasöründe jar dosyaları ve txt dosyaları üretirse ve Ikisini de Azure Blob depolamaya yüklemek istiyorsanız, şu değeri **yükleyecek yapıtların listesi** için aşağıdakileri kullanın: **Build/\*. jar; Build/\*. txt**. Blob adı içinde kullanılacak yolu belirtmek için çift iki nokta sözdizimini de kullanabilirsiniz. Örneğin, blob yolundaki **bildirimleri** kullanarak karşıya yüklemek için blob yolundaki **IKILI** dosyaları ve txt dosyalarını kullanarak jars 'ın karşıya yüklenmesini istiyorsanız, şu değeri **yükleyecek yapıtların listesi** için şunu kullanın: **Build/\*. jar:: ikililer; Build/\*. txt:: bildirimler**.
 
-## <a name="how-to-create-a-build-step-that-downloads-from-azure-blob-storage"></a>Azure Blob Depolama'dan indirilen bir derleme adımı oluşturma
-Aşağıdaki adımlar, yapılandırma öğeleri Azure Blob Depolama'yı indirmek için bir derleme adımı gösterir. Bu derleme, örneğin, Azure Blob Depolama alanında tutan jar dosyaları dışındaki öğeleri dahil etmek istiyorsanız yararlı olacaktır.
+## <a name="how-to-create-a-build-step-that-downloads-from-azure-blob-storage"></a>Azure Blob depolamadan indirilen bir derleme adımı oluşturma
+Aşağıdaki adımlarda, Azure Blob depolamadan öğeleri indirmek için bir derleme adımının nasıl yapılandırılacağı gösterilmektedir. Bu, derlemenize öğe eklemek istiyorsanız (örneğin, Azure Blob depolamada tutacağınız), yararlı olabilir.
 
-1. İçinde **derleme** bölümü iş yapılandırması **derleme adımı Ekle** seçin **Azure Blob Depolama'dan indirme**.
-2. İçin **depolama hesabı adı**, kullanılacak depolama hesabını seçin.
-3. İçin **kapsayıcı adı**, indirmek istediğiniz BLOB'ları içeren kapsayıcının adını belirtin. Ortam değişkenlerini kullanabilirsiniz.
-4. İçin **Blob adı**, blob adı belirtin. Ortam değişkenlerini kullanabilirsiniz. Ayrıca, blob adının ilk letter(s) belirttikten sonra bir joker karakter olarak bir yıldız işareti kullanabilirsiniz. Örneğin, **proje\\** * tüm BLOB adları ile başlayıp belirtebilirdiniz **proje**.
-5. [İsteğe bağlı] İçin **indirme yolu**, Hudson makine, Azure Blob depolama alanından dosyaları indirmek istediğiniz yolu belirtin. Ortam değişkenlerini de kullanılabilir. (Bir değer belirtmezseniz **indirme yolu**, Azure Blob depolama biriminden dosyaları işin çalışma alanına yüklenir.)
+1. İş yapılandırmasının **derleme** bölümünde **derleme adımı ekle** ' ye tıklayın ve **Azure Blob depolama alanından indir**' i seçin.
+2. **Depolama hesabı adı**için kullanılacak depolama hesabını seçin.
+3. **Kapsayıcı adı**için, indirmek istediğiniz bloblara sahip kapsayıcının adını belirtin. Ortam değişkenlerini kullanabilirsiniz.
+4. **BLOB adı**için blob adını belirtin. Ortam değişkenlerini kullanabilirsiniz. Ayrıca, blob adının ilk harflerini belirttikten sonra joker karakter olarak bir yıldız işareti kullanabilirsiniz. Örneğin, **proje\\** * adları **Project**ile başlayan tüm blob 'ları belirtebilir.
+5. Seçim **İndirme yolu**Için, Azure Blob depolamadan dosyaları Indirmek Istediğiniz Hudson makinesindeki yolu belirtin. Ortam değişkenleri de kullanılabilir. ( **İndirme yolu**için bir değer sağlamazsanız, Azure Blob depolama alanındaki dosyalar iş çalışma alanına indirilir.)
 
-Azure Blob depolama alanından indirmek istediğiniz ek öğeler varsa, ek derleme adımları oluşturabilirsiniz.
+Azure Blob depolama alanından indirmek istediğiniz ek öğeleriniz varsa, ek derleme adımları oluşturabilirsiniz.
 
-Bir derlemeyi çalıştırdıktan sonra derleme geçmişi konsol çıkışı denetleyin ya da beklediğiniz blobları başarıyla yüklenmiş olup olmadığını görmek için indirme konumunda, bakın.
+Bir derlemeyi çalıştırdıktan sonra, beklediğiniz Blobların başarıyla indirilip indirilmediğini görmek için derleme geçmişi konsol çıkışını denetleyebilir veya indirme konumunuza bakabilirsiniz.
 
 ## <a name="components-used-by-the-blob-service"></a>Blob hizmeti tarafından kullanılan bileşenler
-Blob hizmeti bileşenlerini genel bir bakış sağlar.
+Aşağıdakiler blob hizmeti bileşenlerine genel bir bakış sağlar.
 
-* **Depolama hesabı**: Tüm Azure depolama erişimi bir depolama hesabı üzerinden yapılır. Bloblara erişmek için ad alanı en üst düzey budur. Kendi toplam boyutu altında 100 TB olduğu sürece bir hesapta kapsayıcılar, sınırsız sayıda olabilir.
-* **kapsayıcı**: Bir kapsayıcı, BLOB'ları kümesi bir gruplandırmasını sağlar. Tüm bloblar bir kapsayıcıda olmalıdır. Bir hesapta sınırsız sayıda kapsayıcı olabilir. Kapsayıcıda sınırsız sayıda blob depolanabilir.
-* **BLOB**: Bir dosya herhangi bir türü ve boyutu. Azure Depolama'da depolanan BLOB'ları iki tür vardır: blok ve sayfa blobları. Çoğu dosya blok blobudur. Tek bir blok blobu en fazla 200 GB boyutunda olabilir. Bu öğreticide, blok blobları kullanılır. Bir dosyadaki bayt aralıkları sık değişiklik yapıldığında, sayfa blobları, başka bir blob türü, en fazla 1 TB boyut ve daha verimli olabilir. BLOB'ları hakkında daha fazla bilgi için bkz: [anlama blok Blobları, ekleme Blobları ve sayfa Blobları](https://msdn.microsoft.com/library/azure/ee691964.aspx).
-* **URL biçimi**: BLOB'ları şu URL biçimi kullanılarak adreslenebilir:
+* **Depolama hesabı**: tüm Azure depolama erişimi bir depolama hesabı üzerinden yapılır. Bu, bloblara erişim için ad alanının en yüksek düzeyidir. Bir hesap, toplam boyutu 100 TB altında olduğu sürece sınırsız sayıda kapsayıcı içerebilir.
+* **Kapsayıcı**: kapsayıcı bir blob kümesi gruplandırması sağlar. Tüm bloblar bir kapsayıcıda olmalıdır. Bir hesapta sınırsız sayıda kapsayıcı olabilir. Kapsayıcıda sınırsız sayıda blob depolanabilir.
+* **BLOB**: herhangi bir tür ve boyuttaki dosya. Azure depolama 'da depolanabilecek iki tür blob vardır: blok ve sayfa Blobları. Çoğu dosya blok bloblardır. Tek bir Blok Blobu boyutu 200 GB 'a kadar olabilir. Bu öğretici blok bloblarını kullanır. Sayfa Blobları, başka bir blob türü, boyutu 1 TB 'ye kadar olabilir ve bir dosyadaki bayt aralıkları sıklıkla değiştirildiğinde daha etkilidir. Blob 'lar hakkında daha fazla bilgi için bkz. [blok bloblarını, ekleme bloblarını ve sayfa Bloblarını anlama](https://msdn.microsoft.com/library/azure/ee691964.aspx).
+* **URL biçimi**: Bloblar aşağıdaki URL biçimi kullanılarak adreslenebilir:
   
     `http://storageaccount.blob.core.windows.net/container_name/blob_name`
   
-    (Yukarıdaki biçimini genel Azure bulutuna uygular. Farklı Azure Bulutu kullanıyorsanız, uç nokta içinde kullanmak [Azure portalı](https://portal.azure.com) URL uç noktanızı belirlemek için.)
+    (Yukarıdaki biçim Global Azure bulutu için geçerlidir. Farklı bir Azure bulutu kullanıyorsanız, URL uç noktanızı öğrenmek için [Azure Portal](https://portal.azure.com) içindeki uç noktayı kullanın.)
   
-    Yukarıdaki biçimde `storageaccount` depolama hesabınızın adını temsil eden `container_name` , kapsayıcının adını temsil eder ve `blob_name` sırasıyla, blob adını temsil eder. Kapsayıcı adı içinde bir eğik ayrılmış birden çok yol olabilir **/** . Bu öğreticideki örnek kapsayıcı adı **MyJob**, ve **${yapı\_kimliği} / ${yapı\_numarası}** blobun URL'sini sahip kaynaklanan ortak sanal yol için kullanıldı Aşağıdaki biçimi:
+    Yukarıdaki biçimde `storageaccount`, depolama hesabınızın adını temsil eder, `container_name` kapsayıcının adını temsil eder ve `blob_name` sırasıyla Blobun adını temsil eder. Kapsayıcı adı içinde, **/** eğik çizgiyle ayırarak birden çok yola sahip olabilirsiniz. Bu öğreticideki örnek kapsayıcı adı **Myjob**idi ve ortak sanal yol için **$ {BUILD\_ID}/$ {BUILD\_Number}** kullanıldı ve BLOB 'un aşağıdaki formun URL 'sini içermesiyle sonuçlanır:
   
     `http://example.blob.core.windows.net/myjob/2014-05-01_11-56-22/1/hello.txt`
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Meet Hudson](https://wiki.eclipse.org/Hudson-ci/Meet_Hudson)
-* [Java için Azure depolama SDK'si](https://github.com/azure/azure-storage-java)
-* [Azure Depolama İstemcisi SDK Başvurusu](http://dl.windowsazure.com/storage/javadoc/)
+* [Hudson ile tanışın](https://wiki.eclipse.org/Hudson-ci/Meet_Hudson)
+* [Java için Azure depolama SDK 'Sı](https://github.com/azure/azure-storage-java)
+* [Azure Depolama İstemcisi SDK Başvurusu](https://javadoc.io/doc/com.microsoft.azure/azure-core/0.8.0/index.html)
 * [Azure Depolama Hizmetleri REST API'si](https://msdn.microsoft.com/library/azure/dd179355.aspx)
 * [Azure Depolama Ekibi Blog’u](https://blogs.msdn.com/b/windowsazurestorage/)
 

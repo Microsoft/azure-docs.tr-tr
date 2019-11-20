@@ -1,6 +1,6 @@
 ---
-title: Hızlı Başlangıç - Azure Active Directory B2C kullanarak bir masaüstü uygulaması için oturum açma bilgileri ayarlama | Microsoft Docs
-description: Hesap oturum açma bilgileri sağlamak için Azure Active Directory B2C’yi kullanan örnek bir ASP.NET masaüstü uygulaması çalıştırın.
+title: Hızlı başlangıç-Azure Active Directory B2C kullanarak bir masaüstü uygulaması için oturum açma ayarlama
+description: Hesap oturum açma sağlamak için Azure Active Directory B2C kullanan bir örnek WPF Masaüstü uygulaması çalıştırın.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -8,26 +8,26 @@ ms.service: active-directory
 ms.workload: identity
 ms.topic: quickstart
 ms.custom: mvc
-ms.date: 11/30/2018
+ms.date: 09/12/2019
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: dd0679cc418cb1a15a69c01d3267d5d11b20fd3e
-ms.sourcegitcommit: adb6c981eba06f3b258b697251d7f87489a5da33
+ms.openlocfilehash: e11fd2c8ff250ff505f312507a577d67ff9c1454
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/04/2019
-ms.locfileid: "66509830"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71065836"
 ---
-# <a name="quickstart-set-up-sign-in-for-a-desktop-app-using-azure-active-directory-b2c"></a>Hızlı Başlangıç: Azure Active Directory B2C kullanarak bir masaüstü uygulaması için oturum açma ayarlama 
+# <a name="quickstart-set-up-sign-in-for-a-desktop-app-using-azure-active-directory-b2c"></a>Hızlı Başlangıç: Azure Active Directory B2C kullanarak bir masaüstü uygulaması için oturum açma ayarlama
 
-Azure Active Directory (Azure AD) B2C, uygulamanız, işletmeniz ve müşterileriniz için koruma sağlamak üzere bulut kimliği yönetimi sunar. Azure AD B2C; uygulamalarınızın, açık standart protokolleri kullanarak sosyal hesaplarda ve kurumsal hesaplarda kimlik doğrulaması gerçekleştirmesine olanak tanır. Bu hızlı başlangıçta bir sosyal kimlik sağlayıcısı kullanarak oturum açmak ve Azure AD B2C korumalı bir web API’sini çağırmak için bir Windows Presentation Foundation (WPF) masaüstü uygulaması kullanacaksınız.
+Azure Active Directory B2C (Azure AD B2C) uygulamanızın, işinizin ve müşterilerinin korunmasını sağlamak için bulut kimlik yönetimi sağlar. Azure AD B2C; uygulamalarınızın, açık standart protokolleri kullanarak sosyal hesaplarda ve kurumsal hesaplarda kimlik doğrulaması gerçekleştirmesine olanak tanır. Bu hızlı başlangıçta bir sosyal kimlik sağlayıcısı kullanarak oturum açmak ve Azure AD B2C korumalı bir web API’sini çağırmak için bir Windows Presentation Foundation (WPF) masaüstü uygulaması kullanacaksınız.
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- [Visual Studio 2019](https://www.visualstudio.com/downloads/) ile **ASP.NET ve web geliştirme** iş yükü. 
-- Facebook’tan, Google’dan, Microsoft’tan veya Twitter’dan bir sosyal hesap.
+- **ASP.net ve Web geliştirme** iş yüküyle [Visual Studio 2019](https://www.visualstudio.com/downloads/) .
+- Facebook, Google veya Microsoft 'dan bir sosyal hesap.
 - GitHub’dan [zip dosyasını indirin](https://github.com/Azure-Samples/active-directory-b2c-dotnet-desktop/archive/master.zip) veya örnek web uygulamasını kopyalayın.
 
     ```
@@ -43,16 +43,16 @@ Azure Active Directory (Azure AD) B2C, uygulamanız, işletmeniz ve müşteriler
 
 1. **Kaydolma veya Oturum Açma** iş akışını başlatmak için **Oturum aç**’a tıklayın.
 
-    ![Örnek uygulama](media/active-directory-b2c-quickstarts-desktop-app/wpf-sample-application.png)
+    ![Örnek WPF uygulamasının ekran görüntüsü](media/active-directory-b2c-quickstarts-desktop-app/wpf-sample-application.png)
 
-    Örnek, çeşitli kaydolma seçeneklerini destekler. Bu seçenekler, sosyal kimlik sağlayıcısı kullanarak veya bir e-posta adresi kullanarak yerel bir hesap oluşturma içerir. Bu hızlı başlangıç için Facebook’tan, Google’dan, Microsoft’tan veya Twitter’dan bir sosyal kimlik sağlayıcısı hesabı kullanın. 
+    Örnek, çeşitli kaydolma seçeneklerini destekler. Bu seçenekler, bir sosyal kimlik sağlayıcısı kullanmayı veya bir e-posta adresi kullanarak yerel bir hesap oluşturmayı içerir. Bu hızlı başlangıç için Facebook, Google veya Microsoft 'dan bir sosyal kimlik sağlayıcısı hesabı kullanın.
 
 
-2. Azure AD B2C, örnek web uygulaması için Wingtip Toys adlı bir kurgusal markaya yönelik özel bir oturum açma sayfası sunar. Sosyal kimlik sağlayıcısı kullanarak kaydolmak için, kullanmak istediğiniz kimlik sağlayıcısının düğmesine tıklayın. 
+2. Azure AD B2C, örnek Web uygulaması için fabrikam adlı kurgusal bir şirket için oturum açma sayfası sunar. Sosyal kimlik sağlayıcısı kullanarak kaydolmak için, kullanmak istediğiniz kimlik sağlayıcısının düğmesine tıklayın.
 
-    ![Oturum Açma veya Kaydolma sağlayıcısı](media/active-directory-b2c-quickstarts-desktop-app/sign-in-or-sign-up-wpf.png)
+    ![Kimlik sağlayıcılarını gösteren oturum açma veya kaydolma sayfası](media/active-directory-b2c-quickstarts-desktop-app/sign-in-or-sign-up-wpf.png)
 
-    Sosyal hesabınızla kimlik bilgileri ve sosyal hesabınızdaki bilgileri okumak için uygulamayı yetkilendirme (oturum açma) kullanarak kimlik doğrulaması. Erişim izni verdiğinizde uygulama sosyal hesabınızdan adınız ve şehriniz gibi profil bilgilerini alabilir. 
+    Sosyal hesap kimlik bilgilerinizi kullanarak kimlik doğrulaması yapabilir (oturum açın) ve uygulamayı sosyal hesabınızdaki bilgileri okumak üzere yetkilendirirsiniz. Erişim izni verdiğinizde uygulama sosyal hesabınızdan adınız ve şehriniz gibi profil bilgilerini alabilir.
 
 2. Kimlik sağlayıcısına ilişkin oturum açma işlemini tamamlayın.
 
@@ -60,13 +60,13 @@ Azure Active Directory (Azure AD) B2C, uygulamanız, işletmeniz ve müşteriler
 
 ## <a name="edit-your-profile"></a>Profilinizi düzenleme
 
-Azure AD B2C, kullanıcılara profillerini güncelleme olanağı tanıyan bir işlev sunar. Örnek web uygulaması iş akışı için bir Azure AD B2C düzenleme profil kullanıcı akışını kullanır. 
+Azure AD B2C, kullanıcılara profillerini güncelleme olanağı tanıyan bir işlev sunar. Örnek Web uygulaması, iş akışı için bir Azure AD B2C düzenleme profili Kullanıcı akışı kullanır.
 
 1. Oluşturduğunuz profili düzenlemek için uygulamanın menü çubuğunda **Profili düzenle**’ye tıklayın.
 
-    ![Profili düzenleme](media/active-directory-b2c-quickstarts-desktop-app/edit-profile-wpf.png)
+    ![WPF örnek uygulamasında profil Düzenle düğmesi vurgulanmış](media/active-directory-b2c-quickstarts-desktop-app/edit-profile-wpf.png)
 
-2. Oluşturduğunuz hesapla ilişkili kimlik sağlayıcısını seçin. Örneğin, hesabınızı oluşturduğunuzda kimlik sağlayıcısı olarak Twitter’ı kullandıysanız ilişkili profil ayrıntılarını değiştirmek için Twitter’ı seçin.
+2. Oluşturduğunuz hesapla ilişkili kimlik sağlayıcısını seçin. Örneğin, hesabınızı oluştururken kimlik sağlayıcısı olarak Facebook kullandıysanız, ilişkili profil ayrıntılarını değiştirmek için Facebook ' u seçin.
 
 3. **Görünen adınızı** veya **Şehrinizi** değiştirip **Devam**’a tıklayın.
 
@@ -74,7 +74,7 @@ Azure AD B2C, kullanıcılara profillerini güncelleme olanağı tanıyan bir i�
 
 ## <a name="access-a-protected-api-resource"></a>Korumalı bir API kaynağına erişme
 
-Korumalı kaynaktan istekte bulunmak için **API’yi çağır**’a tıklayın. 
+Korumalı kaynaktan istekte bulunmak için **API’yi çağır**’a tıklayın.
 
     ![Call API](media/active-directory-b2c-quickstarts-desktop-app/call-api-wpf.png)
 
@@ -88,14 +88,14 @@ Diğer Azure AD B2C hızlı başlangıçlarını veya öğreticilerini denemeyi 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, bir örnek masaüstü uygulaması için kullanılır: 
+Bu hızlı başlangıçta, aşağıdakileri yapmak için örnek bir masaüstü uygulaması kullandınız:
 
-* Özel oturum açma sayfasıyla oturum açmak
+* Özel bir oturum açma sayfasıyla oturum açın
 * Sosyal kimlik sağlayıcısı ile oturum açın
-* Bir Azure AD B2C hesabı oluşturma
-* Azure AD B2C tarafından korunan bir web API'sini çağırma
+* Azure AD B2C hesabı oluşturma
+* Azure AD B2C tarafından korunan bir Web API 'sini çağırın
 
-Kendi Azure AD B2C kiracınızı oluşturarak kullanmaya başlayın. 
+Kendi Azure AD B2C kiracınızı oluşturarak kullanmaya başlayın.
 
 > [!div class="nextstepaction"]
 > [Azure portalında Azure Active Directory B2C kiracısı oluşturma](tutorial-create-tenant.md)

@@ -4,20 +4,19 @@ description: Bu öğreticide Azure portalında Linux SQL Server 2017 sanal makin
 services: virtual-machines-linux
 author: MashaMSFT
 manager: craigg
-ms.date: 12/5/2018
+ms.date: 10/22/2019
 ms.topic: conceptual
 tags: azure-service-management
-ms.devlang: na
 ms.service: virtual-machines-sql
 ms.workload: iaas-sql-server
 ms.author: mathoma
 ms.reviewer: jroth
-ms.openlocfilehash: 468db9d62a98e079fbe6954843e23a518eaabd0a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 85d2396a05e7496b56bd83bd834150aa6d864c62
+ms.sourcegitcommit: 7efb2a638153c22c93a5053c3c6db8b15d072949
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60478607"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72882679"
 ---
 # <a name="provision-a-linux-sql-server-virtual-machine-in-the-azure-portal"></a>Azure portalında bir Linux SQL Server sanal makinesi sağlama
 
@@ -25,7 +24,7 @@ ms.locfileid: "60478607"
 > * [Linux](provision-sql-server-linux-virtual-machine.md)
 > * [Windows](../../windows/sql/virtual-machines-windows-portal-sql-server-provision.md)
 
-Bu hızlı başlangıç öğreticisinde SQL Server 2017 yüklü bir Linux sanal makine oluşturmak için Azure portalını kullanın.
+Bu hızlı başlangıç öğreticisinde, SQL Server 2017 yüklü bir Linux sanal makinesi oluşturmak için Azure portal kullanırsınız.
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
@@ -40,71 +39,67 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 ## <a id="create"></a> SQL Server yüklü bir Linux VM oluşturma
 
-1. [Azure Portal](https://portal.azure.com/) oturum açın.
+1. [Azure Portal](https://portal.azure.com/)’ında oturum açın.
 
-1. Sol bölmede seçin **kaynak Oluştur**.
+1. Sol bölmede **kaynak oluştur**' u seçin.
 
-1. İçinde **kaynak Oluştur** bölmesinde **işlem**.
+1. **Kaynak oluştur** bölmesinde **işlem**' ı seçin.
 
-1. Seçin **tümünü gör** yanındaki **öne çıkan** başlığı.
+1. **Öne çıkan** başlığın yanındaki **Tümünü göster** ' i seçin.
 
    ![Tüm VM görüntülerini inceleme](./media/provision-sql-server-linux-virtual-machine/azure-compute-blade.png)
 
-1. Arama kutusuna **SQL Server 2017**seçip **Enter** aramayı başlatmak için.
+1. Arama kutusuna **SQL Server 2019**yazın ve aramayı başlatmak için **ENTER** ' u seçin.
 
-1. Arama sonuçlarını seçerek sınırlandırmak **işletim sistemi** > **Redhat**. Ardından, altında **yayımcı**, seçin **Microsoft**.
+1. Arama sonuçlarını, **işletim sistemi** > **RedHat**' i seçerek sınırlayın.
 
-    ![SQL Server 2017 VM görüntüleri için arama filtresi](./media/provision-sql-server-linux-virtual-machine/searchfilter.png)
+    ![SQL Server 2019 VM görüntüleri için arama filtresi](./media/provision-sql-server-linux-virtual-machine/searchfilter.png)
 
-1. Arama sonuçlarındaki bir SQL Server 2017 Linux görüntüsünü seçin. Bu öğreticide **ücretsiz SQL Server Lisansı: SQL Server 2017 Geliştirici Red Hat Enterprise Linux 7.4**.
+1. Arama sonuçlarından bir SQL Server 2019 Linux görüntüsü seçin. Bu öğretici **RHEL74 üzerinde 2019 SQL Server**kullanır.
 
    > [!TIP]
-   > Developer sürümü, özellikleri, ancak SQL Server lisanslama maliyeti olmadan Enterprise edition ile geliştirme veya test olanak tanır. Yalnızca Linux VM çalıştırma maliyetleri için ödeme yaparsınız.
+   > Geliştirici sürümü, Enterprise Edition özellikleriyle test veya geliştirme yapmanızı sağlar, ancak SQL Server lisanslama maliyetlerine sahip olmaz. Yalnızca Linux VM çalıştırma maliyetleri için ödeme yaparsınız.
 
-1. Altında **dağıtım modeli seçin**, iş yükü gereksinimlerinize uyan bir dağıtım modelini seçin.
+1. **Oluştur**'u seçin. 
 
-    > [!Note]
-    > Yeni iş yükleri için kullanın **Resource Manager**. Mevcut bir sanal ağa bağlanmak için iş yükünüz için sanal ağın dağıtım yöntemini seçin. Dağıtım modelleri hakkında daha fazla bilgi için bkz. [Azure Resource Manager ve klasik dağıtım modellerini](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-deployment-model).
 
-1. **Oluştur**’u seçin.
+### <a name="set-up-your-linux-vm"></a>Linux VM 'nizi ayarlama
 
-### <a name="set-up-your-linux-vm"></a>Linux VM'nizi ayarlayın
-
-1. İçinde **Temelleri** sekmesinde, **abonelik** ve **kaynak grubu**. 
+1. **Temel bilgiler** sekmesinde, **aboneliğinizi** ve **kaynak grubunuzu**seçin. 
 
     ![Temel bilgiler penceresi](./media/provision-sql-server-linux-virtual-machine/basics.png)
 
-1. İçinde **sanal makine adı**, yeni Linux VM'NİZDE için bir ad girin.
-1. Ardından, yazın veya aşağıdaki değerleri seçin:
-   * **Bölge**: Sizin için en uygun Azure bölgesi seçin.
-   * **Kullanılabilirlik seçeneklerini**: Uygulama ve verileriniz için en iyi kullanılabilirlik ve yedekliliği seçeneği seçin.
-   * **Değiştirme boyutu**: İşiniz bittiğinde, bir makine boyutu seçin ve bu seçeneği **seçin**. VM boyutları hakkında daha fazla bilgi için bkz. [Linux VM boyutları](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-sizes).
+1. **Sanal makine adı**alanına yenı Linux sanal makineniz için bir ad girin.
+1. Ardından, aşağıdaki değerleri yazın veya seçin:
+   * **Bölge**: sizin Için doğru Azure bölgesini seçin.
+   * **Kullanılabilirlik seçenekleri**: Uygulamalarınız ve verileriniz için en iyi kullanılabilirlik ve artıklık seçeneğini belirleyin.
+   * **Boyutu Değiştir**: bir makine boyutu seçmek için bu seçeneği belirleyin ve Işiniz bittiğinde **Seç**' i seçin. VM boyutları hakkında daha fazla bilgi için bkz. [Linux VM boyutları](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-sizes).
 
      ![VM boyutu seçme](./media/provision-sql-server-linux-virtual-machine/vmsizes.png)
 
    > [!TIP]
-   > Geliştirme ve işlevsel test için bir VM boyutu kullanın **DS2** veya üzeri. Performans testi için **DS13** veya üzeri kullanın.
+   > Geliştirme ve işlevsel test için, **DS2** veya ÜZERI bir VM boyutu kullanın. Performans testi için **DS13** veya üzeri kullanın.
 
-   * **Kimlik doğrulama türü**: Seçin **SSH ortak anahtarı**.
+   * **Kimlik doğrulama türü**: **SSH ortak anahtarını**seçin.
 
      > [!Note]
      > Kimlik doğrulaması için SSH ortak anahtarı veya Parola kullanabilirsiniz. SSH daha güvenlidir. SSH anahtarı oluşturma talimatları için bkz. [Azure'daki Linux VM için Linux ve Mac üzerinde SSH anahtarı oluşturma](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys).
 
-   * **Kullanıcı adı**: VM için yönetici adı girin.
+   * **Kullanıcı adı**: VM için yönetici adını girin.
    * **SSH ortak anahtarı**: RSA ortak anahtarınızı girin.
-   * **Ortak gelen bağlantı noktası**: Seçin **Seçili bağlantı noktalarına izin** ve çekme **SSH (22)** içinde bağlantı noktası **seçin ortak gelen bağlantı noktası** listesi. Bu hızlı başlangıçta, bağlanmak ve SQL Server yapılandırmasını tamamlamak Bu adım gereklidir. SQL Server’a uzaktan bağlanmak istiyorsanız, İnternet üzerinden bağlantılar için **MS SQL (1433)** seçeneğini de belirleyerek 1433 numaralı bağlantı noktasını açın.
+   * **Ortak gelen bağlantı noktaları**: **Seçili bağlantı noktalarına izin ver** ' i seçin ve **ortak gelen bağlantı noktalarını Seç** listesinde **SSH (22)** bağlantı noktasını seçin. Bu hızlı başlangıçta, SQL Server yapılandırmasını bağlamak ve gerçekleştirmek için bu adım gereklidir. SQL Server uzaktan bağlanmak istiyorsanız, sanal makine oluşturulduktan sonra Internet üzerinden bağlantılar için Microsoft SQL Server tarafından kullanılan varsayılan bağlantı noktasına (1433) giden trafiğe el ile izin vermeniz gerekir.
 
-   ![Gelen bağlantı noktaları](./media/provision-sql-server-linux-virtual-machine/port-settings.png)
+     ![Gelen bağlantı noktaları](./media/provision-sql-server-linux-virtual-machine/port-settings.png)
 
-1. Aşağıdaki ek Sekmelerdeki ayarlar istediğinizden veya varsayılan ayarları tutun değişiklikleri yapın.
+1. Aşağıdaki ek sekmelerdeki ayarlarda istediğiniz değişiklikleri yapın veya varsayılan ayarları koruyun.
     * **Diskler**
     * **Ağ**
-    * **Yönetim**
-    * **Konuk yapılandırma**
+    * **Yönetme**
+    * **Konuk yapılandırması**
     * **Etiketler**
 
 1. **İncele ve oluştur**’u seçin.
-1. İçinde **gözden geçir + Oluştur** bölmesinde **Oluştur**.
+1. **Gözden geçir + oluştur** bölmesinde **Oluştur**' u seçin.
 
 ## <a id="connect"></a> Linux VM'ye bağlanma
 
@@ -118,7 +113,7 @@ VM'nizin IP adresini Azure portalında bulabilirsiniz.
 
 ![Azure portalında IP adresi](./media/provision-sql-server-linux-virtual-machine/vmproperties.png)
 
-Windows üzerinde çalıştırıyorsanız ve bir BASH kabuğunda yoksa PuTTY gibi bir SSH İstemcisi'ni yükleyin.
+Windows üzerinde çalıştırıyorsanız ve BASH kabuğu yoksa, PuTTY gibi bir SSH istemcisi yükleyebilirsiniz.
 
 1. [PuTTY'yi indirin ve yükleyin](https://www.chiark.greenend.org.uk/~sgtatham/putty/download.html).
 
@@ -126,16 +121,16 @@ Windows üzerinde çalıştırıyorsanız ve bir BASH kabuğunda yoksa PuTTY gib
 
 1. PuTTY yapılandırma ekranına VM'nizin genel IP adresini girin.
 
-1. Seçin **açık** ve kullanıcı adınızı ve parolanızı girin.
+1. **Aç** ' ı seçin ve istemlerin Kullanıcı adınızı ve parolanızı girin.
 
 Linux VM'lerinize bağlanma hakkında daha fazla bilgi için bkz. [Portal kullanarak Azure’da bir Linux VM oluşturma](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-quick-create-portal).
 
 > [!Note]
-> Kayıt defterinde önbelleğe alınmamış sunucunun ana makine anahtarı hakkında bir PuTTY güvenlik uyarısı görürseniz, aşağıdaki seçeneklerden birini seçin. Bu konak güveniyorsanız seçin **Evet** anahtar PuTTy'nın önbelleğine eklemek ve bağlanmaya devam etmek için. Yalnızca bir kez bağlanmaya ilişkin gerçekleştirmek istiyorsanız, eklemeden önbellek anahtarı seçin **Hayır**. Bu konak güvenmiyorsanız seçin **iptal** bağlantı bırakmaya karar.
+> Sunucunun ana bilgisayar anahtarı hakkında kayıt defterinde önbelleğe alınmamış bir PuTTY güvenlik uyarısı görürseniz, aşağıdaki seçeneklerden birini belirleyin. Bu konağa güveniyorsanız, anahtarı PuTTy 'in önbelleğine eklemek ve bağlanmaya devam etmek için **Evet** ' i seçin. Yalnızca bir kez bağlanmak istiyorsanız, anahtarı önbelleğe eklemeden, **Hayır**' ı seçin. Bu konağa güvenmiyorsanız bağlantıyı bırakmak için **iptal** ' i seçin.
 
 ## <a id="password"></a> SA parolasını değiştirme
 
-Yeni sanal makine SQL Server'ı rastgele bir SA parolasıyla yükler. SQL Server'a SA kimlik bilgileriyle bağlanmadan önce bu parolayı sıfırlayın.
+Yeni sanal makine SQL Server'ı rastgele bir SA parolasıyla yükler. SA oturum açmayla SQL Server bağlanmadan önce bu parolayı sıfırlayın.
 
 1. Linux VM'nize bağlandıktan sonra yeni bir komut terminali açın.
 
@@ -174,8 +169,8 @@ Azure VM üzerindeki SQL Server'a uzaktan bağlanmanız gerekirse ağ güvenlik 
 > Sağlama sırasında ayarlarda **MS SQL (1433)** gelen bağlantı noktasını seçtiyseniz, bu değişiklikler sizin için yapılmış olur. Güvenlik duvarını yapılandırmayla ilgili sonraki bölme geçebilirsiniz.
 
 1. Portalda **Sanal makineler**'i ve ardından SQL Server VM'nizi seçin.
-1. Sol gezinti bölmesindeki altında **ayarları**seçin **ağ**.
-1. Ağ penceresinde **gelen bağlantı noktası Ekle** altında **gelen bağlantı noktası kuralları**.
+1. Sol gezinti bölmesindeki **Ayarlar**altında **ağ**' ı seçin.
+1. Ağ penceresinde gelen **bağlantı noktası kuralları**altında **gelen bağlantı noktası Ekle** ' yi seçin.
 
    ![Gelen bağlantı noktası kuralları](./media/provision-sql-server-linux-virtual-machine/networking.png)
 
@@ -202,6 +197,6 @@ Bu öğreticide nasıl Red Hat Enterprise Linux (RHEL) VM oluşturacağınız g�
 
 Azure'da bir SQL Server 2017 sanal makinesi oluşturdunuz. Artık **sqlcmd** ile yerel olarak bağlanıp Transact-SQL sorguları çalıştırabilirsiniz.
 
-Azure VM uzak SQL Server bağlantıları için yapılandırılmışsa, uzak bağlantı olmalıdır. Windows'dan Linux üzerindeki SQL Server'a uzaktan bağlantı kurma örneği için bkz. [Linux üzerindeki SQL Server'a bağlanmak için Windows üzerinde SSMS kullanma](https://docs.microsoft.com/sql/linux/sql-server-linux-develop-use-ssms). Visual Studio Code bağlantısı kurmak için bkz. [SQL Server için Transact-SQL betikleri oluşturma ve çalıştırma amacıyla Visual Studio Code'u kullanma](https://docs.microsoft.com/sql/linux/sql-server-linux-develop-use-vscode)
+Azure VM 'yi uzak SQL Server bağlantıları için yapılandırdıysanız, uzaktan bağlanabilmelisiniz. Windows'dan Linux üzerindeki SQL Server'a uzaktan bağlantı kurma örneği için bkz. [Linux üzerindeki SQL Server'a bağlanmak için Windows üzerinde SSMS kullanma](https://docs.microsoft.com/sql/linux/sql-server-linux-develop-use-ssms). Visual Studio Code bağlantısı kurmak için bkz. [SQL Server için Transact-SQL betikleri oluşturma ve çalıştırma amacıyla Visual Studio Code'u kullanma](https://docs.microsoft.com/sql/linux/sql-server-linux-develop-use-vscode)
 
-Linux üzerinde SQL Server hakkında daha fazla genel bilgi için bkz. [genel bakış, SQL Server 2017 Linux'ta](https://docs.microsoft.com/sql/linux/sql-server-linux-overview). SQL Server 2017 Linux sanal makinelerini kullanma hakkında daha fazla bilgi için bkz. [Azure'daki SQL Server 2017 sanal makinelerine genel bakış](sql-server-linux-virtual-machines-overview.md).
+Linux üzerinde SQL Server hakkında daha fazla genel bilgi için bkz. [Linux üzerinde SQL Server 2017 'ye genel bakış](https://docs.microsoft.com/sql/linux/sql-server-linux-overview). SQL Server 2017 Linux sanal makinelerini kullanma hakkında daha fazla bilgi için bkz. [Azure'daki SQL Server 2017 sanal makinelerine genel bakış](sql-server-linux-virtual-machines-overview.md).

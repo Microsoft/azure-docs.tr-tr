@@ -9,15 +9,15 @@ ms.date: 01/23/2019
 ms.author: danlep
 ms.custom: include file
 ms.openlocfilehash: cd97c61e7493249785293ae331713ba1a98efee3
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.sourcegitcommit: 0f54f1b067f588d50f787fbfac50854a3a64fff7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
+ms.lasthandoff: 08/12/2019
 ms.locfileid: "67188926"
 ---
-## <a name="run-image-from-registry"></a>Kayıt defterinden görüntü çalıştırma
+## <a name="run-image-from-registry"></a>Görüntüyü kayıt defterinden Çalıştır
 
-Şimdi, çekme ve çalıştırabilirsiniz `hello-world:v1` kullanarak container registry'den kapsayıcı görüntüsü [docker run][docker-run]:
+Şimdi `hello-world:v1` [Docker Run][docker-run]kullanarak kapsayıcı Kayıt defterinizden kapsayıcı görüntüsünü çekebilir ve çalıştırabilirsiniz:
 
 ```
 docker run <acrLoginServer>/hello-world:v1  

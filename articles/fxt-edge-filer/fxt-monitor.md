@@ -1,85 +1,85 @@
 ---
-title: Azure FXT Edge dosyalayıcı izleyin
-description: Azure FXT Edge dosyalayıcı karma depolama önbelleği için donanım durumunu izleme
+title: Azure FXT Edge Filni izleme
+description: Azure FXT Edge Filer karma depolama önbelleği için donanım durumunu izleme
 author: ekpgh
 ms.service: fxt-edge-filer
 ms.topic: conceptual
 ms.date: 06/20/2019
-ms.author: v-erkell
-ms.openlocfilehash: e7395c69d99884a5c662e545a69778ed195aec55
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.author: rohogue
+ms.openlocfilehash: 3f422339af2040ad81c585c0e193e6cb3667b135
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67543083"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72254877"
 ---
-# <a name="monitor-azure-fxt-edge-filer-hardware-status"></a>Azure FXT Edge dosyalayıcı donanım durumunu izleme
+# <a name="monitor-azure-fxt-edge-filer-hardware-status"></a>Azure FXT Edge Filer donanım durumunu izleme
 
-Azure FXT Edge dosyalayıcı karma depolama önbellek sistemi kasasına yöneticilerin donanım nasıl çalıştığını anlamanıza yardımcı olmak için yerleşik birden çok durum ışıklar vardır.
+Azure FXT Edge Filer karma depolama önbelleği sisteminde, yöneticilerin donanımın nasıl çalıştığını anlamalarına yardımcı olmak için kasaya yerleşik birden çok durum ışığı vardır.
 
 ## <a name="system-health-status"></a>Sistem durumu
 
-Daha yüksek düzeyde bir önbellek işlemleri izlemek için yazılımın Denetim Masası'nı kullanın. **Pano** sayfasında açıklandığı gibi [Denetim Masası Pano Kılavuzu](https://azure.github.io/Avere/legacy/dashboard/4_7/html/ops_dashboard_index.html)
+Önbellek işlemlerini daha yüksek bir düzeyde izlemek için, [Denetim Masası Pano kılavuzunda](https://azure.github.io/Avere/legacy/dashboard/4_7/html/ops_dashboard_index.html) açıklanan şekilde, yazılım Denetim Masası **Pano** sayfasını kullanın
 
-## <a name="hardware-status-leds"></a>Donanım durumunu LED'leri
+## <a name="hardware-status-leds"></a>Donanım durumu LED 'Leri
 
-Bu bölümde Azure FXT Edge dosyalayıcı donanıma yerleşik çeşitli durumu ışıkları açıklanmaktadır.
+Bu bölümde, Azure FXT Edge Filer donanımında yerleşik olarak bulunan çeşitli durum ışıkları açıklanmaktadır.
 
-### <a name="hard-drive-status-leds"></a>Sabit sürücü durumu LED'leri
+### <a name="hard-drive-status-leds"></a>Sabit sürücü durumu LED 'Leri
 
-![Yatay belirtme çizgisi etiketlerle 2 sabit sürücüsü ön resmi (sol üst köşede), 1 (sol alt köşesinde) ve 3 (sağ taraf)](media/fxt-monitor/fxt-drive-callouts.png)
+![sabit sürücü ön, yatay, belirtme çizgisi etiketleri 2 (sol üst köşe), 1 (sol alt köşe) ve 3 (sağ taraf)](media/fxt-monitor/fxt-drive-callouts.png)
 
-İki durum LED'lerini her sürücü taşıyıcı vardır: bir etkinliği göstergesini (1) ve bir durum göstergesi (2). 
+Her sürücü taşıyıcısı iki durum LED 'e sahiptir: etkinlik göstergesi (1) ve bir durum göstergesi (2). 
 
-* Sürücü kullanımda olmadığında etkinlik (1) ışıkları GEREKTİRİYORDU.  
-* LED (2) durumu, aşağıdaki tabloda kodları kullanarak sürücüsü durumunu gösterir.
+* Etkinlik LED (1) sürücü kullanımda olduğunda ışıklar.  
+* Durum ışığı (2), aşağıdaki tablodaki kodları kullanarak sürücünün koşulunu gösterir.
 
-| Sürücü LED durumu durumu              | Anlamı  |
+| Sürücü durumu LED durumu              | Açıklama  |
 |-------------------------------------|----------------------------------------------------------|
-| Saniye başına iki kez yeşil yanıp sönen      | Sürücü tanımlayan *veya* <br> Sürücü temizleme için hazırlama  |
-| (Işıklandırılmamış)                         | Sistem başlatma tamamlandı değil *veya* <br>Kaldırılacak sürücü hazır |
-| Yanıp sönen amber, yeşil ve kapatma       | Bir sürücü hatası tahmin   |
-| Saniyede dört kez yanıp sönen amber | Sürücü başarısız oldu   |
-| Düz yeşil                         | Sürücü çevrimiçi |
+| Saniyede dakikada bir kez yanıp sönyeşil      | Sürücüyü belirleme *veya* <br> Sürücü kaldırma için hazırlanıyor  |
+| Kapalı (açılmamış)                         | Sistem başlatmayı tamamlamadı *veya* <br>Sürücü kaldırılmak üzere hazırlanıyor |
+| Yanıp sönmeye yeşil, bir ve kapalı       | Sürücü hatası tahmin edildi   |
+| Saniyede yanıp sönyılda dört kez | Sürücü başarısız oldu   |
+| Solid yeşil                         | Sürücü çevrimiçi |
 
-(3) sürücü sağ tarafında, sürücü kapasite ve diğer bilgileri ile etiketlenir.
+Sürücünün (3) sağ tarafı, sürücünün kapasitesi ve diğer bilgilerle etiketlidir.
 
-Sürücü numaraları sürücüleri arasındaki boşluk yazdırılır. Azure FXT Edge dosyalayıcı 0 sürücü sol üst sürücüdür ve 1 doğrudan o altında sürücüdür. Numaralandırma, bu düzende devam eder. 
+Sürücü numaraları, sürücüler arasındaki alana yazdırılır. Azure FXT Edge Filsi içinde, 0. sürücü, sol üst sürücüdür ve 1. Sürücü doğrudan onun altında. Numaralandırma bu düzende devam eder. 
 
-![Fotoğraf bir sabit sürücünün sürücü numaraları ve kapasite etiketleri gösteren FXT kasa içinde bölmesi](media/fxt-drives-photo.png)
+![FXT kasadaki bir sabit sürücü bölmesinin fotoğrafı, sürücü numaralarını ve kapasite etiketlerini gösterir](media/fxt-drives-photo.png)
 
-## <a name="left-control-panel"></a>Sol Denetim Masası
+## <a name="left-control-panel"></a>Sol Denetim bölmesi
 
-Sol Ön Denetim Masası çeşitli durumu LED Göstergeleri (1) ve çok ışıklı sistem durumu göstergesi (2) sahiptir. 
+Sol ön denetim masasında çeşitli durum göstergeleri (1) ve büyük bir sistem durumu göstergesi (2) bulunur. 
 
-![1 durum göstergeleri sol ve sağda ışık büyük sistem sistem durumu göstergesi etiketleme 2 etiketleme sol durum bölmesi](media/fxt-monitor/fxt-control-panel-left.jpg)
+![Sol tarafta 1 etiketleme durumu göstergesi ve sağ taraftaki büyük sistem durumu göstergesi ışığını 2 etiketleyerek sol durum bölmesi](media/fxt-monitor/fxt-control-panel-left.jpg)
 
-### <a name="control-panel-status-indicators"></a>Denetim Masası Durum göstergeleri 
+### <a name="control-panel-status-indicators"></a>Denetim Masası durum göstergeleri 
 
-Durum göstergeleri sol konumunda düz amber ışık bu sistemdeki bir hata olup olmadığını gösterir. Aşağıdaki tabloda, hatalar için olası nedenler ve çözümler açıklanmaktadır. 
+Sol taraftaki durum göstergeleri, bu sistemde bir hata varsa Solid bir TBU ışığı göster. Aşağıdaki tabloda hatalara yönelik olası nedenler ve çözümler açıklanmaktadır. 
 
-Yine de bu çözümleri denedikten sonra hata varsa, Yardım için desteğe başvurun. 
+Bu çözümleri denemeden sonra hala hata yaşıyorsanız yardım için [desteğe başvurun](fxt-support-ticket.md) . 
 
 | Simge | Açıklama | Hata koşulu | Olası çözümler |
 |----------------|---------------|--------------------|----------------------|
-| ![Sürücü simgesi](media/fxt-monitor/fxt-hd-icon.jpg) | Sürücü durumu | Sürücü hatası | Sürücünün bir hata olup olmadığını belirlemek için sistem olay günlüğünü kontrol edin veya <br>Uygun çevrimiçi Tanılama testi çalıştırın; sistemi yeniden başlatın ve ekli tanılama (ePSA) çalıştırın veya <br>Sürücüleri bir RAID dizisinde yapılandırıldıysa, sistemi yeniden başlatın ve ana bilgisayar bağdaştırıcısı yapılandırma yardımcı programı girin |
-|![Sıcaklık simgesi](media/fxt-monitor/fxt-temp-icon.jpg) | Sıcaklık durumu | Sıcaklık hata - Örneğin, bir sporseverseniz başarısız olursa veya ortam sıcaklığı je mimo rozsah | Aşağıdaki adreslenebilir koşulları denetleyin: <br>Bir soğutma fan eksik ya da başarısız oldu <br>Sistemin kapak, hava shroud bellek modülü boş ya da arka dolgusu köşeli ayraç kaldırılır <br>Ortam sıcaklığı çok yüksek <br>Dış hava akışı engellendiği |
-|![Elektrik simgesi](media/fxt-monitor/fxt-electric-icon.jpg) | Elektrik durumu | Elektrik hata - Örneğin, aralık dışında voltaj PSU ya da başarısız gerilim düzenleyicisi başarısız oldu. |  Özel konu için sistem iletisi ve sistem olay günlüğünü denetleyin. PSU ile ilgili bir sorun varsa, LED PSU durumunu denetleyin ve gerekirse PSU yeniden takın. | 
-|![bellek simgesi](media/fxt-monitor/fxt-memory-icon.jpg) | Bellek durumu | Bellek hatası | Başarısız bellek konumu için sistem iletisi ve sistem olay günlüğünü kontrol edin; bellek modülü yeniden takın. |
-|![PCIe simgesi](media/fxt-monitor/fxt-pcie-icon.jpg) | PCIe durumu | PCIe kart hatası | Sistemi yeniden başlatın. PCIe kart sürücüleri güncelleştirme; kart yeniden yükleyin |
+| ![sürücü simgesi](media/fxt-monitor/fxt-hd-icon.jpg) | Sürücü durumu | Sürücü hatası | Sürücüde hata olup olmadığını öğrenmek için sistem olay günlüğünü denetleyin veya <br>Uygun çevrimiçi tanılama testini çalıştırın; sistemi yeniden başlatın ve katıştırılmış tanılamayı (ePSA) çalıştırın veya <br>Sürücüler bir RAID dizisinde yapılandırılmışsa, sistemi yeniden başlatın ve konak bağdaştırıcısı yapılandırma yardımcı programı programını girin |
+|![sıcaklık simgesi](media/fxt-monitor/fxt-temp-icon.jpg) | Sıcaklık durumu | Isı hatası-Örneğin, bir fan başarısız oldu veya çevresel sıcaklık aralığın dışında | Aşağıdaki adreslenebilir koşulları denetleyin: <br>Soğutma fanı eksik veya başarısız oldu <br>Sistemin kapağı, AIR shkabd, bellek modülü boş veya arka doldurucu ayracı kaldırıldı <br>Çevresel sıcaklık çok yüksek <br>Dış uçak akışı engellemeli |
+|![Elektrik simgesi](media/fxt-monitor/fxt-electric-icon.jpg) | Elektrik durumu | Elektrik hatası-Örneğin, Aralık dışı, başarısız PSU veya başarısız bir voltaj Düzenleyicisi olan voltaj |  Belirli bir sorun için sistem olay günlüğünü veya sistem iletilerini denetleyin. Bir PSU sorunu varsa, PSU durumunu yeniden denetleyin ve gerekirse PSU 'yı yeniden takın. | 
+|![Bellek simgesi](media/fxt-monitor/fxt-memory-icon.jpg) | Bellek durumu | Bellek hatası | Hatalı belleğin konumu için sistem olay günlüğünü veya sistem iletilerini denetleyin; bellek modülünü yeniden takın. |
+|![PCIe simgesi](media/fxt-monitor/fxt-pcie-icon.jpg) | PCIe durumu | PCIe kartı hatası | Sistemi yeniden başlatın; PCIe kart sürücülerini güncelleştirin; kartı yeniden yükleme |
 
 
-### <a name="system-health-status-indicator"></a>Sistem sağlık durumu göstergesi
+### <a name="system-health-status-indicator"></a>Sistem durumu göstergesi
 
-Sol Denetim Masası'nı sağ büyük aydınlatılmış düğme genel sistem durumunu gösterir ve ayrıca sistem kimliği modunda bir birim Bulucu açık olarak kullanılır.
+Sol denetim bölmesinin sağ tarafındaki büyük aydınlatmalı düğme, sistem durumunun genel durumunu gösterir ve ayrıca sistem KIMLIĞI modunda bir birim Bulucu ışığı olarak kullanılır.
 
-Sistem durumu ve sistem kimliği modu ve sistem durumu modu arasında geçiş yapmak için kimliği düğmesine basın.
+Sistem durumu ve KIMLIK düğmesine basarak sistem KIMLIĞI modu ve sistem durumu modu arasında geçiş yapın.
 
-|Sistem sağlık durumu | Koşul |
+|Sistem durumu durumu | Koşul |
 |-------------------------------------------|-----------------------------------------------|
-| Düz mavi | Normal işlem: sistemin normal, açık ve sistem kimliği modu etkin değil. <br/>Sistem Kimliği moduna geçmek istiyorsanız sistem durumu ve kimliği düğmesine basın. |
-| Yanıp sönen mavi | Sistem Kimliği modu etkin değil. Sistem durumu moduna geçmek istiyorsanız sistem durumu ve sistem kimliği düğmesine basın. |
-| Düz amber | Sistem emniyet modundadır. Sorun devam ederse Microsoft Müşteri Hizmetleri ve desteği ile iletişime geçin. |
-| Amber yakıp söndürme | Sistem hatası. Belirli hata iletileri için sistem olay günlüğünü denetleyin. Sistem bellenimi ve sistem bileşenleri izleme aracıları tarafından oluşturulan olay ve hata iletileri hakkında daha fazla bilgi için qrl.dell.com hata kodunu arama sayfasına bakın. |
+| Düz mavi | Normal işlem: Sistem açık, normal çalışan ve sistem KIMLIĞI modu etkin değil. <br/>Sistem KIMLIĞI moduna geçmek istiyorsanız sistem durumu ve KIMLIĞI düğmesine basın. |
+| Yanıp sönen mavi | Sistem KIMLIĞI modu etkin. Sistem durumu moduna geçmek istiyorsanız sistem durumu ve sistem KIMLIĞI düğmesine basın. |
+| Solid, | Sistem, başarısız olarak güvenli modda. Sorun devam ederse, [Microsoft Müşteri Hizmetleri ve destek 'e başvurun](fxt-support-ticket.md). |
+| Yanıp sönen bir bu | Sistem hatası. Belirli hata iletileri için sistem olay günlüğünü denetleyin. Sistem üretici yazılımı ve sistem bileşenlerini izleyen aracılar tarafından oluşturulan olay ve hata iletileri hakkında daha fazla bilgi için qrl.dell.com adresindeki hata kodu arama sayfasına bakın. |
 
 

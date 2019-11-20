@@ -1,23 +1,22 @@
 ---
-title: Azure Site Recovery ile ikincil bir siteye VMware/fiziksel sunucu olağanüstü durum kurtarma için Mimari | Microsoft Docs
-description: Bu makalede, şirket içi VMware Vm'lerini veya fiziksel Windows/Linux sunucuları Azure Site Recovery ile ikincil VMware sitesindeki olağanüstü durum kurtarma sırasında kullanılan bileşenlere ve genel bir bakış sağlar.
+title: Mimari-Azure Site Recovery ile ikincil bir siteye VMware/fiziksel olağanüstü durum kurtarma
+description: Bu makalede, şirket içi VMware VM 'lerinin veya fiziksel Windows/Linux sunucularının, Azure Site Recovery ile ikincil bir VMware sitesine olağanüstü durum kurtarması sırasında kullanılan bileşenlere ve mimariye ilişkin genel bir bakış sunulmaktadır.
 author: rayne-wiselman
 manager: carmonm
 ms.service: site-recovery
-services: site-recovery
 ms.topic: conceptual
-ms.date: 05/30/2019
+ms.date: 11/12/2019
 ms.author: raynew
-ms.openlocfilehash: 171a88045531f1fdc01d7046ef0ad8157859d28c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b0a46dcf8fe298494a53713f122b1bda8ce07e5e
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66418274"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73954586"
 ---
-# <a name="architecture-for-vmwarephysical-server-replication-to-a-secondary-on-premises-site"></a>VMware/fiziksel sunucu çoğaltması ikincil şirket içi siteye mimarisi
+# <a name="architecture-for-vmwarephysical-server-replication-to-a-secondary-on-premises-site"></a>İkincil şirket içi siteye VMware/fiziksel sunucu çoğaltması için mimari
 
-Mimari ve işlemlerdeki kullanılan bu makalede olağanüstü durum kurtarma çoğaltma, yük devretme ve şirket içi VMware sanal makinelerini (VM) veya ikincil VMware sitesi kullanarak bir fiziksel Windows/Linux sunucularını kurtarma ayarlandığında [Azure Site Recovery](site-recovery-overview.md).
+Bu makalede, şirket içi VMware sanal makinelerinin (VM 'Ler) veya fiziksel Windows/Linux sunucularının [Azure Site Recovery](site-recovery-overview.md)kullanarak Ikincil bir VMware sitesine olağanüstü durum kurtarma çoğaltması, yük devretme ve kurtarma kurulumu sırasında kullanılan mimari ve süreçler açıklanmaktadır.
 
 
 ## <a name="architectural-components"></a>Mimari bileşenler
@@ -38,7 +37,7 @@ Mimari ve işlemlerdeki kullanılan bu makalede olağanüstü durum kurtarma ço
 2. İlk çoğaltmanın ardından makinelerdeki aracılar çoğaltma değişimleri işlem sunucusuna gönderir.
 3. İşlem sunucusu verileri iyileştirir ve ikincil sitedeki ana hedef sunucusuna aktarır. Yapılandırma sunucusu çoğaltma sürecini yönetir.
 
-**Şekil 6: Vmware'den Vmware'e çoğaltma**
+**Şekil 6: VMware’den VMware’e çoğaltma**
 
 ![VMware'den VMware'e](./media/site-recovery-components/vmware-to-vmware.png)
 
@@ -46,4 +45,4 @@ Mimari ve işlemlerdeki kullanılan bu makalede olağanüstü durum kurtarma ço
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Ayarlanan](vmware-physical-secondary-disaster-recovery.md) VMware Vm'lerini ve fiziksel sunucuları ikincil bir siteye olağanüstü durum kurtarma.
+VMware VM 'Leri ve fiziksel sunucuları ikincil bir siteye olağanüstü durum kurtarmayı [ayarlayın](vmware-physical-secondary-disaster-recovery.md) .

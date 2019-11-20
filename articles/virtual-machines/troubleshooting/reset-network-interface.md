@@ -1,10 +1,10 @@
 ---
-title: Azure Windows VM için ağ arabirimi sıfırlama | Microsoft Docs
-description: Azure Windows VM için ağ arabirimi sıfırlama gösterir
+title: Azure Windows VM için ağ arabirimini sıfırlama | Microsoft Docs
+description: Azure Windows VM için ağ arabiriminin nasıl sıfırlandığını gösterir
 services: virtual-machines-windows, azure-resource-manager
 documentationcenter: ''
 author: genlin
-manager: willchen
+manager: dcscontentpm
 editor: ''
 tags: top-support-issue, azure-resource-manager
 ms.service: virtual-machines-windows
@@ -12,45 +12,45 @@ ms.tgt_pltfrm: vm-windows
 ms.topic: troubleshooting
 ms.date: 11/16/2018
 ms.author: genli
-ms.openlocfilehash: 3a8e005f8678deef9fc4aebd2d620619fe6074bc
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 1c49c6221e9b310a1b14a4e06a296befc7f6da4d
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60307330"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74111730"
 ---
-# <a name="how-to-reset-network-interface-for-azure-windows-vm"></a>Azure Windows VM için ağ arabirimi sıfırlama 
+# <a name="how-to-reset-network-interface-for-azure-windows-vm"></a>Azure Windows VM için ağ arabirimini sıfırlama 
 
 [!INCLUDE [learn-about-deployment-models](../../../includes/learn-about-deployment-models-both-include.md)]
 
-Bu makalede, ağ arabirimi için Microsoft Azure Windows sanal makinesi (VM) sonra bağlanamadığında sorunları çözmek, Azure Windows VM için sıfırlama gösterilmektedir:
+Bu makalede, sonrasında Microsoft Azure Windows sanal makinesine (VM) bağlanamadığınızda sorunları çözümlemek için Azure Windows VM 'nin ağ arabiriminin nasıl sıfırlanacağı gösterilmektedir:
 
-* Varsayılan ağ arabirimi (NIC) devre dışı bırakın. 
-* NIC için statik IP el ile ayarlama 
+* Varsayılan ağ arabirimini (NIC) devre dışı bırakabilirsiniz. 
+* NIC için el ile statik IP ayarlarsınız. 
 
 [!INCLUDE [support-disclaimer](../../../includes/support-disclaimer.md)]
 
 ## <a name="reset-network-interface"></a>Ağ arabirimini sıfırlayın
 
-### <a name="for-vms-deployed-in-resource-group-model"></a>Kaynak grubu modelde dağıtılan VM'ler için
+### <a name="for-vms-deployed-in-resource-group-model"></a>Kaynak grubu modelinde dağıtılan VM 'Ler için
 
 1.  [Azure Portal](https://ms.portal.azure.com) gidin.
 2.  Etkilenen sanal makineyi seçin.
-3.  Seçin **ağ** ve ' % s'ağ arabiriminin VM seçin.
+3.  **Ağ** ' ı seçin ve ardından VM 'Nin ağ arabirimini seçin.
 
     ![Ağ arabirimi konumu](./media/reset-network-interface/select-network-interface-vm.png)
     
-4.  Seçin **IP yapılandırmaları**.
-5.  IP adresi seçin. 
-6.  Varsa **özel IP ataması** değil **statik**, değiştirin **statik**.
-7.  Değişiklik **IP adresi** başka bir IP adresine alt ağdaki kullanılabilir.
-8. Sanal makine sistemde yeni NIC'yi başlatmak için yeniden başlatılır.
-9.  Makinenize yönelik RDP deneyin. İsterseniz başarılı olursa, özgün durumuna geri özel IP adresi değişebilir. Aksi takdirde, tutabilirsiniz. 
+4.  **IP yapılandırması**' nı seçin.
+5.  IP 'yi seçin. 
+6.  **Özel IP ataması** **statik**değilse, **statik**olarak değiştirin.
+7.  **IP adresini** alt ağda kullanılabilir olan başka bir IP adresiyle değiştirin.
+8. Sanal makine, yeni NIC 'yi sisteme başlatacak şekilde yeniden başlatılacak.
+9.  Makinenize RDP 'yi deneyin. Başarılı olursa, isterseniz özel IP adresini özgün olacak şekilde değiştirebilirsiniz. Aksi takdirde, bunu koruyabilirsiniz. 
 
-#### <a name="use-azure-powershell"></a>Azure PowerShell kullanma
+#### <a name="use-azure-powershell"></a>Azure PowerShell’i kullanma
 
-1. Sahip olduğunuzdan emin olun [en son Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview) yüklü
-2. Yükseltilmiş (yönetici olarak çalıştır) Azure PowerShell oturumu açın. Aşağıdaki komutları çalıştırın:
+1. [En son Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview) yüklü olduğundan emin olun
+2. Yükseltilmiş bir Azure PowerShell oturumu açın (yönetici olarak çalıştır). Aşağıdaki komutları çalıştırın:
 
     ```powershell
     #Set the variables 
@@ -68,30 +68,30 @@ Bu makalede, ağ arabirimi için Microsoft Azure Windows sanal makinesi (VM) son
     Test-AzureStaticVNetIP –VNetName $VNET –IPAddress  $IP
 
     #Add/Change static IP. This process will not change MAC address
-    Get-AzVM -ServiceName $ResourceGroup -Name $VM | Set-AzureStaticVNetIP -IPAddress $IP | Update-AzVM
+    Get-AzVM -ResourceGroupName $ResourceGroup -Name $VM | Set-AzureStaticVNetIP -IPAddress $IP | Update-AzVM
     ```
-3. Makinenize yönelik RDP deneyin.  İsterseniz başarılı olursa, özgün durumuna geri özel IP adresi değişebilir. Aksi takdirde, tutabilirsiniz.
+3. Makinenize RDP 'yi deneyin.  Başarılı olursa, isterseniz özel IP adresini özgün olacak şekilde değiştirebilirsiniz. Aksi takdirde, bunu koruyabilirsiniz.
 
-### <a name="for-classic-vms"></a>Klasik VM'ler için
+### <a name="for-classic-vms"></a>Klasik VM 'Ler için
 
-Ağ arabirimi sıfırlamak için şu adımları izleyin:
+Ağ arabirimini sıfırlamak için şu adımları izleyin:
 
 #### <a name="use-azure-portal"></a>Azure portalı kullanma
 
 1.  [Azure Portal]( https://ms.portal.azure.com) gidin.
-2.  Seçin **sanal makineler (Klasik)** .
+2.  **Sanal makineler (klasik)** öğesini seçin.
 3.  Etkilenen sanal makineyi seçin.
-4.  Seçin **IP adresleri**.
-5.  Varsa **özel IP ataması** değil **statik**, değiştirin **statik**.
-6.  Değişiklik **IP adresi** başka bir IP adresine alt ağdaki kullanılabilir.
+4.  **IP adreslerini**seçin.
+5.  **Özel IP ataması** **statik**değilse, **statik**olarak değiştirin.
+6.  **IP adresini** alt ağda kullanılabilir olan başka bir IP adresiyle değiştirin.
 7.  **Kaydet**’i seçin.
-8.  Sanal makine sistemde yeni NIC'yi başlatmak için yeniden başlatılır.
-9.  Makinenize yönelik RDP deneyin. Başarılı olursa, özgün özel IP adresine geri dönmek seçebilirsiniz.  
+8.  Sanal makine, yeni NIC 'yi sisteme başlatacak şekilde yeniden başlatılacak.
+9.  Makinenize RDP 'yi deneyin. Başarılı olursa, özel IP adresini özgün durumuna geri döndürmeyi seçebilirsiniz.  
 
-#### <a name="use-azure-powershell"></a>Azure PowerShell kullanma
+#### <a name="use-azure-powershell"></a>Azure PowerShell’i kullanma
 
-1. Sahip olduğunuzdan emin olun [en son Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview) yüklü.
-2. Yükseltilmiş (yönetici olarak çalıştır) Azure PowerShell oturumu açın. Aşağıdaki komutları çalıştırın:
+1. [En son Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview) yüklü olduğundan emin olun.
+2. Yükseltilmiş bir Azure PowerShell oturumu açın (yönetici olarak çalıştır). Aşağıdaki komutları çalıştırın:
 
     ```powershell
     #Set the variables 
@@ -109,24 +109,24 @@ Ağ arabirimi sıfırlamak için şu adımları izleyin:
     Test-AzureStaticVNetIP –VNetName $VNET –IPAddress  $IP
     
     #Add/Change static IP. This process will not change MAC address
-    Get-AzureVM -ServiceName $CloudService -Name $VM | Set-AzureStaticVNetIP -IPAddress $IP |Update-AzureVM
+    Get-AzureVM -ResourceGroupName $CloudService -Name $VM | Set-AzureStaticVNetIP -IPAddress $IP |Update-AzureVM
     ```
-3. Makinenize yönelik RDP deneyin. İsterseniz başarılı olursa, özgün durumuna geri özel IP adresi değişebilir. Aksi takdirde, tutabilirsiniz. 
+3. Makinenize RDP 'yi deneyin. Başarılı olursa, isterseniz özel IP adresini özgün olacak şekilde değiştirebilirsiniz. Aksi takdirde, bunu koruyabilirsiniz. 
 
-## <a name="delete-the-unavailable-nics"></a>Kullanılamayan NIC Sil
-Makinede Uzak Masaüstü yapabilecekleriniz sonra olası bir sorundan kaçınmak için eski NIC'yi silmeniz gerekir:
+## <a name="delete-the-unavailable-nics"></a>Kullanılamayan NIC 'Leri silme
+Makineye Uzak Masaüstü 'nü etkinleştirdikten sonra olası sorundan kaçınmak için eski NIC 'Leri silmeniz gerekir:
 
-1.  Cihaz Yöneticisi'ni açın.
-2.  Seçin **görünümü** > **gizli aygıtları göster**.
-3.  Seçin **ağ bağdaştırıcıları**. 
-4.  "Microsoft Hyper-V ağ bağdaştırıcısı" olarak adlandırılmış bağdaştırıcıları denetleyin.
-5.  Kullanılamaz durumdaki gri renkli bir bağdaştırıcı görebilirsiniz. Bağdaştırıcısına sağ tıklayın ve ardından Kaldır'ı seçin.
+1.  Aygıt Yöneticisi açın.
+2.  **Gizli aygıtları göstermek** > **görüntüle** ' yi seçin.
+3.  **Ağ bağdaştırıcılarını**seçin. 
+4.  "Microsoft Hyper-V ağ bağdaştırıcısı" olarak adlandırılan bağdaştırıcıları denetleyin.
+5.  Gri kullanılamayan bir bağdaştırıcı görebilirsiniz. Bağdaştırıcıyı sağ tıklatın ve ardından Kaldır ' ı seçin.
 
     ![NIC görüntüsü](media/reset-network-interface/nicpage.png)
 
     > [!NOTE]
-    > Yalnızca "Microsoft Hyper-V ağ bağdaştırıcısı" adlı kullanılamayan bağdaştırıcılar kaldırın. Herhangi bir gizli bağdaştırıcılarının kaldırırsanız, ek sorunları neden olabilir.
+    > Yalnızca "Microsoft Hyper-V ağ bağdaştırıcısı" adlı kullanılamayan bağdaştırıcıları kaldırın. Diğer gizli bağdaştırıcıların birini kaldırırsanız ek sorunlara neden olabilir.
     >
     >
 
-6.  Artık tüm kullanılamayan bağdaştırıcılar sisteminizi temizlenmiş olması gerekir.
+6.  Artık kullanılamayan tüm bağdaştırıcıların sisteminizde temizlenmesi gerekir.

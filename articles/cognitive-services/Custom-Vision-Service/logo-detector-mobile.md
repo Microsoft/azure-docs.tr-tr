@@ -1,111 +1,111 @@
 ---
-title: 'Öğretici: Azure Hizmetleri - Custom Vision tanımak için özel logo algılayıcısı kullanın'
-titlesuffix: Azure Cognitive Services
-description: Bu öğreticide, bir logo algılama senaryonun parçası olarak Azure özel görüntü işleme kullanan bir örnek uygulamayı adım adım. Custom Vision uçtan uca uygulama sunmak için diğer bileşenlerle nasıl kullanıldığını öğrenin.
+title: 'Öğretici: Azure hizmetlerini tanımak için özel logo algılayıcısı kullanın-Özel Görüntü İşleme'
+titleSuffix: Azure Cognitive Services
+description: Bu öğreticide, logo algılama senaryosunun parçası olarak Özel Görüntü İşleme kullanan bir örnek uygulamada adım adım ilerleyebilirsiniz. Özel Görüntü İşleme, uçtan uca bir uygulama sunmak için diğer bileşenlerle nasıl kullanıldığını öğrenin.
 services: cognitive-services
 author: PatrickFarley
-manager: cgronlun
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: custom-vision
 ms.topic: tutorial
-ms.date: 03/11/2019
+ms.date: 07/03/2019
 ms.author: pafarley
-ms.openlocfilehash: 51b2cd42fabe6406f88388e99459a6f3dd3e69f5
-ms.sourcegitcommit: be9fcaace62709cea55beb49a5bebf4f9701f7c6
+ms.openlocfilehash: b48d82354a8e733db5ddd0c86e34bab1fa9caa8d
+ms.sourcegitcommit: 42748f80351b336b7a5b6335786096da49febf6a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/17/2019
-ms.locfileid: "65827646"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72177784"
 ---
-# <a name="tutorial-recognize-azure-service-logos-in-camera-pictures"></a>Öğretici: Azure hizmeti logo kameradan resim tanıma
+# <a name="tutorial-recognize-azure-service-logos-in-camera-pictures"></a>Öğretici: kamera resimlerde Azure hizmet logolarını tanıma
 
-Bu öğreticide, daha büyük bir senaryonun parçası olarak Azure özel görüntü işleme kullanan bir örnek uygulama hakkında bilgi edineceksiniz. Yapay ZEKA Visual sağlama uygulaması, mobil platformlar için Xamarin.Forms uygulaması, Azure hizmet logoları kamera resimlerini analiz eder ve sonra kullanıcının Azure hesabı için gerçek Hizmetleri dağıtır. Burada, özel görüntü işleme diğer bileşenleri ile koordinasyon halinde kullanışlı bir uçtan uca uygulama sunun için nasıl kullandığını öğreneceksiniz. Kendiniz için tüm uygulama senaryosu çalıştırmak veya yalnızca özel görüntü işleme kurulumun bir parçası tamamlayın ve uygulama bunu nasıl kullandığını keşfedin.
+Bu öğreticide, daha büyük bir senaryonun parçası olarak Özel Görüntü İşleme kullanan bir örnek uygulama keşfedeceğiz. Mobil platformlar için bir Xamarin. Forms uygulaması olan AI görsel sağlama uygulaması, Azure hizmet logolarının kamera resimlerini analiz eder ve ardından gerçek Hizmetleri kullanıcının Azure hesabına dağıtır. Burada, yararlı bir uçtan uca uygulama sunmak için diğer bileşenlerle birlikte Özel Görüntü İşleme nasıl kullandığını öğreneceksiniz. Tüm uygulama senaryosunu kendiniz çalıştırabilirsiniz veya kurulumun yalnızca Özel Görüntü İşleme parçasını tamamlayabilir ve uygulamanın bunu nasıl kullandığını keşfedebilirsiniz.
 
 Bu öğreticide şunları nasıl yapacağınızı gösterilecek:
 
 > [!div class="checklist"]
-> - Azure hizmet logoları tanımak için özel nesne algılayıcısı oluşturun.
-> - Uygulamanızı Azure görüntü işleme ve özel görüntü işleme bağlanın.
-> - Azure uygulama Hizmetleri'nden dağıtmak için bir Azure hizmet sorumlusu hesabı oluşturun.
+> - Azure hizmet logolarını tanımak için özel nesne algılayıcısı oluşturun.
+> - Uygulamanızı Azure Görüntü İşleme ve Özel Görüntü İşleme bağlayın.
+> - Uygulamadan Azure hizmetlerini dağıtmak için bir Azure hizmet sorumlusu hesabı oluşturun.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun. 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- [Visual Studio 2017 veya üstü](https://www.visualstudio.com/downloads/)
-- Visual Studio için Xamarin iş yükü (bkz [yükleme Xamarin](https://docs.microsoft.com/xamarin/cross-platform/get-started/installation/windows))
-- Bir iOS veya Android öykünücüsü Visual Studio için
+- [Visual Studio 2017 veya üzeri](https://www.visualstudio.com/downloads/)
+- Visual Studio için Xamarin iş yükü (bkz. [Xamarin 'ı yükleme](https://docs.microsoft.com/xamarin/cross-platform/get-started/installation/windows))
+- Visual Studio için iOS veya Android öykünücüsü
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli-windows?view=azure-cli-latest) (isteğe bağlı)
 
-## <a name="get-the-source-code"></a>Kaynak kodu alma
+## <a name="get-the-source-code"></a>Kaynak kodunu al
 
-Sağlanan web uygulamasını kullanmak istiyorsanız, kopyalama veya uygulamanın kaynak kodunu indirin [AI Visual sağlama](https://github.com/Microsoft/AIVisualProvision) github deposu. Açık *Source/VisualProvision.sln* dosyasını Visual Studio'da. Daha sonra uygulamayı çalıştırabilirsiniz bazı proje dosyaları düzenleme.
+Belirtilen Web uygulamasını kullanmak istiyorsanız, GitHub 'daki [AI görsel sağlama](https://github.com/Microsoft/AIVisualProvision) deposundan uygulamanın kaynak kodunu kopyalayın veya indirin. Visual Studio 'da *kaynak/VisualProvision. sln* dosyasını açın. Daha sonra, uygulamayı çalıştırmak için bazı proje dosyalarını düzenleyeceksiniz.
 
-## <a name="create-an-object-detector"></a>Bir nesne algılayıcısı oluşturma
+## <a name="create-an-object-detector"></a>Nesne algılayıcısı oluşturma
 
-Oturum [Custom Vision Web sitesi](https://customvision.ai/) ve yeni bir proje oluşturun. Bir nesne algılama projesi belirtin ve Logo etki alanını kullan; Bu logo algılama için en iyi duruma getirilmiş bir algoritma kullandığınız hizmet sağlar. 
+[Özel görüntü işleme web sitesinde](https://customvision.ai/) oturum açın ve yeni bir proje oluşturun. Bir nesne algılama projesi belirtin ve logo etki alanını kullanın; Bu, hizmetin logo algılama için iyileştirilmiş bir algoritma kullanmasına izin verir. 
 
-![Chrome tarayıcıda Custom Vision Web sitesindeki yeni proje penceresi](media/azure-logo-tutorial/new-project.png)
+![Chrome tarayıcısında Özel Görüntü İşleme Web sitesinde yeni-proje penceresi](media/azure-logo-tutorial/new-project.png)
 
 ## <a name="upload-and-tag-images"></a>Görüntüleri karşıya yükleme ve etiketleme
 
-Ardından, Azure hizmet logoları görüntüleri karşıya yükleme ve bunları el ile etiketleme logosu algılama algoritması eğitin. AIVisualProvision depo kullanabileceğiniz eğitim görüntü kümesi içerir. Web sitesinde seçin **görüntüleri ekleme** düğmesini **eğitim resmi** sekmesi. Ardından **belgeleri/resimler/Training_DataSet** depo klasörü. El ile her bir resim, logolar etiketlemek ihtiyacınız olacak şekilde bu projeyi yalnızca test ediyorsanız, yalnızca bir alt kümesini görüntüleri karşıya yüklemek isteyebilirsiniz. Kullanmayı planladığınız her etiket en az 15 örnekleri yükleyin.
+Ardından, Azure hizmet logolarının görüntülerini karşıya yükleyerek ve bunları el ile etiketleyerek logo algılama algoritmasını eğitme. Aıvisualprovision deposu kullanabileceğiniz bir eğitim görüntüleri kümesi içerir. Web sitesinde, **eğitim görüntüleri** sekmesinde **Görüntü ekle** düğmesini seçin. Sonra deponun **Belgeler/görüntüler/Training_DataSet** klasörüne gidin. Her görüntüde logoları el ile etiketlemelisiniz, bu nedenle yalnızca bu projeyi test ediyorsanız, görüntülerin yalnızca bir alt kümesini karşıya yüklemek isteyebilirsiniz. Kullanmayı planladığınız her bir etiketin en az 15 örneğini karşıya yükleyin.
 
-Eğitim resmi karşıya yüklenmesinin ardından, ilk bir görüntü seçin. Bu etiketleme penceresi açılır. Kutularında çizme ve her logo her görüntü için etiketler atayabilirsiniz. 
+Eğitim görüntülerini karşıya yükledikten sonra, görüntüde ilk olanı seçin. Etiketleme penceresi görüntülenir. Her bir resimdeki her bir logo için kutular çizin ve Etiketler atayın. 
 
-![Özel görüntü işleme Web sitesinde etiketleme logosu](media/azure-logo-tutorial/tag-logos.png)
+![Özel Görüntü İşleme Web sitesinde Logo etiketleme](media/azure-logo-tutorial/tag-logos.png)
 
-Uygulama, belirli bir etiketi dizelerle çalışacak şekilde yapılandırılır. Tanımlarında bulabilirsiniz *Source\VisualProvision\Services\Recognition\RecognitionService.cs* dosyası:
+Uygulama, belirli etiket dizeleriyle çalışacak şekilde yapılandırıldı. Tanımları *Source\visualprovision\services\recognıtion\recognıtionservice.cs* dosyasında bulacaksınız:
 
-[!code-csharp[Tag definitions](~/AIVisualProvision/Source/VisualProvision/Services/Recognition/RecognitionService.cs?range=18-33)]
+[!code-csharp[Tag definitions](~/AIVisualProvision/Source/VisualProvision/Services/Recognition/RecognitionService.cs?name=snippet_constants)]
 
-Görüntü etiketi sonra bir sonraki etiket için sağa gidin. İşiniz bittiğinde etiketleme pencereyi kapatın.
+Bir görüntüyü etiketledikten sonra, bir sonraki etiketi etiketlemek için sağa gidin. Bitirdiğinizde etiketleme penceresini kapatın.
 
-## <a name="train-the-object-detector"></a>Nesne algılayıcısı eğitin
+## <a name="train-the-object-detector"></a>Nesne algılayıcısı 'nı eğitme
 
-Sol bölmede ayarlamak **etiketleri** geçin **etiketli** görüntülerinizi görüntülenecek. Sonra modeli eğitmek için sayfanın üst kısmındaki yeşil düğmeyi seçin. Bunun yapılması, yeni görüntüleri aynı etiketleri tanımak için algoritma sağlanır. Ayrıca bazı doğruluğu puanları oluşturmak için var olan görüntülerinizin modeli test eder.
+Görüntülerinizi göstermek için sol bölmede **Etiketler** ' i **etiketlendirilmiş** olarak ayarlayın. Ardından, modelin eğitilmesi için sayfanın en üstündeki yeşil düğmeyi seçin. Algoritma, yeni görüntülerde aynı etiketleri tanımak için eğitecektir. Ayrıca, doğruluk puanları oluşturmak için modeli mevcut görüntülerinizden bazıları üzerinde test eder.
 
-![Custom Vision eğitim resmi sekmesinde Web. Bu ekran görüntüsünde, eğit düğmesine ana hatlarıyla açıklanmıştır](media/azure-logo-tutorial/train-model.png)
+![Eğitim görüntüleri sekmesinde Özel Görüntü İşleme Web sitesi. Bu ekran görüntüsünde eğitme düğmesi özetlenmiştir](media/azure-logo-tutorial/train-model.png)
 
-## <a name="get-the-prediction-url"></a>Tahmin URL'sini alma
+## <a name="get-the-prediction-url"></a>Tahmin URL 'sini al
 
-Modelinizi eğitildi sonra uygulamanızla tümleştirmek hazır olursunuz. Bunu yapmak için uç nokta URL'si (uygulama sorgular modelinizin adresi) ve tahmin anahtarı (tahmin isteği için uygulama erişimi vermek için) almanız gerekir. Üzerinde **performans** sekmesinde **tahmin URL** sayfanın üstünde düğme.
+Modelinize eğitim verdikten sonra, bu uygulamayı uygulamanızla tümleştirmeye hazırsınız demektir. Uç nokta URL 'sini (uygulamanın Sorgulayabileceğiniz) ve tahmin anahtarını (uygulamanın tahmin isteklerine erişmesini sağlamak için) almanız gerekir. **Performans** sekmesinde, sayfanın üst kısmındaki **tahmin URL 'si** düğmesini seçin.
 
-![Bir URL adresi ve API anahtarı görüntüleyen Prediction API'deki pencere gösteren özel görüntü işleme Web sitesi](media/azure-logo-tutorial/cusvis-endpoint.png)
+![URL adresini ve API anahtarını görüntüleyen bir tahmin API penceresini gösteren Özel Görüntü İşleme Web sitesi](media/azure-logo-tutorial/cusvis-endpoint.png)
 
-Görüntü dosyası URL'yi kopyalayın ve **tahmin anahtar** uygun alanlara değer *Source\VisualProvision\AppSettings.cs* dosyası:
+Endpoint URL 'sini ve **tahmin-anahtar** değerini *Source\visualprovision\appsettings.cs* dosyasındaki uygun alanlara kopyalayın:
 
-[!code-csharp[Custom Vision fields](~/AIVisualProvision/Source/VisualProvision/AppSettings.cs?range=22-26)]
+[!code-csharp[Custom Vision fields](~/AIVisualProvision/Source/VisualProvision/AppSettings.cs?name=snippet_cusvis_keys)]
 
-## <a name="examine-custom-vision-usage"></a>Custom Vision kullanımını inceleyin
+## <a name="examine-custom-vision-usage"></a>Özel Görüntü İşleme kullanımı inceleyin
 
-Açık *Source/VisualProvision/Services/Recognition/CustomVisionService.cs* uygulama Custom Vision anahtarını ve uç nokta URL'nizi nasıl kullandığını görmek için dosya. **PredictImageContentsAsync** yöntemi (için zaman uyumsuz görev management) belirteci iptal birlikte bir görüntü dosyasının bayt akışı alır, Custom Vision tahmin API çağırır ve tahmin sonuçlarını döndürür. 
+Uygulamanın Özel Görüntü İşleme anahtarınızı ve uç nokta URL 'sini nasıl kullandığını görmek için *kaynak/VisualProvision/Services/tanıması/CustomVisionService. cs* dosyasını açın. **Predictımagecontentsasync** yöntemi bir görüntü dosyasının bayt akışını (zaman uyumsuz görev yönetimi için), özel görüntü işleme tahmin API 'sini çağırır ve tahmin sonucunu döndürür. 
 
-[!code-csharp[Custom Vision fields](~/AIVisualProvision/Source/VisualProvision/Services/Recognition/CustomVisionService.cs?range=12-28)]
+[!code-csharp[Custom Vision fields](~/AIVisualProvision/Source/VisualProvision/Services/Recognition/CustomVisionService.cs?name=snippet_prediction)]
 
-Bu sonuç biçimi alır bir **PredictionResult** örneği, kendisi listesini içeren **tahmin** örnekleri. A **tahmin** algılanan bir etiket ve sınırlayıcı kutusunun konumuna görüntü içerir.
+Bu sonuç, kendisi bir **tahmin** örnekleri listesi Içeren bir **PredictionResult** örneği biçimini alır. **Tahmin** , görüntüde algılanan bir etiketi ve bunun sınırlama kutusu konumunu içerir.
 
-[!code-csharp[Custom Vision fields](~/AIVisualProvision/Source/VisualProvision/Services/Recognition/Prediction.cs?range=3-12)]
+[!code-csharp[Custom Vision fields](~/AIVisualProvision/Source/VisualProvision/Services/Recognition/Prediction.cs?name=snippet_prediction_class)]
 
-Uygulama bu verileri nasıl işlediği hakkında daha fazla bilgi için başlayın **GetResourcesAsync** yöntemi. Bu yöntem tanımlanan *Source/VisualProvision/Services/Recognition/RecognitionService.cs* dosya.  
+Uygulamanın bu verileri nasıl işleyeceği hakkında daha fazla bilgi edinmek için **Getresourcesasync** yöntemiyle başlayın. Bu yöntem, *kaynak/VisualProvision/Services/tanıması/Recognıtionservice. cs* dosyasında tanımlanmıştır.  
 
-## <a name="add-computer-vision"></a>Görüntü işleme ekleme
+## <a name="add-computer-vision"></a>Görüntü İşleme Ekle
 
-Custom Vision bölümü öğreticinin tamamlanmış demektir. Uygulamayı çalıştırmak istiyorsanız, görüntü işleme hizmeti de tümleştirmek gerekir. Uygulama logosu Algılama işlemini tamamlamak için görüntü işleme metin tanıma özelliğini kullanır. Bir Azure logosu görünümünü tarafından tanınacak *veya* yanında yazdırılan metin. Özel işleme modelleri, görüntü işleme kullanan görüntü veya video üzerinde belirli işlemlerin gerçekleştirilmesi.
+Öğreticinin Özel Görüntü İşleme kısmı tamamlanmıştır. Uygulamayı çalıştırmak istiyorsanız, Görüntü İşleme hizmetini de tümleştirmeniz gerekir. Uygulama, logo algılama işlemini tamamlamak için Görüntü İşleme metin tanıma özelliğini kullanır. Azure logosu, görünümü *veya* yakınında yazılı metin tarafından tanınır. Özel Görüntü İşleme modellerinden farklı olarak, Görüntü İşleme görüntülerde veya videolarda belirli işlemleri gerçekleştirmek için önceden eğitilmiş olur.
 
-Görüntü işleme hizmeti için bir anahtarı ve uç nokta URL'si almak için abone olun. Bu adım hakkında daha fazla yardım için bkz: [Abonelik anahtarları edinme](https://docs.microsoft.com/azure/cognitive-services/computer-vision/vision-api-how-to-topics/howtosubscribe).
+Anahtar ve uç nokta URL 'SI almak için Görüntü İşleme hizmetine abone olun. Bu adımla ilgili yardım için bkz. [abonelik anahtarları nasıl elde edilir](https://docs.microsoft.com/azure/cognitive-services/computer-vision/vision-api-how-to-topics/howtosubscribe).
 
-![Azure portalında, seçili Hızlı Başlangıç menüsünde görüntü işleme hizmeti. API uç nokta URL'si olarak bir bağlantı anahtarları için özetlenen](media/azure-logo-tutorial/comvis-keys.png)
+![Azure portal, Hızlı Başlangıç menüsü seçili olan Görüntü İşleme hizmetidir. API uç noktası URL 'SI olduğu gibi anahtarlar için bir bağlantı özetlenmiştir](media/azure-logo-tutorial/comvis-keys.png)
 
-Ardından, açık *Source\VisualProvision\AppSettings.cs* dosya ve doldurma `ComputerVisionEndpoint` ve `ComputerVisionKey` doğru değerlere sahip değişkenler.
+Sonra *Source\visualprovision\appsettings.cs* dosyasını açın ve `ComputerVisionEndpoint` ve `ComputerVisionKey` değişkenlerini doğru değerlerle doldurun.
 
-[!code-csharp[Computer Vision fields](~/AIVisualProvision/Source/VisualProvision/AppSettings.cs?range=28-32)]
+[!code-csharp[Computer Vision fields](~/AIVisualProvision/Source/VisualProvision/AppSettings.cs?name=snippet_comvis_keys)]
 
 ## <a name="create-a-service-principal"></a>Hizmet sorumlusu oluşturma
 
-Uygulama Hizmetleri Azure aboneliğinize dağıtmak için bir Azure hizmet sorumlusu hesabı gerektirir. Bir hizmet sorumlusu, rol tabanlı erişim denetimi kullanarak uygulama için belirli izinleri için temsilci seçme sağlar. Daha fazla bilgi için bkz. [hizmet sorumluları Kılavuzu](https://docs.microsoft.com/azure/azure-stack/user/azure-stack-create-service-principals).
+Uygulamanın Azure aboneliğinize hizmet dağıtması için bir Azure hizmet sorumlusu hesabının olması gerekir. Hizmet sorumlusu, rol tabanlı erişim denetimi kullanarak bir uygulamaya belirli izinler atamanıza olanak tanır. Daha fazla bilgi edinmek için bkz. [hizmet sorumluları Kılavuzu](https://docs.microsoft.com/azure/azure-stack/user/azure-stack-create-service-principals).
 
-Bir hizmet sorumlusu Azure Cloud Shell veya Azure CLI kullanarak aşağıda gösterildiği gibi oluşturabilirsiniz. Başlamak için oturum açın ve kullanmak istediğiniz aboneliği seçin.
+Burada gösterildiği gibi Azure Cloud Shell veya Azure CLı kullanarak bir hizmet sorumlusu oluşturabilirsiniz. Başlamak için oturum açın ve kullanmak istediğiniz aboneliği seçin.
 
 ```console
 az login
@@ -113,13 +113,13 @@ az account list
 az account set --subscription "<subscription name or subscription id>"
 ```
 
-Ardından, hizmet sorumlusu oluşturun. (Bu işlemin tamamlanması biraz zaman alabilir.)
+Ardından hizmet sorumlunuzu oluşturun. (Bu işlemin tamamlanması biraz zaman alabilir.)
 
 ```console
 az ad sp create-for-rbac --name <servicePrincipalName> --password <yourSPStrongPassword>
 ```
 
-İşlemin başarıyla tamamlanmasından sonra aşağıdaki görmelisiniz gerekli kimlik bilgilerini de dahil olmak üzere JSON çıkışını.
+Başarıyla tamamlandıktan sonra, gerekli kimlik bilgileri de dahil olmak üzere aşağıdaki JSON çıkışını görmeniz gerekir.
 
 ```json
 {
@@ -131,55 +131,55 @@ az ad sp create-for-rbac --name <servicePrincipalName> --password <yourSPStrongP
 }
 ```
 
-Not `clientId` ve `tenantId` değerleri. Uygun alanları eklemek *Source\VisualProvision\AppSettings.cs* dosya.
+@No__t-0 ve `tenantId` değerlerine göz atın. Bunları *Source\visualprovision\appsettings.cs* dosyasındaki uygun alanlara ekleyin.
 
-[!code-csharp[Computer Vision fields](~/AIVisualProvision/Source/VisualProvision/AppSettings.cs?range=8-16)]
+[!code-csharp[Computer Vision fields](~/AIVisualProvision/Source/VisualProvision/AppSettings.cs?name=snippet_serviceprincipal)]
 
 ## <a name="run-the-app"></a>Uygulamayı çalıştırma
 
-Bu noktada, uygulama erişimini verdiniz:
+Bu noktada, uygulama erişimini şu şekilde vermiş olursunuz:
 
-- eğitilen bir özel görüntü işleme modeli
-- Görüntü işleme hizmeti
-- bir hizmet sorumlusu hesabı
+- Eğitilen bir Özel Görüntü İşleme modeli
+- Görüntü İşleme Hizmeti
+- Hizmet sorumlusu hesabı
 
 Uygulamayı çalıştırmak için aşağıdaki adımları izleyin:
 
-1. Visual Studio Çözüm Gezgini'nde seçin **VisualProvision.Android** proje veya **VisualProvision.iOS** proje. Ana araç çubuğundaki aşağı açılan menüden bir karşılık gelen bir öykünücü veya bağlı bir mobil cihaz seçin. Ardından, uygulamayı çalıştırın.
+1. Visual Studio Çözüm Gezgini içinde, **visualprovision. Android** projesini veya **Visualprovision. iOS** projesini seçin. Ana araç çubuğundaki açılan menüden ilgili öykünücü veya bağlı bir mobil cihaz seçin. Ardından uygulamayı çalıştırın.
 
     > [!NOTE]
-    > Bir iOS öykünücüyü çalıştırmak için bir MacOS cihazı gerekir.
+    > Bir iOS öykünücüsü çalıştırmak için bir MacOS cihazı gerekir.
 
-1. İlk ekranda, hizmet sorumlusu istemci kimliği, Kiracı kimliği ve parola girin. Seçin **oturum açma** düğmesi.
+1. İlk ekranda, hizmet sorumlusu istemci KIMLIĞI, kiracı KIMLIĞI ve parolanızı girin. **Oturum aç** düğmesini seçin.
 
     > [!NOTE]
-    > Bazı öykünücülerde **oturum açma** düğmesi etkinleştirilmemiş olabilir bu adımı. Böyle bir durumda, uygulamayı durdurun açın *Source/VisualProvision/Pages/LoginPage.xaml* dosya, bulma `Button` etiketli öğe **oturum açma düğmesi**şu satırı kaldırın ve ardından uygulamayı çalıştırın yeniden.
+    > Bazı Öykünücülerde, **oturum açma** düğmesi bu adımda etkinleştirilmemiş olabilir. Bu durumda, uygulamayı durdurun, *kaynak/VisualProvision/Pages/LoginPage. xaml* dosyasını açın, **oturum açma düğmesi**etiketli `Button` öğesini bulun, aşağıdaki satırı kaldırın ve uygulamayı yeniden çalıştırın.
     >  ```xaml
     >  IsEnabled="{Binding IsValid}"
     >  ```
     
-    ![Hizmet sorumlusu kimlik bilgileri için alanları gösteren uygulama ekranı](media/azure-logo-tutorial/app-credentials.png)
+    ![Hizmet sorumlusu kimlik bilgileri alanlarını gösteren uygulama ekranı](media/azure-logo-tutorial/app-credentials.png)
 
-1. Sonraki ekranda, aşağı açılan menüden Azure aboneliğinizi seçin. (Bu menü, hizmet sorumlusu erişimi olan abonelikleri tümünün içermelidir.) Seçin **devam** düğmesi. Bu noktada, uygulama cihazın kamera ve fotoğraf depolama erişim vermek isteyebilir. Erişim izinleri verin.
+1. Sonraki ekranda, açılan menüden Azure aboneliğinizi seçin. (Bu menü, hizmet sorumlusunun erişimi olan tüm abonelikleri içermelidir.) **Devam** düğmesini seçin. Bu noktada, uygulama cihazın kameraya ve fotoğraf depolamaya erişim vermenizi isteyebilir. Erişim izinlerini verin.
 
-    ![Hedef Azure aboneliğinin bir açılan alan gösteren uygulama ekranı](media/azure-logo-tutorial/app-az-subscription.png)
+    ![Hedef Azure aboneliğine yönelik bir açılan alan gösteren uygulama ekranı](media/azure-logo-tutorial/app-az-subscription.png)
 
 
-1. Cihazınızda kamerayı etkinleştirilir. Fotoğraf, eğitilmiş Azure hizmeti logoları birinin yararlanın. Dağıtım penceresi, yeni hizmetler için bir bölge ve kaynak grubu (Azure portalından dağıtımı yaptığınız şekilde) seçmek için isteyecektir. 
+1. Cihazınızdaki kamera etkinleştirilecek. Eğitilen Azure hizmet logolarının bir fotoğrafını alın. Dağıtım penceresi, yeni hizmetler için bir bölge ve kaynak grubu seçmenizi ister (Azure portal dağıtıyorsanız yaptığınız gibi). 
 
-    ![Smartphone kamera ekran iki kağıt kesmeler Azure logoları odaklanır.](media/azure-logo-tutorial/app-camera-capture.png)
+    ![Azure logolarının iki kağıda odaklanan bir smartphone kamera ekranı](media/azure-logo-tutorial/app-camera-capture.png)
 
-    ![Dağıtım bölge ve kaynak grubu için alanları gösteren bir uygulama ekranı](media/azure-logo-tutorial/app-deployment-options.png)
+    ![Dağıtım bölgesinin ve kaynak grubunun alanlarını gösteren bir uygulama ekranı](media/azure-logo-tutorial/app-deployment-options.png)
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Tüm bu senaryonun adımları izleyen ve uygulama hesabınıza Azure hizmetlerini dağıtmak için kullanılan, Git [Azure portalında](https://ms.portal.azure.com/). Hizmetleri kullanmak istemiyorsanız, iptal.
+Bu senaryonun tüm adımlarını izlediyseniz ve Azure hizmetlerini hesabınıza dağıtmak için uygulamayı kullandıysanız, [Azure Portal](https://ms.portal.azure.com/)gidin. Burada, kullanmak istemediğiniz Hizmetleri iptal edin.
 
-Özel görüntü ile kendi nesne algılama projenizi oluşturmayı planlıyorsanız, bu öğreticide oluşturduğunuz logosu algılama projesini silmek isteyebilirsiniz. Ücretsiz deneme için özel görüntü işleme için yalnızca iki proje sağlar. Logo algılama proje silmek için [Custom Vision Web sitesi](https://customvision.ai)açın **projeleri** ve altında Çöp Kutusu simgesini seçin **Yeni Projem**.
+Özel Görüntü İşleme ile kendi nesne algılama projenizi oluşturmayı planlıyorsanız, bu öğreticide oluşturduğunuz logo algılama projesini silmek isteyebilirsiniz. Özel Görüntü İşleme ücretsiz deneme sürümü yalnızca iki proje için izin verir. Logo algılama projesini silmek için, [özel görüntü işleme web sitesinde](https://customvision.ai) **Projeler** ' i açın ve **yeni projem**altında çöp kutusu simgesini seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, ayarlayın ve logoları mobil kamera görüntülerde algılamak için özel görüntü işleme hizmeti kullanan tam özellikli bir Xamarin.Forms uygulaması incelediniz. Ardından, kendi uygulamasını oluşturduğunuzda, güçlü ve doğru yapabileceğiniz bir özel görüntü işleme modeli oluşturmak için en iyi adımları öğrenin.
+Bu öğreticide, Mobil kamera görüntülerinde logoları algılamak için Özel Görüntü İşleme hizmetini kullanan tam özellikli bir Xamarin. Forms uygulaması ayarlayabilir ve araştırın. Daha sonra, bir Özel Görüntü İşleme modeli oluşturmak için en iyi yöntemleri öğrenin, böylece kendi uygulamanız için bir tane oluşturduğunuzda, güçlü ve doğru hale getirebilirsiniz.
 
 > [!div class="nextstepaction"]
-> [Nasıl sınıflandırıcınızı geliştirme](getting-started-improving-your-classifier.md)
+> [Sınıflandırıcınızı geliştirme](getting-started-improving-your-classifier.md)

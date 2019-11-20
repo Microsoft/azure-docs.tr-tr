@@ -1,10 +1,10 @@
 ---
-title: Erişim gözden geçirmeleri - Azure Active Directory kullanıcı erişimini yönetme | Microsoft Docs
+title: Erişim gözden geçirmeleriyle Kullanıcı erişimini yönetme-Azure Active Directory | Microsoft Docs
 description: Azure Active Directory erişim gözden geçirmeleri ile bir grup üyeliği veya bir uygulamaya atama aracılığıyla kullanıcı erişimini yönetmeyi öğrenin
 services: active-directory
 documentationcenter: ''
-author: rolyon
-manager: mtillman
+author: msaburnley
+manager: daveba
 editor: markwahl-msft
 ms.service: active-directory
 ms.workload: identity
@@ -13,15 +13,15 @@ ms.devlang: na
 ms.topic: conceptual
 ms.subservice: compliance
 ms.date: 06/21/2018
-ms.author: rolyon
+ms.author: ajburnle
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9d873f1dace3e3be6a8767e77d57db5ac554afd7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 70b6d925772548e6703b57c265ebacf6b7f3f4c9
+ms.sourcegitcommit: a0b37e18b8823025e64427c26fae9fb7a3fe355a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66473811"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68499649"
 ---
 # <a name="manage-user-access-with-azure-ad-access-reviews"></a>Azure AD erişim gözden geçirmeleriyle kullanıcı erişimini yönetme
 
@@ -34,7 +34,7 @@ Azure Active Directory (Azure AD) sayesinde kullanıcıların uygun erişime sah
 
 - Azure AD Premium P2
 
-Daha fazla bilgi için [hangi kullanıcıların lisansına sahip olması gerekir?](access-reviews-overview.md#which-users-must-have-licenses).
+Daha fazla bilgi için [hangi kullanıcıların lisanslarına sahip olması gerektiğini](access-reviews-overview.md#which-users-must-have-licenses)görün.
 
 ## <a name="create-and-perform-an-access-review"></a>Erişim gözden geçirmesi oluşturma ve gerçekleştirme
 
@@ -44,20 +44,20 @@ Bir erişim gözden geçirmesinde bir veya daha çok kullanıcı gözden geçire
 
 2. Her kullanıcının kendi erişimini mi gözden geçireceğine yoksa bir veya daha fazla kullanıcının tüm kullanıcıların erişimini mi gözden geçireceğine karar verin.
 
-3. Bir genel yönetici veya Kullanıcı Yöneticisi, Git [Kimlik Yönetimi sayfası](https://portal.azure.com/#blade/Microsoft_AAD_ERM/DashboardBlade/).
+3. Genel yönetici veya Kullanıcı Yöneticisi olarak, [Identity idare sayfasına](https://portal.azure.com/#blade/Microsoft_AAD_ERM/DashboardBlade/)gidin.
 
-4. Erişim gözden geçirmesi oluşturma. Daha fazla bilgi için [grupları ve uygulamaları, erişim gözden geçirmesi Oluştur](create-access-review.md).
+4. Erişim gözden geçirmesini oluşturun. Daha fazla bilgi için bkz. [gruplar veya uygulamalar için erişim gözden geçirmesi oluşturma](create-access-review.md).
 
-5. Erişim gözden geçirmesi başlatıldığında gözden geçirenlere geçirmesini isteyin. Varsayılan olarak, her bir e-posta bağlantısını içeren bir Azure ad erişim paneli için aldıkları nerede bunlar [gruplar veya uygulamalar için erişim gözden geçirme](perform-access-review.md).
+5. Erişim incelemesi başladığında, gözden geçirenlerden giriş vermesini isteyin. Varsayılan olarak, her biri Azure AD 'den, [gruplara veya uygulamalara erişimi gözden geçirdikleri](perform-access-review.md)erişim paneli bağlantısı ile bir e-posta alır.
 
 6. Gözden geçirenler bilgi girmediyse, Azure AD’nin onlara bir anımsatıcı göndermesini isteyebilirsiniz. Varsayılan olarak, bitiş tarihine kadar olan sürenin yarısına ulaşıldığında, Azure AD henüz yanıt vermemiş olan gözden geçirenlere bir anımsatıcı gönderir.
 
-7. Gözden geçirenler bilgileri girdikten sonra erişim gözden geçirmesini durdurun ve değişiklikleri uygulayın. Daha fazla bilgi için [grupları ve uygulamaları, erişim değerlendirmesi tamamlama](complete-access-review.md).
+7. Gözden geçirenler bilgileri girdikten sonra erişim gözden geçirmesini durdurun ve değişiklikleri uygulayın. Daha fazla bilgi için bkz. [grupların veya uygulamaların erişim Incelemesini tamamlamaya](complete-access-review.md)yönelik.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Grupları ve uygulamaları, erişim gözden geçirmesi oluştur](create-access-review.md)
+[Gruplar veya uygulamalar için erişim gözden geçirmesi oluşturma](create-access-review.md)
 
 
 

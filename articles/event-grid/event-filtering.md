@@ -1,32 +1,32 @@
 ---
-title: Azure olay ızgarası için filtreleme olay
-description: Azure Event Grid aboneliği oluştururken olayları filtrelemek açıklar.
+title: Azure Event Grid için olay filtreleme
+description: Azure Event Grid aboneliği oluştururken olayların nasıl filtreleneceğini açıklar.
 services: event-grid
 author: spelluru
 ms.service: event-grid
 ms.topic: conceptual
 ms.date: 01/21/2019
 ms.author: spelluru
-ms.openlocfilehash: 76a4c16afc9edef0a88ac9f2892de9738fd30289
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f9fca0a9fefb5959747a4492139ae422a118db02
+ms.sourcegitcommit: 88ae4396fec7ea56011f896a7c7c79af867c90a1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66305067"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70390188"
 ---
-# <a name="understand-event-filtering-for-event-grid-subscriptions"></a>Olay filtreleme için Event Grid abonelikleri anlama
+# <a name="understand-event-filtering-for-event-grid-subscriptions"></a>Event Grid abonelikleri için olay filtrelemeyi anlayın
 
-Bu makalede, hangi olayların uç noktanıza gönderilen filtresi için farklı yollar açıklanmaktadır. Bir olay aboneliği oluştururken, filtreleme için üç seçeneğiniz vardır:
+Bu makalede, hangi olayların uç noktanıza gönderileceğini filtrelemeye yönelik farklı yollar açıklanmaktadır. Bir olay aboneliği oluştururken filtreleme için üç seçeneğiniz vardır:
 
 * Olay türleri
-* Konu ile başlayan veya biten
-* Gelişmiş alanları ve işleçler
+* Konu şununla başlıyor veya şununla bitiyor
+* Gelişmiş alanlar ve işleçler
 
 ## <a name="event-type-filtering"></a>Olay türü filtreleme
 
-Varsayılan olarak, tüm [olay türleri](event-schema.md) için olay kaynağı uç noktasına gönderilir. Yalnızca belirli olay türleri uç noktanıza göndermek karar verebilirsiniz. Örneğin, kaynaklarınıza güncelleştirme bildirimlerini, ancak silme gibi diğer işlemler için bildirim yok. Bu durumda, filtre `Microsoft.Resources.ResourceWriteSuccess` olay türü. Bir dizi olay türleriyle sağlayın veya belirtin `All` tüm etkinlik türleri için olay kaynağı alınamıyor.
+Varsayılan olarak, olay kaynağı için tüm [olay türleri](event-schema.md) uç noktaya gönderilir. Uç noktanıza yalnızca belirli olay türlerini gönderilmeye karar verebilirsiniz. Örneğin, kaynaklarınız için güncelleştirmeler hakkında bildirim alabilir, ancak silme işlemleri gibi diğer işlemlere yönelik bilgilendirilirsiniz. Bu durumda, `Microsoft.Resources.ResourceWriteSuccess` olay türüne göre filtreleyin. Olay türlerine sahip bir dizi sağlayın veya olay kaynağı için `All` tüm olay türlerini almak üzere belirtin.
 
-Olay türüne göre filtrelemek için JSON söz dizimi şu şekildedir:
+Olay türüne göre filtreleme için JSON sözdizimi şöyledir:
 
 ```json
 "filter": {
@@ -37,13 +37,13 @@ Olay türüne göre filtrelemek için JSON söz dizimi şu şekildedir:
 }
 ```
 
-## <a name="subject-filtering"></a>Konu filtresi
+## <a name="subject-filtering"></a>Konu filtreleme
 
-Basit konuya göre filtreleme için konu için bir başlangıç veya bitiş değeri belirtin. Örneğin, konu ile sona erer belirtebilirsiniz `.txt` yalnızca depolama hesabı için bir metin dosyası karşıya yükleme için ilgili olayları almak için. Ya da konu filtreleyebilirsiniz ile başlayan `/blobServices/default/containers/testcontainer` bu kapsayıcı, ancak diğer kapsayıcı olmayan depolama hesabındaki tüm olayları almak için.
+Konuya göre basit filtreleme için, konu için bir başlangıç veya bitiş değeri belirtin. Örneğin, konunun bittiğini `.txt` yalnızca bir metin dosyasını depolama hesabına yüklemeyle ilgili olayları almak üzere belirtebilirsiniz. Ya da, o kapsayıcının tüm olaylarını almak için `/blobServices/default/containers/testcontainer` , depolama hesabındaki diğer kapsayıcıları değil, konunun ile başlayan bir filtre uygulayabilirsiniz.
 
-Olayları özel konular yayımlarken konularla ilgili olay ilgilenen olup olmadığını bilmek aboneleri için kolaylaştıran olaylarınızı oluşturun. Aboneleri filtre ve rota olayları konu özelliğini kullanın. Aboneler tarafından yol kesimleri süzebilirsiniz olayın gerçekleştiği için yol eklemeyi düşünün. Aboneler, sayısı azalacağından veya geniş çapta olayları filtrelemek yol sağlar. Üç segment yolu gibi sağlarsanız `/A/B/C` Bu konu, abonelerin ilk segmente göre filtreleyebilirsiniz `/A` çok sayıda olayları almak için. Bu olaylar gibi konular ile aboneleri `/A/B/C` veya `/A/D/E`. Diğer aboneler tarafından filtreleyebilirsiniz `/A/B` daha dar bir etkinlik kümesi alınamıyor.
+Olayları özel konulara yayımlarken, etkinliklerinizin etkinlikleri oluşturun ve bu da abonelerin olayla ilgilenip ilgilenmediğini bilmesini kolaylaştırır. Aboneler olayları filtrelemek ve yönlendirmek için Subject özelliğini kullanır. Örneğin, abonelerin bu yolun segmentlerine göre filtreleyebilmesi için olayın gerçekleştiği yolu eklemeyi göz önünde bulundurun. Yol, abonelerin olayları en dar veya genel olarak filtrelemesine olanak sağlar. Konu `/A/B/C` içinde üç segment yolu sağlarsanız, aboneler çok sayıda olayı almak için ilk kesime `/A` göre filtreleyebilirsiniz. Bu aboneler, veya `/A/B/C` `/A/D/E`gibi konularla olayları alır. Diğer aboneler, daha dar `/A/B` bir olay kümesi almak için tarafından filtreleyebilirler.
 
-Konuya göre filtrelemek için JSON söz dizimi şu şekildedir:
+Konuya göre filtrelemeye yönelik JSON sözdizimi şöyledir:
 
 ```json
 "filter": {
@@ -55,81 +55,98 @@ Konuya göre filtrelemek için JSON söz dizimi şu şekildedir:
 
 ## <a name="advanced-filtering"></a>Gelişmiş filtreleme
 
-Veri alanlardaki değerlere göre filtrelemek ve karşılaştırma işleci belirtmek için Gelişmiş filtreleme seçeneğini kullanın. İçinde belirttiğiniz Gelişmiş filtreleme:
+Veri alanlarındaki değerlere göre filtrelemek ve karşılaştırma işlecini belirtmek için Gelişmiş filtreleme seçeneğini kullanın. Gelişmiş filtreleme ' de şunları belirtirsiniz:
 
-* işleç türü - karşılaştırma türü.
-* anahtarı - alanda filtreleme için kullanmakta olduğunuz olay verileri. Bir sayı, Boole veya dize olabilir.
-* değeri veya değerleri - değer veya anahtar Karşılaştırılacak değerler.
+* işleç türü-karşılaştırma türü.
+* anahtar-filtreleme için kullanmakta olduğunuz olay verileri alanı. Bir sayı, Boolean veya dize olabilir.
+* değer veya değerler-anahtarla karşılaştırılacak değer veya değerler.
 
-Gelişmiş filtreler kullanmak için JSON söz dizimi şu şekildedir:
+Birden çok değer içeren tek bir filtre belirtirseniz, **ya** da bir işlem gerçekleştirilir, bu nedenle anahtar alanının değeri bu değerlerden biri olmalıdır. Örnek aşağıda verilmiştir:
 
 ```json
-"filter": {
-  "advancedFilters": [
+"advancedFilters": [
     {
-      "operatorType": "NumberGreaterThanOrEquals",
-      "key": "Data.Key1",
-      "value": 5
-    },
-    {
-      "operatorType": "StringContains",
-      "key": "Subject",
-      "values": ["container1", "container2"]
+        "operatorType": "StringContains",
+        "key": "Subject",
+        "values": [
+            "/providers/microsoft.devtestlab/",
+            "/providers/Microsoft.Compute/virtualMachines/"
+        ]
     }
-  ]
-}
+]
 ```
 
-### <a name="operator"></a>İşleç
+Birden çok farklı filtre belirtirseniz, **ve** bir işlem gerçekleştirilir, bu nedenle her filtre koşulu karşılanmalıdır. Örnek aşağıda verilmiştir: 
 
-Sayılar için kullanılabilir işleçler şunlardır:
+```json
+"advancedFilters": [
+    {
+        "operatorType": "StringContains",
+        "key": "Subject",
+        "values": [
+            "/providers/microsoft.devtestlab/"
+        ]
+    },
+    {
+        "operatorType": "StringContains",
+        "key": "Subject",
+        "values": [
+            "/providers/Microsoft.Compute/virtualMachines/"
+        ]
+    }
+]
+```
+
+### <a name="operator"></a>Operator
+
+Rakamlar için kullanılabilir işleçler şunlardır:
 
 * NumberGreaterThan
 * NumberGreaterThanOrEquals
 * NumberLessThan
-* NumberLessThanOrEquals
-* NumberIn
-* NumberNotIn
+* Numberlessals
+* Numberın
+* Numbernotın
 
-Boole değerlerini için kullanılabilir işleç şöyledir: BoolEquals
+Boole değerleri için kullanılabilir işleç: BoolEquals
 
 Dizeler için kullanılabilir işleçler şunlardır:
 
 * StringContains
 * StringBeginsWith
 * StringEndsWith
-* StringIn
-* StringNotIn
+* Stringın
+* Stringnotın
 
-Tüm dize karşılaştırmaları çalışması insensitve ' dir.
+Tüm dize karşılaştırmaları durum-insensitve ' dir.
 
 ### <a name="key"></a>Anahtar
 
-Event Grid şema olayları için anahtar için aşağıdaki değerleri kullanın:
+Event Grid şemasındaki olaylar için, anahtar için aşağıdaki değerleri kullanın:
 
-* Kimlik
+* ID
 * Konu
 * Subject
-* olay türü
-* dataVersion
-* Olay verilerini (gibi Data.key1)
+* EventType
+* Veri sürümü
+* Olay verileri (Data. KEY1 gibi)
 
-Bulut olayları şemasında olayları için anahtar için aşağıdaki değerleri kullanın:
+Bulut olayları şemasındaki olaylar için, anahtar için aşağıdaki değerleri kullanın:
 
 * EventID
-* source
-* olay türü
+* Source
+* EventType
 * EventTypeVersion
-* Olay verilerini (gibi Data.key1)
+* Olay verileri (Data. KEY1 gibi)
 
-Özel giriş şeması için olay veri alanlarını (gibi Data.key1) kullanın.
+Özel giriş şeması için, olay verileri alanlarını (Data. KEY1 gibi) kullanın.
 
 ### <a name="values"></a>Değerler
 
-Değerler olabilir:
+Değerler şu şekilde olabilir:
 
-* number
-* string
+* numarası
+* dize
 * boolean
 * array
 
@@ -137,13 +154,13 @@ Değerler olabilir:
 
 Gelişmiş filtreleme aşağıdaki sınırlamalara sahiptir:
 
-* Event grid aboneliği başına beş Gelişmiş Filtreler
+* Olay Kılavuzu aboneliği başına beş gelişmiş filtre
 * dize değeri başına 512 karakter
-* Beş değerleri **içinde** ve **değil** işleçleri
+* **İçindeki** ve **Not** işleçleri için beş değer
 
-Birden fazla filtreye aynı anahtar kullanılır.
+Aynı anahtar birden fazla filtrede kullanılabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* PowerShell ve Azure CLI ile olayları filtreleme hakkında bilgi edinmek için [olayları Event Grid için filtre](how-to-filter-events.md).
+* PowerShell ve Azure CLı ile olayları filtreleme hakkında bilgi edinmek için bkz. [Event Grid olayları filtreleme](how-to-filter-events.md).
 * Event Grid ile hızla çalışmaya başlamak için bkz: [Azure Event Grid ile özel olaylar oluşturma ve yönlendirme](custom-event-quickstart.md).

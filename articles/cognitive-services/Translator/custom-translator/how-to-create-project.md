@@ -1,68 +1,68 @@
 ---
-title: Bir proje oluşturmak nasıl? -Özel Translator
+title: Proje oluşturma-özel çevirici
 titleSuffix: Azure Cognitive Services
-description: Özel Translator içinde bir proje oluşturmak nasıl?
+description: Bu makalede, Azure bilişsel hizmetler özel çeviricisinde bir projenin nasıl oluşturulacağı ve yönetileceği açıklanmaktadır.
 author: swmachan
-manager: christw
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.date: 02/21/2019
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: 6c8b46c35c03b472863bdc71d29552198dbb0d77
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 5b3a6f2e903d8178554b7a076ae1277633569353
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67448323"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73836557"
 ---
 # <a name="create-a-project"></a>Proje oluşturma
 
-Bir proje modelleri, belgeler için bir kapsayıcıdır ve test eder. Her proje, otomatik olarak doğru dil çiftiniz olması için bu çalışma alanına yüklenen tüm belgeleri içerir.
+Proje, modeller, belgeler ve testler için bir kapsayıcıdır. Her proje, doğru dil çiftine sahip olan bu çalışma alanına yüklenen tüm belgeleri otomatik olarak içerir.
 
-Proje oluşturma, bir model oluşturmaya yönelik ilk adımdır.
+Proje oluşturmak, model oluşturmaya yönelik ilk adımdır.
 
-## <a name="create-a-project"></a>Bir proje oluşturun:
+## <a name="create-a-project"></a>Proje oluşturun:
 
-1.  İçinde [özel Translator](https://portal.customtranslator.azure.ai) portal, proje oluştur'a tıklayın.
+1.  [Özel çevirmen](https://portal.customtranslator.azure.ai) portalında proje oluştur ' a tıklayın.
 
     ![Proje oluşturma](media/how-to/how-to-create-project.png)
 
-2.  Projeniz hakkında aşağıdaki ayrıntıları iletişim kutusunda girin:
+2.  İletişim kutusunda projenizle ilgili aşağıdaki ayrıntıları girin:
 
-    a.  Proje adı (gerekli): Projenize benzersiz ve anlamlı bir ad verin. Başlık içinde dilleri bahsetmek gerekli değildir.
+    a.  Proje adı (gerekli): projenize benzersiz ve anlamlı bir ad verin. Başlık içindeki dillerin bahsetmek gerekli değildir.
 
-    b.  Açıklama: Projeyle ilgili kısa bir özeti. Bu açıklama, özel Translator ya da sonuçta elde edilen özel sisteminizi davranışı üzerinde hiçbir etkisi yoktur, ancak, farklı projeler arasında ayırt etmenize yardımcı olabilir.
+    b.  Açıklama: proje hakkında kısa bir Özet. Bu açıklamanın özel çevirmen veya ortaya çıkan özel sisteminizin davranışı üzerinde hiçbir etkisi yoktur, ancak farklı projeler arasında ayrım yapmanıza yardımcı olabilir.
 
-    c.  Dil çifti (gerekli): Başlangıç ve bitiş çevirme dil seçin.
+    c.  Dil çifti (gerekli): çeviri yaptığınız dili ve ' ı seçin.
 
-    d.  Kategori (gerekli): Projeniz için en uygun kategoriyi seçin. Kategori terminoloji ve çevirmek için istediğinize belgelerin stil açıklar.
+    d.  Kategori (gerekli): projeniz için en uygun kategoriyi seçin. Kategori, çevirmek istediğiniz belgelerin terminolojisini ve stilini açıklar.
 
-    e.  Kategori açıklaması: Belirli bir alan veya, çalıştığınız sektör daha iyi tanımlamak için bu alanı kullanın. Örneğin, TIP, kategori ise belirli bir belge, tür ameliyatı yapıyor veya pediatrics ekleyebilirsiniz. Açıklama davranışı özel Translator ya da sonuçta elde edilen özel sisteminizin üzerinde etkisi yoktur.
+    e.  Kategori açıklaması: bu alanı, çalıştığınız belirli bir alanı veya sektöri daha iyi açıklayacak şekilde kullanın. Örneğin kategorinizin ilaç olması halinde, belirli bir belge (örneğin, bir Sury veya Pediatrics) ekleyebilirsiniz. Açıklamanın özel çevirmen veya elde edilen özel sisteminizin davranışı üzerinde hiçbir etkisi yoktur.
 
-    f.  Proje etiketi: [Proje etiket](workspace-and-project.md#project-labels) projeleri aynı dil çifti ve kategori ile ayırt eder. En iyi uygulama, bir etiket kullanın *yalnızca* birden çok proje için aynı kategoriye ve aynı dil çifti oluşturup bu projeleri ile farklı CategoryID erişmek istediğiniz planlıyorsanız. Bu alan sistemler yalnızca bir kategori için oluşturuluyorsa kullanmayın. Bir proje etiket gerekli ve dil çiftleri arasında ayrım yapmak yararlı değildir. Birden çok proje için aynı etiketi kullanabilirsiniz.
+    f.  Proje etiketi: [Proje etiketi](workspace-and-project.md#project-labels) aynı dil çiftine ve kategoriye sahip projeler arasında ayrım yapar. En iyi uygulama olarak, *yalnızca* aynı dil çifti ve aynı kategori için birden fazla proje oluşturmayı planlıyor ve bu projelere farklı bir CategoryID ile erişmek istiyorsanız bir etiket kullanın. Yalnızca bir kategori için sistem oluşturuyorsanız bu alanı kullanmayın. Proje etiketi gerekli değildir ve dil çiftlerini ayırt etmek için yararlı değildir. Birden çok proje için aynı etiketi kullanabilirsiniz.
 
-    ![Projesi oluştur iletişim kutusu](media/how-to/how-to-create-project-dialog.png)
+    ![Proje oluştur iletişim kutusu](media/how-to/how-to-create-project-dialog.png)
 
 3.  Oluştur’a tıklayın
 
 ## <a name="view-project-details"></a>Proje ayrıntılarını görüntüle
 
-Özel Translator giriş sayfası ilk 10 projeleri çalışma alanınızda gösterir. Proje adı, dil çifti, kategori, durum ve BLEU puanı gösterir.
+Özel çevirici giriş sayfası, çalışma alanınızdaki ilk 10 projeyi gösterir. Proje adı, dil çifti, kategori, durum ve BLEU Puanını görüntüler.
 
-Bir proje seçtikten sonra aşağıdaki proje sayfada görürsünüz:
+Proje seçildikten sonra proje sayfasında şunları görürsünüz:
 
-- CategoryID: CategoryID Workspaceıd, proje etiket ve kategori kodu birleştirilerek oluşturulur. Translator metin API'si ile CategoryID özel çevirileri almak için kullanın.
+- CategoryID: çalışma alanı kimliği, proje etiketi ve kategori kodu bitiştirerek CategoryID oluşturulur. Özel Çeviriler almak için metin Çeviricisi API 'SI ile CategoryID 'yi kullanırsınız.
 
-- Train düğmesi: Başlamak için bu düğmeyi kullanın. bir [modeli](how-to-train-model.md).
+- Eğitme düğmesi: [bir modeli eğitbaşlamak](how-to-train-model.md)için bu düğmeyi kullanın.
 
-- Belgeler düğmesi ekleyin: Bu düğmeyi kullanın [belgeleri karşıya yüklemesine](how-to-upload-document.md).
+- Belge Ekle düğmesi: [belgeleri karşıya yüklemek](how-to-upload-document.md)için bu düğmeyi kullanın.
 
-- Filtre belgeleri düğmesi: Filtre ve belirli belge araması için bu düğmeyi kullanın.
+- Belgeleri filtrele düğmesi: belirli belgeleri filtrelemek ve aramak için bu düğmeyi kullanın.
 
     ![Proje ayrıntılarını görüntüle](media/how-to/how-to-view-project.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bilgi [arama, düzenleme, projesini silmek nasıl](how-to-search-edit-delete-projects.md).
-- Bilgi [belgeyi karşıya yükleme](how-to-upload-document.md) çeviri modellerini oluşturmak için.
+- [Projeyi arama, düzenleme, silme hakkında](how-to-search-edit-delete-projects.md)bilgi edinin.
+- Çeviri modellerini derlemek için [belgeyi karşıya yüklemeyi](how-to-upload-document.md) öğrenin.

@@ -1,63 +1,59 @@
 ---
-title: Öğretici - Azure Kubernetes Service (AKS) Ansible kullanarak rol tabanlı erişim denetimi (RBAC) rollerini yapılandırma | Microsoft Docs
-description: Azure Kubernetes Service(AKS) kümede RBAC yapılandırmak için Ansible'ı kullanmayı öğrenin
-keywords: ansible'ı, azure, devops, bash, cloudshell, playbook, aks, kapsayıcı, aks, kubernetes, azure active directory, rbac
+title: Öğretici-Azure Kubernetes Service 'te (AKS) rol tabanlı erişim denetimi (RBAC) rollerini kullanarak yapılandırma
+description: Azure Kubernetes Service (AKS) kümesinde RBAC 'yi yapılandırmak için nasıl kullanılacağını öğrenin
+keywords: anyalabilen, Azure, DevOps, Bash, cloudshell, PlayBook, aks, Container, aks, Kubernetes, Azure Active Directory, RBAC
 ms.topic: tutorial
-ms.service: ansible
-author: tomarchermsft
-manager: jeconnoc
-ms.author: tarcher
 ms.date: 04/30/2019
-ms.openlocfilehash: dbef7c2cb8de5a1b4bbb3073f694b8f77c9f441b
-ms.sourcegitcommit: 2ce4f275bc45ef1fb061932634ac0cf04183f181
+ms.openlocfilehash: 1be123eb06bd2679169478daf27a7148d2a8b055
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/07/2019
-ms.locfileid: "65231290"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74156863"
 ---
-# <a name="tutorial-configure-role-based-access-control-rbac-roles-in-azure-kubernetes-service-aks-using-ansible"></a>Öğretici: Azure Kubernetes Service (AKS) Ansible kullanarak rol tabanlı erişim denetimi (RBAC) rollerini yapılandırma
+# <a name="tutorial-configure-role-based-access-control-rbac-roles-in-azure-kubernetes-service-aks-using-ansible"></a>Öğretici: Azure Kubernetes Service 'te (AKS) rol tabanlı erişim denetimi (RBAC) rollerini kullanarak yapılandırma
 
 [!INCLUDE [ansible-28-note.md](../../includes/ansible-28-note.md)]
 
 [!INCLUDE [open-source-devops-intro-aks.md](../../includes/open-source-devops-intro-aks.md)]
 
-AKS, kullanılacak yapılandırılabilir [Azure Active Directory (AD)](/azure/active-directory/) kullanıcı kimlik doğrulaması. Yapılandırıldıktan sonra AKS kümesine imzalamak için Azure AD kimlik doğrulama belirteci kullanın. RBAC, bir kullanıcının kimliğini veya directory grubu üyeliği dayanabilir.
+AKS, Kullanıcı kimlik doğrulaması için [Azure Active Directory (ad)](/azure/active-directory/) kullanacak şekilde yapılandırılabilir. Yapılandırıldıktan sonra, AKS kümesinde oturum açmak için Azure AD kimlik doğrulama belirtecinizi kullanırsınız. RBAC, kullanıcının kimliğini veya dizin grubu üyeliğini temel alabilir.
 
 [!INCLUDE [ansible-tutorial-goals.md](../../includes/ansible-tutorial-goals.md)]
 
 > [!div class="checklist"]
 >
-> * Azure AD etkin AKS kümesi oluşturma
-> * Kümedeki bir RBAC rolü Yapılandır
+> * Azure AD özellikli bir AKS kümesi oluşturma
+> * Kümede RBAC rolü yapılandırma
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE [open-source-devops-prereqs-azure-subscription.md](../../includes/open-source-devops-prereqs-azure-subscription.md)]
 [!INCLUDE [open-source-devops-prereqs-create-service-principal.md](../../includes/open-source-devops-prereqs-create-service-principal.md)]
 [!INCLUDE [ansible-prereqs-cloudshell-use-or-vm-creation2.md](../../includes/ansible-prereqs-cloudshell-use-or-vm-creation2.md)]
-- **RedHat OpenShift kitaplığını yükle** - `pip install openshift`
+- **RedHat OpenShift kitaplığı** - `pip install openshift`
 
-## <a name="configure-azure-ad-for-aks-authentication"></a>AKS kimlik doğrulaması için Azure AD'yi yapılandırma
+## <a name="configure-azure-ad-for-aks-authentication"></a>AKS kimlik doğrulaması için Azure AD 'yi yapılandırma
 
-AKS kimlik doğrulaması için Azure AD'yi yapılandırma, iki Azure AD uygulamaları yapılandırılır. Bu işlem, bir Azure Kiracı Yöneticisi tarafından tamamlanması gerekir. Daha fazla bilgi için [Azure Active Directory Tümleştirme ile AKS](/azure/aks/aad-integration#create-server-application). 
+Azure AD 'yi AKS kimlik doğrulaması için yapılandırırken iki Azure AD uygulaması yapılandırılır. Bu işlemin bir Azure kiracı yöneticisi tarafından tamamlanması gerekir. Daha fazla bilgi için bkz. [AKS ile Azure Active Directory tümleştirme](/azure/aks/aad-integration#create-the-server-application). 
 
-Azure Kiracı Yöneticisi'nden aşağıdaki değerleri alın:
+Azure kiracı yöneticisi 'nden aşağıdaki değerleri alın:
 
-- Sunucu uygulama gizli anahtarı
-- Sunucu uygulama kimliği
-- İstemci uygulaması kimliği 
+- Sunucu uygulaması gizli dizisi
+- Sunucu uygulama KIMLIĞI
+- İstemci uygulama KIMLIĞI 
 - Kiracı Kimliği
 
-Bu değerleri örnek playbook çalıştırmak için gereklidir.  
+Bu değerler, örnek PlayBook 'u çalıştırmak için gereklidir.  
 
 ## <a name="create-an-aks-cluster"></a>AKS kümesi oluşturma
 
-Bu bölümde, bir AKS ile oluşturduğunuz [Azure AD uygulaması](#configure-azure-ad-for-aks-authentication).
+Bu bölümde, [Azure AD uygulaması](#configure-azure-ad-for-aks-authentication)Ile BIR aks oluşturacaksınız.
 
-Örnek playbook'u ile çalışırken dikkate alınması gereken bazı önemli notlar şunlardır:
+Örnek PlayBook ile çalışırken göz önünde bulundurmanız gereken bazı önemli notlar şunlardır:
 
-- Playbook'u yükler `ssh_key` gelen `~/.ssh/id_rsa.pub`. Değiştirirseniz, tek satırlı biçimde (tırnak işaretleri olmadan) "ssh-rsa" ile başlayan - kullanın.
-- `client_id` Ve `client_secret` gelen yüklenen değerler `~/.azure/credentials`, varsayılan kimlik bilgileri dosyası olduğu. Bu değerleri hizmetinize asıl ayarlayabilir veya bu değerleri ortam değişkenlerinden yükleyin:
+- PlayBook, `~/.ssh/id_rsa.pub``ssh_key` yükler. Bunu değiştirirseniz, "SSH-RSA" (tırnak işaretleri olmadan) ile başlayan tek satır biçimini kullanın.
+- `client_id` ve `client_secret` değerleri, varsayılan kimlik bilgisi dosyası olan `~/.azure/credentials`'dan yüklenir. Bu değerleri hizmet sorumlusu olarak ayarlayabilir veya bu değerleri ortam değişkenlerinden yükleyebilirsiniz:
 
     ```yml
     client_id: "{{ lookup('env', 'AZURE_CLIENT_ID') }}"
@@ -73,7 +69,7 @@ Aşağıdaki playbook'u `aks-create.yml` olarak kaydedin:
       location: "{{ location }}"
 
 - name: List supported kubernetes version from Azure
-  azure_rm_aks_version:
+  azure_rm_aksversion_facts:
       location: "{{ location }}"
   register: versions
 
@@ -119,29 +115,29 @@ Aşağıdaki playbook'u `aks-create.yml` olarak kaydedin:
       dest: "aks-{{ name }}-kubeconfig"
 ```
 
-## <a name="get-the-azure-ad-object-id"></a>Azure AD nesnesi Kimliğini alın
+## <a name="get-the-azure-ad-object-id"></a>Azure AD nesne KIMLIĞINI al
 
-Bir RBAC bağlamayı oluşturmak için ilk Azure AD nesnesi kimliğini almanız gerekir 
+RBAC bağlama oluşturmak için önce Azure AD nesne KIMLIĞINI almanız gerekir. 
 
-1. [Azure Portal](https://go.microsoft.com/fwlink/p/?LinkID=525040) oturum açın.
+1. [Azure portalında](https://go.microsoft.com/fwlink/p/?LinkID=525040) oturum açın.
 
-1. Sayfanın üstündeki arama alanına girin `Azure Active Directory`. 
+1. Sayfanın üst kısmındaki Ara alanında `Azure Active Directory`girin. 
 
 1. Tıklatın `Enter`.
 
-1. İçinde **Yönet** menüsünde **kullanıcılar**.
+1. **Yönet** menüsünde **Kullanıcılar**' ı seçin.
 
-1. Ad alanında, hesabınız için arama yapın.
+1. Ad alanında, hesabınızı arayın.
 
-1. İçinde **adı** sütun, hesabınızın bağlantısını seçin.
+1. **Ad** sütununda hesabınıza yönelik bağlantıyı seçin.
 
-1. İçinde **kimlik** bölümünde, kopya **nesne kimliği**.
+1. **Kimlik** bölümünde, **nesne kimliğini**kopyalayın.
 
-    ![Azure AD nesnesi kimliği kopyalayın.](./media/ansible-aks-configure-rbac/ansible-aad-object-id.png)
+    ![Azure AD nesne KIMLIĞINI kopyalayın.](./media/ansible-aks-configure-rbac/ansible-aad-object-id.png)
 
-## <a name="create-rbac-binding"></a>RBAC bağlama oluşturma
+## <a name="create-rbac-binding"></a>RBAC bağlaması oluşturma
 
-Bu bölümde, bir rol bağlama veya küme rolü bağlaması aks'deki oluşturun. 
+Bu bölümde, AKS 'de bir rol bağlama veya küme rolü bağlama oluşturursunuz. 
 
 Aşağıdaki playbook'u `kube-role.yml` olarak kaydedin:
 
@@ -160,9 +156,9 @@ subjects:
   name: <your-aad-account>
 ```
 
-Değiştirin `&lt;your-aad-account>` yer tutucusunu Azure AD kiracınız ile [nesne kimliği](#get-the-azure-ad-object-id).
+`&lt;your-aad-account>` yer tutucusunu Azure AD kiracı [nesne kimliğiniz](#get-the-azure-ad-object-id)ile değiştirin.
 
--Bu, yeni rolünüz için AKS dağıtır - aşağıdaki playbook Kaydet `aks-kube-deploy.yml`:
+Aşağıdaki PlayBook 'u kaydedin-yeni rolünüzü `aks-kube-deploy.yml`olarak dağıtır:
 
 ```yml
 - name: Apply role to AKS
@@ -171,9 +167,9 @@ Değiştirin `&lt;your-aad-account>` yer tutucusunu Azure AD kiracınız ile [ne
       kubeconfig: "aks-{{ name }}-kubeconfig"
 ```
 
-## <a name="run-the-sample-playbook"></a>Örnek playbook çalıştırın
+## <a name="run-the-sample-playbook"></a>Örnek PlayBook 'u çalıştırma
 
-Bu bölümde, bu makaledeki oluşturma görevleri çağıran tam örnek playbook'u listelenir. 
+Bu bölümde, bu makalede oluşturulan görevleri çağıran tüm örnek PlayBook listelenmektedir. 
 
 Aşağıdaki playbook'u `aks-rbac.yml` olarak kaydedin:
 
@@ -202,32 +198,32 @@ Aşağıdaki playbook'u `aks-rbac.yml` olarak kaydedin:
        include_tasks: aks-kube-deploy.yml
 ```
 
-İçinde `vars` bölümünde, Azure AD bilgilerinizi aşağıdaki yer tutucularını değiştirin:
+`vars` bölümünde aşağıdaki yer tutucuları Azure AD bilgileriniz ile değiştirin:
 
 - `<client id>`
 - `<server id>`
 - `<server secret>`
 - `<tenant id>`
 
-Kullanarak tam playbook çalıştırma `ansible-playbook` komutu:
+`ansible-playbook` komutunu kullanarak tüm PlayBook 'ları çalıştırın:
 
 ```bash
 ansible-playbook aks-rbac.yml
 ```
 
-## <a name="verify-the-results"></a>Sonuçları doğrulayın
+## <a name="verify-the-results"></a>Sonuçları doğrulama
 
-Bu bölümde, bu makaledeki oluşturma düğümleri kubectl listeyi kullanın.
+Bu bölümde, bu makalede oluşturulan düğümleri kubectl listesini kullanırsınız.
 
-Bir terminal isteminde aşağıdaki komutu girin:
+Terminal isteminde aşağıdaki komutu girin:
 
 ```bash
 kubectl --kubeconfig aks-aksansibletest-kubeconfig-user get nodes
 ```
 
-Komut bir kimlik doğrulaması sayfasına yönlendirir. Azure hesabınızla oturum açın.
+Komut sizi bir kimlik doğrulama sayfasına yönlendirdirecektir. Azure hesabınızla oturum açın.
 
-Kimlik doğrulandıktan sonra kubectl düğümleri aşağıdaki sonuçları için benzer bir biçimde listeler:
+Kubectl kimlik doğrulamasından sonra düğümleri aşağıdaki sonuçlara benzer şekilde listeler:
 
 ```txt
 To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code XXXXXXXX to authenticate.
@@ -239,9 +235,9 @@ aks-nodepool1-33413200-2   Ready    agent   49m   v1.12.6
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Artık gerekli değilse, bu makalede oluşturduğunuz kaynakları silin. 
+Artık gerekli değilse, bu makalede oluşturulan kaynakları silin. 
 
-Aşağıdaki kod olarak Kaydet `cleanup.yml`:
+Aşağıdaki kodu `cleanup.yml`olarak kaydedin:
 
 ```yml
 ---
@@ -261,7 +257,7 @@ Aşağıdaki kod olarak Kaydet `cleanup.yml`:
             path: "aks-{{ name }}-kubeconfig"
 ```
 
-Kullanarak playbook çalıştırma `ansible-playbook` komutu:
+`ansible-playbook` komutunu kullanarak PlayBook 'u çalıştırın:
 
 ```bash
 ansible-playbook cleanup.yml

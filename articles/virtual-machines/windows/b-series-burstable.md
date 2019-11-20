@@ -1,33 +1,32 @@
 ---
-title: B serisi Azure Windows VM boyutları | Microsoft Docs
-description: B serisi seri aktarıma uygun Azure VM boyutları açıklar.
+title: B serisi Azure Windows VM boyutları
+description: Koyu Azure VM boyutlarının B serisini açıklar.
 services: virtual-machines-windows
 documentationcenter: ''
 author: ayshakeen
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 09/07/2017
 ms.author: ayshak
-ms.openlocfilehash: 8530682baac1544de2c73186b35fdf193e1826bd
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f5493cbfa0b325f7cd731fb1d3774fd1eb4a574f
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61456334"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74039259"
 ---
-# <a name="b-series-burstable-virtual-machine-sizes"></a>B serisi seri aktarıma uygun sanal makine boyutları
+# <a name="b-series-burstable-virtual-machine-sizes"></a>B serisi Burstable sanal makine boyutları
 
 [!INCLUDE [virtual-machines-common-b-series-burstable](../../../includes/virtual-machines-common-b-series-burstable.md)]
 
 
-## <a name="other-sizes"></a>Diğer boyutları
+## <a name="other-sizes"></a>Diğer boyutlar
 - [Genel amaçlı](sizes-general.md)
 - [İşlem için iyileştirilmiş](sizes-compute.md)
 - [Bellek için iyileştirilmiş](../virtual-machines-windows-sizes-memory.md)
@@ -36,4 +35,4 @@ ms.locfileid: "61456334"
 - [Yüksek performanslı işlem](sizes-hpc.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Hakkında daha fazla bilgi [Azure işlem birimleri (ACU)](acu.md) Azure SKU'ları arasında işlem performansını karşılaştırmanıza yardımcı olabilir.
+Azure [işlem birimlerinin (ACU)](acu.md) Azure SKU 'ları genelinde işlem performansını karşılaştırmanıza nasıl yardımcı olabileceğini öğrenin.

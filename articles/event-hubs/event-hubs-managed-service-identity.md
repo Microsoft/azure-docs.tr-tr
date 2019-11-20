@@ -11,12 +11,12 @@ ms.topic: article
 ms.custom: seodec18
 ms.date: 05/20/2019
 ms.author: shvija
-ms.openlocfilehash: 4e6f16a15547583baab63f452504d36eb2e43b85
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: dbef1db94d7835bd9326102bd62921c6b3d88d74
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65978444"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707061"
 ---
 # <a name="managed-identities-for-azure-resources-with-event-hubs"></a>Event Hubs ile Azure kaynakları için yönetilen kimlikleri
 
@@ -27,28 +27,28 @@ ms.locfileid: "65978444"
 Yönetilen bir kimlikle ilişkili olduğunda, Event Hubs istemcisi tüm yetkili işlemleri de yapabilirsiniz. Event Hubs rolleri ile bir yönetilen kimlik ilişkilendirerek yetkilendirme izni verilir. 
 
 ## <a name="event-hubs-roles-and-permissions"></a>Olay hub'ları rolleri ve izinleri
-Yönetilen bir kimlik için ekleyebilirsiniz **olay hub'ları veri sahibi** Event Hubs ad alanının rol. Bu rol, kimlik, ad alanındaki tüm varlıklar (Yönetim ve veri işlemleri için) tam denetim verir.
+Bir Event Hubs ad alanının **Event Hubs veri sahibi** rolüne yönetilen bir kimlik ekleyebilirsiniz. Bu rol, ad alanındaki tüm varlıklarda kimlik, tam denetim (Yönetim ve veri işlemleri için) verir.
 
 >[!IMPORTANT]
-> Biz daha önce desteklenen yönetilen kimliğe ekleme **sahibi** veya **katkıda bulunan** rol. Ancak, veri ayrıcalıklarına erişim **sahibi** ve **katkıda bulunan** rolü artık dikkate alınır. Kullanıyorsanız **sahibi** veya **katkıda bulunan** rolü kullanmanın anahtar **olay hub'ları veri sahibi** rol.
+> Daha önce yönetilen kimliği **sahibine** veya **katkıda bulunan** rolüne eklemeyi destekliyoruz. Bununla birlikte, **sahip** ve **katkıda bulunan** rolü için veri erişimi ayrıcalıkları artık onaylanmaz. **Sahip** veya **katkıda bulunan** rolü kullanıyorsanız, **Event Hubs veri sahibi** rolünü kullanmaya geçin.
 
-Yeni yerleşik rolü kullanmak için aşağıdaki adımları izleyin: 
+Yeni yerleşik rolünü kullanmak için şu adımları izleyin: 
 
 1. [Azure portalına](https://portal.azure.com) gidin
 2. Event Hubs ad alanına gidin.
-3. Üzerinde **olay hub'ları Namespace** sayfasında **erişim Control(IAM)** sol menüden.
-4. Üzerinde **erişim denetimi (IAM)** sayfasında **Ekle** içinde **bir rol ataması Ekle** bölümü. 
+3. **Event Hubs ad alanı** sayfasında sol menüden **Access Control (IAM)** seçeneğini belirleyin.
+4. **Access Control (IAM)** sayfasında, **rol ataması Ekle** bölümünde **Ekle** ' yi seçin. 
 
-    ![Rol ataması düğmesi ekleme](./media/event-hubs-managed-service-identity/add-role-assignment-button.png)
-5. Üzerinde **rol ataması Ekle** sayfasında, aşağıdaki adımları uygulayın: 
-    1. İçin **rol**seçin **Azure olay hub'ları veri sahibi**. 
-    2. Seçin **kimlik** role eklenecek.
+    ![Rol atama düğmesi ekleme](./media/event-hubs-managed-service-identity/add-role-assignment-button.png)
+5. **Rol ataması Ekle** sayfasında, aşağıdaki adımları uygulayın: 
+    1. **Rol**için **Azure Event Hubs veri sahibi**' i seçin. 
+    2. Role eklenecek **kimliği** seçin.
     3. **Kaydet**’i seçin. 
 
-        ![Olay hub'ları veri sahip rolü](./media/event-hubs-managed-service-identity/add-role-assignment-dialog.png)
-6. Geçiş **rol atamaları** sayfa ve kullanıcı eklendiğini onaylayın **Azure olay hub'ları veri sahibi** rol. 
+        ![Event Hubs veri sahibi rolü](./media/event-hubs-managed-service-identity/add-role-assignment-dialog.png)
+6. **Rol atamaları** sayfasına geçin ve kullanıcının **Azure Event Hubs veri sahibi** rolüne eklendiğini onaylayın. 
 
-    ![Kullanıcı rolüne eklenir onaylayın](./media/event-hubs-managed-service-identity/role-assignments.png)
+    ![Kullanıcının role eklendiğini onaylayın](./media/event-hubs-managed-service-identity/role-assignments.png)
  
 ## <a name="use-event-hubs-with-managed-identities-for-azure-resources"></a>Event Hubs, Azure kaynakları için yönetilen kimliklerle kullanın
 
@@ -74,13 +74,13 @@ Uygulamayı oluşturduktan sonra (nasıl yapılır makalesinde de gösterilmişt
 
 ### <a name="create-a-new-event-hubs-namespace"></a>Yeni Event Hubs ad alanı oluşturma
 
-Ardından, [bir Event Hubs ad alanı oluşturma](event-hubs-create.md). 
+Sonra [bir Event Hubs ad alanı oluşturun](event-hubs-create.md). 
 
 Ad alanınıza gidin **erişim denetimi (IAM)** sayfasında portalda ve ardından **rol ataması Ekle** için yönetilen kimlik eklemek için **sahibi** rol. Bunu yapmak için web uygulamasının adını arayın **izinleri eklemek** paneli **seçin** alan ve sonra giriş'e tıklayın. Daha sonra **Kaydet**'e tıklayın. Event Hubs ad alanı web uygulaması artık yönetilen kimlik erişimi ve daha önce oluşturduğunuz olay hub'ına. 
 
 ### <a name="run-the-app"></a>Uygulamayı çalıştırma
 
-Artık oluşturduğunuz ASP.NET uygulamasının varsayılan sayfasını değiştirin. Web uygulama kodundan kullanabilirsiniz [bu GitHub deposundan](https://github.com/Azure/azure-event-hubs/tree/master/samples/DotNet/MSI/EventHubsMSIDemoWebApp). 
+Artık oluşturduğunuz ASP.NET uygulamasının varsayılan sayfasını değiştirin. Web uygulama kodundan kullanabilirsiniz [bu GitHub deposundan](https://github.com/Azure/azure-event-hubs/tree/master/samples/DotNet/Microsoft.Azure.EventHubs/Rbac/ManagedIdentityWebApp). 
 
 Uygulamayı başlattıktan sonra tarayıcınızı EventHubsMSIDemo.aspx için işaretleyin. Ayrıca, başlangıç sayfası olarak ayarlayabilirsiniz. Kod EventHubsMSIDemo.aspx.cs dosyasında bulunabilir. Bazı giriş alanları ile birlikte en az bir web uygulaması sonucudur **Gönder** ve **alma** olaylarını almak veya göndermek için Event Hubs'a bağlanma düğmeleri. 
 

@@ -1,28 +1,27 @@
 ---
-title: Azure Linux VM boyutları - HPC | Microsoft Docs
-description: Farklı Linux yüksek performanslı Azure sanal makinelere bilgi işlem için kullanılabilir boyutları listeler. Vcpu, veri diskleri ve NIC yanı sıra bu serideki boyutları için depolama aktarım hızı ve ağ bant sayısı hakkında bilgiler listelenir.
+title: Azure Linux VM boyutları-HPC
+description: Azure 'da Linux yüksek performanslı bilgi işlem sanal makineleri için kullanılabilen farklı boyutları listeler. Bu serideki boyutlarda vCPU sayısı, veri diskleri ve NIC 'lerin yanı sıra depolama aktarım hızı ve ağ bant genişliği hakkındaki bilgileri listeler.
 services: virtual-machines-linux
 documentationcenter: ''
 author: jonbeck7
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager,azure-service-management
 ms.assetid: ''
 ms.service: virtual-machines-linux
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 10/12/2018
 ms.author: jonbeck
-ms.openlocfilehash: 003a14174ff65bab253f27a458d4f3e2c0a1a6db
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 214ab48b6b0dca37eff3b3f155aaa92afc7fee16
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67069991"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74034885"
 ---
-# <a name="high-performance-compute-virtual-machine-sizes"></a>Yüksek performanslı bilgi işlem, sanal makine boyutları
+# <a name="high-performance-compute-virtual-machine-sizes"></a>Yüksek performanslı işlem sanal makine boyutları
 
 [!INCLUDE [virtual-machines-common-sizes-hpc](../../../includes/virtual-machines-common-sizes-hpc.md)]
 
@@ -31,24 +30,24 @@ ms.locfileid: "67069991"
 [!INCLUDE [virtual-machines-common-a8-a9-a10-a11-specs](../../../includes/virtual-machines-common-a8-a9-a10-a11-specs.md)]
 
 
-### <a name="mpi"></a>MPI 
+### <a name="mpi"></a>MPı 
 
-SR-IOV etkin VM boyutları, Azure üzerinde neredeyse izin herhangi kullanılacak MPI flavor.
-SR-IOV olmayan etkin Vm'lerde yalnızca Intel MPI 5.x sürümler desteklenir. Sonraki sürümlerinde (2017, 2018) Intel MPI çalışma zamanı kitaplığı olabilir veya Azure Linux RDMA sürücüleri ile uyumlu olmayabilir.
+Azure 'daki SR-ıOV özellikli VM boyutları, neredeyse her türlü MPı kullanılmasına izin verir.
+SR-ıOV etkin olmayan VM 'lerde yalnızca Intel MPı 5. x sürümleri desteklenir. Intel MPı çalışma zamanı kitaplığı 'nın sonraki sürümleri (2017, 2018), Azure Linux RDMA sürücüleriyle uyumlu olmayabilir veya olmayabilir.
 
 
 ### <a name="supported-os-images"></a>Desteklenen işletim sistemi görüntüleri
  
-Azure marketi, RDMA bağlantısı destekleyen çok sayıda Linux dağıtımları sahiptir:
+Azure Marketi 'nde RDMA bağlantısını destekleyen birçok Linux dağıtımı vardır:
   
-* **CentOS tabanlı HPC** - olmayan-SR-IOV özellikli VM'ler, CentOS tabanlı sürüm 6.5 için HPC veya 7.5 kadar sonraki bir sürümünü uygun. Sürüm 7.1 için 7.5 H serisi VM'ler için önerilir. RDMA sürücüleri ve Intel MPI 5.1 sanal makinede yüklü.
-  SR-IOV sanal makineler için CentOS HPC 7.6 en iyi duruma getirilmiş ve önceden yüklenen RDMA sürücüleri ve çeşitli MPI paketlerin yüklü ile birlikte gelir.
-  Diğer RHEL/CentOS VM görüntüleri için InfiniBand etkinleştirmek için InfiniBandLinux uzantısı ekleyin. Bu bir Linux VM uzantısı RDMA bağlantısı için Mellanox OFED sürücüleri (vm'lerde SR-IOV) yükler. Aşağıdaki PowerShell cmdlet'ini, var olan bir RDMA özellikli sanal makinesinde InfiniBandDriverLinux uzantının en son sürümü (sürüm 1.0) yükler. RDMA özellikli VM adlı *myVM* ve adlı kaynak grubunda dağıtılan *myResourceGroup* içinde *Batı ABD* bölge aşağıdaki gibi:
+* **CentOS tabanlı HPC** -SR-IOV etkin olmayan VM 'Ler, CentOS tabanlı sürüm 6,5 HPC veya sonraki bir sürüm olan 7,5 ' e kadar uygundur. H serisi VM 'Ler için 7,1 sürümlerinin 7,5 olması önerilir. RDMA sürücüleri ve Intel MPı 5,1 VM 'ye yüklenir.
+  SR-ıOV VM 'lerinde, CentOS-HPC 7,6, RDMA sürücüleri ve çeşitli MPı paketleri yüklüyken en iyi duruma getirilmiş ve önceden yüklenmiş olarak sunulur.
+  Diğer RHEL/CentOS VM görüntüleri için, InfiniBand 'yi etkinleştirmek üzere ınfinıbandlinux uzantısını ekleyin. Bu Linux VM uzantısı, RDMA bağlantısı için (SR-ıOV VM 'lerde), Mellanox temelli sürücüleri (SR-ıOV) Aşağıdaki PowerShell cmdlet 'i, mevcut bir RDMA özellikli sanal makineye ınfinibanddriverlinux uzantısının en son sürümünü (sürüm 1,0) yüklüyor. RDMA özellikli VM, *Myvm* olarak adlandırılır ve *Batı ABD* bölgesindeki *myresourcegroup* adlı kaynak grubunda aşağıdaki gibi dağıtılır:
 
   ```powershell
   Set-AzVMExtension -ResourceGroupName "myResourceGroup" -Location "westus" -VMName "myVM" -ExtensionName "InfiniBandDriverLinux" -Publisher "Microsoft.HpcCompute" -Type "InfiniBandDriverLinux" -TypeHandlerVersion "1.0"
   ```
-  Alternatif olarak, VM uzantılarını aşağıdaki JSON öğesi ile kolay dağıtım için Azure Resource Manager şablonları eklenebilir:
+  Alternatif olarak, VM uzantıları aşağıdaki JSON öğesiyle kolay dağıtım için Azure Resource Manager şablonlarına dahil edilebilir:
   ```json
   "properties":{
   "publisher": "Microsoft.HpcCompute",
@@ -56,56 +55,66 @@ Azure marketi, RDMA bağlantısı destekleyen çok sayıda Linux dağıtımları
   "typeHandlerVersion": "1.0",
   } 
   ```
- 
+  
+  Aşağıdaki komut, *Myresourcegroup*adlı kaynak grubunda dağıtılan *myvmss* ADLı var olan bir VM Ölçek kümesindeki tüm RDMA özellikli vm 'Lere en son 1,0 ınfinibanddriverlinux uzantısını yükleme:
+  ```powershell
+  $VMSS = Get-AzVmss -ResourceGroupName "myResourceGroup" -VMScaleSetName "myVMSS"
+  Add-AzVmssExtension -VirtualMachineScaleSet $VMSS -Name "InfiniBandDriverLinux" -Publisher "Microsoft.HpcCompute" -Type "InfiniBandDriverLinux" -TypeHandlerVersion "1.0"
+  Update-AzVmss -ResourceGroupName "myResourceGroup" -VMScaleSetName "MyVMSS" -VirtualMachineScaleSet $VMSS
+  Update-AzVmssInstance -ResourceGroupName "myResourceGroup" -VMScaleSetName "myVMSS" -InstanceId "*"
+  ```
+  
   > [!NOTE]
-  > CentOS tabanlı HPC görüntülerinde de çekirdek güncelleştirmeler devre dışı bırakıldı **yum** yapılandırma dosyası. Linux RDMA sürücüleri bir RPM paket olarak dağıtılır ve çekirdek güncelleştirildiyse, sürücü güncelleştirmelerini çalışmayabilir nedeni budur.
+  > CentOS tabanlı HPC görüntülerinde, çekirdek güncelleştirmeleri, **yıum** yapılandırma dosyasında devre dışıdır. Bunun nedeni, Linux RDMA sürücülerinin bir RPM paketi olarak dağıtılmaktadır ve çekirdek güncelleştirilirse sürücü güncelleştirmeleri çalışmayabilir.
   >
   
 
-* **SUSE Linux Enterprise Server** -SLES 12 SP3 için HPC, SLES 12 SP3 HPC (Premium), SLES 12 için HPC, SLES 12 SP1 for HPC (Premium), SLES 12 SP4 ve SLES 15 SP1. RDMA sürücüleri yüklenir ve Intel MPI paketler VM'de dağıtılır. MPI, aşağıdaki komutu çalıştırarak yükleyin:
+* **SUSE Linux Enterprise Server** , HPC için SLES 12 SP3, HPC için SLES 12 SP3 (Premium), HPC için SLES 12 SP1, HPC için SLES 12 SP1, HPC (Premium), SLES 12 SP4 ve SLES 15. RDMA sürücüleri yüklenir ve Intel MPı paketleri sanal makineye dağıtılır. Aşağıdaki komutu çalıştırarak MPı 'yi çalıştırın:
 
   ```bash
   sudo rpm -v -i --nodeps /opt/intelMPI/intel_mpi_packages/*.rpm
   ```
   
-* **Ubuntu** -Ubuntu Server 16.04 LTS, 18.04 LTS. VM'de RDMA sürücüleri yapılandırın ve Intel MPI indirmek için Intel ile kaydedin:
+* **Ubuntu** -Ubuntu Server 16,04 LTS, 18,04 LTS. VM 'de RDMA sürücülerini yapılandırın ve Intel MPı 'yi indirmek için Intel ile kaydolun:
 
   [!INCLUDE [virtual-machines-common-ubuntu-rdma](../../../includes/virtual-machines-common-ubuntu-rdma.md)]  
 
-  MPI ayarı Infiniband, etkinleştirme hakkında daha fazla ayrıntı için bkz. [etkinleştirme InfiniBand](../workloads/hpc/enable-infiniband.md).
+  InfiniBand 'yi etkinleştirme hakkında daha fazla ayrıntı için MPı 'yi [ayarlama bölümüne bakın](../workloads/hpc/enable-infiniband.md).
 
 
 ### <a name="cluster-configuration-options"></a>Küme yapılandırma seçenekleri
 
-Azure, RDMA ağ aracılığıyla iletişim kuran Linux HPC VM kümeleri oluşturmak için çeşitli seçenekler sunar dahil olmak üzere: 
+Azure, RDMA ağını kullanarak iletişim kurabilen Linux HPC VM kümeleri oluşturmak için çeşitli seçenekler sunar; örneğin: 
 
-* **Sanal makineler** -RDMA özellikli HPC VM'lerin aynı kullanılabilirlik (Azure Resource Manager dağıtım modeli kullandığınız zaman) kümesinde dağıtın. Klasik dağıtım modelini kullanıyorsanız, aynı bulut hizmetindeki sanal makineleri dağıtın. 
+* **Sanal makineler** -RDMA özellikli HPC VM 'lerini aynı Kullanılabilirlik kümesinde dağıtın (Azure Resource Manager dağıtım modelini kullandığınızda). Klasik dağıtım modelini kullanıyorsanız, VM 'Leri aynı bulut hizmetinde dağıtın. 
 
-* **Sanal makine ölçek kümeleri** - bir sanal makine ölçek kümesi, tek bir yerleştirme grubu dağıtımı sınırladığınızdan emin olun. Örneğin, bir Resource Manager şablonunda ayarlamak `singlePlacementGroup` özelliğini `true`. 
+* **Sanal Makine Ölçek Kümeleri** -sanal makine ölçek kümesinde dağıtımı tek bir yerleştirme grubuyla sınırlandırtığınızdan emin olun. Örneğin, bir Kaynak Yöneticisi şablonunda, `singlePlacementGroup` özelliğini `true`olarak ayarlayın. 
 
-* **Azure CycleCloud** -bir HPC kümesi oluşturma [Azure CycleCloud](/azure/cyclecloud/) Linux düğümlerinde MPI işlerini çalıştırma için.
+* **Sanal makineler arasında MPI** -sanal makineler (VM 'ler) arasında gerekliyse MPI iletişimi varsa, VM 'lerin aynı Kullanılabilirlik kümesinde veya sanal makinede aynı ölçek kümesinde olduğundan emin olun.
 
-* **Azure Batch** -oluşturma bir [Azure Batch](/azure/batch/) işlem düğümleri havuzu MPI iş yüklerini Linux üzerinde çalıştırılacak. Daha fazla bilgi için [kullanım RDMA özellikli veya GPU özellikli örnekler Batch havuzlarında](../../batch/batch-pool-compute-intensive-sizes.md). Ayrıca bkz: [Batch Shipyard](https://github.com/Azure/batch-shipyard) toplu olarak kapsayıcı tabanlı iş yüklerini çalıştırmaya yönelik proje.
+* **Azure CycleCloud** -Linux düğümlerinde MPI işlerini çalıştırmak Için [Azure CYCLECLOUD](/azure/cyclecloud/) 'te bir HPC kümesi oluşturun.
 
-* **Microsoft HPC Pack** - [HPC Pack](https://docs.microsoft.com/powershell/high-performance-computing/overview) yönetilen bir Windows Server baş düğüm çalıştırmak için çeşitli Linux dağıtımları, RDMA özellikli Azure Vm'lerinde dağıtılan düğüm işlem destekler. Örnek bir dağıtım için bkz: [azure'da HPC Pack Linux RDMA kümesi oluşturma](https://docs.microsoft.com/powershell/high-performance-computing/hpcpack-linux-openfoam).
+* **Azure Batch** -Linux işlem düğümlerinde MPI iş yüklerini çalıştırmak için bir [Azure Batch](/azure/batch/) havuzu oluşturun. Daha fazla bilgi için bkz. [Batch havuzlarında RDMA özellikli veya GPU özellikli örnekler kullanma](../../batch/batch-pool-compute-intensive-sizes.md). Toplu iş üzerinde kapsayıcı tabanlı iş yüklerini çalıştırmak için [Batch Shipbahçe](https://github.com/Azure/batch-shipyard) projesine de bakın.
+
+* **MICROSOFT HPC pack** - [HPC Pack](https://docs.microsoft.com/powershell/high-performance-computing/overview) , RDMA özellikli Azure VM 'Lerinde dağıtılan ve bir Windows Server baş düğümü tarafından yönetilen Işlem düğümlerinde çalışacak birkaç Linux dağıtımını destekler. Örnek bir dağıtım için bkz. [Azure 'DA HPC Pack LINUX RDMA kümesi oluşturma](https://docs.microsoft.com/powershell/high-performance-computing/hpcpack-linux-openfoam).
 
 
 ### <a name="network-considerations"></a>Ağ konuları
-* Olmayan-SR-IOV hakkında RDMA özellikli Linux Vm'leri azure'da eth1 RDMA ağ trafiği için ayrılmış. Eth1 ayarları veya bu ağa başvuran yapılandırma dosyasındaki bilgileri değiştirmeyin.
-* Üzerinde SR-IOV etkin Vm'leri (HB ve HC serisi), ib0 RDMA ağ trafiği için ayrılır.
-* Azure'da RDMA ağ adres alanı 172.16.0.0/16 ayırır. Bir Azure sanal ağında dağıtılan örneklerinde MPI uygulamalarını çalıştırmak için sanal ağ adres alanı RDMA ağ çakışmadığından emin olun.
-* Tercih ettiğiniz küme yönetim aracını bağlı olarak, ek sistem yapılandırması MPI işlerini çalıştırma için gerekli olabilir. Örneğin, bir VM kümesinde SSH anahtarları oluşturma veya parolasız SSH oturumu açma oluşturarak küme düğümleri arasında güven oluşturma gerekebilir.
+* Azure 'da, SR-ıOV olmayan, RDMA özellikli Linux sanal makinelerinde eth1, RDMA ağ trafiği için ayrılmıştır. Herhangi bir eth1 ayarını veya bu ağa başvuran yapılandırma dosyasında herhangi bir bilgiyi değiştirmeyin.
+* SR-ıOV etkinleştirilmiş VM 'Lerde (HB ve HC Serisi), İb0 RDMA ağ trafiği için ayrılmıştır.
+* Azure 'daki RDMA ağı, 172.16.0.0/16 adres alanını ayırır. MPı uygulamalarını bir Azure sanal ağında dağıtılan örneklerde çalıştırmak için, sanal ağ adres alanının RDMA ağıyla çakışmadığından emin olun.
+* Küme yönetim aracınız seçiminize bağlı olarak, MPı işlerini çalıştırmak için ek sistem yapılandırması gerekebilir. Örneğin, bir VM kümesinde, SSH anahtarları oluşturarak veya parolasız SSH oturumu açarak küme düğümleri arasında güven oluşturmanız gerekebilir.
 
 
-## <a name="other-sizes"></a>Diğer boyutları
+## <a name="other-sizes"></a>Diğer boyutlar
 - [Genel amaçlı](sizes-general.md)
 - [İşlem için iyileştirilmiş](sizes-compute.md)
 - [Bellek için iyileştirilmiş](sizes-memory.md)
 - [Depolama için iyileştirilmiş](sizes-storage.md)
 - [GPU](../windows/sizes-gpu.md)
-- [Önceki nesil](sizes-previous-gen.md)
+- [Önceki nesiller](sizes-previous-gen.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Kurulum, en iyi duruma getirmek ve ölçeklendirme hakkında daha fazla bilgi [HPC iş yüklerini](../workloads/hpc/configure.md) azure'da.
-- Hakkında daha fazla bilgi [Azure işlem birimleri (ACU)](acu.md) Azure SKU'ları arasında işlem performansını karşılaştırmanıza yardımcı olabilir.
+- Azure 'da [HPC iş yüklerini](../workloads/hpc/configure.md) ayarlama, iyileştirme ve ölçeklendirme hakkında daha fazla bilgi edinin.
+- Azure [işlem birimlerinin (ACU)](acu.md) Azure SKU 'ları genelinde işlem performansını karşılaştırmanıza nasıl yardımcı olabileceğini öğrenin.

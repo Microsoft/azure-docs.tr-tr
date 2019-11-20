@@ -1,6 +1,6 @@
 ---
-title: Azure işlevleri çalışma zamanı sorunlarını giderme erişilemiyor.
-description: Geçersiz depolama hesabı sorunlarını gidermeyi öğrenin.
+title: Sorun giderme Azure İşlevleri Çalışma Zamanı ulaşılamaz.
+description: Geçersiz bir depolama hesabında sorun gidermeyi öğrenin.
 services: functions
 documentationcenter: ''
 author: alexkarcher-msft
@@ -8,89 +8,88 @@ manager: cfowler
 editor: ''
 ms.service: azure-functions
 ms.workload: na
-ms.devlang: na
 ms.topic: article
 ms.date: 09/05/2018
 ms.author: alkarche
-ms.openlocfilehash: 6057fa52cd2f1e9b9fd525723f96ab66983fb5d4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d5959acc7719e2b02d529bca8261bc09d5b93634
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61020307"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70085321"
 ---
-# <a name="how-to-troubleshoot-functions-runtime-is-unreachable"></a>"İşlevler çalışma zamanı erişilemiyor" sorunlarını giderme
+# <a name="how-to-troubleshoot-functions-runtime-is-unreachable"></a>"İşlevler çalışma zamanına ulaşılamıyor" sorununu giderme
 
 
 ## <a name="error-text"></a>Hata metni
-Bu belge, İşlevler portalında görüntülendiğinde aşağıdaki hatayı gidermek için tasarlanmıştır.
+Bu belge, Işlevler portalında görüntülendiğinde aşağıdaki hatayla ilgili sorunları gidermeye yöneliktir.
 
 `Error: Azure Functions Runtime is unreachable. Click here for details on storage configuration`
 
 ### <a name="summary"></a>Özet
-Bu sorun, Azure işlevleri çalışma zamanı başlatılamıyor oluşur. Gerçekleşmesi bu hatanın en yaygın nedeni, kendi depolama hesabınıza erişim hakkını kaybetmesini işlev uygulamasının aynısıdır. [Depolama hesabı gereksinimleri hakkında daha fazla bilgi](https://docs.microsoft.com/azure/azure-functions/functions-create-function-app-portal#storage-account-requirements)
+Azure İşlevleri Çalışma Zamanı başlayamediğinde bu sorun oluşur. Bu hatanın oluşma en yaygın nedeni, işlev uygulamasının depolama hesabına erişimi kaybetmesi durumunda meydana gelir. [Depolama hesabı gereksinimleri hakkında buradan daha fazla bilgi edinin](https://docs.microsoft.com/azure/azure-functions/functions-create-function-app-portal#storage-account-requirements)
 
 ### <a name="troubleshooting"></a>Sorun giderme
-Dört en yaygın hata durumları, belirleme ve nasıl çözümleneceğini her durumda aracılığıyla alacağız.
+En yaygın dört hata durumuna, nasıl tanımlanacağına ve her bir durumda nasıl çözümleneceğini adım adım inceleyeceğiz.
 
 1. Depolama hesabı silindi
-1. Depolama hesabı uygulama ayarlarını silindi
+1. Depolama hesabı uygulama ayarları silindi
 1. Depolama hesabı kimlik bilgileri geçersiz
 1. Depolama hesabına erişilemiyor
-1. Günlük yürütme kotası tam
+1. Günlük yürütme kotası dolu
 
 ## <a name="storage-account-deleted"></a>Depolama hesabı silindi
 
-Her işlev uygulaması çalışması için bir depolama hesabı gerektirir. Bu hesabı silinirse, işlevinizi çalışmaz.
+Her işlev uygulamasının çalışması için bir depolama hesabının olması gerekir. Bu hesap silinirse Işleviniz çalışmaz.
 
 ### <a name="how-to-find-your-storage-account"></a>Depolama hesabınızı bulma
 
-Depolama hesabı adınızı uygulama ayarlarınızı bakarak başlayın. Ya da `AzureWebJobsStorage` veya `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING` bağlantı dizesinde paketleniyor depolama hesabınızın adını içerir. Detaylara konumunda okuma [burada uygulama ayarı başvurusu](https://docs.microsoft.com/azure/azure-functions/functions-app-settings#azurewebjobsstorage)
+Uygulama ayarlarınızda depolama hesabı adınızı arayarak başlayın. `AzureWebJobsStorage` Ya`WEBSITE_CONTENTAZUREFILECONNECTIONSTRING` da, bir bağlantı dizesinde sarmalanmış depolama hesabınızın adını içerir. [Burada uygulama ayarı başvurusu](https://docs.microsoft.com/azure/azure-functions/functions-app-settings#azurewebjobsstorage) ' na daha fazla bilgi okuyun
 
-Hala varolup olmadığını görmek için Azure portalındaki depolama hesabınız için arama yapın. Silinmiş olması durumunda, bir depolama hesabını yeniden oluşturun ve depolama bağlantı dizelerinizi değiştirmek gerekir. İşlev kodunuzu kaybedilir ve tekrar tekrar dağıtmanız gerekecektir.
+Hala mevcut olup olmadığını görmek için Azure portal depolama hesabınızı arayın. Silinmişse, bir depolama hesabı oluşturmanız ve depolama bağlantı Dizelerinizin yerine getirmeniz gerekir. İşlev kodunuz kaybolur ve yeniden dağıtmanız gerekir.
 
-## <a name="storage-account-application-settings-deleted"></a>Depolama hesabı uygulama ayarlarını silindi
+## <a name="storage-account-application-settings-deleted"></a>Depolama hesabı uygulama ayarları silindi
 
-Bir depolama hesabı bağlantı dizesi yoksa önceki adımda, silinmiş veya üzerine büyük olasılıkla. Uygulama ayarları silme uygulama ayarlarını belirlemek için dağıtım yuvaları veya Azure Resource Manager betikleri kullanırken en yaygın olarak yapılır.
+Önceki adımda, büyük olasılıkla silinmiş veya üzerine yazılmış bir depolama hesabı bağlantı dizeniz yoksa. Uygulama ayarlarını yapmak için dağıtım yuvaları veya Azure Resource Manager betikleri kullanılırken uygulama ayarlarının silinmesi genellikle yapılır.
 
 ### <a name="required-application-settings"></a>Gerekli uygulama ayarları
 
 * Gerekli
     * [`AzureWebJobsStorage`](https://docs.microsoft.com/azure/azure-functions/functions-app-settings#azurewebjobsstorage)
-* Tüketim planı işlevleri için gerekli
+* Tüketim planı Işlevleri için gereklidir
     * [`WEBSITE_CONTENTAZUREFILECONNECTIONSTRING`](https://docs.microsoft.com/azure/azure-functions/functions-app-settings)
     * [`WEBSITE_CONTENTSHARE`](https://docs.microsoft.com/azure/azure-functions/functions-app-settings)
 
-[Burada bu uygulama ayarlarını okuma](https://docs.microsoft.com/azure/azure-functions/functions-app-settings)
+[Bu uygulama ayarları hakkında buradan okuyun](https://docs.microsoft.com/azure/azure-functions/functions-app-settings)
 
 ### <a name="guidance"></a>Rehber
 
-* "Yuva ayarı" Bu ayarlardan herhangi birini için denetlemez. Dağıtım yuvalarını değiştirme, işlev çalışmamasına neden olur.
-* Otomatik dağıtım bir parçası olarak bu ayarları değiştirmeyin.
-* Bu ayarlar, oluşturma zamanında belirtilen ve geçerli olması gerekir. Ayarları olaydan sonra eklenen olsa bile, bu ayarları içermeyen bir otomatik dağıtım işlevsel olmayan bir uygulamada neden olur.
+* Bu ayarlardan herhangi biri için "yuva ayarı" denetimini kaldırmayın. Dağıtım yuvalarını değiştirdiğinizde Işlev kesilir.
+* Bu ayarları otomatik dağıtımların parçası olarak değiştirmeyin.
+* Bu ayarlar, oluşturma sırasında sağlanmalı ve geçerli olmalıdır. Bu ayarları içermeyen bir otomatik dağıtım, ayarlar olgusuna sonra eklense bile işlevsel olmayan bir uygulamaya neden olur.
 
 ## <a name="storage-account-credentials-invalid"></a>Depolama hesabı kimlik bilgileri geçersiz
 
-Depolama anahtarlarını yeniden, yukarıdaki depolama hesabı bağlantı dizeleri güncelleştirilmesi gerekir. [Burada depolama anahtar yönetimi hakkında daha fazla bilgi](https://docs.microsoft.com/azure/storage/common/storage-create-storage-account)
+Depolama anahtarlarını yeniden oluşturursanız yukarıdaki depolama hesabı bağlantı dizelerinin güncellenmesi gerekir. [Depolama anahtarı yönetimi hakkında buradan daha fazla bilgi edinin](https://docs.microsoft.com/azure/storage/common/storage-create-storage-account)
 
 ## <a name="storage-account-inaccessible"></a>Depolama hesabına erişilemiyor
 
-İşlev uygulamanızı depolama hesabına erişebilir olması gerekir. O blok bir işlevler bir depolama hesabına erişim için sık karşılaşılan sorunlar şunlardır:
+İşlev Uygulaması depolama hesabına erişebilmelidir. Bir depolama hesabına erişim Işlevi engelleyen yaygın sorunlar şunlardır:
 
-* İşlev uygulamaları doğru ağ kuralları App Service ortamları için Dağıtılmış depolama hesabına gelen ve giden trafiğe izin vermek için
-* Depolama hesabı güvenlik duvarı etkinleştirilir ve işlevleri gelen ve giden trafiğine izin verecek şekilde yapılandırılmadı. [Burada depolama hesabının güvenlik duvarı yapılandırması hakkında daha fazla bilgi](https://docs.microsoft.com/azure/storage/common/storage-network-security?toc=%2fazure%2fstorage%2ffiles%2ftoc.json)
+* Depolama hesabından gelen ve giden trafiğe izin vermek için doğru ağ kuralları olmadan App Service ortamlara dağıtılan işlev uygulamaları
+* Depolama hesabı güvenlik duvarı etkinleştirilir ve IŞLEVLERE ve Işlevlerine giden trafiğe izin verecek şekilde yapılandırılmamıştır. [Depolama hesabı güvenlik duvarı yapılandırması hakkında buradan daha fazla bilgi edinin](https://docs.microsoft.com/azure/storage/common/storage-network-security?toc=%2fazure%2fstorage%2ffiles%2ftoc.json)
 
-## <a name="daily-execution-quota-full"></a>Günlük yürütme kotası tam
+## <a name="daily-execution-quota-full"></a>Günlük yürütme kotası dolu
 
-Yapılandırılmış günlük yürütme kota varsa, işlev uygulamanızı geçici olarak devre dışı bırakılır ve portal denetimleri birçoğu kullanılamaz hale gelir. 
+Günlük yürütme kotayı yapılandırdıysanız, İşlev Uygulaması geçici olarak devre dışı bırakılır ve Portal denetimlerinin birçoğu kullanılamaz hale gelir. 
 
-* Onay doğrulamak için Platform özellikleri açın > portalında işlev uygulaması ayarları. Kota kullanıyorsanız aşağıdaki iletiyi görürsünüz.
+* Doğrulamak için, portalda açık platform özellikleri > İşlev Uygulaması ayarları ' na bakın. Kotayı daha fazla olursa aşağıdaki iletiyi görürsünüz
     * `The Function App has reached daily usage quota and has been stopped until the next 24 hours time frame.`
-* Kota kaldırın ve sorunu çözmek için uygulamanızı yeniden başlatın.
+* Sorunu çözmek için kotayı kaldırın ve uygulamanızı yeniden başlatın.
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-İşlev uygulamanız arka ve çalışır durumda olduğuna göre amacıyla müşterilerimize hızlı başlangıç kılavuzlarımız ve geliştirici başvuruları ve yeniden çalıştırmayı göz atın!
+Artık İşlev Uygulaması ve çalışır duruma getirilene kadar hızlı başlangıç ve geliştirici başvurularımıza bakarak yeniden çalışmaya başlayın!
 
 * [İlk Azure İşlevinizi oluşturma](functions-create-first-azure-function.md)  
   Hemen başlayın ve Azure İşlevleri hızlı başlangıcını kullanarak ilk işlevinizi oluşturun. 

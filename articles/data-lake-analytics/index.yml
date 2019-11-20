@@ -1,0 +1,108 @@
+### YamlMime:Landing
+title: Azure Data Lake Analytics Belgeleri
+summary: Azure Data Lake Analytics, büyük hacimli veri kümeleri için ölçeklendirilen büyük veri analizi işlerini çalıştırmanıza olanak sağlar.
+metadata:
+  title: Azure Data Lake Analytics
+  description: Azure Data Lake Analytics, büyük hacimli veri kümeleri için ölçeklendirilen büyük veri analizi işlerini çalıştırmanıza olanak sağlar.
+  services: data-lake-analytics
+  ms.service: data-lake-analytics
+  ms.topic: landing-page
+  ms.collection: collection
+  author: hrasheed-msft
+  ms.author: hrasheed
+  ms.date: 09/13/2019
+  ms.openlocfilehash: ed785cb383381902e488acbe182446eaa977824a
+  ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/08/2019
+  ms.locfileid: "73825796"
+landingContent:
+- title: Data Lake Analytics hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Data Lake Analytics nedir?
+      url: data-lake-analytics-overview.md
+  - linkListType: quickstart
+    links:
+    - text: Azure portalında U-SQL işleri oluşturma
+      url: data-lake-analytics-get-started-portal.md
+    - text: Azure CLI ile U-SQL işleri oluşturma
+      url: data-lake-analytics-get-started-cli.md
+    - text: Visual Studio Code’da U-SQL işleri oluşturma
+      url: data-lake-analytics-data-lake-tools-for-vscode.md
+- title: U-SQL dilini öğrenme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: U-SQL kullanmaya başlama
+      url: data-lake-analytics-u-sql-get-started.md
+    - text: U-SQL dil başvurusu
+      url: https://docs.microsoft.com/u-sql/
+    - text: U-SQL Kataloğunu kullanmaya başlama
+      url: data-lake-analytics-u-sql-catalog.md
+    - text: Kullanıcı tanımlı işleçleri kullanma
+      url: data-lake-analytics-u-sql-develop-user-defined-operators.md
+- title: U-SQL programlarını geliştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Visual Studio için Data Lake Araçları’nı kullanma
+      url: data-lake-analytics-data-lake-tools-get-started.md
+    - text: Visual Studio’da U-SQL veritabanı projesi kullanma
+      url: data-lake-analytics-data-lake-tools-develop-usql-database.md
+    - text: İş Tarayıcı ve İş Görünümünü kullanma
+      url: data-lake-analytics-data-lake-tools-view-jobs.md
+    - text: Kullanıcı tanımlı C# kodunda hata ayıklama
+      url: data-lake-analytics-debug-u-sql-jobs.md
+    - text: Visual Studio Code için Azure Data Lake Araçları’nı kullanma
+      url: data-lake-analytics-data-lake-tools-for-vscode.md
+    - text: Visual Studio Code’da U-SQL ile özel kod kullanma
+      url: data-lake-analytics-u-sql-develop-with-python-r-csharp-in-vscode.md
+    - text: İşleri SSIS kullanarak zamanlama
+      url: data-lake-analytics-schedule-jobs-ssis.md
+- title: Data Lake Analytics'i yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure portalını kullanarak yönetme
+      url: data-lake-analytics-manage-use-portal.md
+    - text: Azure CLI kullanarak yönetme
+      url: data-lake-analytics-manage-use-cli.md
+    - text: .NET uygulaması kullanarak yönetme
+      url: data-lake-analytics-manage-use-dotnet-sdk.md
+    - text: Azure portalında kullanıcı ekleme
+      url: data-lake-analytics-add-users.md
+    - text: Azure Data Lake Analytics'i ilkeleri kullanarak yönetme
+      url: data-lake-analytics-account-policies.md
+- title: Sürekli tümleştirme ve sürekli geliştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: CI/CD işlem hattı ayarlama
+      url: data-lake-analytics-cicd-overview.md
+    - text: U-SQL derlemelerini yönetme
+      url: data-lake-analytics-cicd-manage-assemblies.md
+    - text: U-SQL betiklerini test etme
+      url: data-lake-analytics-cicd-test.md
+    - text: U-SQL SDK kullanma
+      url: data-lake-analytics-u-sql-sdk.md
+- title: U-SQL geliştiricileri için Spark'ı anlama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: U-SQL Geliştiricileri için Apache Spark'ı Anlama
+      url: understand-spark-for-usql-developers.md
+    - text: Apache Spark veri biçimlerini anlama
+      url: understand-spark-data-formats.md
+    - text: Apache Spark kod kavramlarını anlama
+      url: understand-spark-code-concepts.md
+- title: U-SQL işlerinin sorunlarını giderme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: U-SQL çalışma zamanı hatalarını giderme
+      url: runtime-troubleshoot.md
+    - text: .NET yükseltmesi sorunlarını giderme
+      url: dotnet-upgrade-troubleshoot.md

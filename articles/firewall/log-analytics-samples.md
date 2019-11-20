@@ -1,50 +1,50 @@
 ---
-title: Azure güvenlik duvarı log analytics örnekleri
-description: Azure güvenlik duvarı log analytics örnekleri
+title: Azure Güvenlik Duvarı günlük Analizi örnekleri
+description: Azure Izleyici günlükleri, Azure Güvenlik duvarınızı analiz etmek için kullanılabilir. Örnek dosya, Azure Izleyici 'de Görünüm Tasarımcısı 'nda yerleşiktir.
 services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: article
-ms.date: 2/15/2019
+ms.date: 11/19/2019
 ms.author: victorh
-ms.openlocfilehash: 3f329d3dd4af1faef8f77d08db655cc7d6ef79fd
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 714054b8e538b2fb1bfb3fb4f2293636802f3bc4
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60461543"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74168897"
 ---
-# <a name="azure-firewall-log-analytics-samples"></a>Azure güvenlik duvarı log analytics örnekleri
+# <a name="azure-firewall-log-analytics-samples"></a>Azure Güvenlik Duvarı günlük Analizi örnekleri
 
-Aşağıdaki Azure İzleyici günlüklerine örnekleri, Azure güvenlik duvarı günlükleri analiz etmek için kullanılabilir. Örnek dosyayı Azure İzleyicisi ' nde görünümü Tasarımcısı'nda oluşturulan [Görünüm Tasarımcısı'nda Azure İzleyici](https://docs.microsoft.com/azure/log-analytics/log-analytics-view-designer) makalede görünüm tasarım kavramları hakkında daha fazla bilgi bulunur.
+Aşağıdaki Azure Izleyici günlükleri örnekleri, Azure Güvenlik Duvarı günlüklerinizi analiz etmek için kullanılabilir. Örnek dosya, Azure Izleyici 'de Görünüm Tasarımcısı 'nda yerleşik olarak bulunur, [Azure izleyici 'Deki Görünüm Tasarımcısı](https://docs.microsoft.com/azure/log-analytics/log-analytics-view-designer) , görünüm tasarım kavramı hakkında daha fazla bilgi içerir.
 
 [!INCLUDE [azure-monitor-log-analytics-rebrand](../../includes/azure-monitor-log-analytics-rebrand.md)]
 
-## <a name="azure-monitor-logs-view"></a>Azure İzleyici günlüklerini görüntüle
+## <a name="azure-monitor-logs-view"></a>Azure Izleyici günlükleri görünümü
 
-Azure İzleyici günlüklerini görselleştirme örnek nasıl yapılandırabileceğinizi aşağıda verilmiştir. Örneğin görselleştirmedeki indirebileceğiniz [azure-docs-json-samples](https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-firewall/AzureFirewall.omsview) depo. Bu sayfadaki Köprü sağ tıklayın ve en kolay yoludur *Kaydet* gibi bir ad **AzureFirewall.omsview**. 
+Örnek bir Azure Izleyici günlüğü görselleştirmesini yapılandırma hakkında daha fazla bilgiyi burada bulabilirsiniz. Örnek görselleştirmeyi [Azure-docs-JSON-Samples](https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-firewall/AzureFirewall.omsview) deposundan indirebilirsiniz. En kolay yol, bu sayfadaki köprüye sağ tıklayıp *farklı kaydet* ' i seçip **AzureFirewall. omsview**gibi bir ad sağlamalıdır. 
 
-Görünüm Log Analytics çalışma alanınıza eklemek için aşağıdaki adımları uygulayın:
+Görünümü Log Analytics çalışma alanınıza eklemek için aşağıdaki adımları yürütün:
 
-1. Azure portalında Log Analytics çalışma alanını açın.
-2. Açık **görüntülemek Tasarımcısı** aşağıda **genel**.
+1. Azure portal Log Analytics çalışma alanını açın.
+2. **Görünüm tasarımcısını** **genel**altında açın.
 3. **İçeri Aktar**’a tıklayın.
-4. Göz atın ve seçim **AzureFirewall.omsview** önce indirmiş olduğunuz dosya.
-5. **Kaydet**’e tıklayın.
+4. Daha önce indirdiğiniz **AzureFirewall. omsview** dosyasına gözatıp seçin.
+5. **Save (Kaydet)** düğmesine tıklayın.
 
-Görünüm için uygulama kuralı günlük verileri nasıl göründüğünü aşağıda verilmiştir:
+Görünümün uygulama kuralı günlük verilerini nasıl aradığı aşağıda açıklanmıştır:
 
 ![Uygulama kuralı günlük verileri](./media/log-analytics-samples/azurefirewall-applicationrulelogstats.png)
 
-Ve ağ kuralı günlük verileri için:
+Ağ kuralı günlük verileri için:
 
 ![Ağ kuralı günlük verileri]( ./media/log-analytics-samples/azurefirewall-networkrulelogstats.png)
 
-Azure güvenlik duvarı günlükleri aşağıdaki AzureDiagnostics verileri kategorisiyle olarak **AzureFirewallApplicationRule** veya **AzureFirewallNetworkRule**. Ayrıntılarını içeren veri msg_s alanında depolanır. Kullanarak [ayrıştırma](https://docs.microsoft.com/azure/kusto/query/parseoperator) biz ayıklamak çeşitli ilgi çekici özellikler msg_s alanından işleci. Aşağıdaki sorgular hem kategorileri için bilgiler ayıklayın.
+Azure Güvenlik Duvarı, AzureDiagnostics ve **AzureFirewallApplicationRule** ya da **AzureFirewallNetworkRule**olarak category ile verileri günlüğe kaydeder. Ayrıntıları içeren veriler msg_s alanında depolanır. [Ayrıştırma](https://docs.microsoft.com/azure/kusto/query/parseoperator) işlecini kullanarak msg_s alanından çeşitli ilginç özellikleri ayıklayabiliriz. Aşağıdaki sorgular her iki kategorinin de bilgilerini ayıklar.
 
-## <a name="application-rules-log-data-query"></a>Uygulama kuralları günlük veri sorgusu
+## <a name="application-rules-log-data-query"></a>Uygulama kuralları günlük verileri sorgusu
 
-Uygulama kuralı günlük verilerini aşağıdaki sorguyu ayrıştırır. Çeşitli Açıklama satırları sorgu nasıl oluşturulmuş için bazı yönergeler vardır:
+Aşağıdaki sorgu uygulama kuralı günlük verilerini ayrıştırır. Çeşitli açıklama satırlarında, sorgunun nasıl derlenildiği hakkında bazı yönergeler vardır:
 
 ```Kusto
 AzureDiagnostics
@@ -70,7 +70,7 @@ SourcePort = tostring(SourcePortInt)
 TargetPort = tostring(TargetPortInt)
 | extend
 //make sure we only have Allowed / Deny in the Action Field
-Action1 = case(Action1 == "denied","Deny","Unknown Action")
+Action1 = case(Action1 == "Deny","Deny","Unknown Action")
 | extend
     Action = case(Action2 == "",Action1,Action2),
     Rule = case(Rule2a == "",case(Rule1 == "",case(Rule2b == "","N/A", Rule2b),Rule1),Rule2a), 
@@ -80,7 +80,7 @@ Action1 = case(Action1 == "denied","Deny","Unknown Action")
 | project TimeGenerated, msg_s, Protocol, SourceIP, SourcePort, FQDN, TargetPort, Action ,RuleCollection, Rule
 ```
 
-Aynı sorgu içinde daha da kısaltılmış bir biçimi:
+Daha daraltılmış biçimde aynı sorgu:
 
 ```Kusto
 AzureDiagnostics
@@ -92,15 +92,15 @@ AzureDiagnostics
 | parse TempDetails with * "Deny." RuleCollection2b ". Proceeding with" Rule2b
 | extend SourcePort = tostring(SourcePortInt)
 | extend TargetPort = tostring(TargetPortInt)
-| extend Action1 = case(Action1 == "denied","Deny","Unknown Action")
+| extend Action1 = case(Action1 == "Deny","Deny","Unknown Action")
 | extend Action = case(Action2 == "",Action1,Action2),Rule = case(Rule2a == "", case(Rule1 == "",case(Rule2b == "","N/A", Rule2b),Rule1),Rule2a), 
 RuleCollection = case(RuleCollection2b == "",case(RuleCollection2a == "","No rule matched",RuleCollection2a), RuleCollection2b),FQDN = case(FQDN == "", "N/A", FQDN),TargetPort = case(TargetPort == "", "N/A", TargetPort)
 | project TimeGenerated, msg_s, Protocol, SourceIP, SourcePort, FQDN, TargetPort, Action ,RuleCollection, Rule
 ```
 
-## <a name="network-rules-log-data-query"></a>Ağ kurallarının günlük veri sorgusu
+## <a name="network-rules-log-data-query"></a>Ağ kuralları günlük verileri sorgusu
 
-Ağ kuralı günlük verilerini aşağıdaki sorguyu ayrıştırır. Çeşitli Açıklama satırları sorgu nasıl oluşturulmuş için bazı yönergeler vardır:
+Aşağıdaki sorgu, ağ kuralı günlük verilerini ayrıştırır. Çeşitli açıklama satırlarında, sorgunun nasıl derlenildiği hakkında bazı yönergeler vardır:
 
 ```Kusto
 AzureDiagnostics
@@ -137,7 +137,7 @@ TargetPort = tostring(TargetPortInt)
 | project TimeGenerated, msg_s, Protocol, SourceIP,SourcePort,TargetIP,TargetPort,Action, NatDestination
 ```
 
-Aynı sorgu içinde daha da kısaltılmış bir biçimi:
+Daha daraltılmış biçimde aynı sorgu:
 
 ```Kusto
 AzureDiagnostics
@@ -151,9 +151,9 @@ AzureDiagnostics
 | project TimeGenerated, msg_s, Protocol, SourceIP,SourcePort,TargetIP,TargetPort,Action, NatDestination
 ```
 
-## <a name="threat-intelligence-log-data-query"></a>Tehdit zekası günlük veri sorgusu
+## <a name="threat-intelligence-log-data-query"></a>Tehdit bilgileri günlük verileri sorgusu
 
-Aşağıdaki sorgu, tehdit zekası kural günlük verilerini ayrıştırır:
+Aşağıdaki sorgu, tehdit bilgileri kural günlüğü verilerini ayrıştırır:
 
 ```Kusto
 AzureDiagnostics
@@ -168,4 +168,4 @@ AzureDiagnostics
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure Güvenlik Duvarı İzleme ve Tanılama hakkında bilgi edinmek için [Öğreticisi: Azure güvenlik duvarı günlükleri ve ölçümleri izleme](tutorial-diagnostics.md).
+Azure Güvenlik Duvarı izleme ve tanılama hakkında bilgi edinmek için bkz. [öğretici: Azure Güvenlik Duvarı günlüklerini ve ölçümlerini izleme](tutorial-diagnostics.md).

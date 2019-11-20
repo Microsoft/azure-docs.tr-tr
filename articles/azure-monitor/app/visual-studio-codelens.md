@@ -1,26 +1,20 @@
 ---
 title: Visual Studio CodeLens’te Application Insights telemetrisi | Microsoft Belgeleri
 description: Application Insights istek ve özel durum telemetrinize Visual Studio’daki CodeLens ile hızlıca erişin.
-services: application-insights
-documentationcenter: .net
-author: NumberByColors
-manager: carmonm
-ms.assetid: 93559e44-23cb-4b9d-8425-60f7f0d0a82c
-ms.service: application-insights
-ms.custom: vs-azure
-ms.workload: azure-vs
-ms.tgt_pltfrm: ibiza
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: NumberByColors
+ms.author: daviste
 ms.date: 03/17/2017
 ms.reviewer: mbullwin
-ms.pm_owner: daviste;NumberByColors
-ms.author: daviste
-ms.openlocfilehash: d4f7cfab8291fcb6d0160035b9e421a8d47b2396
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: vs-azure
+ms.openlocfilehash: 4232431be221fca076a6bff9305093354f08c44d
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66255176"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899330"
 ---
 # <a name="application-insights-telemetry-in-visual-studio-codelens"></a>Visual Studio CodeLens’te Application Insights telemetrisi
 Web uygulamanızın kodundaki yöntemlere, çalışma zamanı özel durumları ve istek yanıt süreleri hakkında telemetri ile açıklama eklenebilir. [Azure Application Insights](../../azure-monitor/app/app-insights-overview.md)’ı uygulamanıza yüklerseniz telemetri Visual Studio [CodeLens](https://msdn.microsoft.com/library/dn269218.aspx) içinde (işlevin başvurulduğu yer sayısı veya düzenleyen kişi gibi yararlı bilgileri görmeye alışkın olduğunuz her bir işlevin üst kısmında) görünür.
@@ -41,7 +35,7 @@ Application Insights telemetrisini web uygulamanızın ortak istek yöntemlerini
 > 
 
 ## <a name="exceptions-in-codelens"></a>CodeLens’teki özel durumlar
-![TBD](./media/visual-studio-codelens/codelens-exceptions.png)
+![Daha sonra belirlenecek](./media/visual-studio-codelens/codelens-exceptions.png)
 
 CodeLens özel durum göstergesi, yöntemin sunduğu isteği işlerken son 24 içinde uygulamanızda en sık gerçekleşen 15 özel durumdan birkaç tanesini gösterir.
 
@@ -63,7 +57,7 @@ Daha fazla ayrıntı için CodeLens özel durum göstergesine tıklayın:
 > 
 
 ## <a name="requests-in-codelens"></a>CodeLens’teki istekler
-![TBD](./media/visual-studio-codelens/codelens-requests.png)
+![Daha sonra belirlenecek](./media/visual-studio-codelens/codelens-requests.png)
 
 CodeLens istek göstergesi son 24 saat içinde bir yöntemin sunduğu HTTP isteklerinin sayısını ve başarısız olan isteklerin yüzdesini gösterir.
 

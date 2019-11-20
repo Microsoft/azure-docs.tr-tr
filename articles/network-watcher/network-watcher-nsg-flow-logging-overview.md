@@ -1,6 +1,6 @@
 ---
-title: Giriş akış günlüğe kaydetme için ağ güvenlik grupları ile Azure Ağ İzleyicisi | Microsoft Docs
-description: Bu makalede, Azure Ağ İzleyicisi, NSG akış günlükleri özelliğinin nasıl kullanılacağı açıklanmaktadır.
+title: Azure ağ Izleyicisi ile ağ güvenlik grupları için akış günlüğü 'ne giriş | Microsoft Docs
+description: Bu makalede, Azure ağ Izleyicisi 'nin NSG akış günlükleri özelliğinin nasıl kullanılacağı açıklanmaktadır.
 services: network-watcher
 documentationcenter: na
 author: KumudD
@@ -14,94 +14,95 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: kumud
-ms.openlocfilehash: 1ec7fd4116aa848a9c431df386997cb23f405f1b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a77cc22c7a56c29b5b42a032af3d0ea0b2c17d88
+ms.sourcegitcommit: 39d95a11d5937364ca0b01d8ba099752c4128827
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64925423"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69563524"
 ---
-# <a name="introduction-to-flow-logging-for-network-security-groups"></a>Ağ güvenlik grupları için akış günlüğü giriş
+# <a name="introduction-to-flow-logging-for-network-security-groups"></a>Ağ güvenlik grupları için akış günlüğüne giriş
 
-Ağ güvenlik grubu (NSG) akış günlüklerini NSG üzerinden giriş ve çıkış IP trafiğini hakkındaki bilgileri görüntülemek izin veren bir Ağ İzleyicisi'nin bir özelliğidir. Akış günlüklerini JSON biçiminde yazılır ve giden Göster ve trafik varsa gelen akışlar Kural başına temelinde ağ arabirimine (NIC) akış için 5 demet bilgi (kaynak/hedef IP, kaynak/hedef bağlantı noktası ve protokol) akışla ilgili uygular. izin verilen veya reddedilen ve sürüm 2, aktarım hızı bilgilerini (bayt ve paketleri).
+Ağ güvenlik grubu (NSG) akış günlükleri, bir NSG aracılığıyla giriş ve çıkış IP trafiği hakkındaki bilgileri görüntülemenize olanak tanıyan bir ağ Izleyicisi özelliğidir. Akış günlükleri JSON biçiminde yazılır ve bir kural temelinde giden ve gelen akışları gösterir ve trafik, akış (kaynak/hedef IP, kaynak/hedef bağlantı noktası ve protokol) hakkında 5 demet bilgileri izin verilen veya reddedilen ve sürüm 2 ' de üretilen iş bilgileri (bayt ve paketler).
 
 
-![Akış günlüklerine genel bakış](./media/network-watcher-nsg-flow-logging-overview/figure1.png)
+![akış günlüklerine genel bakış](./media/network-watcher-nsg-flow-logging-overview/figure1.png)
 
-Hedef Nsg akış günlükleri, ancak bunlar değil aynı diğer günlükleri olarak görüntülenir. Akış günlükleri yalnızca bir depolama hesabında depolanır ve aşağıdaki örnekte gösterilen günlük yolunu izleyin:
+Akış günlükleri NSG 'leri hedeflerse, diğer Günlükler ile aynı görüntülenmez. Akış günlükleri yalnızca bir depolama hesabı içinde depolanır ve aşağıdaki örnekte gösterilen günlük yolunu izler:
 
 ```
 https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecuritygroupflowevent/resourceId=/SUBSCRIPTIONS/{subscriptionID}/RESOURCEGROUPS/{resourceGroupName}/PROVIDERS/MICROSOFT.NETWORK/NETWORKSECURITYGROUPS/{nsgName}/y={year}/m={month}/d={day}/h={hour}/m=00/macAddress={macAddress}/PT1H.json
 ```
-Akış günlüklerini analiz etme ve ağ trafiğini kullanarak öngörü [trafik analizi](traffic-analytics.md).
+[Trafik analizlerini](traffic-analytics.md)kullanarak akış günlüklerini çözümleyebilir ve ağ trafiğiniz hakkında öngörüler elde edebilirsiniz.
 
-Akış günlüklerini diğer günlükler için görülen aynı bekletme ilkeleri uygulayın. 1 günden 2147483647 gün için günlük bekletme ilkesi ayarlayabilirsiniz. Bekletme ilkesi ayarlanmazsa günlükler süresiz olarak saklanır.
+Diğer Günlükler için görülen aynı bekletme ilkeleri, akış günlükleri için geçerlidir. Günlük tutma ilkesini, 1 günden 2147483647 güne kadar ayarlayabilirsiniz. Bekletme ilkesi ayarlanmazsa günlükler süresiz olarak saklanır.
 
 > [!NOTE] 
-> NSG akış günlüğü ile elde tutma ilkesi özelliği kullanarak, depolama işlemleri yüksek hacimli ve ilişkili maliyetleri neden olabilir. Elde tutma ilkesi özelliği gerekmiyorsa, bu değeri 0 olarak ayarlayın öneririz.
+> NSG akış günlüğü ile bekletme ilkesi özelliğinin kullanılması, yüksek hacimde depolama işlemlerine ve ilişkili maliyetlere neden olabilir. Bekletme İlkesi özelliği gerektirmiyorsa, bu değeri 0 olarak ayarlamanızı öneririz.
 
 
 ## <a name="log-file"></a>Günlük dosyası
 
 Akış günlükleri aşağıdaki özellikleri içerir:
 
-* **zaman** - olayın günlüğe yazıldığı zaman zaman
-* **Systemıd** -ağ güvenlik grubu kaynak kimliği
-* **Kategori** -olayın kategorisi. Her zaman kategorisidir **NetworkSecurityGroupFlowEvent**
-* **ResourceId** -kaynak kimliğini nsg
-* **operationName** -her zaman NetworkSecurityGroupFlowEvents
-* **özellikleri** -flow özelliklerini koleksiyonu
-    * **Sürüm** -akış günlüğü olay şeması sürümü sayısı
-    * **Akışlar** -akış koleksiyonu. Bu özelliği farklı kuralları için birden fazla varlık içeriyor
-        * **Kural** -kural akışlar listelenen
-            * **Akışlar** -akış koleksiyonu
-                * **Mac** -burada akış toplandı sanal makine için NIC MAC adresi
-                * **flowTuples** -virgülle ayrılmış biçimde akış demet için birden çok özelliği içeren bir dize
-                    * **Zaman damgası** -flow UNIX dönem biçiminde oluştuğunda zaman damgasını değerdir
-                    * **Kaynak IP** -kaynak IP
+* etkinliğin günlüğe kaydedildiği **saat**
+* **SystemId** -ağ güvenlik grubu kaynak kimliği.
+* **Kategori** -etkinliğin kategorisi. Kategori her zaman **Networksecuritygroupflowevent**
+* **RESOURCEID** -NSG kaynak kimliği
+* **OperationName** -Always NetworkSecurityGroupFlowEvents
+* **Özellikler** -akışın özelliklerinin bir koleksiyonu
+    * Akış günlüğü olay şemasının **Sürüm** numarası
+    * **akışlar** -akış koleksiyonu. Bu özelliğin farklı kurallar için birden çok girişi vardır
+        * akışların listelendiği **kural** kuralı
+            * **akışlar** -akış koleksiyonu
+                * **Mac** -AKıŞıN toplandığı VM için NIC 'in MAC adresi
+                * **flowtuple** -akış kayıt düzeni için virgülle ayrılmış biçimde birden çok özellik içeren bir dize
+                    * **Zaman damgası** -bu değer, akışın UNIX dönem biçiminde gerçekleştiği zaman damgasıdır
+                    * **Kaynak IP** -kaynak IP 'si
                     * **Hedef IP** -hedef IP
                     * **Kaynak bağlantı noktası** -kaynak bağlantı noktası
-                    * **Hedef bağlantı noktası** -' % s'hedef bağlantı noktası
-                    * **Protokol** -akışın protokol. Geçerli değerler **T** TCP için ve **U** UDP
-                    * **Trafik akışı** -trafik akış yönü. Geçerli değerler **miyim** gelen ve **O** için giden.
-                    * **Trafiği karar** - trafiğe izin verilen veya reddedilen olup olmadığını. Geçerli değerler **A** için izin verilen ve **D** için reddedildi.
-                    * **Akış durumu - yalnızca sürüm 2** -flow durumunu yakalar. Olası durumlar şunlardır **B**: Bir akış oluşturulduğunda başlar. İstatistikleri sağlanmayan. **C**: Devam eden bir akış için devam ediliyor. İstatistikleri, 5 dakikalık aralıklarla sağlanır. **E**: Bir akış sonlandırıldığında son. İstatistikleri sağlanır.
-                    * **-Paket kaynağı hedefe - yalnızca sürüm 2** TCP veya UDP paketlerini kaynaktan hedefe son güncelleştirmeden bu yana gönderilen toplam sayısı.
-                    * **Bayt gönderilen - kaynaktan hedefe - yalnızca sürüm 2** kaynaktan hedefe son güncelleştirmeden bu yana TCP veya UDP paket baytlarının toplam sayısı. Paket üst bilgisi ve yük paket bayt içerir.
-                    * **Paketler - kaynak - yalnızca sürüm 2 için hedef** TCP veya UDP paketlerini hedeften kaynağa son güncelleştirmeden bu yana gönderilen toplam sayısı.
-                    * **Bayt gönderilen - kaynak - yalnızca sürüm 2 için hedef** TCP ve UDP paket bayt hedeften kaynağa son güncelleştirmeden bu yana gönderilen toplam sayısı. Paket üst bilgisi ve yük paket bayt içerir.
+                    * **Hedef bağlantı noktası** -hedef bağlantı noktası
+                    * **Protokol** -akışın protokolü. Geçerli değerler TCP için **T** ve UDP için **U**
+                    * **Trafik akışı** -trafik akışının yönü. Giden ve çıkış için geçerli değerler **ı** .
+                    * **Trafik kararı** -trafiğe izin verilip verilmediğini belirtir. Geçerli değerler, izin verilen ve **D** için için geçerlidir.
+                    * **Flow durumu-yalnızca sürüm 2** -akışın durumunu yakalar. Olası durumlar **B**: Bir akış oluşturulduğunda başlar. İstatistikler sağlanmamış. **C**: Devam eden bir akış için devam edin. İstatistikler 5 dakikalık aralıklarla sağlanır. **E**: Bir akış sonlandırıldığında bitiş. İstatistikler sağlanır.
+                    * **Paketler-kaynak-yalnızca hedef sürüm 2** Son güncelleştirmeden bu yana kaynaktan hedefe gönderilen TCP veya UDP paketlerinin toplam sayısı.
+                    * **Gönderilen bayt-kaynak-yalnızca hedef sürüm 2 ' ye** Son güncelleştirmeden bu yana kaynaktan hedefe gönderilen TCP veya UDP paket baytlarının toplam sayısıdır. Paket baytları paket üst bilgisini ve yükünü içerir.
+                    * **Paketler-hedefe yalnızca kaynak-sürüm 2** Son güncelleştirmeden bu yana hedefin kaynağına Gönderilen TCP veya UDP paketlerinin toplam sayısı.
+                    * **Gönderilen bayt-hedef-yalnızca kaynak-sürüm 2** Son güncelleştirmeden bu yana, hedefin kaynağına Gönderilen TCP ve UDP paket baytlarının toplam sayısıdır. Paket baytları paket üst bilgisini ve yükünü içerir.
 
-## <a name="nsg-flow-logs-version-2"></a>Sürüm 2 NSG akış günlükleri
+## <a name="nsg-flow-logs-version-2"></a>NSG akış günlükleri sürüm 2
 
-Sürüm 2 günlüklerinin akışı durumu tanıtır. Akış günlüklerini'nın hangi sürümünün aldığınız yapılandırabilirsiniz. Akış günlüklerini etkinleştirme hakkında bilgi için bkz: [etkinleştirme NSG akış günlüğü](network-watcher-nsg-flow-logging-portal.md).
+Günlüklerin 2. sürümü Flow durumunu tanıtır. Aldığınız akış günlüklerinin sürümünü yapılandırabilirsiniz. Akış günlüklerinin nasıl etkinleştirileceği hakkında bilgi edinmek için bkz. [NSG akış günlüğünü etkinleştirme](network-watcher-nsg-flow-logging-portal.md).
 
-Akış durumu *B* akış ne zaman başlatılacağını kaydedilir. Akış durumu *C* ve akış durumu *E* akışı ve akışın sonlandırma devamlılık sırasıyla işaretlemek durumlarıdır. Her ikisi de *C* ve *E* durumları trafiği bant genişliği bilgileri içerir.
+Akış durumu *B* , bir akış başlatıldığında kaydedilir. Flow durumu *C* ve Flow durumu *E* , sırasıyla akış ve akış sonlandırmasının devamlılığını işaretleyen durumlardır. Hem *C* hem de *E* durumları trafik bant genişliği bilgilerini içerir.
 
-Devamlılık için *C* ve son *E* akış durumları, bayt ve paket sayıları tarihten önceki akış demet kaydın toplam sayısı. Önceki örnek konuşma başvuran, aktarılan paketlerin toplam sayısı 1021 + 52 + 8005 + 47 = 9125. Aktarılan baytların toplam sayısı 588096 + 29952 + 4610880 + 27072 = 5256000.
+**Örnek**: 185.170.185.105:35370 ve 10.2.0.4:23 arasında bir TCP görüşmesinde akış başlıkları:
 
-**Örnek**: Bir TCP konuşma 185.170.185.105:35370 10.2.0.4:23 arasındaki gelen akış diziler:
+"1493763938, 185.170.185.105, 10.2.0.4, 35370, 23, T, I, A, B,,,," "1493695838, 185.170.185.105, 10.2.0.4, 35370, 23, T, I, A, C, 1021, 588096, 8005, 4610880" "1493696138, 185.170.185.105, 10.2.0.4, 35370, 23, T, I, A, E, 52, 29952, 47, 27072"
 
-"1493763938,185.170.185.105,10.2.0.4,35370,23,T,I,A,B,," "1493695838,185.170.185.105,10.2.0.4,35370,23,T,I,A,C,1021,588096,8005,4610880" "1493696138,185.170.185.105,10.2.0.4,35370,23,T,I,A,E,52,29952,47,27072"
+Devamlılık *C* ve bitiş *E* akışı durumları için bayt ve paket sayıları, önceki akış kayıt kümesi kaydı zamanından itibaren toplam sayılardır. Önceki örnek konuşmaya başvurarak, aktarılan toplam paket sayısı 1021 + 52 + 8005 + 47 = 9125 olur. Aktarılan toplam bayt sayısı 588096 + 29952 + 4610880 + 27072 = 5256000.
 
-Devamlılık için *C* ve son *E* akış durumları, bayt ve paket sayıları tarihten önceki akış demet kaydın toplam sayısı. Önceki örnek konuşma başvuran, aktarılan paketlerin toplam sayısı 1021 + 52 + 8005 + 47 = 9125. Aktarılan baytların toplam sayısı 588096 + 29952 + 4610880 + 27072 = 5256000.
-
-Aşağıdaki metni, bir akış günlüğü örneğidir. Gördüğünüz gibi önceki bölümde açıklanan özellik listesi izleyen birden çok kayıt vardır.
+Aşağıdaki metin akış günlüğüne bir örnektir. Gördüğünüz gibi, önceki bölümde açıklanan özellik listesini izleyen birden çok kayıt vardır.
 
 ## <a name="nsg-flow-logging-considerations"></a>NSG akış günlüğü konuları
 
-**NSG akış günlüğü üzerinde tüm Nsg'ler bir kaynağa bağlı etkinleştirme**: Azure'da oturum akış NSG kaynağı olarak yapılandırılır. Bir akış yalnızca bir NSG kuralı ilişkilendirilir. Birden fazla Nsg burada kullanıldığı senaryolarda, NSG akış günlüğü üzerinde tüm Nsg'ler etkin olduğunu olan öneririz tüm trafiği kaydedildiğinden emin olmak için kaynak alt ağ veya ağ arabirimi uygulanır. Bkz: [trafik nasıl değerlendirilir](../virtual-network/security-overview.md#how-traffic-is-evaluated) ağ güvenlik grupları hakkında daha fazla bilgi için. 
+**Bir kaynağa bağlı tüm NSG 'ler için NSG akış günlüğünü etkinleştirin**: Azure 'da akış günlüğü, NSG kaynağında yapılandırılır. Akış yalnızca bir NSG kuralıyla ilişkilendirilecektir. Birden çok NSG 'nin kullanıldığı senaryolarda, tüm trafiğin kaydedildiğinden emin olmak için bir kaynağın alt ağını veya ağ arabirimini uygulayan NSG akış günlüğü 'nün etkinleştirilmiş olması önerilir. Ağ güvenlik grupları hakkında daha fazla bilgi için [trafiğin nasıl değerlendirildiğini](../virtual-network/security-overview.md#how-traffic-is-evaluated) görün. 
 
-**Akış günlüğü maliyetleri**: NSG akış günlüğü, üretilen günlükleri hacmine göre faturalandırılır. Yüksek trafik hacmi büyük akış günlük birimi ve ilişkili maliyetleri neden olabilir. NSG akış günlüğü fiyatlandırması, temel alınan depolama maliyetlerini içermez. NSG akış günlüğü ile elde tutma ilkesi özelliği kullanarak, depolama işlemleri yüksek hacimli ve ilişkili maliyetleri neden olabilir. Elde tutma ilkesi özelliği gerekmiyorsa, bu değeri 0 olarak ayarlayın öneririz. Bkz: [Ağ İzleyicisi fiyatlandırma](https://azure.microsoft.com/pricing/details/network-watcher/) ve [Azure depolama fiyatlandırması](https://azure.microsoft.com/pricing/details/storage/) ek ayrıntılar için.
+**Akış günlüğü maliyetleri**: NSG akış günlüğü, üretilen günlüklerin hacminde faturalandırılır. Yüksek trafik hacmi, büyük akış günlüğü hacmine ve ilişkili maliyetlere yol açabilir. NSG akış günlüğü fiyatlandırması, depolamanın temel maliyetlerini içermez. NSG akış günlüğü ile bekletme ilkesi özelliğinin kullanılması, yüksek hacimde depolama işlemlerine ve ilişkili maliyetlere neden olabilir. Bekletme İlkesi özelliği gerektirmiyorsa, bu değeri 0 olarak ayarlamanızı öneririz. Ek ayrıntılar için bkz. [ağ Izleyicisi fiyatlandırması](https://azure.microsoft.com/pricing/details/network-watcher/) ve [Azure Depolama fiyatlandırması](https://azure.microsoft.com/pricing/details/storage/) .
 
-**Akışları genel IP'ler olmayan VM'ler için İnternet'ten IP'ler oturum gelen**: Örnek düzeyi genel IP olarak NIC ile ilişkili bir genel IP adresi aracılığıyla atanan bir genel IP adresi yok ya da bir temel yük dengeleyici arka uç havuzu, kullanım parçası olan Vm'leri [SNAT varsayılan](../load-balancer/load-balancer-outbound-connections.md#defaultsnat) ve tarafından atanan bir IP adresi Giden bağlantıyı kolaylaştırmak için azure'ı tıklatın. Sonuç olarak, akışları için akış günlüğü girişleri görebilirsiniz akışı SNAT için atanan bağlantı noktası aralığını bağlantı noktasına yönlendirilir, internet'ten IP adresleri. Azure VM bu akışlar izin vermez ancak denemesi kaydedilir ve Ağ İzleyicisi'nin NSG akış günlüğü tasarım gereği görüntülenir. İstenmeyen gelen internet trafiğini NSG ile açıkça engellenmesi önerilir.
+> [!IMPORTANT]
+> Şu anda ağ Izleyicisi için ağ [güvenlik grubu (NSG) akış günlüklerinin](network-watcher-nsg-flow-logging-overview.md) , bekletme ilkesi ayarlarına göre blob depolamadan otomatik olarak silinmediği bir sorun vardır. Sıfır olmayan bir bekletme ilkeniz varsa, herhangi bir ücret ödemeden kaçınmak için saklama süresini aşan depolama bloblarını düzenli aralıklarla silmenizi öneririz. NSG akış günlüğü depolama blogunu silme hakkında daha fazla bilgi için bkz. [NSG akış günlüğü depolama Bloblarını silme](network-watcher-delete-nsg-flow-log-blobs.md).
+
+**Internet IP 'lerinden ortak IP Içermeyen VM 'lere kaydedilen gelen akışlar**: NIC ile ilişkili bir genel IP adresi olmayan, örnek düzeyi genel IP olarak veya temel bir yük dengeleyici arka uç havuzunun parçası olan VM 'Ler, [varsayılan SNAT](../load-balancer/load-balancer-outbound-connections.md#defaultsnat) 'yi kullanır ve bunu kolaylaştırmak için Azure tarafından ATANMıŞ bir IP adresine sahiptir giden bağlantı. Sonuç olarak, akış, SNAT için atanan bağlantı noktası aralığındaki bir bağlantı noktasına gidiyor ise internet IP adreslerinden akışlar için akış günlüğü girişleri görebilirsiniz. Azure bu akışlara sanal makineye izin vermediğinden, deneme günlüğe kaydedilir ve tasarıma göre ağ Izleyicisi 'nin NSG akış günlüğünde görüntülenir. İstenmeyen gelen internet trafiğinin NSG ile açıkça engellenmesini öneririz.
 
 ## <a name="sample-log-records"></a>Örnek günlük kayıtları
 
-Aşağıdaki metni, bir akış günlüğü örneğidir. Gördüğünüz gibi önceki bölümde açıklanan özellik listesi izleyen birden çok kayıt vardır.
+Aşağıdaki metin akış günlüğüne bir örnektir. Gördüğünüz gibi, önceki bölümde açıklanan özellik listesini izleyen birden çok kayıt vardır.
 
 
 > [!NOTE]
-> Değerler **flowTuples* özelliği olan bir virgülle ayrılmış listesi.
+> **Flowbaşlıkların* özelliğindeki değerler, virgülle ayrılmış bir liste.
  
 ### <a name="version-1-nsg-flow-log-format-sample"></a>Sürüm 1 NSG akış günlüğü biçim örneği
 ```json
@@ -286,7 +287,7 @@ Aşağıdaki metni, bir akış günlüğü örneğidir. Gördüğünüz gibi ön
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Akış günlüklerini etkinleştirme hakkında bilgi için bkz: [etkinleştirme NSG akış günlüğü](network-watcher-nsg-flow-logging-portal.md).
-- Akış günlüklerini okuma hakkında bilgi almak için bkz: [NSG akış günlüklerini okuma](network-watcher-read-nsg-flow-logs.md).
-- NSG günlüğe kaydetme hakkında daha fazla bilgi için bkz: [Azure İzleyici, ağ güvenlik grubu (Nsg) için günlükleri](../virtual-network/virtual-network-nsg-manage-log.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json).
-- Trafiğin izin verilen veya için veya bir VM'den reddedildi olup olmadığını belirlemek için bkz: [bir VM ağ trafik filtresi sorununu tanılama](diagnose-vm-network-traffic-filtering-problem.md)
+- Akış günlüklerinin nasıl etkinleştirileceği hakkında bilgi edinmek için bkz. [NSG akış günlüğünü etkinleştirme](network-watcher-nsg-flow-logging-portal.md).
+- Akış günlüklerini okumayı öğrenmek için bkz. [NSG akış günlüklerini okuma](network-watcher-read-nsg-flow-logs.md).
+- NSG günlüğü hakkında daha fazla bilgi edinmek için bkz. [ağ güvenlik grupları (NSG 'ler) Için Azure izleyici günlükleri](../virtual-network/virtual-network-nsg-manage-log.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json).
+- Bir VM 'ye veya sanal makineye giden trafiğe izin verilip verilmediğini belirlemek için bkz. [BIR VM ağ trafiği tanılama sorunlarını Tanıla](diagnose-vm-network-traffic-filtering-problem.md)

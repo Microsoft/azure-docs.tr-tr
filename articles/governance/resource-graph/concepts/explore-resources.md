@@ -1,51 +1,45 @@
 ---
-title: Azure kaynaklarınızı keşfedin
-description: Kaynaklarınızı keşfedin ve nasıl bağlandığını keşfetmek için kaynak grafik sorgu dilini kullanmayı öğrenin.
-author: DCtheGeek
-ms.author: dacoulte
-ms.date: 04/23/2019
+title: Azure kaynaklarınızı inceleme
+description: Kaynak grafik sorgu dilini kullanarak kaynaklarınızı keşfetme ve bunların nasıl bağlandığını bulma hakkında bilgi edinin.
+ms.date: 10/18/2019
 ms.topic: conceptual
-ms.service: resource-graph
-manager: carmonm
-ms.custom: seodec18
-ms.openlocfilehash: 0b4a75558f5e82b707ae5d012acef4d2c5c4b7a0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e489a4eafdbbd838c4850d67fcd8ec40f76f290c
+ms.sourcegitcommit: 39da2d9675c3a2ac54ddc164da4568cf341ddecf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64723814"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73959232"
 ---
 # <a name="explore-your-azure-resources-with-resource-graph"></a>Kaynak Grafiği ile Azure kaynaklarınızı keşfedin
 
-Azure Kaynak Grafiği keşfedin ve hızla ve uygun ölçekte Azure kaynaklarınıza bulma olanağı sağlar. Hızlı yanıtlar için tasarlanmış, ortamınız hakkında ayrıca Azure kaynaklarınızın olun özellikleri hakkında bilgi edinmek için harika bir yoludur.
+Azure Kaynak Grafiği, Azure kaynaklarınızı hızlı ve ölçeklenebilir bir şekilde keşfetme ve bulma özelliği sağlar. Hızlı yanıtlar için tasarlanan bu, ortamınız ve ayrıca Azure kaynaklarınızı oluşturan özellikler hakkında bilgi edinmek için harika bir yoldur.
 
-[!INCLUDE [az-powershell-update](../../../../includes/updated-for-az.md)]
+## <a name="explore-virtual-machines"></a>Sanal makineleri keşfet
 
-## <a name="explore-virtual-machines"></a>Sanal makineleri keşfedin
-
-Azure'da ortak bir kaynak bir sanal makinedir. Bir kaynak türü sanal makineler, sorgulanabilir birçok özelliklere sahip. Her bir özellik, filtreleme veya tam olarak aradığınız kaynak bulmak için bir seçenek sunar.
+Azure 'daki ortak bir kaynak bir sanal makinedir. Kaynak türü olarak, sanal makinelerin sorgulanabilecek birçok özelliği vardır. Her özellik, aradığınız kaynağı filtrelemek veya bulmak için bir seçenek sağlar.
 
 ### <a name="virtual-machine-discovery"></a>Sanal makine bulma
 
-Tek bir VM bizim ortamından almak ve dönen özelliklerine bakmak için basit bir sorgu başlayalım.
+Ortamınızdaki tek bir VM 'yi almak için basit bir sorgu ile başlayalım ve döndürülen özelliklere bakın.
 
 ```kusto
-where type =~ 'Microsoft.Compute/virtualMachines'
+Resources
+| where type =~ 'Microsoft.Compute/virtualMachines'
 | limit 1
 ```
 
 ```azurecli-interactive
-az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | limit 1"
+az graph query -q "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | limit 1"
 ```
 
 ```azurepowershell-interactive
-Search-AzGraph -Query "where type =~ 'Microsoft.Compute/virtualMachines' | limit 1" | ConvertTo-Json -Depth 100
+Search-AzGraph -Query "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | limit 1" | ConvertTo-Json -Depth 100
 ```
 
 > [!NOTE]
-> Azure PowerShell `Search-AzGraph` cmdlet döndürür bir **PSCustomObject** varsayılan olarak. Aynı Azure CLI tarafından döndürülen olarak ara çıktı elde etmek `ConvertTo-Json` cmdlet'i kullanılır. İçin varsayılan değer **derinliği** olduğu _2_. Bu ayarın _100_ döndürülen tüm düzeyleri dönüştürmeniz gerekir.
+> Azure PowerShell `Search-AzGraph` cmdlet 'i varsayılan olarak bir **PSCustomObject** döndürür. Çıktının Azure CLı tarafından döndürülen ile aynı görünmesi için `ConvertTo-Json` cmdlet 'i kullanılır. **Derinlik** için varsayılan değer _2_' dir. _100_ olarak ayarlanması, döndürülen tüm düzeyleri dönüştürmelidir.
 
-JSON sonuçları şu örneğe benzer şekilde yapılandırılmıştır:
+JSON sonuçları, aşağıdaki örneğe benzer şekilde yapılandırılır:
 
 ```json
 [
@@ -110,26 +104,27 @@ JSON sonuçları şu örneğe benzer şekilde yapılandırılmıştır:
 ]
 ```
 
-Özellikleri bize sanal makine kaynağının, SKU, işletim sistemi, diskleri, etiketler, her şeyi hakkında ek bilgi ve üyesi olduğu kaynak grubu ve abonelik.
+Özellikler, sanal makine kaynağının kendisi, SKU, işletim sistemi, diskler, Etiketler ve kaynak grubu ve aboneliğin üyesi olduğu her şey hakkındaki ek bilgileri bize söyler.
 
 ### <a name="virtual-machines-by-location"></a>Konuma göre sanal makineler
 
-Sanal makineler kaynak hakkında öğrendiklerimizi uygularsanız kullanalım **konumu** özelliği konuma göre tüm sanal makinelerin sayısı. Sorguyu güncellemek için biz limitinizi kaldırmak ve konum değerlerin sayısını özetler.
+Sanal makineler kaynağı hakkında öğrendiğimiz şeyler, konuma göre tüm sanal makineleri saymak için **Location** özelliğini kullanalım. Sorguyu güncelleştirmek için sınırı kaldıracağız ve konum değerlerinin sayısını özetleyeceğiz.
 
 ```kusto
-where type =~ 'Microsoft.Compute/virtualMachines'
+Resources
+| where type =~ 'Microsoft.Compute/virtualMachines'
 | summarize count() by location
 ```
 
 ```azurecli-interactive
-az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by location"
+az graph query -q "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by location"
 ```
 
 ```azurepowershell-interactive
-Search-AzGraph -Query "where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by location"
+Search-AzGraph -Query "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by location"
 ```
 
-JSON sonuçları şu örneğe benzer şekilde yapılandırılmıştır:
+JSON sonuçları, aşağıdaki örneğe benzer şekilde yapılandırılır:
 
 ```json
 [
@@ -148,54 +143,56 @@ JSON sonuçları şu örneğe benzer şekilde yapılandırılmıştır:
 ]
 ```
 
-Her bir Azure bölgesinde sahibiz kaç sanal makineler artık görebiliriz.
+Artık her bir Azure bölgesinde kaç tane sanal makine olduğunu görebiliriz.
 
-### <a name="virtual-machines-by-sku"></a>Sanal makineler tarafından SKU
+### <a name="virtual-machines-by-sku"></a>SKU 'ya göre sanal makineler
 
-Özgün sanal makine özellikleri için yukarıda bahsedilen SKU boyutunu sahip tüm sanal makineleri bulmak deneyelim **Standard_B2s**. Döndürülen JSON yanıtına bakarak, içinde depolanan olduğunu görüyoruz **properties.hardwareprofile.vmsize**. Bu boyut uyan ve yalnızca VM ve bölge adını döndürün tüm Vm'leri bulmak için sorgu güncelleştireceğiz.
+Özgün sanal makine özelliklerine geri dönerek, **STANDARD_B2S**SKU boyutu olan tüm sanal makineleri bulmayı deneyelim. Döndürülen JSON 'a bakarak **Properties. HardwareProfile. VMSize**yolunda depolandığını görüyoruz. Bu boyutla eşleşen tüm VM 'Leri bulmak ve yalnızca VM ve bölgenin adını döndürmek için sorguyu güncelleştireceğiz.
 
 ```kusto
-where type =~ 'Microsoft.Compute/virtualMachines' and properties.hardwareProfile.vmSize == 'Standard_B2s'
+Resources
+| where type =~ 'Microsoft.Compute/virtualMachines' and properties.hardwareProfile.vmSize == 'Standard_B2s'
 | project name, resourceGroup"
 ```
 
 ```azurecli-interactive
-az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' and properties.hardwareProfile.vmSize == 'Standard_B2s' | project name, resourceGroup"
+az graph query -q "Resources | where type =~ 'Microsoft.Compute/virtualMachines' and properties.hardwareProfile.vmSize == 'Standard_B2s' | project name, resourceGroup"
 ```
 
 ```azurepowershell-interactive
-Search-AzGraph -Query "where type =~ 'Microsoft.Compute/virtualMachines' and properties.hardwareProfile.vmSize == 'Standard_B2s' | project name, resourceGroup"
+Search-AzGraph -Query "Resources | where type =~ 'Microsoft.Compute/virtualMachines' and properties.hardwareProfile.vmSize == 'Standard_B2s' | project name, resourceGroup"
 ```
 
-### <a name="virtual-machines-connected-to-premium-managed-disks"></a>Premium yönetilen disklere bağlı sanal makineleri
+### <a name="virtual-machines-connected-to-premium-managed-disks"></a>Premium yönetilen disklere bağlı sanal makineler
 
-Bu bağlı premium yönetilen diskler ayrıntılarını almak istediyseniz **Standard_B2s** sanal makineler, size bu yönetilen disklerin kaynak kimliği bulunun için sorguyu genişletebilirsiniz.
+Bu **Standard_B2s** sanal makinelere eklenmiş Premium yönetilen disklerin ayrıntılarını almak istiyorsam, bu yönetilen DISKLERIN kaynak kimliğini sağlamak için sorguyu genişletebilirsiniz.
 
 ```kusto
-where type =~ 'Microsoft.Compute/virtualmachines' and properties.hardwareProfile.vmSize == 'Standard_B2s'
+Resources
+| where type =~ 'Microsoft.Compute/virtualmachines' and properties.hardwareProfile.vmSize == 'Standard_B2s'
 | extend disk = properties.storageProfile.osDisk.managedDisk
 | where disk.storageAccountType == 'Premium_LRS'
 | project disk.id
 ```
 
 > [!NOTE]
-> SKU başka bir yolunu kullanarak olabilirdi **diğer adlar** özelliği **Microsoft.Compute/virtualMachines/sku.name**. Bkz: [diğer adları Göster](../samples/starter.md#show-aliases) ve [ayrı diğer değerleri gösterir](../samples/starter.md#distinct-alias-values) örnekler.
+> SKU 'YU almanın başka bir yolu da **Microsoft. COMPUTE/virtualMachines/SKU. Name** **diğer** ad özelliği kullanılarak yapılır. [Diğer adları göster](../samples/starter.md#show-aliases) ve [farklı diğer ad değerlerini göster](../samples/starter.md#distinct-alias-values) örneklerine bakın.
 
 ```azurecli-interactive
-az graph query -q "where type =~ 'Microsoft.Compute/virtualmachines' and properties.hardwareProfile.vmSize == 'Standard_B2s' | extend disk = properties.storageProfile.osDisk.managedDisk | where disk.storageAccountType == 'Premium_LRS' | project disk.id"
+az graph query -q "Resources | where type =~ 'Microsoft.Compute/virtualmachines' and properties.hardwareProfile.vmSize == 'Standard_B2s' | extend disk = properties.storageProfile.osDisk.managedDisk | where disk.storageAccountType == 'Premium_LRS' | project disk.id"
 ```
 
 ```azurepowershell-interactive
-  Search-AzGraph -Query "where type =~ 'Microsoft.Compute/virtualmachines' and properties.hardwareProfile.vmSize == 'Standard_B2s' | extend disk = properties.storageProfile.osDisk.managedDisk | where disk.storageAccountType == 'Premium_LRS' | project disk.id"
+Search-AzGraph -Query "Resources | where type =~ 'Microsoft.Compute/virtualmachines' and properties.hardwareProfile.vmSize == 'Standard_B2s' | extend disk = properties.storageProfile.osDisk.managedDisk | where disk.storageAccountType == 'Premium_LRS' | project disk.id"
 ```
 
-Disk kimlikleri listesini sonucudur.
+Sonuç, disk kimliklerinin bir listesidir.
 
 ### <a name="managed-disk-discovery"></a>Yönetilen disk bulma
 
-Önceki sorgunun ilk kaydıyla şunları ilk sanal makineye bağlı yönetilen disk üzerinde bulunan özellikler keşfedeceğiz. Güncelleştirilmiş sorgu disk kimliği kullanır ve türü değiştirir.
+Önceki sorgudaki ilk kayıt ile, ilk sanal makineye eklenmiş yönetilen diskte bulunan özellikleri araştıracağız. Güncelleştirilmiş sorgu disk KIMLIĞINI kullanır ve türü değiştirir.
 
-Örnek, önceki sorgudan örnek çıktı:
+Örneğin, önceki sorgudaki örnek çıktı:
 
 ```json
 [
@@ -206,24 +203,25 @@ Disk kimlikleri listesini sonucudur.
 ```
 
 ```kusto
-where type =~ 'Microsoft.Compute/disks' and id == '/subscriptions/<subscriptionId>/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/disks/ContosoVM1_OsDisk_1_9676b7e1b3c44e2cb672338ebe6f5166'
+Resources
+| where type =~ 'Microsoft.Compute/disks' and id == '/subscriptions/<subscriptionId>/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/disks/ContosoVM1_OsDisk_1_9676b7e1b3c44e2cb672338ebe6f5166'
 ```
 
-Sorguyu çalıştırmadan önce nasıl biz biliyor muydunuz **türü** artık olmalıdır **Microsoft.Compute/disks**?
-Tam kimliği bakarsanız, göreceğiniz **/providers/Microsoft.Compute/disks/** dizesinin parçası olarak. Bu dize parçasını aramak için ne tür dair bir ipucu sağlar. Alternatif bir yöntem türü sınırı kaldırın ve bunun yerine yalnızca arama tarafından Kimliği alanı olacaktır. Kimliği benzersiz olduğundan, yalnızca bir kayıtla döndürülür ve **türü** özelliği üzerindeki bu ayrıntı sağlar.
+Sorguyu çalıştırmadan önce, **türü** Şu anda **Microsoft. COMPUTE/Disks**olarak biliyoruz?
+Tam KIMLIĞE bakarsanız dizenin bir parçası olarak **/providers/Microsoft.COMPUTE/Disks/** görürsünüz. Bu dize parçası, arama yapılacak tür için bir ipucu sağlar. Farklı bir yöntem, sınırı türe göre kaldırmak ve bunun yerine yalnızca KIMLIK alanına göre aramak olacaktır. KIMLIK benzersiz olduğundan, yalnızca bir kayıt döndürülür ve üzerinde **tür** özelliği bu ayrıntıyı sağlar.
 
 > [!NOTE]
-> Çalışmak bu örnek için kendi ortamından bir sonuçla Kimliği alanı değiştirmelisiniz.
+> Bu örneğin çalışması için, KIMLIK alanını kendi ortamınızdaki bir sonuçla değiştirmelisiniz.
 
 ```azurecli-interactive
-az graph query -q "where type =~ 'Microsoft.Compute/disks' and id == '/subscriptions/<subscriptionId>/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/disks/ContosoVM1_OsDisk_1_9676b7e1b3c44e2cb672338ebe6f5166'"
+az graph query -q "Resources | where type =~ 'Microsoft.Compute/disks' and id == '/subscriptions/<subscriptionId>/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/disks/ContosoVM1_OsDisk_1_9676b7e1b3c44e2cb672338ebe6f5166'"
 ```
 
 ```azurepowershell-interactive
-Search-AzGraph -Query "where type =~ 'Microsoft.Compute/disks' and id == '/subscriptions/<subscriptionId>/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/disks/ContosoVM1_OsDisk_1_9676b7e1b3c44e2cb672338ebe6f5166'"
+Search-AzGraph -Query "Resources | where type =~ 'Microsoft.Compute/disks' and id == '/subscriptions/<subscriptionId>/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/disks/ContosoVM1_OsDisk_1_9676b7e1b3c44e2cb672338ebe6f5166'"
 ```
 
-JSON sonuçları şu örneğe benzer şekilde yapılandırılmıştır:
+JSON sonuçları, aşağıdaki örneğe benzer şekilde yapılandırılır:
 
 ```json
 [
@@ -257,37 +255,60 @@ JSON sonuçları şu örneğe benzer şekilde yapılandırılmıştır:
 ]
 ```
 
-## <a name="explore-virtual-machines-to-find-public-ip-addresses"></a>Genel IP adreslerini bulmak için sanal makineleri keşfedin
+## <a name="explore-virtual-machines-to-find-public-ip-addresses"></a>Ortak IP adreslerini bulmak için sanal makineleri keşfedin
 
-İlk sorgu bu Azure CLI kümesi bulur ve tüm ağ arabirimleri (NIC) kaynaklarına sanal makinelere bağlanan depolar. Ardından NIC listesini bir genel IP adresidir her IP adresi kaynağı bulmak için kullanır ve bu değerleri depolamak. Son olarak, genel IP adreslerinden oluşan bir liste sağlar.
+Bu sorgu kümesi önce, sanal makinelere bağlı tüm ağ arabirimleri (NIC) kaynaklarını bulur ve depolar. Ardından sorgular, bir genel IP adresi olan her IP adresi kaynağını bulmak ve bu değerleri depolamak için NIC 'ler listesini kullanır. Son olarak, sorgular genel IP adreslerinin bir listesini sağlar.
 
 ```azurecli-interactive
-# Use Resource Graph to get all NICs and store in the 'nic' variable
-az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | project nic = tostring(properties['networkProfile']['networkInterfaces'][0]['id']) | where isnotempty(nic) | distinct nic | limit 20" --output table | tail -n +3 > nics.txt
+# Use Resource Graph to get all NICs and store in the 'nics.txt' file
+az graph query -q "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | project nic = tostring(properties['networkProfile']['networkInterfaces'][0]['id']) | where isnotempty(nic) | distinct nic | limit 20" --output table | tail -n +3 > nics.txt
 
 # Review the output of the query stored in 'nics.txt'
 cat nics.txt
 ```
 
-Kullanım `nics.txt` ilgili ağ arabiriminin kaynakların ayrıntılarını almak için sonraki sorgu dosyasında bir genel IP adresi bir NIC'ye bağlı olduğu
+```azurepowershell-interactive
+# Use Resource Graph to get all NICs and store in the $nics variable
+$nics = Search-AzGraph -Query "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | project nic = tostring(properties['networkProfile']['networkInterfaces'][0]['id']) | where isnotempty(nic) | distinct nic | limit 20"
+
+# Review the output of the query stored in the variable
+$nics.nic
+```
+
+NIC 'e bağlı bir genel IP adresinin bulunduğu ilgili ağ arabirimi kaynakları ayrıntılarını almak için sonraki sorgudaki dosyayı (Azure CLı) veya değişkenini (Azure PowerShell) kullanın.
 
 ```azurecli-interactive
 # Use Resource Graph with the 'nics.txt' file to get all related public IP addresses and store in 'publicIp.txt' file
-az graph query -q="where type =~ 'Microsoft.Network/networkInterfaces' | where id in ('$(awk -vORS="','" '{print $0}' nics.txt | sed 's/,$//')') | project publicIp = tostring(properties['ipConfigurations'][0]['properties']['publicIPAddress']['id']) | where isnotempty(publicIp) | distinct publicIp" --output table | tail -n +3 > ips.txt
+az graph query -q="Resources | where type =~ 'Microsoft.Network/networkInterfaces' | where id in ('$(awk -vORS="','" '{print $0}' nics.txt | sed 's/,$//')') | project publicIp = tostring(properties['ipConfigurations'][0]['properties']['publicIPAddress']['id']) | where isnotempty(publicIp) | distinct publicIp" --output table | tail -n +3 > ips.txt
 
 # Review the output of the query stored in 'ips.txt'
 cat ips.txt
 ```
 
-Son, genel IP adresi kaynakların listesini depolanan kullanımı `ips.txt` bunları gerçek genel IP adresini almak ve görüntülemek için.
+```azurepowershell-interactive
+# Use Resource Graph  with the $nics variable to get all related public IP addresses and store in $ips variable
+$ips = Search-AzGraph -Query "Resources | where type =~ 'Microsoft.Network/networkInterfaces' | where id in ('$($nics.nic -join "','")') | project publicIp = tostring(properties['ipConfigurations'][0]['properties']['publicIPAddress']['id']) | where isnotempty(publicIp) | distinct publicIp"
+
+# Review the output of the query stored in the variable
+$ips.publicIp
+```
+
+Son olarak, ilgili nesne ve görüntü ' den gerçek genel IP adresini almak için dosyada (Azure CLı) veya değişkende (Azure PowerShell) depolanan genel IP adresi kaynaklarının listesini kullanın.
 
 ```azurecli-interactive
 # Use Resource Graph with the 'ips.txt' file to get the IP address of the public IP address resources
-az graph query -q="where type =~ 'Microsoft.Network/publicIPAddresses' | where id in ('$(awk -vORS="','" '{print $0}' ips.txt | sed 's/,$//')') | project ip = tostring(properties['ipAddress']) | where isnotempty(ip) | distinct ip" --output table
+az graph query -q="Resources | where type =~ 'Microsoft.Network/publicIPAddresses' | where id in ('$(awk -vORS="','" '{print $0}' ips.txt | sed 's/,$//')') | project ip = tostring(properties['ipAddress']) | where isnotempty(ip) | distinct ip" --output table
 ```
+
+```azurepowershell-interactive
+# Use Resource Graph with the $ips variable to get the IP address of the public IP address resources
+Search-AzGraph -Query "Resources | where type =~ 'Microsoft.Network/publicIPAddresses' | where id in ('$($ips.publicIp -join "','")') | project ip = tostring(properties['ipAddress']) | where isnotempty(ip) | distinct ip"
+```
+
+Bu adımları `join` işleçle tek bir sorguda nasıl gerçekleştireceğinizi görmek için, [sanal makineleri ağ arabirimiyle listeleme ve genel IP](../samples/advanced.md#join-vmpip) örneği ' ne bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Sorgu dili](query-language.md) hakkında daha fazla bilgi edinin
-- Kullanımda dili bakın [başlangıç sorguları](../samples/starter.md)
-- Bkz: Gelişmiş kullanır [Gelişmiş sorgular](../samples/advanced.md)
+- [Sorgu dili](query-language.md)hakkında daha fazla bilgi edinin.
+- Bkz. [Başlangıç sorgularında](../samples/starter.md)kullanılan dil.
+- Gelişmiş [sorgularda](../samples/advanced.md)gelişmiş kullanımlar bölümüne bakın.

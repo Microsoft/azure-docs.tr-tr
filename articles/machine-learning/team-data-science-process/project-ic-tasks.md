@@ -1,111 +1,106 @@
 ---
-title: Team Data Science Process içinde tek bir katkıda bulunan görevleri
-description: Görev bir veri bilimi takım projesindeki tek bir katkıda bulunan bir ana hat.
+title: Ekip veri bilimi Işleminde bireysel katkıda bulunan görevler
+description: Bir veri bilimi takım projesindeki bireysel katkıda bulunan görevlere ilişkin ayrıntılı bir anlatım.
 author: marktab
 manager: cgronlun
 editor: cgronlun
 ms.service: machine-learning
 ms.subservice: team-data-science-process
 ms.topic: article
-ms.date: 11/13/2017
+ms.date: 09/24/2019
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 6a52907fa6c0e2483479031fbb3d1ad68a121d95
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b64d9669c11f15de5e6bd616ff7a79f59b748363
+ms.sourcegitcommit: 824e3d971490b0272e06f2b8b3fe98bbf7bfcb7f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61043349"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72244304"
 ---
-# <a name="tasks-for-an-individual-contributor-in-the-team-data-science-process"></a>Team Data Science Process içinde tek bir katkıda bulunan görevleri
+# <a name="tasks-for-an-individual-contributor-in-the-team-data-science-process"></a>Ekip veri bilimi Işleminde bireysel katkıda bulunan görevler
 
-Bu konuda anahatları tek bir katkıda görevleri için veri bilimi ekip tamamlanması bekleniyor. Hedefi üzerinde standartlaştırır ekip işbirliği ortamı oluşturmaktır [Team Data Science Process](overview.md) (TDSP). Bu işlemi, standart personel rolleri ve veri bilimi ekibi tarafından işlenen ilişkilendirilen görevlerinin bir özetini görmek [Team Data Science Process rolleri ve görevleri](roles-tasks.md).
+Bu konu, bir *bireyin* [ekip veri bilimi işleminde](overview.md) (TDSP) bir proje ayarlamak için tamamladığı görevleri özetler. Amaç, TDSP üzerinde standartlayan bir ortak ekip ortamında çalışır. TDSP, işbirliğinin ve Team Learning 'in artırılmasına yardımcı olmak için tasarlanmıştır. Personel rollerinin ve TDSP üzerinde standartlaştırarak bir veri bilimi ekibi tarafından işlenen ilişkili görevlerinin bir özeti için bkz. [Team Data Science işlem rolleri ve görevleri](roles-tasks.md).
 
-Proje bağımsız katılımcıları (TDSP ortamlarını projenin ayarlamayı veri bilimcileri) görevlerini gibi açıklanmamıştır: 
+Aşağıdaki diyagramda, takım ortamlarını ayarlamak için projenin bireysel katkı sağlayanlar (veri bilimcileri) tamamlanmış görevler gösterilmektedir. TDSP altında bir veri bilimi projesi yürütmeye ilişkin yönergeler için bkz. [veri bilimi projelerini yürütme](project-execution.md). 
 
-![1](./media/project-ic-tasks/project-ic-1-tdsp-data-scientist.png)
+![Bireysel katkıda bulunan görevleri](./media/project-ic-tasks/project-ic-1-tdsp-data-scientist.png)
 
-- **GroupUtilities** grubunuz yararlı yardımcı programları grubunun arasında paylaşmak için koruma depodur. 
-- **TeamUtilities** takımınız, özellikle takımınız için koruma depodur. 
+- **ProjectRepository** , proje ekibinizin proje şablonlarını ve varlıklarını paylaşmak için tuttuğu depodur.
+- **Ekipte** ekip, takımınızın özel olarak sağladığı yardımcı program deposudur. 
+- **Grouputilities** , grubunuzun tüm Grup genelinde yararlı yardımcı programları paylaşmak için sakladığı depodur. 
 
-Bir veri bilimi proje TDSP altında çalıştırmak yönergeler için bkz: [veri bilimi projeleri yürütme](project-execution.md). 
+> [!NOTE] 
+> Bu makalede, Microsoft 'ta TDSP 'nin nasıl uygulanacağı için bir TDSP ortamı ayarlamak üzere Azure Repos ve bir Veri Bilimi Sanal Makinesi (DSVM) kullanılmaktadır. Takımınız diğer kod barındırma veya geliştirme platformlarını kullanıyorsa, bireysel katkıda bulunan görevleri aynıdır, ancak bunları tamamlamaya yönelik yol farklı olabilir.
 
->[AZURE.NOTE] Azure DevOps aşağıdaki yönergeleri kullanarak TDSP takım ortamını ayarlamak için gerekli olan adımları genel çizgileriyle belirtin. Biz, biz Microsoft'ta TDSP nasıl uygulama olduğundan, Azure DevOps ile bu görevleri gerçekleştirmek üzere nasıl belirtin. Grubunuz için başka bir kod barındırma platformu kullanılıyorsa, ekip lideri tarafından genellikle tamamlanması gereken görevler değiştirmeyin. Ancak bu görevleri tamamlamak için yol farklı zordur.
+## <a name="prerequisites"></a>Önkoşullar
 
+Bu öğreticide, aşağıdaki kaynakların ve izinlerin [Grup yöneticiniz](group-manager-tasks.md), [ekip lideri](team-lead-tasks.md)ve [Proje lideri](project-lead-tasks.md)tarafından ayarlandığı varsayılır:
 
-## <a name="repositories-and-directories"></a>Depoları ve dizinler
+- Veri bilimi biriminiz için Azure DevOps **organizasyonu**
+- Proje şablonu ve varlıklarını paylaşmak için proje lideri tarafından ayarlanan proje **deposu**
+- Grup Yöneticisi ve ekip lideri tarafından ayarlanan **Grouputilities** ve **Ekipçistilities** depoları
+- Varsa, takımınız veya projeniz için paylaşılan varlıklar için Azure **dosya depolama** ayarı
+- Proje deponuzdan kopyalamanız ve geri göndermeniz için **izinler** 
 
-Bu öğreticide, kısaltılmış depoları ve dizinler için kullanılır. Bu adlar dizinlerini ve depoları işlemleri izlemenizi kolaylaştırır. Bu gösterim (**R** Git depoları ve **D** DSVM'ye yerel dizinler için) aşağıdaki bölümlerde kullanılır:
+Depoları kopyalamak ve yerel makinenizde veya DSVM 'nizin içeriğini değiştirmek ya da Azure dosya depolama alanını DSVM 'nize bağlamak için şunlar gerekir:
 
-- **R2**: Azure DevOps grubu sunucunuzda, Grup Yöneticisi ayarlanmış Git GroupUtilities havuzda.
-- **R4**: Takımınızın sağlama Git TeamUtilities havuzda ayarlanmış.
-- **R5**: Proje deposu, proje lideri tarafından ayarlanmış olan Git üzerinde.
-- **D2**: Yerel dizin R2'den kopyalandı.
-- **D4**: Yerel dizin R4 kopyalandı.
-- **D5**: Yerel dizin R5 kopyalandı.
+- Azure aboneliği.
+- Git makinenizde yüklü. DSVM kullanıyorsanız git önceden yüklüdür. Aksi takdirde, [platformlar ve araçlar ek](platforms-and-tools.md#appendix)bölümüne bakın.
+- DSVM 'yi, Azure 'da oluşturulan ve yapılandırılan Windows veya Linux DSVM 'yi kullanmak istiyorsanız. Daha fazla bilgi ve yönergeler için [veri bilimi sanal makinesi belgelerine](/azure/machine-learning/data-science-virtual-machine/)bakın.
+- Bir Windows DSVM için, makinenizde yüklü [Git kimlik bilgileri Yöneticisi (GCM)](https://github.com/Microsoft/Git-Credential-Manager-for-Windows) . *README.MD* dosyasında, **indir ve yükle** bölümüne gidin ve **en son yükleyiciyi**seçin. Yükleyici sayfasından *. exe* yükleyicisini indirin ve çalıştırın. 
+- Bir Linux DSVM için, DSVM 'niz üzerinde ayarlanan ve Azure DevOps 'a eklenen bir SSH ortak anahtarı. Daha fazla bilgi ve yönergeler için [platformlar ve araçlar EKINDE](platforms-and-tools.md#appendix) **SSH ortak anahtarı oluşturma** bölümüne bakın. 
+- Azure dosya depolama için Azure dosya depolama bilgileri, DSVM 'nize bağlamanız gerekir. 
 
+## <a name="clone-repositories"></a>Depoları Kopyala
 
-## <a name="step-0-prerequisites"></a>Adım-0: Önkoşullar
+Depolarla yerel olarak çalışmak ve değişikliklerinizi paylaşılan ekibe ve proje depolarına iletmek *için, önce* depoları yerel makinenize kopyalamanız veya kopyalamanız gerekir. 
 
-Özetlenen, Grup Yöneticisi atanan görevlerin tamamlayarak önkoşullara uyduğunuzdan [grup yöneticisi görevleri için bir veri bilimi ekip](group-manager-tasks.md). Burada özetlemek gerekirse, aşağıdaki gereksinimleri ekip sağlama görevlerini başlamadan önce karşılanması gerekir: 
-- Grup yöneticinizin ayarladığı **GroupUtilities** depo (varsa). 
-- Ekip Lideri ayarlanmış **TeamUtilities** depo (varsa).
-- Proje deposu, proje lideri ayarladı. 
-- Kopyalama kaynağı ve geri proje depoya ayrıcalık ile proje lideri tarafından proje deponuza eklenmiştir.
+1. Azure DevOps 'da, *https: \/ @ no__t-2 @ no__t-3sunucu adı >/\<kuruluş adı >/\<team name >* (örneğin, **https: \//dev. Azure. com/Databilimenceunit/myTeam**) konumundaki takımınızın Proje Özeti sayfasına gidin.
+   
+1. Sol **Gezinti bölmesinde depo** ' ı seçin ve sayfanın üst kısmında, kopyalamak istediğiniz depoyu seçin.
+   
+1. Depo sayfasında sağ üstteki **kopya** ' ı seçin.
+   
+1. **Depoyu Kopyala** iletişim kutusunda, http bağlantısı için **https** ' yi veya bir SSH bağlantısı için **SSH** ' yi SEÇIN ve **komut satırı** altına kopya URL 'sini panonuza kopyalayın.
+   
+   ![Depoyu Kopyala](./media/project-ic-tasks/clone.png)
+   
+1. Yerel makinenizde veya DSVM 'de aşağıdaki dizinleri oluşturun:
+   
+   - Windows için: **C:\GitRepos**
+   - Linux için: **$Home/gitrepos**
+   
+1. Oluşturduğunuz dizine geçin.
+   
+1. Git Bash 'de, kopyalamak istediğiniz her depo için `git clone <clone URL>` komutunu çalıştırın. 
+   
+   Örneğin, aşağıdaki komut, **Teamutilities** deposunu yerel makinenizde *myTeam* dizinine kopyalar. 
+   
+   **HTTPS bağlantısı:**
+   
+   ```bash
+   git clone https://DataScienceUnit@dev.azure.com/DataScienceUnit/MyTeam/_git/TeamUtilities
+   ```
+   
+   **SSH bağlantısı:**
+   
+   ```bash
+   git clone git@ssh.dev.azure.com:v3/DataScienceUnit/MyTeam/TeamUtilities
+   ```
+   
+1. Yerel proje dizininizde kopyalanmış depoların klasörlerini görebilecekleri onaylayın.
+   
+   ![Üç yerel depo klasörü](./media/project-ic-tasks/project-ic-5-three-repo-cloned-to-ic-linux.png)
 
-İkinci **TeamUtilities** depo, önkoşul ekibinizin takım özgü yardımcı programı depo sahip bağlı olarak, isteğe bağlı. Herhangi diğer üç önkoşulları tamamlanmamış olursa, ekip lideri, proje lideri veya yönergelerini takip ederek ayarlamak için temsilciler geçin [ekibine Liderlikte görev bir veri bilimi takım için](team-lead-tasks.md) veya [ Proje için bir veri bilimi ekibi müşteri adayı görevleri](project-lead-tasks.md).
+## <a name="mount-azure-file-storage-to-your-dsvm"></a>Azure dosya depolama alanını DSVM 'nize bağlama
 
-- Git makinenizde yüklü olması gerekir. Bir veri bilimi sanal makinesi (DSVM) kullanıyorsanız, Git önceden yüklenmiş ve hazırsınız demektir. Aksi takdirde bkz [platformları ve araçlarıyla ek](platforms-and-tools.md#appendix).  
-- Kullanıyorsanız bir **Windows DSVM**, ihtiyacınız [Git Credential Manager'ı (GCM)](https://github.com/Microsoft/Git-Credential-Manager-for-Windows) makinenizde yüklü. README.md dosyasında doğru aşağı kaydırın **indirme ve yükleme** tıklayın ve bölüm *en son yükleyicisi*. Bu en son yükleyici sayfasına götürür. .Exe yükleyiciyi buradan indirin ve çalıştırın. 
-- Kullanıyorsanız **Linux DSVM'sini**, bir SSH ortak anahtarı üzerinde DSVM oluşturma ve Grup Azure DevOps hizmetlerinizi ekleyin. SSH hakkında daha fazla bilgi için bkz: **oluşturma SSH ortak anahtarı** konusundaki [platformları ve araçlarıyla ek](platforms-and-tools.md#appendix). 
-- Takım veya proje müşteri adayı DSVM'ye bağlamak için gereken bazı Azure dosya depolama oluşturduysa, bunları Azure dosya depolama bilgilerini almanız gerekir. 
-
-## <a name="step-1-3-clone-group-team-and-project-repositories-to-local-machine"></a>1-3. adım: Grup ve takım projesi depolarını yerel makinenize kopyalama
-
-Bu bölümde, proje bağımsız katılımcıları ilk üç görevleri tamamlama yönergeleri sağlar: 
-
-- Kopya **GroupUtilities** depoya R2 D2
-- Kopya **TeamUtilities** -D4 depoyu R4 
-- Kopya **proje** D5 R5 depoya.
-
-Yerel makinenizde bir dizin oluşturma ***C:\GitRepos*** (Windows için) veya ***$home/GitRepos*** (forLinux) ve ardından bu dizine geçin. 
-
-Kopyalama için (işletim sisteminiz için gerektiği şekilde) aşağıdaki komutlardan birini çalıştırın, **GroupUtilities**, **TeamUtilities**, ve **proje** depolarını dizinleri için Yerel Makine: 
-
-**Windows**
-    
-    git clone <the URL of the GroupUtilities repository>
-    git clone <the URL of the TeamUtilities repository>
-    git clone <the URL of the Project repository>
-    
-![2](./media/project-ic-tasks/project-ic-2-clone-three-repo-to-ic.png)
-
-Üç klasör proje dizininiz altında gördüğünüzü onaylayın.
-
-![3](./media/project-ic-tasks/project-ic-3-three-repo-cloned-to-ic.png)
-
-**Linux**
-    
-    git clone <the SSH URL of the GroupUtilities repository>
-    git clone <the SSH URL of the TeamUtilities repository>
-    git clone <the SSH URL of the Project repository>
-
-![4](./media/project-ic-tasks/project-ic-4-clone-three-repo-to_ic-linux.png)
-
-Üç klasör proje dizininiz altında gördüğünüzü onaylayın.
-
-![5](./media/project-ic-tasks/project-ic-5-three-repo-cloned-to-ic-linux.png)
-
-## <a name="step-4-5-mount-azure-file-storage-to-your-dsvm-optional"></a>4-5. adım: Azure dosya depolama bağlama için DSVM'ye (isteğe bağlı)
-
-Azure dosya depolama bağlama için DSVM'ye için Bölüm 4'ü yönergelere bakın [ekip sağlama görevleri için bir veri bilimi ekibi](team-lead-tasks.md)
+Takımınız veya projeniz Azure dosya depolama alanında paylaşılan varlıklar içeriyorsa, dosya depolama alanını yerel makinenize veya DSVM 'nize bağlayın. [Yerel makinenizde veya DSVM 'de Azure dosya depolama takma](team-lead-tasks.md#mount-azure-file-storage-on-your-local-machine-or-dsvm)bölümündeki yönergeleri izleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Team Data Science Process tarafından tanımlanan görevleri ve rolleri ayrıntılı açıklamaları için bağlantılar şunlardır:
+Team Data Science Işlemi tarafından tanımlanan diğer roller ve görevler hakkında ayrıntılı açıklamaların bağlantıları aşağıda verilmiştir:
 
-- [Bir veri bilimi takım için Grup yöneticisi görevleri](group-manager-tasks.md)
-- [Bir veri bilimi takım için takım sağlama görevleri](team-lead-tasks.md)
-- [Proje için bir veri bilimi ekibi müşteri adayı görevleri](project-lead-tasks.md)
-- [Bir veri bilimi takım için proje bağımsız katılımcıları](project-ic-tasks.md)
+- [Veri bilimi ekibi için Grup Yöneticisi görevleri](group-manager-tasks.md)
+- [Bir veri bilimi ekibi için ekip sağlama görevleri](team-lead-tasks.md)
+- [Veri bilimi ekibi için proje lideri görevleri](project-lead-tasks.md)
 

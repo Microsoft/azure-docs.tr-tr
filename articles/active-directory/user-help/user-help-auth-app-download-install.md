@@ -1,6 +1,6 @@
 ---
-title: Microsoft Authenticator uygulamasını - Azure Active Directory yükleyip | Microsoft Docs
-description: İndirme, yükleme ve iki Faktörlü doğrulama için Microsoft Authenticator uygulamasını kullanmak nasıl.
+title: Microsoft Authenticator uygulamasını indirme ve yükleme-Azure AD
+description: İki öğeli doğrulama için Microsoft Authenticator uygulamasını indirme, yükleme ve kullanma.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -13,45 +13,47 @@ ms.date: 01/24/2019
 ms.author: lizross
 ms.reviewer: olhaun
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 67393e19a72777d105f1f35a16986c52f52133be
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ebe80d44d52ffa348413e51cd5e82e8468537479
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60473830"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820220"
 ---
-# <a name="download-and-install-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamasını indirip
+# <a name="download-and-install-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamasını indirme ve yükleme
+
 >[!Important]
 >Bu içerik kullanıcılara yöneliktir. Yöneticiyseniz, Azure Active Directory (Azure AD) ortamınızı ayarlama ve yönetme hakkında daha fazla bilgi için [Azure Active Directory Belgelerine](https://docs.microsoft.com/azure/active-directory) bakabilirsiniz.
 
-Microsoft Authenticator uygulamasını hesaplarınıza iki aşamalı doğrulama kullanırsanız oturum yardımcı olur. İki Faktörlü doğrulama özellikle hassas bilgileri görüntülerken hesaplarınızı daha güvenli bir şekilde erişmenize yardımcı olur. Parolaları bu nedenle Unutulan, çalınması veya ele geçirilen, iki Faktörlü doğrulama kesmek diğer kişiler için daha zor hale getirerek hesabınızın korunmasına yardımcı olan bir ek güvenlik adımdır.
+Microsoft Authenticator uygulaması, iki öğeli doğrulama kullanırsanız hesaplarınızda oturum açmanıza yardımcı olur. İki öğeli doğrulama, özellikle de hassas bilgileri görüntülerken hesaplarınıza güvenli bir şekilde erişmenize yardımcı olur. Parolaların unutulabileceği, çalındığı veya güvenliği aşılmış olabileceğinden, iki öğeli doğrulama, diğer kişilerin kesintiye uğraması için hesabınızı korumanıza yardımcı olan ek bir güvenlik adımıdır.
 
-Microsoft Authenticator uygulamasını birden çok yolla kullanabilirsiniz:
+Microsoft Authenticator uygulamasını, aşağıdakiler dahil olmak üzere birden çok şekilde kullanabilirsiniz:
 
-- **İki Faktörlü doğrulama.** Parolanızı olduğu faktör, standart doğrulama yöntemi. Kullanıcı adı ve parolanızla oturum sonra bir bildirimi onaylayın veya sağlanan doğrulama kodunu girin.
+- **İki öğeli doğrulama.** Standart doğrulama yöntemi, etkenlerden biri parolandır. Kullanıcı adınızı ve parolanızı kullanarak oturum açtıktan sonra, bir bildirimi onaylayabilir veya belirtilen bir doğrulama kodu girebilirsiniz.
 
-- **Telefonla oturum açma.** Parmak izi, yüz tanıma veya PIN kullanıcı adınızı ve mobil Cihazınızı kullanarak parola gerektirmeden oturum olanak sağlayan iki Faktörlü doğrulama sürümü.
+- **Telefonla oturum açma.** Kullanıcı adınızı ve mobil cihazınızı parmak izinizle, yüzünüzü veya PIN 'iniz ile kullanmanıza gerek kalmadan, parola gerektirmeden oturum açmanıza olanak tanıyan iki öğeli doğrulamanın bir sürümü.
 
-- **Kod oluşturma.** Kimlik doğrulayıcısı uygulamalarını destekleyen herhangi bir hesabı için bir kod Oluşturucu.
+- **Kod oluşturma.** Kimlik doğrulayıcı uygulamalarını destekleyen diğer hesaplar için kod Oluşturucu olarak.
 
 > [!Important]
-> Microsoft Authenticator uygulamasını iki Faktörlü doğrulama kullanır ve zamana bağlı bir kerelik parola (TOTP) standartlarını destekleyen herhangi bir hesabı ile çalışır.
-> 
-> Kuruluşunuzun oturum açma ve kuruluş verilerini ve belgelerine erişmek için bir kimlik doğrulayıcı uygulama kullanmanızı gerektirebilir. Kullanıcı adınızı uygulamada gibi görünse de, hesap gerçekten kayıt işlemi tamamlanana kadar bir doğrulama yöntemi olarak davranacak şekilde ayarlanmamış. Daha fazla bilgi için [iş veya Okul hesabınızı eklemek](user-help-auth-app-add-work-school-account.md).
+> Microsoft Authenticator uygulama, iki öğeli doğrulama kullanan herhangi bir hesapla birlikte çalışarak, zaman tabanlı bir kerelik parola (TOTP) standartlarını destekler.
+>
+> Kuruluşunuz, oturum açmak ve kurumsal verilerinize ve belgelerinize erişmek için bir doğrulayıcı uygulaması kullanmanızı gerektirebilir. Kullanıcı adınız uygulamada görünebilse de, kayıt işlemini tamamlayana kadar hesap aslında doğrulama yöntemi olarak davranacak şekilde ayarlanamaz. Daha fazla bilgi için bkz. [iş veya okul hesabınızı ekleme](user-help-auth-app-add-work-school-account.md).
 > 
 > [!NOTE]
-> Hesabınızda oturum açarken sorun yaşıyorsanız, bkz. [olamaz oturum açtığınızda Microsoft hesabınızı](https://support.microsoft.com/help/12429) Yardım.  Aldığınız olduğunda yapılması gerekenler hakkında daha fazla bilgi alın ["Bu Microsoft hesabı mevcut değil"](https://support.microsoft.com/help/13811) iletisi, Microsoft hesabınızda oturum açın.
+> Hesabınızda oturum açarken sorun yaşıyorsanız, yardım için [Microsoft hesabı oturum açma](https://support.microsoft.com/help/12429) konusunda bilgi için bkz.  Microsoft hesabı oturum açmaya çalıştığınızda ["bu Microsoft hesabı yok"](https://support.microsoft.com/help/13811) iletisini aldığınızda yapılacaklar hakkında daha fazla bilgi alın.
 
 ## <a name="download-and-install-the-app"></a>Uygulamayı indirme ve yükleme
-İşletim sisteminize Microsoft Authenticator uygulamasını en son sürümünü yükleyin:
 
-- **Google Android.** Android Cihazınızda, Google Play'e Git [Microsoft Authenticator uygulamasını indirip](https://app.adjust.com/e3rxkc_7lfdtm?fallback=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.azure.authenticator).
+İşletim sisteminize göre Microsoft Authenticator uygulamasının en son sürümünü yükler:
 
-- **Apple iOS.** App Store için yeni Apple iOS Cihazınızda Git [Microsoft Authenticator uygulamasını indirip](https://app.adjust.com/e3rxkc_7lfdtm?fallback=https%3A%2F%2Fitunes.apple.com%2Fus%2Fapp%2Fmicrosoft-authenticator%2Fid983156458).
+- **Google Android.** Android cihazınızda, [Microsoft Authenticator uygulamayı indirip yüklemek](https://app.adjust.com/e3rxkc_7lfdtm?fallback=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.azure.authenticator)için Google Play gidin.
+
+- **Apple iOS.** Apple iOS cihazınızda, [Microsoft Authenticator uygulamayı indirip yüklemek](https://app.adjust.com/e3rxkc_7lfdtm?fallback=https%3A%2F%2Fitunes.apple.com%2Fus%2Fapp%2Fmicrosoft-authenticator%2Fid983156458)Için App Store 'a gidin.
 
 >[!Important]
->Siz değil şu anda mobil Cihazınızda gibiyseniz, yine de Microsoft Authenticator uygulamasını kendiniz indirme bağlantı göndererek alabileceğiniz [Microsoft Authenticator sayfasına](https://www.microsoft.com/en-us/account/authenticator).
+>Şu anda mobil cihazınızda değilseniz, [Microsoft Authenticator sayfasından](https://www.microsoft.com/en-us/account/authenticator)kendinize bir indirme bağlantısı göndererek Microsoft Authenticator uygulamayı almaya devam edebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Uygulamayı yükleyip sonra çeşitli hesaplarınızı eklemeniz gerekir. Daha fazla bilgi için [hesaplarınızı ekleme](user-help-auth-app-add-account-overview.md).
+- Uygulamayı indirip yükledikten sonra, çeşitli hesaplarınızı eklemeniz gerekir. Daha fazla bilgi için bkz. [hesaplarınızı ekleme](user-help-auth-app-add-account-overview.md).

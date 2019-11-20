@@ -1,42 +1,38 @@
 ---
-title: Application Insights ile canlı Azure Service Fabric uygulamaları profil | Microsoft Docs
-description: Bir Service Fabric uygulaması için Profiler etkinleştirme
-services: application-insights
-documentationcenter: ''
-author: cweining
-manager: carmonm
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Application Insights ile canlı Azure Service Fabric uygulamaları profilini yayınlama | Microsoft Docs
+description: Service Fabric bir uygulama için profil oluşturucuyu etkinleştirme
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.reviewer: mbullwin
-ms.date: 08/06/2018
+author: cweining
 ms.author: cweining
-ms.openlocfilehash: 5c01c2721a29bf142ee0ba53c9bc29ec66a7278f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/06/2018
+ms.reviewer: mbullwin
+ms.openlocfilehash: a7a64be3c73ea82c6bf3d905772f3278f9bda5df
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64727917"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72818469"
 ---
-# <a name="profile-live-azure-service-fabric-applications-with-application-insights"></a>Application Insights ile canlı Azure Service Fabric uygulamaları profili
+# <a name="profile-live-azure-service-fabric-applications-with-application-insights"></a>Application Insights ile canlı Azure Service Fabric uygulamaları profilini yayınlama
 
-Ayrıca, bu hizmetler Application Insights Profiler dağıtabilirsiniz:
-* [Azure uygulama hizmeti](profiler.md?toc=/azure/azure-monitor/toc.json)
+Ayrıca, bu hizmetlerde Application Insights Profiler dağıtabilirsiniz:
+* [Azure App Service](profiler.md?toc=/azure/azure-monitor/toc.json)
 * [Azure Cloud Services](profiler-cloudservice.md?toc=/azure/azure-monitor/toc.json)
-* [Azure sanal makineleri](profiler-vm.md?toc=/azure/azure-monitor/toc.json)
+* [Azure Sanal Makineler](profiler-vm.md?toc=/azure/azure-monitor/toc.json)
 
-## <a name="set-up-the-environment-deployment-definition"></a>Ortam dağıtım tanımını ayarlar
+## <a name="set-up-the-environment-deployment-definition"></a>Ortam dağıtım tanımını ayarlama
 
-Application Insights Profiler, Azure Tanılama ile birlikte gelir. Service Fabric kümeniz için bir Azure Resource Manager şablonu kullanarak Azure tanılama uzantısını yükleyebilirsiniz. Alma bir [bir Service Fabric kümesinde Azure Tanılama'yı yükleyen şablon](https://github.com/Azure/azure-docs-json-samples/blob/master/application-insights/ServiceFabricCluster.json).
+Application Insights Profiler Azure Tanılama dahildir. Azure Tanılama uzantısını Service Fabric kümeniz için bir Azure Resource Manager şablonu kullanarak yükleyebilirsiniz. [Bir Service Fabric kümesine Azure tanılama yükleyen bir şablon](https://github.com/Azure/azure-docs-json-samples/blob/master/application-insights/ServiceFabricCluster.json)alın.
 
-Ortamınızı ayarlamak için aşağıdaki eylemleri gerçekleştirin:
+Ortamınızı ayarlamak için aşağıdaki işlemleri gerçekleştirin:
 
-1. Profiler, .NET Framework ve.Net Core destekler. .NET Framework kullanıyorsanız, kullandığınızdan emin olun [.NET Framework 4.6.1](https://docs.microsoft.com/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed) veya üzeri. Dağıtılan işletim sistemi olduğundan emin olmak yeterliyse `Windows Server 2012 R2` veya üzeri. Profiler, .NET Core 2.1 ve yeni uygulamaları destekler.
+1. Profiler .NET Framework ve .Net Core destekler. .NET Framework kullanıyorsanız, [.NET Framework 4.6.1](https://docs.microsoft.com/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed) veya üstünü kullandığınızdan emin olun. Dağıtılan işletim sisteminin `Windows Server 2012 R2` veya üzeri olduğunu doğrulamak yeterlidir. Profiler, .NET Core 2,1 ve daha yeni uygulamaları destekler.
 
-1. Arama [Azure tanılama](https://docs.microsoft.com/azure/monitoring-and-diagnostics/azure-diagnostics) dağıtım şablonu dosyası uzantısında.
+1. Dağıtım şablonu dosyasında [Azure tanılama](https://docs.microsoft.com/azure/monitoring-and-diagnostics/azure-diagnostics) uzantısını arayın.
 
-1. Aşağıdaki `SinksConfig` bölüm öğesinin alt öğesi olarak `WadCfg`. Değiştirin `ApplicationInsightsProfiler` kendi Application Insights izleme anahtarı ile özellik değeri:  
+1. Aşağıdaki `SinksConfig` bölümünü `WadCfg`alt öğesi olarak ekleyin. `ApplicationInsightsProfiler` özelliği değerini kendi Application Insights izleme anahtarınızla değiştirin:  
 
       ```json
       "SinksConfig": {
@@ -49,19 +45,19 @@ Ortamınızı ayarlamak için aşağıdaki eylemleri gerçekleştirin:
       }
       ```
 
-      Tanılama uzantısını dağıtım şablonunuza ekleme hakkında daha fazla bilgi için bkz: [kullanımının izlenmesini ve bir Windows VM ve Azure Resource Manager şablonları ile tanılama](https://docs.microsoft.com/azure/virtual-machines/windows/extensions-diagnostics-template?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+      Tanılama uzantısını dağıtım şablonunuza ekleme hakkında daha fazla bilgi için bkz. [WINDOWS VM ve Azure Resource Manager şablonlarıyla izleme ve tanılama kullanma](https://docs.microsoft.com/azure/virtual-machines/windows/extensions-diagnostics-template?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
-1. Service Fabric kümeniz, Azure Resource Manager şablonu kullanarak dağıtın.  
-  Ayarlarınızı doğruysa, Application Insights Profiler yüklenir ve Azure tanılama uzantısı yüklü olduğunda etkinleştirilir. 
+1. Service Fabric kümenizi Azure Resource Manager şablonunuzu kullanarak dağıtın.  
+  Ayarlarınız doğruysa, Azure Tanılama uzantısı yüklendiğinde Application Insights Profiler yüklenir ve etkinleştirilir. 
 
 1. Service Fabric uygulamanıza Application Insights ekleyin.  
-  Profilleri, istekleri için toplanacak Profiler için uygulamanızı Application Insights ile işlemleri izleme gerekir. Durum bilgisi olmayan API'leri için yönergeler için başvurabilirsiniz [profil oluşturma için istekleri izleme](profiler-trackrequests.md?toc=/azure/azure-monitor/toc.json). Diğer tür uygulamaların özel işlemleri izleme hakkında daha fazla bilgi için bkz. [Application Insights .NET SDK ile özel işlemleri izleme](custom-operations-tracking.md?toc=/azure/azure-monitor/toc.json).
+  İstekleriniz için profillerin toplanacağı profil oluşturucunun, uygulamanız Application Insights izleme işlemleri olmalıdır. Durum bilgisi olmayan API 'Ler için, [profil oluşturma isteklerini izleme](profiler-trackrequests.md?toc=/azure/azure-monitor/toc.json)yönergelerine bakabilirsiniz. Diğer uygulama türlerindeki özel işlemleri izleme hakkında daha fazla bilgi için bkz. [.NET SDK ile özel işlemleri izleme Application Insights](custom-operations-tracking.md?toc=/azure/azure-monitor/toc.json).
 
 1. Uygulamanızı yeniden dağıtın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Uygulamanız için trafiği oluşturur (örneğin, başlatma bir [kullanılabilirlik testi](monitor-web-app-availability.md)). Ardından, izlemeleri Application Insights örneğine gönderilmek üzere başlatmak 10-15 dakika bekleyin.
-* Bkz: [Profiler izlemeleri](profiler-overview.md?toc=/azure/azure-monitor/toc.json) Azure portalında.
-* Profiler sorunlarını giderme konusunda yardım için bkz: [sorun giderme Profiler](profiler-troubleshooting.md?toc=/azure/azure-monitor/toc.json).
+* Uygulamanıza trafik oluşturun (örneğin, bir [Kullanılabilirlik testi](monitor-web-app-availability.md)başlatın). Ardından, izlemelerin Application Insights örneğine gönderilmesi için 10 ila 15 dakika bekleyin.
+* Azure portal [Profil Oluşturucu izlemeleri](profiler-overview.md?toc=/azure/azure-monitor/toc.json) bölümüne bakın.
+* Profil Oluşturucu sorunlarını gidermeye yönelik yardım için bkz. [Profil Oluşturucu sorun giderme](profiler-troubleshooting.md?toc=/azure/azure-monitor/toc.json).

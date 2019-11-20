@@ -1,26 +1,26 @@
 ---
-title: Azure Media Clipper'ı klavye ayarlarını yapılandırma | Microsoft Docs
-description: Azure Media Clipper'ı için yapılandırılabilir ayarlama adımları klavye kısayolları
+title: Azure Media Clipper klavye ayarlarını yapılandırma | Microsoft Docs
+description: Azure Medya Clipper için yapılandırılabilir klavye kısayolları ayarlama adımları
 services: media-services
-keywords: clip;subclip;encoding;media
-author: dbgeorge
-manager: jasonsue
-ms.author: dwgeo
+keywords: klip; alt klip; kodlama; medya
+author: Juliako
+manager: femila
+ms.author: juliako
 ms.date: 03/14/2019
 ms.topic: article
 ms.service: media-services
-ms.openlocfilehash: 2eb32b8ec265a4afa2581374c1f07ac06958a576
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 013ca640d30baceeb41e9cb38fab69020b3c50dd
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61466115"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73685064"
 ---
-# <a name="configure-azure-media-clipper-keyboard-shortcuts"></a>Azure Media Clipper'ı klavye kısayollarını yapılandırma 
+# <a name="configure-azure-media-clipper-keyboard-shortcuts"></a>Azure Media Clipper klavye kısayollarını yapılandırma 
 
-Azure Media Clipper'ı destekleyen bir isteğe bağlı sağlayarak varsayılan klavye kısayollarını özelleştirme `keymap` JSON parametresi.
+Azure Media Clipper, isteğe bağlı `keymap` JSON parametresi sağlayarak varsayılan klavye kısayollarını özelleştirmeyi destekler.
 
-Aşağıdaki örnek JSON klavye kısayolları gösterilmektedir. Anahtar alanları değiştirme ve parametreyi Clipper başlatılırken bu işleve geçirerek, bu ayarları özelleştirebilirsiniz.
+Aşağıdaki örnek JSON varsayılan klavye kısayollarını gösterir. Bu ayarları, anahtar alanlarını değiştirerek ve Clipper 'ı başlatırken parametreyi geçirerek özelleştirebilirsiniz.
 
 ```json
 {

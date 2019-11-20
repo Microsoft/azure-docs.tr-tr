@@ -1,6 +1,6 @@
 ---
-title: Azure HDInsight Phoenix performansı
-description: Phoenix performansı iyileştirmek için en iyi yöntemler.
+title: Azure HDInsight 'ta Phoenix performansı
+description: Azure HDInsight kümeleri için Apache Phoenix performansını iyileştirmek için en iyi uygulamalar
 author: ashishthaps
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -8,156 +8,156 @@ ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 01/22/2018
 ms.author: ashishth
-ms.openlocfilehash: 4fc4d1843ddb8d007ca062d928ebbddf90909583
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b2a40802070510939332c3f5e876293445cf2df1
+ms.sourcegitcommit: fa4852cca8644b14ce935674861363613cf4bfdf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64690042"
+ms.lasthandoff: 09/09/2019
+ms.locfileid: "70810436"
 ---
 # <a name="apache-phoenix-performance-best-practices"></a>Apache Phoenix performansı için en iyi yöntemler
 
-En önemli yönüyle [Apache Phoenix](https://phoenix.apache.org/) performansı, arka plandaki en iyi duruma getirme [Apache HBase](https://hbase.apache.org/). Phoenix, ilişkisel bir veri modeli üzerine taramalar gibi HBase işlemlerini SQL sorguları dönüştürür HBase oluşturur. Tablo şemanızı, seçim ve birincil anahtarınızı ve tüm dizinleri kullanımınız alanların sıralamasını tasarım, Phoenix performansı etkiler.
+[Apache Phoenix](https://phoenix.apache.org/) performansının en önemli yönü, temeldeki [Apache HBase](https://hbase.apache.org/)'i en iyi hale getirmenizi sağlar. Phoenix, SQL sorgularını taramalar gibi HBase işlemlerine dönüştüren üzerine HBase ilişkisel bir veri modeli oluşturur. Tablo şemanızın tasarımı, birincil anahtarınızda alanların seçimi ve sıralaması ve dizin kullanımı, Phoenix performansını etkiler.
 
-## <a name="table-schema-design"></a>Tablo şema tasarımı
+## <a name="table-schema-design"></a>Tablo şeması tasarımı
 
-Phoenix bir tablo oluşturduğunuzda, bu tablo bir HBase tablosunda depolanır. HBase tablosuyla birlikte erişilen sütunları (sütun ailesi) gruplarını içerir. Phoenix tablosunda bir satıra burada her satır bir veya daha fazla sütunu ile ilişkili tutulan hücreleri oluşan HBase tablosundaki bir satır var. Mantıksal olarak, tek bir HBase satır her rowkey aynı değere sahip bir anahtar-değer çiftleri koleksiyonudur. Diğer bir deyişle, her anahtar-değer çifti rowkey özniteliği vardır ve bu rowkey özniteliğinin değeri belirli bir satır için aynıdır.
+Phoenix 'te bir tablo oluşturduğunuzda, bu tablo bir HBase tablosunda depolanır. HBase tablosu, birlikte erişilen sütun gruplarını (sütun aileleri) içerir. Phoenix tablosundaki bir satır, HBase tablosundaki, her satırın bir veya daha fazla sütunla ilişkili sürümlenmiş hücrelerden oluştuğu bir satırdır. Mantıksal olarak, tek bir HBase satırı, her biri aynı rowkey değerine sahip olan bir anahtar-değer çiftleri koleksiyonudur. Diğer bir deyişle, her anahtar-değer çiftinin bir rowkey özniteliği vardır ve bu rowkey özniteliğinin değeri belirli bir satır için aynıdır.
 
-Şema tasarım Phoenix tablonun birincil içerir tasarım, sütun ailesi tasarımı, tek tek sütun tasarım ve verilerin nasıl bölümlendiğini anahtar.
+Bir Phoenix tablosunun şema tasarımı, birincil anahtar tasarımı, sütun ailesi tasarımı, tek sütun tasarımı ve verilerin nasıl bölümlenme olduğunu içerir.
 
-### <a name="primary-key-design"></a>Birincil anahtar tasarım
+### <a name="primary-key-design"></a>Birincil anahtar tasarımı
 
-Phoenix tablosunda tanımlı bir birincil anahtar, temel alınan HBase tablo rowkey içinde verilerin depolanma şeklini belirler. Hbase'de, belirli bir satıra erişme girişiminde tek ile rowkey yoludur. Ayrıca, bir HBase tablosu veri rowkey göre sıralanır. Phoenix, her bir satırın birincil anahtarı tanımlandıkları sırayla sütunlardaki değerleri ile birleştirerek rowkey değer oluşturur.
+Phoenix 'teki bir tabloda tanımlanan birincil anahtar, verilerin temel alınan HBase tablosunun rowkey içinde nasıl depolandığını belirler. HBase 'de, belirli bir satıra erişmenin tek yolu rowkey kullanmaktır. Ayrıca, bir HBase tablosunda depolanan veriler rowkey tarafından sıralanır. Phoenix, satırdaki her bir sütunun değerini birincil anahtarda tanımlandıkları sırada birleştirerek rowkey değerini oluşturur.
 
-Örneğin, bir tablo kişiler için ad, son adı, telefon numarası ve tümünü aynı sütun ailesinde adresi vardır. Artan bir dizisi sayısına göre bir birincil anahtar tanımlayabilirsiniz:
+Örneğin, kişiler için bir tablonun adı, soyadı, telefon numarası ve adres, hepsi de aynı sütun ailesinde bulunur. Artan sıra numarasına göre bir birincil anahtar tanımlayabilirsiniz:
 
-|rowkey|       Adresi|   Telefon| FirstName| Soyadı|
+|rowkey|       address|   telefon| firstName| lastName|
 |------|--------------------|--------------|-------------|--------------|
 |  1000|1111 San Gabriel Dr.|1-425-000-0002|    John|Dole|
-|  8396|5415 San Gabriel Dr.|1-230-555-0191|  Calvin|Raji|
+|  8396|5415 San Gabriel Dr.|1-230-555-0191|  Calvin|Oyji|
 
-Sık tarafından lastName sorgularsanız her sorgu her lastName değerini okumak için bir tam tablo taraması gerektirdiğinden ancak, bu birincil anahtar de çalışmayabilir. Bunun yerine, birincil anahtar lastName, firstName ve sosyal güvenlik numarası sütunları olarak tanımlayabilirsiniz. Bu son aynı adresten bir Baba ve son gibi aynı ada sahip iki vatandaşlar ayırt etmek için bir sütundur.
+Bununla birlikte, genellikle lastName ile sorgulama yaptıysanız bu birincil anahtar iyi şekilde gerçekleştirilemeyebilir, çünkü her sorgu her lastName değerini okumak için tam tablo taraması gerektirir. Bunun yerine, lastName, firstName ve sosyal güvenlik numarası sütunlarında bir birincil anahtar tanımlayabilirsiniz. Bu son sütun, babalar ve son gibi aynı adreste bulunan iki sakın belirsizliğini ortadan kaldırmaya yönelik bir addır.
 
-|rowkey|       Adresi|   Telefon| FirstName| Soyadı| socialSecurityNum |
+|rowkey|       address|   telefon| firstName| lastName| socialSecurityNum |
 |------|--------------------|--------------|-------------|--------------| ---|
 |  1000|1111 San Gabriel Dr.|1-425-000-0002|    John|Dole| 111 |
-|  8396|5415 San Gabriel Dr.|1-230-555-0191|  Calvin|Raji| 222 |
+|  8396|5415 San Gabriel Dr.|1-230-555-0191|  Calvin|Oyji| 222 |
 
-Bu yeni birincil anahtarla satır Phoenix tarafından oluşturulan anahtarları olacaktır:
+Bu yeni birincil anahtarla, Phoenix tarafından oluşturulan satır anahtarları şöyle olacaktır:
 
-|rowkey|       Adresi|   Telefon| FirstName| Soyadı| socialSecurityNum |
+|rowkey|       address|   telefon| firstName| lastName| socialSecurityNum |
 |------|--------------------|--------------|-------------|--------------| ---|
-|  Dole John 111|1111 San Gabriel Dr.|1-425-000-0002|    John|Dole| 111 |
-|  Raji Calvin 222|5415 San Gabriel Dr.|1-230-555-0191|  Calvin|Raji| 222 |
+|  Dole-John-111|1111 San Gabriel Dr.|1-425-000-0002|    John|Dole| 111 |
+|  Çüji-Calvin-222|5415 San Gabriel Dr.|1-230-555-0191|  Calvin|Oyji| 222 |
 
-İlk satırda yukarıdaki rowkey için veriler gösterildiği gibi gösterilir:
+Yukarıdaki ilk satırda, rowkey verileri gösterilen şekilde gösterilir:
 
-|rowkey|       anahtar|   value| 
+|rowkey|       key|   value| 
 |------|--------------------|---|
-|  Dole John 111|Adresi |1111 San Gabriel Dr.|  
-|  Dole John 111|Telefon |1-425-000-0002|  
-|  Dole John 111|FirstName |John|  
-|  Dole John 111|Soyadı |Dole|  
-|  Dole John 111|socialSecurityNum |111| 
+|  Dole-John-111|address |1111 San Gabriel Dr.|  
+|  Dole-John-111|telefon |1-425-000-0002|  
+|  Dole-John-111|firstName |John|  
+|  Dole-John-111|lastName |Dole|  
+|  Dole-John-111|socialSecurityNum |111| 
 
-Bu rowkey artık verilerin bir kopyasını depolar. Bu değeri temel HBase tablosundaki her bir hücreyle dahil olduğundan boyutu ve birincil anahtarınızı içeren sütun sayısını göz önünde bulundurun.
+Bu rowkey artık verilerin yinelenen bir kopyasını depolar. Bu değer, temel alınan HBase tablosundaki her hücreye dahil edildiğinden, birincil anahtarınıza eklediğiniz sütunların boyutunu ve sayısını göz önünde bulundurun.
 
-Ayrıca, birincil anahtar tekdüze artırıyorsunuz değerlere sahipse, tablosu oluşturmanız gerekir *demet salt* yazma sıcak oluşturmaktan kaçının Yardım - görmek için [verileri bölümleme](#partition-data).
+Ayrıca, birincil anahtarda tek tek artan değerler varsa, yazma etkin noktaları oluşturmamaya yardımcı olmak için tablo, *anahtar demetleri* ile oluşturmanız gerekir. [bölüm verilerine](#partition-data)bakın.
 
 ### <a name="column-family-design"></a>Sütun ailesi tasarımı
 
-Bazı sütunlarda diğerlerinden daha sık erişilen, sık erişilen sütunları nadiren erişilen sütunları ayırmak için birden çok sütun ailesi oluşturmanız gerekir.
+Bazı sütunlara diğerlerinden daha sık erişiliyorsa, sık erişilen sütunları nadiren erişilen sütunlardan ayırmak için birden çok sütunlu aileleri oluşturmanız gerekir.
 
-Ayrıca, bazı sütunlar birlikte erişilme eğilimi varsa, bu sütunların aynı sütun ailesinde yerleştirin.
+Ayrıca, belirli sütunlara birlikte erişiliyorsa, bu sütunları aynı sütun ailesine koyun.
 
 ### <a name="column-design"></a>Sütun tasarımı
 
-* Altında yaklaşık 1 MB g/ç maliyetleri nedeniyle büyük sütunları VARCHAR sütunları tutun. Sorguları işlerken HBase tam hücrelerde üzerinden istemciye göndermeden önce gerçekleştiren ve istemcinin bunları tam olarak bunları devre dışı uygulama koduna teslim etmeden önce alır.
-* Sütun değerleri kompakt bir biçime protobuf, Avro, msgpack veya BSON gibi kullanarak Store. Daha büyük olduğu gibi JSON önerilmez.
-* Gecikme süresi ve g/ç maliyetleri kesmek için depolama önce veri sıkıştırma göz önünde bulundurun.
+* Büyük sütunların g/ç maliyetlerine bağlı olarak, VARCHAR sütunlarını yaklaşık 1 MB 'tan tutun. Sorgular işlenirken, HBase, hücreleri istemciye göndermeden önce tam olarak bir şekilde çıkarır ve istemci bunları uygulama koduna teslim etmeden önce tam olarak alır.
+* Sütun değerlerini protoarabelleğe, avro, msgpack veya BSON gibi bir kompakt biçim kullanarak depolayın. JSON, daha büyük olduğu için önerilmez.
+* Gecikme süresini ve g/ç maliyetlerini kesmek için depolamadan önce verileri sıkıştırmayı göz önünde bulundurun.
 
 ### <a name="partition-data"></a>Verileri bölümleme
 
-Phoenix, okuma/yazma performansını önemli ölçüde artırabilir verilerinizi dağıtıldığı bölge sayısı denetlemenize olanak tanıyor. Phoenix tablo oluştururken salt veya verilerinizi önceden bölün.
+Phoenix, verilerinizin dağıtıldığı bölge sayısını denetlemenizi sağlar ve bu da okuma/yazma performansını önemli ölçüde artırabilir. Bir Phoenix tablosu oluştururken, verilerinizi güvenlik altına alabilir veya önceden bölebilirsiniz.
 
-Bir tablo oluşturma sırasında salt için salt demet sayısını belirtin:
+Oluşturma sırasında bir tabloyu oluşturmak için, anahtar demetlerinin sayısını belirtin:
 
     CREATE TABLE CONTACTS (...) SALT_BUCKETS = 16
 
-Bu katarak tablonun birincil anahtar değerlerini otomatik olarak seçmek, değerleri boyunca böler. 
+Bu, tablo, verileri otomatik olarak seçerek birincil anahtarların değerleri üzerinde böler. 
 
-Tablo bölmelerini nerede meydana denetlemek için tablonun bölme işleminin gerçekleştiği aralık değerleri sağlayarak önceden bölebilirsiniz. Örneğin, bir tablo oluşturmak için üç bölgeleri bölme:
+Tablonun nerede bölündüğünü denetlemek için bölmenin gerçekleştiği Aralık değerlerini sağlayarak tabloyu önceden bölebilirsiniz. Örneğin, üç bölgenin üzerinde bölünen bir tablo oluşturmak için:
 
     CREATE TABLE CONTACTS (...) SPLIT ON ('CS','EU','NA')
 
 ## <a name="index-design"></a>Dizin tasarımı
 
-Phoenix bazılarını veya tümünü dizinlenmiş tablosundaki verilerin bir kopyasını depolayan bir HBase tablosu dizinidir. Bir dizin belirli sorgu türleri için performansı artırır.
+Phoenix dizini, dizinlenmiş tablodaki verilerin bir kısmının veya tümünün kopyasını depolayan bir HBase tablosudur. Dizin, belirli sorgu türleri için performansı geliştirir.
 
-Tanımlanan birden fazla dizine sahip ve ardından bir tabloyu sorgulamak, Phoenix sorgu için en iyi dizini otomatik olarak seçer. Birincil dizin seçtiğiniz birincil anahtarlar üzerinde göre otomatik olarak oluşturulur.
+Tanımlanmış birden fazla dizininiz varsa ve sonra bir tablo sorgulayıp, Phoenix otomatik olarak sorgunun en iyi dizinini seçer. Birincil dizin, seçtiğiniz birincil anahtarlara göre otomatik olarak oluşturulur.
 
-Beklenen sorguları için kendilerine ait sütunların belirterek de ikincil dizin oluşturabilirsiniz.
+Beklenen sorgular için, sütunlarını belirterek ikincil dizinler de oluşturabilirsiniz.
 
 Dizinlerinizi tasarlarken:
 
-* Yalnızca gereksinim duyduğunuz dizin oluşturun.
-* Sık güncelleştirilen tablolarda dizinler sayısını sınırlayın. Güncelleştirmeleri bir tablo için yazar ana tablo hem dizin tabloları küçültmesini.
+* Yalnızca ihtiyacınız olan dizinleri oluşturun.
+* Sık güncellenen tablolardaki dizinlerin sayısını sınırlayın. Bir tablodaki güncelleştirmeler, hem ana tablo hem de dizin tablolarına yazma olarak dönüştürülür.
 
-## <a name="create-secondary-indexes"></a>İkincil dizinler oluşturma
+## <a name="create-secondary-indexes"></a>İkincil dizinler oluştur
 
-İkincil dizinler, hangi depolama alanı, bir noktası arama içine tam tablo taraması olması ve yazma hızı kapatarak okuma performansı artırabilir. İkincil dizinler eklenebilir veya tablo oluşturulduktan sonra kaldırılır ve mevcut sorguları değişiklikleri gerektirmeyen – yalnızca sorguları daha hızlı çalışır. Gereksinimlerinize bağlı olarak, kapsanan dizinleri, işlevsel dizinlere veya her ikisini de oluşturma göz önünde bulundurun.
+İkincil dizinler, depolama alanı ve yazma hızı maliyetinde bir nokta aramasına tam tablo taraması olacağını açıp okuma performansını iyileştirebilirler. İkincil dizinler tablo oluşturulduktan sonra eklenebilir veya kaldırılabilir, mevcut sorgularda değişiklik gerektirmez – sorgular yalnızca daha hızlı çalışır. Gereksinimlerinize bağlı olarak, kapsanan dizinler, işlevsel dizinler veya her ikisini de oluşturmayı düşünün.
 
-### <a name="use-covered-indexes"></a>Kapsanan dizinleri kullanın
+### <a name="use-covered-indexes"></a>Kapsanan dizinleri kullan
 
-Kapsanan dizinleri dizinlenir değerlere ek olarak satırdaki verileri içeren dizinler var. İstenen dizin girişi bulduktan sonra birincil tablo erişmeye gerek yoktur.
+Kapsanan dizinler, dizinli değerlere ek olarak satırdaki verileri içeren dizinlerdir. İstenen dizin girişini bulduktan sonra, birincil tabloya erişmeniz gerekmez.
 
-Örneğin, örnekte socialSecurityNum sütunu yalnızca ikincil dizin oluşturabilirsiniz tablo başvurun. Bu ikincil dizin socialSecurityNum değerlere göre filtre sorguları hızlandırmak, ancak diğer alan değerlerini alma başka bir ana tablo karşı okuma gerektirir.
+Örneğin, örnek kişi tablosunda yalnızca socialSecurityNum sütununda ikincil bir dizin oluşturabilirsiniz. Bu ikincil dizin, socialSecurityNum değerlerine göre filtreleyen sorguları hızlandıracaktır, ancak diğer alan değerlerinin alınması ana tabloya karşı başka bir okuma gerektirir.
 
-|rowkey|       Adresi|   Telefon| FirstName| Soyadı| socialSecurityNum |
+|rowkey|       address|   telefon| firstName| lastName| socialSecurityNum |
 |------|--------------------|--------------|-------------|--------------| ---|
-|  Dole John 111|1111 San Gabriel Dr.|1-425-000-0002|    John|Dole| 111 |
-|  Raji Calvin 222|5415 San Gabriel Dr.|1-230-555-0191|  Calvin|Raji| 222 |
+|  Dole-John-111|1111 San Gabriel Dr.|1-425-000-0002|    John|Dole| 111 |
+|  Çüji-Calvin-222|5415 San Gabriel Dr.|1-230-555-0191|  Calvin|Oyji| 222 |
 
-Ancak, genellikle firstName ve lastName socialSecurityNum verilen ara istiyorsanız, firstName ve lastName olarak dizin tablosundaki gerçek verileri içeren kapsanan bir dizin oluşturabilirsiniz:
+Bununla birlikte, genel olarak, socialSecurityNum verilen firstName ve lastName bilgilerini aramak istiyorsanız, Dizin tablosunda gerçek veriler olarak firstName ve lastName içeren bir kapsanan dizin oluşturabilirsiniz:
 
     CREATE INDEX ssn_idx ON CONTACTS (socialSecurityNum) INCLUDE(firstName, lastName);
 
-Kapsanan bu dizini yalnızca ikincil dizin içeren tablodan okuyarak tüm verileri almak için aşağıdaki sorguyu sağlar:
+Bu kapsanan Dizin, aşağıdaki sorgunun tüm verileri yalnızca ikincil dizini içeren tablodan okuyarak almasını sağlar:
 
     SELECT socialSecurityNum, firstName, lastName FROM CONTACTS WHERE socialSecurityNum > 100;
 
-### <a name="use-functional-indexes"></a>İşlevsel dizinleri kullanın
+### <a name="use-functional-indexes"></a>İşlevsel dizinleri kullanma
 
-İşlevsel dizinleri sorgularında kullanılmasını beklediğiniz rastgele bir ifade üzerinde dizin oluşturmanıza imkan tanır. İşlevsel bir dizin altyapınız var ve bir sorgu ifade kullanır. sonra dizin veri tablosu yerine sonuçları almak için kullanılabilir.
+İşlevsel dizinler, sorgularda kullanılmasını beklediğinizi rastgele bir ifadede dizin oluşturmanıza imkan tanır. İşlevsel bir dizin oluşturulduktan ve bir sorgu bu ifadeyi kullandığında, dizin veri tablosu yerine sonuçları almak için kullanılabilir.
 
-Örneğin, bir kişinin soyadı ve birleşik ilk adı büyük küçük harf duyarsız arama yapmak, izin vermek için bir dizin oluşturabilirsiniz:
+Örneğin, bir kişinin Birleşik adı ve soyadı için büyük/küçük harfe duyarsız aramalar yapmanıza olanak sağlayan bir dizin oluşturabilirsiniz:
 
      CREATE INDEX FULLNAME_UPPER_IDX ON "Contacts" (UPPER("firstName"||' '||"lastName"));
 
-## <a name="query-design"></a>Sorgu Tasarım
+## <a name="query-design"></a>Sorgu tasarımı
 
-Sorgu Tasarım ana hususlardır:
+Sorgu tasarımında başlıca noktalar şunlardır:
 
 * Sorgu planını anlayın ve beklenen davranışını doğrulayın.
-* Verimli bir şekilde katılın.
+* Verimli bir şekilde birleştirin.
 
-### <a name="understand-the-query-plan"></a>Sorgu planını anlayın
+### <a name="understand-the-query-plan"></a>Sorgu planını anlama
 
-İçinde [SQLLine](http://sqlline.sourceforge.net/), SQL sorgunuzun ardından açıklama planı Phoenix gerçekleştireceği işlemleri görüntülemek için kullanın. Bu maddeyi planı:
+[Sqlline](http://sqlline.sourceforge.net/)Içinde, Phoenix 'in gerçekleştireceği işlem planını görüntülemek için SQL SORGUNUZUN ardından açıkla ' yı kullanın. Planı denetleyin:
 
-* Uygun olduğunda birincil anahtarı kullanır.
-* Veri tablosu yerine ikincil dizinler kullandığı uygun.
-* Tarama ARALIĞI Atla tarama mümkün olduğunda yerine veya tablo taraması kullanır.
+* Uygun durumlarda birincil anahtarınızı kullanır.
+* Veri tablosu yerine uygun ikincil dizinleri kullanır.
+* , Tablo TARAMASı yerine Aralık taramasını kullanır veya mümkün olduğunda taramayı atlar.
 
 #### <a name="plan-examples"></a>Plan örnekleri
 
-Örneğin, uçuş gecikme bilgilerini depolayan UÇUŞLAR adlı bir tablonuz varsayalım.
+Örnek olarak, Uçuş gecikmesi bilgilerini depolayan FıŞıKLARı adlı bir tablonuz olduğunu varsayalım.
 
-Bir airlineid ile tüm uçuşlar seçilecek `19805`burada airlineid birincil anahtar veya herhangi bir dizinde olan bir alan adıdır:
+Airlineıd ile tüm fışıklardan birini `19805`seçmek için airlineıd, birincil anahtarda veya herhangi bir dizinde olmayan bir alandır:
 
     select * from "FLIGHTS" where airlineid = '19805';
 
-Açıklama komutunu aşağıdaki gibi çalıştırın:
+Açıkla komutunu aşağıdaki gibi çalıştırın:
 
     explain select * from "FLIGHTS" where airlineid = '19805';
 
@@ -166,65 +166,65 @@ Sorgu planı şöyle görünür:
     CLIENT 1-CHUNK PARALLEL 1-WAY ROUND ROBIN FULL SCAN OVER FLIGHTS
         SERVER FILTER BY AIRLINEID = '19805'
 
-Bu planda UÇUŞLAR üzerinde tam tarama tümcecik unutmayın. Bu ifade, daha verimli ARALIĞI tarama veya tarama Atla seçeneğini kullanmak yerine tablonun tüm satırlarda bir tablo tarama yürütme yaptığını gösterir.
+Bu planda, FıŞıKLARA göre tam tarama tümceciğini ifade edin. Bu tümcecik, yürütmenin, daha verimli Aralık TARAMASı veya tarama atlama seçeneği yerine tablodaki tüm satırların üzerinde tarama yaptığını gösterir.
 
-Şimdi, uçuşlar için 2 Ocak 2014'te taşıyıcısı sorgulamak istediğiniz varsayalım `AA` kendi flightnum olduğu 1'den büyük. Sütunları yıl, ay, dayofmonth, taşıyıcı ve flightnum örnek tablosunda ve tüm bileşik birincil anahtarın parçası olan varsayalım. Sorguyu şu şekilde görünür:
+Şimdi, flightnum 'ın 1 ' den büyük olduğu taşıyıcı `AA` için 2 Ocak 2014 ' de fışıkları sorgulamak istediğinizi varsayalım. Yıl, ay, dayofmonth, taşıyıcı ve flightnum sütunlarının örnek tabloda bulunduğunu ve bileşik birincil anahtarın bir parçası olduğunu varsayalım. Sorgu şöyle görünür:
 
     select * from "FLIGHTS" where year = 2014 and month = 1 and dayofmonth = 2 and carrier = 'AA' and flightnum > 1;
 
-Bu sorguyla planlama inceleyelim:
+Bu sorgunun planını şu şekilde incelim:
 
     explain select * from "FLIGHTS" where year = 2014 and month = 1 and dayofmonth = 2 and carrier = 'AA' and flightnum > 1;
 
-Sonuçta elde edilen planıdır:
+Elde edilen plan:
 
     CLIENT 1-CHUNK PARALLEL 1-WAY ROUND ROBIN RANGE SCAN OVER FLIGHTS [2014,1,2,'AA',2] - [2014,1,2,'AA',*]
 
-Birincil anahtarlar için değer aralığını köşeli ayraç değerlerdir. Bu durumda, aralık değerleri 2014 yılının, aylık 1 ve 2 dayofmonth ile sabittir, ancak flightnum 2 ve başlatma için değere izin ver (`*`). Bu sorgu planı, birincil anahtar beklendiği gibi kullanılmakta olduğunu doğrular.
+Köşeli ayraçlar içindeki değerler, birincil anahtarların değer aralığıdır. Bu durumda, Aralık değerleri 2014, Month 1 ve dayofmonth 2 ile düzeltilir, ancak 2 ve üzerinde (`*`) başlayan flightnum değerlerine izin verir. Bu sorgu planı, birincil anahtarın beklenen şekilde kullanıldığını onaylar.
 
-Ardından, adlı UÇUŞLAR tablosunda dizin oluşturma `carrier2_idx` yalnızca taşıyıcı alanı olmasıdır. Bu dizin de flightdate, tailnum, kaynak ve flightnum verisini ayrıca dizinde depolanan kapsanan sütunlar olarak içerir.
+Ardından, fışıkları tablosunda yalnızca taşıyıcı alanında olan adlı `carrier2_idx` bir dizin oluşturun. Bu dizin Ayrıca, verileri dizinde depolanan kapsanan sütunlar olarak da flightdate,,,, Origin ve flightnum bilgilerini içerir.
 
     CREATE INDEX carrier2_idx ON FLIGHTS (carrier) INCLUDE(FLIGHTDATE,TAILNUM,ORIGIN,FLIGHTNUM);
 
-Taşıyıcı yanı sıra flightdate ve aşağıdaki sorguyu olduğu gibi tailnum almak istediğinizi varsayalım:
+Aşağıdaki sorguda olduğu gibi, flightdate ve ıdinum ile birlikte taşıyıcıyı almak istediğinizi varsayalım:
 
     explain select carrier,flightdate,tailnum from "FLIGHTS" where carrier = 'AA';
 
-Bu dizin kullanılan görmeniz gerekir:
+Kullanılmakta olan dizini görmeniz gerekir:
 
     CLIENT 1-CHUNK PARALLEL 1-WAY ROUND ROBIN RANGE SCAN OVER CARRIER2_IDX ['AA']
 
-Görünebilen öğelerinin tam listesi için planı sonuçlarını açıklar, planları açıklayan bölümüne bakın [Apache Phoenix ayarlama Kılavuzu](https://phoenix.apache.org/tuning_guide.html).
+Plan sonuçlarını açıkla bölümünde görünebilen öğelerin tamamı listesi için [Apache Phoenix ayarlama kılavuzundaki](https://phoenix.apache.org/tuning_guide.html)açıkla planları bölümüne bakın.
 
-### <a name="join-efficiently"></a>Verimli bir şekilde katılın
+### <a name="join-efficiently"></a>Verimli bir şekilde birleştirin
 
-Genellikle, özellikle sık kullanılan sorgular, bir tarafındaki küçüktür sürece birleştirmeler önlemek istersiniz.
+Genellikle, tek bir kenar küçük olmadığı ve özellikle sık sorgularda, birleşimlerden kaçınmak istersiniz.
 
-Gerekirse, büyük birleştirmeler ile bunu yapabilirsiniz, `/*+ USE_SORT_MERGE_JOIN */` ipucu, ancak büyük bir birleştirme çok sayıda satırı pahalı bir işlem değildir. Kullanılabilir bellek sağ taraftaki sorgularınızdan toplam boyutunu aşacak kullanırsanız `/*+ NO_STAR_JOIN */` ipucu.
+Gerekirse, `/*+ USE_SORT_MERGE_JOIN */` ipucu ile büyük birleşimler yapabilirsiniz, ancak büyük bir birleştirme çok sayıda satır üzerinde pahalı bir işlemdir. Tüm sağ taraftaki tabloların genel boyutu kullanılabilir belleği aşarsa, `/*+ NO_STAR_JOIN */` ipucunu kullanın.
 
 ## <a name="scenarios"></a>Senaryolar
 
-Aşağıdaki yönergeler, bazı ortak desenleri açıklar.
+Aşağıdaki kılavuzlar bazı yaygın desenleri anlatmaktadır.
 
-### <a name="read-heavy-workloads"></a>Okuma yoğunluklu iş yükleri
+### <a name="read-heavy-workloads"></a>Okuma ağır iş yükleri
 
-Okuma yoğunluklu için kullanım örnekleri, dizinleri kullandığınızdan emin olun. Ayrıca, ek yükü okuma zaman kazanmak için kapsanan dizin oluşturmayı düşünün.
+Okuma ağır kullanım örnekleri için, dizinleri kullandığınızdan emin olun. Ayrıca, okuma zamanı ek yükünü kaydetmek için kapsanan dizinler oluşturmayı göz önünde bulundurun.
 
-### <a name="write-heavy-workloads"></a>Yazma yoğunluklu iş yükleri
+### <a name="write-heavy-workloads"></a>Yazma ağır iş yükleri
 
-Birincil anahtarı tekdüze burada genişliyorsa yazma yoğunluklu iş yükleri için gereken ek taramalar nedeniyle genel okuma verimini çoğaltamaz yazma sıcak önlemeye yardımcı olmak için salt demet oluşturun. Ayrıca, UPSERT, çok sayıda kayıtları yazmak için kullanırken otomatik yürütme ve batch kayıtlarını kapatın.
+Birincil anahtarın tek bir şekilde artdığı, yazma ağır iş yükleri için, gereken ek taramalar nedeniyle genel okuma aktarım hızı masrafında yazma etkin noktalarına karşı, yazma etkin noktalarına karşı, anahtar demetleri oluşturun. Ayrıca, çok sayıda kayıt yazmak için UPSERT kullanırken, oto yürütmeyi kapatın ve kayıtları toplu olarak uygulayın.
 
-### <a name="bulk-deletes"></a>Toplu silme
+### <a name="bulk-deletes"></a>Toplu silmeler
 
-Böylece istemci, tüm silinen satırlar için satır anahtarı unutmayın gerekmez. büyük bir veri kümesi silinirken, otomatik yürütme üzerinde silme sorgusu vermeden önce kapatın. Otomatik yürütme, Phoenix bunları doğrudan istemciye döndürme gerekmeksizin bölge sunucuları üzerinde silebilirsiniz tarafından silme, etkilenen satırları ara belleğe alma istemci engeller.
+Büyük bir veri kümesini silerken, SILME sorgusunu vermeden önce, istemci silinen tüm satırların satır anahtarlarını anımsaması gerekmiyorsa, tekrar yürütme özelliğini etkinleştirin. Yeniden yürütme, istemcinin SILME işleminden etkilenen satırları arabelleğe almasını engeller. bu sayede, Phoenix 'in onları istemciye döndürme masrafı olmadan doğrudan bölge sunucularında silmesine izin vermez.
 
-### <a name="immutable-and-append-only"></a>Sabittir ve salt ekleme
+### <a name="immutable-and-append-only"></a>Sabit ve salt ekleme
 
-Senaryonuz yazma hızı üzerinde veri bütünlüğünü korur, yazma önceden yazılan günlük tablolarınızı oluştururken devre dışı bırakma göz önünde bulundurun:
+Senaryonuz veri bütünlüğü üzerinde yazma hızına tercih eder, tablolarınızı oluştururken yazma ön günlüğünü devre dışı bırakmayı göz önünde bulundurun:
 
     CREATE TABLE CONTACTS (...) DISABLE_WAL=true;
 
-Bu ve diğer seçenekleri hakkında daha fazla bilgi için bkz: [Apache Phoenix Dilbilgisi](https://phoenix.apache.org/language/index.html#options).
+Bu ve diğer seçeneklerle ilgili ayrıntılı bilgi için bkz. [Apache Phoenix dilbilgisi](https://phoenix.apache.org/language/index.html#options).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

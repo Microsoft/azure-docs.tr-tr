@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Azure Active Directory Tümleştirmesi ile operasyon müdür Yardımcısı | Microsoft Docs'
-description: Azure Active Directory ve operasyon arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Deputy ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve Depolduğunuz arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -8,6 +8,7 @@ manager: mtillman
 ms.reviewer: barbkess
 ms.assetid: 5665c3ac-5689-4201-80fe-fcc677d4430d
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
@@ -15,97 +16,97 @@ ms.topic: tutorial
 ms.date: 01/25/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8e8b61bc01e729472c140253f8f936b6ec0dd1b0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a0b52a56f51e4dcf5f27eddcd68ff17973df21c0
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67104242"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73159230"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-deputy"></a>Öğretici: Azure Active Directory Tümleştirmesi ile operasyon müdür Yardımcısı
+# <a name="tutorial-azure-active-directory-integration-with-deputy"></a>Öğretici: Deputy ile tümleştirme Azure Active Directory
 
-Bu öğreticide, operasyon müdür yardımcısı, Azure Active Directory (Azure AD) ile tümleştirme konusunda bilgi edinin.
-Operasyon müdür yardımcısı, Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, Deputy 'yi Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+Azure AD ile Deputy 'yi tümleştirmek aşağıdaki avantajları sağlar:
 
-* Operasyon erişimi, Azure AD'de kontrol edebilirsiniz.
-* Otomatik olarak (çoklu oturum açma) operasyon için kendi Azure AD hesapları ile oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Azure AD 'de Deputy 'e erişimi olan denetimi yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla otomatik olarak (çoklu oturum açma) oturum açmasını sağlayabilirsiniz.
+* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile operasyon yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini Deputy ile yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Operasyon çoklu oturum açma abonelik etkin.
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* Deputy çoklu oturum açma etkin abonelik
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* Operasyon destekler **SP** ve **IDP** tarafından başlatılan
+* Deputy **SP** ve **IDP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-deputy-from-the-gallery"></a>Operasyon galeri ekleme
+## <a name="adding-deputy-from-the-gallery"></a>Galeriden Depolduğunuz ekleme
 
-Azure AD'ye operasyon tümleştirmesini yapılandırmak için operasyon müdür yardımcısı Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Depof 'ın Azure AD 'ye tümleştirilmesini yapılandırmak için, Galeriden yönetilen SaaS uygulamaları listenize Deputy eklemeniz gerekir.
 
-**Galeriden operasyon eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden Depolduğunuz 'u eklemek için aşağıdaki adımları uygulayın:**
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+1. **[Azure Portal](https://portal.azure.com)** sol gezinti panelinde **Azure Active Directory** simgesine tıklayın.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+3. Yeni uygulama eklemek için, iletişim kutusunun üst kısmındaki **Yeni uygulama** düğmesine tıklayın.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **operasyon**seçin **operasyon** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **Deputy**yazın, sonuç panelinden **Deputy** ' yi seçin ve ardından **Ekle** düğmesine tıklayarak uygulamayı ekleyin.
 
-     ![Sonuç listesinde operasyon müdür Yardımcısı](common/search-new-app.png)
+     ![Sonuçlar listesinde depolduğunuz](common/search-new-app.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma operasyon adlı bir test kullanıcı tabanlı test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ve operasyon ilgili kullanıcı arasında bir bağlantı ilişki kurulması gerekir.
+Bu bölümde, Azure AD çoklu oturum açmayı, **Britta Simon**adlı bir test kullanıcısına göre Deputy ile yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ve Deputy 'deki ilgili Kullanıcı arasındaki bağlantı ilişkisinin oluşturulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma operasyon birlikte test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açma 'yı Deputy ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[Operasyon tek oturum açma yapılandırması](#configure-deputy-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[Operasyon test kullanıcısı oluşturma](#create-deputy-test-user)**  - kullanıcı Azure AD gösterimini bağlı baş Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD çoklu oturum açma özelliğini yapılandırarak](#configure-azure-ad-single-sign-on)** kullanıcılarınızın bu özelliği kullanmasına olanak sağlayın.
+2. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[Deputy çoklu oturum açmayı yapılandırın](#configure-deputy-single-sign-on)** .
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
+5. Kullanıcı Azure AD gösterimine bağlı olan Deputy 'de Britta Simon 'a sahip olmak için **[Deputy test kullanıcısı oluşturun](#create-deputy-test-user)** .
+6. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[Çoklu oturum açmayı sınayın](#test-single-sign-on)** .
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma ile operasyon müdür Yardımcısı'nı yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açma 'yı Deputy ile yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **operasyon** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **Deputy** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
+3. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** uygulamada yapılandırmak isterseniz, bölümü **IDP** başlatılan modu, aşağıdaki adımları gerçekleştirin:
+4. **Temel SAML yapılandırması** bölümünde, uygulamayı **IDP** tarafından başlatılan modda yapılandırmak istiyorsanız aşağıdaki adımları uygulayın:
 
-    ![Operasyon etki alanı ve URL'ler tek oturum açma bilgileri](common/idp-intiated.png)
+    ![Deputy etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/idp-intiated.png)
 
-    a. İçinde **tanımlayıcı** metin kutusuna şu biçimi kullanarak bir URL yazın:
+    a. **Tanımlayıcı** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın:
 
     |  |
     | ----|
@@ -125,7 +126,7 @@ Azure AD çoklu oturum açma ile operasyon müdür Yardımcısı'nı yapılandı
     | `https://<subdomain>.<region>.ent-an.deputy.com` |
     | `https://<subdomain>.<region>.deputy.com` |
 
-    b. İçinde **yanıt URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın:
+    b. **Yanıt URL 'si** metin kutusuna aşağıdaki kalıbı kullanarak bir URL yazın:
     
     | |
     |----|
@@ -145,146 +146,146 @@ Azure AD çoklu oturum açma ile operasyon müdür Yardımcısı'nı yapılandı
     | `https://<subdomain>.<region>.ent-an.deputy.com/exec/devapp/samlacs` |
     | `https://<subdomain>.<region>.deputy.com/exec/devapp/samlacs` |
 
-5. Tıklayın **ek URL'lerini ayarlayın** ve uygulamada yapılandırmak istiyorsanız, aşağıdaki adımı uygulayın **SP** başlatılan modu:
+5. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
 
-    ![Operasyon etki alanı ve URL'ler tek oturum açma bilgileri](common/metadata-upload-additional-signon.png)
+    ![Deputy etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/metadata-upload-additional-signon.png)
 
-    İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın:  `https://<your-subdomain>.<region>.deputy.com`
+    **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<your-subdomain>.<region>.deputy.com`
 
     >[!NOTE]
-    > Operasyon bölge soneki isteğe bağlı ya da bunlardan birini kullanmanız gerekir: au | na | AB | olarak | la | af | bir | ent au | ent na | ent AB | ent-olarak | üst la | üst-af | bir üst
+    > Deputy bölgesi son eki isteğe bağlıdır veya şunlardan birini kullanmalıdır: au | na | AB | as | La | AF | a | ENT-au | ENT-na | ENT-AB | ENT | ENT-La | ENT-AF | ENT-a
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerler gerçek tanımlayıcısı, yanıt URL'si ve oturum açma URL'si ile güncelleştirin. İlgili kişi [operasyon istemci Destek ekibine](https://www.deputy.com/call-centers-customer-support-scheduling-software) bu değerleri almak için. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bu değerleri gerçek tanımlayıcı, yanıt URL 'SI ve oturum açma URL 'SI ile güncelleştirin. Bu değerleri almak için [Deputy istemci destek ekibine](https://www.deputy.com/call-centers-customer-support-scheduling-software) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-6. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+6. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** ' i gereksiniminize göre verilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-7. Üzerinde **baş ayarlamak** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+7. **Depolduğunuz ayarlama** bölümünde uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+    a. Oturum açma URL 'SI
 
-    b. Azure Ad tanımlayıcısı
+    b. Azure AD tanımlayıcısı
 
-    c. Oturum Kapatma URL'si
+    c. Oturum kapatma URL 'SI
 
-### <a name="configure-deputy-single-sign-on"></a>Operasyon tek oturum açmayı yapılandırın
+### <a name="configure-deputy-single-sign-on"></a>Deputy çoklu oturum açmayı yapılandırma
 
-1. Aşağıdaki URL'ye gidin:[https://(your-subdomain).deputy.com/exec/config/system_config]( https://(your-subdomain).deputy.com/exec/config/system_config). Git **güvenlik ayarları** tıklatıp **Düzenle**.
+1. Şu URL 'ye gidin:[https://(-alt etki alanı). Deputy. com/exec/config/system_config]( https://(your-subdomain).deputy.com/exec/config/system_config). **Güvenlik ayarları** ' na gidin ve **Düzenle**' ye tıklayın.
    
-    ![Çoklu oturum açmayı yapılandırın](./media/deputy-tutorial/tutorial_deputy_004.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/deputy-tutorial/tutorial_deputy_004.png)
 
-2. Bu **güvenlik ayarları** sayfasında, aşağıdaki adımları gerçekleştirin.
+2. Bu **güvenlik ayarları** sayfasında aşağıdaki adımları gerçekleştirin.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/deputy-tutorial/tutorial_deputy_005.png)
+    ![Çoklu oturum açmayı yapılandırma](./media/deputy-tutorial/tutorial_deputy_005.png)
     
-    a. Etkinleştirme **sosyal oturum açma**.
+    a. **Sosyal oturum açmayı**etkinleştirin.
    
-    b. Not Defteri'nde Azure portalından indirilen, Base64 olarak kodlanmış sertifika açın, içeriğini, panoya kopyalayın ve yapıştırın için **OpenSSL sertifikası** metin.
+    b. Not defteri 'nde Azure portal indirilen base64 kodlu sertifikanızı açın, bu içeriği panonuza kopyalayın ve **OpenSSL sertifikası** metin kutusuna yapıştırın.
    
-    c. SAML SSO URL metin kutusuna yazın. `https://<your subdomain>.deputy.com/exec/devapp/samlacs?dpLoginTo=<saml sso url>`
+    c. SAML SSO URL metin kutusuna `https://<your subdomain>.deputy.com/exec/devapp/samlacs?dpLoginTo=<saml sso url>` yazın.
     
-    d. SAML SSO URL metin kutusuna değiştirin `<your subdomain>` , alt etki alanı ile.
+    d. SAML SSO URL metin kutusunda `<your subdomain>` yerine alt etki alanınızı koyun.
    
-    e. SAML SSO URL metin kutusuna değiştirin `<saml sso url>` ile **oturum açma URL'si** Azure portaldan kopyaladığınız.
+    e. SAML SSO URL metin kutusunda, `<saml sso url>` Azure portal kopyaladığınız **oturum açma URL 'si** ile değiştirin.
    
-    f. Tıklayın **ayarlarını kaydetmek**.
+    f. **Ayarları Kaydet**' e tıklayın.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma 
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümün amacı, Azure portal Britta Simon adlı bir test kullanıcısı oluşturmaktır.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
+3. Kullanıcı Özellikleri ' nde aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü **brittasimon\@yourcompanydomain.extension**  
+    b. **Kullanıcı adı** alanında **brittasıon\@yourşirketnotlarıetki alanı. Extension** yazın  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
     d. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, operasyon için erişim izni verdiğinizde, Azure çoklu oturum açma kullanılacak Britta Simon etkinleştirin.
+Bu bölümde, Deputy 'e erişim vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon 'u etkinleştirin.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **operasyon**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **Deputy**' yi seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **operasyon**.
+2. Uygulamalar listesinde, **Deputy**' yi seçin.
 
-    ![Uygulamalar listesini operasyon müdür yardımcısı bağlantıdaki](common/all-applications.png)
+    ![Uygulamalar listesindeki Deputy bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+5. **Kullanıcılar ve gruplar** Iletişim kutusunda kullanıcılar listesinde **Britta Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-deputy-test-user"></a>Operasyon test kullanıcısı oluşturma
+### <a name="create-deputy-test-user"></a>Deputy test kullanıcısı oluşturma
 
-Operasyon için oturum açmak Azure AD kullanıcılarının etkinleştirmek için bunların operasyon sağlanması gerekir. Operasyon durumunda sağlama bir el ile bir görevdir.
+Azure AD kullanıcılarının Deputy 'de oturum açmasını sağlamak için, bu kullanıcıların Deputy 'de sağlanması gerekir. Depolun, sağlama durumunda el ile gerçekleştirilen bir görevdir.
 
 #### <a name="to-provision-a-user-account-perform-the-following-steps"></a>Bir kullanıcı hesabı sağlamak için aşağıdaki adımları gerçekleştirin:
 
-1. Operasyon şirketinizin sitesi için bir yönetici olarak oturum açın.
+1. Depolduğunuz şirket sitenizde yönetici olarak oturum açın.
 
-2. Üst gezinti bölmesinde tıklatın **kişiler**.
+2. Üst gezinti bölmesinde, **kişiler**' e tıklayın.
    
-    ![Kişiler](./media/deputy-tutorial/tutorial_deputy_001.png "kişiler")
+    ![Düzenliyor](./media/deputy-tutorial/tutorial_deputy_001.png "Kişiler")
 
-3. Tıklayın **ekleme kişiler** düğmesini tıklatın ve tıklatın **tek bir kişi ekleyin**.
+3. **Kişi ekle** düğmesine tıklayın ve **tek kişi ekle**' ye tıklayın.
    
-    ![Kişi Ekle](./media/deputy-tutorial/tutorial_deputy_002.png "Kişi Ekle")
+    ![Kişi ekle](./media/deputy-tutorial/tutorial_deputy_002.png "Kişi ekle")
 
-4. Aşağıdaki adımları uygulayın ve tıklayın **Kaydet ve davet**.
+4. Aşağıdaki adımları uygulayın ve **davet & kaydet**' e tıklayın.
    
-    ![Yeni kullanıcı](./media/deputy-tutorial/tutorial_deputy_003.png "yeni kullanıcı")
+    ![Yeni Kullanıcı](./media/deputy-tutorial/tutorial_deputy_003.png "Yeni Kullanıcı")
 
-    a. İçinde **adı** metin kutusuna bir kullanıcı gibi tür adını **BrittaSimon**.
+    a. **Ad** metin kutusuna, **Brittasıon**gibi kullanıcının adını yazın.
    
-    b. İçinde **e-posta** metin sağlamak istediğiniz bir Azure AD hesabı e-posta adresini yazın.
+    b. **E-posta** metin kutusuna, sağlamak Istediğiniz BIR Azure AD hesabının e-posta adresini yazın.
    
-    c. İçinde **sırasında iş** metin iş adı yazın.
+    c. **Çalışma** metin kutusuna iş adını yazın.
    
-    d. Tıklayın **Kaydet ve davet** düğmesi.
+    d. **Davet & kaydet** düğmesine tıklayın.
 
-5. AAD hesap sahibinin e-posta alır ve etkin hale gelir önce hesabını onaylamak için bir bağlantı izler. Herhangi diğer operasyon kullanıcı hesabı oluşturma araçları kullanabilir veya API'leri için AAD kullanıcı hesapları sağlamak operasyon müdür Yardımcısı tarafından sağlanan.
+5. AAD hesap sahibi bir e-posta alır ve etkin hale gelmeden önce hesaplarını doğrulamak için bir bağlantıyı izler. AAD Kullanıcı hesaplarını sağlamak için, Deputy tarafından sunulan diğer tüm Kullanıcı hesabı oluşturma araçlarını veya API 'Leri kullanabilirsiniz.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-Erişim paneli operasyon kutucuğa tıkladığınızda, size otomatik olarak SSO'yu ayarlama operasyon için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelindeki depolduğunuz kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız Depolduğunuz için otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

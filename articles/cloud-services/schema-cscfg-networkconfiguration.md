@@ -1,37 +1,32 @@
 ---
-title: Azure bulut Hizmetleri NetworkConfiguration şeması | Microsoft Docs
+title: Azure Cloud Services NetworkConfiguration şeması | Microsoft Docs
 ms.custom: ''
 ms.date: 12/07/2016
 services: cloud-services
-ms.reviewer: ''
 ms.service: cloud-services
-ms.suite: ''
-ms.tgt_pltfrm: ''
 ms.topic: reference
-ms.assetid: c1b94a9e-46e8-4a18-ac99-343c94b1d4bd
 caps.latest.revision: 28
-author: jpconnock
-ms.author: jeconnoc
-manager: timlt
-ms.openlocfilehash: fb833904502c0c42b46201fd46a368de0376277c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+author: georgewallace
+ms.author: gwallace
+ms.openlocfilehash: c5a6501c71420ca5b43c4c08c2a29ae5f27b4af5
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62130285"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68945917"
 ---
-# <a name="azure-cloud-services-config-networkconfiguration-schema"></a>Azure bulut Hizmetleri Yapılandırma NetworkConfiguration şeması
+# <a name="azure-cloud-services-config-networkconfiguration-schema"></a>Azure Cloud Services config NetworkConfiguration şeması
 
-`NetworkConfiguration` Hizmet yapılandırma dosyası öğesi sanal ağ ve DNS değerleri belirtir. Bu ayarlar, bulut Hizmetleri için isteğe bağlıdır.
+Hizmet yapılandırma dosyasının öğesi sanal ağ ve DNS değerlerini belirtir. `NetworkConfiguration` Bu ayarlar, bulut hizmetleri için isteğe bağlıdır.
 
-Sanal ağlar ve ilişkili şemaları hakkında daha fazla bilgi için aşağıdaki kaynak kullanabilirsiniz:
+Sanal ağlar ve ilişkili şemalar hakkında daha fazla bilgi edinmek için aşağıdaki kaynağı kullanabilirsiniz:
 
-- [Bulut hizmeti (Klasik) yapılandırma şeması](schema-cscfg-file.md)
-- [Bulut hizmeti (Klasik) tanım Şeması](schema-csdef-file.md)
-- [Sanal ağ (Klasik) oluşturma](../virtual-network/virtual-networks-create-vnet-classic-pportal.md)
+- [Bulut hizmeti (klasik) yapılandırma şeması](schema-cscfg-file.md)
+- [Bulut hizmeti (klasik) Tanım Şeması](schema-csdef-file.md)
+- [Sanal ağ oluşturma (klasik)](../virtual-network/virtual-networks-create-vnet-classic-pportal.md)
 
 ## <a name="networkconfiguration-element"></a>NetworkConfiguration öğesi
-Aşağıdaki örnekte gösterildiği `NetworkConfiguration` öğesi ve onun alt öğeleri.
+Aşağıdaki örnek `NetworkConfiguration` öğesi ve onun alt öğelerini gösterir.
 
 ```xml
 <ServiceConfiguration>
@@ -49,7 +44,7 @@ Aşağıdaki örnekte gösterildiği `NetworkConfiguration` öğesi ve onun alt 
         <DnsServer name="<server-name>" IPAddress="<server-address>" />
       </DnsServers>
     </Dns>
-    <VirtualNetworkSite name="<site-name>"/>
+    <VirtualNetworkSite name="Group <RG-VNet> <VNet-name>"/>
     <AddressAssignments>
       <InstanceAddress roleName="<role-name>">
         <Subnets>
@@ -64,18 +59,18 @@ Aşağıdaki örnekte gösterildiği `NetworkConfiguration` öğesi ve onun alt 
 </ServiceConfiguration>
 ```
 
-Aşağıdaki tabloda, alt öğelerini açıklar `NetworkConfiguration` öğesi.
+Aşağıdaki tablo, `NetworkConfiguration` öğesinin alt öğelerini açıklar.
 
 | Öğe       | Açıklama |
 | ------------- | ----------- |
-| AccessControl | İsteğe bağlı. Bir bulut Hizmeti uç noktalarına erişim için kuralları belirtir. Erişim denetimi adı için bir dize tarafından tanımlanan `name` özniteliği. `AccessControl` Öğesi içeren bir veya daha fazla `Rule` öğeleri. Birden fazla `AccessControl` öğesi tanımlanabilir.|
-| Kural | İsteğe bağlı. Bir belirtilen alt ağ IP adresi aralığı için alınması gereken eylemi belirtir. Kural sırası için bir dize değeri tarafından tanımlanan `order` özniteliği. Düşük kuralı, daha yüksek öncelik numarası. Örneğin, kuralları 100, 200 ve 300 sıra numaraları ile belirtilebilir. Sipariş numarası 100 kurala sahip bir sipariş 200 kuralına göre önceliklidir.<br /><br /> Kural için bir eylem için bir dize tarafından tanımlanan `action` özniteliği. Olası değerler şunlardır:<br /><br /> -   `permit` – Yalnızca belirtilen alt ağ aralığı paketleri uç noktası ile iletişim kurabildiğini belirtir.<br />-   `deny` – Belirtilen alt ağ aralığında Uç noktalara erişimin reddedildiğini belirtir.<br /><br /> Kural tarafından etkilenen alt ağ IP adresi aralığı için bir dize tarafından tanımlanan `remoteSubnet` özniteliği. Kural açıklaması için bir dize tarafından tanımlanan `description` özniteliği.|
-| EndpointAcl | İsteğe bağlı. Bir uç nokta erişim denetim kuralları atama belirtir. Uç nokta içeren rolün adı için bir dize tarafından tanımlanan `role` özniteliği. Uç nokta adı için bir dize tarafından tanımlanan `endpoint` özniteliği. Dizi adını `AccessControl` uç noktaya uygulanacak kuralları için bir dize içinde tanımlanmıştır `accessControl` özniteliği. Birden fazla `EndpointAcl` öğeleri tanımlanabilir.|
-| DnsServer | İsteğe bağlı. Bir DNS sunucusu ayarlarını belirtir. DNS sunucuları olmadan bir sanal ağ ayarları belirtebilirsiniz. DNS sunucusu adı için bir dize tarafından tanımlanan `name` özniteliği. DNS sunucusunun IP adresi için bir dize tarafından tanımlanan `IPAddress` özniteliği. IP adresi geçerli bir IPv4 adresi olmalıdır.|
-| VirtualNetworkSite | İsteğe bağlı. Bulut hizmetinizin dağıtmak istediğiniz sanal ağ alanı adını belirtir. Bu ayar, sanal bir ağ sitesi oluşturmaz. Sanal ağınız için ağ dosyasında önceden tanımlanmış bir site başvurduğu. Bir bulut hizmeti, yalnızca bir sanal ağ üyesi olabilir. Bu ayar belirtmezseniz, bulut hizmetine bir sanal ağa dağıtılmaz. Sanal ağ alanı adını bir dize tarafından tanımlanan `name` özniteliği.|
-| InstanceAddress | İsteğe bağlı. İlişki rolü bir alt ağ veya alt ağ kümesi sanal ağ içinde belirtir. Bir rol adı için bir örnek adresi ile ilişkilendirdiğinizde, bu rol, ilişkili olmasını istediğiniz alt ağlar belirtebilirsiniz. `InstanceAddress` Bir alt öğe içeriyor. Alt ağlar ve alt ağ ile ilişkili rol adı için bir dize tarafından tanımlanan `roleName` özniteliği.|
-| Alt ağ | İsteğe bağlı. Alt ağ adı ağ yapılandırma dosyasında karşılık gelen alt ağı belirtir. Alt ağ adı için bir dize tarafından tanımlanan `name` özniteliği.|
-| ReservedIP | İsteğe bağlı. Dağıtım ile ilişkilendirilmesi gereken ayrılmış IP adresini belirtir. Ayrılmış IP adresi oluşturmak için ayrılmış IP adresi oluşturma kullanmanız gerekir. Her dağıtım bir bulut hizmetinde bir ayrılmış IP adresi ile ilişkilendirilebilir. Ayrılmış IP adresi adı için bir dize tarafından tanımlanan `name` özniteliği.|
+| AccessControl | İsteğe bağlı. Bir bulut hizmetindeki uç noktalara erişim kurallarını belirtir. Erişim denetimi adı, özniteliği için `name` bir dize tarafından tanımlanır. Öğe bir veya daha fazla `Rule` öğe içeriyor. `AccessControl` Birden fazla öğe tanımlanabilir. `AccessControl`|
+| Kural | İsteğe bağlı. Belirli bir alt ağ IP adresi aralığı için gerçekleştirilecek eylemi belirtir. Kuralın sırası, `order` öznitelik için bir dize değeri tarafından tanımlanır. Kural sayısı daha yüksek öncelik olur. Örneğin, kurallar 100, 200 ve 300 sıra numaralarıyla belirtilebilir. 100 sıra numarasına sahip kural, 200 sırasına sahip kurala göre önceliklidir.<br /><br /> Kural eylemi, `action` özniteliği için bir dize tarafından tanımlanır. Olası değerler şunlardır:<br /><br /> -   `permit`– Yalnızca belirtilen alt ağ aralığından gelen paketlerin uç noktayla iletişim kurabildiğini belirtir.<br />-   `deny`– Belirtilen alt ağ aralığındaki uç noktalara erişimin reddedildiğini belirtir.<br /><br /> Kuraldan etkilenen IP adreslerinin alt ağ aralığı, `remoteSubnet` özniteliği için bir dize tarafından tanımlanır. Kural açıklaması `description` özniteliği için bir dize tarafından tanımlanır.|
+| EndpointAcl | İsteğe bağlı. Bir uç noktaya erişim denetim kuralları atamasını belirtir. Uç noktasını içeren rolün adı, `role` öznitelik için bir dize tarafından tanımlanır. Uç noktanın adı, `endpoint` öznitelik için bir dize tarafından tanımlanır. Uç noktaya uygulanması gereken `AccessControl` kurallar kümesinin adı, `accessControl` öznitelik için bir dize içinde tanımlanır. Birden fazla öğe tanımlanabilir. `EndpointAcl`|
+| DnsServer | İsteğe bağlı. Bir DNS sunucusunun ayarlarını belirtir. Sanal ağ olmadan DNS sunucularının ayarlarını belirtebilirsiniz. DNS sunucusunun adı, `name` özniteliği için bir dize tarafından tanımlanır. DNS sunucusunun IP adresi, `IPAddress` özniteliği için bir dize tarafından tanımlanır. IP adresi geçerli bir IPv4 adresi olmalıdır.|
+| Localnetworksite | İsteğe bağlı. Bulut hizmetinizi dağıtmak istediğiniz sanal ağ sitesinin adını belirtir. Bu ayar bir sanal ağ sitesi oluşturmaz. Sanal ağınız için Ağ dosyasında daha önce tanımlanan bir siteye başvurur. Bulut hizmeti yalnızca bir sanal ağın üyesi olabilir. Bu ayarı belirtmezseniz, bulut hizmeti sanal bir ağa dağıtılmaz. Sanal ağ sitesinin adı, `name` öznitelik için bir dize tarafından tanımlanır.|
+| Instanceaddress | İsteğe bağlı. Sanal ağdaki bir alt ağ veya alt ağ kümesi için bir rolün ilişkilendirmesini belirtir. Bir rol adını bir örnek adresiyle ilişkilendirdiğinizde, bu rolün ilişkilendirilmesini istediğiniz alt ağları belirtebilirsiniz. , `InstanceAddress` Bir alt ağ öğesi içerir. Alt ağ veya alt ağlarla ilişkili rolün adı, `roleName` öznitelik için bir dize tarafından tanımlanır.|
+| Subnet | İsteğe bağlı. Ağ yapılandırma dosyasındaki alt ağ adına karşılık gelen alt ağı belirtir. Alt ağın adı, `name` öznitelik için bir dize tarafından tanımlanır.|
+| Ayrıl | İsteğe bağlı. Dağıtımla ilişkilendirilmesi gereken ayrılmış IP adresini belirtir. Ayrılmış IP adresini oluşturmak için Create Ayrılmış IP adresini kullanmanız gerekir. Bir bulut hizmetindeki her dağıtım, ayrılmış bir IP adresi ile ilişkilendirilebilir. Ayrılmış IP adresinin adı, `name` öznitelik için bir dize tarafından tanımlanır.|
 
 ## <a name="see-also"></a>Ayrıca Bkz.
-[Bulut hizmeti (Klasik) yapılandırma şeması](schema-cscfg-file.md)
+[Bulut hizmeti (klasik) yapılandırma şeması](schema-cscfg-file.md)

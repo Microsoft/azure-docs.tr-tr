@@ -1,6 +1,6 @@
 ---
-title: Sorun giderme - Azure Otomasyon karma Runbook çalışanları
-description: Bu makalede Azure Otomasyon karma Runbook çalışanları sorun giderme bilgileri sağlar.
+title: Sorun giderme-Azure Otomasyonu karma runbook çalışanları
+description: Bu makalede, Azure Otomasyonu karma runbook çalışanları sorunlarını giderme hakkında bilgi sağlanır
 services: automation
 ms.service: automation
 ms.subservice: ''
@@ -9,60 +9,60 @@ ms.author: robreed
 ms.date: 02/12/2019
 ms.topic: conceptual
 manager: carmonm
-ms.openlocfilehash: 1ab9de1e11fa4f43894a6789fb2ba6fedbd1b77e
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 39cf6126f6212b6e83f1974dae7aaab0038e69c6
+ms.sourcegitcommit: 992e070a9f10bf43333c66a608428fcf9bddc130
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67477507"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71240993"
 ---
-# <a name="troubleshoot-hybrid-runbook-workers"></a>Karma Runbook çalışanları sorunlarını giderme
+# <a name="troubleshoot-hybrid-runbook-workers"></a>Karma runbook çalışanları sorunlarını giderme
 
-Bu makalede, karma Runbook çalışanları sorunlarını giderme hakkında bilgi sağlar.
+Bu makale, karma runbook çalışanları ile ilgili sorun giderme hakkında bilgi sağlar.
 
 ## <a name="general"></a>Genel
 
-Bir aracıda çalışan kaydetme, runbook işlerini alabilir ve durumunu raporlamak için Otomasyon hesabı ile iletişim kurmak için karma Runbook çalışanı bağlıdır. Windows için bu, Microsoft Monitoring Agent aracısıdır. Linux için bu Linux için OMS Aracısı olur.
+Karma Runbook Worker, çalışan, runbook işlerini alacak ve durumu raporlamak üzere otomasyon hesabınızla iletişim kurmak için bir aracıya bağımlıdır. Windows için bu aracı Microsoft Monitoring Agent. Linux için Linux için OMS Aracısı.
 
-### <a name="runbook-execution-fails"></a>Senaryo: Runbook yürütmesi başarısız
+### <a name="runbook-execution-fails"></a>Senaryon Runbook yürütmesi başarısız oluyor
 
 #### <a name="issue"></a>Sorun
 
-Runbook yürütmesi başarısız oluyor ve aşağıdaki hatayı alırsınız:
+Runbook yürütmesi başarısız olur ve şu hatayı alırsınız:
 
 ```error
 "The job action 'Activate' cannot be run, because the process stopped unexpectedly. The job action was attempted three times."
 ```
 
-Kısa bir süre içinde üç kez yürütülecek denemeden sonra runbook askıya alındı. Runbook'un tamamlanmasını kesintiye uğratabilecek koşullar vardır. Bu durumda, ilgili hata iletisini neden belirten ek bilgileri içermeyebilir.
+Runbook 'unuzu üç kez yürütmeyi denediğinde kısa süre sonra askıya alınır. Runbook 'un tamamlanmasını kesintiye uğratan durumlar vardır. Bu durumda, ilgili hata iletisi size nedenini bildiren herhangi bir ek bilgi içermeyebilir.
 
 #### <a name="cause"></a>Nedeni
 
-Olası nedenleri şunlardır:
+Olası olası nedenler şunlardır:
 
-* Runbook'lar yerel kaynakları ile kimlik doğrulaması yapamaz
+* Runbook 'lar yerel kaynaklarla kimlik doğrulayamıyorum
 
-* Karma çalışanı bir proxy veya güvenlik duvarı olduğunu
+* Karma çalışanı bir ara sunucu veya güvenlik duvarının arkasında
 
-* Runbook'lar yerel kaynakları ile kimlik doğrulaması yapamaz
+* Runbook 'lar yerel kaynaklarla kimlik doğrulayamıyorum
 
-* Karma Runbook çalışanı özelliğini çalıştırmak için yapılandırılmış bilgisayar en düşük donanım gereksinimlerini karşılamıyor.
+* Karma Runbook Worker özelliğini çalıştıracak şekilde yapılandırılan bilgisayar, en düşük donanım gereksinimlerini karşılamıyor.
 
 #### <a name="resolution"></a>Çözüm
 
-Bilgisayar bağlantı noktası 443 üzerinde *.azure-automation.net giden erişimi olduğunu doğrulayın.
+443 numaralı bağlantı noktasında, bilgisayarın *. azure-automation.net 'ye giden erişimi olduğunu doğrulayın.
 
-Bu özellik barındırmak için yapılandırılmadan önce karma Runbook çalışanı çalıştıran bilgisayarların en düşük donanım gereksinimlerini karşılamalıdır. Runbook'ları ve kullandıkları arka plan işlemleri sistemin üzerinde kullanılan ve runbook işi gecikmeler veya zaman aşımları neden neden olabilir.
+Karma runbook çalışanı çalıştıran bilgisayarlar, bu özelliği barındırmak üzere yapılandırılmadan önce en düşük donanım gereksinimlerini karşılamalıdır. Runbook 'lar ve kullandıkları arka plan işlemi sistemin aşırı kullanılmasına ve runbook iş gecikmelerine veya zaman aşımına neden olmasına neden olabilir.
 
-Karma Runbook çalışanı özelliğini çalıştıran bilgisayarın en düşük donanım gereksinimlerini karşıladığını doğrulayın. Aksi halde İzleyici CPU ve bellek karma Runbook çalışanı işlemlerin performansını ve Windows arasındaki herhangi bir ilişki belirlemek için kullanın. Bellek veya CPU baskısı ise, bu kaynakları yükseltmek gösterebilir. İş yükü taleplerini artıştır gerekli belirttiğinizde, ölçek ve en düşük gereksinimlerini destekleyen bir farklı işlem kaynağı de seçebilirsiniz.
+Karma Runbook Worker özelliğinin çalışacağı bilgisayarın en düşük donanım gereksinimlerini karşıladığını onaylayın. Varsa, karma Runbook Worker işlemlerinin ve pencerelerinin performansı arasındaki bağıntıyı öğrenmek için CPU ve bellek kullanımını izleyin. Bellek veya CPU baskısı varsa, bu durum kaynakları yükseltme gereksinimini gösterebilir. Ayrıca, iş yükü beklentilerinin bir artış belirtmesi durumunda en düşük gereksinimleri destekleyebilen ve ölçeklendirilen farklı bir işlem kaynağı seçebilirsiniz.
 
-Denetleme **Microsoft SMA** açıklamasıyla karşılık gelen bir olay için olay günlüğünü *Win32 işlemden çıkıldı [4294967295] kodla*. Bu hatanın nedenini kimlik doğrulaması, runbook'larında yapılandırılmış veya karma çalışanı grubu için farklı çalıştır kimlik bilgilerinin henüz ' dir. Gözden geçirme [Runbook izinleri](../automation-hrw-run-runbooks.md#runbook-permissions) doğru şekilde yapılandırdığınız kimlik doğrulaması için runbook'larınızı onaylamak için.
+# *[4294967295] kodlu Win32 Işlemine çıkıldı*açıklaması ile ilgili bir olay için **Microsoft-SMA** olay günlüğü 'nü denetleyin. Bu hatanın nedeni, runbook 'larınızda kimlik doğrulaması yapılandırmadınız veya karma çalışan grubu için farklı çalıştır kimlik bilgilerini belirtmezsiniz. Runbook 'larınız için kimlik doğrulamasını doğru şekilde yapılandırdığınızdan emin olmak için [runbook izinlerini](../automation-hrw-run-runbooks.md#runbook-permissions) gözden geçirin.
 
-### <a name="no-cert-found"></a>Senaryo: Karma Runbook çalışanında sertifika deposunda sertifika bulunamadı
+### <a name="no-cert-found"></a>Senaryon Karma Runbook Worker 'daki sertifika deposunda sertifika bulunamadı
 
 #### <a name="issue"></a>Sorun
 
-Bir karma Runbook çalışanı üzerinde çalışan bir runbook şu hata iletisiyle başarısız olur:
+Karma Runbook Worker üzerinde çalışan bir runbook şu hata iletisiyle başarısız oluyor:
 
 ```error
 Connect-AzureRmAccount : No certificate was found in the certificate store with thumbprint 0000000000000000000000000000000000000000
@@ -75,29 +75,29 @@ At line:3 char:1
 
 #### <a name="cause"></a>Nedeni
 
-Kullanmayı denediğinizde, bu hata oluşur. bir [farklı çalıştır hesabı](../manage-runas-account.md) karma Runbook çalışanı nerede farklı çalıştır hesabı sertifikası değil mevcut üzerinde çalışan bir runbook'ta. Karma Runbook çalışanları sertifika varlığı, farklı çalıştır hesabı tarafından düzgün çalışması için gerekli olan varsayılan olarak, yerel olarak yok.
+Bu hata, farklı çalıştır hesabı sertifikasının bulunmadığı bir karma runbook çalışanında çalışan bir runbook 'ta [Farklı Çalıştır hesabını](../manage-runas-account.md) kullanmaya çalıştığınızda oluşur. Karma runbook çalışanları varsayılan olarak, farklı çalıştır hesabının düzgün çalışması için gerekli olan sertifika varlığını yerel olarak içermez.
 
 #### <a name="resolution"></a>Çözüm
 
-Bir Azure sanal makinesi, karma Runbook çalışanı ise kullanabileceğiniz [Azure kaynakları için yönetilen kimlikleri](../automation-hrw-run-runbooks.md#managed-identities-for-azure-resources) yerine. Bu senaryo, farklı çalıştır hesabı yerine Azure VM'nin yönetilen kimlik kullanarak, kimlik doğrulaması basitleştirme Azure kaynaklarında kimlik doğrulamasını sağlar. Karma Runbook çalışanı şirket içi makine, makine üzerinde farklı çalıştır hesabı sertifikası yüklemeniz gerekir. Sertifikayı yüklemek öğrenmek için adımları çalıştırmak için bkz. [dışarı aktarma RunAsCertificateToHybridWorker](../automation-hrw-run-runbooks.md#runas-script) runbook.
+Karma runbook çalışanınız bir Azure sanal makinesi ise bunun yerine [Azure kaynakları Için Yönetilen kimlikler](../automation-hrw-run-runbooks.md#managed-identities-for-azure-resources) kullanabilirsiniz. Bu senaryo, kimlik doğrulamasını basitleştirecek farklı çalıştır hesabı yerine Azure VM 'nin yönetilen kimliğini kullanarak Azure kaynaklarında kimlik doğrulaması yapmanıza olanak sağlar. Karma Runbook Worker şirket içi bir makinedir ve farklı çalıştır hesabı sertifikasını makineye yüklemeniz gerekir. Sertifikayı yüklemeyi öğrenmek için, [Export-Runascercertificate Meditohybridworker](../automation-hrw-run-runbooks.md#runas-script) runbook 'unu çalıştırma adımlarına bakın.
 
 ## <a name="linux"></a>Linux
 
-Linux karma Runbook çalışanı çalışan kaydetme, runbook işlerini alabilir ve durumunu raporlamak için OMS aracısı üzerinde Otomasyon hesabınız ile iletişim kurmak Linux bağlıdır. Çalışan kaydı başarısız olursa hatanın bazı olası nedenleri şunlardır:
+Linux hibrit Runbook Worker, çalışan, runbook işlerini alacak ve durumu raporlamak üzere otomasyon hesabınızla iletişim kurmak için Linux için OMS Aracısı bağımlıdır. Çalışan kaydı başarısız olursa, hatanın olası nedenleri aşağıda verilmiştir:
 
-### <a name="oms-agent-not-running"></a>Senaryo: Linux için OMS Aracısı çalışmıyor
+### <a name="oms-agent-not-running"></a>Senaryon Linux için OMS Aracısı çalışmıyor
 
 #### <a name="issue"></a>Sorun
 
-Linux için OMS Aracısı çalışmıyor.
+Linux için OMS Aracısı çalışmıyor
 
 #### <a name="cause"></a>Nedeni
 
-Linux için OMS Aracısı çalışmıyorsa Linux karma Runbook çalışanı Azure Otomasyonu ile iletişim kurmasını önler. Aracı çeşitli nedenlerden dolayı çalışmıyor olabilir.
+Linux için OMS Aracısı çalışmıyorsa, Linux hibrit Runbook Worker 'ın Azure Otomasyonu ile iletişim kurmasını engeller. Aracı çeşitli nedenlerle çalışmıyor olabilir.
 
 #### <a name="resolution"></a>Çözüm
 
- Aracı, aşağıdaki komutu girerek çalıştığını doğrulamak: `ps -ef | grep python`. Python işlemlerle aşağıdakine benzer bir çıktı görmeniz gerekir **nxautomation** kullanıcı hesabı. Güncelleştirme yönetimi veya Azure Otomasyon çözümleri olmayan etkinleştirilirse, aşağıdaki işlemler hiçbiri çalışıyor.
+ Aşağıdaki komutu girerek aracının çalıştığını doğrulayın: `ps -ef | grep python`. Aşağıdakine benzer bir çıktı görmeniz gerekir, Python, **nxautomation** Kullanıcı hesabı ile işlenir. Güncelleştirme Yönetimi veya Azure Otomasyonu çözümleri etkinleştirilmemişse, aşağıdaki işlemlerden hiçbiri çalışmıyor.
 
 ```bash
 nxautom+   8567      1  0 14:45 ?        00:00:00 python /opt/microsoft/omsconfig/modules/nxOMSAutomationWorker/DSCResources/MSFT_nxOMSAutomationWorkerResource/automationworker/worker/main.py /var/opt/microsoft/omsagent/state/automationworker/oms.conf rworkspace:<workspaceId> <Linux hybrid worker version>
@@ -105,20 +105,20 @@ nxautom+   8593      1  0 14:45 ?        00:00:02 python /opt/microsoft/omsconfi
 nxautom+   8595      1  0 14:45 ?        00:00:02 python /opt/microsoft/omsconfig/modules/nxOMSAutomationWorker/DSCResources/MSFT_nxOMSAutomationWorkerResource/automationworker/worker/hybridworker.py /var/opt/microsoft/omsagent/<workspaceId>/state/automationworker/diy/worker.conf managed rworkspace:<workspaceId> rversion:<Linux hybrid worker version>
 ```
 
-Aşağıdaki listede, bir Linux karma Runbook çalışanı için başlatılan işlemleri gösterilmektedir. Tüm bulunan `/var/opt/microsoft/omsagent/state/automationworker/` dizin.
+Aşağıdaki listede bir Linux karma Runbook Worker için başlatılan süreçler gösterilmektedir. Bunlar `/var/opt/microsoft/omsagent/state/automationworker/` dizinde bulunur.
 
 
-* **OMS.conf** -çalışan manager işlemi değerdir. Doğrudan DSC başlatıldı.
+* **OMS. conf** -bu değer çalışan Yöneticisi işlemidir. Doğrudan DSC 'den başlatılır.
 
-* **Worker.conf** -bu işlem otomatik kayıtlı karma çalışan işlemi, çalışan Yöneticisi tarafından başlatılır. Bu işlem, güncelleştirme yönetimi tarafından kullanılır ve kullanıcı için saydamdır. Bu işlem, güncelleştirme yönetimi çözümü makine üzerinde etkin değilse mevcut değil.
+* **Worker. conf** -bu Işlem, otomatik kayıtlı karma çalışan sürecdir, çalışan Yöneticisi tarafından başlatılır. Bu işlem, Güncelleştirme Yönetimi tarafından kullanılır ve Kullanıcı için saydamdır. Güncelleştirme Yönetimi çözümü makinede etkinleştirilmemişse bu işlem yoktur.
 
-* **Diy/Worker.conf** -bu işlem kendin YAP karma çalışanı işlemidir. Kendin YAP karma çalışan işlemi, kullanıcı runbook'ları karma Runbook çalışanı üzerinde yürütmek için kullanılır. Yalnızca farklıdır, otomatik karma çalışan işlemi farklı bir yapılandırma kullandığı anahtar ayrıntılı olarak kayıtlı. Azure Otomasyon çözümünü devre dışıysa ve kendin YAP Linux karma çalışanı kayıtlı değilse, bu işlem mevcut değil.
+* **diy/Worker. conf** -bu Işlem, diy karma çalışan işlemidir. Karma Runbook Worker 'daki Kullanıcı runbook 'larını yürütmek için DIY karma çalışan işlemi kullanılır. Bu, yalnızca farklı bir yapılandırma kullanan anahtar ayrıntıdaki otomatik kayıtlı karma çalışan işleminden farklıdır. Bu işlem, Azure Otomasyonu çözümü devre dışı bırakılmışsa ve DIY Linux karma çalışanı kayıtlı değilse mevcut değildir.
 
-Linux çalışmadığı için OMS Aracısı hizmeti başlatmak için aşağıdaki komutu çalıştırırsanız: `sudo /opt/microsoft/omsagent/bin/service_control restart`.
+Linux için OMS Aracısı çalışmıyorsa, hizmeti başlatmak için şu komutu çalıştırın: `sudo /opt/microsoft/omsagent/bin/service_control restart`.
 
-### <a name="class-does-not-exist"></a>Senaryo: Belirtilen sınıf yok
+### <a name="class-does-not-exist"></a>Senaryon Belirtilen sınıf yok
 
-Şu hatayı görürseniz: **Belirtilen sınıf yok...** içinde `/var/opt/microsoft/omsconfig/omsconfig.log` sonra Linux için OMS Aracısı güncelleştirilmesi gerekiyor. OMS Aracısı'nı yeniden yüklemek için aşağıdaki komutu çalıştırın:
+Şu hatayı görürseniz: **Belirtilen sınıf yok..** `/var/opt/microsoft/omsconfig/omsconfig.log` bu durumda Linux için OMS Aracısı güncelleştirilmesi gerekir. OMS aracısını yeniden yüklemek için aşağıdaki komutu çalıştırın:
 
 ```bash
 wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh && sh onboard_agent.sh -w <WorkspaceID> -s <WorkspaceKey>
@@ -126,59 +126,59 @@ wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/inst
 
 ## <a name="windows"></a>Windows
 
-Windows karma Runbook çalışanı çalışan kaydetme, runbook işlerini alabilir ve durumunu raporlamak için Otomasyon hesabı ile iletişim kurmak için Microsoft Monitoring Agent bağlıdır. Çalışan kaydı başarısız olursa hatanın bazı olası nedenleri şunlardır:
+Windows hibrit Runbook Worker, çalışan, runbook işlerini alacak ve durumu raporlamak üzere otomasyon hesabınızla iletişim kurmak için Microsoft Monitoring Agent bağımlıdır. Çalışan kaydı başarısız olursa, hatanın olası nedenleri aşağıda verilmiştir:
 
-### <a name="mma-not-running"></a>Senaryo: Microsoft Monitoring Agent çalışmıyor
+### <a name="mma-not-running"></a>Senaryon Microsoft Monitoring Agent çalışmıyor
 
 #### <a name="issue"></a>Sorun
 
-`healthservice` Karma Runbook çalışanı makinede hizmet çalışmadığından.
+`healthservice` Hizmet karma Runbook Worker makinesinde çalışmıyor.
 
 #### <a name="cause"></a>Nedeni
 
-Microsoft İzleme Aracısı Windows hizmeti çalışmıyorsa bu durum, karma Runbook çalışanı Azure Otomasyonu ile iletişim kurmasını engeller.
+Microsoft Monitoring Agent Windows hizmeti çalışmıyorsa, bu durum karma Runbook Worker 'ın Azure Otomasyonu ile iletişim kurmasını engeller.
 
 #### <a name="resolution"></a>Çözüm
 
-PowerShell'de aşağıdaki komutu girerek aracının çalıştığını doğrulamak: `Get-Service healthservice`. Hizmet durdurulmuşsa hizmeti başlatmak için PowerShell'de aşağıdaki komutu girin: `Start-Service healthservice`.
+PowerShell 'de aşağıdaki komutu girerek aracının çalıştığını doğrulayın: `Get-Service healthservice`. Hizmet durdurulmuşsa, hizmeti başlatmak için PowerShell 'de aşağıdaki komutu girin: `Start-Service healthservice`.
 
-### <a name="event-4502"></a> Operations Manager günlüğünde 4502 olayı
+### <a name="event-4502"></a>Operations Manager günlüğünde olay 4502
 
 #### <a name="issue"></a>Sorun
 
-İçinde **uygulama ve hizmet günlükleri\operations Manager** olay günlüğü gördüğünüz olay 4502 ve içeren EventMessage **sorun**şu açıklama ile: *Hizmet tarafından sunulan sertifika \<wsid\>. oms.opinsights.azure.com değil Microsoft Hizmetleri için kullanılan bir sertifika yetkilisi tarafından verilmiş. TLS/SSL iletişimini kesen bir proxy çalıştırıyorsanız görmek için ağ yöneticinize başvurun. KB3126513 makalesinde bağlantı sorunlarına yönelik ek bilgiler vardır.*
+**Uygulama ve hizmetler Logs\Operations Manager** olay günlüğünde, aşağıdaki açıklamayla **Microsoft. EnterpriseManagement. HealthService. AzureAutomation. Hybridavgent** Içeren olay 4502 ve eventmessage ' u görürsünüz: *\<WSID\>. OMS.opinsights.Azure.com hizmeti tarafından sunulan sertifika, Microsoft Hizmetleri için kullanılan bir sertifika yetkilisi tarafından verilmemiş. Lütfen, TLS/SSL iletişimini engelleyen bir proxy çalıştırıp çalıştırmadığını görmek için ağ yöneticinize başvurun. KB3126513 makalesinde bağlantı sorunlarıyla ilgili ek sorun giderme bilgileri bulunur.*
 
 #### <a name="cause"></a>Nedeni
 
-Bu sorunun nedeni Microsoft Azure, Ara sunucu veya ağ güvenlik duvarı iletişimi engelliyor olabilir. Bilgisayar bağlantı noktası 443 üzerinde *.azure-automation.net giden erişimi olduğunu doğrulayın.
+Bu sorunun nedeni, proxy 'niz veya ağ güvenlik duvarınız Microsoft Azure ile iletişimi engelliyor olabilir. 443 bağlantı noktalarında, bilgisayarın *. azure-automation.net 'ye giden erişimi olduğunu doğrulayın.
 
 #### <a name="resolution"></a>Çözüm
 
-Günlükler her karma çalışanında C:\ProgramData\Microsoft\System Center\Orchestrator\7.2\SMA\Sandboxes, yerel olarak depolanır. Hiçbir uyarı veya hata olayları olup olmadığını kontrol edebilirsiniz **uygulama ve Hizmetleri Logs\Microsoft-SMA\Operations** ve **uygulama ve hizmet günlükleri\operations Manager** olduğu olay günlüğü bir bağlantı veya ekleme, Azure automation'da rol etkileyen diğer sorun veya normal işlemler sırasında altında sorunu gösterir.
+Günlükler, C:\ProgramData\Microsoft\System Center\orchestrator\7.2\sma\sandboxeson konumundaki her karma çalışan üzerinde yerel olarak depolanır. **Uygulama ve hizmetler Logs\Microsoft-SMA\Operations** ve **uygulama ve hizmetler logs\operations Manager** olay günlüğünde bir bağlantı veya diğer sorunu belirten bir uyarı veya hata olayı olup olmadığını kontrol edebilirsiniz. rol, normal işlemler altında Azure Otomasyonu veya sorunu için eklemeyi etkiler.
 
-[Runbook çıkışı ve iletileri](../automation-runbook-output-and-messages.md) yalnızca bulutta çalışan runbook işleri gibi için Azure Otomasyon karma çalışanı gönderilir. Bu gibi durumlarda, ayrıntılı ve ilerleme akışları ayrıca diğer runbook'lar için yaptığınız şekilde etkinleştirebilirsiniz.
+[Runbook çıkışı ve iletileri](../automation-runbook-output-and-messages.md) , yalnızca bulutta çalışan runbook işleri gibi karma çalışanların Azure Otomasyonu 'na gönderilir. Ayrıca ayrıntılı ve Ilerleme akışlarını diğer runbook 'larda yaptığınız şekilde de etkinleştirebilirsiniz.
 
-### <a name="corrupt-cache"></a> Karma Runbook çalışanı raporlama
+### <a name="corrupt-cache"></a>Karma Runbook Worker raporlama değil
 
 #### <a name="issue"></a>Sorun
 
-Karma Runbook çalışanı makineniz çalışıyor, ancak çalışma alanında makine için sinyal verileri göremiyorum.
+Karma Runbook Worker makineniz çalışıyor ancak çalışma alanındaki makinenin sinyal verilerini görmüyor olabilirsiniz.
 
-Aşağıdaki örnek sorgu makineleri bir çalışma alanı ve kendi son sinyal gösterir:
+Aşağıdaki örnek sorguda, bir çalışma alanındaki makineler ve bunların son sinyali gösterilmektedir:
 
 ```loganalytics
 // Last heartbeat of each computer
-Heartbeat 
+Heartbeat
 | summarize arg_max(TimeGenerated, *) by Computer
 ```
 
 #### <a name="cause"></a>Nedeni
 
-Karma Runbook çalışanı üzerinde bozuk bir önbelleği tarafından bu soruna neden olabilir.
+Bu sorun, karma Runbook Worker 'daki bozuk bir önbellekten kaynaklanıyor olabilir.
 
 #### <a name="resolution"></a>Çözüm
 
-Bu sorunu çözmek için karma Runbook çalışanı'için oturum açın ve aşağıdaki betiği çalıştırın. Bu betik Microsoft Monitoring Agent durdurur, önbelleğinde kaldırır ve hizmetini yeniden başlatır. Bu eylem, Azure Otomasyonu yapılandırmasını yeniden indirmek için karma Runbook çalışanı zorlar.
+Bu sorunu çözmek için karma runbook çalışanında oturum açın ve aşağıdaki betiği çalıştırın. Bu betik Microsoft Monitoring Agent sonlandırır, önbelleğini kaldırır ve hizmeti yeniden başlatır. Bu eylem, karma runbook çalışanını Azure Otomasyonu 'ndan yapılandırmasını yeniden indirmeye zorlar.
 
 ```powershell
 Stop-Service -Name HealthService
@@ -188,11 +188,11 @@ Remove-Item -Path 'C:\Program Files\Microsoft Monitoring Agent\Agent\Health Serv
 Start-Service -Name HealthService
 ```
 
-### <a name="already-registered"></a>Senaryo: Karma Runbook çalışanı eklenemiyor
+### <a name="already-registered"></a>Senaryon Karma Runbook Worker ekleyemezsiniz
 
 #### <a name="issue"></a>Sorun
 
-Bir karma Runbook çalışanı kullanarak eklenmeye çalışılırken şu iletiyi alıyorsunuz `Add-HybridRunbookWorker` cmdlet'i.
+`Add-HybridRunbookWorker` Cmdlet 'ini kullanarak karma Runbook Worker eklemeye çalışırken aşağıdaki iletiyi alırsınız.
 
 ```error
 Machine is already registered
@@ -200,19 +200,19 @@ Machine is already registered
 
 #### <a name="cause"></a>Nedeni
 
-Bu makinede zaten farklı bir Otomasyon hesabı ile kayıtlı değilse veya karma Runbook çalışanı bir makineden kaldırdıktan sonra yeniden eklemeyi denerseniz neden olabilir.
+Bu, makinenin farklı bir Otomasyon hesabıyla zaten kayıtlı olması veya bir makineden kaldırıldıktan sonra karma Runbook Worker 'ı yeniden eklemeye çalışırsanız meydana gelir.
 
 #### <a name="resolution"></a>Çözüm
 
-Bu sorunu çözmek için aşağıdaki kayıt defteri anahtarını kaldırın ve yeniden `HealthService` deneyin `Add-HybridRunbookWorker` cmdlet'ini yeniden:
+Bu sorunu çözmek için, aşağıdaki kayıt defteri anahtarını kaldırın ve yeniden başlatın `HealthService` ve `Add-HybridRunbookWorker` cmdlet 'i yeniden deneyin:
 
 `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\HybridRunbookWorker`
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Sorununuzu görmediniz veya sorununuzu çözmenize yüklenemiyor, daha fazla destek için aşağıdaki kanalları birini ziyaret edin:
+Sorununuzu görmüyorsanız veya sorununuzu çözemediyseniz, daha fazla destek için aşağıdaki kanallardan birini ziyaret edin:
 
 * [Azure Forumları](https://azure.microsoft.com/support/forums/) aracılığıyla Azure uzmanlarından yanıtlar alın
 * [@AzureSupport](https://twitter.com/azuresupport) hesabı ile bağlantı kurun. Bu resmi Microsoft Azure hesabı, müşteri deneyimini geliştirmek için Azure topluluğunu doğru kaynaklara ulaştırır: yanıtlar, destek ve uzmanlar.
-* Daha fazla yardıma ihtiyacınız varsa, bir Azure destek olayına dosya. Git [Azure Destek sitesi](https://azure.microsoft.com/support/options/) seçip **alma desteği**.
+* Daha fazla yardıma ihtiyacınız varsa, bir Azure destek olayı dosyası gönderebilirsiniz. [Azure destek sitesine](https://azure.microsoft.com/support/options/) gidin ve **Destek Al**' ı seçin.
 

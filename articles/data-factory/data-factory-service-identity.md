@@ -1,6 +1,6 @@
 ---
-title: Yönetilen kimliği için Data Factory | Microsoft Docs
-description: Azure Data Factory için yönetilen kimlik hakkında öğrenin.
+title: Data Factory için yönetilen kimlik
+description: Azure Data Factory için yönetilen kimlik hakkında bilgi edinin.
 services: data-factory
 author: linda33wj
 manager: craigg
@@ -11,52 +11,52 @@ ms.tgt_pltfrm: na
 ms.topic: conceptual
 ms.date: 04/08/2019
 ms.author: jingwang
-ms.openlocfilehash: 3c1bb38eb12ce77d172257706cd458cebda4bd8c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d8f65bef669e21af96ffe86319602ca5d1eea2c1
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66153412"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73822724"
 ---
 # <a name="managed-identity-for-data-factory"></a>Data Factory için yönetilen kimlik
 
-Bu makale, yönetilen kimlik ne olduğunu anlamanıza yardımcı olur (eski adıyla yönetilen hizmet kimliği/MSI olarak da bilinir) Data Factory ve nasıl çalışır.
+Bu makale, Data Factory için yönetilen kimliği (eski adıyla Yönetilen Hizmet Kimliği/MSI) ve nasıl çalıştığını anlamanıza yardımcı olur.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="overview"></a>Genel Bakış
 
-Veri Fabrikası oluştururken, yönetilen bir kimlik factory oluşturmayla birlikte oluşturulabilir. Yönetilen kimlik Azure Activity Directory için kayıtlı bir yönetilen uygulama ve bu belirli veri üretecini temsil eder.
+Bir veri fabrikası oluştururken, yönetilen bir kimlik, fabrika oluşturma ile birlikte oluşturulabilir. Yönetilen kimlik, Azure Active Directory kayıtlı bir yönetilen uygulamadır ve bu belirli veri fabrikasını temsil eder.
 
-Data Factory için yönetilen kimlik aşağıdaki özellikleri avantajları:
+Data Factory yönetilen kimliği, aşağıdaki özellikleri avantajlarına yöneliktir:
 
-- [Azure anahtar Kasası'nda kimlik bilgisi Store](store-credentials-in-key-vault.md), bu durumda data factory yönetilen kimlik Azure Key Vault kimlik doğrulaması için kullanılır.
-- Bağlayıcıyı [Azure Blob Depolama](connector-azure-blob-storage.md), [Azure Data Lake depolama Gen1](connector-azure-data-lake-store.md), [Azure Data Lake depolama Gen2](connector-azure-data-lake-storage.md), [Azure SQL veritabanı](connector-azure-sql-database.md), ve [Azure SQL veri ambarı](connector-azure-sql-data-warehouse.md).
+- [Kimlik bilgilerini](store-credentials-in-key-vault.md), Azure Key Vault kimlik doğrulaması için veri fabrikası tarafından yönetilen kimliğin kullanıldığı Azure Key Vault depolayın.
+- [Azure Blob depolama](connector-azure-blob-storage.md), [Azure Data Lake Storage 1.](connector-azure-data-lake-store.md), [Azure Data Lake Storage 2.](connector-azure-data-lake-storage.md), [Azure SQL veritabanı](connector-azure-sql-database.md)ve [Azure SQL veri ambarı](connector-azure-sql-data-warehouse.md)dahil olmak üzere bağlayıcılar.
 - [Web etkinliği](control-flow-web-activity.md).
 
-## <a name="generate-managed-identity"></a>Yönetilen kimlik oluşturma
+## <a name="generate-managed-identity"></a>Yönetilen kimlik oluştur
 
-Data Factory için yönetilen kimliği şu şekilde oluşturulur:
+Data Factory için yönetilen kimlik şu şekilde oluşturulur:
 
-- Data factory sayesinde oluştururken **Azure portalı veya PowerShell**, yönetilen kimlik her zaman otomatik olarak oluşturulur.
-- Data factory sayesinde oluştururken **SDK**, yönetilen kimlik oluşturulur, yalnızca belirttiğiniz "kimlik yeni FactoryIdentity() =" oluşturma için Fabrika nesnesinde. Örnekte bakın [.NET hızlı başlangıç - veri fabrikası oluşturma](quickstart-create-data-factory-dot-net.md#create-a-data-factory).
-- Data factory sayesinde oluştururken **REST API**, yönetilen kimlik, istek gövdesinde "kimlik" bölümünde belirtirseniz oluşturulur. Örnekte bakın [veri fabrikası oluşturma - Hızlı Başlangıç'ı REST](quickstart-create-data-factory-rest-api.md#create-a-data-factory).
+- **Azure Portal veya PowerShell**aracılığıyla veri fabrikası oluştururken yönetilen kimlik her zaman otomatik olarak oluşturulur.
+- **SDK**aracılığıyla veri fabrikası oluştururken, yönetilen kimlik yalnızca, oluşturma için fabrika nesnesinde "Identity = New factoryıdentity ()" belirtirseniz oluşturulur. Bkz. [.net hızlı başlangıç-veri fabrikası oluşturma](quickstart-create-data-factory-dot-net.md#create-a-data-factory).
+- **REST API**aracılığıyla veri fabrikası oluştururken, yönetilen kimlik yalnızca istek gövdesinde "kimlik" bölümünü belirtirseniz oluşturulur. Bkz. [rest hızlı başlangıç-veri fabrikası oluşturma](quickstart-create-data-factory-rest-api.md#create-a-data-factory).
 
-Veri fabrikanızın aşağıdaki ilişkili yönetilen bir kimlik yok bulup bulamayacağınızı [yönetilen kimlik almak](#retrieve-managed-identity) yönergesi, açıkça oluşturun bir data factory kimlik Başlatıcı ile program aracılığıyla güncelleştirerek:
+Veri fabrikasının [yönetilen kimlik al](#retrieve-managed-identity) yönergesini izleyerek ilişkili bir yönetilen kimliği yoksa, kimlik başlatıcısı aracılığıyla veri fabrikasını programlı bir şekilde güncelleştirerek bir tane açıkça oluşturabilirsiniz:
 
 - [PowerShell kullanarak yönetilen kimlik oluşturma](#generate-managed-identity-using-powershell)
 - [REST API kullanarak yönetilen kimlik oluşturma](#generate-managed-identity-using-rest-api)
-- [Bir Azure Resource Manager şablonu kullanarak bir yönetilen kimlik oluşturma](#generate-managed-identity-using-an-azure-resource-manager-template)
-- [Yönetilen kimlik kullanarak SDK oluşturma](#generate-managed-identity-using-sdk)
+- [Azure Resource Manager şablonu kullanarak yönetilen kimlik oluşturma](#generate-managed-identity-using-an-azure-resource-manager-template)
+- [SDK kullanarak yönetilen kimlik oluşturma](#generate-managed-identity-using-sdk)
 
 >[!NOTE]
->- Yönetilen kimlik değiştirilemez. Zaten bir yönetilen kimliğe sahip bir veri fabrikası güncelleştirme hiçbir etkisi olmaz, yönetilen kimlik değişmeden tutulur.
->- Zaten bir yönetilen kimlik üretecini "kimlik" parametresini belirtmeden veya "kimlik" bölümünde REST istek gövdesinde belirtmeden sahip bir veri fabrikası güncelleştirirseniz, bir hata alırsınız.
->- Bir veri fabrikasını silmek, ilişkili yönetilen kimlik birlikte silinecek.
+>- Yönetilen kimlik değiştirilemez. Zaten yönetilen bir kimliğe sahip olan bir veri fabrikasının güncelleştirilmesi hiçbir etkiye sahip olmayacaktır, yönetilen kimlik değişmeden tutulur.
+>- Fabrika nesnesinde "Identity" parametresi belirtmeden veya REST istek gövdesinde "kimlik" bölümünü belirtmeden yönetilen bir kimliğe sahip bir veri fabrikasını güncelleştirirseniz bir hata alırsınız.
+>- Bir veri fabrikasını sildiğinizde, ilişkili yönetilen kimlik de silinir.
 
 ### <a name="generate-managed-identity-using-powershell"></a>PowerShell kullanarak yönetilen kimlik oluşturma
 
-Çağrı **kümesi AzDataFactoryV2** "Kimlik" alanları yeni oluşturulan gördüğünüz daha sonra yeniden komutu:
+**Set-AzDataFactoryV2** komutunu tekrar çağırın, sonra yeni oluşturulan "kimlik" alanlarını görürsünüz:
 
 ```powershell
 PS C:\WINDOWS\system32> Set-AzDataFactoryV2 -ResourceGroupName <resourceGroupName> -Name <dataFactoryName> -Location <region>
@@ -72,13 +72,13 @@ ProvisioningState : Succeeded
 
 ### <a name="generate-managed-identity-using-rest-api"></a>REST API kullanarak yönetilen kimlik oluşturma
 
-İstek gövdesindeki "kimlik" bölümünde API çağrısı:
+İstek gövdesinde "Identity" bölümüyle API 'YI çağırın:
 
 ```
 PATCH https://management.azure.com/subscriptions/<subsID>/resourceGroups/<resourceGroupName>/providers/Microsoft.DataFactory/factories/<data factory name>?api-version=2018-06-01
 ```
 
-**İstek gövdesi**: "identity" ekleyin: {"type": "SystemAssigned"}.
+**İstek gövdesi**: "Identity": {"Type": "SystemAssigned"} ekleyin.
 
 ```json
 {
@@ -91,7 +91,7 @@ PATCH https://management.azure.com/subscriptions/<subsID>/resourceGroups/<resour
 }
 ```
 
-**Yanıt**: yönetilen kimlik otomatik olarak oluşturulur ve "kimlik" bölümüne uygun şekilde doldurulur.
+**Yanıt**: yönetilen kimlik otomatik olarak oluşturulur ve "kimlik" bölümü buna göre doldurulur.
 
 ```json
 {
@@ -114,9 +114,9 @@ PATCH https://management.azure.com/subscriptions/<subsID>/resourceGroups/<resour
 }
 ```
 
-### <a name="generate-managed-identity-using-an-azure-resource-manager-template"></a>Bir Azure Resource Manager şablonu kullanarak bir yönetilen kimlik oluşturma
+### <a name="generate-managed-identity-using-an-azure-resource-manager-template"></a>Azure Resource Manager şablonu kullanarak yönetilen kimlik oluşturma
 
-**Şablon**: "identity" ekleyin: {"type": "SystemAssigned"}.
+**Şablon**: "Identity": {"Type": "SystemAssigned"} ekleyin.
 
 ```json
 {
@@ -134,9 +134,9 @@ PATCH https://management.azure.com/subscriptions/<subsID>/resourceGroups/<resour
 }
 ```
 
-### <a name="generate-managed-identity-using-sdk"></a>Yönetilen kimlik kullanarak SDK oluşturma
+### <a name="generate-managed-identity-using-sdk"></a>SDK kullanarak yönetilen kimlik oluşturma
 
-Kimlik ile veri fabrikası create_or_update işlevi çağrısı yeni FactoryIdentity() =. .NET kullanarak örnek kod:
+Data Factory create_or_update işlevini Identity = New Factoryıdentity () ile çağırın. .NET kullanan örnek kod:
 
 ```csharp
 Factory dataFactory = new Factory
@@ -147,26 +147,26 @@ Factory dataFactory = new Factory
 client.Factories.CreateOrUpdate(resourceGroup, dataFactoryName, dataFactory);
 ```
 
-## <a name="retrieve-managed-identity"></a>Yönetilen kimlik alma
+## <a name="retrieve-managed-identity"></a>Yönetilen kimliği al
 
-Yönetilen kimlik Azure portalından veya programlama yoluyla alabilirsiniz. Aşağıdaki bölümlerde bazı örnekler gösterilmektedir.
+Yönetilen kimliği Azure portal veya programlı bir şekilde alabilirsiniz. Aşağıdaki bölümlerde bazı örnekler gösterilmektedir.
 
 >[!TIP]
-> Yönetilen kimlik görmüyorsanız [yönetilen kimlik oluşturmak](#generate-managed-identity) fabrikanızı güncelleştirerek.
+> Yönetilen kimliği görmüyorsanız, fabrikanızı güncelleştirerek [yönetilen kimlik oluşturun](#generate-managed-identity) .
 
-### <a name="retrieve-managed-identity-using-azure-portal"></a>Azure portalını kullanarak yönetilen kimliğini alma
+### <a name="retrieve-managed-identity-using-azure-portal"></a>Azure portal kullanarak yönetilen kimlik alma
 
-Bulabilirsiniz yönetilen kimlik bilgileri Azure portalından -> data factory'nizi -> Özellikler:
+Data Factory-> özelliklerinizi > Azure portal yönetilen kimlik bilgilerini bulabilirsiniz:
 
-- Yönetilen Nesne Kimliği
-- Yönetilen kimliği Kiracısı
-- **Identity Application kimliği yönetilen** > Bu değeri kopyalayın
+- Yönetilen kimlik nesnesi KIMLIĞI
+- Yönetilen kimlik kiracısı
+- **Yönetilen kimlik uygulama kimliği** > Bu değeri kopyalayın
 
-![Yönetilen kimlik alma](media/data-factory-service-identity/retrieve-service-identity-portal.png)
+![Yönetilen kimliği al](media/data-factory-service-identity/retrieve-service-identity-portal.png)
 
-### <a name="retrieve-managed-identity-using-powershell"></a>PowerShell kullanarak yönetilen kimliğini alma
+### <a name="retrieve-managed-identity-using-powershell"></a>PowerShell kullanarak yönetilen kimlik alma
 
-Yönetilen kimlik sorumlu kimliği ve Kiracı kimliği, belirli bir veri fabrikası gibi aldığınızda döndürülür:
+Yönetilen kimlik sorumlusu KIMLIĞI ve kiracı KIMLIĞI, belirli bir veri fabrikasını aşağıdaki şekilde aldığınızda döndürülür:
 
 ```powershell
 PS C:\WINDOWS\system32> (Get-AzDataFactoryV2 -ResourceGroupName <resourceGroupName> -Name <dataFactoryName>).Identity
@@ -176,7 +176,7 @@ PrincipalId                          TenantId
 765ad4ab-XXXX-XXXX-XXXX-51ed985819dc 72f988bf-XXXX-XXXX-XXXX-2d7cd011db47
 ```
 
-Sorumlu Kimliği kopyalayın, sonra aşağıdaki komutu Azure Active Directory ile asıl kimlik almak için parametre olarak çalıştırın. **ApplicationId**, hangi erişim vermek için kullanın:
+Sorumlu KIMLIĞINI kopyalayın ve ardından, erişim izni vermek için kullandığınız **ApplicationId**'yi almak için aşağıdaki Azure Active Directory komutunu parametresi olarak Principal ID ile çalıştırın:
 
 ```powershell
 PS C:\WINDOWS\system32> Get-AzADServicePrincipal -ObjectId 765ad4ab-XXXX-XXXX-XXXX-51ed985819dc
@@ -189,9 +189,9 @@ Type                  : ServicePrincipal
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Hangi yaparken ve yönetilen kimliği data factory'yi nasıl dağıtır aşağıdaki konulara bakın:
+Data Factory tarafından yönetilen kimliğin ne zaman ve nasıl kullanılacağını açıklayan aşağıdaki konulara bakın:
 
-- [Azure anahtar Kasası'nda kimlik bilgisi Store](store-credentials-in-key-vault.md)
-- [Azure Data Lake Store yönetilen kimliklerle Azure kaynaklarında kimlik doğrulaması için / için veri kopyalama](connector-azure-data-lake-store.md)
+- [Kimlik bilgilerini Azure Key Vault içinde depola](store-credentials-in-key-vault.md)
+- [Azure kaynakları kimlik doğrulaması için Yönetilen kimlikler kullanarak/veya Azure Data Lake Store veri kopyalama](connector-azure-data-lake-store.md)
 
-Bkz: [Azure kaynaklarına genel bakış için yönetilen kimlikleri](/azure/active-directory/managed-identities-azure-resources/overview) hangi veri fabrikası yönetilen kimliği, Azure kaynakları için yönetilen kimlikleri hakkında daha fazla arka plan temel alınır. 
+Veri Fabrikası tarafından yönetilen kimliğin temel aldığı Azure kaynakları için Yönetilen kimlikler hakkında genel bakış için bkz. [Azure kaynakları Için Yönetilen kimlikler](/azure/active-directory/managed-identities-azure-resources/overview) . 

@@ -1,40 +1,40 @@
 ---
-title: Bir HDInsight kümesi - Azure silme
-description: Bir HDInsight kümesini silebilirsiniz çeşitli yollar hakkında bilgiler.
+title: HDInsight kümesini silme-Azure
+description: Azure HDInsight kümesini silebilmeniz için çeşitli yollarla ilgili bilgiler
 author: hrasheed-msft
+ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
 ms.date: 04/17/2019
-ms.author: hrasheed
 ms.custom: H1Hack27Feb2017,hdinsightactive
-ms.openlocfilehash: eca7b4f8bd7e91bc8dcb9bcc49ed3b981010aaee
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a28d59cb35004fac6b069f2aa41042b4d46e443f
+ms.sourcegitcommit: c79aa93d87d4db04ecc4e3eb68a75b349448cd17
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64721024"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71091532"
 ---
-# <a name="delete-an-hdinsight-cluster-using-your-browser-powershell-or-the-azure-cli"></a>Tarayıcınız, PowerShell veya Azure CLI kullanarak bir HDInsight kümesini silme
+# <a name="delete-an-hdinsight-cluster-using-your-browser-powershell-or-the-azure-cli"></a>Tarayıcınızı, PowerShell 'i veya Azure CLı 'yı kullanarak bir HDInsight kümesini silme
 
-HDInsight kümesi faturalandırması küme oluşturulduğunda başlar ve küme silindiğinde sona erer. Fatura dakikalara eşit olarak dağıtıldığından, kullanılmayan kümelerinizi mutlaka silmelisiniz. Bu belgede, kullanarak küme silme hakkında bilgi edinin [Azure portalında](https://portal.azure.com), [Az Azure PowerShell Modülü](https://docs.microsoft.com/powershell/azure/overview)ve [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest).
+HDInsight kümesi faturalandırması küme oluşturulduğunda başlar ve küme silindiğinde sona erer. Fatura dakikalara eşit olarak dağıtıldığından, kullanılmayan kümelerinizi mutlaka silmelisiniz. Bu belgede [Azure Portal](https://portal.azure.com), [Azure PowerShell az Module](https://docs.microsoft.com/powershell/azure/overview)ve [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)kullanarak bir kümeyi silmeyi öğreneceksiniz.
 
 > [!IMPORTANT]  
-> Azure depolama hesapları HDInsight küme silme silmez veya Data Lake Storage kümeyle ilişkili. Gelecekte bu Hizmetleri'nde depolanan verileri yeniden kullanabilirsiniz.
+> HDInsight kümesini silmek, kümeyle ilişkili Azure depolama hesaplarını veya Data Lake Storage silmez. Gelecekte bu hizmetlerde depolanan verileri yeniden kullanabilirsiniz.
 
 ## <a name="azure-portal"></a>Azure portal
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
 
-2. Sol menüden gidin **tüm hizmetleri** > **Analytics** > **HDInsight kümeleri** ve kümenizi seçin.
+2. Sol menüden **Tüm Service** > **Analytics** > **HDInsight kümelerine** gidin ve kümenizi seçin.
 
-3. Varsayılan görünümünden seçim **Sil** simgesi. Kümenizi sildiğinizden için istemi izleyin.
-   
-    ![Sil simgesi](./media/hdinsight-delete-cluster/deletecluster.png)
+3. Varsayılan görünümden **Sil** simgesini seçin. Kümenizi silmek için istemi izleyin.
 
-## <a name="azure-powershell-az-module"></a>Azure PowerShell Az Modülü
+    ![HDInsight küme silme düğmesi](./media/hdinsight-delete-cluster/hdinsight-delete-cluster.png)
 
-Değiştirin `CLUSTERNAME` aşağıdaki kod, HDInsight kümenizin adıyla. Bir PowerShell isteminden kümeyi silmek için aşağıdaki komutu girin:
+## <a name="azure-powershell-az-module"></a>Azure PowerShell az Module
+
+Aşağıdaki `CLUSTERNAME` koddaki HDInsight kümenizin adıyla değiştirin. Bir PowerShell isteminden, kümeyi silmek için aşağıdaki komutu girin:
 
 ```powershell
 Remove-AzHDInsightCluster -ClusterName CLUSTERNAME
@@ -42,7 +42,7 @@ Remove-AzHDInsightCluster -ClusterName CLUSTERNAME
 
 ## <a name="azure-cli"></a>Azure CLI
 
-Değiştirin `CLUSTERNAME` HDInsight kümenizin adıyla ve `RESOURCEGROUP` aşağıdaki kod, kaynak grubunuzda adı.  Bir komut istemi'nden kümeyi silmek için şunu girin:
+' `CLUSTERNAME` Yi HDInsight kümenizin adıyla ve `RESOURCEGROUP` kaynak grubunuzun adı ile aşağıdaki kodda olacak şekilde değiştirin.  Bir komut isteminden, kümeyi silmek için aşağıdakileri girin:
 
 ```azurecli
 az hdinsight delete --name CLUSTERNAME --resource-group RESOURCEGROUP

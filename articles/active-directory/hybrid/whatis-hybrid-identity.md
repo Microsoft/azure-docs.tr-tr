@@ -1,6 +1,6 @@
 ---
 title: Azure Active Directory ile karma kimlik nedir?
-description: Karma kimlik hem şirket içi kimlik doğrulaması ve yetkilendirme için genel bir kullanıcı kimliği olan ve bulut.
+description: Karma kimliğin hem şirket içinde hem de bulutta kimlik doğrulama ve yetkilendirme için ortak bir kullanıcı kimliği vardır.
 keywords: Azure AD Connect’e giriş, Azure AD Connect’e genel bakış, Azure AD Connect nedir, active directory yükleme
 services: active-directory
 author: billmath
@@ -13,22 +13,22 @@ ms.date: 05/17/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9c43238d44b2309d105ef14e696a5a16848d0b58
-ms.sourcegitcommit: 67625c53d466c7b04993e995a0d5f87acf7da121
+ms.openlocfilehash: c3d681dd06f07f6174e31b59cccf42df5dc16a1e
+ms.sourcegitcommit: 6cbf5cc35840a30a6b918cb3630af68f5a2beead
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/20/2019
-ms.locfileid: "65896824"
+ms.lasthandoff: 08/05/2019
+ms.locfileid: "68779843"
 ---
 # <a name="what-is-hybrid-identity-with-azure-active-directory"></a>Azure Active Directory ile karma kimlik nedir?
 
-Bugün, şirketler ve kuruluşlar şirket içi bir karışımını daha gelmektedir ve bulut uygulamalarına.  Kullanıcılar bu uygulamaları hem şirket içi erişim gerektirir ve bulut. Hem şirket içi kullanıcıları yönetme ve senaryoları zor bulut yürütmelisiniz. 
+Bugün, işletmeler ve şirketler, şirket içi ve bulut uygulamalarının daha fazla ve daha fazlasını haline geliyor.  Kullanıcılar bu uygulamaları hem şirket içi erişim gerektirir ve bulut. Kullanıcıları hem şirket içinde hem de bulutta yönetmek, zorlu senaryolar doğurur. 
 
 Microsoft'un kimlik çözümleri, şirket içi ve bulut tabanlı özellikleri kapsar.  Kimlik doğrulaması ve yetkilendirme konumdan bağımsız olarak tüm kaynaklara genel bir kullanıcı kimliği bu çözümler oluşturun. Bu diyoruz **karma kimlik**.
 
-Karma kimlik Azure AD'ye ve karma Kimlik Yönetimi bu senaryoları mümkün olur.
+Azure AD ve karma kimlik yönetimine yönelik karma kimlik ile bu senaryolar mümkün olur.
 
-Azure AD ile karma kimlik elde etmek için üç kimlik doğrulama yöntemlerinden biri, senaryolarınıza bağlı olarak kullanılabilir.   Üç yöntem şunlardır: 
+Azure AD ile karma kimlik elde etmek için, senaryolarınıza bağlı olarak üç kimlik doğrulama yönteminden biri kullanılabilir.   Üç yöntem şunlardır: 
 
 - **[Parola Karması eşitleme (PHS)](whatis-phs.md)**  
 - **[Geçişli kimlik doğrulaması (PTA)](how-to-connect-pta.md)**  
@@ -36,7 +36,7 @@ Azure AD ile karma kimlik elde etmek için üç kimlik doğrulama yöntemlerinde
 
 Bu kimlik doğrulama yöntemleri de sağlamak [çoklu oturum açma](how-to-connect-sso.md) özellikleri.  Çoklu oturum açma, kullanıcılarınızın şirket ağınıza bağlı cihazlarından Kurumsal olduklarında, otomatik olarak imzalar.
 
-Ek bilgi için bkz: [, Azure Active Directory karma kimlik çözümü için doğru kimlik doğrulama yöntemini seçin](https://docs.microsoft.com/azure/security/azure-ad-choose-authn). 
+Ek bilgi için bkz: [, Azure Active Directory karma kimlik çözümü için doğru kimlik doğrulama yöntemini seçin](https://docs.microsoft.com/azure/security/fundamentals/choose-ad-authn). 
 
 ## <a name="common-scenarios-and-recommendations"></a>Ortak senaryolar ve öneriler 
 
@@ -45,14 +45,14 @@ Aşağıda, bazı yaygın karma kimlik ve erişim yönetimi senaryoları, hangi 
 |Şunu istiyorum:|PHS ve SSO<sup>1</sup>| PTA ve SSO<sup>2</sup> | AD FS<sup>3</sup>| 
 |-----|-----|-----|-----| 
 |Şirket içi Active Directory ortamında oluşturulan yeni kullanıcı, kişi ve grup hesaplarının otomatik olarak bulutla eşitlenmesi.|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| ![Önerilen](./media/whatis-hybrid-identity/ic195031.png) |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
-|Kiracıma Office 365 karma senaryolar için ayarlayın.|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| ![Önerilen](./media/whatis-hybrid-identity/ic195031.png) |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
-|Kullanıcılarımın oturum açın ve şirket içi parolalarını kullanarak bulut hizmetlerine erişim sağlar.|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| ![Önerilen](./media/whatis-hybrid-identity/ic195031.png) |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
-|Tek şirket kimlik bilgilerini kullanarak oturum açmayı uygulayın.|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| ![Önerilen](./media/whatis-hybrid-identity/ic195031.png) |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)|  
-|Bulutta hiç parola karmaları depolanır emin olun.| |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
-|Çok faktörlü kimlik doğrulaması bulut tabanlı çözümler sağlar.|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
-|Şirket içi multi-Factor authentication çözümleri sağlar.| | |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
+|Office 365 karma senaryolar için kiracımı ayarlayın.|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| ![Önerilen](./media/whatis-hybrid-identity/ic195031.png) |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
+|Kullanıcılarım 'ın şirket içi parolalarını kullanarak bulut hizmetlerine oturum açmasını ve bunlara erişmelerini etkinleştirin.|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| ![Önerilen](./media/whatis-hybrid-identity/ic195031.png) |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
+|Şirket kimlik bilgilerini kullanarak çoklu oturum açma uygulayın.|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| ![Önerilen](./media/whatis-hybrid-identity/ic195031.png) |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)|  
+|Bulutta hiçbir parola karması depolanmamış olduğundan emin olun.| |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
+|Bulut tabanlı Multi-Factor Authentication çözümlerini etkinleştirin.|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)|![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
+|Şirket içi Multi-Factor Authentication çözümlerini etkinleştirin.| | |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
 |Kullanıcılarım için akıllı kart kimlik doğrulamasını destekler. <sup>4</sup>| | |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
-|Office Portalı'nda ve Windows 10 Masaüstü parola süre sonu bildirimleri görüntüleyin.| | |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
+|Parola süre sonu bildirimlerini Office portalında ve Windows 10 Desktop 'ta görüntüleyin.| | |![Önerilen](./media/whatis-hybrid-identity/ic195031.png)| 
 
 > <sup>1</sup> Çoklu oturum açma ile parola karması eşitleme. 
 > 
@@ -63,7 +63,7 @@ Aşağıda, bazı yaygın karma kimlik ve erişim yönetimi senaryoları, hangi 
 > <sup>4</sup> AD FS, kurumsal PKI çözümünüzle tümleştirilerek sertifika ile oturum açma imkanı sunulabilir. Bu sertifikalar MDM veya GPO gibi güvenilen sağlama kanalları aracılığıyla dağıtılan yazılımsal sertifikalar, akıllı kart sertifikaları (PIV/CAC kartları dahil) veya İç için Hello (sertifika güveni) olabilir. Akıllı kart kimlik doğrulaması desteği hakkında daha fazla bilgi için [bu bloga](https://blogs.msdn.microsoft.com/samueld/2016/07/19/adfs-certauth-aad-o365/) bakın. 
 > 
 
-## <a name="license-requirements-for-using-azure-ad-connect"></a>Azure AD Connect kullanarak için lisans gereksinimleri
+## <a name="license-requirements-for-using-azure-ad-connect"></a>Azure AD Connect kullanımı için lisans gereksinimleri
 
 [!INCLUDE [active-directory-free-license.md](../../../includes/active-directory-free-license.md)]
 

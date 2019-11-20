@@ -1,112 +1,112 @@
 ---
-title: SQL Server veya Azure SQL veritabanı - Azure Logic Apps bağlayın | Microsoft Docs
-description: Erişim ve Azure Logic Apps ile iş akışlarını otomatikleştirerek şirket içinde veya bulutta bulunan SQL veritabanlarını yönetme
-author: ecfan
-manager: jeconnoc
-ms.author: estfan
-ms.date: 05/15/2018
-ms.topic: article
-ms.service: logic-apps
+title: SQL Server veya Azure SQL veritabanı 'na bağlanma-Azure Logic Apps
+description: Azure Logic Apps kullanarak şirket içinde veya bulutta SQL veritabanları için görevleri otomatikleştirin
 services: logic-apps
-ms.reviewer: klam, LADocs
+ms.service: logic-apps
 ms.suite: integration
+author: ecfan
+ms.author: estfan
+ms.reviewer: klam; LADocs
+manager: carmonm
+ms.topic: conceptual
 tags: connectors
-ms.openlocfilehash: 998fcba50636cd92b14bdbe1633c2548e84a6bfc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/08/2019
+ms.openlocfilehash: a6367e5897e9bd548550b099c0bd2e6186845d6d
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64696414"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826318"
 ---
-# <a name="connect-to-sql-server-or-azure-sql-database-from-azure-logic-apps"></a>Azure Logic Apps'ten SQL Server veya Azure SQL veritabanına bağlanma
+# <a name="automate-workflows-for-sql-server-or-azure-sql-database-by-using-azure-logic-apps"></a>SQL Server veya Azure SQL veritabanı için iş akışlarını Azure Logic Apps kullanarak otomatikleştirin
 
-Bu makalede, SQL Server Bağlayıcısı ile bir mantıksal uygulama içinde SQL veritabanınızdaki verileri nasıl erişeceği gösterilmektedir. Böylece, görevler, süreçleri ve SQL veri ve kaynaklarınız mantıksal uygulamalar oluşturarak yönetme iş akışlarını otomatik hale getirebilirsiniz. Bağlayıcı için hem de çalışır [şirket içi SQL Server](https://docs.microsoft.com/sql/sql-server/sql-server-technical-documentation) ve [Azure SQL veritabanı bulutta](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview). 
+Bu makalede, SQL veritabanınızdaki verilere SQL Server Bağlayıcısı ile bir mantıksal uygulama içinden nasıl erişebileceğiniz gösterilmektedir. Bu şekilde, mantıksal uygulamalar oluşturarak SQL verilerinizi ve kaynaklarınızı yöneten görevleri, işlemleri veya iş akışlarını otomatikleştirebileceğinizi unutmayın. SQL Server bağlayıcısı hem [Şirket içi SQL Server](https://docs.microsoft.com/sql/sql-server/sql-server-technical-documentation) hem de [bulut tabanlı Azure SQL veritabanı](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview)için geçerlidir.
 
-SQL veritabanınız veya Dynamics CRM Online gibi diğer sistemlerde olaylar tarafından tetiklendiğinde çalışan mantıksal uygulamalar oluşturabilirsiniz. Ayrıca mantıksal uygulamalarınızı alma, ekleme ve SQL sorguları ve saklanan yordamların yürütülmesi yanı sıra veri silme. Örneğin, Dynamics CRM Online içinde yeni kayıtlar için otomatik olarak denetler, tüm kayıtları için SQL veritabanı sunucunuza öğeler ekler ve ardından e-posta uyarıları gönderir, bir mantıksal uygulama oluşturabilirsiniz.
+SQL veritabanınızda veya Dynamics CRM Online gibi diğer sistemlerde olaylar tarafından tetiklendiğinde çalışan Logic Apps oluşturabilirsiniz. Mantıksal uygulamalarınız, çalışan SQL sorguları ve saklı yordamlar ile birlikte verileri de alabilir, ekleyebilir ve silebilir. Örneğin, Dynamics CRM Online 'da yeni kayıtları otomatik olarak denetleyen bir mantıksal uygulama oluşturabilir, her yeni kayıt için SQL veritabanınıza öğe ekler ve ardından eklenen öğeler hakkında e-posta uyarıları gönderir.
 
-Azure aboneliğiniz yoksa <a href="https://azure.microsoft.com/free/" target="_blank">ücretsiz bir Azure hesabı için kaydolun</a>. Logic apps kullanmaya yeni başladıysanız gözden [Azure Logic Apps nedir](../logic-apps/logic-apps-overview.md) ve [hızlı başlangıç: İlk mantıksal uygulamanızı oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md). Bağlayıcısı özel teknik bilgiler için bkz. <a href="https://docs.microsoft.com/connectors/sql/" target="blank">SQL Server bağlayıcı başvurusu</a>.
+Logic Apps 'e yeni başladıysanız, [Azure Logic Apps](../logic-apps/logic-apps-overview.md) ve [hızlı başlangıç: Ilk mantıksal uygulamanızı oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md)' yı gözden geçirin. Bağlayıcıya özgü teknik bilgiler, sınırlamalar ve bilinen sorunlar için, [SQL Server Bağlayıcısı başvuru sayfasına](https://docs.microsoft.com/connectors/sql/)bakın.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-* Mantıksal uygulama burada SQL veritabanınıza erişim gerekir. Bir SQL tetikleyicisi ile birlikte mantıksal uygulamanızı başlatmak için gereken bir [boş mantıksal uygulama](../logic-apps/quickstart-create-first-logic-app-workflow.md). 
+* Azure aboneliği. Aboneliğiniz yoksa, [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/).
 
-* Bir [Azure SQL veritabanı](../sql-database/sql-database-get-started-portal.md) veya [SQL Server veritabanı](https://docs.microsoft.com/sql/relational-databases/databases/create-a-database) 
+* [SQL Server veritabanı](https://docs.microsoft.com/sql/relational-databases/databases/create-a-database) veya [Azure SQL veritabanı](../sql-database/sql-database-get-started-portal.md)
 
-  Mantıksal uygulamanızı sonuçları operations çağırırken geri dönebilmek tablolarınızı veri olması gerekir. Bir Azure SQL veritabanı oluşturun, dahil olan örnek veritabanları kullanabilirsiniz. 
+  Mantıksal uygulamanızın işlemleri çağırırken sonuçlar döndürebilmesi için tablolarınızın verileri olmalıdır. Azure SQL veritabanı oluşturursanız, dahil edilen örnek veritabanlarını kullanabilirsiniz.
 
-* SQL sunucu adınızı, veritabanı adı, kullanıcı adınızı ve parolanızı. Mantıksal SQL sunucunuza erişmek için yetki verebilir böylece, bu kimlik bilgileri gerekir. 
+* SQL sunucunuzun adı, veritabanı adı, Kullanıcı adınız ve parolanız. Mantığınızı SQL Server 'a erişim için yetkilendirebilmeniz için bu kimlik bilgilerine ihtiyacınız vardır.
 
-  * Azure SQL veritabanı için bu Ayrıntılar bağlantı dizesindeki ya da Azure portalında SQL veritabanı özellikleri bölümünde bulabilirsiniz:
+  * SQL Server için bu ayrıntıları bağlantı dizesinde bulabilirsiniz:
 
-    "Server = tcp: <*SunucuAdınız*>. katalog database.windows.net,1433;Initial = <*yourDatabaseName*>; Persist Security Info = False; Kullanıcı Kimliği = <*kullanıcıadınız*>; Parola = <*yourPassword*>; MultipleActiveResultSets = False; Şifreleme = True; TrustServerCertificate = False; Bağlantı zaman aşımı = 30; "
+    `Server={your-server-address};Database={your-database-name};User Id={your-user-name};Password={your-password};`
 
-  * SQL Server için bu Ayrıntılar bağlantı dizesinde bulabilirsiniz: 
+  * Azure SQL veritabanı için bu ayrıntıları bağlantı dizesinde veya SQL veritabanı özellikleri altındaki Azure portal bulabilirsiniz:
 
-    "Server=<*yourServerAddress*>;Database=<*yourDatabaseName*>;User Id=<*yourUserName*>;Password=<*yourPassword*>;"
+    `Server=tcp:{your-server-name}.database.windows.net,1433;Initial Catalog={your-database-name};Persist Security Info=False;User ID={your-user-name};Password={your-password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;`
 
-* Logic apps, SQL Server gibi şirket içi sistemlere bağlanabilmeniz gerekir [bir şirket içi veri ağ geçidi ayarlama](../logic-apps/logic-apps-gateway-install.md). Bu şekilde mantıksal uygulamanız için SQL bağlantı oluşturduğunuzda ağ geçidini seçebilirsiniz.
+* Yerel bir bilgisayarda yüklü [olan şirket içi veri ağ geçidi](../logic-apps/logic-apps-gateway-install.md) ve bu senaryolar için [Azure Portal oluşturulan bir Azure veri ağ geçidi kaynağı](../logic-apps/logic-apps-gateway-connection.md) :
+
+  * Logic Apps, bir [tümleştirme hizmeti ortamında (ıSE)](../logic-apps/connect-virtual-network-vnet-isolated-environment-overview.md)çalışmaz.
+
+  * Mantıksal uygulamalarınız bir tümleştirme hizmeti *ortamında çalışır,* ancak SQL Server bağlantınız için Windows kimlik doğrulamasını kullanmanız gerekir. Bu senaryo için, ıSE sürümü Windows kimlik doğrulamasını desteklemediğinden, SQL Server bağlayıcısının ıSE sürümünü veri ağ geçidiyle birlikte kullanın.
+
+* SQL veritabanınıza erişmeniz gereken mantıksal uygulama. Mantıksal uygulamanızı bir SQL tetikleyicisi ile başlatmak için [boş bir mantıksal uygulama](../logic-apps/quickstart-create-first-logic-app-workflow.md)gerekir.
 
 <a name="add-sql-trigger"></a>
 
-## <a name="add-sql-trigger"></a>SQL tetikleyicisi Ekle
+## <a name="add-a-sql-trigger"></a>SQL tetikleyicisi ekleme
 
-Azure Logic Apps'te, her mantıksal uygulama ile başlamalıdır bir [tetikleyici](../logic-apps/logic-apps-overview.md#logic-app-concepts), belirli bir olay harekete geçirilir gerçekleşen veya belirli bir koşul karşılanıyorsa zaman. Her zaman tetikleyici Logic Apps altyapısı bir mantıksal uygulama örneği oluşturur ve uygulamanızın iş akışı çalışmaya başlar.
+Azure Logic Apps, her mantıksal uygulama, belirli bir olay gerçekleştiğinde veya belirli bir koşul karşılandığında tetiklenen bir [tetikleyiciyle](../logic-apps/logic-apps-overview.md#logic-app-concepts)başlamalıdır. Tetikleyici her tetiklendiğinde Logic Apps altyapısı bir mantıksal uygulama örneği oluşturur ve mantıksal uygulamanızın iş akışını çalıştırmaya başlar.
 
-1. Azure portalı ya da Visual Studio, Logic Apps Tasarımcısı açılır bir boş mantıksal uygulama oluşturun. Bu örnek, Azure portalını kullanır.
+1. Azure portal veya Visual Studio 'da, Logic Apps tasarımcısını açan boş bir mantıksal uygulama oluşturun. Bu örnek Azure portal kullanır.
 
-2. Arama kutusuna filtreniz olarak "sql server" girin. Tetikleyiciler listesinden istediğiniz SQL tetikleyicisini seçin. 
+1. Tasarımcıda arama kutusuna filtreniz olarak "SQL Server" yazın. Tetikleyiciler listesinden istediğiniz SQL tetikleyicisini seçin.
 
-   Bu örnek için şu tetikleyiciyi seçin: **SQL Server - bir öğe oluşturulduğunda**
+   Bu örnek, **bir öğe oluşturulduğunda** tetikleyicisi kullanır.
 
-   !["SQL Server - bir öğe oluşturulduğunda"'ı tetikleyicisi](./media/connectors-create-api-sqlazure/sql-server-trigger.png)
+   !["Bir öğe oluşturulduğunda" tetikleyicisi seçin](./media/connectors-create-api-sqlazure/select-sql-server-trigger.png)
 
-3. Bağlantı ayrıntıları için istenirse [artık SQL bağlantınızı oluşturmak](#create-connection). 
-   Veya, bağlantınız zaten varsa, seçin **tablo adı** listeden istediğiniz.
+1. Bir bağlantı oluşturmanız istenirse, [SQL bağlantınızı şimdi oluşturun](#create-connection). Bağlantınız varsa, bir **tablo adı**seçin.
 
-   ![Tablo seçin](./media/connectors-create-api-sqlazure/azure-sql-database-table.png)
+   ![İstediğiniz tabloyu seçin](./media/connectors-create-api-sqlazure/azure-sql-database-table.png)
 
-4. Ayarlama **aralığı** ve **sıklığı** özellikleri, mantıksal uygulamanızı tablo ne sıklıkla denetleyeceğini belirtebilir.
+1. Mantıksal uygulamanızın tabloyu ne sıklıkta denetleyeceğini belirten **Aralık** ve **Sıklık** özelliklerini ayarlayın.
 
-   Bu örnekte, yalnızca seçili tablo, başka bir şey denetler. 
-   Daha çok ilginizi çeken bir şey yapmak için gerçekleştirmek istediğiniz görevleri eylemler ekleyin. 
-   
-   Örneğin, tabloda yeni öğe görüntülemek için diğer eylemler ekleyin gibi tablodan alan içeren bir dosya oluşturun ve ardından e-posta uyarıları göndermek. 
-   Bu bağlayıcı veya diğer bağlayıcıları için diğer eylemler hakkında bilgi edinmek için bkz. [Logic Apps bağlayıcıları](../connectors/apis-list.md).
+   Bu tetikleyici seçili tablodan yalnızca bir satır döndürür, başka hiçbir şey yapmaz. Diğer görevleri gerçekleştirmek için, istediğiniz görevleri gerçekleştiren diğer eylemleri ekleyin. Örneğin, bu satırdaki verileri görüntülemek için döndürülen satırdaki alanları içeren bir dosya oluşturan başka eylemler ekleyebilir ve ardından e-posta uyarıları gönderebilirsiniz. Bu bağlayıcıya yönelik diğer mevcut eylemler hakkında bilgi edinmek için [bağlayıcının başvuru sayfasına](https://docs.microsoft.com/connectors/sql/)bakın.
 
-5. Tasarımcı araç çubuğunda, işiniz bittiğinde seçin **Kaydet**. 
+1. İşiniz bittiğinde, Tasarımcı araç çubuğunda **Kaydet**' i seçin.
 
-   Bu adım, otomatik olarak sağlar ve mantıksal uygulamanızı Canlı Azure'da yayımlar. 
+   Bu adım otomatik olarak Azure 'da mantıksal uygulamanızı etkin bir şekilde etkinleştirilir ve yayımlar.
 
 <a name="add-sql-action"></a>
 
-## <a name="add-sql-action"></a>SQL Eylem Ekle
+## <a name="add-a-sql-action"></a>SQL eylemi ekleme
 
-Azure Logic apps'te bir [eylem](../logic-apps/logic-apps-overview.md#logic-app-concepts) akışınıza bir tetikleyici veya başka bir eylem izleyen bir adımdır. Bu örnekte, mantıksal uygulama ile başlar [yinelenme tetikleyicisini](../connectors/connectors-native-recurrence.md)ve SQL veritabanı'ndan bir satır alır bir eylem çağırır.
+Azure Logic Apps bir [eylem](../logic-apps/logic-apps-overview.md#logic-app-concepts) , iş akışınızda bir tetikleyiciyi veya başka bir eylemi izleyen bir adımdır. Bu örnekte, mantıksal uygulama [yinelenme tetikleyicisiyle](../connectors/connectors-native-recurrence.md)başlar ve bir SQL veritabanından bir satır alan bir eylem çağırır.
 
-1. Azure portalı ya da Visual Studio, mantıksal uygulamanızı Logic Apps Tasarımcısı'nda açın. Bu örnek, Azure portalını kullanır.
+1. Azure portal veya Visual Studio 'da mantıksal uygulamanızı Logic Apps tasarımcısında açın. Bu örnek Azure portal kullanır.
 
-2. Mantıksal Uygulama Tasarımcısı, tetikleyici veya eylemi seçin **yeni adım** > **Eylem Ekle**.
+1. SQL eylemini eklemek istediğiniz tetikleyici veya eylem altında **yeni adım**' ı seçin.
 
-   !["Yeni adım"Eylem Ekle"", seçin](./media/connectors-create-api-sqlazure/add-action.png)
-   
-   Var olan adımlar arasında bir eylem eklemek için bağlantı okun üzerine fareyi hareket ettirin. 
-   Artı işaretini seçin ( **+** ), görünür ve ardından **Eylem Ekle**.
+   ![Mantıksal uygulamanıza yeni adım ekleme](./media/connectors-create-api-sqlazure/select-new-step-logic-app.png)
 
-2. Arama kutusuna filtreniz olarak "sql server" girin. Eylem listesinden istediğiniz herhangi bir SQL işlem'i seçin. 
+   Varolan adımlar arasında bir eylem eklemek için farenizi bağlantı oku üzerine taşıyın. Görüntülenen artı işaretini ( **+** ) seçin ve ardından **Eylem Ekle**' yi seçin.
 
-   Bu örnekte, tek bir kaydı alır. Bu eylemi seçin: **SQL Server - satır Al**
+1. **Eylem seçin**altında, arama kutusuna filtreniz olarak "SQL Server" yazın. Eylemler listesinden istediğiniz SQL eylemini seçin.
 
-   ![Girin "sql server", "SQL Server - Get satır" seçin](./media/connectors-create-api-sqlazure/select-sql-get-row.png) 
+   Bu örnek, tek bir kayıt alan **satırı al** eylemini kullanır.
 
-3. Bağlantı ayrıntıları için istenirse [artık SQL bağlantınızı oluşturmak](#create-connection). 
-   Veya, bağlantınız varsa, seçin bir **tablo adı**girin **satır kimliği** istediğiniz kaydı.
+   ![SQL "satırı al" eylemini bul ve Seç](./media/connectors-create-api-sqlazure/find-select-sql-get-row-action.png)
 
-   ![Tablo adını girin ve satır kimliği](./media/connectors-create-api-sqlazure/table-row-id.png)
-   
-   Bu örnek seçili tablosundan başka bir şey yalnızca bir satır döndürür. 
-   Bu satırdaki verileri görüntülemek için daha sonra gözden geçirmek için satırdan alanlara sahip bir dosya oluşturun. diğer eylemler ekleyin ve bu dosyayı bulut depolama hesabında depolama. Diğer Eylemler bu bağlayıcının ya da diğer bağlayıcılar hakkında bilgi edinmek için bkz. [Logic Apps bağlayıcıları](../connectors/apis-list.md).
+   Bu eylem, seçili tablodan yalnızca bir satır döndürür, başka hiçbir şey yapmaz. Bu satırdaki verileri görüntülemek için döndürülen satırdaki alanları içeren bir dosya oluşturan ve bu dosyayı bir bulut depolama hesabında depolayabilen başka eylemler ekleyebilirsiniz. Bu bağlayıcıya yönelik diğer mevcut eylemler hakkında bilgi edinmek için [bağlayıcının başvuru sayfasına](https://docs.microsoft.com/connectors/sql/)bakın.
 
-4. Tasarımcı araç çubuğunda, işiniz bittiğinde seçin **Kaydet**. 
+1. Bir bağlantı oluşturmanız istenirse, [SQL bağlantınızı şimdi oluşturun](#create-connection). Bağlantınız varsa, bir **tablo adı**seçin ve Istediğiniz KAYDıN **satır kimliğini** girin.
+
+   ![Tablo adını ve satır KIMLIĞINI girin](./media/connectors-create-api-sqlazure/specify-table-row-id-property-value.png)
+
+1. İşiniz bittiğinde, Tasarımcı araç çubuğunda **Kaydet**' i seçin.
+
+   Bu adım otomatik olarak Azure 'da mantıksal uygulamanızı etkin bir şekilde etkinleştirilir ve yayımlar.
 
 <a name="create-connection"></a>
 
@@ -116,32 +116,28 @@ Azure Logic apps'te bir [eylem](../logic-apps/logic-apps-overview.md#logic-app-c
 
 [!INCLUDE [Create a connection to SQL Server or Azure SQL Database](../../includes/connectors-create-api-sqlazure.md)]
 
-## <a name="handle-bulk-data"></a>Toplu veri işleme
+## <a name="handle-bulk-data"></a>Toplu verileri işle
 
-Bazı durumlarda, bağlayıcı aynı anda tüm sonuçlar döndürmüyor veya büyüklüğüne ve yapısına üzerinde daha iyi denetim sonucu kümeleriniz için istediğiniz kadar büyük sonuç kümeleri çalışmak gerekebilir. Bu büyük sonuç kümelerini işleyebilir bazı yöntemler aşağıda verilmiştir:
+Bazen, bağlayıcının tüm sonuçları aynı anda döndürmemesi veya sonuç kümelerinizin boyutu ve yapısı üzerinde daha iyi denetim sağlamak istiyorsanız sonuç kümeleriyle çalışmanız gerekir. Bu tür büyük sonuç kümelerini işleyebilmeniz için bazı yollar şunlardır:
 
-* Sonuçları daha küçük kümeleri olarak yönetmenize yardımcı olmak için açma *sayfalandırma*. Daha fazla bilgi için [toplu veri, kayıt ve öğeleri sayfalandırma kullanarak elde](../logic-apps/logic-apps-exceed-default-page-size-with-pagination.md).
+* Sonuçları daha küçük kümeler olarak yönetmenize yardımcı olmak için *sayfalandırma*'yı açın. Daha fazla bilgi için bkz. [sayfalandırma kullanarak toplu verileri, kayıtları ve öğeleri edinme](../logic-apps/logic-apps-exceed-default-page-size-with-pagination.md).
 
-* Sonuçlar istediğiniz şekilde düzenler bir saklı yordamı oluşturun.
+* Sonuçları istediğiniz şekilde düzenleyen bir saklı yordam oluşturun.
 
-  Alma veya birden çok satır ekleme, mantıksal uygulamanız bu satırlara kullanarak yineleyebilirsiniz bir [ *until döngüsü* ](../logic-apps/logic-apps-control-flow-loops.md#until-loop) bunlar içinde [sınırları](../logic-apps/logic-apps-limits-and-config.md). 
-  Ancak kayıt kümeleri çok büyük, örneğin binlerce veya milyonlarca satır, veritabanı çağrıları kaynaklanan maliyetleri en aza indirmek istediğiniz çalışmaya olduğunda mantıksal uygulamanız gerekir.
+  Birden çok satır alırken veya eklerken, mantıksal uygulamanız bu [sınırlar](../logic-apps/logic-apps-limits-and-config.md)dahilinde bir [*until döngüsü*](../logic-apps/logic-apps-control-flow-loops.md#until-loop) kullanarak bu satırları yineleyebilir. Ancak, mantıksal uygulamanızın kayıt kümeleriyle birlikte çalışması gerektiğinde, büyük bir deyişle, binlerce veya milyonlarca satır olmak üzere veritabanına yapılan çağrılardan elde edilen maliyetleri en aza indirmek istersiniz.
 
-  Sonuçları, istediğiniz şekilde düzenlemek için oluşturabileceğiniz bir [ *saklı yordamı* ](https://docs.microsoft.com/sql/relational-databases/stored-procedures/stored-procedures-database-engine) kullanır ve SQL örneği'nde çalışan **seçin - ORDER BY** deyimi. 
-  Bu çözüm, boyutu ve sonuçlarınızı yapısı üzerinde daha fazla denetim sağlar. 
-  SQL Server bağlayıcının kullanarak mantıksal uygulamanızı saklı yordam çağrıları **saklı yordam yürütme** eylem.
+  Sonuçları istediğiniz şekilde düzenlemek için, SQL örneğiniz içinde çalışan bir [*saklı yordam*](https://docs.microsoft.com/sql/relational-databases/stored-procedures/stored-procedures-database-engine) oluşturabilir ve **Select-order by** ifadesini kullanabilirsiniz. Bu çözüm, sonuçlarınızın boyutu ve yapısı üzerinde daha fazla denetim sağlar. Mantıksal uygulamanız, SQL Server bağlayıcısının **saklı yordamı Çalıştır** eylemini kullanarak saklı yordamı çağırır.
 
-  Çözüm Ayrıntılar için şu makalelere bakın:
+  Daha fazla çözüm ayrıntısı için şu makalelere bakın:
 
   * [Logic Apps ile toplu veri aktarımı için SQL sayfalandırma](https://social.technet.microsoft.com/wiki/contents/articles/40060.sql-pagination-for-bulk-data-transfer-with-logic-apps.aspx)
 
-  * [SEÇİN - ORDER BY yan tümcesi](https://docs.microsoft.com/sql/t-sql/queries/select-order-by-clause-transact-sql)
+  * [SELECT-ORDER BY yan tümcesi](https://docs.microsoft.com/sql/t-sql/queries/select-order-by-clause-transact-sql)
 
-## <a name="connector-specific-details"></a>Özel bağlayıcı ayrıntıları
+## <a name="connector-specific-details"></a>Bağlayıcıya özgü ayrıntılar
 
-Bu bağlayıcının tetikleyicileri, Eylemler ve sınırları hakkında teknik bilgiler için bkz. [bağlayıcının başvuru ayrıntıları](/connectors/sql/). 
+Bu bağlayıcının Tetikleyicileri, eylemleri ve limitleri hakkında teknik bilgi için [bağlayıcının başvuru sayfasına](https://docs.microsoft.com/connectors/sql/)bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Diğer hakkında bilgi edinin [Logic Apps bağlayıcıları](../connectors/apis-list.md)
-
+* [Azure Logic Apps için diğer bağlayıcılar](../connectors/apis-list.md) hakkında bilgi edinin

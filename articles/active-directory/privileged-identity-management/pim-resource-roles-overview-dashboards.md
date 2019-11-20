@@ -1,10 +1,10 @@
 ---
-title: Kaynak Pano PIM - Azure Active Directory erişim gözden geçirmesi gerçekleştirme | Microsoft Docs
-description: Azure AD Privileged Identity Management (PIM) erişim gözden geçirmesi gerçekleştirmek için bir kaynak Pano kullanmayı açıklar.
+title: PıM-Azure AD 'de erişim gözden geçirmeleri için kaynak panoları | Microsoft Docs
+description: Azure AD Privileged Identity Management (PıM) ' de bir erişim incelemesi gerçekleştirmek için bir kaynak panosunun nasıl kullanılacağını açıklar.
 services: active-directory
 documentationcenter: ''
-author: rolyon
-manager: mtillman
+author: curtand
+manager: daveba
 editor: markwahl-msft
 ms.service: active-directory
 ms.workload: identity
@@ -12,35 +12,35 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.subservice: pim
-ms.date: 03/30/2018
-ms.author: rolyon
+ms.date: 11/08/2019
+ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e5404d1b85821458aedef64b72ae635ea49aa1ff
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6affa2ecc8919dabeb6173622b525280ce96bcfe
+ms.sourcegitcommit: 16c5374d7bcb086e417802b72d9383f8e65b24a7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65602480"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73847022"
 ---
-# <a name="use-a-resource-dashboard-to-perform-an-access-review-in-pim"></a>PIM'de erişim gözden geçirmesi gerçekleştirmek için bir kaynak Panosu'nu kullanın
+# <a name="use-a-resource-dashboard-to-perform-an-access-review-in-privileged-identity-management"></a>Privileged Identity Management bir erişim incelemesi gerçekleştirmek için bir kaynak panosu kullanın
 
-Kaynak Pano, Azure Active Directory (Azure AD) Privileged Identity Management (PIM) erişim gözden geçirmesi gerçekleştirmek için kullanabilirsiniz. Yönetici görünümü Pano üç birincil bileşenden oluşur:
+Privileged Identity Management (PıM) içinde erişim incelemesi gerçekleştirmek için bir kaynak panosu kullanabilirsiniz. Azure Active Directory (Azure AD) içindeki yönetici görünümü panosu üç birincil bileşene sahiptir:
 
-- Kaynak rol etkinleştirmeleri grafik gösterimi.
-- Rol atamaları atamaya göre dağılımını gösteren iki grafik türü.
-- Yeni rol atamaları için ilgili bir veri alanı.
+- Kaynak rolü etkinleştirmeleri grafik gösterimi
+- Atama türüne göre rol atamalarının dağılımını görüntüleyen grafikler
+- Yeni rol atamalarına bilgi içeren bir veri alanı
 
-![Yönetici görünümü Pano graflar ve grafikler gösteren ekran görüntüsü](media/pim-resource-roles-overview-dashboards/rbac-overview-top.png)
+![Grafik ve grafiklerin gösterildiği yönetici görünümü panosunun ekran görüntüsü](media/pim-resource-roles-overview-dashboards/rbac-overview-top.png)
 
-![Yönetici görünümü panosunun ekran görüntüsü, gösteren veriler listelenir.](media/pim-resource-roles-overview-dashboards/role-settings.png)
+![Yönetici görünümü panosunun, veri listelerini gösteren ekran görüntüsü](media/pim-resource-roles-overview-dashboards/role-settings.png)
 
-Kaynak rol etkinleştirmeleri grafik gösterimi son yedi gün kapsar. Bu veriler, seçili kaynak için kapsamlı ve en sık kullanılan rolleri (sahibi, katkıda bulunan, kullanıcı erişimi Yöneticisi) ve birleşik tüm roller için etkinleştirme görüntüler.
+Kaynak rolü etkinleştirmeleri 'nin grafik temsili son yedi gün içinde yer alır. Bu veriler, seçilen kaynağın kapsamına alınır ve en yaygın rollerin (sahip, katkıda bulunan, Kullanıcı erişimi Yöneticisi) ve tüm rollerin birleştirilme için etkinleştirmeleri görüntüler.
 
-Etkinleştirmeleri graf sağında, iki grafik hem kullanıcılar hem de grupları atama türü tarafından rol atamalarını dağılımını görüntüleyin. Değerin bir yüzde değeri (veya tersi), bir dilimi grafiğin seçerek değiştirebilirsiniz.
+Etkinleştirmeler grafiğinin bir tarafında, iki grafik rol atamalarının her iki Kullanıcı ve grup için atama türüne göre dağılımını görüntüler. Grafiğin bir dilimini seçerek değeri bir yüzde (veya tersi) olarak değiştirebilirsiniz.
 
-Grafikleri, son 30 gün ve roller (Azalan) toplam atamalara göre sıralanmış listesini üzerinde kullanıcılar ve gruplar ile yeni rol atamaları sayısı bakın.
+Grafiklerin altında, son 30 gün içinde yeni rol atamaları olan Kullanıcı ve grup sayısı ve toplam atamalara göre azalan düzende sıralanan roller listelenir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [PIM hizmetinde Azure kaynak rolleri için erişim gözden geçirmesi başlatma](pim-resource-roles-start-access-review.md) 
+- [Privileged Identity Management Azure Kaynak rolleri için erişim gözden geçirmesi başlatma](pim-resource-roles-start-access-review.md)

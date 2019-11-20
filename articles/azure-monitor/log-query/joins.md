@@ -1,33 +1,27 @@
 ---
-title: Azure izleyici günlüğü sorgularda birleşimler | Microsoft Docs
-description: Bu makale, Azure İzleyici günlük sorguları birleşimlerde'ı kullanarak bir ders içerir.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici günlük sorgularıyla birleşimler | Microsoft Docs
+description: Bu makale, Azure Izleyici günlük sorgularıyla birleştirmeleri kullanma konusunda bir ders içerir.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 08/16/2018
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 2ea5b4e3af6591e6e25a863998baa7cecb3e29e8
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 08/16/2018
+ms.openlocfilehash: 526c359367271c69ccd461e4421c3223b00fbc36
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60520105"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72900279"
 ---
-# <a name="joins-in-azure-monitor-log-queries"></a>Azure izleyici günlüğü sorgularda birleştirir
+# <a name="joins-in-azure-monitor-log-queries"></a>Azure Izleyici günlük sorgularındaki birleşimler
 
 > [!NOTE]
-> Tamamlamanız gereken [Azure İzleyici Log Analytics ile çalışmaya başlama](get-started-portal.md) ve [Azure İzleyici günlük sorguları](get-started-queries.md) dersin tamamlamadan önce.
+> Bu dersi tamamlamadan önce [Azure izleyici Log Analytics kullanmaya başlayın](get-started-portal.md) ve [Azure İzleyici günlüğü sorgularını](get-started-queries.md) tamamlamanız gerekir.
 
 [!INCLUDE [log-analytics-demo-environment](../../../includes/log-analytics-demo-environment.md)]
 
-Birleşimler, aynı sorguda birden çok tablodan veri çözümleme sağlar. İki veri kümesi satırlarını tarafından belirtilen sütun eşleşen değerleri birleştirecek.
+Birleşimler, aynı sorgudaki birden çok tablodan verileri analiz etmenize olanak tanır. Belirtilen sütunların değerleriyle eşleşen iki veri kümesi satırını birleştirirlar.
 
 
 ```Kusto
@@ -44,15 +38,15 @@ SecurityEvent
 | top 10 by Duration desc
 ```
 
-Bu örnekte, ilk veri kümesi için tüm oturum açma olayları filtreler. Bu işlem için tüm oturum kapatma olayları filtreler ikinci bir veri kümesi ile birleştirilir. Öngörülen sütunlar _bilgisayar_, _hesabı_, _TargetLogonId_, ve _TimeGenerated_. Veri kümeleri, paylaşılan bir sütuna göre bağıntılı olan _TargetLogonId_. Çıktı, oturum açma ve oturum kapatma süresi olan bağıntı başına tek bir kaydıdır.
+Bu örnekte, ilk veri kümesi tüm oturum açma olaylarına filtre uygular. Bu, tüm oturum kapatma olaylarını filtreleyen ikinci bir veri kümesiyle birleştirilir. Tasarlanan sütunlar _bilgisayar_, _Hesap_, _Targetlogonıd_ve _TimeGenerated_' dir. Veri kümeleri, bir paylaşılan sütunla bağıntılı, _Targetlogonıd_. Çıktı, bağıntı başına, oturum açma ve oturum kapatma zamanına sahip tek bir kayıttır.
 
-Her iki veri kümeleri aynı ada sahip sütun varsa, bu örnekte sonuçları gösterir şekilde sağ taraftaki DataSet sütunları bir dizin numarasını verilmesi _TargetLogonId_ sol taraftaki tablonun değerlerini ve  _TargetLogonId1_ sağ taraftaki tabloda değerler. Bu durumda, ikinci _TargetLogonId1_ sütun kullanarak kaldırıldı `project-away` işleci.
+Her iki DataSet 'in de aynı ada sahip sütunları varsa, sağ taraftaki veri kümesinin sütunlarına bir dizin numarası verilir, bu nedenle bu örnekte sonuçlar, sol taraftaki tablodaki değerlerle _Targetlogonıd_ ve _TargetLogonId1_ değerleriyle gösterilir sağ taraftaki tablodan. Bu durumda, ikinci _TargetLogonId1_ sütunu `project-away` işleci kullanılarak kaldırılmıştır.
 
 > [!NOTE]
-> Performansı artırmak için birleştirilmiş veri kümesinin-kullanarak, yalnızca ilgili sütunları tutun `project` işleci.
+> Performansı artırmak için, `project` işlecini kullanarak yalnızca birleştirilmiş veri kümelerinin ilgili sütunlarını saklayın.
 
 
-İki veri kümesi katılmak için aşağıdaki sözdizimini kullanın ve iki tablo arasında farklı bir ad alanına katılmış anahtar vardır:
+İki veri kümesini birleştirmek için aşağıdaki sözdizimini kullanın ve birleştirilmiş anahtar iki tablo arasında farklı bir ada sahiptir:
 ```
 Table1
 | join ( Table2 ) 
@@ -60,7 +54,7 @@ on $left.key1 == $right.key2
 ```
 
 ## <a name="lookup-tables"></a>Arama tabloları
-Birleşim yaygın kullanımı, değerleri kullanarak statik eşleme kullanarak `datatable` , sonuçları daha edileni yolu dönüştürme de yardımcı olabilir. Örneğin, güvenlik zenginleştirmek için olay verilerini her olay için olay adıyla kimliği.
+Birleşimlerin yaygın kullanımı, sonuçları daha edileni bir şekilde dönüştürmeye yardımcı olabilecek `datatable` kullanarak değerlerin statik eşlemesini kullanmaktır. Örneğin, güvenlik olay verilerini her olay KIMLIĞI için olay adıyla zenginleştirme.
 
 ```Kusto
 let DimTable = datatable(EventID:int, eventName:string)
@@ -81,35 +75,35 @@ SecurityEvent
 | summarize count() by eventName
 ```
 
-![Bir datatable ile birleştirme](media/joins/dim-table.png)
+![DataTable ile birleştirin](media/joins/dim-table.png)
 
-## <a name="join-kinds"></a>Tür katılın
-Katılma türü belirtin _tür_ bağımsız değişken. Her tür, aşağıdaki tabloda açıklandığı gibi belirli tablolar kayıtları arasında farklı bir eşleşme gerçekleştirir.
+## <a name="join-kinds"></a>Ekleme türleri
+_Tür_ bağımsız değişkeniyle birlikte JOIN türünü belirtin. Her tür, aşağıdaki tabloda açıklandığı gibi, belirtilen tabloların kayıtları arasında farklı bir eşleşme gerçekleştirir.
 
-| Katılım Türü | Açıklama |
+| JOIN türü | Açıklama |
 |:---|:---|
-| innerunique | Varsayılan JOIN modu budur. Sol Tablo üzerinde eşleşen sütunun değerlerini ilk bulunan ve yinelenen değerler kaldırılır.  Ardından benzersiz değerler kümesini karşı sağ tablodaki eşleştirilir. |
-| İç | Her iki tablodaki yalnızca eşleşen kayıtları sonuçlara dahil edilir. |
-| leftouter | Sol tablodaki tüm kayıtları ve sağ tablodaki eşleşen kayıtları sonuçlara dahil edilir. Eşleşmeyen bir çıkış özellikleri null değerler içerir.  |
-| leftanti | Soldan sağa eşleşme yok kayıtları sonuçlara dahil edilir. Sonuçlar tablosu, yalnızca sol tablodaki sütun içeriyor. |
-| leftsemi | Soldan sağa eşleşen kayıtları sonuçlara dahil edilir. Sonuçlar tablosu, yalnızca sol tablodaki sütun içeriyor. |
+| ınnerunique | Bu, varsayılan JOIN modudur. İlk olarak, sol tablodaki eşleşen sütunun değerleri bulunur ve yinelenen değerler kaldırılır.  Sonra benzersiz değerler kümesi, doğru tabloyla eşleştirilir. |
+| Dahili | Sonuçlara yalnızca her iki tablodaki eşleşen kayıtlar dahil edilir. |
+| soltouter | Sol tablodaki tüm kayıtlar ve sağ tablodaki eşleşen kayıtlar, sonuçlara dahildir. Eşleşmeyen çıkış özellikleri null değerleri içeriyor.  |
+| soltantı | Sol taraftaki kayıtlar, sağdan eşleşme içermeyen sonuçlara dahildir. Sonuçlar tablosunda yalnızca sol tablodaki sütunlar bulunur. |
+| leftyarı | Sağ taraftaki eşleşmeler ile eşleşen kayıtlar sonuçlara dahildir. Sonuçlar tablosunda yalnızca sol tablodaki sütunlar bulunur. |
 
 
 ## <a name="best-practices"></a>En iyi uygulamalar
 
 En iyi performans için aşağıdaki noktaları göz önünde bulundurun:
 
-- Zaman filtresi her tabloda birleştirme için değerlendirilmesi gereken kayıtları azaltmak için kullanın.
-- Kullanım `where` ve `project` girdi tablolarında birleştirme önce içindeki satırları ve sütunları sayıda azaltmak için.
-- Bir tablodaki her zaman diğerinden daha küçükse, birleştirmenin sol tarafındaki kullanın.
+- JOIN için değerlendirilmesi gereken kayıtları azaltmak için her tabloda bir zaman filtresi kullanın.
+- `where` ve `project` kullanarak, birleşimden önce giriş tablolarındaki satır ve sütun sayılarını azaltabilirsiniz.
+- Bir tablo her zaman diğerinin daha küçükse, bunu birleştirmenin sol tarafında kullanın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure İzleyici günlük sorguları kullanmaya yönelik diğer dersler bakın:
+Bkz. Azure Izleyici günlük sorgularını kullanmaya yönelik diğer dersler:
 
 - [Dize işlemleri](string-operations.md)
 - [Toplama işlevleri](aggregations.md)
-- [Gelişmiş toplamaları](advanced-aggregations.md)
+- [Gelişmiş toplamalar](advanced-aggregations.md)
 - [JSON ve veri yapıları](json-data-structures.md)
 - [Gelişmiş sorgu yazma](advanced-query-writing.md)
-- [Grafikler](charts.md)
+- [Grafik](charts.md)

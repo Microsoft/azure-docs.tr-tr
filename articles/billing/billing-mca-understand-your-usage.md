@@ -1,6 +1,6 @@
 ---
-title: Azure kullanımı ve ücretleri dosya için bir Microsoft Müşteri sözleşmesinin koşulları
-description: Okuma ve Azure kullanım ve faturalandırma profiliniz için CSV ücretleri bölümlerini anlama hakkında bilgi edinin.
+title: Microsoft Müşteri Sözleşmesi için Azure kullanımı ve ücretleri dosyasındaki terimler
+description: Faturalama profiliniz için Azure kullanım bilgilerini ve ücretlerini içeren CSV dosyasının bölümlerinin nasıl okunup anlaşılacağını öğrenin.
 author: bandersmsft
 manager: jureid
 tags: billing
@@ -9,123 +9,123 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/01/2019
+ms.date: 10/01/2019
 ms.author: banders
-ms.openlocfilehash: d11e31366ea5aa15cf7a790eaee800fa2ea6dabe
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
-ms.translationtype: MT
+ms.openlocfilehash: c0c43c779affb4edca78def95906f5adfcc6fac4
+ms.sourcegitcommit: d4c9821b31f5a12ab4cc60036fde00e7d8dc4421
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67490617"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71709458"
 ---
-# <a name="terms-in-the-azure-usage-and-charges-file-for-a-microsoft-customer-agreement"></a>Azure kullanımı ve ücretleri dosya için bir Microsoft Müşteri sözleşmesinin koşulları
+# <a name="terms-in-the-azure-usage-and-charges-file-for-a-microsoft-customer-agreement"></a>Microsoft Müşteri Sözleşmesi için Azure kullanımı ve ücretleri dosyasındaki terimler
 
-Bu makale, bir faturalama hesabı için bir Microsoft Müşteri sözleşmesi için geçerlidir. [Microsoft Müşteri sözleşmesi erişimi olup olmadığını denetlemek](#check-access-to-a-microsoft-customer-agreement).
+Bu makale, Microsoft Müşteri Sözleşmesi’ne ilişkin ödeme hesabı için geçerlidir. [Microsoft Müşteri Sözleşmesi’ne erişiminiz olup olmadığını denetleyin](#check-access-to-a-microsoft-customer-agreement).
 
-Azure kullanım ve Ücret CSV dosyası, geçerli fatura dönemi için günlük ve ölçüm düzey kullanım ücretlerini içerir.
+Azure kullanım bilgilerini ve ücretlerini içeren CSV dosyası, geçerli faturalama dönemi için günlük ve ölçüm düzeyinde kullanım ücretlerini sunar.
 
-Azure kullanımı ve ücretleri dosyasını almak için bkz. [ve görüntüleyin ve indirme Azure kullanım ücretleri için Microsoft Müşteri sözleşmenizi](billing-download-azure-daily-usage.md). Elektronik tablo uygulamasında açabileceğiniz bir virgülle ayrılmış değerler (.csv) dosya biçiminde kullanılabilir.
+Azure kullanım bilgilerinizi ve ücretlerinizi içeren dosyayı almak için bkz. [Microsoft Müşteri Sözleşmeniz için Azure kullanım bilgilerinizi ve ücretlerinizi görüntüleme ve indirme](billing-download-azure-daily-usage.md). Bu, bir elektronik tablo uygulamasında açabileceğiniz virgülle ayrılmış değerler (.csv) dosya biçiminde mevcuttur.
 
-Kullanım ücretleri, toplam **aylık** ücretleri bir Abonelikteki. Kullanım ücretleri, herhangi bir kredi veya indirim dikkate almaz.
+Kullanım ücretleri bir abonelikteki toplam **aylık** ücretlerdir. Kullanım ücretleri, kredilerin veya indirimlerin hiçbirini dikkate almaz.
 
-## <a name="changes-from-azure-ea-usage-and-charges"></a>Azure EA kullanımı ve ücretleri değişiklikleri
+## <a name="changes-from-azure-ea-usage-and-charges"></a>Azure Kurumsal Anlaşma kullanımı ve ücretlerindeki değişiklikler
 
-Bir EA müşterisinin olsaydı, Azure faturalandırma profili kullanım CSV dosyası koşullarını Azure EA kullanım CSV dosyasında terimlerden farklı olduğunu fark edeceksiniz. Bir eşleme profili kullanım koşulları faturalandırma için EA Kullanım Koşulları'nın şu şekildedir:
+Kurumsal Anlaşma müşterisiyseniz, Azure faturalama profili kullanım bilgilerini içeren CSV dosyasındaki terimlerin, Azure Kurumsal Anlaşma kullanım bilgilerini içeren CSV dosyasındaki terimlerden farklılık gösterdiğini göreceksiniz. Kurumsal Anlaşma kullanımı terimlerinin faturalama profili kullanımı terimleri ile eşlemesi aşağıda verilmiştir:
 
-| Azure EA kullanım CSV | Microsoft Müşteri sözleşmesi Azure kullanım ve Ücret CSV |
+| Azure Kurumsal Anlaşma kullanım bilgilerini içeren CSV dosyası | Microsoft Müşteri Sözleşmesi Azure kullanım bilgilerini ve ücretlerini içeren CSV dosyası |
 | --- | --- |
 | Tarih | date |
 | Ay| date |
 | Gün | date |
 | Yıl | date |
-| Product | product |
+| Ürün | ürün |
 | MeterId | meterID |
-| MeterCategory | MeterCategory |
-| MeterSubCategory | MeterSubCategory |
-| MeterRegion | MeterRegion |
-| MeterName | MeterName |
-| ConsumedQuantity | Miktar |
+| MeterCategory | meterCategory |
+| MeterSubCategory | meterSubCategory |
+| MeterRegion | meterRegion |
+| MeterName | meterName |
+| ConsumedQuantity | miktar |
 | ResourceRate | effectivePrice |
 | ExtendedCost | maliyet |
-| resourceLocation | resourceLocation |
-| ConsumedService | ConsumedService |
-| InstanceId | InstanceId |
-| ServiceInfo1 | ServiceInfo1 |
-| ServiceInfo2 | ServiceInfo2 |
-| Additionalınfo | Additionalınfo |
-| Tags | tags |
+| ResourceLocation | resourceLocation |
+| ConsumedService | consumedService |
+| InstanceId | instanceId |
+| ServiceInfo1 | serviceInfo1 |
+| HizmetBilgisi2 | serviceInfo2 |
+| AdditionalInfo | additionalInfo |
+| Etiketler | etiketler |
 | StoreServiceIdentifier | Yok |
-| Bölüm adı | invoiceSection |
-| CostCenter | CostCenter |
+| DepartmentName | invoiceSection |
+| CostCenter | costCenter |
 | UnitOfMeasure | unitofMeasure |
-| ResourceGroup | resourceGroup |
+| adlı yönetilen örnek, | resourceGroup |
 | ChargesBilledSeparately | isAzureCreditEligible |
 
-## <a name="detailed-terms-and-descriptions"></a>Ayrıntılı hüküm ve açıklamaları
+## <a name="detailed-terms-and-descriptions"></a>Ayrıntılı terimler ve açıklamaları
 
-Aşağıdaki terimler Azure kullanım ve Ücret dosyasında gösterilmektedir.
+Azure kullanım bilgilerini ve ücretlerini içeren dosyada aşağıdaki terimler gösterilmektedir.
 
-Terim | Açıklama
+Sözleşme Dönemi | Açıklama
 --- | ---
-Fatura kodu | PDF faturada listelenen belgenin benzersiz kimliği
-previousInvoiceId | Bu satır öğesi bir para iadesi ise özgün Fatura referansı
-billingAccountName | Fatura hesabı adı
-billingAccountId | Kök hesabı faturalama için benzersiz tanımlayıcı
-billingProfileId | Faturalandırılan ücretler tahakkuk eder fatura profilinin adı
-billingProfileName | Faturalandırılan ücretler tahakkuk eder faturalandırma profili için benzersiz tanımlayıcı
-invoiceSectionId | Fatura bölümü için benzersiz tanımlayıcı
-invoiceSectionName | Fatura bölümün adı
-CostCenter | Abonelik maliyetleri (yalnızca açık faturalandırma dönemlerini kullanılabilir) izlemek için tanımlanan maliyet merkezi
-billingPeriodStartDate | Fatura oluşturulduğu fatura dönemi başlangıç tarihi
-billingPeriodEndDate | Fatura oluşturulduğu fatura dönemi bitiş tarihi
-servicePeriodStartDate | Derecelendirme süresi başlangıç tarihi tanımlanan ve tüketilen veya satın alınan hizmeti için fiyatlandırma kilitli
-servicePeriodEndDate | Derecelendirme dönemi bitiş tarihi tanımlanan ve tüketilen veya satın alınan hizmeti için fiyatlandırma kilitli
-date | Azure ve Market kullanım tabanlı ücretleri için bu derecelendirme tarihtir. Bu, tek seferlik satın alma işlemleri (ayırmalar, Market) veya sabit tekrar eden ücretler (destek sunar) için satın alma tarihtir.
+invoiceId | Fatura PDF dosyasında listelenen benzersiz belge kimliği
+previousInvoiceId | Bu kalemin para iadesi olması durumunda asıl faturanın başvurusu
+billingAccountName | Ödeme hesabının adı
+billingAccountId | Kök ödeme hesabının benzersiz tanımlayıcısı
+billingProfileId | Faturalanan ücretleri tahakkuk eden faturalama profilinin adı
+billingProfileName | Faturalanan ücretleri tahakkuk eden Faturalama Profilinin benzersiz tanımlayıcısı
+invoiceSectionId | Fatura bölümünün benzersiz tanımlayıcısı
+invoiceSectionName | Fatura bölümünün adı
+costCenter | Maliyetleri izlemek için abonelikte tanımlanan maliyet merkezi (yalnızca açık faturalama döneminde kullanılabilir)
+billingPeriodStartDate | Faturanın oluşturulduğu faturalama döneminin başlangıç tarihi
+billingPeriodEndDate | Faturanın oluşturulduğu faturalama döneminin bitiş tarihi
+servicePeriodStartDate | Kullanılan veya satın alınan hizmet için fiyatlandırmanın tanımlandığı ve kilitlendiği değerlendirme döneminin başlangıç tarihi
+servicePeriodEndDate | Kullanılan veya satın alınan hizmet için fiyatlandırmanın tanımlandığı ve kilitlendiği değerlendirme döneminin bitiş tarihi
+date | Azure ve Market kullanım tabanlı ücretleri için bu, değerlendirme tarihidir. Tek seferlik satın alımlar (Rezervasyonlar, Market) veya sabit yinelenen ücretler (destek teklifleri) için bu, satın alma tarihidir.
 serviceFamily | Hizmetin ait olduğu hizmet ailesi
-productOrderId | Ürün siparişi için benzersiz tanımlayıcı
-productOrderName | Ürün siparişi için benzersiz bir ad
-ConsumedService | Tüketim hizmeti adı
-MeterId | Ölçüm için benzersiz tanımlayıcı
-MeterName | Ölçüm adı
-MeterCategory | Ölçüm için sınıflandırma kategorisi adı. Örneğin, *bulut Hizmetleri*, *ağ*vb.
-MeterSubCategory | Ölçüm alt sınıflandırma kategorisi adı
-MeterRegion | Ölçüm hizmeti için kullanılabilir olduğu bölge adı. Veri Merkezi konumuna göre ücretlendirilen belirli hizmetler için veri merkezinin konumunu belirtir.
-Teklif | Satın alınan teklif adı
-productId | Ücretler tahakkuk ürün için benzersiz tanımlayıcı
-product | Ücretler tahakkuk ürün adı
-Abonelik kimliği | Ücretler tahakkuk abonelik için benzersiz tanımlayıcı
-subscriptionName | Ücretler tahakkuk abonelik adı
-Reservationıd | Satın alınan ayırmanın örneği için benzersiz tanımlayıcı
-reservationName | Satın alınan ayırmanın örneğinin adı
-publisherType | Yayımcı türü (değerleri: firstParty, thirdPartyReseller, thirdPartyAgency)
-PublisherName | Yayımcının Market Hizmetleri
-resourceGroupId | Bu kaynakla ilgili kaynak grubu için benzersiz tanımlayıcı
-resourceGroupName | Kaynakla ilişkili bir kaynak grubu adı
-resourceId | Kaynak örneği için benzersiz tanımlayıcı
-Kaynak türü | Kaynak örnek türü
+productOrderId | Ürün siparişinin benzersiz tanımlayıcısı
+productOrderName | Ürün siparişinin benzersiz adı
+consumedService | Kullanılan hizmetin adı
+meterId | Ölçümün benzersiz tanımlayıcısı
+meterName | Ölçümün adı
+meterCategory | Ölçüm için sınıflandırma kategorisinin adı. Örneğin, *Bulut hizmetleri*, *Ağ iletişimi* vb.
+meterSubCategory | Ölçüm alt sınıflandırma kategorisinin adı
+meterRegion | Hizmet ölçümünün kullanılabilir olduğu bölgenin adı. Veri merkezi konumuna göre fiyatlandırılan belirli hizmetler için veri merkezinin konumunu belirtir.
+teklif | Satın alınan teklifin adı
+productId | Ücretleri tahakkuk eden ürünün benzersiz tanımlayıcısı
+ürün | Ücretleri tahakkuk eden ürünün adı
+abonelik kimliği | Ücretleri tahakkuk eden aboneliğin benzersiz tanımlayıcısı
+subscriptionName | Ücretleri tahakkuk eden aboneliğin adı
+reservationId | Satın alınan rezervasyon örneğinin benzersiz tanımlayıcısı
+reservationName | Satın alınan rezervasyon örneğinin adı
+publisherType | Yayımcı türü (Değerler: firstParty, thirdPartyReseller, thirdPartyAgency)
+publisherName | Market hizmetlerinin yayımcısı
+resourceGroupId | Kaynakla ilişkili kaynak grubunun benzersiz tanımlayıcısı
+resourceGroupName | Kaynakla ilişkili kaynak grubunun adı
+resourceId | Kaynak örneğinin benzersiz tanımlayıcısı
+resourceType | Kaynak örneğinin türü
 resourceLocation | Kaynağın çalıştığı veri merkezinin konumunu belirtir.
-location | Farklı kaynak konumları aynı bölgeler için yapılandırıldıysa, kaynağın normalleştirilmiş konum
-Miktar | Satın alınan veya kullanılan birim sayısı
-UnitOfMeasure | Faturalama hizmeti için ölçü birimidir. Örneğin, işlem Hizmetleri, saat başına faturalandırılır.
-chargeType | Ücret türü. Değerler: <ul><li>AsCharged Kullanım: Bir Azure hizmeti kullanıma bağlı doğan ücretleri. Bu, kullanım karşı ayrılmış örnekler nedeniyle ücretlendirilmez Vm'leri içerir.</li><li>AsCharged PurchaseMarketplace: Market satın alımları gelen tek seferlik veya sabit tekrar eden ücretler</li><li>AsCharged UsageMarketplace: Tüketim birimlerine göre ücretlendirilen Market Hizmetleri ücretlerine uygulanabilir</li></ul>
-isAzureCreditEligible | Hizmetinde ücretsiz Azure KREDİLERİ kullanımı için ödenecek uygun olup olmadığını gösteren bayrak (değerleri: TRUE, False)
-ServiceInfo1 | Hizmete özgü meta veriler
-ServiceInfo2 | İsteğe bağlı hizmete özgü meta veriler yakalanır eski alan
-Additionalınfo | Ek hizmete özgü meta veriler.
-tags | Kaynağa atadığınız etiketler
+location | Aynı bölgeler için farklı kaynak konumları yapılandırılmışsa kaynağın normalleştirilmiş konumu
+miktar | Satın alınan veya kullanılan birim sayısı
+unitOfMeasure | Hizmet faturalamasının ölçü birimi. Örneğin, işlem hizmetleri saat bazında faturalandırılır.
+chargeType | Ücret türü. Değerler: <ul><li>AsCharged-Usage: Bir Azure hizmetinin kullanımına göre tahakkuk eden ücretler. Ayrılmış örnekler nedeniyle ücretlendirilmemiş olan sanal makinelere karşı kullanım buna dahildir.</li><li>AsCharged-PurchaseMarketplace: Market satın alımlarındaki bir kerelik veya sabit yinelenen ücretler</li><li>AsCharged-UsageMarketplace: Tüketim birimlerine göre ücretlendirilen Market hizmetleri için ücretler</li></ul>
+isAzureCreditEligible | Hizmet ücretinin, Azure kredileri kullanılarak ödenmeye uygun olup olmadığını belirten işaret (Değerler: True, False)
+serviceInfo1 | Hizmete özgü meta veriler
+serviceInfo2 | Hizmete özgü isteğe bağlı meta verileri yakalayan eski alan
+additionalInfo | Hizmete özgü ek meta veriler.
+etiketler | Kaynağa atadığınız etiketler
 
-### <a name="make-sure-that-charges-are-correct"></a>Ücretleri doğru olduğundan emin olun
+### <a name="make-sure-that-charges-are-correct"></a>Ücretlerin doğru olduğundan emin olun
 
-Ayrıntılı kullanım dosyanızdaki ücretleri doğru olduğundan emin olmak istiyorsanız, bunları doğrulayabilirsiniz. Bkz: [fatura profil faturasında ücretlerini anlama](billing-mca-understand-your-bill.md)
+Ayrıntılı kullanım dosyanızdaki ücretlerin doğru olduğundan emin olmak istiyorsanız bunları doğrulayabilirsiniz. Bkz. [Faturalama profilinizin faturasındaki ücretleri anlama](billing-mca-understand-your-bill.md)
 
-## <a name="check-access-to-a-microsoft-customer-agreement"></a>Microsoft Müşteri sözleşmesi için erişim denetimi
+## <a name="check-access-to-a-microsoft-customer-agreement"></a>Microsoft Müşteri Sözleşmesi’ne erişimi denetleme
 [!INCLUDE [billing-check-mca](../../includes/billing-check-mca.md)]
 
-## <a name="need-help-contact-us"></a>Yardım mı gerekiyor? Bizimle iletişim kurun.
+## <a name="need-help-contact-us"></a>Yardıma mı ihtiyacınız var? Bize ulaşın.
 
-Sorularınız varsa veya yardıma ihtiyacınız [bir destek isteği oluşturma](https://go.microsoft.com/fwlink/?linkid=2083458).
+Sorularınız varsa ya da yardıma gereksinim duyuyorsanız [destek isteği oluşturun](https://go.microsoft.com/fwlink/?linkid=2083458).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Görüntüleyin ve Microsoft Azure faturanızı indirin](billing-download-azure-invoice.md)
-- [Microsoft Azure kullanım ve Ücret görüntülemenize ve indirmenize](billing-download-azure-daily-usage.md)
+- [Microsoft Azure faturanızı görüntüleme ve indirme](billing-download-azure-invoice.md)
+- [Microsoft Azure kullanımınızı ve ücretlerinizi görüntüleme ve indirme](billing-download-azure-daily-usage.md)

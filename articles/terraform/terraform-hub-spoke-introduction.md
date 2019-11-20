@@ -1,85 +1,79 @@
 ---
-title: Bir hub'ı oluşturup azure'da Terraform ile karma ağ topolojisi
-description: Terraform kullanarak Azure'da bir tüm hibrit ağ başvuru mimarisi oluşturma işlemini gösteren öğretici
-services: terraform
-ms.service: azure
-keywords: terraform, hub ve bağlı bileşen, ağlar, hibrit ağlar, devops, sanal makine, azure, sanal ağ eşleme, ağ sanal Gereci
-author: VaijanathB
-manager: jeconnoc
-ms.author: vaangadi
+title: Öğretici-Terrayform kullanarak Azure 'da merkez ve bağlı bileşen karma ağ topolojisi oluşturma
+description: Terkform kullanarak Azure 'da karma ağ başvuru mimarisinin tamamının nasıl oluşturulacağını gösteren öğretici
 ms.topic: tutorial
-ms.date: 03/01/2019
-ms.openlocfilehash: 648369d89bd2b5b08171e1f6f5482c81bfba3c66
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.date: 10/26/2019
+ms.openlocfilehash: 90a60fc4fe98397c903e3e8a460806d6a2edb908
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60884732"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74159024"
 ---
-# <a name="tutorial-create-a-hub-and-spoke-hybrid-network-topology-with-terraform-in-azure"></a>Öğretici: Bir hub'ı oluşturup azure'da Terraform ile karma ağ topolojisi
+# <a name="tutorial-create-a-hub-and-spoke-hybrid-network-topology-in-azure-using-terraform"></a>Öğretici: Terrayform kullanarak Azure 'da merkez ve bağlı bileşen karma ağ topolojisi oluşturma
 
-Bu öğretici serisinde, Azure'da uygulama Terraform kullanmayı gösterir bir [merkez ve uç ağ topolojisi](/azure/architecture/reference-architectures/hybrid-networking/hub-spoke). 
+Bu öğretici serisinde, Azure 'da bir [hub ve bağlı ağ topolojisi](/azure/architecture/reference-architectures/hybrid-networking/hub-spoke)Için Terrayform 'un nasıl kullanılacağı gösterilmektedir. 
 
-Bir hub ve bağlı bileşen topolojisi ortak Hizmetleri paylaşırken iş yüklerini yalıtmak için bir yoldur. Bu hizmetler, kimlik ve güvenlik içerir. Hub'ı şirket içi ağ merkezi bağlantı noktası gibi davranan bir sanal ağ (VNet) ' dir. Uçlar, merkezle eşlenen sanal ağlardır. Bileşen ağlarını içinde ayrı iş yüklerini dağıtılırken paylaşılan hizmetler hub'ında dağıtılır.
+Hub ve bağlı bileşen topolojisi, ortak hizmetleri paylaşırken iş yüklerini yalıtmak için bir yoldur. Bu hizmetler kimlik ve güvenlik içerir. Hub, şirket içi ağa merkezi bağlantı noktası görevi gören bir sanal ağ (VNet). Uçlar, merkezle eşlenen sanal ağlardır. Paylaşılan hizmetler hub 'a dağıtılır ve tek tek iş yükleri, bağlı olan ağlarda dağıtılır.
 
 Bu öğretici aşağıdaki görevleri kapsar:
 
 > [!div class="checklist"]
-> * Merkez ve uç hibrit ağ başvuru mimarisi kaynakları düzenlemek için HCL (HashiCorp dili) kullanın
-> * Hub'ı ağ Gereci kaynakları oluşturmak için Terraform'u kullanın
-> * Tüm kaynaklar için ortak noktası olarak hareket edecek Azure hub'ı ağ oluşturmak için Terraform'u kullanın
-> * Ayrı iş yüklerini uç azure'da sanal ağları olarak oluşturmak için Terraform'u kullanın
-> * Ağ geçitleri ve şirket içi ve Azure ağları arasında bağlantı kurmak için Terraform'u kullanın
-> * Uç ağlara VNet eşlemesi oluşturmak için Terraform'u kullanın
+> * Hub ve bağlı bileşen karma ağ başvuru mimarisi kaynaklarını düzenlemek için HCL (HashiCorp Language) kullanın
+> * Terrayform kullanarak Merkez ağı gereç kaynakları oluşturma
+> * Azure 'da tüm kaynaklar için ortak nokta olarak davranacak şekilde Azure 'da Merkez ağı oluşturmak için Terrayform 'u kullanın
+> * Azure 'da her iş yükünü bağlı ağ sanal ağları olarak oluşturmak için Terrayform kullanma
+> * Şirket içi ve Azure ağları arasında ağ geçitleri ve bağlantılar oluşturmak için Terrayform kullanın
+> * Bağlı ağa VNet eşlemeleri oluşturmak için Terrayform kullanma
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- **Azure aboneliği**: Azure aboneliğiniz yoksa, oluşturun bir [ücretsiz Azure hesabı](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) başlamadan önce.
+- **Azure aboneliği**: henüz bir Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir Azure hesabı](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) oluşturun.
 
-- **Terraform'u yükleme ve yapılandırma**: VM'ler ve diğer altyapı, azure'da sağlamak için [Terraform'u yükleme ve yapılandırma](/azure/virtual-machines/linux/terraform-install-configure)
+- **Terrayform 'U yükleyip yapılandırma**: Azure 'Da VM 'leri ve diğer altyapıyı sağlamak Için [terrayform 'u yükleyip yapılandırın](/azure/virtual-machines/linux/terraform-install-configure)
 
 ## <a name="hub-and-spoke-topology-architecture"></a>Hub ve bağlı bileşen topolojisi mimarisi
 
-Hub ve bağlı bileşen topolojisinde merkez bir sanal ağ ' dir. Sanal ağ, merkezi bir şirket içi ağınıza bağlantı noktası olarak görev yapar. Uçlar ise merkezle eşleştirilmiş bir ağdır ve iş yüklerini yalıtmak için kullanılabilir. Şirket içi veri merkezi ile merkez arasındaki trafik akışı bir ExpressRoute veya VPN ağ geçidi bağlantısı üzerinden gerçekleşir. Aşağıdaki görüntüde, hub ve bağlı bileşen topolojisinde bileşenleri gösterilmektedir:
+Hub ve bağlı bileşen topolojisinde, hub bir sanal ağ. VNet, şirket içi ağınıza yönelik merkezi bir bağlantı noktası işlevi görür. Uçlar ise merkezle eşleştirilmiş bir ağdır ve iş yüklerini yalıtmak için kullanılabilir. Şirket içi veri merkezi ile merkez arasındaki trafik akışı bir ExpressRoute veya VPN ağ geçidi bağlantısı üzerinden gerçekleşir. Aşağıdaki görüntüde, bir hub ve bağlı bileşen topolojisinde bileşenler gösterilmektedir:
 
-![Azure'da hub ve bağlı bileşen topolojisi mimarisi](./media/terraform-hub-and-spoke-tutorial-series/hub-spoke-architecture.png)
+![Azure 'da hub ve bağlı bileşen topolojisi mimarisi](./media/terraform-hub-and-spoke-tutorial-series/hub-spoke-architecture.png)
 
-## <a name="benefits-of-the-hub-and-spoke-topology"></a>Hub ve bağlı bileşen topolojisi avantajları
+## <a name="benefits-of-the-hub-and-spoke-topology"></a>Hub ve bağlı bileşen topolojisinin avantajları
 
-Bir merkez ve uç ağ topolojisi ortak Hizmetleri paylaşırken iş yüklerini yalıtmak için bir yoldur. Bu hizmetler, kimlik ve güvenlik içerir. Hub'ı şirket içi ağ merkezi bağlantı noktası gibi davranan bir sanal ağ ' dir. Uçlar, merkezle eşlenen sanal ağlardır. Bileşen ağlarını içinde ayrı iş yüklerini dağıtılırken paylaşılan hizmetler hub'ında dağıtılır. Merkez ve uç ağ topolojisi bazı avantajları şunlardır:
+Hub ve bağlı bileşen ağ topolojisi, ortak hizmetleri paylaşırken iş yüklerini yalıtmak için bir yoldur. Bu hizmetler kimlik ve güvenlik içerir. Hub, şirket içi ağa merkezi bağlantı noktası görevi gören bir sanal ağ. Uçlar, merkezle eşlenen sanal ağlardır. Paylaşılan hizmetler hub 'a dağıtılır ve tek tek iş yükleri, bağlı olan ağlarda dağıtılır. Hub ve bağlı bileşen ağ topolojisinin bazı avantajları aşağıda verilmiştir:
 
-- **Maliyet tasarrufu** tarafından birden çok iş yükleri tarafından paylaşılan tek bir konumda Hizmetleri merkezileştirme. Bu iş yükleri, ağ sanal Gereçleri ve DNS sunucularını içerir.
+- Birden çok iş yükü tarafından paylaşılabilen tek bir konumda Hizmetleri merkezileştirerek **maliyet tasarrufu** . Bu iş yükleri, ağ sanal gereçlerini ve DNS sunucularını içerir.
 - **Abonelik sınırlarını aşma**: Farklı aboneliklere ait sanal ağlar merkeze eşlenerek sınırlar aşılabilir.
 - **İşlerin ayrılması**: Merkezi BT (SecOps, InfraOps) ve iş yüklerini (DevOps) ilgilendiren konular ayrılır.
 
-## <a name="typical-uses-for-the-hub-and-spoke-architecture"></a>Merkez ve uç mimarinin tipik kullanımları
+## <a name="typical-uses-for-the-hub-and-spoke-architecture"></a>Hub ve bağlı bileşen mimarisi için tipik kullanımlar
 
-Bir hub ve bağlı bileşen mimarinin tipik kullanımları bazıları şunlardır:
+Hub ve bağlı bileşen mimarisinin bazı yaygın kullanımları şunlardır:
 
-- Birçok müşteri, farklı ortamlarda dağıtılan iş yükleri vardır. Bu ortamların, geliştirme, test ve üretim içerir. Çoğu zaman, bu iş yükleri DNS, Kimlikleri, NTP veya AD DS gibi hizmetleri paylaşmanız gerekir. Bu paylaşılan hizmetler Merkezi sanal ağa yerleştirilebilir. Bu şekilde, her ortam, yalıtım sağlamak için bir uç dağıtılır.
-- Birbirlerine gerektirmez, ancak paylaşılan hizmetlere erişim gerektiren iş yükleri.
-- Güvenlik konuları üzerinde merkezi denetime gerektiren kuruluşlar.
-- Her bir uçtaki iş yükleri için ayrı yönetim gerektiren kuruluşlar.
+- Birçok müşterinin farklı ortamlarda dağıtılan iş yükleri vardır. Bu ortamlar geliştirme, test ve üretimi içerir. Birçok kez, bu iş yüklerinin DNS, KIMLIKLER, NTP veya AD DS gibi hizmetleri paylaşması gerekir. Bu paylaşılan hizmetler hub VNet 'e yerleştirilebilecek. Bu şekilde, her ortam yalıtımı sürdürmek için bir bağlı bileşene dağıtılır.
+- Birbirleriyle bağlantı gerektirmeyen ve paylaşılan hizmetlere erişmesi gereken iş yükleri.
+- Güvenlik yönleri üzerinde merkezi denetim gerektiren kuruluşlar.
+- Her bir bağlı olan iş yükleri için ayrılmış yönetim gerektiren kuruluşlar.
 
-## <a name="preview-the-demo-components"></a>Tanıtım bileşenleri Önizleme
+## <a name="preview-the-demo-components"></a>Tanıtım bileşenlerini önizleyin
 
-Bu serideki her öğretici ile çalışırken, çeşitli bileşenler ayrı Terraform betiklerde tanımlanır. Oluşturulan ve dağıtılan tanıtım mimari aşağıdaki bileşenlerden oluşur:
+Bu serideki her öğreticide çalışırken, farklı bileşenler ayrı Terlarform betiklerinde tanımlanmıştır. Oluşturulan ve dağıtılan tanıtım mimarisi aşağıdaki bileşenlerden oluşur:
 
-- **Şirket içi ağı**. Bir kuruluş ile çalışan bir özel yerel ağ. Merkez ve uç başvuru mimarisi için azure'da bir sanal ağ, şirket içi ağ benzetimini yapmak için kullanılır.
+- **Şirket içi ağı**. Bir kuruluşla çalışan özel bir yerel alan ağı. Hub ve bağlı bileşen başvuru mimarisi için, Azure 'daki bir sanal ağ, şirket içi bir ağın benzetimini yapmak için kullanılır.
 
-- **VPN cihazı**. Bir VPN cihazına veya hizmet şirket içi ağa dış bağlantı sağlar. VPN cihazı, bir donanım aygıtı veya bir yazılım çözümü olabilir. 
+- **VPN cihazı**. VPN cihazı veya hizmeti, şirket içi ağa yönelik dış bağlantı sağlar. VPN cihazı bir donanım gereci veya bir yazılım çözümü olabilir. 
 
-- **Merkezi sanal ağ**. Hub'ı şirket içi ağınıza bağlantı ve hizmetlerini barındırmak için bir yer merkezi noktadır. Bu hizmetler, uç sanal ağlarında barındırılan farklı iş yükleri tarafından kullanılabilecek.
+- **Merkezi sanal ağ**. Merkez, şirket içi ağınıza ve ana bilgisayar hizmetlerine yönelik bir yer olan merkezi bağlantı noktasıdır. Bu hizmetler, bağlı olan sanal ağlarda barındırılan farklı iş yükleri tarafından tüketilebilir.
 
 - **Ağ geçidi alt ağı**. VNet ağ geçitleri aynı alt ağda tutulur.
 
 - **Uç sanal ağları**. Uçlar, iş yüklerini diğer uçlardan ayrı olarak yönetilen kendi sanal ağlarında yalıtmak için kullanılabilir. Her iş yükü birden fazla katman içerebilir. Birden fazla alt ağ, Azure yük dengeleyicileri aracılığıyla birbirine bağlanır. 
 
-- **Sanal ağ eşlemesi**. İki sanal ağ eşleme bağlantısı kullanarak bağlanabilir. Eşleme bağlantıları, sanal ağlar arasındaki geçişsiz ve gecikme süresi düşük bağlantılardır. Sanal ağlar eşlendikten sonra bir yönlendiriciye gerek kalmadan Azure omurgasını kullanarak trafiği exchange. Bir merkez ve uç ağ topolojisinde her ucu merkeze hub'a bağlanmak için VNet eşlemesi kullanılır. Aynı bölgede ya da farklı bölgelerdeki sanal ağlar eşlenebilir.
+- **Sanal ağ eşlemesi**. İki sanal ağ, bir eşleme bağlantısı kullanılarak bağlanabilir. Eşleme bağlantıları, sanal ağlar arasındaki geçişsiz ve gecikme süresi düşük bağlantılardır. Eşlendikten sonra, sanal ağlar Azure omurgasını kullanarak bir yönlendirici gerekmeden trafiği Exchange trafiği. Hub ve bağlı ağ topolojisinde VNet eşlemesi, hub 'ı her bir bağlı ağa bağlamak için kullanılır. VNET 'leri aynı bölgede veya farklı bölgelerde eşler.
 
 ## <a name="create-the-directory-structure"></a>Dizin yapısını oluşturma
 
-Tanıtımı için Terraform yapılandırma dosyalarının bulunduğu dizin oluşturun.
+Tanıtım için Teraform yapılandırma dosyalarınızı tutan dizini oluşturun.
 
 1. [Azure portala](https://portal.azure.com) gidin.
 
@@ -109,7 +103,7 @@ Tanıtımı için Terraform yapılandırma dosyalarının bulunduğu dizin oluş
 
 Azure sağlayıcısını tanımlayan Terraform yapılandırma dosyasını yapılandırın.
 
-1. Cloud Shell'de adlı yeni bir dosya açın `main.tf`.
+1. Cloud Shell ' de, `main.tf`adlı yeni bir dosya açın.
 
     ```bash
     code main.tf
@@ -117,7 +111,7 @@ Azure sağlayıcısını tanımlayan Terraform yapılandırma dosyasını yapıl
 
 1. Aşağıdaki kodu düzenleyiciye yapıştırın:
 
-    ```JSON
+    ```hcl
     provider "azurerm" {
         version = "~>1.22"
     }
@@ -125,11 +119,11 @@ Azure sağlayıcısını tanımlayan Terraform yapılandırma dosyasını yapıl
 
 1. Dosyayı kaydedin ve düzenleyiciden çıkın.
 
-## <a name="create-the-variables-file"></a>Değişkenleri dosyası oluşturma
+## <a name="create-the-variables-file"></a>Değişkenler dosyası oluşturma
 
-Farklı komut dosyaları arasında kullanılan genel değişkenleri Terraform yapılandırma dosyası oluşturun.
+Farklı betiklerde kullanılan ortak değişkenler için Terrayform yapılandırma dosyasını oluşturun.
 
-1. Cloud Shell'de adlı yeni bir dosya açın `variables.tf`.
+1. Cloud Shell ' de, `variables.tf`adlı yeni bir dosya açın.
 
     ```bash
     code variables.tf
@@ -137,7 +131,7 @@ Farklı komut dosyaları arasında kullanılan genel değişkenleri Terraform ya
 
 1. Aşağıdaki kodu düzenleyiciye yapıştırın:
 
-    ```JSON
+    ```hcl
     variable "location" {
       description = "Location of the network"
       default     = "centralus"
@@ -164,4 +158,4 @@ Farklı komut dosyaları arasında kullanılan genel değişkenleri Terraform ya
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"] 
-> [Azure'da Terraform ile şirket içi sanal ağ oluşturma](./terraform-hub-spoke-on-prem.md)
+> [Azure 'da Terrayform ile şirket içi sanal ağ oluşturma](./terraform-hub-spoke-on-prem.md)

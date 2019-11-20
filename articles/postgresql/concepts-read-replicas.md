@@ -1,87 +1,108 @@
 ---
-title: -Tek bir sunucu PostgreSQL için Azure veritabanı çoğaltmalarını okuyun
-description: Bu makalede, PostgreSQL - tek bir sunucu için Azure veritabanı'nda okuma çoğaltma özelliği açıklanır.
+title: PostgreSQL için Azure veritabanı 'nda çoğaltmaları okuma-tek sunucu
+description: Bu makalede PostgreSQL için Azure veritabanı 'nda çoğaltmayı oku özelliği (tek sunucu) açıklanmaktadır.
 author: rachel-msft
 ms.author: raagyema
 ms.service: postgresql
 ms.topic: conceptual
-ms.date: 06/14/2019
-ms.openlocfilehash: c98247b0ba8b670a59dec9aa3ec87e949f1dda78
-ms.sourcegitcommit: 72f1d1210980d2f75e490f879521bc73d76a17e1
+ms.date: 11/17/2019
+ms.openlocfilehash: 5d3d752f549fe336f584fa3534b61cb5a009c3bd
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/14/2019
-ms.locfileid: "67147938"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74158812"
 ---
-# <a name="read-replicas-in-azure-database-for-postgresql---single-server"></a>-Tek bir sunucu PostgreSQL için Azure veritabanı çoğaltmalarını okuyun
+# <a name="read-replicas-in-azure-database-for-postgresql---single-server"></a>PostgreSQL için Azure veritabanı 'nda çoğaltmaları okuma-tek sunucu
 
-Okuma çoğaltması özelliği salt okunur bir sunucuya bir PostgreSQL sunucusu için Azure veritabanı'ndan veri çoğaltmanıza olanak sağlar. En fazla beş çoğaltmalar için ana sunucu ile çoğaltma yapabilirsiniz. Çoğaltmalar, PostgreSQL altyapısı yerel çoğaltma teknolojisiyle zaman uyumsuz olarak güncelleştirilir.
+Çoğaltma oku özelliği, bir PostgreSQL için Azure veritabanı sunucusunun bir salt okunurdur sunucusuna veri çoğaltmanıza olanak sağlar. Ana sunucudan en fazla beş çoğaltmaya çoğaltabilirsiniz. Çoğaltmalar, PostgreSQL altyapısı yerel çoğaltma teknolojisiyle zaman uyumsuz olarak güncelleştirilir.
 
-> [!IMPORTANT]
-> Salt okunur bir çoğaltması, ana sunucunuz ile aynı bölgede ya da diğer Azure bölgesinde, tercih ettiğiniz oluşturabilirsiniz. Bölgeler arası çoğaltma şu anda genel Önizleme aşamasındadır.
+Çoğaltmalar, PostgreSQL için normal Azure veritabanı sunucularına benzer şekilde yönettiğiniz yeni sunuculardır. Her okuma çoğaltması için, sanal çekirdekler ve depolama biriminde GB/ay içinde sağlanan işlem için faturalandırılırsınız.
 
-Çoğaltmalar, PostgreSQL sunucuları için benzer normal için Azure veritabanı'nı yönetme yeni sunucularıdır. Her yineleme okumak için sanal Çekirdeklerde sağlanan işlem ve depolama GB için faturalandırılırsınız / ay.
+[Çoğaltmaları oluşturma ve yönetme](howto-read-replicas-portal.md)hakkında bilgi edinin.
 
-Bilgi edinmek için nasıl [oluşturma ve yinelemeleri yönetme](howto-read-replicas-portal.md).
+## <a name="when-to-use-a-read-replica"></a>Okuma çoğaltması ne zaman kullanılır?
+Okuma çoğaltması özelliği, okuma yoğunluklu iş yüklerinin performansını ve ölçeğini artırmaya yardımcı olur. Okuma iş yükleri çoğaltmalar için yalıtılabilir, yazma iş yükleri ana ağa yönlendirilebilir.
 
-## <a name="when-to-use-a-read-replica"></a>Salt okunur bir çoğaltması kullanmak üzere ne zaman
-Salt okunur çoğaltma özelliği okuma açısından yoğun iş yükleri, ölçek ve performans artırmaya yardımcı olur. Yazma iş yüklerinin asıl yönlendirilebilir okuma iş yükleri için çoğaltmalar, yalıtılmış olabilir.
+Yaygın bir senaryo, bı ve analitik iş yüklerinin raporlama için veri kaynağı olarak okuma çoğaltmasını kullanmasını sağlar.
 
-Sık karşılaşılan bir senaryodur BI sahip olmaktır ve analiz iş yükleri okuma çoğaltması raporlama için veri kaynağı olarak kullanın.
+Çoğaltmalar salt okunurdur, ana bilgisayardaki yazma kapasitesini doğrudan azaltmazlar. Bu özellik, yazma yoğunluklu iş yükleri için hedeflenmez.
 
-Çoğaltmaların salt okunur olduğundan, doğrudan asıl kapasite yazma yüklerini azaltmak yok. Bu özellik, yazma yoğunluklu iş yükleri hedeflenen değil.
+Okuma çoğaltması özelliği PostgreSQL zaman uyumsuz çoğaltmasını kullanır. Özelliği, zaman uyumlu çoğaltma senaryolarına yönelik değildir. Ana ve çoğaltma arasında ölçülebilir bir gecikme olacaktır. Çoğaltılan veriler, sonunda, ana sunucudaki verilerle tutarlı hale gelir. Bu gecikmeyi barındırabilecek iş yükleri için bu özelliği kullanın.
 
-PostgreSQL zaman uyumsuz çoğaltma okuma çoğaltması özelliğini kullanır. Bu özellik, zaman uyumlu çoğaltma senaryoları için tasarlanmamıştır. Ana ve çoğaltma arasında ölçülebilir bir gecikme olur. Veri çoğaltma sonunda asıl verilerle tutarlı hale gelir. Bu gecikme uyum iş yükleri için bu özelliği kullanın.
+## <a name="cross-region-replication"></a>Çapraz bölge çoğaltma
+Ana sunucunuzdaki farklı bir bölgede bir okuma çoğaltması oluşturabilirsiniz. Çapraz bölge çoğaltma, olağanüstü durum kurtarma planlaması veya kullanıcılarınıza daha yakın veri getirme gibi senaryolar için yararlı olabilir.
 
-Okuma çoğaltma, olağanüstü durum kurtarma planınızı geliştirebilirsiniz. İlk yöneticisinden farklı bir Azure bölgesinde bir çoğaltma olması gerekir. Bir bölge olağanüstü durum varsa, bu çoğaltma için çoğaltma durdurma ve iş yükünüz yönlendirin. Çoğaltma durdurma yazma kabul başlamak çoğaltmanın sağlar, hem de okur. Daha fazla bilgi [çoğaltma durdurma](#stop-replication) bölümü. 
+[PostgreSQL Için Azure veritabanı bölgesine](https://azure.microsoft.com/global-infrastructure/services/?products=postgresql)bir ana sunucu ekleyebilirsiniz. Ana sunucu, eşleştirilmiş bölge veya evrensel çoğaltma bölgelerinde bir çoğaltmaya sahip olabilir. Aşağıdaki resimde, ana bölgenize göre hangi çoğaltma bölgelerinin kullanılabildiği gösterilmektedir.
+
+[![okuma çoğaltması bölgeleri](media/concepts-read-replica/read-replica-regions.png)](media/concepts-read-replica/read-replica-regions.png#lightbox)
+
+### <a name="universal-replica-regions"></a>Evrensel çoğaltma bölgeleri
+Ana sunucunuzun bulunduğu yere bakılmaksızın aşağıdaki bölgelerin herhangi birinde her zaman bir okuma çoğaltması oluşturabilirsiniz. Evrensel çoğaltma bölgeleri şunlardır:
+
+Avustralya Doğu, Avustralya Güneydoğu, Orta ABD, Doğu Asya, Doğu ABD, Doğu ABD 2, Japonya Doğu, Japonya Batı, Kore Orta, Kore Güney, Orta Kuzey ABD, Kuzey Avrupa, Orta Güney ABD, Güneydoğu Asya, UK Güney, UK Batı, Batı Avrupa, Batı ABD, Batı ABD 2.
+
+
+### <a name="paired-regions"></a>Eşleştirilmiş bölgeler
+Evrensel çoğaltma bölgelerine ek olarak, ana sunucunuzun Azure eşlenmiş bölgesinde bir okuma çoğaltması oluşturabilirsiniz. Bölgenizin çiftini bilmiyorsanız [Azure eşlenmiş bölgeler makalesinden](../best-practices-availability-paired-regions.md)daha fazla bilgi edinebilirsiniz.
+
+Olağanüstü durum kurtarma planlaması için çapraz bölge çoğaltmaları kullanıyorsanız, çoğaltmayı diğer bölgelerden biri yerine eşleştirilmiş bölgede oluşturmanızı öneririz. Eşleştirilmiş bölgeler eşzamanlı güncelleştirmeleri önleyin ve fiziksel yalıtımın ve veri fazlalığını önceliklendirir.  
+
+Göz önünde bulundurulması gereken sınırlamalar vardır: 
+
+* Bölgesel kullanılabilirlik: PostgreSQL için Azure veritabanı Batı ABD 2, Fransa Orta, BAE Kuzey ve Almanya Orta bulunabilir. Ancak, eşleştirilmiş bölgeleri kullanılamaz.
+    
+* Tek yönlü çiftler: bazı Azure bölgeleri yalnızca bir yönde eşleştirilmelidir. Bu bölgeler Batı Hindistan Brezilya Güney içerir. 
+   Bu, Batı Hindistan 'deki bir ana sunucunun Güney Hindistan bir çoğaltma oluşturmasıdır. Ancak, Güney Hindistan bir ana sunucu Batı Hindistan bir çoğaltma oluşturamaz. Bunun nedeni, Batı Hindistan ikincil bölgesinin Güney Hindistan, ancak Güney Hindistan ikincil bölgesi Batı Hindistan değildir.
+
 
 ## <a name="create-a-replica"></a>Çoğaltma oluşturma
-Ana sunucu olmalıdır `azure.replication_support` parametresini **çoğaltma**. Bu parametre değiştiğinde, değişikliğin etkili olması için sunucunun yeniden başlatılması gereklidir. ( `azure.replication_support` Parametresi yalnızca için genel amaçlı ve bellek için iyileştirilmiş katmanlar için geçerlidir).
+Ana sunucuda `azure.replication_support` parametresi **çoğaltma**olarak ayarlanmış olmalıdır. Bu parametre değiştirildiğinde, değişikliğin etkili olması için sunucu yeniden başlatması gerekir. (`azure.replication_support` parametresi yalnızca Genel Amaçlı ve bellek için Iyileştirilmiş katmanlar için geçerlidir).
 
-PostgreSQL sunucusu için boş bir Azure veritabanı oluşturma çoğaltma iş akışı başlattığınızda oluşturulur. Yeni sunucunun ana sunucuya olan verilerle doldurulur. Oluşturma zamanı asıl ve haftalık tam yedekleme saatinden veri miktarına bağlıdır. Süre birkaç dakikadan birkaç saate kadar değişebilir.
+Çoğaltma oluşturma iş akışını başlattığınızda, PostgreSQL için boş bir Azure veritabanı sunucusu oluşturulur. Yeni sunucu, ana sunucuda bulunan verilerle doldurulur. Oluşturma süresi, ana bilgisayardaki veri miktarına ve son haftalık tam yedeklemeden bu yana geçen zamana bağlıdır. Süre, birkaç dakika ile birkaç saat arasında değişebilir.
 
-Her çoğaltma için depolama etkin [otomatik büyütme](concepts-pricing-tiers.md#storage-auto-grow). Auto-grow özelliği için yinelenen verileri takip edin ve bir sonu dışında depolama hataları nedeniyle çoğaltma önlemek için çoğaltmayı sağlar.
+Her çoğaltma, depolama [otomatik büyüme](concepts-pricing-tiers.md#storage-auto-grow)için etkinleştirilir. Otomatik büyüme özelliği, çoğaltmanın kendisine çoğaltılan verilerle kalmasına izin verir ve çoğaltma sırasında depolama hatalarından kaynaklanan bir kesmeyi önler.
 
-PostgreSQL fiziksel çoğaltma, çoğaltma olmayan mantıksal okuma çoğaltması özelliğini kullanır. Çoğaltma, çoğaltma yuvaları kullanarak akış, varsayılan işlem modu kullanılır. Gerektiğinde, günlük aktarma bilgi edinmek için kullanılır.
+Okuma çoğaltması özelliği, mantıksal çoğaltma değil PostgreSQL fiziksel çoğaltmasını kullanır. Çoğaltma yuvaları kullanılarak akış çoğaltma varsayılan işlem modudur. Gerektiğinde, günlük aktarma işlemi yakalamak için kullanılır.
 
-Bilgi edinmek için nasıl [salt okunur bir çoğaltması Azure Portalı'nda oluşturma](howto-read-replicas-portal.md).
+[Azure Portal bir okuma çoğaltması oluşturmayı](howto-read-replicas-portal.md)öğrenin.
 
-## <a name="connect-to-a-replica"></a>Bir kopyaya bağlanın
-Bir çoğaltma oluşturduğunuzda, sanal ağ hizmet uç noktası ana sunucu ve güvenlik duvarı kuralları devralmaz. Bu kurallar, çoğaltma için bağımsız olarak ayarlanmalıdır.
+## <a name="connect-to-a-replica"></a>Bir çoğaltmaya bağlanma
+Bir çoğaltma oluşturduğunuzda, ana sunucunun güvenlik duvarı kuralları veya VNet hizmeti uç noktası aktarılmaz. Bu kuralların çoğaltma için bağımsız olarak ayarlanması gerekir.
 
-Çoğaltma yönetici hesabı, ana sunucudan devralır. Tüm kullanıcı hesapları ana sunucu üzerinde salt okunur kopyaya çoğaltılır. Salt okunur bir çoğaltması için yalnızca ana sunucu üzerinde kullanılabilir olan kullanıcı hesaplarını kullanarak da bağlanabilirsiniz.
+Çoğaltma, yönetici hesabını ana sunucudan devralır. Ana sunucudaki tüm Kullanıcı hesapları, okuma çoğaltmalarına çoğaltılır. Bir okuma çoğaltmasına yalnızca ana sunucuda bulunan Kullanıcı hesaplarını kullanarak bağlanabilirsiniz.
 
-PostgreSQL sunucusu için normal bir Azure veritabanında olduğu gibi kendi ana bilgisayar adı ve geçerli kullanıcı hesabı kullanarak çoğaltmaya bağlanabilirsiniz. Adlı bir sunucu için **kopyamı** yönetici kullanıcı adı ile **myadmin**, çoğaltmaya psql kullanarak bağlanabilirsiniz:
+Bir PostgreSQL için normal Azure veritabanı sunucusunda yaptığınız gibi, konak adını ve geçerli bir kullanıcı hesabını kullanarak çoğaltmaya bağlanabilirsiniz. Yönetici Kullanıcı adı **myadmin**olan **çoğaltmam** adlı bir sunucu için, psql kullanarak çoğaltmaya bağlanabilirsiniz:
 
 ```
 psql -h myreplica.postgres.database.azure.com -U myadmin@myreplica -d postgres
 ```
 
-İstemde, kullanıcı hesabı için parolayı girin.
+İstemde, Kullanıcı hesabının parolasını girin.
 
-## <a name="monitor-replication"></a>İzleyici çoğaltma
-PostgreSQL için Azure veritabanı çoğaltmasını izleme için iki ölçüm sağlar. İki ölçüm **arasında en fazla gecikme çoğaltmaları** ve **çoğaltma gecikmesi**. Bu ölçümleri görüntüleme hakkında bilgi edinmek için **bir yinelemeyi izlemek** bölümünü [çoğaltma ile ilgili nasıl yapılır makalesi okuma](howto-read-replicas-portal.md).
+## <a name="monitor-replication"></a>Çoğaltmayı izleme
+PostgreSQL için Azure veritabanı, çoğaltmayı izlemek için iki ölçüm sağlar. İki ölçüm çoğaltmalar ve **çoğaltma gecikmesi** **genelinde en fazla gecikme** . Bu ölçümleri görüntülemeyi öğrenmek için, [okuma çoğaltması nasıl yapılır makalesinin](howto-read-replicas-portal.md) **çoğaltma izleme** bölümüne bakın.
 
-**Arasında en fazla gecikme çoğaltmaları** ölçüm bayt ana çoğu İzolasyonu çoğaltma arasındaki gecikme gösterir. Bu ölçüm yalnızca ana sunucu üzerinde kullanılabilir.
+**Çoğaltmalar genelinde en fazla gecikme** ölçümü, ana ve en fazla çoğaltma çoğaltması arasındaki gecikme sayısını bayt cinsinden gösterir. Bu ölçüm yalnızca ana sunucuda kullanılabilir.
 
-**Çoğaltma gecikmesi** ölçüm son işlem yeniden beri zamanı gösterir. Ölçüm, ana sunucunuz üzerinde gerçekleşen işlem varsa, bu zaman gecikmesini yansıtır. Bu ölçüm yalnızca çoğaltma sunucusu için kullanılabilir. Çoğaltma gecikmesi hesaplanır `pg_stat_wal_receiver` görüntüle:
+**Çoğaltma gecikmesi** ölçümü, son yeniden yürütülmüş işlemden bu yana geçen süreyi gösterir. Ana sunucunuzda gerçekleşen işlem yoksa, ölçüm bu zaman gecikmesini yansıtır. Bu ölçüm yalnızca çoğaltma sunucuları için kullanılabilir. Çoğaltma gecikmesi `pg_stat_wal_receiver` görünümünden hesaplanır:
 
 ```SQL
 EXTRACT (EPOCH FROM now() - pg_last_xact_replay_timestamp());
 ```
 
-Çoğaltma gecikmesi, iş yükü için kabul edilebilir olmayan bir değer ulaştığında bildirmek için uyarı ayarlama. 
+Çoğaltma gecikmesi iş yükünüz için kabul edilebilir bir değere ulaştığında sizi bilgilendirmek için bir uyarı ayarlayın. 
 
-Hakkındaki ek bilgiler için ana sunucunun doğrudan bayt tüm çoğaltmaları üzerindeki çoğaltma gecikmesi'nin süresi almak için sorgulayın.
+Ek Öngörüler için, tüm çoğaltmalarda bayt olarak çoğaltma gecikmesini almak üzere ana sunucuyu doğrudan sorgulayın.
 
-PostgreSQL sürümü 10'da:
+PostgreSQL sürüm 10 ' da:
 
 ```SQL
 select pg_wal_lsn_diff(pg_current_wal_lsn(), stat.replay_lsn) 
 AS total_log_delay_in_bytes from pg_stat_replication;
 ```
 
-PostgreSQL sürümü 9.6 ve önceki sürümleri:
+PostgreSQL sürüm 9,6 ve önceki sürümlerde:
 
 ```SQL
 select pg_xlog_location_diff(pg_current_xlog_location(), stat.replay_location) 
@@ -89,48 +110,69 @@ AS total_log_delay_in_bytes from pg_stat_replication;
 ```
 
 > [!NOTE]
-> Bir ana sunucu veya okuma çoğaltması yeniden başlatılırsa, yeniden başlatın ve güncel duruma gelmesi için gereken süreyi çoğaltma gecikmesi ölçümü yansıtılır.
+> Ana sunucu veya okuma çoğaltması yeniden başlatılırsa, yeniden başlatma ve yakalama için geçen süre çoğaltma gecikmesi ölçüsüne yansıtılır.
 
-## <a name="stop-replication"></a>Çoğaltmayı Durdur
-Bir ana ve çoğaltma arasında çoğaltmayı durdurabilirsiniz. Durdurma eylemi, çoğaltmayı yeniden başlatın ve çoğaltma ayarlarını kaldırmak için neden olur. Ana sunucu ile bir salt okunur çoğaltma arasında çoğaltmayı durdurulduktan sonra çoğaltma, tek başına sunucu haline gelir. Tek başına sunucu verileri çoğaltma durdurma komutunun başlatılmasından çoğaltma üzerinde kullanılabilir olan verilerdir. Tek başına sunucu ana sunucu ile Kaçırdığınız değil.
+## <a name="stop-replication"></a>Çoğaltmayı durdurma
+Ana ve çoğaltma arasında çoğaltmayı durdurabilirsiniz. Durdur eylemi, çoğaltmanın yeniden başlatılmasına ve çoğaltma ayarlarını kaldırmasına neden olur. Bir ana sunucu ve bir okuma çoğaltması arasında çoğaltma durdurulduktan sonra çoğaltma tek başına bir sunucu haline gelir. Tek başına sunucusundaki veriler, çoğaltma durdurma komutunun başlatıldığı zamanda çoğaltma üzerinde kullanılabilir olan veri. Tek başına sunucu, ana sunucu ile birlikte yakalamaz.
 
 > [!IMPORTANT]
-> Tek başına sunucu ile bir çoğaltma yeniden yapılamıyor.
-> Salt okunur bir çoğaltma üzerinde çoğaltma durdurmadan önce çoğaltma gerektiren tüm verilere sahip olun.
+> Tek başına sunucu tekrar bir çoğaltmaya yapılamaz.
+> Bir okuma çoğaltmasında çoğaltmayı durdurmadan önce, çoğaltmanın gerekli tüm verilere sahip olduğundan emin olun.
 
-Çoğaltma durdurduğunuzda, çoğaltma önceki ana ve diğer yinelemeler için tüm bağlantılar kaybeder. Hiçbir otomatik Yük Devretme Yöneticisi ve çoğaltma arasında yoktur. 
+Çoğaltmayı durdurduğunuzda, çoğaltma önceki ana ve diğer çoğaltmalara ait tüm bağlantıları kaybeder.
 
-Bilgi edinmek için nasıl [bir çoğaltma için çoğaltma durdurma](howto-read-replicas-portal.md).
+[Bir çoğaltmaya çoğaltmayı durdurmayı](howto-read-replicas-portal.md)öğrenin.
+
+## <a name="failover"></a>Yük devretme
+Ana ve çoğaltma sunucuları arasında otomatik yük devretme yoktur. 
+
+Çoğaltma zaman uyumsuz olduğundan, ana ve çoğaltma arasında bir gecikme vardır. Gecikme miktarı, ana sunucu üzerinde çalışan iş yükünün ne kadar ağır ve veri merkezleri arasındaki gecikme süresi gibi bir dizi faktörden etkilenebilir. Çoğu durumda, çoğaltma gecikmesi birkaç saniye ile birkaç dakika arasında değişir. Her bir çoğaltma için kullanılabilen ölçüm *çoğaltması*gecikmesini kullanarak gerçek çoğaltma gecikmelerinizi izleyebilirsiniz. Bu ölçüm, son yeniden yürütülmüş işlemden bu yana geçen süreyi gösterir. Yineleme gecikmesini bir süre içinde gözlemleyerek ortalama gecikmenizin ne olduğunu tanımlamanızı öneririz. Çoğaltma gecikmesi üzerinde bir uyarı ayarlayabilirsiniz, böylece beklenen aralığın dışında olursa işlem yapabilirsiniz.
+
+> [!Tip]
+> Çoğaltmaya yük devretmek, çoğaltmayı ana bilgisayardan geri bağladığınızda oluşan gecikme, ne kadar veri kaybedildiğine işaret eder.
+
+Bir çoğaltmaya yük devretmek istediğinizde, 
+
+1. Çoğaltmaya çoğaltmayı durdur<br/>
+   Bu adım, çoğaltma sunucusunun yazmaları kabul edebilmesini sağlamak için gereklidir. Bu işlemin bir parçası olarak, çoğaltma sunucusu yeniden başlatılır ve ana bilgisayardan kaldırılır. Çoğaltmayı Durdur ' u başlattığınızda, arka uç işleminin genellikle yaklaşık 2 dakika sürer. Bu eylemin etkilerini anlamak için bu makalenin [çoğaltmayı durdur](#stop-replication) bölümüne bakın.
+    
+2. Uygulamanızı (eski) çoğaltmaya işaret edin<br/>
+   Her sunucunun benzersiz bir bağlantı dizesi vardır. Uygulamanızı ana şablon yerine (eski) çoğaltmaya işaret etmek üzere güncelleştirin.
+    
+Uygulamanız okuma ve yazma işlemlerini başarıyla tamamladıktan sonra, yük devretmeyi tamamladınız. Bir sorunu saptadığınızda ve yukarıdaki 1. ve 2. adımları tamamladıktan sonra uygulama deneyimlerinizin ne kadar süre açık olacağını gösterir.
 
 
 ## <a name="considerations"></a>Dikkat edilmesi gerekenler
 
-Bu bölümde, salt okunur çoğaltma özelliği hakkında dikkat edilecek noktalar özetlenmektedir.
+Bu bölümde çoğaltma oku özelliği hakkında dikkat edilecek noktalar özetlenmektedir.
 
 ### <a name="prerequisites"></a>Önkoşullar
-Salt okunur bir çoğaltması oluşturmadan önce `azure.replication_support` parametresi ayarlanmalıdır **çoğaltma** ana sunucu üzerinde. Bu parametre değiştiğinde, değişikliğin etkili olması için sunucunun yeniden başlatılması gereklidir. `azure.replication_support` Parametresi yalnızca için genel amaçlı ve bellek için iyileştirilmiş katmanlar için geçerlidir.
+Bir okuma çoğaltması oluşturmadan önce, `azure.replication_support` parametresi ana sunucuda **çoğaltma** olarak ayarlanmalıdır. Bu parametre değiştirildiğinde, değişikliğin etkili olması için sunucu yeniden başlatması gerekir. `azure.replication_support` parametresi yalnızca Genel Amaçlı ve bellek için Iyileştirilmiş katmanlara uygulanır.
 
-### <a name="new-replicas"></a>Yeni yineleme
-PostgreSQL sunucusu için yeni bir Azure veritabanı salt okunur bir çoğaltması oluşturulur. Mevcut bir sunucu ile bir çoğaltma yapılamaz. Bir kopyasını başka bir okuma çoğaltması oluşturulamıyor.
+### <a name="new-replicas"></a>Yeni çoğaltmalar
+Bir okuma çoğaltması, PostgreSQL için yeni bir Azure veritabanı sunucusu olarak oluşturulur. Var olan bir sunucu bir çoğaltmaya yapılamaz. Başka bir okuma çoğaltmasının çoğaltmasını oluşturamazsınız.
 
 ### <a name="replica-configuration"></a>Çoğaltma yapılandırması
-Çoğaltma Yöneticisi olarak aynı sunucu yapılandırmasını kullanarak oluşturulur. Bir çoğaltma oluşturulduktan sonra birkaç ayar bağımsız olarak ana sunucu ile değiştirilebilir: işlem oluşturma, sanal çekirdek, depolama ve yedekleme bekletme süresi. Fiyatlandırma katmanı da ayrı ayrı değiştirilebilir ya da temel katmandan hariç.
+Bir çoğaltma, ana öğe ile aynı işlem ve depolama ayarları kullanılarak oluşturulur. Bir çoğaltma oluşturulduktan sonra, birden fazla ayar ana sunucudan bağımsız olarak değiştirilebilir: işlem oluşturma, sanal çekirdek, depolama ve yedekleme saklama süresi. Fiyatlandırma Katmanı, temel katmandan veya dışında bağımsız olarak da değiştirilebilir.
 
 > [!IMPORTANT]
-> Bir ana sunucu yapılandırması için yeni değerleri güncelleştirilmeden önce çoğaltma yapılandırması eşit veya daha fazla değerlerle güncelleştirin. Bu eylem, çoğaltma ana dala yapılan değişiklikler ile koruyabilirsiniz sağlar.
+> Ana ayar yeni bir değere güncellenmadan önce, çoğaltma yapılandırmasını eşit veya daha büyük bir değere güncelleştirin. Bu eylem, çoğaltmanın ana kopya üzerinde yapılan değişiklikleri yansıtmasını sağlar.
 
-PostgreSQL gerektirir değerini `max_connections` olmaz parametresi değerinden büyük veya ana değerine eşit; tersi durumda okuma çoğaltması çoğaltmayı Başlat. PostgreSQL için Azure veritabanı'nda `max_connections` parametre değeri, SKU üzerinde dayanır. Daha fazla bilgi için [sınırları PostgreSQL için Azure veritabanı'nda](concepts-limits.md). 
+PostgreSQL, okuma çoğaltmasında `max_connections` parametresinin değerini ana değerden büyük veya ona eşit olacak şekilde gerektirir; Aksi takdirde, çoğaltma başlatılmaz. PostgreSQL için Azure veritabanı 'nda `max_connections` parametresi değeri SKU 'YU temel alır. Daha fazla bilgi için bkz. [PostgreSQL Için Azure veritabanı 'Nda sınırlamalar](concepts-limits.md). 
 
-Sunucu değerleri güncelleştirmek üzere deneyin ancak sınırlara yoksa, bir hata alırsınız.
+Yukarıda açıklanan sunucu değerlerini güncelleştirmeye çalışırsanız, ancak sınırlara bağlı kalmazsanız bir hata alırsınız.
 
-### <a name="maxpreparedtransactions"></a>max_prepared_transactions
-[PostgreSQL gerektirir](https://www.postgresql.org/docs/10/runtime-config-resource.html#GUC-MAX-PREPARED-TRANSACTIONS) değerini `max_prepared_transactions` olmaz parametresi değerinden büyük veya ana değerine eşit; tersi durumda okuma çoğaltması çoğaltmayı Başlat. Değiştirmek istiyorsanız `max_prepared_transactions` asıl ilk çoğaltmaları değiştirin.
+Çoğaltma oluşturulduğunda veya daha sonra güvenlik duvarı kuralları, sanal ağ kuralları ve parametre ayarları ana sunucudan çoğaltmaya devralınmaz.
+
+### <a name="max_prepared_transactions"></a>max_prepared_transactions
+[PostgreSQL](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-MAX-PREPARED-TRANSACTIONS) , okuma çoğaltmasında `max_prepared_transactions` parametresinin değerini ana değerden büyük veya ona eşit olacak şekilde gerektirir; Aksi takdirde, çoğaltma başlatılmaz. Ana `max_prepared_transactions` değiştirmek istiyorsanız, önce çoğaltmalarda değiştirin.
 
 ### <a name="stopped-replicas"></a>Durdurulan çoğaltmalar
-Bir ana sunucu ve bir salt okunur çoğaltma arasında çoğaltmayı durdurursanız, çoğaltma değişikliği uygulamak için yeniden başlatır. Durdurulan çoğaltma hem okuma hem de yazma işlemleri kabul eden bir tek başına sunucu haline gelir. Tek başına sunucu ile bir çoğaltma yeniden yapılamıyor.
+Bir ana sunucu ve bir okuma çoğaltması arasında çoğaltmayı durdurursanız, çoğaltma değişikliği uygulamak için yeniden başlatılır. Durdurulan çoğaltma, hem okuma hem de yazma işlemlerini kabul eden tek başına bir sunucu haline gelir. Tek başına sunucu tekrar bir çoğaltmaya yapılamaz.
 
-### <a name="deleted-master-and-standalone-servers"></a>Silinen Yöneticisi ve tek başına sunucular
-Ana sunucu silindiğinde, tüm okuma çoğaltmalarını tek başına sunucu haline gelir. Çoğaltmalar, bu değişikliği yansıtacak şekilde yeniden başlatılır.
+### <a name="deleted-master-and-standalone-servers"></a>Ana ve tek başına sunucular silindi
+Bir ana sunucu silindiğinde, tüm okuma çoğaltmaları tek başına sunucular haline gelir. Çoğaltmalar bu değişikliği yansıtacak şekilde yeniden başlatılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bilgi edinmek için nasıl [oluşturmak ve salt okunur çoğaltmalar Azure portalında yönetmek](howto-read-replicas-portal.md).
+* [Azure Portal okuma çoğaltmaları oluşturmayı ve yönetmeyi](howto-read-replicas-portal.md)öğrenin.
+* [Azure CLI ve REST API okuma çoğaltmaları oluşturma ve yönetme](howto-read-replicas-cli.md)hakkında bilgi edinin.

@@ -1,7 +1,7 @@
 ---
-title: Sınırlı bir deneme proje Azure'a taşıyın
-titlesuffix: Azure Cognitive Services
-description: Sınırlı deneme sürümünde proje Azure'a taşımayı öğreneceksiniz.
+title: Sınırlı bir deneme projesini Azure 'a taşıma
+titleSuffix: Azure Cognitive Services
+description: Özel Görüntü İşleme için sınırlı bir deneme projeniz mı var? Bu makalede, bir geçiş betiği ile Azure 'a nasıl taşıyacağınız gösterilmektedir.
 services: cognitive-services
 author: anrothMSFT
 manager: nitinme
@@ -10,52 +10,52 @@ ms.subservice: custom-vision
 ms.topic: conceptual
 ms.date: 02/19/2019
 ms.author: anroth
-ms.openlocfilehash: 6fac6531ea0a39796de13f95aee33b30dc91f131
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0a2b48a6c046150f6e685ecda0c0d765342e0194
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60816525"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73818944"
 ---
-# <a name="how-to-move-your-limited-trial-project-to-azure"></a>Sınırlı deneme sürümünde projenizi Azure'a taşıma
+# <a name="how-to-move-your-limited-trial-project-to-azure"></a>Sınırlı deneme projenizi Azure 'a taşıma
 
-Özel görüntü işleme hizmeti, azure'a geçiş tamamlandığında Azure dışındaki sınırlı deneme sürümünde projeleri için destek sona eriyor. Bu belge için bir Azure kaynağı sınırlı deneme sürümünde projenize kopyalamak için özel görüntü işleme API'leri kullanmayı gösterir.
+Özel Görüntü İşleme Hizmeti Azure 'a taşıma işlemini tamamladıktan sonra, Azure dışında sınırlı deneme projelerine yönelik destek sona eriyor. Bu belgede, sınırlı deneme projenizi bir Azure kaynağına kopyalamak için Özel Görüntü İşleme API 'Lerinin nasıl kullanılacağı gösterilir.
 
-Sınırlı deneme sürümünde projelerin görüntüleme desteği [Custom Vision Web sitesi](https://customvision.ai) 25 Mart 2019 sonlandı. Bu belgeyi artık, özel görüntü işleme API'leriyle kullanma işlemi gösterilmektedir bir [geçiş python betiğini](https://github.com/Azure-Samples/custom-vision-move-project) github'da) projenizi bir Azure kaynağı için çoğaltma.
+[Özel görüntü işleme web sitesinde](https://customvision.ai) sınırlı deneme projelerini görüntüleme desteği 25 Mart 2019 tarihinde sona erdi. Bu belgede, projenizi bir Azure kaynağına çoğaltmak için Özel Görüntü İşleme API 'Lerinin GitHub üzerinde [geçiş Python betiği](https://github.com/Azure-Samples/custom-vision-move-project) ile nasıl kullanılacağı gösterilmektedir.
 
-Sınırlı deneme kullanımdan kaldırma işleminde anahtar teslim tarihlerine dahil olmak üzere daha fazla ayrıntı için lütfen bkz. [sürüm notları](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/release-notes#february-25-2019) veya sınırlı deneme projeleri sahiplerine gönderilen e-posta iletişimi.
+Sınırlı deneme sürümü kaldırma işlemindeki anahtar son tarihleri dahil olmak üzere daha fazla ayrıntı için lütfen [sürüm notlarına](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/release-notes#february-25-2019) veya sınırlı deneme projelerinin sahibine gönderilen e-posta iletişimlerine bakın.
 
-[Geçiş öncesinde bir betik](https://github.com/Azure-Samples/custom-vision-move-project) , geçerli yineleme içinde görüntüler ve indiriliyor ve tüm etiketleri, bölgeleri, karşıya bir projeyi yeniden olanak sağlar. Bu, ardından eğitebilirsiniz yeni aboneliğiniz yeni bir proje ile bırakır.
+[Geçiş betiği](https://github.com/Azure-Samples/custom-vision-move-project) , geçerli yineleinizdeki tüm etiketleri, bölgeleri ve görüntüleri indirip karşıya yükleyerek bir projeyi yeniden oluşturmanızı sağlar. Daha sonra eğitebileceğiniz yeni aboneliğinizdeki yeni bir proje ile sizi bu şekilde bırakacaktır.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-- Microsoft hesabı veya oturum açmak için kullanmak istediğiniz Azure Active Directory (AAD) hesabı ile ilişkili geçerli bir Azure aboneliğine ihtiyacınız olacak [Custom Vision Web sitesi](https://customvision.ai). 
-    - Azure hesabınız yoksa [hesap oluşturma](https://azure.microsoft.com/free/) ücretsiz.
-    - Abonelikler ve kaynaklar Azure kavramlarına giriş için bkz [Azure Geliştirici kılavuzuyla.](https://docs.microsoft.com/azure/guides/developer/azure-developer-guide#manage-your-subscriptions).
+- [Özel görüntü işleme web sitesinde](https://customvision.ai)oturum açmak için kullanmak istediğiniz Microsoft hesabı veya Azure ACTIVE DIRECTORY (AAD) hesabıyla ilişkili geçerli bir Azure aboneliğine ihtiyacınız olacaktır. 
+    - Azure hesabınız yoksa ücretsiz [bir hesap oluşturun](https://azure.microsoft.com/free/) .
+    - Aboneliklerin ve kaynakların Azure kavramlarına giriş için [Azure Geliştirici Kılavuzu](https://docs.microsoft.com/azure/guides/developer/azure-developer-guide#manage-your-subscriptions)' na bakın.
 -  [Python](https://www.python.org/downloads/)
-- [pip](https://pip.pypa.io/en/stable/installing/)
+- [Pip](https://pip.pypa.io/en/stable/installing/)
 
-## <a name="create-custom-vision-resources-in-the-azure-portal"></a>Azure portalında özel görüntü işleme kaynakları oluşturma
+## <a name="create-custom-vision-resources-in-the-azure-portal"></a>Azure portal Özel Görüntü İşleme kaynakları oluşturma
 
-Azure ile özel görüntü işleme hizmeti kullanmak için Custom Vision eğitim ve tahmin kaynaklarında oluşturmanız gerekecektir [Azure portalında](https://portal.azure.com/?microsoft_azure_marketplace_ItemHideKey=microsoft_azure_cognitiveservices_customvision#create/Microsoft.CognitiveServicesCustomVision). 
+Azure ile Özel Görüntü İşleme Hizmeti kullanmak için, [Azure portal](https://portal.azure.com/?microsoft_azure_marketplace_ItemHideKey=microsoft_azure_cognitiveservices_customvision#create/Microsoft.CognitiveServicesCustomVision)özel görüntü işleme eğitim ve tahmin kaynakları oluşturmanız gerekecektir. 
 
-Birden çok proje için tek bir kaynak ilişkilendirilebilir. Hakkında daha fazla ayrıntı [fiyatlandırma ve limitler](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/limits-and-quotas) kullanılabilir. Özel görüntü işleme hizmeti ücretsiz olarak kullanmaya devam etmek için Azure portalında F0 katmanı seçebilirsiniz. 
+Birden çok proje tek bir kaynakla ilişkilendirilebilir. [Fiyatlandırma ve limitlere](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/limits-and-quotas) ilişkin daha fazla ayrıntı mevcuttur. Özel Görüntü İşleme Hizmeti ücretsiz kullanmaya devam etmek için Azure portal katmanını seçin. 
 
 > [!NOTE]
-> Custom Vision projeniz için bir Azure kaynağı taşıdığınızda, temel alınan devralan [izinleri]( https://docs.microsoft.com/azure/role-based-access-control/role-assignments-portal) ilgili Azure kaynağının. Kuruluşunuzdaki diğer kullanıcılara projenize konusu Azure kaynak sahipleri, bunlar üzerinde projenize erişmek mümkün olacaktır [Custom Vision Web sitesi](https://customvision.ai). Benzer şekilde, kaynaklarınızı silindiğinde, projelerinizi silinir.  
+> Özel Görüntü İşleme projenizi bir Azure kaynağına taşıdığınızda, bu Azure kaynağının temel aldığı [izinleri]( https://docs.microsoft.com/azure/role-based-access-control/role-assignments-portal) devralır. Kuruluşunuzdaki diğer kullanıcılar projenizin Azure kaynağının sahipleri ise, [özel görüntü işleme web sitesinde](https://customvision.ai)projenize erişebilecektir. Benzer şekilde, kaynaklarınızın silinmesi projelerinizi de siler.  
 
-## <a name="find-your-limited-trial-project-information"></a>Sınırlı deneme proje bilgilerinizin
+## <a name="find-your-limited-trial-project-information"></a>Sınırlı deneme projesi bilgilerinizi bulun
 
-Projenizi taşımak için ihtiyacınız olacak _kimliği proje_ ve _eğitim anahtar_ geçirmeye çalıştığınız proje için. Bu bilgiler yoksa, ziyaret [ https://limitedtrial.customvision.ai/projects ](https://limitedtrial.customvision.ai/projects) kimliği elde edilir ve her projeleriniz için anahtar. 
+Projenizi taşımak için geçirmeye çalıştığınız proje için _proje kimliği_ ve _eğitim anahtarına_ ihtiyacınız olacaktır. Bu bilgilere sahip değilseniz, projelerinizden her birine ait KIMLIĞI ve anahtarı almak için [https://www.customvision.ai/projects](https://www.customvision.ai/projects) ziyaret edin. 
 
-## <a name="use-the-python-sample-code-to-copy-your-project-to-azure"></a>Azure'a projenize kopyalamak için Python örnek kodu kullanın
+## <a name="use-the-python-sample-code-to-copy-your-project-to-azure"></a>Projenizi Azure 'a kopyalamak için Python örnek kodunu kullanın
 
-İzleyin [örnek kodu yönergeleri](https://github.com/Azure-Samples/custom-vision-move-project), sınırlı deneme anahtarınızı kullanarak ve proje kimliği "kaynak" malzemeler ve anahtar "hedef" olarak oluşturulan yeni Azure kaynağı olarak.
+"Kaynak" malzemeler ve "hedef" olarak oluşturduğunuz yeni Azure kaynağından anahtar olarak, sınırlı deneme anahtarınızı ve proje KIMLIĞINIZI kullanarak [örnek kod yönergelerini](https://github.com/Azure-Samples/custom-vision-move-project)izleyin.
 
-Varsayılan olarak, tüm sınırlı deneme sürümünde projeleri, Güney Orta ABD Azure bölgesi içinde barındırılır.
+Varsayılan olarak, tüm sınırlı deneme projeleri Orta Güney ABD Azure bölgesinde barındırılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Projenizi şimdi bir Azure kaynağına taşındı. Eğitim ve tahmin anahtarlarınızı yazmış olduğunuz tüm uygulamalarda güncelleştirmeniz gerekir.
+Projeniz artık bir Azure kaynağına taşındı. Yazdığınız tüm uygulamalarda eğitim ve tahmin anahtarlarınızı güncelleştirmeniz gerekir.
 
-Projenizi görüntülemek için [Custom Vision Web sitesi](https://customvision.ai), Azure portalında oturum açmak için kullandığınız hesapla oturum açın. Projenizi görmüyorsanız, aynı dizinde bulunan onaylayın [Custom Vision Web sitesi](https://customvision.ai) kaynaklarınızı Azure Portalı'nda bulunduğu yeri dizini olarak. Hem Azure portalı ve CustomVision.ai, ekranın sağ üst köşedeki aşağı açılan kullanıcı menüden dizininizi seçin.
+[Özel görüntü işleme web sitesinde](https://customvision.ai)projenizi görüntülemek için, Azure Portal oturum açmak için kullandığınız hesapla oturum açın. Projenizi görmüyorsanız, lütfen [özel görüntü işleme web sitesinde](https://customvision.ai) kaynaklarınızın Azure Portal bulunduğu dizin olarak aynı dizinde olduğunu lütfen doğrulayın. Hem Azure portal hem de CustomVision.ai içinde, ekranın sağ üst köşesindeki açılır Kullanıcı menüsünden dizininizi seçebilirsiniz.

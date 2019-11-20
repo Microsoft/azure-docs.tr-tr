@@ -10,12 +10,13 @@ ms.subservice: custom-decision-service
 ms.topic: overview
 ms.date: 05/08/2018
 ms.author: slivkins
-ms.openlocfilehash: f4a0f519fe83162e7e161c3fda2b78a94b1d4bd1
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ROBOTS: NOINDEX
+ms.openlocfilehash: 073b2bf6df21e05481cde043d8ddcfd49822e94f
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60507836"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68704237"
 ---
 # <a name="what-is-custom-decision-service"></a>Özel Karar Alma Hizmeti nedir?
 
@@ -44,10 +45,10 @@ Tipik bir web uygulamasında veya mobil uygulamada ön sayfa bağlantısı birç
 
 Bu belgede bazı terimler sık sık geçmektedir:
 
-* **Eylem kümesi**: İçerik öğeleri kümesi için Custom Decision Service derece için. Bu küme bir *RSS* veya *Atom* uç noktası olarak belirtilebilir.
-* **Derecelendirme**: Custom Decision Service için her istek bir belirtiyor veya daha fazla eylem ayarlar. Sistem bu kümelerden tüm içerik seçeneklerini seçerek yanıt verir ve bunları sıralı bir düzende döndürür.
-* **Geri çağırma işlevi**: Bu işlev, belirttiğiniz kullanıcı Arabirimi içeriği işler. İçerik, Özel Karar Alma Hizmeti tarafından döndürülen sıralı düzene göre sıralanır.
-* **Ödül**: Kullanıcı, işlenmiş içeriğin nasıl yanıt verdiğini ölçü. Özel Karar Alma Hizmeti, tıklamaları kullanarak kullanıcı yanıtını ölçer. Tıklamalar, uygulamanıza eklenen özel kod kullanılarak sisteme bildirilir.
+* **Eylem kümesi**: Özel Karar Alma Hizmeti derecelendirmek için içerik öğeleri kümesi. Bu küme bir *RSS* veya *Atom* uç noktası olarak belirtilebilir.
+* **Sıralama**: Özel Karar Alma Hizmeti her istek bir veya daha fazla eylem kümesini belirtir. Sistem bu kümelerden tüm içerik seçeneklerini seçerek yanıt verir ve bunları sıralı bir düzende döndürür.
+* **Geri çağırma işlevi**: Belirttiğiniz bu işlev, Kullanıcı arabiriminizdeki içeriği işler. İçerik, Özel Karar Alma Hizmeti tarafından döndürülen sıralı düzene göre sıralanır.
+* **Ödül**: Kullanıcının işlenmiş içeriğe nasıl yanıt verdiğini gösteren bir ölçü. Özel Karar Alma Hizmeti, tıklamaları kullanarak kullanıcı yanıtını ölçer. Tıklamalar, uygulamanıza eklenen özel kod kullanılarak sisteme bildirilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

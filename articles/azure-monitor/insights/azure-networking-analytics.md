@@ -1,112 +1,106 @@
 ---
-title: Azure İzleyici'de Azure ağ analizi çözümü | Microsoft Docs
-description: Azure ağ analizi çözümü, Azure ağ güvenlik grubu günlükleri ve Azure Application Gateway günlüklerini gözden geçirmek için Azure İzleyici'de kullanabilirsiniz.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: 66a3b8a1-6c55-4533-9538-cad60c18f28b
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici 'de Azure ağ analizi çözümü | Microsoft Docs
+description: Azure ağ güvenlik grubu günlüklerini ve Azure Application Gateway günlüklerini gözden geçirmek için Azure Izleyici 'de Azure ağ analizi çözümünü kullanabilirsiniz.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 06/21/2018
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 13908706f8dcec0eb2d1773bcef2ee622b4ebcc1
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 06/21/2018
+ms.openlocfilehash: 8a8a2f32de905ab7c12f4886d889b2a6fc20c449
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67048648"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899144"
 ---
-# <a name="azure-networking-monitoring-solutions-in-azure-monitor"></a>Azure ağ çözümlerini Azure İzleyici'de izleme
+# <a name="azure-networking-monitoring-solutions-in-azure-monitor"></a>Azure Izleyici 'de Azure ağ izleme çözümleri
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Azure İzleyici, ağ izleme için aşağıdaki çözümleri sunar:
-* Ağ Performansı İzleyicisi'ni (NPM)
-    * Ağınızın durumunu izleyin
-* Azure Application Gateway analytics gözden geçirmek için
+Azure Izleyici, ağlarınızı izlemek için aşağıdaki çözümleri sunar:
+* Ağ Performansı İzleyicisi (NPM)
+    * Ağınızın sistem durumunu izleme
+* Gözden geçirilecek Azure Application Gateway Analizi
     * Azure Application Gateway günlükleri
     * Azure Application Gateway ölçümleri
-* Ağ bulut ağınızdaki etkinliği izlemek ve denetlemek için çözümler
-    * [Trafik analizi](https://docs.microsoft.com/azure/networking/network-monitoring-overview#traffic-analytics) 
-    * Azure ağ güvenlik grubu analizi
+* Bulut ağınızda ağ etkinliğini izlemeye ve denetlemeye yönelik çözümler
+    * [Trafik Analizi](https://docs.microsoft.com/azure/networking/network-monitoring-overview#traffic-analytics) 
+    * Azure Ağ Güvenlik Grubu Analizi
 
-## <a name="network-performance-monitor-npm"></a>Ağ Performansı İzleyicisi'ni (NPM)
+## <a name="network-performance-monitor-npm"></a>Ağ Performansı İzleyicisi (NPM)
 
-[Ağ Performansı İzleyicisi](https://docs.microsoft.com/azure/networking/network-monitoring-overview) yönetim çözümü olan bir ağ izleme sistem durumu, kullanılabilirliği ve ulaşılabilirliği ağların izleyen çözümü.  Arasındaki bağlantıyı izlemek için kullanılır:
+[Ağ performansı İzleyicisi](https://docs.microsoft.com/azure/networking/network-monitoring-overview) yönetim çözümü, ağların sistem durumunu, kullanılabilirliğini ve erişilebilirliğini izleyen bir ağ izleme çözümüdür.  Arasındaki bağlantıyı izlemek için kullanılır:
 
-* Genel Bulut ve şirket içi
-* Veri merkezleri ve kullanıcı konumlarında (şubelere)
-* Çok katmanlı bir uygulamanın çeşitli katmanları barındıran alt ağlar.
+* Genel bulut ve şirket içi
+* Veri merkezleri ve kullanıcı konumları (şube ofisleri)
+* Çok katmanlı bir uygulamanın çeşitli katmanlarını barındıran alt ağlar.
 
-Daha fazla bilgi için [Ağ Performansı İzleyicisi](https://docs.microsoft.com/azure/networking/network-monitoring-overview).
+Daha fazla bilgi için bkz. [ağ performansı İzleyicisi](https://docs.microsoft.com/azure/networking/network-monitoring-overview).
 
-## <a name="azure-application-gateway-and-network-security-group-analytics"></a>Azure Application Gateway ve ağ güvenlik grubu analizi
-Çözümlerini kullanmak için:
-1. Yönetim çözümü için Azure İzleyici, ekleme ve
-2. Bir Log Analytics çalışma alanına Azure İzleyici'de tanılama yönlendirmek tanılamayı etkinleştirin. Günlükler Azure Blob depolama alanına yazmak gerekli değildir.
+## <a name="azure-application-gateway-and-network-security-group-analytics"></a>Azure Application Gateway ve ağ güvenlik grubu Analizi
+Çözümleri kullanmak için:
+1. Yönetim çözümünü Azure Izleyici 'ye ekleyin ve
+2. Tanılamayı Azure Izleyici 'de bir Log Analytics çalışma alanına yönlendirmek için tanılamayı etkinleştirin. Günlükleri Azure Blob depolamaya yazmak gerekli değildir.
 
-Tanılama ve karşılık gelen çözümü birini veya her ikisi de uygulama ağ geçidini ve ağ güvenlik grupları için etkinleştirebilirsiniz.
+Tanılamayı ve ilgili çözümü Application Gateway ve ağ güvenlik gruplarından birini ya da her ikisini de etkinleştirebilirsiniz.
 
-Belirli bir kaynak türü için tanılama günlük kaydını etkinleştirmeyin ancak çözümü yüklemek, o kaynak için Pano dikey pencereleri boş ve bir hata iletisi görüntüler.
+Belirli bir kaynak türü için tanılama günlüğünü etkinleştirmezseniz, ancak çözümü yüklerseniz, bu kaynağın Pano dikey pencereleri boştur ve bir hata iletisi görüntüler.
 
 > [!NOTE]
-> Ocak 2017'de desteklenen bir şekilde gönderme uygulama ağ geçitleri ve ağ güvenlik grupları değiştirilmiş bir Log Analytics çalışma alanına kaydeder. Görürseniz **Azure ağ analizi (kullanım dışı)** çözümü başvurmak [eski ağ Analytics çözüm'den geçiş](#migrating-from-the-old-networking-analytics-solution) adımları izlemeniz gerekir.
+> 2017 Ocak 'ta uygulama ağ geçitlerinden ve ağ güvenlik gruplarından günlüklerin Log Analytics çalışma alanına gönderilmesi için desteklenen yol değişti. **Azure Ağ Analizi (kullanım dışı)** çözümünü görürseniz, izlemeniz gereken adımlar Için [eski ağ analizi çözümünden geçiş](#migrating-from-the-old-networking-analytics-solution) konusuna bakın.
 >
 >
 
-## <a name="review-azure-networking-data-collection-details"></a>Azure ağ veri koleksiyonu ayrıntıları gözden geçirin
-Azure Application Gateway analytics ve ağ güvenlik grubu analytics yönetim çözümleri doğrudan Azure uygulama ağ geçitleri ve ağ güvenlik grupları tanılama günlükleri toplayın. Günlükler Azure Blob depolama alanına yazmak gerekli değildir ve hiçbir aracısı için veri koleksiyonu gereklidir.
+## <a name="review-azure-networking-data-collection-details"></a>Azure ağ verileri toplama ayrıntılarını gözden geçirme
+Azure Application Gateway Analytics ve ağ güvenlik grubu Analizi yönetim çözümleri, tanılama günlüklerini doğrudan Azure uygulama ağ geçitleri ve ağ güvenlik gruplarından toplar. Günlükleri Azure Blob depolama alanına yazmak gerekli değildir ve veri toplama için hiçbir aracı gerekmez.
 
-Veri toplama yöntemleri ve Azure Application Gateway analytics ve ağ güvenlik grubu analizi için verileri nasıl toplanır hakkında diğer ayrıntıları aşağıdaki tabloda gösterilmektedir.
+Aşağıdaki tabloda, veri toplama yöntemleri ve Azure Application Gateway Analytics ve ağ güvenlik grubu analizi için verilerin toplanmasına ilişkin diğer ayrıntılar gösterilmektedir.
 
-| Platform | Doğrudan aracı | Systems Center Operations Manager Aracısı | Azure | Operations Manager gerekli? | Operations Manager aracısı veri yönetim grubu gönderilir. | Toplama sıklığı |
+| Platform | Doğrudan aracı | Systems Center Operations Manager Aracısı | Azure | Operations Manager gerekli mi? | Yönetim grubu aracılığıyla gönderilen aracı verileri Operations Manager | Toplama sıklığı |
 | --- | --- | --- | --- | --- | --- | --- |
-| Azure |  |  |&#8226; |  |  |oturum açıldığında |
+| Azure |  |  |&#8226; |  |  |günlüğe kaydedildiğinde |
 
 
-## <a name="azure-application-gateway-analytics-solution-in-azure-monitor"></a>Azure İzleyici'de Azure Application Gateway analytics çözümü
+## <a name="azure-application-gateway-analytics-solution-in-azure-monitor"></a>Azure Izleyici 'de Azure Application Gateway Analytics çözümü
 
 ![Azure Application Gateway Analytics simgesi](media/azure-networking-analytics/azure-analytics-symbol.png)
 
-Uygulama ağ geçitleri için aşağıdaki günlüklere desteklenir:
+Uygulama ağ geçitleri için aşağıdaki Günlükler desteklenir:
 
 * ApplicationGatewayAccessLog
 * ApplicationGatewayPerformanceLog
 * ApplicationGatewayFirewallLog
 
-Aşağıdaki ölçümler Application Gateway'ler için desteklenir: yeniden
+Uygulama ağ geçitleri için aşağıdaki ölçümler desteklenir: tekrar
 
 
 * 5 dakikalık aktarım hızı
 
-### <a name="install-and-configure-the-solution"></a>Yükleme ve çözüm yapılandırma
-Yükleme ve Azure Application Gateway analytics çözümü yapılandırmak için aşağıdaki yönergeleri kullanın:
+### <a name="install-and-configure-the-solution"></a>Çözümü yükleyip yapılandırma
+Azure Application Gateway Analytics çözümünü yüklemek ve yapılandırmak için aşağıdaki yönergeleri kullanın:
 
-1. Azure Application Gateway analytics çözümü etkinleştirme [Azure Market](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.AzureAppGatewayAnalyticsOMS?tab=Overview) veya açıklanan işlemi kullanarak [Azure İzleyici'yi ekleyin çözüm galeri'sinden](../../azure-monitor/insights/solutions.md).
-2. Etkinleştirmek için günlüğe kaydetme tanılama [Application Gateway'ler](../../application-gateway/application-gateway-diagnostics.md) izlemek istediğiniz.
+1. Azure Application Gateway Analytics çözümünü [Azure Marketi](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.AzureAppGatewayAnalyticsOMS?tab=Overview) 'nden veya [Çözüm Galerisi Azure izleyici çözümlerini ekleme](../../azure-monitor/insights/solutions.md)bölümünde açıklanan işlemi kullanarak etkinleştirin.
+2. İzlemek istediğiniz [uygulama ağ geçitleri](../../application-gateway/application-gateway-diagnostics.md) için tanılama günlüğünü etkinleştirin.
 
 #### <a name="enable-azure-application-gateway-diagnostics-in-the-portal"></a>Portalda Azure Application Gateway tanılamayı etkinleştirme
 
-1. Azure portalında, izlemek için Application Gateway kaynağına gidin.
-2. Seçin *tanılama günlükleri* aşağıdaki sayfasını açın.
+1. Azure portal izlemek için Application Gateway kaynağına gidin.
+2. *Tanılama günlükleri* ' ni seçerek aşağıdaki sayfayı açın.
 
-   ![Azure Application Gateway kaynak görüntüsü](media/azure-networking-analytics/log-analytics-appgateway-enable-diagnostics01.png)
-3. Tıklayın *tanılamayı Aç* aşağıdaki sayfasını açın.
+   ![Azure Application Gateway kaynağının görüntüsü](media/azure-networking-analytics/log-analytics-appgateway-enable-diagnostics01.png)
+3. *Tanılamayı* aç ' a tıklayarak aşağıdaki sayfayı açın.
 
-   ![Azure Application Gateway kaynak görüntüsü](media/azure-networking-analytics/log-analytics-appgateway-enable-diagnostics02.png)
-4. Tanılamayı etkinleştirmek için tıklayın *üzerinde* altında *durumu*.
-5. Onay kutusunu tıklatın *Log Analytics'e gönderme*.
+   ![Azure Application Gateway kaynağının görüntüsü](media/azure-networking-analytics/log-analytics-appgateway-enable-diagnostics02.png)
+4. Tanılamayı açmak için, *durum*' *a tıklayın.*
+5. *Log Analytics gönder*onay kutusuna tıklayın.
 6. Mevcut bir Log Analytics çalışma alanını seçin veya bir çalışma alanı oluşturun.
-7. Altındaki onay kutusuna tıklayın **günlük** toplamak için günlük türlerinin her biri için.
-8. Tıklayın *Kaydet* Azure İzleyici için tanılama günlüğünü etkinleştirme.
+7. Toplanacak günlük türlerinin her biri için **günlük** altında onay kutusuna tıklayın.
+8. Azure Izleyici 'de tanılamayı günlüğe kaydetmeyi etkinleştirmek için *Kaydet* ' e tıklayın.
 
-#### <a name="enable-azure-network-diagnostics-using-powershell"></a>PowerShell kullanarak Azure ağı tanılamayı etkinleştirme
+#### <a name="enable-azure-network-diagnostics-using-powershell"></a>PowerShell kullanarak Azure Ağ Tanılama 'yı etkinleştirme
 
-Aşağıdaki PowerShell betiğini application gateway'ler için günlüğe kaydetme tanılama etkinleştirmek nasıl bir örnek sağlar.
+Aşağıdaki PowerShell betiği, uygulama ağ geçitleri için tanılama günlüğü 'nün nasıl etkinleştirileceği hakkında bir örnek sağlar.
 
 ```powershell
 $workspaceId = "/subscriptions/d2e37fee-1234-40b2-5678-0b2199de3b50/resourcegroups/oi-default-east-us/providers/microsoft.operationalinsights/workspaces/rollingbaskets"
@@ -116,68 +110,68 @@ $gateway = Get-AzApplicationGateway -Name 'ContosoGateway'
 Set-AzDiagnosticSetting -ResourceId $gateway.ResourceId  -WorkspaceId $workspaceId -Enabled $true
 ```
 
-### <a name="use-azure-application-gateway-analytics"></a>Azure Application Gateway analytics kullanın
-![Azure Application Gateway analytics kutucuğuna görüntüsü](media/azure-networking-analytics/log-analytics-appgateway-tile.png)
+### <a name="use-azure-application-gateway-analytics"></a>Azure Application Gateway Analytics 'i kullanma
+![Azure Application Gateway Analytics kutucuğunun görüntüsü](media/azure-networking-analytics/log-analytics-appgateway-tile.png)
 
-Tıkladıktan sonra **Azure Application Gateway analytics** kutucuğuna genel bakış'ta günlüklerinizi özetlerini görüntüleyin ve ardından aşağıdaki kategorilerde ayrıntıları için ayrıntılara girin:
+Genel bakışta **Azure Application Gateway Analytics** kutucuğuna tıkladıktan sonra, günlüklerinizin özetlerini görüntüleyebilir ve ardından aşağıdaki kategorilerde Ayrıntılar için ayrıntıya gidebilirsiniz:
 
-* Uygulama ağ geçidi erişim günlükleri
-  * Uygulama ağ geçidi günlüklerine erişim için istemci ve sunucu hataları
-  * Her uygulama ağ geçidi için saat başına istek
-  * Her uygulama ağ geçidi için saat başına istek başarısız oldu
-  * Uygulama ağ geçitleri için Kullanıcı Aracısı hataları
-* Application Gateway performansı
-  * Application Gateway için konak sistem durumu
-  * Application Gateway için en yüksek ve 95'lik dilim başarısız istekleri
+* Application Gateway erişim günlükleri
+  * Application Gateway erişim günlükleri için istemci ve sunucu hataları
+  * Her bir Application Gateway için saat başına istek
+  * Her bir Application Gateway için saat başına başarısız istek
+  * Uygulama ağ geçitleri için kullanıcı aracısına göre hatalar
+* Application Gateway performans
+  * Application Gateway için konak durumu
+  * Application Gateway başarısız istekler için maksimum ve 95. yüzdebirlik
 
-![Azure Application Gateway analytics panosunun görüntüsü](media/azure-networking-analytics/log-analytics-appgateway01.png)
+![Azure Application Gateway Analytics panosunun görüntüsü](media/azure-networking-analytics/log-analytics-appgateway01.png)
 
-![Azure Application Gateway analytics panosunun görüntüsü](media/azure-networking-analytics/log-analytics-appgateway02.png)
+![Azure Application Gateway Analytics panosunun görüntüsü](media/azure-networking-analytics/log-analytics-appgateway02.png)
 
-Üzerinde **Azure Application Gateway analytics** Pano, dikey pencereleri biriyle özet bilgilerini gözden geçirin ve bir günlük arama sayfasında ayrıntılı bilgileri görüntülemek için tıklayın.
+**Azure Application Gateway Analytics** panosunda, dikey pencerelerden birindeki Özet bilgilerini gözden geçirin ve günlük araması sayfasında ayrıntılı bilgileri görüntülemek için bir tane tıklatın.
 
-Herhangi bir günlük arama sayfası üzerinde sonuç zaman, ayrıntılı sonuçlarını ve günlük arama geçmişinizi görüntüleyebilirsiniz. Ayrıca, sonuçları daraltmak için modelleri göre filtreleyebilirsiniz.
+Günlük arama sayfalarında, sonuçları zamana, ayrıntılı sonuçlara ve günlük arama geçmişinize göre görüntüleyebilirsiniz. Ayrıca, sonuçları daraltmak için de modellerle filtre uygulayabilirsiniz.
 
 
-## <a name="azure-network-security-group-analytics-solution-in-azure-monitor"></a>Azure İzleyici'de Azure ağ güvenlik grubu analizi çözümü
+## <a name="azure-network-security-group-analytics-solution-in-azure-monitor"></a>Azure Izleyici 'de Azure ağ güvenlik grubu analizi çözümü
 
-![Azure ağ güvenlik grubu analizi simgesi](media/azure-networking-analytics/azure-analytics-symbol.png)
+![Azure Ağ Güvenlik Grubu Analizi simgesi](media/azure-networking-analytics/azure-analytics-symbol.png)
 
 > [!NOTE]
-> İşlevselliğini almıştır beri topluluk desteği için ağ güvenlik grubu analizi çözümü taşınıyor [trafik analizi](../../network-watcher/traffic-analytics.md).
-> - Çözüm kullanıma sunulduğunu [Azure hızlı başlangıç şablonları](https://azure.microsoft.com/resources/templates/oms-azurensg-solution/) ve yakında artık Azure Market'te kullanıma sunulacaktır.
-> - Çözümü kendi çalışma alanına zaten eklenmiş mevcut müşteriler, değişikliği olmadan çalışmaya devam eder.
-> - Microsoft, tanılama ayarları kullanarak çalışma alanınıza gönderen NSG tanılama günlüklerini desteklemeye devam edecektir.
+> Ağ güvenlik grubu analizi çözümü, işlevselliği [Trafik Analizi](../../network-watcher/traffic-analytics.md)tarafından değiştirildiğinden topluluk desteğine taşınıyor.
+> - Bu çözüm artık [Azure hızlı başlangıç şablonlarında](https://azure.microsoft.com/resources/templates/oms-azurensg-solution/) kullanılabilir ve yakında Azure Marketi 'nde kullanılamaz.
+> - Çözümü çalışma alanına zaten ekleyen mevcut müşteriler için hiçbir değişiklik yapmadan çalışmaya devam edecektir.
+> - Microsoft, tanılama ayarlarını kullanarak çalışma alanınıza NSG tanılama günlükleri göndermeyi desteklemeye devam edecektir.
 
-Günlükleri, ağ güvenlik grupları için desteklenir:
+Aşağıdaki Günlükler ağ güvenlik grupları için desteklenir:
 
 * NetworkSecurityGroupEvent
 * NetworkSecurityGroupRuleCounter
 
-### <a name="install-and-configure-the-solution"></a>Yükleme ve çözüm yapılandırma
-Yükleme ve Azure ağ analizi çözümü yapılandırmak için aşağıdaki yönergeleri kullanın:
+### <a name="install-and-configure-the-solution"></a>Çözümü yükleyip yapılandırma
+Azure ağ analizi çözümünü yüklemek ve yapılandırmak için aşağıdaki yönergeleri kullanın:
 
-1. Azure ağ güvenlik grubu analizi çözümü etkinleştirme [Azure Market](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.AzureNSGAnalyticsOMS?tab=Overview) veya açıklanan işlemi kullanarak [Azure İzleyici'yi ekleyin çözüm galeri'sinden](../../azure-monitor/insights/solutions.md).
-2. Etkinleştirmek için günlüğe kaydetme tanılama [ağ güvenlik grubu](../../virtual-network/virtual-network-nsg-manage-log.md) izlemek istediğiniz kaynakları.
+1. Azure ağ güvenlik grubu Analizi çözümünü [Azure Marketi](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.AzureNSGAnalyticsOMS?tab=Overview) 'nden veya [Çözüm Galerisi Azure izleyici çözümlerini ekleme](../../azure-monitor/insights/solutions.md)bölümünde açıklanan işlemi kullanarak etkinleştirin.
+2. İzlemek istediğiniz [ağ güvenlik grubu](../../virtual-network/virtual-network-nsg-manage-log.md) kaynakları için tanılama günlüğünü etkinleştirin.
 
 ### <a name="enable-azure-network-security-group-diagnostics-in-the-portal"></a>Portalda Azure ağ güvenlik grubu tanılamayı etkinleştirme
 
-1. Azure portalında, izlemek için ağ güvenlik grubu kaynağına gidin
-2. Seçin *tanılama günlükleri* aşağıdaki sayfasını açmak için
+1. Azure portal izlemek için ağ güvenlik grubu kaynağına gidin
+2. *Tanılama günlüklerini* seçerek aşağıdaki sayfayı açın
 
-   ![Azure ağ güvenlik grubu kaynak görüntüsü](media/azure-networking-analytics/log-analytics-nsg-enable-diagnostics01.png)
-3. Tıklayın *tanılamayı Aç* aşağıdaki sayfasını açmak için
+   ![Azure ağ güvenlik grubu kaynağının görüntüsü](media/azure-networking-analytics/log-analytics-nsg-enable-diagnostics01.png)
+3. *Tanılamayı* aç ' a tıklayarak aşağıdaki sayfayı açın
 
-   ![Azure ağ güvenlik grubu kaynak görüntüsü](media/azure-networking-analytics/log-analytics-nsg-enable-diagnostics02.png)
-4. Tanılamayı etkinleştirmek için tıklayın *üzerinde* altında *durumu*
-5. Onay kutusunu tıklatın *Log Analytics'e gönderme*
-6. Mevcut bir Log Analytics çalışma alanını seçin veya bir çalışma alanı oluşturma
-7. Altındaki onay kutusuna tıklayın **günlük** toplamak için günlük türlerinin her biri için
-8. Tıklayın *Kaydet* Log Analytics için tanılama günlüğünü etkinleştirme
+   ![Azure ağ güvenlik grubu kaynağının görüntüsü](media/azure-networking-analytics/log-analytics-nsg-enable-diagnostics02.png)
+4. Tanılamayı açmak için, *durum* ' *a tıklayın.*
+5. *Log Analytics gönder* onay kutusuna tıklayın
+6. Mevcut bir Log Analytics çalışma alanını seçin veya bir çalışma alanı oluşturun
+7. Toplanacak günlük türlerinin her biri için **günlük** altında onay kutusuna tıklayın
+8. Tanılamayı Log Analytics için günlüğe kaydetmeyi etkinleştirmek üzere *Kaydet* ' e tıklayın
 
-### <a name="enable-azure-network-diagnostics-using-powershell"></a>PowerShell kullanarak Azure ağı tanılamayı etkinleştirme
+### <a name="enable-azure-network-diagnostics-using-powershell"></a>PowerShell kullanarak Azure Ağ Tanılama 'yı etkinleştirme
 
-Aşağıdaki PowerShell betiğini ağ güvenlik grupları için günlüğe kaydetme tanılama etkinleştirmeye ilişkin bir örnek sağlar.
+Aşağıdaki PowerShell betiği, ağ güvenlik grupları için tanılama günlüğünü etkinleştirme hakkında bir örnek sağlar
 ```powershell
 $workspaceId = "/subscriptions/d2e37fee-1234-40b2-5678-0b2199de3b50/resourcegroups/oi-default-east-us/providers/microsoft.operationalinsights/workspaces/rollingbaskets"
 
@@ -186,54 +180,54 @@ $nsg = Get-AzNetworkSecurityGroup -Name 'ContosoNSG'
 Set-AzDiagnosticSetting -ResourceId $nsg.ResourceId  -WorkspaceId $workspaceId -Enabled $true
 ```
 
-### <a name="use-azure-network-security-group-analytics"></a>Kullanım Azure ağ güvenlik grubu analizi
-Tıkladıktan sonra **Azure ağ güvenlik grubu analizi** kutucuğuna genel bakış'ta günlüklerinizi özetlerini görüntüleyin ve ardından aşağıdaki kategorilerde ayrıntıları için ayrıntılara girin:
+### <a name="use-azure-network-security-group-analytics"></a>Azure ağ güvenlik grubu Analizi 'ni kullanma
+Genel bakışta **Azure ağ güvenlik grubu Analizi** kutucuğuna tıkladıktan sonra günlüklerinizin özetlerini görüntüleyebilir ve ardından aşağıdaki kategoriler için ayrıntıya gidebilirsiniz:
 
 * Ağ güvenlik grubu engellenen akışlar
-  * Engellenen akışlar içeren ağ güvenlik grubu kuralları
+  * Engellenen akışlarla ağ güvenlik grubu kuralları
   * Engellenen akışlar içeren MAC adresleri
 * Ağ güvenlik grubu izin verilen akışlar
-  * İzin verilen akışlar içeren ağ güvenlik grubu kuralları
+  * İzin verilen akışlara sahip ağ güvenlik grubu kuralları
   * İzin verilen akışlar içeren MAC adresleri
 
-![Azure ağ güvenlik grubu analizi panosunun görüntüsü](media/azure-networking-analytics/log-analytics-nsg01.png)
+![Azure ağ güvenlik grubu Analizi panosu görüntüsü](media/azure-networking-analytics/log-analytics-nsg01.png)
 
-![Azure ağ güvenlik grubu analizi panosunun görüntüsü](media/azure-networking-analytics/log-analytics-nsg02.png)
+![Azure ağ güvenlik grubu Analizi panosu görüntüsü](media/azure-networking-analytics/log-analytics-nsg02.png)
 
-Üzerinde **Azure ağ güvenlik grubu analizi** Pano, dikey pencereleri biriyle özet bilgilerini gözden geçirin ve bir günlük arama sayfasında ayrıntılı bilgileri görüntülemek için tıklayın.
+**Azure ağ güvenlik grubu Analizi** panosunda, dikey pencerelerden birindeki Özet bilgilerini gözden geçirin ve günlük araması sayfasında ayrıntılı bilgileri görüntülemek için bir tane tıklatın.
 
-Herhangi bir günlük arama sayfası üzerinde sonuç zaman, ayrıntılı sonuçlarını ve günlük arama geçmişinizi görüntüleyebilirsiniz. Ayrıca, sonuçları daraltmak için modelleri göre filtreleyebilirsiniz.
+Günlük arama sayfalarında, sonuçları zamana, ayrıntılı sonuçlara ve günlük arama geçmişinize göre görüntüleyebilirsiniz. Ayrıca, sonuçları daraltmak için de modellerle filtre uygulayabilirsiniz.
 
-## <a name="migrating-from-the-old-networking-analytics-solution"></a>Eski ağ Analytics çözüm'den geçiş
-Ocak 2017'de desteklenen bir şekilde gönderme Azure uygulama ağ geçitleri ve Azure ağ güvenlik grupları değiştirilmiş bir Log Analytics çalışma alanına kaydeder. Bu değişiklikler, aşağıdaki avantajları sağlar:
-+ Günlükleri bir depolama hesabı kullanmak zorunda kalmadan Azure İzleyici için doğrudan yazılır
-+ Ne zaman bunlara Azure İzleyicisi'nde kullanılabilir olan günlükleri üretilir saatten daha az gecikme süresi
+## <a name="migrating-from-the-old-networking-analytics-solution"></a>Eski ağ analizi çözümünden geçiş
+2017 Ocak 'ta, Azure Application Gateway ve Azure ağ güvenlik gruplarından günlüklerin bir Log Analytics çalışma alanına gönderilmesi için desteklenen yol değişti. Bu değişiklikler aşağıdaki avantajları sağlar:
++ Günlükler, depolama hesabı kullanılmasına gerek kalmadan doğrudan Azure Izleyici 'ye yazılır
++ Günlüklerin Azure Izleyici 'de kullanılabilir olması için üretilen zamandan daha az gecikme süresi
 + Daha az yapılandırma adımı
-+ Azure tanılama her tür için ortak bir biçimi
++ Tüm Azure tanılama türleri için ortak bir biçim
 
-Güncelleştirilmiş çözümlerini kullanmak için:
+Güncelleştirilmiş çözümleri kullanmak için:
 
-1. [Azure Application Gateway'ler aracılığıyla doğrudan Azure İzleyici gönderilecek tanılama Yapılandır](#enable-azure-application-gateway-diagnostics-in-the-portal)
-2. [Azure ağ güvenlik grupları'ndan doğrudan Azure İzleyici gönderilecek tanılama Yapılandır](#enable-azure-network-security-group-diagnostics-in-the-portal)
-2. Etkinleştirme *Azure Application Gateway Analytics* ve *Azure ağ güvenlik grubu analizi* açıklanan işlemi kullanarak çözüm [çözümleri Azure İzleyici'yi ekleyin Çözüm Galerisi](solutions.md)
-3. Tüm kaydedilmiş sorgular, panolar veya yeni veri türü kullanılacağını uyarıları güncelleştirme
-   + AzureDiagnostics için türüdür. Kaynak türü için Azure ağ bağlantısı günlükleri filtrelemek için kullanabilirsiniz.
+1. [Tanılamayı Azure Application Gateway 'lerin Azure Izleyici 'ye doğrudan gönderilecek şekilde yapılandırın](#enable-azure-application-gateway-diagnostics-in-the-portal)
+2. [Tanılamayı Azure ağ güvenlik gruplarından Azure Izleyici 'ye doğrudan gönderilecek şekilde yapılandırın](#enable-azure-network-security-group-diagnostics-in-the-portal)
+2. [Çözüm Galerisi Azure izleyici çözümlerini ekleme](solutions.md) bölümünde açıklanan işlemi kullanarak *Azure Application Gateway Analytics* ve *Azure ağ güvenlik grubu Analizi* çözümünü etkinleştirin
+3. Yeni veri türünü kullanmak için kaydedilen sorguları, panoları veya uyarıları güncelleştirme
+   + Tür AzureDiagnostics. Kaynak türü ' nu kullanarak Azure ağ günlüklerine filtre uygulayabilirsiniz.
 
-     | Onun yerine: | Kullanım: |
+     | Onun yerine: | Kullanırsınız |
      | --- | --- |
-     | NetworkApplicationgateways &#124; nerede OperationName "ApplicationGatewayAccess" == | AzureDiagnostics &#124; nerede ResourceType "APPLICATIONGATEWAYS" ve OperationName == "ApplicationGatewayAccess" == |
-     | NetworkApplicationgateways &#124; where OperationName=="ApplicationGatewayPerformance" | AzureDiagnostics &#124; where ResourceType=="APPLICATIONGATEWAYS" and OperationName=="ApplicationGatewayPerformance" |
-     | NetworkSecuritygroups | AzureDiagnostics &#124; where ResourceType=="NETWORKSECURITYGROUPS" |
+     | &#124; Burada OperationName = = "ApplicationGatewayAccess" olduğunda networkapplicationgateway | AzureDiagnostics &#124; WHERE ResourceType = = "applicationgateway" ve OperationName = = "ApplicationGatewayAccess" |
+     | &#124; Burada OperationName = = "ApplicationGatewayPerformance" olduğunda networkapplicationgateway | AzureDiagnostics &#124; WHERE ResourceType = = "applicationgateway" ve OperationName = = "ApplicationGatewayPerformance" |
+     | NetworkSecuritygroups | AzureDiagnostics &#124; WHERE ResourceType = = "NETWORKSECURITYGROUPS" |
 
-   + Bir son eki olan herhangi bir alan için \_s, \_d veya \_g adı küçük harflere ilk karakteri değiştirme
-   + Bir son eki olan herhangi bir alan için \_o adı, veriler iç içe geçmiş alanı adlarını temel alarak ayrı ayrı alanlara bölünür.
-4. Kaldırma *Azure ağ analizi (kullanım dışı)* çözüm.
-   + PowerShell kullanıyorsanız, `Set-AzureOperationalInsightsIntelligencePack -ResourceGroupName <resource group that the workspace is in> -WorkspaceName <name of the log analytics workspace> -IntelligencePackName "AzureNetwork" -Enabled $false`
+   + \_s, \_d veya \_bir sonekine sahip herhangi bir alan için ad içinde ilk karakteri küçük harfe değiştirin
+   + Adında \_o sonekine sahip herhangi bir alan için, veriler iç içe geçmiş alan adlarına göre tek tek alanlara bölünür.
+4. *Azure Ağ Analizi (kullanım dışı)* çözümünü kaldırın.
+   + PowerShell kullanıyorsanız, `Set-AzureOperationalInsightsIntelligencePack -ResourceGroupName <resource group that the workspace is in> -WorkspaceName <name of the log analytics workspace> -IntelligencePackName "AzureNetwork" -Enabled $false` kullanın
 
-Değişiklik yeni çözümde görünür değil. önce toplanan veriler. Alan adları ve eski türünü kullanarak bu verileri sorgulamak devam edebilirsiniz.
+Değişiklik, yeni çözümde görüntülenmeden önce toplanan veriler görünmez. Eski tür ve alan adlarını kullanarak bu verileri sorgulamaya devam edebilirsiniz.
 
 ## <a name="troubleshooting"></a>Sorun giderme
 [!INCLUDE [log-analytics-troubleshoot-azure-diagnostics](../../../includes/log-analytics-troubleshoot-azure-diagnostics.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Kullanım [sorgular Azure İzleyici'de oturum](../log-query/log-query-overview.md) ayrıntılı Azure tanılama verilerini görüntülemek için.
+* Ayrıntılı Azure tanılama verilerini görüntülemek için [Azure izleyici 'de günlük sorguları '](../log-query/log-query-overview.md) nı kullanın.

@@ -1,6 +1,6 @@
 ---
-title: Raporlar - Azure Active Directory Self Servis parola sıfırlama
-description: Raporlama Azure AD Self Servis parola sıfırlama olayları
+title: Self servis parola sıfırlama raporları-Azure Active Directory
+description: Azure AD self servis parola sıfırlama olaylarında raporlama
 services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
@@ -11,171 +11,167 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahenry
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 794a99481d9394229e77168e75c48f4110735578
-ms.sourcegitcommit: 084630bb22ae4cf037794923a1ef602d84831c57
+ms.openlocfilehash: 55ef15bd1fe922aa44227d2fea3d882d4320146f
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67536928"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72786722"
 ---
 # <a name="reporting-options-for-azure-ad-password-management"></a>Azure AD parola yönetimi için raporlama seçenekleri
 
-Dağıtımdan sonra birçok kuruluşun öğrenmek istediğiniz nasıl ya da (SSPR) Self Servis parola sıfırlama, gerçekten kullanılıyor. Azure Active Directory (Azure AD) sağladığı raporlama özelliği önceden oluşturulmuş raporları kullanarak soruları yanıtlamanıza yardımcı olur. Uygun şekilde lisansınız varsa, özel sorgular oluşturabilirsiniz.
+Dağıtımdan sonra, birçok kuruluş, kendi kendine parola sıfırlama (SSPR) hizmetinin nasıl veya ne sıklıkta kullanıldığını öğrenmek ister. Azure Active Directory (Azure AD) tarafından sağlanan raporlama özelliği, önceden oluşturulmuş raporları kullanarak soruları yanıtlamanıza yardımcı olur. Uygun şekilde lisanslandıysanız özel sorgular da oluşturabilirsiniz.
 
-![SSPR üzerinde raporlama denetim kullanarak Azure AD'de oturum][Reporting]
+![Azure AD 'de denetim günlüklerini kullanarak SSPR üzerinde raporlama][Reporting]
 
-Mevcut raporları aşağıdaki sorular yanıtlanabilir [Azure portalında](https://portal.azure.com/):
+Aşağıdaki sorular [Azure Portal](https://portal.azure.com/)var olan raporlar tarafından yanıtlanabilmelidir:
 
 > [!NOTE]
-> Siz [genel yönetici](../users-groups-roles/directory-assign-admin-roles.md), ve, bu veriler kuruluşunuz adına toplanması için katılım gerekir. Katılım için ziyaret gerekir **raporlama** sekme veya denetim günlükleri en az bir kez. O zamana kadar kuruluşunuz için veri toplanmaz.
+> [Genel yönetici](../users-groups-roles/directory-assign-admin-roles.md)olmanız ve bu verilerin kuruluşunuz adına toplanması için kabul etmeniz gerekir. Kabul etmek için **Raporlama** sekmesini veya denetim günlüklerini en az bir kez ziyaret etmeniz gerekir. Bu durumda, veriler kuruluşunuz için toplanmaz.
 >
 
-* Kaç kişinin parola sıfırlama için kaydolan?
-* Kimin parola sıfırlama için kaydolan?
-* Verileri kaydetme kişiler nelerdir?
-* Kaç kişinin parolalarını son yedi gün içinde sıfırlansın mı?
-* Kullanıcılar veya yöneticilerin parolalarını sıfırlayabilir kullanan en yaygın yöntemleri nelerdir?
-* Ortak sorunları kullanıcılar veya yöneticilerin yüz parola sıfırlamayı kullanabilmek çalışırken nelerdir?
-* Hangi yöneticileri sık kendi parolalarını sıfırlama?
-* Parola sıfırlama ile geçmeden herhangi bir şüpheli etkinlik var mı?
+* Parola sıfırlama için kaç kişi kaydettirildi?
+* Parola sıfırlama için kaydoldu?
+* Kişiler hangi verileri kaydediyor?
+* Son yedi gün içinde kaç kişi parolalarını sıfırlıyor?
+* Kullanıcıların veya yöneticilerin parolalarını sıfırlamak için kullandığı en yaygın yöntemler nelerdir?
+* Parola sıfırlamayı kullanmaya çalışırken kullanıcıların veya yöneticilerin karşılaştığı yaygın sorunlar nelerdir?
+* Yöneticiler kendi parolalarını sıklıkla sıfırlıyor mu?
+* Parola sıfırlama ile ilgili şüpheli bir etkinlik var mı?
 
-## <a name="power-bi-content-pack"></a>Power BI İçerik Paketi
+## <a name="how-to-view-password-management-reports-in-the-azure-portal"></a>Azure portal parola yönetimi raporlarını görüntüleme
 
-Power BI kullanıcısıysanız, yok bir içerik paketi SSPR için kullanımı kolay raporlama içeren Azure AD için. İçerik paketini dağıtmak ve nasıl kullanılacağı hakkında daha fazla bilgi için bkz. [Azure Active Directory Power BI içerik Paketi'ni kullanma](../reports-monitoring/howto-power-bi-content-pack.md). İçerik Paketi ile kendi panolarınızı oluşturun ve bunları başkalarıyla kuruluşunuzda paylaşın.
-
-## <a name="how-to-view-password-management-reports-in-the-azure-portal"></a>Azure portalında parola yönetim raporlarını görüntüleme
-
-Azure portalı deneyiminde, parola sıfırlama görüntüleyebilir ve parola sıfırlama kayıt etkinlik şekilde geliştirildi. Sıfırlama adımları parolayı bulmak için aşağıdaki bilgileri kullanın ve parola sıfırlama kayıt olaylarını:
+Azure portal deneyiminde, parola sıfırlama ve parola sıfırlama kayıt etkinliğini görüntüleme yönteminizi geliştirdik. Parola sıfırlama ve parola sıfırlama kaydı olaylarını bulmak için aşağıdaki adımları kullanın:
 
 1. [Azure portala](https://portal.azure.com) gidin.
-2. Seçin **tüm hizmetleri** sol bölmesinde.
-3. Arama **Azure Active Directory** Hizmetler listesinde ve bu seçeneği belirleyin.
-4. Seçin **kullanıcılar** Yönet bölümünden.
-5. Seçin **denetim günlüklerini** gelen **kullanıcılar** dikey penceresi. Bu, dizininizdeki tüm kullanıcılara karşı gerçekleşen denetim olayların tümünü gösterir. Bu görünüm tüm parola ile ilgili olayları görmek için filtre uygulayabilirsiniz.
-6. Gelen **filtre** seçim bölmesinin üst menü **hizmet** aşağı açılan liste ve şekilde değiştirin **Self Servis parola yönetimi** hizmet türü.
-7. İsteğe bağlı olarak, daha fazla listenin belirli seçerek filtrelemek **etkinlik** ilgilendiğiniz.
+2. Sol bölmedeki **tüm hizmetler** ' i seçin.
+3. Hizmetler listesinde **Azure Active Directory** arayın ve seçin.
+4. Yönet bölümünden **Kullanıcılar** ' ı seçin.
+5. **Kullanıcılar** dikey penceresinden **Denetim günlükleri** ' ni seçin. Bu, dizininizdeki tüm kullanıcılara karşı gerçekleşen tüm denetim olaylarını gösterir. Parolayla ilgili tüm olayları görmek için bu görünüme filtre uygulayabilirsiniz.
+6. Bölmenin üst kısmındaki **filtre** menüsünde, **hizmet** açılır listesini seçin ve **self servis parola yönetimi** hizmet türüyle değiştirin.
+7. İsteğe bağlı olarak, ilgilendiğiniz belirli **etkinlikleri** seçerek listeye daha fazla filtre uygulayın.
 
-### <a name="converged-registration-preview"></a>Yakınsanmış kayıt (Önizleme)
+### <a name="converged-registration-preview"></a>Yakınsama kaydı (Önizleme)
 
-Yakınsanmış kayıt genel önizlemede katılan, Denetim günlüklerinde kullanıcı etkinliği ile ilgili bilgi hizmetin altında bulunacaktır **kimlik doğrulama yöntemleri**.
+Yakınsama kaydının genel önizlemesine katılımını yapıyorsanız, denetim günlüklerinde Kullanıcı etkinliğiyle ilgili bilgiler hizmet **kimlik doğrulama yöntemleri**altında bulunur.
 
-## <a name="description-of-the-report-columns-in-the-azure-portal"></a>Azure Portalı'nda rapor sütunlarında açıklaması
+## <a name="description-of-the-report-columns-in-the-azure-portal"></a>Azure portal rapor sütunlarının açıklaması
 
-Aşağıdaki listede, her rapor sütunlarında ayrıntılı Azure portalında açıklanmaktadır:
+Aşağıdaki listede, Azure portal rapor sütunlarının her biri ayrıntılı olarak açıklanmaktadır:
 
-* **Kullanıcı**: Bir parola deneyen kullanıcıya kayıt işlemi sıfırlayın.
-* **Rol**: Dizindeki kullanıcı rolü.
-* **Tarih ve saat**: Tarih ve saat girişimi.
-* **Kayıtlı veri**: Kullanıcı tarafından sağlanan sırasında parola sıfırlama kaydı, kimlik doğrulama verileri.
+* **Kullanıcı**: parola sıfırlama kayıt işlemini deneyen kullanıcı.
+* **Rol**: dizindeki kullanıcının rolü.
+* **Tarih ve saat**: girişim tarihi ve saati.
+* **Kayıtlı veri**: parola sıfırlama kaydı sırasında kullanıcının verdiği kimlik doğrulama verileri.
 
-## <a name="description-of-the-report-values-in-the-azure-portal"></a>Azure Portalı'nda rapor değerlerin açıklaması
+## <a name="description-of-the-report-values-in-the-azure-portal"></a>Azure portal rapor değerlerinin açıklaması
 
-Aşağıdaki tabloda, Azure portalında her sütun için ayarlayabileceğiniz farklı değerler açıklanmaktadır:
+Aşağıdaki tabloda, Azure portal her bir sütun için ayarlayabileceğiniz farklı değerler açıklanmaktadır:
 
-| Sütun | İzin verilen değerler ve bunların anlamları |
+| Sütun | İzin verilen değerler ve anlamları |
 | --- | --- |
-| Kayıtlı veri |**Alternatif e-posta**: Kullanıcı kimlik doğrulaması için bir alternatif e-posta veya kimlik doğrulama e-posta kullanılır.<p><p>**Ofis telefonu**: Kullanıcı bir ofis telefonu kimliğini doğrulamak için kullanılır.<p>**Cep telefonu**: Kullanıcı, bir cep telefonu veya kimlik doğrulama telefon numarasını kimlik doğrulaması için kullanılır.<p>**Güvenlik sorularını**: Kullanıcının güvenlik sorularını kimliğini doğrulamak için kullanılır.<p>**Önceki yöntemlerden herhangi bir birleşimini gibi alternatif e-posta + cep telefonu**: İki ağ geçidi İlkesi belirtilir ve kullanılan kullanıcı hangi iki yöntemi gösterilir gerçekleşir kimlik doğrulaması parolasını sıfırlama isteği. |
+| Kayıtlı veriler |**Alternatif e-posta**: Kullanıcı, kimlik doğrulamak için alternatif bir e-posta veya kimlik doğrulama e<p><p>**Ofis telefonu**: Kullanıcı, kimlik doğrulamak için bir Office telefonu kullandık.<p>**Cep telefonu**: Kullanıcı, kimlik doğrulamak için bir cep telefonu veya kimlik doğrulama telefonu kullandık.<p>**Güvenlik soruları**: Kullanıcı, kimlik doğrulaması için güvenlik soruları kullandı.<p>**Önceki yöntemlerin herhangi bir birleşimi (örneğin, alternatif e-posta + cep telefonu**), iki geçit bir ilke belirtildiğinde oluşur ve kullanıcının parola sıfırlama isteğinde kimlik doğrulaması için kullandığı iki yöntemi gösterir. |
 
-## <a name="self-service-password-management-activity-types"></a>Self Servis parola yönetimi etkinlik türleri
+## <a name="self-service-password-management-activity-types"></a>Self servis parola yönetimi etkinlik türleri
 
-Aşağıdaki etkinlik türlerini görünür **Self Servis parola yönetimi** denetim olay kategorisi:
+Aşağıdaki etkinlik türleri **self servis parola yönetimi** denetim olay kategorisinde görünür:
 
-* [Self Servis parola sıfırlaması engellendi](#activity-type-blocked-from-self-service-password-reset): Kullanıcı parola sıfırlama, belirli bir ağ geçidi kullanın veya bir telefon numarası doğrulama 24 saat içindeki toplam beşten fazla kez denediğini gösterir.
-* [Parolayı değiştirme (Self Servis)](#activity-type-change-password-self-service): Bir kullanıcı bir gönüllü gerçekleştirilen veya (süre sonu nedeniyle) zorunlu gösterir parola değiştirme.
-* [Parolayı Sıfırla (yönetici tarafından)](#activity-type-reset-password-by-admin): Yönetici parola sıfırlama Azure portalından bir kullanıcı adına gerçekleştirilen gösterir.
-* [Parola sıfırlama (Self Servis)](#activity-type-reset-password-self-service): Kullanıcı başarıyla parolalarını sıfırlama gösterir [Azure AD parola sıfırlama portalı](https://passwordreset.microsoftonline.com).
-* [Self Servis parola sıfırlama akış etkinliği ilerleme durumu](#activity-type-self-serve-password-reset-flow-activity-progress): Sıfırlama işleminin parola parçası olarak kimlik doğrulama kapısı geçirerek belirli bir parola sıfırlama gibi bir kullanıcı geçer her belirli bir adıma gösterir.
-* [(Self Servis) kullanıcı hesabının kilidi](#activity-type-unlock-a-user-account-self-service)): Kullanıcı başarıyla Active Directory hesabı parolalarını sıfırlamadan kilidi olduğunu gösteren [Azure AD parola sıfırlama portalı](https://passwordreset.microsoftonline.com) sıfırlamadan kilidini açma hesabının Active Directory özelliğini kullanarak.
-* [Kullanıcı Self Servis parola sıfırlama için kayıtlı](#activity-type-user-registered-for-self-service-password-reset): Kullanıcı şu anda belirtilen kiracıyı parola sıfırlama ilkesine uygun olarak kullanıcının parolasını sıfırlamak için gerekli tüm bilgileri kaydettiğini gösterir.
+* [Self servis parola sıfırlaması engellendi](#activity-type-blocked-from-self-service-password-reset): bir kullanıcının bir parolayı sıfırlamasını, belirli bir ağ geçidini kullanmasını veya 24 saat içinde beş ' dan fazla kez bir telefon numarası doğrulamasını denediğini belirtir.
+* [Parolayı değiştirme (self servis)](#activity-type-change-password-self-service): kullanıcının gönüllü olarak veya zorlamalı (süre sonu) parola değişikliğini yaptığını gösterir.
+* [Parolayı Sıfırla (yöneticiye göre)](#activity-type-reset-password-by-admin): bir yöneticinin Azure Portal Kullanıcı adına bir parola sıfırlaması yaptığını belirtir.
+* [Parola sıfırlama (self servis)](#activity-type-reset-password-self-service): kullanıcının [Azure AD parola sıfırlama portalından](https://passwordreset.microsoftonline.com)parolasını başarıyla sıfırladığı anlamına gelir.
+* [Self servis parola sıfırlama akışı etkinlik ilerlemesi](#activity-type-self-serve-password-reset-flow-activity-progress): bir kullanıcının, parola sıfırlama işleminin bir parçası olarak belirli bir parola sıfırlama kimlik doğrulama kapısını geçirme gibi ilerlemesinin devam ettiğini gösterir.
+* [Kullanıcı hesabının kilidini açma (self servis)](#activity-type-unlock-a-user-account-self-service)): hesabın kilit açma özelliğinin Active Directory özelliğini kullanarak, kullanıcının [Azure AD parola sıfırlama portalından](https://passwordreset.microsoftonline.com) parolalarını sıfırlamadan Active Directory hesabının kilidini başarıyla kilitdiğini belirtir sıfırlama olmadan.
+* [Self servis parola sıfırlama için kayıtlı Kullanıcı](#activity-type-user-registered-for-self-service-password-reset): bir kullanıcının, geçerli olarak belirtilen kiracı parolası sıfırlama ilkesine uygun olarak parolasını sıfırlayabilmesi için gerekli tüm bilgileri kaydetmediğini belirtir.
 
 ### <a name="activity-type-blocked-from-self-service-password-reset"></a>Etkinlik türü: Self servis parola sıfırlaması engellendi
 
-Aşağıdaki listede, bu etkinliğin ayrıntılı açıklanmıştır:
+Aşağıdaki listede bu etkinlik ayrıntılı olarak açıklanmaktadır:
 
-* **Etkinlik açıklaması**: Kullanıcı parola sıfırlama, belirli bir ağ geçidi kullanın veya bir telefon numarası doğrulama 24 saat içindeki toplam beşten fazla kez denediğini gösterir.
-* **Etkinlik aktör**: Ek gerçekleştirmesini kısıtladı kullanıcı işlemleri sıfırlayın. Kullanıcı, bir son kullanıcı veya yönetici olabilir.
-* **Etkinlik hedef**: Ek gerçekleştirmesini kısıtladı kullanıcı işlemleri sıfırlayın. Kullanıcı, bir son kullanıcı veya yönetici olabilir.
+* **Etkinlik açıklaması**: bir kullanıcının bir parolayı sıfırlamasını, belirli bir kapısı kullanmasını veya 24 saat içinde beş ' dan fazla kez bir telefon numarasını doğrulamasını denediğini belirtir.
+* **Etkinlik aktör**: ek sıfırlama işlemleri gerçekleştirmeyi azaltılan Kullanıcı. Kullanıcı bir son kullanıcı veya yönetici olabilir.
+* **Etkinlik hedefi**: ek sıfırlama işlemleri gerçekleştirmeyi azaltılan Kullanıcı. Kullanıcı bir son kullanıcı veya yönetici olabilir.
 * **Etkinlik durumu**:
-  * _Başarı_: Bir kullanıcı herhangi bir ek sıfırlar gerçekleştirme, herhangi bir ek kimlik doğrulama yöntemleri çalışırken ya da sonraki 24 saat için herhangi bir ek telefon numaraları doğrulanıyor kısıtladı gösterir.
-* **Etkinlik durumu hata nedeni**: Geçerli değildir.
+  * _Başarı_: bir kullanıcının herhangi bir ek sıfırlama işlemi gerçekleştirmesini, ek kimlik doğrulama yöntemleri gerçekleştirmeye veya sonraki 24 saat boyunca ek telefon numaralarını doğrulamaya yönelik olduğunu gösterir.
+* **Etkinlik durumu hata nedeni**: uygulanamaz.
 
-### <a name="activity-type-change-password-self-service"></a>Etkinlik türü: Parolayı değiştirme (self servis)
+### <a name="activity-type-change-password-self-service"></a>Etkinlik türü: parolayı değiştirme (self servis)
 
-Aşağıdaki listede, bu etkinliğin ayrıntılı açıklanmıştır:
+Aşağıdaki listede bu etkinlik ayrıntılı olarak açıklanmaktadır:
 
-* **Etkinlik açıklaması**: Bir kullanıcı bir gönüllü gerçekleştirilen veya (süre sonu nedeniyle) zorunlu gösterir parola değiştirme.
-* **Etkinlik aktör**: Kullanıcıların parolalarını değiştiren kullanıcı. Kullanıcı, bir son kullanıcı veya yönetici olabilir.
-* **Etkinlik hedef**: Kullanıcıların parolalarını değiştiren kullanıcı. Kullanıcı, bir son kullanıcı veya yönetici olabilir.
+* **Etkinlik açıklaması**: bir kullanıcının gönüllü olarak veya zorlamalı (süre sonu) parola değişikliğini yaptığını gösterir.
+* **Etkinlik aktör**: parolasını değiştiren kullanıcı. Kullanıcı bir son kullanıcı veya yönetici olabilir.
+* **Etkinlik hedefi**: parolasını değiştiren kullanıcı. Kullanıcı bir son kullanıcı veya yönetici olabilir.
 * **Etkinlik durumları**:
-  * _Başarı_: Bir kullanıcının parolasını başarıyla değiştirildi gösterir.
-  * _Hata_: Bir kullanıcının parolasını değiştirmek başarısız olduğunu gösterir. Satır görmek için seçebileceğiniz **etkinlik durum nedeni** hatanın neden oluştuğunun hakkında daha fazla bilgi için kategori.
+  * _Başarılı_: bir kullanıcının parolasını başarıyla değiştirdiği anlamına gelir.
+  * _Hata_: bir kullanıcının parolasını değiştiremediğini belirtir. Hatanın neden gerçekleştiği hakkında daha fazla bilgi edinmek için **etkinlik durumu nedeni** kategorisini görmek üzere satırı seçebilirsiniz.
 * **Etkinlik durumu hata nedeni**:
-  * _FuzzyPolicyViolationInvalidPassword_: Seçilen kullanıcı olmadığından Microsoft yasaklanmış parola algılama özellikleri çok ortak veya özellikle zayıf olması için otomatik olarak yasaklanmış bir parola.
+  * _FuzzyPolicyViolationInvalidPassword_: Kullanıcı, Microsoft tarafından yasaklanmış parola algılama özellikleri çok yaygın veya özellikle zayıf bir şekilde bulduğu için otomatik olarak yasaklanmış bir parolayı seçti.
 
-### <a name="activity-type-reset-password-by-admin"></a>Etkinlik türü: Parola sıfırlama (yönetici tarafından)
+### <a name="activity-type-reset-password-by-admin"></a>Etkinlik türü: parolayı sıfırlama (yönetici tarafından)
 
-Aşağıdaki listede, bu etkinliğin ayrıntılı açıklanmıştır:
+Aşağıdaki listede bu etkinlik ayrıntılı olarak açıklanmaktadır:
 
-* **Etkinlik açıklaması**: Yönetici parola sıfırlama Azure portalından bir kullanıcı adına gerçekleştirilen gösterir.
-* **Etkinlik aktör**: Parola başka bir son kullanıcı veya yönetici adına sıfırlama gerçekleştirilen yönetici. Parola Yöneticisi, kullanıcı yöneticinize veya Yardım Masası Yöneticisi olması gerekir.
-* **Etkinlik hedef**: Kullanıcı, parola sıfırlandı. Kullanıcı, bir son kullanıcı veya farklı bir yönetici olabilir.
+* **Etkinlik açıklaması**: bir yöneticinin Azure Portal Kullanıcı adına bir parola sıfırlaması yaptığını gösterir.
+* **Etkinlik aktör**: başka bir son kullanıcı veya yönetici adına parola sıfırlamayı gerçekleştiren yönetici. Parola Yöneticisi, Kullanıcı Yöneticisi veya Yardım Masası Yöneticisi olmalıdır.
+* **Etkinlik hedefi**: parolası sıfırlanan Kullanıcı. Kullanıcı bir son kullanıcı veya farklı bir yönetici olabilir.
 * **Etkinlik durumları**:
-  * _Başarı_: Bir yönetici bir kullanıcının parola başarıyla sıfırlandı gösterir.
-  * _Hata_: Bir yönetici bir kullanıcının parolasını değiştirmek başarısız olduğunu gösterir. Satır görmek için seçebileceğiniz **etkinlik durum nedeni** hatanın neden oluştuğunun hakkında daha fazla bilgi için kategori.
+  * _Başarılı_: bir yöneticinin bir kullanıcının parolasını başarıyla sıfırladığını gösterir.
+  * _Hata_: bir yöneticinin bir kullanıcının parolasını değiştiremediğini belirtir. Hatanın neden gerçekleştiği hakkında daha fazla bilgi edinmek için **etkinlik durumu nedeni** kategorisini görmek üzere satırı seçebilirsiniz.
 
-### <a name="activity-type-reset-password-self-service"></a>Etkinlik türü: Parola sıfırlama (self servis)
+### <a name="activity-type-reset-password-self-service"></a>Etkinlik türü: parolayı sıfırlama (self servis)
 
-Aşağıdaki listede, bu etkinliğin ayrıntılı açıklanmıştır:
+Aşağıdaki listede bu etkinlik ayrıntılı olarak açıklanmaktadır:
 
-* **Etkinlik açıklaması**: Kullanıcı başarıyla parolalarını sıfırlama gösterir [Azure AD parola sıfırlama portalı](https://passwordreset.microsoftonline.com).
-* **Etkinlik aktör**: Kullanıcının parolasını sıfırlamasını kullanıcı. Kullanıcı, bir son kullanıcı veya yönetici olabilir.
-* **Etkinlik hedef**: Kullanıcının parolasını sıfırlamasını kullanıcı. Kullanıcı, bir son kullanıcı veya yönetici olabilir.
+* **Etkinlik açıklaması**: bir kullanıcının [Azure AD parola sıfırlama portalından](https://passwordreset.microsoftonline.com)parolasını başarıyla sıfırladığını gösterir.
+* **Etkinlik aktör**: parolasını sıfırlayan Kullanıcı. Kullanıcı bir son kullanıcı veya yönetici olabilir.
+* **Etkinlik hedefi**: parolasını sıfırlayan Kullanıcı. Kullanıcı bir son kullanıcı veya yönetici olabilir.
 * **Etkinlik durumları**:
-  * _Başarı_: Kullanıcı başarıyla kendi parolalarını sıfırlama gösterir.
-  * _Hata_: Bir kullanıcı kendi parolasını sıfırlamak başarısız olduğunu gösterir. Satır görmek için seçebileceğiniz **etkinlik durum nedeni** hatanın neden oluştuğunun hakkında daha fazla bilgi için kategori.
+  * _Başarı_: bir kullanıcının kendi parolasını başarıyla sıfırlamasını belirtir.
+  * _Hata_: bir kullanıcının kendi parolasını sıfırlamasının başarısız olduğunu gösterir. Hatanın neden gerçekleştiği hakkında daha fazla bilgi edinmek için **etkinlik durumu nedeni** kategorisini görmek üzere satırı seçebilirsiniz.
 * **Etkinlik durumu hata nedeni**:
-  * _FuzzyPolicyViolationInvalidPassword_: Yönetici olmadığından Microsoft yasaklanmış parola algılama özellikleri çok ortak veya özellikle zayıf olması için otomatik olarak yasaklanmış bir parola seçilir.
+  * _FuzzyPolicyViolationInvalidPassword_: yönetici, Microsoft yasaklanmış parola algılama özellikleri çok yaygın veya özellikle zayıf olduğunu bulduğundan, otomatik olarak yasaklanmış bir parola seçti.
 
-### <a name="activity-type-self-serve-password-reset-flow-activity-progress"></a>Etkinlik türü: Kendi kendine hizmet parola sıfırlama akış etkinliği ilerleme durumu
+### <a name="activity-type-self-serve-password-reset-flow-activity-progress"></a>Etkinlik türü: Self servis parola sıfırlama akış etkinliği ilerleme durumu
 
-Aşağıdaki listede, bu etkinliğin ayrıntılı açıklanmıştır:
+Aşağıdaki listede bu etkinlik ayrıntılı olarak açıklanmaktadır:
 
-* **Etkinlik açıklaması**: Bölümü parola sıfırlama işleminin (belirli bir parola geçirme kimlik doğrulama ağ geçidi sıfırlama gibi), bir kullanıcı üzerinden geçer her belirli bir adıma belirtir.
-* **Etkinlik aktör**: Parola parçası gerçekleştiren kullanıcının akış sıfırlayın. Kullanıcı, bir son kullanıcı veya yönetici olabilir.
-* **Etkinlik hedef**: Parola parçası gerçekleştiren kullanıcının akış sıfırlayın. Kullanıcı, bir son kullanıcı veya yönetici olabilir.
+* **Etkinlik açıklaması**: bir kullanıcının (belirli bir parola sıfırlama kimlik doğrulama kapısını geçirme gibi) parola sıfırlama işleminin bir parçası olarak devam eden her bir adımı gösterir.
+* **Etkinlik aktör**: parola sıfırlama akışının bir parçasını gerçekleştiren kullanıcı. Kullanıcı bir son kullanıcı veya yönetici olabilir.
+* **Etkinlik hedefi**: parola sıfırlama akışının bir parçasını gerçekleştiren kullanıcı. Kullanıcı bir son kullanıcı veya yönetici olabilir.
 * **Etkinlik durumları**:
-  * _Başarı_: Kullanıcı parola sıfırlama işlem akışında belirli bir adım başarıyla tamamlandığını gösterir.
-  * _Hata_: Parola belirli bir adım başarısız akış sıfırlama gösterir. Satır görmek için seçebileceğiniz **etkinlik durum nedeni** hatanın neden oluştuğunun hakkında daha fazla bilgi için kategori.
-* **Etkinlik durumu nedeniyle**:   İçin aşağıdaki tabloya bakın [tüm izin verilen sıfırlama etkinlik durumu nedeniyle](#description-of-the-report-columns-in-the-azure-portal).
+  * _Başarılı_: bir kullanıcının parola sıfırlama akışının belirli bir adımını başarıyla tamamladığını gösterir.
+  * _Hata_: parola sıfırlama akışının belirli bir adımının başarısız olduğunu gösterir. Hatanın neden gerçekleştiği hakkında daha fazla bilgi edinmek için **etkinlik durumu nedeni** kategorisini görmek üzere satırı seçebilirsiniz.
+* **Etkinlik durumu nedenleri**: [tüm izin verilen sıfırlama etkinliği durum nedenleri](#description-of-the-report-columns-in-the-azure-portal)için aşağıdaki tabloya bakın.
 
-### <a name="activity-type-unlock-a-user-account-self-service"></a>Etkinlik türü: (Self Servis) bir kullanıcı hesabının kilidini açma
+### <a name="activity-type-unlock-a-user-account-self-service"></a>Etkinlik türü: Kullanıcı hesabının kilidini açma (self servis)
 
-Aşağıdaki listede, bu etkinliğin ayrıntılı açıklanmıştır:
+Aşağıdaki listede bu etkinlik ayrıntılı olarak açıklanmaktadır:
 
-* **Etkinlik açıklaması**: Kullanıcı başarıyla Active Directory hesabı parolalarını sıfırlamadan kilidi olduğunu gösteren [Azure AD parola sıfırlama portalı](https://passwordreset.microsoftonline.com) sıfırlamadan kilidini açma hesabının Active Directory özelliğini kullanarak.
-* **Etkinlik aktör**: Kendi hesap parolalarını sıfırlamadan kilidi kullanıcı. Kullanıcı, bir son kullanıcı veya yönetici olabilir.
-* **Etkinlik hedef**: Kendi hesap parolalarını sıfırlamadan kilidi kullanıcı. Kullanıcı, bir son kullanıcı veya yönetici olabilir.
-* **Etkinlik durumları izin**:
-  * _Başarı_: Bir kullanıcı, kendi hesabı başarıyla kilidi gösterir.
-  * _Hata_: Bir kullanıcı hesaplarının kilidini başarısız olduğunu gösterir. Satır görmek için seçebileceğiniz **etkinlik durum nedeni** hatanın neden oluştuğunun hakkında daha fazla bilgi için kategori.
+* **Etkinlik açıklaması**: bir kullanıcının, sıfırlama olmadan hesap kilit açma özelliğinin Active Directory özelliğini kullanarak Active Directory HESABıNı [Azure AD parola sıfırlama portalından](https://passwordreset.microsoftonline.com) başarıyla kilitleyip kilitdiğini gösterir.
+* **Etkinlik aktör**: kendi parolasını sıfırlamadan hesaplarının kilidini açan kullanıcı. Kullanıcı bir son kullanıcı veya yönetici olabilir.
+* **Etkinlik hedefi**: kendi parolasını sıfırlamadan hesaplarının kilidini açan kullanıcı. Kullanıcı bir son kullanıcı veya yönetici olabilir.
+* **Izin verilen etkinlik durumları**:
+  * Başarılı: bir kullanıcının kendi hesabını başarıyla _Kilitduğunu_belirtir.
+  * _Hata_: bir kullanıcının hesabının kilidini açmadığını gösterir. Hatanın neden gerçekleştiği hakkında daha fazla bilgi edinmek için **etkinlik durumu nedeni** kategorisini görmek üzere satırı seçebilirsiniz.
 
-### <a name="activity-type-user-registered-for-self-service-password-reset"></a>Etkinlik türü: Self servis parola sıfırlama için kaydolan kullanıcı
+### <a name="activity-type-user-registered-for-self-service-password-reset"></a>Etkinlik türü: Kullanıcı self servis parola sıfırlama için kaydedildi
 
-Aşağıdaki listede, bu etkinliğin ayrıntılı açıklanmıştır:
+Aşağıdaki listede bu etkinlik ayrıntılı olarak açıklanmaktadır:
 
-* **Etkinlik açıklaması**: Kullanıcı şu anda belirtilen kiracıyı parola sıfırlama ilkesine uygun olarak kullanıcının parolasını sıfırlamak için gerekli tüm bilgileri kaydettiğini gösterir. 
-* **Etkinlik aktör**: Parola sıfırlama için kaydolan kullanıcı. Kullanıcı, bir son kullanıcı veya yönetici olabilir.
-* **Etkinlik hedef**: Parola sıfırlama için kaydolan kullanıcı. Kullanıcı, bir son kullanıcı veya yönetici olabilir.
-* **Etkinlik durumları izin**:
-  * _Başarı_: Kullanıcı başarıyla parola sıfırlamaya uygun olarak geçerli ilke kayıtlı olduğunu belirtir. 
-  * _Hata_: Kullanıcı parola sıfırlama için kaydolmasını başarısız olduğunu gösterir. Satır görmek için seçebileceğiniz **etkinlik durum nedeni** hatanın neden oluştuğunun hakkında daha fazla bilgi için kategori.
+* **Etkinlik açıklaması**: bir kullanıcının şu anda belirtilen kiracı parolası sıfırlama ilkesine uygun olarak parolasını sıfırlayabilmesi için gerekli tüm bilgileri kaydettirdiğini belirtir. 
+* **Etkinlik aktör**: parola sıfırlama için kaydolan Kullanıcı. Kullanıcı bir son kullanıcı veya yönetici olabilir.
+* **Etkinlik hedefi**: parola sıfırlama için kaydolan Kullanıcı. Kullanıcı bir son kullanıcı veya yönetici olabilir.
+* **Izin verilen etkinlik durumları**:
+  * _Başarılı_: bir kullanıcının geçerli ilkeye uygun olarak parola sıfırlama için başarıyla kaydedildiğini belirtir. 
+  * _Hata_: bir kullanıcının parola sıfırlama için kaydolmadığını gösterir. Hatanın neden gerçekleştiği hakkında daha fazla bilgi edinmek için **etkinlik durumu nedeni** kategorisini görmek üzere satırı seçebilirsiniz.
 
      >[!NOTE]
-     >Hata, bir kullanıcı kendi parolanızı sıfırlayamıyoruz anlamına gelmez. Bu, kayıt işlemini tamamlamadı anlamına gelir. Bu telefon numarası doğruladıkları değil olsa da, doğrulanmış değil bir telefon numarası gibi doğru olduğundan, hesapta doğrulanmamış verileri varsa, bunlar bu kullanıcının parolasını sıfırlamak için kullanmaya devam edebilirsiniz.
+     >Hata, bir kullanıcının kendi parolasını sıfırlayamadıkları anlamına gelmez. Bu, kayıt işlemini bitiremediği anlamına gelir. Hesabında, doğrulanmamış bir telefon numarası gibi, bu telefon numarasını doğrulamasa bile, doğru olmayan bir şekilde hesaba yönelik doğrulanmamış veriler varsa, bu numarayı, parolasını sıfırlamak için kullanmaya devam edebilirler.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [SSPR ve MFA kullanımı ve raporlama öngörüleri](howto-authentication-methods-usage-insights.md)
+* [SSPR ve MFA kullanımı ve öngörüleri raporlama](howto-authentication-methods-usage-insights.md)
 * [SSPR’yi başarılı bir şekilde nasıl piyasaya çıkarabilirim?](howto-sspr-deployment.md)
 * [Parolanızı sıfırlama veya değiştirme](../user-help/active-directory-passwords-update-your-own-password.md).
 * [Self servis parola sıfırlama için kaydolma](../user-help/active-directory-passwords-reset-register.md).
@@ -185,7 +181,7 @@ Aşağıdaki listede, bu etkinliğin ayrıntılı açıklanmıştır:
 * [SSPR ile kullanılabilen ilke seçenekleri nelerdir?](concept-sspr-policy.md)
 * [Parola geri yazma nedir ve neden önemlidir?](howto-sspr-writeback.md)
 * [SSPR’deki tüm seçenekler nelerdir ve ne anlama gelir?](concept-sspr-howitworks.md)
-* [Bir arıza olduğunu düşünüyorum. SSPR’de nasıl sorun giderebilirim?](active-directory-passwords-troubleshoot.md)
+* [Bir şeyin bozuk olduğunu düşünüyorum. SSPR sorunlarını gidermek Nasıl yaparım??](active-directory-passwords-troubleshoot.md)
 * [Başka bir yerde ele alınmayan bir sorum var](active-directory-passwords-faq.md)
 
-[Reporting]: ./media/howto-sspr-reporting/sspr-reporting.png "Azure AD'de örneği SSPR etkinlik denetim günlükleri"
+[Reporting]: ./media/howto-sspr-reporting/sspr-reporting.png "Azure AD 'de SSPR etkinlik denetim günlükleri örneği"

@@ -1,96 +1,95 @@
 ---
-title: Veritabanı rolleri ve kullanıcıları Azure Analysis Services yönetme | Microsoft Docs
-description: Veritabanı rolleri ve kullanıcıların bir Azure Analysis Services sunucusu'nı yönetmeyi öğrenin.
+title: Azure Analysis Services veritabanı rollerini ve kullanıcılarını yönetme | Microsoft Docs
+description: Azure 'daki bir Analysis Services sunucusundaki veritabanı rollerini ve kullanıcıları yönetmeyi öğrenin.
 author: minewiskan
-manager: kfile
 ms.service: azure-analysis-services
 ms.topic: conceptual
-ms.date: 01/09/2019
+ms.date: 10/29/2019
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: 462625ce61f4538aa0769667648e07cc6307cbb3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9d1f3387fcea732e002689a4cdeaaf1d50d8a56f
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61023640"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73147000"
 ---
-# <a name="manage-database-roles-and-users"></a>Veritabanı rolleri ve kullanıcıları yönetme
+# <a name="manage-database-roles-and-users"></a>Veritabanı rollerini ve kullanıcılarını yönetme
 
-Model veritabanı düzeyinde tüm kullanıcıları bir role ait olmalıdır. Model veritabanı için belirli izinlere sahip kullanıcı rolleri tanımlar. Herhangi bir kullanıcı veya güvenlik grubu role eklenen bir hesabı Azure AD kiracısı sunucu ile aynı abonelikte olması gerekir. 
+Model veritabanı düzeyinde, tüm kullanıcılar bir role ait olmalıdır. Roller, model veritabanı için belirli izinlere sahip kullanıcıları tanımlar. Bir role eklenen herhangi bir kullanıcı veya güvenlik grubunun, sunucusuyla aynı abonelikte bir Azure AD kiracısında hesabı olması gerekir. 
 
-Kullandığınız araç bağlı olarak farklı rolleri nasıl tanımladığınızı ancak etkisi aynıdır.
+Rolleri nasıl tanımlayacağınızı kullandığınız araca göre farklılık gösteren, ancak efekt aynı.
 
-Rol izinleri şunlardır:
-*  **Yönetici** -kullanıcılar, veritabanı için tam izinlere sahip. Yönetici izinlerine sahip veritabanı rolleri, sunucu yöneticilerinin farklıdır.
-*  **İşlem** -kullanıcılar bağlanmak ve veritabanını işlem işlemleri ve model veritabanı verileri analiz edin.
-*  **Okuma** -kullanıcıların bağlanın ve model veritabanı verileri analiz etmek için bir istemci uygulamasını kullanabilir.
+Rol izinleri şunları içerir:
+*  **Yönetici** -kullanıcıların veritabanı için tam izinleri vardır. Yönetici izinlerine sahip veritabanı rolleri sunucu yöneticilerden farklıdır.
+*  **İşlem** -kullanıcılar, veritabanında işlem işlemlerine bağlanabilir ve bu işlemleri gerçekleştirebilir ve model veritabanı verilerini analiz edebilir.
+*  **Okuma** -kullanıcılar, model veritabanı verilerine bağlanmak ve analiz etmek için bir istemci uygulaması kullanabilir.
 
-Bir tablosal model projesi oluştururken, rolleri oluşturma ve SSDT'de Rol Yöneticisi'ni kullanarak bu rollere kullanıcılar veya gruplar ekleyin. Bir sunucuya dağıtıldığında, SSMS, kullandığınız [Analiz Hizmetleri PowerShell cmdlet'leri](/sql/analysis-services/powershell/analysis-services-powershell-reference), veya [Tablosal Model betik dili](https://msdn.microsoft.com/library/mt614797.aspx) roller veya kullanıcı üyeleri eklemek veya kaldırmak için (TMSL).
+Tablosal model projesi oluştururken, Visual Studio 'da Analysis Services projelerle rol Yöneticisi kullanarak roller oluşturur ve bu rollere kullanıcı veya grup ekleyebilirsiniz. Bir sunucuya dağıtıldığında, rol ve Kullanıcı üyeleri eklemek veya kaldırmak için SQL Server Management Studio (SSMS), [Analysis Services PowerShell cmdlet 'leri](https://docs.microsoft.com/analysis-services/powershell/analysis-services-powershell-reference)veya [tablo modeli komut dosyası dili](https://docs.microsoft.com/bi-reference/tmsl/tabular-model-scripting-language-tmsl-reference) (tmsl) kullanırsınız.
 
-> [!NOTE]
-> Güvenlik grupları olmalıdır `MailEnabled` özelliğini `True`.
+**Güvenlik grupları** , `MailEnabled` özelliği `True` olarak ayarlanmış [posta etkin](https://docs.microsoft.com/exchange/recipients-in-exchange-online/manage-mail-enabled-security-groups) olmalıdır. Bir grup e-posta adresi belirtirken `obj:groupid@tenantid` kullanın.
 
-## <a name="to-add-or-manage-roles-and-users-in-ssdt"></a>Eklemek veya roller ve kullanıcılar ssdt'de yönetmek için  
+
+## <a name="to-add-or-manage-roles-and-users-in-visual-studio"></a>Visual Studio 'da rol ve Kullanıcı ekleme veya yönetme  
   
-1.  SSDT > **Tablosal Model Gezgini**, sağ **rolleri**.  
+1.  **Tablosal Model Gezgini**' nde **Roller**' e sağ tıklayın.  
   
 2.  **Rol Yöneticisi**'nde **Yeni**'ye tıklayın.  
   
-3.  Rolü için bir ad yazın.  
+3.  Rol için bir ad yazın.  
   
-     Varsayılan olarak, varsayılan rolün adını, her yeni bir rol için artımlı olarak numaralandırılmıştır. Örneğin, finans yöneticileri veya İnsan Kaynakları uzmanlarıyla üye türü açıkça tanımlayan bir ad yazın önerilir.  
+     Varsayılan olarak, varsayılan rolün adı her yeni rol için artımlı olarak numaralandırılır. Üye türünü açıkça tanımlayan bir ad yazmanız önerilir, örneğin finans yöneticileri veya Insan kaynakları uzmanları.  
   
 4.  Aşağıdaki izinlerden birini seçin:  
   
     |İzin|Açıklama|  
     |----------------|-----------------|  
-    |**Yok.**|Üyeleri model şeması değiştirilemez ve verileri sorgulayamaz.|  
-    |**Okuma**|Üyeler (satır filtreleri temel alarak) verileri sorgulayabilirsiniz ancak model şeması değiştiremezsiniz.|  
-    |**Okuma ve işleme**|Üye verileri (bağlı olarak satır düzeyi filtreleri) ve çalıştırma işlemi ve işlemin tüm işlemleri sorgulayabilirsiniz ancak model şeması değiştirilemez.|  
-    |**İşlem**|Üye işlemi ve işlemin tüm işlemleri de çalıştırabilirsiniz. Model şeması değiştirilemez ve verileri sorgulayamaz.|  
-    |**Yönetici**|Üyeleri model şeması değiştirebilir ve tüm verileri sorgulayın.|   
+    |**Seçim**|Üyeler model şemasını değiştiremez ve verileri sorgulayamaz.|  
+    |**Okuma**|Üyeler veri sorgulayabilir (satır filtrelerine göre), ancak model şemasını değiştiremezler.|  
+    |**Okuma ve Işleme**|Üyeler, verileri sorgulayabilir (satır düzeyi filtrelere göre) ve Işlemi çalıştırabilir ve tüm işlemleri Işleyebilir, ancak model şemasını değiştiremezler.|  
+    |**İşle**|Üyeler, Işlem çalıştırabilir ve tüm işlemleri Işleyebilir. Model şeması değiştirilemiyor ve veri sorgulanamıyor.|  
+    |**Danışın**|Üyeler model şemasını değiştirebilir ve tüm verileri sorgulayabilir.|   
   
-5.  Rol kullanıyorsanız oluşturma okuma veya okuma ve işleme izni bir DAX formülü kullanarak satır filtreleri ekleyebilirsiniz. Tıklayın **satır filtreleri** sekmesinde, bir tablo seçin, sonra tıklayın **DAX filtresi** alan ve bir DAX formülü yazın.
+5.  Oluşturmakta olduğunuz rolün okuma veya okuma ve Işleme izni varsa, bir DAX formülü kullanarak satır filtreleri ekleyebilirsiniz. **Satır filtreleri** sekmesine tıklayın, sonra bir tablo seçin, sonra **DAX filtresi** alanına tıklayın ve ardından bir DAX formülü yazın.
   
-6.  Tıklayın **üyeleri** > **harici Ekle**.  
+6.  **Üyeler** > **Harici Ekle**' ye tıklayın.  
   
-8.  İçinde **harici Üye Ekle**, kullanıcıları veya grupları kiracınızda Azure AD tarafından e-posta adresi girin. Sonra Tamam'a tıklayın ve rolleri ve Rol üyeleri Tablosal Model Gezgini'nde görünür Rol Yöneticisi'ni kapatın. 
+8.  **Dış üye Ekle**' de, kiracınızdaki kullanıcıları veya grupları e-posta adresine göre Azure AD 'ye girin. Tamam ' a tıkladıktan sonra Rol Yöneticisi ' ni kapattıktan sonra, roller ve rol üyeleri tablosal Model Gezgini 'nde görünür. 
  
-     ![Rolleri ve kullanıcıları Tablosal Model Gezgini'nde](./media/analysis-services-database-users/aas-roles-tmexplorer.png)
+     ![Tablosal model Gezgininde roller ve kullanıcılar](./media/analysis-services-database-users/aas-roles-tmexplorer.png)
 
-9. Azure Analysis Services sunucunuza dağıtabilirsiniz.
+9. Azure Analysis Services sunucunuza dağıtın.
 
 
-## <a name="to-add-or-manage-roles-and-users-in-ssms"></a>Eklemek veya roller ve kullanıcılar ssms'de yönetmek için
+## <a name="to-add-or-manage-roles-and-users-in-ssms"></a>SSMS 'de rol ve Kullanıcı ekleme veya yönetme
 
-Roller ve kullanıcılar için bir dağıtılan model veritabanı eklemek için sunucuya olarak sunucu yöneticisi veya yönetici izinlerine sahip bir veritabanı rolü zaten bağlı gerekir.
+Dağıtılan bir model veritabanına roller ve kullanıcılar eklemek için sunucu yöneticisi olarak sunucuya veya yönetici izinlerine sahip bir veritabanı rolünde zaten olmalıdır.
 
-1. Nesne Exporer içinde sağ **rolleri** > **yeni rol**.
+1. Nesne dışarı Exporer 'da, **roller** > **Yeni rol**' e sağ tıklayın.
 
-2. İçinde **Rol Oluştur**, bir rol adı ve açıklama girin.
+2. **Rol oluştur**' da bir rol adı ve açıklama girin.
 
 3. Bir izin seçin.
 
    |İzin|Açıklama|  
    |----------------|-----------------|  
-   |**Tam Denetim (Yönetici)**|Üyeleri, model şeması değiştirebilirsiniz işlemek ve tüm verileri sorgulayabilir.| 
-   |**İşlem veritabanı**|Üye işlemi ve işlemin tüm işlemleri de çalıştırabilirsiniz. Model şeması değiştirilemez ve verileri sorgulayamaz.|  
-   |**Okuma**|Üyeler (satır filtreleri temel alarak) verileri sorgulayabilirsiniz ancak model şeması değiştiremezsiniz.|  
+   |**Tam denetim (yönetici)**|Üyeler model şemasını değiştirebilir, işleyebilir ve tüm verileri sorgulayabilir.| 
+   |**İşlem veritabanı**|Üyeler, Işlem çalıştırabilir ve tüm işlemleri Işleyebilir. Model şeması değiştirilemiyor ve veri sorgulanamıyor.|  
+   |**Okuma**|Üyeler veri sorgulayabilir (satır filtrelerine göre), ancak model şemasını değiştiremezler.|  
   
-4. Tıklayın **üyelik**, ardından bir kullanıcıyı veya grubu girin, ' % s'kiracınızın Azure AD e-posta adresi.
+4. **Üyelik**' e tıklayın, ardından kiracınızda Azure AD 'ye e-posta adresini girerek bir kullanıcı veya grup girin.
 
      ![Kullanıcı ekle](./media/analysis-services-database-users/aas-roles-adduser-ssms.png)
 
-5. Oluşturduğunuz rolü okuma izni varsa, bir DAX formülü kullanarak satır filtreleri ekleyebilirsiniz. Tıklayın **satır filtreleri**, bir tablo seçin ve ardından bir DAX formülüne yazın **DAX filtresi** alan. 
+5. Oluşturmakta olduğunuz rolün okuma izni varsa, bir DAX formülü kullanarak satır filtresi ekleyebilirsiniz. **Satır filtreleri**' ne tıklayın, bir tablo seçin ve **DAX FILTRESI** alanına bir DAX formülü yazın. 
 
-## <a name="to-add-roles-and-users-by-using-a-tmsl-script"></a>TMSL betik kullanarak rolleri ve kullanıcıları ekleme
+## <a name="to-add-roles-and-users-by-using-a-tmsl-script"></a>Bir TMSL betiği kullanarak rol ve Kullanıcı eklemek için
 
-XMLA penceresinde SSMS veya PowerShell kullanarak bir TMSL betiği çalıştırabilirsiniz. Kullanım [CreateOrReplace](https://docs.microsoft.com/sql/analysis-services/tabular-models-scripting-language-commands/createorreplace-command-tmsl) komut ve [rolleri](https://docs.microsoft.com/sql/analysis-services/tabular-models-scripting-language-objects/roles-object-tmsl) nesne.
+Bir TMSL betiğini SSMS içindeki XMLA penceresinde veya PowerShell kullanarak çalıştırabilirsiniz. [Createorreplace](https://docs.microsoft.com/bi-reference/tmsl/createorreplace-command-tmsl) komutunu ve [Roller](https://docs.microsoft.com/bi-reference/tmsl/roles-object-tmsl) nesnesini kullanın.
 
 **Örnek TMSL betiği**
 
-Bu örnekte, dış B2B kullanıcısı ve grubu SalesBI veritabanı için Okuma izinlerine sahip analist rolüne eklenir. Dış kullanıcı ve Grup aynı Azure AD kiracısında olması gerekir.
+Bu örnekte, B2B dış kullanıcısı ve bir grubu, satış bı veritabanı için okuma izinlerine sahip analist rolüne eklenir. Hem dış kullanıcı hem de grup aynı kiracı Azure AD 'de olmalıdır.
 
 ```
 {
@@ -118,39 +117,39 @@ Bu örnekte, dış B2B kullanıcısı ve grubu SalesBI veritabanı için Okuma i
 }
 ```
 
-## <a name="to-add-roles-and-users-by-using-powershell"></a>PowerShell kullanarak rolleri ve kullanıcıları ekleme
+## <a name="to-add-roles-and-users-by-using-powershell"></a>PowerShell kullanarak rol ve Kullanıcı eklemek için
 
-[SqlServer](/sql/analysis-services/powershell/analysis-services-powershell-reference) göreve özel veritabanı yönetimi cmdlet'leri ve bir Tablosal Model betik dili (TMSL) sorgu veya betik kabul genel amaçlı Invoke-ASCmd cmdlet'i modülü sağlar. Aşağıdaki cmdlet, veritabanı rolleri ve kullanıcıları yönetmek için kullanılır.
+[SqlServer](https://docs.microsoft.com/analysis-services/powershell/analysis-services-powershell-reference) modülü, göreve özgü veritabanı yönetim cmdlet 'Leri ve tablosal model betik DILI (tmsl) sorgusu veya betiği kabul eden genel amaçlı Invoke-ASCmd cmdlet 'ini sağlar. Aşağıdaki cmdlet 'ler veritabanı rollerini ve kullanıcılarını yönetmek için kullanılır.
   
 |Cmdlet|Açıklama|
 |------------|-----------------| 
-|[RoleMember ekleyin](/sql/analysis-services/powershell/analysis-services-powershell-reference)|Üye veritabanı rolüne ekleyin.| 
-|[Remove-RoleMember](/sql/analysis-services/powershell/analysis-services-powershell-reference)|Üye veritabanı rolden kaldırma.|   
-|[Çağırma ASCmd](/sql/analysis-services/powershell/analysis-services-powershell-reference)|TMSL betiğini yürütün.|
+|[Add-Rolemebir](https://docs.microsoft.com/powershell/module/sqlserver/Add-RoleMember)|Bir veritabanı rolüne üye ekleyin.| 
+|[Remove-Rolemeoda](https://docs.microsoft.com/powershell/module/sqlserver/remove-rolemember)|Bir üyeyi veritabanı rolünden kaldırın.|   
+|[Invoke-ASCmd](https://docs.microsoft.com/powershell/module/sqlserver/invoke-ascmd)|Bir TMSL betiği yürütün.|
 
 ## <a name="row-filters"></a>Satır filtreleri  
 
-Bir tablodaki satırları belirli bir rolü üyeleri tarafından sorgulanabilir satır filtrelerini tanımlayın. Satır filtreleri, DAX formülleri kullanarak modeldeki her tablo için tanımlanır.  
+Satır filtreleri, belirli bir rolün üyeleri tarafından bir tablodaki hangi satırların sorgulandığını tanımlar. Satır filtreleri, bir modeldeki her tablo için DAX formülleri kullanılarak tanımlanır.  
   
-Satır filtreleri, yalnızca rolleri okuma ve okuma için tanımlanabilir ve işlem izinleri. Belirli bir tablo için bir satır filtresi tanımlanmazsa başka bir tablodan çapraz filtreleme uygulanır sürece varsayılan olarak, tablodaki tüm satırları üyeleri sorgulayabilirsiniz.
+Satır filtreleri yalnızca okuma ve okuma ve Işleme izinleri olan roller için tanımlanabilir. Varsayılan olarak, belirli bir tablo için bir satır filtresi tanımlanmamışsa, başka bir tablodan çapraz filtreleme uygulanmadığı takdirde Üyeler tablodaki tüm satırları sorgulayabilir.
   
- Satır filtreleri, belirli bir rolü üyeleri tarafından sorgulanabilir satırları tanımlamak için bir TRUE/FALSE değeri değerlendirilmelidir bir DAX formülü gerektirir. DAX formülü bulunmayan satırları sorgulanamıyor. Örneğin, aşağıdaki satır ile Müşteriler tablosunu ifadeyi filtreler *müşteriler [Country] = "ABD" =* , satış rolünün üyeleri, yalnızca ABD müşterileri görebilir.  
+ Satır filtreleri, söz konusu rolün üyeleri tarafından sorgulanabilecek satırları tanımlamak için doğru/yanlış değerine değerlendirilmesi gereken bir DAX formülü gerektirir. DAX formülünde bulunmayan satırlar sorgulanamıyor. Örneğin, aşağıdaki satır filtreleri ifadesi olan Customers tablosu *= Customers [Country] = "USA"* , satış rolü ÜYELERI yalnızca ABD 'deki müşterileri görebilir.  
   
-Satır filtreleri belirtilen satırları ve ilişkili satırları uygulanır. Bir tabloda birden çok ilişki varsa, güvenlik etkin ilişki için filtre uygulayın. Satır filtreleri ilişkili tablolar için örneğin tanımlanan diğer satır filtreleri ile kesiştiğinden:  
+Satır filtreleri belirtilen satırlar ve ilgili satırlar için geçerlidir. Bir tabloda birden çok ilişki olduğunda, filtreler etkin olan ilişki için güvenliği uygular. Satır filtreleri, ilişkili tablolar için tanımlanan diğer satır dosyası'leri ile kesişen, örneğin:  
   
 |Tablo|DAX ifadesi|  
 |-----------|--------------------|  
-|Bölge|= Bölge [Country] = "Tr"|  
-|ProductCategory|= ProductCategory [Name] = "Bisiklet"|  
-|İşlemler|= İşlemleri [yıl] 2016 =|  
+|Bölge|= Region [Ülke] = "USA"|  
+|ProductCategory|= ProductCategory [ad] = "Bisiklet"|  
+|İşlemler|= İşlem [Year] = 2016|  
   
- Üyeleri burada müşteri ABD'de, bisiklet ürün kategorisi olan ve 2016 yıldır veri satırı sorgulayabilirsiniz net etkisidir. Kullanıcılar bu izinler veren başka bir rol üyesi oldukları sürece, bisiklet veya işlemleri değil 2016'da olmayan işlemler işlemler ABD dışında sorgulayamaz.
+ Net etkisi, Üyeler müşterinin ABD 'de olduğu, ürün kategorisinin bisiklet olduğu ve yılın 2016 olduğu veri satırlarını sorgulayabilir. Kullanıcılar, bu izinleri veren başka bir rolün üyesi olmadıkları takdirde ABD dışındaki işlemleri, Bisiklet olmayan işlemleri veya 2016 içinde olmayan işlemleri sorgulayamaz.
   
- Filtre kullanabileceğiniz *=FALSE()* tablonun tamamını tüm satırlara erişimi reddetmek için.
+ Bir tablonun tamamına yönelik tüm satırlara erişimi reddetmek için, *= false ()* filtresini kullanabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-  [Sunucu yöneticilerini yönetme](analysis-services-server-admins.md)   
-  [Azure Analysis Services PowerShell ile yönetme](analysis-services-powershell.md)  
-  [Tablosal Model betik dili (TMSL) başvurusu](https://docs.microsoft.com/sql/analysis-services/tabular-model-scripting-language-tmsl-reference)
+  [Sunucu yöneticileri  yönetme](analysis-services-server-admins.md)  
+  [PowerShell ile Azure Analysis Services yönetme](analysis-services-powershell.md)  
+  [Tablosal model betik dili (TMSL) başvurusu](https://docs.microsoft.com/bi-reference/tmsl/tabular-model-scripting-language-tmsl-reference)
 

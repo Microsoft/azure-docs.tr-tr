@@ -1,121 +1,120 @@
 ---
-title: Uygulama performansı ile ilgili SSS - Azure App Service | Microsoft Docs
-description: Azure App Service'in Web Apps özelliği, kullanılabilirlik, performans ve uygulama sorunları hakkında sık sorulan soruların yanıtlarını alın.
+title: Uygulama performansı SSS-Azure App Service | Microsoft Docs
+description: Azure App Service Web Apps özelliğindeki kullanılabilirlik, performans ve uygulama sorunları hakkında sık sorulan soruların yanıtlarını alın.
 services: app-service\web
 documentationcenter: ''
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: ''
 tags: top-support-issue
 ms.assetid: 2fa5ee6b-51a6-4237-805f-518e6c57d11b
 ms.service: app-service-web
 ms.workload: web
 ms.tgt_pltfrm: ibiza
-ms.devlang: na
 ms.topic: article
 ms.date: 10/31/2018
 ms.author: genli
 ms.custom: seodec18
-ms.openlocfilehash: f455985d2a7d05f45100d4a88b43c688fe1a7767
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9cd529424a022edfa64f9053a53cbbe9f756637e
+ms.sourcegitcommit: fad368d47a83dadc85523d86126941c1250b14e2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65955759"
+ms.lasthandoff: 09/19/2019
+ms.locfileid: "71122062"
 ---
-# <a name="application-performance-faqs-for-web-apps-in-azure"></a>Azure Web Apps için uygulama performansı ile ilgili SSS
+# <a name="application-performance-faqs-for-web-apps-in-azure"></a>Azure 'da Web Apps için uygulama performansı SSS
 
 > [!NOTE]
-> Bazı yönergeleri yalnızca Windows veya Linux uygulama hizmetleri üzerinde çalışabilir. Örneğin, Linux uygulama Hizmetleri çalıştıran 64 bit modunda varsayılan olarak.
+> Aşağıdaki yönergelerin bazıları yalnızca Windows veya Linux uygulama hizmetlerinde çalışabilir. Örneğin, Linux uygulama hizmetleri varsayılan olarak 64 bitlik modda çalışır.
 >
 
-Bu makalede, uygulama performans sorunları hakkında sık sorulan sorular (SSS) yanıtlarını bulunur. [Azure App Service'in Web Apps özelliği](https://azure.microsoft.com/services/app-service/web/).
+Bu makalede, [Azure App Service Web Apps özelliği](https://azure.microsoft.com/services/app-service/web/)için uygulama performansı sorunları hakkında sık sorulan soruların (SSS) yanıtları bulunur.
 
 [!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
 
-## <a name="why-is-my-app-slow"></a>Uygulamam yavaş neden oluyor?
+## <a name="why-is-my-app-slow"></a>Uygulamam neden yavaş?
 
-Çoklu faktörlerle uygulama performansı yavaş katkıda bulunabilir. Ayrıntılı sorun giderme adımları için bkz: [sorun giderme yavaş web uygulaması performansını](troubleshoot-performance-degradation.md).
+Yavaş uygulama performansına birçok etken katkıda bulunabilir. Ayrıntılı sorun giderme adımları için bkz. [yavaş Web uygulaması performansına sorun giderme](troubleshoot-performance-degradation.md).
 
-## <a name="how-do-i-troubleshoot-a-high-cpu-consumption-scenario"></a>Yüksek CPU tüketimi senaryo sorunlarını nasıl giderebilirim?
+## <a name="how-do-i-troubleshoot-a-high-cpu-consumption-scenario"></a>Yüksek CPU tüketim senaryosunda sorun Nasıl yaparım? mi?
 
-Bazı yüksek CPU tüketimi senaryolarda, uygulamanızı daha fazla bilgi işlem kaynakları gerçekten gerektirebilir. Bu durumda, uygulama ihtiyaç duyduğu tüm kaynakları alır. Bu nedenle daha yüksek bir hizmet katmanına ölçeklendirmeyi düşünün. Diğer durumlarda, yüksek CPU tüketimi hatalı bir döngü veya kodlama bir uygulama tarafından kaynaklanıyor olabilir. Daha yüksek CPU tüketimi işlemi tetikleniyor Öngörüler alma iki bölümden oluşur. İlk olarak, bir işlem dökümü oluşturur ve sonra işlem dökümü analiz edin. Daha fazla bilgi için [yakalamak ve Web uygulamaları için yüksek CPU tüketimi için bir döküm dosyası çözümleme](https://blogs.msdn.microsoft.com/asiatech/2016/01/20/how-to-capture-dump-when-intermittent-high-cpu-happens-on-azure-web-app/).
+Bazı yüksek CPU tüketimi senaryolarında, uygulamanız gerçekten daha fazla bilgi işlem kaynağı gerektirebilir. Bu durumda, uygulamanın ihtiyaç duyacağı tüm kaynakları alması için daha yüksek bir hizmet katmanına ölçeklendirmeyi değerlendirin. Diğer zamanlarda, yüksek CPU tüketimine hatalı bir döngü veya bir kodlama uygulaması neden olmuş olabilir. Artan CPU tüketiminin tetiklenmesi hakkında öngörüler elde etmek iki bölümden oluşan bir işlemdir. İlk olarak, bir işlem dökümü oluşturun ve ardından işlem dökümünü çözümleyin. Daha fazla bilgi için bkz. [Web Apps için yüksek CPU tüketimi için döküm dosyası yakalama ve çözümleme](https://blogs.msdn.microsoft.com/asiatech/2016/01/20/how-to-capture-dump-when-intermittent-high-cpu-happens-on-azure-web-app/).
 
-## <a name="how-do-i-troubleshoot-a-high-memory-consumption-scenario"></a>Yüksek bellek tüketimi senaryosu sorunlarını nasıl giderebilirim?
+## <a name="how-do-i-troubleshoot-a-high-memory-consumption-scenario"></a>Yüksek bellek tüketim senaryosunda sorun Nasıl yaparım?.
 
-Yüksek bellek tüketimi bazı senaryolarda, uygulamanızı daha fazla bilgi işlem kaynakları gerçekten gerektirebilir. Bu durumda, uygulama ihtiyaç duyduğu tüm kaynakları alır. Bu nedenle daha yüksek bir hizmet katmanına ölçeklendirmeyi düşünün. Diğer durumlarda, bir bellek sızıntısı koddaki bir hata neden olabilir. Bir kodlama uygulama bellek tüketimini da artırabilir. Ne tüketim iki bölümden oluşur, yüksek bellek harekete Öngörüler alınıyor. İlk olarak, bir işlem dökümü oluşturur ve sonra işlem dökümü analiz edin. Azure Site uzantı Galerisi kilitlenme tanılayıcı verimli bir şekilde hem de bu adımları gerçekleştirebilir. Daha fazla bilgi için [yakalamak ve Web uygulamaları için aralıklı yüksek bellek için bir döküm dosyası çözümleme](https://blogs.msdn.microsoft.com/asiatech/2016/02/02/how-to-capture-and-analyze-dump-for-intermittent-high-memory-on-azure-web-app/).
+Bazı yüksek bellek tüketim senaryolarında, uygulamanız gerçekten daha fazla bilgi işlem kaynağı gerektirebilir. Bu durumda, uygulamanın ihtiyaç duyacağı tüm kaynakları alması için daha yüksek bir hizmet katmanına ölçeklendirmeyi değerlendirin. Diğer zamanlarda, koddaki bir hata bellek sızıntısına neden olabilir. Kodlama uygulaması da bellek tüketimini artırabilir. Yüksek bellek tüketiminin tetiklenmesi hakkında öngörü almak iki bölümden oluşan bir işlemdir. İlk olarak, bir işlem dökümü oluşturun ve ardından işlem dökümünü çözümleyin. Azure Site uzantısı galerisinden kilitlenme tanılayıcı, her iki adımı da etkili bir şekilde gerçekleştirebilir. Daha fazla bilgi için bkz. [Web Apps için aralıklı yüksek bellek için döküm dosyası yakalama ve çözümleme](https://blogs.msdn.microsoft.com/asiatech/2016/02/02/how-to-capture-and-analyze-dump-for-intermittent-high-memory-on-azure-web-app/).
 
-## <a name="how-do-i-automate-app-service-web-apps-by-using-powershell"></a>App Service web apps PowerShell kullanarak nasıl otomatikleştirebilirim?
+## <a name="how-do-i-automate-app-service-web-apps-by-using-powershell"></a>PowerShell kullanarak App Service Web uygulamalarını otomatikleştirin Nasıl yaparım??
 
-App Service web apps korumak ve yönetmek için PowerShell cmdlet'lerini kullanabilirsiniz. Blog gönderimizi içinde [PowerShell kullanarak Azure App Service'te barındırılan web uygulamalarını otomatikleştirmek](https://blogs.msdn.microsoft.com/puneetgupta/2016/03/21/automating-webapps-hosted-in-azure-app-service-through-powershell-arm-way/), biz ortak görevleri otomatik hale getirmek için Azure Resource Manager tabanlı PowerShell cmdlet'lerini kullanmak nasıl açıklar. Blog gönderisinde, çeşitli web apps yönetim görevleri için örnek kod de vardır. Açıklamaları ve tüm App Service web uygulamaları cmdlet'leri için söz dizimi için bkz: [Az.Websites](/powershell/module/az.websites).
+App Service Web uygulamalarını yönetmek ve korumak için PowerShell cmdlet 'lerini kullanabilirsiniz. Blog gönderimizde, [PowerShell kullanarak Azure App Service içinde barındırılan Web uygulamalarını otomatikleştirin](https://blogs.msdn.microsoft.com/puneetgupta/2016/03/21/automating-webapps-hosted-in-azure-app-service-through-powershell-arm-way/), ortak görevleri otomatikleştirmek için Azure Resource Manager tabanlı PowerShell cmdlet 'lerinin nasıl kullanılacağını anlatmaktadır. Blog gönderisinin ayrıca çeşitli Web Apps yönetim görevleri için örnek kodları vardır. Tüm App Service Web Apps cmdlet 'lerinin açıklamaları ve sözdizimi için bkz. [az. Web siteleri](/powershell/module/az.websites).
 
-## <a name="how-do-i-view-my-web-apps-event-logs"></a>My web uygulamasının olay günlüklerini nasıl görüntüleyebilirim?
+## <a name="how-do-i-view-my-web-apps-event-logs"></a>Web uygulamamın olay Günlüklerimi görüntülemek Nasıl yaparım? mı?
 
 Web uygulamanızın olay günlüklerini görüntülemek için:
 
-1. Oturum açın, [Kudu Web sitesi](https://*yourwebsitename*.scm.azurewebsites.net).
-2. Menüde **hata ayıklama konsolunu** > **CMD**.
-3. Seçin **LogFiles** klasör.
-4. Olay günlüklerini görüntüleyin, yanındaki kalem simgesini seçin **eventlog.xml**.
-5. Günlükleri indirmek için PowerShell cmdlet'ini çalıştırın `Save-AzureWebSiteLog -Name webappname`.
+1. [Kudu Web sitenizde](https://*yourwebsitename*.scm.azurewebsites.net)oturum açın.
+2. Menüsünde, **Hata Ayıkla konsol** > **cmd**' yi seçin.
+3. **LogFiles** klasörünü seçin.
+4. Olay günlüklerini görüntülemek için **EventLog. xml**' nin yanındaki kurşun kalem simgesini seçin.
+5. Günlükleri indirmek için PowerShell cmdlet 'ini `Save-AzureWebSiteLog -Name webappname`çalıştırın.
 
-## <a name="how-do-i-capture-a-user-mode-memory-dump-of-my-web-app"></a>Bir kullanıcı modu bellek dökümü web uygulamamı nasıl yakalama?
+## <a name="how-do-i-capture-a-user-mode-memory-dump-of-my-web-app"></a>Web uygulamamın Kullanıcı modu bellek dökümünü Nasıl yaparım? yakalayın mi?
 
-Web uygulamanızın kullanıcı modu bellek dökümü yakalamak için:
+Web uygulamanızın kullanıcı modu bellek dökümünü yakalamak için:
 
-1. Oturum açın, [Kudu Web sitesi](https://*yourwebsitename*.scm.azurewebsites.net).
-2. Seçin **Process Explorer** menüsü.
-3. Sağ **w3wp.exe** işlem veya WebJob işleminizi.
-4. Seçin **bellek dökümünü indirin** > **tam döküm**.
+1. [Kudu Web sitenizde](https://*yourwebsitename*.scm.azurewebsites.net)oturum açın.
+2. **Işlem Gezgini** menüsünü seçin.
+3. **W3wp. exe** Işlemini veya WebJob işleminizi sağ tıklatın.
+4. **Bellek dökümünü** > Yükle**tam dökümünü**Seç ' i seçin.
 
-## <a name="how-do-i-view-process-level-info-for-my-web-app"></a>İşlem düzeyi bilgileri web uygulamamı nasıl görüntüleyebilirim?
+## <a name="how-do-i-view-process-level-info-for-my-web-app"></a>Web uygulamamın işlem düzeyi bilgisini Nasıl yaparım? görüntüle?
 
-Web uygulamanız için işlem düzeyinde bilgileri görüntülemek için iki seçeneğiniz vardır:
+Web uygulamanız için işlem düzeyi bilgileri görüntülemek üzere iki seçeneğiniz vardır:
 
 *   Azure portalında:
-    1. Açık **Process Explorer** web uygulaması için.
-    2. Ayrıntıları görmek için seçin **w3wp.exe** işlem.
+    1. Web uygulaması için **Işlem Gezginini** açın.
+    2. Ayrıntıları görmek için **W3wp. exe** işlemini seçin.
 *   Kudu konsolunda:
-    1. Oturum açın, [Kudu Web sitesi](https://*yourwebsitename*.scm.azurewebsites.net).
-    2. Seçin **Process Explorer** menüsü.
-    3. İçin **w3wp.exe** select işlemi **özellikleri**.
+    1. [Kudu Web sitenizde](https://*yourwebsitename*.scm.azurewebsites.net)oturum açın.
+    2. **Işlem Gezgini** menüsünü seçin.
+    3. **W3wp. exe** Işlemi için **Özellikler**' i seçin.
 
-## <a name="when-i-browse-to-my-app-i-see-error-403---this-web-app-is-stopped-how-do-i-resolve-this"></a>Ben uygulamama göz attığınızda, "Hata 403 - bu web uygulaması durduruldu." görüyorum Bu nasıl giderebilirim?
+## <a name="when-i-browse-to-my-app-i-see-error-403---this-web-app-is-stopped-how-do-i-resolve-this"></a>Uygulamama gözatarken "hata 403-Bu Web uygulaması durduruldu" görüyorum. Nasıl yaparım? bunu çözmek mi istiyorsunuz?
 
 Üç koşul bu hataya neden olabilir:
 
-* Web uygulaması, bir faturalama sınırına ulaşmıştır ve siteniz devre dışı bırakıldı.
-* Portalda web uygulaması durduruldu.
-* Web uygulamasını ücretsiz olarak geçerli olabilecek veya ölçek hizmet planı paylaştığı bir kaynak kotası sınırına ulaştı.
+* Web uygulaması bir faturalandırma sınırına ulaştı ve siteniz devre dışı bırakıldı.
+* Web uygulaması portalda durduruldu.
+* Web uygulaması, ücretsiz veya paylaşılan bir ölçek hizmeti planına uygulanabilecek bir kaynak kotası sınırına ulaştı.
 
-Hataya neden olan bakın ve sorunu gidermek için adımları [Web uygulamaları: "Hata 403 – bu web uygulaması durduruldu"](https://blogs.msdn.microsoft.com/waws/2016/01/05/azure-web-apps-error-403-this-web-app-is-stopped/).
+Hataya neyin neden olduğunu görmek ve sorunu çözmek için Web Apps içindeki [adımları izleyin: "Hata 403 – Bu Web uygulaması durduruldu"](https://blogs.msdn.microsoft.com/waws/2016/01/05/azure-web-apps-error-403-this-web-app-is-stopped/).
 
-## <a name="where-can-i-learn-more-about-quotas-and-limits-for-various-app-service-plans"></a>Çeşitli App Service planları için kotalar ve sınırlar hakkında nereden bilgi edinebilirim?
+## <a name="where-can-i-learn-more-about-quotas-and-limits-for-various-app-service-plans"></a>Çeşitli App Service planlarına yönelik kotalar ve sınırlar hakkında nereden daha fazla bilgi edinebilirim?
 
-Kotalar ve sınırlar hakkında daha fazla bilgi için bkz. [App Service limitleri](../azure-subscription-service-limits.md#app-service-limits). 
+Kotalar ve sınırlamalar hakkında bilgi için bkz. [App Service sınırları](../azure-subscription-service-limits.md#app-service-limits). 
 
-## <a name="how-do-i-decrease-the-response-time-for-the-first-request-after-idle-time"></a>İlk istek için yanıt süresi boşta kalma süresi sonrasında nasıl azaltma?
+## <a name="how-do-i-decrease-the-response-time-for-the-first-request-after-idle-time"></a>Nasıl yaparım?, boşta kalma zamanından sonra ilk isteğin yanıt süresini düşürsin mi?
 
-Belirli bir süre için boşta olmaları durumunda varsayılan olarak, web uygulamaları kaldırılır. Bu şekilde, sistem kaynakları tasarruf edebilirsiniz. Olumsuz tarafı, web uygulaması kaldırılmadan sonra ilk isteğin yanıtını yük ve yanıt tanıtıcısıyla başlatmak web uygulamasına izin vermek için uzun olmasıdır. Temel ve standart hizmet planlarında etkinleştirebilirsiniz **Always On** uygulama her zaman tutmak ayarı. Bu, uygulamanın boşta kaldıktan sonra uzun yükleme sürelerini ortadan kaldırır. Değiştirilecek **Always On** ayarı:
+Varsayılan olarak, Web Apps, belirlenen süre boyunca boşta kalırsa kaldırılır. Bu şekilde, sistem kaynakları tasarrufu sağlayabilir. Downsıde, Web uygulamasının bellekten kaldırıldıktan sonraki ilk istek için yanıtın daha uzun olduğundan, Web uygulamasının yanıt vermeye çalışmasına izin verir. Temel ve standart hizmet planlarında, uygulamanın her zaman yüklenmesini sağlamak için **her zaman açık** ayarını açabilirsiniz. Bu, uygulama boşta kaldıktan sonra yükleme sürelerinin uzamayı ortadan kaldırır. **Her zaman açık** ayarını değiştirmek için:
 
-1. Azure portalında web uygulamanıza gidin.
-2. Seçin **uygulama ayarları**.
-3. İçin **Always On**seçin **üzerinde**.
+1. Azure portal web uygulamanıza gidin.
+2. **Uygulama ayarları**' nı seçin.
+3. **Her zaman açık**için **Açık**seçeneğini belirleyin.
 
-## <a name="how-do-i-turn-on-failed-request-tracing"></a>Başarısız istek izlemeyi nasıl kapatırım?
+## <a name="how-do-i-turn-on-failed-request-tracing"></a>Başarısız istek izlemeyi açmak Nasıl yaparım? mı?
 
-Başarısız istek izlemeyi etkinleştirmek için:
+Başarısız istek izlemeyi açmak için:
 
-1. Azure portalında web uygulamanıza gidin.
-3. Seçin **tüm ayarlar** > **tanılama günlükleri**.
-4. İçin **başarısız istek izleme**seçin **üzerinde**.
+1. Azure portal web uygulamanıza gidin.
+3. **Tüm ayarlar** > **tanılama günlükleri**' ni seçin.
+4. **Başarısız Istek izleme**için **Açık**' ı seçin.
 5. **Kaydet**’i seçin.
-6. Web uygulaması dikey penceresinde seçin **Araçları**.
-7. Seçin **Visual Studio Team Services**.
-8. Ayar değilse **üzerinde**seçin **üzerinde**.
-9. Seçin **Git**.
-10. Seçin **Web.config**.
-11. System.webServer bu yapılandırma (belirli bir URL'ye yakalamak için) ekleyin:
+6. Web uygulaması dikey penceresinde **Araçlar**' ı seçin.
+7. **Visual Studio Online**' ı seçin.
+8. Ayar **Açık**değilse **Açık**' ı seçin.
+9. **Git**' i seçin.
+10. **Web. config**' i seçin.
+11. System. webServer içinde, bu yapılandırmayı ekleyin (belirli bir URL 'YI yakalamak için):
 
     ```xml
     <system.webServer>
@@ -132,7 +131,7 @@ Başarısız istek izlemeyi etkinleştirmek için:
     </add> </traceFailedRequests>
     </tracing>
     ```
-12. Yavaş performans sorunlarını gidermek için bu yapılandırma (Yakalama isteği 30 saniyeden uzun sürerse) ekleyin:
+12. Yavaş performans sorunlarını gidermek için, bu yapılandırmayı ekleyin (yakalama isteği 30 saniyeden uzun sürerse):
     ```xml
     <system.webServer>
     <tracing> <traceFailedRequests>
@@ -147,51 +146,51 @@ Başarısız istek izlemeyi etkinleştirmek için:
     </add> </traceFailedRequests>
     </tracing>
     ```
-13. Başarısız istek izlemelerin de indirmek için [portalı](https://portal.azure.com)Web sitenize gidin.
-15. Seçin **Araçları** > **Kudu** > **Git**.
-18. Menüde **hata ayıklama konsolunu** > **CMD**.
-19. Seçin **LogFiles** klasörü ve ardından çizgi ile başlayan bir ada sahip klasör **W3SVC**.
+13. Başarısız istek izlemelerini indirmek için, [portalda](https://portal.azure.com)Web sitenize gidin.
+15. **Araçlar** > kuduGit > ' i seçin.
+18. Menüsünde, **Hata Ayıkla konsol** > **cmd**' yi seçin.
+19. **LogFiles** klasörünü seçin ve ardından **W3SVC**ile başlayan bir adı olan klasörü seçin.
 20. XML dosyasını görmek için kalem simgesini seçin.
 
-## <a name="i-see-the-message-worker-process-requested-recycle-due-to-percent-memory-limit-how-do-i-address-this-issue"></a>"Çalışan işlemi 'Yüzde bellek' sınırı nedeniyle geri dönüşüm istedi." iletisini görüyorum Bu sorunu nasıl ele?
+## <a name="i-see-the-message-worker-process-requested-recycle-due-to-percent-memory-limit-how-do-i-address-this-issue"></a>"Bellek yüzdesi ' sınırı nedeniyle çalışan Işlemi geri dönüşümü istedi." iletisini görüyorum. " Nasıl yaparım? bu sorunu ele veriyor musunuz?
 
-En fazla kullanılabilir bellek miktarı için 32 bitlik bir işlem (bile bir 64-bit işletim sistemi) 2 GB'dir. Varsayılan olarak, 32 bit çalışan işlemi ayarlanır (eski web uygulamalarıyla uyumluluk için) App Service'te.
+32 bitlik bir işlem için kullanılabilir maksimum bellek miktarı (64 bit işletim sisteminde bile) 2 GB 'dir. Varsayılan olarak, çalışan işlemi App Service (eski web uygulamalarıyla uyumluluk için) olarak 32 bit olarak ayarlanır.
 
-Web çalışanı rolünüz ek bellek yararlanabilir, böylece 64-bit işlemlere göz önünde bulundurun. Bu web uygulamasını yeniden başlatma tetikler, bu nedenle uygun şekilde zamanlayın.
+Web çalışanı rolünüzde bulunan ek belleğin avantajlarından yararlanabilmek için 64 bitlik işlemlere geçmeyi düşünün. Bu, bir Web uygulamasının yeniden başlatılmasını tetikler, bu nedenle zamanlamaya göre zamanlayın.
 
-Ayrıca, bir 64-bit ortamından bir temel veya standart hizmet planı gerektiğini unutmayın. Ücretsiz ve paylaşılan planları, her zaman bir 32-bit ortamında çalıştırın.
+Ayrıca, 64 bitlik bir ortamın temel veya standart bir hizmet planı gerektirdiğini de unutmayın. Ücretsiz ve paylaşılan planlar her zaman 32 bitlik bir ortamda çalışır.
 
-Daha fazla bilgi için [App Service'te web uygulamalarını yapılandırma](configure-common.md).
+Daha fazla bilgi için bkz. [App Service Web uygulamalarını yapılandırma](configure-common.md).
 
-## <a name="why-does-my-request-time-out-after-230-seconds"></a>Neden benim isteği zaman aşımına 230 saniye sonra mu?
+## <a name="why-does-my-request-time-out-after-230-seconds"></a>Neden 230 saniye sonra isteğim zaman aşımına uğrar?
 
-Azure Load Balancer dört dakikalık varsayılan bir boşta kalma zaman aşımı ayarı vardır. Genellikle bir web isteği için makul yanıt zaman sınırı budur. Web uygulamanıza arka plan işlemesi gerekiyorsa, Azure WebJobs'ı kullanmanızı öneririz. Azure web uygulaması Web işleri çağırabilir ve arka plan işlemi tamamlandığında bildirim. WebJobs, kuyruklar ve Tetikleyicileri dahil olmak üzere kullanmak için birden çok yöntem arasından seçim yapabilirsiniz.
+Azure Load Balancer, dört dakikalık varsayılan bir boşta kalma zaman aşımı ayarına sahiptir. Bu genellikle bir Web isteği için makul bir yanıt süresi limiti olur. Web uygulamanız arka planda işleme gerektiriyorsa, Azure WebJobs kullanmanız önerilir. Azure Web uygulaması, Web Işleri çağırabilir ve arka plan işleme tamamlandığında bildirim alabilir. Kuyruklar ve Tetikleyiciler dahil olmak üzere WebJobs kullanımı için birden çok yöntemden birini seçebilirsiniz.
 
-Web işleri, arka plan işlemleri için tasarlanmıştır. WebJob içinde istediğiniz kadar arka plan işlemi yapabilirsiniz. Web işleri hakkında daha fazla bilgi için bkz. [WebJobs ile arka plan görevleri çalıştırma](webjobs-create.md).
+WebJobs, arka plan işlemesi için tasarlanmıştır. WebJob 'ta istediğiniz kadar çok arka plan işlemi yapabilirsiniz. WebJobs hakkında daha fazla bilgi için bkz. [WebJobs ile arka plan görevleri çalıştırma](webjobs-create.md).
 
-## <a name="aspnet-core-applications-that-are-hosted-in-app-service-sometimes-stop-responding-how-do-i-fix-this-issue"></a>Bazen App Service'te barındırılan ASP.NET Core uygulamaları, yanıt vermeyi durdurur. Bu sorunu nasıl düzeltebilirim?
+## <a name="aspnet-core-applications-that-are-hosted-in-app-service-sometimes-stop-responding-how-do-i-fix-this-issue"></a>App Service barındırılan ASP.NET Core uygulamalar bazen yanıt vermeyi durdurabilir. Nasıl yaparım? bu sorun düzeltilsin mi?
 
-Bir önceki bilinen bir sorun [Kestrel sürüm](https://github.com/aspnet/KestrelHttpServer/issues/1182) barındırılan bir ASP.NET Core 1.0 uygulamasını App Service aralıklı olarak yanıt vermeyi durdurmasına neden olabilir. Ayrıca, bu iletiyi görebilirsiniz: "Belirtilen CGI uygulaması bir hatayla karşılaştı ve sunucu işlemi sonlandırıldı."
+Önceki bir [Kestrel sürümü](https://github.com/aspnet/KestrelHttpServer/issues/1182) ile ilgili bilinen bir sorun, App Service içinde barındırılan ASP.NET Core 1,0 uygulamasının zaman zaman yanıt vermeyi durdurmasına neden olabilir. Şu iletiyi de görebilirsiniz: "Belirtilen CGI uygulaması bir hatayla karşılaştı ve sunucu işlemi sonlandırdı."
 
-Bu sorun sürüm 1.0.2 Kestrel içinde düzeltilmiştir. Bu sürüm bulunur ASP.NET Core 1.0.3 güncelleştirme. Bu sorunu çözmek için Kestrel 1.0.2 kullanılacak uygulama bağımlılıklarınızı güncelleştirdiğinizden emin olun. Alternatif olarak, blog gönderisinde açıklanan iki geçici çözümlerden birini kullanabilirsiniz [ASP.NET Core 1.0 yavaş performans sorunları App Service web apps'te](https://blogs.msdn.microsoft.com/waws/2016/12/11/asp-net-core-slow-perf-issues-on-azure-websites).
+Bu sorun Kestrel Version 1.0.2 içinde düzeltilmiştir. Bu sürüm ASP.NET Core 1.0.3 güncelleştirmesine dahildir. Bu sorunu çözmek için, Kestrel 1.0.2 kullanmak üzere uygulama bağımlılıklarınızı güncelleştirdiğinizden emin olun. Alternatif olarak, [App Service Web Apps 'te 1,0 yavaş performans sorunları ASP.NET Core](https://blogs.msdn.microsoft.com/waws/2016/12/11/asp-net-core-slow-perf-issues-on-azure-websites)blog postasında açıklanan iki geçici çözüm de kullanabilirsiniz.
 
 
-## <a name="i-cant-find-my-log-files-in-the-file-structure-of-my-web-app-how-can-i-find-them"></a>Web Uygulamam dosya yapısını günlük dosyalarımı bulamıyorum. Bunları nasıl bulabilirim?
+## <a name="i-cant-find-my-log-files-in-the-file-structure-of-my-web-app-how-can-i-find-them"></a>Günlük dosyalarımı Web uygulamamın dosya yapısında bulamıyorum. Bunları nasıl bulabilirim?
 
-App Service yerel önbellek özelliğini kullanırsanız, App Service örneğinizin LogFiles ve veri klasörleri klasör yapısını etkilenir. Yerel önbellek kullanıldığında, alt klasörler LogFiles depolama ve veri klasörleri oluşturulur. Alt klasörleri adlandırma deseni "benzersiz tanımlayıcı" + zaman damgasını kullanın. Her bir alt web uygulamasını çalıştıran veya çalışan bir VM örneğine karşılık gelir.
+App Service yerel önbellek özelliğini kullanıyorsanız, App Service örneğiniz için LogFiles ve veri klasörlerinin klasör yapısı etkilenir. Yerel önbellek kullanıldığında, alt klasörler depolama günlük dosyaları ve veri klasörlerinde oluşturulur. Alt klasörler "benzersiz tanımlayıcı" ve zaman damgasını adlandırma düzenlerini kullanır. Her alt klasör, Web uygulamasının çalıştığı veya çalıştırıldığı bir VM örneğine karşılık gelir.
 
-App Service yerel önbellek kullanıp kullanmadığını belirleyin denetleyin **uygulama ayarları** sekmesi. Yerel önbellek, uygulama ayarı kullanılıyorsa `WEBSITE_LOCAL_CACHE_OPTION` ayarlanır `Always`.
+Yerel önbellek kullanıp kullanmayacağınızı anlamak için App Service **uygulama ayarları** sekmesini kontrol edin. Yerel önbellek kullanılıyorsa, uygulama ayarı `WEBSITE_LOCAL_CACHE_OPTION` olarak `Always`ayarlanır.
 
-Yerel önbellek kullanmıyorsanız ve bu sorunu yaşıyorsanız, bir destek isteği gönderin.
+Yerel önbellek kullanmıyorsanız ve bu sorunla karşılaşıyorsanız, bir destek isteği gönderin.
 
-## <a name="i-see-the-message-an-attempt-was-made-to-access-a-socket-in-a-way-forbidden-by-its-access-permissions-how-do-i-resolve-this"></a>"Bir yuva, erişim izinleri tarafından yasaklanmış bir şekilde erişmek için girişimde bulunuldu." iletisini görüyorum Bu nasıl giderebilirim?
+## <a name="i-see-the-message-an-attempt-was-made-to-access-a-socket-in-a-way-forbidden-by-its-access-permissions-how-do-i-resolve-this"></a>"Bir yuvaya erişim izinleri tarafından yasaklanmış bir şekilde erişme girişiminde bulunuldu" iletisini görüyorum. Nasıl yaparım? bunu çözmek mi istiyorsunuz?
 
-Bu hata genellikle sanal makine örneğinde giden TCP bağlantılarına tüketilirse oluşur. App Service'te sayısı için her bir VM örneği yapılabilir giden bağlantılar için sınırlar uygulanır. Daha fazla bilgi için [sayısal sınırlar arası VM](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox#cross-vm-numerical-limits).
+Bu hata genellikle VM örneğindeki giden TCP bağlantıları tükendiğinde oluşur. App Service, her bir sanal makine örneği için yapılabilecek en fazla giden bağlantı sayısı için sınırlar zorlanır. Daha fazla bilgi için bkz. [VM 'Ler arası sayısal sınırlar](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox#cross-vm-numerical-limits).
 
-Bu hata, uygulamadan yerel adres erişmeyi denerseniz de oluşabilir. Daha fazla bilgi için [yerel adres istekleri](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox#local-address-requests).
+Bu hata, uygulamanızdan yerel bir adrese erişmeyi denerseniz da oluşabilir. Daha fazla bilgi için bkz. [Yerel adres istekleri](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox#local-address-requests).
 
-Web uygulamanızda giden bağlantılar hakkında daha fazla bilgi için ilgili blog gönderisine bakın [giden bağlantılar Azure Web siteleri'ne](https://www.freekpaans.nl/2015/08/starving-outgoing-connections-on-windows-azure-web-sites/).
+Web uygulamanızdaki giden bağlantılar hakkında daha fazla bilgi için bkz. [Azure Web siteleri 'ne giden bağlantılar](https://www.freekpaans.nl/2015/08/starving-outgoing-connections-on-windows-azure-web-sites/)hakkında blog gönderisi.
 
-## <a name="how-do-i-use-visual-studio-to-remote-debug-my-app-service-web-app"></a>Uzak Visual Studio nasıl kullanırım my App Service web uygulamasında hata ayıklama?
+## <a name="how-do-i-use-visual-studio-to-remote-debug-my-app-service-web-app"></a>Nasıl yaparım? App Service Web uygulamamda uzaktan hata ayıklama yapmak için Visual Studio 'Yu kullanın mi?
 
-Visual Studio kullanarak web uygulamanızda hata ayıklama gösteren ayrıntılı bir kılavuz için bkz. [uzaktan hata ayıklama, App Service web uygulamanıza](https://blogs.msdn.microsoft.com/benjaminperkins/2016/09/22/remote-debug-your-azure-app-service-web-app/).
+Visual Studio 'Yu kullanarak Web uygulamanızda hata ayıklamanın nasıl yapılacağını gösteren ayrıntılı bir anlatım için, bkz. [App Service Web uygulamanızda uzaktan hata ayıklama](https://blogs.msdn.microsoft.com/benjaminperkins/2016/09/22/remote-debug-your-azure-app-service-web-app/).

@@ -1,6 +1,6 @@
 ---
-title: Azure otomasyon ve Log Analytics çalışma alanı eşlemeleri
-description: Bu makalede bir Otomasyon hesabı ile Log Analytics çalışma alanı arasında çözümünü desteklemek için izin verilen eşlemeleri
+title: Azure Otomasyonu ve Log Analytics çalışma alanı eşlemeleri
+description: Bu makalede, bir Otomasyon hesabı ile Log Analytics çalışma alanı arasında çözümü desteklemeye izin verilen eşlemeler açıklanmaktadır
 services: automation
 ms.service: automation
 ms.subservice: process-automation
@@ -9,84 +9,84 @@ ms.author: robreed
 ms.date: 05/20/2019
 ms.topic: conceptual
 manager: carmonm
-ms.openlocfilehash: 9faa261f4b6293d778c5da685f630a21fd88f600
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: cd4500b4ef6492f0b6499bb1e9aa1a773313e860
+ms.sourcegitcommit: a0b37e18b8823025e64427c26fae9fb7a3fe355a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67478571"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68498360"
 ---
 # <a name="workspace-mappings"></a>Çalışma alanı eşlemeleri
 
-Güncelleştirme yönetimi, değişiklik izleme ve stok veya Vm'leri başlatma/durdurma gibi çözümlerle sırasında yoğun olmayan saatlerde çözümü etkinleştirirken, bir Log Analytics çalışma alanı ve Otomasyon hesabı bağlamak için yalnızca belirli bölgelerde desteklenir. Bu eşleme yalnızca Otomasyon hesabının ve Log Analytics çalışma alanı için de geçerlidir. Otomasyon hesabı veya Log Analytics çalışma alanına raporlama kaynakları başka bölgelerde bulunabilir.
+Güncelleştirme Yönetimi, Değişiklik İzleme ve envanter gibi çözümleri veya çalışma saatleri dışında VM 'Leri Başlat/Durdur çözümü etkinleştirirken, bir Log Analytics çalışma alanı ve bir Otomasyon hesabı bağlamak için yalnızca belirli bölgeler desteklenir. Bu eşleme yalnızca Automation hesabı ve Log Analytics çalışma alanı için geçerlidir. Otomasyon hesabınıza veya Log Analytics çalışma alanınıza rapor veren kaynaklar diğer bölgelerde bulunabilir.
 
-## <a name="supported-mappings"></a>Desteklenen eşlemeleri
+## <a name="supported-mappings"></a>Desteklenen eşlemeler
 
-Aşağıdaki tabloda, desteklenen eşlemeleri gösterir:
+Aşağıdaki tabloda desteklenen eşlemeler gösterilmektedir:
 
-|**Log Analytics çalışma alanı bölgesi**|**Azure Otomasyonu bölge**|
+|**Log Analytics çalışma alanı bölgesi**|**Azure Otomasyonu bölgesi**|
 |---|---|
 |**ABD**||
 |EastUS<sup>1</sup>|EastUS2|
 |WestUS2|WestUS2|
 |WestCentralUS<sup>2</sup>|WestCentralUS<sup>2</sup>|
 |**Kanada**||
-|CanadaCentral|CanadaCentral|
+|Canadaorta|Canadaorta|
 |**Asya Pasifik**||
 |AustraliaSoutheast|AustraliaSoutheast|
-|SoutheastAsia|SoutheastAsia|
-|CentralIndia|CentralIndia|
+|Güneydoğu|Güneydoğu|
+|Merkezileştirme Hindistan|Merkezileştirme Hindistan|
 |JapanEast|JapanEast|
 |**Avrupa**||
 |UKSouth|UKSouth|
 |WestEurope|WestEurope|
-|**ABD Devleti**||
+|**US Gov**||
 |USGovVirginia|USGovVirginia|
 
-<sup>1</sup> EastUS eşleme Otomasyon hesapları için Log Analytics çalışma alanları için tam bir bölgeden bölgeye eşleme değil, ancak doğru eşleme.
+<sup>1</sup> EastUS Log Analytics çalışma alanları Için Otomasyon hesaplarına yönelik eşleme, bölge eşlemesinin tam bir bölgesi değildir ancak doğru eşleme olur.
 
-<sup>2</sup> kapasitesi kısıtlamaları nedeniyle bölgeyi yeni kaynakları oluşturulurken kullanılamaz. Bu, Otomasyon hesaplarını ve Log Analytics çalışma alanlarını içerir. Ancak, önceden var olan bağlı kaynaklar bölgede çalışmaya devam.
+<sup>2</sup> kapasite depoları nedeniyle bölge, yeni kaynaklar oluşturulurken kullanılamaz. Bu, Otomasyon hesaplarını ve Log Analytics çalışma alanlarını içerir. Ancak, bölgede önceden var olan bağlı kaynakların çalışmaya devam etmesi gerekir.
 
-## <a name="unlink-workspace"></a>Çalışma alanının bağlantısını Kaldır
+## <a name="unlink-workspace"></a>Çalışma alanının bağlantısını kaldır
 
-Bir Log Analytics çalışma alanı ile Otomasyon hesabınızı tümleştirmek istediğiniz karar verirseniz, doğrudan Azure portalından hesabınızı kesebilir. Devam etmeden önce önce bunları kullanıyorsanız, güncelleştirme yönetimi, değişiklik izleme ve stok veya Vm'leri başlatma/durdurma sırasında yoğun olmayan saatlerde çözümleri kaldırmanız gerekir. Bu işlem, bunları kaldırmazsanız gelen devam etmeden engellenir. Kaldırmak için gerekli adımları anlamak için alınan belirli çözüm makalesini gözden geçirin.
+Artık Otomasyon hesabınızı bir Log Analytics çalışma alanıyla tümleştirmenize karar verirseniz, Hesabınızın bağlantısını doğrudan Azure portal kaldırabilirsiniz. Devam etmeden önce, ilk olarak Güncelleştirme Yönetimi, Değişiklik İzleme ve envanteri ya da bunları kullanıyorsanız, çalışma saatleri dışında VM 'Leri Başlat/Durdur ' u kaldırmanız gerekir. Bunları kaldırmayın, bu işlemin devam etmesi engellenir. Kaldırmak için gereken adımları anlamak için, içeri aktardığınız belirli çözüme yönelik makaleyi gözden geçirin.
 
-Bu çözümleri kaldırdıktan sonra Otomasyon hesabının bağlantısını kaldırmak için aşağıdaki adımları gerçekleştirebilirsiniz.
+Bu çözümleri kaldırdıktan sonra, Otomasyon Hesabınızın bağlantısını kaldırmak için aşağıdaki adımları uygulayabilirsiniz.
 
 > [!NOTE]
-> Azure SQL izleme çözümünün önceki sürümleri dahil olmak üzere bazı çözümler Otomasyon varlıklarından oluşturmuş olabilir ve ayrıca çalışma alanının bağlantısı kaldırılıyor önce kaldırılması gerekebilir.
+> Azure SQL izleme çözümünün önceki sürümleri de dahil olmak üzere bazı çözümler Otomasyon varlıkları oluşturmuş olabilir ve çalışma alanının bağlantısı kaldırılmadan önce de kaldırılması gerekebilir.
 
-1. Azure portalından Otomasyon hesabınızı açın ve sayfa seçin üzerinde Otomasyon hesabı **bağlantılı çalışma** bölümünde **ilgili kaynakları** soldaki.
+1. Azure portal Otomasyon hesabınızı açın ve Otomasyon hesabı sayfasında, sol taraftaki **Ilgili kaynaklar** bölümünde **bağlantılı çalışma alanı** ' nı seçin.
 
-2. Bağlantıyı kaldır çalışma sayfasında tıklayın **çalışma alanının bağlantısını Kaldır**. Devam etmek istediğinizi doğrulayan bir ileti alırsınız.
+2. Çalışma alanının bağlantısını Kaldır sayfasında, **çalışma alanının bağlantısını kaldır**' a tıklayın. Devam etmek istediğinizi doğrulayan bir istem alacaksınız.
 
-3. Azure Otomasyonu hesabı Log Analytics çalışma alanınızın bağlantısını dener, ancak altında ilerleme durumunu izleyebilirsiniz **bildirimleri** menüsünde.
+3. Azure Otomasyonu, Log Analytics çalışma alanınızdaki hesabın bağlantısını kaldırmayı denediğinde, ilerleme durumunu menüdeki **Bildirimler** bölümünden izleyebilirsiniz.
 
-İsteğe bağlı olarak, güncelleştirme yönetimi çözümünü kullandıysanız, çözümü kaldırdıktan sonra artık gerekli olmayan aşağıdaki öğeleri kaldırmak isteyebilirsiniz.
+Güncelleştirme Yönetimi çözümünü kullandıysanız, isteğe bağlı olarak, çözümü kaldırdıktan sonra artık gerekli olmayan aşağıdaki öğeleri kaldırmak isteyebilirsiniz.
 
-* Güncelleştirme zamanlamaları - her oluşturduğunuz güncelleştirme dağıtımlarının eşleşen adlara sahip)
+* Zamanlamayı Güncelleştir-her birinin, oluşturduğunuz güncelleştirme dağıtımlarıyla eşleşen adları olur)
 
-* Çözüm için - oluşturulan karma çalışan grupları her benzer şekilde machine1.contoso.com_9ceb8108 - 26 c 9-4051-b6b3-227600d715c8 için olarak adlandırılır).
+* Çözüm için oluşturulan karma çalışan grupları-her biri, benzer `machine1.contoso.com_9ceb8108-26c9-4051-b6b3-227600d715c8`şekilde adlandırılır).
 
-İsteğe bağlı olarak, yoğun olmayan saatlerde çözüm sırasında Vm'leri başlatma/durdurma kullandıysanız, çözümü kaldırdıktan sonra artık gerekli olmayan aşağıdaki öğeleri kaldırmak isteyebilirsiniz.
+VM 'Leri çalışma saatleri dışında Başlat/Durdur çözümünü kullandıysanız, isteğe bağlı olarak, çözümü kaldırdıktan sonra artık gerekli olmayan aşağıdaki öğeleri kaldırmak isteyebilirsiniz.
 
-* Başlatma ve durdurma VM runbook zamanlama
-* VM runbook'ları durdurun ve başlatın
+* VM runbook zamanlamalarını başlatma ve durdurma
+* VM runbook 'larını başlatma ve durdurma
 * Değişkenler
 
-Alternatif olarak, ayrıca çalışma alanınızı Otomasyon hesabınızdan Log Analytics çalışma alanınızdan kesebilir. Çalışma alanınızda seçin **Otomasyon hesabı** altında **ilgili kaynakları**. Otomasyon hesabı sayfasında **hesabı bağlantısını**.
+Alternatif olarak, Log Analytics çalışma alanınızdan Otomasyon hesabınızdan çalışma alanınızın bağlantısını da kaldırabilirsiniz. Çalışma alanınızda **Ilgili kaynaklar**altında **Otomasyon hesabı** ' nı seçin. Otomasyon hesabı sayfasında **Hesap bağlantısını kaldır**' ı seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bilgi nasıl eklemek için aşağıdaki çözümleri:
+Aşağıdaki çözümleri eklemeyi öğrenin:
 
-Güncelleştirme yönetimi ve değişiklik izleme ve stok:
+Güncelleştirme Yönetimi ve Değişiklik İzleme ve envanter:
 
-* Gelen bir [sanal makine](../automation-onboard-solutions-from-vm.md)
-* Öğesinden, [Otomasyon hesabı](../automation-onboard-solutions-from-automation-account.md)
-* Zaman [birden çok makine gözatma](../automation-onboard-solutions-from-browse.md)
-* Gelen bir [runbook](../automation-onboard-solutions.md)
+* Bir [sanal makineden](../automation-onboard-solutions-from-vm.md)
+* [Otomasyon hesabınızdan](../automation-onboard-solutions-from-automation-account.md)
+* [Birden çok makineye gözatarken](../automation-onboard-solutions-from-browse.md)
+* Bir [runbook](../automation-onboard-solutions.md) 'tan
 
 Hizmetin kapalı olduğu saatlerde Sanal Makineleri Başlatma/Durdurma
 
-* [Kapalı olduğu saatlerde Vm'leri başlatma/durdurma dağıtma](../automation-solution-vm-management.md)
+* [VM 'Leri çalışma saatleri dışında Başlat/Durdur](../automation-solution-vm-management.md)

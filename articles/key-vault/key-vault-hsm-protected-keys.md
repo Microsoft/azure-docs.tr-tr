@@ -1,300 +1,319 @@
 ---
-title: Oluşturma ve Azure anahtar kasası - Azure Key Vault için HSM korumalı anahtarlar Aktarım | Microsoft Docs
-description: Planlama, oluşturma ve Azure anahtar kasası ile kullanmak için kendi HSM korumalı anahtarlar'ı aktarım yardımcı olması için bu makaleyi kullanın. BYOK olarak da bilinen veya kendi anahtarınızı getirin.
+title: Azure Key Vault için HSM korumalı anahtarlar oluşturma ve aktarma-Azure Key Vault | Microsoft Docs
+description: Azure Key Vault ile kullanmak üzere kendi HSM korumalı anahtarlarınızı planlayıp, oluşturmanıza ve aktarmaya yardımcı olması için bu makaleyi kullanın. BYOK olarak da bilinir veya kendi anahtarınızı getir.
 services: key-vault
-author: barclayn
-manager: barbkess
+author: msmbaldwin
+manager: rkarlin
 tags: azure-resource-manager
 ms.service: key-vault
 ms.topic: conceptual
 ms.date: 02/12/2019
-ms.author: barclayn
-ms.openlocfilehash: f510fa09d30f942f4e26a3a41fd8faa77a37e32a
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.author: mbaldwin
+ms.openlocfilehash: 4ebb31a839a645bcb1312405ee0222f39dbbcd1e
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67205978"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71261278"
 ---
-# <a name="how-to-generate-and-transfer-hsm-protected-keys-for-azure-key-vault"></a>Azure anahtar kasası için nasıl oluşturma ve aktarma HSM korumalı anahtarlar
+# <a name="how-to-generate-and-transfer-hsm-protected-keys-for-azure-key-vault"></a>Azure Key Vault için HSM korumalı anahtarlar oluşturma ve aktarma
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Ek güvence için Azure anahtar Kasası'nı kullandığınızda alabilir veya HSM sınırını asla terk donanım güvenlik modüllerinde (HSM'ler) anahtarları oluşturun. Bu senaryo, genellikle olarak adlandırılır *kendi anahtarını Getir*, bYok. HSM'ler, FIPS 140-2 Düzey 2 doğrulanmasına sahiptir. Azure Key Vault, anahtarlarınızı korumak için HSM'ler nCipher nShield ailesini kullanır.
+Ek güvence için, Azure Key Vault kullandığınızda, donanım güvenlik modüllerinde (HSM 'ler), hiçbir zaman HSM sınırını bırakmamış anahtarlar içeri aktarabilir veya oluşturabilirsiniz. Bu senaryo, genellikle *kendi anahtarını getir*veya bYok olarak adlandırılır. HSM'ler, FIPS 140-2 Düzey 2 doğrulanmasına sahiptir. Azure Key Vault anahtarlarınızı korumak için HSM 'lerin nCipher nShield ailesini kullanır.
 
-Bilgileri, planlama, oluşturma ve Azure anahtar kasası ile kullanmak için kendi HSM korumalı anahtarlar'ı aktarım yardımcı olması için bu konudaki kullanın.
+Bu konudaki bilgileri kullanarak, Azure Key Vault ile kullanmak üzere kendi HSM korumalı anahtarlarınızı planlayıp, oluşturmanıza ve daha sonra aktarmanızı sağlamanıza yardımcı olması için bu konudaki bilgileri kullanın.
 
-Bu işlev Azure Çin için kullanılamıyor.
+Bu işlev, Azure Çin için kullanılamaz.
 
 > [!NOTE]
-> Azure Key Vault hakkında daha fazla bilgi için bkz. [Azure anahtar kasası nedir?](key-vault-whatis.md)  
-> Bir anahtar kasası için HSM korumalı anahtarlar oluşturma içeren bir başlangıç öğreticisi için bkz: [Azure anahtar kasası nedir?](key-vault-overview.md).
+> Azure Key Vault hakkında daha fazla bilgi için bkz. [Azure Key Vault nedir?](key-vault-overview.md)  
+> HSM korumalı anahtarlar için Anahtar Kasası oluşturmayı içeren bir başlangıç öğreticisi için bkz. [Azure Key Vault nedir?](key-vault-overview.md).
 
-Oluşturma ve HSM korumalı bir anahtar Internet üzerinden aktarmaktan hakkında daha fazla bilgi için:
+HSM korumalı bir anahtarı oluşturma ve Internet üzerinden aktarma hakkında daha fazla bilgi:
 
-* Saldırı yüzeyini azaltan bir çevrimdışı iş istasyonundan, anahtarı üret
-* Anahtar ile bir anahtar değişim anahtarı (Azure anahtar kasası Hsm'lerine aktarılmasına kadar şifrelenmiş olarak kalır, KEK), şifreli. Anahtarınızın yalnızca şifrelenmiş sürümü özgün iş istasyonundan bırakır.
-* Araç takımı, Kiracı anahtarınızdaki anahtarınızı Azure anahtar kasası güvenlik dünyasına bağlayan özelliklerini ayarlar. Bu sayede Azure anahtar kasası Hsm'lerine almak ve anahtarınızı şifresini sonra yalnızca bu HSM'ler bunu kullanabilirsiniz. Anahtarınız dışarı aktarılamaz. Bu bağlama, nCipher Hsm'leri tarafından zorlanır.
-* Anahtarınızı şifrelemek için kullanılan anahtar değişim anahtarı (KEK) Azure anahtar kasası Hsm'lerinin içinde oluşturulur ve dışarı aktarılamaz. HSM'ler KEK Hsm'lerin dışında NET bir sürümü olabilir uygular. Ayrıca, araç takımı KEK'nin dışarı aktarılabilir olmadığı ve nCipher tarafından üretilmiş orijinal bir HSM içinde oluşturulduğu nCipher kanıtlamayı içerir.
-* Araç takımı, Azure Key Vault güvenlik Dünyası nCipher tarafından üretilen orijinal bir HSM üzerinde de oluşturulan nCipher kanıtlamayı içerir. Bu kanıtlama için Microsoft orijinal donanım kullandığını kanıtlar.
-* Microsoft, ayrı Dünyaları kullanır ve her coğrafi bölgede güvenlik Dünyaları ayırın. Bu ayrım anahtarınızı içinde şifrelendiği bölgedeki veri merkezlerinde yalnızca kullanılabilir sağlar. Örneğin, Avrupalı bir müşterinin bir anahtarı Kuzey Amerika veya Asya'daki veri merkezlerinde kullanılamaz.
+* Anahtar, saldırı yüzeyini azaltan çevrimdışı bir iş istasyonundan oluşturulur.
+* Anahtar bir anahtar değişim anahtarı (KEK) ile şifrelenir ve bu, Azure Key Vault HSM 'lere aktarılıncaya kadar şifrelenmeden kalır. Yalnızca anahtarınızın şifrelenmiş sürümü özgün iş istasyonunu bırakır.
+* Araç takımı, kiracı anahtarınızda anahtarınızı Azure Key Vault güvenlik dünyasına bağlayan özellikleri ayarlar. Bu nedenle Azure Key Vault HSM 'leri anahtarınızı aldıktan ve şifresini çözdüğünde, yalnızca bu HSM 'ler tarafından kullanılabilir. Anahtarınız verilemiyor. Bu bağlama nCipher HSMs tarafından zorlanır.
+* Anahtarınızı şifrelemek için kullanılan anahtar değişim anahtarı (KEK) Azure Key Vault HSM 'ler içinde oluşturulur ve dışarı aktarılabilir değildir. HSM 'ler, KEK 'in HSM dışında net bir sürümü olmaması için zorlar. Ayrıca, araç takımı, KEK dışa aktarılabilir ve nCipher tarafından üretilmiş orijinal bir HSM içinde oluşturulan nCipher 'dan kanıtlama içerir.
+* Araç takımı, Azure Key Vault güvenlik dünyasının nCipher tarafından üretilmiş orijinal bir HSM üzerinde de oluşturulduğunu nCipher 'dan kanıtlama içerir. Bu kanıtlama, Microsoft 'un orijinal donanım kullandığını kanıtlar.
+* Microsoft, her coğrafi bölgedeki ayrı KEKs ve ayrı güvenlik dünyalarını kullanır. Bu ayrım, anahtarınızın yalnızca sizin şifrelediğiniz bölgedeki veri merkezlerinde kullanılabilmesini sağlar. Örneğin, Avrupa Müşterideki bir anahtar Kuzey Amerika veya Asya 'daki veri merkezlerinde kullanılamaz.
 
-## <a name="more-information-about-ncipher-hsms-and-microsoft-services"></a>Daha fazla bilgi hakkında nCipher HSM'ler ve Microsoft Hizmetleri
+## <a name="more-information-about-ncipher-hsms-and-microsoft-services"></a>NCipher HSMs ve Microsoft hizmetleri hakkında daha fazla bilgi
 
-Güvenlik nCipher bir siber güvenlik çözümleri finansal hizmetler, yüksek teknoloji, üretim, kamu ve teknoloji sektörlerine veri şifreleme ve önde gelen genel sağlayıcısıdır. 40 yıllık tecrübesiyle Kurumsal ve resmi bilgileri ile şifreleme güvenlik çözümleri, nCipher dört enerji ve Havacılık beş en büyük şirketleri tarafından kullanılır. Çözümleri ayrıca 22 NATO ülkeler/bölgeler tarafından kullanılır ve daha yüzde 80'den tüm dünyadaki ödeme işlemlerinin güvenli.
+Entrust Datacard bir şirket olan nCipher güvenliği, iş açısından kritik bilgi ve uygulamalarına güven, bütünlük ve denetim sunarak dünya lideri kuruluşların güçlendirin. nCipher 'in şifreleme çözümleri, bulut, IoT, blok zinciri, Dijital Ödemeler ile güvenli bir şekilde gelişen teknolojiden yararlanarak, küresel kuruluşların kendi hassas veriler, ağ iletişimleri ve kurumsal altyapı. nCipher, iş açısından kritik uygulamalar için güven sunar, verilerin bütünlüğünü sağlar ve müşterileri tamamen tüm denetim altına (bugün, yarın, her zaman) yerleştirirler.
 
-Microsoft, nCipher HSM'ler için resim durumunu geliştirmek için güvenlik ile CISCO. Bu geliştirmeler tanımaktadır anahtarlarınızın denetimi sizin bırakmadan, barındırılan hizmetlere tipik avantajlardan yararlanmanıza olanak tanıyacak. Özellikle, bu geliştirmeler, böylece gerekmez HSM'ler Microsoft yürütebilmektedir. Bir bulut hizmeti olan Azure Key Vault, kuruluşunuzun ani artışları karşılamak üzere kullanımındaki. Aynı zamanda, anahtarınızı Microsoft'un Hsm'leri içerisinde korunur: Anahtar oluşturma ve Microsoft'un Hsm'lerine aktarmak için anahtar yaşam döngüsü denetim korur.
+Microsoft, HSM 'lerin durumunu iyileştirmek için nCipher güvenliği ile işbirliği içeriyor. Bu geliştirmeler, anahtarlarınızla ilgili bir denetim elde etmek zorunda kalmadan barındırılan hizmetlerin genel avantajlarından yararlanmanızı sağlar. Özellikle, bu geliştirmeler Microsoft 'un HSMs 'yi yönetmesine olanak tanır. Bulut hizmeti olarak Azure Key Vault, kuruluşunuzun kullanım artışlarını karşılamak için kısa bildirimde ölçeği artırır. Aynı zamanda, anahtarınız Microsoft 'un HSMs içinde korunur: Anahtarı oluşturup Microsoft 'un HSMs 'ye aktaracağından, anahtar yaşam döngüsü üzerinde denetimi koruyabilirsiniz.
 
-## <a name="implementing-bring-your-own-key-byok-for-azure-key-vault"></a>Uygulama kendi anahtarını getir (BYOK) için Azure anahtar kasası
+## <a name="implementing-bring-your-own-key-byok-for-azure-key-vault"></a>Azure Key Vault için kendi anahtarını getir (BYOK) uygulama
 
-Eğer kendi HSM korumalı anahtar oluşturun ve ardından Azure anahtar Kasası'na aktarma aşağıdaki bilgi ve yordamları kullanın — Getir kendi anahtarı (BYOK) senaryosu.
+Kendi HSM korumalı anahtarınızı oluşturup Azure Key Vault (kendi anahtarını getir (BYOK) senaryosunu aktarırsanız, aşağıdaki bilgileri ve yordamları kullanın.
 
 ## <a name="prerequisites-for-byok"></a>BYOK için Önkoşullar
 
-Kendi anahtarını getir (BYOK) için Azure anahtar kasası için bir önkoşul listesi için aşağıdaki tabloya bakın.
+Azure Key Vault için kendi anahtarınızı getir (BYOK) önkoşulları listesi için aşağıdaki tabloya bakın.
 
 | Gereksinim | Daha fazla bilgi |
 | --- | --- |
-| Azure aboneliği |Bir Azure anahtar kasası oluşturmak için bir Azure aboneliğinizin olması gerekir: [Ücretsiz deneme için kaydolun](https://azure.microsoft.com/pricing/free-trial/) |
-| HSM korumalı anahtarları desteklemek için Azure anahtar kasası Premium hizmet katmanı |Azure Key Vault için hizmet katmanları ve özellikler hakkında daha fazla bilgi için bkz. [Azure anahtar kasası fiyatlandırma](https://azure.microsoft.com/pricing/details/key-vault/) Web sitesi. |
-| nCipher nShield HSM, akıllı kartlar ve destek yazılımı |Bir donanım güvenlik modülü nCipher erişimi ve nCipher nShield HSM'ler hakkında temel operasyonel bilginiz olmalıdır. Bkz: [nCipher nShield donanım güvenlik modülü](https://www.ncipher.com/products/key-management/cloud-microsoft-azure/how-to-buy) uyumlu modellerin ya da bir yoksa bir HSM satın almak için listesi. |
-| Aşağıdaki donanım ve yazılım:<ol><li>Çevrimdışı bir x64 iş istasyonunda en az bir Windows işletim sistemi en az Windows 7 ve nCipher nShield yazılımı sürümü ile 11.50 sürümü.<br/><br/>Bu iş istasyonu Windows 7 çalıştırıyorsa, şunları yapmalısınız [Microsoft .NET Framework 4.5 sürümünü yüklemeniz](https://download.microsoft.com/download/b/a/4/ba4a7e71-2906-4b2d-a0e1-80cf16844f5f/dotnetfx45_full_x86_x64.exe).</li><li>Internet'e bağlı ve Windows 7'in en az bir Windows işletim sistemi olan bir iş istasyonu ve [Azure PowerShell](/powershell/azure/overview?view=azps-1.2.0) **en düşük sürüm 1.1.0** yüklü.</li><li>Bir USB sürücü veya en az 16 MB boş alanı olan başka bir taşınabilir depolama cihazı.</li></ol> |Güvenlik nedenleriyle ilk iş istasyonunun bir ağa bağlı değilse öneririz. Ancak, bu öneriyi program aracılığıyla zorlanmaz.<br/><br/>Aşağıdaki yönergelerde bu iş istasyonu, bağlantısı kesilmiş iş istasyonu olarak adlandırılır.</p></blockquote><br/>Kiracı anahtarınız bir üretim ağı için ise, ayrıca, araç takımını indirmek için ikinci ve ayrı bir iş istasyonu kullanın ve Kiracı anahtarınızı karşıya öneririz. Ancak test amacıyla Birincisi aynı iş istasyonunu kullanabilirsiniz.<br/><br/>Aşağıdaki yönergelerde bu ikinci iş istasyonu İnternet'e bağlı iş istasyonu olarak adlandırılır.</p></blockquote><br/> |
+| Azure aboneliği |Azure Key Vault oluşturmak için bir Azure aboneliğine sahip olmanız gerekir: [Ücretsiz deneme için kaydolun](https://azure.microsoft.com/pricing/free-trial/) |
+| HSM korumalı anahtarları desteklemek için Azure Key Vault Premium hizmet katmanı |Azure Key Vault yönelik hizmet katmanları ve özellikleri hakkında daha fazla bilgi için [Azure Key Vault fiyatlandırma](https://azure.microsoft.com/pricing/details/key-vault/) Web sitesine bakın. |
+| nCipher nShield HSM 'leri, smartcards ve Destek yazılımı |NCipher donanım güvenlik modülüne erişiminizin olması ve nCipher nShield HSM 'lerin temel operasyonel bilgisine sahip olmanız gerekir. Uyumlu modellerin listesi için bkz. [NCipher nShield Hardware Security Module](https://www.ncipher.com/products/key-management/cloud-microsoft-azure/how-to-buy) veya yoksa bir HSM satın alma. |
+| Aşağıdaki donanım ve yazılımlar:<ol><li>En az sürüm 11,50 olan Windows 7 ve nCipher nShield yazılımının en düşük Windows işletim sistemine sahip çevrimdışı bir x64 iş istasyonu.<br/><br/>Bu iş istasyonu Windows 7 çalıştırıyorsa [Microsoft .NET Framework 4,5](https://download.microsoft.com/download/b/a/4/ba4a7e71-2906-4b2d-a0e1-80cf16844f5f/dotnetfx45_full_x86_x64.exe)' ü yüklemelisiniz.</li><li>Internet 'e bağlı ve Windows 7 ' nin en düşük Windows işletim sistemine sahip ve **En düşük sürüm 1.1.0** [Azure PowerShell](/powershell/azure/overview?view=azps-1.2.0) yüklü bir iş istasyonu.</li><li>En az 16 MB boş alana sahip bir USB sürücü veya başka bir taşınabilir depolama cihazı.</li></ol> |Güvenlik nedenleriyle, ilk iş istasyonunun bir ağa bağlı olmaması önerilir. Ancak, bu öneri programlı bir şekilde zorlanmaz.<br/><br/>Aşağıdaki yönergelerde, bu iş istasyonu, bağlantısı kesilen iş istasyonu olarak adlandırılır.</p></blockquote><br/>Ayrıca, kiracı anahtarınız bir üretim ağı için ise, araç takımını indirmek için ikinci ve ayrı bir iş istasyonu kullanmanızı ve kiracı anahtarını yüklemenizi öneririz. Ancak test amacıyla, ilki ile aynı iş istasyonunu kullanabilirsiniz.<br/><br/>Aşağıdaki yönergelerde, bu ikinci iş istasyonu Internet 'e bağlı iş istasyonu olarak adlandırılır.</p></blockquote><br/> |
 
-## <a name="generate-and-transfer-your-key-to-azure-key-vault-hsm"></a>Oluşturma ve anahtarınızı Azure anahtar kasası HSM'ye aktarma
+## <a name="generate-and-transfer-your-key-to-azure-key-vault-hsm"></a>Anahtarınızı Azure Key Vault HSM 'ye oluşturun ve aktarın
 
-Oluşturma ve anahtarınızı Azure anahtar kasası HSM'ye aktarma beş aşağıdaki adımları kullanın:
+Anahtarınızı oluşturmak ve bir Azure Key Vault HSM 'ye aktarmak için aşağıdaki beş adımı kullanacaksınız:
 
-* [1. adım: İnternet'e bağlı iş istasyonunuzu hazırlama](#step-1-prepare-your-internet-connected-workstation)
-* [2. adım: Bağlantısı kesilmiş iş istasyonunuzu hazırlama](#step-2-prepare-your-disconnected-workstation)
-* [3. adım: Anahtarınızı](#step-3-generate-your-key)
-* [4. adım: Kiracı anahtarınızı aktarım için hazırlama](#step-4-prepare-your-key-for-transfer)
-* [5. adım: Azure Key Vault'a anahtar aktarma](#step-5-transfer-your-key-to-azure-key-vault)
+* [1. Adım: Internet 'e bağlı iş istasyonunuzu hazırlama](#step-1-prepare-your-internet-connected-workstation)
+* [2. Adım: Bağlantısı kesilen iş istasyonunuzu hazırlama](#step-2-prepare-your-disconnected-workstation)
+* [3. Adım: Anahtarınızı oluşturma](#step-3-generate-your-key)
+* [4. Adım: Anahtarınızı aktarım için hazırlama](#step-4-prepare-your-key-for-transfer)
+* [5. Adım: Anahtarınızı Azure Key Vault aktarın](#step-5-transfer-your-key-to-azure-key-vault)
 
-## <a name="step-1-prepare-your-internet-connected-workstation"></a>1\. adım: İnternet'e bağlı iş istasyonunuzu hazırlama
+## <a name="step-1-prepare-your-internet-connected-workstation"></a>1\. adım: Internet 'e bağlı iş istasyonunuzu hazırlama
 
-Birinci adım için Internet'e bağlı iş istasyonunuzu üzerinde aşağıdaki yordamları gerçekleştirin.
+Bu ilk adım için, Internet 'e bağlı iş istasyonunuzda aşağıdaki yordamları uygulayın.
 
-### <a name="step-11-install-azure-powershell"></a>Adım 1.1: Azure PowerShell'i yükleme
+### <a name="step-11-install-azure-powershell"></a>Adım 1,1: Azure PowerShell'i yükleyin
 
-İnternet'e bağlı iş istasyonundan indirin ve Azure anahtar Kasası'nı yönetmek için cmdlet'ler içeren Azure PowerShell modülünü yükleyin. Yükleme yönergeleri için bkz. [Azure PowerShell'i yükleme ve yapılandırma işlemini](/powershell/azure/overview).
+Internet 'e bağlı iş istasyonunda, Azure Key Vault yönetmek için cmdlet 'leri içeren Azure PowerShell modülünü indirip yükleyin. Yükleme yönergeleri için bkz. [Azure PowerShell yükleme ve yapılandırma](/powershell/azure/overview).
 
-### <a name="step-12-get-your-azure-subscription-id"></a>Adım 1.2: Azure abonelik Kimliğinizi alın
+### <a name="step-12-get-your-azure-subscription-id"></a>Adım 1,2: Azure abonelik KIMLIĞINIZI alın
 
-Azure PowerShell oturumu başlatın ve aşağıdaki komutu kullanarak Azure hesabınızda oturum açın:
+Bir Azure PowerShell oturumu başlatın ve aşağıdaki komutu kullanarak Azure hesabınızda oturum açın:
 
 ```Powershell
    Connect-AzAccount
 ```
-Açılır tarayıcı penceresinde Azure hesabı kullanıcı adınızı ve parolanızı girin. Ardından, [Get-AzSubscription](/powershell/module/az.accounts/get-azsubscription) komutu:
+Açılır tarayıcı penceresinde Azure hesabı kullanıcı adınızı ve parolanızı girin. Sonra [Get-AzSubscription](/powershell/module/az.accounts/get-azsubscription) komutunu kullanın:
 
 ```powershell
    Get-AzSubscription
 ```
-Çıkışı, Azure anahtar kasası için kullanacağınız abonelik Kimliğini bulun. Bu abonelik kimliği daha sonra gerekecektir.
+Çıktıdan Azure Key Vault için kullanacağınız aboneliğin KIMLIĞINI bulun. Daha sonra bu abonelik KIMLIĞINE ihtiyacınız olacak.
 
 Azure PowerShell penceresini kapatmayın.
 
-### <a name="step-13-download-the-byok-toolset-for-azure-key-vault"></a>1\.3. adım: İçin Azure anahtar kasası BYOK araç takımını indirin
+### <a name="step-13-download-the-byok-toolset-for-azure-key-vault"></a>Adım 1,3: Azure Key Vault için BYOK araç takımını indirin
 
-Microsoft Download Center gidin ve [Azure anahtar kasası BYOK araç takımını indirmek](https://www.microsoft.com/download/details.aspx?id=45345) coğrafi bölge veya Azure örneği. İndirme ve karşılık gelen, SHA-256'yı paket karmasını paket adını tanımlamak için aşağıdaki bilgileri kullanın:
+Microsoft Indirme Merkezi ' ne gidin ve coğrafi bölgeniz veya Azure örneğiniz için [Azure Key Vault BYOK araç takımını indirin](https://www.microsoft.com/download/details.aspx?id=45345) . İndirilecek paket adını ve karşılık gelen SHA-256 paket karmasını belirlemek için aşağıdaki bilgileri kullanın:
 
 ---
 **Amerika Birleşik Devletleri:**
 
-States.zip KeyVault-BYOK-araçları-birleşik
+Keykasası-BYOK-Tools-Birleşik Devletler. zip
 
 2E8C00320400430106366A4E8C67B79015524E4EC24A2D3A6DC513CA1823B0D4
 
 ---
-**Avrupa:**
+**'Ya**
 
-Anahtar kasası BYOK araç Europe.zip
+KeyVault-BYOK-Tools-Europe. zip
 
 9AAA63E2E7F20CF9BB62485868754203721D2F88D300910634A32DFA1FB19E4A
 
 ---
-**Asya için:**
+**Noktası**
 
-Anahtar kasası BYOK araç AsiaPacific.zip
+KeyVault-BYOK-Tools-AsiaPacific. zip
 
 4BC14059BF0FEC562CA927AF621DF665328F8A13616F44C977388EC7121EF6B5
 
 ---
 **Latin Amerika:**
 
-Anahtar kasası BYOK araç LatinAmerica.zip
+KeyVault-BYOK-Tools-LatinAmerica. zip
 
 E7DFAFF579AFE1B9732C30D6FD80C4D03756642F25A538922DD1B01A4FACB619
 
 ---
 **Japonya:**
 
-Anahtar kasası BYOK araç Japan.zip
+KeyVault-BYOK-Tools-Japan. zip
 
 3933C13CC6DC06651295ADC482B027AF923A76F1F6BF98B4D4B8E94632DEC7DF
 
 ---
 **Kore:**
 
-Anahtar kasası BYOK araç Korea.zip
+KeyVault-BYOK-Tools-Korea. zip
 
 71AB6BCFE06950097C8C18D532A9184BEF52A74BB944B8610DDDA05344ED136F
 
 ---
 **Güney Afrika:**
 
-KeyVault-BYOK-Tools-SouthAfrica.zip
+KeyVault-BYOK-Tools-SouthAfrica. zip
 
 C41060C5C0170AAAAD896DA732E31433D14CB9FC83AC3C67766F46D98620784A
 
 ---
-**BAE:**
+**BAE**
 
-KeyVault-BYOK-Tools-UAE.zip
+KeyVault-BYOK-Tools-UAE. zip
 
 FADE80210B06962AA0913EA411DAB977929248C65F365FD953BB9F241D5FC0D3
 
 ---
 **Avustralya:**
 
-Anahtar kasası BYOK araç Australia.zip
+KeyVault-BYOK-Tools-Australia. zip
 
 CD0FB7365053DEF8C35116D7C92D203C64A3D3EE2452A025223EEB166901C40A
 
 ---
-[**Azure kamu:** ](https://azure.microsoft.com/features/gov/)
+[**Azure Kamu:** ](https://azure.microsoft.com/features/gov/)
 
-KeyVault-BYOK-Tools-USGovCloud.zip
+KeyVault-BYOK-Tools-USGovCloud. zip
 
 F8DB2FC914A7360650922391D9AA79FF030FD3048B5795EC83ADC59DB018621A
 
 ---
-**ABD DOD:**
+**ABD kamu DOD:**
 
-KeyVault-BYOK-Tools-USGovernmentDoD.zip
+KeyVault-BYOK-Tools-USGovernmentDoD. zip
 
 A79DD8C6DFFF1B00B91D1812280207A205442B3DDF861B79B8B991BB55C35263
 
 ---
 **Kanada:**
 
-KeyVault-BYOK-Tools-Canada.zip
+KeyVault-BYOK-Tools-Canada. zip
 
 61BE1A1F80AC79912A42DEBBCC42CF87C88C2CE249E271934630885799717C7B
 
 ---
 **Almanya:**
 
-Anahtar kasası BYOK araç Germany.zip
+KeyVault-BYOK-Tools-Germany. zip
 
 5385E615880AAFC02AFD9841F7BADD025D7EE819894AA29ED3C71C3F844C45D6
 
 ---
+**Almanya Genel:**
+
+KeyVault-BYOK-Tools-Germany-Public. zip
+
+54534936D0A0C99C8117DB724C04A5E50FD204CFCBD75C78972B785865364A29
+
+---
 **Hindistan:**
 
-KeyVault-BYOK-Tools-India.zip
+KeyVault-BYOK-Tools-India. zip
 
 49EDCEB3091CF1DF7B156D5B495A4ADE1CFBA77641134F61B0E0940121C436C8
 
 ---
 **Fransa:**
 
-Anahtar kasası BYOK araç France.zip
+KeyVault-BYOK-Tools-France. zip
 
 5C9D1F3E4125B0C09E9F60897C9AE3A8B4CB0E7D13A14F3EDBD280128F8FE7DF
 
 ---
 **Birleşik Krallık:**
 
-Anahtar kasası BYOK araç UnitedKingdom.zip
+KeyVault-BYOK-Tools-UnitedKingdom. zip
 
 432746BD0D3176B708672CCFF19D6144FCAA9E5EB29BB056489D3782B3B80849
 
 ---
+**İsviçre:**
 
-Azure PowerShell oturumunuzda, indirilen BYOK araç bütünlüğünü doğrulamak için kullanın [Get-FileHash](https://technet.microsoft.com/library/dn520872.aspx) cmdlet'i.
+KeyVault-BYOK-Tools-Switzerland. zip
+
+88CF8D39899E26D456D4E0BC57E5C94913ABF1D73A89013FCE3BBD9599AD2FE9
+
+---
+
+
+İndirilen BYOK araç takımının bütünlüğünü doğrulamak için, Azure PowerShell oturumunuzda, [Get-FileHash](https://technet.microsoft.com/library/dn520872.aspx) cmdlet 'ini kullanın.
 
    ```powershell
    Get-FileHash KeyVault-BYOK-Tools-*.zip
    ```
 
-Araç takımı içerir:
+Araç takımı şunları içerir:
 
-* İle başlayan bir ada sahip olan bir anahtar değişim anahtarı (KEK) paketi **BYOK-KEK - pkg-.**
-* İle başlayan bir ada sahip olan bir güvenlik Dünyası paketi **BYOK-SecurityWorld - pkg-.**
-* Adlı python betiğini **verifykeypackage.py.**
-* Adlı bir komut satırı yürütülebilir dosyası **KeyTransferRemote.exe** ve ilişkili DLL'ler.
-* Bir görsel C++ adlı yeniden dağıtılabilir paketi **vcredist_x64.exe.**
+* **BYok-kek-pkg-** ile başlayan bir ada sahip bir anahtar değişim anahtarı (kek) paketi.
+* **BYok-SecurityWorld-pkg-** ile başlayan bir ada sahip bir güvenlik dünyası paketi.
+* Verifykeypackage.py adlı bir Python betiği **.**
+* **Keytransferremote. exe** ve Ilişkili dll 'ler adlı komut satırı yürütülebilir dosyası.
+* C++ **Vcredist_x64. exe** adlı bir Visual yeniden dağıtılabilir paket.
 
-Paketi bir USB sürücüye veya başka bir taşınabilir depolama kopyalayın.
+Paketi bir USB sürücüye veya başka bir taşınabilir depolamaya kopyalayın.
 
-## <a name="step-2-prepare-your-disconnected-workstation"></a>2\. adım: Bağlantısı kesilmiş iş istasyonunuzu hazırlama
+## <a name="step-2-prepare-your-disconnected-workstation"></a>2\. adım: Bağlantısı kesilen iş istasyonunuzu hazırlama
 
-Bu ikinci adım için bir ağa (İnternet'e veya iç ağınıza) bağlı olmayan bir iş istasyonunda aşağıdaki yordamları gerçekleştirin.
+Bu ikinci adımda, bir ağa (Internet veya iç ağınız) bağlı olmayan iş istasyonunda aşağıdaki yordamları uygulayın.
 
-### <a name="step-21-prepare-the-disconnected-workstation-with-ncipher-nshield-hsm"></a>2\.1. adım: Bağlantısı kesilmiş iş istasyonunuzu nCipher nShield HSM ile hazırlama
+### <a name="step-21-prepare-the-disconnected-workstation-with-ncipher-nshield-hsm"></a>Adım 2,1: NCipher nShield HSM ile bağlantısı kesilen iş istasyonunu hazırlama
 
-Bir Windows bilgisayara nCipher destek yazılımını yükleyin ve ardından o bilgisayara nCipher nShield HSM ekleyin.
+NCipher destek yazılımını bir Windows bilgisayara yükleyip bu bilgisayara bir nCipher nShield HSM ekleyin.
 
-NCipher araçları yolunuzda olduğundan emin olun ( **%nfast_home%\bin**). Örneğin, aşağıdaki komutu yazın:
+NCipher araçlarının yolunuzda olduğundan emin olun ( **%nfast_home%\Bin**). Örneğin, aşağıdakileri yazın:
 
   ```cmd
   set PATH=%PATH%;"%nfast_home%\bin"
   ```
 
-Daha fazla bilgi için HSM nShield ile kullanıcı kılavuzuna bakın.
+Daha fazla bilgi için, nShield HSM 'ye dahil edilen kullanıcı kılavuzuna bakın.
 
-### <a name="step-22-install-the-byok-toolset-on-the-disconnected-workstation"></a>2\.2. adım: BYOK araç takımını, bağlantısı kesilmiş iş istasyonunda yükleyin
+### <a name="step-22-install-the-byok-toolset-on-the-disconnected-workstation"></a>Adım 2,2: Bağlantısı kesilen iş istasyonuna BYOK araç takımını yükler
 
-USB sürücü veya başka bir taşınabilir depolama BYOK araç takımı paketini kopyalayın ve ardından aşağıdakileri yapın:
+USB sürücüsünden veya diğer taşınabilir depolamadan BYOK araç kümesi paketini kopyalayın ve ardından aşağıdakileri yapın:
 
-1. Dosyaları indirilen paketteki herhangi bir klasöre ayıklayın.
-2. Bu klasörden vcredist_x64.exe çalıştırın.
-3. Yönergeleri, Visual Studio 2013 için Visual C++ çalışma zamanı bileşenlerini yüklemeyi izleyin.
+1. İndirilen paketten dosyaları herhangi bir klasöre ayıklayın.
+2. Bu klasörden, vcredist_x64. exe ' yi çalıştırın.
+3. Visual Studio 2013 için Visual C++ Runtime bileşenlerini yüklemek için yönergeleri izleyin.
 
-## <a name="step-3-generate-your-key"></a>3\. adım: Anahtarınızı
+## <a name="step-3-generate-your-key"></a>3\. adım: Anahtarınızı oluşturma
 
-Bu üçüncü adım için bağlantısı kesilmiş iş istasyonunda aşağıdaki yordamları gerçekleştirin. Bu adımı tamamlamak için HSM tedarikçinize başlatma modunda olması gerekir. 
+Bu üçüncü adımda, bağlantısı kesilen iş istasyonunda aşağıdaki yordamları uygulayın. Bu adımı gerçekleştirmek için HSM 'nizin başlatma modunda olması gerekir. 
 
-### <a name="step-31-change-the-hsm-mode-to-i"></a>Adım 3.1: 'I' HSM modunu değiştirme
+### <a name="step-31-change-the-hsm-mode-to-i"></a>Adım 3,1: HSM modunu ' ı ' olarak değiştir
 
-Modu değiştirmek için Edge, nCipher nShield kullanıyorsanız: 1. Gerekli modu vurgulamak için Modu düğmesini kullanın. 2. Birkaç saniye içinde basın ve Temizle düğmesine birkaç saniye basılı tutun. Modu değişirse, yeni modun LED yanıp durdurur ve aydınlatılmış kalır. Durum LED birkaç saniye düzensiz flash ve düzenli olarak cihaz hazır olduğunda, ardından yanıp. Aksi takdirde cihaz kalır LED uygun moduyla geçerli modunda aydınlatma.
+Modunu değiştirmek için nCipher nShield Edge kullanıyorsanız: 1. Gerekli modu vurgulamak için mod düğmesini kullanın. 2. Birkaç saniye içinde, CTRL tuşuna basın ve birkaç saniye boyunca temizle düğmesini basılı tutun. Mod değişirse, yeni modun ışığı yanıp sönmeye devam eder ve aydınlatılır. Durum ışığı, birkaç saniye boyunca düzenli olarak yanıp sönebilir ve cihaz hazırsa düzenli olarak yanıp sönmeyebilir. Aksi takdirde, cihaz geçerli modda kalır, uygun mod da aydınlatılır.
 
-### <a name="step-32-create-a-security-world"></a>Adım 3.2: Bir güvenlik Dünyası oluşturma
+### <a name="step-32-create-a-security-world"></a>Adım 3,2: Güvenlik dünyası oluşturma
 
-Bir komut istemi başlatın ve nCipher yeni dünya programını çalıştırın.
+Bir komut istemi başlatın ve nCipher New-World programını çalıştırın.
 
    ```cmd
     new-world.exe --initialize --cipher-suite=DLf3072s256mRijndael --module=1 --acs-quorum=2/3
    ```
 
-Bu programın oluşturduğu bir **güvenlik Dünyası** % NFAST_KMDATA%\local\world, C:\ProgramData\nCipher\Key Management Data\local klasörüne karşılık gelen dosya. Çekirdek için farklı değerler kullanabilirsiniz, ancak örneğimizde her biri için biri üç boş kart ve PIN girmeniz istenir. Ardından, herhangi iki kart güvenlik dünyasına tam erişim verin. Bu kartların haline **yönetici kart Seti** yeni güvenlik Dünyası için.
+Bu program,%NFAST_KMDATA%\local\world adresinde C:\ProgramData\nCipher\Key Management Data\local klasörüne karşılık gelen bir **güvenlik dünyası** dosyası oluşturur. Çekirdek için farklı değerler kullanabilirsiniz, ancak örneğimizde her biri için üç boş kart ve PIN girmeniz istenir. Ardından, herhangi iki kart güvenlik dünyasına tam erişim sağlar. Bu kartlar, yeni güvenlik dünyası için **yönetici kart kümesi** olur.
 
 > [!NOTE]
-> HSM'NİZDE yeni şifre paketi DLf3072s256mRijndael desteklemiyorsa değiştirebilirsiniz--şifre paketi DLf3072s256mRijndael şifre paketi ile--= DLf1024s160mRijndael =
+> HSM 'niz daha yeni şifresi üzerinde anlaşılamadı Suite DLf3072s256mRijndael 'yi desteklemiyorsa,--cipher-Suite = DLf3072s256mRijndael ile--Cipher-Suite = DLf1024s160mRijndael ile değiştirebilirsiniz
+> 
+> NCipher yazılım sürümü 12,50 ile birlikte gelen New-World. exe ile oluşturulan güvenlik dünyası, bu BYOK yordamıyla uyumlu değildir. Kullanılabilecek iki seçenek vardır:
+> 1) Yeni bir güvenlik dünyası oluşturmak için nCipher yazılım sürümünün 12.40.2 'e indirgenmesini sağlar.
+> 2) NCipher desteği ile iletişim kurun ve bu BYOK yordamıyla uyumlu New-World. exe ' nin 12.40.2 sürümünü kullanmanıza olanak sağlayan 12,50 yazılım sürümü için bir düzeltme sağlamak üzere bunları isteyin.
 
 Ardından şunları yapın:
 
-* Dünya dosyasının yedeğini alın. Güvenli ve dünya dosyasını, yönetici kartlarını ve PIN kodlarını korumak ve tek başına birden fazla kart erişimi olduğundan emin olun.
+* Dünya dosyasını yedekleyin. Dünya dosyasını, yönetici kartlarını ve bunların PIN 'lerini güvenli hale getirin ve koruyun ve tek bir kişinin birden fazla karta erişimi olmadığından emin olun.
 
-### <a name="step-33-change-the-hsm-mode-to-o"></a>Adım 3.3: HSM moduna '
+### <a name="step-33-change-the-hsm-mode-to-o"></a>Adım 3,3: HSM modunu ' O ' olarak değiştir
 
-Modu değiştirmek için Edge, nCipher nShield kullanıyorsanız: 1. Gerekli modu vurgulamak için Modu düğmesini kullanın. 2. Birkaç saniye içinde basın ve Temizle düğmesine birkaç saniye basılı tutun. Modu değişirse, yeni modun LED yanıp durdurur ve aydınlatılmış kalır. Durum LED birkaç saniye düzensiz flash ve düzenli olarak cihaz hazır olduğunda, ardından yanıp. Aksi takdirde cihaz kalır LED uygun moduyla geçerli modunda aydınlatma.
+Modunu değiştirmek için nCipher nShield Edge kullanıyorsanız: 1. Gerekli modu vurgulamak için mod düğmesini kullanın. 2. Birkaç saniye içinde, CTRL tuşuna basın ve birkaç saniye boyunca temizle düğmesini basılı tutun. Mod değişirse, yeni modun ışığı yanıp sönmeye devam eder ve aydınlatılır. Durum ışığı, birkaç saniye boyunca düzenli olarak yanıp sönebilir ve cihaz hazırsa düzenli olarak yanıp sönmeyebilir. Aksi takdirde, cihaz geçerli modda kalır, uygun mod da aydınlatılır.
 
-### <a name="step-34-validate-the-downloaded-package"></a>Adım 3.4: İndirilen paketi doğrulama
+### <a name="step-34-validate-the-downloaded-package"></a>Adım 3,4: İndirilen paketi doğrula
 
-Bu adım isteğe bağlıdır ancak aşağıdakileri doğrulayabilmeniz böylece önerilir:
+Bu adım isteğe bağlıdır, ancak şunları doğrulayabilmeniz önerilir:
 
-* Araç takımında yer anahtar değişim anahtarı bir orijinal nCipher nShield HSM oluşturuldu.
-* Araç takımında yer güvenlik Dünyası karması, orijinal nCipher nShield HSM oluşturuldu.
-* Anahtar değişim anahtarı aktarılamaz.
+* Araç takımı 'nda bulunan anahtar değişim anahtarı, orijinal bir nCipher nShield HSM 'sinden oluşturulmuştur.
+* Araç takımı 'nda bulunan güvenlik dünyasının karması, orijinal bir nCipher nShield HSM ' de oluşturulmuştur.
+* Anahtar değişim anahtarı dışa aktarılabilir değil.
 
 > [!NOTE]
-> İndirilen paketi doğrulamak için HSM, açık bağlanmalıdır ve üzerindeki güvenlik Dünyası (örneğin, yeni oluşturduğunuz bir tane) sahip olması gerekir.
+> İndirilen paketi doğrulamak için, HSM 'nin bağlı olması, açık olması ve üzerinde bir güvenlik dünyası olması gerekir (örneğin, yeni oluşturduğunuz bir bağlantı).
 
 İndirilen paketi doğrulamak için:
 
-1. Azure örneği veya coğrafi bölgede bağlı olarak aşağıdakilerden birini yazarak verifykeypackage.py betiği çalıştırın:
+1. Coğrafi bölgenize veya Azure örneğine bağlı olarak aşağıdakilerden birini yazarak verifykeypackage.py betiğini çalıştırın:
 
    * Kuzey Amerika için:
 
@@ -317,22 +336,25 @@ Bu adım isteğe bağlıdır ancak aşağıdakileri doğrulayabilmeniz böylece 
    * Güney Afrika için:
 
          "%nfast_home%\python\bin\python" verifykeypackage.py -k BYOK-KEK-pkg-SA-1 -w BYOK-SecurityWorld-pkg-SA-1
-   * BAE için:
+   * UAE için:
 
          "%nfast_home%\python\bin\python" verifykeypackage.py -k BYOK-KEK-pkg-UAE-1 -w BYOK-SecurityWorld-pkg-UAE-1
    * Avustralya için:
 
          "%nfast_home%\python\bin\python" verifykeypackage.py -k BYOK-KEK-pkg-AUS-1 -w BYOK-SecurityWorld-pkg-AUS-1
-   * İçin [Azure kamu](https://azure.microsoft.com/features/gov/), Azure ABD kamu örneğini kullanır:
+   * Azure 'un ABD devlet örneğini kullanan [Azure Kamu](https://azure.microsoft.com/features/gov/)için:
 
          "%nfast_home%\python\bin\python" verifykeypackage.py -k BYOK-KEK-pkg-USGOV-1 -w BYOK-SecurityWorld-pkg-USGOV-1
-   * ABD kamu savunma Bakanlığı için:
+   * ABD kamu DOD için:
 
          "%nfast_home%\python\bin\python" verifykeypackage.py -k BYOK-KEK-pkg-USDOD-1 -w BYOK-SecurityWorld-pkg-USDOD-1
-   * Kanada:
+   * Kanada için:
 
          "%nfast_home%\python\bin\python" verifykeypackage.py -k BYOK-KEK-pkg-CANADA-1 -w BYOK-SecurityWorld-pkg-CANADA-1
    * Almanya için:
+
+         "%nfast_home%\python\bin\python" verifykeypackage.py -k BYOK-KEK-pkg-GERMANY-1 -w BYOK-SecurityWorld-pkg-GERMANY-1
+   * Almanya genel için:
 
          "%nfast_home%\python\bin\python" verifykeypackage.py -k BYOK-KEK-pkg-GERMANY-1 -w BYOK-SecurityWorld-pkg-GERMANY-1
    * Hindistan için:
@@ -344,49 +366,52 @@ Bu adım isteğe bağlıdır ancak aşağıdakileri doğrulayabilmeniz böylece 
    * Birleşik Krallık için:
 
          "%nfast_home%\python\bin\python" verifykeypackage.py -k BYOK-KEK-pkg-UK-1 -w BYOK-SecurityWorld-pkg-UK-1
+   * Isviçre için:
+
+         "%nfast_home%\python\bin\python" verifykeypackage.py -k BYOK-KEK-pkg-SUI-1 -w BYOK-SecurityWorld-pkg-SUI-1
 
      > [!TIP]
-     > NCipher nShield yazılımı, %NFAST_HOME%\python\bin python içerir
+     > NCipher nShield yazılımı,%NFAST_HOME%\python\bin adresinde Python içerir
      >
      >
-2. Doğrulama başarılı gösteren aşağıdaki gördüğünüzü onaylayın: **Sonuç: BAŞARILI**
+2. Başarılı doğrulamayı belirten aşağıdakileri görmediğinizi onaylayın: **Kaynaklanan BAŞARILI**
 
-Bu betik nShield kök anahtarı kadar doğru imzalayan zincirini doğrular. Bu kök anahtarın karması betiğe ekli olduğunu ve değeri **59178a47 de508c3f 291277ee 184f46c4 f1d9c639**. Ayrıca bu değeri ayrı olarak ederek doğrulayabilirsiniz [nCipher Web sitesi](https://www.ncipher.com/products/key-management/cloud-microsoft-azure/validation).
+Bu betik, imzalayan zincirini nShield kök anahtarına kadar doğrular. Bu kök anahtarın karması betiğe katıştırılır ve değeri **59178a47 de508c3f 291277ee 184f46c4 f1d9c639**olmalıdır. Ayrıca, [nCipher Web sitesini](https://www.ncipher.com/products/key-management/cloud-microsoft-azure/validation)ziyaret ederek bu değeri ayrı olarak da doğrulayabilirsiniz.
 
 Şimdi yeni bir anahtar oluşturmaya hazırsınız.
 
-### <a name="step-35-create-a-new-key"></a>Adım 3.5: Yeni anahtar oluştur
+### <a name="step-35-create-a-new-key"></a>Adım 3,5: Yeni anahtar oluştur
 
-NCipher nShield kullanarak bir anahtar oluşturmak **generatekey** program.
+NCipher nShield **GenerateKey** programını kullanarak bir anahtar oluşturun.
 
 Anahtarı oluşturmak için aşağıdaki komutu çalıştırın:
 
     generatekey --generate simple type=RSA size=2048 protect=module ident=contosokey plainname=contosokey nvram=no pubexp=
 
-Bu komutu çalıştırdığınızda, aşağıdaki yönergeleri kullanın:
+Bu komutu çalıştırdığınızda, şu yönergeleri kullanın:
 
-* Parametre *korumak* değerine ayarlanmalıdır **Modülü**gösterildiği gibi. Bu, modül korumalı bir anahtar oluşturur. BYOK araç takımı, OCS korumalı anahtarları desteklemez.
-* Değiştirin *contosokey* için **ident** ve **plainname** ile herhangi bir dize değeri. Yönetim ek yüklerini en aza indirmek ve hataları riskini azaltmak için her ikisi için aynı değeri kullanmanızı öneririz. **İdent** değer yalnızca sayı, tire ve küçük harf içermelidir.
-* Bu örnekte pubexp (varsayılan) boş kaldı, ancak belirli bir değer belirtebilirsiniz. Daha fazla bilgi için [nCipher belgeleri.](https://www.ncipher.com/resources/solution-briefs/protect-sensitive-data-rest-and-use-across-premises-and-azure-based)
+* *Koruma* parametresi, gösterildiği gibi, değer **modülüne**ayarlanmalıdır. Bu, modül korumalı bir anahtar oluşturur. BYOK araç takımı, OCS korumalı anahtarları desteklemez.
+* Ida **ve** **plainname** için *contosokey* değerini herhangi bir dize değeriyle değiştirin. Yönetim üst kafalarını en aza indirmek ve hata riskini azaltmak için, her ikisi için de aynı değeri kullanmanızı öneririz. Ida **değeri** yalnızca rakamlar, tireler ve küçük harf karakterler içermelidir.
+* Bu örnekte pubexp boş bırakılır (varsayılan), ancak belirli değerler belirtebilirsiniz. Daha fazla bilgi için [nCipher belgelerine bakın.](https://www.ncipher.com/resources/solution-briefs/protect-sensitive-data-rest-and-use-across-premises-and-azure-based)
 
-Bu komut, %NFAST_KMDATA%\local klasörünüzde adı ile bir simgeleştirilmiş anahtar dosyası oluşturur. **key_simple_** çizgidir **ident** komutu belirtildi. Örneğin: **key_simple_contosokey**. Bu dosya şifreli bir anahtar içerir.
+Bu komut, başlayıp klasörünüzde, **key_simple_** ile **başlayan ve ardından** komutta belirtilen IBir adı olan bir simgeleştirilmiş anahtar dosyası oluşturur. Örneğin: **key_simple_contosokey**. Bu dosya şifreli bir anahtar içeriyor.
 
-Bu simgeleştirilmiş anahtar dosyasını güvenli bir yere yedekleyin.
+Bu simgeleştirilmiş anahtar dosyasını güvenli bir konumda yedekleyin.
 
 > [!IMPORTANT]
-> Anahtarınızı daha sonra Azure anahtar Kasası'na aktardığınızda, anahtarınızı ve güvenlik dünyanızı güvenle yedeklemeniz çok önemli hale gelir için Microsoft bu anahtarı size geri dışarı aktaramazsınız. İlgili kişi [nCipher](https://www.ncipher.com/about-us/contact-us) rehberlik ve anahtarınızı yedekleme için en iyi uygulamalar için.
+> Anahtarınızı daha sonra Azure Key Vault 'e aktardığınızda, Microsoft bu anahtarı sizin için geri aktaramıyor, böylelikle anahtar ve güvenlik dünyasını güvenle yedeklemeniz çok önemli hale gelir. Anahtarınızı yedeklemeye yönelik rehberlik ve en iyi uygulamalar için [nCipher](https://www.ncipher.com/about-us/contact-us) ile iletişim kurun.
 >
 
 
-Anahtarınızı Azure anahtar Kasası'na aktarmak artık hazırsınız.
+Artık anahtarınızı Azure Key Vault aktarmaya hazırsınız.
 
-## <a name="step-4-prepare-your-key-for-transfer"></a>4\. Adım: Kiracı anahtarınızı aktarım için hazırlama
+## <a name="step-4-prepare-your-key-for-transfer"></a>4\. Adım: Anahtarınızı aktarım için hazırlama
 
-Bu dördüncü adım için bağlantısı kesilmiş iş istasyonunda aşağıdaki yordamları gerçekleştirin.
+Bu dördüncü adımda, bağlantısı kesilen iş istasyonunda aşağıdaki yordamları uygulayın.
 
-### <a name="step-41-create-a-copy-of-your-key-with-reduced-permissions"></a>4\.1. adım: Sınırlı izinlerle anahtarınızın bir kopyasını oluşturma
+### <a name="step-41-create-a-copy-of-your-key-with-reduced-permissions"></a>Adım 4,1: Daha düşük izinlerle anahtarınızın bir kopyasını oluşturun
 
-Yeni bir komut istemi açın ve burada BYOK ZIP dosyasının sıkıştırması açılan geçerli dizine geçin. Anahtarınızı izinleri bir komut istemi'nden azaltmak için Azure örneği veya coğrafi bölgede bağlı olarak aşağıdakilerden birini çalıştırın:
+Yeni bir komut istemi açın ve geçerli dizini, BYOK ZIP dosyasının sıkıştırkunununkkın bulunduğu konum olarak değiştirin. Anahtarınızla ilgili izinleri azaltmak için, bir komut isteminden, coğrafi bölgenize veya Azure örneğine bağlı olarak aşağıdakilerden birini çalıştırın:
 
 * Kuzey Amerika için:
 
@@ -409,22 +434,25 @@ Yeni bir komut istemi açın ve burada BYOK ZIP dosyasının sıkıştırması a
 * Güney Afrika için:
 
         KeyTransferRemote.exe -ModifyAcls -KeyAppName simple -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-SA-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-SA-1
-* BAE için:
+* UAE için:
 
         KeyTransferRemote.exe -ModifyAcls -KeyAppName simple -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-UAE-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-UAE-1
 * Avustralya için:
 
         KeyTransferRemote.exe -ModifyAcls -KeyAppName simple -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-AUS-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-AUS-1
-* İçin [Azure kamu](https://azure.microsoft.com/features/gov/), Azure ABD kamu örneğini kullanır:
+* Azure 'un ABD devlet örneğini kullanan [Azure Kamu](https://azure.microsoft.com/features/gov/)için:
 
         KeyTransferRemote.exe -ModifyAcls -KeyAppName simple -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-USGOV-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-USGOV-1
-* ABD kamu savunma Bakanlığı için:
+* ABD kamu DOD için:
 
         KeyTransferRemote.exe -ModifyAcls -KeyAppName simple -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-USDOD-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-USDOD-1
-* Kanada:
+* Kanada için:
 
         KeyTransferRemote.exe -ModifyAcls -KeyAppName simple -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-CANADA-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-CANADA-1
 * Almanya için:
+
+        KeyTransferRemote.exe -ModifyAcls -KeyAppName simple -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-GERMANY-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-GERMANY-1
+* Almanya genel için:
 
         KeyTransferRemote.exe -ModifyAcls -KeyAppName simple -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-GERMANY-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-GERMANY-1
 * Hindistan için:
@@ -436,26 +464,29 @@ Yeni bir komut istemi açın ve burada BYOK ZIP dosyasının sıkıştırması a
 * Birleşik Krallık için:
 
         KeyTransferRemote.exe -ModifyAcls -KeyAppName simple -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-UK-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-UK-1
+* Isviçre için:
 
-Bu komutu çalıştırdığınızda, değiştirin *contosokey* ile aynı belirtilen değere **adım 3.5: Yeni anahtar oluştur** gelen [anahtarınızı](#step-3-generate-your-key) adım.
+        KeyTransferRemote.exe -ModifyAcls -KeyAppName simple -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-SUI-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-SUI-1
 
-Güvenlik Dünyası yönetim kartlarınızı takmanız istenir.
+Bu komutu çalıştırdığınızda, *contosokey* değerini 3,5 **adımında belirttiğiniz değerle değiştirin:**  Anahtar oluşturma [adımınızdan](#step-3-generate-your-key) yeni bir anahtar oluşturun.
 
-Komut tamamlandığında, gördüğünüz **sonucu: Başarı** ve anahtarınızın sınırlı izinlere sahip kopyası, key_xferacıd_ adlı dosyada olan\<contosokey >.
+Güvenlik dünyası yönetici kartlarınızı eklemek isteyip istemediğiniz sorulur.
 
-İnceler ACL'leri nCipher nShield Araçları'nı kullanarak aşağıdaki komutları kullanarak:
+Komut tamamlandığında şu sonucu görürsünüz **: Daha** düşük izinlerle anahtarınızın başarısı ve kopyası, key_xferacId_\<contosokey > adlı dosyada bulunur.
 
-* aclprint.PY:
+NCipher nShield yardımcı programlarını kullanarak aşağıdaki komutları kullanarak ACL 'LERI inceler:
+
+* aclprint.py:
 
         "%nfast_home%\bin\preload.exe" -m 1 -A xferacld -K contosokey "%nfast_home%\python\bin\python" "%nfast_home%\python\examples\aclprint.py"
-* kmfile-dump.exe:
+* kmfile-dump. exe:
 
         "%nfast_home%\bin\kmfile-dump.exe" "%NFAST_KMDATA%\local\key_xferacld_contosokey"
-  Bu komutları çalıştırdıktan sonra belirttiğiniz değerle contosokey değiştirin **adım 3.5: Yeni anahtar oluştur** gelen [anahtarınızı](#step-3-generate-your-key) adım.
+  Bu komutları çalıştırdığınızda, contosokey değerini 3,5 **adımında belirttiğiniz değerle değiştirin:**  Anahtar oluşturma [adımınızdan](#step-3-generate-your-key) yeni bir anahtar oluşturun.
 
-### <a name="step-42-encrypt-your-key-by-using-microsofts-key-exchange-key"></a>4\.2. adım: Microsoft'un anahtar değişim anahtarını kullanarak anahtarınızı şifreleme
+### <a name="step-42-encrypt-your-key-by-using-microsofts-key-exchange-key"></a>Adım 4,2: Microsoft 'un anahtar değişim anahtarını kullanarak anahtarınızı şifreleyin
 
-Azure örneği veya coğrafi bölgede bağlı olarak aşağıdaki komutlardan birini çalıştırın:
+Coğrafi bölgenize veya Azure örneğine bağlı olarak aşağıdaki komutlardan birini çalıştırın:
 
 * Kuzey Amerika için:
 
@@ -478,22 +509,25 @@ Azure örneği veya coğrafi bölgede bağlı olarak aşağıdaki komutlardan bi
 * Güney Afrika için:
 
         KeyTransferRemote.exe -Package -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-SA-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-SA-1 -SubscriptionId SubscriptionID -KeyFriendlyName ContosoFirstHSMkey
-* BAE için:
+* UAE için:
 
         KeyTransferRemote.exe -Package -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-UAE-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-UAE-1 -SubscriptionId SubscriptionID -KeyFriendlyName ContosoFirstHSMkey
 * Avustralya için:
 
         KeyTransferRemote.exe -Package -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-AUS-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-AUS-1 -SubscriptionId SubscriptionID -KeyFriendlyName ContosoFirstHSMkey
-* İçin [Azure kamu](https://azure.microsoft.com/features/gov/), Azure ABD kamu örneğini kullanır:
+* Azure 'un ABD devlet örneğini kullanan [Azure Kamu](https://azure.microsoft.com/features/gov/)için:
 
         KeyTransferRemote.exe -Package -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-USGOV-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-USGOV-1 -SubscriptionId SubscriptionID -KeyFriendlyName ContosoFirstHSMkey
-* ABD kamu savunma Bakanlığı için:
+* ABD kamu DOD için:
 
         KeyTransferRemote.exe -Package -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-USDOD-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-USDOD-1 -SubscriptionId SubscriptionID -KeyFriendlyName ContosoFirstHSMkey
-* Kanada:
+* Kanada için:
 
         KeyTransferRemote.exe -Package -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-CANADA-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-CANADA-1 -SubscriptionId SubscriptionID -KeyFriendlyName ContosoFirstHSMkey
 * Almanya için:
+
+        KeyTransferRemote.exe -Package -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-GERMANY-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-GERMANY-1 -SubscriptionId SubscriptionID -KeyFriendlyName ContosoFirstHSMkey
+* Almanya genel için:
 
         KeyTransferRemote.exe -Package -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-GERMANY-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-GERMANY-1 -SubscriptionId SubscriptionID -KeyFriendlyName ContosoFirstHSMkey
 * Hindistan için:
@@ -505,29 +539,33 @@ Azure örneği veya coğrafi bölgede bağlı olarak aşağıdaki komutlardan bi
 * Birleşik Krallık için:
 
         KeyTransferRemote.exe -Package -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-UK-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-UK-1 -SubscriptionId SubscriptionID -KeyFriendlyName ContosoFirstHSMkey
+* Isviçre için:
 
-Bu komutu çalıştırdığınızda, aşağıdaki yönergeleri kullanın:
+        KeyTransferRemote.exe -Package -KeyIdentifier contosokey -ExchangeKeyPackage BYOK-KEK-pkg-SUI-1 -NewSecurityWorldPackage BYOK-SecurityWorld-pkg-SUI-1 -SubscriptionId SubscriptionID -KeyFriendlyName ContosoFirstHSMkey
 
-* Değiştirin *contosokey* anahtarı oluşturmak için kullandığınız tanımlayıcıyla **adım 3.5: Yeni anahtar oluştur** gelen [anahtarınızı](#step-3-generate-your-key) adım.
-* Değiştirin *Subscriptionıd* anahtar kasanıza içeren Azure abonelik kimliği. Bu değer aldığınız önceden, **adım 1.2: Azure abonelik Kimliğinizi alın** gelen [İnternet'e bağlı iş istasyonunuzu hazırlama](#step-1-prepare-your-internet-connected-workstation) adım.
-* Değiştirin *ContosoFirstHSMKey* çıktı dosyanızın adı için kullanılan bir etikete sahip.
 
-Başarıyla tamamlandığında, bu görüntüler **sonucu: Başarı** ve geçerli klasörde şu ada sahip yeni bir dosya yok: KeyTransferPackage -*ContosoFirstHSMkey*.byok
+Bu komutu çalıştırdığınızda, şu yönergeleri kullanın:
 
-### <a name="step-43-copy-your-key-transfer-package-to-the-internet-connected-workstation"></a>4\.3. adım: Anahtar aktarım paketinizi İnternet'e bağlı iş istasyonuna kopyalama
+* *Contosokey* değerini, 3,5 **adımında anahtarı oluşturmak için kullandığınız tanımlayıcıyla değiştirin:**  Anahtar oluşturma [adımınızdan](#step-3-generate-your-key) yeni bir anahtar oluşturun.
+* *SubscriptionID* değerini, anahtar kasanızı içeren Azure aboneliğinin kimliğiyle değiştirin. Bu değeri daha önce **aldığınız adım 1,2:**  [Internet 'e bağlı iş istasyonunuzu hazırlama](#step-1-prepare-your-internet-connected-workstation) adımından Azure abonelik Kimliğinizi alın.
+* *ContosoFirstHSMKey* değerini çıkış dosyası adınız için kullanılan bir etiketle değiştirin.
 
-Çıktı dosyasını (KeyTransferPackage-ContosoFirstHSMkey.byok) önceki adımdaki, İnternet'e bağlı iş istasyonunuzu kopyalamak için bir USB sürücü veya başka bir taşınabilir depolama kullanın.
+Bu başarıyla tamamlandığında, şu sonucu görüntüler **: Başarılı** ve geçerli klasörde aşağıdaki ada sahip yeni bir dosya vardır: KeyTransferPackage-*ContosoFirstHSMkey*. bYok
 
-## <a name="step-5-transfer-your-key-to-azure-key-vault"></a>5\. Adım: Azure Key Vault'a anahtar aktarma
+### <a name="step-43-copy-your-key-transfer-package-to-the-internet-connected-workstation"></a>Adım 4,3: Anahtar aktarım paketinizi Internet 'e bağlı iş istasyonuna kopyalayın
 
-Bu son adım İnternet'e bağlı iş istasyonunda, kullanın [Ekle AzKeyVaultKey](/powershell/module/az.keyvault/add-azkeyvaultkey) cmdlet'i için Azure Key Vault HSM'SİNDE bağlantısı kesilmiş iş istasyonundan kopyaladığınız anahtar aktarma paketini karşıya yüklemek için:
+Önceki adımdan (KeyTransferPackage-ContosoFirstHSMkey. bYok) Internet 'e bağlı iş istasyonunuza çıkış dosyasını kopyalamak için bir USB sürücü veya başka bir taşınabilir depolama alanı kullanın.
+
+## <a name="step-5-transfer-your-key-to-azure-key-vault"></a>5\. Adım: Anahtarınızı Azure Key Vault aktarın
+
+Bu son adımda, Internet 'e bağlı iş istasyonunda, bağlantısı kesilen iş istasyonundan Azure Key Vault HSM 'ye kopyaladığınız anahtar aktarım paketini karşıya yüklemek için [Add-AzKeyVaultKey](/powershell/module/az.keyvault/add-azkeyvaultkey) cmdlet 'ini kullanın:
 
    ```powershell
         Add-AzKeyVaultKey -VaultName 'ContosoKeyVaultHSM' -Name 'ContosoFirstHSMkey' -KeyFilePath 'c:\KeyTransferPackage-ContosoFirstHSMkey.byok' -Destination 'HSM'
    ```
 
-Karşıya yükleme başarılı olursa, gördüğünüz eklediğiniz anahtar özelliklerini görüntülenir.
+Karşıya yükleme başarılı olursa, yeni eklediğiniz anahtarın özelliklerinin görüntülendiğini görürsünüz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu HSM korumalı anahtar, anahtar Kasası'nda artık kullanabilirsiniz. Daha fazla bilgi için bkz. Bu fiyat ve özellik [karşılaştırma](https://azure.microsoft.com/pricing/details/key-vault/).
+Artık Anahtar Kasanızda HSM korumalı bu anahtarı kullanabilirsiniz. Daha fazla bilgi için bu fiyat ve özellik [karşılaştırması](https://azure.microsoft.com/pricing/details/key-vault/)bölümüne bakın.

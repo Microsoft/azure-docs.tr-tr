@@ -1,5 +1,5 @@
 ---
-title: App Service ortamları - Azure için özel ayarlar
+title: App Service ortamları için özel ayarlar-Azure
 description: App Service ortamları için özel yapılandırma ayarları
 services: app-service
 documentationcenter: ''
@@ -10,27 +10,26 @@ ms.assetid: 1d1d85f3-6cc6-4d57-ae1a-5b37c642d812
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/16/2018
 ms.author: stefsch
 ms.custom: seodec18
-ms.openlocfilehash: 6463759dbd217cd054f838c09c7cfcf99a06aa2c
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 768e354281aeb5e2143ddb0e190b0f27bf4f4e24
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60765083"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73470701"
 ---
 # <a name="custom-configuration-settings-for-app-service-environments"></a>App Service ortamları için özel yapılandırma ayarları
 ## <a name="overview"></a>Genel Bakış
-App Service ortamları (ase) tek bir müşteriye ayrılmış olduğu için yalnızca App Service ortamları için uygulanabilecek bazı yapılandırma ayarları vardır. Bu makale, App Service ortamları için kullanılabilen çeşitli belirli özelleştirmeleri içermektedir.
+App Service ortamları (ASEs) tek bir müşteriye yalıtılmış olduğundan, yalnızca App Service ortamlara uygulanabilen belirli yapılandırma ayarları vardır. Bu makale App Service ortamları için kullanılabilen çeşitli özelleştirmeleri belgeler.
 
-App Service ortamı yoksa bkz [bir App Service ortamı oluşturma](app-service-web-how-to-create-an-app-service-environment.md).
+Bir App Service Ortamı yoksa, bkz. [nasıl App Service ortamı oluşturma](app-service-web-how-to-create-an-app-service-environment.md).
 
-Yeni bir dizi kullanarak App Service ortamı özelleştirmeleri depolayabilirsiniz **clusterSettings** özniteliği. Bu öznitelik "Özellikler" sözlükte bulunan *hostingEnvironments* Azure Resource Manager varlığı.
+Yeni **Clustersettings** özniteliğinde bir dizi kullanarak, App Service ortamı özelleştirmelerini saklayabilirsiniz. Bu öznitelik, *Hostingenvironments* Azure Resource Manager varlığının "Özellikler" sözlüğünde bulunur.
 
-Aşağıdaki Resource Manager şablonu kod parçacığında gösterildiği kısaltılmış **clusterSettings** özniteliği:
+Aşağıdaki kısaltılmış Kaynak Yöneticisi şablonu kod parçacığı **Clustersettings** özniteliğini gösterir:
 
     "resources": [
     {
@@ -50,26 +49,26 @@ Aşağıdaki Resource Manager şablonu kod parçacığında gösterildiği kısa
        }
     }
 
-**ClusterSettings** özniteliği App Service ortamı güncelleştirmek için bir Resource Manager şablonunda dahil edilebilir.
+**Clustersettings** özniteliği, App Service ortamı güncelleştirmek için bir kaynak yöneticisi şablonuna dahil edilebilir.
 
-## <a name="use-azure-resource-explorer-to-update-an-app-service-environment"></a>App Service ortamı güncelleştirmek için Azure kaynak Gezgini'ni kullanma
-Alternatif olarak, App Service ortamı güncelleştirebilirsiniz [Azure kaynak Gezgini](https://resources.azure.com).  
+## <a name="use-azure-resource-explorer-to-update-an-app-service-environment"></a>Bir App Service Ortamı güncelleştirmek için Azure Kaynak Gezgini kullanma
+Alternatif olarak, [Azure Kaynak Gezgini](https://resources.azure.com)kullanarak App Service ortamı güncelleştirebilirsiniz.  
 
-1. Kaynak Gezgini'nde, App Service ortamı için düğüme gidin (**abonelikleri** > **resourceGroups** > **sağlayıcıları**  >  **Microsoft.Web** > **hostingEnvironments**). Güncelleştirmek istediğiniz belirli App Service Ortamı'ye tıklayın.
-2. Sağ bölmede **okuma/yazma** kaynak Gezgini'nde düzenleme etkileşimli izin vermek için üst araç çubuğunda.  
-3. Mavi tıklayın **Düzenle** düğmesi Resource Manager şablonu düzenlenebilir hale getirin.
-4. Sağ bölmede alt kısmına kaydırın. **ClusterSettings** burada girin veya değerini güncelleştirme çok altındaki bir özniteliktir.
-5. Yazın (veya kopyalayıp yapıştırın) istediğiniz yapılandırma değerleri dizisi **clusterSettings** özniteliği.  
-6. Yeşil tıklayın **PUT** , düğme için App Service ortamı değişikliği kaydetmek için sağ bölmenin üstünde bulunan.
+1. Kaynak Gezgini, App Service Ortamı düğüme**gidin (** **Microsoft. Web** > **hostingenvironments** >  > **ResourceGroups** > **providers** . Sonra güncelleştirmek istediğiniz belirli App Service Ortamı tıklayın.
+2. Sağ bölmede, Kaynak Gezgini ' de etkileşimli düzenlemelere izin vermek için üstteki araç çubuğundan **oku/yaz** ' a tıklayın.  
+3. Kaynak Yöneticisi şablonunu düzenlenebilir hale getirmek için mavi **Düzenle** düğmesine tıklayın.
+4. Sağ bölmenin en altına kaydırın. **Clustersettings** özniteliği en altta olduğundan, değerini girebilir veya güncelleştirebilirsiniz.
+5. **Clustersettings** özniteliğinde istediğiniz yapılandırma değerlerinin dizisini yazın (veya kopyalayıp yapıştırın).  
+6. Değişikliği App Service Ortamı uygulamak için sağ bölmenin en üstünde bulunan yeşil **PUT** düğmesine tıklayın.
 
-Değişiklik gönderdiğiniz ancak değişikliğin etkili olması için App Service Ortamı'nda ön uçlar sayısıyla çarpımı yaklaşık 30 dakika sürer.
-Örneğin, bir App Service ortamı dört ön uçlar varsa, tamamlanması yapılandırma güncelleştirmesi için yaklaşık iki saat sürer. Yapılandırma değişikliği kullanıma sunulacaktır, ancak başka bir ölçeklendirme işlemleri veya yapılandırma değişiklik işlemleri App Service Ortamı'nda yer alabilir.
+Ancak değişikliği gönderdiğinizde, değişikliğin etkili olması için App Service Ortamı ön uçların sayısına göre yaklaşık 30 dakika çarpılır.
+Örneğin, bir App Service Ortamı ön uçları varsa, yapılandırma güncelleştirmesinin tamamlanması yaklaşık olarak iki saat sürer. Yapılandırma değişikliği kullanıma alındığı sırada, App Service Ortamı başka ölçeklendirme işlemleri veya yapılandırma değişikliği işlemleri gerçekleşmiyor.
 
-## <a name="disable-tls-10-and-tls-11"></a>TLS 1.0 ve TLS 1.1 devre dışı bırak
+## <a name="disable-tls-10-and-tls-11"></a>TLS 1,0 ve TLS 1,1 'yi devre dışı bırakın
 
-Bir uygulama tarafından temelinde TLS ayarları yönetmek istediğiniz sonra ile sağlanan yönergeleri kullanarak [zorunlu TLS ayarları](https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-custom-ssl#enforce-tls-versions) belgeleri. 
+Uygulama temelinde bir uygulamadaki TLS ayarlarını yönetmek istiyorsanız, [TLS ayarlarını zorla](../configure-ssl-bindings.md#enforce-tls-versions) belgeleriyle verilen Kılavuzu kullanabilirsiniz. 
 
-Tüm bir ase'deki uygulamalar için tüm gelen TLS 1.0 ve TLS 1.1 trafiği devre dışı bırakmak isterseniz, aşağıdakileri ayarlayabilirsiniz **clusterSettings** girişi:
+Ao 'daki tüm uygulamalar için tüm gelen TLS 1,0 ve TLS 1,1 trafiğini devre dışı bırakmak istiyorsanız, aşağıdaki **Clustersettings** girişini ayarlayabilirsiniz:
 
         "clusterSettings": [
             {
@@ -78,10 +77,10 @@ Tüm bir ase'deki uygulamalar için tüm gelen TLS 1.0 ve TLS 1.1 trafiği devre
             }
         ],
 
-1.0 ayarının adı söylüyor ancak yapılandırıldığında, TLS 1.0 ve TLS 1.1 bırakır.
+Ayarın adı 1,0 diyor ancak yapılandırıldığında, hem TLS 1,0 hem de TLS 1,1 'yi devre dışı bırakır.
 
-## <a name="change-tls-cipher-suite-order"></a>TLS şifre paketi sırasını değiştir
-Bunlar, sunucu tarafından anlaşılan şifrelemeleri listesini değiştirebilirsiniz ve bu değiştirerek gerçekleştirilebilir müşterilerden başka bir soru ise **clusterSettings** aşağıda gösterildiği gibi. Şifre paketleri kullanılabilir listesini alınabilir [bu MSDN makalesinde](https://msdn.microsoft.com/library/windows/desktop/aa374757\(v=vs.85\).aspx).
+## <a name="change-tls-cipher-suite-order"></a>TLS şifre paketi sırasını değiştirme
+Müşterilerden başka bir soru, sunucusu tarafından anlaşmalı şifre listesini değiştirebilir ve bu, aşağıda gösterildiği gibi **Clustersettings** değiştirilerek elde edilebilir. Kullanılabilir şifre paketlerinin listesi [Bu MSDN makalesinden](https://msdn.microsoft.com/library/windows/desktop/aa374757\(v=vs.85\).aspx)alınabilir.
 
         "clusterSettings": [
             {
@@ -91,12 +90,12 @@ Bunlar, sunucu tarafından anlaşılan şifrelemeleri listesini değiştirebilir
         ],
 
 > [!WARNING]
-> SChannel anlayamıyor şifre paketi için yanlış değerleri ayarlarsanız, tüm TLS iletişim sunucunuza çalışmamaya başlayabilir. Böyle bir durumda kaldırmanız gerekecek *FrontEndSSLCipherSuiteOrder* girdisinden **clusterSettings** ve varsayılan şifre paketi geri dönmek için güncelleştirilmiş Resource Manager şablonu gönderin Ayarlar.  Lütfen bu işlevleri dikkatli kullanın.
+> SChannel 'nin anlayamediği şifre paketi için yanlış değerler ayarlandıysa, sunucunuza yönelik tüm TLS iletişimleri çalışmayı durdurabilir. Böyle bir durumda, *Frontendsslciphersuiteorder* girişini **clustersettings** 'ten kaldırmalı ve varsayılan şifre paketi ayarlarına geri dönmek için güncelleştirilmiş Kaynak Yöneticisi şablonunu göndermeniz gerekir.  Lütfen bu işlevselliği dikkatle kullanın.
 > 
 > 
 
-## <a name="get-started"></a>başlarken
-Azure hızlı başlangıç Resource Manager şablonu sitenin temel tanımını şablonla içerir [bir App Service ortamı oluşturma](https://azure.microsoft.com/documentation/templates/201-web-app-ase-create/).
+## <a name="get-started"></a>Kullanmaya başlayın
+Azure hızlı başlangıç Kaynak Yöneticisi şablonu sitesi, [bir App Service ortamı oluşturmak](https://azure.microsoft.com/documentation/templates/201-web-app-ase-create/)için temel tanımına sahip bir şablon içerir.
 
 <!-- LINKS -->
 

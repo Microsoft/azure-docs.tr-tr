@@ -1,6 +1,6 @@
 ---
-title: RBAC kullanarak dış kullanıcılar için Azure kaynaklarına erişimi yönetme | Microsoft Docs
-description: Rol tabanlı erişim denetimi (RBAC) kullanarak bir kuruluş için dış kullanıcılar için Azure kaynaklarına erişimi yönetmeyi öğrenin.
+title: RBAC kullanarak dış Konuk kullanıcılar için Azure kaynaklarına erişimi yönetme | Microsoft Docs
+description: Rol tabanlı erişim denetimi (RBAC) kullanarak bir kuruluşa dış kullanıcılar için Azure kaynaklarına erişimi yönetmeyi öğrenin.
 services: active-directory
 documentationcenter: ''
 author: rolyon
@@ -12,123 +12,198 @@ ms.devlang: ''
 ms.topic: conceptual
 ms.tgt_pltfrm: ''
 ms.workload: identity
-ms.date: 03/20/2018
+ms.date: 09/12/2019
 ms.author: rolyon
 ms.reviewer: skwan
 ms.custom: it-pro
-ms.openlocfilehash: d919453816436366c00dde506210a2ed38cc69b7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5ed9088bcc5776fe1fb0d09e6ae771adabb1b879
+ms.sourcegitcommit: 4f3f502447ca8ea9b932b8b7402ce557f21ebe5a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65952215"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71802678"
 ---
-# <a name="manage-access-to-azure-resources-for-external-users-using-rbac"></a>RBAC kullanarak dış kullanıcılar için Azure kaynaklarına erişimi yönetme
+# <a name="manage-access-to-azure-resources-for-external-guest-users-using-rbac"></a>RBAC kullanarak dış Konuk kullanıcılar için Azure kaynaklarına erişimi yönetme
 
-Rol tabanlı erişim denetimi (RBAC) dış ortak çalışanlar, satıcılar, ortamınızda belirli kaynakların ancak mutlaka tüm erişmesi gereken freelancers ile çalışırken büyük kuruluşlar için ve SMB'ler için daha iyi güvenlik yönetimi sağlar. Altyapı veya herhangi bir faturalandırma ile ilgili kapsam. Bir Azure aboneliğine sahip olan esnekliği yönetici hesabı (Hizmet Yöneticisi rolü abonelik düzeyinde) tarafından yönetilen ve birden çok kullanıcı aynı abonelik altında ancak tüm yönetim haklarına sahip olmayan için çalışmaya davet RBAC sağlar .
+Rol tabanlı erişim denetimi (RBAC), büyük kuruluşlar için daha iyi güvenlik yönetimine olanak tanır. böylece, ortamınızda belirli kaynaklara erişmesi gereken harici ortak çalışanlar, satıcılar veya freelancers ile çalışan küçük ve orta ölçekli işletmeler, ancak tüm altyapının veya faturalandırmayla ilgili kapsamların olması gerekmez. Dış Konuk kullanıcılarıyla işbirliği yapmak için [Azure ACTIVE DIRECTORY B2B](../active-directory/b2b/what-is-b2b.md) içindeki özellikleri kullanabilirsiniz ve yalnızca konuk kullanıcıların ortamınızda ihtiyaç duyduğu izinleri vermek için RBAC 'yi kullanabilirsiniz.
 
-> [!NOTE]
-> Office 365 aboneliği veya Azure Active Directory lisansları (örneğin: Yönetim Merkezi için RBAC kullanarak uygun olmayan Microsoft 365'ten erişimi Azure Active Directory) sağlandı.
+## <a name="when-would-you-invite-guest-users"></a>Konuk kullanıcıları ne zaman davet edebilir?
 
-## <a name="assign-rbac-roles-at-the-subscription-scope"></a>Abonelik kapsamında RBAC Rolleri Ata
+Aşağıda, Konuk kullanıcıları kuruluşunuza davet edebilir ve izin vermeniz halinde birkaç örnek senaryo verilmiştir:
 
-RBAC kullanılan (ancak bunlarla sınırlı olmamak üzere olduğunda) iki yaygın örnekleri vardır:
+- Yalnızca bir proje için Azure kaynaklarınıza erişmek üzere bir e-posta hesabına sahip olan bir dış şirket içi satıcıya izin verin.
+- Bir dış iş ortağının belirli kaynakları veya tüm abonelikleri yönetmesine izin verin.
+- Sorunları gidermek için kuruluşunuzda Azure kaynağına geçici olarak erişmek için (Microsoft desteği gibi) destek mühendislerine izin verin.
 
-* Dış kullanıcıların kuruluşların belirli kaynaklara ya da tüm abonelik yönetmek için (yönetici kullanıcının Azure Active Directory kiracısı parçası değil) davet
-* Kuruluş (bunlar, kullanıcının Azure Active Directory kiracısı parçası olan) ancak farklı ekipler veya tam bir aboneliğe veya belirli bir kaynak grupları veya kaynak kapsamları ortamında ayrıntılı erişim gereken gruplarının parçası içinde kullanıcılar ile çalışma
+## <a name="permission-differences-between-member-users-and-guest-users"></a>Üye kullanıcılar ve Konuk kullanıcılar arasındaki izin farklılıkları
 
-## <a name="grant-access-at-a-subscription-level-for-a-user-outside-of-azure-active-directory"></a>Azure Active Directory dışındaki bir kullanıcı için erişim verme abonelik düzeyinde
+Bir dizinin (üye kullanıcılar) yerel üyeleri, başka bir dizinden B2B işbirliği konuğunu (Konuk kullanıcılar) olarak davet edilen kullanıcılardan farklı izinlere sahiptir. Örneğin, Üyeler kullanıcısı, Konuk kullanıcılar kısıtlamalı dizin izinlerine sahip olan neredeyse tüm dizin bilgilerini okuyabilir. Üye kullanıcılar ve Konuk kullanıcılar hakkında daha fazla bilgi için bkz. [Azure Active Directory varsayılan kullanıcı Izinleri nelerdir?](../active-directory/fundamentals/users-default-permissions.md).
 
-RBAC rollerini yalnızca verilebilir **sahipleri** abonelik. Bu role sahip bir kullanıcı, önceden atanmış veya Azure aboneliğini oluşturan bu nedenle, yönetici oturum açmanız gerekir.
+## <a name="add-a-guest-user-to-your-directory"></a>Dizininize konuk kullanıcı ekleme
 
-Yönetici oturum açtıktan sonra Azure portalından "Abonelikler" ve ardından istediğiniz birini seçin.
-![Azure portalında abonelik dikey](./media/role-assignments-external-users/0.png) yönetici kullanıcı Azure aboneliği satın aldıysanız, varsayılan olarak, kullanıcı olarak görünecek **Hesap Yöneticisi**, bu abonelik rol alınıyor. Azure aboneliği rolleri hakkında daha fazla bilgi için bkz. [ekleme veya değiştirme Azure aboneliği yöneticileri](../billing/billing-add-change-azure-subscription-administrator.md).
+Azure Active Directory sayfasını kullanarak dizininize Konuk Kullanıcı eklemek için bu adımları izleyin.
 
-Bu örnekte, kullanıcı "alflanigan@outlook.com" olan **sahibi** "ücretsiz deneme sürümü" aboneliğinde AAD Kiracı "varsayılan Kiracı Azure". Bu kullanıcı ilk Microsoft Account "Outlook" ile Azure aboneliğini oluşturan olduğundan (Microsoft Account = Outlook, Canlı vb.) bu kiracıda eklenen tüm kullanıcılar için varsayılan etki alanı adı **"\@ alflaniganuoutlook.onmicrosoft.com"** . Tasarım gereği, yeni etki alanının sözdizimi Kiracı oluşturan kullanıcının kullanıcı adı ve etki alanı adını bir araya getirilmesi ve uzantı ekleyerek biçimlendirilmiş **". onmicrosoft.com"** .
-Ayrıca, kullanıcılar oturum kiracıdaki özel etki alanı ekleme ve yeni Kiracı için doğruladıktan sonra oturum açabilir. Azure Active Directory kiracısında özel etki alanı doğrulama hakkında daha fazla bilgi için bkz. [dizininize özel etki alanı adı ekleme](../active-directory/fundamentals/add-custom-domain.md).
+1. Kuruluşunuzun dış işbirliği ayarlarının, konukları davet etmenize izin verilecek şekilde yapılandırıldığından emin olun. Daha fazla bilgi için bkz. [B2B dış Işbirliğini etkinleştirme ve konukları kimlerin davet edebileceğini yönetme](../active-directory/b2b/delegate-invitations.md).
 
-Bu örnekte, yalnızca kullanıcıların etki alanı adıyla "Varsayılan Kiracı Azure" dizinini içeren "\@alflanigan.onmicrosoft.com".
+1. Azure portal, **Azure Active Directory** > **Kullanıcı** > **Yeni Konuk Kullanıcı**' ya tıklayın.
 
-Abonelik seçtikten sonra yönetici kullanıcı tıklatmalısınız **erişim denetimi (IAM)** ardından **Yeni Rol Ekle**.
+    ![Azure portal yeni Konuk Kullanıcı özelliği](./media/role-assignments-external-users/invite-guest-user.png)
 
-![Azure portalında erişim denetimi IAM özelliği](./media/role-assignments-external-users/1.png)
+1. Yeni bir Konuk Kullanıcı eklemek için adımları izleyin. Daha fazla bilgi için [Azure portal Azure ACTIVE DIRECTORY B2B işbirliği kullanıcıları ekleme](../active-directory/b2b/add-users-administrator.md#add-guest-users-to-the-directory)bölümüne bakın.
 
-![erişim denetimi IAM Özelliği Azure portalında yeni kullanıcı ekleme](./media/role-assignments-external-users/2.png)
+Bir konuk kullanıcıyı dizine ekledikten sonra, Konuk kullanıcıyı paylaşılan bir uygulamaya doğrudan bir bağlantı gönderebilirsiniz veya Konuk Kullanıcı davet e-postasında kullanım URL 'sini tıklatabilir.
 
-Sonraki adım, atanacak rol ve kullanıcı kim RBAC rolü atanmış seçeneğini belirlemektir. İçinde **rol** açılır menüsünde, yönetici kullanıcı, Azure'da kullanılabilen yalnızca yerleşik RBAC rolleri görür. Her rol ve bunların atanabilir kapsamlarla açıklamalarını ayrıntılı için bkz: [Azure kaynakları için yerleşik roller](built-in-roles.md).
+![Konuk Kullanıcı davet e-postası](./media/role-assignments-external-users/invite-email.png)
 
-Yönetici kullanıcı, daha sonra dış kullanıcının e-posta adresi eklemeniz gerekir. Beklenen davranış mevcut kiracıda değil gösterilecek dış kullanıcı içindir. Dış kullanıcıyı davet sonra bunlar altında görünür olacak **abonelikler > erişim denetimi (IAM)** abonelik kapsamında bir RBAC rolü atanmış olan tüm geçerli kullanıcılar ile.
+Konuk kullanıcının dizininize erişebilmesi için davet işlemini tamamlaması gerekir.
 
-![Yeni RBAC rolü için izinleri ekleme](./media/role-assignments-external-users/3.png)
+![Konuk Kullanıcı daveti İnceleme izinleri](./media/role-assignments-external-users/invite-review-permissions.png)
 
-![Abonelik düzeyinde RBAC rolleri listesi](./media/role-assignments-external-users/4.png)
+Davet işlemi hakkında daha fazla bilgi için bkz. [Azure ACTIVE DIRECTORY B2B işbirliği daveti](../active-directory/b2b/redemption-experience.md)kullanım.
 
-Kullanıcı "chessercarlton@gmail.com" olarak davet bir **sahibi** "Ücretsiz deneme" aboneliği için. Dış kullanıcıyı davet gönderdikten sonra etkinleştirme bağlantısını içeren bir e-posta onayı alırsınız.
-![e-posta davetiyesi RBAC rolü](./media/role-assignments-external-users/5.png)
+## <a name="grant-access-to-a-guest-user"></a>Konuk kullanıcıya erişim izni verme
 
-Kuruluş dışı olduğundan, yeni kullanıcı herhangi bir mevcut özniteliği "Varsayılan Kiracı Azure" dizininde yok. Dış kullanıcı izin verdiği sonra oluşturulurlar abonelikle ilişkili dizine kaydedilmesi, bir role atanmış.
+RBAC 'de, erişim izni vermek için bir rol atarsınız. Konuk kullanıcıya erişim vermek için üye Kullanıcı, Grup, hizmet sorumlusu veya yönetilen kimlik ile [aynı adımları](role-assignments-portal.md#add-a-role-assignment) takip edersiniz. Farklı kapsamlarda Konuk kullanıcıya erişim sağlamak için bu adımları izleyin.
 
-![RBAC rolü için e-posta davetiyesi iletisi](./media/role-assignments-external-users/6.png)
+1. Azure portalında **Tüm hizmetler**’e tıklayın.
 
-Dış kullanıcı olarak artık Azure Active Directory kiracısı ve bu dış kullanıcı gösterir, Azure portalında görüntülenebilir.
+1.  Erişimin uygulandığı kaynak kümesini (kapsam olarak da bilinir) seçin. Örneğin, **Yönetim grupları**, **abonelikler**, **kaynak grupları**veya bir kaynak seçebilirsiniz.
 
-![Kullanıcılar dikey penceresinde azure active Directory'yi Azure portalı](./media/role-assignments-external-users/7.png)
+1. Belirli kaynağa tıklayın.
 
-İçinde **kullanıcılar** görünümü, dış kullanıcılar, Azure portalında farklı simge türü tarafından tanınan.
+1. **Erişim denetimi (IAM)** öğesine tıklayın.
 
-Ancak, vermiş **sahibi** veya **katkıda bulunan** bir dış kullanıcı erişimi **abonelik** kapsamı, yönetici kullanıcının dizine erişim sürece izin vermiyor **Genel yönetici** verir. Kullanıcı ekrana içinde **kullanıcı türü**, iki ortak parametreleri olan **üye** ve **Konuk** tanımlanabilir. Bir konuk bir kullanıcı bir dış kaynaktan dizine davet ederken dizinde kayıtlı bir kullanıcı bir üyesidir. Daha fazla bilgi için [nasıl Azure Active Directory yöneticileri ekleme B2B işbirliği kullanıcıları](../active-directory/active-directory-b2b-admin-add-users.md).
+    Aşağıdaki ekran görüntüsünde, bir kaynak grubu için erişim denetimi (ıAM) dikey penceresi örneği gösterilmektedir. Burada herhangi bir erişim denetimi değişikliği yaparsanız, bu değişiklikler yalnızca kaynak grubuna uygulanır.
 
-> [!NOTE]
-> Portalda kimlik bilgilerini girdikten sonra emin olun, doğru dizinde oturum açmak için dış kullanıcıyı seçer. Aynı kullanıcı birden çok dizini erişimi kullanıcı adı, Azure portalının sağ üst taraflarında bulunur tıklayarak bunları birini seçin ve ardından açılır listeden uygun dizini seçin.
+    ![Kaynak grubu için erişim denetimi (ıAM) dikey penceresi](./media/role-assignments-external-users/access-control-resource-group.png)
 
-Dizinde Konuk olan sırasında dış kullanıcı Azure aboneliği için tüm kaynakları yönetebilir, ancak dizinine erişilemiyor.
+1. Bu kapsamdaki tüm rol atamalarını görüntülemek için **rol atamaları** sekmesine tıklayın.
 
-![Azure active Directory'yi Azure portalına kısıtlı erişim](./media/role-assignments-external-users/9.png)
+1. Rol ataması Ekle bölmesini açmak için @no__t **Ekle**-1**rol ataması Ekle** ' ye tıklayın.
 
-Azure Active Directory ve Azure aboneliği diğer Azure kaynakları gibi bir üst-alt ilişkisi yok (örneğin: sanal makineler, sanal ağlar, web uygulamaları, depolama vb.) ile bir Azure aboneliğine sahip. Tüm ikinci oluşturulmuş, yönetilen ve Azure aboneliğinin bir Azure dizinine erişimi yönetmek için kullanılan bir Azure aboneliği altında faturalandırılırken. Daha fazla bilgi için [nasıl bir Azure aboneliği Azure AD ile ilgili](../active-directory/fundamentals/active-directory-how-subscriptions-associated-directory.md).
+    Rol atama izniniz yoksa rol ataması Ekle seçeneği devre dışı bırakılır.
 
-Tüm yerleşik RBAC rolleri gelen **sahibi** ve **katkıda bulunan** katkıda bulunan oluşturun ve yeni RBAC rollerini silme emin olmasına fark ortamındaki tüm kaynakların tam yönetim erişimi sunar. . Bir yerleşik roller ister **sanal makine Katılımcısı** yalnızca ada göre bakılmaksızın belirtilen kaynaklar için tam yönetim erişimi sunan **kaynak grubu** içinde oluşturulan.
+    ![Menü ekle](./media/role-assignments-external-users/add-menu.png)
 
-Yerleşik RBAC rolü atama **sanal makine Katılımcısı** kullanıcı rolü atanmış bir abonelik düzeyinde anlamına gelir:
+1. **Rol** açılan listesinde **Sanal Makine Katılımcısı** gibi bir rol seçin.
 
-* Tüm sanal makineler bakılmaksızın kendi dağıtım tarihi ve bunlar parçası olan kaynak grupları görüntüleyebilir
-* Abonelikte sanal makinelerin tam yönetim erişimi olan
-* Diğer kaynak türlerini abonelikte görüntüleyemezsiniz.
-* Faturalandırma açısından değişiklikleri çalışamaz
+1. **Seç** listesinde Konuk kullanıcıyı seçin. Kullanıcıyı listede görmüyorsanız, **Select** kutusunu yazarak görünen adlar, e-posta adresleri ve nesne tanımlayıcıları için dizinde arama yapabilirsiniz.
 
-## <a name="assign-a-built-in-rbac-role-to-an-external-user"></a>Bir dış kullanıcı için bir yerleşik RBAC rolü atayın
+   ![Rol atama bölmesi Ekle](./media/role-assignments-external-users/add-role-assignment.png)
 
-Bu test, dış kullanıcı farklı bir senaryo için "alflanigan@gmail.com" olarak eklenen bir **sanal makine Katılımcısı**.
+1. Rolü seçili kapsamda atamak için **Kaydet** ' e tıklayın.
 
-![sanal makine Katılımcısı yerleşik rolü](./media/role-assignments-external-users/11.png)
+    ![Sanal makine katılımcısı için rol ataması](./media/role-assignments-external-users/access-control-role-assignments.png)
 
-Bu yerleşik rolü bu dış kullanıcı için normal davranış görebilir ve yalnızca sanal makineler ve bitişik Resource Manager yalnızca kaynaklarını dağıtırken gereken yönetme sağlamaktır. Bu sınırlı roller, tasarım gereği, yalnızca Azure portalında oluşturulan düşen kaynaklarına erişim sunar.
+## <a name="grant-access-to-a-guest-user-not-yet-in-your-directory"></a>Henüz dizininizde olmayan bir konuk kullanıcısına erişim izni verin
 
-![Azure portalında sanal makine katkıda bulunan rolüne genel bakış](./media/role-assignments-external-users/12.png)
+RBAC 'de, erişim izni vermek için bir rol atarsınız. Konuk kullanıcıya erişim vermek için üye Kullanıcı, Grup, hizmet sorumlusu veya yönetilen kimlik ile [aynı adımları](role-assignments-portal.md#add-a-role-assignment) takip edersiniz.
 
-## <a name="grant-access-at-a-subscription-level-for-a-user-in-the-same-directory"></a>Aynı dizinde bir kullanıcının erişim verme abonelik düzeyinde
+Konuk Kullanıcı henüz dizininizde değilse, kullanıcıyı doğrudan rol ataması Ekle bölmesinden davet edebilirsiniz.
 
-İşlem akışını, bir dış kullanıcı ekleme ile aynıdır, hem kullanıcı yanı sıra, RBAC rolü verme yönetici açısından rolüne erişim verilmeden. Buradaki fark, Abonelikteki tüm kaynak kapsamlar oturum açtıktan sonra Panoda kullanılabilir olarak davet edilen kullanıcının tüm e-posta Davetleri almaz ' dir.
+1. Azure portalında **Tüm hizmetler**’e tıklayın.
 
-## <a name="assign-rbac-roles-at-the-resource-group-scope"></a>Kaynak grubu kapsamındaki RBAC Rolleri Ata
+1.  Erişimin uygulandığı kaynak kümesini (kapsam olarak da bilinir) seçin. Örneğin, **Yönetim grupları**, **abonelikler**, **kaynak grupları**veya bir kaynak seçebilirsiniz.
 
-Bir RBAC rolü atama bir **kaynak grubu** kapsamına sahip iki kullanıcı türleri - harici veya dahili (aynı dizine parçası) için abonelik düzeyinde rol atamak için özdeş bir işlem. RBAC rolü atanmış kullanıcılar olduğu kaynak grubu, erişim atanmış yalnızca kendi ortamlarında görmek için **kaynak grupları** Azure portalında simgesi.
+1. Belirli kaynağa tıklayın.
 
-## <a name="assign-rbac-roles-at-the-resource-scope"></a>Kaynak kapsamda RBAC Rolleri Ata
+1. **Erişim denetimi (IAM)** öğesine tıklayın.
 
-Azure'da bir kaynak kapsamda bir RBAC rolü atama abonelik düzeyinde veya her iki senaryo için aynı iş akışını izleyerek kaynak grubu düzeyinde rol atamak için benzer bir işlem var. RBAC rolü atanmış kullanıcılar için ya da erişim, atanmış öğeler yeniden görebilir **tüm kaynakları** sekmesinde veya doğrudan panonun.
+1. Bu kapsamdaki tüm rol atamalarını görüntülemek için **rol atamaları** sekmesine tıklayın.
 
-Hem kaynak grup kapsamı veya kaynak kapsamında RBAC için önemli bir yönüdür doğru dizinde mi oturum açtığınızdan emin olmak kullanıcılara yöneliktir.
+1. Rol ataması Ekle bölmesini açmak için @no__t **Ekle**-1**rol ataması Ekle** ' ye tıklayın.
 
-![Azure portalında Directory oturum açma](./media/role-assignments-external-users/13.png)
+    ![Menü ekle](./media/role-assignments-external-users/add-menu.png)
 
-## <a name="assign-rbac-roles-for-an-azure-active-directory-group"></a>RBAC rolleri için bir Azure Active Directory grubuna atayın
+1. **Rol** açılan listesinde **Sanal Makine Katılımcısı** gibi bir rol seçin.
 
-Azure'da üç farklı kapsamlardaki RBAC kullanarak tüm senaryolar yöneten, dağıtan ve kişisel abonelik yönetimine gerek kalmadan atanmış bir kullanıcısı olarak çeşitli kaynakları yönetme yükselmesi sunar. Bakılmaksızın bir aboneliğe, kaynak grubuna ya da kaynak kapsamı için RBAC rolü atanmış, erişim için kullanıcıların sahip olduğu bir Azure aboneliği altında hakkında daha fazla atanmış kullanıcılar tarafından oluşturulan tüm kaynakları faturalandırılır. Bu şekilde, faturalama, tüm Azure aboneliğiniz için yönetici izinleri olan kullanıcıları var. eksiksiz bir genel bakış tüketimi, bakılmaksızın kimin kaynakları yönetme
+1. **Seç** listesinde, davet etmek istediğiniz kişinin e-posta adresini yazın ve bu kişiyi seçin.
 
-Büyük kuruluşlar için RBAC rollerini yönetici kullanıcı teams veya tüm Departmanlar için bu nedenle dikkate alarak, her bir kullanıcı için değil ayrı ayrı ayrıntılı erişim vermek istediğini açısından ele Azure Active Directory grupları ile aynı şekilde uygulanabilir Bu isteğe bağlı olarak son derece zaman ve yönetim etkin. Bu örneği göstermek üzere **katkıda bulunan** rolü, abonelik düzeyinde kiracısındaki gruplardan birine eklendi.
+   ![Rol Ekleme atama bölmesinde Konuk kullanıcıyı davet et](./media/role-assignments-external-users/add-role-assignment-new-guest.png)
 
-![AAD grupları için RBAC rolü Ekle](./media/role-assignments-external-users/14.png)
+1. Konuk kullanıcıyı dizininize eklemek, rolü atamak ve davet göndermek için **Kaydet** ' e tıklayın.
 
-Sağlanan ve yönetilen yalnızca Azure Active Directory içinde güvenlik gruplarını bu gruplarıdır.
+    Birkaç dakika sonra rol atamasının ve davet hakkındaki bilgilerin bir bildirimini görürsünüz.
 
+    ![Rol ataması ve davet edilen Kullanıcı bildirimi](./media/role-assignments-external-users/invited-user-notification.png)
+
+1. Konuk kullanıcıyı el ile davet etmek için, bildirimde sağ tıklayın ve davet bağlantısını kopyalayın. Davet işlemini başlattığı için davet bağlantısına tıklamayın.
+
+    Davet bağlantısı aşağıdaki biçimde olacaktır:
+
+    `https://invitations.microsoft.com/redeem/...`
+
+1. Davet işlemini tamamlamaya yönelik davet bağlantısını Konuk kullanıcıya gönderin.
+
+    Davet işlemi hakkında daha fazla bilgi için bkz. [Azure ACTIVE DIRECTORY B2B işbirliği daveti](../active-directory/b2b/redemption-experience.md)kullanım.
+
+## <a name="remove-a-guest-user-from-your-directory"></a>Bir konuk kullanıcıyı dizininizden kaldırma
+
+Konuk kullanıcıyı bir dizinden kaldırmadan önce, önce bu Konuk Kullanıcı için herhangi bir rol atamasını kaldırmanız gerekir. Konuk kullanıcıyı bir dizinden kaldırmak için aşağıdaki adımları izleyin.
+
+1. **Erişim denetimi (IAM)** , Konuk kullanıcının bir rol ataması olduğu yönetim grubu, abonelik, kaynak grubu veya kaynak gibi bir kapsamda açın.
+
+1. Tüm rol atamalarını görüntülemek için **rol atamaları** sekmesine tıklayın.
+
+1. Rol atamaları listesinde, Konuk kullanıcının yanına, kaldırmak istediğiniz rol atamasını içeren bir onay işareti ekleyin.
+
+   ![Rol atamasını Kaldır](./media/role-assignments-external-users/remove-role-assignment-select.png)
+
+1. **Kaldır**' a tıklayın.
+
+   ![Rol atamasını kaldırma iletisi](./media/role-assignments-external-users/remove-role-assignment.png)
+
+1. Görüntülenen rol atamasını Kaldır iletisinde **Evet**' e tıklayın.
+
+1. Sol gezinti çubuğunda **Azure Active Directory** > **Kullanıcı**' ya tıklayın.
+
+1. Kaldırmak istediğiniz Konuk Kullanıcı ' ya tıklayın.
+
+1. **Sil**'e tıklayın.
+
+   ![Konuk kullanıcıyı sil](./media/role-assignments-external-users/delete-guest-user.png)
+
+1. Görüntülenen silme iletisinde **Evet**' e tıklayın.
+
+## <a name="troubleshoot"></a>Sorun giderme
+
+### <a name="guest-user-cannot-browse-the-directory"></a>Konuk Kullanıcı dizine gözatamıyorum
+
+Konuk kullanıcıların kısıtlı dizin izinleri vardır. Örneğin, Konuk kullanıcılar dizine gözatıp gruplar veya uygulamalar arayamaz. Daha fazla bilgi için bkz. [Azure Active Directory varsayılan kullanıcı izinleri nelerdir?](../active-directory/fundamentals/users-default-permissions.md).
+
+![Konuk Kullanıcı, bir dizindeki kullanıcılara gözatamıyorum](./media/role-assignments-external-users/directory-no-users.png)
+
+Konuk kullanıcının dizinde ek ayrıcalıkları olması gerekiyorsa, Konuk kullanıcıya bir dizin rolü atayabilirsiniz. Aslında bir Konuk kullanıcının dizininiz için tam okuma erişimine sahip olmasını istiyorsanız, Konuk kullanıcıyı Azure AD 'de [Dizin okuyucuları](../active-directory/users-groups-roles/directory-assign-admin-roles.md) rolüne ekleyebilirsiniz. Daha fazla bilgi için bkz. [Azure Active Directory kiracınızdaki iş ortağı kuruluşlarından kullanıcılara Izin verme](../active-directory/b2b/add-guest-to-role.md).
+
+![Dizin okuyucuları rolü atama](./media/role-assignments-external-users/directory-roles.png)
+
+### <a name="guest-user-cannot-browse-users-groups-or-service-principals-to-assign-roles"></a>Konuk Kullanıcı, rol atamak için kullanıcılara, gruplara veya hizmet sorumlularına gözatamez
+
+Konuk kullanıcıların kısıtlı dizin izinleri vardır. Konuk Kullanıcı bir kapsamda [sahip](built-in-roles.md#owner) olsa bile, başka birine erişim vermek üzere bir rol ataması oluşturmaya çalıştıklarında Kullanıcı, Grup veya hizmet sorumlusu listesine gözatamazsınız.
+
+![Konuk Kullanıcı, rol atamak için güvenlik sorumlularına gözatamez](./media/role-assignments-external-users/directory-no-browse.png)
+
+Konuk Kullanıcı, bir kişinin dizinde tam oturum açma adını biliyorsa, erişim izni verebilir. Aslında bir Konuk kullanıcının dizininiz için tam okuma erişimine sahip olmasını istiyorsanız, Konuk kullanıcıyı Azure AD 'de [Dizin okuyucuları](../active-directory/users-groups-roles/directory-assign-admin-roles.md) rolüne ekleyebilirsiniz. Daha fazla bilgi için bkz. [Azure Active Directory kiracınızdaki iş ortağı kuruluşlarından kullanıcılara Izin verme](../active-directory/b2b/add-guest-to-role.md).
+
+### <a name="guest-user-cannot-register-applications-or-create-service-principals"></a>Konuk Kullanıcı, uygulamaları kaydedemiyor veya hizmet sorumluları oluşturamıyor
+
+Konuk kullanıcıların kısıtlı dizin izinleri vardır. Konuk kullanıcının uygulama kaydedebilmesi veya hizmet sorumluları oluşturması gerekiyorsa, Konuk kullanıcıyı Azure AD 'de [uygulama geliştirici](../active-directory/users-groups-roles/directory-assign-admin-roles.md) rolüne ekleyebilirsiniz. Daha fazla bilgi için bkz. [Azure Active Directory kiracınızdaki iş ortağı kuruluşlarından kullanıcılara Izin verme](../active-directory/b2b/add-guest-to-role.md).
+
+![Konuk Kullanıcı, uygulamaları kaydedemiyor](./media/role-assignments-external-users/directory-access-denied.png)
+
+### <a name="guest-user-does-not-see-the-new-directory"></a>Konuk Kullanıcı yeni dizini görmez
+
+Bir konuk kullanıcıya bir dizin erişimi verildiyse, ancak **Dizin + abonelik** bölmesine geçiş yapmaya çalıştıklarında Azure Portal listelenen yeni dizini görmüyorsanız, Konuk kullanıcının davet sürecini tamamladıklarından emin olun. Davet işlemi hakkında daha fazla bilgi için bkz. [Azure ACTIVE DIRECTORY B2B işbirliği daveti](../active-directory/b2b/redemption-experience.md)kullanım.
+
+### <a name="guest-user-does-not-see-resources"></a>Konuk Kullanıcı kaynakları görmez
+
+Bir konuk kullanıcıya bir dizin erişimi verildiyse, ancak Azure portal erişim izni verilen kaynakları görmüyorsanız, Konuk kullanıcının doğru dizini seçtiğinizden emin olun. Konuk kullanıcının birden çok dizine erişimi olabilir. Dizinler arasında geçiş yapmak için sol üst köşedeki **Dizin + abonelik**öğesine ve ardından uygun dizine tıklayın.
+
+![Azure portal dizinler + abonelikler bölmesi](./media/role-assignments-external-users/directory-subscription.png)
+
+## <a name="next-steps"></a>Sonraki adımlar
+
+- [Azure portal Azure Active Directory B2B işbirliği kullanıcıları ekleyin](../active-directory/b2b/add-users-administrator.md)
+- [Azure Active Directory B2B işbirliği kullanıcısının özellikleri](../active-directory/b2b/user-properties.md)
+- [B2B işbirliği davetiyesi e-postası öğeleri-Azure Active Directory](../active-directory/b2b/invitation-email-elements.md)
+- [Konuk kullanıcıyı ortak yönetici olarak ekleme](classic-administrators.md#adding-a-guest-user-as-a-co-administrator)

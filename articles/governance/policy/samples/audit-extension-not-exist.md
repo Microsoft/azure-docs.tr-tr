@@ -1,20 +1,16 @@
 ---
-title: Örnek - uzantı mevcut değilse denetim
-description: Bu örnek ilke tanımını içeren bir sanal makine uzantısı dağıtılmazsa denetler.
-author: DCtheGeek
-manager: carmonm
-ms.service: azure-policy
-ms.topic: sample
+title: Örnek-uzantının mevcut olup olmadığını denetleyin
+description: Bu örnek ilke tanımı, bir uzantının bir sanal makineyle dağıtılmadığını denetler.
 ms.date: 01/23/2019
-ms.author: dacoulte
-ms.openlocfilehash: cca8becc70602dc99e9c3fefc7b0600de4a8fc20
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.topic: sample
+ms.openlocfilehash: 72d7728ef89678998a5fc3726d643142e3842635
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60545622"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74071443"
 ---
-# <a name="sample---audit-if-extension-does-not-exist"></a>Örnek - uzantı mevcut değilse denetim
+# <a name="sample---audit-if-extension-does-not-exist"></a>Örnek-uzantının mevcut olup olmadığını denetleyin
 
 Bu ilke, sanal makine ile bir uzantı dağıtılmadıysa denetler. Dağıtılıp dağıtılmadığını görmek için uzantı yayımcısı ve türünü belirtirsiniz.
 
@@ -28,7 +24,7 @@ Bu ilke, sanal makine ile bir uzantı dağıtılmadıysa denetler. Dağıtılıp
 
 ## <a name="deploy-with-the-portal"></a>Portal ile dağıtma
 
-[![İlke örneği Azure'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FCompute%2Faudit-vm-extension%2Fazurepolicy.json)
+[![Ilke örneğini Azure 'a dağıtma](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/?feature.customportal=false&microsoft_azure_policy=true&microsoft_azure_policy_policyinsights=true&feature.microsoft_azure_security_policy=true&microsoft_azure_marketplace_policy=true#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-policy%2Fmaster%2Fsamples%2FCompute%2Faudit-vm-extension%2Fazurepolicy.json)
 
 ## <a name="deploy-with-powershell"></a>PowerShell ile dağıtma
 

@@ -1,104 +1,98 @@
 ---
-title: Azure İzleyici ile kaynak arasında sorgu | Microsoft Docs
-description: Bu makalede nasıl birden çok çalışma alanları ve App Insights uygulama kaynaklarda aboneliğinizde Sorgulayabileceğiniz açıklanır.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici ile kaynaklar arasında sorgu | Microsoft Docs
+description: Bu makalede, aboneliğinizdeki birden çok çalışma alanı ve App Insights uygulamasının kaynaklarında nasıl sorgu yapılacağı açıklanır.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 06/05/2019
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: 5e411182a26e370ef82a20e67ee18cedd5d96d86
-ms.sourcegitcommit: 2d3b1d7653c6c585e9423cf41658de0c68d883fa
+ms.date: 06/05/2019
+ms.openlocfilehash: e74c81956ab0590b8b7237d3ecf60ae242a43b73
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67296103"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72894481"
 ---
-# <a name="perform-cross-resource-log-queries-in-azure-monitor"></a>Azure İzleyici'de kaynaklar arası günlük sorguları gerçekleştirme  
+# <a name="perform-cross-resource-log-queries-in-azure-monitor"></a>Azure Izleyici 'de çapraz kaynak günlük sorguları gerçekleştirme  
 
-Daha önce Azure İzleyici ile yalnızca geçerli çalışma alanındaki verileri çözümleyebilir ve aboneliğinizde tanımlanmış birden çok çalışma alanında sorgu yapabilmenizi sınırlıdır.  Ayrıca, Application ınsights'ta doğrudan Application Insights ile web tabanlı uygulamanızın içinden veya Visual Studio'dan toplanan telemetri öğelerinin yalnızca arama yapabilirsiniz. Bu ayrıca yerel olarak operasyonel analiz etmek için sınama ve uygulama verileri birlikte hale.
+Daha önce Azure Izleyici ile, verileri yalnızca geçerli çalışma alanından çözümleyebilirsiniz ve aboneliğinizde tanımlanan birden çok çalışma alanında sorgulama yeteneğinizi sınırlı olursunuz.  Ayrıca, yalnızca Application Insights veya Visual Studio 'dan Application Insights doğrudan Web tabanlı uygulamanızdan toplanan telemetri öğelerini arayabilirsiniz. Bu, işletimsel ve uygulama verilerinin birlikte yerel olarak analiz edilmesi için de bir zorluk yaptı.
 
-Artık yalnızca birden fazla Log Analytics çalışma alanları, aynı zamanda aynı kaynak grubunu, başka bir kaynak grubu veya başka bir aboneliğe belirli bir Application Insights uygulamasından verileriniz üzerinde sorgulama yapabilirsiniz. İle verilerinizin sistem genelinde bir görünüm sağlar. Yalnızca bu tür bir sorgu gerçekleştirebileceğiniz [Log Analytics](portals.md).
+Artık yalnızca birden fazla Log Analytics çalışma alanında değil, aynı zamanda aynı kaynak grubundaki belirli bir Application Insights uygulamasından, başka bir kaynak grubunda veya başka bir abonelikte da sorgulama yapabilirsiniz. Bu, verilerinizin sistem genelinde bir görünümünü sağlar. Bu tür sorguları yalnızca [Log Analytics](portals.md)için gerçekleştirebilirsiniz.
 
-## <a name="cross-resource-query-limits"></a>Kaynaklar arası sorgu sınırları 
+## <a name="cross-resource-query-limits"></a>Çapraz kaynak sorgu limitleri 
 
-* Application Insights kaynaklarını ve Log Analytics çalışma alanları, tek bir sorguda dahil edebileceğiniz sayısı 100'e sınırlıdır.
-* Kaynaklar arası sorgu görünümü Tasarımcısı'nda desteklenmiyor. Log analytics'te sorgu yazar ve sabitleyebilirsiniz Azure panosuna için [günlük sorgusu görselleştirme](../learn/tutorial-logs-dashboards.md). 
-* Kaynaklar arası sorgu günlüğü uyarıları yeni desteklenen [scheduledQueryRules API](https://docs.microsoft.com/rest/api/monitor/scheduledqueryrules). Varsayılan olarak, Azure İzleyici kullanır [eski Log Analytics uyarı API](../platform/api-alerts.md) gelen geçiş yapmadığınız sürece, yeni günlük uyarı kuralları Azure portalından oluşturmak için [eski günlük uyarıları API](../platform/alerts-log-api-switch.md#process-of-switching-from-legacy-log-alerts-api). Anahtardan sonra yeni API, Azure portalında yeni uyarı kuralları için varsayılan olur ve kaynaklar arası sorgu günlük uyarı kuralları oluşturmanıza olanak tanır. Kullanarak anahtarı yapmadan kaynaklar arası sorgu günlüğü uyarı kuralları oluşturabilirsiniz [scheduledQueryRules API'si için Azure Resource Manager şablonu](../platform/alerts-log.md#log-alert-with-cross-resource-query-using-azure-resource-template) – ancak yine de bu uyarı kuralı yönetilebilir [scheduledQueryRules API](https://docs.microsoft.com/rest/api/monitor/scheduledqueryrules) ve Azure Portal'da değil.
+* Tek bir sorguya dahil edebilirsiniz Application Insights kaynak ve Log Analytics çalışma alanlarının sayısı 100 ile sınırlıdır.
+* Görünüm tasarımcısında çapraz kaynak sorgusu desteklenmez. Log Analytics bir sorgu yazabilir ve [günlük sorgusunu görselleştirmek](../learn/tutorial-logs-dashboards.md)için Azure panosuna sabitleyebilirsiniz. 
+* Log uyarılarındaki çapraz kaynak sorgusu, yeni [Scheduledqueryrules API](https://docs.microsoft.com/rest/api/monitor/scheduledqueryrules)'sinde desteklenir. Azure Izleyici, [eski günlük uyarıları API](../platform/alerts-log-api-switch.md#process-of-switching-from-legacy-log-alerts-api)'sinden geçiş yapmadığınız takdirde, varsayılan olarak, Azure Portal ' dan yeni günlük uyarı kuralları oluşturmak için [eskı Log Analytics uyarı API](../platform/api-alerts.md) 'sini kullanır. Anahtar sonrasında, yeni API Azure portal yeni uyarı kuralları için varsayılan olur ve çapraz kaynak sorgu günlüğü uyarı kuralları oluşturmanıza olanak sağlar. [Scheduledqueryrules API 'si için Azure Resource Manager şablonunu](../platform/alerts-log.md#log-alert-with-cross-resource-query-using-azure-resource-template) kullanarak anahtarı yapmadan çapraz kaynak sorgu günlüğü uyarı kuralları oluşturabilirsiniz, ancak bu uyarı kuralı, [SCHEDULEDQUERYRULES API 'si](https://docs.microsoft.com/rest/api/monitor/scheduledqueryrules) ile değil, Azure Portal .
 
 
-## <a name="querying-across-log-analytics-workspaces-and-from-application-insights"></a>Application ınsights ve Log Analytics çalışma alanları arasında sorgulama
-Sorgunuzu başka bir çalışma alanı başvurmak için kullanma [ *çalışma* ](https://docs.microsoft.com/azure/log-analytics/query-language/workspace-expression) tanımlayıcısı ve Application ınsights'tan bir uygulama için [ *uygulama* ](https://docs.microsoft.com/azure/log-analytics/query-language/app-expression)tanımlayıcısı.  
+## <a name="querying-across-log-analytics-workspaces-and-from-application-insights"></a>Log Analytics çalışma alanlarında ve Application Insights sorgulama
+Sorgunuzdaki başka bir çalışma alanına başvurmak için, [*çalışma alanı*](https://docs.microsoft.com/azure/log-analytics/query-language/workspace-expression) tanımlayıcısını kullanın ve Application Insights bir uygulama için [*uygulama*](https://docs.microsoft.com/azure/log-analytics/query-language/app-expression) tanımlayıcısı ' nı kullanın.  
 
-### <a name="identifying-workspace-resources"></a>Çalışma alanı kaynakları tanımlama
-Aşağıdaki örnekler, günlükleri özetlenen sayısını güncelleştirme tablosundan adlı bir çalışma alanına dönmek için Log Analytics çalışma alanları arasında sorguları gösterir. *contosoretail BT*. 
+### <a name="identifying-workspace-resources"></a>Çalışma alanı kaynaklarını tanımlama
+Aşağıdaki örnekler, *ContosoRetail-It*adlı bir çalışma alanındaki Update tablosundan güncelleştirme tablosundan özetlenen günlük sayısını döndürmek için Log Analytics çalışma alanları genelinde sorguları gösterir. 
 
-Bir çalışma alanı tanımlama yollarından biri kullanılarak gerçekleştirilebilir olabilir:
+Bir çalışma alanının tanımlanması çeşitli yollarla gerçekleştirilebilir:
 
-* Kaynak adı - bazen denir, çalışma alanının okunabilir bir ad olduğu *bileşen adı*. 
+* Kaynak adı-çalışma alanının, bazen *bileşen adı*olarak adlandırılan okunabilir bir adıdır. 
 
     `workspace("contosoretail-it").Update | count`
- 
-    >[!NOTE]
-    >Bir çalışma alanı adına göre tanımlayan benzersizlik tüm erişilebilir aboneliklerindeki varsayar. Belirtilen ada sahip birden çok uygulamalarınız varsa, sorgu belirsizlik nedeniyle başarısız olur. Bu durumda, diğer tanımlayıcılarla birini kullanmanız gerekir.
 
-* Tam adı - abonelik adı, kaynak grubu ve bileşen adı şu biçimde oluşan çalışma alanında, "tam adı" olduğunu: *resourceGroup/subscriptionName/componentName*. 
+* Nitelenmiş ad-Şu biçimdeki abonelik adı, kaynak grubu ve Bileşen adından oluşan, çalışma alanının "tam adı" dır: *subscriptionName/resourceGroup/ComponentName*. 
 
     `workspace('contoso/contosoretail/contosoretail-it').Update | count`
 
     >[!NOTE]
-    >Azure aboneliği adları benzersiz olmuyor çünkü bu tanımlayıcısı belirsiz olabilir. 
+    >Azure abonelik adları benzersiz olmadığından, bu tanımlayıcı belirsiz olabilir. 
     >
 
-* Çalışma alanı kimliği - atanan genel benzersiz tanıtıcısı (GUID) temsil edilen her bir çalışma alanı için benzersiz, sabit, tanımlayıcı bir çalışma alanı kimliğidir.
+* Çalışma alanı KIMLIĞI-bir çalışma alanı KIMLIĞI, bir genel benzersiz tanımlayıcı (GUID) olarak temsil edilen her çalışma alanına atanan benzersiz, sabit bir tanıtıcıdır.
 
     `workspace("b459b4u5-912x-46d5-9cb1-p43069212nb4").Update | count`
 
-* Azure Resource ID: çalışma alanının Azure tanımlı benzersiz kimliği. Kaynak adı belirsiz olduğunda kaynak Kimliğini kullanın.  Çalışma alanları için biçimi şu şekildedir: */subscriptions/subscriptionId/resourcegroups/resourceGroup/providers/microsoft. Çalışma alanları/Operationalınsights/componentName*.  
+* Azure Kaynak KIMLIĞI: çalışma alanının Azure tarafından tanımlanan benzersiz kimliği. Kaynak adı belirsiz olduğunda kaynak KIMLIĞI kullanılır.  Çalışma alanları için şu biçim: */Subscriptions/SubscriptionID/ResourceGroups/resourcegroup/Providers/Microsoft. Operationalınsights/çalışma alanları/componentName*.  
 
-    Örneğin:
+    Örnek:
     ``` 
     workspace("/subscriptions/e427519-5645-8x4e-1v67-3b84b59a1985/resourcegroups/ContosoAzureHQ/providers/Microsoft.OperationalInsights/workspaces/contosoretail-it").Update | count
     ```
 
-### <a name="identifying-an-application"></a>Bir uygulama tanımlama
-Aşağıdaki örnekte adlı bir uygulama karşı yapılan istekleri özetlenmiş bir sayısını döndürmek *fabrikamapp* Application ınsights. 
+### <a name="identifying-an-application"></a>Bir uygulamayı tanımlama
+Aşağıdaki örneklerde, Application Insights 'de *fabrikamapp* adlı bir uygulamaya yönelik olarak yapılan bir Özet istek sayısı döndürülür. 
 
-İle bir Application Insights uygulamasında tanımlama gerçekleştirilebilir *app(Identifier)* ifade.  *Tanımlayıcı* bağımsız değişkeni, aşağıdakilerden birini kullanarak uygulamayı belirtir:
+Application Insights ' de bir uygulamanın tanımlanması, *uygulama (tanımlayıcı)* ifadesiyle gerçekleştirilebilir.  *Tanımlayıcı* bağımsız değişkeni, aşağıdakilerden birini kullanarak uygulamayı belirtir:
 
-* -Kaynak adı olduğundan bazen denir, app insan tarafından okunabilir adını *bileşen adı*.  
+* Kaynak adı-uygulamanın, bazen *bileşen adı*olarak da adlandırılan, okunabilir bir adıdır.  
 
     `app("fabrikamapp")`
 
-* Tam adı - addır "tam" uygulamasının abonelik adı, kaynak grubu ve bileşen adı şu biçimde oluşur: *resourceGroup/subscriptionName/componentName*. 
+    >[!NOTE]
+    >Bir uygulamanın adına göre tanımlanması, tüm erişilebilir aboneliklerde benzersizlik olduğunu varsayar. Belirtilen ada sahip birden çok uygulamanız varsa, belirsizlik nedeniyle sorgu başarısız olur. Bu durumda, diğer tanımlayıcılardan birini kullanmanız gerekir.
+
+* Nitelikli ad-uygulamanın, abonelik adı, kaynak grubu ve Bileşen adından Şu biçimdeki "tam adı" vardır: *subscriptionName/resourceGroup/ComponentName*. 
 
     `app("AI-Prototype/Fabrikam/fabrikamapp").requests | count`
 
      >[!NOTE]
-    >Azure aboneliği adları benzersiz olmuyor çünkü bu tanımlayıcısı belirsiz olabilir. 
+    >Azure abonelik adları benzersiz olmadığından, bu tanımlayıcı belirsiz olabilir. 
     >
 
-* Kimliği - uygulama uygulamasının GUID.
+* ID-uygulamanın uygulama GUID 'SI.
 
     `app("b459b4f6-912x-46d5-9cb1-b43069212ab4").requests | count`
 
-* Azure kaynak kimliği - uygulamayı Azure tanımlı benzersiz kimliği. Kaynak adı belirsiz olduğunda kaynak Kimliğini kullanın. Biçim: */subscriptions/subscriptionId/resourcegroups/resourceGroup/providers/microsoft. Operationalınsights/bileşenleri/componentName*.  
+* Azure Kaynak KIMLIĞI-uygulamanın Azure tarafından tanımlanan benzersiz kimliği. Kaynak adı belirsiz olduğunda kaynak KIMLIĞI kullanılır. Biçim: */Subscriptions/SubscriptionID/ResourceGroups/resourcegroup/Providers/Microsoft. Operationalınsights/bileşenler/componentName*.  
 
-    Örneğin:
+    Örnek:
     ```
     app("/subscriptions/b459b4f6-912x-46d5-9cb1-b43069212ab4/resourcegroups/Fabrikam/providers/microsoft.insights/components/fabrikamapp").requests | count
     ```
 
-### <a name="performing-a-query-across-multiple-resources"></a>Birden fazla kaynak arasında sorgu gerçekleştirme
-Birden çok kaynak kaynak örnekleriniz hiçbirini sorgulayabilir, bunlar çalışma alanları ve uygulamaları olabilir birleştirilmiş.
+### <a name="performing-a-query-across-multiple-resources"></a>Birden çok kaynak genelinde sorgu gerçekleştirme
+Kaynak örneklerinizin herhangi birinden birden çok kaynağı sorgulayabilirsiniz, bunlar çalışma alanları ve uygulamalar birleştirilebilir.
     
-Örneğin, iki çalışma alanları arasında sorgu:    
+İki çalışma alanı üzerinde sorgu örneği:    
 
 ```
 union Update, workspace("contosoretail-it").Update, workspace("b459b4u5-912x-46d5-9cb1-p43069212nb4").Update
@@ -107,10 +101,10 @@ union Update, workspace("contosoretail-it").Update, workspace("b459b4u5-912x-46d
 | summarize dcount(Computer) by Classification
 ```
 
-## <a name="using-cross-resource-query-for-multiple-resources"></a>Kaynaklar arası sorgu için birden çok kaynakları kullanma
-Kaynaklar arası sorgular birden fazla Log Analytics çalışma alanları ve Application Insights kaynakları verileri ilişkilendirmek için kullanılırken, sorgu karmaşık ve sürdürülmesi zor hale gelebilir. Faydalanın [işlevleri Azure İzleyici'de oturum sorguları](functions.md) kapsamı sorgu yapısı basitleştiren sorgu kaynaklarından gelen sorgu mantığının ayırmak için. Aşağıdaki örnek nasıl birden fazla Application Insights kaynaklarını izleyebilir ve uygulama adına göre başarısız istek sayısını görselleştirmek gösterir. 
+## <a name="using-cross-resource-query-for-multiple-resources"></a>Birden çok kaynak için çapraz kaynak sorgusu kullanma
+Çoklu Log Analytics çalışma alanları ve Application Insights kaynaklarından verileri ilişkilendirmek için çapraz kaynak sorguları kullanırken, sorgu karmaşık ve bakım açısından zor hale gelebilir. Sorgu mantığını sorgu yapısını kolaylaştıran sorgu kaynaklarının kapsamından ayırmak için [Azure izleyici günlük sorgularının işlevlerinden](functions.md) yararlanabilirsiniz. Aşağıdaki örnek, birden çok Application Insights kaynağını nasıl izleyebileceğinizi ve uygulama adına göre başarısız isteklerin sayısını görselleştirmenizi gösterir. 
 
-Application Insights kaynakları kapsamını başvuran aşağıdaki gibi bir sorgu oluşturun. `withsource= SourceApp` Komut, uygulama adını belirten bir sütun gönderilen günlük ekler. [İşlevi sorguyu kaydetmek](functions.md#create-a-function) takma ad ile _applicationsScoping_.
+Aşağıdaki gibi Application Insights kaynak kapsamına başvuran bir sorgu oluşturun. `withsource= SourceApp` komutu, günlüğü gönderen uygulama adını atayan bir sütun ekler. Sorguyu, _Applicationsscoping_diğer adı ile birlikte bir [işlev olarak kaydedin](functions.md#create-a-function) .
 
 ```Kusto
 // crossResource function that scopes my Application Insights resources
@@ -124,7 +118,7 @@ app('Contoso-app5').requests
 
 
 
-Artık [bu işlevi kullanın](../../azure-monitor/log-query/functions.md#use-a-function) kaynaklar arası sorguda aşağıdaki gibi. İşlev diğer adı _applicationsScoping_ tanımlanan tüm uygulamalardan requests tablosuna birleşimini döndürür. Sorgu daha sonra başarısız olan istekleri için filtreler ve uygulama tarafından eğilimleri görselleştirir. _Ayrıştırma_ işleci, bu örnekte isteğe bağlıdır. Uygulama adından ayıklar _SourceApp_ özelliği.
+Artık [Bu işlevi](../../azure-monitor/log-query/functions.md#use-a-function) aşağıdaki gibi bir çapraz kaynak sorgusunda kullanabilirsiniz. _Applicationsscoping_ işlev diğer adı, tüm tanımlanmış uygulamalardan gelen istekler tablosunun birleşimini döndürür. Sorgu daha sonra başarısız isteklere filtre uygular ve eğilimleri uygulamaya göre görselleştirir. Bu örnekte _Parse_ işleci isteğe bağlıdır. _Sourceapp_ özelliğinden uygulama adını ayıklar.
 
 ```Kusto
 applicationsScoping 
@@ -134,9 +128,14 @@ applicationsScoping
 | summarize count() by applicationName, bin(timestamp, 1h) 
 | render timechart
 ```
-![zaman grafiğini](media/cross-workspace-query/chart.png)
+
+>[!NOTE]
+>Çalışma alanları ve uygulamalar dahil olmak üzere uyarı kuralı kaynaklarının erişim doğrulaması uyarı oluşturma sırasında gerçekleştirildiğinden, bu yöntem günlük uyarıları ile kullanılamaz. Uyarı oluşturulduktan sonra işleve yeni kaynaklar eklemek desteklenmez. Günlük uyarılarında kaynak kapsamı için işlev kullanmayı tercih ederseniz, kapsamdaki kaynakları güncelleştirmek için portalda veya bir Kaynak Yöneticisi şablonuyla uyarı kuralını düzenlemeniz gerekir. Alternatif olarak, günlük uyarısı sorgusuna kaynak listesini de ekleyebilirsiniz.
+
+
+![Timechart](media/cross-workspace-query/chart.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Gözden geçirme [analiz günlük verilerini Azure İzleyici'de](log-query-overview.md) günlük sorguları ve Azure İzleyici günlük verilerini nasıl yapılandırıldığını genel bakış.
-- Gözden geçirme [Azure İzleyici günlük sorguları](query-language.md) tüm kaynaklar için Azure İzleyici günlük sorguları görüntüleyin.
+- Günlük sorgularına genel bakış ve Azure Izleyici günlük verilerinin nasıl yapılandırıldığı hakkında bilgi için [Azure izleyici 'de günlük verilerini çözümleme '](log-query-overview.md) ye bakın.
+- Azure izleyici günlük sorgularının tüm kaynaklarını görüntülemek için [Azure izleyici günlük sorgularını](query-language.md) gözden geçirin.

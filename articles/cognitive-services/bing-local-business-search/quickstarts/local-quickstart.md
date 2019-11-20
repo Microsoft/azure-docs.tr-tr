@@ -1,37 +1,38 @@
 ---
-title: Hızlı Başlangıç - Bing yerel iş arama API'si bir sorguya bir gönderme C# | Microsoft Docs
+title: Hızlı başlangıç-içindeki Bing yerel Iş Arama API 'sine bir sorgu gönderinC#
 titleSuffix: Azure Cognitive Services
-description: İçinde Bing yerel iş arama API'sini kullanmaya başlamak için bu makaleyi kullanın C#.
+description: Azure bilişsel hizmeti olan Bing yerel Iş Arama API 'sine istek göndermeye başlamak için bu hızlı başlangıcı kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
+ms.subservice: bing-local-business
 ms.topic: quickstart
 ms.date: 04/26/2019
-ms.author: rosh, v-gedod
-ms.openlocfilehash: ad00076c9cb5ef1c3d21677adabbb167b05a6228
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: rosh
+ms.openlocfilehash: d14e9dd8d02db7ca0131927682804fe81b750d97
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67051623"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74072335"
 ---
-# <a name="quickstart-send-a-query-to-the-bing-local-business-search-api-in-c"></a>Hızlı Başlangıç: Bing yerel iş arama API'si bir sorgu gönderinC#
+# <a name="quickstart-send-a-query-to-the-bing-local-business-search-api-in-c"></a>Hızlı başlangıç: içindeki Bing yerel Iş Arama API 'sine bir sorgu gönderinC#
 
-Bu hızlı başlangıçta, Azure Bilişsel hizmet olduğu Bing yerel iş arama API'si için istekleri göndermeye başlamak için kullanın. Bu basit uygulama yazıldığı sırada C#, tüm programlama dillerini HTTP isteğinde bulunan ve JSON ayrıştırma özelliğine sahip uyumlu bir RESTful Web hizmeti API'dir.
+Azure bilişsel hizmeti olan Bing yerel Iş Arama API 'sine istek göndermeye başlamak için bu hızlı başlangıcı kullanın. Bu basit uygulama ' de C#YAZıLDıĞı sırada API, http istekleri yapma ve JSON 'u ayrıştırma yeteneğine sahip olan herhangi bir programlama diliyle uyumlu olan bir yeniden takip eden Web hizmetidir.
 
-Bu örnek uygulama, arama sorgusu için API'sinden yerel yanıt verilerini alır. `hotel in Bellevue`.
+Bu örnek uygulama, arama sorgusu `hotel in Bellevue`için API 'den gelen yerel yanıt verilerini alır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Herhangi bir sürümünü [Visual Studio 2019](https://www.visualstudio.com/downloads/).
+* Herhangi bir [Visual Studio 2019](https://www.visualstudio.com/downloads/)sürümü.
 * Linux/MacOS kullanıyorsanız bu uygulama, [Mono](https://www.mono-project.com/) kullanılarak çalıştırılabilir.
 
 Bing Arama API'lerine sahip bir [Bilişsel Hizmetler API hesabınız](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) olması gerekir. [Ücretsiz deneme](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api) bu hızlı başlangıç için yeterlidir.  Ayrıca bkz: [Bilişsel hizmetler fiyatlandırması - Bing arama API'si](https://azure.microsoft.com/pricing/details/cognitive-services/search-api/).
 
-## <a name="create-the-request"></a>İstek oluşturma 
+## <a name="create-the-request"></a>İstek oluştur 
 
-Aşağıdaki kod oluşturur bir `WebRequest`erişim anahtar üstbilgisini ayarlar ve "Restoran Bellevue içinde" için bir sorgu dizesi ekler.  Ardından isteği gönderir ve yanıtı JSON metnini içeren bir dizeye atar.
+Aşağıdaki kod bir `WebRequest`oluşturur, erişim anahtarı üst bilgisini ayarlar ve "Bellevue içinde restoran" için bir sorgu dizesi ekler.  Ardından isteği gönderir ve yanıtı JSON metnini içeren bir dizeye atar.
 
 ```
     // Replace the accessKey string value with your valid access key.
@@ -51,12 +52,12 @@ Aşağıdaki kod oluşturur bir `WebRequest`erişim anahtar üstbilgisini ayarla
     string json = new StreamReader(response.GetResponseStream()).ReadToEnd();
 ```
 
-## <a name="run-the-complete-application"></a>Tam uygulama çalıştırma
+## <a name="run-the-complete-application"></a>Uygulamanın tamamını Çalıştır
 
-Bing yerel iş arama API'si, Bing arama motorundan yerelleştirilmiş arama sonuçlarını döndürür.
+Bing yerel Iş Arama API 'SI, Bing arama altyapısından yerelleştirilmiş arama sonuçları döndürür.
 1. Visual Studio'da (Community Edition uygundur) yeni bir Konsol çözümü oluşturun.
 2. Program.cs dosyasını aşağıda sağlanan kod ile değiştirin.
-3. AccessKey değeri, aboneliğiniz için geçerli bir erişim anahtarı ile değiştirin.
+3. AccessKey değerini, aboneliğiniz için geçerli olan bir erişim anahtarı ile değiştirin.
 4. Programı çalıştırın.
 
 ```
@@ -208,6 +209,6 @@ namespace localSearch
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- [Yerel iş arama Java hızlı başlangıç](local-search-java-quickstart.md)
-- [Yerel iş arama düğümü hızlı başlangıç](local-search-node-quickstart.md)
-- [Yerel iş arama Python hızlı başlangıç](local-search-python-quickstart.md)
+- [Yerel Iş arama Java hızlı başlangıç](local-search-java-quickstart.md)
+- [Yerel Iş arama düğümü hızlı başlangıç](local-search-node-quickstart.md)
+- [Yerel Iş arama Python hızlı başlangıç](local-search-python-quickstart.md)

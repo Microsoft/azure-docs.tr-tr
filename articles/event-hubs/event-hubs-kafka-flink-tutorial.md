@@ -1,73 +1,73 @@
 ---
-title: Apache Flink için Apache Kafka - Azure Event hubs'ı kullanın. | Microsoft Docs
-description: Bu makalede, Azure olay hub'ı bir Apache Kafka için Apache Flink bağlanma hakkında bilgi etkin sağlanır.
+title: Apache Kafka için Apache flink kullanın-Azure Event Hubs | Microsoft Docs
+description: Bu makalede, Apache flink Apache Kafka etkinleştirilmiş bir Azure Olay Hub 'ına nasıl bağlanabileceğiniz hakkında bilgi verilmektedir.
 services: event-hubs
 documentationcenter: ''
-author: basilhariri
+author: ShubhaVijayasarathy
 manager: timlt
 ms.service: event-hubs
 ms.topic: article
 ms.custom: seodec18
 ms.date: 12/06/2018
-ms.author: bahariri
-ms.openlocfilehash: dc4a982dde62f62eb8f2d91a61fd70ba79fa13d5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: shvija
+ms.openlocfilehash: 881546a97b01bef993cc24c6b868ec97ddf5ac36
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60821425"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555725"
 ---
-# <a name="use-apache-flink-with-azure-event-hubs-for-apache-kafka"></a>Apache Flink Azure Event Hubs ile Apache Kafka için kullanın.
-Bu öğreticide Protokolü istemcilerinize değiştirme veya kendi kümeleri çalıştıran Apache Flink Kafka özellikli event hubs'a bağlanma gösterilmektedir. Azure Event hubs'ı destekleyen [Apache Kafka sürüm 1.0.](https://kafka.apache.org/10/documentation.html).
+# <a name="use-apache-flink-with-azure-event-hubs-for-apache-kafka"></a>Apache Kafka için Azure Event Hubs ile Apache flink kullanın
+Bu öğreticide, protokol istemcilerinizi değiştirmeden veya kendi kümelerinizi çalıştırmadan Apache flink 'i Kafka özellikli Olay Hub 'larına nasıl bağlayabileceğiniz gösterilmektedir. Azure Event Hubs [Apache Kafka 1,0 sürümünü destekliyor.](https://kafka.apache.org/10/documentation.html).
 
-Apache Kafka kullanmanın önemli avantajları için bağlanabilir çerçeveleri ekosistemi biridir. Kafka ölçeklenebilirliği, tutarlılık ve Azure ekosistemi desteği ile Kafka'nın esneklik olay hub'ları birleştiren etkin.
+Apache Kafka kullanmanın önemli avantajlarından biri, bağlanamaların ekosistemidir. Kafka Enabled Event Hubs, Azure ekosisteminin ölçeklenebilirlik, tutarlılık ve desteğiyle birlikte Kafka esnekliğini birleştirir.
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 > [!div class="checklist"]
 > * Event Hubs ad alanı oluşturma
 > * Örnek projeyi kopyalama
-> * Flink üretici çalıştırın 
-> * Flink tüketici çalıştırın
+> * Flink üreticisi Çalıştır 
+> * Flink tüketicisi Çalıştır
 
 > [!NOTE]
 > Bu örnek [GitHub](https://github.com/Azure/azure-event-hubs-for-kafka/tree/master/tutorials/flink)'da sağlanır
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticiyi tamamlamak için aşağıdaki önkoşulların karşılandığından emin olun:
+Bu öğreticiyi tamamlayabilmeniz için aşağıdaki önkoşullara sahip olduğunuzdan emin olun:
 
 * [Apache Kafka için Event Hubs](event-hubs-for-kafka-ecosystem-overview.md) makalesini okuyun. 
 * Azure aboneliği. Aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) oluşturun.
 * [Java Development Kit (JDK) 1.7+](https://aka.ms/azure-jdks)
     * Ubuntu’da JDK’yi yüklemek için `apt-get install default-jdk` komutunu çalıştırın.
     * JAVA_HOME ortam değişkenini JDK’nin yüklü olduğu klasöre işaret edecek şekilde ayarladığınızdan emin olun.
-* [İndirme](https://maven.apache.org/download.cgi) ve [yükleme](https://maven.apache.org/install.html) Maven ikili Arşivi
+* Maven ikili Arşivi [indirme](https://maven.apache.org/download.cgi) ve [yükleme](https://maven.apache.org/install.html)
     * Ubuntu’da Maven’i yüklemek için `apt-get install maven` komutunu çalıştırabilirsiniz.
 * [Git](https://www.git-scm.com/downloads)
     * Ubuntu’da Git’i yüklemek için `sudo apt-get install git` komutunu çalıştırabilirsiniz.
 
 ## <a name="create-an-event-hubs-namespace"></a>Event Hubs ad alanı oluşturma
 
-Tüm Event Hubs hizmetinden gönderileceği ve alınacağı bir Event Hubs ad alanı gereklidir. Bkz: [Event Hubs etkin Kafka oluşturma](event-hubs-create-kafka-enabled.md) bir olay hub'ları Kafka uç nokta alma hakkında bilgi için. Daha sonra kullanmak için Event Hubs bağlantı dizesi kopyaladığınızdan emin olun.
+Herhangi bir Event Hubs hizmetinden göndermek veya almak için bir Event Hubs ad alanı gerekir. Event Hubs Kafka uç noktası alma hakkında bilgi için bkz. [Create Kafka Enabled Event Hubs](event-hubs-create-kafka-enabled.md) . Event Hubs bağlantı dizesini daha sonra kullanmak üzere kopyalamadığınızdan emin olun.
 
 ## <a name="clone-the-example-project"></a>Örnek projeyi kopyalama
 
-Event Hubs, Kafka özellikli bir bağlantı dizesi olduğuna göre Azure Event Hubs Kafka deposu için kopyalama ve gidin `flink` alt klasörü:
+Artık Kafka özellikli Event Hubs bağlantı dizesine sahip olduğunuza göre, Azure Event Hubs for Kafka Repository 'yi klonlayın ve `flink` alt klasörüne gidin:
 
 ```shell
 git clone https://github.com/Azure/azure-event-hubs-for-kafka.git
 cd azure-event-hubs-for-kafka/tutorials/flink
 ```
 
-## <a name="run-flink-producer"></a>Flink üretici çalıştırın
+## <a name="run-flink-producer"></a>Flink üreticisi Çalıştır
 
-Sağlanan Flink üretici örneği kullanarak Event Hubs hizmeti için iletiler gönderin.
+Belirtilen flink üreticisi örneğini kullanarak, Event Hubs hizmetine ileti gönderin.
 
-### <a name="provide-an-event-hubs-kafka-endpoint"></a>Bir olay hub'ları Kafka uç noktası sağlayın
+### <a name="provide-an-event-hubs-kafka-endpoint"></a>Event Hubs Kafka uç noktası sağlama
 
-#### <a name="producerconfig"></a>Producer.config
+#### <a name="producerconfig"></a>üretici. config
 
-Güncelleştirme `bootstrap.servers` ve `sasl.jaas.config` değerler `producer/src/main/resources/producer.config` üretici doğru kimlik doğrulaması ile Event Hubs Kafka uç noktasına yönlendirmek için.
+Üreticiyi doğru kimlik doğrulamasıyla Event Hubs Kafka uç noktasına yönlendirmek için `producer/src/main/resources/producer.config` `bootstrap.servers` ve `sasl.jaas.config` değerlerini güncelleştirin.
 
 ```xml
 bootstrap.servers={YOUR.EVENTHUBS.FQDN}:9093
@@ -79,26 +79,26 @@ sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule require
    password="{YOUR.EVENTHUBS.CONNECTION.STRING}";
 ```
 
-### <a name="run-producer-from-the-command-line"></a>Üretici komut satırından çalıştırma
+### <a name="run-producer-from-the-command-line"></a>Üretici 'yi komut satırından Çalıştır
 
-Üretici komut satırından çalıştırmak için JAR oluşturmak ve ardından Maven içinde çalıştırın (veya daha sonra sınıf için gerekli Kafka JAR(s) ekleyerek Java'da çalıştırma Maven kullanarak bir JAR oluşturmak):
+Producer 'ı komut satırından çalıştırmak için, JAR 'yi oluşturun ve Maven içinden çalıştırın (veya Maven kullanarak JAR 'yi oluşturun ve ardından, gerekli Kafka JAR 'leri, Sınıfyoluna ekleyerek Java 'da çalıştırın):
 
 ```shell
 mvn clean package
 mvn exec:java -Dexec.mainClass="FlinkTestProducer"
 ```
 
-Üretici artık başlayacak olayları göndermek için Kafka, olay hub'ı konusuna etkin `test` ve stdout olaylara yazdırma.
+Üretici artık `test` konu başlığı altında Kafka etkin olay hub 'ına olay göndermeye başlayacak ve olayları stdout 'a yazdıracaktır.
 
-## <a name="run-flink-consumer"></a>Flink tüketici çalıştırın
+## <a name="run-flink-consumer"></a>Flink tüketicisi Çalıştır
 
-Kuyruktan alma sağlanan tüketici örneği kullanarak Event Hubs Kafka etkin.
+Sağlanan tüketici örneğini kullanarak, Kafka etkin Event Hubs iletiler alın.
 
-### <a name="provide-an-event-hubs-kafka-endpoint"></a>Bir olay hub'ları Kafka uç noktası sağlayın
+### <a name="provide-an-event-hubs-kafka-endpoint"></a>Event Hubs Kafka uç noktası sağlama
 
-#### <a name="consumerconfig"></a>Consumer.config
+#### <a name="consumerconfig"></a>Consumer. config
 
-Güncelleştirme `bootstrap.servers` ve `sasl.jaas.config` değerler `consumer/src/main/resources/consumer.config` tüketici doğru kimlik doğrulaması ile Event Hubs Kafka uç noktasına yönlendirmek için.
+@No__t_0 ve `sasl.jaas.config` `consumer/src/main/resources/consumer.config` değerlerini, tüketiciye doğru kimlik doğrulama ile Event Hubs Kafka uç noktasına yönlendirmek için güncelleştirin.
 
 ```xml
 bootstrap.servers={YOUR.EVENTHUBS.FQDN}:9093
@@ -110,27 +110,27 @@ sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule require
    password="{YOUR.EVENTHUBS.CONNECTION.STRING}";
 ```
 
-### <a name="run-consumer-from-the-command-line"></a>Tüketici komut satırından çalıştırma
+### <a name="run-consumer-from-the-command-line"></a>Komut satırından tüketici çalıştırma
 
-Tüketici komut satırından çalıştırmak için JAR oluşturmak ve ardından Maven içinde çalıştırın (veya daha sonra sınıf için gerekli Kafka JAR(s) ekleyerek Java'da çalıştırma Maven kullanarak bir JAR oluşturmak):
+Tüketici 'yi komut satırından çalıştırmak için, JAR 'yi oluşturun ve Maven içinden çalıştırın (veya Maven kullanarak JAR 'yi oluşturun ve ardından, gerekli Kafka JAR 'leri, Sınıfyoluna ekleyerek Java 'da çalıştırın):
 
 ```shell
 mvn clean package
 mvn exec:java -Dexec.mainClass="FlinkTestConsumer"
 ```
 
-Kafka özellikli bir olay hub'ı olayları (örneğin, üretici da çalışıyorsa) varsa, ardından tüketici artık konu başlığından olayları almaya başlar `test`.
+Kafka etkin olay hub 'ının olayları varsa (örneğin, üreticisi de çalışıyorsa), tüketici artık `test` konudan olay almaya başlar.
 
-Kullanıma [Flink'ın Kafka bağlayıcı Kılavuzu](https://ci.apache.org/projects/flink/flink-docs-stable/dev/connectors/kafka.html) Flink Kafka'ya bağlanma hakkında daha ayrıntılı bilgi için.
+Flink 'in Kafka 'e bağlanması hakkında daha ayrıntılı bilgi için [flink 'In Kafka bağlayıcı kılavuzuna](https://ci.apache.org/projects/flink/flink-docs-stable/dev/connectors/kafka.html) göz atın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu öğreticide, öğrenilmiş Protokolü istemcilerinize değiştirme veya kendi kümelerini çalıştırmak Flink Apache Kafka özellikli event hubs'a bağlama. Bu öğreticinin bir parçası olarak aşağıdaki adımları gerçekleştirdiğiniz: 
+Bu öğreticide, protokol istemcilerinizi değiştirmeden veya kendi kümelerinizi çalıştırmadan Apache flink 'i Kafka özellikli Olay Hub 'larına bağlamayı öğrendiniz. Bu öğreticinin bir parçası olarak aşağıdaki adımları gerçekleştirdiniz: 
 
 > [!div class="checklist"]
 > * Event Hubs ad alanı oluşturma
 > * Örnek projeyi kopyalama
-> * Flink üretici çalıştırın 
-> * Flink tüketici çalıştırın
+> * Flink üreticisi Çalıştır 
+> * Flink tüketicisi Çalıştır
 
 Event Hubs ve Kafka için Event Hubs hakkında daha fazla bilgi edinmek için aşağıdaki konuya bakın:  
 

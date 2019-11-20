@@ -1,22 +1,22 @@
 ---
-title: B2B işbirliği ve B2C - Azure Active Directory karşılaştırın | Microsoft Docs
+title: B2B işbirliği ve B2C 'yi karşılaştırın-Azure Active Directory | Microsoft Docs
 description: Azure Active Directory B2B işbirliği ile Azure AD B2C arasındaki fark nedir?
 services: active-directory
 ms.service: active-directory
 ms.subservice: B2B
 ms.topic: overview
-ms.date: 01/30/2019
+ms.date: 07/22/2019
 ms.author: mimart
 author: msmimart
 manager: celestedg
 ms.reviewer: elisolMS
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d2fb881678c694754c8cfc0714038c030d4b2218
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7e7f5aa324db869e30a8b2fe214416129baca8d9
+ms.sourcegitcommit: 04ec7b5fa7a92a4eb72fca6c6cb617be35d30d0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67113138"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68380739"
 ---
 # <a name="compare-b2b-collaboration-and-b2c-in-azure-active-directory"></a>Azure Active Directory’de B2B işbirliğini ve B2C’yi karşılaştırma
 
@@ -31,14 +31,14 @@ Aşağıdaki tabloda ayrıntılı bir karşılaştırma sağlanmıştır.
 
 B2B işbirliği özellikleri |     Azure AD B2C bağımsız teklifi
 -------- | --------
-Yönelik: Kimlik sağlayıcısı bağımsız olarak bir iş ortağı kuruluştaki kullanıcıların kimliğini doğrulamak isteyen kuruluşlar. | Yönelik: Müşteriler, mobil ve web apps olup davet kişiler, Kurumsal veya Kurumsal müşterilerini Azure AD.
-Desteklenen kimlikleri: Çalışanların iş veya Okul hesapları, iş ortakları ile iş veya Okul hesapları ya da herhangi bir e-posta adresi. Yakında doğrudan federasyon desteklenecektir.  | Desteklenen kimlikleri: Yerel uygulama hesapları (tüm e-posta adresi veya kullanıcı adı) veya herhangi bir tüketici kullanıcıların sosyal kimlik doğrudan Federasyon ile desteklenir.
-Dış kullanıcılar Çalışanlar ile aynı dizinde yönetilen, ancak özel olarak ek açıklama. Çalışanlar, aynı şekilde aynı gruplarına eklenebilir ve benzeri yönetilebilir  | Dış kullanıcılar, uygulama dizini içinde yönetilir. Ayrı olarak kuruluşun çalışan ve iş ortağı dizini (varsa) yönetildikleri.
-Tüm Azure AD ile bağlantılı uygulamalarda çoklu oturum açma (SSO) desteklenir. Örneğin, Office 365 veya şirket içi uygulamalara ve Salesforce ya da Workday gibi diğer SaaS uygulamalarına erişim sağlayabilirsiniz.  |  Azure AD B2C kiracılarında müşterilere ait uygulamalarda SSO desteklenir. Office 365 veya diğer Microsoft ve Microsoft olmayan SaaS uygulamalarında SSO desteklenmez.
-İş ortağı yaşam döngüsü: Konak/davet ederek yönetilen kuruluş.  | Müşteri yaşam döngüsü: Self Servis veya uygulama tarafından yönetilir.
-Güvenlik ilke ve uyumluluk: Konak/davet ederek yönetilen kuruluş (örneğin, [koşullu erişim ilkeleri](https://docs.microsoft.com/azure/active-directory/b2b/conditional-access)).  | Güvenlik ilke ve uyumluluk: Uygulama tarafından yönetilir.
-Marka: Kuruluşunuzun markasını konak/davet kullanılır.  |    Marka: Uygulama tarafından yönetilir. Genellikle kuruluşun arka planda soluk olduğu şekilde ürün markalı olma eğilimindedir.
-Daha fazla bilgi: [Blog gönderisi](https://blogs.technet.microsoft.com/enterprisemobility/2017/02/01/azure-ad-b2b-new-updates-make-cross-business-collab-easy/), [belgeleri](what-is-b2b.md)  | Daha fazla bilgi: [Ürün sayfası](https://azure.microsoft.com/services/active-directory-b2c/), [belgeleri](https://docs.microsoft.com/azure/active-directory-b2c/)
+İçin tasarlanan: Kimlik sağlayıcısından bağımsız olarak, bir iş ortağı kuruluştan kullanıcıların kimliğini doğrulayabilmek isteyen kuruluşlar. | İçin tasarlanan: Kişilerin, kurum veya kurumsal müşterilerin Azure AD 'nize, mobil ve Web uygulamalarınızın müşterilerini davet etme.
+Desteklenen kimlikler: İş veya okul hesapları, iş veya okul hesaplarıyla iş ortakları veya herhangi bir e-posta adresi olan çalışanlar. Yakında doğrudan federasyon desteklenecektir.  | Desteklenen kimlikler: Yerel uygulama hesapları (herhangi bir e-posta adresi veya Kullanıcı adı) veya doğrudan Federasyon ile desteklenen herhangi bir sosyal kimlik olan tüketici kullanıcıları.
+Dış kullanıcılar, çalışanlarla aynı dizinde yönetilir, ancak özellikle açıklama eklenir. Bunlar, çalışanlarla aynı şekilde yönetilebilir, aynı gruplara eklenebilir ve bu şekilde devam edebilir  | Dış kullanıcılar, uygulama dizininde yönetilir. Bunlar, kuruluşun çalışanı ve iş ortağı dizininden (varsa) ayrı olarak yönetilirler.
+Tüm Azure AD ile bağlantılı uygulamalarda çoklu oturum açma (SSO) desteklenir. Örneğin, Office 365 veya şirket içi uygulamalara ve Salesforce ya da Workday gibi diğer SaaS uygulamalarına erişim sağlayabilirsiniz.  |  Azure AD B2C kiracılarında müşterilere ait uygulamalarda SSO desteklenir. Office 365 veya diğer Microsoft SaaS uygulamalarına yönelik SSO desteklenmez.
+İş ortağı yaşam döngüsü: Konak/kuruluş tarafından yönetiliyor.  | Müşteri yaşam döngüsü: Uygulama tarafından Self servis veya yönetilen.
+Güvenlik ilkesi ve Uyumluluk: Konak/kuruluş tarafından yönetilir (örneğin, [koşullu erişim ilkeleriyle](https://docs.microsoft.com/azure/active-directory/b2b/conditional-access)).  | Güvenlik ilkesi ve Uyumluluk: Uygulama tarafından yönetilir.
+Olanağı Kuruluşun markasını barındırmak/davet etmek kullanılır.  |    Olanağı Uygulama tarafından yönetiliyor. Genellikle kuruluşun arka planda soluk olduğu şekilde ürün markalı olma eğilimindedir.
+Daha fazla bilgi: [Blog gönderisi](https://blogs.technet.microsoft.com/enterprisemobility/2017/02/01/azure-ad-b2b-new-updates-make-cross-business-collab-easy/), [Belgeler](what-is-b2b.md)  | Daha fazla bilgi: [Ürün sayfası](https://azure.microsoft.com/services/active-directory-b2c/), [Belgeler](https://docs.microsoft.com/azure/active-directory-b2c/)
 
 
 ### <a name="next-steps"></a>Sonraki adımlar

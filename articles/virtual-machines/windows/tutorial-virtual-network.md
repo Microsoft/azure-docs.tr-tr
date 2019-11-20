@@ -1,31 +1,30 @@
 ---
-title: Öğretici - Windows VM’ler için Azure sanal ağları oluşturma ve yönetme | Microsoft Docs
+title: Öğretici-Windows VM 'Leri için Azure sanal ağları oluşturma ve yönetme
 description: Bu öğreticide, Azure PowerShell kullanarak Windows sanal makineleri için Azure sanal ağları oluşturup yönetmeyi öğrenirsiniz
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 12/04/2018
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 568631705b590bb2ee312b9519164be17c8443ab
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 67cfb04f67e3454bde25969b634116f2871cbeb5
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60711188"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74064757"
 ---
-# <a name="tutorial-create-and-manage-azure-virtual-networks-for-windows-virtual-machines-with-azure-powershell"></a>Öğretici: Oluşturma ve Azure PowerShell ile Windows sanal makineleri için Azure sanal ağları yönetme
+# <a name="tutorial-create-and-manage-azure-virtual-networks-for-windows-virtual-machines-with-azure-powershell"></a>Öğretici - Windows VM’ler için Azure sanal ağları oluşturma ve yönetme | Microsoft Docs
 
-Azure sanal makineleri, iç ve dış ağ iletişimi için Azure ağını kullanır. Bu öğretici, iki sanal makineyi dağıtma ve bu VM’ler için Azure ağını yapılandırma konusunda rehberlik sunar. Bir uygulama öğreticide dağıtılan değil ancak bu öğreticideki örneklerde Vm'leri bir veritabanı arka ucu, bir web uygulaması barındırıldığı varsayılır. Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
+Azure sanal makineleri, iç ve dış ağ iletişimi için Azure ağını kullanır. Bu öğretici, iki sanal makineyi dağıtma ve bu VM’ler için Azure ağını yapılandırma konusunda rehberlik sunar. Bu öğreticideki örneklerde, VM 'Lerin bir veritabanı arka ucu olan bir Web uygulamasını barındırmakta olduğu, ancak öğreticide bir uygulamanın dağıtılmadığı varsayılır. Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Sanal ağ ve alt ağ oluşturma
@@ -65,13 +64,13 @@ Cloud Shell'i açmak için kod bloğunun sağ üst köşesinden **Deneyin**'i se
 
 Bu öğreticide iki alt ağa sahip tek bir sanal ağ oluşturulur. Web uygulamasını barındırmak için bir ön uç alt ağı ve veritabanı sunucusunu barındırmak için bir arka uç alt ağı.
 
-Bir sanal ağ oluşturabilmeniz için önce kullanarak bir kaynak grubu oluşturmanız [yeni AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup). Aşağıdaki örnekte *EastUS* konumunda *myRGNetwork* adlı bir kaynak grubu oluşturulur:
+Bir sanal ağ oluşturabilmeniz için, [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup)kullanarak bir kaynak grubu oluşturun. Aşağıdaki örnekte *EastUS* konumunda *myRGNetwork* adlı bir kaynak grubu oluşturulur:
 
 ```azurepowershell-interactive
 New-AzResourceGroup -ResourceGroupName myRGNetwork -Location EastUS
 ```
 
-Adlı bir alt ağ yapılandırması *myFrontendSubnet* kullanarak [yeni AzVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetworksubnetconfig):
+[New-AzVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetworksubnetconfig)kullanarak *myfrontendsubnet* adlı bir alt ağ yapılandırması oluşturun:
 
 ```azurepowershell-interactive
 $frontendSubnet = New-AzVirtualNetworkSubnetConfig `
@@ -89,7 +88,7 @@ $backendSubnet = New-AzVirtualNetworkSubnetConfig `
 
 ## <a name="create-virtual-network"></a>Sanal ağ oluşturma
 
-Bir VNET oluşturma *myVNet* kullanarak *myFrontendSubnet* ve *myBackendSubnet* kullanarak [yeni AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetwork):
+[New-AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetwork)kullanarak *myfrontendsubnet* ve *mybackendsubnet* kullanarak *myvnet* adlı bir sanal ağ oluşturun:
 
 ```azurepowershell-interactive
 $vnet = New-AzVirtualNetwork `
@@ -106,9 +105,9 @@ Bu noktada ağ oluşturulur ve biri ön uç hizmetlerine, diğeri ise arka uç h
 
 Genel IP adresi, Azure kaynaklarına İnternet’ten erişilmesine izin verir. Genel IP adresi ayırma yöntemi dinamik veya statik olarak yapılandırılabilir. Genel IP adresi varsayılan olarak dinamik biçimde ayrılır. Bir VM serbest bırakıldığında dinamik IP adresleri de serbest bırakılır. Bu davranış, VM’nin serbest bırakılmasını içeren tüm işlemlerde IP adresinin değişmesine neden olur.
 
-IP adresi serbest bırakılsa bile bir VM'ye atanmış kalmasını sağlayan statik ayırma yöntemini ayarlanabilir. Statik bir IP adresi kullanıyorsanız, IP adresi belirtilemez. Bunun yerine, kullanılabilen adresler havuzundan ayrılır.
+Ayırma yöntemi statik olarak ayarlanabilir, bu, serbest bırakılmış bir durum sırasında bile IP adresinin bir VM 'ye atanmasını sağlar. Statik bir IP adresi kullanıyorsanız, IP adresi belirtilemez. Bunun yerine, kullanılabilir bir adres havuzundan ayrılır.
 
-Adlı bir genel IP adresi oluşturma *Mypublicıpaddress* kullanarak [yeni AzPublicIpAddress](https://docs.microsoft.com/powershell/module/az.network/new-azpublicipaddress):
+[New-Azpublicıpaddress](https://docs.microsoft.com/powershell/module/az.network/new-azpublicipaddress)kullanarak *Mypublicıpaddress* adlı bir genel IP adresi oluşturun:
 
 ```azurepowershell-interactive
 $pip = New-AzPublicIpAddress `
@@ -122,7 +121,7 @@ Statik bir genel IP adresi atamak için AllocationMethod parametresini `Static` 
 
 ## <a name="create-a-front-end-vm"></a>Ön uç VM’si oluşturma
 
-Bir VM’nin sanal ağ içerisinde iletişim kurabilmesi için bir sanal ağ arabirimine (NIC) sahip olması gerekir. Bir NIC kullanarak oluşturduğunuz [yeni AzNetworkInterface](https://docs.microsoft.com/powershell/module/az.network/new-aznetworkinterface):
+Bir VM’nin sanal ağ içerisinde iletişim kurabilmesi için bir sanal ağ arabirimine (NIC) sahip olması gerekir. [New-Aznetworkınterface](https://docs.microsoft.com/powershell/module/az.network/new-aznetworkinterface)kullanarak bir NIC oluşturun:
 
 ```azurepowershell-interactive
 $frontendNic = New-AzNetworkInterface `
@@ -139,7 +138,7 @@ $frontendNic = New-AzNetworkInterface `
 $cred = Get-Credential
 ```
 
-Kullanarak VM'ler oluşturma [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm).
+[New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm)kullanarak VM 'ler oluşturun.
 
 ```azurepowershell-interactive
 New-AzVM `
@@ -155,13 +154,13 @@ New-AzVM `
 
 ## <a name="secure-network-traffic"></a>Ağ trafiğinin güvenliğini sağlama
 
-Ağ güvenlik grubu (NSG), Azure Sanal Ağlara (VNet) bağlı kaynaklara ağ trafiğine izin veren veya reddeden güvenlik kurallarının listesini içerir. NSG’ler alt ağlarla veya tek tek ağ arabirimleriyle ilişkilendirilebilir. NSG'yi ilişkili olduğu ağ arabirimi yalnızca ilişkili VM için geçerlidir. Bir NSG bir alt ağ ile ilişkilendirildiğinde kurallar alt ağa bağlı tüm kaynaklar için geçerli olur.
+Ağ güvenlik grubu (NSG), Azure Sanal Ağlara (VNet) bağlı kaynaklara ağ trafiğine izin veren veya reddeden güvenlik kurallarının listesini içerir. NSG’ler alt ağlarla veya tek tek ağ arabirimleriyle ilişkilendirilebilir. Bir NSG, bir ağ arabirimiyle ilişkilendirilir ve yalnızca ilişkili VM için geçerlidir. Bir NSG bir alt ağ ile ilişkilendirildiğinde kurallar alt ağa bağlı tüm kaynaklar için geçerli olur.
 
 ### <a name="network-security-group-rules"></a>Ağ güvenlik grubu kuralları
 
 NSG kuralları trafiğe izin verilen veya trafiğin engellendiği ağ bağlantı noktalarını tanımlar. Trafiğin belirli sistemler veya alt ağlar arasında denetlenmesi için kurallar, kaynak ve hedef IP adresi aralıkları içerebilir. Ayrıca NSG kuralları öncelik (1 ile 4.096 arasında) içerir. Kurallar öncelik sırasına göre değerlendirilir. 100 önceliğine sahip bir kural, 200 önceliğine sahip kuraldan önce değerlendirilir.
 
-Tüm NSG'ler bir varsayılan kurallar kümesini içerir. Varsayılan kurallar silinemez ancak en düşük önceliğe atanmış oldukları çünkü bunlar oluşturduğunuz kurallar tarafından geçersiz kılınabilir.
+Tüm NSG'ler bir varsayılan kurallar kümesini içerir. Varsayılan kurallar silinemez, ancak en düşük önceliğe atandıklarından, oluşturduğunuz kurallar tarafından geçersiz kılınabilir.
 
 - **Sanal ağ** - Kaynağı bir sanal ağ olan ve bir sanal ağda biten trafiğe hem gelen hem de giden yönlerde izin verilir.
 - **İnternet** - Giden trafiğe izin verilir, ancak gelen trafik engellenir.
@@ -169,7 +168,7 @@ Tüm NSG'ler bir varsayılan kurallar kümesini içerir. Varsayılan kurallar si
 
 ### <a name="create-network-security-groups"></a>Ağ güvenlik grupları oluşturma
 
-Adlı bir gelen kuralı oluşturma *myFrontendNSGRule* gelen web trafiği üzerinde izin vermek için *myFrontendVM* kullanarak [yeni AzNetworkSecurityRuleConfig](https://docs.microsoft.com/powershell/module/az.network/new-aznetworksecurityruleconfig):
+[New-AzNetworkSecurityRuleConfig](https://docs.microsoft.com/powershell/module/az.network/new-aznetworksecurityruleconfig)kullanarak *Myfrontendvm* üzerinde gelen Web trafiğine Izin vermek Için *myfrontendnsgrule* adlı bir gelen kural oluşturun:
 
 ```azurepowershell-interactive
 $nsgFrontendRule = New-AzNetworkSecurityRuleConfig `
@@ -199,7 +198,7 @@ $nsgBackendRule = New-AzNetworkSecurityRuleConfig `
   -Access Allow
 ```
 
-Adlı bir ağ güvenlik grubu eklemek *myFrontendNSG* kullanarak [yeni AzNetworkSecurityGroup](https://docs.microsoft.com/powershell/module/az.network/new-aznetworksecuritygroup):
+[New-AzNetworkSecurityGroup](https://docs.microsoft.com/powershell/module/az.network/new-aznetworksecuritygroup)kullanarak *Myfrontendnsg* adlı bir ağ güvenlik grubu ekleyin:
 
 ```azurepowershell-interactive
 $nsgFrontend = New-AzNetworkSecurityGroup `
@@ -209,7 +208,7 @@ $nsgFrontend = New-AzNetworkSecurityGroup `
   -SecurityRules $nsgFrontendRule
 ```
 
-Şimdi adlı bir ağ güvenlik grubu ekleyin *myBackendNSG* yeni AzNetworkSecurityGroup kullanarak:
+Şimdi New-AzNetworkSecurityGroup kullanarak *Mybackendnsg* adlı bir ağ güvenlik grubu ekleyin:
 
 ```azurepowershell-interactive
 $nsgBackend = New-AzNetworkSecurityGroup `
@@ -273,7 +272,7 @@ New-AzVM `
    -VirtualNetworkName myVNet
 ```
 
-SQL Server görüntüsü bu örnekteki yüklüdür, ancak bu öğreticide kullanılan değil. Web trafiğini işlemek için bir VM ile bir VM, veritabanı yönetimi işlemek için nasıl yapılandıracağınızı göstermek için dahil edilir.
+Bu örnekteki görüntüde yüklü SQL Server vardır, ancak bu öğreticide kullanılmaz. Bir sanal makineyi, Web trafiğini işlemek için bir VM 'yi ve veritabanı yönetimini işlemek için bir VM 'yi nasıl yapılandırabileceğini göstermek için eklenmiştir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

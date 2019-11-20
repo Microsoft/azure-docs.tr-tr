@@ -1,6 +1,6 @@
 ---
 title: REST kullanarak bir Azure Media Services hesabına dosya yükleme | Microsoft Docs
-description: Medya içeriği oluşturma ve karşıya yükleme varlıklar Media Services'e almayı öğrenin.
+description: Varlıklar oluşturup karşıya yükleyerek Media Services medya içeriğini nasıl alabileceğinizi öğrenin.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -13,53 +13,53 @@ ms.devlang: na
 ms.topic: article
 ms.date: 02/10/2019
 ms.author: juliako
-ms.openlocfilehash: a241f66adecbab1d0b1462f379d3765d6c1de252
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 78c07330558241c889f284bcaf7302ce1327b5b8
+ms.sourcegitcommit: 88ae4396fec7ea56011f896a7c7c79af867c90a1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61466808"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70389797"
 ---
 # <a name="upload-files-into-a-media-services-account-using-rest"></a>REST kullanarak bir Media Services hesabına dosya yükleme
 
-Media Services'de dijital dosyalar bir varlık ile ilişkili blob kapsayıcısına yükleyin. [Varlık](https://docs.microsoft.com/rest/api/media/operations/asset) varlığı video, ses, görüntüler, küçük resim koleksiyonları, metin parçaları ve kapalı açıklamalı alt yazı dosyaları (ve bu dosyalar hakkındaki meta veriler) içerebilir. Varlık kapsayıcısının içine dosyalar yüklendiğinde, içeriğiniz sonraki işleme ve akışla için bulutta güvenli bir şekilde depolanır.
+Media Services, dijital dosyalarınızı bir varlıkla ilişkili bir blob kapsayıcısına yüklersiniz. Varlık [varlığı video](https://docs.microsoft.com/rest/api/media/operations/asset) , ses, görüntüler, küçük resim koleksiyonları, metin parçaları ve kapalı açıklamalı alt yazı dosyaları (ve bu dosyalar hakkındaki meta veriler) içerebilir. Dosyalar varlığın kapsayıcısına yüklendikten sonra, içeriğiniz daha fazla işlem ve akış için bulutta güvenli bir şekilde depolanır.
 
-Bu makalede REST suing yerel bir dosya karşıya yükleme gösterilmektedir.
+Bu makalede, REST kullanarak yerel bir dosyayı karşıya yükleme işleminin nasıl yapılacağı gösterilir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Bu konu başlığı altında açıklanan adımları tamamlamak için için gerekenler:
 
-- Gözden geçirme [varlık kavramı](assets-concept.md).
+- [Varlık kavramını](assets-concept.md)gözden geçirin.
 - [Azure Media Services REST API çağrıları için Postman yapılandırma](media-rest-apis-with-postman.md).
     
-    Konunun son adımı takip edin [Azure AD belirteci Al](media-rest-apis-with-postman.md#get-azure-ad-token). 
+    [Azure AD belirtecini al](media-rest-apis-with-postman.md#get-azure-ad-token)konusunun son adımını izlediğinizden emin olun. 
 
-## <a name="create-an-asset"></a>Bir varlık oluşturun
+## <a name="create-an-asset"></a>Varlık oluşturma
 
-Bu bölümde, yeni bir varlık oluşturma işlemi gösterilmektedir.
+Bu bölümde, yeni bir varlığın nasıl oluşturulacağı gösterilmektedir.
 
-1. Seçin **varlıklar** -> **oluşturma veya güncelleştirme bir varlık**.
+1. **Varlık oluşturma veya güncelleştirme** **varlıkları** -> ' nı seçin.
 2. **Gönder**’e basın.
 
-    ![Bir varlık oluşturun](./media/upload-files/postman-create-asset.png)
+    ![Varlık oluşturma](./media/upload-files/postman-create-asset.png)
 
-Gördüğünüz **yanıt** yeni oluşturulan varlık hakkındaki bilgileri ile.
+Yeni oluşturulan varlık hakkında bilgi ile **yanıtı** görürsünüz.
 
-## <a name="get-a-sas-url-with-read-write-permissions"></a>Okuma / yazma izinlerine sahip bir SAS URL'sini alma 
+## <a name="get-a-sas-url-with-read-write-permissions"></a>Okuma/yazma izinlerine sahip SAS URL 'SI alın 
 
-Bu bölümde, oluşturulan bir varlık için oluşturulmuş bir SAS URL'si alma işlemi gösterilmektedir. SAS URL'sini okuma-yazma izinleri ile oluşturulmuş ve dijital dosyalar varlık kapsayıcıya yüklemek için kullanılabilir.
+Bu bölüm, oluşturulan varlık için oluşturulan bir SAS URL 'sinin nasıl alınacağını gösterir. SAS URL 'SI okuma-yazma izinleriyle oluşturulmuştur ve varlık kapsayıcısına dijital dosyaları yüklemek için kullanılabilir.
 
-1. Seçin **varlıklar** -> **varlık URL'lerin listesi**.
+1. **Varlık URL 'lerini**seçin **varlıklar** -> listesini seçin.
 2. **Gönder**’e basın.
 
-    ![Dosyayı karşıya yükleme](./media/upload-files/postman-create-sas-locator.png)
+    ![Karşıya dosya yükle](./media/upload-files/postman-create-sas-locator.png)
 
-Gördüğünüz **yanıt** varlığın URL'leri hakkındaki bilgileri ile. İlk URL'sini kopyalayın ve dosyanızı karşıya yüklemek için kullanın.
+Varlığın URL 'Leri hakkında bilgi içeren **yanıtı** görürsünüz. İlk URL 'YI kopyalayın ve dosyanızı karşıya yüklemek için kullanın.
 
-## <a name="upload-a-file-to-blob-storage-using-the-upload-url"></a>Bir dosya karşıya yükleme URL'yi kullanarak blob depolamaya yükleme
+## <a name="upload-a-file-to-blob-storage-using-the-upload-url"></a>Karşıya yükleme URL 'sini kullanarak blob depolamaya bir dosya yükleme
 
-Azure depolama API veya SDK'larını (örneğin, [depolama REST API'si](../../storage/common/storage-rest-api-auth.md), [JAVA SDK'sı](../../storage/blobs/storage-quickstart-blobs-java-v10.md), veya [.NET SDK'sı](../../storage/blobs/storage-quickstart-blobs-dotnet.md).
+Azure depolama API 'Lerini veya SDK 'Larını (örneğin, [depolama REST API](../../storage/common/storage-rest-api-auth.md) veya [.NET SDK](../../storage/blobs/storage-quickstart-blobs-dotnet.md)) kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

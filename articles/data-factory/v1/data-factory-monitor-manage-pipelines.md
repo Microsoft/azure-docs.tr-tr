@@ -1,181 +1,179 @@
 ---
-title: İzleme ve işlem hatları, PowerShell ve Azure portalını kullanarak yönetme | Microsoft Docs
-description: Azure veri fabrikası ve oluşturduğunuz işlem hatlarını yönetmek ve izlemek için Azure PowerShell ve Azure Portalı'nı kullanmayı öğrenin.
+title: Azure portal ve PowerShell kullanarak işlem hatlarını izleme ve yönetme
+description: Azure portal ve Azure PowerShell kullanarak oluşturduğunuz Azure veri fabrikalarını ve işlem hatlarını izleyip yönetme hakkında bilgi edinin.
 services: data-factory
 documentationcenter: ''
-author: sharonlo101
-manager: craigg
-ms.assetid: 9b0fdc59-5bbe-44d1-9ebc-8be14d44def9
+author: djpmsft
+ms.author: daperlov
+manager: jroth
+ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
-ms.tgt_pltfrm: na
 ms.topic: conceptual
 ms.date: 04/30/2018
-ms.author: shlo
-robots: noindex
-ms.openlocfilehash: 64fae56bfc95b62bd60444d49100689845f64278
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 44aadecfa80524345932c03abb51e8ebd040a902
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66123145"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73666975"
 ---
-# <a name="monitor-and-manage-azure-data-factory-pipelines-by-using-the-azure-portal-and-powershell"></a>İzleme ve Azure portalı ve PowerShell kullanarak Azure Data Factory işlem hatlarını yönetme
+# <a name="monitor-and-manage-azure-data-factory-pipelines-by-using-the-azure-portal-and-powershell"></a>Azure portal ve PowerShell 'i kullanarak Azure Data Factory işlem hatlarını izleme ve yönetme
 > [!div class="op_single_selector"]
 > * [Azure portal/Azure PowerShell kullanma](data-factory-monitor-manage-pipelines.md)
-> * [Kullanarak izleme ve yönetim uygulaması](data-factory-monitor-manage-app.md)
+> * [Izleme ve yönetim uygulaması kullanma](data-factory-monitor-manage-app.md)
 
 > [!NOTE]
-> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız bkz [izlemek ve yönetmek, Data Factory işlem hatlarını](../monitor-visually.md).
+> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız, bkz. [Data Factory işlem hatlarını izleme ve yönetme](../monitor-visually.md).
 
-Bu makalede, izleme, yönetme ve işlem hatlarınızı Azure portal ve PowerShell kullanarak hata ayıklama açıklar.
-
-> [!IMPORTANT]
-> İzleme ve yönetim uygulaması izleme ve veri işlem hatlarınızı yönetme ve her türlü sorunu gidermek için daha iyi destek sağlar. Uygulamayı kullanma hakkında daha fazla ayrıntı için bkz. [izlemek ve Data Factory işlem hatlarını izleme ve yönetme uygulamasını kullanarak yönetmek](data-factory-monitor-manage-app.md). 
+Bu makalede Azure portal ve PowerShell kullanarak işlem hatlarınızı izleme, yönetme ve hata ayıklama işlemlerinin nasıl yapılacağı açıklanır.
 
 > [!IMPORTANT]
-> Azure Data Factory sürüm 1 şimdi kullanan yeni [Azure İzleyici'de altyapı uyarı](../../monitoring-and-diagnostics/monitor-alerts-unified-usage.md). Eski uyarı altyapı kullanım dışı bırakılmıştır. Sonuç olarak, mevcut uyarılarınızı sürüm 1 veri fabrikaları artık çalışmıyor yapılandırılmış. Mevcut uyarılarınızı v1 veri fabrikaları için otomatik olarak geçirilmez. Bu uyarılar yeni uyarı altyapı oluşturmanız gerekebilir. Azure portal ve select oturum **İzleyici** yeni uyarılar ölçümleri (örneğin, başarısız çalıştırmaları veya başarılı çalıştırmalar) sürümünüz için 1 veri fabrikası oluşturmak için.
+> İzleme & yönetimi uygulaması, veri işlem hatlarınızı izlemek ve yönetmek için ve sorunları gidermeye yönelik daha iyi bir destek sağlar. Uygulamayı kullanma hakkında ayrıntılı bilgi için bkz. [izleme ve yönetim uygulamasını kullanarak Data Factory işlem hatlarını izleme ve yönetme](data-factory-monitor-manage-app.md). 
+
+> [!IMPORTANT]
+> Azure Data Factory sürüm 1 artık yeni [Azure izleyici uyarı altyapısını](../../monitoring-and-diagnostics/monitor-alerts-unified-usage.md)kullanıyor. Eski uyarı altyapısı kullanımdan kaldırılmıştır. Sonuç olarak, sürüm 1 veri fabrikaları için yapılandırılmış mevcut uyarılarınız artık çalışmaz. V1 veri fabrikaları için mevcut uyarılarınız otomatik olarak geçirilmez. Bu uyarıları yeni uyarı altyapısında yeniden oluşturmanız gerekir. Sürüm 1 veri fabrikalarınız için Azure portal oturum açın ve ölçümler üzerinde yeni uyarılar (başarısız çalıştırmalar veya başarılı çalıştırmalar gibi) oluşturmak için **izleyici** ' yi seçin.
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-## <a name="understand-pipelines-and-activity-states"></a>İşlem hattı ve etkinlik durumlarını anlama
-Azure portalını kullanarak şunları yapabilirsiniz:
+## <a name="understand-pipelines-and-activity-states"></a>İşlem hatlarını ve etkinlik durumlarını anlama
+Azure portal kullanarak şunları yapabilirsiniz:
 
-* Veri fabrikanızın diyagram görüntüleyin.
-* Bir işlem hattı içindeki etkinlikleri görüntüleyin.
+* Veri fabrikanızı diyagram olarak görüntüleyin.
+* Etkinlikleri bir işlem hattında görüntüleyin.
 * Giriş ve çıkış veri kümelerini görüntüleyin.
 
-Bu bölümde, nasıl bir veri kümesi dilim bir durumdan başka bir duruma geçiş de açıklanmaktadır.   
+Bu bölümde ayrıca bir veri kümesi diliminin bir durumdan başka bir duruma nasıl geçirdiği açıklanmaktadır.   
 
-### <a name="navigate-to-your-data-factory"></a>Veri fabrikanıza gidin
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Tıklayın **veri fabrikaları** soldaki menüsünde. Görmüyorsanız, tıklayın **diğer hizmetler >** ve ardından **veri fabrikaları** altında **ZEKA + ANALİZ** kategorisi.
+### <a name="navigate-to-your-data-factory"></a>Veri fabrikanıza gitme
+1. [Azure portalında](https://portal.azure.com) oturum açın.
+2. Soldaki menüdeki **veri fabrikaları** ' na tıklayın. Bunu görmüyorsanız, **diğer hizmetler >** ' a tıklayın ve ardından **zeka + analiz** kategorisi altında **veri fabrikaları** ' na tıklayın.
 
-   ![Tümüne Gözat > veri fabrikaları](./media/data-factory-monitor-manage-pipelines/browseall-data-factories.png)
-3. Üzerinde **veri fabrikaları** dikey penceresinde, ilgilendiğiniz veri fabrikası'nı seçin.
+   ![Tüm > veri fabrikalarını inceleyin](./media/data-factory-monitor-manage-pipelines/browseall-data-factories.png)
+3. **Veri fabrikaları** dikey penceresinde ilgilendiğiniz veri fabrikasını seçin.
 
     ![Veri fabrikası seçme](./media/data-factory-monitor-manage-pipelines/select-data-factory.png)
 
-   Veri fabrikasının giriş sayfasını görmeniz gerekir.
+   Data Factory için ana sayfayı görmeniz gerekir.
 
    ![Veri fabrikası dikey penceresi](./media/data-factory-monitor-manage-pipelines/data-factory-blade.png)
 
-#### <a name="diagram-view-of-your-data-factory"></a>Veri fabrikanızın diyagram görünümü
-**Diyagram** görünümü bir data Factory veri fabrikasına ve varlıklarını yönetmek ve izlemek için tek bir panel sağlar. Görmek için **diyagram** görünümünde veri fabrikanızı, tıklayın **diyagram** veri fabrikasının giriş sayfasında.
+#### <a name="diagram-view-of-your-data-factory"></a>Veri fabrikanızın Diyagram görünümü
+Bir veri fabrikasının **Diyagram** görünümü, veri fabrikasını ve varlıklarını izlemek ve yönetmek için tek bir cam bölmesi sağlar. Veri fabrikanızın **Diyagram** görünümünü görmek için, veri fabrikasının giriş sayfasında **Diyagram** ' a tıklayın.
 
 ![Diyagram görünümü](./media/data-factory-monitor-manage-pipelines/diagram-view.png)
 
-Yakınlaştırmak, uzaklaştırabilir, uygun, % 100 Yakınlaştır, diyagramın düzenini kilitleyin ve işlem hatlarını ve veri kümeleri otomatik olarak konumlandırma Yakınlaştır. Veri kökenini bilgileri de görebilirsiniz (yani, seçilen öğelerin yukarı ve aşağı akış öğelerini göster).
+Yakınlaştırabilir, yakınlaştırabilir, sığacak kadar yakınlaştırabilir, %100 Yakınlaştır, Diyagram düzenini kilitler ve işlem hatlarını ve veri kümelerini otomatik olarak konumlandırabilirsiniz. Data kökenini bilgilerini de görebilirsiniz (diğer bir deyişle, seçili öğelerin yukarı akış ve aşağı akış öğelerini gösterebilirsiniz).
 
-### <a name="activities-inside-a-pipeline"></a>Bir işlem hattı içindeki etkinlikleri
-1. İşlem hattı sağ tıklayın ve ardından **ardışık düzeni Aç** etkinlikler için girdi ve çıktı veri kümeleri ile birlikte, işlem hattındaki tüm etkinlikleri görmek için. Bu özellik, birden fazla etkinlik, işlem hattı içerir ve tek bir işlem hattının işlem hatlarınız anlamak istediğinizde yararlıdır.
+### <a name="activities-inside-a-pipeline"></a>İşlem hattının içindeki etkinlikler
+1. İşlem hattına sağ tıklayın ve sonra işlem hattındaki tüm etkinlikleri görüntülemek için işlem hattını **Aç** ' a tıklayın. Bu işlem, etkinliklerin giriş ve çıkış veri kümeleriyle birlikte. Bu özellik, işlem hatlarınız birden fazla etkinlik içerdiğinde ve tek bir işlem hattının işletimsel kökenini anlamak istediğinizde yararlıdır.
 
     ![İşlem hattı menüsünü açma](./media/data-factory-monitor-manage-pipelines/open-pipeline-menu.png)     
-2. Aşağıdaki örnekte, bir kopyalama etkinliği bir girdi ve çıktı ile işlem hattını görürsünüz. 
+2. Aşağıdaki örnekte, bir giriş ve çıkış ile işlem hattında bir kopyalama etkinliği görürsünüz. 
 
-    ![Bir işlem hattı içindeki etkinlikleri](./media/data-factory-monitor-manage-pipelines/activities-inside-pipeline.png)
-3. Ana sayfaya geri data Factory tıklayarak gidebilirsiniz **veri fabrikası** yer alan içerik haritasındaki sol üst köşesinde bağlantı.
+    ![İşlem hattının içindeki etkinlikler](./media/data-factory-monitor-manage-pipelines/activities-inside-pipeline.png)
+3. Sağ üst köşedeki içerik haritası ' nda bulunan **Data Factory** bağlantısına tıklayarak veri fabrikasının giriş sayfasına geri gidebilirsiniz.
 
-    ![Data factory'ye geri gidin](./media/data-factory-monitor-manage-pipelines/navigate-back-to-data-factory.png)
+    ![Data Factory 'ye geri git](./media/data-factory-monitor-manage-pipelines/navigate-back-to-data-factory.png)
 
-### <a name="view-the-state-of-each-activity-inside-a-pipeline"></a>Bir işlem hattı içindeki her bir etkinlik durumunu görüntüleme
-Herhangi bir etkinlik tarafından oluşturulan veri kümelerini durumunu görüntüleyerek bir etkinliğin geçerli durumunu görüntüleyebilirsiniz.
+### <a name="view-the-state-of-each-activity-inside-a-pipeline"></a>Bir işlem hattının içindeki her etkinliğin durumunu görüntüleme
+Etkinlik tarafından üretilen veri kümelerinin herhangi birinin durumunu görüntüleyerek bir etkinliğin geçerli durumunu görüntüleyebilirsiniz.
 
-Çift tıklayarak **OutputBlobTable** içinde **diyagram**, bir işlem hattı içindeki farklı etkinlik çalıştırmalarını tarafından üretilen tüm dilimleri görebilirsiniz. Kopyalama etkinliği için başarıyla son sekiz saat çalıştı ve dilimlerinin içinde gördüğünüz **hazır** durumu.  
+**Diyagramdaki** **outputblobtable** öğesine çift tıklayarak, bir işlem hattının içinde farklı etkinlik çalıştırmaları tarafından üretilen tüm dilimleri görebilirsiniz. Kopyalama etkinliğinin son sekiz saat boyunca başarıyla çalıştığını ve dilimleri **hazırlanma** durumunda üretmekte olduğunu görebilirsiniz.  
 
-![Ardışık Düzen durumu](./media/data-factory-monitor-manage-pipelines/state-of-pipeline.png)
+![İşlem hattının durumu](./media/data-factory-monitor-manage-pipelines/state-of-pipeline.png)
 
-Data factory veri kümesi dilimleri aşağıdaki durumlardan birine sahip olabilir:
+Data Factory 'deki veri kümesi dilimleri aşağıdaki durumlardan birine sahip olabilir:
 
 <table>
 <tr>
-    <th align="left">Eyalet</th><th align="left">Alt durumu eşleştirildi</th><th align="left">Açıklama</th>
+    <th align="left">Durum</th><th align="left">Alt</th><th align="left">Açıklama</th>
 </tr>
 <tr>
-    <td rowspan="8">Bekleniyor</td><td>ScheduleTime</td><td>Dilimin çalıştırılma zamanı gelen edilmemiş.</td>
+    <td rowspan="8">Bekleniyor</td><td>ScheduleTime</td><td>Dilimin çalışması için geçen süre.</td>
 </tr>
 <tr>
-<td>DatasetDependencies</td><td>Yukarı Akış bağımlılıkları hazır değil.</td>
+<td>DatasetDependencies</td><td>Yukarı akış bağımlılıkları için hazırlanma.</td>
 </tr>
 <tr>
-<td>ComputeResources</td><td>İşlem kaynakları kullanılamıyor.</td>
+<td>Bilgisayar ile kaynaklar</td><td>İşlem kaynakları kullanılamıyor.</td>
 </tr>
 <tr>
-<td>ConcurrencyLimit</td> <td>Tüm etkinlik örnekleri diğer dilimleri çalıştırıyor.</td>
+<td>ConcurrencyLimit</td> <td>Tüm etkinlik örnekleri diğer dilimleri çalıştırmakla meşgul.</td>
 </tr>
 <tr>
-<td>ActivityResume</td><td>Etkinlik duraklatıldı ve etkinlik sürdürülene kadar dilimler çalıştırılamaz.</td>
+<td>Activityözgeçmişi</td><td>Etkinlik duraklatılır ve etkinlik sürdürülene kadar dilimleri çalıştıramıyorum.</td>
 </tr>
 <tr>
-<td>Yeniden Dene</td><td>Etkinlik yürütme yeniden deneniyor.</td>
+<td>Yeniden Dene</td><td>Etkinlik yürütmesi yeniden deneniyor.</td>
 </tr>
 <tr>
 <td>Doğrulama</td><td>Doğrulama henüz başlatılmadı.</td>
 </tr>
 <tr>
-<td>ValidationRetry</td><td>Doğrulama denenmesi için bekliyor.</td>
+<td>ValidationRetry</td><td>Doğrulama yeniden denenmek üzere bekliyor.</td>
 </tr>
 <tr>
 <tr>
-<td rowspan="2">Devam ediyor</td><td>Doğrulama</td><td>Doğrulama işlemi devam ediyor.</td>
+<td rowspan="2">Ediyor</td><td>Doğrulamada</td><td>Doğrulama devam ediyor.</td>
 </tr>
 <td>-</td>
 <td>Dilim işleniyor.</td>
 </tr>
 <tr>
-<td rowspan="4">Başarısız</td><td>Zaman aşımına uğradı</td><td>Etkinlik yürütme etkinliği tarafından izin verilenden daha uzun sürdü.</td>
+<td rowspan="4">Başarısız</td><td>Zaman aşımına uğradı</td><td>Etkinlik yürütmesi etkinliğin izin verilenden daha uzun sürdü.</td>
 </tr>
 <tr>
-<td>İptal edildi</td><td>Dilim kullanıcı eylemiyle iptal edildi.</td>
+<td>İptal edildi</td><td>Dilim Kullanıcı eylemi tarafından iptal edildi.</td>
 </tr>
 <tr>
 <td>Doğrulama</td><td>Doğrulama başarısız oldu.</td>
 </tr>
 <tr>
-<td>-</td><td>Dilim oluşturulan doğrulandı ve/veya başarısız oldu.</td>
+<td>-</td><td>Dilim oluşturulamadı ve/veya doğrulanamadı.</td>
 </tr>
-<td>Hazır</td><td>-</td><td>Dilim kullanıma hazır olur.</td>
-</tr>
-<tr>
-<td>Atlandı</td><td>None</td><td>Dilimin işlenmekte olan değildir.</td>
+<td>Hazır</td><td>-</td><td>Dilim, tüketim için hazırlayın.</td>
 </tr>
 <tr>
-<td>None</td><td>-</td><td>Farklı bir durum ile bir dilim kullanılır, ancak sıfırlandı.</td>
+<td>Atlanmış</td><td>None</td><td>Dilim işlenmiyor.</td>
+</tr>
+<tr>
+<td>None</td><td>-</td><td>Farklı bir durumla aynı şekilde kullanılan bir dilim, ancak sıfırlandı.</td>
 </tr>
 </table>
 
 
 
-Bir dilim girişi tıklayarak bir dilim ayrıntılarını görüntüleyebilirsiniz **en son güncelleştirilen dilimler** dikey penceresi.
+**Son güncellenen dilimler** dikey penceresinde bir dilim girişine tıklayarak bir dilimle ilgili ayrıntıları görüntüleyebilirsiniz.
 
-![Dilimi ayrıntıları](./media/data-factory-monitor-manage-pipelines/slice-details.png)
+![Dilim ayrıntıları](./media/data-factory-monitor-manage-pipelines/slice-details.png)
 
-Dilim birden çok kez yürütüldü birden çok satır görürsünüz **etkinlik çalıştırmalarını** listesi. Çalıştırma girdiye tıklayarak çalıştırın bir etkinliği hakkında ayrıntılı bilgi görüntüleyebileceğiniz **etkinlik çalıştırmalarını** listesi. Varsa bir hata iletisi ile birlikte tüm günlük dosyaları, liste gösterir. Bu özellik, veri fabrikanıza ayrılmak zorunda kalmadan hata ayıklama günlüklerini görüntülemek yararlıdır.
+Dilim birden çok kez yürütülürse, **etkinlik çalıştırmaları** listesinde birden çok satır görürsünüz. Etkinlik **çalıştırmaları** listesinde Çalıştır girişi ' ne tıklayarak bir etkinliğin çalışma hakkındaki ayrıntıları görüntüleyebilirsiniz. Liste, varsa, bir hata iletisiyle birlikte tüm günlük dosyalarını gösterir. Bu özellik, veri fabrikanızın ayrılmasına gerek kalmadan günlükleri görüntülemek ve hatalarını ayıklamak için faydalıdır.
 
 ![Etkinlik çalışma ayrıntıları](./media/data-factory-monitor-manage-pipelines/activity-run-details.png)
 
-Dilim değilse **hazır** durumu, hazır değil ve geçerli dilimin yürütülmesini engelleyen Yukarı Akış dilimleri görebilirsiniz **hazır olmayan Yukarı Akış dilimleri** listesi. Bu özellik, dilim olduğunda yararlıdır **bekleyen** duruma ve istediğinizde dilimi bekliyor Yukarı Akış bağımlılıkları anlamak.
+Dilim, **Ready** durumunda değilse, etkin olmayan yukarı akış dilimlerini görebilir ve geçerli dilimi, **henüz kullanılamayan yukarı akış dilimlerinde** yürütmeyi engelliyor olarak izleyebilirsiniz. Bu özellik, dilim **bekleme** durumundaysa ve dilimin beklediği yukarı akış bağımlılıklarını anlamak istediğinizde faydalıdır.
 
-![Hazır olmayan Yukarı Akış dilimleri](./media/data-factory-monitor-manage-pipelines/upstream-slices-not-ready.png)
+![Kullanılabilir olmayan yukarı akış dilimleri](./media/data-factory-monitor-manage-pipelines/upstream-slices-not-ready.png)
 
-### <a name="dataset-state-diagram"></a>Veri kümesi durum diyagramı
-Veri Fabrikası dağıtabiliyorum ve işlem hatlarını geçerli etkin bir süre sonra veri kümesi geçiş bir durumdan diğerine böler. Dilim durumu şu anda aşağıdaki durum diyagramı aşağıdaki gibidir:
+### <a name="dataset-state-diagram"></a>Veri kümesi durumu diyagramı
+Bir veri fabrikası dağıttıktan ve işlem hatları geçerli bir etkin döneme sahip olduktan sonra, veri kümesi dilimleri bir durumdan diğerine geçiş yapılır. Şu anda, dilim durumu aşağıdaki durum diyagramını izler:
 
-![Durum Diyagramı](./media/data-factory-monitor-manage-pipelines/state-diagram.png)
+![Durum diyagramı](./media/data-factory-monitor-manage-pipelines/state-diagram.png)
 
-Data factory'de veri kümesi durumu geçiş akışı aşağıdaki gibidir: Bekletme -> içinde-ilerleme / (doğrulama) sürüyor hazır/başarısız oldu->.
+Data Factory 'deki veri kümesi durumu geçiş akışı şunlardır: bekleme-> sürüyor/devam ediyor (doğrulanıyor)-> Ready/Failed.
 
-Dilim başlatılacağı bir **bekleyen** yürütülmeden önce karşılanması gereken önkoşulları bekleme durumu. Ardından etkinlik çalıştırmaya başlar ve dilim girmeyeceğini bir **sürüyor** durumu. Etkinlik yürütme başarılı veya başarısız. Dilim olarak işaretlenmiş **hazır** veya **başarısız**göre yürütmenin sonucu.
+Dilim **bekleme** durumunda başlar ve yürütmeden önce önkoşulların karşılanmasını bekler. Sonra, etkinlik yürütülmeye başlar ve dilim **devam ediyor** durumuna geçer. Etkinlik yürütmesi başarılı veya başarısız olabilir. Dilim, yürütmenin sonucuna bağlı olarak, **Ready** veya **Failed**olarak işaretlenir.
 
-Öğesinden geri dönmek için dilim sıfırlayabilirsiniz **hazır** veya **başarısız** durumunu **bekleyen** durumu. Dilim durumu da işaretleyebilirsiniz **atla**, Etkinlik yürütme ve dilim işleme değil engeller.
+Dilimi, **Ready** veya **başarısız** durumundan **bekleme** durumuna geri dönmek için sıfırlayabilirsiniz. Ayrıca, etkinliğin yürütülmesini ve dilimi işlemesini önleyen, **atlanacak**dilim durumunu da işaretleyebilirsiniz.
 
-## <a name="pause-and-resume-pipelines"></a>Duraklatma ve sürdürme işlem hatları
-İşlem hatlarınızı Azure PowerShell kullanarak yönetebilirsiniz. Örneğin, duraklatma ve Azure PowerShell cmdlet'lerini çalıştırarak işlem hatları sürdürün. 
+## <a name="pause-and-resume-pipelines"></a>İşlem hatlarını duraklatma ve devam ettirme
+Azure PowerShell kullanarak işlem hatlarınızı yönetebilirsiniz. Örneğin, Azure PowerShell cmdlet 'lerini çalıştırarak işlem hatlarını duraklatabilir ve devam ettirebilirsiniz. 
 
 > [!NOTE] 
-> Diyagram görünümü, duraklatma ve sürdürme işlem hatları desteklemez. Bir kullanıcı arabirimi kullanmak istiyorsanız, izleme ve yönetme uygulaması kullanın. Uygulamayı kullanma hakkında daha fazla ayrıntı için bkz. [izlemek ve Data Factory işlem hatlarını izleme ve yönetme uygulamasını kullanarak yönetmek](data-factory-monitor-manage-app.md) makalesi. 
+> Diyagram görünümü, işlem hatlarını duraklatmayı ve sürdürmeyi desteklemez. Bir kullanıcı arabirimi kullanmak istiyorsanız, izleme ve yönetme uygulamasını kullanın. Uygulamayı kullanma hakkında ayrıntılı bilgi için bkz. [izleme ve yönetim uygulaması makalesini kullanarak Data Factory işlem hatlarını izleme ve yönetme](data-factory-monitor-manage-app.md) . 
 
-Duraklatma/işlem hatları kullanarak askıya alabilirsiniz **Suspend-AzDataFactoryPipeline** PowerShell cmdlet'i. Bu cmdlet, bir sorun düzeltilene kadar işlem hatlarınızı çalıştırmak istemediğiniz zaman yararlıdır. 
+**Suspend-AzDataFactoryPipeline** PowerShell cmdlet 'ini kullanarak işlem hatlarını duraklatabilir/askıya alabilirsiniz. Bu cmdlet, bir sorun düzeltilene kadar işlem hatlarınızı çalıştırmak istemediğinizde yararlıdır. 
 
 ```powershell
 Suspend-AzDataFactoryPipeline [-ResourceGroupName] <String> [-DataFactoryName] <String> [-Name] <String>
@@ -186,7 +184,7 @@ Suspend-AzDataFactoryPipeline [-ResourceGroupName] <String> [-DataFactoryName] <
 Suspend-AzDataFactoryPipeline -ResourceGroupName ADF -DataFactoryName productrecgamalbox1dev -Name PartitionProductsUsagePipeline
 ```
 
-İşlem hattı çalıştırmasıyla sorun çözüldükten sonra aşağıdaki PowerShell komutunu çalıştırarak askıya alınmış işlem hattı devam edebilir:
+Sorun ardışık düzen ile düzeltildikten sonra, aşağıdaki PowerShell komutunu çalıştırarak askıya alınmış işlem hattını sürdürebilirsiniz:
 
 ```powershell
 Resume-AzDataFactoryPipeline [-ResourceGroupName] <String> [-DataFactoryName] <String> [-Name] <String>
@@ -197,29 +195,29 @@ Resume-AzDataFactoryPipeline [-ResourceGroupName] <String> [-DataFactoryName] <S
 Resume-AzDataFactoryPipeline -ResourceGroupName ADF -DataFactoryName productrecgamalbox1dev -Name PartitionProductsUsagePipeline
 ```
 
-## <a name="debug-pipelines"></a>İşlem hatları hata ayıklama
-Azure Data Factory, Azure portalı ve Azure PowerShell kullanarak komut zincirlerinin sorunlarını giderme ve hata ayıklama için zengin özellikler sunar.
+## <a name="debug-pipelines"></a>Hata ayıklama ardışık düzenleri
+Azure Data Factory, Azure portal ve Azure PowerShell kullanarak işlem hatlarında hata ayıklamanıza ve sorun gidermenize yönelik zengin yetenekler sağlar.
 
 > [!NOTE] 
-> İzleme ve yönetim uygulaması kullanarak troubleshot hataları daha kolaydır. Uygulamayı kullanma hakkında daha fazla ayrıntı için bkz. [izlemek ve Data Factory işlem hatlarını izleme ve yönetme uygulamasını kullanarak yönetmek](data-factory-monitor-manage-app.md) makalesi. 
+> Izleme & yönetimi uygulamasını kullanarak hatalara troubleshot çok daha kolay. Uygulamayı kullanma hakkında ayrıntılı bilgi için bkz. [izleme ve yönetim uygulaması makalesini kullanarak Data Factory işlem hatlarını izleme ve yönetme](data-factory-monitor-manage-app.md) . 
 
-### <a name="find-errors-in-a-pipeline"></a>Bir işlem hattında hataları bulun
-Bir işlem hattında etkinlik çalıştırma başarısız olursa, işlem hattı tarafından üretilen veri kümesi bir hata nedeniyle başarısız durumda. Hata ayıklama ve aşağıdaki yöntemleri kullanarak Azure Data factory'de hatalarını giderme.
+### <a name="find-errors-in-a-pipeline"></a>İşlem hattında hata bulma
+Etkinlik bir işlem hattında başarısız olursa, işlem hattı tarafından üretilen veri kümesi hata nedeniyle hata durumunda olur. Aşağıdaki yöntemleri kullanarak Azure Data Factory hata ayıklama ve sorun giderme işlemleri yapabilirsiniz.
 
-#### <a name="use-the-azure-portal-to-debug-an-error"></a>Bir hata ayıklama için Azure portalını kullanma
-1. Üzerinde **tablo** dikey penceresinde bulunan sorun dilimine tıklayın **durumu** kümesine **başarısız**.
+#### <a name="use-the-azure-portal-to-debug-an-error"></a>Hata ayıklamak için Azure portal kullanma
+1. **Tablo** dikey penceresinde, **durumu** **başarısız**olarak ayarlanan sorun dilimine tıklayın.
 
-   ![Tablo dikey penceresinin sorun dilim](./media/data-factory-monitor-manage-pipelines/table-blade-with-error.png)
-2. Üzerinde **veri dilimi** dikey penceresinde etkinliğin başarısız Çalıştır'ı tıklatın.
+   ![Sorun dilimiyle tablo dikey penceresi](./media/data-factory-monitor-manage-pipelines/table-blade-with-error.png)
+2. **Veri dilimi** dikey penceresinde başarısız olan etkinlik çalıştırmasına tıklayın.
 
-   ![Veri dilimi hata](./media/data-factory-monitor-manage-pipelines/dataslice-with-error.png)
-3. Üzerinde **etkinlik çalıştırması ayrıntıları** dikey penceresinde, HDInsight işlemeyle ilişkili olan dosyaları karşıdan yükleyebilirsiniz. Tıklayın **indirme** hata hakkındaki ayrıntılar içeren hata günlük dosyasını indirmek durum/stderr için.
+   ![Hata içeren veri dilimi](./media/data-factory-monitor-manage-pipelines/dataslice-with-error.png)
+3. **Etkinlik çalışma ayrıntıları** dikey penceresinde, HDInsight işlemeyle ilişkili dosyaları indirebilirsiniz. Hata hakkındaki ayrıntıları içeren hata günlüğü dosyasını indirmek için durum/stderr için **İndir** ' e tıklayın.
 
-   ![Etkinlik çalıştırma hatası ile ayrıntıları dikey penceresi](./media/data-factory-monitor-manage-pipelines/activity-run-details-with-error.png)     
+   ![Etkinlik çalıştırma ayrıntıları dikey penceresi hata ile](./media/data-factory-monitor-manage-pipelines/activity-run-details-with-error.png)     
 
-#### <a name="use-powershell-to-debug-an-error"></a>Bir hata ayıklama için PowerShell kullanma
+#### <a name="use-powershell-to-debug-an-error"></a>Hata ayıklamak için PowerShell 'i kullanma
 1. **PowerShell**’i başlatın.
-2. Çalıştırma **Get-AzDataFactorySlice** dilimleri ve bunların durumlarını görmek için komutu. Durumunu içeren bir dilim görmeniz gerekir **başarısız**.        
+2. Dilimleri ve bunların durumlarını görmek için **Get-AzDataFactorySlice** komutunu çalıştırın. Durumu **başarısız**olan bir dilim görmeniz gerekir.        
 
     ```powershell   
     Get-AzDataFactorySlice [-ResourceGroupName] <String> [-DataFactoryName] <String> [-DatasetName] <String> [-StartDateTime] <DateTime> [[-EndDateTime] <DateTime> ] [-Profile <AzureProfile> ] [ <CommonParameters>]
@@ -230,8 +228,8 @@ Bir işlem hattında etkinlik çalıştırma başarısız olursa, işlem hattı 
     Get-AzDataFactorySlice -ResourceGroupName ADF -DataFactoryName LogProcessingFactory -DatasetName EnrichedGameEventsTable -StartDateTime 2014-05-04 20:00:00
     ```
 
-   Değiştirin **StartDateTime** değerlerini işlem hattınızın başlangıç saatine sahip. 
-3. Şimdi **Get-AzDataFactoryRun** etkinliği hakkında ayrıntılı bilgi almak için cmdlet çalıştırma için dilim.
+   **StartDateTime** değerini işlem hattınızı başlangıç zamanına göre değiştirin. 
+3. Şimdi, dilim için çalıştırılan etkinlik hakkındaki ayrıntıları almak için **Get-AzDataFactoryRun** cmdlet 'ini çalıştırın.
 
     ```powershell   
     Get-AzDataFactoryRun [-ResourceGroupName] <String> [-DataFactoryName] <String> [-DatasetName] <String> [-StartDateTime]
@@ -244,8 +242,8 @@ Bir işlem hattında etkinlik çalıştırma başarısız olursa, işlem hattı 
     Get-AzDataFactoryRun -ResourceGroupName ADF -DataFactoryName LogProcessingFactory -DatasetName EnrichedGameEventsTable -StartDateTime "5/5/2014 12:00:00 AM"
     ```
 
-    StartDateTime, önceki adımda not ettiğiniz hata/sorun dilimin başlangıç zamanı değeridir. Tarih-saat çift tırnak içine alınmalıdır.
-4. Aşağıdakine benzer hata ayrıntılarını içeren bir çıktı görmeniz gerekir:
+    StartDateTime değeri, önceki adımdan not ettiğiniz hata/sorun diliminin başlangıç saati olur. Tarih-saat, çift tırnak içine alınmalıdır.
+4. Aşağıdakine benzer hatalarla ilgili ayrıntıları içeren çıktıyı görmeniz gerekir:
 
     ```   
     Id                      : 841b77c9-d56c-48d1-99a3-8c16c3e77d39
@@ -269,73 +267,73 @@ Bir işlem hattında etkinlik çalıştırma başarısız olursa, işlem hattı 
     PipelineName            : EnrichGameLogsPipeline
     Type                    :
     ```
-5. Çalıştırabileceğiniz **Kaydet AzDataFactoryLog** kimliği değeri çıktısını görmek ve günlük dosyalarını kullanarak karşıdan bir cmdlet'le **- DownloadLogsoption** cmdlet'i için.
+5. **Save-AzDataFactoryLog** cmdlet 'ini, çıkışta gördüğünüz kimlik değeriyle çalıştırabilir ve cmdlet için **-downloadlogsoption** kullanarak günlük dosyalarını indirebilirsiniz.
 
     ```powershell
     Save-AzDataFactoryLog -ResourceGroupName "ADF" -DataFactoryName "LogProcessingFactory" -Id "841b77c9-d56c-48d1-99a3-8c16c3e77d39" -DownloadLogs -Output "C:\Test"
     ```
 
-## <a name="rerun-failures-in-a-pipeline"></a>İşlem hattındaki hataları yeniden çalıştırma
+## <a name="rerun-failures-in-a-pipeline"></a>İşlem hattında yeniden çalıştırma sorunları
 
 > [!IMPORTANT]
-> Hataları gidermek ve başarısız olan dilimler izleme ve yönetim uygulaması kullanarak yeniden çalıştırın. daha kolaydır. Uygulamayı kullanma hakkında daha fazla ayrıntı için bkz. [izlemek ve Data Factory işlem hatlarını izleme ve yönetme uygulamasını kullanarak yönetmek](data-factory-monitor-manage-app.md). 
+> Hataları gidermek ve Izleme & yönetimi uygulamasını kullanarak başarısız dilimleri yeniden çalıştırmak daha kolay. Uygulamayı kullanma hakkında ayrıntılı bilgi için bkz. [izleme ve yönetim uygulamasını kullanarak Data Factory işlem hatlarını izleme ve yönetme](data-factory-monitor-manage-app.md). 
 
 ### <a name="use-the-azure-portal"></a>Azure portalı kullanma
-Sorun giderme ve hata ayıklama hataları ardışık düzeninde sonra hata dilimi gezinme ve tıklayarak hataları çalıştırabilirsiniz **çalıştırma** komut çubuğunda düğme.
+Bir işlem hattındaki hata giderme ve hata ayıklama gerçekleştirdikten sonra, hata dilimine giderek ve Komut çubuğundaki **Çalıştır** düğmesine tıklayarak hataları yeniden çalıştırabilirsiniz.
 
-![Başarısız bir dilimi yeniden çalıştırın](./media/data-factory-monitor-manage-pipelines/rerun-slice.png)
+![Başarısız olan dilimi yeniden çalıştır](./media/data-factory-monitor-manage-pipelines/rerun-slice.png)
 
-(Örneğin, veriler kullanılabilir değilse) durumda dilim doğrulama bir ilke hatası nedeniyle başarısız oldu, hatayı düzeltin ve tekrar tıklayarak doğrulama **doğrulama** komut çubuğunda düğme.
+Bir ilke hatası nedeniyle dilimin doğrulanmasına başarısız olması durumunda (örneğin, veriler yoksa), komut çubuğunda **Doğrula** düğmesine tıklayarak hatayı düzelmez ve yeniden doğrulayabilirsiniz.
 
-![Hataları düzeltin ve doğrulama](./media/data-factory-monitor-manage-pipelines/fix-error-and-validate.png)
+![Hataları düzeltin ve doğrulayın](./media/data-factory-monitor-manage-pipelines/fix-error-and-validate.png)
 
-### <a name="use-azure-powershell"></a>Azure PowerShell kullanma
-Kullanarak, hataları yeniden çalıştırabilirsiniz **kümesi AzDataFactorySliceStatus** cmdlet'i. Bkz: [kümesi AzDataFactorySliceStatus](https://docs.microsoft.com/powershell/module/az.datafactory/set-azdatafactoryslicestatus) konu sözdizimi ve cmdlet ile ilgili diğer ayrıntıları.
+### <a name="use-azure-powershell"></a>Azure PowerShell’i kullanma
+**Set-AzDataFactorySliceStatus** cmdlet 'ini kullanarak başarısızlıklarını yeniden çalıştırabilirsiniz. Sözdizimi ve cmdlet ile ilgili diğer ayrıntılar için [set-AzDataFactorySliceStatus](https://docs.microsoft.com/powershell/module/az.datafactory/set-azdatafactoryslicestatus) konusuna bakın.
 
 **Örnek:**
 
-Aşağıdaki örnek tablosunun tüm dilimleri durumunu 'DAWikiAggregatedData' 'Azure data factory'de 'WikiADF' Bekliyor' ayarlar.
+Aşağıdaki örnek, ' Luwikiaggregdukdata ' tablosunun tüm dilimlerinin durumunu Azure Data Factory ' WikiADF ' içinde ' bekliyor ' olarak ayarlar.
 
-'Güncelleştirme 'türü, 'tablosu için her bir dilimi ve tüm bağımlı (Yukarı Akış) tabloları durumları 'Bekliyor' ayarlandığından anlamına Upstreamınpipeline için', ayarlanır. Bu parametre için diğer olası değer 'Bireysel' dir.
+' UpdateType ', ' UpstreamInPipeline ' olarak ayarlanır, bu da tablo ve tüm bağımlı (yukarı akış) tablolarının her bir diliminin durumlarının ' bekliyor ' olarak ayarlandığı anlamına gelir. Bu parametre için olası diğer değer ' bireysel '.
 
 ```powershell
 Set-AzDataFactorySliceStatus -ResourceGroupName ADF -DataFactoryName WikiADF -DatasetName DAWikiAggregatedData -Status Waiting -UpdateType UpstreamInPipeline -StartDateTime 2014-05-21T16:00:00 -EndDateTime 2014-05-21T20:00:00
 ```
-## <a name="create-alerts-in-the-azure-portal"></a>Azure portalında uyarı oluşturma
+## <a name="create-alerts-in-the-azure-portal"></a>Azure portal uyarı oluşturma
 
-1.  Azure portal ve select oturum **İzleyicisi -> Uyarılar** uyarılar sayfasını açın.
+1.  Azure portal oturum açın ve uyarılar sayfasını açmak için **izleyici > uyarılar** ' ı seçin.
 
     ![Uyarılar sayfasını açın.](media/data-factory-monitor-manage-pipelines/v1alerts-image1.png)
 
-2.  Seçin **+ yeni uyarı kuralı** yeni bir uyarı oluşturmak için.
+2.  Yeni bir uyarı oluşturmak için **+ Yeni uyarı kuralı** ' nı seçin.
 
     ![Yeni bir uyarı oluştur](media/data-factory-monitor-manage-pipelines/v1alerts-image2.png)
 
-3.  Tanımlama **Uyarı koşulu**. (Seçtiğinizden emin olun **veri fabrikaları** içinde **kaynak türüne göre filtre** alan.) İçin değerler belirtebilirsiniz **boyutları**.
+3.  **Uyarı koşulunu**tanımlayın. ( **Kaynak türüne göre filtrele** alanında **veri fabrikaları** ' nı seçtiğinizden emin olun.) Ayrıca, **Boyutlar**için değerler de belirtebilirsiniz.
 
-    ![-Hedefi seçme gibi uyarı koşulunu tanımlama](media/data-factory-monitor-manage-pipelines/v1alerts-image3.png)
+    ![Uyarı koşulunu tanımlayın-hedef seçin](media/data-factory-monitor-manage-pipelines/v1alerts-image3.png)
 
-    ![Uyarı koşulunu tanımlama - uyarı ölçütü Ekle](media/data-factory-monitor-manage-pipelines/v1alerts-image4.png)
+    ![Uyarı koşulunu tanımlayın-uyarı ölçütü ekleyin](media/data-factory-monitor-manage-pipelines/v1alerts-image4.png)
 
-    ![Uyarı koşulunu tanımlama - uyarı mantığı ekleyin](media/data-factory-monitor-manage-pipelines/v1alerts-image5.png)
+    ![Uyarı koşulunu tanımlayın-uyarı mantığı ekleyin](media/data-factory-monitor-manage-pipelines/v1alerts-image5.png)
 
-4.  Tanımlama **uyarı ayrıntıları**.
+4.  **Uyarı ayrıntılarını**tanımlayın.
 
-    ![Uyarı ayrıntılarını tanımlama](media/data-factory-monitor-manage-pipelines/v1alerts-image6.png)
+    ![Uyarı ayrıntılarını tanımlayın](media/data-factory-monitor-manage-pipelines/v1alerts-image6.png)
 
-5.  Tanımlama **eylem grubu**.
+5.  **Eylem grubunu**tanımlayın.
 
-    ![Eylem grubunu tanımlama - yeni bir eylem grubu oluştur](media/data-factory-monitor-manage-pipelines/v1alerts-image7.png)
+    ![Eylem grubunu tanımlayın-Yeni bir eylem grubu oluşturun](media/data-factory-monitor-manage-pipelines/v1alerts-image7.png)
 
-    ![Eylem grubunu - kümesi özellikleri tanımlama](media/data-factory-monitor-manage-pipelines/v1alerts-image8.png)
+    ![Eylem grup kümesi özelliklerini tanımlayın](media/data-factory-monitor-manage-pipelines/v1alerts-image8.png)
 
-    ![-Yeni eylem grubu oluşturulan eylem grubunu tanımlama](media/data-factory-monitor-manage-pipelines/v1alerts-image9.png)
+    ![Eylem grubunu tanımlayın-oluşturulan yeni eylem grubu](media/data-factory-monitor-manage-pipelines/v1alerts-image9.png)
 
-## <a name="move-a-data-factory-to-a-different-resource-group-or-subscription"></a>Veri fabrikası, bir farklı kaynak grubuna veya aboneliğe taşıma
-Kullanarak farklı bir kaynak grubunda veya farklı bir abonelik için bir veri fabrikası taşıyabilirsiniz **taşıma** veri fabrikanızın giriş sayfasında düğme çubuğu komutu.
+## <a name="move-a-data-factory-to-a-different-resource-group-or-subscription"></a>Bir veri fabrikasını farklı bir kaynak grubuna veya aboneliğe taşıma
+Veri fabrikanızın giriş sayfasındaki komut çubuğunu **Taşı** düğmesini kullanarak, bir veri fabrikasını farklı bir kaynak grubuna veya farklı bir aboneliğe taşıyabilirsiniz.
 
-![Veri Fabrikası Taşı](./media/data-factory-monitor-manage-pipelines/MoveDataFactory.png)
+![Veri fabrikasını taşıma](./media/data-factory-monitor-manage-pipelines/MoveDataFactory.png)
 
-Ayrıca, tüm ilgili kaynakları (örneğin, data factory ile ilişkili olan uyarılar), veri fabrikası ile birlikte taşıyabilirsiniz.
+Ayrıca, veri fabrikasının yanı sıra ilgili kaynakları da (Data Factory ile ilişkili uyarılar gibi) taşıyabilirsiniz.
 
-![İletişim kutusu kaynakları Taşı](./media/data-factory-monitor-manage-pipelines/MoveResources.png)
+![Kaynakları Taşı iletişim kutusu](./media/data-factory-monitor-manage-pipelines/MoveResources.png)

@@ -1,274 +1,191 @@
 ---
-title: 'Öğretici: Azure Active Directory Tümleştirmesi ile RunMyProcess | Microsoft Docs'
-description: Azure Active Directory ve RunMyProcess arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: RunMyProcess ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve RunMyProcess arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: daveba
+manager: mtillman
+ms.reviewer: barbkess
 ms.assetid: d31f7395-048b-4a61-9505-5acf9fc68d9b
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 07/12/2017
+ms.topic: tutorial
+ms.date: 08/07/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: dfef1371b7ac61712c0f70efd48c0e791c4c729d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 46c31a209e8521b24e7f604dbe630f689fca484e
+ms.sourcegitcommit: e0e6663a2d6672a9d916d64d14d63633934d2952
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60518266"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "68880392"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-runmyprocess"></a>Öğretici: RunMyProcess ile Azure Active Directory Tümleştirme
+# <a name="tutorial-integrate-runmyprocess-with-azure-active-directory"></a>Öğretici: RunMyProcess 'i Azure Active Directory tümleştirin
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile RunMyProcess tümleştirme konusunda bilgi edinin.
+Bu öğreticide, RunMyProcess 'i Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. RunMyProcess 'i Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-Azure AD ile RunMyProcess tümleştirme ile aşağıdaki avantajları sağlar:
+* Azure AD 'de RunMyProcess 'e erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla RunMyProcess 'e otomatik olarak oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-- RunMyProcess erişimi, Azure AD'de denetleyebilirsiniz
-- Otomatik olarak imzalanan için RunMyProcess (çoklu oturum açma) ile Azure AD hesaplarına açma, kullanıcılarınızın etkinleştirebilirsiniz.
-- Hesaplarınız bir merkezi konumda - Azure portalında yönetebilirsiniz.
-
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](../manage-apps/what-is-single-sign-on.md).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile RunMyProcess yapılandırmak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-- Azure AD aboneliği
-- Abonelik RunMyProcess çoklu oturum açma etkin
-
-> [!NOTE]
-> Bu öğreticideki adımları test etmek için üretim ortamı kullanarak önermiyoruz.
-
-Bu öğreticideki adımları test etmek için bu önerileri izlemelidir:
-
-- Gerekli olmadıkça, üretim ortamında kullanmayın.
-- Azure AD deneme ortamı yoksa, bir aylık deneme burada alabilirsiniz:[deneme teklifi](https://azure.microsoft.com/pricing/free-trial/).
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* RunMyProcess çoklu oturum açma (SSO) etkin aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
-Bu öğreticide, Azure AD çoklu oturum açma bir test ortamında test edin. Bu öğreticide özetlenen senaryo iki temel yapı taşları oluşur:
 
-1. Galeriden RunMyProcess ekleme
-1. Yapılandırma ve test Azure AD çoklu oturum açma
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
+
+* RunMyProcess, **SP** tarafından başlatılan SSO 'yu destekler
 
 ## <a name="adding-runmyprocess-from-the-gallery"></a>Galeriden RunMyProcess ekleme
-Azure AD'de RunMyProcess tümleştirmesini yapılandırmak için RunMyProcess Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
 
-**Galeriden RunMyProcess eklemek için aşağıdaki adımları gerçekleştirin:**
+RunMyProcess 'in Azure AD ile tümleştirilmesini yapılandırmak için, Galeri 'den yönetilen SaaS uygulamaları listenize RunMyProcess eklemeniz gerekir.
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi. 
+1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **RunMyProcess** yazın.
+1. Sonuçlar panelinden **RunMyProcess** ' i seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-    ![Active Directory][1]
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-1. Gidin **kurumsal uygulamalar**. Ardından **tüm uygulamaları**.
+**B. Simon**adlı bir test kullanıcısı kullanarak Azure AD SSO 'Yu RunMyProcess ile yapılandırın ve test edin. SSO 'nun çalışması için, RunMyProcess içindeki bir Azure AD kullanıcısı ve ilgili Kullanıcı arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-    ![Uygulamalar][2]
-    
-1. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+Azure AD SSO 'yu RunMyProcess ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-    ![Uygulamalar][3]
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+2. **[RunMyProcess SSO 'Yu yapılandırma](#configure-runmyprocess-sso)** -uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+5. **[RunMyProcess test kullanıcısı oluşturma](#create-runmyprocess-test-user)** -kullanıcının Azure AD gösterimine bağlı olan RunMyProcess 'te B. Simon 'a karşılık gelen bir.
+6. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-1. Arama kutusuna **RunMyProcess**.
+### <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/runmyprocess-tutorial/tutorial_runmyprocess_search.png)
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-1. Sonuçlar panelinde seçin **RunMyProcess**ve ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+1. [Azure Portal](https://portal.azure.com/), **RunMyProcess** uygulama tümleştirmesi sayfasında, **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/runmyprocess-tutorial/tutorial_runmyprocess_addfromgallery.png)
+   ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-##  <a name="configuring-and-testing-azure-ad-single-sign-on"></a>Yapılandırma ve test Azure AD çoklu oturum açma
-Bu bölümde, yapılandırın ve Azure AD çoklu oturum açma "Britta Simon" adlı bir test kullanıcı tabanlı RunMyProcess sınayın.
+1. **Temel SAML yapılandırması** bölümünde, aşağıdaki alanlar için değerleri girin:
 
-Tek iş için oturum açma için Azure AD ne RunMyProcess karşılığı kullanıcı için bir kullanıcı Azure AD'de olduğunu bilmeniz gerekir. Diğer bir deyişle, bir Azure AD kullanıcısının RunMyProcess ilgili kullanıcı arasında bir bağlantı ilişkisi kurulması gerekir.
+    **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://live.runmyprocess.com/live/<tenant id>`
 
-RunMyProcess içinde değerini atayın **kullanıcı adı** değerini Azure AD'de **kullanıcıadı** bağlantı kurmak için.
+    > [!NOTE]
+    > Değer gerçek değil. Değeri, gerçek oturum açma URL 'SI ile güncelleştirin. Değeri almak için [RunMyProcess istemci destek ekibine](mailto:support@runmyprocess.com) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-Yapılandırma ve Azure AD çoklu oturum açma RunMyProcess ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML Imzalama sertifikası** bölümünde **sertifika bulun (base64)** ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
-1. **[Azure AD çoklu oturum açmayı yapılandırma](#configuring-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-1. **[Bir Azure AD test kullanıcısı oluşturma](#creating-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-1. **[RunMyProcess test kullanıcısı oluşturma](#creating-a-runmyprocess-test-user)**  - kullanıcı Azure AD gösterimini bağlı RunMyProcess Britta simon'un bir karşılığı vardır.
-1. **[Azure AD test kullanıcı atama](#assigning-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-1. **[Çoklu oturum açma testi](#testing-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+    ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
+1. **RunMyProcess 'ı ayarla** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin ve RunMyProcess uygulamanızda çoklu oturum açmayı yapılandırın.
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-**Azure AD çoklu oturum açma ile RunMyProcess yapılandırmak için aşağıdaki adımları gerçekleştirin:**
+### <a name="configure-runmyprocess-sso"></a>RunMyProcess SSO 'yu yapılandırma
 
-1. Azure portalında, üzerinde **RunMyProcess** uygulama tümleştirme sayfasını tıklatın **çoklu oturum açma**.
+1. Farklı bir Web tarayıcı penceresinde, yönetici olarak RunMyProcess kiracınızda oturum açın.
 
-    ![Çoklu oturum açmayı yapılandırın][4]
+1. Sol gezinti panelinde **Hesap** ' a tıklayın ve **yapılandırma**' yı seçin.
 
-1. Üzerinde **çoklu oturum açma** iletişim kutusunda **modu** olarak **SAML tabanlı oturum açma** çoklu oturum açmayı etkinleştirmek için.
- 
-    ![Çoklu oturum açmayı yapılandırın](./media/runmyprocess-tutorial/tutorial_runmyprocess_samlbase.png)
+    ![Uygulama tarafında çoklu oturum açmayı yapılandırma](./media/runmyprocess-tutorial/tutorial_runmyprocess_001.png)
 
-1. Üzerinde **RunMyProcess etki alanı ve URL'ler** bölümünde, aşağıdaki adımları gerçekleştirin:
+1. **Kimlik doğrulama yöntemi** bölümüne gidin ve aşağıdaki adımları gerçekleştirin:
 
-    ![Çoklu oturum açmayı yapılandırın](./media/runmyprocess-tutorial/tutorial_runmyprocess_url.png)
+    ![Uygulama tarafında çoklu oturum açmayı yapılandırma](./media/runmyprocess-tutorial/tutorial_runmyprocess_002.png)
 
-    İçinde **oturum açma URL'si** metin kutusuna bir URL şu biçimi kullanarak: `https://live.runmyprocess.com/live/<tenant id>`
+    a. As **yöntemi**olarak **Samlv2 ile SSO**'yu seçin.
 
-    > [!NOTE] 
-    > Değer, gerçek değil. Değerini gerçek oturum açma URL'si ile güncelleştirin. İlgili kişi [RunMyProcess istemci Destek ekibine](mailto:support@runmyprocess.com) değeri alınamıyor. 
+    b. **SSO yeniden yönlendirme** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'si**değerini yapıştırın.
 
-1. Üzerinde **SAML imzalama sertifikası** bölümünde **sertifika (Base64)** ve bilgisayarınızdaki sertifika dosyasını kaydedin.
+    c. **Logout Redirect** metin kutusunda, Azure Portal kopyaladığınız **Logout URL 'si**değerini yapıştırın.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/runmyprocess-tutorial/tutorial_runmyprocess_certificate.png) 
+    d. **Ad kimliği biçimi** metin kutusunda, **ad tanımlayıcı biçimindeki** değeri **urn: oassıs: names: TC: SAML: 1.1: NameID-Format: emapostaadı**olarak yazın.
 
-1. Tıklayın **Kaydet** düğmesi.
+    e. İndirilen sertifika dosyasını Not defteri 'nde Azure portal açın, sertifika dosyasının içeriğini kopyalayın ve ardından **sertifikayı sertifika** metin kutusuna yapıştırın.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/runmyprocess-tutorial/tutorial_general_400.png)
+    f. **Kaydet** simgesine tıklayın.
 
-1. Üzerinde **RunMyProcess yapılandırma** bölümünde **yapılandırma RunMyProcess** açmak için **yapılandırma oturum açma** penceresi. Kopyalama **oturum kapatma URL'si ve SAML çoklu oturum açma hizmeti URL'si** gelen **hızlı başvuru bölümü.**
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-    ![Çoklu oturum açmayı yapılandırın](./media/runmyprocess-tutorial/tutorial_runmyprocess_configure.png) 
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-1. Farklı bir web tarayıcı penceresinde RunMyProcess kiracınıza yönetici olarak oturum.
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına username@companydomain.extension girin. Örneğin, `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1. **Oluştur**’a tıklayın.
 
-1. Sol gezinti panelinde **hesabı** seçip **yapılandırma**.
-   
-    ![Çoklu oturum açma uygulama tarafında yapılandırma](./media/runmyprocess-tutorial/tutorial_runmyprocess_001.png)
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-1. Git **kimlik doğrulama yöntemi** bölümünde ve aşağıdaki adımları gerçekleştirin:
-   
-    ![Çoklu oturum açma uygulama tarafında yapılandırma](./media/runmyprocess-tutorial/tutorial_runmyprocess_002.png)
+Bu bölümde, RunMyProcess 'e erişim vererek Azure çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştireceksiniz.
 
-    a. Olarak **yöntemi**seçin **Samlv2 ile SSO**. 
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde **RunMyProcess**öğesini seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
-    b. İçinde **SSO yeniden yönlendirme** metin değerini yapıştırın **SAML çoklu oturum açma hizmeti URL'si**, hangi Azure Portalı'ndan kopyaladığınız.
+   !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-    c. İçinde **oturumu kapatıp yeniden yönlendirme** metin değerini yapıştırın **oturum kapatma URL'si**, hangi Azure Portalı'ndan kopyaladığınız.
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-    d. İçinde **ad kimliği biçimi** metin değerini yazın. **ad tanımlayıcı biçimi** olarak **urn: OASIS: adları: tc: SAML:1.1:nameid-biçimi: emailAddress**.
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-    e. İndirilen sertifika dosyasının içeriğini kopyalayın ve ardından yapıştırın **sertifika** metin. 
- 
-    f. Tıklayın **Kaydet** simgesi.
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-> [!TIP]
-> İçindeki bu yönergeleri kısa bir sürümünü artık okuyabilir [Azure portalında](https://portal.azure.com), uygulamayı hazırlama ayarladığınız sırada!  Bu uygulamadan ekledikten sonra **Active Directory > Kurumsal uygulamalar** bölümünde, tıklamanız yeterlidir **çoklu oturum açma** aracılığıyla katıştırılmış belgelere erişebilir ve sekmesinde  **Yapılandırma** alttaki bölümü. Daha fazla bilgi embedded belgeleri özelliği burada hakkında: [Azure AD embedded belgeleri]( https://go.microsoft.com/fwlink/?linkid=845985)
-> 
+### <a name="create-runmyprocess-test-user"></a>RunMyProcess test kullanıcısı oluştur
 
-### <a name="creating-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
-
-![Azure AD kullanıcısı oluşturun][100]
-
-**Azure AD'de bir test kullanıcısı oluşturmak için aşağıdaki adımları gerçekleştirin:**
-
-1. İçinde **Azure portalında**, sol gezinti bölmesinde **Azure Active Directory** simgesi.
-
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/runmyprocess-tutorial/create_aaduser_01.png) 
-
-1. Kullanıcıların listesini görüntülemek için Git **kullanıcılar ve gruplar** tıklatıp **tüm kullanıcılar**.
-    
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/runmyprocess-tutorial/create_aaduser_02.png) 
-
-1. Açmak için **kullanıcı** iletişim kutusunda, tıklayın **Ekle** iletişim kutusunun üst kısmındaki.
- 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/runmyprocess-tutorial/create_aaduser_03.png) 
-
-1. Üzerinde **kullanıcı** iletişim sayfasında, aşağıdaki adımları gerçekleştirin:
- 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/runmyprocess-tutorial/create_aaduser_04.png) 
-
-    a. İçinde **adı** metin kutusuna **BrittaSimon**.
-
-    b. İçinde **kullanıcı adı** metin kutusuna **e-posta adresi** BrittaSimon biri.
-
-    c. Seçin **Göster parola** ve değerini yazma **parola**.
-
-    d. **Oluştur**’a tıklayın.
- 
-### <a name="creating-a-runmyprocess-test-user"></a>RunMyProcess test kullanıcısı oluşturma
-
-RunMyProcess için oturum açmak Azure AD kullanıcılarının etkinleştirmek için bunların RunMyProcess sağlanması gerekir. RunMyProcess söz konusu olduğunda, sağlama bir el ile gerçekleştirilen bir görevdir.
+Azure AD kullanıcılarının RunMyProcess 'de oturum açmasını sağlamak için, RunMyProcess 'e sağlanması gerekir. RunMyProcess söz konusu olduğunda, sağlama el ile gerçekleştirilen bir görevdir.
 
 **Bir kullanıcı hesabı sağlamak için aşağıdaki adımları gerçekleştirin:**
 
-1. RunMyProcess şirketinizin sitesi için bir yönetici olarak oturum açın.
+1. RunMyProcess şirket sitenizde yönetici olarak oturum açın.
 
-1. Tıklayın **hesabı** seçip **kullanıcılar** sol gezinti panelinde, ardından **yeni kullanıcı**.
-   
-    ![Yeni kullanıcı](./media/runmyprocess-tutorial/tutorial_runmyprocess_003.png "yeni kullanıcı")
+1. **Hesap** ' a tıklayıp sol gezinti panelinde **Kullanıcılar** ' ı seçin ve ardından **Yeni Kullanıcı**' ya tıklayın.
 
-1. İçinde **kullanıcı ayarları** bölümünde, aşağıdaki adımları gerçekleştirin:
-   
-    ![Profili](./media/runmyprocess-tutorial/tutorial_runmyprocess_004.png "profili") 
+    ![Yeni Kullanıcı](./media/runmyprocess-tutorial/tutorial_runmyprocess_003.png "Yeni Kullanıcı")
+
+1. **Kullanıcı ayarları** bölümünde aşağıdaki adımları uygulayın:
+
+    ![Profil](./media/runmyprocess-tutorial/tutorial_runmyprocess_004.png "Profil")
   
-    a. Tür **adı** ve **e-posta** geçerli bir Azure AD hesabı ilgili metin kutularına zbilgisayarlar istediğiniz. 
+    a. İlgili metin kutularına sağlamak istediğiniz geçerli bir Azure AD hesabının **adını** ve **e-postasını** yazın.
 
-    b. Seçin bir **IDE dil**, **dil**, ve **profili**. 
+    b. Bir **IDE dili**, **dili**ve **profili**seçin.
 
-    c. Seçin **hesap oluşturma e-posta Gönder bana**. 
+    c. **Hesap oluşturma e-postasını bana gönder**' i seçin.
 
-    d. **Kaydet**’e tıklayın.
-   
-    >[!NOTE]
-    >Herhangi diğer RunMyProcess kullanıcı hesabı oluşturma araçları kullanabilir veya API'leri tarafından RunMyProcess sağlamak için Azure Active Directory kullanıcı hesaplarını sağlanan. 
-    > 
+    d. **Kaydet** düğmesine tıklayın.
 
-### <a name="assigning-the-azure-ad-test-user"></a>Azure AD test kullanıcı atama
+    > [!NOTE]
+    > Azure Active Directory Kullanıcı hesapları sağlamak için RunMyProcess tarafından sunulan diğer bir RunMyProcess Kullanıcı hesabı oluşturma araçlarını veya API 'Leri kullanabilirsiniz.
 
-Bu bölümde, Azure çoklu oturum açma kullanmak için RunMyProcess erişim vererek Britta Simon etkinleştirin.
+### <a name="test-sso"></a>Test SSO 'SU 
 
-![Kullanıcı Ata][200] 
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-**Britta Simon RunMyProcess için atamak için aşağıdaki adımları gerçekleştirin:**
-
-1. Azure portalında uygulama görünümü açtığınız dizin görünümüne gidin ve Git **kurumsal uygulamalar** ardından **tüm uygulamaları**.
-
-    ![Kullanıcı Ata][201] 
-
-1. Uygulamalar listesinde **RunMyProcess**.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/runmyprocess-tutorial/tutorial_runmyprocess_app.png) 
-
-1. Soldaki menüde **kullanıcılar ve gruplar**.
-
-    ![Kullanıcı Ata][202] 
-
-1. Tıklayın **Ekle** düğmesi. Ardından **kullanıcılar ve gruplar** üzerinde **atama Ekle** iletişim.
-
-    ![Kullanıcı Ata][203]
-
-1. Üzerinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** kullanıcıları listesinde.
-
-1. Tıklayın **seçin** düğmesini **kullanıcılar ve gruplar** iletişim.
-
-1. Tıklayın **atama** düğmesini **atama Ekle** iletişim.
-    
-### <a name="testing-single-sign-on"></a>Çoklu oturum açma testi
-
-Bu bölümün amacı, erişim panelini kullanarak Azure AD SSO yapılandırmanızı sınamanızı sağlamaktır.
-
-Erişim panelinde RunMyProcess kutucuğa tıkladığınızda, otomatik olarak RunMyProcess uygulamanıza açan.
+Erişim panelinde RunMyProcess kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız RunMyProcess ' de otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](tutorial-list.md)
-* [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](../manage-apps/what-is-single-sign-on.md)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-
-<!--Image references-->
-
-[1]: ./media/runmyprocess-tutorial/tutorial_general_01.png
-[2]: ./media/runmyprocess-tutorial/tutorial_general_02.png
-[3]: ./media/runmyprocess-tutorial/tutorial_general_03.png
-[4]: ./media/runmyprocess-tutorial/tutorial_general_04.png
-
-[100]: ./media/runmyprocess-tutorial/tutorial_general_100.png
-
-[200]: ./media/runmyprocess-tutorial/tutorial_general_200.png
-[201]: ./media/runmyprocess-tutorial/tutorial_general_201.png
-[202]: ./media/runmyprocess-tutorial/tutorial_general_202.png
-[203]: ./media/runmyprocess-tutorial/tutorial_general_203.png
-
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)

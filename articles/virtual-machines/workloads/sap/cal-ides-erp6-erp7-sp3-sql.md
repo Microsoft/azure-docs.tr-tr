@@ -1,128 +1,127 @@
 ---
-title: Azure'da SAP ERP 6.0 için SAP IDES EHP7 SP3 dağıtma | Microsoft Docs
-description: Azure'da SAP ERP 6.0 için SAP IDES EHP7 SP3'ı dağıtma
+title: Azure 'da SAP ERP 6,0 için SAP ıDES EHP7 SP3 'Ü dağıtma | Microsoft Docs
+description: Azure 'da SAP ERP 6,0 için SAP ıDES EHP7 SP3 'Ü dağıtma
 services: virtual-machines-windows
 documentationcenter: ''
 author: hermanndms
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.assetid: 626c1523-1026-478f-bd8a-22c83b869231
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 09/16/2016
 ms.author: hermannd
-ms.openlocfilehash: 413e449f005d288f66da0257f5b800733e58eb94
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 66921280403027d1723b27f104b42d2c83271213
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60836595"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70100077"
 ---
-# <a name="deploy-sap-ides-ehp7-sp3-for-sap-erp-60-on-azure"></a>Azure'da SAP ERP 6.0 için SAP IDES EHP7 SP3'ı dağıtma
-Bu makalede, SQL Server ve Windows işletim sistemi ile Azure üzerinde SAP Cloud Appliance Library (SAP CAL) 3.0 çalışan bir SAP IDES sistemi dağıtmayı açıklar. Ekran görüntüleri işlemi adım adım gösterir. Farklı bir çözümü dağıtmak için aynı adımları izleyin.
+# <a name="deploy-sap-ides-ehp7-sp3-for-sap-erp-60-on-azure"></a>Azure 'da SAP ERP 6,0 için SAP ıDES EHP7 SP3 'Ü dağıtma
+Bu makalede, SAP Cloud gereç kitaplığı (SAP CAL) 3,0 aracılığıyla Azure 'da SQL Server ve Windows işletim sistemi çalıştıran bir SAP ıDES sisteminin nasıl dağıtılacağı açıklanır. Ekran görüntüleri adım adım işlemi gösterir. Farklı bir çözüm dağıtmak için, aynı adımları izleyin.
 
-SAP CAL ile başlatmak için Git [SAP Cloud Appliance Library](https://cal.sap.com/) Web sitesi. SAP de sahip hakkında yeni bir blog [SAP bulut Gereci kitaplığı 3.0](https://scn.sap.com/community/cloud-appliance-library/blog/2016/05/27/sap-cloud-appliance-library-30-came-with-a-new-user-experience). 
+SAP CAL ile başlamak için [SAP Cloud gereç kitaplığı](https://cal.sap.com/) Web sitesine gidin. SAP Ayrıca yeni [SAP Cloud gereç kitaplığı 3,0](https://scn.sap.com/community/cloud-appliance-library/blog/2016/05/27/sap-cloud-appliance-library-30-came-with-a-new-user-experience)ile ilgili bir bloga sahiptir. 
 
 > [!NOTE]
-> 29 Mayıs 2017'den itibaren SAP CAL'ı dağıtmak için daha az tercih edilen Klasik dağıtım modeli yanı sıra Azure Resource Manager dağıtım modelini kullanabilirsiniz. Yeni Resource Manager dağıtım modelini kullanan ve klasik dağıtım modeli dikkate öneririz.
+> 29 Mayıs 2017 itibariyle, SAP CAL dağıtımı için daha az tercih edilen klasik dağıtım modeline ek olarak Azure Resource Manager dağıtım modelini kullanabilirsiniz. Yeni Kaynak Yöneticisi dağıtım modelini kullanmanızı ve klasik dağıtım modelini göz ardı etmenizi öneririz.
 
-Klasik modeli kullanan bir SAP CAL hesabı zaten oluşturduysanız *başka bir SAP CAL hesabı oluşturmak için ihtiyacınız*. Yalnızca Resource Manager modelini kullanarak Azure'a dağıtmak bu hesabı gerekir.
+Klasik modeli kullanan bir SAP CAL hesabı zaten oluşturduysanız, *başka BIR SAP Cal hesabı oluşturmanız gerekir*. Bu hesabın Kaynak Yöneticisi modelini kullanarak Azure 'a özel olarak dağıtmaları gerekir.
 
-SAP CAL için oturum açtıktan sonra ilk sayfa genellikle, müşteri adayları **çözümleri** sayfası. İstediğiniz çözüm bulmak için bir bit kaydırmanız gerekebilir şekilde SAP CAL üzerinde sağlanan çözümlerin sürekli olarak artmaktadır. Vurgulanan özel olarak Azure üzerinde kullanıma hazır SAP IDES Windows tabanlı çözüm, dağıtım işlemini gösterir:
+SAP CAL 'de oturum açtıktan sonra, ilk sayfa genellikle **çözümler** sayfasına yönlendirir. SAP CAL üzerinde sunulan çözümler artmasıyla artmakta olduğundan istediğiniz çözümü bulmak için tam olarak bir bit kaydırmanız gerekebilir. Yalnızca Azure üzerinde kullanılabilir olan vurgulanmış Windows tabanlı SAP ıDES çözümü, dağıtım işlemini gösterir:
 
 ![SAP CAL çözümleri](./media/cal-ides-erp6-ehp7-sp3-sql/ides-pic1.jpg)
 
-### <a name="create-an-account-in-the-sap-cal"></a>SAP CAL bir hesap oluşturun
-1. SAP CAL için ilk kez oturum açmak için SAP S kullanıcı veya başka bir kullanıcı ile SAP kayıtlı kullanın. Ardından tarafından SAP CAL gereçler azure'da dağıtmak için kullanılan bir SAP CAL hesabı tanımlayın. Hesap tanımında yapmanız gerekir:
+### <a name="create-an-account-in-the-sap-cal"></a>SAP CAL 'de hesap oluşturma
+1. SAP CAL ' de ilk kez oturum açmak için SAP S-User veya SAP ile kayıtlı diğer Kullanıcı ' yı kullanın. Ardından, SAP CAL tarafından Azure 'da gereçlere dağıtım yapmak için kullanılan bir SAP CAL hesabı tanımlayın. Hesap tanımında şunları yapmanız gerekir:
 
-    a. Azure'da (Resource Manager veya Klasik) dağıtım modeli seçin.
+    a. Azure 'da (Kaynak Yöneticisi veya klasik) dağıtım modelini seçin.
 
-    b. Azure aboneliğinizi girin. SAP CAL hesabı yalnızca bir aboneliğe atanabilir. Birden fazla aboneliğine ihtiyacınız varsa, başka bir SAP CAL hesabı oluşturmanız gerekir.
+    b. Azure aboneliğinizi girin. SAP CAL hesabı yalnızca bir aboneliğe atanabilir. Birden fazla aboneliğe ihtiyacınız varsa, başka bir SAP CAL hesabı oluşturmanız gerekir.
     
-    c. Azure aboneliğinize dağıtmak için SAP CAL izin verin.
+    c. SAP CAL 'nin Azure aboneliğinize dağıtılması için izin verin.
 
    > [!NOTE]
-   >  Sonraki adımlar Resource Manager dağıtımları için bir SAP CAL hesabının nasıl oluşturulacağını gösterir. Klasik dağıtım modeline bağlı bir SAP CAL hesabı zaten varsa, *gereken* yeni bir SAP CAL hesabı oluşturmak için aşağıdaki adımları izleyin. Resource Manager modelinde dağıtmak yeni SAP CAL hesabı gerekir.
+   >  Sonraki adımlarda Kaynak Yöneticisi dağıtımları için SAP CAL hesabı oluşturma gösterilmektedir. Klasik dağıtım modeliyle bağlantılı bir SAP CAL hesabınız zaten varsa, yeni bir SAP CAL hesabı oluşturmak için bu adımları izlemeniz *gerekir* . Yeni SAP CAL hesabının Kaynak Yöneticisi modelinde dağıtılması gerekir.
 
-1. Yeni bir SAP CAL hesabı oluşturmak için **hesapları** sayfa, Azure için iki seçenek gösterir: 
+1. Yeni bir SAP CAL hesabı oluşturmak için, **hesaplar** sayfasında Azure için iki seçenek gösterilir: 
 
-    a. **Microsoft Azure (Klasik)** Klasik dağıtım modeli ve artık tercih edilir.
+    a. **Microsoft Azure (klasik)** , klasik dağıtım modelidir ve artık tercih edilmektedir.
 
-    b. **Microsoft Azure** yeni Resource Manager dağıtım modeli.
+    b. Yeni Kaynak Yöneticisi dağıtım modeli **Microsoft Azure** .
 
     ![SAP CAL hesapları](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic-2a.PNG)
 
-    Resource Manager modelinde dağıtmak için seçebileceğiniz **Microsoft Azure**.
+    Kaynak Yöneticisi modelinde dağıtmak için **Microsoft Azure**' ı seçin.
 
     ![SAP CAL hesapları](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic3c.PNG)
 
-1. Azure girin **abonelik kimliği** Azure portalında bulunabilir. 
+1. Azure portal bulunan Azure **ABONELIK kimliğini** girin. 
 
-    ![SAP CAL abonelik kimliği](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic3c.PNG)
+    ![SAP CAL abonelik KIMLIĞI](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic3c.PNG)
 
-1. Tanımladığınız Azure aboneliğinize dağıtmak için SAP CAL yetkilendirmek için tıklatın **Authorize**. Tarayıcı sekmesinde aşağıdaki sayfa açılır:
+1. SAP CAL 'sini tanımladığınız Azure aboneliğine dağıtmak üzere yetkilendirmek için **Yetkilendir**' e tıklayın. Tarayıcı sekmesinde aşağıdaki sayfa görüntülenir:
 
-    ![Oturum açma Internet Explorer bulut Hizmetleri](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic4c.PNG)
+    ![Internet Explorer bulut Hizmetleri oturum açma](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic4c.PNG)
 
-1. Birden fazla kullanıcı listede yoksa, Abonelikteki seçtiğiniz Azure aboneliğinde olması bağlantılı bir Microsoft hesabı seçin. Tarayıcı sekmesinde aşağıdaki sayfa açılır:
+1. Birden fazla Kullanıcı listeleniyorsa, seçtiğiniz Azure aboneliğinin ortak Yöneticisi olacak şekilde bağlantılı Microsoft hesabı seçin. Tarayıcı sekmesinde aşağıdaki sayfa görüntülenir:
 
-    ![Internet Explorer bulut Hizmetleri onayı](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic5a.PNG)
+    ![Internet Explorer bulut hizmetleri onayı](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic5a.PNG)
 
-1. Tıklayın **kabul**. Yetkilendirme başarılı olursa, SAP CAL hesabı tanımı yeniden görüntüler. Kısa bir süre sonra bir ileti, Yetkilendirme işlemi başarılı olduğunu onaylar.
+1. Tıklayın **kabul**. Yetkilendirme başarılı olursa SAP CAL hesabı tanımı yeniden görüntülenir. Kısa bir süre sonra, bir ileti yetkilendirme işleminin başarılı olduğunu onaylar.
 
-1. Kullanıcı için yeni oluşturulan SAP CAL hesabı atamak için girin, **kullanıcı kimliği** sağ tıklayıp metin kutusundaki **Ekle**. 
+1. Yeni oluşturulan SAP CAL hesabını kullanıcıya atamak için, sağdaki metin kutusuna **Kullanıcı Kimliğinizi** girin ve **Ekle**' ye tıklayın. 
 
-    ![Kullanıcı ilişkisi hesap](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic8a.PNG)
+    ![Hesaptan Kullanıcı ilişkilendirmesi](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic8a.PNG)
 
-1. Hesabınız için SAP CAL oturum açmak için kullandığınız kullanıcı ilişkilendirmek için tıklayın **gözden geçirme**. 
+1. Hesabınızı SAP CAL 'sinde oturum açmak için kullandığınız kullanıcıyla ilişkilendirmek için **gözden geçir**' e tıklayın. 
 
-1. Yeni oluşturulan SAP CAL hesabı kullanıcı arasındaki ilişkiyi oluşturmak için tıklayın **Oluştur**.
+1. Kullanıcı ve yeni oluşturulan SAP CAL hesabı arasındaki ilişkiyi oluşturmak için **Oluştur**' a tıklayın.
 
-    ![Kullanıcı hesabı ilişkilendirmesi](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic9b.PNG)
+    ![Kullanıcıdan hesaba ilişkilendirme](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic9b.PNG)
 
-Sizin için bir SAP CAL hesabı başarıyla oluşturuldu:
+Şu şekilde kullanabileceğiniz bir SAP CAL hesabı başarıyla oluşturuldu:
 
-- Resource Manager dağıtım modelini kullanın.
+- Kaynak Yöneticisi dağıtım modelini kullanın.
 - SAP sistemlerini Azure aboneliğinize dağıtın.
 
 > [!NOTE]
-> Windows ve SQL Server üzerinde SAP IDES çözüm dağıtabilmeniz için önce bir SAP CAL aboneliğine kaydolma gerekebilir. Aksi takdirde, çözümü olarak gösterebilir **kilitli** genel bakış sayfasında.
+> SAP ıDES çözümünü Windows ve SQL Server dayalı olarak dağıtabilmeniz için önce SAP CAL aboneliğine kaydolmanız gerekebilir. Aksi takdirde, çözüm Genel Bakış sayfasında **kilitli** olarak görüntülenebilir.
 
-### <a name="deploy-a-solution"></a>Bir çözüm dağıtma
-1. SAP CAL hesabınızı ayarladıktan sonra seçin **Windows ve SQL Server üzerinde SAP IDES çözüm** çözüm. Tıklayın **oluşturma örneği**, kullanım ve koşulları koşullar onaylayın. 
+### <a name="deploy-a-solution"></a>Çözüm dağıtma
+1. SAP CAL hesabı ayarladıktan sonra **Windows ve SQL Server çözümünde SAP ıDES çözümünü** seçin. **Örnek oluştur**' a tıklayın ve kullanım ve hüküm koşullarını onaylayın. 
 
-1. Üzerinde **temel modu: Örneği oluşturma** sayfasında gerekir:
+1. **Temel modda: Örnek** sayfası oluşturun, şunları yapmanız gerekir:
 
-    a. Bir örneği girmeniz **adı**.
+    a. Örnek **adı**girin.
 
-    b. Azure'ı seçin **bölge**. Sunulan birden fazla Azure bölgesini almak için bir SAP CAL aboneliğine ihtiyacınız.
+    b. Bir Azure **bölgesi**seçin. Birden çok Azure bölgesini sunulan bir SAP CAL aboneliğine sahip olmanız gerekebilir.
 
-    c.  Ana girin **parola** gösterildiği gibi çözüm için:
+    c.  Çözümün ana **parolasını** aşağıda gösterildiği gibi girin:
 
-    ![SAP CAL temel modu: Örneği oluşturma](./media/cal-ides-erp6-ehp7-sp3-sql/ides-pic10a.png)
+    ![SAP CAL temel modu: Örnek Oluştur](./media/cal-ides-erp6-ehp7-sp3-sql/ides-pic10a.png)
 
-1. **Oluştur**’a tıklayın. Bir süre sonra büyüklüğü ve karmaşıklığı (SAP CAL bir tahmin sağlar), çözümün bağlı olarak durumu etkin ve kullanıma hazır olarak gösterilir: 
+1. **Oluştur**'a tıklayın. Bir süre sonra çözümün boyutuna ve karmaşıklığına (SAP CAL bir tahmin sağlar) bağlı olarak, durum etkin ve kullanıma hazırlık olarak gösterilir: 
 
     ![SAP CAL örnekleri](./media/cal-ides-erp6-ehp7-sp3-sql/ides-pic12a.png)
 
-1. Kaynak grubu ve SAP CAL tarafından oluşturulan tüm nesneleri bulmak için Azure portalına gidin. Sanal makine, SAP CAL verilen aynı örnek adını başlayarak bulunabilir.
+1. Kaynak grubunu ve SAP CAL tarafından oluşturulan tüm nesnelerini bulmak için Azure portal gidin. Sanal makine, SAP CAL 'sinde verilen aynı örnek adıyla başlayarak bulunabilir.
 
     ![Kaynak grubu nesneleri](./media/cal-ides-erp6-ehp7-sp3-sql/ides_resource_group.PNG)
 
-1. SAP CAL portalında dağıtılan örneklerine gidin ve **Connect**. Aşağıdaki açılır pencere görünür: 
+1. SAP CAL portalında, dağıtılan örneklere gidin ve **Bağlan**' a tıklayın. Aşağıdaki açılır pencere görüntülenir: 
 
-    ![Örneğine bağlanın](./media/cal-ides-erp6-ehp7-sp3-sql/ides-pic14a.PNG)
+    ![Örneğe Bağlan](./media/cal-ides-erp6-ehp7-sp3-sql/ides-pic14a.PNG)
 
-1. Dağıtılmış sisteme bağlanmak için seçeneklerden birini kullanmadan önce tıklayın **Başlarken Kılavuzu**. Belgeleri yöntemlerin her biri bağlantı için kullanıcılar adları. Kullanıcılar için parolalar, dağıtım işleminin başında tanımladığınız ana parola ayarlanır. Belgelerde, dağıtılmış sisteme oturum açmak için kullanabileceğiniz parolalarını ile daha işlevsel diğer kullanıcılar listelenir.
+1. Dağıtılan sistemlere bağlanmak için seçeneklerden birini kullanabilmeniz için **Başlangıç Kılavuzu**' na tıklayın. Belgeler, her bir bağlantı yöntemi için kullanıcıları adlandırır. Bu kullanıcıların parolaları, dağıtım işleminin başlangıcında tanımladığınız ana parolaya ayarlanır. Belgelerde, diğer işlevsel kullanıcılar parolalarla birlikte listelenir ve bu, dağıtılan sistemde oturum açmak için kullanabilirsiniz.
 
-    ![SAP Hoş Geldiniz belgeleri](./media/cal-ides-erp6-ehp7-sp3-sql/ides-pic15.jpg)
+    ![SAP karşılama belgeleri](./media/cal-ides-erp6-ehp7-sp3-sql/ides-pic15.jpg)
 
-Birkaç saat içinde iyi durumda bir SAP IDES sistem Azure'da dağıtılır.
+Birkaç saat içinde, sağlıklı bir SAP ıDES sistemi Azure 'da dağıtılır.
 
-SAP CAL aboneliği satın aldıysanız, SAP dağıtımları SAP CAL aracılığıyla Azure'da tam olarak destekler. Destek, BC VCM CAL kuyruğudur.
+SAP CAL aboneliği satın aldıysanız SAP, Azure üzerinde SAP CAL aracılığıyla dağıtımları tamamen destekler. Destek kuyruğu BC-VCM-CAL ' dir.
 

@@ -14,12 +14,12 @@ ms.topic: tutorial
 ms.date: 04/19/2019
 ms.author: yegu
 ms.custom: mvc
-ms.openlocfilehash: 5e27c6a1ab5fc9dff779c6e5d04689683d5c8e6d
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: 99559c0c77c3e4b29badec1c0be2d741df1f0621
+ms.sourcegitcommit: 66237bcd9b08359a6cce8d671f846b0c93ee6a82
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67274136"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67798369"
 ---
 # <a name="tutorial-use-feature-flags-in-an-aspnet-core-app"></a>Öğretici: Özellik bayrakları ASP.NET Core uygulaması kullanın.
 
@@ -86,30 +86,42 @@ public class Startup
 
 Özellik bayrakları uygulama dışında tutun ve ayrı olarak yönetme öneririz. Bunun yapılması, dilediğiniz zaman bayrağı durumları değiştirebilir ve bu değişiklikleri uygulamaya hemen etkili sahip olanak tanır. Uygulama yapılandırması, düzenleme ve adanmış bir portal kullanıcı Arabirimi üzerinden tüm özellik bayraklarını denetleme için merkezi bir yerde sağlar. Uygulama yapılandırması da bayrakları uygulamanıza doğrudan aracılığıyla, .NET Core istemci kitaplıkları sunar.
 
-Yapılandırma sağlayıcısı uygulama yapılandırması için ASP.NET Core uygulamanızı bağlamak için en kolay yolu olan `Microsoft.Extensions.Configuration.AzureAppConfiguration`. Bu NuGet paketi kullanmak için aşağıdaki kodu ekleyin. *Program.cs* dosyası:
+Yapılandırma sağlayıcısı uygulama yapılandırması için ASP.NET Core uygulamanızı bağlamak için en kolay yolu olan `Microsoft.Azure.AppConfiguration.AspNetCore`. Bu NuGet paketi kullanmak için aşağıdaki adımları izleyin.
 
-```csharp
-using Microsoft.Extensions.Configuration.AzureAppConfiguration;
+1. Açık *Program.cs* dosyasını açıp aşağıdaki kodu ekleyin.
 
-public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-    WebHost.CreateDefaultBuilder(args)
-           .ConfigureAppConfiguration((hostingContext, config) => {
-               var settings = config.Build();
-               config.AddAzureAppConfiguration(options => {
-                   options.Connect(settings["ConnectionStrings:AppConfig"])
-                          .UseFeatureFlags();
-                });
-           })
-           .UseStartup<Startup>();
-```
+   ```csharp
+   using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 
-Özellik bayrağı değerleri, Zamanla değişen beklenir. Varsayılan olarak, özellik Yöneticisi özellik bayrağı değerleri her 30 saniyede yeniler. Aşağıdaki kod 5 saniye cinsinden yoklama aralığını değiştirmek nasıl gösterir `options.UseFeatureFlags()` çağırın:
+   public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+       WebHost.CreateDefaultBuilder(args)
+              .ConfigureAppConfiguration((hostingContext, config) => {
+                  var settings = config.Build();
+                  config.AddAzureAppConfiguration(options => {
+                      options.Connect(settings["ConnectionStrings:AppConfig"])
+                             .UseFeatureFlags();
+                   });
+              })
+              .UseStartup<Startup>();
+   ```
+
+2. Açık *Startup.cs* ve güncelleştirme `Configure` web uygulamasına ASP.NET Core sırasında yinelenen aralıklarla yenilenmesi için özellik bayrağı değerleri izin vermek için bir ara yazılım ekleme yöntemi devam isteklerini almak.
+
+   ```csharp
+   public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+   {
+       app.UseAzureAppConfiguration();
+       app.UseMvc();
+   }
+   ```
+
+Özellik bayrağı değerleri, Zamanla değişen beklenir. Varsayılan olarak, ara yazılım bir istek aldığında tetiklenen bir yenileme işlemi değeri güncelleştiririz, bu önbelleğe alınan değeri süresi dolana kadar olmayan şekilde özellik bayrağı değerleri 30 saniyelik bir süre için önbelleğe alınır. Aşağıdaki kod önbellek sona erme zamanı veya yoklama aralığı için 5 dakika içinde nasıl değiştirileceğini gösterir `options.UseFeatureFlags()` çağırın.
 
 ```csharp
 config.AddAzureAppConfiguration(options => {
     options.Connect(settings["ConnectionStrings:AppConfig"])
            .UseFeatureFlags(featureFlagOptions => {
-                featureFlagOptions.PollInterval = TimeSpan.FromSeconds(300);
+                featureFlagOptions.CacheExpirationTime = TimeSpan.FromMinutes(5);
            });
 });
 ```

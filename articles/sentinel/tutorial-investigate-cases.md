@@ -1,78 +1,116 @@
 ---
-title: Azure Önizleme Gözcü çalışmalarıyla araştırma | Microsoft Docs
-description: Azure Gözcü çalışmalarıyla araştırmak öğrenmek için bu öğreticiyi kullanın.
+title: Azure Sentinel ile olayları araştırın | Microsoft Docs
+description: Azure Sentinel ile olayları araştırmayla ilgili bilgi edinmek için bu öğreticiyi kullanın.
 services: sentinel
 documentationcenter: na
 author: rkarlin
 manager: rkarlin
 editor: ''
-ms.assetid: a493cd67-dc70-4163-81b8-04a9bc0232ac
-ms.service: sentinel
+ms.service: azure-sentinel
+ms.subservice: azure-sentinel
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 3/6/2019
+ms.date: 09/23/2019
 ms.author: rkarlin
-ms.openlocfilehash: d1da180d3b30b57ca2b69985bf3d0261b8d70c39
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fbab3eff3d7f742c2542e4264ef1b2124c5f15e5
+ms.sourcegitcommit: 11265f4ff9f8e727a0cbf2af20a8057f5923ccda
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65205515"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72024613"
 ---
-# <a name="tutorial-investigate-cases-with-azure-sentinel-preview"></a>Öğretici: Azure Önizleme Gözcü çalışmalarıyla araştırın
+# <a name="tutorial-investigate-incidents-with-azure-sentinel"></a>Öğretici: Azure Sentinel ile olayları araştırın
 
 > [!IMPORTANT]
-> Azure Sentinel şu anda genel Önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+> Araştırma grafı Şu anda genel önizlemededir.
+> Bu özellik, bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yükleri için önerilmez.
+> Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
-Bu öğretici Azure Gözcü ile tehditleri algılamanıza yardımcı olur.
 
-Çalıştırdıktan sonra [veri kaynaklarınıza bağlı](quickstart-onboard.md) şüpheli bir şey olduğunda size bildirilmesini istiyorsanız Azure Gözcü için. Bunu sağlamak için oluşturduğunuz Azure Gözcü atayabileceğiniz çalışmaları üreten uyarı kuralları ve kullanım anomalileri ve ortamınızdaki tehditlere derin bir şekilde araştırmak için Gelişmiş sağlar. 
+Bu öğretici, Azure Sentinel ile olayları araştırmanıza yardımcı olur. Veri kaynaklarınızı Azure Sentinel 'e bağladıktan sonra, şüpheli bir sorun olduğunda bildirim almak istersiniz. Bunu yapmanızı sağlamak için Azure Sentinel, atayabileceğiniz ve araştırmanız gereken olayları üreten gelişmiş uyarı kuralları oluşturmanıza olanak sağlar.
 
+Bu makalede şunları ele alınmaktadır:
 > [!div class="checklist"]
-> * Çalışmaları oluşturma
-> * Durumları inceleme
+> * Olayları araştırma
+> * Araştırma grafiğini kullanma
 > * Tehditlere yanıt verme
 
-## <a name="investigate-cases"></a>Durumları inceleme
+Bir olay birden çok uyarı içerebilir. Bu, belirli bir araştırma için ilgili tüm kanıtın bir toplamadır. **Analiz** sayfasında oluşturduğunuz analitik kurallara göre bir olay oluşturulur. Önem derecesi ve durum gibi uyarılarla ilgili özellikler olay düzeyinde ayarlanır. Azure Sentinel 'e hangi tür tehditleri aradığınızı ve bunların nasıl bulunacağını öğrendikten sonra, olayları inceleyerek algılanan tehditleri izleyebilirsiniz.
 
-Bir durum, birden çok uyarı içerebilir. Bu, belirli bir araştırma için tüm kanıt bir toplama olur. Servis talebi, tanımladığınız uyarılar temel alınarak oluşturulur **Analytics** sayfası. Uyarıları önem ve durum gibi ilgili özellikleri büyük/küçük harf düzeyinde ayarlanır. Azure, bildiğiniz aradığınız tehditleri ve bunları nasıl bulacağınıza ilişkin ne tür Gözcü izin sonra durumlarda araştırma tarafından algılanan tehditleri izleyebilirsiniz. 
+## <a name="prerequisites"></a>Önkoşullar
+Yalnızca analitik kuralınızı ayarlarken varlık eşleme alanlarını kullandıysanız olayı araştırabileceksiniz. Araştırma grafiğinde, özgün olaylarınızın varlıkları içermesi gerekir.
 
-1. Seçin **çalışmaları**. **Çalışmaları** sayfa, sahip olduğunuz kaç çalışması bilmenizi sağlar, ne kadar kaç ayarladığınız açık olduğunu **sürüyor**, ve kaç kapatılır. Her durumda, gerçekleştiği zaman ve servis talebi durumunu görebilirsiniz. İlk işlemeye karar verirken önem derecesi arayın. İçinde **çalışmaları** sayfasında **uyarılar** olayla ilgili tüm uyarıları görmek için sekmesinde. Durum bölümü görüntülenebilir önceki eşlenen varlıkları **varlıkları** sekmesi.  Durumlarda, örneğin durumu veya önem sırasına göre gerektiği şekilde filtreleyebilirsiniz. Baktığınızda **çalışmaları** sekmesinde tanımlanan algılama kurallarınızı tarafından tetiklenen uyarılar içerir açık durumda görürsünüz **Analytics**. Üst kısmında gördüğünüz etkin servis talepleri, yeni çalışmaları ve ilerleme durumlarda. Önem derecesine göre tüm çalışmalarınızı genel bir bakış da görebilirsiniz.
+## <a name="how-to-investigate-incidents"></a>Olayları araştırma
 
-   ![Uyarı Panosu](./media/tutorial-investigate-cases/cases.png)
+1. **Olayları**seçin. **Olaylar** sayfası, kaç olay olduğunu, kaç tane açık olduğunu, **devam**ediyor olarak ayarlamış olduğunuzu ve kaç tane kapatıldığını görmenizi sağlar. Her olay için, gerçekleştiği zamanı ve olayın durumunu görebilirsiniz. İlk olarak hangi olayların işleneceğini belirlemek için önem derecesine bakın.
 
-2. Bir araştırma başlamak için belirli bir servis talebi üzerinde tıklayın. Sağ tarafta (sizin eşlemesini göre), önem derecesi, Özet ilgili varlıkların sayısı dahil olmak üzere durumu için ayrıntılı bilgileri görebilirsiniz. Her durumda benzersiz bir kimliğe sahiptir. Servis talebi önem durumda dahil en önemli uyarı göre belirlenir.  
+    ![Olay önem derecesini görüntüle](media/tutorial-investigate-cases/incident-severity.png)
 
-1. Bir durumda uyarılar ve varlıklar hakkında daha fazla ayrıntı görüntülemek için tıklayın **tam ayrıntılarını görüntüleme** durumda sayfasında ve durum bilgileri özetleyen ilgili sekmeleri gözden geçirin.  Tam durum görünümü, uyarı, ilişkili uyarı ve varlıkları tüm kanıt birleştirir.
+1. Olayları gerektiği gibi filtreleyebilirsiniz, örneğin durum veya önem derecesine göre.
 
-1. İçinde **uyarılar** sekmesinde, uyarının kendisine - tetiklendi zaman ve ne kadar belirlediğiniz eşikleri aşıldı tarafından gözden geçirin. Uyarı: Sorgu ve uyarı üzerinde playbook'ları çalıştırma olanağı başına döndürülen sonuç sayısı uyarıyı tetikleyen sorgu ilgili tüm bilgileri görebilirsiniz. Detaya gitmek için aşağı daha durumuna, isabet sayısına tıklayın. Bu, sonuçları ve uyarının Log analytics'te sonuçlar oluşturulan sorgu açar.
+1. Bir araştırmaya başlamak için belirli bir olay seçin. Sağ tarafta, olay için önem derecesi, dahil edilen varlıkların sayısının Özeti, bu olayı tetikleyen ham olaylar ve olayın benzersiz KIMLIĞI gibi ayrıntılı bilgileri görebilirsiniz.
 
-3. İçinde **varlıkları** sekmesinde uyarı kuralı tanımının bir parçası, eşleşen tüm varlıkları görebilirsiniz. 
+1. Olaydaki uyarılar ve varlıklar hakkında daha fazla ayrıntı görüntülemek için olay sayfasında **tam ayrıntıları görüntüle** ' yi seçin ve olay bilgilerini özetleyen ilgili sekmeleri gözden geçirin. **Uyarılar** sekmesinde, uyarının kendisini gözden geçirin. Uyarı ile ilgili tüm bilgileri, uyarıyı tetikleyen sorguyu, sorgu başına döndürülen sonuç sayısını ve uyarılar üzerinde PlayBook 'ları çalıştırma özelliğini görebilirsiniz. Olay içinde daha fazla ayrıntıya geçmek için **olay**sayısını seçin. Bu, sonuçları oluşturan sorguyu ve Log Analytics uyarıyı tetikleyen olayları açar. **Varlıklar** sekmesinde, uyarı kuralı tanımının bir parçası olarak eşleştirmekte olduğunuz tüm varlıkları görebilirsiniz.
 
-4. Bir durum etkin olarak araştırdığınızı ise, durumu ayarlamak için iyi bir fikirdir **sürüyor** Siz kapatana kadar. Durum da kapatabilirsiniz burada **çözümlenen kapalı** durumu gösteren bir olay işlendiğini, çalışmaları sırasında **kapatılmış kapalı** işleme gerektirmeyen çalışmaları durumu. Açıklamalar, servis talebi kapatma, mantık açıklayan gereklidir.
+    ![Uyarı ayrıntılarını görüntüle](media/tutorial-investigate-cases/alert-details.png)
 
-5. Durumlarda, belirli bir kullanıcıya atanabilir. Her durum için durum ayarlayarak bir sahip atayabilir **sahibi** alan. Tüm durumlarda başlangıç olarak atanmamış. Örneklerinden gidin ve sahip olduğunuz tüm durumları görmek için ada göre Filtrele. 
+1. Bir olayı etkin bir şekilde araştırıyorsanız, siz kapatıncaya kadar olayın durumunu **devam ediyor** olarak ayarlamanız iyi bir fikirdir.
 
-5. Tıklayın **Araştır** araştırma Haritası ve düzeltme adımları, ihlal kapsamına görüntülemek için. 
+1. Olaylar, belirli bir kullanıcıya atanabilir. Her olay için, **olay sahibi** alanını ayarlayarak bir sahip atayabilirsiniz. Tüm olaylar atanmamış olarak başlar. Ayrıca, diğer analistlerin ne araştırdığınızı anlayabilmesi ve kaygılarınızın olay etrafında ne olduğunu anlayabilmesi için yorum ekleyebilirsiniz.
 
+    ![Kullanıcıya olay atama](media/tutorial-investigate-cases/assign-incident-to-user.png)
 
+1. Araştırma haritasını görüntülemek için **Araştır** ' ı seçin.
 
-## <a name="respond-to-threats"></a>Tehditlere yanıt verme
+## <a name="use-the-investigation-graph-to-deep-dive"></a>Ayrıntılı bilgi edinmek için araştırma grafiğini kullanın
 
-Azure Sentinel playbook'ları kullanarak tehditlerine yanıt verme için iki birincil seçenek sunar. Playbook bir uyarı tetiklenir ya da bir uyarıya yanıt olarak bir playbook el ile çalıştırabilirsiniz otomatik olarak çalışacak şekilde ayarlayabilirsiniz.
+Araştırma grafiği analistlerin her İnceleme için doğru soruları sormasını sağlar. Araştırma grafiği, ilgili verileri herhangi bir ilgili varlıkla ilişkilendirerek olası bir güvenlik tehdidi kapsamını anlamanıza ve kök nedenini belirlemenize yardımcı olur. Grafik ' i seçerek ve farklı genişletme seçenekleri arasında seçim yaparak grafikte sunulan herhangi bir varlığı daha ayrıntılı bir şekilde araştırıp inceleyebilirsiniz.  
+  
+Araştırma grafiği size şunları sağlar:
 
-- Playbook playbook yapılandırdığınızda, bir uyarı tetiklendiğinde otomatik olarak çalışacak şekilde ayarlayabilirsiniz. 
+- **Ham verilerden görsel bağlam**: canlı, görsel grafik, ham verilerden otomatik olarak ayıklanan varlık ilişkilerini görüntüler. Bu, farklı veri kaynakları genelinde bağlantıları kolayca görmenizi sağlar.
 
-- Gelen bir playbook uyarı içine tıklayarak el ile çalıştırabilirsiniz **playbook'ları görüntüleme** ve sonra çalıştırılacak bir playbook seçerek.
+- **Tam araştırma kapsamı bulma**: bir ihlalin tam kapsamını yüzeye almak için yerleşik araştırma sorgularını kullanarak araştırma kapsamınızı genişletin.
 
+- **Yerleşik araştırma adımları**: bir tehdit tarafında doğru soruları sorduğunuzdan emin olmak için önceden tanımlanmış araştırma seçeneklerini kullanın.
+
+Araştırma grafiğini kullanmak için:
+
+1. Bir olay seçin ve ardından **Araştır**' ı seçin. Bu sizi araştırma grafiğine götürür. Grafik, uyarıya doğrudan bağlı varlıkların bir tanım haritasını ve her bir kaynağı daha fazla bağlantılı olarak sağlar.
+
+   > [!IMPORTANT] 
+   > Yalnızca analitik kuralınızı ayarlarken varlık eşleme alanlarını kullandıysanız olayı araştırabileceksiniz. Araştırma grafiğinde, özgün olaylarınızın varlıkları içermesi gerekir.
+
+   ![Haritayı görüntüleme](media/tutorial-investigate-cases/map1.png)
+
+1. **Varlıklar** bölmesini açmak için bir varlık seçin, böylece ilgili varlık hakkındaki bilgileri gözden geçirebilirsiniz.
+
+    ![Haritalardaki varlıkları görüntüle](media/tutorial-investigate-cases/map-entities.png)
+  
+1. Araştırmanızı sağlamak için her bir varlığın, varlık türü başına güvenlik uzmanlarımız ve analistlerimiz tarafından tasarlanan soruların listesini açığa çıkarmak için araştırmanızı genişletin. Bu seçenekler **araştırma sorgularını**çağırıyoruz.
+
+    ![Diğer ayrıntıları keşfet](media/tutorial-investigate-cases/exploration-cases.png)
+
+   Örneğin, bir bilgisayarda ilgili uyarılar isteyebilirsiniz. Bir araştırma sorgusu seçerseniz, elde edilen sahibine grafiğe geri eklenir. Bu örnekte, **ilgili uyarıları** seçmek grafiğe aşağıdaki uyarıları döndürdü:
+
+    ![İlgili Uyarıları görüntüle](media/tutorial-investigate-cases/related-alerts.png)
+
+1. Her araştırma sorgusu için, **@ no__t-1 olaylarını**seçerek Ham olay sonuçlarını ve Log Analytics ' de kullanılan sorguyu açma seçeneğini belirleyebilirsiniz.
+
+1. Olayı anlamak için, grafik size paralel bir zaman çizelgesi sunar.
+
+    ![Haritada zaman çizelgesini görüntüle](media/tutorial-investigate-cases/map-timeline.png)
+
+1. Hangi noktada grafikteki hangi öğelerin oluştuğunu görmek için zaman çizelgesinin üzerine gelin.
+
+    ![Uyarıları araştırmak için haritada zaman çizelgesini kullanın](media/tutorial-investigate-cases/use-timeline.png)
 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu öğreticide, Azure Gözcü kullanarak araştırmaya başlama öğrendiniz. Öğreticiye devam [otomatik playbook'ları kullanarak tehditleri nasıl](tutorial-respond-threats-playbook.md).
+Bu öğreticide, Azure Sentinel kullanarak olayları araştırmaya nasıl başladığınızı öğrendiniz. [Otomatikleştirilmiş PlayBook 'lar kullanılarak tehditlere yanıt verme](tutorial-respond-threats-playbook.md)öğreticisine devam edin.
 > [!div class="nextstepaction"]
-> [Tehditleri](tutorial-respond-threats-playbook.md) tehditleri verdiğiniz yanıtları otomatik hale getirmek için.
+> Tehditlere yönelik yanıtlarınızı otomatik hale getirmek için [tehditleri yanıtlayın](tutorial-respond-threats-playbook.md) .
 

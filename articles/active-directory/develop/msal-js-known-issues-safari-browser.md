@@ -1,6 +1,7 @@
 ---
-title: Bilinen sorunlar (JavaScript için Microsoft kimlik doğrulama kitaplığı) tarayıcılarda | Azure
-description: Microsoft kimlik doğrulama kitaplığı (MSAL.js) JavaScript için kullanırken bilinen sorunlar Safari tarayıcısı ile bilgi edinin.
+title: Safari tarayıcısı 'nda bilinen sorunlar (JavaScript için MSAL)
+titleSuffix: Microsoft identity platform
+description: Safari tarayıcısı ile JavaScript için Microsoft kimlik doğrulama kitaplığı (MSAL. js) kullanılırken sorunları öğrenin.
 services: active-directory
 documentationcenter: dev-center-name
 author: navyasric
@@ -17,30 +18,30 @@ ms.author: nacanuma
 ms.reviewer: saeeda
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: cb89b1ef4dbbef234fba3152d7f85bbadfbdc64a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c48ae9bf7bb5d7f1055ebf0391557a1d117ab39d
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65873893"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72934853"
 ---
-# <a name="known-issues-on-safari-browser-with-msaljs"></a>Safari tarayıcısını MSAL.js ile bilinen sorunları 
+# <a name="known-issues-on-safari-browser-with-msaljs"></a>Safari tarayıcısı ile MSAL. js ile ilgili bilinen sorunlar 
 
-## <a name="silent-token-renewal-on-safari-12-and-itp-20"></a>Safari 12 ve ITP 2.0 sessiz belirteci yenileme
+## <a name="silent-token-renewal-on-safari-12-and-itp-20"></a>Safari 12 ve ıOP 2,0 ' de sessiz belirteç yenilemesi
 
-12 Apple iOS ve MacOS 10.14 işletim sistemleri dahil sürümü [12 Safari tarayıcı](https://developer.apple.com/safari/whats-new/). Güvenlik ve gizlilik amacı doğrultusunda, Safari 12 içeren [akıllı izleme önleme 2.0](https://webkit.org/blog/8311/intelligent-tracking-prevention-2-0/). Bu temelde ayarlanan üçüncü taraf tanımlama bilgilerini silmek tarayıcı neden olur. ITP 2.0 ayrıca üçüncü taraf tanımlama bilgileri olarak kimlik sağlayıcıları tarafından ayarlanan tanımlama bilgilerini işler.
+Apple iOS 12 ve MacOS 10,14 işletim sistemleri [Safari 12 tarayıcısının](https://developer.apple.com/safari/whats-new/)bir sürümünü içeriyordu. Güvenlik ve gizlilik amaçları doğrultusunda Safari 12, [akıllı Izleme önleme 2,0](https://webkit.org/blog/8311/intelligent-tracking-prevention-2-0/)' i içerir. Bu aslında tarayıcının ayarlanan üçüncü taraf tanımlama bilgilerini bırakmaya neden olur. IOP 2,0 ayrıca kimlik sağlayıcıları tarafından ayarlanan tanımlama bilgilerini üçüncü taraf tanımlama bilgileri olarak değerlendirir.
 
-### <a name="impact-on-msaljs"></a>MSAL.js etkisi
+### <a name="impact-on-msaljs"></a>MSAL. js üzerindeki etki
 
-MSAL.js kapsamında sessiz belirteç edinme ve yenileme gerçekleştirmek için gizli bir Iframe kullanan `acquireTokenSilent` çağırır. Azure AD tarafından ayarlanmış tanımlama bilgileri tarafından temsil edilen kimliği doğrulanmış kullanıcı oturumuna erişim izni olan Iframe sessiz belirteci isteklerini dayanır. ITP 2.0 bu tanımlama bilgilerine erişimi engelleme, MSAL.js sessiz bir şekilde almak ve belirteçleri yenileme başarısız olur ve sonuçlanır `acquireTokenSilent` hataları.
+MSAL. js, `acquireTokenSilent` çağrılarının bir parçası olarak sessiz belirteç alma ve yenileme işlemleri gerçekleştirmek için gizli bir IFRAME kullanır. Sessiz Belirteç istekleri, Azure AD tarafından ayarlanan tanımlama bilgileriyle temsil edilen kimliği doğrulanmış kullanıcı oturumuna erişimi olan IFRAME 'yi kullanır. IOP 2,0, bu tanımlama bilgilerine erişimi engelliyor, MSAL. js belirteçleri sessizce alamıyor ve yenilemez ve bu durum `acquireTokenSilent` hatalara neden olur.
 
-Var. Bu sorun için çözüm bu noktada ve biz standartları topluluk seçeneklerle Değerlendiriyorlar.
+Bu noktada bu sorun için çözüm yoktur ve standartları topluluk ile seçenekleri değerlendiriyoruz.
 
 ### <a name="work-around"></a>Geçici çözüm
 
-Varsayılan olarak, üzerinde Safari tarayıcısı ITP ayar etkindir. Giderek bu ayarı devre dışı bırakabilirsiniz **tercihleri** -> **gizlilik** ve işaretini **siteler arası izleme önlemek** seçeneği.
+Varsayılan olarak, ıOP ayarı Safari tarayıcısı üzerinde etkinleştirilmiştir. **Tercihler** -> **gizliliği** ' ne giderek ve **siteler arası izlemeyi engelle** seçeneğinin işaretini kaldırarak bu ayarı devre dışı bırakabilirsiniz.
 
 ![Safari ayarı](./media/msal-js-known-issue-safari-browser/safari.png)
 
-İşlemek ihtiyacınız olacak `acquireTokenSilent` başarısızlıkları ile etkileşimli kullanıcının oturum açmasını ister belirteci çağrısı.
-Yinelenen oturum açma işlemleri önlemek için işlenecek uygulayabilirsiniz yaklaşım, `acquireTokenSilent` hatası ve kullanıcının etkileşimli çağrısı ile devam etmeden önce Safari'de ITP ayarı devre dışı bırakma seçeneği sağlar. Ayarı devre dışı bırakıldıktan sonra sonraki sessiz belirteci yenileme başarılı olması gerekir.
+`acquireTokenSilent` hatasını, kullanıcıdan oturum açmasını isteyen etkileşimli bir alma belirteci çağrısıyla işlemeniz gerekir.
+Yinelenen oturum açma işlemlerini önlemek için uygulayabileceğiniz bir yaklaşım, `acquireTokenSilent` başarısızlığını idare etmek ve kullanıcıya etkileşimli çağrıya devam etmeden önce Safari 'deki ıOP ayarını devre dışı bırakma seçeneği sağlamamaktır. Ayar devre dışı bırakıldıktan sonra, sonraki sessiz belirteç yenilemeler başarılı olmalıdır.

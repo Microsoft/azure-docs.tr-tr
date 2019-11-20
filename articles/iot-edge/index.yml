@@ -1,108 +1,120 @@
 ### YamlMime:Landing
-title: Azure IoT Edge
-summary: 'Azure IoT Edge, IoT Hub temelinde geliştirilen bir Nesnelerin İnterneti (IoT) hizmetidir. Bu hizmet, verileri bulut yerine cihazlarda veya "en uçta" analiz etmek isteyen müşterilere yöneliktir. İş yükünüzün belirli bölümlerini uca taşıyarak cihazlarınızın iletileri buluta gönderme süresini azaltabilir ve olaylara daha hızlı yanıt vermesini sağlayabilirsiniz.'
+title: Azure IoT Edge belgeleri
+summary: Azure IoT Edge, IoT Hub temelinde geliştirilen bir Nesnelerin İnterneti (IoT) hizmetidir. Bu hizmet, verileri bulut yerine cihazlarda veya "en uçta" analiz etmek isteyen müşterilere yöneliktir. İş yükünüzün belirli bölümlerini uca taşıyarak cihazlarınızın iletileri buluta gönderme süresini azaltabilir ve olaylara daha hızlı yanıt vermesini sağlayabilirsiniz.
 metadata:
+  title: Azure IoT Edge belgeleri
+  description: Azure IoT Edge, IoT Hub temelinde geliştirilen bir Nesnelerin İnterneti (IoT) hizmetidir. Bu hizmet, verileri bulut yerine cihazlarda veya "en uçta" analiz etmek isteyen müşterilere yöneliktir. İş yükünüzün belirli bölümlerini uca taşıyarak cihazlarınızın iletileri buluta gönderme süresini azaltabilir ve olaylara daha hızlı yanıt vermesini sağlayabilirsiniz.
+  services: iot-edge
+  ms.service: iot-edge
   ms.topic: landing-page
+  author: kgremban
+  ms.author: kgremban
+  manager: philmea
+  ms.date: 08/05/2019
+  ms.openlocfilehash: 673243b2e38b6d93091faea2e32a40d23b2a5267
+  ms.sourcegitcommit: c8a102b9f76f355556b03b62f3c79dc5e3bae305
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/06/2019
+  ms.locfileid: "68815779"
 landingContent:
-  - title: Linux cihazları için geliştirme
-    linkLists:
-      - linkListType: quickstart
-        links:
-          - text: Linux cihazına ilk IoT Edge modülünüzü dağıtma
-            url: quickstart-linux.md
-      - linkListType: tutorial
-        links:
-          - text: Linux cihazları için IoT Edge modülleri geliştirme
-            url: tutorial-develop-for-linux.md
-      - linkListType: how-to-guide
-        links:
-          - text: Modül geliştirmek ve modülde hata ayıklamak için Visual Studio Code’u kullanma
-            url: how-to-vs-code-develop-module.md
-  - title: Windows cihazları için geliştirme
-    linkLists:
-      - linkListType: quickstart
-        links:
-          - text: Windows cihazına ilk IoT Edge modülünüzü dağıtma
-            url: quickstart.md
-      - linkListType: tutorial
-        links:
-          - text: Windows cihazları için IoT Edge modülleri geliştirme
-            url: tutorial-develop-for-windows.md
-      - linkListType: how-to-guide
-        links:
-          - text: Modül geliştirmek ve modülde hata ayıklamak için Visual Studio 2017’yi kullanma
-            url: how-to-visual-studio-develop-module.md
-  - title: IoT Edge cihazları hazırlama
-    linkLists:
-      - linkListType: how-to-guide
-        links:
-          - text: Linux x64’te IoT Edge yükleme
-            url: how-to-install-iot-edge-linux.md
-          - text: Linux ARM32’de IoT Edge yükleme
-            url: how-to-install-iot-edge-linux-arm.md
-          - text: Windows x64’te IoT Edge yükleme
-            url: how-to-install-iot-edge-windows.md
-          - text: Linux cihazlarını otomatik olarak sağlama
-            url: how-to-auto-provision-simulated-device-linux.md
-          - text: Windows cihazlarını otomatik olarak sağlama
-            url: how-to-auto-provision-simulated-device-windows.md
-  - title: Açık kaynak topluluğuyla etkileşim kurma
-    linkLists:
-      - linkListType: get-started
-        links:
-          - text: IoT Edge deposu
-            url: 'https://github.com/Azure/iotedge'
-          - text: IoT Edge GitHub sorunları
-            url: 'https://github.com/Azure/iotedge/issues'
-          - text: En son sürümler ve değişiklik günlükleri
-            url: 'https://github.com/Azure/azure-iotedge/releases'
-  - title: IoT Edge cihazlarını ağ geçidi olarak kullanma
-    linkLists:
-      - linkListType: concept
-        links:
-          - text: IoT Edge cihazını ağ geçidi olarak kullanma
-            url: iot-edge-as-gateway.md
-      - linkListType: how-to-guide
-        links:
-          - text: Saydam bir ağ geçidi yapılandırma
-            url: how-to-create-transparent-gateway.md
-          - text: Azure IoT Hub’da bir aşağı akış cihazının kimliğini doğrulama
-            url: how-to-authenticate-downstream-device.md
-          - text: Aşağı akış cihazını bir ağ geçidine bağlama
-            url: how-to-connect-downstream-device.md
-  - title: Üretim senaryolarına hazırlanma
-    linkLists:
-      - linkListType: concept
-        links:
-          - text: Otomatik dağıtımları anlama
-            url: module-deployment-monitoring.md
-          - text: Platform desteği
-            url: support.md
-          - text: Üretim dağıtımı denetim listesi
-            url: production-checklist.md
-          - text: IoT Edge sertifika kullanımını anlama
-            url: iot-edge-certs.md
-          - text: IoT Edge güvenlik standartları
-            url: security.md
-      - linkListType: how-to-guide
-        links:
-          - text: Azure CLI’yı kullanarak her ölçekte dağıtma ve izleme
-            url: how-to-deploy-monitor-cli.md
-          - text: Azure Pipelines ile CI/CD işlem hattı oluşturma
-            url: how-to-ci-cd.md
-      - linkListType: deploy
-        links:
-          - text: IoT Hub için REST API
-            url: 'https://docs.microsoft.com/rest/api/iothub/'
-  - title: Uçta yapay zeka dağıtma
-    linkLists:
-      - linkListType: tutorial
-        links:
-          - text: Azure Machine Learning'i bir IoT Edge modülü olarak dağıtma
-            url: tutorial-deploy-machine-learning.md
-          - text: Özel Görüntü İşleme Hizmeti ile uçta görüntü sınıflandırması yapma
-            url: tutorial-deploy-custom-vision.md
-      - linkListType: deploy
-        links:
-          - text: Azure Market’te Azure Bilişsel Hizmetler modüllerini bulma
-            url: 'https://azuremarketplace.microsoft.com/marketplace/apps/category/internet-of-things?subcategories=iot-edge-modules&search=azure%20cognitive%20services'
+- title: Linux cihazları için geliştirme
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Linux cihazına ilk IoT Edge modülünüzü dağıtma
+      url: quickstart-linux.md
+  - linkListType: tutorial
+    links:
+    - text: Linux cihazları için IoT Edge modülleri geliştirme
+      url: tutorial-develop-for-linux.md
+  - linkListType: how-to-guide
+    links:
+    - text: Modül geliştirmek ve modülde hata ayıklamak için Visual Studio Code’u kullanma
+      url: how-to-vs-code-develop-module.md
+- title: Windows cihazları için geliştirme
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Windows cihazına ilk IoT Edge modülünüzü dağıtma
+      url: quickstart.md
+  - linkListType: tutorial
+    links:
+    - text: Windows cihazları için IoT Edge modülleri geliştirme
+      url: tutorial-develop-for-windows.md
+  - linkListType: how-to-guide
+    links:
+    - text: Modül geliştirmek ve modülde hata ayıklamak için Visual Studio 2017’yi kullanma
+      url: how-to-visual-studio-develop-module.md
+- title: IoT Edge cihazları hazırlama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Linux’ta IoT Edge yükleme
+      url: how-to-install-iot-edge-linux.md
+    - text: Windows’da IoT Edge yükleme
+      url: how-to-install-iot-edge-windows.md
+    - text: Linux cihazlarını otomatik olarak sağlama
+      url: how-to-auto-provision-simulated-device-linux.md
+    - text: Windows cihazlarını otomatik olarak sağlama
+      url: how-to-auto-provision-simulated-device-windows.md
+- title: Açık kaynak topluluğuyla etkileşim kurma
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: IoT Edge deposu
+      url: https://github.com/Azure/iotedge
+    - text: IoT Edge GitHub sorunları
+      url: https://github.com/Azure/iotedge/issues
+    - text: En son sürümler ve değişiklik günlükleri
+      url: https://github.com/Azure/azure-iotedge/releases
+- title: IoT Edge cihazlarını ağ geçidi olarak kullanma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: IoT Edge cihazını ağ geçidi olarak kullanma
+      url: iot-edge-as-gateway.md
+  - linkListType: how-to-guide
+    links:
+    - text: Saydam bir ağ geçidi yapılandırma
+      url: how-to-create-transparent-gateway.md
+    - text: Azure IoT Hub’da bir aşağı akış cihazının kimliğini doğrulama
+      url: how-to-authenticate-downstream-device.md
+    - text: Aşağı akış cihazını bir ağ geçidine bağlama
+      url: how-to-connect-downstream-device.md
+- title: Üretim senaryolarına hazırlanma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Otomatik dağıtımları anlama
+      url: module-deployment-monitoring.md
+    - text: Platform desteği
+      url: support.md
+    - text: Üretim dağıtımı denetim listesi
+      url: production-checklist.md
+    - text: IoT Edge sertifika kullanımını anlama
+      url: iot-edge-certs.md
+    - text: IoT Edge güvenlik standartları
+      url: security.md
+  - linkListType: how-to-guide
+    links:
+    - text: Azure CLI’yı kullanarak her ölçekte dağıtma ve izleme
+      url: how-to-deploy-monitor-cli.md
+    - text: Azure Pipelines ile CI/CD işlem hattı oluşturma
+      url: how-to-ci-cd.md
+  - linkListType: deploy
+    links:
+    - text: IoT Hub için REST API
+      url: https://docs.microsoft.com/rest/api/iothub/
+- title: Uçta yapay zeka dağıtma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Azure Machine Learning'i bir IoT Edge modülü olarak dağıtma
+      url: tutorial-deploy-machine-learning.md
+    - text: Özel Görüntü İşleme Hizmeti ile uçta görüntü sınıflandırması yapma
+      url: tutorial-deploy-custom-vision.md
+  - linkListType: deploy
+    links:
+    - text: Azure Market’te Azure Bilişsel Hizmetler modüllerini bulma
+      url: https://azuremarketplace.microsoft.com/marketplace/apps/category/internet-of-things?subcategories=iot-edge-modules&search=azure%20cognitive%20services

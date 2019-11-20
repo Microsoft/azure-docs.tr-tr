@@ -1,36 +1,36 @@
 ---
-title: "Hızlı Başlangıç: Ruby ve Bing otomatik öneri REST API'si ile arama sorguları önerin"
-titlesuffix: Azure Cognitive Services
-description: Bing Otomatik Öneri API'sini kısa sürede kullanmaya başlamanıza yardımcı olacak bilgi ve kod örnekleri alın.
+title: 'Hızlı Başlangıç: Bing Otomatik Öneri REST API ve Ruby ile arama sorguları önerin'
+titleSuffix: Azure Cognitive Services
+description: Bing Otomatik Öneri API'si ile gerçek zamanlı olarak arama terimleri önerme hakkında hızlı bir başlangıç yapmayı öğrenin.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-autosuggest
 ms.topic: quickstart
-ms.date: 02/20/2019
+ms.date: 07/26/2019
 ms.author: aahi
-ms.openlocfilehash: 56ad71d9a746f61e724c1f3b5c5c6be0a3318452
-ms.sourcegitcommit: 3d4121badd265e99d1177a7c78edfa55ed7a9626
+ms.openlocfilehash: b395c9202ce6d67b76bc0dc6e203a0db275b4fa1
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66390369"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68565794"
 ---
-# <a name="quickstart-suggest-search-queries-with-the-bing-autosuggest-rest-api-and-ruby"></a>Hızlı Başlangıç: Ruby ve Bing otomatik öneri REST API'si ile arama sorguları önerin
+# <a name="quickstart-suggest-search-queries-with-the-bing-autosuggest-rest-api-and-ruby"></a>Hızlı Başlangıç: Bing Otomatik Öneri REST API ve Ruby ile arama sorguları önerin
 
-Bing otomatik öneri API'si ve JSON yanıtını alma yapmaya başlamak için bu Hızlı Başlangıç'ı çağırır kullanın. Bu basit Ruby uygulaması, API için bir kısmi arama sorgusu gönderir ve aramalar için öneriler döndürür. Bu uygulama, Ruby ile yazılmış olmakla birlikte API, çoğu programlama diliyle uyumlu bir RESTful Web hizmetidir.
+Bing Otomatik Öneri API'si çağrı yapmaya başlamak ve JSON yanıtını almak için bu hızlı başlangıcı kullanın. Bu basit Ruby uygulaması, API 'ye kısmi bir arama sorgusu gönderir ve aramalar için öneriler döndürür. Bu uygulama, Ruby ile yazılmış olmakla birlikte API, çoğu programlama diliyle uyumlu bir RESTful Web hizmetidir.
 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* [Ruby 2.4](https://www.ruby-lang.org/en/downloads/) veya üzeri.
+* [Ruby 2,4](https://www.ruby-lang.org/en/downloads/) veya üzeri.
 
 [!INCLUDE [cognitive-services-bing-news-search-signup-requirements](../../../../includes/cognitive-services-bing-autosuggest-signup-requirements.md)]
 
 ## <a name="create-a-new-application"></a>Yeni uygulama oluşturma
 
-1. Yeni bir Ruby dosyası, sık kullandığınız IDE veya düzenleyici oluşturun. Aşağıdaki koşulları ekleyin:
+1. En sevdiğiniz IDE veya düzenleyicide yeni bir Ruby dosyası oluşturun. Aşağıdaki gereksinimleri ekleyin:
 
     ```ruby
     require 'net/https'
@@ -38,7 +38,7 @@ Bing otomatik öneri API'si ve JSON yanıtını alma yapmaya başlamak için bu 
     require 'json'
     ```
 
-2. API konak ve yol değişkenlerinin [pazara kod](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference#market-codes), kısmi arama sorgusu.
+2. API ana bilgisayarınız ve yolunuz, [Pazar kodu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference#market-codes), kısmi arama sorgunuz için değişkenler oluşturun.
 
     ```ruby
     subscriptionKey = 'enter your key here'
@@ -48,23 +48,23 @@ Bing otomatik öneri API'si ve JSON yanıtını alma yapmaya başlamak için bu 
     query = 'sail'
     ```
 
-3. Pazar kodunuzu ekleyerek parametreleri dize oluşturma `?mkt=` parametresi ve sorgunuzu ekleme `&q=` parametresi. Ardından, istek URI'si API konak ve yol parametreleri dize birleştirerek oluşturun.
+3. Pazar kodunuzu `?mkt=` parametresine ekleyerek ve sorgunuzu `&q=` parametresine ekleyerek bir parametre dizesi oluşturun. Ardından API konağını, yolunu ve Parameters dizesini birleştirerek istek URI 'nizi oluşturun.
 
     ```ruby
     params = '?mkt=' + mkt + '&q=' + query
     uri = URI (host + path + params)
     ```
 
-## <a name="create-and-send-an-api-request"></a>Oluşturma ve bir API isteği gönder
+## <a name="create-and-send-an-api-request"></a>API isteği oluşturma ve gönderme
 
-1. Bir isteği ile URI'niz oluşturulur ve abonelik anahtarınızı ekleme `Ocp-Apim-Subscription-Key` başlığı.
+1. URI 'niz ile bir istek oluşturun ve abonelik anahtarınızı `Ocp-Apim-Subscription-Key` üstbilgiye ekleyin.
     
     ```ruby
     request = Net::HTTP::Get.new(uri)
     request['Ocp-Apim-Subscription-Key'] = subscriptionKey
     ```
 
-2. İstek gönderir ve yanıtı depolayın.
+2. İsteği gönderin ve yanıtı depolayın.
     
     ```ruby
     response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
@@ -72,7 +72,7 @@ Bing otomatik öneri API'si ve JSON yanıtını alma yapmaya başlamak için bu 
     end
     ```
 
-3. JSON yanıtı yazdırın.
+3. JSON yanıtını yazdır.
     
     ```ruby
     puts JSON::pretty_generate (JSON (response.body))

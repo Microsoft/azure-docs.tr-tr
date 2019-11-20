@@ -1,39 +1,39 @@
 ---
-title: "Hızlı Başlangıç: Bing varlık arama SDK'sı Python"
-titlesuffix: Azure Cognitive Services
-description: Bing Varlık Arama SDK'sı konsol uygulaması kurulumu.
+title: 'Hızlı Başlangıç: Python için Bing Varlık Arama SDK ile varlıkları arama'
+titleSuffix: Azure Cognitive Services
+description: Python için Bing Varlık Arama SDK 'Sı olan varlıkları aramak için bu hızlı başlangıcı kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-entity-search
 ms.topic: quickstart
-ms.date: 02/01/2019
+ms.date: 07/24/2019
 ms.author: aahi
-ms.openlocfilehash: 9a66df03ceb03885ba5f61b4adeb54cb1876338d
-ms.sourcegitcommit: 36c50860e75d86f0d0e2be9e3213ffa9a06f4150
+ms.openlocfilehash: 0a4a4e3ce6f318a693b8ee760a0d892eaecb2c82
+ms.sourcegitcommit: 75a56915dce1c538dc7a921beb4a5305e79d3c7a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/16/2019
-ms.locfileid: "65813606"
+ms.lasthandoff: 07/24/2019
+ms.locfileid: "68479013"
 ---
-# <a name="quickstart-bing-entity-search-sdk-with-python"></a>Hızlı Başlangıç: Bing varlık arama ile Python SDK'sı
+# <a name="quickstart-bing-entity-search-sdk-with-python"></a>Hızlı Başlangıç: Python ile SDK Bing Varlık Arama
 
-Bing varlık arama SDK'sı ile varlıkları için Python için aramaya başlamak için bu Hızlı Başlangıç'ı kullanın. Bing varlık arama çoğu programlama dilleri ile uyumlu bir REST API olsa da SDK hizmeti uygulamalarınızla tümleştirmek için kolay bir yol sağlar. Bu örnek için kaynak kodu bulunabilir [GitHub](https://github.com/Azure-Samples/cognitive-services-python-sdk-samples/blob/master/samples/search/entity_search_samples.py).
+Python için Bing Varlık Arama SDK ile varlıkları aramaya başlamak için bu hızlı başlangıcı kullanın. Bing Varlık Arama birçok programlama dili ile uyumlu bir REST API sahip olsa da SDK, hizmeti uygulamalarınızla tümleştirmenin kolay bir yolunu sunar. Bu örneğe ilişkin kaynak kodu [GitHub](https://github.com/Azure-Samples/cognitive-services-python-sdk-samples/blob/master/samples/search/entity_search_samples.py)' da bulunabilir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Python [2.x veya 3.x](https://www.python.org/)
+* Python [2. x veya 3. x](https://www.python.org/)
 
-* [İçin Python SDK'sı Bing varlık arama](https://pypi.org/project/azure-cognitiveservices-search-entitysearch/)
+* [Python için Bing varlık arama SDK 'sı](https://pypi.org/project/azure-cognitiveservices-search-entitysearch/)
 
-Bir python sanal ortamı kullanmanız önerilir. Yükleme ve venv modülüyle bir sanal ortam başlatılamıyor. Python 2.7 ile için virtualenv yükleyebilirsiniz:
+Python sanal ortamı kullanmanız önerilir. Venv modülü ile sanal bir ortam yükleyebilir ve başlatabilirsiniz. Virtualenv 'yi şu ile yükleyebilirsiniz:
 
 ```Console
 python -m venv mytestenv
 ```
 
-Bing varlık arama SDK'sı ile yükleyin:
+Bing Varlık Arama SDK 'sını şu şekilde yüklemelisiniz:
 
 ```Console
 cd mytestenv
@@ -44,7 +44,7 @@ python -m pip install azure-cognitiveservices-search-entitysearch
 
 ## <a name="create-and-initialize-the-application"></a>Uygulamayı oluşturma ve başlatma
 
-1. Sık kullandığınız IDE veya düzenleyici yeni bir Python dosyası oluşturun ve aşağıdaki import deyimlerini girin. 
+1. En sevdiğiniz IDE veya düzenleyicide yeni bir Python dosyası oluşturun ve aşağıdaki içeri aktarma deyimlerini ekleyin. 
 
     ```python
     from azure.cognitiveservices.search.entitysearch import EntitySearchAPI
@@ -52,22 +52,22 @@ python -m pip install azure-cognitiveservices-search-entitysearch
     from msrest.authentication import CognitiveServicesCredentials
     ```
 
-2. Abonelik anahtarınız için bir değişken oluşturun ve istemci yeni bir örneğini `CognitiveServicesCredentials` olan nesne.
+2. Abonelik anahtarınız için bir değişken oluşturun ve ile yeni `CognitiveServicesCredentials` bir nesne oluşturarak istemciyi oluşturun.
     
     ```python
     subscription_key = "YOUR-SUBSCRIPTION-KEY"
     client = EntitySearchAPI(CognitiveServicesCredentials(subscription_key))
     ```
 
-## <a name="send-a-search-request-and-receive-a-response"></a>Arama isteği gönderme ve yanıt
+## <a name="send-a-search-request-and-receive-a-response"></a>Arama isteği gönderme ve yanıt alma
 
-1. Bing varlık arama ile arama isteği göndermek `client.entities.search()` ve bir arama sorgusu. 
+1. `client.entities.search()` Ve bir arama sorgusuyla Bing varlık arama için bir arama isteği gönderin. 
     
     ```python
     entity_data = client.entities.search(query="Gibralter")
     ```
 
-2. Varlıkları döndürülmedi, dönüştürme `entity_data.entities.value` bir listesi ve yazdırma ilk sonucu.
+2. Varlıklar döndürülürse, bir listeye dönüştürün `entity_data.entities.value` ve ilk sonucu yazdırın.
     ```python
     if entity_data.entities.value:
     
@@ -83,4 +83,4 @@ python -m pip install azure-cognitiveservices-search-entitysearch
 > [!div class="nextstepaction"]
 > [Tek sayfalı web uygulaması oluşturma](../tutorial-bing-entities-search-single-page-app.md)
 
-* [Bing varlık arama API'si nedir?](../overview.md )
+* [Bing Varlık Arama API'si nedir?](../overview.md )

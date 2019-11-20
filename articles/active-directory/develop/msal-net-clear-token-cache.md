@@ -1,9 +1,10 @@
 ---
-title: .NET - Azure için Microsoft kimlik doğrulama kitaplığı kullanarak belirteç Önbelleği Temizle
-description: Microsoft kimlik doğrulama kitaplığı .NET (MSAL.NET) kullanarak belirteç Önbelleği Temizle öğrenin.
+title: .NET için Microsoft kimlik doğrulama kitaplığı 'nı kullanarak belirteç önbelleğini temizleme
+titleSuffix: Microsoft identity platform
+description: .NET için Microsoft kimlik doğrulama kitaplığı 'nı (MSAL.NET) kullanarak belirteç önbelleğini temizleme hakkında bilgi edinin.
 services: active-directory
 documentationcenter: dev-center-name
-author: rwike77
+author: TylerMSFT
 manager: CelesteDG
 editor: ''
 ms.service: active-directory
@@ -13,22 +14,22 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 05/07/2019
-ms.author: ryanwi
+ms.author: twhitney
 ms.reviewer: saeeda
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c6763c6b2b1f9b4de7d8669a50a4979a7aac00c7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4bd48078ec87b085a71ee23006d18917881894bf
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65544111"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72802920"
 ---
-# <a name="clear-the-token-cache-using-msalnet"></a>MSAL.NET kullanarak belirteç Önbelleği Temizle
+# <a name="clear-the-token-cache-using-msalnet"></a>MSAL.NET kullanarak belirteç önbelleğini temizleme
 
-Olduğunda, [erişim belirteci alma](msal-acquire-cache-tokens.md) Microsoft kimlik doğrulama kitaplığı .NET (MSAL.NET) kullanarak, belirteç önbelleğe alınır. Uygulamasının bir belirteç gerektiğinde, ilk çağırmalıdır `AcquireTokenSilent` kabul edilebilir bir belirteci önbellekte olup olmadığını doğrulamak için yöntem. 
+.NET için Microsoft kimlik doğrulama kitaplığı 'nı (MSAL.NET) kullanarak [bir erişim belirteci](msal-acquire-cache-tokens.md) aldığınızda, belirteç önbelleğe alınır. Uygulamanın bir belirtece ihtiyacı olduğunda, kabul edilebilir bir belirtecin önbellekte olup olmadığını doğrulamak için öncelikle `AcquireTokenSilent` yöntemini çağırmalıdır. 
 
-Önbelleği temizleme, önbellekten hesapları kaldırarak elde edilir. Bu, tarayıcıda, ancak oturum tanımlama bilgisinin kaldırmaz.  Aşağıdaki örnek genel istemci uygulamasının örneğini oluşturan, uygulama için hesapları alır ve hesaplarını kaldırır.
+Hesapları önbellekten kaldırarak önbelleğin temizlenmesi sağlanır. Bu, tarayıcıda bulunan oturum tanımlama bilgisini kaldırmaz, ancak.  Aşağıdaki örnek bir ortak istemci uygulaması örnekleyen, uygulamanın hesaplarını alır ve hesapları kaldırır.
 
 ```csharp
 private readonly IPublicClientApplication _app;
@@ -50,4 +51,4 @@ while (accounts.Any())
 
 ```
 
-Ve hakkında daha fazla alınırken belirteçleri önbelleğe almayı öğrenmek için [erişim belirteci alma](msal-acquire-cache-tokens.md).
+Belirteçleri edinme ve önbelleğe alma hakkında daha fazla bilgi edinmek için, [erişim belirteci alma](msal-acquire-cache-tokens.md)makalesini okuyun.

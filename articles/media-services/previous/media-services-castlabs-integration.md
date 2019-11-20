@@ -1,6 +1,6 @@
 ---
-title: Azure Media Services Widevine lisanslarını teslim etmek için castLabs kullanma | Microsoft Docs
-description: Bu makale, PlayReady ve Widevine benzeri DRM ile AMS tarafından dinamik olarak şifrelenmiş bir akış sunmak için Azure Media Services (AMS) nasıl kullanabileceğinizi açıklar. Media Services PlayReady lisans sunucusundan PlayReady lisans gelir ve Widevine lisans castLabs lisans sunucusu tarafından sağlanır.
+title: Azure Media Services için Wıdevine lisansları teslim etmek üzere Rolabs kullanma | Microsoft Docs
+description: Bu makalede, AMS tarafından hem PlayReady hem de Widevine DRMs ile dinamik olarak şifrelenen bir akış teslim etmek için Azure Media Services (AMS) ' nin nasıl kullanılacağı açıklanır. PlayReady lisansı, Media Services PlayReady lisans sunucusundan gelir ve Widevine lisansı, Rolabs lisans sunucusu tarafından dağıtılır.
 services: media-services
 documentationcenter: ''
 author: Mingfeiy
@@ -13,13 +13,14 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 03/14/2019
-ms.author: Mingfeiy;willzhan;Juliako
-ms.openlocfilehash: dfb82e91b0f65b85d34b7e20d57ed9929469321f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: Juliako
+ms.reviewer: willzhan
+ms.openlocfilehash: 9c61fad333037074f392b019ae61c161673e4008
+ms.sourcegitcommit: a8b638322d494739f7463db4f0ea465496c689c6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61232582"
+ms.lasthandoff: 07/17/2019
+ms.locfileid: "69016684"
 ---
 # <a name="using-castlabs-to-deliver-widevine-licenses-to-azure-media-services"></a>Azure Media Services’ta Widevine lisansları vermek için castLabs kullanma 
 > [!div class="op_single_selector"]
@@ -30,89 +31,89 @@ ms.locfileid: "61232582"
 
 ## <a name="overview"></a>Genel Bakış
 
-Bu makale, PlayReady ve Widevine benzeri DRM ile AMS tarafından dinamik olarak şifrelenmiş bir akış sunmak için Azure Media Services (AMS) nasıl kullanabileceğinizi açıklar. Media Services PlayReady lisans sunucusundan PlayReady lisans gelir ve Widevine lisans teslim edilen **castLabs** lisans sunucusu.
+Bu makalede, AMS tarafından hem PlayReady hem de Widevine DRMs ile dinamik olarak şifrelenen bir akış teslim etmek için Azure Media Services (AMS) ' nin nasıl kullanılacağı açıklanır. PlayReady lisansı, Media Services PlayReady lisans sunucusundan gelir ve Widevine lisansı, **Rolabs** lisans sunucusu tarafından dağıtılır.
 
-Geri CENC (PlayReady ve/veya Widevine) tarafından korunan içeriği akış yürütmek için kullanabileceğiniz [Azure Media Player](https://amsplayer.azurewebsites.net/azuremediaplayer.html). Bkz: [AMP belge](https://amp.azure.net/libs/amp/latest/docs/) Ayrıntılar için.
+CENC (PlayReady ve/veya Widevine) tarafından korunan kayıttan akış içeriğini oynatmak için [Azure Media Player](https://aka.ms/azuremediaplayer)kullanabilirsiniz. Ayrıntılar için bkz. [amp belgesi](https://amp.azure.net/libs/amp/latest/docs/) .
 
-Aşağıdaki diyagramda bir üst düzey Azure Media Services ve castLabs tümleştirme mimarisi gösterilmektedir.
+Aşağıdaki diyagramda, üst düzey bir Azure Media Services ve bir Rolabs tümleştirme mimarisi gösterilmektedir.
 
 ![Tümleştirme](./media/media-services-castlabs-integration/media-services-castlabs-integration.png)
 
-## <a name="typical-system-set-up"></a>Tipik sistem ayarlama
+## <a name="typical-system-set-up"></a>Tipik sistem kurulumu
 
-* Medya içeriği AMS içinde depolanır.
-* İçerik anahtarı anahtar kimliklerini castLabs ve AMS depolanır.
-* castLabs hem de AMS belirteci kimlik doğrulaması yerleşik olarak sahiptir. Aşağıdaki bölümlerde, kimlik doğrulama belirteçlerinizi açıklanmaktadır. 
-* Bir istemci, videonuzun akışını yapmak istediğinde, içerik ile dinamik olarak şifrelenir **ortak şifreleme** (CENC) ve kesintisiz akış ve tire AMS tarafından dinamik olarak paket. Biz de PlayReady M2TS HLS Akış Protokolü için temel akış şifreleme sunun.
-* PlayReady lisans AMS lisans sunucusundan alınır ve Widevine lisans castLabs lisans sunucusundan alınır. 
-* Media Player, hangi lisans almak için İstemci Platformu özelliği temelinde otomatik olarak karar verir. 
+* Medya içeriği AMS 'de depolanır.
+* İçerik anahtarlarının anahtar kimlikleri hem l Labs hem de AMS 'de depolanır.
+* hem Rolabs hem de AMS 'de yerleşik belirteç kimlik doğrulaması bulunur. Aşağıdaki bölümlerde kimlik doğrulama belirteçleri ele alınmıştır. 
+* Bir istemci videoyu akışını istediğinde, içerik **Common Encryption** (CENC) ile dinamik olarak şifrelenir ve AMS tarafından KESINTISIZ AKıŞ ve Dash ile dinamik olarak paketlenir. Ayrıca, HLS akış protokolü için PlayReady M2TS öğesel akış şifrelemesi sunuyoruz.
+* PlayReady lisansı AMS lisans sunucusundan alınır ve Widevine lisansı, Rolabs lisans sunucusundan alınır. 
+* Media Player, istemci platformu özelliğine göre hangi lisansın getirileceği otomatik olarak karar verir. 
 
-## <a name="authentication-token-generation-for-getting-a-license"></a>Bir lisans almak için kimlik doğrulama belirteci oluşturma
+## <a name="authentication-token-generation-for-getting-a-license"></a>Lisans almak için kimlik doğrulama belirteci oluşturma
 
-CastLabs hem AMS lisans izin vermek için kullanılan belirteç biçimi JWT (JSON Web belirteci) destekler. 
+Hem Rolabs hem de AMS, bir lisansı yetkilendirmek için kullanılan JWT (JSON Web Token) belirteç biçimini destekler. 
 
-### <a name="jwt-token-in-ams"></a>AMS JWT belirteci
+### <a name="jwt-token-in-ams"></a>AMS 'de JWT belirteci
 
-Aşağıdaki tabloda, JWT belirteci AMS açıklanmaktadır. 
+Aşağıdaki tabloda AMS 'de JWT belirteci açıklanmaktadır. 
 
-| Veren | Seçilen veren dizeden güvenli belirteç hizmeti (STS) |
+| Sertifikayı Veren | Seçilen güvenli belirteç hizmetinden veren dize (STS) |
 | --- | --- |
-| Hedef kitle |Kullanılan STS İzleyici dizeden |
-| Talep |Talepler kümesi |
-| notBefore |Belirtecin geçerlilik Başlat |
-| Süre sonu |Belirtecin geçerlilik bitiş |
-| Samlassertion'da |PlayReady lisans sunucusu, sunucu lisansı ve STS, castLabs arasında paylaşılan anahtarı simetrik ya da asimetrik olabilir anahtarı. |
+| Hedef kitle |Kullanılan STS 'den alınan hedef kitle dizesi |
+| Talepler |Bir talepler kümesi |
+| NotBefore |Belirtecin geçerliliğini Başlat |
+| Bitiş Tarihi |Belirtecin bitiş geçerliliği |
+| SigningCredentials |PlayReady lisans sunucusu, ROI Labs lisans sunucusu ve STS arasında paylaşılan anahtar, simetrik ya da asimetrik anahtar olabilir. |
 
-### <a name="jwt-token-in-castlabs"></a>JWT belirteci castLabs
+### <a name="jwt-token-in-castlabs"></a>Rolabs 'de JWT belirteci
 
-Aşağıdaki tabloda, JWT belirteci castLabs açıklanmaktadır. 
+Aşağıdaki tabloda, Rolabs 'de JWT belirteci açıklanmaktadır. 
 
 | Ad | Açıklama |
 | --- | --- |
-| optData |İlgili bilgiler içeren bir JSON dizesi. |
-| CRT |Varlık hakkında bilgi içeren bir JSON dizesi lisans bilgileri ve kayıttan yürütme hakları. |
-| iat |Geçerli dönem datetime. |
-| jti |Bu belirteci (her belirteci yalnızca bir kez castLabs sisteminde kullanılabilir) hakkında benzersiz bir tanımlayıcı. |
+| optData |Sizin hakkında bilgi içeren bir JSON dizesi. |
+| CRT |Varlık hakkındaki bilgileri, lisans bilgilerini ve kayıttan yürütme haklarını içeren bir JSON dizesi. |
+| iat |Dönem içinde geçerli tarih saat. |
+| JTI dili |Bu belirteçle ilgili benzersiz bir tanımlayıcı (her belirteç yalnızca bir kez, bir tek |
 
-## <a name="sample-solution-setup"></a>Örnek çözüm Kurulumu
+## <a name="sample-solution-setup"></a>Örnek çözüm kurulumu
 
-[Örnek çözüm](https://github.com/AzureMediaServicesSamples/CastlabsIntegration) iki projeden oluşan:
+[Örnek çözüm](https://github.com/AzureMediaServicesSamples/CastlabsIntegration) iki projeden oluşur:
 
-* PlayReady ve Widevine DRM kısıtlamalarını zaten alınan bir varlık üzerinde ayarlamak için kullanılan bir konsol uygulaması.
-* Bir çok Basitleştirilmiş sürümü STS olarak görülebilir belirteçleri, out uygulamalı bir Web uygulaması.
+* Hem PlayReady hem de Widevine için, zaten alınmış bir varlık üzerinde DRM kısıtlamalarını ayarlamak için kullanılabilen bir konsol uygulaması.
+* Bir STS 'nin çok BASITLEŞTIRILMIŞ bir sürümü olarak görülemeyen belirteçleri kapsayan bir Web uygulaması.
 
 Konsol uygulamasını kullanmak için:
 
-1. AMS kimlik bilgileri, castLabs kimlik bilgileri, STS yapılandırma ve paylaşılan anahtarı ayarlama app.config değiştirin.
-2. Bir varlık AMS karşıya yükleyin.
-3. Karşıya yüklenen varlığından UUID alın ve Program.cs dosyasındaki satır 32 değiştirin:
+1. AMS kimlik bilgilerini, ROI Labs kimlik bilgilerini, STS yapılandırmasını ve paylaşılan anahtarı ayarlamak için App. config dosyasını değiştirin.
+2. Bir varlığı AMS 'ye yükleyin.
+3. Karşıya yüklenen varlığın UUID 'sini alın ve Program.cs dosyasında 32 satırını değiştirin:
    
       var objIAsset = _context.Assets.Where(x => x.Id == "nb:cid:UUID:dac53a5d-1500-80bd-b864-f1e4b62594cf").FirstOrDefault();
-4. Bir AssetID (Program.cs dosyasındaki satır 44) castLabs sistemdeki varlık adlandırmak için kullanın.
+4. AssetId kullanarak, sabit kıymeti sisteminde (Program.cs dosyasında Line 44) varlığı adlandırmak için bir kullanın.
    
-   İçin AssetID ayarlamalısınız **castLabs**; benzersiz bir alfasayısal dize olması gerekir.
+   AssetId için şunu ayarlamanız gerekir; benzersiz bir alfasayısal dize olması gerekir.
 5. Programı çalıştırın.
 
-Web uygulaması'nı (STS) kullanmak için:
+Web uygulamasını kullanmak için (STS):
 
-1. Web.config değiştirmek için Kurulum castlabs satıcı kimliği, STS yapılandırma ve paylaşılan anahtarı.
-2. Azure Web Siteleri'ne dağıtın.
+1. Web. config dosyasını Setup rolabs satıcı KIMLIĞI, STS yapılandırması ve paylaşılan anahtar olarak değiştirin.
+2. Azure Web siteleri 'ne dağıtın.
 3. Web sitesine gidin.
 
-## <a name="playing-back-a-video"></a>Video kayıttan yürütme
+## <a name="playing-back-a-video"></a>Videoyu kayıttan yürütme
 
-Ortak şifreleme ile (PlayReady ve/veya Widevine) şifrelenmiş bir video kayıttan yürütme için kullanabilirsiniz [Azure Media Player](https://amsplayer.azurewebsites.net/azuremediaplayer.html). Konsol uygulaması çalıştırırken, içerik anahtarı kimliği ve bildirim URL'sini okunmaz.
+Ortak şifreleme (PlayReady ve/veya Widevine) ile şifrelenmiş bir videoyu kayıttan yürütmek için [Azure Media Player](https://aka.ms/azuremediaplayer)kullanabilirsiniz. Konsol uygulamasını çalıştırırken, Içerik anahtar KIMLIĞI ve bildirim URL 'SI yankılanır.
 
-1. Yeni bir sekme açın ve, STS başlatın: http://[yourStsName].azurewebsites.net/api/token/assetid/[yourCastLabsAssetId]/contentkeyid/[thecontentkeyid].
-2. Git [Azure Media Player](https://amsplayer.azurewebsites.net/azuremediaplayer.html).
-3. Akış URL'si yapıştırın.
-4. Tıklayın **Gelişmiş Seçenekler** onay kutusu.
-5. İçinde **koruma** açılır menüsünde, select PlayReady ve/veya Widevine.
-6. Belirteç metin kutusuna, STS adresinden aldığınız belirteç yapıştırın. 
+1. Yeni bir sekme açın ve STS 'nizi başlatın: http://[yourStsName]. azurewebsites. net/api/Token/assetid/[Yourserlabsassetıd]/contentkeyıd/[thecontentkeyıd].
+2. [Azure Media Player](https://aka.ms/azuremediaplayer)gidin.
+3. Akış URL 'sini yapıştırın.
+4. **Gelişmiş Seçenekler** onay kutusuna tıklayın.
+5. **Koruma** açılan menüsünde PlayReady ve/veya Widevine öğesini seçin.
+6. STS 'nizden aldığınız belirteci belirteç metin kutusuna yapıştırın. 
    
-   CastLab lisans sunucusuna ihtiyaç duymadığı "taşıyıcı =" belirteci önünde öneki. Bu nedenle, belirteç göndermeden önce lütfen kaldırın.
-7. Oyuncu güncelleştirin.
-8. Videoyu oynatmaya.
+   Rosılab lisans sunucusu, belirtecin önünde "taşıyıcı =" öneki gerektirmez. Bu nedenle, belirteci göndermeden önce lütfen bunu kaldırın.
+7. Oynatıcıyı güncelleştirin.
+8. Videonun yürütülmesi gerekir.
 
 ## <a name="media-services-learning-paths"></a>Media Services’i öğrenme yolları
 [!INCLUDE [media-services-learning-paths-include](../../../includes/media-services-learning-paths-include.md)]

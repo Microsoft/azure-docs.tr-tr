@@ -1,7 +1,7 @@
 ---
 title: Algoritmaları seçme
-titleSuffix: Azure Machine Learning Studio
-description: Azure Machine Learning Studio algoritmaları için denetimli ve Denetimsiz öğrenme kümeleme, sınıflandırma veya regresyon denemeleri nasıl seçeceğinizi öğrenin.
+titleSuffix: ML Studio (classic) - Azure
+description: Kümeleme, sınıflandırma veya regresyon denemeleri için denetimli ve denetlenen öğrenme için Azure Machine Learning Studio (klasik) algoritmaları seçme.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: studio
@@ -10,243 +10,236 @@ author: xiaoharper
 ms.author: amlstudiodocs
 ms.custom: previous-ms.author=pakalra, previous-author=pakalra
 ms.date: 03/04/2019
-ms.openlocfilehash: 3bb88f2f9546ec25433061a0704bd144730bd34c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c69b4c15397dc13f36a707f932c2464a4ff94ca7
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60752981"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73838475"
 ---
-# <a name="how-to-choose-algorithms-for-azure-machine-learning-studio"></a>Azure Machine Learning Studio için algoritma seçme
+# <a name="how-to-choose-algorithms-for-azure-machine-learning-studio-classic"></a>Azure Machine Learning Studio için algoritma seçme (klasik)
 
-"Hangi makine öğrenme algoritmasına kullanmam gerekir?" sorusuna verilen yanıt her zaman "Duruma göre değişir." şeklindedir. Bu boyut, kalite ve verilerin niteliğine bağlıdır. Bu, Yanıtla yapmak istediğiniz üzerinde bağlıdır. Bu, nasıl algoritmasının matematik kullanmakta olduğunuz bilgisayar için yönergeler içine çevrilmiştir üzerinde bağlıdır. Ve duruma göre değişir üzerinde ne kadar süre sahip. Hatta en deneyimli veri uzmanları, denemeden önce en iyi algoritmayı gerçekleştirecek bildiremez.
+[!INCLUDE [Designer notice](../../../includes/designer-notice.md)]
 
-Machine Learning Studio, Microsoft Research'te geliştirilen Ölçeklenebilir Artırılmış Karar ağaçları, Bayes Önerisi sistemleri, Derin Sinir Ağları ve Karar Ormanları gibi teknoloji harikası algoritmaları sağlar. Vowpal Wabbit gibi ölçeklenebilir açık kaynaklı makine öğrenimi paketleri de dahildir. Machine Learning Studio, çok sınıflı ve ikili sınıflandırma, regresyon ve kümeleme için makine öğrenimi algoritmalarını destekler. Tam listesi görmek [Machine Learning modüllerinin](/azure/machine-learning/studio-module-reference/index).
-Belgeler, her bir algoritmanın ve parametreler, kullanımınız için algoritmayı en iyi duruma getirmek için nasıl ayarlanacağını hakkında bazı bilgiler sağlar.  
+"Hangi makine öğrenimi algoritmasını kullanmalıyım?" sorusunun yanıtı her zaman "BT bağımlıdır". Bu, verilerin boyutuna, kalitesine ve yapısına bağlıdır. Bu, Yanıtla ne yapmak istediğinize bağlıdır. Bu, algoritmanın matematiğinin, kullanmakta olduğunuz bilgisayar için yönergelere nasıl çevrildiğinden bağlıdır. Bu, ne kadar zaman sahip olduğunuza bağlıdır. En fazla deneyimli veri uzmanları, denemeden önce hangi algoritmanın en iyi şekilde gerçekleştirileceğini söylemez.
+
+Machine Learning Studio (klasik), Microsoft Research 'ta geliştirilen ölçeklenebilir ve ölçeklenebilir karar ağaçları, Bayeme öneri sistemleri, derin sinir ağları ve karar harikası gibi son teknoloji algoritmaları sağlar. Vowpal Wabbit gibi ölçeklenebilir açık kaynaklı makine öğrenimi paketleri de dahildir. Machine Learning Studio klasik sürümü, birden çok Lass ve ikili sınıflandırma, gerileme ve kümeleme için makine öğrenimi algoritmalarını destekler. [Machine Learning modüllerinin](/azure/machine-learning/studio-module-reference/index)tüm listesine bakın.
+Belgeler her algoritma ve kullanım için algoritmayı iyileştirmek üzere parametrelerin nasıl ayarlanacağı hakkında bazı bilgiler sağlar.  
 
 
-## <a name="the-machine-learning-algorithm-cheat-sheet"></a>Machine Learning algoritmasını kural sayfası
+## <a name="the-machine-learning-algorithm-cheat-sheet"></a>Machine Learning algoritması bir sayfa
 
-**[Microsoft Azure Machine Learning Studio algoritma kural sayfası](algorithm-cheat-sheet.md)** makine öğrenme algoritmasını Azure Machine Learning, Tahmine dayalı analiz çözümleri için sağdaki seçtiğiniz yardımcı olur Studio kitaplığı algoritmaları.
-Bu makalede bu kopya kağıdı kullanma hakkında bilgi vermektedir.
+**[Microsoft Azure Machine Learning algoritması](../algorithm-cheat-sheet.md)** ile Ilgili bilgi sayfası, algoritma Azure Machine Learning kitaplığından tahmine dayalı analiz çözümleriniz için doğru makine öğrenimi algoritmasını seçmenize yardımcı olur.
+Bu makale, bu uygulama sayfasını nasıl kullanacağınızı adım adım göstermektedir.
 
 > [!NOTE]
-> İpuçlarını indirin ve bu makaleyi izlemek için Git [makine öğrenimi algoritma bilgi sayfasına için Microsoft Azure Machine Learning Studio](algorithm-cheat-sheet.md).
+> Tek bir sayfayı indirmek ve bu makaleyle birlikte izlemek için, [Machine Learning algoritması sayfası sayfasına](../algorithm-cheat-sheet.md)gidin.
 > 
 > 
 
-Bu kural sayfası çok belirli bir kitleyi göz önünde vardır: algoritma Azure Machine Learning Studio'da çalışmaya başlamak seçme çalışılırken başına veri uzmanı Lise düzeyi machine learning ile. Bu, bazı genelleştirmesi ve oversimplifications kolaylaştırır, ancak güvenli bir yönde işaret eden anlamına gelir. Ayrıca, burada listelenmeyen algoritmaları çok sayıda olduğu anlamına gelir.
+Bu öneriler, birçok veri bilimcilerinin ve makine öğrenimi uzmanlarının derlenmiş görüşleri ve ipuçları. Her şeyi kabul etmedi, ancak onları kaba bir yarışmaya yönelik olarak kullanmaya çalıştık. Deagreement deyimlerinin çoğu "It depends..." ile başlar
 
-Bu, derlenmiş geri bildirim ve ipuçları birçok veri bilimcileri ve machine learning uzmanlar önerilerdir. Biz üzerinde her şeyi kabul etmememiz ancak biz müşterilerimizin düşünceleri son derece kaba bir fikir birliğine varılmış harmonize girişimi yaptınız. "Duruma göre değişir ile..." çözünürlüğünün bilgilerinin çoğunu başlayın
-
-### <a name="how-to-use-the-cheat-sheet"></a>Kopya kağıdı kullanma
-
-Grafik olarak yolu ve algoritma etiketleri okuyun "için  *&lt;yol etiketinin&gt;* , kullanın  *&lt;algoritması&gt;* ." Örneğin, "için *hızı*, kullanın *lojistik regresyon iki sınıf*." Bazen birden fazla dal için geçerlidir.
-Bazen bunların hiçbiri tam olarak uygun değil. Bunlar tam olan bu konuda endişelenmeyin için thumb kural önerileri olacak şekilde tasarlanmıştır.
-İle söz konusu konuştuk birkaç veri bilimcileri en iyi algoritmayı bulmak için yalnızca emin tümünü denemek için yoludur.
-
-İşte bir örnek [Azure AI Gallery](https://gallery.azure.ai/) aynı verilere karşı çeşitli algoritmalar çalışır ve sonuçları karşılaştıran bir deneme: [Çok sınıflı sınıflandırıcılar karşılaştırın: Harfli tanıma](https://gallery.azure.ai/Details/a635502fc98b402a890efe21cec65b92).
 
 > [!TIP]
-> Anlaşılması kolay bilgi grafiği machine learning temel bilgileri yaygın machine learning soruları yanıtlamak için kullanılan popüler algoritmaları hakkında bilgi edinmek için genel bakış indirmek için bkz [makine öğrenimi algoritma örnekleri ile Temelleri](basics-infographic-with-algorithm-examples.md).
+> Ortak makine öğrenimi sorularını cevaplamak için kullanılan popüler algoritmaların öğrenilmesi için Machine Learning temelleri hakkında kolay bir bilgi grafiğine genel bakış için bkz. [algoritma örnekleri Ile makine öğrenimi temelleri](basics-infographic-with-algorithm-examples.md).
 
-## <a name="flavors-of-machine-learning"></a>Machine Learning model olarak sağlanır
+## <a name="flavors-of-machine-learning"></a>Machine Learning 'in türleri
 
 ### <a name="supervised"></a>Denetimli
 
-Denetimli öğrenme algoritmalarını örnekler kümesine göre tahminlerde. Örneğin, geçmiş hisse senedi fiyatlarına gelecekteki fiyatları hakkında tahmin yapmak için kullanılabilir. Eğitim için kullanılan her bir örnekte ilgi değeri ile etiketlenir — Bu hisse senedi fiyatının durumda. Bu değer etiketleri desenleri denetimli öğrenme algoritmasını arar. İlgili olabilecek herhangi bir bilgi kullanabilirsiniz — gün haftanın, döneminde, şirketin finansal verileri, sektör türünü, jeopolitik aksatıcı olayları varlığını — ve her bir algoritmanın desenleri farklı türleri için görünür. Algoritma en iyi düzeni bulduktan sonra alabilir, etiketsiz sınama veri tahmininde bulunmak amacıyla bu düzeni kullanır: yarının fiyatlar.
+Denetimli öğrenme algoritmaları, örnek kümesini temel alarak tahminler yapar. Örneğin, geçmiş stok fiyatları gelecekteki fiyatlar hakkında tahminler sağlamak için kullanılabilir. Eğitim için kullanılan her örnek, bu örnekte Stok fiyatı olan, ilgilendiğiniz değere göre etiketlidir. Denetimli bir öğrenme algoritması, bu değer etiketlerindeki desenleri arar. Bu, söz konusu olabilecek herhangi bir bilgiyi, haftanın günü, mevsimi, şirketin finansal verileri, sektör türü, kesintiye uğramayan olayların varlığı ve her algoritma farklı tür desenleri arar. Algoritma en iyi model bulduktan sonra, bu düzenin, verileri etiketsiz test verilerinin (yarın 'nin fiyatları) tahmin edilmesi için bu kalıbı kullanır.
 
-Denetimli öğrenme, machine learning, popüler ve kullanışlı bir türüdür. Bunun tek istisnası, tüm modülleri Azure Machine Learning Studio'da öğrenimi algoritmaları denetimli olduğu. Azure Machine Learning Studio içinde temsil birkaç belirli denetimli öğrenme tür vardır: Sınıflandırma, regresyon ve anomali algılama.
+Denetimli öğrenme, makine öğrenmesinin popüler ve kullanışlı bir türüdür. Tek bir istisna ile, klasik sürümündeki Azure Machine Learning Studio tüm modüller denetimli bir öğrenme algoritmadır. Azure Machine Learning Studio (klasik) içinde temsil edilen birkaç özel denetimli öğrenme türü vardır: sınıflandırma, gerileme ve anomali algılama.
 
-* **Sınıflandırma**. Verileri bir kategori tahmin etmek için kullanılan, denetimli öğrenme sınıflandırma da adlandırılır. Bu görüntü resmini 'cat' veya 'dog' atarken durumdur. Yalnızca iki seçenek olduğunda çağrılır **iki sınıflı** veya **binom sınıflandırma**. Olarak olduğunda daha fazla kategori NCAA Mart TURNUVASI Turnuva kazanan tahmin olduğunda, bu sorunu olarak bilinir **çok sınıflı sınıflandırma**.
-* **Regresyon**. Bir değer, hisse senedi fiyatlarına gibi ile tahmin edildiğinde denetimli öğrenme regresyon çağrılır.
-* **Anomali algılama**. Bazen yalnızca olağan dışı veri noktalarını tanımlamak üzere hedeftir. Sahtekarlık algılama, örneğin, şüpheli tüm son derece alışılmışın dışında kredi kartı harcama desenleri alır. Olası çeşitlemeleri kadar çok sayıda ve bu nedenle birkaç sahte hangi etkinlik öğrenmek için uygun değil, eğitim örnekleri gibi görünen. Anomali algılama alan yalnızca normal hangi etkinlik (sahte olmayan işlemleri geçmişini kullanarak gibi) görünümünü öğrenin ve önemli ölçüde farklı olan her şeyi tanımlamak için bir yaklaşımdır.
+* **Sınıflandırma**. Veriler bir kategoriyi tahmin etmek için kullanılırken, denetimli öğrenme de sınıflandırma olarak adlandırılır. Bir görüntüyü ' Cat ' veya ' köpek ' resmi olarak atarken bu durum büyük bir durumdur. Yalnızca iki seçenek olduğunda, bu **iki sınıf** veya **binom sınıflandırması**olarak adlandırılır. Daha fazla kategori olduğunda, bu sorun, NCAA Mart 'tan bağımsız olarak, bu sorun **çok sınıflı sınıflandırma**olarak bilinir.
+* **Gerileme**. Bir değer tahmin edildiğinde, stok fiyatlarıyla birlikte denetimli öğrenme gerileme olarak adlandırılır.
+* **Anomali algılama**. Bazen amaç, olağan dışı olarak yalnızca olağandışı veri noktalarını tanımlamaktır. Sahtekarlık algılamasında, örneğin, tüm yüksek düzeyde olağandışı kredi kartı harcama desenleri şüphelidir. Olası Çeşitlemeler çok sayıda ve eğitim örneklerinden daha az sayıda olduğundan, sahte etkinliğin nasıl göründüğünü öğrenmek mümkün değildir. Anomali algılama 'nın aldığı yaklaşım, normal etkinliğin ne gibi göründüğünü (sahte olmayan işlemlerin geçmişini kullanarak) ve önemli ölçüde farklılık gösteren bir şeyi belirlemektir.
 
 ### <a name="unsupervised"></a>Denetimsiz
 
-Denetimsiz öğrenme içinde bunlarla ilgili hiçbir etiket veri noktanız olması. Bunun yerine, Denetimsiz öğrenme algoritmasının bir şekilde verileri düzenleme veya yapısını tanımlamak için hedeftir. Bu kümeler halinde gruplandırmak veya basit ya da daha düzenli görünür bir karmaşık verilere baktığımızda, farklı yöntemleri sürekli düzende bulmak anlamına gelebilir.
+Denetimli öğreniminde, veri noktalarında bunlarla ilişkili etiket yok. Bunun yerine, denetimli bir öğrenme algoritmasının hedefi, verileri bir şekilde veya yapısını betimleyen şekilde düzenmaktır. Bu, daha basit veya daha fazla görünmesi için verileri kümeler halinde gruplamanın veya karmaşık verilere bakmanın farklı yollarını bulmanın anlamına gelir.
 
 ### <a name="reinforcement-learning"></a>Pekiştirmeye dayalı öğrenme
 
-Öğrenme pekiştirmeye içinde yanıt her veri noktası için bir eylem seçmek üzere algoritma alır. Öğrenme algoritmasını ödül sinyal kısa kararı ne kadar iyi olduğunu gösteren bir süre daha da alır.
-Algoritma bunu temel alarak, yüksek ödül elde etmek için kendi stratejisi değiştirir. Şu anda bir öğrenme algoritması modülleri Azure Machine Learning Studio'da yok pekiştirmeye vardır. Burada zaman içinde bir noktadaki sensör okumaları kümesini bir veri noktasıdır ve algoritma robot'ın sonraki eylem seçmelisiniz robotlara ilişkin pekiştirmeye dayalı öğrenme yaygındır. Ayrıca, bir doğal uygulamaları nesnelerin Internet'için uygun değildir.
+Pekiştirmeye dayalı Learning 'de, algoritma her bir veri noktasına cevap olarak bir eylem seçer. Öğrenme algoritması, daha sonra kararının ne kadar iyi olduğunu belirten bir ödül sinyali de alır.
+Bu, algoritmaya bağlı olarak, en yüksek ödül elde edilmesi için stratejisini değiştirir. Şu anda Azure Machine Learning Studio (klasik) içinde hiç pekiştirmeye dayalı Learning algoritma modülü yok. Pekiştirmeye dayalı Learning, bir noktada bir noktadaki algılayıcı okumaların bir veri noktası olduğu ve algoritmanın robot 'un bir sonraki eylemini seçmesi gereken, Robotics 'de ortaktır. Ayrıca, Nesnelerin İnterneti uygulamalar için de doğal bir uyum.
 
-## <a name="considerations-when-choosing-an-algorithm"></a>Bir algoritma seçerken dikkat edilmesi gerekenler
+## <a name="considerations-when-choosing-an-algorithm"></a>Algoritma seçerken dikkat edilecek noktalar
 
-### <a name="accuracy"></a>Doğruluğu
+### <a name="accuracy"></a>Veritabanınızın
 
-En doğru yanıta olası alma her zaman gerekli değildir.
-Bazen bir yaklaştırma kullanmak istediğinize bağlı olarak, yeterli olur. Bu durumda, işleme süresini önemli ölçüde daha fazla yaklaşık yöntemleriyle kalmanız tarafından Kes mümkün olabilir. Daha fazla yaklaşık yöntemlerden başka bir avantajı, doğal olarak overfitting önlemek için eğilimindedir olmasıdır.
+Mümkün olan en doğru yanıtı almak her zaman gerekli değildir.
+Bazen, için kullanmak istediğiniz seçeneğe bağlı olarak yaklaşık bir yaklaşık değer vardır. Bu durumda, daha yaklaşık yöntemlerle işleme süresini önemli ölçüde kesmeniz mümkün olabilir. Daha yakın yöntemlerin başka bir avantajı, doğal olarak aşırı sığdırmayı kullanmaktan kaçınmaktır.
 
-### <a name="training-time"></a>Eğitim süresini
+### <a name="training-time"></a>Eğitim süresi
 
-Kaç dakika veya saat bir modeli eğitmek için gereken büyük miktarda algoritmaları arasında değişir. Zaman eğitim genellikle yakından bağlı tutarlılık — bir genellikle eşlik eden diğer. Ayrıca, bazı algoritmalar diğerlerinden daha hassas veri noktası sayısı.
-Zaman sınırlı olduğunda özellikle veri kümesi büyük olduğunda seçimi algoritması yönlendirebilirsiniz.
+Bir modeli eğitmek için gereken dakika veya saat sayısı, algoritmalar arasında harika bir işlem olduğunu gösterir. Eğitim süresi genellikle doğrulukla yakından bağlantılıdır. Ayrıca, bazı algoritmalar diğerlerine göre veri noktası sayısına daha duyarlıdır.
+Zaman sınırlı olduğunda, özellikle veri kümesi büyükse, algoritmayı tercih edebilir.
 
-### <a name="linearity"></a>Doğrusallık
+### <a name="linearity"></a>Doğrity
 
-Makine öğrenimi algoritmaları çok sayıda olun Doğrusallık kullanın. Düz çizgi (veya daha büyük boyutlu kendi analog) sınıfları ayrılabilir doğrusal sınıflandırma algoritmaları varsayılır. Bunlar Lojistik regresyon ve vektör makineleri (Azure Machine Learning Studio'da uygulanmış gibi) desteği içerir.
-Doğrusal regresyon algoritmaları, veri eğilimleri düz bir çizgi izleyin varsayılır. Bu varsayımları bazı sorunlar için hatalı değildir, ancak bazılarında, doğruluk kapatmaya.
+Birçok makine öğrenimi algoritması, doğrlılığını kullanır. Doğrusal sınıflandırma algoritmaları sınıfların düz bir çizgi (veya daha yüksek boyutlu bir analog) ile ayrılalabilen varsayılır. Bunlar, Lojistik gerileme ve destek vektör makinelerini (Azure Machine Learning Studio (klasik) uygulandığı gibi) içerir.
+Doğrusal regresyon algoritmaları, veri eğilimlerinin düz bir çizgi olduğunu varsayar. Bu varsayımlar bazı sorunlar için hatalı değildir, ancak diğerleri üzerinde doğruluk altına alır.
 
 ![Doğrusal olmayan sınıf sınırı](./media/algorithm-choice/image1.png)
 
-***Doğrusal olmayan sınıf sınır*** *-bağlı olan bir doğrusal bir sınıflandırma algoritmasıdır üzerinde düşük doğruluk sonuçlanır*
+Doğrusal ***olmayan sınıf sınırı*** *-bir doğrusal sınıflandırma algoritmasına bağlı olarak doğruluk azalmasıyla sonuçlanır*
 
-![Doğrusal bir eğilim verileri](./media/algorithm-choice/image2.png)
+![Doğrusal olmayan bir eğilim içeren veriler](./media/algorithm-choice/image2.png)
 
-***Doğrusal bir eğilim verilerle*** *-bir doğrusal regresyon yöntemi kullanarak daha büyük kadar hataları oluşturmak*
+Doğrusal olmayan bir ***eğilim Içeren veriler*** *-Doğrusal regresyon yöntemi kullanılması gerekenden çok daha büyük hatalar üretir*
 
-Kendi tehlikeleri rağmen doğrusal algoritmaları bir saldırı ilk satırı olarak çok fazla kullanılır. Bunlar algorithmically basit ve hızlı eğitmek için olma eğilimindedir.
+Tehlikeleri olmasına rağmen doğrusal algoritmalar ilk saldırı hattı olarak çok popüler. Algorithmically basit ve hızlı bir şekilde eğitme eğilimindedir.
 
 ### <a name="number-of-parameters"></a>Parametre sayısı
 
-Bir algoritma ayarlarken açmak için bir veri Bilimcisi alır düğmelerini parametrelerdir. Bunlar, hata toleransı veya yineleme veya seçenekleri, algoritmanın nasıl davranacağını çeşitler arasında sayısı gibi algoritması'nın davranışını etkileyen sayılardır. Eğitim süresini ve algoritma doğruluğunu bazen yalnızca doğru ayarları almak için oldukça önemli olabilir. Genellikle, çok sayıda parametre algoritmalar en iyi deneme ve iyi bir kombinasyonu bulmak için hata gerektirir.
+Parametreler, bir algoritma ayarlarken bir veri bilimconu açmak için aldığı KBS 'lardır. Bunlar hata toleransı veya yineleme sayısı gibi algoritmaların davranışını etkileyen sayılardır veya algoritmanın nasıl davrandığı çeşitleri arasındaki seçeneklere sahiptir. Algoritmanın eğitim süresi ve doğruluğu, bazı durumlarda yalnızca doğru ayarları almak için oldukça hassas olabilir. Genellikle, çok sayıda parametreye sahip algoritmalar iyi bir bileşim bulmak için en fazla deneme ve hata gerektirir.
 
-Alternatif olarak, var olan bir [parametresi Süpürme](algorithm-parameters-optimize.md) Azure Machine Learning Studio'da hangi ayrıntı düzeyi seçtiğiniz tüm parametre birleşimlerini otomatik olarak çalışan modülü blok. Bu parametre alanı yayılmış emin olmak için harika bir yoludur ancak, bir modeli eğitmek için gereken süreyi, parametre sayısıyla birlikte katlanarak artar.
+Alternatif olarak, seçtiğiniz ayrıntı düzeyinde tüm parametre birleşimlerini otomatik olarak yapan Azure Machine Learning Studio klasik sürümünde bir [parametre swebir](algorithm-parameters-optimize.md) modül bloğu vardır. Parametre alanının yayıldığından emin olmanın harika bir yolu olsa da, bir modeli eğitmek için gereken süre parametre sayısıyla üstel olarak artar.
 
-Baş genellikle birçok parametreleri olan bir algoritma daha fazla esnekliğe sahip olduğunu gösteren sayıdır. Sağlanan parametre ayarlarını doğru bileşimini bulabilirsiniz genellikle çok iyi doğruluk elde edebilirsiniz.
+Çok sayıda parametreye sahip olan baş, genellikle algoritmanın daha fazla esneklik olduğunu gösterir. Genellikle parametre ayarlarının doğru birleşimini bulabileceğiniz için çok iyi bir doğruluk elde edebilir.
 
-### <a name="number-of-features"></a>Birçok özellik
+### <a name="number-of-features"></a>Özellik sayısı
 
-Belirli veri türleri, birçok özellik veri noktalarının sayısını karşılaştırıldığında çok büyük olabilir. Genetik veya metin verilerini durum genellikle budur. Çok sayıda özellik unfeasibly uzun zaman eğitim yaparak bazı öğrenme algoritmalarını bog. Destek vektörü makineler bu durumda (aşağıya bakın) uygundur.
+Belirli veri türleri için, özellik sayısı veri noktalarının sayısıyla karşılaştırıldığında çok büyük olabilir. Bu durum genellikle, genelikler veya metin verileri ile yapılır. Çok sayıda özellik bazı öğrenme algoritmalarından sonra eğitim süresi unfeasibly uzun sürebilir. Destek vektör makineleri özellikle bu durumda iyi uygundur (aşağıya bakın).
 
 ### <a name="special-cases"></a>Özel durumlar
 
-Bazı öğrenme algoritmalarını, veri ya da istenen sonuçları yapısı hakkında belirli varsayımlar. İhtiyaçlarınıza uygun bir fark ederseniz, bu, daha yararlı sonuçlar, daha doğru tahminler elde etmek veya daha hızlı eğitim süreleri verebilirsiniz.
+Bazı öğrenme algoritmaları, verilerin yapısı veya istenen sonuçlar hakkında belirli varsayımlar yapar. İhtiyaçlarınıza uyan bir tane bulabiliyorsanız, size daha yararlı sonuçlar, daha kesin tahminler veya daha hızlı eğitim süreleri verebilir.
 
-| **Algoritma** | **Doğruluğu** | **Eğitim süresini** | **Doğrusallık** | **Parametreler** | **Notlar** |
+| **Algoritma** | **Veritabanınızın** | **Eğitim süresi** | **Doğrity** | **Parametreler** | **Notlar** |
 | --- |:---:|:---:|:---:|:---:| --- |
-| **İki sınıflı sınıflandırma** | | | | | |
+| **İki sınıf sınıflandırma** | | | | | |
 | [Lojistik regresyon](/azure/machine-learning/studio-module-reference/two-class-logistic-regression) | |● |● |5 | |
 | [karar ormanı](/azure/machine-learning/studio-module-reference/two-class-decision-forest) |● |○ | |6 | |
-| [karar jungle](/azure/machine-learning/studio-module-reference/two-class-decision-jungle) |● |○ | |6 |Düşük bellek Ayak izi |
-| [artırmalı karar ağacı](/azure/machine-learning/studio-module-reference/two-class-boosted-decision-tree) |● |○ | |6 |Büyük bellek Ayak izi |
+| [karar Jungle](/azure/machine-learning/studio-module-reference/two-class-decision-jungle) |● |○ | |6 |Düşük bellek ayak izi |
+| [Artırılmış karar ağacı](/azure/machine-learning/studio-module-reference/two-class-boosted-decision-tree) |● |○ | |6 |Büyük bellek ayak izi |
 | [sinir ağı](/azure/machine-learning/studio-module-reference/two-class-neural-network) |● | | |9 |[Ek özelleştirme mümkündür](azure-ml-netsharp-reference-guide.md) |
-| [Ortalama perceptron](/azure/machine-learning/studio-module-reference/two-class-averaged-perceptron) |○ |○ |● |4 | |
-| [Destekli vektör makinesi](/azure/machine-learning/studio-module-reference/two-class-support-vector-machine) | |○ |● |5 |Büyük özellik kümeleri için iyidir |
-| [yerel olarak kapsamlı destek vektör makinesi](/azure/machine-learning/studio-module-reference/two-class-locally-deep-support-vector-machine) |○ | | |8 |Büyük özellik kümeleri için iyidir |
-| [Bayes noktası makinesinin](/azure/machine-learning/studio-module-reference/two-class-bayes-point-machine) | |○ |● |3 | |
-| **Çok sınıflı sınıflandırma** | | | | | |
+| [Ortalama Perceptron](/azure/machine-learning/studio-module-reference/two-class-averaged-perceptron) |○ |○ |● |4 | |
+| [Destek vektör makinesi](/azure/machine-learning/studio-module-reference/two-class-support-vector-machine) | |○ |● |5 |Büyük özellik kümeleri için iyi |
+| [Yerel olarak derin destek vektör makinesi](/azure/machine-learning/studio-module-reference/two-class-locally-deep-support-vector-machine) |○ | | |8 |Büyük özellik kümeleri için iyi |
+| [Bayes ' noktası makinesi](/azure/machine-learning/studio-module-reference/two-class-bayes-point-machine) | |○ |● |3 | |
+| **Çok sınıf sınıflandırması** | | | | | |
 | [Lojistik regresyon](/azure/machine-learning/studio-module-reference/multiclass-logistic-regression) | |● |● |5 | |
 | [karar ormanı](/azure/machine-learning/studio-module-reference/multiclass-decision-forest) |● |○ | |6 | |
-| [karar jungle](/azure/machine-learning/studio-module-reference/multiclass-decision-jungle) |● |○ | |6 |Düşük bellek Ayak izi |
+| [karar Jungle](/azure/machine-learning/studio-module-reference/multiclass-decision-jungle) |● |○ | |6 |Düşük bellek ayak izi |
 | [sinir ağı](/azure/machine-learning/studio-module-reference/multiclass-neural-network) |● | | |9 |[Ek özelleştirme mümkündür](azure-ml-netsharp-reference-guide.md) |
-| [bir-v-all](/azure/machine-learning/studio-module-reference/one-vs-all-multiclass) |- |- |- |- |Seçilen iki sınıflı yöntemi özelliklerini bakın |
+| [tek-v-tümü](/azure/machine-learning/studio-module-reference/one-vs-all-multiclass) |- |- |- |- |Seçilen iki sınıf yöntemin özelliklerine bakın |
 | **Regresyon** | | | | | |
 | [Doğrusal](/azure/machine-learning/studio-module-reference/linear-regression) | |● |● |4 | |
-| [Bayes doğrusal](/azure/machine-learning/studio-module-reference/bayesian-linear-regression) | |○ |● |2 | |
+| [Bayeduyi doğrusal](/azure/machine-learning/studio-module-reference/bayesian-linear-regression) | |○ |● |2 | |
 | [karar ormanı](/azure/machine-learning/studio-module-reference/decision-forest-regression) |● |○ | |6 | |
-| [artırmalı karar ağacı](/azure/machine-learning/studio-module-reference/boosted-decision-tree-regression) |● |○ | |5 |Büyük bellek Ayak izi |
-| [Hızlı orman quantile](/azure/machine-learning/studio-module-reference/fast-forest-quantile-regression) |● |○ | |9 |Noktası Öngörüler yerine dağıtımları |
+| [Artırılmış karar ağacı](/azure/machine-learning/studio-module-reference/boosted-decision-tree-regression) |● |○ | |5 |Büyük bellek ayak izi |
+| [hızlı orman quantile](/azure/machine-learning/studio-module-reference/fast-forest-quantile-regression) |● |○ | |9 |Puan tahminleri yerine dağıtımlar |
 | [sinir ağı](/azure/machine-learning/studio-module-reference/neural-network-regression) |● | | |9 |[Ek özelleştirme mümkündür](azure-ml-netsharp-reference-guide.md) |
-| [Poisson](/azure/machine-learning/studio-module-reference/poisson-regression) | | |● |5 |Teknik olarak günlük doğrusal. Sayıları tahmin etmek için |
-| [Sıra](/azure/machine-learning/studio-module-reference/ordinal-regression) | | | |0 |Sıra sıralama tahmin etmek için |
+| [Olacağını](/azure/machine-learning/studio-module-reference/poisson-regression) | | |● |5 |Teknik açıdan günlüğe kaydetme-doğrusal. Tahmine dayalı sayımlar için |
+| [numarasını](/azure/machine-learning/studio-module-reference/ordinal-regression) | | | |0 |Tahmine dayalı sıralama için |
 | **Anormallik algılama** | | | | | |
-| [Destekli vektör makinesi](/azure/machine-learning/studio-module-reference/one-class-support-vector-machine) |○ |○ | |2 |Özellikle büyük özellik kümeleri için iyi |
+| [Destek vektör makinesi](/azure/machine-learning/studio-module-reference/one-class-support-vector-machine) |○ |○ | |2 |Büyük özellik kümeleri için özellikle iyi |
 | [PCA tabanlı anomali algılama](/azure/machine-learning/studio-module-reference/pca-based-anomaly-detection) | |○ |● |3 | |
-| [K-ortalamaları](/azure/machine-learning/studio-module-reference/k-means-clustering) | |○ |● |4 |Bir kümeleme algoritması |
+| [K-anlamı](/azure/machine-learning/studio-module-reference/k-means-clustering) | |○ |● |4 |Kümeleme algoritması |
 
 **Algoritma özellikleri:**
 
-**●** -mükemmel doğruluk, hızlı eğitim kez ve Doğrusallık kullanımını gösterir.
+**●** -mükemmel doğruluk, hızlı eğitim süreleri ve doğrity kullanımını gösterir
 
-**○** -iyi doğruluk ve orta eğitim süreleri gösterir.
+**○** -iyi doğruluk ve orta eğitim sürelerini gösterir
 
 ## <a name="algorithm-notes"></a>Algoritma notları
 
 ### <a name="linear-regression"></a>Çizgisel regresyon
 
-Daha önce de belirtildiği [doğrusal regresyon](/azure/machine-learning/studio-module-reference/linear-regression) veri kümesi için bir satır (veya düz veya hyperplane) uyar. Basit ve hızlı, workhorse olduğunu ancak bazı sorunlar için aşırı alıyormuş olabilir.
+Daha önce belirtildiği gibi, [Doğrusal regresyon](/azure/machine-learning/studio-module-reference/linear-regression) , veri kümesine bir hat (veya düzlem veya hiper Düzle) sığdırır. Bu, basit ve hızlı bir çalışmadır, ancak bazı sorunlar için aşırı uyarlaması olabilir.
 
-![Doğrusal bir eğilim verileri](./media/algorithm-choice/image3.png)
+![Doğrusal eğilimi olan veriler](./media/algorithm-choice/image3.png)
 
-***Doğrusal bir eğilim verileri***
+***Doğrusal eğilimi olan veriler***
 
 ### <a name="logistic-regression"></a>Lojistik regresyon
 
-Adı 'regresyon' içerse Lojistik regresyon gerçekten yönelik güçlü bir araç olan [iki sınıflı](/azure/machine-learning/studio-module-reference/two-class-logistic-regression) ve [veya çoklu sınıflar](/azure/machine-learning/studio-module-reference/multiclass-logistic-regression) sınıflandırması. Bu hızlı ve basit olur. Kullandığı gerçek bir kişinin '-düz bir çizgi yerine şekillendirilmiş eğri veri gruplara bölmek için doğal bir şekilde uyum sağlar. Kullandığınızda, lojistik regresyon verir doğrusal sınıfı sınırlar, bu nedenle doğrusal bir yaklaştırma ile canlı şeydir emin olun.
+Adında ' regresyon ' olsa da, lojistik regresyon aslında [iki sınıf ve çok sınıflı](/azure/machine-learning/studio-module-reference/two-class-logistic-regression) [sınıflandırma için](/azure/machine-learning/studio-module-reference/multiclass-logistic-regression) güçlü bir araçtır. Hızlı ve kolaydır. Düz bir çizgi yerine '-şekillendirilmiş eğinin kullanması, verileri gruplara bölmek için doğal bir uyum sağlar. Lojistik regresyon, doğrusal sınıf sınırları verir, bu nedenle kullandığınızda, doğrusal bir yaklaşık ile yaşadığınız bir şeyin olduğundan emin olun.
 
-![Tek bir özellik ile iki sınıflı verilere Lojistik regresyon](./media/algorithm-choice/image4.png)
+![Yalnızca bir özellik ile iki sınıflı verilere gerileme lojistik](./media/algorithm-choice/image4.png)
 
-***Tek bir özellik ile iki sınıflı verilere Lojistik regresyon*** *-sınıfı sınır Lojistik eğri olduğu gibi her iki sınıfları yalnızca yakın noktasıdır*
+***Tek bir özellik ile iki sınıflı verilere yönelik bir Lojistik gerileme*** ; *sınıf sınırı, lojistik eğrisinin her iki sınıfa da yakın* olduğu bir noktasıdır
 
-### <a name="trees-forests-and-jungles"></a>Harikası ağaçlar ve ormanları
+### <a name="trees-forests-and-jungles"></a>Ağaçlar, ormanlar ve harikası
 
-Karar ormanları ([regresyon](/azure/machine-learning/studio-module-reference/decision-forest-regression), [iki sınıflı](/azure/machine-learning/studio-module-reference/two-class-decision-forest), ve [veya çoklu sınıflar](/azure/machine-learning/studio-module-reference/multiclass-decision-forest)), karar harikası ([iki sınıflı](/azure/machine-learning/studio-module-reference/two-class-decision-jungle) ve [ veya çoklu sınıflar](/azure/machine-learning/studio-module-reference/multiclass-decision-jungle)) ve Artırılmış karar ağaçları ([regresyon](/azure/machine-learning/studio-module-reference/boosted-decision-tree-regression) ve [iki sınıflı](/azure/machine-learning/studio-module-reference/two-class-boosted-decision-tree)) tüm karar ağaçları, temel makine öğrenme kavramını temel alır. Karar ağaçları birçok çeşidini vardır, ancak bunların tümü aynı şeyi yapmak — bölgeleri çoğunlukla aynı etikete sahip özellik alanı ayırabilir. Bu bölgeler tutarlı kategorisinin veya sınıflandırma veya regresyon yapmakta olduğunuz bağlı olarak sabit değerinin olabilir.
+Karar ormanları ([gerileme](/azure/machine-learning/studio-module-reference/decision-forest-regression), [iki sınıf](/azure/machine-learning/studio-module-reference/two-class-decision-forest)ve [birden](/azure/machine-learning/studio-module-reference/multiclass-decision-forest)çok sınıf), karar harikası ([iki sınıf](/azure/machine-learning/studio-module-reference/two-class-decision-jungle) ve [birden](/azure/machine-learning/studio-module-reference/multiclass-decision-jungle)çok sınıf) ve daha fazla karar ağaçları ([gerileme](/azure/machine-learning/studio-module-reference/boosted-decision-tree-regression) ve [iki sınıf](/azure/machine-learning/studio-module-reference/two-class-boosted-decision-tree)), kararına göre yapılır temel bir makine öğrenimi kavramı olan ağaçlar. Birçok karar ağacının çeşitleri vardır ancak hepsi aynı şeyi yapar, özellik alanını çoğunlukla aynı etiketle aynı şekilde alt bölümlere ayırır. Bunlar, sınıflandırma veya gerileme yapıp yapmadığınıza bağlı olarak tutarlı kategori veya sabit değer bölgeleri olabilir.
 
-![Karar ağacı kesen ve onun özellik alanı](./media/algorithm-choice/image5.png)
+![Karar ağacı alt bir özellik alanını böler](./media/algorithm-choice/image5.png)
 
-***Karar ağacı özellik alanı kabaca Tekdüzen değerleri bölgelere kesen ve onun***
+***Karar ağacı alt bir özellik alanını kabaca Tekdüzen değerlerinin bölgelerine böler***
 
-Özellik alanı rasgele olarak küçük bölgelere alt bölümlere ayrılabilir, çünkü yeterince iyi bölge başına bir veri noktası için bölme Imagine kolaydır. Bu aşırı overfitting örneğidir. Bunu önlemek için çok sayıda ağaçları uzamayan ağaçları değil bağıntılı sağlamak üzere özel matematik dikkatli. Bu "karar ormanı" overfitting engelleyen bir ağaç ortalamasıdır. Karar ormanları, çok miktarda bellek kullanabilirsiniz. Karar harikası biraz daha uzun bir eğitim süresini çoğaltamaz daha az bellek tüketen bir değişken var.
+Bir özellik alanı, rastgele küçük bölgelere daha fazla bölünebildiğinden, bölge başına bir veri noktasına sahip olmak için yeterince fazla bölmek çok kolay olabilir. Bu, büyük/veya çok fazla ekleme örneğidir. Bunu önlemek için, ağaçların bağıntılı olmadığından emin olmak için özel matematik ile birlikte büyük bir ağaç kümesi oluşturulur. Bu "karar ormanının" ortalaması, fazla sığdırmayı önleyen bir ağacdır. Karar ormanları, çok fazla bellek kullanabilir. Karar harikası, biraz daha uzun bir eğitim zamanının masrafına daha az bellek tüketen bir değişkendir.
 
-Artırmalı karar ağaçları, kaç kez ayırabilir ve her bölgede nasıl birkaç veri noktası izin verilen sınırlayarak overfitting kaçının. Algoritma, her biri için önce ağacı tarafından sol hata dengelemek için öğrenir ağaçları, bir dizi oluşturur. Çok miktarda bellek kullanma eğilimindedir çok doğru bir learner sonucudur. Tam teknik açıklaması için kullanıma [Friedman'ın özgün belgede](https://www-stat.stanford.edu/~jhf/ftp/trebst.pdf).
+Artırılmış karar ağaçları, her bölgede kaç kez alt bölüme ve ne kadar veri noktasına izin verileceğini sınırlayarak aşırı sığdırmayı önleyin. Algoritma, her biri daha önce ağaç tarafından kalan hatayı telafi eden bir ağaç dizisi oluşturur. Sonuç, çok miktarda bellek kullanmanın eğilimi gösteren çok doğru bir öğrenildir. Tam teknik açıklama için, [Friedman 'ın orijinal kağıdına](https://www-stat.stanford.edu/~jhf/ftp/trebst.pdf)göz atın.
 
-[Hızlı orman quantile regresyon](/azure/machine-learning/studio-module-reference/fast-forest-quantile-regression) karar ağaçları verilerin bir bölge, aynı zamanda quantiles biçiminde, dağıtım içinde yalnızca Normal (ORTANCA) değerini bilmek istediğiniz özel bir durum için bir çeşididir.
+[Hızlı orman quantile gerileme](/azure/machine-learning/studio-module-reference/fast-forest-quantile-regression) , bir bölgedeki verilerin yalnızca tipik (ortanca) değerini değil, aynı zamanda da ölçü biçiminde dağıtımını sağlamak istediğiniz özel durum için karar ağaçlarının bir çeşitlemesi.
 
-### <a name="neural-networks-and-perceptrons"></a>Sinir ağları ve perceptrons
+### <a name="neural-networks-and-perceptrons"></a>Sinir Networks ve perceptrons
 
-Sinir ağları beyin ilham alınarak tasarlanan öğrenimi algoritmaları kapsayan [veya çoklu sınıflar](/azure/machine-learning/studio-module-reference/multiclass-neural-network), [iki sınıflı](/azure/machine-learning/studio-module-reference/two-class-neural-network), ve [regresyon](/azure/machine-learning/studio-module-reference/neural-network-regression) sorunları. Sonsuz bir çeşitli geldikleri, ancak Azure Machine Learning Studio içinde sinir ağları yönlendirilmiş Çevrimsiz grafikler biçiminin tümü. Giriş özellikleri ileri (hiçbir zaman geri) katmanları sırasıyla çıkışları açık önce aktarılmasını anlamına gelir. Her katmanda girişleri çeşitli birleşimler ağırlıklı, toplamı ve sonraki katmana geçirildi. Bu basit hesaplamalar birleşimi Gelişmiş sınıfı sınırları ve veri eğilimleri görünüşte tarafından Sihirli öğrenin olanağı sonuçlanır. Çok katmanlı ağlar bu tür "çok fazla teknik raporlama ve Bilim Kurgu artırıyor derin öğrenme" gerçekleştirin.
+Sinir Networks, çok [Lass](/azure/machine-learning/studio-module-reference/multiclass-neural-network), [iki sınıf](/azure/machine-learning/studio-module-reference/two-class-neural-network)ve [gerileme](/azure/machine-learning/studio-module-reference/neural-network-regression) sorunlarını kapsayan, beyana yönelik öğrenme algoritmalardır. Bunlar sonsuz bir çeşitte sunulur, ancak klasik Azure Machine Learning Studio sinir ağları, tüm yönlendirilmiş döngüsel grafikler biçimidir. Bu, giriş özelliklerinin çıkışlar içine açılmadan önce bir dizi katmanda ileri (hiçbir şekilde geri) geçirileceği anlamına gelir. Her katmanda, girişler çeşitli kombinasyonlara ağırlıklı, toplanmıştır ve sonraki katmana geçirilir. Bu basit hesaplamalar birleşimi, karmaşık sınıf sınırlarını ve veri eğilimlerini öğrenerek Magic tarafından elde edilecek. Bu sıralamanın çok katmanlı ağları, çok fazla teknik raporlama ve bilime sahip olan "derin öğrenme" işlemini gerçekleştirir.
 
-Bu yüksek performanslı ücretsiz, ancak gelmez. Sinir ağları, özellikle büyük veri kümeleri çok sayıda özellikleri için eğitmek için uzun sürebilir. Ayrıca parametre Süpürme eğitim süresini büyük ölçüde genişletir anlamına gelir çoğu algoritmaları sayısından daha fazla parametre sahiptirler.
-Ve isteyen bu overachievers [kendi ağ yapısı belirtmek](azure-ml-netsharp-reference-guide.md), olasılık inexhaustible.
+Bu yüksek performans, olmasa da ücretsiz olarak gelmeyecektir. Sinir Networks, özellikle çok sayıda özelliği olan büyük veri kümelerinde eğmek uzun sürebilir. Ayrıca, çoğu algoritmalardan daha fazla parametreye sahiptir, bu da parametre üstün bir şekilde eğitim süresini genişlettiğinden büyük bir işlem olur.
+Ve [kendi ağ yapısını belirtmek](azure-ml-netsharp-reference-guide.md)isteyen overachievers için, olanaklar de tüketilillerdir.
 
-![Sinir ağları tarafından öğrenilen sınırları](./media/algorithm-choice/image6.png)
+![Sinir Networks tarafından öğrenilen sınırlar](./media/algorithm-choice/image6.png)
 
-***Sinir ağları tarafından öğrenilen sınırları, karmaşık ve düzensiz olabilir.***
+***Sinir Networks tarafından öğrenilen sınırlar karmaşık ve düzensiz olabilir***
 
-[İki sınıflı perceptron ortalama](/azure/machine-learning/studio-module-reference/two-class-averaged-perceptron) oldukça eğitim kez sinir ağları yanıtı. Doğrusal sınıfı sınırlar sağlayan bir ağ yapısını kullanır. Günümüzün standartlarıyla neredeyse temel ancak yerine çalışma uzun bir geçmişe sahiptir ve hızlı bir şekilde öğrenmek için küçük.
+[İki sınıflı ortalama Perceptron](/azure/machine-learning/studio-module-reference/two-class-averaged-perceptron) , sinir Networks 'un eğitim sürelerinin yanıtını skyrocketing. Doğrusal sınıf sınırları sağlayan bir ağ yapısı kullanır. Bugünün standartlarına göre neredeyse temel, ancak uzun bir çalışma robustly geçmişi vardır ve hızlı bir şekilde öğrenecek kadar küçüktür.
 
 ### <a name="svms"></a>SVMs
 
-Destek vektörü makineler (SVMs) mümkün olduğunca geniş bir kenar boşluğu olarak sınıfları tarafından ayıran sınır bulun. İki sınıf açıkça ayrılamayan, bunlar için en iyi sınır algoritmalar bulun. Azure Machine Learning Studio'da yazıldığı gibi [iki sınıflı SVM](/azure/machine-learning/studio-module-reference/two-class-support-vector-machine) yalnızca düz bir çizgi ile yapar (SVM konuşurken doğrusal bir çekirdek kullanır).
-Bu doğrusal bir yaklaştırma getirdiği için oldukça hızlı bir şekilde çalıştırabilirsiniz. Burada gerçekten çıkar metin veya genom veri gibi güçlü özelliği veriler değişkendir. Bu gibi durumlarda SVMs sınıfları daha hızlı bir şekilde ve yalnızca uygun miktarda bellek gerektiren ek olarak çoğu diğer algoritmalar, daha az overfitting ayrı olanağına sahip olursunuz.
+Destek vektör makineleri (SVMs), sınıfları mümkün olduğunca geniş bir kenar boşluğuna ayıran sınırı bulur. İki sınıf açık bir şekilde ayrılacaksa, algoritmalar olabilecek en iyi sınırı bulur. Azure Machine Learning Studio (klasik) yazıldığı gibi, [iki SıNıFLı SVM](/azure/machine-learning/studio-module-reference/two-class-support-vector-machine) bunu yalnızca düz bir satırla yapar (SVM-konuş ' ta, doğrusal bir çekirdek kullanır).
+Bu doğrusal bir değer sağladığından, oldukça hızlı bir şekilde çalışabilir. Aslında, metin veya genomik verileri gibi özellik yoğun verilerle nerede olduğu. Bu durumlarda, SVMs sınıfları daha hızlı ve diğer algoritmalardan daha kısa bir süre içinde ayırarak yalnızca bir bellek miktarı gerektirmenize ek olarak ayrılabilir.
 
-![Destek vektör makinesi sınıfı sınır](./media/algorithm-choice/image7.png)
+![Vektör makinesi sınıf sınırını destekleme](./media/algorithm-choice/image7.png)
 
-***Bir normal destek vektör makinesi sınıfı sınır iki sınıf ayırarak kenar boşluğu en üst düzeye çıkarır.***
+***Tipik bir destek vektör makinesi sınıfı sınırı iki sınıfı ayıran kenar boşluğunu en üst düzeye çıkarır***
 
-Microsoft Research'ün başka bir ürün [iki sınıflı yerel olarak derin SVM](/azure/machine-learning/studio-module-reference/two-class-locally-deep-support-vector-machine) doğrusal olmayan bir doğrusal sürüm hız ve bellek verimliliğini çoğunu korur SVM çeşididir. Burada doğrusal bir yaklaşım yeterince doğru yanıtlar vermek olmayan durumlar için idealdir. Geliştiriciler bir dizi küçük doğrusal SVM sorun sorunla hızlı bölmek tarafından tutulur. Okuma [tam açıklama](http://proceedings.mlr.press/v28/jose13.html) nasıl bunlar Bu ipucunu çekilen ilişkin ayrıntılar için.
+Microsoft Research 'ın başka bir ürünü olan [iki sınıf yerel olarak derin](/azure/machine-learning/studio-module-reference/two-class-locally-deep-support-vector-machine) bir SVM, doğrusal sürümün hız ve bellek verimliliğini büyük bir şekilde tutan, doğrusal olmayan bir değişkendir. Doğrusal yaklaşımın yeterince kesin yanıt vermediği durumlarda idealdir. Geliştiriciler sorunu birkaç küçük doğrusal SVM sorununa ayırarak hızlı bir şekilde tutulur. Bu eli nasıl çektikleri hakkındaki ayrıntıların [tam açıklamasını](http://proceedings.mlr.press/v28/jose13.html) okuyun.
 
-Akıllı bir doğrusal SVMs uzantısı [bir sınıf SVM](/azure/machine-learning/studio-module-reference/one-class-support-vector-machine) sıkı bir şekilde tüm veri kümesini özetleyen bir sınır çizer. Anomali algılama için kullanışlıdır. Şu ana kadar bu sınırları dışında kalan tüm yeni veri noktaları, kayda değer olmasını olağan değildir.
+Doğrusal olmayan svms 'nin zekice uzantısını kullanarak, [tek sınıf SVM](/azure/machine-learning/studio-module-reference/one-class-support-vector-machine) , tüm veri kümesini sıkı bir şekilde özetleyen bir sınır çizer. Anomali algılama için faydalıdır. Bu sınırın dışında kalan tüm yeni veri noktaları, en önemli bir değer olacak şekilde çok daha fazla.
 
-### <a name="bayesian-methods"></a>Bayes yöntemleri
+### <a name="bayesian-methods"></a>Bayeme yöntemleri
 
-Yükseltebilirsiniz kalite Bayes yöntemi vardır: Bunlar overfitting kaçının. Bunlar önceden yanıt büyük olasılıkla dağıtımı hakkında bazı varsayımlarda bulunarak yapın. Bu yaklaşımın başka bir byproduct, çok az sayıda parametre sahip olduğunu belirtir. Azure Machine Learning Studio iki sınıflandırma Bayes algoritmaları sahiptir ([iki sınıflı Bayes noktası makinesi](/azure/machine-learning/studio-module-reference/two-class-bayes-point-machine)) ve gerileme ([Bayes doğrusal regresyon](/azure/machine-learning/studio-module-reference/bayesian-linear-regression)).
-Bu veri bölebilir veya düz bir çizgi uygun olduğunu varsayın unutmayın.
+Bayeme metotlarının yüksek oranda istenen kalitesi vardır: çok fazla ekleme yapmaktan kaçınır. Bu, yanıtın büyük olasılıkla dağıtımını yapmadan önce bazı varsayımlar yaparak bunu yapar. Bu yaklaşımın başka bir byürünü, çok az parametreye sahip olmalarından oluşur. Azure Machine Learning Studio klasik sürümünde hem sınıflandırma ([iki sınıf Bayes ' noktası makinesi](/azure/machine-learning/studio-module-reference/two-class-bayes-point-machine)) hem de gerileme ([bayeeli doğrusal regresyon](/azure/machine-learning/studio-module-reference/bayesian-linear-regression)) için bayeme algoritmaları vardır.
+Bu, verilerin düz bir satırla bölünebileceğini veya uygun olduğunu varsaydığını unutmayın.
 
-Geçmiş bir not üzerinde Bayes noktası makineleri Microsoft Research'te geliştirilen. Bazı olağanüstü güzel teorik iş arkasına sahiptirler. İsteyen Öğrenci yönlendirildiği [JMLR özgün makalesinde](http://jmlr.org/papers/volume1/herbrich01a/herbrich01a.pdf) ve [Chris Güneş tarafından bilgilendirici blog](https://blogs.technet.com/b/machinelearning/archive/2014/10/30/embracing-uncertainty-probabilistic-inference.aspx).
+Geçmiş notta, Bayes ' Point machines Microsoft Research ' de geliştirilmiştir. Bunların arkasında daha fazla harika bir teorik iş vardır. İlgilendiğiniz öğrenci, [JMLR ' deki özgün makaleye](http://jmlr.org/papers/volume1/herbrich01a/herbrich01a.pdf) ve [kemal 'e göre ınsighrg bloguna](https://blogs.technet.com/b/machinelearning/archive/2014/10/30/embracing-uncertainty-probabilistic-inference.aspx)yönlendirilir.
 
-### <a name="specialized-algorithms"></a>Özel algoritmaların
-Belirli bir hedefe varsa günümüzdeyiz! tam da olabilir. Azure Machine Learning Studio koleksiyonda olarak uzmanlaşmış algoritmaları vardır:
+### <a name="specialized-algorithms"></a>Özel algoritmalar
+Çok özel bir amacınız varsa, şansda olabilirsiniz. Azure Machine Learning Studio (klasik) koleksiyonu içinde, içinde uzmanlaşan algoritmalar vardır:
 
-- Tahmin Rank ([sıralı regresyon](/azure/machine-learning/studio-module-reference/ordinal-regression)),
-- Tahmin sayısı ([Poisson regresyon](/azure/machine-learning/studio-module-reference/poisson-regression)),
-- anomali algılama (bir temel alarak [asıl bileşenlerini analiz](/azure/machine-learning/studio-module-reference/pca-based-anomaly-detection) ve bir temel [vektör makineler Destek](/azure/machine-learning/studio-module-reference/one-class-support-vector-machine))
-- Kümeleme ([K-ortalamaları](/azure/machine-learning/studio-module-reference/k-means-clustering))
+- sıra Tahmini ([sıralı regresyon](/azure/machine-learning/studio-module-reference/ordinal-regression)),
+- Sayı Tahmini ([Poisson regresyon](/azure/machine-learning/studio-module-reference/poisson-regression)),
+- anomali algılama ( [asıl bileşen analizine](/azure/machine-learning/studio-module-reference/pca-based-anomaly-detection) ve tek bir [destek vektör makinelerine](/azure/machine-learning/studio-module-reference/one-class-support-vector-machine)dayalı olarak bir temel alınarak)
+- kümeleme ([K-Ortalamalar](/azure/machine-learning/studio-module-reference/k-means-clustering))
 
 ![PCA tabanlı anomali algılama](./media/algorithm-choice/image8.png)
 
-***PCA tabanlı anomali algılama*** *-veri büyük çoğunluğu stereotipik dağıtım döner; bu dağıtım noktasından önemli ölçüde deviating şüpheli noktalarıdır*
+***PCA tabanlı anomali algılama*** *-verilerin büyük çoğunluğu bir stereotypical dağıtımına denk gelir; bu dağıtımın önemli ölçüde büyük bir bölümü şüphelidir*
 
-![Veri kümesi K-ortalamaları kullanarak gruplanır.](./media/algorithm-choice/image9.png)
+![K-Ortalamalar kullanılarak gruplanmış veri kümesi](./media/algorithm-choice/image9.png)
 
-***Bir veri kümesi K-ortalamaları kullanarak beş kümeler halinde gruplandırılır.***
+***Bir veri kümesi, K-Ortalamalar kullanılarak beş küme halinde gruplandırılır***
 
-Ayrıca bir topluluğu vardır [bir v tüm çok sınıflı sınıflandırıcı](/azure/machine-learning/studio-module-reference/one-vs-all-multiclass), N-1 iki sınıflı sınıflandırma sorunlarla karşılaşırsanız N sınıflı sınıflandırma problemi keser. Doğruluk, eğitim süresini ve Doğrusallık özellikleri kullanılan iki sınıflı sınıflandırıcılar tarafından belirlenir.
+Ayrıca, N sınıfı sınıflandırma sorununu N-1 2 sınıfı sınıflandırmayla kesen tek bir ve [birden çok Lass Sınıflandırıcısı](/azure/machine-learning/studio-module-reference/one-vs-all-multiclass)vardır. Doğruluk, eğitim süresi ve doğrity özellikleri, kullanılan iki sınıf Sınıflandırıcıların belirlenir.
 
-![Üç düzeyde sınıflandırıcı oluşturmak için bir araya iki sınıflı sınıflandırıcı](./media/algorithm-choice/image10.png)
+![İki sınıf sınıflandırıcıları üç sınıf Sınıflandırıcısı oluşturacak şekilde birleştirildi](./media/algorithm-choice/image10.png)
 
-***Bir çift iki sınıflı sınıflandırıcılar birleştiren üç sınıf sınıflandırıcı oluşturmak için***
+***İki sınıflı sınıflandırıcının çifti, üç sınıf bir sınıflandırıcı oluşturacak şekilde birleştirilir***
 
-Azure Machine Learning Studio, bir güçlü makine öğrenimi framework başlığının altında erişimi de içerir [Vowpal Wabbit](/azure/machine-learning/studio-module-reference/train-vowpal-wabbit-version-7-4-model).
-VW Burada, kategori Koşullarımız, Sınıflandırma ve regresyon hem sorunları edinebilirsiniz ve hatta kısmen etiketlenmemiş verilerden bilgi edinebilirsiniz. Öğrenme algoritmaları, kayıp işlevleri ve iyileştirme algoritmalarını sayısı herhangi birini kullanmak üzere yapılandırabilirsiniz. Bunu baştan yukarı verimli, paralel ve son derece hızlı olacak şekilde tasarlanmıştır. Bu, gerçekten büyük özellik kümeleri görünen çok az çabayla işler.
-Başlatılan ve Microsoft Research'ün kendi John Langford tarafından yürütülen VW hisse senedi araba algoritmaları alanındaki formülü bir bir giriştir. Her sorun VW uyar, ancak Sizinkinde varsa, kendi arabiriminde öğrenme eğrisini tırmanan, while değer olabilir. Ayrıca kullanılabilir olarak [tek başına bir açık kaynak kod](https://github.com/JohnLangford/vowpal_wabbit) çeşitli dillerde.
+Azure Machine Learning Studio klasik sürümü, [Vowpal Wabbit](/azure/machine-learning/studio-module-reference/train-vowpal-wabbit-version-7-4-model)başlığı altında güçlü bir makine öğrenimi çerçevesine erişimi de içerir.
+Sınıflandırma ve regresyon sorunları öğrendiğinden ve kısmen etiketlenmemiş verilerden bile bilgi sağlayabileceği için kategori burada açıklanmıştır. Bunu, bir dizi öğrenme algoritmalarından, kayıp fonksiyonlarından ve en iyi duruma getirme algoritmalarından herhangi birini kullanacak şekilde yapılandırabilirsiniz. Baştan sona, paralel ve son derece hızlı olacak şekilde tasarlanmıştır. Az miktarda çabayla daha kapsamlı, büyük özellik kümelerini işler.
+Microsoft Research 'ın can 'ın kendi John Langford tarafından başlayıp bu yana, bir hisse senedi arabası algoritmalarının alanındaki bir giriş formüldür. Her bir sorun buna uyar, ancak sizinki varsa, bu, kendi arabiriminde öğrenme eğrisi için gereken bir değer olabilir. Ayrıca, çeşitli dillerde [tek başına açık kaynak kodu](https://github.com/JohnLangford/vowpal_wabbit) olarak da kullanılabilir.
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-* Anlaşılması kolay bilgi grafiği machine learning temel bilgileri yaygın machine learning soruları yanıtlamak için kullanılan popüler algoritmaları hakkında bilgi edinmek için genel bakış indirmek için bkz [makine öğrenimi algoritma örnekleri ile Temelleri](basics-infographic-with-algorithm-examples.md).
+* Ortak makine öğrenimi sorularını cevaplamak için kullanılan popüler algoritmaların öğrenilmesi için Machine Learning temelleri hakkında kolay bir bilgi grafiğine genel bakış için bkz. [algoritma örnekleri Ile makine öğrenimi temelleri](basics-infographic-with-algorithm-examples.md).
 
-* Machine Learning Studio'da kullanılabilen tüm makine öğrenimi algoritma kategoriye göre bir listesi için bkz [modeli Başlat](/azure/machine-learning/studio-module-reference/machine-learning-initialize-model) Machine Learning Studio algoritma ve modül Yardımı.
+* Machine Learning Studio (klasik) ' de bulunan tüm makine öğrenimi algoritmalarının kategorilerine göre bir liste için, bkz. Machine Learning Studio (klasik) algoritması ve modül yardımı 'nda [modeli başlatma](/azure/machine-learning/studio-module-reference/machine-learning-initialize-model) .
 
-* Bir tam alfabetik listesi algoritmaları ve Machine Learning Studio'daki modüller için bkz: [Machine Learning Studio modüllerinin A-Z listesi](/azure/machine-learning/studio-module-reference/a-z-module-list) Machine Learning Studio algoritma ve modül Yardımı.
+* Machine Learning Studio klasik sürümündeki algoritmaların ve modüllerin tam alfabetik listesi için, Machine Learning Studio (klasik) algoritması ve modül yardımı 'nda [a-Z Machine Learning Studio (klasik) modüllerine](/azure/machine-learning/studio-module-reference/a-z-module-list) bakın.

@@ -1,86 +1,80 @@
 ---
-title: Azure'da bir yönetimi çözümü oluşturmak | Microsoft Docs
-description: Yönetim çözümleri, Azure'da yer alan müşteriler, Log Analytics çalışma alanınıza ekleyebilirsiniz paketlenmiş yönetim senaryolarını içerir.  Bu makale, kendi ortamınızda kullanılacak yönetim çözümleri nasıl oluşturabileceğiniz hakkında ayrıntılar sağlar veya müşterileriniz için kullanılabilir.
-services: monitoring
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: tysonn
-ms.assetid: 1915e204-ba7e-431b-9718-9eb6b4213ad8
+title: Azure 'da bir yönetim çözümü oluşturun | Microsoft Docs
+description: Yönetim çözümleri, Azure 'da müşterilerin Log Analytics çalışma alanına ekleyebilmeleri için paketlenmiş yönetim senaryolarını içerir.  Bu makalede, kendi ortamınızda kullanılmak üzere yönetim çözümlerini nasıl oluşturabileceğiniz veya müşterileriniz için kullanılabilir hale getirdiğiniz hakkında ayrıntılar sağlanmaktadır.
 ms.service: azure-monitor
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 03/20/2017
+ms.subservice: ''
+ms.topic: conceptual
+author: bwren
 ms.author: bwren
+ms.date: 03/20/2017
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: ef1af4d3d27bc098341a4de716e293557baa946a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 97472a65af6eb2c5c2da93d93f38450cc021f680
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60595826"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555295"
 ---
-# <a name="design-and-build-a-management-solution-in-azure-preview"></a>Tasarım ve azure'da (Önizleme) bir yönetim çözümü oluşturun
+# <a name="design-and-build-a-management-solution-in-azure-preview"></a>Azure 'da bir yönetim çözümü tasarlama ve oluşturma (Önizleme)
 > [!NOTE]
-> Şu anda Önizleme aşamasında olan Azure yönetim çözümleri oluşturmak için başlangıç belgeleri budur. Aşağıda açıklanan herhangi bir şema tabi bir değişikliktir.
+> Bu, şu anda önizleme aşamasında olan Azure 'da yönetim çözümleri oluşturmaya yönelik bir belgedir. Aşağıda açıklanan tüm şemalarla değişiklik yapılır.
 
-[Yönetim çözümleri]( solutions.md) müşteriler, Log Analytics çalışma alanınıza ekleyebilirsiniz paket Yönetimi senaryoları sağlar.  Bu makalede, tasarlamak ve oluşturmak için en yaygın gereksinimlerine uygun bir Yönetimi çözümünün temel bir işlemi sunar.  Bu işlemi başlangıç noktası olarak kullanın ve sonra gereksinimleriniz değiştikçe daha karmaşık çözümleri için kavramlar yararlanarak yönetim çözümleri oluşturma konusunda bilginiz varsa.
+[Yönetim çözümleri]( solutions.md) , müşterilerin Log Analytics çalışma alanına ekleyebilmeleri için paketlenmiş yönetim senaryoları sağlar.  Bu makalede, en yaygın gereksinimlere uygun bir yönetim çözümü tasarlamak ve oluşturmak için temel bir işlem sunulmaktadır.  Yönetim çözümleri oluşturmaya yeni başladıysanız, bu işlemi bir başlangıç noktası olarak kullanabilir ve ardından gereksinimleriniz geliştikçe daha karmaşık çözümler için kavramlardan yararlanabilirsiniz.
 
-## <a name="what-is-a-management-solution"></a>Bir yönetim çözümü nedir?
+## <a name="what-is-a-management-solution"></a>Yönetim çözümü nedir?
 
-Yönetim çözümleri belirli bir yönetim senaryosunu sağlamak için birlikte çalışan Azure kaynakları içerir.  Olarak uygulanan [Resource Manager şablonlarını](../../azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal.md) yüklemek ve çözüm yüklendikten sonra içerdiği kaynaklarla yapılandırma ayrıntılarını içerir.
+Yönetim çözümleri, belirli bir yönetim senaryosuna ulaşmak için birlikte çalışan Azure kaynaklarını içerir.  Çözüm yüklendiğinde içerdikleri kaynakların nasıl yükleneceğine ve yapılandırılacağına ilişkin ayrıntıları içeren [Kaynak Yönetim Şablonları](../../azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal.md) olarak uygulanır.
 
-Temel bileşenleri tek tek Azure ortamınızda yazlım Yönetimi çözümünüz için stratejisidir.  Düzgün çalışmasını işlevselliğini açtıktan sonra daha sonra bunları paketleme başlatabilirsiniz bir [yönetim çözüm dosyası]( solutions-solution-file.md). 
+Temel strateji, Azure ortamınızda bireysel bileşenleri oluşturarak yönetim çözümünüzü başlatmaya başlamadır.  İşlevselliği düzgün şekilde çalışmaya başladıktan sonra bunları bir [yönetim çözümü dosyasına]( solutions-solution-file.md)paketlemeyi başlatabilirsiniz. 
 
 
 ## <a name="design-your-solution"></a>Çözümünüzü tasarlayın
-Bir yönetim çözümü için en yaygın desen, aşağıdaki diyagramda gösterilmiştir.  Bu düzen farklı bileşenlerin ele alınmıştır aşağıda.
+Bir yönetim çözümü için en yaygın model aşağıdaki diyagramda gösterilmiştir.  Bu düzendeki farklı bileşenler aşağıda açıklanmaktadır.
 
 ![Yönetim çözümüne genel bakış](media/solutions-creating/solution-overview.png)
 
 
 ### <a name="data-sources"></a>Veri kaynakları
-Bir çözüm tasarlamanın ilk adımı, Log Analytics depodan ihtiyaç duyduğunuz verileri belirliyor.  Bu veriler tarafından toplanabilir bir [veri kaynağı](../../azure-monitor/platform/agent-data-sources.md) veya [başka bir çözüm]( solutions.md), veya çözümünüz, toplama işlemini sağlamanız gerekebilir.
+Bir çözüm tasarlamanın ilk adımı, Log Analytics deposundan gereken verileri belirliyor.  Bu veriler bir [veri kaynağı](../../azure-monitor/platform/agent-data-sources.md) veya [başka bir çözüm]( solutions.md)tarafından toplanabilir veya çözümünüzün onu toplama işlemini sağlaması gerekebilir.
 
-Log Analytics deposunda açıklandığı toplanan veri kaynakları birkaç yol vardır [Log analytics'te veri kaynakları](../../azure-monitor/platform/agent-data-sources.md).  Bu, Windows olay günlüğüne olayları içerir veya Syslog tarafından ek olarak performans sayaçları hem Windows hem de Linux istemcileri için oluşturulan.  Azure İzleyici tarafından toplanan Azure kaynaklarından verileri de toplayabilirsiniz.  
+[Log Analytics veri kaynaklarında](../../azure-monitor/platform/agent-data-sources.md)açıklandığı gibi Log Analytics deposunda toplanabilecek birçok farklı veri kaynağı vardır.  Bu, Windows olay günlüğü 'ndeki olayları içerir veya hem Windows hem de Linux istemcilerinin performans sayaçlarına ek olarak Syslog tarafından oluşturulmuştur.  Ayrıca, Azure Izleyici tarafından toplanan Azure kaynaklarından veri toplayabilirsiniz.  
 
-Tüm kullanılabilir veri kaynakları erişilebilir değil veri gerektiren sonra kullanabileceğiniz [HTTP veri toplayıcı API'sini](../../azure-monitor/platform/data-collector-api.md) olanak sağlayan bir REST API'sine çağrı yapmadan herhangi bir istemciden Log Analytics depoya veri yazmak.  Özel veri toplama Yönetimi çözümüne en yaygın yolları oluşturmaktır bir [Azure Otomasyonu'nda runbook](../../automation/automation-runbook-types.md) gerekli verileri Azure'a veya dış kaynaklardan toplar ve yazılacak veri toplayıcı API'sini kullanır. Depo.  
+Kullanılabilir veri kaynaklarından herhangi biri üzerinden erişilemeyen verilere ihtiyacınız varsa, REST API çağırabilen herhangi bir istemciden Log Analytics deposuna veri yazmanıza olanak sağlayan [http veri TOPLAYıCı API](../../azure-monitor/platform/data-collector-api.md) 'sini kullanabilirsiniz.  Bir yönetim çözümünde özel veri toplamanın en yaygın yolu, Azure [Otomasyonu 'Nda](../../automation/automation-runbook-types.md) Azure veya dış kaynaklardan gerekli verileri toplayan ve depoya yazmak Için VERI Toplayıcı API 'sini kullanan bir runbook oluşturmaktır.  
 
 ### <a name="log-searches"></a>Günlük aramaları
-[Günlük aramaları](../../azure-monitor/log-query/log-query-overview.md) ayıklayın ve Log Analytics depodaki verileri analiz etmek için kullanılır.  Bunlar, görünümler ve uyarılar, geçici çözümleme veri deposunda gerçekleştirmesine izin verme yanı sıra tarafından kullanılır.  
+[Günlük aramaları](../../azure-monitor/log-query/log-query-overview.md) Log Analytics deposundaki verileri ayıklamak ve analiz etmek için kullanılır.  Bunlar, kullanıcının depodaki verilerin geçici analizini gerçekleştirmesine izin vermenin yanı sıra görünümler ve uyarılar tarafından kullanılır.  
 
-Herhangi bir görünüm veya uyarılar tarafından kullanılmayan bile kullanıcıya yardımcı olacağını düşündüğünüz tüm sorguları tanımlamanız gerekir.  Bunlar Portalı'nda kayıtlı aramalar kullanabilecekleri olacaktır ve bunları de içerebilir bir [, liste sorguları görselleştirme bölümü](../../azure-monitor/platform/view-designer-parts.md#list-of-queries-part) özel görünümünüzdeki.
+Herhangi bir görünüm veya uyarı tarafından kullanılmasa bile, Kullanıcı için yararlı olacağını düşündüğünüz sorguları tanımlamanız gerekir.  Bunlar, portalda kayıtlı aramalar olarak kullanılabilir ve bunları özel görünüminizdeki bir [sorgu görselleştirmesi bölümü listesine](../../azure-monitor/platform/view-designer-parts.md#list-of-queries-part) dahil edebilirsiniz.
 
 ### <a name="alerts"></a>Uyarılar
-[Log analytics'teki uyarılar](../../azure-monitor/platform/alerts-overview.md) ile ilgili sorunları belirlemenize [günlük aramaları](#log-searches) karşı depodaki verileri.  Bunlar kullanıcıya bildir ya da otomatik olarak yanıtta bir eylem çalıştırın. Uygulamanızın farklı uyarı koşullarını tanımlamak ve karşılık gelen bir uyarı kuralları, çözüm dosyasına eklenecek gerekir.
+[Log Analytics uyarılar](../../azure-monitor/platform/alerts-overview.md) depodaki verilere karşı [günlük aramalarıyla](#log-searches) ilgili sorunları belirler.  Kullanıcıya bildirilir veya yanıt olarak bir eylemi otomatik olarak çalıştırır. Uygulamanız için farklı uyarı koşulları belirlemeniz ve ilgili uyarı kurallarını çözüm dosyanıza eklemeniz gerekir.
 
-Ardından sorun büyük olasılıkla otomatik bir işlem ile düzeltilebilir, bu düzeltmesi yapmak için Azure Automation'da bir runbook genellikle oluşturacaksınız.  Çoğu Azure hizmeti ile yönetilebilir [cmdlet'leri](/powershell/azure/overview) , bu tür işlevleri gerçekleştirmek için runbook yararlanarak.
+Sorun potansiyel olarak bir otomatik işlemle düzeltilemezse, bu düzeltmeyi gerçekleştirmek için genellikle Azure Otomasyonu 'nda bir runbook oluşturacaksınız.  Çoğu Azure hizmeti, runbook 'un bu işlevleri gerçekleştirmek için yararlanması gereken [cmdlet](/powershell/azure/overview) 'lerle yönetilebilir.
 
-Dış işlevler bir uyarıya yanıt olarak çözümünüzün gerektirdiği sonra kullanabileceğiniz bir [Web kancası yanıtı](../../azure-monitor/platform/alerts-metric.md).  Bu, uyarıyı bilgi gönderirken bir dış web hizmetini çağırmak sağlar.
+Çözümünüz bir uyarıya yanıt olarak dış işlevsellik gerektiriyorsa, bir [Web kancası yanıtı](../../azure-monitor/platform/alerts-metric.md)kullanabilirsiniz.  Bu, uyarıdan bilgi gönderen bir dış Web hizmetini çağırabilmeniz için izin verir.
 
 ### <a name="views"></a>Görünümler
-Log Analytics'teki görünümler, Log Analytics deposuna verilerini görselleştirmek için kullanılır.  Her çözüm, genellikle tek bir görünümle içerecek bir [döşeme](../../azure-monitor/platform/view-designer-tiles.md) kullanıcının ana panosunda görüntülenir.  Görünüm herhangi bir sayıda içerebilir [görselleştirme bölümleri](../../azure-monitor/platform/view-designer-parts.md) kullanıcıya toplanan verilerin farklı görselleştirmeler sağlamak için.
+Log Analytics görünümler Log Analytics deposundan verileri görselleştirmek için kullanılır.  Her çözüm, genellikle kullanıcının ana panosunda görüntülenen bir [kutucuğa](../../azure-monitor/platform/view-designer-tiles.md) sahip tek bir görünüm içerir.  Görünüm, kullanıcıya toplanan verilerin farklı görselleştirmelerini sağlamak için herhangi bir sayıda [görselleştirme bölümü](../../azure-monitor/platform/view-designer-parts.md) içerebilir.
 
-[Görünüm Tasarımcısı'nı kullanarak özel görünümlerini oluşturma](../../azure-monitor/platform/view-designer.md) , daha sonra çözüm dosyasına ekleme için dışarı aktarabilirsiniz.  
+Daha sonra çözüm dosyanıza eklenmek üzere dışarı aktarabilebilmeniz için [Görünüm tasarımcısını kullanarak özel görünümler oluşturursunuz](../../azure-monitor/platform/view-designer.md) .  
 
 
-## <a name="create-solution-file"></a>Çözüm dosyası oluşturma
-Yapılandırılmış ve sınanan çözümünüzün bir parçası olacak bileşenleri sonra [çözüm dosyanızı oluşturmak]( solutions-solution-file.md).  Çözüm bileşenlerinde gerçekleştireceksiniz bir [Resource Manager şablonu](../../azure-resource-manager/resource-group-authoring-templates.md) içeren bir [çözüm kaynak]( solutions-solution-file.md#solution-resource) ilişkileri dosyasındaki diğer kaynaklara sahip.  
+## <a name="create-solution-file"></a>Çözüm dosyası oluştur
+Çözümünüzün bir parçası olacak bileşenleri yapılandırdıktan ve test edildikten sonra [çözüm dosyanızı oluşturabilirsiniz]( solutions-solution-file.md).  Çözüm bileşenlerini, dosyadaki diğer kaynaklarla ilişkiler içeren bir [çözüm kaynağı]( solutions-solution-file.md#solution-resource) içeren bir [Kaynak Yöneticisi şablonunda](../../azure-resource-manager/resource-group-authoring-templates.md) uygulayacaksınız.  
 
 
 ## <a name="test-your-solution"></a>Çözümünüzü test etme
-Çözümünüzü geliştirirken ve çalışma alanınızda test yüklemeniz gerekir.  Kullanılabilir yöntemlerin herhangi biriyle kullanarak bunu yapabilirsiniz [Resource Manager şablonlarını yüklemek ve test](../../azure-resource-manager/resource-group-template-deploy.md).
+Çözümünüzü geliştirirken, çalışma alanınıza yüklemeniz ve test etmeniz gerekir.  Bunu, [Kaynak Yöneticisi şablonları test etmek ve yüklemek](../../azure-resource-manager/resource-group-template-deploy.md)için kullanılabilir yöntemlerden herhangi birini kullanarak yapabilirsiniz.
 
 ## <a name="publish-your-solution"></a>Çözümünüzü yayımlayın
-Tamamlandı ve çözümünüzü test sonra bunu kullanılabilir aşağıdaki kaynaklardan aracılığıyla müşterilere yapabilirsiniz.
+Çözümünüzü tamamladıktan ve test edildikten sonra, aşağıdaki kaynaklardan biri aracılığıyla müşteriler tarafından kullanılabilir hale getirebilirsiniz.
 
-- **Azure hızlı başlangıç şablonları**.  [Azure hızlı başlangıç şablonları](https://azure.microsoft.com/resources/templates/) GitHub aracılığıyla topluluk tarafından katkıda bulunulan Resource Manager şablonları kümesidir.  Çözümünüzü kullanılabilir aşağıdaki bilgileri tarafından yapabileceğiniz [katkıda bulunma Kılavuzu](https://github.com/Azure/azure-quickstart-templates/tree/master/1-CONTRIBUTION-GUIDE).
-- **Azure Market**.  [Azure Marketi](https://azuremarketplace.microsoft.com/marketplace/) dağıtmak ve diğer geliştiriciler, ISV'ler, çözümünüzü satma sağlar ve BT uzmanları.  Azure Market'ten çözümünüzü yayımlamak öğrenebilirsiniz [yayımlama ve Azure Marketi'nde Teklif yönetme](../../marketplace/marketplace-publishers-guide.md).
+- **Azure hızlı başlangıç şablonları**.  [Azure hızlı başlangıç şablonları](https://azure.microsoft.com/resources/templates/) , GitHub aracılığıyla topluluk tarafından katkıda bulunulan Kaynak Yöneticisi şablonlar kümesidir.  [Katkı kılavuzundaki](https://github.com/Azure/azure-quickstart-templates/tree/master/1-CONTRIBUTION-GUIDE)bilgileri izleyerek çözümünüzü kullanılabilir hale getirebilirsiniz.
+- **Azure Marketi**.  [Azure Marketi](https://azuremarketplace.microsoft.com/marketplace/) , çözümünüzü diğer geliştiriciler, ISV 'ler ve BT uzmanlarına dağıtmanıza ve satmanıza olanak tanır.  Çözümünüzü Azure Marketi 'nde nasıl yayımlayacağınızı [ve Azure Marketi 'nde teklif yayımlama ve yönetme](../../marketplace/marketplace-publishers-guide.md)hakkında bilgi edinebilirsiniz.
 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Bilgi edinmek için nasıl [bir çözüm dosyası oluşturmak]( solutions-solution-file.md) Yönetimi çözümünüz için.
-* Ayrıntılarını öğrenmek [Azure Resource Manager şablonları yazma](../../azure-resource-manager/resource-group-authoring-templates.md).
-* Arama [Azure hızlı başlangıç şablonları](https://azure.microsoft.com/documentation/templates) farklı Resource Manager şablonu örnekleri için.
+* Yönetim çözümünüz için [bir çözüm dosyası oluşturmayı]( solutions-solution-file.md) öğrenin.
+* [Yazma Azure Resource Manager şablonlarının](../../azure-resource-manager/resource-group-authoring-templates.md)ayrıntılarını öğrenin.
+* Farklı Kaynak Yöneticisi şablonlarının örnekleri için [Azure hızlı başlangıç şablonlarında](https://azure.microsoft.com/documentation/templates) arama yapın.

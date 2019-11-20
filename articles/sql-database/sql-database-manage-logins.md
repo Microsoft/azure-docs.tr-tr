@@ -1,6 +1,6 @@
 ---
-title: Azure SQL oturumları ve kullanıcıları | Microsoft Docs
-description: SQL veritabanı ve SQL veri ambarı güvenlik yönetimi hakkında bilgi edinin özellikle sunucu düzeyindeki asıl hesap aracılığıyla veritabanı erişimini ve oturum açma güvenliğini yönetmek nasıl.
+title: Oturum açma bilgileri ve kullanıcılar
+description: SQL veritabanı ve SQL veri ambarı güvenlik yönetimi hakkında, özellikle de sunucu düzeyi sorumlu hesabı aracılığıyla veritabanı erişimini ve oturum açma güvenliğini yönetme hakkında bilgi edinin.
 keywords: sql veritabanı güvenliği,veritabanı güvenliği yönetimi,oturum açma güvenliği,veritabanı güvenliği,veritabanı erişimi
 services: sql-database
 ms.service: sql-database
@@ -11,27 +11,26 @@ ms.topic: conceptual
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: carlrab
-manager: craigg
 ms.date: 03/26/2019
-ms.openlocfilehash: af6cec22ae455e6a6ead4c45fead2d7ff5b708d2
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e9934f868fb62f9b1a19ef408dab69ab8a2c0e29
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67070502"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74159154"
 ---
-# <a name="controlling-and-granting-database-access-to-sql-database-and-sql-data-warehouse"></a>Denetleme ve SQL veritabanı ve SQL veri ambarı veritabanına erişim izni verme
+# <a name="controlling-and-granting-database-access-to-sql-database-and-sql-data-warehouse"></a>SQL veritabanı ve SQL veri ambarı 'na veritabanı erişimini denetleme ve verme
 
-Güvenlik duvarı kurallarını yapılandırmadan sonra Azure'a bağlanma [SQL veritabanı](sql-database-technical-overview.md) ve [SQL veri ambarı](../sql-data-warehouse/sql-data-warehouse-overview-what-is.md) yönetici hesaplarından biri olarak, veritabanının sahibi veya veritabanındaki veritabanı kullanıcısı.  
+Güvenlik duvarı kuralları yapılandırmasından sonra, Azure [SQL veritabanı](sql-database-technical-overview.md) ve [SQL veri ambarı](../sql-data-warehouse/sql-data-warehouse-overview-what-is.md) 'na, veritabanı sahibi olarak veya veritabanındaki bir veritabanı kullanıcısı olarak yönetici hesaplarından biri olarak bağlanabilirsiniz.  
 
 > [!NOTE]  
-> Bu konu, Azure SQL server ve Azure SQL sunucusunda oluşturulan SQL veritabanı ve SQL veri ambarı veritabanları için geçerlidir. Kolaylık açısından, hem SQL Veritabanı hem de SQL Veri Ambarı için SQL Veritabanı terimi kullanılmaktadır. 
+> Bu konu, Azure SQL Server ve Azure SQL Server 'da oluşturulan SQL veritabanı ve SQL veri ambarı veritabanları için geçerlidir. Kolaylık açısından, hem SQL Veritabanı hem de SQL Veri Ambarı için SQL Veritabanı terimi kullanılmaktadır. 
 > [!TIP]
-> Bir öğretici için bkz. [Azure SQL veritabanınızın güvenliğini sağlama](sql-database-security-tutorial.md). Bu öğreticide uygulanmaz **Azure SQL veritabanı yönetilen örneği**.
+> Öğretici için bkz. [Azure SQL veritabanınızı güvenli hale getirme](sql-database-security-tutorial.md). Bu öğretici, **Azure SQL veritabanı yönetilen örneği**için geçerlidir.
 
 ## <a name="unrestricted-administrative-accounts"></a>Kısıtlanmamış yönetici hesapları
 
-Yönetici işlevlerine sahip iki yönetici hesabı (**Sunucu yöneticisi** ve **Active Directory yöneticisi**) vardır. Bu SQL server yönetici hesaplarını tanımlamak için Azure portalını açın ve SQL server veya SQL veritabanı özellikleri sekmesine gidin.
+Yönetici işlevlerine sahip iki yönetici hesabı (**Sunucu yöneticisi** ve **Active Directory yöneticisi**) vardır. SQL sunucunuz için bu yönetici hesaplarını belirlemek için, Azure portal açın ve SQL Server veya SQL veritabanınızın Özellikler sekmesine gidin.
 
 ![SQL Server Yöneticileri](media/sql-database-manage-logins/sql-admins.png)
 
@@ -40,37 +39,40 @@ Yönetici işlevlerine sahip iki yönetici hesabı (**Sunucu yöneticisi** ve **
   Bir Azure SQL sunucusu oluşturduğunuzda **Sunucu yöneticisi oturum açma bilgileri** belirlemeniz gerekir. SQL Server, bu hesabı ana veritabanında oturum açma bilgileri olarak oluşturur. Bu hesap SQL Server kimlik doğrulaması (kullanıcı adı ve parola) kullanarak bağlanır. Bu hesaplardan yalnızca biri mevcut olabilir.
 
   > [!NOTE]
-  > Sunucu Yöneticisi parolasını sıfırlamak için şu adrese gidin [Azure portalında](https://portal.azure.com), tıklayın **SQL sunucuları**listeden sunucuyu seçin ve ardından **parola sıfırlama**.
+  > Sunucu yöneticisinin parolasını sıfırlamak için [Azure Portal](https://portal.azure.com)gidin, **SQL sunucuları**' na tıklayın, listeden sunucuyu seçin ve ardından **Parolayı Sıfırla**' ya tıklayın.
 
-- **Azure Active Directory Yöneticisi**
+- **Yönetici Azure Active Directory**
 
-  Ayrıca, Azure Active Directory’deki bir adet kişi veya güvenlik grubu hesabı da yönetici olarak yapılandırılabilir. Bir Azure AD Yöneticisi, ancak bir Azure AD Yöneticisi yapılandırma adımı isteğe bağlıdır **gerekir** SQL veritabanına bağlanmak için Azure AD hesapları kullanmak istiyorsanız yapılandırılabilir. Azure Active Directory erişimini yapılandırma hakkında daha fazla bilgi için bkz. [Azure Active Directory Kimlik Doğrulamasını Kullanarak SQL Veritabanı’na veya SQL Veri Ambarı’na Bağlanma](sql-database-aad-authentication.md) ve [SQL Veritabanı ve SQL Veri Ambarı ile Azure AD MFA kullanımı için SSMS desteği](sql-database-ssms-mfa-authentication.md).
+  Ayrıca, Azure Active Directory’deki bir adet kişi veya güvenlik grubu hesabı da yönetici olarak yapılandırılabilir. Bir Azure AD yöneticisi yapılandırmak isteğe bağlıdır, ancak SQL veritabanı 'na bağlanmak için Azure AD hesapları kullanmak istiyorsanız bir Azure **ad Yöneticisi yapılandırılmalıdır** . Azure Active Directory erişimini yapılandırma hakkında daha fazla bilgi için bkz. [Azure Active Directory Kimlik Doğrulamasını Kullanarak SQL Veritabanı’na veya SQL Veri Ambarı’na Bağlanma](sql-database-aad-authentication.md) ve [SQL Veritabanı ve SQL Veri Ambarı ile Azure AD MFA kullanımı için SSMS desteği](sql-database-ssms-mfa-authentication.md).
 
-**Sunucu yöneticisi** ve **Azure AD yöneticisi** hesapları şu özelliklere sahiptir:
+**Sunucu Yöneticisi** ve **Azure AD yönetici** hesapları aşağıdaki özelliklere sahiptir:
 
-- Sunucu üzerindeki herhangi bir SQL veritabanı otomatik olarak bağlanabileceği yalnızca hesaplarıdır. (Diğer hesapların, bir kullanıcı veritabanına bağlanabilmek için veritabanının sahibi olmaları veya kullanıcı veritabanında kullanıcı hesabına sahip olmaları gerekir.)
+- Yalnızca sunucudaki herhangi bir SQL veritabanına otomatik olarak bağlanabilecek hesaplardır. (Diğer hesapların, bir kullanıcı veritabanına bağlanabilmek için veritabanının sahibi olmaları veya kullanıcı veritabanında kullanıcı hesabına sahip olmaları gerekir.)
 - Bu hesaplar kullanıcı veritabanlarına `dbo` kullanıcısı olarak girer ve kullanıcı veritabanlarında tüm izinlere sahip olur. (Kullanıcı veritabanının sahibi de veritabanına `dbo` kullanıcısı olarak girer.) 
-- Girmeyin `master` olarak veritabanı `dbo` kullanıcı ve izinleri ana sınırlı. 
-- Olan **değil** standart SQL Server'ın üyeleri `sysadmin` sabit sunucu rolü, SQL veritabanı'nda kullanılabilir değil.  
-- Oluşturabilir, alter ve veritabanlarını, oturum açma bilgileri, kullanıcılar, ana ve sunucu düzeyinde IP güvenlik duvarı kurallarında bırakın.
-- Ekleyebilir ve üyeleri kaldırabilir `dbmanager` ve `loginmanager` rolleri.
-- Görüntüleyebilirsiniz `sys.sql_logins` sistem tablosu.
+- `master` veritabanını `dbo` Kullanıcı olarak girmeyin ve ana üzerinde sınırlı izinlere sahip olmanız gerekir. 
+- , SQL veritabanında kullanılamayan standart SQL Server `sysadmin` sabit sunucu rolünün üyesi **değil** .  
+- Veritabanları, oturum açmalar, ana öğe ve sunucu düzeyinde IP güvenlik duvarı kuralları oluşturabilir, değiştirebilir ve bırakabilir.
+- `dbmanager` ve `loginmanager` rollerine üye ekleyebilir ve kaldırabilir.
+- `sys.sql_logins` sistem tablosunu görüntüleyebilir.
+- Yeniden adlandırılamaz.
+- Azure AD yönetici hesabını değiştirmek için portalını veya Azure CLı 'yi kullanın.
+- Sunucu Yöneticisi hesabı daha sonra değiştirilemez.
 
 ### <a name="configuring-the-firewall"></a>Güvenlik duvarını yapılandırma
 
-Sunucu düzeyinde güvenlik duvarı tek bir IP adresi veya aralığı için yapılandırıldığında **SQL sunucu yöneticisi** ve **Azure Active Directory yöneticisi**, ana veritabanına ve tüm kullanıcı veritabanlarına bağlanabilir. İlk sunucu düzeyi güvenlik duvarı [Azure portalı](sql-database-single-database-get-started.md) üzerinden [PowerShell](sql-database-powershell-samples.md) veya [REST API](https://msdn.microsoft.com/library/azure/dn505712.aspx) kullanılarak yapılandırılabilir. Bağlantı kurulduktan sonra ek sunucu düzeyi IP güvenlik duvarı kurallarını da kullanarak yapılandırılabilir [Transact-SQL](sql-database-configure-firewall-settings.md).
+Sunucu düzeyinde güvenlik duvarı tek bir IP adresi veya aralığı için yapılandırıldığında **SQL sunucu yöneticisi** ve **Azure Active Directory yöneticisi**, ana veritabanına ve tüm kullanıcı veritabanlarına bağlanabilir. İlk sunucu düzeyi güvenlik duvarı [Azure portalı](sql-database-single-database-get-started.md) üzerinden [PowerShell](sql-database-powershell-samples.md) veya [REST API](https://msdn.microsoft.com/library/azure/dn505712.aspx) kullanılarak yapılandırılabilir. Bağlantı kurulduktan sonra [Transact-SQL](sql-database-configure-firewall-settings.md)kullanılarak ek sunucu düzeyi IP güvenlik duvarı kuralları da yapılandırılabilir.
 
 ### <a name="administrator-access-path"></a>Yönetici erişim yolu
 
 Sunucu düzeyi güvenlik duvarı doğru şekilde yapılandırıldığında **SQL sunucu yöneticisi** ve **Azure Active Directory yöneticisi**, SQL Server Management Studio veya SQL Server Veri Araçları gibi istemci araçlarını kullanarak bağlantı kurabilir. Tüm özellikler ve yetenekler yalnızca en güncel araçlar tarafından sunulur. Aşağıdaki şemada iki yönetici hesabı için tipik yapılandırma gösterilmektedir.
 
-![iki Yönetim hesaplarını yapılandırma](./media/sql-database-manage-logins/1sql-db-administrator-access.png)
+![iki yönetim hesabının yapılandırılması](./media/sql-database-manage-logins/1sql-db-administrator-access.png)
 
 Yöneticiler, sunucu düzeyi güvenlik duvarındaki açık bağlantı noktalarından birini kullanarak tüm SQL Veritabanlarına bağlanabilir.
 
 ### <a name="connecting-to-a-database-by-using-sql-server-management-studio"></a>SQL Server Management Studio kullanarak bir veritabanına bağlanma
 
-Bir sunucu, veritabanı, sunucu düzeyinde IP güvenlik duvarı kuralları oluşturma ve bir veritabanını sorgulamak için SQL Server Management Studio'yu kullanarak bir kılavuz için bkz. [Azure SQL veritabanı sunucularını, veritabanlarını ve güvenlik duvarı kuralları, Azure portalını kullanmaya başlama ve SQL Server Management Studio](sql-database-single-database-get-started.md).
+Sunucu, veritabanı, sunucu düzeyinde IP güvenlik duvarı kuralları oluşturma ve bir veritabanını sorgulamak için SQL Server Management Studio kullanma hakkında bilgi için, bkz [. Azure Portal ve SQL kullanarak Azure SQL veritabanı sunucularını, veritabanlarını ve güvenlik duvarı kurallarını kullanmaya başlama Sunucu Management Studio](sql-database-single-database-get-started.md).
 
 > [!IMPORTANT]
 > Microsoft Azure ve SQL Veritabanı güncelleştirmeleriyle aynı sürümde olmak için her zaman en güncel Management Studio sürümünü kullanmanız önerilir. [SQL Server Management Studio’yu güncelleyin](https://msdn.microsoft.com/library/mt238290.aspx).
@@ -78,16 +80,16 @@ Bir sunucu, veritabanı, sunucu düzeyinde IP güvenlik duvarı kuralları oluş
 ## <a name="additional-server-level-administrative-roles"></a>Ek sunucu düzeyinde yönetim rolleri
 
 >[!IMPORTANT]
->Bu bölümde uygulanmaz **Azure SQL veritabanı yönetilen örneği** bu rolleri özgü olarak **Azure SQL veritabanı**.
+>Bu roller **Azure**SQL veritabanı 'na özel olduğundan, bu bölüm **Azure SQL veritabanı yönetilen örneği** için geçerlidir.
 
 Daha önce anlatılan sunucu düzeyi yönetim rollerine ek olarak SQL Veritabanı, ana veritabanında iki adet kısıtlı yönetim rolü sunar. Bu rollere, veritabanı oluşturma veya oturum açma bilgilerini yönetme izinleri veren kullanıcı hesapları eklenebilir.
 
 ### <a name="database-creators"></a>Veritabanı oluşturucuları
 
-Bu yönetici rollerinden biri, **dbmanager** rolüdür. Bu rolün üyeleri yeni veritabanları oluşturabilir. Bu rolü kullanmak için `master` veritabanında bir kullanıcı oluşturmanız ve bu kullanıcıyı **dbmanager** veritabanı rolüne eklemeniz gerekir. Bir veritabanı oluşturmak için kullanıcı bir SQL Server oturumunu temel bir kullanıcı olmalıdır `master` veritabanı veya bağımsız veritabanı kullanıcısı temel bir Azure Active Directory kullanıcı.
+Bu yönetici rollerinden biri, **dbmanager** rolüdür. Bu rolün üyeleri yeni veritabanları oluşturabilir. Bu rolü kullanmak için `master` veritabanında bir kullanıcı oluşturmanız ve bu kullanıcıyı **dbmanager** veritabanı rolüne eklemeniz gerekir. Bir veritabanı oluşturmak için, Kullanıcı `master` veritabanında SQL Server oturum açma veya Azure Active Directory Kullanıcı tabanlı veritabanı kullanıcısı olan bir kullanıcı olmalıdır.
 
-1. Bir yönetici hesabını kullanarak bağlanmak için `master` veritabanı.
-2. Bir SQL Server kimlik doğrulama oturumu kullanarak [CREATE LOGIN](https://msdn.microsoft.com/library/ms189751.aspx) deyimi. Örnek deyim:
+1. Yönetici hesabı kullanarak `master` veritabanına bağlanın.
+2. [Create LOGIN](https://msdn.microsoft.com/library/ms189751.aspx) ifadesini kullanarak SQL Server bir kimlik doğrulaması oturum açma oluşturun. Örnek deyim:
 
    ```sql
    CREATE LOGIN Mary WITH PASSWORD = '<strong_password>';
@@ -98,7 +100,7 @@ Bu yönetici rollerinden biri, **dbmanager** rolüdür. Bu rolün üyeleri yeni 
 
    Performansı artırmak için oturum açma bilgileri (sunucu düzeyi asıl hesaplar) veritabanı düzeyinde geçici olarak önbelleğe alınır. Kimlik doğrulaması önbelleğini yenilemek için bkz. [DBCC FLUSHAUTHCACHE](https://msdn.microsoft.com/library/mt627793.aspx).
 
-3. İçinde `master` kullanarak bir kullanıcı oluşturun, veritabanı [CREATE USER](https://msdn.microsoft.com/library/ms173463.aspx) deyimi. Kullanıcı Azure Active Directory kimlik doğrulaması bağımsız veritabanı kullanıcısı (ortamınızı Azure AD kimlik doğrulaması için yapılandırdıysanız) veya SQL Server kimlik doğrulaması bağımsız veritabanı kullanıcısı ya da SQL Server kimlik doğrulaması oturum açma bilgilerini kullanan SQL Server kimlik doğrulaması kullanıcısı (önceki adımda oluşturulan) olabilir. Örnek deyimler:
+3. `master` veritabanında kullanıcı [Oluştur](https://msdn.microsoft.com/library/ms173463.aspx) ifadesini kullanarak bir kullanıcı oluşturun. Kullanıcı Azure Active Directory bir kimlik doğrulaması, veritabanı kullanıcısı (ortamınızı Azure AD kimlik doğrulaması için yapılandırdıysanız) veya bir SQL Server kimlik doğrulaması içeren veritabanı kullanıcısı veya bir SQL Server tabanlı SQL Server kimlik doğrulaması kullanıcısı olabilir kimlik doğrulaması oturum açma (önceki adımda oluşturulur.) Örnek deyimler:
 
    ```sql
    CREATE USER [mike@contoso.com] FROM EXTERNAL PROVIDER; -- To create a user with Azure Active Directory
@@ -106,7 +108,7 @@ Bu yönetici rollerinden biri, **dbmanager** rolüdür. Bu rolün üyeleri yeni 
    CREATE USER Mary FROM LOGIN Mary;  -- To create a SQL Server user based on a SQL Server authentication login
    ```
 
-4. Yeni kullanıcıyı ekleyin **dbmanager** veritabanı rolünün `master` kullanarak [ALTER ROLE](https://msdn.microsoft.com/library/ms189775.aspx) deyimi. Örnek deyimler:
+4. [Alter role](https://msdn.microsoft.com/library/ms189775.aspx) deyimini kullanarak `master` yeni kullanıcıyı **DBManager** veritabanı rolüne ekleyin. Örnek deyimler:
 
    ```sql
    ALTER ROLE dbmanager ADD MEMBER Mary; 
@@ -118,7 +120,7 @@ Bu yönetici rollerinden biri, **dbmanager** rolüdür. Bu rolün üyeleri yeni 
 
 5. Gerekirse, yeni kullanıcının bağlantı kurabilmesi için bir güvenlik duvarı kuralı yapılandırın. (Yeni kullanıcı, mevcut bir güvenlik duvarı kuralı kapsamında olabilir.)
 
-Bir kullanıcı bağlanabilir artık `master` veritabanı ve yeni veritabanları oluşturabilir. Veritabanını oluşturan hesap, veritabanının sahibi olur.
+Artık Kullanıcı `master` veritabanına bağlanabilir ve yeni veritabanları oluşturabilir. Veritabanını oluşturan hesap, veritabanının sahibi olur.
 
 ### <a name="login-managers"></a>Oturum açma yöneticileri
 
@@ -126,7 +128,7 @@ Diğer yönetim rolü ise oturum açma yöneticisi rolüdür. Bu rolün üyeleri
 
 ## <a name="non-administrator-users"></a>Yönetici olmayan kullanıcılar
 
-Çoğu durumda, yönetici olmayan kullanıcıların ana veritabanına erişmesi gerekmez. [CREATE USER (Transact-SQL)](https://msdn.microsoft.com/library/ms173463.aspx) deyimini kullanarak veritabanı düzeyinde bağımsız veritabanı kullanıcıları oluşturun. Kullanıcı Azure Active Directory kimlik doğrulaması bağımsız veritabanı kullanıcısı (ortamınızı Azure AD kimlik doğrulaması için yapılandırdıysanız) veya SQL Server kimlik doğrulaması bağımsız veritabanı kullanıcısı ya da SQL Server kimlik doğrulaması oturum açma bilgilerini kullanan SQL Server kimlik doğrulaması kullanıcısı (önceki adımda oluşturulan) olabilir. Daha fazla bilgi için bkz. [Bağımsız Veritabanı Kullanıcıları - Veritabanınızı Taşınabilir Hale Getirme](https://msdn.microsoft.com/library/ff929188.aspx). 
+Çoğu durumda, yönetici olmayan kullanıcıların ana veritabanına erişmesi gerekmez. [CREATE USER (Transact-SQL)](https://msdn.microsoft.com/library/ms173463.aspx) deyimini kullanarak veritabanı düzeyinde bağımsız veritabanı kullanıcıları oluşturun. Kullanıcı Azure Active Directory bir kimlik doğrulaması, veritabanı kullanıcısı (ortamınızı Azure AD kimlik doğrulaması için yapılandırdıysanız) veya bir SQL Server kimlik doğrulaması içeren veritabanı kullanıcısı veya bir SQL Server tabanlı SQL Server kimlik doğrulaması kullanıcısı olabilir kimlik doğrulaması oturum açma (önceki adımda oluşturulur.) Daha fazla bilgi için bkz. [Kapsanan Veritabanı kullanıcıları-veritabanınızı taşınabilir hale getirme](https://msdn.microsoft.com/library/ff929188.aspx). 
 
 Kullanıcı oluşturmak için veritabanına bağlanın ve aşağıdaki örneklere benzer deyimleri çalıştırın:
 
@@ -141,22 +143,22 @@ Başlangıçta veritabanı yöneticilerinden yalnızca biri veya veritabanının
 GRANT ALTER ANY USER TO Mary;
 ```
 
-Ek kullanıcılar veritabanı üzerinde tam denetim vermek için bunları bir üyesi olun **db_owner** sabit veritabanı rolü.
+Başka kullanıcılara veritabanına tam denetim sağlamak için, **db_owner** sabit veritabanı rolünün bir üyesi yapın.
 
-Azure SQL veritabanı kullanımda `ALTER ROLE` deyimi.
+Azure SQL veritabanı 'nda `ALTER ROLE` ifadesini kullanın.
 
 ```sql
 ALTER ROLE db_owner ADD MEMBER Mary;
 ```
 
-Azure SQL veri ambarı kullanımda [EXEC sp_addrolemember](/sql/relational-databases/system-stored-procedures/sp-addrolemember-transact-sql).
+Azure SQL veri ambarı 'nda [EXEC sp_addrolemember](/sql/relational-databases/system-stored-procedures/sp-addrolemember-transact-sql)kullanın.
 ```sql
 EXEC sp_addrolemember 'db_owner', 'Mary';
 ```
 
 
 > [!NOTE]
-> Bir SQL veritabanı sunucu oturumuna dayanarak bir veritabanı kullanıcısı oluşturmak için yaygın nedenlerinden biri, birden fazla veritabanına erişmesi gereken kullanıcılar içindir. Bulunan olduğundan veritabanı kullanıcıları tek tek varlıklarla, kendi kullanıcı ve kendi parolasını her veritabanı tutar. Kullanıcı daha sonra her veritabanı için her parola unutmamanız gerekir ve bunu çok sayıda veritabanı için birden çok parola sıfırlama gereksinimiyle olduğunda untenable olabilmesi için bu ek yükü neden olabilir. Ancak, SQL Server oturumları ve yüksek kullanılabilirlik (etkin coğrafi çoğaltma ve yük devretme grupları) kullanmayı düşünüyorsanız, SQL Server oturum açma bilgileri el ile her sunucuda ayarlanmalıdır. Aksi takdirde, bir yük devretme gerçekleşir ve veritabanı yük devretme sonrasında erişmek mümkün olmayacaktır sonra veritabanı kullanıcısı artık sunucu oturum açma eşleştirilir. Oturum açma bilgileri için coğrafi çoğaltmayı yapılandırma hakkında daha fazla bilgi için lütfen bkz [yapılandırma ve Azure SQL veritabanı güvenliğini coğrafi geri yükleme ya da yük devretme için yönetme](sql-database-geo-replication-security-config.md).
+> SQL veritabanı sunucusu oturum açma bilgilerini temel alan bir veritabanı kullanıcısı oluşturmanın yaygın nedenlerinden biri, birden çok veritabanına erişmesi gereken kullanıcılar içindir. Kapsanan veritabanı kullanıcıları bağımsız varlıklar olduğundan, her veritabanı kendi kullanıcısını ve kendi parolasını tutar. Bu, kullanıcının her bir veritabanı için her parolayı hatırlamaları gerektiği için ek yüke neden olabilir ve birçok veritabanı için birden çok parolayı değiştirmek zorunda kalmazsa, bu, eklenebilir hale gelebilir. Ancak, SQL Server oturumlarını ve yüksek kullanılabilirliği (etkin coğrafi çoğaltma ve yük devretme grupları) kullanırken, SQL Server oturum açma işlemleri her bir sunucuda el ile ayarlanmalıdır. Aksi halde, bir yük devretme gerçekleştikten sonra veritabanı kullanıcısı artık sunucu oturum açma bilgileriyle eşlenmeyecektir ve veritabanı yük devretmesine erişemeyecektir. Coğrafi çoğaltma için oturum açma yapılandırma hakkında daha fazla bilgi için lütfen bkz. [coğrafi geri yükleme veya yük devretme Için Azure SQL veritabanı güvenliğini yapılandırma ve yönetme](sql-database-geo-replication-security-config.md).
 
 ### <a name="configuring-the-database-level-firewall"></a>Veritabanı düzeyinde güvenlik duvarını yapılandırma
 
@@ -187,7 +189,7 @@ SQL Veritabanında ayrı ayrı verilebilen veya reddedilebilen 100'den fazla izi
 
 SQL Veritabanında oturum açma bilgilerini ve kullanıcıları yönetirken aşağıdaki noktalara dikkat edin:
 
-- `CREATE/ALTER/DROP DATABASE` deyimlerini yürütürken **ana** veritabanına bağlanmış olmanız gerekir.   
+- **deyimlerini yürütürken**ana`CREATE/ALTER/DROP DATABASE` veritabanına bağlanmış olmanız gerekir.   
 - **Sunucu yöneticisi** oturum açma bilgilerine karşılık gelen veritabanı kullanıcısı değiştirilemez veya kaldırılamaz. 
 - **Sunucu yöneticisi** oturum açma bilgilerinin varsayılan dili ABD-İngilizce olarak belirlenmiştir.
 - Yalnızca yöneticiler (**Sunucu yöneticisi** oturum açma bilgileri veya Azure AD yöneticisi) ve **ana** veritabanındaki **dbmanager** veritabanı rolünün üyeleri `CREATE DATABASE` ve `DROP DATABASE` deyimlerini yürütme iznine sahiptir.
@@ -205,7 +207,7 @@ SQL Veritabanında oturum açma bilgilerini ve kullanıcıları yönetirken aşa
   GO
   ```
   
-  Bunun yerine, aşağıdaki Transact-SQL deyimini kullanın:
+  Bunun yerine, aşağıdaki Transact-SQL ifadesini kullanın:
   
   ```sql
   DROP DATABASE IF EXISTS [database_name]
@@ -214,13 +216,13 @@ SQL Veritabanında oturum açma bilgilerini ve kullanıcıları yönetirken aşa
 - `CREATE USER` deyimini `FOR/FROM LOGIN` seçeneğiyle yürütürken bunun bir Transact-SQL toplu işindeki tek deyim olması gerekir.
 - `ALTER USER` deyimini `WITH LOGIN` seçeneğiyle yürütürken bunun bir Transact-SQL toplu işindeki tek deyim olması gerekir.
 - Bir kullanıcıda `CREATE/ALTER/DROP` işlemini gerçekleştirmek için veritabanında `ALTER ANY USER` izni gerekir.
-- Bir veritabanı rolünün sahibi eklemek veya başka bir veritabanı kullanıcısı ya da bu veritabanı rolünden kaldırmak çalıştığında şu hata ortaya çıkabilir: **Kullanıcı veya rol "Ad" Bu veritabanında yok.** Bu hatanın nedeni, kullanıcının rol sahibine görünür olmamasıdır. Bu sorunu çözmek için rol sahibine kullanıcı için `VIEW DEFINITION` iznini verin. 
+- Bir veritabanı rolünün sahibi başka bir kullanıcıyı ilgili veritabanı rolüne eklemeye veya bu rolden kaldırmaya çalıştığında şu hata ortaya çıkabilir: **Kullanıcı veya rol "Ad" bu veritabanında mevcut değil.** Bu hatanın nedeni, kullanıcının rol sahibine görünür olmamasıdır. Bu sorunu çözmek için rol sahibine kullanıcı için `VIEW DEFINITION` iznini verin. 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - Güvenlik duvarı kuralları hakkında daha fazla bilgi için bkz. [Azure SQL Veritabanı Güvenlik Duvarı](sql-database-firewall-configure.md).
 - SQL Veritabanı güvenlik özelliklerinin tümüne genel bakış için bkz. [SQL Veritabanı güvenliğine genel bakış](sql-database-security-overview.md).
-- Bir öğretici için bkz. [Azure SQL veritabanınızın güvenliğini sağlama](sql-database-security-tutorial.md).
+- Öğretici için bkz. [Azure SQL veritabanınızı güvenli hale getirme](sql-database-security-tutorial.md).
 - Görünümler ve saklı yordamlar hakkında bilgi için bkz. [Görünüm ve saklı yordam oluşturma](https://msdn.microsoft.com/library/ms365311.aspx)
 - Bir veritabanı nesnesine erişim verme hakkında bilgi için bkz. [Bir veritabanı nesnesine erişim verme](https://msdn.microsoft.com/library/ms365327.aspx)

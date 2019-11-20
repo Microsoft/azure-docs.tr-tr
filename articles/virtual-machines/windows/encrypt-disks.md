@@ -1,71 +1,70 @@
 ---
-title: Azure'daki Windows sanal diskleri şifreleme | Microsoft Docs
-description: Azure PowerShell kullanarak gelişmiş güvenlikten yararlanmaya başlamak için bir Windows VM'de sanal diskleri şifreleme
+title: Azure 'da Windows VM 'de diskleri şifreleme
+description: Azure PowerShell kullanarak gelişmiş güvenlik için Windows VM 'de sanal diskleri şifreleme
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 10/30/2018
 ms.author: cynthn
-ms.openlocfilehash: 4ef485bb91fe52e138b805f347e729fc4097fc7c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 096fe779c077424b01df3ead5965cb799866a03b
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66431100"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74033539"
 ---
-# <a name="encrypt-virtual-disks-on-a-windows-vm"></a>Bir Windows VM'de sanal diskleri şifreleme
-Azure'da sanal diskler, sanal makine (VM) geliştirilmiş güvenlik ve uyumluluk için şifrelenebilir. Diskler, bir Azure Key Vault'ta güvenli şifreleme anahtarları kullanılarak şifrelenir. Bu şifreleme anahtarlarını denetlemek ve bunların kullanılması denetleyebilirsiniz. Bu makalede, Azure PowerShell kullanarak bir Windows VM'de sanal diskleri şifreleme açıklar. Ayrıca [Azure CLI kullanarak Linux VM şifreleme](../linux/encrypt-disks.md).
+# <a name="encrypt-virtual-disks-on-a-windows-vm"></a>Windows VM 'de sanal diskleri şifreleme
+Gelişmiş sanal makine (VM) güvenliği ve uyumluluğu için, Azure 'daki sanal diskler şifrelenebilir. Diskler, bir Azure Key Vault güvenli hale getirilmiş şifreleme anahtarları kullanılarak şifrelenir. Bu şifreleme anahtarlarını kontrol edersiniz ve kullanımlarını denetleyebilir. Bu makalede, Azure PowerShell kullanarak bir Windows VM 'de sanal disklerin nasıl şifreleneceği açıklanır. Ayrıca, [Linux sanal makinelerini şifreleyebilirsiniz](../linux/disk-encryption-overview.md).
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
-## <a name="overview-of-disk-encryption"></a>Disk şifrelemesi'ne genel bakış
-Windows sanal makineleri sanal disklerde BitLocker'ı kullanarak bekleme durumundayken şifrelenir. Azure'da sanal diskler şifrelemek için ücret alınmaz. Yazılım Koruması'nı kullanarak bir Azure Key Vault'ta depolanan şifreleme anahtarları veya anahtarlarınızı FIPS 140-2 seviye 2 standartlarıyla sertifikalandırılmış donanım güvenlik modüllerinde (HSM'ler) oluşturun veya içeri aktarın. Şifreleme anahtarlarını, şifreleme ve şifre çözme, sanal Makineye eklenmiş sanal diskler için kullanılır. Bu şifreleme anahtarları denetiminizde korumak ve kullanımlarını denetleyebilirsiniz. 
+## <a name="overview-of-disk-encryption"></a>Disk şifrelemeye genel bakış
+Windows VM 'lerinde sanal diskler, BitLocker kullanılarak geri kalanı şifrelenir. Azure 'da sanal disklerin şifrelenmesi ücretsizdir. Şifreleme anahtarları yazılım koruması kullanılarak bir Azure Key Vault depolanır veya anahtarlarınızı FIPS 140-2 düzey 2 standartlarına sertifikalı donanım güvenlik modüllerinde (HSM 'ler) içeri aktarabilir veya oluşturabilirsiniz. Şifreleme anahtarları, VM 'nize bağlı sanal diskleri şifrelemek ve şifrelerini çözmek için kullanılır. Bu şifreleme anahtarlarının denetimini tutar ve kullanımlarını denetleyebilir. 
 
-Bir VM şifreleme işlemi aşağıdaki gibidir:
+Bir VM 'yi şifreleme işlemi aşağıdaki gibidir:
 
-1. Bir şifreleme anahtarı Azure anahtar Kasası'nda oluşturun.
-1. Disk şifreleme için kullanılabilir olması için şifreleme anahtarını yapılandırın.
-1. Sanal diskler için disk şifrelemeyi etkinleştirir.
-1. Gerekli şifreleme anahtarları Azure Key Vault'tan istenir.
-1. Sanal diskler belirtilen şifreleme anahtarı kullanılarak şifrelenir.
+1. Azure Key Vault bir şifreleme anahtarı oluşturun.
+1. Şifreleme anahtarını, diskleri şifrelemek için kullanılabilir olacak şekilde yapılandırın.
+1. Sanal diskleriniz için disk şifrelemeyi etkinleştirin.
+1. Gerekli şifreleme anahtarları Azure Key Vault istenir.
+1. Sanal diskler, belirtilen şifreleme anahtarı kullanılarak şifrelenir.
 
 
 ## <a name="requirements-and-limitations"></a>Gereksinimler ve sınırlamalar
 
-Desteklenen senaryolar ve disk şifrelemesi için gereksinimleri:
+Disk şifrelemesi için desteklenen senaryolar ve gereksinimler:
 
-* Azure Market görüntülerini veya özel VHD görüntülerinizi yeni Windows vm'lerinde şifrelemeyi etkinleştirme.
-* Azure'daki mevcut Windows vm'lerinde şifrelemeyi etkinleştirme.
-* Depolama alanları kullanılarak yapılandırılan Windows Vm'leri üzerinde şifrelemeyi etkinleştirme.
-* İşletim sistemi ve veri şifrelemeyi devre dışı bırakmak için Windows Vm'leri beraberinde getirir.
-* Standart katmanı Vm'lerini, A, D, DS, G ve GS serisi VM'ler gibi.
+* Azure Marketi görüntülerinden veya özel VHD görüntülerinden yeni Windows VM 'lerinde şifrelemeyi etkinleştirme.
+* Azure 'da mevcut Windows VM 'lerinde şifrelemeyi etkinleştirme.
+* Depolama alanları kullanılarak yapılandırılan Windows VM 'lerinde şifrelemeyi etkinleştirme.
+* Windows VM 'Leri için işletim sistemi ve veri sürücülerinde şifrelemeyi devre dışı bırakma.
+* , D, DS, G ve GS serisi VM 'Ler gibi standart katman VM 'Leri.
 
     > [!NOTE]
-    > (Key Vault, depolama hesabı ve VM dahil) tüm kaynaklar aynı Azure bölgesindeki ve abonelikte olmalıdır.
+    > Tüm kaynaklar (Key Vault, depolama hesabı ve VM dahil) aynı Azure bölgesinde ve abonelikte olmalıdır.
 
-Disk şifrelemesi, aşağıdaki senaryolarda şu anda desteklenmemektedir:
+Aşağıdaki senaryolarda disk şifrelemesi Şu anda desteklenmemektedir:
 
-* Temel katmanı Vm'lerini.
-* Klasik dağıtım modeli kullanılarak oluşturulan VM'ler.
-* Şifreleme anahtarları zaten şifrelenmiş sanal makinesinde güncelleştiriliyor.
-* Şirket içi anahtar yönetimi hizmeti ile tümleştirme.
+* Temel katman VM 'Leri.
+* Klasik dağıtım modeli kullanılarak oluşturulan VM 'Ler.
+* Zaten şifrelenmiş bir VM 'deki şifreleme anahtarları güncelleştiriliyor.
+* Şirket içi anahtar yönetim hizmeti ile tümleştirme.
 
 
-## <a name="create-an-azure-key-vault-and-keys"></a>Bir Azure Key Vault ve anahtarlar oluşturma
-Başlamadan önce Azure PowerShell modülünün en son sürümünün yüklendiğinden emin olun. Daha fazla bilgi için bkz. [Azure PowerShell’i yükleme ve yapılandırma](/powershell/azure/overview). Aşağıdaki komut örneklerinde, tüm örnek parametrelerini kendi adları, konum ve anahtar değerlerini gibi Değiştir *myResourceGroup*, *myKeyVault*, *myVM*, ve diğerleri.
+## <a name="create-an-azure-key-vault-and-keys"></a>Azure Key Vault ve anahtarlar oluşturma
+Başlamadan önce, Azure PowerShell modülünün en son sürümünün yüklendiğinden emin olun. Daha fazla bilgi için bkz. [Azure PowerShell’i yükleme ve yapılandırma](/powershell/azure/overview). Aşağıdaki komut örneklerinde, tüm örnek parametreleri *Myresourcegroup*, *mykeykasa,* *myvm*gibi kendi adlarınız, konumunuz ve anahtar değerlerinizle değiştirin.
 
-İlk adım, bir Azure Key Vault, şifreleme anahtarlarını depolamak için oluşturmaktır. Azure Key Vault, anahtarları, gizli dizileri veya uygulamalarınızda ve hizmetlerinizde güvenli bir şekilde uygulamak izin parolaları depolayabilirsiniz. Sanal disk şifreleme için şifreleme veya şifrelerini çözme, sanal diskler için kullanılan bir şifreleme anahtarı depolamak için bir Key Vault oluşturacaksınız. 
+İlk adım, şifreleme anahtarlarınızın depolanması için bir Azure Key Vault oluşturmaktır. Azure Anahtar kasaları, uygulama ve hizmetlerinize güvenli bir şekilde uygulamanızı sağlayan anahtarları, parolaları veya parolaları depolayabilirler. Sanal disk şifrelemesi için, sanal disklerinizi şifrelemek veya şifresini çözmek için kullanılan bir şifreleme anahtarını depolamak üzere bir Key Vault oluşturacaksınız. 
 
-Azure Key Vault sağlayıcısının ile Azure aboneliğinizde etkinleştirme [Register-AzResourceProvider](https://docs.microsoft.com/powershell/module/az.resources/register-azresourceprovider), sonra bir kaynak grubu oluşturun [yeni AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup). Aşağıdaki örnek, bir kaynak grubu adı oluşturur *myResourceGroup* içinde *Doğu ABD* konumu:
+[Register-AzResourceProvider](https://docs.microsoft.com/powershell/module/az.resources/register-azresourceprovider)ile Azure aboneliğinizde Azure Key Vault sağlayıcıyı etkinleştirin ve ardından [New-azresourcegroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup)ile bir kaynak grubu oluşturun. Aşağıdaki örnek, *Doğu ABD* konumunda *myresourcegroup* adlı bir kaynak grubu adı oluşturur:
 
 ```azurepowershell-interactive
 $rgName = "myResourceGroup"
@@ -75,7 +74,7 @@ Register-AzResourceProvider -ProviderNamespace "Microsoft.KeyVault"
 New-AzResourceGroup -Location $location -Name $rgName
 ```
 
-Azure Key Vault şifreleme anahtarlarını ve depolama alanı ve VM gibi ilişkili işlem kaynakları tutan aynı bölgede olması gerekir. Bir Azure Key Vault ile oluşturma [yeni AzKeyVault](https://docs.microsoft.com/powershell/module/az.keyvault/new-azkeyvault) ve anahtar kasası disk şifrelemesi ile kullanmak için etkinleştirin. İçin benzersiz bir anahtar kasası adı belirtmeniz *keyVaultName* gibi:
+Depolama ve VM gibi şifreleme anahtarlarını ve ilişkili bilgi işlem kaynaklarını tutan Azure Key Vault hepsi aynı bölgede olmalıdır. [New-Azkeykasasıyla](https://docs.microsoft.com/powershell/module/az.keyvault/new-azkeyvault) bir Azure Key Vault oluşturun ve Key Vault disk şifrelemesi ile kullanım için etkinleştirin. *Keyvaultname* için aşağıdaki gibi benzersiz bir Key Vault adı belirtin:
 
 ```azurepowershell-interactive
 $keyVaultName = "myKeyVault$(Get-Random)"
@@ -85,9 +84,9 @@ New-AzKeyVault -Location $location `
     -EnabledForDiskEncryption
 ```
 
-Şifreleme anahtarlarını, yazılım veya donanım güvenlik modeli (HSM) koruması kullanarak depolayabilirsiniz.  Standart bir Key Vault, yazılım korumalı anahtarlar yalnızca depolar. HSM kullanmanın ek bir ücret ödemeden anahtar kasası premium gerektirir. Anahtar kasası premium oluşturmak için önceki adımda ekleme *- Sku "Premium"* parametresi. Aşağıdaki örnek, standart bir Key Vault oluşturduğumuz bu yana yazılım korumalı anahtarlar kullanır. 
+Şifreleme anahtarlarını, yazılım veya donanım güvenlik modeli (HSM) koruması kullanarak saklayabilirsiniz.  Standart Key Vault yalnızca yazılım korumalı anahtarları depolar. HSM kullanmak için ek bir ücret için Premium Key Vault gerekir. Bir Premium Key Vault oluşturmak için, önceki adımda *-SKU "Premium"* parametresini ekleyin. Aşağıdaki örnek, standart bir Key Vault oluşturduğumuz için yazılımla korunan anahtarları kullanır. 
 
-Her iki koruma modeli için Azure platformu sanal disklerin şifresini çözmek için VM önyükleme yaptığında, şifreleme anahtarlarını istemek için erişim verilmesi gerekir. Bir şifreleme anahtarı ile anahtar Kasası'nda oluşturma [Add-AzureKeyVaultKey](https://docs.microsoft.com/powershell/module/az.keyvault/add-azkeyvaultkey). Aşağıdaki örnekte adlı bir anahtar oluşturur *myKey*:
+Her iki koruma modelinde da, sanal disklerin şifresini çözmek üzere VM önyüklendiğinde, şifreleme anahtarlarını istemek için Azure platformuna erişim verilmesi gerekir. [Add-AzureKeyVaultKey](https://docs.microsoft.com/powershell/module/az.keyvault/add-azkeyvaultkey)ile Key Vault bir şifreleme anahtarı oluşturun. Aşağıdaki örnek *MyKey*adlı bir anahtar oluşturur:
 
 ```azurepowershell-interactive
 Add-AzKeyVaultKey -VaultName $keyVaultName `
@@ -96,7 +95,7 @@ Add-AzKeyVaultKey -VaultName $keyVaultName `
 ```
 
 ## <a name="create-a-virtual-machine"></a>Sanal makine oluşturma
-Şifreleme işlemi test etmek için bir VM oluşturma [New-AzVm](https://docs.microsoft.com/powershell/module/az.compute/new-azvm). Aşağıdaki örnekte adlı bir VM oluşturur *myVM* kullanarak bir *Windows Server 2016 Datacenter* görüntü. Kimlik bilgileri istendiğinde, VM'niz için kullanılacak parola ve kullanıcı adı girin:
+Şifreleme işlemini test etmek için [New-azvm](https://docs.microsoft.com/powershell/module/az.compute/new-azvm)Ile bir VM oluşturun. Aşağıdaki örnek, *Windows Server 2016 Datacenter* görüntüsü kullanan *MYVM* adlı bir VM oluşturur. Kimlik bilgileri istendiğinde, VM 'niz için kullanılacak kullanıcı adını ve parolayı girin:
 
 ```azurepowershell-interactive
 $cred = Get-Credential
@@ -113,8 +112,8 @@ New-AzVm `
 ```
 
 
-## <a name="encrypt-a-virtual-machine"></a>Bir sanal makinesi şifreleme
-Şifreleme ile sanal makinenize [kümesi AzVMDiskEncryptionExtension](https://docs.microsoft.com/powershell/module/az.compute/set-azvmdiskencryptionextension) kullanarak Azure Key Vault anahtarı. Aşağıdaki örnekte tüm önemli bilgileri alır. ardından adlı VM şifreler *myVM*:
+## <a name="encrypt-a-virtual-machine"></a>Bir sanal makineyi şifreleme
+Azure Key Vault anahtarını kullanarak VM 'nizi [set-AzVMDiskEncryptionExtension](https://docs.microsoft.com/powershell/module/az.compute/set-azvmdiskencryptionextension) ile şifreleyin. Aşağıdaki örnek, tüm anahtar bilgilerini alır ve *myvm*adlı VM 'yi şifreler:
 
 ```azurepowershell-interactive
 $keyVault = Get-AzKeyVault -VaultName $keyVaultName -ResourceGroupName $rgName;
@@ -130,7 +129,7 @@ Set-AzVMDiskEncryptionExtension -ResourceGroupName $rgName `
     -KeyEncryptionKeyVaultId $keyVaultResourceId
 ```
 
-VM şifreleme ile devam etmek için istemi kabul edin. İşlem sırasında yeniden başlatır. VM yeniden başlattı ve şifreleme işlemi tamamlandıktan sonra şifreleme durumunu gözden [Get-AzVmDiskEncryptionStatus](https://docs.microsoft.com/powershell/module/az.compute/get-azvmdiskencryptionstatus):
+VM şifrelemesiyle devam etmek için istemi kabul edin. İşlem sırasında VM yeniden başlatılır. Şifreleme işlemi tamamlandıktan ve VM yeniden başlatıldıktan sonra, [Get-AzVmDiskEncryptionStatus](https://docs.microsoft.com/powershell/module/az.compute/get-azvmdiskencryptionstatus)ile şifreleme durumunu gözden geçirin:
 
 ```azurepowershell-interactive
 Get-AzVmDiskEncryptionStatus  -ResourceGroupName $rgName -VMName "myVM"
@@ -146,5 +145,5 @@ ProgressMessage            : OsVolume: Encrypted, DataVolumes: Encrypted
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Bir Azure anahtar Kasası'nı yönetme hakkında daha fazla bilgi için bkz. [sanal makineler için bir anahtar kasası ayarlama](key-vault-setup.md).
-* Şifrelenmiş özel bir VM'yi Azure'a yüklemek için hazırlama gibi disk şifrelemesi hakkında daha fazla bilgi için bkz. [Azure Disk şifrelemesi](../../security/azure-security-disk-encryption.md).
+* Azure Key Vault yönetme hakkında daha fazla bilgi için bkz. [sanal makineler için bir Key Vault ayarlama](key-vault-setup.md).
+* Azure 'a yüklemek üzere şifrelenmiş bir özel VM hazırlama gibi disk şifreleme hakkında daha fazla bilgi için bkz. [Azure disk şifrelemesi](../../security/fundamentals/encryption-overview.md).

@@ -23,7 +23,7 @@
           href: azure-to-azure-tutorial-failover-failback.md
         - name: Yük devretmeyi çalıştırma
           href: azure-to-azure-tutorial-failback.md
-    - name: Azure VM'lerini taşıma
+    - name: Taşı
       items:
         - name: Azure VM’lerini başka bir bölgeye taşıma
           href: azure-to-azure-tutorial-migrate.md
@@ -31,6 +31,8 @@
           href: move-Azure-VMs-AVset-Azone.md
         - name: Azure VM’lerini Kamu ve Genel bölgeler arasında taşıma
           href: region-move-cross-geos.md
+        - name: Bir kasayı farklı bir bölgeye taşıma
+          href: move-vaults-across-regions.md
     - name: Azure'a VMware VM olağanüstü durum kurtarma
       items:
         - name: Azure’u hazırlama
@@ -153,6 +155,8 @@
           items:
             - name: Azure VM’lerinde olağanüstü durum kurtarma için ağı hazırlama
               href: azure-to-azure-about-networking.md
+            - name: Hedef Azure VM’nin ağ yapılandırmalarını özelleştirme
+              href: azure-to-azure-customize-networking.md
             - name: Yük devretme sonrasında ağ eşlemesini ayarlama ve IP adreslerini koruma
               href: azure-to-azure-network-mapping.md
             - name: Yük devretme sonrasında IP adreslerini korumaya yönelik örnekler
@@ -179,7 +183,7 @@
           items:
             - name: Azure VM'leri için Mobility Hizmeti'ni güncelleştirme
               href: azure-to-azure-autoupdate.md
-            - name: Azure Site Recovery’deki güncelleştirmeler
+            - name: Site Recovery güncelleştirmelerini yönetme
               href: service-updates-how-to.md
             - name: Sunucuları kaldırma ve korumayı devre dışı bırakma
               href: site-recovery-manage-registration-and-protection.md
@@ -263,7 +267,7 @@
               href: vmware-azure-manage-process-server.md
             - name: vCenter sunucularını yönetme
               href: vmware-azure-manage-vcenter.md
-            - name: Azure Site Recovery’deki güncelleştirmeler
+            - name: Site Recovery güncelleştirmelerini yönetme
               href: service-updates-how-to.md
             - name: Sunucuları kaldırma ve korumayı devre dışı bırakma
               href: site-recovery-manage-registration-and-protection.md
@@ -281,6 +285,8 @@
               href: concepts-on-premises-to-azure-networking.md
         - name: Olağanüstü durum kurtarma işlemini ayarlama
           items:
+            - name: İzlenecek yol-Olağanüstü durum kurtarmayı ayarlama
+              href: physical-azure-disaster-recovery.md
             - name: Kaynak ortamı ayarlama
               href: physical-azure-set-up-source.md
             - name: Hedef ortamı ayarlama
@@ -293,8 +299,6 @@
                   href: vmware-azure-install-mobility-service.md
                 - name: System Center Configuration Manager ile Mobility hizmetini dağıtma
                   href: vmware-azure-mobility-install-configuration-mgr.md
-                - name: İzlenecek yol-Olağanüstü durum kurtarmayı ayarlama
-                  href: physical-azure-disaster-recovery.md
         - name: Yük devretme ve yeniden çalışma işlemlerini çalıştırma
           href: physical-to-azure-failover-failback.md
         - name: Yönetme
@@ -307,7 +311,7 @@
               href: vmware-azure-manage-process-server.md
             - name: Sunucuları kaldırma ve korumayı devre dışı bırakma
               href: site-recovery-manage-registration-and-protection.md
-            - name: Azure Site Recovery’deki güncelleştirmeler
+            - name: Site Recovery güncelleştirmelerini yönetme
               href: service-updates-how-to.md
             - name: Bir kasayı silme
               href: delete-vault.md
@@ -357,17 +361,19 @@
               href: hyper-v-azure-failback.md
         - name: Yönetme
           items:
+            - name: Site Recovery veri şifrelemenin kullanımdan kaldırılması
+              href: encryption-feature-deprecation.md
             - name: Site Recovery ile yapılandırılmış Windows Sunucularını yükseltme
               href: upgrade-2012R2-to-2016.md
             - name: Sunucuları kaldırma ve korumayı devre dışı bırakma
               href: site-recovery-manage-registration-and-protection.md
-            - name: Azure Site Recovery’deki güncelleştirmeler
+            - name: Site Recovery güncelleştirmelerini yönetme
               href: service-updates-how-to.md
             - name: Bir kasayı silme
               href: delete-vault.md
     - name: Uygulamalar için olağanüstü durum kurtarma
       items:
-        - name: Şirket içi uygulamalar için Azure’a olağanüstü durum kurtarmayı ayarlama
+        - name: Şirket içi uygulamalar için olağanüstü durum kurtarma hakkında
           href: site-recovery-workload.md
         - name: Active Directory ve DNS
           href: site-recovery-active-directory.md
@@ -421,41 +427,49 @@
       href: hyper-v-azure-powershell-resource-manager.md
     - name: PowerShell kullanarak Hyper-V VM'lerinin (VMM ile) Azure'a olağanüstü durumdan kurtarmasını ayarlama
       href: hyper-v-vmm-powershell-resource-manager.md
-    - name: Yük devretmeyi düzenlemek için kurtarma planlarına Azure Otomasyonu runbook’ları ekleme
+    - name: Kurtarma planlarına otomasyon runbook’larını ekleme
       href: site-recovery-runbook-automation.md
-- name: İzleme ve sorun giderme
+- name: İzleme
   items:
-    - name: Azure Site Recovery’yi izleme
+    - name: İzleme hakkında sık sorulan sorular
+      href: monitoring-common-questions.md
+    - name: Site Recovery’yi izleme
       href: site-recovery-monitor-and-troubleshoot.md
-    - name: Azure VM’leri
+    - name: Azure İzleyici Günlükleriyle Site Recovery’yi izleme
+      href: monitor-log-analytics.md
+    - name: İşlem sunucularını izleme
+      href: vmware-physical-azure-monitor-process-server.md
+- name: Sorun giderme
+  items:
+    - name: Azure VM sorunlarını giderme
       items:
-        - name: Azure VM’lerinin çoğaltma sorunlarını giderme
+        - name: Azure VM çoğaltma sorunlarını giderme
           href: azure-to-azure-troubleshoot-errors.md
-        - name: Azure VM’lerinde devam eden çoğaltma sorunlarını giderme
+        - name: Azure VM bağlantısıyla ilgili sorunları giderme
+          href: azure-to-azure-troubleshoot-network-connectivity.md
+        - name: Devam eden çoğaltma sorunlarını giderme
           href: azure-to-azure-troubleshoot-replication.md
-        - name: Azure VM'leri için Mobility hizmeti sorunlarını giderme
+        - name: Mobility hizmeti sorunlarını giderme
           href: site-recovery-extension-troubleshoot.md
-    - name: VMware/fiziksel sunucu
+    - name: VMware VM’ler/fiziksel sunucular sorunlarını giderme
       items:
-        - name: İşlem sunucularını izleme
-          href: vmware-physical-azure-monitor-process-server.md
-        - name: VMware-Azure arası çoğaltma sorunlarını giderme
+        - name: VMware VM’leri/fiziksel sunucuları çoğaltma sorunlarını giderme
           href: vmware-azure-troubleshoot-replication.md
         - name: Yapılandırma sunucusu sorunlarını giderme
           href: vmware-azure-troubleshoot-configuration-server.md
         - name: İşlem sunucuları için sorun çözümü
           href: vmware-physical-azure-troubleshoot-process-server.md
-        - name: VMware VM'leri/fiziksel sunucular için Mobility hizmetinin gönderme yüklemesi sorunlarını giderme
+        - name: Mobility hizmetinin gönderme yüklemesi sorunlarını giderme
           href: vmware-azure-troubleshoot-push-install.md
         - name: Azure'a yük devretme sorunlarını giderme
           href: site-recovery-failover-to-azure-troubleshoot.md
         - name: VMware VM'lerinde yeniden koruma ve yeniden çalışma sorunlarını giderme
           href: vmware-azure-troubleshoot-failback-reprotect.md
-        - name: Microsoft Azure Site Recovery Sağlayıcısını yükseltme hatalarını giderme
+        - name: Sağlayıcı yükseltme hatalarında sorun giderme
           href: vmware-azure-troubleshoot-upgrade-failures.md
         - name: VCenter bulma sorunlarını giderme
           href: vmware-azure-troubleshoot-vcenter-discovery-failures.md
-    - name: Hyper-V
+    - name: Hyper-V sorunlarını giderme
       items:
         - name: Hyper-V çoğaltma sorunlarını giderme
           href: hyper-v-azure-troubleshoot.md

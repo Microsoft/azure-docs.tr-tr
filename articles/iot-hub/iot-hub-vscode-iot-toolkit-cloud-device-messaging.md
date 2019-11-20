@@ -1,6 +1,6 @@
 ---
-title: Azure IOT araçları ile birlikte Visual Studio Code için Mesajlaşma Azure IOT hub'ı bulut cihaz yönetme | Microsoft Docs
-description: Cihaz bulut iletilerini izlemek ve bulut, Azure IOT hub'daki cihaz iletilerini göndermek için Visual Studio Code için Azure IOT araçları kullanmayı öğrenin.
+title: VSCode için Azure IoT araçları 'nı kullanarak BT Hub 'ını yöneticinize gönderme
+description: Visual Studio Code için Azure IoT araçları 'nı kullanarak cihazı bulut iletilerine izleyip Azure IoT Hub cihaz iletilerine bulut gönderme hakkında bilgi edinin.
 author: formulahendry
 ms.service: iot-hub
 services: iot-hub
@@ -8,78 +8,78 @@ ms.topic: conceptual
 ms.tgt_pltfrm: arduino
 ms.date: 01/18/2019
 ms.author: junhan
-ms.openlocfilehash: f8799fcb06235474bb33cdaf0406300065208024
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.openlocfilehash: 785c6f2b36396558cc21ce6c025be59c456ff32d
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67543816"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083264"
 ---
-# <a name="use-azure-iot-tools-for-visual-studio-code-to-send-and-receive-messages-between-your-device-and-iot-hub"></a>IOT Hub ve cihaz arasında ileti göndermek ve almak için Visual Studio Code için Azure IOT araçları kullanın
+# <a name="use-azure-iot-tools-for-visual-studio-code-to-send-and-receive-messages-between-your-device-and-iot-hub"></a>Cihazınız ile IoT Hub arasında ileti göndermek ve almak için Azure IoT araçları 'nı kullanın Visual Studio Code
 
-![Uçtan uca diyagramı](./media/iot-hub-vscode-iot-toolkit-cloud-device-messaging/e-to-e-diagram.png)
+![Uçtan uca diyagram](./media/iot-hub-vscode-iot-toolkit-cloud-device-messaging/e-to-e-diagram.png)
 
-[Azure IOT Araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-toolkit) , IOT hub'ı Yönetim ve IOT uygulama geliştirmeyi kolaylaştırır kullanışlı bir Visual Studio Code uzantısı. Bu makalede Visual Studio Code için Azure IOT araçları arasındaki Cihazınızı IOT hub'ınıza ileti göndermek ve almak için nasıl kullanılacağı ele alınmaktadır.
+[Azure IoT araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-toolkit) , IoT Hub yönetimi ve IoT uygulaması geliştirmeyi kolaylaştıran yararlı bir Visual Studio Code uzantısıdır. Bu makalede, cihazınız ile IoT Hub 'ınız arasında ileti göndermek ve almak üzere Visual Studio Code için Azure IoT araçları 'nın nasıl kullanılacağı ele alınmaktadır.
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-partial.md)]
 
-## <a name="what-you-will-learn"></a>Bilgi edineceksiniz
+## <a name="what-you-will-learn"></a>Öğrenirsiniz
 
-CİHAZDAN buluta iletileri izlemeye yönelik ve bulut-cihaz iletilerini göndermek için Visual Studio Code için Azure IOT araçları kullanmayı öğrenin. CİHAZDAN buluta iletileri Cihazınızı toplar ve ardından IOT hub'ınıza gönderir sensör verilerini olabilir. Bulut-cihaz iletilerini, IOT hub'ınıza cihazınıza gönderen cihazınıza bağlı bir LED yanıp sönme komutları olabilir.
+Cihazdan buluta iletileri izlemek ve buluttan cihaza iletiler göndermek için Visual Studio Code için Azure IoT araçlarını kullanmayı öğreneceksiniz. Cihazdan buluta iletiler, cihazınızın topladığı ve daha sonra IoT Hub 'ınıza gönderdiği algılayıcı verileri olabilir. Buluttan cihaza iletiler, IoT Hub 'ınızın cihazınıza bağlı bir ışığı yakıp söndürmek üzere cihazınıza gönderdiği komutlar olabilir.
 
-## <a name="what-you-will-do"></a>Neler yapabileceği
+## <a name="what-you-will-do"></a>Yapabilecekleriniz
 
-* CİHAZDAN buluta iletileri izlemeye yönelik Visual Studio Code için Azure IOT araçları kullanın.
+* Cihazdan buluta iletileri izlemek için Visual Studio Code için Azure IoT araçları 'nı kullanın.
 
-* Bulut-cihaz iletilerini göndermek için Visual Studio Code için Azure IOT araçları kullanın.
+* Buluttan cihaza iletiler göndermek için Visual Studio Code için Azure IoT araçları 'nı kullanın.
 
 ## <a name="what-you-need"></a>Ne gerekiyor
 
 * Etkin bir Azure aboneliği.
 
-* Azure IOT hub, aboneliğiniz altında.
+* Aboneliğiniz kapsamındaki bir Azure IoT Hub 'ı.
 
 * [Visual Studio Code](https://code.visualstudio.com/)
 
-* [VS Code için Azure IOT Araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools) veya [Visual Studio Code'da bu bağlantının açılabilmesi](vscode:extension/vsciot-vscode.azure-iot-tools).
+* [Vs Code Için Azure IoT araçları](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-tools) veya [Bu bağlantıyı Visual Studio Code açın](vscode:extension/vsciot-vscode.azure-iot-tools).
 
 ## <a name="sign-in-to-access-your-iot-hub"></a>IOT hub'ınıza erişmek için oturum açın
 
-1. İçinde **Gezgini** görüntülemek VS Code, genişletme **Azure IOT Hub cihazları** sol alt köşedeki bölümünde.
+1. VS Code **Gezgin** görünümünde, sol alt köşedeki **Azure IoT Hub cihazlar** bölümünü genişletin.
 
-2. Tıklayın **IOT Hub'ı seçin** bağlam menüsünde.
+2. Bağlam menüsünde **IoT Hub Seç** ' e tıklayın.
 
-3. Bir açılır pencere, Azure'da ilk kez oturum açarken izin vermek için sağ alt köşedeki gösterilir.
+3. Bir açılır pencere, Azure 'da ilk kez oturum açmanıza olanak sağlamak için sağ alt köşede görünür.
 
-4. Oturum açtıktan sonra Azure abonelik listesi gösterilir ve ardından Azure aboneliği ve IOT hub'ı seçin.
+4. Oturum açtıktan sonra Azure abonelik listeniz gösterilir ve ardından Azure aboneliği ve IoT Hub ' ni seçin.
 
-5. Cihaz listesinde gösterilecek **Azure IOT Hub cihazları** birkaç saniye içinde sekmesi.
+5. Cihaz listesi, birkaç saniye içinde **Azure IoT Hub cihazları** sekmesinde gösterilir.
 
    > [!Note]
-   > Ayrıca, ayarlamayı tamamlamak için **IoT Hub Bağlantı Dizesini Ayarla**'yı seçebilirsiniz. Açılır pencerede bağlanır IOT Cihazınızı IOT hub'ının bağlantı dizesini girin.
+   > Ayrıca, ayarlamayı tamamlamak için **IoT Hub Bağlantı Dizesini Ayarla**'yı seçebilirsiniz. IoT cihazınızın açılan pencerede bağlandığı IoT Hub 'ı için **iothubowner** ilke bağlantı dizesini girin.
 
-## <a name="monitor-device-to-cloud-messages"></a>CİHAZDAN buluta iletileri izlemeye
+## <a name="monitor-device-to-cloud-messages"></a>Cihazdan buluta iletileri izleme
 
-Cihazınızın IOT hub'ına gönderilen iletileri izlemek için aşağıdaki adımları izleyin:
+Cihazınızdan IoT Hub 'ınıza gönderilen iletileri izlemek için şu adımları izleyin:
 
-1. Cihazınızı sağ tıklayıp **Başlat yerleşik olay uç nokta izleme**.
+1. Cihazınıza sağ tıklayıp **Izlemeyi Başlat yerleşik olay uç noktasını**seçin.
 
-2. İzlenen iletilerin gösterilecek **çıkış** > **Azure IOT hub'ı Araç Seti** görünümü.
+2. İzlenen iletiler **Azure IoT Hub araç seti** görünümünde **çıktı** > gösterilir.
 
-3. İzlemeyi durdurmak için sağ **çıkış** görüntüleyebilir ve seçebilir **Durdur yerleşik olay uç nokta izleme**.
+3. İzlemeyi durdurmak için, **Çıkış** görünümüne sağ tıklayın ve **Izlemeyi durdur yerleşik olay uç noktası**' nı seçin.
 
 ## <a name="send-cloud-to-device-messages"></a>Buluttan cihaza iletileri gönderme
 
-Cihazınız için IOT hub'ınızdan ileti göndermek için bu adımları izleyin:
+IoT Hub 'ından cihazınıza bir ileti göndermek için şu adımları izleyin:
 
-1. Cihazınızı sağ tıklayıp **cihaza C2D iletisi gönder**.
+1. Cihazınıza sağ tıklayıp **CIHAZA C2D Iletisi gönder**' i seçin.
 
-2. İleti giriş kutusuna girin.
+2. Giriş kutusuna iletiyi girin.
 
-3. Sonuçları gösterilecek **çıkış** > **Azure IOT hub'ı Araç Seti** görünümü.
+3. Sonuçlar, **Azure IoT Hub araç seti** görünümünde **çıktı** > gösterilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-CİHAZDAN buluta iletileri izlemeye ve Azure IOT Hub ve IOT cihaz arasında bulut-cihaz iletilerini göndermek öğrendiniz.
+IoT cihazınız ile Azure IoT Hub arasında cihazdan buluta iletileri izlemeyi ve buluttan cihaza iletiler göndermenizi öğrendiniz.
 
 [!INCLUDE [iot-hub-get-started-next-steps](../../includes/iot-hub-get-started-next-steps.md)]

@@ -1,42 +1,63 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Veri Kataloğu Belgeleri
+### YamlMime:Landing
+title: Azure Veri Kataloğu belgeleri
+summary: Kurumunuzun veri kaynaklarını bulabileceği, anlayabileceği ve tüketebileceği bir veri kataloğu oluşturma hakkında bilgi edinin. Öğreticiler, REST API başvurusu ve diğer belgeler, veri tüketicilerinin kullanılabilir veri kaynaklarını bulabileceği ve konunun uzmanları tarafından sağlanan bilgileri edinebileceği veri deponuzu nasıl planlayıp ayarlayabileceğinize ilişkin bilgiler içerir.
 metadata:
-  title: 'Azure Veri Kataloğu Belgeleri - Öğreticiler, API Başvurusu'
-  meta.description: 'Learn how to set up a data catalog where your organization can find, understand, and consume data sources. Tutorials, API reference, and other documentation.'
-  services: data-catalog
-  author: JasonWHowell
+  author: jasonwhowell
+  description: Kurumunuzun veri kaynaklarını bulabileceği, anlayabileceği ve tüketebileceği bir veri kataloğu oluşturma hakkında bilgi edinin. Öğreticiler, API başvurusu ve diğer belgeler.
   ms.author: jasonh
+  ms.date: 08/30/2019
   ms.service: data-catalog
   ms.topic: landing-page
-  ms.date: 07/01/2019
-abstract:
-  description: 'Veri Kataloğu’nu kullanarak kurumunuzun ve takımınızın veri kaynaklarınızı bulmasına, anlamasına ve tüketmesine nasıl yardımcı olabileceğinizi öğrenin. Öğreticiler, REST API başvurusu ve diğer belgeler, veri tüketicilerinin kullanılabilir veri kaynaklarını bulabileceği ve konunun uzmanları tarafından sağlanan bilgileri edinebileceği veri deponuzu nasıl planlayıp ayarlayabileceğinize ilişkin bilgiler içerir.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'İlk Azure Veri Kataloğunuzu dağıtmayı öğrenin:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: media/index/data-catalog.svg
-            text: Azure portal
-            href: 'https://docs.microsoft.com/azure/data-catalog/data-catalog-get-started'
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Azure Veri Kataloğu’ndaki varlıkları kaydetmeyi, aramayı, yönetmeyi, silmeyi ve bu kaynaklara not eklemeyi öğrenin:'
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="register-data-assets-tutorial">Azure Veri Kataloğu’ndaki veri varlıklarını kaydetme</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: REST
-            html: <p><a href="/rest/api/datacatalog/">REST API başvurusu</a></p><p><a href="/rest/api/datacatalog/data-catalog-search-syntax-reference">Arama söz dizimi başvurusu</a></p>
+  ms.openlocfilehash: eb60085cd76fa9d3857b5e284b2cdd03f35fcb13
+  ms.sourcegitcommit: ee61ec9b09c8c87e7dfc72ef47175d934e6019cc
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 08/30/2019
+  ms.locfileid: "70172688"
+landingContent:
+- title: Azure Veri Kataloğu hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Veri Kataloğu nedir?
+      url: overview.md
+  - linkListType: quickstart
+    links:
+    - text: İlk Veri Kataloğunuzu dağıtmayı öğrenin
+      url: data-catalog-get-started.md
+  - linkListType: concept
+    links:
+    - text: Sık sorulan sorular
+      url: data-catalog-frequently-asked-questions.md
+- title: Veri varlıklarını kaydetme
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Varlıkları kaydetmeyi, aramayı, yönetmeyi, silmeyi ve bu kaynaklara not eklemeyi öğrenin
+      url: register-data-assets-tutorial.md
+  - linkListType: concept
+    links:
+    - text: Desteklenen veri kaynakları
+      url: data-catalog-dsr.md
+  - linkListType: how-to-guide
+    links:
+    - text: Veri kaynaklarını kaydetme
+      url: data-catalog-how-to-register.md
+- title: Veri Kataloğu REST API programlama
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: REST kullanarak bir Veri Kataloğu uygulaması oluşturma
+      url: /rest/api/datacatalog/get-started-creating-a-data-catalog-app
+  - linkListType: reference
+    links:
+    - text: REST API başvurusu
+      url: /rest/api/datacatalog/
+  - linkListType: how-to-guide
+    links:
+    - text: Veri Kataloğu uygulaması oluşturma
+      url: /rest/api/datacatalog/register-a-client-app
+  - linkListType: reference
+    links:
+    - text: Arama söz dizimi başvurusu
+      url: /rest/api/datacatalog/data-catalog-search-syntax-reference

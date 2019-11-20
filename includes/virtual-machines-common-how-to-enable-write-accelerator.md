@@ -8,45 +8,43 @@ ms.topic: include
 ms.date: 05/23/2019
 ms.author: raiye
 ms.custom: include file
-ms.openlocfilehash: 7b9b30f1598f7e50d25b15aaf2fda896ee9e5012
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c8e0bb50e14467d2950d97da660fc8e6fa176b99
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66248930"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74008920"
 ---
-# <a name="enable-write-accelerator"></a>Yazma hızlandırıcıyı etkinleştirme
+Yazma Hızlandırıcısı, yalnızca Azure yönetilen diskleri olan Premium depolamada bulunan, a serisi sanal makineler (VM) için bir disk özelliğidir. Ad olduğu gibi, işlevselliğin amacı, Azure Premium depolamada yazma işlemleri için g/ç gecikmesini geliştirmedir. Yazma Hızlandırıcısı, günlük dosyası güncelleştirmelerinin modern veritabanları için yüksek performanslı bir şekilde diskte kalıcı hale getirilmesi için gerekli olduğu idealdir.
 
-Yazma Hızlandırıcı bir disk için M serisi sanal makinelerde (VM) Azure yönetilen diskler ile Premium depolama yalnızca bir özelliktir. Adını belirten, amacı işlevselliği, Azure Premium Depolama'ya yönelik yazma işlemlerinin g/ç gecikme süresini iyileştirmek için aynıdır. Yazma Hızlandırıcı, ideal olarak diske modern veritabanları için yüksek performanslı şekilde kalıcı hale getirmek için günlük dosyası güncelleştirmeleri nerede gereken uygundur.
+Yazma Hızlandırıcısı genel buluttaki d serisi VM 'Ler için genel kullanıma sunulmuştur.
 
-Yazma Hızlandırıcı M serisi vm'lerde genel bulutta kullanıma sunulacaktır.
+## <a name="planning-for-using-write-accelerator"></a>Yazma Hızlandırıcısı kullanımı için planlama yapma
 
-## <a name="planning-for-using-write-accelerator"></a>Yazma Hızlandırıcı kullanmak için planlama
+Yazma Hızlandırıcısı, işlem günlüğünü içeren birimler veya bir DBMS 'nin günlüklerini yinelemek için kullanılmalıdır. Özellik günlük disklerinde kullanılmak üzere iyileştirildiğinden, bir DBMS veri birimlerinde Yazma Hızlandırıcısı kullanılması önerilmez.
 
-Yazma Hızlandırıcı, işlem günlüğü içeren veya DBMS günlüklerini Yinele birimler için kullanılmalıdır. Bu özellik, günlük diskleri karşı kullanılmak üzere iyileştirilmiştir DBMS veri hacimleri için yazma Hızlandırıcı kullanmak üzere önerilmez.
-
-Yazma Hızlandırıcı, yalnızca çalışır birlikte [Azure yönetilen diskler](https://azure.microsoft.com/services/managed-disks/).
+Yazma Hızlandırıcısı yalnızca [Azure yönetilen disklerle](https://azure.microsoft.com/services/managed-disks/)birlikte çalışmaktadır.
 
 > [!IMPORTANT]
-> Sanal makinenin işletim sistemi diski yazma Hızlandırıcı etkinleştirme VM yeniden başlatılır.
+> VM 'nin işletim sistemi diski için Yazma Hızlandırıcısı etkinleştirilmesi VM 'yi yeniden başlatır.
 >
-> Windows disk veya birim yöneticisi, Windows depolama alanları, Windows ölçek genişletme dosya sunucusu (SOFS), Linux LVM veya MDADM, Azure disk erişme iş yükü birden çok disk dışında toplu yapının bir parçası olmayan mevcut bir Azure diske yazma Hızlandırıcı etkinleştirmek için kapatılması gerekiyor. Azure diski kullanan veritabanı uygulamaları kapatılmalıdır.
+> Windows disk veya birim yöneticileri, Windows depolama alanları, Windows genişleme dosya sunucusu (SOFS), Linux LVM veya MDADDM ile birden çok diskin parçası olmayan mevcut bir Azure diskine Yazma Hızlandırıcısı etkinleştirmek için, Azure diskine erişen iş yükü kapatılması gerekiyor. Azure diskini kullanan veritabanı uygulamalarının kapatılması gerekır.
 >
-> Windows depolama alanları, Windows ölçek genişletme dosya sunucusu (SOFS), Linux LVM veya MDADM, etkinleştirmek veya yazma Hızlandırıcı, birden çok Azure Premium depolama diskleri dışında yapılandırılan ve Windows disk veya birim Yöneticisi'ni kullanarak Şerit var olan bir birim için devre dışı bırakmak istiyorsanız, tüm disk birimi oluşturma etkin veya yazma Hızlandırıcı için ayrı adımlarda devre dışı. **Etkinleştirme veya bu tür bir yapılandırma yazma Hızlandırıcı devre dışı bırakma önce Azure sanal makineyi**.
+> Birden çok Azure Premium depolama diskinden oluşan ve Windows disk veya toplu Yöneticiler, Windows depolama alanları, Windows genişleme dosya sunucusu (SOFS), Linux LVM veya MDADDM kullanılarak şeritli mevcut bir birim için Yazma Hızlandırıcısı etkinleştirmek veya devre dışı bırakmak istiyorsanız, tümü birimi oluşturma disklerinin ayrı adımlarda Yazma Hızlandırıcısı için etkinleştirilmesi veya devre dışı bırakılması gerekir. **Bu tür bir yapılandırmada yazma Hızlandırıcısı etkinleştirmeden veya devre dışı bırakmadan önce, Azure VM 'yi kapatın**.
 
-Yazma Hızlandırıcı için işletim sistemi diskleri etkinleştirme SAP ilgili sanal makine yapılandırmaları için gerekli olmamalıdır.
+İşletim sistemi diskleri için Yazma Hızlandırıcısı etkinleştirme, SAP ile ilgili VM yapılandırmalarında gerekli değildir.
 
-### <a name="restrictions-when-using-write-accelerator"></a>Yazma Hızlandırıcı kullanımına yönelik kısıtlamalar
+### <a name="restrictions-when-using-write-accelerator"></a>Yazma Hızlandırıcısı kullanırken kısıtlamalar
 
-Yazma Hızlandırıcı Azure bir disk/VHD için kullanırken bu kısıtlamalar uygulanır:
+Azure diski/VHD için Yazma Hızlandırıcısı kullanırken, bu kısıtlamalar geçerlidir:
 
-- Premium disk önbelleği 'None' olarak ayarlanmalıdır ya da 'Read Only'. Diğer tüm önbelleğe alma modu desteklenmez.
-- Anlık görüntü şu anda desteklenmemektedir yazma Hızlandırıcısı etkinleştirilmiş disk için. Azure Backup hizmeti, yedekleme sırasında VM'ye yazma Hızlandırıcısı etkinleştirilmiş disk otomatik olarak dışlar.
-- Yalnızca küçük g/ç boyutları (< = 512 KiB) hızlandırılmış yolu edilmektedir. İş yükü verileri toplu sürekli olduğu durumlarda yüklenen ya da işlem günlüğü arabelleklerini farklı DBMS daha büyük bir dereceye kadar depolama alanına kalıcı önce doldurulur burada olasılığı olan yazılan g/ç diski hızlandırılmış yolu değil sürüyor.
+- Premium disk önbelleğinin ' none ' veya ' Read Only ' olarak ayarlanması gerekir. Diğer tüm önbelleğe alma modları desteklenmez.
+- Anlık görüntü, Yazma Hızlandırıcısı etkinleştirilmiş diskler için şu anda desteklenmiyor. Yedekleme sırasında Azure Backup hizmeti, sanal makineye bağlı Yazma Hızlandırıcısı etkin diskleri otomatik olarak dışlar.
+- Yalnızca küçük g/ç boyutları (< = 512 KiB) hızlandırılmış yolu alırken. Verilerin toplu olarak yüklendiği veya farklı DBMS 'nin işlem günlüğü arabelleklerinin depolama alanına kalıcı olmadan önce daha büyük bir dereceye doldurulduğu iş yükü durumlarında, diske yazılan g/ç 'nin hızlandırılmış yolu kaplamamasından faydalanıyor olun.
 
-Azure Premium depolama VHD'leri yazma Hızlandırıcı tarafından desteklenen VM başına sınırları vardır. Geçerli sınırlar şu şekildedir:
+VM başına Yazma Hızlandırıcısı tarafından desteklenebilir Azure Premium Depolama VHD 'lerinin limitleri vardır. Geçerli sınırlar şunlardır:
 
-| VM SKU | Yazma Hızlandırıcı disk sayısı | Yazma Hızlandırıcı Disk VM başına IOPS |
+| VM SKU | Yazma Hızlandırıcısı disk sayısı | VM başına Yazma Hızlandırıcısı disk ıOPS 'si |
 | --- | --- | --- |
 | M208ms_v2, M208s_v2| 8 | 10000 |
 | M128ms, 128s | 16 | 20000 |
@@ -55,47 +53,47 @@ Azure Premium depolama VHD'leri yazma Hızlandırıcı tarafından desteklenen V
 | M16ms, M16s | 2 | 2500 |
 | M8ms, M8s | 1 | 1250 |
 
-VM başına IOPS sınırları olduğundan ve *değil* disk başına. Tüm yazma Hızlandırıcı diskler, VM başına aynı IOPS sınırı paylaşır.
+IOPS sınırları, sanal makine başına değil, disk başına *değildir* . Tüm Yazma Hızlandırıcısı diskler VM başına aynı ıOPS sınırını paylaşır.
 
-## <a name="enabling-write-accelerator-on-a-specific-disk"></a>Belirli bir diskte etkinleştirilmesi yazma Hızlandırıcısı
+## <a name="enabling-write-accelerator-on-a-specific-disk"></a>Belirli bir diskte Yazma Hızlandırıcısı etkinleştirme
 
-Yazma Hızlandırıcı, Azure Premium depolama VHD'lerde nasıl etkinleştirilebilir birkaç sonraki bölümlerde açıklanmıştır.
+Sonraki birkaç bölümde Yazma Hızlandırıcısı Azure Premium Depolama VHD 'lerde nasıl etkinleştirilecektir.
 
 ### <a name="prerequisites"></a>Önkoşullar
 
-Aşağıdaki Önkoşullar Bu anda yazma Hızlandırıcı kullanımı için geçerlidir:
+Aşağıdaki Önkoşullar zaman içinde Yazma Hızlandırıcısı kullanımı için geçerlidir:
 
-- Azure yazma Hızlandırıcı karşı uygulamak istediğiniz disklerin olmasına gerek [Azure yönetilen diskler](https://azure.microsoft.com/services/managed-disks/) Premium depolama.
-- M serisi VM kullanıyor gerekir
+- Azure Yazma Hızlandırıcısı uygulamak istediğiniz disklerin Premium depolamada [Azure yönetilen diskleri](https://azure.microsoft.com/services/managed-disks/) olması gerekir.
+- Bir d serisi VM kullanmanız gerekir
 
-## <a name="enabling-azure-write-accelerator-using-azure-powershell"></a>Azure PowerShell kullanarak Azure yazma Hızlandırıcı etkinleştirme
+## <a name="enabling-azure-write-accelerator-using-azure-powershell"></a>Azure PowerShell kullanarak Azure Yazma Hızlandırıcısı etkinleştirme
 
-Azure PowerShell modülü 5.5.0 sürümünden etkinleştirme veya devre dışı yazma Hızlandırıcı belirli Azure Premium depolama diskleri için ilgili cmdlet'ler değişiklikleri içerir.
-Etkinleştirmek veya yazma Hızlandırıcı tarafından desteklenen diskleri dağıtmak için aşağıdaki PowerShell komutları değiştirildi ve yazma Hızlandırıcı için bir parametre kabul etmek için genişletilmiş.
+5\.5.0 sürümündeki Azure Power Shell modülü, belirli Azure Premium Depolama disklerinde Yazma Hızlandırıcısı etkinleştirmek veya devre dışı bırakmak için ilgili cmdlet 'lerde yapılan değişiklikleri içerir.
+Yazma Hızlandırıcısı tarafından desteklenen diskleri etkinleştirmek veya dağıtmak için, aşağıdaki güç kabuğu komutları değişmiştir ve Yazma Hızlandırıcısı bir parametreyi kabul edecek şekilde genişletilir.
 
-Yeni bir anahtar parametresi **- WriteAccelerator** için aşağıdaki cmdlet'leri eklendi:
+Yeni bir switch parametresi, **-writeaccelerator** aşağıdaki cmdlet 'lere eklenmiştir:
 
 - [Set-AzVMOsDisk](https://docs.microsoft.com/powershell/module/az.compute/set-azvmosdisk?view=azurermps-6.0.0)
 - [Add-AzVMDataDisk](https://docs.microsoft.com/powershell/module/az.compute/Add-AzVMDataDisk?view=azurermps-6.0.0)
 - [Set-AzVMDataDisk](https://docs.microsoft.com/powershell/module/az.compute/Set-AzVMDataDisk?view=azurermps-6.0.0)
 - [Add-AzVmssDataDisk](https://docs.microsoft.com/powershell/module/az.compute/Add-AzVmssDataDisk?view=azurermps-6.0.0)
 
-Parametre vererek değil özelliği false olarak ayarlar ve yazma Hızlandırıcı tarafından desteği yok diskleri dağıtır.
+Parametresi verme özelliği false olarak ayarlanır ve Yazma Hızlandırıcısı tarafından desteklenmeyen diskleri dağıtır.
 
-Yeni bir anahtar parametresi **- OsDiskWriteAccelerator** için aşağıdaki cmdlet'leri eklendi:
+Yeni bir switch parametresi, **-osdiskwriteaccelerator** aşağıdaki cmdlet 'lere eklenmiştir:
 
 - [Set-AzVmssStorageProfile](https://docs.microsoft.com/powershell/module/az.compute/Set-AzVmssStorageProfile?view=azurermps-6.0.0)
 
-Parametresini belirtmeden özelliği varsayılan olarak, yazma Hızlandırıcı yararlanan olmayan diskleri döndüren false olarak ayarlar.
+Parametresi belirtilmeden, varsayılan olarak, Yazma Hızlandırıcısı kullanmayan diskler döndüren özelliği false olarak ayarlar.
 
-Yeni bir isteğe bağlı Boolean (atanamayan) parametre, **- OsDiskWriteAccelerator** için aşağıdaki cmdlet'leri eklendi:
+Yeni bir isteğe bağlı Boole (null yapılamayan) parametresi, **-osdiskwriteaccelerator** aşağıdaki cmdlet 'lere eklenmiştir:
 
-- [Update-AzVM](https://docs.microsoft.com/powershell/module/az.compute/Update-AzVM?view=azurermps-6.0.0)
-- [Güncelleştirme AzVmss](https://docs.microsoft.com/powershell/module/az.compute/Update-AzVmss?view=azurermps-6.0.0)
+- [Güncelleştirme-AzVM](https://docs.microsoft.com/powershell/module/az.compute/Update-AzVM?view=azurermps-6.0.0)
+- [Güncelleştirme-AzVmss](https://docs.microsoft.com/powershell/module/az.compute/Update-AzVmss?view=azurermps-6.0.0)
 
-$True veya $false diskleri Azure yazma Hızlandırıcı desteğiyle denetlemek için belirtin.
+Diskler ile Azure Yazma Hızlandırıcısı desteğini denetlemek için $true ya da $false belirtin.
 
-Komutları örnekleri gibi görünebilir:
+Komut örnekleri şöyle görünebilir:
 
 ```powershell
 New-AzVMConfig | Set-AzVMOsDisk | Add-AzVMDataDisk -Name "datadisk1" | Add-AzVMDataDisk -Name "logdisk1" -WriteAccelerator | New-AzVM
@@ -107,13 +105,13 @@ New-AzVmssConfig | Set-AzVmssStorageProfile -OsDiskWriteAccelerator | Add-AzVmss
 Get-AzVmss | Update-AzVmss -OsDiskWriteAccelerator:$false
 ```
 
-İki ana senaryo, aşağıdaki bölümlerde gösterildiği şekilde yazılabilir.
+Aşağıdaki bölümlerde gösterildiği gibi iki ana senaryo komut dosyası oluşturulabilir.
 
-### <a name="adding-a-new-disk-supported-by-write-accelerator-using-powershell"></a>PowerShell kullanarak yazma Hızlandırıcısı'tarafından desteklenen yeni bir disk ekleme
+### <a name="adding-a-new-disk-supported-by-write-accelerator-using-powershell"></a>PowerShell kullanarak Yazma Hızlandırıcısı tarafından desteklenen yeni bir disk ekleme
 
-Bu betik, VM'nize yeni bir disk eklemek için kullanabilirsiniz. Bu betik ile oluşturduğunuz disk yazma Hızlandırıcı kullanır.
+Bu betiği, sanal makinenize yeni bir disk eklemek için kullanabilirsiniz. Bu komut dosyasıyla oluşturulan Disk Yazma Hızlandırıcısı kullanır.
 
-Değiştirin `myVM`, `myWAVMs`, `log001`, disk ve diskin belirli bir dağıtım için uygun değerlerle Lunıd boyut.
+`myVM`, `myWAVMs`, `log001`, diskin boyutunu ve belirli dağıtımınız için uygun değerlerle diskin yarım kimliğini değiştirin.
 
 ```powershell
 # Specify your VM Name
@@ -134,9 +132,9 @@ Add-AzVMDataDisk -CreateOption empty -DiskSizeInGB $size -Name $vmname-$datadisk
 Update-AzVM -ResourceGroupName $rgname -VM $vm
 ```
 
-### <a name="enabling-write-accelerator-on-an-existing-azure-disk-using-powershell"></a>PowerShell kullanarak mevcut bir Azure diskinde etkinleştirilmesi yazma Hızlandırıcısı
+### <a name="enabling-write-accelerator-on-an-existing-azure-disk-using-powershell"></a>PowerShell kullanarak var olan bir Azure diskinde Yazma Hızlandırıcısı etkinleştirme
 
-Bu betik, mevcut bir diske yazma Hızlandırıcı etkinleştirmek için kullanabilirsiniz. Değiştirin `myVM`, `myWAVMs`, ve `test-log001` belirli bir dağıtım için uygun değerlerle. Betik yazma Hızlandırıcı için var olan bir diski ekler. burada değeri **$newstatus** '$true' olarak ayarlayın. ' % S'değeri '$false' kullanarak yazma Hızlandırıcı üzerinde belirli bir disk devre dışı bırakır.
+Bu betiği, mevcut bir diskte Yazma Hızlandırıcısı etkinleştirmek için kullanabilirsiniz. `myVM`, `myWAVMs`ve `test-log001`, belirli dağıtımınız için uygun değerlerle değiştirin. Betik, **$newStatus** değerinin ' $true ' olarak ayarlandığı mevcut bir diske yazma Hızlandırıcısı ekler. ' $False ' değerini kullanmak belirli bir diskte Yazma Hızlandırıcısı devre dışı bırakacak.
 
 ```powershell
 #Specify your VM Name
@@ -156,45 +154,45 @@ Update-AzVM -ResourceGroupName $rgname -VM $vm
 ```
 
 > [!Note]
-> Yukarıdaki komut dosyası yürütme belirtilen disk ayırma, disk yazma hızlandırıcıyı etkinleştirme ve ardından diski yeniden eklemek
+> Yukarıdaki betiği yürütmek, belirtilen diski ayıracaktır, diske karşı Yazma Hızlandırıcısı etkinleştirir ve sonra diski tekrar ekler
 
-## <a name="enabling-write-accelerator-using-the-azure-portal"></a>Yazma Hızlandırıcı Azure portalını kullanarak etkinleştirme
+## <a name="enabling-write-accelerator-using-the-azure-portal"></a>Azure portal kullanarak Yazma Hızlandırıcısı etkinleştirme
 
-Yazma Hızlandırıcı, önbelleğe alma ayarları, disk belirttiğiniz portalı üzerinden etkinleştirebilirsiniz:
+Yazma Hızlandırıcısı, disk önbelleğe alma ayarlarınızı belirttiğiniz Portal aracılığıyla etkinleştirebilirsiniz:
 
-![Azure portalında Hızlandırıcı yazma](./media/virtual-machines-common-how-to-enable-write-accelerator/wa_scrnsht.png)
+![Azure portal Yazma Hızlandırıcısı](./media/virtual-machines-common-how-to-enable-write-accelerator/wa_scrnsht.png)
 
-## <a name="enabling-write-accelerator-using-the-azure-cli"></a>Azure CLI kullanarak etkinleştirilmesi yazma Hızlandırıcısı
+## <a name="enabling-write-accelerator-using-the-azure-cli"></a>Azure CLı kullanarak Yazma Hızlandırıcısı etkinleştirme
 
-Kullanabileceğiniz [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest) yazma hızlandırıcıyı etkinleştirme.
+Yazma Hızlandırıcısı sağlamak için [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest) kullanabilirsiniz.
 
-Yazma Hızlandırıcı üzerinde var olan bir diski etkinleştirmek için [az vm update](https://docs.microsoft.com/cli/azure/vm?view=azure-cli-latest#az-vm-update), diskName VMName ve ResourceGroup kendi değerlerinizle değiştirin, aşağıdaki örneklerde kullanabilirsiniz: `az vm update -g group1 -n vm1 -write-accelerator 1=true`
+Mevcut bir diskte Yazma Hızlandırıcısı etkinleştirmek için [az VM Update](https://docs.microsoft.com/cli/azure/vm?view=azure-cli-latest#az-vm-update)kullanın, DiskName, VMName ve ResourceGroup değerlerini kendi değerlerinizle değiştirmeniz durumunda aşağıdaki örnekleri kullanabilirsiniz: `az vm update -g group1 -n vm1 -write-accelerator 1=true`
 
-Yazma Hızlandırıcı ile diski kullanım etkin [az vm disk ekleme](https://docs.microsoft.com/cli/azure/vm/disk?view=azure-cli-latest#az-vm-disk-attach), siz kendi değerlerinizi yerleştirin, aşağıdaki örnekte kullanabilirsiniz: `az vm disk attach -g group1 -vm-name vm1 -disk d1 --enable-write-accelerator`
+Yazma Hızlandırıcısı etkin bir disk eklemek için [az VM disk Attach](https://docs.microsoft.com/cli/azure/vm/disk?view=azure-cli-latest#az-vm-disk-attach)kullanın, kendi değerlerinizi yerine koymak için aşağıdaki örneği kullanabilirsiniz: `az vm disk attach -g group1 -vm-name vm1 -disk d1 --enable-write-accelerator`
 
-Yazma Hızlandırıcı devre dışı bırakmak için [az vm update](https://docs.microsoft.com/cli/azure/vm?view=azure-cli-latest#az-vm-update), özellikleri false olarak ayarlama: `az vm update -g group1 -n vm1 -write-accelerator 0=false 1=false`
+Yazma Hızlandırıcısı devre dışı bırakmak için [az VM Update](https://docs.microsoft.com/cli/azure/vm?view=azure-cli-latest#az-vm-update)kullanın, özellikleri false olarak ayarlar: `az vm update -g group1 -n vm1 -write-accelerator 0=false 1=false`
 
-## <a name="enabling-write-accelerator-using-rest-apis"></a>Yazma Hızlandırıcı Rest API'lerini kullanarak etkinleştirme
+## <a name="enabling-write-accelerator-using-rest-apis"></a>REST API 'Leri kullanarak Yazma Hızlandırıcısı etkinleştirme
 
-Azure Rest API aracılığıyla dağıtmak için Azure armclient yüklemeniz gerekir.
+Azure REST API aracılığıyla dağıtmak için Azure armclient ' ı yüklemeniz gerekir.
 
-### <a name="install-armclient"></a>Armclient yükleyin
+### <a name="install-armclient"></a>Armclient 'ı yükler
 
-Armclient çalıştırmak için Chocolatey yüklemeniz gerekir. Cmd.exe veya powershell yükleyebilirsiniz. Bu komutlar ("Yönetici olarak çalıştır") için yükseltilmiş haklara kullanın.
+Armclient 'ı çalıştırmak için, Chocolatey aracılığıyla yüklemeniz gerekir. Cmd. exe veya PowerShell aracılığıyla yükleyebilirsiniz. Bu komutlar için yükseltilmiş hakları kullanın ("yönetici olarak çalıştır").
 
-Cmd.exe kullanarak, aşağıdaki komutu çalıştırın: `@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"`
+Cmd. exe ' yi kullanarak şu komutu çalıştırın: `@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"`
 
-PowerShell kullanarak, aşağıdaki komutu çalıştırın: `Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))`
+Power Shell 'i kullanarak şu komutu çalıştırın: `Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))`
 
-Aşağıdaki komutta cmd.exe'i veya PowerShell kullanarak armclient şimdi yükleyebilirsiniz `choco install armclient`
+Artık, cmd. exe veya PowerShell 'de aşağıdaki komutu kullanarak armclient 'ı yükleyebilirsiniz `choco install armclient`
 
 ### <a name="getting-your-current-vm-configuration"></a>Geçerli VM yapılandırmanızı alma
 
-Disk yapılandırmanızı özniteliklerini değiştirmek için önce bir JSON dosyasında geçerli yapılandırmasını almanız gerekir. Aşağıdaki komutu yürüterek geçerli yapılandırmasını alabilirsiniz: `armclient GET /subscriptions/<<subscription-ID<</resourceGroups/<<ResourceGroup>>/providers/Microsoft.Compute/virtualMachines/<<virtualmachinename>>?api-version=2017-12-01 > <<filename.json>>`
+Disk yapılandırmanızın özniteliklerini değiştirmek için, önce geçerli yapılandırmayı bir JSON dosyasında almanız gerekir. Şu komutu yürüterek geçerli yapılandırmayı edinebilirsiniz: `armclient GET /subscriptions/<<subscription-ID<</resourceGroups/<<ResourceGroup>>/providers/Microsoft.Compute/virtualMachines/<<virtualmachinename>>?api-version=2017-12-01 > <<filename.json>>`
 
-<> <>İçindeki terimler JSON dosyada olması gereken dosya adı dahil olmak üzere verilerinizi ile değiştirin.
+' < < > > ' İçindeki terimleri JSON dosyasının sahip olduğu dosya adı da dahil olmak üzere verilerle değiştirin.
 
-Çıkış, gibi görünebilir:
+Çıktı şöyle görünebilir:
 
 ```JSON
 {
@@ -276,7 +274,7 @@ Disk yapılandırmanızı özniteliklerini değiştirmek için önce bir JSON do
 
 ```
 
-Ardından, JSON dosyasını güncelleştirin ve 'log1' adlı disk üzerinde yazma hızlandırıcıyı etkinleştirme. Bu, bu öznitelik JSON dosyasına ekleyerek disk önbellek girişten sonra gerçekleştirilebilir.
+Sonra, JSON dosyasını güncelleştirin ve ' log1 ' adlı diskte Yazma Hızlandırıcısı etkinleştirin. Bu, diskin önbellek girişinden sonra bu öznitelik JSON dosyasına eklenerek gerçekleştirilebilir.
 
 ```JSON
         {
@@ -293,9 +291,9 @@ Ardından, JSON dosyasını güncelleştirin ve 'log1' adlı disk üzerinde yazm
         }
 ```
 
-Ardından bu komutla var olan dağıtım güncelleştirin: `armclient PUT /subscriptions/<<subscription-ID<</resourceGroups/<<ResourceGroup>>/providers/Microsoft.Compute/virtualMachines/<<virtualmachinename>>?api-version=2017-12-01 @<<filename.json>>`
+Sonra mevcut dağıtımı şu komutla güncelleştirin: `armclient PUT /subscriptions/<<subscription-ID<</resourceGroups/<<ResourceGroup>>/providers/Microsoft.Compute/virtualMachines/<<virtualmachinename>>?api-version=2017-12-01 @<<filename.json>>`
 
-Çıktı bir aşağıdaki gibi görünmelidir. Bir disk için yazma Hızlandırıcısı etkinleştirilmiş görebilirsiniz.
+Çıktı aşağıdaki gibi görünmelidir. Yazma Hızlandırıcısı bir disk için etkin olduğunu görebilirsiniz.
 
 ```JSON
 {
@@ -377,4 +375,4 @@ Ardından bu komutla var olan dağıtım güncelleştirin: `armclient PUT /subsc
   "name": "mylittlesapVM"
 ```
 
-Bu değişikliği yaptıktan sonra sürücü yazma Hızlandırıcı tarafından desteklenmelidir.
+Bu değişikliği yaptıktan sonra sürücü, Yazma Hızlandırıcısı tarafından desteklenmelidir.

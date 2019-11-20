@@ -1,42 +1,43 @@
 ---
-title: Bir Power BI uygulaması teklif bilgi kişiler | Azure Market
-description: Power BI uygulaması teklif için kişiler alanları için Microsoft AppSource Marketplace yapılandırın.
+title: Power BI uygulama teklifi için kişi bilgileri | Azure Marketi
+description: Microsoft AppSource Market için Power BI uygulama teklifi için kişiler alanlarını yapılandırın.
 services: Azure, AppSource, Marketplace, Cloud Partner Portal, Power BI
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 04/24/2019
 ms.author: pabutler
-ms.openlocfilehash: f659ad2f75f9dad390c37f0e1736af5991a32dfc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ec1ed23b253f705e1830c1c014492fe52b2133f0
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64943237"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826532"
 ---
 # <a name="power-bi-app-contacts-tab"></a>Power BI uygulama kişileri sekmesi
 
-Kullanım **kişiler** sekmesinde **yeni teklif** teknik ve kullanıcı kaynaklarını teklifiniz için desteği sayfası. Bu, iki bölüme ayrılır: **Mühendislik** ve **müşteri desteği**.
+Teklifiniz için teknik ve Kullanıcı Destek kaynakları sağlamak üzere **yeni teklif** sayfasının **kişiler** sekmesini kullanın. İki bölüme ayrılır: **mühendislik** ve **müşteri desteği**.
 
 ![Kişiler sekmesi](media/contacts-tab.png)
 
 
 ## <a name="contacts-fields"></a>Kişiler alanları 
 
-Aşağıdaki tabloda, her bir alan amacını açıklar.  Gerekli alanlar yıldız (*) indicted. 
+Aşağıdaki tabloda her alanın amacı açıklanmaktadır.  Gerekli alanlar bir yıldız işareti (*) ile tanımlanır. 
 
 |   Alan               |   Açıklama                                                            |
 |-----------------------|--------------------------------------------------------------------------|
-| *Mühendislik birimi ilgili kişisi* | AppSource ya da kuruluşunuzun arasında bir teknik konular ilgili kişisi olarak görev yapar.    |
-| **Ad\***              | Kişi veya teknik ya da mühendislik desteği hizmet veren Grup adı. |
-| **E-posta\***             | Bu teknik konular ilgili kişisi e-posta adresi.                                  |
-| **Telefon\***             | Teknik destek telefon numarası.                                       |
-| *Destek ekibiyle iletişime geçin*     | AppSource müşterileri tarafından açılmış destek biletlerini alır.            |
-| **Ad\***              | Kişi veya grup müşteri desteği veren adı.              |
-| **E-posta\***             | Müşteri desteği e-posta adresi.                                        |
+| *Mühendislik Iletişim* | AppSource ile kuruluşunuz arasında teknik bir iletişim işlevi görür.    |
+| **Ad\***              | Teknik veya mühendislik desteği olarak hizmet veren kişinin veya grubun adı. |
+| **E-posta\***             | Bu teknik kişinin e-posta adresi.                                  |
+| **Telefon\***             | Teknik desteğin telefon numarası.                                       |
+| *Destek kişisi*     | AppSource içindeki müşteriler tarafından açılan destek biletlerini alır.            |
+| **Ad\***              | Müşteri desteği olarak hizmet veren kişinin veya grubun adı.              |
+| **E-posta\***             | Müşteri desteğinin e-posta adresi.                                        |
 |   |   |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Power BI uygulaması teklifinizin tamamladıktan sonra tüm oluşturduğunuz Onayla ilişkili [teknik varlıkları](./cpp-create-technical-assets.md) teklif için.
+Power BI uygulama teklifinizi tamamladıktan sonra, teklif için tüm ilişkili [Teknik varlıkları](./cpp-create-technical-assets.md) oluşturduğunuzdan emin olun.

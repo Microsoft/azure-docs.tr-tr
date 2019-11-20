@@ -79,10 +79,6 @@
       href: service-bus-samples.md
 - name: Kavramlar
   items:
-    - name: Azure kaynakları için yönetilen kimlikler
-      href: service-bus-managed-service-identity.md
-    - name: Rol Tabanlı Erişim Denetimi (önizleme)
-      href: service-bus-role-based-access-control.md
     - name: Premium mesajlaşma
       href: service-bus-premium-messaging.md
     - name: Azure Kuyrukları ve Service Bus kuyruklarını karşılaştırın
@@ -95,8 +91,27 @@
       href: service-bus-async-messaging.md
     - name: Kesintileri ve olağanüstü durumları yönetme
       href: service-bus-outages-disasters.md
-    - name: Azure ortak güvenlik öznitelikleri
-      href: service-bus-messaging-security-attributes.md
+    - name: Azaltma
+      href: service-bus-throttling.md
+    - name: Güvenlik
+      items:
+        - name: Kimlik doğrulama ve yetkilendirme
+          href: service-bus-authentication-and-authorization.md
+          items:
+            - name: Paylaşılan Erişim İmzaları kullanma
+              items:
+                - name: ACS’den SAS’ye geçiş
+                  href: service-bus-migrate-acs-sas.md
+                - name: Paylaşılan Erişim İmzaları ile kimlik doğrulaması
+                  href: service-bus-sas.md
+            - name: Azure Active Directory kullanma
+              items:
+                - name: Azure kaynakları için yönetilen kimliklerle kimlik doğrulaması yapma
+                  href: service-bus-managed-service-identity.md
+                - name: Uygulamadan kimlik doğrulaması yapma
+                  href: authenticate-application.md
+        - name: Yerleşik güvenlik denetimleri
+          href: service-bus-messaging-security-controls.md
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Ad alanı oluşturma
@@ -119,13 +134,6 @@
               href: service-bus-to-event-grid-integration-concept.md
             - name: Azure Event Grid örnekleri
               href: service-bus-to-event-grid-integration-example.md
-        - name: Kimlik doğrulama ve yetkilendirme
-          href: service-bus-authentication-and-authorization.md
-          items:
-            - name: ACS’den SAS’ye geçiş
-              href: service-bus-migrate-acs-sas.md
-            - name: Paylaşılan Erişim İmzaları ile kimlik doğrulaması
-              href: service-bus-sas.md
         - name: Konu başlığı filtreleri ve eylemleri
           href: topic-filters.md
         - name: Standart’tan Premium ad alanlarına geçirme
@@ -140,7 +148,7 @@
               href: service-bus-amqp-overview.md
             - name: .NET
               href: service-bus-amqp-dotnet.md
-            - name: Java İleti Hizmeti ve AMQP
+            - name: Java İleti Hizmeti (JMS) ve AMQP
               href: service-bus-java-how-to-use-jms-api-amqp.md
             - name: AMQP protokol kılavuzu
               href: service-bus-amqp-protocol-guide.md

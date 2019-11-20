@@ -1,30 +1,30 @@
 ---
-title: "Öğretici: Python – Custom Vision Service'e TensorFlow modeli Çalıştır"
-titlesuffix: Azure Cognitive Services
-description: Python’da TensorFlow modeli çalıştırın.
+title: 'Öğretici: Python’da TensorFlow modelini çalıştırma - Özel Görüntü İşleme Hizmeti'
+titleSuffix: Azure Cognitive Services
+description: Python’da TensorFlow modeli çalıştırın. Bu makale yalnızca Özel Görüntü İşleme hizmetindeki görüntü sınıflandırması projelerinden aktarılmış modeller için geçerlidir.
 services: cognitive-services
 author: areddish
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: custom-vision
 ms.topic: tutorial
-ms.date: 03/21/2019
+ms.date: 07/03/2019
 ms.author: areddish
-ms.openlocfilehash: babc9f8c7b8a05c4a91ead4990267311e926fd47
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.openlocfilehash: 00d3b1dce9bacc01c8319c678ab27a3d4cc8da88
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "66236417"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73718431"
 ---
 # <a name="tutorial-run-tensorflow-model-in-python"></a>Öğretici: Python’da TensorFlow modelini çalıştırma
 
 Özel Görüntü İşleme Hizmeti'ndeki [TensorFlow modelinizi dışarı aktardıktan](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/export-your-model) sonra bu hızlı başlangıcı izleyerek bu modeli görüntü sınıflandırma amacıyla yerel ortamda kullanabilirsiniz.
 
 > [!NOTE]
-> Bu öğretici, görüntü sınıflandırma projelerden dışarı modelleri için geçerlidir.
+> Bu öğretici yalnızca görüntü sınıflandırması projelerinden aktarılmış modeller için geçerlidir.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Öğreticiyi kullanmak için aşağıdakileri yapmanız gerekir:
 
@@ -48,7 +48,7 @@ pip install opencv-python
 import tensorflow as tf
 import os
 
-graph_def = tf.GraphDef()
+graph_def = tf.compat.v1.GraphDef()
 labels = []
 
 # These are set to the default names from exported models, update as needed.
@@ -56,7 +56,7 @@ filename = "model.pb"
 labels_filename = "labels.txt"
 
 # Import the TF graph
-with tf.gfile.GFile(filename, 'rb') as f:
+with tf.io.gfile.GFile(filename, 'rb') as f:
     graph_def.ParseFromString(f.read())
     tf.import_graph_def(graph_def, name='')
 
@@ -88,7 +88,7 @@ image = update_orientation(image)
 image = convert_to_opencv(image)
 ```
 
-### <a name="deal-with-images-with-a-dimension-1600"></a>Kenarlarından biri 1600'den küçük olan görüntülerle ilgilenme
+### <a name="handle-images-with-a-dimension-1600"></a>Bir boyutla > 1600 görüntüleri işleme
 
 ```Python
 # If the image has either w or h greater than 1600 we resize it down respecting
@@ -116,7 +116,7 @@ augmented_image = resize_to_256_square(max_square_image)
 
 ```Python
 # Get the input size of the model
-with tf.Session() as sess:
+with tf.compat.v1.Session() as sess:
     input_tensor_shape = sess.graph.get_tensor_by_name('Placeholder:0').shape.as_list()
 network_input_size = input_tensor_shape[1]
 
@@ -172,7 +172,7 @@ def update_orientation(image):
 
 ## <a name="predict-an-image"></a>Görüntü tahmininde bulunma
 
-Görüntü Tensor olarak hazırlandıktan sonra tahmin için model üzerinden gönderilebilir:
+Görüntü bir Tensor olarak hazırlandıktan sonra, bunu bir tahmine yönelik model aracılığıyla gönderebiliriz:
 
 ```Python
 
@@ -180,7 +180,7 @@ Görüntü Tensor olarak hazırlandıktan sonra tahmin için model üzerinden g�
 output_layer = 'loss:0'
 input_node = 'Placeholder:0'
 
-with tf.Session() as sess:
+with tf.compat.v1.Session() as sess:
     try:
         prob_tensor = sess.graph.get_tensor_by_name(output_layer)
         predictions, = sess.run(prob_tensor, {input_node: [augmented_image] })
@@ -210,7 +210,7 @@ Tensor görüntü model aracılığıyla çalıştırıldığında etiketlerle e
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Ardından, modelinizi mobil uygulamasına sarmalamayı öğrenin:
+Ardından, modelinizi bir mobil uygulamaya nasıl kaydıracağınızı öğrenin:
 * [Dışarı aktarılan Tensorflow modelinizi bir Android uygulamasında kullanma](https://github.com/Azure-Samples/cognitive-services-android-customvision-sample)
 * [Dışarı aktarılan CoreML modelinizi bir Swift iOS uygulamasında kullanma](https://go.microsoft.com/fwlink/?linkid=857726)
 * [Dışarı aktarılan CoreML modelinizi Xamarin ile bir iOS uygulamasında kullanma](https://github.com/xamarin/ios-samples/tree/master/ios11/CoreMLAzureModel)

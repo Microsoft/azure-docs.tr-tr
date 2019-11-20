@@ -1,10 +1,10 @@
 ---
-title: Azure CLI örneği - Azure İzleyicisi'ni çalıştıran bir Azure VM oluşturma | Microsoft Docs
-description: Azure CLI örneği - Windows Server 2016 VM ve Azure İzleyicisi'ni çalıştıran bir Azure VM oluşturma.
+title: Azure CLı örneği-Azure Izleyici çalıştıran bir Azure VM oluşturma
+description: Azure CLı örneği-Windows Server 2016 VM ve Azure Izleyici çalıştıran bir Azure VM oluşturma.
 services: virtual-machines-Windows
 documentationcenter: virtual-machines
 author: rickstercdn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: ''
 ms.assetid: ''
@@ -16,14 +16,14 @@ ms.workload: infrastructure
 ms.date: 02/23/2017
 ms.author: rclaus
 ms.custom: mvc,seodec18
-ms.openlocfilehash: 2565433b8f42a3b81b843a972dd27850cce124b8
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 77c5996a11b5223778bf0efbe33250f0db9f74f3
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60505759"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74039903"
 ---
-# <a name="monitor-a-vm-with-azure-monitor-logs"></a>Azure İzleyici günlükleri ile bir VM izleme
+# <a name="monitor-a-vm-with-azure-monitor-logs"></a>Azure Izleyici günlükleri ile VM izleme
 
 Bu betik bir Azure Sanal Makinesi oluşturur, Log Analytics aracısını yükler ve sistemi bir Log Analytics çalışma alanına kaydeder. Betik çalıştıktan sonra sanal makine Azure İzleme’de görünür.
 

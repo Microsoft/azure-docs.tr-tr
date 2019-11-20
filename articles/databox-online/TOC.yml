@@ -1,4 +1,4 @@
-- name: Azure Data Box Belgeleri - Çevrimiçi Aktarım
+- name: Azure Stack Edge ve Data Box Gateway Belgeleri
   href: /azure/databox-online/
   expanded: true
 - name: Data Box Gateway
@@ -47,17 +47,21 @@
           href: data-box-gateway-monitor.md
         - name: Sorun giderme
           href: data-box-gateway-troubleshoot.md
+        - name: Microsoft Desteği’ne başvurma
+          href: data-box-edge-contact-microsoft-support.md
     - name: Sürüm notları
       items:
-        - name: 1905 - Geçerli
+        - name: 1906 - Geçerli
+          href: data-box-gateway-1906-release-notes.md
+        - name: 1905
           href: data-box-gateway-1905-release-notes.md
-        - name: Genel kullanılabilirlik
+        - name: Genel kullanılabilirlik (GA)
           href: data-box-gateway-release-notes.md
-- name: Data Box Edge
+- name: Azure Stack Edge
   items:
     - name: Genel Bakış
       items:
-        - name: Azure Data Box Edge nedir?
+        - name: Azure Stack Edge nedir?
           href: data-box-edge-overview.md
     - name: Öğreticiler
       items:
@@ -105,21 +109,25 @@
               href: data-box-edge-connect-powershell-interface.md
         - name: Sorun giderme
           href: data-box-edge-troubleshoot.md
+        - name: Microsoft Desteği’ne başvurma
+          href: data-box-edge-contact-microsoft-support.md
         - name: İzleme
           href: data-box-edge-monitor.md
-        - name: Cihazın iade edilmesi
+        - name: Cihazı iade etme veya değiştirme
           href: data-box-edge-return-device.md
     - name: Sürüm notları
       items:
-        - name: 1905 - Geçerli
+        - name: 1906 - Geçerli
+          href: data-box-gateway-1906-release-notes.md
+        - name: 1905
           href: data-box-gateway-1905-release-notes.md
-        - name: Genel kullanılabilirlik
+        - name: Genel kullanılabilirlik (GA)
           href: data-box-gateway-release-notes.md
 - name: Kaynaklar
   items:
-    - name: 'Data Box Edge C# modülü örnekleri (.NET)'
+    - name: 'Azure Stack Edge C# modülü örnekleri (.NET)'
       href: 'https://azure.microsoft.com/resources/samples/data-box-edge-csharp-modules/'
-    - name: Data Box Edge/Gateway ürünü
+    - name: Azure Stack Edge/Data Box Gateway ürünü
       href: 'https://azure.microsoft.com/services/storage/databox/edge/'
     - name: Fiyatlandırma
       href: 'https://azure.microsoft.com/pricing/details/storage/databox/edge/'

@@ -1,6 +1,6 @@
 ---
-title: Veeam ile yedekleme hedefi olarak StorSimple 8000 serisi | Microsoft Docs
-description: Veeam ile StorSimple yedekleme hedefi yapılandırmayı açıklar.
+title: Veead ile bir yedekleme hedefi olarak StorSimple 8000 serisi | Microsoft Docs
+description: Veead ile StorSimple yedekleme hedefi yapılandırmasını açıklar.
 services: storsimple
 documentationcenter: ''
 author: harshakirank
@@ -13,446 +13,446 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 12/06/2016
-ms.author: hkanna
-ms.openlocfilehash: e7659cca9081834d41f64ef0fbd8ea3686044bfd
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: matd
+ms.openlocfilehash: 3ebf464fed1480e7452f246f04f3906faf0dd219
+ms.sourcegitcommit: 13d5eb9657adf1c69cc8df12486470e66361224e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60634085"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "67875309"
 ---
-# <a name="storsimple-as-a-backup-target-with-veeam"></a>Yedekleme hedefi olarak Veeam ile StorSimple
+# <a name="storsimple-as-a-backup-target-with-veeam"></a>Veead ile yedekleme hedefi olarak StorSimple
 
 ## <a name="overview"></a>Genel Bakış
 
-Azure StorSimple bir Microsoft karma bulut depolama çözümüdür. StorSimple, şirket içi depolama ve bulut depolama arasında otomatik katmanlama veri ve şirket içi çözümün bir uzantısı olarak Azure depolama hesabı kullanarak üstel veri büyümesi karmaşıklığını yöneliktir.
+Azure StorSimple, Microsoft 'un sunduğu bir karma bulut depolama çözümüdür. StorSimple, şirket içi çözümün uzantısı olarak bir Azure depolama hesabı kullanarak üstel veri artışına ilişkin karmaşıklıkları giderir ve şirket içi depolama ve bulut depolama genelindeki verileri otomatik olarak katmanlama.
 
-Bu makalede, StorSimple tümleştirmesiyle Veeam ve her iki çözüm de tümleştirmeye yönelik en iyi uygulamalar ele alır. Biz de en iyi StorSimple ile tümleştirmek için Veeam konusunda önerilerde. Veeam en iyi yöntemleri, yedekleme mimarlar ve Yöneticiler için ayrı ayrı yedekleme gereksinimlerini ve hizmet düzeyi sözleşmelerine (SLA) karşılamak üzere Veeam ayarlamak en iyi yolu erteleyin.
+Bu makalede, Veeam ile StorSimple tümleştirmesini ve her iki çözümü tümleştirmek için en iyi uygulamaları tartıştık. Ayrıca, StorSimple ile en iyi tümleşecek şekilde Veead 'yi ayarlama önerileri de sunuyoruz. Tek tek yedekleme gereksinimlerini ve hizmet düzeyi sözleşmelerini (SLA 'Lar) karşılamak üzere Veead 'yi ayarlamak için en iyi yol için Veeak en iyi uygulamaları, yedekleme mimarları ve yöneticileri erteliyoruz.
 
-Biz yapılandırma adımları ve temel kavramları göstermek olsa da, bu makalede göre Hayır olmadığı bir adım adım yapılandırma veya yükleme kılavuzudur. Temel bileşenlere ve altyapılara çalışma sırası ve açıklanmaktadır kavramları desteklemeye hazır olduğunu varsayıyoruz.
+Yapılandırma adımlarını ve temel kavramları gösterdiğimiz halde bu makalede, adım adım bir yapılandırma veya Yükleme Kılavuzu olması gerekir. Temel bileşenlerin ve altyapının çalışma sırasında olduğunu ve tanımladığımız kavramları desteklemeye hazırlandığını varsayalım.
 
-### <a name="who-should-read-this"></a>Bu kimler içindir?
+### <a name="who-should-read-this"></a>Bunu kimler okumalı?
 
-Bu makaledeki bilgiler, yedekleme yöneticilerinin, depolama yöneticilerinin ve depolama, Windows Server 2012 R2, Ethernet, bulut Hizmetleri ve Veeam bilgisine sahip depolama mimarları için en faydalı olacaktır.
+Bu makaledeki bilgiler, depolama, Windows Server 2012 R2, Ethernet, bulut hizmetleri ve Veead hakkında bilgi sahibi olan yedekleme yöneticileri, depolama yöneticileri ve depolama mimarları için en yararlı olacaktır.
 
 ### <a name="supported-versions"></a>Desteklenen sürümler
 
--   Veeam 9 ve sonraki sürümler
--   [StorSimple güncelleştirme 3 ve sonraki sürümler](storsimple-overview.md#storsimple-workload-summary)
+-   Veead 9 ve sonraki sürümler
+-   [StorSimple güncelleştirme 3 ve sonraki sürümleri](storsimple-overview.md#storsimple-workload-summary)
 
 
 ## <a name="why-storsimple-as-a-backup-target"></a>Neden bir yedekleme hedefi olarak StorSimple?
 
-StorSimple yedekleme hedefi için iyi bir seçimdir çünkü:
+StorSimple, yedekleme hedefi için iyi bir seçimdir çünkü:
 
--   Bu, herhangi bir değişiklik yapmadan bir hızlı yedekleme hedefi olarak kullanmak üzere yedekleme uygulamaları için standart, yerel depolama sağlar. StorSimple, son yedeklemelerin hızlı geri yükleme için de kullanabilirsiniz.
--   Bulut katmanlaması Hesaplı Azure depolama kullanmak için bir Azure bulut depolama hesabıyla sorunsuz bir şekilde tümleşiktir.
--   Otomatik olarak site dışında depolama için olağanüstü durum kurtarma sağlar.
+-   Yedekleme uygulamaları için, hiçbir değişiklik yapılmadan hızlı yedekleme hedefi olarak kullanılacak standart, yerel depolama alanı sağlar. Ayrıca, son yedeklemelerin hızlı bir şekilde geri yüklenmesi için StorSimple 'ı kullanabilirsiniz.
+-   Bulut katmanlaması, uygun maliyetli Azure depolama alanı kullanmak için bir Azure bulut depolama hesabıyla sorunsuzca tümleşiktir.
+-   Olağanüstü durum kurtarma için otomatik olarak şirket dışı depolama sağlar.
 
 
 ## <a name="key-concepts"></a>Önemli kavramlar
 
-Bir depolama çözümü olarak, çözümün depolama performansını SLA'lar, dikkatli bir değerlendirme ile değiştirin ve kapasite büyüme ihtiyacını başarısı için kritik hızıdır. Buradaki ana fikir, erişim zamanları ve aktarım hızı bulut play kullanılabilmesi için StorSimple yeteneklerini temel bir rol, bir bulut katmanı sunarak olmasıdır.
+Herhangi bir depolama çözümünde olduğu gibi, çözümün depolama performansına, SLA 'Lara, değişiklik hızına ve kapasite büyüme ihtiyaçlarına yönelik dikkatli bir değerlendirme, başarılı olması için kritik öneme sahiptir. Ana fikir, bir bulut katmanı ile tanışın, erişim zamanlarınız ve işlerinizin buluta, işini yapmak için StorSimple özelliği sayesinde temel bir rol oynar.
 
-StorSimple, verilerin (sık erişimli veriler) iyi tanımlanmış çalışma kümesinde çalışan uygulamalar için depolama sağlamak için tasarlanmıştır. Bu modelde, veri çalışma kümesini yerel katmanlarda depolanır ve kalan çalışma dışı/soğuk/arşivlenen veri kümesi, buluta katmanlı. Bu model aşağıdaki şekilde temsil edilir. Neredeyse Düz yeşil çizginin StorSimple cihaz yerel katmanlarda üzerinde depolanan verileri temsil eder. Kırmızı çizgi, tüm katmanlarda StorSimple çözümünde depolanan verilerin toplam miktarı temsil eder. Düz yeşil çizginin üssel kırmızı bir eğri arasındaki boşluk, bulutta depolanan verilerin toplam miktarı temsil eder.
+StorSimple, iyi tanımlanmış bir çalışma verileri kümesi (sık kullanılan veriler) üzerinde çalışan uygulamalara depolama sağlamak için tasarlanmıştır. Bu modelde, çalışma verileri yerel katmanlara depolanır ve kalan çalışma dışı/soğuk/arşivlenmiş veri kümesi buluta katmanlı. Bu model aşağıdaki şekilde temsil edilir. Neredeyse düz yeşil çizgi, StorSimple cihazının yerel katmanlarında depolanan verileri temsil eder. Kırmızı çizgi, tüm katmanlar genelinde StorSimple çözümünde depolanan toplam veri miktarını temsil eder. Düz yeşil çizgi ile üstel kırmızı eğri arasındaki boşluk, bulutta depolanan toplam veri miktarını temsil eder.
 
 **StorSimple katmanlama**
 ![StorSimple katmanlama diyagramı](./media/storsimple-configure-backup-target-using-veeam/image1.jpg)
 
-Bu mimari ile StorSimple yedekleme hedefi çalışmak için idealdir olduğunu bulabilirsiniz. StorSimple için kullanabilirsiniz:
+Bu mimari göz önünde bulundurularak, StorSimple 'ın yedekleme hedefi olarak çalışacak şekilde uygun olduğunu fark edersiniz. StorSimple kullanarak şunları yapabilirsiniz:
 
--   En sık rastlanan yüklemeleriniz, verileri yerel çalışma kümesinden gerçekleştirin.
--   Bulut, geri yükleme işlemleri daha az sıklıkta olduğu site dışı olağanüstü durum kurtarma ve daha eski verileri için kullanın.
+-   Yerel çalışma kümesinden en sık geri yükleme işlemini gerçekleştirin.
+-   Şirket dışı olağanüstü durum kurtarma ve daha eski veriler için bulutu kullanarak geri yüklemeler daha sık sık kullanılır.
 
 ## <a name="storsimple-benefits"></a>StorSimple avantajları
 
-StorSimple, şirket içi sorunsuz erişim avantajlarından yararlanarak Microsoft Azure ile sorunsuz bir şekilde tümleştirilmiş bir şirket içi çözümü sağlar ve bulut depolama.
+StorSimple, şirket içi ve bulut depolamaya sorunsuz erişimin avantajlarından yararlanarak Microsoft Azure ile sorunsuz bir şekilde tümleştirilmiş şirket içi bir çözüm sunar.
 
-StorSimple, otomatik katmanlama (SSD) katı hal cihaz ve seri ekli SCSI (SAS) depolama olan şirket içi cihaz ve Azure depolama kullanır. Otomatik katmanlama sık erişilen verileri SSD ve SAS katmanlarda yerel tutar. Bu, nadiren erişilen veriler Azure depolama alanına taşınır.
+StorSimple, katı hal cihazı (SSD) ve seri ekli SCSI (SAS) depolama alanı ve Azure depolama ile şirket içi cihaz arasında otomatik katmanlama kullanır. Otomatik katmanlama, SSD ve SAS katmanlarında sık erişilen verileri yerel olarak korur. Seyrek erişilen verileri Azure depolama 'ya taşıdığından.
 
-StorSimple, bu avantajlar sunar:
+StorSimple şu avantajları sunar:
 
--   Eşi görülmemiş bir yinelenen verileri kaldırma seviyelerine ulaşmasını sağlamak için bulut kullanan benzersiz yinelenenleri kaldırma ve sıkıştırma algoritmaları
+-   Yinelenenleri kaldırma düzeyleri elde etmek için bulutu kullanan benzersiz yinelenenleri kaldırma ve sıkıştırma algoritmaları
 -   Yüksek kullanılabilirlik
 -   Azure coğrafi çoğaltma kullanarak coğrafi çoğaltma
--   Azure tümleştirme
+-   Azure tümleştirmesi
 -   Bulutta veri şifreleme
--   Geliştirilmiş olağanüstü durum kurtarma ve uyumluluk
+-   İyileştirilmiş olağanüstü durum kurtarma ve uyumluluk
 
-StorSimple temelde iki ana dağıtım senaryoları (birincil yedekleme hedefi ve ikincil yedekleme hedefi) gösterir, ama düz, blok depolama cihazı vardır. StorSimple sıkıştırma yapar ve yinelenenleri kaldırma. Sorunsuz bir şekilde gönderir ve bulut uygulama ve dosya sistemi arasındaki verileri alır.
+StorSimple, temelde iki ana dağıtım senaryosu (birincil yedekleme hedefi ve ikincil yedekleme hedefi) sunmakla birlikte, düz, blok depolama cihazından oluşan bir Işlemdir. StorSimple, tüm sıkıştırma ve yinelenenleri kaldırma işlemi yapar. Bulut ile uygulama ve dosya sistemi arasında sorunsuz bir şekilde veri gönderir ve alır.
 
-StorSimple hakkında daha fazla bilgi için bkz: [StorSimple 8000 serisi: Hibrit bulut depolaması çözümü](storsimple-overview.md). Ayrıca, gözden geçirebilirsiniz [teknik StorSimple 8000 serisi özellikleri](storsimple-technical-specifications-and-compliance.md).
+StorSimple hakkında daha fazla bilgi için bkz [. StorSimple 8000 serisi: Karma bulut depolama çözümü](storsimple-overview.md). Ayrıca, [Teknik StorSimple 8000 serisi belirtimlerini](storsimple-technical-specifications-and-compliance.md)inceleyebilirsiniz.
 
 > [!IMPORTANT]
-> Bir StorSimple kullanarak cihaz yedekleme hedefi olarak yalnızca StorSimple 8000 güncelleştirme 3 ve sonraki sürümlerinde desteklenir.
+> Bir StorSimple cihazının yedekleme hedefi olarak kullanılması yalnızca StorSimple 8000 güncelleştirme 3 ve sonraki sürümlerinde desteklenir.
 
 ## <a name="architecture-overview"></a>Mimariye genel bakış
 
-Aşağıdaki tablolar, cihaz modeli mimarisi başlangıç düzeyi bir kılavuz gösterir.
+Aşağıdaki tablolarda cihaz modelden mimari ilk kılavuz gösterilmektedir.
 
-**Yerel için StorSimple kapasiteler ve bulut depolama**
+**Yerel ve bulut depolama için StorSimple kapasiteleri**
 
 | Depolama kapasitesi | 8100 | 8600 |
 |---|---|---|
-| Yerel depolama kapasitesi | &lt; 10 TiB\*  | &lt; 20 TiB\*  |
-| Bulut depolama kapasitesi | &gt; 200 TiB\* | &gt; 500 TiB\* |
+| Yerel depolama kapasitesi | &lt;10 TiB\*  | &lt;20 TiB\*  |
+| Bulut depolama kapasitesi | &gt;200 TiB\* | &gt;500 TiB\* |
 
-\* Depolama boyutu, yinelenenleri kaldırma ya da sıkıştırma varsayar.
+\*Depolama boyutu, yinelenenleri kaldırma veya sıkıştırma olmadığını varsayar.
 
-**Birincil ve ikincil yedeklemeleri için StorSimple kapasiteler**
+**Birincil ve ikincil yedeklemeler için StorSimple kapasiteleri**
 
 | Yedekleme senaryosu  | Yerel depolama kapasitesi  | Bulut depolama kapasitesi  |
 |---|---|---|
-| Birincil yedekleme  | Kurtarma noktası hedefi (RPO) karşılayacak şekilde son yedeklemelerin Hızlı Kurtarma için yerel depolamada depolanan | Yedekleme geçmişi (RPO) en uygun bulut kapasite |
-| İkincil yedekleme | İkincil kopya yedekleme verilerinin bulut kapasite depolanabilir.  | Yok  |
+| Birincil yedekleme  | Kurtarma noktası hedefini (RPO) karşılamak üzere hızlı kurtarma için yerel depolama alanında depolanan son yedeklemeler | Yedekleme geçmişi (RPO) bulut kapasitesine uyar |
+| İkincil yedekleme | Yedekleme verilerinin ikincil kopyası, bulut kapasitesinde depolanabilir  | Yok  |
 
 ## <a name="storsimple-as-a-primary-backup-target"></a>Birincil yedekleme hedefi olarak StorSimple
 
-Bu senaryoda, StorSimple birimlerini yedekleme uygulamasına yedeklemeler için tek depo olarak sunulur. Aşağıdaki şekil içinde tüm yedeklemeler kullanım StorSimple katmanlı birimleri yedekleme ve geri yüklemeler için bir çözüm mimarisini göstermektedir.
+Bu senaryoda, StorSimple birimleri yedekleme uygulamasına yedeklemeler için tek depo olarak sunulur. Aşağıdaki şekilde, tüm yedeklemelerin yedeklemeler ve geri yüklemeler için StorSimple katmanlı birimler kullanıldığı bir çözüm mimarisi gösterilmektedir.
 
-![Mantıksal Diyagram birincil yedekleme hedefi olarak StorSimple](./media/storsimple-configure-backup-target-using-veeam/primarybackuptargetlogicaldiagram.png)
+![Birincil yedekleme hedefi mantıksal diyagramı olarak StorSimple](./media/storsimple-configure-backup-target-using-veeam/primarybackuptargetlogicaldiagram.png)
 
-### <a name="primary-target-backup-logical-steps"></a>Birincil hedef yedekleme mantıksal adımlara
+### <a name="primary-target-backup-logical-steps"></a>Birincil hedef yedekleme mantıksal adımları
 
-1.  Hedef Yedekleme aracısı yedekleme sunucusu ile iletişim kurar ve yedekleme aracısını veri yedekleme sunucusuna iletir.
-2.  StorSimple için verileri yedekleme sunucusuna Yazar katmanlı birimler.
-3.  Yedekleme sunucusuna katalog veritabanını güncelleştirir ve ardından yedekleme işi tamamlandıktan.
-4.  Anlık görüntü betik StorSimple bulut anlık görüntü Yöneticisi (başlatma veya silme) tetiklenir.
-5.  Yedekleme sunucusuna bir bekletme ilkesi temel alınarak süresi dolmuş yedeklemeleri siler.
+1.  Yedekleme sunucusu hedef yedekleme aracısıyla iletişim kurar ve yedekleme Aracısı verileri yedekleme sunucusuna iletir.
+2.  Yedekleme sunucusu StorSimple katmanlı birimlere veri yazar.
+3.  Yedekleme sunucusu, katalog veritabanını güncelleştirir ve ardından yedekleme işini sonlandırır.
+4.  Bir Snapshot betiği StorSimple bulut anlık görüntü yöneticisi 'ni (başlangıç veya silme) tetikler.
+5.  Yedekleme sunucusu, bir bekletme ilkesine göre süresi biten yedeklemeleri siler.
 
-### <a name="primary-target-restore-logical-steps"></a>Birincil hedef geri yükleme mantıksal adımlara
+### <a name="primary-target-restore-logical-steps"></a>Birincil hedef geri yükleme mantıksal adımları
 
-1.  Yedek sunucu uygun verileri depolama depodan geri başlatır.
-2.  Yedekleme aracısı yedekleme sunucusundan verileri alır.
-3.  Yedekleme sunucusuna geri yükleme işi tamamlar.
+1.  Yedekleme sunucusu, depolama deposundan uygun verileri geri yüklemeye başlar.
+2.  Yedekleme aracısı, yedekleme sunucusundan verileri alır.
+3.  Yedekleme sunucusu geri yükleme işini sonlandırır.
 
 ## <a name="storsimple-as-a-secondary-backup-target"></a>İkincil yedekleme hedefi olarak StorSimple
 
-Bu senaryoda, StorSimple birimlerini öncelikli olarak uzun süreli saklama veya arşivleme için kullanılır.
+Bu senaryoda, StorSimple birimleri öncelikle uzun süreli saklama veya arşivleme için kullanılır.
 
-Aşağıdaki şekil, ilk hangi yedeklemelerde bir mimari gösterilir ve yüksek performanslı hedef birim geri yükler. Bu yedeklemeler kopyalanır ve arşivlenmiş bir StorSimple için katmanlı birim üzerinde ayarlanmış bir planlamada.
+Aşağıdaki şekilde, ilk yedeklemelerin ve geri yüklemeler için yüksek performanslı bir birimin hedeflemesini gösteren bir mimari gösterilmektedir. Bu yedeklemeler, küme zamanlamasında bir StorSimple katmanlı birime kopyalanır ve arşivlenir.
 
-Bekletme İlkesi kapasite ve performans gereksinimlerinizi işleyebilmeniz yüksek performanslı toplu boyutlandırmak önemlidir.
+Yüksek performanslı haciminizi, bekletme ilkesi kapasitenizi ve performans gereksinimlerinizi işleyebilecek şekilde boyutlandırmamak önemlidir.
 
-![Mantıksal Diyagram ikincil yedekleme hedefi olarak StorSimple](./media/storsimple-configure-backup-target-using-veeam/secondarybackuptargetlogicaldiagram.png)
+![İkincil yedekleme hedefi mantıksal diyagramı olarak StorSimple](./media/storsimple-configure-backup-target-using-veeam/secondarybackuptargetlogicaldiagram.png)
 
-### <a name="secondary-target-backup-logical-steps"></a>İkincil hedef yedekleme mantıksal adımlara
+### <a name="secondary-target-backup-logical-steps"></a>İkincil hedef yedekleme mantıksal adımları
 
-1.  Hedef Yedekleme aracısı yedekleme sunucusu ile iletişim kurar ve yedekleme aracısını veri yedekleme sunucusuna iletir.
-2.  Backup sunucusu, yüksek performanslı depolama alanına verileri yazar.
-3.  Yedekleme sunucusuna katalog veritabanını güncelleştirir ve ardından yedekleme işi tamamlandıktan.
-4.  Backup sunucusu yedekleme bekletme ilkesi temel alınarak StorSimple kopyalar.
-5.  Anlık görüntü betik StorSimple bulut anlık görüntü Yöneticisi (başlatma veya silme) tetiklenir.
-6.  Yedekleme sunucusuna bir bekletme ilkesi temel alınarak süresi dolmuş yedeklemeleri siler.
+1.  Yedekleme sunucusu hedef yedekleme aracısıyla iletişim kurar ve yedekleme Aracısı verileri yedekleme sunucusuna iletir.
+2.  Yedekleme sunucusu, verileri yüksek performanslı depolamaya yazar.
+3.  Yedekleme sunucusu, katalog veritabanını güncelleştirir ve ardından yedekleme işini sonlandırır.
+4.  Yedekleme sunucusu yedeklemeleri bir bekletme ilkesine göre StorSimple 'a kopyalar.
+5.  Bir Snapshot betiği StorSimple bulut anlık görüntü yöneticisi 'ni (başlangıç veya silme) tetikler.
+6.  Yedekleme sunucusu, bir bekletme ilkesine göre süresi biten yedeklemeleri siler.
 
-### <a name="secondary-target-restore-logical-steps"></a>İkincil hedef geri yükleme mantıksal adımlara
+### <a name="secondary-target-restore-logical-steps"></a>İkincil hedef geri yükleme mantıksal adımları
 
-1.  Yedek sunucu uygun verileri depolama depodan geri başlatır.
-2.  Yedekleme aracısı yedekleme sunucusundan verileri alır.
-3.  Yedekleme sunucusuna geri yükleme işi tamamlar.
+1.  Yedekleme sunucusu, depolama deposundan uygun verileri geri yüklemeye başlar.
+2.  Yedekleme aracısı, yedekleme sunucusundan verileri alır.
+3.  Yedekleme sunucusu geri yükleme işini sonlandırır.
 
 ## <a name="deploy-the-solution"></a>Çözümü dağıtma
 
-Çözüm dağıtımı, üç adımı gerektirir:
+Çözümü dağıtmak için üç adım gerekir:
 
 1. Ağ altyapısını hazırlayın.
-2. Bir yedekleme hedefi olarak StorSimple Cihazınızı dağıtma.
-3. Veeam dağıtın.
+2. StorSimple cihazınızı bir yedekleme hedefi olarak dağıtın.
+3. Veead 'yi dağıtın.
 
-Her adım, aşağıdaki bölümlerde ayrıntılı olarak ele alınmıştır.
+Her adım aşağıdaki bölümlerde ayrıntılı olarak ele alınmıştır.
 
 ### <a name="set-up-the-network"></a>Ağı ayarlama
 
-StorSimple, StorSimple Azure bulutla tümleşik bir çözüm olduğundan, bir etkin ve Azure bulut çalışan bağlantısı gerektirir. Katmanı için eski, daha az erişilen verileri Azure bulut depolama ve bu bağlantı, bulut anlık görüntüleri, veri yönetimi ve meta veri aktarımı gibi işlemleri için kullanılır.
+StorSimple, Azure bulutu ile tümleştirilmiş bir çözüm olduğundan, StorSimple, Azure bulutuna etkin ve çalışır bir bağlantı gerektirir. Bu bağlantı, bulut anlık görüntüleri, veri yönetimi ve meta veri aktarımı gibi işlemler için kullanılır ve daha eski, daha az erişilen verileri Azure bulut depolama alanına göre katmanlanır.
 
-Çözüm göstermesi bu ağ en iyi uygulamaları izlemenizi öneririz:
+Çözümün en iyi şekilde gerçekleştirilebilmesi için, bu ağ en iyi yöntemlerini izlemenizi öneririz:
 
--   Katmanlama, StorSimple Azure'a bağlanan bağlantı, bant genişliği gereksinimlerini karşılaması gerekir. Altyapınız için gerekli hizmet kalitesi (QoS) düzeyi uygulayarak bunu RPO ve kurtarma eşleştirilecek anahtarları süresi hedefi (RTO) SLA'lar.
--   Maksimum Azure Blob Depolama erişim gecikmeleri yaklaşık 80 ms olmalıdır.
+-   StorSimple katmanlamayı Azure 'a bağlayan bağlantı, bant genişliği gereksinimlerinize uymalıdır. RPO ve kurtarma süresi hedefi (RTO) SLA 'larınızı eşleştirmek için altyapı anahtarlarınızda gerekli hizmet kalitesi (QoS) düzeyini uygulayarak bunu elde edin.
+-   Maksimum Azure Blob depolama erişim gecikmeleri 80 MS 'de olmalıdır.
 
-### <a name="deploy-storsimple"></a>StorSimple'ı dağıtma
+### <a name="deploy-storsimple"></a>StorSimple dağıtma
 
-Adım adım StorSimple dağıtım yönergeleri için bkz. [şirket içi StorSimple Cihazınızı dağıtma](storsimple-deployment-walkthrough-u2.md).
+Adım adım StorSimple dağıtım kılavuzu için bkz. Şirket [Içi StorSimple cihazınızı dağıtma](storsimple-deployment-walkthrough-u2.md).
 
-### <a name="deploy-veeam"></a>Veeam dağıtma
+### <a name="deploy-veeam"></a>Veead 'yi dağıt
 
-Veeam yükleme en iyi yöntemler için bkz: [Veeam yedekleme ve çoğaltma en iyi](https://bp.veeam.expert/), kullanıcı Guide'a okuyup [Veeam Yardım Merkezi (teknik belgeler)](https://www.veeam.com/documentation-guides-datasheets.html).
+Veeamınstallation en iyi uygulamaları için bkz. [Veeambackup & çoğaltma En Iyi uygulamaları](https://bp.veeam.expert/), [Veeaı Yardım Merkezi (teknik belgeler)](https://www.veeam.com/documentation-guides-datasheets.html)adresindeki kullanıcı kılavuzunu okuyun.
 
 ## <a name="set-up-the-solution"></a>Çözümü ayarlama
 
-Bu bölümde, bazı yapılandırma örneği gösterilmektedir. Aşağıdaki örnekler ve öneriler, en temel ve temel uygulama gösterilmektedir. Bu uygulama, doğrudan belirli yedekleme gereksinimlerinizi için geçerli olmayabilir.
+Bu bölümde bazı yapılandırma örnekleri gösterilmektedir. Aşağıdaki örneklerde ve önerilerle en temel ve temel uygulama gösterilmektedir. Bu uygulama, özel yedekleme gereksinimlerinize doğrudan uygulanmayabilir.
 
-### <a name="set-up-storsimple"></a>StorSimple ' ayarlayın
+### <a name="set-up-storsimple"></a>StorSimple 'ı ayarlama
 
-| StorSimple dağıtım görevleri  | Ek Açıklamalar |
+| StorSimple dağıtım görevleri  | Ek açıklamalar |
 |---|---|
-| Şirket içi StorSimple Cihazınızı dağıtın. | Desteklenen sürümler: Güncelleştirme 3 ve sonraki sürümler. |
-| Yedekleme hedefi üzerinde açın. | Yedekleme hedefi modunu devre dışı bırakmak veya etkinleştirmek ve durumu almak için şu komutları kullanın. Daha fazla bilgi için [bir StorSimple cihazı uzaktan bağlanma](storsimple-remote-connect.md).</br> Yedekleme modunu açmak için: `Set-HCSBackupApplianceMode -enable`. </br> Yedekleme modunu devre dışı bırakmak için: `Set-HCSBackupApplianceMode -disable`. </br> Yedekleme modu ayarları geçerli durumunu almak için: `Get-HCSBackupApplianceMode`. |
-| Yedekleme verilerini depolayan biriminiz için ortak bir birim kapsayıcısı oluşturun. Bir birim kapsayıcısındaki tüm veriler yinelenen verileri kaldırma işlemi. | StorSimple birim kapsayıcıları, yinelenenleri kaldırma etki alanlarını tanımlayın.  |
-| StorSimple birimler oluşturun. | Birim boyutu bulut anlık görüntü süresini etkilediğinden birimler öngörülen kullanımınıza yakın boyutlarıyla mümkün olduğunca oluşturun. Bir birimi boyutu hakkında daha fazla bilgi için okuyun [bekletme ilkeleri](#retention-policies).</br> </br> StorSimple kullanın, katmanlı birimleri ve seçin **bu birimi daha az sıklıkta erişilen arşiv verileri için kullanın** onay kutusu. </br> Yerel olarak sabitlenmiş birimler yalnızca kullanılması desteklenmiyor. |
-| Tüm yedekleme hedefi birimler için benzersiz bir StorSimple yedekleme ilkesi oluşturun. | Bir StorSimple yedekleme ilkesine birim tutarlılık grubu tanımlar. |
-| Anlık görüntülerin süresi dolduğundan zamanlama devre dışı bırakın. | Anlık bir işlem sonrası bir işlem olarak tetiklenir. |
+| Şirket içi StorSimple cihazınızı dağıtın. | Desteklenen sürümler: Güncelleştirme 3 ve sonraki sürümleri. |
+| Yedekleme hedefini açın. | Yedekleme hedefi modunu açmak veya kapatmak ve durum almak için bu komutları kullanın. Daha fazla bilgi için bkz. [StorSimple cihazına uzaktan bağlanma](storsimple-remote-connect.md).</br> Yedekleme modunu açmak için: `Set-HCSBackupApplianceMode -enable`. </br> Yedekleme modunu devre dışı bırakmak için `Set-HCSBackupApplianceMode -disable`:. </br> Yedekleme modu ayarlarının geçerli durumunu almak için: `Get-HCSBackupApplianceMode`. |
+| Yedekleme verilerini depolayan biriminiz için ortak bir birim kapsayıcısı oluşturun. Bir birim kapsayıcısındaki tüm veriler yinelenenleri kaldırılmış. | StorSimple birim kapsayıcıları yinelenenleri kaldırma etki alanlarını tanımlar.  |
+| StorSimple birimleri oluşturun. | Birim boyutu bulut anlık görüntü süresi süresini etkilediğinden, boyutları beklenen kullanım için yakın olan birimler oluşturun. Bir birimin nasıl boyutlandıralınacağını öğrenmek için [bekletme ilkeleri](#retention-policies)hakkında bilgi edinin.</br> </br> StorSimple katmanlı birimleri kullanın ve **Bu birimi daha az sıklıkta erişilen arşiv verileri Için kullan** onay kutusunu seçin. </br> Yalnızca yerel olarak sabitlenmiş birimlerin kullanılması desteklenmez. |
+| Tüm yedekleme hedefi birimleri için benzersiz bir StorSimple yedekleme ilkesi oluşturun. | Bir StorSimple yedekleme ilkesi, birim tutarlılığı grubunu tanımlar. |
+| Anlık görüntülerin süre dolduğunda zamanlamayı devre dışı bırakın. | Anlık görüntüler, işlem sonrası bir işlem olarak tetiklenir. |
 
-### <a name="set-up-the-host-backup-server-storage"></a>Konak sunucu yedekleme depolama alanı ayarlama
+### <a name="set-up-the-host-backup-server-storage"></a>Konak yedekleme sunucusu depolamayı ayarlama
 
-Bu yönergelere göre konak yedek sunucu depolama ayarlayın:  
+Konak yedekleme sunucusu depolamayı şu yönergelere göre ayarlayın:  
 
-- Dağıtılmış birimler (Windows Disk Management tarafından oluşturulan) kullanmayın. Dağıtılmış birimler desteklenmez.
-- NTFS ile 64 KB ayırma birimi boyutu kullanarak, birimleri biçimlendirin.
-- StorSimple birimlerini Veeam sunucunun doğrudan eşleyin.
-    - Fiziksel sunucuları için iSCSI kullanın.
+- Yayılmış birimleri kullanmayın (Windows disk yönetimi tarafından oluşturulur). Yayılmış birimler desteklenmez.
+- Hacimlerinizi, 64 KB ayırma birimi boyutuyla NTFS kullanarak biçimlendirin.
+- StorSimple birimlerini doğrudan Veead sunucusuna eşleyin.
+    - Fiziksel sunucular için Iscsı kullanın.
 
 
-## <a name="best-practices-for-storsimple-and-veeam"></a>StorSimple ve Veeam için en iyi uygulamalar
+## <a name="best-practices-for-storsimple-and-veeam"></a>StorSimple ve Veead için en iyi uygulamalar
 
-Çözümünüzü aşağıdaki yönergelere göre ayarlama birkaç bölümler.
+Çözümünüzü aşağıdaki birkaç bölümde bulunan yönergelere göre ayarlayın.
 
-### <a name="operating-system-best-practices"></a>İşletim sistemi en iyi uygulamalar
+### <a name="operating-system-best-practices"></a>İşletim sistemi en iyi uygulamaları
 
-- Windows Server şifreleme ve yinelenenleri kaldırma NTFS dosya sistemi devre dışı bırakın.
-- Windows Server birleştirme StorSimple birimlerde devre dışı bırakın.
-- Windows Server StorSimple birimlerde dizin oluşturmayı devre dışı bırakın.
-- Kaynak ana bilgisayar (değil karşı StorSimple birimlerini) bir virüsten koruma taraması çalıştırın.
-- Varsayılan devre dışı kapatma [Windows Server bakım](https://msdn.microsoft.com/library/windows/desktop/hh848037.aspx) Görev Yöneticisi'nde. Bu aşağıdaki yollardan birini yapın:
-  - Windows Görev Zamanlayıcısı'nda bakım configurator devre dışı bırakın.
-  - İndirme [PsExec](https://technet.microsoft.com/sysinternals/bb897553.aspx) Windows SysInternals öğesinden. PsExec indirdikten sonra Windows PowerShell bir Yöneticiyseniz ve türü çalıştırın:
+- NTFS dosya sistemi için Windows Server şifrelemesini ve Yinelenenleri kaldırmayı devre dışı bırakın.
+- StorSimple birimlerinde Windows Server birleştirmesini devre dışı bırakın.
+- StorSimple birimlerinde Windows Server dizinlemeyi devre dışı bırakın.
+- Kaynak konakta (StorSimple birimlerine karşı değil) bir virüsten koruma taraması çalıştırın.
+- Görev Yöneticisi 'nde varsayılan [Windows Server bakımını](https://msdn.microsoft.com/library/windows/desktop/hh848037.aspx) devre dışı bırakın. Bunu aşağıdaki yollarla yapın:
+  - Windows Görev Zamanlayıcı 'de bakım yapılandırıcısını kapatın.
+  - Windows Sysinternals 'dan [PsExec](https://technet.microsoft.com/sysinternals/bb897553.aspx) 'yi indirin. PsExec indirdikten sonra, Windows PowerShell 'i yönetici olarak çalıştırın ve şunu yazın:
     ```powershell
     psexec \\%computername% -s schtasks /change /tn “MicrosoftWindowsTaskSchedulerMaintenance Configurator" /disable
     ```
 
-### <a name="storsimple-best-practices"></a>StorSimple en iyi uygulamalar
+### <a name="storsimple-best-practices"></a>StorSimple en iyi uygulamaları
 
--   StorSimple cihazı için güncelleştirildiğinden emin olun [güncelleştirme 3 veya üzeri](storsimple-install-update-3.md).
--   Yalıtım iSCSI ve bulut trafiği. StorSimple ve backup sunucusu arasındaki trafiği adanmış iSCSI bağlantıları kullanın.
--   StorSimple Cihazınızı adanmış bir yedekleme hedefi olduğundan emin olun. RTO ve RPO etkilediğinden, karma iş yükleri desteklenmez.
+-   StorSimple cihazının [güncelleştirme 3 veya sonraki bir sürüme](storsimple-install-update-3.md)güncelleştirildiğinden emin olun.
+-   Iscsı ve bulut trafiğini yalıtın. StorSimple ve Backup sunucusu arasındaki trafik için adanmış Iscsı bağlantıları kullanın.
+-   StorSimple cihazınızın ayrılmış bir yedekleme hedefi olduğundan emin olun. RTO ve RPO 'larınızı etkilediği için karışık iş yükleri desteklenmez.
 
-### <a name="veeam-best-practices"></a>Veeam en iyi uygulamalar
+### <a name="veeam-best-practices"></a>Veead en iyi uygulamaları
 
--   Veeam veritabanı, yerel sunucuya ve bir StorSimple biriminde değil.
--   Olağanüstü durum kurtarma için bir StorSimple birimde Veeam veritabanını yedekleyin.
--   Bu çözüm için Veeam tam ve artımlı yedeklemeler destekliyoruz. Yapay ve farklı yedeklemelerini kullanmamanızı öneririz.
--   Yedek veri dosyaları, yalnızca belirli bir işin verileri içermelidir. Örneğin, arasında medya ekler farklı işleri izin verilir.
--   İş doğrulama devre dışı bırakın. Gerekirse, en son yedekleme işinden sonra doğrulama zamanlanmalıdır. Bu iş, Yedekleme penceresi etkileyeceğini anlamak önemlidir.
--   Medya öncesi ayırmada açın.
--   Paralel işleme açık olduğundan emin olun.
--   Sıkıştırma devre dışı bırakın.
--   Yinelenenleri kaldırmayı yedekleme işini devre dışı bırakın.
--   Kümesine iyileştirme **LAN hedef**.
--   Açma **oluşturma etkin tam yedekleme** (2 haftada bir).
--   Yedekleme deposunu ayarlayın **VM başına yedekleme dosyalarını kullanın**.
--   Ayarlama **iş başına birden fazla karşıya yükleme akışları kullanan** için **8** (en fazla 16 izin). Bu sayı, StorSimple cihazında CPU kullanımına göre yukarı veya aşağı ayarlayın.
+-   Veeab veritabanı sunucuda yerel olmalıdır ve StorSimple biriminde yer almalıdır.
+-   Olağanüstü durum kurtarma için, Veead veritabanını bir StorSimple biriminde yedekleyin.
+-   Bu çözüm için Veeak tam ve artımlı yedeklemeleri destekliyoruz. Yapay ve değişiklik yedeklemeleri kullanmanızı öneririz.
+-   Yedekleme veri dosyaları yalnızca belirli bir iş için verileri içermelidir. Örneğin, farklı işlere hiçbir medya ekleme yapılmasına izin verilmez.
+-   İş doğrulamasını devre dışı bırakın. Gerekirse, doğrulama en son yedekleme işinden sonra zamanlanmalıdır. Bu işin yedekleme pencerenizi etkilediğini anlamak önemlidir.
+-   Medya ön ayırmasını açın.
+-   Paralel işlemenin açık olduğundan emin olun.
+-   Sıkıştırmayı devre dışı bırakın.
+-   Yedekleme işinde Yinelenenleri kaldırmayı kapatın.
+-   İyileştirmeyi **LAN hedefine**ayarlayın.
+-   **Etkin tam yedekleme oluştur** (her 2 hafta) seçeneğini etkinleştirin.
+-   Yedekleme deposunda, **VM başına yedekleme dosyalarını kullanın**.
+-   **İş başına birden fazla karşıya yükleme akışını** **8** ' e ayarlayın (en fazla 16 kullanılabilir). StorSimple cihazında CPU kullanımına göre bu sayıyı yukarı veya aşağı ayarlayın.
 
 ## <a name="retention-policies"></a>Elde tutma ilkeleri
 
-Yaygın yedekleme bekletme ilkesi türlerinden birini Dedenizin Baba ve Son (GFS) bir ilkedir. GFS ilkesinde artımlı yedekleme günlük gerçekleştirilir ve tam yedekleme haftalık ve aylık olarak gerçekleştirilir. Bu ilke sonuçlarda altı StorSimple katmanlı birimler: bir birimin içerdiğini haftalık, aylık ve yıllık tam yedekleme; diğer beş birimleri günlük artımlı yedeklemeleri depolar.
+En yaygın yedekleme bekletme ilkesi türlerinden biri, bir en babalar, babalar ve son (GFS) ilkesidir. Bir GFS ilkesinde, her gün artımlı bir yedekleme gerçekleştirilir ve tam yedeklemeler haftalık ve aylık yapılır. Bu ilke altı StorSimple katmanlı hacime neden olur: bir birim haftalık, aylık ve yıllık tam yedeklemeleri içerir; diğer beş birim günlük artımlı yedeklemeleri depolar.
 
-Aşağıdaki örnekte, bir GFS döndürme kullanırız. Aşağıdaki örnekte varsayılır:
+Aşağıdaki örnekte, GFS dönüşü kullanıyoruz. Örnek aşağıdaki gibi kabul eder:
 
--   Yinelenenleri kaldırılan olmayan veya sıkıştırılmış veriler kullanılır.
--   Tam yedeklemeler her biri 1 TiB ' dir.
--   Günlük artımlı yedeklemeleri her biri 500 GiB ' dir.
--   Dört haftalık yedeklemeler için bir ay tutulur.
--   On iki aylık yedeklemeler, bir yıl boyunca tutulur.
--   Bir yıllık yedekleme için 10 yıl tutulur.
+-   Yinelenenleri kaldırılmış veya sıkıştırılmış veriler kullanılır.
+-   Tam yedeklemeler her biri 1 TiB.
+-   Günlük artımlı yedeklemeler, her biri 500 GiB.
+-   Ayda dört haftalık yedekleme tutulur.
+-   Yılda iki aylık yedekleme tutulur.
+-   10 yıl boyunca bir yıllık yedekleme tutulur.
 
-Önceki varsayımları temel alarak 26 TiB oluşturma StorSimple aylık ve yıllık tam yedekleme için birim katmanlı. 5 TiB oluşturma StorSimple katmanlı birim her artımlı günlük yedeklemeleri için.
+Yukarıdaki varsayımlar temelinde, aylık ve yıllık tam yedeklemeler için 26-TiB StorSimple katmanlı bir birim oluşturun. Her bir artımlı günlük yedeklemelerin her biri için 5-TiB StorSimple katmanlı bir birim oluşturun.
 
-| Yedekleme türü bekletme | Boyut (TiB) | GFS çarpanı\* | Toplam Kapasite (TiB)  |
+| Yedekleme türü tutma | Boyut (TiB) | GFS çarpanı\* | Toplam Kapasite (TiB)  |
 |---|---|---|---|
 | Haftalık tam | 1 | 4  | 4 |
-| Günlük artımlı | 0,5 | 20 (döngüleri eşit sayıda hafta / ay) | 12 (2 ek kota için) |
-| Aylık tam | 1 | 12 | 12 |
-| Yıllık tam | 1  | 10 | 10 |
+| Günlük artımlı | 0,5 | 20 (ayda eşit sayıda hafta döngüsü) | 12 (ek kota için 2) |
+| Aylık tam | 1\. | 12 | 12 |
+| Yıllık tam | 1\.  | 10 | 10 |
 | GFS gereksinimi |   | 38 |   |
-| Ek kota  | 4  |   | 42 toplam GFS gereksinimi  |
+| Ek kota  | 4  |   | Toplam 42 GFS gereksinimi  |
 
-\* GFS çarpan koruma ve yedekleme İlkesi gereksinimlerinizi karşılayacak şekilde korumak için ihtiyaç duyduğunuz kopya sayısıdır.
+\*GFS çarpanı, yedekleme ilkesi gereksinimlerinizi karşılamak için korumanız ve korumanız gereken kopya sayısıdır.
 
-## <a name="set-up-veeam-storage"></a>Veeam depolamayı ayarlama
+## <a name="set-up-veeam-storage"></a>Veead depolaması ayarlama
 
-### <a name="to-set-up-veeam-storage"></a>Veeam depolama alanı ayarlama için
+### <a name="to-set-up-veeam-storage"></a>Veead depolaması ayarlamak için
 
-1.  Veeam yedekleme ve çoğaltma konsolunda içinde **depo Araçları**Git **Yedekleme Altyapısı**. Sağ **yedekleme depoları**ve ardından **yedek depo Ekle**.
+1.  Veead yedekleme ve çoğaltma konsolunda, **Depo araçları**' nda, **Yedekleme altyapısı**' na gidin. **Yedekleme depoları**' na sağ tıklayın ve ardından **yedek deposu Ekle**' yi seçin.
 
-    ![Veeam Yönetim Konsolu, yedekleme deposu sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage1.png)
+    ![Veeaı Yönetim Konsolu, yedekleme deposu sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage1.png)
 
-2.  İçinde **yeni yedekleme deposu** iletişim kutusunda, bir ad ve açıklama deponun girin. **İleri**’yi seçin.
+2.  **Yeni yedekleme deposu** iletişim kutusunda, depo için bir ad ve açıklama girin. **İleri**’yi seçin.
 
-    ![Veeam yönetim konsolunu, ad ve açıklama sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage2.png)
+    ![Veead Yönetim Konsolu, ad ve açıklama sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage2.png)
 
-3.  Türü için **Microsoft Windows server**. Veeam sunucuyu seçin. **İleri**’yi seçin.
+3.  Tür için **Microsoft Windows Server**' ı seçin. Veeab sunucusunu seçin. **İleri**’yi seçin.
 
-    ![Veeam Yönetim Konsolu, yedek depo türü seçin](./media/storsimple-configure-backup-target-using-veeam/veeamimage3.png)
+    ![Veead Yönetim Konsolu, yedekleme deposu türünü seçin](./media/storsimple-configure-backup-target-using-veeam/veeamimage3.png)
 
-4.  Belirtmek için **konumu**göz atın ve birimi seçin. Seçin **sınırlamak için en fazla eş zamanlı görevleri:** onay kutusunu işaretleyin ve değerine **4**. Bu, her sanal makine (VM) aynı anda işlenir ancak yalnızca dört sanal diskler işlenmekte olan sağlar. Seçin **Gelişmiş** düğmesi.
+4.  **Konumu**belirtmek için, birimi bulup seçin. **En fazla eşzamanlı görev sayısını sınırla:** onay kutusunu seçin ve değeri **4**olarak ayarlayın. Bu, her bir sanal makine (VM) işlenirken aynı anda yalnızca dört sanal diskin işlenmesini sağlar. **Gelişmiş** düğmesini seçin.
 
-    ![Veeam Yönetim Konsolu, birim seçin](./media/storsimple-configure-backup-target-using-veeam/veeamimage4.png)
+    ![Veeaı Yönetim Konsolu, birim seçin](./media/storsimple-configure-backup-target-using-veeam/veeamimage4.png)
 
 
-5.  İçinde **depolama uyumluluk ayarları** iletişim kutusunda **VM başına yedekleme dosyalarını kullanın** onay kutusu.
+5.  **Depolama uyumluluğu ayarları** iletişim kutusunda, **VM başına yedekleme dosyalarını kullan** onay kutusunu seçin.
 
-    ![Veeam Yönetim Konsolu, depolama uyumluluk ayarları](./media/storsimple-configure-backup-target-using-veeam/veeamimage5.png)
+    ![Veead Yönetim Konsolu, depolama uyumluluk ayarları](./media/storsimple-configure-backup-target-using-veeam/veeamimage5.png)
 
-6.  İçinde **yeni yedekleme deposu** iletişim kutusunda **etkinleştirin (önerilen) bağlama sunucudaki vPower NFS hizmeti** onay kutusu. **İleri**’yi seçin.
+6.  **Yeni yedekleme deposu** iletişim kutusunda, **bağlama sunucusunda vPower NFS hizmetini etkinleştir (önerilir)** onay kutusunu seçin. **İleri**’yi seçin.
 
-    ![Veeam Yönetim Konsolu, yedekleme deposu sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage6.png)
+    ![Veeaı Yönetim Konsolu, yedekleme deposu sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage6.png)
 
-7.  Ayarları gözden geçirin ve ardından **sonraki**.
+7.  Ayarları gözden geçirin ve ardından **İleri**' yi seçin.
 
-    ![Veeam Yönetim Konsolu, yedekleme deposu sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage7.png)
+    ![Veeaı Yönetim Konsolu, yedekleme deposu sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage7.png)
 
-    Veeam sunucuya bir depo eklendi.
+    Veead sunucusuna bir depo eklenir.
 
-## <a name="set-up-storsimple-as-a-primary-backup-target"></a>Birincil bir yedekleme hedefi olarak StorSimple ayarlama
+## <a name="set-up-storsimple-as-a-primary-backup-target"></a>Birincil yedekleme hedefi olarak StorSimple 'ı ayarlama
 
 > [!IMPORTANT]
-> Bulut hızlarında buluta katmanlanmış bir yedekten verileri geri yükleme gerçekleşir.
+> Buluta katmanlı bir yedekten veri geri yükleme bulut hızında gerçekleşir.
 
-Aşağıdaki şekilde, bir yedekleme işi için tipik bir birimin eşlemeyi gösterir. Bu durumda, haftalık yedekleri Cumartesi tam disk eşleyin ve artımlı yedeklemeler Pazartesi-Cuma artımlı disklere eşleyin. Tüm yedekleme ve geri yüklemeler Storsimple'dan verileri, birim katmanlı.
+Aşağıdaki şekilde, tipik bir birimin bir yedekleme işine eşlenmesi gösterilmektedir. Bu durumda, tüm haftalık yedeklemeler Cumartesi tam diskine eşlenir ve artımlı yedeklemeler Pazartesi-Cuma artımlı disklere eşlenir. Tüm yedeklemeler ve geri yüklemeler StorSimple katmanlı bir birimdir.
 
 ![Birincil yedekleme hedefi yapılandırma mantıksal diyagramı](./media/storsimple-configure-backup-target-using-veeam/primarybackuptargetdiagram.png)
 
-### <a name="storsimple-as-a-primary-backup-target-gfs-schedule-example"></a>Birincil GFS yedekleme hedefi olarak StorSimple örnek zamanlama
+### <a name="storsimple-as-a-primary-backup-target-gfs-schedule-example"></a>Birincil yedekleme hedefi GFS zamanlama örneği olarak StorSimple
 
-Dört hafta, aylık ve yıllık GFS döndürme tablosunun bir örnek aşağıda verilmiştir:
+Dört hafta, aylık ve yıllık için bir GFS döndürme zamanlaması örneği aşağıda verilmiştir:
 
-| Sıklığı/yedekleme türü | Tam | Artımlı (gün 1-5)  |   
+| Sıklık/yedekleme türü | Tam | Artımlı (gün 1-5)  |   
 |---|---|---|
 | Haftalık (hafta 1-4) | Cumartesi | Pazartesi-Cuma |
 | Aylık  | Cumartesi  |   |
-| Yıllık yedekleme | Cumartesi  |   |
+| Yıllık | Cumartesi  |   |
 
 
-### <a name="assign-storsimple-volumes-to-a-veeam-backup-job"></a>Veeam yedekleme işi için StorSimple birimlerini atayın
+### <a name="assign-storsimple-volumes-to-a-veeam-backup-job"></a>Bir Veead yedekleme işine StorSimple birimleri atama
 
-Birincil yedekleme hedefi senaryo için birincil Veeam StorSimple biriminiz ile günlük bir iş oluşturun. İkincil yedekleme hedefi senaryo için doğrudan bağlı depolama (DAS), ağa bağlı depolama (NAS) veya sadece bir grup, disk (JBOD) depolama'yı kullanarak günlük bir iş oluşturun.
+Birincil yedekleme hedefi senaryosunda, birincil Veead StorSimple haciminiz ile günlük bir iş oluşturun. İkincil bir yedekleme hedefi senaryosunda, doğrudan bağlı depolama (DAS), ağa bağlı depolama (NAS) veya yalnızca bir dizi disk (JBOD) depolama alanı kullanarak günlük bir iş oluşturun.
 
-#### <a name="to-assign-storsimple-volumes-to-a-veeam-backup-job"></a>Veeam yedekleme işi için StorSimple birim atamak için
+#### <a name="to-assign-storsimple-volumes-to-a-veeam-backup-job"></a>Bir Veead yedekleme işine StorSimple birimleri atamak için
 
-1.  Veeam yedekleme ve çoğaltma konsolu seçin **yedekleme ve çoğaltma**. Sağ **yedekleme**ve ardından **VMware** veya **Hyper-V**, ortamınıza bağlı olarak.
+1.  Veead yedekleme ve çoğaltma konsolunda, **yedekleme & çoğaltması**' nı seçin. **Yedekle**' ye sağ tıklayın ve ardından ortamınıza bağlı olarak **VMware** veya **Hyper-V**' yi seçin.
 
-    ![Veeam Yönetimi konsolunda, yeni bir yedekleme işi](./media/storsimple-configure-backup-target-using-veeam/veeamimage8.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme işi](./media/storsimple-configure-backup-target-using-veeam/veeamimage8.png)
 
-2.  İçinde **yeni yedekleme işi** iletişim kutusunda, bir ad ve günlük yedekleme işi için bir açıklama girin.
+2.  **Yeni yedekleme işi** iletişim kutusunda günlük yedekleme işi için bir ad ve açıklama girin.
 
-    ![Veeam Yönetimi konsolunda, yeni bir yedekleme işi sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage9.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme işi sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage9.png)
 
-3.  Yedekleme için bir sanal makine seçin.
+3.  Yedeklenecek bir sanal makine seçin.
 
-    ![Veeam Yönetimi konsolunda, yeni bir yedekleme işi sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage10.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme işi sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage10.png)
 
-4.  İstediğiniz değerleri seçin **yedekleme proxy** ve **yedekleme deposu**. İçin bir değer seçin **geri yükleme noktaları diskte tutulacak** göre yerel olarak bağlı depolama alanına ve ortamınız için RPO ve RTO tanımları. **Gelişmiş**'i seçin.
+4.  **Yedekleme proxy 'si** ve **yedekleme deposu**için istediğiniz değerleri seçin. Yerel olarak bağlı depolamada ortamınızın RPO ve RTO tanımlarına göre **diskte tutulması Için geri yükleme noktaları** için bir değer seçin. **Gelişmiş**'i seçin.
 
-    ![Veeam Yönetimi konsolunda, yeni bir yedekleme işi sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage11.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme işi sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage11.png)
 
-5. İçinde **Gelişmiş ayarlar** iletişim kutusundaki **yedekleme** sekmesinde **artımlı**. Olduğundan emin olun **düzenli aralıklarla yapay tam yedeklemeler oluşturma** onay kutusu işaretli değilse. Seçin **etkin tam yedeklemeler düzenli aralıklarla oluşturma** onay kutusu. Altında **Active tam yedekleme**seçin **haftalık seçili günlerinde** Cumartesi onay kutusu.
+5. **Gelişmiş ayarlar** iletişim kutusunda, **yedekleme** sekmesinde, **artımlı**' i seçin. **Düzenli olarak yapay tam yedeklemeler oluştur** onay kutusunun temizlenmiş olduğundan emin olun. **Düzenli aralıklarla etkin tam yedeklemeler oluştur** onay kutusunu seçin. **Etkin tam yedekleme**altında, Cumartesi için **haftalık seçili günler** onay kutusunu seçin.
 
-    ![Veeam Yönetimi konsolunda, yeni bir yedekleme işi Gelişmiş Ayarları sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage12.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme işi Gelişmiş ayarlar sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage12.png)
 
-6. Üzerinde **depolama** sekmesinde, emin **etkinleştirme satır içi yinelenenleri** onay kutusu işaretli değilse. Seçin **dışlama takas dosyası blokları** onay kutusunu işaretleyip seçin **dışlama silinmiş dosya bloklarını** onay kutusu. Ayarlama **sıkıştırma düzeyi** için **hiçbiri**. Dengeli performans ve yinelenenleri kaldırma özelliğinin **depolama iyileştirme** için **LAN hedef**. **Tamam**’ı seçin.
+6. **Depolama** sekmesinde, **satır içi yinelenen verileri kaldırmayı etkinleştir** onay kutusunun temizlenmiş olduğundan emin olun. **Takas dosyası bloklarını hariç tut** onay kutusunu seçin ve **silinen dosya bloklarını hariç tut** onay kutusunu seçin. **Sıkıştırma düzeyini** **none**olarak ayarlayın. Dengeli performans ve yinelenenleri kaldırma için, **depolama iyileştirmesini** **LAN hedefe**ayarlayın. **Tamam**’ı seçin.
 
-    ![Veeam Yönetimi konsolunda, yeni bir yedekleme işi Gelişmiş Ayarları sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage13.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme işi Gelişmiş ayarlar sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage13.png)
 
-    Veeam yinelenenleri kaldırma ve sıkıştırma ayarları hakkında daha fazla bilgi için bkz. [veri sıkıştırma ve yinelenenleri kaldırma](https://helpcenter.veeam.com/backup/vsphere/compression_deduplication.html).
+    Veeab yinelenenleri kaldırma ve sıkıştırma ayarları hakkında daha fazla bilgi için bkz. [veri sıkıştırma ve yinelenenleri kaldırma](https://helpcenter.veeam.com/backup/vsphere/compression_deduplication.html).
 
-7.  İçinde **yedekleme işi Düzenle** seçebileceğiniz iletişim kutusu, **uygulama durumunu algılayan işlemeyi etkinleştirmek** onay kutusunu (isteğe bağlı).
+7.  **Yedekleme Işini Düzenle** iletişim kutusunda, **uygulama durumunu algılayan işlemeyi etkinleştir** onay kutusunu seçebilirsiniz (isteğe bağlı).
 
-    ![Veeam Yönetimi konsolunda, yeni bir yedekleme işi Konuk işleme sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage14.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme işi Konuk işleme sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage14.png)
 
-8.  Zamanlamayı belirleyebileceğiniz bir zamanda günde bir kez çalışacak biçimde ayarlayın.
+8.  Zamanlamayı, her gün bir kez çalıştırılacak şekilde ayarlayın.
 
-    ![Veeam Yönetimi konsolunda, yeni bir yedekleme işi zamanlama sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage15.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme işi zamanlama sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage15.png)
 
-## <a name="set-up-storsimple-as-a-secondary-backup-target"></a>İkincil bir yedekleme hedefi olarak StorSimple ayarlama
+## <a name="set-up-storsimple-as-a-secondary-backup-target"></a>İkincil yedekleme hedefi olarak StorSimple 'ı ayarlama
 
 > [!NOTE]
-> Bulut hızlarında buluta katmanlanmış bir yedekten verileri geri yüklemeler oluşur.
+> Buluta katmanlı bir yedekten veri geri yüklemeleri bulut hızlarından oluşur.
 
-Bu modelde, geçici bir önbellek olarak görev yapacak bir depolama medyasına (dışında StorSimple) olmalıdır. Örneğin, boşluk, giriş/çıkış (g/ç) ve bant genişliği uyum sağlamak için yedek birim bağımsız diskler (RAID) dizisi kullanabilirsiniz. RAID 5, 50 ve 10 kullanmanızı öneririz.
+Bu modelde, geçici önbellek olarak kullanılacak bir depolama medyası (StorSimple dışında) olmalıdır. Örneğin, boşluk, giriş/çıkış (g/ç) ve bant genişliğini karşılamak için yedekli bir bağımsız diskler dizisi (RAID) birimi kullanabilirsiniz. RAID 5, 50 ve 10 kullanmanızı öneririz.
 
-Aşağıdaki şekil, tipik kısa vadeli bekletme (sunucu) yerel birimler ve uzun süreli saklama arşiv birimleri gösterir. Bu senaryoda, tüm yedeklemeler (sunucu) yerel RAID birimine çalıştırın. Bu yedeklemeler düzenli aralıklarla yinelenen ve bir arşiv birimine arşivlenir. Kısa vadeli bekletme kapasite ve performans gereksinimlerinizi işleyebilmeniz yerel (sunucu) RAID toplu boyutlandırmak önemlidir.
+Aşağıdaki şekilde, tipik kısa süreli bekletme yerel (sunucu) birimleri ve uzun süreli bekletme Arşivi birimleri gösterilmektedir. Bu senaryoda, tüm yedeklemeler yerel (sunucu) RAID birimi üzerinde çalışır. Bu yedeklemeler düzenli aralıklarla çoğaltılır ve bir arşiv birimine arşivlenir. Kısa vadeli saklama kapasitesini ve performans gereksinimlerinizi işleyebilmesi için yerel (sunucu) RAID birimine göre boyutlandırmamak önemlidir.
 
-![Mantıksal diyagramı ikincil yedekleme hedefi olarak StorSimple](./media/storsimple-configure-backup-target-using-veeam/secondarybackuptargetdiagram.png)
+![İkincil yedekleme hedefi mantıksal diyagramı olarak StorSimple](./media/storsimple-configure-backup-target-using-veeam/secondarybackuptargetdiagram.png)
 
-### <a name="storsimple-as-a-secondary-backup-target-gfs-example"></a>İkincil yedekleme hedefi GFS örnek olarak StorSimple
+### <a name="storsimple-as-a-secondary-backup-target-gfs-example"></a>İkincil yedekleme hedefi GFS olarak StorSimple örneği
 
-Aşağıdaki tabloda, yedekler yerel ve StorSimple diskler üzerinde çalıştırmak için ayarlama işlemi gösterilmektedir. Bu, tek tek ve toplam kapasite gereksinimlerini içerir.
+Aşağıdaki tabloda, yerel ve StorSimple disklerinde çalışacak yedeklemelerin nasıl ayarlanacağı gösterilmektedir. Bireysel ve toplam kapasite gereksinimlerini içerir.
 
-| Yedekleme türü ve saklama | Yapılandırılmış depolama | Boyut (TiB) | GFS çarpanı | Toplam Kapasite\* (TiB) |
+| Yedekleme türü ve bekletme | Yapılandırılan depolama alanı | Boyut (TiB) | GFS çarpanı | Toplam kapasite\* (Tib) |
 |---|---|---|---|---|
-| Hafta 1 (tam ve artımlı) |Yerel disk (kısa vadeli)| 1 | 1\. | 1 |
-| StorSimple hafta 2-4 |StorSimple disk (uzun süreli) | 1 | 4 | 4 |
-| Aylık tam |StorSimple disk (uzun süreli) | 1 | 12 | 12 |
-| Yıllık tam |StorSimple disk (uzun süreli) | 1 | 1\. | 1 |
-|GFS birim boyutu gereksinimini |  |  |  | 18*|
+| Hafta 1 (tam ve artımlı) |Yerel disk (kısa vadeli)| 1\. | 1\. | 1\. |
+| StorSimple hafta 2-4 |StorSimple diski (uzun vadeli) | 1\. | 4 | 4 |
+| Aylık tam |StorSimple diski (uzun vadeli) | 1\. | 12 | 12 |
+| Yıllık tam |StorSimple diski (uzun vadeli) | 1 | 1\. | 1\. |
+|GFS birimleri boyut gereksinimi |  |  |  | 18*|
 
-\* Toplam Kapasite 17 TiB StorSimple'nın, diskler ve yerel RAID birimi 1 TiB içerir.
+\*Toplam kapasite, StorSimple disklerinin 17 TiB ve yerel RAID birimi 'nin 1 TiB 'leri içerir.
 
 
-### <a name="gfs-example-schedule"></a>GFS örnek zamanlama
+### <a name="gfs-example-schedule"></a>GFS örnek zamanlaması
 
-GFS döndürme haftalık, aylık ve yıllık zamanlama
+GFS haftalık, aylık ve yıllık zamanlama
 
-| Hafta | Tam | Artımlı günlük 1 | Artımlı günlük 2 | Artımlı günlük 3 | Artımlı günlük 4 | Artımlı günlük 5 |
+| Hafta | Tam | Artımlı gün 1 | Artımlı gün 2 | Artımlı gün 3 | Artımlı gün 4 | Artımlı gün 5 |
 |---|---|---|---|---|---|---|
-| 1 hafta | Yerel RAID birimi  | Yerel RAID birimi | Yerel RAID birimi | Yerel RAID birimi | Yerel RAID birimi | Yerel RAID birimi |
-| 2 hafta | StorSimple hafta 2-4 |   |   |   |   |   |
-| 3 hafta | StorSimple hafta 2-4 |   |   |   |   |   |
-| 4 hafta | StorSimple hafta 2-4 |   |   |   |   |   |
+| Hafta 1 | Yerel RAID birimi  | Yerel RAID birimi | Yerel RAID birimi | Yerel RAID birimi | Yerel RAID birimi | Yerel RAID birimi |
+| Hafta 2 | StorSimple hafta 2-4 |   |   |   |   |   |
+| Hafta 3 | StorSimple hafta 2-4 |   |   |   |   |   |
+| Hafta 4 | StorSimple hafta 2-4 |   |   |   |   |   |
 | Aylık | StorSimple aylık |   |   |   |   |   |
-| Yıllık yedekleme | Yıllık StorSimple  |   |   |   |   |   |
+| Yıllık | StorSimple yıllık  |   |   |   |   |   |
 
-### <a name="assign-storsimple-volumes-to-a-veeam-copy-job"></a>StorSimple birim atamak için bir Veeam kopyalama işi
+### <a name="assign-storsimple-volumes-to-a-veeam-copy-job"></a>Bir Veead kopyalama işine StorSimple birimleri atama
 
-#### <a name="to-assign-storsimple-volumes-to-a-veeam-copy-job"></a>Veeam kopyalama işe StorSimple birim atamak için
+#### <a name="to-assign-storsimple-volumes-to-a-veeam-copy-job"></a>Bir Veeab kopyalama işine StorSimple birimleri atamak için
 
-1.  Veeam yedekleme ve çoğaltma konsolu seçin **yedekleme ve çoğaltma**. Sağ **yedekleme**ve ardından **VMware** veya **Hyper-V**, ortamınıza bağlı olarak.
+1.  Veead yedekleme ve çoğaltma konsolunda, **yedekleme & çoğaltması**' nı seçin. **Yedekle**' ye sağ tıklayın ve ardından ortamınıza bağlı olarak **VMware** veya **Hyper-V**' yi seçin.
 
-    ![Veeam Yönetimi konsolunda, yeni yedekleme kopyası proje sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage16.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme kopyalama işi sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage16.png)
 
-2.  İçinde **yeni yedekleme kopyalama işi** iletişim kutusunda, bir ad ve iş için bir açıklama girin.
+2.  **Yeni yedekleme kopyalama işi** iletişim kutusunda iş için bir ad ve açıklama girin.
 
-    ![Veeam Yönetimi konsolunda, yeni yedekleme kopyası proje sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage17.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme kopyalama işi sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage17.png)
 
-3.  İşlemek istediğiniz Vm'leri seçin. Yedeklerden seçin ve ardından daha önce oluşturduğunuz günlük bir yedekleme seçin.
+3.  İşlemek istediğiniz VM 'Leri seçin. Yedekler arasından seçim yapın ve ardından daha önce oluşturduğunuz günlük yedeklemeyi seçin.
 
-    ![Veeam Yönetimi konsolunda, yeni yedekleme kopyası proje sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage18.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme kopyalama işi sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage18.png)
 
-4.  Nesneleri, gerekirse yedekleme kopyası işinden hariç tutun.
+4.  Gerekirse, nesneleri yedekleme kopyalama işinden hariç tutun.
 
-5.  Yedekleme deponuzu seçin ve ayarlamak için bir değer **geri yükleme noktalarını tutmak**. Seçtiğinizden emin olun **arşivleme amacıyla aşağıdaki geri yükleme noktalarını tutmak** onay kutusu. Yedekleme sıklığı tanımlayın ve ardından **Gelişmiş**.
+5.  Yedekleme deponuzu seçin ve **geri yükleme noktalarının saklanacak**bir değer ayarlayın. **Arşiv amaçlarıyla aşağıdaki geri yükleme noktalarını tut** onay kutusunu seçtiğinizden emin olun. Yedekleme sıklığını tanımlayın ve **Gelişmiş**' i seçin.
 
-    ![Veeam Yönetimi konsolunda, yeni yedekleme kopyası proje sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage19.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme kopyalama işi sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage19.png)
 
 6.  Aşağıdaki gelişmiş ayarları belirtin:
 
-    * Üzerinde **Bakım** sekmesi, depolama düzeyinde Bozulması guard'ı açın.
+    * **Bakım** sekmesinde, depolama düzeyi bozulma koruması ' nı kapatın.
 
-    ![Veeam Yönetimi konsolunda, yeni yedekleme kopyalama işi Gelişmiş Ayarları sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage20.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme kopyalama işi gelişmiş ayarları sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage20.png)
 
-    * Üzerinde **depolama** sekmesinde, yinelenenleri kaldırma ve sıkıştırma kapalı olduğundan emin olun.
+    * **Depolama** sekmesinde, yinelenenleri kaldırma ve sıkıştırma özelliğinin kapalı olduğundan emin olun.
 
-    ![Veeam Yönetimi konsolunda, yeni yedekleme kopyalama işi Gelişmiş Ayarları sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage21.png)
+    ![Veeaı Yönetim Konsolu, yeni yedekleme kopyalama işi gelişmiş ayarları sayfası](./media/storsimple-configure-backup-target-using-veeam/veeamimage21.png)
 
-7.  Veri aktarımı doğrudan olduğunu belirtin.
+7.  Veri aktarımının doğrudan olduğunu belirtin.
 
-8.  Gereksinimlerinize göre yedekleme kopyası penceresi zamanlamayı tanımlayın ve ardından Sihirbazı tamamlayın.
+8.  Yedekleme kopyası pencere zamanlamasını gereksinimlerinize göre tanımlayın ve ardından Sihirbazı sona erdirin.
 
-Daha fazla bilgi için [yedekleme kopyası işleri oluşturma](https://helpcenter.veeam.com/backup/hyperv/backup_copy_create.html).
+Daha fazla bilgi için bkz. [Yedekleme Kopyalama Işleri oluşturma](https://helpcenter.veeam.com/backup/hyperv/backup_copy_create.html).
 
 ## <a name="storsimple-cloud-snapshots"></a>StorSimple bulut anlık görüntüleri
 
-StorSimple bulut anlık görüntüleri, StorSimple Cihazınızı bulunan verileri koruyun. Bir bulut anlık görüntüsü oluşturma, bir şirket dışı özelliği için yerel yedekleme bantlarının sevkiyat için eşdeğerdir. Azure coğrafi olarak yedekli depolamayı kullanıyorsanız, bir bulut anlık görüntüsü oluşturma için birden çok site için yedekleme bantlarının sevkiyat eşdeğerdir. Bir cihaz bir olağanüstü durumdan sonra geri yüklemeniz gerekirse, başka bir StorSimple cihazı çevrimiçi duruma getirin ve yük devri gerçekleştirmeden. Yük devretmeden sonra en son bulut anlık görüntüden (bulut hızlarında) verilere erişmek mümkün olacaktır.
+StorSimple bulut anlık görüntüleri, StorSimple cihazınızda bulunan verileri korur. Bulut anlık görüntüsü oluşturmak, yerel yedekleme bantlarını site dışı bir tesise aktarma ile eşdeğerdir. Azure coğrafi olarak yedekli depolama kullanırsanız, bir bulut anlık görüntüsü oluşturmak, yedekleme bantlarını birden çok siteye aktarmanın eşdeğeridir. Bir olağanüstü durum sonrasında bir cihazı geri yüklemeniz gerekiyorsa, başka bir StorSimple cihazını çevrimiçi duruma getirebilir ve yük devretme yapabilirsiniz. Yük devretmeden sonra, verilere (bulut hızlarından) en son bulut anlık görüntüsünden erişebilirsiniz.
 
-Aşağıdaki bölümde, başlatın ve yedekleme sonrası işleme sırasında StorSimple bulut anlık görüntüleri silmek için kısa bir komut dosyası oluşturmayı açıklar.
-
-> [!NOTE]
-> El ile veya programlama yoluyla oluşturulan anlık görüntüler, StorSimple anlık görüntü süre sonu ilkesi izlemeyin. El ile veya programlama yoluyla bu anlık görüntülerin silinmesi gerekir.
-
-### <a name="start-and-delete-cloud-snapshots-by-using-a-script"></a>Bir komut dosyası kullanarak bulut anlık görüntüleri silin ve başlatın
+Aşağıdaki bölümde, yedekleme sonrası işlem sırasında StorSimple bulut anlık görüntülerini başlatmak ve silmek için kısa bir komut dosyasının nasıl oluşturulacağı açıklanmaktadır.
 
 > [!NOTE]
-> StorSimple anlık görüntü silmeden önce uyumluluk ve veri saklama varsa dikkatlice değerlendirin. Bir yedekleme sonrası betik çalıştırma hakkında daha fazla bilgi için Veeam belgelerine bakın.
+> El ile veya program aracılığıyla oluşturulan anlık görüntüler StorSimple anlık görüntü süre sonu ilkesini takip etmez. Bu anlık görüntülerin el ile veya program aracılığıyla silinmesi gerekir.
+
+### <a name="start-and-delete-cloud-snapshots-by-using-a-script"></a>Betik kullanarak bulut anlık görüntülerini başlatma ve silme
+
+> [!NOTE]
+> Bir StorSimple anlık görüntüsünü silmeden önce uyumluluk ve veri saklama repercuslarını dikkatle değerlendirin. Yedekleme sonrası betiğin nasıl çalıştırılacağı hakkında daha fazla bilgi için, bkz. Veead belgeleri.
 
 
 ### <a name="backup-lifecycle"></a>Yedekleme yaşam döngüsü
@@ -461,62 +461,62 @@ Aşağıdaki bölümde, başlatın ve yedekleme sonrası işleme sırasında Sto
 
 ### <a name="requirements"></a>Gereksinimler
 
--   Betik çalıştıran sunucuda, Azure bulut kaynaklarını erişiminiz olması gerekir.
+-   Betiği çalıştıran sunucunun Azure bulut kaynaklarına erişimi olmalıdır.
 -   Kullanıcı hesabı gerekli izinlere sahip olmalıdır.
--   Bir StorSimple yedekleme İlkesi ile ilişkili StorSimple birimlerini ayarlanmış ancak açık değil.
--   Gerekir StorSimple kaynak adı, kayıt anahtarı, cihaz adını ve yedekleme ilkesi kimliği.
+-   İlişkili StorSimple birimlerine sahip bir StorSimple yedekleme ilkesi ayarlanmalıdır, ancak açılmamalıdır.
+-   StorSimple kaynak adı, kayıt anahtarı, cihaz adı ve yedekleme ilkesi KIMLIĞI gerekir.
 
-### <a name="to-start-or-delete-a-cloud-snapshot"></a>Başlatın veya bir bulut anlık görüntüsünü silmek için
+### <a name="to-start-or-delete-a-cloud-snapshot"></a>Bir bulut anlık görüntüsünü başlatmak veya silmek için
 
 1. [Azure PowerShell'i yükleme](/powershell/azure/overview).
-2. Karşıdan yükleme ve Kurulum [Yönet CloudSnapshots.ps1](https://github.com/anoobbacker/storsimpledevicemgmttools/blob/master/Manage-CloudSnapshots.ps1) PowerShell Betiği.
-3. Betik çalıştıran sunucuda PowerShell'i yönetici olarak çalıştırın. Komut dosyasını çalıştırdığınızdan emin olun `-WhatIf $true` hangi kodun değiştiğini görmek için yapar. Doğrulama tamamlandıktan sonra geçmesi `-WhatIf $false`. Çalıştırma aşağıdaki komutu:
+2. [Manage-CloudSnapshots. ps1](https://github.com/anoobbacker/storsimpledevicemgmttools/blob/master/Manage-CloudSnapshots.ps1) PowerShell betiğini indirip kurun.
+3. Betiği çalıştıran sunucuda PowerShell 'i yönetici olarak çalıştırın. Betiğin hangi değişiklikleri yaptığını görmek için betiği `-WhatIf $true` ile çalıştırtığınızdan emin olun. Doğrulama tamamlandıktan sonra Pass `-WhatIf $false`. Aşağıdaki komutu çalıştırın:
    ```powershell
    .\Manage-CloudSnapshots.ps1 -SubscriptionId [Subscription Id] -TenantId [Tenant ID] -ResourceGroupName [Resource Group Name] -ManagerName [StorSimple Device Manager Name] -DeviceName [device name] -BackupPolicyName [backup policyname] -RetentionInDays [Retention days] -WhatIf [$true or $false]
    ```
-4. Yedekleme işi için betik eklemek için Gelişmiş Seçenekleri Veeam işinizi düzenleyin.
+4. Betiği yedekleme işinize eklemek için Veeae iş gelişmiş seçeneklerinizi düzenleyin.
 
-    ![Veeam yedekleme Gelişmiş ayarları betikleri sekmesi](./media/storsimple-configure-backup-target-using-veeam/veeamimage22.png)
+    ![Veeaz Yedekleme Gelişmiş ayarları komut dosyaları sekmesi](./media/storsimple-configure-backup-target-using-veeam/veeamimage22.png)
 
-Günlük yedekleme işi sonunda işlem sonrası bir betik olarak StorSimple bulut anlık görüntü yedekleme ilkenizi çalıştırmanızı öneririz. RTO ve RPO karşılamanıza yardımcı olmak için yedekleme Uygulama ortamınızı geri hakkında daha fazla bilgi için lütfen ile yedekleme, Mimarı başvurun.
+StorSimple bulut anlık görüntü yedekleme ilkenizi, günlük yedekleme işinizin sonunda bir işlem sonrası betiği olarak çalıştırmanızı öneririz. RPO ve RTO 'larınızı karşılamanıza yardımcı olmak için yedekleme uygulaması ortamınızı yedekleme ve geri yükleme hakkında daha fazla bilgi için lütfen yedekleme mimarinize başvurun.
 
 ## <a name="storsimple-as-a-restore-source"></a>Geri yükleme kaynağı olarak StorSimple
 
-StorSimple cihaz iş herhangi bir blok depolama CİHAZDAN geri yüklemeler gibi geri yükler. Geri yüklemeler buluta katmanlanmış verileri bulut hızlarda gerçekleşir. Yerel veri için cihaz yerel disk hızında geri yüklemeler oluşur.
+Bir StorSimple cihazından geri yükleme, herhangi bir blok depolama cihazından geri yükleme gibi çalışır. Buluta katmanlı verilerin geri yüklemeleri bulut hızlarında oluşur. Yerel veriler için geri yükleme, cihazın yerel disk hızında oluşur.
 
-Veeam ile hızlı, ayrıntılı, dosya düzeyinde Kurtarma ile StorSimple Veeam konsolunda yerleşik Gezgini görünümleri aracılığıyla sahip olursunuz. Veeam gezginler yedeklemelerden e-posta iletileri, Active Directory nesnelerini ve SharePoint öğeleri gibi tek tek öğeleri kurtarmak için kullanın. Şirket içi VM kesintisiz kurtarma gerçekleştirebilirsiniz. Ayrıca, Azure SQL Database ve Oracle veritabanları için-belirli bir noktaya kurtarma yapabilirsiniz. Veeam ve StorSimple hızlı ve kolay azure'dan öğe düzeyinde kurtarma işlemini yapın. Bir geri yükleme gerçekleştirme hakkında daha fazla bilgi için Veeam belgelerine bakın:
+Veead, Veead konsolundaki yerleşik gezgin görünümleri aracılığıyla StorSimple aracılığıyla hızlı, ayrıntılı, dosya düzeyinde kurtarma edinirsiniz. E-posta iletileri, Active Directory nesneleri ve SharePoint öğeleri yedeklemelerinden ayrı ayrı öğeleri kurtarmak için Veeam araştırmalarını kullanın. Kurtarma, şirket içi VM kesintisi olmadan yapılabilir. Ayrıca Azure SQL veritabanı ve Oracle veritabanları için zaman içinde kurtarma yapabilirsiniz. Veeaa ve StorSimple, Azure 'dan hızlı ve kolay bir şekilde öğe düzeyinde kurtarma işlemi yapar. Geri yükleme gerçekleştirme hakkında daha fazla bilgi için, bkz. Veead belgeleri:
 
-- İçin [Exchange Server](https://www.veeam.com/microsoft-exchange-recovery.html)
-- İçin [Active Directory](https://www.veeam.com/microsoft-active-directory-explorer.html)
-- İçin [SQL Server](https://www.veeam.com/microsoft-sql-server-explorer.html)
-- İçin [SharePoint](https://www.veeam.com/microsoft-sharepoint-recovery-explorer.html)
-- İçin [Oracle](https://www.veeam.com/oracle-backup-recovery-explorer.html)
+- [Exchange Server](https://www.veeam.com/microsoft-exchange-recovery.html) için
+- [Active Directory](https://www.veeam.com/microsoft-active-directory-explorer.html) için
+- [SQL Server](https://www.veeam.com/microsoft-sql-server-explorer.html) için
+- [SharePoint](https://www.veeam.com/microsoft-sharepoint-recovery-explorer.html) için
+- [Oracle](https://www.veeam.com/oracle-backup-recovery-explorer.html) için
 
 
 ## <a name="storsimple-failover-and-disaster-recovery"></a>StorSimple yük devretme ve olağanüstü durum kurtarma
 
 > [!NOTE]
-> Yedekleme hedefi senaryoları için bir geri yükleme hedefi olarak StorSimple Cloud Appliance desteklenmiyor.
+> Yedekleme hedefi senaryolarında StorSimple Cloud Appliance, geri yükleme hedefi olarak desteklenmez.
 
-Olağanüstü bir durum tarafından çeşitli etkenler neden olabilir. Aşağıdaki tabloda olağanüstü durum kurtarma senaryoları listelenmektedir.
+Olağanüstü bir durum, çeşitli faktörlerden kaynaklanıyor olabilir. Aşağıdaki tabloda, yaygın olağanüstü durum kurtarma senaryoları listelenmektedir.
 
 | Senaryo | Etkisi | Kurtarma | Notlar |
 |---|---|---|---|
-| StorSimple cihaz arızası | Yedekleme ve geri yükleme işlemlerini kesintiye uğramaz. | Başarısız aygıt değiştirin ve gerçekleştirme [StorSimple yük devretme ve olağanüstü durum kurtarma](storsimple-device-failover-disaster-recovery.md). | Bir geri yüklemeden sonra cihaz kurtarma gerçekleştirmeniz gerekirse, tam veri çalışma kümeleri için yeni cihaz buluttan alınır. Bulut hızlarda tüm işlemlerdir. Dizin ve işlemi yeniden tarama işlemi katalog taranır ve zaman alan bir işlem olabilir yerel cihaz katmanı için bulut katmanı çekilen tüm yedekleme kümelerini neden olabilir. |
-| Veeam sunucu hatası | Yedekleme ve geri yükleme işlemlerini kesintiye uğramaz. | Yedekleme sunucusuna yeniden oluşturun ve veritabanı geri yükleme ayrıntılı olarak açıklandığı gibi gerçekleştirin [Veeam Yardım Merkezi (teknik belgeler)](https://www.veeam.com/documentation-guides-datasheets.html).  | Yeniden oluşturmanız veya olağanüstü durum kurtarma siteniz Veeam sunucuda geri gerekir. Veritabanını geri yüklemek için en son noktası. Geri yüklenen Veeam veritabanını en son yedekleme işleriniz ile eşitlenmiş durumda değilse, dizin oluşturma ve Katalog gereklidir. Bu dizin ve işlemi yeniden tarama işlemi katalog taranır ve yerel cihaz katmana bulut katmandan oluşan bir derleme tüm yedekleme kümelerini neden olabilir. Bu, daha fazla zaman yoğun kolaylaştırır. |
-| Backup sunucusu ve StorSimple kaybı ile sonuçlanır site hatası | Yedekleme ve geri yükleme işlemlerini kesintiye uğramaz. | StorSimple önce geri ve sonra da Veeam geri yükleyin. | StorSimple önce geri ve sonra da Veeam geri yükleyin. Bir geri yüklemeden sonra cihaz kurtarma gerçekleştirmeniz gerekirse, tam veri çalışma kümeleri için yeni cihaz buluttan alınır. Bulut hızlarda tüm işlemlerdir. |
+| StorSimple cihaz hatası | Yedekleme ve geri yükleme işlemleri kesintiye uğrar. | Başarısız olan cihazı değiştirin ve [StorSimple yük devretme ve olağanüstü durum kurtarma](storsimple-device-failover-disaster-recovery.md)gerçekleştirin. | Cihaz kurtarmasından sonra geri yükleme gerçekleştirmeniz gerekirse, tam veri çalışma kümeleri buluttan yeni cihaza alınır. Tüm işlemler bulut hızlardır. Dizin ve Katalog yeniden tarama işlemi, tüm yedekleme kümelerinin bulut katmanından yerel cihaz katmanına taranmasını ve çekilmesine neden olabilir ve bu da zaman alan bir işlemdir. |
+| Veeab sunucusu hatası | Yedekleme ve geri yükleme işlemleri kesintiye uğrar. | Backup sunucusunu yeniden oluşturun ve veritabanı geri yükleme işlemini [Veeamhelp Center (teknik belgeler)](https://www.veeam.com/documentation-guides-datasheets.html)bölümünde açıklandığı gibi gerçekleştirin.  | Acil durum kurtarma sitesinde Veead sunucusunu yeniden oluşturmanız veya geri yüklemeniz gerekir. Veritabanını en son noktaya geri yükleyin. Geri yüklenen Veead veritabanı en son yedekleme işleriniz ile eşitlenmediğinde, dizin oluşturma ve kataloglama gereklidir. Bu dizin ve Katalog yeniden tarama işlemi, tüm yedekleme kümelerinin bulut katmanından yerel cihaz katmanına taranmasını ve çekilmesine neden olabilir. Bu, daha fazla zaman yoğunluğu sağlar. |
+| Hem yedekleme sunucusu hem de StorSimple kaybına neden olan site hatası | Yedekleme ve geri yükleme işlemleri kesintiye uğrar. | Önce StorSimple 'ı geri yükleyin ve ardından Veead 'yi geri yükleyin. | Önce StorSimple 'ı geri yükleyin ve ardından Veead 'yi geri yükleyin. Cihazın kurtarmasından sonra geri yükleme gerçekleştirmeniz gerekirse, tam veri çalışma kümeleri buluttan yeni cihaza alınır. Tüm işlemler bulut hızlardır. |
 
 
-## <a name="references"></a>Başvurular
+## <a name="references"></a>Referanslar
 
-Aşağıdaki belgeler, bu makale için başvurulan:
+Bu makale için aşağıdaki belgelere başvuruldu:
 
-- [StorSimple çok yollu g/ç Kurulumu](storsimple-configure-mpio-windows-server.md)
+- [StorSimple çok yollu g/ç kurulumu](storsimple-configure-mpio-windows-server.md)
 - [Depolama senaryoları: Ölçülü kaynak sağlama](https://msdn.microsoft.com/library/windows/hardware/dn265487.aspx)
-- [GPT kullanarak sürücüleri](https://msdn.microsoft.com/windows/hardware/gg463524.aspx#EHD)
+- [GPT sürücüleri kullanma](https://msdn.microsoft.com/windows/hardware/gg463524.aspx#EHD)
 - [Paylaşılan klasörler için gölge kopyaları ayarlama](https://technet.microsoft.com/library/cc771893.aspx)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Kullanma hakkında daha fazla bilgi edinin [bir yedekleme kümesinden geri yükleme](storsimple-restore-from-backup-set-u2.md).
-- Nasıl gerçekleştirileceği hakkında daha fazla bilgi [cihaz yük devretme ve olağanüstü durum kurtarma](storsimple-device-failover-disaster-recovery.md).
+- [Bir yedekleme kümesinden geri yükleme](storsimple-restore-from-backup-set-u2.md)hakkında daha fazla bilgi edinin.
+- [Cihaz yük devretmesini ve olağanüstü durum kurtarmayı](storsimple-device-failover-disaster-recovery.md)gerçekleştirme hakkında daha fazla bilgi edinin.

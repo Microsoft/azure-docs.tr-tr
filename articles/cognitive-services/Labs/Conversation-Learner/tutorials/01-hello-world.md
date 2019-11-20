@@ -1,7 +1,7 @@
 ---
-title: Bir "Merhaba Dünya" konuşma Öğrenici modeli - Microsoft Bilişsel hizmetler oluşturma | Microsoft Docs
+title: "\"Merhaba Dünya\" Conversation Learner modeli oluşturma-Microsoft bilişsel hizmetler | Microsoft Docs"
 titleSuffix: Azure
-description: Bir "Merhaba Dünya" konuşma Öğrenici modeli oluşturmayı öğrenin.
+description: Bir "Merhaba Dünya" Conversation Learner modeli oluşturmayı öğrenin.
 services: cognitive-services
 author: nitinme
 manager: nolachar
@@ -10,103 +10,104 @@ ms.subservice: conversation-learner
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: nitinme
-ms.openlocfilehash: fe5d21fadef8f4452ba36259dbf89cefc78230de
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: bb1d053af8813f05872c56d3b5609f2d7d7d5d8c
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66388053"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68705633"
 ---
-# <a name="how-to-create-a-hello-world-model-with-conversation-learner"></a>Konuşma Öğrenici ile bir "Merhaba Dünya" modeli oluşturma
+# <a name="how-to-create-a-hello-world-model-with-conversation-learner"></a>Conversation Learner sahip bir "Merhaba Dünya" modeli oluşturma
 
-Bu öğreticide, Eylemler oluşturma, robot etkileşimli olarak öğretim ve son kullanıcılardan gelen oturum iletişim kutularının düzeltme yapma gibi konuşma Öğrenici kullanmaya başlamak gösterilir.
+Bu öğreticide, eylemler oluşturma, bot 'u etkileşimli bir şekilde öğretme ve son kullanıcılardan gelen günlüğe yazılan iletişim kutularında düzeltme yapma dahil olmak üzere Conversation Learner ile çalışmaya başlama gösterilmektedir.
 
 ## <a name="video"></a>Video
 
-[![Hello World öğretici Önizleme](https://aka.ms/cl_Tutorial_v3_HelloWorld_Preview)](https://aka.ms/cl_tutorial_v3_helloworld)
+[![Merhaba Dünya öğretici önizlemesi](https://aka.ms/cl_Tutorial_v3_HelloWorld_Preview)](https://aka.ms/cl_tutorial_v3_helloworld)
 
 
 ## <a name="requirements"></a>Gereksinimler
-Henüz yapmadıysanız, önce tüm kurulum adımlarını tamamlandı, oluşturma dahil olun bir `.env` anahtar yazma, LUIS ile dosya.  Bkz: [hızlı](../quickstart.md) Ayrıntılar için.
+Henüz yapmadıysanız, lusıs yazma anahtarınızla bir `.env` dosya oluşturma da dahil olmak üzere, ilk olarak tüm Kurulum adımlarının tamamlandığından emin olun.  Ayrıntılar için bkz. [hızlı başlangıç](../quickstart.md) .
 
-Bu öğreticide, genel öğretici Bot çalışıyor olması gerekir
+Bu öğreticide, genel öğretici bot 'ın çalışıyor olması gerekir
 
     npm run tutorial-general
 
 ## <a name="steps"></a>Adımlar
 
-Giriş sayfasında Web kullanıcı arabiriminde başlatın.
+Web Kullanıcı arabirimindeki giriş sayfasında başlatın.
 
 ### <a name="create-the-model"></a>Model oluşturma
-1. "Yeni modeli" düğmesine tıklayın.
-2. "Hello World" "Name" alanına girin.
+1. "Yeni model" düğmesine tıklayın.
+2. "Ad" alanına "Merhaba Dünya" yazın.
 3. "Oluştur" düğmesine tıklayın.
 
-Artık oluşturduğunuz modeli görünümünü görmeniz gerekir.
+Şimdi oluşturduğunuz modelin görünümünü görmeniz gerekir.
 
-### <a name="create-an-action"></a>Bir eylem oluşturun
-1. Sol panelde, "Eylemler" sonra "Yeni Eylem" düğmesine tıklayın.
-    - Konuşma Öğrenici kullanıcı, bir API çağrısı veya bir kart döndüren bir kısa mesaj eylem olabilir.
-2. "Botun yanıtta..." alan türü "Hello".
-    - Bot döndüreceği yanıt budur.
+### <a name="create-an-action"></a>Eylem oluşturma
+1. Sol bölmede, "eylemler" e ve ardından "yeni eylem" düğmesine tıklayın.
+    - Bir eylem, Conversation Learner kullanıcıya, API çağrısına veya karta döndüren bir kısa mesaj olabilir.
+2. "Bot 'un yanıtı..." "Hello" alan türü.
+    - Bu, bot 'ın döndüreceği yanıt olur.
 3. "Oluştur" düğmesine tıklayın.
 
-Bot yapabilmek için ilk eylem oluşturduğunuz yani metin yanıt verin.
+Bot 'un gerçekleştirebileceği ilk eylemi oluşturdunuz, yani bir metin yanıtı döndürün.
 
-### <a name="train-dialogs"></a>Train iletişim kutuları
-Burada, kullanıcı konuşma yanıtlamayla ilgili modeli eğitme budur.
+### <a name="train-dialogs"></a>Iletişim kutularını eğitme
+Bu, modeli kullanıcıya nasıl yanıt verileceğini öğrenmek için eğitebileceğiniz yerdir.
 
-#### <a name="first-training-dialog"></a>İlk eğitim iletişim
+#### <a name="first-training-dialog"></a>İlk eğitim Iletişim kutusu
 
-1. Sol panelde, "İletişim kutuları eğitme" ve ardından "Yeni Train iletişim kutusu" düğmesine tıklayın.
-2. Tür "Hi" ENTER tuşuna basın.
-    - Hangi kullanıcının bir örnek bir konuşma başında diyebilirsiniz gibi.
-3. "Puan Eylemler" düğmesine tıklayın.
-4. "Hello" seçin.
-    - Bu örnek iletişim kutusunda bir tam Aç tamamladığınız. 
-5. Kullanıcı yanıtı "Goodbye" yazın.
-6. "Puan Eylemler" düğmesine tıklayın.
-7. Tıklayın "+ eylem" düğmesi.
-8. Tür "güle güle!" "... Botun yanıt" alanına ve "Oluştur" düğmesine tıklayın.
-    - Bot ile eylem yeni oluşturduğunuz yanıt verdiğini dikkat edin.
+1. Sol bölmede "Iletişim kutularını eğitme" düğmesine ve ardından "yeni eğitme Iletişim kutusu" düğmesine tıklayın.
+2. "Hi" yazın, ENTER tuşuna basın.
+    - Kullanıcının görüşmenin başlangıcında söyleme hakkında bir örnek olarak.
+3. "Eylemleri puan" düğmesine tıklayın.
+4. "Merhaba" yı seçin.
+    - Bu örnek iletişim kutusunu yalnızca bir tam olarak tamamladınız. 
+5. "Güle" Kullanıcı yanıtı yazın.
+6. "Eylemleri puan" düğmesine tıklayın.
+7. "+ Action" düğmesine tıklayın.
+8. "Güle!" yazın "bot 'ın yanıtı..." alanı, ardından "Oluştur" düğmesine tıklayın.
+    - Bot 'un yeni oluşturduğunuz eylemle yanıt verdiğini unutmayın.
 9. "Kaydet" düğmesine tıklayın. 
-    - Bitirmek ve bu eğitim iletişim kaydedin.
+    - Bu, bu eğitim Iletişim kutusunu sona erdirmek ve kaydeder.
 
-Artık bir eğitim iletişim birlikte tek bir varlık modeli ve iki eylem var.
+Artık modelde tek bir varlık ve iki eylem ile birlikte bir eğitim Iletişim kutusu vardır.
 
-#### <a name="second-training-dialog"></a>İkinci eğitim iletişim
-Şimdi bir daha fazla eğitim yapın ve Bot nasıl yanıt verdiğini görebilirsiniz.
+#### <a name="second-training-dialog"></a>İkinci eğitim Iletişim kutusu
+Şimdi bir eğitim yapın ve bot 'ın nasıl yanıt verdiğini görebilirsiniz.
 
-1. "Yeni Train iletişim kutusu" düğmesine tıklayın.
-2. "Hi" yazın
-    - Bu ilk iletişim kutusuna benzer ve Bot iyi bir puan Al bekliyoruz.
-3. "Puan Eylemler" düğmesine tıklayın.
-    - Konum ve puan yine de yeterli doğru olmayabilir ve ek eğitim gerektirebilir.
-4. "Hello" seçin.
-5. Kullanıcı yanıtı "bye" yazın.
-6. "Puan Eylemler" düğmesine tıklayın.
-7. "Güle güle!" seçin
+1. "Yeni eğitme Iletişim kutusu" düğmesine tıklayın.
+2. Yazın, "Hi"
+    - Bu, ilk iletişim kutusuna benzerdir ve bot 'tan iyi bir puan almanızı bekler.
+3. "Eylemleri puan" düğmesine tıklayın.
+    - Konum ve puan yine yeterince doğru olmayabilir ve ek eğitim gerekebilir.
+4. "Merhaba" yı seçin.
+5. "Bye" Kullanıcı yanıtı yazın.
+6. "Eylemleri puan" düğmesine tıklayın.
+7. "Güle!" seçeneğini belirleyin
 8. "Kaydet" düğmesine tıklayın.
 
-### <a name="log-dialogs"></a>Günlük iletişim kutuları
-Bu, Test, görüntülemek ve düzeltin, ya da gerçek kullanıcıları ile Botunuza çalıştırılmış konuşmaları yerdir.
+### <a name="log-dialogs"></a>Günlük Iletişim kutuları
+Bu, sizin veya gerçek kullanıcılarınızın bot 'unuzla sahip olduğu konuşmaları test ettiğiniz, görüntülediğiniz ve düzeltebileceğiniz yerdir.
 
-#### <a name="test-the-model-as-an-end-user"></a>Model bir son kullanıcı olarak test etme
-1. Sol panelde, "Günlük iletişim kutuları" sonra "Yeni günlük iletişim kutusu" düğmesine tıklayın.
-2. "Merhaba" yazın.
-3. Bot, otomatik olarak "Hello" ile yanıt vermelidir kısa bir süre bekleyin
-4. 'Byebye' girin
-5. Kısa bir süre bekleyin, yeniden Bot otomatik olarak "Hello" ile yanıt vermelidir.
-6. "Test Bitti" düğmesine tıklayın.
+#### <a name="test-the-model-as-an-end-user"></a>Modeli son kullanıcı olarak test etme
+1. Sol bölmede "günlük Iletişimleri" ve ardından "yeni günlük Iletişim" düğmesine tıklayın.
+2. "Merhaba buraya" yazın.
+3. Kısa bir süre bekleyin, bot "Hello" ile otomatik olarak yanıt vermelidir
+4. ' Byebye ' girin
+5. Kısa bir süre bekledikten sonra, "Hello" ile otomatik olarak yanıt vermelidir.
+6. "Test bitti" düğmesine tıklayın.
 
-#### <a name="view-and-correct-a-user-conversation"></a>Görüntüleme ve kullanıcı konuşma düzeltin
-Günlük iletişim kutuları kullanma, konuşmalar listesini görüntüleyebilirsiniz kullanıcılar ile Botunuza tutulan. Ayrıca, bunları Botun yanıtları düzeltin ve etkileşimler eğitim iletişim kutuları kaydetmek için de düzenleyebilirsiniz. Bunu yapmak için:
-1. Kılavuzda konuşma oturum açma seçeneğini tıklatın.
-2. Örneğin son Bot eylemini tıklatın "Hello".
-3. "Güle güle!" seçin Bot düzeltmek için.
-4. "Kaydet olarak Train iletişim" düğmesine tıklayın.
+#### <a name="view-and-correct-a-user-conversation"></a>Kullanıcı Iletişimini görüntüleme ve düzeltme
+Günlük Iletişim kutularını kullanarak, bot 'unuzla birlikte tutulan konuşmaları listesini görüntüleyebilirsiniz. Ayrıca, bot 'un yanıtlarını düzeltmek ve etkileşimleri eğitim Iletişimleri olarak kaydetmek için de düzenleyebilirsiniz. Bunu yapmak için:
+1. Kılavuzda, görüşmenin günlüğüne tıklayın.
+2. Son bot eylemine (ör.) tıklayın. "Merhaba".
+3. "Güle!" seçeneğini belirleyin Bot 'ı düzeltmek için.
+4. "Tren olarak kaydet Iletişim kutusu" düğmesine tıklayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Eğitim giriş](./02-intro-to-training.md)
+> [Eğitimlere giriş](./02-intro-to-training.md)

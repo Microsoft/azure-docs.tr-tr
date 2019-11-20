@@ -1,94 +1,103 @@
 ---
-title: Cloud Explorer ile Visual Studio için Mesajlaşma Azure IOT hub'ı bulut cihaz yönetme | Microsoft Docs
-description: Cihaz bulut iletilerini izlemek ve bulut, Azure IOT hub'daki cihaz iletilerini göndermek için Visual Studio için cloud Explorer'ı kullanmayı öğrenin.
+title: Azure IoT Hub cihaz iletilerini yönetmek için VS Cloud Explorer 'ı kullanma
+description: Visual Studio için Cloud Explorer 'ı kullanarak cihazı bulut iletilerine izleme ve Azure IoT Hub cihaz iletilerine bulut gönderme hakkında bilgi edinin.
 author: shizn
 ms.service: iot-hub
 services: iot-hub
 ms.topic: conceptual
-ms.date: 01/07/2018
+ms.date: 08/20/2019
 ms.author: xshi
-ms.openlocfilehash: ab3c02d7207bca70a90df8aa08c73c1484cd635d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c56bb7030b2ebc12e3afc24e2d8cb29ce2dda0bf
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61440756"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74079487"
 ---
-# <a name="use-cloud-explorer-for-visual-studio-to-send-and-receive-messages-between-your-device-and-iot-hub"></a>IOT Hub ve cihaz arasında ileti göndermek ve almak için Visual Studio için cloud Explorer'ı kullanın
+# <a name="use-cloud-explorer-for-visual-studio-to-send-and-receive-messages-between-your-device-and-iot-hub"></a>Cihazınız ve IoT Hub arasında ileti göndermek ve almak için Visual Studio için Cloud Explorer 'ı kullanın
 
-![Uçtan uca diyagramı](./media/iot-hub-visual-studio-cloud-device-messaging/e-to-e-diagram.png)
+![Uçtan uca diyagram](./media/iot-hub-visual-studio-cloud-device-messaging/e-to-e-diagram.png)
 
-[Cloud Explorer](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.CloudExplorerForVS) Azure kaynaklarınızı görüntüleyin, özelliklerini inceleme ve Visual Studio temel Geliştirici eylemler gerçekleştirmek olanak tanıyan kullanışlı bir Visual Studio uzantısıdır. Bu makalede, Cloud Explorer arasındaki Cihazınızı IOT Hub'ınıza ileti göndermek ve almak için nasıl kullanılacağını odaklanır.
+[Bulut Gezgini](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.CloudExplorerForVS) , Azure kaynaklarınızı görüntülemenize, özelliklerini Incelemenize ve Visual Studio içinden önemli geliştirici eylemleri gerçekleştirmenize olanak tanıyan yararlı bir Visual Studio uzantısıdır. Bu makalede, bulut Gezgini 'ni kullanarak cihazınız ve hub 'ınız arasında ileti gönderme ve alma hakkında odaklanılır.
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-partial.md)]
 
-## <a name="what-you-will-learn"></a>Bilgi edineceksiniz
+## <a name="what-you-learn"></a>Öğrenecekleriniz
 
-Visual Studio için Cloud Explorer CİHAZDAN buluta iletileri izlemeye yönelik ve bulut-cihaz iletilerini göndermek için nasıl kullanılacağını öğreneceksiniz. CİHAZDAN buluta iletileri Cihazınızı toplar ve ardından IOT Hub'ınıza gönderir sensör verilerini olabilir. Bulut-cihaz iletilerini cihazınız için IOT Hub'ınıza gönderdiği komutlar olabilir. Örneğin, cihazınıza bağlı bir LED yanıp.
+Bu makalede, cihazdan buluta iletileri izlemek ve buluttan cihaza iletiler göndermek üzere Visual Studio için Cloud Explorer 'ı nasıl kullanacağınızı öğreneceksiniz. Cihazdan buluta iletiler, cihazınızın topladığı ve sonra IoT Hub gönderdiği algılayıcı verileri olabilir. Buluttan cihaza iletiler, IoT Hub cihazınıza göndereceğini belirten komutlardır. Örneğin, cihazınıza bağlı bir LED 'in yanıp sönmesini sağlar.
 
-## <a name="what-you-will-do"></a>Neler yapabileceği
+## <a name="what-you-do"></a>Yapabilecekleriniz
 
-- CİHAZDAN buluta iletileri izlemeye yönelik Visual Studio için cloud Explorer'ı kullanın.
-- Bulut-cihaz iletilerini göndermek için Visual Studio için cloud Explorer'ı kullanın.
+Bu makalede, aşağıdaki görevleri gerçekleştirebilirsiniz:
+
+- Cihazdan buluta iletileri izlemek için Visual Studio için Cloud Explorer 'ı kullanın.
+
+- Bulutta cihaza iletiler göndermek için Visual Studio için Cloud Explorer 'ı kullanın.
 
 ## <a name="what-you-need"></a>Ne gerekiyor
 
+Aşağıdaki önkoşulların olması gerekir:
+
 - Etkin bir Azure aboneliği.
-- Azure IOT Hub, aboneliğiniz altında.
-- Microsoft Visual Studio 2017 güncelleştirme 8 veya üzeri
-- Cloud Explorer bileşeni (Azure iş yükü ile varsayılan olarak seçilidir) Visual Studio Yükleyicisi'nden
 
-## <a name="update-cloud-explorer-to-latest-version"></a>Cloud Explorer'ı en son sürüme güncelleştirme
+- Aboneliğiniz altındaki bir Azure IoT Hub.
 
-Visual Studio Yükleyicisi'nden Cloud Explorer bileşen yalnızca cihaz-Bulut ve bulut-cihaz iletilerini izlenmesini de destekler. Cihaz veya Bulut için iletileri göndermek için indirme ve en son yükleme [Cloud Explorer](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.CloudExplorerForVS).
+- Microsoft Visual Studio 2017 güncelleştirme 9 veya üzeri. Bu makalede [Visual Studio 2019](https://www.visualstudio.com/vs/)kullanılmaktadır.
 
-## <a name="sign-in-to-access-your-iot-hub"></a>IOT Hub'ınıza erişmek için oturum açın
+- Azure Iş yükü ile varsayılan olarak seçilen Visual Studio Yükleyicisi bulut Gezgini bileşeni.
 
-1. Visual Studio'da **Cloud Explorer** penceresinde hesap yönetimi simgesine tıklayın. Cloud Explorer penceresini açabilir **görünümü** > **Cloud Explorer** menüsü.
+## <a name="update-cloud-explorer-to-latest-version"></a>Bulut Gezginini en son sürüme Güncelleştir
 
-    ![Hesap Yönetimi](media/iot-hub-visual-studio-cloud-device-messaging/click-account-management.png)
+Visual Studio 2017 için Visual Studio Yükleyicisi bulut Gezgini bileşeni yalnızca cihazdan buluta ve buluttan cihaza iletileri izlemeyi destekler. Visual Studio 2017 ' i kullanmak için en son [bulut Gezginini](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.CloudExplorerForVS)indirip yükleyin.
 
+## <a name="sign-in-to-access-your-hub"></a>Hub 'ınıza erişmek için oturum açın
 
-2. Tıklayın **hesaplarını yönetme** bulut Gezgini'nde.
+Hub 'ınıza erişmek için şu adımları izleyin:
 
-3. Tıklayın **Hesap Ekle...**  Azure'a ilk kez oturum açmak için yeni pencerede.
+1. Visual Studio 'da bulut Gezgini 'ni açmak **için > ** **bulut Gezgini** ' ni seçin.
 
-4. Oturum açtıktan sonra Azure abonelik listesi gösterilir. Tıklayın ve görüntülemek istediğiniz Azure aboneliklerini seçin **Uygula**.
+1. Aboneliklerinizi göstermek için hesap yönetimi simgesini seçin.
 
-5. Genişletin **aboneliğinizi** > **IOT hub'ları** > **uygulamanızın IOT hub'ı**, cihaz listesi, IOT hub'ı düğümünde gösterilir.
+    ![Hesap yönetimi simgesi](media/iot-hub-visual-studio-cloud-device-messaging/account-management-icon.png)
 
-    ![Cihaz listesi](media/iot-hub-visual-studio-cloud-device-messaging/device-list.png)
+1. Azure 'da oturum açtıysanız hesaplarınız görüntülenir. Azure 'da ilk kez oturum açmak için **Hesap Ekle**' yi seçin.
 
-## <a name="monitor-device-to-cloud-messages"></a>CİHAZDAN buluta iletileri izlemeye
+1. Kullanmak istediğiniz Azure aboneliklerini seçin ve **Uygula**' yı seçin.
 
-Cihazınızın IOT Hub'ına gönderilen iletileri izlemek için aşağıdaki adımları izleyin:
+1. Aboneliğinizi genişlettikten sonra **IoT Hub 'ları**' nı genişletin.  Her hub 'ın altında bu hub için cihazlarınızı görebilirsiniz.
 
-1. IOT hub'ı veya cihaza sağ tıklayıp **D2C iletisini İzlemeyi Başlat**.
+    ![Cihaz listesi](media/iot-hub-visual-studio-cloud-device-messaging/hub-device-list.png)
 
-    ![D2C iletisini izlemeye başlama](media/iot-hub-visual-studio-cloud-device-messaging/start-monitoring-d2c-message.png)
+## <a name="monitor-device-to-cloud-messages"></a>Cihazdan buluta iletileri izleme
 
-2. İzlenen iletilerin gösterilecek **IOT hub'ı** çıkış bölmesi.
+Cihazınızdan IoT Hub gönderilen iletileri izlemek için aşağıdaki adımları izleyin:
 
-    ![İzleme D2C ileti sonucu](media/iot-hub-visual-studio-cloud-device-messaging/monitor-d2c-message-result.png)
+1. IoT Hub veya cihazınıza sağ tıklayın ve **Izlemeyi Başlat D2C iletisini**seçin.
 
-3. İzlemeyi durdurmak için herhangi bir IOT hub'ı veya cihaz üzerinde sağ tıklayın ve seçmek için **D2C iletisini İzlemeyi Durdur**.
+    ![D2C Iletisini Izlemeye başla](media/iot-hub-visual-studio-cloud-device-messaging/start-monitoring-d2c-message-vs2019.png)
+
+1. İzlenen iletiler **çıktı**altında görünür.
+
+    ![D2C Iletisi sonucunu izleme](media/iot-hub-visual-studio-cloud-device-messaging/monitor-d2c-message-result-vs2019.png)
+
+1. İzlemeyi durdurmak için herhangi bir IoT Hub veya cihaza sağ tıklayın ve **Izleme D2C Iletisini durdur**' u seçin.
 
 ## <a name="send-cloud-to-device-messages"></a>Buluttan cihaza iletileri gönderme
 
-Cihazınız için IOT hub'ınızdan ileti göndermek için bu adımları izleyin:
+IoT Hub cihazınıza bir ileti göndermek için şu adımları izleyin:
 
-1. Cihazınızı sağ tıklayıp **C2D iletisi gönder**.
+1. Cihazınıza sağ tıklayın ve **C2D Iletisi gönder**' i seçin.
 
-    ![C2D ileti gönder](media/iot-hub-visual-studio-cloud-device-messaging/send-c2d-message.png)
+1. Giriş kutusuna iletiyi girin.
 
-2. İleti giriş kutusuna girin.
+    ![C2D Iletisi gönder](media/iot-hub-visual-studio-cloud-device-messaging/send-c2d-message-test.png)
 
-3. Sonuçları gösterilecek **IOT hub'ı** çıkış bölmesi.
+    Sonuçlar **çıktı**altında görünür.
 
-    ![C2D ileti sonucu Gönder](media/iot-hub-visual-studio-cloud-device-messaging/send-c2d-message-result.png)
+    ![C2D Ileti sonucunu gönder](media/iot-hub-visual-studio-cloud-device-messaging/send-c2d-message-result-vs2019.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-CİHAZDAN buluta iletileri izlemeye ve Azure IOT Hub ve IOT cihaz arasında bulut-cihaz iletilerini göndermek öğrendiniz.
+IoT cihazınız ile Azure IoT Hub arasında cihazdan buluta iletileri izlemeyi ve buluttan cihaza iletiler göndermenizi öğrendiniz.
 
 [!INCLUDE [iot-hub-get-started-next-steps](../../includes/iot-hub-get-started-next-steps.md)]

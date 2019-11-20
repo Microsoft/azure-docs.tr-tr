@@ -1,10 +1,10 @@
 ---
-title: Azure'da Linux VM cihaz adı değişikliklerle ilgili sorunları giderme | Microsoft Docs
-description: Linux VM cihaz değişiklik neden adları ve sorunun nasıl çözüleceği konusunda açıklanmaktadır.
+title: Azure 'da Linux VM cihaz adı değişikliklerinin sorunlarını giderme | Microsoft Docs
+description: Linux VM cihaz adlarının neden değişmesinin ve sorunun nasıl çözüleceğini açıklar.
 services: virtual-machines-linux
 documentationcenter: ''
 author: genlin
-manager: jeconnoc
+manager: dcscontentpm
 editor: ''
 tags: ''
 ms.service: virtual-machines-linux
@@ -14,43 +14,43 @@ ms.tgt_pltfrm: vm-linux
 ms.devlang: azurecli
 ms.date: 11/01/2018
 ms.author: genli
-ms.openlocfilehash: d636d5f31e78828a518882091af29b25f7219304
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 7d8a7e7e88837214042fb8f1c109c0b93bfe771b
+ms.sourcegitcommit: ca359c0c2dd7a0229f73ba11a690e3384d198f40
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60362246"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71058213"
 ---
-# <a name="troubleshoot-linux-vm-device-name-changes"></a>Linux VM cihaz adı değişikliklerle ilgili sorunları giderme
+# <a name="troubleshoot-linux-vm-device-name-changes"></a>Linux VM cihaz adı değişikliklerinde sorun giderme
 
-Bu makalede, bir Linux VM'yi yeniden başlatın ya da veri disklerini yeniden sonra cihaz adları neden değişiyor açıklanmaktadır. Makalede, bu sorun için çözümleri de sağlanır.
+Bu makalede, bir Linux VM 'yi yeniden başlattıktan veya veri disklerini yeniden iliştirdikten sonra cihaz adlarının neden değiştirileceği açıklanmaktadır. Makale Ayrıca bu soruna yönelik çözümler sağlar.
 
 ## <a name="symptoms"></a>Belirtiler
-Linux Vm'leri, Microsoft Azure'da çalıştırırken aşağıdaki sorunlarla karşılaşabilirsiniz:
+Microsoft Azure ' de Linux VM 'Leri çalıştırırken aşağıdaki sorunlarla karşılaşabilirsiniz:
 
-- VM yeniden başlatma sonrası önyükleneceği başarısız olur.
-- Veri diskleri kullanımdan çıkarıldı ve eklenemeyeceği disk cihaz adları değiştirildi.
-- Cihaz adının değiştirilmesi için bir uygulama veya cihaz adı'nı kullanarak bir diski başvuran bir betik başarısız olur.
+- Yeniden başlatma işleminden sonra VM önyükleme başarısız olur.
+- Veri diskleri ayrıldıktan ve yeniden iliştirilmesi halinde disk cihazı adları değişir.
+- Cihaz adı değiştiği için cihaz adı kullanılarak diske başvuran bir uygulama veya betik başarısız olur.
 
 ## <a name="cause"></a>Nedeni
 
-Linux yollarında cihaz yeniden başlatmaları arasında tutarlı olması garanti değildir. Cihaz adları (harf) büyük sayılar ve küçük sayı oluşur. Linux depolama cihazı sürücüsünün yeni bir cihaz algıladığında, sürücü cihaza büyük ve küçük sayı kullanılabilir aralıktan atar. Bir cihaz kaldırıldığında, cihaz sayıları için yeniden kullanılması kurtulurlar.
+Linux 'taki cihaz yollarının yeniden başlatmalar arasında tutarlı olması garanti edilmez. Cihaz adları, büyük numaralardan (harfler) ve küçük numaralardan oluşur. Linux depolama cihazı sürücüsü yeni bir cihaz algıladığında, sürücü kullanılabilir aralıktan cihaza büyük ve küçük sayılar atar. Bir cihaz kaldırıldığında, cihaz numaraları yeniden kullanım için serbest bırakılır.
 
-Zaman uyumsuz olarak gerçekleştirilecek zamanlanmış tarama Linux'ta cihaz SCSI alt sistemi tarafından olduğundan sorun oluşur. Sonuç olarak, bir cihaz yolu adı yeniden başlatmaları arasında farklılık gösterebilir.
+Bu sorun, Linux 'ta cihaz taramanın zaman uyumsuz olarak gerçekleşmesi için SCSI alt sistemi tarafından zamanlandığından oluşur. Sonuç olarak, cihaz yolu adı yeniden başlatmalar arasında farklılık gösterebilir.
 
 ## <a name="solution"></a>Çözüm
 
-Bu sorunu çözmek için kalıcı adlandırma kullanın. Kalıcı adlandırma kullanmak için dört yolu vardır: dosya sistemi etiketine göre UUID, Kimliğine göre veya yolu. Azure Linux Vm'leri için dosya sistemi etiket veya UUID kullanmanızı öneririz.
+Bu sorunu çözmek için kalıcı adlandırma kullanın. Kalıcı adlandırma kullanmanın dört yolu vardır: dosya sistemi etiketi, UUID, KIMLIĞE göre veya yola göre. Azure Linux VM 'Leri için dosya sistemi etiketi veya UUID kullanmanızı öneririz.
 
-Çoğu dağıtımlar sağlamak `fstab` **nofail** veya **nobootwait** parametreleri. Bu parametreleri başlangıçta bağlanacak bir disk başarısız olduğunda önyükleme için bir sisteme olanak tanır. Bu parametreler hakkında daha fazla bilgi için dağıtım belgelerinize bakın. Bir veri diski eklediğinizde bir UUID'ye kullanmak üzere bir Linux VM yapılandırma hakkında daha fazla bilgi için bkz: [yeni disk bağlanacak Linux VM'ye bağlanma](../linux/add-disk.md#connect-to-the-linux-vm-to-mount-the-new-disk).
+Çoğu dağıtım, `fstab` **nofail** veya **nobootwaıt** parametrelerini sağlar. Bu parametreler, disk başlangıç sırasında takılamazsa sistemin önyüklemesine olanak tanır. Bu parametreler hakkında daha fazla bilgi için dağıtım belgelerinize bakın. Bir veri diski eklediğinizde bir UUID kullanmak üzere Linux VM yapılandırma hakkında bilgi için, bkz. [Yeni diski bağlamak Için LINUX VM 'ye bağlanma](../linux/add-disk.md#connect-to-the-linux-vm-to-mount-the-new-disk).
 
-Bir VM'de Azure Linux Aracısı yüklendiğinde, aracı Udev kuralları /dev/disk/azure yolunda simgesel bağlantılar gibi bir dizi oluşturmak için kullanır. Uygulamalar ve betiklerde Udev kuralları disk türü ile birlikte bir VM'ye bağlı diskler ve diskin LUN'ları tanımlamak için kullanın.
+Azure Linux Aracısı bir VM 'ye yüklendiğinde, aracı/dev/disk/Azure yolu altında bir sembolik bağlantı kümesi oluşturmak için Uıdev kurallarını kullanır. Uygulamalar ve betikler, VM 'ye bağlı diskleri tanımlamak için udev kurallarını disk türü ve disk LUN 'Ları ile birlikte kullanır.
 
-VM'niz değil önyükleme ve sanal Makinenize SSH oluşturulamıyor şekilde, fstab düzenlediyseniz, kullanabileceğiniz [VM seri konsol](./serial-console-linux.md) girmek için [tek kullanıcı modunda](./serial-console-grub-single-user-mode.md) ve, fstab değiştirin.
+Fstab ' yi zaten sanal makinenizin önyüklemesine ve sanal makinenize SSH ile ilgili bir şekilde düzenlediyseniz, [tek kullanıcı moduna](./serial-console-grub-single-user-mode.md) girmek ve fstab 'nizi değiştirmek Için [VM seri konsolunu](./serial-console-linux.md) kullanabilirsiniz.
 
-### <a name="identify-disk-luns"></a>Diskin LUN'ları tanımlama
+### <a name="identify-disk-luns"></a>Disk LUN 'larını tanımla
 
-Uygulamalar, tüm ekli disklerin bulmak ve simgesel bağlantılar oluşturmak için LUN'ları kullanın. Azure Linux Aracısı sembolik bağlantılar bir LUN cihazlar için ayarlanan Udev kurallar içerir:
+Uygulamalar, eklenen tüm diskleri bulmak ve sembolik bağlantılar oluşturmak için LUN 'Ları kullanır. Azure Linux Aracısı, bir LUN 'dan cihazlara sembolik bağlantılar oluşturan udev kurallarını içerir:
 
     $ tree /dev/disk/azure
 
@@ -67,7 +67,7 @@ Uygulamalar, tüm ekli disklerin bulmak ve simgesel bağlantılar oluşturmak i�
         ├── lun1-part2 -> ../../../sdd2
         └── lun1-part3 -> ../../../sdd3
 
-LUN bilgileri Linux Konuk hesabı kullanılarak alınır `lsscsi` veya benzer bir araç:
+Linux konuk hesabındaki LUN bilgileri, veya benzer bir araç kullanılarak `lsscsi` alınır:
 
       $ sudo lsscsi
 
@@ -81,7 +81,7 @@ LUN bilgileri Linux Konuk hesabı kullanılarak alınır `lsscsi` veya benzer bi
 
       [5:0:0:1] disk Msft Virtual Disk 1.0 /dev/sdd
 
-Konuk LUN bilgileri Azure aboneliği meta verilerini Azure Depolama'da bölüm verileri içeren VHD bulmak için kullanılır. Örneğin, kullanabileceğiniz `az` CLI:
+Konuk LUN bilgileri, Azure depolama 'da bölüm verilerini içeren VHD 'YI bulmak için Azure abonelik meta verileri ile birlikte kullanılır. Örneğin, `az` CLI 'yi kullanabilirsiniz:
 
     $ az vm show --resource-group testVM --name testVM | jq -r .storageProfile.dataDisks
     [
@@ -111,9 +111,9 @@ Konuk LUN bilgileri Azure aboneliği meta verilerini Azure Depolama'da bölüm v
       }
     ]
 
-### <a name="discover-filesystem-uuids-by-using-blkid"></a>Dosya sistemi UUID'ler blkid'ı kullanarak keşfedin
+### <a name="discover-filesystem-uuids-by-using-blkid"></a>Blkıd kullanarak FileSystem UUID 'ler bulma
 
-Uygulamalar ve betiklerde çıkışını okuma `blkid`, ya da benzer /dev yolunda simgesel bağlantılar oluşturmak için bilgi kaynakları. Çıktı, VM ve bunların ilişkili cihaz dosyasını bağlı tüm diskleri Uuıd'lerini gösterir:
+Uygulamalar ve betikler,/dev yolunda `blkid`sembolik bağlantılar oluşturmak için, veya benzer bilgi kaynaklarının çıktısını okur. Çıkış, sanal makineye ve ilişkili cihaz dosyasına bağlı tüm disklerin UUID 'ler gösterir:
 
     $ sudo blkid -s UUID
 
@@ -122,7 +122,7 @@ Uygulamalar ve betiklerde çıkışını okuma `blkid`, ya da benzer /dev yolund
     /dev/sdb1: UUID="176250df-9c7c-436f-94e4-d13f9bdea744"
     /dev/sdc1: UUID="b0048738-4ecc-4837-9793-49ce296d2692"
 
-Azure Linux Aracısı Udev kuralları /dev/disk/azure yolunda simgesel bağlantılar gibi bir dizi oluşturun:
+Azure Linux Aracısı udev kuralları/dev/disk/Azure yolu altında bir sembolik bağlantılar kümesi oluşturur:
 
     $ ls -l /dev/disk/azure
 
@@ -132,18 +132,18 @@ Azure Linux Aracısı Udev kuralları /dev/disk/azure yolunda simgesel bağlant�
     lrwxrwxrwx 1 root root  9 Jun  2 23:17 root -> ../../sda
     lrwxrwxrwx 1 root root 10 Jun  2 23:17 root-part1 -> ../../sda1
 
-Uygulamalar, önyükleme diski cihaz ve kaynak (kısa ömürlü) diski tanımlamak için bağlantıları kullanın. Azure'da, uygulamaları bu bölümleri bulmak için /dev/disk/azure/root-part1 veya /dev/disk/azure-resource-part1 yollarında görünmelidir.
+Uygulamalar, önyükleme disk cihazını ve kaynak (kısa ömürlü) diski tanımlamak için bağlantıları kullanır. Azure 'da uygulamalar, bu bölümleri bulmak için/dev/disk/Azure/root-part1 veya/dev/disk/Azure-Resource-part1 yollarında görünmelidir.
 
-Herhangi bir ek bölümlerden `blkid` listesinde bulunan bir veri diski üzerinde. Uygulamalar için bu bölümleri UUID korumak ve çalışma zamanında cihaz adını bulmak için bir yol kullanın:
+`blkid` Listedeki tüm ek bölümler bir veri diskinde bulunur. Uygulamalar bu bölümlerin UUID 'sini korur ve çalışma zamanında cihaz adını bulacak bir yol kullanır:
 
     $ ls -l /dev/disk/by-uuid/b0048738-4ecc-4837-9793-49ce296d2692
 
     lrwxrwxrwx 1 root root 10 Jun 19 15:57 /dev/disk/by-uuid/b0048738-4ecc-4837-9793-49ce296d2692 -> ../../sdc1
 
 
-### <a name="get-the-latest-azure-storage-rules"></a>En son Azure depolama kurallarını Al
+### <a name="get-the-latest-azure-storage-rules"></a>En son Azure depolama kurallarını al
 
-En son Azure depolama kuralları almak için aşağıdaki komutları çalıştırın:
+En son Azure depolama kurallarını almak için aşağıdaki komutları çalıştırın:
 
     # sudo curl -o /etc/udev/rules.d/66-azure-storage.rules https://raw.githubusercontent.com/Azure/WALinuxAgent/master/config/66-azure-storage.rules
     # sudo udevadm trigger --subsystem-match=block
@@ -152,8 +152,8 @@ En son Azure depolama kuralları almak için aşağıdaki komutları çalıştı
 
 Daha fazla bilgi için aşağıdaki makalelere bakın:
 
-- [Ubuntu: UUID kullanma](https://help.ubuntu.com/community/UsingUUID)
+- [Ubuntu UUID kullanma](https://help.ubuntu.com/community/UsingUUID)
 - [Red Hat: Kalıcı adlandırma](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Storage_Administration_Guide/persistent_naming.html)
-- [Linux: UUID'ler sizin için neler](https://www.linux.com/news/what-uuids-can-do-you)
-- [Udev: Modern bir Linux sisteminde cihaz yönetimine giriş](https://www.linux.com/news/udev-introduction-device-management-modern-linux-system)
+- ['Un UUID 'ler ne yapabilir?](https://www.linux.com/news/what-uuids-can-do-you)
+- [Udev Modern bir Linux sisteminde cihaz yönetimine giriş](https://www.linux.com/news/udev-introduction-device-management-modern-linux-system)
 

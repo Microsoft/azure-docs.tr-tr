@@ -1,10 +1,10 @@
 ---
-title: Bir Linux VM üzerinde bir takas dosyası yapılandırma için cloud-init kullanma | Microsoft Docs
-description: Azure CLI ile oluşturma sırasında bir Linux VM'de bir takas dosyası yapılandırma için cloud-init kullanma
+title: Linux VM 'de takas bölümü yapılandırmak için Cloud-init kullanma
+description: Azure CLı ile oluşturma sırasında bir Linux sanal makinesinde takas bölümü yapılandırmak için Cloud-init kullanma
 services: virtual-machines-linux
 documentationcenter: ''
 author: rickstercdn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines-linux
@@ -14,22 +14,22 @@ ms.devlang: azurecli
 ms.topic: article
 ms.date: 11/29/2017
 ms.author: rclaus
-ms.openlocfilehash: 626fd4739daf2506854c42f16ac986a361ebab38
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fad73a7dbed9351d684ef2464cf2fa6fa3489290
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60729826"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036766"
 ---
-# <a name="use-cloud-init-to-configure-a-swapfile-on-a-linux-vm"></a>Bir Linux VM üzerinde bir takas dosyası yapılandırma için cloud-init kullanma
-Bu makalede nasıl kullanılacağını gösterir [cloud-init](https://cloudinit.readthedocs.io) takas dosyası üzerinde çeşitli Linux dağıtımları yapılandırmak için. Takas dosyası tarafından Linux Aracısı (hangi dağıtımların bir gerekli üzerinde temel WALA) geleneksel olarak yapılandırıldı.  Bu belge, cloud-init kullanarak sağlama süresi sırasında isteğe bağlı takas dosyası oluşturma işlemine özetler.  Cloud-init yerel olarak desteklenen Linux dağıtımları ve Azure ile işleyişi hakkında daha fazla bilgi için bkz. [cloud-init genel bakış](using-cloud-init.md)
+# <a name="use-cloud-init-to-configure-a-swap-partition-on-a-linux-vm"></a>Linux VM 'de takas bölümü yapılandırmak için Cloud-init kullanma
+Bu makalede, [Cloud-init](https://cloudinit.readthedocs.io) kullanarak çeşitli Linux dağıtımlarına takas bölümünü nasıl yapılandırabileceğiniz gösterilmektedir. Değiştirme bölümü geleneksel olarak Linux Aracısı (WALA) tarafından hangi dağıtımların gerekli olduğunu temel alan bir şekilde yapılandırılmıştır.  Bu belge, Cloud-init ' i kullanarak sağlama süresi boyunca değiştirme bölümünü isteğe bağlı olarak oluşturma sürecini özetler.  Cloud-init 'in Azure 'da ve desteklenen Linux korumalar 'daki yerel olarak nasıl çalıştığı hakkında daha fazla bilgi için bkz. [Cloud-init Overview](using-cloud-init.md)
 
-## <a name="create-swapfile-for-ubuntu-based-images"></a>Ubuntu tabanlı görüntüler için takas dosyası oluşturma
-Azure üzerinde varsayılan olarak, Ubuntu galeri görüntüleri takas dosyaları oluşturmayın. Takas dosyası yapılandırma VM cloud-init kullanarak sağlama sırasında enable - Lütfen görmek için [AzureSwapPartitions belge](https://wiki.ubuntu.com/AzureSwapPartitions) Ubuntu Wiki.
+## <a name="create-swap-partition-for-ubuntu-based-images"></a>Ubuntu tabanlı görüntüler için takas bölümü oluşturma
+Varsayılan olarak, Azure 'da Ubuntu Galerisi görüntüleri takas bölümleri oluşturmaz. Cloud-init kullanarak VM sağlama süresi sırasında bölüm yapılandırmasını değiştirme özelliğini etkinleştirmek için lütfen Ubuntu wiki üzerinde [Azureswappartitions belgesine](https://wiki.ubuntu.com/AzureSwapPartitions) bakın.
 
-## <a name="create-swapfile-for-red-hat-and-centos-based-images"></a>Red Hat ve CentOS tabanlı görüntüler için takas dosyası oluşturma
+## <a name="create-swap-partition-for-red-hat-and-centos-based-images"></a>Red Hat ve CentOS tabanlı görüntüler için takas bölümü oluşturma
 
-Geçerli kabuğunuzda adlı bir dosya oluşturun *cloud_init_swapfile.txt* oluşturup aşağıdaki yapılandırmayı yapıştırın. Bu örnekte, dosyayı yerel makinenizde değil Cloud shell'de oluşturun. İstediğiniz düzenleyiciyi kullanabilirsiniz. Dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud_init_swapfile.txt` adını girin. Kullanılacak #1 seçin **nano** Düzenleyici. Tüm cloud-init dosyası doğru bir şekilde kopyalandığından emin olun başta birinci satır.  
+Geçerli kabuğunuzun *cloud_init_swappart. txt* adlı bir dosya oluşturun ve aşağıdaki yapılandırmayı yapıştırın. Bu örnekte, dosyayı yerel makinenizde değil Cloud Shell oluşturun. İstediğiniz düzenleyiciyi kullanabilirsiniz. Dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud_init_swappart.txt` adını girin. **Nano** düzenleyiciyi kullanmak için #1 seçin. Tüm Cloud-init dosyalarının, özellikle de ilk satırda doğru şekilde kopyalandığından emin olun.  
 
 ```yaml
 #cloud-config
@@ -48,37 +48,37 @@ mounts:
   - ["ephemeral0.2", "none", "swap", "sw", "0", "0"]
 ```
 
-Bu görüntü dağıtmadan önce bir kaynak grubu oluşturmak için ihtiyacınız [az grubu oluşturma](/cli/azure/group) komutu. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur.
+Bu görüntüyü dağıtılmadan önce [az Group Create](/cli/azure/group) komutuyla bir kaynak grubu oluşturmanız gerekir. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur.
 
 ```azurecli-interactive 
 az group create --name myResourceGroup --location eastus
 ```
 
-Şimdi bir VM oluşturun [az vm oluşturma](/cli/azure/vm) ve cloud-init dosyası ile `--custom-data cloud_init_swapfile.txt` gibi:
+Şimdi [az VM Create](/cli/azure/vm) Ile bir VM oluşturun ve Cloud-init dosyasını `--custom-data cloud_init_swappart.txt` ile aşağıdaki gibi belirtin:
 
 ```azurecli-interactive 
 az vm create \
   --resource-group myResourceGroup \
   --name centos74 \
   --image OpenLogic:CentOS:7-CI:latest \
-  --custom-data cloud_init_swapfile.txt \
+  --custom-data cloud_init_swappart.txt \
   --generate-ssh-keys 
 ```
 
-## <a name="verify-swapfile-was-created"></a>Takas dosyası oluşturuldu doğrulayın
-SSH için yukarıdaki komut çıktısında gösterilen sanal makinenizin genel IP adresi. Kendi girin **Publicıpaddress** gibi:
+## <a name="verify-swap-partition-was-created"></a>Değiştirme bölümünün oluşturulduğunu doğrula
+Önceki komutun çıktısında gösterilen sanal makinenizin genel IP adresine SSH. Kendi **Publicıpaddress** değerini aşağıdaki şekilde girin:
 
 ```bash
 ssh <publicIpAddress>
 ```
 
-SSH'ed VM'de oturum açtıktan sonra takas dosyası oluşturulup oluşturulmadığını denetleyin.
+VM 'ye bir Sshtikten sonra, takas bölümünün oluşturulup oluşturulmadığımsını denetleyin
 
 ```bash
 swapon -s
 ```
 
-Bu komutun çıktısı, şöyle görünmelidir:
+Bu komutun çıktısı şuna benzemelidir:
 
 ```text
 Filename                Type        Size    Used    Priority
@@ -86,12 +86,12 @@ Filename                Type        Size    Used    Priority
 ```
 
 > [!NOTE] 
-> Yapılandırılan bir takas dosyasına sahip mevcut bir Azure görüntüsünü varsa ve yeni görüntüleri için takas dosyası yapılandırmasını değiştirmek istiyorsanız, mevcut takas dosyası kaldırmanız gerekir. Lütfen 'Özelleştir sağlamak için cloud-init tarafından görüntüleri' daha fazla ayrıntı için bkz.
+> Bir değiştirme bölümü yapılandırılmış mevcut bir Azure görüntünüz varsa ve yeni görüntüler için takas bölümü yapılandırmasını değiştirmek istiyorsanız, var olan takas bölümünü kaldırmanız gerekir. Daha fazla ayrıntı için lütfen bkz. ' Cloud-init tarafından sağlanacak resimleri özelleştirme ' belgesi.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Yapılandırma değişiklikleri ek cloud-init örnekleri için aşağıdakilere bakın:
+Yapılandırma değişikliklerine yönelik ek Cloud-init örnekleri için aşağıdakilere bakın:
  
-- [Bir VM'ye ek Linux kullanıcı ekleme](cloudinit-add-user.md)
-- [İlk önyüklemede mevcut paketlerini güncelleştirmek için bir paket Yöneticisi'ni çalıştırın](cloudinit-update-vm.md)
-- [VM yerel ana bilgisayar adını değiştirin](cloudinit-update-vm-hostname.md) 
-- [Bir uygulama paketi yükleme, yapılandırma dosyasını güncelleyin ve anahtarları ekleme](tutorial-automate-vm-deployment.md)
+- [VM 'ye ek bir Linux kullanıcısı ekleme](cloudinit-add-user.md)
+- [İlk önyüklemede var olan paketleri güncelleştirmek için bir paket yöneticisi çalıştırın](cloudinit-update-vm.md)
+- [VM yerel ana bilgisayar adını değiştir](cloudinit-update-vm-hostname.md) 
+- [Uygulama paketi yüklemesi, yapılandırma dosyalarını güncelleştirme ve anahtarları ekleme](tutorial-automate-vm-deployment.md)

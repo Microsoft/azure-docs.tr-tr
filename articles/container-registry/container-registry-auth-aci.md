@@ -1,38 +1,39 @@
 ---
-title: Azure Container Registry'den Azure Container Instances ile kimlik doğrulaması
-description: Özel kapsayıcı kayıt defterinizde bulunan görüntü Azure Container Instances ' bir Azure Active Directory Hizmet sorumlusu kullanarak erişmeyi öğrenin.
+title: Container Instances Azure Container Registry erişim
+description: Azure Active Directory hizmet sorumlusu kullanarak Azure Container Instances özel kapsayıcı kayıt defterinizde görüntülere nasıl erişim sağlayacağınızı öğrenin.
 services: container-registry
 author: dlepow
+manager: gwallace
 ms.service: container-registry
 ms.topic: article
 ms.date: 04/23/2018
 ms.author: danlep
-ms.openlocfilehash: 8a2d19a09233e510055e147fa1cf95dd4471768b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 53cdca72587dafd39abd3f13ad488dcb460bf622
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61333585"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73931668"
 ---
-# <a name="authenticate-with-azure-container-registry-from-azure-container-instances"></a>Azure Container Registry'den Azure Container Instances ile kimlik doğrulaması
+# <a name="authenticate-with-azure-container-registry-from-azure-container-instances"></a>Azure Container Instances Azure Container Registry ile kimlik doğrulama
 
-Azure Container Registry, özel kapsayıcı kayıt defterleri için erişim sağlamak için bir Azure Active Directory (Azure AD) hizmet sorumlusu kullanabilirsiniz.
+Azure Container Registry içindeki özel kapsayıcı kayıt defterlerine erişim sağlamak için bir Azure Active Directory (Azure AD) hizmet sorumlusu kullanabilirsiniz.
 
-Bu makalede, oluşturmak ve bir Azure AD hizmet sorumlusu ile yapılandırmak bilgi *çekme* kayıt izinleri. Sonra Azure Container Instances'a (özel kayıt defterinizdeki, kendi görüntü çeken hizmet sorumlusunu kullanarak kimlik doğrulaması için ACI) bir kapsayıcı başlatın.
+Bu makalede, Kayıt defterinize yönelik *çekme* Izinleriyle BIR Azure AD hizmet sorumlusu oluşturup yapılandırmayı öğreneceksiniz. Daha sonra, kimlik doğrulaması için hizmet sorumlusu kullanarak görüntüsünü özel Kayıt defterinizden alan Azure Container Instances (acı) içinde bir kapsayıcı başlatabilirsiniz.
 
-## <a name="when-to-use-a-service-principal"></a>Bir hizmet sorumlusu kullanma zamanı
+## <a name="when-to-use-a-service-principal"></a>Hizmet sorumlusu ne zaman kullanılır?
 
-ACI kimlik doğrulaması için bir hizmet sorumlusu kullanmalısınız **gözetimsiz senaryoları**kapsayıcı örnekleri otomatik olarak veya başka bir katılımsız şekilde oluşturmak, uygulamaları veya hizmetleri olduğu gibi.
+Bir hizmet sorumlusu kullanarak, bir otomatik veya başka şekilde katılımsız bir şekilde kapsayıcı örnekleri oluşturan uygulama veya hizmetlerde gibi, **gözetimsiz senaryolarda**kimlik doğrulaması için bir hizmet sorumlusu kullanmanız gerekir.
 
-Örneğin, gecelik çalıştırır ve oluşturan otomatik bir betik varsa bir [görev tabanlı bir kapsayıcı örneği](../container-instances/container-instances-restart-policy.md) bazı verileri işlemek için bunu bir hizmet sorumlusu çoğaltılmadığı izinlerle kayıt defterinde kimlik doğrulaması için kullanabilirsiniz. Ardından, hizmet sorumlusunun kimlik bilgilerini döndürme veya diğer hizmetler ve uygulamaları etkilemeden, erişimi tamamen iptal.
+Örneğin, gecelik çalıştıran bir otomatik betiğe sahipseniz ve bazı verileri işlemek için [görev tabanlı bir kapsayıcı örneği](../container-instances/container-instances-restart-policy.md) oluşturursa, kayıt defterinde kimlik doğrulamak için yalnızca çekme izinleriyle bir hizmet sorumlusu kullanabilir. Daha sonra hizmet sorumlusunun kimlik bilgilerini döndürebilir veya diğer hizmetleri ve uygulamaları etkilemeden erişimi tamamen iptal edebilirsiniz.
 
-Hizmet sorumluları olmalıdır ne zaman kullanılan kayıt defteri [yönetici kullanıcı](container-registry-authentication.md#admin-account) devre dışı bırakıldı.
+Hizmet sorumluları, kayıt defteri [Yönetici kullanıcısı](container-registry-authentication.md#admin-account) devre dışı olduğunda da kullanılmalıdır.
 
 [!INCLUDE [container-registry-service-principal](../../includes/container-registry-service-principal.md)]
 
-## <a name="authenticate-using-the-service-principal"></a>Hizmet sorumlusunu kullanarak kimlik doğrulaması
+## <a name="authenticate-using-the-service-principal"></a>Hizmet sorumlusunu kullanarak kimlik doğrulama
 
-Bir kapsayıcıda bir hizmet sorumlusu kullanarak Azure Container Instances'ı başlatmak için kendi kimliği belirtin. `--registry-username`ve bunun parolasını `--registry-password`.
+Hizmet sorumlusu kullanarak Azure Container Instances bir kapsayıcı başlatmak için `--registry-username`KIMLIĞINI ve `--registry-password`parolasını belirtin.
 
 ```azurecli-interactive
 az container create \
@@ -46,17 +47,17 @@ az container create \
 
 ## <a name="sample-scripts"></a>Örnek komut dosyaları
 
-Azure PowerShell için iyi bir sürüm olarak, github'da Azure CLI için önceki örnek betikler bulabilirsiniz:
+Azure CLı için yukarıdaki örnek betikleri GitHub 'da ve Azure PowerShell için de bulabilirsiniz:
 
 * [Azure CLI][acr-scripts-cli]
 * [Azure PowerShell][acr-scripts-psh]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-ACR ile hizmet sorumluları ile çalışma hakkında ek ayrıntılar aşağıdaki makaleleri içerir:
+Aşağıdaki makalelerde hizmet sorumluları ve ACR ile çalışma hakkında ek ayrıntılar yer alır:
 
-* [Azure Container Registry kimlik doğrulama ile hizmet sorumluları](container-registry-auth-service-principal.md)
-* [Azure Container Registry'den Azure Kubernetes Service'i (AKS) ile kimlik doğrulaması](container-registry-auth-aks.md)
+* [Hizmet sorumluları ile kimlik doğrulamasını Azure Container Registry](container-registry-auth-service-principal.md)
+* [Azure Kubernetes Service (AKS) Azure Container Registry ile kimlik doğrulama](../aks/cluster-container-registry-integration.md)
 
 <!-- IMAGES -->
 

@@ -1,7 +1,7 @@
 ---
-title: Video Indexer - kullanılabildiği bölgeler Azure
-titlesuffix: Azure Media Services
-description: Bu makalede, Video Indexer kullanılabildiği Azure bölgeleri hakkında konuşuyor.
+title: Video Indexer kullanılabildiği bölgeler-Azure
+titleSuffix: Azure Media Services
+description: Bu makalede Video Indexer kullanılabildiği Azure bölgeleri ele sunulmuştur.
 services: media-services
 author: anikaz
 manager: johndeu
@@ -10,28 +10,28 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 05/15/2019
 ms.author: anzaman
-ms.openlocfilehash: 404aaf91c0cb30df0a83353ef7397987ec3f8e80
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b67c89e02091d57b4f2dc901005c2dae36deafc2
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65799426"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73838195"
 ---
-# <a name="azure-regions-in-which-video-indexer-exists"></a>Video Indexer bulunduğu azure bölgeleri
+# <a name="azure-regions-in-which-video-indexer-exists"></a>Video Indexer var olan Azure bölgeleri
 
-Video Indexer API'ları içeren bir **konumu** olduğu çağrı yönlendirilir bir Azure bölgesine ayarlamalısınız parametresi. Bu olmalıdır bir [Video Indexer kullanılabildiği Azure bölgesi](https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services&regions=all).
+Video Indexer API 'Leri, çağrının yönlendirileceği Azure bölgesine ayarlamanız gereken bir **konum** parametresi içerir. Bu [, video Indexer kullanılabildiği bir Azure bölgesi](https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services&regions=all)olmalıdır.
 
 ## <a name="locations"></a>Konumlar
 
-**Konumu** parametre değeri olarak bir Azure bölgesine kod adı verilen gerekir. Video Indexer'ı önizleme modunda kullanıyorsanız, sizi koymalısınız *"Deneme"* değeri. Aksi takdirde, hesabınızın bulunduğu ve aramanız için yönlendirileceğini Azure bölgesinin kod adını almak için aşağıdaki satırı çalıştırabilirsiniz [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest):
+**Konum** parametresine, değeri olarak Azure bölge kodu adı verilmelidir. Önizleme modunda Video Indexer kullanıyorsanız, *"deneme"* değerini değer olarak koymanız gerekir. Aksi takdirde, hesabınızın bulunduğu Azure bölgesinin kod adını almak ve çağrın ' a yönlendirilmek için, [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)'de aşağıdaki satırı çalıştırabilirsiniz:
 
 ```bash
 az account list-locations
 ```
 
-Bir kez yukarıda gösterilen tüm Azure bölgelerinde listesini alma satırı çalıştırın. Sahip Azure bölgesine gidin *displayName* aradığınız ve kullanmak, *adı* değerini **konumu** parametresi.
+Yukarıda gösterilen satırı çalıştırdığınızda tüm Azure bölgelerinin bir listesini alırsınız. Aradığınız *DisplayName* 'e sahip Azure bölgesine gidin ve **konum** parametresi için *ad* değerini kullanın.
 
-Örneğin, Azure bölgesinde Batı ABD 2 (aşağıda gösterilen), "westus2" için kullanacağınız **konumu** parametresi.
+Örneğin, Azure bölgesi Batı ABD 2 için (aşağıda görüntülenir), **konum** parametresi için "westus2" kullanacaksınız.
 
 ```json
    {
@@ -46,6 +46,6 @@ Bir kez yukarıda gösterilen tüm Azure bölgelerinde listesini alma satırı �
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Dil modeli API'lerini kullanarak özelleştirme](customize-language-model-with-api.md)
-- [Markaları modeli API'lerini kullanarak özelleştirme](customize-brands-model-with-api.md)
-- [Kişi modeli API'lerini kullanarak özelleştirme](customize-person-model-with-api.md)
+- [API 'Leri kullanarak dil modelini özelleştirme](customize-language-model-with-api.md)
+- [API 'Leri kullanarak markalar modelini özelleştirme](customize-brands-model-with-api.md)
+- [API 'Leri kullanarak kişi modelini özelleştirme](customize-person-model-with-api.md)

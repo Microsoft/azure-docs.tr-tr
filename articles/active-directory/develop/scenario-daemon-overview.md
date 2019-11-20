@@ -1,6 +1,6 @@
 ---
-title: Arka plan programı uygulama çağıran web API'leri (genel bakış) - Microsoft kimlik platformu
-description: Web API'leri çağıran bir arka plan programı uygulaması oluşturmayı öğrenin
+title: Web API 'Lerini çağıran Daemon uygulaması (genel bakış)-Microsoft Identity platform
+description: Web API 'Lerini çağıran bir Daemon uygulaması derlemeyi öğrenin
 services: active-directory
 documentationcenter: dev-center-name
 author: jmprieur
@@ -12,20 +12,20 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 05/07/2019
+ms.date: 09/15/2019
 ms.author: jmprieur
-ms.custom: aaddev
+ms.custom: aaddev, identityplatformtop40
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 578b7cdb38b7df3fab5885d773354a36f76a4cfb
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ae0912203f2427694d2a9b8611966a55e1e6889e
+ms.sourcegitcommit: ca359c0c2dd7a0229f73ba11a690e3384d198f40
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65075888"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71056392"
 ---
-# <a name="scenario-daemon-application-that-calls-web-apis"></a>Senaryo: Daemon uygulamasının web API'leri çağrıları
+# <a name="scenario-daemon-application-that-calls-web-apis"></a>Senaryo: Web API 'Lerini çağıran Daemon uygulaması
 
-Tüm yapmanız gereken web API'lerini çağıran bir arka plan programı uygulaması oluşturmayı öğrenin.
+Web API 'Lerini çağıran bir Daemon uygulaması oluşturmak için ihtiyacınız olan her şey hakkında bilgi edinin.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -33,38 +33,38 @@ Tüm yapmanız gereken web API'lerini çağıran bir arka plan programı uygulam
 
 ## <a name="overview"></a>Genel Bakış
 
-Uygulamanız bir web API'si kendi adına (olmayan bir kullanıcı adına) çağırmak için bir belirteç elde edebilirsiniz. Bu senaryo, arka plan programı uygulamaları için yararlıdır. Standart OAuth 2.0 kullanan [istemci kimlik bilgileri](v2-oauth2-client-creds-grant-flow.md) verin.
+Uygulamanız, bir Web API 'sini kendi adına (Kullanıcı adına değil) çağırmak için bir belirteç alabilir. Bu senaryo, Daemon uygulamaları için yararlıdır. Standart OAuth 2,0 [istemci kimlik bilgileri](v2-oauth2-client-creds-grant-flow.md) ver ' i kullanıyor.
 
 ![Daemon uygulamaları](./media/scenario-daemon-app/daemon-app.svg)
 
-Arka plan programı uygulamaları için kullanım örnekleri bazı örnekleri aşağıda verilmiştir:
+Daemon uygulamaları için kullanım örneklerinin bazı örnekleri aşağıda verilmiştir:
 
-- Sağlama için kullanılan veya kullanıcıları yönetmek ya da toplu işlemler bir dizinde web uygulamaları
-- Toplu işleri ya da arka planda çalışan bir işletim sistemi hizmetidir gerçekleştirin (Windows üzerinde windows Hizmetleri) ya da Linux Daemon'ları işlemleri gibi Masaüstü uygulamaları
-- Web dizinler, özel olmayan kullanıcıları yönetmek için gereken API'leri
+- Kullanıcıları sağlamak veya yönetmek ya da bir dizinde toplu işlem yapmak için kullanılan Web uygulamaları
+- Toplu işleri gerçekleştiren masaüstü uygulamaları (Windows Hizmetleri veya Linux üzerinde Daemon 'ları işlemleri) veya arka planda çalışan bir işletim sistemi hizmeti
+- Belirli kullanıcıları değil, dizinleri işlemek zorunda olan Web API 'Leri
 
-Burada olmayan uygulamalar kullanım istemci kimlik bilgileri başka bir yaygın örneği yoktur: bile, kullanıcıların adına hareket zaman, bir web API'sini veya kaynak kimliklerini ile teknik nedenlerle erişmek ihtiyaç duydukları. Gizli anahtar kasası veya Azure SQL veritabanı erişimi bir önbellek için buna bir örnektir.
+Daemon olmayan uygulamaların istemci kimlik bilgilerini kullandıklarında bile, bir Web API 'sine veya bir kaynağa teknik nedenlerden dolayı kendi kimlik bilgilerine erişmesi gerekir. Bir örnek, anahtar kasasındaki gizli dizileri veya bir önbellek için Azure SQL veritabanı 'na erişim sağlar.
 
-Kendi kimlikleri için bir belirteç almak uygulamalar:
+Kendi kimlikleri için belirteç elde eden uygulamalar:
 
-- Gizli istemci uygulamalardır. Bir kullanıcı bağımsız olarak bunlar kaynaklara koşuluyla, kimliğini kanıtlamak bu uygulamaları gerekir. Bunlar, ayrıca Azure Active Directory (Azure AD) Kiracı yöneticileri tarafından onaylanması için ihtiyaç duydukları yerine hassas uygulamalar hedeflenmiştir.
-- Bir gizli dizi (uygulama parola veya sertifika) Azure AD'ye kaydettiniz. Bu gizli dizinin bir belirteç almak üzere Azure ad araması sırasında aktarılan.
+- Gizli istemci uygulamaları. Kaynaklara bir kullanıcıdan bağımsız olarak eriştikleri belirtilen bu uygulamalar, kimliklerini kanıtlamaları gerekir. Ayrıca, Azure Active Directory (Azure AD) kiracı yöneticileri tarafından onaylanması gereken hassas uygulamalar da vardır.
+- Azure AD ile bir gizli dizi (uygulama parolası veya sertifika) kaydettiniz. Bu gizli dizi, bir belirteç almak için Azure AD çağrısı sırasında geçirilir.
 
-## <a name="specifics"></a>Özellikleri
+## <a name="specifics"></a>Özelliklerini
 
 > [!IMPORTANT]
 >
-> - Kullanıcı etkileşimi bir arka plan programı uygulamayla mümkün değildir. Arka plan programı uygulama kendi kimlik gerektirir. Bu tür bir uygulama bir erişim belirteci kullanarak uygulama kimliğini ve bunun uygulama kimliği, kimlik bilgisi (parola veya sertifika) ve uygulama sunma ister Azure AD'ye kimliği URI'si. Başarılı kimlik doğrulamasından sonra arka plan programı daha sonra web API'sini çağırmak için kullanılır (ve gerekirse yenilenir) Microsoft kimlik platformu uç noktasından bir erişim belirteci (ve bir yenileme belirteci) alır.
-> - Kullanıcı etkileşimi mümkün olmadığı için artımlı onay mümkün olmayacaktır. Gerekli API izinleri uygulama kaydı sırasında yapılandırılmış olması gerekmez ve uygulama kodunda yalnızca statik olarak tanımlı izinler ister. Bu, aynı zamanda arka plan programı uygulamaları artımlı onay desteklemeyeceği anlamına gelir.
+> - Bir Daemon uygulamasıyla Kullanıcı etkileşimi mümkün değildir. Bir Daemon uygulaması kendi kimliğini gerektirir. Bu tür bir uygulama, uygulama kimliğini kullanarak bir erişim belirteci ister ve uygulama KIMLIĞI, kimlik bilgileri (parola veya sertifika) ve uygulama KIMLIĞI URI 'sini Azure AD 'ye sunuyor. Başarılı kimlik doğrulamasından sonra, Daemon, Web API 'sini çağırmak için kullanılan (ve gerektiğinde yenilendiğinde) Microsoft Identity platform uç noktasından bir erişim belirteci (ve yenileme belirteci) alır.
+> - Kullanıcı etkileşimi mümkün olmadığından, artımlı onay mümkün olmayacaktır. Tüm gerekli API izinlerinin uygulama kaydında yapılandırılması gerekir ve uygulamanın kodu yalnızca statik olarak tanımlanan izinleri ister. Bu Ayrıca, Daemon uygulamalarının artımlı onayı desteklememe anlamına gelir.
 
-Geliştiriciler için bu senaryo için uçtan uca deneyim aşağıdaki durumlara sahiptir:
+Geliştiriciler için, bu senaryoya yönelik uçtan uca deneyim aşağıdaki yönlere sahiptir:
 
-- Arka plan programı uygulamaları, yalnızca Azure AD kiracılar çalışabilir. Bu, kişisel Microsoft hesapları yönetmek için çalışır bir arka plan programı uygulamasının anlamsız olmasını. Siz bir satır iş kolu (LOB) uygulama geliştiricisi gibiyseniz, kiracınızda arka plan programı uygulamanızı oluşturmayı öğreneceksiniz. Bir ISV iseniz, çok kiracılı arka plan programı uygulaması oluşturmak isteyebilirsiniz. Her bir kiracı Yöneticisi tarafından onaylı gerekir
-- Sırasında [uygulama kaydı](./scenario-daemon-app-registration.md), **yanıt URI'si** gerek yoktur. Uygulama izinleri isteme ve bu uygulama izinleri kullanmak için yönetici onayı vermek ihtiyacınız ve gizli dizileri veya sertifikaları, Azure AD ile paylaşmak ihtiyacınız.
-- [Uygulama yapılandırması](./scenario-daemon-app-configuration.md) uygulama kaydı sırasında Azure AD ile paylaşılan olarak istemci kimlik bilgileri sağlaması gerekir.
-- [Kapsam](scenario-daemon-acquire-token.md#scopes-to-request) akışların ihtiyaçlarını statik kapsamı için istemci kimlik bilgileri ile bir belirteç almak için kullanılır.
+- Daemon uygulamaları yalnızca Azure AD kiracılarında çalışabilir. Microsoft kişisel hesaplarını işlemeyi deneyen bir Daemon uygulaması oluşturmak mantıklı değildir. İş kolu (LOB) uygulaması geliştiricisiyseniz, kiracınızda Daemon uygulamanızı oluşturacaksınız. Bir ISV iseniz, çok kiracılı bir Daemon uygulaması oluşturmak isteyebilirsiniz. Her kiracı yöneticisi tarafından incelenmesi gerekir.
+- [Uygulama kaydı](./scenario-daemon-app-registration.md)sırasında, **Yanıt URI 'si** gerekli değildir. Parolaların veya sertifikaların veya imzalı onayların Azure AD ile paylaşılması gerekir ve bu uygulama izinlerini kullanmak için uygulama izinleri istemeniz ve yönetici onayı vermeniz gerekir.
+- Uygulama [yapılandırmasının](./scenario-daemon-app-configuration.md) , uygulama kaydı SıRASıNDA Azure AD ile paylaşılan olarak istemci kimlik bilgilerini sağlaması gerekir.
+- İstemci kimlik bilgileri akışı ile belirteç almak için kullanılan [kapsamın](scenario-daemon-acquire-token.md#scopes-to-request) bir statik kapsam olması gerekir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Arka plan programı app - uygulama kaydı](./scenario-daemon-app-registration.md)
+> [Daemon uygulaması-uygulama kaydı](./scenario-daemon-app-registration.md)

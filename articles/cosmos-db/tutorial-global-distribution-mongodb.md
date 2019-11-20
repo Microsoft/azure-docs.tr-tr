@@ -1,34 +1,34 @@
 ---
-title: MongoDB kullanarak Azure Cosmos DB'nin genel dağıtım Öğreticisi
-description: MongoDB kullanarak Azure Cosmos DB'nin genel dağıtımını ayarlama konusunda bilgi edinin.
-author: rimman
+title: MongoDB için Azure Cosmos DB API 'sini kullanarak küresel dağıtım öğreticisi
+description: MongoDB için Azure Cosmos DB API 'sini kullanarak genel dağıtımı ayarlamayı öğrenin.
+author: markjbrown
+ms.author: mjbrown
 ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
 ms.topic: tutorial
 ms.date: 12/26/2018
-ms.author: rimman
 ms.reviewer: sngun
-ms.openlocfilehash: 5ae5923253575fc3dea6b90b599b9fa3d79a85b8
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 5a9c618fdcf2e904a2a3c03b3ae6b5477cd47c4e
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60578814"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72754769"
 ---
-# <a name="set-up-global-distributed-database-using-azure-cosmos-dbs-api-for-mongodb"></a>Azure Cosmos DB'nin MongoDB kullanarak küresel dağıtılmış veritabanı ayarlama
+# <a name="set-up-global-distributed-database-using-azure-cosmos-dbs-api-for-mongodb"></a>MongoDB için Azure Cosmos DB API 'sini kullanarak genel dağıtılmış veritabanını ayarlama
 
-Bu makalede, global olarak dağıtılmış bir veritabanı kurulumu ve bunu Azure Cosmos DB'nin MongoDB kullanarak bağlanmak için Azure portalını kullanmayı göstereceğiz.
+Bu makalede, genel olarak dağıtılmış bir veritabanını kurmak ve MongoDB için Azure Cosmos DB API 'sini kullanarak bu sunucuya bağlanmak için Azure portal nasıl kullanacağınızı göstereceğiz.
 
 Bu makale aşağıdaki görevleri kapsar: 
 
 > [!div class="checklist"]
 > * Azure portalını kullanarak genel dağıtımı yapılandırma
-> * Kullanarak genel dağıtımı yapılandırma [Azure Cosmos DB'nin MongoDB API'si](mongodb-introduction.md)
+> * [MongoDB için Azure Cosmos DB API](mongodb-introduction.md) 'sini kullanarak genel dağıtımı yapılandırma
 
 [!INCLUDE [cosmos-db-tutorial-global-distribution-portal](../../includes/cosmos-db-tutorial-global-distribution-portal.md)]
 
 ## <a name="verifying-your-regional-setup"></a>Bölgesel kurulumunuzu doğrulama 
-MongoDB çalıştırmak için genel yapılandırmayı Cosmos DB API'si ile denetlemek için basit bir yol *isMaster()* Mongo kabuğundan komutu.
+MongoDB için Cosmos DB API 'siyle genel yapılandırmanızı denetetmenin basit bir yolu, Mongo kabuğu 'ndan *IsMaster ()* komutunu kullanmaktır.
 
 Mongo Kabuğunuzdan:
 
@@ -64,7 +64,7 @@ Mongo Kabuğunuzdan:
 
 ## <a name="connecting-to-a-preferred-region"></a>Tercih edilen bir bölgeye bağlanma 
 
-Azure Cosmos DB MongoDB API'si, Global olarak dağıtılmış bir veritabanı için koleksiyonunuzun okuma tercihini belirtmenize olanak sağlar. Hem düşük gecikmeli okumalar hem de genel yüksek kullanılabilirlik için, koleksiyonunuzun okuma tercihini *en yakın* olarak ayarlamanızı öneririz. En yakın bölgeden okumak için *en yakın* okuma tercihi yapılandırılır.
+MongoDB için Azure Cosmos DB API 'SI, genel olarak dağıtılan bir veritabanı için koleksiyonunuzun okuma tercihini belirtmenize olanak sağlar. Hem düşük gecikmeli okumalar hem de genel yüksek kullanılabilirlik için, koleksiyonunuzun okuma tercihini *en yakın* olarak ayarlamanızı öneririz. En yakın bölgeden okumak için *en yakın* okuma tercihi yapılandırılır.
 
 ```csharp
 var collection = database.GetCollection<BsonDocument>(collectionName);
@@ -94,7 +94,7 @@ Bu öğreticide aşağıdakileri yaptınız:
 
 > [!div class="checklist"]
 > * Azure portalını kullanarak genel dağıtımı yapılandırma
-> * Cosmos DB'nin MongoDB kullanarak genel dağıtımı yapılandırma
+> * MongoDB için Cosmos DB API 'sini kullanarak genel dağıtımı yapılandırma
 
 Artık Azure Cosmos DB yerel öykünücüsünü kullanarak yerel olarak geliştirme konusunda bilgi almak için sonraki öğreticiye geçebilirsiniz.
 

@@ -1,6 +1,6 @@
 ---
-title: Kopyalama etkinliği performansı ve ayarlama Kılavuzu Azure Data Factory | Microsoft Docs
-description: Kopyalama etkinliği kullandığınızda, Azure Data factory'de veri taşımayı performansını etkileyen anahtar Etkenler hakkında bilgi edinin.
+title: Azure Data Factory 'de etkinlik performansı ve ölçeklenebilirlik kılavuzunu kopyala
+description: Kopyalama etkinliğini kullandığınızda Azure Data Factory veri hareketinin performansını etkileyen anahtar faktörleri hakkında bilgi edinin.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -10,94 +10,147 @@ ms.service: data-factory
 ms.workload: data-services
 ms.tgt_pltfrm: na
 ms.topic: conceptual
-ms.date: 07/02/2019
+ms.date: 10/24/2019
 ms.author: jingwang
-ms.openlocfilehash: face3719f32ccb44e7479150e94417496141f90b
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.openlocfilehash: 701eaad8d36b352e946ae8d74204876b41ecb53d
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67509566"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73678275"
 ---
-# <a name="copy-activity-performance-and-tuning-guide"></a>Etkinlik performansı ve ayarlama Kılavuzu kopyalayın
-> [!div class="op_single_selector" title1="Azure Data Factory, kullanmakta olduğunuz sürümünü seçin:"]
+# <a name="copy-activity-performance-and-scalability-guide"></a>Kopyalama etkinliği performans ve ölçeklenebilirlik Kılavuzu
+> [!div class="op_single_selector" title1="Kullanmakta olduğunuz Azure Data Factory sürümünü seçin:"]
 > * [Sürüm 1](v1/data-factory-copy-activity-performance.md)
 > * [Geçerli sürüm](copy-activity-performance.md)
 
+Data Lake veya kurumsal veri ambarından (EDW) Azure 'a büyük ölçekli veri geçişi gerçekleştirmek isteyip istemediğiniz ya da büyük veri analizi için farklı kaynaklardaki verileri Azure 'a dönüştürmek istiyorsanız, en iyi performansı elde etmek ve sorun.  Azure Data Factory, verileri ölçeklendirerek yüksek performanslı ve ölçeklenebilir veri alma işlem hatları oluşturmaya yönelik veri mühendislerine harika bir uyum sağlayan performans, esnek ve ekonomik bir mekanizma sağlar.
 
-Azure Data Factory kopyalama etkinliği, çözüm yüklenirken birinci sınıf bir güvenli, güvenilir ve yüksek performanslı veri sunar. Kopyasına terabaytlarca veriyi her gün boyunca birçok farklı Bulut ve şirket içi veri depolarının onlarca kullanabilirsiniz. Hızlı veri yükleme performansı, çekirdek büyük veri soruna odaklanmak, sağlamak üzere anahtarı: Gelişmiş analiz çözümleri oluşturmak ve tüm bu verilerden ayrıntılı Öngörüler alma.
+Bu makaleyi okuduktan sonra aşağıdaki soruları cevaplayabilirsiniz:
 
-Azure Kurumsal düzeyde bir dizi veri depolama ve veri ambarı çözümleri sağlar. Kopyalama etkinliği yapılandırmak ve ayarlamak kolaydır deneyimi yüklenirken yüksek oranda iyileştirilmiş bir veri sunar. Bir tek kopyalama etkinliği ile verileri yükleyebilirsiniz:
+- Veri taşıma ve veri alma senaryolarında ADF kopyalama etkinliğini kullanarak ne düzeyde performans ve ölçeklenebilirlik elde edebilirim?
 
-* Azure SQL veri ambarı'na 1,2 GB/sn.
-* Azure Blob Depolama'ya ise 1,0 GB/sn.
-* Azure Data Lake Store, 1,0 GB/sn.
-
-Bu makalede açıklanır:
-
-* [Performans başvuru sayıları](#performance-reference) desteklenen proje planlamanıza yardımcı olması için kaynak ve havuz veri deposu.
-* Farklı senaryolarda içeren kopyalama aktarım artırabilir özellikleri [veri tümleştirme birimleri](#data-integration-units) (DIUs) [paralel kopyalama](#parallel-copy), ve [kopyalama aşamalı](#staged-copy).
-* [Performans ayarlama Kılavuzu](#performance-tuning-steps) performans ve kopyalama performansını etkileyen önemli faktörlerin ayarlama konusunda.
+- ADF kopyalama etkinliğinin performansını ayarlamak için hangi adımları gerçekleştirmeniz gerekir?
+- Tek bir kopyalama etkinliğinin çalışması için performansı iyileştirmek üzere ADF performans iyileştirmesi her ne kadar kullanabilir?
+- Kopyalama performansını en iyi duruma getirirken ADF dışında hangi diğer faktörler göz önüne
 
 > [!NOTE]
-> Genel kopyalama etkinliği ile ilgili bilgi sahibi değilseniz, bkz. [kopyalama etkinliği'ne genel bakış](copy-activity-overview.md) önce bu makaleyi okuyun.
->
+> Kopyalama etkinliğini genel olarak bilmiyorsanız, bu makaleyi kullanmadan önce [kopyalama etkinliğine genel bakış](copy-activity-overview.md) bölümüne bakın.
 
-## <a name="performance-reference"></a>Performans başvurusu
+## <a name="copy-performance-and-scalability-achievable-using-adf"></a>ADF kullanarak performans ve ölçeklenebilirlik ulaşılabilir kopyalama
 
-Bir başvuru olarak bir tek bir kopyalama etkinliği çalıştırma havuz çiftlerinde şirket içi teste dayanan ve aşağıdaki tabloda kopyalama aktarım hızı sayısı MB/sn olarak belirtilen kaynağı gösterir. Karşılaştırma için ayrıca nasıl farklı ayarları gösterir [veri tümleştirme birimleri](#data-integration-units) veya [barındırılan tümleştirme çalışma zamanı ölçeklenebilirlik](concepts-integration-runtime.md#self-hosted-integration-runtime) (birden çok düğüm) kopyalama performansı üzerinde yardımcı olabilir.
+ADF, farklı düzeylerde paralellik sağlayan sunucusuz bir mimari sunar ve bu sayede, ortamınız için veri taşıma aktarım hızını en üst düzeye çıkarmak amacıyla, geliştiricilerin ağ bant genişliğinizi ve depolama ıOPS ve bant genişliğini tamamen kullanmak üzere işlem hatları oluşturmalarına olanak tanır.  Bu, elde ettiğiniz aktarım hızı, kaynak veri deposu, hedef veri deposu ve kaynak ile hedef arasındaki ağ bant genişliği tarafından sunulan minimum aktarım hızını ölçerek tahmin edilebilecek bir anlamına gelir.  Aşağıdaki tabloda, ortamınız için veri boyutuna ve bant genişliği sınırına göre kopyalama süresi hesaplanır. 
 
-![Performans Matrisi](./media/copy-activity-performance/CopyPerfRef.png)
+| Veri boyutu/ <br/> Bant genişliği | 50 Mbps    | 100 Mb/sn  | 500 Mbps  | 1 Gbps   | 5 Gbps   | 10 Gbps  | 50 Gbps   |
+| --------------------------- | ---------- | --------- | --------- | -------- | -------- | -------- | --------- |
+| **1 GB**                    | 2,7 dk    | 1,4 dk   | 0,3 dk   | 0,1 dk  | 0,03 dk | 0,01 dk | 0,0 dk   |
+| **10 GB**                   | 27,3 dk   | 13,7 dk  | 2,7 dk   | 1,3 dk  | 0,3 dk  | 0,1 dk  | 0,03 dk  |
+| **100 GB**                  | 4,6 saat    | 2,3 saat   | 0,5 saat   | 0,2 saat  | 0,05 Saat | 0,02 Saat | 0,0 saat   |
+| **1 TB**                    | 46,6 saat   | 23,3 saat  | 4,7 saat   | 2,3 saat  | 0,5 saat  | 0,2 saat  | 0,05 Saat  |
+| **10 TB**                   | 19,4 gün  | 9,7 gün  | 1,9 gün  | 0,9 gün | 0,2 gün | 0,1 gün | 0,02 gün |
+| **100 TB**                  | 194,2 gün | 97,1 gün | 19,4 gün | 9,7 gün | 1,9 gün | 1 gün   | 0,2 gün  |
+| **1 PB**                    | 64,7 Mo    | 32,4 Mo   | 6,5 Mo    | 3,2 Mo   | 0,6 Mo   | 0,3 Mo   | 0,06 Mo   |
+| **10 PB**                   | 647,3 Mo   | 323,6 Mo  | 64,7 Mo   | 31,6 Mo  | 6,5 Mo   | 3,2 Mo   | 0,6 Mo    |
 
-> [!IMPORTANT]
-> Kopyalama etkinliği, bir Azure tümleştirme çalışma zamanı üzerinde çalıştığında, en az izin verilen veri tümleştirmesi (eski adıyla veri taşıma birimleri da bilinir) iki birimidir. Belirtilmezse, varsayılan veri tümleştirme kullanılmakta birimlerini görmek [veri tümleştirme birimleri](#data-integration-units).
+ADF kopyası farklı düzeylerde ölçeklenebilir:
 
-**Dikkat edilecek noktalar:**
+![ADF kopyalama nasıl ölçeklendirilir](media/copy-activity-performance/adf-copy-scalability.png)
 
-* Aşağıdaki formülü kullanarak aktarım hızı hesaplanır: [kaynak Okuma boyutu veri] / [kopyalama etkinliği çalıştırma süresi].
-* Tablosundaki performans başvuru numaralarını kullanarak ölçülen bir [TPC-H](http://www.tpc.org/tpch/) veri kümesi tek bir kopyalama etkinliğinde çalıştırın. Test dosyaları dosya tabanlı depoları için birden çok 10 GB boyutundaki dosyalarıdır.
-* Azure veri depoları, kaynak ve havuz aynı Azure bölgesinde olan.
-* Karma kopyalama şirket içi ve bulut arasında veri depoları, her şirket içinde barındırılan Integration runtime düğümü şu belirtime veri deposundan ayrı bir makinede çalışıyordu. Tek bir etkinlik çalıştırırken test makinenin CPU, bellek veya ağ bant genişliği için küçük bir bölümü kopyalama işlemi kullanılan.
-    <table>
-    <tr>
-        <td>CPU</td>
-        <td>2\.20 GHz Intel Xeon E5-2660 v2 32 çekirdek</td>
-    </tr>
-    <tr>
-        <td>Bellek</td>
-        <td>128 GB</td>
-    </tr>
-    <tr>
-        <td>Ağ</td>
-        <td>Internet arabirimi: 10 GB/sn; intranet arabiriminde: 40 Gbps</td>
-    </tr>
-    </table>
+- ADF denetim akışı, örneğin [her döngü için](control-flow-for-each-activity.md)kullanarak birden çok kopyalama etkinliğini paralel olarak başlatabilir.
+- Tek bir kopyalama etkinliği ölçeklenebilir işlem kaynaklarından yararlanabilir: Azure Integration Runtime kullanırken, her bir kopyalama etkinliği için sunucusuz bir şekilde [en fazla 256 DIUs](#data-integration-units) belirtebilirsiniz; Şirket içinde barındırılan Integration Runtime kullanılırken, makineyi el ile ölçeklendirebilir veya birden fazla makineye ([4 düğüme kadar](create-self-hosted-integration-runtime.md#high-availability-and-scalability)) ölçeklendirebilirsiniz ve tek bir kopyalama etkinliği dosya kümesini tüm düğümlerde bölümleyebilir.
+- Tek bir kopyalama etkinliği, [paralel olarak](#parallel-copy)birden çok iş parçacığı kullanarak veri deposundan okur ve yazar.
 
+## <a name="performance-tuning-steps"></a>Performans ayarlama adımları
 
-> [!TIP]
-> Daha fazla DIUs kullanarak daha yüksek aktarım hızı elde edebilirsiniz. Örneğin, 100 DIUs ile verileri Azure Blob depolama alanından 1,0 GB/sn, Azure Data Lake Store içine kopyalayabilirsiniz. Bu özellik ve desteklenen bir senaryo hakkında daha fazla bilgi için bkz: [veri tümleştirme birimleri](#data-integration-units) bölümü. 
+Kopyalama etkinliğiyle Azure Data Factory hizmetinizin performansını ayarlamak için bu adımları uygulayın.
 
-## <a name="data-integration-units"></a>Veri tümleştirme birimleri
+1. **Bir test veri kümesi seçin ve bir taban çizgisi oluşturun.** Geliştirme aşamasında, bir temsili veri örneğine göre kopyalama etkinliğini kullanarak işlem hattınızı test edin. Seçtiğiniz veri kümesi, normal veri desenlerinizi (klasör yapısı, dosya deseni, veri şeması, vb.) temsil etmelidir ve kopyalama performansını değerlendirmek için yeterince büyük olur, örneğin kopyalama etkinliğinin tamamlanabilmesi için 10 dakika veya daha fazla süre sürer. [Kopyalama etkinliği izlemeyi](copy-activity-overview.md#monitoring)izleyen yürütme ayrıntılarını ve performans özelliklerini toplayın.
 
-Bir veri tümleştirme Azure Data Factory içinde tek bir birim (CPU, bellek ve ağ kaynağı ayırma birleşimi) gücünü temsil eden bir ölçü birimidir. Veri tümleştirme birimi yalnızca uygulandığı [Azure tümleştirme çalışma zamanı](concepts-integration-runtime.md#azure-integration-runtime), ama [barındırılan tümleştirme çalışma zamanını](concepts-integration-runtime.md#self-hosted-integration-runtime).
+2. **Tek bir kopyalama etkinliğinin performansını en üst düzeye çıkarma**:
 
-Bir kopyalama etkinliği çalıştırma güçlendirmek için en az DIUs iki olur. Belirtilmezse, aşağıdaki tabloda farklı kopyalama senaryolarında kullanılan varsayılan DIUs listelenmektedir:
+   İle başlamak için, ilk olarak tek bir kopyalama etkinliği kullanarak performansı en üst düzeye çıkarmanızı öneririz.
 
-| Kopyalama senaryosu | Hizmet tarafından belirlenen varsayılan DIUs |
+   **Kopyalama etkinliği bir Azure Integration Runtime üzerinde yürütülürse:**
+
+   [Veri tümleştirme birimleri (DIU)](#data-integration-units) ve [paralel kopya](#parallel-copy) ayarları için varsayılan değerlerle başlayın.  Bir performans testi çalıştırması gerçekleştirin ve ayrıca elde edilen performans ve paralel kopyalar için kullanılan gerçek değerleri göz önünde bulunun.  Kullanılan çalıştırma sonuçları ve performans ayarlarının nasıl toplanacağı hakkında [Etkinlik izlemeyi kopyalama](copy-activity-overview.md#monitoring) konusuna bakın.
+
+   Artık, her zaman DIU ayarı için değeri katlayarak ek performans testi çalıştırmaları gerçekleştirin.  Alternatif olarak, varsayılan ayarı kullanarak elde edilen performansın beklentiinizin altında olduğunu düşünüyorsanız, sonraki Test çalıştırmasında DIU ayarını daha büyük ölçüde artırabilirsiniz.
+
+   DIU ayarını artırdıkça kopyalama etkinliğinin neredeyse kusursuz bir şekilde ölçeklendirilmesi gerekir.  DIU ayarı ikiye katlanarak üretilen iş öğesini görmüyorsanız iki şey meydana gelebilir:
+
+   - Çalıştırmakta olduğunuz belirli bir kopya, daha fazla mus eklemekten yararlanmaz.  Daha büyük bir DIU değeri belirtseniz de, kullanılan gerçek DIU aynı şekilde kaldığı için, aynı aktarım hızını daha önce olduğu gibi elde edersiniz.  Bu durumda, 3. adım ile aynı anda birden fazla kopya çalıştırarak toplam aktarım hızını en üst düzeye çıkarın.
+   - Daha fazla bilgi (daha fazla Horsepower) ekleyerek ve bu sayede veri ayıklama, aktarım ve yükleme hızını daha yüksek bir şekilde sunarak kaynak veri deposu, aralarındaki ağ veya hedef veri deposu performans sorununa ulaştı ve muhtemelen kısıtlanıyor.  Bu durumda, üst sınırı yükseltmek için veri deposu yöneticinize veya ağ yöneticinize başvurmayı deneyin veya alternatif olarak, azaltma işlemi gerçekleşene kadar DIU ayarını azaltın.
+
+   **Kopyalama etkinliği kendi kendine barındırılan bir Integration Runtime yürütülürse:**
+
+   Tümleştirme çalışma zamanını barındırmak için veri deposunu barındıran sunucudan ayrı bir adanmış makine kullanmanızı öneririz.
+
+   [Paralel kopyalama](#parallel-copy) ayarı için varsayılan değerlerle başlayın ve kendınden konak IR için tek bir düğüm kullanın.  Bir performans testi çalıştırması gerçekleştirin ve elde edilen performansı bir yere göz atın.
+
+   Daha yüksek aktarım hızı elde etmek isterseniz, şirket içinde barındırılan IR 'yi ölçeklendirebilir veya ölçeklendirebilirsiniz:
+
+   - Şirket içinde barındırılan IR düğümündeki CPU ve kullanılabilir bellek tam olarak kullanılmaz, ancak eşzamanlı işlerin yürütülmesi sınıra ulaştığı takdirde, bir düğümde çalışabilecek eşzamanlı işlerin sayısını artırarak ölçeklendirmelisiniz.  Yönergeler için [buraya](create-self-hosted-integration-runtime.md#scale-up) bakın.
+   - Diğer taraftan, CPU şirket içinde barındırılan IR düğümünde yüksek veya kullanılabilir bellek düşükse, birden çok düğümde yükün ölçeğini genişletmek için yeni bir düğüm ekleyebilirsiniz.  Yönergeler için [buraya](create-self-hosted-integration-runtime.md#high-availability-and-scalability) bakın.
+
+   Şirket içinde barındırılan IR kapasitesini ölçeklendirdiğiniz veya ölçeklendirdikçe, giderek daha iyi üretilen iş elde ediyorsanız, performans testi çalıştırmasını tekrarlayın.  Aktarım hızı, büyük olasılıkla kaynak veri deposu, aralarındaki ağ veya hedef veri deposu performans sorununa ulaştı ve kısıtlanacak şekilde başlıyor. Bu durumda, üst sınırı yükseltmek için veri deposu yöneticinize veya ağ yöneticinize başvurmayı deneyin veya alternatif olarak, şirket içinde barındırılan IR için önceki ölçeklendirme ayarınıza geri dönün. 
+
+3. **Birden çok kopyayı eşzamanlı olarak çalıştırarak toplam aktarım hızını en iyi duruma getirme:**
+
+   Tek bir kopyalama etkinliğinin performansını zaten kapladığınıza göre, ortamınız-ağ, kaynak veri deposu ve hedef veri deposu için üretilen iş üst limitlerine henüz ulaşırsanız, ADF kullanarak birden çok kopyalama etkinliğini paralel olarak çalıştırabilirsiniz [her döngü için](control-flow-for-each-activity.md)gibi denetim akışı yapıları.
+
+4. **Performans ayarlama ipuçları ve iyileştirme özellikleri.** Bazı durumlarda, Azure Data Factory bir kopyalama etkinliği çalıştırdığınızda, aşağıdaki örnekte gösterildiği gibi [kopyalama etkinliği izlemenin](copy-activity-overview.md#monitor-visually)üstünde "performans ayarlama ipuçları" iletisini görürsünüz. İleti size verilen kopya çalıştırması için tanımlanan performans sorunlarını söyler. Ayrıca, kopyalama aktarım hızını artırmak için nelerin değiştirileceği konusunda size rehberlik eder. Performans ayarlama ipuçları şu anda şu şekilde öneriler sunmaktadır:
+
+   - Azure SQL veri ambarı 'na veri kopyaladığınızda PolyBase kullanın.
+   - Veri deposu tarafındaki kaynak performans sorunu olduğunda Azure Cosmos DB Istek birimlerini veya Azure SQL veritabanı DTU 'ları (veritabanı Işleme birimleri) artırın.
+   - Gereksiz hazırlanmış kopyayı kaldırın.
+
+   Performans ayarlama kuralları da kademeli olarak zenginleşmelidir.
+
+   **Örnek: performans ayarlama ipuçlarıyla Azure SQL veritabanına kopyalama**
+
+   Bu örnekte, bir kopya çalıştırması sırasında, Azure SQL veritabanı 'nın, yazma işlemlerini yavaşlatan yüksek DTU kullanımına ulaştığını Azure Data Factory bildirimler. Öneri, Azure SQL veritabanı katmanını daha fazla DTU ile artırmaya yönelik bir öneridir. 
+
+   ![Performansı ayarlama ipuçlarıyla izleme kopyalama](media/copy-activity-overview/copy-monitoring-with-performance-tuning-tips.png)
+
+   Ayrıca, aşağıdakiler göz önünde bulundurulması gereken bazı performans iyileştirme özellikleridir:
+
+   - [Paralel kopya](#parallel-copy)
+   - [Veri Tümleştirme Birimleri](#data-integration-units)
+   - [Hazırlanmış kopya](#staged-copy)
+   - [Şirket içinde barındırılan tümleştirme çalışma zamanı ölçeklenebilirliği](concepts-integration-runtime.md#self-hosted-integration-runtime)
+
+5. **Yapılandırmayı tüm veri kümeniz için genişletin.** Yürütme sonuçları ve performansından memnun olduğunuzda, tüm veri kümenizi kapsayacak şekilde tanımı ve işlem hattını genişletebilirsiniz.
+
+## <a name="copy-performance-optimization-features"></a>Performansı en iyi duruma getirme özelliklerini Kopyala
+
+Azure Data Factory aşağıdaki performans iyileştirme özelliklerini sağlar:
+
+- [Paralel kopya](#parallel-copy)
+- [Veri Tümleştirme Birimleri](#data-integration-units)
+- [Hazırlanmış kopya](#staged-copy)
+
+### <a name="data-integration-units"></a>Veri tümleştirme birimleri
+
+Veri tümleştirme birimi, Azure Data Factory içinde tek bir birimin gücünü (CPU, bellek ve ağ kaynak ayırma birleşimi) temsil eden bir ölçüdür. Veri tümleştirme birimi yalnızca [Azure tümleştirme çalışma zamanı](concepts-integration-runtime.md#azure-integration-runtime)için geçerlidir, ancak [Şirket içinde barındırılan tümleştirme çalışma zamanı](concepts-integration-runtime.md#self-hosted-integration-runtime)için geçerli değildir.
+
+**Kullanılan mus \* kopyalama süresi \* birim fiyatı/DIU-saat**olarak ücretlendirilirsiniz. Geçerli fiyatlara [buradan](https://azure.microsoft.com/pricing/details/data-factory/data-pipeline/)bakın. Yerel para birimi ve ayrı ayırt sayma, abonelik türü başına uygulanabilir.
+
+Kopyalama etkinliği çalıştırmasını güçlendiren izin verilen, **2 ile 256 arasındadır**. Belirtilmezse veya Kullanıcı arabiriminde "otomatik" seçeneğini belirlerseniz, kaynak havuzu çiftine ve veri düzenine göre en iyi DIU ayarını dinamik olarak uygulayın Data Factory. Aşağıdaki tabloda, farklı kopyalama senaryolarında kullanılan varsayılan değer listelenmiştir:
+
+| Kopyalama senaryosu | Hizmete göre belirlenen varsayılan değer |
 |:--- |:--- |
-| Dosya tabanlı depoları arasında veri kopyalama | 4 ile sayısı ve dosyaların boyutuna bağlı olarak 32 arasında |
-| Azure SQL veritabanı veya Azure Cosmos DB veri kopyalama |Havuz Azure SQL veritabanı'nın veya Cosmos DB'nin Katmanı (Dtu/RU sayısı) bağlı olarak 16 ile 4 arasında |
-| Tüm diğer kopyalama senaryolarında | 4 |
+| Dosya tabanlı mağazalar arasında veri kopyalama | Dosyaların sayısına ve boyutuna bağlı olarak 4 ile 32 arasında |
+| Verileri Azure SQL veritabanı 'na veya Azure Cosmos DB kopyalama |Azure SQL veritabanı 'nın veya Cosmos DB katmanına bağlı olarak 4 ile 16 arasında (DTU sayısı/ru) |
+| Diğer tüm kopyalama senaryoları | 4 |
 
-Bu varsayılanı geçersiz kılmak için bir değer belirtin. **dataIntegrationUnits** özelliğini aşağıdaki gibi. *İzin verilen değerler* için **dataIntegrationUnits** en fazla 256 özelliğidir. *DIUs gerçek sayısını* eşit veya daha az, veri modelini bağlı olarak yapılandırılmış bir değeri, kopyalama işleminin çalışma zamanında kullanır. Özel kopyalama kaynağı ve havuz için daha fazla birimi yapılandırırken alabilirsiniz performans kazancı düzeyi hakkında bilgi için bkz [Performans başvurusu](#performance-reference).
+Bu varsayılanı geçersiz kılmak için, **Dataıntegrationunits** özelliği için aşağıdaki gibi bir değer belirtin. Kopyalama işleminin çalışma zamanında kullandığı *gerçek sayı* , veri düzenlerinize bağlı olarak yapılandırılan değere eşit veya ondan daha az.
 
-Bir etkinlik çalıştırması izlerken kopyalama etkinliği çıkışında çalıştırma her kopya için kullanılan DIUs görebilirsiniz. Daha fazla bilgi için [kopyalama etkinliği izleme](copy-activity-overview.md#monitoring).
+Bir etkinlik çalıştırmasını izlerken kopyalama etkinliği çıkışında her bir kopya için kullanılan orus 'yi görebilirsiniz. Daha fazla bilgi için bkz. [kopyalama etkinliği izleme](copy-activity-overview.md#monitoring).
 
 > [!NOTE]
-> DIUs dört şu anda yalnızca birden fazla dosyaları Azure Storage'dan kopyaladığınızda geçerlidir büyük ayarlama, Azure Data Lake Store, Amazon S3, Google bulut depolama, FTP Bulut veya SFTP için başka bir bulut veri depoları bulut.
->
+> Dörtten daha büyük bir ayar, şu anda yalnızca birden fazla dosyayı Azure Blob/ADLS 1./ADLS 2./Amazon S3/Google bulut depolama/bulut FTP/Cloud SFTP 'den veya bölüm-seçenek etkinleştirilmiş bulut ilişkisel veri deposundan (Oracle dahil) kopyaladığınızda geçerlidir. [ ](connector-oracle.md#oracle-as-source)diğer tüm bulut veri depolarına/[Netezza](connector-netezza.md#netezza-as-source)/[Teradata](connector-teradata.md#teradata-as-source)).
 
-**Örnek**
+**Örnek:**
 
 ```json
 "activities":[
@@ -119,26 +172,32 @@ Bir etkinlik çalıştırması izlerken kopyalama etkinliği çıkışında çal
 ]
 ```
 
-### <a name="data-integration-units-billing-impact"></a>Veri tümleştirme birimleri faturalama etkisi
+### <a name="parallel-copy"></a>Paralel kopya
 
-Tabanlı kopyalama işlemi toplam zamanında ücretlendirildiğiniz olduğunu unutmayın. Veri taşıma toplam süresi faturalandırılırsınız arasında DIUs süresi toplamıdır. Bir kopyalama işi bir saat ile iki bulut birimleri almak için kullanılan ve artık bu sekiz bulut birimiyle 15 dakika sürer, toplam fatura neredeyse aynı kalır.
+Kopyalama etkinliğinin kullanmasını istediğiniz paralellik belirtmek için **Parallelkopyaları** özelliğini kullanabilirsiniz. Bu özelliği, kopyalama etkinliğindeki en fazla iş parçacığı sayısı olarak, kaynağınızdan okuyabilecek veya kanal veri depolarınız paralel olarak yazabileceğiniz şekilde düşünebilirsiniz.
 
-## <a name="parallel-copy"></a>Paralel kopyalama
+Her kopyalama etkinliği çalıştırması için Azure Data Factory, verileri kaynak veri deposundan ve hedef veri deposuna kopyalamak için kullanılacak paralel kopya sayısını belirler. Varsayılan paralel kopya sayısı, kullandığınız kaynak ve havuz türüne bağlıdır.
 
-Kullanabileceğiniz **parallelCopies** kopyalama etkinliği, kullanmak istediğiniz paralellik belirtmek için özelliği. Bu özellik veri kaynağınızdan okuyabilen veya, havuz veri depolarına paralel yazma kopyalama etkinliği içinde iş parçacığı sayısı olarak düşünebilirsiniz.
-
-Çalıştıran her kopyalama etkinliği için Azure Data Factory veri depolamak ve için hedef veri deposu kaynak sunucudan veri kopyalamak için paralel kopya sayısını belirler. Varsayılan sayısıyla onu kullanan paralel kaynak ve havuz kullandığınız türüne bağlıdır.
-
-| Kopyalama senaryosu | Hizmet tarafından belirlenen varsayılan paralel kopya sayısı |
+| Kopyalama senaryosu | Hizmete göre belirlenen varsayılan paralel kopya sayısı |
 | --- | --- |
-| Dosya tabanlı depoları arasında veri kopyalama |Dosyaları iki bulut veri deposu ya da şirket içinde barındırılan tümleştirme çalışma zamanı makinenin fiziksel yapılandırması arasında veri kopyalamak için kullanılan DIUs sayısı ve boyutuna bağlıdır. |
-| Tüm kaynak deposundan Azure tablo depolama alanına veri kopyalama |4 |
-| Tüm diğer kopyalama senaryolarında |1 |
+| Dosya tabanlı mağazalar arasında veri kopyalama |Dosyaların boyutuna ve iki bulut veri deposu arasında veri kopyalamak için kullanılan DIUs sayısının yanı sıra şirket içinde barındırılan tümleştirme çalışma zamanı makinesinin fiziksel yapılandırması da bağlıdır. |
+| Bölüm seçeneği etkinken ilişkisel veri deposundan kopyalama ( [Oracle](connector-oracle.md#oracle-as-source), [Netezza](connector-netezza.md#netezza-as-source), [Teradata](connector-teradata.md#teradata-as-source), [SAP tablosu](connector-sap-table.md#sap-table-as-source)ve [SAP Open hub](connector-sap-business-warehouse-open-hub.md#sap-bw-open-hub-as-source)dahil)|4 |
+| Tüm kaynak depolardan Azure Tablo depolamaya veri kopyalama |4 |
+| Diğer tüm kopyalama senaryoları |1 |
 
 > [!TIP]
-> Dosya tabanlı depoları arasında veri kopyalama, varsayılan davranışı, genellikle en iyi aktarım hızı sağlar. Varsayılan davranış, kaynak dosya deseni temel alınarak otomatik olarak belirlenir.
+> Dosya tabanlı mağazalar arasında veri kopyaladığınızda, varsayılan davranış genellikle en iyi performansı sağlar. Varsayılan davranış, kaynak dosya örüntüsünün temel alınarak otomatik olarak belirlenir.
 
-Verilerinizi barındıran makinelerin yükünü denetlemek için depolar veya kopyalama performansı ayarlamak için varsayılan değeri geçersiz kılabilir ve için bir değer belirtin **parallelCopies** özelliği. Büyük veya 1'e eşit bir tamsayı değeri olmalıdır. Çalışma zamanında, en iyi performans için ayarladığınız değerine eşit veya daha az olan bir değer kopyalama etkinliği kullanır.
+Veri mağazalarınızı barındıran makinelerde yükü denetlemek veya kopyalama performansını ayarlamak için, varsayılan değeri geçersiz kılabilir ve **Parallelcopy** özelliği için bir değer belirtebilirsiniz. Değer 1 ' den büyük veya buna eşit bir tamsayı olmalıdır. Çalışma zamanında, en iyi performans için kopyalama etkinliği, ayarladığınız değerden küçük veya bu değere eşit bir değer kullanır.
+
+**Şunlara işaret eder:**
+
+- Dosya tabanlı mağazalar arasında veri kopyaladığınızda **Parallelcopy** , dosya düzeyinde paralellik belirler. Tek bir dosya içindeki parçalama otomatik ve şeffaf bir şekilde gerçekleşir. Verileri paralel ve **paralelde**paralel olarak yüklemek için belirli bir kaynak veri deposu türü için en uygun öbek boyutunu kullanmak üzere tasarlanmıştır. Çalışma zamanında kopyalama işlemi için veri taşıma hizmeti 'nin kullandığı paralel kopyaların gerçek sayısı sahip olduğunuz dosya sayısından daha fazla değil. Kopyalama davranışı **Mergefile**ise, kopyalama etkinliği dosya düzeyinde paralellik özelliğinden yararlanamaz.
+- Dosya tabanlı olmayan mağazalardan ( [Oracle](connector-oracle.md#oracle-as-source), [Netezza](connector-netezza.md#netezza-as-source), [Teradata](connector-teradata.md#teradata-as-source), [SAP tablosu](connector-sap-table.md#sap-table-as-source)ve [SAP Open hub](connector-sap-business-warehouse-open-hub.md#sap-bw-open-hub-as-source) Bağlayıcısı hariç) dosya tabanlı depolarda verileri kopyaladığınızda, bu veriler taşıma hizmeti **Parallelkopyaları** özelliğini yoksayar. Paralellik belirtilmiş olsa bile, bu durumda uygulanmaz.
+- **Parallelkopyaların** özelliği **dataıntegrationunits**öğesine göre belirlenir. İlki tüm veri tümleştirme birimleri genelinde sayılır.
+- **Parallelkopyaları** özelliği için bir değer belirttiğinizde, kaynak ve havuz Veri depolarındaki yük artışını göz önünde bulundurun. Ayrıca, kopyalama etkinliği, karma kopya için, bu, örneğin, karma kopyaya karşı güç alıyorsa, şirket içinde barındırılan tümleştirme çalışma zamanına yönelik yük artışını de göz önünde bulundurun. Bu yük artışı, özellikle aynı veri deposunda çalışan aynı etkinliklerin birden çok etkinliğiniz veya eş zamanlı çalıştırmaları olduğunda gerçekleşir. Veri deposunun veya şirket içinde barındırılan tümleştirme çalışma zamanının yük ile azaldığını fark ederseniz, yükü ortadan kaldırmak için **Parallelkopyaların** değerini azaltın.
+
+**Örnek:**
 
 ```json
 "activities":[
@@ -160,46 +219,39 @@ Verilerinizi barındıran makinelerin yükünü denetlemek için depolar veya ko
 ]
 ```
 
-**Dikkat edilecek noktalar:**
+### <a name="staged-copy"></a>Hazırlanmış kopya
 
-* Dosya tabanlı depoları arasında veri kopyalama **parallelCopies** dosya düzeyinde paralellik belirler. Tek bir dosyada Öbekleme altında otomatik olarak ve şeffaf bir şekilde gerçekleşir. En uygun öbek paralel veri yükleme belirtilen kaynak veri deposu türü için boyut ve dikgen kullanmak için tasarlanmış **parallelCopies**. Gerçek veri taşıma Hizmeti'nde kopyalama işleminin çalışma zamanında kullandığı paralel kopya sayısı sahip olduğunuz dosyaların sayısı, en fazla ' dir. Kopyalama davranışını ise **mergeFile**, kopyalama etkinliği dosya düzeyinde paralellik yararlanamaz.
-* (Dışında Oracle veritabanı etkin veri bölümleme ile kaynak olarak) dosya tabanlı olmayan depolarından veri kopyaladığınızda, dosya tabanlı depoları için veri taşıma Hizmeti'nde yok sayar **parallelCopies** özelliği. Paralellik belirtilmiş olsa bile, bu durumda uygulanmaz.
-* **ParallelCopies** özelliktir dikgen **dataIntegrationUnits**. Önceki tüm veri tümleştirme birimlerinizde sayılır.
-* İçin bir değer belirtirseniz **parallelCopies** özelliği, kaynak üzerindeki yük artışı göz önünde bulundurun ve havuz veri deposu. Kopyalama etkinliği tarafından Örneğin, karma kopyalama için yetkilendirilirler de şirket içinde barındırılan tümleştirme çalışma zamanı yük artışı göz önünde bulundurun. Bu yük artışı özellikle birden çok etkinlikler veya aynı veri deposuna karşı çalışan aynı etkinliklerden eş zamanlı çalıştırma olduğunda gerçekleşir. Veri deposu ya da şirket içinde barındırılan tümleştirme çalışma zamanı yük ile doludur fark ederseniz, azaltma **parallelCopies** yükle hafifletmek için değer.
+Bir kaynak veri deposundan bir havuz veri deposuna veri kopyaladığınızda, blob Storage 'ı geçici bir hazırlama deposu olarak kullanmayı tercih edebilirsiniz. Hazırlama, özellikle aşağıdaki durumlarda yararlı olur:
 
-## <a name="staged-copy"></a>Hazırlanmış kopya
+- **PolyBase aracılığıyla çeşitli veri depolarındaki verileri SQL veri ambarı 'na almak istiyorsunuz.** SQL veri ambarı, çok büyük miktarda veriyi SQL veri ambarı 'na yüklemek için PolyBase 'i yüksek hacimli bir mekanizma olarak kullanır. Kaynak verilerin blob depolaması veya Azure Data Lake Store olması ve ek ölçütlere uyması gerekir. BLOB depolama veya Azure Data Lake Store dışında bir veri deposundan veri yüklediğinizde, veri kopyalamayı, geçici hazırlama blob depolaması aracılığıyla etkinleştirebilirsiniz. Bu durumda Azure Data Factory, PolyBase 'in gereksinimlerini karşıladığından emin olmak için gerekli veri dönüştürmelerini gerçekleştirir. Daha sonra, verileri SQL veri ambarı 'na verimli bir şekilde yüklemek için PolyBase 'i kullanır. Daha fazla bilgi için bkz. [PolyBase ile Azure SQL Veri Ambarı’na veri yükleme](connector-azure-sql-data-warehouse.md#use-polybase-to-load-data-into-azure-sql-data-warehouse).
+- **Bazen bir karma veri hareketini (yani, şirket içi veri deposundan bir bulut veri deposuna kopyalamak için) yavaş bir ağ bağlantısı üzerinden gerçekleştirme işlemi biraz zaman alır.** Performansı artırmak için, hazırlanan kopyayı, verileri bulutta hazırlama veri deposuna taşımak daha az zaman alması amacıyla Şirket içindeki verileri sıkıştırmak için kullanabilirsiniz. Daha sonra, hedef veri deposuna yüklemeden önce hazırlama deposundaki verileri açabilir.
+- **Şirket BT ilkeleri nedeniyle güvenlik duvarınızdaki bağlantı noktası 80 ve bağlantı noktası 443 dışındaki bağlantı noktalarını açmak istemezsiniz.** Örneğin, şirket içi bir veri deposundan verileri bir Azure SQL veritabanı havuzuna veya Azure SQL veri ambarı havuzuna kopyaladığınızda, hem Windows Güvenlik Duvarı hem de kurumsal güvenlik duvarınız için bağlantı noktası 1433 ' de giden TCP iletişimini etkinleştirmeniz gerekir. Bu senaryoda, hazırlanan kopya, ilk olarak şirket içinde barındırılan tümleştirme çalışma zamanından yararlanarak, önce verileri HTTP veya 443 numaralı bağlantı noktasında HTTP veya HTTPS üzerinden BLOB depolama hazırlama örneğine kopyalayabilir. Ardından, BLOB depolama alanı hazırlamadaki verileri SQL veritabanı veya SQL veri ambarı 'na yükleyebilir. Bu akışta 1433 numaralı bağlantı noktasını etkinleştirmeniz gerekmez.
 
-Bir kaynak veri deposundan bir havuz veri deposuna veri kopyalama, geçici bir hazırlama deposu Blob depolamayı kullanmak seçebilirsiniz. Hazırlama aşağıdaki durumlarda kullanışlıdır:
+#### <a name="how-staged-copy-works"></a>Aşamalı kopya nasıl çalışacaktır?
 
-- **PolyBase aracılığıyla SQL veri ambarı'na çeşitli veri depolarından veri alabilen istiyorsunuz.** SQL veri ambarı PolyBase, SQL veri ambarı'na büyük miktarda veri yüklemek için yüksek performanslı mekanizması olarak kullanır. Kaynak verileri Blob Depolama veya Azure Data Lake Store olmalıdır ve diğer ölçütleri karşılaması gerekir. Blob Depolama farklı bir veri deposu ya da Azure Data Lake Store veri yüklediğinizde, verileri geçici hazırlama Blob depolamaya kopyalama etkinleştirebilirsiniz. Bu durumda, Azure Data Factory, PolyBase gereksinimlerini karşıladığından emin olmak için gerekli veri dönüşümleri gerçekleştirir. Ardından verileri verimli bir şekilde SQL veri ambarı'na yüklemek için PolyBase kullanır. Daha fazla bilgi için [Azure SQL veri ambarı'na veri yüklemek için PolyBase kullanma](connector-azure-sql-data-warehouse.md#use-polybase-to-load-data-into-azure-sql-data-warehouse).
-- **Bazı durumlarda bir karma veri taşıma işlemini gerçekleştirmek için bir süre sürer (diğer bir deyişle, bir şirket içi kopyalamak için verileri bir bulut veri deposuna depolamak) yavaş ağ bağlantısı üzerinden.** Performansı artırmak için hazırlama veri deposu bulutta veri taşıma daha az zaman alır, böylece şirket verileri sıkıştırmak için hazırlanmış kopya kullanabilirsiniz. Hedef veri deposuna yüklemeden önce hazırlama deposu verileri genişletmek.
-- **Kurumsal BT ilkeleri nedeniyle duvarınızda bağlantı noktası 80 ve 443 numaralı bağlantı noktası dışındaki bağlantı noktaları açmadan istemezsiniz.** Örneğin, bir Azure SQL veritabanı havuz veya bir Azure SQL veri ambarı havuzu için bir şirket içi veri deposundan veri kopyaladığınızda, Windows Güvenlik Duvarı hem kurumsal güvenlik ağınızın 1433 numaralı bağlantı noktasında giden TCP iletişimine'ı etkinleştirmeniz gerekir. Bu senaryoda, hazırlanmış kopya, ilk örneği, HTTP veya HTTPS bağlantı noktası 443 üzerinden hazırlama Blob depolama alanına veri kopyalamak için şirket içinde barındırılan tümleştirme çalışma zamanı avantajlarından yararlanabilirsiniz. Ardından, verileri SQL veritabanı veya SQL veri ambarı ile Blob Depolama hazırlamadan yükleyebilirsiniz. Bu akışta 1433 numaralı bağlantı noktasını etkinleştirmek gerekmez.
-
-### <a name="how-staged-copy-works"></a>Nasıl hazırlanmış kopya çalışır
-
-Hazırlama özelliğini etkinleştirdiğinizde, ilk veriler kaynak veri deposundan hazırlama Blob depolama alanına kopyalanır (kendi işleyicinizi getirin). Ardından, veri hazırlama veri deposundan havuz veri deposuna kopyalanır. Azure Data Factory, sizin için iki aşamalı akışı otomatik olarak yönetir. Veri taşıma tamamlandıktan sonra azure Data Factory geçici verileri hazırlama depolama biriminden da temizler.
+Hazırlama özelliğini etkinleştirdiğinizde, önce veriler kaynak veri deposundan hazırlama BLOB depolama alanına kopyalanır (kendinizinkini getirin). Ardından, veriler hazırlama veri deposundan havuz veri deposuna kopyalanır. Azure Data Factory, sizin için iki aşamalı akışı otomatik olarak yönetir. Azure Data Factory, veri taşıma işlemi tamamlandıktan sonra hazırlama depolamadan geçici verileri de temizler.
 
 ![Hazırlanmış kopya](media/copy-activity-performance/staged-copy.png)
 
-Hazırlama deposu kullanarak veri taşıma etkinleştirdiğinizde, veri kaynağından veri taşımadan önce sıkıştırılmasının verileri için bir arada depolamak veya hazırlama veri depolamak ve ardından bir geçiş veya hazırlama dat veri taşımadan önce eklenmişti isteyip istemediğinizi belirtebilirsiniz Havuz veri deposu için bir depo.
+Veri hareketini bir hazırlama deposu kullanarak etkinleştirdiğinizde, verileri kaynak veri deposundan bir ara veya hazırlama veri deposuna taşımadan önce verilerin sıkıştırılıp sıkıştırılmayacağını ve sonra verileri bir ara veya hazırlama dat 'dan taşımadan önce sıkıştırması açılacak şekilde belirtebilirsiniz Havuz veri deposuna bir mağaza.
 
-Şu anda farklı şirket içinde barındırılan IRS, ile ne hazırlanmış kopya olmadan üzerinden bağlanan iki veri depoları arasında veri kopyalanamıyor. Bu senaryo için iki açıkça zincirleme kopyalama etkinliği, hazırlama kaynağından sonra havuz hazırlama alanından kopyalamak için yapılandırabilirsiniz.
+Şu anda, otomatik olarak barındırılan farklı IRS 'ler arasında bağlı olan iki veri deposu arasında veri kopyalayamazsınız, ancak hazırlanmamış kopya olmadan, verileri kopyalayamazsınız. Bu tür senaryolar için, kaynaktan hazırlama ve daha sonra hazırlama durumundan havuza kopyalamak üzere iki açık zincirleme kopyalama etkinliği yapılandırabilirsiniz.
 
-### <a name="configuration"></a>Yapılandırma
+#### <a name="configuration"></a>Yapılandırma
 
-Yapılandırma **enableStaging** verileri Blob Depolama alanında çoğaltılmadan önce bir hedef veri deposuna yüklemek isteyip istemediğinizi belirtmek için kopyalama etkinliği ayarlama. Ayarladığınızda **enableStaging** için `TRUE`, aşağıdaki tabloda listelenen ek özellikleri belirtin. Bir Azure depolama oluşturulması gerekir veya paylaşılan depolama alanı, yoksa, hazırlama için kullanılan erişim imzası bağlı hizmeti.
+Hedef veri deposuna yüklemeden önce, verilerin blob depolamada hazırlanması isteyip istemediğinizi belirtmek için kopyalama etkinliğinde **Enablehazırlama** ayarını yapılandırın. **Enablehazırlama** `TRUE`olarak ayarladığınızda, aşağıdaki tabloda listelenen ek özellikleri belirtin. Ayrıca, yoksa, hazırlama için bir Azure depolama veya depolama paylaşılan erişim imzası ile bağlantılı hizmet oluşturmanız gerekir.
 
 | Özellik | Açıklama | Varsayılan değer | Gerekli |
 | --- | --- | --- | --- |
-| enableStaging |Veri deposunu hazırlama bir geçiş aracılığıyla kopyalamak isteyip istemediğinizi belirtin. |False |Hayır |
-| linkedServiceName |Adını bir [AzureStorage](connector-azure-blob-storage.md#linked-service-properties) bağlı hizmeti, geçici bir hazırlama deposu kullanan depolama örneğine başvurur. <br/><br/> PolyBase aracılığıyla SQL veri ambarı'na veri yüklemek için depolama ile paylaşılan erişim imzası kullanamazsınız. Diğer tüm senaryolarda kullanabilirsiniz. |Yok |Evet, **enableStaging** TRUE olarak ayarlayın |
-| yol |Hazırlanmış verinin içermesini istediğiniz Blob Depolama yolu belirtin. Hizmet, bir yol sağlamazsanız, geçici verileri depolamak için bir kapsayıcı oluşturur. <br/><br/> Yalnızca depolama ile paylaşılan erişim imzası kullanın veya geçici veri belirli bir konumda olmasını gerektiren bir yol belirtin. |Yok |Hayır |
-| Aracılığıyla |Hedefe kopyalamadan önce verilerin sıkıştırılmasının gerekli olup olmadığını belirtir. Bu ayar, aktarılan veri hacmini azaltır. |False |Hayır |
+| Enablehazırlama |Verileri bir geçici hazırlama deposu aracılığıyla kopyalamak isteyip istemediğinizi belirtin. |False |Hayır |
+| linkedServiceName |Geçici hazırlama deposu olarak kullandığınız depolama örneğine başvuran bir [Azurestorage](connector-azure-blob-storage.md#linked-service-properties) Linked hizmetinin adını belirtin. <br/><br/> PolyBase aracılığıyla SQL veri ambarı 'na veri yüklemek için, paylaşılan erişim imzasıyla depolama kullanamazsınız. Diğer tüm senaryolarda kullanabilirsiniz. |Yok |Evet, **Enablehazırlama** true olarak ayarlandığında |
+| Yolun |Hazırlanan verileri içermesini istediğiniz BLOB depolama yolunu belirtin. Bir yol sağlamazsanız, hizmet geçici verileri depolamak için bir kapsayıcı oluşturur. <br/><br/> Yalnızca bir paylaşılan erişim imzasıyla depolama kullanırsanız veya geçici verilerin belirli bir konumda olmasını istiyorsanız bir yol belirtin. |Yok |Hayır |
+| enableCompression |Verilerin hedefe kopyalanmadan önce sıkıştırılması gerekip gerekmediğini belirtir. Bu ayar, aktarılmakta olan verilerin hacmini azaltır. |False |Hayır |
 
 >[!NOTE]
-> Hizmet, bağlantılı blob hazırlama için sıkıştırma etkin, hizmet sorumlusu veya MSI kimlik doğrulaması ile hazırlanmış kopya kullanıyorsanız desteklenmez.
+> Hazırlanan bir kopyayı sıkıştırma etkinken kullanırsanız, hazırlama blobu bağlı hizmeti için hizmet sorumlusu veya MSI kimlik doğrulaması desteklenmez.
 
-Kopyalama etkinliği ile önceki tabloda açıklanan özellikler, örnek bir tanım aşağıda verilmiştir:
+Aşağıda, önceki tabloda açıklanan özelliklerle birlikte kopyalama etkinliğinin örnek bir tanımı verilmiştir:
 
 ```json
 "activities":[
@@ -229,201 +281,27 @@ Kopyalama etkinliği ile önceki tabloda açıklanan özellikler, örnek bir tan
 ]
 ```
 
-### <a name="staged-copy-billing-impact"></a>Faturalama etkisi kopyalama hazırlandı
+#### <a name="staged-copy-billing-impact"></a>Hazırlanan kopya faturalandırma etkisi
 
-Bağlı olarak iki adımı ücretlendirilirsiniz: kopyalama süresi ve kopyalayın türü.
+İki adım temelinde ücretlendirilirsiniz: kopyalama süresi ve kopya türü.
 
-* Kullandığınızda veri kopyalama ve bulut kopyalama sırasında hazırlama bulut veri deposundan başka bir bulut veri deposu, hem aşamaları Azure tümleştirme çalışma zamanı tarafından sunulan, [toplam kopyalama süresi adım 1 ve 2. adım] [bulut kopyalama birim fiyatı] x ücretlendirilirsiniz.
-* Kullandığınızda veri bir şirket içi veri deposundan bir bulut veri deposuna kopyalıyor, karma kopyalama sırasında hazırlama tek bir aşamada yetkilendirilmiş bir şirket içinde barındırılan tümleştirme çalışma zamanı tarafından [karma kopyalama süresi] ücretlendirilirsiniz x [karma kopyalama birim fiyatı] + [bulut kopyalama süresi] [bulut kopyalama birim fiyatı] x.
-
-## <a name="performance-tuning-steps"></a>Performans ayarlama adımları
-
-Kopyalama etkinliği, Azure Data Factory hizmetine performansını ayarlamak için bu adımları uygulayın.
-
-1. **Bir taban çizgisi oluşturun.** Geliştirme aşamasında, bir temsilci veri örnek karşı kopyalama etkinliği'ni kullanarak işlem hattınızı test etme. Yürütme ayrıntıları ve performans özelliklerini aşağıdaki toplamak [kopyalama etkinliği izleme](copy-activity-overview.md#monitoring).
-
-2. **Tanılama ve performansını iyileştirin.** Siz gözleyin performans beklentilerinizi karşılamıyorsa, performans sorunlarını belirleyin. Ardından, kaldırmak veya performans etkisini azaltmak için performansı iyileştirin.
-
-    Bazı durumlarda, Azure Data Factory'de bir kopyalama etkinliği'ni çalıştırdığınızda üst kısmındaki "Performans ipuçları ayarlama" iletisini görürsünüz [kopyalama etkinliği izleme sayfası](copy-activity-overview.md#monitor-visually)aşağıdaki örnekte gösterildiği gibi. İleti, belirli bir kopya çalıştırmak için tanımlanan sorunu bildirir. Bu ayrıca, hangi boost kopyalama aktarım hızını değiştirmek size yol gösterir. Performans ayarı ipuçları şu anda önerileri ister sağlar:
-
-    - Azure SQL veri ambarı'na veri kopyalama PolyBase kullanın.
-    - Kaynak veri deposu tarafında performans sorunu olduğunda Azure Cosmos DB istek birimi veya Azure SQL veritabanı dtu'ları (veritabanı performans birimleri) artırın.
-    - Gereksiz hazırlanmış kopya kaldırın.
-
-    Performans kuralları ayarlama kademeli olarak de zenginleştirilmiş.
-
-    **Örnek: Performans ayarı ipuçları ile Azure SQL veritabanına kopyalama**
-
-    Bu örnekte, Azure Data Factory yazma işlemlerini yavaşlatır yüksek DTU kullanımı, Azure SQL veritabanı ulaştığında havuz çalıştırın, kopyalama sırasında fark eder. Daha fazla dtu'ları ile Azure SQL veritabanı katmanı önerisi artırmaktır. 
-
-    ![Performans ayarlama ipuçları ile izleme kopyalayın](./media/copy-activity-overview/copy-monitoring-with-performance-tuning-tips.png)
-
-    Ayrıca, bazı genel konular aşağıda verilmiştir. Performans Tanılama tam açıklamasını, bu makalenin kapsamı dışındadır ' dir.
-
-   * Performans özellikleri:
-     * [Paralel kopyalama](#parallel-copy)
-     * [Veri Tümleştirme Birimleri](#data-integration-units)
-     * [Hazırlanmış kopya](#staged-copy)
-     * [Şirket içinde barındırılan tümleştirme çalışma zamanı ölçeklenebilirlik](concepts-integration-runtime.md#self-hosted-integration-runtime)
-   * [Şirket içinde barındırılan integration runtime](#considerations-for-self-hosted-integration-runtime)
-   * [Kaynak](#considerations-for-the-source)
-   * [Havuz](#considerations-for-the-sink)
-   * [Serileştirme ve seri durumundan çıkarma](#considerations-for-serialization-and-deserialization)
-   * [Sıkıştırma](#considerations-for-compression)
-   * [Sütun eşleme](#considerations-for-column-mapping)
-   * [Diğer konular](#other-considerations)
-
-3. **Tüm veri kümenize Yapılandırması'nı genişletin.** Yürütme sonuçları ve performans ile memnun kaldığınızda, tanım ve işlem hattı, veri kümesinin tamamında kapsayacak şekilde genişletebilirsiniz.
-
-## <a name="considerations-for-self-hosted-integration-runtime"></a>Şirket içinde barındırılan tümleştirme çalışma zamanı için dikkat edilmesi gerekenler
-
-Kopyalama etkinliği, bir şirket içinde barındırılan tümleştirme çalışma zamanı üzerinde çalışıyorsa, aşağıdakilere dikkat edin:
-
-**Kurulum**: Konak tümleştirme çalışma zamanı için ayrılmış bir makine kullanmanızı öneririz. Bkz: [kullanma konuları şirket içinde barındırılan tümleştirme çalışma zamanı](concepts-integration-runtime.md).
-
-**Ölçeği genişletme**: Bir veya daha fazla düğüme sahip bir tek mantıksal şirket içinde barındırılan tümleştirme çalışma zamanı, aynı anda aynı anda birden fazla kopyalama etkinliği çalıştırma görebilir. Karma veri hareketi çok sayıda eşzamanlı kopyalama etkinliği çalıştırma veya büyük bir kopyalamak için veri hacmi üzerinde ağır gerekmesi durumunda göz önünde bulundurun [şirket içinde barındırılan tümleştirme çalışma zamanını ölçeklendirme](create-self-hosted-integration-runtime.md#high-availability-and-scalability) daha fazla kaynak sağlamak için kopyalama güçlendirin.
-
-## <a name="considerations-for-the-source"></a>Kaynağı için konular
-
-### <a name="general"></a>Genel
-
-Alttaki veri deposuna veya bunlara karşı çalışan diğer iş yükleri tarafından dolmasını olmadığından emin olun.
-
-Microsoft veri depoları için bkz: [izleme ve ayarlama konuları](#performance-reference) özgü veri depoları. Bu konular, veri deposu performans özelliklerine ve yanıt sürelerini en aza indirmek ve aktarım hızını en üst düzeye çıkarmak nasıl anlamanıza yardımcı olabilir.
-
-* Blob depolamadan SQL veri ambarı'na veri kopyalama performansını artırmak üzere PolyBase kullanmayı düşünün. Daha fazla bilgi için [Azure SQL veri ambarı'na veri yüklemek için PolyBase kullanma](connector-azure-sql-data-warehouse.md#use-polybase-to-load-data-into-azure-sql-data-warehouse).
-* Verileri Azure Blob Depolama veya Azure Data Lake Store için HDFS kopyalamak performansını artırmak üzere DistCp kullanmayı düşünün. Daha fazla bilgi için [kullanım verileri HDFS kopyalamak için DistCp](connector-hdfs.md#use-distcp-to-copy-data-from-hdfs).
-* Verileri Azure SQL veri ambarı, Azure BLob depolama veya Azure Data Lake Store Redshift'ten kopyalamak kaldırma performansını artırmak üzere kullanmayı düşünün. Daha fazla bilgi için [kullanım verileri Amazon Redshift'ten kopyalamak için kaldırma](connector-amazon-redshift.md#use-unload-to-copy-data-from-amazon-redshift).
-
-### <a name="file-based-data-stores"></a>Dosya tabanlı veri depoları
-
-* **Dosya boyutu ve dosya sayısı ortalaması**: Kopyalama etkinliği, bir kerede veri bir dosya aktarır. İle aynı taşınacak veri miktarına, hizmetin genel performansını veriler nedeniyle her dosya için önyükleme aşaması birkaç büyük dosyalar yerine çok sayıda küçük dosya oluşuyorsa düşüktür. Mümkünse, daha yüksek performans elde etmek için daha büyük dosyalarına küçük dosyaları Birleştir.
-* **Dosya biçimi ve sıkıştırma**: Performansı artırmak daha fazla yolu için bkz. [serileştirme ve seri durumundan çıkarma için Değerlendirmeler](#considerations-for-serialization-and-deserialization) ve [sıkıştırma dikkate alınacak noktalar](#considerations-for-compression) bölümler.
-
-### <a name="relational-data-stores"></a>İlişkisel veri deposu
-
-* **Veri modelini**: Tablo şemanızı kopyalama aktarım hızını etkiler. Büyük satır boyutu aynı miktarda veri kopyalamak için bir küçük satır boyutu daha iyi performans sağlar. Veritabanı daha az satır içeren veri daha az toplu işler daha verimli bir şekilde alabilirsiniz nedenidir.
-* **Sorgu veya saklı yordam**: Kopyalama etkinliği kaynağı verileri daha verimli bir şekilde getirmek için belirttiğiniz sorgu veya saklı yordam mantığını iyileştirin.
-
-## <a name="considerations-for-the-sink"></a>Havuz için dikkat edilmesi gerekenler
-
-### <a name="general"></a>Genel
-
-Alttaki veri deposuna veya bunlara karşı çalışan diğer iş yükleri tarafından dolmasını olmadığından emin olun.
-
-Microsoft veri depoları için bkz: [izleme ve ayarlama konuları](#performance-reference) özgü veri depoları. Bu konular, veri deposu performans özelliklerine ve yanıt sürelerini en aza indirmek ve aktarım hızını en üst düzeye çıkarmak nasıl anlamanıza yardımcı olabilir.
-
-* Herhangi bir veri deposundan Azure SQL veri ambarı'na veri kopyalama performansını artırmak üzere PolyBase kullanmayı düşünün. Daha fazla bilgi için [Azure SQL veri ambarı'na veri yüklemek için PolyBase kullanma](connector-azure-sql-data-warehouse.md#use-polybase-to-load-data-into-azure-sql-data-warehouse).
-* Verileri Azure Blob Depolama veya Azure Data Lake Store için HDFS kopyalamak performansını artırmak üzere DistCp kullanmayı düşünün. Daha fazla bilgi için [kullanım verileri HDFS kopyalamak için DistCp](connector-hdfs.md#use-distcp-to-copy-data-from-hdfs).
-* Verileri Azure SQL veri ambarı, Azure Blob Depolama veya Azure Data Lake Store Redshift'ten kopyalamak kaldırma performansını artırmak üzere kullanmayı düşünün. Daha fazla bilgi için [kullanım verileri Amazon Redshift'ten kopyalamak için kaldırma](connector-amazon-redshift.md#use-unload-to-copy-data-from-amazon-redshift).
-
-### <a name="file-based-data-stores"></a>Dosya tabanlı veri depoları
-
-* **Kopyalama davranışı**: Farklı dosya tabanlı veri deposundan verileri kopyalarsanız, kopyalama etkinliği ile üç seçenek vardır. **copyBehavior** özelliği. Hiyerarşi korur, hiyerarşi düzleştirir veya dosyayı birleştirir. Koruma veya hiyerarşi düzleştirme çok az kayıpla veya hiç performansa sahiptir, ancak dosyaları birleştirme artırmak performansa neden olur.
-* **Dosya biçimi ve sıkıştırma**: Performansı artırmak daha fazla yolu için bkz. [serileştirme ve seri durumundan çıkarma için Değerlendirmeler](#considerations-for-serialization-and-deserialization) ve [sıkıştırma dikkate alınacak noktalar](#considerations-for-compression) bölümler.
-
-### <a name="relational-data-stores"></a>İlişkisel veri deposu
-
-* **Kopyalama davranışı ve performans olduğu çıkarımında**: SQL havuz veri yazmak için farklı yolu vardır. Daha fazla bilgi [açısından en iyisi, Azure SQL veritabanı'na veri yükleme](connector-azure-sql-database.md#best-practice-for-loading-data-into-azure-sql-database).
-
-* **Veri düzeni ve toplu işlem boyutu**:
-  * Tablo şemanızı kopyalama aktarım hızını etkiler. Veritabanı daha verimli bir şekilde daha az toplu veri kaydedebilir miyim çünkü aynı miktarda veri kopyalamak için büyük satır boyutu, küçük satır boyutu daha iyi performans sağlar.
-  * Kopyalama etkinliği, toplu bir dizi içinde veri ekler. Bir toplu işte satır sayısını kullanarak ayarlayabilirsiniz **writeBatchSize** özelliği. Verilerinizi küçük satır varsa, ayarlayabileceğiniz **writeBatchSize** özellik toplu işlem ek yükü azaltır ve daha yüksek performans avantajlarından yararlanarak daha yüksek bir değere sahip. Verilerinizin satır boyutu büyükse, artırdığınızda dikkat **writeBatchSize**. Yüksek bir değere bir kopyalama hatasının veritabanı aşırı yüklenerek neden neden olabilir.
-
-### <a name="nosql-stores"></a>NoSQL depoları
-
-* İçin **tablo depolama**:
-  * **bölüm**: Araya eklemeli bölümlere önemli ölçüde veri yazma, performansı düşürür. Verileri verimli bir şekilde bir bölüme diğerinden sonra eklenir olacak şekilde, kaynak verileri bölüm anahtarına göre sırala. Veya, tek bir bölüm için veri yazmak için mantığı ayarlayabilirsiniz.
-
-## <a name="considerations-for-serialization-and-deserialization"></a>Serileştirme ve seri durumundan çıkarma için dikkat edilmesi gerekenler
-
-Serileştirme ve seri durumundan çıkarma girdi veri kümesini veya çıkış veri kümesi bir dosya olduğunda ortaya çıkabilir. Kopyalama etkinliği tarafından desteklenen dosya biçimleri hakkında daha fazla bilgi için bkz. [desteklenen dosya ve sıkıştırma biçimleri](supported-file-formats-and-compression-codecs.md).
-
-**Kopyalama davranışı**:
-
-* Dosya tabanlı veri depoları arasında dosyaları kopyalanıyor:
-  * Aynı veya hiçbir dosya biçimi ayarları, veri taşıma Hizmeti'nde girdi ve çıktı veri kümeleri hem olduğunda yürüten bir *ikili kopya* serileştirme veya seri durumundan çıkarma olmadan. Kaynak ve havuz dosya biçimi ayarları birbirinden farklı senaryo ile karşılaştırıldığında daha yüksek bir aktarım hızı görürsünüz.
-  * Ne zaman giriş ve çıkış veri kümeleri hem metin biçimi ve yalnızca kodlama olan türü farklı olmadığı, veri taşıma Hizmeti'nde yalnızca kodlama dönüştürme yapar. Herhangi bir serileştirme yapmaz ve seri durumdan yükü ikili kopyasını kıyasla bazı performans neden olur.
-  * Farklı dosya biçimleri veya sınırlayıcılar gibi farklı yapılandırmaları, veri taşıma Hizmeti'nde girdi ve çıktı veri kümeleri hem olduğunda akışı, dönüştürme ve belirttiğiniz çıkış biçimine seri hale için kaynak verileri seri durumdan çıkarır. Bu işlem ek yükü diğer senaryolarda kıyasla çok daha önemli bir performans sonuçlanır.
-* Veya, örneğin, bir ilişkisel bir depolama dosya tabanlı depolama alanından dosya tabanlı olmayan bir veri deposundaki dosyaları kopyalayın. serileştirme veya seri durumundan çıkarma adım gereklidir. Bu adım, önemli performans ek yükü oluşur.
-
-**Dosya biçimi**: Seçtiğiniz dosya biçimi kopyalama performansı etkileyebilir. Örneğin, Avro verileriyle meta verileri depolar sıkıştırılmış bir ikili biçimi ' dir. Hadoop ekosistemindeki işleme ve sorgulama için geniş destek vardır. Avro için serileştirme ve seri kaldırma metin biçimine kıyasla daha düşük kopyalama aktarım hızı sonuçlanır daha pahalıdır. 
-
-Dosya biçimi işleme akışı boyunca tercih ettiğiniz bütünlüklü olarak yapın. Başlangıcı:
-
-- Hangi veri formu, kaynak veri depolarını veya dış sistemlerden ayıklanacak depolanır.
-- Depolama, analitik işleme ve sorgulama için en iyi biçimi.
-- Hangi veri uygulamasına raporlama ve görselleştirme araçları için veri reyonları formatında.
-
-Bazen için yetersiz bir dosya biçimi okuma ve yazma performansını genel analitik işlemi düşünürken iyi bir seçim olabilir.
-
-## <a name="considerations-for-compression"></a>Sıkıştırma dikkate alınacak noktalar
-
-Giriş veya çıkış veri kümesi bir dosya olduğunda, hedef konuma verileri yazar gibi sıkıştırma veya sıkıştırmayı açma gerçekleştirmek için kopyalama etkinliği ayarlayabilirsiniz. Sıkıştırma seçtiğinizde, giriş/çıkış (g/ç) arasında bir denge duruma ve CPU. Bilgi işlem kaynaklarının ek veri maliyetlerini sıkıştırma. Ancak, ağ g/ç ve depolama azaltır. Verilere bağlı olarak bir artırma genel kopyalama aktarım hızının görebilirsiniz.
-
-**Codec**: Her bir sıkıştırma codec avantajları vardır. Örneğin, bzıp2 düşük kopyalama aktarım hızına sahip, ancak işleme için bölme çünkü bzıp2 ile en iyi Hive sorgu performansı elde. Gzip en dengeli bir seçenektir ve en sık kullanılan. Uçtan uca senaryonuza uygun codec bileşeni seçin.
-
-**Düzey**: Her bir sıkıştırma codec için iki seçenek arasından seçim yapabilirsiniz: hızlı sıkıştırılmış ve verimli sıkıştırılmış. Sonuç dosyası en uygun şekilde sıkıştırılmaz bile sıkıştırılmış en hızlı seçenek, mümkün olan en kısa sürede verileri sıkıştırır. En uygun şekilde sıkıştırılmış seçeneği sıkıştırma üzerinde daha fazla zaman harcadığını ve en az miktarda veri ortaya çıkarır. İki seçenek de durumunuzdaki genel daha iyi performans sağlayan görmek için test edebilirsiniz.
-
-**Önemli bir unsur**: Büyük miktarda bir şirket içi depolama ile bulut arasında veri kopyalamak için kullanmayı [kopyalama aşamalı](#staged-copy) ile sıkıştırma etkin. Geçici depolama kullanarak şirket ağınıza ve Azure hizmetlerinizi bant sınırlayan faktör olan ve giriş veri kümesi istediğiniz ve sıkıştırılmamış biçiminde olması için çıktı veri kümesi hem faydalıdır.
-
-## <a name="considerations-for-column-mapping"></a>Sütun eşlemesi için dikkat edilmesi gerekenler
-
-Ayarlayabileceğiniz **Bunun amacı** tüm harita veya çıkış sütunları için giriş sütun alt kümesi bir kopyalama etkinliği özelliği. Veri taşıma Hizmeti'nde veri kaynağından okur. sonra havuz için verileri yazar önce veriler üzerinde sütun eşleme gerçekleştirmek gerekir. Bu ek işlem kopyalama performansını düşürür.
-
-Kaynak veri deponuzda sorgulanabilir, örneğin, SQL veritabanı veya SQL Server gibi ilişkisel bir mağaza veya tablo depolama veya Azure Cosmos DB gibi bir NoSQL deposu olması durumunda sütun filtreleme gönderme ve mantığı yeniden sıralama göz önünde bulundurun **sorgu** sütun eşlemesi kullanmak yerine özellik. Veri taşıma Hizmeti'nde çok daha verimli olduğu kaynak veri deposundan veri okurken bu şekilde yansıtma gerçekleşir.
-
-Daha fazla bilgi [kopyalama etkinliği şema eşleme](copy-activity-schema-and-type-mapping.md).
-
-## <a name="other-considerations"></a>Dikkat edilecek diğer noktalar
-
-Kopyalamak istediğiniz veri boyutu büyükse, sizin işlerinize verileri diğer bölümlere ayırmak için ayarlayabilirsiniz. Kopyalama etkinliği çalıştıran her bir kopyalama etkinliği için veri boyutunu düşürmek için daha sık çalışacak şekilde zamanlayabilirsiniz.
-
-Birçok veri kümesi hakkında dikkatli olmanız ve Azure Data Factory, aynı anda aynı veri deposuna bağlanmak gerekli etkinlikler kopyalayın. Birçok eş zamanlı kopyası işleri bir veri deposu azaltma ve performansın düşmesine neden, kopyalama işi iç deneme ve bazı durumlarda, yürütme hatalarını sağlama.
-
-## <a name="sample-scenario-copy-from-an-on-premises-sql-server-to-blob-storage"></a>Örnek senaryo: Bir şirket içi SQL Server'dan Blob depolamaya kopyalama
-
-**Senaryo**: Bir işlem hattı, bir şirket içi SQL Server'dan Blob Depolama alanında CSV biçimi veri kopyalamak için oluşturulmuştur. Kopyalama işini daha hızlı hale getirmek için CSV dosyaları bzıp2 biçimine sıkıştırılmasının gerekli.
-
-**Test ve analiz**: Performans Kıyaslama yavaş olduğu değerinden 2 MB/sn aktarım hızı kopyalama etkinliği var.
-
-**Performans Analizi ve ayarlama**: Performans sorunu gidermek için nasıl veri işlenen taşınır ve adresindeki gözden geçirelim.
-
-- **Veri Okuma**: Tümleştirme çalışma zamanının SQL Server için bir bağlantı açar ve sorguyu gönderir. SQL Server Integration runtime intranet üzerinden veri akışını göndererek yanıt verir.
-- **Seri hale getirmek ve verileri sıkıştırmak**: Integration runtime, veri akışı CSV biçimine serileştiren ve bzıp2 akış verileri sıkıştırır.
-- **Veri yazma**: Tümleştirme çalışma zamanının bzıp2 akış Internet üzerinden Blob depolamaya yükler.
-
-Gördüğünüz gibi veriler işlenir ve akış sıralı bir şekilde taşındı: SQL Server > LAN > Integration runtime > WAN > Blob Depolama. Genel performansını en düşük aktarım hızı tarafından ardışık düzeni işlenir.
-
-![Veri akışı](./media/copy-activity-performance/case-study-pic-1.png)
-
-Bir veya daha fazla aşağıdaki faktörleri performans sorunu neden olabilir:
-
-* **Kaynak**: SQL Server kendisini aktarım hızının düşük olmasını nedeniyle ağır yükleri vardır.
-* **Barındırılan tümleştirme çalışma zamanını**:
-  * **LAN**: Integration runtime gölgeden uzak SQL Server makinesinde bulunduğu yer ve düşük bant genişliğine sahip bağlantısı vardır.
-  * **Integration runtime**: Tümleştirme çalışma zamanı aşağıdaki işlemleri gerçekleştirmek için kendi yük sınırlamaları ulaştı:
-    * **Serileştirme**: CSV biçimi için veri akışı seri hale getirme, yavaş aktarım hızına sahip.
-    * **Sıkıştırma**: 2.8 MB/sn ile Core i7 olduğu yavaş sıkıştırma codec, örneğin, bzıp2 seçtiğiniz.
-  * **WAN**: Örneğin, T1, kurumsal ağ ve Azure hizmetlerinizi arasındaki bant düşüktür; 1,544 kbps = T2 6,312 kbps =.
-* **Havuz**: BLOB Depolama, aktarım hızının düşük olmasını sahiptir. En az 60 MB/sn, hizmet düzeyi sözleşmesinin (SLA) garanti eder, çünkü bu senaryo düşüktür.
-
-Bu durumda, bzıp2 veri sıkıştırma tüm işlem hattını yavaşlatmasını. Gzip sıkıştırma codec bileşenine geçiş, bu performans sorunu kolaylaştırmak.
+* Bulut kopyası sırasında hazırlama kullandığınızda, verileri bir bulut veri deposundan başka bir bulut veri deposuna kopyalar. her iki aşama de Azure tümleştirme çalışma zamanı tarafından güçlendirilirse, [1. adım ve 2. adım için kopyalama süresi toplamı] x [bulut kopyalama birimi fiyatı] ücretlendirirsiniz.
+* Bir karma kopya sırasında hazırlama kullandığınızda, verileri şirket içi veri deposundan bir bulut veri deposuna kopyalayan bir aşama, kendinden konak bir tümleştirme çalışma zamanı tarafından güçlendirildiği için, [karma kopyalama süresi] x [karma kopya birim fiyatı] + [bulut kopyalama süresi] için ücret ödersiniz. x [bulut kopya birim fiyatı].
 
 ## <a name="references"></a>Başvurular
 
-Performans izleme ve desteklenen veri depolarının bazılarını başvuruları ayarlama şunlardır:
+Desteklenen bazı veri depoları için performans izleme ve ayarlama başvuruları aşağıda verilmiştir:
 
-* Azure depolama, BLOB ve tablo depolama içerir: [Azure depolama ölçeklenebilirlik hedefleri](../storage/common/storage-scalability-targets.md) ve [Azure depolama performansı ve ölçeklenebilirlik denetim listesi](../storage/common/storage-performance-checklist.md).
-* Azure SQL Veritabanı: Yapabilecekleriniz [performansını izleme](../sql-database/sql-database-single-database-monitor.md) ve veritabanı işlem birimi (DTU) yüzde değerini denetleyin.
-* Azure SQL veri ambarı: Kendi özelliği, veri ambarı birimi (Dwu) ölçülür. Bkz: [yönetme, Azure SQL veri ambarı (genel bakış) güç işlem](../sql-data-warehouse/sql-data-warehouse-manage-compute-overview.md).
-* Azure Cosmos DB: [Azure Cosmos DB'de performans düzeyleri](../cosmos-db/performance-levels.md).
-* Şirket içi SQL Server: [İzleme ve performansı ayarlama](https://msdn.microsoft.com/library/ms189081.aspx).
-* Şirket içi dosya sunucusu: [Dosya sunucuları için performans ayarlama](https://msdn.microsoft.com/library/dn567661.aspx).
+* Blob depolamayı ve tablo depolamayı içeren Azure depolama: Azure depolama [ölçeklenebilirlik hedefleri](../storage/common/storage-scalability-targets.md) ve [Azure depolama performansı ve ölçeklenebilirlik denetim listesi](../storage/common/storage-performance-checklist.md).
+* Azure SQL veritabanı: [performansı izleyebilir](../sql-database/sql-database-single-database-monitor.md) ve veritabanı işlem BIRIMI (DTU) yüzdesini kontrol edebilirsiniz.
+* Azure SQL veri ambarı: yeteneği, veri ambarı birimlerinde (DWU) ölçülür. Bkz. [Azure SQL veri ambarı 'nda işlem gücünü yönetme (genel bakış)](../sql-data-warehouse/sql-data-warehouse-manage-compute-overview.md).
+* Azure Cosmos DB: [Azure Cosmos DB performans düzeyleri](../cosmos-db/performance-levels.md).
+* Şirket içi SQL Server: [performansı izleme ve ayarlama](https://msdn.microsoft.com/library/ms189081.aspx).
+* Şirket içi dosya sunucusu: [dosya sunucuları Için performans ayarlama](https://msdn.microsoft.com/library/dn567661.aspx).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bir kopyalama etkinliği makalelere bakın:
+Diğer kopyalama etkinliği makalelerine bakın:
 
-- [Kopyalama etkinliği'ne genel bakış](copy-activity-overview.md)
-- [Kopyalama etkinliği şema eşleme](copy-activity-schema-and-type-mapping.md)
-- [Kopyalama etkinliği hataya dayanıklılık](copy-activity-fault-tolerance.md)
+- [Kopyalama etkinliğine genel bakış](copy-activity-overview.md)
+- [Data Lake veya veri ambarınızdan verileri Azure 'a geçirmek için Azure Data Factory kullanın](data-migration-guidance-overview.md)
+- [Amazon S3 'ten Azure Storage 'a veri geçirme](data-migration-guidance-s3-azure-storage.md)

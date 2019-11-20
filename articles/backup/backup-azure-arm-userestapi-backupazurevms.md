@@ -1,41 +1,35 @@
 ---
-title: "Azure yedekleme: REST API kullanarak Azure Vm'lerini yedekleme"
-description: Azure sanal makine REST API kullanarak yedekleme, yedekleme işlemlerini yönetme
-services: backup
-author: pvrk
-manager: shivamg
-keywords: REST API; Azure VM yedeklemesi; Azure VM geri yükleme;
-ms.service: backup
+title: REST API kullanarak Azure VM 'lerini yedekleme
+description: Bu makalede, REST API kullanarak Azure VM yedeklemesi 'nin yedekleme işlemlerini yapılandırma, başlatma ve yönetme hakkında bilgi edinin.
 ms.topic: conceptual
 ms.date: 08/03/2018
-ms.author: pullabhk
 ms.assetid: b80b3a41-87bf-49ca-8ef2-68e43c04c1a3
-ms.openlocfilehash: 295c4fed9ab674f0c9e812c02f6b82ee53ef1b91
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: c929f820862f5d041b4a63a1ca9c083abf1a1e4c
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67274860"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74173454"
 ---
-# <a name="back-up-an-azure-vm-using-azure-backup-via-rest-api"></a>REST API aracılığıyla Azure Backup'ı kullanarak Azure VM yedekleme
+# <a name="back-up-an-azure-vm-using-azure-backup-via-rest-api"></a>REST API aracılığıyla Azure Backup kullanarak bir Azure VM 'yi yedekleme
 
-Bu makalede REST API aracılığıyla Azure Backup'ı kullanarak bir Azure VM yedeklemelerini yönetme açıklar. Daha önce korumasız bir Azure sanal makine için ilk kez korumayı yapılandırma, korumalı bir Azure VM için bir isteğe bağlı yedekleme tetikleyin ve burada açıklandığı gibi yedeklenen sanal makine REST API aracılığıyla yedekleme özelliklerini değiştirin.
+Bu makalede, REST API aracılığıyla Azure Backup kullanarak bir Azure VM için yedeklemelerin nasıl yönetileceği açıklanır. Daha önce korumasız bir Azure VM için korumayı ilk kez yapılandırmak, korumalı bir Azure VM için isteğe bağlı bir yedekleme tetikleyip, yedeklenen bir sanal makinenin yedekleme özelliklerini burada açıklandığı gibi REST API aracılığıyla değiştirin.
 
-Başvurmak [kasası oluşturma](backup-azure-arm-userestapi-createorupdatevault.md) ve [ilkesi oluşturma](backup-azure-arm-userestapi-createorupdatepolicy.md) yeni kasalar ve ilkeleri oluşturmak için REST API öğreticiler.
+Yeni kasa ve ilke oluşturmaya yönelik REST API [kasa oluşturma](backup-azure-arm-userestapi-createorupdatevault.md) ve [ilke oluşturma](backup-azure-arm-userestapi-createorupdatepolicy.md) öğreticilerine bakın.
 
-Bir VM'yi kurtarma Hizmetleri kasasına "testVault", "testVaultRG" kaynak grubunda mevcut bir kaynak grubu "testRG" altında "testVM" ("DefaultPolicy" olarak adlandırılır) varsayılan ilkeyle korumak istediğiniz varsayalım.
+"TestRG" kaynak grubu altındaki "testVM" sanal makinesini "testVaultRG" kaynak grubunda ("DefaultPolicy" adlı) içeren "Testkasag" adlı bir kurtarma hizmetleri kasasıyla korumak istediğinizi varsayalım.
 
-## <a name="configure-backup-for-an-unprotected-azure-vm-using-rest-api"></a>REST API kullanarak korumasız Azure VM için yedeklemeyi yapılandırma
+## <a name="configure-backup-for-an-unprotected-azure-vm-using-rest-api"></a>REST API kullanarak korumasız bir Azure VM için yedeklemeyi yapılandırma
 
-### <a name="discover-unprotected-azure-vms"></a>Korumasız Azure Vm'leri keşfedin
+### <a name="discover-unprotected-azure-vms"></a>Korumasız Azure VM 'lerini bulma
 
-İlk olarak, kasa Azure VM belirlemek mümkün olması gerekir. Bunu kullanarak tetiklenir [yenileme işlemi](https://docs.microsoft.com/rest/api/backup/protectioncontainers/refresh). Zaman uyumsuz olduğu *POST* kasa xenapp'i işlemi geçerli abonelikte tüm korumasız bir VM'yi en son listesini alır ve 'bunları önbelleğe'. VM önbelleğe' sonra' Kurtarma Hizmetleri sanal Makineye erişmek ve korumak mümkün olacaktır.
+İlk olarak, kasanın Azure VM 'yi tanımlayabilmesi gerekir. Bu, [yenileme işlemi](https://docs.microsoft.com/rest/api/backup/protectioncontainers/refresh)kullanılarak tetiklenir. Bu, kasasının geçerli abonelikteki tüm korumasız VM 'nin en son listesini aldığından ve bunlara ' önbelleğe aldığınızdan emin olan zaman uyumsuz bir *Post* işlemidir. VM ' önbelleğe alındıktan sonra, Kurtarma Hizmetleri sanal makineye erişebilir ve bunu koruyabilir.
 
 ```http
 POST https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{vaultresourceGroupname}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers?api-version=2016-12-01
 ```
 
-POST URI'ya sahip `{subscriptionId}`, `{vaultName}`, `{vaultresourceGroupName}`, `{fabricName}` parametreleri. `{fabricName}` "Azure". Bizim örneğimizde göre `{vaultName}` "testVault" olduğundan ve `{vaultresourceGroupName}` "testVaultRG" olduğu. URI'de verilen tüm gerekli parametreleri gibi ayrı bir istek gövdesi için gerek yoktur.
+POST URI 'sinin `{subscriptionId}`, `{vaultName}`, `{vaultresourceGroupName}``{fabricName}` parametreleri vardır. `{fabricName}`, "Azure" dır. Örneğimize göre, `{vaultName}` "Testkasası" ve `{vaultresourceGroupName}` "testVaultRG" dir. URI 'de tüm gerekli parametreler verildiğinden, ayrı bir istek gövdesi gerekmez.
 
 ```http
 POST https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/refreshContainers?api-version=2016-12-01
@@ -43,18 +37,18 @@ POST https://management.azure.com/Subscriptions/00000000-0000-0000-0000-00000000
 
 #### <a name="responses"></a>Responses
 
-'Yenile' işlem bir [zaman uyumsuz işlem](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations). Bu işlem, ayrı ayrı izlenmesi gereken başka bir işlem oluşturur anlamına gelir.
+' Refresh ' işlemi [zaman uyumsuz bir işlemdir](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations). Bu işlemin Ayrıca izlenmesi gereken başka bir işlem oluşturduğu anlamına gelir.
 
-İki yanıt döndürür: 202 (kabul edildi başka bir işlem oluşturulurken) ve ardından 200 (Tamam) Bu işlem tamamlandığında.
+Başka bir işlem oluşturulduğunda 202 (kabul edildi) ve bu işlem tamamlandığında 200 (Tamam) iki yanıt döndürür.
 
 |Ad  |Tür  |Açıklama  |
 |---------|---------|---------|
-|204 No Content     |         |  Tamam düğmesiyle döndürülen içerik yok      |
-|202 kabul edildi     |         |     Kabul edildi    |
+|204 Içerik yok     |         |  Hiçbir içerik döndürülmeden Tamam      |
+|202 kabul edildi     |         |     Eden    |
 
-##### <a name="example-responses"></a>Örnek yanıt
+##### <a name="example-responses"></a>Örnek yanıtlar
 
-Bir kez *POST* istek gönderildi, 202 (kabul edildi) yanıt döndürülür.
+*Post* isteği gönderildikten sonra, 202 (kabul edildi) yanıtı döndürülür.
 
 ```http
 HTTP/1.1 202 Accepted
@@ -69,17 +63,17 @@ x-ms-correlation-request-id: 43cf550d-e463-421c-8922-37e4766db27d
 x-ms-routing-request-id: SOUTHINDIA:20180521T105701Z:43cf550d-e463-421c-8922-37e4766db27d
 Cache-Control: no-cache
 Date: Mon, 21 May 2018 10:57:00 GMT
-Location: https://management.azure.com/subscriptions//00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/operationResults/aad204aa-a5cf-4be2-a7db-a224819e5890?api-version=2016-12-01
+Location: https://management.azure.com/subscriptions//00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/operationResults/aad204aa-a5cf-4be2-a7db-a224819e5890?api-version=2019-05-13
 X-Powered-By: ASP.NET
 ```
 
-İle basit bir "Konum" üst bilgisi kullanılarak elde edilen işlem izlemek *alma* komutu
+Basit bir *Get* komutuyla "konum" üst bilgisini kullanarak ortaya çıkan işlemi izleyin
 
 ```http
-GET https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/operationResults/aad204aa-a5cf-4be2-a7db-a224819e5890?api-version=2016-12-01
+GET https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/operationResults/aad204aa-a5cf-4be2-a7db-a224819e5890?api-version=2019-05-13
 ```
 
-Tüm Azure VM'ler bulunduktan sonra GET komutu 204 (içerik yok) bir yanıt döndürür. Kasa abonelik içindeki herhangi bir VM bulabilir.
+Tüm Azure VM 'Leri keşfedildiğinde GET komutu bir 204 (Içerik yok) yanıtı döndürür. Kasa artık abonelik içindeki herhangi bir VM 'yi bulabilir.
 
 ```http
 HTTP/1.1 204 NoContent
@@ -96,27 +90,27 @@ Date: Mon, 21 May 2018 10:58:25 GMT
 X-Powered-By: ASP.NET
 ```
 
-### <a name="selecting-the-relevant-azure-vm"></a>İlgili Azure VM'yi seçme
+### <a name="selecting-the-relevant-azure-vm"></a>İlgili Azure VM 'yi seçme
 
- "Önbelleğe alma" yapıldığını doğrulayabilirsiniz [tüm korunabilir öğelerin listesi](https://docs.microsoft.com/rest/api/backup/backupprotectableitems/list) aboneliği altında istediğiniz VM'yi yanıtta bulun. [Bu işlem yanıtı](#example-responses-1) ayrıca nasıl kurtarma hizmetleri tanımlayan bir VM hakkında bilgi sağlar.  Desen ile ilgili bilgi sahibi olduktan sonra bu adımı atlayabilir ve doğrudan devam [korunmasını](#enabling-protection-for-the-azure-vm).
+ Abonelik kapsamındaki [Tüm korunabilir öğeleri listeleyerek](https://docs.microsoft.com/rest/api/backup/backupprotectableitems/list) "önbelleğe alma" işleminin yapıldığını ve yanıttaki istenen VM 'yi bulabileceğinizi doğrulayabilirsiniz. [Bu işlemin yanıtı,](#example-responses-1) kurtarma hizmetleri 'nin bir VM 'yi nasıl tanımladığına ilişkin bilgiler de sağlar.  Modele alışdıktan sonra, bu adımı atlayabilir ve [Korumayı etkinleştirme](#enabling-protection-for-the-azure-vm)işlemine doğrudan devam edebilirsiniz.
 
-Bu işlem bir *alma* işlemi.
+Bu işlem bir *Get* işlemidir.
 
 ```http
 GET https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{vaultresourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectableItems?api-version=2016-12-01&$filter=backupManagementType eq 'AzureIaasVM'
 ```
 
-*Alma* URI'ya sahip tüm gerekli parametreleri. Hiçbir ek istek gövdesi gerekli değildir.
+*Get* URI 'sinin tüm gerekli parametreleri vardır. Ek istek gövdesi gerekli değildir.
 
-##### <a name="responses-1"></a>Yanıtları
+#### <a name="responses-1"></a>Lerinde
 
 |Ad  |Tür  |Açıklama  |
 |---------|---------|---------|
-|200 TAMAM     | [WorkloadProtectableItemResourceList](https://docs.microsoft.com/rest/api/backup/backupprotectableitems/list#workloadprotectableitemresourcelist)        |       Tamam |
+|200 TAMAM     | [Workloadkorunabilir Tableıtemresourcelist](https://docs.microsoft.com/rest/api/backup/backupprotectableitems/list#workloadprotectableitemresourcelist)        |       Tamam |
 
-##### <a name="example-responses-1"></a>Örnek yanıt
+#### <a name="example-responses-1"></a>Örnek yanıtlar
 
-Bir kez *alma* istek gönderildi, bir 200 (Tamam) yanıt döndürülür.
+*Get* isteği gönderildikten sonra bir 200 (Tamam) yanıtı döndürülür.
 
 ```http
 HTTP/1.1 200 OK
@@ -153,44 +147,44 @@ X-Powered-By: ASP.NET
 ```
 
 > [!TIP]
-> Değerleri sayısı bir *alma* için 200 'page' yanıt sınırlıdır. URL yanıtlar sonraki kümesini almak için 'nextLink' alanını kullanın.
+> Bir *Get* yanıtında değer sayısı, bir ' Page ' için 200 ile sınırlıdır. Sonraki yanıt kümesinin URL 'sini almak için ' nextLink ' alanını kullanın.
 
-Yanıt ve her korumasız Azure Vm'lerinin listesini içeren `{value}` yedeklemeyi yapılandırmak için Azure kurtarma hizmeti tarafından gerekli tüm bilgileri içerir. Yedeklemeyi yapılandırmak için Not `{name}` alan ve `{virtualMachineId}` alanındaki `{properties}` bölümü. Aşağıda belirtildiği gibi bu alan değerlerinin iki değişken oluşturun.
+Yanıt, tüm korumasız Azure VM 'lerinin listesini içerir ve her `{value}`, Azure kurtarma hizmeti 'nin yedeklemeyi yapılandırmak için gereken tüm bilgileri içerir. Yedeklemeyi yapılandırmak için, `{properties}` bölümündeki `{name}` alanını ve `{virtualMachineId}` alanı ' na göz önünde edin. Aşağıda belirtildiği gibi bu alan değerlerinden iki değişken oluşturun.
 
-- containerName = "iaasvmcontainer;" +`{name}`
-- protectedItemName = "vm;" + `{name}`
-- `{virtualMachineId}` Daha sonra kullanılan [istek gövdesi](#example-request-body)
+- containerName = "ıaasvmcontainer;" +`{name}`
+- Korunabilir = "VM;" + `{name}`
+- `{virtualMachineId}`, [istek gövdesinde](#example-request-body) daha sonra kullanılır
 
-Örnekte, yukarıdaki değerler için çevir:
+Örnekte yukarıdaki değerler şu şekilde çeviri yapar:
 
-- containerName = "iaasvmcontainer;iaasvmcontainerv2;testRG;testVM"
+- containerName = "ıaasvmcontainer; iaasvmcontainerv2; testRG; testVM"
 - protectedItemName = "vm;iaasvmcontainerv2;testRG;testVM"
 
 ### <a name="enabling-protection-for-the-azure-vm"></a>Azure VM için korumayı etkinleştirme
 
-İlgili VM "önbelleğe alınmış" ve "tanımlanan" sonra korumak için ilkeyi seçin. Kasadaki mevcut ilkeleri hakkında daha fazla bilgi edinmek için bkz [ilke API listesinde](https://docs.microsoft.com/rest/api/backup/backuppolicies/list). Ardından [uygun ilke](https://docs.microsoft.com/rest/api/backup/protectionpolicies/get) ilke adına başvuran tarafından. İlkeleri oluşturmak için başvurmak [ilke öğretici oluşturma](backup-azure-arm-userestapi-createorupdatepolicy.md). "DefaultPolicy" seçildiğinde, aşağıdaki örnekteki.
+İlgili VM "Önbelleğe alındı" ve "tanımlı" olduktan sonra, korunacak ilkeyi seçin. Kasadaki mevcut ilkeler hakkında daha fazla bilgi edinmek için [liste ILKESI API](https://docs.microsoft.com/rest/api/backup/backuppolicies/list)'sine bakın. Ardından ilke adına başvurarak [ilgili ilkeyi](https://docs.microsoft.com/rest/api/backup/protectionpolicies(2019-05-13)/get) seçin. İlke oluşturmak için [ilke oluşturma öğreticisi](backup-azure-arm-userestapi-createorupdatepolicy.md)' ne bakın. Aşağıdaki örnekte "DefaultPolicy" seçilidir.
 
-Koruma etkinleştirme zaman uyumsuz bir *PUT* 'korumalı öğesi' oluşturan bir işlem.
-
-```http
-https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{vaultresourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}?api-version=2016-12-01
-```
-
-`{containerName}` Ve `{protectedItemName}` üzerinde oluşturulmuş gibi. `{fabricName}` "Azure". Bizim örneğimizde, bunun için çevirir:
+Korumayı etkinleştirme, ' Protected Item ' oluşturan zaman uyumsuz bir *PUT* işlemidir.
 
 ```http
-PUT https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;iaasvmcontainerv2;testRG;testVM?api-version=2016-12-01
+https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{vaultresourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}?api-version=2019-05-13
 ```
 
-#### <a name="create-the-request-body"></a>İstek gövdesi oluşturma
+`{containerName}` ve `{protectedItemName}` yukarıda oluşturulur. `{fabricName}`, "Azure" dır. Örneğimiz için şu şekilde çeviri yapar:
 
-Korumalı bir öğe oluşturmak için istek gövdesi bileşenlerinin aşağıda verilmiştir.
+```http
+PUT https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;iaasvmcontainerv2;testRG;testVM?api-version=2019-05-13
+```
+
+#### <a name="create-the-request-body"></a>İstek gövdesini oluşturma
+
+Korumalı bir öğe oluşturmak için, istek gövdesinin bileşenleri aşağıda verilmiştir.
 
 |Ad  |Tür  |Açıklama  |
 |---------|---------|---------|
-|properties     | AzureIaaSVMProtectedItem        |ProtectedItem kaynak özellikleri         |
+|properties     | AzureIaaSVMProtectedItem        |Korunabilir kaynak özellikleri         |
 
-İstek gövdesini ve diğer ayrıntıları tanımlarını tam listesi için başvurmak [korumalı öğe REST API belge oluşturma](https://docs.microsoft.com/rest/api/backup/protecteditems/createorupdate#request-body).
+İstek gövdesinin ve diğer ayrıntıların tanımlarının tüm listesi için, [korumalı öğe oluştur REST API belge](https://docs.microsoft.com/rest/api/backup/protecteditems/createorupdate#request-body)' ye başvurun.
 
 ##### <a name="example-request-body"></a>Örnek istek gövdesi
 
@@ -206,28 +200,28 @@ Aşağıdaki istek gövdesi, korumalı bir öğe oluşturmak için gereken özel
 }
 ```
 
-`{sourceResourceId}` Olduğu `{virtualMachineId}` gelen yukarıda sözü edilen [korunabilir öğe listesi yanıtı](#example-responses-1).
+`{sourceResourceId}` [korunabilir öğelerin listesinin yanıtından](#example-responses-1)yukarıda bahsedilen `{virtualMachineId}`.
 
 #### <a name="responses"></a>Responses
 
-Korumalı bir öğe oluşturma bir [zaman uyumsuz işlem](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations). Bu işlem, ayrı ayrı izlenmesi gereken başka bir işlem oluşturur anlamına gelir.
+Korumalı bir öğenin oluşturulması [zaman uyumsuz bir işlemdir](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations). Bu işlemin Ayrıca izlenmesi gereken başka bir işlem oluşturduğu anlamına gelir.
 
-İki yanıt döndürür: 202 (kabul edildi başka bir işlem oluşturulurken) ve ardından 200 (Tamam) Bu işlem tamamlandığında.
+Başka bir işlem oluşturulduğunda 202 (kabul edildi) ve bu işlem tamamlandığında 200 (Tamam) iki yanıt döndürür.
 
 |Ad  |Tür  |Açıklama  |
 |---------|---------|---------|
-|200 TAMAM     |    [ProtectedItemResource](https://docs.microsoft.com/rest/api/backup/protecteditemoperationresults/get#protecteditemresource)     |  Tamam       |
-|202 kabul edildi     |         |     Kabul edildi    |
+|200 TAMAM     |    [Korunabilir kaynak](https://docs.microsoft.com/rest/api/backup/protecteditemoperationresults/get#protecteditemresource)     |  Tamam       |
+|202 kabul edildi     |         |     Eden    |
 
-##### <a name="example-responses"></a>Örnek yanıt
+##### <a name="example-responses"></a>Örnek yanıtlar
 
-Gönderdiğiniz sonra *PUT* istek korumalı öğe oluşturma veya güncelleştirme, ilk yanıt, 202 (kabul edildi). bir konum üst bilgisi ya da Azure async başlığı.
+Korumalı öğe oluşturma veya güncelleştirme için *PUT* isteğini gönderdikten sonra, ilk yanıt bir konum üst bilgisi veya Azure-Async-header ile 202 (kabul edilir) olur.
 
 ```http
 HTTP/1.1 202 Accepted
 Pragma: no-cache
 Retry-After: 60
-Azure-AsyncOperation: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;testRG;testVM/operationsStatus/a0866047-6fc7-4ac3-ba38-fb0ae8aa550f?api-version=2016-12-01
+Azure-AsyncOperation: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;testRG;testVM/operationsStatus/a0866047-6fc7-4ac3-ba38-fb0ae8aa550f?api-version=2019-05-13
 X-Content-Type-Options: nosniff
 x-ms-request-id: db785be0-bb20-4598-bc9f-70c9428b170b
 x-ms-client-request-id: e1f94eef-9b2d-45c4-85b8-151e12b07d03; e1f94eef-9b2d-45c4-85b8-151e12b07d03
@@ -237,17 +231,17 @@ x-ms-correlation-request-id: db785be0-bb20-4598-bc9f-70c9428b170b
 x-ms-routing-request-id: SOUTHINDIA:20180521T073907Z:db785be0-bb20-4598-bc9f-70c9428b170b
 Cache-Control: no-cache
 Date: Mon, 21 May 2018 07:39:06 GMT
-Location: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;testRG;testVM/operationResults/a0866047-6fc7-4ac3-ba38-fb0ae8aa550f?api-version=2016-12-01
+Location: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;testRG;testVM/operationResults/a0866047-6fc7-4ac3-ba38-fb0ae8aa550f?api-version=2019-05-13
 X-Powered-By: ASP.NET
 ```
 
-Ardından ile basit bir konum üst bilgisi veya Azure-AsyncOperation başlığı kullanılarak elde edilen işlemi izlemek *alma* komutu.
+Ardından, bir basit *Get* komutuyla konum üstbilgisini veya Azure-AsyncOperation üst bilgisini kullanarak elde edilen işlemi izleyin.
 
 ```http
-GET https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;testRG;testVM/operationsStatus/a0866047-6fc7-4ac3-ba38-fb0ae8aa550f?api-version=2016-12-01
+GET https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;testRG;testVM/operationsStatus/a0866047-6fc7-4ac3-ba38-fb0ae8aa550f?api-version=2019-05-13
 ```
 
-İşlem tamamlandığında, yanıt gövdesi korumalı öğenin içeriği ile 200 (Tamam) döndürür.
+İşlem tamamlandıktan sonra, yanıt gövdesinde korunan öğe içeriğiyle 200 (Tamam) döndürür.
 
 ```json
 {
@@ -278,37 +272,37 @@ GET https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000
 }
 ```
 
-Bu, sanal makine için koruma etkinleştirildikten ve ilk yedekleme İlkesi zamanlamaya göre tetiklenen doğrular.
+Bu, korumanın VM için etkinleştirildiğini ve ilk yedeklemenin ilke zamanlaması uyarınca tetikleneceğini onaylar.
 
-## <a name="trigger-an-on-demand-backup-for-a-protected-azure-vm"></a>Korumalı bir Azure VM için bir isteğe bağlı yedekleme tetikleyin
+## <a name="trigger-an-on-demand-backup-for-a-protected-azure-vm"></a>Korumalı bir Azure VM için isteğe bağlı yedekleme tetikleyin
 
-Bir Azure VM yedeklemesi için yapılandırıldıktan sonra yedekleme İlkesi zamanlamaya göre gerçekleşir. İlk zamanlanmış yedekleme için bekleyin ya da her zaman talep üzerine yedekleme tetikleyin. İsteğe bağlı yedeklemeler için elde tutma yedekleme ilkesinin saklamadan ayrıdır ve belirli bir tarih-saat belirtilebilir. Belirtilmezse, isteğe bağlı yedekleme tetikleyicinin günden itibaren 30 gün olduğu varsayılır.
+Yedekleme için bir Azure VM yapılandırıldıktan sonra yedeklemeler, ilke zamanlaması uyarınca gerçekleşir. Zamanlanan ilk yedeklemeyi bekleyebilir veya dilediğiniz zaman bir isteğe bağlı yedekleme tetikleyebilirsiniz. İsteğe bağlı yedeklemeler için bekletme, yedekleme ilkesinin saklama alanından ayrıdır ve belirli bir tarih-saat için belirtilebilir. Belirtilmemişse, isteğe bağlı yedekleme tetikleyicisinin günüyle 30 gün olduğu varsayılır.
 
-İsteğe bağlı yedekleme tetikleniyor olduğu bir *POST* işlemi.
+İsteğe bağlı yedekleme tetiklenmesi bir *Post* işlemidir.
 
 ```http
 POST https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/backup?api-version=2016-12-01
 ```
 
-`{containerName}` Ve `{protectedItemName}` oluşturulmuş gibi [yukarıda](#responses-1). `{fabricName}` "Azure". Bizim örneğimizde, bunun için çevirir:
+`{containerName}` ve `{protectedItemName}` [yukarıda](#responses-1)oluşturulur. `{fabricName}`, "Azure" dır. Örneğimiz için şu şekilde çeviri yapar:
 
 ```http
 POST https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;iaasvmcontainerv2;testRG;testVM/backup?api-version=2016-12-01
 ```
 
-### <a name="create-the-request-body"></a>İstek gövdesi oluşturma
+### <a name="create-the-request-body"></a>İstek gövdesini oluşturma
 
-Aşağıdaki isteğe bağlı yedekleme tetiklemek için istek gövdesi bileşenleridir.
+İsteğe bağlı bir yedeklemeyi tetiklemek için, istek gövdesinin bileşenleri aşağıda verilmiştir.
 
 |Ad  |Tür  |Açıklama  |
 |---------|---------|---------|
-|properties     | [IaaSVMBackupRequest](https://docs.microsoft.com/rest/api/backup/backups/trigger#iaasvmbackuprequest)        |BackupRequestResource özellikleri         |
+|properties     | [Iaasvmbackuprequest](https://docs.microsoft.com/rest/api/backup/backups/trigger#iaasvmbackuprequest)        |BackupRequestResource özellikleri         |
 
-İstek gövdesini ve diğer ayrıntıları tanımlarını tam listesi için başvurmak [tetikleme yedeklemeler için korumalı öğeler REST API belge](https://docs.microsoft.com/rest/api/backup/backups/trigger#request-body).
+İstek gövdesinin ve diğer ayrıntıların tanımlarının tamamı listesi için bkz. [korumalı öğeler için tetikleyici yedeklemeleri REST API belgesi](https://docs.microsoft.com/rest/api/backup/backups/trigger#request-body).
 
 #### <a name="example-request-body"></a>Örnek istek gövdesi
 
-Aşağıdaki istek gövdesi, korumalı bir öğe için bir yedek tetiklemek için gereken özellikleri tanımlar. Bekletme belirtilmezse yedekleme işinin tetikleyicisinin tarihten itibaren 30 gün boyunca saklanır.
+Aşağıdaki istek gövdesi, korumalı bir öğe için bir yedeklemeyi tetiklemek için gereken özellikleri tanımlar. Bekletme belirtilmemişse, yedekleme işinin tetiklenme zamanından itibaren 30 gün boyunca tutulacaktır.
 
 ```json
 {
@@ -321,23 +315,23 @@ Aşağıdaki istek gövdesi, korumalı bir öğe için bir yedek tetiklemek içi
 
 ### <a name="responses"></a>Responses
 
-İsteğe bağlı yedekleme tetikleniyor olduğu bir [zaman uyumsuz işlem](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations). Bu işlem, ayrı ayrı izlenmesi gereken başka bir işlem oluşturur anlamına gelir.
+İsteğe bağlı yedekleme tetiklenmesi [zaman uyumsuz bir işlemdir](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations). Bu işlemin Ayrıca izlenmesi gereken başka bir işlem oluşturduğu anlamına gelir.
 
-İki yanıt döndürür: 202 (kabul edildi başka bir işlem oluşturulurken) ve ardından 200 (Tamam) Bu işlem tamamlandığında.
+Başka bir işlem oluşturulduğunda 202 (kabul edildi) ve bu işlem tamamlandığında 200 (Tamam) iki yanıt döndürür.
 
 |Ad  |Tür  |Açıklama  |
 |---------|---------|---------|
-|202 kabul edildi     |         |     Kabul edildi    |
+|202 kabul edildi     |         |     Eden    |
 
-##### <a name="example-responses-3"></a>Örnek yanıt
+#### <a name="example-responses-3"></a>Örnek yanıtlar
 
-Gönderdiğiniz sonra *POST* isteği için bir isteğe bağlı yedekleme, ilk yanıt, 202 (kabul edildi). bir konum üst bilgisi ya da Azure async başlığı.
+İstek üzerine yedekleme için *Post* isteğini gönderdikten sonra, ilk yanıt bir konum üst bilgisi veya Azure-Async-header ile 202 (kabul edilir) olur.
 
 ```http
 HTTP/1.1 202 Accepted
 Pragma: no-cache
 Retry-After: 60
-Azure-AsyncOperation: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testVaultRG;testVM/protectedItems/vm;testRG;testVM/operationsStatus/b8daecaa-f8f5-44ed-9f18-491a9e9ba01f?api-version=2016-12-01
+Azure-AsyncOperation: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testVaultRG;testVM/protectedItems/vm;testRG;testVM/operationsStatus/b8daecaa-f8f5-44ed-9f18-491a9e9ba01f?api-version=2019-05-13
 X-Content-Type-Options: nosniff
 x-ms-request-id: 7885ca75-c7c6-43fb-a38c-c0cc437d8810
 x-ms-client-request-id: 7df8e874-1d66-4f81-8e91-da2fe054811d; 7df8e874-1d66-4f81-8e91-da2fe054811d
@@ -347,17 +341,17 @@ x-ms-correlation-request-id: 7885ca75-c7c6-43fb-a38c-c0cc437d8810
 x-ms-routing-request-id: SOUTHINDIA:20180521T083541Z:7885ca75-c7c6-43fb-a38c-c0cc437d8810
 Cache-Control: no-cache
 Date: Mon, 21 May 2018 08:35:41 GMT
-Location: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testVaultRG;testVM/protectedItems/vm;testRG;testVM/operationResults/b8daecaa-f8f5-44ed-9f18-491a9e9ba01f?api-version=2016-12-01
+Location: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testVaultRG;testVM/protectedItems/vm;testRG;testVM/operationResults/b8daecaa-f8f5-44ed-9f18-491a9e9ba01f?api-version=2019-05-13
 X-Powered-By: ASP.NET
 ```
 
-Ardından ile basit bir konum üst bilgisi veya Azure-AsyncOperation başlığı kullanılarak elde edilen işlemi izlemek *alma* komutu.
+Ardından, bir basit *Get* komutuyla konum üstbilgisini veya Azure-AsyncOperation üst bilgisini kullanarak elde edilen işlemi izleyin.
 
 ```http
-GET https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;testRG;testVM/operationsStatus/a0866047-6fc7-4ac3-ba38-fb0ae8aa550f?api-version=2016-12-01
+GET https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/microsoft.recoveryservices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;testRG;testVM/operationsStatus/a0866047-6fc7-4ac3-ba38-fb0ae8aa550f?api-version=2019-05-13
 ```
 
-İşlem tamamlandığında, yanıt gövdesi içinde elde edilen yedekleme işi kimliği 200 (Tamam) döndürür.
+İşlem tamamlandıktan sonra, yanıt gövdesinde elde edilen yedekleme işinin KIMLIĞI ile 200 (Tamam) döndürür.
 
 ```json
 HTTP/1.1 200 OK
@@ -387,13 +381,13 @@ X-Powered-By: ASP.NET
 }
 ```
 
-Yedekleme işi uzun süren bir işlem olduğundan, onu açıklandığı şekilde izlenmesi gereken [belge REST API kullanarak işleri izleme](backup-azure-arm-userestapi-managejobs.md#tracking-the-job).
+Yedekleme işi uzun süredir çalışan bir işlem olduğundan, [REST API belge kullanan izleme işlerinde](backup-azure-arm-userestapi-managejobs.md#tracking-the-job)açıklandığı şekilde izlenmesi gerekir.
 
-## <a name="modify-the-backup-configuration-for-a-protected-azure-vm"></a>Korumalı bir Azure VM yedekleme yapılandırmasını değiştirme
+## <a name="modify-the-backup-configuration-for-a-protected-azure-vm"></a>Korumalı bir Azure VM için yedekleme yapılandırmasını değiştirme
 
 ### <a name="changing-the-policy-of-protection"></a>Koruma ilkesini değiştirme
 
-İle VM korumalı ilkeyi değiştirmek için aynı biçimde kullanabilirsiniz [korunmasını](#enabling-protection-for-the-azure-vm). Yalnızca yeni ilke kimliği sağlayın. [istek gövdesi](#example-request-body) ve isteği gönderin. İçin örn: 'ProdPolicy' için 'DefaultPolicy' nden testVM ilkeyi değiştirmek için istek gövdesinde 'ProdPolicy' kimliği sağlayın.
+VM 'nin koruduğu ilkeyi değiştirmek için, [Korumayı etkinleştirme](#enabling-protection-for-the-azure-vm)ile aynı biçimi kullanabilirsiniz. [İstek gövdesinde](#example-request-body) yenı ilke kimliğini sağlamanız ve isteği göndermesi yeterlidir. Örneğin: testVM ilkesini ' DefaultPolicy ' iken ' ProdPolicy ' olarak değiştirmek Için, istek gövdesinde ' ProdPolicy ' KIMLIĞINI sağlayın.
 
 ```http
 {
@@ -405,11 +399,11 @@ Yedekleme işi uzun süren bir işlem olduğundan, onu açıklandığı şekilde
 }
 ```
 
-Yanıt belirtildiği gibi aynı biçimde izleyeceği [korumayı etkinleştirmek için](#responses-2)
+Yanıt, [korumayı etkinleştirmek için](#responses-2) belirtilen biçimde olacaktır
 
-### <a name="stop-protection-but-retain-existing-data"></a>Korumayı durdurur ancak mevcut verileri tut
+### <a name="stop-protection-but-retain-existing-data"></a>Korumayı durdurun, ancak mevcut verileri koruyun
 
-Korunan bir sanal makine üzerindeki korumayı kaldırır ancak zaten yedeklenmiş verileri tutmak için ilke istek gövdesinde kaldırın ve isteği gönderin. İlke ilişkilendirmesini kaldırıldıktan sonra yedeklemeler artık tetiklenir ve yeni kurtarma noktası oluşturulur.
+Korunan bir sanal makinede korumayı kaldırmak, ancak zaten yedeklenen verileri korumak için, istek gövdesinde ilkeyi kaldırın ve isteği iletin. İlkeyle ilişkilendirme kaldırıldıktan sonra yedeklemeler artık tetiklenmez ve yeni kurtarma noktası oluşturulmaz.
 
 ```http
 {
@@ -421,40 +415,40 @@ Korunan bir sanal makine üzerindeki korumayı kaldırır ancak zaten yedeklenmi
 }
 ```
 
-Yanıt belirtildiği gibi aynı biçimde izleyeceği [isteğe bağlı yedekleme tetiklemek](#example-responses-3). Sonuç iş açıklandığı şekilde izlenmesi gereken [belge REST API kullanarak işleri izleme](backup-azure-arm-userestapi-managejobs.md#tracking-the-job).
+Yanıt, [isteğe bağlı bir yedeklemenin tetiklenmesi için](#example-responses-3)belirtilen biçimde olacaktır. Sonuç iş, [REST API belge kullanan izleme işlerinde](backup-azure-arm-userestapi-managejobs.md#tracking-the-job)açıklandığı şekilde izlenmelidir.
 
 ### <a name="stop-protection-and-delete-data"></a>Korumayı durdurma ve verileri silme
 
-Korunan bir sanal makine üzerindeki korumayı kaldırma ve yedekleme verileri de silmek için bir silme işlemi ayrıntılı olarak gerçekleştirmek [burada](https://docs.microsoft.com/rest/api/backup/protecteditems/delete).
+Korunan bir sanal makinenin korumasını kaldırmak ve yedekleme verilerini silmek için, [burada](https://docs.microsoft.com/rest/api/backup/protecteditems/delete)ayrıntılı olarak bir silme işlemi gerçekleştirin.
 
-Korumayı durdurma ve verileri silme bir *Sil* işlemi.
-
-```http
-DELETE https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}?api-version=2016-12-01
-```
-
-`{containerName}` Ve `{protectedItemName}` oluşturulmuş gibi [yukarıda](#responses-1). `{fabricName}` "Azure" dir. Bizim örneğimizde, bunun için çevirir:
+Korumayı durdurma ve verileri silme işlemi *silme* işlemidir.
 
 ```http
-DELETE https://management.azure.com//Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;iaasvmcontainerv2;testRG;testVM?api-version=2016-12-01
+DELETE https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}?api-version=2019-05-13
 ```
 
-### <a name="responses-2"></a>Yanıtları
+`{containerName}` ve `{protectedItemName}` [yukarıda](#responses-1)oluşturulur. `{fabricName}` "Azure". Örneğimiz için şu şekilde çeviri yapar:
 
-*SİLME* koruma bir [zaman uyumsuz işlem](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations). Bu işlem, ayrı ayrı izlenmesi gereken başka bir işlem oluşturur anlamına gelir.
+```http
+DELETE https://management.azure.com//Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVaultRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;testRG;testVM/protectedItems/vm;iaasvmcontainerv2;testRG;testVM?api-version=2019-05-13
+```
 
-İki yanıt döndürür: 202 (kabul edildi başka bir işlem oluşturulurken) ve ardından 204 (Bu işlem tamamlandığında NoContent).
+### <a name="responses-2"></a>Lerinde
+
+Korumayı *silme* [işlemi zaman uyumsuz bir işlemdir](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations). Bu işlemin Ayrıca izlenmesi gereken başka bir işlem oluşturduğu anlamına gelir.
+
+Bu, başka bir işlem oluşturulduğunda 202 (kabul edildi) ve bu işlem tamamlandığında 204 (NoContent) olarak iki yanıt döndürür.
 
 |Ad  |Tür  |Açıklama  |
 |---------|---------|---------|
 |204 NoContent     |         |  NoContent       |
-|202 kabul edildi     |         |     Kabul edildi    |
+|202 kabul edildi     |         |     Eden    |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Verileri bir Azure sanal makine yedekten geri yükleyin](backup-azure-arm-userestapi-restoreazurevms.md).
+[Verileri bir Azure sanal makine yedeğinden geri yükleyin](backup-azure-arm-userestapi-restoreazurevms.md).
 
-Azure Backup REST API'leri hakkında daha fazla bilgi için aşağıdaki belgelere bakın:
+Azure Backup REST API 'Leri hakkında daha fazla bilgi için aşağıdaki belgelere bakın:
 
-- [Azure kurtarma Hizmetleri Sağlayıcısı REST API'si](/rest/api/recoveryservices/)
-- [Azure REST API'si ile çalışmaya başlama](/rest/api/azure/)
+- [Azure kurtarma hizmetleri sağlayıcısı REST API](/rest/api/recoveryservices/)
+- [Azure REST API’yi kullanmaya başlayın](/rest/api/azure/)

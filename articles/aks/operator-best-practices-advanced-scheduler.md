@@ -1,50 +1,50 @@
 ---
-title: İşleç en iyi uygulamalar - Gelişmiş Zamanlayıcı Özellikleri Azure Kubernetes Hizmetleri (AKS)
-description: İçin Gelişmiş Zamanlayıcı taints ve tolerations, düğüm seçicileri ve benzeşim veya arası pod benzeşimi ve benzeşim karşıtlığı Azure Kubernetes Service (AKS) kullanarak küme işleci en iyi uygulamaları öğrenin
+title: Operatör en iyi uygulamaları-Azure Kubernetes hizmetlerindeki (AKS) gelişmiş Zamanlayıcı özellikleri
+description: Azure Kubernetes Service (AKS) ile ilgili teknoloji ve tolerans, düğüm seçicileri, benzeşim veya POD olmayan benzeşim ve benzeşim gibi gelişmiş Zamanlayıcı özelliklerini kullanmaya yönelik küme işletmeni en iyi yöntemlerini öğrenin
 services: container-service
-author: iainfoulds
+author: mlearned
 ms.service: container-service
 ms.topic: conceptual
 ms.date: 11/26/2018
-ms.author: iainfou
-ms.openlocfilehash: 5affcd5ee1e51ac754d8a9bb81560a6cc3626860
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: mlearned
+ms.openlocfilehash: 798c368edb4a738124fce965f8990e6805fbdeba
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67055622"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73472606"
 ---
-# <a name="best-practices-for-advanced-scheduler-features-in-azure-kubernetes-service-aks"></a>Gelişmiş Zamanlayıcı Özellikleri Azure Kubernetes Service (AKS) için en iyi uygulamalar
+# <a name="best-practices-for-advanced-scheduler-features-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) içindeki gelişmiş Zamanlayıcı özellikleri için en iyi yöntemler
 
-Azure Kubernetes Service (AKS) kümelerini yönetirken, genellikle takımlar ve iş yüklerini yalıtmak gerekir. Kubernetes Zamanlayıcı belirli düğümler üzerinde hangi pod'ların zamanlanması veya nasıl küme genelinde uygulamaların uygun şekilde için çok pod dağıtılması denetlemenize olanak sağlayan gelişmiş özellikler sunar. 
+Azure Kubernetes Service (AKS) içindeki kümeleri yönetirken, genellikle takımları ve iş yüklerini yalıtmanız gerekir. Kubernetes Scheduler, belirli düğümlerde hangi yığınların planlanabileceği veya birden çok Pod uygulamasının kümeye uygun şekilde nasıl dağılamayacağını denetlemenize olanak sağlayan gelişmiş özellikler sağlar. 
 
-Bu en iyi yöntemler makalesi Gelişmiş Kubernetes küme operatörleri için zamanlama özellikleri ele alınmaktadır. Bu makalede şunları öğreneceksiniz:
+Bu en iyi yöntemler makalesi, küme işleçleri için gelişmiş Kubernetes zamanlama özelliklerine odaklanır. Bu makalede şunları öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Kullanım taints ve hangi pod'ların sınırlamak için tolerations düğümlerinde zamanlanabilir
-> * Düğüm Seçici veya düğüm benzeşim belirli düğümler üzerinde çalıştırılacak tercih pod'ları için
-> * Uzaklıkta veya grup birlikte pod'lar arası pod benzeşim veya benzeşim karşıtlığı ile bölme
+> * Düğümlerde hangi yığınların zamanlanabileceği sınırlandırmalar için Talara ve toleransyonlar kullanın
+> * Düğüm seçicileri veya düğüm benzeşimi ile belirli düğümlerde çalıştırılacak olan tercihi verme
+> * Pod 'lar arası benzeşim veya benzeşim önleme ile bir arada parçalama veya gruplama
 
-## <a name="provide-dedicated-nodes-using-taints-and-tolerations"></a>Adanmış düğümler taints tolerations ile sağlayın
+## <a name="provide-dedicated-nodes-using-taints-and-tolerations"></a>Talitre ve tolerans kullanarak adanmış düğümler sağlama
 
-**En iyi uygulama kılavuzunu** -kaynak kullanımı yoğun uygulamalar için giriş denetleyicileri gibi belirli düğümlere erişimi sınırlayın. Onları gerektiren iş yükleri için kullanılabilir düğüm kaynakları saklamak ve diğer iş yüklerinin düğümlerde zamanlama izin verme.
+Giriş denetleyicileri gibi kaynak kullanımı yoğun uygulamalar için belirli düğümlere **en iyi yöntem kılavuzlarını** sınırlayın. Düğüm kaynaklarını, bunları gerektiren iş yükleri için kullanılabilir tutun ve düğümlerdeki diğer iş yüklerinin zamanlamaya izin vermez.
 
-AKS kümenizi yeniden oluşturduğunuzda, GPU desteğine veya çok sayıda güçlü CPU'lara düğümleri dağıtabilirsiniz. Bu düğümler, genellikle machine learning (ML) veya yapay zeka (AI) gibi büyük veri işleme iş yükleri için kullanılır. Bu donanım türü genellikle dağıtmak için bir pahalı düğüm kaynağı olduğundan, bu düğümlere zamanlanabilen iş yüklerinin sınırlayın. Bunun yerine, giriş hizmetleri çalıştırmak ve diğer iş yükleri önlemek için kümedeki bazı düğümler ayırmak isteyebilirsiniz.
+AKS kümenizi oluştururken, GPU desteğiyle veya çok sayıda güçlü CPU ile düğümleri dağıtabilirsiniz. Bu düğümler genellikle Machine Learning (ML) veya yapay zeka (AI) gibi büyük veri işleme iş yükleri için kullanılır. Bu tür donanımlar genellikle dağıtılacak maliyetli bir düğüm kaynağı olduğundan, bu düğümlerde zamanlanabilecek iş yüklerini sınırlayın. Bunun yerine, giriş hizmetlerini çalıştırmak ve diğer iş yüklerini engellemek için kümedeki bazı düğümleri ayırmak isteyebilirsiniz.
 
-Bu destek farklı düğümleri için birden çok düğüm havuzları kullanılarak sağlanır. Bir AKS kümesi, bir veya daha fazla düğüm havuzları sağlar. Birden çok düğüm havuzları aks'deki desteği şu anda Önizleme aşamasındadır.
+Farklı düğümler için bu destek, birden çok düğüm havuzu kullanılarak sağlanır. AKS kümesi bir veya daha fazla düğüm havuzu sağlar.
 
-Kubernetes Zamanlayıcı taints ve tolerations düğümler üzerinde hangi iş yüklerini çalıştırabilirsiniz kısıtlamak için kullanabilirsiniz.
+Kubernetes Zamanlayıcı, düğümlerde hangi iş yüklerinin çalıştırılacağını kısıtlamak için tatları ve toleranları kullanabilir.
 
-* A **taint** belirli pod'ların yalnızca bunlara zamanlanabilir belirten bir düğüm uygulanır.
-* A **toleration** izin veren bir pod uygulanır *tolere* düğümün taint.
+* Yalnızca belirli yığınların zamanlanabileceğini gösteren bir düğüme bir **taınt** uygulanır.
+* Daha sonra bir **tolerans** , düğümün Taint *'e kabul* etmesine izin veren bir pod öğesine uygulanır.
 
-Bir AKS kümesi için bir pod dağıttığınızda, Kubernetes düğümlerinde burada bir toleration taint ile hizalanır pod yalnızca zamanlar. Örnek olarak, destekleyen bir düğüm havuzunu AKS kümenizde düğümleri GPU ile sahip olduğunuz varsayılır. Adı gibi tanımladığınız *gpu*, zamanlama için bir değer daha sonra. Bu değeri ayarlamanız *NoSchedule*, pod uygun toleration tanımlamıyorsa, Kubernetes Zamanlayıcı pod'ların düğümde zamanlayamazsınız.
+Bir aks kümesine Pod dağıttığınızda, Kubernetes yalnızca bir toleranation 'ın Taint ile hizalandığı düğümlerde Pod 'yi zamanlar. Örnek olarak, GPU desteği olan düğümler için AKS kümenizdeki bir düğüm havuzunuzun olduğunu varsayalım. *GPU*gibi bir ad, sonra da zamanlama için bir değer tanımlarsınız. Bu değeri *NoSchedule*olarak ayarlarsanız, Pod uygun toleransı tanımlamıyorsa Kubernetes Scheduler düğüm üzerinde pod zamanlayamaz.
 
 ```console
 kubectl taint node aks-nodepool1 sku=gpu:NoSchedule
 ```
 
-Düğümlere uygulanması bir taint ile ardından bir toleration düğümlerde zamanlama izin veren pod belirtiminde tanımlarsınız. Aşağıdaki örnek tanımlar `sku: gpu` ve `effect: NoSchedule` önceki adımda düğüme uygulanan taint tolerans:
+Düğümlere bir taınt uygulandıktan sonra, düğümlerde zamanlamaya izin veren Pod belirtiminde bir tolerans tanımlarsınız. Aşağıdaki örnek, önceki adımda düğümüne uygulanan Taint 'e tolerans sağlamak için `sku: gpu` ve `effect: NoSchedule` tanımlar:
 
 ```yaml
 kind: Pod
@@ -69,44 +69,44 @@ spec:
     effect: "NoSchedule"
 ```
 
-Ne zaman bu pod dağıtıldığında kullanmak gibi `kubectl apply -f gpu-toleration.yaml`, Kubernetes düğümlerinde pod başarıyla uygulandı taint ile zamanlayabilirsiniz. Bu mantıksal yalıtımı sayesinde bir küme içindeki kaynaklara erişimi denetler.
+Bu Pod dağıtıldığında, `kubectl apply -f gpu-toleration.yaml`kullanımı gibi Kubernetes, bir Taint uygulanmış olan düğümlerde Pod 'u başarıyla zamanlayabilir. Bu mantıksal yalıtım, bir küme içindeki kaynaklara erişimi denetlemenize olanak tanır.
 
-Taints uyguladığınızda, uygulama geliştiriciler ve sahipleri izin vermek üzere kendi dağıtımlarda gerekli tolerations tanımlamak için çalışır.
+Taşı uyguladığınızda, uygulama geliştiricileriniz ve sahipleriyle birlikte çalışarak dağıtımlarındaki gerekli toleranları tanımlamasına izin verin.
 
-Taints ve tolerations hakkında daha fazla bilgi için bkz. [taints ve tolerations uygulama][k8s-taints-tolerations].
+Litre ve toleransyonlar hakkında daha fazla bilgi için bkz. [litre ve tolerans uygulama][k8s-taints-tolerations].
 
-AKS içindeki birden çok düğüm havuzları kullanma hakkında daha fazla bilgi için bkz. [oluşturun ve bir AKS kümesi için birden çok düğüm havuzları yönetme][use-multiple-node-pools].
+AKS 'de birden çok düğüm havuzu kullanma hakkında daha fazla bilgi için bkz. [AKS 'deki bir küme için birden çok düğüm havuzu oluşturma ve yönetme][use-multiple-node-pools].
 
-### <a name="behavior-of-taints-and-tolerations-in-aks"></a>Taints ve aks'deki tolerations davranışı
+### <a name="behavior-of-taints-and-tolerations-in-aks"></a>AKS 'teki litre ve tolerantalara yönelik davranış
 
-Bir düğüm havuzunu aks'deki yükselttiğinizde, yeni düğümlere uygulanması gibi taints ve tolerations kümesi deseni izler:
+AKS 'deki bir düğüm havuzunu yükselttiğinizde, litre ve tolerans, yeni düğümlere uygulandıkları sırada bir küme düzeniyle uyar:
 
-- **Sanal makine ölçek desteği olmayan varsayılan kümeler**
-  - İki düğümlü bir küme - sahip *Düğüm1* ve *Düğüm2*. Yükseltme yaptığınızda, başka bir düğüme (*Düğüm3*) oluşturulur.
-  - Gelen taints *Düğüm1* uygulanan *Düğüm3*, ardından *Düğüm1* ardından silinir.
-  - Başka bir yeni düğümü oluşturulur (adlı *Düğüm1*, önceki beri *Düğüm1* silindi) ve *Düğüm2* taints yeni uygulanır *Düğüm1*. Ardından, *Düğüm2* silinir.
-  - Temelde *Düğüm1* olur *Düğüm3*, ve *Düğüm2* olur *Düğüm1*.
-
-- **Sanal makine kümeleri ölçek kümeleri** (şu anda önizlemede aks'deki)
-  - Yine, sahip olduğunuz bir iki düğümlü küme - varsayalım *Düğüm1* ve *Düğüm2*. Düğüm havuzu yükseltme.
-  - İki ek düğümler oluşturulur, *Düğüm3* ve *Düğüm4*, ve taints sırasıyla geçirilir.
+- **Sanal makine ölçek kümeleri kullanan varsayılan kümeler**
+  - İki düğümlü bir kümeniz olduğunu varsayalım- *Düğüm1* ve *Düğüm2*. Düğüm havuzunu yükseltirsiniz.
+  - İki ek düğüm oluşturulur, *Düğüm3* ve *Düğüm4*ve litre sırasıyla geçirilir.
   - Özgün *Düğüm1* ve *Düğüm2* silinir.
 
-AKS içindeki bir düğüm havuzunu ölçeklendirmek, taints ve tolerations tasarım tarafından devralınırsa taşımaz.
+- **Sanal makine ölçek kümesi desteği olmayan kümeler**
+  - Yine de iki düğümlü bir kümeniz olduğunu varsayalım- *Düğüm1* ve *Düğüm2*. Yükselttiğinizde, ek bir düğüm (*Düğüm3*) oluşturulur.
+  - *Düğüm1* 'in talar *Düğüm3*'e uygulanır, sonra *Düğüm1* silinir.
+  - Başka bir yeni düğüm oluşturulur (önceki *Düğüm1* silindiği için *Düğüm1*adında) ve *Düğüm2* talitre yeni *Düğüm1*uygulanır. Sonra, *Düğüm2* silinir.
+  - *Düğüm1* ' de *Düğüm3*olur ve *Düğüm2* *Düğüm1*olur.
 
-## <a name="control-pod-scheduling-using-node-selectors-and-affinity"></a>Denetim pod düğüm seçicileri ve benzeşimi'ni kullanarak zamanlama
+AKS 'deki bir düğüm havuzunu ölçeklendirdiğiniz zaman, litre ve tolerans, tasarıma göre yerine geçer.
 
-**En iyi uygulama kılavuzunu** - düğüm seçiciler, düğümü benzeşimini kullanarak düğümlerinde pod'ları zamanlama denetlemek veya benzeşim'arası pod. Bu ayarlar mantıksal iş yükleri gibi donanım düğümünde yalıtmak Kubernetes Zamanlayıcı sağlar.
+## <a name="control-pod-scheduling-using-node-selectors-and-affinity"></a>Düğüm seçicileri ve benzeşimi kullanarak Pod zamanlamasını denetleme
 
-Taints ve tolerations sabit bir sonlandırma - kaynaklarla mantıksal olarak ayırmak için kullanılan bir düğümün taint pod tolere değil, düğüm üzerinde zamanlanmış değil. Alternatif bir yaklaşım, düğüm Seçici kullanmaktır. SSD depolaması yerel olarak bağlı veya büyük miktarda bellek belirtin ve ardından pod belirtiminde düğüm Seçicisi tanımlamak için düğümleri gibi etiketleyin. Kubernetes, ardından bu pod'ların eşleşen bir düğümde zamanlar. Tolerations, eşleşen bir düğüm Seçici olmadan pod'ların etiketli düğümler üzerinde zamanlanabilir. Bu davranış, kullanılmamış kaynakları kullanmak için düğümlerde sağlar ancak eşleşen düğüm Seçicisi tanımlayan pod'ların öncelik verir.
+**En iyi Yöntem Kılavuzu** -düğüm seçicileri, düğüm benzeşimi veya Pod tabanlı benzeşim kullanarak düğümlerde düğüm zamanlamayı kontrol edin. Bu ayarlar, Kubernetes Scheduler 'ın, düğümdeki donanımlar gibi iş yüklerini mantıksal olarak yalıtmak için izin verir.
 
-Yüksek miktarda bellek düğümlerinin bir örneğe göz atalım. Bu düğümler, yüksek miktarda bellek isteği pod'ları tercih verebilirsiniz. Boşta kaynakları sit yoksa emin olmak için bunlar ayrıca diğer pod'ların çalışmasına izin verin.
+Litre ve toleransyonlar, kaynakları sabit bir şekilde yalıtmak için kullanılır-Pod bir düğümün Taint 'i kabul etmez, düğüm üzerinde zamanlanmamış. Alternatif yaklaşım, düğüm seçicileri kullanmaktır. Yerel olarak bağlı SSD depolamayı veya büyük miktarda belleği göstermek için gibi düğümleri etiketleyebilir ve sonra Pod belirtiminde bir düğüm seçici içinde tanımlayabilirsiniz. Kubernetes daha sonra bu düğüm 'leri eşleşen bir düğümde zamanlar. Toleranların aksine, eşleşen düğüm seçici olmayan düğüm etiketli düğümlerde zamanlanabilir. Bu davranış, düğümlerdeki kullanılmayan kaynakların kullanılmasına izin verir, ancak eşleşen düğüm seçiciyi tanımlayan Pod 'ye öncelik verir.
+
+Yüksek miktarda bellekle bir düğüm örneğine göz atalım. Bu düğümler, büyük miktarda bellek isteyen Pod 'ye tercih verebilir. Kaynakların boşta olmadığından emin olmak için diğer yığınların çalışmasına de izin verir.
 
 ```console
 kubectl label node aks-nodepool1 hardware:highmem
 ```
 
-Ardından bir pod belirtimi ekler `nodeSelector` özellik etiketi ile eşleşen bir düğüm Seçicisi tanımlamak için bir düğümde ayarlayın:
+Pod belirtimi daha sonra, düğüm üzerinde ayarlanan etiketle eşleşen bir düğüm seçici tanımlamak için `nodeSelector` özelliğini ekler:
 
 ```yaml
 kind: Pod
@@ -128,15 +128,15 @@ spec:
       hardware: highmem
 ```
 
-Bu zamanlayıcı seçeneklerini kullandığınızda, uygulama geliştiricilerinin ve sahipleri izin vermek üzere doğru şekilde kendi pod özellikleri tanımlamak için çalışır.
+Bu Zamanlayıcı seçeneklerini kullandığınızda, kendi Pod özelliklerini doğru bir şekilde tanımlamasına olanak tanımak için uygulama geliştiricileriniz ve sahipleriyle birlikte çalışın.
 
-Düğüm seçiciler kullanma hakkında daha fazla bilgi için bkz. [atama pod düğümlere][k8s-node-selector].
+Düğüm seçicileri kullanma hakkında daha fazla bilgi için bkz. [düğümlere pods atama][k8s-node-selector].
 
-### <a name="node-affinity"></a>Düğüm benzeşim
+### <a name="node-affinity"></a>Düğüm benzeşimi
 
-Bir düğüm Seçicisi, pod'ların verilen bir düğüme atamak için temel bir yoludur. Daha fazla esneklik aracılığıyla kullanılabilir olan *düğüm benzeşim*. Düğüm benzeşim ile pod bir düğüm ile eşleştirilemiyor, ne olacağını tanımlar. Yapabilecekleriniz *gerektiren* Kubernetes Zamanlayıcı ile etiketlenmiş bir konağa bir pod eşleşir. Veya *tercih* eşleşme kullanılabilir değilse bir eşleşme ancak farklı bir ana bilgisayarda zamanlanmış pod izin verin.
+Düğüm seçici, belirli bir düğüme Pod atamak için temel bir yoldur. *Düğüm benzeşimi*kullanılarak daha fazla esneklik sağlanır. Düğüm benzeşimi ile pod 'un bir düğümle eşleştirilemezse ne olacağını tanımlarsınız. Kubernetes Scheduler 'ın etiketli bir ana bilgisayar ile bir pod ile eşleşmesini *zorunlu* kılabilirsiniz. Ya da bir eşleşme *tercih* edebilir, ancak aynı eşleşme yoksa Pod 'ın farklı bir konakta zamanlanmasını sağlayabilirsiniz.
 
-Aşağıdaki örnek düğümü benzeşimini ayarlar *requiredDuringSchedulingIgnoredDuringExecution*. Bu benzeşimi, bir düğüm ile eşleşen bir etiket kullanmayı Kubernetes zamanlama gerektirir. Hiçbir düğüm varsa, devam etmek için zamanlama için beklenecek pod sahiptir. Başka bir düğümde zamanlanması pod izin vermek için bunun yerine değeri ayarlayabilirsiniz *preferredDuringScheduledIgnoreDuringExecution*:
+Aşağıdaki örnek, Düğüm benzeşimini *requiredDuringSchedulingIgnoredDuringExecution*olarak ayarlar. Bu benzeşim, eşleşen etikete sahip bir düğüm kullanmak için Kubernetes zamanlamasını gerektirir. Kullanılabilir düğüm yoksa Pod 'ın zamanlamanın devam etmesini beklemesi gerekir. Pod 'un farklı bir düğümde zamanlanmasını sağlamak için, bunun yerine değeri *preferredDuringScheduledIgnoreDuringExecution*olarak ayarlayabilirsiniz:
 
 ```yaml
 kind: Pod
@@ -164,29 +164,29 @@ spec:
             values: highmem
 ```
 
-*IgnoredDuringExecution* ayarı parça belirtir düğümü değişiklik etiketler, pod düğümden çıkarılacak olmamalıdır. Kubernetes Zamanlayıcı zamanlanması, yeni pod'ların zaten düğümler üzerinde zamanlanmış pod yalnızca güncelleştirilen düğüme etiketleri kullanır.
+Ayarın *IgnoredDuringExecution* bölümü, düğüm etiketlerinin değiştiğinde Pod 'un düğümden çıkarılmaması gerektiğini gösterir. Kubernetes Scheduler yalnızca, düğümlerde zaten planlanmış olan yeni Pod 'ler için güncelleştirilmiş düğüm etiketlerini kullanır.
 
-Daha fazla bilgi için [benzeşimi'ni ve benzeşim karşıtlığı][k8s-affinity].
+Daha fazla bilgi için bkz. [benzeşim ve benzeşim önleme][k8s-affinity].
 
-### <a name="inter-pod-affinity-and-anti-affinity"></a>Arası pod benzeşimi'ni ve benzeşim karşıtlığı
+### <a name="inter-pod-affinity-and-anti-affinity"></a>Pod 'lar arası benzeşim ve benzeşim
 
-Mantıksal iş yüklerini yalıtmak Kubernetes Zamanlayıcı için son bir yaklaşım arası pod benzeşim veya benzeşim karşıtlığı kullanıyor. Bu pod'ları ayarları tanımlamak *olmamalıdır* zamanlanmış bir mevcut pod eşleşen bir düğüm veya bu bunlar *gereken* zamanlanmış. Varsayılan olarak, bir yineleme düğümleri arasında kümesini birden çok pod'ların zamanlamak Kubernetes Zamanlayıcı çalışır. Bu davranışı daha belirli kurallar tanımlayabilirsiniz.
+İş yüklerini mantıksal olarak yalıtmak için Kubernetes Scheduler 'a yönelik bir son yaklaşım, Pod 'lar arası benzeşim veya benzeşim kullanımı kullanmaktır. Ayarlar, var olan bir pod 'a sahip olan ya da zamanlanmaları *gereken* bir düğüm üzerinde, *Pod 'nin zamanlanmaması* gerektiğini tanımlar. Varsayılan olarak, Kubernetes Zamanlayıcı, düğümler arasında bir çoğaltma kümesinde birden çok düğüm zamanlamaya çalışır. Bu davranış etrafında daha özel kurallar tanımlayabilirsiniz.
 
-İyi bir örnek bir Azure önbelleği için Redis de kullanan bir web uygulamasıdır. Kubernetes Zamanlayıcı çoğaltmaları düğümlere dağıtır istemek için pod benzeşim karşıtlığı kuralları kullanabilirsiniz. Sonra her web uygulaması bileşeni, karşılık gelen bir önbellek olarak aynı ana bilgisayardaki zamanlandı emin olmak için benzeşim kuralları kullanabilir. Pod'ların düğümleri arasında dağıtılması, aşağıdaki örnekteki gibi görünür:
+İyi bir örnek, redde için Azure önbelleği kullanan bir Web uygulamasıdır. Kubernetes Scheduler 'ın çoğaltmaları düğümler arasında dağıtmasını istemek için Pod, çoklu seçim önleme kurallarını kullanabilirsiniz. Ardından, her bir Web uygulaması bileşeninin karşılık gelen bir önbellek ile aynı ana bilgisayarda zamanlandığından emin olmak için benzeşim kurallarını kullanabilirsiniz. Düğümler arasında Pod dağıtımı aşağıdaki örneğe benzer şekilde görünür:
 
 | **Düğüm 1** | **Düğüm 2** | **Düğüm 3** |
 |------------|------------|------------|
-| WebApp-1   | WebApp-2   | WebApp-3   |
-| 1\. önbellek    | Önbellek-2    | Önbellek 3    |
+| WEBAPP-1   | WEBAPP-2   | WEBAPP-3   |
+| Önbellek-1    | önbellek-2    | önbellek-3    |
 
-Daha karmaşık bir dağıtıma kullanımı göre düğüm Seçici veya düğüm benzeşim örnektir. Dağıtım sağlar, Kubernetes düğümlerinde pod'ların nasıl zamanlar üzerinde denetim ve mantıksal kaynakları yalıtma. Bu Azure Cache ile web uygulamasını Redis örneği için tam bir örnek için bkz: [birlikte bulundurma, aynı düğümdeki pod'ların][k8s-pod-affinity].
+Bu örnek, düğüm seçicileri veya düğüm benzeşimi kullanmaktan daha karmaşık bir dağıtımdır. Dağıtım, Kubernetes 'in düğümlerde düğüm zamanlamalarına ilişkin denetim sağlar ve kaynakları mantıksal olarak yalıtabilir. Redin örneği için Azure Cache ile bu Web uygulamasının tam bir örneği için bkz. [aynı düğümdeki aynı düğüm üzerinde yer alan ortak bulma][k8s-pod-affinity].
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, Gelişmiş Kubernetes Zamanlayıcı özelliklere odaklanan. AKS kümesi işlemleri hakkında daha fazla bilgi için aşağıdaki en iyi bakın:
+Bu makalede, gelişmiş Kubernetes Zamanlayıcı özelliklerine odaklanılmıştır. AKS 'deki küme işlemleri hakkında daha fazla bilgi için aşağıdaki en iyi yöntemlere bakın:
 
-* [Çok kiracılılık ve küme ayırma][aks-best-practices-scheduler]
-* [Temel Kubernetes Zamanlayıcı Özellikleri][aks-best-practices-scheduler]
+* [Çok kiracılı ve küme yalıtımı][aks-best-practices-scheduler]
+* [Temel Kubernetes Zamanlayıcı özellikleri][aks-best-practices-scheduler]
 * [Kimlik doğrulama ve yetkilendirme][aks-best-practices-identity]
 
 <!-- EXTERNAL LINKS -->

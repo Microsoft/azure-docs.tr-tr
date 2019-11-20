@@ -1,19 +1,14 @@
 ---
-title: Örnekler - PCI-DSS v3.2.1 şeması - Genel bakış
-description: Ödeme Kartı Sektörü Veri Güvenliği Standardı v3.2.1 şema örneğine genel bakış.
-services: blueprints
-author: DCtheGeek
-ms.author: dacoulte
+title: PCI-DSS v3.2.1 şema örneği - Genel Bakış
+description: Ödeme Kartı Sektörü Veri Güvenliği Standardı v3.2.1 şema örneğine genel bakış. Bu şema örneği, müşterilerin belirli denetimleri değerlendirmesine yardımcı olur.
 ms.date: 06/24/2019
 ms.topic: conceptual
-ms.service: blueprints
-manager: carmonm
-ms.openlocfilehash: 1261f90910891fa4cae6ff915fbb3f9a9b714c9c
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 11ddf04e9e440fa811ed6a29498deeaf01f2c397
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67451198"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037779"
 ---
 # <a name="overview-of-the-pci-dss-v321-blueprint-sample"></a>PCI-DSS v3.2.1 şema örneğine genel bakış
 

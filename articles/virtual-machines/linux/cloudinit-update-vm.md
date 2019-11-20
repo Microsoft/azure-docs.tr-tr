@@ -1,10 +1,10 @@
 ---
-title: Güncelleştirmek ve bir Azure Linux VM'de paketleri yüklemek için cloud-init kullanma | Microsoft Docs
-description: Cloud-init güncelleştirmek için nasıl kullanılacağını ve Azure CLI ile Linux VM oluşturma sırasında yükleme paketleri
+title: Azure 'da bir Linux sanal makinesine paket güncelleştirmek ve onları yüklemek için Cloud-init kullanma
+description: Azure CLı ile oluşturma sırasında bir Linux sanal makinesine paket güncelleştirmek ve yüklemek için Cloud-init kullanma
 services: virtual-machines-linux
 documentationcenter: ''
 author: rickstercdn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines-linux
@@ -14,20 +14,20 @@ ms.devlang: azurecli
 ms.topic: article
 ms.date: 04/20/2018
 ms.author: rclaus
-ms.openlocfilehash: d5f4dc7f4abc13f253a206a63e65faf1106f9c7c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ddea412598e02be7d71d5a3efafa444a5dc19e8c
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60627750"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036721"
 ---
-# <a name="use-cloud-init-to-update-and-install-packages-in-a-linux-vm-in-azure"></a>Güncelleştirmek ve azure'da bir Linux sanal makinesi, paketleri yüklemek için cloud-init kullanma
-Bu makalede nasıl kullanılacağını gösterir [cloud-init](https://cloudinit.readthedocs.io) güncelleştirme paketleri bir Linux için sanal makine (VM) ya da sanal makine ölçek kümeleri (VMSS zaman azure'da sağlama sırasında). Kaynakları Azure tarafından sağlanan sonra ilk önyüklemede bu cloud-init betikleri çalıştırın. Cloud-init yerel olarak desteklenen Linux dağıtımları ve Azure ile işleyişi hakkında daha fazla bilgi için bkz. [cloud-init genel bakış](using-cloud-init.md)
+# <a name="use-cloud-init-to-update-and-install-packages-in-a-linux-vm-in-azure"></a>Azure 'daki bir Linux sanal makinesine paket güncelleştirmek ve onları yüklemek için Cloud-init kullanma
+Bu makalede, Azure 'da sağlama zamanında bir Linux sanal makinesi (VM) veya sanal makine ölçek kümeleri (VMSS) üzerinde paket güncelleştirmek için [Cloud-init](https://cloudinit.readthedocs.io) ' in nasıl kullanılacağı gösterilmektedir. Bu Cloud-init betikleri, kaynaklar Azure tarafından sağlandıktan sonra ilk önyüklemede çalışır. Cloud-init 'in Azure 'da ve desteklenen Linux korumalar 'daki yerel olarak nasıl çalıştığı hakkında daha fazla bilgi için bkz. [Cloud-init Overview](using-cloud-init.md)
 
 ## <a name="update-a-vm-with-cloud-init"></a>Cloud-init ile VM güncelleştirme
-Güvenlik nedenleriyle ilk önyüklemede en son güncelleştirmeleri uygulamak için bir VM yapılandırmak isteyebilirsiniz. Cloud-init arasında farklı Linux dağıtım paketlerini çalıştığı belirtmek için gerek yoktur `apt` veya `yum` için Paket Yöneticisi. Bunun yerine, tanımladığınız `package_upgrade` ve kullanımdaki distro uygun mekanizması belirlemek cloud-init işlem izin verin. Bu iş akışı aynı cloud-init betikleri arasında dağıtım paketlerini kullanmanıza olanak tanır.
+Güvenlik nedeniyle, ilk önyüklemede en son güncelleştirmeleri uygulamak için bir VM yapılandırmak isteyebilirsiniz. Cloud-init farklı Linux kaldırmalar arasında çalıştığından, Paket Yöneticisi için `apt` veya `yum` belirtmeniz gerekmez. Bunun yerine, `package_upgrade` tanımlar ve Cloud-init işleminin kullanımda olan kullanım için uygun mekanizmayı belirlemesini sağlayabilirsiniz. Bu iş akışı, distros genelinde aynı Cloud-init betiklerini kullanmanıza olanak sağlar.
 
-Yükseltme işlemi uygulamada görmek için geçerli kabuğunuzda adlı bir dosya oluşturmak *cloud_init_upgrade.txt* oluşturup aşağıdaki yapılandırmayı yapıştırın. Bu örnekte, dosyayı yerel makinenizde değil Cloud shell'de oluşturun. İstediğiniz düzenleyiciyi kullanabilirsiniz. Dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud_init_upgrade.txt` adını girin. Kullanılacak #1 seçin **nano** Düzenleyici. Tüm cloud-init dosyası doğru bir şekilde kopyalandığından emin olun başta birinci satır.  
+Yükseltme işlemini eylemde görmek için, geçerli kabuğunuzun *cloud_init_upgrade. txt* adlı bir dosya oluşturun ve aşağıdaki yapılandırmayı yapıştırın. Bu örnekte, dosyayı yerel makinenizde değil Cloud Shell oluşturun. İstediğiniz düzenleyiciyi kullanabilirsiniz. Dosyayı oluşturmak ve kullanılabilir düzenleyicilerin listesini görmek için `sensible-editor cloud_init_upgrade.txt` adını girin. **Nano** düzenleyiciyi kullanmak için #1 seçin. Tüm Cloud-init dosyalarının, özellikle de ilk satırda doğru şekilde kopyalandığından emin olun.  
 
 ```yaml
 #cloud-config
@@ -36,13 +36,13 @@ packages:
 - httpd
 ```
 
-Bu görüntü dağıtmadan önce bir kaynak grubu oluşturmak için ihtiyacınız [az grubu oluşturma](/cli/azure/group) komutu. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur.
+Bu görüntüyü dağıtılmadan önce [az Group Create](/cli/azure/group) komutuyla bir kaynak grubu oluşturmanız gerekir. Azure kaynak grubu, Azure kaynaklarının dağıtıldığı ve yönetildiği bir mantıksal kapsayıcıdır. Aşağıdaki örnek *eastus* konumunda *myResourceGroup* adlı bir kaynak grubu oluşturur.
 
 ```azurecli-interactive 
 az group create --name myResourceGroup --location eastus
 ```
 
-Şimdi bir VM oluşturun [az vm oluşturma](/cli/azure/vm) ve cloud-init dosyası ile `--custom-data cloud_init_upgrade.txt` gibi:
+Şimdi [az VM Create](/cli/azure/vm) Ile bir VM oluşturun ve Cloud-init dosyasını `--custom-data cloud_init_upgrade.txt` ile aşağıdaki gibi belirtin:
 
 ```azurecli-interactive 
 az vm create \
@@ -53,19 +53,19 @@ az vm create \
   --generate-ssh-keys 
 ```
 
-SSH için yukarıdaki komut çıktısında gösterilen sanal makinenizin genel IP adresi. Kendi girin **Publicıpaddress** gibi:
+Önceki komutun çıktısında gösterilen sanal makinenizin genel IP adresine SSH. Kendi **Publicıpaddress** değerini aşağıdaki şekilde girin:
 
 ```bash
 ssh <publicIpAddress>
 ```
 
-Güncelleştirmeleri denetle ve paket yönetim aracını çalıştırın.
+Paket Yönetimi aracını çalıştırın ve güncelleştirmeleri denetleyin.
 
 ```bash
 sudo yum update
 ```
 
-Cloud-init kontrol ve önyükleme yüklü güncelleştirmeleri uygulamak için hiçbir ek güncelleştirme olmalıdır.  Yüklenmesini yanı sıra güncelleştirme işlemi, değiştirilen paket sayısı gördüğünüz `httpd` çalıştırarak `yum history` ve aşağıdakine benzer bir çıktı gözden geçirin.
+Cloud-init için denetlenir ve önyükleme sırasında güncelleştirmeler yüklüyse, uygulanacak başka bir güncelleştirme olmamalıdır.  Güncelleştirme işlemini, değiştirilen paket sayısını ve `yum history` çalıştırıp `httpd` yüklemesini görürsünüz ve aşağıdakine benzer bir çıktıyı gözden geçirin.
 
 ```bash
 Loaded plugins: fastestmirror, langpacks
@@ -77,9 +77,9 @@ ID     | Command line             | Date and time    | Action(s)      | Altered
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Yapılandırma değişiklikleri ek cloud-init örnekleri için aşağıdakilere bakın:
+Yapılandırma değişikliklerine yönelik ek Cloud-init örnekleri için aşağıdakilere bakın:
  
-- [Bir VM'ye ek Linux kullanıcı ekleme](cloudinit-add-user.md)
-- [İlk önyüklemede mevcut paketlerini güncelleştirmek için bir paket Yöneticisi'ni çalıştırın](cloudinit-update-vm.md)
-- [VM yerel ana bilgisayar adını değiştirin](cloudinit-update-vm-hostname.md) 
-- [Bir uygulama paketi yükleme, yapılandırma dosyasını güncelleyin ve anahtarları ekleme](tutorial-automate-vm-deployment.md)
+- [VM 'ye ek bir Linux kullanıcısı ekleme](cloudinit-add-user.md)
+- [İlk önyüklemede var olan paketleri güncelleştirmek için bir paket yöneticisi çalıştırın](cloudinit-update-vm.md)
+- [VM yerel ana bilgisayar adını değiştir](cloudinit-update-vm-hostname.md) 
+- [Uygulama paketi yüklemesi, yapılandırma dosyalarını güncelleştirme ve anahtarları ekleme](tutorial-automate-vm-deployment.md)

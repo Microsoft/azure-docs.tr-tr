@@ -1,154 +1,151 @@
 ---
-title: Sık sorulan sorular için Azure Güvenlik Merkezi Önizleme IOT | Microsoft Docs
-description: En sık sorulan soruları yanıtlar Azure Güvenlik Merkezi hakkında IOT özelliklerini ve hizmet için bulun.
+title: IoT için Azure Güvenlik Merkezi hakkında sık sorulan sorular | Microsoft Docs
+description: IoT özellikleri ve hizmeti için Azure Güvenlik Merkezi hakkında en sık sorulan soruların yanıtlarını bulun.
 services: asc-for-iot
-ms.service: ASCforiot
+ms.service: asc-for-iot
 documentationcenter: na
 author: mlottner
 manager: rkarlin
 editor: ''
 ms.assetid: 97fda6c2-1ecb-491f-b48d-41788bd7e0d3
+ms.subservice: asc-for-iot
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/25/2019
+ms.date: 07/23/2019
 ms.author: mlottner
-ms.openlocfilehash: f15cd14ddc3a489db3abbbd2665d242470b5a821
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 639a3f89e470a832279add8d2ed7cf49441611f4
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65200699"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73571794"
 ---
-# <a name="azure-security-center-for-iot-frequently-asked-questions"></a>IOT için Azure Güvenlik Merkezi sık sorulan sorular  
+# <a name="azure-security-center-for-iot-frequently-asked-questions"></a>IoT için Azure Güvenlik Merkezi hakkında sık sorulan sorular  
 
-> [!IMPORTANT]
-> IOT için Azure Güvenlik Merkezi şu anda genel Önizleme aşamasındadır.
-> Bu önizleme sürümü, bir hizmet düzeyi sözleşmesi olmadan sağlanmaktadır ve üretim iş yükleri için önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+Bu makale, IoT için Azure Güvenlik Merkezi hakkında sık sorulan soruların ve yanıtların bir listesini sağlar. 
 
-Bu makalede, IOT için sık sorulan sorular ve yanıtlar hakkında Azure Güvenlik Merkezi (ASC) bir listesini sağlar. 
+## <a name="does-azure-provide-support-for-iot-security"></a>Azure, IoT güvenliği için destek sağlar mi?
 
-## <a name="does-azure-provide-support-for-iot-security"></a>Azure IOT güvenliği için destek sağlar?
+Azure, Azure Güvenlik Merkezi aracılığıyla genel güvenlik çözümünüzün bir parçası olarak IoT güveninizi izlemeye ve yönetmeye yönelik tümleşik bir görünüm sağlar. Uygulama geliştiricisiyseniz IoT uygulama güvenlerinizi yönetmek için IoT Hub görünümünü kullanabilirsiniz.
 
-Azure izleme ve IOT güvenlik genel güvenlik çözümünüzü Azure Güvenlik Merkezi aracılığıyla bir parçası olarak yönetmek için tümleşik bir görünümünü sağlar. Bir uygulama geliştiricisiyseniz, IOT Hub görünümünü, IOT uygulama güvenliği yönetmek için kullanabilirsiniz.
+## <a name="what-is-azures-unique-value-proposition-for-iot-security"></a>Azure 'un IoT güvenliği için benzersiz değer teklifi nedir?
 
-## <a name="what-is-azures-unique-value-proposition-for-iot-security"></a>IOT güvenliği için Azure'nın benzersiz değer teklifi nedir?
+IoT için Azure Güvenlik Merkezi, kuruluşların mevcut siber güvenlik görünümünü tüm IoT çözümüne genişletmesini sağlar. Azure, iş çözümünüzün uçtan uca bir görünümünü sunarak kurumsal güvenlik duruşunuzu ve toplanan verileri temel alarak işle ilgili eylemler ve kararlar almanıza olanak sağlar. Azure IoT, Azure IoT Edge ve Azure Güvenlik Merkezi kullanılarak birleştirilmiş güvenlik, ihtiyacınız olan güvenlik ile istediğiniz çözümü oluşturmanızı sağlar.
 
-IOT için ASC kurumlar IOT çözümünün tamamını, var olan siber güvenlik görünümüne genişletmek etkinleştirir. Azure, işle ilgili eylemleri olanak sağlayarak iş çözümünüzün bir uçtan uca görünümünü sunar ve kararları Kurumsal güvenlik duruşunuzu tabanlı ve toplanan verileri. Birleştirilmiş güvenlik kullanarak Azure IOT, Azure IOT Edge, Azure Sphere, Azure merkezi ve Azure Güvenlik Merkezi, ihtiyaç duyduğunuz güvenlikle istediğiniz çözümü oluşturmak etkinleştirin.
+## <a name="who-is-azure-security-center-for-iot-made-for"></a>IoT için Azure Güvenlik Merkezi kim için yapılır? 
 
-## <a name="who-is-asc-for-iot-made-for"></a>IOT için yapılan için ASC kimdir? 
+IoT için Azure Güvenlik Merkezi, Azure IoT Hub güvenliği kapsamında tümleşiktir ve günlük iş çözümü güvenlik işlemleri için yönetim sağlar. IoT için Azure Güvenlik Merkezi, Azure Güvenlik Merkezi özelliklerine de tümleştirilir ve genel güvenlik çözümünüzün bir parçası olarak IoT güveninizi izlemeye ve yönetmeye yönelik tümleşik bir görünüm sağlar.
 
-ASC IOT için Azure IOT Hub güvenlik içinde tümleşik ve güvenlik işlemleri günlük iş çözümleri için yönetimi sağlar. ASC IOT için Azure Güvenlik Merkezi özelliklerini de tümleştirilen ve izleme ve IOT güvenlik genel güvenlik çözümünüzün bir parçası olarak yönetmek için tümleşik bir görünümünü sağlar.
+## <a name="how-does-azure-security-center-for-iot-compare-to-the-competition"></a>IoT için Azure Güvenlik Merkezi yarışmaya nasıl karşılaştırılmaktadır?
 
-## <a name="how-does-asc-for-iot-compare-to-the-competition"></a>IOT için ASC yarışmaya nasıl arasındaki fark nedir?
+Diğer çözümler müşterilerin kendi çözümlerini oluşturmalarına izin veren bir dizi özellik sağlarken, IoT için Azure Güvenlik Merkezi, ilgili tüm Azure güvenliğinin güvenliği genelinde geniş bir görünüm sağlayan benzersiz bir uçtan uca IoT güvenlik çözümü sağlar kaynakların. Azure, mevcut cihaz yönetim araçlarıyla kolay tümleştirme için IoT Hub Module TWINS ile hızlı dağıtım ve tam tümleştirme imkanı sunar.
 
-Diğer çözümleri müşterilerin kendi çözümlerini oluşturma için olanak tanıyan özellikler kümesi sağlar, ancak ASC IOT için geniş bir görünüm arasında tüm ilgili Azure kaynaklarınızın güvenliğini sağlayan benzersiz bir uçtan uca IOT güvenlik çözümü sunar. Azure hızlı dağıtım ve mevcut cihaz yönetimi araçlarıyla kolay tümleştirme için IOT hub'ı modül ikizlerini ile tam tümleştirme sağlar.
+## <a name="do-i-have-to-be-an-azure-security-center-customer-to-use-this-service"></a>Bu hizmeti kullanmak için bir Azure Güvenlik Merkezi müşterisi olmam gerekiyor mu?
 
-## <a name="do-i-have-to-be-an-azure-security-center-asc-customer"></a>Azure Güvenlik Merkezi (ASC) müşteri olması gerekiyor mu?
+Hayır, ancak önerilir. Azure Güvenlik Merkezi olmadan IoT için Azure Güvenlik Merkezi, sınırlı bağlantılı kaynak verileri alır ve olası saldırı yüzeyi, tehditler ve olası saldırılara ilişkin sınırlı bir analiz sağlar. 
 
-Hayır, ancak tavsiye edilir. ASC, olmadan ASC IOT için sınırlı bağlı kaynak verileri alır ve olası saldırı yüzeyini, tehditleri ve olası saldırılara karşı sınırlı bir analizini sağlar. 
+## <a name="do-i-have-to-be-an-azure-iot-customer"></a>Azure IoT müşterisi olmam gerekiyor mu?
 
-## <a name="do-i-have-to-be-an-azure-iot-customer"></a>Azure IOT müşteri olması gerekiyor mu?
+Evet. IoT için Azure Güvenlik Merkezi, Azure IoT bağlantısı ve altyapısına bağımlıdır.
 
-Evet. ASC IOT için Azure IOT bağlantı ve altyapı kullanır.
+## <a name="do-i-have-to-install-an-agent"></a>Bir aracı yüklemem gerekir mi?
 
-## <a name="do-i-have-to-install-an-agent"></a>Bir aracı yüklemek zorunda mıyım?
+IoT cihazlarınızdaki aracı yüklemesi, IoT için Microsoft Azure Güvenlik merkezini etkinleştirmek üzere zorunlu değildir. Aşağıdaki üç seçenekten birini seçerek seçiminize göre farklı güvenlik izleme ve yönetim özellikleri elde edebilirsiniz:
 
-Aracı yüklemesi IOT cihazlarınızda IOT için Microsoft ASC etkinleştirmek için zorunlu değildir. İzleme ve yönetim özelliklerine yaptığınız seçime göre farklı güvenlik düzeyleri elde etme aşağıdaki üç seçenek arasından seçim yapabilirsiniz:
+1. IoT güvenlik aracısına yönelik Azure Güvenlik Merkezi 'Ni, değişiklikler olmadan veya bunlarla birlikte yükler. Bu seçenek, en yüksek düzeyde gelişmiş güvenlik öngörülerini cihaz davranışı ve erişimi sağlar.
 
-1. IOT güvenlik aracısı ASC ile ya da değişiklik olmadan yükleyin. Bu seçenek en yüksek düzeyde cihaz davranışının ve erişimin Gelişmiş Güvenlik Öngörüler sağlar.
+2. Kendi aracınızı oluşturun ve IoT güvenlik iletisi şeması için Microsoft Azure Güvenlik Merkezi 'Ni uygulayın. Bu seçenek, cihaz güvenlik aracınızın üst kısmında IoT çözümleme araçları için Microsoft Azure Güvenlik Merkezi 'nin kullanımını mümkün bir şekilde sunar.
 
-2. Kendi aracınızı oluşturabilir ve Microsoft ASC uygulamak için IOT güvenlik ileti şeması. Bu seçenek, cihaz güvenlik aracısı üzerinde IOT analizi araçları için Microsoft ASC kullanımını etkinleştirir.
+3. IoT cihazlarınıza güvenlik Aracısı yüklemesi yok. Bu seçenek, güvenlik izleme ve yönetim özelliklerini azaltmak için IoT Hub iletişim izlemeyi mümkün bir şekilde sunar. 
 
-3. IOT cihazlarınızda güvenlik aracı yüklemesi yok. Bu seçenek, IOT Hub iletişim, azaltılmış güvenlik izleme ve yönetim özellikleriyle izleme sağlar. 
+## <a name="what-does-the-azure-security-center-for-iot-agent-do"></a>IoT Aracısı için Azure Güvenlik Merkezi ne yapar?
 
-## <a name="what-does-the-asc-for-iot-agent-do"></a>ASC IOT aracının ne yapar?
+IoT Aracısı için Azure Güvenlik Merkezi, cihaz yapılandırması, davranışı ve erişimi (yapılandırmayı tarayarak) için cihaz düzeyinde tehdit kapsamı sağlar, & bağlantısını işler. IoT güvenlik aracısına yönelik Azure Güvenlik Merkezi, işle ilgili verileri veya etkinlikleri taramaz.
 
-ASC IOT Aracısı, cihaz yapılandırması, davranış ve (yapılandırma tarayarak) erişim, işlem ve bağlantı için cihaz tehdit düzeyi kapsamı sağlar. IOT güvenlik aracısı ASC, işle ilgili veri veya etkinlik taraması yapmaz.
+## <a name="where-can-i-get-the-azure-security-center-for-iot-security-agent"></a>IoT güvenlik Aracısı için Azure Güvenlik Merkezi 'Ni nereden alabilirim?
 
-## <a name="where-i-can-get-the-asc-for-iot-security-agent"></a>IOT güvenlik aracısı ASC nereden alabilirim?
+IoT güvenlik aracısına yönelik Azure Güvenlik Merkezi, 32 bit ve 64-bit Windows ve Linux sürümlerindeki GitHub 'da açık kaynaktır ve mevcuttur: https://github.com/Azure/Azure-Security-IoT.
 
-IOT güvenlik aracısı ASC açık kaynaktır ve github'da 32 bit ve 64-bit Windows ve Linux sürümleri: https://github.com/Azure/Azure-Security-IoT-Preview
+## <a name="where-does-the-azure-security-center-for-iot-agent-get-installed"></a>IoT aracısının Azure Güvenlik Merkezi 'nin yüklendiği yer nedir? 
 
-## <a name="where-does-the-asc-for-iot-agent-get-installed"></a>ASC IOT aracısının yüklü olduğu? 
+Ayrıntılı yükleme ve aracı dağıtım bilgileri GitHub 'da bulunabilir: https://github.com/Azure/Azure-IoT-Security.
 
-Ayrıntılı yükleme ve aracı dağıtım bilgileri Github'da bulunabilir: https://github.com/Azure/Azure-Security-IoT-Preview
+## <a name="what-are-the-dependencies-and-prerequisites-of-the-agent"></a>Aracının bağımlılıkları ve önkoşulları nelerdir?
 
-## <a name="what-are-the-dependencies-and-prerequisites-of-the-agent"></a>Aracısı'nın önkoşulları ve bağımlılıklar nelerdir?
+IoT için Azure Güvenlik Merkezi, çok çeşitli platformları destekler. Belirli cihazlarınızla ilgili desteği doğrulamak için [desteklenen cihaz platformları](how-to-deploy-agent.md) bölümüne bakın. 
 
-ASC IOT için çok çeşitli platformları destekler. Bkz: [desteklenen cihaz platformları](how-to-deploy-agent.md) belirli cihazlarınız için destek doğrulayın. 
+## <a name="which-data-is-collected-by-the-agent"></a>Aracı hangi verileri topladı?
 
-## <a name="which-data-is-collected-by-the-agent"></a>Hangi verilerin aracı tarafından toplanır?
+Bağlantı, erişim, güvenlik duvarı yapılandırması, işlem listesi & işletim sistemi taban çizgisi aracı tarafından toplanır.
 
-Bağlantı, erişim, güvenlik duvarı yapılandırması, işlem listesi ve işletim sistemi temeli aracı tarafından toplanır.
+## <a name="how-much-data-will-the-agent-generate"></a>Aracı ne kadar veri oluşturacak?
 
-## <a name="how-much-data-will-the-agent-generate"></a>Ne kadar veri aracı oluşturur?
+Aracı verileri oluşturma cihaz, uygulama, bağlantı türü ve müşteri Aracısı yapılandırması tarafından çalıştırılır. Cihazlar ve IoT çözümleri arasındaki yüksek değişkenlik nedeniyle,, oluşturulan verilerin miktarını ölçirken, gereksinimlerinize uyan belirli yapılandırmayı gözlemlemek, öğrenmek ve ayarlamak için önce aracıyı bir laboratuvar veya test ayarında dağıtmanız önerilir. Hizmeti başlattıktan sonra IoT Aracısı için Azure Güvenlik Merkezi, yapılandırma ve özelleştirme sürecinde size yardımcı olmak üzere aracı aktarım hızını iyileştirmek için işlemsel öneriler sağlar.
 
-Aracı verisi oluşturma, cihaz, uygulama, bağlantı türü ve müşteri aracı yapılandırması tarafından yönetilir. Cihazlar ve IOT çözümleri arasında yüksek oranda çeşitlilik nedeniyle bir laboratuvar veya test inceleyin, öğrenin ve oluşturulan veri miktarı ölçme sırasında ihtiyaçlarınıza daha uygun belirli yapılandırma ayarı aracıyı ilk dağıtımı öneririz. Hizmet başlattıktan sonra yapılandırma ve özelleştirme işlemine yardımcı olmak için işletimsel önerileri Aracısı aktarım hızını iyileştirmek için IOT Aracısı ASC sağlar.
+## <a name="how-can-i-control-my-billing"></a>Faturalandırma mi nasıl denetlerim?
 
-## <a name="how-can-i-control-my-billing"></a>Faturam nasıl kontrol edebilir?
+IoT için Azure Güvenlik Merkezi, yapılandırılabilir aracı taramaları, veri arabellekleri ve aracı tarafından oluşturulan veri miktarını artıran veya azaltan özel uyarılar oluşturma yeteneği sağlar.
 
-IOT için ASC yapılandırılabilir aracı taramaları, veri arabelleği ve aracı tarafından oluşturulan veri miktarını azaltmak veya artırmak özel uyarılar oluşturma olanağı sağlar.
+## <a name="do-agent-messages-use-up-quota-from-iot-hub"></a>Aracı iletileri IoT Hub kota kullanıyor mu?
 
-## <a name="do-agent-messages-use-up-quota-from-iot-hub"></a>Aracı iletileri IOT hub'dan kota ayarlama kullanıyor musunuz?
+Evet. Aracı iletilen veriler IoT Hub kotasında sayılır. 
 
-Evet. IOT hub'ı kota aktarılan aracı verilerini hesaba katılır. 
+## <a name="what-next-ive-installed-an-agent-and-dont-see-any-activities-or-logs"></a>Ne kadar ileri? Bir aracı yükledim ve hiç etkinlik veya günlük görmüyorum...
 
-## <a name="what-next-ive-installed-an-agent-and-dont-see-any-activities-or-logs"></a>Şimdi ne yapacaksınız? Aracıyı yükledikten ve herhangi bir etkinlik veya günlükleri göremiyorum
+1. [Aracı türünün cihazınızın belirtilen işletim sistemi platformuna uygun](how-to-deploy-agent.md) olduğunu denetleyin
 
-1. Denetleme [aracı türü uygun cihazınızın belirtilen işletim sistemi platformu](how-to-deploy-agent.md)
+1. [Cihazda aracının çalıştığını](how-to-agent-configuration.md)onaylayın.
 
-1. Onayla [aracı cihaz üzerinde çalışan](how-to-agent-configuration.md).
+2. Hizmetin IoT Hub **güvenlik** için [başarıyla etkinleştirildiğinden](quickstart-onboard-iot-hub.md) emin olun. 
 
-2. Denetleme [hizmeti başarıyla etkinleştirildi](quickstart-onboard-iot-hub.md) için **güvenlik** IOT hub'ınızdaki. 
+3. Aygıtın [IoT modülü Için Azure Güvenlik Merkezi ile IoT Hub ' de yapılandırılıp yapılandırılmadığını](quickstart-create-security-twin.md)denetleyin.  
 
-3. Cihaz olup olmadığını denetleyin [IOT Hub ile IOT modülü için ASC yapılandırılan](quickstart-create-security-twin.md).  
+Etkinlikler veya Günlükler hala kullanılamıyorsa, ek yardım için IoT iş ortağı için Azure Güvenlik Merkezi 'ne başvurun.
 
-Etkinlikler ve günlükleri hala kullanılamıyorsa, Ek Yardım için IOT iş ortağı, ASC başvurun.
+## <a name="what-happens-when-the-internet-connection-stops-working"></a>Internet bağlantısı çalışmayı kestiğinde ne olur?
 
-## <a name="what-happens-when-the-internet-connection-stops-working"></a>İnternet bağlantısı çalışmayı durduruyor ne olur?
+Aracı, cihaz çalıştığı sürece verileri çalıştırmaya ve depolamaya devam eder. Veriler, boyut yapılandırmasına göre güvenlik iletisi önbelleğinde depolanır. Cihazın bağlantısı yapıldığında, güvenlik iletileri göndermeye sürdürülür. 
 
-Aracısı'nı çalıştırın ve cihaz çalıştığı sürece veri depolamak devam eder. Veriler boyut yapılandırmasından göre güvenlik ileti önbellekte depolanır. Cihaz bağlantısı kazandıktan sonra güvenlik iletileri gönderme sürdürün. 
+## <a name="if-the-device-is-restarted-will-the-security-agent-self-recover"></a>Cihaz yeniden başlatılırsa güvenlik aracısının otomatik olarak kurtarılması gerekir mi?
 
-## <a name="if-the-device-is-restarted-will-the-security-agent-self-recover"></a>Güvenlik aracı, Self cihaz yeniden başlatılırsa, kurtarılır?
+Güvenlik Aracısı, her cihaz yeniden başlatması ile otomatik olarak yeniden çalışacak şekilde tasarlanmıştır.
 
-Güvenlik aracı, her cihaz yeniden başlatma otomatik olarak yeniden çalıştırmak için tasarlanmıştır.
+## <a name="can-the-agent-affect-the-performance-of-the-device-or-other-installed-software"></a>Aracı, cihazın veya diğer yüklü yazılımların performansını etkileyebilir mi?
 
-## <a name="can-the-agent-affect-the-performance-of-the-device-or-other-installed-software"></a>Aracı, cihaz veya diğer yüklü yazılımların performansını etkileyebilir?
+Aracı başka bir uygulama/işlem olarak makine kaynakları tüketir ve normal cihaz etkinliğini kesintiye uğramamalıdır. Aracının üzerinde çalıştığı cihazdaki kaynak tüketimi, kurulumu ve yapılandırmasıyla birlikte bulunur. Bir üretim ortamında dağıtmayı denemeden önce, diğer IoT Uygulamalarınız ve işlevlerle birlikte çalışabilirlik ile birlikte, aracı yapılandırmanızın bir kapsanan ortamda test edilmesini öneririz.
 
-Aracı diğer uygulama/bir işlem makine kaynaklarını tüketir ve normal cihaz etkinliği kesintiye. Kaynak tüketimi aracıyı çalıştıran bir cihazda, kendi kurulumu ve yapılandırması ile birleştirilmiştir. Bir üretim ortamında dağıtmaya çalışmadan önce aracı yapılandırması, bir IOT uygulamaları ve işlevselliği ile birlikte çalışabilirlik yanı sıra bağımsız bir ortamda, test etmenizi öneririz.
+## <a name="im-making-some-maintenance-on-the-device-can-i-turn-off-the-agent"></a>Cihazda bazı bakımda bakım yapmaya çalışıyorum. Aracıyı kapatabilir miyim?
 
-## <a name="im-making-some-maintenance-on-the-device-can-i-turn-off-the-agent"></a>Bazı bakım cihazda hale getiriyorum. Aracısı'nı devre dışı kapatırım?
+Aracı kapatılamadı.
 
-Aracıyı devre dışı bırakılamaz.
+## <a name="is-there-a-way-to-test-if-the-agent-is-working-correctly"></a>Aracının düzgün çalışıp çalışmadığını test etmenin bir yolu var mı? 
 
-## <a name="is-there-a-way-to-test-if-the-agent-is-working-correctly"></a>Aracı düzgün çalışıp çalışmadığını test etmek için bir yol var mı? 
+Aracı iletişimi durduruyor veya güvenlik iletilerini gönderemezse, bir **Cihaz sessiz** uyarı oluşturulur.
 
-Aracı iletişim durdurur veya güvenlik ileti göndermek başarısız olursa bir **cihazdır sessiz** uyarısı oluşturulur.
+## <a name="can-i-create-my-own-alerts"></a>Kendi uyarılarımı oluşturabilir miyim?
 
-## <a name="can-i-create-my-own-alerts"></a>Kendi el Uyarılarım oluşturabilir miyim?
+Evet. IP adresi ve açık bağlantı noktaları gibi, önceden belirlenmiş davranış kümesinde özelleştirilmiş bir uyarı ayarlayabilirsiniz. Özel uyarılar ve bunların nasıl yapılacağı hakkında daha fazla bilgi edinmek için bkz. [özel uyarılar oluşturma](quickstart-create-custom-alerts.md) . 
 
-Evet. IP adresi ve bağlantı noktalarını açma gibi davranışları önceden belirlenmiş dizi özelleştirilmiş bir uyarı ayarlayabilirsiniz. Bkz: [özel uyarılar oluşturabilirsiniz](quickstart-create-custom-alerts.md) özel uyarılar ve bunları yapma hakkında daha fazla bilgi edinmek için. 
+## <a name="where-can-i-see-logs-can-i-customize-logs"></a>Günlükleri nereden görebilirim? Günlükleri özelleştirebilir miyim?
 
-## <a name="where-can-i-see-logs-can-i-customize-logs"></a>Günlükleri nerede görebilirim? Günlükleri özelleştirebilirim?
+- Bağlı Log Analytics çalışma alanınızı kullanarak uyarıları ve önerileri görüntüleyin. Çalışma alanındaki depolama boyutunu ve süreyi yapılandırın.
 
-- Uyarıları ve öneriler bağlı Log Analytics çalışma alanını kullanarak görüntüleyin. Depolama boyutu ve süresi çalışma alanında yapılandırın.
+- Güvenlik aracılarınızın ham verileri de Log Analytics hesabınızda depolanabilir. Bu seçeneğin yapılandırmasını değiştirmeden önce boyut, süre, depolama gereksinimleri ve ilişkili maliyetleri göz önünde bulundurun. 
 
-- Güvenlik aracınızdan ham verileri, Log Analytics hesabınızdaki da depolanabilir. Boyut, süre, depolama gereksinimleri ve ilişkili maliyetleri bu seçeneği yapılandırmasını değiştirmeden önce göz önünde bulundurun. 
+## <a name="why-should-i-add-azure-security-center-for-iot-to-the-module-identity-what-is-it-used-for"></a>IoT için Azure Güvenlik Merkezi 'ni modül kimliğine neden eklemeliyim? Ne için kullanılır?
 
-## <a name="why-should-i-add-asc-for-iot-to-the-module-identity-what-is-it-used-for"></a>Neden ASC IOT için modül kimliği eklemeliyim? Ne için kullanılacağını?
-
-ASC IOT modülü için aracı yapılandırması ve yönetimi için kullanılır.
+IoT modülü için Azure Güvenlik Merkezi, aracı yapılandırma ve yönetimi için kullanılır.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-IOT için ASC ile çalışmaya başlama hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
+IoT için Azure Güvenlik Merkezi 'ni kullanmaya başlama hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
 
 
-- IOT için ASC okuma [genel bakış](overview.md)
-- Doğrulama [hizmet önkoşulları](service-prerequisites.md)
-- Kullanma hakkında daha fazla bilgi edinin [kullanmaya başlayın](getting-started.md)
-- Anlamak [ASC IOT güvenlik uyarıları](concept-security-alerts.md)
+- IoT için Azure Güvenlik Merkezi ['ne genel bakış](overview.md) konusunu okuyun
+- [Hizmet önkoşullarını](service-prerequisites.md) doğrulama
+- [Kullanmaya başlama](getting-started.md) hakkında daha fazla bilgi edinin
+- [IoT güvenlik uyarıları Için Azure Güvenlik Merkezi 'ni](concept-security-alerts.md) anlama
 

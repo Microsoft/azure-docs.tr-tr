@@ -1,127 +1,128 @@
 ---
-title: Azure Danışmanı ile Azure uygulamalarını performansını | Microsoft Docs
-description: Azure dağıtımlarınızı performansını iyileştirmek için Danışman'ı kullanın.
+title: Azure Advisor ile Azure uygulamalarının performansını geliştirme | Microsoft Docs
+description: Azure dağıtımlarınızın performansını iyileştirmek için Advisor 'ı kullanın.
 services: advisor
 documentationcenter: NA
-author: kasparks
+author: saket-ms
 ms.service: advisor
 ms.topic: article
 ms.date: 01/29/2019
-ms.author: kasparks
-ms.openlocfilehash: 8fdae1e12e56dcbcb56941726b0c089ad59b8fc8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: sagupt
+ms.openlocfilehash: 08af119e7f9e72de4a8ae4a1842289a4fd5d925e
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66254660"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74144156"
 ---
-# <a name="improve-performance-of-azure-applications-with-azure-advisor"></a>Azure Danışmanı ile Azure uygulamalarını'nın performansını artırma
+# <a name="improve-performance-of-azure-applications-with-azure-advisor"></a>Azure Advisor ile Azure uygulamalarının performansını geliştirme
 
-Azure Danışmanı performans önerilerini, hız ve yanıt hızını iş açısından kritik uygulamalarınızın geliştirilmesine yardımcı olur. Performans önerileri Danışmandan alma **performans** Danışman Panosu sekmesi.
+Azure Advisor performans önerileri, iş açısından kritik uygulamalarınızın hızını ve yanıt hızını artırmaya yardımcı olur. Danışman panosunun **performans** sekmesinde, Advisor 'ın performans önerilerini alabilirsiniz.
 
-## <a name="reduce-dns-time-to-live-on-your-traffic-manager-profile-to-fail-over-to-healthy-endpoints-faster"></a>DNS sağlıklı uç noktalar için daha hızlı yük devretme için Traffic Manager profilinizin üzerinde etkin kalma süresi azaltın
+## <a name="reduce-dns-time-to-live-on-your-traffic-manager-profile-to-fail-over-to-healthy-endpoints-faster"></a>Traffic Manager profilinizde etkin hale geçen DNS süresini, sağlıklı uç noktalara daha hızlı yük devretmek için azaltın
 
-[Yaşam süresi (TTL) ayarları süresi](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-performance-considerations) Traffic Manager profilinizin uç noktaları belirli bir uç nokta sorgularına yanıt vermemeye başlarsa hızlı bir şekilde geçiş yapma belirtmenizi sağlar. TTL değerleri azaltma, istemcileri işlevsel Uç noktalara daha hızlı yönlendirilir anlamına gelir.
+Traffic Manager profilinizde [yaşam süresi (TTL) ayarları](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-performance-considerations) , belirli bir uç nokta sorgulara yanıt vermeyi durdurduğunda bitiş noktalarına ne kadar hızlı geçiş yapılacağını belirtmenizi sağlar. TTL değerlerini azaltmak, istemcilerin bitiş noktalarına daha hızlı çalışacağı anlamına gelir.
 
-Azure Danışmanı, yapılandırılmış için uzun bir TTL Traffic Manager profillerini tanımlar ve önerir 20 saniye ya da bağlı olarak 60 saniyede TTL yapılandırma profili için yapılandırıldığından [hızlı yük devretme](https://azure.microsoft.com/roadmap/fast-failover-and-tcp-probing-in-azure-traffic-manager/).
+Azure Advisor, daha uzun bir TTL yapılandırılmış Traffic Manager profillerini tanımlar ve bu profilin [hızlı yük devretme](https://azure.microsoft.com/roadmap/fast-failover-and-tcp-probing-in-azure-traffic-manager/)için yapılandırılmış olup olmadığına bağlı olarak TTL 'yi 20 saniyeye veya 60 saniyeye yapılandırmayı önerir.
 
-## <a name="improve-database-performance-with-sql-db-advisor"></a>SQL DB Danışmanı ile veritabanı performansını artırın
+## <a name="improve-database-performance-with-sql-db-advisor"></a>SQL DB Danışmanı ile veritabanı performansını geliştirin
 
-Danışman, öneriler tüm Azure kaynaklarınız için tutarlı ve birleştirilmiş bir görünümünü sağlar. SQL Azure veritabanınızın performansını artırmak için önerileri getirmek için SQL veritabanı Danışmanı ile tümleştirilir. SQL veritabanı Danışmanı, kullanım geçmişinizi analiz ederek SQL Azure veritabanlarınızın performansını değerlendirir. Ardından, veritabanının tipik iş yükünü çalıştırmak için en uygun adaylardır öneriler sunar.
-
-> [!NOTE]
-> Öneriler almak için bir veritabanı kullanımının bir hafta hakkında sahip olmalıdır ve bu hafta içinde var. bazı tutarlı etkinlik olması gerekir. SQL veritabanı Danışmanı daha kolay etkinlik rastgele ani artışlar için tutarlı sorgu desenleri için en iyi duruma getirebilirsiniz.
-
-SQL veritabanı Danışmanı hakkında daha fazla bilgi için bkz: [SQL veritabanı Danışmanı](https://azure.microsoft.com/documentation/articles/sql-database-advisor/).
-
-## <a name="improve-app-service-performance-and-reliability"></a>App Service performans ve güvenilirliğini artırın
-
-Azure Danışmanı, uygulama hizmetleri deneyiminizi geliştirmek ve ilgili platform özelliklerini keşfetmek için en iyi yöntem önerilerini tümleştirir. Uygulama Hizmetleri önerileri örnekleri şunlardır:
-* Algılama örnekleri burada bellek veya CPU kaynaklarını azaltma seçenekleri ile uygulama çalışma zamanı tarafından bitti.
-* Algılama örnekleri burada collocating kaynak web uygulamaları ve veritabanları gibi performans ve düşük maliyetli artırabilir.
-
-Uygulama Hizmetleri öneriler hakkında daha fazla bilgi için bkz. [Azure App Service için en iyi](https://azure.microsoft.com/documentation/articles/app-service-best-practices/).
-
-## <a name="use-managed-disks-to-prevent-disk-io-throttling"></a>Disk g/ç azalmasını engellemek için yönetilen diskleri kullanma
-
-Danışman, ölçeklenebilirlik hedefine ulaşmak bir depolama hesabına ait sanal makineleri tanımlar. Bu durum bu Vm'leri g/ç azalmasını getirir. Danışman, performans düşüşünü önlemek için yönetilen diskleri kullanmanız önerilir.
-
-## <a name="improve-the-performance-and-reliability-of-virtual-machine-disks-by-using-premium-storage"></a>Premium Depolama'yı kullanarak performans ve sanal makine disklerini güvenilirliğini artırın
-
-Danışman, depolama hesabınızda yüksek hacimli işlemler sahip standart disklere sahip sanal makineleri tanımlar ve premium disklere yükseltme önerir. 
-
-Azure Premium depolama, g/Ç açısından yoğun iş yüklerini çalıştıran sanal makineleri için yüksek performanslı, düşük gecikme süreli disk desteği sunar. Premium depolama hesapları kullanan sanal makine disklerini verileri katı hal sürücülerine (SSD) depolar. Uygulamanız için en iyi performans için premium depolama yüksek IOPS gerektiren tüm sanal makine disklerinin geçişi öneririz.
-
-## <a name="remove-data-skew-on-your-sql-data-warehouse-table-to-increase-query-performance"></a>Sorgu performansını artırmak için SQL veri ambarı tablosu üzerinde eğriltme verilerini kaldırma
-
-Veri dengesizliği gereksiz veri hareketi veya kaynak darboğazları yükünüz çalıştırırken neden olabilir. Advisor dağıtım veri dengesizliği % 15'den büyük ve verilerinizi dağıtan ve tablo dağıtım anahtar seçimlerinizi yeniden ziyaret öneririz algılar. Ve hakkında daha fazla tanımlama eğriltme kaldırma bilgi edinmek için [eğriltme sorun giderme](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-tables-distribute#how-to-tell-if-your-distribution-column-is-a-good-choice).
-
-## <a name="create-or-update-outdated-table-statistics-on-your-sql-data-warehouse-table-to-increase-query-performance"></a>Sorgu performansını artırmak için SQL veri ambarı tablosu güncel olmayan tablo istatistikleri güncelle
-
-Advisor tanımlayan güncel olmayan tablolar [tablo istatistikleri](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-tables-statistics) ve tablo istatistikleri oluşturmak veya güncelleştirmek önerir. Sorgu iyileştiricisi, en hızlı performans için bir yüksek kaliteli sorgu planı oluşturmak sorgu iyileştiricisi sağlayan sorgu sonucu satır sayısı ve kardinalite tahmin etmek için güncel statikler kullanır. SQL veri ambarı.
-
-## <a name="scale-up-to-optimize-cache-utilization-on-your-sql-data-warehouse-tables-to-increase-query-performance"></a>Sorgu performansını artırmak için SQL veri ambarı tabloları önbellek kullanımını iyileştirmek için ölçeği büyütün
-
-Azure Danışmanı, SQL veri ambarınızın olması durumunda yüksek önbellek yüzdesini kullanılan ve düşük isabet yüzdesi algılar. Bu durum, SQL veri ambarınızın performansını etkileyebilir yüksek önbellek çıkarma gösterir. İş yükünüz için yeterli önbellek kapasite ayırma sağlamak için SQL veri ambarınızın ölçeğini Advisor önerir.
-
-## <a name="convert-sql-data-warehouse-tables-to-replicated-tables-to-increase-query-performance"></a>Sorgu performansını artırmak için çoğaltılmış tablolar için SQL veri ambarı tabloları Dönüştür
-
-Danışman, çoğaltılmış tablolar olmayan ancak dönüştürmenizi avantaj elde edecektir tabloları tanımlar ve bu tablolar dönüştürme önerir. Öneriler çoğaltılmış tablo boyutu, sütunları, tabloda dağıtım türü ve SQL veri ambarı tablosunun bölüm sayısını temel alır. Ek buluşsal yöntemler, bağlamı için Önerideki sağlanabilir. Bu öneri belirleme hakkında daha fazla bilgi için bkz: [SQL veri ambarı önerileri](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-concept-recommendations#replicate-tables). 
-
-## <a name="migrate-your-storage-account-to-azure-resource-manager-to-get-all-of-the-latest-azure-features"></a>Depolama hesabınızı tüm en yeni Azure özellikleri almak için Azure Resource Manager'a geçiş
-
-Depolama hesabı dağıtım modelinizin Azure Resource şablon dağıtımları, ek güvenlik seçenekleri ve Azure Depolama'nın en son özelliklerin kullanımı bir GPv2 hesabına yükseltme olanağı yararlanmak için Manager'a (Resource Manager) geçirin. Danışman, Klasik dağıtım modelini kullanarak herhangi bir tek başına bir depolama hesabı tanımlayacak ve Resource Manager dağıtım modeline geçirilmesi önerir.
+Advisor, tüm Azure kaynaklarınız için önerilerin tutarlı, birleştirilmiş bir görünümünü sağlar. SQL Azure veritabanınızın performansını iyileştirmeye yönelik öneriler getirmek için SQL Veritabanı Danışmanı ile tümleşir. SQL Veritabanı Danışmanı kullanım geçmişinizi çözümleyerek SQL Azure veritabanlarınızın performansını değerlendirir. Daha sonra veritabanının tipik iş yükünü çalıştırmaya en uygun öneriler sunar.
 
 > [!NOTE]
-> Azure İzleyici'de klasik uyarılar Haziran 2019 ' devre dışı bırakmak için zamanlanır. Klasik depolama hesabınızı yeni platformu ile uyarı işlevselliği korumak için Resource Manager'ı kullanacak şekilde yükseltmeniz önerilir. Daha fazla bilgi için [Klasik uyarılar devre dışı bırakılması](https://azure.microsoft.com/updates/classic-alerting-monitoring-retirement/).
+> Öneriler almak için, bir veritabanının kullanım haftası ile ilgili olması gerekir ve bu hafta içinde bazı tutarlı etkinlik olması gerekir. SQL Veritabanı Danışmanı, rastgele ek etkinlik için daha kolay olan tutarlı sorgu desenleri için daha kolay iyileştirebilirler.
 
-## <a name="design-your-storage-accounts-to-prevent-hitting-the-maximum-subscription-limit"></a>En büyük abonelik sınırını ulaşmaktan önlemek için depolama hesaplarınıza tasarlama
+SQL Veritabanı Danışmanı hakkında daha fazla bilgi için bkz. [SQL veritabanı Danışmanı](https://azure.microsoft.com/documentation/articles/sql-database-advisor/).
 
-Bir Azure bölgesinde en fazla 250 depolama hesaplarının abonelik başına destekleyebilir. Sınıra ulaşıldığında, bölge ve abonelikle birlikte daha fazla tüm depolama hesaplarını oluşturmak mümkün olmayacaktır. Advisor aboneliklerinizi kontrol eder ve yüzey, daha az depolama hesapları için hiçbir, tasarlamak üst sınıra ulaşması yakın önerilerdir.
+## <a name="improve-app-service-performance-and-reliability"></a>Performansı ve güvenilirliği App Service geliştirme
 
-## <a name="optimize-the-performance-of-your-azure-mysql-azure-postgresql-and-azure-mariadb-servers"></a>Azure MySQL ve Azure PostgreSQL Azure MariaDB sunucularınızın performansını en iyi duruma getirme 
+Azure Advisor, uygulama hizmetleri deneyiminizi iyileştirmek ve ilgili platform özelliklerini bulmak için en iyi yöntemler önerilerini tümleştirir. Uygulama Hizmetleri önerilerine örnek olarak şunlar verilebilir:
+* Bellek veya CPU kaynaklarının, risk azaltma seçenekleriyle uygulama çalışma zamanları tarafından tükenmiş olduğu örneklerin algılanması.
+* Web uygulamaları ve veritabanları gibi kaynakların birlikte bulunması, performansı ve daha düşük maliyetten iyileştirebildiği örneklerin algılanması.
 
-### <a name="fix-the-cpu-pressure-of-your-azure-mysql-azure-postgresql-and-azure-mariadb-servers-with-cpu-bottlenecks"></a>Azure MySQL ve Azure PostgreSQL Azure MariaDB sunucularınızın CPU baskısı CPU performans sorunlarını düzeltme
-Yavaş sorgu performansı iş yükünüz için çok yüksek CPU kullanımını uzun bir süre boyunca neden olabilir. CPU boyutunu artırmayı çalışma zamanı veritabanı sorgularının en iyi duruma getirme yardımcı ve genel performansı geliştirin. Azure Danışmanı sunucuları büyük olasılıkla kısıtlı CPU iş yükleri çalıştıran ve işlem ölçeklendirme önerilir bir yüksek CPU kullanımı ile tanımlar.
+Uygulama Hizmetleri önerileri hakkında daha fazla bilgi için bkz. [Azure App Service Için En Iyi uygulamalar](https://azure.microsoft.com/documentation/articles/app-service-best-practices/).
 
-### <a name="reduce-memory-constraints-on-your-azure-mysql-azure-postgresql-and-azure-mariadb-servers-or-move-to-a-memory-optimized-sku"></a>Azure MySQL ve Azure PostgreSQL Azure MariaDB sunucularınızda bellek kısıtlamaları azaltın veya SKU taşımak için bir bellek için iyileştirilmiş
-Yetersiz önbellek isabet oranını daha yavaş sorgu performansı ve daha yüksek IOPS neden olabilir. Bu bir hatalı sorgu planı ya da bir bellek kullanımı yoğun iş yükü nedeniyle olabilir. Sorgu planı düzelttikten veya [belleğin artırılması](https://docs.microsoft.com/azure/postgresql/concepts-pricing-tiers) PostgreSQL veritabanı sunucusu, Azure MySQL veritabanı sunucusu veya Azure MariaDB için Azure veritabanı sunucusu veritabanı iş yükünüzü yürütülmesi en iyi duruma yardımcı olur. Azure Danışmanı, bu yüksek arabellek havuzu veri değişim sıklığı nedeniyle etkilenen sunucuları belirler ve sorgu planı düzeltme daha yüksek bir SKU ile daha fazla bellek taşımak ya da daha yüksek IOPS almak için depolama boyutunu artırma önerir.
+## <a name="use-managed-disks-to-prevent-disk-io-throttling"></a>Disk g/ç azaltmasını engellemek için yönetilen diskleri kullanma
 
-### <a name="use-a-azure-mysql-or-azure-postgresql-read-replica-to-scale-out-reads-for-read-intensive-workloads"></a>Okuma açısından yoğun kaynak gerektiren iş yükleri için okuma ölçeği genişletmek için Azure MySQL veya PostgreSQL okuma çoğaltması Azure'ı kullanın
-Azure Danışmanı, okuma ve yazma sunucudaki son yedi okuma açısından yoğun iş yükleri tanımlamak için gün içindeki oranı gibi iş yükü tabanlı buluşsal yararlanır. Kaynak PostgreSQL için Azure veritabanı veya çok yüksek okuma/yazma oranı ile kaynak MySQL için Azure veritabanı sorgu performansı yavaş baştaki CPU ve/veya bellek çakışması neden olabilir. Ekleme bir [çoğaltma](https://docs.microsoft.com/azure/postgresql/howto-read-replicas-portal) okuma birincil sunucudaki CPU ve/veya bellek kısıtlamaları önleme çoğaltma sunucusuna ölçeği genişletmeyi de yardımcı olur. Danışman sunucular gibi yüksek okuma açısından yoğun iş yükleri ile tanımlar ve eklemenizi öneririz bir [çoğaltma okuma](https://docs.microsoft.com/azure/postgresql/concepts-read-replicas) okuma iş yükleri yük boşaltması için.
+Danışman, ölçeklenebilirlik hedefine ulaşan bir depolama hesabına ait sanal makineleri belirler. Bu durum, bu VM 'Leri, g/ç daraltma saldırılarına açık hale getirir. Danışman, performans düşüşünü engellemek için yönetilen diskleri kullanmalarını önerir.
+
+## <a name="improve-the-performance-and-reliability-of-virtual-machine-disks-by-using-premium-storage"></a>Premium Depolama kullanarak sanal makine disklerinin performansını ve güvenilirliğini geliştirme
+
+Danışman, depolama hesabınızda yüksek işlem hacmi olan standart disklere sahip sanal makineleri tanımlar ve Premium disklere yükseltmeyi önerir. 
+
+Azure Premium Depolama, g/ç yoğunluklu iş yüklerini çalıştıran sanal makineler için yüksek performanslı ve düşük gecikmeli disk desteği sunar. Premium Depolama hesapları kullanan sanal makine diskleri, verileri katı hal sürücülerinde (SSD 'Ler) depolar. Uygulamanızın en iyi performansı için, yüksek ıOPS gerektiren tüm sanal makine disklerini Premium depolamaya yükseltmenizi öneririz.
+
+## <a name="remove-data-skew-on-your-sql-data-warehouse-table-to-increase-query-performance"></a>Sorgu performansını artırmak için SQL veri ambarı tablonuzda veri eğriliğini kaldırma
+
+Veri eğriltme, iş yükünüzü çalıştırırken gereksiz veri hareketine veya kaynak performans sorunlarına neden olabilir. Danışman, %15 ' ten büyük olan dağıtım verilerinin eğriliğini algılar ve verilerinizi yeniden dağıtmanız ve tablo dağıtım anahtarı seçimlerinizi yeniden oluşturmanız önerilir. Eğriliği belirleme ve kaldırma hakkında daha fazla bilgi edinmek için bkz. [skew sorunlarını giderme](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-tables-distribute#how-to-tell-if-your-distribution-column-is-a-good-choice).
+
+## <a name="create-or-update-outdated-table-statistics-on-your-sql-data-warehouse-table-to-increase-query-performance"></a>Sorgu performansını artırmak için SQL veri ambarı tablonuzda geçmiş tablo istatistiklerini oluşturun veya güncelleştirin
+
+Danışman güncel [tablo istatistiklerine](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-tables-statistics) sahip olmayan tabloları tanımlar ve tablo istatistiklerini oluşturmayı veya güncelleştirmeyi önerir. SQL veri ambarı sorgu iyileştiricisi, sorgu iyileştiricinin en hızlı performans için yüksek kaliteli bir sorgu planı oluşturmasını sağlayan sorgu sonucundaki kardinalite veya satır sayısını tahmin etmek için güncel statikler kullanır.
+
+## <a name="scale-up-to-optimize-cache-utilization-on-your-sql-data-warehouse-tables-to-increase-query-performance"></a>Sorgu performansını artırmak için SQL veri ambarı tablolarınızdaki önbellek kullanımını iyileştirmek üzere ölçeği büyütün
+
+Azure Advisor, SQL veri ambarınızın yüksek önbellek kullanılan yüzdesine ve düşük bir isabet yüzdesine sahip olup olmadığını algılar. Bu durum, SQL veri ambarınızın performansını etkileyebilecek yüksek önbellek çıkardığını gösterir. Danışman, iş yükünüz için yeterli önbellek kapasitesi ayırdığınızdan emin olmak için SQL veri Ambarınızı ölçeklendirmenizi önerir.
+
+## <a name="convert-sql-data-warehouse-tables-to-replicated-tables-to-increase-query-performance"></a>Sorgu performansını artırmak için SQL veri ambarı tablolarını çoğaltılan tablolara dönüştürme
+
+Danışman, çoğaltılan tablo olmayan tabloları tanımlar, ancak dönüştürmeden yarar olur ve bu tabloları dönüştürmenizi önerir. Öneriler, çoğaltılan tablo boyutunu, sütun sayısını, tablo dağıtım türünü ve SQL veri ambarı tablosunun bölüm sayısını temel alır. Bağlam için öneri bölümünde ek buluşsal yöntemler sağlanmış olabilir. Bu önerinin nasıl belirlendiği hakkında daha fazla bilgi edinmek için bkz. [SQL veri ambarı önerileri](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-concept-recommendations#replicate-tables). 
+
+## <a name="migrate-your-storage-account-to-azure-resource-manager-to-get-all-of-the-latest-azure-features"></a>En son Azure özelliklerinin tümünü almak için depolama hesabınızı Azure Resource Manager geçirin
+
+Şablon dağıtımlarınızın, ek güvenlik seçeneklerinin ve Azure depolamanın en son özelliklerinin kullanımı için bir GPv2 hesabına yükseltme yeteneğinin avantajlarından yararlanmak için depolama hesabı dağıtım modelinizi Azure Resource Manager (Kaynak Yöneticisi) sürümüne geçirin. Danışman, klasik dağıtım modelini kullanan tek başına depolama hesaplarını belirler ve Kaynak Yöneticisi dağıtım modeline geçiş yapmanızı önerir.
+
+> [!NOTE]
+> Azure Izleyici 'de klasik uyarılar Ağustos 2019 ' de kullanımdan kaldırılmıştır. Yeni platformla uyarı işlevlerini sürdürmek için Kaynak Yöneticisi kullanmak üzere klasik depolama hesabınızı yükseltmenizi öneririz. Daha fazla bilgi için bkz. [Klasik uyarılar kullanımdan](https://docs.microsoft.com/azure/azure-monitor/platform/monitoring-classic-retirement#retirement-of-classic-monitoring-and-alerting-platform)kaldırma.
+
+## <a name="design-your-storage-accounts-to-prevent-hitting-the-maximum-subscription-limit"></a>Maksimum abonelik sınırına vurmasını engellemek için depolama hesaplarınızı tasarlayın
+
+Bir Azure bölgesi, abonelik başına en fazla 250 depolama hesabını destekleyebilir. Sınıra ulaşıldığında, bu bölgede/abonelik birleşiminde daha fazla depolama hesabı oluşturmayacak. Danışman, aboneliklerinizi ve yüzey önerilerinizi, en yüksek sınıra ulaşılmaya yakın olan herhangi biri için daha az depolama hesabı tasarlamanızı denetlayacaktır.
+
+## <a name="optimize-the-performance-of-your-azure-mysql-azure-postgresql-and-azure-mariadb-servers"></a>Azure MySQL, Azure PostgreSQL ve Azure MariaDB sunucularının performansını iyileştirin 
+
+### <a name="fix-the-cpu-pressure-of-your-azure-mysql-azure-postgresql-and-azure-mariadb-servers-with-cpu-bottlenecks"></a>Azure MySQL, Azure PostgreSQL ve Azure MariaDB sunucularınızın CPU basıncını performans sorunlarını giderme
+CPU 'nun genişletilmiş bir süre içinde çok yüksek kullanımı, iş yükünüz için yavaş sorgu performansına neden olabilir. CPU boyutunu artırmak, veritabanı sorgularının çalışma zamanının iyileştirilmesine ve genel performansı iyileştirmenize yardımcı olur. Azure Advisor, büyük olasılıkla CPU kısıtlanmış iş yüklerini çalıştıran ve işlem izlemenizi ölçeklendirmenizi gerektiren yüksek CPU kullanımına sahip sunucuları belirler.
+
+### <a name="reduce-memory-constraints-on-your-azure-mysql-azure-postgresql-and-azure-mariadb-servers-or-move-to-a-memory-optimized-sku"></a>Azure MySQL, Azure PostgreSQL ve Azure MariaDB sunucularındaki bellek kısıtlamalarını azaltın veya bellek için iyileştirilmiş bir SKU 'ya geçiş yapın
+Düşük önbellek isabet oranı, daha yavaş sorgu performansına ve daha fazla ıOPS oluşmasına neden olabilir. Bunun nedeni hatalı bir sorgu planı veya bellek yoğun iş yükünü çalıştırıyor olabilir. Sorgu planını [düzeltme veya](https://docs.microsoft.com/azure/postgresql/concepts-pricing-tiers) PostgreSQL Için Azure veritabanı veritabanı sunucusu, Azure MySQL veritabanı sunucusu veya Azure MariaDB sunucusu, veritabanı iş yükünün yürütülmesini iyileştirmenize yardımcı olur. Azure Advisor, bu yüksek arabellek havuzu karmaşıklığı nedeniyle etkilenen sunucuları tanımlar ve sorgu planını düzeltmeyi, daha fazla belleğe sahip daha yüksek bir SKU 'ya taşımayı veya daha fazla ıOPS almak için depolama boyutunu artırmayı önerir.
+
+### <a name="use-a-azure-mysql-or-azure-postgresql-read-replica-to-scale-out-reads-for-read-intensive-workloads"></a>Okuma yoğunluğu yoğun iş yükleri için okuma ölçeğini genişletmek için bir Azure MySQL veya Azure PostgreSQL okuma çoğaltması kullanın
+Azure Advisor, okuma yoğunluklu iş yüklerini belirlemek için son yedi gün içinde sunucuda yazma işlemleri için okuma oranı gibi iş yükü tabanlı buluşsal yöntemler kullanır. PostgreSQL için Azure veritabanı kaynağı veya çok yüksek bir okuma/yazma oranıyla, MySQL için Azure veritabanı kaynağı, sorgu performansının yavaşlamasına neden olabilir.  [Çoğaltma](https://docs.microsoft.com/azure/postgresql/howto-read-replicas-portal) eklemek, Çoğaltma sunucusuna yapılan okumaların ölçeklendirilmesine, BIRINCIL sunucuda CPU ve/veya bellek kısıtlamalarını engellemeye yardımcı olur. Danışman, bu yüksek okuma yoğunluklu iş yükleri olan sunucuları belirler ve bazı okuma iş yüklerini boşaltmak için bir [okuma çoğaltması](https://docs.microsoft.com/azure/postgresql/concepts-read-replicas) eklemeyi önerir.
 
 
-### <a name="scale-your-azure-mysql-azure-postgresql-or-azure-mariadb-server-to-a-higher-sku-to-prevent-connection-constraints"></a>Azure MySQL, PostgreSQL Azure veya Azure MariaDB sunucunuzun bağlantı kısıtlamaları önlemek için daha yüksek bir SKU için ölçeği
-Her yeni bağlantı veritabanı sunucunuza bazı bellek kaplar. Sunucunuza bağlantılar nedeniyle başarısız oluyorsa veritabanı sunucusunun performansı düşürür bir [üst sınırı](https://docs.microsoft.com/azure/postgresql/concepts-limits) bellekte. Azure Danışmanı ile birçok bağlantı hataları çalıştıran sunucuları tanımlamak ve hesaplamayı ölçeklendirme veya bellek için iyileştirilmiş, daha fazla işlem çekirdeği başına SKU'ları, kullanarak sunucunuza daha fazla bellek sağlamak için sunucunuzun bağlantı sınırları öneririz.
+### <a name="scale-your-azure-mysql-azure-postgresql-or-azure-mariadb-server-to-a-higher-sku-to-prevent-connection-constraints"></a>Bağlantı kısıtlamalarını engellemek için Azure MySQL, Azure PostgreSQL veya Azure MariaDB sunucunuzu daha yüksek bir SKU 'ya ölçeklendirin
+Veritabanı sunucunuza yönelik her yeni bağlantı, bazı bellek kaplar. Veritabanı sunucusunun performansı, bellekteki [üst sınır](https://docs.microsoft.com/azure/postgresql/concepts-limits) nedeniyle sunucu bağlantısı başarısız olursa düşer. Azure Advisor birçok bağlantı hatalarıyla çalışan sunucuları belirler ve işlem yaparak veya çekirdek başına daha fazla işlem yapan bellek için Iyileştirilmiş SKU 'Lar kullanarak sunucunuza daha fazla bellek sağlamak üzere sunucunuzun bağlantı sınırlarını yükseltmeyi önerir.
 
-## <a name="scale-your-cache-to-a-different-size-or-sku-to-improve-cache-and-application-performance"></a>Önbelleğinize başka bir boyutu veya SKU önbellek artırmak için ölçeklendirme ve uygulama performansı
+## <a name="scale-your-cache-to-a-different-size-or-sku-to-improve-cache-and-application-performance"></a>Önbelleği ve uygulama performansını artırmak için önbelleğinizi farklı bir boyut veya SKU 'ya ölçeklendirin
 
-Önbellek örnekleri, en yüksek bellek baskısı, yüksek sunucu iş yükü veya onlara yanıt vermemeye, veri kaybı veya kullanılamaz duruma neden olabilecek yüksek ağ bant genişliği altında çalıştırılmadığında gerçekleştirin. Danışman Bu koşullar önbellek örnekleri tanımlar ve bellek baskısı, sunucu iş yükü veya ağ bant genişliğini azaltmak için en iyi yöntemleri uygulayarak ya da bir başka bir boyutu veya SKU ile daha fazla kapasite ölçeklendirme önerilir.
+Önbellek örnekleri, yüksek bellek baskısı, yüksek sunucu yükü veya yüksek ağ bant genişliği altında çalışmadığı zaman, yanıt vermemeye başlamasına, veri kaybına veya kullanılamaz duruma gelmesine neden olabilecek en iyi şekilde çalışır. Danışman, bu koşullarda önbellek örneklerini belirler ve bellek baskısı, sunucu yükü veya ağ bant genişliğini azaltmak için en iyi uygulamaları uygulayarak daha fazla kapasiteye sahip farklı bir boyuta veya SKU 'ya ölçeklendirmeye önerilir.
 
-## <a name="add-regions-with-traffic-to-your-azure-cosmos-db-account"></a>Azure Cosmos DB hesabınıza bölge trafik ile ekleme
+## <a name="add-regions-with-traffic-to-your-azure-cosmos-db-account"></a>Azure Cosmos DB hesabınıza trafiğe sahip bölgeler ekleyin
 
-Danışman şu anda yapılandırılmamış bir bölgeden trafik olan Azure Cosmos DB hesaplarını algılar ve bu bölge eklemenizi öneririz. Bu, bu bölgede gelen istekleri için gecikme süresi artar ve bölgede kesintiler yaşanması kullanılabilirliği garanti eder. [Azure Cosmos DB ile genel veri dağıtımı hakkında daha fazla bilgi edinin](https://aka.ms/cosmos/globaldistribution)
+Danışman, şu anda yapılandırılmamış olan bir bölgeden gelen trafiğe sahip olan Azure Cosmos DB hesaplarını algılar ve bu bölgeyi ekleme önerilir. Bu, söz konusu bölgeden gelen isteklerin gecikmesini artırır ve bölge kesintileri durumunda kullanılabilirliği güvence altına alacak. [Azure Cosmos DB ile genel veri dağıtımı hakkında daha fazla bilgi edinin](https://aka.ms/cosmos/globaldistribution)
 
-## <a name="configure-your-azure-cosmos-db-indexing-policy-with-customer-included-or-excluded-paths"></a>Azure Cosmos DB yapılandırmak dahil veya yolları hariç müşteri ile dizin oluşturma ilkesi
+## <a name="configure-your-azure-cosmos-db-indexing-policy-with-customer-included-or-excluded-paths"></a>Azure Cosmos DB Dizin oluşturma ilkenizi müşteri dahil edilen veya dışlanan yollarla yapılandırma
 
-Azure Danışmanı, varsayılan dizinleme ilkesinin kullanıyor, ancak iş yükü deseni temel alınarak özel dizin oluşturma ilkesi sağlayabileceğiyle Cosmos DB kapsayıcıları tanımlar. Varsayılan dizinleme ilkesinin tüm özelliklerini dizinler, ancak sorgu filtrelerinde kullanılan açık veya içeri yolların özel bir dizin oluşturma ilkesini kullanarak dizin oluşturma için kullanılan depolama ve RU azaltabilir. [Dizin ilkeleri değiştirme hakkında daha fazla bilgi edinin](https://aka.ms/cosmosdb/modify-index-policy)
+Azure Advisor varsayılan dizin oluşturma ilkesini kullanan Cosmos DB kapsayıcıları belirler, ancak iş yükü düzenine göre özel bir dizin oluşturma ilkesinden yararlanabilir. Varsayılan dizin oluşturma ilkesi tüm özellikleri dizine alır, ancak sorgu filtrelerinde kullanılan açık veya dışlanan yollarla özel bir dizin oluşturma ilkesi kullanmak, dizin oluşturma için tüketilen ru ve depolamayı azaltabilir. [Dizin ilkelerini değiştirme hakkında daha fazla bilgi edinin](https://aka.ms/cosmosdb/modify-index-policy)
 
 ## <a name="configure-your-azure-cosmos-db-query-page-size-maxitemcount-to--1"></a>Azure Cosmos DB sorgu sayfanızın boyutunu (MaxItemCount) -1 olarak yapılandırın 
 
-Azure Danışmanı sorgu sayfası boyutu 100 kullanıyorsanız ve bir sayfa boyutu-1 için daha hızlı tarama kullanmanızı öneririz, Azure Cosmos DB kapsayıcıları tanımlar. [En fazla öğe sayısı hakkında daha fazla bilgi edinin](https://aka.ms/cosmosdb/sql-api-query-metrics-max-item-count)
+Azure Advisor, 100 sorgu sayfası boyutunu kullanan Azure Cosmos DB kapsayıcıları belirler ve daha hızlı taramalar için bir sayfa boyutu-1 kullanılmasını önerir. [En fazla öğe sayısı hakkında daha fazla bilgi edinin](https://aka.ms/cosmosdb/sql-api-query-metrics-max-item-count)
 
-## <a name="how-to-access-performance-recommendations-in-advisor"></a>Nasıl Danışmanı performans önerileri
+## <a name="how-to-access-performance-recommendations-in-advisor"></a>Danışman 'de performans önerilerine erişme
 
-1. Oturum [Azure portalında](https://portal.azure.com)ve ardından açın [Advisor](https://aka.ms/azureadvisordashboard).
+1. [Azure Portal](https://portal.azure.com)oturum açın ve [danışman](https://aka.ms/azureadvisordashboard)' yi açın.
 
-2.  Advisor panosunda **performans** sekmesi.
+2.  Danışman panosunda, **performans** sekmesine tıklayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Danışman önerileri hakkında daha fazla bilgi için bkz:
+Danışman önerileri hakkında daha fazla bilgi edinmek için bkz.:
 
-* [Advisor giriş](advisor-overview.md)
+* [Advisor 'a giriş](advisor-overview.md)
 * [Danışman’ı kullanmaya başlama](advisor-get-started.md)
-* [Advisor maliyet önerileri](advisor-performance-recommendations.md)
-* [Advisor yüksek kullanılabilirlik önerisi](advisor-high-availability-recommendations.md)
-* [Advisor güvenlik önerileri](advisor-security-recommendations.md)
+* [Danışman maliyet önerileri](advisor-performance-recommendations.md)
+* [Danışman yüksek kullanılabilirlik önerileri](advisor-high-availability-recommendations.md)
+* [Danışman güvenlik önerileri](advisor-security-recommendations.md)
+* [Danışman Işletimsel üstün öneriler](advisor-operational-excellence-recommendations.md)

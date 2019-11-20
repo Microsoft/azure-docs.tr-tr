@@ -1,37 +1,45 @@
 ---
-title: Azure Cosmos öykünücüsü'nü indirme ve sürüm notları
-description: Azure Cosmos öykünücüsü'nü sürüm notlarını okuyun ve indirin.
+title: Azure Cosmos öykünücüsü indirme ve sürüm notları
+description: Azure Cosmos öykünücü sürüm notlarını okuyun ve indirin.
 ms.service: cosmos-db
 ms.topic: tutorial
 author: markjbrown
 ms.author: mjbrown
 ms.date: 06/20/2019
-ms.openlocfilehash: 5985d0d82341c76993ee91b8dff6927edd1ed8b4
-ms.sourcegitcommit: 08138eab740c12bf68c787062b101a4333292075
+ms.openlocfilehash: cda3b0db1a4f1b098d8ea57887a047fcdef04243
+ms.sourcegitcommit: e0a1a9e4a5c92d57deb168580e8aa1306bd94723
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/22/2019
-ms.locfileid: "67332123"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72286494"
 ---
-# <a name="use-the-azure-cosmos-emulator-for-local-development-and-testing"></a>Yerel geliştirme ve test için Azure Cosmos öykünücüsünü kullanma
+# <a name="azure-cosmos-emulator---release-notes-and-download-information"></a>Azure Cosmos öykünücüsü-sürüm notları ve indirme bilgileri
 
-Bu makalede Azure Cosmos öykünücü sürüm notları her sürümde yapılan özellik güncelleştirmeleri listesini gösterir. Ayrıca, en son sürümü karşıdan yüklemek ve kullanmak için öykünücü listelenir.
+Bu makalede, Azure Cosmos öykünücü sürüm notları her sürümde yapılan Özellik güncelleştirmelerinin bir listesi ile gösterilir. Ayrıca, indirme ve kullanma öykünücünün en son sürümünü de listeler.
 
-## <a name="download"></a>İndirme
+## <a name="download"></a>İndirin
 
 | | |
 |---------|---------|
-|**MSI yükleme**|[Microsoft İndirme Merkezi](https://aka.ms/cosmosdb-emulator)|
-|**Kullanmaya başlama**|[Azure Cosmos öykünücü ile yerel olarak geliştirme](local-emulator.md)|
+|**MSI indirme**|[Microsoft İndirme Merkezi](https://aka.ms/cosmosdb-emulator)|
+|**Başlarken**|[Azure Cosmos öykünücüsü ile yerel olarak geliştirme](local-emulator.md)|
 
 ## <a name="release-notes"></a>Sürüm notları
 
+### <a name="270"></a>2.7.0
+
+- Bu sürüm, .NET Core veya x86 .NET tabanlı istemcileri kullanırken kullanıcılardan SQL API hesabında sorgu yürütmesini önleyen bir gerileme düzeltir.
+
+### <a name="246"></a>2.4.6
+
+- Bu sürüm Azure Cosmos 2019 hizmetindeki özelliklerle birlikte Azure [Cosmos öykünücüsü ile yerel olarak geliştirme](local-emulator.md)bölümünde belirtilen özel durumlar ile eşlik sağlar. Ayrıca, komut satırı ve doğrudan mod bağlantısı kullanan SDK istemcileri için iç IP adresi geçersiz kılmaları aracılığıyla çağrıldığında öykünücü kapatmaya ilişkin çeşitli hataları düzeltir.
+
 ### <a name="243"></a>2.4.3
 
-- Devre dışı varsayılan olarak MongoDB hizmeti başlatılıyor. Yalnızca SQL uç noktası, varsayılan etkindir. Kullanıcı öykünücü'nın el ile kullanarak uç nokta başlamalıdır "/ EnableMongoDbEndpoint" komut satırı seçeneği. Şimdi, tüm diğer hizmet uç noktaları, Gremlin, Cassandra ve tablo gibi gibidir.
-- Öykünücüde, ile başlatılırken bir hata düzeltildi "/ AllowNetworkAccess" nerede Gremlin, Cassandra ve tablo uç noktaları olmayan düzgün bir şekilde işleme dış istemcilerden gelen istekleri.
-- Doğrudan bağlantı noktaları için güvenlik duvarı kuralları ayarları ekleyin.
+- MongoDB hizmetinin varsayılan olarak başlatılması devre dışı bırakıldı. Yalnızca SQL uç noktası varsayılan olarak etkindir. Kullanıcı, öykünücü "/EnableMongoDbEndpoint" komut satırı seçeneğini kullanarak uç noktayı el ile başlatmalıdır. Artık Gremlin, Cassandra ve Table gibi diğer tüm hizmet uç noktalarına benzer.
+- Gremlin, Cassandra ve tablo uç noktalarının dış istemcilerden gelen istekleri doğru bir şekilde işleyemediğinde "/AllowNetworkAccess" ile Başlarken öykünücüsünde hata düzeltildi.
+- Güvenlik duvarı kuralları ayarlarına doğrudan bağlantı bağlantı noktaları ekleyin.
 
 ### <a name="240"></a>2.4.0
 
-- Pulse istemcisi gibi ağ izleme uygulamaları ana bilgisayarda mevcut olduğunda başlatılamamasına öykünücü ile bir sorun düzeltildi.
+- Ana bilgisayarda Pulse Istemcisi gibi ağ izleme uygulamaları varsa öykünücü ile ilgili bir sorun düzeltildi.

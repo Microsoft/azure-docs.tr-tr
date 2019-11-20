@@ -14,15 +14,15 @@ ms.topic: tutorial
 ms.custom: mvc
 ms.date: 01/18/2019
 ms.author: spelluru
-ms.openlocfilehash: b5abb8d4aad7c58bf673aa578255efe12d32ad4b
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: ee9a68df685095244fc9471b7d4ab0f6cee0642d
+ms.sourcegitcommit: 4b647be06d677151eb9db7dccc2bd7a8379e5871
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61083592"
+ms.lasthandoff: 07/19/2019
+ms.locfileid: "68360268"
 ---
-# <a name="tutorial-access-a-lab-in-azure-devtest-labs"></a>Öğretici: Azure DevTest labs'deki bir laboratuvara erişim
-Bu öğreticide, oluşturulan Laboratuvar kullandığınız [Öğreticisi: Azure DevTest Labs'de Laboratuvar oluşturma](tutorial-create-custom-lab.md) .
+# <a name="tutorial-access-a-lab-in-azure-devtest-labs"></a>Öğretici: Azure DevTest Labs bir laboratuvara erişin
+Bu öğreticide, [öğreticide oluşturulan Laboratuvarı kullanacaksınız: Azure DevTest Labs](tutorial-create-custom-lab.md) bir laboratuvar oluşturun.
 
 Bu öğreticide, aşağıdaki eylemleri gerçekleştireceksiniz:
 
@@ -58,8 +58,15 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
     ![Sanal makineye bağlanma](./media/tutorial-use-custom-lab/connect-button.png)
 2. İndirilen **RDP** dosyasını sabit diskinize kaydedin ve sanal makineye bağlanmak için bunu kullanın. Önceki bölümde sanal makine oluşturulurken belirttiğiniz kullanıcı adını ve parolayı belirtin. 
 
-    > [!NOTE] 
-    > Bir Linux VM'ye bağlanmak için VM’nin SSH ve/veya RDP erişiminin etkinleştirilmesi gerekir. RDP üzerinden Linux VM’ye bağlanma adımları için bkz. [Azure’da Linux VM’ye bağlanmak için Uzak Masaüstü’nü yükleme ve yapılandırma](../virtual-machines/linux/use-remote-desktop.md). 
+    Bir Linux VM'ye bağlanmak için VM’nin SSH ve/veya RDP erişiminin etkinleştirilmesi gerekir. RDP üzerinden Linux VM’ye bağlanma adımları için bkz. [Azure’da Linux VM’ye bağlanmak için Uzak Masaüstü’nü yükleme ve yapılandırma](../virtual-machines/linux/use-remote-desktop.md). 
+
+    > [!NOTE]
+    > VM 'niz için sanal makine sayfasına ulaşmak üzere başka yollar vardır. Bunlardan bazıları şunlardır: 
+    > 
+    > 1. Aboneliğinizdeki tüm VM 'Leri arayın. **Sanal makine** sayfasına ulaşmak için VM 'lerin listesinden VM 'nizi seçin.
+    > 2. Kaynak grubunun **kaynak grubu** sayfasına gidin. Sonra, **sanal makine** sayfasına ulaşmak için kaynak grubundaki kaynak listesinden VM 'nizi seçin. 
+    >
+    > Bu seçenekleri kullanarak aldığınız **sanal makine** sayfasındaki araç çubuğunda **Bağlan** düğmesini kullanmayın. Bunun yerine, bu makalede gösterildiği gibi **DevTest Labs** sayfasından **sanal makine** sayfasına gidin ve araç çubuğundaki **Bağlan** düğmesini kullanın.
 
 
 ## <a name="unclaim-the-vm"></a>Sanal makine talebini geri alma
@@ -68,16 +75,16 @@ Sanal makineyi kullandıktan sonra şu adımları izleyerek sanal makine talebin
 1. Sanal makine sayfasında, araç çubuğundan **Talebi Geri Al**’ı seçin. 
 
     ![Sanal makine talebini geri alma](./media/tutorial-use-custom-lab/unclaim-vm-menu.png)
-1. Sanal makine talebi geri alınmadan önce sanal makine kapatılır. Bildirimleri bu işlemin durumunu görebilirsiniz.  
-3. Laboratuvar adınızı üstteki içerik haritası menüsüne tıklayarak geliştirme ve test laboratuvarı sayfasına gidin. 
+1. Sanal makine talebi geri alınmadan önce sanal makine kapatılır. Bu işlemin durumunu bildirimler ' de görebilirsiniz.  
+3. Üstteki içerik haritası menüsünde laboratuvar adına tıklayarak DevTest Lab sayfasına geri gidin. 
     
-    ![Laboratuvara geri gidin](./media/tutorial-use-custom-lab/breadcrumb-to-lab.png)
-1. VM listesinde gördüğünüzü onaylayın **talep edilebilir sanal makineler** alttaki liste.
+    ![Laboratuvara geri git](./media/tutorial-use-custom-lab/breadcrumb-to-lab.png)
+1. VM 'yi en alttaki **sanal makineler** listesi listesinden görtığınızdan emin olun.
 
     
 ## <a name="next-steps"></a>Sonraki adımlar
 Bu öğreticide, Azure DevTest Labs kullanılarak oluşturulan bir laboratuvara nasıl erişeceğiniz ve bu laboratuvarı nasıl kullanacağınız gösterildi. Laboratuvardaki sanal makinelere erişme ve bu sanal makineleri kullanma hakkında daha fazla bilgi için bkz. 
 
 > [!div class="nextstepaction"]
-> [Nasıl yapılır: Vm'leri bir laboratuvarda kullanma](devtest-lab-add-vm.md)
+> [Nasıl yapılır: Laboratuvarda VM kullanma](devtest-lab-add-vm.md)
 

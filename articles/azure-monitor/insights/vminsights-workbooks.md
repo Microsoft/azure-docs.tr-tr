@@ -1,143 +1,137 @@
 ---
-title: Azure İzleyici çalışma kitapları ile etkileşimli raporlar oluşturun | Microsoft Docs
-description: Karmaşık önceden tanımlanmış ve özel parametreli içeren çalışma kitapları için Azure İzleyici VM'ler için raporlama basitleştirin.
-services: azure-monitor
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: ''
+title: Çalışma kitapları ile VM'ler için Azure İzleyici etkileşimli raporlar oluşturma | Microsoft Docs
+description: VM'ler için Azure İzleyici için önceden tanımlı ve özel parametreli çalışma kitapları ile karmaşık raporlamayı kolaylaştırın.
 ms.service: azure-monitor
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 04/05/2019
+ms.subservice: ''
+ms.topic: conceptual
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: 90c236347380bb5d5e51db56d0f431d2659a7258
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/15/2019
+ms.openlocfilehash: dff5027f2ff9ff244f0fa04177a04e446e98465b
+ms.sourcegitcommit: fa5ce8924930f56bcac17f6c2a359c1a5b9660c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61387293"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73200537"
 ---
-# <a name="create-interactive-reports-with-azure-monitor-workbooks"></a>Azure İzleyici çalışma kitapları ile etkileşimli raporlar oluşturun
+# <a name="create-interactive-reports-azure-monitor-for-vms-with-workbooks"></a>Çalışma kitaplarında etkileşimli raporlar VM'ler için Azure İzleyici oluşturma
 
-Çalışma kitapları, metin, birleştirme [oturum sorguları](../log-query/query-language.md), Ölçümler ve zengin etkileşimli raporları parametreleri. Çalışma kitapları, aynı Azure kaynaklarına erişimi olan tüm diğer ekip üyeleri tarafından düzenlenebilir.
+Çalışma kitapları metin, [günlük sorgularını](../log-query/query-language.md), ölçümleri ve parametreleri zengin etkileşimli raporlara birleştirir. Çalışma kitapları aynı Azure kaynaklarına erişimi olan diğer takım üyeleri tarafından düzenlenebilir.
 
-Çalışma kitapları gibi senaryolar için yararlıdır:
+Çalışma kitapları şu senaryolar için yararlıdır:
 
-* Sanal makinenizin kullanım, ilgilendiğiniz ölçümleri önceden bilmediğinizde keşfetme: CPU kullanımı, disk alanı, bellek, ağ bağımlılıklarını, vs. Başka kullanım analizi Araçları çalışma kitapları, birden çok türde görselleştirmeler ve analizleri, bu tür bir serbest biçimli araştırması için harika yönetilmelerini birleştirmek olanak tanır.
-* Takımınız için son sağlanan bir VM, anahtar sayaçları ve diğer günlük olayları için ölçümleri göstererek performansıyla açıklayan.
-* Sanal makinenizin yeniden boyutlandırma bir deneme sonuçlarını diğer takım üyeleriyle paylaşma. Denemeyi metinle amaçlarını açıklayan ve ardından her kullanım ölçümü ve analiz sorguları Göster her ölçümü yukarıda veya aşağıda-hedefi olup için açık çağrı-çıkarmayı birlikte deneme değerlendirmek için kullanılır.
-* Kesinti etkisini vm'nizin gelecekte kesintileri önlemek için verileri, açıklama metnini ve sonraki adımları ayrıntılı bir birleştirme, kullanım raporlama.
+* Daha önce ilgilendiğiniz ölçümleri bilmiyorsanız sanal makinenizin kullanımını keşfetme: CPU kullanımı, disk alanı, bellek, ağ bağımlılıkları vb. Diğer kullanım analizi araçlarının aksine, çalışma kitapları birden çok görselleştirme ve analizler birleştirerek bu tür bir serbest biçim araştırması için harika hale getirir.
+* Son sağlanan VM 'nin nasıl çalıştığını açıklayan, anahtar sayaçları ve diğer günlük olayları için ölçümleri gösterir.
+* SANAL makinenizin yeniden boyutlandırma denemenizin sonuçlarını takımınızın diğer üyeleriyle paylaşma. Denemeye ilişkin hedefleri açıklayabileceğiniz için, her bir metriğin hedefin üstünde mi yoksa altında mı olduğunu gösteren açık çağrı durumuyla birlikte denemeyi değerlendirmek için kullanılan her kullanım ölçümünü ve analiz sorgularını gösterebilirsiniz.
+* SANAL makinenizin kullanımıyla ilgili bir kesinti oluşmasını, verileri, metin açıklamasını birleştirerek ve gelecekte kesintiye neden olan kesintileri önlemeye yönelik sonraki adımlara ilişkin bir tartışmayı raporlama.
 
-VM'ler için Azure İzleyici başlamanıza yardımcı olmak için birkaç çalışma kitaplarını içerir ve bunlar aşağıdaki tabloda özetlenmiştir.
+VM'ler için Azure İzleyici, başlamanızı sağlamak için birkaç çalışma kitabı içerir ve aşağıdaki tablo bunları özetler.
 
-| Çalışma kitabı | Açıklama | `Scope` |
+| Kitabının | Açıklama | Kapsam |
 |----------|-------------|-------|
-| Performans | Üst N listesi ve tüm etkin Log Analytics performans sayaçları yararlanan tek bir çalışma kitabı grafikler görünümünde özelleştirilebilir bir sürümü sağlar.| Uygun ölçekte |
-| Performans sayaçları | Üst N grafik görünümü arasında çok sayıda performans sayaçları. | Uygun ölçekte |
-| Bağlantılar | Bağlantıları, izlenen Vm'lerden gelen ve giden bağlantılara kapsamlı bir görünümünü sağlar. | Uygun ölçekte |
-| Etkin Bağlantı Noktaları | İzlenen Vm'leri ve seçilen bir zaman çerçevesinde etkinliklerini bağlantı noktalarına bağlı işlemlerin bir listesini sağlar. | Uygun ölçekte |
-| Açık Bağlantı Noktaları | Bağlantı noktalarının sayısı izlenen Vm'lerinizde açın ve Ayrıntılar Bu bağlantı noktalarını açma sağlar. | Uygun ölçekte |
-| Başarısız Bağlantılar | Başarısız bağlantı sayısı hatası eğilimi, izlenen Vm'leri görüntülemek ve hatalarının yüzdesini büyümediğini. | Uygun ölçekte |
-| Güvenlik ve Denetim | Genel bağlantılarda IP uç noktalarını genel bulunduğu kötü amaçlı bağlantıları, raporlar, TCP/IP'yi trafik analizi.  Tüm özellikleri etkinleştirmek için güvenlik algılanabilmesi gerekir. | Uygun ölçekte |
-| TCP Trafiği | İzlenen Vm'lerinizi ve bunların gönderilen, alınan ve toplam ağ kişilerinin sıralı bir rapor, bir kılavuzda trafiği ve bir eğilim çizgisi görüntülenir. | Uygun ölçekte |
-| Trafik Karşılaştırması | Bu çalışma kitaplarını tek bir makine ya da bir makine grubu için ağ trafiği eğilimleri karşılaştırmanıza olanak tanır. | Uygun ölçekte |
-| Performans | Tüm etkin Log Analytics performans sayaçları yararlanan bizim performans görünümü özelleştirilebilir bir sürümü sağlar. | Tek VM | 
-| Bağlantılar | Bağlantıları, sanal makineden gelen ve giden bağlantılara kapsamlı bir görünümünü sağlar. | Tek VM |
+| Performans | , Etkinleştirdiğiniz tüm Log Analytics performans sayaçlarından yararlanan tek bir çalışma kitabında En Iyi N liste ve grafik görünümümüzün özelleştirilebilir bir sürümünü sağlar.| Ölçekte |
+| Performans sayaçları | Çok sayıda performans sayacı üzerinde Ilk N grafik görünümü. | Ölçekte |
+| Bağlantılar | Bağlantılar, izlenen sanal makinelerinizden gelen ve giden bağlantıların derinlemesine bir görünümünü sağlar. | Ölçekte |
+| Etkin Bağlantı Noktaları | İzlenen sanal makinelerdeki bağlantı noktalarına ve bunların seçili zaman diliminde etkinliklerine bağlı işlemlerin bir listesini sağlar. | Ölçekte |
+| Açık Bağlantı Noktaları | İzlenen sanal makinelerinizdeki açık bağlantı noktası sayısını ve bu açık bağlantı noktalarıyla ilgili ayrıntıları sağlar. | Ölçekte |
+| Başarısız Bağlantılar | İzlenen sanal makinelerinizdeki başarısız bağlantı sayısını, başarısızlık eğilimi 'ni ve hata yüzdesinin zaman içinde arttığını görüntüleyin. | Ölçekte |
+| Güvenlik ve Denetim | Genel bağlantılarda, kötü amaçlı bağlantılardan ve IP uç noktalarının küresel olarak bulunduğu TCP/IP trafiğinizin analizi.  Tüm özellikleri etkinleştirmek için güvenlik algılamayı etkinleştirmeniz gerekir. | Ölçekte |
+| TCP Trafiği | Bir kılavuzda izlenen sanal makinelerinize ve gönderdikleri, alınmış ve toplam ağ trafiğine yönelik bir derecelendirilmiş rapor ve eğilim çizgisi olarak görüntülenen. | Ölçekte |
+| Trafik Karşılaştırması | Bu çalışma kitapları, tek bir makine veya makine grubu için ağ trafiği eğilimlerini karşılaştırmanızı sağlar. | Ölçekte |
+| Performans | , Etkinleştirdiğiniz tüm Log Analytics performans sayaçlarından yararlanan performans görünümümüzün özelleştirilebilir bir sürümünü sağlar. | Tek VM | 
+| Bağlantılar | Bağlantılar, sanal makinenizin gelen ve giden bağlantılarının derinlemesine bir görünümünü sağlar. | Tek VM |
  
-## <a name="starting-with-a-template-or-saved-workbook"></a>Bir şablonla başlayarak veya kaydedilmiş bir çalışma kitabı
+## <a name="starting-with-a-template-or-saved-workbook"></a>Şablon veya kaydedilmiş çalışma kitabından başlayarak
 
-Bir çalışma kitabı oluşan bağımsız olarak düzenlenebilir grafikleri, tablolar, metin, bölümlerini yapılır ve giriş denetimleri. Çalışma kitapları daha iyi anlamak için şimdi bir şablonu açarak işleme başlayın ve özel bir çalışma kitabı oluşturmada size yol. 
+Çalışma kitabı, bağımsız olarak düzenlenebilir grafiklerden, tablolardan, metinden ve giriş denetimlerinden oluşan bölümlerden oluşur. Çalışma kitaplarını daha iyi anlamak için, bir şablon açıp özel bir çalışma kitabı oluşturmaya ilerleyerek başlayalım. 
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
+1. [Azure Portal](https://portal.azure.com)’ında oturum açın.
 
-2. Seçin **sanal makineler**.
+2. **Sanal makineleri**seçin.
 
 3. Listeden bir VM seçin.
 
-4. VM sayfasında içinde **izleme** bölümünden **Insights (Önizleme)** .
+4. VM sayfasında, **izleme** bölümünde Öngörüler ' i **(Önizleme)** seçin.
 
-5. VM içgörüler sayfasında **performans** veya **haritalar** sekmesini seçip **görünümü çalışma kitapları** sayfasındaki bağlantıdan. 
+5. VM öngörüleri sayfasında **performans** veya **haritalar** sekmesini seçin ve sayfadaki bağlantıdan **çalışma kitaplarını görüntüle** ' yi seçin. 
 
-    ![Çalışma kitapları için Gezinti bölmesinin ekran görüntüsü](media/vminsights-workbooks/workbook-option-01.png)
+    ![Çalışma kitaplarına gezinmenin ekran görüntüsü](media/vminsights-workbooks/workbook-option-01.png)
 
-6. Aşağı açılan listesinden **Galerisine Git** listenin en üstündeki.
+6. Aşağı açılan listeden, listenin altındaki **Galeriye git** ' i seçin.
 
-    ![Çalışma kitabı aşağı açılan listesinin ekran görüntüsü](media/vminsights-workbooks/workbook-dropdown-gallery-01.png)
+    ![Çalışma kitabı açılır listesinin ekran görüntüsü](media/vminsights-workbooks/workbook-dropdown-gallery-01.png)
 
-    Çalışma kitabı Galerisi başlamanıza yardımcı olmak için önceden oluşturulmuş çalışma kitaplarını sayısı ile başlatılır.
+    Başlamanıza yardımcı olması için çalışma kitabı galerisini bir dizi önceden oluşturulmuş çalışma kitabıyla başlatır.
 
-7. İle başlayacağız **varsayılan şablon**, başlığı altında bulunan **Hızlı Başlangıç**.
+7. **Hızlı başlangıç**başlığı altında bulunan **varsayılan şablonla**başlayacağız.
 
-    ![Çalışma kitabı galeri görüntüsü](media/vminsights-workbooks/workbook-gallery-01.png)
+    ![Çalışma kitabı galerinin ekran görüntüsü](media/vminsights-workbooks/workbook-gallery-01.png)
 
-## <a name="editing-workbook-sections"></a>Çalışma kitabı bölümleri düzenleme
+## <a name="editing-workbook-sections"></a>Çalışma kitabı bölümlerini Düzenle
 
-Çalışma kitapları iki mod vardır: **düzenleme modunda**, ve **Okuma modunda**. Varsayılan şablon çalışma kitabı ilk kez başlatıldığında açılır **düzenleme modunda**. Bu, tüm adımlar ve aksi takdirde gizli parametreleri de dahil olmak üzere çalışma kitabının içeriğini gösterir. **Okuma Modu** Basitleştirilmiş rapor stil görünümünü sunar. Okuma Modu, yine de temel alınan mekanizması yalnızca birkaç tıklamayla ulaşabiliyoruz değiştirilmek üzere gerektiğinde yaparken bir raporu oluşturmaya giden karmaşıklığı hemen soyut olanak tanır.
+Çalışma kitaplarında iki mod vardır: **Düzen modu**ve **Okuma modu**. Varsayılan şablon çalışma kitabı ilk başlatıldığında, **Düzen modunda**açılır. Bu, başka bir şekilde gizlenen tüm adımlar ve parametreler dahil olmak üzere çalışma kitabının tüm içeriğini gösterir. **Okuma modu** , Basitleştirilmiş bir rapor stili görünümü sunar. Okuma modu, bir rapor oluşturma ile ilgili karmaşıklığın dışında, yalnızca değişiklik için gerektiğinde yalnızca birkaç tıklamayla oluşan bir rapor oluşturmaya yönelik karmaşıklığın ötede olmasını sağlar.
 
-![Azure İzleyici Vm'leri çalışma kitapları bölümün denetimleri düzenleme](media/vminsights-workbooks/workbook-new-workbook-editor-01.png)
+![VM'ler için Azure İzleyici çalışma kitapları bölümü Düzenle denetimleri](media/vminsights-workbooks/workbook-new-workbook-editor-01.png)
 
-1. Bitirdiğinizde bir bölümünü Düzenleyen, tıklayın **düzenleme Bitti** bölümünün sol alt köşedeki.
+1. Bir bölümü düzenlemenizi bitirdiğinizde, bölümünün sol alt köşesinde bulunan **Düzenle** ' ye tıklayın.
 
-2. Bir bölümün bir kopyasını oluşturmak için tıklayın **bu bölümü kopyalayın** simgesi. Yinelenen bölümleri oluşturmak, önceki yinelemelerin kaybetmeden bir sorgu üzerinde gezinmek için yol için harika bir işlemdir.
+2. Bir bölümün bir kopyasını oluşturmak için **Bu bölümü Kopyala** simgesine tıklayın. Yinelenen bölümler oluşturmak, önceki yinelemeleri kaybetmeden bir sorgu üzerinde yinelemek için harika bir yoldur.
 
-3. Bir çalışma kitabı bir bölümde yukarı taşımak için tıklatın **Yukarı Taşı** veya **Aşağı Taşı** simgesi.
+3. Çalışma kitabındaki bir bölümü yukarı taşımak için **Yukarı taşı** veya **aşağı taşı** simgesine tıklayın.
 
-4. Bir bölümün kalıcı olarak kaldırmak için tıklayın **Kaldır** simgesi.
+4. Bir bölümü kalıcı olarak kaldırmak için **Kaldır** simgesine tıklayın.
 
-## <a name="adding-text-and-markdown-sections"></a>Metin ve Markdown bölümleri ekleme
+## <a name="adding-text-and-markdown-sections"></a>Metin ve Markaşağı bölümleri ekleme
 
-Başlıklarını, açıklamaları ve yorum, çalışma kitaplarına ekleme yardımcı tablolar ve grafikler bir dizi bir anlatım açın. Çalışma kitapları destek metin bölümlerinde [Markdown söz dizimi](https://daringfireball.net/projects/markdown/) başlıklar, kalın, italik ve madde işaretli listeler gibi biçimlendirme metin.
+Çalışma kitaplarınıza başlıklar, açıklamalar ve yorum eklemek, bir dizi tablo ve grafiği bir anlatıcı haline dönüştürmenize yardımcı olur. Çalışma kitaplarındaki metin bölümleri, metin biçimlendirme için başlıklar, kalın, italik ve madde işaretli listeler gibi [markı sözdizimini](https://daringfireball.net/projects/markdown/) destekler.
 
-Bir metin bölümüne çalışma kitabınıza eklemek için **metin eklemek** çalışma kitabını sayfanın alt kısmında veya herhangi bir bölümü altındaki düğmeyi.
+Çalışma kitabınıza bir metin bölümü eklemek için, çalışma kitabının alt kısmındaki veya herhangi bir bölümün altındaki **metin ekle** düğmesini kullanın.
 
 ## <a name="adding-query-sections"></a>Sorgu bölümleri ekleme
 
-![Sorgu bölümünde çalışma kitapları](media/vminsights-workbooks/005-workbook-query-section.png)
+![Çalışma kitaplarında sorgu bölümü](media/vminsights-workbooks/005-workbook-query-section.png)
 
-Çalışma kitabınıza sorgu bölümü eklemek için **Sorgu Ekle** çalışma kitabını alt kısmındaki ya da herhangi bir bölümü altındaki düğmesi.
+Çalışma kitabınıza sorgu bölümü eklemek için, çalışma kitabının alt kısmındaki **Sorgu Ekle** düğmesini ya da herhangi bir bölümün alt kısmını kullanın.
 
-Sorgu bölümler son derece esnektir ve aşağıdaki gibi sorulara yanıt için kullanılabilir:
+Sorgu bölümleri son derece esnektir ve şunun gibi soruları yanıtlamak için kullanılabilir:
 
-* Ağ trafiği bir artış ile aynı süre boyunca my CPU kullanımı nasıldı?
-* Geçen ay kullanılabilir disk alanı eğilimi neydi?
-* Ağ bağlantısı hataları kaç tane sanal Makinem son iki hafta boyunca denediniz mi? 
+* Ağ trafiğinden bir artış ile aynı süre boyunca CPU kullanımım nasıl?
+* Son ayda kullanılabilir disk alanı eğilimi nedir?
+* Son iki hafta içinde VM deneyimimin kaç ağ bağlantı hatasından oluşması? 
 
-Siz de yalnızca sınırlı değildir, sanal makinenin bağlamdan sorgulama kitabından başlattı. Bu kaynaklara erişim iznine sahip olduğu sürece birden çok sanal makinelerin yanı sıra Log Analytics çalışma alanları, sorgulayabilirsiniz.
+Ayrıca, çalışma kitabını başlattığınız sanal makine bağlamından sorgulanmayı da sınırlı değilsiniz. Bu kaynaklara erişim iznine sahip olduğunuz sürece, birden fazla sanal makinede sorgulama yapabilirsiniz ve Log Analytics çalışma alanları.
 
-Diğer Log Analytics çalışma alanları veya belirli bir Application Insights uygulamasını kullanarak verileri içerecek şekilde **çalışma** tanımlayıcısı. Kaynaklar arası sorguları hakkında daha fazla bilgi için bkz [resmi rehberlik](../log-query/cross-workspace-query.md).
+Diğer Log Analytics çalışma alanlarından veya **çalışma alanı** tanımlayıcısı kullanarak belirli bir Application Insights uygulamadan veri eklemek için. Çapraz kaynak sorguları hakkında daha fazla bilgi edinmek için [resmi kılavuza](../log-query/cross-workspace-query.md)bakın.
 
 ### <a name="advanced-analytic-query-settings"></a>Gelişmiş analitik sorgu ayarları
 
-Her bölüm ayarları erişilebilir kendi Gelişmiş ayarları olan ![çalışma kitapları bölümünde düzenleme denetimleri](media/vminsights-workbooks/006-settings.png) simgesi sağında bulunan **parametreleri ekleme** düğmesi.
+Her bölümde kendi gelişmiş ayarları bulunur ve bu ayarlar ![çalışma kitapları bölüm bölümü Düzenle](media/vminsights-workbooks/006-settings.png) simgesi **parametre Ekle** düğmesinin sağında bulunur.
 
-![Azure İzleyici Vm'leri çalışma kitapları bölümün denetimleri düzenleme](media/vminsights-workbooks/007-settings-expanded.png)
+![VM'ler için Azure İzleyici çalışma kitapları bölümü Düzenle denetimleri](media/vminsights-workbooks/007-settings-expanded.png)
 
 |         |          |
 | ---------------- |:-----|
-| **Özel bir genişlik**    | Daha iyi grafikler ve tablolar etkileşimli zengin raporlar düzenlemenize olanak sağlayan tek bir satırda öğe sayısını sığacak şekilde rastgele boyutu, bir öğe sağlar.  |
-| **Koşullu olarak görünür** | Okuma modunda olduğunda bir parametresini temel alan adımları gizlemek için bu seçeneği belirtin. |
-| **Parametreyi Dışarı Aktar**| Kılavuz veya değerleri değiştirmesini veya görünür olmasını için sonraki adımları neden grafik seçili bir satır izin verir.  |
-| **Düzenlenmediği sırada sorguyu Göster** | Grafiğe veya tabloya bile yukarıdaki sorgunun Okuma modunda olduğunda görüntüler.
-| **Düzenlenmediği sırada analiz düğmesi açık Göster** | Tek tıklamayla erişim izni vermek için grafiğin sağ köşesinde için mavi Analytics simgesi ekler.|
+| **Özel genişlik**    | Bir öğe rastgele bir boyut oluşturur, böylece grafikleri ve tablolarınızı zengin etkileşimli raporlarda daha iyi düzenlemenizi sağlayabilirsiniz.  |
+| **Koşullu olarak görünür** | Okuma modundayken bir parametreye göre adımları gizlemek için belirtin. |
+| **Bir parametreyi dışarı aktarma**| Kılavuzda veya grafikte seçili bir satırın, sonraki adımların değer değiştirmesine veya görünür hale gelmesine neden olmasını sağlar.  |
+| **Düzenlenmediğinden sorguyu göster** | Okuma modundayken bile grafiğin veya tablonun üzerindeki sorguyu görüntüler.
+| **Düzenlenmediğinden Analytics 'te aç düğmesini göster** | Tek tıklamayla erişime izin vermek için grafiğin sağ köşesine mavi analiz simgesini ekler.|
 
-Bu ayarların birçoğu oldukça kolay anlaşılır ancak anlamak için **parametreyi dışarı aktar** bir çalışma kitabı incelemek iyidir yapar bu işlevi kullanın.
+Bu ayarların çoğu oldukça sezgisel, ancak **bir parametreyi dışarı aktarmayı** anlamak için bu işlevi kullanan bir çalışma kitabını incelemek daha iyidir.
 
-Önceden oluşturulmuş çalışma kitaplarını - birini **TCP trafiği**, bir VM'den bağlantı ölçümü hakkında bilgi sağlar.
+Önceden oluşturulmuş çalışma kitaplarından biri olan **TCP trafiğinden**, bir VM 'den gelen bağlantı ölçümleri hakkında bilgi sağlanır.
 
-Çalışma kitabı ilk bölümü, günlük veri temel alır. İkinci bölüm de günlük sorgu verilere dayalı, ancak ilk tabloda bir satır seçilmesi grafikleri içeriğini etkileşimli olarak güncelleştirir:
+Çalışma kitabının ilk bölümü günlük sorgusu verilerini temel alır. İkinci bölüm de günlük sorgu verilerine dayalıdır, ancak ilk tablodaki bir satırı seçmek, grafiklerin içeriğini etkileşimli olarak güncelleştirir:
 
-![Azure İzleyici Vm'leri çalışma kitapları bölümün denetimleri düzenleme](media/vminsights-workbooks/008-workbook-tcp-traffic.png)
+![VM'ler için Azure İzleyici çalışma kitapları bölümü Düzenle denetimleri](media/vminsights-workbooks/008-workbook-tcp-traffic.png)
 
-Davranıştır aracılığıyla olası **bir öğe seçildiğinde, parametreyi dışarı aktar** Gelişmiş tablonun günlük sorgusu içinde etkin olan ayarlar.
+Bir öğe seçildiğinde, tablonun günlük sorgusunda etkinleştirilen **bir parametre gelişmiş ayarlarını dışarı aktarmak** için davranış mümkündür.
 
-![Azure İzleyici Vm'leri çalışma kitapları bölümün denetimleri düzenleme](media/vminsights-workbooks/009-settings-export.png)
+![VM'ler için Azure İzleyici çalışma kitapları bölümü Düzenle denetimleri](media/vminsights-workbooks/009-settings-export.png)
 
-Ardından bölüm başlığı ve grafikleri tarafından kullanılan değerleri kümesi oluşturmak için bir satır seçili olduğunda ikinci günlük sorgusu sonra verilen değerleri kullanır. Hiçbir satır seçilirse, grafikler ve bölüm başlığı gizler. 
+İkinci günlük sorgusu daha sonra bölüm başlığı ve grafikler tarafından kullanılan bir değer kümesi oluşturmak için bir satır seçildiğinde, bu değerleri kullanır. Hiçbir satır seçilmezse, bölüm başlığını ve grafiklerini gizler. 
 
-Örneğin, İkinci bölüm içindeki gizli parametre Kılavuz Seçilen satırdan şu başvuruyu kullanır:
+Örneğin, ikinci bölümdeki Hidden parametresi, kılavuzda seçili olan satırdaki şu başvuruyu kullanır:
 
 ```
 VMConnection
@@ -146,58 +140,58 @@ VMConnection
 | summarize Sent = sum(BytesSent), Received = sum(BytesReceived) by bin(TimeGenerated, {TimeRange:grain})
 ```
 
-## <a name="adding-metrics-sections"></a>Ölçümleri bölümleri ekleme
+## <a name="adding-metrics-sections"></a>Ölçüm bölümleri ekleme
 
-Ölçümleri bölümleri etkileşimli raporlarınızda içeri Azure İzleyici ölçüm verilerini birleştirmek için tam erişim verin. VM'ler için Azure İzleyici'de önceden oluşturulmuş çalışma kitaplarını genellikle ölçüm verileri yerine analitik sorgu verilerini içerir.  Ölçüm verileri ile çalışma kitaplarını oluşturmak, her iki özelliği en iyi şekilde tek bir yerde yararlanmaya olanak tanıyan seçebilirsiniz. Ayrıca, erişiminiz olan Aboneliklerde kaynaklardan gelen ölçüm verilerini çekin olanağı vardır.
+Ölçüm bölümleri, Azure Izleyici ölçüm verilerini etkileşimli raporlarınıza katmak için size tam erişim sağlar. VM'ler için Azure İzleyici, önceden oluşturulmuş çalışma kitapları tipik olarak ölçüm verileri yerine analitik sorgu verileri içerir.  Ölçüm verileriyle çalışma kitapları oluşturmayı tercih edebilirsiniz, böylece her iki özellikten en iyi şekilde tek bir yerde yararlanmanızı sağlayabilirsiniz. Ayrıca, erişiminiz olan aboneliklerdeki kaynaklardan ölçüm verilerini çekme olanağınız da vardır.
 
-Sanal makine verilerinin kılavuz görselleştirme CPU performans sağlamak için bir çalışma kitabına çekilen bir örnek aşağıda verilmiştir:
+Aşağıda, bir çalışma kitabına eklenen ve CPU performansının kılavuz bir görselleştirmesi sağlayan sanal makine verilerinin bir örneği verilmiştir:
 
-![Azure İzleyici Vm'leri çalışma kitapları bölümün denetimleri düzenleme](media/vminsights-workbooks/010-metrics-grid.png)
+![VM'ler için Azure İzleyici çalışma kitapları bölümü Düzenle denetimleri](media/vminsights-workbooks/010-metrics-grid.png)
 
 ## <a name="adding-parameter-sections"></a>Parametre bölümleri ekleme
 
-Çalışma kitabı parametreleri sorgu veya metin bölümleri el ile düzenlemek zorunda kalmadan değerleri çalışma kitabında değiştirmenize izin verir. Bu, temel alınan analytics sorgu dili anlamanıza gerek kalmadan gerekliliğini ortadan kaldırır ve çalışma kitabı tabanlı raporlama olası hedef kitle büyük ölçüde genişletir.
+Çalışma kitabı parametreleri, sorgu veya metin bölümlerini el ile düzenlemeniz gerekmeden çalışma kitabındaki değerleri değiştirmenize izin verir. Bu, temel analiz sorgu dilini anlamaya gerek gereksinimini ortadan kaldırır ve çalışma kitabı tabanlı raporlamanın potansiyel kitlelerini büyük ölçüde genişletir.
 
-Parametre değerlerini sorgu, metin veya diğer parametre bölümleri gibi köşeli ayraçlar parametrenin adını koyarak değiştirilir ``{parameterName}``. Parametre adları benzer kurallara JavaScript tanımlayıcıları, alfabetik bir karakter veya alt çizgi, ardından alfasayısal karakterler veya alt çizgi sınırlıdır. Örneğin, **a1** izin verilir, ancak **1a** izin verilmiyor.
+Parametre değerleri, ``{parameterName}`` gibi küme ayraçları içine yerleştirerek sorgu, metin veya diğer parametre bölümlerinde yer alır. Parametre adları, JavaScript tanımlayıcıları, alfabetik karakterler veya alt çizgiler, ardından alfasayısal karakterler veya alt çizgiler ile benzer kurallarla sınırlıdır. Örneğin, **a1** 'ye izin verilir, ancak **1a** buna izin verilmez.
 
-Çalışma kitabının En üstten başlayarak ve sonraki adımları aşağı akan doğrusal parametrelerdir.  Bir çalışma kitabında olarak bildirilen parametreleri, daha önce bildirilen parametreleri geçersiz kılabilirsiniz. Bu sorgular daha önce tanımlanan parametreler değerlere erişmek için kullandığınız parametre de sağlar. Bir parametrenin adım içinde kendisi de burada aynı o adımda daha önce bildirilen bir parametre sağa parametreleri güvenebileceğiniz soldan sağa doğrusal parametrelerdir.
+Parametreler doğrusal, bir çalışma kitabının üstünden başlayıp daha sonraki adımlara akar.  Daha sonra bir çalışma kitabında bildirildiği parametreler, daha önce belirtilen parametreleri geçersiz kılabilir. Bu Ayrıca, daha önce tanımlanan parametrelerden değerlere erişmek için sorgular kullanan parametrelere izin verir. Bir parametrenin adımının kendisi içinde, parametreler aynı adımda daha önce belirtilen bir parametreye bağlı olabileceği gibi, parametreler de doğrusal, soldan sağa doğru yapılır.
  
-Şu anda desteklenen parametreler, dört farklı tür vardır:
+Şu anda desteklenen dört farklı parametre türü vardır:
 
 |                  |      |
 | ---------------- |:-----|
-| **Text**    | Bir metin kutusu düzenlemesine olanak tanır ve isteğe bağlı olarak, varsayılan değeri doldurmak için bir sorgu sağlayabilirsiniz. |
-| **Açılan menü** | Kullanıcının bir değerler kümesinden seçmesine izin verir. |
-| **Zaman aralığı Seçici**| Önceden tanımlı bir zaman aralığı değerleri kümesinden seçin veya bir özel zaman aralığı seçin izin verir.|
-| **Kaynak Seçici** | Çalışma kitabı için seçilen kaynakları arasından seçim izin verir.|
+| **Metin**    | Kullanıcının bir metin kutusunu düzenlemesine izin verir ve isteğe bağlı olarak varsayılan değeri dolduracak bir sorgu sağlayabilirsiniz. |
+| **Açılır liste** | Kullanıcının bir değer kümesinden seçmesine izin verir. |
+| **Zaman aralığı seçici**| Kullanıcının önceden tanımlanmış bir zaman aralığı değerleri kümesinden seçmesine izin verir veya özel bir zaman aralığından seçim yapmasına olanak tanır.|
+| **Kaynak seçici** | Kullanıcının çalışma kitabı için seçilen kaynaklardan seçmesine izin verir.|
 
-### <a name="using-a-text-parameter"></a>Bir metin parametresini kullanma
+### <a name="using-a-text-parameter"></a>Metin parametresi kullanma
 
-Değeri metin kutusuna bir kullanıcı türleri kaçış veya Alıntısı, doğrudan sorgusunda değiştirilir. Gereksinim duyduğunuz değer bir dize ise, sorgu parametresi tırnak olmalıdır (gibi **'{parameter}'** ).
+Metin kutusundaki Kullanıcı türlerinin değeri, kaçış veya tırnak içine alma olmadan doğrudan sorguda yer alır. İhtiyacınız olan değer bir dize ise, sorgunun parametre etrafında tırnak işareti olmalıdır ( **' {Parameter} '** gibi).
 
-Metin parametresi herhangi bir kullanılmak üzere bir metin kutusundaki değeri verir. Tablo adı, sütun adı, işlev adı, işleç, vb. olabilir.  Bir ayar metin typ parametru **varsayılan değeri analiz sorgusundan Al**, metin kutusuna için varsayılan değer doldurmak için bir sorgu kullanılacak çalışma kitabı yazarı sağlar.
+Metin parametresi bir metin kutusundaki değerin her yerde kullanılmasına izin verir. Tablo adı, sütun adı, işlev adı, işleç vb. olabilir.  Metin parametre türü, **analiz sorgusundan varsayılan değeri Al**ayarına sahiptir ve bu, çalışma kitabı yazarının bu metin kutusu için varsayılan değeri doldurmak üzere bir sorgu kullanmasına izin verir.
 
-(Satır 0, 0 sütun) ilk satırın yalnızca ilk değer, bir günlük sorgusu varsayılan değerden kullanırken, varsayılan değer olarak kullanılır. Bu nedenle, yalnızca bir satır ve bir sütun döndürmek için sorguyu sınırlamak için önerilir. Sorgu tarafından döndürülen diğer veriler yoksayılır. 
+Bir günlük sorgusundan varsayılan değeri kullanırken, varsayılan değer olarak yalnızca ilk satırın ilk değeri (satır 0, sütun 0) kullanılır. Bu nedenle, sorgunuzu yalnızca bir satır ve bir sütun döndürecek şekilde sınırlandırmaya önerilir. Sorgu tarafından döndürülen diğer veriler yok sayılır. 
 
-Her sorgunun döndürdüğü değer doğrudan hiçbir kaçış veya Alıntısı ile değiştirilecek. Sorgu hiçbir satır döndürürse, parametre sonuçları (parametre gerekli değilse), boş bir dize olan veya (parametre gerekli ise) tanımlı değil.
+Sorgunun döndürdüğü değer, doğrudan kaçış veya tırnak işareti olmadan değişir. Sorgu hiçbir satır döndürürse, parametrenin sonucu boş bir dizedir (parametre gerekli değilse) ya da tanımsız (parametre gerekliyse).
 
-### <a name="using-a-drop-down"></a>Bir açılan kullanma
+### <a name="using-a-drop-down"></a>Açılan bir liste kullanma
 
-Açılan parametre türü, bir açılır denetimi oluşturmak, bir veya daha çok değerlerin seçilmesine olanak verecek sağlar.
+Açılan parametre türü, bir veya daha fazla değer seçimine izin veren bir açılan denetim oluşturmanıza olanak sağlar.
 
-Açılan günlük sorgusu veya JSON doldurulur. Sorgu bir sütun döndürürse, bu sütundaki değerleri hem değer hem de açılır denetimin etiketinde ' dir. Sorgu iki sütun döndürürse, ilk sütun değeridir ve ikinci sütun, açılan menü gösterilen etiketidir. Sorgu üç sütun döndürürse, üçüncü sütunda, açılan varsayılan seçimi göstermek için kullanılır. Bu sütun her türlü olabilir, ancak basit bool veya sayısal türler, burada 0 false ve 1 true kullanmaktır.
+Açılan menü, bir günlük sorgusu veya JSON ile doldurulur. Sorgu bir sütun döndürürse, bu sütundaki değerler hem değer hem de açılan denetimdeki etikettir. Sorgu iki sütun döndürürse, ilk sütun değerdir ve ikinci sütun açılan kutuda gösterilen etikettir. Sorgu üç sütun döndürürse, üçüncü sütun bu açılan kutuda varsayılan seçimi göstermek için kullanılır. Bu sütun herhangi bir tür olabilir, ancak en basit değer bool veya sayısal türler kullanmaktır; burada 0, false, 1 ise doğrudur.
 
-Sütun bir dize türü ise, null veya boş dize false olarak kabul edilir ve başka bir değer true olarak değerlendirilir. Tek seçim açılır listeleri için varsayılan seçim true değerine sahip ilk değer kullanılır.  Birden çok seçimi açılan listeler için varsayılan seçili kümesi olarak true değerine sahip tüm değerleri kullanılır. Açılır öğelerde hangi sırada satırları sorgu döndürülen gösterilmektedir. 
+Sütun bir dize türü ise, null/boş dize yanlış olarak değerlendirilir ve diğer tüm değerler doğru olarak değerlendirilir. Tek seçim açılan listeleri için, true değeri olan ilk değer varsayılan seçim olarak kullanılır.  Çoklu seçim açılan listeleri için, true değeri olan tüm değerler varsayılan seçili küme olarak kullanılır. Açılır öğelerdeki öğeler, sorgunun satırları döndürdüğü sırada gösterilir. 
 
-Bağlantılara genel bakış raporu mevcut parametreler bakalım. Düzenle simgesini tıklayın **yönü**.
+Bağlantılara Genel Bakış raporunda bulunan parametrelere göz atalım. **Yön**seçeneğinin yanındaki Düzenle simgesine tıklayın.
 
-![Azure İzleyici Vm'leri çalışma kitapları bölümün denetimleri düzenleme](media/vminsights-workbooks/011-workbook-using-dropdown.png)
+![VM'ler için Azure İzleyici çalışma kitapları bölümü Düzenle denetimleri](media/vminsights-workbooks/011-workbook-using-dropdown.png)
 
-Bu başlatacak **Düzenle parametresi** menü öğesi.
+Bu işlem **parametre Düzenle** menü öğesini başlatacaktır.
 
-![Azure İzleyici Vm'leri çalışma kitapları bölümün denetimleri düzenleme](media/vminsights-workbooks/012-workbook-edit-parameter.png)
+![VM'ler için Azure İzleyici çalışma kitapları bölümü Düzenle denetimleri](media/vminsights-workbooks/012-workbook-edit-parameter.png)
 
-JSON içerikle doldurulur rastgele bir tablo oluşturmanıza olanak sağlar. Örneğin, aşağıdaki JSON iki değer açılan menü oluşturur:
+JSON, içerikle doldurulmuş rastgele bir tablo oluşturmanıza olanak sağlar. Örneğin, aşağıdaki JSON açılan kutuda iki değer oluşturur:
 
 ```
 [
@@ -206,7 +200,7 @@ JSON içerikle doldurulur rastgele bir tablo oluşturmanıza olanak sağlar. Ör
 ]
 ```
 
-Daha uygun bir örnek, bir dizi performans sayacı adına göre seçmek için bir açılan kullanıyor:
+Daha uygun bir örnek, bir performans sayaçları kümesinden ada göre seçim yapmak için açılan bir örnek kullanmaktır:
 
 ```
 Perf
@@ -215,41 +209,44 @@ Perf
 | project Counter = pack('counter', CounterName, 'object', ObjectName), CounterName, group = ObjectName
 ```
 
-Sorgu sonuçları aşağıdaki gibi görüntülenir:
+Sorgu sonuçları şu şekilde görüntüler:
 
-![Performans sayacı açılır](media/vminsights-workbooks/013-workbook-edit-parameter-perf-counters.png)
+![Performans sayacı açılan kutusu](media/vminsights-workbooks/013-workbook-edit-parameter-perf-counters.png)
 
-Açılan listeler özelleştirme ve etkileşimli raporlar oluşturmak için son derece güçlü araçlardır.
+Açılır listeler, etkileşimli raporları özelleştirmeye ve oluşturmaya yönelik inanılmaz güçlü araçlardır.
 
 ### <a name="time-range-parameters"></a>Zaman aralığı parametreleri
 
-Kendi özel zaman aralığı parametresi açılan parametre türü aracılığıyla yapabilirsiniz, ancak aynı derecede esnekliğe ihtiyacınız yoksa kullanıma hazır zaman aralığı parametre türü kullanabilirsiniz. 
+Açılan parametre türü aracılığıyla kendi özel zaman aralığı parametresini de yapabilirsiniz, ancak aynı esneklik derecesine gerek duymuyorsanız, kutudan çıkar zaman aralığı parametre türünü de kullanabilirsiniz. 
 
-Beş dakika veya Son 90 gün önce 15 varsayılan aralıklarını zaman aralığı parametre türleri vardır. Açık Başlat'ı seçin ve zaman aralığına ilişkin değerleri durdurmak rapor operatörü izin veren özel saat aralığı seçimine izin vermek için bir seçenek de mevcuttur.
+Zaman aralığı parametre türlerinde beş dakikadan son 90 güne kadar geçen 15 varsayılan Aralık vardır. Ayrıca, özel zaman aralığı seçimine izin veren bir seçenek de vardır. Bu, raporun işlecinin, zaman aralığı için açık başlatma ve durdurma değerlerini seçmesine olanak sağlar.
 
-### <a name="resource-picker"></a>Kaynak Seçici
+### <a name="resource-picker"></a>Kaynak seçici
 
-Kaynak Seçici parametre türü, bazı kaynak türleri için raporun kapsamını olanağı sağlar. Kaynak Seçici türü yararlanan önceden oluşturulmuş bir çalışma kitabının bir örneğini **performans** çalışma kitabı.
+Kaynak seçici parametre türü, raporunuzu belirli kaynak türlerine göre kapsam yeteneği sağlar. Kaynak seçici türünü kullanan önceden oluşturulmuş bir çalışma kitabına bir örnek, **performans** çalışma kitabıdır.
 
-![Çalışma alanları açılır](media/vminsights-workbooks/014-workbook-edit-parameter-workspaces.png)
+![Çalışma alanları açılan kutusu](media/vminsights-workbooks/014-workbook-edit-parameter-workspaces.png)
 
-## <a name="saving-and-sharing-workbooks-with-your-team"></a>Kaydetme ve çalışma kitapları takımınızla paylaşma
+## <a name="saving-and-sharing-workbooks-with-your-team"></a>Çalışma kitaplarını ekibinizle kaydetme ve paylaşma
 
-Çalışma kitapları, Log Analytics çalışma alanı veya çalışma kitapları galeri nasıl eriştiğinize bağlı olarak bir sanal makine kaynağı kaydedilir. Çalışma kitabı için kaydedilebilir **raporlarım** , hem de özel bölümü **paylaşılmış olan raporlar** herkesin erişebileceği kaynağına erişimi olan bir bölüm. Kaynakta tüm çalışma kitaplarını görüntülemek için tıklayın **açık** eylem çubuğunda düğme.
+Çalışma kitapları, çalışma kitapları galerisine nasıl eriştiğinize bağlı olarak bir Log Analytics çalışma alanı veya bir sanal makine kaynağı içinde kaydedilir. Çalışma kitabı, size özel olan **Raporlarım** bölümüne veya kaynağa erişimi olan herkesin erişebileceği **paylaşılan raporlar** bölümünde kaydedilebilir. Kaynaktaki tüm çalışma kitaplarını görüntülemek için Eylem çubuğundaki **Aç** düğmesine tıklayın.
 
-Şu anda kullanımda bir çalışma kitabını paylaşmak için **raporlarım**:
+Şu anda **Raporlarım**bir çalışma kitabını paylaşmak için:
 
-1. Tıklayın **açık** eylem çubuğunda
-2. Paylaşmak istediğiniz çalışma kitabını yanındaki "…" düğmesine tıklayın
-3. Tıklayın **paylaşılan Raporlar'a Taşı**.
+1. Eylem çubuğunda **Aç** ' a tıklayın
+2. "..." Düğmesine tıklayın. paylaşmak istediğiniz çalışma kitabının yanındaki düğme
+3. **Paylaşılan raporlara taşı**' ya tıklayın.
 
-Bir çalışma kitabı bağlantısını içeren bir ya da e-posta ile paylaşmak için tıklatın **paylaşmak** eylem çubuğunda. Bağlantının alıcıları çalışma kitabını görüntülemek için Azure portalında bu kaynağa erişimi gerektiğini aklınızda bulundurun. Gereken en az alıcılar düzenlemeler yapmak için kaynak için katkıda bulunan izinleri.
+Bir çalışma kitabını bir bağlantı ile veya e-posta ile paylaşmak için, eylem çubuğunda **paylaşma** ' ya tıklayın. Bağlantı alıcılarının, çalışma kitabını görüntülemek için Azure portal bu kaynağa erişmesi gerektiğini aklınızda bulundurun. Düzenleme yapmak için, alıcıların kaynak için en az katkıda bulunan izinleri olması gerekir.
 
-Azure panosu için bir çalışma kitabı bağlantısını sabitlemek için:
+Bir Azure panosuna çalışma kitabına bir bağlantı sabitlemek için:
 
-1. Tıklayın **açık** eylem çubuğunda
-2. Sabitlemek istediğiniz çalışma kitabının yanındaki "…" düğmesine tıklayın
-3. Tıklayın **panoya Sabitle**.
+1. Eylem çubuğunda **Aç** ' a tıklayın
+2. "..." Düğmesine tıklayın. sabitlemek istediğiniz çalışma kitabının yanındaki düğme
+3. **Panoya sabitle**' ye tıklayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Sistem durumu özelliği kullanmayı öğrenmek için bkz: [Azure VM durumunu görüntüle](vminsights-health.md), veya bulunan Uygulama bağımlılıklarını görüntülemek için bkz. [Vm'leri harita görünümü Azure İzleyici](vminsights-maps.md). 
+
+- Sınırlamaları ve genel VM performansını belirlemek için bkz. [Azure VM performansını görüntüleme](vminsights-performance.md).
+
+- Bulunan uygulama bağımlılıkları hakkında bilgi edinmek için bkz. [VM'ler için Azure izleyici haritasını görüntüleme](vminsights-maps.md).

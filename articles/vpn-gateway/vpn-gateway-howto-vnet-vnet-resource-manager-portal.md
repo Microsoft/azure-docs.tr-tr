@@ -2,25 +2,17 @@
 title: Azure portalını kullanarak bir VNet-VNet VPN ağ geçidi bağlantısı yapılandırma | Microsoft Docs
 description: Resource Manager ve Azure portalı kullanarak sanal ağlar arasında VPN ağ geçidi bağlantısı oluşturun.
 services: vpn-gateway
-documentationcenter: na
 author: cherylmc
-manager: jpconnock
-editor: ''
-tags: azure-resource-manager
-ms.assetid: a7015cfc-764b-46a1-bfac-043d30a275df
 ms.service: vpn-gateway
-ms.devlang: na
 ms.topic: conceptual
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 12/03/2018
+ms.date: 09/24/2019
 ms.author: cherylmc
-ms.openlocfilehash: 94b32595cf2c884ccfd1362f6c8d03f542aabfc5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7ad83327d5b85784f523a5931f277cd00009e0ed
+ms.sourcegitcommit: 3f22ae300425fb30be47992c7e46f0abc2e68478
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62128390"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71266455"
 ---
 # <a name="configure-a-vnet-to-vnet-vpn-gateway-connection-by-using-the-azure-portal"></a>Azure portalını kullanarak bir VNet-VNet VPN ağ geçidi bağlantısı yapılandırma
 
@@ -39,7 +31,6 @@ Bu makaledeki adımlarda, Azure Resource Manager dağıtım modeli için geçerl
 > * [Farklı dağıtım modellerini bağlama - PowerShell](vpn-gateway-connect-different-deployment-models-powershell.md)
 >
 >
-
 
 ## <a name="about-connecting-vnets"></a>Sanal ağları bağlama hakkında
 
@@ -83,57 +74,55 @@ Bu makale, VNet-VNet bağlantı türünü kullanarak sanal ağları bağlama iş
 **Değerler TestVNet1 için:**
 
 - **Sanal ağ ayarları**
-    - **Ad**: Girin *TestVNet1*.
-    - **Adres alanı**: Girin *10.11.0.0/16*.
+    - **Ad**: *TestVNet1*girin.
+    - **Adres alanı**: *10.11.0.0/16*girin.
     - **Abonelik**: Kullanmak istediğiniz aboneliği seçin.
-    - **Kaynak grubu**: Girin *TestRG1*.
+    - **Kaynak grubu**: *TestRG1*girin.
     - **Konum**: **Doğu ABD**’yi seçin.
     - **Alt ağ**
-        - **Ad**: Girin *ön uç*.
-        - **Adres aralığı**: Girin *10.11.0.0/24*.
+        - **Ad**: *Ön uç*girin.
+        - **Adres aralığı**: *10.11.0.0/24*girin.
     - **Ağ geçidi alt ağı**:
-        - **Ad**: *GatewaySubnet* autofilled olduğu.
-        - **Adres aralığı**: Girin *10.11.255.0/27*.
-    - **DNS sunucusu**: Seçin **özel** ve DNS sunucunuzun IP adresini girin.
+        - **Ad**: *Gatewaysubnet* , oto doldurulur.
+        - **Adres aralığı**: *10.11.255.0/27*girin.
 
 - **Sanal ağ geçidi ayarları** 
-    - **Ad**: Girin *TestVNet1GW*.
-    - **Ağ geçidi türü**: Seçin **VPN**.
-    - **VPN türü**: Seçin **rota tabanlı**.
-    - **SKU**: SKU kullanmak istediğiniz ağ geçidi seçin.
-    - **Genel IP adresi adı**: Girin *Testvnet1gwıp*
+    - **Ad**: *Testvnet1gw öğesine*girin.
+    - **Ağ geçidi türü**: **VPN**' yi seçin.
+    - **VPN türü**: **Rota tabanlı**' ı seçin.
+    - **SKU**: Kullanmak istediğiniz ağ geçidi SKU 'sunu seçin.
+    - **Genel IP adresi adı**: *TestVNet1GWIP* girin
     - **bağlantı** 
-       - **Ad**: Girin *TestVNet1toTestVNet4*.
-       - **Paylaşılan anahtar**: Girin *abc123*. Paylaşılan anahtarı kendiniz oluşturabilirsiniz. Sanal ağlar arası bağlantı oluşturduğunuzda, değerlerin eşleşmesi gerekir.
+       - **Ad**: *TestVNet1toTestVNet4*girin.
+       - **Paylaşılan anahtar**: *Abc123*girin. Paylaşılan anahtarı kendiniz oluşturabilirsiniz. Sanal ağlar arası bağlantı oluşturduğunuzda, değerlerin eşleşmesi gerekir.
 
 **Değerler TestVNet4 için:**
 
 - **Sanal ağ ayarları**
-   - **Ad**: Girin *testvnet4'ü*.
-   - **Adres alanı**: Girin *10.41.0.0/16*.
+   - **Ad**: *TestVNet4*girin.
+   - **Adres alanı**: *10.41.0.0/16*girin.
    - **Abonelik**: Kullanmak istediğiniz aboneliği seçin.
-   - **Kaynak grubu**: Girin *TestRG4*.
-   - **Konum**: Seçin **Batı ABD**.
+   - **Kaynak grubu**: *TestRG4*girin.
+   - **Konum**: **Batı ABD**seçin.
    - **Alt ağ** 
-      - **Ad**: Girin *ön uç*.
-      - **Adres aralığı**: Girin *10.41.0.0/24*.
+      - **Ad**: *Ön uç*girin.
+      - **Adres aralığı**: *10.41.0.0/24*girin.
    - **GatewaySubnet** 
-      - **Ad**: *GatewaySubnet* autofilled olduğu.
-      - **Adres aralığı**: Girin *10.41.255.0/27*.
-   - **DNS sunucusu**: Seçin **özel** ve DNS sunucunuzun IP adresini girin.
+      - **Ad**: *Gatewaysubnet* , oto doldurulur.
+      - **Adres aralığı**: *10.41.255.0/27*girin.
 
 - **Sanal ağ geçidi ayarları** 
-    - **Ad**: Girin *TestVNet4GW*.
-    - **Ağ geçidi türü**: Seçin **VPN**.
-    - **VPN türü**: Seçin **rota tabanlı**.
-    - **SKU**: SKU kullanmak istediğiniz ağ geçidi seçin.
-    - **Genel IP adresi adı**: Girin *Testvnet4gwıp*.
+    - **Ad**: *TestVNet4GW*girin.
+    - **Ağ geçidi türü**: **VPN**' yi seçin.
+    - **VPN türü**: **Rota tabanlı**' ı seçin.
+    - **SKU**: Kullanmak istediğiniz ağ geçidi SKU 'sunu seçin.
+    - **Genel IP adresi adı**: *TestVNet4GWIP*girin.
     - **bağlantı** 
-       - **Ad**: Girin *TestVNet4toTestVNet1*.
-       - **Paylaşılan anahtar**: Girin *abc123*. Paylaşılan anahtarı kendiniz oluşturabilirsiniz. Sanal ağlar arası bağlantı oluşturduğunuzda, değerlerin eşleşmesi gerekir.
+       - **Ad**: *TestVNet4toTestVNet1*girin.
+       - **Paylaşılan anahtar**: *Abc123*girin. Paylaşılan anahtarı kendiniz oluşturabilirsiniz. Sanal ağlar arası bağlantı oluşturduğunuzda, değerlerin eşleşmesi gerekir.
 
 ## <a name="create-and-configure-testvnet1"></a>TestVNet1’i oluşturma ve yapılandırma
-Zaten bir sanal ağınız varsa, ayarların VPN ağ geçidi tasarımınızla uyumlu olduğunu doğrulayın. Diğer ağlarla çakışabilecek herhangi bir alt ağ olup olmadığına özellikle dikkat edin. Çakışan alt ağlarınız varsa bağlantınız düzgün çalışmaz. Vnet'inizi doğru ayarlarla yapılandırıldıktan sonra bir DNS sunucusu bölümü belirtin adımları uygulamaya başlayabilirsiniz.
+Zaten bir sanal ağınız varsa, ayarların VPN ağ geçidi tasarımınızla uyumlu olduğunu doğrulayın. Diğer ağlarla çakışabilecek herhangi bir alt ağ olup olmadığına özellikle dikkat edin. Çakışan alt ağlarınız varsa bağlantınız düzgün çalışmaz.
 
 ### <a name="to-create-a-virtual-network"></a>Sanal ağ oluşturmak için
 [!INCLUDE [vpn-gateway-basic-vnet-rm-portal](../../includes/vpn-gateway-basic-vnet-rm-portal-include.md)]
@@ -143,26 +132,15 @@ Sanal ağınız oluşturulduktan sonra ek adres alanı ekleyebilir ve alt ağ ol
 
 [!INCLUDE [vpn-gateway-additional-address-space](../../includes/vpn-gateway-additional-address-space-include.md)]
 
-## <a name="create-a-gateway-subnet"></a>Ağ geçidi alt ağı oluşturma
-Sanal ağınız için bir sanal ağ geçidi oluşturmadan önce ilk olarak ağ geçidi alt ağını oluşturmanız gerekir. Ağ geçidi alt ağı, sanal ağ geçidinin kullandığı IP adreslerini içerir. Mümkünse, gelecekteki ek yapılandırma gereksinimlerini karşılamaya yetecek sayıda IP adresine sağlamak için/28'i veya/27 CIDR bloğu kullanarak bir ağ geçidi alt ağı oluşturulması idealdir.
-
-Bu yapılandırmayı bir alıştırma olarak oluşturuyorsanız başvurun [örnek ayarları](#example-settings) ağ geçidi alt ağınızı oluştururken.
-
-[!INCLUDE [vpn-gateway-no-nsg](../../includes/vpn-gateway-no-nsg-include.md)]
-
-### <a name="to-create-a-gateway-subnet"></a>Bir ağ geçidi alt ağı oluşturmak için
-[!INCLUDE [vpn-gateway-add-gwsubnet-rm-portal](../../includes/vpn-gateway-add-gwsubnet-rm-portal-include.md)]
-
-## <a name="specify-a-dns-server-optional"></a>DNS sunucusu belirtme (isteğe bağlı)
-DNS, VNet-VNet bağlantıları için gerekli değildir. Ancak, sanal ağınıza dağıtılmış kaynaklar için ad çözümleme istiyorsanız bir DNS sunucusu belirtin. Bu ayar, bu sanal ağ için ad çözümlemede kullanmak istediğiniz DNS sunucusunu belirtmenizi sağlar. Bunu yapmak için bir DNS sunucusu oluşturmaz.
-
-[!INCLUDE [vpn-gateway-add-dns-rm-portal](../../includes/vpn-gateway-add-dns-rm-portal-include.md)]
-
 ## <a name="create-a-virtual-network-gateway"></a>Sanal ağ geçidi oluşturma
 Bu adımda sanal ağınız için sanal ağ geçidi oluşturacaksınız. Bir ağ geçidinin oluşturulması, seçili ağ geçidi SKU’suna bağlı olarak 45 dakika veya daha uzun sürebilir. Bu yapılandırmayı bir alıştırma olarak oluşturuyorsanız bkz [örnek ayarları](#example-settings).
 
+[!INCLUDE [About gateway subnets](../../includes/vpn-gateway-about-gwsubnet-portal-include.md)]
+
 ### <a name="to-create-a-virtual-network-gateway"></a>Bir sanal ağ geçidi oluşturmak için
 [!INCLUDE [vpn-gateway-add-gw-rm-portal](../../includes/vpn-gateway-add-gw-rm-portal-include.md)]
+
+[!INCLUDE [vpn-gateway-no-nsg](../../includes/vpn-gateway-no-nsg-include.md)]
 
 ## <a name="create-and-configure-testvnet4"></a>TestVNet4’ü oluşturma ve yapılandırma
 Testvnet1'i yapılandırdıktan sonra testvnet4'ü önceki adımları yineleyerek ve değerleri testvnet4'ü değerlerle değiştirerek oluşturun. TestVNet1 için sanal ağ geçidi testvnet4'ü yapılandırmadan önce oluşturma işlemlerinin tamamlanmasını beklemenize gerek yoktur. Kendi değerlerinizi kullanıyorsanız, tüm bağlanmak istediğiniz sanal ağ adres alanlarının çakışmadığından emin olun.
@@ -180,17 +158,17 @@ TestVNet1 ve TestVNet4 için sanal ağ geçidi oluşturma işlemleri tamamlandı
 
    - **Ad**: Bağlantınız için bir ad girin. Örnek: *TestVNet1toTestVNet4*.
 
-   - **Bağlantı türü**: Seçin **VNet-VNet** açılır listeden.
+   - **Bağlantı türü**: Açılan listeden VNET **-VNET** ' i seçin.
 
-   - **İlk sanal ağ geçidi**: Bu bağlantıyı belirtilen sanal ağ geçidinden oluşturduğunuz için bu alanın değeri otomatik olarak doldurulur.
+   - **İlk sanal ağ geçidi**: Bu bağlantıyı belirtilen sanal ağ geçidinden oluştururken bu alan değeri otomatik olarak doldurulur.
 
-   - **İkinci sanal ağ geçidi**: Bu alan için bir bağlantı oluşturmak istediğiniz sanal ağın sanal ağ geçidi olur. Seçin **başka bir sanal ağ geçidi seçin** açmak için **sanal ağ geçidi Seç** sayfası.
+   - **İkinci sanal ağ geçidi**: Bu alan, bağlantı oluşturmak istediğiniz VNet 'in sanal ağ geçidi olur. Seçin **başka bir sanal ağ geçidi seçin** açmak için **sanal ağ geçidi Seç** sayfası.
 
      - Bu sayfada listelenen sanal ağ geçitlerini görüntüleyin. Yalnızca aboneliğinizdeki sanal ağ geçitleri listelenir. Aboneliğinizde kullanmak olmayan bir sanal ağ geçidine bağlanmak istiyorsanız [PowerShell](vpn-gateway-vnet-vnet-rm-ps.md).
 
      - Bağlanmak istediğiniz sanal ağ geçidi seçin.
 
-     - **Paylaşılan anahtar (PSK)** : Bu alanda bağlantınız için bir paylaşılan anahtar girin. Bu anahtarı kendiniz üretebilir veya oluşturabilirsiniz. Siteden siteye bağlantı, kullanacağınız anahtarın şirket içi Cihazınızı ve sanal ağ geçidi bağlantınızı aynıdır. Başka bir sanal ağ geçidi için bağlantı kurduğunuz, kavram, yerine bir VPN cihazına bağlanmak dışında burada benzer.
+     - **Paylaşılan anahtar (PSK)** : Bu alana, bağlantınız için paylaşılan bir anahtar girin. Bu anahtarı kendiniz üretebilir veya oluşturabilirsiniz. Siteden siteye bağlantı, kullanacağınız anahtarın şirket içi Cihazınızı ve sanal ağ geçidi bağlantınızı aynıdır. Başka bir sanal ağ geçidi için bağlantı kurduğunuz, kavram, yerine bir VPN cihazına bağlanmak dışında burada benzer.
     
 4. Seçin **Tamam** yaptığınız değişiklikleri kaydedin.
 

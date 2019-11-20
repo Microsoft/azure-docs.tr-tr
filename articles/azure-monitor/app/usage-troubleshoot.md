@@ -1,59 +1,54 @@
 ---
-title: Kullanıcı davranış analizi araçları Azure Application ınsights sorunlarını giderme
-description: Sorun giderme kılavuzu - Application Insights ile site ve uygulama kullanımını analiz etme.
-services: application-insights
-documentationcenter: ''
-author: NumberByColors
-manager: carmonm
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights 'de Kullanıcı davranışı analiz araçlarının sorunlarını giderme
+description: Sorun giderme kılavuzu-Application Insights ile site ve uygulama kullanımını analiz etme.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: NumberByColors
+ms.author: daviste
 ms.date: 07/11/2018
 ms.reviewer: mbullwin
-ms.pm_owner: daviste;NumberByColors
-ms.author: daviste
-ms.openlocfilehash: eabc47c2acb33d8c6ee03477b5e8c7783edebbb7
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 9222f4611f87869c1bacf3084035c0ab9322fa40
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60371861"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899344"
 ---
-# <a name="troubleshoot-user-behavior-analytics-tools-in-application-insights"></a>Kullanıcı davranış analizi araçları Application ınsights sorunlarını giderme
-Hakkında sorularınız [kullanıcı davranış analizi araçları Application ınsights'ta](usage-overview.md): [Kullanıcılar, oturumlar, etkinlikler](usage-segmentation.md), [Huniler](usage-funnels.md), [kullanıcı akışları](usage-flows.md), [bekletme](usage-retention.md), veya Kohortlar? Bazı soruların yanıtları aşağıdadır.
+# <a name="troubleshoot-user-behavior-analytics-tools-in-application-insights"></a>Application Insights 'de Kullanıcı davranışı analiz araçlarının sorunlarını giderme
+[Application Insights ' deki Kullanıcı davranışı analizi araçları](usage-overview.md)hakkında sorularınız var: [Kullanıcılar, oturumlar, etkinlikler](usage-segmentation.md), [funyls](usage-funnels.md), [Kullanıcı akışları](usage-flows.md), [bekletme](usage-retention.md)veya cohorts İşte bazı yanıtlar.
 
-## <a name="counting-users"></a>Kullanıcı sayımı
-**Kullanıcı davranış analizi araçları, bir kullanıcı oturumunu Uygulamam var, ancak birçok kullanıcı oturumları uygulamamı sahip biliyorum gösterir. Bu yanlış sayım nasıl düzeltebilirim?**
+## <a name="counting-users"></a>Kullanıcıları sayma
+**Kullanıcı davranışı analiz araçları uygulamamın bir Kullanıcı/oturum olduğunu gösteriyor, ancak uygulamamın çok sayıda kullanıcı/oturum olduğunu biliyorum. Bu hatalı sayıları nasıl giderebilirim?**
 
-Application ınsights tüm telemetri olaylarını sahip bir [anonim kullanıcı kimliği](../../azure-monitor/app/data-model-context.md) ve [oturum kimliği](../../azure-monitor/app/data-model-context.md) iki standart özellikleri olarak. Varsayılan olarak, tüm kullanım analizi araçları, kullanıcılar ve bu kimliklerine göre çıkarak sayısı. Bu standart özellikler her kullanıcı ve uygulama oturumu için benzersiz kimlikler ile doldurulmasını olmayan kullanıcılar ve kullanım analizi araçları oturumlarda sayımının yanlış görürsünüz.
+Application Insights tüm telemetri olaylarının, standart özelliklerinden ikisi olarak [anonim bir kullanıcı kimliği](../../azure-monitor/app/data-model-context.md) ve [oturum kimliği](../../azure-monitor/app/data-model-context.md) vardır. Varsayılan olarak, tüm kullanım analizi araçları, kullanıcıları ve oturumları bu kimliklere göre sayar. Bu standart özellikler, uygulamanızın her bir kullanıcısı ve oturumu için benzersiz kimliklerle doldurulmazsa, Kullanım Analizi araçlarında yanlış Kullanıcı ve oturum sayısı görürsünüz.
 
-Bir web uygulaması izleme yapıyorsanız, kolay çözümü eklemek için ise [Application Insights JavaScript SDK'sı](../../azure-monitor/app/javascript.md) , uygulama ve emin için kod parçacığı izlemek istediğiniz her sayfada yüklenir. JavaScript SDK'yı otomatik olarak anonim kullanıcı ve oturum kimliklerini oluşturur ve ardından uygulamanızdan gönderilen gibi telemetri olayları bu kimlikleri ile doldurur.
+Bir Web uygulamasını izliyorsanız, en kolay çözüm [Application Insights JavaScript SDK 'sını](../../azure-monitor/app/javascript.md) uygulamanıza eklemektir ve komut dosyası parçacığının izlemek istediğiniz her sayfada yüklü olduğundan emin olun. JavaScript SDK 'Sı otomatik olarak anonim kullanıcı ve oturum kimliklerini oluşturur ve ardından, bu kimliklerle telemetri olaylarını, uygulamanızdan gönderildikleri şekilde doldurur.
 
-Bir web hizmeti (hiçbir kullanıcı arabirimi) izliyorsanız [anonim kullanıcı kimliği ve oturum kimliği özellikleri dolduran bir telemetri Başlatıcısı oluşturma](usage-send-user-context.md) göre benzersiz kullanıcı ve oturum hizmetinizin kavramları.
+Bir Web hizmetini (Kullanıcı arabirimi olmadan) izliyorsanız, [Anonim Kullanıcı kimliği ve oturum kimliği özelliklerini](usage-send-user-context.md) hizmetinizin benzersiz kullanıcı ve oturumlarınıza göre dolduran bir telemetri başlatıcısı oluşturun.
 
-Uygulamanızı gönderiyorsa [kimliği doğrulanmış kullanıcı kimlikleri](../../azure-monitor/app/api-custom-events-metrics.md#authenticated-users), bağlı olarak kimliği doğrulanmış kullanıcı kimlikleri kullanıcılar aracında güvenebilirsiniz. "Show" açılır menüden "Kimliği doğrulanan kullanıcılar" seçin
+Uygulamanız [kimliği doğrulanmış kullanıcı kimlikleri](../../azure-monitor/app/api-custom-events-metrics.md#authenticated-users)gönderiyorsa, kullanıcılar aracında kimliği doğrulanmış kullanıcı kimlikleri ' ne göre sayım yapabilirsiniz. "Göster" açılan menüsünde "kimliği doğrulanmış kullanıcılar" ı seçin.
 
-Kullanıcı davranış analizi araçları sayım kullanıcılar veya anonim kullanıcı kimliği, kimliği doğrulanmış kullanıcı kimliği veya oturum kimliği dışındaki özellikleri göre oturumları şu anda desteklenmiyor
+Kullanıcı davranışı analiz araçları şu anda anonim kullanıcı KIMLIĞI, kimliği doğrulanmış kullanıcı KIMLIĞI veya oturum KIMLIĞI dışındaki özelliklere göre kullanıcıları veya oturumları saymayı desteklememektedir.
 
-## <a name="naming-events"></a>Adlandırma olayları
-**Binlerce farklı sayfa görünümü ve özel olay adlarının Uygulamam var. Bunlar arasında ayrım yapmak zordur ve kullanıcı davranış analizi araçları genellikle yanıt veremez duruma gelebilir. Bu adlandırma sorunları nasıl düzeltebilirim?**
+## <a name="naming-events"></a>Olayları adlandırma
+**Uygulamamın binlerce farklı sayfa görünümü ve özel olay adı vardır. Aralarında ayrım yapmak zordur ve Kullanıcı davranışı analiz araçlarının çoğu zaman yanıt vermemeye başladı. Bu adlandırma sorunlarını nasıl giderebilirim?**
 
-Sayfa görünümü ve özel olay adlarının kullanıcı davranış analizi araçları kullanılır. Olayları da adlandırma değeri bu Araçları'ndan almak için önemlidir. Hedef arasında bir denge ise çok az sayıda, aşırı genel adlar ("tıklanan Button") sahip ve çok fazla aşırı belirli adları olan ("Düzenle düğmesine tıkladı http:\//www.contoso.com/index").
+Sayfa görünümü ve özel olay adları, Kullanıcı davranışı analiz araçları boyunca kullanılır. Bu araçlardan değer elde etmek için olayların adlandırılması iyi bir öneme sahiptir. Amaç çok az, fazla genel ad ("düğme tıklandı") ve çok fazla sayıda, aşırı özgü ada sahip (http 'de "Düzenle düğmesi tıklandı:\//www.contoso.com/index") arasında bir dengedir.
 
-Sayfa görünümü ve özel olay adlarının uygulamanızı göndermek için değişiklik yapmak için uygulamanızın kaynak kodu ve yeniden dağıtma değiştirmeniz gerekir. **Application Insights'ta verileri 90 gün boyunca saklanır ve silinemez tüm telemetri**, olay adları yaptığınız değişikliklerin tam listesi için 90 gün sürer. 90 ad değişiklikleri yaptıktan sonra gün için eski ve yeni olay adları telemetrinizi gösterilir, böylece sorguları ayarlamak ve takımlarınızın içinde uygun şekilde iletişim.
+Uygulamanızın gönderdiği sayfa görünümünde ve özel olay adlarında herhangi bir değişiklik yapmak için uygulamanızın kaynak kodunu değiştirmeniz ve yeniden dağıtmanız gerekir. **Application Insights 'Deki tüm telemetri verileri 90 gün boyunca depolanır ve silinemez**, böylece olay adlarında yaptığınız değişiklikler, tam olarak bildirimde bulunur 90 gün sürer. Ad değişikliklerinden sonra 90 gün boyunca, hem eski hem de yeni olay adları telemetrinizde görünür, bu nedenle sorguları ayarlayın ve ekipleriniz içinde iletişim kurun.
 
-Uygulamanız çok fazla sayfa görünümü adları gönderiyorsa, bu sayfanın görünüm adları kodda el ile belirtilen olup olmadığını veya bunlar otomatik olarak Application Insights JavaScript SDK tarafından gönderilen, kontrol edin:
+Uygulamanız çok fazla sayfa görünümü adı gönderiyorsa, Bu sayfa görünümü adlarının kodda el ile mi belirtilmediğini veya Application Insights JavaScript SDK 'Sı tarafından otomatik olarak gönderilip gönderilmediğini denetleyin:
 
-* Sayfa görünümü adları el ile kod kullanarak belirtilmezse [ `trackPageView` API](https://github.com/Microsoft/ApplicationInsights-JS/blob/master/API-reference.md), daha az belirgin olması için adı değiştirin. Sayfa görünümü adı URL koyarak gibi yaygın hataları kaçının. Bunun yerine, URL parametresi kullanın `trackPageView` API. Diğer ayrıntılar sayfa görünümü adından özel özelliklerini taşıyın.
+* Sayfa görünümü adları [`trackPageView` API](https://github.com/Microsoft/ApplicationInsights-JS/blob/master/API-reference.md)kullanılarak kodda el ile belirtilirse, adı daha az özel olacak şekilde değiştirin. URL 'YI Sayfa görünümünün adına yerleştirme gibi yaygın hatalardan kaçının. Bunun yerine, `trackPageView` API 'sinin URL parametresini kullanın. Sayfa görünümü adından diğer ayrıntıları özel özelliklere taşıyın.
 
-* Application Insights JavaScript SDK'sını otomatik olarak sayfa görünümü adları gönderiyorsa, sayfaların başlıkları değiştirebilir veya el ile sayfa görünümü adları nasıl geçiş yapabilirim. SDK gönderir [başlık](https://developer.mozilla.org/docs/Web/HTML/Element/title) sayfa görünümü adı varsayılan olarak her sayfanın. Daha fazla genel, ancak bu değişiklik sahip diğer etkiler ve SEO ve oluşturduğunu, başlıklar değiştirebilir. Sayfa görünümü el ile belirtme adları ile `trackPageView` API sayfa başlıklarının değiştirmeden daha genel adlar telemetri gönderebilir şekilde otomatik olarak toplanan adları geçersiz kılar.   
+* Application Insights JavaScript SDK 'Sı otomatik olarak sayfa görünümü adlarını gönderiyorsa, sayfa görünüm adlarını el ile göndermek için sayfalarınızın başlıklarını veya anahtarını değiştirebilirsiniz. SDK, her sayfanın [başlığını](https://developer.mozilla.org/docs/Web/HTML/Element/title) varsayılan olarak sayfa görünümü adı olarak gönderir. Başlıklarınızı daha genel olacak şekilde değiştirebilirsiniz, ancak bu değişiklik, bu değişikliğin sahip olduğu diğer etkileri ve diğer etkileri de olabilir. `trackPageView` API 'SI ile sayfa görünümü adlarını el ile belirtmek, otomatik olarak toplanan adları geçersiz kılar, bu nedenle, sayfa başlıklarını değiştirmeden telemetride daha fazla genel ad gönderebilirsiniz.   
 
-Uygulamanız çok sayıda özel olay adlarının gönderiyorsa, kodda daha az belirgin olacak şekilde değiştirin. Yeniden URL'ler ve diğer sayfa başına veya dinamik bilgi özel olay adları doğrudan eklemekten kaçının. Bunun yerine, özel olay ile özel özellikleri içine bu ayrıntıları Taşı `trackEvent` API. Örneğin, yerine, `appInsights.trackEvent("Edit button clicked on http://www.contoso.com/index")`, aşağıdakine benzer öneririz `appInsights.trackEvent("Edit button clicked", { "Source URL": "http://www.contoso.com/index" })`.
+Uygulamanız çok fazla özel olay adı gönderiyorsa, koddaki adı daha az özel olacak şekilde değiştirin. Bu durumda, URL 'Leri ve diğer sayfa başına ya da dinamik bilgileri doğrudan özel olay adlarına yerleştirmekten kaçının. Bunun yerine, bu ayrıntıları `trackEvent` API 'SI ile özel olayın özel özelliklerine taşıyın. Örneğin, `appInsights.trackEvent("Edit button clicked on http://www.contoso.com/index")`yerine `appInsights.trackEvent("Edit button clicked", { "Source URL": "http://www.contoso.com/index" })`gibi bir şey öneririz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Kullanıcı davranış analizi araçları genel bakış](usage-overview.md)
+* [Kullanıcı davranışı analiz araçlarına genel bakış](usage-overview.md)
 
 ## <a name="get-help"></a>Yardım alın
 * [Stack Overflow](https://stackoverflow.com/questions/tagged/ms-application-insights)

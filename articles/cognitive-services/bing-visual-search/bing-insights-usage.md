@@ -1,7 +1,7 @@
 ---
-title: Bing ınsights - Bing görsel arama örnekleri
+title: Bing Insights örnekleri-Bing Görsel Arama
 titleSuffix: Azure Cognitive Services
-description: Resim öngörüleri Bing.com üzerinde gösterilen örneklerini gösterir.
+description: Bu makalede, Bing Görsel Arama nasıl kullanabileceği ve Bing.com üzerinde görüntü öngörülerini görüntüleyebilen örnekler yer almaktadır.
 services: cognitive-services
 author: swhite-msft
 manager: nitinme
@@ -10,72 +10,72 @@ ms.subservice: bing-visual-search
 ms.topic: conceptual
 ms.date: 04/03/2019
 ms.author: scottwhi
-ms.openlocfilehash: 94f8d4ea98f42ad919597ef53dc63281825f0e6b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: df66dbeebb04209921ff91c4b99a14580f026718
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60610475"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74111644"
 ---
-# <a name="examples-of-bing-insights-usage"></a>Bing ınsights kullanım örnekleri
+# <a name="examples-of-bing-insights-usage"></a>Bing Öngörüler kullanım örnekleri
 
-Bu makale, Bing nasıl ve resim öngörüleri Bing.com üzerinde görüntülemek örnekleri içerir.
+Bu makalede, Bing 'in Bing.com üzerinde görüntü öngörülerini nasıl kullanabileceği ve görüntüleyeceği hakkında örnekler yer almaktadır.
 
-## <a name="pagesincluding-insight-example"></a>PagesIncluding Insight örneği
+## <a name="pagesincluding-insight-example"></a>Öngörüler Içeren Pagesexample
 
-Aşağıdaki ilk Web sayfasına bağlantı görüntüler ve kullanıcının genişletin ve görüntü içeren diğer Web sayfalarının listesini Daralt olanak tanır:
+Aşağıda ilk Web sayfasının bağlantısı görüntülenmektedir ve kullanıcının görüntüyü içeren diğer Web sayfalarının listesini genişletmesine ve daraltmaya izin verir:
 
-![Genişletilmiş sayfaları dahil olmak üzere](./media/pages-including.PNG)
+![Genişletilmiş sayfalar dahil](./media/pages-including.PNG)
 
 ## <a name="shoppingsources-insight-example"></a>ShoppingSources Insight örneği
 
-Aşağıdaki görüntüde görebileceğiniz ürünleri için alışveriş kaynakları Bing nasıl görüntüleyebilir gösterir:
+Aşağıda, Bing 'in görüntüde görülen ürünlere ait alışveriş kaynaklarını nasıl görüntüleyeceği gösterilmektedir:
 
 ![Alışveriş kaynakları](./media/shopping-sources.PNG)
 
 ## <a name="visualsearch-insight-example"></a>VisualSearch Insight örneği
 
-Bing görsel açıdan benzer resimler nasıl görüntüleyebilir, aşağıdaki gösterir (bkz **ilgili görüntüleri** örneğinde):
+Aşağıda, Bing 'in görsel açıdan benzer görüntüleri nasıl görüntüleyeceği gösterilmektedir (örnekteki **ilgili görüntüler** bölümüne bakın):
 
-![Görsel olarak benzer resimler](./media/similar-images.PNG)
+![Görsel olarak benzer görüntüler](./media/similar-images.PNG)
 
-## <a name="recipes-insight-example"></a>Tarif içeren Insight örneği
+## <a name="recipes-insight-example"></a>Tarifler öngörü örneği
 
-Aşağıdaki görüntüde gösterilen Gıda yönelik tarifleri Bing nasıl görüntüleyebilir gösterir. Örnek kullanıcının tarifleri kullanılabilir sağlar:
+Aşağıda, Bing 'in görüntüde gösterilen yiyecek için yemek tariflerini nasıl görüntüleyeceği gösterilmektedir. Örnek, kullanıcının kullanılabilir Tarifler olduğunu bilmesini sağlar:
 
-![Tarif içeren ve sayfalar dahil](./media/recipes-pages-including.PNG)
+![Dahil olan yemek tarifleri ve sayfalar](./media/recipes-pages-including.PNG)
 
- Kullanıcı listesi genişletirken tarifleri bağlantısını sağlar:
+ Ve Kullanıcı listeyi genişlediğinde yapılan Tarifler için bağlantı sağlar:
 
-![Genişletilmiş tarif sayfaları dahil olmak üzere](./media/expanded-recipes-pages-including.PNG)
+![Genişletilmiş tarif sayfaları dahil](./media/expanded-recipes-pages-including.PNG)
 
-## <a name="relatedsearches-insight-example"></a>RelatedSearches Insight örneği
+## <a name="relatedsearches-insight-example"></a>Relatedaramaları öngörü örneği
 
-Aşağıdaki Bing ilgili aramalar başkaları tarafından yapılan görüntülerinin nasıl görüntüleyebilir gösterir. Kullanıcı görüntüsü tıklarsa, kullanıcı için ilgili sorgu Bing.com/images arama sonuçları sayfası için alınır.
+Aşağıda, Bing 'in başkaları tarafından yapılan görüntülerle ilgili aramaları nasıl görüntüleyeceği gösterilmektedir. Kullanıcı görüntüye tıklarsa, Kullanıcı ilgili sorgu için Bing.com/images arama sonuçları sayfasına alınır.
 
 ![Görüntüler için ilgili aramalar](./media/bordered-related-searches.PNG)
 
-## <a name="entity-insight-example"></a>Varlık Insight örneği
+## <a name="entity-insight-example"></a>Entity Insight örneği
 
-Aşağıdaki görüntüde gösterilen varlık (kişi, yer veya bir şey) hakkında bilgi Bing nasıl görüntüleyebilir gösterir. Kullanıcının varlık bağlantıya tıklar, kullanıcı varlığı için Bing.com arama sonuçları sayfası için alınır:
+Aşağıda, Bing 'in görüntüde gösterilen varlık (kişi, yer veya şey) hakkındaki bilgileri nasıl görüntüleyeceği gösterilmektedir. Kullanıcı varlık bağlantısına tıkladığında, Kullanıcı varlık için Bing.com arama sonuçları sayfasına alınır:
 
 ![Görüntüde gösterilen varlık](./media/entity.PNG)
 
-## <a name="displaying-other-insights-that-the-user-might-explore"></a>Kullanıcı keşfedebilirsiniz diğer öngörüleri görüntüleme
+## <a name="displaying-other-insights-that-the-user-might-explore"></a>Kullanıcının keşfedebilecek diğer öngörüleri görüntüleme
 
-Aşağıdaki Bing kullanıcı keşfedebilirsiniz görüntü ile ilgili diğer bilgileri nasıl görüntüleyebilir gösterir.
+Aşağıda, Bing 'in kullanıcının keşfedebilecek görüntüyle ilgili diğer bilgileri nasıl görüntüleyeceği gösterilmektedir.
 
-![Görüntü ile ilgili diğer içgörüleri keşfedin](./media/apple-pie-more-tags.PNG)
+![Görüntüyle ilgili diğer öngörüleri keşfet](./media/apple-pie-more-tags.PNG)
 
-## <a name="bounding-boxes-and-hot-spots"></a>Sınırlayıcı kutuları ve ayırma-birleştirme
+## <a name="bounding-boxes-and-hot-spots"></a>Sınırlayıcı kutular ve etkin noktalar
 
-Varsayılan olmayan etiketler etiketin uygulandığı görüntüde faiz alanını tanımlayan bir sınırlayıcı kutu içerir. Sınırlayıcı kutu görüntünün tanımlamıyorsa, sınırlayıcı kutunun görüntü üzerinde etkin nokta oluşturmak için kullanın. Kullanıcı etkin nokta (veya dikdörtgen) altında bulunan içeriğin ilgili bilgi almak için etkin nokta tıklayabilirsiniz. Görüntünün bir şekilde yüksek görüntüsü ise, örneğin, sonuçları etiketleri (ve sınırlama kutusu) Donatılar için resimde gösterildiği bir çantanızda, mücevher özelliklerine, scarfs ve benzeri gibi içerebilir. Aşağıdaki örnek resimde gösterilen gözlüğü için sık erişimli nokta dikdörtgen gösterir:
+Varsayılan olmayan Etiketler, resmin geçerli olduğu görüntüde ilgilendiğiniz alanı tanımlayan sınırlayıcı kutuyu içerir. Sınırlama kutusu görüntünün tamamını tanımlamaz görüntüde etkin bir nokta oluşturmak için sınırlayıcı kutuyu kullanın. Kullanıcı, etkin nokta (veya dikdörtgen) altında bulunan içerikle ilgili bilgi almak için etkin noktaya tıklayabilir. Örneğin, görüntü yüksek moda sahip bir görüntü ise sonuçlar, görüntüde gösterilen aksesuar (ve sınırlayıcı kutular) içerebilir; Örneğin, bir Purse, jekaynak, scarfs vb. Aşağıdaki örnek görüntüde gösterilen güneş için bir etkin nokta dikdörtgeni göstermektedir:
 
 ![Sınırlayıcı kutu ve etkin nokta](./media/click-to-search.PNG)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-İlk isteğinizi kullanmaya başlamak için hızlı başlangıçları bakın: [C#](quickstarts/csharp.md) | [Java](quickstarts/java.md) | [node.js](quickstarts/nodejs.md) | [Python](quickstarts/python.md)
+İlk isteğinizi kullanmaya başlamak için bkz. Hızlı Başlangıç [C#](quickstarts/csharp.md) : | [Java](quickstarts/java.md) | [Node. js](quickstarts/nodejs.md) | [Python](quickstarts/python.md)
 
 
 

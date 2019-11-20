@@ -8,21 +8,20 @@ ms.topic: include
 ms.date: 11/11/2018
 ms.author: tamram
 ms.custom: include file
-ms.openlocfilehash: 13e99f1dc84c5345ba04fcfc412b8ef4237cc581
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 6ffc91a6e01cfb479a4090bcf13f15a7bd20095c
+ms.sourcegitcommit: 8a717170b04df64bd1ddd521e899ac7749627350
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188044"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71203955"
 ---
 ## <a name="copy-your-credentials-from-the-azure-portal"></a>Azure portalından kimlik bilgilerinizi kopyalama
 
-Örnek uygulamanın, depolama hesabınıza erişim yetkisi vermesi gerekir. Bir bağlantı dizesi şeklinde uygulamaya depolama hesabı kimlik bilgilerinizi sağlayın. Depolama hesabınızın kimlik bilgilerini görüntülemek için:
+Örnek uygulamanın, depolama hesabınıza erişim yetkisi vermesi gerekir. Depolama hesabı kimlik bilgilerinizi uygulamaya bağlantı dizesi biçiminde sağlayın. Depolama hesabınızın kimlik bilgilerini görüntülemek için:
 
-1. [Azure portalına](https://portal.azure.com) gidin.
-2. Depolama hesabınızı bulun.
-3. Depolama hesabına genel bakışın **Ayarlar** bölümünde **Erişim anahtarları**’nı seçin. Hesap erişim anahtarlarınız ve bağlantı dizeniz görüntülenir.
-4. Yetkilendirme için gerekecek olan depolama hesabınızın adını not edin.   
-5. **key1** bölümünde **Anahtar** değerini bulun ve **Kopyala** düğmesine tıklayarak hesap anahtarını kopyalayın.
+1. [Azure Portal](https://portal.azure.com) , depolama hesabınıza gidin.
+1. Depolama hesabına genel bakış ' ın **Ayarlar** bölümünde, hesap erişim Anahtarlarınızı ve Bağlantı dizenizi göstermek için **erişim anahtarları** ' nı seçin.
+1. Yetkilendirme için gerekecek olan depolama hesabınızın adını not edin.   
+1. **KEY1**altında **anahtar** değerini bulun ve hesap anahtarını kopyalamak için **Kopyala** ' yı seçin.
 
     ![Azure portalından hesap anahtarınızın kopyalanmasını gösteren ekran görüntüsü](media/storage-copy-account-key-portal/portal-account-key.png)

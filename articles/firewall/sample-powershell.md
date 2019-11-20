@@ -1,31 +1,28 @@
 ---
-title: Azure güvenlik duvarı örnekleri
-description: Azure güvenlik duvarı PowerShell örnekleri
+title: Azure Güvenlik Duvarı örnekleri
+description: Bu makale, Azure Güvenlik duvarları oluşturan Azure PowerShell betik örneklerinin bağlantılarını içerir.
 services: firewall
 author: vhorne
-manager: jpconnock
-editor: tysonn
-tags: azure-resource-manager
 ms.service: firewall
 ms.topic: article
-ms.date: 7/11/2018
+ms.date: 11/19/2019
 ms.author: victorh
 ms.custom: mvc
-ms.openlocfilehash: 3dd751c5dd4edbc2c132859f142ef927e63298bc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5e4fab3d632bca6eb62f1233f681a3611d7ccddf
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64691889"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74168729"
 ---
-# <a name="azure-firewall-powershell-samples"></a>Azure güvenlik duvarı PowerShell örnekleri
+# <a name="azure-firewall-powershell-samples"></a>Azure Güvenlik Duvarı PowerShell örnekleri
 
-Aşağıdaki tablo, güvenlik duvarları oluşturmak Azure PowerShell Betiği örneklerinin bağlantılarını içerir:
+Aşağıdaki tabloda güvenlik duvarları oluşturan Azure PowerShell betik örneklerinin bağlantıları yer almaktadır:
 
 
 | | |
 |----|----|
-|[Bir Azure güvenlik duvarı ve test altyapısı oluşturma](scripts/sample-create-firewall-test.md)|Bir Azure güvenlik duvarı ve bir test ağ altyapısı oluşturur.|
+|[Azure Güvenlik Duvarı ve test altyapısı oluşturma](scripts/sample-create-firewall-test.md)|Bir Azure Güvenlik Duvarı ve bir test ağ altyapısı oluşturur.|
 
 
 

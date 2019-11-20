@@ -1,85 +1,87 @@
 ---
 title: Azure Marketi için VHD oluşturma (SSS) sırasında sık karşılaşılan sorunlar
-description: Sık sorulan VHD oluşturma ve ilişkili sorunları hakkında sorular.
+description: VHD oluşturma ve ilişkili sorunlar hakkında sık sorulan sorular.
 services: Azure Marketplace
 author: HannibalSII
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 10/02/2018
-ms.author: hascipio; v-divte; v-miclar
-ms.openlocfilehash: d8b532793282db18d6182237bb921bc118ea717b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: hascipio
+ms.reviewer: v-divte; v-miclar
+ms.openlocfilehash: 1d4224d8f1f735ecef3d4551e3032b916e81dc3c
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64938444"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826625"
 ---
-# <a name="common-issues-during-vhd-creation-faq"></a>VHD oluşturma (SSS) sırasında sık karşılaşılan sorunlar
+# <a name="common-issues-during-vhd-creation-faq"></a>VHD oluşturma sırasında yaygın sorunlar (SSS)
 
-Aşağıdaki sık sorulan sorular (SSS) teklifleri için sanal makine (VM) oluşturma sırasında sanal sabit disk (VHD) ve sanal makine kapak sık karşılaşılan sorunları karşılaşıldı. 
+Aşağıdaki sık sorulan sorular (SSS) VM teklifleri için sanal sabit disk (VHD) ve sanal makine (VM) oluşturma sırasında karşılaşılan yaygın sorunları ele alır. 
 
-## <a name="how-do-you-create-a-vm-from-the-azure-portal-using-the-vhd-that-is-uploaded-to-premium-storage"></a>Premium depolama alanına yüklenir VHD kullanılarak Azure portalından bir VM nasıl oluşturulur?
+## <a name="how-do-you-create-a-vm-from-the-azure-portal-using-the-vhd-that-is-uploaded-to-premium-storage"></a>Premium depolamaya yüklenen VHD 'YI kullanarak Azure portal bir VM nasıl oluşturulur?
 
-Azure Market, VM Teklifler oluşturma yönetilen depolama alanında bulunan görüntülerinden ya da Azure Premium depolama şu anda desteklemiyor.  Bu depolama seçenekleri hakkında daha fazla bilgi için bkz. [Azure yönetilen disklere genel bakış](https://docs.microsoft.com/azure/virtual-machines/windows/managed-disks-overview).
-
-
-## <a name="can-you-use-generation-2-vms-for-offers"></a>2\. kuşak Vm'lerde teklifleri için kullanabilir miyim?
-
-Hayır, yalnızca nesil 1 VHD'ler desteklenir.  Ancak, şu anda 2. kuşak VM'ler için destek araştırmak için Microsoft Azure platformu ekibiyle birlikte çalışıyoruz.  Farklar hakkında daha fazla bilgi için bkz. [Hyper-V'de 1 veya 2. kuşak sanal makine oluşturmalısınız?](https://docs.microsoft.com/windows-server/virtualization/hyper-v/plan/should-i-create-a-generation-1-or-2-virtual-machine-in-hyper-v)
+Azure Marketi Şu anda yönetilen depolama veya Azure Premium Depolama üzerinde bulunan görüntülerden VM tekliflerinin oluşturulmasını desteklememektedir.  Bu depolama seçenekleri hakkında daha fazla bilgi için bkz. [Azure yönetilen disklere genel bakış](https://docs.microsoft.com/azure/virtual-machines/windows/managed-disks-overview).
 
 
-## <a name="how-do-you-change-the-name-of-the-host"></a>Nasıl ana bilgisayar adı değişir mi?
+## <a name="can-you-use-generation-2-vms-for-offers"></a>Teklifler için 2. nesil VM 'Leri kullanabilir miyim?
 
-Şunları yapamazsınız.  VM oluşturulduktan sonra kullanıcılar (sahipleri dahil olmak üzere) ana bilgisayar adı güncelleştirilemiyor.
+Hayır, yalnızca nesil 1 VHD 'ler desteklenir.  Ancak, 2. nesil VM 'Lerin desteğini araştırmak için Microsoft Azure platform ekibiyle çalışıyoruz.  Farklar hakkında daha fazla bilgi için bkz. [Hyper-V ' d a 1. kuşak veya 2 sanal makine oluşturmalıyım?](https://docs.microsoft.com/windows-server/virtualization/hyper-v/plan/should-i-create-a-generation-1-or-2-virtual-machine-in-hyper-v)
 
 
-## <a name="how-do-you-reset-the-remote-desktop-service-or-its-sign-in-password"></a>Uzak Masaüstü hizmetini veya oturum açma parolası nasıl sıfırlansın mı?
+## <a name="how-do-you-change-the-name-of-the-host"></a>Konağın adını nasıl değiştirirsiniz?
 
-Aşağıdaki makaleler, Windows ve Linux tabanlı VM'ler için RDS ayarlarına sıfırlamanıza açıklanmaktadır:   
+Oluşturamazsınız.  VM oluşturulduktan sonra kullanıcılar (sahipler dahil) konağın adını güncelleştiremez.
+
+
+## <a name="how-do-you-reset-the-remote-desktop-service-or-its-sign-in-password"></a>Uzak Masaüstü hizmetini veya oturum açma parolasını nasıl sıfırlayabilirim?
+
+Aşağıdaki makalelerde, Windows ve Linux tabanlı VM 'Ler için RDS sıfırlamaları gerçekleştirme açıklanmaktadır:   
 
 - [Windows VM’de Uzak Masaüstü hizmetini veya oturum açma parolasını sıfırlama](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-reset-rdp/)
-- [Bir Linux VM parolayı veya SSH anahtarı sıfırlama, SSH yapılandırmasını düzeltin ve VMAccess uzantısını kullanarak disk tutarlılık denetimi hakkında](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-classic-reset-access/)
+- [Bir Linux VM parolasını veya SSH anahtarını sıfırlama, SSH yapılandırmasını çözme ve VMAccess uzantısını kullanarak disk tutarlılığını denetleme](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-classic-reset-access/)
 
 
-## <a name="how-do-you-generate-new-ssh-certificates"></a>Yeni SSH sertifikaları nasıl oluşturduğunuz?
+## <a name="how-do-you-generate-new-ssh-certificates"></a>Yeni SSH sertifikaları nasıl oluşturulur?
 
-Sertifikaların oluşturulmasını makalesinde açıklanan [Get VM görüntünüz için paylaşılan erişim imzası URI'si](./cpp-get-sas-uri.md) sonraki bölümdeki [teknik varlıkları için bir VM teklifi oluşturma](./cpp-create-technical-assets.md).
+Sertifika oluşturma, [BIR VM teklifi için teknik varlıklar oluşturma](./cpp-create-technical-assets.md)BAŞLıKLı makalede [VM Görüntünüz için paylaşılan erişim Imzası URI 'si al](./cpp-get-sas-uri.md) makalesinde açıklanmaktadır.
 
 
-## <a name="how-do-you-configure-a-virtual-private-network-vpn-to-work-with-my-vms"></a>Bir sanal özel ağ (VPN) Vm'lerimi ile çalışmaya nasıl yapılandırırım?
+## <a name="how-do-you-configure-a-virtual-private-network-vpn-to-work-with-my-vms"></a>Sanal özel ağ (VPN), VM 'lerim ile çalışacak şekilde nasıl yapılandırılır?
 
-Ardından Azure Resource Manager dağıtım modelini kullanıyorsanız, VPN ayarlama, genel üç seçeneğiniz vardır:
-- [Azure portalını kullanarak rota temelli VPN ağ geçidi oluşturma](https://docs.microsoft.com/azure/vpn-gateway/create-routebased-vpn-gateway-portal)
+Azure Resource Manager dağıtım modelini kullanıyorsanız, VPN 'yi ayarlama konusunda üç genel seçeneğiniz vardır:
+- [Azure portal kullanarak rota tabanlı bir VPN ağ geçidi oluşturma](https://docs.microsoft.com/azure/vpn-gateway/create-routebased-vpn-gateway-portal)
 - [PowerShell kullanarak rota temelli VPN ağ geçidi oluşturma](https://docs.microsoft.com/azure/vpn-gateway/create-routebased-vpn-gateway-powershell)
-- [CLI kullanarak rota temelli VPN ağ geçidi oluşturma](https://docs.microsoft.com/azure/vpn-gateway/create-routebased-vpn-gateway-cli)
+- [CLı kullanarak rota temelli VPN ağ geçidi oluşturma](https://docs.microsoft.com/azure/vpn-gateway/create-routebased-vpn-gateway-cli)
 
 
-## <a name="what-are-microsoft-support-policies-for-running-microsoft-server-software-on-azure-based-vms"></a>Azure tabanlı VM'ler üzerinde Microsoft sunucu yazılımları çalıştırmak için Microsoft destek ilkeleri nelerdir?
+## <a name="what-are-microsoft-support-policies-for-running-microsoft-server-software-on-azure-based-vms"></a>Azure tabanlı VM 'lerde Microsoft sunucu yazılımını çalıştırmaya yönelik Microsoft destek ilkeleri nelerdir?
 
-Bu destek ilkeleri makalesinde ayrıntılı [Microsoft Azure sanal makineler için Microsoft sunucu yazılımı desteği](https://support.microsoft.com/help/2721672/microsoft-server-software-support-for-microsoft-azure-virtual-machines).
-
-
-## <a name="do-virtual-machines-have-unique-identifiers-associated-with-them"></a>Sanal makineler ilişkili benzersiz tanımlayıcıları mı?
-
-Evet, Azure üzerinde barındırılıyorsa.  Azure, Azure sanal makine benzersiz kimliği oluşturulan her yeni VM kaynağı benzersiz bir tanımlayıcı atar.  Daha fazla bilgi için blog gönderisini okuyun [Azure sanal makine benzersiz kimliği](https://blogs.msdn.microsoft.com/wasimbloch/2016/10/20/azure-virtual-machine-unique-id/).  Bu tanımlayıcı üzerinden programlı olarak da edinebilirsiniz [listesi API'sini](https://docs.microsoft.com/rest/api/compute/virtualmachines/list).
+Bu destek ilkeleri, [Microsoft Azure sanal makineler Için Microsoft sunucu yazılımı desteği](https://support.microsoft.com/help/2721672/microsoft-server-software-support-for-microsoft-azure-virtual-machines)makalesinde ayrıntılı olarak açıklanmıştır.
 
 
-## <a name="in-a-vm-how-do-you-manage-the-custom-script-extension-in-the-startup-task"></a>Bir VM'de, nasıl özel betik uzantısı'nda başlangıç görevinin yönetebilirsiniz?
+## <a name="do-virtual-machines-have-unique-identifiers-associated-with-them"></a>Sanal makinelerin kendileriyle ilişkili benzersiz tanımlayıcıları var mı?
 
-Aşağıdaki makalede Azure PowerShell modülü, Azure Resource Manager şablonları ve sorun giderme adımları Windows sistemlerinde ayrıntıları kullanarak özel betik uzantısı kullanma işlemi açıklanmaktadır: [Windows için özel betik uzantısı](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-extensions-customscript/)
+Evet, Azure üzerinde barındırılıyorsa.  Azure, oluşturulan her yeni VM kaynağına Azure sanal makinesi benzersiz KIMLIĞI olarak adlandırılan benzersiz bir tanımlayıcı atar.  Daha fazla bilgi için [Azure sanal makinesi BENZERSIZ kimliğini](https://blogs.msdn.microsoft.com/wasimbloch/2016/10/20/azure-virtual-machine-unique-id/)okuyun.  Ayrıca, bu tanımlayıcıyı [liste API 'si](https://docs.microsoft.com/rest/api/compute/virtualmachines/list)aracılığıyla programlı bir şekilde edinebilirsiniz.
 
 
-## <a name="are-32-bit-applications-or-services-supported-in-the-azure-marketplace"></a>32-bit uygulamalar veya hizmetler Azure Marketi'nde desteklenen misiniz?
+## <a name="in-a-vm-how-do-you-manage-the-custom-script-extension-in-the-startup-task"></a>Bir VM 'de, başlangıç görevinde Özel Betik uzantısını nasıl yöneteceksiniz?
 
-Genellikle yapamazsınız.  Azure sanal makineler için standart Hizmetleri ve desteklenen işletim sistemlerinin 64 bit.  Ancak, teknik açıdan, uygulamaların geriye dönük uyumluluk için 32 bit sürümlerini çalıştıran en çok 64-bit işletim sistemlerini destekler.  VM çözümünüzün bir parçası desteklenmez ve bu nedenle 32-bit uygulamaları ancak kullanın *yüksek oranda önerilmez*.  Bunun yerine, uygulamanızın bir 64-bit proje olarak yeniden derleyin.
+Aşağıdaki makalede, Windows sistemlerinde Azure PowerShell modülü, Azure Resource Manager şablonları ve Ayrıntılar sorunlarını giderme adımları kullanılarak özel betik uzantısının nasıl kullanılacağı açıklanır: [Windows Için özel Betik uzantısı](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-extensions-customscript/)
+
+
+## <a name="are-32-bit-applications-or-services-supported-in-the-azure-marketplace"></a>32 bitlik uygulamalar veya hizmetler Azure Marketi 'nde destekleniyor mu?
+
+Genel, hayır.  Azure VM 'Leri için desteklenen işletim sistemleri ve standart hizmetler 64 bittir.  Ancak, teknik bir bakış ile 64 bitlik işletim sistemleri, geriye dönük uyumluluk için uygulamaların 32 bit sürümlerini çalıştırmayı destekler.  Ancak, VM çözümünüzün bir parçası olarak 32 bitlik uygulamalar kullanılması desteklenmez ve bu nedenle *kesinlikle önerilmez*.  Bunun yerine, uygulamanızı 64 bitlik bir proje olarak yeniden derleyin.
 
 Daha fazla bilgi için aşağıdaki makalelere bakın:
-- [32-bit uygulamaları çalıştırma](https://docs.microsoft.com/windows/desktop/WinProg64/running-32-bit-applications)
-- [Azure sanal makineler'de 32-bit işletim sistemleri için destek](https://support.microsoft.com/help/4021388/support-for-32-bit-operating-systems-in-azure-virtual-machines)
+- [32 bitlik uygulamalar çalıştırma](https://docs.microsoft.com/windows/desktop/WinProg64/running-32-bit-applications)
+- [Azure sanal makinelerde 32 bitlik işletim sistemleri için destek](https://support.microsoft.com/help/4021388/support-for-32-bit-operating-systems-in-azure-virtual-machines)
 - [Microsoft Azure sanal makineleri için Microsoft sunucu yazılımı desteği](https://support.microsoft.com/help/2721672/microsoft-server-software-support-for-microsoft-azure-virtual-machines)
 
 
-## <a name="every-time-i-try-to-create-an-image-from-my-vhds-i-get-the-error-vhd-is-already-registered-with-image-repository-as-the-resource-in-powershell-i-did-not-create-any-image-before-nor-did-i-find-any-image-with-this-name-in-azure-how-do-i-resolve-this-issue"></a>My Vhd'lerden bir görüntü oluşturmak çalıştığım her zaman şu hatayı alır `.VHD is already registered with image repository as the resource` PowerShell'de. Önce herhangi bir görüntü oluşturmadı ya da bu ada sahip herhangi bir görüntü Azure'da buldunuz. Bu sorunu nasıl giderebilirim?
+## <a name="every-time-i-try-to-create-an-image-from-my-vhds-i-get-the-error-vhd-is-already-registered-with-image-repository-as-the-resource-in-powershell-i-did-not-create-any-image-before-nor-did-i-find-any-image-with-this-name-in-azure-how-do-i-resolve-this-issue"></a>VHD 'lerimin içinden bir görüntü oluşturmaya her seferinde, PowerShell 'de hata `.VHD is already registered with image repository as the resource` alıyorum. Azure 'da bu ada sahip herhangi bir görüntü oluşturamıyorum veya hiç görüntü oluşturmadınız. Bu sorunu çözmek Nasıl yaparım? mı?
 
-Kullanıcı bir VM üzerinde bir kilit sahip bir VHD'den sağladıysa Bu sorun genellikle oluşur.  Bu VHD'den ayrılan hiçbir VM olduğundan emin olun ve sonra işlemi yeniden deneyin.  Bu sorun devam ederse bir destek bileti açıklandığı şekilde açın [bulut iş ortağı portalı için desteği](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-support-for-cloud-partner-portal). 
+Bu sorun genellikle Kullanıcı kilidi olan bir VHD 'den bir VM sağladıysa oluşur.  Bu VHD 'den ayrılmış bir VM olmadığından emin olun ve işlemi yeniden deneyin.  Bu sorun devam ederse, [bulut iş ortağı portalı Için destek](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-support-for-cloud-partner-portal)bölümünde açıklandığı gibi bir destek bileti açın. 
 

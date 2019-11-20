@@ -1,32 +1,32 @@
 ---
-title: VM görüntüleri ile paylaşılan galeriler paylaşma | Microsoft Docs
-description: VM görüntüleri kuruluşunuz içinde paylaşmak için paylaşılan resim galerileri kullanmayı öğrenin.
+title: Paylaşılan galerileriyle VM görüntülerini paylaşma
+description: Kuruluşunuz genelinde VM görüntülerini paylaşmak için paylaşılan görüntü galerilerini nasıl kullanacağınızı öğrenin.
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: axayjo
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.service: virtual-machines-linux
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 05/06/2019
-ms.author: akjosh; cynthn
+ms.date: 11/02/2019
+ms.author: akjosh
+ms.reviewer: cynthn
 ms.custom: ''
-ms.openlocfilehash: ca625093ce85e63042a92dec07b6bcb8968f3fda
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b79abeffffd7dc1bb54e828823aa909216508496
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65236005"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74035023"
 ---
-# <a name="shared-image-galleries-overview"></a>Paylaşılan resim galerileri genel bakış
+# <a name="shared-image-galleries-overview"></a>Paylaşılan görüntü galerilerine genel bakış
 
 [!INCLUDE [virtual-machines-common-shared-image-galleries](../../../includes/virtual-machines-common-shared-image-galleries.md)]
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bilgi edinmek için nasıl [paylaşılan görüntüleri dağıtma](shared-images.md).
+[Paylaşılan görüntüleri dağıtmayı](shared-images.md)öğrenin.

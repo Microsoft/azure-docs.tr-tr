@@ -1,123 +1,117 @@
 ---
-title: Ödül puan - Personalizer
+title: Ödül puanı-kişiselleştirici
 titleSuffix: Azure Cognitive Services
-description: Ödül puanı, kullanıcının sonuçlandı ne kadar iyi kişiselleştirme tercih ettiğiniz RewardActionID, gösterir. Ödül puanı değeri gözlemlere kullanıcı davranışına dayalı iş mantığınızı tarafından belirlenir. Kendi makine öğrenimi modellerini ödül değerlendirerek personalizer eğitir.
+description: Ödül puanı, kişiselleştirme seçiminin, rewarterctionıd 'nin Kullanıcı için ne kadar iyi olduğunu gösterir. Ödül puanı değeri, Kullanıcı davranışının gözlemlerini temel alarak iş mantığınızla belirlenir. Kişiselleştirici, remarları değerlendirerek makine öğrenimi modellerini ister.
 services: cognitive-services
-author: edjez
+author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
-ms.topic: overview
-ms.date: 06/07/2019
-ms.author: edjez
-ms.openlocfilehash: c64d43301fd173203bd1625b8d37120b71c22805
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.topic: conceptual
+ms.date: 10/24/2019
+ms.author: diberry
+ms.openlocfilehash: a47d6014e51dce81c9caf82f8624896c439f050d
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67077408"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73490889"
 ---
-# <a name="reward-scores-indicate-success-of-personalization"></a>Kişiselleştirme başarısını ödül puanlar
+# <a name="reward-scores-indicate-success-of-personalization"></a>Reward puanları, kişiselleştirmenin başarısını gösterir
 
-Ödül puan ne kadar iyi kişiselleştirme seçimi belirtir [RewardActionID](https://docs.microsoft.com/rest/api/cognitiveservices/personalizer/rank/rank#response), kullanıcı ile sonuçlandı. Ödül puanı değeri gözlemlere kullanıcı davranışına dayalı iş mantığınızı tarafından belirlenir.
+Ödül puanı, kişiselleştirme seçiminin, [rewarterctionıd](https://docs.microsoft.com/rest/api/cognitiveservices/personalizer/rank/rank#response)'nin Kullanıcı için ne kadar iyi olduğunu gösterir. Ödül puanı değeri, Kullanıcı davranışının gözlemlerini temel alarak iş mantığınızla belirlenir.
 
-Kendi makine öğrenimi modellerini ödül değerlendirerek personalizer eğitir. 
+Kişiselleştirici, remarları değerlendirerek makine öğrenimi modellerini ister. 
 
-## <a name="use-reward-api-to-send-reward-score-to-personalizer"></a>Ödül için Personalizer ödül puan göndermek için API kullanma
+## <a name="use-reward-api-to-send-reward-score-to-personalizer"></a>Kişiselleştiriciye yeniden Puanlama göndermek için ödül API kullanma
 
-Ödül Personalizer tarafından gönderilen [ödül API](https://docs.microsoft.com/rest/api/cognitiveservices/personalizer/events/reward). Bir ödül, -1 ile 1 arasında bir sayıdır. Personalizer ödül en yüksek olası toplamını zamanla elde etmek için modeli eğitir.
+Reward, [Reward API](https://docs.microsoft.com/rest/api/cognitiveservices/personalizer/events/reward)tarafından kişiselleştiriciye gönderilir. Genellikle, bir ödül 0 ve 1 ' den bir sayıdır. -1 değeri ile negatif bir ödül, bazı senaryolarda mümkündür ve yalnızca pekiştirmeye dayalı Learning (RL) ile karşılaşırsanız kullanılmalıdır. Kişiselleştirici, zaman içinde mümkün olan en yüksek miktarda yeniden elde etmek için modeli gözleyin.
 
-Ödül kullanıcı davranışı, gün sonra olabilecek oluştuktan sonra gönderilir. Bir olay yok ödül sahip olduğu kabul edildiği veya varsayılan ödül yapılandırılmış kadar Personalizer bekleyeceği en uzun süreyi [ödül bekleme süresi](#reward-wait-time) Azure portalında.
+Yeniden ödüller, Kullanıcı davranışı gerçekleştirildikten sonra gönderilir ve bu gün daha sonra günler olabilir. Kişiselleştirilmez bir olay, bir olayın yeniden ele alınmayacak şekilde değerlendirilene veya Azure portal bir varsayılan yeniden [beklenene](#reward-wait-time) kadar bekleneceği maksimum zaman.
 
-İçinde bir olay için ödül puanı alınan edilmemiş varsa **ödül bekleme süresi**, ardından **varsayılan ödül** uygulanır. Genellikle, **[varsayılan ödül](how-to-settings.md#configure-reward-settings-for-the-feedback-loop-based-on-use-case)** sıfır olarak yapılandırılır.
+Bir olayın ödül puanı, **bekleme süresi**içinde alınmadıysa, **varsayılan ödül** uygulanır. Genellikle, **[varsayılan değer](how-to-settings.md#configure-reward-settings-for-the-feedback-loop-based-on-use-case)** sıfır olacak şekilde yapılandırılır.
 
 
-## <a name="behaviors-and-data-to-consider-for-rewards"></a>Davranışları ve ödüller için dikkate alınması gereken veri
+## <a name="behaviors-and-data-to-consider-for-rewards"></a>Ödüller için göz önünde bulundurulması gereken davranışlar ve veriler
 
-Bu sinyalleri ve davranışları ödül score bağlamı için göz önünde bulundurun:
+Bu sinyalleri ve davranışları, ödül puanı bağlamı için göz önünde bulundurun:
 
-* Öneriler kullanıcı girişini seçenekleri söz konusu olduğunda doğrudan ("X şunu mu demek musunuz?").
+* Seçenekler dahil edildiğinde öneriler için doğrudan Kullanıcı girişi ("ortalama X?").
 * Oturum uzunluğu.
 * Oturumlar arasındaki süre.
-* Yaklaşım analizi kullanıcının etkileşimler dizesi.
-* Doğrudan sorular ve mini anketler doğruluğu fayda hakkında burada yakmasını kullanıcı için geri bildirim ister.
-* Uyarıları veya gecikmesi uyarılara yanıt olarak verilen yanıt.
+* Kullanıcı etkileşimlerinin yaklaşım analizi.
+* Bot 'ın, kullanıcıdan kullanışlılık, doğruluk hakkında geri bildirim aramasını istediğinde doğrudan sorular ve mini anketler.
+* Uyarılara yanıt verme veya uyarılara yanıt verme gecikmesi.
 
-## <a name="composing-reward-scores"></a>Ödül puanları oluşturma
+## <a name="composing-reward-scores"></a>Ödül puanları oluşturuluyor
 
-İş mantığınızı bir ödül puan hesaplanması gerekir. Sonuç olarak gösterilebilir:
+Bir Reward puanı, iş mantığınızdan hesaplanmalıdır. Puan şu şekilde gösterilebilir:
 
-* Bir kez gönderilen tek bir sayı 
-* Hemen (0,8 gibi) gönderilen bir puan ve daha sonra gönderilen bir ek puanı (genellikle 0.2).
+* Tek bir sayı tek bir kez gönderilir 
+* Anında gönderilen puan (0,8 gibi) ve daha sonra gönderilen ek bir puan (genellikle 0,2).
 
-## <a name="default-rewards"></a>Varsayılan ödül
+## <a name="default-rewards"></a>Varsayılan ödüller
 
-İçinde herhangi bir ödül aldıysanız [ödül bekleme süresi](#reward-wait-time)çağrı süresi boyut beri örtük olarak Personalizer geçerlidir **varsayılan ödül** derece o olaya.
+Daha fazla [bekleme süresi](#reward-wait-time)içinde bir yeniden alma işlemi yoksa, bu sıralama çağrısının bu yana, kişiselleştirici, bu sıra olayına ilişkin **varsayılan** değeri örtülü olarak uygular.
 
-## <a name="building-up-rewards-with-multiple-factors"></a>Ödül çoklu faktörlerle ile yedekleme oluşturma  
+## <a name="building-up-rewards-with-multiple-factors"></a>Birden çok faktörle yeniden ödüller oluşturma  
 
-Etkili kişiselleştirme için ödül puan oluşturabilirsiniz (-1 ile 1 arasında herhangi bir sayı) birden çok unsura bağlı. 
+Etkili kişiselleştirme için, daha fazla etkene göre ödül puanı oluşturabilirsiniz. 
 
-Örneğin, video içerik listesini kişiselleştirmek için bu kuralları uygulayabilirsiniz:
+Örneğin, video içeriğinin bir listesini kişiselleştirmek için bu kuralları uygulayabilirsiniz:
 
 |Kullanıcı davranışı|Kısmi puan değeri|
 |--|--|
-|Kullanıcı üst öğede tıkladı.|+0.5 ödül|
-|Kullanıcı bu öğesinin gerçek içeriği açılır.|+0.3 ödül|
-|Kullanıcı 5 dakika içeriği veya % 30 izlenen, hangisinin daha uzun olduğuna.|+0.2 ödül|
+|Kullanıcı üst öğeyi tıkladı.|\+ 0,5 ödül|
+|Kullanıcı o öğenin gerçek içeriğini açtı.|\+ 0,3 ödül|
+|Kullanıcı, içeriğin 5 dakika veya daha uzun bir süre sonra %30 oranında izleniyor.|\+ 0,2 ödül|
 |||
 
-Ardından, API için toplam ödül gönderebilirsiniz.
+Sonra, API 'ye toplam yeniden ödül gönderebilirsiniz.
 
-## <a name="calling-the-reward-api-multiple-times"></a>Birden çok kez ödül API çağırma
+## <a name="calling-the-reward-api-multiple-times"></a>Reward API 'YI birden çok kez çağırma
 
-Ödül farklı Ödül puanları gönderme aynı olay Kimliğini kullanarak API çağrısı. Bu ödül Personalizer alır, bu olay için son ödül Personalizer ayarlarında belirtilen toplayarak belirler.
+Ayrıca, aynı olay kimliğini kullanarak, farklı rehirlar göndererek, ödül API 'sini de çağırabilirsiniz. Kişiselleştirici bu ödüller aldığında, bu olayın, kişiselleştirici yapılandırmasında belirtilen şekilde toplayarak son halini belirler.
 
-Toplama ayarları:
+Toplama değerleri:
 
-*  **İlk**: Olay için alınan ilk ödül puanı alır ve rest atar.
-* **Sum**: EventID için toplanan tüm Ödül puanları alır ve bunları bir araya getirir.
+*  **İlk**: olay için ilk geri alma puanı alır ve geri kalanı atar.
+* **Sum**: EventID için toplanan tüm yeniden puanları alır ve bunları bir araya getirir.
 
-Sonra alınan bir olay için tüm ödül **ödül bekleme süresi**atılır ve modellerin eğitimi etkilemez.
+**Yeniden bekleme zamanından**sonra alınan bir olayın tüm depoları atılır ve modellerin eğitimini etkilemez.
 
-Ödül puanları ' ekleyerek, son ödül 1'den daha yüksek veya -1'den daha düşük olabilir. Bu, başarısız hizmet yapmaz.
+Toplama skorları ekleyerek, son ödül tahmini beklenen puan aralığının dışında olabilir. Bu, hizmetin başarısız olmasına neden olmaz.
 
-<!--
-@edjez - is the number ignored if it is outside the acceptable range?
--->
+## <a name="best-practices-for-calculating-reward-score"></a>Ödül Puanını hesaplamak için en iyi uygulamalar
 
-## <a name="best-practices-for-calculating-reward-score"></a>Ödül puanı hesaplamaya yönelik en iyi uygulamalar
+* **Başarılı bir kişiselleştirmenin gerçek göstergelerini göz önünde bulundurun**: tıklama açısından kolayca düşünmek kolaydır, ancak kullanıcılarınızın ne *yapmak*istediğinize ilişkin ne kadar hızlı bir şekilde *elde* etmelerini istediğinizi temel alır.  Örneğin, tıklatmalar üzerinde yeniden çarpıtma, clickbait lekeli içeriğin seçilmesine neden olabilir.
 
-* **Başarılı kişiselleştirme true göstergeleri göz önünde bulundurun**: Tıklama açısından düşünmeniz kolaydır, ancak iyi bir ödül kullanıcılarınız için istediğinize bağlı *elde* kişiler için istediğinize yerine *yapmak*.  Örneğin, tıklar ödüllendiriyoruz clickbait potansiyeli olan içerik seçmeye neden olabilir.
+* **Kişiselleştirmenin ne kadar iyi çalıştığı konusunda bir ödül puanı kullanın**: bir film önerisini kişiselleştirmek, kullanıcının filmi izlemeye ve yüksek bir derecelendirme kullanmasına neden olur. Film derecelendirmesi büyük olasılıkla çok sayıda işleme bağlı olduğundan (hareket kalitesi, kullanıcının ruh derecesi), *kişiselleştirmenin* ne kadar iyi çalıştığı konusunda iyi bir sinyal değildir. Ancak filmin ilk birkaç dakikasını izleyen Kullanıcı, kişiselleştirme verimliliğinden daha iyi bir sinyal alabilir ve 5 dakika sonra 1 ' in bir kez daha iyi bir sinyal olarak gönderilmesini sağlayabilir.
 
-* **Bir ödül puanlamak için ne kadar iyi kişiselleştirme çalışılan kullanım**: Bir film öneri kişiselleştirme Umarım kullanıcı filmi izlemek ve yüksek bir derecelendirme vererek neden olur. Film derecelendirme büyük olasılıkla birçok şey (kullanıcının ruh acting kalitesini) bağlı olduğundan, bunu nasıl iyi ödül sinyal de değil *kişiselleştirme* çalıştı. İlk birkaç dakika film izlemeyi kullanıcı kişiselleştirme verimlilik ve daha iyi bir sinyal 5 dakika sonra bir ödül 1 gönderme daha iyi bir sinyal ancak olabilir.
+* **Releleler yalnızca rewarterctionıd için geçerlidir**: kişiselleştirici, rewarterctionıd içinde belirtilen eylemin göre etkinliğine anlamak için yeniden ödüller uygular. Diğer eylemleri görüntülemeyi tercih ederseniz ve Kullanıcı bunlara tıkladıysanız, yeniden, sıfır olmalıdır.
 
-* **Ödül yalnızca uygulamak için RewardActionID**: Personalizer ödül RewardActionID içinde belirtilen eylemle çalışıp çalışmadığını anlamak için geçerlidir. Diğer Eylemler ve kullanıcı bunlar üzerinde görüntülemek isterseniz, ödül sıfır olmalıdır.
+* **İstemeden oluşan sonuçları göz önünde bulundurun**: [ahlak ve sorumlu kullanım](ethics-responsible-use.md)ile sorumlu sonuçlara yol açabilecek ödül işlevleri oluşturun.
 
-* **İstenmeyen sonuçlara göz önünde bulundurun**: Sorumlu sonuçları ile neden ödül işlevler Oluştur [etik kurallara ve sorumlu kullanımı](ethics-responsible-use.md).
+* **Artımlı yeniden kullanım**: daha küçük kullanıcı davranışları için kısmi reksel ekleme, kişiselleştirmeye daha iyi bir performans sağlamaya yardımcı olur. Bu artımlı yeniden, algoritmanın kullanıcıya son istenen davranışta ilgi çekici olduğunu bilmesini sağlar.
+    * Bir film listesi gösteriyorsa, Kullanıcı daha fazla bilgi görüntülemek için ilk bir kez üzerine gelirse, bazı kullanıcı katılımı olduğunu belirleyebilirsiniz. Davranış, 0,1 için bir ödül puanı ile sayabilir. 
+    * Kullanıcı sayfayı açtı ve sonra çıkmadıysa, ödül puanı 0,2 olabilir. 
 
-* **Artımlı ödül kullanın**: Daha iyi ödül ulaşmak için daha küçük kullanıcı davranışları için kısmi ödül ekleme Personalizer yardımcı olur. Bu artımlı bir ödül son istenen davranışı kullanıcının ilgi çekici için daha yakından alma bilmek algoritması sağlar.
-    * Daha fazla bilgi, bir süredir ilk öğe üzerinde getirirse filmler listesi gösterildiğinden, bazı kullanıcı katılım gerçekleştiğini belirleyebilirsiniz. Davranış 0,1 bir ödül puanıyla güvenebilirsiniz. 
-    * Kullanıcı sayfası açılır ve ardından çıkıldı ödül puan 0.2 olabilir. 
+## <a name="reward-wait-time"></a>bekleme süresi
 
-## <a name="reward-wait-time"></a>Ödül bekleme süresi
+Kişiselleştirici, modeli eğitme çağrılarında, bir derece çağrısının bilgilerini, yeniden aramalarla gönderilen ödüller ile ilişkilendirilecektir. Bunlar, farklı zamanlarda gelebilir. Kişiselleştirici, derece çağrısının ne zaman meydana geldiği, sıralama çağrısının etkin olmayan bir olay olarak yapılmış ve daha sonra etkinleştirilse bile, sınırlı bir süre bekler.
 
-Personalizer bağıntı kurmak bir sıralama bilgilerini modeli eğitmek için ödül çağrılarında gönderilen ödül ile çağrısı. Bu, farklı zamanlarda ortaya çıkabilir. Personalizer sınırlı bir süre için derece çağrı oldu derece çağrısı etkin olmayan bir olay olarak yapılan ve daha sonra etkin olsa bile başlatılmasını bekler.
+Daha fazla **bekleme süresi** dolarsa ve hiçbir bilgi yoksa, eğitim için bu olaya bir varsayılan değer uygulanır. En uzun bekleme süresi 6 gündür.
 
-Varsa **ödül bekleme süresi** süresi sonu ve ödül bilgi olmuştur, varsayılan ödül, olay eğitim için uygulanır. En fazla bekleme süresi 6 gün olur.
-
-## <a name="best-practices-for-setting-reward-wait-time"></a>Ödül ayarlamaya yönelik en iyi bekleme süresi
+## <a name="best-practices-for-reward-wait-time"></a>İlk bekleme süresi için en iyi uygulamalar
 
 Daha iyi sonuçlar için bu önerileri izleyin.
 
-* Ödül bekleme süresi, kullanıcı geri bildirimi almak için yeterli zaman bırakarak, olabildiğince kısa yapın. 
+* Kullanıcı geri bildirimi almak için yeterli zaman bırakarak, yeniden bekleme süresini olabildiğince kısa bir hale getirin. 
 
-<!--@Edjez - storage quota? -->
-
-* Geri bildirim almak için gereken süreden daha kısa bir süre seçmeyin. Bir kullanıcı 1 dakika video izlenen sonra ödül bazıları vardır, örneğin, deneme uzunluğu en az bir çift olmalıdır.
+* Geri bildirim almak için gereken süreden daha kısa bir süre seçmeyin. Örneğin, bir Kullanıcı bir videonun 1 dakikalık bir süre sonra geliyorsa, deneme uzunluğu en az çift olmalıdır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Pekiştirmeye dayalı öğrenme](concepts-reinforcement-learning.md) 
-* [API boyut deneyin](https://westus2.dev.cognitive.microsoft.com/docs/services/personalizer-api/operations/Rank/console)
-* [Ödül API'sini deneyin](https://westus2.dev.cognitive.microsoft.com/docs/services/personalizer-api/operations/Reward)
+* [Derecelendirme API 'sini deneyin](https://westus2.dev.cognitive.microsoft.com/docs/services/personalizer-api/operations/Rank/console)
+* [Reward API 'sini deneyin](https://westus2.dev.cognitive.microsoft.com/docs/services/personalizer-api/operations/Reward)

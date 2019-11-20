@@ -1,19 +1,20 @@
 ---
-title: Azure PowerShell Betiği - Azure Cosmos DB liste ve tablo API'si için işlemleri Al
-description: Azure PowerShell Betiği - Azure Cosmos DB liste ve tablo API'si için işlemleri Al
+title: Azure PowerShell betiği Azure Cosmos DB listesi ve Tablo API'si için işlemleri al
+description: Azure PowerShell betiği Azure Cosmos DB listesi ve Tablo API'si için işlemleri al
 author: markjbrown
 ms.service: cosmos-db
-ms.topic: samples
+ms.subservice: cosmosdb-table
+ms.topic: sample
 ms.date: 05/18/2019
 ms.author: mjbrown
-ms.openlocfilehash: 320d2ff57275648657a15f843a2f32dcb6722bf9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d4d299f9cec7170256e66ec161eff3976c5211ca
+ms.sourcegitcommit: 83df2aed7cafb493b36d93b1699d24f36c1daa45
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66247057"
+ms.lasthandoff: 09/22/2019
+ms.locfileid: "71178709"
 ---
-# <a name="list-and-get-tables-for-azure-cosmos-db---table-api"></a>Liste ve Azure Cosmos DB - tablo API'si için tabloları alma
+# <a name="list-and-get-tables-for-azure-cosmos-db---table-api"></a>Azure Cosmos DB Tablo API'si için tabloları listeleme ve edinme
 
 [!INCLUDE [updated-for-az](../../../../../includes/updated-for-az.md)]
 
@@ -38,8 +39,8 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 | Komut | Notlar |
 |---|---|
 |**Azure kaynakları**| |
-| [Yeni AzResource](https://docs.microsoft.com/powershell/module/az.resources/new-azresource) | Bir kaynak oluşturur. |
-|**Azure kaynak grupları**| |
+| [New-AzResource](https://docs.microsoft.com/powershell/module/az.resources/new-azresource) | Bir kaynak oluşturur. |
+|**Azure Kaynak grupları**| |
 | [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcegroup) | Bir kaynak grubunu tüm iç içe geçmiş kaynaklar dahil siler. |
 |||
 

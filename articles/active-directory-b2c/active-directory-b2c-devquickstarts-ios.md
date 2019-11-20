@@ -1,6 +1,6 @@
 ---
-title: Bir iOS uygulaması Azure Active Directory B2C AppAuth kullanarak | Microsoft Docs
-description: Bu makalede, kullanıcı kimliklerini yönetmek ve kullanıcıların kimliğini doğrulamak için Azure Active Directory B2C ile AppAuth kullanan bir iOS uygulamasının nasıl oluşturulacağını gösterir.
+title: Azure Active Directory B2C 'de bir iOS uygulamasında AppAuth kullanma | Microsoft Docs
+description: Bu makalede, Kullanıcı kimliklerini yönetmek ve kullanıcıların kimliğini doğrulamak için Azure Active Directory B2C ile AppAuth kullanan bir iOS uygulamasının nasıl oluşturulacağı gösterilmektedir.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,90 +10,94 @@ ms.topic: conceptual
 ms.date: 11/30/2018
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 1f7c864102a4985aa1b2c66e12b42cbe3bc19bca
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0fb5341c2e7ee55391cb38251b0ea66b55b93301
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66510094"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73469147"
 ---
-# <a name="azure-ad-b2c-sign-in-using-an-ios-application"></a>Azure AD B2C: Bir iOS uygulaması kullanarak oturum açın
+# <a name="azure-ad-b2c-sign-in-using-an-ios-application"></a>Azure AD B2C: iOS uygulaması kullanarak oturum açma
 
-Microsoft kimlik platformu OAuth2 ve OpenID Connect gibi açık standartlar kullanır. Açık standart protokolü kullanılarak, hizmetlerimizle tümleştirmek için bir kitaplık seçerken daha fazla Geliştirici seçenekleri sunar. Bu izlenecek yolda ve diğerleri gibi geliştiricilerin Microsoft Identity platformuna bağlanmak uygulamalar yazmaya yardımcı olmak için sağladık. Uygulayan çoğu kitaplık [RFC6749 OAuth2 belirtimi](https://tools.ietf.org/html/rfc6749) Microsoft Identity platformuna bağlanmak olanağına sahip olursunuz.
+Microsoft kimlik platformu OAuth2 ve OpenID Connect gibi açık standartlar kullanır. Açık bir standart protokol kullanmak, hizmetlerimizle tümleştirilecek bir kitaplığı seçerken daha fazla geliştirici seçeneği sunar. Geliştiricilere Microsoft Identity platformu 'na bağlanan uygulamalar yazma konusunda yardımcı olmak için bu izlenecek yolu ve diğer diğerlerini sağladık. [RFC6749 OAuth2 spec](https://tools.ietf.org/html/rfc6749) uygulayan çoğu kitaplık Microsoft Identity platformu 'na bağlanabilir.
 
 > [!WARNING]
-> Microsoft, üçüncü taraf kitaplıklar için düzeltmeler ve bu kitaplık bir gözden geçirme yapmış değil sağlamaz. Bu örnek, Azure AD B2C ile temel senaryolarda uyumluluk için test edilmiştir AppAuth adlı bir üçüncü taraf kitaplığı kullanıyor. Sorunları ve özellik istekleri kitaplığın açık kaynak projesine yönlendirilebilir. Daha fazla bilgi için [bu makaleye](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-libraries) bakın.
+> Microsoft üçüncü taraf kitaplıklar için düzeltmeler sağlamaz ve bu kitaplıkların gözden geçirilmesini yapılmamış demektir. Bu örnek, Azure AD B2C ile temel senaryolarda uyumluluk için test edilmiş AppAuth adlı bir üçüncü taraf kitaplığı kullanmaktır. Sorunlar ve özellik istekleri kitaplığın açık kaynaklı projesine yönlendirilmelidir. Daha fazla bilgi için [bu makaleye](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-libraries) bakın.
 >
 >
 
-OAuth2 veya Openıd Connect kullanmaya yeni başladıysanız Bu örnek yapılandırmanın büyük kadar sizin için anlamlı olmayabilir. [burada belgelediğimiz protokolün genel bakışına](active-directory-b2c-reference-protocols.md) kısaca bakmanız önerilir.
+OAuth2 veya OpenID Connect ' i yeni başladıysanız, bu örnek yapılandırmanın büyük bölümü sizin için çok anlamlı olmayabilir. [burada belgelediğimiz protokolün genel bakışına](active-directory-b2c-reference-protocols.md) kısaca bakmanız önerilir.
 
 ## <a name="get-an-azure-ad-b2c-directory"></a>Azure AD B2C dizini alma
-Azure AD B2C'yi kullanabilmek için önce dizin veya kiracı oluşturmanız gerekir. Bir dizin, tüm kullanıcılarınız, uygulamalar, gruplar ve daha fazlası için bir kapsayıcıdır. Henüz yoksa devam etmeden önce [bir B2C dizini oluşturun](tutorial-create-tenant.md).
+Azure AD B2C'yi kullanabilmek için önce dizin veya kiracı oluşturmanız gerekir. Dizin, tüm kullanıcılarınızın, uygulamalarınızın, grupların ve daha fazlası için bir kapsayıcıdır. Henüz yoksa devam etmeden önce [bir B2C dizini oluşturun](tutorial-create-tenant.md).
 
 ## <a name="create-an-application"></a>Uygulama oluşturma
-Ardından B2C dizininizde uygulama oluşturmanız gerekir. Uygulama kaydı, uygulamanız ile güvenli bir şekilde iletişim kurması için gereken bilgileri Azure AD'ye verir. Bir mobil uygulama oluşturmak için takip [bu yönergeleri](active-directory-b2c-app-registration.md). Şunları yaptığınızdan emin olun:
 
-* Dahil bir **yerel istemci** uygulama.
-* Uygulamanıza atanan **Uygulama Kimliği**'ni kopyalayın. Daha sonra bu GUID gerekir.
-* Ayarlanmış bir **yeniden yönlendirme URI'si** (örneğin, com.onmicrosoft.fabrikamb2c.exampleapp://oauth/redirect) özel bir düzen ile. Daha sonra bu URI gerekir.
+Sonra, Azure AD B2C kiracınıza bir uygulamayı kaydedin. Bu, Azure AD 'nin uygulamanızla güvenli bir şekilde iletişim kurması için gereken bilgileri sağlar.
+
+[!INCLUDE [active-directory-b2c-appreg-native](../../includes/active-directory-b2c-appreg-native.md)]
+
+Daha sonraki bir adımda kullanmak üzere **uygulama (istemci) kimliğini** kaydedin.
+
+Ayrıca, daha sonraki bir adımda kullanmak üzere özel yeniden yönlendirme URI 'nizi kaydedin. Örneğin, `com.onmicrosoft.contosob2c.exampleapp://oauth/redirect`.
 
 ## <a name="create-your-user-flows"></a>Kullanıcı akışlarınızı oluşturun
-Azure AD B2C'de, her kullanıcı deneyimi tarafından tanımlanan bir [kullanıcı akışı](active-directory-b2c-reference-policies.md). Bu uygulama bir kimlik deneyimi içerir: birleşik bir oturum açma ve kaydolma. İlkeyi oluştururken şunları yaptığınızdan emin olun:
+Azure AD B2C, her kullanıcı deneyimi bir [Kullanıcı akışı](active-directory-b2c-reference-policies.md)tarafından tanımlanır. Bu uygulama bir kimlik deneyimi içerir: Birleşik bir oturum açma ve kaydolma. Kullanıcı akışını oluştururken şunları yaptığınızdan emin olun:
 
-* Altında **kaydolma özniteliklerini**, öznitelik seçin **görünen ad**.  Diğer öznitelikler de seçebilirsiniz.
-* Altında **uygulama taleplerini**, talepleri seçmek **görünen ad** ve **kullanıcının nesne kimliği**. Diğer talepleri de seçebilirsiniz.
-* Kopyalama **adı** oluşturduktan sonra her kullanıcı akış. Kullanıcı akışı adınızı ön ekine sahip `b2c_1_` kullanıcı akışı kaydettiğinizde.  Userjourney adı daha sonra gerekir.
+* **Kaydolma öznitelikleri**altında, öznitelik **görünen adını**seçin.  Başka öznitelikler de seçebilirsiniz.
+* **Uygulama talepleri**bölümünde, talep **görünen adını** ve **kullanıcının nesne kimliğini**seçin. Diğer talepler ' i de seçebilirsiniz.
+* Her Kullanıcı akışının **adını** oluşturduktan sonra kopyalayın. Kullanıcı akışını kaydettiğinizde Kullanıcı akış adınızın önüne `b2c_1_` eklenir.  Kullanıcı akış adının daha sonra olması gerekir.
 
-Kullanıcı akış oluşturduktan sonra uygulamanızı oluşturmaya hazırsınız.
+Kullanıcı akışlarınızı oluşturduktan sonra uygulamanızı oluşturmaya hazırsınız demektir.
 
 ## <a name="download-the-sample-code"></a>Örnek kodu indirin
-AppAuth kullanan Azure AD B2C ile çalışma örnek sağladık [github'da](https://github.com/Azure-Samples/active-directory-ios-native-appauth-b2c). Kodu indirin ve çalıştırın. Azure AD B2C kiracınızı kullanmak için yönergeleri izleyin. [README.md](https://github.com/Azure-Samples/active-directory-ios-native-appauth-b2c/blob/master/README.md).
+[GitHub üzerinde](https://github.com/Azure-Samples/active-directory-ios-native-appauth-b2c)Azure AD B2C AppAuth kullanan bir çalışan örnek sağladık. Kodu indirebilir ve çalıştırabilirsiniz. Kendi Azure AD B2C kiracınızı kullanmak için [README.MD](https://github.com/Azure-Samples/active-directory-ios-native-appauth-b2c/blob/master/README.md)içindeki yönergeleri izleyin.
 
-Bu örnek tarafından Benioku yönergeleri takip ederek oluşturulduğu [iOS AppAuth proje Github'da](https://github.com/openid/AppAuth-iOS). Örnek ve kitaplığı nasıl çalıştığı hakkında daha fazla bilgi için github'da AppAuth Benioku başvuru.
+Bu örnek, [GitHub 'Daki IOS AppAuth projesi](https://github.com/openid/AppAuth-iOS)tarafından Benioku yönergelerini izleyerek oluşturulmuştur. Örnek ve kitaplığın nasıl çalıştığı hakkında daha fazla bilgi için GitHub 'da AppAuth Benioku dosyasına başvurun.
 
-## <a name="modifying-your-app-to-use-azure-ad-b2c-with-appauth"></a>Azure AD B2C ile AppAuth kullanmak için uygulamanızı değiştirme
+## <a name="modifying-your-app-to-use-azure-ad-b2c-with-appauth"></a>Uygulamanızı AppAuth ile Azure AD B2C kullanmak üzere değiştirme
 
 > [!NOTE]
-> AppAuth destekleyen iOS 7 ve üzeri.  Ancak, sosyal oturumların Google'da desteklenmesi için SFSafariViewController gerekli iOS 9 veya üstü gerektirir.
+> AppAuth, iOS 7 ve üstünü destekler.  Ancak, Google üzerinde sosyal oturum açma işlemlerini desteklemek için iOS 9 veya üstünü gerektiren SFSafariViewController gerekir.
 >
 
 ### <a name="configuration"></a>Yapılandırma
 
-Yetkilendirme uç noktası ve belirteç uç noktası URI belirterek Azure AD B2C ile iletişim yapılandırabilirsiniz.  Bu bir URI'leri oluşturmak için aşağıdaki bilgiler gereklidir:
-* Kiracı kimliği (örneğin, contoso.onmicrosoft.com)
-* Userjourney adı (örneğin, B2C\_1\_SignUpIn)
+Yetkilendirme uç noktası ve belirteç uç noktası URI 'Lerini belirterek Azure AD B2C iletişim yapılandırabilirsiniz.  Bu URI 'Leri oluşturmak için aşağıdaki bilgilere ihtiyacınız vardır:
+* Kiracı KIMLIĞI (örneğin, contoso.onmicrosoft.com)
+* Kullanıcı akış adı (örneğin, B2C\_1\_SignUpIn)
 
-URI Kiracının değiştirerek oluşturulabilir ve belirteç uç noktasına\_kimliği ve ilke\_aşağıdaki URL adı:
+Belirteç uç noktası URI 'SI, kiracı\_KIMLIĞI ve Ilke\_adı aşağıdaki URL 'de değiştirilerek oluşturulabilir:
 
 ```objc
 static NSString *const tokenEndpoint = @"https://<Tenant_name>.b2clogin.com/te/<Tenant_ID>/<Policy_Name>/oauth2/v2.0/token";
 ```
 
-URI Kiracının değiştirerek oluşturulabilir yetkilendirme uç noktası\_kimliği ve ilke\_aşağıdaki URL adı:
+Aşağıdaki URL 'deki kiracı\_KIMLIĞI ve Ilke\_adı değiştirilerek yetkilendirme uç noktası URI 'SI oluşturulabilir:
 
 ```objc
 static NSString *const authorizationEndpoint = @"https://<Tenant_name>.b2clogin.com/te/<Tenant_ID>/<Policy_Name>/oauth2/v2.0/authorize";
 ```
 
-AuthorizationServiceConfiguration nesneyi oluşturmak için aşağıdaki kodu çalıştırın:
+AuthorizationServiceConfiguration nesneniz oluşturmak için aşağıdaki kodu çalıştırın:
 
 ```objc
-OIDServiceConfiguration *configuration = 
+OIDServiceConfiguration *configuration =
     [[OIDServiceConfiguration alloc] initWithAuthorizationEndpoint:authorizationEndpoint tokenEndpoint:tokenEndpoint];
 // now we are ready to perform the auth request...
 ```
 
-### <a name="authorizing"></a>Yetkilendirme
+### <a name="authorizing"></a>İşlemidir
 
-Yapılandırma veya bir yetkilendirme hizmet yapılandırması alma sonra bir yetkilendirme isteği oluşturulabilir. İsteği oluşturmak için aşağıdaki bilgiler gereklidir:  
-* İstemci kimliği (örneğin, 00000000-0000-0000-0000-000000000000)
-* Özel bir düzen ile (örneğin, com.onmicrosoft.fabrikamb2c.exampleapp://oauth/redirect) yeniden yönlendirme URI'si
+Yetkilendirme hizmeti yapılandırmasını yapılandırdıktan veya aldıktan sonra bir yetkilendirme isteği oluşturulabilir. İsteği oluşturmak için aşağıdaki bilgilere ihtiyacınız vardır:
 
-Olduğunda, her iki öğe kaydedilmiş olması [uygulamanızı kaydetme](#create-an-application).
+* Daha önce kaydettiğiniz istemci KIMLIĞI (uygulama KIMLIĞI). Örneğin, `00000000-0000-0000-0000-000000000000`.
+* Daha önce kaydettiğiniz özel yeniden yönlendirme URI 'SI. Örneğin, `com.onmicrosoft.contosob2c.exampleapp://oauth/redirect`.
+
+[Uygulamanızı kaydederken](#create-an-application)her iki öğe de kaydedilmiş olmalıdır.
 
 ```objc
-OIDAuthorizationRequest *request = 
+OIDAuthorizationRequest *request =
     [[OIDAuthorizationRequest alloc] initWithConfiguration:configuration
                                                   clientId:kClientId
                                                     scopes:@[OIDScopeOpenID, OIDScopeProfile]
@@ -102,7 +106,7 @@ OIDAuthorizationRequest *request =
                                       additionalParameters:nil];
 
 AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-appDelegate.currentAuthorizationFlow = 
+appDelegate.currentAuthorizationFlow =
     [OIDAuthState authStateByPresentingAuthorizationRequest:request
                                    presentingViewController:self
                                                    callback:^(OIDAuthState *_Nullable authState, NSError *_Nullable error) {
@@ -116,16 +120,16 @@ appDelegate.currentAuthorizationFlow =
     }];
 ```
 
-Uygulamanızın yeniden yönlendirme URI'sine özel şema ile işlemesini ayarlamak için uygulamanızın Info.plist dosyasındaki 'URL şemalarını' listesini güncelleştirmeniz gerekiyor:
-* Info.plist açın.
-* 'Paket işletim sistemi türü kodu' gibi bir satır üzerine gelin ve tıklayın \+ simgesi.
-* Yeni satır 'URL türleri' olarak yeniden adlandırın.
-* 'URL türleri' solundaki oka tıklayın ağaç açın.
-* Solundaki oka tıklayın ' 0 ağaç açmak için ' öğesi.
-* 0 öğesine 'URL şemalarını' altında ilk öğeyi yeniden adlandırın.
-* Ağaç açmak için 'URL şemalarını' solundaki oka tıklayın.
-* 'Value' sütununda solundaki boş bir alan yoktur 'Öğesi 0' 'URL şemalarını altında'.  Değeri, uygulamanızın benzersiz düzenine ayarlayın.  Değer redirectURL OIDAuthorizationRequest nesnesi oluşturulurken kullanılan şema eşleşmelidir.  Bu örnekte 'com.onmicrosoft.fabrikamb2c.exampleapp' şeması kullanılır.
+Uygulamanızı özel şemayla URI 'ye yeniden yönlendirmeyi işleyecek şekilde ayarlamak için, Info. pList dosyanızın ' URL şemaları ' listesini güncelleştirmeniz gerekir:
+* Info. pList öğesini açın.
+* ' Paket işletim sistemi türü kodu ' gibi bir satırın üzerine gelin ve \+ simgesine tıklayın.
+* Yeni ' URL türleri ' satırını yeniden adlandırın.
+* Ağacı açmak için ' URL türleri ' sol tarafındaki oka tıklayın.
+* Ağacı açmak için ' Item 0 ' solundaki oka tıklayın.
+* 0 öğesinin altındaki ilk öğeyi ' URL şemaları ' olarak yeniden adlandırın.
+* Ağacı açmak için ' URL şemaları ' sol tarafındaki oka tıklayın.
+* ' Value ' sütununda, ' URL şemaları ' altında ' Item 0 ' solunda boş bir alan var.  Değeri uygulamanızın benzersiz düzenine ayarlayın.  Oıdaduthorizationrequest nesnesi oluşturulurken bu değerin redirectURL içinde kullanılan şemayla eşleşmesi gerekir.  Örnekte, ' com. onmicrosoft. fabrikamb2c. exampleapp ' şeması kullanılır.
 
-Başvurmak [AppAuth Kılavuzu](https://openid.github.io/AppAuth-iOS/) nasıl işlemi tamamlayın. İle çalışan bir uygulamayı hızlıca başlamak ihtiyacınız varsa, kullanıma [örnek](https://github.com/Azure-Samples/active-directory-ios-native-appauth-b2c). Bağlantısındaki [README.md](https://github.com/Azure-Samples/active-directory-ios-native-appauth-b2c/blob/master/README.md) kendi Azure AD B2C yapılandırmasını girmek için.
+İşlemin geri kalanını tamamlamaya yönelik [Appauth kılavuzuna](https://openid.github.io/AppAuth-iOS/) bakın. Çalışan bir uygulamayla hızlı bir şekilde çalışmaya başlamak için [örneğe](https://github.com/Azure-Samples/active-directory-ios-native-appauth-b2c)göz atın. Kendi Azure AD B2C yapılandırmanızı girmek için [README.MD](https://github.com/Azure-Samples/active-directory-ios-native-appauth-b2c/blob/master/README.md) içindeki adımları izleyin.
 
-Her zaman geri bildirim ve öneriler için açık duyuyoruz! Bu makalede herhangi bir güçlük sahip veya bu içeriğin geliştirilmesi için öneri, sayfanın sonundaki geri BİLDİRİMİNİZE değer veriyoruz. Özellik istekleri için ekleyebilmesi [UserVoice](https://feedback.azure.com/forums/169401-azure-active-directory/category/160596-b2c).
+Geri bildirim ve önerilere her zaman açıktır! Bu makaleyle ilgili zorluklar varsa veya bu içeriği geliştirmeye yönelik önerileriniz varsa, sayfanın en altında geri bildiriminizi beğeneceğiz. Özellik istekleri için bunları [UserVoice](https://feedback.azure.com/forums/169401-azure-active-directory/category/160596-b2c)'a ekleyin.

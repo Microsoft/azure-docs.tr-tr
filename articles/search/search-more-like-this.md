@@ -1,36 +1,35 @@
 ---
-title: Azure Search (Önizleme) - Azure Search moreLikeThis
-description: Azure Search REST API'SİNDE kullanıma sunulan moreLikeThis (Önizleme) özelliği için başlangıç belgeleri.
+title: moreLikeThis (Önizleme) sorgu özelliği
+titleSuffix: Azure Cognitive Search
+description: Azure Bilişsel Arama REST API önizleme sürümlerinde kullanılabilen moreLikeThis (Önizleme) özelliğini açıklar.
+manager: nitinme
 author: brjohnstmsft
-manager: jlembicz
-services: search
-ms.service: search
-ms.devlang: rest-api
-ms.topic: conceptual
-ms.date: 05/02/2019
 ms.author: brjohnst
-ms.custom: seodec2018
-ms.openlocfilehash: 4d1c691e570d3cfc7e0475c02e4c60ed6ffa8440
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.devlang: rest-api
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
+ms.openlocfilehash: fdde89f9ff88b15c464af805b81708b268e5ddf5
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67485346"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73721743"
 ---
-# <a name="morelikethis-in-azure-search"></a>Azure Search'te moreLikeThis
+# <a name="morelikethis-preview-in-azure-cognitive-search"></a>Azure Bilişsel Arama moreLikeThis (Önizleme)
 
-> [!Note]
-> moreLikeThis önizlemesi ve değil amaçlayan üretim kullanımı için kullanılıyor. [2019-05-06-Önizleme REST API sürümü](search-api-preview.md) bu özelliği sağlar. .NET SDK'sı desteği şu anda yoktur.
+> [!IMPORTANT] 
+> Bu özellik şu anda genel önizleme aşamasındadır. Önizleme işlevselliği, bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yükleri için önerilmez. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/). [REST API sürüm 2019-05-06-önizleme](search-api-preview.md) bu özelliği sağlar. Şu anda portal veya .NET SDK desteği yok.
 
-`moreLikeThis=[key]` bir sorgu parametresidir [arama belgeleri API](https://docs.microsoft.com/rest/api/searchservice/search-documents) , bulduğu belgeleri belge anahtarını tarafından belirtilen belge benzer. Ne zaman bir arama isteği yapıldığında ile `moreLikeThis`, belge en iyi şekilde açıklayan verilen belgedeki ayıklanan arama terimlerini bir sorgu oluşturulur. Oluşturulan sorgu daha sonra arama istekte bulunmak için kullanılır. Varsayılan olarak, tüm aranabilir alanları içeriğini, kullanarak belirtilen kısıtlı alanları değerlendirilir `searchFields` parametresi. `moreLikeThis` Parametresi kullanılamaz arama parametresi ile `search=[string]`.
+`moreLikeThis=[key]`, belge anahtarı tarafından belirtilen belgeye benzer belgeleri bulan [arama belgeleri API 'sindeki](https://docs.microsoft.com/rest/api/searchservice/search-documents) bir sorgu parametresidir. `moreLikeThis`ile bir arama isteği yapıldığında, bu belgeyi en iyi şekilde tanımlayan belirtilen belgeden ayıklanan arama terimleriyle bir sorgu oluşturulur. Oluşturulan sorgu daha sonra arama isteğini yapmak için kullanılır. Varsayılan olarak, tüm aranabilir alanların içeriği, `searchFields` parametresini kullanarak belirttiğiniz tüm kısıtlı alanlar olarak değerlendirilir. `moreLikeThis` parametresi, `search=[string]`arama parametresiyle birlikte kullanılamaz.
 
-Varsayılan olarak, tüm üst düzey aranabilir alanları içeriği olarak kabul edilir. Bunun yerine belirli alanları belirtmek istiyorsanız, kullanabileceğiniz `searchFields` parametresi. 
+Varsayılan olarak, en üst düzey aranabilir alanların içeriği göz önünde bulundurululur. Bunun yerine belirli alanları belirtmek istiyorsanız `searchFields` parametresini kullanabilirsiniz. 
 
-MoreLikeThis alt aranabilir alanları kullanamazsınız bir [karmaşık tür](search-howto-complex-data-types.md).
+[Karmaşık bir türdeki](search-howto-complex-data-types.md)aranabilir alt alanlarda moreLikeThis kullanamazsınız.
 
 ## <a name="examples"></a>Örnekler 
 
-MoreLikeThis sorgu örneği aşağıda verilmiştir. Açıklama alanları tarafından belirtilen kaynak belge alanının en çok benzeyen belgeleri sorgunun bulacağı `moreLikeThis` parametresi.
+Aşağıda bir moreLikeThis sorgusuna örnek verilmiştir. Sorgu, açıklama alanları `moreLikeThis` parametresi tarafından belirtildiği gibi, kaynak belgenin alanına benzer olan belgeleri bulur.
 
 ```
 Get /indexes/hotels/docs?moreLikeThis=1002&searchFields=description&api-version=2019-05-06-Preview
@@ -47,7 +46,7 @@ POST /indexes/hotels/docs/search?api-version=2019-05-06-Preview
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu özellikle ilgili denemeler için herhangi bir web testi aracı kullanabilirsiniz.  Bu alıştırma için Postman'ı kullanmanızı öneririz.
+Bu özellikle denemek için herhangi bir Web testi aracı kullanabilirsiniz.  Bu alıştırma için Postman kullanmanızı öneririz.
 
 > [!div class="nextstepaction"]
-> [Postman kullanarak Azure Search REST API'lerini keşfetme](search-get-started-postman.md)
+> [Postman kullanarak Azure Bilişsel Arama REST API 'Lerini keşfet](search-get-started-postman.md)

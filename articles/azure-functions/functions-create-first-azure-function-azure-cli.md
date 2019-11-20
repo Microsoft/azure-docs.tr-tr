@@ -1,8 +1,6 @@
 ---
 title: Azure CLI kullanarak ilk işlevinizi oluşturma
 description: Azure CLI ve Azure Functions Core Tools kullanarak sunucusuz yürütme için ilk Azure İşlevinizi oluşturma hakkında bilgi edinin.
-services: functions
-keywords: ''
 author: ggailey777
 ms.author: glenga
 ms.assetid: 674a01a7-fd34-4775-8b69-893182742ae0
@@ -10,16 +8,15 @@ ms.date: 11/13/2018
 ms.topic: quickstart
 ms.service: azure-functions
 ms.custom: mvc
-ms.devlang: azure-cli
-manager: jeconnoc
-ms.openlocfilehash: 625fcda4b612fdeda940f9219238ac79354dd056
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+manager: gwallace
+ms.openlocfilehash: 1d0c6edf250e49fe966388253617181ed2b3dff1
+ms.sourcegitcommit: 1d0b37e2e32aad35cc012ba36200389e65b75c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67444659"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72329648"
 ---
-# <a name="create-your-first-function-from-the-command-line"></a>Komut satırından ilk işlevinizi oluşturma
+# <a name="quickstart-create-your-first-function-from-the-command-line-using-azure-cli"></a>Hızlı başlangıç: Azure CLı kullanarak komut satırından ilk işlevinizi oluşturma
 
 Bu hızlı başlangıç konusu, komut satırından veya terminalden ilk işlevinizi oluşturma hakkında bilgi vermektedir. İşlev uygulaması oluşturmak için, işlevinizi barındıran [sunucusuz](https://azure.microsoft.com/solutions/serverless/) bir altyapı olan Azure CLI’yi kullanın. İşlev kodu projesi, bir uygulamadan, işlev uygulaması projesini Azure’ye dağıtmak için de kullanılan [Azure Functions Core Tools](functions-run-local.md) kullanılarak bir şablondan oluşturulur.
 
@@ -29,43 +26,17 @@ Mac, Windows veya Linux bilgisayar kullanarak aşağıdaki adımları izleyebili
 
 Bu örneği çalıştırmadan önce aşağıdakilere sahip olmanız gerekir:
 
-+ Yükleme [Azure işlevleri çekirdek Araçları](./functions-run-local.md#v2) 2.6.666 sürümü veya üzeri.
++ [Azure Functions Core Tools](./functions-run-local.md#v2) sürüm 2.6.666 veya üstünü yükler.
 
-+ [Azure CLI]( /cli/azure/install-azure-cli)’yi yükleyin. Bu makale, Azure CLI 2.0 veya sonraki bir sürümü gerektirir. Kullandığınız sürümü bulmak için `az --version` komutunu çalıştırın. [Azure Cloud Shell](https://shell.azure.com/bash)’i de kullanabilirsiniz.
++ [Azure CLI](/cli/azure/install-azure-cli)’yi yükleyin. Bu makale için Azure CLı 2,0 veya sonraki bir sürümü gerekir. Kullandığınız sürümü bulmak için `az --version` komutunu çalıştırın. [Azure Cloud Shell](https://shell.azure.com/bash)’i de kullanabilirsiniz.
 
 + Etkin bir Azure aboneliği.
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-## <a name="create-the-local-function-app-project"></a>Yerel işlev uygulaması projesi oluşturma
+[!INCLUDE [functions-create-function-app-cli](../../includes/functions-create-function-app-cli.md)]
 
-Geçerli yerel dizinin `MyFunctionProj` klasöründe bir işlev uygulaması projesi oluşturmak için komut satırından aşağıdaki komutu çalıştırın. `MyFunctionProj`’de bir GitHub deposu da oluşturulur.
-
-```bash
-func init MyFunctionProj
-```
-
-İstendiğinde, aşağıdaki dil seçimlerinden bir worker çalışma zamanı seçin:
-
-+ `dotnet`: yeni bir .NET Core sınıf kitaplığı projesi (.csproj) oluşturur.
-+ `node`: bir JavaScript projesi oluşturur.
-
-Komut yürütüldüğünde, aşağıdaki çıktıya benzer bir şey görürsünüz:
-
-```output
-Writing .gitignore
-Writing host.json
-Writing local.settings.json
-Initialized empty Git repository in C:/functions/MyFunctionProj/.git/
-```
-
-Yeni `MyFunctionProj` proje klasörüne gitmek için aşağıdaki komutu kullanın.
-
-```bash
-cd MyFunctionProj
-```
-
-## <a name="enable-extension-bundles"></a>Uzantı paketleri etkinleştir
+## <a name="enable-extension-bundles"></a>Uzantı paketlerini etkinleştir
 
 [!INCLUDE [functions-extension-bundles](../../includes/functions-extension-bundles.md)]
 
@@ -81,7 +52,7 @@ cd MyFunctionProj
 
 İşlevlerinizin yürütülmesini barındıran bir işlev uygulamasına sahip olmanız gerekir. İşlev uygulaması, işlev kodunuzun sunucusuz yürütülmesine yönelik bir ortam sağlar. Kaynakların daha kolay yönetilmesi, dağıtılması ve paylaşılması için işlevleri bir mantıksal birim olarak gruplandırmanıza olanak tanır. [az functionapp create](/cli/azure/functionapp#az-functionapp-create) komutunu kullanarak bir işlev uygulaması oluşturun. 
 
-Aşağıdaki komutta benzersiz bir işlev uygulamasının adını `<APP_NAME>` yer tutucusunun ve `<STORAGE_NAME>` depolama hesabı adının yerine ekleyin. `<APP_NAME>`, işlev uygulamasının varsayılan DNS etki alanı olarak kullanılacağı için adın Azure’daki tüm uygulamalarda benzersiz olması gerekir. Ayrıca ayarlamalısınız `<language>` işlev uygulamanız için çalışma zamanı gelen `dotnet` (C#) veya `node` (JavaScript).
+Aşağıdaki komutta benzersiz bir işlev uygulamasının adını `<APP_NAME>` yer tutucusunun ve `<STORAGE_NAME>` depolama hesabı adının yerine ekleyin. `<APP_NAME>`, işlev uygulamasının varsayılan DNS etki alanı olarak kullanılacağı için adın Azure’daki tüm uygulamalarda benzersiz olması gerekir. Ayrıca, işlev uygulamanız için `<language>` çalışma zamanını `dotnet` (C#) veya `node` (JavaScript) olarak ayarlamanız gerekir.
 
 ```azurecli-interactive
 az functionapp create --resource-group myResourceGroup --consumption-plan-location westeurope \

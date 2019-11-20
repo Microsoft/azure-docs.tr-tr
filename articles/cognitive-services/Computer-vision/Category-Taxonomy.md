@@ -1,7 +1,7 @@
 ---
-title: Resim kategorileri - görüntü işleme'nin Taksonomisi
-titlesuffix: Azure Cognitive Services
-description: Azure Bilişsel hizmetler, görüntü işleme API'si için sınıflandırma 86 kategorilerini alın.
+title: Görüntü kategorileri sınıflandırması-Görüntü İşleme
+titleSuffix: Azure Cognitive Services
+description: Azure bilişsel hizmetler 'deki Görüntü İşleme API'si için Taksonomi 86 kategorilerini alın.
 services: cognitive-services
 author: KellyDF
 manager: nitinme
@@ -11,16 +11,16 @@ ms.topic: reference
 ms.date: 04/17/2019
 ms.author: kefre
 ms.custom: seodec18
-ms.openlocfilehash: 92adcf40d008a94a2fd81846cf9aa712474beacc
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 42562f3e19844621cb3893cb4ce185e85cf7e0ab
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60498857"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68565755"
 ---
-# <a name="computer-vision-86-category-taxonomy"></a>Bilgisayar işleme 86 kategori sınıflandırma
+# <a name="computer-vision-86-category-taxonomy"></a>Görüntü İşleme 86-kategori taksonomi
 
-abstract_
+Soyut
 
 abstract_net
 
@@ -32,7 +32,7 @@ abstract_shape
 
 abstract_texture
 
-animal_
+hayvan
 
 animal_bird
 
@@ -44,7 +44,7 @@ animal_horse
 
 animal_panda
 
-building_
+yapım
 
 building_arch
 
@@ -62,9 +62,9 @@ building_stair
 
 building_street
 
-dark_
+ci
 
-drink_
+içki
 
 drink_can
 
@@ -74,7 +74,7 @@ dark_fireworks
 
 sky_object
 
-food_
+yemek
 
 food_bread
 
@@ -100,9 +100,9 @@ indoor_venue
 
 dark_light
 
-others_
+bilgisayarlardan
 
-outdoor_
+Doğa
 
 outdoor_city
 
@@ -132,7 +132,7 @@ outdoor_water
 
 outdoor_waterside
 
-people_
+düzenliyor
 
 people_baby
 
@@ -152,7 +152,7 @@ people_tattoo
 
 people_young
 
-plant_
+bit
 
 plant_branch
 
@@ -174,7 +174,7 @@ people_swimming
 
 outdoor_pool
 
-text_
+metinleri
 
 text_mag
 

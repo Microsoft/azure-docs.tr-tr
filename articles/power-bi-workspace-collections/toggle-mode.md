@@ -2,18 +2,18 @@
 title: Görünüm arasında geçiş yapmak ve düzenleme modundan Power BI çalışma alanı koleksiyonları'ndaki raporlar için | Microsoft Docs
 description: Görünüm arasında geçiş yapmak ve raporlarınızı Power BI çalışma alanı koleksiyonları içinde modunu düzenleme hakkında bilgi edinin.
 services: power-bi-workspace-collections
-ms.service: power-bi-workspace-collections
+ms.service: power-bi-embedded
 author: rkarlin
 ms.author: rkarlin
 ms.topic: article
 ms.workload: powerbi
 ms.date: 09/20/2017
-ms.openlocfilehash: cab5d067387fcffe4f62b94e06960afe47d5f00c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 327f2fdcd4d1bc9e71e3aabb3541c6fd30f02811
+ms.sourcegitcommit: 2e4b99023ecaf2ea3d6d3604da068d04682a8c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64702681"
+ms.lasthandoff: 07/09/2019
+ms.locfileid: "67672361"
 ---
 # <a name="toggle-between-view-and-edit-mode-for-reports-in-power-bi-workspace-collections"></a>Düzenleme modundan Power BI çalışma alanı koleksiyonları'raporların ve görünüm arasında geçiş
 

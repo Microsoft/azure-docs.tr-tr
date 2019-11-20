@@ -1,6 +1,6 @@
 ---
-title: "\"Buradan oraya ulaşamazsınız\" hata - Azure Active Directory sorunlarını giderme | Microsoft Docs"
-description: "\"Buradan oraya ulaşamazsınız\" hata iletisi karşılaşacağınız olası nedenleri giderin."
+title: "\"Buradan alamıyoruz\" hatasını gidermeye yönelik düzeltmeler-Azure AD"
+description: Neden "Buradan alamazsınız" hata iletisini aldığınızı öğrenmek için olası düzeltmeleri bulun.
 services: active-directory
 author: eross-msft
 manager: daveba
@@ -14,60 +14,61 @@ ms.author: lizross
 ms.reviewer: jairoc
 ms.custom: user-help, seo-update-azuread-jan
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a317680a39d4594aacdf84ccdf963bb84bfbf07b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3d6385343ed26e5043e1491529fd2454caff4d04
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60473812"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74028569"
 ---
-# <a name="potential-reasons-for-the-you-cant-get-there-from-here-error-message"></a>Olası nedenleri "Buradan oraya ulaşamazsınız" hata iletisi
-Kuruluşunuzun iç web uygulamalarına veya hizmetlerine erişirken yazan bir hata iletisi alabilirsiniz **oraya buradan ulaşamazsınız**. Bu ileti, kuruluşunuz cihazınızın, kuruluşunuzun kaynaklarına erişimi engelleyen bir yerde bir ilke getirdi anlamına gelir. Bu sorunu gidermek için yardım masasına başvurmak zorunda son, ancak ilk deneyebileceğiniz birkaç şey aşağıda verilmiştir.
+# <a name="possible-fixes-for-the-you-cant-get-there-from-here-error-message"></a>"Buradan alamazsınız" hata iletisiyle ilgili olası düzeltmeler
+
+Kuruluşunuzun iç Web uygulamalarına veya hizmetlerine erişirken, **burada**bir hata iletisi alabilirsiniz. Bu ileti, kuruluşunuzun cihazın kuruluşunuzun kaynaklarına erişmesini engelleyen bir ilke yerleştirmediği anlamına gelir. Bu sorunu gidermek için yardım masanızla iletişim kurmaya gerek duyabilirsiniz, ancak öncelikle deneyebileceğiniz birkaç şey vardır.
 
 ## <a name="make-sure-youre-using-a-supported-browser"></a>Desteklenen bir tarayıcı kullandığınızdan emin olun
-Alırsanız **oraya buradan ulaşamazsınız** çalıştırdığınızdan, çalıştığınız, desteklenmeyen bir tarayıcıdan kuruluşunuzun sitelerine erişmek tarayıcıyı denetleyin belirten bir ileti.
+Burada, kuruluşunuzun sitelerine desteklenmeyen bir tarayıcıdan erişmeye çalıştığınızın ne olduğunu bildiren bir iletiyle **karşılaşamıyoruz** , çalıştırmakta olduğunuz tarayıcıyı kontrol edin.
 
-![Tarayıcı destek ile ilgili hata iletisi](media/user-help-device-remediation/browser-version.png)
+![Tarayıcı desteğiyle ilgili hata iletisi](media/user-help-device-remediation/browser-version.png)
 
-Bu sorunu gidermek için yükleme ve desteklenen bir tarayıcı, işletim sisteminize göre çalıştırın. Windows 10 kullanıyorsanız, desteklenen tarayıcılar Microsoft Edge, Internet Explorer ve Google Chrome içerir. Farklı bir işletim sistemi kullanıyorsanız, tam listesini denetleyebilirsiniz [Desteklenen tarayıcılar](../conditional-access/technical-reference.md#supported-browsers).
+Bu sorunu gidermek için işletim sisteminize bağlı olarak desteklenen bir tarayıcı yükleyip çalıştırmanız gerekir. Windows 10 kullanıyorsanız, desteklenen tarayıcılar Microsoft Edge, Internet Explorer ve Google Chrome 'u içerir. Farklı bir işletim sistemi kullanıyorsanız, [Desteklenen tarayıcıların](../conditional-access/technical-reference.md#supported-browsers)tüm listesini kontrol edebilirsiniz.
 
 ## <a name="make-sure-youre-using-a-supported-operating-system"></a>Desteklenen bir işletim sistemi kullandığınızdan emin olun
-İşletim sisteminin desteklenen bir sürümünü çalıştırdığınızdan emin olun dahil olmak üzere:
+İşletim sisteminin desteklenen bir sürümünü çalıştırdığınızdan emin olun; örneğin:
 
-- **Windows İstemcisi.** Windows 7 veya üzeri.
+- **Windows Istemcisi.** Windows 7 veya üzeri.
 
 - **Windows Server.** Windows Server 2008 R2 veya üzeri.
 
-- **macOS.** macOS X veya üzeri
+- **MacOS.** macOS X veya üzeri
 
-- **Android ve iOS.** Android ve iOS mobil işletim sistemlerini en son sürümünü
+- **Android ve iOS.** Android ve iOS mobil işletim sistemlerinin en son sürümü
 
-Bu sorunu gidermek için yükleme ve desteklenen bir işletim sistemi çalıştırması gerekir.
+Bu sorunu gidermek için desteklenen bir işletim sistemi yükleyip çalıştırmanız gerekir.
 
-## <a name="make-sure-your-device-is-joined-to-your-network"></a>Cihazınızı ağınıza katıldığından emin olun
-Alırsanız **oraya buradan ulaşamazsınız** cihazınızın uyumluluğunu dışı olduğunu belirten bir ileti, kuruluşunuzun erişim ilkesi ile kuruluşunuzun ağa Cihazınızı katılmış emin olun.
+## <a name="make-sure-your-device-is-joined-to-your-network"></a>Cihazınızın ağınıza katılmış olduğundan emin olun
+Burada, cihazınızın kuruluşunuzun erişim ilkesiyle uyumlu olmadığını söyleyen bir iletiyle ilgili bilgi **alamazsanız** , cihazınızı kuruluşunuzun ağına katıldığınızdan emin olun.
 
-![Ağınızda olmanıza için ilgili hata iletisi](media/user-help-device-remediation/network-version.png)
+![Ağınızda olup olmadığınız ile ilgili hata iletisi](media/user-help-device-remediation/network-version.png)
 
-### <a name="to-check-whether-your-device-is-joined-to-your-network"></a>Cihazınızı ağınıza hangisine katılması gerektiğini denetlemek için
-1. İçin Windows iş veya Okul hesabınızı kullanarak oturum açın. Örneğin, alain@contoso.com.
+### <a name="to-check-whether-your-device-is-joined-to-your-network"></a>Cihazınızın ağınıza katılıp katılmadığını denetlemek için
+1. İş veya okul hesabınızı kullanarak Windows 'da oturum açın. Örneğin, alain@contoso.com.
 
-2. Kuruluşunuzun ağa bir sanal özel ağ (VPN) veya DirectAccess aracılığıyla bağlanın.
+2. Sanal özel ağ (VPN) veya DirectAccess aracılığıyla kuruluşunuzun ağına bağlanın.
 
-3. Bağlandıktan sonra basın **Windows logosu tuşu + L** Cihazınızı kilitlemek üzere.
+3. Bağlandıktan sonra, cihazınızı kilitlemek için **Windows logosu tuşu + L** tuşlarına basın.
 
-4. Çalışmanızı kullanarak cihazınızın kilidini açın ya da Okul hesabı ve sorunlu uygulamaya erişmek veya hizmetini yeniden deneyin.
+4. İş veya okul hesabınızı kullanarak cihazınızın kilidini açın ve ardından sorunlu uygulamaya veya hizmete erişmeyi yeniden deneyin.
 
-    Görürseniz **oraya buradan ulaşamazsınız** hata iletisini tekrar seçin **daha fazla ayrıntı** bağlantısını ve ardından ayrıntılarını birlikte Yardım Masanızla iletişime geçin.
+    Buradan bir hata iletisi **alırsanız** , **daha fazla ayrıntı** bağlantısını seçin ve ardından yardım masanızla iletişime geçin.
 
-### <a name="to-join-your-device-to-your-network"></a>Cihazınızı ağınıza katılmak için
-Cihazınızı kuruluşunuzun ağa katılmış değilse, bunu ikisinden birini yapabilirsiniz:
+### <a name="to-join-your-device-to-your-network"></a>Cihazınızı ağınıza katmak için
+Cihazınız kuruluşunuzun ağına katılmamışsa, iki işlemlerden birini yapabilirsiniz:
 
-- **Cihazınızı çalışma alanına ekleyin.** Potansiyel olarak kısıtlanmış kaynaklara erişebilmesi için iş ait Windows 10 Cihazınızı kuruluşunuzun ağa katılmasını sağlayın. Daha fazla bilgi ve adım adım yönergeler için bkz. [iş cihazınızın, kuruluşunuzun ağına katılın](user-help-join-device-on-network.md).
+- **İş cihazınıza katın.** Potansiyel olarak kısıtlanmış kaynaklara erişebilmek için, iş sahibi Windows 10 cihazınızı kuruluşunuzun ağına katın. Daha fazla bilgi ve adım adım yönergeler için bkz. [iş cihazınızı kuruluşunuzun ağına ekleme](user-help-join-device-on-network.md).
 
-- **İş için kişisel Cihazınızı kaydedin.** Kişisel Cihazınızı, genellikle bir telefonda veya tablette, kuruluşunuzun ağ kaydedin. Cihazınız kaydedildikten sonra kuruluşunuzun kısıtlanmış kaynaklara erişebilir. Daha fazla bilgi ve adım adım yönergeler için bkz. [kuruluşunuzun ağ üzerindeki kişisel cihazını kaydetmek](user-help-register-device-on-network.md).
+- **Kişisel cihazınızı iş için kaydedin.** Kuruluşunuzun ağına, genellikle telefon veya tablet kişisel cihazınızı kaydedin. Cihazınız kaydolduktan sonra kuruluşunuzun kısıtlanmış kaynaklarına erişebilir. Daha fazla bilgi ve adım adım yönergeler için bkz. [Kişisel cihazınızı kuruluşunuzun ağına kaydetme](user-help-register-device-on-network.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- [MyApps portalında nedir?](active-directory-saas-access-panel-introduction.md)
+- [Uygulamaps portalı nedir?](active-directory-saas-access-panel-introduction.md)
 
 - [Parolanızla değil telefonunuzla oturum açma](user-help-auth-app-sign-in.md)

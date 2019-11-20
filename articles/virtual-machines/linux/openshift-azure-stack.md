@@ -1,6 +1,6 @@
 ---
-title: OpenShift Azure Stack'te dağıtma | Microsoft Docs
-description: OpenShift Azure Stack'te dağıtın.
+title: Azure Stack 'de OpenShift dağıtma
+description: Azure Stack 'de OpenShift dağıtın.
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: haroldwongms
@@ -9,32 +9,31 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-linux
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 10/23/2018
+ms.date: 10/14/2019
 ms.author: haroldw
-ms.openlocfilehash: 91b37753ae80596612eda9d3ccd34858691e35ad
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d6c73b8cd33aa85793a2ce839410065e03b97be7
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60771558"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74035542"
 ---
-# <a name="deploy-openshift-container-platform-or-okd-in-azure-stack"></a>OpenShift kapsayıcı platformu veya Azure Stack'te OKD dağıtın
+# <a name="deploy-openshift-container-platform-or-okd-in-azure-stack"></a>Azure Stack 'de OpenShift kapsayıcı platformunu veya OKD 'yi dağıtma
 
-Azure Stack'te OpenShift dağıtılabilir. Dağıtım biraz farklılık gösterir ve özellikleri de biraz farklılık gösterir böylece Azure'da ve Azure Stack'te arasındaki bazı temel farklar vardır.
+OpenShift, Azure Stack dağıtılabilir. Azure ile Azure Stack arasında bazı önemli farklılıklar vardır; böylece dağıtım biraz farklı olur ve özellikleri de biraz farklılık gösterir.
 
-Şu anda, Azure bulut sağlayıcısı Azure Stack çalışmaz. Bu nedenle, disk kullanmayı mümkün olmayacaktır kalıcı depolama Azure Stack'te için iliştirin. Bunun yerine, diğer depolama seçenekleri iSCSI, GlusterFS, NFS gibi yapılandırabileceğiniz vs. Alternatif olarak, CNS etkinleştirebilir ve GlusterFS kalıcı depolama için kullanın. CNS etkinleştirilirse, üç ek düğümler GlusterFS kullanımı için ek depolama alanı ile dağıtılır.
+Azure bulut sağlayıcısı şu anda Azure Stack çalışmıyor. Bu nedenle, Azure Stack kalıcı depolama için disk iliştirme 'yi kullanamazsınız. Bunun yerine, NFS, Iscsı, GlusterFS vb. gibi diğer depolama seçeneklerini yapılandırabilirsiniz. Alternatif olarak, CNS ' ı etkinleştirebilir ve kalıcı depolama için GlusterFS kullanabilirsiniz. CNS etkinleştirilirse, GlusterFS kullanımı için ek depolama ile üç ek düğüm dağıtılır.
 
-OpenShift kapsayıcı platformu veya Azure Stack'te OKD dağıtmak için birkaç yöntemden birini kullanabilirsiniz:
+Azure Stack, OpenShift kapsayıcı platformunu veya OKD 'yi dağıtmak için birkaç yöntemden birini kullanabilirsiniz:
 
-- Gerekli Azure altyapı bileşenlerini el ile dağıtın ve izleyin [OpenShift kapsayıcı platformu belgeleri](https://docs.openshift.com/container-platform) veya [OKD belgeleri](https://docs.okd.io).
-- Mevcut bir kullanabilirsiniz [Resource Manager şablonu](https://github.com/Microsoft/openshift-container-platform/) , OpenShift kapsayıcı platformu küme dağıtımını basitleştirir.
-- Mevcut bir kullanabilirsiniz [Resource Manager şablonu](https://github.com/Microsoft/openshift-origin) , OKD küme dağıtımını basitleştirir.
+- Gerekli Azure altyapı bileşenlerini el ile dağıtabilir ve ardından [OpenShift kapsayıcı platformu belgelerini](https://docs.openshift.com/container-platform) veya [OKD belgelerini](https://docs.okd.io)takip edebilirsiniz.
+- OpenShift kapsayıcı platformu kümesinin dağıtımını kolaylaştıran mevcut bir [Kaynak Yöneticisi şablonunu](https://github.com/Microsoft/openshift-container-platform/) da kullanabilirsiniz.
+- Ayrıca, OKD kümesinin dağıtımını kolaylaştıran mevcut bir [Kaynak Yöneticisi şablonunu](https://github.com/Microsoft/openshift-origin) da kullanabilirsiniz.
 
-Resource Manager şablonu kullanarak, uygun dalı (azurestack yayın 3.x) seçin. API sürümleri Azure ve Azure Stack arasında farklı olduğundan, şablonları Azure için çalışmaz. RHEL görüntüsü başvuru şu anda sabit kodlanmış azuredeploy.json dosyasındaki bir değişken olarak ve görüntünüzü eşleşecek şekilde değiştirilmesi gerekir.
+Kaynak Yöneticisi şablonu kullanılıyorsa doğru dalı seçin (azurestack-Release-3. x). API sürümleri Azure ile Azure Stack arasında farklı olduğu için Azure şablonları çalışmaz. RHEL görüntü başvurusu Şu anda azuredeploy. json dosyasında bir değişken olarak sabit kodlanmış ve görüntlekiniz eşleşecek şekilde değiştirilmelidir.
 
 ```json
 "imageReference": {
@@ -45,31 +44,31 @@ Resource Manager şablonu kullanarak, uygun dalı (azurestack yayın 3.x) seçin
 }
 ```
 
-Red Hat aboneliklerini tüm seçenekler için gereklidir. Dağıtım sırasında Red Hat Enterprise Linux örneği Red Hat aboneliğe kayıtlı ve OpenShift kapsayıcı platformu için yetkilendirmeleri içeren havuzu kimliğine bağlı.
-Bir geçerli Red Hat Abonelik Yöneticisi (RHSM) kullanıcı adı, parola ve havuzu kimliği olduğundan emin olun Alternatif olarak, bir etkinleştirme anahtarı, kuruluş kimliği ve Havuz kimliği kullanabilirsiniz  Oturum açarak bu bilgileri doğrulayabilirsiniz https://access.redhat.com.
+Tüm seçenekler için, Red Hat aboneliği gerekir. Dağıtım sırasında Red Hat Enterprise Linux örneği Red Hat aboneliğine kaydedilir ve OpenShift kapsayıcı platformu için yetkilendirmeleri içeren havuz KIMLIĞINE eklenir.
+Geçerli bir Red Hat abonelik Yöneticisi (RHSM) Kullanıcı adı, parola ve havuz KIMLIĞINIZ olduğundan emin olun. Alternatif olarak, bir etkinleştirme anahtarı, kuruluş KIMLIĞI ve havuz KIMLIĞI de kullanabilirsiniz.  https://access.redhat.com' de oturum açarak bu bilgileri doğrulayabilirsiniz.
 
 ## <a name="azure-stack-prerequisites"></a>Azure Stack önkoşulları
 
-RHEL görüntüsü (OpenShift kapsayıcı platformu) veya CentOS görüntüsü (OKD) OpenShift kümeyi dağıtmak için Azure Stack ortamınıza eklenmesi gerekir. Bu görüntüleri eklemek için Azure Stack yöneticinize başvurun. Yönergeler burada bulunabilir:
+Bir OpenShift kümesi dağıtmak için Azure Stack ortamınıza bir RHEL görüntüsü (OpenShift kapsayıcı platformu) veya CentOS görüntüsü (OKD) eklenmelidir. Bu görüntüleri eklemek için Azure Stack yöneticinize başvurun. Yönergeleri şurada bulabilirsiniz:
 
 - https://docs.microsoft.com/azure/azure-stack/azure-stack-add-vm-image
 - https://docs.microsoft.com/azure/azure-stack/azure-stack-marketplace-azure-items
 - https://docs.microsoft.com/azure/azure-stack/azure-stack-redhat-create-upload-vhd
 
-## <a name="deploy-by-using-the-openshift-container-platform-or-okd-resource-manager-template"></a>OpenShift kapsayıcı platformu veya OKD Resource Manager şablonu kullanarak dağıtın
+## <a name="deploy-by-using-the-openshift-container-platform-or-okd-resource-manager-template"></a>OpenShift kapsayıcı platformunu veya OKD Kaynak Yöneticisi şablonunu kullanarak dağıtma
 
-Resource Manager şablonu kullanarak dağıtmak için giriş parametreleri sağlamak için bir parametre dosyası kullanın. Daha fazla dağıtımı özelleştirmek için GitHub depo çatalını oluşturmanız ve uygun öğeleri değiştirin.
+Kaynak Yöneticisi şablonunu kullanarak dağıtmak için, giriş parametrelerini sağlamak üzere bir parametreler dosyası kullanırsınız. Dağıtımı daha fazla özelleştirmek için GitHub deposunun çatalını yapın ve uygun öğeleri değiştirin.
 
-Bazı ortak özelleştirme seçenekleri içerir, ancak bunlarla sınırlı değildir:
+Bazı yaygın özelleştirme seçenekleri şunlardır, ancak bunlarla sınırlı değildir:
 
-- Savunma VM boyutu (azuredeploy.json değişkeninde)
-- Adlandırma kuralları (azuredeploy.json değişkenlerinde)
-- OpenShift küme özellikleri, hosts dosyasını (deployOpenShift.sh) değiştirme
-- RHEL görüntüsü başvurusu (azuredeploy.json değişkeninde)
+- Savunma VM boyutu (azuredeploy. JSON içinde değişken)
+- Adlandırma kuralları (azuredeploy. JSON içindeki değişkenler)
+- OpenShift küme özellikleri, Hosts dosyası aracılığıyla değiştirildi (deployOpenShift.sh)
+- RHEL görüntü başvurusu (azuredeploy. JSON içinde değişken)
 
-Azure CLI kullanarak dağıtma adımları için uygun bölümünde izleyin [OpenShift kapsayıcı platformu](./openshift-container-platform.md) bölüm veya [OKD](./openshift-okd.md) bölümü.
+Azure CLı kullanarak dağıtma adımları için [OpenShift kapsayıcı platformu](./openshift-container-platform-3x.md) bölümünde veya [OKD](./openshift-okd.md) bölümünde uygun bölümü izleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Dağıtım sonrası görevler](./openshift-post-deployment.md)
-- [Azure'da OpenShift dağıtım sorunlarını giderme](./openshift-troubleshooting.md)
+- [Dağıtım sonrası görevler](./openshift-container-platform-3x-post-deployment.md)
+- [Azure 'da OpenShift dağıtımında sorun giderme](./openshift-container-platform-3x-troubleshooting.md)

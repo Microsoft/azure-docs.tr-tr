@@ -1,7 +1,7 @@
 ---
-title: Küfür filtresini - Translator metin çevirisi API'si
-titlesuffix: Azure Cognitive Services
-description: Translator metin çevirisi API'si filtreleme küfür kullanın.
+title: Küfür filtrelemesi-Translator Metin Çevirisi API'si
+titleSuffix: Azure Cognitive Services
+description: Azure bilişsel hizmetler Translator Metin Çevirisi API'si metninizi çevrilmiş bir küfür düzeyini öğrenmek için uygunsuz metin filtrelemeyi kullanın.
 services: cognitive-services
 author: swmachan
 manager: nitinme
@@ -10,28 +10,28 @@ ms.subservice: translator-text
 ms.topic: conceptual
 ms.date: 06/04/2019
 ms.author: swmachan
-ms.openlocfilehash: cc6bf9766912aa55d7869d90976d3089cfd6cf4c
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: e7e2097e0d3daf360f1fa0f30bf3fd2c62c07163
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67448269"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73836221"
 ---
-# <a name="add-profanity-filtering-with-the-translator-text-api"></a>Translator metin çevirisi API'si ile filtreleme küfür Ekle
+# <a name="add-profanity-filtering-with-the-translator-text-api"></a>Translator Metin Çevirisi API'si ile küfür filtrelemesi ekleme
 
-Normalde Translator hizmeti, mevcut çeviri kaynağında küfür korur. Küfür ve sözcükler Küfürlü yapan bağlam derecesini kültürler arasında farklılık gösterir. Sonuç olarak, hedef dilde küfür derecesini yükseltilmiş sınırlı veya olabilir.
+Normalde çevirmen hizmeti, çevirinin kaynağında bulunan küfür 'ı korur. Küfür derecesi ve küfürlü sözcüklerini yapan bağlam, kültürler arasında farklılık gösterir. Sonuç olarak, hedef dildeki küfür derecesi, daha fazla veya daha az olabilir.
 
-Küfür kaynak metni mevcut olsa da, küfür çevirisini görmekten kaçınmak istiyorsanız, filtreleme seçeneği Translate() yöntemi sağlanır küfür kullanın. Bu seçenek, uygun etiketlerle işaretlenmiş silinmiş küfür görmek isteyip istemediğinizi seçin veya hiçbir eyleme girişilmedi sağlar.
+Kaynak metinde küfür mevcut olsa bile, çeviri içinde küfür görmekten kaçınmak isterseniz, Translate () yönteminde bulunan küfür filtreleme seçeneğini kullanın. Bu seçenek, küfür silinip silinmeyeceğini, uygun etiketlerle işaretlenip işaretlenmediğini veya hiçbir eylemde bulunulmayacağını seçmenizi sağlar.
 
-Translate() yöntemi yeni bir öğe "ProfanityAction" içerir "options" parametresi alır. Kabul edilen ProfanityAction "NoAction", "Marked" ve "Silinmiş" değerleri
+Translate () yöntemi "ProfanityAction" Yeni öğesini içeren "Options" parametresini alır. Kabul edilen ProfanityAction değeri "NoAction", "Işaretlendi" ve "Deleted" dir.
 
-## <a name="accepted-values-of-profanityaction-and-examples"></a>Kabul edilen değerler ProfanityAction ve örnekler
-|ProfanityAction değeri | Eylem | Örnek: Kaynak - Japonca | Örnek: Target - İngilizce|
+## <a name="accepted-values-of-profanityaction-and-examples"></a>ProfanityAction ve örneklerin kabul edilen değerleri
+|ProfanityAction değeri | Eylem | Örnek: kaynak-Japonca | Örnek: hedef-Ingilizce|
 | :---|:---|:---|:---|
-| NoAction | Varsayılan. Aynı seçenek ayarı bulunamadı. Küfür kaynaktan hedefe aktarır. | 彼は変態です。 | He aptalın olur. |
-| İşaretli | Küfürlü sözcükleri tarafından XML etiketleri arasına \<küfür >... \</profanity >. | 彼は変態です。 | He's bir \<küfür > jerk\</profanity >. |
-| Silme | Küfürlü sözcükleri değiştirme yapmadan çıktıdan kaldırıldı. | 彼は。 | He's bir. |
+| NoAction | Varsayılan. Seçeneği ayarlamaya benzer. Küfür kaynaktan hedefe geçiyor. | 彼は変態です. | Bu bir Jerk. |
+| İm | Küfürlü sözcükler \<küfür >... \</küfür > XML etiketleriyle çevrelenmiş. | 彼は変態です. | \<bir küfür > Jerk\</küfür >. |
+| Silinen | Küfürlü sözcükler, değişiklik yapılmadan çıktıdan kaldırılır. | 彼は. | Bir. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 > [!div class="nextstepaction"]
-> [Translator API çağrınızı filtreleme küfür Uygula](reference/v3-0-translate.md)
+> [Çevirmen API çağrlarınız ile uygunsuz filtre uygulama](reference/v3-0-translate.md)

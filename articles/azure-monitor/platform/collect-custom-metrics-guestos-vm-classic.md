@@ -1,64 +1,66 @@
 ---
-title: Azure İzleyici'veri deposu için bir Windows sanal makine (Klasik) konuk işletim sistemi ölçümleri gönderme
-description: Azure İzleyici'veri deposu için bir Windows sanal makine (Klasik) konuk işletim sistemi ölçümleri gönderme
+title: Windows sanal makinesi için Azure Izleyici veri deposuna Konuk işletim sistemi ölçümleri gönderme (klasik)
+description: Windows sanal makinesi için Azure Izleyici veri deposuna Konuk işletim sistemi ölçümleri gönderme (klasik)
 author: anirudhcavale
 services: azure-monitor
 ms.service: azure-monitor
 ms.topic: conceptual
-ms.date: 09/24/2018
+ms.date: 09/09/2019
 ms.author: ancav
 ms.subservice: ''
-ms.openlocfilehash: 57212da1a8da7ee6c57faf2413b88a413df04817
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: cc0c7c4928fb03cb60bb51f74d74fdc1ab914348
+ms.sourcegitcommit: adc1072b3858b84b2d6e4b639ee803b1dda5336a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66129572"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70844914"
 ---
-# <a name="send-guest-os-metrics-to-the-azure-monitor-data-store-for-a-windows-virtual-machine-classic"></a>Azure İzleyici'veri deposu için bir Windows sanal makine (Klasik) konuk işletim sistemi ölçümleri gönderme
+# <a name="send-guest-os-metrics-to-the-azure-monitor-data-store-for-a-windows-virtual-machine-classic"></a>Windows sanal makinesi için Azure Izleyici veri deposuna Konuk işletim sistemi ölçümleri gönderme (klasik)
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Azure İzleyici [tanılama uzantısını](https://docs.microsoft.com/azure/monitoring-and-diagnostics/azure-diagnostics) ("WAD" veya "Tanılama" olarak bilinir), ölçüm ve günlükleri bir sanal makine, bulut hizmeti veya Service Fabric bir parçası olarak çalışan konuk işletim sistemi (konuk OS) toplamanıza olanak sağlar Küme. Uzantı için telemetri gönderebilir [birçok farklı konumlarda.](https://docs.microsoft.com/azure/monitoring/monitoring-data-collection?toc=/azure/azure-monitor/toc.json)
+Azure Izleyici [Tanılama uzantısı](https://docs.microsoft.com/azure/monitoring-and-diagnostics/azure-diagnostics) ("wad" veya "Diagnostics" olarak bilinir), bir sanal makinenin, bulut hizmetinin veya Service Fabric kümesinin bir parçası olarak çalışan konuk işletim sisteminden (konuk işletim sistemi) ölçümleri ve günlükleri toplamanıza olanak tanır. Uzantı [birçok farklı konuma](https://docs.microsoft.com/azure/monitoring/monitoring-data-collection?toc=/azure/azure-monitor/toc.json) telemetri gönderebilir.
 
-Bu makalede Azure İzleyici ölçüm depoya bir Windows sanal makine (Klasik) konuk işletim sistemi performans ölçümleri gönderme işlemi açıklanır. Tanılama 1.11 sürüm ile başlayarak, doğrudan Azure ölçümleri mağazasından, burada standart platform zaten toplanan ölçümler izleyiciye ölçümleri yazabilirsiniz. 
+Bu makalede, Azure Izleyici ölçüm deposuna bir Windows sanal makinesi (klasik) için konuk işletim sistemi performans ölçümlerini gönderme işlemi açıklanır. Tanılama sürüm 1,11 ' den başlayarak, ölçümleri doğrudan Azure Izleyici ölçümleri deposuna yazabilirsiniz; burada standart platform ölçümleri zaten toplanır. 
 
-Bunları bu konumda depolama, platform ölçümler için yaptığınız gibi aynı eylemleri erişmenize olanak sağlar. Eylemler, uyarı verme, grafik, yönlendirme, neredeyse gerçek zamanlı bir REST API ve daha fazla erişim içerir. Geçmişte, Azure depolama, ancak Azure İzleyici'veri deposu tanılama uzantısını yazıldı. 
+Bu konumda depolamak, platform ölçümleri için yaptığınız aynı eylemlere erişmenizi sağlar. Eylemler, neredeyse gerçek zamanlı uyarı, grafik, yönlendirme, REST API erişimi ve daha fazlasını içerir. Geçmişte, tanılama uzantısı Azure depolama 'ya yazdı, ancak Azure Izleyici veri deposuna değil. 
 
-Bu makalede açıklanan işlem, yalnızca Windows işletim sistemi çalıştıran Klasik sanal makineler üzerinde çalışır.
+Bu makalede özetlenen işlem yalnızca Windows işletim sistemini çalıştıran klasik sanal makinelerde çalışır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Siz bir [Hizmet Yöneticisi veya ortak yönetici](../../billing/billing-add-change-azure-subscription-administrator.md) Azure aboneliğinize. 
+- Azure aboneliğinizde bir [Hizmet Yöneticisi veya ortak yönetici](../../billing/billing-add-change-azure-subscription-administrator.md) olmanız gerekir. 
 
-- Aboneliğiniz ile kaydedilmelidir [Microsoft.Insights](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-supported-services). 
+- Aboneliğinizin [Microsoft. Insights](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-supported-services)'a kayıtlı olması gerekir. 
 
-- Ya da gerek [Azure PowerShell](/powershell/azure) veya [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview) yüklü.
+- [Azure PowerShell](/powershell/azure) veya [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview) yüklemiş olmanız gerekir.
+
+- VM kaynağınızın [özel ölçümleri destekleyen bir bölgede](metrics-custom-overview.md#supported-regions)olması gerekir.
 
 ## <a name="create-a-classic-virtual-machine-and-storage-account"></a>Klasik sanal makine ve depolama hesabı oluşturma
 
-1. Azure portalını kullanarak klasik bir sanal makine oluşturun.
+1. Azure portal kullanarak klasik bir VM oluşturun.
    ![Klasik VM oluşturma](./media/collect-custom-metrics-guestos-vm-classic/create-classic-vm.png)
 
-1. Bu sanal makine oluştururken, yeni bir Klasik depolama hesabı oluşturmak için bu seçeneği seçin. Sonraki adımlarda bu depolama hesabı kullanırız.
+1. Bu sanal makineyi oluştururken, yeni bir klasik depolama hesabı oluşturma seçeneğini belirleyin. Bu depolama hesabını sonraki adımlarda kullanırız.
 
-1. Azure portalında Git **depolama hesapları** kaynak dikey penceresi. Seçin **anahtarları**, depolama hesabı adı ve depolama hesabı anahtarını not alın. Sonraki adımlarda bu bilgileri gerekir.
-   ![Depolama erişim anahtarlarını](./media/collect-custom-metrics-guestos-vm-classic/storage-access-keys.png)
+1. Azure portal **depolama hesapları** kaynağı dikey penceresine gidin. **Anahtarlar**' ı seçin ve depolama hesabı adı ile depolama hesabı anahtarını aklınızda yapın. Sonraki adımlarda bu bilgilere ihtiyacınız vardır.
+   ![Depolama erişim tuşları](./media/collect-custom-metrics-guestos-vm-classic/storage-access-keys.png)
 
 ## <a name="create-a-service-principal"></a>Hizmet sorumlusu oluşturma
 
-Bölümündeki yönergeleri kullanarak Azure Active Directory kiracınızda bir hizmet ilkesi oluşturma [hizmet sorumlusu oluşturma](../../active-directory/develop/howto-create-service-principal-portal.md). Bu süreç boyunca çalışırken aşağıdakileri unutmayın: 
-- Bu uygulama için yeni istemci gizli anahtarı oluşturun.
-- Sonraki adımlarda, anahtar ve kullanmak için istemci kimliği kaydedin.
+[Hizmet sorumlusu oluşturma](../../active-directory/develop/howto-create-service-principal-portal.md)bölümündeki yönergeleri kullanarak Azure Active Directory kiracınızda bir hizmet ilkesi oluşturun. Bu işlemden sonra aşağıdaki adımları göz önünde edin: 
+- Bu uygulama için yeni bir istemci gizli dizisi oluşturun.
+- Daha sonraki adımlarda kullanmak üzere anahtarı ve istemci KIMLIĞINI kaydedin.
 
-Bu uygulama, ölçümleri karşı yayma istediğiniz kaynağa "İzleme ölçümleri Publisher" izinlerini verin. Bir kaynak grubu veya tüm aboneliği kullanabilirsiniz.  
+Bu uygulamaya, ölçümleri sunmak istediğiniz kaynak için "Izleme ölçümleri yayımcısı" izinleri verin. Bir kaynak grubunu veya tüm aboneliği kullanabilirsiniz.  
 
 > [!NOTE]
-> Tanılama uzantısını hizmet sorumlusunu Azure İzleyici karşı kimliğini doğrulamak ve klasik sanal Makineniz için ölçümleri yaymak için kullanır.
+> Tanılama uzantısı, Azure Izleyicisine göre kimlik doğrulaması yapmak ve klasik sanal makinenizin ölçümlerini göstermek için hizmet sorumlusunu kullanır.
 
-## <a name="author-diagnostics-extension-configuration"></a>Tanılama uzantı yapılandırmasını yazma
+## <a name="author-diagnostics-extension-configuration"></a>Tanılama uzantısı yapılandırmasını yaz
 
-1. Tanılama uzantısı yapılandırma dosyanızı hazırlayın. Bu dosya, hangi günlükleri ve performans sayaçları tanılama uzantısını Klasik sanal Makineniz için toplama belirler. Bir örneği verilmiştir:
+1. Tanılama uzantısı yapılandırma dosyanızı hazırlayın. Bu dosya, tanılama uzantısının klasik VM 'niz için hangi günlükleri ve performans sayaçlarını toplayacağını belirler. Aşağıda bir örnek verilmiştir:
 
     ```xml
     <?xml version="1.0" encoding="utf-8"?>
@@ -104,7 +106,7 @@ Bu uygulama, ölçümleri karşı yayma istediğiniz kaynağa "İzleme ölçüml
     <IsEnabled>true</IsEnabled>
     </DiagnosticsConfiguration>
     ```
-1. Tanılama dosyanızın "SinksConfig" bölümünde yeni bir Azure Monitor havuzu, aşağıdaki gibi tanımlayın:
+1. Tanılama dosyanızın "SinksConfig" bölümünde, yeni bir Azure Izleyici havuzunu aşağıdaki gibi tanımlayın:
 
     ```xml
     <SinksConfig>
@@ -117,7 +119,7 @@ Bu uygulama, ölçümleri karşı yayma istediğiniz kaynağa "İzleme ölçüml
     </SinksConfig>
     ```
 
-1. Toplanacak performans sayaçlarının listesi nerede listeleniyor yapılandırma dosyanızı bölümünde Azure Monitor havuzu "AzMonSink" için performans sayaçlarını yol.
+1. Yapılandırma dosyanızın toplanacak performans sayaçları listesinin listelendiği bölümde, performans sayaçlarını "AzMonSink" Azure Izleyici havuzuna yönlendirin.
 
     ```xml
     <PerformanceCounters scheduledTransferPeriod="PT1M" sinks="AzMonSink">
@@ -126,7 +128,7 @@ Bu uygulama, ölçümleri karşı yayma istediğiniz kaynağa "İzleme ölçüml
     </PerformanceCounters>
     ```
 
-1. Özel yapılandırmada, Azure İzleyici hesabı tanımlayın. Ardından ölçümleri yaymak üzere kullanmak için hizmet sorumlusu bilgilerini ekleyin.
+1. Özel yapılandırmada Azure Izleyici hesabını tanımlayın. Daha sonra ölçümleri yayma için kullanılacak hizmet sorumlusu bilgilerini ekleyin.
 
     ```xml
     <PrivateConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
@@ -142,65 +144,65 @@ Bu uygulama, ölçümleri karşı yayma istediğiniz kaynağa "İzleme ölçüml
 
 1. Bu dosyayı yerel olarak kaydedin.
 
-## <a name="deploy-the-diagnostics-extension-to-your-cloud-service"></a>Bulut hizmetinize tanılama uzantısını dağıtma
+## <a name="deploy-the-diagnostics-extension-to-your-cloud-service"></a>Tanılama uzantısını bulut hizmetinize dağıtma
 
-1. PowerShell'i başlatın ve oturum açın.
+1. PowerShell 'i başlatın ve oturum açın.
 
     ```powershell
     Login-AzAccount
     ```
 
-1. Klasik sanal Makineniz için bağlam ayarlayarak başlatın.
+1. Klasik sanal makinenizin bağlamını ayarlayarak başlayın.
 
     ```powershell
     $VM = Get-AzureVM -ServiceName <VM’s Service_Name> -Name <VM Name>
     ```
 
-1. Sanal makine ile oluşturulan Klasik depolama hesabı bağlamını ayarlayın.
+1. VM ile oluşturulan klasik depolama hesabının bağlamını ayarlayın.
 
     ```powershell
     $StorageContext = New-AzStorageContext -StorageAccountName <name of your storage account from earlier steps> -storageaccountkey "<storage account key from earlier steps>"
     ```
 
-1.  Tanılama dosya yolu, aşağıdaki komutu kullanarak bir değişkene ayarlayın:
+1.  Aşağıdaki komutu kullanarak tanılama dosya yolunu bir değişkene ayarlayın:
 
     ```powershell
     $diagconfig = “<path of the diagnostics configuration file with the Azure Monitor sink configured>”
     ```
 
-1.  Klasik sanal Makineniz için güncelleştirme yapılandırılmış Azure Monitor havuzu tanılama dosyasıyla hazırlayın.
+1.  Azure Izleyici havuzunun yapılandırıldığı tanılama dosyası ile klasik VM 'niz için güncelleştirmeyi hazırlayın.
 
     ```powershell
     $VM_Update = Set-AzureVMDiagnosticsExtension -DiagnosticsConfigurationPath $diagconfig -VM $VM -StorageContext $Storage_Context
     ```
 
-1.  Güncelleştirme, sanal makinenizde aşağıdaki komutu çalıştırarak dağıtın:
+1.  Aşağıdaki komutu çalıştırarak güncelleştirmeyi sanal makinenize dağıtın:
 
     ```powershell
     Update-AzureVM -ServiceName "ClassicVMWAD7216" -Name "ClassicVMWAD" -VM $VM_Update.VM
     ```
 
 > [!NOTE]
-> Tanılama uzantısını yüklemesinin bir parçası olarak bir depolama hesabı sağlamak için hala zorunludur. Tüm günlükleri veya tanılama yapılandırma dosyasında belirtilen performans sayaçları, belirtilen depolama hesabına yazılır.
+> Tanılama uzantısının yüklenmesinin parçası olarak bir depolama hesabı sağlanması yine de zorunludur. Tanılama yapılandırma dosyasında belirtilen tüm Günlükler veya performans sayaçları, belirtilen depolama hesabına yazılır.
 
-## <a name="plot-the-metrics-in-the-azure-portal"></a>Azure portalında ölçümleri Çiz
+## <a name="plot-the-metrics-in-the-azure-portal"></a>Azure portal ölçümleri çizme
 
 1.  Azure portalına gidin. 
 
-1.  Sol menüden **İzleyici.**
+1.  Sol taraftaki menüden Izleyici ' yi seçin **.**
 
-1.  Üzerinde **İzleyici** dikey penceresinde **ölçümleri**.
+1.  **İzleyici** dikey penceresinde **ölçümler**' i seçin.
 
-    ![Ölçümleri gidin](./media/collect-custom-metrics-guestos-vm-classic/navigate-metrics.png)
+    ![Ölçümlere git](./media/collect-custom-metrics-guestos-vm-classic/navigate-metrics.png)
 
-1. Kaynak açılan menüsünde, Klasik VM'nizi seçin.
+1. Kaynaklar açılan menüsünde, klasik sanal makineyi seçin.
 
-1. Ad alanları açılır menüde **azure.vm.windows.guest**.
+1. Ad alanları açılan menüsünde **Azure. VM. Windows. Guest**' yi seçin.
 
-1. Ölçümleri açılan menüde **bellek\kaydedilmiş bayt**.
-   ![Çizim ölçümleri](./media/collect-custom-metrics-guestos-vm-classic/plot-metrics.png)
+1. Ölçümler açılan menüsünde, **Bellek\kaydedilmiş bayt kullanımda**' yı seçin.
+   ![Ölçümleri çiz](./media/collect-custom-metrics-guestos-vm-classic/plot-metrics.png)
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Daha fazla bilgi edinin [özel ölçümler](metrics-custom-overview.md).
+- [Özel ölçümler](metrics-custom-overview.md)hakkında daha fazla bilgi edinin.
 

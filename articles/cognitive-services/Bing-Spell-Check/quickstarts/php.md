@@ -1,7 +1,7 @@
 ---
-title: "Hızlı Başlangıç: PHP ve Bing yazım denetimi REST API'si ile yazım denetimi"
-titlesuffix: Azure Cognitive Services
-description: Bing yazım denetimi API'si yazım ve dilbilgisi denetimini kullanmaya başlayın.
+title: 'Hızlı başlangıç: Bing Yazım Denetimi REST API ve PHP ile yazım denetimi yapma'
+titleSuffix: Azure Cognitive Services
+description: Bu basit PHP uygulaması, Bing Yazım Denetimi API'si bir istek gönderir ve önerilen düzeltmelerin bir listesini döndürür.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,20 +10,20 @@ ms.subservice: bing-spell-check
 ms.topic: quickstart
 ms.date: 02/20/2019
 ms.author: aahi
-ms.openlocfilehash: 38ec5fcc57482928024f8a5a1cd07100db3085e6
-ms.sourcegitcommit: 3d4121badd265e99d1177a7c78edfa55ed7a9626
+ms.openlocfilehash: 4437297c99e346209cf1f7a8973ea0f6f81894af
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66390142"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74110797"
 ---
-# <a name="quickstart-check-spelling-with-the-bing-spell-check-rest-api-and-php"></a>Hızlı Başlangıç: PHP ve Bing yazım denetimi REST API'si ile yazım denetimi
+# <a name="quickstart-check-spelling-with-the-bing-spell-check-rest-api-and-php"></a>Hızlı başlangıç: Bing Yazım Denetimi REST API ve PHP ile yazım denetimi yapma
 
-Bu hızlı başlangıçta, Bing yazım denetimi REST API'si, ilk çağrı yapmak için kullanın. Bu basit bir Python uygulaması API'sine bir istek gönderir ve önerilen düzeltmeler listesini döndürür. Bu uygulama Python ile yazılmış olmakla birlikte API, çoğu programlama diliyle uyumlu bir RESTful Web hizmetidir.
+Bing Yazım Denetimi REST API ilk çağrlarınızı yapmak için bu hızlı başlangıcı kullanın. Bu basit PHP uygulaması, API 'ye bir istek gönderir ve önerilen düzeltmelerin bir listesini döndürür. Bu uygulama PHP 'de yazıldığı sırada API, çoğu programlama dili ile uyumlu olan bir yeniden sorun Web hizmetidir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* [PHP 5.6.x](https://php.net/downloads.php)
+* [PHP 5.6. x](https://php.net/downloads.php)
 
 [!INCLUDE [cognitive-services-bing-spell-check-signup-requirements](../../../../includes/cognitive-services-bing-spell-check-signup-requirements.md)]
 
@@ -134,7 +134,7 @@ Başarılı yanıt, aşağıdaki örnekte gösterildiği gibi JSON biçiminde d�
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Bir tek sayfalı web uygulaması oluşturma](../tutorials/spellcheck.md)
+> [Tek sayfalı Web uygulaması oluşturma](../tutorials/spellcheck.md)
 
-- [Bing yazım denetimi API'si nedir?](../overview.md)
+- [Bing Yazım Denetimi API'si nedir?](../overview.md)
 - [Bing Yazım Denetimi API’si v7 Başvurusu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference)

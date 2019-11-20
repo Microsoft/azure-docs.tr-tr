@@ -1,81 +1,81 @@
 ---
-title: Azure için Avere vFXT
-description: HPC için bulut önbellek katmanı olan Azure için Avere vFXT'ye giriş
+title: Azure için avere vFXT
+description: HPC için bir bulut önbelleği katmanı olan Azure için avere vFXT 'ye giriş
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: overview
 ms.date: 10/31/2018
-ms.author: v-erkell
-ms.openlocfilehash: 724352ae9f7c66dfeab293473ea79438e3b36254
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.author: rohogue
+ms.openlocfilehash: 70ae20daa81ab52d4054dcd4bea3c9432a5ceaeb
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60409431"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72256164"
 ---
-# <a name="what-is-avere-vfxt-for-azure"></a>Azure için Avere vFXT nedir? 
+# <a name="what-is-avere-vfxt-for-azure"></a>Azure için avere vFXT nedir? 
 
-Azure için Avere vFXT, yoğun veri kullanan yüksek performanslı bilgi işlem (HPC) görevlerine yönelik bir dosya sistemi önbellek çözümüdür. Bulut bilişimin ölçeklenebilirlik avantajlarından faydalanarak şirket içi donanımlarınızda bulunan veriler dahil olmak üzere tüm verilerinize ihtiyaç duyulduğu yerde ve zamanda erişim sağlanmasını mümkün kılar.
+Azure için avere vFXT, veri yoğun yüksek performanslı bilgi işlem (HPC) görevlerine yönelik bir dosya sistemi önbelleğe alma çözümüdür. Kendi şirket içi donanımınızda depolanan veriler için bile gerektiğinde verilerinizi erişilebilir hale getirmek için bulut bilgi işlemin ölçeklenebilirliğini avantajlarından yararlanmanızı sağlar.
 
-Avere vFXT şu yaygın bilgi işlem senaryolarını destekler: 
+Avere vFXT, bu ortak bilgi işlem senaryolarını destekler: 
 
-* Karma bulut mimarisi: Azure için Avere vFXT dosyaları taşımak zorunda kalmadan bulut avantajlarını sağlar bir donanım depolama sistemi çalışabilirsiniz. 
-* Bulut Patlaması: Azure için Avere vFXT yardımcı olabilir, verilerinizi tek bir proje için buluta taşıyın veya "kaldırma ve kaydırma" iş akışının tamamını kalıcı olarak. 
+* Karma bulut mimarisi: Azure için avere vFXT, dosyaları taşımaya gerek kalmadan bulut bilgi işlemin avantajını sağlayan bir donanım depolama sistemiyle çalışabilir. 
+* Bulut patlaması: Azure için avere vFXT, verilerinizi tek bir proje için buluta taşımanızı veya tüm iş akışının kalıcı olarak "kaldırın ve kaydırmasını" sağlayabilir. 
 
-![Blob depolama alanına ve şirket içi veri merkezine bağlı bir Azure aboneliğindeki Avere vFXT sisteminin ayrıntılarını gösteren diyagram](media/avere-vfxt-hybrid.png)
+![Blob depolamaya ve şirket içi veri merkezine bağlı bir Azure aboneliğinin içindeki avere vFXT sisteminin ayrıntılarını gösteren diyagram](media/avere-vfxt-hybrid.png)
 
-Azure için Avere vFXT, şu durumlar için ideal çözümdür: 
+Azure için avere vFXT, bu durumlar için idealdir: 
 
-* HPC iş yükleri için yoğun okuma işlemleri
+* HPC iş yükleri için okuma ağır işlemleri
 * Ortak NFS protokolünü kullanan uygulamalar
-* 1000-40.000 CPU çekirdeğine sahip işlem grupları
-* Şirket içi NAS donanımı, Azure Blob depolama alanı veya ikisiyle birden tümleştirme
+* 1000 ile 40.000 arasındaki CPU çekirdekleri için işlem grupları
+* Şirket içi donanım NAS, Azure Blob depolama veya her ikisiyle tümleştirme
 
-Daha fazla bilgi için <https://azure.microsoft.com/services/storage/avere-vfxt/> adresini ziyaret edin.
+Daha fazla bilgi için @no__t ziyaret edin-0
 
-## <a name="who-uses-avere-vfxt-for-azure"></a>Azure için Avere vFXT kimlere yöneliktir? 
+## <a name="who-uses-avere-vfxt-for-azure"></a>Azure için avere vFXT 'yi kimler kullanıyor? 
 
-Avere vFXT, okuma açısından yoğun bilgi işlem görevlerinde yardımcı olabilir:
+Avere vFXT, tüm okuma yoğunluklu bilgi işlem görevleri konusunda yardımcı olabilir:
 
-### <a name="visual-effects-rendering"></a>Görsel efekt oluşturma 
+### <a name="visual-effects-rendering"></a>Görsel etkileri işleme 
 
-Avere vFXT kümesi medya ve eğlence sektöründe zaman açısından kritik projeler için veri erişimini hızlandırabilir. Azure'da daha fazla önbellek alanı ve işlem düğümü ekleme imkanına sahip olduğunuz için büyük projeleri verimli bir şekilde işleyebilirsiniz. 
+Medya ve eğlence sürümünde avere vFXT kümesi, zaman açısından kritik işleme projeleri için veri erişimini hızlandırabilir. Azure 'da daha fazla önbellek alanı ve daha fazla işlem düğümü ekleyebildiğinden, büyük projeleri verimli bir şekilde işleme esnekliği de vardır. 
 
-### <a name="life-sciences"></a>Yaşam bilimleri 
+### <a name="life-sciences"></a>Yaşam Bilimleri 
 
-Avere vFXT, araştırmacıların ikincil analiz iş akışlarını Azure üzerinde çalıştırmasını ve bulundukları konumdan bağımsız olarak genomik verilere erişmesini sağlar.
+Avere vFXT, araştırmacıların Azure Işlem 'da ikincil analiz iş akışlarını çalıştırmasına ve konumlarına bakılmaksızın genomıc verilerine erişmesine izin verebilir.
 
-Avere vFXT kümeleri ilaç araştırmalarında araştırmacıların ilaç hedef etkileşimlerini tahmin etmesine ve araştırma verilerini analiz etmesine yardımcı olarak ilaç bulma sürecini hızlandırmak için kullanılabilir.
+İlaç araştırmada avere vFXT kümeleri, araştırmacıların ilaç-Target etkileşimlerini tahmin etmesine ve araştırma verilerini çözümlemesine yardımcı olarak ilaç bulmayı hızlandırmak için kullanılabilir.
 
-### <a name="financial-services-analytics"></a>Finansal hizmetler analizi
+### <a name="financial-services-analytics"></a>Finans hizmetleri Analizi
 
-Avere vFXT kümesi nicel analiz hesaplamalarını hızlandırmaya yardımcı olarak finansal kuruluşlara stratejik karar alma konusunda daha iyi içgörüler sunabilir. 
+Avere vFXT kümesi, finansal hizmetler şirketlerinin stratejik kararlar almaya yönelik daha iyi Öngörüler sağlayan nicel Analysis hesaplamalarını hızlandırmaya yardımcı olabilir. 
 
 ## <a name="features-and-specifications"></a>Özellikler ve belirtimler
 
-Avere vFXT sistemi, bir küme halinde yapılandırılmış üç veya daha fazla sanal kenar dosya düğümünden oluşur. İstemci makinelerin yanında konumlandırılarak doğrudan depolama alanını takmak yerine kümeyi takma seçeneği sunar. 
+Avere vFXT sistemi, bir kümede yapılandırılmış üç veya daha fazla sanal Edge filme düğümünden oluşur. Bu, depolamayı doğrudan bağlamak yerine kümeyi bağlayan istemci makinelerinin yakınında bulunabilir. 
 
-Avere vFXT kümesi, istenen dosyaları önbelleğe alır. Tekrarlanan istekler %80'den daha fazla önbellekten sunulabilir.
+Avere vFXT kümesi dosyaları istendiği gibi önbelleğe alır. Yinelenen istekler, önbellekten% 80 ' dan fazla bir süre içinde sunulabilir.
 
 ### <a name="compatibility"></a>Uyumluluk 
 
-* NetApp veya Dell EMC Isilon donanımsal NAS sistemleri ile uyumludur
-* Azure Blob ile uyumludur
+* NetApp veya Dell EMC ıınon 'tan donanım NAS sistemleriyle uyumlu
+* Azure blob ile uyumlu
 * NFSv3 veya SMB2 protokolünü kullanır
 
-Avere vFXT şu Azure kaynaklarını kullanır: 
+Avere vFXT aşağıdaki Azure kaynaklarını kullanır: 
 
 |Azure bileşeni|   |
 |----------|-----------|
 |Sanal makineler|3 veya daha fazla E32s_v3|
-|Premium SSD depolama alanı|200 GB işletim sistemi alanına ek olarak düğüm başına 1 TB-4 TB önbellek alanı |
+|Premium SSD depolama|200 GB işletim sistemi alanı ve düğüm başına 1 TB-4 TB önbellek alanı |
 |Depolama hesabı (isteğe bağlı) |v2|
-|Veri arka uç depolama alanı (isteğe bağlı) | Boş bir LRS Blob kapsayıcısı |
+|Veri arka ucu depolaması (isteğe bağlı) | Bir boş LRS blob kapsayıcısı |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Kendi Avere vFXT dağıtımınızı oluşturmaya başlamak için aşağıdaki bağlantılardan faydalanabilirsiniz. 
+Kendi avere vFXT dağıtımınızı oluşturmaya başlamak için bazı bağlantılar aşağıda verilmiştir. 
 
 * [Sisteminizi planlama](avere-vfxt-deploy-plan.md)
 * [Dağıtıma genel bakış](avere-vfxt-deploy-overview.md)
-* [vFXT ortamını oluşturma](avere-vfxt-deploy.md)
+* [VFXT oluşturma](avere-vfxt-deploy.md)

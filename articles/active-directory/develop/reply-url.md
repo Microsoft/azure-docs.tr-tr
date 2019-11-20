@@ -1,69 +1,76 @@
 ---
-title: URI/yanıt URL'si kısıtlamalar ve sınırlamalar - Microsoft kimlik platformu yeniden yönlendirme
-description: Yanıt URL'leri/yeniden yönlendirme URL'leri kısıtlamalar ve sınırlamalar
+title: Yeniden yönlendirme URI/yanıt URL 'SI kısıtlamaları ve sınırlamalar-Microsoft Identity platform
+description: Yanıt URL 'Leri/yeniden yönlendirme URL kısıtlamaları & sınırlamaları
 author: SureshJa
 ms.author: sureshja
 manager: CelesteDG
 ms.date: 06/29/2019
-ms.topic: article
+ms.topic: conceptual
 ms.subservice: develop
+ms.custom: aaddev
 ms.service: active-directory
 ms.reviewer: lenalepa, manrath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 07be7d0c70193fec88782fea681e33d6b4cf4b40
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: c9cc6ab0342682bce7befdfe412221ec581312be
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67486239"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72389591"
 ---
 # <a name="redirect-urireply-url-restrictions-and-limitations"></a>Yeniden yönlendirme URI’si/yanıt URL’si kısıtlamaları ve sınırlamaları
 
-Bir yeniden yönlendirme URI'si veya yanıt URL'si, yetkilendirme sunucusu uygulaması için bir kez kullanıcı gönderir konumu başarıyla yetkilendirildi olduğu ve bir yetki kodu veya erişim verilen belirteç. Kod ya da belirtecinde yer alan yeniden yönlendirme URI'si veya yanıt belirteç uygulama kayıt işleminin bir parçası doğru konumunu kaydetmeniz önemlidir.
+Bir yeniden yönlendirme URI 'si veya yanıt URL 'SI, uygulama başarıyla yetkilendirildiğinde ve yetkilendirme kodu ya da erişim belirteci verildiğinde, yetkilendirme sunucusunun kullanıcıyı kullanıcıya göndereceği konumdur. Kod veya belirteç yeniden yönlendirme URI 'SI veya Yanıt belirtecinde bulunur, bu nedenle doğru konumu uygulama kayıt işleminin bir parçası olarak kaydetmeniz önemlidir.
 
-## <a name="maximum-number-of-redirect-uris"></a>Yeniden yönlendirme URI'leri sayısı
+## <a name="maximum-number-of-redirect-uris"></a>Maksimum yeniden yönlendirme URI sayısı
 
-Aşağıdaki tabloda, en fazla yeniden yönlendirme uygulamanızı kaydettiğinizde ekleyebileceğiniz bir URI'leri sayısını gösterir. 
+Aşağıdaki tabloda, uygulamanızı kaydettiğinizde ekleyebileceğiniz en fazla yeniden yönlendirme URI sayısı gösterilmektedir.
 
-| İmzalanmış hesaplar | Yeniden yönlendirme URI'leri sayısı | Açıklama |
+| Oturum açan hesaplar | Maksimum yeniden yönlendirme URI sayısı | Açıklama |
 |--------------------------|---------------------------------|-------------|
-| Microsoft iş veya Okul hesapları herhangi bir kuruluşun Azure Active Directory (Azure AD) kiracısı içinde | 256 | `signInAudience` uygulama bildiriminde ayarlanmış olarak *AzureADMyOrg* veya *AzureADMultipleOrgs* |
-| Kişisel Microsoft hesapları ve iş ve Okul hesapları | 100 | `signInAudience` uygulama bildiriminde alanı *AzureADandPersonalMicrosoftAccount* |
+| Herhangi bir kuruluşun Azure Active Directory (Azure AD) kiracısındaki Microsoft iş veya okul hesapları | 256 | uygulama bildirimindeki `signInAudience` alanı *Azureadmyorg* ya da *Azureadmultipleorgs* olarak ayarlandı |
+| Kişisel Microsoft hesapları ve iş ve okul hesapları | 100 | uygulama bildirimindeki `signInAudience` alanı *Azureadandpersonmicrosoftaccount* olarak ayarlandı |
 
-## <a name="maximum-uri-length"></a>URI uzunluğu en fazla
+## <a name="maximum-uri-length"></a>En fazla URI uzunluğu
 
-Her yeniden yönlendirme URI'si için bir uygulama kaydı eklediğiniz için en fazla 256 karakter kullanabilirsiniz.
+Bir uygulama kaydına eklediğiniz her bir yeniden yönlendirme URI 'SI için en fazla 256 karakter kullanabilirsiniz.
 
-## <a name="restrictions-using-a-wildcard-in-uris"></a>İçinde bir URI'leri bir joker karakter kullanılması kısıtlamaları
+## <a name="supported-schemes"></a>Desteklenen düzenler
+Azure AD uygulama modeli, Microsoft iş veya okul hesaplarında herhangi bir kuruluşun Azure Active Directory (Azure AD) kiracısında oturum açmasını sağlayan uygulamalar için hem HTTP hem de HTTPS düzenlerini destekler. Uygulama bildirimindeki `signInAudience` alanı *Azureadmyorg* veya *Azureadmultipleorgs*olarak ayarlanır. Kişisel Microsoft hesaplarında ve iş ve okul hesaplarında oturum açılan uygulamalar (`signInAudience` ' ı *Azureadandpersonmicrosoftaccount*olarak ayarlanmıştır) yalnızca https şemasına izin verilir.
 
-Joker karakter URI gibi `https://*.contoso.com`, kullanışlıdır ancak kaçınılmalıdır. URI yönlendir joker karakterler kullanarak güvenlikle ilgili etkileri vardır. OAuth 2.0 belirtimini göre ([3.1.2, RFC 6749 bölümünde](https://tools.ietf.org/html/rfc6749#section-3.1.2)), bir yeniden yönlendirme uç nokta URI'si mutlak bir URI olmalıdır. 
+> [!NOTE]
+> Yeni [uygulama kayıtları](https://go.microsoft.com/fwlink/?linkid=2083908) deneyimi, geliştiricilerin kullanıcı arabiriminde http düzenine sahip URI 'leri eklemesine izin vermez. İş veya okul hesaplarında oturum açma uygulamaları için HTTP URI 'Leri eklemek yalnızca uygulama bildirimi Düzenleyicisi aracılığıyla desteklenir. İleri giderek, yeni uygulamalar yeniden yönlendirme URI 'sinde HTTP şemaları kullanamaz. Ancak, yeniden yönlendirme URI 'Lerinde HTTP şemaları içeren eski uygulamalar çalışmaya devam edecektir. Geliştiricilerin yeniden yönlendirme URI 'Lerinde HTTPS şemaları kullanması gerekir.
 
-Azure AD uygulama modeli, kişisel Microsoft hesapları oturum ve çalışmak için yapılandırılan uygulamalar için joker karakter URI'ler desteklemiyor ya da Okul hesapları. Ancak, joker karakter URI'ler iş veya Okul hesaplarını bir kuruluşun Azure AD kiracısında bugün üzere yapılandırılan uygulamalar için verilir. 
+## <a name="restrictions-using-a-wildcard-in-uris"></a>URI 'Ler içinde bir joker karakter kullanan kısıtlamalar
+
+@No__t-0 gibi joker karakter URI 'Leri kullanışlıdır, ancak kaçınılmalıdır. Yeniden yönlendirme URI 'sinde joker karakter kullanılması güvenlik etkilerine sahiptir. OAuth 2,0 belirtimine göre ([RFC 6749 ' nin Bölüm 3.1.2](https://tools.ietf.org/html/rfc6749#section-3.1.2)), bir yeniden yönlendirme uç noktası URI 'si mutlak bir URI olmalıdır. 
+
+Azure AD uygulama modeli, kişisel Microsoft hesaplarında ve iş veya okul hesaplarında oturum açmak üzere yapılandırılan uygulamalar için joker karakter URI 'Lerini desteklemez. Ancak, günümüzde bir kuruluşun Azure AD kiracısında iş veya okul hesaplarında oturum açmak üzere yapılandırılan uygulamalar için joker karakter URI 'Lerinde izin verilir. 
  
 > [!NOTE]
-> Yeni [uygulama kayıtları](https://go.microsoft.com/fwlink/?linkid=2083908) deneyimi, geliştiricilerin kullanıcı Arabirimi üzerindeki joker URI'ler eklemelerini izin değil. İş veya Okul hesapları uygulamalar için URI joker karakteri ifadenin ekleme, yalnızca uygulama bildirimi düzenleyicisindeki desteklenir. Bundan sonra yeni uygulamalar joker karakterler yeniden yönlendirme URI'sini kullanmanız mümkün olmayacaktır. Ancak, yeniden yönlendirme joker karakter içeren eski uygulamaları çalışmak URI devam eder.
+> Yeni [uygulama kayıtları](https://go.microsoft.com/fwlink/?linkid=2083908) deneyimi, geliştiricilerin kullanıcı arabirimine joker URI 'ler eklemesine izin vermez. İş veya okul hesaplarında oturum açmak için yalnızca uygulama bildirimi Düzenleyicisi aracılığıyla desteklenen uygulamalar için solcard URI ekleme desteklenir. İleri giderek yeni uygulamalar, yeniden yönlendirme URI 'sinde joker karakterler kullanamaz. Ancak, yeniden yönlendirme URI 'Lerinde joker karakterler içeren eski uygulamalar çalışmaya devam edecektir.
 
-Daha fazla bir joker karakter yeniden yönlendirme URI'si, ekleme yerine izin verilen üst sınırı'dan yeniden yönlendirme URI'leri senaryonuz gerektiriyorsa, aşağıdaki yaklaşımlardan birini göz önünde bulundurun.
+Senaryonuz, izin verilen en yüksek sınırdan daha fazla yeniden yönlendirme URI 'si gerektiriyorsa, joker karakter yeniden yönlendirme URI 'si eklemek yerine aşağıdaki yaklaşımlardan birini göz önünde bulundurun.
 
-### <a name="use-a-state-parameter"></a>Bir durum parametresi kullanma
+### <a name="use-a-state-parameter"></a>Bir durum parametresi kullanın
 
-Bir alt etki alanı sayısı ve senaryonuz başarılı kimlik doğrulamadan sonra kullanıcılar, başlatıldığı sayfasına yeniden yönlendirmek gerekiyorsa, bir durum parametresi kullanarak faydalı olabilir. 
+Bir dizi alt etki alanı varsa ve senaryonuz, başarıyla başlatıldığı sayfada kullanıcıları yeniden yönlendirmenizi gerektiriyorsa, bir durum parametresinin kullanılması faydalı olabilir. 
 
 Bu yaklaşımda:
 
-1. Yetkilendirme uç noktasından aldığınız güvenlik belirteçleri işlemek için uygulama başına "paylaşılan" bir yeniden yönlendirme URI'si oluşturun.
-1. Uygulamanız, state parametresinde uygulamaya özgü parametreler (örneğin, alt etki alanı URL'si burada kaynaklanan kullanıcı ya da herhangi bir şey gibi marka bilgilerini) gönderebilirsiniz. State parametresi kullanırken, belirtilen CSRF koruması karşı koruma sağlamak [, RFC 6749 10.12 bölümünde](https://tools.ietf.org/html/rfc6749#section-10.12)). 
-1. Uygulamaya özgü parametreleri doğru işlemek için uygulamaya yönelik kullanıcı için diğer bir deyişle deneyimi, uygun uygulama durumu oluşturmak gerekli tüm bilgileri içerir. State parametresi HTML bu nedenle emin olun, Azure AD yetkilendirme uç noktası şeritler HTML bu parametrede içerik geçirmediğimiz.
-1. Azure AD yeniden yönlendirme URI'si "paylaşılan" yanıt gönderir, state parametresi uygulama geri gönderir.
-1. Uygulama ardından değeri state parametresinde daha fazla kullanıcıya gönderilecek hangi URL'sini belirlemek için kullanabilirsiniz. CSRF koruması için doğrulama emin olun.
+1. Yetkilendirme uç noktasından aldığınız güvenlik belirteçlerini işlemek için uygulama başına bir "paylaşılan" yeniden yönlendirme URI 'SI oluşturun.
+1. Uygulamanız, durum parametresindeki uygulamaya özgü parametreleri (kullanıcının kaynaklandığı veya marka bilgileri gibi) uygulamaya özgü parametreler gönderebilir. Bir durum parametresi kullanırken, [10,12 ' ın RFC 6749 bölümünde](https://tools.ietf.org/html/rfc6749#section-10.12)belirtildiği gibi CSRF korumasına karşı koruma yapın. 
+1. Uygulamaya özgü parametreler, uygulamanın kullanıcı için doğru deneyimi işlemesi için gereken tüm bilgileri ve diğer bir deyişle, uygun uygulama durumunu içerir. Azure AD yetkilendirme uç noktası, durum parametresinden HTML 'yi şeritler, bu nedenle bu parametreye HTML içeriği geçirdiğinizden emin olun.
+1. Azure AD, "paylaşılan" yeniden yönlendirme URI 'sine bir yanıt gönderdiğinde, durum parametresini uygulamaya geri gönderir.
+1. Daha sonra uygulama, kullanıcının daha fazla gönderileceği URL 'YI belirleyebilmek için durum parametresindeki değeri kullanabilir. CSRF koruması için doğrulama yaptığınızdan emin olun.
 
 > [!NOTE]
-> Bu yaklaşım sağlar, böylece kullanıcı olan farklı bir URL için yeniden yönlendirme durum parametresi gönderilen ek parametreleri değiştirmek güvenliği aşılmış bir istemci [açın yeniden yönlendirici tehdit](https://tools.ietf.org/html/rfc6819#section-4.2.4) RFC 6819 içinde açıklanan. Bu nedenle, istemci durumu şifrelenirken veya belirteci yeniden yönlendirme URI'si etki alanı adını doğrulama gibi diğer yollarla bazı doğrulama tarafından bu parametreleri korumanız gerekir.
+> Bu yaklaşım, güvenliği aşılmış bir istemcinin durum parametresinde gönderilen ek parametreleri değiştirmesine olanak tanır. böylece Kullanıcı, RFC 6819 ' de açıklanan [Açık yeniden yönlendirici tehdidi](https://tools.ietf.org/html/rfc6819#section-4.2.4) olan farklı bir URL 'ye yeniden yönlendirme sağlar. Bu nedenle, istemci, durumu şifreleyerek veya yeniden yönlendirme URI 'sindeki etki alanı adını belirtece karşı doğrulamak gibi bazı yollarla bu parametreleri korumalıdır.
 
-### <a name="add-redirect-uris-to-service-principals"></a>Eklemek için hizmet sorumluları yeniden yönlendirme URI'leri
+### <a name="add-redirect-uris-to-service-principals"></a>Hizmet sorumlularına yeniden yönlendirme URI 'Leri ekleme
 
-Başka bir yaklaşım ise yeniden yönlendirme URI'leri için [hizmet sorumluları](app-objects-and-service-principals.md#application-and-service-principal-relationship) temsil eden bir Azure AD kiracısında uygulama kaydınız. State parametresi kullanamazsınız veya senaryonuz yeni yeniden yönlendirme URI'leri desteklediğiniz her yeni Kiracı için uygulama kaydınızı eklemenizi gerektirir, bu yaklaşımı kullanabilirsiniz. 
+Diğer bir yaklaşım, herhangi bir Azure AD kiracısında uygulama kaydınızı temsil eden [hizmet sorumlularına](app-objects-and-service-principals.md#application-and-service-principal-relationship) yeniden yönlendirme URI 'leri eklemektir. Bu yaklaşımı, bir durum parametresini kullanmınızda, sizin destekledikleri her yeni kiracı için uygulama kaydınıza yeni yeniden yönlendirme URI 'Leri eklemenizi gerektirdiğinde kullanabilirsiniz. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Hakkında bilgi edinin [uygulama bildirimi](reference-app-manifest.md)
+- [Uygulama bildirimi](reference-app-manifest.md) hakkında bilgi edinin

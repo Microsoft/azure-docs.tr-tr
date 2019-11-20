@@ -1,5 +1,5 @@
 ---
-title: Yönlendirici yapılandırma örnekleri - NAT - Azure ExpressRoute | Microsoft Docs
+title: 'Azure ExpressRoute: yönlendirici yapılandırma örnekleri-NAT'
 description: Bu sayfa, Cisco ve Juniper yönlendirici için yönlendirici yapılandırma örnekleri sağlar.
 services: expressroute
 author: cherylmc
@@ -7,13 +7,12 @@ ms.service: expressroute
 ms.topic: article
 ms.date: 12/06/2018
 ms.author: cherylmc
-ms.custom: seodec18
-ms.openlocfilehash: ccee0f0c01119ebbfb5ba9c5980ee006a555a399
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ef2fd40db422c459ca966e802344ef45f7ec01de
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60367617"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74072107"
 ---
 # <a name="router-configuration-samples-to-set-up-and-manage-nat"></a>Ayarlama ve yönetme NAT için yönlendirici yapılandırma örnekleri
 
@@ -83,7 +82,7 @@ NAT komutlar:
 
 
 ## <a name="juniper-srx-series-routers"></a>Juniper SRX serisi yönlendiriciler
-### <a name="1-create-redundant-ethernet-interfaces-for-the-cluster"></a>1. Küme için yedekli Ethernet arabirimleri oluşturun
+### <a name="1-create-redundant-ethernet-interfaces-for-the-cluster"></a>1. küme için yedekli Ethernet arabirimleri oluşturun
     interfaces {
         reth0 {
             description "To Internal Network";
@@ -115,7 +114,7 @@ NAT komutlar:
     }
 
 
-### <a name="2-create-two-security-zones"></a>2. İki güvenlik bölgeleri oluşturma
+### <a name="2-create-two-security-zones"></a>2. iki güvenlik bölgesi oluşturun
 * İç ağ için güven bölgesi ve dış ağ uç yönlendiricileri karşılıklı Güvenilmeyenler bölgesi
 * Bölgeleri için uygun arabirimleri atayın
 * Arabirimler Services'ta izin ver
@@ -123,7 +122,7 @@ NAT komutlar:
     güvenlik {bölgeleri {güvenlik bölgesi güven {konak gelen-trafiği {sistemi hizmetleri {ping;                   } {bgp; protokolleri                   {reth0.100;}} arabirimleri               }} {konak gelen-trafiği {sistemi hizmetleri {ping; güvenlik bölgesi Güvenilmeyenler                   } {bgp; protokolleri                   {reth1.100;}} arabirimleri               }           }       }   }
 
 
-### <a name="3-create-security-policies-between-zones"></a>3. Bölgeler arasında güvenlik ilkeleri oluşturma
+### <a name="3-create-security-policies-between-zones"></a>3. bölgeler arasında güvenlik ilkeleri oluşturma
     security {
         policies {
             from-zone Trust to-zone Untrust {
@@ -213,10 +212,10 @@ NAT komutlar:
            }
        }
 
-### <a name="5-configure-bgp-to-advertise-selective-prefixes-in-each-direction"></a>5. Her yönde seçmeli öneklerini BGP yapılandırma
-Örnekleri başvurmak [yönlendirme yapılandırma örnekleri](expressroute-config-samples-routing.md) sayfası.
+### <a name="5-configure-bgp-to-advertise-selective-prefixes-in-each-direction"></a>5. her yönde seçmeli önekleri tanıtmak için BGP 'yi yapılandırın
+[Yönlendirme yapılandırma örnekleri](expressroute-config-samples-routing.md) sayfasındaki örneklere bakın.
 
-### <a name="6-create-policies"></a>6. İlkeleri oluşturma
+### <a name="6-create-policies"></a>6. ilke oluşturma
     routing-options {
                   autonomous-system <Customer-ASN>;
     }

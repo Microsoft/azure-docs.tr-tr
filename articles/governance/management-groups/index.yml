@@ -1,0 +1,39 @@
+### YamlMime:Landing
+title: Azure yönetim grupları belgeleri
+summary: Azure yönetim grupları kaynaklarınızı ve aboneliklerinizi düzenlemenize yardımcı olur.
+metadata:
+  title: Azure yönetim grupları belgeleri
+  description: Azure yönetim grupları kaynaklarınızı ve aboneliklerinizi düzenlemenize yardımcı olur.
+  ms.service: governance
+  ms.topic: landing-page
+  ms.collection: collection
+  author: DCtheGeek
+  ms.author: dacoulte
+  ms.date: 09/26/2019
+  ms.openlocfilehash: 9d91baaec7f1bd0e365f86ea07174d6f9e32725c
+  ms.sourcegitcommit: e1b6a40a9c9341b33df384aa607ae359e4ab0f53
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/27/2019
+  ms.locfileid: "71341054"
+landingContent:
+- title: Azure İdaresi hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure'daki yönetim hizmetlerine genel bakış
+      url: ../azure-management.md
+- title: Azure yönetim grupları hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure yönetim grupları
+      url: ./overview.md
+- title: Kaynaklarınızı düzenleme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Yönetim grupları oluşturma
+      url: ./create.md
+    - text: Kaynaklarınızı yönetme
+      url: ./manage.md

@@ -1,6 +1,6 @@
 ---
-title: Yerelleştirme dize kimlikleri - Azure Active Directory B2C | Microsoft Docs
-description: İçerik tanımı kimliklerini Azure Active Directory B2C, özel bir ilkede api.signuporsignin kimliği belirtin.
+title: Yerelleştirme dize kimlikleri-Azure Active Directory B2C | Microsoft Docs
+description: Azure Active Directory B2C bir özel ilkede API. signuporsignıd kimliğine sahip bir içerik tanımının kimliklerini belirtin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,51 +10,51 @@ ms.topic: reference
 ms.date: 09/10/2018
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 41a72013f1538b0a857c76bc949a7109e1cd54b4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: da1390de4e2eb0624032dc490416e7b6e5d61baa
+ms.sourcegitcommit: 0f54f1b067f588d50f787fbfac50854a3a64fff7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66510916"
+ms.lasthandoff: 08/12/2019
+ms.locfileid: "67846845"
 ---
-# <a name="localization-string-ids"></a>Yerelleştirme dize kimlikleri
+# <a name="localization-string-ids"></a>Yerelleştirme dizesi kimlikleri
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-**Yerelleştirme** öğesi kullanıcı yolculuklarından ilkesinde birden çok yerel ayarları veya dil desteği sağlar. Bu makalede, yerelleştirme ilkenizde kullanabileceğiniz kimlikleri listesini sağlar. UI yerelleştirme ile hakkında bilgi edinmek için bkz: [yerelleştirme](localization.md).
+**Yerelleştirme** öğesi, Kullanıcı yolculukları için ilkedeki birden çok yerel ayarı veya dili desteklemenize olanak sağlar. Bu makale, ilkenizde kullanabileceğiniz yerelleştirme kimliklerinin listesini sağlar. UI yerelleştirmesini öğrenmek için bkz. [Yerelleştirme](localization.md).
 
 ## <a name="sign-up-or-sign-in-page-elements"></a>Kaydolma veya oturum açma sayfası öğeleri
 
-İçerik tanımı kimliği için kullanılan aşağıdaki kimlikler `api.signuporsignin`.
+KIMLIĞI olan bir içerik tanımı için aşağıdaki kimlikler kullanılır `api.signuporsignin`.
 
-| Kimlik | Varsayılan değer |
+| id | Varsayılan değer |
 | -- | ------------- |
 | **local_intro_email** | Mevcut hesabınızla oturum açın |
-| **logonIdentifier_email** | E-posta adresi |
+| **logonIdentifier_email** | E-posta Adresi |
 | **requiredField_email** | Lütfen e-postanızı girin |
 | **invalid_email** | Lütfen geçerli bir e-posta adresi girin |
-| **email_pattern** | ^ [a-zA-Z0-9.! #$% &'' *+/ =? ^ _\`{\|} ~-]+@[a-zA-Z0-9-]+ (?:\\. [ bir-zA-Z0 - 9-] +)* $ |
-| **local_intro_username** | Kullanıcı adınız ile oturum açın |
-| **logonIdentifier_username** | Kullanıcı adı |
+| **email_pattern** | ^ [a-zA-Z0-9.! # $% & ' ' *+/=? ^ _\`{\|} ~-] + @ [a-Za-z0-9-] + (?:\\. [ a-zA-Z0-9-] +)* $ |
+| **local_intro_username** | Kullanıcı adınızla oturum açın |
+| **logonIdentifier_username** | Kullanıcı Adı |
 | **requiredField_username** | Lütfen kullanıcı adınızı girin |
-| **Parola** | Parola |
+| **Parola** | istemcisiyle yönetilen bir cihaz için) |
 | **requiredField_password** | Lütfen parolanızı girin |
 | **invalid_password** | Girdiğiniz parola beklenen biçimde değil. |
 | **forgotpassword_link** | Parolanızı mı unuttunuz? |
 | **createaccount_intro** | Hesabınız yok mu? |
-| **createaccount_link** | Hemen kaydolun |
+| **createaccount_link** | Şimdi kaydolun |
 | **divider_title** | OR |
-| **cancel_message** | Kullanıcı parolasını unutmuş. |
+| **cancel_message** | Kullanıcı parolasını unuttu |
 | **button_signin** | Oturum aç |
 | **social_intro** | Sosyal hesabınızla oturum açın |
   **remember_me** |Oturumumu açık bırak|
-| **unknown_error** | Oturumunuzu açarken sorun yaşıyoruz. Lütfen daha sonra tekrar deneyin. |
+| **unknown_error** | Oturumunuzu açmada sorun yaşıyoruz. Lütfen daha sonra tekrar deneyin. |
 
-Aşağıdaki örnek kullanımı bazı kullanıcı arabirimi öğeleri kaydolma veya oturum açma sayfasında gösterir:
+Aşağıdaki örnek, kayıt veya oturum açma sayfasında bazı Kullanıcı arabirimi öğelerinin kullanımını gösterir:
 
 ![Kaydolma veya oturum açma sayfası UX öğeleri](./media/localization-string-ids/localization-susi.png)
 
-Kimlik sağlayıcıları kimliği kullanıcı yolculuğunda yapılandırılmış **ClaimsExchange** öğesi. Kimlik sağlayıcısının başlığı yerelleştirmek için **ElementType** ayarlanır `ClaimsProvider`, ancak **Stringıd** Kimliğine ayarlanır `ClaimsExchange`.
+Kimlik sağlayıcılarının KIMLIĞI, Kullanıcı yolculuğu **Claimsexchange** öğesinde yapılandırılır. Kimlik sağlayıcısının başlığını yerelleştirmek için, **ElementType** olarak ayarlanır `ClaimsProvider`, **strıngıd** , `ClaimsExchange`kimliğine ayarlanır.
 
 ```XML
 <OrchestrationStep Order="2" Type="ClaimsExchange">
@@ -73,7 +73,7 @@ Kimlik sağlayıcıları kimliği kullanıcı yolculuğunda yapılandırılmış
 </OrchestrationStep>
 ```
 
-Aşağıdaki örnek Arapça Facebook kimlik sağlayıcısına yerelletirilmesi:
+Aşağıdaki örnek, Facebook kimlik sağlayıcısını Arapça olarak yerelleştirir:
 
 ```XML
 <LocalizedString ElementType="ClaimsProvider" StringId="FacebookExchange">فيس بوك</LocalizedString>
@@ -81,127 +81,127 @@ Aşağıdaki örnek Arapça Facebook kimlik sağlayıcısına yerelletirilmesi:
 
 ## <a name="sign-up-or-sign-in-error-messages"></a>Kaydolma veya oturum açma hata iletileri
 
-| Kimlik | Varsayılan değer |
+| id | Varsayılan değer |
 | -- | ------------- |
-| **UserMessageIfInvalidPassword** | Parola doğru değil. |
-| **UserMessageIfClaimsPrincipalDoesNotExist** | Hesabınız gerçekleştiremiyorum. |
-| **UserMessageIfOldPasswordUsed** | Eski bir parola kullandığınız görülüyor. |  
-| **DefaultMessage** | Geçersiz kullanıcı adı veya parola. |  
-| **UserMessageIfUserAccountDisabled** | Hesabınız kilitlendi. Kilidini açmak ve ardından yeniden denemek için destek personelinize başvurun. |  
-| **UserMessageIfUserAccountLocked** | Hesabınız yetkisiz kullanımı önlemek için geçici olarak kilitlendi. Daha sonra tekrar deneyin. |  
-| **AADRequestsThrottled** | Şu anda çok fazla istek var. Lütfen bir süre bekleyin ve yeniden deneyin. |  
+| **Usermessageifınvalidpassword** | Yanlış parola girdiniz. |
+| **UserMessageIfClaimsPrincipalDoesNotExist** | Hesabınızı bulamıyoruz. |
+| **UserMessageIfOldPasswordUsed** | Eski bir parola kullandınız gibi görünüyor. |
+| **DefaultMessage** | Geçersiz kullanıcı adı veya parola. |
+| **UserMessageIfUserAccountDisabled** | Hesabınız kilitlendi. Dosyanın kilidini açmak için destek sorumlunuza başvurun, sonra yeniden deneyin. |
+| **Usermessageifuseraccountkilitlendi** | Hesabınız yetkisiz kullanımı engellemek için geçici olarak kilitlidir. Daha sonra tekrar deneyin. |
+| **Aadrequestskısıtlanıyor** | Şu anda çok fazla istek var. Lütfen bir süre bekleyip yeniden deneyin. |
 
-## <a name="sign-up-and-self-asserted-pages-user-interface-elements"></a>Kaydolma ve kendi kullanıcı arabirimi öğeleri sayfaları onaylanan
+## <a name="sign-up-and-self-asserted-pages-user-interface-elements"></a>Kaydolma ve kendi kendine onaylanan sayfalar Kullanıcı arabirimi öğeleri
 
-İçerik tanımı kimliği kimlikleri şunlardır `api.localaccountsignup` veya ile başlayan herhangi bir içerik tanım `api.selfasserted`, gibi `api.selfasserted.profileupdate` ve `api.localaccountpasswordreset`.
+Aşağıda, `api.localaccountsignup` `api.selfasserted.profileupdate` ve `api.selfasserted` gibibiriçeriktanımınınkimliğiolanbiriçerik`api.localaccountpasswordreset`tanımının kimlikleri verilmiştir.
 
-| Kimlik | Varsayılan değer |
+| id | Varsayılan değer |
 | -- | ------------- |
-| **ver_sent** | Doğrulama kodu gönderildi: |
+| **ver_sent** | Doğrulama kodu şu adrese gönderildi: |
 | **ver_but_default** | Varsayılan |
-| **cancel_message** | Otomatik olarak onaylanan bilgileri girerek kullanıcı iptal etti |
+| **cancel_message** | Kullanıcı kendi kendine onaylanan bilgileri girmeyi iptal etti |
 | **preloader_alt** | Lütfen bekleyin |
-| **ver_but_send** | Doğrulama kodu Gönder |
+| **ver_but_send** | Doğrulama kodu gönder |
 | **alert_yes** | Evet |
-| **error_fieldIncorrect** | Bir veya daha fazla alan yanlış doldurulur. Lütfen girişlerinizi denetleyin ve yeniden deneyin. |
-| **Yıl** | Yıl |
-| **verifying_blurb** | Biz bilgileriniz işlenirken lütfen bekleyin. |
+| **error_fieldIncorrect** | Bir veya daha fazla alan yanlış doldurulmuş. Lütfen girişlerinizi denetleyin ve yeniden deneyin. |
+| **yıl** | Yıl |
+| **verifying_blurb** | Bilgileriniz işlenirken lütfen bekleyin. |
 | **button_cancel** | İptal |
-| **ver_fail_no_retry** | Çok fazla sayıda yanlış denemesi yaptınız. Lütfen daha sonra tekrar deneyin. |
-| **Ay** | Ay |
+| **ver_fail_no_retry** | Çok fazla hatalı deneme yaptınız. Lütfen daha sonra tekrar deneyin. |
+| **başından** | Ay |
 | **ver_success_msg** | E-posta adresi doğrulandı. Artık devam edebilirsiniz. |
-| **months** | Ocak, Şubat ve Mart, Nisan, olabilir Haziran, Temmuz, Ağustos, Eylül, Ekim, Kasım, aralık |
-| **ver_fail_server** | E-posta adresinizi doğrulama konusunda sorun yaşıyoruz. Lütfen geçerli bir e-posta adresini girin ve yeniden deneyin. |
-| **error_requiredFieldMissing** | Gerekli alan eksik. Lütfen tüm gerekli alanları doldurun ve yeniden deneyin. |
-| **initial_intro** | Lütfen şu bilgileri sağlayın. |
-| **ver_but_resend** | Yeni kod Gönder |
+| **months** | Ocak, Şubat, Mart, Nisan, Mayıs, Haziran, Temmuz, Ağustos, Eylül, Ekim, Kasım, Aralık |
+| **ver_fail_server** | E-posta adresinizi doğrularken sorun yaşıyoruz. Lütfen geçerli bir e-posta adresi girin ve yeniden deneyin. |
+| **error_requiredFieldMissing** | Gerekli bir alan eksik. Lütfen tüm gerekli alanları doldurun ve yeniden deneyin. |
+| **initial_intro** | Lütfen aşağıdaki ayrıntıları sağlayın. |
+| **ver_but_resend** | Yeni kod gönder |
 | **button_continue** | Create |
-| **error_passwordEntryMismatch** | Parola giriş alanları eşleşmiyor. Lütfen her iki alana aynı parolayı girin ve yeniden deneyin. |
-| **ver_incorrect_format** | Biçimi hatalı. |
-| **ver_but_edit** | E-posta değiştirme |
-| **ver_but_verify** | Kodu doğrulayın |
+| **error_passwordEntryMismatch** | Parola girişi alanları eşleşmiyor. Lütfen her iki alana da aynı parolayı girip yeniden deneyin. |
+| **ver_incorrect_format** | Hatalı biçim. |
+| **ver_but_edit** | E-postayı değiştir |
+| **ver_but_verify** | Kodu doğrula |
 | **alert_no** | Hayır |
-| **ver_info_msg** | Gelen kutunuza doğrulama kodu gönderildi. Lütfen aşağıdaki giriş kutusuna kopyalayın. |
-| **gün** | Gün |
-| **ver_fail_throttled** | Bu e-posta adresini doğrulamak için çok fazla istek yapıldı. Lütfen bir süre bekleyin ve yeniden deneyin. |
+| **ver_info_msg** | Doğrulama kodu gelen kutunuza gönderildi. Lütfen aşağıdaki giriş kutusuna kopyalayın. |
+| **günündeki** | Gün |
+| **ver_fail_throttled** | Bu e-posta adresini doğrulamak için çok fazla istek vardı. Lütfen bekleyin, sonra yeniden deneyin. |
 | **helplink_text** | Bu nedir? |
-| **ver_fail_retry** | Bu kod doğru değil. Lütfen yeniden deneyin. |
-| **alert_title** | Bilgilerinizi girme işlemini iptal et |
-| **required_field** | Bu bilgiler gereklidir. |
-| **alert_message** | Bilgilerinizi girme iptal etmek istediğinizden emin misiniz? |
-| **ver_intro_msg** | Doğrulama gerekli değildir. Lütfen gönder düğmesine tıklayın. |
+| **ver_fail_retry** | Bu kod yanlış. Lütfen yeniden deneyin. |
+| **alert_title** | Bilgilerinizi Girmeyi İptal Edin |
+| **required_field** | Bu bilgi gereklidir. |
+| **alert_message** | Bilgilerinizi girmeyi iptal etmek istediğinizden emin misiniz? |
+| **ver_intro_msg** | Doğrulama gereklidir. Lütfen gönder düğmesine tıklayın. |
 | **ver_input** | Doğrulama kodu |
 
-## <a name="sign-up-and-self-asserted-pages-error-messages"></a>Kaydolma ve kendi kendini sayfaları hata iletileri onaylanan
+## <a name="sign-up-and-self-asserted-pages-error-messages"></a>Kaydolma ve kendi kendine onaylanan sayfalar hata iletileri
 
-| Kimlik | Varsayılan değer |
+| id | Varsayılan değer |
 | -- | ------------- |
-| **UserMessageIfClaimsPrincipalAlreadyExists** | Belirtilen Kimliğe sahip bir kullanıcı zaten var. Lütfen bir abonelik seçin. |
-| **UserMessageIfClaimNotVerified** | Talep doğrulanamadı: {0} |
-| **UserMessageIfIncorrectPattern** | Yanlış deseni için: {0} |
-| **UserMessageIfMissingRequiredElement** | Eksik gerekli öğe: {0} |
-| **UserMessageIfValidationError** | Tarafından doğrulama hatası: {0} |
-| **UserMessageIfInvalidInput** | {0} Geçersiz giriş var. |
-| **ServiceThrottled** | Şu anda çok fazla istek var. Lütfen bir süre bekleyin ve yeniden deneyin. |
+| **Usermessageifclaimsprincıpalalreadyexists** | Belirtilen KIMLIĞE sahip bir kullanıcı zaten var. Lütfen farklı bir tane seçin. |
+| **Usermessageifclaimnotdoğrulandı** | Talep doğrulanmadı:{0} |
+| **UserMessageIfIncorrectPattern** | İçin yanlış desenler:{0} |
+| **UserMessageIfMissingRequiredElement** | Gerekli öğe eksik:{0} |
+| **UserMessageIfValidationError** | Doğrulamada hata:{0} |
+| **Usermessageifınvalidınput** | {0}geçersiz giriş içeriyor. |
+| **Servicekısıtlanıyor** | Şu anda çok fazla istek var. Lütfen bir süre bekleyip yeniden deneyin. |
 
-Aşağıdaki örnek, kayıt sayfasındaki kullanıcı arabirimi öğelerinden bazıları kullanımını gösterir:
+Aşağıdaki örnek, kaydolma sayfasında bazı Kullanıcı arabirimi öğelerinin kullanımını gösterir:
 
-![Kayıt sayfasına UX öğeleri](./media/localization-string-ids/localization-sign-up.png)
+![Kullanıcı arabirimi öğesi adları etiketli kaydolma sayfası](./media/localization-string-ids/localization-sign-up.png)
 
-Aşağıdaki örnek, kayıt sayfasındaki kullanıcı arabirimi öğelerinden bazıları kullanımını gösterir, doğrulama kodu düğmesine tıkladığında kullanıcı sonra gönder:
+Aşağıdaki örnek, Kullanıcı doğrulama kodu gönder düğmesine tıkladıktan sonra kaydolma sayfasındaki bazı Kullanıcı arabirimi öğelerinin kullanımını gösterir:
 
-![Kayıt sayfasına e-posta doğrulama UX öğeleri](./media/localization-string-ids/localization-email-verification.png)
+![Kaydolma sayfası eposta doğrulaması UX öğeleri](./media/localization-string-ids/localization-email-verification.png)
 
 
-## <a name="phone-factor-authentication-page-user-interface-elements"></a>Faktörlü kimlik doğrulaması sayfası kullanıcı arabirimi öğeleri telefon
+## <a name="phone-factor-authentication-page-user-interface-elements"></a>Telefon faktörü kimlik doğrulama sayfası kullanıcı arabirimi öğeleri
 
-İçerik tanımı kimliği kimlikleri şunlardır `api.phonefactor`. 
+Aşağıda KIMLIĞI `api.phonefactor`olan bir içerik tanımının kimlikleri verilmiştir.
 
-| Kimlik | Varsayılan değer |
+| id | Varsayılan değer |
 | -- | ------------- |
-| **button_verify** | Beni ara |
+| **button_verify** | Beni Arayın |
 | **country_code_label** | Ülke kodu |
-| **cancel_message** | Kullanıcı çok faktörlü kimlik doğrulaması iptal etti |
-| **text_button_send_second_code** | Yeni bir kod gönderin |
+| **cancel_message** | Kullanıcı Multi-Factor Authentication 'ı iptal etti |
+| **text_button_send_second_code** | Yeni bir kod gönder |
 | **code_pattern** | \\d{6} |
-| **intro_mixed** | Aşağıdaki numarasını kaydında sizin için sahibiz. SMS yoluyla bir kod gönderin veya, kimliğinizi doğrulamak telefon. |
-| **intro_mixed_p** | Aşağıdaki numaralarını kaydında sizin için sahibiz. Biz telefon veya böylelikle Gönder, kimliğinizi doğrulamak için SMS ile kod bir sayı seçin. |
-| **button_verify_code** | Kodu doğrulayın |
+| **intro_mixed** | Sizin için kayıt üzerinde aşağıdaki sayıyı sunuyoruz. Kimliğinizi doğrulamak için SMS veya Phone aracılığıyla kod gönderebiliriz. |
+| **intro_mixed_p** | Sizin için kayıt için aşağıdaki numaralara ihtiyacımız var. Kimliğinizi doğrulamak için SMS aracılığıyla telefon ve kod gönderebileceğimiz bir sayı seçin. |
+| **button_verify_code** | Kodu Doğrula |
 | **requiredField_code** | Lütfen aldığınız doğrulama kodunu girin |
 | **invalid_code** | Lütfen aldığınız 6 basamaklı kodu girin |
 | **button_cancel** | İptal |
 | **local_number_input_placeholder_text** | Telefon numarası |
 | **button_retry** | Yeniden Dene |
-| **alternative_text** | Telefonumu sahip değilsiniz |
-| **intro_phone_p** | Aşağıdaki numaralarını kaydında sizin için sahibiz. Biz, kimliğinizi doğrulamak için telefon bir sayı seçin. |
-| **intro_phone** | Aşağıdaki numarasını kaydında sizin için sahibiz. Kimliğinizi doğrulamak telefon. |
-| **enter_code_text_intro** | Doğrulama kodunuzu aşağıdaki girin veya  |
-| **intro_entry_phone** | Aşağıdaki bir sayı girin. biz, kimliğinizi doğrulamak telefon. |
-| **intro_entry_sms** | Aşağıda, SMS, kimliğinizi doğrulamak için bir kodu gönderebiliriz bir sayı girin. |
+| **alternative_text** | Telefonum yanımda değil |
+| **intro_phone_p** | Sizin için kayıt için aşağıdaki numaralara ihtiyacımız var. Kimliğinizi doğrulamak için telefon yapabilmemiz gereken bir sayı seçin. |
+| **intro_phone** | Sizin için kayıt üzerinde aşağıdaki sayıyı sunuyoruz. Kimliğinizi doğrulamak için telefon göndereceğiz. |
+| **enter_code_text_intro** | Doğrulama kodunuzu aşağıya girin veya  |
+| **intro_entry_phone** | Aşağıya kimliğinizi doğrulamak için arayabileceğimiz bir numara girin. |
+| **intro_entry_sms** | Aşağıya kimliğinizi doğrulamak için SMS aracılığıyla kod gönderebileceğimiz bir numara girin. |
 | **button_send_code** | Kod Gönder |
 | **invalid_number** | Lütfen geçerli bir telefon numarası girin |
-| **intro_sms** | Aşağıdaki numarasını kaydında sizin için sahibiz. SMS, kimliğinizi doğrulamak için bir kod göndereceğiz. |
-| **intro_entry_mixed** | Aşağıdaki bir sayı girin biz SMS yoluyla bir kod gönderin veya böylelikle, kimliğinizi doğrulamak telefon. |
-| **number_pattern** | ^\\+(?:[0-9][\\x20-]?){6,14}[0-9]$ |
-| **intro_sms_p** |Aşağıdaki numaralarını kaydında sizin için sahibiz. Bir sayı seçin, kimliğinizi doğrulamak için SMS ile kod gönderebiliriz. |
+| **intro_sms** | Sizin için kayıt üzerinde aşağıdaki sayıyı sunuyoruz. Kimliğinizi doğrulamak için SMS aracılığıyla bir kod göndereceğiz. |
+| **intro_entry_mixed** | Aşağıya kimliğinizi doğrulamak için SMS aracılığıyla kod gönderebileceğimiz veya arayabileceğimiz bir numara girin. |
+| **number_pattern** | ^\\+ (?: [0-9] [\\x20-]?) {6,14}[0-9] $ |
+| **intro_sms_p** |Sizin için kayıt için aşağıdaki numaralara ihtiyacımız var. Kimliğinizi doğrulamak için SMS aracılığıyla kod gönderebileceğimiz bir sayı seçin. |
 | **requiredField_countryCode** | Lütfen ülke kodunuzu seçin |
 | **requiredField_number** | Lütfen telefon numaranızı girin |
 | **country_code_input_placeholder_text** |Ülke veya bölge |
 | **number_label** | Telefon numarası |
-| **error_tryagain** | Belirttiğiniz telefon numarasını meşgul veya kullanılamıyor. Lütfen numarayı denetleyin ve yeniden deneyin. |
-| **error_incorrect_code** | Girdiğiniz doğrulama kodu, kayıtlarımızla eşleşmiyor. Lütfen yeniden deneyin veya yeni bir kod isteyin. |
-| **countryList** | {\"Varsayılan\":\"ülke/bölge\",\"AF\":\"Afganistan\",\"AX\":\"Aland Adaları\",\"AL\":\"Arnavutluk\",\"DZ\":\"Cezayir\",\"AS\":\" Amerikan Samoası\",\"AD\":\"Andora\",\"AO\":\"Angola\",\"AI\": \"Avustralya\",\"AQ\":\"Antarktika\",\"AG\":\"Antigua ve Barbuda\",\"AR\":\"Arjantin\",\"AM\":\"Ermenistan\",\"AW\":\"Aruba \",\"AU\":\"Avustralya\",\"ADRESİNDEKİ\":\"Avusturya\",\" AZ\":\"Azerbaycan\",\"BS\":\"Bahamalar\",\"BH\":\" Bahreyn\",\"BD\":\"Bangladeş\",\"BB\":\"Barbados\",\" TARAFINDAN\":\"Belarus\",\"BE\":\"Belçika\",\"BZ\":\" Belize\",\"BJ\":\"Benin\",\"BM\":\"teni\",\"BT\":\"Bhutan\",\"BO\":\"Bolivya\",\"BQ\":\" Bonaire\",\"BA\":\"Bosna-Hersek\",\"BW\":\"Botsvana<span class="notransla class=""></span class="notransla> Harici Adaları\",\"VI\":\"ABD Virgin Adaları\",\"UG\":\"Uganda\",\"UA\":\"Ukrayna\",\"AE\":\" Birleşik Arap Emirlikleri\",\"GB\":\"Birleşik Krallık\",\"ABD\":\"Amerika Birleşik Devletleri\",\"UY \":\"Uruguay\",\"UZ\":\"Özbekistan\",\"VU\":\"Vanuatu\", \"VA\":\"Vatikan\",\"VE\":\"Venezuela\",\"VN\":\"Vietnam \",\"WF\":\"Wallis ve Futuna\",\"YE\":\"Yemen\",\"ZM\":\"Zambiya\",\"ZW\":\"Zimbabve\"} |
-| **error_448** | Belirttiğiniz telefon numarasını erişilemiyor. |
-| **error_449** | Kullanıcı, yeniden deneme sayısını aştı. |
+| **error_tryagain** | Verdiğiniz telefon numarası meşgul veya kullanılamıyor. Lütfen numarayı denetleyip yeniden deneyin. |
+| **error_incorrect_code** | Girdiğiniz doğrulama kodu kayıtlarımızla eşleşmiyor. Lütfen yeniden deneyin veya yeni bir kod isteyin. |
+| **countryList** | {\"Varsayılan\":ülke/\"bölge,AF\":\"Afganistan,AX\":,\"\"\"\"\" Adaları\",\"Al:\"Arnavutluk\",DZ\" : Cezayir,as\":\"\"\"\"\"\" Amerikan Samoa\",\"ad\":Andora\",\"Ao:\"Angola,AI\":\"\"\"\" \"Anguilla\", aq:\"Antarktika\",AG\":Antigua veBarbuda\",\"\" \"\"\"Ar\":Arjantin,har\": Ermenistan,AW:\"Aruba\"\"\"\"\"\"\" \",Au\":\"Avustralya,\"at:Avusturya,\"\"\"\"\"\" AZ\":\"Azerbaycan,\"BS\":Bahamalar\", BH:\"\"\"\"\" Bahreyn\",\"BD:\"Bangladeş\",BB\":Barbados,\"\"\"\"\" Şu\"kadar\":\"Belarus,\"beyaz:\"Belçika,\"BZ:\" \"\"\" Belize\",\"BJ:\"Benin\",BM\":Bermuda,\"\"\"\"\"BT\":Bhutan\",\"Bo:\"Bolivya,BQ:\"\"\"\"\"\" Bonaire\",\"ba\":Bosna\"-Hersek\",Siyah\"beyaz\":Botsvana\"<span class="notransla class=""></span class="notransla> Harici Adaları\",\"VI\":ABD\" Virgin Adaları\",\"UG\":\"Uganda,\"UA\":Ukrayna\",AE:\"\"\"\"\" Birleşik Arap Emirlikleri\",\"GB\":BirleşikKrallık\",ABD\":BirleşikDevletler\",uy\"\"\"\" \":Uruguay\",\"uz:\"Özbekistan, vu & lt:Vanuatu\",\"\"\"\"\"\" \"VA:\"Vatikanşehri\",ve\": Venezuela, vn:\"Vietnam\"\"\"\"\"\" \",WF\":Wallisve\"Futuna,YS:\"Yemen,\"ZM\"\"\"\"\"\":Zambiya\",\"ZW:Zimbabve\"}\"\"\" |
+| **error_448** | Belirttiğiniz telefon numarasına ulaşılamıyor. |
+| **error_449** | Kullanıcı yeniden deneme girişimi sayısını aştı. |
 | **verification_code_input_placeholder_text** | Doğrulama kodu |
 
-Aşağıdaki örnek MFA kayıt sayfasında kullanıcı arabirimi öğelerinden bazıları kullanımını gösterir:
+Aşağıdaki örnek, MFA kayıt sayfasında bazı Kullanıcı arabirimi öğelerinin kullanımını gösterir:
 
-![Kayıt sayfasına e-posta doğrulama UX öğeleri](./media/localization-string-ids/localization-mfa1.png)
+![Kaydolma sayfası eposta doğrulaması UX öğeleri](./media/localization-string-ids/localization-mfa1.png)
 
-Aşağıdaki örnek MFA doğrulama sayfasında kullanıcı arabirimi öğelerinden bazıları kullanımını gösterir:
+Aşağıdaki örnek, MFA doğrulama sayfasında bazı Kullanıcı arabirimi öğelerinin kullanımını gösterir:
 
-![Kayıt sayfasına e-posta doğrulama UX öğeleri](./media/localization-string-ids/localization-mfa2.png)
+![Kaydolma sayfası eposta doğrulaması UX öğeleri](./media/localization-string-ids/localization-mfa2.png)
 
 
 

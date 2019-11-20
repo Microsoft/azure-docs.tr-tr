@@ -1,59 +1,61 @@
 ---
-title: Azure özel yollar, zorlamalı tünel ile KMS etkinleştirmesi kullanmayı | Microsoft Docs
-description: Azure özel yollar kullanarak Azure'da zorlamalı, KMS etkinleştirmesi için nasıl kullanılacağını gösterir.
+title: Zorlamalı tünel ile KMS etkinleştirmesini etkinleştirmek için Azure özel yollarını kullanın | Microsoft Docs
+description: Azure 'da Zorlamalı tünel kullanırken KMS etkinleştirmesini etkinleştirmek için Azure özel yollarının nasıl kullanılacağını gösterir.
 services: virtual-machines-windows, azure-resource-manager
 documentationcenter: ''
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: ''
 tags: top-support-issue, azure-resource-manager
 ms.service: virtual-machines-windows
 ms.workload: na
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: troubleshooting
 ms.date: 12/20/2018
 ms.author: genli
-ms.openlocfilehash: 6557649eb1b97ad4d88876906737f8249e18b958
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 47ff8870df7c89ee2ab3e48e064e31aa581f65f0
+ms.sourcegitcommit: 827248fa609243839aac3ff01ff40200c8c46966
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66399797"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73748641"
 ---
-# <a name="windows-activation-fails-in-forced-tunneling-scenario"></a>Zorlamalı tünel senaryoda Windows etkinleştirme başarısız
+# <a name="windows-activation-fails-in-forced-tunneling-scenario"></a>Zorlamalı tünel senaryosunda Windows etkinleştirme başarısız oluyor
 
-Bu makalede çözümlemek siteden siteye VPN bağlantısı veya ExpressRoute senaryoları, etkinleştirdiğinizde karşılaşabileceğiniz KMS etkinleştirme sorun zorlamalı açıklar.
+Bu makalede, siteden siteye VPN bağlantısı veya ExpressRoute senaryolarında zorlamalı tüneli etkinleştirdiğinizde karşılaşabileceğiniz KMS etkinleştirme sorununun nasıl çözümleneceği açıklanır.
 
 ## <a name="symptom"></a>Belirti
 
-Etkinleştirdiğiniz [zorlamalı tünel](../../vpn-gateway/vpn-gateway-forced-tunneling-rm.md) Azure'da, şirket içi ağınıza tüm İnternet'e bağlı trafiği yönlendirmek için sanal ağ alt ağları yedekleyin. Bu senaryoda, Azure Windows Server 2012 R2 (veya sonraki Windows sürümlerinde) çalışan sanal makineleri (VM'ler) başarıyla Windows etkinleştirebilirsiniz. Ancak, önceki bir Windows sürümünü çalıştıran sanal makineler Windows etkinleştirme başarısız.
+Internet 'e bağlı tüm trafiği şirket içi ağınıza geri yönlendirmek için Azure sanal ağ alt ağlarında [zorlamalı tüneli](../../vpn-gateway/vpn-gateway-forced-tunneling-rm.md) etkinleştirin. Bu senaryoda, Windows çalıştıran Azure sanal makineleri (VM) Windows 'u etkinleştirmek için başarısız olur.
 
 ## <a name="cause"></a>Nedeni
 
-Azure Windows sanal makinelerinin Windows etkinleştirme için Azure KMS sunucusuna bağlanmanız gerekmez. Etkinleştirme, etkinleştirme isteği bir Azure genel IP adresinden gelen gerektiriyor. Etkinleştirme isteği, şirket içi ağdan Azure genel bir IP adresinden gelen geldiğinden zorlamalı tünel oluşturma senaryosunda etkinleştirme başarısız olur.
+Azure Windows VM 'lerinin Windows etkinleştirme için Azure KMS sunucusuna bağlanması gerekir. Etkinleştirme, etkinleştirme isteğinin bir Azure genel IP adresinden gelmesini gerektirir. Zorlamalı tünel senaryosunda, etkinleştirme isteği Azure genel IP adresi yerine şirket içi ağınızdan geldiği için etkinleştirme başarısız olur.
 
 ## <a name="solution"></a>Çözüm
 
-Bu sorunu gidermek için Azure özel rota için rota etkinleştirme trafiği Azure KMS sunucusunu kullanın.
+Bu sorunu çözmek için etkinleştirme trafiğini Azure KMS sunucusuna yönlendirmek üzere Azure özel yolunu kullanın.
 
-23\.102.135.246 Azure genel bulut için KMS sunucunun IP adresidir. DNS kms.core.windows.net adıdır. Azure Almanya gibi diğer Azure platformları kullanırsanız, karşılık gelen bir KMS sunucusu IP adresini kullanmanız gerekir. Daha fazla bilgi için aşağıdaki tabloya bakın:
+Azure genel bulutu için KMS sunucusunun IP adresi 23.102.135.246 ' dir. DNS adı kms.core.windows.net ' dir. Azure Almanya gibi diğer Azure platformlarını kullanıyorsanız, karşılık gelen KMS sunucusunun IP adresini kullanmanız gerekir. Daha fazla bilgi için aşağıdaki tabloya bakın:
 
-|Platform| KMS DNS|KMS IP|
+|Platform| KMS DNS|KMS ıP 'SI|
 |------|-------|-------|
-|Azure genel|KMS.Core.Windows.NET|23.102.135.246|
+|Azure genel|kms.core.windows.net|23.102.135.246|
 |Azure Almanya|kms.core.cloudapi.de|51.4.143.248|
 |Azure US Government|kms.core.usgovcloudapi.net|23.97.0.13|
 |Azure Çin 21Vianet|kms.core.chinacloudapi.cn|42.159.7.249|
 
 
-Özel rota eklemek için aşağıdaki adımları izleyin:
+Özel yolu eklemek için aşağıdaki adımları izleyin:
 
-### <a name="for-resource-manager-vms"></a>Kaynak Yöneticisi VM'ler için
+### <a name="for-resource-manager-vms"></a>Kaynak Yöneticisi VM 'Ler için
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
-1. Azure PowerShell'i açın ve ardından [Azure aboneliğinizde oturum açın](https://docs.microsoft.com/powershell/azure/authenticate-azureps).
+> [!NOTE] 
+> Etkinleştirme, genel IP adreslerini kullanır ve standart SKU Load Balancer yapılandırmasından etkilenecek. Gereksinimler hakkında bilgi edinmek için [Azure 'Daki giden bağlantıları](https://docs.microsoft.com/azure/load-balancer/load-balancer-outbound-connections) dikkatle gözden geçirin.
+
+1. Azure PowerShell açın ve ardından [Azure aboneliğinizde oturum açın](https://docs.microsoft.com/powershell/azure/authenticate-azureps).
 2. Aşağıdaki komutları çalıştırın:
 
     ```powershell
@@ -75,15 +77,15 @@ Bu sorunu gidermek için Azure özel rota için rota etkinleştirme trafiği Azu
 
     Set-AzVirtualNetwork -VirtualNetwork $vnet
     ```
-3. Etkinleştirme sorunlarını olan sanal Makineye gidin. Kullanım [PsPing](https://docs.microsoft.com/sysinternals/downloads/psping) KMS sunucusunda erişebiliyorsa test etmek için:
+3. Etkinleştirme sorunları olan VM 'ye gidin. KMS sunucusuna ulaşabilmesini sınamak için [Psping](https://docs.microsoft.com/sysinternals/downloads/psping) kullanın:
 
         psping kms.core.windows.net:1688
 
-4. Windows etkinleştirme ve sorunun çözülüp çözülmediğine bakın deneyin.
+4. Windows 'u etkinleştirmeyi deneyin ve sorunun çözümlenip çözümlenmediğini görün.
 
-### <a name="for-classic-vms"></a>Klasik VM'ler için
+### <a name="for-classic-vms"></a>Klasik VM 'Ler için
 
-1. Azure PowerShell'i açın ve ardından [Azure aboneliğinizde oturum açın](https://docs.microsoft.com/powershell/azure/authenticate-azureps).
+1. Azure PowerShell açın ve ardından [Azure aboneliğinizde oturum açın](https://docs.microsoft.com/powershell/azure/authenticate-azureps).
 2. Aşağıdaki komutları çalıştırın:
 
     ```powershell
@@ -101,15 +103,15 @@ Bu sorunu gidermek için Azure özel rota için rota etkinleştirme trafiği Azu
     -RouteTableName "VNet-DM-KmsRouteTable"
     ```
 
-3. Etkinleştirme sorunlarını olan sanal Makineye gidin. Kullanım [PsPing](https://docs.microsoft.com/sysinternals/downloads/psping) KMS sunucusunda erişebiliyorsa test etmek için:
+3. Etkinleştirme sorunları olan VM 'ye gidin. KMS sunucusuna ulaşabilmesini sınamak için [Psping](https://docs.microsoft.com/sysinternals/downloads/psping) kullanın:
 
         psping kms.core.windows.net:1688
 
-4. Windows etkinleştirme ve sorunun çözülüp çözülmediğine bakın deneyin.
+4. Windows 'u etkinleştirmeyi deneyin ve sorunun çözümlenip çözümlenmediğini görün.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [KMS istemcisi kurulum anahtarları](https://docs.microsoft.com/windows-server/get-started/kmsclientkeys
+- [KMS Istemcisi kurulum anahtarları](https://docs.microsoft.com/windows-server/get-started/kmsclientkeys
 )
-- [Gözden geçirme ve seçme etkinleştirme yöntemleri](https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/jj134256(v=ws.11)
+- [Etkinleştirme yöntemlerini gözden geçirme ve seçme](https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/jj134256(v=ws.11)
 )

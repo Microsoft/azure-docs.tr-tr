@@ -1,125 +1,102 @@
 ---
-title: Azure önbelleği için Redis yönetme | Microsoft Docs
-description: Azure önbelleği için Redis için yeniden başlatma ve zamanlama güncelleştirmeleri gibi yönetim görevlerini gerçekleştirmeyi öğreneceksiniz
-services: cache
-documentationcenter: na
+title: Redsıs için Azure önbelleğini yönetme
+description: Redsıs için yeniden başlatma ve Azure önbelleği güncelleştirmelerini zamanlama gibi yönetim görevlerinin nasıl gerçekleştirileceğini öğrenin
 author: yegu-ms
-manager: jhubbard
-editor: tysonn
-ms.assetid: 8c915ae6-5322-4046-9938-8f7832403000
 ms.service: cache
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: cache
-ms.workload: tbd
+ms.topic: conceptual
 ms.date: 07/05/2017
 ms.author: yegu
-ms.openlocfilehash: 81ef669b62c822e10d8bf5c45e58dd769c5dbeb9
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 69686cad20bc4ce70bff2a92a216c9430522c301
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60233001"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74122526"
 ---
-# <a name="how-to-administer-azure-cache-for-redis"></a>Azure önbelleği için Redis yönetme
-Bu konuda gibi yönetim görevlerini gerçekleştirmek kullanılan nasıl açıklanmaktadır [yeniden](#reboot) ve [güncelleştirmelerini zamanlama](#schedule-updates) , Azure önbelleği için Redis örneği için.
+# <a name="how-to-administer-azure-cache-for-redis"></a>Redsıs için Azure önbelleğini yönetme
+Bu konu, Redsıs örnekleri için Azure önbelleğiniz için güncelleştirmeleri yeniden [başlatma](#reboot) ve [zamanlama](#schedule-updates) gibi yönetim görevlerinin nasıl gerçekleştirileceğini açıklamaktadır.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="reboot"></a>Yeniden başlatma
-**Yeniden** dikey önbelleğinizin bir veya daha fazla düğüm yeniden başlatmanızı sağlar. Bu yeniden başlatma özelliği, bir önbellek düğümü bir hata varsa, dayanıklılık için uygulamanızı test olanak tanır.
+**Yeniden başlatma** dikey penceresi, önbelleğinizin bir veya daha fazla düğümünü yeniden başlatmanızı sağlar. Bu yeniden başlatma özelliği, bir önbellek düğümünde hata oluşursa uygulamanızı dayanıklılık açısından test etmenizi sağlar.
 
 ![Yeniden başlatma](./media/cache-administration/redis-cache-administration-reboot.png)
 
-Yeniden başlatma ve düğümleri seçmek **yeniden**.
+Yeniden başlatılacak düğümleri seçin ve **Yeniden Başlat**' a tıklayın.
 
 ![Yeniden başlatma](./media/cache-administration/redis-cache-reboot.png)
 
-Kümeleme özelliği etkinleştirilmiş bir premium önbellek varsa, hangi parçalar önbelleğin yeniden başlatmayı seçebilirsiniz.
+Kümelemenin etkinleştirildiği Premium bir önbelleğiniz varsa, önbelleğin hangi parçaları yeniden başlatılacağını seçebilirsiniz.
 
 ![Yeniden başlatma](./media/cache-administration/redis-cache-reboot-cluster.png)
 
-Önbelleğinizin bir veya daha fazla düğümlerini yeniden başlatmanız, istediğiniz düğümleri seçin ve tıklayın **yeniden**. Kümeleme özelliği etkinleştirilmiş bir premium önbellek varsa, yeniden başlatın ve ardından istenen parçalar seçin **yeniden**. Birkaç dakika sonra çalıştırdığınız ve seçili düğümlerin yeniden başlatılması birkaç dakika sonra yeniden çevrimiçi.
+Önbelleğinizin bir veya daha fazla düğümünü yeniden başlatmak için, istenen düğümleri seçin ve **Yeniden Başlat**' a tıklayın. Kümelemenin etkinleştirildiği Premium bir önbelleğiniz varsa, yeniden başlatmak için istenen parçaları seçin ve ardından **Yeniden Başlat**' a tıklayın. Birkaç dakika sonra, seçili düğümler yeniden başlatılır ve birkaç dakika sonra tekrar çevrimiçi olacak.
 
-İstemci uygulamaları üzerindeki etkisi, yeniden hangi düğüme bağlı olarak değişir.
+İstemci uygulamalarına etkisi, yeniden başlatmanız gereken düğümlere bağlı olarak değişir.
 
-* **Ana** - ana düğüm yeniden başlatıldığında, Azure önbelleği için Redis çoğaltma düğüme yük devreder ve ana yükseltir. Bu yük devretme sırasında bağlantıları önbelleğe başlatılamayabilir kısa bir aralık olabilir.
-* **Bağımlı** - ikincil düğüm yeniden başlatıldığında önbellek istemcileri için herhangi bir etkisi yoktur.
-* **Hem ana hem de ikincil** -ne zaman hem önbellek düğümleri yeniden, tüm verileri önbelleğe kaybolur ve bağlantıları önbelleğe kadar birincil düğüm başarısız söz konusu yeniden çevrimiçi. Yapılandırdıysanız [veri kalıcılığı](cache-how-to-premium-persistence.md), en son yedekleme önbelleği olarak yeniden çevrimiçine döner, ancak en son yedeklemeden sonra gerçekleşen herhangi bir önbellek yazma kaybolur geri.
-* **Bir premium düğümlerinin önbelleğe kümeleme özellikli** - kümeleme özelliği etkinleştirildiğinde, bir premium önbelleğin bir veya daha fazla düğümlerini yeniden başlatmanız seçili düğümlerin davranışı, karşılık gelen veya kümelenmemiş bir önbellek düğümü yeniden başlatmanız aynıdır.
+* **Ana** düğüm-ana düğüm yeniden başlatıldığında, redin Azure önbelleği çoğaltma düğümüne devrediltilir ve onu ana öğe olarak yükseltir. Bu yük devretme sırasında, bağlantıların önbellekte başarısız olabileceği kısa bir Aralık olabilir.
+* **Bağımlı** -bağımlı düğüm yeniden başlatıldığında, istemcileri önbelleğe alma işlemi genellikle bir etkisi yoktur.
+* **Hem ana** hem de bağımlı-her iki önbellek düğümü yeniden başlatıldığında tüm veriler önbellekte kaybolur ve önbellek bağlantıları birincil düğüm yeniden çevrimiçi olana kadar başarısız olur. [Veri kalıcılığını](cache-how-to-premium-persistence.md)yapılandırdıysanız, önbellek yeniden çevrimiçi olduğunda en son yedekleme geri yüklenir, ancak en son yedeklemeden sonra gerçekleşen tüm önbellek yazmaları kaybedilir.
+* **Kümeleme etkinken Premium önbelleğinin düğümleri** -kümelendirmeyi etkin bir Premium önbelleğin bir veya daha fazla düğümünü yeniden başlattığınızda, seçili düğümlerin davranışı ilgili düğümü veya kümelenmemiş bir önbelleğin düğümlerini yeniden başlattığınızda aynı olur.
 
-> [!IMPORTANT]
-> Yeniden başlatma için tüm fiyatlandırma katmanında kullanıma sunulmuştur.
-> 
-> 
+## <a name="reboot-faq"></a>Yeniden başlatma SSS
+* [Uygulamamı test etmek için hangi düğümü yeniden başlatmalıyım?](#which-node-should-i-reboot-to-test-my-application)
+* [İstemci bağlantılarını temizlemek için önbelleği yeniden başlatabilirim miyim?](#can-i-reboot-the-cache-to-clear-client-connections)
+* [Yeniden başlatma işlemi yapmam durumunda önbelleğim verileri kaybedecek mıyım?](#will-i-lose-data-from-my-cache-if-i-do-a-reboot)
+* [PowerShell, CLı veya diğer yönetim araçlarını kullanarak önbelleğinizi yeniden başlatabilirim miyim?](#can-i-reboot-my-cache-using-powershell-cli-or-other-management-tools)
 
-## <a name="reboot-faq"></a>Yeniden başlatma ile ilgili SSS
-* [Uygulamamın test etmek için hangi düğümün yeniden?](#which-node-should-i-reboot-to-test-my-application)
-* [İstemci bağlantıları temizlemek için kullanılan önbellek yeniden başlatma?](#can-i-reboot-the-cache-to-clear-client-connections)
-* [Yeniden başlatma yapmam miyim my önbellekten veri kaybedersiniz?](#will-i-lose-data-from-my-cache-if-i-do-a-reboot)
-* [PowerShell, CLI veya diğer yönetim araçlarını kullanarak önbelleğimin yeniden başlatma?](#can-i-reboot-my-cache-using-powershell-cli-or-other-management-tools)
-* [Fiyatlandırma katmanları, yeniden başlatma işlevlerini kullanabilir miyim?](#what-pricing-tiers-can-use-the-reboot-functionality)
+### <a name="which-node-should-i-reboot-to-test-my-application"></a>Uygulamamı test etmek için hangi düğümü yeniden başlatmalıyım?
+Uygulamanızın dayanıklılığını, önbelleğinizin birincil düğümünde hata ile test etmek için **ana** düğümü yeniden başlatın. Uygulamanızın dayanıklılığını ikincil düğümün hatasına karşı test etmek için **bağımlı** düğümü yeniden başlatın. Uygulamanızın dayanıklılığını önbelleğin toplam arızasına karşı test etmek için **her iki** düğümü yeniden başlatın.
 
-### <a name="which-node-should-i-reboot-to-test-my-application"></a>Uygulamamın test etmek için hangi düğümün yeniden?
-Uygulamanızı hataya karşı önbelleğinizin birincil düğüm esnekliğini test etmek için yeniden başlatma **ana** düğümü. Uygulamanızı hataya karşı ikincil düğüme esnekliğini test etmek için yeniden başlatma **bağımlı** düğümü. Toplam hataya karşı uygulamanızı önbellek esnekliğini test etmek için yeniden başlatma **hem** düğümleri.
-
-### <a name="can-i-reboot-the-cache-to-clear-client-connections"></a>İstemci bağlantıları temizlemek için kullanılan önbellek yeniden başlatma?
-Önbellek yeniden başlatırsanız, Evet, tüm istemci bağlantıları temizlenir. Yeniden başlatma burada tüm istemci bağlantıları bir mantık hatası veya istemci uygulamasındaki bir hata nedeniyle tüketildikten durumda yararlı olabilir. Her fiyatlandırma katmanının farklı olan [istemci bağlantı sınırları](cache-configure.md#default-redis-server-configuration) çeşitli boyutlarda ve sonra bu sınırlar ulaşıldı için daha fazla istemci bağlantı kabul edilir. Önbellek yeniden başlatılıyor, tüm istemci bağlantıları temizlemek için bir yol sağlar.
+### <a name="can-i-reboot-the-cache-to-clear-client-connections"></a>İstemci bağlantılarını temizlemek için önbelleği yeniden başlatabilirim miyim?
+Evet, önbelleği yeniden başlattıktan sonra tüm istemci bağlantıları temizlenir. Yeniden başlatma, bir mantık hatası veya istemci uygulamasındaki bir hata nedeniyle tüm istemci bağlantılarının kullanıldığı durumlarda yararlı olabilir. Her fiyatlandırma katmanının çeşitli boyutlarda farklı [istemci bağlantısı limitleri](cache-configure.md#default-redis-server-configuration) vardır ve bu sınırlara ulaşıldığında daha fazla istemci bağlantısı kabul edilmez. Önbelleğin yeniden başlatılması, tüm istemci bağlantılarını temizlemek için bir yol sağlar.
 
 > [!IMPORTANT]
-> İstemci bağlantıları temizlemek için önbelleğinizi yeniden başlatırsanız, StackExchange.Redis Redis düğümü yeniden çevrimiçi olduğunda otomatik olarak bağlanır. Temel sorun çözülemiyorsa, istemci bağlantılarını kullanılan devam edebilir.
+> İstemci bağlantılarını temizlemek için önbelleğinizi yeniden başlattıktan sonra, redin düğümü yeniden çevrimiçi olduktan sonra StackExchange. Red, otomatik olarak yeniden bağlanır. Temel alınan Sorun çözümlenmezse istemci bağlantıları çalışmaya devam edebilir.
 > 
 > 
 
-### <a name="will-i-lose-data-from-my-cache-if-i-do-a-reboot"></a>Yeniden başlatma yapmam miyim my önbellekten veri kaybedersiniz?
-Her ikisi de yeniden başlatırsanız **ana** ve **bağımlı** düğümler, önbellek (veya bir premium önbellek kümeleme özellikli kullanıyorsanız bu parça) tüm veriler kaybolmuş olabilir, ancak bu ya da garanti edilmez. Yapılandırdıysanız [veri kalıcılığı](cache-how-to-premium-persistence.md), en fazla önbellek olarak yeniden çevrimiçine döner, ancak yedekleme yapıldıktan sonra ortaya çıkan herhangi bir önbellek yazma kaybolur son yedeklemeden geri yüklenir.
+### <a name="will-i-lose-data-from-my-cache-if-i-do-a-reboot"></a>Yeniden başlatma işlemi yapmam durumunda önbelleğim verileri kaybedecek mıyım?
+Hem **ana** hem de **bağımlı** düğümleri yeniden başlattıktan sonra önbellekteki tüm veriler (veya kümelendirmeyi etkin bir Premium önbellek kullanıyorsanız) kaybolabilir, ancak bu garanti edilmez. [Veri kalıcılığını](cache-how-to-premium-persistence.md)yapılandırdıysanız, önbellek yeniden çevrimiçi olduğunda en son yedekleme geri yüklenir, ancak yedekleme yapıldıktan sonra gerçekleşen tüm önbellek yazmaları kaybedilir.
 
-Düğümler yalnızca birini yeniden başlatırsanız, veriler genellikle kaybolmaz, ancak yine de olabilir. Örneğin bir önbellek yazma, verileri önbellek yazma devam ediyor ve ana düğüm yeniden kaybolur için. Veri kaybı için başka bir senaryo, bir düğümü yeniden başlatma ve diğer düğümü aynı anda bir hata nedeniyle aşağı git olacağını olacaktır. Veri kaybı için olası nedenler hakkında daha fazla bilgi için bkz: [Redis verilerimi ne?](https://gist.github.com/JonCole/b6354d92a2d51c141490f10142884ea4#file-whathappenedtomydatainredis-md)
+Düğümlerden yalnızca birini yeniden yüklerseniz, veriler genellikle kaybedilmez, ancak yine de olabilir. Örneğin, ana düğüm yeniden başlatıldığında ve bir önbellek yazma işlemi devam ediyorsa, önbellek yazma verileri kaybedilir. Veri kaybı için başka bir senaryo da bir düğümü yeniden başlattığınızda ve diğer düğüm aynı anda bir hata nedeniyle sona acaksa olur. Veri kaybına ilişkin olası nedenler hakkında daha fazla bilgi için bkz. [redsıs 'deki verilerim ne oldu?](https://gist.github.com/JonCole/b6354d92a2d51c141490f10142884ea4#file-whathappenedtomydatainredis-md)
 
-### <a name="can-i-reboot-my-cache-using-powershell-cli-or-other-management-tools"></a>PowerShell, CLI veya diğer yönetim araçlarını kullanarak önbelleğimin yeniden başlatma?
-Evet, PowerShell için yönergeleri görmek [bir Azure önbelleği için Redis yeniden](cache-howto-manage-redis-cache-powershell.md#to-reboot-an-azure-cache-for-redis).
-
-### <a name="what-pricing-tiers-can-use-the-reboot-functionality"></a>Fiyatlandırma katmanları, yeniden başlatma işlevlerini kullanabilir miyim?
-Yeniden başlatma, tüm fiyatlandırma katmanları için kullanılabilir.
+### <a name="can-i-reboot-my-cache-using-powershell-cli-or-other-management-tools"></a>PowerShell, CLı veya diğer yönetim araçlarını kullanarak önbelleğinizi yeniden başlatabilirim miyim?
+Evet, PowerShell yönergeleri için bkz. [Reda Için Azure önbelleğini yeniden başlatma](cache-how-to-manage-redis-cache-powershell.md#to-reboot-an-azure-cache-for-redis).
 
 ## <a name="schedule-updates"></a>Güncelleştirmeleri zamanlama
-**Güncelleştirmeleri zamanla** dikey Premium katmanı önbellek hesabınız için bir bakım penceresi belirtmek olanak tanır. Bakım penceresi belirtildiğinde, herhangi bir Redis sunucu güncelleştirme sırasında bu pencereyi yapılır. 
+**Güncelleştirmeleri zamanla** dikey penceresi, önbellek örneğiniz için bir bakım penceresi atamanıza olanak tanır. Bakım penceresi belirtildiğinde, bu pencere sırasında tüm Red, Server güncelleştirmeleri yapılır. 
 
 > [!NOTE] 
-> Bakım penceresi server güncelleştirmeleri yalnızca Redis için geçerlidir ve değil herhangi bir Azure güncelleştirmeleri veya işletim sistemine sanal makinelerinin ana bilgisayar önbelleği güncelleştirir.
-> 
-> 
+> Bakım penceresi yalnızca Redsıs sunucu güncelleştirmeleri için geçerlidir ve önbelleği barındıran VM 'lerin işletim sisteminde herhangi bir Azure güncelleştirmesi ya da güncelleştirmesi için geçerli değildir.
+>
 
 ![Güncelleştirmeleri zamanlama](./media/cache-administration/redis-schedule-updates.png)
 
-Bir bakım penceresi belirtmek için istenen gün işaretleyin ve her gün için bakım penceresi başlangıç saati belirleyin ve tıklayın **Tamam**. Bakım penceresi saati UTC biçiminde olduğunu unutmayın. 
+Bir bakım penceresi belirtmek için, istenen günleri denetleyin ve her gün için bakım penceresi başlangıç saatini belirtip **Tamam**' a tıklayın. Bakım penceresi saatinin UTC olarak olduğunu unutmayın. 
 
-Güncelleştirmeler için varsayılan ve en düşük bakım penceresi beş saattir. Bu değer Azure Portalı'ndan yapılandırılabilir değildir, ancak PowerShell kullanarak yapılandırabilirsiniz `MaintenanceWindow` parametresinin [yeni AzRedisCacheScheduleEntry](/powershell/module/az.rediscache/new-azrediscachescheduleentry) cmdlet'i. Daha fazla bilgi için bkz: PowerShell, CLI veya diğer yönetim araçlarını kullanarak zamanlanmış güncelleştirmeler yönetebilirim?
+Güncelleştirmeler için varsayılan ve en düşük bakım penceresi beş saattir. Bu değer Azure portal yapılandırılamaz, ancak [New-Azrediscacheschedutaentry](/powershell/module/az.rediscache/new-azrediscachescheduleentry) cmdlet 'inin `MaintenanceWindow` parametresini kullanarak PowerShell 'de yapılandırabilirsiniz. Daha fazla bilgi için bkz. PowerShell, CLı veya diğer yönetim araçlarını kullanarak zamanlanmış güncelleştirmeleri yönetebilir miyim?
 
+## <a name="schedule-updates-faq"></a>Güncelleştirme zamanlama SSS
+* [Güncelleştirmeleri zamanla özelliğini kullandığımda güncelleştirmeler ne zaman oluşur?](#when-do-updates-occur-if-i-dont-use-the-schedule-updates-feature)
+* [Zamanlanmış bakım penceresi sırasında ne tür güncelleştirmeler yapılır?](#what-type-of-updates-are-made-during-the-scheduled-maintenance-window)
+* [Zamanlanan güncelleştirmeleri PowerShell, CLı veya diğer yönetim araçlarını kullanarak yönetebilir miyim?](#can-i-managed-scheduled-updates-using-powershell-cli-or-other-management-tools)
 
-## <a name="schedule-updates-faq"></a>SSS güncelleştirmelerini zamanlama
-* [Zamanlamayı güncelleştirme özelliğini kullanmıyorsanız güncelleştirmeler olduğunda?](#when-do-updates-occur-if-i-dont-use-the-schedule-updates-feature)
-* [Zamanlanan bakım penceresi sırasında yapılan güncelleştirmeleri hangi türde?](#what-type-of-updates-are-made-during-the-scheduled-maintenance-window)
-* [PowerShell, CLI veya diğer yönetim araçlarını kullanarak zamanlanmış güncelleştirmeler yönetebilirim?](#can-i-managed-scheduled-updates-using-powershell-cli-or-other-management-tools)
-* [Fiyatlandırma katmanları zamanlama Güncelleştirmeler işlevini kullanabilir miyim?](#what-pricing-tiers-can-use-the-schedule-updates-functionality)
+### <a name="when-do-updates-occur-if-i-dont-use-the-schedule-updates-feature"></a>Güncelleştirmeleri zamanla özelliğini kullandığımda güncelleştirmeler ne zaman oluşur?
+Bakım penceresi belirtmezseniz, güncelleştirmeler herhangi bir zamanda yapılabilir.
 
-### <a name="when-do-updates-occur-if-i-dont-use-the-schedule-updates-feature"></a>Zamanlamayı güncelleştirme özelliğini kullanmıyorsanız güncelleştirmeler olduğunda?
-Bir bakım penceresi belirtmezseniz, herhangi bir zamanda güncelleştirmeleri yapılabilir.
+### <a name="what-type-of-updates-are-made-during-the-scheduled-maintenance-window"></a>Zamanlanmış bakım penceresi sırasında ne tür güncelleştirmeler yapılır?
+Zamanlanan bakım penceresi sırasında yalnızca Redsıs sunucu güncelleştirmeleri yapılır. Bakım penceresi, Azure güncelleştirmeleri veya VM işletim sistemi güncelleştirmeleri için geçerlidir.
 
-### <a name="what-type-of-updates-are-made-during-the-scheduled-maintenance-window"></a>Zamanlanan bakım penceresi sırasında yapılan güncelleştirmeleri hangi türde?
-Yalnızca sunucu zamanlanmış bakım penceresi sırasında yapılan güncelleştirmeler Redis. Bakım penceresi uygulanamaz Azure güncelleştirmeleri ya da sanal makine işletim sistemi güncelleştirmeleri.
-
-### <a name="can-i-managed-scheduled-updates-using-powershell-cli-or-other-management-tools"></a>Ben zamanlanmış güncelleştirmeler PowerShell, CLI veya diğer yönetim araçlarını kullanarak yönetilen alabilirim?
-Evet, aşağıdaki PowerShell cmdlet'lerini kullanarak, Zamanlanmış güncelleştirmeleri yönetebilirsiniz:
+### <a name="can-i-managed-scheduled-updates-using-powershell-cli-or-other-management-tools"></a>PowerShell, CLı veya diğer yönetim araçlarını kullanarak zamanlanmış güncelleştirmeleri yönetibilirim miyim?
+Evet, aşağıdaki PowerShell cmdlet 'lerini kullanarak zamanlanmış güncelleştirmelerinizi yönetebilirsiniz:
 
 * [Get-AzRedisCachePatchSchedule](/powershell/module/az.rediscache/get-azrediscachepatchschedule)
-* [Yeni AzRedisCachePatchSchedule](/powershell/module/az.rediscache/new-azrediscachepatchschedule)
-* [Yeni AzRedisCacheScheduleEntry](/powershell/module/az.rediscache/new-azrediscachescheduleentry)
+* [New-AzRedisCachePatchSchedule](/powershell/module/az.rediscache/new-azrediscachepatchschedule)
+* [New-Azrediscacheschedutaentry](/powershell/module/az.rediscache/new-azrediscachescheduleentry)
 * [Remove-AzRedisCachePatchSchedule](/powershell/module/az.rediscache/remove-azrediscachepatchschedule)
 
-### <a name="what-pricing-tiers-can-use-the-schedule-updates-functionality"></a>Fiyatlandırma katmanları zamanlama Güncelleştirmeler işlevini kullanabilir miyim?
-**Güncelleştirmeleri zamanla** özelliği, yalnızca premium fiyatlandırma katmanı kullanılabilir.
-
 ## <a name="next-steps"></a>Sonraki adımlar
-* Daha fazla keşif [Azure önbelleği için Redis premium katmanı](cache-premium-tier-intro.md) özellikleri.
+* [Redsıs Premium katman özellikleri için daha fazla Azure önbelleği](cache-premium-tier-intro.md) bulun.
 

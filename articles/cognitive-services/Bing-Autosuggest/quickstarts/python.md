@@ -1,41 +1,41 @@
 ---
-title: "Hızlı Başlangıç: Bing otomatik öneri REST API'si ve Python ile arama sorguları önerin"
-titlesuffix: Azure Cognitive Services
-description: Bing Otomatik Öneri API'sini kısa sürede kullanmaya başlamanıza yardımcı olacak bilgi ve kod örnekleri alın.
+title: 'Hızlı Başlangıç: Bing Otomatik Öneri REST API ve Python ile arama sorguları önerin'
+titleSuffix: Azure Cognitive Services
+description: Bing Otomatik Öneri API'si ile gerçek zamanlı olarak arama terimleri önerme hakkında hızlı bir başlangıç yapmayı öğrenin.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-autosuggest
 ms.topic: quickstart
-ms.date: 02/20/2019
+ms.date: 07/26/2019
 ms.author: aahi
-ms.openlocfilehash: 38cc9440e3cb5492ef1f45b3907fd2c00867f350
-ms.sourcegitcommit: 3d4121badd265e99d1177a7c78edfa55ed7a9626
+ms.openlocfilehash: 5f6d92037bd588f96e9345ad1c7bc2e1f49e580c
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66385007"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68564643"
 ---
-# <a name="quickstart-suggest-search-queries-with-the-bing-autosuggest-rest-api-and-python"></a>Hızlı Başlangıç: Bing otomatik öneri REST API'si ve Python ile arama sorguları önerin
+# <a name="quickstart-suggest-search-queries-with-the-bing-autosuggest-rest-api-and-python"></a>Hızlı Başlangıç: Bing Otomatik Öneri REST API ve Python ile arama sorguları önerin
 
-Bing otomatik öneri API'si ve JSON yanıtını alma yapmaya başlamak için bu Hızlı Başlangıç'ı çağırır kullanın. Bu basit bir Python uygulaması API için bir kısmi arama sorgu gönderir ve aramalar için öneriler döndürür. Bu uygulama Python ile yazılmış olmakla birlikte API, çoğu programlama diliyle uyumlu bir RESTful Web hizmetidir. Bu örnek için kaynak kodu kullanılabilir [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/python/Search/BingAutosuggestv7.py)
+Bing Otomatik Öneri API'si çağrı yapmaya başlamak ve JSON yanıtını almak için bu hızlı başlangıcı kullanın. Bu basit Python uygulaması, API 'ye kısmi bir arama sorgusu gönderir ve aramalar için öneriler döndürür. Bu uygulama Python ile yazılmış olmakla birlikte API, çoğu programlama diliyle uyumlu bir RESTful Web hizmetidir. Bu örneğe ilişkin kaynak kodu [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/python/Search/BingAutosuggestv7.py) 'da kullanılabilir
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* [Python 3.x](https://www.python.org/downloads/) 
+* [Python 3. x](https://www.python.org/downloads/) 
 
 [!INCLUDE [cognitive-services-bing-news-search-signup-requirements](../../../../includes/cognitive-services-bing-autosuggest-signup-requirements.md)]
 
 ## <a name="create-a-new-application"></a>Yeni uygulama oluşturma
 
-1. Sık kullandığınız IDE veya düzenleyici yeni bir Python dosyası oluşturun. Aşağıdaki içeri aktarmaları ekleyin:
+1. En sevdiğiniz IDE veya düzenleyicide yeni bir Python dosyası oluşturun. Aşağıdaki içeri aktarmaları ekleyin:
 
     ```python
     import http.client, urllib.parse, json
     ```
 
-2. API konak ve yol değişkenlerinin [pazara kod](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference#market-codes)ve kısmi arama sorgusu.
+2. API ana bilgisayarınız ve yolunuz, [Pazar kodunuz](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference#market-codes)ve kısmi arama sorgusu için değişkenler oluşturun.
 
     ```python
     subscriptionKey = 'enter key here'
@@ -45,21 +45,21 @@ Bing otomatik öneri API'si ve JSON yanıtını alma yapmaya başlamak için bu 
     query = 'sail'
     ```
 
-3. Pazar kodunuzu ekleyerek parametreleri dize oluşturma `?mkt=` parametresi ve sorgunuzu ekleme `&q=` parametresi.
+3. Pazar kodunuzu `?mkt=` parametresine ekleyerek ve sorgunuzu `&q=` parametresine ekleyerek bir parametre dizesi oluşturun.
 
     ```python
     params = '?mkt=' + mkt + '&q=' + query
     ```
 
-## <a name="create-and-send-an-api-request"></a>Oluşturma ve bir API isteği gönder
+## <a name="create-and-send-an-api-request"></a>API isteği oluşturma ve gönderme
 
-1. Abonelik anahtarınızı ekleme bir `Ocp-Apim-Subscription-Key` başlığı.
+1. Abonelik anahtarınızı bir `Ocp-Apim-Subscription-Key` üstbilgiye ekleyin.
     
     ```python
     headers = {'Ocp-Apim-Subscription-Key': subscriptionKey}
     ```
 
-2. API'sini kullanarak bağlanma `HTTPSConnection()`, gönderip `GET` istek parametrelerinizi içeren istek.
+2. Kullanarak `HTTPSConnection()`API 'ye bağlanın ve istek parametrelerinizi içeren `GET` isteği gönderin.
     
     ```python
     conn = http.client.HTTPSConnection(host)
@@ -68,7 +68,7 @@ Bing otomatik öneri API'si ve JSON yanıtını alma yapmaya başlamak için bu 
     return response.read ()
     ```
 
-3. Almak ve JSON yanıtı yazdırın.
+3. JSON yanıtını alın ve yazdırın.
 
     ```python
     result = get_suggestions ()

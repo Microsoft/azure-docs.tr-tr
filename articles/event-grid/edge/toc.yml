@@ -1,0 +1,62 @@
+- name: Event Grid IoT Edge Belgeleri
+  href: index.yml
+- name: Azure Event Grid’e geçiş belgeleri
+  href: ../overview.md
+- name: Genel Bakış
+  items:
+    - name: IoT Edge üzerinde Event Grid nedir?
+      href: overview.md
+- name: Öğreticiler
+  items:
+    - name: Olayları yerel olarak yayımlama ve abone olma
+      href: pub-sub-events-webhook-local.md
+    - name: Olayları bulutta yayımlama ve abone olma
+      href: pub-sub-events-webhook-cloud.md
+    - name: Olayları Azure Event Grid’e iletme
+      href: forward-events-event-grid-cloud.md
+    - name: Olayları Azure IoT Hub’a iletme
+      href: forward-events-iothub.md
+    - name: Blob Depolama olaylarına yerel olarak tepki verme
+      href: react-blob-storage-events-locally.md
+- name: Örnekler
+  href: 'https://github.com/Azure/event-grid-iot-edge'
+- name: Kavramlar
+  items:
+    - name: Event Grid kavramları
+      href: concepts.md
+    - name: Güvenlik ve kimlik doğrulaması
+      href: security-authentication.md
+    - name: Olay şemaları
+      href: event-schemas.md
+    - name: Teslim ve yeniden deneme
+      href: delivery-retry.md
+    - name: Çıkışı toplu işleme
+      href: delivery-output-batching.md
+    - name: Gelişmiş filtreleme
+      href: advanced-filtering.md
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: Durumu kalıcı hale getirme
+      items:
+        - name: Linux
+          href: persist-state-linux.md
+        - name: Windows
+          href: persist-state-windows.md
+    - name: API protokollerini yapılandırma
+      href: configure-api-protocol.md
+    - name: İstemci kimlik doğrulamasını yapılandırma
+      href: configure-client-auth.md
+    - name: Web kancası abone kimlik doğrulamasını yapılandırma
+      href: configure-webhook-subscriber-auth.md
+    - name: Kimlik doğrulamasını yapılandırma
+      href: configure-identity-auth.md
+    - name: Sorun giderme
+      href: troubleshoot.md
+- name: Başvuru
+  items:
+    - name: REST API
+      href: api.md
+    - name: Event Grid’i yapılandırma
+      href: configure-event-grid.md
+    - name: Modül İkizi yapılandırma şeması
+      href: twin-json.md

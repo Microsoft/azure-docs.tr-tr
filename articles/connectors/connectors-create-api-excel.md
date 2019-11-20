@@ -1,76 +1,75 @@
 ---
-title: Excel Online - Azure Logic Apps bağlanma
-description: Excel Online REST API'leri ve Azure Logic Apps ile verileri yönetme
+title: Excel Online 'a bağlanma-Azure Logic Apps
+description: Excel Online REST API 'Leri ve Azure Logic Apps verileri yönetme
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
 author: ecfan
 ms.author: estfan
+manager: carmonm
 ms.reviewer: klam, LADocs
-tags: connectors
-ms.topic: article
+ms.topic: conceptual
 ms.date: 08/23/2018
-ms.openlocfilehash: 28739ad65462acc9f2d2ed7db1e9ed14d19f032c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+tags: connectors
+ms.openlocfilehash: d3c6395f7fd66e1b89fc49536e228249bc4ed2a9
+ms.sourcegitcommit: 65131f6188a02efe1704d92f0fd473b21c760d08
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60311973"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70859244"
 ---
-# <a name="manage-excel-online-data-with-azure-logic-apps"></a>Azure Logic Apps ile Excel Online veri yönetme
+# <a name="manage-excel-online-data-with-azure-logic-apps"></a>Excel Online verilerini Azure Logic Apps yönetme
 
-Azure Logic Apps ve Excel Online Bağlayıcısı ile otomatik görevler ve iş veya OneDrive için Excel Online'da verilerinizi temel iş akışları oluşturabilirsiniz. Bu bağlayıcı yardımcı Eylemler sağlar, verileri ile çalışma ve elektronik tablolar, örneğin yönetebilirsiniz:
+Azure Logic Apps ve Excel Online Bağlayıcısı sayesinde, Iş veya OneDrive için Excel Online 'daki verilerinize göre otomatik görevler ve iş akışları oluşturabilirsiniz. Bu bağlayıcı, verilerle çalışmanıza ve elektronik tabloları yönetmenize yardımcı olan eylemler sağlar; örneğin:
 
-* Yeni çalışma sayfaları ve tabloları oluşturun.
-* Alma ve çalışma, tabloları ve satırları yönetin.
-* Tek satır ve anahtar sütunlarını ekleyin.
+* Yeni çalışma sayfaları ve tablolar oluşturun.
+* Çalışma sayfaları, tablolar ve satırlar alın ve yönetin.
+* Tek satır ve anahtar sütunları ekleyin.
 
-Bu eylemler çıkışları diğer hizmetler için Eylemler ile kullanın. Örneğin, her hafta çalışma oluşturan bir eylem kullanın, onay e-posta, Office 365 Outlook bağlayıcısını kullanarak gönderir, başka bir eylem kullanın.
+Daha sonra bu eylemlerdeki çıktıları diğer hizmetlere yönelik eylemlerle kullanabilirsiniz. Örneğin, her hafta çalışma sayfası oluşturan bir eylem kullanırsanız, Office 365 Outlook bağlayıcısını kullanarak onay e-postası gönderen başka bir eylem kullanabilirsiniz.
 
-Logic apps kullanmaya yeni başladıysanız gözden [Azure Logic Apps nedir?](../logic-apps/logic-apps-overview.md)
+Logic Apps 'e yeni başladıysanız [ne Azure Logic Apps](../logic-apps/logic-apps-overview.md) olduğunu gözden geçirin.
 
 > [!NOTE]
-> [Excel Online iş](/connectors/excelonlinebusiness/) ve [Excel Online OneDrive için](/connectors/excelonline/) bağlayıcıları Azure Logic Apps ile çalışma ve farklı [powerapps Excel bağlayıcı](/connectors/excel/).
+> [İş Için Excel Online](/connectors/excelonlinebusiness/) ve [OneDrive bağlayıcıları için excel online](/connectors/excelonline/) , Azure Logic Apps çalışır ve [PowerApps için Excel Bağlayıcısı](/connectors/excel/)'ndan farklıdır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Azure aboneliği. Azure aboneliğiniz yoksa <a href="https://azure.microsoft.com/free/" target="_blank">ücretsiz bir Azure hesabı için kaydolun</a>.
+* Azure aboneliği. Azure aboneliğiniz yoksa [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/).
 
-* Bir [Office 365 hesabı](https://www.office.com/) iş hesabı veya kişisel Microsoft hesabı
+* İş hesabınız veya kişisel Microsoft hesabı için bir [Office 365 hesabı](https://www.office.com/)
 
-  Excel verilerinizi storage klasöründeki virgülle ayrılmış değer (CSV) dosyası olarak Örneğin, Onedrive'da bulunabilir. 
-  Aynı CSV dosyası ile de kullanabileceğiniz [düz dosya bağlayıcı](../logic-apps/logic-apps-enterprise-integration-flatfile.md).
+  Excel verileriniz bir depolama klasöründe (örneğin, OneDrive) bir virgülle ayrılmış değer (CSV) dosyası olarak bulunabilir. 
+  Aynı CSV dosyasını [düz dosya Bağlayıcısı](../logic-apps/logic-apps-enterprise-integration-flatfile.md)ile de kullanabilirsiniz.
 
-* Hakkında temel bilgilere [mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md)
+* [Mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md) hakkında temel bilgi
 
-* Excel Online verilerinize erişmek için istediğiniz mantıksal uygulaması. Bu bağlayıcı, bu nedenle, mantıksal uygulamanızı başlatmak için yalnızca eylem seçebilir ayrı bir tetikleyici örneğin sağlar, **yinelenme** tetikleyici.
+* Excel Online verilerinize erişmek istediğiniz mantıksal uygulama. Bu bağlayıcı yalnızca eylemler sağlar, bu nedenle mantıksal uygulamanızı başlatmak için **yineleme** tetikleyicisi gibi ayrı bir tetikleyici seçin.
 
-## <a name="add-excel-action"></a>Excel Eylem Ekle
+## <a name="add-excel-action"></a>Excel eylemi Ekle
 
-1. İçinde [Azure portalında](https://portal.azure.com), mantıksal Uygulama Tasarımcısı'nda mantıksal uygulamanızı açın, açık değilse.
+1. [Azure Portal](https://portal.azure.com), zaten açık değilse mantıksal uygulama Tasarımcısı 'nda mantıksal uygulamanızı açın.
 
-1. Tetikleyici altında seçin **yeni adım**.
+1. Tetikleyici altında **yeni adım**' ı seçin.
 
-1. Arama kutusuna filtreniz olarak "excel" girin. Eylemler listesinde, istediğiniz eylemi seçin.
+1. Arama kutusuna filtreniz olarak "Excel" yazın. Eylemler listesi altında istediğiniz eylemi seçin.
 
-1. Office 365 hesabınızda oturum açmanız istenirse seçin **oturum**.
+   > [!NOTE]
+   > Logic App Designer, 100 veya daha fazla sütunu olan tabloları yükleyemez. Mümkünse, tasarımcı 'nın tabloyu yükleyebilmesi için seçili tablodaki sütun sayısını azaltın.
 
-   Mantıksal uygulamanızı Excel Online bağlantı oluşturun ve verilerinize erişmek için kimlik bilgilerinizi yetkilendirin.
+1. İstenirse, Office 365 hesabınızda oturum açın.
 
-1. Seçili eylem için gerekli bilgileri sağlayarak ve mantıksal uygulamanızın iş akışı oluşturmaya devam edin.
+   Kimlik bilgileriniz, mantıksal uygulamanızı Excel Online 'a yönelik bir bağlantı oluşturmak ve verilerinize erişmek için yetkilendirin.
+
+1. Seçili eylem için gerekli ayrıntıları sağlamaya ve mantıksal uygulamanızın iş akışını oluşturmaya devam edin.
 
 ## <a name="connector-reference"></a>Bağlayıcı başvurusu
 
-Tetikleyiciler ve Eylemler sınırları, bağlayıcının Openapı'nin açıklandığı gibi teknik ayrıntılar için (önceki adıyla Swagger) dosyaları, bu bağlayıcıyı başvuru sayfalarına bakın:
+Bağlayıcının Openapı (eski adıyla Swagger) dosyaları tarafından açıklandığı şekilde Tetikleyiciler, Eylemler ve sınırlar gibi teknik ayrıntılar için, şu bağlayıcı başvuru sayfalarına bakın:
 
-* [İş için Excel Online'da](/connectors/excelonlinebusiness/)
-* [Excel Online'da OneDrive için](/connectors/excelonline/)
-
-## <a name="get-support"></a>Destek alın
-
-* Sorularınız için [Azure Logic Apps forumunu](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps) ziyaret edin.
-* Özelliklerle ilgili fikirlerinizi göndermek veya gönderilmiş olanları oylamak için [Logic Apps kullanıcı geri bildirimi sitesini](https://aka.ms/logicapps-wish) ziyaret edin.
+* [Iş için Excel Online](/connectors/excelonlinebusiness/)
+* [OneDrive için Excel Online](/connectors/excelonline/)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Diğer hakkında bilgi edinin [Logic Apps bağlayıcıları](../connectors/apis-list.md)
+* Diğer [Logic Apps bağlayıcıları](../connectors/apis-list.md) hakkında bilgi edinin

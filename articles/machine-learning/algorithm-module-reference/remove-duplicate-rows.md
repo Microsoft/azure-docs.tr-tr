@@ -1,82 +1,81 @@
 ---
-title: 'Yinelenen satırları kaldırır: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Yinelenen satırları Kaldır modülü Azure Machine Learning hizmetinde bir veri kümesinden olası yinelenenleri kaldırmak için kullanmayı öğrenin.
+title: 'Yinelenen satırları kaldır: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: Bir veri kümesinden Potansiyel yinelemeleri kaldırmak için Azure Machine Learning yinelenen satırları kaldır modülünü nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
-ms.date: 05/02/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: dce90d911085c1f7330a2e0952bb9576c1d765fa
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: a0faba895c5717d061bacee2ce724c20464f8150
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65029303"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73497700"
 ---
-# <a name="remove-duplicate-rows-module"></a>Yinelenen satırları modülü kaldırıldı
+# <a name="remove-duplicate-rows-module"></a>Yinelenen satırları kaldır modülü
 
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-Bir veri kümesinden olası yinelenenleri kaldırmak için bu modülü kullanın.
+Bir veri kümesinden Potansiyel yinelemeleri kaldırmak için bu modülü kullanın.
 
-Örneğin, verileriniz aşağıdakine benzer olacaktır ve hastalar için birden çok kayıt temsil varsayalım. 
+Örneğin, verilerinizin aşağıdaki gibi göründüğünü varsayın ve hastalar için birden çok kaydı temsil eder. 
 
-| PatientID | Baş harfler| Cinsiyet|Yaş|Kabul edilen|
+| Hatıd | Harf| Cinsiyet|Yaş|Kabul edilen|
 |----|----|----|----|----|
-|1|F.M.| M| 53| Jan|
-|2| F.A.M.| M| 53| Jan|
-|3| F.A.M.| M| 24| Jan|
-|3| F.M.| M| 24| Şubat|
-|4| F.M.| M| 23| Şubat|
+|1|F.M.| M| 53| Oca|
+|2| F.A.M.| M| 53| Oca|
+|3| F.A.M.| M| 24| Oca|
+|3| F.M.| M| 24| Şub|
+|4| F.M.| M| 23| Şub|
 | | F.M.| M| 23| |
 |5| F.A.M.| M| 53| |
-|6| F.A.M.| M| NaN| |
-|7| F.A.M.| M| NaN| |
+|6| F.A.M.| M| NBir| |
+|7| F.A.M.| M| NBir| |
 
-NET bir şekilde, bu örnek, potansiyel olarak yinelenen verilerle birden çok sütun içeriyor. Aslında çoğaltmaları olup olmadıkları bilginiz verilerin bağlıdır. 
+Açık olarak, bu örnekte muhtemelen yinelenen verileri olan birden çok sütun vardır. Gerçekte yinelenen olup olmadıkları, verilerin bilgisine bağlıdır. 
 
-+ Örneğin, birçok hastalara aynı ada sahip biliyor olabilirsiniz. Yalnızca hiçbir adı sütun kullanarak yinelemeleri ortadan mıydı **kimliği** sütun. Bu şekilde, yalnızca yinelenen kimliği değerlere sahip satırları, hastaların aynı ada veya olup bağımsız olarak filtrelenir.
++ Örneğin, birçok hastaların aynı ada sahip olduğunu bilirsiniz. Herhangi bir ad sütununu kullanarak Yinelenenleri ortadan kaldırmadınız ve yalnızca **ID** sütunu. Bu şekilde, hastaların aynı ada sahip olup olmamasına bakılmaksızın yalnızca yinelenen KIMLIK değerleri olan satırlar filtrelenmelidir.
 
-+ Alternatif olarak, Kimliği alanında atlanmasına izin ver ve başka bir kombinasyonuna dosya adı, son adı, yaşı ve cinsiyet gibi benzersiz kayıtları bulmak için karar verebilirsiniz.  
++ Alternatif olarak, KIMLIK alanında yinelemelere izin vermeye karar verebilir ve ad, soyadı, yaş ve cinsiyeti gibi benzersiz kayıtları bulmak için başka bir dosya birleşimini kullanabilirsiniz.  
 
-Bir satır yinelenen olup olmamasına ölçütlerini ayarlamak için tek bir sütun veya sütunlar olarak kullanmak üzere bir dizi belirttiğiniz **anahtarları**. İki satır yinelenen olarak kabul edilir yalnızca değerlerde **tüm** anahtar sütunları eşit. Herhangi bir satır için eksik değer varsa **anahtarları**, yinelenen satırları değerlendirilmeyecek. Yukarıdaki tabloya, 6 ve 7 satır anahtarlarını yinelenen satırları verilen olmadığından cinsiyet ve yaş ayarlarsanız, örneğin, değeri eksik yaşı sahiptirler.
+Bir satırın yinelenen olup olmadığına ilişkin ölçütleri ayarlamak için, tek bir sütun veya **anahtar**olarak kullanılacak bir sütun kümesi belirtirsiniz. İki satır yalnızca **Tüm** anahtar sütunlarındaki değerler eşitse yinelenen olarak değerlendirilir. Herhangi bir satırda **anahtarlar**için değer yoksa, bu değerler yinelenen satırlar olarak kabul edilmez. Örneğin, cinsiyet ve Age, yukarıdaki tabloda anahtar olarak ayarlanırsa, 6. ve 7. satır, yaş içinde eksik değere sahip olduklarından yinelenen satırlar değildir.
 
-Modül çalıştırdığınızda, bir aday veri kümesi oluşturur ve belirtilen sütun kümesi arasında yinelemelere sahip satır kümesini döndürür.
+Modülünü çalıştırdığınızda, bir aday veri kümesi oluşturur ve belirttiğiniz sütunlar kümesi içinde tekrarsız bir satır kümesi döndürür.
 
 > [!IMPORTANT]
-> Kaynak veri kümesi değiştirilemez; Bu modül, çoğaltmaları, belirttiğiniz ölçütlere göre hariç tutmak için filtrelenmiştir yeni bir veri kümesi oluşturur.
+> Kaynak veri kümesi değiştirilmez; Bu modül, belirttiğiniz ölçütlere göre yinelemeleri hariç tutmak üzere filtrelenmiş yeni bir veri kümesi oluşturur.
 
-## <a name="how-to-use-remove-duplicate-rows"></a>Yinelenen satırları Kaldır'ı kullanma
+## <a name="how-to-use-remove-duplicate-rows"></a>Yinelenen satırları kaldır 'ı kullanma
 
-1. Modül için denemenizi ekleyin. Bulabilirsiniz **yinelenen satırları Kaldır** modülü altında **veri dönüştürme**, **işleme**.  
+1. İşlem hattınızı modüle ekleyin. **Veri dönüştürme**, **düzenleme**altında **yinelenen satırları kaldır** modülünü bulabilirsiniz.  
 
-2. Yinelenen satırlar için kontrol etmek istediğiniz veri kümesine bağlanın.
+2. Yinelenen satırları denetlemek istediğiniz veri kümesini bağlayın.
 
-3. İçinde **özellikleri** bölmesi altında **anahtar sütun seçimi filtre ifadesi**, tıklayın **Sütun seçiciyi Başlat**, çoğaltmaları tanımlanırken kullanılacak sütunları seçmek için.
+3. **Özellikler** bölmesinde, **anahtar sütunu seçim filtresi ifadesi**altında, yinelemeleri tanımlamak için kullanılacak sütunları seçmek üzere **sütun seçiciyi Başlat**' a tıklayın.
 
-    Bu bağlamda **anahtar** benzersiz bir tanımlayıcı anlamına gelmez. Sütun seçiciyi kullanarak seçtiğiniz tüm sütunları olarak atanan **anahtar sütunları**. Tüm seçili olmayanların haricindeki sütunları, anahtar olmayan sütun olarak kabul edilir. Kayıtların benzersiz anahtarlar olarak seçtiğiniz sütunları birleşimi belirler. (Bunu, birden çok equalities birleştirmeler kullanan bir SQL deyimi düşünün.)
+    Bu bağlamda, **anahtar** benzersiz bir tanımlayıcı anlamına gelmez. Sütun seçiciyi kullanarak seçtiğiniz tüm sütunlar, **anahtar sütunları**olarak belirtilir. Tüm seçilmemiş sütunlar, anahtar olmayan sütunlar olarak kabul edilir. Anahtar olarak seçtiğiniz sütunların birleşimi kayıtların benzersizlik düzeyini belirler. (Birden çok equalkatlanmış birleşimler kullanan bir SQL ifadesiyle düşünün.)
 
     Örnekler:
 
-    + "Kimlikleri benzersiz olduğundan emin olmak istiyorum": Yalnızca kimlik sütunu seçin.
-    + "Ad, Soyadı ve kimliği birleşimi benzersiz olduğundan emin olmak istiyorum": Üç sütunu seçin.
+    + "Kimliklerin benzersiz olduğundan emin olmak istiyorum": yalnızca KIMLIK sütununu seçin.
+    + "Ad, son ad ve KIMLIK birleşiminin benzersiz olduğundan emin olmak istiyorum": tüm üç sütunu seçin.
 
-4. Kullanım **tut ilk yinelenen satır** çoğaltmaları bulunduğunda döndürülecek satır belirtmek için onay kutusunu:
+4. Yinelemeler bulunduğunda hangi satırın dönecağını belirtmek için **ilk yinelenen satırı koru** onay kutusunu kullanın:
 
-    + Seçtiyseniz, ilk satırda verilir ve diğerlerinin atıldı. 
-    + Bu seçeneğin işaretini kaldırırsanız, sonuçlarda son yinelenen satır tutulur ve diğerleri yoksayılır. 
+    + Seçilirse, ilk satır döndürülür ve diğerleri atılır. 
+    + Bu seçeneğin işaretini kaldırırsanız, son yinelenen satır sonuçlarda tutulur ve diğerleri atılır. 
 
-5. Denemeyi çalıştırın.
+5. İşlem hattını çalıştırma.
 
-6. Sonuçları gözden geçirmek için modülün sağ tıklayın, **sonuçları veri kümesi**, tıklatıp **Görselleştir**. 
+6. Sonuçları gözden geçirmek için modüle sağ tıklayın, **sonuçlar veri kümesi**' ni seçin ve **Görselleştir**' e tıklayın. 
 
 > [!TIP]
-> Sonucu anlaşılması zor olan veya göz bazı sütunları dışlamak istiyorsanız, kullanarak sütunları kaldırabilirsiniz [kümesindeki sütunları seçme](./select-columns-in-dataset.md) modülü.
+> Sonuçların anlaşılması zor olursa veya bazı sütunların dikkate alınması gerekiyorsa, [veri kümesindeki sütunları seçme](./select-columns-in-dataset.md) modülündeki sütunları kullanarak sütunu kaldırabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

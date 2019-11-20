@@ -1,170 +1,168 @@
 ---
-title: Çok katmanlı SAP NetWeaver uygulama dağıtımı için Azure Site Recovery ile olağanüstü durum kurtarma ayarlama | Microsoft Docs
-description: Bu makalede, Azure Site RECOVERY'yi kullanarak SAP NetWeaver uygulama dağıtımları için olağanüstü durum kurtarma ayarlamayı açıklar.
+title: Azure Site Recovery ile SAP NetWeaver olağanüstü durum kurtarmayı ayarlama
+description: Bu makalede, Azure Site Recovery kullanarak SAP NetWeaver uygulama dağıtımları için olağanüstü durum kurtarmanın nasıl ayarlanacağı açıklanır.
 author: asgang
 manager: rochakm
 ms.service: site-recovery
-ms.workload: backup-recovery
-ms.tgt_pltfrm: na
 ms.topic: conceptual
 ms.date: 11/27/2018
 ms.author: asgang
-ms.openlocfilehash: 0848738b71a605d8baf049847daa3ae2428a7abe
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ca3126c983d62cb28c543215b86ab9709a4736d8
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65793682"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083782"
 ---
 # <a name="set-up-disaster-recovery-for-a-multi-tier-sap-netweaver-app-deployment"></a>Çok katmanlı SAP NetWeaver uygulama dağıtımı için olağanüstü durum kurtarmayı ayarlama
 
-En büyük boyut ve orta ölçekli SAP dağıtımları çeşit olağanüstü durum kurtarma çözümü kullanın. Güçlü ve test edilebilir olağanüstü durum kurtarma çözümlerinin önemi, SAP gibi uygulamalar için daha fazla çekirdek iş işlemleri geçildiği arttı. Azure Site Recovery, test edilmiş ve SAP uygulamalarıyla tümleştirilmiş. Site kurtarma özellikleri çoğu şirket içi olağanüstü durum kurtarma çözümlerinin ve daha düşük bir maliyetle toplam sahip olma maliyetinizi (TCO) rakip çözümlerine kıyasla aşıyor.
+Büyük boyutlu ve orta ölçekli SAP dağıtımları, bir dizi olağanüstü durum kurtarma çözümünü kullanır. Daha fazla temel iş işlemi SAP gibi uygulamalara taşınabildiğinden, sağlam ve test edilebilir olağanüstü durum kurtarma çözümlerinin önemi artar. Azure Site Recovery, SAP uygulamalarıyla sınanmış ve tümleşiktir. Site Recovery, çoğu şirket içi olağanüstü durum kurtarma çözümünün ve daha düşük bir toplam sahip olma maliyeti (TCO) ile rekabet eden çözümlerin yeteneklerini aşmaktadır.
 
-Site Recovery ile şunları yapabilirsiniz:
-* **Şirket içi SAP NetWeaver ve NetWeaver dışı üretim uygulamalarının korumasını etkinleştirin** bileşenleri Azure'a çoğaltma tarafından.
-* **Azure üzerinde çalışan SAP NetWeaver ve NetWeaver dışı üretim uygulamalarının korumasını etkinleştirin** bileşenleri başka bir Azure veri merkezine çoğaltma tarafından.
-* **Buluta geçişi basitleştirin** kullanarak SAP dağıtımınızı Azure'a geçirmek için Site Recovery kullanarak.
-* **SAP proje yükseltmelerini, testlerini ve prototip basitleştirmek** SAP uygulamaları test etmek için isteğe bağlı bir üretim oluşturarak kopyalayın.
+Site Recovery, şunları yapabilirsiniz:
+* Bileşenleri Azure 'a çoğaltarak **Şirket içinde çalışan SAP NetWeaver ve NetWeaver olmayan üretim uygulamalarının korumasını etkinleştirin** .
+* **Azure üzerinde çalışan SAP NetWeaver ve NetWeaver olmayan üretim uygulamalarının korunmasını,** bileşenleri başka bir Azure veri merkezine çoğaltarak etkinleştirin.
+* SAP dağıtımınızı Azure 'a geçirmek için Site Recovery kullanarak **bulut geçişini kolaylaştırın** .
+* SAP uygulamalarını test etmek için isteğe bağlı bir üretim kopyası oluşturarak **SAP Proje yükseltmeleri, test ve prototip oluşturma Işlemlerini kolaylaştırın** .
 
-Bu makalede kullanarak SAP NetWeaver uygulama dağıtımlarının korunmasına nasıl [Azure Site Recovery](site-recovery-overview.md). Makale, bir üç katmanlı Azure üzerinde SAP NetWeaver dağıtım Site Recovery kullanarak başka bir Azure veri merkezine çoğaltarak korumak için en iyi uygulamaları kapsar. Desteklenen senaryolar ve yapılandırmaları ve yük devretme testi (olağanüstü durum kurtarma tatbikatlarını) gerçekleştirmeyi açıklar ve gerçek bir yük devretme işlemleri.
+Bu makalede, [Azure Site Recovery](site-recovery-overview.md)kullanarak SAP NetWeaver uygulama dağıtımlarını nasıl koruyabileceğiniz açıklanır. Makale, Site Recovery kullanarak başka bir Azure veri merkezine çoğaltarak Azure 'da üç katmanlı SAP NetWeaver dağıtımını korumaya yönelik en iyi yöntemleri içerir. Desteklenen senaryoları ve konfigürasyonları ve test yük devretmeleri (olağanüstü durum kurtarma detayları) ve gerçek yük devretme işlemleri gerçekleştirmeyi açıklar.
 
-## <a name="prerequisites"></a>Önkoşullar
-Başlamadan önce aşağıdaki görevleri gerçekleştirmek nasıl bildiğinizden emin olun:
+## <a name="prerequisites"></a>Ön koşullar
+Başlamadan önce, aşağıdaki görevleri nasıl yapabileceğinizi öğrendiğinizden emin olun:
 
-* [Bir sanal makineyi Azure'a çoğaltın](azure-to-azure-walkthrough-enable-replication.md)
-* [Bir kurtarma ağı tasarlama](site-recovery-azure-to-azure-networking-guidance.md)
-* [Azure'a yük devretme testi yapın](azure-to-azure-walkthrough-test-failover.md)
-* [Azure'a yük devretme yapın](site-recovery-failover.md)
-* [Bir etki alanı denetleyicisi çoğaltma](site-recovery-active-directory.md)
+* [Bir sanal makineyi Azure 'a çoğaltma](azure-to-azure-walkthrough-enable-replication.md)
+* [Kurtarma ağını tasarlama](site-recovery-azure-to-azure-networking-guidance.md)
+* [Azure 'a yük devretme testi yapın](azure-to-azure-walkthrough-test-failover.md)
+* [Azure 'a yük devretme](site-recovery-failover.md)
+* [Bir etki alanı denetleyicisini çoğaltma](site-recovery-active-directory.md)
 * [SQL Server çoğaltma](site-recovery-sql.md)
 
 ## <a name="supported-scenarios"></a>Desteklenen senaryolar
-Aşağıdaki senaryolarda bir olağanüstü durum kurtarma çözümü uygulamak için Site RECOVERY'yi kullanabilirsiniz:
-* Başka bir Azure veri merkezine (Azure'dan Azure'a olağanüstü durum kurtarma) çoğaltma bir Azure veri merkezinde çalışan SAP sistemler. Daha fazla bilgi için [Azure'dan Azure'a çoğaltma mimarisi](https://aka.ms/asr-a2a-architecture).
-* VMware (veya fiziksel) çalışan SAP sistemlerini sunucuları şirket içi olağanüstü durum kurtarma sitesine Azure veri merkezindeki (Vmware'den Azure'a olağanüstü durum kurtarma) Bu çoğaltma. Bu senaryo, bazı ek bileşenler gerektirir. Daha fazla bilgi için [Vmware'den Azure'a çoğaltma mimarisi](https://aka.ms/asr-v2a-architecture).
-* Hyper-V (Hyper-V Azure'a olağanüstü durum kurtarma) Azure veri merkezindeki bir olağanüstü durum kurtarma siteye çoğaltılan şirket içinde çalışan SAP sistemlerini. Bu senaryo, bazı ek bileşenler gerektirir. Daha fazla bilgi için [Hyper-V Azure'a çoğaltma mimarisi](https://aka.ms/asr-h2a-architecture).
+Aşağıdaki senaryolarda bir olağanüstü durum kurtarma çözümü uygulamak için Site Recovery kullanabilirsiniz:
+* Başka bir Azure veri merkezine (Azure 'dan Azure 'a olağanüstü durum kurtarma) çoğaltılan bir Azure veri merkezinde çalışan SAP sistemleri. Daha fazla bilgi için bkz. [Azure 'Dan Azure 'a çoğaltma mimarisi](https://aka.ms/asr-a2a-architecture).
+* Şirket içinde, bir Azure veri merkezinde olağanüstü durum kurtarma sitesine çoğaltılan (VMware 'den Azure 'a olağanüstü durum kurtarma), VMware (veya fiziksel) sunucularda çalışan SAP sistemleri. Bu senaryo için bazı ek bileşenler gereklidir. Daha fazla bilgi için bkz. [VMware 'Den Azure 'a çoğaltma mimarisi](https://aka.ms/asr-v2a-architecture).
+* Şirket içi Hyper-V ' d e çalışan, bir Azure veri merkezinde olağanüstü durum kurtarma sitesine çoğaltılan SAP sistemleri (Hyper-V-Azure olağanüstü durum kurtarma). Bu senaryo için bazı ek bileşenler gereklidir. Daha fazla bilgi için bkz. [Hyper-V-Azure çoğaltma mimarisi](https://aka.ms/asr-h2a-architecture).
 
-Bu makalede kullandığımız bir **Azure'dan Azure'a** Site Kurtarma'nın SAP olağanüstü durum kurtarma özellikleri göstermek için olağanüstü durum kurtarma senaryosuna. Site Recovery çoğaltma uygulamaya özgü olmadığından, açıklanan işlemi diğer senaryolar için de geçerli beklenir.
+Bu makalede, Site Recovery SAP olağanüstü durum kurtarma yeteneklerini göstermek için **Azure 'Dan Azure 'a** olağanüstü durum kurtarma senaryosunu kullanırız. Site Recovery çoğaltma uygulamaya özgü olmadığından, açıklanan işlemin diğer senaryolar için de uygulanması beklenir.
 
-### <a name="required-foundation-services"></a>Gerekli foundation Hizmetleri
-Bu makalede ele senaryoda aşağıdaki foundation Hizmetleri dağıtılır:
-* Azure ExpressRoute ya da Azure VPN ağ geçidi
-* En az bir Active Directory etki alanı denetleyicisi ve DNS sunucusu, Azure'da çalışan
+### <a name="required-foundation-services"></a>Gerekli temel hizmetler
+Bu makalede tartıştığımız senaryoda, aşağıdaki Foundation Hizmetleri dağıtılır:
+* Azure ExpressRoute veya Azure VPN Gateway
+* Azure 'da çalışan en az bir Active Directory etki alanı denetleyicisi ve DNS sunucusu
 
-Site Recovery dağıtmadan önce bu altyapı oluşturmanızı öneririz.
+Site Recovery dağıtmadan önce bu altyapıyı oluşturmanız önerilir.
 
 ## <a name="reference-sap-application-deployment"></a>Başvuru SAP uygulama dağıtımı
 
-Bu başvuru mimarisi, SAP NetWeaver Windows ortamında yüksek kullanılabilirlik ile Azure üzerinde çalışan gösterir.  Bu mimari, kuruluşunuzun gereksinimlerini karşılayacak şekilde belirli bir sanal makine (VM) boyutları ile dağıtılır.
+Bu başvuru mimarisi, Azure 'da yüksek kullanılabilirliğe sahip bir Windows ortamında SAP NetWeaver 'ın çalıştığını gösterir.  Bu mimari, kuruluşunuzun ihtiyaçlarına uyacak şekilde değiştirilebilen belirli bir sanal makine (VM) boyutlarıyla dağıtılır.
 
-![Tipik bir SAP dağıtım modeli diyagramı](./media/site-recovery-sap/sap-netweaver_latest.png)
+![Tipik bir SAP dağıtım deseninin diyagramı](./media/site-recovery-sap/sap-netweaver_latest.png)
 
-## <a name="disaster-recovery-considerations"></a>Olağanüstü durum kurtarma değerlendirmeleri
+## <a name="disaster-recovery-considerations"></a>Olağanüstü durum kurtarma konuları
 
 Olağanüstü Durum Kurtarma (DR), ikincil bir bölgeye yük devretme mümkün olması gerekir. Olağanüstü durum kurtarma (DR) koruması sağlamak için her katman farklı bir strateji kullanır.
 
-#### <a name="vms-running-sap-web-dispatcher-pool"></a>SAP Web Dispatcher havuzu çalıştıran VM'ler 
-Web Dispatcher bileşen SAP trafiği SAP uygulama sunucuları arasında bir yük dengeleyici olarak kullanılır. Web Dispatcher bileşeni için yüksek kullanılabilirlik elde etmek için Azure Load Balancer dengeleyici havuzunda kullanılabilir Web dağıtıcıları arasında HTTP (S) trafiğinin dağıtım için hepsini bir kez deneme yapılandırmasında paralel Web dağıtıcısı Kurulum uygulamak için kullanılır. Bu Azure Site kasadır kullanarak çoğaltılır ve yük dengeleyici üzerinde olağanüstü durum kurtarma bölgesindeki yapılandırmak için Otomasyon betikleri kullanılır. 
+#### <a name="vms-running-sap-web-dispatcher-pool"></a>SAP web Dağıtıcı havuzu çalıştıran VM 'Ler 
+Web Dispatcher bileşen SAP trafiği SAP uygulama sunucuları arasında bir yük dengeleyici olarak kullanılır. Web dağıtıcısı bileşeni için yüksek kullanılabilirlik elde etmek üzere Azure Load Balancer, paralel Web dağıtıcısı kurulumunu, dengeleyici havuzundaki kullanılabilir Web dengeleyicileri 'ler arasında HTTP (S) trafik dağıtımı için hepsini bir kez deneme yapılandırmasında uygulamak üzere kullanılır. Bu, Azure Site Recovery (ASR) kullanılarak çoğaltılır ve otomasyon betikleri, olağanüstü durum kurtarma bölgesinde yük dengeleyiciyi yapılandırmak için kullanılacaktır. 
 
-#### <a name="vms-running-application-servers-pool"></a>Uygulama sunucuları havuzu çalıştıran VM'ler
-SMLG işlem ABAP uygulama sunucuları için oturum açma grupları yönetmek için kullanılır. Yük Dengeleme ileti sunucusu merkezi Hizmetleri işlevindeki SAPGUIs ve RFC için SAP uygulama sunucuları havuzu arasındaki iş yükünü dağıtmak için kullandığı trafiği. Bu Azure Site Recovery kullanılarak çoğaltılır 
+#### <a name="vms-running-application-servers-pool"></a>Uygulama sunucuları havuzunu çalıştıran VM 'Ler
+SMLG işlem ABAP uygulama sunucuları için oturum açma grupları yönetmek için kullanılır. Yük Dengeleme ileti sunucusu merkezi Hizmetleri işlevindeki SAPGUIs ve RFC için SAP uygulama sunucuları havuzu arasındaki iş yükünü dağıtmak için kullandığı trafiği. Bu, Azure Site Recovery kullanılarak çoğaltılır 
 
-#### <a name="vms-running-sap-central-services-cluster"></a>SAP Central Services'in kümesi çalıştıran VM'ler
+#### <a name="vms-running-sap-central-services-cluster"></a>SAP merkezi hizmetler kümesi çalıştıran VM 'Ler
 Bu başvuru mimarisi, uygulama katmanında Vm'lerde merkezi hizmetleri çalıştırır. Merkezi Hizmetleri için tek bir VM dağıtılırken hata (SPOF) bir olası tek noktası olan — yüksek kullanılabilirlik gereksinimi olmadığı durumlarda tipik dağıtım.<br>
 
-Bir yüksek kullanılabilirlik çözümü uygulamak için bir paylaşılan disk kümesi veya dosya paylaşımı kümesi kullanılabilir. Paylaşılan disk kümesi için Vm'leri yapılandırmak için Windows Server Yük devretme kümesi kullanın. Bulut Tanığını bir çekirdek tanığı olarak önerilir. 
+Yüksek oranda kullanılabilir bir çözüm uygulamak için, paylaşılan bir disk kümesi veya bir dosya paylaşım kümesi kullanılabilir. VM 'Leri paylaşılan bir disk kümesi için yapılandırmak için Windows Server yük devretme kümesi ' ni kullanın. Bulut tanığı çekirdek tanığı olarak önerilir. 
  > [!NOTE]
- > Azure Site Recovery bulut tanığı yinelenmez bu nedenle olağanüstü durum kurtarma bölgesindeki bulut tanığı dağıtma için önerilir.
+ > Azure Site Recovery bulut tanığını çoğaltmadığından, bulut tanığını olağanüstü durum kurtarma bölgesinde dağıtmanız önerilir.
 
 Yük devretme küme ortamında desteklemek için [SIOS DataKeeper Cluster Edition](https://azuremarketplace.microsoft.com/marketplace/apps/sios_datakeeper.sios-datakeeper-8) küme düğümlerinin sahip olduğu bağımsız diskleri çoğaltarak Küme Paylaşılan Birimi işlevi gerçekleştirir. Azure Paylaşılan diskleri yerel olarak desteklemez ve bu nedenle SIOS tarafından sağlanan çözümleri gerektirir. 
 
-Kümeleme işlemek için başka bir yol, bir dosya paylaşımı kümesi uygulamaktır. [SAP](https://blogs.sap.com/2018/03/19/migration-from-a-shared-disk-cluster-to-a-file-share-cluster) /sapmnt genel dizinleri UNC yolu üzerinden erişmek için Yönetim Hizmetleri dağıtım modeli yakın zamanda değiştirilmiş. Bununla birlikte, yine de /sapmnt UNC paylaşımı yüksek oranda kullanılabilir olmasını sağlamak için önerilir. Bu merkezi Hizmetleri örneğinde ölçek kullanıma arama dosya sunucusu (SOFS) ve Windows Server 2016 depolama alanları doğrudan (S2D) özelliği ile Windows Server Yük devretme kümesi kullanılarak yapılabilir. 
+Kümeleme işlemenin başka bir yolu da dosya paylaşma kümesi uygulamaktır. [SAP](https://blogs.sap.com/2018/03/19/migration-from-a-shared-disk-cluster-to-a-file-share-cluster) /sapmnt genel dizinleri UNC yolu üzerinden erişmek için Yönetim Hizmetleri dağıtım modeli yakın zamanda değiştirilmiş. Ancak,/sapmnt UNC paylaşımının yüksek oranda kullanılabilir olduğundan emin olmak yine de önerilir. Bu işlem, Windows Server 2016 ' deki genişleme dosya sunucusu (SOFS) ve Depolama Alanları Doğrudan (S2D) özelliği ile Windows Server yük devretme kümesi kullanılarak Merkezi Hizmetler örneğinde yapılabilir. 
  > [!NOTE]
- > Şu anda Azure Site Recovery destek yalnızca kilitlenme tutarlı noktası çoğaltma SIOS Datakeeper, depolama alanları doğrudan ve Pasif düğümü kullanan sanal makinelerin
+ > Şu anda Azure Site Recovery, yalnızca depolama alanları doğrudan ve yalnızca SIOS veri Man 'ın pasif düğümü kullanılarak sanal makinelerin kilitlenme tutarlı noktası çoğaltmasını destekler
 
 
 ## <a name="disaster-recovery-considerations"></a>Olağanüstü durum kurtarmayla konusunda dikkat edilmesi gerekenler
 
-Azure Site Recovery, yük boyunca tüm SAP dağıtımının Azure bölgeleri arasında düzenlemek için kullanabilirsiniz.
-Olağanüstü durum kurtarma ayarlama adımları aşağıda verilmiştir 
+Azure bölgelerinde tam SAP dağıtımı yükünü yönetmek için Azure Site Recovery kullanabilirsiniz.
+Olağanüstü durum kurtarmayı ayarlamaya yönelik adımlar aşağıda verilmiştir 
 
-1. Çoğaltma sanal makineler 
-2. Bir kurtarma ağı tasarlama
-3.  Bir etki alanı denetleyicisi çoğaltma
-4.  Temel katman verileri çoğaltma 
+1. Sanal makineleri çoğaltma 
+2. Kurtarma ağını tasarlama
+3.  Bir etki alanı denetleyicisini çoğaltma
+4.  Veri tabanı katmanını Çoğalt 
 5.  Yük devretme testi gerçekleştirin 
 6.  Yük devretme gerçekleştirin 
 
-Aşağıda bu örnekte kullanılan her bir katman olağanüstü durum kurtarma için önerilir. 
+Bu örnekte kullanılan her bir katmanın olağanüstü durum kurtarma önerisi aşağıda verilmiştir. 
 
  **SAP katmanları** | **Öneri**
  --- | ---
-**SAP Web Dispatcher havuzu** |  Site recovery kullanarak çoğaltma 
-**SAP uygulama sunucusu havuzu** |  Site recovery kullanarak çoğaltma 
-**SAP Central Services'in küme** |  Site recovery kullanarak çoğaltma 
-**Active directory sanal makineler** |  Active directory çoğaltma 
-**SQL veritabanı sunucuları** |  SQL çoğaltma her zaman açık
+**SAP web Dağıtıcı havuzu** |  Site Recovery kullanarak çoğaltma 
+**SAP uygulama sunucusu havuzu** |  Site Recovery kullanarak çoğaltma 
+**SAP merkezi hizmetler kümesi** |  Site Recovery kullanarak çoğaltma 
+**Active Directory sanal makineleri** |  Active Directory çoğaltma 
+**SQL veritabanı sunucuları** |  SQL Always on çoğaltma
 
-## <a name="replicate-virtual-machines"></a>Çoğaltma sanal makineler
+## <a name="replicate-virtual-machines"></a>Sanal makineleri çoğaltma
 
-Tüm SAP uygulama sanal makineleri Azure'a olağanüstü durum kurtarma veri merkezine çoğaltma başlatmak için sunulan yönergeleri [bir sanal makine, Azure'a](azure-to-azure-walkthrough-enable-replication.md).
+Tüm SAP uygulaması sanal makinelerini Azure olağanüstü durum kurtarma veri merkezine Çoğaltmaya başlamak için, [bir sanal makineyi Azure 'A çoğaltma](azure-to-azure-walkthrough-enable-replication.md)' daki yönergeleri izleyin.
 
 
-* Active Directory ve DNS'yi koruma ile ilgili yönergeler için bkz [korumak Active Directory ve DNS](site-recovery-active-directory.md) belge.
+* Active Directory ve DNS 'yi koruma hakkında yönergeler için bkz. [koruma Active Directory ve DNS](site-recovery-active-directory.md) belgesi.
 
-* Veritabanı katmanı SQL sunucusunda çalışan koruma ile ilgili yönergeler için bkz [SQL Server koruma](site-recovery-active-directory.md) belge.
+* SQL Server üzerinde çalışan veritabanı katmanını koruma hakkında yönergeler için bkz. [koruma SQL Server](site-recovery-active-directory.md) belgesi.
 
 ## <a name="networking-configuration"></a>Ağ yapılandırması
 
-Statik bir IP adresi kullanırsanız, sanal makinenin almak için istediğiniz IP adresi belirtebilirsiniz. IP adresi ayarlamak için şuraya gidin: **işlem ve ağ ayarları** > **ağ arabirim kartı**.
+Statik bir IP adresi kullanırsanız, sanal makinenin kullanmasını istediğiniz IP adresini belirtebilirsiniz. IP adresini ayarlamak için, **işlem ve ağ ayarları** > **ağ arabirimi kartına**gidin.
 
-![Site Recovery ağ arabirimi kartı Bölmesi'nde özel bir IP adresi ayarlamak gösteren ekran görüntüsü](./media/site-recovery-sap/sap-static-ip.png)
-
-
-## <a name="creating-a-recovery-plan"></a>Bir kurtarma planı oluşturma
-Bir kurtarma planı yük devretme sırasında çok katmanlı bir uygulama çeşitli katmanları sıralama destekler. Sıralama, özel olarak uygulama tutarlılığı sürdürmeye yardımcı olur. Çok katmanlı web uygulaması için bir kurtarma planı oluşturduğunuzda, tam adımlar açıklanan [Site Recovery kullanarak bir kurtarma planı oluşturma](site-recovery-create-recovery-plans.md).
-
-### <a name="adding-virtual-machines-to-failover-groups"></a>Sanal makineler için yük devretme grupları ekleme
-
-1.  Uygulama sunucusu, web dispatcher ve SAP Central Services'in Vm'leri ekleyerek bir kurtarma planı oluşturun.
-2.  'Sanal makineleri gruplandırmak için Özelleştir' tıklayın. Varsayılan olarak, tüm VM'ler 'Grubu 1' bir parçasıdır.
+![Site Recovery ağ arabirimi kartı bölmesinde özel IP adresi ayarlamayı gösteren ekran görüntüsü](./media/site-recovery-sap/sap-static-ip.png)
 
 
+## <a name="creating-a-recovery-plan"></a>Kurtarma planı oluşturma
+Kurtarma planı, yük devretme sırasında çok katmanlı bir uygulamadaki çeşitli katmanların sıralamasını destekler. Sıralama, uygulama tutarlılığını sürdürmenize yardımcı olur. Çok katmanlı bir Web uygulaması için bir kurtarma planı oluşturduğunuzda [Site Recovery kullanarak kurtarma planı oluşturma](site-recovery-create-recovery-plans.md)bölümünde açıklanan adımları uygulayın.
 
-### <a name="add-scripts-to-the-recovery-plan"></a>Betikleri kurtarma planına ekleyin
-Uygulamalarınızın düzgün çalışması, yük devretme işleminden sonra veya bir yük devretme testi sırasında Azure sanal makinelerinde bazı işlemler yapmanız gerekebilir. Bazı yük devretme sonrası işlemleri otomatik hale getirebilirsiniz. Örneğin, DNS girişini güncelleştirmek ve kurtarma planına betikleri ekleyerek bağlamaları ve bağlantıları değiştirin.
+### <a name="adding-virtual-machines-to-failover-groups"></a>Yük devretme gruplarına sanal makineler ekleme
+
+1.  Uygulama sunucusu, Web dağıtıcısı ve SAP Merkezi Hizmetleri VM 'Leri ekleyerek bir kurtarma planı oluşturun.
+2.  VM 'Leri gruplandırmak için ' Özelleştir 'e tıklayın. Varsayılan olarak, tüm VM 'Ler ' Grup 1 ' in bir parçasıdır.
 
 
-En yaygın olarak kullanılan Azure Site Recovery betikleri için 'Azure'a Dağıt' düğmesini Otomasyon hesabınıza dağıtabilirsiniz. Yayımlanan herhangi bir komut dosyası kullanırken, komut dosyasındaki yönergeleri emin olun.
+
+### <a name="add-scripts-to-the-recovery-plan"></a>Kurtarma planına betikler ekleme
+Uygulamalarınızın düzgün çalışması için, yük devretmeden sonra veya yük devretme testi sırasında Azure sanal makinelerinde bazı işlemler yapmanız gerekebilir. Bazı yük devretme sonrası işlemleri otomatik hale getirebilirsiniz. Örneğin, kurtarma planına ilgili betikler ekleyerek DNS girişini güncelleştirebilir ve bağlamaları ve bağlantıları değiştirebilirsiniz.
+
+
+En yaygın olarak kullanılan Azure Site Recovery betikleri aşağıdaki ' Azure 'a Dağıt ' düğmesine tıklayarak Otomasyon hesabınıza dağıtabilirsiniz. Yayımlanmış herhangi bir betiği kullanırken, betikteki yönergeleri izlediğinizden emin olun.
 
 [![Azure’a dağıtma](https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/c4803408-340e-49e3-9a1f-0ed3f689813d.png)](https://aka.ms/asr-automationrunbooks-deploy)
 
-1. Bir ön eylem betiği 'Grubu 1' için yük devretme SQL kullanılabilirlik grubuna ekleyin. Örnek betiklerde yayımlanan 'ASR-SQL-FailoverAG' betiğini kullanın. Komut dosyasındaki yönergeleri izleyin ve komut dosyasında gerekli değişiklikleri yapın, uygun şekilde emin olun.
-2. Yük dengeleyicide başarısız eklemek için son eylem betik ekleme yükü devredilen sanal makineler, Web Katmanı (Grup 1). Örnek betiklerde yayımlanan 'AddSingleLoadBalancer ASR' betiğini kullanın. Komut dosyasındaki yönergeleri izleyin ve komut dosyasında gerekli değişiklikleri yapın, uygun şekilde emin olun.
+1. SQL kullanılabilirlik grubu yük devretmesi için ' Group 1 ' öğesine bir ön eylem betiği ekleyin. Örnek betikte yayımlanan ' ASR-SQL-FailoverAG ' betiğini kullanın. Betikteki yönergeleri izlediğinizden ve betikteki gerekli değişiklikleri uygun şekilde seçtiğinizden emin olun.
+2. Yük dengeleyiciyi web katmanının yükü devredildiği sanal makinelere (Grup 1) eklemek için bir post eylem betiği ekleyin. Örnek betikte yayımlanan ' ASR-AddSingleLoadBalancer ' betiğini kullanın. Betikteki yönergeleri izlediğinizden ve betikteki gerekli değişiklikleri uygun şekilde seçtiğinizden emin olun.
 
 ![SAP kurtarma planı](./media/site-recovery-sap/sap_recovery_plan.png)
 
 
 ## <a name="run-a-test-failover"></a>Yük devretme testi çalıştırma
 
-1.  Azure portalında kurtarma Hizmetleri kasanızı seçin.
-2.  SAP uygulamaları için oluşturduğunuz kurtarma planı seçin.
+1.  Azure portal, kurtarma hizmetleri kasanızı seçin.
+2.  SAP uygulamaları için oluşturduğunuz kurtarma planını seçin.
 3.  **Yük Devretme Testi**'ni seçin.
-4.  Test yük devretme işlemini başlatmak için kurtarma noktası ve Azure sanal ağı'nı seçin.
-5.  İkincil bir ortamı yukarı olduğunda doğrulamaları gerçekleştirin.
-6.  Yük devretme ortamı temizlemek için doğrulamaları tamamlandığı zaman seçin **yük devretme testini Temizle**.
+4.  Yük devretme testi işlemini başlatmak için kurtarma noktasını ve Azure sanal ağını seçin.
+5.  İkincil ortam çalışır duruma geldiğinde doğrulama gerçekleştirin.
+6.  Doğrulamalar tamamlandığında, yük devretme ortamını temizlemek için **Test yük devretmesini**Temizle ' yi seçin.
 
-Daha fazla bilgi için [Azure Site recovery'de yük devretme testi](site-recovery-test-failover-to-azure.md).
+Daha fazla bilgi için bkz. [Azure 'a yük devretmeyi test etme Site Recovery](site-recovery-test-failover-to-azure.md).
 
 ## <a name="run-a-failover"></a>Yük devretme çalıştırma
 
-1.  Azure portalında kurtarma Hizmetleri kasanızı seçin.
-2.  SAP uygulamaları için oluşturduğunuz kurtarma planı seçin.
+1.  Azure portal, kurtarma hizmetleri kasanızı seçin.
+2.  SAP uygulamaları için oluşturduğunuz kurtarma planını seçin.
 3.  **Yük devretme**'yi seçin.
 4.  Yük devretme işlemini başlatmak için kurtarma noktasını seçin.
 
-Daha fazla bilgi için [Site recovery'de yük devretme](site-recovery-failover.md).
+Daha fazla bilgi için bkz. [Site Recovery 'de yük devretme](site-recovery-failover.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Site RECOVERY'yi kullanarak SAP NetWeaver dağıtımlar için bir olağanüstü durum kurtarma çözümü oluşturma hakkında daha fazla bilgi edinmek için indirilebilir teknik incelemesine bakın [SAP NetWeaver: Azure Site Recovery ile bir olağanüstü durum kurtarma çözümü oluşturma](https://aka.ms/asr_sap). Beyaz Kağıt, çeşitli SAP mimarileri için öneriler ele alınmaktadır, Azure üzerinde SAP için desteklenen uygulamalar ve VM türleri listeler ve olağanüstü durum kurtarma çözümünüzü test planı seçenekleri açıklar.
-* Daha fazla bilgi edinin [diğer iş yükleri çoğaltma](site-recovery-workload.md) Site Recovery kullanarak.
+* Site Recovery kullanarak SAP NetWeaver dağıtımları için olağanüstü durum kurtarma çözümü oluşturma hakkında daha fazla bilgi için bkz. indirilebilir beyaz kağıt [SAP NetWeaver: Azure Site Recovery Ile olağanüstü durum kurtarma çözümü oluşturma](https://aka.ms/asr_sap). Teknik İnceleme, çeşitli SAP mimarilerine yönelik öneriler ele alınmaktadır, Azure 'da SAP için desteklenen uygulamaları ve VM türlerini listeler ve olağanüstü durum kurtarma çözümünüz için test planı seçeneklerini açıklar.
+* Site Recovery kullanarak [diğer iş yüklerini çoğaltma](site-recovery-workload.md) hakkında daha fazla bilgi edinin.

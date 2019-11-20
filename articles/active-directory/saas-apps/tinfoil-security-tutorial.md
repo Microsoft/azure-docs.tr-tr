@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: TINFOIL SECURITY ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: TINFOIL SECURITY ile Azure Active Directory arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: TINFOIL SECURITY ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ile TINFOIL SECURITY arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -13,247 +13,186 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 03/27/2019
+ms.date: 10/16/2019
 ms.author: jeedes
-ms.openlocfilehash: 627a324c580661220712a0598a996844fac0c169
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.collection: M365-identity-device-management
+ms.openlocfilehash: 71d3078b553843922cd51e4e0f43ea84b6dcde16
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67088595"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74170758"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-tinfoil-security"></a>Öğretici: TINFOIL SECURITY ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-tinfoil-security"></a>Öğretici: TINFOIL SECURITY ile çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile TINFOIL SECURITY tümleştirme konusunda bilgi edinin.
-TINFOIL SECURITY Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, TINFOIL SECURITY 'yi Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. TINFOIL SECURITY 'yi Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-* TINFOIL SECURITY erişimi, Azure AD'de kontrol edebilirsiniz.
-* Azure AD hesaplarına otomatik olarak (çoklu oturum açma) için TINFOIL SECURITY oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Azure AD 'de TINFOIL SECURITY erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla GÜVENLIK altına almak için otomatik olarak oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-TINFOIL SECURITY ile Azure AD tümleştirmesini yapılandırmak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* TINFOIL SECURITY çoklu oturum açma abonelik etkin.
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* TINFOIL SECURITY çoklu oturum açma (SSO) etkin aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-* TINFOIL SECURITY destekler **IDP** tarafından başlatılan
+* TINFOIL SECURITY, **IDP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-tinfoil-security-from-the-gallery"></a>TINFOIL SECURITY galeri ekleme
+> [!NOTE]
+> Bu uygulamanın tanımlayıcısı, tek bir kiracıda yalnızca bir örneğin yapılandırılabilmesini sağlamak için sabit bir dize değeridir.
 
-Azure AD'de TINFOIL SECURITY tümleştirmesini yapılandırmak için TINFOIL SECURITY Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+## <a name="adding-tinfoil-security-from-the-gallery"></a>Galeriden TINFOIL SECURITY ekleme
 
-**TINFOIL SECURITY Galeriden eklemek için aşağıdaki adımları gerçekleştirin:**
+TINFOIL SECURITY 'nin Azure AD ile tümleştirilmesini yapılandırmak için, galerinizden yönetilen SaaS uygulamaları listenize TINFOIL SECURITY eklemeniz gerekir.
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **TINFOIL SECURITY** yazın.
+1. Sonuçlar panelinden **TINFOIL SECURITY** ' yi seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-    ![Azure Active Directory düğmesi](common/select-azuread.png)
+## <a name="configure-and-test-azure-ad-single-sign-on-for-tinfoil-security"></a>Azure AD çoklu oturum açmayı, TINFOIL SECURITY için yapılandırma ve test etme
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+**B. Simon**adlı bir test kullanıcısı kullanarak Azure AD SSO 'YU TINFOIL SECURITY ile yapılandırın ve test edin. SSO 'nun çalışması için, bir Azure AD kullanıcısı ile ilgili Kullanıcı ile TINFOIL SECURITY arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
+Azure AD SSO 'yu TINFOIL SECURITY ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+    * Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+    * Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+1. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[TINFOIL SECURITY SSO 'Yu yapılandırın](#configure-tinfoil-security-sso)** .
+    * Kullanıcının Azure AD gösterimine bağlı olan TINFOIL SECURITY 'de B. Simon 'ın bir karşılığı olacak şekilde **[TINFOIL Security test kullanıcısı oluşturun](#create-tinfoil-security-test-user)** .
+1. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+## <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-4. Arama kutusuna **TINFOIL SECURITY**seçin **TINFOIL SECURITY** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-     ![TINFOIL SECURITY sonuç listesinde](common/search-new-app.png)
+1. [Azure Portal](https://portal.azure.com/), **TINFOIL SECURITY** uygulama tümleştirmesi sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+   ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma TINFOIL SECURITY adlı bir test kullanıcı tabanlı test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısı ile ilgili kullanıcı TINFOIL Security arasında bir bağlantı ilişki kurulması gerekir.
+1. **Temel SAML yapılandırması** bölümünde, uygulama önceden yapılandırılmıştır ve gerekli URL 'ler Azure ile önceden doldurulmuştur. Kullanıcının **Kaydet** düğmesine tıklayarak yapılandırmayı kaydetmesi gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma TINFOIL SECURITY ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+1. Visitly uygulaması, SAML belirteci öznitelikleri yapılandırmanıza özel öznitelik eşlemeleri eklemenizi gerektiren belirli bir biçimde SAML onayları bekler. Aşağıdaki ekran görüntüsünde varsayılan özniteliklerin listesi gösterilmektedir.
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[TINFOIL güvenlik çoklu oturum açmayı yapılandırma](#configure-tinfoil-security-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[TINFOIL SECURITY test kullanıcısı oluşturma](#create-tinfoil-security-test-user)**  - kullanıcı Azure AD gösterimini bağlı TINFOIL Security Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+    ![image](common/default-attributes.png)
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
-
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
-
-TINFOIL SECURITY ile Azure AD çoklu oturum açmayı yapılandırmak için aşağıdaki adımları gerçekleştirin:
-
-1. İçinde [Azure portalında](https://portal.azure.com/), **TINFOIL SECURITY** uygulama tümleştirme sayfasında **çoklu oturum açma**.
-
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
-
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
-
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
-
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
-
-    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
-
-4. Üzerinde **temel SAML yapılandırma** bölümünde kullanıcısının clonedatabase'i uygulama zaten Azure ile önceden tümleşik olarak herhangi bir adımı gerçekleştirmek.
-
-    ![TINFOIL güvenlik etki alanı ve URL'ler tek oturum açma bilgileri](common/preintegrated.png)
-
-5. TINFOIL SECURITY uygulamanız SAML onaylamalarını özel öznitelik eşlemelerini SAML belirteci öznitelikleri yapılandırmanıza ekleyin gerektiren belirli bir biçimde bekliyor. Aşağıdaki ekran görüntüsünde, varsayılan öznitelikler listesinde gösterilmiştir. Tıklayın **Düzenle** açmak için simgeyi **kullanıcı öznitelikleri** iletişim.
-
-        ![image](common/edit-attribute.png)
-
-6. Ayrıca yukarıdaki için TINFOIL SECURITY uygulama SAML yanıtta geçirilecek birkaç daha fazla öznitelik bekliyor. İçinde **kullanıcı taleplerini** bölümünde **kullanıcı öznitelikleri** iletişim kutusunda gösterildiği gibi SAML belirteci özniteliği eklemek için aşağıdaki adımları gerçekleştirin tablonun altındaki:
+1. Visitly uygulaması, yukarıdakine ek olarak, aşağıda gösterilen SAML yanıtına daha fazla öznitelik geçirilmesini bekler. Bu öznitelikler de önceden doldurulur, ancak gereksinimlerinize göre bunları gözden geçirebilirsiniz.
 
     | Ad | Kaynak özniteliği |
     | ------------------- | -------------|
-    | Hesap Kimliği | UXXXXXXXXXXXXX |
+    | Accoun | UıXXXXXXXXXXXXX |
 
-    a. Tıklayın **Ekle yeni talep** açmak için **yönetmek, kullanıcı talepleri** iletişim.
+    > [!NOTE]
+    > Öğreticide daha sonra açıklanacak AccountID değerini alacaksınız.
 
-    ![image](common/new-save-attribute.png)
+1. **SAML Imzalama sertifikası** bölümünde, **SAML imzalama sertifikası** Iletişim kutusunu açmak için **Düzenle** düğmesine tıklayın.
 
-    ![image](common/new-attribute-details.png)
+    ![SAML Imzalama sertifikasını Düzenle](common/edit-certificate.png)
 
-    b. İçinde **adı** metin kutusuna, bu satır için gösterilen öznitelik adı yazın.
+1. **SAML Imzalama sertifikası** bölümünde, **parmak izi değerini** kopyalayın ve bilgisayarınıza kaydedin.
 
-    c. Bırakın **Namespace** boş.
+    ![Parmak Izi değerini Kopyala](common/copy-thumbprint.png)
 
-    d. Kaynağı olarak **özniteliği**.
+1. **TINFOIL SECURITY 'Yi ayarla** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-    e. İçinde **kaynak özniteliği** metin kutusuna, daha sonra öğreticide alacak Yapıştır hesap kimliği değeri.
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    f. Tıklayın **Tamam**
+### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
 
-    g. **Kaydet**’e tıklayın.
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-7. İçinde **SAML imzalama sertifikası** bölümünde **Düzenle** açmak için düğmeyi **SAML imzalama sertifikası** iletişim.
-
-    ![SAML imzalama sertifikası Düzenle](common/edit-certificate.png)
-
-8. İçinde **SAML imzalama sertifikası** bölümünde, kopya **parmak izi** ve bilgisayarınıza kaydedin.
-
-    ![Parmak izi değerini kopyalayın](common/copy-thumbprint.png)
-
-9. Üzerinde **TINFOIL güvenliği'kurmak** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
-
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
-
-    a. Oturum Açma URL'si:
-
-    b. Azure AD Tanımlayıcısı
-
-    c. Oturum Kapatma URL'si
-
-### <a name="configure-tinfoil-security-single-sign-on"></a>TINFOIL güvenlik çoklu oturum açmayı yapılandırın
-
-1. Farklı bir web tarayıcı penceresinde TINFOIL SECURITY şirket sitenize yönetici olarak oturum açın.
-
-2. Üst araç çubuğunda tıklatın **hesabım**.
-   
-    ![Pano](./media/tinfoil-security-tutorial/ic798971.png "Panosu")
-
-3. Tıklayın **güvenlik**.
-   
-    ![Güvenlik](./media/tinfoil-security-tutorial/ic798972.png "güvenlik")
-
-4. Üzerinde **çoklu oturum açma** yapılandırma sayfasında, aşağıdaki adımları gerçekleştirin:
-   
-    ![Çoklu oturum açma](./media/tinfoil-security-tutorial/ic798973.png "çoklu oturum açma")
-   
-    a. Seçin **etkinleştirme SAML**.
-   
-    b. Tıklayın **el ile yapılandırma**.
-   
-    c. İçinde **SAML gönderme URL'sini** metin değerini yapıştırın **oturum açma URL'si** , Azure Portalı'ndan kopyaladığınız
-   
-    d. İçinde **SAML sertifikası parmak izi** metin değerini yapıştırın **parmak izi** kopyalanan **SAML imzalama sertifikası** bölümü.
-  
-    e. Kopyalama **bilgisayarınızı hesap kimliği** değeri ve değer yapıştırın **öznitelik değeri** metin kutusunun altında **öznitelik Ekle** bölümü Azure Portalı'nda.
-   
-    f. **Kaydet**’e tıklayın.
-
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma 
-
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
-
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
-
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
-
-2. Seçin **yeni kullanıcı** ekranın üstünde.
-
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
-
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
-
-    ![Kullanıcı iletişim kutusu](common/user-properties.png)
-
-    a. İçinde **adı** alana **BrittaSimon**.
-  
-    b. İçinde **kullanıcı adı** alan türü brittasimon@yourcompanydomain.extension. Örneğin, BrittaSimon@contoso.com
-
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
-
-    d. **Oluştur**’a tıklayın.
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Seçin **yeni kullanıcı** ekranın üstünde.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına username@companydomain.extensiongirin. Örneğin, `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1. **Oluştur**’ tıklayın.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-Bu bölümde, Azure çoklu oturum açma kullanmak için TINFOIL SECURITY erişim vererek Britta Simon etkinleştirin.
+Bu bölümde, Azure çoklu oturum açma özelliğini kullanarak TINFOIL SECURITY 'ye erişim izni vererek B. Simon 'u etkinleştireceksiniz.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **TINFOIL SECURITY**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde, **TINFOIL SECURITY**' yi seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
-    ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
+   !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-2. Uygulamalar listesinde **TINFOIL SECURITY**.
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-    ![TINFOIL SECURITY bağlantıya uygulamalar listesi](common/all-applications.png)
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+## <a name="configure-tinfoil-security-sso"></a>TINFOIL SECURITY SSO 'yu yapılandırma
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+1. Farklı bir Web tarayıcısı penceresinde, TINFOIL SECURITY şirket sitenizde yönetici olarak oturum açın.
 
-    ![Atama Ekle bölmesi](common/add-assign-user.png)
+1. Üstteki araç çubuğunda **Hesabım**' ı tıklatın.
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+    ![Pano](./media/tinfoil-security-tutorial/ic798971.png "Pano")
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+1. Tıklayın **güvenlik**.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+    ![Güvenlik](./media/tinfoil-security-tutorial/ic798972.png "Güvenlik")
+
+1. **Çoklu oturum açma** yapılandırması sayfasında, aşağıdaki adımları uygulayın:
+
+    ![Çoklu oturum açma](./media/tinfoil-security-tutorial/ic798973.png "Çoklu oturum açma")
+
+    a. **SAML etkinleştir**' i seçin.
+
+    b. **El Ile yapılandırma**' ya tıklayın.
+
+    c. **SAML Post URL** metin kutusuna kopyaladığınız **oturum açma URL 'si** değerini yapıştırın Azure Portal
+
+    d. **SAML sertifikası parmak izi** metin kutusunda, **SAML imzalama sertifikası** bölümünden kopyaladığınız **parmak izine** ait değeri yapıştırın.
+  
+    e. **Hesap kimliği** değerini kopyalayın ve Azure Portal Içindeki **Kullanıcı öznitelikleri & talepler** bölümünde bulunan **kaynak öznitelik** metin kutusuna değeri yapıştırın.
+
+    f. **Save (Kaydet)** düğmesine tıklayın.
 
 ### <a name="create-tinfoil-security-test-user"></a>TINFOIL SECURITY test kullanıcısı oluşturma
 
-TINFOIL SECURITY oturum açmak Azure AD kullanıcılarının etkinleştirmek için bunların TINFOIL SECURITY sağlanması gerekir. TINFOIL SECURITY söz konusu olduğunda, sağlama bir el ile gerçekleştirilen bir görevdir.
+Azure AD kullanıcılarının TINFOIL SECURITY 'de oturum açmasını sağlamak için, bu kullanıcıların TINFOIL SECURITY 'de sağlanması gerekir. TINFOIL SECURITY, sağlama durumunda el ile gerçekleştirilen bir görevdir.
 
-**Sağlanan kullanıcı almak için aşağıdaki adımları gerçekleştirin:**
+**Sağlanan bir kullanıcıyı almak için aşağıdaki adımları gerçekleştirin:**
 
-1. Kullanıcı bir kurumsal hesap parçasıysa yapmanız [TINFOIL SECURITY Destek ekibine başvurun](https://www.tinfoilsecurity.com/contact) oluşturduğunuz kullanıcı hesabı.
+1. Kullanıcı bir Kurumsal hesabın parçasıysa, Kullanıcı hesabının oluşturulmasını sağlamak için [TINFOIL Security destek ekibine başvurmanız](https://www.tinfoilsecurity.com/contact) gerekir.
 
-1. TINFOIL SECURITY SaaS normal bir kullanıcı kullanıcı ise daha sonra kullanıcı ortak çalışan herhangi bir kullanıcının siteler ekleyebilirsiniz. Bu, yeni bir TINFOIL SECURITY kullanıcı hesabı oluşturmak için bir davet belirtilen e-posta göndermek için bir işlemi tetikler.
+1. Kullanıcı normal bir TINFOIL SECURITY SaaS kullanıcısı ise Kullanıcı, kullanıcının sitelerine bir ortak çalışan ekleyebilir. Bu, yeni bir TINFOIL SECURITY Kullanıcı hesabı oluşturmak için belirtilen e-postaya davetiye gönderme işlemini tetikler.
 
 > [!NOTE]
-> Azure AD kullanıcı hesapları sağlamak için herhangi bir TINFOIL SECURITY kullanıcı hesabı oluşturma araçları veya TINFOIL SECURITY tarafından sağlanan API'leri kullanabilirsiniz.
-> 
+> Azure AD Kullanıcı hesapları sağlamak için TINFOIL SECURITY tarafından sunulan herhangi bir diğer TINFOIL SECURITY Kullanıcı hesabı oluşturma aracını veya API 'Leri kullanabilirsiniz.
 
-### <a name="test-single-sign-on"></a>Çoklu oturum açma testi 
+## <a name="test-sso"></a>Test SSO 'SU
 
 Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-Erişim paneli TINFOIL SECURITY kutucuğa tıkladığınızda, size otomatik olarak SSO'yu ayarlama TINFOIL SECURITY için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde TINFOIL SECURITY kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız TINFOIL SECURITY 'de otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
-## <a name="additional-resources"></a>Ek Kaynaklar
+## <a name="additional-resources"></a>Ek kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
-- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 
+- [Azure AD ile TINFOIL SECURITY 'yi deneyin](https://aad.portal.azure.com/)

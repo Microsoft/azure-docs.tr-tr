@@ -7,19 +7,19 @@ author: zhangmanling
 manager: zhangmanling
 editor: ''
 ms.assetid: 837018e3-03e6-4f9c-a23e-4b63d5707a64
-ms.service: cdn
+ms.service: azure-cdn
 ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: integration
 ms.date: 11/17/2017
 ms.author: mezha
-ms.openlocfilehash: b55685bc9cfdc8c31e6658050be94cbe49062f89
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fa71f472294b91baebc2a6075ddb2b50123e545d
+ms.sourcegitcommit: ccb9a7b7da48473362266f20950af190ae88c09b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66472163"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67593386"
 ---
 # <a name="securing-azure-cdn-assets-with-token-authentication"></a>Azure CDN varlıkları belirteç kimlik doğrulaması ile güvenli hale getirme
 
@@ -114,7 +114,7 @@ Aşağıdaki akış çizelgesi, CDN uç noktasında belirteci kimlik doğrulamas
       >          <li>`http://www.mydomain.com/pictures/city/strasbourg.png`</li>
       >          <li>`http://www.mydomain.com/picturesnew/city/strasbourgh.png`</li>
       >       </ul></li>
-      >       <li>Giriş değeri `/pictures/`: Yalnızca istekleri içeren `/pictures/` yolu izin verilir. Örneğin, `http://www.mydomain.com/pictures/city/strasbourg.png`.</li>
+      >       <li>Giriş değeri `/pictures/`: Yalnızca istekleri içeren `/pictures/` yolu izin verilir. Örneğin: `http://www.mydomain.com/pictures/city/strasbourg.png`.</li>
       >       <li>Giriş değeri `/pictures/city/strasbourg.png`: Bu belirli bir yol ve varlık için yalnızca isteklerine izin verilir.</li>
       >    </ul>
       > </tr>
@@ -162,7 +162,7 @@ Aşağıdaki akış çizelgesi, CDN uç noktasında belirteci kimlik doğrulamas
 
    7. Seçin **şifrele** belirteci oluşturabilirsiniz.
 
-      Belirteç oluşturulduktan sonra görüntüleneceğini **oluşturulan belirteç** kutusu. Belirteç kullanmak için URL yolundaki dosyanın sonuna bir sorgu dizesi olarak ekler. Örneğin, `http://www.domain.com/content.mov?a4fbc3710fd3449a7c99986b`.
+      Belirteç oluşturulduktan sonra görüntüleneceğini **oluşturulan belirteç** kutusu. Belirteç kullanmak için URL yolundaki dosyanın sonuna bir sorgu dizesi olarak ekler. Örneğin: `http://www.domain.com/content.mov?a4fbc3710fd3449a7c99986b`.
         
    8. İsteğe bağlı olarak, belirtecin parametreleri görüntüleyebilmek, belirteç şifre çözme aracı ile test edin. Belirteç değeri olarak yapıştırın **belirteç şifre çözme için** kutusu. Şifreleme anahtarını kullanmak için işaretleyin **anahtarın şifresini çözüp** listeleyin ve ardından **şifresini**.
 

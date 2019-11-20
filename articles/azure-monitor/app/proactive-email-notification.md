@@ -1,51 +1,50 @@
 ---
-title: Azure Application Insights, akıllı algılama – varsayılan bildirim alıcılarını yaklaşan değişiklik | Microsoft Docs
-description: Azure Application Insights ile uygulama izlemeleri için izleme telemetrisi olağandışı desenleri izleyin.
-services: application-insights
-author: harelbr
-manager: carmonm
-ms.service: application-insights
+title: 'Azure Application Insights akıllı algılama: Varsayılan bildirim alıcılarına yaklaşan değişiklikler | Microsoft Docs'
+description: İzleme telemetride olağandışı desenler için Azure Application Insights ile uygulama izlemelerini izleyin.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.reviewer: mbullwin
-ms.date: 03/13/2019
+author: harelbr
 ms.author: harelbr
-ms.openlocfilehash: f984a34be1c5d5fdd18a00812107318df8f5d9bf
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 03/13/2019
+ms.reviewer: mbullwin
+ms.openlocfilehash: fa1f98b5a9ee592a4c702e87e365eff7941194d4
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61299010"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72820615"
 ---
-# <a name="smart-detection-e-mail-notification-change"></a>Akıllı algılama e-posta bildirimi değiştirme
+# <a name="smart-detection-e-mail-notification-change"></a>Akıllı algılama e-posta bildirimi değişikliği
 
-1 Nisan 2019, Müşteri geribildirimine dayalı akıllı algılama e-posta bildirimleri alması varsayılan rolleri değiştirirsiniz.
+Müşteri geri bildirimlerine bağlı olarak, 1 Nisan 2019 ' de, akıllı algılamada e-posta bildirimleri alan varsayılan rolleri değiştiriyoruz.
 
-## <a name="what-is-changing"></a>Değişen nedir?
+## <a name="what-is-changing"></a>Ne değişiyor?
 
-Akıllı algılama e-posta bildirimleri varsayılan olarak şu anda, gönderilen _abonelik sahibi_, _abonelik katkıda bulunanı_, ve _abonelik okuyucusu_ rolleri. Bu roller genellikle izlemeyle aktif olarak ilgilenmeyen kullanıcıları içerdiğinden bu durum, bu kullanıcıların gereksiz bildirimler almasına neden olur. Böylece e-posta bildirimleri yalnızca Git bu deneyimi geliştirmek için bir değişiklik yapıyoruz [izleme okuyucusu](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-reader) ve [izleme katılımcı](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-contributor) varsayılan roller.
+Şu anda, akıllı algılama e-posta bildirimleri varsayılan olarak _abonelik sahibine_, _abonelik katkıya_ve _abonelik okuyucu_ rollerine gönderilir. Bu roller genellikle izlemeyle aktif olarak ilgilenmeyen kullanıcıları içerdiğinden bu durum, bu kullanıcıların gereksiz bildirimler almasına neden olur. Bu deneyimi geliştirmek için, e-posta bildirimlerinin yalnızca [Izleme okuyucusuna](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-reader) gitmesi ve varsayılan olarak [katkıda bulunan rollerinin izlenmesi](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-contributor) için bir değişiklik yapıyoruz.
 
-## <a name="scope-of-this-change"></a>Bu değişiklik kapsamı
+## <a name="scope-of-this-change"></a>Bu değişikliğin kapsamı
 
 Bu değişiklik aşağıdakiler dışında tüm Akıllı Algılama kurallarını etkileyecek:
 
-* Önizleme olarak işaretlenen Akıllı Algılama kuralları. Bu akıllı algılama kuralları e-posta bildirimleri bugün desteklemez.
+* Önizleme olarak işaretlenen Akıllı Algılama kuralları. Bu akıllı algılama kuralları, e-posta bildirimlerini bugün desteklemez.
 
-* Hata Anomalileri kuralı. Bu kural, birleştirilmiş uyarılar platformu için Klasik bir uyarıdan geçirildikten sonra yeni varsayılan rolleri hedefleyen başlar (daha fazla bilgi edinilebilir [burada](https://docs.microsoft.com/azure/azure-monitor/platform/monitoring-classic-retirement).)
+* Hata Anomalileri kuralı. Bu kural, klasik bir uyarıdan birleştirilmiş uyarılar platformuna geçirildikten sonra yeni varsayılan rolleri hedeflemeye başlar ( [burada](https://docs.microsoft.com/azure/azure-monitor/platform/monitoring-classic-retirement)daha fazla bilgi bulunur.)
 
-## <a name="how-to-prepare-for-this-change"></a>Bu değişikliğe hazırlanmak nasıl?
+## <a name="how-to-prepare-for-this-change"></a>Bu değişiklik için nasıl hazırlandınız?
 
-Akıllı algılama e-posta bildirimleri ilgili kullanıcılara gönderildiğinden emin olmak için söz konusu kullanıcıların atanmalıdır [izleme okuyucusu](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-reader) veya [izleme katılımcı](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-contributor) aboneliğin rolleri.
+Akıllı algılamada e-posta bildirimlerinin ilgili kullanıcılara gönderilmesini sağlamak için, bu kullanıcıların [Izleme okuyucusuna](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-reader) atanması veya aboneliğin [katkıda bulunan rollerinin izlenmesi](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#monitoring-contributor) gerekir.
 
-Azure portal aracılığıyla izleme okuyucusu veya izleme katkıda bulunan rollerine kullanıcıları atamak için açıklanan adımları izleyin. [bir rol ataması Ekle](https://docs.microsoft.com/azure/role-based-access-control/role-assignments-portal#add-a-role-assignment) makalesi. Seçtiğinizden emin olun _izleme okuyucusu_ veya _izleme katılımcı_ kullanıcılar atanan rol olarak.
+Kullanıcıları Izleme okuyucusuna atamak veya Azure portal ile katkıda bulunan rolleri Izlemek için [rol ataması ekleme](https://docs.microsoft.com/azure/role-based-access-control/role-assignments-portal#add-a-role-assignment) makalesinde açıklanan adımları izleyin. _Izleme okuyucusunu_ veya _izleme katkı izlemeyi_ kullanıcıların atandığı rol olarak seçtiğinizden emin olun.
 
 > [!NOTE]
-> Akıllı algılama uyarıları, kullanılarak yapılandırılan belirli alıcıları _ek e-posta alıcılarını_ kuralı ayarlar seçeneği, bu değişiklikten etkilenmez. Bu alıcı, e-posta bildirimleri almaya devam eder.
+> Kural ayarlarındaki _ek e-posta alıcıları_ seçeneği kullanılarak yapılandırılmış akıllı algılama bildirimlerinin belirli alıcıları bu değişiklikten etkilenmez. Bu alıcılar e-posta bildirimlerini almaya devam edecektir.
 
-Sorularınız veya bu değişiklik hakkında endişeleriniz varsa, çekinmeyin [bizimle](mailto:smart-alert-feedback@microsoft.com).
+Bu değişiklik hakkında sorularınız veya endişeleriniz varsa [bizimle iletişime](mailto:smart-alert-feedback@microsoft.com)geçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Akıllı algılama hakkında bilgi edinin:
+Akıllı algılama hakkında daha fazla bilgi edinin:
 
 - [Hata anormallikleri](../../azure-monitor/app/proactive-failure-diagnostics.md)
 - [Bellek sızıntıları](../../azure-monitor/app/proactive-potential-memory-leak.md)

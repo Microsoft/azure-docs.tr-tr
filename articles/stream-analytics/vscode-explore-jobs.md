@@ -1,47 +1,47 @@
 ---
-title: Visual Studio Code (Önizleme) ile Azure Stream Analytics işleri keşfedin
-description: Bu makalede, yerel bir proje, listeleyemeyeceksiniz ve görünüm iş varlıkları için Azure Stream Analytics işi dışarı aktarma gösterir.
+title: Visual Studio Code Azure Stream Analytics işleri keşfet
+description: Bu makalede bir Azure Stream Analytics işini yerel bir projeye aktarma, işleri listeleme ve iş varlıklarını görüntüleme işlemleri gösterilmektedir.
 ms.service: stream-analytics
 author: mamccrea
 ms.author: mamccrea
 ms.date: 05/15/2019
 ms.topic: conceptual
-ms.openlocfilehash: 8674d478646c8f9be6b32521c6624752ac6df052
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1d3a02d3778f9b4113767c5f755d675aeadd901b
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65827808"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72934231"
 ---
-# <a name="explore-azure-stream-analytics-with-visual-studio-code-preview"></a>Visual Studio Code (Önizleme) ile Azure Stream Analytics'i keşfedin
+# <a name="explore-azure-stream-analytics-with-visual-studio-code-preview"></a>Visual Studio Code ile Azure Stream Analytics araştırma (Önizleme)
 
-Visual Studio Code uzantısı için Azure Stream Analytics, geliştiricilerin Stream Analytics işlerini yönetmek için basit bir deneyim sunar. Windows, Mac ve Linux'ta kullanılabilir. Azure Stream Analytics uzantısı ile şunları yapabilirsiniz:
+Visual Studio Code uzantısının Azure Stream Analytics geliştiricilere Stream Analytics işlerini yönetmek için hafif bir deneyim sunar. Windows, Mac ve Linux 'ta kullanılabilir. Azure Stream Analytics uzantısıyla şunları yapabilirsiniz:
 
-- [Oluşturma](quick-create-vs-code.md), başlatmak ve durdurmak işleri
-- Mevcut dışarı aktarma işleri için yerel bir proje
-- İşleri listelemek ve iş varlıkları görüntüleyin
+- İşleri [oluşturma](quick-create-vs-code.md), başlatma ve durdurma
+- Mevcut işleri yerel bir projeye aktar
+- İşleri listeleme ve iş varlıklarını görüntüleme
 
-## <a name="export-a-job-to-a-local-project"></a>Bir işi dışarı aktarma için yerel bir proje
+## <a name="export-a-job-to-a-local-project"></a>Yerel bir projeye bir işi dışarı aktarma
 
-Yerel bir proje için bir iş dışarı aktarmak için dışarı aktarmak istediğiniz işi bulun **Stream Analytics Gezgini'nde** Visual Studio code'da. Ardından, projeniz için bir klasör seçin. Proje, seçtiğiniz klasöre aktarılır ve Visual Studio Code'dan işi yönetmek devam edebilirsiniz. Stream Analytics işlerini yönetmek için Visual Studio Code kullanmayla ilgili daha fazla bilgi için bkz. Visual Studio Code [hızlı](quick-create-vs-code.md).
+Bir işi yerel bir projeye aktarmak için, Visual Studio Code **Stream Analytics Gezgininde** dışarı aktarmak istediğiniz işi bulun. Ardından projeniz için bir klasör seçin. Proje, seçtiğiniz klasöre aktarıldığından Visual Studio Code işi yönetmeye devam edebilirsiniz. Stream Analytics işleri yönetmek için Visual Studio Code kullanma hakkında daha fazla bilgi için Visual Studio Code [hızlı başlangıç](quick-create-vs-code.md)başlığına bakın.
 
-![Visual Studio code'da ASA işi Dışarı Aktar](./media/vscode-explore-jobs/export-job.png)
+![Visual Studio Code ASA işini dışarı aktarma](./media/vscode-explore-jobs/export-job.png)
 
-## <a name="list-job-and-view-job-entities"></a>İş listesi ve iş varlıkları görüntüleyin
+## <a name="list-job-and-view-job-entities"></a>İşi listeleme ve iş varlıklarını görüntüleme
 
-Visual Studio'dan Azure Stream Analytics işleri ile etkileşim kurmak için iş görünümü kullanabilirsiniz.
+Visual Studio 'dan Azure Stream Analytics işlerle etkileşim kurmak için iş görünümünü kullanabilirsiniz.
 
 
-1. Tıklayın **Azure** Visual Studio kod etkinlik çubuğundaki ve ardından **Stream Analytics düğümünü**. İşlerinizi aboneliklerinizi altında görünmelidir.
+1. Visual Studio Code etkinlik çubuğundaki **Azure** simgesine tıklayın ve ardından **Stream Analytics düğümünü**genişletin. İşleriniz aboneliklerinizin altında görünmelidir.
 
-   ![Açık bir Stream Analytics Gezgini](./media/vscode-explore-jobs/open-explorer.png)
+   ![Stream Analytics Gezginini aç](./media/vscode-explore-jobs/open-explorer.png)
 
-2. Proje düğümünü, açın ve iş sorgusu, yapılandırma, girişler, çıkışlar ve işlevleri görüntüleyin. 
+2. İş düğümünü genişletin, iş sorgusunu, yapılandırmayı, girişleri, çıkışları ve işlevleri açabilir ve görüntüleyebilirsiniz. 
 
-3. Proje düğümünü sağ tıklatın ve seçin **iş görünümünde Aç portalı** Azure portalında iş görünümünü açmak için düğümü.
+3. İş düğümünüz üzerinde sağ tıklayın ve iş görünümünü Azure portal açmak için **Portal düğümünde Iş görünümünü aç** ' ı seçin.
 
-   ![Açık proje görünümü'nde portalı](./media/vscode-explore-jobs/open-job-view.png)
+   ![Portalda iş görünümünü aç](./media/vscode-explore-jobs/open-job-view.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Visual Studio Code'da (Önizleme) Azure Stream Analytics bulut işi oluşturma](quick-create-vs-code.md)
+* [Visual Studio Code Azure Stream Analytics bulut işi oluşturma (Önizleme)](quick-create-vs-code.md)

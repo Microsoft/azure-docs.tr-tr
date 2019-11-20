@@ -1,60 +1,60 @@
 ---
-title: Mürekkep tanıyıcı nedir? -Mürekkep tanıyıcı API
-titlesuffix: Azure Cognitive Services
-description: Mürekkep tanıyıcı uygulamalarınızı, Web sitelerini, araçları ve diğer çözümleri sağlamak için tümleştirme...
+title: Mürekkep tanıyıcı nedir? -Ink tanıyıcı API 'SI
+titleSuffix: Azure Cognitive Services
+description: Mürekkep vuruşu verilerinin giriş olarak tanımlanmasını ve kullanılmasını sağlamak için mürekkep tanıyıcıyı uygulamalarınızın, Web siteleriniz, araçlarınızla ve diğer çözümlerle tümleştirin.
 services: cognitive-services
 author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: ink-recognizer
-ms.topic: tutorial
-ms.date: 05/02/2019
+ms.topic: overview
+ms.date: 07/24/2019
 ms.author: erhopf
-ms.openlocfilehash: 0ed1a72a5dc61458200b72c768ad722656b820d8
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.openlocfilehash: c90d656539a2ed64b416dc9b8e7e11e205b98ee6
+ms.sourcegitcommit: 75a56915dce1c538dc7a921beb4a5305e79d3c7a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "65027232"
+ms.lasthandoff: 07/24/2019
+ms.locfileid: "68478363"
 ---
 # <a name="what-is-the-ink-recognizer-api"></a>Mürekkep Tanıma API’si nedir?
 
 
-Mürekkep tanıyıcı Bilişsel hizmet çözümlemek ve dijital mürekkep içeriğini tanımak için bulut tabanlı REST API sağlar. Optik karakter tanıma (OCR) kullanan hizmetler, giriş olarak dijital mürekkep vuruşu veri API'si gerektirir. Dijital mürekkep vuruşlarını zamana göre sıralı giriş araçlarıyla dijital kalemler veya parmağınızı hareket temsil eden 2B noktaları (X, Y koordinatları) kümeleridir. Şekiller ve giriş el ile yazılmış içerikten algılar ve tanınan tüm varlıkları içeren bir JSON yanıtı döndürür.
+Mürekkep tanıyıcı bilişsel hizmeti, dijital mürekkep içeriğini çözümlemek ve tanımak için bulut tabanlı bir REST API sağlar. Optik karakter tanıma (OCR) kullanan hizmetlerden farklı olarak, API, giriş olarak dijital mürekkep kontur verileri gerektirir. Dijital mürekkep vuruşları, dijital kalemlerin veya parmakların gibi giriş araçlarının hareketini temsil eden, zaman sıralı 2B puntolar (X, Y koordinatları) kümesidir. Daha sonra bu şekil, girdiden şekilleri ve el yazısı içeriğini tanır ve tüm tanınan varlıkları içeren bir JSON yanıtı döndürür.
 
-![Mürekkep vuruşu giriş API'sine gönderme açıklayan bir akış çizelgesi](media/ink-recognizer-pen-graph.png)
+![API 'ye mürekkep konturu girişi göndermeyi açıklayan bir akış çizelgesi](media/ink-recognizer-pen-graph.svg)
 
 ## <a name="features"></a>Özellikler
 
-Mürekkep tanıyıcı API'si ile uygulamalarınızda el yazısı içeriği kolayca tanıyabilirsiniz. 
+Mürekkep tanıyıcı API 'SI sayesinde, uygulamalarınızda el yazısı içeriğini kolayca tanıyabilirsiniz. 
 
 |Özellik  |Açıklama  |
 |---------|---------|
-| El yazısı tanıma | El yazısı içerikleri 63 core'da [dil ve yerel ayar](language-support.md). | 
-| Düzen tanıma | Dijital Mürekkep içeriği yapısal bilgi alın. İçerik, bölgeleri, paragraf, satırlar, sözcük, madde işaretli listeler yazıya bölün. Uygulamalarınızı daha sonra otomatik listesi biçimlendirme gibi ek özellikler oluşturmaya ilişkin düzen bilgilerini kullanın ve hizalama şekil. |
-| Şekil tanıma | En sık kullanılan tanımak [geometrik şekiller](concepts/send-ink-data.md#shapes-recognized-by-the-ink-recognizer-api) notları çekerken. |
-| Birleşik şekiller ve metin tanıma | Hangi mürekkep vuruşlarını şekilleri veya el ile yazılmış içerik ait tanıması ve ayrı olarak sınıflandırın.|
+| El yazısı tanıma | 63 çekirdek [dilinde ve yerel ayarlarda](language-support.md)el ile yazılmış içeriği tanıyın. | 
+| Düzen tanıma | Dijital mürekkep içeriğiyle ilgili yapısal bilgiler alın. İçeriği, paragrafları, satırları, sözcükleri ve madde işaretli listeleri yazma bölümlerine bölün. Uygulamalarınız daha sonra otomatik liste biçimlendirme ve şekil hizalama gibi ek özellikler oluşturmak için düzen bilgilerini kullanabilir. |
+| Şekil tanıma | Not alırken en yaygın olarak kullanılan [geometrik şekilleri](concepts/send-ink-data.md#shapes-recognized-by-the-ink-recognizer-api) tanır. |
+| Birleşik şekiller ve metin tanıma | Şekillere veya el yazısı içeriğine ait olan mürekkep vuruşlarını ve bunları ayrı olarak sınıflandırın.|
 
-## <a name="workflow"></a>İş Akışı
+## <a name="workflow"></a>İş akışı
 
-Mürekkep tanıyıcı API'si bir RESTful web, HTTP istekleri ve JSON Ayrıştır tüm programlama dilinden çağrı kolaylaştırma hizmetidir.
+Mürekkep tanıyıcı API 'SI, bir Web hizmeti olduğundan, HTTP istekleri yapan ve JSON 'u ayrıştırabilen herhangi bir programlama dilinden çağrı yapmayı kolaylaştırır.
 
 [!INCLUDE [cognitive-services-ink-recognizer-signup-requirements](../../../includes/cognitive-services-ink-recognizer-signup-requirements.md)]
 
 Kaydolduktan sonra:
 
-1. Mürekkep vuruşu verilerinizi alın ve [biçimlendirmeniz](concepts/send-ink-data.md#sending-ink-data) geçerli JSON içinde.
-1. Verilerinizle mürekkep tanıyıcı API'sine bir istek gönderin.
+1. Mürekkep vuruşu verilerinizi alın ve geçerli JSON olarak [biçimlendirin](concepts/send-ink-data.md#sending-ink-data) .
+1. Verilerinize yönelik olarak mürekkep tanıyıcı API 'sine bir istek gönderin.
 1. Döndürülen JSON iletisini ayrıştırarak API yanıtını işleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Mürekkep tanıyıcı API'sine çağrı yapmaya başlamak için şu dillerde bir hızlı başlangıcı deneyin.
+Mürekkep tanıyıcı API 'sine çağrı yapmaya başlamak için aşağıdaki dillerde bir hızlı başlangıç yapın.
 * [C#](quickstarts/csharp.md)
 * [Java](quickstarts/java.md)
 * [JavaScript](quickstarts/csharp.md)
 
-Mürekkep tanıma API'si dijital mürekkep bir uygulamada nasıl çalıştığını görmek için Github'da aşağıdaki örnek uygulamaları göz atın:
+Mürekkep tanıma API 'sinin dijital bir mürekkep uygulamasında nasıl çalıştığını görmek için GitHub 'da aşağıdaki örnek uygulamalara göz atın:
 * [C# Evrensel Windows Platformu (UWP)](https://go.microsoft.com/fwlink/?linkid=2089803)  
 * [C# Windows Presentation Foundation (WPF)](https://go.microsoft.com/fwlink/?linkid=2089804)
 * [JavaScript web tarayıcı uygulaması](https://go.microsoft.com/fwlink/?linkid=2089908)       

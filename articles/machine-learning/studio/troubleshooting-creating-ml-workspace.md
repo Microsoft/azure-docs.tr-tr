@@ -1,7 +1,7 @@
 ---
-title: Bir çalışma sorunlarını giderme
-titleSuffix: Azure Machine Learning Studio
-description: Bu kılavuz, Azure Machine Learning Studio çalışma alanları ayarlarken çözümleri bazı zorluklar sık karşılaşıldı. sağlar.
+title: Çalışma alanı sorunlarını giderme
+titleSuffix: ML Studio (classic) - Azure
+description: Bu kılavuz, Azure Machine Learning Studio çalışma alanlarının klasik sürümünü ayarlarken bazı sık karşılaşılan güçlükler için çözümler sağlar.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: studio
@@ -10,53 +10,53 @@ author: xiaoharper
 ms.author: amlstudiodocs
 ms.custom: previous-author=heatherbshapiro, previous-ms.author=hshapiro
 ms.date: 03/20/2017
-ms.openlocfilehash: 7cc825daa29a0398793f3c6fc5ce8ee426ad79e6
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 88f4e1edae84892892d1a8a9e76499d71d551abf
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60193874"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73838033"
 ---
-# <a name="troubleshooting-guide-create-and-connect-to-an-azure-machine-learning-studio-workspace"></a>Sorun giderme kılavuzu: Oluşturma ve bir Azure Machine Learning Studio çalışma alanına bağlayın
-Bu kılavuz, Azure Machine Learning Studio çalışma alanları ayarlarken çözümleri bazı zorluklar sık karşılaşıldı. sağlar.
+# <a name="troubleshooting-guide-create-and-connect-to-an-azure-machine-learning-studio-classic-workspace"></a>Sorun giderme kılavuzu: Azure Machine Learning Studio (klasik) çalışma alanı oluşturma ve bağlanma
+Bu kılavuz, Azure Machine Learning Studio (klasik) çalışma alanlarını ayarlarken bazı sık karşılaşılan güçlükler için çözümler sağlar.
 
 
 
 ## <a name="workspace-owner"></a>Çalışma alanı sahibi
-Bir çalışma alanında Machine Learning Studio'da açmak için çalışma alanı oluşturmak için kullanılan Microsoft Account oturum açmanız gerekir veya sahibinden çalışma alanına katılması için davet almak gerekir. Azure portalından, erişimi yapılandırmak için olanağını da içeren çalışma alanında, yönetebilirsiniz.
+Machine Learning Studio (klasik) ' de bir çalışma alanı açmak için, çalışma alanını oluşturmak için kullandığınız Microsoft hesabında oturum açmanız veya çalışma alanına katılması için sahibinden bir davetiye almanız gerekir. Azure portal, erişimi yapılandırma özelliğini içeren çalışma alanını yönetebilirsiniz.
 
-Bir çalışma alanı yönetme ile ilgili daha fazla bilgi için bkz: [bir Azure Machine Learning Studio çalışma alanını yönetme].
+Çalışma alanını yönetme hakkında daha fazla bilgi için bkz. [Azure Machine Learning Studio (klasik) çalışma alanını yönetme].
 
-[Bir Azure Machine Learning Studio çalışma alanını yönetme]: manage-workspace.md
+[Azure Machine Learning Studio (klasik) çalışma alanını yönetme]: manage-workspace.md
 
 ## <a name="allowed-regions"></a>İzin verilen bölgeler
-Machine Learning sınırlı sayıdaki bölgede şu anda kullanılabilir. Aboneliğiniz bu bölgelerden birini içermiyorsa hata iletisini görebilirsiniz, "izin verilen bölgelerde aboneliğiniz yok."
+Machine Learning, şu anda sınırlı sayıda bölgede kullanılabilir. Aboneliğiniz bu bölgelerden birini içermiyorsa, "izin verilen bölgelerde aboneliğiniz yok" hata iletisini görebilirsiniz.
 
-Bir bölge aboneliğinize eklenmesini isteyin için Azure portalında yeni bir Microsoft destek isteği oluşturma, **faturalama** sorun türü olarak ve isteğinizi göndermek için yönergeleri izleyin.
+Aboneliğinize bir bölgenin eklenmesini istemek için, Azure portal yeni bir Microsoft destek isteği oluşturun, sorun türü olarak **faturalandırma** ' i seçin ve isteğinizi göndermek için istemleri izleyin.
 
 ## <a name="storage-account"></a>Depolama hesabı
-Machine Learning hizmetinin veri depolamak için bir depolama hesabı gerekir. (Yeni bir depolama hesabı oluşturmak için kota varsa), yeni bir Machine Learning Studio çalışma alanı oluşturduğunuzda, yeni bir depolama hesabı oluşturabilirsiniz veya mevcut bir depolama hesabını kullanabilirsiniz.
+Machine Learning hizmeti, verileri depolamak için bir depolama hesabı gerektirir. Mevcut bir depolama hesabını kullanabilir veya yeni Machine Learning Studio (klasik) çalışma alanını oluştururken yeni bir depolama hesabı oluşturabilirsiniz (yeni bir depolama hesabı oluşturmak için kotayı kullanıyorsanız).
 
-Yeni bir Machine Learning Studio çalışma alanı oluşturulduktan sonra Machine Learning Studio çalışma alanı oluşturmak için kullandığınız Microsoft hesabı kullanarak oturum açabilirsiniz. Hata iletisi "Çalışma alanı bulunamadı" (aşağıdaki ekran görüntüsüne benzer) karşılaşırsanız, tarayıcı tanımlama bilgilerinizi silmek için aşağıdaki adımları kullanın.
+Yeni Machine Learning Studio (klasik) çalışma alanı oluşturulduktan sonra, çalışma alanını oluşturmak için kullandığınız Microsoft hesabı kullanarak Machine Learning Studio (klasik) oturum açabilirsiniz. "Çalışma alanı bulunamadı" hata iletisiyle karşılaşırsanız (aşağıdaki ekran görüntüsüne benzer şekilde), lütfen tarayıcı tanımlama bilgilerinizi silmek için aşağıdaki adımları kullanın.
 
 ![Çalışma alanı bulunamadı](media/troubleshooting-creating-ml-workspace/screen3.png)
 
 **Tarayıcı tanımlama bilgilerini silmek için**
 
-1. Internet Explorer kullanıyorsanız, tıklatın **Araçları** sağ üst köşesinde'düğmesine tıklayın ve belirleyin **Internet Seçenekleri**.  
+1. Internet Explorer kullanıyorsanız, sağ üst köşedeki **Araçlar** düğmesine tıklayın ve **Internet seçenekleri**' ni seçin.  
 
-   ![Internet Seçenekleri](media/troubleshooting-creating-ml-workspace/screen4.png)
+   ![Internet seçenekleri](media/troubleshooting-creating-ml-workspace/screen4.png)
 
-2. Altında **genel** sekmesinde **Sil...**
+2. **Genel** sekmesinde Sil ' e tıklayın **...**
 
    ![Genel sekmesi](media/troubleshooting-creating-ml-workspace/screen5.png)
 
-3. İçinde **Gözatma Geçmişini Sil** iletişim kutusunda, emin **tanımlama bilgileri ve Web sitesi verileriyle** seçilir ve tıklayın **Sil**.
+3. **Gözatma Geçmişini Sil** iletişim kutusunda, **tanımlama bilgileri ve Web sitesi verilerinin** seçili olduğundan emin olun ve **Sil**' e tıklayın.
 
-   ![Tanımlama bilgilerini silin](media/troubleshooting-creating-ml-workspace/screen6.png)
+   ![Tanımlama bilgilerini sil](media/troubleshooting-creating-ml-workspace/screen6.png)
 
-Tanımlama bilgilerini silindikten sonra tarayıcıyı yeniden başlatmak ve ardından Git [Microsoft Azure Machine Learning Studio](https://studio.azureml.net) sayfası. Bir kullanıcı adı ve parola sorulduğunda, çalışma alanı oluşturmak için kullandığınız aynı Microsoft hesabını girin.
+Tanımlama bilgileri silindikten sonra, tarayıcıyı yeniden başlatın ve ardından [Microsoft Azure Machine Learning Studio (klasik)](https://studio.azureml.net) sayfasına gidin. Bir Kullanıcı adı ve parola istendiğinde, çalışma alanını oluşturmak için kullandığınız Microsoft hesabı aynısını girin.
 
-## <a name="comments"></a>Açıklamalar
+## <a name="comments"></a>Yorumlar
 
-Machine Learning deneyiminizi mümkün olduğunca sorunsuz hale getirmek için Amacımız sağlamaktır. Lütfen herhangi bir yorum ve sorunu sonrası [Azure Machine Learning Forumu](https://social.msdn.microsoft.com/Forums/windowsazure/home?forum=MachineLearning) daha iyi hizmet yardımcı olmak için.
+Amacınız Machine Learning deneyimini olabildiğince sorunsuz hale getirmek. Daha iyi sunmamıza yardımcı olması için lütfen [Azure Machine Learning forumundan](https://social.msdn.microsoft.com/Forums/windowsazure/home?forum=MachineLearning) açıklama ve sorun gönderin.

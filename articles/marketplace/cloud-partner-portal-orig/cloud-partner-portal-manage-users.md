@@ -1,61 +1,62 @@
 ---
-title: Bulut iş ortağı portalında kullanıcıları yönetme | Azure Market
-description: Bulut iş ortağı portalında kullanıcıları yönetme
+title: Bulut iş ortağı portalı 'nda kullanıcıları yönetme | Azure Marketi
+description: Bulut iş ortağı portalı 'nda kullanıcıları yönetme
 services: Azure, Marketplace, Cloud Partner Portal,
 author: qianw211
 manager: pbutlerm
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 5a3724729f85b7917b1559ce2ac3d859881e0de8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b14d40e9b3a2aa1ca71335b60e97f15b3782698f
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935134"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73823276"
 ---
-<a name="managing-users-on-cloud-partner-portal"></a>Bulut iş ortağı portalında kullanıcıları yönetme
+<a name="managing-users-on-cloud-partner-portal"></a>Bulut iş ortağı portalı 'nda kullanıcıları yönetme
 ======================================
 
-Bulut iş ortağı portalı sanal makine teklifler için rol tabanlı erişimi olan kullanıcılar eklemenize olanak sağlar. Birden çok kişinin teklifler çalışırken erişim ve izinleri yönetmek için yardımcı olur.
+Bulut İş Ortağı Portalı, sanal makine tekliflerine rol tabanlı erişime sahip kullanıcılar eklemenize olanak tanır. Birden çok kişi teklifler üzerinde çalışırken erişimi ve izinleri yönetmeye yardımcı olur.
 
-İçin **kullanıcı eklemesini ve rol atamasını** teklifi yayımlama için aşağıdaki adımları izleyin:
+Teklif yayımlamaya yönelik **Kullanıcı eklemek ve rol atamak** için aşağıdaki adımları izleyin:
 
-<a name="step-1-to-add-users-and-assign-roles-click-the-users-tab-on-the-left-side-navigation-pane"></a>1\.Adım Kullanıcı ekleme ve rolleri atamak için sol tarafındaki gezinti bölmesinde kullanıcılar sekmesine tıklayın.
+<a name="step-1-to-add-users-and-assign-roles-click-the-users-tab-on-the-left-side-navigation-pane"></a>1\. Adım Kullanıcı eklemek ve rol atamak için, sol taraftaki Gezinti bölmesindeki kullanıcılar sekmesine tıklayın.
 --------------------------------------------------------------------------------------------
 
-![Kullanıcılar sekmesine](./media/cloud-partner-portal-how-to-manage-users/userstab.png)
+![Kullanıcılar sekmesi](./media/cloud-partner-portal-how-to-manage-users/userstab.png)
 
-<a name="step-2-click-add-user"></a>2\.Adım Kullanıcı Ekle seçeneğine tıklayın.
+<a name="step-2-click-add-user"></a>2\. Adım. Kullanıcı Ekle ' ye tıklayın.
 -----------------------
 
-![Kullanıcı Ekle seçeneğini belirleme](./media/cloud-partner-portal-how-to-manage-users/adduser.png)
+![Kullanıcı Ekle ' yi seçin](./media/cloud-partner-portal-how-to-manage-users/adduser.png)
 
-<a name="step-3-type-email-address-and-select-a-role-assignment"></a>Adım 3. E-posta adresini yazın ve bir rol atamasını seçin.
+<a name="step-3-type-email-address-and-select-a-role-assignment"></a>3\. Adım. E-posta adresi yazın ve bir rol ataması seçin.
 --------------------------------------------------------
 
-Yeni bir kullanıcı bir 'owner' veya 'katkıda bulunan' olarak ekleyebilirsiniz.
+Yeni kullanıcıyı ' Owner ' veya ' katkıda bulunan ' olarak ekleyebilirsiniz.
 
-**e-posta**: E-posta adreslerini teklifini yayımlamanın üzerinde çalışan takım arkadaşları ekleyin. Microsoft hesapları (Outlook, Hotmail ve canlı) ve kuruluş kimlikleri desteklenir.
+**E-posta**: teklifi yayımlamak için çalışacak ekip mates e-posta adreslerini ekleyin. Microsoft hesapları (Outlook, hotmail ve canlı) ve kuruluş kimlikleri desteklenir.
 
-o durumda teklifiyle ilgili ayrı ayrı çalışan kuruluştan ayrılan bir ' takım/Grup e-posta diğer adı/güvenlik grubu' ekleyin.
+o teklif üzerinde çalışan kişinin kuruluştan ayrılmasına karşı bir ' takım/Grup e-posta diğer adı/güvenlik grubu ' ekleyin.
 
-o kimlikleri bulut iş ortağı portalında sağlanan Microsoft gelen tüm iletişimi için izlenen bu e-posta emin olun.
+o Bulut İş Ortağı Portalı belirtilen e-posta kimliklerinin Microsoft 'tan gelen tüm iletişimler için izlendiğinden emin olun.
 
-**Rol**: Uygun kullanıcı rol türü tanımlamak için aşağıdaki tabloya bakın.
+**Rol**: uygun Kullanıcı rolü türünü tanımlamak için aşağıdaki tabloya bakın.
 
-![Rol atama](./media/cloud-partner-portal-how-to-manage-users/assignrole.png)
-![rol düzeyi](./media/cloud-partner-portal-how-to-manage-users/roleaccesslevel.png)
+Rol](./media/cloud-partner-portal-how-to-manage-users/assignrole.png)
+![rol düzeyini ![ata](./media/cloud-partner-portal-how-to-manage-users/roleaccesslevel.png)
 
-Şu anda yalnızca sahipler Insights Azure ödeme ve Azure müşteri sekmeleri erişebilirsiniz.
+Şu anda yalnızca sahipler Azure ödeme ve Azure müşteri sekmelerinde öngörülere erişebilir.
 
-<a name="step-4-select-the-publisher-name-you-want-to-add-to-the-new-user-then-click-add-to-complete-user-addition"></a>4\. adımı. Daha sonra kullanıcı ekleme tamamlamak için Ekle'yi tıklatın yeni kullanıcıyı eklemek istediğiniz yayımcı adını seçin.
+<a name="step-4-select-the-publisher-name-you-want-to-add-to-the-new-user-then-click-add-to-complete-user-addition"></a>4\. Adım. Yeni kullanıcıya eklemek istediğiniz yayımcı adını seçin, sonra Kullanıcı ekleme ' ye tıklayarak Ekle ' ye tıklayın.
 ----------------------------------------------------------------------------------------------------------------------------
 
 > [!NOTE]
-> 'E-posta sahibi veya katkıda bulunanı eklenir yayımcı adları görünecektir yayımcı aşağı açılan listesinden seçim.'
+> Bir sahip veya katkıda bulunan olarak e-postanız eklendiği ' yayımcı adları ', Publisher 'ın seçim için aşağı açılan listesinde görünür. '
 
-![Rol - select yayımcı Ata](./media/cloud-partner-portal-how-to-manage-users/assignselectpublisher.png)
+![Rol atama-yayımcı seçin](./media/cloud-partner-portal-how-to-manage-users/assignselectpublisher.png)
 
-Eklenmiş olan bir kullanıcıyı kaldırmak istiyorsanız, gerçekleştirmeniz gereken tek şey e-postasına ilişkin kullanıcılar sekmesinde arayın ve sonra da sağ tarafta Sil düğmesine basın.
+Eklenmiş bir kullanıcıyı kaldırmanız gerekiyorsa, tüm yapmanız gereken kullanıcılar sekmesinde e-postalarını arar ve ardından sağ taraftaki Sil düğmesine basın.

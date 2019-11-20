@@ -8,54 +8,54 @@ ms.topic: include
 ms.date: 02/20/2019
 ms.author: dobett
 ms.custom: include file
-ms.openlocfilehash: 3893b79cee96c3928897f64f3601ebe4c490ebdd
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 2498711a5b7e5bce29cd0054ba40257f8f996d43
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188479"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71266832"
 ---
-### <a name="enable-logging-with-diagnostics-settings"></a>Tanılama ayarları ile günlük kaydını etkinleştirme
+### <a name="enable-logging-with-diagnostics-settings"></a>Tanılama ayarlarıyla günlüğü etkinleştir
 
 [!INCLUDE [updated-for-az](./updated-for-az.md)]
 
 1. Oturum [Azure portalında](https://portal.azure.com) ve IOT hub'ınıza gidin.
 
-2. Seçin **tanılama ayarları**.
+2. **Tanılama ayarları**' nı seçin.
 
 3. Seçin **tanılamayı Aç**.
 
-   ![Tanılamayı açma](./media/iot-hub-diagnostics-settings/turnondiagnostics.png)
+   ![Tanılamayı aç](./media/iot-hub-diagnostics-settings/turnondiagnostics.png)
 
-4. Tanılama ayarlarını, bir ad verin.
+4. Tanılama ayarlarına bir ad verin.
 
-5. Seçmek istediğiniz günlükleri göndermek. Üç seçenekten herhangi bir birleşimini seçebilirsiniz:
+5. Günlükleri nereye göndermek istediğinizi seçin. Üç seçenekten herhangi bir birleşimini seçebilirsiniz:
 
    * Bir depolama hesabına arşivle
-   * Olay hub'ına Stream
-   * Log Analytics’e gönderme
+   * Bir olay hub'ına akış yap
+   * Log Analytics'e gönder
 
-6. İzlemek istediğiniz işlemleri seçin ve bu işlemler için günlüklerini etkinleştirin. Tanılama Ayarları'nın Raporlama yapabileceği işlemleri şunlardır:
+6. Hangi işlemleri izlemek istediğinizi seçin ve bu işlemler için günlükleri etkinleştirin. Tanılama ayarlarının rapor aldığı işlemler şunlardır:
 
    * Bağlantılar
    * Cihaz telemetrisi
    * Bulut-cihaz iletilerini
-   * Cihaz kimlik işlemleri
+   * Cihaz kimliği işlemleri
    * Dosya yüklemeleri
    * İleti yönlendirme
-   * Bulut-cihaz ikizi işlemleri
-   * CİHAZDAN buluta ikizi işlemleri
-   * İkiz işlemleri
+   * Buluttan cihaza ikizi işlemleri
+   * Cihazdan buluta ikizi işlemleri
+   * İkizi işlemleri
    * İş işlemleri
    * Doğrudan yöntemler  
    * Dağıtılmış izleme (Önizleme)
-   * Yapılandırmalar
+   * Yapılandırmaları
    * Cihaz akışları
    * Cihaz ölçümleri
 
 6. Yeni ayarları kaydedin. 
 
-PowerShell ile tanılama ayarları etkinleştirmek istiyorsanız, aşağıdaki kodu kullanın:
+Tanılama ayarlarını PowerShell ile açmak istiyorsanız aşağıdaki kodu kullanın:
 
 ```azurepowershell
 Connect-AzAccount
@@ -63,4 +63,4 @@ Select-AzSubscription -SubscriptionName <subscription that includes your IoT Hub
 Set-AzDiagnosticSetting -ResourceId <your resource Id> -ServiceBusRuleId <your service bus rule Id> -Enabled $true
 ```
 
-Yeni ayarları yaklaşık 10 dakika içinde etkinleşir. Sonra günlükleri yapılandırılmış arşivleme hedef üzerinde görünen **tanılama ayarları** dikey penceresi. Tanılama yapılandırma hakkında daha fazla bilgi için bkz. [toplamak ve azure kaynaklarınızdan günlük verilerini kullanma](../articles/azure-monitor/platform/diagnostic-logs-overview.md).
+Yeni ayarları yaklaşık 10 dakika içinde etkinleşir. Bundan sonra, Günlükler **Tanılama ayarları** dikey penceresinde yapılandırılan arşivleme hedefi ' nde görüntülenir. Tanılamayı yapılandırma hakkında daha fazla bilgi için bkz. [Azure kaynaklarınızdan günlük verilerini toplama ve](../articles/azure-monitor/platform/resource-logs-overview.md)kullanma.

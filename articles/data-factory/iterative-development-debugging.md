@@ -1,6 +1,6 @@
 ---
-title: Yinelemeli geliştirme ve Azure Data Factory'de hata ayıklama | Microsoft Docs
-description: Geliştirme ve Data Factory işlem hattı çalıştırmalarınızı Azure Portalı'nda hata ayıklama hakkında bilgi edinin.
+title: Azure Data Factory 'de yinelemeli geliştirme ve hata ayıklama
+description: Azure portal Data Factory işlem hatlarını nasıl geliştirebileceğinizi ve hata ayıklacağınızı öğrenin.
 ms.date: 09/26/2018
 ms.topic: conceptual
 ms.service: data-factory
@@ -8,67 +8,71 @@ services: data-factory
 documentationcenter: ''
 ms.workload: data-services
 ms.tgt_pltfrm: na
-author: gauravmalhot
-ms.author: gamal
+author: djpmsft
+ms.author: daperlov
 manager: craigg
-ms.openlocfilehash: a8028fdde93d06f7b25bf9bd8b4ed5a560a35f83
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 38e51e33ef487da8879132eb1ce9cf1e63a814e4
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60686316"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73672841"
 ---
-# <a name="iterative-development-and-debugging-with-azure-data-factory"></a>Yinelemeli geliştirme ve Azure Data Factory ile hata ayıklama
+# <a name="iterative-development-and-debugging-with-azure-data-factory"></a>Azure Data Factory ile yinelemeli geliştirme ve hata ayıklama
 
-Azure Data Factory, yinelemeli olarak geliştirme ve Data Factory işlem hatlarını hata ayıklama sağlar.
+Azure Data Factory, Data Factory işlem hatlarını tekrarlayarak geliştirmenize ve hata ayıklamanıza olanak tanır.
 
-Bir sekiz dakikalık bir giriş ve bu özelliği için şu videoyu izleyin:
+Bu özelliğin sekiz dakikalık bir girişi ve gösterimi için aşağıdaki videoyu izleyin:
 
 > [!VIDEO https://channel9.msdn.com/Shows/Azure-Friday/Iterative-development-and-debugging-with-Azure-Data-Factory/player]
 
-## <a name="iterative-debugging-features"></a>Yineleyici hata ayıklama özellikleri
-İşlem hatları oluşturun ve test çalıştırmaları kullanarak **hata ayıklama** tek satırlık bir kod yazmadan işlem hattı tuvalinde yeteneği.
+## <a name="iterative-debugging-features"></a>Yinelemeli hata ayıklama özellikleri
+Tek bir kod satırı yazmadan işlem hattı tuvalindeki **hata ayıklama** özelliğini kullanarak işlem hatları oluşturun ve test çalıştırmaları yapın.
 
-![İşlem hattı tuvalinde yeteneğini hata ayıklama](media/iterative-development-debugging/iterative-development-image1.png)
+![İşlem hattı tuvalindeki hata ayıklama özelliği](media/iterative-development-debugging/iterative-development-image1.png)
 
-Test sonuçlarını çalışan görünümü **çıkış** işlem hattı tuvalinde penceresi.
+İşlem hattı tuvalinin **Çıkış** penceresinde, test çalıştırmalarının sonuçlarını görüntüleyin.
 
-![İşlem hattı tuvalinde çıkış penceresi](media/iterative-development-debugging/iterative-development-image2.png)
+![İşlem hattı tuvalinin çıkış penceresi](media/iterative-development-debugging/iterative-development-image2.png)
 
-Bir test çalıştırması başarılı olduktan sonra daha fazla etkinlik ardışık düzeninize ekleme ve yinelemeli bir şekilde hata ayıklamaya devam et. Ayrıca **iptal** devam ederken testi.
+Bir test çalıştırması başarılı olduktan sonra, işlem hattınızda daha fazla etkinlik ekleyin ve hata ayıklamaya yinelemeli bir şekilde devam edin. Ayrıca, devam ederken bir test çalıştırmasını **iptal** edebilirsiniz.
 
-![Bir test çalıştırması iptal et](media/iterative-development-debugging/iterative-development-image3.png)
+![Test çalıştırmasını iptal et](media/iterative-development-debugging/iterative-development-image3.png)
 
-Test çalıştırmaları, seçtiğiniz önce yaptığınız değişiklikleri data factory'de yayımlamak zorunda değilsiniz **hata ayıklama**. Bu özellik değişiklikleri veri fabrikası iş akışı güncelleştirmeden önce beklendiği gibi çalıştığından emin olmak için istediğiniz senaryolarda yararlıdır.
+Test çalıştırmalarını gerçekleştirdiğinizde, **Hata Ayıkla**' yı seçmeden önce veri fabrikasında yaptığınız değişiklikleri yayımlamanız gerekmez. Bu özellik, Data Factory iş akışını güncelleştirmeden önce değişikliklerin beklendiği gibi çalıştığından emin olmak istediğiniz senaryolarda yararlıdır.
 
 > [!IMPORTANT]
-> Seçme **hata ayıklama** aslında işlem hattını çalıştırır. İşlem hattının kopyalama etkinliği içeriyorsa, bu nedenle, örneğin, test çalıştırması verileri kaynaktan hedefe kopyalar. Sonuç olarak, test klasörleri kopyalama etkinliklerinizi ve diğer etkinlikler ayıklanırken kullanmanızı öneririz. İşlem hattı hata ayıklaması sonra normal işlemlerde kullanmak istediğiniz gerçek klasörleri geçin.
+> **Hata ayıklamayı** seçtiğinizde işlem hattı çalıştırılır. Bu nedenle, örneğin, işlem hattı kopyalama etkinliği içeriyorsa, test çalıştırması verileri kaynaktan hedefe kopyalar. Sonuç olarak, hata ayıklama sırasında kopyalama etkinliklerinizde ve diğer etkinliklerinizde test klasörleri kullanmanızı öneririz. İşlem hattının hata ayıkladıktan sonra, normal işlemlerde kullanmak istediğiniz gerçek klasörlere geçin.
 
-## <a name="visualizing-debug-runs"></a>Görselleştirildiği hata ayıklama çalıştırır
+## <a name="visualizing-debug-runs"></a>Hata ayıklama çalıştırmaları görselleştiriliyor
 
-Veri fabrikanızın tek bir yerde sürmekte olan tüm hata ayıklama çalıştırmalarını görselleştirebilirsiniz. Seçin **görünümü hata ayıklama çalıştıran** sayfanın sağ üst köşesindeki. Bu özellik, burada alt işlem hatları için hata ayıklama çalıştırmalarını kapalı başlatılmadan ana işlem hatları sahip ve tek bir görünümde, tüm etkin hata ayıklama çalıştırmalarını görmek için istediğiniz senaryolarda yararlıdır.
+Veri fabrikanızın sürmekte olan tüm hata ayıklama çalıştırmalarını tek bir yerde görselleştirebilirsiniz. Sayfanın sağ üst köşesindeki **hata ayıklama çalıştırmalarını görüntüle** ' yi seçin. Bu özellik, alt işlem hatları için hata ayıklama çalıştırmalarının ana işlem hatlarından oluşan senaryolarda ve tüm etkin hata ayıklama çalıştırmalarını görmek için tek bir görünüm istediğinizde yararlıdır.
 
 ![Etkin hata ayıklama çalıştırmalarını görüntüle simgesini seçin](media/iterative-development-debugging/view-debug-runs-image1.png)
 
-![Etkin hata ayıklama çalıştırmalarını örnek listesi](media/iterative-development-debugging/view-debug-runs-image2.png)
+![Etkin hata ayıklama çalıştırmalarının örnek listesi](media/iterative-development-debugging/view-debug-runs-image2.png)
 
-## <a name="monitoring-debug-runs"></a>Hata ayıklama izleme çalıştırır
+Etkin veri akışı hata ayıklama oturumlarınız varsa, Bu oturumlar etkin hata ayıklama penceresinin alt kısmında görünür. Etkin bir veri akışı oturumu seçebilir ve ilgili kümeyi durdurabilirsiniz.
 
-İle başlatılan çalıştırmalar **hata ayıklama** özellik listesinde kullanılabilir olmayan **İzleyici** sekmesi. Bkz: ile tetiklenen çalışır yalnızca **şimdi Tetikle**, **zamanlama**, veya **atlayan pencere** içinde tetikler **İzleyici** sekmesi. İle başlatılan son test gördüğünüz **hata ayıklama** özelliği **çıkış** işlem hattı tuvalinde penceresi.
+![Etkin veri akışı hata ayıklama çalıştırmalarının örnek listesi](media/data-flow/dfsessions.png)
 
-## <a name="setting-breakpoints-for-debugging"></a>Hata ayıklama için kesme noktaları ayarlama
+## <a name="monitoring-debug-runs"></a>Hata ayıklama çalıştırmalarını izleme
 
-Data Factory işlem hattı tuvalinde belirli bir etkinliğe ulaşana kadar hata ayıklama da olanak tanır. Henüz bir kesme noktası kadar istediğiniz test ve etkinliği koyduğunuz **hata ayıklama**. Veri fabrikası, test yalnızca kesme noktası etkinlik kadar işlem hattı tuvalinde çalıştırmasını sağlar. Bu *hata ayıklamak kadar* özelliği, işlem hattının tamamı, ancak yalnızca bir alt işlem hattı içindeki etkinliklerin test istemediğiniz zaman yararlıdır.
+**Hata ayıklama** özelliğiyle başlatılan test çalıştırmaları, **izleyici** sekmesindeki listede kullanılamaz. Yalnızca **tetikleyici sekmesinde Tetikle** **,** **zamanlamaya**veya atlayan **pencere** tetikleyicilerle tetiklenen çalıştırmaları görebilirsiniz. İşlem hattı tuvalinin **Çıkış** penceresinde **hata ayıklama** özelliğiyle başlatılan son test çalıştırmasını görebilirsiniz.
 
-![İşlem hattı tuvalinde kesme noktaları](media/iterative-development-debugging/iterative-development-image4.png)
+## <a name="setting-breakpoints-for-debugging"></a>Hata ayıklama için kesme noktaları ayarlanıyor
 
-Bir kesme noktası ayarlamak için işlem hattı tuvalinde bir öğe seçin. A *hata ayıklamak kadar* olarak boş bir kırmızı halka öğe sağ üst köşesindeki seçeneği görüntülenir.
+Data Factory, işlem hattı tuvalindeki belirli bir etkinliğe ulaşana kadar hata ayıklamanıza da olanak tanır. Test etmek istediğiniz kadar etkinliğe bir kesme noktası koymanız ve **Hata Ayıkla**' yı seçmeniz yeterlidir. Data Factory, testin yalnızca işlem hattı tuvalindeki kesme noktası etkinliğine kadar çalışmasını sağlar. İşlem hattının tamamını test etmek istemediğiniz durumlarda bu *hata ayıklama* işlemi, yalnızca işlem hattının içindeki etkinliklerin bir alt kümesi yararlı olur.
 
-![Seçilen öğe üzerinde bir kesme noktası ayarlamadan önce](media/iterative-development-debugging/iterative-development-image5.png)
+![İşlem hattı tuvalindeki kesme noktaları](media/iterative-development-debugging/iterative-development-image4.png)
 
-Seçtikten sonra *hata ayıklamak kadar* seçeneği, kesme noktası etkin belirtmek için doldurulmuş kırmızı bir daire için değiştirir.
+Kesme noktası ayarlamak için işlem hattı tuvalinde bir öğe seçin. Öğenin sağ üst köşesinde boş bir kırmızı daire olarak bir *hata ayıklama* seçeneği belirir.
 
-![Seçilen öğe üzerinde bir kesme noktası ayarladıktan sonra](media/iterative-development-debugging/iterative-development-image6.png)
+![Seçili öğede bir kesme noktası ayarlamadan önce](media/iterative-development-debugging/iterative-development-image5.png)
+
+*Hata ayıklamayı Until* seçeneğini belirledikten sonra, kesme noktasının etkin olduğunu göstermek için dolgulu kırmızı bir daireye dönüşür.
+
+![Seçili öğe üzerinde bir kesme noktası ayarladıktan sonra](media/iterative-development-debugging/iterative-development-image6.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[Sürekli tümleştirme ve dağıtım Azure Data factory'de](continuous-integration-deployment.md)
+[Azure Data Factory 'de sürekli tümleştirme ve dağıtım](continuous-integration-deployment.md)

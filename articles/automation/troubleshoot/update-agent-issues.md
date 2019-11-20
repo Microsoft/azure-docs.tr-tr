@@ -1,6 +1,6 @@
 ---
-title: Güncelleştirme yönetimini Azure Windows Aracısı onay sonuçları anlama
-description: Güncelleştirme yönetimi Aracısı ile ilgili sorunları giderme hakkında bilgi edinin.
+title: Azure Güncelleştirme Yönetimi Windows Agent denetim sonuçlarını anlayın
+description: Güncelleştirme Yönetimi aracısında sorunları nasıl giderebileceğinizi öğrenin.
 services: automation
 author: bobbytreed
 ms.author: robreed
@@ -9,105 +9,107 @@ ms.topic: conceptual
 ms.service: automation
 ms.subservice: update-management
 manager: carmonm
-ms.openlocfilehash: 3555ec74b7e7c8a0f7606f24f8c6f2c4fe36b52d
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: d3099498c3abea428e04d94ca0fcd553e6a0fec6
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67477092"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73886409"
 ---
-# <a name="understand-the-windows-agent-check-results-in-update-management"></a>Windows Aracısı onay sonuçları güncelleştirme yönetimini anlama
+# <a name="understand-the-windows-agent-check-results-in-update-management"></a>Güncelleştirme Yönetimi Windows Agent denetim sonuçlarını anlayın
 
-Makinenizde görüntülenmiyorsa birçok nedeni olabilir **hazır** güncelleştirme yönetimi. Ortamında güncelleştirme yönetimi, arka plandaki sorunu belirlemek için bir karma çalışanı aracı durumunu kontrol edebilirsiniz. Bu makalede Azure portalı ve Azure olmayan makineler Azure makineler için sorun giderici çalıştırın anlatılmaktadır [çevrimdışı senaryosu](#troubleshoot-offline).
+Güncelleştirme Yönetimi ' de makinenizin **Ready** olarak görünmemesinin pek çok nedeni olabilir. Güncelleştirme Yönetimi, temeldeki sorunu tespit etmek için karma çalışan aracısının sistem durumunu kontrol edebilirsiniz. Bu makalede, [çevrimdışı senaryodaki](#troubleshoot-offline)Azure Portal ve Azure dışı makinelerden Azure makinelerinde sorun gidericinin nasıl çalıştırılacağı açıklanmaktadır.
 
-Aşağıdaki listede, bir makine olabilir üç hazır olma durumlarından şunlardır:
+Aşağıdaki liste, bir makinenin içinde bulunabileceği üç hazırlık durumlarından oluşan bir durum olabilir:
 
-* **Hazır** -Güncelleştirme Aracısı dağıtılır ve son 1 saatten önce görüldü.
-* **Bağlantısı kesilmiş** -Güncelleştirme Aracısı dağıtıldıktan ve üzerinde 1 saat önce son kez görüldü.
-* **Yapılandırılmamış** -Windows update Aracısı, bulunamadığında veya ekleme işlemi tamamlanmadı.
-
-> [!NOTE]
-> Hangi Azure portalında gösterilir ve makinenin geçerli durumu arasında bir gecikme olabilir.
-
-## <a name="start-the-troubleshooter"></a>Sorun Gidericisi
-
-Tıklayarak Azure makineler için **sorun giderme** altında bağlantı **Güncelleştirme Aracısı hazırlığı** portal başlatır sütununda **Güncelleştirme Aracısı sorunlarını giderme** sayfası. Azure olmayan makineler için bağlantıyı bu makaleye getirir. Bkz: [çevrimdışı yönergeleri](#troubleshoot-offline) Azure olmayan makine giderilir.
-
-![Sanal makine yönetim listesini güncelleştirme](../media/update-agent-issues/vm-list.png)
+* **Ready** -Güncelleştirme Aracısı dağıtıldı ve en son 1 saatten daha önce görüldü.
+* **Bağlantısı kesik** -Güncelleştirme Aracısı dağıtıldı ve en son 1 saat önce görüldü.
+* **Yapılandırılmadı** -Güncelleştirme Aracısı bulunamadı veya ekleme bitmedi.
 
 > [!NOTE]
-> Bir aracı durumunu denetlemek için VM çalıştırılması gerekir. VM çalışmıyorsa, bir **VM'yi başlatın** düğmesi görünür.
+> Azure portal gösterdiği ve makinenin geçerli durumu arasında hafif bir gecikme olabilir.
 
-Üzerinde **Güncelleştirme Aracısı sorunlarını giderme** sayfasında **denetimlerini çalıştırmak** giderici başlatmak için. Sorun giderici kullanan [komutu Çalıştır](../../virtual-machines/windows/run-command.md) Aracısı bağımlılıkları doğrulamak için makine üzerinde bir komut dosyasını çalıştırmak için. Sorun giderici tamamlandığında denetimleri sonucunu döndürür.
+## <a name="start-the-troubleshooter"></a>Sorun gidericiyi Başlat
 
-![Windows Update Aracısı sayfasında ilgili sorunları giderme](../media/update-agent-issues/troubleshoot-page.png)
+Azure makinelerinde, portalda **Güncelleştirme Aracısı hazırlığı** sütununda **sorun gider** bağlantısına tıkladığınızda **Güncelleştirme Aracısı sorunlarını gider** sayfası başlatılır. Azure dışı makineler için bağlantı sizi bu makaleye getirir. Azure olmayan bir makinede sorun gidermeye yönelik [çevrimdışı yönergelere](#troubleshoot-offline) bakın.
 
-Hazır olduğunuzda, sonuçları sayfasında gösterilir. Denetimleri aşağıdaki bölümlerde her iade nelerin dahil olduğunu gösterir.
+![Sanal makinelerin yönetim listesini güncelleştir](../media/update-agent-issues/vm-list.png)
 
-![Windows Update Aracısı denetimleri sorunlarını giderme](../media/update-agent-issues/update-agent-checks.png)
+> [!NOTE]
+> Bir aracının durumunu denetlemek için VM 'nin çalışıyor olması gerekir. VM çalışmıyorsa **VM 'Yi Başlat** düğmesi görüntülenir.
+
+**Güncelleştirme Aracısı sorunlarını giderme** sayfasında, sorun gidericiyi başlatmak Için **denetimleri Çalıştır** ' ı seçin. Sorun giderici, aracı bağımlılıklarını doğrulamak üzere makinede bir betik çalıştırmak için [Run komutunu](../../virtual-machines/windows/run-command.md) kullanır. Sorun giderici tamamlandığında, denetimlerin sonucunu döndürür.
+
+![Güncelleştirme Aracısı sayfasında sorun giderme](../media/update-agent-issues/troubleshoot-page.png)
+
+Sonuçlar, varsa sayfada gösterilir. Denetimler bölümünde her bir denetimin içerdiği özellikler gösterilir.
+
+![Güncelleştirme Aracısı denetimlerinde sorun giderme](../media/update-agent-issues/update-agent-checks.png)
 
 ## <a name="prerequisite-checks"></a>Önkoşul denetimleri
 
 ### <a name="operating-system"></a>İşletim sistemi
 
-İşletim sistemi denetimi, karma Runbook çalışanı bu işletim sistemlerinden birini çalışıp çalışmadığını doğrular:
+İşletim sistemi denetimi, karma Runbook Worker 'ın şu işletim sistemlerinden birini çalıştırıp çalıştırmadığını doğrular:
 
 |İşletim sistemi  |Notlar  |
 |---------|---------|
-|Windows Server 2008 R2 RTM, Windows Server 2008 | Destekler, yalnızca değerlendirme güncelleştirin.         |
-|Windows Server 2008 R2 SP1 ve üzeri |.NET framework 4.5.1 veya üzeri gereklidir. ([.NET Framework'ü indirin](/dotnet/framework/install/guide-for-developers))<br/> Windows PowerShell 4.0 veya üzeri gereklidir. ([Windows Management Framework 4.0 indirme](https://www.microsoft.com/download/details.aspx?id=40855))<br/> Windows PowerShell 5.1, daha fazla güvenilirlik için önerilir.  ([İndirme Windows Management Framework'ün 5.1](https://www.microsoft.com/download/details.aspx?id=54616))        |
+|Windows Server 2008 R2 RTM, Windows Server 2008 | Yalnızca güncelleştirme değerlendirmelerini destekler.         |
+|Windows Server 2008 R2 SP1 ve üzeri |.NET Framework 4.6.1 veya üzeri gereklidir. ([.NET Framework indirin](/dotnet/framework/install/guide-for-developers))<br/> Windows PowerShell 5,1 gereklidir.  ([Windows Management Framework 5,1 'Yi indirin](https://www.microsoft.com/download/details.aspx?id=54616))        |
 
-### <a name="net-451"></a>.NET 4.5.1
+### <a name="net-461"></a>.NET 4.6.1 +
 
-.NET Framework onay sistem en az sahip olduğunu doğrular [.NET Framework 4.5.1](https://www.microsoft.com/download/details.aspx?id=30653) yüklü.
+.NET Framework denetimi sistemin en az [.NET Framework 4.6.1](https://www.microsoft.com/en-us/download/details.aspx?id=49981) yüklü olduğunu doğrular.
 
-### <a name="wmf-51"></a>WMF 5.1
+### <a name="wmf-51"></a>WMF 5,1
 
-WMF denetim sistemi Windows Management Framework (WMF) gerekli sürümü olduğunu doğrular. [Windows Management Framework 4.0](https://www.microsoft.com/download/details.aspx?id=40855) desteklenen en erken sürümü. Yüklemenizi öneririz [Windows Management Framework 5.1](https://www.microsoft.com/download/details.aspx?id=54616) karma Runbook çalışanı güvenilirliğini artırmak için.
+WMF Check, sistemin gerekli Windows Management Framework (WMF) sürümüne sahip olduğunu doğrular- [Windows Management framework 5,1](https://www.microsoft.com/download/details.aspx?id=54616).
 
-### <a name="tls-12"></a>TLS 1.2
+### <a name="tls-12"></a>TLS 1,2
 
-Bu onay, TLS 1.2, iletişimi şifrelemek için kullanmakta olduğunuz olup olmadığını belirler. TLS 1.0, platform tarafından artık desteklenmiyor. İstemcileri güncelleştirme yönetimi ile iletişim kurmak için TLS 1.2 kullanmanızı öneririz.
+Bu denetim, iletişimlerinizi şifrelemek için TLS 1,2 kullanıp kullanmayacağınızı belirler. TLS 1,0 artık platform tarafından desteklenmiyor. İstemcilerin Güncelleştirme Yönetimi ile iletişim kurmak için TLS 1,2 kullanmasını öneririz.
 
-## <a name="connectivity-checks"></a>Bağlantısı denetimleri
+## <a name="connectivity-checks"></a>Bağlantı denetimleri
 
 ### <a name="registration-endpoint"></a>Kayıt uç noktası
 
-Bu onay, aracıyı düzgün bir şekilde Aracısı ile iletişim kurup kuramadığını belirler.
+Bu denetim aracının Aracı hizmetiyle düzgün şekilde iletişim kurup kuramayacağını belirler.
 
-Proxy ve güvenlik duvarı yapılandırmaları karma Runbook çalışanı aracı kayıt uç noktası ile iletişim kurmasına izin vermeniz gerekir. Adresleri ve bağlantı noktalarını açmak için bir listesi için bkz. [ağ karma çalışanları için planlama](../automation-hybrid-runbook-worker.md#network-planning).
+Proxy ve güvenlik duvarı yapılandırmalarının, karma Runbook Worker aracısının kayıt uç noktasıyla iletişim kurmasına izin verilmelidir. Açılacak adreslerin ve bağlantı noktalarının listesi için bkz. [karma çalışanlar Için ağ planlaması](../automation-hybrid-runbook-worker.md#network-planning).
 
-### <a name="operations-endpoint"></a>İşlemleri uç noktası
+### <a name="operations-endpoint"></a>İşlemler uç noktası
 
-Bu onay, aracıyı düzgün bir şekilde iş çalışma zamanı veri hizmeti ile iletişim kurup kuramadığını belirler.
+Bu denetim, aracının Iş çalışma zamanı veri hizmetiyle düzgün şekilde iletişim kurup kuramayacağını belirler.
 
-Proxy ve güvenlik duvarı yapılandırmaları karma Runbook çalışanı aracı işi çalışma zamanı veri hizmetiyle iletişim kurmasına izin vermeniz gerekir. Adresleri ve bağlantı noktalarını açmak için bir listesi için bkz. [ağ karma çalışanları için planlama](../automation-hybrid-runbook-worker.md#network-planning).
+Proxy ve güvenlik duvarı yapılandırmalarının, karma Runbook Worker aracısının Iş çalışma zamanı veri hizmetiyle iletişim kurmasına izin verilmelidir. Açılacak adreslerin ve bağlantı noktalarının listesi için bkz. [karma çalışanlar Için ağ planlaması](../automation-hybrid-runbook-worker.md#network-planning).
 
-## <a name="vm-service-health-checks"></a>VM hizmet sistem durumu denetimleri
+## <a name="vm-service-health-checks"></a>VM hizmeti durum denetimleri
 
-### <a name="monitoring-agent-service-status"></a>İzleme Aracısı hizmeti durumu
+### <a name="monitoring-agent-service-status"></a>İzleme Aracısı hizmet durumu
 
-Bu onay belirler olmadığını `HealthService`, Microsoft Monitoring Agent, makinede çalışıyor.
+Bu denetim makinede `HealthService`, Microsoft Monitoring Agent çalışıp çalışmadığını belirler.
 
-Hizmet sorunlarını giderme hakkında daha fazla bilgi için bkz: [Microsoft Monitoring Agent çalışmıyor](hybrid-runbook-worker.md#mma-not-running).
+Hizmette sorun giderme hakkında daha fazla bilgi edinmek için [Microsoft Monitoring Agent çalışmıyor](hybrid-runbook-worker.md#mma-not-running)' a bakın.
 
-Microsoft Monitoring Agent'ı yeniden yüklemek için bkz: [yüklemek ve Microsoft Monitoring Agent'ı yapılandırma](../../azure-monitor/learn/quick-collect-windows-computer.md#install-the-agent-for-windows).
+Microsoft Monitoring Agent yeniden yüklemek için, bkz. [Microsoft Monitoring Agent yükleme ve yapılandırma](../../azure-monitor/learn/quick-collect-windows-computer.md#install-the-agent-for-windows).
 
-### <a name="monitoring-agent-service-events"></a>İzleme Aracısı hizmeti olayları
+### <a name="monitoring-agent-service-events"></a>Aracı hizmeti olaylarını izleme
 
-Bu onay herhangi gerekmediğini belirleyen `4502` olaylar son 24 saat içindeki makine üzerinde Azure Operations Manager günlüğünde görünür.
+Bu denetim, son 24 saat içinde makinede bulunan Azure Operations Manager günlüğünde herhangi bir `4502` olayının görünüp görünmeyeceğini belirler.
 
-Bu olay hakkında daha fazla bilgi için bkz: [sorun giderme kılavuzu](hybrid-runbook-worker.md#event-4502) bu olay için.
+Bu olay hakkında daha fazla bilgi edinmek için bu olayla ilgili [sorun giderme kılavuzuna](hybrid-runbook-worker.md#event-4502) bakın.
 
 ## <a name="access-permissions-checks"></a>Erişim izinleri denetimleri
 
-### <a name="machinekeys-folder-access"></a>MachineKeys klasör erişimi
+### <a name="machinekeys-folder-access"></a>MachineKeys klasörü erişimi
 
-Şifreleme klasör erişim denetimi, yerel sistem hesabını C:\ProgramData\Microsoft\Crypto\RSA erişimi olup olmadığını belirler.
+Şifreleme klasörü erişim denetimi, yerel sistem hesabının C:\programdata\microsoft\crypto\rsaa erişimi olup olmadığını belirler.
 
-## <a name="troubleshoot-offline"></a>Çevrimdışı sorunlarını giderme
+## <a name="troubleshoot-offline"></a>Çevrimdışı sorun giderme
 
-Betiği yerel olarak çalıştırarak karma Runbook çalışanı üzerinde çevrimdışı sorun gidericisini kullanabilirsiniz. Betik alabilirsiniz [sorun giderme WindowsUpdateAgentRegistration](https://www.powershellgallery.com/packages/Troubleshoot-WindowsUpdateAgentRegistration), PowerShell Galerisi'ndeki. Bu betiğin çıkışı aşağıdaki örnekteki gibi görünür:
+Betiği yerel olarak çalıştırarak karma Runbook Worker 'daki sorun gidericiyi çevrimdışı olarak kullanabilirsiniz. PowerShell Galerisi, [sorun giderme-WindowsUpdateAgentRegistration](https://www.powershellgallery.com/packages/Troubleshoot-WindowsUpdateAgentRegistration)komut dosyasına ulaşabilirsiniz. Betiği çalıştırmak için WMF 4,0 veya sonraki bir sürümü yüklemiş olmanız gerekir. PowerShell 'in en son sürümünü indirmek için bkz. [PowerShell 'in çeşitli sürümlerini yükleme](https://docs.microsoft.com/powershell/scripting/install/installing-powershell).
+
+Bu Betiğin çıktısı aşağıdaki örneğe benzer şekilde görünür:
 
 ```output
 RuleId                      : OperatingSystemCheck
@@ -144,7 +146,7 @@ RuleId                      : AutomationAgentServiceConnectivityCheck1
 RuleGroupId                 : connectivity
 RuleName                    : Registration endpoint
 RuleGroupName               : connectivity
-RuleDescription             : 
+RuleDescription             :
 CheckResult                 : Failed
 CheckResultMessage          : Unable to find Workspace registration information in registry
 CheckResultMessageId        : AutomationAgentServiceConnectivityCheck1.Failed.NoRegistrationFound
@@ -203,5 +205,5 @@ CheckResultMessageArguments : {}
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Karma Runbook çalışanlarıyla daha fazla sorunlarını gidermek için bkz: [sorun giderme karma Runbook çalışanları](hybrid-runbook-worker.md).
+Karma runbook çalışanlarınız hakkında daha fazla sorunu gidermek için bkz. [karma runbook çalışanları sorunlarını giderme](hybrid-runbook-worker.md).
 

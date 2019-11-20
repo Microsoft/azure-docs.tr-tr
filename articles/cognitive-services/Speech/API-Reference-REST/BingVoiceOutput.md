@@ -1,84 +1,84 @@
 ---
-title: Metin okuma API'si, Microsoft konuşma hizmeti | Microsoft Docs
+title: Microsoft konuşma hizmeti 'nin Metin Okuma API'si | Microsoft Docs
 titlesuffix: Azure Cognitive Services
-description: Seslerle ve dilleri çeşitli gerçek zamanlı metinden konuşmaya dönüştürme sağlamak için metin okuma API'si kullanma
+description: Çeşitli seslerle ve dillerde gerçek zamanlı metin okuma dönüştürmesi sağlamak için metin okuma API 'sini kullanın
 services: cognitive-services
-author: priyaravi20
-manager: yanbo
+author: nitinme
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-speech
 ms.topic: article
 ms.date: 09/18/2018
-ms.author: priyar
+ms.author: nitinme
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: a046bec5d81d828d88716d31c84e9cbcdcea1a08
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: ee9b0b47fb88cba948bc06db6eb83fe9c076fe40
+ms.sourcegitcommit: fbea2708aab06c19524583f7fbdf35e73274f657
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60515434"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70966866"
 ---
-# <a name="bing-text-to-speech-api"></a>Bing metin okuma API'si
+# <a name="bing-text-to-speech-api"></a>Bing metin okuma API 'SI
 
 [!INCLUDE [Deprecation note](../../../../includes/cognitive-services-bing-speech-api-deprecation-note.md)]
 
 ## <a name="Introduction"></a>Giriş
 
-Bing ile metin okuma API'si, uygulamanızın nerede metin anında İnsan görünen konuşmaya oluşturulan ve bir ses dosyası olarak döndürülen bulut sunucusu, HTTP istekleri gönderebilirsiniz. Bu API, gerçek zamanlı metinden konuşmaya dönüştürme farklı sesler ve dilleri çeşitli sağlamak için birçok farklı bağlamda kullanılabilir.
+Bing metin okuma API 'SI sayesinde, uygulamanız bir bulut sunucusuna HTTP istekleri gönderebilir, burada metin, insan sesi taşıyan konuşmaya anında birleştirilir ve bir ses dosyası olarak döndürülür. Bu API, çeşitli farklı seslerde ve dillerde gerçek zamanlı metinden konuşmaya dönüştürme sağlamak için birçok farklı bağlamda kullanılabilir.
 
-## <a name="VoiceSynReq"></a>Sesli sentezi isteği
+## <a name="VoiceSynReq"></a>Ses sensimi isteği
 
 ### <a name="Subscription"></a>Yetkilendirme belirteci
 
-Her ses sentezi isteği bir JSON Web Token (JWT) erişim belirteci gerektirir. JWT erişim belirteci aracılığıyla konuşma istek üst bilgisinde geçirilir. Belirteç, 10 dakikalık bir sona erme süresi vardır. Abone olma ve geçerli JWT erişim belirteçlerini almak için kullanılan API anahtarlarını alma hakkında daha fazla bilgi için bkz. [Bilişsel hizmetler abonelik](https://azure.microsoft.com/try/cognitive-services/).
+Her ses sensimi isteği bir JSON Web Token (JWT) erişim belirteci gerektirir. JWT erişim belirteci, konuşma isteği üst bilgisinde geçirilir. Belirtecin süre sonu 10 dakikadır. Geçerli JWT erişim belirteçlerini almak için kullanılan API anahtarlarını abone etme ve alma hakkında daha fazla bilgi için bkz. bilişsel [Hizmetler aboneliği](https://azure.microsoft.com/try/cognitive-services/).
 
-API anahtarı belirteç hizmetine geçirilir. Örneğin:
+API anahtarı, belirteç hizmetine geçirilir. Örneğin:
 
 ```HTTP
 POST https://api.cognitive.microsoft.com/sts/v1.0/issueToken
 Content-Length: 0
 ```
 
-Belirteç erişimi için gereken üst bilgi bilgileri aşağıdaki gibidir.
+Belirteç erişimi için gerekli üst bilgi bilgileri aşağıdaki gibidir.
 
-Ad| Biçimi | Açıklama
+Name| Biçimi | Açıklama
 ----|----|----
 Ocp-Apim-Subscription-Key | ASCII | Abonelik anahtarınız
 
-JWT belirteci belirteç hizmetine döndürür `text/plain`. Daha sonra JWT olarak geçirilen bir `Base64 access_token` dizesiyle önekli bir yetkilendirme üst bilgisi olarak konuşma tanıma uç noktasına `Bearer`. Örneğin:
+Belirteç hizmeti, JWT erişim belirtecini olarak `text/plain`döndürür. Ardından JWT, konuşma uç noktasına, `Base64 access_token` dize `Bearer`önekli bir yetkilendirme üstbilgisi olarak geçirilir. Örneğin:
 
 `Authorization: Bearer [Base64 access_token]`
 
-İstemciler aşağıdaki uç noktayı metin okuma hizmetine erişmek için kullanmanız gerekir:
+İstemcilerin, metinden konuşmaya hizmetine erişmek için aşağıdaki uç noktayı kullanması gerekir:
 
 `https://speech.platform.bing.com/synthesize`
 
 >[!NOTE]
->Bir erişim belirteci daha önce açıklandığı gibi abonelik anahtarınızla edindiğiniz kadar bu bağlantı oluşturur. bir `403 Forbidden` yanıtı hatası.
+>Daha önce açıklandığı gibi abonelik anahtarınızı içeren bir erişim belirteci edinene kadar bu bağlantı bir `403 Forbidden` yanıt hatası oluşturur.
 
 ### <a name="Http"></a>HTTP üstbilgileri
 
-Aşağıdaki tablo, sesli sentezi istekleri için kullanılan HTTP üst bilgilerini gösterir.
+Aşağıdaki tabloda, ses birleştirme istekleri için kullanılan HTTP üstbilgileri gösterilmektedir.
 
-Üstbilgi |Değer |Açıklamalar
+Üstbilgi |Value |Açıklamalar
 ----|----|----
-Content-Type | Uygulama/ssml'yi + xml şeklindedir | Giriş içerik türü.
-X-Microsoft-OutputFormat | **1.** ssml'yi-16 khz-16 bit-mono-tts <br> **2.** ham-16 khz-16 bit-mono-pcm <br>**3.** ses-16 khz-16 KB/sn-mono-siren <br> **4.** RIFF-16 khz-16 KB/sn-mono-siren <br> **5.** RIFF-16 khz-16 bit-mono-pcm <br> **6.** ses-16 khz-128kbitrate-mono-mp3 <br> **7.** ses-16 khz-64kbitrate-mono-mp3 <br> **8.** ses-16 khz-32kbitrate-mono-mp3 | Çıkış ses biçimi.
-X-Search-AppId | Bir GUID (onaltılık yalnızca, çizgi içermeyen) | İstemci uygulaması benzersiz olarak tanımlayan bir kimliği. Bu uygulamalar için depolama kimliği olabilir. Bir kullanılabilir durumda değilse, bir uygulama için oluşturulan kullanıcı kimliği olabilir.
-X-Search-ClientID | Bir GUID (onaltılık yalnızca, çizgi içermeyen) | Her yükleme için uygulama örneğini benzersiz şekilde tanımlayan bir kimliği.
-User-Agent | Uygulama adı | Uygulama adı gereklidir ve 255'den az karakter olmalıdır.
-Authorization | Yetkilendirme belirteci |  Bkz: <a href="#Subscription">yetkilendirme belirteci</a> bölümü.
+Content-Type | Application/SSML + XML | Giriş içerik türü.
+X-Microsoft-OutputFormat | **1.** SSML-16khz-16bit-mono-TTS <br> **2.** RAW-16khz-16bit-mono-PCM <br>**3.** ses-16khz-16kbps-mono-SIREN <br> **4.** Riff-16khz-16kbps-mono-SIREN <br> **5.** Riff-16khz-16bit-mono-PCM <br> **6.** ses-16khz-128kbit hızı-mono-MP3 <br> **7.** ses-16khz-64kbit hızı-mono-MP3 <br> **8.** ses-16khz-32K bit hızı-mono-MP3 | Çıkış ses biçimi.
+X-Search-AppID | Bir GUID (yalnızca onaltılı, tire yok) | İstemci uygulamasını benzersiz bir şekilde tanımlayan bir KIMLIK. Bu, uygulamalar için mağaza KIMLIĞI olabilir. Bir tane yoksa, KIMLIK, bir uygulama için Kullanıcı tarafından oluşturulmuş olabilir.
+X-Search-ClientID | Bir GUID (yalnızca onaltılı, tire yok) | Her yükleme için bir uygulama örneğini benzersiz bir şekilde tanımlayan bir KIMLIK.
+User-Agent | Uygulama adı | Uygulama adı gereklidir ve 255 karakterden kısa olmalıdır.
+Authorization | Yetkilendirme belirteci |  <a href="#Subscription">Yetkilendirme belirteci</a> bölümüne bakın.
 
 ### <a name="InputParam"></a>Giriş parametreleri
 
-Bing metin okuma API'si isteklerini HTTP POST çağrıları kullanılarak yapılır. Üstbilgileri, önceki bölümde belirtilir. Gövde sentezlenecek metni temsil eden konuşma sentezi işaretleme dili (SSML'yi) giriş içerir. Konuşma gibi dil özelliklerini ve cinsiyet konuşmacının denetlemek için kullanılan biçimlendirme açıklaması için bkz: [SSML'yi W3C belirtimi](https://www.w3.org/TR/speech-synthesis/).
+Bing metin okuma API 'sine yapılan istekler HTTP POST çağrıları kullanılarak yapılır. Üst bilgiler önceki bölümde belirtilmiştir. Gövde, sentezlenen metni temsil eden konuşma birleştirme biçimlendirme dili (SSML) girişi içerir. Konuşmacının dili ve cinsiyeti gibi konuşma yönlerini denetlemek için kullanılan biçimlendirmenin açıklaması için bkz. [SSML W3C belirtimi](https://www.w3.org/TR/speech-synthesis/).
 
 >[!NOTE]
->SSML'yi giriş, desteklenen en büyük boyutunu, tüm etiketleri dahil olmak üzere, 1024 karakterdir.
+>Desteklenen SSML girişinin en büyük boyutu, tüm Etiketler dahil olmak üzere 1.024 karakterdir.
 
-###  <a name="SampleVoiceOR"></a>Örnek: ses çıkışı isteği
+###  <a name="SampleVoiceOR"></a>Örnek: sesli çıktı isteği
 
-Ses çıkış isteğinin bir örneği aşağıdaki gibidir:
+Sesli çıkış isteğine bir örnek aşağıdaki gibidir:
 
 ```HTTP
 POST /synthesize
@@ -94,13 +94,13 @@ Authorization: Bearer [Base64 access_token]
 <speak version='1.0' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female' name='Microsoft Server Speech Text to Speech Voice (en-US, ZiraRUS)'>Microsoft Bing Voice Output API</voice></speak>
 ```
 
-## <a name="VoiceOutResponse"></a>Ses çıkış yanıt
+## <a name="VoiceOutResponse"></a>Sesli çıkış yanıtı
 
-Bing metin okuma API'si, HTTP POST ses istemciye geri göndermek için kullanır. API yanıtı ses akışı ve codec bileşeni içerir ve istenen çıktı biçimi eşleşir. Belirli bir istek için döndürülen ses 15 saniyeyi aşmamalıdır.
+Bing metin okuma API 'SI, istemciye geri ses göndermek için HTTP POST kullanır. API yanıtı, ses akışını ve codec 'i içerir ve istenen çıkış biçimiyle eşleşir. Belirli bir istek için döndürülen ses 15 saniyeyi aşmamalıdır.
 
-### <a name="SuccessfulRecResponse"></a>Örnek: başarılı sentezi yanıt
+### <a name="SuccessfulRecResponse"></a>Örnek: başarılı sensıs yanıtı
 
-Aşağıdaki kod, bir JSON yanıtı başarılı ses sentezi isteğine örneğidir. Açıklamalar ve kodun biçimi yalnızca bu örnek amaçlıdır ve gerçek yanıttan göz ardı edilir.
+Aşağıdaki kod, başarılı bir Voice sensıs isteğine yönelik JSON yanıtının bir örneğidir. Kodun açıklamaları ve biçimlendirmesi yalnızca bu örneğin amaçlıdır ve gerçek yanıttan çıkarılır.
 
 ```HTTP
 HTTP/1.1 200 OK
@@ -110,9 +110,9 @@ Content-Type: audio/x-wav
 Response audio payload
 ```
 
-### <a name="RecFailure"></a>Örnek: Birleştirici hatası
+### <a name="RecFailure"></a>Örnek: sensıs hatası
 
-Aşağıdaki kod örneği bir ses birleştirme sorgu hatası için bir JSON yanıtı gösterilir:
+Aşağıdaki örnek kodda bir Voice-sensıs sorgu hatasına yönelik JSON yanıtı gösterilmektedir:
 
 ```HTTP
 HTTP/1.1 400 XML parser error
@@ -124,12 +124,12 @@ Content-Length: 0
 
 Hata | Açıklama
 ----|----
-HTTP/400 Hatalı istek | Gerekli parametre eksik, boş veya null olduğu veya gerekli veya isteğe bağlı parametresi için geçirilen değer geçersiz. "Geçersiz" yanıt almak için bir neden, izin verilen uzunluktan daha uzun bir dize değeri geçiyor. Sorunlu parametresi kısa bir açıklamasını dahil edilir.
-HTTP/401 Yetkisiz | İstek yetkili değil.
-HTTP/413 RequestEntityTooLarge  | SSML'yi giriş, nelerin desteklendiği daha büyüktür.
-HTTP/502 BadGateway | Ağ ile ilgili bir sorun veya bir sunucu tarafı sorun yoktur.
+HTTP/400 Hatalı Istek | Gerekli bir parametre eksik, boş veya null ya da gerekli veya isteğe bağlı bir parametreye geçirilen değer geçersiz. "Geçersiz" yanıtını almak için bir neden, izin verilen uzunluktan daha uzun bir dize değeri geçirmektir. Sorunlu parametrenin kısa bir açıklaması dahildir.
+HTTP/401 yetkilendirilmemiş | İstek yetkili değil.
+HTTP/413 RequestEntityTooLarge  | SSML girişi desteklenenden daha büyük.
+HTTP/502 BadGateway | Ağla ilgili bir sorun veya sunucu tarafı sorun vardır.
 
-Bir hata yanıtı örneği aşağıdaki gibidir:
+Bir hata yanıtına örnek olarak aşağıdaki gibidir:
 
 ```HTTP
 HTTP/1.0 400 Bad Request
@@ -139,9 +139,9 @@ Content-Type: text/plain; charset=UTF-8
 Voice name not supported
 ```
 
-## <a name="ChangeSSML"></a>Ses çıkış SSML'yi aracılığıyla değiştirme
+## <a name="ChangeSSML"></a>SSML aracılığıyla ses çıkışını değiştirme
 
-Microsoft metin okuma API'si destekler SSML'yi 1.0 W3C tanımlandığı şekilde [konuşma sentezi işaretleme dili (SSML'yi) sürüm 1.0](https://www.w3.org/TR/2009/REC-speech-synthesis-20090303/). Bu bölüm değiştirme örnekleri oluşturulan ses çıkış konuşma gibi özelliklerini oranı, Söyleniş SSML'yi etiketleri kullanarak vb. belirli gösterir.
+Microsoft metin okuma API 'SI [, W3C konuşma birleştirme biçimlendirme dili (SSML) sürüm 1,0](https://www.w3.org/TR/2009/REC-speech-synthesis-20090303/)' de tanımlandığı şekilde ssml 1,0 ' i destekler. Bu bölümde, SSML etiketlerini kullanarak, üretilen sesli çıkışın belirli özelliklerini, konuşma oranı, telaffuz gibi çeşitli özellikleri değiştirme örnekleri gösterilmektedir.
 
 1. Kesme ekleme
 
@@ -173,26 +173,26 @@ Microsoft metin okuma API'si destekler SSML'yi 1.0 W3C tanımlandığı şekilde
    <speak version='1.0' xmlns="https://www.w3.org/2001/10/synthesis" xml:lang='en-US'><voice  name='Microsoft Server Speech Text to Speech Voice (en-US, JessaRUS)'>Welcome to use <prosody pitch="high">Microsoft Cognitive Services Text-to-Speech API.</prosody></voice> </speak>
    ```
 
-6. Değişiklik prosody dağılımı
+6. Prosody dağılımını değiştirme
 
    ```
    <speak version='1.0' xmlns="https://www.w3.org/2001/10/synthesis" xml:lang='en-US'><voice  name='Microsoft Server Speech Text to Speech Voice (en-US, JessaRUS)'><prosody contour="(80%,+20%) (90%,+30%)" >Good morning.</prosody></voice> </speak>
    ```
 
 > [!NOTE]
-> Not ses verilerini şu biçimde Dosyalanan 8 k ya da 16 k wav gerekir: **CRC kod** (CRC-32): 4 bayt (DWORD), geçerli aralık 0x00000000 ~ 0xFFFFFFFF; **Ses biçimi bayrağı**: 4 bayt (DWORD), geçerli aralık 0x00000000 ~ 0xFFFFFFFF; **Örnek sayısı**: 4 bayt (DWORD), geçerli aralık 0x00000000 ~ 0x7FFFFFFF; **İkili Gövde boyutu**: 4 bayt (DWORD), geçerli aralık 0x00000000 ~ 0x7FFFFFFF; **İkili gövde**: n baytı.
+> Ses verilerinin aşağıdaki biçimde dosyalanmış 8k veya 16k WAV olması gerektiğini aklınızda olun: **CRC kodu** (CRC-32): geçerli aralıkta 4 bayt (DWORD) 0x00000000 ~ 0xFFFFFFFF; **Ses biçimi bayrağı**: geçerli aralıkta 4 bayt (DWORD) 0x00000000 ~ 0xFFFFFFFF; **Örnek sayısı**: Geçerli Aralık 4 bayt (DWORD) 0x00000000 ~ 0x7; **İkili gövdenin boyutu**: Geçerli Aralık 4 bayt (DWORD) 0x00000000 ~ 0x7; **İkili gövde**: n bayt.
 
 ## <a name="SampleApp"></a>Örnek uygulama
 
-Uygulama ayrıntıları için bkz. [Visual C# .NET metin okuma örnek uygulaması](https://github.com/Microsoft/Cognitive-Speech-TTS/blob/master/Samples-Http/CSharp/TTSProgram.cs).
+Uygulama ayrıntıları için bkz. [Visual C#.net metin okuma örnek uygulaması](https://github.com/Microsoft/Cognitive-Speech-TTS/blob/master/Samples-Http/CSharp/TTSProgram.cs).
 
-## <a name="SupLocales"></a>Desteklenen yerel ayarlar ve ses tipleri
+## <a name="SupLocales"></a>Desteklenen yerel ayarlar ve ses yazı tipleri
 
-Aşağıdaki tabloda bazı desteklenen yerel ayarlar ve ilgili ses tipi olarak tanımlar.
+Aşağıdaki tabloda, desteklenen bazı yerel ayarlar ve ilgili ses yazı tiplerinin bazıları tanımlanmaktadır.
 
 Yerel Ayar | Cinsiyet | Hizmet adı eşleme
 ---------|--------|------------
-ar-Örneğin * | Kadın | "Microsoft sunucu konuşma Sesli konuşmayı metne (ar-Örneğin, Hoda)"
+AR-örn. | Kadın | "Microsoft sunucu konuşma Sesli konuşmayı metne (ar-Örneğin, Hoda)"
 ar-SA | Erkek | "Microsoft Server Konuşma metin konuşma ses (ar-SA, Naayf)"
 BG-BG | Erkek | "Microsoft Server Konuşma metin okuma ses (bg-BG, çalışan Ivan)"
 CA-ES | Kadın | "Microsoft Server Konuşma metin okuma ses (ca-ES, HerenaRUS)"
@@ -200,11 +200,11 @@ cs-CZ | Erkek | "Microsoft sunucu konuşma Sesli konuşmayı metne (cs-CZ, Jakub
 v-DK | Kadın | "Microsoft Server Konuşma metin konuşma ses (v-DK, HelleRUS)"
 de-AT | Erkek | "Microsoft Server Konuşma metin konuşma ses (de-AT, Michael)"
 de-CH | Erkek | "Microsoft Server Konuşma metin konuşma ses (de-CH, Karsten)"
-de-DE | Kadın | "Microsoft Server Konuşma metin konuşma ses (de-DE, Hedda)"
+de-DE | Kadın | "Microsoft Server konuşma Metin Okuma sesi (de-DE, Hedda)"
 de-DE | Kadın | "Microsoft Server Konuşma metin konuşma ses (de-DE, HeddaRUS)"
-de-DE | Erkek | "Microsoft Server Konuşma metin konuşma ses (de-DE, Stefan, Apollo)"
+de-DE | Erkek | "Microsoft Server konuşma Metin Okuma sesi (de-DE, Stefan, Apollo)"
 el-GR | Erkek | "Microsoft Server Konuşma metin konuşma ses (el-GR, Stefanos)"
-tr-AU | Kadın | "Microsoft Server Konuşma metin konuşma ses (en-AU, Catherine)"
+tr-AU | Kadın | "Microsoft Server konuşma Metin Okuma sesi (en-AU, Catherine)"
 tr-AU | Kadın | "Microsoft Server Konuşma metin konuşma ses (en-AU, HayleyRUS)"
 CA tr | Kadın | "Microsoft Server Konuşma metin konuşma ses (tr-CA, Gamze)"
 CA tr | Kadın | "Microsoft Server Konuşma metin konuşma ses (tr-CA, HeatherRUS)"
@@ -271,15 +271,15 @@ zh-TW | Kadın | "Microsoft Server Konuşma metin konuşma ses (zh-TW Yating, Ap
 zh-TW | Kadın | "Microsoft Server Konuşma metin konuşma ses (zh-TW, HanHanRUS)"
 zh-TW | Erkek | "Microsoft Server Konuşma metin konuşma ses (zh-TW Zhiwei, Apollo)"
 
- \* ar-ÖRN Modern standart Arapça (MSA) destekler.
+ \* AR-ÖRNEĞIN modern Standart Arapça (MSA) desteği.
 
 > [!NOTE]
-> Unutmayın önceki hizmet adları **Microsoft sunucu konuşma Sesli konuşmayı metne (cs-CZ, Vit)** ve **konuşma ses (tr-IE, Shaun) için Microsoft sunucu konuşma metin** 3/31/2018 de kullanımdan Bing konuşma API'SİNİN özellikleri en iyi duruma getirme sırası. Lütfen kodunuzu güncelleştirilmiş adları ile güncelleştirin.
+> Bing Konuşma API'si 'un en iyi hale getirilmesini sağlamak için, **Microsoft Server konuşma metin okuma seslerinin (CS-CZ, Vit)** ve **microsoft Server konuşma metin okuma Voice (en-IE, Shaun)** 3/31/2018 sonrasında kullanım dışı olacağını unutmayın. Yetenek. Lütfen kodunuzu güncelleştirilmiş adlarla güncelleştirin.
 
-## <a name="TrouNSupport"></a>Sorun giderme ve Destek
+## <a name="TrouNSupport"></a>Sorun giderme ve destek
 
-Tüm soruları ve sorunları gidermek üzere [Bing konuşma hizmeti](https://social.msdn.microsoft.com/Forums/en-US/home?forum=SpeechService) MSDN Forumu. Tüm ayrıntılar gibi şunlardır:
+Tüm soruları ve sorunları [Bing Konuşma Service](https://social.msdn.microsoft.com/Forums/en-US/home?forum=SpeechService) MSDN forumuna gönderin. Tüm ayrıntıları ekleyin, örneğin:
 
-* Tam istek dize örneği.
-* Uygunsa, tam çıktısını içeren bir başarısız istek kimliklerini oturum açın.
-* Başarısız olan istek yüzdesi.
+* Tam istek dizesine bir örnek.
+* Uygulanabiliyorsa, günlük kimliklerini içeren bir başarısız isteğin tam çıktısı.
+* Başarısız olan isteklerin yüzdesi.

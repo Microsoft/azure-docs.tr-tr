@@ -1,52 +1,54 @@
 ---
-title: Azure Blob Depolama içeriği için tam metin arama - Azure Search dizini
-description: Azure Blob Depolama dizin ve Azure Search belgelerden metni Ayıkla hakkında bilgi edinin.
-ms.date: 05/02/2019
+title: Azure Blob depolama içeriğini arama
+titleSuffix: Azure Cognitive Search
+description: Azure Blob depolama alanını dizinlemeyi ve Azure Bilişsel Arama ile belgelerden metin ayıklamayı öğrenin.
+manager: nitinme
 author: mgottein
-manager: cgronlun
 ms.author: magottei
-services: search
-ms.service: search
 ms.devlang: rest-api
+ms.service: cognitive-search
 ms.topic: conceptual
-ms.custom: seodec2018
-ms.openlocfilehash: 832be20f78d1e88a3bb6d1c25c7aaf5d7354e857
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/04/2019
+ms.openlocfilehash: 4f662df6692e03cf3eb948b0d8e2ae51002e815d
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66753970"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74113016"
 ---
-# <a name="indexing-documents-in-azure-blob-storage-with-azure-search"></a>Azure arama ile Azure Blob Depolama'da belgelerin dizin oluşturma
-Bu makalede, belgelerin dizinini oluşturmak için Azure Search kullanma gösterilmektedir (PDF gibi Microsoft Office belge ve diğer birçok ortak biçimleri) Azure Blob Depolama alanında depolanır. İlk olarak ayarlama ve blob dizin oluşturucu yapılandırma temellerini açıklar. Ardından, davranışların bir daha ayrıntılı keşfi sunar ve karşılaşabileceğiniz olası senaryolar.
+# <a name="how-to-index-documents-in-azure-blob-storage-with-azure-cognitive-search"></a>Azure Bilişsel Arama Azure Blob depolamada belge dizin oluşturma
 
-## <a name="supported-document-formats"></a>Belge biçimleri desteklenir
-Blob dizin oluşturucu aşağıdaki belge biçimlerinden metin ayıklayabilirsiniz:
+Bu makalede, Azure Blob depolamada depolanan belgelerin (PDF 'Ler, Microsoft Office belgeler ve diğer birçok yaygın biçim gibi) dizin oluşturma için Azure Bilişsel Arama nasıl kullanılacağı gösterilmektedir. İlk olarak, blob Dizin oluşturucuyu ayarlama ve yapılandırma hakkında temel bilgileri açıklar. Daha sonra, büyük olasılıkla karşılaştığınız davranış ve senaryolar hakkında daha ayrıntılı bir araştırma sunar.
+
+<a name="SupportedFormats"></a>
+
+## <a name="supported-document-formats"></a>Desteklenen belge biçimleri
+Blob Indexer aşağıdaki belge biçimlerinden metin ayıklayabilir:
 
 [!INCLUDE [search-blob-data-sources](../../includes/search-blob-data-sources.md)]
 
-## <a name="setting-up-blob-indexing"></a>BLOB dizin oluşturma ayarlama
-Bir Azure Blob Depolama Dizin Oluşturucu kullanarak ayarlayabilirsiniz:
+## <a name="setting-up-blob-indexing"></a>Blob dizinlemeyi ayarlama
+Kullanarak bir Azure Blob depolama Dizin Oluşturucu ayarlayabilirsiniz:
 
-* [Azure portal](https://ms.portal.azure.com)
-* Azure Search'ü [REST API](https://docs.microsoft.com/rest/api/searchservice/Indexer-operations)
-* Azure Search'ü [.NET SDK'sı](https://aka.ms/search-sdk)
+* [Azure Portal](https://ms.portal.azure.com)
+* Azure Bilişsel Arama [REST API](https://docs.microsoft.com/rest/api/searchservice/Indexer-operations)
+* Azure Bilişsel Arama [.NET SDK](https://aka.ms/search-sdk)
 
 > [!NOTE]
-> Bazı özellikler (örneğin, alan eşlemelerini) henüz portalda kullanılabilir değildir ve programlı olarak kullanılması gerekir.
+> Bazı Özellikler (örneğin, alan eşlemeleri) portalda henüz kullanılamaz ve programlı olarak kullanılması gerekir.
 >
 
-Burada, REST API kullanarak akışı gösterilmektedir.
+Burada, akışı REST API kullanarak gösteririz.
 
-### <a name="step-1-create-a-data-source"></a>1\. adım: Bir veri kaynağı oluşturun
-Bir veri kaynağı, hangi veri dizini için (yeni, değiştirilen veya Silinen satırlar) verilerdeki değişiklikleri verimli bir şekilde tanımlamak için ilkeler ve veri erişmek için gerekli kimlik bilgilerini belirtir. Bir veri kaynağı, aynı arama hizmetinde birden çok dizin oluşturucular tarafından kullanılabilir.
+### <a name="step-1-create-a-data-source"></a>1\. Adım: Veri kaynağı oluşturma
+Veri kaynağı, hangi verilerin dizine erişmesi gerektiğini, verilere erişmek için gereken kimlik bilgilerini ve verilerdeki değişiklikleri verimli bir şekilde belirlemek için ilkeleri (yeni, değiştirilmiş veya silinen satırlar) belirler. Aynı arama hizmetinde birden çok Dizin Oluşturucu tarafından bir veri kaynağı kullanılabilir.
 
-Veri kaynağı, blob dizin oluşturma işlemi için aşağıdaki gerekli özelliklerde sahip olmanız gerekir:
+Blob dizin oluşturma için veri kaynağı aşağıdaki gerekli özelliklere sahip olmalıdır:
 
-* **adı** veri kaynağı, arama hizmetinizin içinde benzersiz adıdır.
-* **tür** olmalıdır `azureblob`.
-* **kimlik bilgileri** olarak depolama hesabı bağlantı dizesi sağlar `credentials.connectionString` parametresi. Bkz: [kimlik bilgilerini belirleme konusunda](#Credentials) altındaki ayrıntılar için.
-* **kapsayıcı** depolama hesabınızdaki bir kapsayıcıya belirtir. Varsayılan olarak, kapsayıcıdaki tüm blobları alınabilir. Yalnızca belirli bir sanal dizin içinde dizini bloblara istiyorsanız, isteğe bağlı kullanarak bu dizine belirtebilirsiniz **sorgu** parametresi.
+* **ad** , arama hizmetinizin içindeki veri kaynağının benzersiz adıdır.
+* **tür** `azureblob`olmalıdır.
+* **kimlik bilgileri** , `credentials.connectionString` parametresi olarak depolama hesabı bağlantı dizesini sağlar. Ayrıntılar için aşağıdaki [kimlik bilgilerini belirtme](#Credentials) konusuna bakın.
+* **kapsayıcı** , depolama hesabınızda bir kapsayıcı belirtir. Varsayılan olarak, kapsayıcıdaki tüm Bloblar alınabilir. Yalnızca belirli bir sanal dizinde Blobları indekslemek istiyorsanız, bu dizini isteğe bağlı **sorgu** parametresini kullanarak belirtebilirsiniz.
 
 Bir veri kaynağı oluşturmak için:
 
@@ -61,26 +63,26 @@ Bir veri kaynağı oluşturmak için:
         "container" : { "name" : "my-container", "query" : "<optional-virtual-directory-name>" }
     }   
 
-Veri kaynağı oluşturma API'si hakkında daha fazla bilgi için bkz. [veri kaynağı oluşturma](https://docs.microsoft.com/rest/api/searchservice/create-data-source).
+Veri kaynağı API 'SI oluşturma hakkında daha fazla bilgi için bkz. [veri kaynağı oluşturma](https://docs.microsoft.com/rest/api/searchservice/create-data-source).
 
 <a name="Credentials"></a>
 #### <a name="how-to-specify-credentials"></a>Kimlik bilgilerini belirtme ####
 
-Aşağıdaki yöntemlerden biriyle blob kapsayıcısında için kimlik bilgileri sağlayabilirsiniz:
+Blob kapsayıcısının kimlik bilgilerini şu yollarla sağlayabilirsiniz:
 
-- **Tam erişim depolama hesabı bağlantı dizesi**: `DefaultEndpointsProtocol=https;AccountName=<your storage account>;AccountKey=<your account key>` Depolama hesabı dikey penceresine giderek bağlantı dizesini Azure portalından alabilirsiniz > Ayarlar > tuşları (Klasik depolama hesapları) ya da ayarlar > erişim anahtarları (için Azure Resource Manager depolama hesaplarında).
-- **Depolama hesabı paylaşılan erişim imzası** (SAS) bağlantı dizesi: `BlobEndpoint=https://<your account>.blob.core.windows.net/;SharedAccessSignature=?sv=2016-05-31&sig=<the signature>&spr=https&se=<the validity end time>&srt=co&ss=b&sp=rl` SAS listesine sahip ve Okuma izinlerine kapsayıcılar ve nesneler (Bu durumda blobları).
--  **Kapsayıcı paylaşılan erişim imzası**: `ContainerSharedAccessUri=https://<your storage account>.blob.core.windows.net/<container name>?sv=2016-05-31&sr=c&sig=<the signature>&se=<the validity end time>&sp=rl` SAS listesine sahip ve okuma kapsayıcı üzerindeki izinleri gerekir.
+- **Tam erişimli depolama hesabı bağlantı dizesi**: `DefaultEndpointsProtocol=https;AccountName=<your storage account>;AccountKey=<your account key>` Azure Portal depolama hesabı dikey penceresine giderek > Ayarlar > anahtarlar (klasik depolama hesapları için) veya ayarlar > erişim anahtarları (Azure Resource Manager depolama hesapları için) üzerinden bağlantı dizesini alabilir.
+- **Depolama hesabı paylaşılan erişim imzası** (SAS) bağlantı dizesi: sas 'lar `BlobEndpoint=https://<your account>.blob.core.windows.net/;SharedAccessSignature=?sv=2016-05-31&sig=<the signature>&spr=https&se=<the validity end time>&srt=co&ss=b&sp=rl` kapsayıcılar ve nesneler üzerinde (Bu durumda Bloblar) liste ve okuma izinlerine sahip olmalıdır.
+-  **Kapsayıcı paylaşılan erişim imzası**: `ContainerSharedAccessUri=https://<your storage account>.blob.core.windows.net/<container name>?sv=2016-05-31&sr=c&sig=<the signature>&se=<the validity end time>&sp=rl` sa 'lar, kapsayıcıda liste ve okuma izinlerine sahip olmalıdır.
 
-Paylaşılan depolama hakkında daha fazla bilgi için erişim imzaları, bkz: [paylaşılan erişim imzaları kullanma](../storage/common/storage-dotnet-shared-access-signature-part-1.md).
+Depolama paylaşılan erişim imzaları hakkında daha fazla bilgi için bkz. [paylaşılan erişim Imzalarını kullanma](../storage/common/storage-dotnet-shared-access-signature-part-1.md).
 
 > [!NOTE]
-> SAS kimlik bilgileri kullanıyorsanız, veri kaynağı kimlik bilgileri düzenli aralıklarla yenilenen imzaları ile kendi zaman aşımını önlemek için güncelleştirme gerekir. SAS kimlik bilgilerinin süresi dolar, dizin oluşturucu için benzer bir hata iletisiyle başarısız olur `Credentials provided in the connection string are invalid or have expired.`.  
+> SAS kimlik bilgilerini kullanıyorsanız, zaman aşımı süresini engellemek için veri kaynağı kimlik bilgilerini yenilenen imzalara göre düzenli aralıklarla güncelleştirmeniz gerekecektir. SAS kimlik bilgilerinin kullanım süreleri dolarsa, Dizin Oluşturucu `Credentials provided in the connection string are invalid or have expired.`benzer bir hata iletisiyle başarısız olur.  
 
-### <a name="step-2-create-an-index"></a>2\. adım: Dizin oluşturma
-Bir belgede, öznitelikler, alanları dizinini belirtir ve arama şekil diğer yapıları karşılaşırsınız.
+### <a name="step-2-create-an-index"></a>2\. Adım: Dizin oluşturma
+Dizin, bir belge, öznitelik ve arama deneyimini şekillendirip diğer yapıların alanlarını belirtir.
 
-Aranabilir bir dizin oluşturmak nasıl işte `content` bloblarından ayıklanan metinleri saklamak için alan:   
+Bloblardan ayıklanan metni depolamak için aranabilir `content` alanla bir dizin oluşturma:   
 
     POST https://[service name].search.windows.net/indexes?api-version=2019-05-06
     Content-Type: application/json
@@ -94,12 +96,12 @@ Aranabilir bir dizin oluşturmak nasıl işte `content` bloblarından ayıklanan
           ]
     }
 
-Dizin oluşturma hakkında daha fazla bilgi için bkz. [dizin oluştur](https://docs.microsoft.com/rest/api/searchservice/create-index)
+Dizinler oluşturma hakkında daha fazla bilgi için bkz. [Dizin oluşturma](https://docs.microsoft.com/rest/api/searchservice/create-index)
 
-### <a name="step-3-create-an-indexer"></a>3\. adım: Dizin oluşturucu oluşturma
-Bir dizin oluşturucu, bir veri kaynağı ile bir hedef arama dizinine bağlar ve veri yenilemeyi otomatikleştirmek için bir zamanlama sağlar.
+### <a name="step-3-create-an-indexer"></a>3\. Adım: Dizin Oluşturucu oluşturma
+Bir Dizin Oluşturucu bir veri kaynağını hedef arama diziniyle bağlar ve veri yenilemeyi otomatikleştirmek için bir zamanlama sağlar.
 
-Dizinin ve veri kaynağının oluşturulan dizin oluşturucu oluşturmaya hazırsınız:
+Dizin ve veri kaynağı oluşturulduktan sonra, Dizin oluşturucuyu oluşturmaya hazırsınız:
 
     POST https://[service name].search.windows.net/indexers?api-version=2019-05-06
     Content-Type: application/json
@@ -112,69 +114,71 @@ Dizinin ve veri kaynağının oluşturulan dizin oluşturucu oluşturmaya hazır
       "schedule" : { "interval" : "PT2H" }
     }
 
-Bu dizin oluşturucu ("PT2H için" zamanlama aralığı ayarlanır) iki saatte çalışır. 30 dakikada bir dizin oluşturucu çalıştırmak için "PT30M" için aralığı ayarlayın. Kısa desteklenen aralığı 5 dakikadır. Zamanlama atlanırsa isteğe bağlıdır, dizin oluşturucu yalnızca oluştururken bir kez çalışır. Ancak, bir dizin oluşturucu isteğe bağlı herhangi bir zamanda çalıştırabilirsiniz.   
+Bu Dizin Oluşturucu her iki saatte bir çalışır (zamanlama aralığı "PT2H" olarak ayarlanır). Her 30 dakikada bir dizin oluşturucu çalıştırmak için, aralığı "PT30M" olarak ayarlayın. Desteklenen en kısa Aralık 5 dakikadır. Zamanlama isteğe bağlıdır-atlanırsa, Dizin Oluşturucu yalnızca bir kez oluşturulduğunda çalışır. Ancak, bir dizin oluşturucuyu dilediğiniz zaman isteğe bağlı olarak çalıştırabilirsiniz.   
 
-Dizin Oluşturucu Oluşturma API'si hakkında daha fazla ayrıntı için kullanıma [dizin oluşturucu oluşturma](https://docs.microsoft.com/rest/api/searchservice/create-indexer).
+Dizin Oluşturucu oluşturma API 'SI hakkında daha fazla bilgi için bkz. [Dizin Oluşturucu oluştur](https://docs.microsoft.com/rest/api/searchservice/create-indexer).
 
-Dizin Oluşturucu zamanlamaları tanımlama hakkında daha fazla bilgi için bkz. [dizin oluşturucular için Azure Search zamanlama](search-howto-schedule-indexers.md).
+Dizin Oluşturucu zamanlamalarını tanımlama hakkında daha fazla bilgi için bkz. [Azure bilişsel arama için Dizin Oluşturucu zamanlama](search-howto-schedule-indexers.md).
 
-## <a name="how-azure-search-indexes-blobs"></a>Azure Search BLOB'ları nasıl dizinler?
+<a name="how-azure-search-indexes-blobs"></a>
 
-Yapılandırmanıza bağlı olarak [dizin oluşturucu yapılandırmasını](#PartsOfBlobToIndex), blob dizin oluşturucu yalnızca depolama meta verileri dizinleyebilirsiniz (yararlı hakkındaki meta veriler yalnızca sizin ve BLOB içeriğinin dizinini gerekmez), depolama ve içerik meta verileri veya hem meta veriler ve metin içeriği. Varsayılan olarak, dizin oluşturucu, hem meta veriler hem de içerik ayıklar.
+## <a name="how-azure-cognitive-search-indexes-blobs"></a>Azure Bilişsel Arama blob 'ları dizin oluşturma
+
+[Dizin Oluşturucu yapılandırmasına](#PartsOfBlobToIndex)bağlı olarak, blob Indexer yalnızca depolama meta verilerini dizine alabilir (yalnızca meta verileri ilgilenmeniz ve Blobların içeriğini dizinlemek gerekmez), depolama ve içerik meta verileri ya da hem meta veri hem de metin içeriği. Varsayılan olarak, Dizin Oluşturucu hem meta verileri hem de içeriği ayıklar.
 
 > [!NOTE]
-> Varsayılan olarak, JSON veya CSV gibi yapılandırılmış içeriği BLOB'ları, tek bir metin parçası dizine eklenir. Yapılandırılmış bir biçimde JSON ve CSV bloblarını dizine eklemek istiyorsanız bkz [dizin JSON BLOB'ları](search-howto-index-json-blobs.md) ve [dizin CSV BLOB'ları](search-howto-index-csv-blobs.md) daha fazla bilgi için.
+> Varsayılan olarak, JSON veya CSV gibi yapılandırılmış içeriğe sahip Bloblar tek bir metin öbeği olarak dizinlenir. JSON ve CSV bloblarını yapılandırılmış bir şekilde indekslemek istiyorsanız, daha fazla bilgi için bkz. [JSON bloblarını](search-howto-index-json-blobs.md) dizine ekleme ve [CSV bloblarını dizin oluşturma](search-howto-index-csv-blobs.md) .
 >
-> Bileşik veya katıştırılmış bir belge (örneğin, bir ZIP arşivi veya Word belgesi ekleri katıştırılmış Outlook e-posta ile), ayrıca tek bir belge olarak dizine alınır.
+> Birleşik veya katıştırılmış bir belge (örneğin, bir posta arşivi veya ek içeren katıştırılmış Outlook e-postasına sahip bir Word belgesi) tek bir belge olarak dizinlenir.
 
-* Belge metin içeriği adlı bir dize alanı ayıklanan `content`.
-
-> [!NOTE]
-> Azure arama, fiyatlandırma katmanına bağlı olarak ayıklar ne kadar metin sınırları: 32.000 karakter ücretsiz katmanı, 64.000 temel ve standart, standart S2 ve standart S3 katmanları için 4 milyon. Bir uyarı kesilmiş belgeler için dizin oluşturucu durumu yanıtına dahil edilir.  
-
-* Kullanıcı tanımlı meta veri özelliklerini blob üzerinde mevcut varsa, aynen ayıklanır.
-* Standart blob meta veri özelliklerini şu alanlara ayıklanır:
-
-  * **meta veri\_depolama\_adı** (Edm.String) - blob, dosya adı. Örneğin, bir blob /my-container/my-folder/subfolder/resume.pdf varsa, bu alan değeri `resume.pdf`.
-  * **meta veri\_depolama\_yolu** (Edm.String) - BLOB Depolama hesapları dahil olmak üzere, tam URI. Örneğin, `https://myaccount.blob.core.windows.net/my-container/my-folder/subfolder/resume.pdf`
-  * **meta veri\_depolama\_içeriği\_türü** (Edm.String) - içerik blob karşıya yüklemek için kullanılan kod tarafından belirtilen türü. Örneğin, `application/octet-stream`.
-  * **meta veri\_depolama\_son\_değiştiren** son değiştirme (Edm.DateTimeOffset) - blob için zaman damgası. Azure arama, her şeyi ilk dizinleme sonra ölçeklemek önlemek için değiştirilen blobları tanımlamak için bu zaman damgası kullanır.
-  * **meta veri\_depolama\_boyutu** (EDM.Int64) - blob bayt cinsinden boyutu.
-  * **meta veri\_depolama\_içeriği\_md5** (Edm.String) - blob içeriğinin varsa MD5 karma değeri.
-  * **meta veri\_depolama\_sas\_belirteci** (Edm.String) - tarafından kullanılan geçici bir SAS belirteci [özel becerileri](cognitive-search-custom-skill-interface.md) blob erişim elde etmek için. Bu belirteç, süresi dolduğundan daha sonra kullanmak üzere depolanması.
-
-* Her belge biçimi için özel meta veri özelliklerini listelenen alanlarına ayıklanan [burada](#ContentSpecificMetadata).
-
-Yukarıdaki özelliklerin tümü için alanları search dizininizi tanımlama - yalnızca uygulamanız için gereken özellikleri yakalama gerekmez.
+* Belgenin metinsel içeriği, `content`adlı bir dize alanına ayıklanır.
 
 > [!NOTE]
-> Genellikle, alan adları varolan dizininize belge ayıklama sırasında oluşturulan alan adlarından farklı olacaktır. Kullanabileceğiniz **alan eşlemeleri** arama dizininizdeki alan adları için Azure Search tarafından sağlanan özellik adlarını eşlemek için. Alan eşlemelerini aşağıda kullanın örneği görürsünüz.
+> Azure Bilişsel Arama, fiyatlandırma katmanına bağlı olarak ne kadar metin ayıklar: ücretsiz katman için 32.000 karakter, temel için 64.000 ve standart, Standart S2 ve Standart S3 katmanları için 4.000.000. Kesilen belgeler için Dizin Oluşturucu durum yanıtında bir uyarı bulunur.  
+
+* Blob üzerinde bulunan Kullanıcı tarafından belirtilen meta veri özellikleri, varsa, tam olarak ayıklanır.
+* Standart blob meta veri özellikleri aşağıdaki alanlara ayıklanır:
+
+  * **meta veri\_depolama\_adı** (EDM. String)-Blobun dosya adı. Örneğin, bir blob/My-Container/My-Folder/subfolder/Resume.exe PDF varsa, bu alanın değeri `resume.pdf`.
+  * **meta veri\_depolama\_yolu** (EDM. String)-depolama hesabı da dahil olmak üzere Blobun tam URI 'si. Örneğin, `https://myaccount.blob.core.windows.net/my-container/my-folder/subfolder/resume.pdf`
+  * **meta veri\_depolama\_içerik\_türü** (EDM. String)-içerik türü blobu yüklemek için kullandığınız kodla belirtilir. Örneğin, `application/octet-stream`.
+  * **meta veri\_depolama\_son değiştirilen\_** (EDM. DateTimeOffset)-blob için son değiştirme zaman damgası. Azure Bilişsel Arama, ilk dizinledikten sonra her şeyin yeniden dizinlenmesini önlemek için değişen Blobları tanımlamak üzere bu zaman damgasını kullanır.
+  * **meta veri\_depolama\_boyutu** (EDM. Int64)-BLOB boyutu bayt cinsinden.
+  * **meta veri\_depolama\_içerik\_MD5** (EDM. String)-varsa Blob içeriğinin MD5 karması.
+  * **meta veri\_depolama\_sas\_belirteci** (EDM. String)-bloba erişim sağlamak için [özel yetenekler](cognitive-search-custom-skill-interface.md) tarafından kullanılabilen geçici bir SAS belirteci. Bu belirtecin kullanım süreleri dolduğunda daha sonra kullanılmak üzere depolanmamalıdır.
+
+* Her belge biçimine özgü meta veri özellikleri [burada](#ContentSpecificMetadata)listelenen alanlara ayıklanır.
+
+Arama dizininizdeki yukarıdaki özelliklerin tümü için alanları tanımlamanız gerekmez; uygulamanız için gereken özellikleri yakalayın.
+
+> [!NOTE]
+> Genellikle, var olan dizininizdeki alan adları belge ayıklama sırasında oluşturulan alan adlarından farklı olacaktır. Azure Bilişsel Arama tarafından sunulan özellik adlarını arama dizininizdeki alan adlarına eşlemek için **alan eşlemelerini** kullanabilirsiniz. Aşağıda, alan eşlemelerinin kullanımıyla bir örnek görürsünüz.
 >
 >
 
 <a name="DocumentKeys"></a>
-### <a name="defining-document-keys-and-field-mappings"></a>Belge anahtarları ve alan eşlemelerini tanımlama
-Azure Search'te belge anahtarını, bir belgeyi benzersiz olarak tanımlar. Her arama dizini Edm.String türünde tam olarak bir anahtar alan olması gerekir. (Bu gerçekten gerekli olan tek alan) dizine eklenen her belge için anahtar alanı gereklidir.  
+### <a name="defining-document-keys-and-field-mappings"></a>Belge anahtarlarını ve alan eşlemelerini tanımlama
+Azure Bilişsel Arama 'de belge anahtarı bir belgeyi benzersiz şekilde tanımlar. Her arama dizininde Edm. String türünde tam olarak bir anahtar alanı olmalıdır. Dizine eklenmekte olan her belge için anahtar alanı gereklidir (aslında yalnızca gerekli olan alandır).  
 
-Ayıklanan alanı anahtar alan dizininiz için eşlemelisiniz dikkatle göz önünde bulundurmalısınız. Adaylar:
+Hangi ayıklanan alanın, dizininiz için anahtar alanla eşleşmesi gerektiğini dikkatle düşünmeniz gerekir. Adaylar şunlardır:
 
-* **meta veri\_depolama\_adı** - bu uygun bir aday olabilir, ancak farklı klasörlerde aynı ada ve (2) adı ile BLOB'ları sahip (1) adları benzersiz olmayabilir, Not karakterleri içerebilir çizgi gibi belge anahtarları geçersiz. İle geçersiz karakterler kullanarak giderebilirsiniz `base64Encode` [alan eşlemesi işlevi](search-indexer-field-mappings.md#base64EncodeFunction) - bunu yaptığınızda, arama gibi bunları geçirmeden API'SİNDE çağırdığında, belge anahtarlar kodlayın unutmayın. (Örneğin,. NET'te kullanabilirsiniz [UrlTokenEncode yöntemi](https://msdn.microsoft.com/library/system.web.httpserverutility.urltokenencode.aspx) bu amaç için).
-* **meta veri\_depolama\_yolu** - tam yolunu kullanarak benzersizlik sağlar, ancak kesinlikle yolunu içeren `/` karakterler [geçersiz bir belge anahtarında](https://docs.microsoft.com/rest/api/searchservice/naming-rules).  Yukarıdaki olarak kullanarak anahtarlarını kodlama seçeneğiniz `base64Encode` [işlevi](search-indexer-field-mappings.md#base64EncodeFunction).
-* Yukarıdaki seçeneklerin hiçbiri işinize yaramazsa blobları için özel meta veri özelliği ekleyebilirsiniz. Ancak, bu seçenek için tüm blobları bu meta veri özellik eklemek için blob karşıya yükleme işlemi gerektirir. Anahtar gerekli bir özellik olduğundan, bu özelliğe sahip olmayan tüm bloblar dizine başarısız olur.
+* **meta veri\_depolama\_adı** -bu kullanışlı bir aday olabilir, ancak bu, farklı klasörlerde aynı ada sahip bloblarınız olabileceği ve 2) ad, çizgiler gibi belge anahtarlarında geçersiz karakterler içeriyor olabilir. `base64Encode` [alan eşleme işlevini](search-indexer-field-mappings.md#base64EncodeFunction) kullanarak geçersiz karakterlerle uğraşabilir. bunu yaparsanız, arama gibi API çağrılarına geçirirken belge anahtarlarını kodlamayı unutmayın. (Örneğin, .NET 'te bu amaçla [UrlTokenEncode yöntemini](https://msdn.microsoft.com/library/system.web.httpserverutility.urltokenencode.aspx) kullanabilirsiniz).
+* **meta veri\_depolama\_yolu** -tam yolun kullanılması benzersizlik sağlar, ancak yol kesinlikle [bir belge anahtarında geçersiz](https://docs.microsoft.com/rest/api/searchservice/naming-rules)`/` karakterler içerir.  Yukarıdaki gibi, `base64Encode` [işlevini](search-indexer-field-mappings.md#base64EncodeFunction)kullanarak anahtarları kodlama seçeneğiniz vardır.
+* Yukarıdaki seçeneklerden hiçbiri sizin için işe çalışmadıysanız, bloblara özel meta veri özelliği ekleyebilirsiniz. Ancak, bu seçenek, bu meta veri özelliğini tüm bloblara eklemek için blob karşıya yükleme işleminizi gerektirir. Anahtar gerekli bir özellik olduğundan, bu özelliğe sahip olmayan tüm Blobların dizini oluşturulamaz.
 
 > [!IMPORTANT]
-> Azure Search dizini anahtar alanında açık bir eşleme yok ise, otomatik olarak kullanan `metadata_storage_path` anahtar değerlerini (ikinci seçenek yukarıdaki) anahtar ve base-64 olarak kodlar.
+> Dizinde anahtar alanı için açık eşleme yoksa, Azure Bilişsel Arama anahtar olarak `metadata_storage_path` kullanır ve temel 64 anahtar değerlerini kodluyor (yukarıdaki ikinci seçenek).
 >
 >
 
-Bu örnekte, şimdi çekme `metadata_storage_name` alan belge anahtarı olarak. Ayrıca dizininizi sahip adlandırılmış bir anahtar alan varsayalım `key` ve bir alan `fileSize` belge boyutunu depolamak için. İstediğiniz gibi işlemleri wire için oluştururken veya oluşturucunuz güncelleştirirken aşağıdaki alan eşlemelerini belirtin:
+Bu örnekte, belge anahtarı olarak `metadata_storage_name` alanını seçelim. Ayrıca, dizininizin `key` adlı bir anahtar alanı olduğunu ve belge boyutunu depolamak için `fileSize` alan olduğunu varsayalım. İstediğiniz gibi durumlarda, Dizin oluşturucuyu oluştururken veya güncelleştirirken aşağıdaki alan eşlemelerini belirtin:
 
     "fieldMappings" : [
       { "sourceFieldName" : "metadata_storage_name", "targetFieldName" : "key", "mappingFunction" : { "name" : "base64Encode" } },
       { "sourceFieldName" : "metadata_storage_size", "targetFieldName" : "fileSize" }
     ]
 
-Çıkarmasını ister bütün, alan eşlemelerini ekleyin ve var olan bir dizin oluşturucu için anahtarların base-64 kodlamasını etkinleştirmek nasıl şöyledir:
+Bunu bir araya getirmek için, alan eşlemelerini nasıl ekleyebileceğiniz ve mevcut bir dizin oluşturucunun anahtarlarının Base-64 kodlamasını nasıl etkinleştirebileceğiniz aşağıda verilmiştir:
 
     PUT https://[service name].search.windows.net/indexers/blob-indexer?api-version=2019-05-06
     Content-Type: application/json
@@ -191,16 +195,16 @@ Bu örnekte, şimdi çekme `metadata_storage_name` alan belge anahtarı olarak. 
     }
 
 > [!NOTE]
-> Alan eşlemeleri hakkında daha fazla bilgi için bkz: [bu makalede](search-indexer-field-mappings.md).
+> Alan eşlemeleri hakkında daha fazla bilgi edinmek için [Bu makaleye](search-indexer-field-mappings.md)bakın.
 >
 >
 
 <a name="WhichBlobsAreIndexed"></a>
-## <a name="controlling-which-blobs-are-indexed"></a>Hangi BLOB'ları dizine denetleme
-Hangi BLOB'ları dizini oluşturulur ve hangi atlanır denetleyebilirsiniz.
+## <a name="controlling-which-blobs-are-indexed"></a>Hangi Blobların dizine alınacağını denetleme
+Hangi Blobların dizine alınacağını ve hangilerinin atlandığını denetleyebilirsiniz.
 
-### <a name="index-only-the-blobs-with-specific-file-extensions"></a>Yalnızca belirli dosya uzantılarına sahip bloblarını dizinleme
-Yalnızca dosya adı uzantılarını kullanarak belirttiğiniz blob'larla dizinleyebilirsiniz `indexedFileNameExtensions` dizin oluşturucu yapılandırma parametresi. (Sahip, önde gelen bir nokta) dosya uzantılarının virgülle ayrılmış listesini içeren bir dize değeridir. Örneğin, yalnızca dizin için. PDF ve. DOCX BLOB'ları bu yapın:
+### <a name="index-only-the-blobs-with-specific-file-extensions"></a>Yalnızca belirli dosya uzantılarına sahip Blobları dizine oluştur
+Yalnızca `indexedFileNameExtensions` Dizin Oluşturucu yapılandırma parametresini kullanarak belirttiğiniz dosya adı uzantılarına sahip Blobları dizine ekleyebilirsiniz. Değer, dosya uzantılarının virgülle ayrılmış bir listesini içeren bir dizedir (önde gelen noktayla). Örneğin, yalnızca ' ı dizine eklemek için. PDF ve. DOCX blob 'ları, bunu yapın:
 
     PUT https://[service name].search.windows.net/indexers/[indexer name]?api-version=2019-05-06
     Content-Type: application/json
@@ -211,8 +215,8 @@ Yalnızca dosya adı uzantılarını kullanarak belirttiğiniz blob'larla dizinl
       "parameters" : { "configuration" : { "indexedFileNameExtensions" : ".pdf,.docx" } }
     }
 
-### <a name="exclude-blobs-with-specific-file-extensions"></a>Belirli dosya uzantılarını blob'larla Dışla
-Belirli dosya adı uzantıları ile BLOB'ları kullanarak dizine elmadan hariç tutabilirsiniz `excludedFileNameExtensions` yapılandırma parametresi. (Sahip, önde gelen bir nokta) dosya uzantılarının virgülle ayrılmış listesini içeren bir dize değeridir. Örneğin, tüm BLOB'ları ile hariç dizin. PNG ve. JPEG uzantıları, bu yapın:
+### <a name="exclude-blobs-with-specific-file-extensions"></a>Belirli dosya uzantılarına sahip Blobları Dışla
+`excludedFileNameExtensions` yapılandırma parametresini kullanarak, dizin oluşturma işleminden belirli dosya adı uzantılarına sahip Blobları dışlayabilirsiniz. Değer, dosya uzantılarının virgülle ayrılmış bir listesini içeren bir dizedir (önde gelen noktayla). Örneğin, tüm Blobları hariç tüm Blobları dizine eklemek için. PNG ve. JPEG uzantıları, bunu yapın:
 
     PUT https://[service name].search.windows.net/indexers/[indexer name]?api-version=2019-05-06
     Content-Type: application/json
@@ -223,18 +227,18 @@ Belirli dosya adı uzantıları ile BLOB'ları kullanarak dizine elmadan hariç 
       "parameters" : { "configuration" : { "excludedFileNameExtensions" : ".png,.jpeg" } }
     }
 
-Her iki `indexedFileNameExtensions` ve `excludedFileNameExtensions` parametreleri, ilk Azure Search bakar `indexedFileNameExtensions`, ardından adresindeki `excludedFileNameExtensions`. Bu, her iki listede de aynı dosya uzantısı varsa, dizine elmadan hariç tutulacaktır olduğunu anlamına gelir.
+Hem `indexedFileNameExtensions` hem de `excludedFileNameExtensions` parametreleri varsa, Azure Bilişsel Arama önce `indexedFileNameExtensions`, sonra da `excludedFileNameExtensions`' a bakar. Bu, aynı dosya uzantısının her iki listede de mevcutsa, dizin oluşturma işleminin dışlanacağını belirtir.
 
 <a name="PartsOfBlobToIndex"></a>
-## <a name="controlling-which-parts-of-the-blob-are-indexed"></a>Hangi blob bölümlerinin dizine denetleme
+## <a name="controlling-which-parts-of-the-blob-are-indexed"></a>Blob 'un hangi bölümlerinin dizine alınacağını denetleme
 
-Hangi BLOB bölümlerinin kullanılarak dizinlenir denetleyebilirsiniz `dataToExtract` yapılandırma parametresi. Bunu yapmak için şu değerleri alabilir:
+`dataToExtract` yapılandırma parametresi kullanılarak Blobların hangi bölümlerinin dizine alınacağını kontrol edebilirsiniz. Bu, aşağıdaki değerleri alabilir:
 
-* `storageMetadata` -belirtir, yalnızca [standart blob özelliklerini ve kullanıcı tanımlı meta veriler](../storage/blobs/storage-properties-metadata.md) dizinlenir.
-* `allMetadata` -Depolama meta verilerin belirtir ve [içerik türü belirli meta veriler](#ContentSpecificMetadata) ayıklanan blob içeriği dizin bulunur.
-* `contentAndMetadata` -tüm meta veriler ve metinsel içeriği blobundan ayıklanan dizini belirtir. Varsayılan değer budur.
+* `storageMetadata`-yalnızca [Standart blob özelliklerinin ve Kullanıcı tarafından belirtilen meta verilerin](../storage/blobs/storage-properties-metadata.md) dizine alınacağını belirtir.
+* `allMetadata`-depolama meta verilerinin ve BLOB içeriğinden ayıklanan [içerik türü belirli meta verilerin](#ContentSpecificMetadata) dizine alınacağını belirtir.
+* `contentAndMetadata`-bloba ayıklanan tüm meta veri ve metin içeriğinin dizine alınacağını belirtir. Varsayılan değer budur.
 
-Örneğin, yalnızca depolama meta verileri dizine kullanın:
+Örneğin, yalnızca depolama meta verilerini indekslemek için şunu kullanın:
 
     PUT https://[service name].search.windows.net/indexers/[indexer name]?api-version=2019-05-06
     Content-Type: application/json
@@ -245,19 +249,19 @@ Hangi BLOB bölümlerinin kullanılarak dizinlenir denetleyebilirsiniz `dataToEx
       "parameters" : { "configuration" : { "dataToExtract" : "storageMetadata" } }
     }
 
-### <a name="using-blob-metadata-to-control-how-blobs-are-indexed"></a>Blobların nasıl dizinleneceğini denetlemek için BLOB meta verilerini kullanma
+### <a name="using-blob-metadata-to-control-how-blobs-are-indexed"></a>Blobların nasıl dizine alınacağını denetlemek için blob meta verilerini kullanma
 
-Yukarıda açıklanan yapılandırma parametreleri tüm bloblara uygulanır. Bazı durumlarda, denetlemek isteyebilir nasıl *tek tek bloblar* dizinlenir. Aşağıdaki blob meta veri özelliklerini ve değerlerini ekleyerek bunu yapabilirsiniz:
+Yukarıda açıklanan yapılandırma parametreleri tüm Bloblar için geçerlidir. Bazen, *ayrı Blobların* nasıl dizine alınacağını denetlemek isteyebilirsiniz. Bunu, aşağıdaki blob meta veri özelliklerini ve değerlerini ekleyerek yapabilirsiniz:
 
 | Özellik adı | Özellik değeri | Açıklama |
 | --- | --- | --- |
-| AzureSearch_Skip |"true" |Blob tamamen atlamak için blob dizin oluşturucu bildirir. Meta veriler ya da içerik ayıklama denenir. Belirli bir blob art arda başarısız olur ve dizin oluşturma işlemi kesintiye uğratır bu yararlı olur. |
-| AzureSearch_SkipContent |"true" |Bu, eşdeğerdir `"dataToExtract" : "allMetadata"` açıklanan ayarı [yukarıda](#PartsOfBlobToIndex) belirli bir bloba kapsamlı. |
+| AzureSearch_Skip |"true" |Blob Dizin oluşturucuyu blobu tamamen atlayacak şekilde yönlendirir. Meta veri veya içerik ayıklama denenmez. Bu, belirli bir blob sürekli olarak başarısız olduğunda ve dizin oluşturma işlemini kesintiye uğradığında yararlı olur. |
+| AzureSearch_SkipContent |"true" |Bu, [yukarıda](#PartsOfBlobToIndex) belirtilen bir Blobun kapsamına alınan `"dataToExtract" : "allMetadata"` ayarından eşdeğerdir. |
 
 <a name="DealingWithErrors"></a>
-## <a name="dealing-with-errors"></a>Hatalarıyla ilgilenme
+## <a name="dealing-with-errors"></a>Hatalarla ilgilenme
 
-Varsayılan olarak, blob dizin oluşturucu, bir blob desteklenmeyen bir içerik türüyle (örneğin, bir görüntü) karşılaştığında hemen durdurur. Elbette kullanabileceğiniz `excludedFileNameExtensions` belirli içerik türlerini atlama parametresi. Ancak, tüm olası içerik türlerini önceden bilmeden dizin blob'lara gerekebilir. Desteklenmeyen bir içerik türü ile karşılaşıldığında dizin oluşturma devam etmek için ayarlama `failOnUnsupportedContentType` yapılandırma parametresi `false`:
+Varsayılan olarak, blob Indexer, desteklenmeyen içerik türü (örneğin, bir görüntü) ile bir blob ile karşılaştığında yanıt vermez. Kuşkusuz, belirli içerik türlerini atlamak için `excludedFileNameExtensions` parametresini kullanabilirsiniz. Ancak, tüm olası içerik türlerini önceden bilmeden blob 'ları dizinleyebilirsiniz. Desteklenmeyen bir içerik türüyle karşılaşıldığında dizin oluşturmaya devam etmek için `failOnUnsupportedContentType` yapılandırma parametresini `false`olarak ayarlayın:
 
     PUT https://[service name].search.windows.net/indexers/[indexer name]?api-version=2019-05-06
     Content-Type: application/json
@@ -268,34 +272,34 @@ Varsayılan olarak, blob dizin oluşturucu, bir blob desteklenmeyen bir içerik 
       "parameters" : { "configuration" : { "failOnUnsupportedContentType" : false } }
     }
 
-Bazı BLOB'lar için Azure Search içerik türü belirlenemiyor veya bir belgenin işlenemedi. Aksi takdirde içerik türü desteklenen. Bu hata modu yoksayacak şekilde ayarlayın `failOnUnprocessableDocument` yapılandırma parametresi yanlış:
+Bazı Bloblar için Azure Bilişsel Arama, içerik türünü belirleyemiyor veya başka türlü desteklenen içerik türündeki bir belgeyi işleyemez. Bu hata modunu yoksaymak için `failOnUnprocessableDocument` yapılandırma parametresini false olarak ayarlayın:
 
       "parameters" : { "configuration" : { "failOnUnprocessableDocument" : false } }
 
-Azure arama dizini BLOB boyutu sınırlar. Bu sınırlar içinde belirtilmiştir [Azure Search'te hizmet sınırları](https://docs.microsoft.com/azure/search/search-limits-quotas-capacity). Büyük boyutlu BLOB'ları, varsayılan olarak hata olarak kabul edilir. Ancak, ayarlarsanız büyük boyutlu blobları depolama meta verilerini hala dizinleyebilirsiniz `indexStorageMetadataOnlyForOversizedDocuments` yapılandırma parametresi true: 
+Azure Bilişsel Arama, dizini oluşturulmuş Blobların boyutunu sınırlandırır. Bu sınırlar [Azure bilişsel arama hizmet sınırları](https://docs.microsoft.com/azure/search/search-limits-quotas-capacity)bölümünde belgelenmiştir. Büyük bir blob, varsayılan olarak hata olarak değerlendirilir. Ancak, `indexStorageMetadataOnlyForOversizedDocuments` Configuration parametresini true olarak ayarlarsanız büyük Blobların depolama meta verilerini yine de dizine alabilirsiniz: 
 
     "parameters" : { "configuration" : { "indexStorageMetadataOnlyForOversizedDocuments" : true } }
 
-Hataları işleme, BLOB'ları ayrıştırılırken ya da belgeler için dizin eklerken, herhangi bir noktada görülüyorsa dizin oluşturma devam edebilirsiniz. Belirli bir sayıya hataların yoksayacak şekilde ayarlayın `maxFailedItems` ve `maxFailedItemsPerBatch` istenen değerleri yapılandırma parametreleri. Örneğin:
+Blob 'ları ayrıştırırken veya bir dizine belge eklerken, herhangi bir işlem noktasında hatalar meydana geliyorsa dizin oluşturmaya da devam edebilirsiniz. Belirli sayıda hatayı yoksaymak için `maxFailedItems` ve `maxFailedItemsPerBatch` yapılandırma parametrelerini istenen değerlere ayarlayın. Örneğin:
 
     {
       ... other parts of indexer definition
       "parameters" : { "maxFailedItems" : 10, "maxFailedItemsPerBatch" : 10 }
     }
 
-## <a name="incremental-indexing-and-deletion-detection"></a>Artımlı dizin oluşturma ve silme algılama
-Bir zamanlamaya göre çalıştırılacak bir blob dizin oluşturucu ' ayarladığınızda, onu yalnızca değiştirilen blobları, blob tarafından belirlendiği reindexes `LastModified` zaman damgası.
+## <a name="incremental-indexing-and-deletion-detection"></a>Artımlı dizin oluşturma ve silme algılaması
+Bir blob Dizin Oluşturucuyu bir zamanlamaya göre çalışacak şekilde ayarlarken, blob 'un `LastModified` zaman damgası tarafından belirlendiği şekilde yalnızca değiştirilen Blobları yeniden dizinleyebilirsiniz.
 
 > [!NOTE]
-> Bir değişiklik algılama İlkesi belirtmeniz gerekmez; Artımlı dizin sizin için otomatik olarak etkinleştirilir.
+> Değişiklik algılama ilkesi belirtmeniz gerekmez – artımlı dizin oluşturma sizin için otomatik olarak etkinleştirilir.
 
-Belgelerini silmeyi desteklemek için "geçici silme" bir yaklaşım kullanın. Blobları yükseltebilir silerseniz, ilgili belgeleri arama dizinden kaldırılmaz. Bunun yerine, aşağıdaki adımları kullanın:  
+Belge silmeyi desteklemek için "geçici silme" yaklaşımını kullanın. Blob 'ları sağ silme, ilgili belgeler arama dizininden kaldırılmaz. Bunun yerine, aşağıdaki adımları kullanın:  
 
-1. Azure Search'e mantıksal olarak silinip silinmediğini belirtmek için blob için özel meta veri özellik ekleme
-2. Veri kaynağında bir geçici silme algılama ilkesi yapılandırma
-3. Dizin Oluşturucu (Dizin Oluşturucu durum API'si tarafından gösterilen şekilde) blob işlediğinde, fiziksel blob silebilirsiniz
+1. Bilişsel Arama Azure 'da mantıksal olarak silindiğini göstermek için blob 'a özel meta veri özelliği ekleyin
+2. Veri kaynağında geçici silme algılama ilkesi yapılandırma
+3. Dizin Oluşturucu blob 'u işledikten sonra (Dizin Oluşturucu durum API 'SI tarafından gösterildiği gibi), blobu fiziksel olarak silebilirsiniz
 
-Örneğin, bir blobun bir metadata özelliğine sahip silinmesi şu ilkeyi göz önünde bulundurur `IsDeleted` değerle `true`:
+Örneğin, aşağıdaki ilke, bir blob 'un bir meta veri özelliği `IsDeleted`, `true`değeri ile bir blob 'unu kabul eder:
 
     PUT https://[service name].search.windows.net/datasources/blob-datasource?api-version=2019-05-06
     Content-Type: application/json
@@ -313,12 +317,12 @@ Belgelerini silmeyi desteklemek için "geçici silme" bir yaklaşım kullanın. 
         }
     }   
 
-## <a name="indexing-large-datasets"></a>Büyük veri kümelerini dizin oluşturma
+## <a name="indexing-large-datasets"></a>Büyük veri kümelerini dizinleme
 
-Bloblarını dizine ekleme, zaman alıcı bir işlem olabilir. BLOB'ları dizin milyonlarca sahip olduğu durumlarda, verilerinizi bölümlemeyi ve paralel verileri işlemek için birden çok dizin oluşturucuları kullanarak dizin oluşturmayı hızlandırabilir. İşte nasıl bunu ayarlayabilirsiniz:
+Dizin oluşturma Blobları zaman alan bir işlem olabilir. Dizin oluşturmak için milyonlarca blob 'un bulunduğu durumlarda, verileri bölümleyerek ve paralel olarak verileri işlemek için birden çok Dizin Oluşturucu kullanarak dizin oluşturmayı hızlandırabilirsiniz. Bunu nasıl ayarlayabilmeniz gerekir:
 
-- Verilerinizi birden çok blob kapsayıcıları veya sanal klasörler bölümlere ayırma
-- Çeşitli Azure Search veri kaynakları, bir kapsayıcının veya klasörün başına ayarlayın. Blob klasörüne işaret edecek şekilde kullanma `query` parametresi:
+- Verilerinizi birden çok blob kapsayıcılarına veya sanal klasöre bölme
+- Her kapsayıcı veya klasör için bir tane olmak üzere çeşitli Azure Bilişsel Arama veri kaynakları ayarlayın. Blob klasörünü işaret etmek için `query` parametresini kullanın:
 
     ```
     {
@@ -329,20 +333,20 @@ Bloblarını dizine ekleme, zaman alıcı bir işlem olabilir. BLOB'ları dizin 
     }
     ```
 
-- Her bir veri kaynağına karşılık gelen bir dizin oluşturucu oluşturun. Tüm Dizin oluşturucuların aynı hedef arama dizinine işaret edebilir.  
+- Her veri kaynağı için karşılık gelen bir Dizin Oluşturucu oluşturun. Tüm Dizin oluşturucular aynı hedef arama dizinine işaret edebilir.  
 
-- Hizmetinizde bir arama birimi bir dizin oluşturucu, belirli bir zamanda çalıştırabilirsiniz. Yukarıda açıklandığı gibi birden çok dizin oluşturucu oluşturma yalnızca gerçekten paralel olarak çalıştırırsanız yararlı olur. Birden çok dizin oluşturucu paralel olarak çalıştırmak için uygun sayıda bölümleri ve çoğaltmalarını oluşturarak arama hizmetinizi ölçeklendirin. Arama hizmetinizi 6 arama birimleri (örneğin, 2 bölüm x 3 çoğaltmalar) varsa, örneğin, ardından 6 dizin oluşturucular eşzamanlı olarak dizin oluşturma performansı six-fold bir artış výsledek çalıştırabilirsiniz. Ölçekleme ve kapasite planlaması hakkında daha fazla bilgi için bkz: [sorgu ve iş yüklerini Azure Search'te dizin oluşturma için kaynak düzeylerini ölçeklendirme](search-capacity-planning.md).
+- Hizmetinizdeki bir arama birimi, belirli bir zamanda bir Dizin Oluşturucu çalıştırabilir. Yukarıda açıklandığı gibi birden çok Dizin Oluşturucu oluşturmak yalnızca aslında paralel olarak çalıştırıldıklarında yararlıdır. Birden çok dizin oluşturucuyu paralel olarak çalıştırmak için, uygun sayıda bölüm ve çoğaltma oluşturarak arama hizmetinizi ölçeklendirin. Örneğin, arama hizmetinizin 6 arama birimi varsa (örneğin, 2 bölüm x 3 çoğaltmalar), 6 Dizin oluşturucular eşzamanlı olarak çalışabilir ve dizin oluşturma sırasında altı kat artışına neden olur. Ölçeklendirme ve kapasite planlaması hakkında daha fazla bilgi edinmek için bkz. [Azure bilişsel arama 'de sorgu ve dizin oluşturma iş yükleri için kaynak düzeylerini ölçeklendirme](search-capacity-planning.md).
 
-## <a name="indexing-documents-along-with-related-data"></a>İlgili verileri yanı sıra dizin oluşturma belgeleri
+## <a name="indexing-documents-along-with-related-data"></a>İlgili verilerle birlikte belgelerin dizinini oluşturma
 
-"Belgeleri dizininize birden çok kaynaktan bir araya getirmek" isteyebilirsiniz. Örneğin, Cosmos DB'de depolanan diğer meta veriler BLOB metin birleştirmek isteyebilirsiniz. Birden fazla bölümü arama belgeleri oluşturulacak API dizin birlikte çeşitli oluşturucular anında iletme bile kullanabilirsiniz. 
+Dizininizdeki birden fazla kaynaktaki belgeleri "birleştirmek" isteyebilirsiniz. Örneğin, Cosmos DB içinde depolanan diğer meta verilerle bloblardan metin birleştirmek isteyebilirsiniz. Birden çok bölümden arama belgeleri oluşturmak için çeşitli dizin oluşturucularla birlikte gönderme dizin oluşturma API 'sini de kullanabilirsiniz. 
 
-Bunun işe yaraması için tüm dizin oluşturucuların ve diğer bileşenleri belge anahtarı kabul etmeniz gerekir. Ayrıntılı bir Rehber için bu dış makaleye bakın: [Azure Search'te diğer verilerle belgeleri birleştirmeniz](https://blog.lytzen.name/2017/01/combine-documents-with-other-data-in.html).
+Bunun çalışması için, tüm dizin oluşturucularının ve diğer bileşenlerin belge anahtarını kabul etmesi gerekir. Bu konuyla ilgili daha fazla bilgi için bkz. [birden çok Azure veri kaynağını dizine](https://docs.microsoft.com/azure/search/tutorial-multiple-data-sources)gönderme. Ayrıntılı bir adım adım için bkz. bu dış Makale: [belgeleri Azure bilişsel arama diğer verilerle birleştirme](https://blog.lytzen.name/2017/01/combine-documents-with-other-data-in.html).
 
 <a name="IndexingPlainText"></a>
-## <a name="indexing-plain-text"></a>Dizin oluşturma düz metin 
+## <a name="indexing-plain-text"></a>Düz metin dizini oluşturma 
 
-Tüm bloblar aynı kodlamada düz metin içeriyorsa, önemli ölçüde dizin oluşturma kullanarak performansı **metni ayrıştırma modu**. Ayrıştırma modu metin kullanmak için ayarlanmış `parsingMode` yapılandırma özelliğini `text`:
+Tüm bloblarınız aynı kodlamada düz metin içeriyorsa, **metin ayrıştırma modunu**kullanarak dizin oluşturma performansını önemli ölçüde artırabilirsiniz. Metin ayrıştırma modunu kullanmak için `parsingMode` yapılandırma özelliğini `text`olarak ayarlayın:
 
     PUT https://[service name].search.windows.net/indexers/[indexer name]?api-version=2019-05-06
     Content-Type: application/json
@@ -353,7 +357,7 @@ Tüm bloblar aynı kodlamada düz metin içeriyorsa, önemli ölçüde dizin olu
       "parameters" : { "configuration" : { "parsingMode" : "text" } }
     }
 
-Varsayılan olarak, `UTF-8` kodlama olduğu varsayılır. Farklı bir kodlama belirtmek için kullanın `encoding` yapılandırma özellik: 
+Varsayılan olarak, `UTF-8` kodlaması varsayılır. Farklı bir kodlama belirtmek için `encoding` yapılandırma özelliğini kullanın: 
 
     {
       ... other parts of indexer definition
@@ -362,27 +366,37 @@ Varsayılan olarak, `UTF-8` kodlama olduğu varsayılır. Farklı bir kodlama be
 
 
 <a name="ContentSpecificMetadata"></a>
-## <a name="content-type-specific-metadata-properties"></a>İçerik türe özgü meta veriler özellikleri
-Aşağıdaki tabloda her belge biçimi için yapılan işleme özetler ve Azure Search tarafından ayıklanan meta veri özelliklerini açıklar.
+## <a name="content-type-specific-metadata-properties"></a>İçerik türüne özgü meta veri özellikleri
+Aşağıdaki tabloda her belge biçimi için yapılan işlem özetlenmektedir ve Azure Bilişsel Arama tarafından ayıklanan meta veri özellikleri açıklanmaktadır.
 
-| Belge biçimi / içerik türü | İçerik türü belirli meta veri özelliklerini | İşleme ayrıntıları |
+| Belge biçimi/içerik türü | İçerik türü belirli meta veri özellikleri | İşleme ayrıntıları |
 | --- | --- | --- |
-| HTML (`text/html`) |`metadata_content_encoding`<br/>`metadata_content_type`<br/>`metadata_language`<br/>`metadata_description`<br/>`metadata_keywords`<br/>`metadata_title` |Şerit HTML biçimlendirmesi ve metni Ayıkla |
-| PDF (`application/pdf`) |`metadata_content_type`<br/>`metadata_language`<br/>`metadata_author`<br/>`metadata_title` |Ekli belgelerin (görüntüleri hariç) dahil olmak üzere, metni Ayıkla |
-| DOCX (application/vnd.openxmlformats-officedocument.wordprocessingml.document) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_character_count`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_page_count`<br/>`metadata_word_count` |Ekli belgelerin dahil olmak üzere, metni Ayıkla |
-| DOC (uygulama/msword) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_character_count`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_page_count`<br/>`metadata_word_count` |Ekli belgelerin dahil olmak üzere, metni Ayıkla |
-| XLSX (application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_last_modified` |Ekli belgelerin dahil olmak üzere, metni Ayıkla |
-| XLS (application/vnd.ms-excel) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_last_modified` |Ekli belgelerin dahil olmak üzere, metni Ayıkla |
-| PPTX (application/vnd.openxmlformats-officedocument.presentationml.presentation) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_slide_count`<br/>`metadata_title` |Ekli belgelerin dahil olmak üzere, metni Ayıkla |
-| PPT (uygulama/vnd.ms-powerpoint) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_slide_count`<br/>`metadata_title` |Ekli belgelerin dahil olmak üzere, metni Ayıkla |
-| MSG (uygulama/vnd.ms-outlook) |`metadata_content_type`<br/>`metadata_message_from`<br/>`metadata_message_to`<br/>`metadata_message_cc`<br/>`metadata_message_bcc`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_subject` |Ekleri dahil olmak üzere, metni Ayıkla |
-| ZIP (uygulama/zip'i) |`metadata_content_type` |Arşivdeki tüm belgelerden metni Ayıkla |
-| XML (application/xml) |`metadata_content_type`</br>`metadata_content_encoding`</br> |XML işaretlemesini kaldırın ve metni Ayıkla |
-| JSON (application/json) |`metadata_content_type`</br>`metadata_content_encoding` |Metin ayıklama<br/>NOT: JSON blobu birden çok belge alanlarını ayıklamak ihtiyacınız varsa bkz [dizin JSON blobları](search-howto-index-json-blobs.md) Ayrıntılar için |
-| EML (ileti/rfc822) |`metadata_content_type`<br/>`metadata_message_from`<br/>`metadata_message_to`<br/>`metadata_message_cc`<br/>`metadata_creation_date`<br/>`metadata_subject` |Ekleri dahil olmak üzere, metni Ayıkla |
-| RTF (uygulama/rtf) |`metadata_content_type`</br>`metadata_author`</br>`metadata_character_count`</br>`metadata_creation_date`</br>`metadata_page_count`</br>`metadata_word_count`</br> | Metin ayıklama|
-| Düz metin (metin/düz) |`metadata_content_type`</br>`metadata_content_encoding`</br> | Metin ayıklama|
+| HTML (metin/html) |`metadata_content_encoding`<br/>`metadata_content_type`<br/>`metadata_language`<br/>`metadata_description`<br/>`metadata_keywords`<br/>`metadata_title` |HTML biçimlendirmesini şerit ve metin Ayıkla |
+| PDF (uygulama/PDF) |`metadata_content_type`<br/>`metadata_language`<br/>`metadata_author`<br/>`metadata_title` |Gömülü belgeler dahil olmak üzere metni Ayıkla (görüntüler hariç) |
+| DOCX (application/vnd. openxmlformats-officedocument. WordprocessingML. Document) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_character_count`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_page_count`<br/>`metadata_word_count` |Gömülü belgeler dahil olmak üzere metni Ayıkla |
+| DOC (Application/msword) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_character_count`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_page_count`<br/>`metadata_word_count` |Gömülü belgeler dahil olmak üzere metni Ayıkla |
+| DOCM (application/vnd. MS-Word. Document. macroenabled. 12) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_character_count`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_page_count`<br/>`metadata_word_count` |Gömülü belgeler dahil olmak üzere metni Ayıkla |
+| WORD XML (application/vnd. MS-word2006ml) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_character_count`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_page_count`<br/>`metadata_word_count` |XML işaretlemesini şerit ve metin Ayıkla |
+| WORD 2003 XML (application/vnd. MS-WordML) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date` |XML işaretlemesini şerit ve metin Ayıkla |
+| XLSX (application/vnd. openxmlformats-officedocument. elektronik sayfaml. Sheet) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_last_modified` |Gömülü belgeler dahil olmak üzere metni Ayıkla |
+| XLS (application/vnd. MS-Excel) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_last_modified` |Gömülü belgeler dahil olmak üzere metni Ayıkla |
+| XLSM (application/vnd. MS-Excel. Sheet. makroenabled. 12) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_last_modified` |Gömülü belgeler dahil olmak üzere metni Ayıkla |
+| PPTX (application/vnd. openxmlformats-officedocument. presentationml. Presentation) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_slide_count`<br/>`metadata_title` |Gömülü belgeler dahil olmak üzere metni Ayıkla |
+| PPT (application/vnd. MS-PowerPoint) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_slide_count`<br/>`metadata_title` |Gömülü belgeler dahil olmak üzere metni Ayıkla |
+| PPTM (application/vnd. MS-PowerPoint. Presentation. macroenabled. 12) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_slide_count`<br/>`metadata_title` |Gömülü belgeler dahil olmak üzere metni Ayıkla |
+| MSG (application/vnd. MS-Outlook) |`metadata_content_type`<br/>`metadata_message_from`<br/>`metadata_message_from_email`<br/>`metadata_message_to`<br/>`metadata_message_to_email`<br/>`metadata_message_cc`<br/>`metadata_message_cc_email`<br/>`metadata_message_bcc`<br/>`metadata_message_bcc_email`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_subject` |Ekleri dahil metin Ayıkla |
+| ODT (application/vnd. oassıs. OpenDocument. Text) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_character_count`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`metadata_page_count`<br/>`metadata_word_count` |Gömülü belgeler dahil olmak üzere metni Ayıkla |
+| ODS (application/vnd. oassıs. OpenDocument. Spreadsheet) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_last_modified` |Gömülü belgeler dahil olmak üzere metni Ayıkla |
+| ODP (application/vnd. oassıs. OpenDocument. Presentation) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_last_modified`<br/>`title` |Gömülü belgeler dahil olmak üzere metni Ayıkla |
+| ZIP (uygulama/zip) |`metadata_content_type` |Arşivdeki tüm belgelerden metin Ayıkla |
+| GZ (uygulama/gzip) |`metadata_content_type` |Arşivdeki tüm belgelerden metin Ayıkla |
+| EPUB (Application/EPUB + zip) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_creation_date`<br/>`metadata_title`<br/>`metadata_description`<br/>`metadata_language`<br/>`metadata_keywords`<br/>`metadata_identifier`<br/>`metadata_publisher` |Arşivdeki tüm belgelerden metin Ayıkla |
+| XML (Application/XML) |`metadata_content_type`<br/>`metadata_content_encoding`<br/> |XML işaretlemesini şerit ve metin Ayıkla |
+| JSON (uygulama/JSON) |`metadata_content_type`<br/>`metadata_content_encoding` |Metin ayıklama<br/>NOTE: bir JSON blobundan birden çok belge alanı ayıklamanız gerekiyorsa, Ayrıntılar için bkz. [JSON Bloblarını dizine ekleme](search-howto-index-json-blobs.md) |
+| EML (ileti/rfc822) |`metadata_content_type`<br/>`metadata_message_from`<br/>`metadata_message_to`<br/>`metadata_message_cc`<br/>`metadata_creation_date`<br/>`metadata_subject` |Ekleri dahil metin Ayıkla |
+| RTF (uygulama/RTF) |`metadata_content_type`<br/>`metadata_author`<br/>`metadata_character_count`<br/>`metadata_creation_date`<br/>`metadata_page_count`<br/>`metadata_word_count`<br/> | Metin ayıklama|
+| Düz metin (metin/düz) |`metadata_content_type`<br/>`metadata_content_encoding`<br/> | Metin ayıklama|
 
 
-## <a name="help-us-make-azure-search-better"></a>Azure Search iyileştirmemize yardımcı olun
-Özellik istekleri veya geliştirmeleri için fikriniz varsa bize üzerinde bildirin bizim [UserVoice sitesinde](https://feedback.azure.com/forums/263029-azure-search/).
+## <a name="help-us-make-azure-cognitive-search-better"></a>Azure Bilişsel Arama daha iyi hale getirmemize yardımcı olun
+Geliştirmeler için özellik istekleriniz veya fikirler varsa [UserVoice sitemizi](https://feedback.azure.com/forums/263029-azure-search/)bize tanıyın.

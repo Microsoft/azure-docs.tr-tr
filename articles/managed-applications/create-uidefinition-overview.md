@@ -1,6 +1,6 @@
 ---
-title: Kullanıcı Arabirimi oluşturma anlamak tanımı Azure yönetilen uygulamalar | Microsoft Docs
-description: Azure yönetilen uygulamalar için kullanıcı Arabirimi tanımları oluşturulacağını açıklar.
+title: Createuıdefinition. JSON-Azure yönetilen uygulaması
+description: Azure portal için Kullanıcı arabirimi tanımlarının nasıl oluşturulacağını açıklar. Azure yönetilen uygulamaları tanımlarken kullanılır.
 services: managed-applications
 documentationcenter: na
 author: tfitzmac
@@ -11,57 +11,62 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/26/2019
+ms.date: 08/06/2019
 ms.author: tomfitz
-ms.openlocfilehash: 3d0a6d97440404904c041369a4631fdd3fb618b4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9009d6a54c27617dd0d1d53369405555becde59d
+ms.sourcegitcommit: f29fec8ec945921cc3a89a6e7086127cc1bc1759
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66257558"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72529322"
 ---
-# <a name="create-azure-portal-user-interface-for-your-managed-application"></a>Yönetilen uygulamanız için Azure portal kullanıcı arabirimi oluşturma
-Bu belge, createUiDefinition.json dosyasının temel kavramlar açıklanmaktadır. Azure portalı, yönetilen bir uygulama oluşturmak için kullanılan kullanıcı arabirimi oluşturmak için bu dosyayı kullanır.
+# <a name="createuidefinitionjson-for-azure-managed-applications-create-experience"></a>Azure yönetilen uygulamanın oluşturma deneyimi için Createuıdefinition. JSON
+
+Bu belge, yönetilen bir uygulama oluştururken Kullanıcı arabirimini tanımlamak için Azure portal tarafından kullanılan **Createuıdefinition. JSON** dosyasının temel kavramlarını tanıtır.
+
+Şablon aşağıdaki gibidir
 
 ```json
 {
    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
-   "handler": "Microsoft.Compute.MultiVm",
+   "handler": "Microsoft.Azure.CreateUIDef",
    "version": "0.1.2-preview",
    "parameters": {
       "basics": [ ],
       "steps": [ ],
-      "outputs": { }
+      "outputs": { },
+      "resourceTypes": [ ]
    }
 }
 ```
 
-Bir CreateUiDefinition her zaman üç özellik içerir: 
+Createuıdefinition her zaman üç özellik içerir: 
 
-* İşleyici
+* Iy
 * version
 * parametreler
 
-Yönetilen uygulamalar için her zaman işleyicisi olmalıdır `Microsoft.Compute.MultiVm`, ve desteklenen son sürümü `0.1.2-preview`.
+İşleyici her zaman `Microsoft.Azure.CreateUIDef` olmalıdır ve desteklenen en son sürüm `0.1.2-preview` ' dir.
 
-Parameters özelliği şema sürümü ve belirtilen işleyici birleşimi bağlıdır. Yönetilen uygulamalar için desteklenen özelliklerdir `basics`, `steps`, ve `outputs`. Temel kavramları ve adımları özelliklerini içeren _öğeleri_ - gibi metin kutuları ve bırakmalar - Azure Portalı'nda görüntülenecek. Outputs özelliğini, Azure Resource Manager dağıtım şablonu parametrelerini için belirtilen öğe çıkış değerlerini eşleştirmek için kullanılır.
+Parameters özelliğinin şeması, belirtilen işleyicinin ve sürümün birleşimine bağlıdır. Yönetilen uygulamalar için desteklenen özellikler `basics`, `steps` ve `outputs` ' dir. Temel bilgiler ve adımlar özellikleri, Azure portal görüntülenecek metin kutuları ve açılan [öğeler](create-uidefinition-elements.md) içerir. Çıktılar özelliği, belirtilen öğelerin çıkış değerlerini Azure Resource Manager dağıtım şablonunun parametreleriyle eşlemek için kullanılır.
 
-Dahil olmak üzere `$schema` önerilir ancak isteğe bağlıdır. Belirtilmişse, değerin için `version` içinde eşleşmelidir `$schema` URI.
+@No__t_0 dahil edilmesi önerilir, ancak isteğe bağlıdır. Belirtilmişse, `version` ' ın değeri, `$schema` URI 'sindeki sürümle aynı olmalıdır.
 
-UI tanımı korumalı alan oluşturun ve kullanıcı Arabirimi tanım Önizleme için kullanabileceğiniz veya JSON Düzenleyicisi, UI tanımı oluşturmak için kullanabilirsiniz. Korumalı alan hakkında daha fazla bilgi için bkz: [Azure yönetilen uygulamalar için portal Arabirimi Test](test-createuidefinition.md).
+Createuıdefinition 'nizi oluşturmak için bir JSON Düzenleyicisi kullanabilir, ardından bunu önizlemek için [Createuıdefinition korumalı](https://portal.azure.com/?feature.customPortal=false&#blade/Microsoft_Azure_CreateUIDef/SandboxBlade) alanında test edebilirsiniz. Korumalı alan hakkında daha fazla bilgi için bkz. [Azure yönetilen uygulamalar için Portal arabiriminizi test](test-createuidefinition.md)etme.
 
 ## <a name="basics"></a>Temel Bilgiler
-Temel bilgileri her zaman ilk adımı Azure portalında dosyasını ayrıştırırken oluşturulan Sihirbazı adımdır. Belirtilen öğelerin görüntüleme yanı sıra `basics`, portal abonelik, kaynak grubu ve dağıtım konumunu seçmek kullanıcıları için öğeleri ekler. Genellikle, bu adımda bir küme veya yönetici kimlik bilgileri adı gibi dağıtım genelinde parametreleri için sorgu öğeleri gitmeniz gerekir.
 
-Bir öğenin davranışı kullanıcının aboneliği, kaynak grubu veya konum bağlıysa, bu öğenin temel bilgileri kullanılamaz. Örneğin, **Microsoft.Compute.SizeSelector** kullanıcının abonelik ve konum kullanılabilir boyutların listesi belirlemek için bağlıdır. Bu nedenle, **Microsoft.Compute.SizeSelector** adımlarda yalnızca kullanılabilir. Genellikle, yalnızca öğeleri **Microsoft.Common** ad alanı, temel bilgileri kullanılabilir. Ancak diğer ad alanlarında bazı öğeleri (gibi **Microsoft.Compute.Credentials**), kullanıcının bağlamına bağlı olmayan, yine de izin verilir.
+Temel bilgiler, Azure portal dosyayı ayrıştırdığında oluşturulan ilk adımdır. Portal, `basics` ' da belirtilen öğeleri görüntülemenin yanı sıra, kullanıcıların abonelik, kaynak grubu ve dağıtımın konumunu seçmesi için öğeleri çıkartır. Mümkün olduğunda, küme veya yönetici kimlik bilgileri gibi dağıtım çapındaki parametreleri sorgulayan öğeler bu adımda ilerlemelidir.
 
 ## <a name="steps"></a>Adımlar
-Adımları özelliği, her biri bir veya daha fazla öğe içeren temel bilgileri sonra görüntülemek için sıfır veya daha fazla ek adımlar içerebilir. Rol veya dağıtılan uygulamayı katmanının başına adımları eklemeyi düşünün. Örneğin, bir kümedeki ana düğümleri için girişler için bir adım ve çalışan düğümleri için bir adım ekleyin.
+
+Steps özelliği, her biri bir veya daha fazla öğe içeren temel kavramlar sonrasında görüntülenecek sıfır veya daha fazla ek adım içerebilir. Dağıtılan uygulamanın rol veya katmanına göre adımları eklemeyi düşünün. Örneğin, ana düğüm girişleri için bir adım ve bir kümedeki çalışan düğümlerine yönelik bir adım ekleyin.
 
 ## <a name="outputs"></a>Çıkışlar
-Azure portalını kullanır `outputs` öğeleri eşlemek için özellik `basics` ve `steps` Azure Resource Manager dağıtım şablonu parametrelerini için. Bu sözlüğün anahtarlarını şablon parametrelerinin adları ve değerleri başvurulan öğelerin çıkış nesnelerden özellikleridir.
 
-Yönetilen uygulama kaynak adı ayarlamak için adlandırılmış bir değer eklemelisiniz `applicationResourceName` outputs özelliğini de. Bu değer ayarlamazsanız, uygulama adı için bir GUID atar. Bir ad kullanıcıdan isteyen kullanıcı arabiriminde bir metin kutusu ekleyebilirsiniz.
+Azure portal, öğeleri `basics` ve `steps` ' den Azure Resource Manager dağıtım şablonunun parametrelerine eşlemek için `outputs` özelliğini kullanır. Bu sözlüğün anahtarları, şablon parametrelerinin adlarıdır ve değerler başvurulan öğelerden çıkış nesnelerinin özellikleridir.
+
+Yönetilen uygulama kaynak adını ayarlamak için, çıktılar özelliğinde `applicationResourceName` adlı bir değer eklemelisiniz. Bu değeri ayarlamazsanız, uygulama ad için bir GUID atar. Kullanıcı arabirimine, kullanıcıdan bir ad isteyen bir metin kutusu ekleyebilirsiniz.
 
 ```json
 "outputs": {
@@ -73,15 +78,32 @@ Yönetilen uygulama kaynak adı ayarlamak için adlandırılmış bir değer ekl
 }
 ```
 
+## <a name="resource-types"></a>Kaynak türleri
+
+Kullanılabilir konumları yalnızca dağıtılacak kaynak türlerini destekleyen konumlara göre filtrelemek için kaynak türlerinin bir dizisini sağlayın. Birden çok kaynak türü sağlarsanız, yalnızca tüm kaynak türlerini destekleyen konumlar döndürülür. Bu özellik isteğe bağlıdır.
+
+```json
+{
+    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+    "handler": "Microsoft.Azure.CreateUIDef",
+    "version": "0.1.2-preview",
+    "parameters": {
+      "resourceTypes": ["Microsoft.Compute/disks"],
+      "basics": [
+        ...
+```  
+
 ## <a name="functions"></a>İşlevler
-Benzer şekilde şablon işlevleri, Azure Resource Manager (hem de söz dizimi ve İşlevler), CreateUiDefinition işlevler öğeleri girişleri ve çıkışları ve koşullar gibi özellikler ile çalışmak için sağlar.
+
+Createuıdefinition, öğelerin girdileri ve çıkışları ve conditionals gibi özelliklerle çalışmak için [işlevler](create-uidefinition-functions.md) sağlar. Bu işlevler, Azure Resource Manager şablon işlevleri için hem söz dizimi hem de işlevselliğe benzer.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-CreateUiDefinition.json dosya, basit bir şeması vardır. Tüm desteklenen öğeleri ve işlevleri gerçek derinliğini gelir. Bu öğeler daha ayrıntılı açıklanmıştır:
 
-- [Öğeleri](create-uidefinition-elements.md)
+Createuıdefinition. json dosyasının kendisi basit bir şemaya sahiptir. Gerçek derinliği, desteklenen tüm öğe ve işlevlerden gelir. Bu öğeler, daha ayrıntılı olarak açıklanmıştır:
+
+- [Ög](create-uidefinition-elements.md)
 - [İşlevler](create-uidefinition-functions.md)
 
-CreateUiDefinition için geçerli bir JSON şeması şuradan ulaşabilirsiniz: https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json.
+Createuıdefinition için geçerli bir JSON şeması şurada bulunabilir: https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json.
 
-Bir örnek kullanıcı arabirimi dosyasına bakın [createUiDefinition.json](https://github.com/Azure/azure-managedapp-samples/blob/master/samples/201-managed-app-using-existing-vnet/createUiDefinition.json).
+Örnek bir kullanıcı arabirimi dosyası için bkz. [Createuıdefinition. JSON](https://github.com/Azure/azure-managedapp-samples/blob/master/Managed%20Application%20Sample%20Packages/201-managed-app-using-existing-vnet/createUiDefinition.json).

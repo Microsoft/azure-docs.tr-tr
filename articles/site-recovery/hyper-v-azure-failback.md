@@ -1,96 +1,98 @@
 ---
-title: Bir yeniden çalışma sırasında Hyper-v vm'lerinin olağanüstü durum Azure'dan şirket içine çalıştırma | Microsoft Docs
-description: Başarısız öğrenin Azure Site Recovery hizmeti ile azure'a olağanüstü durum kurtarma sırasında bir şirket içi siteye Hyper-V sanal makineleri yedekleyin.
+title: Azure 'dan Hyper-v VM 'lerini Azure Site Recovery ile yeniden çalıştırma
+description: Azure Site Recovery hizmetiyle Azure 'a olağanüstü durum kurtarma sırasında Hyper-V sanal makinelerini şirket içi bir siteye nasıl geri yükleyeceğinizi öğrenin.
 services: site-recovery
 author: rajani-janaki-ram
 manager: gauravd
 ms.service: site-recovery
 ms.topic: article
-ms.date: 11/27/2018
+ms.date: 09/12/2019
 ms.author: rajanaki
-ms.openlocfilehash: 4030b1905f8d5b50ef6be3ffa61eda74d8a27951
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b924c1424a309fb61f690c21e5665a70356c7a62
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60552425"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74084223"
 ---
-# <a name="run-a-failback-for-hyper-v-vms"></a>Hyper-V Vm'leri için bir yeniden çalışma
+# <a name="run-a-failback-for-hyper-v-vms"></a>Hyper-V VM 'Leri için yeniden çalışma çalıştırma
 
-Bu makalede Site Recovery tarafından korunan arka Hyper-V sanal makine başarısız açıklar.
+Bu makalede, Site Recovery tarafından korunan Hyper-V sanal makinelerinin nasıl başarısız olduğu açıklanır.
 
-## <a name="prerequisites"></a>Önkoşullar
-1. Hakkında ayrıntılar okuduğunuzu olun [geri dönme farklı türde](concepts-types-of-failback.md) ve karşılık gelen uyarılar.
-1. Birincil site VMM sunucusunda veya Hyper-V konak sunucusunu Azure'a bağlı olduğundan emin olun.
-2. Gerçekleştirilen **işleme** sanal makinede.
+## <a name="prerequisites"></a>Ön koşullar
 
-## <a name="perform-failback"></a>Yeniden çalışma gerçekleştirin
-İkincil konuma yük devretme birincil sonra çoğaltılan sanal makineler Site Recovery tarafından korunmayan ve ikincil konumdaki artık etkin konum davranır. Başarısız olmaya planlı yük devretme ikincil siteden birincil siteye, aşağıdaki gibi çalıştırın, bir kurtarma planında Vm'leri yedekleyin. 
-1. Seçin **kurtarma planları** > *recoveryplan_name*. Tıklayın **yük devretme** > **planlı yük devretme**.
-2. Üzerinde **planlı yük devretmeyi Onayla** sayfasında, kaynak ve hedef konumları seçin. Yük devretme yönü unutmayın. Birincilden yük devretme durumunda olarak bekler ve tüm sanal makineler, bu yalnızca bilgi içindir ikincil konumdaki olur.
-3. Azure'dan devrediyorsanız Ayarları'nda seçin **veri eşitleme**:
-    - **(Delta değişikliklerini yalnızca Eşitle) yük devretmeden önce verileri eşitlemek**— kapatmadan bunları eşitlerken bu seçenek sanal makineler için kapalı kalma süresini en aza indirir. Bunu, aşağıdaki adımları gerçekleştirir:
-        - 1\. Aşama: Azure'da sanal makine anlık görüntüsünü alır ve şirket içi Hyper-V konağına kopyalar. Makine Azure'da çalıştırmaya devam eder.
-        - 2\. Aşama: Yeni değişiklik var. gerçekleşmesi azure'da sanal makineyi kapatır. Delta değişikliklerin son kümesi şirket içi sunucusuna aktarılır ve şirket içi sanal makine başlatıldı.
+- [Farklı yeniden çalışma türleri](concepts-types-of-failback.md) ve ilgili uyarılar hakkındaki ayrıntıları okuduğunuzdan emin olun.
+- Birincil site VMM sunucusunun veya Hyper-V ana bilgisayar sunucusunun Azure 'a bağlı olduğundan emin olun.
+- Sanal makinede **yürütmeyi** gerçekleştirmelisiniz.
+- Çoğaltma için bir depolama hesabı kullandığınızdan ve yönetilmeyen disklere sahip olduğunuzdan emin olun. Diskleri yönetme kullanılarak çoğaltılan Hyper-V VM 'lerinin yeniden çalışması desteklenmez.
 
-    - **Yalnızca Yük devretme sırasında veri (tam yükleme) eşitleme**— bu seçenek daha hızlıdır.
-        - Bu seçenek daha hızlı çünkü disk çoğunu değişti ve biz sağlama toplamı hesaplama zaman harcamak istemiyorsanız bekliyoruz. Bu diskin bir yükleme gerçekleştirir. Şirket içi sanal makine silindiğinde de yararlıdır.
-        - Bir süredir Azure çalıştırıyorsunuz varsa bu seçeneği kullanmanız önerilir (bir ay veya daha fazlası) veya şirket içi sanal makine silindi. Bu seçenek, herhangi bir sağlama toplamı hesaplama gerçekleştirmez.
+## <a name="perform-failback"></a>Yeniden çalışma gerçekleştir
+Birincil sunucudan ikincil konuma yük devretmeden sonra, çoğaltılan sanal makineler Site Recovery tarafından korunmaz ve ikincil konum artık etkin konum olarak davranır. Bir kurtarma planında VM 'Leri yeniden devretmek için, ikincil siteden birincil bir yük devretmeyi aşağıdaki gibi çalıştırın. 
+1. *Recoveryplan_name* > **Kurtarma planlarını** seçin. **Planlı Yük devretme** > **Yük devretme** ' ya tıklayın.
+2. **Planlı Yük devretmeyi Onayla** sayfasında, kaynak ve hedef konumları seçin. Yük devretme yönünü aklınızda edin. Birincil konumdaki yük devretme beklenen şekilde çalışmışsa ve tüm sanal makineler ikincil konumsa bu yalnızca bilgi amaçlıdır.
+3. Azure 'dan geri yük devretmek için **veri eşitleme**' de ayarları seçin:
+    - **Yük devretme işleminden önce verileri eşitleme (yalnızca Delta değişikliklerini eşitleme)** — Bu seçenek, sanal makinelerin kapanmadan eşitlendiği kapalı kalma süresini en aza indirir. Aşağıdaki adımları yapar:
+        - 1\. Aşama: Azure 'da sanal makinenin anlık görüntüsünü alır ve şirket içi Hyper-V konağına kopyalar. Makine Azure 'da çalışmaya devam ediyor.
+        - 2\. Aşama: Azure 'da sanal makineyi kapatır, bu sayede hiçbir yeni değişiklik gerçekleşmez. Son Delta değişikliği kümesi şirket içi sunucuya aktarılır ve şirket içi sanal makine başlatılır.
+
+    - **Yalnızca yük devretme sırasında (tam indirme) verileri eşitler**— Bu seçenek daha hızlıdır.
+        - Diskin çoğunu değiştirdiğimiz ve sağlama toplamı hesaplamasında zaman harcamasını istediğimizden Bu seçenek daha hızlıdır. Diskin indirilmesini gerçekleştirir. Ayrıca, şirket içi sanal makine silindiğinde de yararlı olur.
+        - Azure 'u bir süredir (bir ay veya daha fazla) çalıştırıyorsanız veya şirket içi sanal makine silinmişse bu seçeneği kullanmanızı öneririz. Bu seçenek, sağlama toplamı hesaplamaları gerçekleştirmez.
 
 
-4. Veri şifreleme bulut için etkinleştirilmişse **şifreleme anahtarı** VMM sunucusunda sağlayıcı yüklemesi sırasında veri şifrelemesi etkin olduğunda verilmiş sertifikayı seçin.
+4. Bulut için veri şifreleme etkinse, **şifreleme anahtarı** ' nda, VMM sunucusunda sağlayıcı yüklemesi sırasında veri şifrelemeyi etkinleştirdiğinizde verilen sertifikayı seçin.
 5. Yük devretmeyi başlatın. Yük devretme işleminin ilerleme durumunu **İşler** sekmesinden takip edebilirsiniz.
-6. Yük devretmeden önce verileri eşitlemek için seçeneğini seçtiyseniz, ilk veri eşitlemesi tamamlandıktan sonra Azure sanal makineleri kapatmak hazır **işleri** > İş adı >  **Yük devretme tamamlayın**. Bu Azure makineyi kapatmadan, şirket içi sanal makineye en son değişiklikleri aktarır ve şirket içi VM başlatır.
-7. Bunu doğrulamak için sanal makine oturum beklendiği gibi kullanılabilir artık.
-8. Yürütme Bekleme durumundaki sanal makinedir. Tıklayın **işleme** için yük devretmeyi yürütürsünüz.
-9. Yeniden çalışmayı tamamla için tıklatın **ters çoğaltma** birincil sitedeki sanal makine korumayı başlatmak için.
+6. Verilerin yük devretmeden önce eşitlenmesi seçeneğini belirlediyseniz, ilk veri eşitlemesi tamamlandıktan sonra Azure 'daki sanal makineleri kapatmaya hazırsanız Işler > iş adı > **Yük devretmeyi tamamladıktan**sonra **işler** ' e tıklayın. Bu, Azure makinesini kapatır, en son değişiklikleri şirket içi sanal makineye aktarır ve şirket içi VM 'yi başlatır.
+7. Artık beklendiği gibi kullanılabilir olduğunu doğrulamak için sanal makinede oturum açabilirsiniz.
+8. Sanal makine, bir tamamlama bekleme durumunda. Yük devretmeyi yürütmek için **Yürüt** ' e tıklayın.
+9. Yeniden çalışmayı gerçekleştirmek için, birincil sitede sanal makineyi korumaya başlamak üzere **çoğaltmayı tersine çevir** ' e tıklayın.
 
 
-Özgün birincil sitede yeniden çalıştırmak için bu yordamları izleyin. Bu yordamda, bir kurtarma planı için planlanan yük devretme çalıştırma açıklanmaktadır. Alternatif olarak, yük devretme için tek bir sanal makine üzerinde çalışabilir **sanal makineler** sekmesi.
+Özgün birincil siteye yeniden yük devretmek için bu yordamları izleyin. Bu yordamda, bir kurtarma planı için planlı yük devretmenin nasıl çalıştırılacağı açıklanmaktadır. Alternatif olarak, **sanal makineler** sekmesinde tek bir sanal makine için yük devretmeyi çalıştırabilirsiniz.
 
 
-## <a name="failback-to-an-alternate-location-in-hyper-v-environment"></a>Farklı bir konuma Hyper-V ortamına yeniden çalışma
-Arasında korumayı dağıttıysanız bir [Hyper-V site ile Azure](site-recovery-hyper-v-site-to-azure.md) özelliği yeniden çalışma için azure'dan şirket alternatif bir konuma gerekir. Bu yeni şirket içi donanım ayarlama istiyorsanız kullanışlıdır. Bunu nasıl yapacağınız aşağıda verilmiştir.
+## <a name="failback-to-an-alternate-location-in-hyper-v-environment"></a>Hyper-V ortamında alternatif bir konuma yeniden çalışma
+Bir [Hyper-V sitesi Ile Azure](site-recovery-hyper-v-site-to-azure.md) arasında koruma dağıttıysanız, Azure 'dan alternatif bir şirket içi konuma yeniden çalışma yeteneği uygulamanız gerekir. Yeni şirket içi donanım ayarlamanız gerekiyorsa bu faydalıdır. Bunu yapabilirsiniz.
 
-1. Yeni donanım ayarlıyorsanız, Windows Server 2012 R2 ve Hyper-V rolünü sunucuya yükleyin.
-2. Özgün sunucuya vardı aynı ada sahip bir sanal ağ anahtarı oluşturun.
-3. Seçin **korunan öğeler** -> **koruma grubu** -> \<ProtectionGroupName > -> \<Sourceserver > yeniden, çalışmak istediğiniz seçip **planlı yük devretme**.
-4. İçinde **planlı yük devretmeyi Onayla** seçin **Oluştur şirket içi sanal makine henüz yoksa**.
-5. Konak adı ** istediğiniz sanal makineyi yerleştirmek yeni Hyper-V konak sunucusunu seçin.
-6. Veri eşitlemede veri yük devretmeden önce eşitleme seçeneği seçtiğiniz öneririz. Bunları kapatılıyor olmadan eşitlendiğinde, sanal makineler için kapalı kalma süresi daha en aza indirir. Şunları yapar:
+1. Yeni donanım ayarlıyorsanız, Windows Server 2012 R2 'yi ve sunucuda Hyper-V rolünü yükleyebilirsiniz.
+2. Özgün sunucuda sahip olduğunuz adla aynı ada sahip bir sanal ağ anahtarı oluşturun.
+3. **Korunan öğeler** -> **koruma grubu** -> \<protectiongroupname >-> \<virtualmachinename > yeniden devretmek ve **Planlı Yük devretme**seçeneğini belirleyin.
+4. **Planlı Yük devretmeyi Onayla** bölümünde, **yoksa Şirket Içi sanal makine oluştur**' u seçin.
+5. Ana bilgisayar adı ' nda, * * sanal makineyi yerleştirmek istediğiniz yeni Hyper-V ana bilgisayar sunucusunu seçin.
+6. Veri eşitleme ' de, yük devretmeden önce verileri eşitleme seçeneğini seçmenizi öneririz. Bu, sanal makinelerin kapanmadan eşitlendiği kapalı kalma süresini en aza indirir. Şunları yapar:
 
-    - 1\. Aşama: Azure'da sanal makine anlık görüntüsünü alır ve şirket içi Hyper-V konağına kopyalar. Makine Azure'da çalıştırmaya devam eder.
-    - 2\. Aşama: Yeni değişiklik var. gerçekleşmesi azure'da sanal makineyi kapatır. Son değişiklik kümesini şirket içi sunucusuna aktarılır ve şirket içi sanal makine başlatıldı.
+    - 1\. Aşama: Azure 'da sanal makinenin anlık görüntüsünü alır ve şirket içi Hyper-V konağına kopyalar. Makine Azure 'da çalışmaya devam ediyor.
+    - 2\. Aşama: Azure 'da sanal makineyi kapatır, bu sayede hiçbir yeni değişiklik gerçekleşmez. Son değişiklik kümesi şirket içi sunucuya aktarılır ve şirket içi sanal makine başlatılır.
     
-7. (Yeniden çalışma) yük devretmeyi başlatmak için onay işaretine tıklayın.
-8. İlk eşitleme tamamlandıktan sonra azure'da sanal makineyi kapatmanız hazırsınız **işleri** > \<planlı yük devretme işi >> **yük devretmeyi tamamlamak** . Bu Azure makineyi kapatmadan, şirket içi sanal makineye en son değişiklikleri aktarır ve başlar.
-9. Her şeyin beklendiği gibi çalıştığını doğrulamak için şirket içi sanal makineye oturum açabilirsiniz. Ardından **işleme** yük devretmeyi tamamlamak için. İşleme, Azure sanal makine ve disklerine siler ve VM yeniden koruma için hazırlar.
-10. Tıklayın **ters çoğaltma** şirket içi sanal makine korumayı başlatmak için.
+7. Yük devretmeye (yeniden çalışma) başlamak için onay işaretine tıklayın.
+8. İlk eşitleme bittikten ve Azure 'da sanal makineyi kapatmaya hazırsanız Işler > planlı yük devretme işi \<> > **Yük devretmeyi tamamladıktan**sonra **işler** ' e tıklayın. Bu, Azure makinesini kapatır, en son değişiklikleri şirket içi sanal makineye aktarır ve başlatır.
+9. Her şeyin beklendiği gibi çalıştığını doğrulamak için şirket içi sanal makinede oturum açabilirsiniz. Ardından, yük devretmeyi tamamlamak için **Yürüt** ' e tıklayın. Yürüt, Azure sanal makinesini ve disklerini siler ve VM 'yi yeniden korunacak şekilde hazırlar.
+10. Şirket içi sanal makineyi korumaya başlamak için **tersine Çoğalt** ' a tıklayın.
 
     > [!NOTE]
-    > Veri Eşitleme adımında, ancak yeniden çalışma işini iptal ederseniz, şirket içi VM bozuk durumda olacaktır. Veri eşitlemeyi en son verileri şirket içi veri diskleri için Azure VM diskleri kopyalar ve eşitleme işlemi tamamlanana kadar disk verilerinin tutarlı bir durumda olmayabilir nedeni budur. Veri eşitlemeyi iptal edildikten sonra şirket içi VM önyüklendiyse önyüklenemez. Veri Eşitleme işlemini tamamlamak için yük devretme yeniden Tetikle.
+    > Veri eşitleme adımında yeniden çalışma işini iptal ederseniz şirket içi VM bozuk bir durumda olacaktır. Bunun nedeni, veri eşitlemesinin en son verileri Azure VM disklerinden şirket içi veri disklerine kopyalama ve eşitleme tamamlanana kadar disk verilerinin tutarlı bir durumda olmaması olabilir. Veri eşitleme iptal edildikten sonra şirket içi VM önyüklenir, önyükleme olmayabilir. Veri eşitlemesini tamamlamaya yönelik yük devretmeyi yeniden tetikle.
 
 
-## <a name="why-is-there-no-button-called-failback"></a>Neden yeniden adlandırılan hiçbir bir düğme var mı?
-Portalda, yeniden çalışma adında hiçbir açık hareket yoktur. Yeniden çalışma, birincil siteye geri dönün burada bir adımdır. Tanımı gereği, yük devretme için birincil kurtarma sanal makinelerden yeniden geri dönme andır.
+## <a name="why-is-there-no-button-called-failback"></a>Neden yeniden çalışma olarak adlandırılan hiçbir düğme yok?
+Portalda, yeniden çalışma adlı açık bir hareket yoktur. Yeniden çalışma, birincil siteye geri dönebileceğiniz bir adımdır. Tanım olarak, yeniden çalışma, sanal makinelerin kurtarma işleminden birincili geri yük devretmesine yönelik olarak gerçekleştirilir.
 
-Bir yük devretme başlatın, dikey penceresinde, sanal makinelerin olduğu taşınması için yön Azure'dan şirket içine, bir yeniden çalışma ise, yönü hakkında sizi bilgilendirir.
+Bir yük devretme başlattığınızda, dikey pencere, sanal makinelerin taşınacağı yönle ilgili olarak size bildirir. bu yön, Azure 'dan şirket içine, yeniden çalışır duruma gelir.
 
-## <a name="why-is-there-only-a-planned-failover-gesture-to-failback"></a>Neden yalnızca bir yeniden çalışma için planlanan yük devretme hareket var mı?
-Azure yüksek oranda kullanılabilir bir ortamdır ve sanal makinelerinizin her zaman kullanılabilir. Yeniden çalışma burada iş yükleri şirket içine yeniden çalışmaya başlayabilmeniz için küçük bir kapalı kalma süresi benimsemeye karar planlı bir etkinliktir. Bu, veri kaybı olmadan bekliyor. Bu nedenle yalnızca planlı yük devretme hareket kullanılabilir, Azure sanal makineleri kapatmak, en son değişiklikleri indirir ve veri kaybı olduğundan emin olun.
+## <a name="why-is-there-only-a-planned-failover-gesture-to-failback"></a>Yeniden çalışma için neden yalnızca planlanmış bir yük devretme hareketi var?
+Azure, yüksek oranda kullanılabilir bir ortamdır ve sanal makineleriniz her zaman kullanılabilir. Yeniden çalışma, iş yüklerinin şirket içinde çalışmaya başlamasını sağlamak için küçük bir kesinti süresine karar verirken planlanmış bir etkinliktir. Bu, veri kaybı beklemiyor. Bu nedenle, Azure 'daki VM 'Leri kapatan yalnızca planlanmış bir yük devretme hareketi kullanılabilir, en son değişiklikleri indirir ve veri kaybı olmadığından emin olur.
 
-## <a name="do-i-need-a-process-server-in-azure-to-failback-to-hyper-v"></a>Azure'da Hyper-V'ye yeniden çalışma işlem sunucusu ihtiyacım var?
-Hayır, yalnızca VMware sanal makinelerini korurken bir işlem sunucusu gereklidir. Korumak/yeniden çalışma, Hyper-v sanal makinelerin dağıtılması için hiçbir ek bileşenler gereklidir.
+## <a name="do-i-need-a-process-server-in-azure-to-failback-to-hyper-v"></a>Hyper-v ' y e yeniden çalışma için Azure 'da bir işlem sunucusu gerekir mi?
+Hayır, yalnızca VMware sanal makinelerini koruduğunuzda bir işlem sunucusu gerekir. Hyper-v sanal makinelerinin koruması/yeniden çalışma sırasında dağıtılması gereken ek bir bileşen yoktur.
 
 
-## <a name="time-taken-to-failback"></a>Yeniden çalışma için harcanan süre
-Veri eşitlemeyi tamamlayın ve sanal makineyi önyüklemek için harcanan süre çeşitli etkenlere bağlıdır. Geçen süre bir anlayış vermek için veri eşitleme sırasında neler açıklanmaktadır.
+## <a name="time-taken-to-failback"></a>Yeniden çalışma için geçen süre
+Veri eşitlemesini tamamlamaya yönelik geçen süre ve sanal makine önyüklemesi, çeşitli faktörlere bağlıdır. Geçen süre hakkında bir fikir vermek için veri eşitleme sırasında ne olduğunu açıkladık.
 
-Veri eşitleme, sanal makinenin disklerinin anlık görüntüsünü alır ve blok blok denetlemeye başlar ve toplamını hesaplar. Başka bir hesaplanan sağlama toplamı, şirket içi aynı blok şirket içi sağlama toplamı ile karşılaştırmak için gönderilir. Sağlama toplamları eşleşmesi durumunda, veri bloğu aktarılmaz. Eşleşmiyorsa, veri bloğu şirket içine aktarılır. Bu aktarım süresini kullanılabilir bant genişliğine bağlıdır. Sağlama birkaç GB başına min hızıdır. 
+Veri eşitleme, sanal makine disklerinin anlık görüntüsünü alır ve blok tarafından blok denetimini başlatır ve sağlama toplamını hesaplar. Bu hesaplanan sağlama toplamı, aynı bloktaki şirket içi sağlama toplamıyla karşılaştırmak için şirket içine gönderilir. Sağlama toplamı eşleşiyorsa, veri bloğu aktarılmaz. Eşleşmiyorsa, veri bloğu şirket içine aktarılır. Bu aktarım süresi, kullanılabilir bant genişliğine bağlıdır. Sağlama hızının hızı, dakikada birkaç GB olur. 
 
-Veri indirme hızlandırmak için MARS Aracısı indirme paralel hale getirmek için daha fazla iş parçacığı kullanmak için yapılandırabilirsiniz. Başvurmak [burada yer veremeyeceğimiz](https://support.microsoft.com/en-us/help/3056159/how-to-manage-on-premises-to-azure-protection-network-bandwidth-usage) Aracısı'nı indirme iş parçacıklarının değiştirme.
+Verilerin indirilmesini hızlandırmak için, MARS aracınızı, indirmeyi paralel hale getirmek için daha fazla iş parçacığı kullanacak şekilde yapılandırabilirsiniz. Aracıdaki indirme iş parçacıklarını değiştirme hakkında [Buradaki belgeye](https://support.microsoft.com/en-us/help/3056159/how-to-manage-on-premises-to-azure-protection-network-bandwidth-usage) başvurun.
 
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-Sonra **işleme**, bunların başlatabilirsiniz *ters çoğaltma*. Bu, sanal makine şirket içinden Azure'a yeniden koruma başlatır. VM Azure'da kapatıldı ve bu nedenle yalnızca değişiklikleri gönderir bu yalnızca değişiklikler çoğaltılır.
+**İşlemeden**sonra, *çoğaltmayı tersine çevirme*işlemini başlatabilirsiniz. Bu, sanal makinenin Şirket içinden Azure 'a korunmasını başlatır. Bu, VM 'yi yalnızca Azure 'da devre dışı bırakıldıklarından ve bu nedenle yalnızca fark değişikliklerini gönderdiğinden, değişiklikleri çoğaltacaktır.

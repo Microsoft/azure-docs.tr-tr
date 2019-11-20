@@ -1,65 +1,65 @@
 ---
 title: Azure DNS nedir?
-description: Microsoft Azure'deki DNS barındırma hizmetine genel bakış. Etki alanınızı Microsoft Azure'da barındırın.
+description: Microsoft Azure 'de DNS barındırma hizmetine genel bakış. Etki alanınızı Microsoft Azure barındırın.
 author: vhorne
 ms.service: dns
 ms.topic: overview
 ms.date: 3/21/2019
 ms.author: victorh
-ms.openlocfilehash: 06e53f07969ab5dfdebec88d36d0cb3d06cc87e1
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 5055734ae3529d7fca87688c5f9410f38368a634
+ms.sourcegitcommit: 4d177e6d273bba8af03a00e8bb9fe51a447196d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67078424"
+ms.lasthandoff: 10/04/2019
+ms.locfileid: "71959362"
 ---
 # <a name="what-is-azure-dns"></a>Azure DNS nedir?
 
-Azure DNS, DNS etki alanları için Microsoft Azure altyapısı kullanılarak ad çözümlemesi olanağı sağlayan bir hizmettir. Etki alanlarınızı Azure'da barındırarak DNS kayıtlarınızı diğer Azure hizmetlerinde kullandığınız kimlik bilgileri, API’ler, araçlar ve faturalarla yönetebilirsiniz.
+Azure DNS, Microsoft Azure altyapısını kullanarak ad çözümlemesi sağlayan DNS etki alanları için bir barındırma hizmetidir. Etki alanlarınızı Azure 'da barındırarak DNS kayıtlarınızı, diğer Azure hizmetlerinizle aynı kimlik bilgilerini, API 'Leri, araçları ve faturalandırmayı kullanarak yönetebilirsiniz.
 
-Azure DNS'yi kullanarak etki alanı adı satın alamazsınız. Bir yıllık ücret karşılığı bir etki alanı adı kullanarak alabilirsiniz [App Service etki alanları](https://docs.microsoft.com/azure/app-service/manage-custom-dns-buy-domain#buy-the-domain) veya bir üçüncü taraf etki alanı adı kayıt şirketi. Ardından etki alanlarınızı kayıt yönetimi için Azure DNS'de barındırabilirsiniz. Daha fazla bilgi için bkz. [Bir etki alanını Azure DNS'ye devretme](dns-domain-delegation.md).
+Bir etki alanı adı satın almak için Azure DNS kullanamazsınız. Yıllık bir ücret karşılığında, [App Service](https://docs.microsoft.com/azure/app-service/manage-custom-dns-buy-domain#buy-the-domain) etki alanı veya üçüncü taraf etki alanı adı Kaydedicisi kullanarak bir etki alanı adı satın alabilirsiniz. Etki alanlarınız, kayıt yönetimi için Azure DNS içinde barındırılabilir. Daha fazla bilgi için bkz. [Azure DNS etki alanı verme](dns-domain-delegation.md).
 
-Azure DNS aşağıdaki özellikleri içerir.
+Aşağıdaki özellikler Azure DNS eklenmiştir.
 
 ## <a name="reliability-and-performance"></a>Güvenilirlik ve performans
 
-Azure DNS içindeki DNS etki alanları Azure'un global DNS ad sunucusu ağında barındırılır. Azure DNS ağı her noktaya yayın özelliğine sahiptir. DNS sorguları en yakın DNS sunucusu tarafından yanıtlanır ve bu sayede etki alanınız için yüksek performans ve kullanılabilirlik sağlar.
+Azure DNS 'deki DNS etki alanları, Azure 'un DNS ad sunucularının küresel ağında barındırılır. Azure DNS, her noktaya yayın ağını kullanır. Her DNS sorgusu, etki alanınız için hızlı performans ve yüksek kullanılabilirlik sağlamak üzere en yakın kullanılabilir DNS sunucusu tarafından yanıtlanır.
 
 ## <a name="security"></a>Güvenlik
 
- Azure DNS, Azure Resource Manager'ı temel alır ve aşağıdaki gibi özellikler sunar:
+ Azure DNS, şu gibi özellikler sağlayan Azure Resource Manager tabanlıdır:
 
-* [Rol tabanlı erişim denetimi](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview): Resource Manager, belirli eylemlere kuruluşunuzda kimlerin erişebildiğini denetlemenize olanak tanır.
+* Kuruluşunuza yönelik belirli eylemlere kimlerin erişebileceğini denetlemek için [rol tabanlı erişim denetimi](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview) .
 
-* [Etkinlik günlükleri](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview): Sorun giderme sırasında bir hata bulmak veya kuruluşunuzdaki kullanıcının bir kaynağı nasıl değiştirdiğini izlemek için etkinlik günlüklerini kullanın.
+* Kuruluşunuzdaki bir kullanıcının bir kaynağı nasıl değiştirtiğini ve sorun giderirken hata bulmasını izlemek için [etkinlik günlükleri](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview) .
 
-* [Kaynak kilitleme](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-lock-resources): Bir aboneliği, kaynak grubunu veya kaynağı kilitlemenizi sağlar. Kilitleme işlemi kuruluşunuzdaki kullanıcıların kritik kaynakları yanlışlıkla silmesini veya değiştirmesini önler.
+* Bir aboneliği, kaynak grubunu veya kaynağı kilitlemek için [kaynak kilitleme](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-lock-resources) . Kilitleme, kuruluşunuzdaki diğer kullanıcıların yanlışlıkla önemli kaynakları silmesini veya değiştirmesini önler.
 
 Daha fazla bilgi için bkz. [DNS bölgelerini ve kayıtlarını koruma](dns-protect-zones-recordsets.md). 
 
 ## <a name="dnssec"></a>DNSSEC
 
-Azure DNS, DNSSEC şu anda desteklemiyor. Çoğu durumda, uygulamalarınızı sürekli olarak HTTPS/TLS kullanarak DNSSEC gereksinimini azaltabilir. DNSSEC DNS bölgeleriniz için kritik bir gereksinimse üçüncü taraf DNS barındırma sağlayıcıları ile bu bölgelerde barındırabilir.
+Azure DNS şu anda DNSSEC 'yi desteklemiyor. Çoğu durumda, uygulamalarınızda HTTPS/TLS kullanarak DNSSEC gereksinimini sürekli olarak azaltabilirsiniz. DNSSEC, DNS bölgeleriniz için kritik bir gereksinimle karşılaşırsanız, üçüncü taraf DNS barındırma sağlayıcılarıyla bu bölgeleri barındırabilirsiniz.
 
 ## <a name="ease-of-use"></a>Kullanım kolaylığı
 
- Azure DNS, Azure hizmetlerinizin DNS kayıtlarını yönetebilir ve Azure dışı kaynaklar için de DNS hizmeti sunabilir. Azure DNS, Azure portala tümleştirilmiştir ve diğer Azure hizmetlerinizle aynı kimlik bilgilerini, destek ekibini ve faturalandırma özelliklerini kullanır. 
+ Azure DNS, Azure hizmetlerinize yönelik DNS kayıtlarını yönetebilir ve dış kaynaklarınız için DNS sağlayabilir. Azure DNS, Azure portal tümleşiktir ve diğer Azure hizmetlerinize göre aynı kimlik bilgilerini, destek sözleşmesini ve faturalandırmayı kullanır. 
 
-DNS faturalarında, Azure’da barındırılan DNS bölgelerinin sayısı ve alınan DNS sorgularının sayısı temel alınır. Fiyatlandırma hakkında daha fazla bilgi için bkz. [Azure DNS fiyatlandırması](https://azure.microsoft.com/pricing/details/dns/).
+DNS faturalandırma, Azure 'da barındırılan DNS bölgesinin sayısını ve alınan DNS sorgularının sayısını temel alır. Fiyatlandırma hakkında daha fazla bilgi için bkz. [Azure DNS fiyatlandırması](https://azure.microsoft.com/pricing/details/dns/).
 
-Etki alanlarınızı ve kayıtlarınızı yönetmek için Azure portalı, Azure PowerShell cmdlet'lerini ve farklı platformlarda Azure CLI özelliklerini kullanabilirsiniz. Otomatik DNS yönetimi gerektiren uygulamalar REST API ve SDK'lar ile hizmetle tümleştirilebilir.
+Etki alanlarınız ve kayıtlarınız Azure portal, Azure PowerShell cmdlet 'leri ve platformlar arası Azure CLı kullanılarak yönetilebilir. Otomatik DNS yönetimi gerektiren uygulamalar, REST API ve SDK 'Ları kullanarak hizmetle tümleştirilebilir.
 
-## <a name="customizable-virtual-networks-with-private-domains"></a>Özel etki alanlarıyla özelleştirilebilir sanal ağlar
+## <a name="customizable-virtual-networks-with-private-domains"></a>Özel etki alanları içeren özelleştirilebilir sanal ağlar
 
-Azure DNS genel önizleme sürümündeki bir özellikle özel DNS etki alanlarını da destekler. Bu özellik, özel sanal ağlarınızda Azure tarafından sağlanan adların yerine özel etki alanı adlarınızı kullanmanızı sağlar.
+Ayrıca, özel DNS etki alanlarını da destekler Azure DNS. Bu özellik, bugün kullanılabilen Azure tarafından sağlanan adlar yerine özel sanal ağlarınızda kendi özel etki alanı adlarınızı kullanmanıza olanak sağlar.
 
-Daha fazla bilgi için bkz. [Azure DNS'yi özel etki alanları için kullanma](private-dns-overview.md).
+Daha fazla bilgi için bkz. [özel etki alanları için Azure DNS kullanma](private-dns-overview.md).
 
 ## <a name="alias-records"></a>Diğer ad kayıtları
 
-Azure DNS, diğer adı kayıt kümelerini destekler. Bir Azure genel IP adresi, bir Azure Traffic Manager profili veya bir Azure Content Delivery Network (CDN) uç noktası gibi bir Azure kaynağına başvurmak için bir diğer ad kayıt kümesi kullanabilirsiniz. Temel alınan kaynağın IP adresi değişirse, diğer ad kayıt kümesi DNS çözümlemesi sırasında kendisini sorunsuz bir şekilde güncelleştirir. Diğer ad kaydı kümesi, hizmet örneğini işaret eder ve hizmet örneği bir IP adresi ile ilişkilidir.
+Azure DNS diğer ad kayıt kümelerini destekler. Azure genel IP adresi, Azure Traffic Manager profili veya Azure Content Delivery Network (CDN) uç noktası gibi bir Azure kaynağına başvurmak için bir diğer ad kayıt kümesi kullanabilirsiniz. Temel alınan kaynağın IP adresi değişirse, diğer ad kayıt kümesi DNS çözümlemesi sırasında kendisini sorunsuz bir şekilde günceller. Diğer ad kayıt kümesi hizmet örneğine işaret eder ve hizmet örneği bir IP adresi ile ilişkilendirilir.
 
-Ayrıca, artık apex veya çıplak etki için bir Traffic Manager profili veya bir diğer ad kaydı kullanılarak CDN uç noktası işaret edebilir. Örneğin: contoso.com.
+Ayrıca, artık tepesinde veya çıplak etki alanınızı bir diğer ad kaydı kullanarak bir Traffic Manager profile veya CDN uç noktasına ekleyebilirsiniz. Örnek olarak contoso.com.
 
 Daha fazla bilgi için bkz. [Azure DNS diğer ad kayıtlarına genel bakış](dns-alias.md).
 
@@ -67,7 +67,7 @@ Daha fazla bilgi için bkz. [Azure DNS diğer ad kayıtlarına genel bakış](dn
 
 * DNS bölgeleri ve kayıtları hakkında bilgi edinmek için bkz. [DNS bölgeleri ve kayıtlarına genel bakış](dns-zones-records.md).
 
-* Azure DNS'de bölge oluşturmayı öğrenmek için bkz. [DNS bölgesi oluşturma](./dns-getstarted-create-dnszone-portal.md).
+* Azure DNS bir bölgenin nasıl oluşturulacağını öğrenmek için bkz. [DNS bölgesi oluşturma](./dns-getstarted-create-dnszone-portal.md).
 
-* Azure DNS hakkında sık sorulan sorular için bkz. [Azure DNS Hakkında SSS](dns-faq.md).
+* Azure DNS hakkında sık sorulan sorular için bkz. [Azure DNS SSS](dns-faq.md).
 

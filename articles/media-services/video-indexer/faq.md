@@ -1,6 +1,6 @@
 ---
-title: Video Indexer - Azure hakkında sık sorulan sorular
-titlesuffix: Azure Media Services
+title: Video Indexer hakkında sık sorulan sorular-Azure
+titleSuffix: Azure Media Services
 description: Video Indexer hakkında sık sorulan soruların yanıtlarını alın.
 services: media-services
 author: Juliako
@@ -10,163 +10,163 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 05/15/2019
 ms.author: juliako
-ms.openlocfilehash: f20d718d0b1d3bbdf117e502a380897c79a7905f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 95f2af1b192564290551f9ed31f0fe158b4536f6
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65799512"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73838225"
 ---
 # <a name="frequently-asked-questions"></a>Sık sorulan sorular
 
-Bu makalede, Video Indexer hakkında sık sorulan sorular yanıtlanmaktadır.
+Bu makale Video Indexer hakkında sık sorulan soruları yanıtlar.
 
 ## <a name="general-questions"></a>Genel sorular
 
 ### <a name="what-is-video-indexer"></a>Video Indexer nedir?
 
-Video Indexer Microsoft Azure Media Services'ın bir parçası olan bir yapay zeka hizmetidir. Video Indexer, birden çok makine öğrenimi modellerini kolayca videosu hakkında ayrıntılı bilgiler almanıza olanak sağlayan bir düzenleme sağlar. Gelişmiş ve doğru bilgiler sağlamak için Video Indexer sağlar birden çok kanalda video kullanın: ses, konuşma ve görsel. Video Indexer'ın ınsights içerik keşfedilme ve erişilme yeni kazanç fırsatları oluşturmak için oluşturma, geliştirme gibi pek çok yolla kullanılabilir veya ınsights kullanan yapı yeni deneyimler. Video Indexer, test etme, yapılandırma ve özelleştirme hesabınızdaki modelleri için web tabanlı bir arabirim sağlar. Geliştiriciler, bir REST tabanlı API, Video Indexer üretim sistemle tümleştirmek için kullanabilir. 
+Video Indexer, Microsoft Azure Media Services bir parçası olan yapay zeka hizmetidir. Video Indexer, bir videodan kolayca derin Öngörüler ayıklamanızı sağlayan birden çok makine öğrenimi modeli düzenlemesi sağlar. Gelişmiş ve doğru Öngörüler sağlamak için Video Indexer videonun birden çok kanalını kullanmasını sağlar: ses, konuşma ve görsel. Video Indexer içgörüler, içerik bulunabilirliği ve erişilebilirliği geliştirmek, yeni para, fırsatları oluşturmak veya öngörüleri kullanan yeni deneyimler oluşturmak gibi birçok şekilde kullanılabilir. Video Indexer, hesabınızdaki modellerin test edilmesi, yapılandırılması ve özelleştirilmesi için Web tabanlı bir arabirim sağlar. Geliştiriciler, Video Indexer üretim sistemine tümleştirmede REST tabanlı bir API kullanabilir. 
 
 ### <a name="what-can-i-do-with-video-indexer"></a>Video Indexer ile ne yapabilirim?
 
-Video Indexer, medya dosyaları üzerinde gerçekleştirebileceği işlemleri bazıları şunlardır:
+Video Indexer medya dosyalarında gerçekleştirebileceği işlemlerden bazıları şunlardır:
 
-* Tanımlama ve konuşma ayıklanması ve konuşmacıları belirleyin.
-* Tanımlama ve ekran ayıklama video metin.
-* Nesneleri bir video dosyasını algılanıyor.
-* Markaları belirleyin (örneğin: Bir videoda Microsoft) ses parçalarını ve ekran metin.
-* Algılama ve ünlüleri, bir veritabanı ve kullanıcı tanımlı veritabanı dikdörtgenlerini yüzleri tanıma.
-* Ayıklama konuları ele alınan ancak mutlaka ses ve video içerikte bahsedilen.
-* Kapalı açıklamalı alt yazıları ve alt yazıları ses parçasından oluşturuluyor.
+* Konuşmayı tanımlama ve ayıklama ve hoparlörleri tanımlama.
+* Videoda ekran metnini tanımlama ve ayıklama.
+* Bir video dosyasındaki nesneler algılanıyor.
+* Ses İzlemelerden (örneğin, Microsoft) markalarını ve bir videodaki ekran metnini tanımla.
+* Ünlüler veritabanından yüzleri ve Kullanıcı tanımlı yüzlerin bir veritabanını algılayarak ve tanıyor.
+* Ses ve video içeriklerde ele alınmayan ancak bahsedilen konular ayıklanıyor.
+* Ses izağından kapalı açıklamalı alt yazılar veya alt yazılar oluşturma.
 
-Daha fazla bilgi ve daha fazla Video Indexer özellikleri için bkz: [genel bakış](video-indexer-overview.md).
+Daha fazla bilgi ve Video Indexer özellikler için bkz. [genel bakış](video-indexer-overview.md).
 
-### <a name="how-do-i-get-started-with-video-indexer"></a>Video Indexer ile nasıl başlayabilirim?
+### <a name="how-do-i-get-started-with-video-indexer"></a>Video Indexer kullanmaya başlamak Nasıl yaparım??
 
-Video Indexer, ücretsiz bir deneme teklifi 600 dakika içinde web tabanlı bir arabirim ve API aracılığıyla 2.400 dakika ile sağlayan içerir. Yapabilecekleriniz [Video Indexer arabirime web tabanlı oturum açma](https://www.videoindexer.ai/) ve bir Azure aboneliğini ayarlama gerek kalmadan ve herhangi bir web kimliği kullanarak kendiniz için deneyin. 
+Video Indexer, Web tabanlı arabirimde 600 dakika ve API aracılığıyla 2.400 dakika boyunca size sağlayan ücretsiz bir deneme teklifi içerir. [Video Indexer Web tabanlı arabirimde oturum](https://www.videoindexer.ai/) açabilir ve herhangi bir Web kimliği kullanarak ve bir Azure aboneliği ayarlamanıza gerek kalmadan kendiniz deneyin. 
 
-Dizin video ve ses uçarak uygun ölçekte, Video Indexer, ücretli bir Microsoft Azure aboneliğine bağlanabilirsiniz. Fiyatlandırma hakkında daha fazla bilgi bulabilirsiniz [fiyatlandırma](https://azure.microsoft.com/pricing/details/cognitive-services/video-indexer/) sayfası.
+Videoları ve ses uçlarını ölçeklendirerek, Video Indexer ücretli bir Microsoft Azure aboneliğine bağlayabilirsiniz. [Fiyatlandırma sayfasında fiyatlandırma](https://azure.microsoft.com/pricing/details/cognitive-services/video-indexer/) hakkında daha fazla bilgi edinebilirsiniz.
 
-Çalışmaya başlama hakkında daha fazla bilgi bulabilirsiniz [başlama](video-indexer-get-started.md).
+Kullanmaya başlarken hakkında daha fazla bilgi edinmek için bkz [..](video-indexer-get-started.md)
 
-### <a name="do-i-need-coding-skills-to-use-video-indexer"></a>Video Indexer'ı kullanmak için kodlama gerekiyor mu?
+### <a name="do-i-need-coding-skills-to-use-video-indexer"></a>Video Indexer kullanmak için kodlama becerileri almam gerekiyor mu?
 
-Video Indexer web tabanlı bir arabirim değerlendirmek, yapılandırma ve hesabınızı yönetmek için kullanabileceğiniz **kodlama gerekmeden**.  Daha karmaşık uygulamalar geliştirmek hazır olduğunuzda kullanabileceğiniz [Video Indexer API](https://api-portal.videoindexer.ai/) kendi uygulamalarınızı, web siteleri, Video Indexer'ı tümleştirmek için veya [gibi sunucusuz teknolojilerini kullanarak özel iş akışları Azure Logic Apps](https://azure.microsoft.com/blog/logic-apps-flow-connectors-will-make-automating-video-indexer-simpler-than-ever/) veya Azure işlevleri.
+Bir **kodlama gerekmeden**hesabınızı değerlendirmek, yapılandırmak ve yönetmek için video Indexer Web tabanlı arabirimi kullanabilirsiniz.  Daha karmaşık uygulamalar geliştirmeye hazırsanız, Azure Logic Apps veya Azure Işlevleri [gibi sunucusuz teknolojileri kullanarak](https://azure.microsoft.com/blog/logic-apps-flow-connectors-will-make-automating-video-indexer-simpler-than-ever/) kendi uygulamalarınıza, Web sitelerinize veya özel iş akışlarıyla video Indexer bütünleştirmek IÇIN [video Indexer API](https://api-portal.videoindexer.ai/) 'sini kullanabilirsiniz.
 
-### <a name="do-i-need-machine-learning-skills-to-use-video-indexer"></a>Video Indexer'ı kullanmak için machine learning becerileri ihtiyacım var?
+### <a name="do-i-need-machine-learning-skills-to-use-video-indexer"></a>Video Indexer kullanmak için makine öğrenimi becerileri gerekir mi?
 
-Hayır, Video Indexer, birden çok makine öğrenimi modellerini bir komut zinciriyle tümleştirmeyi sağlar. Video Indexer aracılığıyla bir ses veya video dosyası dizin oluşturma, paylaşılan bir zaman çizelgesinde becerileri ya da Müşteri'nin yapmanız gereken algoritmaları hakkında bilgi bankasına öğrenme herhangi bir makineye olmadan ayıklanır ınsights tam bir dizi alır.
+Hayır, Video Indexer birden çok makine öğrenimi modelinin tek bir işlem hattına tümleştirilmesini sağlar. Video Indexer aracılığıyla bir video veya ses dosyasının dizinlenmesini, herhangi bir makine öğrenimi özelliği veya müşterinin bölümünde gerekli algoritmalarla ilgili bilgi sahibi olmadan, paylaşılan bir zaman çizelgesinde ayıklanan tüm Öngörüler kümesini alır.
 
-### <a name="what-media-formats-does-video-indexer-support"></a>Hangi medya biçimleri Video Indexer destek mu?
+### <a name="what-media-formats-does-video-indexer-support"></a>Video Indexer hangi medya biçimlerini destekler?
 
-Video Indexer, en yaygın ortam biçimlerini destekler. Başvurmak [Azure Media Encoder standard biçimleri](https://docs.microsoft.com/azure/media-services/latest/media-encoder-standard-formats) daha fazla ayrıntı için liste.
+Video Indexer, yaygın kullanılan medya biçimlerinin çoğunu destekler. Daha fazla ayrıntı için [Azure Media Encoder standart biçimler](https://docs.microsoft.com/azure/media-services/latest/media-encoder-standard-formats) listesine bakın.
 
-### <a name="how-to-do-i-upload-a-media-into-video-indexer"></a>Video Indexer ile medya yükleyebilirim yapmak için nasıl?
+### <a name="how-to-do-i-upload-a-media-into-video-indexer"></a>Video Indexer ' ye medya yükleme
 
-Web tabanlı Video Indexer portalında dosya karşıya yükleme iletişim kutusu kullanılarak bir medya dosyasını karşıya yükleyebilir veya URL'sini doğrudan işaret ederek barındıran kaynak dosyası (bkz [örnek](https://nimbuscdn-nimbuspm.streaming.mediaservices.windows.net/2b533311-b215-4409-80af-529c3e853622/Ignite-short.mp4)). Medya Ekleme kodu veya bir iFrame kullanarak içerik ana çalışmaz herhangi bir URL (bkz [örnek](https://www.videoindexer.ai/accounts/7e1282e8-083c-46ab-8c20-84cae3dc289d/videos/5cfa29e152/?t=4.11)). Video Indexer API URL ya da bir bayt dizisi aracılığıyla giriş dosyası belirtmenizi gerektirir. API kullanarak bir URL aracılığıyla karşıya 10 GB ile sınırlıdır, ancak bir zaman süresi sınırı yoktur. Daha fazla bilgi için lütfen bu bakın [yapılır kılavuzunda](https://docs.microsoft.com/azure/media-services/video-indexer/upload-index-videos).
+Video Indexer Web tabanlı portalda karşıya dosya yükleme iletişim kutusunu kullanarak veya kaynak dosyayı doğrudan barındıran bir URL 'yi işaret ederek bir medya dosyası yükleyebilirsiniz (bkz. [örnek](https://nimbuscdn-nimbuspm.streaming.mediaservices.windows.net/2b533311-b215-4409-80af-529c3e853622/Ignite-short.mp4)). İFrame veya ekleme kodu kullanarak medya içeriğini barındıran herhangi bir URL çalışmaz (bkz. [örnek](https://www.videoindexer.ai/accounts/7e1282e8-083c-46ab-8c20-84cae3dc289d/videos/5cfa29e152/?t=4.11)). Video Indexer API 'SI, giriş dosyasını bir URL veya bir bayt dizisi aracılığıyla belirtmenizi gerektirir. API kullanarak bir URL aracılığıyla karşıya yükleme, 10 GB ile sınırlıdır, ancak zaman süresi sınırı yoktur. Daha fazla bilgi için lütfen bu [nasıl yapılır Kılavuzu](https://docs.microsoft.com/azure/media-services/video-indexer/upload-index-videos)'na bakın.
 
-### <a name="how-long-does-it-take-video-indexer-to-extract-insights-from-media"></a>Video Indexer'ın medyadan öngörüleri ayıklamak için ne kadar sürer?
+### <a name="how-long-does-it-take-video-indexer-to-extract-insights-from-media"></a>Medyadan Öngörüler çıkarmak için ne kadar sürer Video Indexer?
 
-Insights sayısını sayısınıdosyasındabulunanherikiVideoIndexerAPIvewebtabanlıVideoIndexerarabiriminikullanarakbirsesveyavideodosyasıdizinioluşturmakiçingerekensüreyidosyauzunluğuvekalitesi,gibibirdençokparametrebağlıdır[ayrılmış birimleri](https://docs.microsoft.com/azure/media-services/previous/media-services-scale-media-processing-overview) kullanılabilir olup olmadığını ve [akış uç noktası](https://docs.microsoft.com/azure/media-services/previous/media-services-streaming-endpoints-overview) etkin olup olmadığı. Kendi içeriğinizi birkaç test dosyalarını çalıştırmak ve daha iyi bir fikir almak için ortalama ele öneririz.
+Her ikisi de Video Indexer API ve Video Indexer Web tabanlı arabirim kullanarak bir video veya ses dosyasının dizin oluşturma süresi, dosya uzunluğu ve kalitesi, dosyada bulunan Öngörüler sayısı, kullanılabilir [ayrılmış birim](https://docs.microsoft.com/azure/media-services/previous/media-services-scale-media-processing-overview) sayısı ve [akış uç noktasının](https://docs.microsoft.com/azure/media-services/previous/media-services-streaming-endpoints-overview) etkin olup olmadığı gibi birden çok parametreye bağlıdır. Daha iyi bir fikir edinmek için kendi içeriklerinize birkaç test dosyası çalıştırmanızı ve ortalama bir fikir almanızı öneririz.
 
-### <a name="can-i-create-customized-workflows-to-automate-processes-with-video-indexer"></a>Video Indexer ile işlemleri otomatik hale getirmek için özelleştirilmiş iş akışları oluşturabilir miyim?
+### <a name="can-i-create-customized-workflows-to-automate-processes-with-video-indexer"></a>Video Indexer ile işlemleri otomatikleştirmek için özelleştirilmiş iş akışları oluşturabilir miyim?
 
-Evet, Video Indexer Flow, Logic Apps gibi sunucusuz teknolojilerini tümleştirebileceğiniz ve [Azure işlevleri](https://azure.microsoft.com/services/functions/). Daha fazla ayrıntı bulabilirsiniz [mantıksal uygulama](https://azure.microsoft.com/services/logic-apps/) ve [akış](https://flow.microsoft.com/en-us/) Video Indexer için Bağlayıcılar [burada](https://azure.microsoft.com/blog/logic-apps-flow-connectors-will-make-automating-video-indexer-simpler-than-ever/). 
+Evet, Video Indexer Logic Apps, Flow ve [Azure işlevleri](https://azure.microsoft.com/services/functions/)gibi sunucusuz teknolojilerle tümleştirilebilir. Daha fazla ayrıntı için [mantıksal uygulama](https://azure.microsoft.com/services/logic-apps/) ve [akış](https://flow.microsoft.com/en-us/) bağlayıcıları hakkında daha fazla bilgiyi [buradan](https://azure.microsoft.com/blog/logic-apps-flow-connectors-will-make-automating-video-indexer-simpler-than-ever/)video Indexer bulabilirsiniz. 
 
-### <a name="in-which-azure-regions-is-video-indexer-available"></a>Video Indexer, hangi Azure bölgelerinde kullanılabilir?
+### <a name="in-which-azure-regions-is-video-indexer-available"></a>Video Indexer hangi Azure bölgelerinde kullanılabilir?
 
-Hangi Azure bölgeleri Video Indexer kullanılabilir gördüğünüz [bölgeleri](https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services&regions=all) sayfası.
+[Bölgeler](https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services&regions=all) sayfasında hangi Azure bölgelerinin video Indexer kullanılabilir olduğunu görebilirsiniz.
 
-### <a name="what-is-the-sla-for-video-indexer"></a>Video Indexer için SLA'sı nedir?
+### <a name="what-is-the-sla-for-video-indexer"></a>Video Indexer SLA nedir?
 
-Azure medya Hizmetleri SLA'sı Video Indexer kapsar ve bulunabilir [SLA](https://azure.microsoft.com/support/legal/sla/media-services/v1_2/) sayfası. SLA yalnızca hesapları Ücretli Video Indexer için geçerlidir ve ücretsiz deneme sürümü için geçerli değildir.
+Azure Media Service 'in SLA 'sı Video Indexer kapsamakta ve [SLA](https://azure.microsoft.com/support/legal/sla/media-services/v1_2/) sayfasında bulunabilir. SLA yalnızca Video Indexer ücretli hesaplara uygulanır ve ücretsiz deneme için geçerli değildir.
 
-## <a name="privacy-questions"></a>Gizlilik sorularının
+## <a name="privacy-questions"></a>Gizlilik soruları
 
-### <a name="are-video-and-audio-files-indexed-by-video-indexer-stored"></a>Video ve ses dosyalarını depolanan Video Indexer tarafından dizine eklenir?
+### <a name="are-video-and-audio-files-indexed-by-video-indexer-stored"></a>Video ve ses dosyaları Video Indexer tarafından dizinlenebilir mi?
 
-Evet, görüntü Video Indexer Web sitesi veya API'sini kullanarak dizin oluşturucudan dosyayı silmeniz sürece, video ve ses dosyalarını depolanır. Ücretsiz deneme, video ve ses dosyaları için dizin Azure Doğu ABD bölgesinde saklanır. Aksi takdirde, video ve ses dosyalarını Azure aboneliğinizin depolama hesabında depolanır.
+Evet, Video Indexer Web sitesini veya API 'yi kullanarak Video Indexer dosyayı silmediğiniz takdirde, video ve ses dosyalarınız saklanır. Ücretsiz deneme için, dizininizdeki video ve ses dosyaları Azure bölgesinde Doğu ABD depolanır. Aksi halde, video ve ses dosyalarınız Azure aboneliğinizin depolama hesabında depolanır.
 
-### <a name="can-i-delete-my-files-that-are-stored-in-video-indexer-portal"></a>Ben, Video Indexer Portalı'nda depolanan dosyalarımı silebilir miyim?
+### <a name="can-i-delete-my-files-that-are-stored-in-video-indexer-portal"></a>Video Indexer portalında depolanan dosyalarımı silebilir miyim?
 
-Evet, video ve ses dosyaları yanı sıra tüm meta veriler ve içgörüler bunları Video Indexer tarafından Ayıklanan her zaman silebilirsiniz. Bir kez bir dosya tarafından sağlanan Video Indexer, dosyayı silin ve sağlanan Video Indexer, meta veriler ve içgörüler kalıcı olarak kaldırılır. Ancak, yedekleme çözümünüzü Azure depolamada uyguladıysanız, dosya, Azure depolama alanında kalır.
+Evet, her zaman video ve ses dosyalarınızı, Video Indexer tarafından ayıklanan meta verileri ve öngörüleri de silebilirsiniz. Video Indexer bir dosyayı sildikten sonra dosya ve meta verileri ve öngörüleri Video Indexer kalıcı olarak kaldırılır. Ancak, Azure depolama 'da kendi yedekleme çözümünüzü uyguladıysanız, dosya Azure depolama alanında kalır.
 
-### <a name="can-i-control-user-access-to-my-video-indexer-account"></a>Video Indexer Hesabımı kullanıcı erişimi denetleyebilir miyim?
+### <a name="can-i-control-user-access-to-my-video-indexer-account"></a>Video Indexer hesabımın Kullanıcı erişimini denetleyebilir miyim?
 
-Evet, yalnızca hesap yöneticileri davet ve hesaplarını kişilere davetini iptal yanı ayrıcalıkları düzenleme kimlerin ve salt okunur erişimi olanların atayın.
+Evet, yalnızca hesap yöneticileri kişileri kendi hesaplarına davet edebilir ve davet edebilir ve kimin ve salt okuma erişimine sahip olduğunu atayabilir.
 
-### <a name="who-has-access-to-my-video-and-audio-files-that-have-been-indexed-andor-stored-by-video-indexer-and-the-metadata-and-insights-that-were-extracted"></a>Dizin ve/veya ve meta verileri ve ayıklanan ınsights Video Indexer tarafından depolanan my video ve ses dosyalarına kimler erişebilir?
+### <a name="who-has-access-to-my-video-and-audio-files-that-have-been-indexed-andor-stored-by-video-indexer-and-the-metadata-and-insights-that-were-extracted"></a>Video Indexer ve/veya tarafından depolanan video ve ses dosyalarına kim ve ayıklanan meta veriler ve Öngörüler erişebilir?
 
-Genel olarak gizlilik ayarına sahip, video veya ses içeriğini, video veya ses içeriğini ve kendi öngörüleri bağlantısını olan herkes tarafından erişilebilir. Özel olarak gizlilik ayarına sahip, video veya ses içeriğini yalnızca video veya ses içeriğini hesabına davet kullanıcılar tarafından erişilebilir. Gizlilik ayarı içeriğinizi meta verileri ve öngörüleri ayıklayan Video Indexer için de geçerlidir. Video veya ses dosyanızı karşıya yüklediğinizde gizlilik ayarı atayın. Ayrıca, dizin oluşturma sonrasında gizlilik ayarı değiştirebilirsiniz.
+Gizlilik ayarı olarak genel olan videonuzya da ses içeriğinize, video veya ses içeriğiniz ve öngörüleri bağlantısı olan herkes erişebilir. Gizlilik ayarı olarak özel olan videonuzya da ses içeriğinize yalnızca video veya ses içeriğinin hesabına davet edilen kullanıcılar erişebilir. İçeriğinizin gizlilik ayarı, Video Indexer çıkaran meta veriler ve Öngörüler için de geçerlidir. Video veya ses dosyanızı karşıya yüklerken gizlilik ayarını atarsınız. Ayrıca, dizin oluşturma işleminden sonra gizlilik ayarını değiştirebilirsiniz.
 
-### <a name="what-access-does-microsoft-have-to-my-video-or-audio-files-that-have-been-indexed-andor-stored-by-video-indexer-and-the-metadata-and-insights-that-were-extracted"></a>Hangi erişim dizin ve/veya ve meta verileri ve ayıklanan ınsights Video Indexer tarafından depolanan video veya ses dosyalarımı Microsoft gerekiyor mu?
+### <a name="what-access-does-microsoft-have-to-my-video-or-audio-files-that-have-been-indexed-andor-stored-by-video-indexer-and-the-metadata-and-insights-that-were-extracted"></a>Microsoft 'un, Video Indexer ve/veya tarafından depolanan video veya ses dosyaları ve çıkarılan meta veriler ve içgörüler tarafından hangi erişimi vardır?
 
-Başına [Azure çevrimiçi hizmet koşulları](https://www.microsoftvolumelicensing.com/DocumentSearch.aspx?Mode=3&DocumentTypeId=31) (OST) içeriğinizi tamamen size ait ve Microsoft içerik meta verileri ve Video Indexer içeriğinizi OST ve Microsoft göre ayıklar ınsights yalnızca erişir Gizlilik bildirimi.
+[Azure Online Services koşulları](https://www.microsoftvolumelicensing.com/DocumentSearch.aspx?Mode=3&DocumentTypeId=31) 'na (OST) tamamen sahip olursunuz ve Microsoft, Içeriğinize ve Microsoft gizlilik bildirimine göre içeriğinizi yalnızca video Indexer ayıklayarak, meta veriler ve öngörülere erişir.
 
-### <a name="are-the-custom-models-that-i-build-in-my-video-indexer-account-available-to-other-accounts"></a>Geliştiriyorum özel modelleri Video Indexer Hesabımda diğer hesapları için kullanılabilir?
+### <a name="are-the-custom-models-that-i-build-in-my-video-indexer-account-available-to-other-accounts"></a>Video Indexer hesabında oluşturduğum özel modeller diğer hesaplar için kullanılabilir mi?
 
- Hayır, hesabınızda oluşturduğunuz özel modelleri, başka bir hesap için kullanılamaz. Video Indexer şu anda sayesinde özel derleme [markaları](customize-brands-model-overview.md), [dil](customize-language-model-overview.md), ve [kişi](customize-person-model-overview.md) hesabınızdaki modelleri. Bu modeller yalnızca modelleri oluşturduğunuz hesabı kullanılabilir.
+ Hayır, hesabınızda oluşturduğunuz özel modeller başka bir hesap için kullanılamaz. Video Indexer Şu anda hesabınızda özel [marka](customize-brands-model-overview.md), [dil](customize-language-model-overview.md)ve [kişi](customize-person-model-overview.md) modelleri oluşturmanıza izin veriyor. Bu modeller yalnızca modelleri oluşturduğunuz hesapta kullanılabilir.
   
-### <a name="is-the-content-indexed-by-video-indexer-kept-within-the-azure-region-where-i-am-using-video-indexer"></a>Video Indexer: Video Indexer burada kullanmakta olduğum Azure bölgesi içinde tutulan tarafından içeriği dizine?
+### <a name="is-the-content-indexed-by-video-indexer-kept-within-the-azure-region-where-i-am-using-video-indexer"></a>Video Indexer tarafından dizin oluşturulan ve Video Indexer kullandığım Azure bölgesinde tutulan içerik var mı?
 
-Evet, içerik ve kendi ınsights birden fazla Azure bölgesini kullanan Azure aboneliğinizde bir el ile yapılandırma olmadığı sürece, Azure bölgesi içinde tutulur. 
+Evet, Azure aboneliğinizde birden çok Azure bölgesi kullanan bir el ile yapılandırmanız yoksa, içerik ve öngörüleri Azure bölgesi içinde tutulur. 
 
-### <a name="what-is-the-privacy-policy-for-video-indexer"></a>Video Indexer gizlilik ilkesi nedir?
+### <a name="what-is-the-privacy-policy-for-video-indexer"></a>Video Indexer için Gizlilik ilkesi nedir?
 
-Video Indexer tarafından kapsanan [Microsoft gizlilik bildirimi](https://privacy.microsoft.com/privacystatement). Gizlilik bildirimi Microsoft işler kişisel verileri açıklar, Microsoft, nasıl işlediğini ve Microsoft hangi amaçla işler. Gizlilik hakkında daha fazla bilgi edinmek için [Microsoft Trust Center](https://www.microsoft.com/trustcenter).
+Video Indexer, [Microsoft gizlilik bildirimi](https://privacy.microsoft.com/privacystatement)tarafından ele alınmıştır. Gizlilik bildirimi Microsoft işlemleri, Microsoft 'un bunu nasıl işleyeceği ve Microsoft 'un bunu hangi amaçlarla işledikleri konusunda açıklar. Gizlilik hakkında daha fazla bilgi edinmek için [Microsoft Güven Merkezi](https://www.microsoft.com/trustcenter)' ni ziyaret edin.
 
-### <a name="what-certifications-does-video-indexer-have"></a>Video Indexer hangi sertifikaları var mı?
+### <a name="what-certifications-does-video-indexer-have"></a>Video Indexer hangi sertifikaları vardır?
 
-Video Indexer, şu anda SOC sertifika yok. Video Indexer'ın sertifika gözden geçirmek için lütfen başvurmak [Microsoft Trust Center](https://www.microsoft.com/trustcenter/compliance/complianceofferings?product=Azure).
+Video Indexer Şu anda SOC sertifikasıdır. Video Indexer sertifikasını gözden geçirmek için lütfen [Microsoft Güven Merkezi](https://www.microsoft.com/trustcenter/compliance/complianceofferings?product=Azure)' ne bakın.
 
-## <a name="api-questions"></a>API sorular
+## <a name="api-questions"></a>API soruları
 
-### <a name="what-apis-does-video-indexer-offer"></a>Video Indexer hangi API'ler sunar?
+### <a name="what-apis-does-video-indexer-offer"></a>Hangi API 'Ler Video Indexer sunmaktadır?
 
-Video Indexer'ın API'leri dizin oluşturma, ayıklama meta verileri, varlık yönetimi, çeviri, ekleme, özelleştirme modelleri ve daha fazlasını sağlar. Daha ayrıntılı Video Indexer API kullanma hakkında bilgi bulmak için başvurmak [Video Indexer Geliştirici Portalı](https://api-portal.videoindexer.ai/).
+Video Indexer API 'Leri, dizin oluşturma, meta veri ayıklama, varlık yönetimi, çeviri, ekleme, modellerin özelleştirilmesi ve daha fazlasını sağlar. Video Indexer API 'sini kullanma hakkında daha ayrıntılı bilgi edinmek için [video Indexer geliştirici portalına](https://api-portal.videoindexer.ai/)bakın.
 
-### <a name="what-client-sdks-does-video-indexer-offer"></a>Video Indexer hangi istemci SDK'ları sunuluyor?
+### <a name="what-client-sdks-does-video-indexer-offer"></a>Hangi istemci SDK 'larının Video Indexer teklifi vardır?
 
-Şu anda hiçbir istemci SDK'ları sunulan vardır. Video Indexer ekibi, yakında teslim planları ve SDK'ları üzerinde çalışmaktadır.
+Şu anda sunulan hiçbir istemci SDK 'Sı yok. Video Indexer ekibi SDK 'larda çalışıyor ve yakında teslim edilecek planlar.
 
-### <a name="how-do-i-get-started-with-video-indexers-api"></a>Video Indexer'ın API'sini kullanmaya nasıl başlayabilirim?
+### <a name="how-do-i-get-started-with-video-indexers-api"></a>Nasıl yaparım? Video Indexer API 'SI ile çalışmaya başlama
 
-İzleyin [Öğreticisi: Video dizinleyici API'sini kullanmaya başlama](video-indexer-use-apis.md).
+[Öğreticiyi izleyin: video Indexer API 'si ile çalışmaya başlayın](video-indexer-use-apis.md).
 
-### <a name="what-is-the-difference-between-the-video-indexer-api-and-the-azure-media-service-v3-api"></a>Video Indexer API ve Azure Media Service v3 API arasındaki fark nedir?
+### <a name="what-is-the-difference-between-the-video-indexer-api-and-the-azure-media-service-v3-api"></a>Video Indexer API 'si ve Azure Media Service v3 API 'SI arasındaki fark nedir?
 
-Şu anda bazı çakışıyor Video Indexer API ve Azure medya hizmeti v3 API'si tarafından sunulan özellikler vardır. Her iki services karşılaştırması hakkında daha fazla bilgi bulabilirsiniz [burada](compare-video-indexer-with-media-services-presets.md).
+Şu anda Video Indexer API ve Azure Media Service v3 API 'SI tarafından sunulan özelliklerde bazı örtüşmeler vardır. Her [iki hizmeti de](compare-video-indexer-with-media-services-presets.md)nasıl karşılaştırılacağı hakkında daha fazla bilgi edinebilirsiniz.
 
-### <a name="what-is-an-api-access-token-and-why-do-i-need-it"></a>Bir API erişim belirteci nedir ve neden gerekir?
+### <a name="what-is-an-api-access-token-and-why-do-i-need-it"></a>API erişim belirteci nedir ve neden ihtiyacım var?
 
-Video Indexer API, bir yetkilendirme API ve işlemleri API içerir. Yetkilendirmeleri API size çağrıları içeren erişim belirteci. İşlemler API'sine yapılan her çağrı, çağrının yetkilendirme kapsamına uyan bir erişim belirteci ile ilişkilendirilmelidir.
+Video Indexer API 'si bir yetkilendirme API 'SI ve bir Operations API 'si içerir. Yetkilendirmeler API 'SI size erişim belirteci veren çağrılar içerir. İşlemler API'sine yapılan her çağrı, çağrının yetkilendirme kapsamına uyan bir erişim belirteci ile ilişkilendirilmelidir.
 
-Erişim belirteçleri, Video Indexer API'ları güvenlik amacıyla kullanmak için gereklidir. Bu, tüm çağrıları, ya da hesabınıza erişim izinlerine sahip olanlar geldiğini sağlar. 
+Video Indexer API 'Lerini güvenlik amacıyla kullanmak için erişim belirteçleri gerekir. Bu, herhangi bir çağrının sizin veya hesabınıza erişim izinleri olan kişilerin gelmesini sağlar. 
 
-### <a name="what-is-the-difference-between-account-access-token-user-access-token-and-video-access-token"></a>Hesap erişim belirtecini, kullanıcı erişim belirteci ve Video erişim belirteci arasındaki fark nedir?
+### <a name="what-is-the-difference-between-account-access-token-user-access-token-and-video-access-token"></a>Hesap erişim belirteci, Kullanıcı erişim belirteci ve video erişim belirteci arasındaki fark nedir?
 
-* Hesap düzeyi – hesap düzeyinde erişim belirteçleri, hesap düzeyinde veya video düzeyinde işlemleri sağlar. Örneğin, karşıya video yükleme, tüm videoları liste, video öngörüleri alın.
-* Kullanıcı düzeyinde - kullanıcı düzeyinde erişim belirteçleri kullanıcı düzeyinde işlemler gerçekleştirmenize olanak tanır. Örnek: ilişkili hesaplar alma.
-* Video düzeyindeki – belirli bir video işlemleri video düzeyinde erişim belirteçleri sağlar. Örnek: video içgörüsü alma, açıklamalı alt yazı indirme, pencere öğesi alma vb.
+* Hesap düzeyi – hesap düzeyinde erişim belirteçleri, hesap düzeyinde veya video düzeyinde işlemler gerçekleştirmenize olanak tanır. Örneğin, bir videoyu karşıya yükleyin, tüm videoları listeleyin, video öngörüleri alın.
+* Kullanıcı düzeyi-Kullanıcı düzeyi erişim belirteçleri, Kullanıcı düzeyinde işlem gerçekleştirmenize olanak tanır. Örnek: ilişkili hesaplar alma.
+* Video düzeyi – video düzeyi erişim belirteçleri, belirli bir video üzerinde işlemler gerçekleştirmenize olanak tanır. Örnek: video içgörüsü alma, açıklamalı alt yazı indirme, pencere öğesi alma vb.
 
-### <a name="how-often-do-i-need-to-get-a-new-access-token-when-do-access-tokens-expire"></a>Yeni bir erişim belirteci almak ne sıklıkla ihtiyacım var? Ne zaman erişim belirteçleri süresi dolar mı?
+### <a name="how-often-do-i-need-to-get-a-new-access-token-when-do-access-tokens-expire"></a>Ne sıklıkla yeni bir erişim belirteci almam gerekir? Erişim belirteçlerinin süre sonu ne zaman dolacak?
 
-Erişim belirteçleri, her saat yeni bir erişim belirteci oluşturmak gereken şekilde her saat sona erer. 
+Erişim belirteçlerinin her saat sonu dolduğunda, her saat için yeni bir erişim belirteci oluşturmanız gerekir. 
 
 ## <a name="billing-questions"></a>Faturalama soruları
 
-### <a name="how-much-does-video-indexer-cost"></a>Video Indexer nin ücreti ne kadardır?
+### <a name="how-much-does-video-indexer-cost"></a>Video Indexer maliyeti ne kadar sürer?
 
-Video Indexer, dizin içerik giriş süresine göre basit Kullandıkça Öde fiyatlandırma modeli kullanır. Ek ücretleri, kodlama, akış, depolama, ağ kullanımı ve medya ayrılmış birimleri uygulanabilir. Daha fazla bilgi için [fiyatlandırma](https://azure.microsoft.com/pricing/details/cognitive-services/video-indexer/) sayfası.
+Video Indexer, Dizin oluşturduğunuz içerik girişi süresine bağlı olarak basit bir Kullandıkça Öde fiyatlandırma modeli kullanır. Kodlama, akış, depolama, ağ kullanımı ve medya ayrılmış birimleri için ek ücretler uygulanabilir. Daha fazla bilgi için [fiyatlandırma](https://azure.microsoft.com/pricing/details/cognitive-services/video-indexer/) sayfasına bakın.
 
-### <a name="when-am-i-billed-for-using-video-indexer"></a>Video Indexer'ı kullanmak için ne zaman faturalandırılırım?
+### <a name="when-am-i-billed-for-using-video-indexer"></a>Video Indexer kullanmak için ne zaman faturalandırılırım?
 
 Bir video dizin oluşturma için gönderilirken, dizin oluşturmanın video analizini mi, ses analizi mi yoksa ikisini birden mi içereceği kullanıcı tarafından belirtilir. Bu, hangi SKU’ların ücretlendirileceğini belirler. İşleme sırasında bir kritik düzey hatası oluşursa yanıt olarak bir hata kodu döndürülür. Bu durumda faturalama gerçekleştirilmez.  Kritik hatalar, koddaki bir hatadan veya hizmetin bir iç bağımlılığında oluşan kritik bir hatadan kaynaklanabilir. Yanlış tanımlama veya içgörü ayıklama gibi hatalar kritik olarak kabul edilmez ve bir yanıt döndürülür. Geçerli (hata kodu olmayan) bir yanıt döndürülen durumlarda faturalama gerçekleşir.
  
-### <a name="does-video-indexer-offer-a-free-trial"></a>Video Indexer ücretsiz bir deneme sunar?
+### <a name="does-video-indexer-offer-a-free-trial"></a>Video Indexer ücretsiz bir deneme sunuyor mu?
 
-Evet, Video Indexer tam hizmet ve API işlevselliğini sağlayan ücretsiz bir deneme sunar. Bir kota videoların web tabanlı bir arabirim kullanıcılar için ve 2.400 dakika API kullanıcılar için 600 dakika yoktur. 
+Evet, Video Indexer tam hizmet ve API işlevselliği sağlayan ücretsiz bir deneme sunar. Web tabanlı arabirim kullanıcıları ve API kullanıcıları için 2.400 dakika 600 dakikalık videoların bir kotası vardır. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Genel bakış](video-indexer-overview.md)
+[Genel Bakış](video-indexer-overview.md)

@@ -1,6 +1,6 @@
 ---
-title: Masaüstü uygulaması çağrıları API'ler (uygulama kaydı) - web Microsoft kimlik platformu
-description: Bir masaüstü uygulaması oluşturmayı öğrenin çağrıları veritabanını web API'leri (uygulama kaydı)
+title: Web API 'Leri çağıran masaüstü uygulaması (uygulama kaydı)-Microsoft Identity platform
+description: Web API 'Leri (uygulama kaydı) çağıran bir masaüstü uygulaması oluşturmayı öğrenin
 services: active-directory
 documentationcenter: dev-center-name
 author: jmprieur
@@ -13,54 +13,55 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 04/18/2019
+ms.date: 09/09/2019
 ms.author: jmprieur
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5ab2701a82da0b8f7bc4e23a3d947be905593e85
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 648652ed32a5dea30de665b7fa49190171a7f10a
+ms.sourcegitcommit: 263a69b70949099457620037c988dc590d7c7854
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67057222"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71268400"
 ---
-# <a name="desktop-app-that-calls-web-apis---app-registration"></a>Web API'leri - uygulama kaydı çağrıları masaüstü uygulaması
+# <a name="desktop-app-that-calls-web-apis---app-registration"></a>Web API 'Lerini çağıran masaüstü uygulaması-uygulama kaydı
 
-Bu makale, bir masaüstü uygulaması için uygulama kaydı specificities içerir.
+Bu makale, bir masaüstü uygulaması için uygulama kaydı karmaşıklığını içerir.
 
-## <a name="supported-accounts-types"></a>Desteklenen hesapları türleri
+## <a name="supported-accounts-types"></a>Desteklenen hesap türleri
 
-Bir masaüstü uygulamasında desteklenen hesap türlerini istediğiniz ışık yedekleme deneyimi bağlıdır, ve bu nedenle kullanmak istiyorsanız akışlarda.
+Masaüstü uygulamasında desteklenen hesap türleri, açmak istediğiniz deneyime bağlı olarak değişir. Bu ilişki nedeniyle, desteklenen hesap türleri kullanmak istediğiniz akışlara bağlıdır.
 
-### <a name="audience-for-interactive-token-acquisition"></a>Etkileşimli belirteç edinme işlemi için hedef kitle
+### <a name="audience-for-interactive-token-acquisition"></a>Etkileşimli belirteç alımı için hedef kitle
 
-Masaüstü uygulamanızı etkileşimli kimlik doğrulaması kullanıyorsa, tüm kullanıcıların oturum açabilirsiniz [hesap türü](quickstart-register-app.md#register-a-new-application-using-the-azure-portal)
+Masaüstü uygulamanız etkileşimli kimlik doğrulaması kullanıyorsa, kullanıcıların herhangi bir [Hesap türünden](quickstart-register-app.md#register-a-new-application-using-the-azure-portal)oturum açmasını sağlayabilirsiniz.
 
-### <a name="audience-for-desktop-app-silent-flows"></a>Masaüstü uygulaması sessiz akışlar için hedef kitle
+### <a name="audience-for-desktop-app-silent-flows"></a>Masaüstü uygulaması için hedef kitle sessiz akışlar
 
-- Tümleşik Windows kimlik doğrulaması veya kullanıcı adı/parola kullanmak istiyorsanız, kullanıcıların kendi kiracınızı (iş KOLU geliştiricisi) veya Azure Active directory kuruluşlardaki (ISV senaryosu) oturum açmak uygulamanız gerekir. Bu kimlik doğrulama akışları kişisel Microsoft hesapları için desteklenmez
-- Cihaz kod akışını kullanmak istiyorsanız, kullanıcıların kendi kişisel Microsoft hesapları ile henüz oturum açılamıyor
-- Kullanıcılar bir B2C yetkilisi hem de ilke sosyal kimliklerle oturum açarsanız, yalnızca etkileşimli ve kullanıcı adı parola kimlik doğrulaması kullanabilirsiniz.
+- Tümleşik Windows kimlik doğrulaması veya Kullanıcı adı/parola kullanmak için uygulamanızın kendi kiracınızda (LOB Geliştirici) veya Azure Active Directory kuruluşları 'nda (ISV senaryosu) Kullanıcı oturum açması gerekir. Bu kimlik doğrulama akışları, Microsoft kişisel hesapları için desteklenmez.
+- Cihaz kod akışını kullanmak istiyorsanız, kullanıcıları Microsoft kişisel hesaplarıyla henüz oturum açamazsınız.
+- Sosyal kimlik ve ilke geçirimli kullanıcılar oturum açarsanız, yalnızca etkileşimli ve Kullanıcı adı-parola kimlik doğrulamasını kullanabilirsiniz.
 
-## <a name="redirect-uris"></a>Yeniden yönlendirme URI'leri
+## <a name="redirect-uris"></a>Yeniden Yönlendirme URI'leri
 
-Yeniden yönlendirme URI'leri bir masaüstü uygulamasında kullanmak için kullanmak istediğiniz akışı üzerinde yeniden bağlı olacaktır.
+Masaüstü uygulamasında kullanılacak yeniden yönlendirme URI 'Leri, kullanmak istediğiniz akışa bağlı olacaktır.
 
-- Kullanıyorsanız **etkileşimli kimlik doğrulaması** veya **cihaz kod akış**, kullanmak istediğiniz `https://login.microsoftonline.com/common/oauth2/nativeclient`. Karşılık gelen URL'yi tıklayarak bu yapılandırma başarıya ulaşırsınız **kimlik doğrulaması** uygulamanız için bölüm
+- **Etkileşimli kimlik doğrulama** veya **cihaz kod akışı**kullanıyorsanız, kullanmak `https://login.microsoftonline.com/common/oauth2/nativeclient`isteyeceksiniz. Uygulamanız için **kimlik doğrulama** bölümünde karşılık gelen URL 'ye tıklayarak bu yapılandırmayı elde edeceksiniz.
   
   > [!IMPORTANT]
-  > Bugün Windows üzerinde çalışan masaüstü uygulamalarda varsayılan olarak başka bir yeniden yönlendirme URI'si MSAL.NET kullanır (`urn:ietf:wg:oauth:2.0:oob`). Gelecekte bu varsayılanı değiştirmek istiyoruz ve bu nedenle kullanmanızı öneririz `https://login.microsoftonline.com/common/oauth2/nativeclient`
+  > Bugün MSAL.NET, Windows (`urn:ietf:wg:oauth:2.0:oob`) üzerinde çalışan masaüstü uygulamalarında varsayılan olarak başka bir yeniden yönlendirme URI 'si kullanır. Gelecekte bu Varsayılanı değiştirmek istiyoruz ve bu nedenle şunu kullanmanızı öneririz`https://login.microsoftonline.com/common/oauth2/nativeclient`
 
-- Uygulamanızı yalnızca kullanıcı adı/parola, tümleşik Windows kimlik doğrulaması kullanıyorsa, uygulamanız için bir yeniden yönlendirme URI'si kaydetme gerekmez. Aslında bu akışlar Microsoft kimlik platformu v2.0 uç noktasına bir gidiş dönüş yapmak ve uygulamanızın belirli tüm URI üzerinde geri çağrılması olmaz. 
-- Cihaz kod akışını bir ayrım yapmak için tümleşik Windows kimlik doğrulaması ve kullanıcı adı/parola sahip gizli bir istemci uygulama akışının yeniden yönlendirme URI'leri (arka plan programı uygulamalarında kullanılan ya da istemci kimlik bilgileri akışı), express gerekir Uygulamanızı genel bir istemci uygulaması olduğunu. Bu yapılandırma sayfasına gidip sağlanır **kimlik doğrulaması** bölümü ve uygulamanız için **Gelişmiş ayarlar** ayrıntılarının öğesini **Evet**, sorusuna **Uygulama genel bir istemci kabul** (içinde **varsayılan istemci türü** paragraf)
+- MacOS için yerel bir amaç-C veya Swift uygulaması oluşturuyorsanız, redirectUri 'yi uygulamanızın paket tanımlayıcısına göre aşağıdaki biçimde kaydetmek isteyeceksiniz: **msauth <. app. demeti. ıd >:/auth** (replace < Uygulamanızın paket tanımlayıcısına sahip. app. demeti. ID >
+- Uygulamanız yalnızca tümleşik Windows kimlik doğrulaması veya Kullanıcı adı/parola kullanıyorsa, uygulamanız için bir yeniden yönlendirme URI 'SI kaydetmeniz gerekmez. Bu akışlar Microsoft Identity platform v 2.0 uç noktasına gidiş dönüş yapılır ve uygulamanız belirli bir URI üzerinde geri çağrılmayacaktır.
+- Cihaz kod akışını, tümleşik Windows kimlik doğrulamasını ve Kullanıcı adını/parolayı yeniden yönlendirme URI 'Leri olmayan bir gizli istemci uygulama akışından ayırt etmek için (daemon uygulamalarında kullanılan istemci kimlik bilgisi akışı), uygulama, ortak bir istemci uygulamasıdır. Bu yapılandırmayı başarmak için uygulamanızın **kimlik doğrulama** bölümüne gidin. Ardından, **Gelişmiş ayarlar** alt bölümünde, **varsayılan istemci türü** paragrafında, **uygulamayı ortak istemci olarak işle**sorusuna **Evet** ' i seçin.
 
-  ![Genel istemci izin ver](media/scenarios/default-client-type.png)
+  ![Ortak istemciye izin ver](media/scenarios/default-client-type.png)
 
 ## <a name="api-permissions"></a>API izinleri
 
-Masaüstü uygulamaları, oturum açmış kullanıcı adına API'lerini çağırma. Temsilci izinleri istemek gerekir. Bunlar uygulama izinleri isteyemez (hangi yalnızca işlenir [arka plan programı uygulamaları](scenario-daemon-overview.md))
+Masaüstü uygulamaları, oturum açmış kullanıcı için API 'Ler çağırır. Temsilci izinleri istemeleri gerekir. Ancak, yalnızca [Daemon uygulamalarında](scenario-daemon-overview.md)işlenen uygulama izinleri isteyemeyebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Masaüstü uygulaması - uygulama yapılandırma](scenario-desktop-app-configuration.md)
+> [Masaüstü uygulaması-uygulama yapılandırması](scenario-desktop-app-configuration.md)

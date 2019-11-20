@@ -1,240 +1,173 @@
 ---
-title: 'Öğretici: Azure Active Directory Tümleştirmesi ile BenSelect | Microsoft Docs'
-description: Azure Active Directory ve BenSelect arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: BenSelect ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve BenSelect arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: daveba
+manager: mtillman
+ms.reviewer: barbkess
 ms.assetid: ffa17478-3ea1-4356-a289-545b5b9a4494
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 06/23/2017
+ms.topic: tutorial
+ms.date: 08/07/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 699afd4703efc5e8f63bb13fe1dd753a0c72594d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: f5ca12f89615cd4b3110b0d67268c048b8e44561
+ms.sourcegitcommit: aa042d4341054f437f3190da7c8a718729eb675e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60282990"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68879713"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-benselect"></a>Öğretici: BenSelect ile Azure Active Directory Tümleştirme
+# <a name="tutorial-integrate-benselect-with-azure-active-directory"></a>Öğretici: Azure Active Directory BenSelect ile tümleştirin
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile BenSelect tümleştirme konusunda bilgi edinin.
+Bu öğreticide, BenSelect 'i Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. BenSelect 'i Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-Azure AD ile BenSelect tümleştirme ile aşağıdaki avantajları sağlar:
+* Azure AD 'de BenSelect 'e erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla zararsız bir şekilde oturum açabilmesi için bu seçeneği etkinleştirin.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-- BenSelect erişimi, Azure AD'de denetleyebilirsiniz
-- Otomatik olarak imzalanan için BenSelect (çoklu oturum açma) ile Azure AD hesaplarına açma, kullanıcılarınızın etkinleştirebilirsiniz.
-- Hesaplarınız bir merkezi konumda - Azure portalında yönetebilirsiniz.
-
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](../manage-apps/what-is-single-sign-on.md).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile BenSelect yapılandırmak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-- Azure AD aboneliği
-- Abonelik BenSelect çoklu oturum açma etkin
-
-> [!NOTE]
-> Bu öğreticideki adımları test etmek için üretim ortamı kullanarak önermiyoruz.
-
-Bu öğreticideki adımları test etmek için bu önerileri izlemelidir:
-
-- Gerekli olmadıkça, üretim ortamında kullanmayın.
-- Azure AD deneme ortamı yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/).
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* BenSelect çoklu oturum açma (SSO) etkin aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
-Bu öğreticide, Azure AD çoklu oturum açma bir test ortamında test edin. Bu öğreticide özetlenen senaryo iki temel yapı taşları oluşur:
 
-1. Galeriden BenSelect ekleme
-1. Yapılandırma ve test Azure AD çoklu oturum açma
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
+
+* BenSelect, **IDP** tarafından başlatılan SSO 'yu destekler
 
 ## <a name="adding-benselect-from-the-gallery"></a>Galeriden BenSelect ekleme
-Azure AD'de BenSelect tümleştirmesini yapılandırmak için BenSelect Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
 
-**Galeriden BenSelect eklemek için aşağıdaki adımları gerçekleştirin:**
+BenSelect 'ın Azure AD 'de tümleştirilmesini yapılandırmak için Galeriden yönetilen SaaS uygulamaları listenize BenSelect eklemeniz gerekir.
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi. 
+1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **benselect** yazın.
+1. Sonuçlar panelinden **benselect** ' i seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-    ![Active Directory][1]
 
-1. Gidin **kurumsal uygulamalar**. Ardından **tüm uygulamaları**.
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
 
-    ![Uygulamalar][2]
-    
-1. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+**B. Simon**adlı bir test kullanıcısı kullanarak Azure AD SSO 'Yu, benselect ile yapılandırın ve test edin. SSO 'nun çalışması için, bir Azure AD kullanıcısı ve BenSelect içinde ilgili Kullanıcı arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-    ![Uygulamalar][3]
+Azure AD SSO 'yu bir BenSelect ile yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-1. Arama kutusuna **BenSelect**.
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+2. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[BenSelect SSO 'Yu yapılandırın](#configure-benselect-sso)** .
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+5. Kullanıcının Azure AD gösterimine bağlı olan BenSelect 'te B. Simon 'a sahip olmak için **[benselect test kullanıcısı oluşturun](#create-benselect-test-user)** .
+6. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/benselect-tutorial/tutorial_benselect_search.png)
+### <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-1. Sonuçlar panelinde seçin **BenSelect**ve ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/benselect-tutorial/tutorial_benselect_addfromgallery.png)
+1. [Azure Portal](https://portal.azure.com/), **zararsız** Uygulama tümleştirmesini seçin sayfasında **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
-##  <a name="configuring-and-testing-azure-ad-single-sign-on"></a>Yapılandırma ve test Azure AD çoklu oturum açma
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma "Britta Simon." adlı bir test kullanıcı tabanlı BenSelect ile test etme
+   ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-Tek iş için oturum açma için Azure AD ne BenSelect karşılığı kullanıcı için bir kullanıcı Azure AD'de olduğunu bilmeniz gerekir. Diğer bir deyişle, bir Azure AD kullanıcısının BenSelect ilgili kullanıcı arasında bir bağlantı ilişkisi kurulması gerekir.
+1. **Temel SAML yapılandırması** bölümünde, aşağıdaki alanlar için değerleri girin:
 
-BenSelect içinde değerini atayın **kullanıcı adı** değerini Azure AD'de **kullanıcıadı** bağlantı kurmak için.
+    **Yanıt URL 'si** metin kutusuna aşağıdaki kalıbı kullanarak bir URL yazın:`https://www.benselect.com/enroll/login.aspx?Path=<tenant name>`
 
-Yapılandırma ve Azure AD çoklu oturum açma BenSelect ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+    > [!NOTE]
+    > Değer gerçek değil. Değeri gerçek yanıt URL 'siyle güncelleştirin. Değeri almak için [Benselect istemci destek ekibine](mailto:support@selerix.com) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-1. **[Azure AD çoklu oturum açmayı yapılandırma](#configuring-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-1. **[Bir Azure AD test kullanıcısı oluşturma](#creating-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-1. **[BenSelect test kullanıcısı oluşturma](#creating-a-benselect-test-user)**  - kullanıcı Azure AD gösterimini bağlı BenSelect Britta simon'un bir karşılığı vardır.
-1. **[Azure AD test kullanıcı atama](#assigning-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-1. **[Çoklu oturum açma testi](#testing-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. BenSelect uygulaması, SAML onaylamalarını belirli bir biçimde bekliyor. Bu uygulama için aşağıdaki talepleri yapılandırın. Bu özniteliklerin değerlerini, uygulama tümleştirme sayfasındaki **Kullanıcı öznitelikleri** bölümünden yönetebilirsiniz. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **Kullanıcı öznitelikleri** Iletişim kutusunu açmak için **Düzenle** düğmesine tıklayın.
 
-### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
+    ![image](common/edit-attribute.png)
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin ve BenSelect uygulamanızda çoklu oturum açmayı yapılandırın.
+1. **Ad tanımlayıcı değerini**düzenlemek için **Düzenle** simgesine tıklayın.
 
-**Azure AD çoklu oturum açma ile BenSelect yapılandırmak için aşağıdaki adımları gerçekleştirin:**
+    ![image](media/benselect-tutorial/mail-prefix1.png)
 
-1. Azure portalında, üzerinde **BenSelect** uygulama tümleştirme sayfasını tıklatın **çoklu oturum açma**.
+1. **Kullanıcı taleplerini Yönet** bölümünde aşağıdaki adımları uygulayın:
 
-    ![Çoklu oturum açmayı yapılandırın][4]
+    ![image](media/benselect-tutorial/mail-prefix2.png)
 
-1. Üzerinde **çoklu oturum açma** iletişim kutusunda **modu** olarak **SAML tabanlı oturum açma** çoklu oturum açmayı etkinleştirmek için.
- 
-    ![Çoklu oturum açmayı yapılandırın](./media/benselect-tutorial/tutorial_benselect_samlbase.png)
+    a. **Kaynak**olarak **dönüşüm** ' i seçin.
 
-1. Üzerinde **BenSelect etki alanı ve URL'ler** bölümünde, aşağıdaki adımları gerçekleştirin:
+    b. **Dönüştürme** açılan listesinde **Extractmailprefix ()** öğesini seçin.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/benselect-tutorial/tutorial_benselect_url.png)
+    c. **Parametre 1** açılan listesinde **User. UserPrincipalName**' i seçin.
 
-    İçinde **yanıt URL'si** metin kutusuna bir URL şu biçimi kullanarak: `https://www.benselect.com/enroll/login.aspx?Path=<tenant name>`
+    d. **Kaydet**’e tıklayın.
 
-    > [!NOTE] 
-    > Bu değer, gerçek değil. Bu değer, gerçek yanıt URL'si ile güncelleştirin. İlgili kişi [BenSelect Destek ekibine](mailto:support@selerix.com) bu değeri alınamıyor.
- 
-1. Üzerinde **SAML imzalama sertifikası** bölümünde **Certificate(Raw)** ve bilgisayarınızdaki sertifika dosyasını kaydedin.
+1. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML Imzalama Sertifikası** bölümünde **sertifika (ham)** bulun ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/benselect-tutorial/tutorial_benselect_certificate.png) 
+    ![Sertifika indirme bağlantısı](common/certificateraw.png)
 
-1. BenSelect uygulama belirli bir biçimde SAML onaylamalarını bekler. Bu uygulama için aşağıdaki talepleri yapılandırın. Bu öznitelikleri değerlerini yönetebilirsiniz **kullanıcı öznitelikleri** uygulama tümleştirme sayfasında bölümü. Aşağıdaki ekran görüntüsü bunun bir örneği gösterilmektedir.
+1. **Zararsız seçimi ayarla** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/benselect-tutorial/tutorial_benselect_06.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-1. İçinde **kullanıcı öznitelikleri** bölümünde **çoklu oturum açma** iletişim:
+### <a name="configure-benselect-sso"></a>BenSelect SSO 'yu yapılandırma
 
-    a. İçinde **kullanıcı tanımlayıcısı** açılan listesinden **ExtractMailPrefix**.
+**Benselect** tarafında çoklu oturum açmayı yapılandırmak için, indirilen **sertifikayı (ham)** ve uygun kopyalanmış URL 'Leri Azure Portal 'den [benselect destek ekibine](mailto:support@selerix.com)göndermeniz gerekir. Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
 
-    b. İçinde **posta** açılan listesinden **user.userprincipalname**.
+> [!NOTE]
+> Bu tümleştirmenin, app2101 vb gibi uygun sunucuda SSO 'yu ayarlamak için SHA256 algoritmasını (SHA1 desteklenmez) gerektirdiğini belirlemeniz gerekir.
 
-1. Tıklayın **Kaydet** düğmesi.
+### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
 
-    ![Çoklu oturum açmayı yapılandırın](./media/benselect-tutorial/tutorial_general_400.png)
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-1. Üzerinde **BenSelect yapılandırma** bölümünde **yapılandırma BenSelect** açmak için **yapılandırma oturum açma** penceresi. Kopyalama **oturum kapatma URL'si, SAML varlık kimliği ve SAML çoklu oturum açma hizmeti URL'si** gelen **hızlı başvuru bölümü.**
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Seçin **yeni kullanıcı** ekranın üstünde.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına, username@companydomain.extensiongirin. Örneğin: `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1.           **Oluştur**'a tıklayın.
 
-    ![Çoklu oturum açmayı yapılandırın](./media/benselect-tutorial/tutorial_benselect_configure.png) 
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
 
-1. Çoklu oturum açmayı yapılandırma **BenSelect** tarafı, indirilen göndermek için ihtiyacınız **Certificate(Raw)** ve **oturum kapatma URL'si, SAML varlık kimliği ve SAML çoklu oturum açma hizmeti URL'si**için [BenSelect Destek ekibine](mailto:support@selerix.com).
+Bu bölümde, BenSelect 'e erişim vererek Azure çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştireceksiniz.
 
-   >[!NOTE]
-   >Bu tümleştirme (SHA1 desteklenmez) SHA256 algoritmasını gerektirir anlatılması gerekir app2101 gibi uygun sunucu üzerinden SSO vb. ayarlamak için. 
-   
-> [!TIP]
-> İçindeki bu yönergeleri kısa bir sürümünü artık okuyabilir [Azure portalında](https://portal.azure.com), uygulamayı hazırlama ayarladığınız sırada!  Bu uygulamadan ekledikten sonra **Active Directory > Kurumsal uygulamalar** bölümünde, tıklamanız yeterlidir **çoklu oturum açma** aracılığıyla katıştırılmış belgelere erişebilir ve sekmesinde  **Yapılandırma** alttaki bölümü. Daha fazla bilgi embedded belgeleri özelliği burada hakkında: [Azure AD embedded belgeleri]( https://go.microsoft.com/fwlink/?linkid=845985)
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde, **benselect**' ı seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
-### <a name="creating-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+   !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
 
-![Azure AD kullanıcısı oluşturun][100]
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-**Azure AD'de bir test kullanıcısı oluşturmak için aşağıdaki adımları gerçekleştirin:**
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-1. İçinde **Azure portalında**, sol gezinti bölmesinde **Azure Active Directory** simgesi.
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/benselect-tutorial/create_aaduser_01.png) 
+### <a name="create-benselect-test-user"></a>BenSelect test kullanıcısı oluştur
 
-1. Kullanıcıların listesini görüntülemek için Git **kullanıcılar ve gruplar** tıklatıp **tüm kullanıcılar**.
-    
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/benselect-tutorial/create_aaduser_02.png) 
+Bu bölümde, BenSelect 'te Britta Simon adlı bir Kullanıcı oluşturacaksınız. Benselect platformunda kullanıcıları eklemek için [benselect destek ekibi](mailto:support@selerix.com) ile çalışın. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
 
-1. Açmak için **kullanıcı** iletişim kutusunda, tıklayın **Ekle** iletişim kutusunun üst kısmındaki.
- 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/benselect-tutorial/create_aaduser_03.png) 
+### <a name="test-sso"></a>Test SSO 'SU
 
-1. Üzerinde **kullanıcı** iletişim sayfasında, aşağıdaki adımları gerçekleştirin:
- 
-    ![Bir Azure AD test kullanıcısı oluşturma](./media/benselect-tutorial/create_aaduser_04.png) 
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
 
-    a. İçinde **adı** metin kutusuna **BrittaSimon**.
-
-    b. İçinde **kullanıcı adı** metin kutusuna **e-posta adresi** BrittaSimon biri.
-
-    c. Seçin **Göster parola** ve değerini yazma **parola**.
-
-    d. **Oluştur**’a tıklayın.
- 
-### <a name="creating-a-benselect-test-user"></a>BenSelect test kullanıcısı oluşturma
-
-Bu bölümün amacı BenSelect Britta Simon adlı bir kullanıcı oluşturmaktır. Çalışmak [BenSelect Destek ekibine](mailto:support@selerix.com) BenSelect hesabında kullanıcıları eklemek için.
-
-### <a name="assigning-the-azure-ad-test-user"></a>Azure AD test kullanıcı atama
-
-Bu bölümde, Azure çoklu oturum açma kullanmak için BenSelect erişim vererek Britta Simon etkinleştirin.
-
-![Kullanıcı Ata][200] 
-
-**Britta Simon BenSelect için atamak için aşağıdaki adımları gerçekleştirin:**
-
-1. Azure portalında uygulama görünümü açtığınız dizin görünümüne gidin ve Git **kurumsal uygulamalar** ardından **tüm uygulamaları**.
-
-    ![Kullanıcı Ata][201] 
-
-1. Uygulamalar listesinde **BenSelect**.
-
-    ![Çoklu oturum açmayı yapılandırın](./media/benselect-tutorial/tutorial_benselect_app.png) 
-
-1. Soldaki menüde **kullanıcılar ve gruplar**.
-
-    ![Kullanıcı Ata][202] 
-
-1. Tıklayın **Ekle** düğmesi. Ardından **kullanıcılar ve gruplar** üzerinde **atama Ekle** iletişim.
-
-    ![Kullanıcı Ata][203]
-
-1. Üzerinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** kullanıcıları listesinde.
-
-1. Tıklayın **seçin** düğmesini **kullanıcılar ve gruplar** iletişim.
-
-1. Tıklayın **atama** düğmesini **atama Ekle** iletişim.
-    
-### <a name="testing-single-sign-on"></a>Çoklu oturum açma testi
-
-Bu bölümde, Azure AD SSO yapılandırmanızı erişim panelini kullanarak test edin.
-
-Erişim panelinde BenSelect kutucuğa tıkladığınızda, otomatik olarak BenSelect uygulamanıza açan.
+Erişim panelinde BenSelect kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız Benseçim için otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](tutorial-list.md)
-* [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](../manage-apps/what-is-single-sign-on.md)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
-<!--Image references-->
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-[1]: ./media/benselect-tutorial/tutorial_general_01.png
-[2]: ./media/benselect-tutorial/tutorial_general_02.png
-[3]: ./media/benselect-tutorial/tutorial_general_03.png
-[4]: ./media/benselect-tutorial/tutorial_general_04.png
-
-[100]: ./media/benselect-tutorial/tutorial_general_100.png
-
-[200]: ./media/benselect-tutorial/tutorial_general_200.png
-[201]: ./media/benselect-tutorial/tutorial_general_201.png
-[202]: ./media/benselect-tutorial/tutorial_general_202.png
-[203]: ./media/benselect-tutorial/tutorial_general_203.png
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

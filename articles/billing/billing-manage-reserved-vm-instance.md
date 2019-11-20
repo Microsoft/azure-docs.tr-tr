@@ -1,6 +1,6 @@
 ---
-title: Azure ayırmalarını yönetme
-description: Abonelik kapsamını değiştirmek ve erişimi yönetmek için Azure ayırmaları nasıl öğrenin.
+title: Azure Ayrılmış Sanal Makine Örnekleri’ni yönetme
+description: Azure Ayrılmış Sanal Makine Örnekleri’ni nasıl yönetebileceğinizi öğrenin.
 ms.service: billing
 author: bandersmsft
 manager: yashesvi
@@ -8,93 +8,93 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/01/2019
+ms.date: 08/06/2019
 ms.author: banders
-ms.openlocfilehash: 89279387b3630ea654070eef671f131ec757d55f
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
-ms.translationtype: MT
+ms.openlocfilehash: b161fc7cd4faa75dd87613c297c12f1edd862510
+ms.sourcegitcommit: 3e7646d60e0f3d68e4eff246b3c17711fb41eeda
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67491192"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "68840009"
 ---
-# <a name="manage-reservations-for-azure-resources"></a>Rezervasyonlar Azure kaynaklarını yönetme
+# <a name="manage-reservations-for-azure-resources"></a>Azure kaynakları için Rezervasyonları yönetme
 
-Azure için bir ayırma satın sonra gerekebilir ayırma farklı bir aboneliğe uygulamak için kimin ayırma yönetmek veya ayırma kapsamını değiştirmek değiştirin. Ayrıca, bir ayırma satın aldığınız örnekleri bazı başka bir aboneliğe uygulamak için iki ayırmalar halinde bölebilirsiniz.
+Azure rezervasyonu satın aldıktan sonra rezervasyonu farklı bir aboneliğe uygulamanız, rezervasyonu yönetebilecek kullanıcıları değiştirmeniz veya rezervasyon kapsamını düzenlemeniz gerekebilir. Ayrıca bir rezervasyonu iki rezervasyona ayırarak satın aldığınız örneklerin bazılarını başka bir aboneliğe uygulayabilirsiniz.
 
-Azure ayrılmış sanal makine örnekleri satın aldıysanız, ayırma için İyileştir ayarı değiştirebilirsiniz. Ayırma indirimi, aynı dizide Vm'lere uygulayabilir veya belirli bir VM boyutu için veri merkezi kapasite ayırabilirsiniz.
+Azure Ayrılmış Sanal Makine Örnekleri satın aldıysanız rezervasyon için iyileştirme ayarını değiştirebilirsiniz. Rezervasyon indirimi aynı serideki VM'lere uygulanabilir veya veri merkezi kapasitesini belirli bir VM boyutu için ayırabilirsiniz. Ayrıca tamamen kullanılmalarını sağlamak için rezervasyonları iyileştirmeyi denemelisiniz.
 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-## <a name="reservation-order-and-reservation"></a>Rezervasyon siparişi ve ayırma
+## <a name="reservation-order-and-reservation"></a>Rezervasyon Siparişi ve Rezervasyon
 
-Bir rezervasyon satın alma işlemi yaptığınızda, iki nesne oluşturulur: **Rezervasyon siparişi** ve **ayırma**.
+Rezervasyon satın aldığınızda iki nesne oluşturulur: **Rezervasyon Siparişi** ve **Rezervasyon**.
 
-Satın alım zamanında rezervasyon siparişi altındaki bir ayırma vardır. Bölünmüş, birleştirme, kısmi para iadesi veya exchange gibi eylemleri altında yeni ayırmaları oluşturma **rezervasyon siparişi**.
+Satın alma sırasında Rezervasyon Siparişinin altında tek bir Rezervasyon vardır. Bölme, birleştirme, kısmi para iadesi veya değiştirme gibi eylemler **Rezervasyon Siparişi**'nin altında yeni rezervasyonlar oluşturur.
 
-Rezervasyon siparişi görüntülemek için Git **ayırmaları** > Rezervasyon seçin ve ardından **rezervasyon sipariş kimliği**.
+Rezervasyon Siparişini görüntülemek için **Rezervasyonlar**'a gidin > rezervasyonu seçin ve ardından **Rezervasyon sipariş kimliği**'ne tıklayın.
 
-![Rezervasyon sipariş ayrıntılarını gösteren rezervasyon sipariş kimliği örneği ](./media/billing-manage-reserved-vm-instance/reservation-order-details.png)
+![Rezervasyon sipariş kimliğinin gösterildiği rezervasyon sipariş ayrıntıları örneği ](./media/billing-manage-reserved-vm-instance/reservation-order-details.png)
 
-Ayırma, rezervasyon siparişini izinleri devralır.
+Rezervasyonlar kendi rezervasyon siparişlerinin izinlerini devralır.
 
-## <a name="change-the-reservation-scope"></a>Ayırma Kapsamı Değiştir
+## <a name="change-the-reservation-scope"></a>Rezervasyon kapsamını değiştirme
 
- Ayırma indirimi, sanal makineler, SQL veritabanları, Azure Cosmos DB veya rezervasyonunuzun eşleşen ve ayırma kapsamı içinde çalıştırılan diğer kaynaklar için geçerlidir. Fatura bağlamı, rezervasyon satın almak için kullanılan abonelik üzerinde bağlıdır.
+ Rezervasyon indiriminiz sanal makinelere, SQL veritabanlarına, Azure Cosmos DB'ye veya rezervasyonunuzla eşleşen ve rezervasyon kapsamında çalıştırılan diğer kaynaklara uygulanır. Faturalama bağlamı, rezervasyonu satın almak için kullanılan aboneliğe bağlıdır.
 
-Rezervasyon kapsamı güncelleştirilemedi:
+Rezervasyon kapsamını güncelleştirmek için:
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Seçin **tüm hizmetleri** > **ayırmaları**.
-3. Ayırma seçin.
+2. **Tüm hizmetler** > **Rezervasyonlar**’ı seçin.
+3. Rezervasyonu seçin.
 4. **Ayarlar** > **Yapılandırma**'yı seçin.
-5. Kapsamını değiştirin.
+5. Kapsamı değiştirin.
 
-Gelen tek bir kapsam için paylaşılan değiştirirseniz, yalnızca sahibi olduğu abonelikleri seçebilirsiniz. Yalnızca rezervasyonla aynı fatura bağlamında bulunan abonelikleri seçebilirsiniz.
+Paylaşılan kapsamdan tek kapsama geçerseniz yalnızca sahibi olduğunuz rezervasyon abonelikleri seçebilirsiniz. Yalnızca rezervasyonla aynı fatura bağlamında bulunan abonelikleri seçebilirsiniz.
 
-Kapsamı yalnızca Kullandıkça Öde tarifesine göre (teklifler MS-AZR - 0003 P veya MS-AZR - 0023 P) ile tek tek abonelikleri Kurumsal teklif MS-AZR - 0017 P veya MS-AZR - 0148 P ya da CSP'ye abonelik türlerinde geçerlidir.
+Kapsam yalnızca kullandıkça öde fiyatının geçerliği olduğu tek tek abonelikler (MS-AZR-0003P veya MS-AZR-0023P teklifi), MS-AZR-0017P veya MS-AZR-0148P kodlu Kurumsal teklif ya da CSP abonelikleri için geçerlidir.
 
 ## <a name="add-or-change-users-who-can-manage-a-reservation"></a>Rezervasyonu yönetebilecek kullanıcıları ekleme veya değiştirme
 
-Ayırma yönetim rolleri rezervasyon siparişi veya ayırma kişiler ekleyerek devredebilirsiniz. Varsayılan olarak, rezervasyon siparişi ve Hesap Yöneticisi yerleştirir kişi rezervasyon siparişi ve ayırma sahip rolüne sahiptir.
+Rezervasyon siparişindeki veya rezervasyondaki rollere kullanıcı ekleyerek bir rezervasyonun yönetimi için temsilciler belirleyebilirsiniz. Varsayılan olarak rezervasyonu sipariş eden kişi ve hesap yöneticisi, rezervasyon siparişinde ve rezervasyonda Sahip rolüne atanır.
 
-Rezervasyon siparişleri ve ayırmaları bağımsız olarak ayırma indirimi alma aboneliklerinden gelen erişimi yönetebilir. Birisi bir rezervasyon siparişi veya ayırma yönetme izni verdiğinizde, bunları aboneliği yönetme izni vermek değil. Birisi bir abonelikte bir ayırma'nın kapsamı yönetme izni verirseniz, benzer şekilde, bu bunları rezervasyon siparişi veya ayırma yönetme hakkı verin değil.
+Rezervasyon siparişlerine ve rezervasyonlara erişimi, rezervasyon indirimini alan aboneliklerden bağımsız olarak yönetebilirsiniz. Birine rezervasyon siparişini veya rezervasyonu yönetme izinleri verdiğinizde, ona aboneliği yönetme izni vermiş olmazsınız. Benzer biçimde birine rezervasyon kapsamında aboneliği yönetme izinleri verirseniz, o kişi rezervasyon siparişini veya rezervasyonu yönetme hakları almış olmaz.
 
-Bir exchange ya da para iadesinin gerçekleştirmek için kullanıcı rezervasyon siparişi erişimi olmalıdır. Birisi izin verirken, rezervasyon siparişi ayırma izinler en iyisidir.
+Değiştirme veya para iadesi yapmak için kullanıcının rezervasyon siparişine erişimi olmalıdır. Birine izinler verirken, rezervasyona değer rezervasyon siparişine izinler vermek daha iyi olabilir.
 
 
-Erişim yönetimi için bir ayırma temsilci atamak için:
+Rezervasyona yönetim erişimi temsilcisi atamak için:
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Seçin **tüm hizmetleri** > **ayırma** erişiminiz listesi ayırmalar için.
-3. Diğer kullanıcılara erişim vermek istediğiniz ayırma seçin.
-4. Seçin **erişim denetimi (IAM)** .
-5. Seçin **rol ataması Ekle** > **rol** > **sahibi**. Sınırlı erişim vermek istiyorsanız farklı bir rol seçebilirsiniz.
+2. **Tüm Hizmetler** > **Rezervasyon**'u seçerek erişim sahibi olduğunuz rezervasyonları listeleyin.
+3. Diğer kullanıcılara erişim vermek istediğiniz rezervasyonu seçin.
+4. **Erişim denetimi (IAM)** öğesini seçin.
+5. **Rol ataması ekle** > **Rol** > **Sahip**'i seçin. Sınırlı erişim vermek istiyorsanız farklı bir rol seçebilirsiniz.
 6. Sahip olarak eklemek istediğiniz kullanıcının e-posta adresini yazın.
 7. Kullanıcıyı ve ardından **Kaydet**'i seçin.
 
-## <a name="split-a-single-reservation-into-two-reservations"></a>Tek bir ayırma iki ayırmalar halinde bölme
+## <a name="split-a-single-reservation-into-two-reservations"></a>Tek rezervasyonu iki rezervasyona bölme
 
- Birden fazla kaynak örneği içindeki bir ayırma satın sonra bu ayırma örneklerinden farklı aboneliklere atamak isteyebilirsiniz. Varsayılan olarak, tüm örnekleri bir kapsamı - ya da tek bir abonelik veya paylaşılan. Örneğin, 10 ayırma örnekleri satın ve belirtilen abonelik a için kapsamı Artık abonelik A için 7 ayırmaları kapsamını değiştirmek isteyebilirsiniz ve ayrıntılı kapsam yönetimi için örnek dağıtmak kalan abonelik b bölme bir ayırma 3 sağlar. Paylaşılan kapsam seçerek aboneliklere ayırma basitleştirebilir. Ancak, maliyet Yönetimi'ni veya ödemeyle amaçları için özel abonelikler miktarlar ayırabilirsiniz.
+ Bir rezervasyon içinde birden fazla kaynak örneği satın aldıktan sonra o rezervasyon içindeki örnekleri farklı aboneliklere atamak isteyebilirsiniz. Varsayılan olarak tüm örneklerin kapsamı (tek abonelik veya paylaşılan) vardır. On rezervasyon örneği satın aldığınızı ve kapsam olarak A aboneliğini belirttiğinizi varsayalım. Şimdi yedi rezervasyonun kapsamı A aboneliği ve kalan üçünün B aboneliği olacak şekilde değişiklik yapmak istiyor olabilirsiniz. Rezervasyonun bölünmesi ayrıntılı kapsam yönetimi için örnekleri dağıtabilmenizi sağlar. Paylaşılan kapsamı seçerek abonelikleri ayırma işlemini basitleştirebilirsiniz. Ama maliyet yönetimi ve bütçeleme amacıyla, miktarları belirli aboneliklere ayırabilirsiniz.
 
- PowerShell, CLI, ancak iki ayırmalar halinde ayırma bölebilir veya API üzerinden.
+ Rezervasyonu PowerShell, CLI veya API aracılığıyla iki rezervasyona bölebilirsiniz.
 
-### <a name="split-a-reservation-by-using-powershell"></a>PowerShell kullanarak bir ayırma Böl
+### <a name="split-a-reservation-by-using-powershell"></a>PowerShell kullanarak rezervasyonu bölme
 
-1. Rezervasyon sipariş kimliği, aşağıdaki komutu çalıştırarak alın:
+1. Aşağıdaki komutu çalıştırarak rezervasyon sipariş kimliğini alın:
 
     ```powershell
     # Get the reservation orders you have access to
     Get-AzReservationOrder
     ```
 
-2. Bir ayırmanın ayrıntılarını alın:
+2. Rezervasyonun ayrıntılarını alın:
 
     ```powershell
     Get-AzReservation -ReservationOrderId a08160d4-ce6b-4295-bf52-b90a5d4c96a0 -ReservationId b8be062a-fb0a-46c1-808a-5a844714965a
     ```
 
-3. Ayırma iki halinde bölme ve örnekleri dağıtabilirsiniz:
+3. Rezervasyonu ikiye bölün ve örnekleri dağıtın:
 
     ```powershell
     # Split the reservation. The sum of the reservations, the quantity, must equal the total number of instances in the reservation that you're splitting.
@@ -106,54 +106,81 @@ Erişim yönetimi için bir ayırma temsilci atamak için:
     Update-AzReservation -ReservationOrderId a08160d4-ce6b-4295-bf52-b90a5d4c96a0 -ReservationId 5257501b-d3e8-449d-a1ab-4879b1863aca -AppliedScopeType Single -AppliedScope /subscriptions/15bb3be0-76d5-491c-8078-61fe3468d414
     ```
 
-## <a name="cancellations-and-exchanges"></a>İptalleri ve değişimler
+## <a name="cancel-exchange-or-refund-reservations"></a>Rezervasyonları iptal etme, değiştirme veya para iadesi alma
 
-Ayırma türüne bağlı olarak, iptal etme veya rezervasyon exchange mümkün olabilir. Daha fazla bilgi için İptal ve aşağıdaki konulardaki değişimleri bölümlere bakın:
+Belirli sınırlamalarla rezervasyonları iptal edebilir, değiştirebilir veya para iadesi alabilirsiniz. Daha fazla bilgi için bkz. [Azure Ayrılmış Sanal Makine Örnekleri için self servis değişimler ve para iadeleri](billing-azure-reservations-self-service-exchange-and-refund.md).
 
-- [Azure Ayrılmış VM Örnekleri ile Sanal Makinelere ön ödeme yapma](..//virtual-machines/windows/prepay-reserved-vm-instances.md#cancellations-and-exchanges)
-- [Azure Ayırmaları ile SUSE yazılım planları için ön ödeme yapma](../virtual-machines/linux/prepay-suse-software-charges.md#cancellation-and-exchanges-not-allowed)
-- [Azure SQL Veritabanı ayrılmış kapasitesi ile SQL Veritabanı işlem kaynakları için ön ödeme yapma](../sql-database/sql-database-reserved-capacity.md#cancellations-and-exchanges)
+## <a name="change-optimize-setting-for-reserved-vm-instances"></a>Ayrılmış VM Örnekleri için iyileştirme ayarını değiştirme
 
-## <a name="change-optimize-setting-for-reserved-vm-instances"></a>Ayrılmış VM örnekleri için ayar değişiklik iyileştirin
+ Ayrılmış VM Örneği satın aldığınızda örnek boyutu esnekliğini veya kapasite önceliğini seçersiniz. VM örneği esnekliği aynı [VM boyutu grubundaki](https://aka.ms/RIVMGroups) diğer VM'lere rezervasyon indirimini uygular. Kapasite önceliği dağıtımlarınızda veri merkezi kapasitesine öncelik verir. Bu seçenek ihtiyacınız olduğunda VM örneklerini başlatabileceğinize daha fazla güvenmenizi sağlar.
 
- Ayrılmış VM örneği satın aldığınızda, örneği boyutu esnekliği veya kapasite önceliği seçin. Örnek boyutu esneklik, aynı diğer VM'ler için ayırma indirimi geçerlidir [VM boyutu grubu](https://aka.ms/RIVMGroups). Kapasite önceliği dağıtımlarınız için veri merkezi kapasitenizi önceliklendirir. Bu seçenek, ihtiyaç duyduğunuzda sanal makine örneklerini başlatma yeteneğinizi ek güvence sunar.
+Varsayılan olarak rezervasyonun kapsamı paylaşılan olduğunda örnek boyutu esnekliği açıktır. VM dağıtımlarında veri merkezi kapasitesine öncelik verilmez.
 
-Rezervasyon kapsamı paylaşıldığında, varsayılan olarak, örnek boyutu esneklik açıktır. Veri Merkezi kapasitenizi VM dağıtımları için öncelik değildir.
+Kapsamın tek olduğu rezervasyonlarda, VM örnek boyutu esnekliği yerine rezervasyonu kapasite önceliği için iyileştirebilirsiniz.
 
-Kapsamı tek olduğu için ayırmaları, sanal makine örneği boyutu esnekliği yerine kapasite önceliği ayırmasını iyileştirebilirsiniz.
-
-Ayırma için İyileştir ayarını güncelleştirmek için:
+Rezervasyonun iyileştirme ayarını güncelleştirmek için:
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Seçin **tüm hizmetleri** > **ayırmaları**.
-3. Ayırma seçin.
+2. **Tüm Hizmetler** > **Rezervasyonlar**'ı seçin.
+3. Rezervasyonu seçin.
 4. **Ayarlar** > **Yapılandırma**'yı seçin.
-5. Değişiklik **için en iyi duruma getirme** ayarı.
+5. **En iyi duruma getir** ayarını değiştirin.
 
-## <a name="need-help-contact-us"></a>Yardım mı gerekiyor? Bizimle iletişim kurun.
+## <a name="optimize-reservation-use"></a>Rezervasyon kullanımını iyileştirme
 
-Sorularınız varsa veya yardıma ihtiyacınız [bir destek isteği oluşturma](https://go.microsoft.com/fwlink/?linkid=2083458).
+Azure rezervasyon tasarrufları ancak sürekli kaynak kullanımında elde edilir. Rezervasyon satın aldığınızda bir veya üç yıllık bir dönemde temelde %100 olası kaynak kullanımı için önceden ödeme yaparsınız. Mümkün olan en iyi kullanımı ve tasarrufu elde etmek için rezervasyonunuzu maksimum düzeye çıkarmaya çalışın. Aşağıdaki bölümlerde rezervasyonu izleme ve kullanımını iyileştirme işlemleri açıklanır.
+
+### <a name="view-reservation-use-in-the-azure-portal"></a>Azure portalında rezervasyon kullanımını görüntüleme
+
+Rezervasyon kullanımını görüntülemenin bir yolu bunu Azure portalında yapmaktır.
+
+1. [Azure Portal](https://portal.azure.com/) oturum açın.
+2. **Tüm hizmetler** > [**Rezervasyonlar**](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/ReservationsBrowseBlade)'ı seçin ve rezervasyonu **Kullanım (%)** değerini not alın.  
+  ![Rezervasyon listesini gösteren resim](./media/billing-manage-reserved-vm-instance/reservation-list.png)
+3. Bir rezervasyon seçin.
+4. Zaman içinde rezervasyonun kullanım eğilimini gözden geçirin.  
+  ![Rezervasyon kullanımını gösteren resim ](./media/billing-manage-reserved-vm-instance/reservation-utilization-trend.png)
+
+### <a name="view-reservation-use-with-api"></a>API'yle rezervasyon kullanımını görüntüleme
+
+Kurumsal Anlaşma (EA) müşterisiyseniz, kuruluşunuzda rezervasyonların nasıl kullanıldığını program aracılığıyla görüntüleyebilirsiniz. Kullanım verileri aracılığıyla kullanılmayan rezervasyon bilgisini elde edersiniz. Rezervasyon ücretlerini gözden geçirirken verilerin gerçek maliyet ve amorti edilmiş maliyet olarak bölündüğüne dikkat edin. Gerçek maliyet aylık faturanızda mutabakat sağlamak için gereken verileri sağlar. Ayrıca rezervasyon satın alma maliyetleri ve rezervasyon uygulama ayrıntıları vardır. Amorti edilmiş maliyet gerçek maliyet gibidir; tek farkı rezervasyon kullanımı için etkin fiyatın eşit dağıtılmış olmasıdır. Kullanılmayan rezervasyon saatleri amorti edilmiş maliyet verilerinde gösterilir. EA müşterilerinin kullanım verileri hakkında daha fazla bilgi için bkz. [Kurumsal Anlaşma rezervasyon maliyetleri ve kullanım bilgilerini alma](billing-understand-reserved-instance-usage-ea.md).
+
+Diğer abonelik türleri için [Rezervasyon Özetleri - Rezervasyon Siparişine ve Rezervasyona Göre Listeleme](/rest/api/consumption/reservationssummaries/listbyreservationorderandreservation) API’sini kullanın.
+
+### <a name="optimize-your-reservation"></a>Rezervasyonunuzu iyileştirme
+
+Kuruluşunuzun rezervasyonlarının gerektiği şekilde kullanılmadığını belirlerseniz:
+
+- Kuruluşunuzun oluşturduğu sanal makinelerin, rezervasyonun sanal makine boyutuyla aynı olduğundan emin olun.
+- Örnek boyutu esnekliğinin açık olduğundan emin olun. Daha fazla bilgi için bkz [Rezervasyonları yönetme - Ayrılmış Sanal Makine Örnekleri için iyileştirme ayarını değiştirme](#change-optimize-setting-for-reserved-vm-instances).
+- Rezervasyon kapsamını, daha geniş çapta geçerli olması için _paylaşılan_ olarak değiştirin. Daha fazla bilgi için bkz. [Rezervasyonun kapsamını değiştirme](#change-the-reservation-scope).
+- Kullanılmayan miktarı değiştokuş etmeyi göz önünde bulundurun. Daha fazla bilgi için bkz. [İptaller ve değişimler](#cancel-exchange-or-refund-reservations).
+
+
+## <a name="need-help-contact-us"></a>Yardıma mı ihtiyacınız var? Bize ulaşın.
+
+Sorularınız varsa ya da yardıma gereksinim duyuyorsanız [destek isteği oluşturun](https://go.microsoft.com/fwlink/?linkid=2083458).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure ayırmaları hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+Azure Ayrılmış Sanal Makine Örnekleri hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
 
-- [Azure için ayırmaları nelerdir?](billing-save-compute-costs-reservations.md)
+- [Azure rezervasyonları nedir?](billing-save-compute-costs-reservations.md)
 
-Bir hizmet planı satın alın:
+Hizmet planı satın alma:
 - [Azure Ayrılmış VM Örnekleri ile Sanal Makinelere ön ödeme yapma](../virtual-machines/windows/prepay-reserved-vm-instances.md)
 - [Azure SQL Veritabanı ayrılmış kapasitesi ile SQL Veritabanı işlem kaynakları için ön ödeme yapma](../sql-database/sql-database-reserved-capacity.md)
-- [Azure Cosmos DB ayrılmış kapasite ile Azure Cosmos DB kaynaklarını için ön ödeme](../cosmos-db/cosmos-db-reserved-capacity.md)
+- [Azure Cosmos DB ayrılmış kapasitesiyle Azure Cosmos DB kaynakları için önceden ödeme yapma](../cosmos-db/cosmos-db-reserved-capacity.md)
 
-Yazılım planı satın alın:
-- [Red Hat yazılımı planlarından Azure ayırmalar için ön ödeme](../virtual-machines/linux/prepay-rhel-software-charges.md)
+Yazılım planı satın alma:
+- [Azure Ayırmaları ile Red Hat yazılım planları için ön ödeme yapma](../virtual-machines/linux/prepay-rhel-software-charges.md)
 - [Azure Ayırmaları ile SUSE yazılım planları için ön ödeme yapma](../virtual-machines/linux/prepay-suse-software-charges.md)
 
-İndirim ve kullanımını anlayın:
-- [VM ayırma indirimi nasıl uygulanacağını anlama](billing-understand-vm-reservation-charges.md)
-- [Red Hat Enterprise Linux yazılım planı indirim nasıl uygulanacağını anlama](../billing/billing-understand-rhel-reservation-charges.md)
-- [SUSE Linux Enterprise yazılım planı indirim nasıl uygulanacağını anlama](../billing/billing-understand-suse-reservation-charges.md)
-- [Nasıl diğer ayırma indirimi uygulanmaz anlama](billing-understand-reservation-charges.md)
-- [Kullandıkça Öde aboneliğinizi için ayırma kullanımını anlama](billing-understand-reserved-instance-usage.md)
-- [Kurumsal kayıt için ayırma kullanımını anlama](billing-understand-reserved-instance-usage-ea.md)
-- [Windows yazılım maliyetleri ile ayırmaları dahil değil](billing-reserved-instance-windows-software-costs.md)
+İndirimi ve kullanımı anlama:
+- [Sanal makine rezervasyon indiriminin nasıl uygulandığını anlama](billing-understand-vm-reservation-charges.md)
+- [Red Hat Enterprise Linux yazılım planı indiriminin nasıl uygulandığını anlama](../billing/billing-understand-rhel-reservation-charges.md)
+- [SUSE Linux Enterprise yazılım planı indiriminin nasıl uygulandığını anlama](../billing/billing-understand-suse-reservation-charges.md)
+- [Diğer rezervasyon indirimlerinin nasıl uygulandığını anlama](billing-understand-reservation-charges.md)
+- [Kullandıkça Öde aboneliğiniz için rezervasyon kullanımını anlama](billing-understand-reserved-instance-usage.md)
+- [Kurumsal kaydınız için rezervasyon kullanımını anlama](billing-understand-reserved-instance-usage-ea.md)
+- [Rezervasyonlara dahil olmayan Windows yazılımı maliyetleri](billing-reserved-instance-windows-software-costs.md)

@@ -1,6 +1,6 @@
 ---
-title: En iyi uygulamalar için StorSimple sanal dizisi | Microsoft Docs
-description: StorSimple sanal dizisi dağıtıp için en iyi yöntemler açıklanmıştır.
+title: StorSimple Sanal dizisi için en iyi uygulamalar | Microsoft Docs
+description: StorSimple Sanal dizisinin dağıtımı ve yönetilmesi için en iyi yöntemleri açıklar.
 services: storsimple
 documentationcenter: NA
 author: alkohli
@@ -12,277 +12,281 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 11/08/2018
+ms.date: 07/25/2019
 ms.author: alkohli
-ms.openlocfilehash: b8e9f12a549f71971c2da3b9865f6a74dad58f61
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a8aed646f03b777722518152354cfe80cea043a0
+ms.sourcegitcommit: e97a0b4ffcb529691942fc75e7de919bc02b06ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60630147"
+ms.lasthandoff: 09/15/2019
+ms.locfileid: "71002814"
 ---
-# <a name="storsimple-virtual-array-best-practices"></a>StorSimple sanal dizisi en iyi uygulamalar
+# <a name="storsimple-virtual-array-best-practices"></a>StorSimple Sanal dizi en iyi uygulamaları
+
 ## <a name="overview"></a>Genel Bakış
-Microsoft Azure StorSimple Virtual Array bir hiper yönetici ve Microsoft Azure bulut depolama çalışan bir şirket içi sanal aygıt arasındaki Depolama görevlerini yöneten tümleşik depolama çözümüdür. StorSimple sanal dizisi 8000 serisi fiziksel dizisine verimli ve ekonomik bir alternatiftir. Sanal dizi mevcut hiper yönetici altyapınızda çalıştırabilirsiniz, hem iSCSI ve SMB protokolleri destekler ve Uzaktan ofis/şube ofisi senaryolarında için çok uygundur. StorSimple çözümleri hakkında daha fazla bilgi için Git [Microsoft Azure StorSimple genel bakış](https://www.microsoft.com/en-us/server-cloud/products/storsimple/overview.aspx).
 
-Bu makalede, ilk Kurulum, dağıtım ve yönetimini StorSimple sanal dizisi sırasında uygulanan en iyi uygulamaları kapsar. Bu en iyi uygulamaları, Kurulum ve Yönetim sanal diziniz için doğrulanmış yönergeleri sağlar. Bu makalede, dağıtma ve yönetme veri merkezlerini sanal dizilerde BT yöneticileri doğrultusunda yöneliktir.
+[!INCLUDE [storsimple-virtual-array-eol-banner](../../includes/storsimple-virtual-array-eol-banner.md)]
 
-Kurulum veya işlem akışı için değişiklik yapıldığında, cihazınızın hala uyumlu olduğundan emin olmak için en iyi uygulamaları periyodik olarak İnceleme öneririz. Karşılaştığınız sorunları sanal diziniz üzerinde bu en iyi uygulama çalışırken [Microsoft Support başvurun](storsimple-virtual-array-log-support-ticket.md) Yardım almak için.
+Microsoft Azure StorSimple Sanal dizi, bir Hiper yöneticide çalışan bir şirket içi sanal cihaz ve bulut depolama Microsoft Azure arasındaki depolama görevlerini yöneten tümleşik bir depolama çözümüdür. StorSimple Sanal dizisi, 8000 serisi fiziksel dizisine yönelik verimli ve ekonomik bir alternatiftir. Sanal dizi, mevcut hiper yönetici altyapınız üzerinde çalışabilir, hem Iscsı hem de SMB protokollerini destekler ve uzak Office/şube ofis senaryolarına uygundur. StorSimple çözümleri hakkında daha fazla bilgi için [Microsoft Azure StorSimple genel bakış](https://www.microsoft.com/en-us/server-cloud/products/storsimple/overview.aspx)sayfasına gidin.
 
-## <a name="configuration-best-practices"></a>Yapılandırma en iyi uygulamalar
-Sanal diziler dağıtılması ve ilk kurulum sırasında izlenmesi gereken yönergeler bu en iyi uygulamaları kapsar. Grup İlkesi ayarları, boyutlandırma, ağı kurma, depolama hesaplarını yapılandırma ve paylaşımları ve birimler sanal dizi oluşturma sanal makinenin sağlama için ilgili bu en iyi yöntemleri içerir. 
+Bu makalede, StorSimple Sanal dizisinin ilk kurulumu, dağıtımı ve yönetimi sırasında uygulanan en iyi uygulamalar ele alınmaktadır. Bu en iyi uygulamalar, sanal dizinizi ayarlama ve yönetimi için doğrulanan yönergeler sağlar. Bu makale, veri merkezlerinde sanal dizileri dağıtan ve yöneten BT yöneticilerine yöneliktir.
+
+Kurulum veya işlem akışında değişiklik yapıldığında cihazınızın hala uyumlu olduğundan emin olmak için en iyi uygulamaları düzenli bir şekilde gözden geçirmeniz önerilir. Sanal dizinizdeki bu en iyi yöntemleri uygularken herhangi bir sorunla karşılaşmanız gerekir, yardım için [Microsoft desteği başvurun](storsimple-virtual-array-log-support-ticket.md) .
+
+## <a name="configuration-best-practices"></a>En iyi yapılandırma uygulamaları
+Bu en iyi uygulamalar, sanal dizilerin ilk kurulumu ve dağıtımı sırasında izlenmesi gereken yönergeleri kapsar. Bu en iyi uygulamalar, sanal makine sağlama, Grup İlkesi ayarları, boyutlandırma, ağı ayarlama, depolama hesaplarını yapılandırma ve sanal dizi için paylaşımlar ve birimler oluşturma ile ilgili olanları içerir. 
 
 ### <a name="provisioning"></a>Sağlama
-StorSimple sanal dizisi bir sanal (Hyper-V veya VMware) hiper yöneticide sağlanan makine (VM) ana bilgisayar sunucu bulunuyor. Sanal makine sağlanırken konağınız yeterli kaynak ayırması mümkün olduğundan emin olun. Daha fazla bilgi için Git [en düşük kaynak gereksinimlerini](storsimple-virtual-array-deploy2-provision-hyperv.md#step-1-ensure-that-the-host-system-meets-minimum-virtual-array-requirements) bir diziyi sağlamak için.
+StorSimple Sanal dizisi, ana bilgisayar sunucunuzun Hiper yöneticide (Hyper-V veya VMware) sağlanan bir sanal makinedir (VM). Sanal makine sağlanırken, ana makinenizin yeterli kaynakları ayırabildiğinden emin olun. Daha fazla bilgi için, bir dizi sağlamak üzere [En düşük kaynak gereksinimlerine](storsimple-virtual-array-deploy2-provision-hyperv.md#step-1-ensure-that-the-host-system-meets-minimum-virtual-array-requirements) gidin.
 
-Sanal dizi sağlanırken aşağıdaki en iyi yöntemleri uygulayın:
+Sanal diziyi sağlarken aşağıdaki en iyi yöntemleri uygulayın:
 
 |  | Hyper-V | VMware |
 | --- | --- | --- |
-| **Sanal makine türü** |**2. nesil** Windows Server 2012 veya daha sonra kullanmak için VM ve *.vhdx* görüntü. <br></br> **1. kuşak** bir Windows Server 2008 veya daha sonra kullanmak için VM ve *.vhd* görüntü. |Sanal makine sürümünü kullanın kullanırken 8 *.vmdk* görüntü. |
-| **Bellek türü** |Olarak yapılandırma **statik bellek**. <br></br> Kullanmayın **dinamik bellek** seçeneği. | |
-| **Veri disk türü** |Olarak sağlama **dinamik olarak genişleyen**.<br></br> **Boyutu sabit** uzun sürüyor. <br></br> Kullanmayın **fark kayıt** seçeneği. |Kullanım **ölçülü kaynak sağlama** seçeneği. |
-| **Veri disk değiştirme** |Genişletme veya küçültme izin verilmiyor. Bunu yapma girişimi, cihazdaki tüm yerel veri kaybı sonuçlanır. |Genişletme veya küçültme izin verilmiyor. Bunu yapma girişimi, cihazdaki tüm yerel veri kaybı sonuçlanır. |
+| **Sanal makine türü** |**2. nesil** Windows Server 2012 veya üzeri ve *. vhdx* görüntüsüyle kullanılacak VM. <br></br> **1. nesil** Windows Server 2008 veya üzeri ile bir *. vhd* görüntüsüyle kullanılacak VM. |*. Vmdk* görüntüsünü kullanırken sanal makine sürüm 8 ' i kullanın. |
+| **Bellek türü** |**Statik bellek**olarak yapılandırın. <br></br> **Dinamik bellek** seçeneğini kullanmayın. | |
+| **Veri diski türü** |Dinamik olarak **genişleyen**sağlama.<br></br> **Sabit boyut** uzun zaman alır. <br></br> **Fark kayıt** seçeneğini kullanmayın. |**Ölçülü kaynak sağlama** seçeneğini kullanın. |
+| **Veri diski değişikliği** |Genişletme veya küçültme yapılmasına izin verilmez. Bunun bir girişimi, cihazdaki tüm yerel verilerin kaybedilmesine neden olur. |Genişletme veya küçültme yapılmasına izin verilmez. Bunun bir girişimi, cihazdaki tüm yerel verilerin kaybedilmesine neden olur. |
 
 ### <a name="sizing"></a>Boyutlandırma
-StorSimple Virtual Array'iniz için boyutlandırma yaparken aşağıdaki etmenleri dikkate alın:
+StorSimple Sanal dizinizi boyutlandırdığınızda aşağıdaki faktörleri göz önünde bulundurun:
 
-* Birimler veya paylaşımlar için yerel ayırma. % Alanı yaklaşık 12 her sağlanan katmanlı birim veya paylaşım için yerel katmanında ayrılmıştır. Yaklaşık %10 alan da yerel olarak sabitlenmiş bir birim dosya sistemi için ayrılmıştır.
-* Ek yükü anlık görüntüsünü alın. Yaklaşık % 15 alan yerel katmanındaki anlık görüntüler için ayrılmış.
-* Geri yüklemeler için gerekli. Yeni bir işlem olarak geri yükleme yaparsanız, boyutlandırma geri yüklemek için ihtiyaç duyulan alanı hesabı. Geri yükleme, bir paylaşımı veya birimi aynı boyutta için gerçekleştirilir.
-* Bazı arabellek için beklenmeyen büyümesine ayrılmalıdır.
+* Birimler veya paylaşımlar için yerel ayırma. Alanın yaklaşık% 12 ' i, sağlanan her katmanlı birim veya paylaşımın yerel katmanında ayrılmıştır. Alanın yaklaşık% 10 ' unun, dosya sistemi için yerel olarak sabitlenmiş bir birim için de ayrılmış olması.
+* Anlık görüntü yükü. Yerel katmanda yaklaşık% 15 alan anlık görüntüler için ayrılmıştır.
+* Geri yüklemeler gerekiyor. Geri yükleme yeni bir işlem olarak yapıldığında, boyutlandırma için gereken alan için boyutlandırma hesabı olmalıdır. Geri yükleme işlemi, aynı boyuttaki bir paylaşıma veya birime yapılır.
+* Bazı arabellekler beklenmeyen büyüme için ayrılmalıdır.
 
-Önceki etkenlere bağlı olarak, boyutlandırma gereksinimlerini deneylerin gösterilebilir:
+Önceki faktörlere bağlı olarak, boyutlandırma gereksinimleri aşağıdaki denklemle temsil edilebilir:
 
 `Total usable local disk size = (Total provisioned locally pinned volume/share size including space for file system) + (Max (local reservation for a volume/share) for all tiered volumes/share) + (Local reservation for all tiered volumes/shares)`
 
 `Data disk size = Total usable local disk size + Snapshot overhead + buffer for unexpected growth or new share or volume`
 
-Aşağıdaki örnekler, gereksinimlerinize göre bir sanal diziye nasıl boyutunu gösterir.
+Aşağıdaki örneklerde, gereksinimlerinize göre bir sanal diziyi nasıl kullanabileceğiniz gösterilmektedir.
 
 #### <a name="example-1"></a>Örnek 1:
-Sanal diziniz için kullanabilmek ister.
+Sanal diziniz üzerinde şunları yapabilmek istiyorsunuz
 
-* 2 TB katmanlı birim veya paylaşım sağlayın.
-* 1 TB katmanlı birim veya paylaşım sağlayın.
-* 300 GB yerel olarak sabitlenmiş birim veya paylaşım sağlayın.
+* 2 TB katmanlı bir birim veya paylaşma sağlayın.
+* 1 TB katmanlı birim veya paylaşma sağlayın.
+* Yerel olarak sabitlenmiş bir birim veya Share 300 GB sağlayın.
 
-Bize önceki birimler veya paylaşımlar için yerel katman alanı gereksinimleri hesaplayın.
+Önceki birimler veya paylaşımlar için yerel katmanda alan gereksinimlerini hesaplamıza izin verin.
 
-İlk olarak, her katmanlı birim/paylaşım için yerel ayırma birim/paylaşım boyutu % 12 oranında eşit olacaktır. Yerel olarak sabitlenmiş birim/paylaşım için yerel ayırma (ek olarak sağlanan boyut) yerel olarak sabitlenmiş birim/paylaşım boyutunun % 10'dur. Bu örnekte, gereksinim
+İlk olarak, her katmanlı birim/paylaşılan için yerel rezervasyon, birim/paylaşma boyutunun% 12 ' ye eşit olacaktır. Yerel olarak sabitlenmiş birim/paylaşma için yerel ayırma, yerel olarak sabitlenmiş birim/paylaşımın boyutunun% 10 ' u olur (sağlanan boyuta ek olarak). Bu örnekte, şunları yapmanız gerekir
 
-* 240 GB için ayrılmış yerel alanlarınız (2 TB katmanlı birim/paylaşım)
-* 120 GB için ayrılmış yerel alanlarınız (1 TB katmanlı birim/paylaşım)
-* 330 GB yerel olarak sabitlenmiş birim veya paylaşım (ayrılmış yerel alanlarınız % 10 sağlanan 300 GB boyutunu ekleme)
+* 240 GB yerel ayırma (2 TB katmanlı birim/paylaşma için)
+* 120 GB yerel ayırma (1 TB katmanlı birim/paylaşma için)
+* Yerel olarak sabitlenmiş birim veya paylaşma için 330-GB (sağlanan boyut 300 GB 'a yerel ayırma% 10)
 
-Yerel katmanında şimdiye gereken toplam alanı verilmiştir: 240 GB + 120 GB + 330 GB = 690 GB.
+Şu ana kadar yerel katmanda gereken toplam alan: 240 GB + 120 GB + 330 GB = 690 GB.
 
-İkinci olarak, yerel katmanında en az bir alan en büyük tek ayırma ihtiyacımız var. Bu ek miktar, bulut anlık görüntüden geri yüklemeniz gereken durumlarda kullanılır. Bu örnekte, en büyük ayrılmış yerel alanlarınız 330 (dosya sistemi ayırma dahil), GB'dir bu nedenle, 690 GB ile eklemeniz: 690 GB + 330 GB = 1020 GB.
-Sonraki ek geri yüklemeler gerçekleştirdiğimiz, size her zaman önceki geri yükleme işlemi yer boşaltabilirsiniz.
+İkinci olarak, en büyük tek ayırma olarak yerel katmanda en az daha fazla alan olması gerekir. Bu ek miktar, bir bulut anlık görüntüsünden geri yüklemeniz gereken durumlarda kullanılır. Bu örnekte, en büyük yerel ayırma 330 GB 'tır (dosya sistemi için rezervasyon dahil), bu nedenle bunu 690 GB 'a eklersiniz: 690 GB + 330 GB = 1020 GB.
+Sonraki ek geri yüklemeleri gerçekleştirmemiz durumunda, alanı her zaman önceki geri yükleme işleminden serbest bırakabilirsiniz.
 
-Böylece yalnızca % 85, kullanılabilir üçüncü şimdiye yerel anlık görüntüleri depolamak için toplam yerel alanınızın % 15 ihtiyacımız var. Bu örnekte, olurdu etrafında 1020 GB = 0.85&ast;sağlanan verilerin TB disk. Bu nedenle, sağlanan veri diski olacaktır (1020&ast;(1/0.85)) 1200 GB = 1.20 TB = ~ 1,25 (en yakın dörtte için yuvarlama) TB
+Üçüncü olarak, yerel anlık görüntüleri depolamak için toplam yerel alanın% 15 ' i için yalnızca% 85 kullanılabilir olması gerekir. Bu örnekte, 1020 GB = 0,85&ast;tarafından sağlanan veri diski TB ' nin altında olacaktır. Bu nedenle, sağlanan veri diski (1020&ast;(1/0.85)) = 1200 GB = 1,20 TB ~ 1,25 TB (en yakın dörttebirine yuvarlama) olacaktır
 
-Beklenmeyen büyüme ve yeni geri yüklemeler hesaba katacak şekilde, geçici olarak yerel bir disk sağlamanız gerekir 1,25-1,5 TB.
+Düzenleme beklenmeyen büyüme ve yeni geri yüklemeler içinde, 1,25-1,5 TB 'lık bir yerel disk sağlamanız gerekir.
 
 > [!NOTE]
-> Ayrıca yerel disk ölçülü öneririz. Bu öneri, geri yükleme alanı yalnızca beş günden eski olan verileri geri yüklemek istediğinizde gerekli olmasıdır. Öğe düzeyinde kurtarma verileri, ek alan geri yüklemek için gerek kalmadan son beş gün boyunca geri yüklemenize olanak sağlar.
+> Ayrıca yerel diskin ölçülü kaynak sağlaması önerilir. Bu öneri, geri yükleme alanının yalnızca beş günden eski verileri geri yüklemek istediğinizde gerekli olmasından kaynaklanır. Öğe düzeyinde kurtarma, geri yükleme için ek alan gerekmeden verileri son beş güne geri yüklemenize olanak tanır.
 
 
 #### <a name="example-2"></a>Örnek 2:
-Sanal diziniz için kullanabilmek ister.
+Sanal diziniz üzerinde şunları yapabilmek istiyorsunuz
 
-* 2 TB katmanlı birim sağlayın
-* 300 GB yerel olarak sabitlenmiş bir birim
+* 2 TB katmanlı birim sağlama
+* 300 GB yerel olarak sabitlenmiş bir birim sağlama
 
-İhtiyacımız katmanlı birimleri/paylaşımları için yerel alanı ayırma ve yerel olarak sabitlenmiş birimleri/paylaşımları için % %10 12 bağlı olarak,
+Katmanlı birimler/paylaşımlar için yerel alan ayırmasının% 12 ' i ve yerel olarak sabitlenmiş birimler/paylaşımlar için% 10 ' a göre
 
-* 240 GB yerel ayırma (birim/paylaşım için 2 TB katmanlı)
-* Yerel olarak sabitlenmiş birim veya paylaşım (10 yerel ayırma yüzdesi 300 GB sağlanan alanına eklemek) için 330 GB
+* 240 GB yerel ayırma (2 TB katmanlı birim/paylaşma için)
+* Yerel olarak sabitlenmiş birim veya paylaşma için 330-GB (300 GB sağlanan alana yerel ayırmanın% 10 ' unu ekleyerek)
 
-Yerel katmanında gereken toplam alan şöyledir: 240 GB + 330 GB = 570 GB
+Yerel katmanda gereken toplam alan: 240 GB + 330 GB = 570 GB
 
-Geri yükleme için gereken en düşük yerel alan 330 GB'dir.
+Geri yükleme için gereken en az yerel alan 330 GB 'dir.
 
-Toplam diskinizin % 15, böylece yalnızca 0.85 kullanılabilir anlık görüntülerini depolamak için kullanılır. Bu nedenle, disk boyutu olan (900&ast;(1/0.85)) 1.06 TB = ~ 1,25 (en yakın dörtte için yuvarlama) TB
+Toplam diskinizin% 15 ' i, anlık görüntüleri yalnızca 0,85 kullanılabilir olacak şekilde depolamak için kullanılır. Bu nedenle disk boyutu (900&ast;(1/0.85)) = 1,06 TB ~ 1,25 TB (en yakın dörttebirine yuvarlama)
 
-Beklenmeyen büyümesine hesaba katacak şekilde, yerel bir 1,25-1,5 TB disk sağlayabilirsiniz.
+Düzenleme beklenmeyen büyümeye karşı, 1,25-1,5 TB yerel disk sağlayabilirsiniz.
 
-### <a name="group-policy"></a>Grup İlkesi
-Grup İlkesi, kullanıcılar ve bilgisayarlar için belirli yapılandırmaları uygulamak izin veren bir altyapıdır. Grup İlkesi ayarları, Grup İlkesi nesneleri (GPO'lar), Active Directory etki alanı Hizmetleri (AD DS) kapsayıcıların bağlanılan içindedir: sitelere, etki alanları veya kuruluş birimlerine (OU). 
+### <a name="group-policy"></a>Grup ilkesi
+Grup ilkesi, kullanıcılar ve bilgisayarlar için belirli konfigürasyonlar uygulamanıza olanak tanıyan bir altyapısıdır. Grup ilkesi ayarları, aşağıdaki Active Directory Domain Services (AD DS) kapsayıcılarıyla bağlantılı grup ilkesi nesneler (GPO) içinde bulunur: siteler, etki alanları veya kuruluş birimleri (OU). 
 
-Sanal diziniz etki alanına katılmış ise, GPO'ları uygulanabilir. StorSimple sanal dizisi işlemi olumsuz yönde etkileyebilir bir virüsten koruma yazılımı gibi uygulamalar bu GPO'larını yükleyebilirsiniz.
+Sanal diziniz etki alanına katılmış ise, GPO 'Lara uygulanabilir. Bu GPO 'Lar, StorSimple Sanal dizisinin işlemini olumsuz yönde etkileyebilecek bir virüsten koruma yazılımı gibi uygulamaları yükleyebilir.
 
-Bu nedenle, öneririz:
+Bu nedenle şunları yapmanızı öneririz:
 
-* Sanal diziniz için Active Directory kendi kuruluş birimi (OU) olduğundan emin olun.
-* Sanal diziniz hiçbir Grup İlkesi nesneleri (GPO'lar) uygulandığından emin olun. Sanal dizi (alt düğümü) otomatik olarak herhangi bir GPO üstten devralmaz emin olmak için devralmayı engelleyebilirsiniz. Daha fazla bilgi için Git [block devralma](https://technet.microsoft.com/library/cc731076.aspx).
+* Sanal diziniz Active Directory için kendi kuruluş biriminde (OU) olduğundan emin olun.
+* Sanal dizize hiçbir Grup İlkesi nesnesi (GPO 'Lar) uygulanmadığından emin olun. Sanal dizinin (alt düğüm) üst öğeden hiçbir GPO 'yu otomatik olarak devralmamasından emin olmak için devralmayı engelleyebilirsiniz. Daha fazla bilgi için, [blok devralma](https://technet.microsoft.com/library/cc731076.aspx)bölümüne gidin.
 
 ### <a name="networking"></a>Ağ
-Sanal diziniz için ağ yapılandırması yerel web UI gerçekleştirilir. Bir sanal ağ arabirimi, hiper yönetici sanal dizinin sağlandığı etkinleştirilir. Kullanım [ağ ayarlarını](storsimple-virtual-array-deploy3-fs-setup.md) sayfasında sanal ağ arabirimi IP adresi, alt ağ ve ağ geçidi yapılandırmak için.  Cihazınız için birincil ve ikincil DNS sunucusu, saat ayarlarını ve isteğe bağlı proxy ayarlarını da yapılandırabilirsiniz. Çoğu ağ yapılandırması, bir kerelik Kurulum olur. Gözden geçirme [gereksinimlerinde StorSimple](storsimple-ova-system-requirements.md#networking-requirements) sanal diziyi dağıtmadan önce.
+Sanal diziniz için ağ yapılandırması yerel Web Kullanıcı arabirimi üzerinden yapılır. Sanal bir ağ arabirimi, sanal dizinin sağlandığı hiper yönetici aracılığıyla etkinleştirilir. Sanal ağ arabirimi IP adresini, alt ağını ve ağ geçidini yapılandırmak için [ağ ayarları](storsimple-virtual-array-deploy3-fs-setup.md) sayfasını kullanın.  Ayrıca, cihazınız için birincil ve ikincil DNS sunucusunu, zaman ayarlarını ve isteğe bağlı ara sunucu ayarlarını da yapılandırabilirsiniz. Ağ yapılandırmasının çoğu tek seferlik bir kurulumdır. Sanal diziyi dağıtmadan önce [StorSimple ağ gereksinimlerini](storsimple-ova-system-requirements.md#networking-requirements) gözden geçirin.
 
-Sanal diziniz dağıtırken, bu en iyi uygulamaları izlemenizi öneririz:
+Sanal diziniz dağıtıldığında, bu en iyi yöntemleri izlemeniz önerilir:
 
-* Sanal dizide her zaman dağıtılan ağ 5 MB/sn Internet bant genişliği (veya daha fazlası) ayrılması kapasitesi olduğundan emin olun.
+* Sanal dizinin dağıtıldığı ağın her zaman 5 Mbps Internet bant genişliği (veya daha fazla) ayırmak için kapasiteye sahip olduğundan emin olun.
   
-  * Internet bant genişliği gereksinimi, iş yükü özellikleriniz ve veri değişikliği hızına bağlı olarak değişir.
-  * İşlenebilir veri değişikliği için Internet bant genişliğiniz orantılıdır. Bir yedekleme alırken bir örnek olarak, 5 MB/sn bant genişliği 18 GB yaklaşık 8 saat içindeki bir veri değişikliği barındırabilir. Dört kat daha fazla bant genişliği ile (20 MB/sn), dört kat daha fazla veri değişikliği (72 GB) işleyebilir.
-* İnternet'e her zaman kullanılabilir olduğundan emin olun. Internet bağlantısı ara sıra ya da güvenilir olmayan cihazlara bulutta verilere erişim kaybına neden olabilir ve desteklenmeyen bir yapılandırma neden olabilir.
-* Cihazınız bir iSCSI sunucusu olarak dağıtmayı planlıyorsanız:
+  * Internet bant genişliği gereksinimi, iş yükünün özelliklerine ve veri değişikliği hızına bağlı olarak değişir.
+  * İşlenebilecek veri değişikliği, Internet bant genişliğinizin doğrudan orantılıdır. Bir yedek alırken, 5 Mbps 'lik bir bant genişliği 8 saat içinde 18 GB 'lık bir veri değişikliğine uyum sağlayabilir. Dört kat daha fazla bant genişliği (20 Mbps) ile dört kat daha fazla veri değişikliğini (72 GB) işleyebilirsiniz.
+* Internet bağlantısının her zaman kullanılabilir olduğundan emin olun. Cihazlara tek veya güvenilir olmayan Internet bağlantıları, buluttaki verilere erişim kaybına neden olabilir ve desteklenmeyen bir yapılandırmaya neden olabilir.
+* Cihazınızı bir Iscsı sunucusu olarak dağıtmayı planlıyorsanız:
   
-  * Devre dışı bırakmanızı öneririz **IP adresini otomatik olarak almak** seçeneği (DHCP).
-  * Statik IP adreslerini yapılandırın. Birincil ve ikincil DNS sunucusu yapılandırmanız gerekir.
-  * Birden çok ağ arabirimi sanal üzerinde tanımlanıyorsa dizisi, yalnızca ilk ağ arabirimini (varsayılan olarak, bu arabirimidir **Ethernet**) bulut ulaşabilirsiniz. Trafik türü denetlemek için (bir iSCSI sunucusu olarak yapılandırılmış) sanal diziniz birden çok sanal ağ arabirimi oluşturun ve bu arabirimler farklı alt ağlara bağlanmak.
-* Yalnızca bulut bant genişliğini azaltma (kullanılan sanal dizi tarafından), yönlendirici veya güvenlik duvarı azaltma yapılandırın. Azaltma, Hiper yöneticide tanımlarsanız, iSCSI ve SMB yalnızca bulut bant genişliğini yerine dahil olmak üzere tüm protokoller kısıtlama.
-* Hiper etkinleştirilmişse, o zaman eşitleme emin olun. Hyper-V Yöneticisi'nde sanal diziniz Hyper-V kullanarak seçeneğini belirlerseniz, Git **ayarları &gt; tümleştirme hizmetleri**, olduğundan emin olun **zaman eşitleme** denetlenir.
+  * **IP adresini otomatik olarak al** SEÇENEĞINI (DHCP) devre dışı bırakmanızı öneririz.
+  * Statik IP adreslerini yapılandırın. Birincil ve ikincil bir DNS sunucusu yapılandırmanız gerekir.
+  * Sanal diziniz üzerinde birden çok ağ arabirimi tanımlıyorsanız, yalnızca ilk ağ arabirimi (varsayılan olarak, bu arabirim **Ethernet**'dir) buluta ulaşabilir. Trafik türünü denetlemek için, sanal diziniz üzerinde (Iscsı sunucusu olarak yapılandırılmış) birden çok sanal ağ arabirimi oluşturabilir ve bu arabirimleri farklı alt ağlara bağlayabilirsiniz.
+* Yalnızca bulut bant genişliğini azaltmak için (sanal dizi tarafından kullanılır), yönlendiricide veya güvenlik duvarında azaltma yapılandırın. Hiper yöneticide daraltma tanımlarsanız, yalnızca bulut bant genişliği yerine Iscsı ve SMB dahil olmak üzere tüm protokollerin sayısını ortadan kaldırılır.
+* Hiper yöneticilerin zaman eşitlemesinin etkinleştirildiğinden emin olun. Hyper-v kullanıyorsanız, Hyper-v Yöneticisi 'nde sanal dizinizi seçin, **Ayarlar &gt; Tümleştirme Hizmetleri**' ne gidin ve **zaman eşitlemenin** denetlendiğinden emin olun.
 
 ### <a name="storage-accounts"></a>Depolama hesapları
-StorSimple sanal dizisi, tek bir depolama hesabı ile ilişkili olabilir. Veya başka bir abonelik için bir depolama hesabıyla ilgili bu depolama hesabına otomatik olarak oluşturulan depolama hesabı, hizmet ile aynı abonelikte hesap olabilir. Daha fazla bilgi için bkz. nasıl [sanal diziniz için depolama hesaplarını yönetme](storsimple-virtual-array-manage-storage-accounts.md).
+StorSimple Sanal dizisi, tek bir depolama hesabıyla ilişkilendirilebilir. Bu depolama hesabı, otomatik olarak oluşturulan bir depolama hesabı, hizmetle aynı abonelikte bulunan bir hesap veya başka bir abonelikle ilişkili bir depolama hesabı olabilir. Daha fazla bilgi için bkz. [sanal diziniz için depolama hesaplarını yönetme](storsimple-virtual-array-manage-storage-accounts.md).
 
 Sanal diziniz ile ilişkili depolama hesapları için aşağıdaki önerileri kullanın.
 
-* Maksimum Kapasite (64 TB) bir sanal dizin ve bir depolama hesabı için maksimum boyut (500 TB) için birden çok sanal diziler ile tek bir depolama hesabına bağlanırken faktörü. Bu, söz konusu depolama hesabına yaklaşık 7 ile ilişkilendirilebilir tam boyutlu sanal diziler sayısını sınırlar.
+* Birden çok sanal diziyi tek bir depolama hesabıyla bağlarken, bir sanal dizi için maksimum kapasite (64 TB) ve bir depolama hesabı için maksimum boyut (500 TB) cinsinden faktörü. Bu, bu depolama hesabı ile ilişkilendirilebilen tam boyutlu sanal dizilerin sayısını 7 ile sınırlandırır.
 * Yeni bir depolama hesabı oluştururken
   
-  * Bu bölgede en yakın gecikme süreleri en aza indirmek için StorSimple Virtual Array'iniz dağıtıldığı uzaktan ofis/şube ofisi oluşturmanızı öneririz.
-  * Unutmayın, bir depolama hesabı farklı bölgeler arasında taşıyamazsınız size aittir. Ayrıca, bir hizmet abonelikler arasında taşıyamazsınız.
-  * Veri merkezleri arasında yedeklilik uygulayan bir depolama hesabını kullanırsınız. Coğrafi olarak yedekli depolama (GRS), bölgesel olarak yedekli depolama (ZRS) ve yerel olarak yedekli depolama (LRS) tüm sanal diziniz ile kullanım için desteklenir. Farklı türlerde depolama hesapları hakkında daha fazla bilgi için Git [Azure depolama çoğaltma](../storage/common/storage-redundancy.md).
+  * Gecikme sürelerini en aza indirmek için StorSimple Sanal diziniz dağıtıldığı uzak Office/şube ofise en yakın bölgede oluşturmanız önerilir.
+  * Bir depolama hesabını farklı bölgelerde taşıyamayacağınızı göz önünde bulundurun. Ayrıca, bir hizmeti abonelikler arasında taşıyamazsınız.
+  * Veri merkezleri arasında artıklık uygulayan bir depolama hesabı kullanın. Coğrafi olarak yedekli depolama (GRS), bölge yedekli depolama (ZRS) ve yerel olarak yedekli depolama (LRS), sanal diziniz ile kullanım için desteklenir. Farklı türlerde depolama hesapları hakkında daha fazla bilgi için [Azure Storage çoğaltma](../storage/common/storage-redundancy.md)' ya gidin.
 
-### <a name="shares-and-volumes"></a>Paylaşımları ve birimler
-StorSimple Virtual Array'iniz için bir dosya sunucusu ve bir iSCSI sunucusu olarak yapılandırıldığında birimleri olarak yapılandırıldığında, paylaşımları sağlayabilirsiniz. Paylaşımları ve birimler oluşturmak için en iyi uygulamalar, boyutu ve yapılandırılan türü ilgilidir.
+### <a name="shares-and-volumes"></a>Paylaşımlar ve birimler
+StorSimple Sanal diziniz için, bir Iscsı sunucusu olarak yapılandırıldığında bir dosya sunucusu ve birim olarak yapılandırıldığında paylaşımlar sağlayabilirsiniz. Paylaşımlar ve birimler oluşturmak için en iyi uygulamalar, boyut ve yapılandırılan tür ile ilgilidir.
 
-#### <a name="volumeshare-size"></a>Birim/paylaşım boyutu
-Sanal diziniz üzerinde bir dosya sunucusu ve bir iSCSI sunucusu olarak yapılandırıldığında birimleri olarak yapılandırıldığında, paylaşımları sağlayabilirsiniz. Paylaşımları ve birimler oluşturmak için en iyi boyut ve yapılandırılan türü ilişkilendirebilirsiniz. 
+#### <a name="volumeshare-size"></a>Birim/paylaşma boyutu
+Sanal diziniz üzerinde, bir Iscsı sunucusu olarak yapılandırıldığında dosya sunucusu ve birimler olarak yapılandırıldığında paylaşımlar sağlayabilirsiniz. Paylaşımlar ve birimler oluşturmak için en iyi uygulamalar, boyut ve yapılandırılan tür ile ilgilidir. 
 
-Aşağıdaki en iyi paylaşımlarından veya birimlerinden sanal Cihazınızda sağlanırken unutmayın.
+Sanal cihazınızda paylaşımlar veya birimler sağlarken aşağıdaki en iyi uygulamaları aklınızda bulundurun.
 
-* Katmanlı bir paylaşım boyutunun sağlanan göreli dosya boyutları katmanlama performansını etkileyebilir. Büyük dosyaları ile çalışma, yavaş bir katmanın ölçeğini sonuçlanabilir. Büyük dosyalarla çalışırken, en büyük dosya paylaşım boyutunun %3 küçükse öneririz.
-* Sanal dizide en fazla 16 birimleri/paylaşımları oluşturulabilir. Yerel olarak sabitlenmiş hem de katmanlı birimleri/paylaşımları için boyut sınırları, her zaman başvurmak [StorSimple sanal dizi sınırları](storsimple-ova-limits.md).
-* Bir birim oluştururken, beklenen veri tüketimi yanı sıra gelecekteki büyüme faktörü. Birim daha sonra genişletilemez.
-* Birim oluşturulduktan sonra StorSimple birimde boyutunu küçültülemez.
-* Birimdeki verileri (ayrılmış birim için yerel alan göre) belirli bir eşiğe ulaştığında bir katmanlı birim için StorSimple yazarken GÇ kısıtlanır. Bu birime yazmaya devam GÇ önemli ölçüde uzuyor. Katmanlı birim (biz etkin olarak sağlanan kapasiteyi aşan yazma kullanıcıdan durdurmaz), sağlanan kapasiteyi aşan yazabileceğiniz rağmen zamanlayıcınızın, etkili olması için bir uyarı bildirimine bakın. Uyarıyı gördüğünüzde, kesinlik temelli birimdeki verileri silme gibi düzeltici önlemleri alın (Birim genişletme şu anda desteklenmiyor).
-* Olağanüstü durum kurtarma için kullanım örnekleri, izin verilen paylaşımları/birim sayısı 16'dır ve paralel olarak işlenebilir paylaşımları/birim sayısı da 16, paylaşımları/birim sayısı bir boşluğunu RPO ve RTO yok.
+* Katmanlı bir paylaşımın sağlanan boyutuna göre dosya boyutları katmanlama performansını etkileyebilir. Büyük dosyalarla çalışma, yavaş bir katmana neden olabilir. Büyük dosyalarla çalışırken, en büyük dosyanın paylaşma boyutunun% 3 ' inden küçük olmasını öneririz.
+* Sanal dizi üzerinde en fazla 16 birim/paylaşım oluşturulabilir. Yerel olarak sabitlenmiş ve katmanlı birimlerin/paylaşımların boyut sınırları için her zaman [StorSimple Sanal dizi sınırlarına](storsimple-ova-limits.md)başvurun.
+* Bir birim oluştururken, beklenen veri tüketiminde ve gelecekteki büyüme için faktör. Birim daha sonra genişletilemiyor.
+* Birim oluşturulduktan sonra StorSimple üzerinde birimin boyutunu daraltamazsınız.
+* StorSimple üzerinde katmanlı bir birime yazarken, birim verileri belirli bir eşiğe ulaştığında (birim için ayrılan yerel alana göre), GÇ kısıtlanıyor demektir. Bu birime yazmaya devam etmek GÇ 'yi önemli ölçüde yavaşlatır. Sağlanan kapasitesinin ötesinde katmanlı bir birime yazabilseniz de (kullanıcının sağlanan kapasitenin ötesine yazmasını etkin bir şekilde durdurmayın), aşırı abone olduğunuz etkiye yönelik bir uyarı bildirimi görürsünüz. Uyarıyı gördüğünüzde, birim verilerini silme (birim genişletmesi Şu anda desteklenmiyor) gibi düzeltici önlemler almanız zorunludur.
+* Olağanüstü durum kurtarma kullanım örnekleri için, izin verilen paylaşımların/birimlerin sayısı 16 ve paralel olarak işlenebileceği en fazla paylaşım/birim sayısı da 16 ise, paylaşımların/birimlerin sayısında RPO ve RTOs üzerinde bir pul yoktur.
 
-#### <a name="volumeshare-type"></a>Birim/paylaşım türü
-StorSimple, kullanıma bağlı iki birime/paylaşıma tür destekler: yerel olarak sabitlenmiş hem de katmanlı. Yerel olarak sabitlenmiş birimleri/paylaşımları, katmanlı birimleri/paylaşımları ölçülü ise bol sağlanır. Yerel olarak sabitlenmiş bir birim/paylaşım dönüştürülemiyor çok katmanlı veya *tersi* oluşturulduktan sonra.
+#### <a name="volumeshare-type"></a>Birim/paylaşma türü
+StorSimple, kullanıma bağlı olarak iki birim/paylaşma türünü destekler: yerel olarak sabitlenmiş ve katmanlı. Yerel olarak sabitlenmiş birimler/paylaşımlar bol alanla sağlanır, katmanlı birimler/paylaşımlar ise ölçülü kaynak olarak sağlanır. Yerel olarak sabitlenmiş bir birimi/payı, oluşturulduktan sonra katmanlı veya *tam tersi* olarak dönüştüremezsiniz.
 
-StorSimple birimleri/paylaşımları yapılandırırken aşağıdaki en iyi uygulama öneririz:
+StorSimple birimlerini/paylaşımlarını yapılandırırken aşağıdaki en iyi yöntemleri uygulamanız önerilir:
 
-* Bir birim oluşturmadan önce dağıtmak istediğiniz iş yüklerini temel birim türünü belirleyin. Yerel olarak sabitlenmiş birimler (hatta bir bulut kesinti sırasında) yerel GARANTİLERİN veri gerektiren ve bulut düşük gecikme süreleri gerektiren iş yükleri için kullanın. Bir birim üzerinde sanal diziniz oluşturduktan sonra birim türünü değiştiremezsiniz öğesinden yerel olarak çok katmanlı sabitlenmiş veya *tersi*. SQL iş yükleri veya sanal makineleri (VM'ler); iş yüklerini dağıtırken örnek olarak, yerel olarak sabitlenmiş birim oluştur Katmanlı birimler, dosya paylaşımı iş yükleri için kullanın.
+* Birim türünü, bir birim oluşturmadan önce dağıtmayı planladığınız iş yüklerine göre belirler. Yerel olarak sabitlenmiş birimler (bir bulut kesintisi da dahil olmak üzere) ve düşük bulut gecikme süreleri gerektiren iş yükleri için yerel olarak sabitlenmiş birimler kullanın. Sanal diziniz üzerinde bir birim oluşturduktan sonra, birim türünü yerel olarak sabitlenmiş veya *tam tersi*olarak değiştiremezsiniz. Örnek olarak, sanal makineleri (VM 'Ler) barındıran SQL iş yüklerini veya iş yüklerini dağıttığınızda yerel olarak sabitlenmiş birimler oluşturun; dosya paylaşma iş yükleri için katmanlı birimleri kullanın.
 
 
-#### <a name="volume-format"></a>Ses biçimi
-StorSimple birimlerini iSCSI sunucunuzda oluşturduktan sonra Başlat, bağlamak ve birimleri biçimlendirmek gerekir. Bu işlem, StorSimple cihazınıza bağlı konak üzerinde gerçekleştirilir. Bağlama ve StorSimple konaktaki birimleri biçimlendirme, aşağıdaki en iyi yöntemleri kullanmanız önerilir.
+#### <a name="volume-format"></a>Birim biçimi
+Iscsı sunucunuzda StorSimple birimleri oluşturduktan sonra birimleri başlatmalısınız, bağlamanız ve biçimlendirmeniz gerekir. Bu işlem, StorSimple cihazınıza bağlı olan konakta gerçekleştirilir. StorSimple ana bilgisayarındaki birimleri bağlama ve biçimlendirme sırasında aşağıdaki en iyi yöntemler önerilir.
 
-* Tüm StorSimple birimlerde hızlı biçimlendirme gerçekleştirin.
-* Bir StorSimple biriminin biçimlendirilirken bir 64 KB ayırma birimi boyutu (AU) kullanın (varsayılan değer 4 KB). 64 KB AU, şirket içinde ortak StorSimple iş yükleri ve diğer iş yükleri için yapılan testlere temel alır.
-* StorSimple Virtual Array'ı bir iSCSI sunucusu olarak yapılandırılmış kullanırken, bu birimler dağıtılmış birimler veya dinamik diskleri kullanmayın veya diskler StorSimple tarafından desteklenmez.
+* Tüm StorSimple birimlerinde hızlı biçimlendirme gerçekleştirin.
+* StorSimple birimini biçimlendirirken, 64 KB 'lik bir ayırma birimi boyutu (Avustralya) kullanın (varsayılan değer 4 KB 'dir). 64 KB au, yaygın StorSimple iş yükleri ve diğer iş yükleri için şirket içinde yapılan testi temel alır.
+* Bir Iscsı sunucusu olarak yapılandırılmış StorSimple Sanal dizisi kullanılırken, bu birimler veya diskler StorSimple tarafından desteklenmediğinden yayılmış birimleri veya dinamik diskleri kullanmayın.
 
-#### <a name="share-access"></a>Paylaşım erişimi
-Sanal dizi dosya sunucunuzda paylaşımları oluştururken, aşağıdaki yönergeleri izleyin:
+#### <a name="share-access"></a>Erişimi paylaşma
+Sanal dizi dosya sunucunuzda paylaşımlar oluştururken şu yönergeleri izleyin:
 
-* Bir paylaşımı oluştururken, tek bir kullanıcı yerine bir paylaşım yönetici olarak bir kullanıcı grubuna atayın.
-* Windows Gezgini aracılığıyla paylaşımları düzenleyerek paylaşım oluşturulduktan sonra NTFS izinlerini yönetebilir.
+* Bir paylaşma oluştururken, bir kullanıcı grubunu tek bir kullanıcı yerine bir paylaşılan yönetici olarak atayın.
+* Paylaşımları Windows Gezgini aracılığıyla düzenleyerek paylaşım oluşturulduktan sonra NTFS izinlerini yönetebilirsiniz.
 
 #### <a name="volume-access"></a>Birim erişimi
-İSCSI birimler, StorSimple sanal dizisi yapılandırırken, gerekli olan her yerde erişimi denetlemek önemlidir. Hangi ana bilgisayar sunucuları birimlere erişebilirsiniz belirlemek için oluşturma ve erişim denetimi kayıtları (Acr'leri) StorSimple birimlerini ile ilişkilendirebilirsiniz.
+StorSimple Sanal dizinizdeki Iscsı birimleri yapılandırılırken, erişimin gerektiği her yerde denetlenmesi önemlidir. Hangi konak sunucularının birimlere erişebileceğini, erişim denetim kayıtlarını oluşturup (ACRs) StorSimple birimleriyle ilişkilendireceğini belirleyin.
 
-Acr'leri için StorSimple birimlerini yapılandırırken aşağıdaki en iyi yöntemleri kullanın:
+StorSimple birimleri için ACRs 'yi yapılandırırken aşağıdaki en iyi yöntemleri kullanın:
 
-* Her zaman en az bir ACR toplu ile ilişkilendirin.
+* Her zaman en az bir ACR 'yi bir birimle ilişkilendirin.
 
-* Birden fazla ACR bir birime atarken, birim, burada, aynı anda birden fazla kümelenmemiş ana bilgisayar tarafından erişilebilen bir şekilde gösterilmez emin olun. Bir birim için birden çok Acr'leri atadıysanız, bir uyarı iletisi yapılandırmanızı gözden geçirmek için açılır.
+* Bir birime birden fazla ACR atarken, birimin birden fazla kümelenmemiş konak tarafından aynı anda erişilebilen bir şekilde kullanıma sunulmadığından emin olun. Bir birime birden fazla ACRs atadıysanız, yapılandırmanızı gözden geçirmeniz için bir uyarı iletisi açılır.
 
 ### <a name="data-security-and-encryption"></a>Veri güvenliği ve şifreleme
-StorSimple sanal dizisi gizlilik ve veri bütünlüğünü sağlamak veri güvenliği ve şifreleme özellikleri de vardır. Bu özellikler kullanılırken, bu en iyi uygulamaları izlemeniz önerilir: 
+StorSimple Sanal diziniz, verilerinizin gizliliğini ve bütünlüğünü sağlayan veri güvenliğine ve şifreleme özelliklerine sahiptir. Bu özellikleri kullanırken, bu en iyi yöntemleri izlemeniz önerilir: 
 
-* Veriler sanal diziniz buluta gönderilmeden önce AES-256 şifreleme oluşturmak için bir bulut depolama şifreleme anahtarı tanımlayın. Verileriniz ile başlaması şifrelenir, bu anahtar gerekli değildir. Anahtar oluşturulur ve anahtar yönetimi sistemi kullanarak nedensiz [Azure anahtar kasası](../key-vault/key-vault-whatis.md).
-* StorSimple Yöneticisi hizmeti aracılığıyla depolama hesabı yapılandırırken, StorSimple cihazınız ve bulut arasında ağ iletişimi için güvenli bir kanal oluşturmak SSL modu etkinleştirdiğinizden emin olun.
-* Depolama hesaplarınız için anahtarları (Azure depolama hizmetine erişerek) düzenli aralıklarla hesabına erişmek herhangi bir değişiklik için Yöneticiler değiştirilen listesine göre yeniden oluşturun.
-* Veriler sanal diziniz üzerinde sıkıştırılır ve Azure'a gönderilmeden önce kaldırılmış. Yinelenen verileri kaldırma rol hizmetini Windows Server konağınızda kullanımı önerilmemektedir.
+* Veri sanal dizinizden buluta gönderilmeden önce AES-256 şifrelemesi oluşturmak için bir bulut depolama şifreleme anahtarı tanımlayın. Verileriniz ile başlamak üzere şifrelendiyse bu anahtar gerekli değildir. Anahtar, [Azure Anahtar Kasası](../key-vault/key-vault-overview.md)gibi bir anahtar yönetim sistemi kullanılarak oluşturulabilir ve güvenli bir şekilde saklanabilir.
+* StorSimple Yöneticisi hizmeti aracılığıyla depolama hesabını yapılandırırken, StorSimple cihazınız ve bulut arasında ağ iletişimi için güvenli bir kanal oluşturmak üzere SSL modunu etkinleştirdiğinizden emin olun.
+* Değiştirilen Yöneticiler listesine göre erişim değişiklikleri için düzenli aralıklarla depolama hesaplarınız (Azure Storage Service 'e erişerek) anahtarlarını yeniden oluşturun.
+* Sanal dizinizdeki veriler Azure 'a gönderilmeden önce sıkıştırılır ve yinelenenleri kaldırılmış. Windows Server konağında yinelenen verileri kaldırma rol hizmetini kullanmanızı önermiyoruz.
 
 ## <a name="operational-best-practices"></a>İşletimsel en iyi uygulamalar
-İşletimsel en iyi uygulamalar günlük yönetim ve sanal dizinin işlemi sırasında izlenmesi gereken yönergelerdir. Bu yöntemler bir yük devri gerçekleştirmek, bir yedekleme kümesinden geri yedekler almak gibi belirli yönetim görevlerini kapsar, devre dışı bırakılması ve sistem kullanımı ve sistem durumu izleme ve koruma çalıştırma dizinin silinmesi sanal diziniz tarar.
+İşletimsel en iyi uygulamalar, sanal dizinin günlük yönetimi veya çalışması sırasında izlenmesi gereken kılavuzlardır. Bu uygulamalar, yedeklemeleri alma, bir yedekleme kümesinden geri yükleme, yük devretme gerçekleştirme, diziyi devre dışı bırakma ve silme, sistem kullanımını ve sistem durumunu izleme ve sanal dizinizdeki virüs taramalarını çalıştırma gibi belirli yönetim görevlerini kapsar.
 
 ### <a name="backups"></a>Yedeklemeler
-Sanal diziniz verileri iki yolla buluta yedeklendiğinden, varsayılan Otomatik günlük yedekleme 22:30 veya el ile talep üzerine yedekleme ile başlayan tüm cihaz. Varsayılan olarak, cihaz üzerinde bulunan tüm verilerin günlük bulut anlık görüntüleri otomatik olarak oluşturur. Daha fazla bilgi için Git [StorSimple Virtual Array'iniz yedekleme](storsimple-virtual-array-backup.md).
+Sanal dizinizdeki veriler buluta yedeklenir. Bu, varsayılan olarak tüm cihazın 22:30 ' den başlayarak veya el ile isteğe bağlı bir yedekten bir otomatik günlük yedeklemesini sağlar. Varsayılan olarak cihaz, üzerinde bulunan tüm verilerin günlük bulut anlık görüntülerini otomatik olarak oluşturur. Daha fazla bilgi için, [StorSimple Sanal dizinizi yedekleyin](storsimple-virtual-array-backup.md)bölümüne gidin.
 
-Varsayılan yedekleme ile ilişkili bekletme ve sıklığı değiştirilemez, ancak her gün başlatılan günlük yedekleri zaman yapılandırabilirsiniz. Otomatik yedekleri için başlangıç saatini yapılandırırken öneririz:
+Varsayılan yedeklemelerle ilişkili sıklık ve bekletme değiştirilemez, ancak günlük yedeklemelerin her gün başlatıldığı saati yapılandırabilirsiniz. Otomatik yedeklemeler için başlangıç saatini yapılandırırken şunları öneririz:
 
-* Yedeklemeleriniz için yoğun olmayan saatler zamanlayın. Yedekleme başlangıç saati çok sayıda konak g/ç ile çakıştığı değil.
-* Sanal diziniz üzerinde verileri korumak için bakım penceresi için önceki ya da cihaz yük devretme gerçekleştirmek planlama yaparken, el ile isteğe bağlı yedekleme başlatın.
+* Yedeklemelerinizi yoğun olmayan saatlere zamanlayın. Yedekleme başlangıç saati çok sayıda konak GÇ ile aynı olmamalıdır.
+* Sanal dizinizdeki verileri korumak için bir cihaz yük devretmesi veya bakım penceresinden önce, el ile isteğe bağlı yedekleme başlatın.
 
-### <a name="restore"></a>Geri Yükleme
-İki şekilde ayarlanmış bir yedekten geri yükleyebilirsiniz: başka bir birime veya paylaşıma geri yükleme ya da (yalnızca dosya sunucusu olarak yapılandırılmış bir sanal dizin kullanılabilir) bir öğe düzeyinde kurtarma gerçekleştirin. Öğe düzeyinde kurtarma StorSimple cihazında tüm paylaşımlar bulut yedeğinden dosya ve klasörlerin parçalı kurtarma gerçekleştirmenize izin verir. Daha fazla bilgi için Git [bir yedekten geri yükleme](storsimple-virtual-array-clone.md).
+### <a name="restore"></a>Geri yükle
+Bir yedekleme kümesinden iki şekilde geri yükleme yapabilirsiniz: başka bir birime geri yükleme veya öğe düzeyinde kurtarma (yalnızca dosya sunucusu olarak yapılandırılmış bir sanal dizi üzerinde kullanılabilir) gerçekleştirme. Öğe düzeyinde kurtarma, StorSimple cihazındaki tüm paylaşımların bir bulut yedeğinden dosya ve klasörlerin ayrıntılı bir şekilde kurtarılmasını sağlar. Daha fazla bilgi için [bir yedekten geri yükleme](storsimple-virtual-array-clone.md)bölümüne gidin.
 
-Bir geri yükleme gerçekleştirilirken aşağıdaki yönergeleri göz önünde bulundurun:
+Geri yükleme gerçekleştirirken aşağıdaki yönergeleri aklınızda bulundurun:
 
-* StorSimple Virtual Array'iniz yerinde geri yüklemeyi desteklemez. Ancak bu yedeğe olabilir iki adımlı bir işlem tarafından gerçekleştirilen: sanal dizi ve daha sonra başka bir birime/paylaşıma geri alan.
-* Yerel bir birimden geri koruduğunuzda göz önünde uzun süre çalışan bir işlemin geri yükleme olacaktır. Birim hızlı bir şekilde çevrimiçi gelebilir ancak veriler arka planda hydrated devam eder.
-* Birim türünü geri yükleme işlemi sırasında aynı kalır. Katmanlı birim başka bir katmanlı birime geri yüklenir ve yerel olarak sabitlenmiş bir birim için başka bir yerel olarak sabitlenmiş birim.
-* Bir birimi veya paylaşımı bir yedekten geri yüklemeyi denerken ayarlayın, geri yükleme işi başarısız olursa, bir hedef birim veya paylaşım Portalı'nda yine de oluşturulabilir. Bu kullanılmayan hedef birimi silin veya bu öğeden doğan gelecekteki sorunları en aza indirmek için portaldaki paylaşıma önemlidir.
+* StorSimple Sanal diziniz yerinde geri yüklemeyi desteklemiyor. Bu, ancak iki adımlı bir işlem tarafından kolayca sağlanabilir: sanal dizide yer açın ve sonra başka bir birime/paylaşıma geri yükleyin.
+* Yerel bir birimden geri yükleme yaparken, geri yüklemenin uzun süre çalışan bir işlem olacağını aklınızda bulundurun. Birim hızla çevrimiçi olarak gelebilse de, veriler arka planda ortaya çıkmaya devam eder.
+* Birim türü, geri yükleme işlemi sırasında aynı kalır. Katmanlı bir birim, başka bir katmanlı birime ve yerel olarak sabitlenmiş bir birime başka bir yerel olarak sabitlenmiş birime geri yüklenir.
+* Yedekleme kümesinden bir birimi veya bir paylaşımın geri yüklenmeye çalışıldığında, geri yükleme işi başarısız olursa, portalda bir hedef birim veya paylaşma yine de oluşturulabilir. Bu öğeden doğan gelecekteki sorunları en aza indirmek için, bu kullanılmayan hedef birimi veya paylaşmak için portalda silmeniz önemlidir.
 
 ### <a name="failover-and-disaster-recovery"></a>Yük devretme ve olağanüstü durum kurtarma
-Cihaz yük devretme geçirmenizi verilerinizden sağlayan bir *kaynak* cihaz başka bir veri merkezinde *hedef* cihaz, aynı veya farklı bir coğrafi konumda bulunan. Cihaz yük devretme için tüm cihazdır. Yük devretme sırasında kaynak cihazdaki bulut verilerini sahipliği, hedef cihazın değiştirir.
+Bir cihaz yük devretmesi, veri merkezindeki bir *kaynak* cihazdan aynı veya farklı coğrafi konumda bulunan başka bir *hedef* cihaza geçiş yapmanıza olanak sağlar. Cihaz yük devretmesi tüm cihaza yöneliktir. Yük devretme sırasında kaynak cihaz için bulut verileri, hedef cihazın sahipliğini değiştirir.
 
-StorSimple Virtual Array'iniz için size yalnızca aynı StorSimple Yöneticisi hizmeti tarafından yönetilen başka bir sanal diziye devredebilir. 8000 serisi bir cihaza ya da dizi (kaynak cihaz için olandan) farklı bir StorSimple Yöneticisi hizmeti tarafından yönetilen bir yük devretme izin verilmez. Yük devretme dikkat edilecek noktalar hakkında daha fazla bilgi için Git [cihaz yük devretme için Önkoşullar](storsimple-virtual-array-failover-dr.md).
+StorSimple Sanal diziniz için, yalnızca aynı StorSimple Yöneticisi hizmeti tarafından yönetilen başka bir sanal diziye yük devreder. 8000 serisi bir cihaza veya farklı bir StorSimple Manager hizmeti (kaynak cihazından) yönetilen bir diziye yük devretme yapılmasına izin verilmez. Yük devretme konuları hakkında daha fazla bilgi edinmek için [cihaz yük devretmesi önkoşulları](storsimple-virtual-array-failover-dr.md)bölümüne gidin.
 
-Sanal diziniz için yük devretme üzerinden gerçekleştirildiği sırada aşağıdakileri göz önünde bulundurun:
+Sanal diziniz için yük devretme gerçekleştirirken şunları aklınızda tutun:
 
-* Planlanmış bir yük devretme için tüm birimleri/yük devretmeyi başlatmadan önce paylaşımlar çevrimdışına almak için önerilen en iyi uygulama olan. Birimleri/paylaşımları çevrimdışı konakta ilk alıp ardından bu sanal Cihazınızda çevrimdışı duruma işletim sistemine özgü yönergeleri izleyin.
-* Bir dosya sunucusu olağanüstü durum kurtarma için (DR), böylece paylaşım izinleri otomatik olarak çözümlenir hedef cihaz kaynak ile aynı etki alanına katılma öneririz. Bu sürümde, yalnızca aynı etki alanında bir hedef cihaza yük devretme desteklenir.
-* DR başarıyla tamamlandıktan sonra kaynak cihaz otomatik olarak silinir. Cihaz artık kullanılabilir olsa da, konak sisteminde sağlanan sanal makine kaynakları hala tüketiyor. Ana bilgisayar sisteminizden herhangi bir ücret tahakkuk gelen önlemek için bu sanal makine silmenizi öneririz.
-* Yük devretme başarısız olsa bile Not **verileri her zaman bulutta güvenlidir**. Yük devretme, bir başarıyla tamamlanmadı üç aşağıdaki senaryoları göz önünde bulundurun:
+* Planlı Yük devretme için, yük devretmeyi başlatmadan önce tüm birimleri/paylaşımları çevrimdışı duruma getirme önerilen en iyi uygulamadır. Öncelikle konakta bulunan birimleri/paylaşımları çevrimdışına almak için işletim sistemine özgü yönergeleri izleyin ve ardından sanal cihazınızda çevrimdışı duruma getirin.
+* Bir dosya sunucusu olağanüstü durum kurtarma (DR) için, paylaşma izinlerinin otomatik olarak çözülmesi için hedef cihazın kaynakla aynı etki alanına katılması önerilir. Bu sürümde yalnızca aynı etki alanındaki bir hedef cihaza yük devretme desteklenir.
+* DR başarıyla tamamlandıktan sonra kaynak cihaz otomatik olarak silinir. Cihaz artık kullanılamıyor olsa da, konak sisteminde sağladığınız sanal makine halen kaynak tüketiyor. Tahakkuk eden ücretleri engellemek için bu sanal makineyi konak sisteminizden silmenizi öneririz.
+* Yük devretme başarısız olsa bile, **verilerin bulutta her zaman güvenli**olduğunu unutmayın. Yük devretmenin başarıyla tamamlanmadığından aşağıdaki üç senaryoyu göz önünde bulundurun:
   
-  * Yük devretme zaman DR öncesi denetimler gerçekleştiriliyor gibi ilk aşamalarında bir hata oluştu. Bu durumda, hedef cihazınız hala kullanılabilir. Aynı hedef cihazda yük devretmeyi yeniden deneyin.
-  * Gerçek bir yük devretme işlemi sırasında bir hata oluştu. Bu durumda, hedef cihaza kullanılamaz olarak işaretlenmiş. Sağlama ve başka bir hedef sanal dizi yapılandırmak ve, yük devretme için kullanmanız gerekir.
-  * Yük devretme, kaynak cihaz silindikten sonra aşağıdaki tamamlandı, ancak hedef cihaz sorunları vardır ve herhangi bir veri erişemez. Veriler bulutta hala güvenlidir ve başka bir sanal diziye oluşturarak ve ardından DR için bir hedef cihaz kullanarak kolayca alınabilir.
+  * Yük devretmenin, DR ön denetimleri gerçekleştirilirken olduğu gibi ilk aşamalarında bir hata oluştu. Bu durumda, hedef cihazınız hala kullanılabilir. Aynı hedef cihazda yük devretmeyi yeniden deneyebilirsiniz.
+  * Gerçek yük devretme işlemi sırasında bir hata oluştu. Bu durumda, hedef cihaz kullanılamaz olarak işaretlenir. Başka bir hedef sanal dizi sağlamalısınız ve yapılandırmanız ve bu işlemi yük devretme için kullanmanız gerekir.
+  * Kaynak cihazın silindiği ancak hedef cihazda sorunlar olduğu ve herhangi bir veriye erişemediği için yük devretme tamamlanmıştır. Veriler bulutta hala güvenlidir ve başka bir sanal dizi oluşturup daha sonra DR için hedef cihaz olarak kullanılarak kolayca alınabilir.
 
 ### <a name="deactivate"></a>Devre dışı bırak
-StorSimple sanal dizisi devre dışı bıraktığınızda, karşılık gelen bir StorSimple Yöneticisi hizmeti ile cihaz arasındaki bağlantı sever. Devre dışı bırakma olan bir **kalıcı** işlemi ve geri alınamaz. Devre dışı bırakılmış bir cihaz StorSimple Yöneticisi hizmetine yeniden kaydedilemez. Daha fazla bilgi için Git [devre dışı bırakma ve silme StorSimple Virtual Array'iniz](storsimple-virtual-array-deactivate-and-delete-device.md).
+StorSimple Sanal dizisini devre dışı bıraktıktan sonra, cihazla ilgili StorSimple Manager hizmeti arasındaki bağlantıyı sanal olarak kullanırsınız. Devre dışı bırakma **kalıcı** bir işlemdir ve geri alınamaz. Devre dışı bırakılmış bir cihaz, StorSimple Yöneticisi hizmetine yeniden kaydedilemez. Daha fazla bilgi için, [devre dışı bırak ' a gidin ve StorSimple Sanal dizinizi silin](storsimple-virtual-array-deactivate-and-delete-device.md).
 
-Aşağıdaki en iyi sanal diziniz devre dışı bırakılırken göz önünde bulundurun:
+Sanal dizinizi devre dışı bırakadığınızda aşağıdaki en iyi uygulamaları aklınızda bulundurun:
 
-* Sanal cihazı devre dışı bırakma önce tüm verileri bir bulut anlık görüntüsünü alın. Bir sanal dizin devre dışı bıraktığınızda, tüm yerel cihaz verileri kaybolur. Bir bulut anlık görüntü alma, verileri daha sonraki bir aşamada kurtarmak izin verir.
-* StorSimple sanal dizisi devre dışı bırakmadan önce durdurmak veya istemciler ve o cihazda ana bilgisayarları Sil emin olun.
-* Böylece ücretler tahakkuk etmez artık kullanıyorsanız, devre dışı bırakılmış bir cihaz silin.
+* Sanal bir cihazı devre dışı bırakmadan önce tüm verilerin bir bulut anlık görüntüsünü alın. Bir sanal diziyi devre dışı bıraktıktan sonra tüm yerel cihaz verileri kaybedilir. Bir bulut anlık görüntüsünün alınması, verileri daha sonraki bir aşamada kurtarmanıza izin verir.
+* StorSimple Sanal dizisini devre dışı bırakmadan önce, söz konusu cihaza bağlı istemcileri ve Konakları durdurmayı veya silmeyi unutmayın.
+* Artık kullanmıyorsanız, devre dışı bırakılmış bir cihazı, ücretleri tahakkuk ettirilmeyen bir cihaza silin.
 
 ### <a name="monitoring"></a>İzleme
-StorSimple Virtual Array'iniz sürekli iyi durumda olduğundan emin olmak için dizi izleme ve uyarılar dahil olmak üzere sistem bilgileri aldığından emin olmak gerekir. Sanal diziyi genel durumunu izlemek için aşağıdaki en iyi yöntemleri uygulayın:
+StorSimple Sanal diziniz sürekli sağlıklı bir durumda olduğundan emin olmak için, diziyi izlemeniz ve uyarılar dahil olmak üzere sistemden bilgi aldığınızdan emin olmanız gerekir. Sanal dizinin genel durumunu izlemek için aşağıdaki en iyi yöntemleri uygulayın:
 
-* Sanal dizi veri diskinizi yanı sıra işletim sistemi diskinin disk kullanımını izlemek için izleme yapılandırın. Hyper-V çalıştırıyorsanız, sanallaştırma konaklarını izlemek için System Center Virtual Machine Manager (SCVMM) ve System Center Operations Manager'ı kullanabilirsiniz.
-* E-posta bildirimleri sanal diziniz belirli kullanım düzeylerinde uyarıları göndermek üzere yapılandırın.                                                                                                                                                                                                
+* Sanal dizi veri diskinizin yanı sıra işletim sistemi diskinin disk kullanımını izlemek için izlemeyi yapılandırın. Hyper-V çalıştırıyorsa, sanallaştırma konaklarınızı izlemek için System Center Virtual Machine Manager (SCVMM) ve System Center Operations Manager birleşimini kullanabilirsiniz.
+* Belirli kullanım düzeylerinde uyarı göndermek için sanal dizinizdeki e-posta bildirimlerini yapılandırın.                                                                                                                                                                                                
 
-### <a name="index-search-and-virus-scan-applications"></a>Dizin arama ve virüs uygulamaları tarama
-StorSimple Virtual Array, otomatik olarak Microsoft Azure bulutuna yerel katmanından veri katmanı. Bir uygulama gibi bir dizin araması veya bir virüs taraması StorSimple üzerinde depolanan verileri taramak için kullanıldığında, bulut verilerini değil erişilen alıp yerel katmana geri çekilen, halletmeniz gerekir.
+### <a name="index-search-and-virus-scan-applications"></a>Dizin arama ve virüs tarama uygulamaları
+StorSimple Sanal dizisi, verileri yerel katmandan Microsoft Azure buluta otomatik olarak katman halinde açabilir. StorSimple üzerinde depolanan verileri taramak için Dizin arama veya virüs taraması gibi bir uygulama kullanıldığında, bulut verilerinin erişilmediğinden ve yerel katmana geri çekmediğinden emin olmanız gerekir.
 
-Dizin arama veya virüs taraması sanal diziniz yapılandırırken aşağıdaki en iyi uygulama öneririz:
+Sanal dizinizdeki Dizin aramasını veya virüs taramasını yapılandırırken aşağıdaki en iyi yöntemleri uygulamanızı öneririz:
 
-* Herhangi bir otomatik olarak yapılandırılan bir tam tarama işlemi devre dışı bırakın.
-* Artımlı bir tarama gerçekleştirmek için dizin arama veya virüs taraması uygulama katmanlı birimler için yapılandırın. Bu, yalnızca yeni veriler büyük olasılıkla yerel katmanında bulunan taraması. Artımlı bir işlemi sırasında buluta katmanlanmış verileri erişilebilir değil.
-* Doğru arama filtreleri ve ayarları yapılandırılmış dosya yalnızca hedeflenen türlerini taranan emin olun. Örneğin, görüntü dosyaları (JPEG, GIF ve TIFF) ve mühendislik çizimler artımlı veya tam dizinin yeniden oluşturulması sırasında taranmalıdır değil.
+* Otomatik olarak yapılandırılmış tüm tarama işlemlerini devre dışı bırakın.
+* Katmanlı birimlerde, bir artımlı tarama gerçekleştirmek için Dizin arama veya virüs tarama uygulamasını yapılandırın. Bu, yalnızca yerel katmanda büyük olasılıkla bulunan yeni verileri tarar. Artımlı bir işlem sırasında buluta katmanlı verilere erişilemez.
+* Doğru arama filtrelerinin ve ayarlarının yalnızca istenen dosya türlerinin taranmasını sağlamak için yapılandırıldığından emin olun. Örneğin, görüntü dosyaları (JPEG, GIF ve TIFF) ve mühendislik çizimleri, artımlı veya tam dizin yeniden oluşturma sırasında taranmamalıdır.
 
-Dizin oluşturma işlemi Windows kullanıyorsanız, aşağıdaki yönergeleri izleyin:
+Windows Dizin oluşturma işlemini kullanıyorsanız, aşağıdaki yönergeleri izleyin:
 
-* Dizin sık sık yeniden oluşturulması gerekiyorsa bulut üzerinden büyük miktarlarda veri (TB'a) çeker gibi Windows Dizin Oluşturucu için katmanlı birim kullanmayın. Dizinini yeniden oluşturmayı dizin içeriklerinin tüm dosya türlerini alır.
-* Bu, yalnızca (bulut veri erişilemeyecektir) dizin oluşturmak için yerel katmanlardaki verilere erişir gibi dizin oluşturma işlemi yerel olarak sabitlenmiş birimler için Windows kullanın.
+* Dizinin sık yeniden oluşturulması gerekiyorsa, katmanlı birimler için Windows Dizin oluşturucuyu, buluttan büyük miktarlarda veri (TBs) geri çeker. Dizinin yeniden oluşturulması, içeriklerinin dizinini oluşturmak için tüm dosya türlerini alır.
+* Yerel olarak sabitlenmiş birimler için Windows Dizin oluşturma işlemini kullanın. Bu, dizini oluşturmak için yalnızca yerel katmanlardaki verilere erişir (bulut verilerine erişilmeyecektir).
 
 ### <a name="byte-range-locking"></a>Bayt aralığı kilitleme
-Uygulamalar, belirtilen bayt aralığı içindeki dosyaları kilitleyebilirsiniz. Bayt aralığı kilitleme için StorSimple'ınızı yazma uygulamaları etkinse, sonra katmanlama sanal diziniz çalışmaz. Çalışmak için katman ayarlama için tüm alanları erişilen dosyaların kilitli olmalıdır. Sanal diziniz katmanlı birimlerde bayt aralığı kilitleme desteklenmez.
+Uygulamalar, dosyalar içindeki belirli bir bayt aralığını kilitleyebilir. StorSimple uygulamanıza yazılan uygulamalarda bayt aralığı kilitleme etkinleştirilirse, katmanlama sanal diziniz üzerinde çalışmaz. Katmanlama işinin çalışması için, erişilen dosyaların tüm alanlarının kilidinin açılması gerekir. Sanal dizinizdeki katmanlı birimlerde bayt aralığı kilitleme desteklenmez.
 
-Bayt aralığı kilitleme hafifletmek için önerilen ölçüleri içerir:
+Bayt aralığı kilitlemeyi hafiflemede önerilen ölçüler şunları içerir:
 
-* Bayt aralığı uygulama mantığınızın kilitleme devre dışı bırakın.
-* Kullanım yerel olarak sabitlenmiş birimler (yerine katmanlı) bu uygulamayla ilişkili verileri. Yerel olarak sabitlenmiş birimler buluta katmanı değil.
-* Kullanarak yerel olarak bayt aralığı kilitleme etkin sabitlenmiş birimler, geri yükleme tamamlanmadan önce birim çevrimiçi gelebilir. Bu gibi durumlarda, tam olarak geri yüklemek için beklemeniz gerekir.
+* Uygulama mantığınızdaki bayt aralığı kilitlemeyi devre dışı bırakın.
+* Bu uygulamayla ilişkili veriler için yerel olarak sabitlenmiş birimleri (katmanlı yerine) kullanın. Yerel olarak sabitlenmiş birimler buluta katman içermez.
+* Bayt aralığı kilitleme etkinken yerel olarak sabitlenmiş birimler kullanılırken, geri yükleme tamamlanmadan önce birim çevrimiçi olabilir. Bu örneklerde geri yüklemenin tamamlanmasını beklemeniz gerekir.
 
-## <a name="multiple-arrays"></a>Birden çok dizisi
-Birden çok sanal diziler, böylece cihaz performansını buluta sığdırmaya veri büyüyen bir çalışma kümesi hesabına dağıtılması gerekebilir. Bu gibi durumlarda, çalışma kümesi arttıkça ölçeği cihazlara en iyisidir. Bu, şirket içi veri merkezinde eklenecek bir veya daha fazla cihaz gerektirir. Cihaz ekleme, şunları yapabilirsiniz:
+## <a name="multiple-arrays"></a>Birden çok dizi
+Birden çok sanal dizi, buluta taşılabilecek, daha sonra cihazın performansını etkileyecek şekilde, büyümekte olan bir veri kümesinin hesaba dağıtılması gerekebilir. Bu örneklerde, çalışma kümesi büyüdükçe cihazları ölçeklendirmek en iyisidir. Bu, şirket içi veri merkezinde bir veya daha fazla cihazın eklenmesini gerektirir. Cihazları eklerken şunları yapabilirsiniz:
 
-* Geçerli veri kümesi bölün.
-* Yeni iş yüklerini yeni aygıtlara dağıtın.
-* Birden çok sanal diziler dağıtımı-yük dengelemeden öneririz açısından, bir dizi farklı hiper yönetici ana bilgisayarları üzerinde dağıtın.
-* (Dosya sunucusu veya bir iSCSI sunucusu olarak yapılandırıldığında) birden çok sanal dizisi, bir dağıtılmış dosya sistemi Namespace içinde dağıtılabilir. Ayrıntılı adımlar için Git [dağıtılmış dosya sistemi Namespace çözümüyle karma bulut depolama Dağıtım Kılavuzu](https://www.microsoft.com/download/details.aspx?id=45507). Dağıtılmış dosya sistemi çoğaltma, şu anda sanal diziyi ile kullanım için önerilmez. 
+* Geçerli veri kümesini Böl.
+* Yeni cihaza yeni iş yükleri dağıtın.
+* Birden çok sanal dizi dağıtıyorsanız, Yük Dengeleme perspektifinden diziyi farklı hiper yönetici konaklarına dağıtmanız önerilir.
+* Birden çok sanal dizi (dosya sunucusu veya Iscsı sunucusu olarak yapılandırıldığında) bir Dağıtılmış Dosya Sistemi ad alanına dağıtılabilir. Ayrıntılı adımlar için [karma bulut depolama dağıtım kılavuzu ile dağıtılmış dosya sistemi ad alanı çözümüne](https://www.microsoft.com/download/details.aspx?id=45507)gidin. Dağıtılmış Dosya Sistemi çoğaltma şu anda sanal dizi ile kullanım için önerilmez. 
 
 ## <a name="see-also"></a>Ayrıca bkz.
-Bilgi edinmek için nasıl [StorSimple Virtual Array'iniz yönetmek](storsimple-virtual-array-manager-service-administration.md) StorSimple Yöneticisi hizmeti aracılığıyla.
+StorSimple [sanal dizinizi](storsimple-virtual-array-manager-service-administration.md) StorSimple Yöneticisi hizmeti aracılığıyla yönetmeyi öğrenin.
 

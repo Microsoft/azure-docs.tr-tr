@@ -1,6 +1,6 @@
 ---
 title: Azure Active Directory raporlama gecikmeleri | Microsoft Docs
-description: Raporlama olayları, Azure Portalı'nda görünmesi geçen süreyi hakkında bilgi edinin
+description: Raporlama olaylarının Azure portal göstermesi için gereken süre miktarını öğrenin
 services: active-directory
 documentationcenter: ''
 author: MarkusVi
@@ -17,38 +17,38 @@ ms.date: 05/13/2019
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8d4d02f9e99acb68db126ccde465f73cc2294e06
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6d031546bb4f1f05e9ea2abb5b74fe911b0b507f
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65594024"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74007695"
 ---
-# <a name="azure-active-directory-reporting-latencies"></a>Azure Active Directory raporlama gecikmeleri
+# <a name="azure-active-directory-reporting-latencies"></a>Azure Active Directory raporlama gecikme süreleri
 
-Gecikme süresi, Azure Active raporlama verilerini Directory (Azure AD) görünmesini süresini miktarıdır [Azure portalında](https://portal.azure.com). Bu makale, beklenen gecikme sürelerini farklı rapor türlerini listeler. 
+Gecikme süresi Azure Active Directory (Azure AD) raporlama verilerinin [Azure Portal](https://portal.azure.com)gösterilmesi için gereken süredir. Bu makalede, farklı rapor türleri için beklenen gecikme süresi listelenmektedir. 
 
 ## <a name="activity-reports"></a>Etkinlik raporları
 
-İki tür Etkinlik Raporu vardır:
+İki tür etkinlik raporu vardır:
 
-- [Oturum açma işlemleri](concept-sign-ins.md) – kullanımı hakkında bilgi yönetilen uygulamalar ve kullanıcı oturum açma etkinlikleri sağlar.
-- [Denetim günlükleri](concept-audit-logs.md) -kullanıcılar ve grupları, yönetilen uygulamalar ve dizin etkinlikleriniz hakkında sistem etkinliği bilgileri sağlar
+- [Oturum açma](concept-sign-ins.md) işlemleri – yönetilen uygulamaların kullanımı ve Kullanıcı oturum açma etkinlikleri hakkında bilgi sağlar
+- [Denetim günlükleri](concept-audit-logs.md) -kullanıcılar ve gruplar, yönetilen uygulamalar ve Dizin etkinlikleri hakkında sistem etkinliği bilgileri sağlar
 
-Aşağıdaki tabloda, etkinlik raporları gecikme bilgileri listeler. 
+Aşağıdaki tabloda etkinlik raporları için gecikme bilgileri listelenmektedir. 
 
 > [!NOTE]
-> **Gecikme süresi (yüzde 95'lik dilim)** olarak %95 günlükler bildirilir, süresi başvurur ve **gecikme (99. yüzdebirlik dilimde)** olarak %99 günlükler bildirilir süresini gösterir. 
+> **Gecikme süresi (95. yüzdebirlik)** , günlüklerin %95 ' i bildirilecek süreyi ifade eder ve **gecikme süresi (99th)** , günlüklerin bildirildiği 99 süreyi belirtir. 
 >
 
-| Rapor | Gecikme süresi (yüzde 95'lik dilim) |Gecikme (99. yüzdebirlik dilimde)|
+| Rapor | Gecikme süresi (95. yüzdebirlik) |Gecikme süresi (99th yüzdebirlik)|
 | :-- | --- | --- |
 | Denetim günlükleri | 2 dk.  | 5 dk.  |
 | Oturum açma işlemleri | 2 dk.  | 5 dk. |
 
-### <a name="how-soon-can-i-see-activities-data-after-getting-a-premium-license"></a>Etkinlikler verileri bir premium lisansı aldıktan sonra en kısa sürede nasıl görebilirim?
+### <a name="how-soon-can-i-see-activities-data-after-getting-a-premium-license"></a>Premium lisans aldıktan sonra etkinlik verilerini ne kadar yakında görebilirim?
 
-Etkinlikleri veriler, ücretsiz lisansa zaten varsa, daha sonra bunu hemen yükseltmeyi görebilirsiniz. Herhangi bir veri yoksa, raporlarda görünmesi için bir premium lisansı yükselttikten sonra verilerin bir veya iki gün sürebilir.
+Ücretsiz lisansınız olan etkinlik verileriniz zaten varsa, yükseltme sırasında hemen görebilirsiniz. Hiç veriniz yoksa, Premium lisansa yükselttikten sonra verilerin raporlarda gösterilmesi bir veya iki gün sürer.
 
 ## <a name="security-reports"></a>Güvenlik raporları
 
@@ -57,18 +57,18 @@ Etkinlikleri veriler, ücretsiz lisansa zaten varsa, daha sonra bunu hemen yüks
 - [Riskli oturum açma işlemleri](concept-risky-sign-ins.md) - Riskli oturum açma işlemi bir kullanıcı hesabının meşru sahibi olmayan bir kişi tarafından gerçekleştirilmiş olabilecek oturum açma girişiminin göstergesidir. 
 - [Riskli oldukları belirlenen kullanıcılar](concept-user-at-risk.md) - Riskli kullanıcı, güvenliği tehlikeye girmiş olabilecek bir kullanıcı hesabının göstergesidir. 
 
-Aşağıdaki tabloda, güvenlik raporları gecikme bilgileri listeler.
+Aşağıdaki tabloda güvenlik raporlarının gecikme süresi bilgileri listelenmektedir.
 
 | Rapor | Minimum | Ortalama | Maksimum |
 | :-- | --- | --- | --- |
 | Risk altındaki kullanıcılar          | 5 dakika   | 15 dakika  | 2 saat  |
 | Riskli oturum açma işlemleri         | 5 dakika   | 15 dakika  | 2 saat  |
 
-## <a name="risk-events"></a>Risk olayları
+## <a name="risk-detections"></a>Risk algılamaları
 
-Azure AD, kullanıcı hesaplarınızla ilgili kuşkulu eylemleri algılamak için Uyarlamalı makine öğrenimi algoritmaları ve buluşsal yöntemler kullanır. Her kuşkulu eylem adlı bir kayıt depolanır algılanan bir **risk olayı**.
+Azure AD, kullanıcı hesaplarınızla ilgili şüpheli eylemleri algılamak için uyarlamalı makine öğrenimi algoritmaları ve buluşsal yöntemler kullanır. Algılanan her şüpheli eylem, **risk algılama**adlı bir kayıtta saklanır.
 
-Aşağıdaki tabloda, risk olayları gecikme bilgileri listeler.
+Aşağıdaki tabloda risk algılamaları için gecikme bilgileri listelenmektedir.
 
 | Rapor | Minimum | Ortalama | Maksimum |
 | :-- | --- | --- | --- |
@@ -83,5 +83,5 @@ Aşağıdaki tabloda, risk olayları gecikme bilgileri listeler.
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Azure AD raporlarına genel bakış](overview-reports.md)
-* [Azure AD raporlar programlı erişim](concept-reporting-api.md)
-* [Azure Active Directory risk olayları](concept-risk-events.md)
+* [Azure AD raporlarına programlı erişim](concept-reporting-api.md)
+* [Risk algılamalarını Azure Active Directory](concept-risk-events.md)

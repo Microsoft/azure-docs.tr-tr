@@ -1,24 +1,21 @@
 ---
-title: Kaynak grubu ve Azure Resource Manager kaynaklarını - sil
-description: Bir kaynak grubunun silinmesi, Azure Resource Manager kaynakların silinmesini nasıl sıralar açıklar. Bu, yanıt kodları ve Resource Manager silme başarılı olup olmadığını belirlemek için bunları nasıl işlediğini açıklar.
-author: tfitzmac
-ms.service: azure-resource-manager
+title: Kaynak grubunu ve kaynakları Sil
+description: Kaynak gruplarının ve kaynakların nasıl silineceğini açıklar. Bir kaynak grubunu silerken kaynakların silme işlemini nasıl Azure Resource Manager belirtir. Bu, yanıt kodları ve Resource Manager silme başarılı olup olmadığını belirlemek için bunları nasıl işlediğini açıklar.
 ms.topic: conceptual
-ms.date: 12/09/2018
-ms.author: tomfitz
+ms.date: 09/03/2019
 ms.custom: seodec18
-ms.openlocfilehash: 18990b51b5ff2184197db48fd139d63750626663
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: c84dcf64555f40f45dbdaeedb05d4cc461f2cbb7
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67204213"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74150821"
 ---
-# <a name="azure-resource-manager-resource-group-deletion"></a>Azure Resource Manager kaynak grubunu silme
+# <a name="azure-resource-manager-resource-group-and-resource-deletion"></a>Azure Resource Manager kaynak grubu ve kaynak silme
 
-Bu makalede, bir kaynak grubu sildiğinizde, Azure Resource Manager kaynakların silinmesini nasıl sıralar açıklanır.
+Bu makalede, kaynak gruplarının ve kaynakların nasıl silineceği gösterilir. Bir kaynak grubunu sildiğinizde kaynakların silme işlemini nasıl Azure Resource Manager belirtir.
 
-## <a name="determine-order-of-deletion"></a>Silme sırasını belirleme
+## <a name="how-order-of-deletion-is-determined"></a>Silme sırası nasıl belirlenir
 
 Bir kaynak grubu sildiğinizde, Resource Manager kaynakları silmek için sırasını belirler. Aşağıdaki sırayı kullanır:
 
@@ -27,8 +24,6 @@ Bir kaynak grubu sildiğinizde, Resource Manager kaynakları silmek için sıras
 2. Diğer kaynakları yönetmek kaynaklar ardından silinir. Bir kaynak olabilir `managedBy` farklı bir kaynak, yönettiği belirtmek için özelliğini ayarlayın. Bu özelliği ayarlandığında, diğer kaynak yöneten kaynak önce diğer kaynaklar silinir.
 
 3. Önceki iki kategoriye sonra kalan kaynaklar silinir.
-
-## <a name="resource-deletion"></a>Kaynak silme
 
 Sırasını belirlendikten sonra kaynak yöneticisi her kaynak için bir silme işlemi verir. Herhangi bir bağımlılığın devam etmeden önce tamamlanmasını bekler.
 
@@ -40,7 +35,7 @@ Zaman uyumlu işlemler için beklenen başarılı yanıt kodları şunlardır:
 
 Zaman uyumsuz işlemleri için beklenen başarılı yanıt, 202. Kaynak Yöneticisi konum veya silme zaman uyumsuz işlemin durumunu belirlemek için azure-zaman uyumsuz işlemi başlığındaki izler.
   
-### <a name="errors"></a>Hatalar
+### <a name="deletion-errors"></a>Silme işlemi hataları
 
 Bir hata silme işlemi geri döndüğünde, Resource Manager DELETE çağrısı yeniden dener. Yeniden denemeler için 429 ve 408 durum kodu 5xx gerçekleşir. Varsayılan olarak, yeniden deneme süre 15 dakikadır.
 
@@ -50,16 +45,77 @@ Kaynak Yöneticisi bir GET çağrısı silmeye çalıştığınız her kaynaktak
 
 Ancak, kaynaktaki alma çağrısı, bir 200 ya da 201 döndürürse, Resource Manager kaynak yeniden oluşturur.
 
-### <a name="errors"></a>Hatalar
-
 GET işlemi hata verirse, Resource Manager aşağıdaki hata kodunu alma yeniden deneme:
 
-* 100'den küçük
+* 100’den daha az
 * 408
 * 429
 * 500'den büyük
 
 Diğer hata kodları için Resource Manager kaynak silme işlemi başarısız olur.
+
+## <a name="delete-resource-group"></a>Kaynak grubunu silme
+
+Kaynak grubunu silmek için aşağıdaki yöntemlerden birini kullanın.
+
+# <a name="powershelltabazure-powershell"></a>[PowerShell](#tab/azure-powershell)
+
+```azurepowershell-interactive
+Remove-AzResourceGroup -Name ExampleResourceGroup
+```
+
+# <a name="azure-clitabazure-cli"></a>[Azure CLI](#tab/azure-cli)
+
+```azurecli-interactive
+az group delete --name ExampleResourceGroup
+```
+
+# <a name="portaltabazure-portal"></a>[Portal](#tab/azure-portal)
+
+1. [Portalda](https://portal.azure.com), silmek istediğiniz kaynak grubunu seçin.
+
+1. **Kaynak grubunu sil**'i seçin.
+
+   ![Kaynak grubunu silme](./media/resource-group-delete/delete-group.png)
+
+1. Silmeyi onaylamak için kaynak grubunun adını yazın
+
+---
+
+## <a name="delete-resource"></a>Kaynağı Sil
+
+Bir kaynağı silmek için aşağıdaki yöntemlerden birini kullanın.
+
+# <a name="powershelltabazure-powershell"></a>[PowerShell](#tab/azure-powershell)
+
+```azurepowershell-interactive
+Remove-AzResource `
+  -ResourceGroupName ExampleResourceGroup `
+  -ResourceName ExampleVM `
+  -ResourceType Microsoft.Compute/virtualMachines
+```
+
+# <a name="azure-clitabazure-cli"></a>[Azure CLI](#tab/azure-cli)
+
+```azurecli-interactive
+az resource delete \
+  --resource-group ExampleResourceGroup \
+  --name ExampleVM \
+  --resource-type "Microsoft.Compute/virtualMachines"
+```
+
+# <a name="portaltabazure-portal"></a>[Portal](#tab/azure-portal)
+
+1. [Portalda](https://portal.azure.com), silmek istediğiniz kaynağı seçin.
+
+1. **Sil**’i seçin. Aşağıdaki ekran görüntüsünde, bir sanal makine için yönetim seçenekleri gösterilmektedir.
+
+   ![Kaynağı Sil](./media/resource-group-delete/delete-resource.png)
+
+1. Sorulduğunda silme işlemini onaylayın.
+
+---
+
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

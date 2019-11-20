@@ -7,9 +7,7 @@
     - name: PowerShell - Hızlı Başlangıç
       href: quickstart-powershell.md
 - name: Özellikler ve araçlar
-  items:
-    - name: Özellikler ve araçlar
-      href: features.md
+  href: features.md
 - name: Öğreticiler
   items:
     - name: Ansible

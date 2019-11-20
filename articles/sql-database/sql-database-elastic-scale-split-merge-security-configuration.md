@@ -1,6 +1,6 @@
 ---
-title: Ayırma-birleştirme güvenliği yapılandırma | Microsoft Docs
-description: X409 ayarlamak için esnek ölçeklendirme ayırma/birleştirme hizmetiyle şifreleme için sertifikalar.
+title: Bölünmüş birleştirme güvenlik yapılandırması
+description: Elastik ölçek için bölünmüş/birleştirme hizmetiyle şifreleme için x409 sertifikaları ayarlayın.
 services: sql-database
 ms.service: sql-database
 ms.subservice: scale-out
@@ -10,118 +10,117 @@ ms.topic: conceptual
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: sstein
-manager: craigg
 ms.date: 12/18/2018
-ms.openlocfilehash: 7ca7e653cc42323f4313ef955de40416154b4ecf
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a916645f153f73a98e7fc5d4046bdf557e8acf2b
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60335233"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73823523"
 ---
-# <a name="split-merge-security-configuration"></a>Ayırma-birleştirme güvenliği yapılandırma
+# <a name="split-merge-security-configuration"></a>Bölünmüş birleştirme güvenlik yapılandırması
 
-Ayırma/birleştirme hizmetini kullanmak için doğru güvenlik yapılandırmanız gerekir. Hizmet, Microsoft Azure SQL veritabanı'nın esnek ölçeklendirme özelliği bir parçasıdır. Daha fazla bilgi için [esnek ölçek bölme ve birleştirme Service Öğreticisi](sql-database-elastic-scale-configure-deploy-split-and-merge.md).
+Bölünmüş/birleştirme hizmetini kullanmak için güvenliği doğru şekilde yapılandırmanız gerekir. Hizmet, Microsoft Azure SQL Veritabanı elastik ölçek özelliğinin bir parçasıdır. Daha fazla bilgi için bkz. [elastik ölçek bölünmüş ve birleştirme hizmeti öğreticisi](sql-database-elastic-scale-configure-deploy-split-and-merge.md).
 
 ## <a name="configuring-certificates"></a>Sertifikaları yapılandırma
 
 Sertifikalar iki şekilde yapılandırılır. 
 
-1. [SSL sertifikası yapılandırma](#to-configure-the-ssl-certificate)
-2. [İstemci sertifikaları yapılandırma](#to-configure-client-certificates) 
+1. [SSL sertifikasını yapılandırmak için](#to-configure-the-ssl-certificate)
+2. [Istemci sertifikalarını yapılandırmak için](#to-configure-client-certificates) 
 
-## <a name="to-obtain-certificates"></a>Sertifika edinme
+## <a name="to-obtain-certificates"></a>Sertifikaları almak için
 
-Ortak sertifika yetkilileri (CA) ya da sertifika elde edilebilir [Windows sertifika hizmeti](https://msdn.microsoft.com/library/windows/desktop/aa376539.aspx). Bu sertifikaları almak için tercih edilen yöntemlerdir.
+Sertifikalar, genel sertifika yetkililerinden (CA 'Lar) veya [Windows sertifika hizmeti](https://msdn.microsoft.com/library/windows/desktop/aa376539.aspx)'nden alınabilir. Bunlar, sertifikaları almak için tercih edilen yöntemlerdir.
 
-Bu seçenek kullanılabilir değilse, oluşturabileceğiniz **otomatik olarak imzalanan sertifikalar**.
+Bu seçenekler yoksa, **otomatik olarak imzalanan sertifikalar**oluşturabilirsiniz.
 
-## <a name="tools-to-generate-certificates"></a>Sertifikalarını oluşturmak için Araçlar
+## <a name="tools-to-generate-certificates"></a>Sertifika oluşturmaya yönelik araçlar
 
-* [makecert.exe](https://msdn.microsoft.com/library/bfsktky3.aspx)
-* [pvk2pfx.exe](https://msdn.microsoft.com/library/windows/hardware/ff550672.aspx)
+* [MakeCert. exe](https://msdn.microsoft.com/library/bfsktky3.aspx)
+* [Pvk2pfx. exe](https://msdn.microsoft.com/library/windows/hardware/ff550672.aspx)
 
 ### <a name="to-run-the-tools"></a>Araçları çalıştırmak için
 
-* Bir geliştirici komut isteminden Visual Studios için bkz: [Visual Studio komut istemi](https://msdn.microsoft.com/library/ms229859.aspx) 
+* Visual Studios için bir Geliştirici Komut İstemi, bkz. [Visual Studio komut istemi](https://msdn.microsoft.com/library/ms229859.aspx) 
   
-    Yüklü değilse, şuraya gidin:
+    Yüklüyse, şuraya gidin:
   
         %ProgramFiles(x86)%\Windows Kits\x.y\bin\x86 
-* WDK gelen alma [Windows 8.1: Yükleme setleri ve araçları](https://msdn.microsoft.com/windows/hardware/gg454513#drivers)
+* Windows 8.1 WDK Al [: takımları ve araçları indirme](https://msdn.microsoft.com/windows/hardware/gg454513#drivers)
 
-## <a name="to-configure-the-ssl-certificate"></a>SSL sertifikası yapılandırma
+## <a name="to-configure-the-ssl-certificate"></a>SSL sertifikasını yapılandırmak için
 
-Bir SSL sertifikası, iletişimi şifrelemek ve sunucu kimlik doğrulaması için gereklidir. Aşağıdaki üç senaryo en uygun seçin ve tüm adımları yürütün:
+İletişimi şifrelemek ve sunucunun kimliğini doğrulamak için bir SSL sertifikası gerekir. Aşağıdaki üç senaryonun en uygun olanını seçin ve tüm adımlarını yürütün:
 
-### <a name="create-a-new-self-signed-certificate"></a>Yeni bir otomatik olarak imzalanan sertifika oluştur
+### <a name="create-a-new-self-signed-certificate"></a>Otomatik olarak imzalanan yeni bir sertifika oluştur
 
-1. [Otomatik olarak imzalanan bir sertifika oluşturun](#create-a-self-signed-certificate)
-2. [İçin otomatik olarak imzalanan SSL Sertifika PFX dosyasını oluşturma](#create-pfx-file-for-self-signed-ssl-certificate)
-3. [Bulut hizmeti için SSL sertifikasını karşıya yükle](#upload-ssl-certificate-to-cloud-service)
-4. [Hizmet yapılandırma dosyasında SSL sertifikasını güncelleştirme](#update-ssl-certificate-in-service-configuration-file)
-5. [SSL sertifika yetkilisi içeri aktarma](#import-ssl-certification-authority)
+1. [Otomatik olarak Imzalanan sertifika oluşturma](#create-a-self-signed-certificate)
+2. [Otomatik olarak Imzalanan SSL sertifikası için PFX dosyası oluştur](#create-pfx-file-for-self-signed-ssl-certificate)
+3. [SSL sertifikasını bulut hizmetine yükle](#upload-ssl-certificate-to-cloud-service)
+4. [Hizmet yapılandırma dosyasında SSL sertifikası Güncelleştir](#update-ssl-certificate-in-service-configuration-file)
+5. [SSL sertifika yetkilisini içeri aktar](#import-ssl-certification-authority)
 
-### <a name="to-use-an-existing-certificate-from-the-certificate-store"></a>Sertifika depolama alanından mevcut bir sertifikayı kullanmak için
-1. [Sertifika Store ' SSL sertifikasını dışarı aktarma](#export-ssl-certificate-from-certificate-store)
-2. [Bulut hizmeti için SSL sertifikasını karşıya yükle](#upload-ssl-certificate-to-cloud-service)
-3. [Hizmet yapılandırma dosyasında SSL sertifikasını güncelleştirme](#update-ssl-certificate-in-service-configuration-file)
+### <a name="to-use-an-existing-certificate-from-the-certificate-store"></a>Sertifika deposundan var olan bir sertifikayı kullanmak için
+1. [Sertifika deposundan SSL sertifikasını dışarı aktar](#export-ssl-certificate-from-certificate-store)
+2. [SSL sertifikasını bulut hizmetine yükle](#upload-ssl-certificate-to-cloud-service)
+3. [Hizmet yapılandırma dosyasında SSL sertifikası Güncelleştir](#update-ssl-certificate-in-service-configuration-file)
 
-### <a name="to-use-an-existing-certificate-in-a-pfx-file"></a>Mevcut bir sertifikayı bir PFX dosyasında kullanmak için
-1. [Bulut hizmeti için SSL sertifikasını karşıya yükle](#upload-ssl-certificate-to-cloud-service)
-2. [Hizmet yapılandırma dosyasında SSL sertifikasını güncelleştirme](#update-ssl-certificate-in-service-configuration-file)
+### <a name="to-use-an-existing-certificate-in-a-pfx-file"></a>Bir PFX dosyasında var olan bir sertifikayı kullanmak için
+1. [SSL sertifikasını bulut hizmetine yükle](#upload-ssl-certificate-to-cloud-service)
+2. [Hizmet yapılandırma dosyasında SSL sertifikası Güncelleştir](#update-ssl-certificate-in-service-configuration-file)
 
-## <a name="to-configure-client-certificates"></a>İstemci sertifikaları yapılandırma
-İstemci sertifikaları, istekleri hizmete kimlik doğrulaması için gereklidir. Aşağıdaki üç senaryo en uygun seçin ve tüm adımları yürütün:
+## <a name="to-configure-client-certificates"></a>İstemci sertifikalarını yapılandırmak için
+Hizmette isteklerin kimliğini doğrulamak için istemci sertifikaları gereklidir. Aşağıdaki üç senaryonun en uygun olanını seçin ve tüm adımlarını yürütün:
 
-### <a name="turn-off-client-certificates"></a>İstemci sertifikaları Kapat
-1. [İstemci sertifika tabanlı kimlik doğrulamasını devre dışı Aç](#turn-off-client-certificate-based-authentication)
+### <a name="turn-off-client-certificates"></a>İstemci sertifikalarını kapat
+1. [Istemci sertifikası tabanlı kimlik doğrulamasını kapat](#turn-off-client-certificate-based-authentication)
 
-### <a name="issue-new-self-signed-client-certificates"></a>Yeni otomatik olarak imzalanan istemci sertifikaları
-1. [Otomatik olarak imzalanan bir sertifika yetkilisi oluşturma](#create-a-self-signed-certification-authority)
-2. [Bulut hizmeti için CA sertifikasını karşıya yükle](#upload-ca-certificate-to-cloud-service)
-3. [Hizmet yapılandırma dosyasında CA sertifikasını güncelleştir](#update-ca-certificate-in-service-configuration-file)
-4. [İstemci sertifikaları](#issue-client-certificates)
-5. [İstemci sertifikaları için PFX dosyaları oluşturma](#create-pfx-files-for-client-certificates)
-6. [İstemci sertifika İçeri Aktar](#import-client-certificate)
-7. [İstemci sertifikası parmak izleri kopyalayın](#copy-client-certificate-thumbprints)
-8. [Hizmet yapılandırma dosyasında izin verilen istemcilerini yapılandırma](#configure-allowed-clients-in-the-service-configuration-file)
+### <a name="issue-new-self-signed-client-certificates"></a>Otomatik olarak imzalanan yeni istemci sertifikaları verme
+1. [Otomatik olarak Imzalanan sertifika yetkilisi oluşturma](#create-a-self-signed-certification-authority)
+2. [CA sertifikasını bulut hizmetine yükle](#upload-ca-certificate-to-cloud-service)
+3. [Hizmet yapılandırma dosyasında CA sertifikasını Güncelleştir](#update-ca-certificate-in-service-configuration-file)
+4. [Istemci sertifikası verme](#issue-client-certificates)
+5. [Istemci sertifikaları için PFX dosyaları oluşturma](#create-pfx-files-for-client-certificates)
+6. [Istemci sertifikasını içeri aktar](#import-client-certificate)
+7. [Istemci sertifikası parmak Izlerini Kopyala](#copy-client-certificate-thumbprints)
+8. [Hizmet yapılandırma dosyasında Izin verilen Istemcileri yapılandırma](#configure-allowed-clients-in-the-service-configuration-file)
 
-### <a name="use-existing-client-certificates"></a>Mevcut istemci sertifikaları kullanın
-1. [CA ortak anahtar bulunamadı](#find-ca-public-key)
-2. [Bulut hizmeti için CA sertifikasını karşıya yükle](#upload-ca-certificate-to-cloud-service)
-3. [Hizmet yapılandırma dosyasında CA sertifikasını güncelleştir](#update-ca-certificate-in-service-configuration-file)
-4. [İstemci sertifikası parmak izleri kopyalayın](#copy-client-certificate-thumbprints)
-5. [Hizmet yapılandırma dosyasında izin verilen istemcilerini yapılandırma](#configure-allowed-clients-in-the-service-configuration-file)
-6. [İstemci sertifika iptal denetimi yapılandırma](#configure-client-certificate-revocation-check)
+### <a name="use-existing-client-certificates"></a>Mevcut istemci sertifikalarını kullan
+1. [CA ortak anahtarını bul](#find-ca-public-key)
+2. [CA sertifikasını bulut hizmetine yükle](#upload-ca-certificate-to-cloud-service)
+3. [Hizmet yapılandırma dosyasında CA sertifikasını Güncelleştir](#update-ca-certificate-in-service-configuration-file)
+4. [Istemci sertifikası parmak Izlerini Kopyala](#copy-client-certificate-thumbprints)
+5. [Hizmet yapılandırma dosyasında Izin verilen Istemcileri yapılandırma](#configure-allowed-clients-in-the-service-configuration-file)
+6. [Istemci sertifikası Iptal denetimini yapılandırma](#configure-client-certificate-revocation-check)
 
 ## <a name="allowed-ip-addresses"></a>İzin verilen IP adresleri
-Hizmet uç noktalarına erişimi belirli IP adresleri aralığı için sınırlı olabilir.
+Hizmet uç noktalarına erişim, belirli IP adresi aralıklarıyla kısıtlanabilir.
 
-## <a name="to-configure-encryption-for-the-store"></a>Store için şifreleme yapılandırmak için
-Meta veri deposunda saklanan kimlik bilgilerini şifrelemek için bir sertifika gerekir. Aşağıdaki üç senaryo en uygun seçin ve tüm adımları yürütün:
+## <a name="to-configure-encryption-for-the-store"></a>Mağaza şifrelemesini yapılandırmak için
+Meta veri deposunda depolanan kimlik bilgilerini şifrelemek için bir sertifika gerekir. Aşağıdaki üç senaryonun en uygun olanını seçin ve tüm adımlarını yürütün:
 
-### <a name="use-a-new-self-signed-certificate"></a>Yeni bir otomatik olarak imzalanan sertifika kullan
-1. [Otomatik olarak imzalanan bir sertifika oluşturun](#create-a-self-signed-certificate)
-2. [İçin otomatik imzalanan şifreleme sertifika PFX dosyasını oluşturma](#create-pfx-file-for-self-signed-ssl-certificate)
-3. [Bulut hizmeti için şifreleme sertifikasını karşıya yükle](#upload-encryption-certificate-to-cloud-service)
-4. [Hizmet yapılandırma dosyasında şifreleme sertifikasını güncelleştir](#update-encryption-certificate-in-service-configuration-file)
+### <a name="use-a-new-self-signed-certificate"></a>Otomatik olarak imzalanan yeni bir sertifika kullan
+1. [Otomatik olarak Imzalanan sertifika oluşturma](#create-a-self-signed-certificate)
+2. [Otomatik olarak Imzalanan şifreleme sertifikası için PFX dosyası oluştur](#create-pfx-file-for-self-signed-ssl-certificate)
+3. [Şifreleme sertifikasını bulut hizmetine yükle](#upload-encryption-certificate-to-cloud-service)
+4. [Hizmet yapılandırma dosyasında şifreleme sertifikasını Güncelleştir](#update-encryption-certificate-in-service-configuration-file)
 
-### <a name="use-an-existing-certificate-from-the-certificate-store"></a>Mevcut bir sertifikayı sertifika deposundan kullanın
-1. [Sertifika Store ' şifreleme sertifikasını dışarı aktarma](#export-encryption-certificate-from-certificate-store)
-2. [Bulut hizmeti için şifreleme sertifikasını karşıya yükle](#upload-encryption-certificate-to-cloud-service)
-3. [Hizmet yapılandırma dosyasında şifreleme sertifikasını güncelleştir](#update-encryption-certificate-in-service-configuration-file)
+### <a name="use-an-existing-certificate-from-the-certificate-store"></a>Sertifika deposundan var olan bir sertifikayı kullan
+1. [Sertifika deposundan şifreleme sertifikasını dışarı aktar](#export-encryption-certificate-from-certificate-store)
+2. [Şifreleme sertifikasını bulut hizmetine yükle](#upload-encryption-certificate-to-cloud-service)
+3. [Hizmet yapılandırma dosyasında şifreleme sertifikasını Güncelleştir](#update-encryption-certificate-in-service-configuration-file)
 
-### <a name="use-an-existing-certificate-in-a-pfx-file"></a>Mevcut bir sertifikayı bir PFX dosyasında kullanmak
-1. [Bulut hizmeti için şifreleme sertifikasını karşıya yükle](#upload-encryption-certificate-to-cloud-service)
-2. [Hizmet yapılandırma dosyasında şifreleme sertifikasını güncelleştir](#update-encryption-certificate-in-service-configuration-file)
+### <a name="use-an-existing-certificate-in-a-pfx-file"></a>PFX dosyasında var olan bir sertifikayı kullan
+1. [Şifreleme sertifikasını bulut hizmetine yükle](#upload-encryption-certificate-to-cloud-service)
+2. [Hizmet yapılandırma dosyasında şifreleme sertifikasını Güncelleştir](#update-encryption-certificate-in-service-configuration-file)
 
 ## <a name="the-default-configuration"></a>Varsayılan yapılandırma
-Varsayılan yapılandırma, HTTP uç noktasına tüm erişimi engeller. Bu istekler Bu uç noktaları için veritabanı kimlik bilgileri gibi hassas bilgileri gerçekleştirmek beri önerilen, ayardır.
-Tüm erişim HTTPS uç noktasına varsayılan yapılandırmasını sağlar. Bu ayar daha da kısıtlanabilir.
+Varsayılan yapılandırma HTTP uç noktasına tüm erişimi reddeder. Bu uç noktalara yönelik istekler veritabanı kimlik bilgileri gibi hassas bilgileri taşıyabileceğinizden bu, önerilen ayardır.
+Varsayılan yapılandırma, HTTPS uç noktasına tüm erişime izin verir. Bu ayar daha fazla kısıtlanmış olabilir.
 
 ### <a name="changing-the-configuration"></a>Yapılandırmayı değiştirme
-Geçerli erişim denetim kuralları ve uç nokta grubunun yapılandırılmış  **\<EndpointAcls >** konusundaki **hizmet yapılandırma dosyasını**.
+Ve uç nokta için uygulanan erişim denetimi kuralları grubu, **hizmet yapılandırma dosyasının** **\<EndpointAcls >** bölümünde yapılandırılır.
 
 ```xml
 <EndpointAcls>
@@ -130,10 +129,10 @@ Geçerli erişim denetim kuralları ve uç nokta grubunun yapılandırılmış  
 </EndpointAcls>
 ```
 
-Bir erişim denetimi grubu kurallarında, yapılandırılmış bir \<AccessControl name = "" > hizmet yapılandırma dosyasının. 
+Bir erişim denetim grubundaki kurallar, hizmet yapılandırma dosyasının \<AccessControl Name = "" > bölümünde yapılandırılır. 
 
-Biçim, ağ erişim denetimi listelerini belgelerinde açıklanmıştır.
-Örneğin, yalnızca IP HTTPS uç noktasına erişmek için 100.100.0.0 için 100.100.255.255 aralığında izin vermek için kuralları şöyle görünür:
+Biçim, ağ Access Control listeleri belgelerinde açıklanmıştır.
+Örneğin, 100.100.0.0 ile 100.100.255.255 arasında yalnızca IP 'Lerin HTTPS uç noktasına erişmesine izin vermek için kurallar şuna benzer:
 
 ```xml
 <AccessControl name="Retricted">
@@ -145,29 +144,29 @@ Biçim, ağ erişim denetimi listelerini belgelerinde açıklanmıştır.
 </EndpointAcls>
 ```
 
-## <a name="denial-of-service-prevention"></a>Önleme hizmet reddi
-Algılama ve hizmet reddi saldırılarını önlemek için desteklenen iki farklı mekanizma vardır:
+## <a name="denial-of-service-prevention"></a>Hizmet reddi engellemesi
+Hizmet reddi saldırılarını algılamak ve engellemek için desteklenen iki farklı mekanizma vardır:
 
-* Uzak ana bilgisayar başına eşzamanlı istek sayısını sınırlayın (varsayılan olarak kapalıdır)
-* Uzak ana bilgisayar başına erişim oranını sınırlamak (üzerinde varsayılan olarak)
+* Uzak ana bilgisayar başına eşzamanlı istek sayısını kısıtla (varsayılan olarak kapalı)
+* Uzak ana bilgisayar başına erişim oranını kısıtla (varsayılan olarak açık)
 
-Bunlar daha fazla IIS dinamik IP güvenlik konusunda belgelenen özellikleri temel alır. Ne zaman bu yapılandırmasının değiştirilmesi aşağıdaki etmenlere dikkat:
+Bunlar, IIS 'de dinamik IP güvenliği ile belgelendiği özelliklere dayalıdır. Bu yapılandırmayı değiştirirken aşağıdaki faktörlerden de dikkat edin:
 
-* Proxy ve ağ adresi çevirisi cihazlar üzerinde uzak konak bilgilerini davranışı
-* Her isteğin web rolünde herhangi bir kaynağa (örneğin yüklenirken komut dosyaları, görüntüler vb.) olarak kabul edilir
+* Uzak ana bilgisayar bilgileri üzerinde proxy ve ağ adresi çevirisi cihazlarının davranışı
+* Web rolündeki herhangi bir kaynağa yönelik her istek kabul edilir (örneğin, betikleri, resimleri yükleme vb.)
 
-## <a name="restricting-number-of-concurrent-accesses"></a>Eş zamanlı erişimi sayısını sınırlandırma
-Bu davranış yapılandırdığınız ayarlar şunlardır:
+## <a name="restricting-number-of-concurrent-accesses"></a>Eşzamanlı erişimlerin sayısını kısıtlama
+Bu davranışı yapılandıran ayarlar şunlardır:
 
 ```xml
 <Setting name="DynamicIpRestrictionDenyByConcurrentRequests" value="false" />
 <Setting name="DynamicIpRestrictionMaxConcurrentRequests" value="20" />
 ```
 
-DynamicIpRestrictionDenyByConcurrentRequests bu korumayı etkinleştirmek için true olarak değiştirin.
+Bu korumayı etkinleştirmek için DynamicIpRestrictionDenyByConcurrentRequests değerini true olarak değiştirin.
 
-## <a name="restricting-rate-of-access"></a>Erişimi kısıtlama oranı
-Bu davranış yapılandırdığınız ayarlar şunlardır:
+## <a name="restricting-rate-of-access"></a>Erişim oranını kısıtlama
+Bu davranışı yapılandıran ayarlar şunlardır:
 
 ```xml
 <Setting name="DynamicIpRestrictionDenyByRequestRate" value="true" />
@@ -175,23 +174,23 @@ Bu davranış yapılandırdığınız ayarlar şunlardır:
 <Setting name="DynamicIpRestrictionRequestIntervalInMilliseconds" value="2000" />
 ```
 
-## <a name="configuring-the-response-to-a-denied-request"></a>Reddedilen bir isteğin yanıtını yapılandırma
-Reddedilen bir isteğin yanıtını aşağıdaki ayarı yapılandırır:
+## <a name="configuring-the-response-to-a-denied-request"></a>Reddedilen bir isteğe yanıt yapılandırma
+Aşağıdaki ayar, reddedilen bir istek için yanıtı yapılandırır:
 
 ```xml
 <Setting name="DynamicIpRestrictionDenyAction" value="AbortRequest" />
 ```
 
-Desteklenen diğer değerler için dinamik IP Güvenlik IIS'de belgelere bakın.
+Desteklenen diğer değerler için IIS 'deki dinamik IP güvenliği belgelerine bakın.
 
-## <a name="operations-for-configuring-service-certificates"></a>Hizmet sertifikaları yapılandırma işlemleri
-Bu konu, yalnızca başvuru amacıyla kullanılır. Bölümünde açıklanan yapılandırma adımlarını izleyin:
+## <a name="operations-for-configuring-service-certificates"></a>Hizmet sertifikalarını yapılandırma işlemleri
+Bu konu yalnızca başvuru amaçlıdır. İçinde özetlenen yapılandırma adımlarını izleyin:
 
-* SSL sertifikası yapılandırma
-* İstemci sertifikaları yapılandırma
+* SSL sertifikasını yapılandırma
+* İstemci sertifikalarını yapılandırma
 
 ## <a name="create-a-self-signed-certificate"></a>Otomatik olarak imzalanan sertifika oluşturma
-Yürütün:
+Yürütme
 
     makecert ^
       -n "CN=myservice.cloudapp.net" ^
@@ -200,63 +199,63 @@ Yürütün:
       -a sha256 -len 2048 ^
       -sv MySSL.pvk MySSL.cer
 
-Özelleştirme için:
+Özelleştirmek için:
 
-* -n ile hizmet URL'si. Joker karakter ("CN = * .cloudapp .net") ve diğer adları ("CN=myservice1.cloudapp.net, CN=myservice2.cloudapp.net") desteklenir.
-* -e sertifika sona erme tarihi ile güçlü bir parola oluşturmak ve onu istendiğinde belirtin.
+* -n hizmet URL 'SI. Joker karakterler ("CN = *. cloudapp. net") ve alternatif adlar ("CN = myservice1. cloudapp. net, CN = myservice2. cloudapp. net") desteklenir.
+* -e, sertifika sona erme tarihi ile güçlü bir parola oluşturun ve istendiğinde belirtin.
 
-## <a name="create-pfx-file-for-self-signed-ssl-certificate"></a>Otomatik olarak imzalanan SSL sertifikası PFX dosyasını oluşturma
-Yürütün:
+## <a name="create-pfx-file-for-self-signed-ssl-certificate"></a>Otomatik olarak imzalanan SSL sertifikası için PFX dosyası oluştur
+Yürütme
 
         pvk2pfx -pvk MySSL.pvk -spc MySSL.cer
 
-Parolayı girin ve ardından bu seçeneklere sahip sertifika verme:
+Parolayı girin ve sertifikayı şu seçeneklerle dışarı aktarın:
 
 * Evet, özel anahtarı dışarı aktar
-* Tüm genişletilmiş özellikleri Dışarı Aktar
+* Tüm genişletilmiş özellikleri dışarı aktar
 
-## <a name="export-ssl-certificate-from-certificate-store"></a>Sertifika deposundan SSL sertifikasını dışarı aktarma
-* Sertifika bulunamadı
-* Tıklayın Eylemler -> tüm görevler -> dışarı aktar...
-* Sertifikayı dışarı aktarma bir. PFX dosyası olan bu seçenekleri:
+## <a name="export-ssl-certificate-from-certificate-store"></a>Sertifika deposundan SSL sertifikasını dışarı aktar
+* Sertifika bul
+* Eylemler-> Tüm Görevler-> dışarı aktar... öğesine tıklayın.
+* Sertifikayı bir öğesine dışarı aktarın. Bu seçeneklere sahip PFX dosyası:
   * Evet, özel anahtarı dışarı aktar
-  * Mümkünse sertifika yolundaki tüm sertifikaları dahil et * tüm genişletilmiş özellikleri Dışarı Aktar
+  * Mümkünse sertifika yolundaki tüm sertifikaları Ekle * tüm genişletilmiş özellikleri dışarı aktar
 
-## <a name="upload-ssl-certificate-to-cloud-service"></a>Bulut hizmeti için SSL sertifikasını karşıya yükle
-Karşıya yükleme, var olan sertifika veya oluşturulabilir. SSL anahtar çifti ile PFX dosyası:
+## <a name="upload-ssl-certificate-to-cloud-service"></a>SSL sertifikasını bulut hizmetine yükle
+Sertifikayı var olan veya oluşturulan ile karşıya yükleyin. SSL anahtar çiftiyle PFX dosyası:
 
-* Özel anahtar bilgisi koruyan parolayı girin
+* Özel anahtar bilgilerini koruyan parolayı girin
 
-## <a name="update-ssl-certificate-in-service-configuration-file"></a>Hizmet yapılandırma dosyasında SSL sertifikasını güncelleştirme
-Bulut hizmeti için karşıya yüklenen sertifikanın parmak izine sahip hizmet yapılandırma dosyasında aşağıdaki ayarı parmak izi değerini güncelleştirin:
+## <a name="update-ssl-certificate-in-service-configuration-file"></a>Hizmet yapılandırma dosyasında SSL sertifikası Güncelleştir
+Hizmet yapılandırma dosyasında, bulut hizmetine yüklenen sertifikanın parmak izine sahip aşağıdaki ayarın parmak izi değerini güncelleştirin:
 
     <Certificate name="SSL" thumbprint="" thumbprintAlgorithm="sha1" />
 
-## <a name="import-ssl-certification-authority"></a>SSL sertifika yetkilisi içeri aktarma
-Tüm hesap / hizmetiyle iletişim kuracak makinede aşağıdaki adımları izleyin:
+## <a name="import-ssl-certification-authority"></a>SSL sertifika yetkilisini içeri aktar
+Hizmetle iletişim kuracak tüm hesap/makinedeki bu adımları izleyin:
 
-* Çift tıklayın. Windows Gezgini'nde CER dosyası
-* Sertifika iletişim kutusunda, sertifikayı yükle düğmesine...
-* Güvenilen Kök Sertifika Yetkilileri deposuna sertifika İçeri Aktar
+* Öğesine çift tıklayın. Windows Gezgini 'nde CER dosyası
+* Sertifika iletişim kutusunda Sertifikayı Kur... öğesine tıklayın.
+* Sertifikayı güvenilen kök sertifika yetkilileri deposuna aktarma
 
-## <a name="turn-off-client-certificate-based-authentication"></a>İstemci sertifika tabanlı kimlik doğrulamasını devre dışı Aç
-Yalnızca istemci sertifika tabanlı kimlik doğrulaması desteklenir ve başka mekanizmalar karşılandığından (örneğin, Microsoft Azure sanal ağı) sürece devre dışı bırakılması hizmet uç noktalarına erişimine izin verir.
+## <a name="turn-off-client-certificate-based-authentication"></a>İstemci sertifikası tabanlı kimlik doğrulamasını kapat
+Yalnızca istemci sertifikası tabanlı kimlik doğrulaması desteklenir ve devre dışı bırakıldığında, başka mekanizmalar yerinde değilse (örneğin, Microsoft Azure Sanal Ağ) hizmet uç noktalarına genel erişim izni verilir.
 
-Bu ayarlar, hizmet yapılandırma dosyasında özelliği devre dışı bırakmak için false değiştirin:
+Özelliği devre dışı bırakmak için, hizmet yapılandırma dosyasında bu ayarları false olarak değiştirin:
 
 ```xml
 <Setting name="SetupWebAppForClientCertificates" value="false" />
 <Setting name="SetupWebserverForClientCertificates" value="false" />
 ```
 
-Ardından, CA sertifikası ayarı SSL sertifikası olarak aynı parmak izini kopyalayın:
+Ardından, CA sertifikası ayarında aynı parmak izini SSL sertifikası ile kopyalayın:
 
 ```xml
 <Certificate name="CA" thumbprint="" thumbprintAlgorithm="sha1" />
 ```
 
-## <a name="create-a-self-signed-certification-authority"></a>Otomatik olarak imzalanan bir sertifika yetkilisi oluşturma
-Bir sertifika yetkilisi olarak davranacak şekilde otomatik olarak imzalanan bir sertifika oluşturmak için aşağıdaki adımları uygulayın:
+## <a name="create-a-self-signed-certification-authority"></a>Otomatik olarak imzalanan sertifika yetkilisi oluşturma
+Sertifika yetkilisi görevi görecek otomatik olarak imzalanan bir sertifika oluşturmak için aşağıdaki adımları yürütün:
 
     makecert ^
     -n "CN=MyCA" ^
@@ -266,50 +265,50 @@ Bir sertifika yetkilisi olarak davranacak şekilde otomatik olarak imzalanan bir
       -sr localmachine -ss my ^
       MyCA.cer
 
-Bunu özelleştirmek için
+Özelleştirmek için
 
-* -e ile sertifika sona erme tarihi
+* -e sertifikanın sona erme tarihi
 
-## <a name="find-ca-public-key"></a>CA ortak anahtar bulunamadı
-Tüm istemci sertifikaları hizmet tarafından güvenilen bir sertifika yetkilisi tarafından verilmiş olmalıdır. İstemci kimlik doğrulaması için bulut hizmetine yüklemek için kullanılacak sertifikaları veren sertifika yetkilisine genel anahtarını bulun.
+## <a name="find-ca-public-key"></a>CA ortak anahtarını bul
+Tüm istemci sertifikalarının, hizmet tarafından güvenilen bir sertifika yetkilisi tarafından verilmiş olması gerekir. Bulut hizmetine yüklemek için kimlik doğrulaması için kullanılacak istemci sertifikalarını veren sertifika yetkilisinin ortak anahtarını bulun.
 
-Genel anahtar dosyasıyla kullanılamıyorsa sertifika deposundan dışarı aktarın:
+Ortak anahtara sahip dosya kullanılamıyorsa, sertifika deposundan dışarı aktarın:
 
-* Sertifika bulunamadı
-  * Aynı sertifika yetkilisi tarafından verilmiş bir istemci sertifikası Ara
+* Sertifika bul
+  * Aynı sertifika yetkilisi tarafından verilen bir istemci sertifikası ara
 * Sertifikaya çift tıklayın.
 * Sertifika iletişim kutusunda sertifika yolu sekmesini seçin.
-* Yolun CA girişi çift tıklatın.
-* Sertifika Özellikleri Not.
-* Kapat **sertifika** iletişim.
-* Sertifika bulunamadı
-  * Yukarıda belirtilen CA'yı arayın.
-* Tıklayın Eylemler -> tüm görevler -> dışarı aktar...
-* Sertifikayı dışarı aktarma bir. CER bu seçenekleri:
-  * **Hayır, özel anahtarı verme**
-  * Mümkünse sertifika yolundaki tüm sertifikaları Ekle.
+* Yoldaki CA girişini çift tıklatın.
+* Sertifika özelliklerine not alın.
+* **Sertifika** iletişim kutusunu kapatın.
+* Sertifika bul
+  * Yukarıda belirtilen CA 'yı arayın.
+* Eylemler-> Tüm Görevler-> dışarı aktar... öğesine tıklayın.
+* Sertifikayı bir öğesine dışarı aktarın. Bu seçeneklerle CER:
+  * **Hayır, özel anahtarı dışarı aktarma**
+  * Mümkünse sertifika yolundaki tüm sertifikaları ekleyin.
   * Tüm genişletilmiş özellikleri dışarı aktarın.
 
-## <a name="upload-ca-certificate-to-cloud-service"></a>Bulut hizmeti için CA sertifikasını karşıya yükle
-Karşıya yükleme, var olan sertifika veya oluşturulabilir. CER dosyası CA ortak anahtara sahip.
+## <a name="upload-ca-certificate-to-cloud-service"></a>CA sertifikasını bulut hizmetine yükle
+Sertifikayı var olan veya oluşturulan ile karşıya yükleyin. CA ortak anahtarına sahip CER dosyası.
 
-## <a name="update-ca-certificate-in-service-configuration-file"></a>Hizmet yapılandırma dosyasında güncelleştirme CA sertifikası
-Bulut hizmeti için karşıya yüklenen sertifikanın parmak izine sahip hizmet yapılandırma dosyasında aşağıdaki ayarı parmak izi değerini güncelleştirin:
+## <a name="update-ca-certificate-in-service-configuration-file"></a>Hizmet yapılandırma dosyasında CA sertifikasını Güncelleştir
+Hizmet yapılandırma dosyasında, bulut hizmetine yüklenen sertifikanın parmak izine sahip aşağıdaki ayarın parmak izi değerini güncelleştirin:
 
 ```xml
 <Certificate name="CA" thumbprint="" thumbprintAlgorithm="sha1" />
 ```
 
-Aşağıdaki ayarı değerini aynı parmak izine sahip güncelleştirin:
+Aşağıdaki ayarın değerini aynı parmak izine göre güncelleştirin:
 
 ```xml
 <Setting name="AdditionalTrustedRootCertificationAuthorities" value="" />
 ```
 
-## <a name="issue-client-certificates"></a>İstemci sertifikaları
-Her hizmete erişim yetkisi verilen kendi özel kullanım için bir istemci sertifikasına sahip olmalıdır ve özel anahtarıyla korumak için kendi güçlü bir parola seçmeniz gerekir. 
+## <a name="issue-client-certificates"></a>İstemci sertifikası verme
+Hizmete erişim yetkisi olan her bireyin kendi özel kullanımları için verilmiş bir istemci sertifikasına sahip olmalıdır ve özel anahtarını korumak için kendi güçlü parolasını seçmesi gerekir. 
 
-Aşağıdaki adımları otomatik olarak imzalanan sertifika burada oluşturulan ve depolanan aynı makinede yürütülmelidir:
+Aşağıdaki adımlar, otomatik olarak imzalanan CA sertifikasının oluşturulduğu ve depolandığı makinede çalıştırılmalıdır:
 
     makecert ^
       -n "CN=My ID" ^
@@ -319,172 +318,172 @@ Aşağıdaki adımları otomatik olarak imzalanan sertifika burada oluşturulan 
       -in "MyCA" -ir localmachine -is my ^
       -sv MyID.pvk MyID.cer
 
-Özelleştirme:
+Bkz
 
-* Bu sertifika ile kimlik doğrulaması yapılacak istemciye ait bir kimlik ile -n
-* -e ile sertifika sona erme tarihi
-* MyID.pvk ve bu istemci sertifikası için benzersiz dosya adları ile MyID.cer
+* -n istemciye, bu sertifikayla kimlik doğrulaması yapılacak bir KIMLIĞE sahip
+* -e, sertifika sona erme tarihi
+* Bu istemci sertifikası için benzersiz dosya adlarıyla MyID. PVK ve MyID. cer
 
-Bu komut, oluşturulması ve bir kez kullanılması için bir parola sorar. Güçlü bir parola kullanın.
+Bu komut, bir parolanın oluşturulmasını ve sonra bir kez kullanılmasını ister. Güçlü bir parola kullanın.
 
-## <a name="create-pfx-files-for-client-certificates"></a>PFX dosyaları için istemci sertifikaları oluşturma
-Her oluşturulan istemci sertifikası için yürütün:
+## <a name="create-pfx-files-for-client-certificates"></a>İstemci sertifikaları için PFX dosyaları oluşturma
+Oluşturulan her istemci sertifikası için şunu yürütün:
 
     pvk2pfx -pvk MyID.pvk -spc MyID.cer
 
-Özelleştirme:
+Bkz
 
     MyID.pvk and MyID.cer with the filename for the client certificate
 
-Parolayı girin ve ardından bu seçeneklere sahip sertifika verme:
+Parolayı girin ve sertifikayı şu seçeneklerle dışarı aktarın:
 
 * Evet, özel anahtarı dışarı aktar
-* Tüm genişletilmiş özellikleri Dışarı Aktar
-* Bu sertifika yayımlanmaktadır tek dışarı aktarma parolası seçmeniz gerekir
+* Tüm genişletilmiş özellikleri dışarı aktar
+* Bu sertifikanın verildiği kişi, parolayı dışarı aktar seçeneğini seçmenizi sağlar
 
-## <a name="import-client-certificate"></a>İstemci sertifika İçeri Aktar
-Kendisi için bir istemci sertifikası verildi her hizmetiyle iletişim kurmak için kullanacağı makineleri içindeki anahtar çiftinden almanız gerekir:
+## <a name="import-client-certificate"></a>İstemci sertifikasını içeri aktar
+İstemci sertifikası verilen her bir bireyin, hizmet ile iletişim kurmak için kullandıkları makinelere anahtar çiftini içeri aktarmanız gerekir:
 
-* Çift tıklayın. Windows Gezgini'nde PFX dosyası
-* İçeri aktarma sertifikayı Kişisel depolama ile en az bu seçeneği:
-  * Seçili tüm genişletilmiş özellikleri Ekle
+* Öğesine çift tıklayın. Windows Gezgini 'nde PFX dosyası
+* En azından bu seçenekle sertifikayı Kişisel depoya aktarın:
+  * Tüm genişletilmiş özellikleri ekle işaretli
 
-## <a name="copy-client-certificate-thumbprints"></a>İstemci sertifikası parmak izleri kopyalayın
-Kendisi için bir istemci sertifikası verildi her bir hizmet yapılandırma dosyasına eklenir, sertifikanın parmak izini edinmek için şu adımları uygulamanız gerekir:
+## <a name="copy-client-certificate-thumbprints"></a>İstemci sertifikası parmak izlerini Kopyala
+İstemci sertifikası verilen her bir bireyin, sertifikasının parmak izini almak için, hizmet yapılandırma dosyasına eklenecek bu adımları izlemelidir:
 
-* Certmgr.exe çalıştırın
-* Kişisel sekmesini seçin.
-* Kimlik doğrulaması için kullanılacak istemci sertifikası'na çift tıklayın
-* Ayrıntılar sekmesi açılır sertifikası iletişim kutusunda seçin
-* Tümünü Göster görüntüleme emin olun
-* Parmak izi listesinde adlı bir alan seçin
+* Certmgr. exe dosyasını çalıştır
+* Kişisel sekmesini seçin
+* Kimlik doğrulaması için kullanılacak istemci sertifikasına çift tıklayın
+* Açılan Sertifika iletişim kutusunda Ayrıntılar sekmesini seçin.
+* Gösterme 'nin tümünü görüntülediğinden emin olun
+* Listede Parmak Izi adlı alanı seçin
 * Parmak izi değerini kopyalayın
-  * İlk basamak önünde görünür olmayan Unicode karakterleri silin
+  * İlk basamağın önünde görünür olmayan Unicode karakterleri Sil
   * Tüm boşlukları Sil
 
-## <a name="configure-allowed-clients-in-the-service-configuration-file"></a>Hizmet yapılandırma dosyasında verilen istemcilerini yapılandırma
-Hizmete erişim verilen istemci sertifikaların parmak izleriyle virgülle ayrılmış listesiyle birlikte hizmet yapılandırma dosyasında aşağıdaki ayarın değerini güncelleştirin:
+## <a name="configure-allowed-clients-in-the-service-configuration-file"></a>Hizmet yapılandırma dosyasında Izin verilen istemcileri yapılandırma
+Hizmet yapılandırma dosyasında, hizmet erişimine izin verilen istemci sertifikalarının parmak izlerinin virgülle ayrılmış listesiyle birlikte, aşağıdaki ayarın değerini güncelleştirin:
 
 ```xml
 <Setting name="AllowedClientCertificateThumbprints" value="" />
 ```
 
-## <a name="configure-client-certificate-revocation-check"></a>İstemci sertifika iptal denetimi yapılandırma
-Varsayılan ayar, istemcinin sertifika iptal durumunu için sertifika yetkilisi ile denetlemez. İstemci sertifikaları veren sertifika yetkilisi tür denetimler destekliyorsa denetimleri etkinleştirmek için aşağıdaki ayarı X509RevocationMode numaralandırmada tanımlanan değerlerden biriyle değiştirin:
+## <a name="configure-client-certificate-revocation-check"></a>İstemci sertifikası iptal denetimini yapılandırma
+Varsayılan ayar, istemci sertifikası iptal durumu için sertifika yetkilisini denetlemez. Denetimleri açmak için, istemci sertifikalarını veren sertifika yetkilisi bu denetimleri destekliyorsa, X509RevocationMode sabit listesinden tanımlanan değerlerden biriyle aşağıdaki ayarı değiştirin:
 
 ```xml
 <Setting name="ClientCertificateRevocationCheck" value="NoCheck" />
 ```
 
-## <a name="create-pfx-file-for-self-signed-encryption-certificates"></a>Otomatik olarak imzalanan şifreleme sertifikaları PFX dosyasını oluşturma
-Bir şifreleme sertifikası için yürütün:
+## <a name="create-pfx-file-for-self-signed-encryption-certificates"></a>Otomatik olarak imzalanan şifreleme sertifikaları için PFX dosyası oluştur
+Bir şifreleme sertifikası için şunu yürütün:
 
     pvk2pfx -pvk MyID.pvk -spc MyID.cer
 
-Özelleştirme:
+Bkz
 
     MyID.pvk and MyID.cer with the filename for the encryption certificate
 
-Parolayı girin ve ardından bu seçeneklere sahip sertifika verme:
+Parolayı girin ve sertifikayı şu seçeneklerle dışarı aktarın:
 
 * Evet, özel anahtarı dışarı aktar
-* Tüm genişletilmiş özellikleri Dışarı Aktar
-* Bulut hizmeti için sertifika karşıya yüklenirken parolaya ihtiyaç duyacaksınız.
+* Tüm genişletilmiş özellikleri dışarı aktar
+* Sertifikayı bulut hizmetine yüklerken parolaya ihtiyaç duyarsınız.
 
-## <a name="export-encryption-certificate-from-certificate-store"></a>Şifreleme sertifikası, sertifika deposundan dışarı aktarma
-* Sertifika bulunamadı
-* Tıklayın Eylemler -> tüm görevler -> dışarı aktar...
-* Sertifikayı dışarı aktarma bir. PFX dosyası olan bu seçenekleri: 
+## <a name="export-encryption-certificate-from-certificate-store"></a>Sertifika deposundan şifreleme sertifikasını dışarı aktar
+* Sertifika bul
+* Eylemler-> Tüm Görevler-> dışarı aktar... öğesine tıklayın.
+* Sertifikayı bir öğesine dışarı aktarın. Bu seçeneklere sahip PFX dosyası: 
   * Evet, özel anahtarı dışarı aktar
-  * Mümkünse sertifika yolundaki tüm sertifikaları dahil et 
-* Tüm genişletilmiş özellikleri Dışarı Aktar
+  * Mümkünse sertifika yolundaki tüm sertifikaları Ekle 
+* Tüm genişletilmiş özellikleri dışarı aktar
 
-## <a name="upload-encryption-certificate-to-cloud-service"></a>Bulut hizmeti için şifreleme sertifikasını karşıya yükle
-Karşıya yükleme, var olan sertifika veya oluşturulabilir. PFX dosyası şifreleme anahtar çifti ile:
+## <a name="upload-encryption-certificate-to-cloud-service"></a>Şifreleme sertifikasını bulut hizmetine yükle
+Sertifikayı var olan veya oluşturulan ile karşıya yükleyin. Şifreleme anahtarı çiftinin bulunduğu PFX dosyası:
 
-* Özel anahtar bilgisi koruyan parolayı girin
+* Özel anahtar bilgilerini koruyan parolayı girin
 
-## <a name="update-encryption-certificate-in-service-configuration-file"></a>Hizmet yapılandırma dosyasında şifreleme sertifikasını güncelleştir
-Bulut hizmeti için karşıya yüklenen sertifikanın parmak izi ile parmak izi değerini hizmet yapılandırma dosyasında aşağıdaki ayarlardan birini güncelleştirin:
+## <a name="update-encryption-certificate-in-service-configuration-file"></a>Hizmet yapılandırma dosyasında şifreleme sertifikasını Güncelleştir
+Hizmet yapılandırma dosyasında, bulut hizmetine yüklenen sertifikanın parmak izine sahip aşağıdaki ayarların parmak izi değerini güncelleştirin:
 
 ```xml
 <Certificate name="DataEncryptionPrimary" thumbprint="" thumbprintAlgorithm="sha1" />
 ```
 
 ## <a name="common-certificate-operations"></a>Ortak sertifika işlemleri
-* SSL sertifikası yapılandırma
-* İstemci sertifikaları yapılandırma
+* SSL sertifikasını yapılandırma
+* İstemci sertifikalarını yapılandırma
 
-## <a name="find-certificate"></a>Sertifika bulunamadı
+## <a name="find-certificate"></a>Sertifika bul
 Şu adımları uygulayın:
 
-1. MMC.exe çalıştırın.
-2. Dosya -> Ekle/Kaldır ek bileşenini...
-3. Seçin **sertifikaları**.
-4. **Ekle**'yi tıklatın.
-5. Sertifika depolama konumu seçin.
-6. **Son**'a tıklayın.
+1. MMC. exe ' yi çalıştırın.
+2. Dosya-> ek bileşen Ekle/Kaldır...
+3. **Sertifikalar**' ı seçin.
+4. **Ekle**'ye tıklayın.
+5. Sertifika deposu konumunu seçin.
+6. **Finish (Son)** düğmesine tıklayın.
 7. **Tamam** düğmesine tıklayın.
-8. Genişletin **sertifikaları**.
-9. Sertifika deposu düğümünü genişletin.
+8. **Sertifikalar**' ı genişletin.
+9. Sertifika depolama düğümünü genişletin.
 10. Sertifika alt düğümünü genişletin.
 11. Listeden bir sertifika seçin.
 
 ## <a name="export-certificate"></a>Sertifikayı dışarı aktarma
-İçinde **Sertifika Verme Sihirbazı**:
+**Sertifika dışarı aktarma Sihirbazı**'nda:
 
 1. **İleri**’ye tıklayın.
-2. Seçin **Evet**, ardından **özel anahtarı dışarı**.
+2. **Evet**' i seçin ve ardından **özel anahtarı dışarı aktarın**.
 3. **İleri**’ye tıklayın.
-4. İstenen çıkış dosya biçimini seçin.
+4. İstenen çıkış dosyası biçimini seçin.
 5. İstenen seçenekleri denetleyin.
-6. Denetleme **parola**.
+6. **Parolayı**denetleyin.
 7. Güçlü bir parola girin ve onaylayın.
 8. **İleri**’ye tıklayın.
-9. Yazın veya bir dosya adı sertifikanın depolanacağı yeri bulun (kullanan bir. PFX uzantısı).
+9. Sertifikanın depolanacağı bir dosya adı yazın veya dosyaya gidin (bir kullanın. PFX uzantısı).
 10. **İleri**’ye tıklayın.
-11. **Son**'a tıklayın.
+11. **Finish (Son)** düğmesine tıklayın.
 12. **Tamam** düğmesine tıklayın.
 
-## <a name="import-certificate"></a>Sertifika İçeri Aktar
-Sertifika Alma Sihirbazı'nda:
+## <a name="import-certificate"></a>Sertifikayı içeri aktar
+Sertifika Içeri aktarma Sihirbazı 'nda:
 
-1. Depolama konumu seçin.
+1. Mağaza konumunu seçin.
    
-   * Seçin **geçerli kullanıcının** yalnızca geçerli kullanıcı altında çalışan işlemler hizmete erişecek
-   * Seçin **yerel makine** bu bilgisayardaki diğer işlemler hizmete erişecek olursa
+   * Yalnızca geçerli kullanıcı altında çalışan işlemlerin hizmete erişmesi durumunda **Geçerli Kullanıcı** ' yı seçin
+   * Bu bilgisayardaki başka işlemlerin hizmete erişmesi durumunda **yerel makine** ' yi seçin
 2. **İleri**’ye tıklayın.
-3. Bir dosyadan içe aktarılıyorsa, dosya yolunu doğrulayın.
-4. İçe aktarılıyorsa bir. PFX dosyası:
-   1. Özel anahtarını koruyan parolayı girin
-   2. İçeri aktarma seçenekleri seçin
-5. "Yerleştir" sertifikaları aşağıdaki depolama alanına seçin
+3. Bir dosyadan içeri aktarıldıysanız dosya yolunu onaylayın.
+4. İçeri aktarıldıysanız. PFX dosyası:
+   1. Özel anahtarı koruyan parolayı girin
+   2. İçeri aktarma seçeneklerini belirleyin
+5. Aşağıdaki depoya "yerleştir" sertifikalarını seçin
 6. **Gözat**’a tıklayın.
-7. İstediğiniz depoyu seçin.
-8. **Son**'a tıklayın.
+7. İstenen depoyu seçin.
+8. **Finish (Son)** düğmesine tıklayın.
    
-   * Güvenilen kök sertifika yetkilisi deposunda seçildiyse, tıklayın **Evet**.
-9. Tıklayın **Tamam** tüm iletişim Windows.
+   * Güvenilen kök sertifika yetkilisi deposu seçilmişse **Evet**' e tıklayın.
+9. Tüm iletişim kutusu pencereleri üzerinde **Tamam** ' ı tıklatın.
 
 ## <a name="upload-certificate"></a>Sertifikayı karşıya yükleme
 [Azure portalında](https://portal.azure.com/)
 
-1. Seçin **bulut Hizmetleri**.
-2. Bulut hizmeti seçin.
-3. Üst menüsünde **sertifikaları**.
-4. Alt çubuğunda **karşıya**.
-5. Sertifika dosyası seçin.
-6. Bu doğruysa bir. PFX dosya, özel anahtarı parolasını girin.
-7. Tamamlandığında, listedeki yeni girişi sertifika parmak izini kopyalayın.
+1. **Cloud Services**seçin.
+2. Bulut hizmetini seçin.
+3. Üstteki menüde, **Sertifikalar**' a tıklayın.
+4. Alt çubukta **karşıya yükle**' ye tıklayın.
+5. Sertifika dosyasını seçin.
+6. Eğer bir. PFX dosyası, özel anahtar için parolayı girin.
+7. Tamamlandıktan sonra, listedeki yeni girdiden sertifika parmak izini kopyalayın.
 
 ## <a name="other-security-considerations"></a>Diğer güvenlik konuları
-Bu belgede açıklanan SSL ayarları, HTTPS uç noktası kullanıldığında, hizmet ve istemcileri arasındaki iletişimi şifrelemek. Veritabanı erişimi için kimlik bilgilerini bu yana önemli olduğunu ve iletişime olabilecek diğer hassas bilgiler yer alır. Ancak, hizmet kimlik bilgilerini, Microsoft Azure aboneliğiniz meta veri depolama için sağlanan Microsoft Azure SQL veritabanı'nda kendi iç tablolar dahil olmak üzere, iç durumu devam ettiğini unutmayın. Bu veritabanı, aşağıdaki ayarı hizmet yapılandırma dosyanızdaki bir parçası olarak tanımlandı (. CSCFG dosyası): 
+Bu belgede açıklanan SSL ayarları, HTTPS uç noktası kullanıldığında hizmet ve istemcileri arasındaki iletişimi şifreler. Bu, veritabanı erişimi için kimlik bilgileri ve potansiyel olarak diğer gizli bilgiler iletişim içinde bulunduğundan önemlidir. Ancak, hizmetin, kimlik bilgileri de dahil olmak üzere iç durumu, Microsoft Azure aboneliğinizde meta veri depolaması için sağladınız Microsoft Azure SQL veritabanındaki iç tablolarında devam etmediğini unutmayın. Bu veritabanı, hizmet yapılandırma dosyanızda aşağıdaki ayarın bir parçası olarak tanımlanmıştır (. CSCFG dosyası): 
 
 ```xml
 <Setting name="ElasticScaleMetadata" value="Server=…" />
 ```
 
-Bu veritabanında depolanan kimlik bilgileri şifrelenir. Ancak, en iyi uygulama, hem web hem de çalışan roller hizmet dağıtımlarınıza güncel tutulur ve güvenli olarak hem de meta verileri veritabanı ve şifreleme ve şifre çözme depolanan kimlik bilgileri için kullanılan sertifikanın erişiminiz emin olun. 
+Bu veritabanında depolanan kimlik bilgileri şifrelenir. Bununla birlikte, en iyi uygulama olarak, hizmet dağıtımlarınızın hem Web hem de çalışan rollerinin hem meta veri veritabanına erişimi hem de depolanan kimlik bilgilerinin şifrelenmesi ve şifresinin çözülmesi için kullanılan sertifika olduğundan emin olun. 
 
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 

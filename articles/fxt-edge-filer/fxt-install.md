@@ -1,228 +1,228 @@
 ---
-title: Bir Azure FXT Edge dosyalayıcı fiziksel cihaz yükleme Öğreticisi | Microsoft Docs
-description: Nasıl Cihazınızı kutusundan çıkarma, rafa ve Microsoft Azure FXT Edge dosyalayıcı karma depolama önbelleği fiziksel cihaz bileşeninin bağlama
+title: Azure FXT Edge Filer fiziksel cihazı yükleme öğreticisi | Microsoft Docs
+description: Microsoft Azure FXT Edge Filer karma depolama önbelleğinin fiziksel cihaz bileşenini açma, bölme ve kablo oluşturma
 services: ''
 author: ekpgh
 ms.service: fxt-edge-filer
 ms.topic: tutorial
 ms.date: 07/01/2019
-ms.author: v-erkell
-ms.openlocfilehash: ed9eca88e5ccc386b25acb95fa729a3cfb95cbd0
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.author: rohogue
+ms.openlocfilehash: 0f3c7b01ee9d4a62ec0d563af55f2086894081be
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67543401"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72256052"
 ---
-# <a name="tutorial-install-azure-fxt-edge-filer"></a>Öğretici: Azure FXT Edge dosyalayıcı yükleyin 
+# <a name="tutorial-install-azure-fxt-edge-filer"></a>Öğretici: Azure FXT Edge Filer 'ı kurma 
 
-Bu öğreticide, Azure FXT Edge dosyalayıcı karma depolama önbelleği için bir donanım düğüm yüklemeyi açıklar. Bir Azure FXT Edge dosyalayıcı kümesi oluşturmak için en az üç donanımı düğümlerine yüklemeniz gerekir.
+Bu öğreticide, Azure FXT Edge Filer karma depolama önbelleği için bir donanım düğümünün nasıl yükleneceği açıklanmaktadır. Azure FXT Edge Filer kümesi oluşturmak için en az üç donanım düğümü yüklemeniz gerekir.
 
-Yükleme yordamını açılmasını ve cihazı bağlama ve kablo yönetim arm (CMA) ve ön Pano ekleme raf içerir. Ayrı bir öğretici düğmelere ağ kablosu ve bağlanan power açıklar. 
+Yükleme yordamı, cihazı açma ve rafa çıkarma ve kablo yönetimi ARM (CMA) ve ön kapak ekleme işlemini içerir. Ayrı bir öğreticide ağ kablolarını ekleme ve güç bağlama işlemleri açıklanmaktadır. 
 
-Bir Azure FXT Edge dosyalayıcı düğümüne yüklemek için yaklaşık bir saat sürer. 
+Azure FXT Edge Filer düğümünü yüklemek yaklaşık bir saat sürer. 
 
-Bu öğretici, bu kurulum adımları içerir: 
+Bu öğreticide aşağıdaki kurulum adımları yer almaktadır: 
 
 > [!div class="checklist"]
-> * Cihazı kutusundan çıkarma
-> * Bir raf üstü cihazı bağlayın
-> * (İsteğe bağlı) ön Pano yükleme
+> * Cihazın paketini açın
+> * Cihazı bir rafa bağlama
+> * Ön ucu (isteğe bağlı) yükler
 
 ## <a name="installation-prerequisites"></a>Yükleme önkoşulları 
 
-Başlamadan önce veri merkezi ve kullanacağınız raf bu özelliklere sahip olduğundan emin olun:
+Başlamadan önce, kullanacağınız veri merkezi ve rafın bu özelliklere sahip olduğundan emin olun:
 
-* Burada cihaz bağlamak istediğiniz bir kullanılabilir 1U yuvada rafa.
-* AC güç ve soğutma Azure FXT Edge dosyalayıcı ihtiyaçlarını karşılayan sistemler. (Okuma [gücü ve sıcaklık belirtimleri](fxt-specs.md#power-and-thermal-specifications) için planlama ve yükleme boyutlandırma yardımcı olur.)  
+* Cihazı bağlamak istediğiniz raftaki kullanılabilir bir 1U yuvası.
+* Azure FXT Edge Filininin ihtiyaçlarını karşılayan AC güç kaynağı ve soğutma sistemleri. (Yüklemeyi planlamaya ve boyutlandırmasına yardımcı olmak için [güç ve sıcaklık belirtimlerini](fxt-specs.md#power-and-thermal-specifications) okuyun.)  
 
   > [!NOTE] 
-  > Güç Dağıtım birimleri iki yedek güç kaynağı (PSUs) birim tam olarak yararlanmak için iki farklı dal devreler üzerinde AC gücü eklerken kullanın. Okuma [power kabloları bağlayın](fxt-network-power.md#connect-power-cables) Ayrıntılar için.  
+  > İki yedekli güç kaynağı biriminden (PSUs) tam olarak yararlanabilmek için, AC gücü eklenirken iki farklı dalda güç dağıtım birimi kullanın. Ayrıntılar için [bağlantı gücü kablolarını](fxt-network-power.md#connect-power-cables) okuyun.  
 
-## <a name="unpack-the-hardware-node"></a>Donanım düğüm paketinden çıkarma 
+## <a name="unpack-the-hardware-node"></a>Donanım düğümünü paketten çıkarma 
 
-Her Azure FXT Edge dosyalayıcı düğümü tek bir kutuda gönderilir. Bir cihazın ambalajını açmak için aşağıdaki adımları tamamlayın.
+Her Azure FXT Edge Filer düğümü tek bir kutuda gönderilir. Bir cihazın paketini açmak için bu adımları uygulayın.
 
-1. Kutuyu düz ve sabit bir yüzeye yerleştirin.
+1. Kutuyu düz, düzey bir yüzeye yerleştirin.
 
-2. Kutuda ve ambalajda ezik, kesik, su hasarı veya gözle görülür herhangi bir hasar olup olmadığını kontrol edin. Paketleme ve kutusu ciddi zarar, açmayın. Cihazın iyi durumda olup olmadığının değerlendirilmesi için Microsoft Desteği ile iletişim kurun.
+2. Kutuyu ve paketlemeyi, kırma, keser, su hasarı veya başka bir açık hasar için paketleme. Kutu veya paketleme ciddi hasar görmüşse bunu açmayın. Cihazın iyi çalışma sırasında olup olmadığını değerlendirmenize yardımcı olmak için Microsoft Desteği başvurun.
 
-3. Kutuyu açın. Aşağıdaki öğeler içerdiğinden emin olun:
-   * Tek tek kutu FXT cihaz
+3. Kutunun paketini açın. Aşağıdaki öğeleri içerdiğinden emin olun:
+   * Tek bir kasa FXT cihazı
    * İki güç kablosu
-   * Bir ön Pano ve anahtarı
-   * Bir parmaklık Seti derleme
-   * Bir kablo yönetim arm (CMA)
-   * CMA yükleme yönergeleri Kitapçığı
-   * Raf yükleme yönergeleri Kitapçığı
-   * Kitapçığı güvenliği, çevre ve yasal bilgiler
+   * Tek bir ön ve anahtar
+   * Bir demiryolu seti derlemesi
+   * Bir kablo yönetimi ARM (CMA)
+   * CMA yükleme yönergeleri kitapçığı
+   * Raf yükleme yönergeleri kitapçık
+   * Güvenlik, çevresel ve mevzuat bilgileri kitapçık
 
-Listelenen öğelerin tümünü almadıysanız, aygıt satıcısı için desteğe başvurun. 
+Listelenen öğelerin tümünü almadıysanız, destek almak için cihaz satıcısına başvurun. 
 
-Cihaz yükleme veya üzerinde açmadan önce odası olarak aynı sıcaklık ulaşmak için yeterli bir süre beklendiğinden olduğundan emin olun. Cihaz herhangi bir kısmını buharlaşmayı fark ederseniz, yüklemeden önce en az 24 saat bekleyin.
+Cihazın, yüklemeden veya kapatmadan önce oda ile aynı sıcaklığa ulaşması için yeterli zamana sahip olduğundan emin olun. Cihazın herhangi bir bölümünde daha fazla bildirimde bulunuruz, yüklemeden önce en az 24 saat bekleyin.
 
-Sonraki adım etmektir Cihazınızı bağlayın.
+Sonraki adım, cihazınızı takmaya yönelik bir adımdır.
 
-## <a name="rack-the-device"></a>Cihazı rafa yerleştirme
+## <a name="rack-the-device"></a>Cihazı raf
 
-Azure FXT Edge dosyalayıcı cihaz standart 19 inç rafa yüklü olması gerekir. 
+Azure FXT Edge Filer cihazı, standart 19 inç bir rafa yüklenmiş olmalıdır. 
 
-Azure FXT Edge dosyalayıcı karma depolama önbelleği üç veya daha fazla Azure FXT Edge dosyalayıcı aygıtların oluşur. Sisteminizin bir parçası olan her bir cihaz için raf yükleme adımlarını yineleyin. 
+Azure FXT Edge Filer karma depolama önbelleği, üç veya daha fazla Azure FXT Edge Filer cihazdan oluşur. Sisteminizin parçası olan her bir cihaz için raf yükleme adımlarını yineleyin. 
 
-### <a name="rack-install-prerequisites"></a>Raf Önkoşulları Yükleme
+### <a name="rack-install-prerequisites"></a>Raf yüklemesi önkoşulları
 
-* Başlamadan önce Cihazınızda setleriyle güvenliği, çevre ve yasal bilgiler Kitapçığı güvenlik yönergeleri okuyun.
+* Başlamadan önce, cihazıyla birlikte sunulan güvenlik, çevresel ve mevzuat bilgileri kitapçığındaki güvenlik yönergelerini okuyun.
 
   > [!NOTE]
-  > Her zaman iki kişinin bir rafa yüklediğinizde veya rafa kaldırmak da dahil olmak üzere bir düğümü kaldırma olduğunda kullanın. 
+  > Düğüm çalışırken her zaman iki kişi kullanın, bunu bir rafa yüklediğinizde ya da rafınızdan kaldırdığınızda. 
 
-* İle donanım rafı kullanılan parmaklık yükleme türünü belirleyin. 
-  * Kare veya yuvarlak delik raflar'ın eklentisini alet parmaklık yönergeleri izleyin.
-  * İş parçacıklı delik raflar için tooled parmaklık yönergeleri izleyin. 
+* Ekipman rafınız ile kullanılan demiryolu yükleme türünü belirler. 
+  * Kare veya yuvarlak delik ek bileşen rafları için, aletsiz demiryolu yönergelerini izleyin.
+  * İş parçacıklı delik raflar için, toulan demiryolu talimatlarını izleyin. 
   
-    Yapılandırma bağlama tooled parmaklık için sekiz Vida, 10-32, 12-24 türü, M5 veya M6 sağlamanız gerekir. Baş Vida çapı 10 mm'lik küçüktür (0,4") olmalıdır.
+    Toulan demiryolu yapılandırması için sekiz adet screws sağlamanız, 10-32, 12-24, M5 veya M6 yazmanız gerekir. Screws 'nin baş çapı 10 mm 'den (0,4 ") az olmalıdır.
 
-### <a name="identify-the-rail-kit-contents"></a>Parmaklık Seti içeriği tanımlayın
+### <a name="identify-the-rail-kit-contents"></a>Demiryolu Kit içeriğini tanımla
 
-Parmaklık Seti bütünleştirilmiş kod yükleme için bileşenleri bulun:
+Demiryolu Kit derlemesini yüklemek için bileşenleri bulun:
 
-1. İki A7 Dell ReadyRails parmaklık derlemeleri (1) kayan II
-1. İki bağlama ve (2) straps döngü
+1. İki A7 Dell Readyrayi II kayan demiryolu derlemeleri (1)
+1. İki kanca ve döngü Straps (2)
 
-![Parmaklık Seti İçindekiler numaralı çizim](media/fxt-install/identify-rail-kit-contents-400.png)
+![Demiryolu, Kııl Kit içeriğinin numaralandırılmış çizimi](media/fxt-install/identify-rail-kit-contents-400.png)
 
-### <a name="rail-assembly---tool-less-rails-square-hole-or-round-hole-racks"></a>Parmaklık derleme - alet rails (kare delik veya yuvarlak delik raflar)
+### <a name="rail-assembly---tool-less-rails-square-hole-or-round-hole-racks"></a>Demiryolu derlemesi-aletsiz raylar (köşeli delik veya yuvarlak delik raflar)
 
-Ek bileşenini kare veya yuvarlak delik Raflarla için rails yüklemek ve derlemek için bu yordamı izleyin. 
+Ek bileşen kare veya yuvarlak delikleri olan raflar için, bu yordamı izleyerek rayları toplayın ve yükler. 
 
-1. Etiketli sol ve sağ parmaklık son parçaları konumlandırma **ön** içe karşılıklı. Bu dikey raf çıkıntıları ön tarafındaki boşluklar lisans şekilde son birer konumlandırın. (1)
+1. Sol ve sağ tarafındaki demiryolu bitiş parçalarını, **içe yönlü olarak** etiketlenen şekilde konumlandırın. Her bir son parçayı dikey Raf flantlerinin ön tarafındaki deliklere oturmasını sağlayacak şekilde konumlandırın. (1)
 
-2. Her alt ve üst boşluklar son parçası, bağlamak istediğiniz alanı rafa, hizalayın. (2)
+2. Her bir son parçayı, bağlamak istediğiniz alana en alta ve en üst deliklere hizalayın. (
 
-3. Parmaklık arka ucunu kadar tam lisans dikey raf Flanş ve Mandal tıklama yerine etkileşim kurun. Getirin ve ön uç parça dikey raf Flanş üzerinde bilgisayar lisansı için bu adımları yineleyin. (3)
+3. Dikey Raf flanş üzerinde tam olarak oturana kadar, ve mandal bir yere tıkladığı sürece, rayın arka ucuna katılın. Bu adımları, ön uç parçasını dikey Raf flanş üzerinde konumlandırmak ve oturmek için tekrarlayın. 03
 
 > [!TIP]
-> Rails kaldırmak için Mandal yayın düğmesini uç parça Orta (4) çekme ve her parmaklık unseat.
+> Rayları kaldırmak için, son nokta orta noktasında (4) mandal yayını düğmesini çekin ve her bir demiryolu 'yi serbest bırakın.
 
-![Numaralı adımlara alet rails, kaldırma ve yükleme diyagramı](media/fxt-install/installing-removing-tool-less-rails-400.png)
+![Araç-Less raylarını yükleme ve kaldırma diyagramı, adımlar numaralandırıldı](media/fxt-install/installing-removing-tool-less-rails-400.png)
 
-### <a name="rail-assembly---tooled-rails-threaded-hole-racks"></a>Parmaklık derleme - tooled rails (zincir delik raflar)
+### <a name="rail-assembly---tooled-rails-threaded-hole-racks"></a>Demiryolu derlemesi-toulan raylar (vida dişli delik rafları)
 
-İş parçacıklı boşluklarını Raflarla için rails yüklemek ve derlemek için bu yordamı izleyin.
+İş parçacıklı delikleri olan raflar için, bu yordamı izleyerek rayları toplayın ve yükler.
 
-1. PIN ile düz Eğimli tornavida montaj arka ve ön kaldırın. (1)
-1. Çekme ve bağlama noktalarından kaldırılacak parmaklık Mandal yarı mamullerden döndürün. (2)
-1. Sol ve sağda iki Vida çiftlerini kullanarak ön dikey raf çıkıntıları için rails bağlama ekleyin. (3)
-1. Köşeli ayraçlar karşı arka dikey raf çıkıntıları iletmek ve iki Vida çiftlerini kullanarak bunları eklemek sol ve sağ arka kaydırın. (4)
+1. PIN 'leri ön ve arka bağlama ayraçları düz eğimli bir screwsürücü ile kaldırın. (1)
+1. Montaj ayraçlarından kaldırmak için, demiryolu halkalarını çekin ve döndürün. (
+1. Sol ve sağ montaj rayları, iki adet sayıda screws kullanarak ön dikey rafa monte edilebilir olarak ekleyin. 03
+1. Sol dikey dolapta, sol ve sağ köşeli ayraçlara doğru kaydırın ve iki adet screws çifti kullanarak bunları ekleyin. 4
 
-![Numaralı adımlara tooled rails, kaldırma ve yükleme diyagramı](media/fxt-install/installing-removing-tooled-rails-400.png)
+![Numaralandırılmış adımlarla birlikte toulan rayların yüklenmesi ve kaldırılması diyagramı](media/fxt-install/installing-removing-tooled-rails-400.png)
 
-### <a name="install-the-system-in-the-rack"></a>Rafa sistemini yükleyin
+### <a name="install-the-system-in-the-rack"></a>Sistemi rafa yükler
 
-Azure FXT Edge dosyalayıcı cihazı rafa bağlamak için aşağıdaki adımları izleyin.
+Azure FXT Edge Filer cihazını rafa bağlamak için aşağıdaki adımları izleyin.
 
-1. Bunlar kilitlemek kadar iç slayt rails rafa dışında çekin. (1)
-1. Her cihaz tarafında arka parmaklık standoff bulun ve bunları arka J yuvaları slayt derlemeler halinde düşürün. (2) 
-1. Parmaklık standoffs J yuvalarda yerleştirildiğinden kadar cihaz Aşağı Döndür. (3)
-1. Kilit levers yere tıklayana kadar cihaza içe gönderecektir.
-1. Slayt yayın kilit düğmeleri hem rails (4) tuşuna basın ve cihazı rafa kaydırın.
+1. İç slaydı, parçalara çıkana kadar raf dışına çekin. (1)
+1. Cihazın her tarafında arka rayları bulun ve bunları slayt derlemelerindeki arka uç yuvalarına düşürün. ( 
+1. Tüm RAIL rap 'leri J yuvalarında kümelendirilene kadar cihazı aşağı döndürün. 03
+1. Kilit bir yere tıklatalana kadar cihazı içe gönderin.
+1. Her iki rayda (4) slayt yayını kilidi düğmelerine basın ve cihazı rafa kaydırın.
 
-![Sistem bir raf üstü diyagramda numaralı adımlara yükleyin.](media/fxt-install/installing-system-rack-400.png)
+![Sistem, bir raf diyagramına, numaralanmış adımlarla birlikte yüklenir](media/fxt-install/installing-system-rack-400.png)
 
-### <a name="remove-the-system-from-the-rack"></a>Sistem rafa kaldırın
+### <a name="remove-the-system-from-the-rack"></a>Sistemi rafa kaldır
 
-Cihaz rafa kaldırmak için bu yordamı izleyin. 
+Cihazı rafınızdan kaldırmak için bu yordamı izleyin. 
 
-1. Kilit levers iç rails (1) tarafında bulun.
-2. Her seviyesini yayın konumuna kadar (2) döndürerek kilidini açın.
-3. Sistem tarafının metz'in kavrayın ve parmaklık standoffs J yuvaları önündeki kadar ileriye doğru çekin. Sistem yedekleme ve raf uzağa lift- and -düzeyi surface (3) yerleştirin.
+1. İç rayların (1) tarafındaki kilit çimlerini bulun.
+2. Her mandalını, serbest bırakma konumuna (2) döndürerek açın.
+3. Sistemin yüzlerini korkutın ve RAIL stanon, J yuvalarının önünde oluncaya kadar ileriye doğru çekin. Sistemi rafa kaldırın ve bir düzey yüzeyine (3) yerleştirin.
 
-![Resmi bir sistemi numaralı adımlara raf kaldırılıyor](media/fxt-install/removing-system-rack-400.png)
+![Bir sistemin rafdan kaldırılmasına ve bu adımların numaralandırıldığı gösterimi](media/fxt-install/removing-system-rack-400.png)
 
-### <a name="engage-the-slam-latch"></a>Slam Mandal etkileşim kurun
+### <a name="engage-the-slam-latch"></a>Slad mandalına katılın
 
-1. Öne bakan, sistem her iki tarafında slam Mandal (1) bulun.
-2. Mandal otomatik olarak sistemi rafa gönderildiğinde gibi etkileşim kurun. 
+1. Önde oturun, sistemin her iki tarafında da SLA, (1) topolojinizi bulun.
+2. Sistem rafa itildiğinde, bu, otomatik olarak kullanılır. 
 
-Sistem kaldırırken Mandal serbest bırakmak için (2) çekin.
+Sistemi kaldırırken atmaları serbest bırakmak için, (2) çekin.
 
-İsteğe bağlı sabit bağlama Vida Sevk irsaliyesi için veya diğer kararsız ortamlarda raf sisteme güvenli hale getirmek için sağlanır. Her Mandal altında Sarmal bulun ve bunları #2 ile sıkılaştıran Phillips tornavida (3).
+İsteğe bağlı sabit bağlama screws, sistemin sevkiyata veya diğer kararsız ortamlara karşı güvenlik altına almak için sağlanır. Her mandal altında vidalı bulun ve bunları bir #2 Phillips screwdriver (3) ile güçlendir.
 
-![Numaralandırılmış çizimi ilgi çekici ve slam mandalı bırakılıyor](media/fxt-install/engaging-releasing-slam-latch-400.png)
+![SLA 'nın, SLA 'nın ve serbest bırakılması için numaralandırılmış gösterimi](media/fxt-install/engaging-releasing-slam-latch-400.png)
 
-### <a name="install-the-cable-management-arm"></a>Kablo yönetim kolu yükleyin 
+### <a name="install-the-cable-management-arm"></a>Kablo yönetimi ARM 'yi yükler 
 
-İsteğe bağlı kablo yönetim arm (CMA) ile FXT Edge dosyalayıcı sağlanır. Paketi yüklemek belgelerdeki yönergeleri sağlanır. 
+FXT Edge Filsi ile isteğe bağlı bir kablo yönetimi kolu (CMA) sağlanır. Yüklemeye yönelik yazılı yönergeler pakette verilmiştir. 
 
-1. Paketten ve kablo yönetim arm Seti bileşenlerinin tanımlayın:
-   * CMA Tepsisi (1)
+1. Kablo yönetimi ARM Kit bileşenlerinin paketini açın ve yapın:
+   * CMA tepsisi (1)
    * CMA (2)
-   * (3) naylon kablo KRAVAT sarmalar
-   * CMA eki köşeli ayraçlar (4)
+   * Nylon kablo bağlaması kaydırılır (3)
+   * CMA ek ayraçları (4)
    * Durum göstergesi kablosu (5) 
 
    > [!TIP] 
-   > Sevkiyat raftaki CMA güvenliğini sağlamak için sepetleri hem Tepsisi etrafında KRAVAT sarmalayan döngü ve sıkıca cinch. Bu şekilde CMA güvenli hale getirme sisteminiz kararsız ortamlarda güvenli.
+   > CMA 'nın rafta sevkiyat amacıyla güvenliğini sağlamak için, her iki sepetin ve tepsinin yanı sıra, her iki sepetin da bir yanındaki halkalar alın. CMA 'nın bu şekilde güvenliğini sağlamak, sisteminizi kararsız ortamlarda da güvence altına alacak.
 
-   ![CMA bölümleri gösterimi](media/fxt-install/cma-kit-400.png)
+   ![CMA parçalarının çizimi](media/fxt-install/cma-kit-400.png)
 
-2. CMA Tepsisi yükleyin.
+2. CMA tepsisini yükler.
 
-   CMA Tepsisi desteği sağlar ve CMA için bir tutucu olarak görev yapar. 
+   CMA tepsisi destek sağlar ve CMA için Retainer işlevi görür. 
 
-   1. Hizalama ve her iki tarafındaki Tepsisi rails iç kenarlarında alıcı ayraç ile etkileşim kurun. 
-   1. Tepsisi ileriye doğru yere tıklayana kadar gönderin. (1)
-   1. Tepsisi kaldırmak için mandalı düğmeleri merkezine sığdırması ve alıcı köşeli ayraçlar (2) dışında Tepsisi çekme.
+   1. Tepsinin iç kenarlarındaki alıcı ayraçları ile tepsiyi her tarafını hizalayın ve birlikte devreye koyun. 
+   1. Bir yere tıklaana kadar tepsiyi ileri doğru gönderin. (1)
+   1. Tepsiyi kaldırmak için, mandal yayınlama düğmelerini merkeze doğru sıkıştırın ve tepsiyi alıcı ayraçları dışına çıkarın (2).
 
-   ![CMA Tepsisi yükleme resmi](media/fxt-install/cma-tray-install-400.png)
+   ![CMA tepsisi yüklemesinin çizimi](media/fxt-install/cma-tray-install-400.png)
 
-3. CMA eki köşeli ayraçlar yükleyin. 
+3. CMA ek ayraçları 'nı yükler. 
 
    > [!NOTE]
    >
-   > * Sağa veya sola rota kabloları sistemden nasıl istediğinize bağlı olarak parmaklık, bağlama CMA ekleyebilirsiniz. 
-   > * Kolaylık olması için güç kaynağı (yan A) ters tarafında CMA bağlayın. B tarafında takılmışsa, dış güç kaynağı kaldırmak için CMA kesilmelidir. 
-   > * Her zaman güç kaynakları önce Tepsisi kaldırın. 
+   > * CMA 'yı, sistem üzerinden kabloları nasıl yönlendirdiğinize bağlı olarak, sağ veya sol bağlamak üzere, bir Köl 'ye ekleyebilirsiniz. 
+   > * Kolaylık sağlamak için, CMA 'yı güç tedariklerini (yan A) karşı tarafa bağlayın. B tarafına bağlanmışsa, dış güç kaynağını kaldırmak için CMA 'nın bağlantısı kesilmelidir. 
+   > * Güç kaynakları kaldırılmadan önce her zaman tepsiyi kaldırın. 
 
-   ![CMA köşeli ayraç yükleme resmi](media/fxt-install/cma-bracket-l-r-install-400.png)
+   ![CMA ayracı yüklemesinin çizimi](media/fxt-install/cma-bracket-l-r-install-400.png)
 
-   1. Uygun CMA ek köşeli ayraç (yan B veya yan A) CMA bağlamak istediğiniz tarafı için seçin.
-   1. Karşılık gelen yan A veya B yan işaretleme slayt parmaklık arkasına CMA ek köşeli ayraç yükleyin.
-   1. Köşeli ayraç üzerinde boşluklarını slayt parmaklık iğneleri ile hizalar. Köşeli ayraç Yerleştir kilitler kadar itin. 
+   1. CMA 'yı bağlamak istediğiniz taraf için uygun CMA eki köşeli ayracını seçin (yüz B veya yan A).
+   1. CMA eki köşeli ayracını arka arkaya, karşılık gelen yan A veya yan B işaretine sahip olacak şekilde yükler.
+   1. Köşeli ayracın içindeki delikleri, slayt rampaındaki PIN 'leri ile hizalayın. Yer işareti bitene kadar köşeli ayracı aşağı gönderin. 
 
-4. CMA yükleyin.
+4. CMA 'yı yükler.
 
-   1. Mandal (1) devreye girene kadar sistem arkasına CMA ön ucundaki Mandal slayt derlemenin en içteki ayraç üzerinde uygun. 
-   1. Bir Mandal en dıştaki ayraç ucundaki Mandal (2) devreye girene kadar sığdırır. 
-   1. CMA kaldırmak için her iki tutma (3) iç ve dış Mandal housings üst kısmındaki CMA yayın düğmeleri tuşlarına basarak disengage.
+   1. Sistemin arkasında, MANMA 'nın ön ucundaki manuca, mandal (1) kadar, slayt derlemesinin en içteki köşeli ayracına uydurun. 
+   1. Mandal (2) bitene kadar en dıştaki ayracın sonundaki diğer mandal uydurun. 
+   1. CMA 'yı kaldırmak için, iç ve dış mandallarda (3) en üstündeki CMA yayın düğmelerine basarak her iki kapsayıcıyı da ele edin.
 
-   ![Ana CMA yükleme resmi](media/fxt-install/cma-install-400.png)
+   ![Ana CMA yüklemesinin çizimi](media/fxt-install/cma-install-400.png)
 
-   CMA uzağa erişimi ve hizmet Sistem döndürülebilir. Hinged sonunda, (1) unseat için CMA Tepsisi uzağa taşıyın. Tepsisinden unseated olduktan sonra (2) sistem uzağa CMA swing.
+   CMA, erişim ve hizmet için sistemden dışarıda döndürülür. Alınan uçta, CMA 'yı tepsiden çıkarmak için tepsiyi kaldırın (1). Tepsiden ayrıldıktan sonra, CMA 'yı sistemden uzağa (2) geri dönüşümlü hale gelir.
 
-   ![Hizmet için açık CMA gösterimi Döndürülmüş](media/fxt-install/cma-swing-over-tray-400.png)
+   ![Hizmet için açık olan CMA döndürülmüş gösterimi](media/fxt-install/cma-swing-over-tray-400.png)
 
-## <a name="install-the-front-bezel-optional"></a>(İsteğe bağlı) ön Pano yükleme
+## <a name="install-the-front-bezel-optional"></a>Ön ucu (isteğe bağlı) yükler
 
-Bu bölümde, yükleme ve kaldırma (ekran) Azure FXT Edge dosyalayıcı donanım için ön Pano açıklanmaktadır. 
+Bu bölümde, Azure FXT Edge Filer donanımı için ön KACININ (çok yönlü levha) nasıl yükleneceği ve kaldırılacağı açıklanır. 
 
-Ön pano yüklemek için: 
+Ön ucu yüklemek için: 
 
-1. Bulun ve çerçeve paketinde sağlanan kasa anahtarını kaldırın. 
-1. Çerçeve önüne kasa ile uyumlu hale getirmek ve düğümün sağ tarafındaki rafa takma Flanş üzerinde boşluklarını çerçeve sağ tarafında PIN'ler yerleştirin. 
-1. Kasa üzerine çerçeve sol ucundaki sığdırır. Sol taraftaki düğmeyi yere tıklayana kadar çerçeve tuşuna basın.
-1. Kasa anahtarıyla kilitleyin.
+1. Ana paket içinde sunulan bir kasa anahtarını bulun ve kaldırın. 
+1. Üst öğeyi gövdenin önüne hizalayın ve grafiğin sağ tarafındaki iğneleri, düğümün sağ tarafındaki raf bağlama bezge 'daki deliklere ekleyin. 
+1. Kasanın sol ucuna kasa üzerine uydurun. Sol taraftaki düğme gelene kadar gidilecek yere basın.
+1. Ana nesneyi anahtarla kilitleyin.
 
-Ön pano kaldırmak için: 
-1. Çerçeve kasa anahtarını kullanarak kilidini açın.
-1. Sol tarafta yayın düğmesine basın ve kasa uzağa çerçeve sol ucundaki çekme.
-1. Sağ ucuna tutulabilir ve çerçeve kaldırın.
+Ön ucu kaldırmak için: 
+1. Kasa anahtarını kullanarak, ana bilgisayarın kilidini açın.
+1. Sol taraftaki yayın düğmesine basın ve kasanın sol ucuna kasadan uzağa çekin.
+1. Sağ ucu kaldırır ve ön ucu kaldırın.
    
-   ![Çerçeve ve sol tarafındaki dışa doğru çekerek kaldırma solundaki yayın düğmesini gösteren resim](media/fxt-install/remove-bezel-edited-600.png)
+   ![Bir resmin sol tarafındaki yayın düğmesini ve sol taraftan dışarı doğru çekerek nasıl kaldırılacağını gösteren resim](media/fxt-install/remove-bezel-edited-600.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Açılmış ve cihaz yerleştirdiğinizi sonra ağ kablosu ekleme ve bir Azure FXT Edge dosyalayıcı AC gücü bağlanarak kurulum devam edin.
+Cihazı paketten kaldırarak ve geçirdikten sonra, ağ kablolarını ekleyerek ve Azure FXT Edge Filkına AC gücü bağlayarak kuruluma devam edin.
 
 > [!div class="nextstepaction"]
-> [Ağ bağlantı noktalarının kablo ve güç kaynağı](fxt-network-power.md)
+> [Ağ bağlantı noktaları ve sağlama gücü kablosu](fxt-network-power.md)

@@ -10,7 +10,7 @@
     - name: Dağıtma ve yapılandırma
       href: tutorial-firewall-deploy-portal.md
     - name: Hibrit ağda dağıtma
-      href: tutorial-hybrid-ps.md
+      href: tutorial-hybrid-portal.md
     - name: DNAT ile gelen trafiği filtreleme
       href: tutorial-firewall-dnat.md
     - name: Tanılama günlüklerini izleme
@@ -39,6 +39,8 @@
   items:
     - name: Azure PowerShell’i kullanarak dağıtma
       href: deploy-ps.md
+    - name: Hibrit ağda dağıtma - PowerShell
+      href: tutorial-hybrid-ps.md
     - name: Azure CLI’yi kullanarak dağıtma
       href: deploy-cli.md
     - name: Şablon kullanarak dağıtma
@@ -49,10 +51,12 @@
       href: deploy-availability-zone-powershell.md
     - name: Yük dengeleyici ile tümleştirme
       href: integrate-lb.md
+    - name: SQL FQDN’leri ile uygulama kuralları
+      href: sql-fqdn-filtering.md
 - name: Başvuru
   items:
     - name: Azure CLI
-      href: /cli/azure/network
+      href: /cli/azure/ext/azure-firewall/network/firewall
     - name: Azure PowerShell
       href: /powershell/module/az.network/new-azfirewall
     - name: .NET

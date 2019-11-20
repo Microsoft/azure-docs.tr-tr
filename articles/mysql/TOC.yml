@@ -4,6 +4,8 @@
   items:
     - name: MySQL için Azure DB nedir?
       href: overview.md
+    - name: Hangi MySQL seçeneğini kullanmalıyım?
+      href: select-right-deployment-type.md
 - name: Hızlı Başlangıçlar
   expanded: true
   items:
@@ -55,6 +57,8 @@
   items:
     - name: Azure CLI
       href: sample-scripts-azure-cli.md
+    - name: Java bağlantı havuzu
+      href: sample-scripts-java-connection-pooling.md
 - name: Kavramlar
   items:
     - name: DB ve Sunucular
@@ -69,6 +73,8 @@
       items:
         - name: Fiyatlandırma katmanları
           href: concepts-pricing-tiers.md
+        - name: Ayrılmış kapasite için ön ödeme yapma
+          href: concept-reserved-pricing.md
         - name: Sınırlar
           href: concepts-limits.md
     - name: Veri erişimi ve güvenlik
@@ -79,13 +85,14 @@
           href: concepts-ssl-connection-security.md
         - name: Gelişmiş Tehdit Koruması
           href: concepts-data-access-and-security-threat-protection.md
-        - name: Sanal ağ
+        - name: Sanal Ağ
           href: concepts-data-access-and-security-vnet.md
         - name: Bağlantı mimarisi
           href: concepts-connectivity-architecture.md
     - name: İş sürekliliği
       items:
-        - name: Genel Bakış
+        - name: İş sürekliliğine giriş
+          displayName: 'backup, restore, backups, restores, georestore, geo-restore, outage'
           href: concepts-business-continuity.md
         - name: Yedekleme ve geri yükleme
           href: concepts-backup.md
@@ -127,7 +134,7 @@
           href: concepts-read-replicas.md
 - name: Nasıl yapılır kılavuzları
   items:
-    - name: Sunucu Yönetme
+    - name: Sunucu yönetme
       items:
         - name: Azure portal
           href: howto-create-manage-server-portal.md
@@ -171,6 +178,8 @@
       items:
         - name: Azure portal
           href: howto-auto-grow-storage-portal.md
+        - name: Azure CLI
+          href: howto-auto-grow-storage-cli.md
     - name: Sunucu günlüklerine erişme
       items:
         - name: Yavaş sorgu günlükleri
@@ -193,7 +202,7 @@
           href: howto-data-in-replication.md
         - name: Azure portalda okuma amaçlı çoğaltma oluşturma
           href: howto-read-replicas-portal.md
-        - name: Azure CLI'de okuma amaçlı çoğaltma oluşturma
+        - name: 'Azure CLI, REST API okuma amaçlı çoğaltma oluşturma'
           href: howto-read-replicas-cli.md
     - name: Sorun giderme
       items:
@@ -227,8 +236,8 @@
       href: /rest/api/mysql
     - name: Resource Manager şablonu
       href: /azure/templates/microsoft.dbformysql/allversions
-    - name: Veri içi çoğaltma saklı yordamları
-      href: reference-data-in-stored-procedures.md
+    - name: Yönetim saklı yordamları
+      href: reference-stored-procedures.md
 - name: Kaynaklar
   items:
     - name: Dağıtım şablonları
@@ -238,7 +247,7 @@
     - name: Fiyatlandırma
       href: 'https://azure.microsoft.com/pricing/details/mysql/'
     - name: MSDN forumu
-      href: 'https://social.msdn.microsoft.com/forums/security/en-US/home?forum=AzureDatabaseforMySQL'
+      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureDatabaseforMySQL'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-database-mysql'
     - name: Videolar

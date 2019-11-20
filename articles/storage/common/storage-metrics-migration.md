@@ -1,121 +1,120 @@
 ---
-title: Azure depolama ölçümleri geçiş | Microsoft Docs
-description: Azure İzleyici tarafından yönetilen yeni ölçümler için eski ölçümleri geçirmeyi öğrenin.
-services: storage
+title: Azure depolama ölçümleri geçişi | Microsoft Docs
+description: Eski ölçümleri Azure Izleyici tarafından yönetilen yeni ölçümlere geçirmeyi öğrenin.
 author: normesta
 ms.service: storage
-ms.topic: article
+ms.topic: conceptual
 ms.date: 03/30/2018
 ms.author: normesta
 ms.reviewer: fryu
 ms.subservice: common
-ms.openlocfilehash: 58ac15c1aba715c9a5b67e723401b531e76608b2
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 537369c9466b1083723642ec9e93fcdf25056c5e
+ms.sourcegitcommit: 670c38d85ef97bf236b45850fd4750e3b98c8899
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65153592"
+ms.lasthandoff: 08/08/2019
+ms.locfileid: "68855333"
 ---
 # <a name="azure-storage-metrics-migration"></a>Azure depolama ölçümleri geçişi
 
-Azure İzleyici deneyimini birleştirme stratejisini ile hizalanmış, Azure depolama ölçümlerini Azure İzleyici platforma tümleştirilir. Gelecekte, eski ölçüm hizmeti, Azure ilkesine göre erken bir bildirim ile sona erer. Eski depolama ölçümleri güveniyorsanız, ölçüm bilgilerinizi korumak için hizmet bitiş tarihinden önce geçirmek gerekir.
+Azure Storage, izleme deneyimini Azure 'da kaldırma stratejisi ile hizalı olarak ölçümleri Azure Izleyici platformu ile tümleştirir. Gelecekte, eski ölçümlerin hizmeti Azure ilkesi temel alınarak erken bir bildirimle sona acaktır. Eski depolama ölçümlerini kullanıyorsanız, ölçüm bilgilerinizi korumak için hizmet bitiş tarihinden önce geçiş yapmanız gerekir.
 
-Bu makalede, eski ölçümleri yeni ölçümlere geçme işlemini göstermektedir.
+Bu makalede, eski ölçülerden yeni ölçümlere nasıl geçiş yapılacağı gösterilmektedir.
 
-## <a name="understand-old-metrics-that-are-managed-by-azure-storage"></a>Azure Depolama tarafından yönetilen eski ölçüleri anlama
+## <a name="understand-old-metrics-that-are-managed-by-azure-storage"></a>Azure depolama tarafından yönetilen eski ölçümleri anlama
 
-Azure depolama eski ölçüm değerleri toplar ve toplar ve bunları aynı depolama hesabındaki tablolar $Metric depolar. İzleme bir hesap için Azure portalını kullanabilirsiniz. Azure depolama SDK'ları, şemaya dayalı $Metric tablolardan verileri okumak için de kullanabilirsiniz. Daha fazla bilgi için [depolama analizi](./storage-analytics.md).
+Azure depolama, eski ölçüm değerlerini toplar ve bunları aynı depolama hesabındaki $Metric tablolarında toplar ve depolar. Bir izleme grafiği ayarlamak için Azure portal kullanabilirsiniz. Şemayı temel alan $Metric tablolarından verileri okumak için Azure Storage SDK 'larını de kullanabilirsiniz. Daha fazla bilgi için bkz. [depolama Analizi](./storage-analytics.md).
 
-Eski ölçüm yalnızca Azure Blob Depolama kapasite ölçümleri sağlar. Eski ölçüm, Blob Depolama, tablo depolama, Azure dosyaları ve kuyruk depolama üzerinde işlem ölçümlerini sağlar.
+Eski ölçümler yalnızca Azure Blob depolama alanı üzerinde kapasite ölçümleri sağlar. Eski ölçümler, BLOB depolama, tablo depolama, Azure dosyaları ve kuyruk depolama üzerinde işlem ölçümleri sağlar.
 
-Eski ölçüm düz bir şemada tasarlanmıştır. Ölçüm tetikleme trafik düzenlerini olmadığında tasarım ölçüm sıfır değerini verir. Örneğin, **ServerTimeoutError** değeri ayarı $Metric tablolardaki 0 olduğunda bile sunucu zaman aşımı hatalarını Canlı trafiği bir depolama hesabına almadığınız.
+Eski ölçümler düz bir şemada tasarlanmıştır. Ölçüyü tetikleyerek trafik desenleri yoksa tasarım sıfır ölçüm değeriyle sonuçlanır. Örneğin, canlı trafiğinden bir depolama hesabına herhangi bir sunucu zaman aşımı hatası almadığınızda bile, **Servertimeouterror** değeri, $Metric tablolarında 0 olarak ayarlanır.
 
-## <a name="understand-new-metrics-managed-by-azure-monitor"></a>Azure İzleyici tarafından yönetilen yeni ölçümler anlama
+## <a name="understand-new-metrics-managed-by-azure-monitor"></a>Azure Izleyici tarafından yönetilen yeni ölçümleri anlama
 
-Yeni depolama ölçümlerine için Azure depolama, ölçüm verilerini Azure İzleyici arka ucuna yayar. Azure İzleyici, veri portalından da dahil olmak üzere birleştirilmiş bir izleme deneyimi sağlar veri alımı yanı sıra. Daha fazla ayrıntı için bu başvurabilirsiniz [makale](../../monitoring-and-diagnostics/monitoring-overview-metrics.md).
+Yeni depolama ölçümleri için Azure depolama, ölçüm verilerini Azure Izleyici arka ucuna yayar. Azure Izleyici, portaldan veriler ve veri alımı dahil olmak üzere Birleşik bir izleme deneyimi sağlar. Daha fazla ayrıntı için bu [makaleye](../../monitoring-and-diagnostics/monitoring-overview-metrics.md)başvurabilirsiniz.
 
-Blob, tablo, dosya, kuyruk ve premium depolama kapasite ölçümleri ve işlem ölçümlerini yeni ölçümler sağlar.
+Yeni ölçümler; blob, tablo, dosya, kuyruk ve Premium depolamada kapasite ölçümleri ve işlem ölçümleri sağlar.
 
-Çok boyutlu Azure İzleyicisi'nin sağladığı özelliklerden biridir. Azure depolama, yeni ölçüm şema tanımlama tasarım devralır. İçin desteklenen boyutlar ölçümlere ilişkin ayrıntılı bilgi bulabilirsiniz [Azure İzleyici'de Azure depolama ölçümleri](./storage-metrics-in-azure-monitor.md). Birden çok boyut tasarımı, her iki bant alımı ve kapasite ölçümleri engeller maliyet verimliliği sağlar. Sonuç olarak, ilgili ölçümleri trafiğiniz tetiklediğini değil, ilgili ölçüm verileri üretilmez. Trafiğiniz sunucu zaman aşımı hatalarını tetiklediğini değil, ölçüm değeri sorguladığınızda, Azure İzleyici herhangi bir veri döndürmüyor **işlemleri** boyut ile **ResponseType** eşittir **ServerTimeoutError**.
+Çoklu boyut, Azure Izleyicisinin sağladığı özelliklerden biridir. Azure depolama, yeni ölçüm şeması tanımlama bölümünde tasarımı benimsemektedir. Ölçümler üzerinde desteklenen boyutlar için Azure [izleyici 'de Azure depolama ölçümleri](./storage-metrics-in-azure-monitor.md)' nde ayrıntıları bulabilirsiniz. Çok boyutlu tasarım, ölçüm ve kapasite depolama alanından her iki bant genişliği için maliyet verimliliği sağlar. Sonuç olarak, trafiğiniz ilgili ölçümleri tetiklememiş ise ilgili ölçüm verileri oluşturulmaz. Örneğin, trafiğiniz sunucu zaman aşımı hatalarını tetiklerse, Azure Izleyici, boyut **responseType** değeri **Servertimeouterror**'e eşit olan ölçüm **işlemlerinin** değerini sorgulayıp hiçbir veri döndürmez.
 
-## <a name="metrics-mapping-between-old-metrics-and-new-metrics"></a>Eski ölçüm ve yeni ölçümler arasında eşleme ölçümleri
+## <a name="metrics-mapping-between-old-metrics-and-new-metrics"></a>Eski ölçümler ve yeni ölçümler arasında ölçüm eşlemesi
 
-Ölçüm verilerini programlı bir şekilde okuyun, programlarınızda yeni ölçüm şeması kullanmaları gerekir. Değişiklikleri daha iyi anlamak için aşağıdaki tabloda listelenen eşleme başvurabilirsiniz:
+Ölçüm verilerini programlı olarak okuduğunuzda, programlarınızda yeni ölçüm şemasını benimsemeniz gerekir. Değişiklikleri daha iyi anlamak için aşağıdaki tabloda listelenen eşlemeye başvurabilirsiniz:
 
 **Kapasite ölçümleri**
 
 | Eski ölçüm | Yeni ölçüm |
 | ------------------- | ----------------- |
-| **Kapasite**            | **BlobCapacity** boyutuyla **BlobType** eşit **BlockBlob** veya **PageBlob** |
-| **ObjectCount**        | **BLOB sayısı** boyutuyla **BlobType** eşit **BlockBlob** veya **PageBlob** |
+| **Kapasite**            | **Blobtype** , **Blok Blobu** veya **Pageblob** değerine eşit olan **blobcapacity** |
+| **ObjectCount**        | **Blobtype değeri** **Blockblob** veya **Pageblob** değerine eşit olan **blobcount** |
 | **ContainerCount**      | **ContainerCount** |
 
-Aşağıdaki ölçümler eski ölçümleri desteklemeyen yeni teklifler şunlardır:
-* **TableCapacity**
-* **TableCount**
+Aşağıdaki ölçümler, eski ölçümlerin desteklemediği yeni tekliflerdir:
+* **Tablokapasitesi**
+* **Tablosayısı**
 * **TableEntityCount**
 * **QueueCapacity**
 * **QueueCount**
 * **QueueMessageCount**
-* **FileCapacity**
+* **Dosya kapasitesi**
 * **FileCount**
-* **FileShareCount**
+* **Dosya ShareCount**
 * **UsedCapacity**
 
 **İşlem ölçümleri**
 
 | Eski ölçüm | Yeni ölçüm |
 | ------------------- | ----------------- |
-| **AnonymousAuthorizationError** | Boyut ile işlemleri **ResponseType** eşit **AuthorizationError** ve boyut **kimlik doğrulaması** eşit **anonim** |
-| **AnonymousClientOtherError** | Boyut ile işlemleri **ResponseType** eşit **ClientOtherError** ve boyut **kimlik doğrulaması** eşit **anonim** |
-| **AnonymousClientTimeoutError** | Boyut ile işlemleri **ResponseType** eşit **ClientTimeoutError** ve boyut **kimlik doğrulaması** eşit **anonim** |
-| **AnonymousNetworkError** | Boyut ile işlemleri **ResponseType** eşit **NetworkError** ve boyut **kimlik doğrulaması** eşit **anonim** |
-| **AnonymousServerOtherError** | Boyut ile işlemleri **ResponseType** eşit **ServerOtherError** ve boyut **kimlik doğrulaması** eşit **anonim** |
-| **AnonymousServerTimeoutError** | Boyut ile işlemleri **ResponseType** eşit **ServerTimeoutError** ve boyut **kimlik doğrulaması** eşit **anonim** |
-| **AnonymousSuccess** | Boyut ile işlemleri **ResponseType** eşit **başarı** ve boyut **kimlik doğrulaması** eşit **anonim** |
-| **AnonymousThrottlingError** | Boyut ile işlemleri **ResponseType** eşit **ClientThrottlingError** veya **ServerBusyError** ve boyut **kimlikdoğrulaması** eşit **anonim** |
-| **AuthorizationError** | Boyut ile işlemleri **ResponseType** eşit **AuthorizationError** |
+| **AnonymousAuthorizationError** | Boyut **responseType** değerine eşit olan Işlemler, **Authorizationerror** ve boyut **kimlik doğrulaması** **anonim** değere eşit |
+| **Anonymousclienentothererror** | Boyut **responseType** değerine eşittir **Clienentothererror** ve boyut **Authentication** , **anonim** olarak eşit |
+| **AnonymousClientTimeoutError** | Boyut **responseType değeri** **Clienttimeouterror** değerine eşit ve boyut **kimlik doğrulaması** **anonim** olarak eşit olan işlemler |
+| **AnonymousNetworkError** | Boyut **responseType** değerine eşit olan Işlemler, **Networkerror** ve boyut **kimlik doğrulaması** **anonim** olarak eşittir |
+| **AnonymousServerOtherError** | Boyut **responseType** değerine eşit olan işlem sayısı, **Sunucudiğerhata** ve boyut **kimlik doğrulaması** **anonim** olarak eşittir |
+| **AnonymousServerTimeoutError** | Boyut **responseType değeri** **Servertimeouterror** değerine eşit ve boyut **kimlik doğrulaması** **anonim** olarak eşit olan işlemler |
+| **AnonymousSuccess** | Boyut **responseType** değerine eşit olan işlemler ve boyut **kimlik doğrulaması** **anonim** olarak eşit |
+| **Anonymouskısıtlar Lingerror** | Boyut **responseType** değerine eşit olan Işlem, **Clientkısıtlar Lingerror** veya **Serverbusyerror** ve boyut **kimlik doğrulaması** **anonim** değere eşit |
+| **AuthorizationError** | Boyut **responseType** Ile **authorizationerror** 'a eşit işlemler |
 | **Kullanılabilirlik** | **Kullanılabilirlik** |
-| **AverageE2ELatency** | **Başarı E2e** |
-| **AverageServerLatency** | **SuccessServerLatency** |
-| **ClientOtherError** | Boyut ile işlemleri **ResponseType** eşit **ClientOtherError** |
-| **ClientTimeoutError** | Boyut ile işlemleri **ResponseType** eşit **ClientTimeoutError** |
-| **NetworkError** | Boyut ile işlemleri **ResponseType** eşit **NetworkError** |
-| **PercentAuthorizationError** | Boyut ile işlemleri **ResponseType** eşit **AuthorizationError** |
-| **PercentClientOtherError** | Boyut ile işlemleri **ResponseType** eşit **ClientOtherError** |
-| **Percentnetworkerror'da** | Boyut ile işlemleri **ResponseType** eşit **NetworkError** |
-| **PercentServerOtherError** | Boyut ile işlemleri **ResponseType** eşit **ServerOtherError** |
-| **PercentSuccess** | Boyut ile işlemleri **ResponseType** eşit **başarılı** |
-| **Percentthrottlingerror'da** | Boyut ile işlemleri **ResponseType** eşit **ClientThrottlingError** veya **ServerBusyError** |
-| **Percenttimeouterror'da** | Boyut ile işlemleri **ResponseType** eşit **ServerTimeoutError** veya **ResponseType** eşit **ClientTimeoutError** |
-| **SASAuthorizationError** | Boyut ile işlemleri **ResponseType** eşit **AuthorizationError** ve boyut **kimlik doğrulaması** eşit **SAS** |
-| **SASClientOtherError** | Boyut ile işlemleri **ResponseType** eşit **ClientOtherError** ve boyut **kimlik doğrulaması** eşit **SAS** |
-| **SASClientTimeoutError** | Boyut ile işlemleri **ResponseType** eşit **ClientTimeoutError** ve boyut **kimlik doğrulaması** eşit **SAS** |
-| **SASNetworkError** | Boyut ile işlemleri **ResponseType** eşit **NetworkError** ve boyut **kimlik doğrulaması** eşit **SAS** |
-| **SASServerOtherError** | Boyut ile işlemleri **ResponseType** eşit **ServerOtherError** ve boyut **kimlik doğrulaması** eşit **SAS** |
-| **SASServerTimeoutError** | Boyut ile işlemleri **ResponseType** eşit **ServerTimeoutError** ve boyut **kimlik doğrulaması** eşit **SAS** |
-| **SASSuccess** | Boyut ile işlemleri **ResponseType** eşit **başarı** ve boyut **kimlik doğrulaması** eşit **SAS** |
-| **SASThrottlingError** | Boyut ile işlemleri **ResponseType** eşit **ClientThrottlingError** veya **ServerBusyError** ve boyut **kimlikdoğrulaması** eşit **SAS** |
-| **ServerOtherError** | Boyut ile işlemleri **ResponseType** eşit **ServerOtherError** |
-| **ServerTimeoutError** | Boyut ile işlemleri **ResponseType** eşit **ServerTimeoutError** |
-| **Başarılı** | Boyut ile işlemleri **ResponseType** eşit **başarılı** |
-| **ThrottlingError** | **İşlem** boyutuyla **ResponseType** eşit **ClientThrottlingError** veya **ServerBusyError**|
+| **AverageE2ELatency** | **SuccessE2ELatency** |
+| **Averageserverlatency gösteriyor** | **Başarılı Sunucugecikmesi** |
+| **Clienentothererror** | Boyut **responseType** 'ı **Clienentothererror** değerine eşit olan işlemler |
+| **ClientTimeoutError** | Boyut **responseType değeri** **Clienttimeouterror** değerine eşit olan işlemler |
+| **NetworkError** | Boyut **responseType** Ile **networkerror** 'a eşit işlemler |
+| **Yüztauthorizationerror** | Boyut **responseType** Ile **authorizationerror** 'a eşit işlemler |
+| **Percentclienentothererror** | Boyut **responseType** 'ı **Clienentothererror** değerine eşit olan işlemler |
+| **PercentNetworkError** | Boyut **responseType** Ile **networkerror** 'a eşit işlemler |
+| **PercentServerOtherError** | Boyut **responseType** değerine eşit olan Işlemler **serverothererror** 'a eşittir |
+| **PercentSuccess** | Boyut **responseType** değerine eşit olan Işlemler **başarılı oldu** |
+| **PercentThrottlingError** | Boyut **responseType değeri** **Clientıngerror** veya **serverbusyerror** değerine eşit olan işlemler |
+| **PercentTimeoutError** | Boyut **responseType değeri** **servertimeouterror** veya **responseType** ile **clienttimeouterror** değerine eşit olan işlemler |
+| **SASAuthorizationError** | Boyut **responseType** değerine eşit olan ve **SAS** 'ye eşit boyut **kimlik doğrulaması** olan işlemler |
+| **SASClientOtherError** | Boyut **responseType** değerine eşit olan ve **SAS** 'e eşit boyut **kimlik doğrulaması** olan işlemler |
+| **SASClientTimeoutError** | Boyut **responseType değeri** **Clienttimeouterror** ve boyut **kimlik doğrulaması** **SAS** ile eşit olan işlemler |
+| **SASNetworkError** | Boyut **responseType** değerine eşit olan Işlemler, **Networkerror** ve boyut **kimlik doğrulaması** **SAS** değerine eşit |
+| **SASServerOtherError** | Boyut **responseType** değerine eşit olan ve **SAS** 'e eşit boyut **kimlik doğrulaması** olan işlemler |
+| **SASServerTimeoutError** | Boyut **responseType değeri** **Servertimeouterror** ve boyut **kimlik doğrulaması** **SAS** değerine eşit olan işlemler |
+| **SASSuccess** | Boyut **responseType** değerine eşit ve boyut **kimlik doğrulaması** **SAS** değerine eşit olan işlemler |
+| **Saskısıtlar Lingerror** | Boyut **responseType** değerine eşit olan Işlem, **Clientkısıtlar lingerror** veya **serverbusyerror** ve **SAS** ile aynı boyut **kimlik doğrulaması** |
+| **ServerOtherError** | Boyut **responseType** değerine eşit olan Işlemler **serverothererror** 'a eşittir |
+| **ServerTimeoutError** | Boyut **responseType değeri** **Servertimeouterror** değerine eşit olan işlemler |
+| **Başarılı** | Boyut **responseType** değerine eşit olan Işlemler **başarılı oldu** |
+| **Kısıtlar Lingerror** | Boyut **responseType değeri** **Clientıngerror** veya **serverbusyerror** değerine eşit olan **işlemler**|
 | **TotalBillableRequests** | **İşlemler** |
 | **TotalEgress** | **Çıkış** |
 | **Totalıngress** | **Giriş** |
-| **TotalRequests** | **İşlemler** |
+| **Toplam Istek sayısı** | **İşlemler** |
 
 ## <a name="faq"></a>SSS
 
-### <a name="how-should-i-migrate-existing-alert-rules"></a>Mevcut uyarı kuralları nasıl geçirmeniz gerekir?
+### <a name="how-should-i-migrate-existing-alert-rules"></a>Mevcut uyarı kurallarını nasıl geçirmem gerekir?
 
-Eski depolama ölçümlere göre Klasik uyarı kuralları oluşturursanız, yeni uyarı kuralları yeni ölçüm şemaya dayalı oluşturmanız gerekir.
+Eski depolama ölçümlerini temel alan klasik uyarı kuralları oluşturduysanız yeni ölçüm şemasına göre yeni uyarı kuralları oluşturmanız gerekir.
 
-### <a name="is-new-metric-data-stored-in-the-same-storage-account-by-default"></a>Yeni ölçüm verileri varsayılan olarak aynı depolama hesabında depolanır?
+### <a name="is-new-metric-data-stored-in-the-same-storage-account-by-default"></a>Yeni ölçüm verileri varsayılan olarak aynı depolama hesabında depolanır mi?
 
-Hayır. Ölçüm verileri bir depolama hesabına arşivleme için kullanın [Azure İzleyici tanılama ayarı API](https://docs.microsoft.com/rest/api/monitor/diagnosticsettings/createorupdate).
+Hayır. Ölçüm verilerini bir depolama hesabına arşivlemek için [Azure Izleyici tanılama AYARı API](https://docs.microsoft.com/rest/api/monitor/diagnosticsettings/createorupdate)'sini kullanın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Azure İzleyici](../../monitoring-and-diagnostics/monitoring-overview.md)
-* [Azure İzleyici'de depolama ölçümleri](./storage-metrics-in-azure-monitor.md)
+* [Azure Izleyici 'de depolama ölçümleri](./storage-metrics-in-azure-monitor.md)

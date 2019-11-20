@@ -1,6 +1,6 @@
 ---
-title: Azure Service Fabric ters proxy tanılama | Microsoft Docs
-description: İzleme ve isteği işlemeye ters proxy Tanılama hakkında bilgi edinin.
+title: Azure Service Fabric ters proxy tanılaması | Microsoft Docs
+description: İstek işlemenin ters proxy 'de nasıl izleneceğini ve tanılacağınızı öğrenin.
 services: service-fabric
 documentationcenter: .net
 author: kavyako
@@ -13,36 +13,36 @@ ms.tgt_pltfrm: na
 ms.workload: required
 ms.date: 08/08/2017
 ms.author: kavyako
-ms.openlocfilehash: c9c8c649208cff95f4ee515d39cc8cca3e2c64bf
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6074b799e992371d41de050f68690e450f008789
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60726851"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72933961"
 ---
-# <a name="monitor-and-diagnose-request-processing-at-the-reverse-proxy"></a>İzleme ve isteği işlemeye ters proxy tanılama
+# <a name="monitor-and-diagnose-request-processing-at-the-reverse-proxy"></a>İstek işlemesini ters ara sunucuda izleme ve tanılama
 
-Service Fabric 5.7 sürümünden itibaren ters proxy olayları koleksiyonu için kullanılabilir. Olayları yalnızca hata olaylarıyla istek işleme hatası ters proxy ve girişi başarılı ve başarısız istekler için Ayrıntılı olayları içeren ikinci bir kanal ile ilgili iki kanalda kullanılabilir.
+Service Fabric 5,7 sürümünden itibaren, ters proxy olayları koleksiyon için kullanılabilir. Olaylar, yalnızca ters ara sunucuda ve hem başarılı hem de başarısız istekler için girişlerle birlikte ayrıntılı olayları içeren ikinci kanalda yalnızca istek işleme hatası ile ilgili hata olaylarını içeren iki kanalda kullanılabilir.
 
-Başvurmak [ters proxy olayları toplamak](service-fabric-diagnostics-event-aggregation-wad.md#log-collection-configurations) yerel ve Azure Service Fabric kümeleri bu kanallar toplama olayları etkinleştirmek için.
+Yerel ve Azure Service Fabric kümelerinde bu kanallardan olay toplamayı etkinleştirmek için [ters proxy olayları toplama](service-fabric-diagnostics-event-aggregation-wad.md#log-collection-configurations) bölümüne bakın.
 
 ## <a name="troubleshoot-using-diagnostics-logs"></a>Tanılama günlüklerini kullanarak sorun giderme
-Bir sınırlamasıyla yaygın hata günlüklerinizi yorumlama hakkında bazı örnekler şunlardır:
+Aşağıda, bir birinin karşılaşabileceği ortak hata günlüklerini yorumlama hakkında bazı örnekler verilmiştir:
 
-1. Ters proxy yanıt durum kodu 504 (zaman aşımı) döndürür.
+1. Ters proxy, yanıt durum kodu 504 (zaman aşımı) döndürüyor.
 
-    Nedenlerinden biri, istek zaman aşımı süresi içinde yanıt Hizmeti'nin nedeniyle olabilir.
-   İlk olay günlükleri ters proxy alınan isteği ayrıntılarını aşağıda. 
-   İkinci olay istek hizmetine ileten hata nedeniyle başarısız olduğunu gösterir. "İç hata ERROR_WINHTTP_TIMEOUT =" 
+    Bir nedenden dolayı hizmetin istek zaman aşımı süresi içinde yanıt vermesi başarısız olabilir.
+   Aşağıdaki ilk olay, ters proxy 'de alınan isteğin ayrıntılarını günlüğe kaydeder. 
+   İkinci olay, "iç hata = ERROR_WINHTTP_TIMEOUT" nedeniyle isteğin hizmete iletilirken başarısız olduğunu gösterir 
 
-    Yükü içerir:
+    Yük şunları içerir:
 
-   * **traceId**: Bu GUID, tek bir istek için karşılık gelen tüm olayları ilişkilendirmek için kullanılabilir. İçinde iki olay, traceId aşağıda = **2f87b722-e254-4ac2-a802-fd315c1a0271**, ait oldukları aynı istekle olduğunu belirtmek.
-   * **requestUrl**: İsteğin gönderildiği URL (ters proxy URL'si).
-   * **Fiili**: HTTP fiili.
-   * **remoteAddress**: İstemci isteği gönderen adresi.
-   * **resolvedServiceUrl**: Gelen istek çözümlendiği hizmet uç noktası URL'si. 
-   * **Hata ayrıntıları**: Hatayla ilgili ek bilgiler.
+   * **TraceID**: Bu GUID, tek bir istekle eşleşen tüm olayları ilişkilendirmek için kullanılabilir. Aşağıdaki iki olay olan TraceID = **2f87b722-e254-4AC2-A802-fd315c1a0271**, aynı isteğe ait olduğunu kesin.
+   * **requestURL**: ISTEĞIN gönderildiği URL (ters proxy URL 'si).
+   * **fiil**: http fiili.
+   * **RemoteAddress**: isteği gönderen istemcinin adresi.
+   * **resolvedServiceUrl**: gelen isteğin çözümlendiği hizmet uç noktası URL 'si. 
+   * **ErrorDetails**: hata hakkında ek bilgi.
 
      ```
      {
@@ -81,12 +81,12 @@ Bir sınırlamasıyla yaygın hata günlüklerinizi yorumlama hakkında bazı ö
      }
      ```
 
-2. Ters proxy yanıt durum kodu 404 (bulunamadı) döndürür. 
+2. Ters proxy, yanıt durum kodu 404 (bulunamadı) döndürüyor. 
     
-    Eşleşen hizmet uç noktasını bulmak başarısız olduğu ters proxy 404 döndüğü bir örnek olay aşağıdadır.
-    Burada ilgi yükü girişler:
-   * **processRequestPhase**: İstek işleme sırasında hatanın oluştuğu andaki aşamasını gösterir ***TryGetEndpoint*** yani iletmek için hizmet uç noktası getirilmeye çalışılırken. 
-   * **Hata ayrıntıları**: Uç nokta arama ölçütlerini listeler. Burada, listenerName belirttiğiniz görebilirsiniz = **FrontEndListener** çoğaltma uç nokta listesi yalnızca ada sahip bir dinleyici içerirken **OldListener**.
+    Bu, eşleşen hizmet uç noktasını bulamadığı için ters proxy 'nin 404 döndürdüğü örnek bir olay aşağıda verilmiştir.
+    İlgilendiğiniz yük girişleri şunlardır:
+   * **Processrequestphase**: hata oluştuğunda istek işleme sırasındaki aşamayı gösterir, ***trygetendpoint*** ör iletmek için hizmet uç noktası getirilmeye çalışılırken. 
+   * **ErrorDetails**: uç nokta arama ölçütlerini listeler. Burada listenerName belirtilen = **Frontendlistener** olduğunu ve çoğaltma uç noktası listesinin yalnızca **oldlistener**adlı bir dinleyici içerdiğini görebilirsiniz.
     
      ```
      {
@@ -104,16 +104,16 @@ Bir sınırlamasıyla yaygın hata günlüklerinizi yorumlama hakkında bazı ö
      }
      }
      ```
-     Ters proxy döndürdüğü 404 başka bir örnek olduğundan bulunamadı: ApplicationGateway\Http yapılandırma parametresi **SecureOnlyMode** ters proxy ile true olarak ayarlanırsa üzerinde dinleme **HTTPS**, ancak yineleme bitiş noktalarının tümü güvenli olmayan (HTTP dinleme).
-     Bir uç nokta isteği iletmek için HTTPS dinleme bulunamıyor beri proxy döndürür 404 tersine çevirir. Yük sorunu daraltmak için yardımcı olur olay parametreleri analiz ediliyor:
+     Ters proxy 'nin 404 döndürdüğü başka bir örnek: ApplicationGateway\Http yapılandırma parametresi **Secureonlymode** , **https**üzerinde dinleme yapan ters proxy ile true olarak ayarlanır, ancak tüm çoğaltma uç noktaları güvenli değildir ( HTTP üzerinde dinleme).
+     Ters proxy, isteği iletmek için HTTPS üzerinde dinleme yapan bir uç nokta bulamadığı için 404 döndürür. Olay yükünde parametreleri çözümlemek sorunu daraltmaya yardımcı olur:
     
      ```
       "errorDetails": "SecureOnlyMode = true, gateway protocol = https, listenerName = NewListener, replica endpoint = {\"Endpoints\":{\"OldListener\":\"Http:\/\/localhost:8491\/LocationApp\/\", \"NewListener\":\"Http:\/\/localhost:8492\/LocationApp\/\"}}"
      ```
 
-3. İstek ters proxy için bir zaman aşımı hatası ile başarısız olur. 
-    Olay günlükleri, olay (burada gösterilmiyor) alınan istek ayrıntılarla içeriyor.
-    Sonraki olayı, hizmeti bir 404 durum kodu ile yanıt verdi ve ters proxy yeniden çözümleyebilir başlatır gösterir. 
+3. Ters ara sunucuya yönelik istek bir zaman aşımı hatasıyla başarısız oluyor. 
+    Olay günlükleri alınan istek ayrıntılarına sahip bir olay içerir (burada gösterilmez).
+    Sonraki olay, hizmetin 404 durum kodu ile yanıt verdiğini ve ters proxy 'nin yeniden çözümlenme işlemini başlattığını gösterir. 
 
     ```
     {
@@ -134,11 +134,11 @@ Bir sınırlamasıyla yaygın hata günlüklerinizi yorumlama hakkında bazı ö
       }
     }
     ```
-    Tüm olayları toplayan her çözmek ve iletme girişimi gösteren olayların trene görürsünüz.
-    İstek işleme başarılı çözümleme girişimi sayısı ile birlikte bir zaman aşımı ile başarısız oldu serideki son olayın gösterir.
+    Tüm olayları toplarken, her çözümle ve ileriye doğru girişimi gösteren bir olay eğitimi görürsünüz.
+    Serideki son olay, istek işlemenin başarısız bir zaman aşımı ile başarısız olduğunu gösterir ve bu da başarılı çözümleme denemeleri sayısıdır.
     
     > [!NOTE]
-    > Varsayılan olarak devre dışı ayrıntılı kanal olay koleksiyonu tutmak ve bir gereksinim olarak sorun giderme için etkinleştirmek için önerilir.
+    > Varsayılan olarak, ayrıntılı kanal olay koleksiyonunun devre dışı bırakılması ve gereksinim temelinde sorun giderme için etkinleştirilmesi önerilir.
 
     ```
     {
@@ -157,13 +157,13 @@ Bir sınırlamasıyla yaygın hata günlüklerinizi yorumlama hakkında bazı ö
     }
     ```
     
-    Yalnızca kritik/hata olaylarını toplama etkinse, zaman aşımı ve çözümleme girişimi sayısını ayrıntılarını içeren bir olay bakın. 
+    Koleksiyon yalnızca kritik/hata olayları için etkinleştirilirse, zaman aşımı ve çözümleme denemelerinin sayısı hakkındaki ayrıntıları içeren bir olay görürsünüz. 
     
-    Kullanıcı için bir 404 durum kodu göndermek istediğiniz hizmetleri, bir "X-ServiceFabric" üst bilgisi yanıtta eklemelidir. Yanıt üst bilgisi eklendikten sonra ters proxy durum kodunu istemciye geri gönderir.  
+    Kullanıcıya 404 durum kodu gönderilmesini sağlayan hizmetler yanıta bir "X-ServiceFabric" üst bilgisi eklemeli. Üst bilgi yanıta eklendikten sonra, ters proxy durum kodunu istemciye geri iletir.  
 
-4. İstemci isteği kesildiğinde durumları.
+4. İstemcinin isteği bağlantısı kesildiğinde oluşan durumlar.
 
-    Aşağıdaki olay ters Ara sunucu, istemciye yanıt iletme ancak istemci bağlantısını keser kaydedilir:
+    Ters proxy istemciye yanıtı iletirken, ancak istemcinin bağlantısı kesildiğinde aşağıdaki olay kaydedilir:
 
     ```
     {
@@ -181,24 +181,24 @@ Bir sınırlamasıyla yaygın hata günlüklerinizi yorumlama hakkında bazı ö
       }
     }
     ```
-5. Ters Proxy 404 FABRIC_E_SERVICE_DOES_NOT_EXIST döndürür
+5. Ters proxy 404 FABRIC_E_SERVICE_DOES_NOT_EXIST döndürür
 
-    Hizmet bildirimi içinde hizmet uç noktası için kullanılacak URI düzeni belirtilmediği takdirde FABRIC_E_SERVICE_DOES_NOT_EXIST hata döndürülür.
+    FABRIC_E_SERVICE_DOES_NOT_EXIST hatası, hizmet bildiriminde hizmet uç noktası için URI şeması belirtilmemişse döndürülür.
 
     ```
     <Endpoint Name="ServiceEndpointHttp" Port="80" Protocol="http" Type="Input"/>
     ```
 
-    Sorunu çözmek için kullanılacak URI düzeni bildiriminde belirtin.
+    Sorunu çözmek için, bildirimde URI şemasını belirtin.
     ```
     <Endpoint Name="ServiceEndpointHttp" UriScheme="http" Port="80" Protocol="http" Type="Input"/>
     ```
 
 > [!NOTE]
-> Şu anda websocket isteğini işlemiyle ilgili olayları günlüğe kaydedilmez. Bu, sonraki sürümde eklenecek.
+> WebSocket istek işlemeyle ilgili olaylar şu anda günlüğe kaydedilmez. Bu, sonraki sürüme eklenecektir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Olay toplama ve Windows Azure Tanılama'yı kullanarak koleksiyon](service-fabric-diagnostics-event-aggregation-wad.md) Azure kümelerinde günlük toplamayı etkinleştirmek için.
-* Visual Studio'da Service Fabric olayları görüntülemek için bkz: [İzleyici yerel olarak ve tanılama](service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md).
-* Başvurmak [güvenli hizmetlerine bağlanmak için ters proxy yapılandırma](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/ReverseProxySecureSample#configure-reverse-proxy-to-connect-to-secure-services) için Azure Resource Manager şablonu örnekleri yapılandırmak için farklı hizmet sertifikası ile ters proxy doğrulama seçenekleri güvenli.
-* Okuma [Service Fabric ters proxy'si](service-fabric-reverseproxy.md) daha fazla bilgi için.
+* Azure kümelerinde günlük toplamayı etkinleştirmek için [Windows Azure tanılama kullanan olay toplama ve toplama](service-fabric-diagnostics-event-aggregation-wad.md) .
+* Visual Studio 'da Service Fabric olaylarını görüntülemek için bkz. [yerel olarak izleme ve tanılama](service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md).
+* Farklı hizmet sertifikası doğrulama seçenekleriyle güvenli ters proxy 'yi yapılandırmak üzere Azure Resource Manager şablon örnekleri için [güvenli hizmetlere bağlanmak üzere ters proxy 'Yi yapılandırma](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/Reverse-Proxy-Sample#configure-reverse-proxy-to-connect-to-secure-services) konusuna bakın.
+* Daha fazla bilgi edinmek için [Service Fabric ters proxy](service-fabric-reverseproxy.md) 'yi okuyun.

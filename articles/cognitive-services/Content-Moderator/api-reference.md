@@ -1,46 +1,46 @@
 ---
-title: API Başvurusu - Content Moderator
-titlesuffix: Azure Cognitive Services
-description: Çeşitli içerik denetleme hakkında bilgi edinin ve API'ler için Content Moderator gözden geçirin.
+title: API başvurusu-Content Moderator
+titleSuffix: Azure Cognitive Services
+description: Çeşitli içerik denetleme ve Content Moderator için API 'Leri gözden geçirme hakkında bilgi edinin.
 services: cognitive-services
-author: sanjeev3
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: content-moderator
 ms.topic: reference
 ms.date: 05/29/2019
-ms.author: sajagtap
-ms.openlocfilehash: f802c64e141e8757f633d82ad577fa50f7d076fc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: pafarley
+ms.openlocfilehash: 7fc46d06b68dca074da060b4866186a6242ffad2
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66688893"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72757371"
 ---
-# <a name="content-moderator-api-reference"></a>Content Moderator API'si başvurusu
+# <a name="content-moderator-api-reference"></a>Content Moderator API başvurusu
 
-Azure Content Moderator API'leri ile aşağıdaki şekillerde başlayabilirsiniz:
+Azure Content Moderator API 'Leri ile aşağıdaki yollarla çalışmaya ulaşabilirsiniz:
 
-- Azure portalında [Content Moderator API'si için abone](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesContentModerator).
-- Bkz: [deneyin Content Moderator Web'de](quick-start.md) ile kaydolmak için [Content Moderator İnceleme aracı](https://contentmoderator.cognitive.microsoft.com/).
+- Azure portal, [Content moderator API 'sine abone olun](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesContentModerator).
+- Bkz. [Web üzerinde Content moderator deneyin](quick-start.md) [Content moderator İnceleme aracıyla](https://contentmoderator.cognitive.microsoft.com/)kaydolun.
 
 ## <a name="moderation-apis"></a>Yönetim API’leri
 
-Aşağıdaki Content Moderator API'sine sonrası denetimi akışlarınızı ayarlamak için kullanabilirsiniz.
+Denetleme sonrası iş akışlarınızı ayarlamak için aşağıdaki Content Moderator API 'Lerini kullanabilirsiniz.
 
 | Açıklama | Başvuru |
 | -------------------- |-------------|
-| **Görüntü denetimi API'si**<br /><br />Tarama görüntüleri ve etiketleri, güven puanları ve diğer ayıklanan bilgileri kullanarak olası yetişkinlere yönelik ve müstehcen içerikleri algılayın. <br /><br />Yayımlama, reddetme veya sonrası denetimi iş akışınızda içeriği gözden geçir için bu bilgileri kullanın. <br /><br />| [Görüntü Denetim API'si başvurusu](https://westus.dev.cognitive.microsoft.com/docs/services/57cf753a3f9b070c105bd2c1/operations/57cf753a3f9b070868a1f66c "görüntü denetim API'si başvurusu")   |
-| **Metin denetimi API'si**<br /><br />Metin içeriğini tarar. Küfür hüküm ve kişisel veriler döndürülür. <br /><br />Yayımlama, reddetme veya sonrası denetimi iş akışınızda içeriği gözden geçir için bu bilgileri kullanın.<br /><br /> | [Metin denetimi API'si başvurusu](https://westus.dev.cognitive.microsoft.com/docs/services/57cf753a3f9b070c105bd2c1/operations/57cf753a3f9b070868a1f66f "metin denetimi API'si başvurusu")   |
-| **Video denetimi API'si**<br /><br />Videoları taramak ve olası yetişkinlere yönelik ve müstehcen içerikleri algılayın. <br /><br />Yayımlama, reddetme veya sonrası denetimi iş akışınızda içeriği gözden geçir için bu bilgileri kullanın.<br /><br /> | [Video denetimi API'sine genel bakış](video-moderation-api.md "Video denetimi API'sine genel bakış")   |
-| **Listeyi yönetim API'si**<br /><br />Oluşturun ve resim ve metin özel dışlama veya ekleme listeleri yönetin. Etkinleştirilirse, **görüntü - eşleşen** ve **metin - ekran** işlemleri yapıp özel listelerinizle gönderilen içerik benzer öğe eşleştirmesi. <br /><br />Verimlilik için makine öğrenme tabanlı denetimi adımı atlayabilirsiniz.<br /><br /> | [Yönetim API başvuru listesinde](https://westus.dev.cognitive.microsoft.com/docs/services/57cf755e3f9b070c105bd2c2/operations/57cf755e3f9b070868a1f675 "listesi yönetim API Başvurusu")   |
+| **Görüntü denetleme API 'SI**<br /><br />Etiketleri, güvenirlik puanlarını ve diğer ayıklanan bilgileri kullanarak görüntüleri tarayın ve olası yetişkin ve akıllı içeriği tespit edin. <br /><br />Denetleme sonrası iş akışınızda içerik yayımlamak, reddetmek veya gözden geçirmek için bu bilgileri kullanın. <br /><br />| [Görüntü denetleme API 'SI başvurusu](https://westus.dev.cognitive.microsoft.com/docs/services/57cf753a3f9b070c105bd2c1/operations/57cf753a3f9b070868a1f66c "Görüntü denetleme API 'SI başvurusu")   |
+| **Metin denetleme API 'SI**<br /><br />Metin içeriğini tarayın. Küfür terimleri ve kişisel veriler döndürülür. <br /><br />Denetleme sonrası iş akışınızda içerik yayımlamak, reddetmek veya gözden geçirmek için bu bilgileri kullanın.<br /><br /> | [Metin denetleme API başvurusu](https://westus.dev.cognitive.microsoft.com/docs/services/57cf753a3f9b070c105bd2c1/operations/57cf753a3f9b070868a1f66f "Metin denetleme API başvurusu")   |
+| **Video denetleme API 'SI**<br /><br />Videoları tarayın ve olası yetişkin ve kcy içeriğini tespit edin. <br /><br />Denetleme sonrası iş akışınızda içerik yayımlamak, reddetmek veya gözden geçirmek için bu bilgileri kullanın.<br /><br /> | [Video denetleme API 'sine genel bakış](video-moderation-api.md "Video denetleme API 'sine genel bakış")   |
+| **Yönetim API 'SI Listele**<br /><br />Özel dışlama veya görüntü ve metin ekleme listeleri oluşturun ve yönetin. Etkinleştirilirse, **görüntü eşleştirmesi** ve **metin ekranı** işlemleri, gönderilen içeriğin özel listelerinize karşı benzer şekilde eşleşmesini ister. <br /><br />Verimlilik için makine öğrenimi tabanlı denetleme adımını atlayabilirsiniz.<br /><br /> | [Yönetim API 'SI başvurusunu Listele](https://westus.dev.cognitive.microsoft.com/docs/services/57cf755e3f9b070c105bd2c2/operations/57cf755e3f9b070868a1f675 "Yönetim API 'SI başvurusunu Listele")   |
 
 ## <a name="review-apis"></a>API’leri inceleme
 
-İnceleme API'lerini aşağıdaki bileşenlere sahiptir:
+Inceleme API 'Leri aşağıdaki bileşenlere sahiptir:
 
 | Açıklama | Başvuru |
 | -------------------- |-------------|
-| **İşler**<br /><br /> Hem resim ve metin içeriği için tarama ve gözden geçirme denetimi iş akışları başlatın. Bir denetimi işi görüntü denetim API'si ve metin denetimi API'si kullanarak içeriğinizi tarar. Denetimi işleri tanımlanmış kullanın ve iş akışlarını gözden geçirmeleri oluşturmak için varsayılan. <br /><br />İnsan moderatör otomatik olarak atanan etiketleri ve tahmin verilerini inceleme ve içerik denetleme karar gönderilen sonra gözden geçirme API, API uç noktanıza tüm bilgileri gönderir.<br /><br /> | [Proje başvurusu](https://westus.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c5 "proje başvurusu")   |
-| **Gözden geçirmeler**<br /><br />Görüntü veya metin incelemeleri İnsan Moderatörler için doğrudan oluşturmak için İnceleme aracını kullanın.<br /><br /> İnsan moderatör otomatik olarak atanan etiketleri ve tahmin verilerini inceleme ve içerik denetleme karar gönderilen sonra gözden geçirme API, API uç noktanıza tüm bilgileri gönderir.<br /><br /> | [Gözden geçirin, başvuru](https://westus.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c4 "başvuru gözden geçirme")   |
-| **İş akışları**<br /><br />Oluşturma, güncelleştirme ve ekibinizin oluşturduğu özel iş akışları hakkında ayrıntılı bilgi edinin. İnceleme aracını kullanarak iş akışlarını tanımlarsınız. <br /> <br />İş akışları genellikle Content Moderator kullanır, ancak gözden geçirme Aracı'nda bağlayıcılar olarak kullanılabilen belirli bir API de kullanabilirsiniz.<br /><br /> | [İş akışı başvurusu](https://westus.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/5813b46b3f9b0711b43c4c59 "iş akışı başvurusu")   |
+| **İşler**<br /><br /> Tarama yapın ve hem görüntü hem de metin içeriği için denetleme iş akışlarını gözden geçirin. Bir denetleme işi, görüntü denetleme API 'sini ve metin denetleme API 'sini kullanarak içeriğinizi tarar. Denetleme işleri, gözden geçirmeler oluşturmak için tanımlı ve varsayılan iş akışlarını kullanır. <br /><br />Bir insan aracı otomatik olarak atanan etiketleri ve tahmin verilerini inceledikten ve bir içerik denetleme kararı gönderdikten sonra, gözden geçirme API 'SI tüm bilgileri API uç noktanıza gönderir.<br /><br /> | [İş başvurusu](https://westus.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c5 "İş başvurusu")   |
+| **İnceleyen**<br /><br />İnsan moderatör için doğrudan görüntü veya metin incelemesi oluşturmak için Inceleme aracını kullanın.<br /><br /> Bir insan aracı otomatik olarak atanan etiketleri ve tahmin verilerini inceledikten ve bir içerik denetleme kararı gönderdikten sonra, gözden geçirme API 'SI tüm bilgileri API uç noktanıza gönderir.<br /><br /> | [Başvuruyu gözden geçir](https://westus.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/580519483f9b0709fc47f9c4 "Başvuruyu gözden geçir")   |
+| **İş akışları**<br /><br />Takımınızın oluşturduğu özel iş akışlarıyla ilgili ayrıntıları oluşturun, güncelleştirin ve alın. İş akışlarını gözden geçirme aracını kullanarak tanımlarsınız. <br /> <br />İş akışları genellikle Content Moderator kullanır, ancak Inceleme aracında bağlayıcı olarak kullanılabilen diğer API 'Leri de kullanabilir.<br /><br /> | [İş akışı başvurusu](https://westus.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/5813b46b3f9b0711b43c4c59 "İş akışı başvurusu")   |

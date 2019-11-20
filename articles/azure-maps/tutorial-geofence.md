@@ -1,66 +1,66 @@
 ---
-title: Azure haritalar kullanan bir bölge sınırının oluştur | Microsoft Docs
-description: Azure haritalar'ı kullanarak bir bölge sınırının ayarlayın.
+title: 'Öğretici: Azure haritalar kullanarak bölge oluşturma'
+description: "Öğretici: Azure haritalar 'ı kullanarak bölge düzeni ayarlayın."
 author: walsehgal
 ms.author: v-musehg
-ms.date: 02/14/2019
+ms.date: 11/12/2019
 ms.topic: tutorial
 ms.service: azure-maps
 services: azure-maps
 manager: timlt
 ms.custom: mvc
-ms.openlocfilehash: 112d0bd4b6802179692d0d177775027e552d1170
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 62005546c653796773083eaf625820ab532a8a2c
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60795849"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74107106"
 ---
-# <a name="set-up-a-geofence-by-using-azure-maps"></a>Azure haritalar'ı kullanarak bir bölge sınırının ayarlayın
+# <a name="tutorial-set-up-a-geofence-by-using-azure-maps"></a>Öğretici: Azure haritalar 'ı kullanarak bölge bölge ayarlama
 
-Bu öğreticide Azure haritalar'ı kullanarak döndürürüz ayarlamak için temel adımlarında size kılavuzluk eder. Belirtilen yapı alanları taşıyarak Yardım yapım site yöneticileri İzleyici olası tehlikeli donanımı, biz Bu öğreticide ele bir senaryodur. Bir yapı site pahalı donanım ve düzenlemeleri içerir. Genellikle, ekipman yapım site içinde kalır ve izniniz olmadan bırakmaz gerektirir.
+Bu öğretici, Azure haritalar 'ı kullanarak bölge sınırlaması ayarlama konusunda size kılavuzluk eder. Bu öğreticide adresdığımız senaryo, site yöneticilerinin, belirlenen oluşturma alanlarının ötesine geçen potansiyel tehlikeli donanımları izlemesine yardımcı olur. Bir inşaat sitesi pahalı ekipman ve düzenlemeler içerir. Genellikle, ekipmanın yapım sitesinin içinde kalmasını ve izin olmadan ayrılmamaya gerek yoktur.
 
-Azure haritalar veri karşıya API'si bir bölge sınırının depolamak için kullanırız ve bölge sınırının ekipman konumu bölge sınırının göre denetlemek için API kullanımı Azure eşler. Bölge sınırının sonuçları akış ve bölge sınırının sonuçlarına dayalı bir bildirim ayarlamak için Azure Event Grid kullanacağız.
-Event Grid hakkında daha fazla bilgi için bkz: [Azure Event Grid](https://docs.microsoft.com/azure/event-grid/overview).
-Bu öğreticide, öğreneceksiniz, nasıl yapılır:
+Bölge listesini depolamak için Azure Maps veri yükleme API 'sini kullanacağız ve bölge konumunu, bölge alanına göre denetlemek için Azure Maps geofence API 'sini kullanacağız. Bölge sonuçlarının akışını yapmak ve bölge sonuçlarına dayalı bir bildirim ayarlamak için Azure Event Grid kullanacağız.
+Event Grid hakkında daha fazla bilgi için bkz. [Azure Event Grid](https://docs.microsoft.com/azure/event-grid/overview).
+Bu öğreticide şunları öğreneceksiniz:
 
 > [!div class="checklist"]
-> * Azure haritalar, karşıya yükleme veri API'sini kullanarak veri hizmeti döndürürüz alanında karşıya yükleyin.
-> *   Döndürürüz olayları işlemek için bir olay ızgarası ayarlama.
-> *   Kurulum döndürürüz olay işleyicisi.
-> *   Logic Apps kullanarak döndürürüz olaylara yanıt olarak uyarılar ayarlayın.
-> *   Bir yapı varlık oluşturma site içinde olsun veya olmasın izlemek için Azure haritalar döndürürüz hizmet API'lerini kullanın.
+> * Veri yükleme API 'sini kullanarak Azure Maps, Data Service içindeki bölge bölge alanını karşıya yükleyin.
+> *   Bölge olaylarını işlemek için bir Event Grid ayarlayın.
+> *   Bölge olayları işleyicisini ayarlayın.
+> *   Logic Apps kullanarak bölge sınırı olaylarına yanıt olarak uyarıları ayarlayın.
+> *   Bir oluşturma varlığının yapım sitesi içinde olup olmadığını izlemek için Azure haritalar bölge hizmeti API 'Lerini kullanın.
 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 ### <a name="create-an-azure-maps-account"></a>Azure Haritalar hesabı oluşturma 
 
-Bu öğreticideki adımları tamamlamak için önce görmek ihtiyacınız [hesapları ve anahtarları yönetme](how-to-manage-account-keys.md) oluşturup fiyatlandırma katmanı, hesap aboneliğiniz S1 ile yönetebilirsiniz.
+Bu öğreticideki adımları tamamlayabilmeniz için, S1 fiyatlandırma katmanıyla bir Azure Maps hesap aboneliği oluşturmak üzere [Hesabı Yönet](https://docs.microsoft.com/azure/azure-maps/how-to-manage-account-keys#create-a-new-account) ' deki yönergeleri izleyin ve hesabınıza ilişkin birincil abonelik anahtarını almak için [birincil anahtar al](./tutorial-search-location.md#getkey) bölümündeki adımları izleyin.
 
-## <a name="upload-geofences"></a>Bölge sınırlarının karşıya yükleme
+## <a name="upload-geofences"></a>Bölge dilimleri karşıya yükle
 
-Karşıya veri API'si kullanarak yapı sitenin döndürürüz karşıya yüklemek için postman uygulama kullanacağız. Bu öğretici için yapı ekipman değil ihlal sabit bir parametre bir genel yapı site alanı yok varsayıyoruz. Bu sınır ihlalleri olan ciddi bir red ve Operations Manager'a raporlanır. Ek sınırlar en iyi duruma getirilmiş bir dizi farklı bir yapım izleyen kullanılabilir alanları genel yapı alan zamanlamaya göre. Ana Bölge sınırının süre sonu Ayarla sahip bir subsite1 olduğunu varsayıyoruz saat ve bundan sonra dolar. Gereksinimlerinize göre daha fazla iç içe geçmiş bölge sınırlarının oluşturabilirsiniz. Örneğin, burada iş zamanlamasını 1-4 hafta gerçekleşen ve alt site 2 iş 5-7 hafta içinde gerçekleştiği subsite1 olabilir. Tüm dilimleri proje başına tek bir veri kümesi olarak yüklenir ve kuralları zaman ve yer göre izlemek için kullanılır. Bölge sınırının veri biçimi hakkında daha fazla bilgi için bkz. [Döndürürüz GeoJSON veri](https://docs.microsoft.com/azure/azure-maps/geofence-geojson). Azure haritalar hizmetine karşıya veri yükleme ile ilgili daha fazla bilgi için bkz: [verileri karşıya yükleme API belgeleri](https://docs.microsoft.com/rest/api/maps/data/uploadpreview) .
+Veri yükleme API 'sini kullanarak inşaat sitesinin bölge bölge 'sini karşıya yüklemek için Postman uygulamasını kullanacağız. Bu öğreticinin bir bölümü olarak, yapı donanımının ihlal etmemelidir bir sabit parametre olan genel bir oluşturma site alanı olduğunu varsayalım. Bu çit ihlalleri ciddi bir OFFENSE ve Operations Manager bildirilir. En iyi duruma getirilmiş ek bir küme, genel yapım alanı içindeki farklı oluşturma alanlarının zamanlamaya göre izlenmesi için kullanılabilir. Ana geofalanın, zaman aşımı süresi geçen ve bu süreden sonra sona ereceği bir subsite1 olduğunu varsayabiliriz. Gereksinimlerinize göre daha fazla iç içe bölge oluşturabilirsiniz. Örneğin, subsite1, zamanlamanın 1 ila 4 ' e kadar iş gerçekleştiği ve alt site 2 ' nin hafta 5 ' e kadar iş gerçekleştiği yerdir. Bu tür balıkların hepsi projenin başlangıcında tek bir veri kümesi olarak yüklenebilir ve kuralları saat ve alana göre izlemek için kullanılabilir. Bölge verileri biçimi hakkında daha fazla bilgi için bkz. [bölge bölge coğrafi JSON verileri](https://docs.microsoft.com/azure/azure-maps/geofence-geojson). Verileri Azure Maps hizmetine yükleme hakkında daha fazla bilgi için bkz. [veri yükleme API 'si belgeleri](https://docs.microsoft.com/rest/api/maps/data/uploadpreview) .
 
-Postman uygulamasını açın ve Azure haritalar, verileri karşıya yükleme API kullanan yapı site döndürürüz karşıya yüklemek için aşağıdaki adımları izleyin.
+Postman uygulamasını açın ve Azure Maps, veri yükleme API 'sini kullanarak inşaat sitesini karşıya yüklemek için aşağıdaki adımları izleyin.
 
-1. Postman uygulamasını açıp yeni tıklayın | Yeni oluştur ve istek'i seçin. Bir koleksiyon ya da kaydedin ve klasör kaydetmek karşıya yükleme döndürürüz veriler için select bir istek adı girin.
+1. Postman uygulamasını açın ve yeni ' ye tıklayın | Yeni oluştur ve Istek seç. Bölge bölge verilerini karşıya yükleme için bir Istek adı girin, kaydedilecek bir koleksiyon veya klasör seçin ve Kaydet ' e tıklayın.
 
-    ![Bölge sınırlarının Postman kullanarak karşıya yükleme](./media/tutorial-geofence/postman-new.png)
+    ![Postman kullanarak bölge dilimleri yükleme](./media/tutorial-geofence/postman-new.png)
 
-2. Oluşturucu sekmesinde POST HTTP yöntemini seçin ve bir POST isteğinde bulunmak için aşağıdaki URL'yi girin.
+2. Oluşturucu sekmesinde HTTP SONRASı yöntemi ' ni seçin ve POST isteği oluşturmak için aşağıdaki URL 'YI girin.
 
     ```HTTP
     https://atlas.microsoft.com/mapData/upload?subscription-key={subscription-key}&api-version=1.0&dataFormat=geojson
     ```
     
-    URL yolu GEOJSON parametresinde yüklenen verilerin veri biçimini temsil eder.
+    URL yolundaki GEOJSON parametresi, karşıya yüklenen verilerin veri biçimini temsil eder.
 
-3. Tıklayın **Params**, POST isteği URL'sini kullanılacak aşağıdaki anahtar/değer çiftleri girin. Abonelik anahtarı değerini Azure haritalar abonelik anahtarınız ile değiştirin.
+3. **Parametreler**' e tıklayın ve post isteği URL 'si için kullanılacak aşağıdaki anahtar/değer çiftlerini girin. Abonelik anahtarı değerini Azure Maps birincil abonelik anahtarınızla değiştirin.
    
-    ![Anahtar-değer parametreleri: Postman](./media/tutorial-geofence/postman-key-vals.png)
+    ![Anahtar-değer params Postman](./media/tutorial-geofence/postman-key-vals.png)
 
-4. Tıklayın **gövdesi** sonra ham giriş biçimini seçin ve JSON giriş biçimi açılır listeden seçin. Aşağıdaki JSON verileri olarak karşıya yüklenecek sağlar:
+4. **Gövde** ' ye tıklayın, ham giriş biçimi ' ni seçin ve açılan listeden giriş BIÇIMI olarak JSON ' ı seçin. Karşıya yüklenecek veri olarak aşağıdaki JSON 'ı sağlayın:
 
    ```JSON
    {
@@ -148,117 +148,131 @@ Postman uygulamasını açın ve Azure haritalar, verileri karşıya yükleme AP
    }
    ```
 
-5. Gönder ve yanıt üst bilgisi gözden geçirin. Location üst bilgisini gelecekte kullanım için veri indirin veya URI içeriyor. Ayrıca bir benzersiz içerdiği `udId` karşıya yüklenen veriler için.
+5. Gönder ' e tıklayın ve yanıt üst bilgisini gözden geçirin. Başarılı bir istek olduğunda, **konum** üstbilgisi karşıya yükleme isteğinin geçerli durumunu denetlemek IÇIN durum URI 'sini içerir. Durum URI 'SI aşağıdaki biçimde olacaktır. 
 
    ```HTTP
-   https://atlas.microsoft.com/mapData/{udId}/status?api-version=1.0&subscription-key={Subscription-key}
+   https://atlas.microsoft.com/mapData/{uploadStatusId}/status?api-version=1.0
    ```
 
-## <a name="set-up-an-event-handler"></a>Bir olay işleyicisini
+6. Durum URI 'nizi kopyalayın ve bu değere bir `subscription-key` parametresi ekleyerek Azure Maps hesabı abonelik anahtarınız olacak şekilde ekleyin. Durum URI biçimi aşağıdaki gibi olmalıdır:
 
-Operations Manager enter ve çıkış olayları ile ilgili bilgilendirmek için bildirimleri alan bir olay işleyicisi oluşturmalısınız.
+   ```HTTP
+   https://atlas.microsoft.com/mapData/{uploadStatusId}/status?api-version=1.0&subscription-key={Subscription-key}
+   ```
 
-İki oluşturacağız [Logic Apps](https://docs.microsoft.com/azure/event-grid/event-handlers#logic-apps) işlemek için Hizmetleri girin ve çıkış olayları. Ayrıca bu olaylar tarafından tetiklenen Logic Apps içinde olay tetikleyicilerini oluşturacağız. Fikirdir uyarıları göndermek için bu durumda e-postalar için Operations Manager her donanım girer veya yapım site çıkar. Olay döndürürüz girmek için aşağıdaki şekilde bir mantıksal uygulama oluşturma gösterilmektedir. Benzer şekilde, başka bir çıkış olayının oluşturabilirsiniz.
-Tümünü gör [olay işleyicileri desteklenen](https://docs.microsoft.com/azure/event-grid/event-handlers) daha fazla bilgi için.
+7. `udId` ' ı almak için, Postman uygulamasında yeni bir sekme açın ve Oluşturucu sekmesinde HTTP yöntemi Al ' ı seçin ve durum URI 'sinde bir GET isteği yapın. Karşıya veri yükleme işlemi başarılı olduysa yanıt gövdesinde bir UDID alırsınız. Uıdıd ' i daha sonra kullanmak üzere kopyalayın.
 
-1. Azure Portalı'nda mantıksal uygulama oluşturma
+   ```JSON
+   {
+    "udid" : "{udId}"
+   }
+   ```
 
-   ![Mantıksal uygulamalar oluşturma](./media/tutorial-geofence/logic-app.png)
+## <a name="set-up-an-event-handler"></a>Olay işleyicisi ayarlama
 
-2. Bir HTTP isteği tetikleyicisini seçin ve ardından "outlook Bağlayıcısı'nı bir eylem olarak bir e-posta Gönder"
+Operations Manager giriş ve çıkış olaylarıyla ilgili bilgilendirmek için bildirimleri alan bir olay işleyicisi oluşturacağız.
+
+Olayları işlemek, girmek ve çıkmak için iki [Logic Apps](https://docs.microsoft.com/azure/event-grid/event-handlers#logic-apps) hizmeti oluşturacağız. Ayrıca, bu olaylar tarafından tetiklenen Logic Apps içindeki olay tetikleyicileri de oluşturacağız. Bu durumda, ekipman her seferinde veya çıkış sitesinden çıktığında, bu e-postalara Operations Manager uyarı gönderilmesi önerilir. Aşağıdaki şekilde, bölge sınırı Enter olayı için bir mantıksal uygulama oluşturma gösterilmektedir. Benzer şekilde, çıkış olayı için başka bir tane de oluşturabilirsiniz.
+Daha fazla bilgi için [desteklenen tüm olay işleyicilerini](https://docs.microsoft.com/azure/event-grid/event-handlers) görebilirsiniz.
+
+1. Azure portal bir mantıksal uygulama oluşturma
+
+   ![Logic Apps oluştur](./media/tutorial-geofence/logic-app.png)
+
+2. Bir HTTP isteği tetikleyicisi seçin ve Outlook Bağlayıcısı 'nda "e-posta gönder" eylemini seçin
   
    ![Logic Apps şeması](./media/tutorial-geofence/logic-app-schema.png)
 
-3. HTTP URL'sini kopyalayın ve HTTP URL uç noktasını oluşturmak için mantıksal uygulamayı kaydedin.
+3. HTTP URL uç noktasını oluşturmak için mantıksal uygulamayı kaydedin ve HTTP URL 'sini kopyalayın.
 
    ![Logic Apps uç noktası](./media/tutorial-geofence/logic-app-endpoint.png)
 
 
-## <a name="create-an-azure-maps-events-subscription"></a>Azure haritalar olay aboneliği oluşturma
+## <a name="create-an-azure-maps-events-subscription"></a>Azure haritalar olayları aboneliği oluşturma
 
-Azure haritalar, üç olay türlerini destekler. Azure haritalar'ın desteklenen olay türleri göz olabilir [burada](https://docs.microsoft.com/azure/event-grid/event-schema-azure-maps). İki farklı Aboneliklerde, enter için bir ve çıkış olayları için diğer oluşturacağız.
+Azure haritalar üç olay türünü destekler. Azure haritalar desteklenen olay türlerine [buradan](https://docs.microsoft.com/azure/event-grid/event-schema-azure-maps)göz atabilirsiniz. Biri, diğeri de çıkış olayları için olmak üzere iki farklı abonelik oluşturacağız.
 
-Olayları döndürürüz girmek için bir olay aboneliği oluşturmak için aşağıdaki adımları izleyin. Benzer şekilde döndürürüz çıkış olaylarına abone olabilirsiniz.
+Bölge giriş olayları için bir olay aboneliği oluşturmak üzere aşağıdaki adımları izleyin. Bölge sınırı çıkış olaylarına benzer bir şekilde abone olabilirsiniz.
 
-1. Azure haritalar hesabınız gidin [portal bu bağlantıyı](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/dashboard/) ve olayları sekmesini seçin.
+1. [Bu portal bağlantısı](https://ms.portal.azure.com/#@microsoft.onmicrosoft.com/dashboard/) aracılığıyla Azure haritalar hesabınıza gidin ve olaylar sekmesini seçin.
 
    ![Azure haritalar olayları](./media/tutorial-geofence/events-tab.png)
 
-2. Bir olay aboneliği oluşturmak için olaylar sayfasından olay aboneliği seçin.
+2. Bir olay aboneliği oluşturmak için olaylar sayfasından olay aboneliği ' ni seçin.
 
    ![Azure haritalar olayları aboneliği](./media/tutorial-geofence/create-event-subscription.png)
 
-3. Olay aboneliği adlandırın ve Enter olay türüne abone olun. Artık Web kancası "Uç noktası türü" olarak seçin ve "Uç", mantıksal uygulama HTTP URL uç noktasını kopyalayın
+3. Olayların aboneliğini adlandırın ve ENTER olay türüne abone olun. Şimdi "uç nokta türü" olarak Web kancası ' yi seçin ve mantıksal uygulamanızın HTTP URL uç noktasını "uç noktaya" kopyalayın
 
    ![Olay aboneliği](./media/tutorial-geofence/events-subscription.png)
 
 
-## <a name="use-geofence-api"></a>Bölge sınırının API kullanın
+## <a name="use-geofence-api"></a>Geofence API kullanma
 
-Bölge sınırının API denetlemek için kullanabileceğiniz olup olmadığını bir **cihaz** (donanım durum bir parçası değildir) içinde veya dışında bir döndürürüz. API alma döndürürüz daha iyi anlamak için. Biz, zaman içinde belirli bir donanım taşındığı farklı konumlara karşı sorgu. Aşağıdaki şekilde, belirli bir yapı cihazlarınızla benzersiz bir beş konumlarını gösterilmektedir **cihaz kimliği** kronolojik sırayla gözlemlenen. Bu beş konumların her biri döndürürüz değerlendirmek için kullanılan giriş ve çıkış dilimi karşı durum değişikliği. Bir durum değişikliği ortaya çıkarsa, bölge sınırının service mantıksal uygulama için Event Grid tarafından gönderilen bir olay tetikler. Sonuç olarak işlem Yöneticisi'ni karşılık gelen enter alır veya bir e-posta aracılığıyla bildirim çıkın.
+Bir **cihazın** (donanımların durumun parçası olduğunu) bir bölge 'nin içinde mi yoksa dışında mı olduğunu denetlemek Için GEOFENCE API 'sini kullanabilirsiniz. Bölge sınırı Get API 'sini daha iyi anlamak için. Belirli bir ekipmanın zaman içinde taşındığı farklı konumlara karşı sorgu yaptık. Aşağıdaki şekilde, belirli bir yapım donanımının, kronolojik sırada gözlemlendiği şekilde benzersiz bir **cihaz kimliğiyle** birlikte beş konumu gösterilmektedir. Bu beş konumların her biri, dilimçine karşı bölge girme ve çıkış durumu değişikliğini değerlendirmek için kullanılır. Bir durum değişikliği gerçekleşirse, bölge sınırı hizmeti, mantıksal uygulamaya Event Grid tarafından gönderilen bir olayı tetikler. Sonuç olarak, işlem yöneticisi bir e-posta yoluyla ilgili ENTER veya çıkış bildirimini alır.
 
 > [!Note]
-> Yukarıdaki senaryo ve davranışı temel aynı **cihaz kimliği** böylece aşağıdaki şekilde gösterildiği gibi beş farklı konumlara yansıtır.
+> Yukarıdaki senaryo ve davranış, aşağıdaki şekilde beş farklı konumu yansıtacak şekilde aynı **cihaz kimliğini** temel alır.
 
-![Bölge sınırının eşleme](./media/tutorial-geofence/geofence.png)
+![Bölge Haritası](./media/tutorial-geofence/geofence.png)
 
-Postman uygulamasında aynı koleksiyonda yukarıda oluşturduğunuz yeni bir sekme açın. Oluşturucu sekmesinde GET HTTP yöntemini seçin:
+Postman uygulamasında, yukarıda oluşturduğunuz koleksiyonda yeni bir sekme açın. Oluşturucu sekmesinde HTTP yöntemini Al ' ı seçin:
 
-Donanım farklı karşılık gelen konum koordinatlarını ile beş HTTP alma bölge sınırlaması API isteklerinin kronolojik sırayla gözlemlenen aşağıda verilmiştir. Her istek, yanıt gövdesi tarafından izlenir.
+Aşağıda, donanımların kronolojik sırada gözlemlendiği gibi farklı ilgili konum koordinatları bulunan beş HTTP GET Geofsel API isteği bulunur. Her isteğin ardından yanıt gövdesi gelir.
  
-1. 1. konum:
+1. Konum 1:
     
    ```HTTP
    https://atlas.microsoft.com/spatial/geofence/json?subscription-key={subscription-key}&api-version=1.0&deviceId=device_01&udId={udId}&lat=47.638237&lon=-122.1324831&searchBuffer=5&isAsync=True&mode=EnterAndExit
    ```
-   ![Bölge sınırının sorgu 1](./media/tutorial-geofence/geofence-query1.png)
+   ![Geofence sorgu 1](./media/tutorial-geofence/geofence-query1.png)
 
-   Yanıt yukarıdaki bakarsanız, ana bölge sınırının negatif mesafe ekipman bölge sınırının içinde olduğu ve alt bölge sınırı'ndan pozitif alt bölge sınırının dışında olduğu anlamına gelir anlamına gelir. 
+   Yukarıdaki yanıta baktığınızda, ana bölge değerinden olumsuz mesafe, ekipmanın bölge bölge içinde olduğu ve alt siteden gelen pozitif bölge, alt site bölge ilişkisinin dışında olduğu anlamına gelir. 
 
-2. 2. konum: 
+2. Konum 2: 
    
    ```HTTP
    https://atlas.microsoft.com/spatial/geofence/json?subscription-key={subscription-key}&api-version=1.0&deviceId=device_01&udId={udId}&lat=47.63800&lon=-122.132531&searchBuffer=5&isAsync=True&mode=EnterAndExit
    ```
     
-   ![Bölge sınırının sorgu 2](./media/tutorial-geofence/geofence-query2.png)
+   ![Geofence sorgu 2](./media/tutorial-geofence/geofence-query2.png)
 
-   Yukarıdaki JSON yanıtında dikkatle bakarsanız ekipman alt site dışında ancak ana sınırı içinde. Bir olayı tetiklenmiyor ve hiç e-posta gönderilir.
+   Yukarıdaki JSON yanıtına dikkatlice bakarsanız, ekipman alt sitenin dışındadır, ancak ana çit içindedir. Bir olayı tetiklemez ve e-posta gönderilmez.
 
-3. 3. konum: 
+3. Konum 3: 
   
    ```HTTP
    https://atlas.microsoft.com/spatial/geofence/json?subscription-key={subscription-key}&api-version=1.0&deviceId=device_01&udId={udId}&lat=47.63810783315048&lon=-122.13336020708084&searchBuffer=5&isAsync=True&mode=EnterAndExit
    ```
 
-   ![Bölge sınırının sorgu 3](./media/tutorial-geofence/geofence-query3.png)
+   ![Geofence sorgu 3](./media/tutorial-geofence/geofence-query3.png)
 
-   Bir durum değişikliği oluştu ve artık ekipman içinde her iki ana ve alt site, bölge sınırlarının. Bu olay ve bildirim yayımlar için Operations Manager e-posta gönderilir.
+   Bir durum değişikliği gerçekleşti ve artık ekipman hem ana hem de alt site bölge içindedir. Bu, bir olay yayımlar ve Operations Manager bir bildirim e-postası gönderilir.
 
-4. 4. konum: 
+4. Konum 4: 
 
    ```HTTP
    https://atlas.microsoft.com/spatial/geofence/json?subscription-key={subscription-key}&api-version=1.0&deviceId=device_01&udId={udId}&lat=47.637988&lon=-122.1338344&searchBuffer=5&isAsync=True&mode=EnterAndExit
    ```
   
-   ![Bölge sınırının sorgu 4](./media/tutorial-geofence/geofence-query4.png)
+   ![Geofence sorgu 4](./media/tutorial-geofence/geofence-query4.png)
 
-   Karşılık gelen yanıt dikkatle gözlemleyerek ekipman alt bölge sınırının çıkıldı olsa bile hiçbir olay burada yayımlanabilmesi fark edebilirsiniz. Kullanıcının belirtilen GET isteğine zamanında bakarsanız, alt bölge sınırının göre bu süre sona ve donanım yine de ana bölge sınırının içinde olduğunu görebilirsiniz. Alt bölge sınırının altında geometri kimliği atabilirsiniz `expiredGeofenceGeometryId` yanıt gövdesi içinde.
+   Karşılık gelen yanıtı dikkatle gözlemleyerek, ekipman alt site bölge değerinden çıksa bile burada hiçbir olay yayımlanmadığını unutmayın. Kullanıcının GET isteğinde belirtilen zamanına bakarsanız, alt site bölge kullanım süresinin bu saate göre dolduğunu ve ekipmanın hala ana bölge yolunda olduğunu görebilirsiniz. Yanıt gövdesinde `expiredGeofenceGeometryId` alt sitenin bölge bölge numarasını da görebilirsiniz.
 
 
-5. 5. konum:
+5. Konum 5:
       
    ```HTTP
    https://atlas.microsoft.com/spatial/geofence/json?subscription-key={subscription-key}&api-version=1.0&deviceId=device_01&udId={udId}&lat=47.63799&lon=-122.134505&userTime=2019-01-16&searchBuffer=5&isAsync=True&mode=EnterAndExit
    ```
 
-   ![Bölge sınırının sorgu 5](./media/tutorial-geofence/geofence-query5.png)
+   ![Geofence sorgu 5](./media/tutorial-geofence/geofence-query5.png)
 
-   Donanım ana yapım site döndürürüz ayrıldığını görebilirsiniz. Bir olayı yayımlar, ciddi ihlal eder ve Operations Manager için kritik bir uyarı e-posta gönderilir.
+   Ekipmanın ana yapım site bölge bölgesine ayrıldığı hakkında bilgi alabilirsiniz. Bir olay yayımlar, ciddi bir ihlal değildir ve Operations Manager kritik bir uyarı e-postası gönderilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide şunları öğrendiniz, nasıl Azure haritalar, karşıya yükleme veri API'sini kullanarak veri hizmeti yükleyerek döndürürüz ayarlanır. Ayrıca Azure haritalar olayları Grid abone olma ve bölge sınırının olayları işlemek için nasıl kullanılacağını öğrendiniz. 
+Bu öğreticide, verileri karşıya yükleme API 'sini kullanarak Azure Maps, veri hizmeti ' ne karşıya yükleyerek bölge sayısını nasıl ayarlayacaınız. Ayrıca bölge olaylarına abone olmak ve bunları işlemek için Azure Maps olayları kılavuzunu nasıl kullanacağınızı öğrendiniz. 
 
-* Bkz: [Azure Logic apps'te içerik türlerini işleme](https://docs.microsoft.com/azure/logic-apps/logic-apps-content-type), Logic Apps, daha karmaşık bir mantık oluşturmak için JSON ayrıştırmak için kullanmayı öğrenin.
-* Event Grid olay işleyicileri hakkında daha fazla bilgi edinmek için bkz: [Event Grid olay işleyicilerini desteklenen](https://docs.microsoft.com/azure/event-grid/event-handlers).
+* Daha karmaşık bir mantık oluşturmak için JSON ayrıştırmak üzere Logic Apps kullanmayı öğrenmek için [Azure Logic Apps içerik türlerini işleme](https://docs.microsoft.com/azure/logic-apps/logic-apps-content-type)bölümüne bakın.
+* Event Grid içindeki olay işleyicileri hakkında daha fazla bilgi edinmek için [Event Grid desteklenen olay işleyicileri](https://docs.microsoft.com/azure/event-grid/event-handlers)bölümüne bakın.

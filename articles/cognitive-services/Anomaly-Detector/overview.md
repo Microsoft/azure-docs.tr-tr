@@ -1,56 +1,64 @@
 ---
-title: Anomali Algılayıcısı API'si nedir? | Microsoft Docs
+title: Anomali Algılayıcısı API'si nedir?
 titleSuffix: Azure Cognitive Services
-description: Zaman serisi verilerinizdeki anormallikleri belirlemek için gelişmiş algoritmalar Anomali algılayıcısı API'nin kullanın.
+description: Zaman serisi verilerinizde bozukluklar belirlemek için anomali algılayıcı API 'sinin gelişmiş algoritmalarını kullanın.
 services: cognitive-services
 author: aahill
+manager: nitinme
 ms.service: cognitive-services
-ms.subservice: anomaly-detection
-ms.topic: article
-ms.date: 03/26/2019
+ms.subservice: anomaly-detector
+ms.topic: overview
+ms.date: 09/05/2019
 ms.author: aahi
-ms.openlocfilehash: 48dffb8853d3def590e434c1683ecf038e2a194e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 706bd9c141b191632acee1c04745d64baaf50ee5
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64415817"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74012052"
 ---
 # <a name="what-is-the-anomaly-detector-api"></a>Anomali Algılayıcısı API'si nedir?
 
-Anomali algılayıcısı API'si, izleme ve machine learning ile zaman serisi verilerinizdeki prosesler algılamak sağlar. Anomali algılayıcısı API tanımlayarak ve sektör, senaryo veya veri hacmi bağımsız olarak verilerinize en sığdırma modelleri uygulama otomatik olarak uyum sağlar. Zaman serisi verilerinizi kullanarak, API sınırları anomali algılama, beklenen değerleri belirler ve anomalileri hangi veri noktalarıdır.
+Anomali algılayıcı API 'SI, makine öğrenimi ile zaman serisi verilerinizde bulunan normalleştirikleri izlemenize ve algılamanıza olanak sağlar. Anomali algılayıcı API 'SI, sektör, senaryo veya veri hacminin ne olursa olsun, verilerinize en uygun modelleri otomatik olarak tanımlayarak ve uygulayarak uyum sağlar. API, zaman serisi verilerinizi kullanarak anomali algılama, beklenen değerler ve hangi veri noktalarının güvenlik sınırlarını belirler.
 
-![Hizmet isteklerini desen değişiklikleri algılama](./media/anomaly_detection2.png)
+![Hizmet isteklerindeki model değişikliklerini Algıla](./media/anomaly_detection2.png)
 
-Tüm önceki deneyime machine learning Anomali algılayıcısı kullanarak gerektirmez ve RESTful API hizmeti işlemleri ve uygulamaları kolayca tümleştirmenizi sağlar.
+Anomali algılayıcısının kullanılması, Machine Learning 'de önceki bir deneyim gerektirmez ve yeniden işleme API 'SI, hizmeti uygulamalarınızın ve süreçlerinizle kolayca tümleştirmenize olanak sağlar.
 
 ## <a name="features"></a>Özellikler
 
-Anomali algılayıcısı ile otomatik olarak zaman serisi verilerinizle anormal durumları algılayabilirsiniz veya gerçek zamanlı olarak göründüklerinde. 
+Anomali algılayıcısı sayesinde, zaman serisi verileriniz genelinde veya gerçek zamanlı olarak oluşan anormallikleri otomatik olarak tespit edebilirsiniz. 
 
 |Özellik  |Açıklama  |
 |---------|---------|
-|Gerçek zamanlı olarak göründüklerinde anomalileri algılayın. | Anomalileri, son bir anomali olup olmadığını belirlemek için önceden görülen veri noktalarını kullanarak akış verilerinizi algılayın. Bu işlem, göndermek ve hedef noktasına bir anomali olup olmadığını belirler ve veri noktalarını kullanarak bir model oluşturur. Oluşturduğunuz her yeni bir veri noktasının API'SİYLE çağırarak, verilerinizi oluşturulduğu şekilde izleyebilirsiniz. |
-|Toplu olarak veri kümenizi boyunca anomalileri algılayın. | Zaman serisi verilerinizi bulunmayabilir anomalileri algılamak için kullanın. Bu işlem, tüm zaman serisi verilerinizi her noktasıyla aynı modeliyle analiz kullanarak bir model oluşturur.         |
-| Verileriniz hakkında ek bilgi alın. | Verilerinizi ve beklenen değerleri, anomali sınırları ve konumlar gibi anomalileri gözlemlenen ilgili yararlı ayrıntıları alın. |
-| Anomali algılama sınırları ayarlayın. | Anomali algılayıcısı API, anomali algılama için sınırları otomatik olarak oluşturur. Artırmak veya veri anomalileri API'nin hassasiyet azaltmak için bu sınırlarını ayarlama ve verilerinizi daha iyi uyum sağlamak. |
+|Gerçek zamanlı olarak gerçekleştikleri gibi bozukluklar olup olmadığı tespit edin. | En son birinin bir anomali olup olmadığını belirlemek için daha önce görülmüş veri noktalarını kullanarak akış verilerinizde bozukluklar algılayın. Bu işlem, göndereceğiniz veri noktalarını kullanarak bir model oluşturur ve hedef noktanın bir anomali olup olmadığını belirler. Oluşturduğunuz her yeni veri noktasıyla API çağırarak, verileri oluşturulduğu gibi izleyebilirsiniz. |
+|Veri kümesinin tamamında bir toplu iş olarak, anormallikleri tespit edin. | Verilerinizin tamamında mevcut olabilecek tüm anormallikleri algılamak için zaman serinizi kullanın. Bu işlem, her bir noktanın aynı modelle çözümlenme işleminde, tüm zaman serisi verilerinizi kullanarak bir model oluşturur.         |
+| Verileriniz hakkında daha fazla bilgi alın. | Verileriniz ve beklenen değerler, anomali sınırları ve pozisyonları dahil tüm gözlemlenen bozukluklar hakkında yararlı Ayrıntılar alın. |
+| Anomali algılama sınırlarını ayarlayın. | Anomali algılayıcı API 'SI, anomali algılama için sınırları otomatik olarak oluşturur. Bu sınırları, API 'nin veri bozuklularındaki duyarlılığını artırmak veya azaltmak için ayarlayın ve verilerinize daha iyi uyum sağlar. |
 
 ## <a name="demo"></a>Tanıtım
 
-Anomali algılayıcısı API'ı kullanmaya hızlıca başlamak için deneyin bir [çevrimiçi Tanıtımı](https://notebooks.azure.com/AzureAnomalyDetection/projects/anomalydetector) tarayıcınızdan çalıştırılabilir. Bu Tanıtım, bir web barındırılan Jupyter not defteri çalıştırır ve bir API isteği göndermek ve sonucun görselleştirilmesi gösterilmektedir.
+Anomali algılayıcısının nasıl çalıştığını anlamak için bu [etkileşimli tanıtımı](https://aka.ms/adDemo) inceleyin.
+Tanıtımı çalıştırmak için bir anomali algılayıcısı kaynağı oluşturmanız ve API anahtarını ve uç noktasını almanız gerekir.
 
-Tanıtım çalıştırmak için aşağıdaki adımları tamamlayın:
+## <a name="notebook"></a>Not Defteri
 
-1. Geçerli bir abonelik Anomali algılayıcısı API anahtarı ve bir API uç noktası edinin. Aşağıdaki bölümde kaydolduğunuz için yönergeler içerir. 
-2. Oturum açın ve sağ üst köşedeki kopyalama,'a tıklayın.
-3. Tıklayın **ücretsiz işlem üzerinde çalıştırın**
-4. Bu örnek için not defterlerini birini seçin.
-5. Geçerli Anomali algılayıcısı API abonelik anahtarınızı ekleme `subscription_key` değişkeni. Değişiklik `endpoint` uç noktanıza değişken. Örneğin, `https://westus2.api.cognitive.microsoft.com`
-1. Üst menü çubuğunda **hücre**, ardından **tümünü Çalıştır**.
+Anomali algılayıcı API 'sini çağırmayı öğrenmek için bu [Azure Not defterini](https://aka.ms/adNotebook)deneyin. Bu Web 'de barındırılan Jupyter Notebook, bir API isteğinin nasıl gönderileceğini ve sonucu görselleştirmeyi gösterir.
+
+Not defterini çalıştırmak için aşağıdaki adımları gerçekleştirin:
+
+1. Geçerli bir anomali algılayıcı API 'SI abonelik anahtarı ve bir API uç noktası alın. Aşağıdaki bölümde kaydolma talimatları bulunur.
+1. Oturum açın ve sağ üst köşedeki Kopyala ' ya tıklayın.
+1. Kopyalama işlemini tamamlamadan önce iletişim kutusundaki "genel" seçeneğinin işaretini kaldırın, aksi takdirde tüm abonelik anahtarları dahil Not defteriniz herkese açık olur.
+1. **Ücretsiz işlem sırasında Çalıştır 'a** tıklayın
+1. Not defterlerinden birini seçin.
+1. Geçerli anomali algılayıcısı API abonelik anahtarınızı `subscription_key` değişkenine ekleyin. 
+1. `endpoint` değişkenini uç noktanızla değiştirin. Örneğin, `https://westus2.api.cognitive.microsoft.com/anomalydetector/v1.0/timeseries/last/detect`
+1. Üstteki menü çubuğunda **hücre**' ya ve ardından **Tümünü Çalıştır**' ı tıklatın.
 
 ## <a name="workflow"></a>İş akışı
 
-Anomali algılayıcısı API'si bir RESTful web, HTTP istekleri ve JSON Ayrıştır tüm programlama dilinden çağrı kolaylaştırma hizmetidir.
+Anomali algılayıcı API 'SI, bir daha fazla Web hizmeti olduğundan, HTTP istekleri yapıp JSON 'u ayrıştırabilen herhangi bir programlama dilinden çağrı yapmayı kolaylaştırır.
 
 [!INCLUDE [cognitive-services-anomaly-detector-data-requirements](../../../includes/cognitive-services-anomaly-detector-data-requirements.md)]
 
@@ -58,12 +66,24 @@ Anomali algılayıcısı API'si bir RESTful web, HTTP istekleri ve JSON Ayrışt
 
 Kaydolduktan sonra:
 
-1. Zaman serisi verilerinizi alın ve geçerli bir JSON biçimine dönüştürün. Kullanım [en iyi uygulamalar](concepts/anomaly-detection-best-practices.md) verilerinizi en iyi sonuçları almak için hazırlarken.
-1. Verilerinizle Anomali algılayıcısı API'sine bir istek gönderin.
+1. Zaman serisi verilerinizi alın ve geçerli bir JSON biçimine dönüştürün. En iyi sonuçları elde etmek için verilerinizi hazırlarken [en iyi uygulamaları](concepts/anomaly-detection-best-practices.md) kullanın.
+1. Anomali algılayıcısı API 'sine verilerinize bir istek gönderin.
 1. Döndürülen JSON iletisini ayrıştırarak API yanıtını işleyin.
+
+## <a name="algorithms"></a>Algoritmalar
+
+* Lütfen [Azure anomali algılayıcısı API 'sine](https://techcommunity.microsoft.com/t5/AI-Customer-Engineering-Team/Introducing-Azure-Anomaly-Detector-API/ba-p/490162) başvuran teknik bloglara ve [Azure anomali ALGıLAYıCıSı ' nda on 'un](https://techcommunity.microsoft.com/t5/AI-Customer-Engineering-Team/Overview-of-SR-CNN-algorithm-in-Azure-Anomaly-Detector/ba-p/982798) altındaki algoritmalarla ilgili genel bakışlara bakın.
+* Microsoft tarafından geliştirilen son teknoloji tabanlı SR-CNN algoritmaları için lütfen [Microsoft 'ta bu kağıt zaman serisi anomali algılama hizmeti](https://arxiv.org/abs/1906.03821) (kdd 2019 tarafından kabul edilir) bölümüne bakın.
+
+> [!VIDEO https://www.youtube.com/embed/ERTaAnwCarM]
+
+## <a name="join-the-anomaly-detector-community"></a>Anomali Algılayıcısı topluluğuna katılın
+
+* [Microsoft ekiplerinde anomali algılayıcı danışmanları grubuna](https://aka.ms/AdAdvisorsJoin) katılarak
+* Seçilen [Kullanıcı tarafından oluşturulan içeriğe](user-generated-content.md) bakın
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Hızlı Başlangıç: Anomali algılayıcısı REST API kullanarak, zaman serisi verilerinde görülen anomalileri algılayın](quickstarts/detect-data-anomalies-csharp.md)
-* Anomali algılayıcısı API [çevrimiçi Tanıtımı](https://notebooks.azure.com/AzureAnomalyDetection/projects/anomalydetector)
-* Anomali algılayıcısı [REST API Başvurusu](https://westus2.dev.cognitive.microsoft.com/docs/services/AnomalyDetector/operations/post-timeseries-entire-detect)
+* [Hızlı başlangıç: anomali algılayıcısının kullanıldığı zaman serisi verilerinizde bozukluklar Algıla REST API](quickstarts/detect-data-anomalies-csharp.md)
+* Anomali algılayıcı API 'SI [çevrimiçi tanıtımı](https://notebooks.azure.com/AzureAnomalyDetection/projects/anomalydetector)
+* Anomali algılayıcısı [REST API başvurusu](https://westus2.dev.cognitive.microsoft.com/docs/services/AnomalyDetector/operations/post-timeseries-entire-detect)

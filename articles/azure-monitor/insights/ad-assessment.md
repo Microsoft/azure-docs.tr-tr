@@ -1,192 +1,208 @@
 ---
-title: Active Directory ortamınızı Azure İzleyici ile en iyi duruma getirme | Microsoft Docs
-description: Düzenli bir aralıkta, ortamlarının sistem durumunu ve riskini değerlendirmek için Active Directory sistem durumu denetimi çözümü kullanabilirsiniz.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: 81eb41b8-eb62-4eb2-9f7b-fde5c89c9b47
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici ile Active Directory ortamınızı iyileştirin | Microsoft Docs
+description: Düzenli aralıklarla ortamlarınızın riskini ve sistem durumunu değerlendirmek için Active Directory sistem durumu denetimi çözümünü kullanabilirsiniz.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 10/27/2017
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: 3b5da6c9046fc694bd5eb0f55cf031b82b6d0103
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/10/2019
+ms.openlocfilehash: bdc84a9213bd98981040775d3fec90f45edac54f
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60919829"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899198"
 ---
-# <a name="optimize-your-active-directory-environment-with-the-active-directory-health-check-solution-in-azure-monitor"></a>Active Directory ortamınızı Azure İzleyici'de Active Directory sistem durumu denetimi çözümü ile en iyi duruma getirme
+# <a name="optimize-your-active-directory-environment-with-the-active-directory-health-check-solution-in-azure-monitor"></a>Azure Izleyici 'de Active Directory sistem durumu denetimi çözümüyle Active Directory ortamınızı iyileştirin
 
-![AD sistem durumu denetimi simgesi](./media/ad-assessment/ad-assessment-symbol.png)
+![AD sistem durumu denetim simgesi](./media/ad-assessment/ad-assessment-symbol.png)
 
 [!INCLUDE [azure-monitor-log-analytics-rebrand](../../../includes/azure-monitor-log-analytics-rebrand.md)]
 
-Düzenli bir aralıkta, server ortamlarının sistem durumunu ve riskini değerlendirmek için Active Directory sistem durumu denetimi çözümü kullanabilirsiniz. Bu makalede, yükleme ve çözüm kullanabilir, böylece olası sorunlar için düzeltici eylemleri gerçekleştirebilirsiniz yardımcı olur.
+Düzenli aralıklarla sunucu ortamlarınızın riskini ve sistem durumunu değerlendirmek için Active Directory sistem durumu denetimi çözümünü kullanabilirsiniz. Bu makale, çözümü yüklemenize ve kullanmanıza yardımcı olur, böylece olası sorunlar için düzeltici eylemler gerçekleştirebilirsiniz.
 
-Bu çözüm, Önceliklendirilmiş öneriler dağıtılan sunucu altyapınızı belirli listesini sağlar. Öneriler dört arasında ayrılır odak alanlarına odaklanmak hızlı bir şekilde yardımcı riskini anlamak ve işlem yapın.
+Bu çözüm, dağıtılan sunucu altyapınıza özgü önerilerin öncelikli bir listesini sağlar. Öneriler, riski hızla anlamanıza ve işlem yapmanıza yardımcı olan dört odak alanına göre kategorize edilir.
 
-Öneriler bilgi ve müşteri binlerce Microsoft mühendisinin göre kazanılan deneyimi temel alır. Her öneri, önerilen değişiklikleri uygulamak nasıl bir sorun için neden önemli ve ilgili yönergeleri sağlar.
+Öneriler, binlerce müşteri ziyaretinden Microsoft mühendisleri tarafından elde edilen bilgi ve deneyime dayanır. Her öneri, bir sorunun neden bir sorun ve önerilen değişikliklerin nasıl uygulanacağı hakkında rehberlik sağlar.
 
-Ücretsiz ve sağlam bir risk ortamında çalışan kendi ilerleme durumlarını izlemek ve kuruluşunuz için en önemli odak alanlarına odaklanmak seçebilirsiniz.
+Kuruluşunuz için en önemli odak alanını seçebilir ve risk ücretsiz ve sağlıklı bir ortamı çalıştırmaya yönelik ilerlemenizi izleyebilirsiniz.
 
-Çözüm ekledikten sonra bir denetimi tamamlandı ve Özet bilgi odak alanlarına odaklanmak için gösterilir **AD sistem durumu denetimi** ortamınızdaki altyapısı için Pano. Aşağıdaki bölümlerde bilgileri kullanmak üzere nasıl **AD sistem durumu denetimi** Pano, burada görüntüleyebilir ve sonra gerçekleştirin Eylemler Active Directory sunucusu altyapınız için önerilen.  
+Çözümü ekledikten ve bir onay tamamlandıktan sonra, ortamınızdaki altyapı için **ad sistem durumu denetimi** panosunda odak alanlarının Özet bilgileri gösterilir. Aşağıdaki bölümlerde, Active Directory sunucu altyapınız için önerilen eylemleri görüntüleyip uygulayabileceğiniz **ad sistem durumu denetimi** panosundaki bilgilerin nasıl kullanılacağı açıklanır.  
 
-![AD sistem durumu denetimi kutucuk görüntüsü](./media/ad-assessment/ad-healthcheck-summary-tile.png)
+![AD sistem durumu denetimi kutucuğunun görüntüsü](./media/ad-assessment/ad-healthcheck-summary-tile.png)
 
 ![AD sistem durumu denetimi panosunun görüntüsü](./media/ad-assessment/ad-healthcheck-dashboard-01.png)
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Active Directory sistem durumu denetimi çözümü, desteklenen bir .NET Framework 4.5.2 sürümü gerekir veya yukarıda Microsoft Monitoring Agent (yüklenmiş MMA) olan her bilgisayarda yüklü.  MMA aracısını, System Center 2016 - Operations Manager ve Operations Manager 2012 R2 ve Azure İzleyici tarafından kullanılır.
-* Çözüm, Windows Server 2008 ve 2008 R2, Windows Server 2012 ve 2012 R2 ve Windows Server 2016 çalıştıran etki alanı denetleyicilerini destekler.
-* Azure portalında Azure Market'ten Active Directory sistem durumu denetimi çözümü eklemek için bir Log Analytics çalışma alanı.  Başka bir yapılandırma işlemi gerekmez.
+* Active Directory sistem durumu denetimi çözümü, Windows için Log Analytics aracısına sahip olan (Microsoft Monitoring Agent (MMA) olarak da bilinir) yüklü .NET Framework 4.5.2 veya üzeri bir sürümü gerektirir.  Aracı System Center 2016-Operations Manager, Operations Manager 2012 R2 ve Azure Izleyici tarafından kullanılır.
+* Bu çözüm, Windows Server 2008 ve 2008 R2, Windows Server 2012 ve 2012 R2 ve Windows Server 2016 çalıştıran etki alanı denetleyicilerini destekler.
+* Azure portal Azure Marketi 'nden Active Directory sistem durumu denetimi çözümünü eklemek için bir Log Analytics çalışma alanı. Ek yapılandırma gerekmez.
 
   > [!NOTE]
-  > Çözüm ekledikten sonra aracılar sunucularıyla AdvisorAssessment.exe dosyası eklenir. Yapılandırma verilerini okuyun ve ardından Azure İzleyici bulutta işleme için gönderilen. Mantıksal alınan verilere uygulanır ve bulut hizmeti olan verileri kaydeder.
+  > Çözümü ekledikten sonra, danışmanlı Assessment. exe dosyası aracıları olan sunuculara eklenir. Yapılandırma verileri okuyup işlenmek üzere Bulutta Azure Izleyici 'ye gönderilir. Alınan verilere mantık uygulanır ve bulut hizmeti verileri kaydeder.
   >
   >
 
-Değerlendirilecek etki alanının üyesi olan etki alanı denetleyicilerinizin sistem durumu denetimi gerçekleştirmek için bunlar bir aracı ve Azure İzleyici'de aşağıdaki desteklenen yöntemlerden birini kullanarak bağlantı gerektirir:
+Değerlendirilecek etki alanının üyesi olan etki alanı denetleyicileriniz için sistem durumu denetimini gerçekleştirmek üzere, bu etki alanındaki her etki alanı denetleyicisi, aşağıdaki desteklenen yöntemlerden birini kullanarak bir aracı ve Azure Izleyici bağlantısı gerektirir:
 
-1. Yükleme [Microsoft Monitoring Agent (MMA)](../../azure-monitor/platform/agent-windows.md) , etki alanı denetleyicisi zaten System Center 2016 - Operations Manager veya Operations Manager 2012 R2 tarafından izlenmiyor.
-2. System Center 2016 - Operations Manager veya Operations Manager 2012 R2 ile izlenir ve yönetim grubu, Azure İzleyici ile tümleşiktir değil, etki alanı denetleyicisi verileri toplamak ve hala Hizmeti'ne iletmek için Azure İzleyici ile birden çok girişli olabilir Operations Manager tarafından izlenecek.  
-3. Operations Manager yönetim grubunuzun hizmeti ile tümleşikse, aksi takdirde, etki alanı denetleyicileri için veri toplama altındaki adımları izleyerek hizmet eklemek ihtiyacınız [aracıyla yönetilen bilgisayarlar ekleme](../../azure-monitor/platform/om-agents.md#connecting-operations-manager-to-azure-monitor) seçeneğini etkinleştirdikten sonra çalışma alanınızda çözümün.  
+1. Etki alanı denetleyicisi System Center 2016-Operations Manager veya Operations Manager 2012 R2 tarafından zaten izlenmediği takdirde [Windows için Log Analytics aracısını](../../azure-monitor/platform/agent-windows.md) yükler.
+2. System Center 2016-Operations Manager veya Operations Manager 2012 R2 ile izleniyorsa ve yönetim grubu Azure Izleyici ile tümleşikse, etki alanı denetleyicisi, veri toplamak ve hizmete iletmek için Azure Izleyici ile çok daha fazla erişilebilir olabilir ve yine de Operations Manager tarafından izlenir.  
+3. Aksi takdirde, Operations Manager yönetim grubunuz hizmetle tümleşikse, çözümü etkinleştirmek üzere [Aracı tarafından yönetilen bilgisayarlar ekleme](../../azure-monitor/platform/om-agents.md#connecting-operations-manager-to-azure-monitor) altındaki adımları izleyerek, hizmet tarafından veri toplamaya yönelik etki alanı denetleyicilerini eklemeniz gerekir. alanında.  
 
-Etki alanı denetleyicinize bir Operations Manager yönetim grubu için hangi raporların verileri toplayan aracıda kendi atanan yönetim sunucusuna iletir ve doğrudan yönetim sunucusundan Azure İzleyicisi'ne gönderilir.  Operations Manager veritabanları için veriler yazılmaz.  
+Etki alanı denetleyicinizde bir Operations Manager yönetim grubuna rapor veren, verileri toplayan, atanan yönetim sunucusuna ileten ve sonra doğrudan bir yönetim sunucusundan Azure Izleyici 'ye gönderilen aracı.  Veriler Operations Manager veritabanlarına yazılmaz.  
 
-## <a name="active-directory-health-check-data-collection-details"></a>Active Directory sistem durumu denetimi veri koleksiyonu ayrıntıları
+## <a name="active-directory-health-check-data-collection-details"></a>Active Directory sistem durumu denetimi verileri toplama ayrıntıları
 
-Active Directory sistem durumu denetimi veri etkinleştirdiğiniz aracısını kullanarak aşağıdaki kaynaklardan toplar:
+Active Directory sistem durumu denetimi, etkinleştirdiğiniz aracıyı kullanarak aşağıdaki kaynaklardan veri toplar:
 
-- Kayıt defteri
+- Kayıt Defteri
 - LDAP
 - .NET Framework
 - Olay günlüğü
-- Active Directory hizmet arabirimi (ADSI)
+- Active Directory Hizmet Arabirimleri (ADSI)
 - Windows PowerShell
 - Dosya verileri
 - Windows Yönetim Araçları (WMI)
-- DCDIAG aracı API'si
-- Dosya Çoğaltma Hizmeti (NTFRS) API'si
-- Özel C# kodu
+- DCDIAG aracı API 'SI
+- Dosya Çoğaltma hizmeti (NTFRS) API 'SI
+- Özel C# kod
 
-Veri etki alanı denetleyicisinde toplanır ve Azure İzleyici her yedi günde iletilir.  
+Veriler etki alanı denetleyicisinde toplanır ve yedi günde bir Azure Izleyici 'ye iletilir.  
 
-## <a name="understanding-how-recommendations-are-prioritized"></a>Öneriler nasıl önceliklendirilir anlama
-Yaptığınız her öneri, öneri göreceli önemini tanımlayan bir ağırlık değeri verilir. Yalnızca en önemli 10 önerileri gösterilir.
+## <a name="understanding-how-recommendations-are-prioritized"></a>Önerilerin nasıl önceliklendirildiğini anlama
+
+Yapılan her öneriye, önerinin göreli önemini tanımlayan bir ağırlık değeri verilir. Yalnızca en önemli 10 öneri gösterilmektedir.
 
 ### <a name="how-weights-are-calculated"></a>Ağırlıklar nasıl hesaplanır
-Ağırlık belirlemeyi üç anahtar etkenlere göre toplam değerler şunlardır:
 
-* *Olasılık* tanımlanan bir sorunun sorunlara neden olur. Daha yüksek bir olasılık öneri için daha büyük bir genel puan karşılık gelir.
-* *Etkisi* kuruluşunuzdaki bir soruna neden olursa sorunun. Daha yüksek bir etkisi öneri için daha büyük bir genel puan karşılık gelir.
-* *Çaba* öneriyi uygulamak için gereklidir. Daha yüksek bir çaba öneri için daha küçük bir genel puan karşılık gelir.
+Ağırlıklı değerler üç ana etkene göre toplam değerlerdir:
 
-Her öneri için hesaplamasının her odak alanı için kullanılabilir toplam puanı yüzdesi olarak ifade edilir. Örneğin, bu öneri uygulandıktan bir puan % 5, güvenlik ve uyumluluk odak alanında bir öneri varsa, genel güvenlik ve uyumluluk puanı tarafından %5 artırır.
+* Bir sorunu tespit eden *olasılık* sorunlara neden olur. Daha yüksek bir olasılık, öneriye ilişkin daha büyük bir genel puanı elde eden bir olasılıktır.
+* Soruna neden olursa sorunun kuruluşunuza *etkisi* . Daha yüksek bir etkisi, önerinin daha büyük bir genel puanı ile aynıdır.
+* Öneriyi uygulamak için gereken *çaba* . Daha yüksek bir çaba, önerinin daha küçük bir genel puanı ile aynıdır.
 
-### <a name="focus-areas"></a>Odak alanları
-**Güvenlik ve Uyumluluk** -bu odak alanı olası güvenlik tehditlerini ve ihlallerinden, şirket ilkelerini ve uyumluluk teknik, yasal ve kanuni gereksinimleri için öneriler gösterir.
+Her öneri ağırlığı, her bir odak alanı için kullanılabilen toplam puanların yüzdesi olarak ifade edilir. Örneğin, güvenlik ve uyumluluk odağında bir önerinin %5 puanı varsa, bu öneriyi uygulamak genel güvenlik ve uyumluluk puanınızı %5 oranında artırır.
 
-**Kullanılabilirlik ve iş sürekliliği** -hizmet kullanılabilirlik, dayanıklılık, altyapı ve işletme korumasına yönelik öneriler bu odak alanı gösterir.
+### <a name="focus-areas"></a>Odak alanı
 
-**Performans ve ölçeklenebilirlik** -bu odak alanı kuruluşunuzun yardımcı olacak öneriler gösterir BT altyapısı arttıkça, BT ortamınızı geçerli performans gereksinimlerini karşıladığından ve değişen altyapı mümkün olduğundan emin olun gerekir.
+**Güvenlik ve uyumluluk** -bu odak alanı, olası güvenlik tehditleri ve ihlal, kurumsal ilkeler ve teknik, yasal ve yasal uyumluluk gereksinimlerine yönelik öneriler gösterir.
 
-**Yükseltme, geçiş ve dağıtım** -bu odak alanı yükseltme, geçiş ve Active Directory mevcut altyapınızı dağıtmak yardımcı olacak öneriler gösterir.
+**Kullanılabilirlik ve Iş sürekliliği** -bu odak alanı hizmet kullanılabilirliği, altyapınızın esnekliği ve iş koruma önerilerini gösterir.
 
-### <a name="should-you-aim-to-score-100-in-every-focus-area"></a>% 100 her odak alanında puanlamak için indirmeyi amaçlamanız gerekir?
-Olmayabilir. Öneriler bilgi ve müşteri binlerce Microsoft mühendisleri tarafından elde edilen deneyimler temel alır. Ancak, hiçbir iki sunucu altyapıları aynıdır ve öneriler için daha az veya uygun olabilir. Örneğin, bazı güvenlik önerilerini sanal makinelerinize Internet'e açık değildir, daha az ilgili olabilir. Bazı kullanılabilirlik önerisi düşük öncelikli işler için geçici veri toplama ve raporlama sağladığı hizmetler için daha uygun olabilir. Olgun bir işletmeye için önemli olan sorunları için bir başlangıç daha az önemli olabilir. Önceliklerinizle odak alanları tanımlamak ve puanları, zaman içinde nasıl değiştiğini ardından aramak isteyebilirsiniz.
+**Performans ve ölçeklenebilirlik** -bu odak alanı, kuruluşunuzun BT altyapısının BÜYÜMESI, BT ortamınızın geçerli performans gereksinimlerini karşıladığından emin olmak ve değişen altyapı ihtiyaçlarına yanıt verebilmeleri için öneriler gösterir.
 
-Her öneri neden önemli olduğu ile ilgili yönergeler içerir. Öneri uygulandıktan verilen BT hizmetlerinizin doğasını ve kuruluşunuzun iş gereksinimlerini, sizin için uygun olup olmadığını değerlendirmek için bu yönergeleri kullanmanız gerekir.
+**Yükseltme, geçiş ve dağıtım** -bu odak alanı, mevcut altyapınıza Active Directory yükseltmenize, geçirmenize ve dağıtmanıza yardımcı olacak öneriler gösterir.
 
-## <a name="use-health-check-focus-area-recommendations"></a>Odak alanı önerileri kullanım durumunu denetleme
-Yüklendikten sonra çözüm sayfasında Azure portalındaki sistem durumu denetimi kutucuk kullanarak önerileri özetini görüntüleyebilirsiniz.
+### <a name="should-you-aim-to-score-100-in-every-focus-area"></a>Her odak alanında %100 puan elde etmeniz gerekir mi?
 
-Altyapınız ve ardından-ayrıntıya önerileri için Özet uyumluluk değerlendirmesi görüntüleyin.
+Olmayabilir. Öneriler, binlerce müşteri ziyaretinde Microsoft mühendisleri tarafından kazanılan bilgi ve deneyimlere dayalıdır. Ancak, iki sunucu altyapısı aynı değildir ve belirli öneriler sizinle daha fazla veya daha az olabilir. Örneğin, sanal makineleriniz Internet 'e açık değilse bazı güvenlik önerileri daha az ilgili olabilir. Bazı kullanılabilirlik önerileri düşük öncelikli geçici veri toplama ve raporlama sağlayan hizmetlerle daha az ilgili olabilir. Yetişkin iş açısından önemli olan sorunlar, başlangıç için daha az önemli olabilir. Önceliklerinizin hangi odak alanlarından olduğunu belirlemek ve sonra puanlarınızın zaman içinde nasıl değişdiklerini görmek isteyebilirsiniz.
 
-### <a name="to-view-recommendations-for-a-focus-area-and-take-corrective-action"></a>Odak alanı için önerileri görüntüleme ve düzeltme eylemi
+Her öneri, neden önemli olduğuna ilişkin bir kılavuz içerir. BT hizmetlerinizin doğası ve kuruluşunuzun iş ihtiyaçları göz önüne alındığında, öneriyi uygulamanız için uygun olup olmadığını değerlendirmek için bu kılavuzu kullanmanız gerekir.
+
+## <a name="use-health-check-focus-area-recommendations"></a>Sistem durumu denetimi odak alanı önerilerini kullan
+
+Yüklendikten sonra, Azure portal çözüm sayfasında sistem durumu denetimi kutucuğunu kullanarak önerilerin özetini görüntüleyebilirsiniz.
+
+Altyapınız için özetlenen uyumluluk değerlendirmelerini görüntüleyin ve sonra öneriler ' e gidin.
+
+### <a name="to-view-recommendations-for-a-focus-area-and-take-corrective-action"></a>Bir odak alanı önerilerini görüntülemek ve düzeltici eylemi gerçekleştirmek için
+
 [!INCLUDE [azure-monitor-solutions-overview-page](../../../includes/azure-monitor-solutions-overview-page.md)]
 
-1. Üzerinde **genel bakış** sayfasında **Active Directory sistem durumu denetimi** Döşe.
-1. Üzerinde **sistem durumu denetimi** sayfasında odak alanı dikey pencereleri biriyle özet bilgilerini gözden geçirin ve ardından bu odak alanı için önerileri görmek için tıklatın.
-1. Herhangi bir odak alanı sayfalar üzerinde ortamınız için yapılan Önceliklendirilmiş öneriler görüntüleyebilirsiniz. Altında bir öneriye tıklayabilir **etkilenen nesneler** öneri neden yapılır hakkında ayrıntılı bilgi görüntülemek için.<br><br> ![Sistem durumu denetimi önerileri görüntüsü](./media/ad-assessment/ad-healthcheck-dashboard-02.png)
-1. Önerilen düzeltici eylemleri gerçekleştirebilirsiniz **önerilen eylemleri**. Öğe ele alındığında, önerilen eylemler sonraki değerlendirmeler kayıtları alınan ve uyumluluk puanınız artacaktır. Düzeltilen öğeler görünür olarak **geçirilen nesneleri**.
+1. **Genel bakış** sayfasında, **Active Directory sistem durumu denetim** kutucuğuna tıklayın.
 
-## <a name="ignore-recommendations"></a>Öneriler yoksay
-Yok saymak için istediğiniz önerilerini varsa, Azure İzleyici, öneriler, değerlendirme sonuçlarında görüntülenmesini önlemek için kullanacağı bir metin dosyası oluşturabilirsiniz.
+2. **Sistem durumu denetimi** sayfasında, odak alanı Dikey penceresinde bulunan Özet bilgilerini gözden geçirin ve ardından bu odak alanı önerilerini görüntülemek için bir tane tıklatın.
 
-### <a name="to-identify-recommendations-that-you-will-ignore"></a>Göz ardı eder önerileri tanımlamak için
+3. Odak alanı sayfalarında, ortamınız için yapılan öncelikli önerileri görüntüleyebilirsiniz. Önerinin neden yapıldığına ilişkin ayrıntıları görüntülemek için **etkilenen nesneler** altında bir öneriye tıklayın.
+
+    ![Sistem durumu denetimi önerilerinin görüntüsü](./media/ad-assessment/ad-healthcheck-dashboard-02.png)
+
+4. **Önerilen eylemlerde**önerilen düzeltici eylemler gerçekleştirebilirsiniz. Öğe ne zaman giderildiği, daha sonraki değerlendirmeler önerilen eylemlerin alındığını ve uyumluluk puanınız artacaktır. Düzeltilen öğeler **geçirilmiş nesneler**olarak görünür.
+
+## <a name="ignore-recommendations"></a>Önerileri yoksay
+
+Yok saymak istediğiniz önerileriniz varsa, Azure Izleyici 'nin değerlendirme sonuçlarınızda görünmesini engellemek için kullanacağı bir metin dosyası oluşturabilirsiniz.
+
+### <a name="to-identify-recommendations-that-you-will-ignore"></a>Yok sayılacak önerileri belirlemek için
+
 [!INCLUDE [azure-monitor-log-queries](../../../includes/azure-monitor-log-queries.md)]
 
-Ortamınızdaki bilgisayarları için başarısız olan liste öneriler için aşağıdaki sorguyu kullanın.
+Ortamınızdaki bilgisayarlarda başarısız olan önerileri listelemek için aşağıdaki sorguyu kullanın.
 
 ```
 ADAssessmentRecommendation | where RecommendationResult == "Failed" | sort by Computer asc | project Computer, RecommendationId, Recommendation
 ```
 
-Günlük sorgusu gösteren ekran görüntüsü aşağıda verilmiştir:<br><br> ![başarısız önerileri](media/ad-assessment/ad-failed-recommendations.png)
+Günlük sorgusunun gösterildiği bir ekran görüntüsü aşağıda verilmiştir: <
 
-Yok saymak için istediğiniz önerilerini seçin. Sonraki yordamda Recommendationıd için değerleri kullanacaksınız.
+![başarısız öneriler](media/ad-assessment/ad-failed-recommendations.png)
 
-### <a name="to-create-and-use-an-ignorerecommendationstxt-text-file"></a>Oluşturma ve bir IgnoreRecommendations.txt metin dosyası kullanma
-1. IgnoreRecommendations.txt adlı bir dosya oluşturun.
-2. Yapıştırın veya Azure İzleyici'nın ayrı bir satıra yoksay ve sonra dosyayı kaydedip kapatın istediğiniz her bir öneri için her Recommendationıd yazın.
-3. Dosya, aşağıdaki klasörde, önerileri yok saymak için Azure İzleyici istediğiniz her bilgisayara yerleştirin.
-   * Bilgisayarlarda Microsoft izleme (doğrudan veya Operations Manager üzerinden bağlı) aracısı ile - *SystemDrive*: \Program Monitoring Agent\Agent
-   * Operations Manager 2012 R2 yönetim sunucusunda - *SystemDrive*: \Program System Center 2012 R2\Operations Manager\Server
-   * Operations Manager 2016 yönetim sunucusunda - *SystemDrive*: \Program System Center 2016\Operations Manager\Server
+Yoksaymak istediğiniz önerileri seçin. Sonraki yordamda RecommendationId için değerleri kullanacaksınız.
 
-### <a name="to-verify-that-recommendations-are-ignored"></a>Öneriler göz ardı edilir doğrulamak için
-Sonraki, varsayılan olarak yedi günde sistem durumu denetimi çalıştırır, zamanlanmış sonra belirtilen önerileri işaretlenmiş *yoksayıldı* ve Panoda görünmez.
+### <a name="to-create-and-use-an-ignorerecommendationstxt-text-file"></a>Bir ıgnorereyorum geçişleri. txt metin dosyası oluşturmak ve kullanmak için
 
-1. Yoksayılan tüm önerilere listelemek için aşağıdaki günlük sorguları kullanabilirsiniz.
+1. Ignorereyorumgeçişleri. txt adlı bir dosya oluşturun.
+
+2. Azure Izleyici 'nin ayrı bir satırda yok saymasını istediğiniz her öneri için her bir RecommendationId yapıştırın veya yazın, sonra dosyayı kaydedip kapatın.
+
+3. Azure Izleyici 'nin önerileri yoksaymasını istediğiniz her bilgisayarda dosyayı aşağıdaki klasöre yerleştirin.
+
+   * Microsoft Monitoring Agent olan bilgisayarlarda (doğrudan veya Operations Manager üzerinden bağlı)- *systemdrive*: \Program Files\Microsoft Monitoring Tors t\agent
+   * Operations Manager 2012 R2 Management Server- *systemdrive*: \Program Files\Microsoft System Center 2012 R2\Operations manager\server
+   * Operations Manager 2016 yönetim sunucusu- *systemdrive*: \Program Files\Microsoft System Center 2016 \ Operations manager\server
+
+### <a name="to-verify-that-recommendations-are-ignored"></a>Önerilerin yoksayıldığını doğrulamak için
+
+Zamanlanan bir sonraki sistem durumu denetimi çalıştıktan sonra, varsayılan olarak yedi günde bir, belirtilen öneri *yoksayıldı* olarak işaretlenir ve panoda görünmez.
+
+1. Tüm yoksayılan önerileri listelemek için aşağıdaki günlük sorgularını kullanabilirsiniz.
 
     ```
     ADAssessmentRecommendation | where RecommendationResult == "Ignored" | sort by Computer asc | project Computer, RecommendationId, Recommendation
     ```
 
-2. Daha sonra yoksayılan önerileri görmek istediğinize karar verirseniz, IgnoreRecommendations.txt dosyaları kaldırın veya bunları RecommendationIDs kaldırabilirsiniz.
+2. Daha sonra yoksayılan önerilere bakmak istediğinize karar verirseniz, tüm ıgnorereyorum. txt dosyalarını kaldırın veya RecommendationIDs kaldırabilir.
 
-## <a name="ad-health-check-solutions-faq"></a>AD durumu denetimi çözümleri hakkında SSS
-*Sistem durumu denetimi ne kadar sıklıkla çalışır?*
+## <a name="ad-health-check-solutions-faq"></a>AD sistem durumu denetimi çözümleri SSS
 
-* Denetim yedi günde bir çalıştırılır.
+*Bir sistem durumu denetimi ne sıklıkta çalıştırılır?*
 
-*Sistem durumu denetimini çalışma sıklığını yapılandırmak için bir yol var mı?*
+* Onay her yedi günde bir çalıştırılır.
 
-* Şu anda değil.
+*Sistem durumu denetiminin ne sıklıkta çalışacağını yapılandırmak için bir yol var mı?*
 
-*Eğer başka bir sunucuya, ben bir sistem durumu denetimi çözümü ekledikten sonra bulunan için denetlenmesi*
+* Şimdilik hayır.
 
-* Evet, yedi günde bir, daha sonra gelen iade edilmeden bulununca.
+*Bir sistem durumu denetimi çözümünü ekledikten sonra başka bir sunucu bulunursa, denetlenecek*
 
-*Ne zaman bir sunucu kullanımdan alındıktan hemen ise sistem durumu denetiminin dışında kaldırılacak?*
+* Evet, bu, her yedi günde bir üzerinde denetlenir.
 
-* Bir sunucu 3 haftaya kadar veri göndermez, kaldırılır.
+*Sunucu kullanımdan çıkarılmışsa, sistem durumu denetiminden kaldırılır?*
 
-*Veri koleksiyonu yapan işlemin adı nedir?*
+* Bir sunucu 3 hafta boyunca veri göndermezse, kaldırılır.
 
-* AdvisorAssessment.exe
+*Veri toplamayı yapan işlemin adı nedir?*
 
-*Ne kadar toplanacak veri için sürer?*
+* Danışmanorassessment. exe
 
-* Gerçek veri toplama sunucusuna yaklaşık 1 saat sürer. Bu çok sayıda Active Directory sunucuları sahip sunucularda daha uzun sürebilir.
+*Verilerin toplanması ne kadar sürer?*
 
-*Verileri toplandığında yapılandırmak için bir yol var mı?*
+* Sunucu üzerindeki gerçek veri koleksiyonu yaklaşık 1 saat sürer. Çok sayıda Active Directory sunucusu olan sunucularda daha uzun sürebilir.
 
-* Şu anda değil.
+*Verilerin toplanması sırasında yapılandırmak için bir yol var mı?*
 
-*Neden yalnızca ilk 10 önerileri görüntülensin mi?*
+* Şimdilik hayır.
 
-* Büyük kapsamlı bir liste görevlerin vermek yerine, Önceliklendirilmiş öneriler adresleme odaklanmak öneririz. Bunları adres sonra ek öneriler kullanılabilir hale gelir. Ayrıntılı listesini görmek isterseniz, bir günlük sorgusu kullanarak tüm önerileri görüntüleyebilirsiniz.
+*Neden yalnızca ilk 10 öneriyi görüntülersin?*
 
-*Bir öneri yok saymak için bir yol var mı?*
+* Size ayrıntılı bir görev listesi vermek yerine öncelikle öncelikli önerileri gidermeye odaklanmanız önerilir. Bunları adresledikten sonra ek öneriler kullanılabilir hale gelir. Ayrıntılı listeyi görmeyi tercih ediyorsanız, bir günlük sorgusu kullanarak tüm önerileri görüntüleyebilirsiniz.
 
-* Evet, bkz: [önerileri yoksay](#ignore-recommendations) yukarıdaki bölümde.
+*Öneriyi yoksaymak için bir yol var mı?*
+
+* Evet, bkz. Yukarıdaki [önerileri yoksay](#ignore-recommendations) bölümü.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Kullanım [Azure İzleyici günlük sorguları](../log-query/log-query-overview.md) ayrıntılı veri AD sistem durumunu denetleyin ve önerileri çözümleme hakkında bilgi edinmek için.
+
+Ayrıntılı AD sistem durumu denetimi verilerini ve önerilerini çözümlemeyi öğrenmek için [Azure izleyici günlük sorgularını](../log-query/log-query-overview.md) kullanın.

@@ -1,32 +1,30 @@
 ---
 title: ASP.NET Web Uygulamanızı Azure Application Insights ile izleme | Microsoft Docs
-description: Application Insights ile izleme için bir ASP.NET Web uygulamasını hızlıca ayarlamaya yönergeler sağlar
-services: application-insights
-keywords: ''
+description: Application Insights ile izlemek üzere bir ASP.NET Web uygulamasını hızlıca ayarlamaya yönelik yönergeler sağlar
+ms.service: azure-monitor
+ms.subservice: application-insights
+ms.topic: quickstart
 author: mrbullwinkle
 ms.author: mbullwin
 ms.date: 06/26/2019
-ms.service: application-insights
 ms.custom: mvc
-ms.topic: quickstart
-manager: carmonm
-ms.openlocfilehash: 6d26cedb0dd836846d7e9f00539fe101c944f478
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 1aab9009c2c33522abdeae6ca865a35b9fc104e4
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67442220"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72900482"
 ---
 # <a name="start-monitoring-your-aspnet-web-application"></a>ASP.NET Web Uygulamanızı izlemeye başlama
 
 Azure Application Insights ile web uygulamanızı kullanılabilirlik, performans ve kullanım bakımından kolayca izleyebilirsiniz.  Ayrıca, bir kullanıcının bildirmesini beklemeden uygulamanızdaki hataları hızlıca tanımlayıp tespit edebilirsiniz.  Application Insights’tan uygulamanızın verimi ve performansı hakkında topladığınız bilgileri kullanarak, uygulamanızı korumak ve geliştirmek için bilinçli seçimler yapabilirsiniz.
 
-Bu hızlı başlangıç, var olan bir ASP.NET web uygulamasına Application Insights ekleme ve uygulamanızı çözümlemek için kullanabileceğiniz çeşitli yöntemlerden yalnızca biri olan canlı istatistikleri çözümlemeye başlama işlemini gösterir. Bir ASP.NET web uygulaması yoksa izleyerek bir tane oluşturabilirsiniz [bir ASP.NET Web uygulaması oluşturma Hızlı başlangıcı](../../app-service/app-service-web-get-started-dotnet-framework.md).
+Bu hızlı başlangıç, var olan bir ASP.NET web uygulamasına Application Insights ekleme ve uygulamanızı çözümlemek için kullanabileceğiniz çeşitli yöntemlerden yalnızca biri olan canlı istatistikleri çözümlemeye başlama işlemini gösterir. Bir ASP.NET Web uygulamanız yoksa, [ASP.NET Web uygulaması oluşturma hızlı](../../app-service/app-service-web-get-started-dotnet-framework.md)başlangıcı ' nı izleyerek bir tane oluşturabilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 Bu hızlı başlangıcı tamamlamak için:
 
-- Yükleme [Visual Studio 2019](https://www.visualstudio.com/downloads/) aşağıdaki iş yükleri ile:
+- Aşağıdaki iş yükleriyle [Visual Studio 2019](https://www.visualstudio.com/downloads/) ' i yükledikten sonra:
     - ASP.NET ve web geliştirme
     - Azure geliştirme
 
@@ -35,7 +33,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.
 
 ## <a name="enable-application-insights"></a>Application Insights'ı etkinleştirme
 
-1. Projenizi Visual Studio 2019 ' açın.
+1. Projenizi Visual Studio 2019 ' de açın.
 2. Proje menüsünden **Application Insights’ı Yapılandır**’ı seçin. Visual Studio, uygulamanıza Application Insights SDK'sını ekler.
 
     > [!IMPORTANT]
@@ -47,7 +45,9 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.
 
 4. Aboneliğinizi seçin ve **Kaydet**’e tıklayın.
 
-5. **Hata Ayıkla** menüsünden **Hata Ayıklamayı Başlat**’ı seçerek veya F5 tuşuna basarak uygulamanızı çalıştırın.
+5. **Proje** seçin > **NuGet Paketlerini Yönet** > **paket kaynağı: NuGet.org** > Application Insights SDK paketlerini en son kararlı sürüme **güncelleştirin** .
+
+6. **Hata Ayıkla** menüsünden **Hata Ayıklamayı Başlat**’ı seçerek veya F5 tuşuna basarak uygulamanızı çalıştırın.
 
 ## <a name="confirm-app-configuration"></a>Uygulama yapılandırmasını onaylama
 
@@ -61,7 +61,7 @@ Application Insights, uygulamanızın nerede çalıştığına bakmaksızın tel
 
 Artık Application Insights’ı Azure portalında açarak çalışan uygulamanıza ilişkin çeşitli ayrıntıları görüntüleyebilirsiniz.
 
-1. Genişletin **bağlı hizmetler** Çözüm Gezgini'nde klasörü (Bulut ve Tak simgesi) sonra sağ **Application Insights** klasörü ve tıklatın **Application Insights portalını Aç** .  Uygulamanıza ilişkin bazı bilgiler ve çeşitli seçenekler görürsünüz.
+1. Çözüm Gezgini **bağlı hizmetler** klasörünü (bulut ve tak simgesi) genişletin, **Application Insights** klasörüne sağ tıklayın ve **Application Insights Portal 'ı aç**' a tıklayın.  Uygulamanıza ilişkin bazı bilgiler ve çeşitli seçenekler görürsünüz.
 
     ![Uygulama Eşlemesi](media/quick-monitor-portal/04-overview.png)
 
@@ -69,11 +69,11 @@ Artık Application Insights’ı Azure portalında açarak çalışan uygulaman�
 
     ![Uygulama Eşlemesi](media/quick-monitor-portal/05-appmap.png)
 
-3. Tıklayarak **uygulama analizi** simgesi ![Uygulama Haritası](media/quick-monitor-portal/app-viewinlogs-icon.png) **günlükleri (analiz) görünümünde** Uygulama bileşenlerinden birinde. Bu açılır **günlükleri (analiz)** , Application Insights tarafından toplanan tüm verileri çözümleme için zengin bir sorgu dili sağlar. Bu örnekte, istek sayısını grafik olarak işleyen bir sorgu oluşturulur. Diğer verileri çözümlemek için kendi sorgularınızı yazabilirsiniz.
+3. Uygulama **Analizi** simgesine, uygulama bileşenlerinden birindeki application Map](media/quick-monitor-portal/app-viewinlogs-icon.png) **View for logs (Analytics)** ![tıklayın. Bu, Application Insights tarafından toplanan tüm verileri analiz etmek için zengin bir sorgu dili sağlayan **Günlükler (Analiz)** açar. Bu örnekte, istek sayısını grafik olarak işleyen bir sorgu oluşturulur. Diğer verileri çözümlemek için kendi sorgularınızı yazabilirsiniz.
 
     ![Analiz](media/quick-monitor-portal/6viewanalytics.png)
 
-4. Tıklayarak **Canlı ölçümleri Stream** altında soldaki araştırın. Burada uygulamanızın çalışması sırasında canlı istatistikler gösterilir. Buna gelen istek sayısı, bu isteklerin süresi ve oluşan her türlü hata gibi bilgiler dahildir. Ayrıca, işlemci ve bellek gibi önemli performans ölçümlerini inceleyebilirsiniz.
+4. Araştır altında sol tarafta **canlı ölçüm akışı** ' a tıklayın. Burada uygulamanızın çalışması sırasında canlı istatistikler gösterilir. Buna gelen istek sayısı, bu isteklerin süresi ve oluşan her türlü hata gibi bilgiler dahildir. Ayrıca, işlemci ve bellek gibi önemli performans ölçümlerini inceleyebilirsiniz.
 
     ![Canlı Akış](media/quick-monitor-portal/7livemetrics.png)
 
@@ -104,15 +104,15 @@ Daha fazla bilgi edinmek için [açık kaynak JavaScript SDK'sı](https://github
 
 ## <a name="video"></a>Video
 
-* İlgili dış adım adım video [sıfırdan bir .NET uygulaması ile Application Insights'ı yapılandırma](https://www.youtube.com/watch?v=blnGAVgMAfA).
+* [Sıfırdan bir .NET uygulaması ile Application Insights yapılandırma](https://www.youtube.com/watch?v=blnGAVgMAfA)hakkında dış adım adım video.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
-İşiniz bittiğinde test, kaynak grubunu silebilirsiniz ve tüm ilgili kaynakları. İçin aşağıdaki adımları izleyin.
+Testi tamamladığınızda, kaynak grubunu ve tüm ilgili kaynakları silebilirsiniz. Bunu yapmak için aşağıdaki adımları izleyin.
 1. Azure portalında sol taraftaki menüden, **Kaynak grupları**’na tıklayın ve ardından **myResourceGroup**’a tıklayın.
 2. Kaynak grubu sayfanızda, **Sil**’e tıklayın, metin kutusuna **myResourceGroup** yazın ve ardından **Sil**’e tıklayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu hızlı başlangıçta, Azure Application Insights tarafından izleme için uygulamanızı etkinleştirdiniz.  İstatistikleri izlemek ve uygulamanızdaki sorunları tespit etmek üzere nasıl kullanacağınızı öğrenmek için öğreticilere ilerleyin.
+Bu hızlı başlangıçta, uygulamanızı Azure Application Insights tarafından izlemeye etkinleştirdiniz.  İstatistikleri izlemek ve uygulamanızdaki sorunları tespit etmek üzere nasıl kullanacağınızı öğrenmek için öğreticilere ilerleyin.
 
 > [!div class="nextstepaction"]
 > [Azure Application Insights öğreticileri](tutorial-runtime-exceptions.md)

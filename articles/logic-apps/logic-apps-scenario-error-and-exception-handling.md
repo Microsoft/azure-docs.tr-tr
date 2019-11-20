@@ -1,61 +1,61 @@
 ---
-title: Özel durum işleme & hata günlüğü senaryo - Azure Logic Apps | Microsoft Docs
-description: İşte bir gerçek kullanım örnekleri hakkında gelişmiş özel durum işleme ve Azure Logic Apps'te günlüğe kaydetme hatası
+title: Özel durum işleme & hata günlüğü senaryosu-Azure Logic Apps
+description: Gelişmiş özel durum işleme ve hata günlüğü Azure Logic Apps için gerçek kullanım örneği ve senaryo
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
 author: hedidin
-ms.author: b-hoedid
-ms.reviewer: estfan, LADocs
+ms.author: estfan
+ms.reviewer: LADocs
 ms.assetid: 63b0b843-f6b0-4d9a-98d0-17500be17385
 ms.topic: article
 ms.date: 07/29/2016
-ms.openlocfilehash: 58e59e4faa135e24124f494d90437b49caa30129
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 7930d487d367ee19b869becae5017f80ea1df8cb
+ms.sourcegitcommit: d37991ce965b3ee3c4c7f685871f8bae5b56adfa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60599464"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72680171"
 ---
-# <a name="scenario-exception-handling-and-error-logging-for-logic-apps"></a>Senaryo: Logic apps için hata günlüğünü ve özel durum işleme
+# <a name="scenario-exception-handling-and-error-logging-for-logic-apps"></a>Senaryo: Logic Apps için özel durum işleme ve hata günlüğü
 
-Bu senaryo, bir mantıksal uygulama, daha iyi özel durum işleme destekleyecek şekilde nasıl genişletebileceğinizi açıklar. Soruyu yanıtlamak için gerçek zamanlı konuşmaların kullanım örneği kullandık: "Azure Logic Apps özel durum ve hata işleme destekliyor mu?"
+Bu senaryo, özel durum işlemeyi daha iyi desteklemek için bir mantıksal uygulamayı nasıl genişletebileceğinizi açıklar. Soruyu yanıtlamak için gerçek yaşam bir kullanım durumu kullandık: "destek özel durum ve hata işleme Azure Logic Apps"
 
 > [!NOTE]
-> Geçerli Azure Logic Apps şemasını eylem yanıtlar için standart bir şablon sağlar. Bu şablon, hem iç doğrulama hem de bir API uygulaması döndürülen hata yanıtları içerir.
+> Geçerli Azure Logic Apps şeması, eylem yanıtları için standart bir şablon sağlar. Bu şablon, bir API uygulamasından döndürülen iç doğrulama ve hata yanıtlarını içerir.
 
-## <a name="scenario-and-use-case-overview"></a>Senaryo ve kullanım örneği genel bakış
+## <a name="scenario-and-use-case-overview"></a>Senaryo ve kullanım örneğine genel bakış
 
-Bu senaryo için kullanım örneği olarak Hikayeyi şöyledir: 
+Bu senaryo için kullanım örneği olarak hikaye aşağıda verilmiştir: 
 
-İyi bilinen bir sağlık hizmeti kuruluşunda bize Microsoft Dynamics CRM Online'ı kullanarak bir Hasta portalı oluşturacak bir Azure çözümü geliştirmek için gerçekleştiriliyor. Randevu kayıtları Dynamics CRM Online bir Hasta portalı ve Salesforce arasında göndermek gerekli. Biz kullanmak için sorulan [HL7 FHIR](http://www.hl7.org/implement/standards/fhir/) tüm hasta kayıtları için standart.
+İyi bilinen bir sağlık kurumunda, Microsoft Dynamics CRM Online 'ı kullanarak bir hasta portalı oluşturacak bir Azure çözümü geliştiriyorum. Dynamics CRM Online hasta portalı ve Salesforce arasında randevu kayıtları göndermeleri gerekir. Tüm hasta kayıtları için [HL7 FHıR](http://www.hl7.org/implement/standards/fhir/) standardını kullanmanız istendi.
 
-Projeye iki ana gereksinimlerini sahipti:  
+Projede iki önemli gereksinim vardı:  
 
-* Dynamics CRM Online portaldan gönderilen kayıtlarını günlüğe kaydetmek için bir yöntem
-* İş akışı içinde oluşan hataları görüntülemek için bir yol
+* Dynamics CRM Online portalından gönderilen kayıtları günlüğe kaydetmek için bir yöntem
+* İş akışında oluşan hataları görüntülemenin bir yolu
 
 > [!TIP]
-> Bu proje hakkında üst düzey video için bkz. [tümleştirme kullanıcı grubu](http://www.integrationusergroup.com/logic-apps-support-error-handling/ "tümleştirme kullanıcı grubu").
+> Bu proje hakkında üst düzey bir video için bkz. [tümleştirme Kullanıcı grubu](http://www.integrationusergroup.com/logic-apps-support-error-handling/ "Tümleştirme Kullanıcı grubu").
 
-## <a name="how-we-solved-the-problem"></a>Biz sorun nasıl çözüldü
+## <a name="how-we-solved-the-problem"></a>Sorunu nasıl çözeceğiz
 
-Seçtik [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/ "Azure Cosmos DB") (Cosmos DB başvuruyor kayıtları belgeleri için) günlük ve hata kayıtlar için bir depo olarak. Azure Logic Apps tüm yanıtları için standart bir şablon olduğundan, size özel bir şema oluşturun girmesi gerekmez. Bir API uygulamasına oluşturabilir **Ekle** ve **sorgu** hem hata hem de günlük kayıtları için. Biz de, bir şema için her API uygulaması içinde tanımlayabilirsiniz.  
+Günlük ve hata kayıtları için depo olarak [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/ "Azure Cosmos DB") seçtik (Cosmos DB kayıtları belgeler olarak ifade eder). Azure Logic Apps tüm yanıtlar için standart bir şablon içerdiğinden, özel bir şema oluşturmak zorunda olmamız gerekir. Hem hata hem de günlük kayıtlarını **eklemek** ve **sorgulamak** için bir API uygulaması oluşturacağız. Ayrıca API uygulaması içinde her biri için bir şema tanımlayabiliriz.  
 
-Belirli bir tarihten sonra kayıtları temizlemek için başka bir gereksinim oluştu. Cosmos DB adlı bir özelliğe sahiptir [yaşam süresi](https://azure.microsoft.com/blog/documentdb-now-supports-time-to-live-ttl/ "yaşam süresi") (TTL), izin verilen bize ayarlamak bir **yaşam süresi** her bir kaydı veya koleksiyon için değer. Bu özellik, el ile Cosmos DB'de kayıtları silme gereksinimini ortadan.
+Başka bir gereksinim, belirli bir tarihten sonra kayıtları temizlemelidir. Cosmos DB, [yaşam süresi](https://azure.microsoft.com/blog/documentdb-now-supports-time-to-live-ttl/ "Yaşam süresi") (TTL) adlı bir özelliğe sahiptir ve bu, her bir kayıt veya koleksiyon Için bir **yaşam** değeri ayarlayabileceğimizi sağlar. Bu özellik Cosmos DB kayıtları el ile silme gereksinimini ortadan kaldırmıştır.
 
 > [!IMPORTANT]
-> Bu öğreticiyi tamamlamak için bir Cosmos DB veritabanı ve iki koleksiyon (günlüğe kaydetme ve hataları) oluşturmanız gerekir.
+> Bu öğreticiyi tamamlayabilmeniz için bir Cosmos DB veritabanı ve iki koleksiyon (günlüğe kaydetme ve hata) oluşturmanız gerekir.
 
-## <a name="create-the-logic-app"></a>Mantıksal uygulama oluşturma
+## <a name="create-the-logic-app"></a>Mantıksal uygulamayı oluşturma
 
-Mantıksal uygulama oluşturun ve uygulamayı Logic Apps Tasarımcısı'nda açmak için ilk adımdır bakın. Bu örnekte, üst-alt logic apps kullanıyoruz. Biz üst oluşturmuş ve bir alt mantıksal uygulama oluşturacaksınız varsayalım.
+İlk adım mantıksal uygulama oluşturmak ve uygulamayı Logic App Designer 'da açmak. Bu örnekte, üst-alt mantıksal uygulamaları kullanıyoruz. Zaten üst öğeyi oluşturduğumuz ve bir alt mantıksal uygulama oluşturduğumuz varsayılalım.
 
-Günlük kaydı, Dynamics CRM Online oturumunu yakında kullanacağız çünkü en üstünde başlayalım. Kullanmanız gerekir bir **istek** üst mantıksal uygulama bu alt Tetikleyiciler olduğundan tetikleyin.
+Dynamics CRM Online 'dan gelen kaydı günlüğe kaydedebilmemiz için en üst kısımdaki bir başlangıç yapın. Üst mantıksal uygulama bu alt öğeyi tetiklediği için bir **istek** tetikleyicisi kullanmalıdır.
 
 ### <a name="logic-app-trigger"></a>Mantıksal uygulama tetikleyicisi
 
-Kullanmakta olduğunuz bir **istek** tetiklemek aşağıdaki örnekte gösterildiği gibi:
+Aşağıdaki örnekte gösterildiği gibi bir **istek** tetikleyicisi kullanıyoruz:
 
 ``` json
 "triggers": {
@@ -95,39 +95,39 @@ Kullanmakta olduğunuz bir **istek** tetiklemek aşağıdaki örnekte gösterild
 
 ## <a name="steps"></a>Adımlar
 
-Biz, Dynamics CRM Online portaldan hasta kaydının (istek) kaynak oturum açmalısınız.
+Hasta kaydının kaynağını (istek) Dynamics CRM Online portalından günlüğe kaydetmeniz gerekir.
 
-1. Size yeni bir randevu kayıt Dynamics CRM Online'dan almanız gerekir.
+1. Dynamics CRM Online 'dan yeni bir randevu kaydı almalıdır.
 
-   Bizimle CRM'den yakında tetikleyici sağlar **CRM PatentId**, **kayıt türü**, **yeni veya güncelleştirilmiş kayıt** (yeni veya Boolean değeri güncelleştirin), ve  **SalesforceId**. **SalesforceId** yalnızca bir güncelleştirme için kullanıldığından null olabilir.
-   CRM kullanarak CRM Kayıt aldığımız **PatientID** ve **kayıt türü**.
+   CRM 'den gelen tetikleyici, bize **CRM PatentId**, **kayıt türü**, **Yeni veya güncelleştirilmiş kayıt** (yeni veya güncelleştirme Boolean değeri) ve **salesforceıd**sağlar. **Salesforceıd** yalnızca bir güncelleştirme için kullanıldığından null olabilir.
+   CRM **Hatıd** ve **kayıt türü**kullanılarak CRM kaydı alınır.
 
-2. Ardından, Azure Cosmos DB SQL API uygulamamızı eklemek ihtiyacımız **InsertLogEntry** Logic Apps Tasarımcısı'nda burada gösterildiği gibi işlem.
+2. Daha sonra, mantıksal uygulama Tasarımcısı 'nda gösterildiği gibi Azure Cosmos DB SQL API uygulaması **ınsertlogentry** işleminizi eklememiz gerekiyor.
 
-   **Günlük Girdisi Ekle**
+   **Günlük girdisi Ekle**
 
-   ![Günlük Girdisi Ekle](media/logic-apps-scenario-error-and-exception-handling/lognewpatient.png)
+   ![Günlük girdisi Ekle](media/logic-apps-scenario-error-and-exception-handling/lognewpatient.png)
 
-   **Hata Girişi Ekle**
+   **Hata girişi Ekle**
 
-   ![Günlük Girdisi Ekle](media/logic-apps-scenario-error-and-exception-handling/insertlogentry.png)
+   ![Günlük girdisi Ekle](media/logic-apps-scenario-error-and-exception-handling/insertlogentry.png)
 
-   **Onay için kayıt hatası oluşturun**
+   **Kayıt oluşturma hatası olup olmadığını denetleyin**
 
    ![Koşul](media/logic-apps-scenario-error-and-exception-handling/condition.png)
 
 ## <a name="logic-app-source-code"></a>Mantıksal uygulama kaynak kodu
 
 > [!NOTE]
-> Aşağıdaki örnek yalnızca örnektir. Bu öğreticide uygulama artık üretim, değerini bağlı olduğu bir **kaynak düğüm** bir randevu. zamanlamayla ilgili özellikleri görüntülenmeyebilir > 
+> Aşağıdaki örnekler yalnızca örnektir. Bu öğretici üretimde bir uygulamaya bağlı olduğundan, **kaynak düğümün** değeri bir randevunun zamanlanması ile ilgili özellikleri görüntülemeyebilir. > 
 
 ### <a name="logging"></a>Günlüğe kaydetme
 
-Aşağıdaki mantıksal uygulama kod örneği, günlüğe kaydetme nasıl ele alınacağını gösterir.
+Aşağıdaki mantıksal uygulama kodu örneği, günlüğün nasıl işleneceğini gösterir.
 
-#### <a name="log-entry"></a>Günlük girişi
+#### <a name="log-entry"></a>Günlük girdisi
 
-Aşağıda, bir günlük girişi eklemek için mantıksal uygulama kaynak kodu verilmiştir.
+Günlük girdisi eklemek için mantıksal uygulama kaynak kodu aşağıda verilmiştir.
 
 ``` json
 "InsertLogEntry": {
@@ -153,9 +153,9 @@ Aşağıda, bir günlük girişi eklemek için mantıksal uygulama kaynak kodu v
 }
 ```
 
-#### <a name="log-request"></a>Günlük istek
+#### <a name="log-request"></a>Günlük isteği
 
-API uygulamasına gönderilen günlük istek iletisi aşağıda verilmiştir.
+API uygulamasına gönderilen günlük isteği iletisi aşağıda verilmiştir.
 
 ``` json
     {
@@ -173,9 +173,9 @@ API uygulamasına gönderilen günlük istek iletisi aşağıda verilmiştir.
 ```
 
 
-#### <a name="log-response"></a>Günlük yanıt
+#### <a name="log-response"></a>Günlük yanıtı
 
-API uygulamasında oturum yanıt iletisi aşağıda verilmiştir.
+API uygulamasından günlük yanıtı iletisi aşağıda verilmiştir.
 
 ``` json
 {
@@ -209,15 +209,15 @@ API uygulamasında oturum yanıt iletisi aşağıda verilmiştir.
 
 ```
 
-Artık adımları işleme hatası bakalım.
+Şimdi hata işleme adımlarına bakalım.
 
 ### <a name="error-handling"></a>Hata işleme
 
-Hata işleme nasıl uygulayacağınıza dair aşağıdaki mantıksal uygulama kod örneği gösterilmektedir.
+Aşağıdaki mantıksal uygulama kodu örneği, nasıl hata işleme uygulayabileceğinizi gösterir.
 
-#### <a name="create-error-record"></a>Hata kayıt oluşturma
+#### <a name="create-error-record"></a>Hata kaydı oluştur
 
-Burada, bir hata kaydı oluşturmak için mantıksal uygulama kaynak kodu verilmiştir.
+Bir hata kaydı oluşturmak için mantıksal uygulama kaynak kodu aşağıda verilmiştir.
 
 ``` json
 "actions": {
@@ -252,7 +252,7 @@ Burada, bir hata kaydı oluşturmak için mantıksal uygulama kaynak kodu verilm
 }             
 ```
 
-#### <a name="insert-error-into-cosmos-db--request"></a>Ekleme hatası Cosmos DB'ye--iste
+#### <a name="insert-error-into-cosmos-db--request"></a>Cosmos DB--istek içine hata Ekle
 
 ``` json
 
@@ -275,7 +275,7 @@ Burada, bir hata kaydı oluşturmak için mantıksal uygulama kaynak kodu verilm
 }
 ```
 
-#### <a name="insert-error-into-cosmos-db--response"></a>Cosmos DB'ye--yanıt ekleme hatası
+#### <a name="insert-error-into-cosmos-db--response"></a>Cosmos DB--Response 'a hata ekleme
 
 ``` json
 {
@@ -343,11 +343,11 @@ Burada, bir hata kaydı oluşturmak için mantıksal uygulama kaynak kodu verilm
 
 ```
 
-### <a name="return-the-response-back-to-parent-logic-app"></a>Yanıt üst mantıksal uygulama döndürür
+### <a name="return-the-response-back-to-parent-logic-app"></a>Yanıtı üst mantıksal uygulamaya geri döndür
 
-Yanıt aldıktan sonra yanıt üst mantıksal uygulama geçirebilirsiniz.
+Yanıtı aldıktan sonra, yanıtı üst mantıksal uygulamaya geri geçirebilirsiniz.
 
-#### <a name="return-success-response-to-parent-logic-app"></a>Başarılı yanıt üst mantıksal uygulamaya döndürür
+#### <a name="return-success-response-to-parent-logic-app"></a>Üst mantıksal uygulamaya başarı yanıtı dön
 
 ``` json
 "SuccessResponse": {
@@ -369,7 +369,7 @@ Yanıt aldıktan sonra yanıt üst mantıksal uygulama geçirebilirsiniz.
 }
 ```
 
-#### <a name="return-error-response-to-parent-logic-app"></a>Üst mantıksal uygulama için hata yanıtı döndürür
+#### <a name="return-error-response-to-parent-logic-app"></a>Üst mantıksal uygulamaya hata yanıtı döndürün
 
 ``` json
 "ErrorResponse": {
@@ -393,50 +393,50 @@ Yanıt aldıktan sonra yanıt üst mantıksal uygulama geçirebilirsiniz.
 ```
 
 
-## <a name="cosmos-db-repository-and-portal"></a>Cosmos DB depo ve portal
+## <a name="cosmos-db-repository-and-portal"></a>Cosmos DB deposu ve Portal
 
-Çözümümüz eklenen özellikleriyle [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db).
+Çözümümüzde [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db)özellikleri eklendi.
 
-### <a name="error-management-portal"></a>Yönetim Portalı'nı hata
+### <a name="error-management-portal"></a>Hata yönetimi portalı
 
-Hataları görüntülemek için Cosmos DB'den hata kayıtları görüntülemek için bir MVC web uygulaması oluşturabilirsiniz. **Listesi**, **ayrıntıları**, **Düzenle**, ve **Sil** işlemleri'nın geçerli sürümünde dahil edilir.
+Hataları görüntülemek için Cosmos DB hata kayıtlarını görüntülemek üzere bir MVC web uygulaması oluşturabilirsiniz. **Liste**, **Ayrıntılar**, **düzenleme**ve **silme** işlemleri geçerli sürüme dahildir.
 
 > [!NOTE]
-> İşlemi Düzenle: Cosmos DB, tüm belgeyi değiştirir. Gösterilen kayıtları **listesi** ve **ayrıntı** örnekleri yalnızca görünümleridir. Bunlar gerçek hasta randevu kayıtlarını değildir.
+> İşlemi Düzenle: Cosmos DB tüm belgeyi değiştirir. **Liste** ve **ayrıntı** görünümlerinde gösterilen kayıtlar yalnızca örneklerdir. Bunlar gerçek hasta randevusu kayıtları değildir.
 
-Daha önce açıklanan yaklaşımı ile oluşturulan bizim MVC uygulama ayrıntılarını örnekleri aşağıda verilmiştir.
+Aşağıda, daha önce açıklanan yaklaşımla oluşturulan MVC uygulama ayrıntılarımızın örnekleri verilmiştir.
 
-#### <a name="error-management-list"></a>Hata Yönetimi listesi
+#### <a name="error-management-list"></a>Hata yönetimi listesi
 ![Hata Listesi](media/logic-apps-scenario-error-and-exception-handling/errorlist.png)
 
-#### <a name="error-management-detail-view"></a>Hata Yönetimi ayrıntı görünümü
+#### <a name="error-management-detail-view"></a>Hata yönetimi ayrıntı görünümü
 ![Hata Ayrıntıları](media/logic-apps-scenario-error-and-exception-handling/errordetails.png)
 
-### <a name="log-management-portal"></a>Günlük Yönetim Portalı
+### <a name="log-management-portal"></a>Günlük yönetimi portalı
 
-Günlükleri görüntülemek için de bir MVC web uygulaması oluşturduk. Daha önce açıklanan yaklaşımı ile oluşturulan bizim MVC uygulama ayrıntılarını örnekleri aşağıda verilmiştir.
+Günlükleri görüntülemek için de bir MVC web uygulaması oluşturduk. Aşağıda, daha önce açıklanan yaklaşımla oluşturulan MVC uygulama ayrıntılarımızın örnekleri verilmiştir.
 
 #### <a name="sample-log-detail-view"></a>Örnek günlük ayrıntı görünümü
-![Günlük ayrıntı görünümü](media/logic-apps-scenario-error-and-exception-handling/samplelogdetail.png)
+![Günlük ayrıntısı görünümü](media/logic-apps-scenario-error-and-exception-handling/samplelogdetail.png)
 
-### <a name="api-app-details"></a>API uygulama ayrıntıları
+### <a name="api-app-details"></a>API uygulaması ayrıntıları
 
-#### <a name="logic-apps-exception-management-api"></a>Logic Apps özel durum yönetimi API'si
+#### <a name="logic-apps-exception-management-api"></a>Logic Apps özel durum yönetim API 'SI
 
-Burada açıklandığı gibi açık kaynaklı Azure Logic Apps özel durum yönetimi API'si uygulamamızı işlevsellik sağlar - iki denetleyicisi vardır:
+Açık kaynaklı Azure Logic Apps özel durum yönetim API 'SI uygulamanız burada açıklanan işlevselliği sağlar-iki denetleyici vardır:
 
-* **ErrorController** bir hata kaydı (belge), bir Azure Cosmos DB koleksiyonunda ekler.
-* **LogController** günlük kaydı (belge), bir Azure Cosmos DB koleksiyonunda ekler.
+* **Errorcontroller** bir Azure Cosmos DB koleksiyonuna bir hata kaydı (belge) ekler.
+* **Günlüğe kaydetme denetleyicisi** Bir Azure Cosmos DB koleksiyonuna bir günlük kaydı (belge) ekler.
 
 > [!TIP]
-> Her iki denetleyicilerinin kullandığı `async Task<dynamic>` işlemleri, Azure Cosmos DB şema işlemi gövdesinde oluşturabilmesi için çalışma zamanında çözümlenecek işlemlere izin verme. 
+> Her iki denetleyici de `async Task<dynamic>` işlemler kullanır, bu nedenle işlem gövdesinde Azure Cosmos DB şeması oluşturuyoruz. 
 > 
 
-Azure Cosmos DB'de her belgenin benzersiz bir kimliği olması gerekir Kullanıyoruz `PatientId` ve Unix zaman damgası değeri (çift) dönüştürülür bir zaman damgası ekleme. Kesirli değer kaldırmak için değer olacak şekilde kısaltın.
+Azure Cosmos DB içindeki her belge benzersiz bir KIMLIĞE sahip olmalıdır. @No__t_0 kullanıyor ve bir Unix zaman damgası değerine (Double) dönüştürülen bir zaman damgası ekliyoruz. Kesirli değeri kaldırmak için değeri kestik.
 
-Kaynak kodu hata denetleyicimizin API görüntüleyebileceğiniz [GitHub](https://github.com/HEDIDIN/LogicAppsExceptionManagementApi/blob/master/LogicAppsExceptionManagementApi/Controllers/LogController.cs).
+[GitHub](https://github.com/HEDIDIN/LogicAppsExceptionManagementApi/blob/master/LogicAppsExceptionManagementApi/Controllers/LogController.cs)'dan hata denetleyicisi API 'sinin kaynak kodunu görüntüleyebilirsiniz.
 
-API'yi bir mantıksal uygulamadan aşağıdaki söz dizimini kullanarak diyoruz:
+Aşağıdaki sözdizimini kullanarak bir mantıksal uygulamadan API 'YI çağırıyoruz:
 
 ``` json
  "actions": {
@@ -469,20 +469,20 @@ API'yi bir mantıksal uygulamadan aşağıdaki söz dizimini kullanarak diyoruz:
  }
 ```
 
-Yukarıdaki kod örneğinde ifadesinde denetler *Create_NewPatientRecord* durumunu **başarısız**.
+Önceki kod örneğindeki ifade, **başarısız**olup olmadığını kontrol *Create_NewPatientRecord* durumunu denetler.
 
 ## <a name="summary"></a>Özet
 
-* Günlüğe kaydetme ve hata işleme bir mantıksal uygulama çalıştırmasında kolayca uygulayabilirsiniz.
-* Azure Cosmos DB, günlük ve hata kayıtları (belgeler) için deposu olarak kullanabilirsiniz.
-* MVC, günlük ve hata kayıtları görüntülemek için bir portal oluşturmak için kullanabilirsiniz.
+* Bir mantıksal uygulamada günlüğe kaydetme ve hata işlemeyi kolayca uygulayabilirsiniz.
+* Günlük ve hata kayıtları (belgeler) için depo olarak Azure Cosmos DB kullanabilirsiniz.
+* Günlük ve hata kayıtlarını göstermek için bir portal oluşturmak üzere MVC 'yi kullanabilirsiniz.
 
-### <a name="source-code"></a>Kaynak kod
+### <a name="source-code"></a>Kaynak kodu
 
-Logic Apps özel durum yönetimi API uygulaması için kaynak kodu bu kullanılabilir [GitHub deposu](https://github.com/HEDIDIN/LogicAppsExceptionManagementApi "mantıksal uygulama özel durum yönetimi API'si").
+Logic Apps özel durum yönetim API 'SI uygulamasının kaynak kodu bu [GitHub deposunda](https://github.com/HEDIDIN/LogicAppsExceptionManagementApi "Mantıksal uygulama özel durum yönetim API 'SI")kullanılabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Daha fazla mantıksal uygulama örnekleri ve senaryoları görüntüleyin](../logic-apps/logic-apps-examples-and-scenarios.md)
+* [Daha fazla Logic App örneği ve senaryosu görüntüleyin](../logic-apps/logic-apps-examples-and-scenarios.md)
 * [Mantıksal uygulamaları izleme hakkında bilgi edinin](../logic-apps/logic-apps-monitor-your-logic-apps.md)
-* [Mantıksal uygulamalar için otomatik dağıtım şablonları oluşturma](../logic-apps/logic-apps-create-deploy-template.md)
+* [Mantıksal uygulama dağıtımını otomatikleştirme](../logic-apps/logic-apps-azure-resource-manager-templates-overview.md)

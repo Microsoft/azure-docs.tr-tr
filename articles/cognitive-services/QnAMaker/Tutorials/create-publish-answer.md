@@ -1,6 +1,6 @@
 ---
-title: Oluşturun, yayımlayın, yanıt
-titleSuffix: QnA Maker - Azure Cognitive Services
+title: 'Öğretici: oluşturma, yayımlama, yanıt Soru-Cevap Oluşturma'
+titleSuffix: Azure Cognitive Services
 description: Bu REST tabanlı öğretici, program aracılığıyla bilgi bankası oluşturup yayımlama ve bunu kullanarak soruları cevaplama adımlarını göstermektedir.
 services: cognitive-services
 author: diberry
@@ -9,28 +9,28 @@ ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: qna-maker
 ms.topic: tutorial
-ms.date: 01/24/2019
+ms.date: 10/12/2019
 ms.author: diberry
-ms.openlocfilehash: a14bc14e6115c1bc25582c3de71382ae17d7debd
-ms.sourcegitcommit: 36c50860e75d86f0d0e2be9e3213ffa9a06f4150
+ms.openlocfilehash: d13bce3c1cafd20b311aa882d3a32101c1833ba5
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/16/2019
-ms.locfileid: "65792293"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555498"
 ---
-# <a name="tutorial-using-c-create-knowledge-base-then-answer-question"></a>Öğretici: Kullanarak C#, bilgi tabanı oluşturan sonra soru yanıtlayın
+# <a name="tutorial-using-c-create-knowledge-base-then-answer-question"></a>Öğretici: C# kullanarak bilgi bankası oluşturma ve soruları cevaplama
 
 Bu öğretici, program aracılığıyla bilgi bankası (KB) oluşturup yayımlama ve bunu kullanarak müşteri sorularını cevaplama adımlarını göstermektedir. 
 
 > [!div class="checklist"]
-> * Bilgi bankası oluşturma 
+> * Bilgi bankası oluşturun 
 > * Oluşturma durumunu denetleme
 > * Bilgi bankasını eğitme ve yayımlama
 > * Uç nokta bilgisi alma
 > * Curl kullanarak bilgi bankasını sorgulama
 
 
-Bu hızlı başlangıç şu Soru-Cevap Oluşturma API'lerini çağırır:
+Bu hızlı başlangıçta Soru-Cevap Oluşturma REST API 'Leri çağrıları yapılır:
 
 * [Bilgi bankası (KB) oluşturma](https://go.microsoft.com/fwlink/?linkid=2092179)
 * [İşlem Ayrıntılarını Alma](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/operations/getdetails)
@@ -41,10 +41,10 @@ Bu hızlı başlangıç şu Soru-Cevap Oluşturma API'lerini çağırır:
 ## <a name="prerequisites"></a>Önkoşullar
 
 * En son [**Visual Studio Community sürümü**](https://www.visualstudio.com/downloads/).
-* [Soru-Cevap Oluşturma hizmetine](../How-To/set-up-qnamaker-service-azure.md) sahip olmanız gerekir. Anahtarınızı almak için, panonuzda **Kaynak Yönetimi** altında **Anahtarlar** öğesini seçin. 
+* [Soru-Cevap Oluşturma hizmetine](../How-To/set-up-qnamaker-service-azure.md) sahip olmanız gerekir. Anahtarınızı ve kaynak adınızı almak için Soru-Cevap Oluşturma kaynağınız için Azure portal **hızlı başlangıç** ' ı seçin. 
 
 > [!NOTE] 
-> Eksiksiz bir çözüm dosyaları kullanılabilir [ **Azure-Samples/bilişsel-services-qnamaker-csharp** GitHub deposu](https://github.com/Azure-Samples/cognitive-services-qnamaker-csharp/tree/master/documentation-samples/tutorials/create-publish-answer-knowledge-base).
+> Tam çözüm dosyası (ler) [ **Azure-Samples/bilişsel hizmetler-qnamaker-CSharp** GitHub deposundan](https://github.com/Azure-Samples/cognitive-services-qnamaker-csharp/tree/master/documentation-samples/tutorials/create-publish-answer-knowledge-base)kullanılabilir.
 
 ## <a name="create-a-knowledge-base-project"></a>Bilgi bankası projesi oluşturma
 
@@ -146,13 +146,13 @@ Yayımlama başarılı olursa API çağrısı boş yanıt gövdesiyle 204 durumu
 Diğer yanıtlarda döndürülen yanıt değiştirilmez.
 
 ## <a name="generating-an-answer"></a>Yanıt oluşturma
-Program, soru sormak ve en iyi cevabı almak üzere KB'ye erişim sağlayabilmek için KB ayrıntılar API'sinden _uç nokta ana bilgisayarı_ ve Uç Nokta API'sinden _birincil uç nokta anahtarı_ değerlerine ihtiyaç duyar. Bu yöntemler cevap oluşturma yöntemiyle birlikte aşağıdaki bölümlerde verilmiştir. 
+Bir soru göndermek ve en iyi yanıtı almak üzere KB 'ye erişebilmek için, programın KB ayrıntıları API 'sinden _Kaynak adına_ ve uç noktalar API 'sindeki _birincil uç nokta anahtarına_ ihtiyacı vardır. Bu yöntemler cevap oluşturma yöntemiyle birlikte aşağıdaki bölümlerde verilmiştir. 
 
 Aşağıdaki tabloda verilerin URI oluşturmak için nasıl kullanıldığı gösterilmiştir:
 
 |Yanıt URI şablonu oluşturma|
 |--|
-|https://**HOSTNAME**.azurewebsites.net/qnamaker/knowledgebases/**KBID**/generateAnswer|
+|https:// **-Resource-Name**. azurewebsites.net/qnamaker/knowledgebases/**KBID**/generateanswer|
 
 Cevap oluşturulması amacıyla isteğin kimlik doğrulamasından geçirilmesi için _birincil uç nokta_ bir üst bilgi olarak geçirilir:
 
@@ -169,7 +169,7 @@ Cevap oluşturulması amacıyla isteğin kimlik doğrulamasından geçirilmesi i
 ```
 
 ## <a name="get-kb-details"></a>KB ayrıntılarını alma
-KB ayrıntılarını almak için aşağıdaki yöntemi kullanın. Bu ayrıntılar, KB'nin ana bilgisayar adını içerir. Ana bilgisayar adı, Soru-Cevap Oluşturma kaynağını oluştururken girdiğiniz Soru-Cevap Oluşturma Azure web hizmeti adıdır. 
+KB ayrıntılarını almak için aşağıdaki yöntemi kullanın. Bu ayrıntılar, aşağıdaki JSON 'da `hostName` olarak bilinen KB kaynak adını içerir. Kaynak adı, Soru-Cevap Oluşturma kaynağını oluştururken girdiğiniz Soru-Cevap Oluşturma kaynağının adıdır. 
 
 [!code-csharp[Get KB Details](~/samples-qnamaker-csharp/documentation-samples/tutorials/create-publish-answer-knowledge-base/QnaMakerQuickstart/Program.cs?range=260-273 "Add publish method")]
 
@@ -214,6 +214,13 @@ Bu API çağrısı bir JSON yanıtı döndürür:
 Kullanıcının sorusuna cevap almak için aşağıdaki yöntemi ekleyin. 
 
 [!code-csharp[Get Answer](~/samples-qnamaker-csharp/documentation-samples/tutorials/create-publish-answer-knowledge-base/QnaMakerQuickstart/Program.cs?range=290-315 "Get Answer")]
+
+Yalnızca soruların yanıtını sınırlandırmak istiyorsanız gövdeye `[rankerType](Learn more about [rankerType](../concepts/best-practices.md#choosing-ranker-type).
+)` özelliğini ekleyin, örneğin: 
+
+```csharp
+request.Content = new StringContent("{question:'" + question + "', rankerType:'QuestionOnly'}", Encoding.UTF8, "application/json"); 
+```
 
 Bu API çağrısı bir JSON yanıtı döndürür: 
 

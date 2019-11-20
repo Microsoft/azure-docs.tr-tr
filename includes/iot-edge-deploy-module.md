@@ -8,36 +8,36 @@ ms.topic: include
 ms.date: 01/04/2019
 ms.author: kgremban
 ms.custom: include file
-ms.openlocfilehash: c20a14ef2bc74d73b93ab39ee52fe1be8a5f984f
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 12661c77c6a950b482187b09e4465c964e6d6652
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188489"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73494069"
 ---
-Azure IOT Edge özellikleri birini kod IOT Edge cihazlarınıza buluttan dağıtma çağrılabilmesidir. **IOT Edge modülleri** kapsayıcılar uygulanan yürütülebilir paketler. Bu bölümde, önceden oluşturulmuş bir modülden dağıttığınız [Azure Marketi bölümünde IOT Edge modülleri](https://azuremarketplace.microsoft.com/marketplace/apps/category/internet-of-things?page=1&subcategories=iot-edge-modules). 
+Azure IoT Edge temel yetilerinden biri, buluttan IoT Edge cihazlarınıza kod dağıtabiyor. **IoT Edge modüller** , kapsayıcı olarak uygulanan yürütülebilir paketlerdir. Bu bölümde, [Azure Marketi 'nin IoT Edge modüller bölümünden](https://azuremarketplace.microsoft.com/marketplace/apps/category/internet-of-things?page=1&subcategories=iot-edge-modules)önceden oluşturulmuş bir modül dağıtırsınız. 
 
-Bu bölümde dağıttığınız modül algılayıcı benzetimini yapar ve oluşturulan verileri gönderir. Geliştirme ve test için benzetilmiş data özelliğini kullanabildiğinden, IOT Edge ile çalışmaya başlarken bu modül kod yararlı bir parçasıdır. Bu modül yaptığı tam olarak görmek istiyorsanız, görüntüleyebileceğiniz [benzetimli sıcaklık algılayıcısı kaynak kodu](https://github.com/Azure/iotedge/blob/027a509549a248647ed41ca7fe1dc508771c8123/edge-modules/SimulatedTemperatureSensor/src/Program.cs). 
+Bu bölümde dağıttığınız modül bir algılayıcısı taklit eder ve üretilen verileri gönderir. Bu modül, geliştirme ve test amacıyla sanal verileri kullanabilmeniz için IoT Edge kullanmaya başlarken yararlı bir kod parçasıdır. Bu modülün tam olarak ne yaptığını görmek isterseniz, [sanal sıcaklık algılayıcısı kaynak kodunu](https://github.com/Azure/iotedge/blob/027a509549a248647ed41ca7fe1dc508771c8123/edge-modules/SimulatedTemperatureSensor/src/Program.cs)görüntüleyebilirsiniz. 
 
-Azure Market'te sunulan ilk modülünüzde dağıtmak için aşağıdaki adımları kullanın:
+Azure Marketi 'nden ilk modülünüzü dağıtmak için aşağıdaki adımları kullanın:
 
-1. İçinde [Azure portalında](https://portal.azure.com), girin **benzetimli sıcaklık algılayıcısı** arama ve açık Market sonucu.
+1. [Azure Portal](https://portal.azure.com), aramaya **sanal sıcaklık algılayıcısı** ' nı girin ve Market sonucunu açın.
 
-   ![Azure portal Search'te benzetimli sıcaklık algılayıcısı](./media/iot-edge-deploy-module/search-for-temperature-sensor.png)
+   ![Azure portal aramada sanal sıcaklık algılayıcısı](./media/iot-edge-deploy-module/search-for-temperature-sensor.png)
 
-2. Bu modül almak için bir IOT Edge cihazı seçin. Üzerinde **hedef cihazlar IOT Edge modülü için** sayfasında, aşağıdaki bilgileri sağlayın:
+2. Bu modülü alacak bir IoT Edge cihaz seçin. **IoT Edge modülü Için hedef cihazlar** sayfasında, aşağıdaki bilgileri sağlayın:
 
-   1. **Abonelik**: kullanmakta olduğunuz IOT hub'ı içeren aboneliği seçin.
+   1. **Abonelik**: kullanmakta olduğunuz IoT Hub 'ını içeren aboneliği seçin.
 
-   2. **IOT hub'ı**: kullanmakta olduğunuz IOT hub'ı adını seçin.
+   2. **IoT Hub**: kullanmakta olduğunuz IoT Hub 'ının adını seçin.
 
-   3. **IOT Edge cihaz adı**: Bu hızlı başlangıçta daha önce önerilen cihaz adını kullandıysanız, girin **myEdgeDevice**. Ya da seçin **cihaz bulma** IOT Edge cihazlarının IOT hub'ınızda bir listesinden seçmek için. 
+   3. **IoT Edge cihaz adı**: Bu hızlı başlangıçta önerilen cihaz adını kullandıysanız, **myedgedevice**yazın. Veya IoT Hub 'ınızdaki IoT Edge cihaz listesinden seçilecek **cihaz bul** ' u seçin. 
    
-   4. **Oluştur**’u seçin.
+   4. **Oluştur**'u seçin.
 
-3. Azure Marketi'nden bir IOT Edge modülü seçtiniz ve modül almak için bir IOT Edge cihazı seçmiş göre modül tam olarak nasıl dağıtılacağı tanımlamanıza yardımcı olan üç adımlık Sihirbazı yönlendirilirsiniz. İçinde **Ekle modülleri** adım Sihirbazı'nın dikkat **SimulatedTemperatureSensor** girdiğinizde modülüdür. Öğreticilerde dağıtımınıza ek modül eklemek için bu sayfayı kullanın. Bu hızlı başlangıçta, yalnızca bu bir modül dağıtın. Seçin **sonraki** sihirbazın sonraki adıma devam etmek için.
+3. Artık Azure Marketi 'nden bir IoT Edge modülü seçtiğinizi ve modülü almak üzere bir IoT Edge cihaz seçtiğinizi, modülün nasıl dağıtılacağını tam olarak tanımlamanıza yardımcı olan üç adımlı bir sihirbaza yönlendirilirsiniz. Sihirbazın **Modül Ekle** adımında, **SimulatedTemperatureSensor** modülünün tekrar doldurulduğuna dikkat edin. Öğreticilerde, dağıtımınıza ek modüller eklemek için bu sayfayı kullanın. Bu hızlı başlangıçta yalnızca bu bir modülü dağıtın. Sihirbazın sonraki adımına devam etmek için **İleri ' yi** seçin.
 
-4. İçinde **yolları belirtin** adım Sihirbazı'nın, IOT hub'ına modüller arasında iletileri nasıl geçirildiğini tanımlayın. Hızlı Başlangıç için istediğiniz tüm modüllerdeki tüm iletileri IOT Hub'ına gidin (`$upstream`). Paneldeki değilse, aşağıdaki kodu ekleyin, ardından seçin **sonraki**:
+4. Sihirbazın **rotalar belirtin** adımında, iletilerin modüller arasında ve IoT Hub nasıl geçtiğini tanımlarsınız. Hızlı başlangıç için tüm modüllerden gelen tüm iletilerin IoT Hub (`$upstream`) gitmesini istiyorsunuz. Yeniden doldurulmamışsa aşağıdaki kodu ekleyin:
 
    ```json
     {
@@ -46,13 +46,14 @@ Azure Market'te sunulan ilk modülünüzde dağıtmak için aşağıdaki adımla
         }
     }
    ```
+   Sonra **İleri**’yi seçin.
 
-5. İçinde **gözden geçirme dağıtım** adım Sihirbazı'nın IOT Edge cihazınıza dağıtıldığı tüm modülleri tanımlayan JSON dosyasını önizlemesini görebilirsiniz. Dikkat **SimulatedTemperatureSensor** modülü bulunur ve iki ek sistem modülleri adlı **edgeAgent** ve **edgeHub**. Seçin **Gönder** bitirdiğinizde gözden geçirme.
+5. Sihirbazın **dağıtımı gözden geçirme** adımında, IoT Edge cihazınıza dağıtılan tüm MODÜLLERI tanımlayan JSON dosyasının önizlemesini yapabilirsiniz. **SimulatedTemperatureSensor** modülünün dahil edildiğini ve **edgeagent** ve **edgehub**adlı iki ek sistem modülü olduğunu unutmayın. Gözden geçirmeyi bitirdiğinizde **Gönder** ' i seçin.
 
-   IOT Edge cihazı için yeni bir dağıtım gönderdiğinizde, hiçbir şey cihazınıza gönderilir. Bunun yerine, cihaz IOT hub'ı yeni yönergeleri için düzenli olarak sorgular. Cihaz güncelleştirilmiş dağıtım bildirimini bulursa, buluttan modül görüntüleri çekmek için yeni dağıtım hakkında bilgi kullanır ardından modüllerini yerel olarak çalışmaya başlar. Bu işlem birkaç dakika sürebilir. 
+   IoT Edge cihazına yeni bir dağıtım gönderdiğinizde, cihazınıza hiçbir şey itilemez. Bunun yerine, cihaz sorguları tüm yeni yönergeler için düzenli olarak IoT Hub. Cihaz güncelleştirilmiş bir dağıtım bildirimi bulursa, buluttan modül görüntülerini çekmek için yeni dağıtım hakkındaki bilgileri kullanır ve ardından modülleri yerel olarak çalıştırmaya başlar. Bu işlem birkaç dakika sürebilir. 
 
-6. Modül dağıtım ayrıntıları gönderdikten sonra sihirbazın döndürür **IOT Edge** IOT hub'ınızın sayfası. Ayrıntılarını görmek için IOT Edge cihaz listesinden Cihazınızı seçin. 
+6. Modül dağıtım ayrıntılarını gönderdikten sonra, sihirbaz sizi IoT Hub 'ınızın **IoT Edge** sayfasına döndürür. Ayrıntılarını görmek için IoT Edge cihaz listesinden cihazınızı seçin. 
 
-7. Cihaz Ayrıntıları sayfasında aşağı kaydırarak **modülleri** bölümü. Üç modül listelenir: $edgeAgent $edgeHub ve SimulatedTemperatureSensor. Bir veya daha çok modülü olarak listede yoksa, IOT Edge cihaz tarafından bildirilen değil ancak dağıtımda belirtilen cihaz hala bunları başlatılıyor. Birkaç dakika bekleyin ve seçin **Yenile** sayfanın üstünde. 
+7. Cihaz ayrıntıları sayfasında, **modüller** bölümüne gidin. Üç modülün listelenmesi gerekir: $edgeAgent, $edgeHub ve SimulatedTemperatureSensor. Bir veya daha fazla modül dağıtımda belirtilen şekilde listeleniyorsa, ancak cihaz tarafından bildirilmediyse, IoT Edge cihazınız hala başlatılıyor demektir. Birkaç dakika bekleyip sayfanın üst kısmında **Yenile** ' yi seçin. 
 
    ![Dağıtılan modüller listesinde SimulatedTemperatureSensor görüntüle](./media/iot-edge-deploy-module/deployed-modules-marketplace.png)

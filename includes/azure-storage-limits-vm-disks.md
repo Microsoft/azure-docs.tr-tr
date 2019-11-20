@@ -4,34 +4,34 @@ ms.service: virtual-machines
 ms.topic: include
 ms.date: 03/18/2019
 ms.author: rogarana
-ms.openlocfilehash: 2936fd318f08c74675f7e8b382c861f4a28319fc
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 8b25d2395811a2197aff6d653c5038a4380021e9
+ms.sourcegitcommit: cd70273f0845cd39b435bd5978ca0df4ac4d7b2c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188361"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "68669877"
 ---
-Bir Azure sanal makinesine veri diski sayısı ekleyebilirsiniz. Bir sanal makinenin veri diskleri için ölçeklenebilirlik ve performans hedefleri bağlı olarak, performans ve kapasite gereksinimlerini karşılamak için gereken disk türü ve numarası belirleyebilirsiniz.
+Bir Azure sanal makinesine çok sayıda veri diski ekleyebilirsiniz. Bir sanal makinenin veri disklerinin ölçeklenebilirlik ve performans hedeflerine bağlı olarak, performans ve kapasite gereksinimlerinizi karşılamak için gereken disk sayısını ve türünü belirleyebilirsiniz.
 
 > [!IMPORTANT]
-> En iyi performans için olası azalmayı önlemek için sanal makineye bağlı, yüksek oranda kullanılan disk sayısını sınırlayın. Eklenen tüm diskler aynı anda yüksek oranda kullanılan değil, sanal makine diskleri daha fazla sayıda destekleyebilir.
+> En iyi performans için, olası azaltmayı önlemek için sanal makineye bağlı olan yüksek oranda kullanılan disklerin sayısını sınırlayın. Tüm eklenen diskler aynı anda yüksek oranda kullanılıyorsa, sanal makine daha fazla sayıda diski destekleyebilir.
 
-**İçin Azure yönetilen diskler:**
+**Azure yönetilen diskler için:**
 
-Aşağıdaki tabloda, varsayılan ve maksimum sınırları her Abonelikteki bölge başına kaynak sayısı gösterilmektedir.
+Aşağıdaki tabloda, abonelik başına bölge başına düşen kaynak sayısı için varsayılan ve en fazla limit gösterilmektedir. Kaynak grubu başına yönetilen disk sayısı, anlık görüntüler ve görüntüler için bir sınır yoktur.  
 
 > | Resource | Varsayılan limit  | Üst sınır |
 > | --- | --- | --- |
-> | Standart yönetilen diskler | 25,000 | 50,000 |
-> | Standart SSD yönetilen diskler | 25,000 | 50,000 |
-> | Premium yönetilen diskler | 25,000 | 50,000 |
-> | Standard_LRS anlık görüntüleri | 25,000 | 50,000 |
-> | Standard_ZRS anlık görüntüleri | 25,000 | 50,000 |
-> | Yönetilen bir görüntü | 25,000 | 50,000 |
+> | Standart yönetilen diskler | 50,000 | 50,000 |
+> | Standart SSD yönetilen diskler | 50,000 | 50,000 |
+> | Premium yönetilen diskler | 50,000 | 50,000 |
+> | Standard_LRS anlık görüntüleri | 50,000 | 50,000 |
+> | Standard_ZRS anlık görüntüleri | 50,000 | 50,000 |
+> | Yönetilen görüntü | 50,000 | 50,000 |
 
-* **Standart depolama hesapları için:** Bir standart depolama hesabı, 20.000 IOPS toplam en fazla istek oranını sahiptir. Tüm standart depolama hesabı, sanal makine disklerinizde toplam IOPS bu sınırı aşmamalıdır.
+* **Standart depolama hesapları için:** Standart depolama hesabında en fazla 20.000 ıOPS toplam istek oranı vardır. Standart depolama hesabındaki tüm sanal makine disklerinizdeki toplam ıOPS, bu sınırı aşmamalıdır.
   
-    İstek oranı sınırına göre tek bir standart depolama hesabı tarafından desteklenen yüksek kullanımlı disk sayısını kabaca hesaplayabilirsiniz. Örneğin, bir temel katman için sanal makine, disk başına 20.000/300 IOPS olduğu sayısı yüksek kullanımlı disk 66 hakkında sayısıdır. Bir standart katman sanal makine için yüksek oranda kullanılan disk sayısı, disk başına 20.000/500 IOPS olduğu yaklaşık 40, olur. 
+    İstek hızı sınırına göre tek bir standart depolama hesabı tarafından desteklenen yüksek oranda kullanılan disk sayısını kabaca hesaplayabilirsiniz. Örneğin, temel bir katman VM 'si için, en yüksek oranda kullanılan disk sayısı, disk başına 20.000/300 ıOPS olan 66 ' dir. Standart katman bir sanal makine için yüksek oranda kullanılan disk sayısı, disk başına 20000/500 ıOPS olan 40 ' dir. 
 
-* **Premium depolama hesapları için:** Premium depolama hesabı en fazla aktarım hızı 50 Gbps'dir sahiptir. Tüm sanal makinelerdeki toplam aktarım hızı bu sınırı aşmamalıdır.
+* **Premium Depolama hesapları için:** Premium Depolama hesabında en fazla 50 Gbps toplam verimlilik ücreti vardır. Tüm sanal makinelerdeki toplam aktarım hızı bu sınırı aşmamalıdır.
 

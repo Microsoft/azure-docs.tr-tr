@@ -1,6 +1,6 @@
 ---
-title: Azure AD Connect yükleme sorunlarını giderme | Microsoft Docs
-description: Bu konuda, Azure AD Connect yükleme sorunlarını gidermek için adımları sağlar.
+title: Azure AD Connect yüklemeleri sorunlarını giderme | Microsoft Docs '
+description: Bu konuda Azure AD Connect yükleme ile ilgili sorunları gidermeye yönelik adımlar sağlanmaktadır.
 services: active-directory
 documentationcenter: ''
 author: billmath
@@ -15,37 +15,37 @@ ms.date: 01/31/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e077127681f8bd7b650ab22f2d036efd7f9733ee
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e75ad29c5b4a76de5317991995f132c6cb53bbe3
+ms.sourcegitcommit: 8fea78b4521921af36e240c8a92f16159294e10a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60454804"
+ms.lasthandoff: 09/02/2019
+ms.locfileid: "70211849"
 ---
-# <a name="troubleshoot-azure-ad-connect-install-issues"></a>Sorun giderme: Azure AD Connect yükleme sorunları
+# <a name="troubleshoot-azure-ad-connect-install-issues"></a>Giderilmesine Azure AD Connect yükleme sorunları
 
 ## <a name="recommended-steps"></a>**Önerilen Adımlar**
-Lütfen hangi denetleyin [Azure AD Connect yükleme türünü](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-connect-install-select-installation) sizin için uygundur. Hızlı yükleme ölçütlerini karşılıyorsanız, ardından, hızlı yükleme ile gitmenizi öneririz. Hızlı yükleme yükleme işleminin tamamlanması için gereken en düşük seçenekleri sağlar, bu nedenle daha az olasılığını herhangi bir sorun yoktur. 
+Lütfen hangi [Azure AD Connect yükleme türünün](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-connect-install-select-installation) sizin için uygun olduğunu denetleyin. Hızlı yükleme ölçütlerini karşılıyoruz, Hızlı yüklemeye gitmeniz önerilir. Hızlı yükleme, yüklemeyi bitirebilmeniz için gereken en az seçenek sağlar, bu nedenle herhangi bir sorunun daha az olma olasılığı vardır. 
 
-Hızlı yükleme ölçütlerine uymayan ve en iyi yöntemlerden bazıları aşağıda verilmiştir sonra özel bir yükleme yapmanız gerekir, ancak sık karşılaşılan sorunları önlemek için izleyebilirsiniz. Basitleştirmek amacıyla yalnızca seçmeli seçenekleri aşağıda belirtilmiştir:
+Ancak, hızlı yükleme ölçütlerini karşılamıyorsa ve özel yükleme yapmanız gerekiyorsa, yaygın sorunlardan kaçınmak için izleyebileceğiniz bazı en iyi uygulamalar aşağıda verilmiştir. Kolaylık sağlaması için yalnızca seçmeli seçenekler burada belirtilmiştir:
 
-* AAD Connect'i yüklüyorsanız makinede bir yönetici olduğundan emin olun. Üzerinde makine aynı yönetici kimlik bilgileriyle oturum açın.
+* AAD Connect 'i yüklemekte olduğunuz makinede yönetici olduğunuzdan emin olun. Aynı yönetici kimlik bilgileriyle makinede oturum açın.
 
-* Mevcut SQL Server kullanmak istiyorsanız "Kullanımı mevcut bir SQL Server" dışında aşağıdaki sayfasında, varsayılan olarak tüm seçenekler sağlar. İşte [daha fazla ayrıntı](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-connect-install-custom) özel yükleme seçenekleri kullanma hakkında. 
+* Mevcut SQL Server kullanmak istiyorsanız, "var olan bir SQL Server kullan" dışında tüm seçeneklerin varsayılan olmasına izin verin. Özel yükleme seçeneklerini kullanma hakkında [daha fazla ayrıntı](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-connect-install-custom) aşağıda verilmiştir. 
 
-    ![Mevcut SQL Server'ı kullanın](media/tshoot-connect-install-issues/tshoot-connect-install-issues/useexistingsqlserver.png)
+    ![Mevcut SQL Server kullan](media/tshoot-connect-install-issues/tshoot-connect-install-issues/useexistingsqlserver.png)
 
-* Herhangi bir izni önlemek için sorunları var olan bir hesapla, şu sayfada "Oluştur yeni AD hesabı" seçeneğini seçin.
+* Aşağıdaki sayfada, mevcut hesapla ilgili herhangi bir izin sorununu önlemek için "yeni AD hesabı oluştur" seçeneğini belirleyin.
 
-    ![AD ormanı hesabı](media/tshoot-connect-install-issues/tshoot-connect-install-issues/createnewaccount.png)
+    ![AD Ormanı hesabı](media/tshoot-connect-install-issues/tshoot-connect-install-issues/createnewaccount.png)
 
 ### <a name="common-issues"></a>**Genel Sorunlar**
 
-* [Şirket içi Active Directory ile ilgili bağlantı sorunlarını](https://docs.microsoft.com/azure/active-directory/hybrid/reference-connect-adconnectivitytools).
+* Şirket [içi Active Directory bağlantı sorunları](https://docs.microsoft.com/azure/active-directory/hybrid/reference-connect-adconnectivitytools).
 
-* [Çevrimiçi Azure Active Directory ile ilgili bağlantı sorunlarını](https://docs.microsoft.com/azure/active-directory/hybrid/tshoot-connect-connectivity).
+* [Çevrimiçi Azure Active Directory bağlantı sorunları](https://docs.microsoft.com/azure/active-directory/hybrid/tshoot-connect-connectivity).
 
-* [Şirket içi Active Directory ile izin sorunları](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-connect-configure-ad-ds-connector-account).
+* Şirket [içi Active Directory izin sorunları](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-connect-configure-ad-ds-connector-account).
 
 ## <a name="recommended-documents"></a>**Önerilen Belgeler**
 * [Azure AD Connect Önkoşulları](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-connect-install-prerequisites)
@@ -58,7 +58,7 @@ Hızlı yükleme ölçütlerine uymayan ve en iyi yöntemlerden bazıları aşa�
 
 ## <a name="next-steps"></a>Sonraki adımlar
 - [Azure AD Connect eşitleme](how-to-connect-sync-whatis.md).
-- [Karma kimlik nedir? ](whatis-hybrid-identity.md).
+- [Hibrit kimlik nedir?](whatis-hybrid-identity.md)
 
 
 

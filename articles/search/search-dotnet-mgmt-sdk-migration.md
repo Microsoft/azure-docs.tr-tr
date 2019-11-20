@@ -1,52 +1,50 @@
 ---
-title: Azure Search .NET Yönetim SDK sürüm 2 - Azure Search için yükseltme
-description: Azure Search .NET Yönetim SDK sürüm 2 için önceki sürümlerinden yükseltin. Nelerin yeni olduğunu öğrenin ve hangi kodda değişiklik yapmanız gerekmez.
+title: Azure Search .NET Yönetim SDK 'Sı sürüm 2 ' ye yükseltme
+titleSuffix: Azure Cognitive Search
+description: Önceki sürümlerden Azure Search .NET Yönetim SDK 'Sı sürüm 2 ' ye yükseltin. Nelerin yeni olduğunu ve hangi kod değişikliklerinin gerekli olduğunu öğrenin.
+manager: nitinme
 author: brjohnstmsft
-manager: jlembicz
 ms.author: brjohnst
-services: search
-ms.service: search
+ms.service: cognitive-search
 ms.devlang: dotnet
 ms.topic: conceptual
-ms.date: 05/02/2019
-ms.openlocfilehash: 62c2ed555fcac56677f4950c10d38ded8fb0649d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/04/2019
+ms.openlocfilehash: b18e9688141ee64eb7dfcb82ce58db198e324b5b
+ms.sourcegitcommit: 16c5374d7bcb086e417802b72d9383f8e65b24a7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65025185"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73847531"
 ---
-# <a name="upgrading-to-the-azure-search-net-management-sdk-version"></a>Azure Search .NET Yönetim SDK'sı sürümüne yükseltme 
+# <a name="upgrading-versions-of-the-azure-search-net-management-sdk"></a>Azure Search .NET Yönetim SDK 'sının sürümlerini yükseltme
 
 > [!Important]
-> Bu içerik yine de tamamlanmamıştır. Azure arama yönetimi .NET SDK'sının sürüm 3.0 NuGet üzerinde kullanılabilir. Bu geçiş kılavuzunda en yeni sürüme yükseltme açıklayan güncelleştirmeyi çalışıyoruz. 
+> Bu içerik hala yapım aşamasındadır. Azure Search Management .NET SDK 3,0 sürümü NuGet üzerinde kullanılabilir. Yeni sürüme nasıl yükseltileceğini açıklamak için bu geçiş kılavuzunu güncelleştirme üzerinde çalışıyoruz. 
 >
 
-Sürüm 1.0.2 kullanıyorsanız, eski veya [Azure Search .NET Yönetim SDK'sı](https://aka.ms/search-mgmt-sdk), bu makalede, uygulamanızı sürüm 2 kullanacak şekilde yükseltin yardımcı olur.
+[Azure Search .NET Yönetim SDK 'sının](https://aka.ms/search-mgmt-sdk)sürüm 1.0.2 veya daha eski bir sürümünü kullanıyorsanız, bu makale uygulamanızı sürüm 2 ' yi kullanacak şekilde yükseltmenize yardımcı olur.
 
-Azure Search .NET Yönetim SDK'sı sürüm 2, bazı değişiklikler daha önceki sürümlerin içerir. Kodunuzu değiştirmek, yalnızca en az çaba istemeniz gerekir böylece bunlar çoğunlukla küçük. Bkz: [yükseltme adımları](#UpgradeSteps) yeni SDK sürümü kullanmak kodunuzu değiştirmek konusunda yönergeler için.
+Azure Search .NET Yönetim SDK 'sının 2. sürümü önceki sürümlerden bazı değişiklikler içerir. Bunlar çoğunlukla düşüktür, bu nedenle kodunuzun değiştirilmesi yalnızca en az çaba gerektirir. Kodunuzu yeni SDK sürümünü kullanacak şekilde değiştirme hakkında yönergeler için bkz. [yükseltme adımları](#UpgradeSteps) .
 
 <a name="WhatsNew"></a>
 
-## <a name="whats-new-in-version-2"></a>Sürüm 2 yenilikler nelerdir?
-Azure Search .NET Yönetim SDK'sı sürüm 2 özellikle 2015-08-19 olarak önceki SDK sürümleri, Azure arama yönetimi REST API'si aynı genel kullanıma sunulan sürümünü hedefleyen. SDK SDK'ın kullanılabilirliği iyileştirmek için kesinlikle istemci tarafı değişiklikleri değişikliklerdir. Bu değişiklikler şunları içerir:
+## <a name="whats-new-in-version-2"></a>Sürüm 2 ' deki yenilikler
+Azure Search .NET Yönetim SDK 'sının 2. sürümü, genel olarak kullanılan Azure Search yönetimi REST API sürümünü önceki SDK sürümleri, özellikle 2015-08-19 olarak hedefler. SDK 'nın üzerinde yapılan değişiklikler, SDK 'nın kullanılabilirliğini geliştirmek için kesinlikle istemci tarafı değişikliklerdir. Bu değişiklikler şunları içerir:
 
-* `Services.CreateOrUpdate` ve kendi zaman uyumsuz sürümleri artık otomatik olarak sağlama yoklaması `SearchService` ve sağlama hizmeti tamamlanana kadar döndürmüyor. Bu tür yoklama kodu kendiniz yazmak zorunda kalmaktan kurtarır.
-* El ile sağlama hizmeti yoklama hala istiyorsanız yeni kullanabilirsiniz `Services.BeginCreateOrUpdate` yöntemi veya bir zaman uyumsuz sürümlerini.
-* Yeni yöntemler `Services.Update` ve SDK, zaman uyumsuz sürümlere eklenmiştir. Bu yöntemler, artımlı bir hizmeti güncelleştirme desteklemek için HTTP PATCH kullanın. Örneğin, artık bir hizmet geçirerek ölçeklendirebileceğiniz bir `SearchService` yalnızca istenen içeren örneği bu yöntemlere yapılan `partitionCount` ve `replicaCount` özellikleri. Eski yöntem çağırma `Services.Get`, döndürülen değiştirme `SearchService`ve aktarması `Services.CreateOrUpdate` hala desteklenmektedir, ancak artık gerekli değildir. 
+* `Services.CreateOrUpdate` ve zaman uyumsuz sürümleri, sağlama `SearchService` otomatik olarak yoklamıştır ve hizmet sağlama tamamlanana kadar geri dönmez. Bu, sizi bir tür yoklama kodu yazmak zorunda kalmanızı sağlar.
+* Hizmet sağlamayı hala el ile yoklamak istiyorsanız yeni `Services.BeginCreateOrUpdate` yöntemini veya zaman uyumsuz sürümlerinden birini kullanabilirsiniz.
+* Yeni yöntemler `Services.Update` ve zaman uyumsuz sürümleri SDK 'ya eklenmiştir. Bu yöntemler, bir hizmetin artımlı güncelleştirilmesini desteklemek için HTTP PATCH kullanır. Örneğin, artık yalnızca istenen `partitionCount` ve `replicaCount` özelliklerini içeren bu yöntemlere `SearchService` bir örnek geçirerek bir hizmeti ölçeklendirebilirsiniz. `Services.Get`çağırmanın eski yolu, döndürülen `SearchService`değiştirme ve `Services.CreateOrUpdate` geçirmek hala desteklenmektedir, ancak artık gerekli değildir. 
 
 <a name="UpgradeSteps"></a>
 
 ## <a name="steps-to-upgrade"></a>Yükseltme adımları
-İlk olarak, için NuGet başvuru güncelleştirme `Microsoft.Azure.Management.Search` NuGet Paket Yöneticisi konsolu kullanılarak veya ile proje başvurularınızın sağ tıklayıp "Yönetme NuGet paketleri..." Visual Studio'da.
+İlk olarak, NuGet Paket Yöneticisi konsolunu kullanarak veya proje başvurularınız ' a sağ tıklayıp "NuGet Paketlerini Yönet..." seçeneğini belirleyerek NuGet başvurunuz `Microsoft.Azure.Management.Search` güncelleştirin. Visual Studio 'da.
 
-NuGet yeni paketler ve bağımlılıkları İndirildikten sonra projenizi yeniden derleyin. Kodunuzu nasıl yapılandırıldığını bağlı olarak başarıyla yeniden oluşturmak. Bu durumda, başlamaya hazırsınız!
+NuGet yeni paketleri ve bağımlılıklarını indirdikten sonra projenizi yeniden derleyin. Kodunuzun nasıl yapılandırıldığına bağlı olarak, başarıyla yeniden oluşturulabilir. Öyleyse başlamaya hazırsınız demektir!
 
-Yapı başarısız olursa, bazı değiştirildi (örneğin, amacı doğrultusunda, birim testi), SDK'sı arabirimleri uyguladık nedeni olabilir. Bu sorunu çözmek için yeni yöntemler gibi uygulama gerekecektir `BeginCreateOrUpdateWithHttpMessagesAsync`.
+Derlemeniz başarısız olursa, bunun nedeni bazı SDK arabirimlerini (örneğin, birim testi amaçları için) uygulamış olmanız olabilir. Bunu çözmek için `BeginCreateOrUpdateWithHttpMessagesAsync`gibi yeni yöntemler uygulamanız gerekir.
 
-Derleme hataları düzelttik sonra isterseniz yeni işlevsellikten yararlanmak için uygulamanızı değişiklik yapabilirsiniz. SDK'sı yeni özellikleri ayrıntılı olarak [sürüm 2 yenilikler](#WhatsNew).
+Herhangi bir derleme hatasını düzelttikten sonra, isterseniz yeni işlevlerden yararlanmak için uygulamanızda değişiklikler yapabilirsiniz. SDK 'daki yeni özellikler [sürüm 2 ' deki](#WhatsNew)Yenilikler bölümünde ayrıntılı olarak açıklanmıştır.
 
-## <a name="conclusion"></a>Sonuç
-Bildirimleriniz üzerindeki SDK bizim için değerli. Sorunlarla karşılaşırsanız, bize yardım isteyin çekinmeyin [Azure Search MSDN Forumu](https://social.msdn.microsoft.com/Forums/azure/home?forum=azuresearch). Bir hata bulursanız, sorunu bildirin [Azure .NET SDK'sı GitHub deposu](https://github.com/Azure/azure-sdk-for-net/issues). "[Azure Search]", bir sorun başlığı önek emin olun.
-
-Azure Search kullandığınız için teşekkür ederiz!
+## <a name="next-steps"></a>Sonraki adımlar
+SDK 'daki geri bildirimlerinize hoş geldiniz. Sorunlarla karşılaşırsanız lütfen sorularınızı [Stack Overflow](https://stackoverflow.com/questions/tagged/azure-cognitive-search?tab=Newest)gönderin. Bir hata bulursanız, [Azure .NET SDK GitHub deposunda](https://github.com/Azure/azure-sdk-for-net/issues)bir sorun oluşturabilirsiniz. Sorun başlığınız "[Search]" ile etiketlediğinizden emin olun.

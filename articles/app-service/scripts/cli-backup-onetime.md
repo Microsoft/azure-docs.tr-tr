@@ -1,6 +1,6 @@
 ---
-title: Azure CLI betik örneği - bir uygulamasını yedekleme | Microsoft Docs
-description: Azure CLI betik örneği - bir uygulamasını yedekleme
+title: Azure CLı betik örneği-bir uygulamayı yedekleme | Microsoft Docs
+description: Azure CLı betik örneği-bir uygulamayı yedekleme
 services: app-service\web
 documentationcenter: ''
 author: msangapu
@@ -9,21 +9,21 @@ editor: ''
 tags: azure-service-management
 ms.service: app-service-web
 ms.workload: web
-ms.devlang: na
 ms.topic: sample
 ms.date: 12/07/2017
-ms.author: msangapu;cephalin
+ms.author: msangapu
+ms.reviewer: cephalin
 ms.custom: seodec18
-ms.openlocfilehash: b394eb4674175f96d7fc0ceb8eafee0003312327
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 07ca1a167a2c7bf2f2946772b97cca4d2c1bd9c9
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66137006"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70098503"
 ---
-# <a name="back-up-an-app-using-cli"></a>CLI kullanarak uygulama yedekleme
+# <a name="back-up-an-app-using-cli"></a>CLı kullanarak bir uygulamayı yedekleme
 
-Bu örnek betik, bir uygulamayı App Service'te ilgili kaynaklarıyla birlikte oluşturur ve bunun için tek seferlik bir yedekleme oluşturur. 
+Bu örnek betik, App Service içinde ilgili kaynakları içeren bir uygulama oluşturur ve ardından BT için bir kerelik yedekleme oluşturur. 
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
@@ -48,9 +48,9 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 | [`az storage container create`](/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-create) | Bir Azure depolama kapsayıcısı oluşturur. |
 | [`az storage container generate-sas`](/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-generate-sas) | Azure depolama kapsayıcısı için bir SAS belirteci oluşturur.  |
 | [`az appservice plan create`](/cli/azure/appservice/plan?view=azure-cli-latest#az-appservice-plan-create) | App Service planı oluşturur. |
-| [`az webapp create`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-create) | Bir App Service uygulaması oluşturur. |
-| [`az webapp config backup create`](/cli/azure/webapp/config/backup?view=azure-cli-latest#az-webapp-config-backup-create) | Bir App Service uygulaması için bir yedekleme oluşturur. |
-| [`az webapp config backup list`](/cli/azure/webapp/config/backup?view=azure-cli-latest#az-webapp-config-backup-list) | Bir App Service uygulaması için yedekleme listesini alır. |
+| [`az webapp create`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-create) | App Service uygulaması oluşturur. |
+| [`az webapp config backup create`](/cli/azure/webapp/config/backup?view=azure-cli-latest#az-webapp-config-backup-create) | App Service uygulaması için bir yedekleme oluşturur. |
+| [`az webapp config backup list`](/cli/azure/webapp/config/backup?view=azure-cli-latest#az-webapp-config-backup-list) | App Service bir uygulama için yedeklemelerin listesini alır. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

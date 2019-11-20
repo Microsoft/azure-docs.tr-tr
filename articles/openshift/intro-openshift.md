@@ -1,6 +1,6 @@
 ---
-title: Azure Red Hat OpenShift giriş | Microsoft Docs
-description: Kapsayıcı tabanlı uygulamaları dağıtmak ve yönetmek için Microsoft Azure Red Hat OpenShift avantajları ve özellikleri öğrenin.
+title: Azure Red Hat OpenShift 'e giriş | Microsoft Docs
+description: Kapsayıcı tabanlı uygulamaları dağıtmak ve yönetmek için Microsoft Azure Red Hat OpenShift 'in özelliklerini ve avantajlarını öğrenin.
 services: container-service
 author: jimzim
 ms.author: jzim
@@ -9,46 +9,46 @@ manager: jeconnoc
 ms.topic: overview
 ms.date: 05/08/2019
 ms.custom: mvc
-ms.openlocfilehash: 7cabedaec1190437aa9f225397afa8871cb06e88
-ms.sourcegitcommit: 009334a842d08b1c83ee183b5830092e067f4374
+ms.openlocfilehash: f76f5d4dc84d1f8827248ab8399c1ae450a643a0
+ms.sourcegitcommit: 08d3a5827065d04a2dc62371e605d4d89cf6564f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66306368"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68620161"
 ---
 # <a name="azure-red-hat-openshift"></a>Azure Red Hat OpenShift
 
-Microsoft *Azure Red Hat OpenShift* hizmeti sayesinde dağıtmak tam olarak yönetilen [OpenShift](https://www.openshift.com/) kümeleri.
+Microsoft *Azure Red Hat OpenShift* hizmeti, tam olarak yönetilen [OpenShift](https://www.openshift.com/) kümelerini dağıtmanıza olanak sağlar.
 
-Azure Red Hat OpenShift genişletir [Kubernetes](https://kubernetes.io/). Kubernetes ile üretimde çalışan kapsayıcılar ek araçlar ve görüntü kayıt, Depolama Yönetimi, ağ çözümleri ve günlüğe kaydetme gibi kaynaklar gerektirir ve izleme araçları, hepsi birlikte tutulan ve test edilmiş olması gerekir. Kapsayıcı tabanlı uygulamaları oluşturmak, ara yazılım, çerçeveler, veritabanları ve CI/CD araçlarıyla daha da fazla tümleştirme iş gerektirir. Azure Red Hat OpenShift tüm bu uygulama sağlarken BT ekipleri için işlemlerinin bir kolayca getiren tek bir platform yürütmek ihtiyaç duydukları takımlar birleştirir.
+Azure Red Hat OpenShift, [Kubernetes](https://kubernetes.io/)'i genişletiyor. Kubernetes ile üretimde çalışan kapsayıcılar, bir görüntü kayıt defteri, depolama yönetimi, ağ çözümleri ve günlük ve izleme araçları gibi ek araçlar ve kaynaklar gerektirir; bunların hepsi sürümü oluşturma ve test edilmiş olmalıdır. Kapsayıcı tabanlı uygulamalar oluşturmak için, ara yazılım, çerçeveler, veritabanları ve CI/CD araçlarıyla daha fazla tümleştirme çalışması gerekir. Azure Red Hat OpenShift, tüm bunu tek bir platformda birleştirir ve bu sayede uygulama ekiplerinin yürütülmesi gerekenleri verirken BT ekiplerine işlem kolaylığı sağlar.
 
-Azure Red Hat OpenShift ortaklaşa mühendislik işletilen ve tümleşik destek deneyimi sağlamak için Red Hat ve Microsoft tarafından desteklenir. Çalışması için hiçbir sanal makine vardır ve hiçbir düzeltme eki uygulama gereklidir. Ana, altyapı ve uygulama düğümleri güncelleştirilmiş, Yama ve Red Hat ve Microsoft tarafından sizin adınıza izlenen. Azure Red Hat OpenShift kümeleriniz, Azure aboneliğinize dağıtılır ve Azure faturanızda yer alır.
+Azure Red Hat OpenShift, tümleşik bir destek deneyimi sağlamak üzere Red Hat ve Microsoft tarafından ortaklaşa tasarlanmış, çalıştırılır ve desteklenir. Çalışması gereken sanal makine yok ve düzeltme eki uygulama gerekli değil. Ana, altyapı ve uygulama düğümleri, Red Hat ve Microsoft tarafından sizin adınıza düzeltme eki uygulanmış, güncelleştirilir ve izlenir. Azure Red Hat OpenShift kümeleriniz Azure aboneliğinize dağıtılır ve Azure faturanızda yer alır.
 
-Kendi kayıt defteri, ağ, depolama ve CI/CD çözümleri veya kullanmak için otomatik kaynak kodu yönetimi, kapsayıcı ve uygulama yerleşik çözüm oluşturur, dağıtımlar, ölçeklendirme, sistem durumu yönetimi ve daha fazla seçebilirsiniz. Azure Red Hat OpenShift bir tümleşik oturum açma deneyimi Azure Active Directory aracılığıyla sağlar.
+Kendi kayıt defterinizi, ağ iletişimini, depolamayı ve CI/CD çözümlerinizi seçebilir veya otomatik kaynak kodu yönetimi, kapsayıcı ve uygulama yapıları, dağıtımlar, ölçeklendirme, sistem durumu yönetimi ve daha fazlası için yerleşik çözümleri kullanabilirsiniz. Azure Red Hat OpenShift, Azure Active Directory aracılığıyla tümleşik bir oturum açma deneyimi sağlar.
 
-Başlamak için tamamlamak [Azure Red Hat OpenShift küme oluşturma](tutorial-create-cluster.md) öğretici.
+Başlamak için, [Azure Red Hat OpenShift kümesi oluşturma](tutorial-create-cluster.md) öğreticisini doldurun.
 
 ## <a name="access-security-and-monitoring"></a>Erişim, güvenlik ve izleme
 
-Geliştirilmiş güvenlik ve Yönetim için Azure Red Hat OpenShift Azure Active Directory (Azure AD) ile tümleştirme ve Kubernetes rol tabanlı erişim denetimi (RBAC) kullanmanıza olanak tanır. Ayrıca, kümelerinizin ve kaynaklarınızın sistem durumunu da izleyebilirsiniz.
+Gelişmiş güvenlik ve yönetim için Azure Red Hat OpenShift, Azure Active Directory (Azure AD) ile tümleştirmenize ve Kubernetes rol tabanlı erişim denetimi 'ni (RBAC) kullanmanıza olanak tanır. Ayrıca, kümelerinizin ve kaynaklarınızın sistem durumunu da izleyebilirsiniz.
 
 ## <a name="cluster-and-node"></a>Küme ve düğüm
 
-Azure Red Hat OpenShift düğümleri Azure sanal makineler üzerinde çalıştırın. Depoları düğümlere ve pod’lara bağlayabilir, küme bileşenlerini yükseltebilir ve GPU’lar kullanabilirsiniz.
+Azure Red Hat OpenShift düğümleri Azure sanal makinelerinde çalışır. Depoları düğümlere ve pod’lara bağlayabilir, küme bileşenlerini yükseltebilir ve GPU’lar kullanabilirsiniz.
 
 ## <a name="virtual-networks-and-ingress"></a>Sanal ağlar ve giriş
 
-Bir Azure Red Hat OpenShift kümesi mevcut bir sanal ağ eşlemesi aracılığıyla bağlanabilirsiniz. Bu yapılandırmada, pod'ların eşlenen sanal ağdaki diğer hizmetlere ve şirket içi ağlara üzerinden bağlanabilirsiniz [ExpressRoute](https://docs.microsoft.com/azure/expressroute/) veya siteden siteye (S2S) VPN bağlantıları.
+[Bir Azure Red Hat OpenShift kümesini eşleme yoluyla mevcut bir sanal ağa bağlayabilirsiniz](https://docs.microsoft.com/azure/openshift/tutorial-create-cluster#optional-connect-the-clusters-virtual-network-to-an-existing-virtual-network) . Bu yapılandırmada, Pod eşlenmiş bir sanal ağdaki diğer hizmetlere bağlanabilir.
 
-Bkz: [kümenin sanal ağ mevcut bir sanal ağa bağlama](tutorial-create-cluster.md#optional-connect-the-clusters-virtual-network-to-an-existing-virtual-network) Ayrıntılar için.
+Ayrıntılar için bkz. [bir kümenin sanal ağını mevcut bir sanal ağa bağlama](tutorial-create-cluster.md#optional-connect-the-clusters-virtual-network-to-an-existing-virtual-network) .
 
 ## <a name="kubernetes-certification"></a>Kubernetes sertifikası
 
-Azure Red Hat OpenShift hizmeti, Kubernetes uyumlu sertifikalı CNCF olmuştur.
+Azure Red Hat OpenShift hizmeti, Kubernetes uyumlu olarak CNCF sertifikalı.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure Red Hat OpenShift önkoşulları öğrenin:
+Azure Red Hat OpenShift için önkoşulları öğrenin:
 
 > [!div class="nextstepaction"]
 > [Geliştirme ortamınızı kurma](howto-setup-environment.md)

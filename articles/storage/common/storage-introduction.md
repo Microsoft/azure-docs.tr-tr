@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.date: 06/20/2019
 ms.author: tamram
 ms.subservice: common
-ms.openlocfilehash: 51255bc4a93fbe3719eec96f00940a765644bbfe
-ms.sourcegitcommit: 5cb0b6645bd5dff9c1a4324793df3fdd776225e4
+ms.openlocfilehash: 612da322e0d248f9b0000c8f0006893b87b74e44
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67312865"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74084635"
 ---
 # <a name="introduction-to-azure-storage"></a>Azure Depolama’ya Giriş
 
@@ -22,17 +22,17 @@ Azure Depolama, Microsoft’un modern veri depolama senaryolarına yönelik bulu
 - **Dayanıklı ve yüksek oranda kullanılabilir.** Yedeklilik, verilerinizin geçici donanım hataları durumunda güvende kalmasını sağlar. Ayrıca, yerel felaketler ya da doğal afetlere karşı ek koruma için verileri meri merkezleri ya da coğrafi bölgeler arasında çoğaltmayı seçebilirsiniz. Bu şekilde çoğaltılan veriler beklenmeyen bir kesinti durumunda yüksek oranda kullanılabilir olmaya devam eder.
 - **Güvenlik.** Azure Depolama’ya yazılan tüm veriler hizmet tarafından şifrelenir. Azure Depolama, verilerinize erişmesi gereken kişiler üzerinde ayrıntılı denetime sahip olmanızı sağlar.
 - **Ölçeklenebilir.** Azure Depolama, günümüzün uygulamalarına ait veri depolama ve performans gereksinimlerini karşılamak için yüksek düzeyde ölçeklenebilir şekilde tasarlanmıştır. 
-- **Yönetilen.** Microsoft Azure, donanım bakım, güncelleştirmeleri ve kritik sorunları sizin yerinize çözer.
-- **Erişilebilir.** Azure Depolama’daki verilere dünyanın herhangi bir yerinden HTTP ya da HTTPS aracılığıyla erişilebilir. Microsoft, çeşitli dillerde, .NET, Java, Node.js, Python, PHP, Ruby, Go ve diğerleri, hem de olgun bir REST API dahil olmak üzere Azure depolama istemci kitaplıkları sağlar. Azure Depolama, Azure PowerShell veya Azure CLI’de betik oluşturmayı destekler. Azure portalı ve Azure Depolama Gezgini ise verilerinizle çalışmaya yönelik kolay görsel çözümler sunar.  
+- **Yönetilen.** Microsoft Azure, donanım bakımını, güncelleştirmeleri ve kritik sorunları sizin için işler.
+- **Erişilebilir.** Azure Depolama’daki verilere dünyanın herhangi bir yerinden HTTP ya da HTTPS aracılığıyla erişilebilir. Microsoft, Azure depolama için, .NET, Java, Node. js, Python, PHP, Ruby, Go ve diğerleri gibi çeşitli dillerde istemci kitaplıkları ve yetişkinlere yönelik REST API sağlar. Azure Depolama, Azure PowerShell veya Azure CLI’de betik oluşturmayı destekler. Azure portalı ve Azure Depolama Gezgini ise verilerinizle çalışmaya yönelik kolay görsel çözümler sunar.  
 
 ## <a name="azure-storage-services"></a>Azure Depolama hizmetleri
 
 Azure Depolama şu veri hizmetlerini içerir:
 
-- [Azure BLOB'ları](../blobs/storage-blobs-introduction.md): Metin ve ikili veriler için yüksek düzeyde ölçeklenebilir nesne deposu.
-- [Azure dosyaları](../files/storage-files-introduction.md): Yönetilen dosya paylaşımları için bulut veya şirket içi dağıtımlar.
-- [Azure kuyrukları](../queues/storage-queues-introduction.md): Uygulama bileşenleri arasında güvenilir Mesajlaşma için Mesajlaşma deposu. 
-- [Azure tabloları](../tables/table-storage-overview.md): Yapılandırılmış verilerin şemasız depolanmasına yönelik bir NoSQL deposu.
+- [Azure Blobları](../blobs/storage-blobs-introduction.md): Metin ve ikili veriler için yüksek düzeyde ölçeklenebilir nesne deposu.
+- [Azure Dosyaları](../files/storage-files-introduction.md): Bulut veya şirket içi dağıtımlar için yönetilen dosya paylaşımları.
+- [Azure Kuyrukları](../queues/storage-queues-introduction.md): Uygulama bileşenleri arasında güvenilir mesajlaşmaya yönelik bir mesajlaşma deposu. 
+- [Azure Tabloları](../tables/table-storage-overview.md): Yapılandırılmış verilerin şemasız depolanmasına yönelik bir NoSQL deposu.
 
 Her hizmete bir depolama hesabı aracılığıyla erişilir. Başlamak için bkz. [Depolama hesabı oluşturma](storage-quickstart-create-account.md).
 
@@ -48,9 +48,9 @@ Blob depolama aşağıdaki durumlar için idealdir:
 - Yedekleme ve geri yükleme, olağanüstü durum kurtarma ve arşivleme için verilerin depolanması.
 - Şirket içi veya Azure’da barındırılan bir hizmetle analiz için verilerin depolanması.
 
-Blob depolamadaki nesnelere, dünyanın her yerinden HTTP veya HTTPS üzerinden erişilebilir. Kullanıcılar veya istemci uygulamalar, bloblara URL’ler, [Azure Depolama REST API’si](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api), [Azure PowerShell](https://docs.microsoft.com/powershell/module/azure.storage), [Azure CLI](https://docs.microsoft.com/cli/azure/storage) veya bir Azure Depolama istemci kitaplığı aracılığıyla erişebilir. Depolama istemci kitaplıkları [.NET](https://docs.microsoft.com/dotnet/api/overview/azure/storage/client), [Java](https://docs.microsoft.com/java/api/overview/azure/storage/client), [Node.js](https://azure.github.io/azure-storage-node), [Python](https://azure-storage.readthedocs.io/), [PHP](https://azure.github.io/azure-storage-php/) ve [Ruby](https://azure.github.io/azure-storage-ruby) dahil olmak üzere birden çok dil ile kullanılabilir.
+Blob depolamadaki nesnelere, dünyanın her yerinden HTTP veya HTTPS üzerinden erişilebilir. Kullanıcılar veya istemci uygulamalar, bloblara URL’ler, [Azure Depolama REST API’si](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api), [Azure PowerShell](https://docs.microsoft.com/powershell/module/azure.storage), [Azure CLI](https://docs.microsoft.com/cli/azure/storage) veya bir Azure Depolama istemci kitaplığı aracılığıyla erişebilir. Depolama istemci kitaplıkları [.NET](https://docs.microsoft.com/dotnet/api/overview/azure/storage/client), [Java](https://docs.microsoft.com/java/api/overview/azure/storage), [Node.js](https://azure.github.io/azure-storage-node), [Python](https://azure-storage.readthedocs.io/), [PHP](https://azure.github.io/azure-storage-php/) ve [Ruby](https://azure.github.io/azure-storage-ruby) dahil olmak üzere birden çok dil ile kullanılabilir.
 
-Blob Depolama hakkında daha fazla bilgi için bkz. [Blob depolamaya giriş](../blobs/storage-blobs-introduction.md).
+BLOB depolama hakkında daha fazla bilgi için bkz. [BLOB depolamaya giriş](../blobs/storage-blobs-introduction.md).
 
 ## <a name="azure-files"></a>Azure Dosyaları
 
@@ -74,7 +74,7 @@ Azure Dosyaları hakkında daha fazla bilgi için bkz. [Azure Dosyaları'na Giri
 
 Azure Kuyruk hizmeti, iletileri depolamak ve almak için kullanılır. Kuyruk iletilerinin boyutu 64 KB'ye kadar olabilir ve bir kuyruk, milyonlarca ileti içerebilir. Kuyruklar, genellikle zaman uyumsuz olarak işlenecek ileti listelerini depolamak için kullanılır.
 
-Örneğin, müşterilerinizin resimleri karşıya yükleyebilmesini ve her resmin küçük resimlerini oluşturabilmesini istediğinizi düşünelim. Müşterinizin resimleri karşıya yüklerken küçük resimleri oluşturmanızı beklemesini sağlayabilirsiniz. Alternatif olarak bir kuyruk kullanabilirsiniz. Müşteri, karşıya yüklemeyi tamamladığında, kuyruğa bir ileti yazın. Ardından Azure İşlevinin iletiyi kuyruktan alıp ve küçük resimleri oluşturmasını sağlayın. Bu işlemin tüm bölümleri ayrıca ölçeklendirilebileceğinden kullanımınız için ayarlarken daha fazla kontrol sunar.
+Örneğin, müşterilerinizin resimleri karşıya yükleyebilmesini ve her resmin küçük resimlerini oluşturabilmesini istediğinizi düşünelim. Müşterinizin resimleri karşıya yüklerken küçük resimleri oluşturmanızı beklemesini sağlayabilirsiniz. Alternatif olarak bir kuyruk kullanabilirsiniz. Müşteri karşıya yüklemeyi tamamladığında, kuyruğa bir ileti yazın. Ardından Azure İşlevinin iletiyi kuyruktan alıp ve küçük resimleri oluşturmasını sağlayın. Bu işlemin tüm bölümleri ayrıca ölçeklendirilebileceğinden kullanımınız için ayarlarken daha fazla kontrol sunar.
 
 Azure Kuyrukları hakkında daha fazla bilgi için bkz. [Kuyruklara Giriş](../queues/storage-queues-introduction.md).
 
@@ -86,9 +86,9 @@ Tablo depolama hakkında daha fazla bilgi için bkz. [Azure Tablo depolamaya gen
 
 ## <a name="disk-storage"></a>Disk depolama
 
-Azure yönetilen diski olan bir sanal sabit disk (VHD). Bunu, ancak, sanallaştırılmış bir şirket içi sunucu fiziksel bir disk gibi düşünebilirsiniz. Azure yönetilen diskler, azure'da rastgele g/ç depolama nesnesi olan sayfa blobları olarak depolanır. ', Sayfa blobları, blob kapsayıcıları ve Azure depolama hesabı üzerinde bir Özet olduğundan yönetilen' yönetilen disk diyoruz. Yönetilen disklerle yapmanız gereken tek şey sağlama disk ve Azure geri kalanını üstlenir.
+Azure yönetilen disk, bir sanal sabit disktir (VHD). Bunu, şirket içi sunucuda bir fiziksel disk gibi düşünebilirsiniz, ancak sanallaştırılabilir. Azure yönetilen diskler, Azure 'daki bir rastgele GÇ depolama nesnesi olan sayfa Blobları olarak depolanır. Sayfa Blobları, blob kapsayıcıları ve Azure depolama hesapları üzerinde bir soyutlama olduğundan, yönetilen bir disk ' Managed ' çağrısı yaptık. Yönetilen disklerle, tüm yapmanız gereken diski temin etmek ve Azure 'un geri kalanını yapması gerekir.
 
-Yönetilen diskler hakkında daha fazla bilgi için bkz. [giriş Azure yönetilen diskler](../../virtual-machines/windows/managed-disks-overview.md).
+Yönetilen diskler hakkında daha fazla bilgi için bkz. [Azure yönetilen disklere giriş](../../virtual-machines/windows/managed-disks-overview.md).
 
 ## <a name="types-of-storage-accounts"></a>Depolama hesabı türleri
 
@@ -96,15 +96,15 @@ Yönetilen diskler hakkında daha fazla bilgi için bkz. [giriş Azure yönetile
 
 Depolama hesabı türleri hakkında daha fazla bilgi için bkz. [Azure depolama hesabına genel bakış](storage-account-overview.md).
 
-## <a name="securing-access-to-storage-accounts"></a>Depolama hesapları için erişim güvenliğini sağlama
+## <a name="securing-access-to-storage-accounts"></a>Depolama hesaplarına erişimin güvenliğini sağlama
 
-Azure depolama için her istek yetkili olması gerekir. Azure depolama, aşağıdaki yetkilendirme yöntemleri destekler:
+Azure depolama 'ya yönelik her isteğin yetkilendirilmiş olması gerekir. Azure depolama aşağıdaki yetkilendirme yöntemlerini destekler:
 
-- **Blob ve kuyruk verileri için Azure Active Directory (Azure AD) Tümleştirmesi.** Azure depolama, kimlik doğrulaması ve Azure AD ile yetkilendirme için rol tabanlı erişim denetimi (RBAC) aracılığıyla Blob ve kuyruk hizmetlerine destekler. Azure AD ile istekleri yetkilendirme üst düzey güvenlik ve kullanım kolaylığı için önerilir. Daha fazla bilgi için [erişimi yetkilendirin Azure blobları ve Azure Active Directory'yi kullanarak sıralar](storage-auth-aad.md).
-- **Azure dosyaları (Önizleme) için Azure AD yetkilendirme SMB üzerinden.** Azure dosyaları, Azure Active Directory etki alanı Hizmetleri ile (sunucu ileti bloğu) SMB üzerinden kimlik tabanlı yetkilendirme destekler. Etki alanına katılmış Windows sanal makinelerinizi (VM) Azure dosya paylaşımlarını Azure AD kimlik bilgilerini kullanarak erişebilir. Daha fazla bilgi için [SMB üzerinden Azure dosyaları (Önizleme) genel bakış, Azure Active Directory yetkilendirme](../files/storage-files-active-directory-overview.md).
-- **Paylaşılan anahtar ile yetkilendirme.** Azure depolama Blob, kuyruk ve tablo hizmetlerine ve Azure dosyaları ile paylaşılan bir depolama hesabı erişim anahtarı kullanılarak imzalandığını her istek üstbilgiyle yetkilendirme geçirir anahtar kullanılarak paylaşılan Key.A istemci yetkilendirme destekler. Daha fazla bilgi için [paylaşılan anahtar ile Authorize](https://docs.microsoft.com/rest/api/storageservices/authorize-with-shared-key).
-- **Yetkilendirme kullanarak paylaşılan erişim imzaları (SAS).** Paylaşılan erişim imzası (SAS) depolama kaynağı için URI eklenecek bir güvenlik belirteci içeren bir dizedir. Güvenlik belirteci, izinler ve erişim aralığı gibi kısıtlamaları kapsüller. Daha fazla bilgi için [paylaşılan erişim imzaları (SAS) kullanma](storage-dotnet-shared-access-signature-part-1.md).
-- **Kapsayıcılara ve blob'lara anonim erişimi.** Bir kapsayıcı ve bloblarını genel kullanıma açık olabilir. Bir kapsayıcı veya blob genel belirttiğinizde herkes anonim olarak okuyabilir; kimlik doğrulaması gereklidir. Daha fazla bilgi için bkz. [Kapsayıcılar ve bloblar için anonim okuma erişimini yönetme](../blobs/storage-manage-access-to-resources.md).
+- **Blob ve kuyruk verileri için Azure Active Directory (Azure AD) tümleştirmesi.** Azure depolama, rol tabanlı erişim denetimi (RBAC) aracılığıyla blob ve sıra Hizmetleri için Azure AD ile kimlik doğrulaması ve yetkilendirmeyi destekler. Azure AD ile istekleri yetkilendirmek, üstün güvenlik ve kullanım kolaylığı için önerilir. Daha fazla bilgi için bkz. [Azure Active Directory kullanarak Azure bloblarına ve kuyruklara erişim yetkisi verme](storage-auth-aad.md).
+- **Azure dosyaları için SMB üzerinden Azure AD yetkilendirmesi (Önizleme).** Azure dosyaları, Azure Active Directory Domain Services aracılığıyla SMB (sunucu Ileti bloğu) üzerinden kimlik tabanlı yetkilendirmeyi destekler. Etki alanına katılmış Windows sanal makineleriniz (VM), Azure AD kimlik bilgilerini kullanarak Azure dosya paylaşımlarına erişebilir. Daha fazla bilgi için bkz. [Azure dosyaları IÇIN SMB üzerinden Azure Active Directory yetkilendirmeyi genel bakış (Önizleme)](../files/storage-files-active-directory-overview.md).
+- **Paylaşılan anahtarla yetkilendirme.** Azure Depolama Blobu, kuyruk ve tablo Hizmetleri ve Azure dosyaları, paylaşılan anahtarla yetkilendirmeyi destekler. paylaşılan anahtar yetkilendirmesi kullanan bir istemci, depolama hesabı erişim anahtarı kullanılarak imzalanan her isteği içeren bir üst bilgi geçirir. Daha fazla bilgi için bkz. [paylaşılan anahtarla yetkilendirme](https://docs.microsoft.com/rest/api/storageservices/authorize-with-shared-key).
+- **Paylaşılan erişim imzalarını (SAS) kullanarak yetkilendirme.** Paylaşılan erişim imzası (SAS), bir depolama kaynağının URI 'sine eklenebileceği bir güvenlik belirteci içeren bir dizedir. Güvenlik belirteci, izinler ve erişim aralığı gibi kısıtlamaları kapsüller. Daha fazla bilgi için bkz. [paylaşılan erişim imzaları (SAS) kullanma](storage-sas-overview.md).
+- **Kapsayıcılara ve bloblara anonim erişim.** Bir kapsayıcı ve Blobları herkese açık olabilir. Bir kapsayıcının veya Blobun genel olduğunu belirttiğinizde, herkes onu anonim olarak okuyabilir; kimlik doğrulaması gerekmiyor. Daha fazla bilgi için bkz. [Kapsayıcılar ve bloblar için anonim okuma erişimini yönetme](../blobs/storage-manage-access-to-resources.md).
 
 ## <a name="encryption"></a>Şifreleme
 
@@ -112,23 +112,23 @@ Depolama hizmetleri için iki temel şifreleme seçeneği vardır. Güvenlik ve 
 
 ### <a name="encryption-at-rest"></a>Bekleme sırasında şifreleme
 
-Azure depolama şifrelemesi korur ve organizasyonel güvenlik ve uyumluluk yükümlülüklerinizin yerine verilerinizi korur. Azure depolama, otomatik olarak depolama hesabı için kaydetmeden önce tüm verileri şifreler ve alınmadan önce çözer. Şifreleme, şifre çözme ve anahtar yönetimi işlemlerini kullanıcılara tamamen şeffaf. Müşteriler Azure Key Vault'u kullanarak kendi anahtarlarını yönetmek de seçebilirsiniz. Daha fazla bilgi için [bekleyen veriler için Azure depolama şifrelemesi](storage-service-encryption.md).
+Azure depolama şifrelemesi, kurumsal güvenlik ve uyumluluk taahhütlerinizi karşılamak için verilerinizi korur ve korur. Azure depolama, depolama hesabına kalıcı yapmadan önce tüm verileri otomatik olarak şifreler ve alma işleminden önce şifresini çözer. Şifreleme, şifre çözme ve anahtar yönetim işlemleri, kullanıcılar için tamamen saydamdır. Müşteriler, Azure Key Vault kullanarak kendi anahtarlarını yönetmeyi de seçebilir. Daha fazla bilgi için bkz. [bekleyen veriler Için Azure depolama şifrelemesi](storage-service-encryption.md).
 
 ### <a name="client-side-encryption"></a>İstemci Tarafında Şifreleme
 
-Azure depolama istemci kitaplıkları, ağ üzerinden göndermek ve yanıtın çözme önce istemci Kitaplığı'ndan verileri şifrelemek için yöntemler sağlar. İstemci tarafı şifreleme ile şifrelenmiş veriler, Azure Depolama tarafından de bekleme sırasında şifrelenir. İstemci tarafı şifreleme hakkında daha fazla bilgi için bkz: [Azure depolama için .NET ile istemci tarafı şifreleme](storage-client-side-encryption.md).
+Azure depolama istemci kitaplıkları, istemci kitaplığından, verileri kablo üzerinden göndermeden ve yanıtın şifresini çözmeden önce şifrelemek için yöntemler sağlar. İstemci tarafı şifreleme aracılığıyla şifrelenen veriler de Azure Storage tarafından REST 'de şifrelenir. İstemci tarafı şifreleme hakkında daha fazla bilgi için bkz. [Azure depolama için .net Ile istemci tarafı şifreleme](storage-client-side-encryption.md).
 
 ## <a name="redundancy"></a>Yedeklilik
 
-Verilerinizin güvende olmasını sağlamak için Azure Depolama, verilerinizin birden çok kopyasını çoğaltır. Depolama hesabınızı ayarladığınızda, bir yedeklik seçeneği seçin.
+Verilerinizin güvende olmasını sağlamak için Azure Depolama, verilerinizin birden çok kopyasını çoğaltır. Depolama hesabınızı ayarlarken bir artıklık seçeneği belirleyin.
 
 [!INCLUDE [storage-common-redundancy-options](../../../includes/storage-common-redundancy-options.md)]
 
-Olağanüstü durum kurtarma hakkında daha fazla bilgi için bkz: [olağanüstü durum kurtarma ve depolama hesabı yük devretme (Önizleme) Azure Depolama'daki](storage-disaster-recovery-guidance.md).
+Olağanüstü durum kurtarma hakkında daha fazla bilgi için bkz. [Azure Storage 'Da olağanüstü durum kurtarma ve depolama hesabı yük devretmesi (Önizleme)](storage-disaster-recovery-guidance.md).
 
 ## <a name="transferring-data-to-and-from-azure-storage"></a>Azure Depolama’da veri alışverişi
 
-Verileri Azure depolama içine veya dışına taşımak için birkaç seçeneğiniz vardır. Hangi seçeneği, veri kümesi ve ağ bant genişliğiniz boyutuna bağlıdır. Daha fazla bilgi için [veri aktarımı için bir Azure çözümü seçin](storage-choose-data-transfer-solution.md).
+Verileri Azure depolama alanına veya dışına taşımaya yönelik çeşitli seçenekleriniz vardır. Seçtiğiniz seçenek, veri kümenizin boyutuna ve ağ bant genişliğine bağlıdır. Daha fazla bilgi için bkz. [veri aktarımı için bir Azure çözümü seçme](storage-choose-data-transfer-solution.md).
 
 ## <a name="pricing"></a>Fiyatlandırma
 
@@ -140,10 +140,10 @@ Azure Storage kaynakları HTTP/HTTPS isteği yapabilen her dil ile erişilebilir
 
 ### <a name="azure-storage-data-api-and-library-references"></a>Azure Depolama veri API’si ve kitaplık başvuruları
 
-- [Azure depolama REST API'si](https://docs.microsoft.com/rest/api/storageservices/)
+- [Azure depolama REST API](https://docs.microsoft.com/rest/api/storageservices/)
 - [.NET için Azure depolama istemci kitaplığı](https://docs.microsoft.com/dotnet/api/overview/azure/storage)
 - [Java/Android için Azure depolama istemci kitaplığı](https://docs.microsoft.com/java/api/overview/azure/storage)
-- [Node.js için Azure depolama istemci kitaplığı](https://docs.microsoft.com/javascript/api/azure-storage)
+- [Node. js için Azure depolama istemci kitaplığı](https://docs.microsoft.com/javascript/api/overview/azure/storage)
 - [Python için Azure depolama istemci kitaplığı](https://github.com/Azure/azure-storage-python)
 - [PHP için Azure depolama istemci kitaplığı](https://github.com/Azure/azure-storage-php)
 - [Ruby için Azure depolama istemci kitaplığı](https://github.com/Azure/azure-storage-ruby)

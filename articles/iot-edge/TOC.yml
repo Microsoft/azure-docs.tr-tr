@@ -45,7 +45,7 @@
           href: tutorial-deploy-function.md
         - name: Azure Stream Analytics ile ortalamaları bulma
           href: tutorial-deploy-stream-analytics.md
-        - name: Azure Machine Learning hizmetiyle verileri puanlama
+        - name: Azure Machine Learning ile verileri puanlama
           href: tutorial-deploy-machine-learning.md
         - name: Özel Görüntü İşleme ile görüntüleri sınıflandırma
           href: tutorial-deploy-custom-vision.md
@@ -110,22 +110,14 @@
 - name: Nasıl yapılır kılavuzları
   items:
     - name: IoT Edge cihazı kaydetme
-      items:
-        - name: Azure portal
-          href: how-to-register-device-portal.md
-        - name: Azure CLI
-          href: how-to-register-device-cli.md
-        - name: Visual Studio Code
-          href: how-to-register-device-vscode.md
+      href: how-to-register-device.md
     - name: IoT Edge'i yükleme ve yönetme
       items:
-        - name: Linux X64
+        - name: Linux
           href: how-to-install-iot-edge-linux.md
-        - name: Linux ARM32
-          href: how-to-install-iot-edge-linux-arm.md
-        - name: Windows X64
+        - name: Windows
           href: how-to-install-iot-edge-windows.md
-        - name: Windows X64 üzerinde Linux kapsayıcıları
+        - name: Windows üzerinde Linux kapsayıcıları
           href: how-to-install-iot-edge-windows-with-linux.md
         - name: Windows Server VM
           href: how-to-install-iot-edge-windows-server-vm.md
@@ -137,10 +129,14 @@
           href: how-to-update-iot-edge.md
     - name: DPS ile otomatik sağlama
       items:
-        - name: Linux
-          href: how-to-auto-provision-simulated-device-linux.md
-        - name: Windows
-          href: how-to-auto-provision-simulated-device-windows.md
+        - name: TPM kanıtlama
+          items:
+            - name: Linux
+              href: how-to-auto-provision-simulated-device-linux.md
+            - name: Windows
+              href: how-to-auto-provision-simulated-device-windows.md
+        - name: Simetrik anahtar kanıtlama
+          href: how-to-auto-provision-symmetric-keys.md
     - name: Özel modüller geliştirme ve bunlarda hata ayıklama
       items:
         - name: Visual Studio 2019
@@ -175,6 +171,8 @@
       href: how-to-configure-proxy-support.md
     - name: Uçta veri depolama
       items:
+        - name: Modüllerin bir cihazın yerel depolama alanına erişmesine izin ver
+          href: how-to-access-host-storage-from-module.md
         - name: IoT Edge üzerinde Azure Blob Depolama
           href: how-to-store-data-blob.md
         - name: Blob depolama modüllerini dağıtma
@@ -193,25 +191,27 @@
   items:
     - name: Çözümler
       items:
-        - name: IoT çözüm hızlandırıcıları
-          href: /azure/iot-suite
         - name: IoT Central
           href: 'https://docs.microsoft.com/microsoft-iot-central/'
-    - name: Platform hizmetleri
+        - name: IoT çözüm hızlandırıcıları
+          href: /azure/iot-accelerators
+    - name: Platform Hizmetleri
       items:
         - name: IoT Hub
           href: /azure/iot-hub
+        - name: IoT Tak Çalıştır
+          href: /azure/iot-pnp
         - name: IoT Hub Cihazı Sağlama Hizmeti
           href: /azure/iot-dps
+        - name: IoT Hizmet SDK’ları
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
         - name: Haritalar
           href: /azure/azure-maps
-        - name: Hizmet SDK'ları
-          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
         - name: Time Series Insights
           href: /azure/time-series-insights
-    - name: Azure IoT Edge
+    - name: IoT Edge
       items:
-        - name: IoT Edge
+        - name: Azure IoT Edge
           href: /azure/iot-edge
         - name: IoT Cihaz SDK'ları
           href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'
@@ -244,14 +244,14 @@
     - name: MSDN forumu
       href: 'https://social.msdn.microsoft.com/Forums/azure/home?forum=iotedge'
     - name: Fiyatlandırma
-      href: 'https://azure.microsoft.com/pricing/details/iot-hub/'
+      href: 'https://azure.microsoft.com/pricing/details/iot-edge/'
     - name: Fiyatlandırma hesaplayıcı
       href: 'https://azure.microsoft.com/pricing/calculator/'
     - name: Hizmet güncelleştirmeleri
-      href: 'https://azure.microsoft.com/updates/?product=iot-hub'
+      href: 'https://azure.microsoft.com/updates/?product=iot-edge'
     - name: Stack Overflow
-      href: 'https://stackoverflow.com/questions/tagged/azure-iot-hub'
+      href: 'https://stackoverflow.com/questions/tagged/azure-iot-edge'
     - name: Teknik örnek olay incelemeleri
       href: 'https://microsoft.github.io/techcasestudies/#technology=IoT&sortBy=featured'
     - name: Videolar
-      href: 'https://azure.microsoft.com/documentation/videos/index/?services=iot-hub'
+      href: 'https://azure.microsoft.com/documentation/videos/index/?services=iot-edge'

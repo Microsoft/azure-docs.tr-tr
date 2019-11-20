@@ -1,44 +1,44 @@
 ---
-title: 'Hızlı Başlangıç: Python – Form tanıyıcı kullanarak giriş verilerini ayıklama'
+title: 'Hızlı başlangıç: Python form tanıyıcısı kullanarak alındı verilerini ayıklama'
 titleSuffix: Azure Cognitive Services
-description: Bu hızlı başlangıçta, satış makbuzuna görüntülerden verileri ayıklamak için Form tanıyıcı REST API ile Python kullanacaksınız.
+description: Bu hızlı başlangıçta, satış alındıları görüntülerinden veri ayıklamak için Python ile REST API adlı form tanıyıcıyı kullanacaksınız.
 author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
-ms.subservice: form-recognizer
+ms.subservice: forms-recognizer
 ms.topic: quickstart
 ms.date: 07/01/2019
 ms.author: pafarley
-ms.openlocfilehash: da699c9e5ca933c182c83a33dd0c09b49a0726c3
-ms.sourcegitcommit: 837dfd2c84a810c75b009d5813ecb67237aaf6b8
+ms.openlocfilehash: ef5c9e8d548e8acbcbdbe83f6e7c9965c798ad44
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67503444"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72931247"
 ---
-# <a name="quickstart-extract-receipt-data-using-the-form-recognizer-rest-api-with-python"></a>Hızlı Başlangıç: Python ile Form tanıyıcı REST API kullanarak giriş verilerini ayıklama
+# <a name="quickstart-extract-receipt-data-using-the-form-recognizer-rest-api-with-python"></a>Hızlı başlangıç: Python ile REST API form tanıyıcı kullanarak alındı verilerini ayıklama
 
-Bu hızlı başlangıçta, ayıklayın ve satış makbuzuna ilgili bilgileri tanımlamak için Python ile Azure Form tanıyıcı REST API kullanacaksınız.
+Bu hızlı başlangıçta, satış girişlerinde ilgili bilgileri ayıklamak ve tanımlamak için Python ile Azure form tanıyıcı REST API kullanacaksınız.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
-Bu hızlı başlangıcı tamamlamak için şunlara sahip olmalısınız:
-- Form tanıyıcı sınırlı erişim önizlemesine erişebilirsiniz. Önizleme erişim elde etmek için doldurun ve gönderme [Form tanıyıcı erişim isteği](https://aka.ms/FormRecognizerRequestAccess) formu.
-- [Python](https://www.python.org/downloads/) (örnek yerel olarak çalıştırmak istiyorsanız) yüklü.
-- Görüntüyü bir giriş için bir URL. Kullanabileceğiniz bir [örnek görüntü](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/curl/form-recognizer/contoso-receipt.png?raw=true) Bu Hızlı Başlangıç için.
+Bu hızlı başlangıcı tamamlayabilmeniz için şunları yapmanız gerekir:
+- Form tanıyıcı sınırlı erişim önizlemesine erişim. Önizlemeye erişim sağlamak için [form tanıyıcı erişim isteği](https://aka.ms/FormRecognizerRequestAccess) formunu doldurun ve gönderebilirsiniz.
+- [Python](https://www.python.org/downloads/) yüklendi (örneği yerel olarak çalıştırmak istiyorsanız).
+- Bir makbuz görüntüsünün URL 'SI. Bu hızlı başlangıç için [örnek bir görüntü](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/curl/form-recognizer/contoso-receipt.png?raw=true) kullanabilirsiniz.
 
-## <a name="create-a-form-recognizer-resource"></a>Form tanıyıcı kaynak oluştur
+## <a name="create-a-form-recognizer-resource"></a>Form tanıyıcı kaynağı oluşturma
 
 [!INCLUDE [create resource](../includes/create-resource.md)]
 
-## <a name="analyze-a-receipt"></a>Bir giriş analiz edin
+## <a name="analyze-a-receipt"></a>Okundu bilgisi Analizi
 
-Bir giriş analiz etmeye başlamak için çağrı **analiz giriş** Python komut dosyası kullanarak API. Betiği çalıştırmadan önce şu değişiklikleri yapın:
+Bir alındısı analizine başlamak için aşağıdaki Python betiğini kullanarak **Çözümleme alındı** API 'sini çağırabilirsiniz. Betiği çalıştırmadan önce Şu değişiklikleri yapın:
 
-1. Değiştirin `<Endpoint>` Form tanıyıcı abonelik anahtarınızı aldığınız uç noktası ile. Form tanıyıcı kaynağınızda bulabilirsiniz **genel bakış** sekmesi.
-1. Değiştirin `<your receipt URL>` Giriş resminin URL adresine sahip.
-1. Değiştirin `<subscription key>` önceki adımda kopyaladığınız abonelik anahtarı.
+1. `<Endpoint>`, form tanıyıcı aboneliğinizle edindiğiniz uç noktayla değiştirin.
+1. `<your receipt URL>`, bir makbuz resminin URL adresiyle değiştirin.
+1. `<subscription key>`, önceki adımdan kopyaladığınız abonelik anahtarıyla değiştirin.
 
     ```python
     import http.client, urllib.request, urllib.parse, urllib.error, base64
@@ -66,19 +66,19 @@ Bir giriş analiz etmeye başlamak için çağrı **analiz giriş** Python komut
         exit()
     ```
 
-1. Kod bir dosyayı .py uzantısıyla kaydedin. Örneğin, *form tanıyıcı receipts.py*.
+1. Kodu. Kopyala uzantılı bir dosyaya kaydedin. Örneğin, *form-recognizer-receipts.py*.
 1. Bir komut istemi penceresi açın.
 1. İstemde, örneği çalıştırmak için `python` komutunu kullanın. Örneğin, `python form-recognizer-receipts.py`.
 
-Size gönderilecektir bir `202 (Success)` içeren yanıt bir **işlemi konumu** üst bilgi betik konsola yazdırır. Bu üst bilgi işlemin durumunu sorgulamak ve analiz sonuçları almak için kullanabileceğiniz bir işlem kimliği içeriyor. Aşağıdaki örnek değeri, sonra gelen dize içindeki `operations/` işlem kimliğidir.
+Komut dosyasının konsola yazdırılacağı bir **Işlem konumu** üst bilgisi içeren `202 (Success)` yanıtını alırsınız. Bu üst bilgi, işlemin durumunu sorgulamak ve analiz sonuçlarını almak için kullanabileceğiniz bir işlem KIMLIĞI içerir. Aşağıdaki örnek değerde, `operations/` sonraki dize işlem KIMLIĞIDIR.
 
 ```console
 https://cognitiveservice/formrecognizer/v1.0-preview/prebuilt/receipt/operations/54f0b076-4e38-43e5-81bd-b85b8835fdfb
 ```
 
-## <a name="get-the-receipt-results"></a>Giriş sonuçlar elde edin
+## <a name="get-the-receipt-results"></a>Makbuz sonuçlarını alma
 
-Çağırdıktan sonra **analiz giriş** API'sini çağırırsınız **giriş sonuç alma** API işlemi ve Ayıklanan veriler durumunu almak için. Python betiğinizi altına aşağıdaki kodu ekleyin. Bu işlem kimlik değerini ayıklar ve yeni bir API çağrısına geçirir. Bu betik sonuçlarını kullanılabilir olana kadar düzenli aralıklarla API'yi çağıran için zaman uyumsuz bir işlemdir. Bir saniye veya daha fazla zaman aralığı öneririz.
+**Çözümleme alındı** API 'sini çağırdıktan sonra, işlemin durumunu ve ayıklanan verileri almak Için **alma sonucu** API 'sini çağırın. Aşağıdaki kodu Python betiğinizin altına ekleyin. Bu işlem KIMLIĞI değerini ayıklar ve yeni bir API çağrısına geçirir. İşlem zaman uyumsuzdur, bu nedenle, sonuçlar kullanılabilir olana kadar bu betik API 'YI düzenli aralıklarla çağırır. Bir saniye veya daha fazla Aralık öneririz.
 
 ```python
 operationId = operationURL.split("operations/")[1]
@@ -99,16 +99,16 @@ while True:
         exit()
 ```
 
-1. Komut dosyasını kaydedin.
-1. Yeniden kullanmak `python` örneği çalıştırmak için komutu. Örneğin, `python form-recognize-analyze.py`.
+1. Betiği kaydedin.
+1. Örneği çalıştırmak için `python` komutunu yeniden kullanın. Örneğin, `python form-recognize-analyze.py`.
 
 ### <a name="examine-the-response"></a>Yanıtı inceleme
 
-Analiz işlemi tamamlanana kadar komut yanıtlarını konsola yazdırır. Ardından, ayıklanan metin verileri JSON biçiminde yazdırılır. `"recognitionResults"` Alan alınmasından ayıklanan metin her satırı içerir ve `"understandingResults"` alan kaydınızda en uygun bölümleri için anahtar/değer bilgilerini içerir.
+Betik, Çözümle işlemi tamamlanana kadar yanıtları konsola yazdıracaktır. Daha sonra, ayıklanan metin verilerini JSON biçiminde yazdıracaktır. `"recognitionResults"` alanı, alış irsaliyesinden ayıklanan her metin satırını içerir ve `"understandingResults"` alanı, girişin en ilgili bölümleri için anahtar/değer bilgilerini içerir.
 
-Aşağıdaki giriş resmi ve karşılık gelen kendi JSON çıkışa bakın. Çıkış okunabilir olması için kısaltıldı.
+Aşağıdaki makbuz görüntüsüne ve buna karşılık gelen JSON çıktısına bakın. Çıktı okunabilirlik için kısaltıldı.
 
-![Contoso Mağazası'ndan bir giriş](../media/contoso-receipt.png)
+![Contoso mağazasından alındı](../media/contoso-receipt.png)
 
 ```json
 {
@@ -223,7 +223,7 @@ Aşağıdaki giriş resmi ve karşılık gelen kendi JSON çıkışa bakın. Ç�
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, Form tanıyıcı REST API ile Python bir modeli eğitmek ve bir örnek senaryosunda çalıştırmak için kullanılır. Ardından, daha fazla ayrıntılı Form tanıyıcı API'sini keşfetmek için başvuru belgelerine bakın.
+Bu hızlı başlangıçta, bir modeli eğitme ve örnek bir senaryoda çalıştırmak için Python ile birlikte REST API form tanıyıcıyı kullandınız. Sonra, form tanıyıcı API 'sini daha ayrıntılı incelemek için başvuru belgelerine bakın.
 
 > [!div class="nextstepaction"]
 > [REST API başvuru belgeleri](https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api/operations/AnalyzeReceipt)

@@ -1,62 +1,61 @@
 ---
-title: İşlem kaynaklarını verimli bir şekilde - kullanmak için paralel olarak Azure Batch görevlerini çalıştırmak | Microsoft Docs
-description: Azure Batch havuzundaki her düğümde daha az işlem düğümlerini ve eş zamanlı çalışan görevleri kullanarak verimliliği ve maliyetleri düşüren
+title: İşlem kaynaklarını verimli bir şekilde kullanmak için görevleri paralel olarak çalıştırın-Azure Batch | Microsoft Docs
+description: Daha az işlem düğümü kullanarak ve bir Azure Batch havuzundaki her düğümde eşzamanlı görevleri çalıştırarak verimliliği ve daha düşük maliyetleri artırın
 services: batch
 documentationcenter: .net
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.assetid: 538a067c-1f6e-44eb-a92b-8d51c33d3e1a
 ms.service: batch
-ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: ''
 ms.workload: big-compute
 ms.date: 04/17/2019
 ms.author: lahugh
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 79b45bd423ed6715cdb7cc7c0e079c150eefede5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f45c35e6d9fb611ebf73c4eab8b517d8575b8e82
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64717941"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70094940"
 ---
-# <a name="run-tasks-concurrently-to-maximize-usage-of-batch-compute-nodes"></a>İşlem düğümleri Batch kullanımını eşzamanlı olarak en üst düzeye çıkarmak için görevleri Çalıştır 
+# <a name="run-tasks-concurrently-to-maximize-usage-of-batch-compute-nodes"></a>Toplu işlem düğümlerinin kullanımını en üst düzeye çıkarmak için görevleri eşzamanlı olarak çalıştırın 
 
-Birden fazla görevin eşzamanlı olarak, Azure Batch havuzundaki her işlem düğümünde çalıştırmak, kaynak kullanımını daha küçük bir havuzdaki düğümlerin sayısı en üst düzeye çıkarabilirsiniz. Bazı iş yükleri için bu kısa iş süreleri ve daha düşük maliyetli neden olabilir.
+Azure Batch havuzunuzdaki her bir işlem düğümünde birden fazla görev aynı anda çalıştırılarak, havuzdaki daha az sayıda düğüm üzerinde kaynak kullanımını en üst düzeye çıkarabilirsiniz. Bazı iş yükleri için bu, daha kısa iş sürelerine ve maliyeti azaltmaya neden olabilir.
 
-Bir düğümün kaynakların tümünü tek bir görev için ayrılmış bazı senaryolarda yararlı olsa da bu kaynakları paylaşmak birden çok görev izin vermesini çeşitli durumlarda yararlanabilirsiniz:
+Bazı senaryolar, tüm düğümün kaynaklarını tek bir göreve eklemek avantajına karşın, birkaç durum birden fazla görevin bu kaynakları paylaşmasına izin vermenin avantajlarından yararlanır:
 
-* **Veri aktarımını en aza** görevleri olduğunda veri paylaşabilir. Bu senaryoda, paylaşılan veri düğümler küçük bir sayıya kopyalayarak ve her bir düğümde Paralel Görevler yürütülürken veri aktarımı ücretlerini önemli ölçüde azaltabilir. Bu özellikle, her düğüme kopyalanacak verileri coğrafi bölgeler arasında aktarılması gereken geçerlidir.
-* **Bellek kullanımını en üst düzeye** görevleri büyük miktarda bellek, ancak yalnızca kısa süreli süreyi ve yürütme sırasında değişken zamanlarda sırasında ne zaman gerektirir. Bu tür ani verimli bir şekilde işlemek için daha fazla bellek ile daha az sayıda ancak daha büyük işlem düğümleri kullanabilirsiniz. Bu düğümü birden çok görevi paralel olarak her bir düğümde çalışan olur, ancak farklı zamanlarda her görev düğümlerinin çoktur bellek yararlanmak.
-* **Düğüm sayısı sınırları Azaltıcı** düğümler arası iletişimin olduğunda bir havuz gerekli. Şu anda, 50 işlem düğümlerine düğümler arası iletişim için yapılandırılmış havuzlarında sınırlıdır. Böyle bir havuzdaki her düğüme görevleri paralel olarak yürütmek için ise çok büyük sayıda görev aynı anda çalıştırılabilir.
-* **Bir şirket içi işlem kümesi çoğaltma**, ilk işlem ortamı Azure'a taşıdığınızda gibi. İşlem düğümü başına birden çok görev geçerli şirket içi çözümünüzü yürütür, düğüm görevleri daha yakından söz konusu yapılandırmayı yansıtmak üzere en fazla sayısını artırabilirsiniz.
+* Görevler veri paylaştığında **veri aktarımını en aza indirir** . Bu senaryoda, paylaşılan verileri daha az sayıda düğüme kopyalayarak ve görevleri her düğümde paralel olarak yürüterek veri aktarımı ücretlerini ciddi ölçüde azaltabilirsiniz. Bu özellikle, her düğüme kopyalanabilecek verilerin coğrafi bölgeler arasında aktarılması gerekiyorsa geçerlidir.
+* Görevler büyük miktarda bellek gerektirdiğinde, ancak yalnızca kısa süreler boyunca ve yürütme sırasında değişken sürelerinde **bellek kullanımının** en üst düzeye çıkarın. Bu tür artışları verimli bir şekilde işlemek için daha fazla belleğe sahip daha az, ancak daha büyük işlem düğümleri kullanabilirsiniz. Bu düğümlerde her düğüm üzerinde paralel olarak çalışan birden çok görev olur, ancak her görev farklı zamanlarda düğümlerin plentiful belleğinden faydalanır.
+* Bir havuz içinde düğümler arası iletişim gerektiğinde **düğüm sayısı sınırlarını** azaltma. Şu anda, düğümler arası iletişim için yapılandırılan havuzlar 50 işlem düğümüyle sınırlıdır. Bu tür bir havuzdaki her düğüm görevleri paralel olarak yürütebiliyor ise, daha fazla sayıda görev aynı anda yürütülebilir.
+* Bir bilgi işlem ortamını Azure 'a taşırken olduğu gibi, **Şirket içi bir hesaplama kümesini çoğaltma**. Mevcut şirket içi çözümünüz işlem düğümü başına birden çok görev çalıştırırsa, bu yapılandırmayı daha yakından yansıtmak için en fazla düğüm görevi sayısını artırabilirsiniz.
 
 ## <a name="example-scenario"></a>Örnek senaryo
-Paralel görev yürütmeye avantajlarını göstermek için örnek olarak, varsayalım görev uygulamanızın CPU ve bellek gereksinimleri karşıladığından emin olacak şekilde [standart\_D1](../cloud-services/cloud-services-sizes-specs.md) düğümlerdir yeterli. Ancak, bu düğümler 1.000 işi gereken sürede tamamlamak için gerekli.
+Paralel görev yürütmesinin avantajlarını gösteren bir örnek olarak, görev uygulamanızın [Standart\_D1](../cloud-services/cloud-services-sizes-specs.md) düğümlerinin yeterli olması gibi CPU ve bellek gereksinimleri olduğunu varsayalım. Ancak, işin gerekli zamanda tamamlanabilmesi için, bu düğümlerin 1.000 ' i gereklidir.
 
-Standart kullanmak yerine\_1 CPU çekirdeği D1 düğüm, kullanabilir [standart\_D14](../cloud-services/cloud-services-sizes-specs.md) 16 çekirdeğe sahip ve paralel görev yürütmeye etkinleştirme düğümleri. Bu nedenle, *16 kat daha az düğümü* 63 gerekli yalnızca--1.000 düğümler yerine kullanılabilir. Büyük uygulama dosyaları veya başvuru verileriyle her düğüm için gerekli olduğunda, veriler yalnızca 63 düğümlerine kopyaladığınızdan ek olarak, iş süresi ve verimlilik yeniden geliştirildi.
+1 CPU çekirdeği olan\_standart D1 düğümlerini kullanmak yerine, her biri 16 çekirdeğe sahip [Standart\_D14](../cloud-services/cloud-services-sizes-specs.md) düğümlerini kullanabilir ve paralel görev yürütmeyi etkinleştirebilirsiniz. Bu nedenle, 1.000 düğüm yerine *16 kez daha az düğüm* kullanılabilir, ancak yalnızca 63 gereklidir. Ayrıca, her düğüm için büyük uygulama dosyaları veya başvuru verileri gerekliyse, veriler yalnızca 63 düğümlere kopyalandığından iş süresi ve verimlilik yeniden geliştirilmiştir.
 
-## <a name="enable-parallel-task-execution"></a>Paralel görev yürütmeye etkinleştir
-Paralel görev yürütmeye için işlem düğümleri havuzu düzeyinde yapılandırdığınız. Batch .NET kitaplığı ile ayarlanmış [CloudPool.MaxTasksPerComputeNode] [ maxtasks_net] bir havuz oluşturduğunuzda özelliği. Batch REST API'SİNİN kullanıyorsanız [maxTasksPerNode] [ rest_addpool] havuz oluşturma sırasında istek gövdesindeki öğesi.
+## <a name="enable-parallel-task-execution"></a>Paralel görev yürütmeyi etkinleştir
+Paralel görev yürütme için işlem düğümlerini havuz düzeyinde yapılandırırsınız. Batch .NET kitaplığı ile, bir havuz oluştururken [Cloudpool. MaxTasksPerComputeNode][maxtasks_net] özelliğini ayarlayın. Batch REST API kullanıyorsanız, havuz oluşturma sırasında istek gövdesinde [Maxtaskspernode][rest_addpool] öğesini ayarlayın.
 
-Azure Batch görevleri (4 x) en fazla düğüm başına ayarlamanıza olanak sağlayan çekirdek düğüm sayısı. Havuz düğümleri ile yapılandırılmışsa, örneğin, "Büyük" (dört çekirdek), ardından boyut `maxTasksPerNode` 16 olarak ayarlanabilir. Ancak, düğüm kaç çekirdek bağımsız olarak, düğüm başına 256 karakterden daha fazla görev sahip olamaz. Her düğümü boyutları için çekirdek sayısı hakkında daha fazla bilgi için bkz: [Cloud Services boyutları](../cloud-services/cloud-services-sizes-specs.md). Hizmet sınırları hakkında daha fazla bilgi için bkz. [Azure Batch hizmeti için kotalar ve sınırlar](batch-quota-limit.md).
+Azure Batch, düğüm başına görevleri (4X) çekirdek düğüm sayısına kadar ayarlamanıza olanak sağlar. Örneğin, havuz "büyük" (dört çekirdek) boyutundaki düğümlerle yapılandırıldıysa, `maxTasksPerNode` 16 olarak ayarlanabilir. Ancak, düğümde kaç çekirdeğin olduğuna bakılmaksızın, düğüm başına 256 ' den fazla görev kullanamazsınız. Düğüm boyutlarının her biri için çekirdek sayısı hakkında daha fazla bilgi için bkz. [Cloud Services boyutları](../cloud-services/cloud-services-sizes-specs.md). Hizmet limitleri hakkında daha fazla bilgi için bkz. [Azure Batch hizmet Için kotalar ve sınırlar](batch-quota-limit.md).
 
 > [!TIP]
-> Hesaba katması mutlaka `maxTasksPerNode` değeri oluşturduğunuzda, bir [otomatik ölçeklendirme formülü] [ enable_autoscaling] havuzunuz için. Örneğin, veren bir formül `$RunningTasks` önemli ölçüde artış düğüm başına görev tarafından etkilenebilir. Bkz: [işlem düğümleri Azure Batch havuzunda otomatik olarak](batch-automatic-scaling.md) daha fazla bilgi için.
+> Havuzunuz için bir `maxTasksPerNode` [Otomatik ölçeklendirme formülü][enable_autoscaling] oluştururken değeri hesaba aldığınızdan emin olun. Örneğin, değerlendirilen `$RunningTasks` bir formül, düğüm başına görevlerin artışına göre önemli ölçüde etkilenebilir. Daha fazla bilgi için bkz. [bir Azure Batch havuzundaki işlem düğümlerini otomatik olarak ölçeklendirme](batch-automatic-scaling.md) .
 >
 >
 
-## <a name="distribution-of-tasks"></a>Dağıtım görevleri
-Bir havuzdaki işlem düğümlerine görevleri eşzamanlı olarak yürütebilir, havuzdaki düğümler arasında dağıtılması için görevleri nasıl istediğinizi belirtmek önemlidir.
+## <a name="distribution-of-tasks"></a>Görevlerin dağıtılması
+Bir havuzdaki işlem düğümleri görevleri eşzamanlı olarak yürütemediğinde, bu görevlerin havuzdaki düğümlerde nasıl dağıtılmasını istediğinizi belirtmek önemlidir.
 
-Kullanarak [CloudPool.TaskSchedulingPolicy] [ task_schedule] özelliği görevleri ("yayılma") havuzdaki tüm düğümlere eşit olarak atanmasını belirtebilirsiniz. Veya görevleri ("Paket") havuzdaki başka bir düğüme atanır önce mümkün olduğunca çok görevleri her düğüme atanmalıdır belirtebilirsiniz.
+[Cloudpool. TaskSchedulingPolicy][task_schedule] özelliğini kullanarak, bu görevlerin havuzdaki tüm düğümlerde eşit olarak atanmasını belirtebilirsiniz ("yayma"). Ya da görevler havuzdaki başka bir düğüme atanmadan önce her düğüme olabildiğince fazla görevin atanması gerektiğini belirtebilirsiniz ("paketleme").
 
-Bu özelliği nasıl değerlidir ilişkin bir örnek olarak, havuzu göz önünde bulundurun [standart\_D14](../cloud-services/cloud-services-sizes-specs.md) düğümleri (yukarıdaki örnekte) ile yapılandırılmış bir [CloudPool.MaxTasksPerComputeNode] [ maxtasks_net] değer 16. Varsa [CloudPool.TaskSchedulingPolicy] [ task_schedule] ile yapılandırılmış bir [ComputeNodeFillType] [ fill_type] , *paketi*, her düğümün tüm 16 Çekirdek kullanımını en üst düzeye çıkarmak ve izin bir [otomatik ölçeklendirme havuzu](batch-automatic-scaling.md) kullanılmayan düğümler (düğüm atanan tüm görevleri olmadan) havuzundan ayıklamak üzere. Bu, kaynak kullanımını en aza indirir ve masraflarından tasarruf edebilirsiniz.
+Bu özelliğin nasıl değerli olduğunu gösteren bir örnek olarak, [\_standart D14](../cloud-services/cloud-services-sizes-specs.md) düğümlerinin havuzunu (Yukarıdaki örnekte) bir [cloudpool. MaxTasksPerComputeNode][maxtasks_net] değeri 16 ile yapılandırılmış şekilde düşünün. [Cloudpool. TaskSchedulingPolicy][task_schedule] , bir [Computenodefilltype][fill_type] *paketi*ile yapılandırıldıysa, her düğümün 16 çekirdeğin tüm kullanımlarını en üst düzeye çıkarabilir ve bir [Otomatik ölçeklendirme havuzunun](batch-automatic-scaling.md) kullanılmayan düğümleri havuzdan (düğümler olmadan) ayıklayabilmesini sağlar. atanan tüm görevler). Bu, kaynak kullanımını en aza indirir ve para tasarrufu sağlar.
 
-## <a name="batch-net-example"></a>Batch .NET örnek
-Bu [Batch .NET] [ api_net] API kod parçacığı, düğüm başına dört görev en fazla dört düğüm içeren bir havuz oluşturma isteği göstermektedir. Bu, bir görev her düğüm görevleri havuzdaki başka bir düğüme atamadan önce görevlerle doldurur ilke zamanlama belirtir. Batch .NET API'si kullanılarak havuzları ekleme ile ilgili daha fazla bilgi için bkz: [BatchClient.PoolOperations.CreatePool][poolcreate_net].
+## <a name="batch-net-example"></a>Batch .NET örneği
+Bu [Batch .net][api_net] API kod parçacığı, düğüm başına en fazla dört adet görev içeren dört düğüm içeren bir havuz oluşturma isteğini gösterir. Bu işlem, havuzdaki başka bir düğüme görev atamadan önce her bir düğümü görevlerle dolduracak bir görev zamanlama İlkesi belirtir. Batch .NET API 'sini kullanarak havuz ekleme hakkında daha fazla bilgi için bkz. [Batchclient. PoolOperations. CreatePool][poolcreate_net].
 
 ```csharp
 CloudPool pool =
@@ -71,8 +70,8 @@ pool.TaskSchedulingPolicy = new TaskSchedulingPolicy(ComputeNodeFillType.Pack);
 pool.Commit();
 ```
 
-## <a name="batch-rest-example"></a>Batch REST örneği
-Bu [Batch REST] [ api_rest] API kod parçacığı, düğüm başına dört görev en fazla iki büyük düğümleri içeren bir havuz oluşturmak için bir istek gösterir. REST API kullanarak havuzları ekleme ile ilgili daha fazla bilgi için bkz: [hesaba havuz ekleme][rest_addpool].
+## <a name="batch-rest-example"></a>Toplu REST örneği
+Bu [toplu Iş Rest][api_rest] API parçacığı, düğüm başına en fazla dört görevi olan iki büyük düğüm içeren bir havuz oluşturma isteğini gösterir. REST API kullanarak havuzlar ekleme hakkında daha fazla bilgi için bkz. bir [hesaba havuz ekleme][rest_addpool].
 
 ```json
 {
@@ -90,14 +89,14 @@ Bu [Batch REST] [ api_rest] API kod parçacığı, düğüm başına dört göre
 ```
 
 > [!NOTE]
-> Ayarlayabileceğiniz `maxTasksPerNode` öğesi ve [MaxTasksPerComputeNode] [ maxtasks_net] havuzu oluşturma zamanında yalnızca özellik. Bunlar zaten bir havuzu oluşturulduktan sonra değiştirilemez.
+> `maxTasksPerNode` Öğesi ve [MaxTasksPerComputeNode][maxtasks_net] özelliğini yalnızca havuz oluşturma zamanında ayarlayabilirsiniz. Havuz zaten oluşturulduktan sonra değiştirilemez.
 >
 >
 
 ## <a name="code-sample"></a>Kod örneği
-[ParallelNodeTasks] [ parallel_tasks_sample] GitHub projede kullanımını göstermektedir [CloudPool.MaxTasksPerComputeNode] [ maxtasks_net] özelliği.
+GitHub 'daki [Parallelnodetasks][parallel_tasks_sample] projesi [Cloudpool. MaxTasksPerComputeNode][maxtasks_net] özelliğinin kullanımını gösterir.
 
-Bu C# konsol uygulaması kullanan [Batch .NET] [ api_net] kitaplığı ile bir veya daha fazla işlem düğümleri havuzu oluşturmak için. Bu görevler yapılandırılabilir sayıda değişken yükünün benzetimini yapmak için bu düğümlerde yürütür. Uygulamadan çıktı, her görevin çalıştığı düğümleri yürütülen belirtir. Uygulama ayrıca iş parametresi ve süresi bir özetini sağlar. İki farklı çalışma örnek uygulamasının çıktısı Özet bölümü altında görünür.
+Bu C# konsol uygulaması, bir veya daha fazla işlem düğümü içeren bir havuz oluşturmak için [Batch .net][api_net] kitaplığını kullanır. Değişken yükünün benzetimini yapmak için bu düğümlerde yapılandırılabilir sayıda görevi yürütür. Uygulamanın çıktısı, her bir görevi yürüten düğümleri belirtir. Uygulama, iş parametrelerinin ve sürenin bir özetini de sağlar. Örnek uygulamanın iki farklı çalıştırmasından çıktının Özet bölümü aşağıda görüntülenir.
 
 ```
 Nodes: 1
@@ -107,7 +106,7 @@ Tasks: 32
 Duration: 00:30:01.4638023
 ```
 
-Örnek uygulamayı ilk kez yürütülmesi, ile havuz ve varsayılan ayarı, bir görev, düğüm başına tek bir düğüm üzerinde 30 dakika iş süresi olduğunu gösterir.
+Örnek uygulamanın ilk yürütülmesi, havuzda tek bir düğüm ve düğüm başına bir görev için varsayılan ayar olan iş süresinin 30 dakikadan fazla olduğunu gösterir.
 
 ```
 Nodes: 1
@@ -117,16 +116,16 @@ Tasks: 32
 Duration: 00:08:48.2423500
 ```
 
-İkinci örnek gösterir iş süresi önemli ölçüde bir düşüş çalıştırın. Havuzu neredeyse zaman Çeyrek içinde işi tamamlamak paralel görev yürütmeye izin veren, düğüm başına dört görev ile yapılandırılmış olmasıdır.
+Örneğin ikinci çalıştırmasında iş süresinde önemli bir düşüş gösterilmektedir. Bunun nedeni, havuzun her düğüm için dört görev ile yapılandırılmıştı. Bu, paralel görev yürütmenin iş zamanının neredeyse bir çeyrekte tamamlanmasını sağlar.
 
 > [!NOTE]
-> İş süreleri yukarıdaki özetleri içinde havuz oluşturma zamanı içermez. Yukarıdaki işlerinin her biri olan işlem düğümleri, daha önce oluşturulan havuzlar için gönderilen *boşta* gönderme zaman durum.
+> Yukarıdaki özetlerdeki iş süreleri havuz oluşturma süresini içermez. Yukarıdaki işlerin her biri, işlem düğümleri gönderme zamanında *Boşta* durumunda olan önceden oluşturulmuş havuzlara gönderilmiştir.
 >
 >
 
 ## <a name="next-steps"></a>Sonraki adımlar
-### <a name="batch-explorer-heat-map"></a>Batch Explorer ısı Haritası
-[Batch Explorer] [ batch_labs] oluşturma, hata ayıklama ve izleme Azure Batch uygulamalarıyla yardımcı olmak için bir ücretsiz ve zengin özellikli tek başına istemci aracıdır. Batch Gezgini içeren bir *ısı Haritası* görselleştirme görev yürütme sağlayan özelliktir. Ne zaman yürütme [ParallelTasks] [ parallel_tasks_sample] örnek uygulama, her bir düğümde Paralel Görevler yürütülmesini kolayca görselleştirmek için ısı Haritası özelliğini kullanabilirsiniz.
+### <a name="batch-explorer-heat-map"></a>Batch Explorer ısı haritası
+[Batch Explorer][batch_labs] , Azure Batch uygulamaları oluşturmaya, hata ayıklamanıza ve izlemenize yardımcı olan ücretsiz, zengin özellikli, tek başına bir istemci aracıdır. Batch Explorer, görev yürütme görselleştirmesini sağlayan bir *ısı haritası* özelliği içerir. [Paralleltasks][parallel_tasks_sample] örnek uygulamasını yürütürken, her bir düğümdeki paralel görevlerin yürütülmesini kolayca görselleştirebilmeniz Için ısı haritası özelliğini kullanabilirsiniz.
 
 
 [api_net]: https://msdn.microsoft.com/library/azure/mt348682.aspx

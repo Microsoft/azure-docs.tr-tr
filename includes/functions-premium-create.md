@@ -5,50 +5,61 @@ services: functions
 author: jeffhollan
 ms.service: azure-functions
 ms.topic: include
-ms.date: 04/01/2019
+ms.date: 10/25/2019
 ms.author: jehollan, glenga
 ms.custom: include file
-ms.openlocfilehash: 0f3303e7bc87ca0bd29f367405372568ed6da7a7
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 911db285d1ca885142e8a80345926ce76379e3bc
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188526"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72958819"
 ---
-1. [Azure Portal](https://portal.azure.com) gidin.
+1. Azure portal [https://portal.azure.com](https://portal.azure.com) açın
 
-1. Seçin **+ kaynak Oluştur** seçin sol tarafta **işlev uygulaması**.
+1. **Kaynak oluştur** düğmesini seçin
 
-1. İçin **barındırma planı**, seçin **App Service planı**, ardından **App Service planı/konumu**.
+    ![Kaynak oluştur](./media/functions-create-function-app-portal/function-app-create-resource.png)
 
-    ![İşlev uygulaması oluşturma](./media/functions-premium-create/create-function-app-resource.png)
+1. **İşlem** > **işlev uygulaması**seçin.
 
-1. Seçin **Yeni Oluştur**, türü bir **App Service planı** ad öğesini bir **konumu** içinde bir [bölge](https://azure.microsoft.com/regions/) yakınınızdaki veya diğer yakın işlevlerinizi Hizmetleri erişim ve ardından **fiyatlandırma katmanı**.
+    ![Azure portalında işlev uygulaması oluşturma](./media/functions-premium-create/function-app-create-start.png)
 
-    ![App Service planı oluşturma](./media/functions-premium-create/new-app-service-plan.png)
+1. Görüntünün altındaki tabloda belirtilen işlev uygulaması ayarlarını kullanın.
 
-1. Seçin **EP1** (esnek Premium) planlayın ve ardından **Uygula**.
+    ![Temel Bilgiler](./media/functions-premium-create/function-app-create-basics.png)
 
-    ![Premium planı seçin](./media/functions-premium-create/hosting-plan.png) 
-
-1. Seçin **Tamam** görüntünün altındaki tabloda belirtilen planı oluşturmak ve ardından olarak kalan işlev uygulaması ayarlarını kullanın. 
-
-    ![Tamamlanmış uygulama hizmeti planı](./media/functions-premium-create/create-function-app.png)  
-
-    | Ayar      | Önerilen değer  | Açıklama                                        |
-    | ------------ |  ------- | -------------------------------------------------- |
-    | **Uygulama adı** | Genel olarak benzersiz bir ad | Yeni işlev uygulamanızı tanımlayan ad. Geçerli karakterler: `a-z`, `0-9`, ve `-`.  | 
+    | Ayar      | Önerilen değer  | Açıklama |
+    | ------------ | ---------------- | ----------- |
     | **Abonelik** | Aboneliğiniz | Bu yeni işlev uygulamasının oluşturulduğu abonelik. |
-    | **[Kaynak Grubu](../articles/azure-resource-manager/resource-group-overview.md)** |  myResourceGroup | İşlev uygulamanızın oluşturulacağı yeni kaynak grubunun adı. Önerilen değer de kullanabilirsiniz. |
-    | **OS** | Windows | Linux üzerinde Premium planı şu anda desteklenmiyor. |
-    | **Çalışma zamanı yığını** | Tercih edilen dil | Tercih ettiğiniz işlev programlama dilini destekleyen bir çalışma zamanı seçin. C# ve F# için **.NET** işlevlerini seçin. Yalnızca seçtiğiniz üzerinde desteklenen dilleri **işletim sistemi** görüntülenir. |
-    | **[Depolama](../articles/storage/common/storage-quickstart-create-account.md)** |  Genel olarak benzersiz bir ad |  İşlev uygulamanız tarafından kullanılan bir depolama hesabı oluşturun. Depolama hesabı adları 3 ile 24 karakter arasında olmalı ve yalnızca sayıyla küçük harf içermelidir. Dilerseniz [depolama hesabı gereksinimlerini](../articles/azure-functions/functions-scale.md#storage-account-requirements) karşılayan mevcut bir hesap da kullanabilirsiniz. |
-    | **[Application Insights](../articles/azure-functions/functions-monitoring.md)** | Varsayılan | Bir Application Insights kaynağı aynı oluşturur *uygulama adı* , desteklenen en yakın bölgesinde. Bu ayar genişleterek değiştirebilirsiniz **yeni kaynak adı** veya farklı bir seçim **konumu** içinde bir [her Azure coğrafyası](https://azure.microsoft.com/global-infrastructure/geographies/) istediğiniz verileri depolamak. |
+    | **[Kaynak Grubu](../articles/azure-resource-manager/resource-group-overview.md)** |  *myResourceGroup* | İşlev uygulamanızın oluşturulacağı yeni kaynak grubunun adı. |
+    | **İşlev Uygulaması adı** | Genel olarak benzersiz bir ad | Yeni işlev uygulamanızı tanımlayan ad. Geçerli karakterler `a-z` (büyük/küçük harf duyarsız), `0-9`ve `-`.  |
+    |**Yayımlama**| Kodlayın | Kod dosyalarını veya Docker kapsayıcısını yayımlama seçeneği. |
+    | **Çalışma zamanı yığını** | Tercih edilen dil | Tercih ettiğiniz işlev programlama dilini destekleyen bir çalışma zamanı seçin. C# ve F# için **.NET** işlevlerini seçin. |
+    |**Bölge**| Tercih edilen bölge | Kendinize veya işlevinizin erişeceği diğer hizmetlere yakın bir [bölge](https://azure.microsoft.com/regions/) seçin. |
 
-1. Ayarlarınızı doğrulandıktan sonra Seç **Oluştur**.
+    **Sonraki: barındırma >** düğmesini seçin.
 
-1. Portalın sağ üst köşesindeki Bildirim simgesini seçin ve **Dağıtım başarılı** iletisini bekleyin.
+1. Aşağıdaki barındırma ayarlarını girin.
 
-    ![Yeni işlev uygulaması ayarlarını tanımlama](./media/functions-premium-create/function-app-create-notification.png)
+    ![Barındırma](./media/functions-premium-create/function-app-premium-create-hosting.png)
 
-1. Yeni işlev uygulamanızı görüntülemek için **Kaynağa git**’i seçin. Belirleyebilirsiniz **panoya Sabitle**. Sabitleme, bu işlev uygulaması kaynağa panonuzdan döndürülecek kolaylaştırır.
+    | Ayar      | Önerilen değer  | Açıklama |
+    | ------------ | ---------------- | ----------- |
+    | **[Depolama hesabı](../articles/storage/common/storage-quickstart-create-account.md)** |  Genel olarak benzersiz bir ad |  İşlev uygulamanız tarafından kullanılan bir depolama hesabı oluşturun. Depolama hesabı adları 3 ile 24 karakter arasında olmalı ve yalnızca sayıyla küçük harf içermelidir. Ayrıca, [depolama hesabı gereksinimlerini](../articles/azure-functions/functions-scale.md#storage-account-requirements)karşılaması gereken mevcut bir hesabı da kullanabilirsiniz. |
+    |**İşletim sistemi**| Tercih edilen işletim sistemi | Çalışma zamanı yığını seçiminize göre sizin için bir işletim sistemi önceden seçilmiştir, ancak gerekirse ayarı değiştirebilirsiniz. |
+    | **[Planınızın](../articles/azure-functions/functions-scale.md)** | Premium | Plan türü için **Premium (Önizleme)** öğesini seçin ve *Windows planı* ve *SKU ve boyut* seçimleri için Varsayılanlar ' ı seçin. |
+
+    **Sonraki: izleme >** düğmesini seçin.
+
+1. Aşağıdaki izleme ayarlarını girin.
+
+    ![İzleme](./media/functions-create-function-app-portal/function-app-create-monitoring.png)
+
+    | Ayar      | Önerilen değer  | Açıklama |
+    | ------------ | ---------------- | ----------- |
+    | **[Application Insights](../articles/azure-functions/functions-monitoring.md)** | Varsayılan | En yakın desteklenen bölgede aynı *uygulama adının* Application Insights kaynağını oluşturur. Bu ayarı genişleterek, **Yeni kaynak adını** değiştirebilir veya verilerinizi depolamak istediğiniz [Azure Coğrafya](https://azure.microsoft.com/global-infrastructure/geographies/) 'da farklı bir **konum** seçebilirsiniz. |
+
+    Uygulama yapılandırma seçimlerini gözden geçirmek için **gözden geçir + oluştur** ' u seçin.
+
+1. İşlev uygulamasını sağlamak ve dağıtmak için **Oluştur**'u seçin.

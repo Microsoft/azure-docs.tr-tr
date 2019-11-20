@@ -1,59 +1,68 @@
 ---
-title: .NET uygulamaları için Azure Application Insights Snapshot Debugger yükseltme | Microsoft Docs
-description: Snapshot Debugger, Azure App Services'ta veya aracılığıyla Nuget paketlerinin en son sürüme yükseltme
-services: application-insights
-author: MarioHewardt
-manager: carmonm
-ms.service: application-insights
+title: .NET uygulamaları için Azure Application Insights Snapshot Debugger yükseltmesi | Microsoft Docs
+description: Snapshot Debugger Azure Uygulama Hizmetleri veya NuGet paketleri aracılığıyla en son sürüme yükseltme
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: pharring
+ms.author: pharring
 ms.date: 03/28/2019
-ms.author: Mario.Hewardt
 ms.reviewer: mbullwin
-ms.openlocfilehash: 54b79897ee378cda52106fe704e25c50a4325f38
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 51642dde3de16f2bed3ca247e573237effb30917
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60784225"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73935978"
 ---
-# <a name="upgrading-the-snapshot-debugger"></a>Snapshot Debugger'ı yükseltme
+# <a name="upgrading-the-snapshot-debugger"></a>Snapshot Debugger yükseltiliyor
 
-Verileriniz için olası en iyi güvenliği sağlamak için belirlenen saldırganlara karşı savunmasız gösterilen TLS 1.0 ve TLS 1.1 verdikleri Microsoft'tur. Site uzantısı'nın eski bir sürümünü kullanıyorsanız, çalışmaya devam etmek için bir yükseltme gerektirir. Bu belge, anlık görüntü hata ayıklayıcısı en son sürüme yükseltmek için gerekli olan adımları açıklanmaktadır. Snapshot Debugger site uzantısını kullanarak etkinleştirilirse veya eklenen uygulamanıza bir SDK'sı / Nuget kullandıysanız bağlı olarak iki birincil yükseltme yolları vardır. Her iki yükseltme yolları aşağıda ele alınmıştır. 
+Verileriniz için mümkün olan en iyi güvenliği sağlamak üzere Microsoft, belirlenen saldırganlar tarafından açık olarak gösterilen TLS 1,0 ve TLS 1,1 ' den uzaklaşmakta. Site uzantısının daha eski bir sürümünü kullanıyorsanız, çalışmaya devam etmek için yükseltmenin yapılması gerekir. Bu belgede, anlık görüntü hata ayıklayıcıyı en son sürüme yükseltmek için gereken adımlar özetlenmektedir. Snapshot Debugger bir site uzantısı kullanarak veya uygulamanıza eklenmiş bir SDK/NuGet kullandıysanız, bu iki birincil yükseltme yolu vardır. Her iki yükseltme yolu da aşağıda ele alınmıştır. 
 
-## <a name="upgrading-the-site-extension"></a>Site uzantısı'nı yükseltme
+## <a name="upgrading-the-site-extension"></a>Site uzantısını yükseltme
 
-Snapshot debugger site uzantısını kullanarak etkinleştirilirse, aşağıdaki yordamı kullanarak kolayca yükseltebilirsiniz:
+> [!IMPORTANT]
+> Application Insights eski sürümleri _Azure App Service için Application Insights uzantısı_adlı bir özel site uzantısı kullandı. Geçerli Application Insights deneyimi, uygulama ayarları önceden yüklenmiş bir site uzantısını açık olacak şekilde ayarlanarak etkinleştirilir.
+> Sitenizin çalışmayı durdurmasına neden olabilecek çakışmaların önüne geçmek için, önce özel site uzantısının silinmesi önemlidir. Aşağıdaki 4. adıma bakın.
+
+Site uzantısını kullanarak anlık görüntü hata ayıklayıcısını etkinleştirdiyseniz, aşağıdaki yordamı kullanarak yükseltebilirsiniz:
 
 1. Azure Portal’da oturum açın.
-2. Application Insights ve anlık görüntü hata ayıklayıcısı etkin olan kaynağınıza gidin. Örneğin, bir Web uygulaması için App Service kaynağına gidin:
+2. Application Insights ve anlık görüntü hata ayıklayıcısı etkin olan kaynağınız için gidin. Örneğin, bir Web uygulaması için App Service kaynağına gidin:
 
-   ![Ayrı App Service kaynak görüntüsü DiagService01 adlı](./media/snapshot-debugger-upgrade/app-service-resource.png)
+   ![DiagService01 adlı tek bir App Service kaynağının ekran görüntüsü](./media/snapshot-debugger-upgrade/app-service-resource.png)
 
-3. Kaynağınıza yaptığında, Application Insights genel bakış dikey penceresinde tıklayın:
+3. Kaynak ile gezindikten sonra, uzantılar dikey penceresine tıklayın ve eklenecek uzantılar listesini bekleyin:
 
-   ![Üç düğme ekran görüntüsü. Adı Application Insights ile orta düğmesi seçili](./media/snapshot-debugger-upgrade/application-insights-button.png)
+   ![Azure App Service yüklü Application Insights uzantısını gösteren App Service uzantılarının ekran görüntüsü](./media/snapshot-debugger-upgrade/application-insights-site-extension-to-be-deleted.png)
 
-4. Geçerli ayarlarla yeni bir dikey pencere açılır. Ayarlarınızı değiştirmek için bu fırsattan yararlanarak istemediğiniz sürece, bunları olduğu gibi bırakabilirsiniz. **Uygula** varsayılan olarak dikey pencerenin alt kısmındaki düğmesi etkin değil ve bir düğmeyi etkinleştirmek için ayarları değiştirmek gerekir. Gerçek herhangi bir ayarı değiştirmek zorunda kalmadan, bunun yerine ayarı değiştirin ve ardından hemen geri değiştirin. Ayarlama ve sonra seçerek Profiler geçiş öneririz **Uygula**.
+4. _Azure App Service için Application Insights uzantısının_ herhangi bir sürümü yüklüyse, seçin ve Sil ' e tıklayın. Uzantıyı silmek için **Evet** ' i onaylayın ve sonraki adıma geçmeden önce silme işleminin tamamlanmasını bekleyin.
 
-   ![Uygula düğmesini kırmızı renkte vurgulanmış ekran görüntüsü, Application Insights uygulama hizmetini yapılandırma sayfası](./media/snapshot-debugger-upgrade/view-application-insights-data.png)
+   ![Sil düğmesi vurgulanmış şekilde Azure App Service Application Insights uzantısını gösteren App Service uzantılarının ekran görüntüsü](./media/snapshot-debugger-upgrade/application-insights-site-extension-delete.png)
 
-5. ' A tıkladığınızda **Uygula**, değişiklikleri onaylamanız istenir.
+5. Kaynağınızın genel bakış dikey penceresine gidip Application Insights ' ye tıklayın:
+
+   ![Üç düğme ekran görüntüsü. Application Insights adlı Merkez düğmesi seçili](./media/snapshot-debugger-upgrade/application-insights-button.png)
+
+6. Bu App Service için Application Insights dikey pencere ilk kez görüntüleniyorsa Application Insights açmanız istenir. **Application Insights aç '** ı seçin.
+ 
+   ![Aç Application Insights düğmesine vurgulanmış Application Insights dikey penceresindeki ilk seferlik deneyimin ekran görüntüsü](./media/snapshot-debugger-upgrade/turn-on-application-insights.png)
+
+7. Geçerli Application Insights ayarları görüntülenir. Ayarlarınızı değiştirme fırsatı almak istemediğiniz sürece, bunları olduğu gibi bırakabilirsiniz. Dikey pencerenin alt kısmındaki **Uygula** düğmesi varsayılan olarak etkin değildir ve düğmeyi etkinleştirmek için ayarlardan birini ayarlamanız gerekir. Gerçek ayarları değiştirmeniz gerekmez, bunun yerine ayarı değiştirebilir ve sonra hemen değiştirebilirsiniz. Profil Oluşturucu ayarını ve ardından **Uygula**' yı seçmeniz önerilir.
+
+   ![Application Insights App Service yapılandırma sayfasının kırmızı renkle vurgulanmış şekilde ekran görüntüsü](./media/snapshot-debugger-upgrade/view-application-insights-data.png)
+
+8. **Uygula**' ya tıkladığınızda, değişiklikleri onaylamanız istenir.
 
     > [!NOTE]
-    > Site yükseltme işleminin bir parçası yeniden başlatılır.
+    > Site, yükseltme işleminin bir parçası olarak yeniden başlatılacak.
 
-   ![Ekran görüntüsü, App Service'nın izleme istemi uygulayın. Metin kutusu iletiyi görüntüler: "Biz şimdi uygulama ayarlarınızda değişiklikler uygulanır ve web uygulaması için Application Insights kaynağınıza bağlanmak için araçlarımızı yükler. Bu sitenin yeniden başlatır. Devam etmek istiyor musunuz?"](./media/snapshot-debugger-upgrade/apply-monitoring-settings.png)
+   ![App Service izleme isteminin ekran görüntüsü. Metin kutusu şu iletiyi görüntüler: "Şimdi uygulama ayarlarınıza değişiklikler uygulayacağız ve Application Insights kaynağınızı Web uygulamasına bağlamak için araçlarımızı yükleyeceğiz. Bu, siteyi yeniden başlatacak. Devam etmek istiyor musunuz? "](./media/snapshot-debugger-upgrade/apply-monitoring-settings.png)
 
-6. Tıklayın **Evet** değişiklikleri uygulamak için. İşlem sırasında değişiklikler uygulanıyor gösteren bir bildirim görüntülenir:
+9. Değişiklikleri uygulamak için **Evet** ' i tıklatın ve işlemin tamamlanmasını bekleyin.
 
-   ![Sağ üst köşedeki görüntülenen uzantıları mesajı güncelleştirme Değişiklikleri Uygula - ekran görüntüsü](./media/snapshot-debugger-upgrade/updating-extensions.png)
+Site artık yükseltildi ve kullanıma hazır.
 
-Tamamlandıktan sonra bir **"Değişiklikler uygulanır"** bildirimi görüntülenir.
+## <a name="upgrading-snapshot-debugger-using-sdknuget"></a>SDK/NuGet kullanarak Snapshot Debugger yükseltme
 
-   ![Ekran görüntüsü değişiklikleri bildiren bir ileti uygulanır](./media/snapshot-debugger-upgrade/changes-are-applied.png)
-
-Sitenin artık yükseltildi ve kullanıma hazır.
-
-## <a name="upgrading-snapshot-debugger-using-sdknuget"></a>Snapshot Debugger SDK/Nuget kullanarak yükseltme
-
-Uygulamanın bir sürümünü kullanıyorsanız `Microsoft.ApplicationInsights.SnapshotCollector` sürüm 1.3.1 için yükseltilmesi gerekir bir [sürüme](https://www.nuget.org/packages/Microsoft.ApplicationInsights.SnapshotCollector) çalışmaya devam etmek için.
+Uygulama, 1.3.1 sürümünün `Microsoft.ApplicationInsights.SnapshotCollector` bir sürümünü kullanıyorsa, çalışmaya devam etmek için [daha yeni bir sürüme](https://www.nuget.org/packages/Microsoft.ApplicationInsights.SnapshotCollector) yükseltilmesi gerekir.

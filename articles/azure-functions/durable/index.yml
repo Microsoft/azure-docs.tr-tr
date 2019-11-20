@@ -1,0 +1,110 @@
+### YamlMime:Landing
+title: Azure Dayanıklı İşlevler belgeleri
+summary: Dayanıklı İşlevler, Azure İşlevleri'nin sunucusuz bir bilgi işlem ortamında durum bilgisi içeren işlevler yazmanıza olanak tanıyan bir bileşenidir.
+metadata:
+  title: Azure Dayanıklı İşlevler belgeleri
+  description: Dayanıklı İşlevler, Azure İşlevleri'nin sunucusuz bir bilgi işlem ortamında durum bilgisi içeren işlevler yazmanıza olanak tanıyan bir bileşenidir.
+  ms.service: azure-functions
+  ms.topic: landing-page
+  author: ggailey777
+  ms.author: azfundocs
+  ms.date: 10/04/2019
+  ms.openlocfilehash: f0f47c8d997a3d02ad3bae1bc4634f4c7ad2155c
+  ms.sourcegitcommit: f29fec8ec945921cc3a89a6e7086127cc1bc1759
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/17/2019
+  ms.locfileid: "72529695"
+landingContent:
+- title: Dayanıklı İşlevler hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Dayanıklı İşlevler nedir?
+      url: durable-functions-overview.md
+    - text: Sunucusuz seçeneklerini karşılaştırma
+      url: ../functions-compare-logic-apps-ms-flow-webjobs.md
+  - linkListType: concept
+    links:
+    - text: Dayanıklı işlev türleri
+      url: durable-functions-types-features-overview.md
+  - linkListType: video
+    links:
+    - text: Sunucusuz sistemin önündeki engelleri aşma
+      url: https://azure.microsoft.com/resources/videos/break-through-the-serverless-barriers-with-durable-functions/
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Dayanıklı işlev oluşturma (C#)
+      url: durable-functions-create-first-csharp.md
+    - text: İlk işlevinizi oluşturma (JavaScript)
+      url: quickstart-js-vscode.md
+  - linkListType: learn
+    links:
+    - text: Uzun süre çalışan sunucusuz iş akışı oluşturma
+      url: /learn/modules/create-long-running-serverless-workflow-with-durable-functions/
+  - linkListType: video
+    links:
+    - text: Nasıl kullanmaya başlayacağınızı izleyin
+      url: https://azure.microsoft.com/resources/videos/azure-friday-durable-functions-in-azure-functions/
+- title: Önemli kavramlar
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Düzenlemeler
+      url: durable-functions-orchestrations.md
+    - text: Durum bilgisi olan varlıklar
+      url: durable-functions-entities.md
+    - text: HTTP özellikleri
+      url: durable-functions-http-features.md
+    - text: Görev merkezleri
+      url: durable-functions-task-hubs.md
+    - text: Sürüm oluşturma
+      url: durable-functions-versioning.md
+  - linkListType: video
+    links:
+    - text: Sunucusuz varlıklar, düzenlemeler ve durum bilgisi olan işlevler
+      url: https://channel9.msdn.com/Events/dotnetConf/NET-Conf-2019/B206
+- title: Uygulama desenleri
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: İşlev zinciri oluşturma
+      url: durable-functions-sequence.md
+    - text: Zaman uyumsuz HTTP API’leri
+      url: durable-functions-create-first-csharp.md
+    - text: Yelpaze dışarı/yelpaze içeri
+      url: durable-functions-cloud-backup.md
+    - text: İzleyiciler
+      url: durable-functions-monitor.md
+    - text: İnsan etkileşimi
+      url: durable-functions-phone-verification.md
+    - text: Toplayıcı
+      url: durable-functions-entities.md
+- title: Performans ve izleme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Tanılama
+      url: durable-functions-diagnostics.md
+  - linkListType: concept
+    links:
+    - text: İzleme işlevleri
+      url: ../functions-monitoring.md
+    - text: Ağ konusunda dikkat edilmesi gerekenler
+      url: ../functions-networking-options.md
+- title: Örnekler
+  linkLists:
+  - linkListType: download
+    links:
+    - text: Dayanıklı İşlevler örnekleri
+      url: /samples/browse/?products=azure-functions&term=durable
+    - text: Azure Serverless Community Library
+      url: https://www.serverlesslibrary.net/
+    - text: Azure Resource Manager şablonları
+      url: https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Web&term=functions
+  - linkListType: how-to-guide
+    links:
+    - text: Azure CLI örnekleri
+      url: ../functions-cli-samples.md

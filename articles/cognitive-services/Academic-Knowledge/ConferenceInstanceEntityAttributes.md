@@ -1,48 +1,59 @@
 ---
-title: Konferans örneği varlık öznitelikleri - akademik bilgi API'si
+title: Konferans örneği varlık öznitelikleri-Akademik Bilgi API
 titlesuffix: Azure Cognitive Services
-description: Akademik bilgi API'si konferans örneği varlıkta ile kullanabileceğiniz öznitelikleri hakkında bilgi edinin.
+description: Akademik Bilgi API 'sindeki konferans örneği varlığıyla kullanabileceğiniz öznitelikleri öğrenin.
 services: cognitive-services
-author: alch-msft
-manager: nitinme
+author: darrine
+manager: kuansanw
 ms.service: cognitive-services
 ms.subservice: academic-knowledge
 ms.topic: conceptual
-ms.date: 03/23/2017
-ms.author: alch
-ms.openlocfilehash: 183a307159adb5dfdb248eb0cf4862462a626db6
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 11/14/2019
+ms.author: darrine
+ROBOTS: NOINDEX
+ms.openlocfilehash: c6761206a58724dae96d9dc6f6234658892d4d18
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60498755"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74146569"
 ---
-# <a name="conference-instance-entity"></a>Konferans örneği varlık
+# <a name="conference-instance-entity"></a>Konferans örneği varlığı
 
-<sub> * Şu öznitelikleri konferans örneği varlığa özgüdür. (Ty = '4') </sub>
+> [!NOTE]
+> Aşağıdaki öznitelikler, konferans örneği varlığına özgüdür. (Ty = ' 4 ')
 
-Ad    |Açıklama                            |Tür       | İşlemler
-------- | ------------------------------------- | --------- | ----------------------------
-Kimlik      |Varlık Kimliği                              |Int64      |Eşittir
-CIN     |Konferans örneği normalleştirilmiş adı ({ConferenceSeriesNormalizedName} {ConferenceInstanceYear})        |String     |Eşittir
-DCN     |Konferans örneği görünen ad ({ConferenceSeriesName}: {ConferenceInstanceYear})       |String     |Yok
-CIL'İ     |Konferans örneği konumu    |String     |Eşittir<br/>StartsWith
-CISD    |Konferans örneği başlangıç tarihi  |Tarih       |Eşittir<br/>IsBetween
-CIED    |Konferans örneği bitiş tarihi    |Tarih       |Eşittir<br/>IsBetween
-CIARD   |Soyut kayıt son tarihi konferans örneği  |Tarih       |Eşittir<br/>IsBetween
-CISDD   |Gönderim konferans örneği son tarihi     |Tarih       |Eşittir<br/>IsBetween
-CIFVD   |Son sürüm konferans örneği son tarihi  |Tarih       |Eşittir<br/>IsBetween
-CINDD   |Konferans örneği bildirim tarihi   |Tarih       |Eşittir<br/>IsBetween
-CD. T    |Konferans örneği olay başlığı   |Tarih       |Eşittir<br/>IsBetween
-CD. D    |Konferans örneği olay tarihi    |Tarih       |Eşittir<br/>IsBetween
-PCS.CN  |Örneğin konferans serisi adı |String     |Eşittir
-PCS.CId |Konferans serisi kimliği örneği |Int64    |Eşittir
-CC      |Konferans örneği alıntı toplam sayısı           |Int32      |Yok  
-ECC     |Konferans örneği toplam tahmini alıntı sayısı |Int32      |Yok
+Ad | Açıklama | Tür | İşlemler
+--- | --- | --- | ---
+BILGISI      |Konferans örneği toplam alıntı sayısı           |Int32      |None  
+CD. TID    |Bir konferans örneği olayının tarihi    |Tarih       |Eşittir, ısbetween
+CD. Şı    |Bir konferans örneği olayının başlığı   |Tarih       |Eşittir, ısbetween
+CıARD   |Konferans örneğinin Özet kayıt bitiş tarihi  |Tarih       |Eşittir, ısbetween
+CIED    |Konferans örneğinin bitiş tarihi    |Tarih       |Eşittir, ısbetween
+CIFVD   |Konferans örneğinin son sürüm bitiş tarihi  |Tarih       |Eşittir, ısbetween
+CIL     |Konferans örneğinin konumu    |Dize     |Eşittir, StartsWith
+CIN     |Konferans örneği normalleştirilmiş adı |Dize        |Eşittir
+CINDD   |Konferans örneğinin bildirim tarihi   |Tarih       |Eşittir, ısbetween
+CıD    |Konferans örneğinin başlangıç tarihi  |Tarih       |Eşittir, ısbetween
+CıDD   |Konferans örneğinin gönderim bitiş tarihi     |Tarih       |Eşittir, ısbetween
+DCN     |Konferans örneği görünen adı  |Dize      |None
+E | Genişletilmiş meta veriler</br></br>**Önemli**: Bu öznitelik kullanımdan kaldırılmıştır ve yalnızca eski uygulamalar için desteklenir. Bu özniteliğin tek başına istenir (yani Attributes = ID, TI, E), tüm genişletilmiş meta veri özniteliklerinin *SERILEŞTIRILMIŞ JSON dizesinde* döndürülmesiyle sonuçlanır</br></br>Genişletilmiş meta verilerde bulunan tüm öznitelikler artık üst düzey bir öznitelik olarak kullanılabilir ve bu şekilde istenebilir (örneğin, öznitelikler = ID, Ti, DOı, IA) | [Genişletildiğinde](#extended) | None
+ECC     |Konferans örneği toplam tahmini alıntı sayısı |Int32      |None
+FN | Konferans örneği tam adı | Dize | None
+Kimlik      |Varlık KIMLIĞI                              |Int64      |Eşittir
+PC | Konferans örneği toplam yayın sayısı | Int32 | None
+Açıla. ,  |Örneğin üst konferans serisi adı |Dize  |Eşittir
+Açıla. CID |Örneğin üst konferans serisi KIMLIĞI |Int64     |Eşittir
 
+## <a name="extended"></a>Genişletildiğinde
 
-## <a name="extended-metadata-attributes"></a>Genişletilmiş meta veri öznitelikleri ##
+> [!IMPORTANT]
+> Bu öznitelik kullanımdan kaldırılmıştır ve yalnızca eski uygulamalar için desteklenir. Bu özniteliğin tek başına istenir (yani Attributes = ID, TI, E), tüm genişletilmiş meta veri özniteliklerinin *SERILEŞTIRILMIŞ JSON dizesinde* döndürülmesiyle sonuçlanır</br></br>Genişletilmiş meta verilerde bulunan tüm öznitelikler artık üst düzey bir öznitelik olarak kullanılabilir ve bu şekilde istenebilir (örneğin, öznitelikler = ID, Ti, DOı, IA)
 
-Ad    | Açıklama               
---------|---------------------------    
-FN      | Konferans örneği tam adı
+> [!IMPORTANT]
+> "E" kullanarak ayrı ayrı genişletilmiş öznitelikler isteme desteği. kapsam, yani "E. DN" kullanım dışıdır. Teknik olarak desteklenmeye devam ederken, "E" kullanarak ayrı ayrı genişletilmiş öznitelikler istiyor. kapsam, "E" nesnesinin ve en üst düzey özniteliğin bir parçası olarak JSON yanıtında iki yerde döndürülen öznitelik değerinin oluşmasına neden olur.
+
+Ad | Açıklama | Tür | İşlemler
+--- | --- | --- | ---
+FN | Konferans örneği tam adı | Dize | None
+PC | Konferans örneği toplam yayın sayısı | Int32 | None

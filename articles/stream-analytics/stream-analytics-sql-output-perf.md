@@ -1,59 +1,59 @@
 ---
-title: Azure SQL veritabanı için Azure Stream Analytics çıkışı
-description: SQL Azure için Azure Stream Analytics'ten veri çıktısı hakkında bilgi edinin ve daha yüksek yazma aktarım hızı oranlarına ulaşamayabilir.
+title: Azure SQL veritabanı 'na Azure Stream Analytics çıkışı
+description: Azure Stream Analytics SQL Azure veri çıktısı alma ve daha yüksek yazma işleme ücretleri elde etme hakkında bilgi edinin.
 services: stream-analytics
 author: chetanmsft
-ms.author: chetanmsft
+ms.author: chetang
 manager: katiiceva
 ms.reviewer: mamccrea
 ms.service: stream-analytics
 ms.topic: conceptual
-ms.date: 3/18/2019
-ms.openlocfilehash: ac58bbbc252d66620ad410bffa805b75ec3042d4
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.date: 03/18/2019
+ms.openlocfilehash: 7845833a0269514c8fdbd093e18d4516ff9567d9
+ms.sourcegitcommit: ee61ec9b09c8c87e7dfc72ef47175d934e6019cc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67341761"
+ms.lasthandoff: 08/30/2019
+ms.locfileid: "70173011"
 ---
-# <a name="azure-stream-analytics-output-to-azure-sql-database"></a>Azure SQL veritabanı için Azure Stream Analytics çıkışı
+# <a name="azure-stream-analytics-output-to-azure-sql-database"></a>Azure SQL veritabanı 'na Azure Stream Analytics çıkışı
 
-Bu makalede, Azure Stream Analytics'i kullanarak SQL Azure veritabanına veri yükleme zaman daha iyi yazma aktarım hızı performansı elde etmek için ipuçları açıklanır.
+Bu makalede Azure Stream Analytics kullanarak SQL Azure veritabanına veri yüklerken daha iyi yazma performansı elde etme ipuçları ele alınmaktadır.
 
-Azure Stream analytics'te SQL çıkış seçeneği olarak paralel yazılmasını destekler. Bu seçenek verir [tam olarak paralel](stream-analytics-parallelization.md#embarrassingly-parallel-jobs) iş yeri birden çok çıkış bölüm yazma paralel hedef tabloya topolojiler,. Azure Stream analytics'te bu seçeneğin etkinleştirilmesi ancak tablo şemasını ve SQL Azure veritabanı yapılandırması üzerinde önemli ölçüde bağlı olarak daha yüksek aktarım hızı elde etmek yeterli olmayabilir. Dizinler, anahtar ve dizini Doldurma faktörü sıkıştırma Kümelemesi, tercih ettiğiniz tablolarından yükleme zamanında bir etkisi vardır. SQL Azure veritabanınızın sorgu performansını ve iç ölçümlerinde temel performans yüklemek için en iyi duruma getirme hakkında daha fazla bilgi için bkz. [SQL database performans rehberi](../sql-database/sql-database-performance-guidance.md). Yazmayı sıralama paralel SQL Azure veritabanına yazılırken garanti edilmez.
+Azure Stream Analytics içindeki SQL çıktısı, bir seçenek olarak paralel yazmayı destekler. Bu seçenek, birden çok çıkış bölümünün paralel olarak hedef tabloya yazıldığı [tam paralel](stream-analytics-parallelization.md#embarrassingly-parallel-jobs) iş Topolojilerine izin verir. Azure Stream Analytics bu seçeneğin etkinleştirilmesi, SQL Azure veritabanı yapılandırmanıza ve tablo şemanıza önemli ölçüde bağlı olduğundan daha yüksek bir işlem elde etmek için yeterli olmayabilir. Dizinler, kümeleme anahtarı, Dizin doldurma faktörü ve sıkıştırma seçimi, tabloları yükleme zamanına göre bir etkiye sahiptir. SQL Azure veritabanınızı, iç kıyaslamalar temelinde sorgu ve yükleme performansını iyileştirmek üzere en iyi hale getirmeye yönelik daha fazla bilgi için bkz. [SQL veritabanı performans Kılavuzu](../sql-database/sql-database-performance-guidance.md). SQL Azure veritabanına paralel yazma sırasında yazma sıralaması garanti edilmez.
 
-Çözümünüzün genel performansını iyileştirmeye yardımcı olabilecek her hizmet içinde bazı yapılandırmalar şunlardır.
+Çözümünüzün genel verimini artırmaya yardımcı olabilecek her bir hizmet içindeki bazı konfigürasyonlar aşağıda verilmiştir.
 
 ## <a name="azure-stream-analytics"></a>Azure Stream Analytics
 
-- **Bölümleme devral** – bölümleme düzeni önceki bir sorgu adımına veya giriş devralan bu SQL çıktı yapılandırma seçeneği sağlar. Bu etkinleştirildiğinde, disk tabanlı tablo için yazma ve sahip bir [tam olarak paralel](stream-analytics-parallelization.md#embarrassingly-parallel-jobs) , işiniz için topoloji beklediğiniz daha iyi aktarım hızı görmek. Bu bölümleme zaten otomatik olarak için diğer birçok olur [çıkarır](stream-analytics-parallelization.md#partitions-in-sources-and-sinks). Tablo (TABLOCK) kilitleme de bu seçenekle yapılan toplu eklemeler için devre dışı.
+- **Bölümlendirmeyi devralma** – bu SQL çıkış yapılandırma seçeneği, önceki sorgu adımlarınızın veya girişinin bölümleme düzeninin devralınmasını mümkün. Bu etkinken, disk tabanlı bir tabloya yazma ve işiniz için [tamamen paralel](stream-analytics-parallelization.md#embarrassingly-parallel-jobs) topolojiye sahip olmak için daha iyi işlem görmeniz beklenir. Bu bölümlendirme diğer birçok [çıktı](stream-analytics-parallelization.md#partitions-in-sources-and-sinks)için zaten otomatik olarak yapılır. Bu seçenekle yapılan toplu eklemeler için tablo kilitleme (TABLOCK) de devre dışı bırakıldı.
 
 > [!NOTE] 
-> 8'den fazla giriş bölümler olduğunda, bölümleme düzeni giriş devralan uygun bir seçim olmayabilir. Bu üst sınırı, bir tek bir kimlik sütunu ve kümelenmiş bir dizin olan bir tabloda gözlemlendi. Bu durumda, kullanmayı [INTO](https://docs.microsoft.com/stream-analytics-query/into-azure-stream-analytics#into-shard-count) açıkça çıkış yazıcılar sayısını belirtmek için sorgu, 8. Şema ve dizinleri, tercih ettiğiniz bağlı olarak, uygulamanızın gözlemler farklılık gösterebilir.
+> 8 ' den fazla giriş bölümü olduğunda, giriş bölümleme düzenini devralma uygun bir seçenek olmayabilir. Bu üst sınır, tek bir kimlik sütunu ve bir kümelenmiş dizin içeren bir tabloda gözlemlendi. Bu durumda, çıkış yazıcılarının sayısını açıkça belirtmek için sorgunuzda 8 ' [e](https://docs.microsoft.com/stream-analytics-query/into-azure-stream-analytics#into-shard-count) kadar kullanmayı düşünün. Şemanıza ve Dizin seçimine bağlı olarak, gözlemlerinizin farklılık gösterebilir.
 
-- **Yığın boyutu** -SQL çıkış yapılandırması hedef tablo/iş yükünüz doğası hakkında temel bir Azure Stream Analytics SQL çıkışında en yüksek toplu iş boyutu belirtmenize olanak verir. Toplu iş boyutu en fazla gönderilen her toplu ile kayıt sayısı işlem Ekle ' dir. Kümelenmiş columnstore dizinlerinde toplu etrafında boyutları [100 bin cinsinden](https://docs.microsoft.com/sql/relational-databases/indexes/columnstore-indexes-data-loading-guidance) daha fazla paralelleştirme, en az günlüğe kaydetme ve en iyi duruma getirme kilitleme için izin verilir. Daha yüksek toplu iş boyutu toplu ekleme sırasında kilit azaltımı tetikleyebilir disk tabanlı tablolarda, 10 K (varsayılan) veya alt çözümünüz için en iyi olabilir.
+- **Toplu Iş boyutu** -SQL çıkış yapılandırması, hedef tablonuzun/iş yükünüzün doğasına göre Azure Stream ANALYTICS bir SQL çıkışında en büyük toplu iş boyutunu belirtmenize olanak tanır. Toplu iş boyutu, her toplu ekleme işlemi ile gönderilen en fazla kayıt sayısıdır. Kümelenmiş columnstore dizinlerinde, daha paralelleştirme, en az günlüğe kaydetme ve kilitleme iyileştirmeleri için [100K](https://docs.microsoft.com/sql/relational-databases/indexes/columnstore-indexes-data-loading-guidance) etrafında toplu işlem boyutları. Disk tabanlı tablolarda, en fazla Batch boyutları toplu ekleme sırasında kilit yükseltmeyi tetikleyebilen için 10.000 (varsayılan) veya daha düşük bir çözüm, çözümünüz için en uygun olabilir.
 
-- **Giriş iletisi ayarlama** – kullanılarak iyileştirilmiş bölümleme ve toplu işlem boyutu devralır, giriş olayları her bölüm başına ileti sayısını artırmak daha fazla yazma düzeyinizi dağıtmaya yardımcı olur. Giriş iletisi ayarlama, belirtilen Batch böylece üretimini geliştirme boyuta kadar Azure Stream Analytics içinde batch boyutlara izin verir. Bu kullanarak gerçekleştirilebilir [sıkıştırma](stream-analytics-define-inputs.md) veya EventHub veya Blob giriş ileti boyutları artırma.
+- **Giriş Iletisi ayarlama** – bölümleme ve toplu iş boyutunu devralma kullanarak en iyi duruma getirildikten sonra, bölüm başına ileti başına giriş olaylarının sayısını artırmak, yazma aktarım hızınızı daha da ileri dağıtmaya yardımcı olur. Giriş iletisi ayarlama, Azure Stream Analytics içindeki toplu iş boyutlarının belirtilen toplu iş boyutuna kadar olmasına olanak tanır ve böylece üretilen işi geliştirir. Bu, bu veya EventHub ya [](stream-analytics-define-inputs.md) da blob 'daki giriş iletisi boyutlarının artması veya artırılması aracılığıyla elde edilebilir.
 
 ## <a name="sql-azure"></a>SQL Azure
 
-- **Tablo ve dizinleri bölümlenmiş** – kullanarak bir [bölümlenmiş](https://docs.microsoft.com/sql/relational-databases/partitions/partitioned-tables-and-indexes?view=sql-server-2017) SQL tablosunu ve bölümlenmiş dizinlerde tabloyla aynı sütun (örneğin, PartitionID), bölüm anahtarı olarak önemli ölçüde azaltabilirsiniz arasındaki çakışmaları yazma sırasında bölümleri. Bölümlenmiş bir tablodaki oluşturmanız gerekecek bir [bölümleme işlevinin](https://docs.microsoft.com/sql/t-sql/statements/create-partition-function-transact-sql?view=sql-server-2017) ve [bölüm düzeni](https://docs.microsoft.com/sql/t-sql/statements/create-partition-scheme-transact-sql?view=sql-server-2017) birincil dosya çubuğunda. Yeni veriler yüklenirken bu var olan veri kullanılabilirliğini artırır. Günlük g/ç sınırı SKU yükselterek artırılabilir bölüm sayısına göre karşılaşabilirsiniz.
+- **Bölümlenmiş tablo ve dizinler** – bölümlemeli [](https://docs.microsoft.com/sql/relational-databases/partitions/partitioned-tables-and-indexes?view=sql-server-2017) bir SQL tablosu ve bölümlenmiş dizinleri, Bölüm anahtarınızla aynı sütunla (örneğin, PartitionID) kullanarak, yazma işlemleri sırasında bölümler arasındaki çekişmeleri önemli ölçüde azaltabilir. Bölümlenmiş bir tablo için, BIRINCIL dosya grubunda bir [bölüm işlevi](https://docs.microsoft.com/sql/t-sql/statements/create-partition-function-transact-sql?view=sql-server-2017) ve bir [bölüm düzeni](https://docs.microsoft.com/sql/t-sql/statements/create-partition-scheme-transact-sql?view=sql-server-2017) oluşturmanız gerekir. Bu, yeni veriler yüklenirken mevcut verilerin kullanılabilirliğini de artırır. Günlük GÇ sınırı, SKU ile yükseltilerek artırılabilir olan bölüm sayısına bağlı olarak gelebilir.
 
-- **Benzersiz anahtar ihlalini önlemek** – alırsanız [birden çok anahtar ihlali uyarı iletilerini](stream-analytics-troubleshoot-output.md#key-violation-warning-with-azure-sql-database-output) Azure Stream Analytics etkinlik günlüğü'nde işinizi olması olasılığı olan benzersiz kısıtlama ihlali tarafından etkilenen olmadığından emin olun. Kurtarma çalışmaları sırasında. Bu ayarlayarak önlenebilir [Yoksay\_DUP\_anahtar](stream-analytics-troubleshoot-output.md#key-violation-warning-with-azure-sql-database-output) dizinlerinizi seçeneği.
+- **Benzersiz anahtar Ihlallerinden kaçının** – Azure Stream Analytics etkinlik günlüğünde [birden çok anahtar ihlali uyarı iletisi](stream-analytics-troubleshoot-output.md#key-violation-warning-with-azure-sql-database-output) alırsanız, işinizin kurtarma durumları sırasında gerçekleşmesi muhtemel olan benzersiz kısıtlama ihlallerinden etkilenmediğinden emin olun. Dizininizdeki [\_\_anahtar yok sayma](stream-analytics-troubleshoot-output.md#key-violation-warning-with-azure-sql-database-output) seçeneği ayarlanarak bu kaçınılabilir.
 
-## <a name="azure-data-factory-and-in-memory-tables"></a>Azure Data Factory ve bellek içi tablolar
+## <a name="azure-data-factory-and-in-memory-tables"></a>Azure Data Factory ve bellek Içi tablolar
 
-- **Bellek içi tablosu geçici tablo olarak** – [bellek içi tablolar](/sql/relational-databases/in-memory-oltp/in-memory-oltp-in-memory-optimization) çok yüksek hızlı veri yükler için izin ver, ancak veri belleğe sığması gerekir. Disk tabanlı tablo için bir bellek içi tablosundan Kıyaslama show toplu yükleme kıyasla yaklaşık 10 kat daha hızlı bir tek yazıcı disk tabanlı tablo bir kimlik sütunu ve bir kümelenmiş dizin kullanarak ekleme doğrudan toplu. Bu toplu INSERT performans yararlanmak üzere ayarlanan sahte bir [kullanarak Azure Data Factory kopyalama işini](../data-factory/connector-azure-sql-database.md) , veri bellek içi tablosundan disk tabanlı tablo için kopyalar.
+- **Geçici tablo olarak bellek Içi tablo** : [bellek içi tablolar](/sql/relational-databases/in-memory-oltp/in-memory-oltp-in-memory-optimization) çok yüksek hızlı veri yükleri sağlar ancak verilerin belleğe sığması gerekir. Kıyaslamalar, bir bellek içi tablodan disk tabanlı bir tabloya toplu yükleme işlemini, bir kimlik sütunuyla ve kümelenmiş bir dizinle disk tabanlı tabloya tek bir yazıcı kullanarak doğrudan toplu ekleme işlemi için yaklaşık 10 kat daha hızlıdır. Bu toplu ekleme performansından yararlanmak için, bellek içi tablodaki verileri disk tabanlı tabloya kopyalayan [Azure Data Factory kullanarak bir kopyalama işi](../data-factory/connector-azure-sql-database.md) ayarlayın.
 
-## <a name="avoiding-performance-pitfalls"></a>Performans sorunları önleme
-Toplu veri ekleme, çünkü tekli eklemeleri verilerle yüklemekten çok daha hızlı yinelenen veri aktarımı, INSERT deyimi ayrıştırma, deyim çalışan ve veren bir işlem kaydı ek yükü engellenir. Bunun yerine, daha verimli bir yolu, depolama motorunda veri akışı için kullanılır. Kurulum bu yolu bir disk tabanlı Tablo tek INSERT deyiminde ancak çok daha yüksek maliyetidir. Başa baş noktası genellikle dışında toplu yükleme neredeyse her zaman daha fazla yaklaşık 100 satırı olan etkin. 
+## <a name="avoiding-performance-pitfalls"></a>Performans Tuzaslarını önleme
+Toplu ekleme verileri, tek eklemeleri olan verileri yüklemeye göre çok daha hızlıdır, çünkü verileri aktarma tekrarlanması, INSERT ifadesini ayrıştırma, ifadeyi çalıştırma ve bir işlem kaydı verme önlenmiş olur. Bunun yerine, verileri akışa almak için depolama altyapısına daha verimli bir yol kullanılır. Bu yolun kurulum maliyeti, disk tabanlı tablodaki tek bir INSERT ifadesinden çok daha yüksektir. Satır içi yüklemenin neredeyse her zaman daha verimli olması için, kesme çift noktası genellikle 100 satırı etrafında olur. 
 
-Gelen olayları oranı düşükse, bunu kolayca toplu iş boyutu toplu ekleme verimsiz kılacak ve çok fazla disk alanı kullanan 100 satırı daha düşük oluşturabilirsiniz. Bu sınırlara yakın çalışmak için aşağıdaki eylemlerden birini yapabilirsiniz:
-* Bir INSTEAD OF oluşturma [tetikleyici](/sql/t-sql/statements/create-trigger-transact-sql) basit INSERT her satır için kullanılacak.
-* Bellek içi geçici tablo, önceki bölümde açıklandığı gibi kullanın.
+Gelen olaylar oranı düşükse, toplu ekleme verimsiz ve çok fazla disk alanı kullanan 100 satırdan daha düşük toplu işlem boyutları kolayca oluşturulabilir. Bu kısıtlamayı geçici olarak çözmek için şu eylemlerden birini yapabilirsiniz:
+* Her satır için basit ekleme kullanmak üzere bir INSTEAD OF [tetikleyicisi](/sql/t-sql/statements/create-trigger-transact-sql) oluşturun.
+* Önceki bölümde açıklandığı gibi bellek Içi geçici tablo kullanın.
 
-Başka bir senaryo, bir kümelenmemiş columnstore dizini (NCCI) içinde daha küçük toplu eklemeler dizini çökebilir çok fazla parçalar, burada oluşturabilirsiniz yazarken gerçekleşir. Bu durumda, kümelenmiş Columnstore dizini kullanmanız önerilir.
+Bu tür bir senaryo, kümelenmemiş bir columnstore dizinine (NCCı) yazılırken meydana gelir; burada daha küçük toplu ekler çok fazla bölüt oluşturabilir ve bu da dizin kilitlenebilirler. Bu durumda, bunun yerine kümelenmiş bir columnstore dizininin kullanılması önerilir.
 
 ## <a name="summary"></a>Özet
 
-Özet olarak, SQL çıkış için Azure Stream analytics'te bölümlenmiş çıkış özelliğiyle hizalanmış paralelleştirme ile SQL Azure bölümlenmiş bir tablodaki işinizin size önemli performans geliştirmeleri vermesi gerekir. Disk tabanlı tablolara bir bellek içi tablodan veri taşıma işlemlerini için Azure Data Factory yararlanarak, büyüklük sırası üretilen iş kazanımlarını verebilirsiniz. Uygulanabiliyorsa ileti yoğunluklu iyileştirme de genel üretimini geliştirme önemli bir etken olabilir.
+Özet olarak, SQL çıktısı için Azure Stream Analytics bölümlenmiş çıkış özelliği ile, bir SQL Azure bölümlenmiş tablo ile işinizin hizalı paralelleştirme, size önemli bir işleme iyileştirmeleri vermelidir. Bellek Içi bir tablodan disk tabanlı tablolara veri hareketini düzenlemek için Azure Data Factory kullanma, büyüklük halinde üretilen iş kazanımları verebilir. Mümkünse, ileti yoğunluğunu artırmak, genel üretilen işi iyileştirmeye yönelik bir büyük etken de olabilir.

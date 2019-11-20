@@ -1,35 +1,34 @@
 ---
-title: Bir Azure sanal makinesi için izleme ve tanılama ekleyin | Microsoft Docs
-description: Azure tanılama uzantısı ile yeni bir Windows sanal makine oluşturmak için bir Azure Resource Manager şablonu kullanın.
+title: Azure sanal makinesine izleme & tanılaması ekleme
+description: Azure tanılama Uzantısı ile yeni bir Windows sanal makinesi oluşturmak için bir Azure Resource Manager şablonu kullanın.
 services: virtual-machines-windows
 documentationcenter: ''
 author: sbtron
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: 8cde8fe7-977b-43d2-be74-ad46dc946058
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 05/31/2017
 ms.author: saurabh
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 00b4a145da9104cab410c5a07f6d7ec5ded5c45d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2490c3de60e0deac6a1a4ddc5abc95cb46e240b2
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60800006"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74073837"
 ---
-# <a name="use-monitoring-and-diagnostics-with-a-windows-vm-and-azure-resource-manager-templates"></a>İzleme ve tanılama bir Windows VM ve Azure Resource Manager şablonları ile kullanma
-Azure tanılama uzantısı, bir Windows tabanlı Azure sanal makinesinde izleme ve tanılama özellikleri sağlar. Bu özellikler sanal makinede uzantı Azure Resource Manager şablonunun bir parçası dahil ederek etkinleştirebilirsiniz. Bkz: [VM uzantıları içeren Azure Resource Manager şablonları yazma](../windows/template-description.md#extensions) uzantıyı, bir sanal makine şablonunun bir parçası dahil olmak üzere daha fazla bilgi için. Bu makalede, Azure tanılama uzantısını bir windows sanal makine şablonu nasıl ekleyebileceğinizi açıklar.  
+# <a name="use-monitoring-and-diagnostics-with-a-windows-vm-and-azure-resource-manager-templates"></a>Windows VM ve Azure Resource Manager şablonlarıyla izleme ve tanılama kullanma
+Azure Tanılama uzantısı, Windows tabanlı bir Azure sanal makinesinde izleme ve tanılama özellikleri sağlar. Uzantıyı Azure Resource Manager şablonun bir parçası olarak ekleyerek sanal makinede bu özellikleri etkinleştirebilirsiniz. Bir sanal makine şablonunun parçası olarak herhangi bir uzantı ekleme hakkında daha fazla bilgi için bkz. [VM uzantılarına sahip Azure Resource Manager şablonları yazma](../windows/template-description.md#extensions) . Bu makalede, Azure Tanılama uzantısını bir Windows sanal makine şablonuna nasıl ekleyebileceğiniz açıklanır.  
 
-## <a name="add-the-azure-diagnostics-extension-to-the-vm-resource-definition"></a>Azure tanılama uzantısını VM kaynak tanımına ekleyin.
-Bir Windows sanal makine üzerinde tanılama uzantısını etkinleştirmek için VM kaynak Resource Manager şablonu olarak uzantısı eklemeniz gerekir.
+## <a name="add-the-azure-diagnostics-extension-to-the-vm-resource-definition"></a>Azure Tanılama uzantısını VM kaynak tanımına ekleyin
+Windows sanal makinesinde tanılama uzantısını etkinleştirmek için uzantıyı Kaynak Yöneticisi şablonuna bir VM kaynağı olarak eklemeniz gerekir.
 
-İçin basit bir Resource Manager tabanlı sanal makine eklemek için uzantı Yapılandırması *kaynakları* dizi sanal makine için: 
+Basit Kaynak Yöneticisi tabanlı bir sanal makine için uzantı yapılandırmasını sanal makinenin *kaynaklar* dizisine ekleyin: 
 
 ```json
 "resources": [
@@ -63,29 +62,29 @@ Bir Windows sanal makine üzerinde tanılama uzantısını etkinleştirmek için
 ]
 ```
 
-Başka bir genel kural uzantı Yapılandırması altında sanal makinenin kaynakları düğümü tanımlamak yerine şablon kök kaynak düğümde eklemektir. Bu yaklaşımda, uzantısı ile sanal makine arasındaki hiyerarşik bir ilişki açıkça belirtmek zorunda *adı* ve *türü* değerleri. Örneğin: 
+Diğer bir yaygın kural, uzantı yapılandırmasını, sanal makinenin kaynaklar düğümü altında tanımlamak yerine şablonun kök kaynakları düğümüne eklemektir. Bu yaklaşımda, uzantı ile sanal makine arasında *ad* ve *tür* değerleriyle açık bir şekilde hiyerarşik ilişki belirtmeniz gerekir. Örneğin: 
 
 ```json
 "name": "[concat(variables('vmName'),'Microsoft.Insights.VMDiagnosticsSettings')]",
 "type": "Microsoft.Compute/virtualMachines/extensions",
 ```
 
-Uzantının her zaman sanal makineyle ilişkili olduğundan, ya da doğrudan, sanal makinenin kaynak düğümü altında doğrudan tanımlayabilir veya temel düzeyde tanımlayın ve sanal makine ile ilişkilendirilecek hiyerarşik bir adlandırma kuralını kullanın.
+Uzantı her zaman sanal makineyle ilişkilendirilir; doğrudan sanal makinenin kaynak düğümü altında doğrudan tanımlayabilir veya temel düzeyde tanımlayabilir ve hiyerarşik adlandırma kuralını kullanarak sanal makineyle ilişkilendirebilirsiniz.
 
-Sanal makine ölçek kümeleri için uzantıları yapılandırma belirtilen *extensionprofile öğesine* özelliği *VirtualMachineProfile*.
+Sanal Makine Ölçek Kümeleri için, uzantı yapılandırması *Virtualmachineprofile*'In *extensionprofile* özelliğinde belirtilmiştir.
 
-*Yayımcı* özellik değeriyle **Microsoft.Azure.Diagnostics** ve *türü* özellik değeriyle **IaaSDiagnostics**Azure tanılama uzantısını benzersiz olarak tanımlanabilmesi.
+**Microsoft. Azure. Diagnostics** değeri ve **ıaasdiagnostics** değeri ile *type* özelliği olan *Publisher* özelliği Azure tanılama uzantısını benzersiz şekilde tanımlar.
 
-Değerini *adı* özelliği, kaynak grubundaki uzantısı başvurmak için kullanılabilir. Özellikle çok ayar **Microsoft.Insights.VMDiagnosticsSettings** kolayca izleme show yukarı doğru Azure portalında grafikleri, sağlama Azure portal tarafından tanımlanması etkinleştirir.
+*Ad* özelliğinin değeri, kaynak grubundaki uzantıya başvurmak için kullanılabilir. Bunu özellikle **Microsoft. Insights. VMDiagnosticsSettings** olarak ayarlamak, izleme grafiklerinin Azure Portal doğru görünmesini sağlamak için Azure Portal tarafından kolayca tanımlanmasını sağlar.
 
-*TypeHandlerVersion* kullanmak istediğiniz uzantısı sürümünü belirtir. Ayarı *autoUpgradeMinorVersion* için alt sürüm **true** kullanılabilir uzantısı küçük en son sürümünü elde etmeniz sağlanır. Her zaman ayarlamanız önerilir *autoUpgradeMinorVersion* her zaman olacak şekilde **true** böylece her zaman tüm yeni özellikler ve hata düzeltmeleri ile en son kullanılabilir tanılama uzantısını kullanmak alın. 
+*Typehandlerversion* , kullanmak istediğiniz uzantının sürümünü belirtir. *Oto Upgrademinorversion* alt sürümünün **true** olarak ayarlanması, mevcut uzantının en son ikincil sürümünü almanızı sağlar. Her zaman yeni özellikler ve hata düzeltmeleriyle birlikte kullanılabilir en son tanılama uzantısını kullanmak için her zaman her zaman **true** *olarak ayarlamanız önerilir* . 
 
-*Ayarları* öğesi ayarlayın ve tekrar (bazen genel yapılandırma olarak adlandırılır) uzantısı okuma uzantısı için yapılandırma özelliklerini içerir. *Xmlcfg* özelliği içeren xml tabanlı yapılandırma için tanılama günlükleri tanılama aracısı tarafından toplanan performans sayaçlarını vs. Bkz: [tanılama yapılandırma şeması](https://msdn.microsoft.com/library/azure/dn782207.aspx) xml şeması hakkında daha fazla bilgi. Yaygın Azure Resource Manager şablonu bir değişken olarak gerçek xml yapılandırmasını depolamak ve ardından birleştirmek için bir uygulamadır ve base64 kodlama değeri ayarlamak için bunları *xmlcfg*. Bölümüne [tanılama yapılandırma değişkenleri](#diagnostics-configuration-variables) için xml değişkenleri içinde saklamak hakkında daha fazla bilgi edinin. *StorageAccount* özelliği için hangi tanılama veri aktarılır depolama hesabının adını belirtir. 
+*Settings* öğesi, uzantıya (bazen genel yapılandırma olarak adlandırılır) ayarlanabilir ve geri okuyabilen yapılandırma özelliklerini içerir. *Xmlcfg* özelliği, tanılama Aracısı tarafından toplanan tanılama günlükleri, performans sayaçları ve XML tabanlı yapılandırmayı içerir. XML şemasının kendisi hakkında daha fazla bilgi için bkz. [Tanılama yapılandırma şeması](https://msdn.microsoft.com/library/azure/dn782207.aspx) . Ortak bir uygulama, gerçek xml yapılandırmasını Azure Resource Manager şablonunda bir değişken olarak depolayıp, sonra *xmlcfg*için değer ayarlamak üzere bunları birleştirir ve Base64 olarak kodlayayöneliktir. XML 'i değişkenlerde nasıl depolayacağınızı öğrenmek için [Tanılama yapılandırma değişkenleri](#diagnostics-configuration-variables) bölümüne bakın. *Storageaccount* özelliği, tanılama verilerinin aktarıldığı depolama hesabının adını belirtir. 
 
-Özelliklerinde *protectedSettings* (bazen başvurulan özel olarak yapılandırma) ayarlanabilir, ancak geri ayarlanan sonra okunamıyor. Salt yazılır doğasını *protectedSettings* yararlı gizli dizileri gibi depolama hesabı anahtarını depolamak için tanılama veri yazıldığı kolaylaştırır.    
+*Protectedsettings* içindeki Özellikler (bazen özel yapılandırma olarak adlandırılır) ayarlanabilir, ancak ayarlandıktan sonra geri okunamaz. *Protectedsettings* 'in salt yazılır olması, tanılama verilerinin yazıldığı depolama hesabı anahtarı gibi gizli dizileri depolamanın yararlı olmasını sağlar.    
 
-## <a name="specifying-diagnostics-storage-account-as-parameters"></a>Tanılama depolama hesabı parametreleri olarak belirtme
-Yukarıdaki tanılama uzantısı json parçacığı, iki parametre kabul eder *existingdiagnosticsStorageAccountName* ve *existingdiagnosticsStorageResourceGroup* tanılama depolama belirtmek için Tanılama verilerinin nerede depolanacağını hesabı. Tanılama depolama hesabı belirten bir parametre farklı ortamlar genelinde tanılama depolama hesabı değiştirmek kolaylaştırır gibi örneğin test etmek için farklı tanılama depolama hesabı ve farklı bir için kullanmak istediğiniz, Üretim dağıtımı.  
+## <a name="specifying-diagnostics-storage-account-as-parameters"></a>Tanılama depolama hesabını parametre olarak belirtme
+Yukarıdaki tanılama uzantısı JSON parçacığı, tanılama verilerinin depolandığı tanılama depolama hesabını belirtmek için iki parametrenin *Existingdiagnosticsstorageaccountname* ve *Existingdiagnosticsstorageresourcegroup* olduğunu varsayar. Tanılama depolama hesabının bir parametre olarak belirtilmesi, farklı ortamlarda tanılama depolama hesabını değiştirmeyi kolaylaştırır. Örneğin, test için farklı bir tanılama depolama hesabı ve Üretim dağıtımı.  
 
 ```json
 "existingdiagnosticsStorageAccountName": {
@@ -102,23 +101,23 @@ Yukarıdaki tanılama uzantısı json parçacığı, iki parametre kabul eder *e
 }
 ```
 
-Sanal makine için kaynak grubundan farklı bir kaynak grubunda bir tanılama depolama hesabı belirtmek için iyi bir uygulamadır. Bir kaynak grubu, kendi yaşam süresi ile bir dağıtım birimi olarak kabul edilebilir, bir sanal makine dağıtılabilir ve kendisine yapılan yeni yapılandırmalar güncelleştirmeleri ancak arasında aynı depolama hesabındaki tanılama verilerini depolamak isteyebileceğiniz yeniden dağıtıldı Bu sanal makine dağıtımları. Depolama hesabı farklı bir kaynağa sahip çeşitli sürümleri arasında sorunlarını gidermek kolaylaştıran çeşitli sanal makine dağıtımları verileri kabul etmek için depolama hesabı sağlar.
+Sanal makine için kaynak grubundan farklı bir kaynak grubunda bir tanılama depolama hesabı belirtmek en iyi uygulamadır. Bir kaynak grubu, kendi yaşam süresine sahip bir dağıtım birimi olarak kabul edilebilir, yeni yapılandırma güncelleştirmeleri kendisine yaptığı için bir sanal makine dağıtılabilir ve yeniden dağıtılabilir, ancak tanılama verilerini aynı depolama hesabında depolamaya devam etmek isteyebilirsiniz. Bu sanal makine dağıtımları. Depolama hesabının farklı bir kaynakta olması, depolama hesabının çeşitli sanal makine dağıtımlarındaki verileri kabul etmesine olanak sağlayarak çeşitli sürümlerde sorunları gidermeyi kolaylaştırır.
 
 > [!NOTE]
-> Visual Studio'dan bir windows sanal makine şablonu oluşturursanız, varsayılan depolama hesabını burada sanal makine VHD karşıya aynı depolama hesabını kullanmak için ayarlanmış olabilir. Bu sanal makinenin ilk kurulum kolaylaştırmaktır. İçindeki bir parametre olarak geçirilebilen farklı bir depolama hesabı kullanılacak şablonu yeniden faktörü. 
+> Visual Studio 'dan bir Windows sanal makine şablonu oluşturursanız, varsayılan depolama hesabı, sanal makine VHD 'sinin karşıya yüklendiği aynı depolama hesabını kullanacak şekilde ayarlanmış olabilir. Bu, VM 'nin ilk kurulumunu basitleştirecek. Şablonu bir parametre olarak geçirilebilecek farklı bir depolama hesabı kullanmak için yeniden çarpanlara koyun. 
 > 
 > 
 
 ## <a name="diagnostics-configuration-variables"></a>Tanılama yapılandırma değişkenleri
-Önceki tanılama uzantısı json parçacığı tanımlayan bir *AccountID* tanılama depolama için depolama hesabı anahtarını alma basitleştirmek için değişkeni:   
+Önceki tanılama uzantısı JSON parçacığı, tanılama depolaması için depolama hesabı anahtarını almayı basitleştirmek üzere bir *AccountID* değişkeni tanımlar:   
 
 ```json
 "accountid": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/',parameters('existingdiagnosticsStorageResourceGroup'), '/providers/','Microsoft.Storage/storageAccounts/', parameters('existingdiagnosticsStorageAccountName'))]"
 ```
 
-*Xmlcfg* tanılama uzantısını özelliği birlikte birleştirilmiş birden fazla değişken kullanılarak tanımlanır. Bu değişkenlerin değerleri xml biçiminde olduğundan doğru json değişkenleri ayarlarken Atlanan gerekir.
+Tanılama uzantısının *xmlcfg* özelliği, birlikte birleştirilmiş birden çok değişken kullanılarak tanımlanır. Bu değişkenlerin değerleri XML biçiminde olduğundan, JSON değişkenlerini ayarlarken doğru bir şekilde atlanmaları gerekir.
 
-Aşağıdaki örnek, bazı windows olay günlükleri ve Tanılama Altyapısı günlükleri ile birlikte standart sistem düzeyi performans sayaçlarını toplayan tanılama yapılandırma XML'i açıklar. Bu olduğundan kaçış ve böylece yapılandırmasını, şablon değişkenleri bölümüne doğrudan yapıştırılabilir hatalı biçimlendirilmiş. Bkz: [tanılama yapılandırma şeması](https://msdn.microsoft.com/library/azure/dn782207.aspx) yapılandırma XML'i daha fazla insan tarafından okunabilir bir örneğin.
+Aşağıdaki örnekte, bazı Windows olay günlükleri ve tanılama altyapı günlükleri ile birlikte standart sistem düzeyi performans sayaçlarını toplayan tanılama yapılandırması XML açıklanmaktadır. Yapılandırmanın doğrudan şablonunuzun değişkenler bölümüne yapıştırılabilmesi için, bu, atmıştır ve doğru biçimlendirilmiştir. Yapılandırma XML dosyası için daha okunabilir bir örnek için [Tanılama yapılandırması şemasına](https://msdn.microsoft.com/library/azure/dn782207.aspx) bakın.
 
 ```json
 "wadlogs": "<WadCfg> <DiagnosticMonitorConfiguration overallQuotaInMB=\"4096\" xmlns=\"http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration\"> <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter=\"Error\"/> <WindowsEventLog scheduledTransferPeriod=\"PT1M\" > <DataSource name=\"Application!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"Security!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"System!*[System[(Level = 1 or Level = 2)]]\" /></WindowsEventLog>",
@@ -129,14 +128,14 @@ Aşağıdaki örnek, bazı windows olay günlükleri ve Tanılama Altyapısı g�
 "wadcfgxend": "\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>"
 ```
 
-Yukarıdaki yapılandırma ölçüm tanımı xml düğümünde nasıl performans sayaçlarını önceki xml dosyasında tanımlanan tanımlar önemli yapılandırma öğesi aynıdır *PerformanceCounter* düğüm toplanır ve depolanır. 
+Yukarıdaki yapılandırmadaki ölçüm tanımı XML düğümü, *PerformanceCounter* düğümündeki XML 'de daha önce tanımlanan performans sayaçlarının nasıl toplandığını ve depolandığını tanımladığından önemli bir yapılandırma öğesidir. 
 
 > [!IMPORTANT]
-> Bu ölçümler, Azure portalında izleme grafikleri ve Uyarıları sürücü.  **Ölçümleri** düğümle *ResourceId* ve **MetricAggregation** verilerinde izleme VM görmek istiyorsanız, VM tanılama yapılandırmasında eklenmelidir Azure portalı. 
+> Bu ölçümler, Azure portal izleme grafiklerini ve uyarılarını sürücü halinde izler.  Azure portal VM izleme verilerini görmek istiyorsanız, *RESOURCEID* ve **metrictoplamasını** içeren **ölçümler** düğümünün VM 'niz için tanılama yapılandırmasına dahil olması gerekir. 
 > 
 > 
 
-Aşağıdaki örnek, ölçüm tanımları için xml gösterir: 
+Aşağıdaki örnek, ölçüm tanımlarının XML 'sini göstermektedir: 
 
 ```xml
 <Metrics resourceId="/subscriptions/subscription().subscriptionId/resourceGroups/resourceGroup().name/providers/Microsoft.Compute/virtualMachines/vmName">
@@ -145,39 +144,39 @@ Aşağıdaki örnek, ölçüm tanımları için xml gösterir:
 </Metrics>
 ```
 
-*ResourceId* özniteliği, aboneliğinizdeki sanal makineyi benzersiz olarak tanımlar. Şablonu dağıtım yaptığınız kaynak grubuna ve aboneliğe göre bu değerleri otomatik olarak güncelleştirilir. böylece subscription() ve resourceGroup() işlevleri kullandığınızdan emin olun.
+*RESOURCEID* özniteliği, aboneliğinizdeki sanal makineyi benzersiz şekilde tanımlar. Şablon, dağıttığınız abonelik ve kaynak grubuna göre bu değerleri otomatik olarak güncelleyen abonelik () ve resourceGroup () işlevlerini kullandığınızdan emin olun.
 
-Bir döngüde birden çok sanal makine oluşturuyorsanız, doldurmak zorunda *ResourceId* tek tek her VM doğru bir şekilde ayırt etmek için bir copyındex () işlevi ile değeri. *XmlCfg* değeri, bunu şu şekilde desteklemek için güncelleştirilebilir:  
+Bir döngüde birden çok sanal makine oluşturuyorsanız, her bir sanal MAKINEYI doğru şekilde ayırt etmek için *RESOURCEID* değerini bir copyındex () işleviyle doldurmanız gerekir. *Xmlcfg* değeri bunu aşağıdaki gibi destekleyecek şekilde yapılandırılabilir:  
 
 ```json
 "xmlCfg": "[base64(concat(variables('wadcfgxstart'), variables('wadmetricsresourceid'), concat(parameters('vmNamePrefix'), copyindex()), variables('wadcfgxend')))]", 
 ```
 
-MetricAggregation değerini *PT1M* ve *PT1H* sırasıyla bir dakika içinde bir toplama ve bir saat içinde bir toplama türünü belirtir.
+*PT1M* ve *PT1H* ' nin metrictoplamasını değeri, sırasıyla bir dakika ve bir toplama üzerinde bir toplama olduğunu işaret eder.
 
-## <a name="wadmetrics-tables-in-storage"></a>Depolama WADMetrics tablolarında
-Yukarıdaki ölçümleri yapılandırma, tanılama depolama hesabınızda aşağıdaki adlandırma kuralları ile tablolar oluşturur:
+## <a name="wadmetrics-tables-in-storage"></a>Depolama alanındaki Wadölçümler tabloları
+Yukarıdaki ölçüm yapılandırması, tanılama depolama hesabınızda aşağıdaki adlandırma kurallarıyla tablo oluşturur:
 
-* **WADMetrics**: Tüm WADMetrics tablolar için standart ön eki
-* **PT1H** veya **PT1M**: Tablo üzerinde 1 saat veya 1 dakika veri toplama içerdiğini gösterir.
-* **P10D**: Tablo veri toplama başladığında tablo verilerini 10 gün için içerecek gösterir
-* **V2S**: Dize sabiti
-* **yyyymmdd**: Hangi veri toplamayı tablo başlangıç tarihi
+* **Wadölçümler**: tüm wadmetrik tabloları için Standart önek
+* **PT1H** veya **PT1M**: tablonun 1 saat veya 1 dakikalık toplam verileri içerdiğini belirtir
+* **P10D**: tablonun veri toplamaya başladığı zaman 10 günlük verileri içereceği anlamına gelir
+* **V2S**: dize sabiti
+* **YYYYMMDD**: tablonun veri toplamaya başladığı tarih
 
-Örnek: *WADMetricsPT1HP10DV2S20151108* üzerinde 11-Kasım 2015'ten 10 gün boyunca bir saat içinde toplanan ölçümler verileri içerir    
+Örnek: *WADMetricsPT1HP10DV2S20151108* 11-kas-2015 tarihinden itibaren 10 gün boyunca toplanan ölçüm verilerini içerir    
 
-Her WADMetrics tablo şu sütunları içerir:
+Her Wadölçümler tablosu şu sütunları içerir:
 
-* **PartitionKey**: Bölüm anahtarına göre oluşturulan *ResourceId* VM kaynağı benzersiz şekilde tanımlamak için değeri. Örneğin, `002Fsubscriptions:<subscriptionID>:002FresourceGroups:002F<ResourceGroupName>:002Fproviders:002FMicrosoft:002ECompute:002FvirtualMachines:002F<vmName>`  
-* **RowKey**: Biçim izleyen `<Descending time tick>:<Performance Counter Name>`. Azalan zaman değer çizgisi hesaplaması toplama dönemini başlangıcının zaman eksi maksimum süre ticks ' dir. Örneğin örnek süre 10-Kasım-2015'te başlatılan ve 00:00Hrs UTC sonra hesaplama olacaktır: `DateTime.MaxValue.Ticks - (new DateTime(2015,11,10,0,0,0,DateTimeKind.Utc).Ticks)`. İçin kullanılabilir bellek bayt performans sayacı satır anahtarı şöyle görünecektir: `2519551871999999999__:005CMemory:005CAvailable:0020Bytes`
-* **CounterName**: Performans sayacı adıdır. Bu eşleşen *counterSpecifier* xml yapılandırması tanımlanmış.
-* **En fazla**: Performans sayacı toplama dönemdeki maksimum değer.
-* **En az**: Performans sayacı toplama süre minimum değer.
-* **Toplam**: Toplama süresi içinde performans sayacı tüm değerlerin toplamını bildirdi.
-* **Sayısı**: Performans sayacı için bildirilen değerleri toplam sayısı.
-* **Ortalama**: Performans sayacı toplama dönemdeki ortalama (toplam /) değeri.
+* **Partitionkey**: bölüm anahtarı, VM kaynağını benzersiz şekilde tanımlamak için *RESOURCEID* değeri temel alınarak oluşturulur. Örneğin, `002Fsubscriptions:<subscriptionID>:002FresourceGroups:002F<ResourceGroupName>:002Fproviders:002FMicrosoft:002ECompute:002FvirtualMachines:002F<vmName>`  
+* **Rowkey**: `<Descending time tick>:<Performance Counter Name>`biçimini izler. Azalan zaman değeri hesaplaması, en fazla zaman aralığı toplama döneminin başlangıcının süresinin çıkarılmasıyla elde edilir. Örneğin, 10-Kas-2015 ve 00:00Saat UTC 'de örnek dönem başlatılırsa, hesaplama şöyle olacaktır: `DateTime.MaxValue.Ticks - (new DateTime(2015,11,10,0,0,0,DateTimeKind.Utc).Ticks)`. Kullanılabilir bellek baytları performans sayacı için satır anahtarı şöyle görünür: `2519551871999999999__:005CMemory:005CAvailable:0020Bytes`
+* **CounterName**: performans sayacının adıdır. Bu, XML yapılandırmasında tanımlanan *sayaç belirticisiyle* eşleşir.
+* **Maksimum**: toplama dönemi boyunca performans sayacının maksimum değeri.
+* **Minimum**: toplama dönemi boyunca performans sayacının minimum değeri.
+* **Toplam**: toplama dönemi boyunca raporlanan performans sayacının tüm değerlerinin toplamı.
+* **Sayı**: performans sayacı için raporlanan toplam değer sayısı.
+* **Average**: toplama dönemi boyunca performans sayacının ortalama (Toplam/sayı) değeri.
 
 ## <a name="next-steps"></a>Sonraki Adımlar
-* Tanılama uzantısı ile Windows sanal makine için bir tam örnek şablon bkz [201-vm-izleme-tanılama-extension](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-monitoring-diagnostics-extension)   
-* Azure Resource Manager şablonu kullanarak dağıtma [Azure PowerShell](../windows/ps-template.md) veya [Azure komut satırı](../linux/create-ssh-secured-vm-from-template.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
-* Daha fazla bilgi edinin [Azure Resource Manager şablonları yazma](../../resource-group-authoring-templates.md)
+* Tanılama uzantısına sahip bir Windows sanal makinesinin tam örnek şablonu için bkz. [201-VM-Monitoring-Diagnostics-Extension](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-monitoring-diagnostics-extension)   
+* [Azure PowerShell](../windows/ps-template.md) veya [Azure komut satırı](../linux/create-ssh-secured-vm-from-template.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) kullanarak Azure Resource Manager şablonu dağıtma
+* [Azure Resource Manager şablonları yazma](../../resource-group-authoring-templates.md) hakkında daha fazla bilgi edinin

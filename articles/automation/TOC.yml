@@ -20,10 +20,19 @@
       displayName: RBAC
     - name: Otomasyon Hesabınızı başka bir Aboneliğe taşıma
       href: how-to/move-account.md
+    - name: Otomasyon Hizmetleri’nin eklenmesini otomatikleştirme
+      href: /azure/architecture/cloud-adoption/operations/azure-server-management/onboarding-automation
+    - name: Log Analytics Çalışma Alanı Eşlemeleri için Desteklenen Bölgeler
+      href: how-to/region-mappings.md
+    - name: Azure Otomasyonu verilerini yönetme
+      href: automation-managing-data.md
+      displayName: backup
 - name: Süreç Otomasyonu
   items:
     - name: Karma Runbook Çalışanına Genel Bakış
       href: automation-hybrid-runbook-worker.md
+    - name: Runbook galerisi
+      href: automation-runbook-gallery.md
     - name: Kavramlar
       items:
         - name: Runbook türleri
@@ -35,16 +44,10 @@
       items:
         - name: Runbook oluşturma
           href: automation-quickstart-create-runbook.md
-    - name: Ekleme
-      items:
-        - name: Portaldan birden çok VM ekleme
-          href: automation-onboard-solutions-from-browse.md
-        - name: Azure VM’den ekleme
-          href: automation-onboard-solutions-from-vm.md
-        - name: Otomasyon hesabından ekleme
-          href: automation-onboard-solutions-from-automation-account.md
     - name: Nasıl Yapılır Kılavuzları
       items:
+        - name: Hizmetin kapalı olduğu saatlerde VM’leri başlatma/durdurma
+          href: automation-solution-vm-management.md
         - name: Runbook'ları yönetme
           href: manage-runbooks.md
         - name: Runbook oluşturma
@@ -82,8 +85,6 @@
               href: automation-child-runbooks.md
             - name: Azure Otomasyonu runbook’una bir JSON nesnesi geçirme
               href: automation-pass-json-string.md
-            - name: Hizmetin kapalı olduğu saatlerde VM’leri başlatma/durdurma
-              href: automation-solution-vm-management.md
         - name: Runbook’ları izleme
           items:
             - name: Runbook çıkışı
@@ -94,15 +95,6 @@
               displayName: 'fair share, activity log'
             - name: Grafik runbook'larında hata işleme
               href: automation-runbook-graphical-error-handling.md
-            - name: Kaynak denetimi tümleştirmesi
-              href: source-control-integration.md
-              displayName: 'github, vsts, azure devops, personal access token'
-            - name: Kaynak denetimi tümleştirmesi - eski
-              href: automation-source-control-integration-legacy.md
-              displayname: github
-            - name: Azure Otomasyonu verilerini yönetme
-              href: automation-managing-data.md
-              displayName: backup
         - name: Karma Runbook Çalışanı
           items:
             - name: Windows Karma Runbook Çalışanı dağıtma
@@ -116,8 +108,23 @@
             - name: İzleyici görevleriyle güncelleştirilen dosyaları izleme
               href: automation-watchers-tutorial.md
               displayName: 'hybrid runbook worker, hybrid worker, trigger'
+        - name: Kaynak Denetimi Tümleştirmesi
+          items:
+            - name: Kaynak denetimi tümleştirmesi
+              href: source-control-integration.md
+              displayName: 'github, vsts, azure devops, personal access token'
+            - name: Kaynak denetimi tümleştirmesi - eski
+              href: automation-source-control-integration-legacy.md
+              displayname: github
+            - name: GitHub Enterprise ile kaynak denetimi tümleştirmesi
+              href: automation-scenario-source-control-integration-with-github-ent.md
+              displayName: 'CI, runbooks'
+            - name: Azure DevOps ile kaynak denetimi tümleştirmesi
+              href: automation-scenario-source-control-integration-with-VSTS.md
     - name: Sorun giderme
       items:
+        - name: Microsoft Azure Otomasyonu için bir servis talebi açtığınızda toplanan veriler
+          href: troubleshoot/collect-data-microsoft-azure-automation-case.md
         - name: Karma Runbook Çalışanı ile ilgili sorunları giderme
           href: troubleshoot/hybrid-runbook-worker.md
           displayName: 'troubleshoot, HRW, hybrid worker'
@@ -141,6 +148,8 @@
           href: automation-onboard-solutions-from-automation-account.md
     - name: Nasıl Yapılır Kılavuzları
       items:
+        - name: Azure Sanal Makineleriniz için güncelleştirme ve düzeltme eki yönetimi
+          href: automation-tutorial-update-management.md
         - name: Birden çok VM için güncelleştirmesini yönetme
           href: manage-update-multi.md
         - name: Ön ve son betikler
@@ -150,6 +159,14 @@
         - name: SCCM’yi Güncelleştirme Yönetimi ile Tümleştirme
           href: oms-solution-updatemgmt-sccmintegration.md
           displayName: Configuration Manager
+        - name: Güncelleştirme Yönetimi için Windows Update’i yapılandırma
+          href: automation-configure-windows-update.md
+        - name: Güncelleştirme Yönetimi ile dinamik grupları kullanma
+          href: automation-update-management-groups.md
+        - name: Güncelleştirme Yönetimi günlüklerini sorgulama
+          href: automation-update-management-query-logs.md
+        - name: Güncelleştirme değerlendirmelerini görüntüleme
+          href: automation-view-update-assessments.md
     - name: Sorun giderme
       items:
         - name: Ekleme
@@ -212,9 +229,6 @@
         - name: VM üzerindeki değişikliklerle ilgili sorunları giderme
           href: automation-tutorial-troubleshoot-changes.md
           displayName: inventory
-        - name: Stok koleksiyonuyla VM yönetme
-          href: automation-vm-inventory.md
-          displayName: inventory
     - name: Sorun giderme
       items:
         - name: Ekleme
@@ -234,7 +248,7 @@
         - name: Başlarken
           href: automation-dsc-getting-started.md
           displayName: DSC
-        - name: DSC yapılandırması oluşturma
+        - name: Makine yapılandırmasını yönetme
           href: automation-quickstart-dsc-configuration.md
           displayName: 'DSC, state configuration, config, node configuration, node'
     - name: Ekleme
@@ -253,6 +267,9 @@
         - name: DSC yapılandırmaları derleme
           href: automation-dsc-compile.md
           displayName: 'state configuration, composite resources, configurationData'
+        - name: Uyumlu olmayan DSC sunucularını düzeltme
+          href: automation-dsc-remediate.md
+          displayName: 'state configuration, DSC, remediate'
         - name: Bileşik Kaynakları kullanarak DSC Yapılandırmaları oluşturma
           href: compose-configurationwithcompositeresources.md
         - name: Chocolatey kullanarak sürekli dağıtım
@@ -269,6 +286,22 @@
         - name: State Configuration (DSC) sorunlarını giderme
           href: troubleshoot/desired-state-configuration.md
           displayName: 'Desired State Configuration, troubleshoot'
+    - name: Başvuru
+      items:
+        - name: Topluluk Çözümleri
+          items:
+            - name: Uygun ölçekte yapılandırma verileri
+              href: automation-dsc-config-data-at-scale.md
+              displayName: 'DSC, Configuration Data, ConfigData'
+            - name: Sunuculardan yapılandırma oluşturma
+              href: automation-dsc-config-from-server.md
+              displayName: 'DSC, ReverseDSC'
+            - name: STIG tabanlı yapılandırma
+              href: automation-dsc-configuration-based-on-stig.md
+              displayName: 'DSC, Configuration'
+            - name: Yapılandırmaları bileşik kaynaklara dönüştürme
+              href: automation-dsc-create-composite.md
+              displayName: 'DSC, composite'
 - name: Paylaşılan Kaynakları Yönetme
   items:
     - name: Sertifikalar
@@ -277,14 +310,18 @@
       href: automation-connections.md
     - name: Kimlik Bilgileri
       href: automation-credentials.md
-    - name: Tümleştirme modülleri
-      href: automation-integration-modules.md
+    - name: PowerShell modülleri
+      items:
+        - name: Modüller
+          href: automation-integration-modules.md
+        - name: Azure Otomasyonu'nda Az modüllerini kullanma
+          href: az-modules.md
+        - name: Azure PowerShell modüllerini güncelleştirme
+          href: automation-update-azure-modules.md
     - name: Zamanlamalar
       href: automation-schedules.md
     - name: Değişkenler
       href: automation-variables.md
-    - name: Azure PowerShell modüllerini güncelleştirme
-      href: automation-update-azure-modules.md
     - name: Python 2 paketlerini yönetme
       href: python-packages.md
     - name: Paylaşılan Kaynak sorunlarını giderme
@@ -292,8 +329,8 @@
       displayName: 'module, import'
 - name: Bileşenler Arası Senaryolar
   items:
-    - name: Runbook galerisi
-      href: automation-runbook-gallery.md
+    - name: SendGrid kullanarak Runbook'tan e-posta gönderme
+      href: automation-send-email.md
     - name: Ölçüm uyarıları ile runbook’ları izleme
       href: automation-alert-metric.md
     - name: Azure uyarılarından runbook başlatma
@@ -301,16 +338,13 @@
       displayName: 'Monitor, Azure Monitor'
     - name: Amazon Web Hizmetleri Sanal Makinesi oluşturma
       href: automation-scenario-aws-deployment.md
-    - name: GitHub Enterprise ile kaynak denetimi tümleştirmesi
-      href: automation-scenario-source-control-integration-with-github-ent.md
-      displayName: 'CI, runbooks'
-    - name: Azure DevOps ile kaynak denetimi tümleştirmesi
-      href: automation-scenario-source-control-integration-with-VSTS.md
       displayName: 'VSTS, CI, runbooks'
     - name: Azure Otomasyonu PowerShell runbook’unda Azure Resource Manager şablonu dağıtma
       href: automation-deploy-template-runbook.md
     - name: Azure Otomasyonu’nu Event Grid ve Microsoft Teams ile tümleştirme
       href: ../event-grid/ensure-tags-exists-on-new-virtual-machines.md?toc=%2fazure%2fautomation%2ftoc.json
+    - name: Azure-SSIS IR'yi başlatan/durduran Azure Otomasyonu runbook'unu oluşturma ve zamanlama
+      href: '../data-factory/how-to-schedule-azure-ssis-integration-runtime.md#create-and-schedule-azure-automation-runbook-that-startsstops-azure-ssis-ir'
 - name: İzleme
   items:
     - name: Azure Otomasyonu iş verilerini Log Analytics’e iletme
@@ -326,14 +360,10 @@
   items:
     - name: Azure PowerShell
       href: /powershell/module/azurerm.automation
-    - name: Azure PowerShell (Klasik)
-      href: /powershell/module/azure/?view=azuresmps-3.7.0
     - name: .NET
       href: /dotnet/api/microsoft.azure.management.automation
     - name: REST
       href: /rest/api/automation
-    - name: REST (Klasik)
-      href: 'https://msdn.microsoft.com/library/azure/mt163781'
 - name: Kaynaklar
   items:
     - name: Otomasyon tanıtım videosu

@@ -1,6 +1,6 @@
 ---
-title: 'Azure Resource Manager: Tek veritabanı - Azure SQL veritabanı oluşturma | Microsoft Docs'
-description: Azure Resource Manager şablonu kullanarak Azure SQL veritabanı içinde tek bir veritabanı oluşturun.
+title: 'Azure Resource Manager: tek bir veritabanı oluşturma'
+description: Azure Resource Manager şablonunu kullanarak Azure SQL veritabanı 'nda tek bir veritabanı oluşturun.
 services: sql-database
 ms.service: sql-database
 ms.subservice: single-database
@@ -10,30 +10,29 @@ ms.topic: quickstart
 author: mumian
 ms.author: jgao
 ms.reviewer: carlrab
-manager: craigg
 ms.date: 06/28/2019
-ms.openlocfilehash: 4ef0f9ff6f8620109f2ef6f6bd5f549281b4de54
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: b7888215a2d463c8007168e215179ace898ca1cc
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67472154"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73821020"
 ---
-# <a name="quickstart-create-a-single-database-in-azure-sql-database-using-the-azure-resource-manager-template"></a>Hızlı Başlangıç: Azure Resource Manager şablonu kullanarak Azure SQL veritabanı tek veritabanı oluşturma
+# <a name="quickstart-create-a-single-database-in-azure-sql-database-using-the-azure-resource-manager-template"></a>Hızlı başlangıç: Azure Resource Manager şablonunu kullanarak Azure SQL veritabanı 'nda tek bir veritabanı oluşturma
 
-Oluşturma bir [tek veritabanı](sql-database-single-database.md) Azure SQL veritabanında bir veritabanı oluşturmak için hızlı ve kolay bir dağıtım seçeneğidir. Bu hızlı başlangıçta, Azure Resource Manager şablonu kullanarak tek veritabanı oluşturma işlemini göstermektedir. Daha fazla bilgi için [Azure Resource Manager belgelerini](/azure/azure-resource-manager/).
+Tek bir [veritabanı](sql-database-single-database.md) oluşturmak, Azure SQL veritabanı 'nda veritabanı oluşturmak için en hızlı ve en basit dağıtım seçeneğidir. Bu hızlı başlangıçta, Azure Resource Manager şablonunu kullanarak tek bir veritabanının nasıl oluşturulacağı gösterilmektedir. Daha fazla bilgi için bkz. [Azure Resource Manager belgeleri](/azure/azure-resource-manager/).
 
 Azure aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
-## <a name="create-a-single-database"></a>Tek veritabanı oluşturma
+## <a name="create-a-single-database"></a>Tek bir veritabanı oluşturma
 
-Bir dizi işlem, bellek, GÇ ve depolama kaynakları iki birini kullanarak tek bir veritabanı olan [satın alma modeli](sql-database-purchase-models.md). Tek bir veritabanı oluşturduğunuzda, aynı zamanda tanımlamış bir [SQL veritabanı sunucusu](sql-database-servers.md) yönetip içine yerleştirdiğiniz [Azure kaynak grubu](../azure-resource-manager/resource-group-overview.md) belirli bir bölgede.
+Tek bir veritabanı, iki [satın alma modelinden](sql-database-purchase-models.md)birini kullanarak tanımlı bir işlem, bellek, GÇ ve depolama kaynakları kümesine sahiptir. Tek bir veritabanı oluşturduğunuzda, bunu yönetmek için bir [SQL veritabanı sunucusu](sql-database-servers.md) tanımlar ve belirli bir bölgedeki [Azure Kaynak grubuna](../azure-resource-manager/resource-group-overview.md) yerleştirebilirsiniz.
 
-Aşağıdaki JSON dosyası bu makalede kullanılan şablonudur. Şablon içinde depolanan [GitHub](https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/SQLServerAndDatabase/azuredeploy.json). Daha fazla Azure SQL veritabanı şablonu örnekleri bulunabilir [Azure hızlı başlangıç şablonları](https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Sql&pageNumber=1&sort=Popular).
+Aşağıdaki JSON dosyası, bu makalede kullanılan şablondur. Şablon [GitHub](https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/SQLServerAndDatabase/azuredeploy.json)'da depolanır. [Azure hızlı başlangıç şablonlarında](https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Sql&pageNumber=1&sort=Popular), daha fazla Azure SQL veritabanı şablonu örneği bulunabilir.
 
 [!code-json[create-azure-sql-database-server-and-database](~/resourcemanager-templates/SQLServerAndDatabase/azuredeploy.json)]
 
-1. Seçin **deneyin** Azure Cloud Shell'i açmak için aşağıdaki PowerShell kod bloğunun.
+1. Azure Cloud Shell açmak için aşağıdaki PowerShell kod bloğundan **deneyin** öğesini seçin.
 
     ```azurepowershell-interactive
     $projectName = Read-Host -Prompt "Enter a project name that is used for generating resource names"
@@ -50,20 +49,20 @@ Aşağıdaki JSON dosyası bu makalede kullanılan şablonudur. Şablon içinde 
     Read-Host -Prompt "Press [ENTER] to continue ..."
     ```
 
-1. Seçin **kopyalama** PowerShell Betiği panoya kopyalanmak için.
-1. Kabuk bölmesinde sağ tıklayın ve ardından **Yapıştır**.
+1. PowerShell betiğini Pano 'ya kopyalamak için **Kopyala** ' yı seçin.
+1. Kabuk bölmesine sağ tıklayın ve ardından **Yapıştır**' ı seçin.
 
-    Veritabanı sunucusu ve veritabanı oluşturmak için birkaç dakika sürer.
+    Veritabanı sunucusunun ve veritabanının oluşturulması birkaç dakika sürer.
 
 ## <a name="query-the-database"></a>Veritabanını sorgulama
 
-Veritabanını sorgulamak için bkz. [veritabanını sorgulama](./sql-database-single-database-get-started.md#query-the-database).
+Veritabanını sorgulamak için bkz. [Veritabanını sorgulama](./sql-database-single-database-get-started.md#query-the-database).
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Bu kaynak grubu, veritabanı sunucusu ve tek veritabanı için gitmek isterseniz tutmak [sonraki adımlar](#next-steps). Sonraki adımlar bağlanın ve farklı yöntemler kullanarak veritabanını sorgulama işlemini göstermektedir.
+[Sonraki adımlara](#next-steps)gitmek istiyorsanız bu kaynak grubunu, veritabanı sunucusunu ve tek veritabanını saklayın. Sonraki adımlarda, farklı yöntemler kullanarak veritabanınızı nasıl bağlayabilmeniz ve Sorgulayabileceğiniz gösterilmektedir.
 
-Azure Powershell ile kaynak grubunu silmek için:
+Kaynak grubunu Azure PowerShell 'e göre silmek için:
 
 ```azurepowershell-interactive
 $projectName = Read-Host -Prompt "Enter the same project name"
@@ -76,9 +75,9 @@ Read-Host -Prompt "Press [ENTER] to continue ..."
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Şirket içi veya uzak Araçlar tek bir veritabanına bağlanmak için sunucu düzeyinde güvenlik duvarı kuralı oluşturun. Daha fazla bilgi için [sunucu düzeyinde güvenlik duvarı kuralı oluşturma](sql-database-server-level-firewall-rule.md).
-- Bir sunucu düzeyinde güvenlik duvarı kuralı oluşturduktan sonra [bağlanma ve sorgulama](sql-database-connect-query.md) birkaç farklı araçları ve dilleri kullanarak veritabanınızı.
+- Şirket içi veya uzak araçlardan tek veritabanına bağlanmak için sunucu düzeyinde bir güvenlik duvarı kuralı oluşturun. Daha fazla bilgi için bkz. [sunucu düzeyinde güvenlik duvarı kuralı oluşturma](sql-database-server-level-firewall-rule.md).
+- Sunucu düzeyinde bir güvenlik duvarı kuralı oluşturduktan sonra, birkaç farklı araç ve dil kullanarak veritabanınızı [bağlayın ve sorgulayın](sql-database-connect-query.md) .
   - [SQL Server Management Studio kullanarak bağlanma ve sorgulama](sql-database-connect-query-ssms.md)
   - [Azure Data Studio kullanarak bağlanma ve sorgulama](https://docs.microsoft.com/sql/azure-data-studio/quickstart-sql-database?toc=/azure/sql-database/toc.json)
-- Azure CLI kullanarak tek bir veritabanı oluşturmak için bkz [Azure CLI örnekleri](sql-database-cli-samples.md).
-- Azure PowerShell kullanarak tek bir veritabanı oluşturmak için bkz [Azure PowerShell örnekleri](sql-database-powershell-samples.md).
+- Azure CLı kullanarak tek bir veritabanı oluşturmak için bkz. [Azure CLI örnekleri](sql-database-cli-samples.md).
+- Azure PowerShell kullanarak tek bir veritabanı oluşturmak için bkz. [Azure PowerShell örnekleri](sql-database-powershell-samples.md).

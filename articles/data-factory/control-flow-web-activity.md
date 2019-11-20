@@ -1,26 +1,28 @@
 ---
-title: Web etkinliği Azure Data factory'de | Microsoft Docs
-description: Bir REST uç noktasından bir işlem hattı çağıracak Web etkinliği bir Data Factory tarafından desteklenen denetim akışı etkinlikleri nasıl kullanabileceğinizi öğrenin.
+title: Azure Data Factory Web etkinliği
+description: Bir işlem hattından REST uç noktasını çağırmak için Data Factory tarafından desteklenen denetim akışı etkinliklerinin biri olan Web etkinliğini nasıl kullanabileceğinizi öğrenin.
 services: data-factory
 documentationcenter: ''
-author: sharonlo101
-manager: craigg
-editor: ''
+author: djpmsft
+ms.author: daperlov
+manager: jroth
+ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
-ms.tgt_pltfrm: na
 ms.topic: conceptual
 ms.date: 12/19/2018
-ms.author: shlo
-ms.openlocfilehash: 7edaa4c673c2cb94dc5bd0245ce66c9fe6a7dd3c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5929d4edac53b2be87e168b527034c5a473f154f
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60764297"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73678181"
 ---
-# <a name="web-activity-in-azure-data-factory"></a>Azure Data factory'de Web etkinliği
+# <a name="web-activity-in-azure-data-factory"></a>Azure Data Factory Web etkinliği
 Web Etkinliği bir Data Factory işlem hattından özel bir REST uç noktasını çağırmak için kullanılabilir. Etkinlik tarafından kullanılacak ve erişilecek veri kümelerini ve bağlı hizmetleri geçirebilirsiniz.
+
+> [!NOTE]
+> Web etkinliği, yalnızca genel olarak gösterilen URL 'Leri çağırabilir. Özel bir sanal ağda barındırılan URL 'Ler için desteklenmez.
 
 ## <a name="syntax"></a>Sözdizimi
 
@@ -63,36 +65,36 @@ Web Etkinliği bir Data Factory işlem hattından özel bir REST uç noktasını
 
 Özellik | Açıklama | İzin verilen değerler | Gerekli
 -------- | ----------- | -------------- | --------
-name | Web etkinliği adı | String | Evet
-türü | Ayarlanmalıdır **WebActivity**. | String | Evet
-method | Hedef uç nokta için REST API yöntemi. | dize. <br/><br/>Desteklenen türler: "POST", "PUT GET" | Evet
-url | Hedef uç nokta ve yolu | Dize (veya dizenin ifadenin resulttype'ı ile). Etkinlik yapmayacağınıza zaman aşımı 1 dakika ile bir hata, uç noktasından bir yanıt almaz. | Evet
-Üst bilgileri | Gönderilen istek için üstbilgiler. Örneğin dil ve türdeki bir istek üzerinde ayarlanan: `"headers" : { "Accept-Language": "en-us", "Content-Type": "application/json" }`. | Dize (veya dizenin ifadenin resulttype'ı ile) | Evet, Content-type üst bilgisi gereklidir. `"headers":{ "Content-Type":"application/json"}`
-Gövde | Uç noktaya gönderdi yükünü temsil eder.  | Dize (veya dizenin ifadenin resulttype'ı ile). <br/><br/>İstek yükü şemayı [istek yükü şeması](#request-payload-schema) bölümü. | POST/PUT yöntemleri için gereklidir.
-kimlik doğrulaması | Uç noktasını çağırmak için kullanılan kimlik doğrulama yöntemi. "Temel veya ClientCertificate." türleri desteklenir Daha fazla bilgi için [kimlik doğrulaması](#authentication) bölümü. Kimlik doğrulama gerekli değilse, bu özellik hariç tutun. | Dize (veya dizenin ifadenin resulttype'ı ile) | Hayır
-datasets | Veri kümelerinin listesini uç noktasına geçilen. | Veri kümesi yapılan başvuruların dizisi. Boş bir dizi olabilir. | Evet
-linkedServices | Bağlı hizmetler listesini uç noktasına geçilen. | Bağlı hizmet başvuruları dizisi. Boş bir dizi olabilir. | Evet
+ad | Web etkinliğinin adı | Dize | Evet
+type | **Webactivity**olarak ayarlanmalıdır. | Dize | Evet
+method | Hedef uç nokta için REST API yöntemi. | dizisinde. <br/><br/>Desteklenen türler: "GET", "POST", "PUT" | Evet
+url | Hedef uç nokta ve yol | Dize (veya dize resultType 'ı olan ifade). Bitiş noktasından yanıt almadıysanız etkinlik, bir hatayla 1 dakika sonra zaman aşımına uğrayacaktır. | Evet
+Bilgisinde | İsteğe gönderilen üst bilgiler. Örneğin, bir istek için dili ve türü ayarlamak için: `"headers" : { "Accept-Language": "en-us", "Content-Type": "application/json" }`. | Dize (veya dize resultType 'ı olan ifade) | Evet, Content-Type üst bilgisi gereklidir. `"headers":{ "Content-Type":"application/json"}`
+bölümü | Uç noktaya gönderilen yükü temsil eder.  | Dize (veya dize resultType 'ı olan ifade). <br/><br/>İstek [yükü şeması](#request-payload-schema) 'nda istek yükü şeması bölümüne bakın. | POST/PUT yöntemleri için gereklidir.
+kimlik doğrulaması | Uç noktayı çağırmak için kullanılan kimlik doğrulama yöntemi. Desteklenen türler "Basic, or ClientCertificate" dir. Daha fazla bilgi için bkz. [kimlik doğrulama](#authentication) bölümü. Kimlik doğrulaması gerekmiyorsa, bu özelliği dışlayın. | Dize (veya dize resultType 'ı olan ifade) | Hayır
+kümelerinin | Uç noktaya geçirilen veri kümelerinin listesi. | Veri kümesi başvuruları dizisi. Boş bir dizi olabilir. | Evet
+LinkedServices | Uç noktaya geçirilen bağlı hizmetlerin listesi. | Bağlı hizmet başvuruları dizisi. Boş bir dizi olabilir. | Evet
 
 > [!NOTE]
-> Web etkinliği çağırır REST uç noktalarını türü JSON yanıtı döndürmelidir. Etkinlik yapmayacağınıza zaman aşımı 1 dakika ile bir hata, uç noktasından bir yanıt almaz.
+> Web etkinliğinin çağırdığı REST uç noktaları JSON türünde bir yanıt döndürmelidir. Bitiş noktasından yanıt almadıysanız etkinlik, bir hatayla 1 dakika sonra zaman aşımına uğrayacaktır.
 
-JSON içeriği gereksinimleri aşağıdaki tabloda gösterilmiştir:
+Aşağıdaki tabloda JSON içeriği için gereksinimler gösterilmektedir:
 
 | Değer türü | İstek gövdesi | Yanıt gövdesi |
 |---|---|---|
-|JSON nesnesi | Desteklenen | Desteklenen |
-|JSON dizisi | Desteklenen <br/>(Şu anda bir hata sonucu olarak JSON dizileri çalışmaz. Düzeltme sürüyor.) | Desteklenmiyor |
-| JSON değeri | Desteklenen | Desteklenmiyor |
-| JSON olmayan türü | Desteklenmiyor | Desteklenmiyor |
+|JSON nesnesi | Destekleniyor | Destekleniyor |
+|JSON dizisi | Destekleniyor <br/>(Mevcut olduğunda, JSON dizileri bir hata sonucu olarak çalışmaz. Bir çözüm devam ediyor.) | Desteklenmeyen |
+| JSON değeri | Destekleniyor | Desteklenmeyen |
+| JSON olmayan tür | Desteklenmeyen | Desteklenmeyen |
 ||||
 
 ## <a name="authentication"></a>Kimlik Doğrulaması
 
 ### <a name="none"></a>None
-Kimlik doğrulama gerekli değilse, "kimlik doğrulaması" özelliğini içermez.
+Kimlik doğrulaması gerekmiyorsa, "Authentication" özelliğini eklemeyin.
 
 ### <a name="basic"></a>Temel
-Kullanıcı adı ve temel kimlik doğrulaması ile kullanılacak parolayı belirtin.
+Temel kimlik doğrulamasıyla kullanılacak kullanıcı adını ve parolayı belirtin.
 
 ```json
 "authentication":{
@@ -103,7 +105,7 @@ Kullanıcı adı ve temel kimlik doğrulaması ile kullanılacak parolayı belir
 ```
 
 ### <a name="client-certificate"></a>İstemci sertifikası
-Base64 ile kodlanmış içeriği bir PFX dosyası ve parolayı belirtin.
+PFX dosyası ve parolanın Base64 ile kodlanmış içeriğini belirtin.
 
 ```json
 "authentication":{
@@ -115,7 +117,7 @@ Base64 ile kodlanmış içeriği bir PFX dosyası ve parolayı belirtin.
 
 ### <a name="managed-identity"></a>Yönetilen Kimlik
 
-Erişim belirteci için istenecektir yönetilen kimlik kullanarak veri fabrikası için Kaynak URI belirtin. Azure Resource Management API'si çağırmak için kullanın `https://management.azure.com/`. Yönetilen kimlikleri hakkında daha fazla bilgi Bkz çalıştığı için [yönetilen Azure kaynaklarına genel bakış sayfası için kimlikleri](/azure/active-directory/managed-identities-azure-resources/overview).
+Veri Fabrikası için yönetilen kimlik kullanılarak erişim belirtecinin istendiği Kaynak URI 'sini belirtin. Azure Kaynak yönetimi API 'sini çağırmak için `https://management.azure.com/`kullanın. Yönetilen kimliklerin nasıl çalıştığı hakkında daha fazla bilgi için bkz. [Azure kaynaklarına ilişkin Yönetilen kimlikler genel bakış sayfası](/azure/active-directory/managed-identities-azure-resources/overview).
 
 ```json
 "authentication": {
@@ -124,8 +126,8 @@ Erişim belirteci için istenecektir yönetilen kimlik kullanarak veri fabrikas�
 }
 ```
 
-## <a name="request-payload-schema"></a>İstek yükü şeması
-POST/PUT yöntemini kullandığınızda, gövdesi özelliğinden uç noktaya gönderdi yükünü temsil eder. Bağlı hizmetleri ve veri kümeleri yükün bir parçası olarak geçirebilirsiniz. Yükü şeması şu şekildedir:
+## <a name="request-payload-schema"></a>İstek yük şeması
+POST/PUT yöntemini kullandığınızda Body özelliği uç noktaya gönderilen yükü temsil eder. Bağlı hizmetleri ve veri kümelerini yükün bir parçası olarak geçirebilirsiniz. Yükün şeması aşağıda verilmiştir:
 
 ```json
 {
@@ -148,9 +150,9 @@ POST/PUT yöntemini kullandığınızda, gövdesi özelliğinden uç noktaya gö
 ```
 
 ## <a name="example"></a>Örnek
-Bu örnekte, bir REST uç noktası işlem hattının web etkinliği çağırır. Bu seçenek, bir Azure SQL bağlı hizmeti ve bir Azure SQL veri kümesi için uç nokta geçirir. REST uç noktası, Azure SQL sunucusuna bağlanmak için Azure SQL bağlantı dizesini kullanır ve SQL server örneğinin adını döndürür.
+Bu örnekte, işlem hattının Web etkinliği REST uç noktasını çağırır. Bir Azure SQL bağlı hizmetini ve bir Azure SQL veri kümesini uç noktaya geçirir. REST uç noktası Azure SQL Server 'a bağlanmak için Azure SQL bağlantı dizesini kullanır ve SQL Server örneğinin adını döndürür.
 
-### <a name="pipeline-definition"></a>İşlem hattı
+### <a name="pipeline-definition"></a>İşlem hattı tanımı
 
 ```json
 {
@@ -212,7 +214,7 @@ Bu örnekte, bir REST uç noktası işlem hattının web etkinliği çağırır.
 
 ```
 
-### <a name="web-service-endpoint-code"></a>Web Hizmeti uç noktası kodu
+### <a name="web-service-endpoint-code"></a>Web hizmeti uç noktası kodu
 
 ```csharp
 
@@ -242,7 +244,7 @@ public HttpResponseMessage Execute(JObject payload)
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Data Factory tarafından desteklenen diğer denetim akışı etkinlikleri bakın:
+Data Factory tarafından desteklenen diğer denetim akışı etkinliklerini görün:
 
 - [İşlem Hattı Yürütme Etkinliği](control-flow-execute-pipeline-activity.md)
 - [Her etkinlik için](control-flow-for-each-activity.md)

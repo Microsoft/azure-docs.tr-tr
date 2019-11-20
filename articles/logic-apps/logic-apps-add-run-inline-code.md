@@ -1,6 +1,6 @@
 ---
-title: Ekleme ve kod parçacıkları - Azure Logic Apps çalıştırma
-description: Ekleme ve Azure Logic Apps kodunda satır içi kod parçacıkları çalıştırma
+title: Kod parçacıkları ekleme ve çalıştırma-Azure Logic Apps
+description: Azure Logic Apps satır içi kodla kod parçacıkları ekleme ve çalıştırma
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -9,85 +9,89 @@ ms.author: estfan
 ms.reviewer: derek1ee, LADocs
 ms.topic: article
 ms.date: 05/14/2019
-ms.openlocfilehash: 0bfa98396ee3afb80b486a5a17959664dfbe603c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3b51215e0cf48df2d3cd9df85a3d4c5641a17215
+ms.sourcegitcommit: 88ae4396fec7ea56011f896a7c7c79af867c90a1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65602124"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70390798"
 ---
-# <a name="add-and-run-code-snippets-by-using-inline-code-in-azure-logic-apps"></a>Ekleme ve kod parçacıkları, Azure Logic Apps'te satır içi kod kullanarak çalıştırma
+# <a name="add-and-run-code-snippets-by-using-inline-code-in-azure-logic-apps"></a>Azure Logic Apps içinde satır içi kod kullanarak kod parçacıkları ekleme ve çalıştırma
 
-Mantıksal uygulamanız içinde kod parçası çalıştırmak istediğinizde, yerleşik ekleyebilirsiniz **satır içi kod** mantıksal uygulamanızın iş akışı adımı olarak eylem. Bu senaryo uygun kodu çalıştırmak istediğinizde bu eylemi en iyi şekilde çalışır:
+Mantıksal uygulamanızın içinde kod parçası çalıştırmak istediğinizde, yerleşik **satır Içi kod** eylemini mantıksal uygulamanızın iş akışına bir adım olarak ekleyebilirsiniz. Bu eylem, bu senaryoya uyan kodu çalıştırmak istediğinizde en iyi şekilde çalışır:
 
-* JavaScript içinde çalışır. Çok yakında daha fazla dil.
-* Beş saniye veya daha az çalışan biter.
-* Veri işleme boyutu en fazla 50 MB.
-* Node.js sürümü 8.11.1 kullanır. Daha fazla bilgi için [standart yerleşik nesneleri](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects). 
+* JavaScript 'te çalışır. Yakında daha fazla dil geliyor.
+* Beş saniye veya daha kısa bir süre içinde çalışmayı sonlandırır.
+* Boyutu 50 MB 'a kadar olan verileri işler.
+* Henüz desteklenmeyen [ **değişken** eylemlerle](../logic-apps/logic-apps-create-variables-store-values.md)çalışmayı gerektirmez.
+* Node. js sürüm 8.11.1 kullanır. Daha fazla bilgi için bkz. [Standart yerleşik nesneler](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects). 
 
   > [!NOTE]
-  > Require() işlevi tarafından desteklenmeyen **satır içi kod** JavaScript çalıştırma için eylem.
+  > İşlev, JavaScript çalıştırmak için **satır içi kod** eylemi tarafından desteklenmiyor. `require()`
 
-Bu eylem, kod parçacığı çalıştırır ve çıktıyı bu kod parçacığından adlı bir belirteç döndürür. **sonucu**, hangi mantıksal uygulamanızda sonraki eylemlerde kullanabiliriz. İstediğiniz, kodunuzda bir işlev oluşturmak için diğer senaryolar için deneyin [oluşturma ve bir Azure işlevi çağırma](../logic-apps/logic-apps-azure-functions.md) mantıksal uygulamanızda.
+Bu eylem, kod parçacığını çalıştırır ve mantıksal uygulamanızdaki sonraki eylemlerde kullanabileceğiniz **Result**adlı bir belirteç olarak bu kod parçacığındaki çıktıyı döndürür. Kodunuz için bir işlev oluşturmak istediğiniz diğer senaryolar için, mantıksal uygulamanızda [bir Azure işlevi oluşturmayı ve çağırmayı](../logic-apps/logic-apps-azure-functions.md) deneyin.
 
-Bu makalede, bir Office 365 Outlook hesabı yeni bir e-posta geldiğinde örnek mantıksal uygulama Tetikleyicileri ulaşır. Kod parçacığının ayıklar ve e-posta gövdesinde görünen herhangi bir e-posta adresi döndürür.
+Bu makalede, bir Office 365 Outlook hesabına yeni bir e-posta geldiğinde örnek mantıksal uygulama tetiklenir. Kod parçacığı, e-posta gövdesinde görünen tüm e-posta adreslerini ayıklar ve döndürür.
 
-![Örnek genel bakış](./media/logic-apps-add-run-inline-code/inline-code-example-overview.png)
+![Örneğe genel bakış](./media/logic-apps-add-run-inline-code/inline-code-example-overview.png)
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 * Azure aboneliği. Azure aboneliğiniz yoksa [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/).
 
-* Mantıksal uygulama bir tetikleyici de dahil olmak üzere, kod parçacığı eklemek istediğiniz. Mantıksal uygulama yoksa bkz [hızlı başlangıç: İlk mantıksal uygulamanızı oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md).
+* Tetikleyici dahil olmak üzere kod parçacığınızı eklemek istediğiniz mantıksal uygulama. Mantıksal uygulamanız yoksa bkz [. hızlı başlangıç: İlk mantıksal uygulamanızı](../logic-apps/quickstart-create-first-logic-app-workflow.md)oluşturun.
 
-   Bu konudaki örnek mantıksal uygulama bu Office 365 Outlook tetikleyici kullanır: **Yeni bir e-posta geldiğinde**
+   Bu konudaki örnek mantık uygulaması bu Office 365 Outlook tetikleyicisini kullanır: **Yeni bir e-posta geldiğinde**
 
-* Bir [tümleştirme hesabı](../logic-apps/logic-apps-enterprise-integration-create-integration-account.md) mantıksal uygulamanıza bağlı
+* Mantıksal uygulamanıza bağlı bir [tümleştirme hesabı](../logic-apps/logic-apps-enterprise-integration-create-integration-account.md)
 
-## <a name="add-inline-code"></a>Satır içi kod ekleyin
+  > [!NOTE]
+  > Kullanım örneği veya senaryonuz için uygun bir tümleştirme hesabı kullandığınızdan emin olun. Örneğin, [ücretsiz katman](../logic-apps/logic-apps-pricing.md#integration-accounts) tümleştirme hesapları yalnızca araştırmacı senaryolar ve iş yükleri için, üretim senaryolarında değil, kullanım ve verimlilik açısından sınırlı ve hizmet düzeyi SÖZLEŞMESI (SLA) tarafından desteklenmemektedir. Diğer katmanlar maliyetlere tabi olur, ancak SLA desteğini içerir, daha fazla verimlilik sunar ve daha yüksek sınırlara sahiptir. Tümleştirme hesabı [katmanları](../logic-apps/logic-apps-pricing.md#integration-accounts), [fiyatlandırma](https://azure.microsoft.com/pricing/details/logic-apps/)ve [sınırlamalar](../logic-apps/logic-apps-limits-and-config.md#integration-account-limits)hakkında daha fazla bilgi edinin.
 
-1. Henüz kaydolmadıysanız, [Azure portalında](https://portal.azure.com), mantıksal Uygulama Tasarımcısı'nda mantıksal uygulamanızı açın.
+## <a name="add-inline-code"></a>Satır içi kod Ekle
 
-1. Tasarımcıda ekleme **satır içi kod** mantıksal uygulamanızın iş akışında istediğiniz konumda eylem.
+1. Henüz yapmadıysanız, [Azure Portal](https://portal.azure.com)mantıksal uygulama tasarımcısında mantıksal uygulamanızı açın.
 
-   * İş akışınızı sonunda eylem eklemek için **yeni adım**.
+1. Tasarımcıda, mantıksal uygulamanızın iş akışında istediğiniz konuma **satır Içi kod** eylemini ekleyin.
 
-   * Var olan adımlar arasında bir eylem eklemek için bu adımları bağlanan okun üzerine fare işaretçisini taşıyın. Artı işaretini seçin ( **+** ) seçip **Eylem Ekle**.
+   * Eylemi iş akışınızın sonunda eklemek için **yeni adım**' ı seçin.
 
-   Bu örnek ekler **satır içi kod** eylemi Office 365 Outlook tetikleyicinin altında.
+   * Varolan adımlar arasında eylem eklemek için fare işaretçinizi bu adımları bağlayan okun üzerine taşıyın. Artı işaretini ( **+** ) seçin ve **Eylem Ekle**' yi seçin.
+
+   Bu örnek, Office 365 Outlook tetikleyicisinin altındaki **satır Içi kod** eylemini ekler.
 
    ![Yeni adım Ekle](./media/logic-apps-add-run-inline-code/add-new-step.png)
 
-1. Altında **eylem seçin**, arama kutusuna filtreniz olarak "satır içi kod" girin. Eylem listesinden şu eylemi seçin: **JavaScript kodu yürütme**
+1. **Eylem seçin**altında, arama kutusuna filtreniz olarak "satır içi kod" yazın. Eylemler listesinden şu eylemi seçin: **JavaScript kodunu Yürüt**
 
-   !["JavaScript kodu yürütme" seçin](./media/logic-apps-add-run-inline-code/select-inline-code-action.png)
+   !["JavaScript kodunu Yürüt" i seçin](./media/logic-apps-add-run-inline-code/select-inline-code-action.png)
 
-   Eylem Tasarımcısı'nda görünür ve bir dönüş ifadesi'dahil olmak üzere bazı varsayılan örnek kodunu içerir.
+   Eylem tasarımcıda görünür ve dönüş ifadesi dahil olmak üzere bazı varsayılan örnek kod içerir.
 
-   ![Varsayılan örnek kod ile satır içi kod eylemi](./media/logic-apps-add-run-inline-code/inline-code-action-default.png)
+   ![Varsayılan örnek kodlu satır içi kod eylemi](./media/logic-apps-add-run-inline-code/inline-code-action-default.png)
 
-1. İçinde **kod** kutusuna örnek kodu silin ve çalıştırmak istediğiniz kodu girin. Bir yöntem içinde ancak yöntem imzası tanımlama olmadan koyabilirsiniz kod yazın. 
+1. **Kod** kutusunda, örnek kodu silin ve çalıştırmak istediğiniz kodu girin. Yöntem imzasını tanımlamadan, bir yöntemin içine yerleştirdiğiniz kodu yazın. 
 
-   Tanınan bir anahtar sözcüğü yazın, kullanılabilir sözcüklerden örneğin seçebilmeniz için otomatik tamamlama listesi görünür:
+   Tanınan bir anahtar sözcük yazdığınızda, otomatik tamamlama listesi görüntülenir, böylece kullanılabilir anahtar sözcüklerden seçim yapabilirsiniz, örneğin:
 
-   ![Anahtar sözcüğü otomatik tamamlama listesi](./media/logic-apps-add-run-inline-code/auto-complete.png)
+   ![Anahtar sözcük otomatik tamamlama listesi](./media/logic-apps-add-run-inline-code/auto-complete.png)
 
-   Bu örnek kod parçacığı ilk olarak depolayan bir değişken oluşturur bir *normal ifade*, giriş metninde eşleştirmeyi için bir desen belirtir. Kodu daha sonra tetikleyici için e-posta gövdesi verilerini depolayan bir değişken oluşturur.
+   Bu örnek kod parçacığı ilk olarak, giriş metninde eşleştirilecek bir model belirten *normal ifade*depolayan bir değişken oluşturur. Daha sonra kod, tetikleyiciden e-posta gövdesi verilerini depolayan bir değişken oluşturur.
 
    ![Değişken oluşturma](./media/logic-apps-add-run-inline-code/save-email-body-variable.png)
 
-   Tetikleyici ve Eylemler önceki sonuçlardan başvuru kolaylaştırmak için imlecinizi iç ederken dinamik içerik listesi görünür **kod** kutusu. Bu örnekte, liste tetikleyiciden kullanılabilir sonuçları gösterir dahil olmak üzere **gövdesi** belirteci artık seçebilirsiniz.
+   Tetikleyiciden ve önceki eylemlerin sonuçlarını daha kolay başvuruya getirmek için, imleiniz **kod** kutusunun içindeyken dinamik içerik listesi görüntülenir. Bu örnekte, liste, artık seçebileceğiniz **gövde** belirteci dahil olmak üzere tetikleyiciden kullanılabilir sonuçları gösterir.
 
-   Seçtikten sonra **gövdesi** belirteç, satır içi kod eylemi belirtece çözümlenen bir `workflowContext` e-postanın başvuran nesne `Body` özellik değeri:
+   **Gövde** belirtecini seçtikten sonra, satır içi kod eylemi, belirteci e-postanın `workflowContext` `Body` özellik değerine başvuran bir nesneye çözümler:
 
-   ![Sonucu seçin](./media/logic-apps-add-run-inline-code/inline-code-example-select-outputs.png)
+   ![Sonuç seçin](./media/logic-apps-add-run-inline-code/inline-code-example-select-outputs.png)
 
-   İçinde **kod** kutusunda parçacığınızı salt okunur kullanabilirsiniz `workflowContext` giriş olarak nesnesi. Bu nesne, tetikleyici ve önceki eylemlerin iş sonuçları, kod erişim vermek alt özellikleri vardır.
-   Daha fazla bilgi için bu konunun ilerleyen bölümlerinde bu bölümüne bakın: [Tetikleyici ve eylem sonuçlarını, kodunuzda başvuru](#workflowcontext).
+   Kod kutusunda, **kod** parçacığında, salt okunurdur `workflowContext` nesnesini giriş olarak kullanabilirsiniz. Bu nesne, kodunuzu tetikleyiciden gelen sonuçlara ve iş akışınızdan önceki eylemlere erişim sağlayan alt özellikler içerir.
+   Daha fazla bilgi için bu konunun ilerleyen kısımlarında bu bölüme bakın: [Başvuru tetikleyicisi ve eylem, kodunuzda sonuçlanır](#workflowcontext).
 
    > [!NOTE]
    >
-   > Kod parçacığınızı nokta (.) işlecini kullanan eylem adları başvuruyorsa, bu eylem adları için eklemelisiniz [ **eylemleri** parametre](#add-parameters). Bu başvuruları da örneğin eylem adları köşeli ayraç ([]) ve tırnak işaretleri ile almalısınız:
+   > Kod parçacığınızı nokta (.) işlecini kullanan eylem adlarına başvuruyorsa, bu eylem adlarını [ **Eylemler** parametresine](#add-parameters)eklemeniz gerekir. Bu başvurular Ayrıca eylem adlarını köşeli ayraç ([]) ve tırnak işaretleriyle birlikte içermelidir, örneğin:
    >
    > `// Correct`</br> 
    > `workflowContext.actions["my.action.name"].body`</br>
@@ -95,8 +99,8 @@ Bu makalede, bir Office 365 Outlook hesabı yeni bir e-posta geldiğinde örnek 
    > `// Incorrect`</br>
    > `workflowContext.actions.my.action.name.body`
 
-   Satır içi kod eylemi gerektirmeyen bir `return` deyimi, ancak sonuçları bir `return` deyimi, sonraki eylemleri başvuru için kullanılabilir **sonucu** belirteci. 
-   Örneğin, kod parçacığının çağırarak sonucunu döndürür `match()` işlevi, hangi bulduğu eşleşen normal ifade karşı e-posta gövdesindeki. **Compose** eylem kullandığı **sonucu** belirteci başvurmak için satır içi sonuçlardan kod eylemi ve tek bir sonuç oluşturur.
+   Satır içi kod eylemi bir `return` ifade gerektirmez, ancak bir `return` deyimin sonuçları sonraki eylemlerde **sonuç** belirteci aracılığıyla başvuru için kullanılabilir. 
+   Örneğin, kod parçacığı, normal ifadeye karşılık gelen e-posta `match()` gövdesinde eşleşmeleri bulan işlevi çağırarak sonucu döndürür. **Oluşturma** eylemi, satır içi kod eyleminin sonuçlarına başvurmak için **sonuç** belirtecini kullanır ve tek bir sonuç oluşturur.
 
    ![Tamamlanmış mantıksal uygulama](./media/logic-apps-add-run-inline-code/inline-code-complete-example.png)
 
@@ -104,9 +108,9 @@ Bu makalede, bir Office 365 Outlook hesabı yeni bir e-posta geldiğinde örnek 
 
 <a name="workflowcontext"></a>
 
-### <a name="reference-trigger-and-action-results-in-your-code"></a>Kodunuzda başvuru tetikleyici ve eylem sonuçları
+### <a name="reference-trigger-and-action-results-in-your-code"></a>Kodunuzda başvuru tetikleyicisi ve eylem sonuçları
 
-`workflowContext` Nesnesinde içerir, bu yapı `actions`, `trigger`, ve `workflow` alt:
+Nesnesi,, `trigger`ve `actions` altözellikleriiçerenbuyapıyasahiptir`workflow`: `workflowContext`
 
 ```json
 {
@@ -129,12 +133,12 @@ Bu tablo, bu alt özellikler hakkında daha fazla bilgi içerir:
 
 | Özellik | Tür | Açıklama |
 |----------|------|-------|
-| `actions` | Nesne koleksiyonu | Sonuç nesnelerini kod parçacığınız çalışmadan önce çalıştırmak Eylemlerdeki. Her bir nesnenin sahip bir *anahtar-değer* burada anahtarı bir eylemin adı ve değeri çağırmakla eşdeğerdir çifti [actions() işlevi](../logic-apps/workflow-definition-language-functions-reference.md#actions) ile `@actions('<action-name>')`. Eylemin adı boşluk değiştirir temel iş akışı tanımında kullanılan eylem adının aynısını kullanır ("") eylem adı alt çizgi (_). Bu nesne, eylem özellik değerlerini çalıştırmak geçerli iş akışı örneğinden erişim sağlar. |
-| `trigger` | Object | Arama için sonuç nesnesi tetikleyici ve eşdeğer [trigger() işlevi](../logic-apps/workflow-definition-language-functions-reference.md#trigger). Bu nesne, geçerli iş akışı örneği çalıştırmak tetikleyicisi özellik değerlerine erişim sağlar. |
-| `workflow` | Object | Arama eşdeğerdir ve iş akışı nesnesini [akışı() işlevi](../logic-apps/workflow-definition-language-functions-reference.md#workflow). Bu nesne erişim çalıştırmak geçerli iş akışı örneğinden iş akışı adı, çalıştırma kimliği ve vb. gibi iş akışı özellik değerlerini sağlar. |
+| `actions` | Nesne koleksiyonu | Kod parçacığınızdan önce çalışan eylemlerden elde edilen sonuç nesneleri. Her bir nesne, anahtarın bir eylemin adı olduğu ve değeri ile `@actions('<action-name>')` [eylem () işlevinin](../logic-apps/workflow-definition-language-functions-reference.md#actions) çağrılmasının eşdeğeri olan *anahtar-değer* çiftine sahiptir. Eylemin adı, temel alınan iş akışı tanımında kullanılan aynı eylem adını kullanır. Bu, eylem adındaki boşluklar ("") alt çizgi (_) ile değiştirir. Bu nesne, geçerli iş akışı örneğinden çalıştırılan eylem özelliği değerlerine erişim sağlar. |
+| `trigger` | Object | Tetikleyiciden elde edilen sonuç nesnesi ve [Trigger () işlevini](../logic-apps/workflow-definition-language-functions-reference.md#trigger)çağırma ile eşdeğerdir. Bu nesne, geçerli iş akışı örneği çalıştırağından tetikleme özelliği değerlerine erişim sağlar. |
+| `workflow` | Object | Workflow nesnesi ve [Workflow () işlevini](../logic-apps/workflow-definition-language-functions-reference.md#workflow)çağırmaya eşdeğerdir. Bu nesne, geçerli iş akışı örneğinden çalıştırılan iş akışı adı, çalıştırma KIMLIĞI gibi iş akışı özellik değerlerine erişim sağlar. |
 |||
 
-Bu konunun örnekte `workflowContext` nesne kodunuzu erişebileceği şu özelliklere sahiptir:
+Bu konunun örneğinde, `workflowContext` nesnesi kodunuzun erişebileceği şu özelliklere sahiptir:
 
 ```json
 {
@@ -204,65 +208,65 @@ Bu konunun örnekte `workflowContext` nesne kodunuzu erişebileceği şu özelli
 
 <a name="add-parameters"></a>
 
-## <a name="add-parameters"></a>Parametre ekleme
+## <a name="add-parameters"></a>Parametre ekle
 
-Bazı durumlarda, açıkça gerektiren gerekebilir **satır içi kod** eylem sonuçlardan ekleyerek kod bağımlılıkları olarak başvuran tetikleyicisi veya belirli eylemler içeriyorsa **tetikleyici** veya **Eylemleri** parametreleri. Bu seçenek, çalışma zamanında başvurulan sonuçları bulunduğu olmayan senaryolar için kullanışlıdır.
+Bazı durumlarda, **satır Içi kod** eyleminin **tetikleyici veya** **eylem** parametrelerini ekleyerek tetikleyiciden gelen sonuçları veya kodun bağımlılıklar olarak başvurduğu belirli eylemleri içermesi gerekebilir. Bu seçenek, başvurulan sonuçların çalışma zamanında bulunamadığı senaryolar için yararlıdır.
 
 > [!TIP]
-> Kodunuzu yeniden kullanmayı planlıyorsanız, özellikler için başvuru kullanarak eklemek **kod** tetikleyici veya eylem özel bağımlılıklar eklemek yerine kodunuzu çözümlenen belirteci başvuruları içeren kutusu.
+> Kodunuzu yeniden kullanmayı planlıyorsanız, kodunuzun, tetikleyici veya eylemleri açık bağımlılıklar olarak eklemek yerine çözümlenen belirteç başvurularını içermesi için **kod** kutusunu kullanarak özelliklere başvurular ekleyin.
 
-Örneğin, başvuran kod olduğunu varsayalım **SelectedOption** sonucunda **onay e-posta Gönder** Office 365 Outlook Bağlayıcısı için eylem. Oluşturma zamanı, Logic Apps altyapısı, herhangi bir tetikleyici başvurulan veya eylem sonuçlarını ve bu sonuçları otomatik olarak dahil olup olmadığını belirlemek için kodunuzu analiz eder. Çalışma zamanında, başvurulan tetikleyici veya eylem sonucu belirtilen kullanılabilir olmayan bir hata almalısınız `workflowContext` ekleyebilirsiniz, tetikleyici veya eylemi açık bir bağımlılık olarak nesnesi. Bu örnekte, eklediğiniz **eylemleri** parametresi belirleyen **satır içi kod** eylem sonucu açıkça dahil **onay e-posta Gönder** eylem.
+Örneğin, Office 365 Outlook Bağlayıcısı için **onay e-postası gönder** eyleminden **SelectedOption** sonucuna başvuran bir kodunuz olduğunu varsayalım. Oluşturma zamanında, Logic Apps altyapısı, herhangi bir tetikleyici veya eylem sonucuna başvurulduğunu ve bu sonuçları otomatik olarak içerip içermediğini anlamak için kodunuzu analiz eder. Çalışma zamanında, başvurulan tetikleyici veya eylem sonucunun belirtilen `workflowContext` nesnede kullanılamadığı bir hata almanız gerekir, bu tetikleyiciyi veya eylemi açık bir bağımlılık olarak ekleyebilirsiniz. Bu örnekte, **Eylemler** parametresini ekler ve **satır içi kod** eyleminin **onay e-postası gönder** eyleminden sonucu açıkça içermesini belirtirsiniz.
 
-Bu parametre eklemek için açık **yeni parametre Ekle** listelemek ve istediğiniz parametreleri seçin:
+Bu parametreleri eklemek için **yeni parametre Ekle** listesini açın ve istediğiniz parametreleri seçin:
 
-   ![Parametre ekleme](./media/logic-apps-add-run-inline-code/inline-code-action-add-parameters.png)
+   ![Parametre ekle](./media/logic-apps-add-run-inline-code/inline-code-action-add-parameters.png)
 
    | Parametre | Açıklama |
    |-----------|-------------|
-   | **Eylemler** | Önceki Eylemlerdeki sonuçları içerir. Bkz: [eylem sonuçlarında](#action-results). |
-   | **Tetikleyici** | Tetikleyici sonuçlarını içerir. Bkz: [INCLUDE tetikleyici sonuçları](#trigger-results). |
+   | **Eylemler** | Önceki eylemlerden sonuçları dahil edin. Bkz. [eylem sonuçlarını dahil et](#action-results). |
+   | **Tetikleyici** | Tetikleyiciden sonuçları ekleyin. Bkz. [tetikleyici sonuçlarını ekleme](#trigger-results). |
    |||
 
 <a name="trigger-results"></a>
 
-### <a name="include-trigger-results"></a>Tetikleyici sonuçları dahil et
+### <a name="include-trigger-results"></a>Tetikleyici sonuçlarını dahil et
 
-Seçerseniz **Tetikleyicileri**, sonuçlarını tetikleyici dahil etmek için olup olmadığını istenir.
+**Tetikleyiciler**' i seçerseniz, tetikleyici sonuçlarının dahil edilip edilmeyeceğini girmeniz istenir.
 
-* Gelen **tetikleyici** listesinden **Evet**.
+* **Tetikleyici** listesinden **Evet**' i seçin.
 
 <a name="action-results"></a>
 
-### <a name="include-action-results"></a>Eylem sonuçlarını içerir.
+### <a name="include-action-results"></a>Eylem sonuçlarını dahil et
 
-Seçerseniz **eylemleri**, istenir, eklemek istediğiniz eylemleri için. Ancak, Eylemler ekleme başlamadan önce mantıksal uygulamanın temel iş akışı tanımı içinde görünen eylem adı sürümü gerekir.
+**Eylemler**' i seçerseniz, eklemek istediğiniz eylemler istenir. Ancak, eylem eklemeye başlamadan önce mantıksal uygulamanın temel alınan iş akışı tanımında görüntülenen eylem adı sürümüne ihtiyacınız vardır.
 
-* Bu özellik, değişkenleri, döngüler ve yineleme dizinler desteklemiyor.
+* Bu özellik değişkenleri, döngüleri ve yineleme dizinlerini desteklemez.
 
-* Mantıksal uygulamanızın iş akışı tanımı adları alt çizgi (_), bir alanı kullanın.
+* Mantıksal uygulamanızın iş akışı tanımındaki adlar boşluk değil bir alt çizgi (_) kullanır.
 
-* Nokta işleci (.) eylem adları için örneğin bu işleçler şunlardır:
+* Nokta işleci (.) kullanan eylem adları için bu işleçleri dahil edin, örneğin:
 
   `My.Action.Name`
 
-1. Tasarımcı araç çubuğunda **kod görünümü**, içinde arama ve `actions` özniteliği eylem adı.
+1. Tasarımcı araç çubuğunda **kod görünümü**' ne tıklayın ve eylem adı için `actions` özniteliği içinde arama yapın.
 
-   Örneğin, `Send_approval_email_` JSON adı **onay e-posta Gönder** eylem.
+   Örneğin, `Send_approval_email_` **onay e-postası gönder** eyleminin JSON adıdır.
 
-   ![Eylem adı, JSON'da bulun](./media/logic-apps-add-run-inline-code/find-action-name-json.png)
+   ![JSON 'da eylem adını bul](./media/logic-apps-add-run-inline-code/find-action-name-json.png)
 
-1. Kod Görünümü araç çubuğunda, Tasarımcı görünümü dönmek için **Tasarımcısı**.
+1. Tasarımcı görünümü ' ne dönmek için, kod görünümü araç çubuğunda **Tasarımcı**' yı seçin.
 
-1. İlk eylem eklemek için **eylemleri öğesi - 1** kutusu, eylem JSON adı girin.
+1. İlk eylemi eklemek için, **Eylemler öğesi-1** kutusuna eylemin JSON adını girin.
 
-   ![İlk eylem girin](./media/logic-apps-add-run-inline-code/add-action-parameter.png)
+   ![İlk eylemi girin](./media/logic-apps-add-run-inline-code/add-action-parameter.png)
 
-1. Başka bir eylem eklemek için **Yeni Öğe Ekle**.
+1. Başka bir eylem eklemek için **Yeni öğe Ekle**' yi seçin.
 
 ## <a name="reference"></a>Başvuru
 
-Hakkında daha fazla bilgi için **yürütme JavaScript kodunu** eylemin yapısı ve mantıksal uygulamanızın iş akışı tanımlama dili kullanarak temel iş akışı tanımı sözdiziminde bkz bu eylemin [bölümü başvurusu ](../logic-apps/logic-apps-workflow-actions-triggers.md#run-javascript-code).
+Mantıksal uygulamanızın temel alınan iş akışı tanımında Iş akışı tanım dilini kullanarak **JavaScript kodu yürütme** eyleminin yapısını ve sözdizimini Çalıştır hakkında daha fazla bilgi için, bu eylemin [başvuru bölümüne](../logic-apps/logic-apps-workflow-actions-triggers.md#run-javascript-code)bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla bilgi edinin [Azure Logic Apps için bağlayıcılar](../connectors/apis-list.md)
+[Azure Logic Apps Için bağlayıcılar](../connectors/apis-list.md) hakkında daha fazla bilgi edinin

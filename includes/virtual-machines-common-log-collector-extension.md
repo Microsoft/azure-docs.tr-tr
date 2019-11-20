@@ -4,24 +4,24 @@ ms.service: virtual-machines
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: cynthn
-ms.openlocfilehash: 072864d565e2edbddd4b7df851ad0e30daf7e5fa
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 09c4420647043fccc408631fec75854667923721
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188395"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74085284"
 ---
-Microsoft Azure bulut hizmeti sorunları tanılama, sorunlar ortaya çıktığında sanal makineler hizmetin günlük dosyalarını toplama gerektirir. AzureLogCollector uzantısı isteğe bağlı bir veya daha fazla bulut hizmeti Vm'lerden (web rolleri ve çalışan rolleri için) tek seferlik günlüklerin toplanmasını gerçekleştirin ve tüm hizmetlerde oturum uzaktan olmadan bir Azure depolama hesabına – toplanan dosyaları aktarmak için kullanabileceğiniz Sanal makinelerin.
+Microsoft Azure bulut hizmeti ile ilgili sorunları tanılamak, sorunlar oluşması durumunda hizmetin günlük dosyalarının sanal makinelerde toplanmasını gerektirir. Bir veya daha fazla bulut hizmeti sanal makinelerinden (her iki web rolünden ve çalışan rolünden) tek seferlik bir günlük koleksiyonu gerçekleştirmek ve toplanan dosyaları bir Azure depolama hesabına aktarmak için isteğe bağlı AzureLogCollector uzantısını kullanabilirsiniz; Bu, herhangi bir uzaktan oturum açmadan , VM 'Ler.
 
 > [!NOTE]
-> Günlüğe kaydedilen bilgileri çoğu için açıklamalar bulunabilir http://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.asp.
+> Günlüğe kaydedilen bilgilerin çoğunun açıklamaları https://blogs.msdn.microsoft.com/kwill/2013/08/09/windows-azure-paas-compute-diagnostics-data/ adresinde bulunabilir
 > 
 > 
 
-Toplanacak dosyaları türlerine bağımlı koleksiyonun iki mod vardır.
+Toplanacak dosya türlerine bağlı iki koleksiyon modu vardır.
 
-* **Azure Konuk Aracısı günlükleri yalnızca (GA)** . Bu koleksiyon modu Azure Konuk aracısı ve diğer Azure bileşenlerini ilgili tüm günlükleri içerir.
-* **Tüm günlükler (tam)** . Bu koleksiyon modu GA modunda, plus tüm dosyaları toplar:
+* **Yalnızca Azure Konuk Aracısı günlükleri (GA)** . Bu koleksiyon modu, Azure Konuk aracıları ve diğer Azure bileşenleriyle ilgili tüm günlükleri içerir.
+* **Tüm Günlükler (tam)** . Bu koleksiyon modu, tüm dosyaları GA modunda toplar ve:
   
   * Sistem ve uygulama olay günlükleri
   * HTTP hata günlükleri
@@ -29,28 +29,28 @@ Toplanacak dosyaları türlerine bağımlı koleksiyonun iki mod vardır.
   * Kurulum günlükleri
   * diğer sistem günlükleri
 
-Her iki koleksiyon modda aşağıdaki yapıya koleksiyonunu kullanarak ek veri koleksiyon klasörleri belirtilebilir:
+Her iki koleksiyon modunda, aşağıdaki yapının bir koleksiyonu kullanılarak ek veri toplama klasörleri belirtilebilir:
 
-* **Ad**: Toplanan dosyaları zip dosyası içinde bir alt klasör adı olarak kullanılacak koleksiyonun adı.
-* **Konum**: Sanal makinede toplanacak dosyalarının bulunduğu klasörü yolu.
-* **SearchPattern**: Toplanacak dosya adlarını deseni. Varsayılan değer "\*"
-* **Özyinelemeli**: Belirtilen konum altında bulunan yinelemeli olarak toplanacak dosyaları olması durumunda.
+* **Ad**: koleksiyonun adı, toplanan dosyalarla ZIP dosyasının içindeki alt klasörün adı olarak kullanılır.
+* **Konum**: sanal makinede toplanacak dosyaların bulunduğu klasörün yolu.
+* **Searchmodel**: toplanacak dosyaların adlarının kalıbı. Varsayılan değer "\*"
+* **Özyinelemeli**: toplanacak dosyalar belirtilen konumun altına özyinelemeli olarak konumlandırıldı.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE [updated-for-az](./updated-for-az.md)]
 
-* Oluşturulan zip dosyaları kaydetmek uzantı için bir depolama hesabına sahip.
-* Azure PowerShell. Bkz: [Azure PowerShell yükleme](/powershell/azure/install-az-ps)] yükleme yönergeleri için.
+* Oluşturulmuş ZIP dosyalarını kaydetmek için uzantı için bir depolama hesabına sahip olmanız gerekir.
+* Azure PowerShell. Bkz. Install [Azure PowerShell](/powershell/azure/install-az-ps)] for Install yönergeleri.
 
 ## <a name="add-the-extension"></a>Uzantıyı ekleme
-Kullanabileceğiniz [Microsoft Azure PowerShell](https://msdn.microsoft.com/library/dn495240.aspx) cmdlet'leri veya [Hizmet Yönetimi REST API'lerini](https://msdn.microsoft.com/library/ee460799.aspx) AzureLogCollector uzantısı eklemek için.
+AzureLogCollector uzantısını eklemek için [Microsoft Azure PowerShell](https://msdn.microsoft.com/library/dn495240.aspx) cmdlet 'Lerini veya [hizmet yönetimi REST API 'lerini](https://msdn.microsoft.com/library/ee460799.aspx) kullanabilirsiniz.
 
-Bulut Hizmetleri, mevcut Azure Powershell cmdlet'i için **kümesi AzureServiceExtension**, bulut Hizmeti rol örneklerinde uzantıyı etkinleştirmek için kullanılabilir. Bu uzantı Bu cmdlet ile etkin her seferinde, günlük toplama seçilen rollerin seçili rol örneklerinde tetiklenir.
+Cloud Services için, var olan Azure PowerShell cmdlet 'i, **set-AzureServiceExtension**, bulut hizmeti rol örneklerinde uzantıyı etkinleştirmek için kullanılabilir. Bu cmdlet aracılığıyla bu uzantı her etkinleştirildiğinde, seçilen rollerin seçili rol örneklerinde günlük koleksiyonu tetiklenir.
 
-Sanal makineler, mevcut Azure Powershell cmdlet'i için **kümesi AzureVMExtension**, sanal makinelerde uzantıyı etkinleştirmek için kullanılabilir. Bu uzantı cmdlet'leri aracılığıyla etkin her seferinde, günlük toplama her örneğinde tetiklenir.
+Sanal makinelerde, sanal makinelerde uzantıyı etkinleştirmek için, **set-AzureVMExtension**, mevcut Azure PowerShell cmdlet 'i kullanılabilir. Bu uzantı cmdlet 'ler aracılığıyla her etkinleştirildiğinde, her bir örnek üzerinde günlük koleksiyonu tetiklenir.
 
-Dahili olarak, bu uzantı, JSON tabanlı PublicConfiguration ve PrivateConfiguration kullanır. Genel ve özel yapılandırması için örnek JSON düzenini verilmiştir.
+Bu uzantı, dahili olarak JSON tabanlı PublicConfiguration ve PrivateConfiguration kullanır. Ortak ve özel yapılandırma için örnek bir JSON 'nin düzeni aşağıda verilmiştir.
 
 ### <a name="publicconfiguration"></a>PublicConfiguration
 
@@ -86,15 +86,15 @@ Dahili olarak, bu uzantı, JSON tabanlı PublicConfiguration ve PrivateConfigura
 ```
 
 > [!NOTE]
-> Bu uzantı gerekmiyor **privateConfiguration**. Yalnızca boş bir yapısına sağlayabilir **– PrivateConfiguration** bağımsız değişken.
+> Bu uzantının **Privateconfiguration**'ı olması gerekmez. **– Privateconfiguration** bağımsız değişkeni için yalnızca boş bir yapı sağlayabilirsiniz.
 > 
 > 
 
-Bir veya daha fazla örneğini bir bulut hizmeti veya sanal makine seçilen rollerin koleksiyonları çalıştırmak ve belirtilen Azure hesabı için toplanan dosyaları göndermek için her VM'de tetikler AzureLogCollector eklemek için aşağıdaki iki adımlardan birini izleyebilirsiniz.
+AzureLogCollector 'i bir veya daha fazla bulut hizmeti örneğine veya seçili rollerin sanal makinesine eklemek için aşağıdaki iki adımdan birini izleyebilirsiniz. Bu, her bir VM 'deki koleksiyonları çalıştırmak ve toplanan dosyaları belirtilen Azure hesabına göndermek için tetikler.
 
-## <a name="adding-as-a-service-extension"></a>Bir hizmet uzantısı olarak ekleme
-1. Azure PowerShell aboneliğinize bağlanmak için yönergeleri izleyin.
-2. Ekleme ve AzureLogCollector uzantıyı etkinleştirmek istediğiniz hizmet adı, yuva, rolleri ve rol örnekleri belirtin.
+## <a name="adding-as-a-service-extension"></a>Hizmet uzantısı olarak ekleme
+1. Azure PowerShell aboneliğinize bağlamak için yönergeleri izleyin.
+2. AzureLogCollector uzantısını eklemek ve etkinleştirmek istediğiniz hizmet adını, yuvasını, rolleri ve rol örneklerini belirtin.
 
    ```powershell
    #Specify your cloud service name
@@ -113,7 +113,7 @@ Bir veya daha fazla örneğini bir bulut hizmeti veya sanal makine seçilen roll
    $mode = "GA"
    ```
 
-3. Dosyaları toplanacak ek veri klasörü belirtin (Bu adım isteğe bağlıdır).
+3. Dosyaların toplanacağı ek veri klasörünü belirtin (Bu adım isteğe bağlıdır).
 
    ```powershell
    #add one location
@@ -129,23 +129,23 @@ Bir veya daha fazla örneğini bir bulut hizmeti veya sanal makine seçilen roll
    ```
 
    > [!NOTE]
-   > Belirteci kullanabilirsiniz `%roleroot%` bir sabit sürücü kullanmaz olduğundan rol kök sürücüsünde belirtmek için.
+   > Sabit bir sürücü kullanmasından bu yana rol kök sürücüsünü belirtmek için belirteç `%roleroot%` kullanabilirsiniz.
    > 
    > 
-4. Azure depolama hesabı adı ve toplanan dosyalar karşıya yüklenecek bir anahtar sağlar.
+4. Toplanan dosyaların yükleneceği Azure depolama hesabı adını ve anahtarını belirtin.
 
    ```powershell
    $StorageAccountName = 'YourStorageAccountName'
    $StorageAccountKey  = 'YourStorageAccountKey'
    ```
 
-5. (Bir makalenin sonunda bulunur) SetAzureServiceLogCollector.ps1 yönelik bir bulut hizmeti AzureLogCollector uzantıyı etkinleştirmek için şu şekilde çağırın. Yürütme tamamlandıktan sonra karşıya yüklenen dosya altında bulabilirsiniz. `https://YourStorageAccountName.blob.core.windows.net/vmlogs`
+5. Bir bulut hizmeti için AzureLogCollector uzantısını etkinleştirmek üzere aşağıdaki şekilde SetAzureServiceLogCollector. ps1 (makalenin sonuna dahildir) öğesini çağırın. Yürütme tamamlandıktan sonra karşıya yüklenen dosyayı `https://YourStorageAccountName.blob.core.windows.net/vmlogs` altına bulabilirsiniz.
 
    ```powershell
    .\SetAzureServiceLogCollector.ps1 -ServiceName YourCloudServiceName  -Roles $roles  -Instances $instances –Mode $mode -StorageAccountName $StorageAccountName -StorageAccountKey $StorageAccountKey -AdditionDataLocationList $AdditionalDataList
    ```
 
-Aşağıdaki betiğe geçirilen parametreler tanımıdır. (Bu aşağıda da kopyalanır.)
+Aşağıda, Betiğe geçirilen parametrelerin tanımı verilmiştir. (Bu, aşağıda de kopyalanır.)
 
 ```powershell
 [CmdletBinding(SupportsShouldProcess = $true)]
@@ -177,14 +177,14 @@ param (
 )
 ```
 
-* **ServiceName**: Bulut hizmeti adı.
-* **rolleri**: "WebRole1" veya "WorkerRole1" gibi rollerinin listesi.
-* **Örnekleri**: Rol örneği--virgülle ayırarak adları listesini bir joker karakter dizesi kullanın ("*") tüm rol örnekleri için.
-* **Yuva**: Yuva adı. "Üretim" veya "Hazırlama".
-* **Modu**: Koleksiyon modu. "Tam" veya "GA".
-* **StorageAccountName**: Toplanan verileri depolamak için Azure depolama hesabı adı.
-* **StorageAccountKey**: Azure depolama hesabı anahtarı adı.
-* **AdditionalDataLocationList**: Aşağıdaki yapı listesi:
+* **HizmetAdı**: bulut hizmeti adınız.
+* **Roller**: "WebRole1" veya "WorkerRole1" gibi rollerin bir listesi.
+* **Örnekler**: virgülle ayrılmış rol örneklerinin adlarının bir listesi--tüm rol örnekleri için joker ("*") dizesini kullanın.
+* **Yuva**: yuva adı. "Üretim" veya "hazırlama".
+* **Mode**: toplama modu. "Tam" veya "GA".
+* **StorageAccountName**: toplanan verileri depolamak için Azure depolama hesabının adı.
+* **Storageaccountkey**: Azure depolama hesabı anahtarının adı.
+* **Additionaldatalocationlist**: aşağıdaki yapının listesi:
 
   ```powershell
   {
@@ -195,10 +195,10 @@ param (
   }
   ```
 
-## <a name="adding-as-a-vm-extension"></a>VM uzantısı ekleme
-Azure PowerShell aboneliğinize bağlanmak için yönergeleri izleyin.
+## <a name="adding-as-a-vm-extension"></a>VM uzantısı olarak ekleme
+Azure PowerShell aboneliğinize bağlamak için yönergeleri izleyin.
 
-1. Hizmet adı, VM ve koleksiyon modu belirtin.
+1. Hizmet adını, VM 'yi ve koleksiyon modunu belirtin.
 
    ```powershell
    #Specify your cloud service name
@@ -224,16 +224,16 @@ Azure PowerShell aboneliğinize bağlanmak için yönergeleri izleyin.
         #more locations can be added....
    ```
   
-2. Azure depolama hesabı adı ve toplanan dosyalar karşıya yüklenecek bir anahtar sağlar.
+2. Toplanan dosyaların yükleneceği Azure depolama hesabı adını ve anahtarını belirtin.
 
    ```powershell
    $StorageAccountName = 'YourStorageAccountName'
    $StorageAccountKey  = 'YourStorageAccountKey'
    ```
 
-3. (Bir makalenin sonunda bulunur) SetAzureVMLogCollector.ps1 yönelik bir bulut hizmeti AzureLogCollector uzantıyı etkinleştirmek için şu şekilde çağırın. Yürütme tamamlandıktan sonra karşıya yüklenen dosya altında bulabilirsiniz. `https://YourStorageAccountName.blob.core.windows.net/vmlogs`
+3. Bir bulut hizmeti için AzureLogCollector uzantısını etkinleştirmek üzere aşağıdaki şekilde SetAzureVMLogCollector. ps1 (makalenin sonuna dahildir) öğesini çağırın. Yürütme tamamlandıktan sonra karşıya yüklenen dosyayı `https://YourStorageAccountName.blob.core.windows.net/vmlogs` altına bulabilirsiniz.
 
-Aşağıdaki betiğe geçirilen parametreler tanımıdır. (Bu aşağıda da kopyalanır.)
+Aşağıda, Betiğe geçirilen parametrelerin tanımı verilmiştir. (Bu, aşağıda de kopyalanır.)
 
 ```powershell
 [CmdletBinding(SupportsShouldProcess = $true)]
@@ -259,12 +259,12 @@ param (
 )
 ```
 
-* **ServiceName**: Bulut hizmeti adı.
-* **VMName**: VM adı.
-* **Modu**: Koleksiyon modu. "Tam" veya "GA".
-* **StorageAccountName**: Toplanan verileri depolamak için Azure depolama hesabı adı.
-* **StorageAccountKey**: Azure depolama hesabı anahtarı adı.
-* **AdditionalDataLocationList**: Aşağıdaki yapı listesi:
+* **HizmetAdı**: bulut hizmeti adınız.
+* **VMName**: sanal makinenin adı.
+* **Mode**: toplama modu. "Tam" veya "GA".
+* **StorageAccountName**: toplanan verileri depolamak için Azure depolama hesabının adı.
+* **Storageaccountkey**: Azure depolama hesabı anahtarının adı.
+* **Additionaldatalocationlist**: aşağıdaki yapının listesi:
 
   ```
   {
@@ -275,7 +275,7 @@ param (
   }
   ```
 
-## <a name="extention-powershell-script-files"></a>Uzantı PowerShell komut dosyaları
+## <a name="extention-powershell-script-files"></a>Uzantı PowerShell betik dosyaları
 ### <a name="setazureservicelogcollectorps1"></a>SetAzureServiceLogCollector.ps1
 
 ```powershell
@@ -527,5 +527,5 @@ else
 ```
 
 ## <a name="next-steps"></a>Sonraki Adımlar
-Şimdi inceleyin veya günlüklerinizi basit bir konumdan kopyalayın.
+Artık günlüklerinizi tek bir basit konumdan inceleyebilir veya kopyalayabilirsiniz.
 

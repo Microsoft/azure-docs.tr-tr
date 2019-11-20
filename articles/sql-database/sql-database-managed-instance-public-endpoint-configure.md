@@ -1,6 +1,6 @@
 ---
-title: Yapılandırma genel uç nokta - Azure SQL veritabanı yönetilen örneği | Microsoft Docs
-description: Yönetilen örnek için ortak bir uç nokta yapılandırma hakkında bilgi edinin
+title: Ortak uç nokta ile yönetilen örneği yapılandırma
+description: Yönetilen örnek için genel bir uç nokta yapılandırmayı öğrenin
 services: sql-database
 ms.service: sql-database
 ms.subservice: security
@@ -9,48 +9,47 @@ ms.topic: conceptual
 author: srdan-bozovic-msft
 ms.author: srbozovi
 ms.reviewer: vanto, carlrab
-manager: craigg
 ms.date: 05/07/2019
-ms.openlocfilehash: d3e68a5287e59c576f85491e6e5eba33fac080ca
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a35176770a3100a288ad3da52cd89870e0110f63
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65465143"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73828024"
 ---
-# <a name="configure-public-endpoint-in-azure-sql-database-managed-instance"></a>Azure SQL veritabanı yönetilen örneği'nde genel uç nokta yapılandırma
+# <a name="configure-public-endpoint-in-azure-sql-database-managed-instance"></a>Azure SQL veritabanı yönetilen örneği 'nde ortak uç noktayı yapılandırma
 
-Genel uç noktası için bir [yönetilen örnek](https://docs.microsoft.com/azure/sql-database/sql-database-managed-instance-index) yönetilen Örneğinize dışında veri erişimi sağlayan [sanal ağ](../virtual-network/virtual-networks-overview.md). Power BI, Azure App Service veya şirket içi ağa gibi Azure hizmetlerinden çok kiracılı yönetilen Örneğinize erişmek kullanabilirsiniz. Yönetilen örneğinde genel uç noktasını kullanarak VPN aktarım hızını sorunları önlemeye yardımcı olmak bir VPN kullanmanız gerekmez.
+[Yönetilen](https://docs.microsoft.com/azure/sql-database/sql-database-managed-instance-index) örnek için genel uç nokta, yönetilen örneğiniz için [sanal ağ](../virtual-network/virtual-networks-overview.md)dışından veri erişimi sağlar. Yönetilen örneğinize Power BI, Azure App Service veya şirket içi ağ gibi çok kiracılı Azure hizmetlerinden erişebilirsiniz. Yönetilen bir örnekteki ortak uç noktayı kullanarak, VPN işleme sorunlarından kaçınmanıza yardımcı olabilecek bir VPN kullanmanız gerekmez.
 
-Bu makalede, öğreneceksiniz nasıl yapılır:
+Bu makalede aşağıdakileri nasıl yapacağınızı öğreneceksiniz:
 
 > [!div class="checklist"]
-> - Azure portalında yönetilen Örneğiniz için genel bir uç nokta etkinleştir
-> - PowerShell kullanarak yönetilen Örneğiniz için ortak bir uç noktayı etkinleştirme
-> - Yönetilen örnek genel uç nokta trafiğe izin vermek için yönetilen örnek ağ güvenlik grubu yapılandırma
-> - Yönetilen örnek genel uç nokta bağlantı dizesini alın
+> - Azure portal yönetilen örneğiniz için ortak uç noktayı etkinleştirin
+> - PowerShell kullanarak yönetilen örneğiniz için ortak uç noktayı etkinleştirme
+> - Yönetilen örnek ağ güvenlik grubunuzu yönetilen örnek genel uç noktasına giden trafiğe izin verecek şekilde yapılandırın
+> - Yönetilen örnek genel uç nokta bağlantı dizesi al
 
 ## <a name="permissions"></a>İzinler
 
-Yönetilen bir örneği olan verilerin duyarlılık nedeniyle, yönetilen örnek genel uç nokta yapılandırmasını iki adımlı bir işlem gerektirir. Bu güvenlik önlemi ayrımı (Çim kaplama) için uyar:
+Yönetilen örnekteki verilerin duyarlılığı nedeniyle, yönetilen örnek genel uç noktasını etkinleştirme yapılandırması iki adımlı bir işlem gerektirir. Bu güvenlik ölçüsü, görev ayrımı (SoD) olarak uyar:
 
-- Yönetilen örnek genel uç noktada etkinleştirme yönetilen örnek Yöneticisi tarafından yapılmalıdır Yönetilen örnek Yöneticisi bulunabilir **genel bakış** sayfasında, SQL yönetilen örneği kaynağı.
-- Bir ağ yöneticisi tarafından yapılması gereken bir ağ güvenlik grubu kullanarak trafiğe izin vermek Daha fazla bilgi için [ağ güvenlik grubu izinlerini](../virtual-network/manage-network-security-group.md#permissions).
+- Yönetilen örnek üzerinde genel bitiş noktasının etkinleştirilmesi, yönetilen örnek Yöneticisi tarafından yapılmalıdır. Yönetilen örnek Yöneticisi, SQL yönetilen örnek kaynağınızın **genel bakış** sayfasında bulunabilir.
+- Ağ Yöneticisi tarafından gerçekleştirilmesi gereken bir ağ güvenlik grubu kullanılarak trafiğe izin verme. Daha fazla bilgi için bkz. [ağ güvenlik grubu izinleri](../virtual-network/manage-network-security-group.md#permissions).
 
-## <a name="enabling-public-endpoint-for-a-managed-instance-in-the-azure-portal"></a>Azure portalında bir yönetilen örnek için genel bir uç nokta etkinleştirme
+## <a name="enabling-public-endpoint-for-a-managed-instance-in-the-azure-portal"></a>Azure portal yönetilen bir örnek için genel uç noktayı etkinleştirme
 
-1. Adresinden Azure portalında başlatın <https://portal.azure.com/.>
-1. Yönetilen örnek ile kaynak grubunu açın ve seçin **SQL yönetilen örneği** üzerinde genel uç noktası yapılandırmak istediğiniz.
-1. Üzerinde **güvenlik** ayarları, select **sanal ağ** sekmesi.
-1. Sanal ağ yapılandırma sayfasında seçin **etkinleştirme** ve ardından **Kaydet** yapılandırmasını güncelleştirmek için simge.
+1. <https://portal.azure.com/.> Azure portal başlatın
+1. Yönetilen örnekle birlikte kaynak grubunu açın ve üzerinde genel uç noktasını yapılandırmak istediğiniz **SQL yönetilen örneğini** seçin.
+1. **Güvenlik** ayarları ' na, **sanal ağ** sekmesini seçin.
+1. Sanal ağ yapılandırması sayfasında, yapılandırmayı güncelleştirmek için **Etkinleştir** ' i ve ardından **Kaydet** simgesini seçin.
 
-![mı vnet config.png](media/sql-database-managed-instance-public-endpoint-configure/mi-vnet-config.png)
+![mi-VNET-config. png](media/sql-database-managed-instance-public-endpoint-configure/mi-vnet-config.png)
 
-## <a name="enabling-public-endpoint-for-a-managed-instance-using-powershell"></a>PowerShell kullanarak bir yönetilen örnek için genel bir uç nokta etkinleştirme
+## <a name="enabling-public-endpoint-for-a-managed-instance-using-powershell"></a>PowerShell kullanarak yönetilen örnek için genel uç noktayı etkinleştirme
 
-### <a name="enable-public-endpoint"></a>Genel bir uç noktayı etkinleştirme
+### <a name="enable-public-endpoint"></a>Ortak uç noktayı etkinleştir
 
-Aşağıdaki PowerShell komutlarını çalıştırın. Değiştirin **subscrıptıon-ID** abonelik kimliğinizi Ayrıca değiştirin **rg adı** kaynak grubuyla değiştirin ve yönetilen örnek için **mı adı** yönetilen örneğinizin adı.
+Aşağıdaki PowerShell komutlarını çalıştırın. **Abonelik** KIMLIĞINI abonelik Kimliğinizle değiştirin. Ayrıca, **RG-Name** öğesini yönetilen örneğinizin kaynak grubuyla değiştirin ve **mı-adını** yönetilen örneğinizin adıyla değiştirin.
 
 ```powershell
 Install-Module -Name Az
@@ -71,50 +70,50 @@ $mi = Get-AzSqlInstance -ResourceGroupName {rg-name} -Name {mi-name}
 $mi = $mi | Set-AzSqlInstance -PublicDataEndpointEnabled $true -force
 ```
 
-### <a name="disable-public-endpoint"></a>Genel bir uç noktayı devre dışı
+### <a name="disable-public-endpoint"></a>Ortak uç noktayı devre dışı bırak
 
-PowerShell kullanarak genel uç noktası devre dışı bırakmak için aşağıdaki komutu yürüterek (ve NSG gelen bağlantı noktası 3342 için yapılandırdıysanız, kapatmak de unutmayın):
+PowerShell kullanarak genel uç noktasını devre dışı bırakmak için aşağıdaki komutu yürütür (Ayrıca, yapılandırdıysanız gelen bağlantı noktası 3342 için NSG 'yi kapatmayı unutmayın):
 
 ```powershell
 Set-AzSqlInstance -PublicDataEndpointEnabled $false -force
 ```
 
-## <a name="allow-public-endpoint-traffic-on-the-network-security-group"></a>Genel bir uç nokta trafiği üzerinde ağ güvenlik grubu izin ver
+## <a name="allow-public-endpoint-traffic-on-the-network-security-group"></a>Ağ güvenlik grubunda genel uç nokta trafiğine izin ver
 
-1. Yönetilen örnek hala açık yapılandırma sayfasında varsa gidin **genel bakış** sekmesi. Aksi takdirde, geri dönüp, **SQL yönetilen örneği** kaynak. Seçin **sanal ağ/alt ağ** bağlantı, sanal ağ yapılandırma sayfasına götürür.
+1. Yönetilen örneğin yapılandırma sayfası hala açıksa **genel bakış** sekmesine gidin. Aksi takdirde, **SQL yönetilen örnek** kaynağına geri dönün. Sanal ağ **/alt ağ** bağlantısını seçin, bu Işlem sizi sanal ağ yapılandırması sayfasına götürür.
 
-    ![mi-overview.png](media/sql-database-managed-instance-public-endpoint-configure/mi-overview.png)
+    ![mi-Overview. png](media/sql-database-managed-instance-public-endpoint-configure/mi-overview.png)
 
-1. Seçin **alt ağlar** sanal ağınızın yapılandırma sol bölmede sekme ve Not **güvenlik grubu** yönetilen Örneğiniz için.
+1. Sanal ağınızın sol Yapılandırma bölmesinde **alt ağlar** sekmesini seçin ve yönetilen ÖRNEĞINIZIN **güvenlik grubunu** aklınızda olun.
 
-    ![mi-vnet-subnet.png](media/sql-database-managed-instance-public-endpoint-configure/mi-vnet-subnet.png)
+    ![mi-VNET-subnet. png](media/sql-database-managed-instance-public-endpoint-configure/mi-vnet-subnet.png)
 
-1. Yönetilen örneğinizi içeren, kaynak grubuna geri dönün. Görmelisiniz **ağ güvenlik grubu** adı belirtildiği üstünde. Ağ güvenlik grubu yapılandırma sayfasına gitmek için bir ad seçin.
+1. Yönetilen örneğinizi içeren kaynak grubunuza geri dönün. Yukarıda belirtilen **ağ güvenlik grubu** adını görmeniz gerekir. Ağ güvenlik grubu yapılandırma sayfasına gidilecek adı seçin.
 
-1. Seçin **gelen güvenlik kuralları** sekmesinde ve **Ekle** daha yüksek önceliğe sahip kural **deny_all_inbound** kuralını aşağıdaki ayarlarla: </br> </br>
+1. **Gelen güvenlik kuralları** sekmesini seçin ve aşağıdaki ayarlarla **deny_all_inbound** kuralından daha yüksek önceliğe sahip bir kural **ekleyin** : </br> </br>
 
     |Ayar  |Önerilen değer  |Açıklama  |
     |---------|---------|---------|
-    |**Kaynak**     |Herhangi bir IP adresi veya hizmet etiketi         |<ul><li>Power BI gibi Azure Hizmetleri için Azure bulut hizmeti etiketi seçin</li> <li>Bilgisayar veya Azure VM için NAT IP adresini kullanın</li></ul> |
-    |**Kaynak bağlantı noktası aralıkları**     |*         |Bu şekilde bırakın * (herhangi bir) olarak kaynak bağlantı noktaları genellikle dinamik olarak ayrılan ve gibi bu tür, beklenmedik |
-    |**Hedef**     |Tüm         |Bırakma hedefi olarak herhangi bir yönetilen örnek alt ağa trafiğe izin vermek için |
-    |**Hedef bağlantı noktası aralıkları**     |3342         |Yönetilen örnek genel TDS uç noktası olan kapsam hedef bağlantı noktasına 3342, |
-    |**Protokolü**     |TCP         |Örneğinin kullandığı TCP protokolü için TDS yönetilen |
-    |**Eylem**     |İzin Ver         |Yönetilen örnek genel uç noktası üzerinden gelen trafiğe izin vermek |
-    |**Öncelik**     |1300         |Bu kural, daha yüksek bir öncelik olduğundan emin olun **deny_all_inbound** kuralı |
+    |**Kaynak**     |Herhangi bir IP adresi veya hizmet etiketi         |<ul><li>Power BI gibi Azure hizmetleri için Azure Cloud Service etiketini seçin</li> <li>Bilgisayarınız veya Azure sanal makinesi için NAT IP adresi kullanın</li></ul> |
+    |**Kaynak bağlantı noktası aralıkları**     |*         |Kaynak bağlantı noktaları genellikle dinamik olarak ayrıldığı ve bu şekilde tahmin edilemeyen |
+    |**Hedefine**     |Herhangi biri         |Yönetilen örnek alt ağına gelen trafiğe izin vermek için hedeften ayrılmaya |
+    |**Hedef bağlantı noktası aralıkları**     |3342         |Yönetilen örnek genel TDS uç noktası olan 3342 öğesine kapsam hedef bağlantı noktası |
+    |**Protokol**     |TCP         |Yönetilen örnek TDS için TCP protokolünü kullanır |
+    |**Eylem**     |Allow         |Ortak uç nokta aracılığıyla yönetilen örneğe gelen trafiğe izin ver |
+    |**Öncelik**     |1300         |Bu kuralın **deny_all_inbound** kuralından daha yüksek öncelikli olduğundan emin olun |
 
-    ![mi-nsg-rules.png](media/sql-database-managed-instance-public-endpoint-configure/mi-nsg-rules.png)
+    ![mi-NSG-Rules. png](media/sql-database-managed-instance-public-endpoint-configure/mi-nsg-rules.png)
 
     > [!NOTE]
-    > Bağlantı noktası 3342 bağlantı, yönetilen örnek ve bu noktada değiştirilemez genel uç noktası için kullanılır.
+    > Bağlantı noktası 3342, yönetilen örneğe yönelik genel uç nokta bağlantıları için kullanılır ve bu noktada değiştirilemez.
 
-## <a name="obtaining-the-managed-instance-public-endpoint-connection-string"></a>Yönetilen örnek genel uç nokta bağlantı dizesini alma
+## <a name="obtaining-the-managed-instance-public-endpoint-connection-string"></a>Yönetilen örnek genel uç nokta bağlantı dizesi alınıyor
 
-1. Genel uç noktası için etkin SQL yönetilen örnek yapılandırma sayfasına gidin. Seçin **bağlantı dizeleri** sekmesinde altında **ayarları** yapılandırma.
-1. Genel bir uç nokta ana bilgisayar adı biçiminde < mi_name > geldiğini unutmayın. **genel**. < dns_zone >. database.windows.net ve bağlantı için kullanılan bağlantı noktası 3342 olduğunu.
+1. Genel uç nokta için etkinleştirilen SQL yönetilen örnek yapılandırma sayfasına gidin. **Ayarlar** Yapılandırması altındaki **bağlantı dizeleri** sekmesini seçin.
+1. Genel uç nokta ana bilgisayar adının < mi_name > biçiminde geldiğini unutmayın. **Public**. < dns_zone >. Database. Windows. net ve bağlantı için kullanılan bağlantı noktası 3342.
 
-    ![mi-public-endpoint-conn-string.png](media/sql-database-managed-instance-public-endpoint-configure/mi-public-endpoint-conn-string.png)
+    ![mi-public-Endpoint-Conn-String. png](media/sql-database-managed-instance-public-endpoint-configure/mi-public-endpoint-conn-string.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Hakkında bilgi edinin [kullanarak Azure SQL veritabanı yönetilen örnek genel uç noktası ile güvenli bir şekilde](sql-database-managed-instance-public-endpoint-securely.md).
+- [Genel uç nokta Ile Azure SQL veritabanı yönetilen örneğini güvenli bir şekilde kullanma](sql-database-managed-instance-public-endpoint-securely.md)hakkında bilgi edinin.

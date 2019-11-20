@@ -1,6 +1,6 @@
 ---
-title: "Hızlı Başlangıç: Duraklatma ve sürdürme işlem Azure SQL veri ambarı'nda - Azure portalı | Microsoft Docs"
-description: Duraklatma işlem Azure portalında Azure SQL veri ambarı'nda maliyetlerden tasarruf etmek için kullanın. Veri ambarı kullanılmaya hazır olduğunda sürdürebilirsiniz.
+title: 'Hızlı başlangıç: duraklatma & devam eden işlem-Azure portal '
+description: Maliyetleri kaydetmek için Azure SQL veri ambarı 'nda işlem duraklatmak için Azure portal kullanın. Veri ambarını kullanmaya hazırsanız işlem işlemine da izin verilmez.
 services: sql-data-warehouse
 author: kevinvngo
 manager: craigg
@@ -10,69 +10,70 @@ ms.subservice: manage
 ms.date: 04/18/2018
 ms.author: kevin
 ms.reviewer: igorstan
-ms.openlocfilehash: 9c3ed6dd79d6225b38751c910253cfa1f0720d1c
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.custom: seo-lt-2019
+ms.openlocfilehash: 14f66f71948f75a723c9fdbed7490d54c2c3e2b2
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61475623"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73693007"
 ---
-# <a name="quickstart-pause-and-resume-compute-for-an-azure-sql-data-warehouse-in-the-azure-portal"></a>Hızlı Başlangıç: Azure portalında bir Azure SQL veri ambarı için işlem duraklatma ve sürdürme
+# <a name="quickstart-pause-and-resume-compute-for-an-azure-sql-data-warehouse-in-the-azure-portal"></a>Hızlı başlangıç: Azure portal Azure SQL veri ambarı için işlem duraklatma ve devam ettirme
 
-Duraklatma işlem Azure portalında Azure SQL veri ambarı'nda maliyetlerden tasarruf etmek için kullanın. [İşlem devam](sql-data-warehouse-manage-compute-overview.md) veri ambarı kullanılmaya hazır olduğunuzda.
+Maliyetleri kaydetmek için Azure SQL veri ambarı 'nda işlem duraklatmak için Azure portal kullanın. Veri ambarını kullanmaya hazırsanız [Işlem işlemine](sql-data-warehouse-manage-compute-overview.md) da izin verilmez.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz](https://azure.microsoft.com/free/) bir hesap oluşturun.
 
 ## <a name="sign-in-to-the-azure-portal"></a>Azure portalında oturum açın
 
-[Azure Portal](https://portal.azure.com/) oturum açın.
+[Azure portalında](https://portal.azure.com/) oturum açın.
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Kullanım [oluşturma ve bağlanma - portal](create-data-warehouse-portal.md) adlı bir veri ambarı oluşturmak için **mySampleDataWarehouse**. 
+**Mysampledatawarehouse**adlı bir veri ambarı oluşturmak için [oluşturma ve bağlanma-Portal](create-data-warehouse-portal.md) ' i kullanın. 
 
-## <a name="pause-compute"></a>Duraklatma işlem
+## <a name="pause-compute"></a>İşlem Duraklat
 
-Maliyetlerden tasarruf etmek için duraklatma ve sürdürme işlem kaynaklarını isteğe bağlı. Örneğin, veritabanı sırasında gece ve hafta sonları kullanmanız gerekmez, bu saatlerde duraklatabilir ve gün boyunca devam. Veritabanı durdurulduğunda bilgi işlem kaynakları için ücret ödemezsiniz. Ancak, depolama için ücret ödemeye devam eder. 
+Maliyetleri kaydetmek için, talep üzerine işlem kaynaklarını duraklatabilir ve sürdürebilirsiniz. Örneğin, gece ve hafta sonları sırasında veritabanını kullanmıyorsanız, bu zamanlarda duraklatıp gün içinde devam edebilirsiniz. Veritabanı duraklatıldığında işlem kaynakları için ücretlendirilmezsiniz. Ancak, depolama alanı için ücretlendirilmeye devam edersiniz. 
 
-SQL veri ambarını duraklatmak için bu adımları izleyin.
+Bir SQL veri ambarını duraklatmak için bu adımları izleyin.
 
 1. Azure portalının sol taraftaki sayfasında **SQL veritabanları**’na tıklayın.
 2. **SQL veritabanları** sayfasından **mySampleDataWarehouse** seçeneğini belirleyin. Bu, veri ambarını açar. 
-3. Üzerinde **mySampleDataWarehouse** sayfasında, fark **durumu** olduğu **çevrimiçi**.
+3. **Mysampledatawarehouse** sayfasında, **durumu** **çevrimiçi**olarak görürsünüz.
 
     ![Çevrimiçi işlem](media/pause-and-resume-compute-portal/compute-online.png)
 
-4. Veri ambarını duraklatmak için tıklatın **duraklatmak** düğmesi. 
-5. Devam etmek istiyorsanız onay soru soran görüntülenir. **Evet**'e tıklayın.
-6. Birkaç dakika bekleyin ve ardından dikkat edin **durumu** olduğu **duraklatma**.
+4. Veri ambarını duraklatmak için **Duraklat** düğmesine tıklayın. 
+5. Devam etmek isteyip istemediğinizi soran bir onay sorusu görüntülenir. **Evet**'e tıklayın.
+6. Birkaç dakika bekleyin ve sonra **durumun** **duraklatıldığına**dikkat edin.
 
     ![Duraklatılıyor](media/pause-and-resume-compute-portal/pausing.png)
 
-7. Duraklatma işlemi tamamlandığında durumu ise **duraklatıldı** ve seçenek düğmesini **Başlat**.
-8. İşlem kaynakları veri ambarı için çevrimdışı. Hizmet yeniden başlatana kadar işlem için ücret ödemezsiniz.
+7. Duraklatma işlemi tamamlandığında durum **duraklatılır** ve seçenek düğmesi **başlatılır**.
+8. Veri ambarı için işlem kaynakları artık çevrimdışı. Hizmeti sürdürülene kadar işlem için ücretlendirilmezsiniz.
 
-    ![İşlem çevrimdışı](media/pause-and-resume-compute-portal/compute-offline.png)
+    ![Çevrimdışı işlem](media/pause-and-resume-compute-portal/compute-offline.png)
 
 
-## <a name="resume-compute"></a>İşlem devam et
+## <a name="resume-compute"></a>İşlem işlemine geri dön
 
-SQL veri ambarı sürdürmek için aşağıdaki adımları izleyin.
+Bir SQL veri ambarını yeniden başlatmak için aşağıdaki adımları izleyin.
 
 1. Azure portalının sol taraftaki sayfasında **SQL veritabanları**’na tıklayın.
 2. **SQL veritabanları** sayfasından **mySampleDataWarehouse** seçeneğini belirleyin. Bu, veri ambarını açar. 
-3. Üzerinde **mySampleDataWarehouse** sayfasında, fark **durumu** olduğu **duraklatıldı**.
+3. **Mysampledatawarehouse** sayfasında **durum** **duraklatıldı**' ya dikkat edin.
 
-    ![İşlem çevrimdışı](media/pause-and-resume-compute-portal/compute-offline.png)
+    ![Çevrimdışı işlem](media/pause-and-resume-compute-portal/compute-offline.png)
 
-4. Veri ambarı sürdürmek için tıklayın **Başlat**. 
-5. Başlamak istiyorsanız onay soru soran görüntülenir. **Evet**'e tıklayın.
-6. Bildirim **durumu** olduğu **sürdürülüyor**.
+4. Veri ambarını yeniden **başlatmak Için Başlat**' a tıklayın. 
+5. Başlatmak isteyip istemediğinizi soran bir onay sorusu görüntülenir. **Evet**'e tıklayın.
+6. **Durumun** **sürdürüldiğine**dikkat edin.
 
-    ![Sürdürülüyor](media/pause-and-resume-compute-portal/resuming.png)
+    ![Etmek](media/pause-and-resume-compute-portal/resuming.png)
 
-7. Veri ambarını yeniden çevrimiçi olduğunda durumudur **çevrimiçi** ve seçenek düğmesini **duraklatma**.
-8. Veri ambarı işlem kaynaklarını çevrimiçi olduğundan ve hizmeti kullanabilirsiniz. İşlem ücretleri devam ettirildi.
+7. Veri ambarı yeniden çevrimiçi olduğunda, durum **çevrimiçi** olur ve seçenek düğmesi **duraklatılır**.
+8. Veri ambarı için işlem kaynakları artık çevrimiçi ve hizmeti kullanabilirsiniz. İşlem ücretleri sürdürüldü.
 
     ![Çevrimiçi işlem](media/pause-and-resume-compute-portal/compute-online.png)
 
@@ -80,12 +81,12 @@ SQL veri ambarı sürdürmek için aşağıdaki adımları izleyin.
 
 Veri ambarı birimleri ve veri Ambarınızda depolanan veriler için ücretlendirilirsiniz. Bu işlem ve depolama alanı kaynakları ayrı ayrı faturalandırılır. 
 
-- Verileri depoda tutmak istiyorsanız, duraklatabilirsiniz.
+- Verileri depolama alanında tutmak istiyorsanız, işlem ' i duraklatın.
 - Gelecekteki ücretlendirmeleri kaldırmak istiyorsanız, veri ambarını silebilirsiniz. 
 
 Kaynakları istediğiniz gibi temizlemek için bu adımları izleyin.
 
-1. Oturum [Azure portalında](https://portal.azure.com)ve veri ambarınıza tıklayın.
+1. [Azure Portal](https://portal.azure.com)oturum açın ve veri ambarınıza tıklayın.
 
     ![Kaynakları temizleme](media/load-data-from-azure-blob-storage-using-polybase/clean-up-resources.png)
 
@@ -93,14 +94,14 @@ Kaynakları istediğiniz gibi temizlemek için bu adımları izleyin.
 
 2. İşlem veya depolama için ücretlendirilmemek üzere veri ambarını kaldırmak için **Sil**’e tıklayın.
 
-3. Oluşturduğunuz SQL sunucusunu kaldırmak için tıklayın **mynewserver-20171113.database.windows.net**ve ardından **Sil**.  Sunucuyu silmek sunucuyla ilişkili tüm veritabanlarını da sileceğinden bu silme işlemini gerçekleştirirken dikkatli olun.
+3. Oluşturduğunuz SQL Server 'ı kaldırmak için **MyNewServer-20171113.Database.Windows.net**ve ardından **Sil**' e tıklayın.  Sunucuyu silmek sunucuyla ilişkili tüm veritabanlarını da sileceğinden bu silme işlemini gerçekleştirirken dikkatli olun.
 
 4. Kaynak grubunu kaldırmak için, **myResourceGroup**’a tıklayıp daha sonra **Kaynak grubunu sil**’e tıklayın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Artık duraklatıldı ve veri ambarınıza yönelik işlem sürdürülüyor. Azure SQL Veri Ambarı hakkında daha fazla bilgi edinmek için, veri yükleme öğreticisiyle devam edin.
+Artık veri ambarınız için işlem duraklamış ve devam ettirildi. Azure SQL Veri Ambarı hakkında daha fazla bilgi edinmek için, veri yükleme öğreticisiyle devam edin.
 
 > [!div class="nextstepaction"]
-> [SQL veri ambarına veri yükleme](load-data-from-azure-blob-storage-using-polybase.md)
+> [Verileri bir SQL veri ambarına yükleme](load-data-from-azure-blob-storage-using-polybase.md)

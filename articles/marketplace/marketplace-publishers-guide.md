@@ -1,71 +1,72 @@
 ---
-title: Azure Market ve Appsource'ta yayımlama Kılavuzu
-description: Azure Marketi ve Microsoft AppSource genel bakış uygulama ve hizmet yayımcılar için.
+title: Azure Marketi ve AppSource Yayımlama Kılavuzu
+description: Azure Marketi 'ne genel bakış ve uygulama ve hizmet yayımcıları için Microsoft AppSource.
 services: Azure, Marketplace, Compute, Storage, Networking, Blockchain, Security
 author: ellacroi
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 06/05/2018
 ms.author: ellacroi
-ms.openlocfilehash: 58591302280c67dbd0f69ebe0bc47cf95c8bfc18
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fba9c481ad9b3da1eb0dd5d8a4ff2499240a8cfa
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65956752"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826475"
 ---
-# <a name="azure-marketplace-and-appsource-publishing-guide"></a>Azure Market ve Appsource'ta yayımlama Kılavuzu
+# <a name="azure-marketplace-and-appsource-publishing-guide"></a>Azure Marketi ve AppSource Yayımlama Kılavuzu
 
-Market yayımlama Kılavuzu, yeni yardımcı olmak için tasarlanmıştır ve mevcut yayımcıların vitrinler olarak kullanmayı öğrenmek [Azure Marketi](https://azuremarketplace.microsoft.com) ve [Microsoft AppSource](https://appsource.microsoft.com) iş ortaklığı işletmelerini büyütme için Microsoft uygulamaları ve hizmetleri listeleme tarafından.
+Market Yayımlama Kılavuzu, yeni ve mevcut yayımcıların [Azure Marketi](https://azuremarketplace.microsoft.com) 'nde storeronts 'yi nasıl kullanacağınızı ve [Microsoft AppSource](https://appsource.microsoft.com) uygulamaları listeleyerek Microsoft ile iş ortaklığımlarını nasıl büyütireceğinizi öğrenmek servislere.
 
 >[!Note]
->Market Burada, Azure Market ve AppSource için ifade eder.  Bkz: [bir Market, iki vitrinin](https://docs.microsoft.com/azure/marketplace/comparing-appsource-azure-marketplace) daha fazla bilgi için.
+>Burada Market, Azure Marketi ve AppSource 'a başvurur.  Daha fazla bilgi için bkz. [bir market, iki stotrefronts](https://docs.microsoft.com/azure/marketplace/comparing-appsource-azure-marketplace) .
 
 Bu kılavuzda aşağıdaki konular ele alınmaktadır: 
-*   Market nedir ve nasıl çalışır? 
-*   Azure Market ve AppSource vitrinler arasındaki fark 
-*   Market'te katılmanın avantajları 
-*   Bir yayımcı olur ve uygulamanızın veya hizmetinizin listelemeyi 
-*   Nasıl işletmenizi büyütün 
+*   Market 'in ne olduğu ve nasıl çalıştığı 
+*   Azure Marketi ve appsource vitrinler arasındaki fark 
+*   Market 'e katılma avantajları 
+*   Bir yayımcı olma ve uygulamanızı veya hizmetinizi listeleme 
+*   İşinizi Büyütme 
 
-Bu kılavuz, uygulama ve hizmetlerinizin listesi önce yapmanız gereken teknik ve işletmeye adımlar hakkında bilgi içerir. İçindekiler tablosu, Kılavuzu'nun farklı bölümlerine gitmek ve doğrudan önemli konular için Git kullanın.
+Bu kılavuz, uygulamalarınızı ve hizmetlerinizi listeetmeden önce uygulamanız gereken adımlarla ilgili teknik ve iş bilgilerini içerir. Kılavuzun farklı bölümlerine gitmek ve doğrudan temel konulara gitmek için İçindekiler tablosunu kullanın.
 
-Azure Market ve AppSource hakkında sorular için bize altında bir ileti gönderin **sorun türü** > **Market ekleme**.  Market yayımcı ekleme ekibimiz, yardımcı olmaktan mutluluk duyarız! 
+Azure Marketi ve AppSource hakkında sorular için, **sorun türü** altında **Market ekleme** > bir ileti gönderin.  Market Yayımcımız ekleme ekibi, yardım almak için mutluluk duyarız! 
 
-## <a name="benefits-of-participating-in-the-marketplace"></a>Market'te katılmanın avantajları 
+## <a name="benefits-of-participating-in-the-marketplace"></a>Market 'e katılımın avantajları 
 
-İşletmeniz büyüdükçe hızlandırmaya yardımcı olabilecek Microsoft ile birleşik pazara Git etkinliklerine başlatma panelindeki marketidir. Market tekliflerinize başlatma yükseltme, talep oluşturma ve birleşik satış ve pazarlama kullanarak, bulut iş altyapınız ana parçası olabilir. Market'te katılım için ücret yoktur.
+Market, Microsoft ile iş büyümesinin hızlandırmasına yardımcı olan, pazara yönelik bir go-to-market etkinliğine yönelik bir başlatma yeridir. Market, talep oluşturma ve Birleşik satış ve pazarlama kullanarak, bulut iş altyapılarınızın centertemanı olabilir. Market 'e katılım ücretleri yoktur.
 
-Hedefimiz Microsoft müşterileri ile iş ortağı ekosistemimiz sunan en iyi çözümleri bağlamaktır. Bunu yapmak için yayımlama ve büyüme için onboarding gelen yolculuğunuza boyunca destekliyoruz. 
+Amacınız, Microsoft müşterilerine iş ortağı ekosistemi tekliflerimizin sunduğu en iyi çözümleri bağlayamaktır. Bunu yapmak için, ekleme sürecinizden yayımlamaya ve büyümeye kadar sizi bir yolculukta destekliyoruz. 
 
-İşletmenizi büyütün Market'te özelliklerinden yararlanan.
+İşletmenizi büyütmek için Market 'teki özelliklerden yararlanın.
 
-### <a name="expand-to-new-markets-and-segments-and-generate-new-sales-opportunities"></a>Yeni pazarlara ve segmentlerle genişletin ve yeni satış fırsatları elde edin
+### <a name="expand-to-new-markets-and-segments-and-generate-new-sales-opportunities"></a>Yeni pazarlara ve segmentlere genişletin ve yeni satış fırsatları oluşturun
 
-Marketi yeni pazarlar, parçaları ve Microsoft bulut çözümleri portföyünüzü kullanıcılarla erişmek için bir kanal kullanın. Yeni Pazarlama müşteri adayları ve satış fırsatları postasıdır yeni gidiyor. Yararlı ortak pazarlama ve satış etkinlikleri daha fazla müşteriye alınamıyor.
+Yeni pazarlara, segmentlere ve Microsoft bulut kullanıcılarına çözüm portföyüne erişmek için Market 'i kanal olarak kullanın. Yeni pazarlama müşteri adayları oluşturun ve satış fırsatlarına yeni müşteri adayları yapın. Daha fazla müşteriye ulaşmak için Joint Marketing ve Sales etkinliklerinden yararlanın.
 
-### <a name="enhance-business-value-and-increase-deal-size-with-existing-and-new-customers"></a>İş değeri geliştirmek ve mevcut ve yeni müşterilerle fırsat boyutunu büyütün 
+### <a name="enhance-business-value-and-increase-deal-size-with-existing-and-new-customers"></a>Mevcut ve yeni müşterilerle iş değerini geliştirin ve anlaşma boyutunu artırın 
 
-Yukarı satış ve çapraz çözümlerinizi iş yüklerini buluta taşıma işlemi sonrasında, müşteri sorunları gidererek satış. Satıyor veya dağıtıyor Market aracılığıyla dağıtma, satış uzatmaya projeleri hızlandırmak ve eksiksiz çözümler, hedef belirli iş yükleri ve sektör senaryoları satarak anlaşma karlılığını artırın. 
+İş yüklerini buluta taşıdıktan sonra müşteri sorunlarını gidererek çözümlerinizi büyük ölçüde satma ve çapraz satış. Market üzerinden satış veya dağıtım yapıyorsanız, belirli iş yüklerini ve sektör senaryolarını hedefleyen tüm çözümleri satarak satış döngülerini azaltabilir, projeleri hızlandırabilir ve anlaşma karlılığı artırabilirsiniz. 
 
 ### <a name="get-actionable-insights"></a>Eyleme dönüştürülebilir içgörüler elde edin 
 
-Öngörüler, listelerinin performansını aracılığıyla Market aracılığıyla kullanılabilir olan Analiz ve Öngörüler edinin. Kampanya performansı, sipariş ve ödemeler ve kampanyalarını çözümünüz için en iyi şekilde nasıl hakkında daha fazla bilgi edinin.
+Market aracılığıyla kullanabileceğiniz Öngörüler ve analizler aracılığıyla listelerinizin performansına ilişkin Öngörüler elde edin. Kampanya performansı, siparişler ve ödemeler hakkında daha fazla bilgi ve çözümünüz için kampanya etkinliklerini en üst düzeye çıkarma hakkında daha fazla bilgi alın.
 
-### <a name="marketplace-go-to-market-benefits"></a>Market Git pazara açılma avantajları 
+### <a name="commercial-marketplace-benefits"></a>Ticari Market avantajları 
 
-Market'teki yeni kayıtlara, iş ortaklarının işletmelerini markette büyütme yardımcı olmak için ücretsiz avantajlar farklı bir dizi için uygundur. Bu avantaj, aşağıdaki kategorilere ayrılır: 
+Market 'teki yeni listeler, iş ortaklarının Market 'te işletmelerini büyütmeye yönelik çeşitli ücretsiz avantajlar için uygundur. Bu avantajlar aşağıdaki kategorilere ayrılır: 
 
-*   Teknik: İhtiyacınız olan her şey, uygulamanızın başlatma için hazır hale getirmek. Teknik Destek, uygulama tasarımı ve Mimari Tasarım, geliştirme ve test için Azure kredisine sahip olun. 
+*   Teknik: uygulamanızı başlatmaya hazırlamak için ihtiyacınız olan her şey. Teknik destek, uygulama tasarımı ve mimari tasarımından, geliştirme ve test için Azure kredilerine. 
 
-*   Ortak pazarlama: Her şeyi teklifinizi açmanız gerekir. Microsoft Go-To-Market başlatma başlatın ve çözümünüzü tanıtın yardımcı olması için temel bilgiler ücretsiz erişim. Ek Microsoft pazarlama kampanyası ekleme ve Market'te yayınlanmak üzere fırsatları için uygun olabilir.
+*   Ortak pazarlama: teklifinizi başlatmanız için ihtiyacınız olan her şey. Çözümünüzü başlatıp yükseltebilmeniz için ücretsiz Microsoft go-to-market başlatma temelleri 'ne erişin. Market 'te öne çıkmaya yönelik ek Microsoft pazarlama kampanyası dahil ve fırsatları da uygun olabilir.
 
-*   Ortak satış: Başlamak veya Market aracılığıyla Microsoft ile satış sürecinizi hızlandırın. Programlar ve Microsoft teams ile ortak satış sürücü için desteğe erişin.
+*   Ortak satış: Market üzerinden Microsoft ile satış yapmak için yolculuğa başlayın veya hızlandırın. Microsoft ekipleriyle Birleşik satışları sağlamak için programlar ve desteğe erişin.
 
-Çalıştırdıktan sonra [çözümünüzü gönderme](https://partner.microsoft.com/dashboard/account/v3/enrollment/introduction/azureisv) Market'te, ekleme ekibimiz, yayımlama deneyiminizi desteklemek için bağlantı kurar.  Bkz: [bir iş ortağı merkezi hesabınız oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) daha fazla bilgi için.
+Çözümünüzü Market 'e [gönderdikten](https://partner.microsoft.com/dashboard/account/v3/enrollment/introduction/azureisv) sonra, ekleme ekibimiz yayımlama deneyiminizi desteklemek için sizi iletişim kurar.  Daha fazla bilgi için bkz. [Iş Ortağı Merkezi hesabı oluşturma](https://docs.microsoft.com/azure/marketplace/partner-center-portal/create-account) .
 
-Microsoft Go-To-Market avantajları ve işinizi markette büyütme yolları hakkında daha fazla bilgi için bkz: [Microsoft Go-To-Market Hizmetleri](https://partner.microsoft.com/reach-customers/gtm).
+[Ticari Market avantajlarınız](https://docs.microsoft.com//azure/marketplace/gtm-your-marketplace-benefits)hakkında daha fazla bilgi edinin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bulut Marketi konuları hakkında ayrıntılı bilgi için soldaki İçindekiler inceleyerek gözden geçirin. 
+Sol taraftaki İçindekiler tablosunu inceleyerek bulut marketi konularıyla ilgili ayrıntılı bilgileri gözden geçirin. 

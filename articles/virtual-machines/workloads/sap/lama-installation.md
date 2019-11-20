@@ -1,6 +1,6 @@
 ---
-title: Azure için SAP LaMa Bağlayıcısı | Microsoft Docs
-description: SAP LaMa kullanarak azure'da SAP sistemlerini yönetme
+title: Azure için SAP 'yi kısıtlama Bağlayıcısı | Microsoft Docs
+description: SAP sistemlerini, SAP 'yi kullanarak Azure 'da yönetme
 services: virtual-machines-linux,virtual-machines-windows
 documentationcenter: ''
 author: MSSedusch
@@ -9,18 +9,17 @@ editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.service: virtual-machines-linux
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
-ms.date: 11/17/2018
+ms.date: 07/29/2019
 ms.author: sedusch
-ms.openlocfilehash: f09f66e81ec4878aedebfee9be4c0c67b75c8ad6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6521c139463bb0de1e24783bbbdd6a2d3996be6f
+ms.sourcegitcommit: 77bfc067c8cdc856f0ee4bfde9f84437c73a6141
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61463030"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72430098"
 ---
 # <a name="sap-lama-connector-for-azure"></a>Azure için SAP LaMa bağlayıcısı
 
@@ -30,6 +29,7 @@ ms.locfileid: "61463030"
 [2562184]: https://launchpad.support.sap.com/#/notes/2562184
 [2628497]: https://launchpad.support.sap.com/#/notes/2628497
 [2445033]: https://launchpad.support.sap.com/#/notes/2445033
+[2815988]: https://launchpad.support.sap.com/#/notes/2815988
 [Logo_Linux]:media/virtual-machines-shared-sap-shared/Linux.png
 [Logo_Windows]:media/virtual-machines-shared-sap-shared/Windows.png
 [dbms-guide]:dbms-guide.md
@@ -38,197 +38,197 @@ ms.locfileid: "61463030"
 [hana-ops-guide]:hana-vm-operations.md
 
 > [!NOTE]
-> Genel destek bildirimi: SAP LaMa veya Azure Bağlayıcısı için desteğe ihtiyacınız varsa lütfen her zaman bir olay ile SAP VCM LVM HYPERV BC bileşende açın.
+> Genel destek beyanı: SAP veya Azure Bağlayıcısı için desteğe ihtiyacınız varsa lütfen her zaman bileşen BC-VCM-LVM-HYPERV üzerinde SAP ile bir olay açın.
 
-SAP LaMa çoğu, çalıştırmak ve bunların SAP ortamı izlemek için kullanılır. SAP LaMa 3.0 SP05 beri varsayılan olarak Azure için bir bağlayıcı ile birlikte gelir. Bu bağlayıcı, serbest bırakın ve sanal makineleri başlatmanız, kopyalayın ve yönetilen diskler dışında yeniden konumlandırmakta ve yönetilen diskleri silmek için kullanabilirsiniz. Bu temel işlemleri ile dışında yeniden konumlandırmakta, kopyalama, kopyalama ve SAP LaMa kullanarak SAP sistemlerini yenileyin.
+SAP 'yi almak, birçok müşteri tarafından SAP Yatayı çalıştırmak ve izlemek için kullanılır. SAP 3,0 SP05, varsayılan olarak Azure 'a bir bağlayıcı ile birlikte gönderilir. Bu bağlayıcıyı, sanal makineleri serbest bırakmak ve başlatmak, yönetilen diskleri kopyalamak ve yeniden konumlandırmak ve yönetilen diskleri silmek için kullanabilirsiniz. Bu temel işlemlerle, SAP sistemlerini, SAP 'yi kullanarak yeniden konumlandırmak, kopyalamak, klonlayabilir ve yenileyebilirsiniz.
 
-Bu kılavuz için SAP LaMa Azure Bağlayıcısı'nı nasıl ayarlanacağını açıklar, Uyarlamalı SAP sistemlerini ve nasıl yapılandırılacakları yüklemek için kullanılan sanal makineleri oluşturun.
+Bu kılavuzda, SAP 'yi almak için Azure bağlayıcısını ayarlama, uyarlamalı SAP sistemlerini yüklemek için kullanılabilecek sanal makineler oluşturma ve bunların nasıl yapılandırılacağı açıklanmaktadır.
 
 > [!NOTE]
-> Bağlayıcı yalnızca SAP LaMa Enterprise Edition'da kullanılabilir
+> Bağlayıcı yalnızca SAP-Enterprise sürümünde kullanılabilir
 
 ## <a name="resources"></a>Kaynaklar
 
-Aşağıdaki SAP notları konu, Azure üzerinde SAP LaMa ilgili:
+Aşağıdaki SAP notları, Azure 'da SAP 'nin konusu ile ilgilidir:
 
-| Not numarası | Unvan |
+| Dekont numarası | Başlık |
 | --- | --- |
-| [2343511] |SAP yatay Yönetim (LaMa) için Microsoft Azure Bağlayıcısı |
-| [2350235] |Landscape yönetim 3.0 - Enterprise edition SAP |
+| [2343511] |SAP manzara yönetimi için Microsoft Azure Bağlayıcısı (bir) |
+| [2350235] |SAP yatay yönetimi 3,0-Enterprise Edition |
 
-Ayrıca okuma [SAP Yardım portalı için SAP LaMa](https://help.sap.com/viewer/p/SAP_LANDSCAPE_MANAGEMENT_ENTERPRISE).
+Ayrıca, [SAP 'Yi almak Için SAP yardım portalını](https://help.sap.com/viewer/p/SAP_LANDSCAPE_MANAGEMENT_ENTERPRISE)okuyun.
 
 ## <a name="general-remarks"></a>Genel açıklamalar
 
-* Etkinleştirdiğinizden emin olun *otomatik Mountpoint oluşturma* kurulumunda -> Ayarlar -> altyapısı  
-  SAP LaMa SAP Uyarlamalı Uzantıları'nı kullanarak bir sanal makinede birimleri bağlar, bu ayar etkin değilse, bağlama noktasının mevcut olması gerekir.
+* Kurulum-> ayarları-> altyapısında *otomatik bağlama noktası oluşturmayı* etkinleştirdiğinizden emin olun  
+  SAP, bir sanal makinede SAP Uyarlamalı uzantıları kullanarak birimleri takar, bu ayar etkinleştirilmemişse bağlama noktası mevcut olmalıdır.
 
-* Ayrı bir alt ağ kullanın ve SAP örnekleri hazırlıksız IP önlemenin kullanımı dinamik IP adresleri "Yeni sanal makineler dağıtırken çalmak" adres yok  
-  Ayrıca SAP LaMa tarafından kullanılan alt ağdaki dinamik IP adresi ayırma kullanırsanız, bir SAP sistemiyle ile SAP LaMa hazırlama başarısız olabilir. Bir SAP sistemiyle hazır değil ise, IP adreslerinin ayrılmış değildir ve diğer sanal makinelere ayrılan.
+* Farklı alt ağ kullan ve yeni VM 'Ler dağıtıldığında "çalmasını" IP adresini önlemek için dinamik IP adresleri kullanmayın ve SAP örnekleri hazırlanmamışsa  
+  Bu alt ağda dinamik IP adresi ayırma kullanıyorsanız, bu da SAP 'nin ele alındığı, SAP sisteminin yük devri ile hazırlanması başarısız olabilir. Bir SAP sistemi hazırlanmamışsa, IP adresleri ayrılmamıştır ve diğer sanal makinelere tahsis edilebilir.
 
-* Yönetilen konaklar için oturum açın, dosya sistemlerinin bağlı olmayan engellemediğinizden emin olun.  
-  Bir Linux sanal makinelerinde oturum açın ve değişiklik bir dizinde bağlama noktası, örneğin /usr/sap/AH1/ASCS00/exe, birim için çalışma dizini kaldırılan olamaz ve yeniden Yerleştir veya unprepare başarısız olur.
+* Yönetilen konaklarda oturum açarsanız, dosya sistemlerinin çıkarılmasını engellemediğinizden emin olun  
+  Bir Linux sanal makinelerinde oturum açıp çalışma dizinini bağlama noktasındaki bir dizin olarak değiştirirseniz (örneğin,/usr/sap/AH1/ASCS00/exe), birim kaldırılamaz ve bir yeniden konumlandırma ya da hazırlama başarısız olur.
 
-## <a name="set-up-azure-connector-for-sap-lama"></a>SAP LaMa için Azure Bağlayıcısı'nı Ayarla
+## <a name="set-up-azure-connector-for-sap-lama"></a>SAP için Azure bağlayıcısını ayarlama
 
-Azure bağlayıcısı SAP LaMa 3.0 SP05 itibarıyla sevk edilir. Her zaman SAP LaMa 3.0 için düzeltme eki ve en son destek paketini yüklemeniz önerilir. Azure bağlayıcı, Microsoft Azure karşı korunmasına yetki vermek için bir hizmet sorumlusu kullanır. SAP yatay Yönetim (LaMa) için bir hizmet sorumlusu oluşturmak için aşağıdaki adımları izleyin.
+Azure Bağlayıcısı, SAP 'yi 3,0 SP05 olarak sevk edilir. SAP 'yi 3,0 için en son destek paketini ve düzeltme ekini yüklemenizi öneririz. Azure Bağlayıcısı Microsoft Azure karşı yetkilendirmek için bir hizmet sorumlusu kullanır. SAP yatay yönetimi (bir hizmet sorumlusu) oluşturmak için bu adımları izleyin.
 
 1. Şuraya gidin: https://portal.azure.com
 1. Azure Active Directory dikey penceresini açın
 1. Uygulama kayıtları tıklayın
-1. Ekle'ye tıklayın
-1. Bir ad girin, "Web uygulaması/API'si" uygulama türünü seçin, bir oturum açma URL'sini girin (örneğin http:\//localhost) ve üzerinde oluştur
-1. Oturum açma URL'si kullanılmaz ve geçerli bir URL olabilir
-1. Yeni uygulamayı seçin ve ayarları sekmesini anahtarları
-1. Yeni bir anahtar için bir açıklama girin, "Her zaman geçerli olsun"'i seçin ve tıklayın kaydederken
-1. Değeri yazın. Hizmet sorumlusu parolası olarak kullanılır
-1. Uygulama Kimliği yazma Hizmet sorumlusu, kullanıcı adı olarak kullanılır
+1. Ekle 'ye tıklayın
+1. Bir ad girin, uygulama türü "Web uygulaması/API" yi seçin, bir oturum açma URL 'SI girin (örneğin, http: \//localhost) ve Oluştur ' a tıklayın.
+1. Oturum açma URL 'SI kullanılmıyor ve geçerli bir URL olabilir
+1. Yeni uygulamayı seçin ve Ayarlar sekmesinde anahtarlar ' a tıklayın.
+1. Yeni anahtar için bir açıklama girin, "süresiz Expires" seçeneğini belirleyin ve Kaydet ' e tıklayın.
+1. Değeri yazın. Hizmet sorumlusu için parola olarak kullanılır
+1. Uygulama KIMLIĞINI yazın. Hizmet sorumlusunun Kullanıcı adı olarak kullanılır
 
-Hizmet sorumlusu kullanarak Azure kaynaklarınızı varsayılan olarak erişim izni yok. Bunlara erişmek için hizmet sorumlusu izinleri vermeniz gerekir.
+Hizmet sorumlusu, varsayılan olarak Azure kaynaklarınıza erişme iznine sahip değildir. Onlara erişim sağlamak için hizmet sorumlusu izinlerine sahip olmanız gerekir.
 
 1. Şuraya gidin: https://portal.azure.com
 1. Kaynak grupları dikey penceresini açın
 1. Kullanmak istediğiniz kaynak grubunu seçin
-1. Erişim denetimi (IAM)'ye tıklayın.
-1. Rol ataması Ekle'e tıklayın
-1. Katkıda bulunan rolü seçin
+1. Erişim denetimi (ıAM) öğesine tıklayın
+1. Rol ataması Ekle ' ye tıklayın
+1. Rol katılımcısı seçin
 1. Yukarıda oluşturduğunuz uygulamanın adını girin
 1. Kaydet’e tıklayın.
-1. Adım 3'ten 8 SAP LaMa içinde kullanmak istediğiniz tüm kaynak grupları için yineleyin
+1. SAP 'de kullanmak istediğiniz tüm kaynak grupları için 3 ile 8 arasındaki adımları yineleyin
 
-SAP LaMa Web sitesini açın ve altyapı için gidin. Bulut yöneticileri sekmesine gidin ve Ekle'ye tıklayın. Microsoft Azure bulut bağdaştırıcıyı seçin ve İleri'ye tıklayın. Aşağıdaki bilgileri girin:
+SAP bir Web sitesini açın ve altyapıya gidin. Sekme bulut yöneticileri ' ne gidin ve Ekle ' ye tıklayın. Microsoft Azure Bulut Bağdaştırıcısı seçin ve Ileri ' ye tıklayın. Aşağıdaki bilgileri girin:
 
-* Etiket: Bağlayıcı örneği için bir ad seçin
-* Kullanıcı adı: Hizmet Sorumlusu Uygulama Kimliği
-* Parola: Hizmet sorumlusu anahtarı/parolası
-* URL: Varsayılan koruyun https://management.azure.com/
-* İzleme aralığı (saniye): En az 300 olmalıdır
-* Abonelik kimliği: Azure abonelik kimliği
-* Azure Active Directory Kiracı kimliği: Active Directory kiracısının kimliği
-* Proxy ana bilgisayarı: SAP LaMa internet'e bağlanmak için Ara sunucu gerekiyorsa proxy konak adı
-* Proxy bağlantı noktası: Proxy TCP bağlantı noktası
+* Etiket: bağlayıcı örneği için bir ad seçin
+* Kullanıcı adı: hizmet sorumlusu uygulama KIMLIĞI
+* Parola: hizmet sorumlusu anahtarı/parolası
+* URL: varsayılan @no__t tut-0
+* İzleme aralığı (saniye): en az 300 olmalıdır
+* Abonelik KIMLIĞI: Azure abonelik KIMLIĞI
+* Azure Active Directory kiracı KIMLIĞI: Active Directory kiracının KIMLIĞI
+* Proxy Konağı: SAP 'nin internet 'e bağlanması için bir proxy olması gerekiyorsa, proxy 'nin ana bilgisayar adı
+* Proxy bağlantı noktası: proxy 'nin TCP bağlantı noktası
 
-Girişinizi doğrulamak için test yapılandırmasına tıklayın. Görmeniz gerekir
+Girişinizi doğrulamak için test yapılandırması ' na tıklayın. Şunu görmeniz gerekir:
 
-Bağlantı başarılı: Microsoft bulut bağlantı başarılı oldu. (yalnızca 10 grupları istenen) 7 kaynak grupları bulunamadı
+Bağlantı başarılı: Microsoft bulut bağlantısı başarılı oldu. 7 kaynak grubu bulundu (yalnızca 10 grup istendi)
 
 Web sitesinin en altında.
 
-## <a name="provision-a-new-adaptive-sap-system"></a>Yeni bir Uyarlamalı SAP sistemi sağlayın
+## <a name="provision-a-new-adaptive-sap-system"></a>Yeni bir uyarlamalı SAP sistemi sağlama
 
-El ile yeni bir sanal makine dağıtma veya Azure şablonlarında birini [hızlı depo](https://github.com/Azure/azure-quickstart-templates). Şablonları içerdiği [SAP NetWeaver ASCS](https://github.com/Azure/azure-quickstart-templates/tree/master/sap-lama-ascs), [SAP NetWeaver uygulama sunucuları](https://github.com/Azure/azure-quickstart-templates/tree/master/sap-lama-apps)ve [veritabanı](https://github.com/Azure/azure-quickstart-templates/tree/master/sap-lama-database). Bu şablonlar, sistem kopyalama/kopya vb. bir parçası olarak yeni konaklarını sağlamak için de kullanabilirsiniz.
+Yeni bir sanal makineyi el ile dağıtabilir veya [hızlı başlangıç deposundaki](https://github.com/Azure/azure-quickstart-templates)Azure şablonlarından birini kullanabilirsiniz. [SAP NetWeaver Ass](https://github.com/Azure/azure-quickstart-templates/tree/master/sap-lama-ascs), [SAP NetWeaver uygulama sunucuları](https://github.com/Azure/azure-quickstart-templates/tree/master/sap-lama-apps)ve [veritabanı](https://github.com/Azure/azure-quickstart-templates/tree/master/sap-lama-database)için şablonlar içerir. Ayrıca, bu şablonları bir sistem kopyasının/kopyasının bir parçası olarak yeni konaklar sağlamak için de kullanabilirsiniz.
 
-Ayrı bir alt ağ için tüm sanal SAP LaMa ile yönetmek istediğiniz ve IP adresi "Yeni sanal makineler dağıtırken çalarak" önlemek için dinamik IP adresi kullanmayın ve SAP örnekleri hazırlıksız başladığınız makineleri kullanmanızı öneririz.
+SAP 'yi kullanarak yönetmek istediğiniz tüm sanal makineler için ayrı bir alt ağ kullanmanızı ve yeni sanal makineler ve SAP örneklerinin hazırlanmasından sonra "çalmasını" IP adresini önlemek için dinamik IP adreslerini kullanmayı öneririz.
 
 > [!NOTE]
-> Disk bir sanal makineden ayırmak için uzun çalışma zamanları neden olabileceğinden, mümkün olduğunda, tüm sanal makine uzantıları kaldırın.
+> Mümkünse, sanal makineden disk ayırmak için uzun çalışma zamanlarının oluşmasına neden olabilecek tüm sanal makine uzantılarını kaldırın.
 
-Bu kullanıcı emin \<hanasid > adm, \<sapsid > adm ve Grup sapsys aynı kimliği ve GID hedef makinede mevcut veya LDAP kullanın. Etkinleştirir ve SAP NetWeaver (A) SCS çalıştırmak için kullanılması gereken sanal makineleri NFS sunucusu başlatır.
+Kullanıcı \<hanasıd > adm, \<sapsıd > adm ve grup sapsys 'in aynı KIMLIĞE ve GID 'ye sahip hedef makinede bulunduğundan emin olun veya LDAP kullanın. SAP NetWeaver (A) SCS 'yi çalıştırmak için kullanılması gereken sanal makinelerde NFS Sunucusunu etkinleştirin ve başlatın.
 
 ### <a name="manual-deployment"></a>El ile dağıtım
 
-SAP LaMa SAP konak Aracısı'nı kullanarak sanal makine ile iletişim kurar. El ile veya değil, hızlı başlangıç depodan Azure Resource Manager şablonu kullanarak sanal makineler dağıtırsanız, en son SAP konak aracısı ve SAP Uyarlamalı uzantıları yüklemek emin olun. Azure için gerekli bir düzeltme eki düzeyleri hakkında daha fazla bilgi için bkz. Not SAP [2343511].
+SAP, SAP ana bilgisayar Aracısı kullanılarak sanal makine ile iletişim kurar. Sanal makineleri el ile dağıtır veya hızlı başlangıç deposundan Azure Resource Manager şablonunu kullanmıyorsanız, en son SAP konak aracısını ve SAP Uyarlamalı uzantılarını yüklediğinizden emin olun. Azure için gereken düzeltme eki düzeyleri hakkında daha fazla bilgi için bkz. SAP Note [2343511].
 
-#### <a name="manual-deployment-of-a-linux-virtual-machine"></a>El ile dağıtımı, bir Linux sanal makinesi
+#### <a name="manual-deployment-of-a-linux-virtual-machine"></a>Bir Linux sanal makinesinin el ile dağıtılması
 
-SAP notu içinde listelenen desteklenen işletim sistemi biri ile yeni bir sanal makine oluşturma [2343511]. SAP örnekleri için ek IP yapılandırmaları ekleyin. Her örneği, IP adresi üzerinde en az ve bir sanal ana bilgisayar adı kullanılarak yüklenmesi gerekir.
+SAP Note [2343511]' de listelenen desteklenen işletim sistemlerinden birine sahip yeni bir sanal makine oluşturun. SAP örnekleri için ek IP yapılandırması ekleyin. Her örnek için en az IP adresi gerekir ve bir sanal ana bilgisayar adı kullanılarak yüklenmelidir.
 
-SAP NetWeaver ASCS örneği için /sapmnt/ diske ihtiyacı\<SAPSID >, / usr/sap/\<SAPSID >, /usr/sap/transve/usr/sap/\<sapsid > adm. SAP NetWeaver uygulama sunucularına ek diskler gerekmez. SAP örneğine ilgili her şeyi gerekir ASCS üzerinde depolanabilir ve NFS dışarı aktarılan. Aksi takdirde, şu anda SAP LaMa kullanarak ek uygulama sunucuları eklemek mümkün değildir.
+SAP NetWeaver ASCS örneği/sapmnt/\<SAPSıD >,/usr/SAP/\<SAPSıD >,/usr/SAP/Trans ve/usr/SAP/\<sapsıd > adm için disklere ihtiyaç duyuyor. SAP NetWeaver uygulama sunucularında ek disklere gerek yoktur. SAP örneğiyle ilgili her şey, Ass 'de depolanmalıdır ve NFS aracılığıyla aktarmalıdır. Aksi takdirde, şu anda SAP 'yi kullanarak ek uygulama sunucuları eklemek mümkün değildir.
 
-![Linux'ta SAP NetWeaver ASCS](media/lama/sap-lama-ascs-app-linux.png)
+![Linux üzerinde SAP NetWeaver YOKLARı](media/lama/sap-lama-ascs-app-linux.png)
 
 #### <a name="manual-deployment-for-sap-hana"></a>SAP HANA için el ile dağıtım
 
-Yeni bir sanal makine desteklenmeyen bir işlem sistemlerinden biri ile SAP HANA için SAP Not listelendiği gibi oluşturma [2343511]. SAP HANA için ek bir IP yapılandırmasına ve HANA Kiracı başına ekleyin.
+SAP HANA için desteklenen işletim sistemlerinden birine sahip yeni bir sanal makine oluşturun, SAP Note [2343511]' de listelenmiştir. SAP HANA için bir ek IP yapılandırması ve her bir HANA kiracısı için bir tane ekleyin.
 
-SAP HANA diskleri /hana/shared, /hana/backup, /hana/data ve /hana/log gerekiyor
+SAP HANA/Hana/Shared,/Hana/Backup,/Hana/Data ve/Hana/log için disklere ihtiyaç duyuyor
 
 ![Linux üzerinde SAP HANA](media/lama/sap-lama-db-hana.png)
 
-#### <a name="manual-deployment-for-oracle-database-on-linux"></a>Linux üzerinde Oracle veritabanı için el ile dağıtım
+#### <a name="manual-deployment-for-oracle-database-on-linux"></a>Linux üzerinde Oracle Database için el ile dağıtım
 
-SAP Not listelendiği gibi Oracle veritabanları için desteklenen işletim sistemi biri ile yeni bir sanal makine oluşturma [2343511]. Oracle veritabanı için ek bir IP yapılandırmasına ekleyin.
+SAP Note [2343511]bölümünde listelendiği gibi Oracle veritabanları için desteklenen işletim sistemlerinden birine sahip yeni bir sanal makine oluşturun. Oracle veritabanı için bir ek IP yapılandırması ekleyin.
 
-Oracle veritabanı diskleri /oracle, /home/oraod1 ve /home/oracle gerekiyor
+Oracle veritabanı/Oracle,/Home/oraod1 ve/Home/Oracle için disklere ihtiyaç duyuyor
 
-![Linux üzerinde Oracle veritabanı](media/lama/sap-lama-db-ora-lnx.png)
+![Linux 'ta Oracle veritabanı](media/lama/sap-lama-db-ora-lnx.png)
 
 #### <a name="manual-deployment-for-microsoft-sql-server"></a>Microsoft SQL Server için el ile dağıtım
 
-Yeni bir sanal makine desteklenmeyen bir işlem sistemlerinden biri ile Microsoft SQL Server için SAP Not listelendiği gibi oluşturma [2343511]. SQL Server örneği için ek bir IP yapılandırmasına ekleyin.
+Microsoft SQL Server için desteklenen işletim sistemlerinden birine sahip yeni bir sanal makine oluşturun, SAP Note [2343511]' de listelenmiştir. SQL Server örneği için bir ek IP yapılandırması ekleyin.
 
-SQL Server veritabanı sunucusu, veritabanı veri ve günlük dosyaları ve c:\usr\sap diskleri için diskler gerekir.
+SQL Server veritabanı sunucusu, c:\usr\sap. için veritabanı verilerine ve günlük dosyalarına ve disklere yönelik disklere ihtiyaç duyuyor.
 
-![Linux üzerinde Oracle veritabanı](media/lama/sap-lama-db-sql.png)
+![Linux 'ta Oracle veritabanı](media/lama/sap-lama-db-sql.png)
 
-SAP NetWeaver uygulama sunucusu veya bir sistem kopyalama/kopyalama hedefi olarak yeniden konumlandırmak için kullanmak istediğiniz bir sanal makinede SQL Server için desteklenen bir Microsoft ODBC sürücüsü yüklediğinizden emin olun.
+SAP NetWeaver uygulama sunucusunu bir sistem kopyası/kopyalama hedefi olarak veya olarak değiştirmek için kullanmak istediğiniz bir sanal makineye SQL Server için desteklenen bir Microsoft ODBC sürücüsü yüklediğinizden emin olun.
 
-Önceden SQL Server veritabanı örneği için veya bir sistem kopyalama/kopyalama hedefi olarak yeniden konumlandırmak için kullanmak istediğiniz bir sanal makine gerekir SAP LaMa SQL sunucusunun kendisi yerini değiştiremezsiniz.
+SAP, bir veritabanı örneğini yeniden konumlandırmak için kullanmak istediğiniz bir sanal makineye veya bir sistem kopyalama/Kopyalama hedefi ihtiyaçlarına SQL Server önceden yüklenmiş olarak, SQL Server kendisini yeniden konumlandıramaz.
 
 ### <a name="deploy-virtual-machine-using-an-azure-template"></a>Azure şablonu kullanarak sanal makine dağıtma
 
-Aşağıdaki en son kullanılabilir arşivler öğesinden indirme [SAP yazılım Market](https://support.sap.com/swdc) sanal makinelerin işletim sistemi için:
+Sanal makinelerin işletim sistemi için [SAP Software Market](https://support.sap.com/swdc) 'ten aşağıdaki en son mevcut arşivleri indirin:
 
-1. SAPCAR 7.21
-1. SAP HOST AGENT 7.21
-1. SAP UYARLAMALI UZANTISI 1.0 EXT
+1. SAPCAR 7,21
+1. SAP ANA BILGISAYAR ARACıSı 7,21
+1. SAP UYARLAMALı UZANTı 1,0 EXT
 
-Ayrıca aşağıdaki bileşenlerden indirme [Microsoft Download Center](https://www.microsoft.com/download)
+Ayrıca, [Microsoft Indirme merkezi](https://www.microsoft.com/download) ' nden aşağıdaki bileşenleri indirin
 
 1. Microsoft Visual C++ 2010 yeniden dağıtılabilir paketi (x64) (yalnızca Windows)
-1. SQL Server (yalnızca SQL Server) için Microsoft ODBC sürücüsü
+1. SQL Server için Microsoft ODBC Sürücüsü (yalnızca SQL Server)
 
-Bileşenler, şablonu dağıtmak için gereklidir. Şablonu kullanılabilir hale getirmek için en kolay yolu, bunları bir Azure depolama hesabına yükleyin ve bir paylaşılan erişim imzası (SAS) oluşturmaktır.
+Şablonu dağıtmak için bileşenlerin olması gerekir. Bunları şablon için kullanılabilir yapmanın en kolay yolu, bunları bir Azure depolama hesabına yüklemek ve paylaşılan erişim Imzası (SAS) oluşturmaktır.
 
-Şablon aşağıdaki parametreleri vardır:
+Şablonlar aşağıdaki parametrelere sahiptir:
 
-* sapSystemId: SAP sistem kimliği Disk düzeni oluşturmak için kullanılır (örneğin/usr/sap/\<sapsid >).
+* Sapsystemıd: SAP sistem KIMLIĞI. Disk düzeni oluşturmak için kullanılır (örneğin,/usr/SAP/\<sapsıd >).
 
-* computerName: Yeni sanal makinenin bilgisayar adı. Bu parametre, SAP LaMa tarafından da kullanılır. Bir sistem kopyalama işleminin bir parçası olarak yeni bir sanal makine sağlamak için bu şablonu kullandığınızda, bu bilgisayar adı olan ana bilgisayara ulaşılana kadar SAP LaMa bekler.
+* computerName: yeni sanal makinenin bilgisayar adı. Bu parametre Ayrıca, SAP tarafından kullanılır. Bu şablonu, bir sistem kopyasının parçası olarak yeni bir sanal makine sağlamak için kullandığınızda, bu bilgisayar adına sahip ana bilgisayara ulaşılana kadar SAP 'nin kullanılmasına izin bekler.
 
-* osType: Dağıtmak istediğiniz işletim sistemi türü.
+* osType: dağıtmak istediğiniz işletim sisteminin türü.
 
-* DbType: Veritabanı türü. Bu parametre, ne kadar ek IP yapılandırmaları eklenmesi gerekir ve nasıl disk düzeni görünmesi gerektiğini belirlemek için kullanılır.
+* DbType: veritabanının türü. Bu parametre, kaç tane ek IP yapılandırmasının eklenmesi gerektiğini ve disk düzeninin nasıl görüneceğini belirlemede kullanılır.
 
-* sapSystemSize: Dağıtmak istediğiniz SAP sistemine boyutu. Sanal makine örneği türünü ve boyutunu belirlemek için kullanılır.
+* sapSystemSize: dağıtmak istediğiniz SAP sisteminin boyutu. Sanal makine örneği türünü ve boyutunu tespit etmek için kullanılır.
 
-* adminUsername: Sanal makine için kullanıcı adı.
+* adminUsername: sanal makine için Kullanıcı adı.
 
-* adminPassword: Sanal makinenin parolası. SSH için bir ortak anahtar de sağlayabilirsiniz.
+* adminPassword: sanal makine için parola. SSH için ortak anahtar da sağlayabilirsiniz.
 
-* sshKeyData: Sanal makineler için SSH ortak anahtarı. Yalnızca Linux işletim sistemleri için desteklenir.
+* sshKeyData: sanal makineler için genel SSH anahtarı. Yalnızca Linux işletim sistemleri için desteklenir.
 
-* subnetId: Kullanmak istediğiniz alt ağ kimliği.
+* SubnetID: kullanmak istediğiniz alt ağın KIMLIĞI.
 
-* deployEmptyTarget: Sanal makine veya benzer bir örneği yeniden Yerleştir için yalnızca bir hedef olarak kullanmak istiyorsanız, boş bir hedef dağıtabilirsiniz. Bu durumda, hiçbir ek diskler veya IP yapılandırmalarına eklenir.
+* deployEmptyTarget: sanal makineyi bir örnek yeniden konumlandırma veya buna benzer bir hedef olarak kullanmak istiyorsanız boş bir hedef dağıtabilirsiniz. Bu durumda, ek disk veya IP yapılandırması eklenmez.
 
-* sapcarLocation: Dağıttığınız işletim sistemiyle eşleşen sapcar uygulaması için konum. sapcar, diğer parametre sağladığınız arşivleri ayıklamak için kullanılır.
+* sapcarLocation:, dağıttığınız işletim sistemiyle eşleşen sapcar uygulamasının konumu. sapcar, diğer parametrelerde sağladığınız arşivleri ayıklamak için kullanılır.
 
-* sapHostAgentArchiveLocation: SAP konak Aracısı Arşiv dosyasının konumu. SAP konak Aracısı, bu şablon dağıtımının bir parçası dağıtılır.
+* sapHostAgentArchiveLocation: SAP konak Aracısı Arşivi konumu. SAP konak Aracısı, bu şablon dağıtımının bir parçası olarak dağıtılır.
 
-* sapacExtLocation: SAP Uyarlamalı uzantıları konumu. SAP notu [2343511] Azure için gerekli en düşük düzeltme eki düzeyi listeler.
+* sapacExtLocation: SAP Uyarlamalı uzantılarının konumu. SAP Note [2343511] , Azure için gereken en düşük düzeltme eki düzeyini listeler.
 
-* vcRedistLocation: SAP Uyarlamalı uzantıları yüklemek için gerekli VC çalışma zamanının konumu. Bu parametre yalnızca Windows için gereklidir.
+* vcRedistLocation: SAP Uyarlamalı uzantılarını yüklemek için gereken VC çalışma zamanının konumu. Bu parametre yalnızca Windows için gereklidir.
 
-* odbcDriverLocation: ODBC sürücüsü yüklemek istediğiniz konumu. Yalnızca SQL Server için Microsoft ODBC sürücüsü desteklenir.
+* odbcDriverLocation: yüklemek istediğiniz ODBC sürücüsünün konumu. Yalnızca SQL Server için Microsoft ODBC sürücüsü desteklenir.
 
-* sapadmPassword: Sapadm kullanıcı parolası.
+* sapadmPassword: sapadm kullanıcısının parolası.
 
-* sapadmId: Linux kullanıcı sapadm kullanıcının kimliği. Windows için gerekli değildir.
+* sapadmId: sapadm kullanıcısının Linux Kullanıcı KIMLIĞI. Windows için gerekli değildir.
 
-* sapsysGid: Linux grubu sapsys grubun kimliği. Windows için gerekli değildir.
+* Sapsysgıd: sapsys grubunun Linux Grup KIMLIĞI. Windows için gerekli değildir.
 
-* _artifactsLocation: Bu şablon için gerekli yapıtları bulunduğu yere taban URI. Eşlik eden komut dosyalarını kullanarak şablon dağıtıldığında, abonelik özel bir konumda kullanılır ve bu değeri otomatik olarak oluşturulur. Github'dan şablon dağıtma değil, yalnızca gerekli.
+* _artifactsLocation: Bu şablon için gereken yapıtların bulunduğu temel URI. Şablon, eşlik eden betikler kullanılarak dağıtıldığında, abonelikte bir özel konum kullanılacaktır ve bu değer otomatik olarak oluşturulur. Şablonu yalnızca GitHub 'dan dağıtmayın.
 
-* _artifactsLocationSasToken: _ArtifactsLocation erişmek için gerekli sasToken. Eşlik eden komut dosyalarını kullanarak şablon dağıtıldığında bir sasToken otomatik olarak oluşturulur. Github'dan şablon dağıtma değil, yalnızca gerekli.
+* _artifactsLocationSasToken: _artifactsLocation öğesine erişmek için gereken sasToken. Şablon, eşlik eden betikler kullanılarak dağıtıldığında, otomatik olarak bir sasToken oluşturulur. Şablonu yalnızca GitHub 'dan dağıtmayın.
 
 ### <a name="sap-hana"></a>SAP HANA
 
-Aşağıdaki örneklerde, kimliği HN1 ve sistem kimliği AH1 ile SAP NetWeaver sistemi ile SAP HANA yüklediğiniz varsayılır. Sanal ana bilgisayar adları hn1-db ah1-db SAP NetWeaver sistemi ah1 ascs, SAP NetWeaver ASCS için ve di ah1 0 için ilk SAP NetWeaver uygulama sunucusu tarafından kullanılan HANA Kiracı için HANA örneği için ' dir.
+Aşağıdaki örneklerde, System ID HN1 ve SAP NetWeaver System with System ID AH1 ile SAP HANA yükletireceğiz varsayılmaktadır. Sanal ana bilgisayar adları, hn1-DB, SAP NetWeaver sistemi tarafından kullanılan HANA kiracısı için AH1-DB, SAP NetWeaver ASCS ve AH1-dı-0 için ilk SAP NetWeaver uygulama sunucusu için AH1-ascs ' dir.
 
-#### <a name="install-sap-netweaver-ascs-for-sap-hana"></a>SAP HANA için SAP NetWeaver ASCS yükleyin
+#### <a name="install-sap-netweaver-ascs-for-sap-hana-using-azure-managed-disks"></a>Azure yönetilen diskleri kullanarak SAP HANA için SAP NetWeaver YOKLARı 'nı yükler
 
-SAP yazılım sağlama Yöneticisi (SWPM) başlamadan önce sanal ana bilgisayar adını ASCS IP adresini bağlamak gerekir. Önerilen yöntem sapacext kullanmaktır. Sapacext kullanarak IP adresini bağlarsanız, IP adresi yeniden başlatma sonrası yeniden bağlamaya yönelik emin olun.
+SAP yazılım sağlama Yöneticisi 'Ni (SWPM) başlatabilmeniz için, yoks 'nin sanal ana bilgisayar adının IP adresini bağlamanız gerekir. Önerilen yol, sapacext kullanmaktır. IP adresini sapacext kullanarak bağlarsanız, yeniden başlatmadan sonra IP adresini kaldırdığınızdan emin olun.
 
 ![Linux][Logo_Linux] Linux
 
@@ -244,19 +244,106 @@ SAP yazılım sağlama Yöneticisi (SWPM) başlamadan önce sanal ana bilgisayar
 C:\Program Files\SAP\hostctrl\exe\sapacext.exe -a ifup -i "Ethernet 3" -h ah1-ascs -n 255.255.255.128
 ```
 
-SWPM çalıştırın ve *ah1 ascs* için *ASCS örneği ana bilgisayar adı*.
+SPM 'yi çalıştırın ve *ascs örnek ana bilgisayar adı*için *AH1-ascs* kullanın.
 
-![Linux][Logo_Linux] Linux  
-Aşağıdaki profil parametresi /usr/sap/hostctrl/exe/host_profile bulunduğu SAP konak Aracısı profili ekleyin. Daha fazla bilgi için bkz. Not SAP [2628497].
+![Linux @ no__t-1 Linux  
+Aşağıdaki profil parametresini/usr/SAP/hostctrl/exe/host_profile. adresinde bulunan SAP konak Aracısı profiline ekleyin Daha fazla bilgi için bkz. SAP Note [2628497].
 ```
 acosprep/nfs_paths=/home/ah1adm,/usr/sap/trans,/sapmnt/AH1,/usr/sap/AH1
 ```
 
+#### <a name="install-sap-netweaver-ascs-for-sap-hana-on-azure-netappfiles-anf-beta"></a>Azure NetAppFiles (ANF) BETA SAP HANA için SAP NetWeaver yoks 'yi yükler
+
+> [!NOTE]
+> Bu işlevsellik daha sonra veya GA 'dir. Daha fazla bilgi için SAP Note [2815988] (yalnızca Preview müşterilerine görünür) bölümüne bakın.
+Bir SAP olayını bileşen BC-VCM-LVM-HYPERV ' de açın ve Azure NetApp Files önizlemesi için yönetim depolama bağdaştırıcısına katma isteği yapın
+
+ANF, Azure için NFS sağlar. SAP 'nin bu bağlamda, ABAP Merkezi Hizmetleri (ASCS) örneklerinin ve sonraki uygulama sunucuları yüklemesinin oluşturulmasını basitleştirir. Daha önce ASCS örneğinin de NFS sunucusu olarak davranması gerekiyordu ve acosprep/nfs_paths parametresi, SAP Hostagent 'ın host_profile 'e eklenmesi gerekiyordu.
+
+#### <a name="anf-is-currently-available-in-these-regions"></a>ANF Şu anda şu bölgelerde kullanılabilir:
+
+Avustralya Doğu, Orta ABD, Doğu ABD, Doğu ABD 2, Kuzey Avrupa, Orta Güney ABD, Batı Avrupa ve Batı ABD 2.
+
+#### <a name="network-requirements"></a>Ağ gereksinimleri
+
+ANF, SAP sunucularıyla aynı VNET 'in bir parçası olması gereken Temsilcili bir alt ağ gerektirir. Bu tür bir yapılandırma için örnek verilmiştir.
+Bu ekranda VNET 'in ve ilk alt ağın oluşturulması gösterilmektedir:
+
+![Azure ANF için sanal ağ oluşturma SAP ](media/lama/sap-lama-createvn-50.png)
+
+Sonraki adımda, Microsoft. NetApp/birimleri için Temsilcili alt ağ oluşturulur.
+
+![SAP 'yi temsil eden alt ağ ekle ](media/lama/sap-lama-addsubnet-50.png)
+
+![Alt ağların SAP 'yi Lama listesi ](media/lama/sap-lama-subnets.png)
+
+Artık Azure portal içinde bir NetApp hesabının oluşturulması gerekir:
+
+![SAP 'yi oluşturma NetApp hesabı oluştur ](media/lama/sap-lama-create-netappaccount-50.png)
+
+![SAP 'nin NetApp hesabı oluşturuldu ](media/lama/sap-lama-netappaccount.png)
+
+NetApp hesabında, kapasite havuzu her havuzun disk boyutunu ve türünü belirtir:
+
+![SAP 'yi oluşturma NetApp kapasite Havuzu Oluştur ](media/lama/sap-lama-capacitypool-50.png)
+
+![SAP 'nin NetApp kapasite havuzunu oluşturma ](media/lama/sap-lama-capacitypool-list.png)
+
+NFS birimleri artık tanımlanabilir. Tek bir havuzdaki birden fazla sistem için birimler olacağı için, kendi kendine açıklayan bir adlandırma düzeni seçilmelidir. SID ekleme ilgili birimleri birlikte gruplamak için yardımcı olur. YOKS ve AS örneği için aşağıdaki takmalar gereklidir: */sapmnt/\<SıD @ no__t-2*, */usr/SAP/\<sid @ no__t-5*ve */Home/\<sid @ no__t-8adm*. İsteğe bağlı olarak, */usr/SAP/Trans* , en azından bir yatay 'ın tüm sistemleri tarafından kullanılan merkezi aktarım dizini için gereklidir.
+
+> [!NOTE]
+> BETA aşamasında birimlerin adı, abonelik içinde benzersiz olmalıdır.
+
+![SAP 'yi oluşturan birim oluşturma 1 ](media/lama/sap-lama-createvolume-80.png)
+
+![SAP 'yi oluşturma birim oluştur 2 ](media/lama/sap-lama-createvolume2-80.png)
+
+![SAP 'yi oluşturma birim oluşturma 3 ](media/lama/sap-lama-createvolume3-80.png)
+
+Bu adımların diğer birimler için de tekrarlanması gerekir.
+
+![Oluşturulan birimlerin SAP 'yi Lama listesi ](media/lama/sap-lama-volumes.png)
+
+Artık bu birimlerin SAP SWPM ile ilk yüklemesinin gerçekleştirileceği sistemlere bağlanması gerekir.
+
+İlk olarak bağlama noktalarının oluşturulması gerekir. Bu durumda, SID AN1 olur, bu nedenle aşağıdaki komutların yürütülmesi gerekir:
+
+```bash
+mkdir -p /home/an1adm
+mkdir -p /sapmnt/AN1
+mkdir -p /usr/sap/AN1
+mkdir -p /usr/sap/trans
+```
+Sonraki ANF birimleri aşağıdaki komutlarla birlikte bağlanacaktır:
+
+```bash
+# sudo mount -t nfs -o rw,hard,rsize=65536,wsize=65536,vers=3,tcp 9.9.9.132:/an1-home-sidadm /home/an1adm
+# sudo mount -t nfs -o rw,hard,rsize=65536,wsize=65536,vers=3,tcp 9.9.9.132:/an1-sapmnt-sid /sapmnt/AN1
+# sudo mount -t nfs -o rw,hard,rsize=65536,wsize=65536,vers=3,tcp 9.9.9.132:/an1-usr-sap-sid /usr/sap/AN1
+# sudo mount -t nfs -o rw,hard,rsize=65536,wsize=65536,vers=3,tcp 9.9.9.132:/global-usr-sap-trans /usr/sap/trans
+```
+Bağlama komutları portaldan da türetilebilir. Yerel bağlama noktalarının ayarlanması gerekir.
+
+Doğrulamak için df-h komutunu kullanın.
+
+![SAP yerleştirme noktaları işletim sistemi düzeyi ](media/lama/sap-lama-mounts.png)
+
+Artık SWPM ile yükleme yapılmalıdır.
+
+En az bir AS örneği için aynı adımların gerçekleştirilmesi gerekir.
+
+Başarılı yüklemeden sonra sistem, SAP 'nin içinde keşfedilmiş olmalıdır.
+
+Bağlama noktaları, yoks ve AS örneği için şöyle görünmelidir:
+
+](media/lama/sap-lama-ascs.png)  ' de bağlama noktalarını (Bu bir örnektir). IP adresleri ve dışa aktarma yolu, daha önce kullanıldıklarından farklıdır)
+
+
 #### <a name="install-sap-hana"></a>SAP HANA yükleme
 
-Komut satırı aracı hdblcm kullanılarak SAP HANA'ya yüklerseniz, bir sanal ana bilgisayar adı sağlamak için parametre--ana bilgisayar adı kullanın. Bir ağ arabirimi için IP adresini sanal ana bilgisayar veritabanı adını eklemek gerekir. Önerilen yöntem sapacext kullanmaktır. Sapacext kullanarak IP adresini bağlarsanız, IP adresi yeniden başlatma sonrası yeniden bağlamaya yönelik emin olun.
+SAP HANA, hdblcm komut satırı aracını kullanarak yüklerseniz, sanal konak adı sağlamak için--hostname parametresini kullanın. Veritabanının sanal ana bilgisayar adının IP adresini bir ağ arabirimine eklemeniz gerekir. Önerilen yol, sapacext kullanmaktır. IP adresini sapacext kullanarak bağlarsanız, yeniden başlatmadan sonra IP adresini kaldırdığınızdan emin olun.
 
-Başka bir sanal ana bilgisayar adı ve IP adresi uygulama sunucuları tarafından HANA kiracıya bağlanmak için kullanılan ad.
+HANA kiracısına bağlanmak için uygulama sunucuları tarafından kullanılan ad için başka bir sanal konak adı ve IP adresi ekleyin.
 
 ```bash
 # /usr/sap/hostctrl/exe/sapacext -a ifup -i <network interface> -h <virtual hostname or IP address> -n <subnet mask>
@@ -264,11 +351,11 @@ Başka bir sanal ana bilgisayar adı ve IP adresi uygulama sunucuları tarafınd
 /usr/sap/hostctrl/exe/sapacext -a ifup -i eth0 -h ah1-db -n 255.255.255.128
 ```
 
-Veritabanı örneğinin yüklenmesini SWPM HANA sanal makine değil, uygulama sunucusu sanal makinede çalıştırın. Kullanım *ah1 db* için *veritabanı konak* iletişim kutusunda *SAP sistemine için veritabanı*.
+HANA sanal makinesinde değil, uygulama sunucusu sanal makinesinde SWPM 'nin veritabanı örneği yüklemesini çalıştırın. *SAP sistemi için Iletişim veritabanı*'Ndaki *veritabanı ana bilgisayarı* için *AH1-DB* kullanın.
 
-#### <a name="install-sap-netweaver-application-server-for-sap-hana"></a>SAP HANA için SAP NetWeaver uygulama sunucusu yükleme
+#### <a name="install-sap-netweaver-application-server-for-sap-hana"></a>SAP HANA için SAP NetWeaver uygulama sunucusunu yükler
 
-SAP yazılım sağlama Yöneticisi (SWPM) başlamadan önce sanal ana bilgisayar adı uygulama sunucusunun IP adresini bağlamak gerekir. Önerilen yöntem sapacext kullanmaktır. Sapacext kullanarak IP adresini bağlarsanız, IP adresi yeniden başlatma sonrası yeniden bağlamaya yönelik emin olun.
+SAP yazılım sağlama Yöneticisi 'Ni (SWPM) başlatabilmeniz için, uygulama sunucusunun sanal ana bilgisayar adının IP adresini bağlamanız gerekir. Önerilen yol, sapacext kullanmaktır. IP adresini sapacext kullanarak bağlarsanız, yeniden başlatmadan sonra IP adresini kaldırdığınızdan emin olun.
 
 ![Linux][Logo_Linux] Linux
 
@@ -284,14 +371,14 @@ SAP yazılım sağlama Yöneticisi (SWPM) başlamadan önce sanal ana bilgisayar
 C:\Program Files\SAP\hostctrl\exe\sapacext.exe -a ifup -i "Ethernet 3" -h ah1-di-0 -n 255.255.255.128
 ```
 
-SAP NetWeaver profili parametresi dbs/hdb/hdb_use_ident içinde HDB userstore anahtarını bulmak için kullanılan kimlik kullanmak için önerilir. Bu parametre, SWPM ile veritabanı örneği yüklemeden sonra el ile ekleyebilir veya SWPM ile çalıştırma
+HDB userStore 'da anahtarı bulmak için kullanılan kimliği ayarlamak için SAP NetWeaver profil parametresi DBS/HDB/hdb_use_ident kullanılması önerilir. Bu parametreyi SWPM ile veritabanı örneği yüklemesinden sonra el ile ekleyebilir veya ile SWPM 'yi çalıştırın
 
 ```bash
 # from https://blogs.sap.com/2015/04/14/sap-hana-client-software-different-ways-to-set-the-connectivity-data/
 /sapdb/DVDs/IM_LINUX_X86_64/sapinst HDB_USE_IDENT=SYSTEM_COO
 ```
 
-El ile ayarlarsanız, ayrıca yeni HDB userstore girdileri oluşturmanız gerekir.
+El ile ayarlarsanız, Yeni HDB userStore girdileri de oluşturmanız gerekir.
 
 ```bash
 # run as <sapsid>adm
@@ -300,182 +387,182 @@ El ile ayarlarsanız, ayrıca yeni HDB userstore girdileri oluşturmanız gereki
 /usr/sap/AH1/hdbclient/hdbuserstore SET DEFAULT ah1-db:35041@AH1 SAPABAP1 <password>
 ```
 
-Kullanım *ah1 di 0* için *PA'lar örneği ana bilgisayar adı* iletişim kutusunda *birincil uygulama sunucusu örneği*.
+İletişim kutusu *birincil uygulama sunucusu örneğindeki* *pas örneği konak adı* için *AH1-dı-0* kullanın.
 
 #### <a name="post-installation-steps-for-sap-hana"></a>SAP HANA için yükleme sonrası adımlar
 
-Kiracı kopyalamayı yapmak için taşıma Kiracı veya sistem çoğaltma oluşturma denemeden önce SYSTEMDB ve tüm Kiracı veritabanlarında yedekleme emin olun.
+Kiracı kopyalama yapmayı denemeden önce SYSTEMDB ve tüm kiracı veritabanlarını yedeklediğinizden emin olun, kiracı taşıyın veya sistem çoğaltması oluşturun.
 
 ### <a name="microsoft-sql-server"></a>Microsoft SQL Server
 
-Aşağıdaki örneklerde, SAP NetWeaver sistem kimliği AS1 sistemiyle yükleme varsayıyoruz. Sanal ana bilgisayar adları as1-db SAP NetWeaver sistemi as1 ascs, SAP NetWeaver ASCS için ve di as1 0 için ilk SAP NetWeaver uygulama sunucusu tarafından kullanılan SQL Server örneği için ' dir.
+Aşağıdaki örneklerde, System ID AS1 ile SAP NetWeaver sistemini yüklediğinizi varsaydık. Sanal konak adları, SAP NetWeaver sistemi tarafından kullanılan SQL Server örneği için AS1-DB, SAP NetWeaver ASCS ve AS1-dı-0 için ilk SAP NetWeaver uygulama sunucusu için AS1-ascs.
 
-#### <a name="install-sap-netweaver-ascs-for-sql-server"></a>SQL Server için SAP NetWeaver ASCS yükleyin
+#### <a name="install-sap-netweaver-ascs-for-sql-server"></a>SQL Server için SAP NetWeaver YOKLARı 'nı yükler
 
-SAP yazılım sağlama Yöneticisi (SWPM) başlamadan önce sanal ana bilgisayar adını ASCS IP adresini bağlamak gerekir. Önerilen yöntem sapacext kullanmaktır. Sapacext kullanarak IP adresini bağlarsanız, IP adresi yeniden başlatma sonrası yeniden bağlamaya yönelik emin olun.
+SAP yazılım sağlama Yöneticisi 'Ni (SWPM) başlatabilmeniz için, yoks 'nin sanal ana bilgisayar adının IP adresini bağlamanız gerekir. Önerilen yol, sapacext kullanmaktır. IP adresini sapacext kullanarak bağlarsanız, yeniden başlatmadan sonra IP adresini kaldırdığınızdan emin olun.
 
 ```bash
 # C:\Program Files\SAP\hostctrl\exe\sapacext.exe -a ifup -i <network interface> -h <virtual hostname or IP address> -n <subnet mask>
 C:\Program Files\SAP\hostctrl\exe\sapacext.exe -a ifup -i "Ethernet 3" -h as1-ascs -n 255.255.255.128
 ```
 
-SWPM çalıştırın ve *as1 ascs* için *ASCS örneği ana bilgisayar adı*.
+SPM 'yi çalıştırın ve *ascs örnek ana bilgisayar adı*için *AS1-ascs* kullanın.
 
-#### <a name="install-sql-server"></a>SQL Server yükleme
+#### <a name="install-sql-server"></a>SQL Server yüklensin
 
-Bir ağ arabirimi için IP adresini sanal ana bilgisayar veritabanı adını eklemek gerekir. Önerilen yöntem sapacext kullanmaktır. Sapacext kullanarak IP adresini bağlarsanız, IP adresi yeniden başlatma sonrası yeniden bağlamaya yönelik emin olun.
+Veritabanının sanal ana bilgisayar adının IP adresini bir ağ arabirimine eklemeniz gerekir. Önerilen yol, sapacext kullanmaktır. IP adresini sapacext kullanarak bağlarsanız, yeniden başlatmadan sonra IP adresini kaldırdığınızdan emin olun.
 
 ```bash
 # C:\Program Files\SAP\hostctrl\exe\sapacext.exe -a ifup -i <network interface> -h <virtual hostname or IP address> -n <subnet mask>
 C:\Program Files\SAP\hostctrl\exe\sapacext.exe -a ifup -i "Ethernet 3" -h as1-db -n 255.255.255.128
 ```
 
-SQL server sanal makinesinde SWPM veritabanı örneği yüklemesini çalıştırın. SAPINST_USE_HOSTNAME kullanın =*as1 db* SQL Server'a bağlanmak için kullanılan ana bilgisayar adı geçersiz kılmak için. Azure Resource Manager şablonu kullanarak sanal makineyi dağıttığınız, için veritabanı veri dosyaları için kullanılacak dizini ayarladığınızdan emin olun *C:\sql\data* ve veritabanı günlük dosyasına *C:\sql\log*.
+SQL Server sanal makinesinde SWPM veritabanı örneği yüklemesini çalıştırın. SQL Server bağlanmak için kullanılan ana bilgisayar adını geçersiz kılmak için SAPINST_USE_HOSTNAME =*AS1-DB* kullanın. Sanal makineyi Azure Resource Manager şablonu kullanarak dağıttıysanız, veritabanı veri dosyaları için kullanılan dizini *C:\sql\data* ve veritabanı günlük dosyası için *c:\SQL\LOG*olarak ayarladığınızdan emin olun.
 
-Emin olun kullanıcı *NT AUTHORITY\SYSTEM* SQL Server'a erişimi olan ve sunucu rolü *sysadmin*. Daha fazla bilgi için bkz. Not SAP [1877727] ve [2562184].
+*NT AUTHORITY\SYSTEM* kullanıcısının SQL Server erişimi olduğundan ve sunucu rolü *sysadmin*olduğundan emin olun. Daha fazla bilgi için bkz. SAP Note [1877727] ve [2562184].
 
-#### <a name="install-sap-netweaver-application-server"></a>SAP NetWeaver uygulama sunucusu yükleme
+#### <a name="install-sap-netweaver-application-server"></a>SAP NetWeaver uygulama sunucusunu yükler
 
-SAP yazılım sağlama Yöneticisi (SWPM) başlamadan önce sanal ana bilgisayar adı uygulama sunucusunun IP adresini bağlamak gerekir. Önerilen yöntem sapacext kullanmaktır. Sapacext kullanarak IP adresini bağlarsanız, IP adresi yeniden başlatma sonrası yeniden bağlamaya yönelik emin olun.
+SAP yazılım sağlama Yöneticisi 'Ni (SWPM) başlatabilmeniz için, uygulama sunucusunun sanal ana bilgisayar adının IP adresini bağlamanız gerekir. Önerilen yol, sapacext kullanmaktır. IP adresini sapacext kullanarak bağlarsanız, yeniden başlatmadan sonra IP adresini kaldırdığınızdan emin olun.
 
 ```bash
 # C:\Program Files\SAP\hostctrl\exe\sapacext.exe -a ifup -i <network interface> -h <virtual hostname or IP address> -n <subnet mask>
 C:\Program Files\SAP\hostctrl\exe\sapacext.exe -a ifup -i "Ethernet 3" -h as1-di-0 -n 255.255.255.128
 ```
 
-Kullanım *as1 di 0* için *PA'lar örneği ana bilgisayar adı* iletişim kutusunda *birincil uygulama sunucusu örneği*.
+İletişim kutusu *birincil uygulama sunucusu örneğindeki* *pas örneği konak adı* için *AS1-dı-0* kullanın.
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-### <a name="errors-and-warnings-during-discover"></a>Hataları ve Uyarıları bulma sırasında
+### <a name="errors-and-warnings-during-discover"></a>Bulma sırasında hatalar ve uyarılar
 
-* SELECT izni reddedildi
-  * [Microsoft] [ODBC SQL Server sürücüsü] [SQL Server] SELECT izni reddedildi; nesne 'log_shipping_primary_databases', 'msdb' veritabanı, şema 'dbo'. [SOAPFaultException]  
-  SELECT izni reddedildi; nesne 'log_shipping_primary_databases', 'msdb' veritabanı, şema 'dbo'.
+* Seçme izni reddedildi
+  * MICROSOFT [ODBC SQL Server sürücüsü] [SQL Server] ' Log_shipping_primary_databases ' nesnesi, ' msdb ' veritabanı, ' dbo ' şeması üzerinde SELECT izni reddedildi. [SOAPFaultException]  
+  ' Log_shipping_primary_databases ' nesnesi, ' msdb ' veritabanı, ' dbo ' şeması üzerinde SELECT izni reddedildi.
   * Çözüm  
-    Emin olun *NT AUTHORITY\SYSTEM* SQL Server erişebilirsiniz. ' Lu SAP notuna bakın [2562184]
+    *NT AUTHORITY\SYSTEM* 'ın SQL Server erişebildiğinizden emin olun. Bkz. SAP Note [2562184]
 
 
-### <a name="errors-and-warnings-for-instance-validation"></a>Hatalar ve Uyarılar için örnek doğrulama
+### <a name="errors-and-warnings-for-instance-validation"></a>Örnek doğrulaması için hatalar ve uyarılar
 
-* HDB userstore doğrulamada bir özel durum oluştu  
-  * Günlük Görüntüleyici bakın  
-    com.sap.nw.lm.aci.monitor.api.validation.RuntimeValidationException: Özel durum 'RuntimeHDBConnectionValidator' kimlikli doğrulayıcı (doğrulama: 'VALIDATION_HDB_USERSTORE'): Hdbuserstore alınamadı  
-    HANA userstore doğru konumda değil
+* HDB Kullanıcı deposunun doğrulanması sırasında bir özel durum oluştu  
+  * Günlük Görüntüleyicisine bakın  
+    com. sap. NW. lm. aci. Monitor. API. Validation. RuntimeValidationException: KIMLIĞI ' RuntimeHDBConnectionValidator ' olan doğrulayıcının özel durumu (doğrulama: ' VALIDATION_HDB_USERSTORE '): hdbuserstore alınamadı  
+    HANA userStore doğru konumda değil
   * Çözüm  
-    Bu /usr/sap/AH1/hdbclient/install/installation.ini doğru olduğundan emin olun
+    /Usr/SAP/AH1/hdbclient/Install/ınstaltar .Ini öğesinin doğru olduğundan emin olun
 
-### <a name="errors-and-warnings-during-a-system-copy"></a>Hataları ve Uyarıları System kopyalama sırasında
+### <a name="errors-and-warnings-during-a-system-copy"></a>Sistem kopyası sırasında hatalar ve uyarılar
 
-* Adım sağlama sistem doğrulanırken bir hata oluştu
-  * Neden: com.sap.nw.lm.aci.engine.base.api.util.exception.HAOperationException çağırma ' / usr/sap/hostctrl/exe/sapacext - bir ShowHanaBackups -m HN1 -f 50 - h hn1-db - o düzeyi = 0\;durumu = 5\;bağlantı noktası 35013 pf = / usr/sap/hostctrl = / exe/host_profile -R -T dev_lvminfo -u SYSTEM -p kanca - r' | /usr/SAP/hostctrl/exe/sapacext - bir ShowHanaBackups -m HN1 -f 50 - h hn1-db - o düzeyi = 0\;durumu = 5\;bağlantı noktası 35013 pf = / usr/sap/hostctrl/exe/host_profile = -R -T dev_lvminfo -u SYSTEM -p kanca - r
+* Sistem sağlama adımı doğrulanırken bir hata oluştu
+  * Neden: com. sap. NW. lm. aci. Engine. Base. API. util. Exception. HAOperationException çağıran '/usr/SAP/hostctrl/exe/sapacext-a ShowHanaBackups-m HN1-f 50-h HN1-DB-o Level = 0 @ no__t-0durum = 5 @ no__t-1port = 35013 PF =/usr/SAP/hostctrl/exe/Host_ profil-R-T dev_lvminfo-u SISTEM-p kanca-r ' | /usr/SAP/hostctrl/exe/sapacext-a ShowHanaBackups-m HN1-f 50-h HN1-DB-o Level = 0 @ no__t-2 durum = 5 @ no__t-3port = 35013 PF =/usr/SAP/hostctrl/exe/host_profile-R-T dev_lvminfo-u SISTEM-p kanca-r
   * Çözüm  
-    HANA sistem kaynağında tüm veritabanlarının yedek Al
+    Kaynak HANA sistemindeki tüm veritabanlarının yedeklemesini al
 
-* Sistem kopyalama adımı *Başlat* veritabanı örneği
-  * Konak aracısı işlemini '000D3A282BC91EE8A1D76CF1F92E2944' başarısız oldu (OperationException. FaultCode: '127', ileti: ' Komutu yürütülemedi. : [Microsoft] [ODBC SQL Server sürücüsünü] [SQL Server] kullanıcı, 'AS2' veritabanını değiştirme izni yok, veritabanı yok veya veritabanı erişim denetimlerine izin veren bir durumda değil.')
+* Veritabanı örneğinin sistem kopyalama adımı *başlangıcı*
+  * ' 000D3A282BC91EE8A1D76CF1F92E2944 ' konak Aracısı Işlemi başarısız oldu (OperationException. FaultCode: ' 127 ', Ileti: ' komutunun yürütülmesi başarısız oldu. : [Microsoft] [ODBC SQL Server sürücüsü] [SQL Server] kullanıcının ' AS2 ' veritabanını değiştirme izni yok, veritabanı yok veya veritabanı erişim denetimlerine izin veren bir durumda değil. ')
   * Çözüm  
-    Emin olun *NT AUTHORITY\SYSTEM* SQL Server erişebilirsiniz. ' Lu SAP notuna bakın [2562184]
+    *NT AUTHORITY\SYSTEM* 'ın SQL Server erişebildiğinizden emin olun. Bkz. SAP Note [2562184]
 
-### <a name="errors-and-warnings-during-a-system-clone"></a>Hataları ve Uyarıları System kopyalama sırasında
+### <a name="errors-and-warnings-during-a-system-clone"></a>Sistem kopyası sırasında hatalar ve uyarılar
 
-* Adımda örneği Aracısı kaydedilmeye çalışılırken hata oluştu *zorunlu kaydetmek ve örnek Aracısı başlangıç* ASCS veya uygulama sunucusu
-  * Örnek Aracısı kaydedilmeye çalışılırken hata oluştu. (RemoteException: 'Profilinden örnek verileri yüklemek için başarısız oldu'\\as1 ascs\sapmnt\AS1\SYS\profile\AS1_D00_as1 di 0':  Profiline erişilemiyor '\\as1 ascs\sapmnt\AS1\SYS\profile\AS1_D00_as1 di 0': Böyle dosya veya dizin yok.')
+* Uygulama sunucusu ya da yoks adımındaki *zorlamalı yazmaç ve başlatma örneği aracısına* örnek Aracısı kaydettirilmeye çalışılırken hata oluştu
+  * Örnek Aracısı kaydettirilmeye çalışılırken hata oluştu. (RemoteException: ', ' \\as1-ascs \ sapmnt \ AS1 \ SYS \ profile \ AS1_D00_as1-di-0 ' profilinden örnek veriler yüklenemedi: ' \\AS1-ascs \ sapmnt \ AS1 \ SYS \ profile \ AS1_D00_as1-di-0 ' profiline erişilemiyor: böyle bir dosya veya dizin yok. ')
   * Çözüm  
-   ASCS/SCS sapmnt paylaşımında SAP_AS1_GlobalAdmin için tam erişime sahip olduğundan emin olun
+   ASCS/SCS 'deki sapmnt paylaşımının SAP_AS1_GlobalAdmin için tam erişime sahip olduğundan emin olun
 
-* Adımda hata *kopya için başlangıç korumayı etkinleştir*
-  * Dosya açılamadı '\\as1 ascs\sapmnt\AS1\SYS\profile\AS1_D00_as1 di 0' neden: Böyle bir dosya veya dizin yok
+* Adım, *kopyalama Için başlangıç korumasını etkinleştirme* hatası
+  * ' @No__t-0as1-ascs \ sapmnt \ AS1 \ SYS \ profile \ AS1_D00_as1-di-0 ' adlı dosya açılamadı nedeni: böyle bir dosya veya dizin yok
   * Çözüm  
-    Uygulama sunucusunun bilgisayar hesabı profili yazma erişimi olmalıdır
+    Uygulama sunucusunun bilgisayar hesabının profile yazma erişimi olması gerekir
 
-### <a name="errors-and-warnings-during-create-system-replication"></a>Hataları ve Uyarıları sırasında sistem çoğaltma oluşturma
+### <a name="errors-and-warnings-during-create-system-replication"></a>Sistem çoğaltması oluşturma sırasında hatalar ve uyarılar
 
-* Sistem çoğaltma oluşturma tıklandığında özel durumu
-  * Neden: com.sap.nw.lm.aci.engine.base.api.util.exception.HAOperationException çağırma ' / usr/sap/hostctrl/exe/sapacext - bir ShowHanaBackups -m HN1 -f 50 - h hn1-db - o düzeyi = 0\;durumu = 5\;bağlantı noktası 35013 pf = / usr/sap/hostctrl = / exe/host_profile -R -T dev_lvminfo -u SYSTEM -p kanca - r' | /usr/SAP/hostctrl/exe/sapacext - bir ShowHanaBackups -m HN1 -f 50 - h hn1-db - o düzeyi = 0\;durumu = 5\;bağlantı noktası 35013 pf = / usr/sap/hostctrl/exe/host_profile = -R -T dev_lvminfo -u SYSTEM -p kanca - r
+* Sistem çoğaltması oluştur 'a tıklanmadaki özel durum
+  * Neden: com. sap. NW. lm. aci. Engine. Base. API. util. Exception. HAOperationException çağıran '/usr/SAP/hostctrl/exe/sapacext-a ShowHanaBackups-m HN1-f 50-h HN1-DB-o Level = 0 @ no__t-0durum = 5 @ no__t-1port = 35013 PF =/usr/SAP/hostctrl/exe/Host_ profil-R-T dev_lvminfo-u SISTEM-p kanca-r ' | /usr/SAP/hostctrl/exe/sapacext-a ShowHanaBackups-m HN1-f 50-h HN1-DB-o Level = 0 @ no__t-2 durum = 5 @ no__t-3port = 35013 PF =/usr/SAP/hostctrl/exe/host_profile-R-T dev_lvminfo-u SISTEM-p kanca-r
   * Çözüm  
-    Sapacext olarak yürütülen test `<hanasid`> adm
+    Sapacext 'ın `<hanasid` > adm olarak yürütülebileceğini test edin
 
-* Tam kopyalama depolama adımda etkinleştirilmediğinde hata
-  * Bir bağlam özniteliği ileti yolu IStorageCopyData.storageVolumeCopyList:1 ve alan targetStorageSystemId bildirirken bir hata oluştu
+* Depolama adımında tam kopya etkin olmadığında hata
+  * Itoesgecopydata. storageVolumeCopyList: 1 ve Field Targetstoragessystemıd için bağlam öznitelik iletisi raporlanırken bir hata oluştu
   * Çözüm  
-    Adımda uyarılarını gözardı et ve tekrar deneyin. Yeni bir destek paketi/düzeltme eki içinde SAP LaMa Bu sorun çözülecektir.
+    Adımdaki uyarıları yoksayın ve yeniden deneyin. Bu sorun, yeni bir destek paketinde/SAP 'nin düzeltme ekinde düzeltilecektir.
 
-### <a name="errors-and-warnings-during-relocate"></a>Hataları ve Uyarıları sırasında yeniden Yerleştir
+### <a name="errors-and-warnings-during-relocate"></a>Yeniden konumlandırma sırasında hatalar ve uyarılar
 
-* Yol '/ usr/sap/AH1' nfs reexports için izin verilmiyor.
-  * SAP notu denetleyin [2628497] Ayrıntılar için.
+* NFS yeniden dışarı aktarmaları için '/usr/sap/AH1 ' yoluna izin verilmez.
+  * Ayrıntılar için SAP Note [2628497] ' a bakın.
   * Çözüm  
-    ASCS ASCS HostAgent profiline dışarı aktaran ekleyin. ' Lu SAP notuna bakın [2628497]
+    Ascs HostAgent profiline yoks dışarı aktarmaları ekleyin. Bkz. SAP Note [2628497]
 
-* ASCS yeniden konumlandırma, uygulanmadı işlevi
-  * Komut çıktısı: exportfs: ana bilgisayar: / usr/sap/AX1: Uygulanmadı işlevi
+* YOKS yerini alırken işlev uygulanmadı
+  * Komut çıkışı: exportfs: Host:/usr/SAP/AX1: Işlev uygulanmadı
   * Çözüm  
-    NFS Sunucusu hizmeti yeniden Yerleştir hedef sanal makinede etkin olduğundan emin olun
+    Hedef sanal makinede NFS Sunucusu hizmetinin etkinleştirildiğinden emin olun
 
-### <a name="errors-and-warnings-during-application-server-installation"></a>Hataları ve Uyarıları uygulama sunucusu yüklemesi sırasında
+### <a name="errors-and-warnings-during-application-server-installation"></a>Uygulama sunucusu yüklemesi sırasında hatalar ve uyarılar
 
-* SAPinst adımı yürütülürken hata oluştu: getProfileDir
-  * HATA: (Son adımı tarafından bildirilen hata: Yakalanan ESAPinstException modülü çağrısında: Doğrulayıcı adımının ' | NW_DI | ul | ul | ul | ul | 0 | 0 | NW_GetSidFromProfiles | ul | ul | ul | ul | getSid | 0 | NW_readProfileDir | ul | ul | ul | ul | readProfile | 0 | getProfileDir' bir hata bildirdi: Düğüm \\\as1-ascs\sapmnt\AS1\SYS\profile mevcut değil. Bu sorunu çözmek için etkileşimli modda SAPinst Başlangıç)
+* Sapınst adımını yürütme hatası: getProfileDir
+  * Hata: (adım tarafından bildirilen son hata: modül çağrısında ESAPinstException yakalandı: ' | adım doğrulayıcısı NW_DI | ind | ind | ind | ind | 0 | 0 | NW_GetSidFromProfiles | ind | ind | ind | INSID | 0 | NW_readProfileDir | ind | ind | ind | ind | readProfile | 0 | Getprofiledır ' bir hata bildirdi: düğüm \\ \ as1-ascs\sapmnt\AS1\SYS\profile yok. Bu sorunu çözmek için Sapınst 'yi etkileşimli modda başlatın
   * Çözüm  
-    SWPM profili erişimi olan bir kullanıcı ile çalıştığından emin olun. Bu kullanıcı Uygulama Sunucusu Kurulum Sihirbazı'nda yapılandırılabilir
+    SWPM 'nin profile erişimi olan bir kullanıcı ile çalıştığından emin olun. Bu Kullanıcı, uygulama sunucusu Yükleme Sihirbazı 'nda yapılandırılabilir
 
-* SAPinst adımı yürütülürken hata oluştu: askUnicode
-  * HATA: (Son adımı tarafından bildirilen hata: Yakalanan ESAPinstException modülü çağrısında: Doğrulayıcı adımının ' | NW_DI | ul | ul | ul | ul | 0 | 0 | NW_GetSidFromProfiles | ul | ul | ul | ul | getSid | 0 | NW_getUnicode | ul | ul | ul | ul | unicode | 0 | askUnicode' bir hata bildirdi: Bu sorunu çözmek için etkileşimli modda SAPinst Başlangıç)
+* Sapınst adımını yürütme hatası: askUnicode
+  * Hata: (adım tarafından bildirilen son hata: modül çağrısında ESAPinstException yakalandı: ' | adım doğrulayıcısı NW_DI | ind | ind | ind | ind | 0 | 0 | NW_GetSidFromProfiles | ind | ind | ind | INSID | 0 | NW_getUnicode | ind | ind | ind | ind | UNICODE | 0 | Askunıcode ' bir hata bildirdi: Bu sorunu çözmek için Sapınst 'yi etkileşimli modda başlatın)
   * Çözüm  
-    Yeni bir SAP çekirdek kullanırsanız SWPM sistem artık ASCS ileti sunucusu kullanılarak bir unicode sistem olup olmadığını belirleyemiyor. ' Lu SAP notuna bakın [2445033] daha fazla ayrıntı için.  
-    Yeni bir destek paketi/düzeltme eki içinde SAP LaMa Bu sorun çözülecektir.  
-    Profil parametre OS_UNICODE SAP sisteminizin bu sorunu çözmek için varsayılan profilde uc =.
+    Son SAP çekirdeği kullanıyorsanız, SWPM, sistemin artık ASCS 'nin ileti sunucusunu kullanarak bir Unicode sistem olup olmadığını belirleyemez. Daha fazla bilgi için bkz. SAP Note [2445033] .  
+    Bu sorun, yeni bir destek paketinde/SAP 'nin düzeltme ekinde düzeltilecektir.  
+    Bu sorunu geçici olarak çözmek için SAP sisteminizin varsayılan profilinde OS_UNICODE = UC profil parametresini ayarlayın.
 
-* SAPinst adımı yürütülürken hata oluştu: dCheckGivenServer
-  * SAPinst adımı yürütülürken hata oluştu: dCheckGivenServer "Sürüm"1.0"hata =: (Son adımı tarafından bildirilen hata: \<p > yükleme kullanıcı tarafından iptal edildi. \</p >
+* Sapınst adımını yürütme hatası: dCheckGivenServer
+  * Sapınst adımını yürütme hatası: dCheckGivenServer "Version =" 1.0 "hatası: (adım tarafından bildirilen son hata: \<p > Yükleme Kullanıcı tarafından iptal edildi. \</p >
   * Çözüm  
-    SWPM profili erişimi olan bir kullanıcı ile çalıştığından emin olun. Bu kullanıcı Uygulama Sunucusu Kurulum Sihirbazı'nda yapılandırılabilir
+    SWPM 'nin profile erişimi olan bir kullanıcı ile çalıştığından emin olun. Bu Kullanıcı, uygulama sunucusu Yükleme Sihirbazı 'nda yapılandırılabilir
 
-* SAPinst adımı yürütülürken hata oluştu: checkClient
-  * SAPinst adımı yürütülürken hata oluştu: checkClient "Sürüm"1.0"hata =: (Son adımı tarafından bildirilen hata: \<p > yükleme kullanıcı tarafından iptal edildi. \</p >)
+* Sapınst adımını yürütme hatası: checkClient
+  * Sapınst adımını yürütme hatası: checkClient "Version =" 1.0 "hatası: (adım tarafından bildirilen son hata: \<p > Yükleme Kullanıcı tarafından iptal edildi. \</p >)
   * Çözüm  
-    Sanal uygulama sunucusu yüklemek istediğiniz makinede SQL Server için Microsoft ODBC sürücüsü yüklü olduğundan emin olun
+    SQL Server için Microsoft ODBC sürücüsünün uygulama sunucusunu yüklemek istediğiniz sanal makinede yüklü olduğundan emin olun
 
-* SAPinst adımı yürütülürken hata oluştu: copyScripts
-  * Adımı tarafından bildirilen son hata: Sistem çağrısı başarısız oldu. AYRINTILAR: Hata 13 (0x0000000d) (izni reddedildi) yürütme sisteminin çağrı parametresi ' fopenU' (\\\as1-ascs/sapmnt/AS1/SYS/exe/uc/NTAMD64/strdbs.cmd, w), dosya (\bas/bas/749_REL/bc_749_REL/src/ins/SAPINST/impl/src/syslib satır (494) / filesystem/syxxcfstrm2.cpp), yığın izleme:  
-  CThrThread.cpp: 85: CThrThread::threadFunction()  
-  CSiServiceSet.cpp: 63: CSiServiceSet::executeService()  
-  CSiStepExecute.cpp: 913: CSiStepExecute::execute()  
-  EJSController.cpp: 179: EJSControllerImpl::executeScript()  
-  JSExtension.hpp: 1136: CallFunctionBase::call()  
-  iaxxcfile.cpp: 183: iastring CIaOsFileConnect::callMemberFunction (iastring const & adına args_t const ve args)  
-  iaxxcfile.cpp: 1849: iastring CIaOsFileConnect::newFileStream (const args_t & _args)  
-  iaxxbfile.cpp: 773: CIaOsFile::newFileStream_impl(4)  
-  syxxcfile.cpp: 233: CSyFileImpl::openStream(ISyFile::eFileOpenMode)  
-  syxxcfstrm.cpp: 29: CSyFileStreamImpl::CSyFileStreamImpl(CSyFileStream*,iastring,ISyFile::eFileOpenMode)  
-  syxxcfstrm.cpp: 265: CSyFileStreamImpl::open()  
-  syxxcfstrm2.cpp: 58: CSyFileStream2Impl::CSyFileStream2Impl (const CSyPath & \\\aw1-ascs/sapmnt/AW1/SYS/exe/uc/NTAMD64/strdbs.cmd, 0x4)  
-  syxxcfstrm2.cpp: 456: CSyFileStream2Impl::open()
+* Sapınst adımını yürütme hatası: copyScripts
+  * Adım tarafından bildirilen son hata: sistem çağrısı başarısız oldu. Ayrıntılar: parametre (\\ \ AS1-ascs/sapmnt/AS1/SYS/exe/UC/NTAMD64/strdbs) ile ' fopenU ' sistem çağrısını yürütmede hata 13 (0x0000000d) (Izin reddedildi). cmd, w), (\ bas/bas/749_REL/bc_749_REL/src/ins/SAPINST/Impl/src/) dosyasında satır (494) syslib/FileSystem/syxxcfstrm2. cpp), yığın izleme:  
+  CThrThread. cpp: 85: CThrThread:: threadFunction ()  
+  Csiservıceset. cpp: 63: Csiservıceset:: executeService ()  
+  CSiStepExecute. cpp: 913: CSiStepExecute:: Execute ()  
+  EJSController. cpp: 179: EJSControllerImpl:: executeScript ()  
+  Jsextenma. hpp: 1136: CallFunctionBase:: Call ()  
+  ıaxxcfile. cpp: 183: ıastring Cıaosfileconnect:: callMemberFunction (ıastring const & Name, args_t const & args)  
+  ıaxxcfile. cpp: 1849: ıastring Cıaosfileconnect:: newFileStream (args_t const & _Args)  
+  ıaxxbdosya. cpp: 773: Cıaosfile:: newFileStream_impl (4)  
+  syxxcfile. cpp: 233: Csyfileımpl:: openStream (ırivfile:: eFileOpenMode)  
+  syxxcfstrı. cpp: 29: Csyfilestreamımpl:: Csyfilestreamımpl (CSyFileStream *, ıastring, ırivfile:: eFileOpenMode)  
+  syxxcfstrd. cpp: 265: Csyfilestreamımpl:: Open ()  
+  syxxcfstrm2. cpp: 58: CSyFileStream2Impl:: CSyFileStream2Impl (const CSyPath & \\ \ AW1-ascs/sapmnt/AW1/SYS/exe/UC/NTAMD64/strdbs. cmd, 0x4)  
+  syxxcfstrm2. cpp: 456: CSyFileStream2Impl:: Open ()
   * Çözüm  
-    SWPM profili erişimi olan bir kullanıcı ile çalıştığından emin olun. Bu kullanıcı Uygulama Sunucusu Kurulum Sihirbazı'nda yapılandırılabilir
+    SWPM 'nin profile erişimi olan bir kullanıcı ile çalıştığından emin olun. Bu Kullanıcı, uygulama sunucusu Yükleme Sihirbazı 'nda yapılandırılabilir
 
-* SAPinst adımı yürütülürken hata oluştu: askPasswords
-  * Adımı tarafından bildirilen son hata: Sistem çağrısı başarısız oldu. AYRINTILAR: Hata (0x00000005) 5 (erişim engellendi.) yığın izlemesini sistem çağrısı 'NetValidatePasswordPolicy' parametresi (...) (\bas/bas/749_REL/bc_749_REL/src/ins/SAPINST/impl/src/syslib/account/synxcaccmg.cpp) dosyasında (359) satırı ile yürütülmesi içinde:  
-  CThrThread.cpp: 85: CThrThread::threadFunction()  
-  CSiServiceSet.cpp: 63: CSiServiceSet::executeService()  
-  CSiStepExecute.cpp: 913: CSiStepExecute::execute()  
-  EJSController.cpp: 179: EJSControllerImpl::executeScript()  
-  JSExtension.hpp: 1136: CallFunctionBase::call()  
-  CSiStepExecute.cpp: 764: CSiStepExecute::invokeDialog()  
-  DarkModeGuiEngine.cpp: 56: DarkModeGuiEngine::showDialogCalledByJs()  
-  DarkModeDialog.cpp: 85: DarkModeDialog::submit()  
-  EJSController.cpp: 179: EJSControllerImpl::executeScript()  
-  JSExtension.hpp: 1136: CallFunctionBase::call()  
-  iaxxcaccount.cpp: 107: iastring CIaOsAccountConnect::callMemberFunction (iastring const & adına args_t const ve args)  
-  iaxxcaccount.cpp: 1186: iastring CIaOsAccountConnect::validatePasswordPolicy (const args_t & _args)  
-  iaxxbaccount.cpp: 430: CIaOsAccount::validatePasswordPolicy_impl()  
-  synxcaccmg.cpp: 297: Const ISyAccountMgt::PasswordValidationMessage CSyAccountMgtImpl::validatePasswordPolicy(saponazure,***))
+* Sapınst adımını yürütme hatası: Askşifreler
+  * Adım tarafından bildirilen son hata: sistem çağrısı başarısız oldu. Ayrıntılar: hata 5 (0x00000005) (erişim reddedildi.) ' NetValidatePasswordPolicy ' sistem çağrısının (...), dosyadaki (\ bas/bas/749_REL/bc_749_REL/src/ins/SAPINST/Impl/src/syslib/Account/synxcaccmg. cpp) (\ 359), yığın izleme:  
+  CThrThread. cpp: 85: CThrThread:: threadFunction ()  
+  Csiservıceset. cpp: 63: Csiservıceset:: executeService ()  
+  CSiStepExecute. cpp: 913: CSiStepExecute:: Execute ()  
+  EJSController. cpp: 179: EJSControllerImpl:: executeScript ()  
+  Jsextenma. hpp: 1136: CallFunctionBase:: Call ()  
+  CSiStepExecute. cpp: 764: CSiStepExecute:: ınvokedialog ()  
+  Koyu Modeguiengine. cpp: 56: koyu Modeguiengine:: showDialogCalledByJs ()  
+  Koyu Modedialog. cpp: 85: koyu Modedialog:: gönder ()  
+  EJSController. cpp: 179: EJSControllerImpl:: executeScript ()  
+  Jsextenma. hpp: 1136: CallFunctionBase:: Call ()  
+  ıaxxcaccount. cpp: 107: ıastring Cıaosaccountconnect:: callMemberFunction (ıastring const & Name, args_t const & args)  
+  ıaxxcaccount. cpp: 1186: ıastring Cıaosaccountconnect:: validatePasswordPolicy (args_t const & _Args)  
+  ıaxxbaccount. cpp: 430: Cıaosaccount:: validatePasswordPolicy_impl ()  
+  synxcaccmg. cpp: 297: ısyaccountynt::P asswordValidationMessage Csyaccountmgtımpl:: validatePasswordPolicy (saponazure, * * * * *) const)
   * Çözüm  
-    Adımda bir konak kural eklediğinizden emin olun *yalıtım* etki alanı denetleyicisini VM'den iletişime izin vermek
+    VM 'den etki alanı denetleyicisine iletişime izin vermek için adım *yalıtımına* bir konak kuralı eklediğinizden emin olun
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Azure işlemler kılavuzu üzerinde SAP HANA][hana-ops-guide]
-* [Azure sanal makineleri planlama ve uygulama için SAP][planning-guide]
-* [SAP için Azure sanal makineler dağıtımı][deployment-guide]
-* [SAP için Azure sanal makineleri DBMS dağıtım][dbms-guide]
+* [Azure işlemlerinde SAP HANA kılavuzu][hana-ops-guide]
+* [SAP için Azure sanal makineleri planlama ve uygulama][planning-guide]
+* [SAP için Azure sanal makineleri dağıtımı][deployment-guide]
+* [SAP için Azure sanal makineleri DBMS dağıtımı][dbms-guide]

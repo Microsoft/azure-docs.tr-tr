@@ -1,6 +1,6 @@
 ---
-title: Reliable Services iletişimine genel bakış | Microsoft Docs
-description: Açılış dinleyicileri Hizmetleri dahil olmak üzere, uç noktaları çözme ve Hizmetleri iletişim güvenilir hizmetler iletişimi modeline genel bakış.
+title: Reliable Services iletişime genel bakış | Microsoft Docs
+description: Hizmetlere yönelik dinleyicileri açmak, uç noktaları çözümlemek ve hizmetler arasında iletişim kurmak dahil Reliable Services iletişim modeline genel bakış.
 services: service-fabric
 documentationcenter: .net
 author: vturecek
@@ -8,24 +8,24 @@ manager: chackdan
 editor: BharatNarasimman
 ms.assetid: 36217988-420e-409d-b0a4-e0e875b6eac8
 ms.service: service-fabric
-ms.devlang: multiple
+ms.devlang: csharp, java
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: required
 ms.date: 11/01/2017
 ms.author: vturecek
-ms.openlocfilehash: 15b45cadc69830827952d87ffc2315b06b07b02c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4d3deb7f3b7e7fb6334525886c6d5b8787a8f940
+ms.sourcegitcommit: 18061d0ea18ce2c2ac10652685323c6728fe8d5f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62125001"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69036774"
 ---
-# <a name="how-to-use-the-reliable-services-communication-apis"></a>Reliable Services iletişimi API'leri kullanma
-Azure Service Fabric platform olarak hizmetler arasındaki iletişimi hakkında tamamen bağımsızdır. Tüm protokoller ve Yığınlar HTTP UDP Gelen kabul edilebilir. Bu hizmetleri nasıl iletişim kuracağını seçmek için hizmeti Geliştirici aittir. Reliable Services uygulaması çerçevesi yerleşik iletişim yığınlarının yanı sıra, özel iletişim bileşenleri oluşturmak için kullanabileceğiniz API'ler sağlar.
+# <a name="how-to-use-the-reliable-services-communication-apis"></a>Reliable Services iletişim API 'Lerini kullanma
+Platform olarak Azure Service Fabric, hizmetler arasındaki iletişim hakkında tamamen bağımsızdır. Her protokol ve yığın, UDP 'den HTTP 'ye kadar kabul edilebilir. Hizmetlerin nasıl iletişim kurması gerektiğini seçmek için hizmet geliştiricisi 'nin bir daha vardır. Reliable Services uygulama çerçevesi, yerleşik iletişim yığınlarının yanı sıra özel iletişim bileşenlerinizi oluşturmak için kullanabileceğiniz API 'Ler sağlar.
 
-## <a name="set-up-service-communication"></a>Hizmet iletişim kurma ayarlayın
-Reliable Services API, hizmet iletişimi için basit bir arabirim kullanır. Hizmetiniz için bir uç noktası'nı açmak için bu arabirimi uygulayan yeterlidir:
+## <a name="set-up-service-communication"></a>Hizmet iletişimini ayarla
+Reliable Services API 'SI, hizmet iletişimi için basit bir arabirim kullanır. Hizmetiniz için bir uç nokta açmak üzere bu arabirimi uygulamanız yeterlidir:
 
 ```csharp
 
@@ -50,7 +50,7 @@ public interface CommunicationListener {
 }
 ```
 
-Sonra hizmet tabanlı sınıfı yöntemi geçersiz kılma seçeneğinde döndürerek iletişim dinleyicisi uygulamanıza ekleyebilirsiniz.
+Daha sonra iletişim dinleyicisi uygulamanızı, hizmet tabanlı bir sınıf yöntemi geçersiz kılma bölümünde döndürerek ekleyebilirsiniz.
 
 Durum bilgisi olmayan hizmetler için:
 
@@ -96,11 +96,11 @@ public class MyStatefulService : StatefulService
 }
 ```
 
-Her iki durumda da dinleyicileri koleksiyonunu döndürür. Bu, büyük olasılıkla birden çok dinleyici kullanarak farklı protokoller kullanarak birden fazla uç noktası dinleyecek şekilde hizmetinizi sağlar. Örneğin, bir HTTP dinleyicisi ve ayrı bir WebSocket dinleyicisi olabilir. Her dinleyici bir ad ve sonuçta elde edilen koleksiyonunu alır *adı: adresi* çiftleri bir istemci bir hizmet örneği veya bir bölümü için dinleme adresleri istediğinde bir JSON nesnesi olarak temsil edilir.
+Her iki durumda da bir dinleyici koleksiyonu döndürürler. Bu, hizmetinize birden çok dinleyici kullanarak farklı protokoller kullanan birden çok uç noktayı dinlemesine olanak tanır. Örneğin, bir HTTP dinleyicisine ve ayrı bir WebSocket dinleyicisine sahip olabilirsiniz. Her dinleyici bir ad alır ve sonuç olarak *ad: adres* çiftleri, bir istemci bir hizmet örneği veya bölüm için dinleme adreslerini ISTEDIĞINDE bir JSON nesnesi olarak temsil edilir.
 
-Bir durum bilgisi olmayan hizmet içinde geçersiz kılma ServiceInstanceListeners koleksiyonunu döndürür. A `ServiceInstanceListener` oluşturmak için bir işlev içeren bir `ICommunicationListener(C#) / CommunicationListener(Java)` ve bir ad verir. Durum bilgisi olan hizmetler için geçersiz kılma ServiceReplicaListeners koleksiyonunu döndürür. Bu durum bilgisi olmayan çözümlemesiyle biraz daha farklı olmasına çünkü bir `ServiceReplicaListener` açmak için bir seçenek sahip bir `ICommunicationListener` ikincil çoğaltmalarındaki. Yalnızca bir hizmet birden fazla iletişim dinleyicileri kullanabilirsiniz, ancak hangi dinleyicileri ikincil çoğaltmalarındaki isteklerini kabul etmek ve hangilerinin yalnızca birincil çoğaltmalara üzerinde dinleme de belirtebilirsiniz.
+Durum bilgisi olmayan bir hizmette, geçersiz kılma Serviceınstancelisteners koleksiyonunu döndürür. , Oluşturmak için bir işlev içerirvebunabiradverir.`ServiceInstanceListener` `ICommunicationListener(C#) / CommunicationListener(Java)` Durum bilgisi olan hizmetler için, geçersiz kılma bir ServiceReplicaListeners koleksiyonu döndürür. Bu, durum bilgisiz karşılığından biraz farklıdır, çünkü `ServiceReplicaListener` bir ikincil çoğaltmalarda bir `ICommunicationListener` açma seçeneği vardır. Yalnızca bir hizmette birden fazla iletişim dinleyicisi kullanamazsınız, ancak hangi dinleyicilerin ikincil çoğaltmalarda istekleri kabul ettiklerinin ve yalnızca birincil çoğaltmalarda dinleneceğini de belirtebilirsiniz.
 
-Örneğin, yalnızca birincil çoğaltma RPC çağrıları alan ServiceRemotingListener olabilir ve salt okunur alan ikinci, özel bir dinleyicisi, HTTP üzerinden ikincil çoğaltmalarda ister:
+Örneğin, yalnızca birincil çoğaltmalarda RPC çağrıları alan bir ServiceRemotingListener ve HTTP üzerinden ikincil çoğaltmalarda okuma isteklerini alan ikinci bir özel dinleyici oluşturabilirsiniz:
 
 ```csharp
 protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
@@ -121,11 +121,11 @@ protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListe
 ```
 
 > [!NOTE]
-> Bir hizmet, her dinleyici için birden çok dinleyici oluştururken **gerekir** benzersiz bir ad verilmelidir.
+> Bir hizmet için birden çok dinleyici oluştururken, her dinleyiciye benzersiz bir ad verilmelidir.
 >
 >
 
-Son olarak, hizmet için gerekli olan uç noktaları açıklayan [hizmet bildirimi](service-fabric-application-and-service-manifests.md) uç noktalarda bölümünün altında.
+Son olarak, uç noktaların bölümünde hizmet [bildiriminde](service-fabric-application-and-service-manifests.md) hizmet için gereken uç noktaları tanıtın.
 
 ```xml
 <Resources>
@@ -137,7 +137,7 @@ Son olarak, hizmet için gerekli olan uç noktaları açıklayan [hizmet bildiri
 
 ```
 
-İletişim dinleyicisini içinden ayrılan uç nokta kaynaklara erişebilir `CodePackageActivationContext` içinde `ServiceContext`. Dinleyici açıldığında isteklerini dinlemeye başlayabilirsiniz.
+İletişim dinleyicisi, `CodePackageActivationContext` `ServiceContext`içindeki öğesinden öğesine ayrılmış uç nokta kaynaklarına erişebilir. Daha sonra dinleyici, açıldığında istekleri dinlemeye başlayabilir.
 
 ```csharp
 var codePackageActivationContext = serviceContext.CodePackageActivationContext;
@@ -151,12 +151,12 @@ int port = codePackageActivationContext.getEndpoint("ServiceEndpoint").getPort()
 ```
 
 > [!NOTE]
-> Uç nokta kaynakları tüm hizmet paketi için ortak olan ve hizmet paketi etkin olduğunda Service Fabric tarafından ayrılır. Aynı hizmeti ana bilgisayarında barındırılan birden çok hizmet çoğaltmaları aynı bağlantı noktasını paylaşabiliriz. Bu iletişim dinleyicisi bağlantı noktası paylaşımı desteklemelidir anlamına gelir. Bölüm kimliği ve çoğaltma/örnek kimliği dinleme adresi oluşturduğunda kullanmak için iletişim dinleyicisini bu önerilen yoludur.
+> Uç nokta kaynakları tüm hizmet paketi için ortaktır ve hizmet paketi etkinleştirildiğinde Service Fabric tarafından ayrılır. Aynı ServiceHost içinde barındırılan birden çok hizmet çoğaltması aynı bağlantı noktasını paylaşabilir. Bu, iletişim dinleyicisinin bağlantı noktası paylaşımını desteklemesi gerektiği anlamına gelir. Bunu yapmanın önerilen yolu, iletişim dinleyicisinin dinleme adresini oluştururken bölüm KIMLIĞINI ve çoğaltma/örnek KIMLIĞINI kullanması içindir.
 >
 >
 
-### <a name="service-address-registration"></a>Hizmeti adresi kaydı
-Bir sistem hizmeti adlı *adlandırma hizmeti* Service Fabric kümelerinde çalıştırılır. Adlandırma Hizmetleri ve her bir örneği veya hizmet çoğaltması dinlediği adresleri için bir kayıt şirketi hizmetidir. Zaman `OpenAsync(C#) / openAsync(Java)` yöntemi bir `ICommunicationListener(C#) / CommunicationListener(Java)` tamamlandıktan, dönüş değeri adlandırma hizmetinde kayıtlı. Adlandırma Hizmeti yayımlanabilmesi bu dönüş değeri, değeri herhangi bir şey hiç olabilir bir dizedir. Hizmet için bir adres için adlandırma hizmetinden yakalıyorum istemcileri görür Bu dize değeridir.
+### <a name="service-address-registration"></a>Hizmet adresi kaydı
+*Adlandırma hizmeti* adlı bir sistem hizmeti Service Fabric kümelerinde çalışır. Adlandırma Hizmeti, hizmetler için bir kayıt ve hizmetin her örneğinin veya çoğaltmasının dinlediği adresleridir. `OpenAsync(C#) / openAsync(Java)` Bir`ICommunicationListener(C#) / CommunicationListener(Java)` işlemi tamamlandığında, dönüş değeri adlandırma hizmeti kaydedilir. Adlandırma Hizmeti yayımlanan bu dönüş değeri, değeri hiç bir şey olabilecek bir dizedir. Bu dize değeri, istemcilerin Adlandırma Hizmeti hizmetin bir adresini sorduklarında gördükleri şeydir.
 
 ```csharp
 public Task<string> OpenAsync(CancellationToken cancellationToken)
@@ -194,20 +194,20 @@ public CompletableFuture<String> openAsync(CancellationToken cancellationToken)
 }
 ```
 
-Service Fabric, istemciler ve diğer hizmetler bu adres için hizmet adından sonra istemeniz sağlayan API'ler sağlar. Hizmet adresinin statik olduğundan, bu önemlidir. Hizmetleri kaynak Dengeleme ve kullanılabilirlik amaçları için kümedeki taşındı. Bir hizmet için dinleme adresini çözümlemek istemcilerin mekanizması budur.
+Service Fabric, istemcilerin ve diğer hizmetlerin bu adresi hizmet adına göre sormasını sağlayan API 'Ler sağlar. Hizmet adresi statik olmadığı için bu önemlidir. Hizmetler, kaynak Dengeleme ve kullanılabilirlik amaçlarıyla küme içinde taşınır. Bu, istemcilerin bir hizmetin dinleme adresini çözümlemesine izin veren mekanizmadır.
 
 > [!NOTE]
-> Bir iletişim dinleyicisini yazma tam talimatları için bkz [OWIN kendi kendine barındırma ile Service Fabric Web API Hizmetleri](service-fabric-reliable-services-communication-webapi.md) için C#Java için kendi HTTP sunucusu uygulamasını yazabileceğiniz bilgileriyse EchoServer bakın Uygulama örneğe https://github.com/Azure-Samples/service-fabric-java-getting-started.
+> İletişim dinleyicisi yazma hakkında tam bir yol için, bkz. C# [Owin Self-HOSTING ile Web API Services Service Fabric](service-fabric-reliable-services-communication-webapi.md) . Java için kendi http sunucu uygulamanızı yazabilir, bkz. https://github.com/Azure-Samples/service-fabric-java-getting-started.
 >
 >
 
-## <a name="communicating-with-a-service"></a>Bir hizmeti ile iletişim
-Reliable Services API Hizmetleri ile iletişim kuran istemciler yazmak için aşağıdaki kitaplıklar sağlar.
+## <a name="communicating-with-a-service"></a>Bir hizmetle iletişim kurma
+Reliable Services API 'SI, hizmetlerle iletişim kuran istemcileri yazmak için aşağıdaki kitaplıkları sağlar.
 
 ### <a name="service-endpoint-resolution"></a>Hizmet uç noktası çözümleme
-Bir hizmeti ile iletişimi için ilk adımı, bölüm veya konuşabilir istediğiniz hizmeti örneğini bir uç nokta adresini çözümlemek sağlamaktır. `ServicePartitionResolver(C#) / FabricServicePartitionResolver(Java)` Yardımcı sınıfı, temel temel nesne çalışma zamanında bir hizmet uç noktası belirlemek istemciler yardımcı olur. Service Fabric terminolojisinde, bir hizmet uç noktasını belirleme işlemi olarak adlandırılır *hizmet uç noktası çözümleme*.
+Bir hizmetle iletişimin ilk adımı, iletişim kurmak istediğiniz bölümün veya hizmet örneğinin bir uç nokta adresini çözmeye yönelik bir hizmettir. `ServicePartitionResolver(C#) / FabricServicePartitionResolver(Java)` Yardımcı program sınıfı, istemcilerin çalışma zamanında bir hizmetin uç noktasını belirlemesine yardımcı olan temel bir temel programdır. Service Fabric terimlerinde, bir hizmetin uç noktasını belirleme işlemi *hizmet uç noktası çözümü*olarak adlandırılır.
 
-Bir küme içindeki hizmetlerine bağlanmak için ServicePartitionResolver varsayılan ayarları kullanarak oluşturulabilir. Bu, çoğu durum için önerilen kullanımdır:
+Bir küme içindeki hizmetlere bağlanmak için, varsayılan ayarlar kullanılarak ServicePartitionResolver oluşturulabilir. Çoğu durum için önerilen kullanımdır:
 
 ```csharp
 ServicePartitionResolver resolver = ServicePartitionResolver.GetDefault();
@@ -216,7 +216,7 @@ ServicePartitionResolver resolver = ServicePartitionResolver.GetDefault();
 FabricServicePartitionResolver resolver = FabricServicePartitionResolver.getDefault();
 ```
 
-Farklı bir kümede hizmetlerin bağlanmak için küme ağ geçidi uç noktaları bir dizi bir ServicePartitionResolver oluşturulabilir. Ağ geçidi uç noktalar aynı kümeye bağlanmak için yalnızca farklı uç noktalar olduğunu unutmayın. Örneğin:
+Farklı bir kümedeki hizmetlere bağlanmak için bir küme ağ geçidi uç noktası kümesiyle bir ServicePartitionResolver oluşturulabilir. Ağ Geçidi uç noktalarının aynı kümeye bağlanmak için yalnızca farklı uç noktalar olduğunu unutmayın. Örneğin:
 
 ```csharp
 ServicePartitionResolver resolver = new  ServicePartitionResolver("mycluster.cloudapp.azure.com:19000", "mycluster.cloudapp.azure.com:19001");
@@ -225,7 +225,7 @@ ServicePartitionResolver resolver = new  ServicePartitionResolver("mycluster.clo
 FabricServicePartitionResolver resolver = new  FabricServicePartitionResolver("mycluster.cloudapp.azure.com:19000", "mycluster.cloudapp.azure.com:19001");
 ```
 
-Alternatif olarak, `ServicePartitionResolver` bir işlev oluşturmak için verilebilir. bir `FabricClient` dahili olarak kullanmak için:
+Alternatif olarak `ServicePartitionResolver` , dahili olarak kullanılmak `FabricClient` üzere oluşturmak için bir işlev verilebilir:
 
 ```csharp
 public delegate FabricClient CreateFabricClientDelegate();
@@ -240,7 +240,7 @@ public interface CreateFabricClient {
 }
 ```
 
-`FabricClient` küme üzerinde çeşitli yönetim işlemlerini için Service Fabric kümesi ile iletişim kurmak için kullanılan nesnedir. Hizmet bölüm çözümleyici kümenizle nasıl etkileşim kurduğunu üzerinde daha fazla denetim istediğinizde bu kullanışlıdır. `FabricClient` dahili olarak önbelleğe alma gerçekleştirir ve yeniden geçirmeniz önemlidir oluşturmak, genellikle pahalıdır `FabricClient` mümkün olduğunca örnekleri.
+`FabricClient`, kümedeki çeşitli yönetim işlemleri için Service Fabric kümesiyle iletişim kurmak için kullanılan nesnedir. Bu, bir hizmet bölümü Çözümleyicisinin kümeniz ile nasıl etkileşime girdiğinin üzerinde daha fazla denetim istediğinizde yararlıdır. `FabricClient`dahili olarak önbelleğe alma işlemini gerçekleştirir ve genellikle oluşturulması çok pahalıdır, bu nedenle örneklerin mümkün `FabricClient` olduğunca yeniden kullanılması önemlidir.
 
 ```csharp
 ServicePartitionResolver resolver = new  ServicePartitionResolver(() => CreateMyFabricClient());
@@ -249,7 +249,7 @@ ServicePartitionResolver resolver = new  ServicePartitionResolver(() => CreateMy
 FabricServicePartitionResolver resolver = new  FabricServicePartitionResolver(() -> new CreateFabricClientImpl());
 ```
 
-Resolve yöntemi, ardından bir hizmet ya da hizmet bölüm bölümlenmiş Hizmetleri adresini almak için kullanılır.
+Daha sonra bir çözümleme yöntemi, bölümlenmiş hizmetlere yönelik bir hizmetin veya hizmet bölümünün adresini almak için kullanılır.
 
 ```csharp
 ServicePartitionResolver resolver = ServicePartitionResolver.GetDefault();
@@ -264,16 +264,16 @@ CompletableFuture<ResolvedServicePartition> partition =
     resolver.resolveAsync(new URI("fabric:/MyApp/MyService"), new ServicePartitionKey());
 ```
 
-Bir hizmet adresi ServicePartitionResolver bir kolayca kullanarak çözülebilir. ancak daha fazla iş çözümlenen adresini doğru kullanılabilir emin olmak için gereklidir. İstemci bağlantı denemesi nedeniyle geçici bir hatayla başarısız oldu ve yeniden denenebilir algılaması gerekir (örneğin, hizmet taşınmış veya geçici olarak kullanılamıyor) ya da kalıcı bir hatayla (örneğin, hizmeti silindi veya istenen kaynak artık yok). Hizmet örneği veya çoğaltmaları düğümden düğüme birden çok nedeniyle herhangi bir zamanda taşıyabilirsiniz. İstemci kodunuz bağlanmaya zaman ServicePartitionResolver çözümlenen hizmet adresini eski olabilir. Bu durumda yeniden adresini çözümlemek yeniden istemcinin gerekir. Önceki sağlama `ResolvedServicePartition` çözümleyici almak yerine yalnızca bir önbelleğe alınan adresi yeniden denemeniz gerektiğini belirtir.
+Hizmet adresi bir ServicePartitionResolver kullanılarak kolayca çözülebilir, ancak çözümlenen adresin doğru şekilde kullanılabilmesi için daha fazla iş gerekir. İstemci, geçici bir hata nedeniyle bağlantı girişiminin başarısız olup olmadığını algılamamalıdır (örneğin, hizmet taşınabilir veya geçici olarak kullanılamıyor) veya kalıcı bir hata (ör. hizmet silinmiş veya istenen kaynak artık yok). Hizmet örnekleri veya çoğaltmalar, birden çok nedenden dolayı herhangi bir zamanda düğümden düğüme hareket edebilir. ServicePartitionResolver üzerinden çözümlenen hizmet adresi, istemci kodunuzun bağlanmaya çalıştığı zamandan daha eski olabilir. Bu durumda, istemcinin adresi yeniden çözümlemesi gerekir. Öncekini `ResolvedServicePartition` sağlamak, çözümleyicinin yalnızca önbelleğe alınmış bir adresi almak yerine yeniden denemek gerektiğini gösterir.
 
-Genellikle, istemci kodu ile ServicePartitionResolver doğrudan işe. Oluşturulur ve güvenilir hizmetler API'si iletişim istemci Fabrikalar geçirilen. Fabrikaları çözümleyici Hizmetleri ile iletişim kurmak için kullanılan istemci nesnesi oluşturmak için dahili olarak kullanın.
+Genellikle, istemci kodunun doğrudan ServicePartitionResolver ile çalışması gerekmez. Oluşturma ve Reliable Services API 'sindeki iletişim istemci fabrikalarını iletişim için başarılı oldu. Fabrikalar, hizmetlerle iletişim kurmak için kullanılabilecek bir istemci nesnesi oluşturmak için dahili olarak çözümleyici kullanır.
 
-### <a name="communication-clients-and-factories"></a>İletişim istemcileri ve fabrikaları
-İletişim Fabrika kitaplığı çözümlenen hizmet uç noktalarına deneniyor bağlantıları kolaylaştırır tipik bir hata işleme yeniden deneme düzeni uygular. Hata işleyicilerini sunarken Fabrika kitaplığı yeniden deneme mekanizması sağlar.
+### <a name="communication-clients-and-factories"></a>İletişim istemcileri ve fabrikalar
+İletişim fabrikası kitaplığı, çözümlenmiş hizmet uç noktalarına bağlantıların yeniden denenmesini kolaylaştıran tipik bir hata işleme yeniden deneme modelini uygular. Fabrika kitaplığı, hata işleyicilerini sağlarken yeniden deneme mekanizması sağlar.
 
-`ICommunicationClientFactory(C#) / CommunicationClientFactory(Java)` temel bir Service Fabric hizmeti için konuşabilirsiniz istemciler üreten bir iletişim istemci sınıf üreticisi tarafından uygulanan arabirimi tanımlar. CommunicationClientFactory uygulamasını nerede istemci iletişim kurmak istediği Service Fabric hizmeti tarafından kullanılan iletişim yığını üzerinde bağlıdır. Reliable Services API sağlayan bir `CommunicationClientFactoryBase<TCommunicationClient>`. Bu CommunicationClientFactory arabiriminin temel bir uygulamasını sağlar ve tüm iletişim yığınları için ortak olan görevleri gerçekleştirir. (Bu görevler, hizmet uç noktasını belirlemek için bir ServicePartitionResolver kullanarak içerir). İstemcileri, iletişim yığını için belirli mantığı işlemek için soyut CommunicationClientFactoryBase sınıf genellikle uygulama.
+`ICommunicationClientFactory(C#) / CommunicationClientFactory(Java)`bir Service Fabric hizmetiyle konuşabilecek istemcileri üreten bir iletişim istemci fabrikası tarafından uygulanan temel arabirimi tanımlar. CommunicationClientFactory uygulamasının uygulanması, istemcinin iletişim kurmak istediği Service Fabric hizmeti tarafından kullanılan iletişim yığınına bağlıdır. Reliable Services API 'SI sağlar `CommunicationClientFactoryBase<TCommunicationClient>`. Bu, CommunicationClientFactory arabiriminin temel bir uygulamasını sağlar ve tüm iletişim yığınları için ortak olan görevleri gerçekleştirir. (Bu görevler hizmet uç noktasını belirlemede bir ServicePartitionResolver kullanmayı içerir). İstemciler genellikle iletişim yığınına özgü mantığı işlemek için soyut CommunicationClientFactoryBase sınıfını uygular.
 
-İstemci iletişimi yalnızca bir adresi alır ve bir hizmete bağlanmak için kullanır. İstemcinin istediği ne olursa olsun protokolünü kullanabilirsiniz.
+İletişim istemcisi yalnızca bir adres alır ve bir hizmete bağlanmak için onu kullanır. İstemci istediği herhangi bir protokolü kullanabilir.
 
 ```csharp
 public class MyCommunicationClient : ICommunicationClient
@@ -298,7 +298,7 @@ public class MyCommunicationClient implements CommunicationClient {
 }
 ```
 
-İstemci sınıf üreticisi iletişim istemciler oluşturmak için öncelikli olarak sorumludur. Bir HTTP istemcisi gibi kalıcı bir bağlantı sürdürmenizi olmayan istemciler için Fabrika oluşturma ve istemciye döndürmek yeterlidir. Bazı ikili protokolleri gibi kalıcı bir bağlantı sürdürmenizi diğer protokolleri ayrıca bağlantı yeniden oluşturulması gerekip gerekmediğini belirlemek için Fabrika doğrulanması gerekir.  
+İstemci fabrikası, birincil olarak iletişim istemcileri oluşturmaktan sorumludur. HTTP istemcisi gibi kalıcı bir bağlantı bulundurmeyen istemciler için, yalnızca fabrika 'nin istemciyi oluşturması ve döndürmesi gerekir. Bazı ikili protokoller gibi kalıcı bir bağlantı sağlayan diğer protokoller de, bağlantının yeniden oluşturulması gerekip gerekmediğini belirleyebilmek için fabrika tarafından doğrulanması gerekir.  
 
 ```csharp
 public class MyCommunicationClientFactory : CommunicationClientFactoryBase<MyCommunicationClient>
@@ -341,14 +341,14 @@ public class MyCommunicationClientFactory extends CommunicationClientFactoryBase
 }
 ```
 
-Son olarak, özel durum işleyicisi bir özel durum oluştuğunda yapılacak eylemi belirlemekten sorumludur. Özel durumlar halinde kategorilere ayrılmış **yeniden denenebilir** ve **denenemeyen**.
+Son olarak, özel durum işleyicisi bir özel durum oluştuğunda hangi eylemin yapılacağını belirlemekten sorumludur. Özel durumlar yeniden **denenebilir** ve yeniden **denenmesiz**olarak kategorize edilir.
 
-* **Denenemeyen** özel durumları yeterlidir çağırana geri döndükten.
-* **yeniden denenebilir** özel durumları ek halinde kategorilere **geçici** ve **geçici olmayan**.
-  * **Geçici** özel durumları olan, yalnızca Hizmeti uç noktası adresi çözümlemeden yeniden denenebilir. Bu durum geçici ağ sorunları veya hizmet hata yanıtları hizmet uç noktası adresi yok gösteren dışındaki dahil edilir.
-  * **Geçici olmayan** özel durumları olanlardır yeniden çözümlenmesi için hizmet uç noktası adresi gerektirir. Hizmet uç noktası ulaşılamıyor belirten özel durumlar bunlar, hizmet belirten farklı bir düğüme taşınmıştır.
+* Yeniden **denenmeyen** özel durumlar, çağrı yapana tekrar geri oluşturulur.
+* yeniden **denenebilir** özel durumlar **geçici** ve **geçici olmayan**bir şekilde kategorilere ayrılır.
+  * **Geçici** özel durumlar, hizmet uç noktası adresi yeniden çözümlenmeden yalnızca yeniden denenebilecek olanlardır. Bunlar, hizmet uç noktası adresinin yok olduğunu belirten geçici ağ sorunları veya hizmet hatası yanıtlarını içerir.
+  * **Geçici olmayan** özel durumlar, hizmet uç noktası adresinin yeniden çözümlenmesini gerektirir. Bunlar, hizmetin farklı bir düğüme taşındığını belirten hizmet uç noktasına ulaşılamadığını gösteren özel durumlar içerir.
 
-`TryHandleException` Belirli bir özel durum hakkında karar verir. Varsa, **bilmediği** döndürmesi gereken bir özel durum hakkında yapmak için hangi kararları **false**. Varsa, **bilen** yapmak için hangi karar ve buna göre sonuç kümesi döndürür **true**.
+, `TryHandleException` Belirli bir özel durumla ilgili bir karar getirir. Bir özel durum hakkında hangi kararların yapılacağını bilmezse, **false**döndürmelidir. Hangi kararın yapılacağını **biliyorsanız** , sonucu buna göre ayarlamanız ve **true**döndürmelidir.
 
 ```csharp
 class MyExceptionHandler : IExceptionHandler
@@ -396,7 +396,7 @@ public class MyExceptionHandler implements ExceptionHandler {
 }
 ```
 ### <a name="putting-it-all-together"></a>Hepsini bir araya getirme
-İle bir `ICommunicationClient(C#) / CommunicationClient(Java)`, `ICommunicationClientFactory(C#) / CommunicationClientFactory(Java)`, ve `IExceptionHandler(C#) / ExceptionHandler(Java)` bir iletişim protokolü, yerleşik bir `ServicePartitionClient(C#) / FabricServicePartitionClient(Java)` tümünü bir araya sarmalar ve bu bileşenler geçici hata işleme ve hizmet bölümü adresi çözümleme döngü sağlar.
+,, Ve `ServicePartitionClient(C#) / FabricServicePartitionClient(Java)` bir iletişim protokolü etrafında yerleşik olarak, bir, tümünü bir araya getirir ve bu bileşenler etrafında hata işleme ve hizmet bölümü adres çözümleme döngüsünü sağlar. `IExceptionHandler(C#) / ExceptionHandler(Java)` `ICommunicationClientFactory(C#) / CommunicationClientFactory(Java)` `ICommunicationClient(C#) / CommunicationClient(Java)`
 
 ```csharp
 private MyCommunicationClientFactory myCommunicationClientFactory;
@@ -431,6 +431,6 @@ CompletableFuture<?> result = myServicePartitionClient.invokeWithRetryAsync(clie
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Reliable Services ile ASP.NET Core](service-fabric-reliable-services-communication-aspnetcore.md)
-* [Reliable Services uzaktan iletişimi ile uzak yordam çağrıları](service-fabric-reliable-services-communication-remoting.md)
-* [Reliable Services kullanarak WCF iletişim](service-fabric-reliable-services-communication-wcf.md)
+* [Reliable Services ASP.NET Core](service-fabric-reliable-services-communication-aspnetcore.md)
+* [Reliable Services uzaktan iletişim ile uzak yordam çağrıları](service-fabric-reliable-services-communication-remoting.md)
+* [Reliable Services kullanarak WCF iletişimi](service-fabric-reliable-services-communication-wcf.md)

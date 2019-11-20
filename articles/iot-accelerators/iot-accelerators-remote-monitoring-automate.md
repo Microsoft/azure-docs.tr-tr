@@ -1,5 +1,5 @@
 ---
-title: Cihaz sorunlarını algılayan bir uzaktan izleme çözümü öğreticide - Azure | Microsoft Docs
+title: Cihaz sorunlarını algılamak için uzaktan Izleme çözümünü kullanma-Azure | Microsoft Docs
 description: Bu öğreticide Uzaktan İzleme çözümündeki eşik değer tabanlı cihaz sorunlarını otomatik olarak algılama amacıyla kuralların ve eylemlerin nasıl kullanılacağı gösterilmektedir.
 author: dominicbetts
 manager: timlt
@@ -9,14 +9,14 @@ services: iot-accelerators
 ms.date: 11/08/2018
 ms.topic: tutorial
 ms.custom: mvc
-ms.openlocfilehash: 91ee5087e5f41cda3648c2ecadcfcf16fd32a249
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 676f1133a516174478a456a97bc467e7770fe6e7
+ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61448379"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73888884"
 ---
-# <a name="tutorial-detect-issues-with-devices-connected-to-your-monitoring-solution"></a>Öğretici: İzleme çözümünüze bağlı cihazlarla sorunları tespit edin
+# <a name="tutorial-detect-issues-with-devices-connected-to-your-monitoring-solution"></a>Öğretici: İzleme çözümünüze bağlı cihazlarla sorunları algılama
 
 Bu öğreticide bağlı IoT cihazlarınızla ilgili sorunları algılamak için Uzaktan İzleme çözümü hızlandırıcısını yapılandıracaksınız. Cihazlarınızla ilgili sorunları algılamak için çözüm panosunda uyarı oluşturan kurallar ekleyeceksiniz.
 

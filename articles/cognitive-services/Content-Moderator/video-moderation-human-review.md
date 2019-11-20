@@ -1,39 +1,39 @@
 ---
-title: İnsan tarafından İnceleme - Content Moderator ile video denetimi
-titlesuffix: Azure Cognitive Services
-description: Uygunsuz içeriği Orta için makine destekli video denetimi ve insan tarafından İnceleme araçları kullanın
+title: İnsan incelemesi ile video denetleme-Content Moderator
+titleSuffix: Azure Cognitive Services
+description: Uygun olmayan içeriğe sahip olan makine yardımlı video denetleme ve insan gözden geçirme araçlarını kullanın
 services: cognitive-services
-author: sanjeev3
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 04/30/2019
-ms.author: sajagtap
-ms.openlocfilehash: a6c467d3153400815e37a5d461766140abd1fa32
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: pafarley
+ms.openlocfilehash: a4e7b079367a4b4dec1d2b3d6c0afde1d8276766
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65228121"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72754165"
 ---
-# <a name="video-moderation-with-human-review"></a>İnsan tarafından İnceleme ile video denetimi
+# <a name="video-moderation-with-human-review"></a>İnsan incelemesinin bulunduğu video denetlemesi
 
-Kullanım Content Moderator'ın makine destekli [video denetimi](video-moderation-api.md) ve [insan tarafından İnceleme aracı](Review-Tool-User-Guide/human-in-the-loop.md) Orta videoları ve dökümleri için yetişkin (açık) ve en iyi sonuçları almak için (müstehcen) müstehcen içerik işletmenizi.
+İşletmeniz için en iyi sonuçları elde etmek için Content Moderator makine yardımlı [video denetlemesi](video-moderation-api.md) ve [insan gözden geçirme aracı](Review-Tool-User-Guide/human-in-the-loop.md) 'nı, Yetişkin (açık) ve kcy (müstesel) içeriği için orta ve döküm dosyaları için kullanın.
 
-## <a name="video-trained-classifier-preview"></a>Video eğitimli sınıflandırıcı (Önizleme)
+## <a name="video-trained-classifier-preview"></a>Video eğitilen sınıflandırıcı (Önizleme)
 
-Makine destekli video sınıflandırma ya da görüntü eğitilen modelleri veya video eğitilen modelleri ile elde edilir. Görüntü eğitimli video sınıflandırıcılar farklı olarak, Microsoft'un yetişkinlere yönelik ve müstehcen video sınıflandırıcı videolardaki eğitildi. Bu yöntem, daha iyi eşleşmenin kalitesini sonuçlanır.
+Görüntü eğitilen modeller veya video eğitilen modeller ile makine destekli video sınıflandırması elde edilir. Görüntü eğitilen video sınıflandırıcılarından farklı olarak, Microsoft 'un yetişkinlere yönelik video sınıflandırıcıları videolar ile eğitilir. Bu yöntem, daha iyi eşleşme kalitesine neden olur.
 
-## <a name="shot-detection"></a>Kare algılama
+## <a name="shot-detection"></a>Görüntü algılama
 
-Sınıflandırma ayrıntılarını alırken ek video zeka videoları analiz daha fazla esneklik yardımcı olur. Çerçeve çıktısı yerine, Microsoft'un video denetimi hizmeti çok görüntüsü düzeyi bilgileri sağlar. Şimdi, görüntüsü ve çerçeve düzeyindeki videolarınızı analiz seçeneğiniz de vardır.
+Sınıflandırma ayrıntılarının çıktıları sırasında, ek video zekası videoları çözümlemede daha fazla esneklik sağlar. Microsoft 'un video denetleme hizmeti, yalnızca çerçevelerin çıktısını almak yerine, görüntü düzeyinde bilgiler de sağlar. Artık videolarınızı, görüntü düzeyinde ve çerçeve düzeyinde analiz etme seçeneğiniz vardır.
 
-## <a name="key-frame-detection"></a>Anahtar kare algılama
+## <a name="key-frame-detection"></a>Anahtar çerçeve algılama
 
-Çerçeve düzenli aralıklarla çıktısı, yerine video denetimi hizmeti tanımlar ve yalnızca büyük olasılıkla tamamlandı (iyi) çerçeve çıkarır. Bu özellik, çerçeve düzeyi yetişkinlere yönelik ve müstehcen analizi için etkin çerçeve oluşturma sağlar.
+Video denetleme hizmeti, düzenli aralıklarla çerçeve almak yerine yalnızca tamamlanmış olabilecek (iyi) çerçeveleri tanımlar ve verir. Özelliği, çerçeve düzeyinde yetişkinlere yönelik ve hızlı analizler için verimli çerçeve oluşturulmasına olanak sağlar.
 
-Aşağıdaki Ayıkla kısmi yanıt olası görüntüleri, anahtar çerçeveler ve yetişkinlere yönelik ve müstehcen puanları gösterilmektedir:
+Aşağıdaki ayıklama, olası görüntüler, anahtar çerçeveler ve yetişkin ve kcy puanlarını içeren kısmi bir yanıt gösterir:
 
 ```json
 "fragments":[  
@@ -76,33 +76,33 @@ Aşağıdaki Ayıkla kısmi yanıt olası görüntüleri, anahtar çerçeveler v
     ]
 ```
 
-## <a name="visualization-for-human-reviews"></a>İncelemelere için görselleştirme
+## <a name="visualization-for-human-reviews"></a>İnsan incelemeleri için görselleştirme
 
-Daha fazla bilgi için ince durumlarda, işletmeler, video, çerçeveler ve makine atanan etiketleri işlemeye yönelik bir insan tarafından İnceleme çözümü gerekir. Videolar ve çerçeveleri gözden geçirme İnsan Moderatörler öngörüleri eksiksiz bir görünümünü elde, etiketleri değiştirmek ve kararlarına gönderin.
+Daha fazla sayıda durumda, işletmeler video, çerçeve ve makine tarafından atanan etiketleri işlemek için bir insan incelemesi çözümüne ihtiyaç duyar. Videoları ve kareleri inceleyen insan BT yöneticileri, öngörülerin tamamen bir görünümünü alır, etiketleri değiştirebilir ve kararlarını gönderir.
 
-![Video gözden geçirme aracı varsayılan görünüm](images/video-review-default-view.png)
+![video inceleme aracı varsayılan görünümü](images/video-review-default-view.png)
 
-## <a name="player-view-for-video-level-review"></a>Video düzeyinde gözden geçirme için Player görüntüle
+## <a name="player-view-for-video-level-review"></a>Video düzeyinde inceleme için oynatıcı görünümü
 
-Video düzeyinde ikili kararları olası yetişkinlere yönelik ve müstehcen çerçeveleri gösteren bir video oynatıcı görünümü ile yapılabilir. Video Sahne incelemek için çeşitli hızı seçenekleri ile İnsan gözden geçirenler gidin. Bunlar, etiketler kapatarak kararlarına onaylayın.
+Video düzeyinde ikili kararlar, olası yetişkinlere ve kcy çerçevelerini gösteren bir video oynatıcı görünümüyle mümkün hale getirilir. İnsan gözden geçirenler, sahneleri incelemek için çeşitli hız seçenekleriyle videoda gezinenler. Bunlar, etiketleri değiştirerek kararlarını doğrulamalar.
 
-![Video gözden geçirme aracı player görüntüle](images/video-review-player-view.PNG)
+![video İnceleme araç oynatıcı görünümü](images/video-review-player-view.PNG)
 
-## <a name="frames-view-for-detailed-reviews"></a>Çerçeve görünüm ayrıntılı incelemeleri
+## <a name="frames-view-for-detailed-reviews"></a>Ayrıntılı incelemeler için çerçeveler görünümü
 
-Çerçeve çerçeve analizi için ayrıntılı bir video İnceleme çerçeve tabanlı bir görünümle mümkün olur. İnsan gözden geçirenler, gözden geçirin ve bir veya daha fazla kareyi seçin ve etiketleri kararlarına onaylamak için Değiştir. İsteğe bağlı bir sonraki adım, rahatsız edici çerçeveleri veya içerik Redaksiyon olacaktır.
+Çerçeve tabanlı bir görünümle çerçeve başına analiz için ayrıntılı bir video incelemesi yapılabilir. İnsan gözden geçirenler bir veya daha fazla kare inceleyerek, kararları almak için bir veya daha fazla kare ve geçiş etiketi seçer İsteğe bağlı bir sonraki adım, rahatsız edici çerçevelerin veya içeriğin bir kopyası olur.
 
-![Video gözden geçirme aracı çerçeveleri görüntülemek](images/video-review-frames-view-apply-tags.PNG)
+![video İnceleme araç çerçeveleri görünümü](images/video-review-frames-view-apply-tags.PNG)
 
 ## <a name="transcript-moderation"></a>Transkripti denetleme
 
-Videoları genellikle ses üzerinden denetimi de uygunsuz konuşma gereken sahiptir. Konuşmayı metne dönüştürün ve gözden geçirme aracı içindeki metin denetimi için döküm göndermek için Content Moderator'ın gözden geçirme API kullanmak için Azure Media Indexer hizmeti kullanın.
+Videolar genellikle, rahatsız edici bir konuşma için gereken bir sestir. Konuşmayı metne dönüştürmek ve Content Moderator İnceleme API 'sini kullanarak İnceleme aracında metin denetlemesi için dökümü göndermek üzere Azure Media Indexer hizmetini kullanın.
 
-![Video gözden geçirme aracı döküm görüntüle](images/video-review-transcript-view.png)
+![video inceleme aracı dökümü görünümü](images/video-review-transcript-view.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Kullanmaya başlama [video denetimi hızlı](video-moderation-api.md).
-- Nasıl oluşturacağınızı öğrenin [video incelemeleri](video-reviews-quickstart-dotnet.md) İnsan gözden geçirenler, denetlenen çıktısından için.
-- Ekleme [video deşifre metni inceler](video-transcript-reviews-quickstart-dotnet.md) video, incelemeleri için.
-- Ayrıntılı öğretici nasıl geliştirebileceğinizi kullanıma bir [tamamlamak video denetimi çözümü](video-transcript-moderation-review-tutorial-dotnet.md).
+- [Video denetleme hızlı](video-moderation-api.md)başlangıcı ile çalışmaya başlayın.
+- Aracılı çıkışınızdan insan gözden geçirenler için [video İncelemeleri](video-reviews-quickstart-dotnet.md) oluşturmayı öğrenin.
+- Video incelemelerinizi [video dökümü](video-transcript-reviews-quickstart-dotnet.md) ekleme hakkında inceleme.
+- [Tüm video denetleme çözümünü](video-transcript-moderation-review-tutorial-dotnet.md)geliştirme hakkında ayrıntılı öğreticiye göz atın.

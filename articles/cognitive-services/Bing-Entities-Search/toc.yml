@@ -45,7 +45,8 @@
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Küçük resimleri yeniden boyutlandırma ve kırpma
-      href: resize-and-crop-thumbnails.md
+      maintainContext: true
+      href: ../bing-web-search/resize-and-crop-thumbnails.md
 - name: Kavramlar
   items:
     - name: Varlıkları arama
@@ -64,11 +65,11 @@
         - name: .NET
           href: 'https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingentitysearchapi?view=azure-dotnet'
         - name: Java
-          href: 'https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/entitysearch?view=azure-java-stable'
+          href: 'https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/bingentitysearchapi?view=azure-java-stable'
         - name: Python
           href: 'https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/entitysearch?view=azure-python'
         - name: Node.js
-          href: 'https://docs.microsoft.com/javascript/api/overview/azure/cognitiveservices/entitysearch?view=azure-node-latest'
+          href: 'https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-entitysearch/?view=azure-node-latest'
         - name: Başlayın
           href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/entitysearch'
 - name: Kaynaklar
@@ -92,6 +93,7 @@
     - name: Bing Varlık Arama uç noktası
       href: entity-search-endpoint.md
     - name: Bing Varlık Arama API'si Analizleri
-      href: bing-entity-stats.md
+      maintainContext: true
+      href: ../bing-web-search/bing-web-stats.md
     - name: Uyumluluk
       href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'

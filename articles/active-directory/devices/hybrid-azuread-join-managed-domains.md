@@ -1,6 +1,6 @@
 ---
-title: Yönetilen etki alanları için hibrit Azure Active Directory katılımını Yapılandır | Microsoft Docs
-description: Hibrit Azure Active Directory join yönetilen etki alanları için yapılandırmayı öğrenin.
+title: Yönetilen etki alanları için karma Azure Active Directory birleştirmesini yapılandırma | Microsoft Docs
+description: Yönetilen etki alanları için karma Azure Active Directory birleştirmesini yapılandırmayı öğrenin.
 services: active-directory
 ms.service: active-directory
 ms.subservice: devices
@@ -11,26 +11,26 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sandeo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: b24888934d7e89a13b1b07b7138be476575fc306
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: 787900918035dc8b14d3a173496ab1a23b0f93bb
+ms.sourcegitcommit: c8a102b9f76f355556b03b62f3c79dc5e3bae305
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67204609"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68813082"
 ---
-# <a name="tutorial-configure-hybrid-azure-active-directory-join-for-managed-domains"></a>Öğretici: Yönetilen etki alanları için hibrit Azure Active Directory katılımını Yapılandır
+# <a name="tutorial-configure-hybrid-azure-active-directory-join-for-managed-domains"></a>Öğretici: Yönetilen etki alanları için karma Azure Active Directory birleştirmesini yapılandırma
 
-Kuruluşunuzdaki bir kullanıcı gibi bir cihaz korumak istediğiniz bir çekirdek kimliğidir. Dilediğiniz zaman ve herhangi bir konumdan kaynaklarınızı korumak için bir cihazın kimliğini kullanabilirsiniz. Bu hedef, cihaz kimliklerini getiren ve bunları aşağıdaki yöntemlerden birini kullanarak Azure Active Directory (Azure AD) yöneterek gerçekleştirebilirsiniz:
+Kuruluşunuzdaki bir kullanıcı gibi, bir cihaz da korumak istediğiniz çekirdek kimliktir. Kaynaklarınızı istediğiniz zaman ve herhangi bir konumdan korumak için bir cihazın kimliğini kullanabilirsiniz. Aşağıdaki yöntemlerden birini kullanarak cihaz kimliklerini Azure Active Directory (Azure AD) içinde yöneterek, bu hedefi gerçekleştirebilirsiniz:
 
 - Azure AD'ye katılım
 - Hibrit Azure AD'ye katılım
 - Azure AD kaydı
 
-Azure AD'ye kendi aygıtlarını getiren bulut arasında çoklu oturum açma (SSO) kullanıcı üretkenliği en üst düzeye çıkarır ve şirket içi kaynaklara. İle Bulut ve şirket kaynaklarına erişim güvenliğini sağlayabilirsiniz [koşullu erişim](../active-directory-conditional-access-azure-portal.md) aynı anda.
+Cihazlarınızı Azure AD 'ye getirmek, bulut ve şirket içi kaynaklarınız genelinde çoklu oturum açma (SSO) ile Kullanıcı üretkenliğini en üst düzeye çıkarır. Bulut ve şirket içi kaynaklarınız için aynı anda [koşullu erişimle](../active-directory-conditional-access-azure-portal.md) erişimi güvenli hale getirebilirsiniz.
 
-Bu öğreticide, yönetilen bir ortamda hibrit Azure AD'ye katılma Active Directory etki alanına katılmış bilgisayarları ve cihazları için yapılandırma konusunda bilgi edinin. 
+Bu öğreticide, yönetilen bir ortamdaki Active Directory etki alanına katılmış bilgisayarlar cihazları için karma Azure AD JOIN 'i yapılandırmayı öğreneceksiniz. 
 
-Yönetilen bir ortam olabilir aracılığıyla dağıtılan [parola karma eşitlemesi (PHS)](../hybrid/whatis-phs.md) veya [geçişli kimlik doğrulaması (PTA)](../hybrid/how-to-connect-pta.md) ile [sorunsuz çoklu oturum açma](../hybrid/how-to-connect-sso.md). Bu senaryolar, bir federasyon sunucusu kimlik doğrulaması için yapılandırmak gerekli değildir.
+Yönetilen bir ortam, [sorunsuz çoklu oturum açma](../hybrid/how-to-connect-sso.md)ile [Parola karması eşitlemesi (PHS)](../hybrid/whatis-phs.md) ya da [geçişli kimlik doğrulaması (PTA)](../hybrid/how-to-connect-pta.md) aracılığıyla dağıtılabilir. Bu senaryolar, kimlik doğrulaması için bir federasyon sunucusu yapılandırmanızı gerektirmez.
 
 Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
@@ -42,141 +42,143 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticide, bu makaleler ile ilgili bilgi sahibi olduğunuz varsayılır:
+Bu öğreticide, bu makalelerle ilgili bilgi sahibi olduğunuz varsayılır:
 
-- [Bir cihaz Kimliği nedir?](overview.md)
-- [Hibrit Azure AD'ye katılma uygulamanızı planlama](hybrid-azuread-join-plan.md)
-- [Hibrit Azure AD'ye katılma denetimli doğrulama yapma](hybrid-azuread-join-control.md)
+- [Cihaz kimliği nedir?](overview.md)
+- [Hibrit Azure AD JOIN Uygulamanızı planlayın](hybrid-azuread-join-plan.md)
+- [Karma Azure AD JOIN 'in denetimli doğrulaması nasıl yapılır?](hybrid-azuread-join-control.md)
 
 > [!NOTE]
-> Azure AD, akıllı kart veya sertifika yönetilen etki alanlarında desteklemiyor.
+> Azure AD, yönetilen etki alanlarında akıllı kartlar veya sertifikaları desteklemez.
 
-Bu makaledeki senaryoda yapılandırmak için ihtiyacınız [Azure AD Connect'in en son sürümünü](https://www.microsoft.com/download/details.aspx?id=47594) (1.1.819.0 veya üstü) yüklü.
+Bu makaledeki senaryoyu yapılandırmak için Azure AD Connect (1.1.819.0 veya üzeri) [en son sürümünün](https://www.microsoft.com/download/details.aspx?id=47594) yüklü olması gerekir.
 
-Azure AD Connect cihazların hibrit Azure AD'ye Azure AD'ye katılmış olmasını istediğiniz bilgisayar nesnelerinin eşitlenen olun. Bilgisayar nesnelerinin belirli kuruluş birimine (OU) aitse, OU'ları Azure AD Connect eşitleme yapılandırmanız da gerekir. Azure AD Connect kullanarak bilgisayar nesneleri eşitleme hakkında daha fazla bilgi için bkz: [Azure AD Connect kullanarak filtreleme yapılandırma](../hybrid/how-to-connect-sync-configure-filtering.md#organizational-unitbased-filtering).
+Azure AD Connect, karma Azure AD 'ye katılmış olmasını istediğiniz cihazların bilgisayar nesnelerini Azure AD 'ye eşitlemediğini doğrulayın. Bilgisayar nesneleri belirli kuruluş birimlerine (OU) aitse, OU 'Ları Azure AD Connect de eşitlenecek şekilde yapılandırmanız gerekir. Azure AD Connect kullanarak bilgisayar nesnelerini eşitleme hakkında daha fazla bilgi için bkz. [Azure AD Connect kullanarak filtrelemeyi yapılandırma](../hybrid/how-to-connect-sync-configure-filtering.md#organizational-unitbased-filtering).
 
-Azure AD Connect 1.1.819.0 sürümünden başlayarak, hibrit Azure AD'ye katılım'ı yapılandırmak için kullanabileceğiniz bir sihirbaz içerir. Sihirbaz yapılandırma işlemini önemli ölçüde basitleştirir. Sihirbaz, cihaz kaydı için hizmet bağlantı noktaları (SCP) yapılandırır.
+Sürüm 1.1.819.0 ile başlayarak, Azure AD Connect karma Azure AD JOIN 'i yapılandırmak için kullanabileceğiniz bir sihirbaz içerir. Sihirbaz yapılandırma işlemini önemli ölçüde basitleştirir. Sihirbaz, cihaz kaydı için hizmet bağlantı noktalarını (SCP) yapılandırır.
 
-Yapılandırma adımları bu makalede Azure AD Connect Sihirbazı'nı kullanarak temel alır.
+Bu makaledeki yapılandırma adımları Azure AD Connect ' deki Sihirbazı kullanmayı temel alır.
 
-Hibrit Azure AD'ye katılım, kuruluşunuzun ağ içinde aşağıdaki Microsoft kaynaklarına erişimi cihaz gerektirir:  
+Karma Azure AD katılımı, cihazların kuruluşunuzun ağının içinden aşağıdaki Microsoft kaynaklarına erişmesini gerektirir:  
 
 - `https://enterpriseregistration.windows.net`
 - `https://login.microsoftonline.com`
 - `https://device.login.microsoftonline.com`
-- `https://autologon.microsoftazuread-sso.com` (Kullanın veya sorunsuz çoklu oturum açma kullanmayı planlıyorsanız)
+- `https://autologon.microsoftazuread-sso.com`(Sorunsuz SSO kullanmayı planlıyorsanız veya kullanıyorsanız)
 
-Microsoft, kuruluşunuzun bir giden proxy üzerinden internet erişimi gerektirip gerektirmediğini önerir [Web Proxy Otomatik Bulma (WPAD) uygulama](https://docs.microsoft.com/previous-versions/tn-archive/cc995261(v%3dtechnet.10)) Azure AD ile cihaz kaydı için Windows 10 bilgisayarlarını etkinleştirmek için. Yapılandırma ve yönetme WPAD sorunlarla karşılaşırsanız bkz [otomatik algılama sorunlarını giderme](https://docs.microsoft.com/previous-versions/tn-archive/cc302643(v=technet.10)). 
+Kuruluşunuz, bir giden proxy üzerinden internet erişimi gerektiriyorsa, Microsoft, Windows 10 bilgisayarlarını Azure AD 'ye cihaz kaydı için etkinleştirmek üzere [Web proxy otomatik bulma (WPAD)](https://docs.microsoft.com/previous-versions/tn-archive/cc995261(v%3dtechnet.10)) uygulamasını önerir. WPAD yapılandırma ve yönetme sorunlarıyla karşılaşırsanız bkz. [otomatik algılama sorunlarını giderme](https://docs.microsoft.com/previous-versions/tn-archive/cc302643(v=technet.10)). 
 
-Bilgisayarınızda proxy ayarlarını yapılandırmak için WPAD ve gereksinim kullanmıyorsanız, bu nedenle Windows 10 1709'ile başlayan yapabilirsiniz. Daha fazla bilgi için [WinHTTP yapılandırma ayarları Grup İlkesi nesnesi (GPO) kullanarak](https://blogs.technet.microsoft.com/netgeeks/2018/06/19/winhttp-proxy-settings-deployed-by-gpo/).
+WPAD kullanmıyorsanız ve bilgisayarınızda proxy ayarlarını yapılandırmanız gerekiyorsa, bunu Windows 10 1709 ' den başlayarak yapabilirsiniz. Daha fazla bilgi için bkz. [Grup İlkesi nesnesi (GPO) kullanarak WinHTTP ayarlarını yapılandırma](https://blogs.technet.microsoft.com/netgeeks/2018/06/19/winhttp-proxy-settings-deployed-by-gpo/).
 
 > [!NOTE]
-> WinHTTP ayarlarını kullanarak bilgisayarınızda proxy ayarlarını yapılandırın, yapılandırılan proxy sunucusuna bağlanılamıyor bilgisayarlara internet'e bağlanmak başarısız olur.
+> Bilgisayarınızda, WinHTTP ayarlarını kullanarak ara sunucu ayarlarını yapılandırırsanız, yapılandırılmış ara sunucuya bağlanamamakta olan tüm bilgisayarlar internet 'e bağlanamaz.
 
-Kuruluşunuzda giden kimliği doğrulanmış bir ara sunucu üzerinden internet erişimi gerekiyorsa, Windows 10 bilgisayarlarınızı giden proxy sunucusuna başarıyla kimlik doğrulayabildiğini emin olmanız gerekir. Windows 10 bilgisayarlar, makine bağlamını kullanarak cihaz kaydı çalıştığından, makine bağlamını kullanarak giden proxy kimlik doğrulaması yapılandırmanız gerekir. Yapılandırma gereksinimleri için giden bağlantı proxy'si sağlayıcınızı izleyin.
+Kuruluşunuzun kimliği doğrulanmış bir giden ara sunucu üzerinden İnternet 'e erişmesi gerekiyorsa, Windows 10 bilgisayarlarınızın giden ara sunucuda başarıyla kimlik doğrulayabileceği için emin olmanız gerekir. Windows 10 bilgisayarları makine bağlamını kullanarak cihaz kaydı çalıştırdığı için, makine bağlamını kullanarak giden proxy kimlik doğrulamasını yapılandırmanız gerekir. Yapılandırma gereksinimleri için giden bağlantı proxy'si sağlayıcınızı izleyin.
+
+Cihazın sistem hesabı altında yukarıdaki Microsoft kaynaklarına erişip erişemediğinizi doğrulamak için, [test cihazı kayıt bağlantı](https://gallery.technet.microsoft.com/Test-Device-Registration-3dc944c0) betiği ' ni kullanabilirsiniz.
 
 ## <a name="configure-hybrid-azure-ad-join"></a>Hibrit Azure AD'ye katılımı yapılandırma
 
 Azure AD Connect kullanarak bir hibrit Azure AD'ye katılımı yapılandırmak için şunlar gereklidir:
 
 - Azure AD kiracınız için genel yönetici kimlik bilgileri
-- Her bir orman için Kurumsal yönetici kimlik bilgileri
+- Ormanların her biri için Kuruluş Yöneticisi kimlik bilgileri
 
-**Azure AD Connect kullanarak hibrit Azure AD'ye katılma yapılandırmak için:**
+**Azure AD Connect kullanarak hibrit bir Azure AD katılımı yapılandırmak için:**
 
-1. Azure AD Connect başlatın ve ardından **yapılandırma**.
+1. Azure AD Connect başlatın ve ardından **Yapılandır**' ı seçin.
 
    ![Hoş Geldiniz](./media/hybrid-azuread-join-managed-domains/11.png)
 
-1. Üzerinde **ek görevler** sayfasında **cihaz seçeneklerini yapılandır**ve ardından **sonraki**.
+1. **Ek görevler** sayfasında **cihaz seçeneklerini yapılandır**' ı seçin ve ardından **İleri**' yi seçin.
 
    ![Ek görevler](./media/hybrid-azuread-join-managed-domains/12.png)
 
-1. Üzerinde **genel bakış** sayfasında **sonraki**.
+1. **Genel bakış** sayfasında **İleri**' yi seçin.
 
    ![Genel Bakış](./media/hybrid-azuread-join-managed-domains/13.png)
 
 1. **Azure AD'ye Bağlanma** sayfasında Azure AD kiracınızın genel yöneticisinin kimlik bilgilerini girin.  
 
-   ![Azure AD'ye Bağlanma](./media/hybrid-azuread-join-managed-domains/14.png)
+   ![Azure AD'ye bağlan](./media/hybrid-azuread-join-managed-domains/14.png)
 
-1. Üzerinde **cihaz seçenekleri** sayfasında **yapılandırma hibrit Azure AD'ye katılma**ve ardından **sonraki**.
+1. **Cihaz seçenekleri** sayfasında, **karma Azure AD birleştirmesini Yapılandır**' ı seçin ve ardından **İleri**' yi seçin.
 
    ![Cihaz seçenekleri](./media/hybrid-azuread-join-managed-domains/15.png)
 
-1. Üzerinde **SCP** sayfasında, Azure AD Connect'in SCP'yi yapılandırmasını, aşağıdaki adımları tamamlayın ve ardından istediğiniz her bir orman için **sonraki**:
+1. SCP 'yi yapılandırmak istediğiniz her Azure AD Connect orman için **SCP** sayfasında, aşağıdaki adımları uygulayın ve ardından **İleri**' yi seçin:
 
    ![SCP](./media/hybrid-azuread-join-managed-domains/16.png)
 
    1. Ormanı seçin.
    1. Kimlik doğrulama hizmetini seçin.
-   1. Seçin **Ekle** kuruluş yöneticisi kimlik bilgilerini girmek için.
+   1. Kuruluş Yöneticisi kimlik bilgilerini girmek için **Ekle** ' yi seçin.
 
-1. Üzerinde **cihaz işletim sistemlerinin** sayfasında, Active Directory ortamında kullanımınız cihazların işletim sistemlerini seçin ve ardından **sonraki**.
+1. **Cihaz işletim sistemleri** sayfasında, Active Directory ortamınızdaki cihazların kullandığı işletim sistemlerini seçin ve ardından **İleri**' yi seçin.
 
    ![Cihaz işletim sistemi](./media/hybrid-azuread-join-managed-domains/17.png)
 
-1. Üzerinde **yapılandırma için hazır** sayfasında **yapılandırma**.
+1. **Yapılandırmaya hazırlanma** sayfasında **Yapılandır**' ı seçin.
 
    ![Yapılandırma için hazır](./media/hybrid-azuread-join-managed-domains/19.png)
 
-1. Üzerinde **yapılandırmasını tamamlamak** sayfasında **çıkış**.
+1. **Yapılandırma Tamam** sayfasında **Çıkış**' ı seçin.
 
    ![Yapılandırma tamamlandı](./media/hybrid-azuread-join-managed-domains/20.png)
 
-## <a name="enable-windows-downlevel-devices"></a>Windows alt düzey cihazları etkinleştirme
+## <a name="enable-windows-downlevel-devices"></a>Windows alt düzey cihazlarını etkinleştir
 
-Etki alanına katılmış cihazlarınızı bazıları Windows alt düzey cihazlar varsa, şunları yapmalısınız:
+Etki alanına katılmış cihazlarınızdan bazıları Windows alt düzey aygıtlardır, şunları yapmanız gerekir:
 
 - Cihaz kaydı için yerel intranet ayarlarını yapılandırma
-- Sorunsuz çoklu oturum açmayı yapılandırın
-- Yükleme için Microsoft çalışma Windows katılın alt düzey bilgisayarlar
+- Sorunsuz SSO yapılandırma
+- Windows alt düzey bilgisayarlar için Microsoft Workplace Join 'yi yükler
 
 ### <a name="configure-the-local-intranet-settings-for-device-registration"></a>Cihaz kaydı için yerel intranet ayarlarını yapılandırma
 
-o Windows alt düzey cihazlarınızı hibrit Azure AD'ye katılımı başarıyla tamamlayın ve cihazları Azure AD'ye kimlik doğrulaması sırasında sertifika istemleri önlemek için bir ilke aşağıdaki URL'lere Internet, yerel intranet bölgesine eklemek için etki alanına katılmış cihazlarınıza gönderebilirsiniz Gezgini:
+Windows alt düzey cihazlarınızın karma Azure AD katılmasını başarıyla tamamlayıp cihazların Azure AD 'de kimlik doğrulaması yaparken sertifika istemlerine engel olmak için, etki alanına katılmış cihazlarınıza bir ilke göndererek Internet 'teki yerel intranet bölgesine aşağıdaki URL 'Leri ekleyebilirsiniz Gezgini
 
 - `https://device.login.microsoftonline.com`
 - `https://autologon.microsoftazuread-sso.com`
 
-Ayrıca etkinleştirmelisiniz **izin vermek için durum çubuğu komut dosyası aracılığıyla güncelleştirmeleri** kullanıcının yerel intranet bölgesi.
+Ayrıca, kullanıcının yerel intranet bölgesindeki **komut dosyası aracılığıyla durum çubuğu güncelleştirmelerine Izin ver** ' i etkinleştirmeniz gerekir.
 
-### <a name="configure-seamless-sso"></a>Sorunsuz çoklu oturum açmayı yapılandırın
+### <a name="configure-seamless-sso"></a>Sorunsuz SSO yapılandırma
 
-[PHS] kullanan yönetilen bir etki alanındaki Windows alt düzey cihazlarınızı hibrit Azure AD katılımı başarıyla tamamlamak için... /Hybrid/whatis-phs.MD) veya [PTA](../hybrid/how-to-connect-pta.md) ayrıca Azure AD bulut kimlik doğrulama yöntemi olarak gerekir [sorunsuz çoklu oturum açmayı yapılandırma](../hybrid/how-to-connect-sso-quick-start.md#step-2-enable-the-feature).
+Azure AD bulut kimlik doğrulama yönteminiz olarak [PHS](../hybrid/whatis-phs.md) veya [PTA](../hybrid/how-to-connect-pta.md) kullanan yönetilen bir etki alanında Windows alt düzey CIHAZLARıNıZıN karma Azure AD birleştirmesini BAŞARıYLA tamamlaması için [sorunsuz SSO yapılandırmanız](../hybrid/how-to-connect-sso-quick-start.md#step-2-enable-the-feature)da gerekir.
 
-### <a name="install-microsoft-workplace-join-for-windows-downlevel-computers"></a>Yükleme için Microsoft çalışma Windows katılın alt düzey bilgisayarlar
+### <a name="install-microsoft-workplace-join-for-windows-downlevel-computers"></a>Windows alt düzey bilgisayarlar için Microsoft Workplace Join 'yi yükler
 
-Windows alt düzey cihazları kaydetmek için kuruluşlar yüklemelisiniz [Microsoft Workplace Join Windows 10 bilgisayarlar için](https://www.microsoft.com/download/details.aspx?id=53554). Microsoft Workplace Join Windows 10 bilgisayarları için Microsoft Download Center'da kullanılabilir.
+Windows alt düzey cihazlarını kaydettirmek için kuruluşların [Windows 10 olmayan bilgisayarlar Için Microsoft Workplace Join](https://www.microsoft.com/download/details.aspx?id=53554)yüklemesi gerekir. Windows 10 olmayan bilgisayarlar için Microsoft Workplace Join, Microsoft Indirme Merkezi ' nde bulunabilir.
 
-Gibi bir yazılım dağıtım sistemi kullanarak pakete dağıtabilirsiniz [System Center Configuration Manager](https://www.microsoft.com/cloud-platform/system-center-configuration-manager). Standart sessiz yükleme seçenekleriyle paketi destekler `quiet` parametresi. Geçerli dal Configuration Manager'ın önceki sürümlerinde, tamamlanan kayıtları izleme yeteneği gibi üzerinden avantaj sunar.
+Paketi, [System Center Configuration Manager](https://www.microsoft.com/cloud-platform/system-center-configuration-manager)gibi bir yazılım dağıtım sistemi kullanarak dağıtabilirsiniz. Paket, `quiet` parametresiyle standart sessiz yükleme seçeneklerini destekler. Configuration Manager geçerli dalı, tamamlanan kayıtları izleme özelliği gibi önceki sürümlerden daha fazla avantaj sunar.
 
-Yükleyici, kullanıcı bağlamında çalışacak sistemdeki zamanlanmış bir görev oluşturur. Windows için kullanıcının oturum açtığı zaman görevi tetiklenir. Görev, Azure AD ile kimlik doğrulaması yaptıktan sonra kullanıcı kimlik bilgilerini kullanarak Azure AD ile cihazın sessizce birleştirir.
+Yükleyici, kullanıcı bağlamında çalışan sistemde zamanlanmış bir görev oluşturur. Görev, Kullanıcı Windows 'da oturum açtığında tetiklenir. Görev, Azure AD ile kimlik doğrulamasından geçtikten sonra Kullanıcı kimlik bilgilerini kullanarak cihazı Azure AD ile sessizce birleştirir.
 
 ## <a name="verify-the-registration"></a>Kaydı doğrulama
 
-Cihaz kayıt durumu, Azure kiracınızdaki doğrulamak için kullanabileceğiniz **[Get-MsolDevice](/powershell/msonline/v1/get-msoldevice)** cmdlet'inde [Azure Active Directory PowerShell Modülü](/powershell/azure/install-msonlinev1?view=azureadps-2.0).
+Azure kiracınızdaki cihaz kayıt durumunu doğrulamak için [Azure Active Directory PowerShell modülündeki](/powershell/azure/install-msonlinev1?view=azureadps-2.0) **[Get-msoldevice](/powershell/msonline/v1/get-msoldevice)** cmdlet 'ini kullanabilirsiniz.
 
-Kullanırken **Get-MSolDevice** cmdlet'ini hizmet ayrıntılarını kontrol edin:
+Hizmet ayrıntılarını denetlemek için **Get-MSolDevice** cmdlet 'ini kullandığınızda:
 
-- Bir nesne ile **cihaz kimliği** istemci bulunmalıdır Windows kimliği eşleşir.
-- **DeviceTrustType** değerinin **Etki Alanına Katılmış** olması gerekir. Bu ayar eşdeğerdir **hibrit Azure AD'ye katıldı** üzerinde durum **cihazları** Azure AD portalında sayfa.
-- Koşullu erişim, değeri kullanılan cihazlar için **etkin** olmalıdır **True** ve **DeviceTrustLevel** olmalıdır **yönetilen**.
+- Windows istemcisinde KIMLIĞIYLE eşleşen **CIHAZ kimliğine** sahip bir nesne var olmalıdır.
+- **DeviceTrustType** değerinin **Etki Alanına Katılmış** olması gerekir. Bu ayar, Azure AD portalındaki **cihazlar** sayfasında **karma Azure AD 'ye katılmış** durumuna eşdeğerdir.
+- Koşullu erişimde kullanılan cihazlarda, **Enabled** değeri **true** olmalı ve **devicetrustlevel** **yönetilmelidir**.
 
-**Hizmet Ayrıntıları kontrol etmek için**:
+**Hizmet ayrıntılarını denetlemek için**:
 
-1. Windows PowerShell'i yönetici olarak açın.
-1. Girin `Connect-MsolService` Azure kiracınıza bağlamak için.  
+1. Windows PowerShell 'i yönetici olarak açın.
+1. Azure `Connect-MsolService` kiracınıza bağlanmak için girin.  
 1. `get-msoldevice -deviceId <deviceId>` yazın.
 1. **Enabled** değerinin **True** olarak ayarlandığını doğrulayın.
 
 ## <a name="troubleshoot-your-implementation"></a>Uygulamanızda sorun giderme
 
-Etki alanına katılmış Windows cihazlar için hibrit Azure AD'ye katılma tamamlama ile sorunlarla karşılaşırsanız, bkz:
+Etki alanına katılmış Windows cihazları için karma Azure AD JOIN 'i tamamlamada sorunlarla karşılaşırsanız, bkz.:
 
-- [Hibrit Azure AD'ye katılım'ı Windows cihazları için sorun giderme](troubleshoot-hybrid-join-windows-current.md)
-- [Hibrit Azure AD'ye katılım'ı Windows alt düzey cihazları için sorun giderme](troubleshoot-hybrid-join-windows-legacy.md)
+- [Windows geçerli cihazlarda karma Azure AD katılımı sorunlarını giderme](troubleshoot-hybrid-join-windows-current.md)
+- [Windows alt düzey cihazlarda karma Azure AD katılımı sorunlarını giderme](troubleshoot-hybrid-join-windows-legacy.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bilgi edinmek için nasıl [Azure portalını kullanarak cihaz ikizlerini yönetme](device-management-azure-portal.md).
+[Azure Portal kullanarak cihaz kimliklerini yönetmeyi](device-management-azure-portal.md)öğrenin.

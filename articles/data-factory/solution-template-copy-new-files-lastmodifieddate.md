@@ -1,6 +1,6 @@
 ---
-title: Azure Data Factory ile LastModifiedDate yeni ve değiştirilen dosyaları kopyalama | Microsoft Docs
-description: Azure Data Factory ile LastModifiedDate tarafından yeni ve değiştirilen dosyaları kopyalamak için bir çözüm şablonu kullanmayı öğrenin.
+title: Azure Data Factory ile yeni ve değiştirilmiş dosyaları LastModifiedDate göre Kopyala
+description: Azure Data Factory ile yeni ve değiştirilmiş dosyaları LastModifiedDate göre kopyalamak için bir çözüm şablonu kullanmayı öğrenin.
 services: data-factory
 documentationcenter: ''
 author: dearandyxu
@@ -13,83 +13,83 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.date: 3/8/2019
-ms.openlocfilehash: cae75f4d64c8b3f74cc40e94a675c0f10a6bd9ec
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: aaa7114113d5f0330d2dc7d656b0d91963931512
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60312857"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73684222"
 ---
-# <a name="copy-new-and-changed-files-by-lastmodifieddate-with-azure-data-factory"></a>Azure Data Factory ile LastModifiedDate tarafından yeni ve değiştirilen dosyaları Kopyala
+# <a name="copy-new-and-changed-files-by-lastmodifieddate-with-azure-data-factory"></a>Azure Data Factory ile yeni ve değiştirilmiş dosyaları LastModifiedDate göre Kopyala
 
-Bu makalede, yeni ve değiştirilen dosyalar LastModifiedDate tarafından yalnızca bir dosya tabanlı depolama alanından hedef deposuna kopyalamak için kullanabileceğiniz bir çözüm şablonu açıklanır. 
+Bu makalede, yeni ve değiştirilmiş dosyaları yalnızca dosya tabanlı bir mağazadan hedef depoya LastModifiedDate ile kopyalamak için kullanabileceğiniz bir çözüm şablonu açıklanmaktadır. 
 
 ## <a name="about-this-solution-template"></a>Bu çözüm şablonu hakkında
 
-Bu şablon, yeni ve değiştirilmiş dosyalar ilk yalnızca özniteliklerini seçer. **LastModifiedDate**ve ardından seçili dosyaları kaynak veri deposundan hedef veri deposuna kopyalar.
+Bu şablon ilk olarak yeni ve değiştirilmiş dosyaları yalnızca özniteliklerini **LastModifiedDate**seçer ve ardından bu seçili dosyaları veri kaynağı deposundan veri hedef deposuna kopyalar.
 
-Bu şablon bir etkinlik içerir:
-- **Kopyalama** yeni ve değiştirilen dosyalar LastModifiedDate tarafından yalnızca bir dosya deposundan hedef deposuna kopyalamak için.
+Şablon bir etkinlik içerir:
+- Yeni ve değiştirilmiş dosyaları yalnızca bir dosya deposundan hedef depoya LastModifiedDate göre kopyalamak için **Kopyala** .
 
 Şablon dört parametre tanımlar:
--  *FolderPath_Source* nerede okuyabilir dosyaları kaynak deposundan klasör yoludur. Varsayılan değer kendi klasör yolu ile değiştirmeniz gerekir.
--  *FolderPath_Destination* istediğiniz dosyaları hedef deposuna kopyalamak için klasör yolu. Varsayılan değer kendi klasör yolu ile değiştirmeniz gerekir.
--  *LastModified_From* bu tarih/saat değerine eşit veya olan LastModifiedDate özniteliktir sonra dosyalar seçmek için kullanılır.  Yalnızca son kez kopyalanır değil, yeni dosyalar seçmek için bu tarih saat değeri zaman işlem hattının son tetiklenme zamanı olabilir. Varsayılan değer 2019 ' değiştirebilirsiniz-02-01T00:00:00Z', beklenen LastModifiedDate UTC saat dilimi içinde için. 
--  *LastModified_To* olan LastModifiedDate özniteliği bu tarih saat değeri önce dosya seçmek için kullanılır. Yalnızca son kez kopyalanır değil, yeni dosyalar seçmek için bu tarih saat değeri saatten olabilir.  Varsayılan değer 2019 ' değiştirebilirsiniz-02-01T00:00:00Z', beklenen LastModifiedDate UTC saat dilimi içinde için. 
+-  *FolderPath_Source* , kaynak depodan dosyaları okuyabileceğiniz klasör yoludur. Varsayılan değeri kendi klasör yolınızla değiştirmeniz gerekir.
+-  *FolderPath_Destination* , dosyaları hedef depoya kopyalamak istediğiniz klasör yoludur. Varsayılan değeri kendi klasör yolınızla değiştirmeniz gerekir.
+-  *LastModified_From* , LastModifiedDate özniteliği bu tarih saat değerine eşit veya daha büyük olan dosyaları seçmek için kullanılır.  Son kez kopyalanamayan yeni dosyaları seçmek için bu tarih saat değeri, işlem hattının son kez tetiklendiği zaman olabilir. ' 2019-02-01T00:00:00Z ' varsayılan değerini UTC saat dilimindeki beklenen LastModifiedDate yerine değiştirebilirsiniz. 
+-  *LastModified_To* , LastModifiedDate özniteliği bu tarih saat değerinden önce olan dosyaları seçmek için kullanılır. Son kez kopyalanamayan yeni dosyaları seçmek için bu tarih saat değeri şimdiki saat olabilir.  ' 2019-02-01T00:00:00Z ' varsayılan değerini UTC saat dilimindeki beklenen LastModifiedDate yerine değiştirebilirsiniz. 
 
-## <a name="how-to-use-this-solution-template"></a>Bu çözüm şablonu kullanma
+## <a name="how-to-use-this-solution-template"></a>Bu çözüm şablonunu kullanma
 
-1. Şablon Git **LastModifiedDate tarafından yalnızca yeni bir dosya kopyalama**. Oluşturma bir **yeni** kaynak depolama deponuza bağlantı. Kaynak depolama dosyalarını kopyalamak istediğiniz deposudur.
+1. Şablona git **yalnızca LastModifiedDate ile yeni dosyaları Kopyala**. Kaynak depolama deponuza **Yeni** bir bağlantı oluşturun. Kaynak depolama deposu, dosyaları içinden kopyalamak istediğiniz yerdir.
 
-    ![Kaynak için yeni bir bağlantı oluşturun](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate1.png)
+    ![Kaynağa yeni bir bağlantı oluşturun](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate1.png)
     
-2. İlk Depolama seçin **türü**. Depolama giriş sonra **hesap adı** ve **hesap anahtarı**. Son olarak, seçin **son**.
+2. Önce depolama **türünü**seçin. Bu, depolama **hesabı adını** ve **hesap anahtarını**girdikten sonra. Son olarak **son**' u seçin.
 
     ![Bir bağlantı dizesi girin](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate2.png)
     
-3. Oluşturma bir **yeni** hedef deponuza bağlantı. Dosyaları kopyalamak istediğiniz hedef deposudur. 2 adımda gibi veri deposunun hedef benzer bağlantı bilgilerini de giriş.
+3. Hedef deponuza **Yeni** bir bağlantı oluşturun. Hedef Depo, dosyaları kopyalamak istediğiniz yerdir. Ayrıca, adım 2 ' de yaptığınız gibi veri hedefi deposunun bağlantı bilgilerini de girin.
 
-    ![Hedef için yeni bir bağlantı oluşturun](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate3.png)
+    ![Hedefe yeni bir bağlantı oluşturun](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate3.png)
 
-4. Seçin **bu şablonu kullan**.
+4. **Bu şablonu kullan**' ı seçin.
 
-    ![Bu şablonu kullanın.](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate4.png)
+    ![Bu şablonu kullan](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate4.png)
     
-5. Aşağıdaki örnekte gösterildiği gibi panelinde kullanılabilir işlem hattı görürsünüz:
+5. Aşağıdaki örnekte gösterildiği gibi panelde kullanılabilir işlem hattı görüntülenir:
 
-    ![İşlem hattı Göster](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate5.png)
+    ![İşlem hattını gösterme](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate5.png)
 
-6. Seçin **hata ayıklama**, değeri yazma **parametreleri** seçip **son**.  Aşağıdaki resimde, biz parametreleri aşağıdaki gibi ayarlayın.
-   - **FolderPath_Source** =  **/source/**
-   - **FolderPath_Destination** =  **/destination/**
+6. **Hata Ayıkla**' yı seçin, **parametrelerin** değerini yazın ve **son**' u seçin.  Aşağıdaki resimde parametreleri aşağıdaki şekilde ayarlayacağız.
+   - **FolderPath_Source** =  **/Source/**
+   - **FolderPath_Destination** =  **/Destination/**
    - **LastModified_From** =  **2019-02-01T00:00:00Z**
    - **LastModified_To** = **2019-03-01T00:00:00Z**
     
-     Örneğin son arasında geçen süreyi içindeki değiştirilmiş dosyaları gösteren *2019-02-01T00:00:00Z* ve *2019-03-01T00:00:00Z* bir klasörden kopyalanır */source/*  bir klasöre */destination/* .  Bunları kendi parametrelerini değiştirebilirsiniz.
+     Örnek, *2019-02-01T00:00:00Z* ve *2019-03-01T00:00:00Z* arasındaki zaman aralığı içinde son değiştirilen dosyaları gösterir */Source/* klasöründen */Destination/* klasörüne kopyalanır.  Bunları kendi parametreleriniz ile değiştirebilirsiniz.
     
      ![İşlem hattını çalıştırma](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate6.png)
 
-7. Sonucu gözden geçirin. Yalnızca son yapılandırılmış içinde değiştirilen dosyaları göreceğiniz timespan hedef depoya kopyalandı.
+7. Sonucu gözden geçirin. Yalnızca yapılandırılan TimeSpan içinde son değiştirilen dosyaların hedef depoya kopyalandığını görürsünüz.
 
-    ![Sonucu gözden geçir](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate7.png)
+    ![Sonucu gözden geçirin](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate7.png)
     
-8. Artık işlem hattı her zaman yeni ve değiştirilen dosyalar yalnızca LastModifiedDate tarafından düzenli aralıklarla böylelikle bu işlem hattı otomatikleştirmek için bir atlayan windows tetikleyicisi ekleyebilirsiniz.  Seçin **tetikleyicisi Ekle**seçip **yeni/Düzenle**.
+8. Artık, bu işlem hattını otomatikleştirmek için ardışık düzen bir Windows tetikleyicisi ekleyebilirsiniz, böylece işlem hattı her zaman yeni ve değiştirilmiş dosyaları yalnızca LastModifiedDate göre düzenli olarak kopyalayabilir.  **Tetikleyici Ekle**' yi seçin ve **Yeni/Düzenle**' yi seçin.
 
-    ![Sonucu gözden geçir](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate8.png)
+    ![Sonucu gözden geçirin](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate8.png)
     
-9. İçinde **tetikleyici Ekle** penceresinde **+ yeni**.
+9. **Tetikleyici Ekle** penceresinde **+ Yeni**' yi seçin.
 
-    ![Sonucu gözden geçir](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate9.png)
+    ![Sonucu gözden geçirin](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate9.png)
 
-10. Seçin **atlayan pencere** tetikleyici türü için **her 15 dakikada bir** (dilediğiniz zaman aralığını değiştirebilirsiniz), yineleme olarak seçip **sonraki**.
+10. Tetikleyici türü için atlayan **pencere** ' yi seçin, **15 dakikada** bir yinelenme olarak ayarlayın (herhangi bir Aralık zamanına geçiş yapabilirsiniz) ve ardından **İleri**' yi seçin.
 
-    ![Tetikleyici oluşturma](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate10.png)    
+    ![Tetikleyici oluştur](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate10.png)    
     
-11. Değeri yazma **tetikleyici çalıştırma parametreleri** seçin ve aşağıdaki **son**.
-    - **FolderPath_Source** =  **/source/** .  Kaynak veri deposu klasörünüze ile değiştirebilirsiniz.
-    - **FolderPath_Destination** =  **/destination/** .  Hedef veri deposuna klasörünüze ile değiştirebilirsiniz.
-    - **LastModified_From** =   **@trigger(). outputs.windowStartTime**.  Tetikleyici, işlem hattı son tetiklenme zamanı belirleyen bir sistem değişkenidir.
-    - **LastModified_To** =  **@trigger(). outputs.windowEndTime**.  Bu süre işlem hattı tetiklendiğinde süreyi belirlemede tetikleyiciden bir sistem değişkenidir.
+11. **Tetikleyici çalıştırma parametrelerinin** değerini aşağıdaki şekilde yazın ve **son**' u seçin.
+    - **FolderPath_Source** =  **/Source/** .  Kaynak veri deposundaki klasörünüzle değiştirebilirsiniz.
+    - **FolderPath_Destination** =  **/Destination/** .  Hedef veri deposundaki klasörünüzle değiştirebilirsiniz.
+    - **LastModified_From** =   **\@tetikleyicisi (). çıktılar. windowstarttime**.  Bu, işlem hattının son kez tetiklendiği saati belirleyen tetikleyiciden bir sistem değişkenidir.
+    - **LastModified_To** =  **\@tetikleyicisi (). çıktılar. windowbitişsaati**.  Bu süre, işlem hattının bu kez tetiklendiği saati belirleyen tetikleyiciden bir sistem değişkenidir.
     
     ![Giriş parametreleri](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate11.png)
     
@@ -97,15 +97,15 @@ Bu şablon bir etkinlik içerir:
     
     ![Tümünü Yayımla](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate12.png)
 
-13. Veri kaynağı deposu, kaynak klasördeki yeni dosyalar oluşturun.  Artık otomatik olarak tetiklenen işlem hattının atanmasını bekliyor ve yalnızca yeni dosyalar hedef deposuna kopyalanacak.
+13. Veri kaynağı depolama alanının kaynak klasörünüzde yeni dosyalar oluşturun.  Artık işlem hattının otomatik olarak tetiklenmesi bekleniyor ve hedef depoya yalnızca yeni dosyalar kopyalanacaktır.
 
-14. Seçin **izleme** sekmesinde sol gezinti panelinde ve 15 dakikada tetikleyicisinin yinelenmesi ayarlarsanız yaklaşık 15 dakika bekleyin. 
+14. Sol gezinti panelinde **izleme** sekmesini seçin ve tetikleyici yinelemesi her 15 dakikada bir olarak ayarlandıysa 15 dakika bekleyin. 
 
-    ![İzleme seçin](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate14.png)
+    ![Izlemeyi Seç](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate14.png)
 
-15. Sonucu gözden geçirin. İşlem hattınızı otomatik olarak 15 dakikada bir tetiklenir ve her işlem hattı çalıştırması hedef depoda yalnızca yeni veya değiştirilmiş dosyaları kaynak deposundan kopyalanacağı görürsünüz.
+15. Sonucu gözden geçirin. İşlem hattınızı 15 dakikada bir otomatik olarak tetikleneceğini ve kaynak depodan yalnızca yeni veya değiştirilmiş dosyaları her işlem hattı çalıştırmasında hedef depoya kopyalacaksınız.
 
-    ![Sonucu gözden geçir](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate15.png)
+    ![Sonucu gözden geçirin](media/solution-template-copy-new-files-lastmodifieddate/copy-new-files-lastmodifieddate15.png)
     
 ## <a name="next-steps"></a>Sonraki adımlar
 

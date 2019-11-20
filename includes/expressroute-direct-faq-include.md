@@ -5,58 +5,40 @@ services: expressroute
 author: jaredr80
 ms.service: expressroute
 ms.topic: include
-ms.date: 02/25/2019
+ms.date: 10/29/2019
 ms.author: jaredro
 ms.custom: include file
-ms.openlocfilehash: ab74c331bdc8b72612aa848688e1de080314337a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 1f6c65d6d8da275d6c52ac2802092dbb5e4e507d
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67133325"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73182294"
 ---
-### <a name="what-is-expressroute-direct"></a>ExpressRoute doğrudan nedir?
+### <a name="what-is-expressroute-direct"></a>ExpressRoute Direct nedir?
 
-ExpressRoute Direct, müşterilere Microsoft’un dünya çapında stratejik noktalara yerleştirilmiş eşleme konumlarından oluşan küresel ağına doğrudan bağlanabilme olanağı sağlar. ExpressRoute doğrudan sağlar çift 100 GB/sn bağlantısı, uygun ölçekte etkin/etkin bağlantıyı destekler. 
+ExpressRoute Direct, müşterilere Microsoft’un dünya çapında stratejik noktalara yerleştirilmiş eşleme konumlarından oluşan küresel ağına doğrudan bağlanabilme olanağı sağlar. ExpressRoute Direct, ölçek üzerinde etkin/etkin bağlantıyı destekleyen iki 100 veya 10 Gbps bağlantı sağlar. 
 
-### <a name="how-do-customers-connect-to-expressroute-direct"></a>Müşteriler için ExpressRoute doğrudan nasıl bağlanırım? 
+### <a name="how-do-customers-connect-to-expressroute-direct"></a>Müşteriler ExpressRoute Direct 'e nasıl bağlanır? 
 
-Müşteriler kendi yerel operatörler ve ortak yerleşim sağlayıcıları ile ExpressRoute yönlendiricilerine bağlantı almak için ExpressRoute doğrudan yararlanmak için çalışmanız gerekir.
+ExpressRoute Direct 'ten faydalanmak için müşterilerin ExpressRoute yönlendiricilerine bağlantı alması için yerel taşıyıcılar ve ortak konum sağlayıcılarıyla birlikte çalışması gerekecektir.
 
-### <a name="what-locations-currently-support-expressroute-direct"></a>Hangi konumları, şu anda ExpressRoute doğrudan destekliyor? 
+### <a name="what-locations-currently-support-expressroute-direct"></a>Şu anda ExpressRoute Direct 'i hangi konumlarda destekliyor? 
 
-Kullanılabilir bağlantı noktaları, dinamik ve kapasite görüntülemek için PowerShell uygulamaları tarafından kullanılabilir. Konumlar içerir ve *yapılmak kaydıyla değiştirebilir kullanılabilirliğine göre*:
+Lütfen [konum sayfasında](../articles/expressroute/expressroute-locations-providers.md)kullanılabilirliği denetleyin. 
 
-* Amsterdam
-* Chicago
-* Washington DC
-* Dallas 
-* Hong Kong SAR
-* Londra
-* Los Angeles
-* New York City
-* Paris
-* Perth
-* Toronto
-* San Antonio
-* Seattle
-* Seul
-* Silikon Vadisi
-* Singapur 
-* Sidney
+### <a name="what-is-the-sla-for-expressroute-direct"></a>ExpressRoute Direct için SLA nedir?
 
-### <a name="what-is-the-sla-for-expressroute-direct"></a>ExpressRoute doğrudan için SLA'sı nedir?
+ExpressRoute Direct, [ExpressRoute 'un kurumsal sınıf](https://azure.microsoft.com/support/legal/sla/expressroute/v1_3/)aynısını kullanır. 
 
-ExpressRoute doğrudan aynı yararlanacaktır [ExpressRoute, kurumsal düzeyde](https://azure.microsoft.com/support/legal/sla/expressroute/v1_3/). 
+### <a name="what-scenarios-should-customers-consider-with-expressroute-direct"></a>Müşterilerin ExpressRoute Direct ile hangi senaryolar dikkate alınmalıdır?  
 
-### <a name="what-scenarios-should-customers-consider-with-expressroute-direct"></a>Hangi senaryoları ile ExpressRoute doğrudan müşteriler göz önünde bulundurmalıyım?  
+ExpressRoute Direct, müşterilere Microsoft Global omurgaya doğrudan 100 veya 10 Gbps bağlantı noktası çiftleri sağlar. Müşterilerimize en yüksek avantajları sağlayacak senaryolar şunlardır: büyük miktarda veri alma, düzenlenen pazarlar için fiziksel yalıtım ve işleme gibi veri bloğu senaryosu için adanmış kapasite. 
 
-ExpressRoute doğrudan müşteriler ile doğrudan 100 GB/sn bağlantı noktası çiftleri Microsoft Genel omurga sağlar. Müşteriler en büyük avantaj sağlayacak senaryolar şunlardır: İşleme, çok büyük veri alımı, düzenlenen pazarlara yönelik fiziksel yalıtım ve geçirme senaryosu için adanmış kapasite ister. 
+### <a name="what-is-the-billing-model-for-expressroute-direct"></a>ExpressRoute Direct için faturalandırma modeli nedir? 
 
-### <a name="what-is-the-billing-model-for-expressroute-direct"></a>ExpressRoute doğrudan için faturalandırma modeli nedir? 
+ExpressRoute Direct, bağlantı noktası çifti için sabit bir miktar olarak faturalandırılır. Standart devreler ek bir saat olmaksızın dahil edilir ve Premium, hafif bir eklenti ücretine sahip olur. Çıkış, eşleme konumunun bölgesine bağlı olarak her bir devre temelinde faturalandırılır.
 
-ExpressRoute doğrudan sabit bir tutar, bağlantı noktası çifti için faturalandırılırsınız. Standart bağlantı hatları için hiçbir ek saat eklenir ve premium bir hafif eklenti ücrete tabi. Çıkış, eşleme konumuna bölgeye bağlı devre başına temelinde faturalandırılır.
+### <a name="when-does-billing-start-for-the-expressroute-direct-port-pairs"></a>ExpressRoute doğrudan bağlantı noktası çiftleri için faturalandırma ne zaman başlar?
 
-### <a name="when-does-billing-start-for-the-expressroute-direct-port-pairs"></a>Ne zaman fatura başlangıç için ExpressRoute doğrudan bağlantı noktası çiftleri mu?
-
-ExpressRoute doğrudan'ın bağlantı noktası çiftleri 45 gün içinde ExpressRoute doğrudan kaynak oluşturulmasını faturalandırılır veya 1 veya bağlantılar hem de etkin olduğunda, hangisi önce gelirse. 45 günlük bir mehil süresi, ortak yerleşim sağlayıcının ile çapraz bağlantı işlemi tamamlamak kanıtlayabilecekleri verilir.
+ExpressRoute Direct 'in bağlantı noktası çiftleri 45 gün boyunca ExpressRoute doğrudan kaynağının oluşturulmasına veya bağlantıların 1 veya her ikisinin de etkinleştirilmediğinde, hangisi önce geldiğini faturalandırılır. 45 günlük yetkisiz kullanım süresi, müşterilerin çapraz bağlantı sürecini birlikte bulundurma sağlayıcısıyla tamamçalıştırmasına izin vermek için verilir.

@@ -1,38 +1,39 @@
 ---
-title: Örnekler için Test Sürüşü dönüştürme | Azure Market
-description: Test Sürüşü uygulama örnekleri listesi.
+title: Sınama sürücüsü örnekleri dönüştürülüyor | Azure Marketi
+description: Test sürücüsünün nasıl uygulanacağı hakkındaki örneklerin listesi.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: pbutlerm
 manager: Ricardo.Villalobos
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 727028611c52a8d03026e5d3fa67b2e0ee7e2053
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2680ef04a2136c36e307dc5b119df3e8053c2597
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64938487"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73824535"
 ---
-<a name="transforming-examples-for-test-drive"></a>Örnekler için Test Sürüşü dönüştürme
+<a name="transforming-examples-for-test-drive"></a>Sınama sürücüsü örnekleri dönüştürülüyor
 ====================================
 
-Bir Test sürücü mantıksal uygulama ya da Resource Manager şablonu bir mimari kaynakların kapatma işlemin göz korkutucu olabilir. Bu işlem kolaylaştırılmasına yardımcı olmak için biz\'ve yapılan üç örnek nasıl en iyi geçerli mimarileri dönüştürmek:
+Bir kaynak mimarisini bir test sürücüsü mantıksal uygulamasına veya Kaynak Yöneticisi şablonuna açma işlemi, korundırıcı olabilir. Bu işlemi daha kolay hale getirmek için, geçerli mimarilerin en iyi şekilde dönüştürülmesiyle ilgili üç örnek\':
 
-<a name="transform-website-template-into-test-drive"></a>Test Sürüşü şablonuna dönüştürme Web sitesi
+<a name="transform-website-template-into-test-drive"></a>Web sitesi şablonunu test sürücüsüne Dönüştür
 ------------------------------------------
 
 <https://github.com/Azure/AzureTestDrive/wiki/Transforming-Website-Deployment-Template-for-Test-Drive>
 
-<a name="transform-virtual-machine-template-into-test-drive"></a>Sanal makine şablonu Test sürücüsüne Dönüştür
+<a name="transform-virtual-machine-template-into-test-drive"></a>Sanal makine şablonunu test sürücüsüne Dönüştür
 --------------------------------------------------
 
 <https://github.com/Azure/AzureTestDrive/wiki/Transforming-Virtual-Machine-Deployment-Template-for-Test-Drive>
 
-<a name="transform-existing-resource-manager-templates-into-test-drive"></a>Test Sürüşü mevcut Resource Manager şablonlarını Dönüştür
+<a name="transform-existing-resource-manager-templates-into-test-drive"></a>Varolan Kaynak Yöneticisi şablonlarını test sürücüsüne Dönüştür
 ------------------------------------------------
 
 <https://github.com/Azure/AzureTestDrive/wiki/Deploying-Existing-Solutions>
 
-Lütfen Git başka sorularım varsa, sorun giderme önerilerine aradığınız veya Test Sürüşünüz daha da başarılı hale getirmek istediğiniz [Test sürücü pazarlama ve en iyi](./marketing-and-best-practices.md).
+Daha fazla sorunuz varsa, sorun giderme önerisi aranıyor veya test sürücünüzü daha başarılı hale getirmek istiyorsanız, lütfen [test sürüşü ve En Iyi Yöntemler](./marketing-and-best-practices.md)sayfasına gidin.

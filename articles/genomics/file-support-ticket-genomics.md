@@ -1,49 +1,49 @@
 ---
-title: 'Microsoft Genomiks: Bir destek isteği nasıl | Microsoft Docs'
-titleSuffix: Azure
-description: Bu genel bakış, Microsoft Genomics başvurmak için bir destek isteği açıklar. Bu sorun giderme kılavuzu veya SSS kullanarak sorununuzu gidermek açamazsak yararlı olabilir.
-keywords: sorun giderme, hata, hata ayıklama ve Destek
+title: Destek isteği nasıl yapılır?
+titleSuffix: Microsoft Genomics
+description: Bu makalede, sorun giderme kılavuzu veya SSS ile sorununuzu çözemeyebilirsiniz Microsoft Genomiks ile iletişim kurmak için bir destek isteği dosyasının nasıl yapılacağı açıklanır.
+keywords: sorun giderme, hata, hata ayıklama, destek
 services: genomics
 author: grhuynh
 manager: cgronlun
 ms.author: grhuynh
 ms.service: genomics
-ms.topic: article
+ms.topic: conceptual
 ms.date: 05/23/2018
-ms.openlocfilehash: ed37d42d8ec1692cc5edb62b68536803f47205f5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ddfe8b6010ddc241364ccf7b2d4f5f648bd3ce0e
+ms.sourcegitcommit: 961468fa0cfe650dc1bec87e032e648486f67651
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60721285"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72248604"
 ---
-# <a name="how-to-contact-microsoft-genomics-for-support"></a>İçin destek Microsoft Genomics başvurma
-Bu genel bakış, Microsoft Genomics başvurmak için bir destek isteği açıklar. Bu sorun kullanmayla ilgili sorun giderme mümkün değilse, yararlı olabilir [sorun giderme kılavuzu](troubleshooting-guide-genomics.md) veya [SSS](frequently-asked-questions-genomics.md). 
+# <a name="how-to-contact-microsoft-genomics-for-support"></a>Destek için Microsoft Genomiks ile iletişim kurma
+Bu genel bakışta, Microsoft Genomiks ile iletişim kurmak için bir destek isteği dosyasının nasıl yapılacağı açıklanır. Sorun [giderme kılavuzunu](troubleshooting-guide-genomics.md) veya [SSS](frequently-asked-questions-genomics.md)'yi kullanarak sorununuzu gideremeyebilirsiniz, bu yararlı olabilir. 
 
 
-## <a name="file-a-support-ticket-through-the-azure-portal"></a>Azure portalı üzerinden bir destek bileti
-İlk olarak, Azure portalında Azure hesabınızda oturum açın. Sağ üst köşesinde bulunan soru işaretine tıklayın ve seçin `Help + support`.
+## <a name="file-a-support-ticket-through-the-azure-portal"></a>Azure portal aracılığıyla bir destek bileti dosyası oluşturma
+İlk olarak, Azure portal Azure hesabınızda oturum açın. Sağ üst köşedeki soru işaretine tıklayın ve `Help + support` ' ı seçin.
 
-![Azure portalında bir Destek ekibiyle iletişime geçin](./media/file-support-ticket/genomics-contact-support.png "Azure portalında bir Destek ekibiyle iletişime geçin") 
-
-
-
-Ardından, `New support request`. 
-
-![Yeni destek isteği](./media/file-support-ticket/new-support-request.png "yeni destek isteği") 
-
-Doldurun `Basics`de dahil olmak üzere `Issue type` ve `Subscription`. En uygun seçin `Issue type` sorununuzu; aşağıdaki görüntüde bir örnek olarak `Technical` seçilmedi. Seçtiğinizden emin olun `Microsoft Genomics` ilgili hizmet olarak.  `Microsoft Genomics` altında listelenen `Intelligence and Analytics` kategorisi.   Seçtikten sonra `Microsoft Genomics`, siz de sağlamanız istenir, `Support plan` türü.
-
-![İsteği temel destek](./media/file-support-ticket/support-request-basics.png "destek isteği temelleri")
+![](./media/file-support-ticket/genomics-contact-support.png "Azure Portal") Azure Portal desteğe başvurun 
 
 
-Ardından, sorununuzu ayrıntılarını ekleyin. İstek aracı da yardımcı olması yardımcı olabilecek mevcut belgeleri bağlayacaksınız. Bu örnekte, sorunla ilgili `Genomics keys`, ancak diğer seçenekler de mevcuttur.
 
-![Destek isteği sorun](./media/file-support-ticket/support-request-problem.png "destek isteği sorun")
+Sonra `New support request` ' ı seçin. 
 
-Son olarak, iletişim bilgilerinizi ekleyin ve seçin `Create` destek talebinizi göndermek için ekranın alt kısmındaki.
+![Yeni destek isteği](./media/file-support-ticket/new-support-request.png "Yeni destek isteği") 
 
-![Destek isteği kişi](./media/file-support-ticket/support-request-contact.png "destek isteği ilgili kişisi")
+@No__t-1 ve `Subscription` ' yi içeren `Basics` ' ı doldurun. Sorununuzla ilgili en uygun @no__t seçin; Aşağıdaki görüntüde örnek olarak `Technical` seçilidir. İlgili hizmet olarak `Microsoft Genomics` ' ı seçtiğinizden emin olun.  `Microsoft Genomics`, `Intelligence and Analytics` kategorisinin altında listelenecektir.   @No__t-0 ' ı seçtikten sonra, `Support plan` türünü de sağlamanız istenecektir.
+
+Temel bilgileri(./media/file-support-ticket/support-request-basics.png "Destek isteği") ![destek isteği temel]bilgiler
+
+
+Sonra sorununuzla ilgili ayrıntıları ekleyin. İstek Aracı, size yardımcı olabilecek mevcut belgelere de bağlanır. Bu örnekte, sorun `Genomics keys` ile ilgilidir, ancak birkaç diğer seçenek de mevcuttur.
+
+Sorun(./media/file-support-ticket/support-request-problem.png "Destek isteği") ![destek isteği sorunu]
+
+Son olarak, destek isteğinizi göndermek için iletişim bilgilerinizi ekleyin ve ekranın alt kısmındaki `Create` ' ı seçin.
+
+![Destek isteği kişi](./media/file-support-ticket/support-request-contact.png "destek isteği iletişim")
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makalede, bir destek isteği gönderin öğrendiniz. Kullanarak sık karşılaşılan sorunları çözmek de bizim [SSS](frequently-asked-questions-genomics.md) ve bizim [sorun giderme kılavuzu](troubleshooting-guide-genomics.md). 
+Bu makalede, destek isteği gönderme hakkında daha fazla öğrendiniz. Ayrıca, [SSS](frequently-asked-questions-genomics.md) ve [sorun giderme kılavuzumuzu](troubleshooting-guide-genomics.md)kullanarak sık karşılaşılan sorunları çözebilirsiniz. 

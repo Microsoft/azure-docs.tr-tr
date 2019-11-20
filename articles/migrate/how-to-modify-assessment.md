@@ -1,63 +1,72 @@
 ---
-title: Azure geçişi değerlendirmesi ayarları özelleştirme | Microsoft Docs
-description: Ayarlama ve Azure Migration Planner'ı kullanarak Azure'a geçirme VMware Vm'leri için değerlendirme çalıştırma açıklar
+title: Azure sunucu değerlendirmesi geçişi için değerlendirmeleri özelleştirin | Microsoft Docs
+description: Azure geçişi sunucu değerlendirmesi ile oluşturulan değerlendirmelerin nasıl özelleştirileceğini açıklar
 author: rayne-wiselman
 ms.service: azure-migrate
 ms.topic: article
-ms.date: 01/10/2019
+ms.date: 07/15/2019
 ms.author: raynew
-ms.openlocfilehash: 8419d7e7a91e4cbfd0eebfe00d35bf498cf5998c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2cfac978b0a5af20e9e2fa1e32a7361488f20fbe
+ms.sourcegitcommit: b2db98f55785ff920140f117bfc01f1177c7f7e2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62129832"
+ms.lasthandoff: 07/16/2019
+ms.locfileid: "68234280"
 ---
 # <a name="customize-an-assessment"></a>Bir değerlendirmeyi özelleştirme
 
-[Azure geçişi](migrate-overview.md) değerlendirmeleri varsayılan özelliklerle oluşturur. Değerlendirme oluşturduktan sonra bu makaledeki yönergeleri kullanarak varsayılan özelliklerini değiştirebilirsiniz.
+Bu makalede, Azure geçişi sunucu değerlendirmesi tarafından oluşturulan değerlendirmelerin nasıl özelleştirileceği açıklanır.
+
+[Azure geçişi](migrate-services-overview.md) , şirket içi uygulamalarınızı, iş yüklerinizi ve özel/genel bulut VM 'lerini Azure 'a bulmayı, değerlendirmeyi ve geçirmeyi izlemek için bir merkezi Merkez sağlar. Hub, değerlendirme ve geçiş için Azure geçiş araçları ve ayrıca üçüncü taraf bağımsız yazılım satıcısı (ISV) teklifleri sağlar.
+
+Azure 'a geçiş için hazırlık bölümünde şirket içi VMware VM 'leri ve Hyper-V VM 'Leri için değerlendirmeler oluşturmak üzere Azure geçişi sunucu değerlendirmesi aracını kullanabilirsiniz.
+
+## <a name="about-assessments"></a>Değerlendirmeler hakkında
+
+Azure geçişi sunucu değerlendirmesi kullanarak çalıştırabileceğiniz iki tür değerlendirme vardır.
+
+**Değerlendirmesini** | **Ayrıntılar** | **Veri**
+--- | --- | ---
+**Performans tabanlı** | Toplanan performans verilerine dayalı değerlendirmeler | **ÖNERILEN VM boyutu**: CPU ve bellek kullanımı verilerine göre.<br/><br/> **Önerilen disk türü (Standart veya Premium yönetilen disk)** : Şirket içi disklerin ıOPS ve aktarım hızına göre.
+**Şirket içi olarak** | Şirket içi boyutlandırmayı temel alan değerlendirmeler. | **ÖNERILEN VM boyutu**: Şirket içi VM boyutuna bağlı olarak<br/><br> **Önerilen disk türü**: Değerlendirme için seçtiğiniz depolama türü ayarına göre.
+
+
+## <a name="how-is-an-assessment-done"></a>Değerlendirme nasıl yapılır?
+
+Azure geçişi sunucu değerlendirmesi sırasında yapılan bir değerlendirme üç aşamaya sahiptir. Değerlendirme, bir uygunluk analizi, ardından boyutlandırma ve son olarak aylık maliyet tahmini ile başlar. Bir makine, bir öncekini geçerse daha sonraki bir aşamaya geçer. Örneğin, bir makine Azure uygunluk denetiminde başarısız olursa, Azure için uygun değil olarak işaretlenir ve boyutlandırma ve maliyetlendirme yapılmaz. [Daha fazla bilgi edinin.](https://docs.microsoft.com/azure/migrate/concepts-assessment-calculation)
+
+## <a name="whats-in-an-assessment"></a>Bir değerlendirme neleri içerir?
+
+**Özellik** | **Ayrıntılar**
+--- | ---
+**Hedef konum** | Geçişi yapmak istediğiniz Azure konumu.<br/> Sunucu değerlendirmesi Şu anda bu hedef bölgeleri destekliyor: Avustralya Doğu, Avustralya Güneydoğu, Brezilya Güney, Kanada Orta, Kanada Doğu, Orta Hindistan, Orta ABD, Çin Doğu, Çin Kuzey, Doğu Asya, Doğu ABD, Doğu ABD2, Almanya Orta, Almanya Kuzeydoğu, Japonya Doğu, Japonya Batı, Kore Orta, Kore Güney, Kuzey Orta ABD, Kuzey Avrupa, Orta Güney ABD, Güneydoğu Asya, Güney Hindistan, UK Güney, UK Batı, US Gov Arizona, US Gov Teksas, US Gov Virginia, Orta Batı ABD, Batı Avrupa, Batı Hindistan, Batı ABD ve Batı ABD2.
+**Depolama türü** | Azure 'da, ' ye taşımak istediğiniz disk türünü belirtmek için bu özelliği kullanabilirsiniz.<br/><br/> Şirket içi olarak boyutlandırma için, hedef depolama türünü Premium yönetilen diskler, Standart SSD yönetilen diskler veya Standart HDD tarafından yönetilen diskler olarak belirtebilirsiniz. Performans tabanlı boyutlandırma için, hedef disk türünü otomatik, Premium yönetilen diskler, Standart HDD yönetilen diskler veya Standart SSD tarafından yönetilen diskler olarak belirtebilirsiniz.<br/><br/> Depolama türünü otomatik olarak belirttiğinizde, disk önerisi, disklerin performans verilerine (ıOPS ve aktarım hızı) göre yapılır. Depolama türünü Premium/standart olarak belirtirseniz, değerlendirme, seçilen depolama türü içinde bir disk SKU 'SU önerir. % 99,9 tek örnekli bir VM SLA 'Sı elde etmek istiyorsanız, depolama türünü Premium ile yönetilen diskler olarak belirtmek isteyebilirsiniz. Bu, değerlendirmede tüm disklerin Premium tarafından yönetilen diskler olarak önerilmesini sağlar. Azure
+**Ayrılmış örnekler (RI)** | Bu özellik, Azure 'da [ayrılmış örneklere](https://azure.microsoft.com/pricing/reserved-vm-instances/) sahip olup olmadığını belirtmenize yardımcı olur, değerlendirmede maliyet tahminleri daha sonra RI indirimlerine göre yapılır. Ayrılmış örnekler şu anda yalnızca Azure geçişi 'nde Kullandıkça Öde teklifi için desteklenmektedir.
+**Boyutlandırma ölçütü** | Azure için VM 'Leri doğru şekilde boyutlandırma için kullanılacak ölçüt. Performans geçmişini dikkate almadan, *performans tabanlı* boyutlandırma yapabilir veya VM 'leri *Şirket içinde olacak şekilde boyut olarak*ayarlayabilirsiniz.
+**Performans geçmişi** | Makinelerin performans verilerini değerlendirmek için göz önünde bulundurulması gereken süre. Bu özellik yalnızca boyutlandırma ölçütü *performans tabanlı*olduğunda geçerlidir.
+**Yüzdebirlik kullanımı** | Doğru boyutlandırma için dikkate alınacak performans örnek kümesinin yüzdebirlik değeri. Bu özellik yalnızca boyutlandırma *performans tabanlı*olduğunda geçerlidir.
+**VM serisi** |     Uygun boyutlandırma için değerlendirmek istediğiniz bir VM serisini belirtebilirsiniz. Örneğin, Azure 'da bir serisi VM 'lere geçirmeyi planlamadığınız bir üretim ortamınız varsa, bir serisi listeden veya seriden hariç tutabilir ve sağ boyutlandırma yalnızca seçili seriler içinde yapılır.
+**Konfor katsayısı** | Azure geçişi sunucu değerlendirmesi, değerlendirme sırasında bir arabellek (rahatetken) kabul eder. Bu tampon, VM’lerin makine kullanım verilerinin (CPU, bellek, disk ve ağ) üzerine uygulanır. Konfor katsayısı; sezona özgü kullanım, kısa performans geçmişi ve gelecek kullanımlarda oluşabilecek artışlar gibi konuları hesaba katar.<br/><br/> Örneğin, %20 kullanıma sahip 10 çekirdekli bir VM normalde 2 çekirdekli VM ile sonuçlanır. Ancak, 2.0x konfor katsayısı ile sonuç 4 çekirdekli VM olur.
+**Teklif** | Kaydolduğunuz [Azure teklifi](https://azure.microsoft.com/support/legal/offer-details/). Azure Geçişi, buna göre bir maliyet tahmini oluşturur.
+**Para Birimi** | Fatura para birimi.
+**İndirim (%)** | Azure teklifinin yanı sıra aldığınız, aboneliğe özgü indirim.<br/> Varsayılan ayar, %0’dır.
+**VM çalışma süresi** | VM 'leriniz Azure 'da 7/24 çalışmaya devam etmeyeceklerse, çalıştırılacağı süreyi (aylık gün sayısı ve gün başına saat sayısı), maliyet tahminleri de uygun şekilde yapılacak şekilde belirtebilirsiniz.<br/> Varsayılan değer ayda 31 gün ve günde 24 saat olur.
+**Azure Hibrit Avantajı** | Yazılım Güvencesi olup olmadığını ve [Azure hibrit avantajı](https://azure.microsoft.com/pricing/hybrid-use-benefit/)için uygun olup olmadığını belirtin. Evet olarak ayarlanırsa, Windows sanal makineleri için Windows olmayan Azure fiyatları dikkate alınır. Varsayılan değer Evet’tir.
 
 
 ## <a name="edit-assessment-properties"></a>Değerlendirme özelliklerini Düzenle
 
-1. Geçiş projesinin **Değerlendirmeler** sayfasında değerlendirmeyi seçin ve **Özellikleri düzenle**’ye tıklayın.
-2. Aşağıdaki ayrıntılara bağlı olarak değerlendirme özelliklerini Özelleştir:
+Değerlendirme oluşturduktan sonra değerlendirme özelliklerini düzenlemek için aşağıdakileri yapın:
 
-    **Ayar** | **Ayrıntılar** | **Varsayılan**
-    --- | --- | ---
-    **Hedef konum** | Geçişi yapmak istediğiniz Azure konumu.<br/><br/> Şu anda Azure Geçişi tarafından desteklenen 30 bölge şunlardır: Avustralya Doğu, Avustralya Güneydoğu, Brezilya Güney, Kanada Orta, Kanada Doğu, Orta Hindistan, Orta ABD, Çin Doğu, Çin Kuzey, Doğu Asya, Doğu ABD, Almanya Orta, Almanya Kuzeydoğu, Doğu ABD 2, Japonya Doğu, Japonya Batı, Kore Orta, Kore Güney, Orta Kuzey ABD, Kuzey Avrupa, Orta Güney ABD, Güneydoğu Asya, Güney Hindistan, UK Güney, UK Batı, US Gov Arizona, US Gov Teksas, US Gov Virginia, Orta Batı ABD, Batı Avrupa, Batı Hindistan, Batı ABD ve Batı ABD 2. |  Batı ABD 2, varsayılan konumdur.
-    **Depolama türü** | Azure'da taşımak istediğiniz diskleri türünü belirtmek için bu özelliği kullanabilirsiniz. Boyutlandırma-şirket içi için hedef disk türünü Premium yönetilen diskler veya standart yönetilen diskler olarak belirtebilirsiniz. Performansa dayalı boyutlandırma için hedef disk türünü otomatik, Premium yönetilen diskler veya standart yönetilen diskler olarak belirtebilirsiniz. Otomatik olarak depolama türü belirttiğinizde, disk önerisi disklerin (IOPS ve aktarım hızı) performans verileri göre yapılır. Örneğin, elde etmek istiyorsanız bir [Tek Örnekli sanal makine SLA'sı % 99,9 düzeyinde](https://azure.microsoft.com/support/legal/sla/virtual-machines/v1_8/), Premium yönetilen diskler depolama türünü belirtmek isteyebilirsiniz. Bu, tüm diskler değerlendirmede Premium yönetilen diskler önerilen sağlar. Azure Geçişi’nin yönetilen diskleri yalnızca geçiş değerlendirmesi için desteklediğini unutmayın. | Varsayılan değer: Premium yönetilen diskler (boyutlandırma ölçütü ile *şirket içi olarak boyutlandırma*).
-    **Ayrılmış Örnekler** |  Azure’da [ayrılmış örneklere](https://azure.microsoft.com/pricing/reserved-vm-instances/) sahip olup olmadığınızı belirttiğinizde Azure Geçişi, maliyeti buna göre tahmin eder. Ayrılmış örnekleri şu anda yalnızca Kullandıkça Öde teklifine Azure Geçişi'ndeki desteklenir. | 3 yıl ayrılmış örnekleri bu özellik için varsayılan değerdir.
-    **Boyutlandırma ölçütü** | Azure için sanal makineleri doğru şekilde boyutlandırmak üzere Azure Geçişi tarafından kullanılacak ölçüt. Performans geçmişini dikkate almadan, *performans tabanlı* boyutlandırma yapabilir veya sanal makineleri *şirket içi olarak* boyutlandırabilirsiniz. | Varsayılan seçenek, performans tabanlı boyutlandırmadır.
-    **Performans geçmişi** | Sanal makinelerin performansını değerlendirmek için dikkate alınacak süre. Bu özellik yalnızca boyutlandırma ölçütü *performans tabanlı boyutlandırma* olduğunda geçerlidir. | Varsayılan bir gündür.
-    **Yüzdebirlik kullanımı** | Doğru boyutlandırma için dikkate alınacak performans örnek kümesinin yüzdebirlik değeri. Bu özellik yalnızca boyutlandırma ölçütü *performans tabanlı boyutlandırma* olduğunda geçerlidir.  | Varsayılan, 95. yüzdebirliktir.
-    **VM serisi** | Uygun boyutlandırma için değerlendirmek istediğiniz bir VM serisini belirtebilirsiniz. Örneğin, A serisi Vm'lerde bulunan Azure geçirmeyi planlamadığınız bir üretim ortamınız varsa, A serisi listeden hariç tutabilirsiniz veya serisi ve boyutlandırmaya yalnızca seçili dizide gerçekleştirilir. | Varsayılan olarak tüm VM serisi seçilir.
-    **Konfor katsayısı** | Azure Geçişi, değerlendirme sırasında bir tamponu (konfor katsayısı) göz önünde bulundurur. Bu tampon, VM’lerin makine kullanım verilerinin (CPU, bellek, disk ve ağ) üzerine uygulanır. Konfor katsayısı; sezona özgü kullanım, kısa performans geçmişi ve gelecek kullanımlarda oluşabilecek artışlar gibi konuları hesaba katar.<br/><br/> Örneğin, %20 kullanıma sahip 10 çekirdekli bir VM normalde 2 çekirdekli VM ile sonuçlanır. Ancak, 2.0x konfor katsayısı ile sonuç 4 çekirdekli VM olur. | Varsayılan ayar, 1.3x değeridir.
-    **Teklif** | Kaydolduğunuz [Azure Teklifi](https://azure.microsoft.com/support/legal/offer-details/). | Varsayılan, [Kullandıkça öde](https://azure.microsoft.com/offers/ms-azr-0003p/)’dir.
-    **Para Birimi** | Fatura para birimi. | Varsayılan, ABD Doları’dır.
-    **İndirim (%)** | Azure teklifinin yanı sıra aldığınız, aboneliğe özgü indirim. | Varsayılan ayar, %0’dır.
-    **VM çalışma süresi** | Sanal makinelerinizi Azure'da 7/24 çalıştırılması kullanmayacaksanız, bunlar çalıştırıyordur için süresi (gün / ay sayısı) ve her gün saat sayısı belirtebilirsiniz ve maliyet tahminleri buna göre uygulanır. | 31 gün / ay ve günde 24 saat varsayılan değerdir.
-    **Azure Hibrit Avantajı** | Yazılım güvencesine sahip olup olmadığınızı ve [Azure Hibrit Avantajı](https://azure.microsoft.com/pricing/hybrid-use-benefit/) için uygun olup olmadığınızı belirtin. Evet olarak ayarlanırsa, Windows sanal makineleri için Windows olmayan Azure fiyatları dikkate alınır. | Varsayılan değer Evet’tir.
+1. Azure geçişi projesinde **sunucular**' a tıklayın.
+2. Azure **geçişi 'nde: Sunucu değerlendirmesi**, değerlendirme sayısına tıklayın.
+3. **Değerlendirme**bölümünde ilgili değerlendirmeye > **Özellikleri Düzenle**' ye tıklayın.
+5. Değerlendirme özelliklerini yukarıdaki tabloya göre özelleştirin.
+6. Değerlendirmeyi güncelleştirmek için **Kaydet** ' e tıklayın.
 
-3. Tıklayın **Kaydet** güncelleştirme değerlendirmesi için.
 
-## <a name="faqs-on-assessment-properties"></a>Değerlendirme özellikleri hakkında SSS
+Değerlendirme oluştururken değerlendirme özelliklerini de düzenleyebilirsiniz.
 
-### <a name="what-is-the-difference-between-as-on-premises-sizing-and-performance-based-sizing"></a>Olarak şirket içi boyutlandırma ve performans tabanlı boyutlandırma arasındaki fark nedir?
-
-Olarak şirket içi olarak boyutlandırma ölçütü belirttiğinizde boyutlandırma, Azure Geçişi sanal makinelerin performans verilerini dikkate almaz ve şirket içi yapılandırmasını temel alan VM boyutları. Boyutlandırma ölçütü performans tabanlı olduğunda, boyutlandırma kullanım verilerine göre yapılır. Örneğin 4 çekirdekli, 8 GB belleğe sahip, %50 CPU kullanımı ve %50 bellek kullanımı olan bir şirket içi VM'yi düşünelim. Boyutlandırma ölçütü şirket içi boyutlandırma olarak ayarlanmışsa 4 çekirdekli ve 8 GB belleğe sahip bir Azure VM SKU’su önerilir; ancak boyut önerilerinde kullanım yüzdesi göz önünde bulundurulduğu için boyutlandırma ölçütü performans tabanlıysa 2 çekirdek ve 4 GB bir VM SKU’su önerilir.
-
-Benzer şekilde, diskler için disk boyutlandırma ölçütü ve depolama türü boyutlandırma iki değerlendirme özelliklerine - bağlıdır. Boyutlandırma ölçütü performans tabanlı ve depolama türü otomatikse hedef disk türünü (Standart veya Premium) tanımlamak için diskin IOPS ve aktarım hızı değerleri göz önünde bulundurulur. Boyutlandırma ölçütü performans tabanlı ve depolama türü premium ise premium bir disk önerilir. Azure’daki premium disk SKU’su şirket içi diskin boyutuna göre seçilir. Boyutlandırma ölçütü şirket içi boyutlandırma ve depolama türü standart veya premium olduğunda aynı mantık kullanılır.
-
-### <a name="what-impact-does-performance-history-and-percentile-utilization-have-on-the-size-recommendations"></a>Boyut önerileri üzerinde performans geçmişi ve yüzdebirlik kullanımı nasıl bir etkisi var mı?
-
-Bu özellikler yalnızca performans tabanlı boyutlandırma için geçerlidir. Azure Geçişi, şirket içi makinelerin performans geçmişini toplar ve bunları Azure’da VM boyutu ve disk türü önermek için kullanır.
-
-- Toplayıcı aleti, her 20 saniyede bir gerçek zamanlı kullanım verilerini toplamak için sürekli olarak şirket içi ortamın profilini oluşturur.
-- Alet, 20 saniyelik örnekler toparlar ve her 15 dakika için tek bir veri noktası oluşturur. Tek veri noktasını oluşturmak için alet tüm 20 saniyelik örneklerden en yüksek değerleri seçer ve Azure’a gönderir.
-- Azure’da bir değerlendirme oluşturduğunuzda, Azure Geçişi performans süresi ve performans geçmişi yüzdebirlik değerine bağlı olarak Azure Geçişi etkili kullanım değerini hesaplar ve boyutlandırma için bunu kullanır.
-
-Örneğin, performans süresini 1 gün ve yüzdebirlik değeri 95 yüzdebirlik olarak ayarlarsanız, Azure Geçişi toplayıcı tarafından gönderilen son bir günün 15 dakikalık örnek noktalarını kullanır, bunları artan biçimde sıralar ve etkili kullanım değeri olarak 95 yüzdebirliği seçer. 95\. yüzdebirlik değeri, 99. yüzdebirliği seçtiğinizde gelebilecek aykırı değerleri görmezden gelmenizi sağlar. Dönemin en yüksek kullanımını seçmek ve aykırı değerleri kaçırmamak istiyorsanız 99. yüzdebirliği seçmelisiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

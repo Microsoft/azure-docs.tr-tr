@@ -1,94 +1,95 @@
 ---
-title: İş ortağı Merkezi'nde ticari Market portalı için desteği alın
-description: Bir destek isteği nasıl dahil olmak üzere, iş ortağı Merkezi, destek seçenekleri hakkında bilgi edinin.
-author: mattwojo
+title: Iş Ortağı Merkezi 'nde ticari Market portalı için destek alın
+description: Destek isteğine nasıl dosya ekleneceğini de içeren Iş Ortağı Merkezi 'ndeki Destek seçenekleriniz hakkında bilgi edinin.
+author: ChJenk
 manager: evansma
 ms.author: jamwall
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 05/17/2019
-ms.openlocfilehash: 355694f7f1d5fe0588c6f93bcbdb47f3086aec79
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 53d6b5b43a028d552c95c58aebf7268353621759
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65958083"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73827894"
 ---
-# <a name="support-for-the-commercial-marketplace-program-in-partner-center"></a>İş ortağı merkezi ticari Market programı için destek
+# <a name="support-for-the-commercial-marketplace-program-in-partner-center"></a>Iş Ortağı Merkezi 'nde ticari Market programı desteği
 
-Microsoft, çok çeşitli ürünleri ve Hizmetleri için destek sağlar. Doğru Destek ekibine bulma, bir uygun ve zamanında yanıt vermek önemlidir. Sorgunuzu yönlendirmek için uygun takım yardımcı olması aşağıdaki senaryoları göz önünde bulundurun: 
+Microsoft, çok çeşitli ürün ve hizmetler için destek sağlar. Doğru destek ekibinin bulunması, uygun ve zamanında yanıt sağlamak açısından önemlidir. Sorgunuzu uygun ekibe yönlendirmenize yardımcı olması gereken aşağıdaki senaryoları göz önünde bulundurun: 
 
-- Bir yayımcı yapıyorsanız ve bir müşterinin bir sorunuz varsa destek bağlantıları kullanarak destek istemek için müşterinizin isteyin [Azure portalında](https://portal.azure.com/). 
+- Bir yayımınız varsa ve müşterimiz varsa, [Azure Portal](https://portal.azure.com/)destek bağlantılarını kullanarak müşterinizden destek istemesine sorun. 
 
-- Bir yayımcı yapıyorsanız ve uygulamanız veya hizmetiniz için ilgili bir sorunuz varsa, aşağıdaki destek seçenekleri gözden geçirin.
+- Bir yayımsanız ve uygulamanız veya hizmetiniz ile ilgili sorularınız varsa, aşağıdaki destek seçeneklerini gözden geçirin.
 
 ## <a name="support-options-for-publishers"></a>Yayımcılar için destek seçenekleri
 
-1. Oturum [ticari Market iş ortağı merkezi programı](https://partner.microsoft.com/dashboard/commercial-marketplace/overview) iş hesabınızı kullanarak. (Henüz yapmadıysanız, gerekecektir [bir iş ortağı merkezi hesabınız oluşturma](./create-account.md).)
+1. İş hesabınızla iş [Ortağı Merkezi ' nde ticari Market programında](https://partner.microsoft.com/dashboard/commercial-marketplace/overview) oturum açın. (Henüz yapmadıysanız, [bir Iş Ortağı Merkezi hesabı oluşturmanız](./create-account.md)gerekecektir.)
 
-1. Üst sayfanın sağ tarafındaki menüde **Destek** simgesi. 
+1. Sayfanın sağ tarafındaki menüden **destek** simgesini seçin. 
  
    ![Destek simgesi](./media/commercial-marketplace-support.png)
 
-1. **Yardım ve Destek** sayfanın sağ taraftan bölmesinde görünür. İş ortağı Merkezi'nde, hesabınız için kaydedilen her bir program için bir açılan olacaktır. Seçin **ticari Market** açılan menüsü. 
+1. **Yardım ve destek** bölmesi sayfanın sağ tarafında görünür. Iş Ortağı Merkezi 'nde hesabınızın kayıtlı olduğu her program için bir açılır liste görüntülenir. **Ticari Market** açılan menüsünü seçin. 
  
    ![Destek açılan menüsü](./media/commercial-marketplace-support-pane.png)
 
-1. Seçin **[belgeleri](../index.md)** kapsamlı sorular ve kaynakları yanıtlarını gözden geçirmek için. 
+1. Soruların ve kaynakların kapsamlı yanıtlarını gözden geçirmek için **[Belgeler](../index.md)** ' i seçin. 
 
-1. Seçin **[Market iş ortağı Topluluk Forumu](https://www.microsoftpartnercommunity.com/t5/Azure-Marketplace-and-AppSource/bd-p/2222)** diğer Microsoft yayımcılar bilgisi yararlanarak sorularınızı yanıtlamak üzere. 
+1. Diğer Microsoft yayımcılarından yararlanarak sorularınızı yanıtlamak için **[Market Iş ortağı topluluk Forumu](https://www.microsoftpartnercommunity.com/t5/Azure-Marketplace-and-AppSource/bd-p/2222)** ' nu seçin. 
 
-1. Seçin **[Ek Yardım](https://support.microsoft.com/supportforbusiness/productselection?sapId=48734891-ee9a-5d77-bf29-82bf8d8111ff)** açmak için bir **yeni destek isteği** bileti. 
+1. **Yeni bir destek talebi** bileti açmak için **[ek yardım](https://support.microsoft.com/supportforbusiness/productselection?sapId=48734891-ee9a-5d77-bf29-82bf8d8111ff)** ' ı seçin. 
 
-## <a name="how-to-open-a-support-ticket"></a>Nasıl bir destek bileti açmak için
+## <a name="how-to-open-a-support-ticket"></a>Destek bileti açma
 
-Seçme **Ek Yardım** ticari Market Destek'ten iş ortağı merkezi menüde, iş sayfası için Microsoft Support yönlendirir. Birden çok açılan menüler görürsünüz. İlk birkaç açılan menüler otomatik olarak sizin için doldurulur. Ürün ailesi Market desteğini belirlemek **Bulut ve Çevrimiçi Hizmetler**, bir ürün olarak **Market yayımcısı**ve ürün sürümü olarak **Market'teyayımlama**. Bu önceden doldurulmuş bir açılan menü seçimleri değiştirmeyin. 
+İş Ortağı Merkezi 'nde ticari Market destek menüsünden **ek yardım** ' ın seçilmesi sizi iş için Microsoft desteği sayfasına yönlendirir. Birkaç açılan menü görürsünüz. İlk birkaç açılan menü, sizin için otomatik olarak doldurulur. Market desteği için ürün ailesini **bulut ve çevrimiçi hizmetler**, **Market yayımcısı**olarak ve ürün sürümünü **Market Publishing**olarak belirleyebilirsiniz. Önceden doldurulmuş bu açılan menü seçimlerini değiştirmeyin. 
 
-- **En iyi sorunu açıklayan bir kategoriyi seçin**: Sorunuzu veya sorununuzu ile en uygun kategoriyi seçin. Bir kategoriyi sorununuzu en iyi şekilde açıklayan sorun seçmenizi isteyen bir ek açılır menüsünde görünmesini, neden olur.
+- **Sorunu en iyi açıklayan kategoriyi seçin**: sorunuz veya sorununuz ile en iyi şekilde hizalanan kategoriyi seçin. Bir kategorinin seçilmesi ek bir açılan menünün görünmesine neden olur ve bu da sorununuzu en iyi şekilde açıklayan sorunu seçmenizi ister.
 
-- **En iyi sorunu açıklayan bir sorun seçin**: Sorun, sorununuzu ile iyi uyuştuğundan emin listelenen seçenekleri arasından seçim yapın. Sorununuzu bağlı olarak, sorununuzla ilgili bağlantılarla "Yardımcı olabilecek bazı bilgiler aşağıdadır" diyerek yeni bir bölüm görüntülenebilir. Seçmeden önce bu bağlantıları gözden geçirin **sonraki** sorunuzu veya sorununuzu yönelik olup olmadığını görmek için düğme.
+- **Sorunu en iyi açıklayan bir sorun seçin**: sorununuzla en iyi şekilde hizalanan listelenen seçeneklerden sorunu seçin. Sorununuzla ilgili olarak yeni bir bölüm görünebilir ve bu konuda "yardım alabileceğiniz bazı bilgiler" aşağıda verilmiştir. Sorunuz veya sorununuzun sorunu olup olmadığını görmek için **İleri** düğmesini seçmeden önce bu bağlantıları gözden geçirin.
 
-Seçerek **sonraki** düğmesi, yönlendirileceği **sorun ayrıntıları** sayfası. 
+**İleri** düğmesini seçerek **Sorun ayrıntıları** sayfasına yönlendirilirsiniz. 
 
 #### <a name="tell-us-more-about-your-issue"></a>Karşılaştığınız sorun hakkında daha fazla bilgi verin
 
-İçinde **sorun ayrıntıları** bölümünde, yardıma gerek açıklanmaktadır.
+**Sorun ayrıntıları** bölümünde, konusunda ne kadar yardıma ihtiyacınız olduğunu açıklayın.
 
 - Ülkenizi seçin.
 - Destek almak istediğiniz dili seçin.
-- (3'ten 200 karakteri), sorununuzu için bir başlık girin.  
-- (En fazla 2000 karakter) sorunun kısa bir açıklama girin.
+- Sorununuz için bir başlık girin (3 ile 200 karakter arasında).  
+- Sorununuzla ilgili kısa bir açıklama girin (en fazla 2000 karakter).
 - **İleri**’yi seçin.
 
 #### <a name="select-a-support-plan"></a>Bir destek planı seçin
 
-Hiçbir bilgi gereklidir **destek planı** bölümü. **İleri**’yi seçin. 
+**Destek planı** bölümünde bilgi gerekli değildir. **İleri**’yi seçin. 
 
-#### <a name="select-the-severity-of-your-issue"></a>Sorunun önem derecesini seçin
+#### <a name="select-the-severity-of-your-issue"></a>Sorununuzun önem derecesini seçin
 
-Hiçbir bilgi gereklidir **önem derecesi** bölümü. **İleri**’yi seçin. 
+**Önem derecesi** bölümünde bilgi gerekli değildir. **İleri**’yi seçin. 
 
-#### <a name="who-should-we-contact"></a>Kimlerin sizinle iletişime
+#### <a name="who-should-we-contact"></a>Kimler iletişim kuracağız?
 
-İçinde **irtibat bilgileri** bölümünde, birincil ilgili kişinizin adı, telefon numarası ve e-posta doğru olduğundan emin olun. 
-- Yanlış herhangi bir şey görürseniz, bu bilgileri güncelleştirin.
-- Diğer kişiler, şirket tarafından bu destek isteği isterseniz ekleyebilirsiniz
+**Kişi bilgileri** bölümünde, birincil kişinizin adı, telefon numarası ve e-postalarınızın doğru olduğundan emin olun. 
+- Yanlış bir şey görürseniz, bu bilgileri güncelleştirin
+- İsterseniz, şirketinizdeki bu destek isteğine başka kişiler ekleyebilirsiniz
 - **İleri**’yi seçin
 
-#### <a name="review-and-submit-your-support-request"></a>Gözden geçirin ve destek isteği gönderin
+#### <a name="review-and-submit-your-support-request"></a>Destek isteğinizi gözden geçirin ve iletin
 
-Destek isteği bilgilerinizi gözden **gözden geçirme** bölümü. 
-- Tüm bilgiler doğruysa seçin **Gönder**. 
-- Herhangi bir bilgi güncelleştirilmesi gerekiyorsa seçin **değişiklik** güncelleştirmeleri geçirilmesi gereken bölümün yanında düğmesi.
+**Gözden geçirme** bölümünde destek isteği bilgilerinizi gözden geçirin. 
+- Tüm bilgiler doğruysa, **Gönder**' i seçin. 
+- Herhangi bir bilginin güncelleştirilmesi gerekiyorsa, güncelleştirmelerin olması gereken bölümün yanındaki **Değiştir** düğmesini seçin.
 
-## <a name="track-your-existing-support-requests"></a>Mevcut destek isteklerinizi izleme 
+## <a name="track-your-existing-support-requests"></a>Mevcut destek isteklerinizi izleyin 
 
-Destek talebinizi izlemek için ziyaret [ticari Market destek sayfasını](https://support.microsoft.com/supportforbusiness/productselection?sapId=48734891-ee9a-5d77-bf29-82bf8d8111ff). 
+Destek isteğinizi izlemek için [ticari Market desteği sayfasını](https://support.microsoft.com/supportforbusiness/productselection?sapId=48734891-ee9a-5d77-bf29-82bf8d8111ff)ziyaret edin. 
 
-Üstteki mavi menü çubuğunda, "Destek için iş" yanındaki seçin **destek istekleri** bağlantı. 
+Üstteki mavi menü çubuğunda, "iş desteği" nin yanındaki **destek istekleri** bağlantısını seçin. 
 
-Tüm açık ve kapalı destek isteklerinizi gözden **Microsoft profesyonel destek** bölümü. 
+**Microsoft Professional desteği** bölümündeki açık ve kapalı destek isteklerinizi inceleyin. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Ticari Market'te bir mevcut teklifi güncelleştirme](./update-existing-offer.md)
+- [Ticari Market 'te mevcut bir teklifi güncelleştirme](./update-existing-offer.md)

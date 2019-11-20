@@ -1,6 +1,6 @@
 ---
-title: Kullandıkça Öde tarifesine göre ile tek bir aboneliği Azure ayırma kullanımı
-description: Azure ayırma için tek tek aboneliğinizi Kullandıkça Öde tarifesine göre nasıl uygulanacağını anlamak için kullanım okumayı öğrenin.
+title: Kullandıkça öde ücretlerine tabi bireysel abonelik için Azure rezervasyon kullanımı
+description: Kullandıkça öde fiyatlarına tabi bireysel aboneliğiniz için Azure rezervasyonunun nasıl uygulandığını anlamak için kullanım bilgilerinizi okuma hakkında bilgi edinin.
 author: bandersmsft
 manager: yashr
 tags: billing
@@ -9,99 +9,99 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/01/2019
+ms.date: 10/01/2019
 ms.author: banders
-ms.openlocfilehash: 11f05c3de50f2f82173b6666d304887fbc2038cc
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
-ms.translationtype: MT
+ms.openlocfilehash: f16fabf86cebc41f8d057f5bfab2e0d776d73395
+ms.sourcegitcommit: d4c9821b31f5a12ab4cc60036fde00e7d8dc4421
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67490375"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71709453"
 ---
-# <a name="understand-azure-reservation-usage-for-your-individual-subscription-with-pay-as-you-go-rates-subscription"></a>Tek tek aboneliğinizin Kullandıkça Öde tarifesine göre aboneliğiyle Azure ayırma kullanımını anlama
+# <a name="understand-azure-reservation-usage-for-your-individual-subscription-with-pay-as-you-go-rates-subscription"></a>Kullandıkça öde fiyatlarına tabi bireysel aboneliğiniz için Azure rezervasyon kullanımını anlama
 
-Reservationıd gelen kullanın [ayırma sayfası](https://portal.azure.com/?microsoft_azure_marketplace_ItemHideKey=Reservations&Microsoft_Azure_Reservations=true#blade/Microsoft_Azure_Reservations/ReservationsBrowseBlade) ve kullanım dosyasından [Azure hesap portalını](https://account.azure.com) ayırma kullanımınızı değerlendirilecek.
+Rezervasyon kullanımınızı değerlendirmek için [Rezervasyon sayfasındaki](https://portal.azure.com/?microsoft_azure_marketplace_ItemHideKey=Reservations&Microsoft_Azure_Reservations=true#blade/Microsoft_Azure_Reservations/ReservationsBrowseBlade) RezervasyonKimliğini ve [Azure Hesapları portalındaki](https://account.azure.com) kullanım dosyasını kullanın.
 
-Bir kurumsal anlaşma kapsamında olan bir Müşteriyseniz bkz [Kurumsal kayıt için ayırma kullanımını anlayın.](billing-understand-reserved-instance-usage-ea.md).
+Kurumsal Anlaşması olan bir müşteriyseniz bkz. [Kurumsal kaydınız için rezervasyon kullanımını anlama](billing-understand-reserved-instance-usage-ea.md).
 
-Bu makalede ayırma tek bir abonelik için geçerli olduğunu varsayar. Rezervasyon için birden fazla aboneliğiniz uygulanırsa, rezervasyon Avantajı'nızı birden çok kullanım CSV dosyalarını yayılabilir.
+Bu makalede, rezervasyonun tek bir aboneliğe uygulandığı varsayılmaktadır. Rezervasyon birden fazla aboneliğe uygulandıysa rezervasyon avantajınız kullanım bilgilerini içeren birden çok CSV dosyasına yayılabilir.
 
-## <a name="usage-for-reserved-virtual-machine-instances"></a>Kullanım için ayrılmış sanal makine örnekleri
+## <a name="usage-for-reserved-virtual-machine-instances"></a>Ayrılmış Sanal Makine Örnekleri için kullanım
 
-Aşağıdaki bölümlerde için Standard_DS1_v2 Windows VM, ayrılmış VM örneği bilgi aşağıdaki gibi görünür aşağıdaki tabloda, Doğu ABD bölgesinde çalıştığını varsayalım:
+Aşağıdaki bölümlerde, Doğu ABD bölgesinde bir Standard_DS1_v2 Windows sanal makinesi çalıştırdığınızı ve ayrılmış sanal makine örneği bilgilerinizin aşağıdaki tablo gibi göründüğünü varsayın:
 
 | Alan | Değer |
 |---| :---: |
-|Reservationıd |8117adfb-1d94-4675-be2b-f3c1bca808b6|
+|ReservationId |8117adfb-1d94-4675-be2b-f3c1bca808b6|
 |Miktar |1|
 |SKU | Standard_DS1_v2|
 |Bölge | eastus |
 
-Dağıtılan VM ayırma öznitelikleri ile eşleştiği için sanal makinenin donanım bölümü ele alınmıştır. Ayrılmış VM örneği tarafından hangi Windows yazılım kapsamında değildir görmek için bkz [Azure ayrılmış VM örnekleri Windows yazılım maliyetleri](billing-reserved-instance-windows-software-costs.md)
+Dağıtılan sanal makine, rezervasyon öznitelikleriyle eşleştiğinden, sanal makinenin donanım kısmı ele alınmıştır. Hangi Windows yazılımının ayrılmış sanal makine örneği kapsamında olmadığını görmek için bkz. [Azure Ayrılmış Sanal Makine Örnekleri Windows yazılımı maliyetleri](billing-reserved-instance-windows-software-costs.md)
 
-### <a name="statement-section-of-csv-file-for-vms"></a>VM'ler için CSV dosyası bölümünü deyimi
+### <a name="statement-section-of-csv-file-for-vms"></a>Sanal makineler için CSV dosyasının bildirim bölümü
 
-CSV dosyanız bu bölümü, ayırma için toplam kullanım gösterir. Filtre uygulamak **ölçüm alt kategorisi** içeren alan **"Ayırma-"** . Aşağıdaki ekran görüntüsüne benzer bir şey görürsünüz:
+CSV dosyanızın bu bölümünde, rezervasyonunuzun toplam kullanımı gösterilmektedir. **"Rezervasyon-"** ifadesini içeren **Ölçüm Kategorisi** alanına filtreyi uygulayın. Aşağıdaki ekran görüntüsüne benzer bir sonuç görürsünüz:
 
-![Filtrelenmiş ayırma kullanım ayrıntıları ve ücretleri ekran görüntüsü](./media/billing-understand-reserved-instance-usage/billing-payg-reserved-instance-csv-statements.png)
+![Filtrelenmiş rezervasyon kullanımı ayrıntıları ve ücretlerinin ekran görüntüsü](./media/billing-understand-reserved-instance-usage/billing-payg-reserved-instance-csv-statements.png)
 
-**Ayırma-temel VM** ayırma tarafından kapsanan toplam süreyi satırı içeriyor. Bu satırı 0,00 ABD Doları çünkü ayırma kapsar. **Ayırma-Windows Svr (1 çekirdek)** satırı Windows yazılımının maliyetini kapsar.
+**Ayırma - Temel VM** satırında, rezervasyon kapsamındaki toplam saat sayısı yer alır. Bu satır, rezervasyon kapsamında olduğundan 0,00 ABD dolarıdır. **Ayırma - Windows Svr (1 Çekirdek)** satırı, Windows yazılımının maliyetlerini kapsar.
 
-### <a name="daily-usage-section-of-csv-file"></a>Günlük kullanım bölümüne CSV dosyası
+### <a name="daily-usage-section-of-csv-file"></a>CSV dosyasının günlük kullanım bölümü
 
-Filtre **ek bilgi** ve yazın, **rezervasyon kimliği**. Aşağıdaki ekran görüntüsünde ayırmaya ilgili alanları gösterir.
+**Ek Bilgiler** bölümünü filtreleyin ve **Rezervasyon Kimliğinizi** yazın. Aşağıdaki ekran görüntüsünde, rezervasyonla ilgili alanlar gösterilmektedir.
 
-![Günlük kullanım ayrıntıları ve ücretleri ekran görüntüsü](./media/billing-understand-reserved-instance-usage/billing-payg-reserved-instance-csv-details.png)
+![Günlük kullanım ayrıntıları ve ücretlerinin ekran görüntüsü](./media/billing-understand-reserved-instance-usage/billing-payg-reserved-instance-csv-details.png)
 
-1. **Reservationıd** içinde **ek bilgi** VM'ye uygulanan ayırma bir alandır.
-2. **ConsumptionMeter** VM için ölçüm kimliğidir.
-3. **Ayırma-temel VM** **ölçüm alt kategorisi** satır 0 ABD Doları maliyet deyimi bölümünde temsil eder. Bu VM çalıştırmanın maliyeti, rezervasyon zaten ödenir.
-4. **Ölçüm kimliği** ayırma için ölçüm kimliği. Bu ölçüm maliyeti 0 TL'dir. Bu ölçüm kimliği için ayırma indirimi niteleyen herhangi bir VM için görünür.
-5. Standard_DS1_v2 bir vCPU olan VM ve VM Azure karma avantajı olmadan dağıtılır. Bu nedenle, bu ölçüm, Windows yazılım başka bir ücret kapsar. D serisi 1 çekirdek VM karşılık gelen bir ölçüm bulmak için bkz: [Azure ayrılmış VM örnekleri Windows yazılım maliyetleri](billing-reserved-instance-windows-software-costs.md). Azure hibrit avantajı varsa, bu ek ücret uygulanmaz.
+1. **Ek Bilgiler** alanındaki **RezervasyonKimliği**, sanal makineye uygulanan rezervasyondur.
+2. **ConsumptionMeter**, sanal makinenin ölçüm kimliğidir.
+3. **Ayırma - Temel VM** **Ölçüm Alt Kategorisi** satırı, bildirim bölümünde 0 ABD doları maliyeti temsil eder. Bu sanal makineyi çalıştırmanın maliyeti zaten rezervasyon tarafından ödenmiştir.
+4. **Ölçüm Kimliği**, rezervasyonun ölçüm kimliğidir. Bu ölçümün maliyeti 0 ABD dolarıdır. Bu ölçüm kimliği, rezervasyon indirimi için uygun nitelikte olan tüm sanal makineler için görüntülenir.
+5. Standard_DS1_v2 bir vCPU sanal makinesidir ve sanal makine, Azure Hibrit Avantajı olmadan dağıtılır. Bu nedenle bu ölçüm, Windows yazılımının ek ücretini kapsar. D serisi 1 çekirdekli sanal makineye karşılık gelen ölçümü bulmak için bkz. [Azure Ayrılmış Sanal Makine Örnekleri Windows yazılım maliyetleri](billing-reserved-instance-windows-software-costs.md). Azure Hibrit Avantajı’na sahipseniz bu ek ücret uygulanmaz.
 
-## <a name="usage-for-sql-database--cosmos-db-reservations"></a>SQL veritabanı ve Cosmos DB ayırmalar için kullanım
+## <a name="usage-for-sql-database--cosmos-db-reservations"></a>SQL Veritabanı ve Cosmos DB rezervasyonları için kullanım
 
-Aşağıdaki bölümlerde, kullanım raporu açıklamak için örnek olarak Azure SQL veritabanı kullanın. Azure Cosmos DB için de kullanımını almak için aynı adımları kullanabilirsiniz.
+Aşağıdaki bölümlerde, kullanım raporunu açıklamak için örnek olarak Azure SQL Veritabanı kullanılmaktadır. Azure Cosmos DB kullanım bilgilerini almak için de aynı adımları kullanabilirsiniz.
 
-Bir SQL veritabanı Gen 4 Aşağıdaki tabloda, ayırma bilgileri görünür, Doğu ABD bölgesinde çalıştığını varsayalım:
+Doğu ABD bölgesinde bir SQL Veritabanı 4. Nesil çalıştırdığınızı ve rezervasyon bilgilerinizin aşağıdaki tabloya benzer şekilde göründüğünü varsayın:
 
 | Alan | Değer |
 |---| --- |
-|Reservationıd |446ec809-423d-467c-8c5c-bbd5d22906b1|
+|ReservationId |446ec809-423d-467c-8c5c-bbd5d22906b1|
 |Miktar |2|
-|Product| SQL veritabanı 4. nesil (2 Çekirdek)|
+|Ürün| SQL Veritabanı 4. Nesil (2 Çekirdek)|
 |Bölge | eastus |
 
-### <a name="statement-section-of-csv-file"></a>CSV dosyasının deyimi bölümü
+### <a name="statement-section-of-csv-file"></a>CSV dosyasının bildirim bölümü
 
-Filtre **ayrılmış örnek kullanımını** gerekli seçin ve ölçüm adı **ölçüm kategorisi** -Azure SQL veritabanı veya Azure Cosmos DB. Aşağıdaki ekran görüntüsüne benzer bir şey görürsünüz:
+**Ayrılmış Örnek Kullanımı** ölçüm adını filtreleyin ve Azure SQL veritabanı veya Azure Cosmos DB olarak gerekli **Ölçüm Kategorisi**’ni seçin. Aşağıdaki ekran görüntüsüne benzer bir sonuç görürsünüz:
 
-![SQL veritabanı ayrılmış kapasite için CSV dosyası](./media/billing-understand-reserved-instance-usage/billing-payg-sql-db-reserved-capacity-csv-statements.png)
+![SQL Veritabanı ayrılmış kapasitesi için CSV dosyası](./media/billing-understand-reserved-instance-usage/billing-payg-sql-db-reserved-capacity-csv-statements.png)
 
-**Ayrılmış örnek kullanımını** çizgi bulunan Çekirdek saatleri ayırma tarafından kapsanan toplam sayısı. Rezervasyon maliyeti anlatıldığı gibi bu satırı 0 ABD Doları hızıdır.
+**Ayrılmış Örnek Kullanımı** satırında, rezervasyon kapsamındaki toplam çekirdek saati sayısı yer alır. Rezervasyon maliyeti kapsadığından bu satır için fiyat 0 ABD dolarıdır.
 
 ### <a name="detail-section-of-csv-file"></a>CSV dosyasının ayrıntı bölümü
 
-Filtre **ek bilgi** ve yazın, **rezervasyon kimliği**. Aşağıdaki ekran görüntüsünde, SQL veritabanı ayrılmış kapasite ayırma için ilgili alanları gösterir.
+**Ek Bilgiler** bölümünü filtreleyin ve **Rezervasyon Kimliğinizi** yazın. Aşağıdaki ekran görüntüsünde, SQL Veritabanı ayrılmış kapasite rezervasyonu ile ilgili alanlar gösterilmektedir.
 
-![SQL veritabanı ayrılmış kapasite için CSV dosyası](./media/billing-understand-reserved-instance-usage/billing-payg-sql-db-reserved-capacity-csv-details.png)
+![SQL Veritabanı ayrılmış kapasitesi için CSV dosyası](./media/billing-understand-reserved-instance-usage/billing-payg-sql-db-reserved-capacity-csv-details.png)
 
-1. **Reservationıd** içinde **ek bilgi** SQL veritabanı kaynağı uygulanan SQL veritabanı ayrılmış kapasite ayırma bir alandır.
-2. **ConsumptionMeter** SQL veritabanı kaynak için ölçüm kimliği.
-3. **Ölçüm kimliği** ayırma ölçer. Bu ölçüm maliyeti 0 TL'dir. Ayırma indirimini Bu ölçüm kimliği CSV dosyasında gösterir. uygun bir SQL veritabanı kaynaklar.
+1. **Ek Bilgiler** alanındaki **RezervasyonKimliği**, SQL veritabanı kaynağına uygulanan SQL Veritabanı ayrılmış kapasite rezervasyonudur.
+2. **ConsumptionMeter**, SQL Veritabanı kaynağının ölçüm kimliğidir.
+3. **Ölçüm Kimliği**, rezervasyon ölçümüdür. Bu ölçümün maliyeti 0 ABD dolarıdır. Rezervasyon indirimi için uygun nitelikte olan SQL Veritabanı kaynakları, CSV dosyasında bu ölçüm kimliğini gösterir.
 
-## <a name="need-help-contact-us"></a>Yardım mı gerekiyor? Bizimle iletişim kurun.
+## <a name="need-help-contact-us"></a>Yardıma mı ihtiyacınız var? Bize ulaşın.
 
-Sorularınız varsa veya yardıma ihtiyacınız [bir destek isteği oluşturma](https://go.microsoft.com/fwlink/?linkid=2083458).
+Sorularınız varsa ya da yardıma gereksinim duyuyorsanız [destek isteği oluşturun](https://go.microsoft.com/fwlink/?linkid=2083458).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure ayırmaları hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+Azure Ayrılmış Sanal Makine Örnekleri hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
 
-- [Azure ayırmaları nelerdir?](billing-save-compute-costs-reservations.md)
+- [Azure Ayrılmış Sanal Makine Örnekleri nedir?](billing-save-compute-costs-reservations.md)
 - [Azure Ayrılmış VM Örnekleri ile Sanal Makinelere ön ödeme yapma](../virtual-machines/windows/prepay-reserved-vm-instances.md)
 - [Azure SQL Veritabanı ayrılmış kapasitesi ile SQL Veritabanı işlem kaynakları için ön ödeme yapma](../sql-database/sql-database-reserved-capacity.md)
 - [Azure Ayırmalarını yönetme](billing-manage-reserved-vm-instance.md)
-- [Ayırma indirimi nasıl uygulanacağını anlama](billing-understand-vm-reservation-charges.md)
-- [Kurumsal kayıt için ayırma kullanımını anlama](billing-understand-reserved-instance-usage-ea.md)
-- [Windows yazılım maliyetleri ile ayırmaları dahil değil](billing-reserved-instance-windows-software-costs.md)
+- [Rezervasyon indiriminin nasıl uygulandığını anlama](billing-understand-vm-reservation-charges.md)
+- [Kurumsal kaydınız için rezervasyon kullanımını anlama](billing-understand-reserved-instance-usage-ea.md)
+- [Rezervasyonlara dahil olmayan Windows yazılımı maliyetleri](billing-reserved-instance-windows-software-costs.md)

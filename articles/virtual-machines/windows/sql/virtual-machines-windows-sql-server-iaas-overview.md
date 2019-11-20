@@ -8,19 +8,18 @@ manager: craigg
 tags: azure-service-management
 ms.assetid: c505089e-6bbf-4d14-af0e-dd39a1872767
 ms.service: virtual-machines-sql
-ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 12/12/2018
 ms.author: mathoma
 ms.reviewer: jroth
-ms.openlocfilehash: 99c4f0f99af61196cf1a12f2f68a7d10d8b2e6c7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 855bd64bc8beb86a1bc62c65f71254f43c7a722a
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61477170"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70101966"
 ---
 # <a name="what-is-sql-server-on-azure-virtual-machines-windows"></a>Azure Sanal Makinelerinde SQL Server nedir? (Windows)
 
@@ -69,12 +68,12 @@ Kullanmaya başlamak için, gerekli olan sürüm ve işletim sisteminizle birlik
 Kullanabileceğiniz Linux SQL Server sanal makine görüntülerini görmek için bkz. [Azure Sanal Makinelerinde SQL Server'a Genel Bakış (Linux)](../../linux/sql/sql-server-linux-virtual-machines-overview.md).
 
 > [!NOTE]
-> Artık kendi lisansınızı kullanmak için bir kullanım başına ödeme SQL Server VM'nin lisanslama modelini değiştirmek mümkündür. Daha fazla bilgi için [bir SQL VM için lisanslama modelini değiştirme](virtual-machines-windows-sql-ahb.md). 
+> Kullanım başına ödeme SQL Server VM lisans modelini kendi lisansınızı kullanacak şekilde değiştirmek mümkündür. Daha fazla bilgi için bkz. [SQL VM için lisans modelini değiştirme](virtual-machines-windows-sql-ahb.md). 
 
 ### <a id="BYOL"></a> Kendi lisansını getir
 Ayrıca kendi lisansınızı getirebilirsiniz (KLG). Bu senaryoda, SQL Server Lisans için hiçbir ek bir ücret olmadan yalnızca VM için ödeme yaparsınız.  Kendi lisansınızı getirmek, sürekli üretim iş yüklerinde zaman içinde paradan tasarruf etmenizi sağlayabilir. Bu seçeneği kullanmaya yönelik gereksinimler için bkz. [SQL Server Azure VM’leri için fiyatlandırma kılavuzu](virtual-machines-windows-sql-server-pricing-guidance.md#byol).
 
-Kendi lisansını Getir için var olan kullanım başına ödeme SQL VM'yi ya da dönüştürebilir veya önekli bir resim dağıtabilirsiniz **{KLG}** . Lisanslama modelinizin kullanım başına ödeme ve KLG arasında geçiş yapma hakkında daha fazla bilgi için bkz. [bir SQL VM için lisanslama modelini değiştirme](virtual-machines-windows-sql-ahb.md). 
+Kendi lisansınızı getirmek için, var olan bir ödeme başına SQL VM 'yi dönüştürebilir ya da **{KLG}** önekli bir görüntüyü dağıtabilirsiniz. Lisans modelinizi kullanım başına ödeme ve KLG arasında değiştirme hakkında daha fazla bilgi için bkz. [BIR SQL VM için lisans modelini değiştirme](virtual-machines-windows-sql-ahb.md). 
 
 | Version | İşletim sistemi | Sürüm |
 | --- | --- | --- |
@@ -83,13 +82,13 @@ Kendi lisansını Getir için var olan kullanım başına ödeme SQL VM'yi ya da
 | **SQL Server 2014 SP2** |Windows Server 2012 R2 |[Enterprise KLG](https://portal.azure.com/#create/Microsoft.BYOLSQLServer2014SP2EnterpriseWindowsServer2012R2), [Standard KLG](https://portal.azure.com/#create/Microsoft.BYOLSQLServer2014SP2StandardWindowsServer2012R2) |
 | **SQL Server 2012 SP4** |Windows Server 2012 R2 |[Enterprise KLG](https://portal.azure.com/#create/Microsoft.BYOLSQLServer2012SP4EnterpriseWindowsServer2012R2), [Standard KLG](https://portal.azure.com/#create/Microsoft.BYOLSQLServer2012SP4StandardWindowsServer2012R2) |
 
-PowerShell kullanarak Azure portalında kullanılabilir olmayan bir SQL Server'ın daha eski bir görüntü dağıtmak mümkündür. PowerShell kullanarak tüm kullanılabilir görüntüleri görmek için aşağıdaki komutu kullanın:
+PowerShell kullanılarak Azure portal kullanılamayan SQL Server eski bir görüntüsünü dağıtmak mümkündür. PowerShell kullanarak kullanılabilir tüm görüntüleri görüntülemek için aşağıdaki komutu kullanın:
 
   ```powershell
   Get-AzVMImageOffer -Location $Location -Publisher 'MicrosoftSQLServer'
   ```
 
-PowerShell kullanarak SQL Server Vm'leri dağıtma hakkında daha fazla bilgi için görüntüleme [Azure PowerShell ile SQL Server sanal makineler sağlamak nasıl](virtual-machines-windows-ps-sql-create.md).
+PowerShell kullanarak SQL Server VM 'Leri dağıtma hakkında daha fazla bilgi için, [Azure PowerShell ile SQL Server sanal makinelerin nasıl](virtual-machines-windows-ps-sql-create.md)sağlanacağını görüntüleyin.
 
 
 ### <a name="connect-to-the-vm"></a>VM’ye bağlanma
@@ -97,6 +96,30 @@ SQL Server sanal makinenizi oluşturduktan sonra, SQL Server Management Studio (
 
 ### <a name="migrate-your-data"></a>Verilerinizi geçirme
 Varolan bir veritabanınız varsa, bunu yeni sağlanan SQL VM'ye taşımak istersiniz. Geçiş seçenekleri ve kılavuzların listesi için bkz. [Azure VM’de bir Veritabanını SQL Server’a Geçirme](virtual-machines-windows-migrate-sql.md).
+
+## <a name="create-and-manage-azure-sql-resources-with-the-azure-portal"></a>Azure portal ile Azure SQL kaynakları oluşturma ve yönetme
+
+Azure portal, SQL sanal makineleriniz dahil olmak üzere [tüm Azure SQL kaynaklarınızı](https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Sql%2Fazuresql) yönetebileceğiniz tek bir sayfa sağlar.
+
+**Azure SQL kaynakları** sayfasına erişmek için Azure Portal sol taraftaki menüden **Azure SQL** ' i seçin. **Azure SQL** listede yoksa, **tüm hizmetler**' i seçin ve arama kutusuna *Azure SQL* yazın.
+
+> [!NOTE]
+> **Azure SQL** , tüm SQL veritabanlarına, elastik havuzlara, veritabanı SUNUCULARıNA, SQL yönetilen örneklere ve SQL sanal makinelerinize erişmenin hızlı ve kolay bir yolunu sunar. Azure SQL bir hizmet veya kaynak değil. 
+
+Mevcut kaynakları yönetmek için listeden istediğiniz öğeyi seçin. Yeni Azure SQL kaynakları oluşturmak için **+ Ekle**' yi seçin. 
+
+![Azure SQL Portal sayfası](./media/quickstart-sql-vm-create-portal/azure-sql.png)
+
+**+ Ekle**' yi seçtikten sonra herhangi bir kutucukta **Ayrıntıları göster** ' i seçerek farklı seçeneklerle ilgili ek bilgileri görüntüleyin.
+
+![veritabanları kutucuk ayrıntıları](./media/quickstart-sql-vm-create-portal/sql-vm-details.png)
+
+Ayrıntılar için bkz.
+
+- [Tek bir veritabanı oluşturma](../../../sql-database/sql-database-single-database-get-started.md)
+- [Esnek havuz oluşturma](../../../sql-database/sql-database-elastic-pool.md#creating-a-new-sql-database-elastic-pool-using-the-azure-portal)
+- [Yönetilen örnek oluşturma](../../../sql-database/sql-database-managed-instance-get-started.md)
+- [SQL sanal makinesi oluşturma](quickstart-sql-vm-create-portal.md)
 
 ## <a id="lifecycle"></a> SQL VM görüntü yenileme ilkesi
 Azure desteklenen her işletim sistemi, sürüm ve sürüm bileşimi için yalnızca tek bir sanal makine görüntüsü tutar. Diğer bir deyişle, zaman içinde görüntüler yenilenir ve eski görüntüler kaldırılır. Daha fazla bilgi için [SQL Server VM'leri SSS](virtual-machines-windows-sql-server-iaas-faq.md#images) makalesindeki **Görüntüler** bölümüne bakın.

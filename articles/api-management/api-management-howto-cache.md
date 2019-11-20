@@ -10,16 +10,15 @@ ms.assetid: 740f6a27-8323-474d-ade2-828ae0c75e7a
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: conceptual
 ms.date: 11/27/2018
 ms.author: apimpm
-ms.openlocfilehash: a0459eb67b5a79219e556cb03473a5ddf691b49d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 76a87d539e19acc30944a6a896cb0e01f431fa37
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60527423"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70073573"
 ---
 # <a name="add-caching-to-improve-performance-in-azure-api-management"></a>Azure API Management performansını artırmak için önbelleğe alma ekleme
 
@@ -38,7 +37,7 @@ API Management işlemleri yanıt önbelleğe alma için yapılandırılabilir. Y
 ## <a name="availability"></a>Kullanılabilirlik
 
 > [!NOTE]
-> İç önbelleği kullanılabilir değil **tüketim** Azure API Yönetimi katmanı. Yapabilecekleriniz [dış bir Azure önbelleği için Redis kullanın](api-management-howto-cache-external.md) yerine.
+> İç önbellek, Azure API Management **Tüketim** katmanında kullanılamıyor. Bunun yerine [redin için bir dış Azure önbelleği kullanabilirsiniz](api-management-howto-cache-external.md) .
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -57,7 +56,7 @@ Bu örnekte önbelleğe alma ilkeleri kullanılarak, **GetSpeakers** işlemine y
 4. API listenizden **Tanıtım Konferansı API’sine** tıklayın.
 5. **GetSpeakers**’ı seçin.
 6. Ekranın üst kısmında **Tasarım** sekmesini seçin.
-7. İçinde **gelen işlem** bölümünde **</>** simgesi.
+7. **Gelen işleme** bölümünde **</>** simgesine tıklayın.
 
     ![kod düzenleyicisi](media/api-management-howto-cache/code-editor.png)
 
@@ -76,7 +75,7 @@ Bu örnekte önbelleğe alma ilkeleri kullanılarak, **GetSpeakers** işlemine y
     **Süre** önbelleğe alınan yanıtların sona erme aralığını belirtir. Bu örnekte, aralık **20** saniyedir.
 
 > [!TIP]
-> Bölümünde anlatıldığı gibi bir dış önbellek kullanıyorsanız [bir dış Azure Cache Redis Azure API Yönetimi'nde kullanmak](api-management-howto-cache-external.md), belirtmek isteyebilirsiniz `caching-type` önbelleğe alma ilkelerini özniteliği. Bkz: [API Management önbelleğe alma ilkeleri](api-management-caching-policies.md) daha fazla ayrıntı için.
+> [Azure API Management redsıs için dış Azure önbelleği kullanma](api-management-howto-cache-external.md)bölümünde açıklandığı gibi dış önbellek kullanıyorsanız, önbelleğe alma ilkelerinin `caching-type` özniteliğini belirtmek isteyebilirsiniz. Daha fazla ayrıntı için bkz. [API Management önbelleğe alma ilkeleri](api-management-caching-policies.md) .
 
 ## <a name="test-operation"> </a>İşlem çağırma ve önbelleğe almayı test etme
 Önbelleğe alma eylemini görmek için, işlemi geliştirici portalından çağırın.
@@ -89,9 +88,9 @@ Bu örnekte önbelleğe alma ilkeleri kullanılarak, **GetSpeakers** işlemine y
 6. **Gönder**’e basın.
 
 ## <a name="next-steps"> </a>Sonraki adımlar
-* Önbelleğe alma ilkeleri hakkında daha fazla bilgi için bkz. [API Management ilke başvurusunda][API Management policy reference] [Önbelleğe alma ilkeleri][Caching policies].
+* Önbelleğe alma ilkeleri hakkında daha fazla bilgi için bkz. [API Management ilke başvurusu][API Management policy reference]’nda [Önbelleğe alma ilkeleri][Caching policies].
 * Anahtar kullanım ilkesi ifadeleri hakkında daha fazla bilgi için bkz. [Azure API Management’te özel önbelleğe alma](api-management-sample-cache-by-key.md).
-* Dış Azure önbelleği için Redis kullanma hakkında daha fazla bilgi için bkz. [bir dış Azure Cache Redis Azure API Yönetimi'nde kullanmak](api-management-howto-cache-external.md).
+* Redin için dış Azure önbelleğini kullanma hakkında daha fazla bilgi için bkz. [Azure 'Da redin için dış Azure önbelleği kullanma API Management](api-management-howto-cache-external.md).
 
 [api-management-management-console]: ./media/api-management-howto-cache/api-management-management-console.png
 [api-management-echo-api]: ./media/api-management-howto-cache/api-management-echo-api.png

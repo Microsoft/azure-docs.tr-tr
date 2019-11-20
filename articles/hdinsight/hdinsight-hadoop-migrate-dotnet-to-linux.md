@@ -1,6 +1,6 @@
 ---
-title: .NET ile HDInsight - Azure Linux tabanlı Hadoop MapReduce kullanma
-description: .NET uygulamalarında Linux tabanlı HDInsight MapReduce akış için nasıl kullanılacağı hakkında bilgi edinin.
+title: Linux tabanlı HDInsight 'ta Hadoop MapReduce ile .NET kullanma-Azure
+description: Linux tabanlı HDInsight 'ta MapReduce akışı için .NET uygulamalarını nasıl kullanacağınızı öğrenin.
 author: hrasheed-msft
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -8,67 +8,67 @@ ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 02/27/2018
 ms.author: hrasheed
-ms.openlocfilehash: a1d1488840ca2b17c83f380af4fa24105bb36202
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4b402975a151d26e8f335c07930274c156ac52fb
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64729491"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73498217"
 ---
-# <a name="migrate-net-solutions-for-windows-based-hdinsight-to-linux-based-hdinsight"></a>.NET çözümlerini Linux tabanlı HDInsight için Windows tabanlı HDInsight için geçirme
+# <a name="migrate-net-solutions-for-windows-based-hdinsight-to-linux-based-hdinsight"></a>Windows tabanlı HDInsight için .NET çözümlerini Linux tabanlı HDInsight 'a geçirme
 
-Linux tabanlı HDInsight kümeleri kullanım [Mono (https://mono-project.com) ](https://mono-project.com) .NET uygulamaları çalıştırmak için. Mono Linux tabanlı HDInsight ile MapReduce uygulamaları gibi .NET bileşenlerini kullanmanıza olanak tanır. Bu belgede, .NET çözümlerini Linux tabanlı HDInsight üzerinde Mono çalışmak Windows tabanlı HDInsight kümeleri için oluşturulan geçirmeyi öğrenin.
+Linux tabanlı HDInsight kümeleri, .NET uygulamalarını çalıştırmak için [Mono (https://mono-project.com)](https://mono-project.com) kullanır. Mono, Linux tabanlı HDInsight ile MapReduce uygulamaları gibi .NET bileşenlerini kullanmanıza olanak sağlar. Bu belgede, Windows tabanlı HDInsight kümeleri için oluşturulan .NET çözümlerini, Linux tabanlı HDInsight 'ta Mono ile çalışacak şekilde geçirmeyi öğrenin.
 
-## <a name="mono-compatibility-with-net"></a>.NET Mono uyumluluğu
+## <a name="mono-compatibility-with-net"></a>.NET ile mono uyumluluğu
 
-HDInsight sürümü 3.6 ile Mono sürüm 4.2.1 dahildir. HDInsight ile dahil Mono sürümü hakkında daha fazla bilgi için bkz. [HDInsight bileşen sürümü](hdinsight-component-versioning.md).
+Tek bir sürüm 4.2.1, HDInsight sürüm 3,6 ' ye dahildir. HDInsight 'ta bulunan mono sürümü hakkında daha fazla bilgi için bkz. [HDInsight bileşen sürümleri](hdinsight-component-versioning.md).
 
-Mono ve .NET uyumluluğu hakkında daha fazla bilgi için bkz. [Mono uyumluluğu (https://www.mono-project.com/docs/about-mono/compatibility/) ](https://www.mono-project.com/docs/about-mono/compatibility/) belge.
-
-> [!IMPORTANT]  
-> SCP.NET çerçevesi, Mono ile uyumludur. SCP.NET Mono ile kullanma hakkında daha fazla bilgi için bkz. [HDInsight üzerinde Apache Storm için C# topolojileri geliştirme için Visual Studio](storm/apache-storm-develop-csharp-visual-studio-topology.md).
-
-## <a name="automated-portability-analysis"></a>Otomatik taşınabilirlik analizi
-
-[.NET Portability Analyzer](https://marketplace.visualstudio.com/items?itemName=ConnieYau.NETPortabilityAnalyzer) uygulamanızı ve Mono arasında uyumsuzluk, rapor oluşturmak için kullanılabilir. Uygulamanız Mono taşınabilirlik için denetlenecek Çözümleyicisi'ni yapılandırmak için aşağıdaki adımları kullanın:
-
-1. Yükleme [.NET Portability Analyzer](https://marketplace.visualstudio.com/items?itemName=ConnieYau.NETPortabilityAnalyzer). Yükleme sırasında kullanmak için Visual Studio sürümünü seçin.
-
-2. Visual Studio 2015'ten seçin __Çözümle__ > __taşınabilirlik Çözümleyicisi ayarları__, emin olun __4.5__ iade __Mono__ bölümü.
-
-    ![Mono bölümünde Çözümleyicisi ayarları için kontrol 4.5](./media/hdinsight-hadoop-migrate-dotnet-to-linux/portability-analyzer-settings.png)
-
-    Seçin __Tamam__ yapılandırmayı kaydetmek için.
-
-3. Seçin __analiz__ > __derleme taşınabilirlik analiz__. Çözümünüzü içeren derlemeyi seçin ve ardından __açık__ analize başlamak için.
-
-4. Analiz tamamlandıktan sonra seçin __Çözümle__ > __analiz raporları görüntüleme__. İçinde __taşınabilirlik analiz sonuçları__seçin __raporunu Aç__ bir raporu açın.
-
-    ![Taşınabilirlik Çözümleyicisi sonuçları iletişim](./media/hdinsight-hadoop-migrate-dotnet-to-linux/portability-analyzer-results.png)
+Mono ve .NET arasında uyumluluk hakkında daha fazla bilgi için bkz. [mono uyumluluk (https://www.mono-project.com/docs/about-mono/compatibility/)](https://www.mono-project.com/docs/about-mono/compatibility/) belgesi.
 
 > [!IMPORTANT]  
-> Çözümünüzü her sorun Çözümleyicisi yakalayamaz. Örneğin, bir dosya yolu `c:\temp\file.txt` Mono Windows üzerinde çalışıyorsa Tamam olarak değerlendirilir. Aynı yol bir Linux platformunda geçerli değil.
+> SCP.NET Framework Mono ile uyumludur. Mono ile SCP.NET kullanma hakkında daha fazla bilgi için bkz. [HDInsight 'ta Apache Storm için C# topolojiler geliştirmek üzere Visual Studio 'yu kullanma](storm/apache-storm-develop-csharp-visual-studio-topology.md).
 
-## <a name="manual-portability-analysis"></a>El ile Taşınabilirlik analizi
+## <a name="automated-portability-analysis"></a>Otomatik taşınabilirlik Analizi
 
-El ile bir denetim bilgileri kullanarak kodunuzun gerçekleştirmek [uygulama taşınabilirliğini (https://www.mono-project.com/docs/getting-started/application-portability/) ](https://www.mono-project.com/docs/getting-started/application-portability/) belge.
+[.Net taşınabilirlik Çözümleyicisi](https://marketplace.visualstudio.com/items?itemName=ConnieYau.NETPortabilityAnalyzer) , uygulamanız ve mono arasındaki uyumsuzluklar hakkında bir rapor oluşturmak için kullanılabilir. Çözümleyicisi 'ni, uygulamayı mono taşınabilirlik için denetleyecek şekilde yapılandırmak için aşağıdaki adımları kullanın:
 
-## <a name="modify-and-build"></a>Derleme ve değiştirme
+1. [.Net taşınabilirlik Çözümleyicisi](https://marketplace.visualstudio.com/items?itemName=ConnieYau.NETPortabilityAnalyzer)'ni yükler. Yükleme sırasında, kullanılacak Visual Studio sürümünü seçin.
 
-Visual Studio için HDInsight .NET çözümlerinizi oluşturmak için kullanmaya devam edebilirsiniz. Ancak, proje .NET Framework 4.5 kullanmak için yapılandırıldığından emin olmanız gerekir.
+2. Visual Studio 2015 ' den > __taşınabilirlik Çözümleyicisi ayarlarını__ __Çözümle__ ' yi seçin ve __mono__ bölümünde __4,5__ ' nin işaretli olduğundan emin olun.
 
-## <a name="deploy-and-test"></a>Dağıtma ve test etme
+    ![4,5, çözümleyici ayarları için mono bölümünde işaretlendi](./media/hdinsight-hadoop-migrate-dotnet-to-linux/portability-analyzer-settings.png)
 
-.NET Portability Analyzer veya el ile çözümleme önerileri kullanarak çözümünüzü oluşturduktan sonra HDInsight ile test etmeniz gerekir. Linux tabanlı HDInsight kümesi üzerinde çözüm test ediliyor, düzeltilmesi gereken Zarif sorunlarını gösterilmesine neden olabilir. Sınama sırasında uygulamanızda ek günlükler etkinleştirmenizi öneririz.
+    Yapılandırmayı kaydetmek için __Tamam ' ı__ seçin.
 
-Günlüklerine erişme hakkında daha fazla bilgi için aşağıdaki belgelere bakın:
+3. __Bütünleştirilmiş kod taşınabilirliği__analiz > __Çözümle__ ' yi seçin. Çözümünüzü içeren derlemeyi seçin ve ardından Analize Başlamak için __Aç__ ' ı seçin.
 
-* [Linux tabanlı HDInsight üzerinde erişim Apache Hadoop YARN uygulama günlüklerine](hdinsight-hadoop-access-yarn-app-logs-linux.md)
+4. Analiz tamamlandıktan sonra analiz __raporlarını görüntüle__ > __Çözümle__ ' yi seçin. __Taşınabilirlik Analizi sonuçlarında__rapor açmak Için __raporu aç__ ' ı seçin.
+
+    ![Taşınabilirlik Çözümleyicisi sonuçları iletişim kutusu](./media/hdinsight-hadoop-migrate-dotnet-to-linux/portability-analyzer-results.png)
+
+> [!IMPORTANT]  
+> Çözümleyici, çözümünüzle ilgili her sorunu yakalayabilir. Örneğin, mono Windows üzerinde çalışıyorsa `c:\temp\file.txt` dosya yolu tamam olarak kabul edilir. Aynı yol bir Linux platformunda geçerli değildir.
+
+## <a name="manual-portability-analysis"></a>El ile taşınabilirlik Analizi
+
+[Uygulama taşınabilirlik (https://www.mono-project.com/docs/getting-started/application-portability/)](https://www.mono-project.com/docs/getting-started/application-portability/) belgesindeki bilgileri kullanarak kodunuzun el ile denetimini gerçekleştirin.
+
+## <a name="modify-and-build"></a>Değiştir ve oluştur
+
+HDInsight için .NET çözümlerini oluşturmak üzere Visual Studio 'Yu kullanmaya devam edebilirsiniz. Ancak, projenin 4,5 .NET Framework kullanacak şekilde yapılandırıldığından emin olmanız gerekir.
+
+## <a name="deploy-and-test"></a>Dağıtın ve test edin
+
+Çözümünüzü .NET taşınabilirlik Çözümleyicisi 'nden veya el ile bir analizde kullanarak değiştirdikten sonra, HDInsight ile test etmeniz gerekir. Çözümü Linux tabanlı HDInsight kümesinde test etmek, düzeltilmesi gereken hafif sorunları açığa çıkarmayabilir. Test ederken uygulamanızda ek günlüğe kaydetmeyi etkinleştirmenizi öneririz.
+
+Günlüklere erişme hakkında daha fazla bilgi için aşağıdaki belgelere bakın:
+
+* [Linux tabanlı HDInsight 'ta YARN uygulama günlüklerine erişim Apache Hadoop](hdinsight-hadoop-access-yarn-app-logs-linux.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [HDInsight MapReduce ile C# kullanma](hadoop/apache-hadoop-dotnet-csharp-mapreduce-streaming.md)
+* [HDInsight C# üzerinde MapReduce ile kullanma](hadoop/apache-hadoop-dotnet-csharp-mapreduce-streaming.md)
 
-* [Kullanım C# Apache Hive ve Apache Pig ile kullanıcı tanımlı işlevler](hadoop/apache-hadoop-hive-pig-udf-dotnet-csharp.md)
+* [Apache Hive C# ve Apache Pig ile Kullanıcı tanımlı işlevler kullanma](hadoop/apache-hadoop-hive-pig-udf-dotnet-csharp.md)
 
-* [Geliştirme C# HDInsight üzerinde Apache Storm topolojileri](storm/apache-storm-develop-csharp-visual-studio-topology.md)
+* [HDInsight C# üzerinde Apache Storm için topolojiler geliştirin](storm/apache-storm-develop-csharp-visual-studio-topology.md)

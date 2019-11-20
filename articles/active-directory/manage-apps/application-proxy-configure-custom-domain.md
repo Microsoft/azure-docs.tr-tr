@@ -1,6 +1,6 @@
 ---
-title: Azure AD uygulama proxy'sinde özel etki alanları | Microsoft Docs
-description: Böylece uygulama URL'sini kullanıcılarınız, eriştiği ne olursa olsun aynı olan Azure AD uygulama proxy'sinde özel etki alanlarını yönetin.
+title: Azure AD Uygulama Ara Sunucusu özel etki alanları | Microsoft Docs
+description: Azure AD Uygulama Ara Sunucusu 'de özel etki alanlarını yapılandırın ve yönetin.
 services: active-directory
 documentationcenter: ''
 author: msmimart
@@ -11,83 +11,138 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 01/31/2018
+ms.date: 10/24/2019
 ms.author: mimart
 ms.reviewer: harshja
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: bae13de156d502cdd731005d460641ca452448d5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 189b8666adde0eedcb451655657a4a82dc5e4fec
+ms.sourcegitcommit: f7f70c9bd6c2253860e346245d6e2d8a85e8a91b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67108669"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73062515"
 ---
-# <a name="working-with-custom-domains-in-azure-ad-application-proxy"></a>Azure AD uygulama proxy'sinde özel etki alanları ile çalışma
+# <a name="configure-custom-domains-with-azure-ad-application-proxy"></a>Azure AD Uygulama Ara Sunucusu özel etki alanlarını yapılandırma
 
-Azure Active Directory Uygulama proxy'si aracılığıyla uygulama yayımladığınızda, kullanıcılarınız uzaktan çalışırken gitmek için bir dış URL oluşturun. Varsayılan etki alanı bu URL'yi alır *yourtenant.msappproxy.net*. Örneğin, yayımladığınız uygulama adlı masrafları ve kiracınız Contoso adlı, sonra dış URL şu şekilde olacaktır `https://expenses-contoso.msappproxy.net`. Kendi etki alanı adınızı kullanmak istiyorsanız, uygulamanız için özel bir etki alanı yapılandırın. 
+Azure Active Directory Uygulama Ara Sunucusu aracılığıyla bir uygulama yayımladığınızda kullanıcılarınız için bir dış URL oluşturursunuz. Bu URL varsayılan etki alanını alır *yourtenant.msappproxy.net*. Örneğin, kiracınızda *contoso* *adlı bir* uygulama yayımladığınızda dış URL *https: \//Expenses-contoso.msappproxy.net*. *Msappproxy.net*yerine kendi etki alanı adınızı kullanmak istiyorsanız, uygulamanız için özel bir etki alanı yapılandırabilirsiniz. 
 
-Mümkün olduğunda, uygulamalarınız için özel etki alanları ayarlamanızı öneririz. Özel etki alanları avantajlarından bazıları şunlardır:
+## <a name="benefits-of-custom-domains"></a>Özel etki alanlarının avantajları
 
-- İçinde veya dışında ağınıza çalışıyor olmanızdan kullanıcılarınızın uygulama ile aynı URL'yi elde edebilirsiniz.
-- Tüm uygulamalar aynı iç ve dış URL'ler varsa, başka bir işaret eden bir uygulama bağlantılar, kurumsal ağ dışından bile çalışmaya devam. 
-- Markanızın denetlemek ve istediğiniz URL'leri oluşturun. 
+Mümkün olduğunda uygulamalarınız için özel etki alanları ayarlamanız iyi bir fikirdir. Özel etki alanlarını kullanmanın bazı nedenleri şunlardır:
 
+- Uygulamalar arasındaki bağlantılar, şirket ağı dışında da çalışır. Özel etki alanı olmadan, uygulamanız uygulama proxy 'Si dışındaki hedeflere sabit kodlanmış iç bağlantılar içeriyorsa ve bağlantılar dışarıdan çözümlenememişse, bunlar kesilir. İç ve dış URL 'niz aynı olduğunda, bu sorundan kaçının. Özel etki alanlarını kullanmıyorsanız, bu sorunu gidermek için [Azure AD uygulama ara sunucusu ile yayımlanan uygulamalar için bkz. yeniden kodlanmış bağlantıları yeniden yönlendirme](../application-proxy-link-translation.md) . 
+  
+- Kullanıcılarınız, ağınızın içinden veya dışından aynı URL ile uygulamaya gidebildiğinden daha kolay bir deneyimle karşılaşacaktır. Farklı iç ve dış URL 'Ler öğrenmeleri veya geçerli konumlarını izlemesi gerekmez. 
 
-## <a name="configure-a-custom-domain"></a>Özel etki alanı yapılandırma
+- Markanızı denetleyebilir ve istediğiniz URL 'Leri oluşturabilirsiniz. Kullanıcılar, *msappproxy.net*yerine tanıdık bir ad görüp kullandığından, özel bir etki alanı kullanıcılarınızın güvenini oluşturmaya yardımcı olabilir.
 
-### <a name="prerequisites"></a>Önkoşullar
+- Bazı yapılandırmalara yalnızca özel etki alanları ile çalışacaksınız. Örneğin, Active Directory Federasyon Hizmetleri (AD FS) (AD FS) kullandığınızda, ancak WS-Federation ' i kullanırken Security Assertion Markup Language (SAML) kullanan uygulamalar için özel etki alanlarına ihtiyacınız vardır. Daha fazla bilgi için bkz. [uygulama proxy 'sinde talep kullanan uygulamalarla çalışma](application-proxy-configure-for-claims-aware-applications.md). 
 
-Özel bir etki alanını yapılandırmadan önce hazırlanmış aşağıdaki gereksinimlere sahip olduğunuzdan emin olun: 
-- A [doğrulanmamış etki alanını Azure Active Directory'ye eklenen](../fundamentals/add-custom-domain.md).
-- Bir PFX dosyası biçiminde etki alanı için özel bir sertifika. 
-- Şirket içi uygulama [uygulama proxy'si aracılığıyla yayımlandığından](application-proxy-add-on-premises-application.md).
+İç ve dış URL 'Leri eşleşmeyebilirsiniz, özel etki alanları kullanmak önemli değildir, ancak yine de diğer avantajlardan faydalanabilirsiniz. 
 
-### <a name="configure-your-custom-domain"></a>Özel etki alanınızı yapılandırın
+## <a name="dns-configuration-options"></a>DNS yapılandırma seçenekleri
 
-Bu üç gereksinimleri hazır olduğunda, özel etki alanı oluşturmak için aşağıdaki adımları izleyin:
+Gereksinimlerinize bağlı olarak DNS yapılandırmanızı ayarlamaya yönelik çeşitli seçenekler vardır:
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Gidin **Azure Active Directory** > **kurumsal uygulamalar** > **tüm uygulamaları** ve yönetmek istediğiniz uygulamayı seçin.
-3. Seçin **uygulama proxy'si**. 
-4. Dış URL alanına özel etki alanınızı seçmek için açılan listeyi kullanın. Listede etki alanınızı görmüyorsanız, ardından da henüz doğrulanmış edilmemiş. 
-5. Seçin **Kaydet**
-5. **Sertifika** olur devre dışı bırakılmış bir alan etkin. Bu alanı seçin. 
+### <a name="same-internal-and-external-url-different-internal-and-external-behavior"></a>Aynı dahili ve dış URL, farklı iç ve dış davranış 
 
-   ![Bir sertifikayı karşıya yüklemek için tıklayın](./media/application-proxy-configure-custom-domain/certificate.png)
+İç kullanıcılarınızın uygulama proxy 'Si aracılığıyla yönlendirilmesini istemiyorsanız, *bölünmüş beyinli BIR DNS*ayarlayabilirsiniz. Bölünmüş bir DNS altyapısı, iç Konakları iç etki alanı ad sunucusuna ve dış ana bilgisayarları, ad çözümlemesi için bir dış etki alanı ad sunucusuna yönlendirir. 
 
-   Bu etki alanı için bir sertifika zaten karşıya sertifika alanı sertifika bilgilerini görüntüler. 
+![Bölünmüş beyinli DNS](./media/application-proxy-configure-custom-domain/split-brain-dns.png)
 
-6. PFX sertifikasını karşıya yükleyin ve sertifikanın parolasını girin. 
-7. Seçin **Kaydet** yaptığınız değişiklikleri kaydedin. 
-8. Ekleme bir [DNS kaydı](../../dns/dns-operations-recordsets-portal.md) yeni dış URL msappproxy.net etki alanına yeniden yönlendirir.
-9. DNS kaydı doğru şekilde kullanarak yapılandırıldığından emin olun [nslookup](https://social.technet.microsoft.com/wiki/contents/articles/29184.nslookup-for-beginners.aspx) , dış URL erişilebilir olduğundan ve diğer ad olarak msapproxy.net etki alanı gösterilir görmek için komutu.
+### <a name="different-internal-and-external-urls"></a>Farklı iç ve dış URL 'Ler 
 
->[!TIP] 
->Özel etki alanı başına bir sertifikayı karşıya yüklemek yeterlidir. Sertifika karşıya yükledikten sonra yeni bir uygulama yayımlama ve DNS kaydı dışında ek yapılandırma gerekmez, özel etki alanını seçebilirsiniz. 
+İç ve dış URL 'Ler farklıysa, Kullanıcı yönlendirmesi URL tarafından belirlendiği için, bölünmüş beyinli davranışı yapılandırmanız gerekmez. Bu durumda, yalnızca dış DNS 'i değiştirirsiniz ve dış URL 'YI uygulama proxy uç noktasına yönlendirin. 
 
-## <a name="manage-certificates"></a>Sertifikaları yönetme
+Dış URL için özel bir etki alanı seçtiğinizde, bir bilgi çubuğu dış DNS sağlayıcısına eklemeniz gereken CNAME girişini gösterir. Uygulamanın **uygulama proxy 'si** sayfasına giderek bu bilgileri her zaman görebilirsiniz.
 
-### <a name="certificate-format"></a>Sertifika biçimi
-Sertifika imza yöntemler konusunda bir kısıtlama yoktur. Tüm Eliptik Eğri Şifrelemesi (ECC), konu alternatif adı (SAN) ve diğer ortak sertifika türleri desteklenir. 
+## <a name="set-up-and-use-custom-domains"></a>Özel etki alanlarını ayarlama ve kullanma
 
-İstenen dış URL'yi joker karakter eşleşmesi şartıyla, bir joker sertifikası kullanabilirsiniz.
+Şirket içi bir uygulamayı özel etki alanı kullanacak şekilde yapılandırmak için, bir özel etki alanı, özel etki alanı için bir PFX sertifikası ve yapılandırılacak şirket içi bir uygulama için onaylanmış bir Azure Active Directory gerekir. 
 
-Kendi ortak anahtar altyapısı (PKI) nedeniyle güvenlik konuları tarafından verilen bir sertifika kullanamazsınız.
+### <a name="create-and-verify-a-custom-domain"></a>Özel etki alanı oluşturma ve doğrulama
 
-### <a name="changing-the-domain"></a>Etki alanını değiştirme
-Tüm doğrulanmış etki alanları, uygulamanız için dış URL aşağı açılan listede görünür. Etki alanını değiştirmek için bu alan için uygulamayı güncelleştirmeniz yeterlidir. İstediğiniz etki alanının listesinde değilse [doğrulanmış bir etki alanı ekleme](../fundamentals/add-custom-domain.md). İlişkili bir sertifikanız henüz, sertifika eklemek için 5-7 adımları bir etki alanı seçtiğinizde. Ardından, yeni harici URL'den yönlendirmek için DNS kaydı güncelleştirdiğinizden emin olun. 
+Özel etki alanı oluşturmak ve doğrulamak için:
+
+1. Azure Active Directory, sol gezinti bölmesinde **özel etki alanı adları** ' nı seçin ve ardından **özel etki alanı Ekle**' yi seçin. 
+1. Özel etki alanı adınızı girip **etki alanı Ekle**' yi seçin. 
+1. Etki alanı sayfasında, etki alanınız için TXT kayıt bilgilerini kopyalayın. 
+1. Etki alanı Kaydedicinizin üzerine gidip, kopyalanmış DNS bilgilerinizi temel alarak etki alanınız için yeni bir TXT kaydı oluşturun.
+1. Etki alanını kaydettikten sonra, Azure Active Directory etki alanının sayfasında **Doğrula**' yı seçin. Etki alanı durumu **doğrulandıktan**sonra, uygulama proxy 'si de dahil olmak üzere tüm Azure AD yapılandırmalarında etki alanını kullanabilirsiniz. 
+
+Daha ayrıntılı yönergeler için [Azure Active Directory portalını kullanarak özel etki alanı adınızı ekleme](../fundamentals/add-custom-domain.md)bölümüne bakın.
+
+### <a name="configure-an-app-to-use-a-custom-domain"></a>Bir uygulamayı özel etki alanı kullanacak şekilde yapılandırma
+
+Uygulamanızı özel bir etki alanı ile uygulama proxy 'Si aracılığıyla yayımlamak için:
+
+1. Yeni bir uygulama için, Azure Active Directory, sol gezinti bölmesinde **Kurumsal uygulamalar** ' ı seçin. **Yeni uygulama**’yı seçin. Şirket **içi uygulamalar** bölümünde Şirket **içi uygulama ekle**' yi seçin. 
+   
+   Zaten **Kurumsal uygulamalarda**bulunan bir uygulama için listeden seçin ve sol gezinti bölmesinde **uygulama proxy 'si** ' ni seçin. 
+
+2. Uygulama proxy 'Si ayarları sayfasında, kendi şirket içi uygulamanızı ekliyorsanız bir **ad** girin.
+
+3.  **Iç URL** alanına UYGULAMANıZıN iç URL 'sini girin.
+   
+4. **Dış URL** alanında, listeyi aşağı açılır ve kullanmak istediğiniz özel etki alanını seçin.
+   
+5. **Add (Ekle)** seçeneğini belirleyin.
+   
+   ![Özel etki alanı seç](./media/application-proxy-configure-custom-domain/application-proxy.png)
+   
+6. Etki alanının zaten bir sertifikası varsa, **sertifika** alanı sertifika bilgilerini görüntüler. Aksi takdirde, **sertifika** alanını seçin. 
+   
+   ![Sertifikayı karşıya yüklemek için tıklayın](./media/application-proxy-configure-custom-domain/certificate.png)
+   
+7. **SSL sertifikası** SAYFASıNDA, PFX Sertifika dosyanıza gidin ve seçin. Sertifika için parola girin ve **sertifikayı karşıya yükle**' yi seçin. Sertifikalar hakkında daha fazla bilgi için bkz. [özel etki alanları Için sertifikalar](#certificates-for-custom-domains) bölümü.
+   
+   ![Sertifikayı karşıya yükle](./media/application-proxy-configure-custom-domain/ssl-certificate.png)
+   
+   > [!TIP] 
+   > Özel bir etki alanı yalnızca sertifikasını bir kez karşıya yüklenmesini gerektirir. Bundan sonra, diğer uygulamalar için özel etki alanını kullandığınızda karşıya yüklenen sertifika otomatik olarak uygulanır.
+   
+8. Bir sertifika eklediyseniz, **uygulama proxy 'si** sayfasında **Kaydet**' i seçin. 
+   
+9. **Uygulama proxy 'si** sayfasındaki bilgi çubuğunda, DNS bölgenize eklemenız gereken CNAME girişini aklınızda edin. 
+   
+   ![CNAME DNS girdisi Ekle](./media/application-proxy-configure-custom-domain/dns-info.png)
+   
+10. Yeni dış URL 'YI *msappproxy.net* etki alanına YÖNLENDIREN bir DNS kaydı eklemek için [Azure Portal kullanarak DNS kayıtlarını ve kayıt kümelerini yönetme](../../dns/dns-operations-recordsets-portal.md) konusundaki yönergeleri izleyin.
+   
+11. DNS kaydının doğru şekilde yapılandırıldığından emin olmak için, dış URL 'nizin erişilebilir olduğunu ve *msapproxy.net* etki alanının bir diğer ad olarak göründüğünü onaylamak için [nslookup](https://social.technet.microsoft.com/wiki/contents/articles/29184.nslookup-for-beginners.aspx) komutunu kullanın.
+
+Uygulamanız artık özel etki alanını kullanacak şekilde ayarlanmıştır. Test etmeden veya bırakmadan önce kullanıcıları uygulamanıza atadığınızdan emin olun. 
+
+Bir uygulamanın etki alanını değiştirmek için uygulamanın **uygulama proxy 'si** SAYFASıNDAKI **dış URL** 'deki açılan listeden farklı bir etki alanı seçin. Gerekirse güncelleştirilmiş etki alanı için bir sertifika yükleyin ve DNS kaydını güncelleştirin. **Dış URL**'deki açılan listede istediğiniz özel etki alanını görmüyorsanız, bu durum doğrulanmaz.
+
+Uygulama proxy 'Si hakkında daha ayrıntılı yönergeler için bkz. [öğretici: Azure Active Directory Içindeki uygulama proxy 'si aracılığıyla uzaktan erişim için şirket içi uygulama ekleme](application-proxy-add-on-premises-application.md).
+
+## <a name="certificates-for-custom-domains"></a>Özel etki alanları için sertifikalar
+
+Sertifika, özel etki alanınız için güvenli SSL bağlantısı oluşturur. 
+
+### <a name="certificate-formats"></a>Sertifika biçimleri
+
+Tüm gerekli ara sertifikaların dahil edildiğinden emin olmak için bir PFX sertifikası kullanmanız gerekir. Sertifika özel anahtarı içermelidir.
+
+Sertifika imzası yöntemlerinde kısıtlama yoktur. Eliptik Eğri Şifreleme (ECC), konu diğer adı (SAN) ve diğer ortak sertifika türleri desteklenir. 
+
+Joker karakter, dış URL ile eşleştiği sürece joker sertifikaları kullanabilirsiniz. [Joker uygulamalar](application-proxy-wildcard.md)için joker karakter sertifikaları kullanmanız gerekir. Sertifikayı da alt etki alanlarına erişmek üzere kullanmak istiyorsanız, alt etki alanı joker karakterlerini aynı sertifikaya konu alternatif adları olarak eklemeniz gerekir. Örneğin, konu diğer adı olarak *\*. Apps.Adventure-Works.com* eklemediğiniz sürece *\*. Adventure-Works.com* için bir sertifika *\*. Apps.Adventure-Works.com* için çalışmaz. 
+
+Sertifika zinciri istemci cihazlarınızda yüklüyse, kendi ortak anahtar altyapınız (PKI) tarafından verilen sertifikaları kullanabilirsiniz. Intune, bu sertifikaları yönetilen cihazlara dağıtabilir. Yönetilmeyen cihazlar için, bu sertifikaları el ile yüklemelisiniz.
+
+Özel bir kök CA kullanmak iyi bir fikir değildir. Özel kök CA 'nın Ayrıca birçok zorluk sunan istemci makinelere itilmesi gerekir. 
 
 ### <a name="certificate-management"></a>Sertifika yönetimi
-Bir dış konak uygulamaları paylaşmak sürece birden çok uygulama için aynı sertifikayı kullanabilirsiniz. 
 
-Bir sertifikanın süresi dolduğunda, portal üzerinden başka bir sertifikayı karşıya yüklemek için bildiren bir uyarı alırsınız. Sertifika iptal edilirse, kullanıcılarınızın uygulamaya erişirken bir güvenlik uyarısı görebilirsiniz. Biz için sertifikalar iptal denetimlerini yerine getirmiyor.  Belirli bir uygulama için bir sertifikayı güncelleştirmek için uygulamaya gidin ve özel etki alanlarını yapılandırma yeni sertifikayı karşıya yüklemek için yayımlanan uygulamalar için 5-7 adımları izleyin. Eski sertifika diğer uygulamalar tarafından kullanılmayan, otomatik olarak silinir. 
+Tüm sertifika yönetimi tek tek uygulama sayfalarıdır. **Sertifika** alanına erişmek Için uygulamanın **uygulama proxy 'si** sayfasına gidin.
 
-Şu anda sertifikalar ilgili uygulamalar bağlamında yönetmeniz gereken tüm sertifika yönetimi tek tek uygulama sayfaları olduğundan. 
+Birden çok uygulama için aynı sertifikayı kullanabilirsiniz. Karşıya yüklenen bir sertifika başka bir uygulamayla çalışıyorsa, otomatik olarak uygulanır. Uygulamayı eklediğinizde veya yapılandırdığınızda yeniden yüklemeniz istenmez. 
+
+Bir sertifikanın süresi dolmuşsa, başka bir sertifikayı karşıya yüklemeyi söyleyen bir uyarı alırsınız. Sertifika iptal edildiğinde, kullanıcılarınız uygulamaya erişirken bir güvenlik uyarısı görebilirler. Bir uygulama için sertifikayı güncelleştirmek için uygulama **ara sunucusu** sayfasına gidin, **sertifika**' ı seçin ve yeni bir sertifika yükleyin. Eski sertifika diğer uygulamalar tarafından kullanılmıyorsa, otomatik olarak silinir. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Çoklu oturum açmayı etkinleştirme](application-proxy-configure-single-sign-on-with-kcd.md) yayımlanan uygulamalarınıza Azure AD kimlik doğrulamasıyla.
-* [Koşullu erişimi etkinleştirme](application-proxy-integrate-with-sharepoint-server.md) , yayımlanan uygulamalar için.
-* [Özel etki alanı adınızı Azure AD'ye ekleme](../fundamentals/add-custom-domain.md)
-
+* Azure AD kimlik doğrulamasıyla yayımlanmış uygulamalarınızda [Çoklu oturum açmayı etkinleştirin](application-proxy-configure-single-sign-on-with-kcd.md) .
+* Yayınlanan uygulamalarınıza [koşullu erişimi etkinleştirin](../conditional-access/technical-reference.md#cloud-apps-assignments) .
 

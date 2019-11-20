@@ -1,8 +1,7 @@
 ---
-title: İki adımlı doğrulama ayarlarınızı - Azure Active Directory yönetme | Microsoft Docs
-description: İletişim bilgilerinizi değiştirmek veya cihazlarınızı yapılandırmak da dahil olmak üzere Azure multi-Factor Authentication kullanımını yönetin.
+title: İki öğeli doğrulama ayarlarınızı yönetme-Azure AD
+description: İki öğeli doğrulamayla ilgili olarak güvenlik doğrulama yöntemi ayrıntılarınızı değiştirmeyi öğrenin.
 services: active-directory
-keywords: çok faktörlü kimlik doğrulama istemcisi, kimlik doğrulama sorunu, bağıntı kimliği
 author: eross-msft
 manager: daveba
 ms.reviewer: richagi
@@ -11,72 +10,135 @@ ms.workload: identity
 ms.service: active-directory
 ms.subservice: user-help
 ms.topic: conceptual
-ms.date: 05/23/2017
+ms.date: 08/06/2019
 ms.author: lizross
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 433c2d712ca4867a5ec59f86c333511070b6d507
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 4c402e0992a3a04d674477bc9dd19e0181fd6775
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60334497"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73805272"
 ---
-# <a name="manage-your-settings-for-two-step-verification"></a>İki adımlı doğrulama ayarlarınızı yönetme
-Bu makalede, iki aşamalı doğrulama veya çok faktörlü kimlik doğrulaması ayarlarını güncelleştirme hakkında sorular yanıtlanmaktadır. Hesabınızda oturum açma sorunları yaşıyorsanız başvurmak [iki aşamalı doğrulama konusunda sorun mu yaşıyorsunuz](multi-factor-authentication-end-user-troubleshoot.md) sorun giderme Yardımı.
+# <a name="manage-your-two-factor-verification-method-settings"></a>İki öğeli doğrulama yöntemi ayarlarınızı yönetin
 
-## <a name="where-to-find-the-settings-page"></a>Ayarlar sayfasını nerede bulacağını
-Şirketinizin Azure multi-Factor Authentication kurulumu nasıl ayarladığına bağlı olarak, ayarlarınızı telefon numaranız gibi değiştirebileceğiniz birkaç yerde mevcuttur.
+İş veya okul hesabınız için güvenlik doğrulama yöntemlerinizi ayarladıktan sonra, aşağıdakiler dahil olmak üzere ilgili ayrıntıların birini güncelleştirebilirsiniz:
 
-Şirketinizin destek, iki aşamalı doğrulama yönetmek için bu yönergeleri izleyerek belirli bir URL veya adımları gönderdi. Aksi takdirde, aşağıdaki yönergeleri herkes için çalışması gerekir. Aşağıdaki adımları izleyin, ancak aynı seçenekleri göremiyorsanız, bu iş veya Okul hesabınız, kendi portalı özelleştirilmiş anlamına gelir. Azure multi-Factor Authentication portalı bağlantısını için yöneticinize başvurun.
+- Varsayılan güvenlik doğrulama yönteminizi seçme.
 
-**Ek güvenlik doğrulama sayfasına gidin**
+- Telefon numaranız gibi güvenlik doğrulama yöntemi ayrıntılarınızı ekleme veya güncelleştirme.
 
-- https://aka.ms/MFASetup kısmına gidin.
+- Yeni bir Authenticator uygulaması ayarlama veya bir cihazı Doğrulayıcı uygulamasından silme.
 
-    ![Düzenleyebileceğinizi](./media/multi-factor-authentication-end-user-manage-settings/proofup.png)
+## <a name="using-the-additional-security-verification-page"></a>Ek güvenlik doğrulama sayfasını kullanma
 
-Bu bağlantıya tıkladığınızda sizin için işe yaramazsa, ayrıca ulaşmak için **ek güvenlik doğrulaması** sayfasında aşağıdaki adımları izleyerek:
+Kuruluşunuz, iki öğeli doğrulamanızı açma ve yönetme hakkında belirli adımlar sağladıysa, bu yönergeleri izlemelisiniz. Aksi takdirde, güvenlik doğrulama yöntemi ayarlarınıza [ek güvenlik doğrulama](https://aka.ms/mfasetup) sayfasından ulaşabilirsiniz.
 
-1. Oturum açın [https://myapps.microsoft.com](https://myapps.microsoft.com)  
+>[!Note]
+>Ekranınızda gördüğünüz özellikler, bu makalede ele alınanlara eşleşmezse, yöneticinizin güvenlik bilgileri (Önizleme) deneyimini açmış olması veya kuruluşunuzun kendi özel portalının olduğu anlamına gelir. Güvenlik bilgileri deneyimi hakkında daha fazla bilgi için bkz. [güvenlik bilgisi (Önizleme) genel bakış](user-help-security-info-overview.md). Kuruluşunuzun özel portalı hakkında daha fazla bilgi için yardım masasına başvurmanız gerekir.
 
-2. Sağ üst hesabınızın adını seçin ve ardından **profili**.
+### <a name="to-get-to-the-additional-security-verification-page"></a>Ek güvenlik doğrulama sayfasına ulaşmak için
 
-3. Seçin **ek güvenlik doğrulaması**.  
+- https://aka.ms/mfasetup kısmına gidin.
 
-    ![Myapps](./media/multi-factor-authentication-end-user-manage-settings/myapps1.png)
+    ![Ek güvenlik doğrulama ekranı, kullanılabilir güvenlik doğrulama yöntemi ayrıntıları](./media/multi-factor-authentication-end-user-manage-settings/mfa-security-verification-page.png)
 
-4. Ek güvenlik doğrulama sayfasına ayarlarınızla yükler.
+    Bu bağlantıya tıklanmazsa, aşağıdaki adımları izleyerek **ek güvenlik doğrulama** sayfasına da ulaşabilirsiniz:
 
-    ![Düzenleyebileceğinizi](./media/multi-factor-authentication-end-user-manage-settings/proofup.png)
+    1. [https://myapps.microsoft.com](https://myapps.microsoft.com) adresinde oturum açın.
 
-## <a name="i-want-to-change-my-phone-number-or-add-a-secondary-number"></a>Telefon numaramı değiştirin ya da ikincil numara eklemek istiyorum
-İkincil kimlik doğrulama telefon numarasını yapılandırmak önemlidir.  Birincil telefon numaranızı ve mobil uygulamanıza büyük olasılıkla aynı telefonda olduğu için ikincil bir telefon numarası, telefonunuz kaybolur veya çalınırsa hesabınıza geri almak mümkün olmayacak en hızlı yoludur.
+    2. Sağ üst köşedeki hesap adınızı seçip **profil**' i seçin.
 
-> [!NOTE]
-> Birincil telefon numaranızı erişimi ve hesabınıza alınırken yardıma ihtiyacınız yoksa bkz [iki aşamalı doğrulama konusunda sorun mu yaşıyorsunuz](multi-factor-authentication-end-user-troubleshoot.md) daha fazla yardım makalesi.  
+    3. **Ek güvenlik doğrulaması**' nı seçin.  
 
-**Birincil telefon numaranızı değiştirmek için:**  
+        ![Uygulamalarım ek güvenlik doğrulama sayfasına bağlanır](./media/multi-factor-authentication-end-user-manage-settings/mfa-myapps-link.png)
 
-1. Üzerinde **ek güvenlik doğrulaması** sayfasında, geçerli bir telefon numarası ile metin kutusunu seçin ve yeni telefon numaranızı ile düzenleyin.  
-2. **Kaydet**’i seçin.  
-3. Bu telefon numarası için tercih edilen doğrulama seçeneğini kullanan bir sayı ise, kaydedebilmek için önce yeni numarası doğrulamanız gerekir.  
+>[!Note]
+>**Ek güvenlik doğrulama** sayfasının **Uygulama parolaları** bölümünü kullanma hakkında bilgi için bkz. [iki öğeli doğrulama için uygulama parolalarını yönetme](multi-factor-authentication-end-user-app-passwords.md). Uygulama parolaları yalnızca iki öğeli doğrulamayı henüz desteklemeyen uygulamalar için kullanılmalıdır.
 
-**İkincil bir telefon numarası eklemek için:**  
+## <a name="change-your-default-security-verification-method"></a>Varsayılan güvenlik doğrulama yönteminizi değiştirme
 
-1. Ek güvenlik doğrulama sayfasında yanındaki kutuyu işaretleyin **alternatif kimlik doğrulama telefonu.**  
-2. İkincil bir telefon numaranız, metin kutusuna girin.  
-3. Seçin **Kaydet** ve yaptığınız değişiklikleri tamamlandı.  
+Kullanıcı adınız ve parolanızla iş veya okul hesabınızda oturum açtıktan sonra otomatik olarak seçtiğiniz güvenlik doğrulama yöntemi sunulur. Kuruluşunuzun gereksinimlerine bağlı olarak, bu bir doğrulayıcı uygulaması, bir SMS mesajı veya telefon araması aracılığıyla bir bildirim veya doğrulama kodu olabilir.
 
-## <a name="require-two-step-verification-again-on-a-device-youve-marked-as-trusted"></a>İki aşamalı doğrulamayı yeniden güvenilir olarak işaretlediğiniz bir cihaz gerektirir
+Kullanmakta olduğunuz varsayılan güvenlik doğrulama yöntemini değiştirmek istediğinize karar verirseniz, buradan yapabilirsiniz.
 
-Kuruluş ayarlarınıza bağlı olarak bildiren bir onay kutusu olabilir "için tekrar sorma **X** gün" gerçekleştirdiğinizde iki aşamalı doğrulama tarayıcınızda. Bu onay kutusunu işaretleyin ve Cihazınızı kaybeder veya hesabınızın güvenliği ihlal olduğunu düşündüğünüz tüm cihazlarınıza iki aşamalı doğrulama geri yüklemeniz gerekir.
+### <a name="to-change-your-default-security-verification-method"></a>Varsayılan güvenlik doğrulama yönteminizi değiştirmek için
 
-1. Ek güvenlik doğrulama sayfasında **önceden güvenilen cihazlara geri yükleme çok faktörlü kimlik doğrulaması**.
-2. Herhangi bir cihazda oturum açtığınızda iki aşamalı doğrulamayı gerçekleştirmek üzere istenir.
+1. **Ek güvenlik doğrulaması** sayfasında, **tercih ettiğiniz seçenek** açılır listesinden kullanılacak yöntemi seçin. Tüm seçenekleri görürsünüz ancak kuruluşunuz tarafından yalnızca sizin tarafınızdan kullanılabilir olanları seçebileceksiniz.
 
-## <a name="how-do-i-clean-up-microsoft-authenticator-from-my-old-device-and-move-to-a-new-one"></a>Nasıl Microsoft Authenticator eski aygıttan temizlemek ve yeni bir hareket?
-Cihazınızın uygulamayı kaldırın veya Cihazınızı sıfırladığınızda, arka uçta etkinleştirme kaldırmaz. Daha fazla bilgi için [Microsoft Authenticator](user-help-auth-app-download-install.md).
+    - **Uygulama aracılığıyla bana bildir.** Doğrulama isteminizi bekleyen kimlik doğrulayıcı uygulamanız aracılığıyla size bildirilir.
+
+    - **Kimlik doğrulama telefonumu çağırın.** Mobil cihazınızda bilgilerinizi doğrulamanızı isteyen bir telefon araması alacaksınız.
+
+    - **Kimlik doğrulama telefonum için metin kodu.** Bir doğrulama kodunu, mobil cihazınızda kısa mesajın bir parçası olarak alırsınız. Bu kodu iş veya okul hesabınızın doğrulama istemine girmeniz gerekir.
+
+    - **Ofis telefonumu arayın.** Office telefonunuzda, bilgilerinizi doğrulamanızı isteyen bir telefon araması alırsınız.
+
+    - **Uygulamadaki doğrulama kodunu kullan.** Kimlik doğrulayıcı uygulamanızı, iş veya okul hesabınızda sorulacak bir doğrulama kodu almak için kullanacaksınız.
+
+2. **Kaydet**’i seçin.
+
+## <a name="add-or-change-your-phone-number"></a>Telefon numaranızı ekleme veya değiştirme
+
+**Ek güvenlik doğrulama** sayfasından yeni telefon numaraları ekleyebilir veya mevcut numaraları güncelleştirebilirsiniz.
+
+>[!Important]
+>Birincil telefonunuz kaybolur veya çalınırsa ya da yeni bir telefon alırsanız ve artık özgün, birincil telefon numaranız yoksa, hesabınız dışında bırakılmasını önlemeye yardımcı olmak için bir ikincil telefon numarası eklemenizi önemle öneririz.
+
+### <a name="to-change-your-phone-numbers"></a>Telefon numaralarınızı değiştirmek için
+
+1. **Ek güvenlik doğrulama** sayfasının **nasıl yanıt vermesini istersiniz?** bölümünde, **kimlik doğrulama telefonunuzun** telefon numarası bilgilerini (birincil mobil cihazınız) ve **ofis telefonunuzu**güncelleştirin.
+
+2. **Alternatif kimlik doğrulama telefonu** seçeneğinin yanındaki kutuyu işaretleyin ve ardından birincil cihazınıza erişemiyorsanız metin iletilerini veya telefon görüşmelerini alacağınız bir ikincil telefon numarası yazın.
+
+3. **Kaydet**’i seçin.
+
+## <a name="add-a-new-account-to-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamasına yeni bir hesap ekleme
+
+İş veya okul hesabınızı [Android](https://play.google.com/store/apps/details?id=com.azure.authenticator) veya [iOS](https://apps.apple.com/app/microsoft-authenticator/id983156458)için Microsoft Authenticator uygulamasında ayarlayabilirsiniz.
+
+Microsoft Authenticator uygulamasında daha önce iş veya okul hesabınızı ayarladıysanız, bunu tekrar yapmanız gerekmez.
+
+1. **Ek güvenlik doğrulama** sayfasının **nasıl yanıt vermesini istiyorsunuz?** bölümünde, **kimlik doğrulayıcı uygulaması ayarla** düğmesini seçin.
+
+    ![Microsoft Authenticator uygulamasında iş veya okul hesabınızı ayarlama](./media/multi-factor-authentication-end-user-manage-settings/mfa-security-verification-page-auth-app.png)
+
+2. QR kodunu taramak için mobil cihazınızı kullanma da dahil olmak üzere ekrandaki yönergeleri izleyin ve sonra **İleri**' yi seçin.
+
+    Bilgilerinizi doğrulamak için Microsoft Authenticator uygulama aracılığıyla bir bildirimi onaylamanız istenecektir.
+
+3. **Kaydet**’i seçin.
+
+## <a name="delete-your-account-or-device-from-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamasından hesabınızı veya cihazınızı silme
+
+Microsoft Authenticator uygulamasından hesabınızı silebilir ve cihazınızı iş veya okul hesabınızdan silebilirsiniz. Genellikle cihazınızı, kayıp, çalınmış veya eski bir cihazı hesabınızdan kalıcı olarak kaldıracak şekilde siler ve bazı bağlantı sorunlarını gidermeyi denemek veya yeni bir Kullanıcı adı gibi bir hesap değişikliğini gidermek için hesabınızı silersiniz.
+
+### <a name="to-delete-your-device-from-your-work-or-school-account"></a>Cihazınızı iş veya okul hesabınızdan silmek için
+
+1. **Ek güvenlik doğrulama** sayfasının **nasıl yanıt vermesini istiyorsunuz?** bölümünde, **kimlik doğrulayıcı uygulaması ayarla** düğmesini seçin.
+
+2. **Kaydet**’i seçin.
+
+### <a name="to-delete-your-account-from-the-microsoft-authenticator-app"></a>Microsoft Authenticator uygulamasından hesabınızı silmek için
+
+- Microsoft Authenticator uygulamadan, silmek istediğiniz cihazın yanındaki **Sil** düğmesini seçin.
+
+## <a name="turn-on-two-factor-verification-prompts-on-a-trusted-device"></a>Güvenilen bir cihazda iki öğeli doğrulama istemlerini açma
+
+Kuruluşunuzun ayarlarına bağlı olarak, tarayıcınızda iki öğeli doğrulama gerçekleştirirken **X gün boyunca tekrar sorma** seçeneğini belirten bir onay kutusu görebilirsiniz. İki öğeli doğrulama istemini durdurmak için bu kutuyu denetlediyseniz ve cihazınızı kaybederseniz veya cihazınız potansiyel olarak tehlikeye girerse, hesabınızı korumaya yardımcı olması için iki öğeli doğrulama istemini yeniden açmanız gerekir. Ne yazık ki, tek bir cihaz için istemleri yeniden açamazsınız. Tüm cihazlarınızın tüm cihazlarınızı aynı anda açmanız gerekir.
+
+### <a name="to-turn-two-factor-verification-prompts-back-on-for-your-devices"></a>Cihazlarınız için iki öğeli doğrulama istemini yeniden etkinleştirmek için
+
+- **Ek güvenlik doğrulaması** sayfasında, **önceden güvenilen cihazlarda Multi-Factor Authentication 'ı geri yükle**' yi seçin.
+
+    Herhangi bir cihazda bir sonraki oturum açışınızda iki öğeli doğrulama gerçekleştirmeniz istenir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Sorun giderme ipuçları alın ve Yardım [iki aşamalı doğrulama konusunda sorun mu yaşıyorsunuz](multi-factor-authentication-end-user-troubleshoot.md)
-* Ayarlanan [uygulama parolaları](multi-factor-authentication-end-user-app-passwords.md) iki aşamalı doğrulamayı desteklemeyen tüm uygulamalar için.
+
+İki öğeli doğrulama ayarlarınızı ekledikten veya güncelleştirdikten sonra, uygulama parolalarınızı yönetebilir, oturum açabilir veya bazı yaygın iki öğeli doğrulama ile ilgili bazı sorunlarla ilgili yardım alabilirsiniz.
+
+- İki öğeli doğrulamayı desteklemeyen uygulamalar için [iki öğeli doğrulama için uygulama parolalarını yönetin](multi-factor-authentication-end-user-app-passwords.md) .
+
+- [İki öğeli doğrulama kullanarak oturum açın](multi-factor-authentication-end-user-signin.md)
+
+- [İki öğeli doğrulamayla ilgili yardım alın](multi-factor-authentication-end-user-troubleshoot.md)

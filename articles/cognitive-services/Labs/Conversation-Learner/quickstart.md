@@ -1,7 +1,7 @@
 ---
-title: Node.js - Microsoft Bilişsel hizmetler kullanarak bir konuşma Öğrenici model oluşturma | Microsoft Docs
+title: Node. js kullanarak Conversation Learner modeli oluşturma-Microsoft bilişsel hizmetler | Microsoft Docs
 titleSuffix: Azure
-description: Node.js kullanarak bir konuşma Öğrenici modeli oluşturmayı öğrenin.
+description: Node. js kullanarak Conversation Learner modeli oluşturmayı öğrenin.
 services: cognitive-services
 author: nitinme
 manager: nolachar
@@ -10,46 +10,47 @@ ms.subservice: conversation-learner
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: nitinme
-ms.openlocfilehash: cc071d59a387c8ae4982eacbce6812526f447788
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: 7ab32fb421a2c0db72652d1bbf12d312bffd5d1e
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66388776"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68706545"
 ---
-# <a name="create-a-conversation-learner-model-using-nodejs"></a>Node.js kullanarak bir konuşma Öğrenici model oluşturma
+# <a name="create-a-conversation-learner-model-using-nodejs"></a>Node. js kullanarak Conversation Learner modeli oluşturma
 
-Konuşma Öğrenici botlar oluşturma karmaşıklığını azaltır. Ancak, bir karma geliştirme iş elle yazılmış kod ve makine öğrenimi botlar yazmak için gereken kod miktarını azaltmak izin verme akışı etkinleştirir. Kullanıcı oturum, denetimi veya bir API isteği deposuna stok kontrolü yapmak gibi modelinizi sabit bazı kısımlarını yine de kodlanmış olabilir. Ancak, durum ve eylem seçimi diğer değişiklikler etki alanı uzmanı veya geliştirici tarafından verilen örnek iletişim kutuları'ndan öğrendiniz.
+Conversation Learner, botların oluşturulmasına ilişkin karmaşıklığı azaltır. Bir karma geliştirme iş akışını, el ile yazılmış kod ve makine öğrenimine izin vererek botları yazmak için gereken kod miktarını azaltır. Modelinizin, kullanıcının oturum açıp açmamakta olup olmadığını denetleme veya mağaza envanterini denetlemek için bir API isteği oluşturma gibi belirli sabit bölümleri yine de kodlanmalıdır. Ancak, durum ve eylem seçiminde diğer değişiklikler, etki alanı uzmanı veya geliştiricisi tarafından verilen örnek iletişim kutularından öğrenilebilir.
 
-## <a name="invitation-required"></a>Davet gerekli
+## <a name="invitation-required"></a>Davetiye gerekiyor
 
-*Davetiye proje konuşma Öğrenici erişmek için gereklidir.*
+*Proje Conversation Learner erişmek için davetiye gereklidir.*
 
-Botunuzun ve machine learning için SDK'sı erişir bir bulut hizmetine eklediğiniz bir SDK proje konuşma Öğrenici oluşur.  Şu anda davet proje konuşma daha yalın bulut hizmetine erişim gerektirir.  Zaten davet yapmadıysanız, [davet isteği](https://aka.ms/conversation-learner-request-invite).  Davetiye almadıysanız, bulut API'sine erişmek mümkün olmayacaktır.
+Project Conversation Learner, bot 'a eklediğiniz bir SDK ve makine öğrenimine SDK 'nin eriştiği bir bulut hizmeti içerir.  Mevcut olduğunda, proje konuşması Taaner bulut hizmetine erişim için bir davet gerekir.  Henüz davet edilmediyse [davetiye isteyin](https://aka.ms/conversation-learner-request-invite).  Davet almadıysanız, bulut API 'sine erişemeyecektir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Düğüm 8.5.0 veya üzeri ve npm 5.3.0 veya üzeri. Yüklersiniz [ https://nodejs.org ](https://nodejs.org).
+- Node 8.5.0 veya üzeri ve NPM 5.3.0 veya üzeri. Buradan ' [https://nodejs.org](https://nodejs.org)den ' a.
   
-- LUIS yazarlık anahtarı:
+- LUSıS yazma anahtarı:
 
-  1. Oturum [ https://www.luis.ai ](https://www.luis.ai).
+  1. Oturum açın [https://www.luis.ai](https://www.luis.ai).
 
-  2. Sağ üst köşedeki, ardından "ayarlar" şirket adınızı tıklayın
+  2. Sağ üst köşedeki ad ' a tıklayın ve ardından "Ayarlar" a tıklayın.
 
-  3. Anahtar yazma elde edilen sayfada gösterilir
+  3. Yazma anahtarı sonuçtaki sayfada gösterilir
 
-  (2 rolü anahtar yazma, LUIS işlevi görür.  İlk olarak, konuşma Öğrenici yazma anahtarı hizmet verecektir.  İkinci olarak, konuşma Öğrenici LUIS varlık ayıklama için kullanır. anahtar yazma LUIS LUIS, sizin adınıza modeller oluşturmak için kullanılır)
+  (LUSıS yazma anahtarınız 2 rol sunar.  İlk olarak, Conversation Learner yazma anahtarınız olarak görev yapar.  İkincisi, Conversation Learner varlık ayıklama için LUO kullanır; LUSıS yazma anahtarı, sizin adınıza LUSıS modelleri oluşturmak için kullanılır)
 
-- Google Chrome web tarayıcısı. Yüklersiniz [ https://www.google.com/chrome/index.html ](https://www.google.com/chrome/index.html).
+- Google Chrome Web tarayıcısı. Buradan ' [https://www.google.com/chrome/index.html](https://www.google.com/chrome/index.html)den ' a.
 
-- Git. Yüklersiniz [ https://git-scm.com/downloads ](https://git-scm.com/downloads).
+- Git. Buradan ' [https://git-scm.com/downloads](https://git-scm.com/downloads)den ' a.
 
-- VSCode. Yüklersiniz [ https://code.visualstudio.com/ ](https://code.visualstudio.com/). Bu önerilir, gerekli unutmayın.
+- VSCode. Buradan ' [https://code.visualstudio.com/](https://code.visualstudio.com/)den ' a. Not Bu gerekli değildir, bu önerilmez.
 
 ## <a name="quick-start"></a>Hızlı başlangıç 
 
-1. Yükleyin ve yapılandırın:
+1. Install ve Build:
 
     ```bash    
     git clone https://github.com/Microsoft/ConversationLearner-Samples cl-bot-01
@@ -59,41 +60,41 @@ Botunuzun ve machine learning için SDK'sı erişir bir bulut hizmetine eklediğ
     ```
 
     > [!NOTE]
-    > Sırasında `npm install`, bu durum oluşursa bu hatayı yoksayabilirsiniz: `gyp ERR! stack Error: Can't find Python executable`
+    > Sırasında `npm install`, meydana gelirse bu hatayı yoksayabilirsiniz:`gyp ERR! stack Error: Can't find Python executable`
 
-2. Yapılandırın:
+2. Yapılandır:
 
-   Adlı bir dosya oluşturun `.env` dizinde `cl-bot-01`.  Dosyanın içeriğini olmalıdır:
+   `.env` Dizininde`cl-bot-01`adlı bir dosya oluşturun.  Dosyanın içeriği şu olmalıdır:
 
    ```
    NODE_ENV=development
    LUIS_AUTHORING_KEY=<your LUIS authoring key>
    ```
 
-3. Bot başlatın:
+3. Bot 'ı Başlat:
 
     ```
     npm start
     ```
 
-    Bu genel boş bot çalıştırır `cl-bot-01/src/app.ts`.
+    Bu, içinde `cl-bot-01/src/app.ts`genel boş bot 'ı çalıştırır.
 
-3. Tarayıcıyı Aç `http://localhost:3978`
+3. Tarayıcıyı açmak için`http://localhost:3978`
 
-Konuşma Öğrenici kullanmakta olduğunuz ve oluşturabilir ve konuşma Öğrenici modeli öğretin.  
+Artık Conversation Learner kullanıyorsunuz ve bir Conversation Learner modeli oluşturabilir ve öğretebiliriz.  
 
 > [!NOTE]
-> Başlatma sırasında proje konuşma Öğrenici davetle kullanılabilir.  Varsa `http://localhost:3978/ui` HTTP gösterir `403` hata, yani hesabınız yok davet etti.  Lütfen [davet isteği](https://aka.ms/conversation-learner-request-invite).
+> Başlatmada, proje Conversation Learner davet tarafından kullanılabilir.  Bir http`403` hatası gösteriyorsa bu, hesabınızın davet edilmediği anlamına gelir. `http://localhost:3978/ui`  Lütfen [bir davetiye isteyin](https://aka.ms/conversation-learner-request-invite).
 
-## <a name="tutorials-demos-and-switching-between-bots"></a>Öğreticiler, tanıtımlar ve botlar arasında geçiş yapma
+## <a name="tutorials-demos-and-switching-between-bots"></a>Bu gibi öğreticiler, tanıtımlar ve geçiş
 
-Yukarıdaki yönergeleri genel boş bot başlatıldı.  Bir öğretici çalıştırma veya bunun yerine bot gösteri için:
+Yukarıdaki yönergeler, genel boş bot 'ı başlattı.  Bunun yerine bir öğretici veya tanıtım bot 'ı çalıştırmak için:
 
-1. Konuşma Öğrenici web kullanıcı arabirimini açın varsa, model listesine dönmek `http://localhost:3978/ui/home`.
+1. Conversation Learner Web Kullanıcı arabirimi açıksa, içindeki modeller `http://localhost:3978/ui/home`listesine geri dönün.
     
-2. Başka bir bot çalışıyorsa (gibi `npm start` veya `npm run demo-pizza`), durdurun.  UI işlemi durdurun ya da web tarayıcısını kapatın gerekmez.
+2. Başka bir bot çalışıyorsa (veya `npm start` `npm run demo-pizza`gibi), bunu durdurun.  UI işlemini durdurmanız veya Web tarayıcısını kapatmanız gerekmez.
 
-3. Bir tanıtım bot (yukarıdaki adım 2) komut satırından çalıştırın.  Tanıtımlar şunlardır:
+3. Komut satırından bir demo bot çalıştırın (yukarıdaki 2. adım).  Tanıtımlar şunlardır:
 
    ```bash
    npm run tutorial-general
@@ -106,66 +107,66 @@ Yukarıdaki yönergeleri genel boş bot başlatıldı.  Bir öğretici çalışt
    npm run demo-storage
    ```
 
-4. Zaten değilseniz, konuşma Öğrenici Web Arabirimine chrome'da yükleyerek geçiş `http://localhost:3978/ui/home`. 
+4. Henüz açmadıysanız, ' yi yükleyerek `http://localhost:3978/ui/home`Conversation Learner Web Kullanıcı arabirimine geçiş yapın. 
 
-5. "İçeri aktarma eğitimler" tıklayın ve konuşma Öğrenici başlattığınız tanıtım için karşılık gelen kullanıcı arabiriminde tanıtım modeli seçin.
+5. "Öğreticileri Içeri aktar" düğmesine tıklayın ve başlattığınız tanıtım öğesine karşılık gelen Conversation Learner Kullanıcı arabiriminde demo modeli seçin.
 
-Tanıtımları için kaynak dosyaları `cl-bot-01/src/demos`
+Tanıtımlar için kaynak dosyalar`cl-bot-01/src/demos`
 
-## <a name="create-a-bot-which-includes-back-end-code"></a>Arka uç kodu içeren bir bot oluşturun
+## <a name="create-a-bot-which-includes-back-end-code"></a>Arka uç kodunu içeren bir bot oluştur
 
-1. Konuşma Öğrenici web kullanıcı arabirimini açın varsa, model listesine dönmek `http://localhost:3978/ui/home`.
+1. Conversation Learner Web Kullanıcı arabirimi açıksa, içindeki modeller `http://localhost:3978/ui/home`listesine geri dönün.
     
-2. Bir bot çalışıyorsa (gibi `npm run demo-pizza`), durdurun.  UI işlemi durdurun ya da web tarayıcısını kapatın gerekmez.
+2. Bir bot çalışıyorsa (gibi `npm run demo-pizza`), bunu durdurun.  UI işlemini durdurmanız veya Web tarayıcısını kapatmanız gerekmez.
 
-3. İsterseniz, kodu düzenleme `cl-bot-01/src/app.ts`.
+3. İsterseniz kodu ' de `cl-bot-01/src/app.ts`düzenleyin.
 
-4. Yeniden oluşturun ve bot yeniden başlatın:
+4. Bot 'ı yeniden derleyin ve yeniden başlatın:
 
     ```bash    
     npm run build
     npm start
     ```
 
-5. Zaten değilseniz, konuşma Öğrenici Web Arabirimine chrome'da yükleyerek geçiş `http://localhost:3978/ui/home`. 
+5. Henüz açmadıysanız, ' yi yükleyerek `http://localhost:3978/ui/home`Conversation Learner Web Kullanıcı arabirimine geçiş yapın. 
 
-6. Yeni bir konuşma Öğrenici modeli oluşturma kullanıcı Arabiriminde ve öğretim başlatın.
+6. Kullanıcı arabiriminde yeni bir Conversation Learner modeli oluşturun ve öğretme başlatın.
 
-7. Kod değişikliklerini yapmak `cl-bot-01/src/app.ts`, yukarıdaki adım 2 ' başlayarak adımları yineleyin.
+7. İçinde `cl-bot-01/src/app.ts`kod değişikliği yapmak için adım 2 ' den başlayarak yukarıdaki adımları tekrarlayın.
 
 ## <a name="vscode"></a>VSCode
 
-VSCode içinde var. çalıştırılır "boş bot" yanı sıra, her bir tanıtım için yapılandırmaları `cl-bot-01/src/app.ts`.  Açık `cl-bot-01` VSCode klasöründe.
+VSCode 'da, her demo için ve içindeki `cl-bot-01/src/app.ts`"boş bot" için çalışma yapılandırması vardır.  `cl-bot-01` Klasörü vscode 'da açın.
 
 ## <a name="advanced-configuration"></a>Gelişmiş yapılandırma
 
-Bir şablon `.env.example` dosyasını gösterir hangi ortamı değişkenlerini örnekleri yapılandırmak için ayarlanmış.
+Şablon `.env.example` dosyası, örnekleri yapılandırmak için ayarlayabileceğiniz ortam değişkenlerini gösterir.
 
-Ekleyerek, makine üzerinde çalışan diğer hizmetler arasında çakışmaları önlemek için bu bağlantı noktaları ayarlayabilirsiniz bir `.env` projesinin kök dosya:
+Bu bağlantı noktalarını, projenin köküne bir `.env` dosya ekleyerek makinenizde çalışan diğer hizmetler arasındaki çakışmaları önlemek için ayarlayabilirsiniz:
 
 ```bash
 cp .env.example .env
 ```
 
-Bu, botunuzun yerel olarak çalıştırın ve konuşma Öğrenici kullanmaya başlamasını sağlayan standart yapılandırmayı kullanır.  (Daha sonra botunuzun Bot Framework'ü dağıtmak için bu dosyaya yönelik bazı düzenlemeler gerekli olacaktır.)
+Bu, bot uygulamanızı yerel olarak çalıştırmanızı sağlayan Standart yapılandırmayı kullanır ve Conversation Learner kullanmaya başlayabilirsiniz.  (Daha sonra, bot ' ı bot Framework 'e dağıtmak için bu dosyada yapılan bazı düzenlemeler gerekecektir.)
 
 ## <a name="support"></a>Destek
 
-- Etiket sorular [Stack Overflow](https://stackoverflow.com) "microsoft bilişsel" ile
-- Bir özellik istemek bizim [User Voice sayfası](https://aka.ms/conversation-learner-uservoice)
-- Bir sorun açın bizim [GitHub deposu](https://github.com/Microsoft/ConversationLearner-Samples)
+- "Microsoft bilişsel" ile [Stack Overflow](https://stackoverflow.com) ilgili soruları etiketleme
+- [Kullanıcı ses sayfamızda](https://aka.ms/conversation-learner-uservoice) bir özellik isteyin
+- [GitHub](https://github.com/Microsoft/ConversationLearner-Samples) deponuzda bir sorun açın
 
-## <a name="contributing"></a>Katkıda bulunan
+## <a name="contributing"></a>Bulunan
 
 Bu proje [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/) (Microsoft Açık Kaynak Kullanım Kuralları) belgesinde listelenen kurallara uygundur. Daha fazla bilgi için [Kullanım Kuralları SSS](https://opensource.microsoft.com/codeofconduct/faq/) sayfasına bakın. Başka sorularınız ya da yorumlarınız varsa bunları [opencode@microsoft.com](mailto:opencode@microsoft.com) adresine gönderebilirsiniz.
 
-## <a name="source-repositories"></a>Kaynak havuzları
+## <a name="source-repositories"></a>Kaynak depoları
 
-- [conversationlearner örnekleri](https://github.com/Microsoft/ConversationLearner-Samples)
-- [conversationlearner-sdk](https://github.com/Microsoft/ConversationLearner-SDK)
-- [conversationlearner modelleri](https://github.com/Microsoft/ConversationLearner-Models)
-- [conversationlearner kullanıcı arabirimi](https://github.com/Microsoft/ConversationLearner-UI)
-- [conversationlearner webchat](https://github.com/Microsoft/ConversationLearner-WebChat)
+- [konuşma-örnekler](https://github.com/Microsoft/ConversationLearner-Samples)
+- [konuşma öğrenici-SDK](https://github.com/Microsoft/ConversationLearner-SDK)
+- [konuşma ve modeller](https://github.com/Microsoft/ConversationLearner-Models)
+- [konuşma, Kullanıcı arabirimi](https://github.com/Microsoft/ConversationLearner-UI)
+- [konuşma ve Webchat](https://github.com/Microsoft/ConversationLearner-WebChat)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

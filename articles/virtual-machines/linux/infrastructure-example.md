@@ -1,117 +1,116 @@
 ---
-title: Örnek Azure altyapısı gözden geçirme | Microsoft Docs
-description: Bir örnek altyapısını Azure'a dağıtmak için önemli tasarım ve uygulama yönergeleri hakkında bilgi edinin.
+title: Örnek Azure altyapısına ilişkin Izlenecek yol
+description: Azure 'da örnek bir altyapı dağıtmaya yönelik anahtar tasarımı ve uygulama yönergeleri hakkında bilgi edinin.
 documentationcenter: ''
 services: virtual-machines-linux
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: 281fc2c0-b533-45fa-81a3-728c0049c73d
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
-ms.devlang: na
 ms.topic: article
 ms.date: 12/15/2017
 ms.author: cynthn
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 00357641f51be703d2e5c52c5b9cc6187ce05ff6
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: cf63db18dac5fa202bbf339723c6555c4acb2ca2
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60543078"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036026"
 ---
-# <a name="example-azure-infrastructure-walkthrough-for-linux-vms"></a>Linux VM'ler için örnek Azure altyapı Kılavuzu
-Bu makalede örnek uygulama altyapısı oluşturmaya gösterilmektedir. Biz, yönergeleri ve adlandırma kuralları, kullanılabilirlik kümeleri, sanal ağlar ve yük Dengeleyiciler kararları bir araya basit bir çevrimiçi mağaza için bir altyapı tasarımı ve gerçekte sanal makinelerinizi (VM) dağıtma açıklamaktadır.
+# <a name="example-azure-infrastructure-walkthrough-for-linux-vms"></a>Linux VM 'Leri için örnek Azure altyapı Kılavuzu
+Bu makalede, örnek bir uygulama altyapısı oluşturma işlemi adım adım açıklanmaktadır. Adlandırma kuralları, kullanılabilirlik kümeleri, sanal ağlar ve yük dengeleyiciler ve aslında sanal makinelerinizi (VM 'Ler) dağıtmak için tüm kılavuzları ve kararları bir araya getiren basit bir çevrimiçi mağaza için bir altyapı tasarlama ayrıntımız yaptık.
 
 ## <a name="example-workload"></a>Örnek iş yükü
-Adventure Works Cycles, azure'da oluşan bir çevrimiçi mağaza uygulaması derleme ister:
+Adventure Works döngüleri, Azure 'da şunları içeren çevrimiçi bir mağaza uygulaması oluşturmak istiyor:
 
-* Bir web katmanı ön uç istemcisi çalıştıran iki ngınx sunucu
-* Veri ve uygulama katmanında orders işleme iki ngınx sunucu
-* Ürün verileri ve siparişler bir veritabanı katmanında depolamak için bir parçalı kümenin iki MongoDB sunucuları parçası
-* Müşteri hesaplar ve bir kimlik doğrulama katmanı sağlayıcıları için iki Active Directory etki alanı denetleyicisi
-* Tüm sunucular iki alt ağlarında bulunur:
-  * web sunucuları için ön uç bir alt ağ 
-  * uygulama sunucuları, MongoDB küme ve etki alanı denetleyicileri için bir arka uç alt ağı
+* Web katmanında istemci ön ucu çalıştıran iki NGINX sunucusu
+* Bir uygulama katmanındaki verileri ve siparişleri işleyen iki NGINX sunucusu
+* Bir veritabanı katmanında ürün verilerini ve siparişleri depolamak için parçalı bir kümenin parçası olan iki MongoDB sunucusu
+* Bir kimlik doğrulama katmanındaki müşteri hesapları ve tedarikçiler için iki Active Directory etki alanı denetleyicisi
+* Tüm sunucular iki alt ağda bulunur:
+  * Web sunucuları için bir ön uç alt ağı 
+  * uygulama sunucuları, MongoDB kümesi ve etki alanı denetleyicileri için arka uç alt ağı
 
-![Uygulama altyapısı için farklı bir katman diyagramı](./media/infrastructure-example/example-tiers.png)
+![Uygulama altyapısı için farklı katmanların diyagramı](./media/infrastructure-example/example-tiers.png)
 
-Güvenli gelen web trafiğini gerekir yük dengeli web sunucular arasında gezinirken müşteriler çevrimiçi mağaza. Sipariş biçiminde HTTP trafiği işleme, Web sunucuları-uygulama sunucuları arasında dengeli yük gerekir ister. Ayrıca, altyapı yüksek kullanılabilirlik için tasarlanması gerekir.
+Müşteriler çevrimiçi depoya gözatabileceği için, gelen güvenli Web trafiği Web sunucuları arasında yük dengelenmesi gerekir. Web sunucularından gelen HTTP istekleri biçiminde işleme trafiğinin işlenmesi, uygulama sunucuları arasında yük dengelenmesi gerekir. Ayrıca, altyapı yüksek kullanılabilirlik için tasarlanmalıdır.
 
-Sonuçta elde edilen tasarım eklemeniz gerekir:
+Elde edilen tasarımın şunu içermesi gerekir:
 
 * Bir Azure aboneliği ve hesabı
 * Tek bir kaynak grubu
 * Azure Yönetilen Diskleri
 * İki alt ağa sahip bir sanal ağ
-* Benzer bir role sahip VM'ler için kullanılabilirlik kümeleri
+* Benzer role sahip VM 'Ler için kullanılabilirlik kümeleri
 * Sanal makineler
 
-Tüm adlandırma kurallarına yukarıda izleyin:
+Yukarıdaki tüm bunlar şu adlandırma kurallarını izler:
 
-* Adventure Works Cycles kullandığı **[BT iş yükü]-[konumu]-[Azure resource]** öneki olarak
-  * Bu örnekte, "**azos**" (Azure çevrimiçi Store), BT iş yükü adıdır ve "**kullanın**" (Doğu ABD 2) konumdur
-* Sanal ağları kullanın AZOS kullanım VN<strong>[sayı]</strong>
-* Kullanılabilirlik kümelerini kullanın azos-kullanın-olarak- **[rol]**
-* Sanal makine adları azos kullanın-kullanın-vm - **[vmname]**
+* Adventure Works döngüleri ön ek olarak **[IT iş yükü]-[konum]-[Azure Kaynak]** kullanır
+  * Bu örnekte, "**azos**" (Azure çevrimiçi depo), BT iş yükü adıdır ve "**kullanım**" (Doğu ABD 2) konumudur
+* Sanal ağlar AZOS kullanır-USE-VN<strong>[sayı]</strong>
+* Kullanılabilirlik kümeleri azos kullanma-as- **[rol]**
+* Sanal makine adları azos kullanma-VM- **[VMName]**
 
-## <a name="azure-subscriptions-and-accounts"></a>Azure aboneliklerini ve hesaplarını
-Adventure Works Cycles, bu BT iş yükü için fatura bilgilerini sağlamak için Adventure Works Enterprise aboneliğinizin adlı Enterprise aboneliğini kullanıyor.
+## <a name="azure-subscriptions-and-accounts"></a>Azure abonelikleri ve hesapları
+Adventure Works döngüleri, bu BT iş yükü için faturalandırma sağlamak üzere Adventure Works kurumsal abonelik adlı kurumsal aboneliklerini kullanıyor.
 
 ## <a name="storage"></a>Depolama
-Adventure Works Cycles, Azure yönetilen diskler kullanması gerektiğini belirledi. Vm'leri oluştururken, her iki depolama alanı kullanılabilir depolama katmanları kullanılır:
+Adventure Works döngüleri, Azure yönetilen diskleri kullanması gerektiğini tespit ederler. VM 'Ler oluştururken, her iki depolama alanı kullanılabilir depolama katmanı da kullanılır:
 
-* **Standart depolama** web sunucuları, uygulama sunucuları ve etki alanı denetleyicileri ve veri diskleriyle.
-* **Premium depolama** MongoDB parçalı küme sunucuları ve veri diskleriyle.
+* Web sunucuları, uygulama sunucuları ve etki alanı denetleyicileri ve bunların veri diskleri için **Standart depolama** .
+* MongoDB parçalı küme sunucuları ve bunların veri diskleri için **Premium Depolama** .
 
 ## <a name="virtual-network-and-subnets"></a>Sanal ağ ve alt ağlar
-Sanal ağ Adventure iş döngüleri şirket içi ağınıza bağlantı gerekmediği için yalnızca bulutta yer alan bir sanal ağda karar verdi.
+Sanal ağın Adventure Iş döngüleri şirket içi ağı üzerinde devam eden bağlantılara ihtiyacı olmadığından, yalnızca bulut sanal ağı üzerinde karar vermiştir.
 
-Azure portalını kullanarak aşağıdaki ayarlara sahip bir yalnızca bulut sanal ağ oluşturdukları:
+Azure portal kullanarak aşağıdaki ayarlarla yalnızca bir bulut sanal ağı oluşturmuşlar:
 
 * Ad: AZOS-USE-VN01
 * Konum: Doğu ABD 2
-* sanal ağ adres alanı: 10.0.0.0/8
-* İlk alt ağı:
-  * Ad: FrontEnd
+* Sanal ağ adres alanı: 10.0.0.0/8
+* İlk alt ağ:
+  * Ad: ön uç
   * Adres alanı: 10.0.1.0/24
-* İkinci alt ağı:
-  * Ad: BackEnd
+* İkinci alt ağ:
+  * Ad: arka uç
   * Adres alanı: 10.0.2.0/24
 
 ## <a name="availability-sets"></a>Kullanılabilirlik kümeleri
-Tüm dört katman kendi çevrimiçi depolama yüksek kullanılabilirliğini sürdürmek için Adventure Works Cycles dört kullanılabilirlik kümeleri verdi:
+Satır içi mağazalarından oluşan dört katmanın yüksek oranda kullanılabilirliğini sürdürmek için Adventure Works döngülerinin dört kullanılabilirlik kümesine karar vermiş olması gerekir:
 
-* **web olarak azos kullanım** web sunucuları için
-* **uygulama olarak azos kullanım** uygulama sunucuları için
-* **db olarak azos kullanım** MongoDB parçalı kümesindeki sunucular için
-* **dc olarak azos kullanım** etki alanı denetleyicileri
+* **azos-** Web sunucuları için Web 'i kullanma
+* **azos-** uygulama sunucuları için uygulama olarak kullanma
+* **azos-** MongoDB parçalı kümesindeki sunucular için DB 'yi kullanma
+* **azos-** etki alanı denetleyicileri için DC kullanımı
 
 ## <a name="virtual-machines"></a>Sanal makineler
-Şu adları kendi Azure Vm'leri için Adventure Works Cycles verdi:
+Adventure Works döngüleri, Azure VM 'Leri için aşağıdaki adlara karar verdi:
 
-* **Kullanım vm web01 azos** ilk web sunucusu
-* **Kullanım vm web02 azos** ikinci web sunucusunun
-* **Kullanım vm app01 azos** ilk uygulama sunucusu
-* **Kullanım vm app02 azos** ikinci uygulama sunucusu
-* **Kullanım vm db01 azos** kümedeki ilk MongoDB sunucu için
-* **Kullanım vm db02 azos** kümedeki ikinci MongoDB sunucu için
-* **Kullanım vm dc01 azos** ilk etki alanı denetleyicisi
-* **Kullanım vm dc02 azos** ikinci etki alanı denetleyicisi
+* **azos-Use-VM-web01** First Web Server
+* **azos-VM-web02** ikinci Web sunucusu için kullanılır
+* **azos-Use-VM-app01** ilk uygulama sunucusu için
+* **azos-VM-app02** ikinci uygulama sunucusu için kullanılır
+* **azos-Use-VM-db01** -kümedeki Ilk MongoDB sunucusu için
+* **azos-Use-VM-db02** -kümedeki Ikinci MongoDB sunucusu için
+* azos-ilk etki alanı denetleyicisi için **-VM-DC01 kullanın**
+* **azos-VM-DC02** ikinci etki alanı denetleyicisi için kullanılır
 
-Sonuçta elde edilen yapılandırması aşağıda verilmiştir.
+Elde edilen yapılandırma aşağıda verilmiştir.
 
-![Azure'da dağıtılan son uygulama altyapısı](./media/infrastructure-example/example-config.png)
+![Azure 'da dağıtılan son uygulama altyapısı](./media/infrastructure-example/example-config.png)
 
-Bu yapılandırmayı içerir:
+Bu yapılandırma şunları içerir:
 
-* Yalnızca bulutta yer alan bir sanal ağ ile iki alt ağa (ön uç ve arka uç)
-* Standart ve Premium diskler kullanarak Azure yönetilen diskler
-* Bir çevrimiçi mağaza, her bir katman için dört kullanılabilirlik kümeleri
-* Sanal makineler için dört katmanı
-* Web sunucularına HTTPS tabanlı web trafiği Internet'ten bir dış yük dengeli küme
-* Uygulama sunucuları için web sunucularından şifrelenmemiş web trafiği için bir iç yük dengeli
+* İki alt ağa sahip bir yalnızca bulut sanal ağı (ön uç ve arka uç)
+* Standart ve Premium diskleri kullanan Azure yönetilen diskler
+* Satır içi mağazanın her katmanı için bir adet olmak üzere dört kullanılabilirlik kümesi
+* Dört katmanda sanal makineler
+* Internet 'ten Web sunucularına HTTPS tabanlı Web trafiği için dış yük dengeli bir küme
+* Web sunucularından uygulama sunucularına şifrelenmemiş web trafiği için iç yük dengeli bir küme
 * Tek bir kaynak grubu

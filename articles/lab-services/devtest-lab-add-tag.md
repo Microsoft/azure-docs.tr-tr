@@ -1,6 +1,6 @@
 ---
-title: Azure DevTest labs'deki bir laboratuvara etiket ekleme | Microsoft Docs
-description: Azure DevTest labs'deki bir laboratuvara etiket ekleme hakkında bilgi edinin
+title: Azure DevTest Labs bir laboratuvara etiket ekleme | Microsoft Docs
+description: Azure DevTest Labs laboratuvara nasıl etiket ekleneceğini öğrenin
 services: devtest-lab,virtual-machines
 documentationcenter: na
 author: spelluru
@@ -12,47 +12,50 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 04/17/2018
+ms.date: 10/13/2019
 ms.author: spelluru
-ms.openlocfilehash: e4d9aeb527461cc7292235fef1de0abdfa4242bd
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 1d7175d000eebd3f68665e7f097bbe3f68025bc8
+ms.sourcegitcommit: bd4198a3f2a028f0ce0a63e5f479242f6a98cc04
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60311378"
+ms.lasthandoff: 10/14/2019
+ms.locfileid: "72302788"
 ---
-# <a name="add-tags-to-a-lab-in-azure-devtest-labs"></a>Azure DevTest labs'deki bir laboratuvara etiket ekleme
+# <a name="add-tags-to-a-lab-in-azure-devtest-labs"></a>Azure DevTest Labs laboratuvara etiket ekleme
 
-Özel etiketler oluşturabilir ve bunları kaynaklarınızı mantıksal olarak kategorilere ayırmak için DevTest Labs kaynaklarınızı uygulayabilirsiniz. Daha sonra hızla ve kolayca aboneliğinizde bu etikete sahip tüm kaynaklara bakın. Faturalandırma veya yönetim kaynakları düzenlemek gerektiğinde etiketleri yararlı olur.
+Kaynaklarınızın mantıksal olarak sınıflandırmasını sağlamak için özel Etiketler oluşturabilir ve bunları DevTest Labs kaynaklarına uygulayabilirsiniz. Daha sonra, bu etikete sahip aboneliğinizdeki tüm kaynakları hızlıca ve kolayca görebilirsiniz. Etiketler faturalandırma veya yönetim için kaynakları düzenlemeniz gerektiğinde faydalıdır.
 
-Etiketlere göre desteklenen kaynakları içerir
+Etiketler tarafından desteklenen kaynaklar şunlardır
 
-* Vm'leri işlem
+* İşlem VM 'Leri
 * NIC’ler
 * IP adresleri
 * Yük dengeleyiciler
 * Depolama hesapları
-* Yönetilen diskler
+* Yönetilen Diskler
 
-Uygulayabileceğiniz ne zaman etiketler, [Laboratuvar oluşturma](devtest-lab-create-lab.md) ve daha sonra yapılandırma ve ayarlar altında etiketleri dikey penceresinde yönetebilirsiniz.
+[Bir laboratuvar oluşturup](devtest-lab-create-lab.md) daha sonra yapılandırma ve Ayarlar altındaki Etiketler dikey penceresinde bunları yönetirken Etiketler uygulayabilirsiniz.
 
-Her etiket oluşan bir **adı**/**değer** çifti. Örneğin, adında bir etiket oluşturabilirsiniz *costcenter* değerine sahip *34543*. Bir etiket gibi daha sonra bu yardımcı olabilecek, kuruluşunuzun belirli bu alana Faturalanabilir Laboratuvar kaynaklarını tanımlayın. Adları ve aboneliğinizi düzenlemek istediğiniz için anlamlı değerleri seçmek alın.
+Her etiket bir **ad**/**değer** çiftinden oluşur. Örneğin, *34543*değerine sahip *costcenter* adlı bir etiket oluşturabilirsiniz. Bu gibi bir etiket, kuruluşunuzun bu belirli alanı için faturalandırılabilen laboratuvar kaynaklarını daha sonra belirlemenize yardımcı olur. Aboneliğinizi nasıl düzenlemek istediğinize ilişkin anlamlı adlar ve değerler seçmeniz gerekir.
 
-## <a name="steps-to-manage-tags-in-an-existing-lab"></a>Mevcut bir laboratuvar etiketleri yönetme adımları
+## <a name="steps-to-manage-tags-in-an-existing-lab"></a>Mevcut laboratuvarda etiketleri yönetme adımları
 
-1. [Azure Portal](https://go.microsoft.com/fwlink/p/?LinkID=525040) oturum açın.
-1. Gerekirse, seçin **tüm hizmetleri**ve ardından **DevTest Labs** listeden. Laboratuvarınızı zaten altında Panoda görüntülenebilir **tüm kaynakları**.
-1. Labs listesinden eklemek veya etiketleri yönetmek istediğiniz Laboratuvar seçin.
-1. Laboratuvar'ın **genel bakış** alanında **yapılandırması ve ilkelerini**.
+1. [Azure Portal](https://go.microsoft.com/fwlink/p/?LinkID=525040)’ında oturum açın.
+1. Gerekirse, **tüm hizmetler**' i seçin ve ardından listeden **DevTest Labs** ' i seçin. Laboratuvarınız panoda zaten **tüm kaynaklar**altında gösteriliyor olabilir.
+1. Laboratuvarlar listesinden, etiketleri eklemek veya yönetmek istediğiniz Laboratuvarı seçin.
+1. Laboratuvarın **genel bakış** alanında **yapılandırma ve ilkeler**' i seçin.
 
-    ![Yapılandırması ve ilkelerini düğmesi](./media/devtest-lab-add-tag/devtestlab-config-and-policies.png)
+    ![Yapılandırma ve ilkeler düğmesi](./media/devtest-lab-add-tag/devtestlab-config-and-policies.png)
 
-1. Soldaki altında **Yönet**seçin **etiketleri**.
-1. Bu Laboratuvar için yeni bir etiket oluşturmak için girin bir **adı**/**değer** eşleştirebilir ve seçin **Kaydet**. Ayrıca, bu etiketle ilişkili kaynakları yönetmek veya görüntülemek için listeden varolan bir etiketi seçebilirsiniz.
+1. **Yönet**altında sol tarafta **Etiketler**' i seçin.
+1. Bu laboratuvar için yeni bir etiket oluşturmak üzere bir **ad**/**değer** çifti girin ve **Kaydet**' i seçin. Bu etiketle ilişkili kaynakları görüntülemek veya yönetmek için listeden varolan bir etiketi de seçebilirsiniz.
 
     ![Etiketleri yönet](./media/devtest-lab-add-tag/devtestlab-manage-tags.png)
 
-## <a name="understanding-limitations-to-tags"></a>Etiketlerle sınırlamaları anlama
+> [!NOTE]
+> Laboratuvar düzeyinde oluşturulan Etiketler, laboratuvarın aboneliğinizde aldığı tüm faturalanabilir kaynaklar üzerinden akar. Örneğin, laboratuvar düzeyi etiketleri laboratuvar VM 'lerinin temel işlem VM 'lerine akar. etiketleri maliyet yönetimi bağlamında kullanabilirsiniz. Laboratuvar düzeyi etiketleri, maliyet yönetimi için etiket filtreinde görünür.
+
+## <a name="understanding-limitations-to-tags"></a>Etiketlere yönelik sınırlamaları anlama
 
 Etiketler için aşağıdaki sınırlamalar geçerlidir:
 
@@ -60,10 +63,10 @@ Etiketler için aşağıdaki sınırlamalar geçerlidir:
 * Etiket adı 512 karakter ile sınırlıdır ve etiket değeri 256 karakter ile sınırlıdır. Depolama hesapları için etiket adı 128 karakter ile sınırlıdır ve etiket değeri 256 karakter ile sınırlıdır.
 * Kaynak grubuna uygulanan etiketler, bu kaynak grubundaki kaynaklar tarafından devralınmaz.
 
-[Azure kaynaklarınızı düzenlemek için etiketleri kullanma](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags) etiketleri PowerShell veya Azure CLI kullanarak yönetme de dahil olmak üzere Azure'da etiketler kullanma hakkında daha fazla ayrıntıları sağlar.
+[Azure kaynaklarınızı düzenlemek için etiketleri kullanın](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags) , PowerShell veya Azure CLI kullanarak etiketleri yönetme dahil olmak üzere Azure 'da etiketleri kullanma hakkında daha fazla ayrıntı sağlar.
 
 [!INCLUDE [devtest-lab-try-it-out](../../includes/devtest-lab-try-it-out.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Özelleştirilmiş ilkeler kullanarak, aboneliğinizi arasında kısıtlamaları ve kuralları uygulayabilirsiniz. Tanımladığınız bir ilke, tüm kaynakların belirli bir etiket için bir değer olmasını gerektirebilir. Daha fazla bilgi için [ilke ve zamanlamalar ayarlama](devtest-lab-set-lab-policy.md).
-* Keşfedin [DevTest Labs Azure Resource Manager hızlı başlangıç Şablon Galerisi](https://github.com/Azure/azure-devtestlab/tree/master/samples/DevTestLabs/QuickStartTemplates).
+* Özelleştirilmiş ilkeleri kullanarak aboneliğinizde kısıtlamalar ve kurallar uygulayabilirsiniz. Tanımladığınız bir ilke, tüm kaynakların belirli bir etiket için bir değere sahip olmasını gerektirebilir. Daha fazla bilgi için bkz. [ilkeleri ve zamanlamaları ayarlama](devtest-lab-set-lab-policy.md).
+* [DevTest Labs Azure Resource Manager hızlı başlangıç şablonu galerisini](https://github.com/Azure/azure-devtestlab/tree/master/samples/DevTestLabs/QuickStartTemplates)gezin.

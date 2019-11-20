@@ -1,39 +1,33 @@
 ---
-title: Azure İzleyici'de verimli günlük sorguları yazma | Microsoft Docs
-description: Log Analytics'te sorgu yazmayı öğrenmek için kaynaklara başvurular.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici 'de verimli günlük sorguları yazma | Microsoft Docs
+description: Log Analytics sorguları yazmayı öğrenmek için kaynaklara başvurular.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 01/17/2019
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 25d6b582ed4d4e24df3841f4191471296e25abd8
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 01/17/2019
+ms.openlocfilehash: a5ee03f6c42f076549856161a6ebe0b1888fe4aa
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60519378"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72894126"
 ---
-# <a name="writing-efficient-log-queries-in-azure-monitor"></a>Azure İzleyici'de verimli günlük sorguları yazma
-Bu makalede, Azure İzleyici'de verimli günlük sorguları yazma ile ilgili öneriler sağlar. Bu stratejiler kullanarak, sorgularınızı hızlı bir şekilde çalışır ve ile en az overheard emin olabilirsiniz.
+# <a name="writing-efficient-log-queries-in-azure-monitor"></a>Azure Izleyici 'de verimli günlük sorguları yazma
+Bu makalede, Azure Izleyici 'de etkili günlük sorguları yazma önerileri sağlanır. Bu stratejileri kullanarak, sorgularınızın hızlı bir şekilde ve en düşük fazla Heard ile çalışacağını sağlayabilirsiniz.
 
-## <a name="scope-your-query"></a>Sorgunuzun kapsamı
-Sorgunuzu gerçekten ihtiyacınız olandan daha fazla veri işleme sahip bir uzun süre çalışan sorgu için sağlama ve çok fazla veri etkili bir şekilde analiz etmek için sonucu genellikle sonuçlanır. Aşırı durumlarda sorgu zaman aşımı çift ve başarısız.
+## <a name="scope-your-query"></a>Sorgunuzun kapsamını
+Sorgunuzun gerçekten ihtiyaç duyduğundan daha fazla veri işleminizin olması, uzun süreli bir sorguya yol açabilir ve genellikle sonuçlarınızda çok fazla verinin etkin bir şekilde analiz edilmesine neden olur. Olağanüstü durumlarda sorgu zaman aşımına uğrar ve başarısız olabilir.
 
 ### <a name="specify-your-data-source"></a>Veri kaynağınızı belirtin
-Verimli bir sorgu yazılmasını ilk adımı, gerekli veri kaynaklarına kapsamını sınırlayan. Belirten bir tablo, her zaman tercih edilen bir geniş metin araması gibi çalıştıran `search *`. Belirli bir tabloyu sorgulamak üzere sorgunuzu tablo adı olduğu aşağıdaki gibi başlangıcı:
+Etkili bir sorgu yazarken ilk adım kapsamını gereken veri kaynaklarıyla sınırlandırırsınız. Bir tablo belirtme, `search *`gibi geniş bir metin araması çalıştırılarak her zaman tercih edilir. Belirli bir tabloyu sorgulamak için aşağıdaki gibi tablo adıyla sorgunuzu başlatın:
 
 ``` Kusto
 requests | ...
 ```
 
-Kullanabileceğiniz [arama](/azure/kusto/query/searchoperator) birden çok sütunda aşağıdaki gibi bir sorgu kullanarak belirli tablolar arasında bir değeri aramak için:
+Aşağıdaki gibi bir sorgu kullanarak belirli tablolardaki birden çok sütunda bir değer aramak için [aramayı](/azure/kusto/query/searchoperator) kullanabilirsiniz:
 
 ``` Kusto
 search in (exceptions) "The server was not found"
@@ -41,14 +35,14 @@ search in (exceptions) "The server was not found"
 search in (exceptions, customEvents) "timeout"
 ```
 
-Kullanım [birleşim](/azure/kusto/query/unionoperator) aşağıdaki gibi birçok tabloları sorgulamak için:
+Aşağıdaki gibi çeşitli tabloları sorgulamak için [UNION](/azure/kusto/query/unionoperator) kullanın:
 
 ``` Kusto
 union requests, traces | ...
 ```
 
 ### <a name="specify-a-time-range"></a>Bir zaman aralığı belirtin
-Ayrıca, ihtiyaç duyduğunuz verileri zaman aralığını sorgunuza sınırlamanız gerekir. Varsayılan olarak, sorgunuzu son 24 saat içindeki toplanan veriler içerir. Bu seçeneği değiştirebilir [zaman aralığı seçicisinin](get-started-portal.md#select-a-time-range) veya açıkça sorgunuza ekleyin. Böylece sorgunuzun rest yalnızca bu aralık içinde veri işleme süresi filtre hemen sonra tablo adını eklemek idealdir:
+Ayrıca sorgunuzu, ihtiyacınız olan veri aralığı ile sınırlandırmalısınız. Varsayılan olarak, sorgunuz son 24 saat içinde toplanan verileri dahil eder. [Zaman aralığı seçicisindeki](get-started-portal.md#select-a-time-range) bu seçeneği değiştirebilir veya doğrudan sorgunuza ekleyebilirsiniz. Sorgunuzun geri kalanı yalnızca söz konusu aralıktaki verileri işleyerek, tablo adından hemen sonra zaman filtresini eklemek en iyisidir:
 
 ``` Kusto
 requests | where timestamp > ago(1h)
@@ -56,17 +50,17 @@ requests | where timestamp > ago(1h)
 requests | where timestamp between (ago(1h) .. ago(30m))
 ```
    
-### <a name="get-only-the-latest-records"></a>Yalnızca en son kayıtları Al
+### <a name="get-only-the-latest-records"></a>Yalnızca en son kayıtları al
 
-Yalnızca en son kayıtları döndürmek için *üst* en son 10 kayıtları döndüren şu sorguyu olduğu gibi işleç oturum *izlemeleri* tablosu:
+Yalnızca en son kayıtları döndürmek için, *izleme* tablosunda günlüğe kaydedilen en son 10 kaydı döndüren aşağıdaki sorguda *en üstteki* işleci kullanın:
 
 ``` Kusto
 traces | top 10 by timestamp
 ```
 
    
-### <a name="filter-records"></a>Kayıtları Filtrele
-Belirli bir koşul ile eşleşen günlüklerini gözden geçirmek için *burada* işleci yalnızca kayıtlar döndüren şu sorguyu olduğu gibi _Err_ değeri 0'dan:
+### <a name="filter-records"></a>Kayıtları filtrele
+Yalnızca belirli bir koşulla eşleşen günlükleri gözden geçirmek için, aşağıdaki sorguda *olduğu* gibi, yalnızca _daitylevel_ değerinin 0 ' dan yüksek olduğu kayıtları döndüren WHERE işlecini kullanın:
 
 ``` Kusto
 traces | where severityLevel > 0
@@ -75,11 +69,11 @@ traces | where severityLevel > 0
 
 
 ## <a name="string-comparisons"></a>Dize karşılaştırmaları
-Zaman [dizeleri değerlendirme](/azure/kusto/query/datatypes-string-operators), genellikle kullanması gereken `has` yerine `contains` tam belirteçleri için ararken. `has` alt dize için arama olmadığı daha verimli olur.
+[Dizeleri değerlendirirken](/azure/kusto/query/datatypes-string-operators), genellikle tam belirteçleri ararken `contains` yerine `has` kullanmanız gerekir. `has`, alt dizeler için arama yapmak zorunda olmadığından daha etkilidir.
 
-## <a name="returned-columns"></a>Geri dönen sütunlar
+## <a name="returned-columns"></a>Döndürülen sütunlar
 
-Kullanım [proje](/azure/kusto/query/projectoperator) yalnızca için gereksinim duyduğunuz işlenmekte olan sütun kümesini daraltmak için:
+İşlenmekte olan sütun kümesini yalnızca ihtiyaç duyduğunuz sütunlara daraltmak için [Proje](/azure/kusto/query/projectoperator) kullanın:
 
 ``` Kusto
 traces 
@@ -87,9 +81,9 @@ traces
 | ...
 ```
 
-Kullanabilirsiniz ancak [genişletmek](/azure/kusto/query/extendoperator) değerleri hesaplamak ve kendi sütunları oluşturmak için bunu tipik olarak bir tablo sütununda filtrelemek için daha verimli olacaktır.
+Değerleri hesaplamak ve kendi sütunlarınızı oluşturmak için [Genişlet](/azure/kusto/query/extendoperator) ' i kullanarak, genellikle tablo sütununa filtre uygulamak daha verimli olacaktır.
 
-Üzerindeki olaylarla filtreler, örneğin, ilk aşağıdaki sorguyu _işlemi\_adı_ oluşturan yeni bir ikinciden daha verimli olacaktır _abonelik_ sütunu ve bu filtreler:
+Örneğin, _işlem\_adı_ üzerinde filtre uygulayan ilk sorgu, yeni bir _abonelik_ sütunu oluşturan ve üzerinde filtre uygulayan ikinciden daha etkili olacaktır:
 
 ``` Kusto
 customEvents 
@@ -100,9 +94,9 @@ customEvents
 | where subscription == "acb"
 ```
 
-## <a name="using-joins"></a>Birleşimleri kullanma
-Kullanırken [birleştirme](/azure/kusto/query/joinoperator) işleci, sorgu sol tarafında olması daha az satır içeren tabloyu seçin.
+## <a name="using-joins"></a>Birleştirmeleri kullanma
+[JOIN](/azure/kusto/query/joinoperator) işlecini kullanırken, sorgunun sol tarafında daha az satır içeren tabloyu seçin.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Sorgu en iyi uygulamalar hakkında daha fazla bilgi için bkz: [sorgu en iyi](/azure/kusto/query/best-practices).
+Sorgu en iyi uygulamaları hakkında daha fazla bilgi edinmek için bkz. [sorgu en iyi yöntemleri](/azure/kusto/query/best-practices).

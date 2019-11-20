@@ -1,6 +1,6 @@
 ---
-title: MongoDB için Azure Cosmos DB'nin API'SİNDE dizinleme
-description: Dizinleme özelliklerine genel bakış için MongoDB API'si ile Azure Cosmos DB'nin sunar.
+title: MongoDB için Azure Cosmos DB API 'sinde dizin oluşturma
+description: MongoDB için Azure Cosmos DB API 'SI ile dizin oluşturma özelliklerine genel bir bakış sunar.
 ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
 ms.devlang: nodejs
@@ -8,18 +8,34 @@ ms.topic: conceptual
 ms.date: 12/26/2018
 author: sivethe
 ms.author: sivethe
-ms.openlocfilehash: de037316efa50dd25ea04c370fa0e5878fb52ba1
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e51e96c0c553bcf37284878cab11f3ec592ddd05
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60448512"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72753385"
 ---
-# <a name="indexing-using-azure-cosmos-dbs-api-for-mongodb"></a>Azure Cosmos DB'nin MongoDB kullanarak dizin oluşturma
+# <a name="indexing-using-azure-cosmos-dbs-api-for-mongodb"></a>MongoDB için Azure Cosmos DB API 'sini kullanarak dizin oluşturma
 
-Azure Cosmos DB'nin MongoDB API'si, Cosmos DB'nin otomatik dizin yönetimi özelliklerinden yararlanır. Sonuç olarak, kullanıcılar varsayılan dizinleme ilkelerine Cosmos DB'nin erişebilir. Bu nedenle, kullanıcı tarafından tanımlanmış dizin yok veya dizin bırakılmamışsa, ardından tüm alanları otomatik olarak bir koleksiyona eklendiğinde varsayılan olarak dizinlenir. Çoğu senaryoda, hesap üzerinde ayarlanmış varsayılan dizinleme ilkesinin kullanılması önerilir.
+MongoDB için Azure Cosmos DB API 'SI Cosmos DB otomatik dizin yönetimi yeteneklerini kullanır. Sonuç olarak, kullanıcıların Cosmos DB varsayılan dizin oluşturma ilkelerine erişimi vardır. Bu nedenle, Kullanıcı tarafından tanımlanmış bir dizin yoksa veya hiçbir dizin bırakılmazsa, bir koleksiyona yerleştirildiğinde tüm alanlar varsayılan olarak otomatik olarak dizine alınır. Çoğu senaryoda, hesap üzerinde ayarlanmış varsayılan dizinleme ilkesinin kullanılması önerilir.
 
-## <a name="dropping-the-default-indexes"></a>Varsayılan dizinleri bırakma
+## <a name="indexing-for-version-36"></a>Sürüm 3,6 için dizin oluşturma
+
+Kablo Protokolü sürüm 3,6 ' a hizmet veren hesaplar, önceki sürümlerin sağladığı ilkeden farklı bir varsayılan dizin oluşturma ilkesi sağlar. Varsayılan olarak, yalnızca _ID alanı dizinlenir. Ek alanlara dizin eklemek için, kullanıcının MongoDB Dizin Yönetimi komutlarını uygulaması gerekir. Bir sorguya sıralama uygulamak için şu anda sıralama işleminde kullanılan alanlarda bir dizin oluşturulmalıdır.
+
+### <a name="dropping-the-default-indexes-36"></a>Varsayılan dizinleri bırakma (3,6)
+
+Kablo protokol 3,6 sürümüne hizmet veren hesaplar için, yalnızca varsayılan dizin, bırakılamaz.
+
+### <a name="creating-a-compound-index-36"></a>Bileşik dizin oluşturma (3,6)
+
+3,6 kablo protokolünü kullanan hesaplar için doğru Bileşik dizinler desteklenir. Aşağıdaki komut, ' a ' ve ' b ' alanlarında bir bileşik dizin oluşturacak: `db.coll.createIndex({a:1,b:1})`
+
+Bileşik dizinler aynı anda birden çok alanda etkili bir şekilde sıralamak için kullanılabilir: `db.coll.find().sort({a:1,b:1})`
+
+## <a name="indexing-for-version-32"></a>Sürüm 3,2 için dizin oluşturma
+
+### <a name="dropping-the-default-indexes-32"></a>Varsayılan dizinleri bırakma (3,2)
 
 Bir koleksiyon ```coll``` için varsayılan dizinleri bırakmak üzere aşağıdaki komut kullanılabilir:
 
@@ -28,20 +44,25 @@ Bir koleksiyon ```coll``` için varsayılan dizinleri bırakmak üzere aşağıd
 { "_t" : "DropIndexesResponse", "ok" : 1, "nIndexesWas" : 3 }
 ```
 
-## <a name="creating-compound-indexes"></a>Bileşik dizinler oluşturma
+### <a name="creating-a-compound-index-32"></a>Bileşik dizin oluşturma (3,2)
 
 Bileşik dizinler bir belgenin birden çok alanına başvurular içerir. Mantıksal olarak, alan başına birden fazla tek dizin oluşturmaya eşdeğerdir. Cosmos DB dizinleme teknikleri tarafından sağlanan iyileştirmelerden yararlanmak için tek (benzersiz olmayan) bir bileşik dizin yerine birden fazla tek dizin oluşturulması önerilir.
 
+## <a name="common-indexing-operations"></a>Ortak dizin oluşturma Işlemleri
+
+Aşağıdaki işlemler, hat Protokolü sürüm 3,6 ' i sunan hesaplar ve eski hat Protokolü sürümlerine hizmet veren hesaplar için ortaktır. 
+
 ## <a name="creating-unique-indexes"></a>Benzersiz dizinler oluşturma
 
-[Benzersiz dizinler](unique-keys.md), iki veya daha fazla belgeyi dizini oluşturulmuş alanlar için aynı değeri içermemeye zorlarken yararlıdır. 
->[!important] 
-> Şu anda benzersiz dizinler yalnızca koleksiyon boş olduğunda (hiçbir belge içermediğinde) oluşturulabilir. 
+[Benzersiz dizinler](unique-keys.md), iki veya daha fazla belgeyi dizini oluşturulmuş alanlar için aynı değeri içermemeye zorlarken yararlıdır.
 
-Aşağıdaki komut, "student_id" alan benzersiz bir dizin oluşturur:
+>[!Important]
+> Şu anda benzersiz dizinler yalnızca koleksiyon boş olduğunda (hiçbir belge içermediğinde) oluşturulabilir.
 
-```JavaScript
-globaldb:PRIMARY> db.coll.createIndex( { "student_id" : 1 }, {unique:true} ) 
+Aşağıdaki komut, "student_id" alanında benzersiz bir dizin oluşturur:
+
+```shell
+globaldb:PRIMARY> db.coll.createIndex( { "student_id" : 1 }, {unique:true} )
 {
         "_t" : "CreateIndexesResponse",
         "ok" : 1,
@@ -55,7 +76,7 @@ Parçalı koleksiyonlar için MongoDB davranışına göre benzersiz bir dizin o
 
 Aşağıdaki komutlar student_id ve university alanlarında benzersiz bir dizin ile ```coll``` parçalı koleksiyonu (parça anahtarı ```university```) oluşturur:
 
-```JavaScript
+```shell
 globaldb:PRIMARY> db.runCommand({shardCollection: db.coll._fullName, key: { university: "hashed"}});
 {
         "_t" : "ShardCollectionResponse",
@@ -79,22 +100,23 @@ Yukarıdaki örnekte ```"university":1``` yan tümcesi çıkarılsaydı aşağı
 ## <a name="ttl-indexes"></a>TTL dizinleri
 
 Belirli bir koleksiyonda belge geçerlilik süresini etkinleştirmek için bir ["TTL dizini" (yaşam süresi dizini)](../cosmos-db/time-to-live.md) oluşturulması gerekir. TTL dizini, _ts alanında "expireAfterSeconds" değerini içeren bir dizindir.
- 
+
 Örnek:
+
 ```JavaScript
 globaldb:PRIMARY> db.coll.createIndex({"_ts":1}, {expireAfterSeconds: 10})
 ```
 
-Yukarıdaki komut, ```db.coll``` koleksiyonunda son 10 saniye içinde değiştirilmemiş tüm belgelerin silinmesine neden olur. 
- 
+Yukarıdaki komut, ```db.coll``` koleksiyonunda son 10 saniye içinde değiştirilmemiş tüm belgelerin silinmesine neden olur.
+
 > [!NOTE]
 > **_ts**, Cosmos DB’ye özel bir alandır ve MongoDB istemcilerinden erişilemez. Belgenin son değiştirme tarihinin zaman damgasını içeren ayrılmış (sistem) bir özelliktir.
->
 
 ## <a name="migrating-collections-with-indexes"></a>Koleksiyonları dizinlerle geçirme
 
-Şu anda benzersiz dizinler yalnızca koleksiyon hiçbir belge içermediğinde oluşturulabilir. Popüler MongoDB geçiş araçları, verileri içeri aktardıktan sonra benzersiz dizin oluşturmaya çalışır. Bu sorunu aşmak için kullanıcıların geçiş aracına izin vermek yerine karşılık gelen koleksiyonları ve benzersiz dizinleri el ile oluşturması önerilir (```mongorestore``` için bu davranış komut satırında --noIndexRestore bayrağı kullanılarak elde edilir).
+Şu anda benzersiz dizinler yalnızca koleksiyon hiçbir belge içermediğinde oluşturulabilir. Popüler MongoDB geçiş araçları, verileri içeri aktardıktan sonra benzersiz dizin oluşturmaya çalışır. Bu sorunu aşmak için, kullanıcıların geçiş aracına izin vermek yerine karşılık gelen koleksiyonları ve benzersiz dizinleri el ile oluşturması önerilir (```mongorestore``` için bu davranış, komut satırındaki `--noIndexRestore` bayrağı kullanılarak elde edilir).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Azure Cosmos DB'yi dizine ekleme](../cosmos-db/index-policy.md)
-* [Yaşam süresi otomatik olarak Azure Cosmos DB'de verilerle süresi dolacak](../cosmos-db/time-to-live.md)
+
+* [Azure Cosmos DB 'de dizin oluşturma](../cosmos-db/index-policy.md)
+* [Azure Cosmos DB verileri yaşam süresi ile otomatik olarak sona erer](../cosmos-db/time-to-live.md)

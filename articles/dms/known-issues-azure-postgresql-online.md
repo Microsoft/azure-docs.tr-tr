@@ -1,6 +1,6 @@
 ---
-title: MySQL için Azure veritabanı çevrimiçi geçişleri ile bilinen sorunları/geçiş sınırlamalarıyla ilgili bir makale | Microsoft Docs
-description: MySQL için Azure veritabanı çevrimiçi geçişleri ile bilinen sorunları/geçiş sınırlamaları hakkında bilgi edinin.
+title: PostgreSQL 'e yönelik çevrimiçi geçişlerle ilgili bilinen sorunlar/geçiş sınırlamaları, PostgreSQL için Azure veritabanı-tek sunucu | Microsoft Docs
+description: PostgreSQL ' den PostgreSQL için Azure veritabanı 'na çevrimiçi geçişlerle ilgili bilinen sorunlar/geçiş sınırlamaları hakkında bilgi edinin.
 services: database-migration
 author: HJToland3
 ms.author: jtoland
@@ -10,38 +10,39 @@ ms.service: dms
 ms.workload: data-services
 ms.custom: mvc
 ms.topic: article
-ms.date: 04/23/2019
-ms.openlocfilehash: 2c8a3f36e04fbedfdd127939d55fab376e3e6b30
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/27/2019
+ms.openlocfilehash: e25e31a9ed656d625d2025d8d0086d23ecf10682
+ms.sourcegitcommit: 38251963cf3b8c9373929e071b50fd9049942b37
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/14/2019
-ms.locfileid: "64691943"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73043197"
 ---
-# <a name="known-issuesmigration-limitations-with-online-migrations-to-azure-db-for-postgresql"></a>PostgreSQL için Azure DB online geçişleri ile bilinen sorunları/geçiş sınırlamaları
+# <a name="known-issuesmigration-limitations-with-online-migrations-from-postgresql-to-azure-db-for-postgresql-single-server"></a>PostgreSQL ' den PostgreSQL için Azure DB 'ye çevrimiçi geçişlerle ilgili bilinen sorunlar/geçiş sınırlamaları-tek sunucu
 
-Bilinen sorunlar ve sınırlamalar online geçişleri PostgreSQL için Azure veritabanı için PostgreSQL ile ilişkili aşağıdaki bölümlerde açıklanmıştır. 
+PostgreSQL 'e yönelik çevrimiçi geçişlerle ilgili bilinen sorunlar ve sınırlamalar PostgreSQL için Azure veritabanı 'na-tek sunucu aşağıdaki bölümlerde açıklanmıştır.
 
-## <a name="online-migration-configuration"></a>Çevrimiçi geçişi yapılandırma
-- PostgreSQL sunucusu kaynağı 9.5.11, 9.6.7 veya 10.3 sürümü çalıştırması gerekir veya üzeri. Daha fazla bilgi için bkz [desteklenen PostgreSQL veritabanı sürümlere](../postgresql/concepts-supported-versions.md).
-- Yalnızca aynı sürüm geçişler desteklenir. Örneğin, 9.6.7 PostgreSQL için Azure veritabanı geçişi PostgreSQL 9.5.11 desteklenmiyor.
+## <a name="online-migration-configuration"></a>Çevrimiçi geçiş yapılandırması
+
+- Kaynak PostgreSQL sunucusu, 9.5.11, 9.6.7 veya 10,3 veya sonraki bir sürümü çalıştırıyor olmalıdır. Daha fazla bilgi için bkz. [PostgreSQL veritabanı sürümlerini destekleyen](../postgresql/concepts-supported-versions.md)makale.
+- Yalnızca aynı sürüm geçişleri desteklenir. Örneğin, PostgreSQL 9.5.11 'in PostgreSQL için Azure veritabanı 9.6.7 'ye geçirilmesi desteklenmez.
 
     > [!NOTE]
-    > PostgreSQL için sürüm 10, şu anda DMS yalnızca PostgreSQL için Azure veritabanı 10.3 sürümüne geçişini destekler. Daha yeni sürümlerini PostgreSQL desteği, çok yakında planlıyorsanız.
+    > PostgreSQL sürüm 10 ' da şu anda DMS yalnızca, sürüm 10,3 ' in PostgreSQL için Azure veritabanı 'na geçirilmesini destekler. Çok yakında PostgreSQL 'in daha yeni sürümlerini desteklemeyi planlıyoruz.
 
-- İçinde mantıksal çoğaltmayı etkinleştirmek için **PostgreSQL postgresql.conf kaynak** dosya için şu parametreleri ayarlayın:
-    - **wal_level** mantıksal =
-    - **max_replication_slots** = [veritabanı geçiş için en fazla sayısı]; 4 veritabanının geçirmek istiyorsanız, değer 4'e ayarlayın.
-    - **max_wal_senders** [eşzamanlı olarak çalışan veritabanı sayısı] =; önerilen değer: 10
-- DMS aracı IP'si için kaynak PostgresSQL pg_hba.conf Ekle
-    1. DMS bir örneğini sağlama işlemini tamamladıktan sonra DMS IP adresini not edin.
-    2. IP adresi gösterildiği pg_hba.conf dosyaya ekleyin:
+- **Kaynak PostgreSQL PostgreSQL. conf** dosyasında mantıksal çoğaltmayı etkinleştirmek için aşağıdaki parametreleri ayarlayın:
+  - **wal_level** = mantıksal
+  - **max_replication_slots** = [geçiş için en fazla veritabanı sayısı]; dört veritabanını geçirmek istiyorsanız, değeri 4 olarak ayarlayın
+  - **max_wal_senders** = [aynı anda çalışan veritabanlarının sayısı]; Önerilen değer 10 ' dur
+- Kaynak PostgreSQL pg_hba. conf dosyasına DMS Aracısı IP 'si ekleyin
+  1. DMS 'in bir örneğini sağlamayı tamamladıktan sonra DMS IP adresini bir yere unutmayın.
+  2. IP adresini pg_hba. conf dosyasına aşağıda gösterildiği gibi ekleyin:
 
-        Tüm 172.16.136.18/10 md5 konak çoğaltma postgres 172.16.136.18/10 md5 barındırın
+        Tüm 172.16.136.18/10 MD5 konak çoğaltma Postgres 172.16.136.18/10 MD5 ana bilgisayar
 
-- Kullanıcının kaynak veritabanını barındıran sunucuda süper kullanıcı izninizin olması gerekir
-- Kaynak veritabanı şemasında ENUM olması dışında kaynak ve hedef veritabanı şemalarını eşleşmesi gerekir.
-- PostgreSQL için Azure veritabanı hedef şemasında yabancı anahtarlar olmaması gerekir. Yabancı anahtarlar bırakmak için aşağıdaki sorguyu kullanın:
+- Kullanıcı, kaynak veritabanını barındıran sunucuda Süper Kullanıcı iznine sahip olmalıdır
+- Kaynak veritabanı şemasında ENUM olmadan, kaynak ve hedef veritabanı şemaları eşleşmelidir.
+- PostgreSQL için Azure veritabanı 'nın hedef şeması-tek sunucu yabancı anahtarlara sahip olmamalıdır. Yabancı anahtarları bırakmak için aşağıdaki sorguyu kullanın:
 
     ```
                                 SELECT Queries.tablename
@@ -72,43 +73,47 @@ Bilinen sorunlar ve sınırlamalar online geçişleri PostgreSQL için Azure ver
 
     Sorgu sonucunda bırakma yabancı anahtarını (ikinci sütun) çalıştırın.
 
-- Şemanın hedef PostgreSQL için Azure veritabanı içinde hiçbir tetikleyici olmaması gerekir. Hedef veritabanı Tetikleyicileri devre dışı bırakmak için aşağıdakileri kullanın:
+- PostgreSQL için Azure veritabanı hedef şeması-tek sunucu, herhangi bir tetikleyici içermemelidir. Hedef veritabanında Tetikleyicileri devre dışı bırakmak için aşağıdakileri kullanın:
 
      ```
     SELECT Concat('DROP TRIGGER ', Trigger_Name, ';') FROM  information_schema.TRIGGERS WHERE TRIGGER_SCHEMA = 'your_schema';
      ```
 
-## <a name="datatype-limitations"></a>DataType sınırlamaları
+## <a name="datatype-limitations"></a>Veri türü sınırlamaları
 
-- **Sınırlama**: Kaynak PostgreSQL veritabanına bir sabit listesi veri türü varsa, geçiş sırasında sürekli eşitleme başarısız olur.
+- **Kısıtlama**: kaynak PostgreSQL veritabanında bir sabit listesi veri türü varsa, geçiş sürekli eşitleme sırasında başarısız olur.
 
-    **Geçici çözüm**: PostgreSQL için Azure veritabanı'nda değişen karakter sabit listesi veri türüne değiştirin.
+    **Geçici çözüm**: enum veri türünü PostgreSQL Için Azure veritabanı 'nda değişen karakterle değiştirin.
 
-- **Sınırlama**: Tablolarda birincil anahtar varsa, sürekli eşitleme başarısız olur.
+- **Kısıtlama**: tablolarda birincil anahtar yoksa sürekli eşitleme başarısız olur.
 
-    **Geçici çözüm**: Bir birincil anahtar tablosu geçişe devam etmek için geçici olarak ayarlar. Veri geçişi tamamlandıktan sonra birincil anahtarı kaldırabilirsiniz.
+    **Geçici çözüm**: geçiş işleminin devam etmesi için geçici olarak tablo için bir birincil anahtar ayarlayın. Veri geçişi tamamlandıktan sonra birincil anahtarı kaldırabilirsiniz.
+
+- **Kısıtlama**: jsonb veri türü geçiş için desteklenmiyor.
 
 ## <a name="lob-limitations"></a>LOB sınırlamaları
-Büyük nesne (LOB) sütunları fazla büyüyebilir sütunlarıdır. PostgreSQL için örnekleri LOB veri türleri, XML, JSON, resim, metin, vb. içerir.
 
-- **Sınırlama**: LOB veri türleri birincil anahtarlar kullanılıyorsa, geçiş başarısız olur.
+Büyük nesne (LOB) sütunları büyük büyüyerek sütunlardır. PostgreSQL için, LOB veri türlerine örnek olarak XML, JSON, IMAGE, metın vb. verilebilir.
 
-    **Geçici çözüm**: Birincil anahtar, diğer veri türleri veya LOB olmayan sütunlar ile değiştirin.
+- **Sınırlama**: lob veri türleri birincil anahtar olarak kullanılıyorsa, geçiş başarısız olur.
 
-- **Sınırlama**: Büyük nesne (LOB) sütun uzunluğu 32 KB'den daha büyük ise, hedefte veri kesilebilir. Bu sorguyu kullanarak LOB sütunu uzunluğunu kontrol edebilirsiniz:
+    **Geçici çözüm**: birincil anahtarı diğer veri TÜRLERI veya LOB olmayan sütunlarla değiştirin.
+
+- **Kısıtlama**: büyük nesne (LOB) sütununun uzunluğu 32 KB 'tan büyükse, veriler hedefte kesilebilir. Bu sorguyu kullanarak LOB sütununun uzunluğunu kontrol edebilirsiniz:
 
     ```
     SELECT max(length(cast(body as text))) as body FROM customer_mail
     ```
 
-    **Geçici çözüm**: 32 KB'den büyük LOB nesne varsa, mühendislik ekibiyle iletişime geçin. [isteyin Azure veritabanı geçişlerini](mailto:AskAzureDatabaseMigrations@service.microsoft.com).
+    **Geçici çözüm**: 32 KB 'den büyük bir lob nesneniz varsa [Azure veritabanı geçişleri sorun](mailto:AskAzureDatabaseMigrations@service.microsoft.com)konusunda mühendislik ekibine başvurun.
 
-- **Sınırlama**: Tablodaki LOB sütunları vardır ve birincil anahtar ödenmez tablo için verileri bu tablo için geçirilmiş olabilir değil.
+- **Kısıtlama**: tabloda lob sütunları varsa ve tablo için birincil anahtar kümesi yoksa, veriler bu tablo için geçirilmeyebilir.
 
-    **Geçici çözüm**: Bir birincil anahtar tablosu geçişe devam etmek için geçici olarak ayarlar. Veri geçişi tamamlandıktan sonra birincil anahtarı kaldırabilirsiniz.
+    **Geçici çözüm**: geçiş işleminin devam edebilmesi için tablo için geçici olarak bir birincil anahtar ayarlayın. Veri geçişi tamamlandıktan sonra birincil anahtarı kaldırabilirsiniz.
 
 ## <a name="postgresql10-workaround"></a>PostgreSQL10 geçici çözüm
-PostgreSQL 10.x pg_xlog klasör adları ve bu nedenle geçiş beklendiği gibi çalışmıyor neden çeşitli değişiklikler yapar. PostgreSQL geçiş yapıyorsanız 10.x PostgreSQL 10.3 için Azure veritabanı kaynak PostgreSQL veritabanında pg_xlog işlevleri çevresinde sarmalayıcı işlevi oluşturmak için aşağıdaki betiği yürütün.
+
+PostgreSQL 10. x, pg_xlog klasör adlarında çeşitli değişiklikler yapar ve bu nedenle geçişe beklenen şekilde çalışmadığını neden olur. PostgreSQL 10. x ' den PostgreSQL için Azure veritabanı 10,3 ' den geçiş yapıyorsanız, pg_xlog işlevleri etrafında sarmalayıcı işlevi oluşturmak için kaynak PostgreSQL veritabanında aşağıdaki betiği yürütün.
 
 ```
 BEGIN;
@@ -148,13 +153,41 @@ ALTER USER PG_User SET search_path = fnRenames, pg_catalog, "$user", public;
 COMMIT;
 ```
 
+  > [!NOTE]
+  > Yukarıdaki komut dosyasında, "PG_User", geçiş kaynağına bağlanmak için kullanılan Kullanıcı adını ifade eder.
+
+## <a name="limitations-when-migrating-online-from-aws-rds-postgresql"></a>AWS RDS PostgreSQL 'ten çevrimiçi geçiş yaparken sınırlamalar
+
+AWS RDS PostgreSQL 'ten PostgreSQL için Azure veritabanı 'na çevrimiçi geçiş gerçekleştirmeye çalıştığınızda, aşağıdaki hatalarla karşılaşabilirsiniz.
+
+- **Hata**: ' {Database} ' veritabanındaki ' {Table} ' tablosunda bulunan ' {Column} ' sütununun varsayılan değeri kaynak ve hedef sunucularda farklı. Değer kaynakta '{value on source}', hedefte ise '{value on target}'.
+
+  **Kısıtlama**: bir sütun şemasındaki varsayılan değer, kaynak ve hedef veritabanları arasında farklı olduğunda bu hata oluşur.
+  **Geçici çözüm**: hedefteki şemanın kaynaktaki şemayla eşleştiğinden emin olun. Şemayı geçirme hakkında ayrıntılı bilgi için [Azure PostgreSQL çevrimiçi geçiş belgelerine](https://docs.microsoft.com/azure/dms/tutorial-postgresql-azure-postgresql-online#migrate-the-sample-schema)bakın.
+
+- **Hata**: ' {Database} ' hedef veritabanında ' {Database} ' kaynak veritabanının ' {tablo sayısı} ' tablosu olduğu için ' {tablo sayısı} ' tablo vardır. Kaynak ve hedef veritabanlarındaki tablo sayısı aynı olmalıdır.
+
+  **Sınırlama**: Bu hata, tablo sayısı kaynak ve hedef veritabanları arasında farklıysa oluşur.
+  **Geçici çözüm**: hedefteki şemanın kaynaktaki şemayla eşleştiğinden emin olun. Şemayı geçirme hakkında ayrıntılı bilgi için [Azure PostgreSQL çevrimiçi geçiş belgelerine](https://docs.microsoft.com/azure/dms/tutorial-postgresql-azure-postgresql-online#migrate-the-sample-schema)bakın.
+
+- **Hata:** {Database} kaynak veritabanı boş.
+
+  **Kısıtlama**: kaynak veritabanı boş olduğunda bu hata oluşur. Bunun nedeni büyük olasılıkla kaynak olarak yanlış veritabanını seçmiş olmanızdır.
+  **Geçici çözüm**: geçiş için seçtiğiniz kaynak veritabanını çift işaretleyin ve sonra yeniden deneyin.
+
+- **Hata:** Hedef veritabanı {Database} boş. Lütfen şemayı geçirin.
+
+  **Kısıtlama**: hedef veritabanında şema olmadığında bu hata oluşur. Hedefteki şemanın kaynaktaki şemayla eşleştiğinden emin olun.
+  **Geçici çözüm**: hedefteki şemanın kaynaktaki şemayla eşleştiğinden emin olun. Şemayı geçirme hakkında ayrıntılı bilgi için [Azure PostgreSQL çevrimiçi geçiş belgelerine](https://docs.microsoft.com/azure/dms/tutorial-postgresql-azure-postgresql-online#migrate-the-sample-schema)bakın.
+
 ## <a name="other-limitations"></a>Diğer sınırlamalar
-- Veritabanı adı, noktalı virgül (;) içeremez.
-- Açma ve kapatma küme parantezleri {} olan bir parola dizesi desteklenmiyor. Her iki bağlanmaya PostgreSQL kaynak ve hedef Azure veritabanını Postgresql'ye bu sınırlama geçerlidir.
-- Yakalanan bir tabloda bir birincil anahtarı olmalıdır. Bir tabloda bir birincil anahtar yoksa, silme ve güncelleştirme kayıt işlemleri sonucu tahmin edilemez olacaktır.
-- Bir birincil anahtar kesimi güncelleştirme göz ardı edilir. Bu gibi durumlarda, bu tür bir güncelleştirmeyi uygulamadan hedef tarafından herhangi bir satır güncelleştirilmedi ve özel durumlar tablosuna yazılan bir kayıt sonuçlanır bir güncelleştirme olarak tanımlanır.
-- Aynı ada ancak farklı bir durumda (örneğin table1, tablo1 ve Table1) sahip birden fazla tablo geçişini öngörülemeyen davranışlara neden olabilir ve bu nedenle desteklenmiyor.
-- İşlenmesi değiştirme [oluştur | ALTER | Bir iç işlev/yordam gövde bloğundaki veya diğer iç içe geçmiş yapılar tutulduğu sürece bırakma] tablo DDLs desteklenir. Örneğin, aşağıdaki değişikliği yakalanmaz:
+
+- Veritabanı adı noktalı virgül (;)) içeremez.
+- Küme ayraçları açma ve kapatma {} olan parola dizesi desteklenmiyor. Bu sınırlama, kaynak PostgreSQL bağlantısı ve PostgreSQL için Azure veritabanı hedef için geçerlidir.
+- Yakalanan bir tablo, birincil anahtara sahip olmalıdır. Bir tablonun birincil anahtarı yoksa, kayıt SILME ve GÜNCELLEŞTIRME işlemlerinin sonucu öngörülemeyen olur.
+- Birincil anahtar segmentinin güncelleştirilmesi yok sayılır. Böyle durumlarda, bu tür bir güncelleştirmenin uygulanması, hedef tarafından herhangi bir satırı güncelleştirmediğiniz bir güncelleştirme olarak tanımlanır ve özel durumlar tablosuna yazılmış bir kayıtla sonuçlanır.
+- Aynı ada sahip, ancak farklı bir Case (örn. Table1, TABLE1 ve Table1) birden çok tablo geçişi öngörülemeyen davranışlara neden olabilir ve bu nedenle desteklenmez.
+- [Oluştur | işlemini değiştirme DEĞIŞTIR | DROP] tablo DDLs, bir iç işlev/yordam gövde bloğunda veya diğer iç içe yapılar içinde tutulmadığı müddetçe desteklenir. Örneğin, aşağıdaki değişiklik yakalanmayacak:
 
     ```
     CREATE OR REPLACE FUNCTION pg.create_distributors1() RETURNS void
@@ -167,8 +200,10 @@ COMMIT;
     $$;
     ```
 
-- Kesme işlemleri (sürekli eşitleme) işlenmesini değişikliği desteklenmiyor. Geçişini bölümlenmiş tablolar desteklenmiyor. Bölümlenmiş bir tablodaki algılandığında, aşağıdakiler gerçekleşir:
-    - Veritabanı, üst ve alt tablo listesini bildirir.
-    - Hedef tablo olarak seçilen tabloları aynı özelliklere sahip olağan bir tablo olarak oluşturulur.
-    - Kaynak veritabanında üst tablo kendi alt tablolar aynı birincil anahtar değeri varsa, "yinelenen anahtar" hatası oluşturulur.
-- DMS tek tek geçiş etkinliği geçirilecek veritabanları sınırını dörttür.
+- KESME işlemlerinde değişiklik işleme (sürekli eşitleme) desteklenmiyor. Bölümlenmiş tabloların geçirilmesi desteklenmez. Bölümlenmiş bir tablo algılandığında, aşağıdaki işlemler gerçekleşir:
+
+  - Veritabanı, üst ve alt tabloların listesini rapor eder.
+  - Tablo, seçili tablolarla aynı özelliklere sahip olan normal tablo olarak hedefte oluşturulur.
+  - Kaynak veritabanındaki üst tablo, alt tablolarıyla aynı birincil anahtar değerine sahipse, "yinelenen anahtar" hatası oluşturulur.
+
+- DMS 'de, tek bir geçiş etkinliğinde geçirilecek veritabanlarının sınırı dördü.

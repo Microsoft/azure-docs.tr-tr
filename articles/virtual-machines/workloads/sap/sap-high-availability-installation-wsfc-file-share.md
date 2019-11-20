@@ -1,30 +1,29 @@
 ---
-title: SAP NetWeaver yüksek kullanılabilirlik yüklemesi Azure üzerinde SAP ASCS/SCS örneği için bir Windows Yük devretme kümesi ve dosya paylaşım | Microsoft Docs
-description: SAP NetWeaver SAP ASCS/SCS örneği için bir Windows Yük devretme kümesi ve dosya paylaşımı üzerinde yüksek kullanılabilirlik yüklemesi
+title: SAP NetWeaver yüksek kullanılabilirlik yüklemesi bir Windows Yük devretme kümesinde ve Azure 'daki SAP yoks/SCS örnekleri için dosya paylaşımında | Microsoft Docs
+description: SAP NetWeaver yüksek kullanılabilirlik yükleme bir Windows Yük devretme kümesinde ve SAP ASCS/SCS örnekleri için dosya paylaşımında
 services: virtual-machines-windows,virtual-network,storage
 documentationcenter: saponazure
 author: goraco
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.assetid: 71296618-673b-4093-ab17-b7a80df6e9ac
 ms.service: virtual-machines-windows
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 05/05/2017
 ms.author: rclaus
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 95cde28bc4789346aabd58b5f7b543e1bbc989c1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b7bdd1e1922d9d8845a8187cabb3fd39af4694ab
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66357688"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70077908"
 ---
-# <a name="install-sap-netweaver-high-availability-on-a-windows-failover-cluster-and-file-share-for-sap-ascsscs-instances-on-azure"></a>Azure üzerinde SAP ASCS/SCS örneği için bir Windows Yük devretme kümesi ve dosya paylaşım SAP NetWeaver-yüksek kullanılabilirlik yükleyin
+# <a name="install-sap-netweaver-high-availability-on-a-windows-failover-cluster-and-file-share-for-sap-ascsscs-instances-on-azure"></a>SAP NetWeaver yüksek kullanılabilirliği 'ni bir Windows Yük devretme kümesine ve Azure 'daki SAP Ass/SCS örnekleri için dosya paylaşımında yükler
 
 [1928533]:https://launchpad.support.sap.com/#/notes/1928533
 [1999351]:https://launchpad.support.sap.com/#/notes/1999351
@@ -90,7 +89,7 @@ ms.locfileid: "66357688"
 
 [sap-official-ha-file-share-document]:https://www.sap.com/documents/2017/07/f453332f-c97c-0010-82c7-eda71af511fa.html
 
-[sap-ha-multi-sid-guide]:sap-high-availability-multi-sid.md (SAP çoklu SID yüksek kullanılabilirliği yapılandırma)
+[sap-ha-multi-sid-guide]:sap-high-availability-multi-sid.md (SAP çoklu SID yüksek kullanılabilirlik yapılandırması)
 
 
 [sap-ha-guide-figure-1000]:./media/virtual-machines-shared-sap-high-availability-guide/1000-wsfc-for-sap-ascs-on-azure.png
@@ -198,55 +197,55 @@ ms.locfileid: "66357688"
 
 [virtual-machines-manage-availability]:../../virtual-machines-windows-manage-availability.md
 
-Bu makalede, yükleme ve Windows Server Yük devretme kümesi (WSFC) ve genişleme dosya sunucusu kümesi SAP ASCS/SCS örneği için bir seçenek olarak ile azure'da yüksek kullanılabilirlik SAP sistemine yapılandırma açıklar.
+Bu makalede, Windows Server yük devretme kümesi (WSFC) ile Azure 'da yüksek kullanılabilirliğe sahip bir SAP sisteminin nasıl yükleneceği ve yapılandırılacağı ve SAP Ass/SCS örneklerinin kümelenmesi için bir seçenek olarak Genişleme Dosya Sunucusu açıklanmaktadır.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Yükleme başlamadan önce aşağıdaki makaleleri inceleyin:
+Yüklemeye başlamadan önce aşağıdaki makaleleri gözden geçirin:
 
-* [Mimari Kılavuzu: Dosya paylaşımı kullanarak bir Windows Yük devretme kümesinde Küme: SAP ASCS/SCS örneği][sap-high-availability-guide-wsfc-file-share]
+* [Mimari Kılavuzu: Dosya paylaşma kullanarak bir Windows Yük devretme kümesinde SAP ASCS/SCS örneği oluşturma][sap-high-availability-guide-wsfc-file-share]
 
-* [Azure altyapı SAP yüksek kullanılabilirlik, SAP ASCS/SCS örneği için bir Windows Yük devretme kümesi ve dosya paylaşımı kullanarak hazırlama][sap-high-availability-infrastructure-wsfc-file-share]
+* [SAP Ass/SCS örnekleri için bir Windows Yük devretme kümesi ve dosya paylaşma kullanarak Azure altyapı SAP yüksek kullanılabilirliği hazırlama][sap-high-availability-infrastructure-wsfc-file-share]
 
-* [Azure vm'lerinde SAP NetWeaver için yüksek kullanılabilirlik][high-availability-guide]
+* [Azure VM 'lerinde SAP NetWeaver için yüksek kullanılabilirlik][high-availability-guide]
 
-Aşağıdaki yürütülebilir dosyaları ve SAP DLL'lerden ihtiyacınız vardır:
-* SAP yazılım sağlama Yöneticisi (SWPM) yükleme aracı sürümü SPS25 veya üzeri.
-* SAP çekirdek 7,49 veya üzeri
+SAP 'den aşağıdaki yürütülebilir dosyalar ve DLL 'Ler gereklidir:
+* SAP yazılım sağlama Yöneticisi (SWPM) Yükleme Aracı sürüm SPS25 veya üzeri.
+* SAP Kernel 7,49 veya üzeri
 
 > [!IMPORTANT]
-> SAP ASCS/SCS örnekleri bir dosya paylaşımı kullanarak kümeleme için SAP NetWeaver 7.40 (ve daha sonra), SAP çekirdek 7.49 (ve üzeri) desteklenir.
+> SAP ASCS/SCS örneklerinin bir dosya paylaşımının kullanılarak kümelenmesi, SAP çekirdek 7,49 (ve üzeri) ile SAP NetWeaver 7,40 (ve üzeri) için desteklenir.
 >
 
 
-Ayarlar kullandığınız DBMS bağlı olarak farklılık gösterdiğinden biz veritabanı Yönetim Sistemi'nin (DBMS) Kurulum tanımlamaz. Ancak, çeşitli DBMS satıcıları desteklemek için Azure işlevleri ile DBMS ile yüksek kullanılabilirlik sorunları ele alınır varsayılır. Bu tür işlevleri AlwaysOn ya da SQL Server ve Oracle Data Guard'için Oracle veritabanları için veritabanı yansıtma içerir. Bu makalede kullandığımız senaryosunda, size daha fazla koruma için DBMS ekleyemiyor.
+Kurulum, kullandığınız DBMS 'ye bağlı olarak farklılık gösterdiğinden, veritabanı yönetim sistemi (DBMS) kurulumunu tanımlamaz. Bununla birlikte, DBMS ile ilgili yüksek kullanılabilirliğe sahip olan kaygılarınızın Azure için çeşitli DBMS satıcılarının desteklediği işlevlere değinilmesi gerektiğini varsaydık. Bu işlevler, SQL Server için AlwaysOn veya veritabanı yansıtma ve Oracle veritabanları için Oracle Data Guard içerir. Bu makalede kullandığımız senaryoda, DBMS 'ye daha fazla koruma ekleyeceğiz.
 
-Bu tür bir kümelenmiş SAP ASCS/SCS yapılandırma azure'daki çeşitli DBMS Hizmetleri etkileşim oluşan özel durumlar vardır.
+Çeşitli DBMS Hizmetleri, Azure 'da bu tür kümelenmiş SAP yoks/SCS yapılandırmasıyla etkileşime girmişse özel bir dikkat yoktur.
 
 > [!NOTE]
-> SAP NetWeaver ABAP sistemleri, Java sistemleri ve ABAP + Java sistemleri yükleme yordamları neredeyse aynıdır. En önemli fark, bir SAP ABAP sistemi bir ASCS örneğine sahip olur. SAP Java sistem bir SCS örneği vardır. ASCS örneği ve bir SCS örneği aynı Microsoft yük devretme küme grubu içinde çalışan SAP ABAP + Java sistemi vardır. Her SAP NetWeaver yükleme yığınının yükleme farkları açıkça belirtilmiştir. Diğer tüm bölümleri aynı olduğunu varsayabilirsiniz.  
+> SAP NetWeaver ABAP Systems, Java sistemleri ve ABAP + Java sistemlerinin yükleme yordamları neredeyse aynıdır. En önemli fark, SAP ABAP sisteminin bir ASCS örneğine sahip olması gerektiğidir. SAP Java sisteminde bir SCS örneği vardır. SAP ABAP + Java sisteminde bir ASCS örneği ve aynı Microsoft yük devretme kümesi grubunda çalışan bir SCS örneği vardır. Her SAP NetWeaver yükleme yığını için herhangi bir yükleme farkı açıkça bahsedilir. Diğer tüm parçaların aynı olduğunu varsayabilirsiniz.  
 >
 >
 
-## <a name="prepare-an-sap-global-host-on-the-sofs-cluster"></a>SOFS kümesine bir SAP genel konağında hazırlama
+## <a name="prepare-an-sap-global-host-on-the-sofs-cluster"></a>SOFS kümesinde SAP Küresel ana bilgisayarı hazırlama
 
-SOFS küme üzerinde aşağıdaki birim ve dosya paylaşımını oluşturun:
+SOFS kümesinde aşağıdaki birim ve dosya payını oluşturun:
 
-* SAP GLOBALHOST dosya `C:\ClusterStorage\Volume1\usr\sap\<SID>\SYS\` SOFS kümesi yapısına paylaşılan birimi (CSV)
+* SOFS küme paylaşılan `C:\ClusterStorage\Volume1\usr\sap\<SID>\SYS\` birimi (CSV) üzerinde SAP globalhost dosya yapısı
 
-* SAPMNT dosya paylaşımı
+* SAPMNT dosya paylaşma
 
-* SAPMNT dosya paylaşımı ve klasörü için tam denetim ile güvenlik ayarlayın:
-    * \<Etki alanı > \SAP_\<SID > _GlobalAdmin kullanıcı grubu
-    * SAP ASCS/SCS küme düğümü bilgisayar nesneleri \<etki alanı > \ClusterNode1$ ve \<etki alanı > \ClusterNode2$
+* SAPMNT dosya paylaşımında ve için tam denetim ile klasör üzerinde güvenlik ayarlayın:
+    * Etki alanı > \sap_\<SID > _GlobalAdmin Kullanıcı grubu \<
+    * SAP ascs/SCS küme düğümü bilgisayar nesneleri \<etki alanı > \clusternode1 $ ve \<etki alanı > \clusternode2 $
 
-Bir CSV birimi yansıtma dayanıklılığı ile oluşturmak için SOFS küme düğümlerinden biri üzerinde aşağıdaki PowerShell cmdlet'ini yürütün:
+Yansıtma dayanıklılığı olan bir CSV birimi oluşturmak için, SOFS küme düğümlerinden birinde aşağıdaki PowerShell cmdlet 'ini yürütün:
 
 
 ```powershell
 New-Volume -StoragePoolFriendlyName S2D* -FriendlyName SAPPR1 -FileSystem CSVFS_ReFS -Size 5GB -ResiliencySettingName Mirror
 ```
-SAPMNT oluşturup klasörü ve paylaşımı güvenlik için SOFS küme düğümlerinden biri üzerinde aşağıdaki PowerShell betiğini çalıştırın:
+SAPMNT oluşturup klasör ayarlama ve güvenlik paylaşma için, SOFS küme düğümlerinden birinde aşağıdaki PowerShell betiğini yürütün:
 
 ```powershell
 # Create SAPMNT on file share
@@ -289,56 +288,56 @@ $Acl.SetAccessRule($Ar)
 Set-Acl $UsrSAPFolder $Acl -Verbose
  ```
 
-## <a name="create-a-virtual-host-name-for-the-clustered-sap-ascsscs-instance"></a>Kümelenmiş SAP ASCS/SCS örneği için bir sanal ana bilgisayar adı oluşturun
+## <a name="create-a-virtual-host-name-for-the-clustered-sap-ascsscs-instance"></a>Kümelenmiş SAP Ass/SCS örneği için sanal ana bilgisayar adı oluşturma
 
-Bir SAP ASCS/SCS küme ağ adı oluşturun (örneğin, **pr1-ascs [10.0.6.7]** ) anlatılan şekilde [kümelenmiş SAP ASCS/SCS örneği için bir sanal ana bilgisayar adı oluşturma] [ sap-high-availability-installation-wsfc-shared-disk-create-ascs-virt-host] .
-
-
-## <a name="install-an-ascsscs-and-ers-instances-in-the-cluster"></a>Kümedeki bir ASCS/SCS ve Ağıranlar örnekleri yükleyin
-
-### <a name="install-an-ascsscs-instance-on-the-first-ascsscs-cluster-node"></a>ASCS/SCS örneği ilk ASCS/SCS küme düğümüne yükleme
-
-SAP ASCS/SCS örneği ilk küme düğümüne yükleyin. SAP SWPM yükleme aracı örneği yüklemek için şuraya gidin:
-
-**\<Ürün >**  >  **\<DBMS >**  > **yükleme** > **ABAP uygulama sunucusu** () veya **Java**) > **yüksek kullanılabilirlik sistem** > **ASCS/SCS örneği** > **ilk küme düğümüne**.
-
-### <a name="add-a-probe-port"></a>Bir araştırma bağlantı noktası Ekle
-
-PowerShell kullanarak bir SAP küme kaynağı SAP SID IP araştırma bağlantı noktasını yapılandırın. Açıklandığı gibi bu yapılandırma SAP ASCS/SCS küme düğümlerinden biri üzerinde yürütme [bu makaledeki][sap-high-availability-installation-wsfc-shared-disk-add-probe-port].
-
-### <a name="install-an-ascsscs-instance-on-the-second-ascsscs-cluster-node"></a>ASCS/SCS örneği ikinci ASCS/SCS küme düğümüne yükleme
-
-SAP ASCS/SCS örneği, ikinci küme düğümüne yükleyin. SAP SWPM yükleme aracı örneği yüklemek için şuraya gidin:
-
-**\<Ürün >**  >  **\<DBMS >**  > **yükleme** > **ABAP uygulama sunucusu** () veya **Java**) > **yüksek kullanılabilirlik sistem** > **ASCS/SCS örneği** > **ek küme düğümü** .
+[KÜMELENMIŞ SAP ascs/SCS örneği için sanal ana bilgisayar adı oluşturma][sap-high-availability-installation-wsfc-shared-disk-create-ascs-virt-host]bölümünde açıklandığı gıbı bır SAP ascs/SCS küme ağı adı (örneğin, **PR1-ascs [10.0.6.7]** ) oluşturun.
 
 
-## <a name="update-the-sap-ascsscs-instance-profile"></a>SAP ASCS/SCS örneği profilini güncelleştir
+## <a name="install-an-ascsscs-and-ers-instances-in-the-cluster"></a>Kümeye yoks/SCS ve ERS örnekleri yükler
 
-SAP ASCS/SCS örneği profilinde parametreleri güncelleştirin \<SID >_ASCS/SCS\<Nr >_ \<konak >.
+### <a name="install-an-ascsscs-instance-on-the-first-ascsscs-cluster-node"></a>İlk yoks/SCS kümesi düğümüne bir ASCS/SCS örneği yükler
+
+İlk küme düğümüne bir SAP ASCS/SCS örneği yükler. Örneği yüklemek için SAP SWPM yükleme aracında şuraya gidin:
+
+**\<Ürün >**  >  >  **DBMS>\<** yükleme > uygulama sunucusu ABAP (veya Java) **yüksek kullanılabilirlik sistemi >**  >  **Yoks/SCS örneği** **İlk küme düğümü.**  > 
+
+### <a name="add-a-probe-port"></a>Araştırma bağlantı noktası ekle
+
+PowerShell kullanarak SAP-SID-IP araştırma bağlantı noktasını bir SAP küme kaynağı olarak yapılandırın. Bu yapılandırmayı, [Bu makalede][sap-high-availability-installation-wsfc-shared-disk-add-probe-port]AÇıKLANDıĞı gıbı SAP Ass/SCS küme düğümlerinden birinde yürütün.
+
+### <a name="install-an-ascsscs-instance-on-the-second-ascsscs-cluster-node"></a>İkinci yoks/SCS küme düğümüne bir ASCS/SCS örneği yükler
+
+İkinci küme düğümüne bir SAP ASCS/SCS örneği yükler. Örneği yüklemek için SAP SWPM yükleme aracında şuraya gidin:
+
+**\<Ürün >**  >  >  **DBMS>\<** yükleme > uygulama sunucusu ABAP (veya Java) **yüksek kullanılabilirlik sistemi >**  >  **Yoks/SCS örneği** **Ek küme düğümü.**  > 
+
+
+## <a name="update-the-sap-ascsscs-instance-profile"></a>SAP ASCS/SCS örnek profilini güncelleştirme
+
+SAP ascs/SCS örnek profili \<SID >_ascs/SCS\<NR >_ \<Host > parametrelerini güncelleştirin.
 
 
 | Parametre adı | Parametre değeri |
 | --- | --- |
 | GW/netstat_once | **0** |
-| enque/encni/set_so_keepalive  | **TRUE** |
-| service/ha_check_node | **1** |
+| EnQue/encnı/set_so_keepalive  | **değeri** |
+| hizmet/ha_check_node | **1** |
 
-SAP ASCS/SCS örneğini yeniden başlatın. Ayarlama `KeepAlive` hem SAP ASCS/SCS küme düğümlerinde parametreleri için yönergeleri izleyerek [kayıt defteri girdileri SAP ASCS/SCS örneği küme düğümlerinde ayarlayın][high-availability-guide]. 
+SAP ASCS/SCS örneğini yeniden başlatın. Her `KeepAlive` iki sap ascs/SCS küme düğümlerinde parametreleri ayarla, [SAP ascs/SCS örneğinin küme düğümlerinde kayıt defteri girişlerini ayarlamak][high-availability-guide]için yönergeleri izleyin. 
 
-## <a name="install-a-dbms-instance-and-sap-application-servers"></a>DBMS örneği ve SAP uygulama sunucuları yükleme
+## <a name="install-a-dbms-instance-and-sap-application-servers"></a>Bir DBMS örneği ve SAP uygulama sunucuları yükler
 
-SAP sistemi yüklemenizin yükleyerek son haline getir:
+Aşağıdakileri yükleyerek SAP sistem yüklemenizi sonlandırın:
 * Bir DBMS örneği.
-* Birincil bir SAP uygulama sunucusu.
+* Birincil SAP uygulama sunucusu.
 * Ek bir SAP uygulama sunucusu.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [ASCS/SCS örneği yük devretme kümesinde paylaşılan diskleri - yüksek kullanılabilirlik dosya paylaşımı için resmi SAP yönergeleri ile yükleme][sap-official-ha-file-share-document]
+* [Paylaşılan disk olmadan bir yük devretme kümesine bir ASCS/SCS örneği, yüksek kullanılabilirliğe sahip dosya paylaşma için resmi SAP yönergeleri yükler][sap-official-ha-file-share-document]
 
-* [Windows Server 2016 depolama alanları doğrudan][s2d-in-win-2016]
+* [Windows Server 2016 ' de Depolama Alanları Doğrudan][s2d-in-win-2016]
 
-* [Uygulama verileri genel bakışı için genişleme dosya sunucusu][sofs-overview]
+* [Uygulama verileri için Genişleme Dosya Sunucusu genel bakış][sofs-overview]
 
-* [Windows Server 2016'da depolamadaki yenilikler][new-in-win-2016-storage]
+* [Windows Server 2016 ' de depolamadaki yenilikler][new-in-win-2016-storage]

@@ -1,5 +1,5 @@
 ---
-title: Azure bulut Hizmetleri def olarak NetworkTrafficRules şeması | Microsoft Docs
+title: Azure Cloud Services def. NetworkTrafficRules şeması | Microsoft Docs
 ms.custom: ''
 ms.date: 04/14/2015
 services: cloud-services
@@ -10,26 +10,26 @@ ms.tgt_pltfrm: ''
 ms.topic: reference
 ms.assetid: 351b369f-365e-46c1-82ce-03fc3655cc88
 caps.latest.revision: 17
-author: jpconnock
-ms.author: jeconnoc
-manager: timlt
-ms.openlocfilehash: 8925943b0a5d151d55adedcfe3f01b5a14c63c1b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+author: georgewallace
+ms.author: gwallace
+manager: gwallace
+ms.openlocfilehash: e99b9f0f601841fe6ff32eba0a43bfafd652e941
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60613877"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68945943"
 ---
-# <a name="azure-cloud-services-definition-networktrafficrules-schema"></a>Azure Cloud Services tanım NetworkTrafficRules şeması
-`NetworkTrafficRules` Rolleri birbirleri ile nasıl iletişim kuracağını belirtir Hizmet tanım dosyası isteğe bağlı bir öğedeki bir düğümdür. Sınırlar hangi rollerin belirli rolünün iç Uç noktalara erişebilir. `NetworkTrafficRules` Değil bir tek başına öğesi; bir hizmet tanımı dosyasında iki veya daha fazla rol ile birleştirilir.
+# <a name="azure-cloud-services-definition-networktrafficrules-schema"></a>Azure Cloud Services Definition NetworkTrafficRules şeması
+`NetworkTrafficRules` Düğüm, rollerinin birbirleriyle nasıl iletişim kuracağını belirten hizmet tanımı dosyasındaki isteğe bağlı bir öğedir. Bu, belirli rolün iç uç noktalarına hangi rollerin erişebileceğini sınırlandırır. `NetworkTrafficRules` Tek başına bir öğe değildir; bir hizmet tanımı dosyasında iki veya daha fazla rolle birleştirilir.
 
-.Csdef Hizmet tanım dosyası için varsayılan uzantısıdır.
+Hizmet tanım dosyası için varsayılan uzantı. csdef ' dir.
 
 > [!NOTE]
->  `NetworkTrafficRules` Düğüm, yalnızca Azure SDK'sı sürüm 1.3 kullanılarak kullanılabilirlik veya daha yüksek.
+>  `NetworkTrafficRules` Düğüm yalnızca Azure SDK 1,3 veya üzeri sürümler kullanılarak kullanılabilir.
 
-## <a name="basic-service-definition-schema-for-the-network-traffic-rules"></a>Temel Hizmet tanım düzenini ağ trafiği kuralları
-Ağ trafiği tanımlarını içeren bir hizmet tanımı dosyası temel biçimi aşağıdaki gibidir.
+## <a name="basic-service-definition-schema-for-the-network-traffic-rules"></a>Ağ trafiği kuralları için temel hizmet tanımı şeması
+Ağ trafiği tanımlarını içeren bir hizmet tanımı dosyasının temel biçimi aşağıdaki gibidir.
 
 ```xml
 <ServiceDefinition …>
@@ -48,13 +48,13 @@ Ağ trafiği tanımlarını içeren bir hizmet tanımı dosyası temel biçimi a
 ```
 
 ## <a name="schema-elements"></a>Şema öğeleri
-`NetworkTrafficRules` Hizmet tanım dosyası düğümünün, bu konunun sonraki bölümlerinde ayrıntılı olarak açıklanan, bu öğeleri içerir:
+Hizmet tanımı dosyasının düğümü, bu konunun sonraki bölümlerinde ayrıntılı olarak açıklanan bu öğeleri içerir: `NetworkTrafficRules`
 
-[NetworkTrafficRules Element](#NetworkTrafficRules)
+[NetworkTrafficRules öğesi](#NetworkTrafficRules)
 
 [OnlyAllowTrafficTo öğesi](#OnlyAllowTrafficTo)
 
-[Hedefleri öğesi](#Destinations)
+[Destinations öğesi](#Destinations)
 
 [RoleEndpoint öğesi](#RoleEndpoint)
 
@@ -64,39 +64,39 @@ AllowAllTraffic öğesi
 
 [FromRole öğesi](#FromRole)
 
-##  <a name="NetworkTrafficRules"></a> NetworkTrafficRules öğesi
-`NetworkTrafficRules` Öğesi belirtir hangi rollerin hangi rolü başka bir uç noktasıyla iletişim kurabilir. Bir hizmet içerebilir `NetworkTrafficRules` tanımı.
+##  <a name="NetworkTrafficRules"></a>NetworkTrafficRules öğesi
+Öğesi `NetworkTrafficRules` , hangi rollerin başka bir roldeki hangi uç noktayla iletişim kurabildiğini belirtir. Bir hizmet, bir `NetworkTrafficRules` tanım içerebilir.
 
-##  <a name="OnlyAllowTrafficTo"></a> OnlyAllowTrafficTo öğesi
-`OnlyAllowTrafficTo` Hedef uç noktaları ve onlarla iletişim rolleri koleksiyonunu açıklar. Birden çok belirtebilirsiniz `OnlyAllowTrafficTo` düğümleri.
+##  <a name="OnlyAllowTrafficTo"></a>OnlyAllowTrafficTo öğesi
+Öğesi `OnlyAllowTrafficTo` , hedef uç noktaları ve bunlarla iletişim kurabilen roller koleksiyonunu açıklar. Birden çok `OnlyAllowTrafficTo` düğüm belirtebilirsiniz.
 
-##  <a name="Destinations"></a> Hedefleri öğesi
-`Destinations` Öğesi ile bildirilmesi daha RoleEndpoints koleksiyonunu açıklar.
+##  <a name="Destinations"></a>Destinations öğesi
+Öğesi `Destinations` , ile iletilenenden bir roleendpoints koleksiyonu tanımlar.
 
-##  <a name="RoleEndpoint"></a> RoleEndpoint öğesi
-`RoleEndpoint` Öğesi ile iletişime izin vermek için bir rol üzerinde bir uç nokta açıklar. Birden çok belirtebilirsiniz `RoleEndpoint` rolünde birden fazla uç nokta varsa öğeleri.
+##  <a name="RoleEndpoint"></a>RoleEndpoint öğesi
+Öğesi `RoleEndpoint` , ile iletişime izin vermek üzere bir rol üzerinde bir uç nokta tanımlar. Rol üzerinde birden fazla `RoleEndpoint` uç nokta varsa birden çok öğe belirtebilirsiniz.
 
-| Öznitelik      | Tür     | Açıklama |
+| Öznitelik      | Type     | Açıklama |
 | -------------- | -------- | ----------- |
-| `endpointName` | `string` | Gereklidir. Trafiğe izin vermek için uç nokta adı.|
-| `roleName`     | `string` | Gereklidir. Web rolü için iletişim sağlamak üzere adı.|
+| `endpointName` | `string` | Gerekli. Trafiğe izin verilecek uç noktanın adı.|
+| `roleName`     | `string` | Gerekli. İletişime izin verilecek Web rolünün adı.|
 
 ## <a name="allowalltraffic-element"></a>AllowAllTraffic öğesi
-`AllowAllTraffic` Öğedir tanımlanan uç noktaları ile iletişim kurmak için tüm roller izin verecek bir kural `Destinations` düğümü.
+Öğesi, tüm rollerin `Destinations` düğümde tanımlanan uç noktalarla iletişim kurmasına izin veren bir kuraldır. `AllowAllTraffic`
 
-##  <a name="WhenSource"></a> WhenSource öğesi
-`WhenSource` Açıklar rolleri koleksiyonu içinde tanımlanan uç noktaları ile iletişim kurabilmesi daha `Destinations` düğümü.
+##  <a name="WhenSource"></a>WhenSource öğesi
+Öğesi, `Destinations` düğümünde tanımlanan uç noktalarla iletişim kurabildiğinden rol koleksiyonunu açıklar. `WhenSource`
 
-| Öznitelik | Tür     | Açıklama |
+| Öznitelik | Type     | Açıklama |
 | --------- | -------- | ----------- |
-| `matches` | `string` | Gereklidir. Kuralın iletişimleri izin verirken uygulanmasını belirtir. Şu anda geçerli olan tek değer olduğu `AnyRule`.|
+| `matches` | `string` | Gerekli. İletişime izin verirken uygulanacak kuralı belirtir. Geçerli olan tek değer şu anda `AnyRule`.|
   
-##  <a name="FromRole"></a> FromRole öğesi
-`FromRole` Öğe içinde tanımlanan uç noktaları ile iletişim kurabilen rolleri belirtir `Destinations` düğümü. Birden çok belirtebilirsiniz `FromRole` uç noktaları ile iletişim kurabilen birden fazla rol varsa öğeleri.
+##  <a name="FromRole"></a>FromRole öğesi
+Öğesi, `Destinations` düğümünde tanımlanan uç noktalarla iletişim kurabilen rolleri belirtir. `FromRole` Uç noktalarla iletişim kurabilen `FromRole` birden fazla rol varsa birden çok öğe belirtebilirsiniz.
 
-| Öznitelik  | Tür     | Açıklama |
+| Öznitelik  | Type     | Açıklama |
 | ---------- | -------- | ----------- |
-| `roleName` | `string` | Gereklidir. İletişime izin vermek üzere rol adı.|
+| `roleName` | `string` | Gerekli. İletişime izin verilecek rolün adı.|
 
 ## <a name="see-also"></a>Ayrıca Bkz.
-[Bulut hizmeti (Klasik) tanım Şeması](schema-csdef-file.md)
+[Bulut hizmeti (klasik) Tanım Şeması](schema-csdef-file.md)

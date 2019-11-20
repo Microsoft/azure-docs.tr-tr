@@ -1,155 +1,153 @@
 ---
-title: Azure uygulama hizmetleri performansını izleme | Microsoft Docs
-description: Azure uygulama hizmetleri için uygulama performansı izleme. Yük ve yanıt süresi, bağımlılık bilgilerinin grafiğini oluşturun ve performansa bağlı uyarılar ayarlayın.
-services: application-insights
-documentationcenter: .net
-author: mrbullwinkle
-manager: carmonm
-ms.service: application-insights
+title: Azure App Services performansını izleme | Microsoft Docs
+description: Azure Uygulama Hizmetleri için uygulama performansı izleme. Grafik yükleme ve yanıt süresi, bağımlılık bilgileri ve performans üzerinde Uyarılar ayarlama.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 04/26/2019
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: 5594c1f3517bf3d3f74841493df3c683304fa3f5
-ms.sourcegitcommit: 837dfd2c84a810c75b009d5813ecb67237aaf6b8
+ms.date: 10/04/2019
+ms.openlocfilehash: 1937cce03412db55dafc2025c6a59b037deee3d1
+ms.sourcegitcommit: 1bd2207c69a0c45076848a094292735faa012d22
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67502077"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72677648"
 ---
 # <a name="monitor-azure-app-service-performance"></a>Azure App Service performansını izleme
 
-Temel üzerinde çalışan web uygulamaları, .NET ve .NET Core izlemeyi etkinleştirme [Azure uygulama hizmetleri](https://docs.microsoft.com/azure/app-service/) artık her zamankinden daha kolaydır. Daha önce el ile bir site uzantısını yüklemek için gereken diğer yandan en son uzantısı/aracı artık varsayılan olarak app service görüntüye oluşturulmuştur. Bu makalede, Application Insights izleme ile etkinleştirme işleminde size yol yanı sıra büyük ölçekli dağıtımlar için işlemini otomatik hale getirmek için başlangıç rehberlik sağlar.
+[Azure Uygulama hizmetlerinde](https://docs.microsoft.com/azure/app-service/) çalışan ASP.NET ve ASP.NET Core tabanlı Web uygulamalarında izlemenin etkinleştirilmesi artık hiç olmadığı kadar kolay. Daha önce bir site uzantısını el ile yüklemek için, en son uzantı/aracı artık varsayılan olarak App Service görüntüsüne yerleşik olarak bulunur. Bu makale, Application Insights izlemenin nasıl etkinleştirilebileceğine ve büyük ölçekli dağıtımlar için işlemi otomatikleştirmek üzere ön kılavuz sağlamanıza yol gösterecektir.
 
 > [!NOTE]
-> Bir Application Insights site uzantısı aracılığıyla el ile ekleme **geliştirme araçları** > **uzantıları** kullanım dışı bırakılmıştır. Bu uzantı yükleme yöntemi her yeni sürümü için el ile güncelleştirmeler bağımlıdır. Uzantının en son kararlı sürüm sunulmuştur [önceden](https://github.com/projectkudu/kudu/wiki/Azure-Site-Extensions) App Service görüntünün bir parçası olarak. Dosyalar bulunur `d:\Program Files (x86)\SiteExtensions\ApplicationInsightsAgent` ve kararlı her sürümde otomatik olarak güncelleştirilir. İzlemeyi etkinleştirmek için aracı tabanlı yönergeleri izlerseniz aşağıda bunu otomatik olarak kullanım dışı uzantı sizin için kaldırılır.
+> **Geliştirme araçları**  > **uzantıları** aracılığıyla Application Insights bir site uzantısının el ile eklenmesi kullanım dışıdır. Bu uzantı yükleme yöntemi, her yeni sürüm için el ile güncelleştirmelere bağımlıdır. Uzantının en son kararlı sürümü artık App Service görüntüsünün bir parçası olarak [önceden yüklenmiştir](https://github.com/projectkudu/kudu/wiki/Azure-Site-Extensions) . Dosyalar `d:\Program Files (x86)\SiteExtensions\ApplicationInsightsAgent` ' da bulunur ve her kararlı sürümle otomatik olarak güncelleştirilir. Aşağıda izlemeyi etkinleştirmek için aracı tabanlı yönergeleri izlerseniz, devre dışı bırakılmış uzantıyı sizin için otomatik olarak kaldırır.
 
 ## <a name="enable-application-insights"></a>Application Insights'ı etkinleştirme
 
-Azure App Services, barındırılan uygulamalar için uygulama izlemeyi etkinleştirmek için iki yolu vardır:
+Azure App Services 'da barındırılan uygulamalar için uygulama izlemeyi etkinleştirmenin iki yolu vardır:
 
-* **Aracı tabanlı uygulama izleme** (ApplicationInsightsAgent).  
-    * Bu yöntem etkinleştirmek en kolay olan ve Gelişmiş Yapılandırma gerekmiyor. Bu genellikle "çalışma zamanı" izleme olarak adlandırılır. Azure uygulama hizmetleri için Biz bu düzeyde izlemeyi etkinleştirme en azından önerilir ve ardından daha gelişmiş el ile izleme izleme gerekli olup olmadığını değerlendirebilirsiniz, belirli senaryo temel alınarak.
+* **Aracı tabanlı uygulama izleme** (applicationınsiizsagent).  
+    * Bu yöntem etkinleştirilmesi en kolayıdır ve gelişmiş yapılandırma gerekmez. Genellikle "çalışma zamanı" izleme olarak adlandırılır. Azure Uygulama Hizmetleri için, bu izleme düzeyini en az etkinleştirme ve ardından belirli senaryonuza bağlı olarak, el ile izleme yoluyla daha gelişmiş izleme gerekip gerekmediğini değerlendirebilirsiniz.
 
-* **El ile kod aracılığıyla uygulama izleme** Application Insights SDK'sını yükleyerek.
+* Application Insights SDK 'Yı yükleyerek **uygulamayı kodla el ile işaretleme** .
 
-    * Bu yaklaşım çok daha fazla özelleştirilebilir, ancak gerektirir [Application Insights SDK'sı NuGet paketleri bağımlılık ekleme](https://docs.microsoft.com/azure/azure-monitor/app/asp-net). Bu yöntem aynı zamanda anlamına gelir paketlerin en son sürüme güncelleştirmelerini kendiniz yönetmeniz gerekiyorsa.
+    * Bu yaklaşım çok daha özelleştirilebilir, ancak [APPLICATION INSIGHTS SDK NuGet paketlerine bağımlılık eklemeyi](https://docs.microsoft.com/azure/azure-monitor/app/asp-net)gerektirir. Bu yöntem, ayrıca paketlerin en son sürümüne yönelik güncelleştirmeleri yönetmeniz anlamına gelir.
 
-    * İzleme olayları/bağımlılıklara aracı tabanlı izleme varsayılan olarak yakalanan değil özel API çağrısı yapmanız gerekirse bu yöntemi kullanmak gerekir. Kullanıma [API'si için özel olaylar ve ölçümler makale](https://docs.microsoft.com/azure/azure-monitor/app/api-custom-events-metrics) daha fazla bilgi için.
-
-> [!NOTE]
-> Aracı tabanlı izleme hem el ile SDK Araçları tabanlıysa yalnızca el ile izleme ayarları kullanılacaktır algılandı. Bu yinelenen veri önlemek içindir gönderen. Bu kullanıma hakkında daha fazla bilgi edinmek için [sorun giderme bölümüne](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#troubleshooting) aşağıda.
-
-## <a name="enable-agent-based-monitoring-net"></a>Aracı tabanlı izleme .NET etkinleştir
+    * Aracı tabanlı izleme ile varsayılan olarak yakalanmayan olayları/bağımlılıkları izlemek için özel API çağrıları yapmanız gerekiyorsa, bu yöntemi kullanmanız gerekir. Daha fazla bilgi edinmek için [özel olaylar ve ölçümler makalesine yönelik API](https://docs.microsoft.com/azure/azure-monitor/app/api-custom-events-metrics) 'ye göz atın.
 
 > [!NOTE]
-> APPINSIGHTS_JAVASCRIPT_ENABLED ve urlCompression bileşimi desteklenmiyor. Daha fazla bilgi için bkz: açıklamada [sorun giderme bölümüne](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#troubleshooting).
+> Hem aracı tabanlı izleme hem de el ile SDK tabanlı izleme algılanırsa, yalnızca el ile izleme ayarları kabul edilir. Bu, yinelenen verilerin gönderilmesini önlemektir. Bu konuda daha fazla bilgi edinmek için aşağıdaki [sorun giderme bölümüne](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#troubleshooting) bakın.
+
+## <a name="enable-agent-based-monitoring-for-net-applications"></a>.NET uygulamaları için aracı tabanlı izlemeyi etkinleştir
+
+> [!NOTE]
+> APPINSIGHTS_JAVASCRIPT_ENABLED ve urlCompression birleşimi desteklenmez. Daha fazla bilgi için bkz. [sorun giderme bölümündeki](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#troubleshooting)açıklama.
 
 
-1. **Application Insights'ı seçin** uygulama hizmetiniz için Azure Denetim Masası'nda.
+1. App Service için Azure Denetim Masası 'nda Application Insights ' yi **seçin** .
 
-    ![Ayarlarda, Application ınsights'ı seçin.](./media/azure-web-apps/settings-app-insights-01.png)
+    ![Ayarlar altında Application Insights ' ı seçin.](./media/azure-web-apps/settings-app-insights-01.png)
 
-   * Yeni bir kaynak oluşturmak bu uygulama için bir Application Insights kaynağı zaten ayarlamadıysanız'ı seçin. 
+   * Bu uygulama için zaten bir Application Insights kaynağı ayarlamadığınız takdirde yeni bir kaynak oluşturmayı seçin. 
 
      > [!NOTE]
-     > Tıkladığınızda **Tamam** için istenir yeni kaynak oluşturmak için **izleme ayarlarını uygula**. Seçme **devam** app Service'e kadar olacak de yapmak, yeni Application Insights kaynağınıza bağlayacaksınız **app service'inizi yeniden tetikleyin**. 
+     > Yeni kaynağı oluşturmak için **Tamam** ' a tıkladığınızda, **izleme ayarlarını uygulamanız**istenir. **Devam** ' ı seçerseniz, yeni Application Insights kaynağınızı App Service 'e bağlayacaksınız, bunun yapılması da **App Service 'in yeniden başlatılmasını tetikler**. 
 
      ![Web uygulamanızı izleme](./media/azure-web-apps/create-resource-01.png)
 
-2. Hangi kaynağı kullanacağını belirlemesinde belirttikten sonra her platformun uygulamanız için veri toplamak için application ınsights'ı nasıl istediğinizi seçebilirsiniz. ASP.NET uygulamasını izleme üzerinde varsayılan olarak koleksiyon iki farklı düzeylerine sahip.
+2. Hangi kaynağı kullanacağınızı belirttikten sonra, Application Insights 'ın uygulamanız için her platform için veri toplamasını nasıl istediğinizi seçebilirsiniz. ASP.NET uygulama izleme iki farklı koleksiyon düzeyiyle varsayılan olarak yapılır.
 
     ![Platform başına seçenekleri belirleyin](./media/azure-web-apps/choose-options-new.png)
 
-   * .NET **temel koleksiyonu** düzeyini temel Tek Örnekli APM özellikleri sunar.
+   * .NET **temel koleksiyon** düzeyi, temel tek örnekli APM özellikleri sunar.
 
-   * .NET **koleksiyon önerilen** düzeyi:
+   * .NET tarafından **Önerilen koleksiyon** düzeyi:
        * CPU, bellek ve g/ç kullanım eğilimlerini ekler.
-       * Mikro hizmetler, istek/bağımlılık sınırlarında ilişkilendirir.
-       * Kullanım eğilimlerini toplar ve işlemler için kullanılabilirlik sonuçlarından bağıntı sağlar.
-       * Ana bilgisayar işlemi tarafından işlenmemiş özel durumlar toplar.
-       * Örnekleme kullanıldığında yük altında APM ölçümleri doğruluğu artırır.
+       * Mikro hizmetleri istek/bağımlılık sınırları arasında ilişkilendirir.
+       * Kullanım eğilimlerini toplar ve kullanılabilirlik sonuçlarından işlemlere bağıntı sağlar.
+       * Ana bilgisayar işlemi tarafından işlenmeyen özel durumları toplar.
+       * Örnekleme kullanıldığında yük altında APM ölçüm doğruluğunu geliştirir.
 
-3. Daha önce applicationınsights.config dosyası denetleyebilirsiniz örnekleme gibi ayarları yapılandırmak için artık aynı bu ayarları uygulama ayarlarından karşılık gelen bir önek ile etkileşim kurabilirsiniz. 
+3. Daha önce ApplicationInsights. config dosyası aracılığıyla denetleyebileceği örnekleme gibi ayarları yapılandırmak için artık ilgili bir ön ek ile uygulama ayarları aracılığıyla aynı ayarlarla etkileşime geçebilirsiniz. 
 
-    * Örneğin, ilk örnekleme yüzdesini değiştirmek için bir uygulama ayarı oluşturabilirsiniz: `MicrosoftAppInsights_AdaptiveSamplingTelemetryProcessor_InitialSamplingPercentage` değerini `100`.
+    * Örneğin, ilk örnekleme yüzdesini değiştirmek için, bir uygulama ayarı oluşturabilirsiniz: `MicrosoftAppInsights_AdaptiveSamplingTelemetryProcessor_InitialSamplingPercentage` ve `100` değeri.
 
-    * Desteklenen Uyarlamalı örnekleme telemetri işlemci ayarları listesi için başvurabilirsiniz [kod](https://github.com/Microsoft/ApplicationInsights-dotnet/blob/master/src/ServerTelemetryChannel/AdaptiveSamplingTelemetryProcessor.cs) ve [ilişkili belgeler](https://docs.microsoft.com/azure/azure-monitor/app/sampling).
+    * Desteklenen Uyarlamalı örnekleme telemetri işlemcisi ayarlarının listesi için [koda](https://github.com/Microsoft/ApplicationInsights-dotnet/blob/master/src/ServerTelemetryChannel/AdaptiveSamplingTelemetryProcessor.cs) ve [ilişkili belgelere](https://docs.microsoft.com/azure/azure-monitor/app/sampling)başvurabilirsiniz.
 
-## <a name="enable-agent-based-monitoring-net-core"></a>Aracı tabanlı izleme .NET Core etkinleştir
+## <a name="enable-agent-based-monitoring-for-net-core-applications"></a>.NET Core uygulamaları için aracı tabanlı izlemeyi etkinleştir
 
-.NET Core'nın şu sürümleri desteklenir: ASP.NET Core 2.0, ASP.NET Core 2.1, ASP.NET Core 2.2
+Aşağıdaki .NET Core sürümleri desteklenir: ASP.NET Core 2,0, ASP.NET Core 2,1, ASP.NET Core 2,2
 
-.NET Core, kendi başına dağıtım ve ASP.NET Core 3.0 tam çerçeve hedefleme şu anda **desteklenmiyor** Aracı/Uzantısı tabanlı izleme. ([El ile izleme](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) kod önceki senaryoların tümünde çalışır.)
+.NET Core, kendinden bağımsız dağıtım ve ASP.NET Core 3,0 ' den tam Framework 'ü hedeflemek aracı/uzantısı tabanlı izleme ile Şu anda **desteklenmemektedir** . (Kod aracılığıyla[el ile izleme](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) , önceki senaryolardan tümünde çalışır.)
 
-1. **Application Insights'ı seçin** uygulama hizmetiniz için Azure Denetim Masası'nda.
+1. App Service için Azure Denetim Masası 'nda Application Insights ' yi **seçin** .
 
-    ![Ayarlarda, Application ınsights'ı seçin.](./media/azure-web-apps/settings-app-insights-01.png)
+    ![Ayarlar altında Application Insights ' ı seçin.](./media/azure-web-apps/settings-app-insights-01.png)
 
-   * Yeni bir kaynak oluşturmak bu uygulama için bir Application Insights kaynağı zaten ayarlamadıysanız'ı seçin. 
+   * Bu uygulama için zaten bir Application Insights kaynağı ayarlamadığınız takdirde yeni bir kaynak oluşturmayı seçin. 
 
      > [!NOTE]
-     > Tıkladığınızda **Tamam** için istenir yeni kaynak oluşturmak için **izleme ayarlarını uygula**. Seçme **devam** app Service'e kadar olacak de yapmak, yeni Application Insights kaynağınıza bağlayacaksınız **app service'inizi yeniden tetikleyin**. 
+     > Yeni kaynağı oluşturmak için **Tamam** ' a tıkladığınızda, **izleme ayarlarını uygulamanız**istenir. **Devam** ' ı seçerseniz, yeni Application Insights kaynağınızı App Service 'e bağlayacaksınız, bunun yapılması da **App Service 'in yeniden başlatılmasını tetikler**. 
 
      ![Web uygulamanızı izleme](./media/azure-web-apps/create-resource-01.png)
 
-2. Hangi kaynağı kullanacağını belirlemesinde belirttikten sonra her platformun uygulamanız için veri toplamak için Application ınsights'ı nasıl istediğinizi seçebilirsiniz. .NET core sunar **koleksiyon önerilen** veya **devre dışı bırakılmış** .NET Core 2.0 ve 2.1 2.2 için.
+2. Hangi kaynağı kullanacağınızı belirttikten sonra, uygulamanız için her platform için verileri nasıl toplayacağınızı Application Insights istediğinizi seçebilirsiniz. .NET Core, .NET Core 2,0, 2,1 ve 2,2 için **Önerilen koleksiyon** veya **devre dışı** olanakları sunmaktadır.
 
     ![Platform başına seçenekleri belirleyin](./media/azure-web-apps/choose-options-new-net-core.png)
 
-## <a name="enable-client-side-monitoring-net"></a>İstemci-tarafı izleme .NET etkinleştir
+## <a name="enable-client-side-monitoring-for-net-applications"></a>.NET uygulamaları için istemci tarafı izlemeyi etkinleştir
 
-Katılımı için ASP.NET istemci-tarafı izleme. İstemci-tarafı izlemeyi etkinleştirmek için:
+İstemci tarafı izleme, ASP.NET için kabul edilir. İstemci tarafı izlemeyi etkinleştirmek için:
 
-* Seçin **ayarları** > ** ** *** Uygulama ayarları
-   * Uygulama ayarları, yeni bir ekleme **uygulama ayarı adı** ve **değer**:
+* **Ayarları** seçin > * * * * uygulama ayarları * * * *
+   * Uygulama ayarları ' nın altında yeni bir **uygulama ayarı adı** ve **değeri**ekleyin:
 
-     Adı: `APPINSIGHTS_JAVASCRIPT_ENABLED`
+     Ad: `APPINSIGHTS_JAVASCRIPT_ENABLED`
 
      Değer:`true`
 
    * Ayarları **Kaydedin** ve uygulamanızı **Yeniden başlatın**.
 
-![Uygulamasının ekran görüntüsü ayarları kullanıcı Arabirimi](./media/azure-web-apps/appinsights-javascript-enabled.png)
+![Uygulama ayarları Kullanıcı arabiriminin ekran görüntüsü](./media/azure-web-apps/appinsights-javascript-enabled.png)
 
-İçin istemci tarafı uygulama ayarlarından ilişkili anahtar değer çifti kaldırabilir ya da izleme devre dışı bırakın veya değerini false olarak ayarlayın.
+İstemci tarafı izlemeyi devre dışı bırakmak için, uygulama ayarlarından ilişkili anahtar değer çiftini kaldırın ya da değeri false olarak ayarlayın.
 
-## <a name="enable-client-side-monitoring-net-core"></a>İstemci-tarafı izleme .NET Core etkinleştir
+## <a name="enable-client-side-monitoring-for-net-core-applications"></a>.NET Core uygulamaları için istemci tarafı izlemeyi etkinleştir
 
-İstemci-tarafı izleme **varsayılan olarak etkin** ile .NET Core uygulamaları için **koleksiyon önerilen**uygulama ayarı 'APPINSIGHTS_JAVASCRIPT_ENABLED' bulunup bulunmadığını bakılmaksızın.
+İstemci tarafı izleme, ' APPINSIGHTS_JAVASCRIPT_ENABLED ' uygulama ayarının mevcut olup olmamasına bakılmaksızın **Önerilen koleksiyonla**birlikte .NET Core uygulamaları için **Varsayılan olarak etkindir** .
 
-Herhangi bir nedenden dolayı istemci-tarafı izlemeyi devre dışı bırakmak istiyorsanız:
+Bazı nedenlerle istemci tarafı izlemeyi devre dışı bırakmak istiyorsanız:
 
-* Seçin **ayarları** > **uygulama ayarları**
-   * Uygulama ayarları, yeni bir ekleme **uygulama ayarı adı** ve **değer**:
+* **Uygulama ayarları**  >  **ayarları** seçin
+   * Uygulama ayarları ' nın altında yeni bir **uygulama ayarı adı** ve **değeri**ekleyin:
 
-     Adı: `APPINSIGHTS_JAVASCRIPT_ENABLED`
+     ad: `APPINSIGHTS_JAVASCRIPT_ENABLED`
 
      Değer:`false`
 
    * Ayarları **Kaydedin** ve uygulamanızı **Yeniden başlatın**.
 
-![Uygulamasının ekran görüntüsü ayarları kullanıcı Arabirimi](./media/azure-web-apps/appinsights-javascript-disabled.png)
+![Uygulama ayarları Kullanıcı arabiriminin ekran görüntüsü](./media/azure-web-apps/appinsights-javascript-disabled.png)
 
 ## <a name="automate-monitoring"></a>İzlemeyi otomatikleştirin
 
-Application Insights ile telemetri koleksiyonunu etkinleştirmek için yalnızca uygulama ayarlarını ayarlanması gerekir:
+Application Insights ile telemetri toplamayı etkinleştirmek için, yalnızca uygulama ayarlarının ayarlanması gerekir:
 
-   ![App Service uygulama ayarları kullanılabilir Application Insights ayarlardan](./media/azure-web-apps/application-settings.png)
+   ![Kullanılabilir Application Insights ayarları ile uygulama ayarlarını App Service](./media/azure-web-apps/application-settings.png)
 
 ### <a name="application-settings-definitions"></a>Uygulama ayarları tanımları
 
 |Uygulama ayarı adı |  Tanım | Değer |
 |-----------------|:------------|-------------:|
-|ApplicationInsightsAgent_EXTENSION_VERSION | Ana uzantısı, çalışma zamanını izleme denetler. | `~2` |
-|XDT_MicrosoftApplicationInsights_Mode |  Varsayılan modu yalnızca, temel özelliklerini en iyi performans sağlamak için etkinleştirilir. | `default` veya `recommended`. |
-|InstrumentationEngine_EXTENSION_VERSION | Göndermediğini denetler ikili yeniden yazma motoru `InstrumentationEngine` alınır. Bu ayar, performans şifrelemelerini ve soğuk başlangıç/başlangıç süresini etkileyecek. | `~1` |
-|XDT_MicrosoftApplicationInsights_BaseExtensions | Metin, SQL ve Azure tablo, denetimleri, bağımlılık çağrılarını yakalanan. Performans Uyarısı: Bu ayar `InstrumentationEngine`. | `~1` |
+|ApplicationInsightsAgent_EXTENSION_VERSION | Çalışma zamanı izlemeyi denetleyen ana uzantı. | `~2` |
+|XDT_MicrosoftApplicationInsights_Mode |  Yalnızca varsayılan modda, en iyi performansı sağlamak için temel özellikler etkindir. | `default` veya `recommended`. |
+|InstrumentationEngine_EXTENSION_VERSION | İkili yeniden yazma altyapısının `InstrumentationEngine` açılıp açılmeyeceğini denetler. Bu ayarın performans etkileri vardır ve soğuk başlatma/başlatma süresini etkiler. | `~1` |
+|XDT_MicrosoftApplicationInsights_BaseExtensions | SQL & Azure Tablo metninin bağımlılık çağrılarında birlikte yakalanıp yakalanmayacağını denetler. Performans uyarısı: Bu ayar `InstrumentationEngine` gerektirir. | `~1` |
 
-### <a name="app-service-application-settings-with-azure-resource-manager"></a>App Service uygulama ayarları ile Azure Resource Manager
+### <a name="app-service-application-settings-with-azure-resource-manager"></a>Azure Resource Manager ile uygulama ayarlarını App Service
 
-Uygulama hizmetleri için uygulama ayarları yönetilen ve yapılandırılmış [Azure Resource Manager şablonları](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-authoring-templates). Bu yöntem, yeni App Service kaynaklarının mevcut kaynakların ayarlarını değiştirmek için veya Azure Resource Manager otomasyon ile dağıtım yaparken kullanılabilir.
+Uygulama Hizmetleri için uygulama ayarları, [Azure Resource Manager şablonlarıyla](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-authoring-templates)yönetilebilir ve yapılandırılabilir. Bu yöntem, Azure Resource Manager otomasyonu ile yeni App Service kaynakları dağıtıldığında veya mevcut kaynakların ayarlarını değiştirirken kullanılabilir.
 
-Bir app Service uygulama ayarları JSON temel yapısını aşağıda verilmiştir:
+App Service için uygulama ayarları JSON ' un temel yapısı aşağıda verilmiştir:
 
 ```JSON
       "resources": [
@@ -169,24 +167,23 @@ Bir app Service uygulama ayarları JSON temel yapısını aşağıda verilmişti
           }
         }
       ]
-
 ```
 
-Application Insights için yapılandırılan uygulama ayarları ile bir Azure Resource Manager şablonu örneği için bu [şablon](https://github.com/Andrew-MSFT/BasicImageGallery) özellikle başlangıç bölüm yarayabilir [satır 238](https://github.com/Andrew-MSFT/BasicImageGallery/blob/c55ada54519e13ce2559823c16ca4f97ddc5c7a4/CoreImageGallery/Deploy/CoreImageGalleryARM/azuredeploy.json#L238).
+Application Insights için yapılandırılmış uygulama ayarlarına sahip Azure Resource Manager bir şablon örneği için, bu [şablon](https://github.com/Andrew-MSFT/BasicImageGallery) faydalı olabilir, özellikle de [238. satırdan](https://github.com/Andrew-MSFT/BasicImageGallery/blob/c55ada54519e13ce2559823c16ca4f97ddc5c7a4/CoreImageGallery/Deploy/CoreImageGalleryARM/azuredeploy.json#L238)başlayan bir bölümdür.
 
-### <a name="automate-the-creation-of-an-application-insights-resource-and-link-to-your-newly-created-app-service"></a>Bir Application Insights kaynağı ve yeni oluşturulan uygulama hizmetiniz için bağlantı oluşturulmasını otomatikleştirin.
+### <a name="automate-the-creation-of-an-application-insights-resource-and-link-to-your-newly-created-app-service"></a>Bir Application Insights kaynağı oluşturmayı otomatikleştirin ve yeni oluşturduğunuz App Service bağlayın.
 
-Yapılandırılan tüm varsayılan Application Insights ayarları ile bir Azure Resource Manager şablonu oluşturmak için işlem alacağı Application Insights ile yeni bir Web uygulaması oluşturmak için kullanmaya başlayın.
+Yapılandırılmış tüm varsayılan Application Insights ayarlarla Azure Resource Manager şablonu oluşturmak için, Application Insights etkin yeni bir Web uygulaması oluşturacağım gibi işlemi başlatın.
 
-Seçin **Otomasyon seçenekleri**
+**Otomasyon seçeneklerini** belirleyin
 
-   ![App Service web uygulaması oluşturma menüsü](./media/azure-web-apps/create-web-app.png)
+   ![Web uygulaması oluşturma menüsünü App Service](./media/azure-web-apps/create-web-app.png)
 
-Bu seçenek, yapılandırılan tüm gerekli ayarları ile en son Azure Resource Manager şablonu oluşturur.
+Bu seçenek, tüm gerekli ayarlarla yapılandırılmış en son Azure Resource Manager şablonunu oluşturur.
 
-  ![App Service web uygulaması şablonu](./media/azure-web-apps/arm-template.png)
+  ![App Service Web uygulaması şablonu](./media/azure-web-apps/arm-template.png)
 
-Bir örneği aşağıda verilmiştir tüm örneklerinin yerine `AppMonitoredSite` ile site adı:
+Aşağıda, `AppMonitoredSite` ' ın tüm örneklerinin site adınızla yerine geçecek bir örnek verilmiştir:
 
 ```json
 {
@@ -280,11 +277,11 @@ Bir örneği aşağıda verilmiştir tüm örneklerinin yerine `AppMonitoredSite
 ```
 
 > [!NOTE]
-> Şablon "varsayılan" modunda uygulama ayarları oluşturur. Tercih ettiğiniz hangi özelliklerini etkinleştirmek için şablonu değiştirebilirsiniz ancak bu performans için iyileştirilmiş, modudur.
+> Şablon, uygulama ayarlarını "varsayılan" modunda oluşturacaktır. Bu mod performansı en iyi duruma getirilmiştir, ancak istediğiniz özellikleri etkinleştirmek için şablonu değiştirebilirsiniz.
 
 ### <a name="enabling-through-powershell"></a>PowerShell aracılığıyla etkinleştirme
 
-Uygulaması PowerShell aracılığıyla izlemeyi etkinleştirmek için yalnızca temel uygulama ayarlarının değiştirilmesi gerekir. "AppMonitoredSite" kaynak grubunda "AppMonitoredRG" adlı bir Web sitesi için uygulama izleme sağlayan bir örnek aşağıda verilmiştir ve için "012345678-abcd-ef01-2345-6789abcd" izleme anahtarını gönderilecek verileri yapılandırır.
+Uygulama izlemeyi PowerShell aracılığıyla etkinleştirmek için, yalnızca temeldeki uygulama ayarlarının değiştirilmesi gerekir. Aşağıda, "Appmonitortoredrg" kaynak grubunda "Appmonitortoredsite" adlı bir Web sitesi için uygulama izlemeye olanak tanıyan bir örnek verilmiştir ve "012345678-abcd-EF01-2345-6789abcd" izleme anahtarına gönderilecek verileri yapılandırır.
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
@@ -297,76 +294,79 @@ $newAppSettings["ApplicationInsightsAgent_EXTENSION_VERSION"] = "~2"; # enable t
 $app = Set-AzWebApp -AppSettings $newAppSettings -ResourceGroupName $app.ResourceGroup -Name $app.Name -ErrorAction Stop
 ```
 
-## <a name="upgrade-monitoring-extensionagent"></a>İzleme uzantısı/aracıyı yükseltme
+## <a name="upgrade-monitoring-extensionagent"></a>Yükseltme izleme uzantısı/Aracısı
 
-### <a name="upgrading-from-versions-289-and-up"></a>2\.8.9 sürümlerinden ve yedekleme yükseltme
+### <a name="upgrading-from-versions-289-and-up"></a>2\.8.9 ve up sürümlerinden yükseltme
 
-2\.8.9 sürümünden yükseltirken, herhangi bir ek eylem otomatik olarak gerçekleşir. Yeni izleme BITS arka planda hedef app Service'e dağıtılır ve uygulama yeniden başlatma sırasında bunlar seçilir.
+2\.8.9 sürümünden yükseltme, ek eylemler olmadan otomatik olarak gerçekleşir. Yeni izleme bitleri, hedef App Service 'e arka planda teslim edilir ve uygulama yeniden başlatıldığında alınır.
 
-Uzantı hangi sürümünü denetlemek için şu adresi ziyaret edin çalıştırıyorsanız `http://yoursitename.scm.azurewebsites.net/ApplicationInsights`
+Çalıştırdığınız uzantının hangi sürümünün olduğunu denetlemek için `http://yoursitename.scm.azurewebsites.net/ApplicationInsights`
 
-![Url yolu ekran görüntüsü http://yoursitename.scm.azurewebsites.net/ApplicationInsights](./media/azure-web-apps/extension-version.png)
+![URL yolu http://yoursitename.scm.azurewebsites.net/ApplicationInsights ekran görüntüsü](./media/azure-web-apps/extension-version.png)
 
-### <a name="upgrade-from-versions-100---265"></a>Sürümlerden 1.0.0 - 2.6.5 yükseltme
+### <a name="upgrade-from-versions-100---265"></a>1\.0.0-2.6.5 sürümlerinden yükseltme
 
-2\.8.9 sürümünden başlayarak, önceden yüklenmiş site uzantısı kullanılır. Önceki bir sürümü varsa, iki yoldan biriyle güncelleştirebilirsiniz:
+Version 2.8.9 sürümünden itibaren önceden yüklenmiş site uzantısı kullanılır. Önceki bir sürümdeyse, iki şekilde güncelleştirebilirsiniz:
 
-* [Portal üzerinden etkinleştirerek yükseltme](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#enable-application-insights). (Kullanıcı Arabirimi yüklü Azure App Service için Application Insights uzantısını olsa bile yalnızca gösterir **etkinleştirme** düğmesi. Arka planda, eski özel site uzantısı kaldırılacak.)
+* [Portal üzerinden etkinleştirerek yükseltme](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#enable-application-insights)yapın. (Azure App Service Application Insights uzantısı yüklü olsa da, UI yalnızca **Etkinleştir** düğmesini gösterir. Arka planda, eski özel site uzantısı kaldırılır.)
 
-* [PowerShell aracılığıyla yükseltme](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#enabling-through-powershell):
+* [PowerShell aracılığıyla Yükselt](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#enabling-through-powershell):
 
-    1. Önceden yüklenmiş site uzantısı ApplicationInsightsAgent etkinleştirmek için uygulama ayarlarını belirleyin. Bkz: [powershell aracılığıyla etkinleştirme](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#enabling-through-powershell).
-    2. Azure App Service için Application Insights uzantısını adlı özel site uzantısı el ile kaldırın.
+    1. Uygulama ayarlarını, önceden yüklenmiş site uzantısını Applicationınsimalsagent olacak şekilde ayarlayın. Bkz. [PowerShell aracılığıyla etkinleştirme](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#enabling-through-powershell).
+    2. Azure App Service için Application Insights uzantısı adlı özel site uzantısını el ile kaldırın.
 
-2\.5.1 önceki bir sürümünden yükseltme yapıldığında ApplicationInsigths DLL'leri uygulama bin klasöründen kaldırılır denetleyin [sorun giderme adımları görmek](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#troubleshooting).
+Yükseltme, 2.5.1 ' den önceki bir sürümden yapılamıyorsa, uygulama bin klasöründen Applicationınsigyoze dll 'lerinin kaldırılıp kaldırılmadığını denetleyin. [sorun giderme adımları bölümüne bakın](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#troubleshooting).
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-.NET için Uzantı/Aracı tabanlı izleme için adım adım sorun giderme kılavuzumuza aşağıda verilmiştir ve .NET Core tabanlı Azure App Services üzerinde çalışan uygulamalar.
+Azure Uygulama Hizmetleri 'nde çalışan .NET ve .NET Core tabanlı uygulamalar için uzantı/aracı tabanlı izlemeye yönelik adım adım sorun giderme kılavuzumuz aşağıda verilmiştir.
 
 > [!NOTE]
-> Java ve Node.js uygulamaları el ile Temel SDK Araçları yalnızca Azure App Services'ta desteklenir ve bu nedenle aşağıdaki adımları bu senaryolar için geçerli değildir.
+> Java ve Node. js uygulamaları yalnızca el ile SDK tabanlı araçlar aracılığıyla Azure Uygulama hizmetlerinde desteklenir ve bu nedenle aşağıdaki adımlar bu senaryolara uygulanmaz.
 
-1. Uygulama aracılığıyla izlenen onay `ApplicationInsightsAgent`.
-    * Bu maddeyi `ApplicationInsightsAgent_EXTENSION_VERSION` uygulama ayarı "~ 2" değerine ayarlanır.
-2. Uygulamanın izlenmesi için gereksinimleri karşıladığından emin olun.
-    * Göz atın `https://yoursitename.scm.azurewebsites.net/ApplicationInsights`
+> [!NOTE]
+> ASP.NET Core 3,0 uygulamaları desteklenmez. Lütfen ASP.NET Core 3,0 uygulamaları için kod aracılığıyla [el ile](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) izleme uygulayın.
 
-    ![Ekran görüntüsü https://yoursitename.scm.azurewebsites/applicationinsights sonuçları sayfası](./media/azure-web-apps/app-insights-sdk-status.png)
+1. Uygulamanın `ApplicationInsightsAgent` ile izlenip izlenmediğini denetleyin.
+    * @No__t_0 uygulama ayarının "~ 2" değerine ayarlandığını denetleyin.
+2. Uygulamanın izlenecek gereksinimleri karşıladığından emin olun.
+    * @No__t_0 gidin
 
-    * Onaylayın `Application Insights Extension Status` olduğu `Pre-Installed Site Extension, version 2.8.12.1527, is running.`
-        * Çalışmıyorsa, izleyin [yönergeleri izleme Application ınsights'ı etkinleştir](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#enable-application-insights)
+    ![@No__t_0 sonuçları sayfasının ekran görüntüsü](./media/azure-web-apps/app-insights-sdk-status.png)
 
-    * Durum kaynak var olduğunu ve benzer olduğunu onaylayın: `Status source D:\home\LogFiles\ApplicationInsights\status\status_RD0003FF0317B6_4248_1.json`
-        * Benzer bir değer yoksa, bu uygulama şu anda çalışmıyor veya desteklenmeyen anlamına gelir. Uygulamasının çalıştığından emin olmak için el ile çalışma zamanı bilgilerin kullanılabilir olmasını sağlayan uygulama URL'si/uygulama uç noktaları ziyaret edin.
+    * @No__t_0 `Pre-Installed Site Extension, version 2.8.12.1527, is running.` olduğunu onaylayın
+        * Çalışmıyorsa, [etkinleştirme Application Insights izleme yönergelerini](https://docs.microsoft.com/azure/azure-monitor/app/azure-web-apps#enable-application-insights) izleyin
 
-    * Onaylayın `IKeyExists` olduğu `true`
-        * False ise,'ekle ' appınsıghts_ınstrumentatıonkey uygulama ayarlarınıza, ikey GUID'e sahip.
+    * Durum kaynağının var olduğunu ve şu şekilde göründüğünü onaylayın: `Status source D:\home\LogFiles\ApplicationInsights\status\status_RD0003FF0317B6_4248_1.json`
+        * Benzer bir değer yoksa, uygulamanın Şu anda çalışmadığı veya desteklenmediği anlamına gelir. Uygulamanın çalıştığından emin olmak için, uygulama URL 'si/uygulama uç noktalarını el ile ziyaret etmeyi deneyin, bu, çalışma zamanı bilgilerinin kullanılabilir hale gelmesini sağlar.
 
-    * Onaylamak için girdi yok `AppAlreadyInstrumented`, `AppContainsDiagnosticSourceAssembly`, ve `AppContainsAspNetTelemetryCorrelationAssembly`.
-        * Bu girişlerin varsa, aşağıdaki paketleri uygulamanızdan Kaldır: `Microsoft.ApplicationInsights`, `System.Diagnostics.DiagnosticSource`, ve `Microsoft.AspNet.TelemetryCorrelation`.
+    * @No__t_0 `true` olduğunu onaylayın
+        * Yanlış ise, uygulama ayarlarınıza ' APPINSIGHTS_INSTRUMENTATIONKEY ' ekleyin.
 
-Aşağıdaki tabloda bu değerlerin anlamları daha ayrıntılı bir açıklama sağlar, kendi temel neden olur ve düzeltmeleri önerilir:
+    * @No__t_0, `AppContainsDiagnosticSourceAssembly` ve `AppContainsAspNetTelemetryCorrelationAssembly` için hiçbir giriş olmadığını doğrulayın.
+        * Bu girdilerden herhangi biri mevcutsa, şu paketleri uygulamanızdan kaldırın: `Microsoft.ApplicationInsights`, `System.Diagnostics.DiagnosticSource` ve `Microsoft.AspNet.TelemetryCorrelation`.
 
-|Sorun değeri|Açıklama|Düzelt
+Aşağıdaki tabloda, bu değerlerin ne anlama geldiğini, temeldeki nedenleri ve önerilen düzeltmeleri verilmiştir:
+
+|Sorun değeri|Açıklama|Onar
 |---- |----|---|
-| `AppAlreadyInstrumented:true` | Bu değer, uzantı SDK'ın bazı yönlerini uygulamada zaten var ve geri alma, algılandığını gösterir. Bir başvuru nedeniyle olabilir `System.Diagnostics.DiagnosticSource`, `Microsoft.AspNet.TelemetryCorrelation`, veya `Microsoft.ApplicationInsights`  | Başvuruları kaldırın. Bu başvurular bazıları varsayılan olarak belirli Visual Studio şablonlardan eklenir ve Visual Studio'nun eski sürümlerini başvuruları ekleyebilir `Microsoft.ApplicationInsights`.
-|`AppAlreadyInstrumented:true` | Uygulamanın .NET Core 2.1 veya 2.2 hedefleme ve başvurduğu [Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) meta-package, Application Insights'ta duruma getirir ve uzantısı geri alma. | Müşteriler üzerinde .NET Core 2.1,2.2 [önerilen](https://github.com/aspnet/Announcements/issues/287) Microsoft.AspNetCore.App meta-package yerine kullanılacak.|
-|`AppAlreadyInstrumented:true` | Bu değer aynı zamanda önceki bir dağıtım uygulama klasöründen yukarıdaki DLL'leri varlığını neden olabilir. | Bu DLL'leri kaldırıldığından emin olmak için uygulama klasörü temizleyin.|
-|`AppContainsAspNetTelemetryCorrelationAssembly: true` | Bu değer uzantısı başvuruları algılandığını gösterir `Microsoft.AspNet.TelemetryCorrelation` uygulamasının ve geri alma. | Başvuruyu kaldırın.
-|`AppContainsDiagnosticSourceAssembly**:true`|Bu değer uzantısı başvuruları algılandığını gösterir `System.Diagnostics.DiagnosticSource` uygulamasının ve geri alma.| Başvuruyu kaldırın.
-|`IKeyExists:false`|İzleme anahtarı uygulama ayarı mevcut değil, bu değeri gösterir `APPINSIGHTS_INSTRUMENTATIONKEY`. Olası nedenler: Değerleri, yanlışlıkla kaldırılmış olabilir, Otomasyon betiği, vb. değerleri ayarlamak unuttum. | App Service uygulama ayarlarında ayarı bulunduğundan emin olun.
+| `AppAlreadyInstrumented:true` | Bu değer, uzantının bir SDK 'nın bazı yönlerinin uygulamada zaten bulunduğunu algıladı ve geri dönecek. Bunun nedeni, `System.Diagnostics.DiagnosticSource`, `Microsoft.AspNet.TelemetryCorrelation` veya `Microsoft.ApplicationInsights` ' e bir başvuru olabilir  | Başvuruları kaldırın. Bu başvurulardan bazıları varsayılan olarak belirli Visual Studio şablonlarından eklenmiştir ve Visual Studio 'nun eski sürümleri `Microsoft.ApplicationInsights` ' a başvuruları ekleyebilir.
+|`AppAlreadyInstrumented:true` | Uygulama .NET Core 2,1 veya 2,2 ' i hedefliyorsanız ve [Microsoft. AspNetCore. All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) meta Package öğesine başvuruyorsa, Application Insights ve uzantı geri açılır. | .NET Core 2.1, 2.2 ' deki müşterilerin yerine Microsoft. AspNetCore. app meta paketini kullanması [önerilir](https://github.com/aspnet/Announcements/issues/287) .|
+|`AppAlreadyInstrumented:true` | Bu değere, önceki bir dağıtımdan uygulama klasöründeki yukarıdaki dll 'lerin varlığı da neden olabilir. | Bu dll 'lerin kaldırıldığından emin olmak için uygulama klasörünü temizleyin. Hem yerel uygulamanızın bin dizinini hem de App Service Wwwroot dizinini denetleyin. (App Service Web uygulamanızın Wwwroot dizinini denetlemek için: Gelişmiş araçlar (kudu) > hata ayıklama Konsolu > CMD > home\wwwroot).
+|`AppContainsAspNetTelemetryCorrelationAssembly: true` | Bu değer, uzantının uygulamada `Microsoft.AspNet.TelemetryCorrelation` ' a başvurduğu ve geri dönecek olduğunu gösterir. | Başvuruyu kaldırın.
+|`AppContainsDiagnosticSourceAssembly**:true`|Bu değer, uzantının uygulamada `System.Diagnostics.DiagnosticSource` ' a başvurduğu ve geri dönecek olduğunu gösterir.| Başvuruyu kaldırın.
+|`IKeyExists:false`|Bu değer, `APPINSIGHTS_INSTRUMENTATIONKEY` AppSetting 'de izleme anahtarının bulunmadığını gösterir. Olası nedenler: değerler yanlışlıkla kaldırılmış olabilir, Otomasyon betikindeki değerleri ayarlamayı unuttu, vb. | Ayarın App Service uygulama ayarlarında bulunduğundan emin olun.
 
-### <a name="appinsightsjavascriptenabled-and-urlcompression-is-not-supported"></a>APPINSIGHTS_JAVASCRIPT_ENABLED ve urlCompression desteklenmiyor
+### <a name="appinsights_javascript_enabled-and-urlcompression-is-not-supported"></a>APPINSIGHTS_JAVASCRIPT_ENABLED ve urlCompression desteklenmez
 
-APPINSIGHTS_JAVASCRIPT_ENABLED kullanırsanız = gibi hatalar alabilirsiniz doğru durumlarda burada kodlanmış içeriği: 
+İçeriğin kodlandığı durumlarda APPINSIGHTS_JAVASCRIPT_ENABLED = true kullanırsanız, şöyle bir hata alabilirsiniz: 
 
 - 500 URL yeniden yazma hatası
-- 500.53 HTTP yanıtının içeriğini kodlanmış ('gzip') olduğunda URL yeniden yazma modülü hata iletisi giden yeniden yazma kuralları uygulanamaz. 
+- 500,53 URL yeniden yazma hatası ileti giden yeniden yazma kuralları HTTP yanıtının içeriği kodlanmışsa (' gzip ') uygulanamaz. 
 
-Bu APPINSIGHTS_JAVASCRIPT_ENABLED uygulama ayarı nedeniyle doğru ve içerik kodlamasını, aynı anda mevcut olması için ayarlanıyor. Bu senaryonun henüz desteklenmiyor. Geçici çözüm, uygulama ayarlarınızı APPINSIGHTS_JAVASCRIPT_ENABLED kaldırmaktır. Ne yazık ki bu tarayıcı/istemci-tarafı JavaScript izleme yine de gerekliyse, el ile SDK başvuruları için Web sayfalarınızı gerektiği anlamına gelir. Lütfen izleyin [yönergeleri](https://github.com/Microsoft/ApplicationInsights-JS#snippet-setup-ignore-if-using-npm-setup) JavaScript SDK'sı ile el ile izleme için.
+Bunun nedeni, APPINSIGHTS_JAVASCRIPT_ENABLED uygulama ayarından aynı anda doğru ve içerik kodlamasının mevcut olmasını sağlar. Bu senaryo henüz desteklenmiyor. Geçici çözüm, APPINSIGHTS_JAVASCRIPT_ENABLED uygulamasını uygulama ayarlarından kaldırdır. Ne yazık ki, istemci/tarayıcı tarafı JavaScript izleme hâlâ gerekliyse, Web sayfalarınız için el ile SDK başvuruları gerekir. Lütfen JavaScript SDK 'Sı ile el ile izleme [yönergelerini](https://github.com/Microsoft/ApplicationInsights-JS#snippet-setup-ignore-if-using-npm-setup) izleyin.
 
-Application Insights Aracısı/uzantı en son bilgiler için kullanıma [sürüm notları](https://github.com/Microsoft/ApplicationInsights-Home/blob/master/app-insights-web-app-extensions-releasenotes.md).
+Application Insights Aracısı/uzantısıyla ilgili en son bilgiler için, [sürüm notlarına](https://github.com/Microsoft/ApplicationInsights-Home/blob/master/app-insights-web-app-extensions-releasenotes.md)göz atın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 * [Canlı uygulamanızda profil oluşturucuyu çalıştırın](../app/profiler.md).

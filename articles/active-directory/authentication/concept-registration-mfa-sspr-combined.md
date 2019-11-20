@@ -1,146 +1,151 @@
 ---
-title: Kayıt için Azure AD SSPR ve multi-Factor Authentication (Önizleme) - Azure Active Directory birleştirilmiş
-description: Kayıt (Önizleme) Azure AD multi-Factor Authentication ve Self Servis parola sıfırlama
+title: Azure AD SSPR ve Multi-Factor Authentication için Birleşik Kayıt (Önizleme)-Azure Active Directory
+description: Azure AD Multi-Factor Authentication ve self servis parola sıfırlama kaydı (Önizleme)
 services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: conceptual
-ms.date: 05/23/2019
+ms.date: 08/29/2019
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahenry
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: fc0e80ec7a378d44000565034ce47d95c78b777e
-ms.sourcegitcommit: 084630bb22ae4cf037794923a1ef602d84831c57
+ms.openlocfilehash: a312c39352f0d13b4354e7b0dfcd897bf4cc0992
+ms.sourcegitcommit: ec2b75b1fc667c4e893686dbd8e119e7c757333a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67537021"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72808456"
 ---
-# <a name="combined-security-information-registration-preview"></a>Birleştirilmiş güvenlik bilgileri kayıt (Önizleme)
+# <a name="combined-security-information-registration-preview"></a>Birleşik güvenlik bilgileri kaydı (Önizleme)
 
-Birleşik kayıt önce kullanıcılar kimlik doğrulama yöntemleri Azure multi-Factor Authentication ve Self Servis parola sıfırlama (SSPR) için ayrı olarak kayıtlı. Kişiler, çok faktörlü kimlik doğrulaması ve SSPR için benzer yöntemler kullanıldı, ancak her iki özellik için kaydolmak sahip oldukları karıştırılır. Şimdi, birleşik kayıt ile kullanıcılar bir kez kaydedebilir ve multi-Factor Authentication hem SSPR avantajlarından yararlanın.
+Birleşik kayıt öncesinde, kullanıcılar Azure Multi-Factor Authentication ve self servis parola sıfırlama (SSPR) için kimlik doğrulama yöntemlerini ayrı olarak kaydetti. İnsanlar Multi-Factor Authentication ve SSPR için benzer yöntemlerin kullanıldığını, ancak her iki özelliğe de kaydolmaları gerektiğini karıştı. Artık, birleştirilmiş kayıt ile kullanıcılar bir kez kaydolduktan sonra hem Multi-Factor Authentication hem de SSPR avantajlarından yararlanabilir.
 
-![Bir kullanıcı için güvenlik bilgisi My profili gösteren kayıtlı](media/concept-registration-mfa-sspr-combined/combined-security-info-defualts-registered.png)
+![Bir kullanıcı için kayıtlı güvenlik bilgilerini gösteren profilim](media/concept-registration-mfa-sspr-combined/combined-security-info-defualts-registered.png)
 
-Yeni deneyimi etkinleştirmeden önce bu yönetici odaklı belgeleri ve işlevleri ve bu özellik etkisini anladığınızdan emin olmak için kullanıcı odaklı belgeleri gözden geçirin. Eğitim temel [kullanıcı belgeleri](../user-help/user-help-security-info-overview.md) yeni deneyimi ve başarılı bir sunum emin olmaya yardım etmek için kullanıcılarınızın hazırlamak için.
+Yeni deneyimi etkinleştirmeden önce, bu özelliğin işlevselliğini ve etkisini anladığınızdan emin olmak için bu yöneticiye odaklanmış belgeleri ve Kullanıcı odaklı belgeleri gözden geçirin. Kullanıcılarınıza yeni deneyim hazırlamak ve başarılı bir dağıtım sağlamaya yardımcı olmak için, [Kullanıcı belgelerine](../user-help/user-help-security-info-overview.md) yönelik eğitime dayandırın.
 
-Azure AD güvenlik bilgileri kayıt Ulusal bulutlara Azure ABD devlet kurumları, Azure Almanya'yı veya Azure Çin 21Vianet gibi şu anda kullanılabilir değil birleştirilmiş.
+Azure AD Birleşik güvenlik bilgileri kaydı Şu anda Azure ABD Kamu, Azure Almanya veya Azure Çin 21Vianet gibi ulusal bulutlarda kullanılamaz.
 
 |     |
 | --- |
-| Çok faktörlü kimlik doğrulaması ve Azure Active Directory (Azure AD) Self Servis parola sıfırlama için birleşik güvenlik bilgileri kayıt bir Azure AD genel Önizleme özelliğidir. Önizlemeler hakkında daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).|
+| Multi-Factor Authentication ve Azure Active Directory (Azure AD) self servis parola sıfırlama için Birleşik güvenlik bilgileri kaydı, Azure AD 'nin genel önizleme özelliğidir. Önizlemeler hakkında daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).|
 |     |
 
 > [!IMPORTANT]
-> Özgün Önizleme ve gelişmiş bir birleşik kayıt deneyimi için etkinleştirilmiş kullanıcılar yeni davranış görürsünüz. Her iki deneyimleri etkin kullanıcılar, yalnızca yeni Profilim deneyim elde edeceksiniz. Yeni Profilim, birleşik kayıt görünümü ve deneyimini ile hizalanan ve kullanıcılar için sorunsuz bir deneyim sağlar. Kullanıcılar, giderek Profilim görebilirsiniz [ https://myprofile.microsoft.com ](https://myprofile.microsoft.com).
+> Hem özgün önizleme hem de geliştirilmiş Birleşik kayıt deneyimi için etkinleştirilen kullanıcılar yeni davranışı görür. Her iki deneyim için de etkinleştirilen kullanıcılar yalnızca yeni profil deneyimimi görecektir. Yeni profilim, Birleşik kaydın görünümü ve hissi ile hizalanır ve kullanıcılar için sorunsuz bir deneyim sağlar. Kullanıcılar [https://myprofile.microsoft.com](https://myprofile.microsoft.com)giderek profilimi görebilir.
 
-Profili Sayfalarım sayfaya erişimi olan bilgisayarın dil ayarlarına göre yerelleştirilir. Microsoft, sonraki denemeler sayfalara erişmek için kullanılan son dil işleme devam edecek şekilde tarayıcı önbelleğini içinde kullanılan en son dil depolar. Önbelleği temizlemek, sayfaları yeniden işlenir. Ekleyebileceğiniz belirli bir dil zorlamak istiyorsanız, `?lng=<language>` URL'sinin sonuna burada `<language>` işlemek için istediğiniz dili kodudur.
+> [!NOTE] 
+> Güvenlik bilgisi seçeneğine erişmeye çalışırken bir hata iletisiyle karşılaşabilirsiniz. Örneğin, "Üzgünüz, oturumunuzu açamıyoruz". Bu durumda, Web tarayıcısında üçüncü taraf tanımlama bilgilerini engelleyen bir yapılandırma veya Grup İlkesi nesneniz olmadığından emin olun. 
+
+Profil sayfalarınız, sayfaya erişen bilgisayarın dil ayarlarına bağlı olarak yerelleştirilir. Microsoft, tarayıcı önbelleğinde kullanılan en son dili saklar, böylece sayfalara erişmeye yönelik sonraki denemeler kullanılan son dilde işlemeye devam eder. Önbelleği temizlerseniz sayfalar yeniden işlenir. Belirli bir dili zorlamak istiyorsanız URL 'nin sonuna `?lng=<language>` ekleyebilirsiniz; burada `<language>`, işlemek istediğiniz dilin kodudur.
 
 ![SSPR veya diğer güvenlik doğrulama yöntemlerini ayarlama](media/howto-registration-mfa-sspr-combined/combined-security-info-my-profile.png)
 
-## <a name="methods-available-in-combined-registration"></a>İçinde birleşik kayıt yöntemleri
+## <a name="methods-available-in-combined-registration"></a>Birleşik kayıtta kullanılabilen Yöntemler
 
-Aşağıdaki kimlik doğrulama yöntemlerini kayıt destekler ve eylemleri birleştirilmiş:
+Birleşik kayıt aşağıdaki kimlik doğrulama yöntemlerini ve eylemleri destekler:
 
-|   | Kaydolma | Değiştir | Sil |
+|   | Kaydol | Değiştir | Sil |
 | --- | --- | --- | --- |
-| Microsoft Authenticator | Evet (en fazla 5) | Hayır | Evet |
-| Diğer authenticator uygulaması | Evet (en fazla 5) | Hayır | Evet |
-| Donanım belirteci | Hayır | Hayır | Evet |
-| Telefon | Evet | Evet | Evet |
-| Alternatif telefon | Evet | Evet | Evet |
+| Microsoft Authenticator | Evet (en fazla 5) | Hayır | Yes |
+| Diğer kimlik doğrulayıcı uygulaması | Evet (en fazla 5) | Hayır | Yes |
+| Donanım belirteci | Hayır | Hayır | Yes |
+| Telefon | Yes | Yes | Yes |
+| Alternatif telefon | Yes | Yes | Yes |
 | Ofis telefonu | Hayır | Hayır | Hayır |
-| Email | Evet | Evet | Evet |
-| Güvenlik soruları | Evet | Hayır | Evet |
-| Uygulama parolaları | Evet | Hayır | Evet |
+| E-posta | Yes | Yes | Yes |
+| Güvenlik soruları | Yes | Hayır | Yes |
+| Uygulama parolaları | Yes | Hayır | Yes |
 
 > [!NOTE]
-> Uygulama parolaları, yalnızca çok faktörlü kimlik doğrulamasını zorunlu kullanıcılar tarafından kullanılabilir. Uygulama parolaları bir koşullu erişim ilkesi çok faktörlü kimlik doğrulaması için etkinleştirilmiş kullanıcılar tarafından kullanılamaz.
+> Uygulama parolaları yalnızca Multi-Factor Authentication için zorlanan kullanıcılar tarafından kullanılabilir. Uygulama parolaları, koşullu erişim ilkesi aracılığıyla Multi-Factor Authentication için etkinleştirilen kullanıcılar tarafından kullanılamaz.
 
-Kullanıcılar aşağıdaki seçeneklerden birini varsayılan çok faktörlü kimlik doğrulaması yöntemi ayarlayabilirsiniz:
+Kullanıcılar aşağıdaki seçeneklerden birini varsayılan Multi-Factor Authentication yöntemi olarak ayarlayabilir:
 
-- Microsoft Authenticator – bildirim.
-- Authenticator uygulaması veya donanım belirteci – kod.
+- Microsoft Authenticator – bildirimi.
+- Doğrulayıcı uygulaması veya donanım belirteci – kod.
 - Telefon araması.
-- metin iletisi.
+- Kısa mesaj.
 
-Azure AD'ye daha fazla kimlik doğrulama yöntemleri eklemeye devam ediyoruz, bu yöntemleri birleşik kaydında kullanılabilir olacaktır.
+Azure AD 'ye daha fazla kimlik doğrulama yöntemi eklemeye devam ediyoruz, bu yöntemler Birleşik kayıtta kullanıma sunulacaktır.
 
-## <a name="combined-registration-modes"></a>Birleşik kayıt modları
+## <a name="combined-registration-modes"></a>Birleşik Kayıt modları
 
-Birleşik kayıt iki mod vardır: kesme ve yönetin.
+İki Birleşik kayıt modu vardır: kesme ve yönetme.
 
-- **Kesme modu** kaydolun veya oturum açma işlemi sırasında güvenlik bilgileri Yenile kullanıcılara sunulan bir sihirbaz benzeri deneyim sunar.
+- **Kesme modu** , oturum açma sırasında güvenlik bilgilerini kaydederken veya yenilediklerinde kullanıcılara sunulan sihirbaza benzer bir deneyimdir.
 
-- **Modunun** kullanıcı profilinin bir parçasıdır ve kullanıcıların güvenlik bilgilerini yönetmesine olanak tanır.
+- **Yönetim modu** Kullanıcı profilinin bir parçasıdır ve kullanıcıların güvenlik bilgilerini yönetmesine olanak tanır.
 
-Her iki mod için çok faktörlü kimlik doğrulaması için kullanılabilecek bir yöntem daha önce kaydettiğiniz kullanıcılar güvenlik bilgilerini erişebilmeniz için önce çok faktörlü kimlik doğrulaması gerçekleştirmeniz gerekir.
+Her iki mod için, daha önce Multi-Factor Authentication için kullanılabilecek bir yöntemi kaydetmiş olan kullanıcıların güvenlik bilgilerine erişebilmeleri için Multi-Factor Authentication gerçekleştirmesi gerekir.
 
 ### <a name="interrupt-mode"></a>Kesme modu
 
-Her ikisi de kiracınız için etkinleştirilip etkinleştirilmediğini birleşik kayıt multi-Factor Authentication hem SSPR ilkeleri dikkate alır. Bu ilkeler, bir kullanıcı oturum açma sırasında kayıt olup kesilir ve hangi yöntemlerin kayıt için kullanılabilir denetler.
+Her ikisi de kiracınız için etkinse, birleştirilmiş kayıt hem Multi-Factor Authentication hem de SSPR ilkelerine uyar. Bu ilkeler, kullanıcının oturum açma sırasında kayıt için kesintiye uğratılmadığını ve kayıt için hangi yöntemlerin kullanılabildiğini denetler.
 
-Kaydolun veya güvenlik bilgilerini yenilemek için kullanıcıların hangi istenebilir çeşitli senaryolar şunlardır:
+Kullanıcılara güvenlik bilgilerini kaydetmek veya yenilemek için istenen çeşitli senaryolar aşağıda verilmiştir:
 
-- Çok faktörlü kimlik doğrulaması kaydı: kimlik koruması zorlanır Kullanıcılar, oturum açma sırasında kaydetmek için istenir. (Kullanıcının SSPR'ye etkinse) çok faktörlü kimlik doğrulaması ve SSPR yöntemleri kaydedin.
-- Çok faktörlü kimlik doğrulaması kaydı üzerinden kullanıcı başına çok faktörlü kimlik doğrulaması zorunlu: Kullanıcılar, oturum açma sırasında kaydetmek için istenir. (Kullanıcının SSPR'ye etkinse) çok faktörlü kimlik doğrulaması ve SSPR yöntemleri kaydedin.
-- Çok faktörlü kimlik doğrulaması kaydı koşullu erişim veya diğer ilkeleri zorlanır: Kullanıcılar, çok faktörlü kimlik doğrulaması gerektiren bir kaynak kullandıklarında kaydetmek için istenir. (Kullanıcının SSPR'ye etkinse) çok faktörlü kimlik doğrulaması ve SSPR yöntemleri kaydedin.
-- SSPR kaydı zorlanır: Kullanıcılar, oturum açma sırasında kaydetmek için istenir. Bunlar yalnızca SSPR yöntemlerini kaydedin.
-- SSPR yenileme zorlanır: Kullanıcılar yöneticiniz tarafından belirlenen aralıklarla güvenlik bilgilerini gözden geçirmek için gereklidir Kullanıcılar kendi bilgi gösterilir ve geçerli bilgilerinizi onaylayın veya gerekirse değişiklik.
+- Kimlik koruması aracılığıyla Multi-Factor Authentication kayıt zorlandı: kullanıcıların oturum açma sırasında kaydolması istenir. Multi-Factor Authentication yöntemleri ve SSPR yöntemlerini (Kullanıcı SSPR için etkinleştirildiyse) kaydeder.
+- Kullanıcı başına Multi-Factor Authentication üzerinden Multi-Factor Authentication kaydı zorlandı: kullanıcıların oturum açma sırasında kaydolması istenir. Multi-Factor Authentication yöntemleri ve SSPR yöntemlerini (Kullanıcı SSPR için etkinleştirildiyse) kaydeder.
+- Koşullu erişim veya diğer ilkeler aracılığıyla Multi-Factor Authentication kaydı zorlandı: kullanıcılardan Multi-Factor Authentication gerektiren bir kaynak kullandıklarında kaydolmaları istenir. Multi-Factor Authentication yöntemleri ve SSPR yöntemlerini (Kullanıcı SSPR için etkinleştirildiyse) kaydeder.
+- SSPR kaydı zorlandı: kullanıcıların oturum açma sırasında kaydolması istenir. Bunlar yalnızca SSPR yöntemlerini kaydeder.
+- SSPR yenileme zorlandı: kullanıcıların, güvenlik bilgilerini yönetici tarafından ayarlanan bir aralığa incebilmeleri gerekir. Kullanıcılar bilgilerini gösterilir ve gerekirse geçerli bilgileri doğrulayabilirler veya değişiklik yapabilir.
 
-Kayıt uygulandığında, kullanıcılara en düşük olandan en az güvenli hale getirmek için multi-Factor Authentication hem SSPR ilkelerle uyumlu olmasını gerekli yöntemleri sayısı gösterilir.
+Kayıt zorlandığında, kullanıcılara en az Multi-Factor Authentication ve SSPR ilkeleriyle uyumlu olması için gereken en az sayıda yöntem gösterilir.
 
-Örneğin:
+Örnek:
 
-- Bir kullanıcının SSPR için etkinleştirilir. SSPR ilke sıfırlamak için iki yöntem gerekli ve mobil uygulama kodu, e-posta ve telefon etkinleştirdi.
-   - Bu kullanıcı, iki yöntem kaydetmek için gereklidir.
-      - Kullanıcı, kimlik doğrulayıcı uygulamasını ve telefon varsayılan olarak gösterilir.
-      - Kullanıcı e-posta yerine kimlik doğrulayıcısı uygulaması ya da telefon kaydetmek seçebilirsiniz.
+- Bir Kullanıcı SSPR için etkinleştirilmiştir. SSPR ilkesi, mobil uygulama kodu, e-posta ve telefon 'i sıfırlamak ve etkinleştirmek için iki yöntem gerektirir.
+   - Bu kullanıcının iki yöntemi kaydetmesi gerekir.
+      - Kullanıcı, kimlik doğrulayıcı uygulaması ve telefon varsayılan olarak gösterilir.
+      - Kullanıcı, kimlik doğrulayıcı uygulaması veya telefon yerine e-posta kaydetmeyi tercih edebilir.
 
-Bu akış, hangi yöntemlerin kesintiye, bir kullanıcı oturum açma sırasında kaydetmek için gösterilen açıklanmaktadır:
+Bu akış çizelgesi, oturum açma sırasında kaydolmak üzere kesintiye uğradığında kullanıcıya hangi yöntemlerin gösterildiğini açıklar:
 
-![Birleştirilmiş güvenlik bilgisi akış çizelgesi](media/concept-registration-mfa-sspr-combined/combined-security-info-flow-chart.png)
+![Birleşik güvenlik bilgisi akış çizelgesi](media/concept-registration-mfa-sspr-combined/combined-security-info-flow-chart.png)
 
-Multi-Factor Authentication hem de etkin SSPR varsa, multi-Factor Authentication kayıt zorunlu kılmanız önerilir.
+Hem Multi-Factor Authentication hem de SSPR etkinse, Multi-Factor Authentication kayıt uygulanmasını öneririz.
 
-SSPR İlkesi güvenlik bilgileri düzenli aralıklarla gözden geçirilecek kullanıcılar gerektiriyorsa, kullanıcılar oturum açma sırasında kesintiye ve bunların tüm kayıtlı yöntemleri gösterilmektedir. Güncel olduğundan veya bunlar gerekirse değişiklik yapabilir, geçerli bilgilerinizi doğrulayabilirsiniz.
+SSPR ilkesi, kullanıcıların güvenlik bilgilerini düzenli aralıklarla incelemesini gerektiriyorsa, oturum açma işlemi sırasında kullanıcılar kesintiye uğrar ve tüm kayıtlı yöntemleri gösterilir. Güncel bilgileri güncellerse, güncel bilgileri doğrulayabilirler veya gerekirse değişiklik yapabilirler.
 
-### <a name="manage-mode"></a>Modunu yönetin
+### <a name="manage-mode"></a>Yönetim modu
 
-Kullanıcıların erişebileceği giderek modu yönetme [ https://aka.ms/mysecurityinfo ](https://aka.ms/mysecurityinfo) veya seçerek **güvenlik bilgisi** Profilim öğesinden. Buradan kullanıcılar yöntemleri ekleyin, silin veya var olan yöntemleri değiştirmek için varsayılan yöntemi ve daha fazlasını değiştirin.
+Kullanıcılar, [https://aka.ms/mysecurityinfo](https://aka.ms/mysecurityinfo) giderek veya Profilimin **güvenlik bilgilerini** seçerek Yönetim moduna erişebilir. Kullanıcılar buradan Yöntemler ekleyebilir, var olan yöntemleri silebilir veya değiştirebilir, varsayılan yöntemi değiştirebilir ve daha fazlasını yapabilir.
 
-## <a name="key-usage-scenarios"></a>Anahtar kullanım senaryoları
+## <a name="key-usage-scenarios"></a>Anahtar kullanımı senaryoları
 
-### <a name="set-up-security-info-during-sign-in"></a>Oturum açma sırasında güvenlik bilgileri ' ayarlayın
+### <a name="set-up-security-info-during-sign-in"></a>Oturum açma sırasında güvenlik bilgilerini ayarlama
 
-Bir yönetici, kaydı zorunlu.
+Yönetici kaydı zorladı.
 
-Bir kullanıcı tüm gerekli güvenlik bilgisi ayarlamamış ve Azure portalına gider. Kullanıcı adını ve parolasını girdikten sonra kullanıcı güvenlik bilgileri ' ayarlaması istenir. Kullanıcı, ardından gerekli güvenlik bilgilerini ayarlamak için Sihirbazı'nda gösterilen adımları izler. Ayarlarınız izin veriyorsa, varsayılan olarak gösterilen dışındaki yöntemleri ayarlamak kullanıcı seçebilir. Sihirbazı tamamladıktan sonra kullanıcılar bunlar ayarlama yöntemleri ve varsayılan yöntemi için multi-Factor Authentication gözden geçirin. Kurulum işlemini tamamlamak için kullanıcı bilgileri onaylar ve Azure portalına devam eder.
+Bir kullanıcı gerekli tüm güvenlik bilgilerini ayarlamadı ve Azure portal gider. Kullanıcı adını ve parolayı girdikten sonra kullanıcıdan güvenlik bilgilerini ayarlaması istenir. Daha sonra Kullanıcı, gerekli güvenlik bilgilerini ayarlamak için sihirbazda gösterilen adımları izler. Ayarlarınıza izin verirseniz, Kullanıcı varsayılan olarak gösterilenler dışındaki yöntemleri ayarlamayı tercih edebilir. Sihirbaz tamamlandıktan sonra, kullanıcılar ayarladıkları yöntemleri ve Multi-Factor Authentication varsayılan yöntemlerini gözden geçirir. Kurulum işlemini gerçekleştirmek için Kullanıcı bilgileri onaylar ve Azure portal devam eder.
 
-### <a name="set-up-security-info-from-my-profile"></a>Profilim içindeki güvenlik bilgileri ' ayarlayın
+### <a name="set-up-security-info-from-my-profile"></a>Profilimi güvenlik bilgilerini ayarlama
 
-Bir yönetici, kaydı zorunlu değildir.
+Yönetici kaydı zormadı.
 
-Tüm gerekli güvenlik bilgisi henüz Ayarla edilmemiş bir kullanıcıyı gider [ https://myprofile.microsoft.com ](https://myprofile.microsoft.com). Kullanıcının seçtiği **güvenlik bilgisi** sol bölmesinde. Kullanıcı bir yöntem eklemeyi seçtiğinde buradan kullanılabilir yöntemlerden herhangi birini seçer ve bu yöntemi ayarlamak için adımları izler. İşiniz bittiğinde kullanıcı güvenlik bilgileri sayfasında yalnızca ayarlandığı yöntemi görür.
+Gerekli güvenlik bilgilerini henüz ayarlamış bir Kullanıcı [https://myprofile.microsoft.com](https://myprofile.microsoft.com)gider. Kullanıcı sol bölmedeki **güvenlik bilgilerini** seçer. Buradan Kullanıcı bir yöntem eklemeyi seçer, kullanılabilir yöntemlerin birini seçer ve bu yöntemi ayarlama adımlarını izler. İşiniz bittiğinde, Kullanıcı güvenlik bilgileri sayfasında ayarlanmış olan yöntemi görür.
 
-### <a name="delete-security-info-from-my-profile"></a>Profilim içindeki güvenlik bilgilerini sil
+### <a name="delete-security-info-from-my-profile"></a>Profilimi güvenlik bilgilerini sil
 
-En az bir yöntemi ayarlamak daha önce bir kullanıcı gider [ https://aka.ms/mysecurityinfo ](https://aka.ms/mysecurityinfo). Kullanıcının, önceden kaydedilmiş yöntemlerden birini silmek seçer. İşiniz bittiğinde kullanıcı güvenlik bilgileri sayfasında bu yöntem artık görür.
+Daha önce en az bir yöntemi kuran bir Kullanıcı [https://aka.ms/mysecurityinfo](https://aka.ms/mysecurityinfo)gider. Kullanıcı önceden kaydedilmiş yöntemlerden birini silmeyi seçer. İşiniz bittiğinde, Kullanıcı artık güvenlik bilgileri sayfasında bu yöntemi görmediğini.
 
-### <a name="change-the-default-method-from-my-profile"></a>Profilim içindeki varsayılan yöntemini değiştirme
+### <a name="change-the-default-method-from-my-profile"></a>Varsayılan yöntemi profilimi değiştirme
 
-Çok faktörlü kimlik doğrulaması için kullanılabilecek en az bir yöntem önceden ayarlanmış bir kullanıcıyı gider [ https://aka.ms/mysecurityinfo ](https://aka.ms/mysecurityinfo). Kullanıcının geçerli varsayılan yöntemi için farklı varsayılan bir yöntemi değiştirir. İşiniz bittiğinde kullanıcı güvenlik bilgileri sayfasında yeni varsayılan yöntemi görür.
+Daha önce Multi-Factor Authentication için kullanılabilecek en az bir yöntemi ayarlamış olan bir Kullanıcı [https://aka.ms/mysecurityinfo](https://aka.ms/mysecurityinfo)gider. Kullanıcı geçerli varsayılan yöntemi farklı bir varsayılan yönteme geçirir. İşiniz bittiğinde, Kullanıcı, güvenlik bilgileri sayfasında yeni varsayılan yöntemi görür.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Kiracınızda bulunan toplam kayıt etkinleştirme](howto-registration-mfa-sspr-combined.md)
+[Kullanıcıları kimlik doğrulama yöntemlerini yeniden kaydetmeye zorla](howto-mfa-userdevicesettings.md#manage-authentication-methods)
 
-[SSPR ve MFA kullanımı ve raporlama öngörüleri](howto-authentication-methods-usage-insights.md)
+[Kiracınızda Birleşik kayıt özelliğini etkinleştirme](howto-registration-mfa-sspr-combined.md)
 
-[Çok faktörlü kimlik doğrulaması ve SSPR için kullanılabilen yöntemler](concept-authentication-methods.md)
+[SSPR ve MFA kullanımı ve öngörüleri raporlama](howto-authentication-methods-usage-insights.md)
 
-[Self Servis parola sıfırlamayı yapılandırın](howto-sspr-deployment.md)
+[Multi-Factor Authentication ve SSPR için kullanılabilir Yöntemler](concept-authentication-methods.md)
 
-[Azure çok faktörlü kimlik doğrulamasını yapılandırma](howto-mfa-getstarted.md)
+[Self servis parola sıfırlamayı yapılandırma](howto-sspr-deployment.md)
+
+[Azure Multi-Factor Authentication yapılandırma](howto-mfa-getstarted.md)

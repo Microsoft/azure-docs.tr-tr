@@ -1,6 +1,6 @@
 ---
-title: Azure geçişi ile ilgili SSS | Microsoft Docs
-description: Azure geçişi hakkında sık sorulan soruların yanıtlarını alın.
+title: Azure Relay SSS | Microsoft Docs
+description: Azure Relay hakkında sık sorulan bazı soruların yanıtlarını alın.
 services: service-bus-relay
 documentationcenter: na
 author: spelluru
@@ -14,103 +14,103 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 05/21/2018
 ms.author: spelluru
-ms.openlocfilehash: 2433f4b3563cc8b301d1815cccf5ab24406e8662
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 207f73bbf9a92d26be1791fc11ce81fe68252705
+ms.sourcegitcommit: 198c3a585dd2d6f6809a1a25b9a732c0ad4a704f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66111479"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68422965"
 ---
-# <a name="azure-relay-faqs"></a>Azure geçişi ile ilgili SSS
+# <a name="azure-relay-faqs"></a>Azure Relay SSS
 
-Bu makalede hakkında sık sorulan bazı sorular (SSS) yanıtlarını [Azure geçişi](https://azure.microsoft.com/services/service-bus/). Genel Azure fiyatlandırma ve destek için bilgi [Azure desteği SSS](https://azure.microsoft.com/support/faq/).
+Bu makalede [Azure Relay](https://azure.microsoft.com/services/service-bus/)hakkında sık sorulan bazı sorular (SSS) yanıtlanmaktadır. Genel Azure fiyatlandırması ve destek bilgileri için bkz. [Azure desteği SSS](https://azure.microsoft.com/support/faq/).
 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="general-questions"></a>Genel sorular
 ### <a name="what-is-azure-relay"></a>Azure Geçiş nedir?
-[Azure geçişi hizmetini](relay-what-is-it.md) karma uygulamalarınızı daha güvenli bir şekilde kullanıma sunma genel bulutta Kurumsal işletme ağında bulunan Hizmetleri yardımcı olarak gerçekleştirir. Bir güvenlik duvarı bağlantısı açmak ve kurumsal ağ altyapısına müdahale eden değişikliklere gerek olmadan Hizmetleri üzerinden kullanıma sunabilirsiniz.
+[Azure Relay hizmeti](relay-what-is-it.md) , kurumsal bir kurumsal ağ içinde bulunan hizmetleri genel buluta daha güvenli bir şekilde kullanıma sunmanıza yardımcı olarak karma uygulamalarınızı kolaylaştırır. Bir güvenlik duvarı bağlantısı açmadan Hizmetleri açığa çıkarmak ve kurumsal ağ altyapısına müdahale eden değişiklikler yapmanıza gerek kalmadan kullanıma sunabilirsiniz.
 
-### <a name="what-is-a-relay-namespace"></a>Bir geçiş ad alanı nedir?
-A [ad alanı](relay-create-namespace-portal.md) uygulamanızdaki adresi geçişi kaynakları için kullanabileceğiniz kapsayan bir kapsayıcıdır. Geçiş ad alanı oluşturmanız gerekir. Bu Başlarken içinde ilk adımlarından biridir.
+### <a name="what-is-a-relay-namespace"></a>Geçiş ad alanı nedir?
+[Ad alanı](relay-create-namespace-portal.md) , uygulamanızdaki geçiş kaynaklarını ele almak için kullanabileceğiniz bir kapsam kapsayıcıdır. Geçiş kullanmak için bir ad alanı oluşturmanız gerekir. Bu, kullanmaya başlarken ilk adımlardan biridir.
 
-### <a name="what-happened-to-service-bus-relay-service"></a>Service Bus geçişi hizmetini ne oldu?
-Daha önce adlandırılmış Service Bus geçişi hizmetini şimdi adlı [WCF geçişi](relay-wcf-dotnet-get-started.md). Bu hizmet zamanki gibi kullanmaya devam edebilirsiniz. Karma bağlantılar özelliği, Azure BizTalk Services transplanted bir hizmet, güncelleştirilmiş bir sürümüdür. WCF geçişi ve karma bağlantılar desteklemeye devam eder.
+### <a name="what-happened-to-service-bus-relay-service"></a>Service Bus Relay Service 'e ne oldu?
+Daha önce adlandırılmış Service Bus geçiş hizmeti artık [WCF geçişi](service-bus-relay-tutorial.md)olarak adlandırılır. Bu hizmeti her zamanki gibi kullanmaya devam edebilirsiniz. Karma Bağlantılar özelliği, Azure BizTalk Services tarafından oluşturulan bir hizmetin güncelleştirilmiş sürümüdür. WCF Geçişi ve Karma Bağlantılar her ikisi de desteklenmeye devam eder.
 
 ## <a name="pricing"></a>Fiyatlandırma
-Bu bölümde, fiyatlandırma yapısı geçişi hakkında sık sorulan bazı sorular yanıtlanmaktadır. Ayrıca bkz [Azure desteği SSS](https://azure.microsoft.com/support/faq/) genel Azure fiyatlandırma bilgileri için. Geçişi fiyatlandırması hakkında tam bilgi için bkz. [Service Bus fiyatlandırma ayrıntıları][Pricing overview].
+Bu bölümde, geçiş Fiyatlandırma yapısı hakkında sık sorulan bazı sorular yanıtlanmaktadır. Ayrıca, genel Azure fiyatlandırma bilgileri için [Azure Destek SSS](https://azure.microsoft.com/support/faq/) ' ye bakabilirsiniz. Geçiş fiyatlandırması hakkında ayrıntılı bilgi için bkz. [Service Bus fiyatlandırma ayrıntıları][Pricing overview].
 
-### <a name="how-do-you-charge-for-hybrid-connections-and-wcf-relay"></a>Nasıl karma bağlantılar ve WCF geçişi için ücretlendirme yapılır?
-Geçişi fiyatlandırması hakkında tam bilgi için bkz. [karma bağlantılar ve WCF geçişleri] [ Pricing overview] Service Bus fiyatlandırma ayrıntıları sayfasına tablosunda. Bu sayfada bahsi geçen ücretler ek olarak, ilişkili veri aktarımları, uygulamanızın sağlandığı veri merkezi dışında çıkışı için ücretlendirilirsiniz.
+### <a name="how-do-you-charge-for-hybrid-connections-and-wcf-relay"></a>Karma Bağlantılar ve WCF Geçişi nasıl ücretlendirilir?
+Geçiş fiyatlandırması hakkında ayrıntılı bilgi için, Service Bus fiyatlandırma ayrıntıları sayfasında [karma bağlantılar ve WCF geçişleri][Pricing overview] tablosuna bakın. Bu sayfada belirtilen fiyatlara ek olarak, uygulamanızın sağlandığı veri merkezinin dışında çıkış için ilişkili veri aktarımları için ücretlendirilirsiniz.
 
-### <a name="how-am-i-billed-for-hybrid-connections"></a>Karma bağlantılar için nasıl faturalandırılırım?
-Karma bağlantılar için üç örnek fatura senaryoları şunlardır:
+### <a name="how-am-i-billed-for-hybrid-connections"></a>Karma Bağlantılar için nasıl faturalandırılırım?
+Karma Bağlantılar için üç örnek faturalandırma senaryosu aşağıda verilmiştir:
 
 *   Senaryo 1:
-    *   Karma bağlantılar yöneticisinin yüklü ve tüm ay boyunca sürekli olarak çalışan bir örneğini gibi tek bir dinleyiciniz varsa var.
-    *   Ay boyunca bağlantı üzerinden 3 GB veri gönderin. 
-    *   Toplam ödeyeceğiniz ücret, 5 ABD Doları ' dir.
+    *   Karma Bağlantılar Yöneticisi 'nin bir örneği ve tüm ay için sürekli çalışan gibi tek bir dinleyiciniz vardır.
+    *   Ay boyunca bağlantı üzerinden 3 GB veri gönderirsiniz. 
+    *   Toplam ücretiniz $5 ' dir.
 *   Senaryo 2:
-    *   Karma bağlantılar yöneticisinin yüklü ve tüm ay boyunca sürekli olarak çalışan bir örneğini gibi tek bir dinleyiciniz varsa var.
-    *   Bağlantı ay boyunca 10 GB veri gönderdiyseniz.
-    *   Toplam ödeyeceğiniz ücret $7.50 ' dir. Bu bağlantı ve ilk 5 GB için 5 + 2,50 ek 5 GB veri için şeklindedir.
+    *   Karma Bağlantılar Yöneticisi 'nin bir örneği ve tüm ay için sürekli çalışan gibi tek bir dinleyiciniz vardır.
+    *   Ay boyunca bağlantı üzerinden 10 GB veri gönderirsiniz.
+    *   Toplam ücretiniz $7,50 ' dir. Bu, bağlantı için $5 ve 5 GB 'lık 5 GB veri için ilk 5 GB + $2,50 ' dir.
 *   Senaryo 3:
-    *   A ve B, yüklü ve tüm ay boyunca sürekli çalışan karma bağlantılar yöneticisinin iki örneği var.
-    *   Bir ay boyunca bağlantı üzerinden 3 GB veri gönderin.
-    *   Ay sırasında B bağlantısı üzerinden 6 GB veri gönderin.
-    *   Toplam ödeyeceğiniz ücret $10.50 olan. Olan 5 A bağlantısı için + B bağlantısı için 5 ABD doları (için B bağlantısında altıncı gigabayt) 0,50 ABD Doları.
+    *   Karma Bağlantılar Manager 'ın bir ve B, her ay için sürekli olarak çalışan iki örneki vardır.
+    *   Ayda 3 GB veri gönderebilirsiniz.
+    *   Ayda 6 GB veri gönderebilirsiniz.
+    *   Toplam ücretiniz $10,50 ' dir. Bu, bağlantı B + $0,50 için bir + $5 bağlantısı için $5 (B bağlantısı üzerindeki altıncı gigabayt için).
 
-Örneklerde kullanılan fiyatların yalnızca karma bağlantılar Önizleme dönemi boyunca geçerli olduğunu unutmayın. Fiyatlar, karma bağlantılar genel kullanım sonrasında değiştirilebilir.
+Örneklerde kullanılan fiyatların yalnızca Karma Bağlantılar önizleme döneminde geçerli olduğunu unutmayın. Fiyatlar, Karma Bağlantılar genel kullanıma sunulmasıyla ilgili olarak değişebilir.
 
-### <a name="how-are-hours-calculated-for-relay"></a>Geçiş saatleri nasıl hesaplanır?
+### <a name="how-are-hours-calculated-for-relay"></a>Geçiş için saatler nasıl hesaplanır?
 
-WCF geçişi, yalnızca standart katman ad alanlarında kullanılabilir. Fiyatlandırma ve [bağlantı kotalar](../service-bus-messaging/service-bus-quotas.md) geçişleri aksi değişip değişmediğini için. Geçişleri ücretlendirilmeye devam Bunun anlamı, iletileri (değil işlemi) ve geçiş saatleri sayısına göre. Daha fazla bilgi için ["Karma bağlantılar ve WCF geçişleri"](https://azure.microsoft.com/pricing/details/service-bus/) fiyatlandırma ayrıntıları sayfasına tablosunda.
+WCF Geçişi yalnızca Standart katman ad alanlarında kullanılabilir. Geçiş için fiyatlandırma ve [bağlantı kotaları](../service-bus-messaging/service-bus-quotas.md) , aksi durumda değişmemiştir. Yani, geçişlerin ileti sayısına (işlem değil) ve geçiş saatlerine göre ücretlendirilmeye devam eder. Daha fazla bilgi için, fiyatlandırma ayrıntıları sayfasındaki ["karma bağlantılar ve WCF geçişleri"](https://azure.microsoft.com/pricing/details/service-bus/) tablosuna bakın.
 
-### <a name="what-if-i-have-more-than-one-listener-connected-to-a-specific-relay"></a>Belirli bir geçiş için bağlı birden fazla dinleyici varsa ne olur?
-Bazı durumlarda tek bir geçiş birden çok bağlı dinleyici olabilir. En az bir geçiş dinleyicisinin bağlı olduğunda geçiş açık olarak kabul edilir. Dinleyicileri bir açık geçiş sonuçları için ek geçiş saatleri ekleniyor. Geçiş Gönderenler (geçişleri için ileti göndermek ya da çağırma istemciler) sayısını bağlı geçiş geçiş saatleri hesaplama etkilemez.
+### <a name="what-if-i-have-more-than-one-listener-connected-to-a-specific-relay"></a>Belirli bir geçişe bağlı birden fazla dinleyici varsa ne yapmalıyım?
+Bazı durumlarda, tek bir geçiş birden fazla bağlantılı dinleyicilerine sahip olabilir. En az bir geçiş dinleyicisi bağlandığında bir geçiş açık kabul edilir. Açık geçiş için dinleyicileri eklemek ek geçiş saatleriyle sonuçlanır. Geçişe bağlı olan geçiş gönderenlerin sayısı (geçişleri çağıran veya iletileri gönderen istemciler) geçiş saatleri hesaplamasını etkilemez.
 
-### <a name="how-is-the-messages-meter-calculated-for-wcf-relays"></a>Mesaj ölçütü, WCF geçişleri için nasıl hesaplanır?
-(**Bu yalnızca WCF geçişleri için geçerlidir. İletileri karma bağlantılar için bir maliyet değildir.** )
+### <a name="how-is-the-messages-meter-calculated-for-wcf-relays"></a>WCF geçişleri için ileti ölçümü nasıl hesaplanır?
+(**Bu yalnızca WCF geçişleri için geçerlidir. Mesajlar Karma Bağlantılar maliyeti değildir.** )
 
-Genel olarak, daha önce açıklanan aracılı varlıklarda (kuyruklar, konular ve abonelikler) aynı yöntemi kullanarak Faturalanabilir mesajlar geçişleri için hesaplanır. Ancak, bazı önemli farklılıklar vardır.
+Genel olarak, geçişler için faturalanabilir iletiler, daha önce açıklanan aracılı varlıklar (kuyruklar, konular ve abonelikler) için kullanılan yöntemi kullanarak hesaplanır. Ancak bazı önemli farklılıklar vardır.
 
-İletiyi alır geçiş dinleyici "tam yoluyla" gönderme, ileti göndermek için Service Bus geçişi kabul edilir. Service Bus geçişi, geçiş dinleyicisinin teslim ardından için bir gönderme işlemi olarak işlenmez. İstek-yanıt geçiş karşı hizmet çağırma (of, 64 KB'a kadar) iki Faturalanabilir ileti dinleyici sonuçlarında stil: isteği ve yanıtı için bir adet Faturalanabilir mesaj bir adet Faturalanabilir mesaj (yanıt varsayarak, da 64 KB veya daha küçük). Bu, bir istemci ve hizmet arasında aktarmak için bir kuyruk kullanmaktan farklıdır. Bir istemci ve hizmet arasında aktarmak için bir kuyruk kullanırsanız, aynı istek-yanıt desen tarafından bir kuyruktan çıkarma/teslim kuyruktan hizmetine ve ardından sıranın bir istek Gönder gerektirir. Bu yanıt gönderme tarafından başka bir kuyruk ve kuyruktan çıkarma/teslim istemciye bu kuyruktan takip eder. Aynı boyut varsayımların boyunca (64 KB'a kadar) kullanarak, cout kuyruk düzeni 4 Faturalanabilir mesaj sonuçlanır. İki kez geçişi kullanarak gerçekleştirmek aynı deseni uygulamak için ileti sayısı için faturalandırılırsınız. Elbette, bu düzen, dayanıklılık gibi ulaşmasını sağlamak ve Yük Dengeleme kuyrukları kullanmanın avantajları vardır. Bu avantajlara ek masraf Yasla.
+Service Bus geçişine ileti göndermek, iletiyi alan geçiş dinleyicisine "tam olarak" olarak değerlendirilir. Service Bus geçişine gönderme işlemi olarak değerlendirilmez ve ardından geçiş dinleyicisine gönderim yapılır. Bir geçiş dinleyicisine karşı bir istek-yanıt stil hizmeti çağrısı (64 KB 'ye kadar), iki adet faturalanabilir ileti ile sonuçlanır: istek için bir faturalanabilir ileti ve yanıt için bir faturalanabilir ileti (yanıtın de 64 KB veya daha küçük olduğu varsayılırsa). Bu, bir istemci ile hizmet arasında aracılık için bir sıra kullanmaktan farklıdır. Bir istemci ile bir hizmet arasında aracılık için bir sıra kullanırsanız, aynı istek-yanıt deseninin kuyruğa gönderilmesi için bir istek gönderimi ve sonra sıradan hizmete bir sıra oluşturma/teslim olması gerekir. Bunun ardından, başka bir kuyruğa gönderme yanıtı ve bu kuyruktan istemciye bir sıra oluşturma/teslim işlemi gönderilir. Aynı boyut varsayımlarını (64 KB 'a kadar) kullanarak, ortalandırılmış sıra deseninin 4 faturalanabilir ileti ile sonucu vardır. Geçiş kullanarak yaptığınız aynı kalıbı uygulamak için ileti sayısının iki katı için faturalandırılırsınız. Tabii ki, dayanıklılık ve yük dengeleme gibi bu düzene ulaşmak için kuyrukları kullanmanın avantajları vardır. Bu avantajlar ek giderleri de gösterebilir.
 
-Kullanılarak açılan geçişleri **netTCPRelay** WCF bağlama tek bir ileti olarak değil, ancak sistem üzerinden akıyor veri akışı olarak ileti kabul et. Bu bağlama kullandığınızda, yalnızca gönderen ve dinleyici gönderilen ve alınan bireysel iletilerin çerçeveleme görünürlük sahiptir. Geçişleri kullanan **netTCPRelay** bağlama, tüm veriler olarak kabul edildiği Faturalanabilir mesajlar hesaplamak için bir akış. Bu durumda, Service Bus toplam gönderilen veya alınan 5 dakikalık aralıklarla tek tek her geçiş aracılığıyla veri miktarını hesaplar. Ardından, 64 KB'ın ilgili süre içinde bu geçiş Faturalanabilir mesajların sayısı belirlemek için bu toplam veri miktarı böler.
+**Nettcprelay** WCF bağlaması kullanılarak açılan geçişler, tek tek iletiler olarak olmayan iletileri kabul eder, ancak sistem üzerinden akan veri akışı olarak işlenir. Bu bağlamayı kullandığınızda, yalnızca gönderici ve dinleyici, gönderilen ve alınan ayrı mesajların çerçeveleme halinde görünürlüğe sahiptir. **Nettcprelay** bağlamasını kullanan geçişler için tüm veriler, faturalandırılabilir iletileri hesaplamak için bir akış olarak değerlendirilir. Bu durumda Service Bus, her bir geçiş aracılığıyla gönderilen veya alınan toplam veri miktarını 5 dakikalık bir esasına göre hesaplar. Daha sonra, bu süre boyunca o geçiş için faturalandırılabilir ileti sayısını öğrenmek üzere bu toplam veri miktarını 64 KB 'ye böler.
 
 ## <a name="quotas"></a>Kotalar
-| Kota adı | `Scope` |  Notlar | Değer |
+| Kota adı | `Scope` |  Notlar | Value |
 | --- | --- | --- | --- |
-| Bir geçiş üzerinde eşzamanlı dinleyicileri |Varlık |Bir ek bağlantı için sonraki istekler reddedilir ve bir özel durum çağıran kod tarafından alınır. |25 |
-| Tüm geçiş uç noktaların bir hizmet ad alanı başına eşzamanlı geçiş bağlantıları |Ad Alanı |- |5,000 |
+| Geçiş sırasında eş zamanlı dinleyiciler |Varlık |Daha sonraki ek bağlantı istekleri reddedilir ve çağıran kod tarafından bir özel durum alınır. |25 |
+| Hizmet ad alanındaki tüm geçiş uç noktaları başına eş zamanlı geçiş bağlantıları |Ad Alanı |- |5,000 |
 | Hizmet ad alanı başına geçiş uç noktaları |Ad Alanı |- |10,000 |
-| İleti boyutu için [NetOnewayRelayBinding](/dotnet/api/microsoft.servicebus.netonewayrelaybinding) ve [NetEventRelayBinding](/dotnet/api/microsoft.servicebus.neteventrelaybinding) geçişleri |Ad Alanı |Bu kotaları aşan gelen iletileri reddedilir ve bir özel durum çağıran kod tarafından alınır. |64 KB |
-| İleti boyutu için [HttpRelayTransportBindingElement](/dotnet/api/microsoft.servicebus.httprelaytransportbindingelement) ve [NetTcpRelayBinding](/dotnet/api/microsoft.servicebus.nettcprelaybinding) geçişleri |Ad Alanı |İleti boyutu sınırı yoktur. |Sınırsız |
+| [NetOnewayRelayBinding](/dotnet/api/microsoft.servicebus.netonewayrelaybinding) ve [Neteventrelaybinding](/dotnet/api/microsoft.servicebus.neteventrelaybinding) geçişleri için ileti boyutu |Ad Alanı |Bu kotaları aşan gelen iletiler reddedilir ve çağıran kod tarafından bir özel durum alınır. |64 KB |
+| [Httprelaytransportbindingelement](/dotnet/api/microsoft.servicebus.httprelaytransportbindingelement) ve [Nettcprelaybinding](/dotnet/api/microsoft.servicebus.nettcprelaybinding) geçişleri için ileti boyutu |Ad Alanı |İleti boyutu için sınır yoktur. |Sınırsız |
 
-### <a name="does-relay-have-any-usage-quotas"></a>Geçiş herhangi bir kullanım kotalarını var mı?
-Varsayılan olarak herhangi bir bulut hizmeti için Microsoft, tüm müşteri abonelikleri hesaplanan bir toplam aylık kullanım kotası ayarlar. Bazen gereksinimlerinizi bu limitlerin olduğunu biliyoruz. Biz de ihtiyaçlarınızı anlayabilmemiz ve bu limitleri uygun şekilde ayarlamak için Müşteri Hizmetleri herhangi bir zamanda başvurabilirsiniz. Service Bus için toplam kullanım kotalarını aşağıdaki gibidir:
+### <a name="does-relay-have-any-usage-quotas"></a>Geçiş, kullanım kotalarına sahip mi?
+Varsayılan olarak, herhangi bir bulut hizmeti için, Microsoft tüm müşteri abonelikleri genelinde hesaplanan bir toplu aylık kullanım kotası ayarlar. İhtiyaçlarınızı Bu limitlerin aşılabileceğini anladık. Müşteri Hizmetleri 'ne dilediğiniz zaman başvurabilirsiniz, böylelikle ihtiyaçlarınızı anlayabiliriz ve bu limitleri uygun şekilde ayarlayabiliriz. Service Bus için, toplam kullanım kotaları aşağıdaki gibidir:
 
 * 5 milyar ileti
 * 2 milyon geçiş saati
 
-Aylık kullanım kotalarını aşan bir hesap devre dışı bırakmak için hakkımızı saklı tutarız, e-posta bildirimi sağlarız ve birden çok vermiyoruz rağmen müşteri herhangi bir işlem gerçekleştirmeden önce bağlantı kurmayı dener. Bu kotaları aşan müşteriler, aşırı ücretlerden için yine de sorumludur.
+Aylık kullanım kotalarını aşan bir hesabı devre dışı bırakma hakkını ayırdık, ancak e-posta bildirimi sağlıyoruz ve herhangi bir işlem gerçekleştirmeden önce müşteriyle iletişim kurmaya yönelik birden çok girişim yaptık. Bu kotaları aşan müşteriler hala fazla ücretlerden sorumludur.
 
 ### <a name="naming-restrictions"></a>Adlandırma kısıtlamaları
-Bir geçiş ad alanı adı uzunluğu 6 ile 50 karakter arasında olmalıdır.
+Geçiş ad alanı adı 6 ila 50 karakter uzunluğunda olmalıdır.
 
 ## <a name="subscription-and-namespace-management"></a>Abonelik ve ad alanı yönetimi
-### <a name="how-do-i-migrate-a-namespace-to-another-azure-subscription"></a>Bir ad alanı için başka bir Azure aboneliğine nasıl geçirebilirim?
+### <a name="how-do-i-migrate-a-namespace-to-another-azure-subscription"></a>Bir ad alanını başka bir Azure aboneliğine geçirmek Nasıl yaparım? mı?
 
-Bir ad alanı bir Azure aboneliğine ait başka bir aboneliğe taşımak için kullanabilir [Azure portalında](https://portal.azure.com) veya PowerShell komutlarını kullanın. Bir ad alanı başka bir aboneliğe taşımak için ad alanı zaten etkin olması gerekir. Komutları çalıştıran kullanıcının, hem kaynak hem de hedef Aboneliklerde yönetici kullanıcı olması gerekir.
+Bir ad alanını bir Azure aboneliğinden başka bir aboneliğe taşımak için [Azure Portal](https://portal.azure.com) kullanabilir ya da PowerShell komutlarını kullanabilirsiniz. Bir ad alanını başka bir aboneliğe taşımak için ad alanı zaten etkin olmalıdır. Komutları çalıştıran kullanıcının hem kaynak hem de hedef aboneliklerde yönetici kullanıcı olması gerekir.
 
 #### <a name="azure-portal"></a>Azure portal
 
-Azure geçişi ad alanlarını başka bir aboneliğe bir abonelikten geçirmek için Azure portalını kullanmak için bkz: [kaynakları yeni kaynak grubuna veya aboneliğe taşıma](../azure-resource-manager/resource-group-move-resources.md#use-portal). 
+Bir abonelikteki Azure Relay ad alanlarını başka bir aboneliğe geçirmek üzere Azure portal kullanmak için bkz. [kaynakları yeni bir kaynak grubuna veya aboneliğe taşıma](../azure-resource-manager/resource-group-move-resources.md#use-the-portal). 
 
 #### <a name="powershell"></a>PowerShell
 
-Bir ad alanı bir Azure aboneliğine ait başka bir aboneliğe taşımak için PowerShell kullanmak için aşağıdaki komutları dizisini kullanın. Bu işlemi yürütmek için ad alanı zaten etkin olması gerekir ve PowerShell komutları çalıştıran kullanıcının kaynak ve hedef Aboneliklerde yönetici kullanıcı olması gerekir.
+Bir ad alanını bir Azure aboneliğinden başka bir aboneliğe taşımak üzere PowerShell 'i kullanmak için aşağıdaki komut dizisini kullanın. Bu işlemi yürütmek için, ad alanı zaten etkin olmalıdır ve PowerShell komutlarını çalıştıran kullanıcı hem kaynak hem de hedef aboneliklerde yönetici kullanıcı olmalıdır.
 
 ```azurepowershell-interactive
 # Create a new resource group in the target subscription.
@@ -124,14 +124,14 @@ Move-AzResource -DestinationResourceGroupName 'targetRG' -DestinationSubscriptio
 ```
 
 ## <a name="troubleshooting"></a>Sorun giderme
-### <a name="what-are-some-of-the-exceptions-generated-by-azure-relay-apis-and-suggested-actions-you-can-take"></a>Bazı özel durumlar nedir, Azure geçişi API'leri tarafından oluşturulan ve önerilen gerçekleştirebileceğiniz eylemler?
-Sık karşılaşılan özel durumlar ve önerilen eylemler gerçekleştirebileceğiniz açıklaması için bkz: [geçiş özel durumları][Relay exceptions].
+### <a name="what-are-some-of-the-exceptions-generated-by-azure-relay-apis-and-suggested-actions-you-can-take"></a>Azure Relay API 'Leri tarafından oluşturulan özel durumların bazıları ve gerçekleştirebileceğiniz önerilen eylemler nelerdir?
+Ortak özel durumlar ve gerçekleştirebileceğiniz önerilen eylemlerin bir açıklaması için bkz. [geçiş özel durumları][Relay exceptions].
 
-### <a name="what-is-a-shared-access-signature-and-which-languages-can-i-use-to-generate-a-signature"></a>Paylaşılan erişim imzası nedir ve hangi dillerin bir imzayı üretmek için kullanabilir miyim?
-Paylaşılan erişim imzaları (SAS), SHA-256'yı güvenli karmaları veya URI dayalı bir kimlik doğrulama mekanizmasıdır. Düğüm, PHP, Java, C ve C# içinde kendi imzaları üretmek hakkında daha fazla bilgi için bkz: [paylaşılan erişim imzaları ile Service Bus kimlik doğrulaması][Shared Access Signatures].
+### <a name="what-is-a-shared-access-signature-and-which-languages-can-i-use-to-generate-a-signature"></a>Paylaşılan erişim imzası nedir ve imza oluşturmak için hangi dilleri kullanabilirim?
+Paylaşılan erişim Imzaları (SAS), SHA-256 güvenli karmaları veya URI 'Leri temel alan bir kimlik doğrulama mekanizmasıdır. Node. js, PHP, Python, Java, C ve C#' de kendi imzalarınızı oluşturma hakkında daha fazla bilgi için bkz. [paylaşılan erişim imzaları ile Service Bus kimlik doğrulaması][Shared Access Signatures].
 
-### <a name="is-it-possible-to-whitelist-relay-endpoints"></a>Beyaz liste geçiş uç noktaları için olası mı?
-Evet. Geçiş istemcisi, tam etki alanı adlarını kullanarak Azure geçişi hizmetini bağlantıları sağlar. Müşteriler için bir giriş ekleyebilirsiniz `*.servicebus.windows.net` DNS beyaz listeye ekleme desteği güvenlik.
+### <a name="is-it-possible-to-whitelist-relay-endpoints"></a>Geçiş uç noktalarını beyaz listelemek mümkün mü?
+Evet. Geçiş istemcisi tam etki alanı adlarını kullanarak Azure Relay hizmetine bağlantı yapar. Müşteriler, DNS beyaz listesini destekleyen `*.servicebus.windows.net` güvenlik duvarları için bir giriş ekleyebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 * [Ad alanı oluşturma](relay-create-namespace-portal.md)

@@ -1,161 +1,85 @@
 ---
-title: Azure Backup’ta dosya ve klasörlerin yavaş yedekleme sorunlarını giderme
-description: Neden Azure Backup performans sorunlarını tanılamanıza yardımcı olmak için sorun giderme kılavuzu verilmiştir
-services: backup
-author: saurabhsensharma
-manager: saurabhsensharma
-ms.service: backup
+title: Dosya ve klasörlerin yavaş yedeklenmesinde sorun giderme
+description: Azure Backup performans sorunlarının nedenini tanılamanıza yardımcı olması için sorun giderme kılavuzu sağlar
+ms.reviewer: saurse
 ms.topic: troubleshooting
-ms.date: 10/31/2018
-ms.author: saurabhsensharma
-ms.openlocfilehash: 1bc9c7b4f6e2a4f2a7c712d966caac74b73518df
-ms.sourcegitcommit: d2785f020e134c3680ca1c8500aa2c0211aa1e24
+ms.date: 07/05/2019
+ms.openlocfilehash: 2b7b8903da0d8dd83591b260bacb496b0c253ae3
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/04/2019
-ms.locfileid: "67565656"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74172578"
 ---
 # <a name="troubleshoot-slow-backup-of-files-and-folders-in-azure-backup"></a>Azure Backup’ta dosya ve klasörlerin yavaş yedekleme sorunlarını giderme
-Bu makalede, Azure Backup kullanırken, dosya ve klasörlerin yavaş yedekleme performansı nedenini tanılamanıza yardımcı olmak için sorun giderme kılavuzu verilmiştir. Dosyalarını yedeklemek için Azure Backup Aracısı'nı kullandığınızda, yedekleme işlemi beklenenden daha uzun sürebilir. Bu gecikme, bir veya daha fazlasını tarafından kaynaklanabilir:
 
-* [Yedeklenmekte olan bir bilgisayarda performans sorunları vardır.](#cause1)
-* [Başka bir işlem veya virüsten koruma yazılımı Azure yedekleme işlemine engelliyor.](#cause2)
-* [Backup Aracısı, Azure sanal makinesi (VM) üzerinde çalışıyor.](#cause3)  
-* [Çok sayıda dosya (milyon) yedekleme yapıyorsanız.](#cause4)
+Bu makalede, Azure Backup kullanırken dosyalar ve klasörler için yavaş yedekleme performansının Nedenini tanılamanıza yardımcı olacak sorun giderme kılavuzu sağlanmıştır. Dosyaları yedeklemek için Azure Backup Aracısı 'nı kullandığınızda, yedekleme işlemi beklenenden uzun sürebilir. Bu gecikmeye aşağıdakilerden biri veya birkaçı neden olmuş olabilir:
 
-İndirme ve yükleme sorunlarını giderme başlamadan önce öneririz [en son Azure Backup aracısını](https://aka.ms/azurebackup_agent). Çeşitli sorunları gidermek, özellikleri ekleyin ve performansı artırmak için Backup Aracısı sık güncelleştirmeler vermiyoruz.
+* [Yedeklenmekte olan bilgisayarda performans sorunları var.](#cause1)
+* [Başka bir işlem veya virüsten koruma yazılımı Azure Backup işlemini engelliyor.](#cause2)
+* [Yedekleme aracısı bir Azure sanal makinesinde (VM) çalışıyor.](#cause3)  
+* [Çok sayıda (milyonlarca) dosyayı yedekliyorsunuz.](#cause4)
 
-Ayrıca gözden geçirmenizi öneririz [Azure Backup hizmeti hakkında SSS](backup-azure-backup-faq.md) değil karşılaştığınız herhangi bir ortak yapılandırma sorunlarını emin olmak için.
+Sorun giderme sorunlarını gidermeye başlamadan önce [en son Azure Backup aracısını](https://aka.ms/azurebackup_agent)indirip yüklemenizi öneririz. Çeşitli sorunları gidermek, özellikler eklemek ve performansı artırmak için yedekleme aracısında sık sık güncelleştirmeler yaptık.
+
+Ayrıca, yaygın yapılandırma sorunlarından biriyle karşılaşmadığınızdan emin olmak için [Azure Backup hizmeti hakkında SSS](backup-azure-backup-faq.md) 'yi incelemenizi öneririz.
 
 [!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
 
 <a id="cause1"></a>
 
-## <a name="cause-performance-bottlenecks-on-the-computer"></a>Neden: Bilgisayarda performans sorunları
-Yedeklenmekte olan bir bilgisayarda performans sorunlarını gecikmelere neden olabilir. Örneğin, bilgisayarın özelliği okuma veya yazma disk veya ağ üzerinden veri göndermek için kullanılabilir bant genişliği performans sorunlarını neden olabilir.
+## <a name="cause-performance-bottlenecks-on-the-computer"></a>Neden: bilgisayardaki performans sorunları
 
-Windows adlı yerleşik bir aracı sağlayan [Performans İzleyicisi](https://technet.microsoft.com/magazine/2008.08.pulse.aspx) (Bu performans sorunlarını algılamak için Perfmon).
+Yedeklenen bilgisayardaki performans sorunları gecikmelere neden olabilir. Örneğin, bilgisayarın disk okuma veya diske yazma veya ağ üzerinden veri göndermek için kullanılabilir bant genişliği gibi performans sorunlarına neden olabilir.
 
-Bazı performans sayaçları ve en iyi yedekleme için performans sorunlarını tanılamada yararlı olabilir aralıkları aşağıda verilmiştir.
+Windows, bu darboğazları algılamak için [Performans İzleyicisi](https://technet.microsoft.com/magazine/2008.08.pulse.aspx) (PerfMon) adlı yerleşik bir araç sağlar.
+
+En iyi yedeklemeler için performans sorunlarını tanılamaya yardımcı olabilecek bazı performans sayaçları ve aralıkları aşağıda verilmiştir.
 
 | Sayaç | Durum |
 | --- | --- |
-| Mantıksal Disk (Fiziksel Disk)--% boşta |• %100 %50 boşta boşta Sağlıklı =</br>• %49 %20 boşta boşta = uyarı veya İzleyici</br>• %19 %0 boşta boşta = kritik veya tanesi belirtimi |
-| Mantıksal Disk (Fiziksel Disk)--% ortalama Disk sn okuma veya yazma |• 0,001 ms ile 0.015 ms Sağlıklı =</br>• 0.015 ms 0.025 ms için uyarı veya İzleyici =</br>• 0.026 ms veya daha uzun süre = kritik veya tanesi belirtimi |
-| Mantıksal Disk (Fiziksel Disk)--geçerli Disk Sırası Uzunluğu (tüm örnekler için) |6 dakikadan fazla süre için 80 istek |
-| Bellek--olmayan havuzda bayt |• Küçüktür %60 tüketilen havuzunun Sağlıklı =<br>• %61 80 tüketilen havuzunun uyarı veya İzleyici =</br>• % 80 havuzu tüketilmiş büyüktür = kritik veya tanesi belirtimi |
-| Disk belleği havuzu bayt bellek-- |• Küçüktür %60 tüketilen havuzunun Sağlıklı =</br>• %61 80 tüketilen havuzunun uyarı veya İzleyici =</br>• % 80 havuzu tüketilmiş büyüktür = kritik veya tanesi belirtimi |
-| Bellek--kullanılabilir megabayt |• 50 boş bellek yüzdesi veya daha Sağlıklı =</br>• 25 kullanılabilir boş bellek yüzdesi İzleyici =</br>• 10 kullanılabilir boş bellek yüzdesi uyarı =</br>• 100 MB veya 5 boş bellek yüzdesi az kritik veya tanesi Spec = |
-| Processor--\%Processor Time (all instances) |• Less than 60% consumed = Healthy</br>• 61% to 90% consumed = Monitor or Caution</br>• 91% to 100% consumed = Critical |
+| Mantıksal disk (fiziksel disk)--% boşta |• %100 boşta = %50 boşta = sağlıklı</br>• %49 boşta = %20 boşta = uyarı ya da Izleyici</br>• %19 boşta, %0 boşta = kritik veya spec dışı |
+| Mantıksal disk (fiziksel disk)--% ort. Disk sn okuma veya yazma |• 0,001 MS-0,015 MS = sağlıklı</br>• 0,015 MS-0,025 MS = uyarı veya Izleyici</br>• 0,026 MS veya daha uzun = kritik veya spec dışı |
+| Mantıksal disk (fiziksel disk)--geçerli disk sırası uzunluğu (tüm örnekler için) |6 dakikadan uzun süre 80 istek |
+| Bellek--Sayfalamayan baytlar |• Kullanılan havuzun %60 ' inden az olması = sağlıklı<br>• %61, kullanılan havuzun %80 ' i = uyarı veya Izleyici</br>• %80 daha fazla kullanılan havuz = kritik veya spec dışı |
+| Bellek--havuzda disk belleğine alınan baytlar |• Kullanılan havuzun %60 ' inden az olması = sağlıklı</br>• %61, kullanılan havuzun %80 ' i = uyarı veya Izleyici</br>• %80 daha fazla kullanılan havuz = kritik veya spec dışı |
+| Bellek--kullanılabilir megabayt |• %50 boş bellek kullanılabilir veya daha fazla = sağlıklı</br>• boş belleğin %25 ' i kullanılabilir = Izleyici</br>• kullanılabilir boş belleğin %10 ' ü = uyarı</br>• 100 MB 'tan az veya kullanılabilir boş belleğin %5 ' inden az olması = kritik veya spec dışı |
+| İşlemci--\%Işlemci zamanı (tüm örnekler) |• %60 daha az tüketilen = sağlıklı</br>• %61-90% tüketilen = Izleyici veya uyarı</br>• %91-100% tüketilen = kritik |
 
 > [!NOTE]
-> If you determine that the infrastructure is the culprit, we recommend that you defragment the disks regularly for better performance.
+> Altyapının külün olduğunu belirlerseniz, daha iyi performans için diskleri düzenli olarak birleştirmeniz önerilir.
 >
 >
 
 <a id="cause2"></a>
 
-## Cause: Another process or antivirus software interfering with Azure Backup
-We've seen several instances where other processes in the Windows system have negatively affected performance of the Azure Backup agent process. For example, if you use both the Azure Backup agent and another program to back up data, or if antivirus software is running and has a lock on files to be backed up, the multiple locks on files might cause contention. In this situation, the backup might fail, or the job might take longer than expected.
+## <a name="cause-another-process-or-antivirus-software-interfering-with-azure-backup"></a>Neden: başka bir işlem veya virüsten koruma yazılımı Azure Backup engelliyor
 
-The best recommendation in this scenario is to turn off the other backup program to see whether the backup time for the Azure Backup agent changes. Usually, making sure that multiple backup jobs are not running at the same time is sufficient to prevent them from affecting each other.
+Windows sistemindeki diğer işlemlerin Azure Backup Aracısı işleminin performansını olumsuz yönde etkilediği birkaç örnek gördük. Örneğin, verileri yedeklemek için hem Azure Backup Aracısı hem de başka bir program kullanıyorsanız veya virüsten koruma yazılımı çalışıyorsa ve yedeklenmek üzere dosyalar üzerinde bir kilit varsa, dosyalardaki birden fazla kilit çekişmeye neden olabilir. Bu durumda, yedekleme başarısız olabilir veya iş beklenenden uzun sürebilir.
 
-For antivirus programs, we recommend that you exclude the following files and locations:
+Bu senaryodaki en iyi öneri, Azure Backup Aracısı için yedekleme saatinin değişmediğini görmek üzere diğer Yedekleme programını kapatmmsudur. Genellikle, birden çok yedekleme işinin aynı anda çalışmadığı ve birbirini etkilemelerini engellemek için yeterli olduğundan emin olun.
 
-* C:\Program Files\Microsoft Azure Recovery Services Agent\bin\cbengine.exe as a process
-* C:\Program Files\Microsoft Azure Recovery Services Agent\ folders
-* Scratch location (if you're not using the standard location)
+Virüsten koruma programları için aşağıdaki dosyaları ve konumları dışlanmasını öneririz:
 
-<a id="cause3"></a>
-
-## Cause: Backup agent running on an Azure virtual machine
-If you're running the Backup agent on a VM, performance will be slower than when you run it on a physical machine. This is expected due to IOPS limitations.  However, you can optimize the performance by switching the data drives that are being backed up to Azure Premium Storage. We're working on fixing this issue, and the fix will be available in a future release.
-
-<a id="cause4"></a>
-
-## Cause: Backing up a large number (millions) of files
-Moving a large volume of data will take longer than moving a smaller volume of data. In some cases, backup time is related to not only the size of the data, but also the number of files or folders. This is especially true when millions of small files (a few bytes to a few kilobytes) are being backed up.
-
-This behavior occurs because while you're backing up the data and moving it to Azure, Azure is simultaneously cataloging your files. In some rare scenarios, the catalog operation might take longer than expected.
-
-The following indicators can help you understand the bottleneck and accordingly work on the next steps:
-
-* **UI is showing progress for the data transfer**. The data is still being transferred. The network bandwidth or the size of data might be causing delays.
-* **UI is not showing progress for the data transfer**. Open the logs located at C:\Program Files\Microsoft Azure Recovery Services Agent\Temp, and then check for the FileProvider::EndData entry in the logs. This entry signifies that the data transfer finished and the catalog operation is happening. Don't cancel the backup jobs. Instead, wait a little longer for the catalog operation to finish. If the problem persists, contact [Azure support](https://portal.azure.com/#create/Microsoft.Support).İşlemci--\`işlemci zamanı (tüm örnekler için)es and folders in Azure Backup
-description: Provides troubleshooting guidance to help you diagnose the cause of Azure Backup performance issues
-services: backup
-author: saurabhsensharma
-manager: saurabhsensharma
-ms.service: backup
-ms.topic: troubleshooting
-ms.date: 10/31/2018
-ms.author: saurabhsensharma
----
-# Troubleshoot slow backup of files and folders in Azure Backup
-This article provides troubleshooting guidance to help you diagnose the cause of slow backup performance for files and folders when you're using Azure Backup. When you use the Azure Backup agent to back up files, the backup process might take longer than expected. This delay might be caused by one or more of the following:
-
-* [There are performance bottlenecks on the computer that’s being backed up.](#cause1)
-* [Another process or antivirus software is interfering with the Azure Backup process.](#cause2)
-* [The Backup agent is running on an Azure virtual machine (VM).](#cause3)  
-* [You're backing up a large number (millions) of files.](#cause4)
-
-Before you start troubleshooting issues, we recommend that you download and install the [latest Azure Backup agent](https://aka.ms/azurebackup_agent). We make frequent
-updates to the Backup agent to fix various issues, add features, and improve performance.
-
-We also strongly recommend that you review the [Azure Backup service FAQ](backup-azure-backup-faq.md) to make sure you're not experiencing any of the common configuration issues.
-
-[!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
-
-<a id="cause1"></a>
-
-## Cause: Performance bottlenecks on the computer
-Bottlenecks on the computer that's being backed up can cause delays. For example, the computer's ability to read or write to disk, or available bandwidth to send data over the network, can cause bottlenecks.
-
-Windows provides a built-in tool that's called [Performance Monitor](https://technet.microsoft.com/magazine/2008.08.pulse.aspx) (Perfmon) to detect these bottlenecks.
-
-Here are some performance counters and ranges that can be helpful in diagnosing bottlenecks for optimal backups.
-
-| Counter | Status |
-| --- | --- |
-| Logical Disk(Physical Disk)--%idle |• 100% idle to 50% idle = Healthy</br>• 49% idle to 20% idle = Warning or Monitor</br>• 19% idle to 0% idle = Critical or Out of Spec |
-| Logical Disk(Physical Disk)--%Avg. Disk Sec Read or Write |• 0.001 ms to 0.015 ms  = Healthy</br>• 0.015 ms to 0.025 ms = Warning or Monitor</br>• 0.026 ms or longer = Critical or Out of Spec |
-| Logical Disk(Physical Disk)--Current Disk Queue Length (for all instances) |80 requests for more than 6 minutes |
-| Memory--Pool Non Paged Bytes |• Less than 60% of pool consumed = Healthy<br>• 61% to 80% of pool consumed = Warning or Monitor</br>• Greater than 80% pool consumed = Critical or Out of Spec |
-| Memory--Pool Paged Bytes |• Less than 60% of pool consumed = Healthy</br>• 61% to 80% of pool consumed = Warning or Monitor</br>• Greater than 80% pool consumed = Critical or Out of Spec |
-| Memory--Available Megabytes |• 50% of free memory available or more = Healthy</br>• 25% of free memory available = Monitor</br>• 10% of free memory available = Warning</br>• Less than 100 MB or 5% of free memory available = Critical or Out of Spec |
-| Processor--\%Processor Time (all instances) |• % 60'den az kullanılan Sağlıklı =</br>• 61 tüketilen % 90 = İzleyici veya uyarı</br>• %91 100 arasında tüketilen kritik = |
-
-> [!NOTE]
-> Altyapı sorunlu olduğunu belirlerseniz, daha iyi performans için düzenli olarak disk birleştirme öneririz.
->
->
-
-<a id="cause2"></a>
-
-## <a name="cause-another-process-or-antivirus-software-interfering-with-azure-backup"></a>Neden: Başka bir işlem veya virüsten koruma yazılımı Azure Backup ile engelliyor
-Windows sisteminde diğer işlemleri olumsuz yönde etkilenen Azure Backup aracısı işleminin performansını burada birkaç örneğe gördük. Örneğin, verileri yedeklemek için Azure Backup aracısını hem de başka bir program kullanıyorsanız veya virüsten koruma yazılımı çalıştıran ve yedeklenecek dosyaları üzerinde bir kilit sahiptir, üzerinde birden çok kilitler dosyaları Çekişme neden olabilir. Bu durumda, yedekleme başarısız veya iş beklenenden daha uzun sürebilir.
-
-Bu senaryoda en iyi kullanılması, Azure Yedekleme aracısı yedekleme zamanını değişiklikler olup olmadığını görmek için diğer yedekleme programınızı kapatmak için önerilir. Genellikle, birden çok yedekleme işleri aynı anda çalışmayan sağlamaktan birbirine etkilemesini önlemek yeterli olur.
-
-Virüsten koruma programları için konumları ve aşağıdaki dosyaları dışarıda öneririz:
-
-* Bir işlem olarak C:\Program Files\Microsoft Azure Recovery Services Agent\bin\cbengine.exe
-* C:\Program Files\Microsoft Azure Recovery Services Agent\ klasörleri
-* Karalama konumu (standart konumu değil kullanıyorsanız)
+* C:\Program Files\Microsoft Azure kurtarma hizmetleri bir işlem olarak Agent\bin\cbengine.exe
+* C:\Program Files\Microsoft Azure kurtarma hizmetleri Aracısı \ klasörler
+* Karalama konumu (Standart konumu kullanmıyorsanız)
 
 <a id="cause3"></a>
 
-## <a name="cause-backup-agent-running-on-an-azure-virtual-machine"></a>Neden: Azure sanal makinesinde çalışan yedekleme aracısı
-Backup Aracısı VM üzerinde çalıştırıyorsanız, performansı, fiziksel bir makinede çalıştırıldığında yavaş olur. IOPS sınırlamaları nedeniyle bu bekleniyor.  Ancak, Azure Premium Depolama'ya yedeklenen veri sürücülerine geçiş yaparak performansını iyileştirebilirsiniz. Bu sorunu düzeltmeye çalışıyoruz ve düzeltme gelecekteki bir sürümde sağlanacaktır.
+## <a name="cause-backup-agent-running-on-an-azure-virtual-machine"></a>Neden: bir Azure sanal makinesinde çalışan yedekleme Aracısı
+
+Yedekleme aracısını bir VM üzerinde çalıştırıyorsanız, performans fiziksel bir makinede çalıştırılırken daha yavaş olur. Bu, ıOPS sınırlamaları nedeniyle beklenmektedir.  Ancak, Azure Premium depolamaya yedeklenmekte olan veri sürücülerine geçerek performansı iyileştirebilirsiniz. Bu sorunu düzeltmek için çalışıyoruz ve düzeltme gelecekteki bir sürümde kullanıma sunulacaktır.
 
 <a id="cause4"></a>
 
-## <a name="cause-backing-up-a-large-number-millions-of-files"></a>Neden: Yedekleme dosyaları çok sayıda (milyon)
-Büyük miktarda veri taşıma daha küçük bir veri hacmi taşımaktan daha uzun sürer. Bazı durumlarda yalnızca boyutunu verilerin, aynı zamanda dosyaları veya klasörleri için yedekleme zamanı ilişkilidir. Bu, özellikle küçük dosyaları (birkaç kilobayt birkaç bayt) milyonlarca yedeklenen olduğunda geçerlidir.
+## <a name="cause-backing-up-a-large-number-millions-of-files"></a>Neden: çok sayıda (milyonlarca) dosyayı yedekleme
 
-Bu davranış, veri yedekleme ve Azure'a taşıma, ancak Azure dosyaları aynı anda kataloglama kaynaklanır. Bazı nadir senaryolarda katalog işlemi beklenenden daha uzun sürebilir.
+Büyük hacimli verilerin taşınması, daha küçük bir veri hacmi taşımadan daha uzun sürer. Bazı durumlarda, yedekleme zamanı yalnızca verilerin boyutuyla ve ayrıca dosya veya klasör sayısıyla ilgilidir. Bu özellikle, milyonlarca küçük dosya (birkaç kilobayt kadar bayt) yedeklendiğinde geçerlidir.
 
-Aşağıdaki göstergelerden bir performans sorunu anlamanıza ve sonraki adımlara göre uygun şekilde çalışması yardımcı olabilir:
+Bu davranış, verileri yedeklemekte ve Azure 'a taşırken, Azure 'un aynı anda dosyalarınızı kataloglarken meydana gelir. Nadir bazı senaryolarda, Katalog işlemi beklenenden uzun sürebilir.
 
-* **UI veri aktarımı için ilerlemeyi gösteren**. Veri hala aktarıldığı. Ağ bant genişliğini veya veri boyutu gecikmelere neden.
-* **UI göstermiyorsa ilerleme veri aktarımı için**. C:\Program Files\Microsoft Azure Recovery Services Agent\Temp bulunan günlüklerini açın ve ardından günlüklerinde FileProvider::EndData giriş olup olmadığını denetleyin. Bu giriş, veri aktarımı tamamlandı ve Katalog işleminin gerçekleştiği gösterir. Yedekleme işleri iptal etme. Bunun yerine, biraz daha uzun Kataloğu işlemin tamamlanmasını bekleyin. Sorun devam ederse, iletişim [Azure Destek](https://portal.azure.com/#create/Microsoft.Support).
+Aşağıdaki göstergeler, bir sonraki adımlarda performans sorunlarını ve buna uygun işi anlamanıza yardımcı olabilir:
+
+* **Kullanıcı arabirimi, veri aktarımının ilerlemesini gösteriyor**. Veriler hala aktarılmakta. Ağ bant genişliği veya veri boyutu gecikmelere neden olabilir.
+* **UI veri aktarımı için ilerlemeyi gösterilmiyor**. C:\Program Files\Microsoft Azure Recovery Services \Temp dizininde bulunan günlükleri açın ve sonra günlüklerde FileProvider:: EndData girdisini kontrol edin. Bu giriş, veri aktarımının bittiğini ve Katalog işleminin gerçekleştiğini belirtir. Yedekleme işlerini iptal etmeyin. Bunun yerine, Katalog işleminin bitmesini biraz daha uzun süre bekleyin. Sorun devam ederse [Azure desteği](https://portal.azure.com/#create/Microsoft.Support)'ne başvurun.

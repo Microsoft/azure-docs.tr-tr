@@ -1,50 +1,49 @@
 ---
-title: Eş Anlamlılar C# örneği - Azure Search
-description: Bu C# örnek, eş anlamlılar özelliğini Azure Search'teki bir dizine eklemeyi öğrenin. Eş Anlamlılar eşdeğer terimleri listesini haritasıdır. Eş anlamlı sözcük desteği alanlarla sorguları kullanıcı tarafından sağlanan terimi içerecek şekilde genişletin ve tüm eş anlamlılar ilgili.
-manager: cgronlun
+title: Eş C# anlamlı örnek
+titleSuffix: Azure Cognitive Search
+description: Bu C# örnekte, eş anlamlılar özelliğini Azure bilişsel arama içindeki bir dizine eklemeyi öğrenin. Eş anlamlı eşleme, eşdeğer terimlerin bir listesidir. Eş anlamlı olan alanlar, Kullanıcı tarafından sunulan terimi ve ilgili tüm eş anlamlıları içerecek şekilde sorguları genişletir.
+manager: nitinme
 author: HeidiSteen
-services: search
-ms.service: search
-ms.topic: conceptual
-ms.date: 05/02/2019
 ms.author: heidist
-ms.custom: seodec2018
-ms.openlocfilehash: 5b81e4b9a8773cc8e4cc76582ccf2df88565d3d8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
+ms.openlocfilehash: 8cc085fd27004928babd7df305a4452d1b068f6e
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65025164"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72794244"
 ---
-# <a name="example-add-synonyms-for-azure-search-in-c"></a>Örnek: Azure Search için eş anlamlı sözcükler eklemeC#
+# <a name="example-add-synonyms-for-azure-cognitive-search-in-c"></a>Örnek: içinde Azure Bilişsel Arama için eş anlamlılar ekleyinC#
 
 Eş anlamlılar, giriş terimine anlam bakımından eşdeğer olan terimlerle eşleşerek bir sorguyu genişletir. Örneğin, "araba" aramasının "otomobil" veya "araç" terimlerini içeren belgelerle eşleşmesini isteyebilirsiniz. 
 
-Azure Search’te, eş anlamlılar eşdeğer terimleri ilişkilendiren *eşleme kuralları* aracılığıyla bir *eş anlamlı eşleminde* tanımlanır. Bu örnekte, ekleme ve mevcut dizin ile eş anlamlılar kullanmak için temel adımları kapsar. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
+Azure Bilişsel Arama 'de eş anlamlılar, eşdeğer terimleri ilişkilendiren *eşleme kuralları* aracılığıyla bir *eş anlamlı haritada*tanımlanmıştır. Bu örnek, var olan bir dizinle eş anlamlıları eklemek ve kullanmak için gerekli olan adımları içerir. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 
 > [!div class="checklist"]
-> * Kullanarak bir eş anlamlı eşlemi oluşturabilir [SynonymMap](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.synonymmap?view=azure-dotnet) sınıfı. 
-> * Ayarlama [SynonymMaps](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.field.synonymmaps?view=azure-dotnet) özelliği alanlarda eş anlamlılar aracılığıyla sorgu genişletme desteklemelidir.
+> * [Eş anlamlı eşleme sınıfını kullanarak](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.synonymmap?view=azure-dotnet) bir eşanlamlı eşlemesi oluşturun. 
+> * Eş anlamlıları aracılığıyla sorgu genişletmeyi desteklemesi gereken alanlarda [eş](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.field.synonymmaps?view=azure-dotnet) anlamlılar özelliğini ayarlayın.
 
-Normalde yaptığınız gibi bir eş anlamlı etkin alanı sorgulayabilirsiniz. Eş Anlamlılar erişmek için gerekli hiçbir ek sorgu sözdizimi yoktur.
+Eş anlamlı etkin bir alanı normal şekilde sorgulayabilirsiniz. Eş anlamlıya erişmek için ek sorgu söz dizimi gerekli değildir.
 
-Birden çok eş anlamlı eşlemi oluşturabilir, bunları bir dizin için kullanılabilen hizmet genelinde kaynak olarak gönderebilir ve alan düzeyinde hangisinin kullanılacağını belirtebilirsiniz. Sorgu zamanında Azure Search, sorguda kullanılan alanlarda belirtilmişse dizinde aramaya ek olarak bir eş anlamlı eşleminde arama yapar.
+Birden çok eş anlamlı eşlemi oluşturabilir, bunları bir dizin için kullanılabilen hizmet genelinde kaynak olarak gönderebilir ve alan düzeyinde hangisinin kullanılacağını belirtebilirsiniz. Sorgu zamanında, bir dizin aramanın yanı sıra, sorguda kullanılan alanlarda bir tane belirtilmişse, Azure Bilişsel Arama bir eş anlamlı haritada arama yapar.
 
 > [!NOTE]
-> Eş Anlamlılar programlı olarak oluşturulabilir ancak Portalı'nda. Eş anlamlılar için Azure portalı desteği sizin için kullanışlı olacaksa, lütfen [UserVoice](https://feedback.azure.com/forums/263029-azure-search)’te geri bildiriminizi sağlayın
+> Eş anlamlılar, portalda değil, programlı bir şekilde oluşturulabilir. Eş anlamlılar için Azure portalı desteği sizin için kullanışlı olacaksa, lütfen [UserVoice](https://feedback.azure.com/forums/263029-azure-search)’te geri bildiriminizi sağlayın
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Öğretici gereksinimleri şunları içerir:
 
 * [Visual Studio](https://www.visualstudio.com/downloads/)
-* [Azure Search hizmeti](search-create-service-portal.md)
+* [Azure Bilişsel Arama hizmeti](search-create-service-portal.md)
 * [Microsoft.Azure.Search .NET kitaplığı](https://aka.ms/search-sdk)
-* [Bir .NET Uygulamasından Azure Search kullanma](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk)
+* [.NET uygulamasından Azure Bilişsel Arama kullanma](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk)
 
 ## <a name="overview"></a>Genel Bakış
 
-Öncesi ve sonrası sorguları, eş anlamlıların değerini gösterir. Bu örnekte, sorguları yürüten ve sonuçları bir örnek dizinde döndüren örnek bir uygulama kullanın. Örnek uygulama, iki belgeyle doldurulmuş "oteller" adlı küçük bir dizin oluşturur. Uygulama, dizinde görünmeyen terim ve ifadeleri kullanarak arama sorguları yürütür, eş anlamlılar özelliğini etkinleştirir, ardından aynı aramaları tekrar gerçekleştirir. Aşağıdaki kod genel akışı gösterir.
+Öncesi ve sonrası sorguları, eş anlamlıların değerini gösterir. Bu örnekte, sorguları yürüten ve sonuçları örnek bir dizin üzerinde döndüren örnek bir uygulama kullanın. Örnek uygulama, iki belgeyle doldurulmuş "oteller" adlı küçük bir dizin oluşturur. Uygulama, dizinde görünmeyen terim ve ifadeleri kullanarak arama sorguları yürütür, eş anlamlılar özelliğini etkinleştirir, ardından aynı aramaları tekrar gerçekleştirir. Aşağıdaki kod genel akışı gösterir.
 
 ```csharp
   static void Main(string[] args)
@@ -78,7 +77,7 @@ Birden çok eş anlamlı eşlemi oluşturabilir, bunları bir dizin için kullan
       Console.ReadKey();
   }
 ```
-Örnek dizini oluşturma ve doldurma adımları [Bir .NET Uygulamasından Azure Search kullanma](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk) bölümünde açıklanmıştır.
+Örnek dizini oluşturma ve doldurma adımları [bir .NET uygulamasından Azure bilişsel arama kullanma](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk)bölümünde açıklanmıştır.
 
 ## <a name="before-queries"></a>"Öncesi" sorguları
 
@@ -129,7 +128,7 @@ Eş anlamlıların etkinleştirilmesi iki adımlı bir işlemdir. İlk olarak e�
 
     serviceClient.SynonymMaps.CreateOrUpdate(synonymMap);
    ```
-   Bir eş anlamlı eşlemi, açık kaynak standart `solr` biçimine uygun olmalıdır. Biçim, `Apache Solr synonym format` bölümündeki [Azure Search’te Eş Anlamlılar](search-synonyms.md) içinde açıklanmıştır.
+   Bir eş anlamlı eşlemi, açık kaynak standart `solr` biçimine uygun olmalıdır. Biçim, Bölüm `Apache Solr synonym format`altında [Azure bilişsel arama eş anlamlılar](search-synonyms.md) olarak açıklanmaktadır.
 
 2. Dizin tanımında eş anlamlı eşlemini kullanacak aranabilir alanları yapılandırın. `EnableSynonymsInHotelsIndex` içinde, `synonymMaps` özelliği yeni yüklenen eş anlamlı eşleminin adına ayarlanarak `category` ve `tags` alanlarında eş anlamlılar etkinleştirilir.
    ```csharp
@@ -163,18 +162,18 @@ Name: Roach Motel       Category: Budget        Tags: [motel, budget]
 ~~~
 İlk sorgu, `five star=>luxury` kuralından belgeyi bulur. İkinci sorgu, `internet,wifi` kullanarak aramayı genişletir, üçüncü sorgu ise eşleştikleri belgeleri bulmak için `hotel, motel` ve `economy,inexpensive=>budget` kullanır.
 
-Eş anlamlıların eklenmesi, arama deneyimini tamamen değiştirir. Bu örnekte, ilk sorgular anlamlı sonuçlar belgelerin ilgili olsa da döndürmek başarısız oldu. Eş anlamlıları etkinleştirerek, dizinde temel alınan verileri değiştirmeden dizini yaygın olarak kullanılan terimleri içerecek şekilde genişletebiliriz.
+Eş anlamlıların eklenmesi, arama deneyimini tamamen değiştirir. Bu örnekte, dizinimizde bulunan belgeler ilgili olmasına rağmen özgün sorgular anlamlı sonuçlar döndüremedi. Eş anlamlıları etkinleştirerek, dizinde temel alınan verileri değiştirmeden dizini yaygın olarak kullanılan terimleri içerecek şekilde genişletebiliriz.
 
 ## <a name="sample-application-source-code"></a>Örnek uygulama kaynak kodu
 Bu kılavuzda kullanılan örnek uygulamanın tam kaynak kodunu [GitHub](https://github.com/Azure-Samples/search-dotnet-getting-started/tree/master/DotNetHowToSynonyms) üzerinde bulabilirsiniz.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Azure Search Hizmeti içeren kaynak grubunu silerek bir örnektir sonra temizlemek için en hızlı yolu. Kaynak grubunu silerek içindeki her şeyi kalıcı olarak silebilirsiniz. Portalda kaynak grubu adı, Azure Search hizmetinin Genel Bakış sayfasında bulunur.
+Bir örnek sonrasında temizlemenin en hızlı yolu, Azure Bilişsel Arama hizmetini içeren kaynak grubunu silkullanmaktır. Kaynak grubunu silerek içindeki her şeyi kalıcı olarak silebilirsiniz. Portalda, kaynak grubu adı Azure Bilişsel Arama hizmeti 'nin genel bakış sayfaalıdır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu örnekte eş anlamlılar özelliğini gösterilen C# kod eşleme kurallarını gönderin ve bir sorgu üzerindeki eş anlamlı eşlemi'ı çağırın. [.NET SDK](https://docs.microsoft.com/dotnet/api/microsoft.azure.search) ve [REST API](https://docs.microsoft.com/rest/api/searchservice/) başvuru belgelerinde daha fazla bilgi bulabilirsiniz.
+Bu örnekte, eşleme kuralları oluşturma ve C# gönderme için koddaki eş anlamlılar özelliği gösterilmiştir ve sonra bir sorguda eş anlamlı eşleme çağrısı yapılır. [.NET SDK](https://docs.microsoft.com/dotnet/api/microsoft.azure.search) ve [REST API](https://docs.microsoft.com/rest/api/searchservice/) başvuru belgelerinde daha fazla bilgi bulabilirsiniz.
 
 > [!div class="nextstepaction"]
-> [Azure Search’te eş anlamlıları kullanma](search-synonyms.md)
+> [Azure Bilişsel Arama eş anlamlılar kullanma](search-synonyms.md)

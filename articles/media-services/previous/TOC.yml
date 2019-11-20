@@ -7,7 +7,7 @@
       href: scenarios-and-availability.md
     - name: Kavramlar
       href: media-services-concepts.md
-- name: başlarken
+- name: Başlarken
   items:
     - name: Hesap oluşturma ve yönetme
       href: media-services-portal-create-account.md
@@ -49,8 +49,22 @@
           href: media-services-dotnet-live-encode-with-onpremises-encoders.md
 - name: Nasıl yapılır
   items:
+    - name: Eski bileşenler
+      href: legacy-components.md
+      items:
+        - name: Azure Medya Kodlayıcısı’ndan geçiş
+          href: migrate-azure-media-encoder.md
+          displayName: AME
+        - name: Windows Azure Medya Kodlayıcısı’ndan geçiş
+          href: migrate-windows-azure-media-encoder.md
+          displayName: WAME
+        - name: Dizin oluşturucu v1 ve v2’den geçiş
+          href: migrate-indexer-v1-v2.md
     - name: Yönetme
       items:
+        - name: Hesaplar
+          displayName: subscription
+          href: media-services-account-concept.md
         - name: Varlıklar
           items:
             - name: .NET
@@ -69,7 +83,7 @@
             - name: Depolama erişim anahtarlarını dağıttıktan sonra Media Services'i güncelleştirme
               href: media-services-roll-storage-access-keys.md
             - name: Birden çok depolama hesabında varlıkları yönetme
-              href: meda-services-managing-multiple-storage-accounts.md
+              href: media-services-managing-multiple-storage-accounts.md
         - name: Kotalar ve sınırlamalar
           href: media-services-quotas-and-limitations.md
     - name: Postman'i yapılandırma
@@ -89,10 +103,10 @@
               href: media-services-portal-upload-files.md
             - name: .NET
               href: media-services-dotnet-upload-files.md
+              displayName: invalid character
             - name: REST
               href: media-services-rest-upload-files.md
-        - name: Aspera ile büyük dosyaları karşıya yükleme
-          href: media-services-upload-files-with-aspera.md
+              displayName: invalid character
         - name: StorSimple ile dosyaları karşıya yükleme
           href: media-services-upload-files-from-storsimple.md
         - name: Mevcut blobları kopyalama
@@ -251,7 +265,7 @@
         - name: Uzun süren işlemlerle başa çıkma
           href: media-services-dotnet-long-operations.md
         - name: Bölünmüş MP4 canlı içe alma belirtimi
-          href: media-services-fmp4-live-ingest-overview.md
+          href: ../media-services-fmp4-live-ingest-overview.md
         - name: Başlarken
           href: media-services-azure-media-clipper-getting-started.md
         - name: Videoları yükleme
@@ -455,11 +469,11 @@
     - name: Belirtimler
       items:
         - name: Canlı Alma - Bölünmüş MP4 canlı alma belirtimi
-          href: media-services-fmp4-live-ingest-overview.md
+          href: ../media-services-fmp4-live-ingest-overview.md
         - name: Canlı Alma - Canlı Akışta Zamanlanmış Meta Verilere Sinyal Gönderme
-          href: media-services-specifications-live-timed-metadata.md
+          href: ../media-services-specifications-live-timed-metadata.md
         - name: Kesintisiz Akış HEVC
-          href: media-services-specifications-ms-sstr-amendment-hevc.md
+          href: ../media-services-specifications-ms-sstr-amendment-hevc.md
 - name: Kaynaklar
   items:
     - name: Azure Media Services topluluğu

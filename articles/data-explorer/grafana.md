@@ -1,195 +1,94 @@
 ---
-title: Azure veri Gezgini'nde Grafana kullanarak verileri Görselleştir
-description: Bu nasıl yapılır makalesinde, Azure Veri Gezgini, Grafana için veri kaynağı olarak ayarlayın ve ardından örnek Küme verilerini görselleştirmek öğrenin.
+title: Grafana kullanarak Azure Veri Gezgini verileri görselleştirme
+description: Bu makalede, Grafana için bir veri kaynağı olarak Azure Veri Gezgini ayarlamayı ve sonra örnek bir kümeden verileri görselleştirmeyi öğreneceksiniz.
 author: orspod
 ms.author: orspodek
-ms.reviewer: mblythe
+ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 6/30/2019
-ms.openlocfilehash: 0f148a97b25afb9135223ff92afb898d4734c586
-ms.sourcegitcommit: 084630bb22ae4cf037794923a1ef602d84831c57
+ms.date: 11/13/2019
+ms.openlocfilehash: a1c52007ea86ca0812c4a73a92ce81db6ddadc7b
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67537796"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037995"
 ---
-# <a name="visualize-data-from-azure-data-explorer-in-grafana"></a>Grafana Azure veri Gezgini'nde verileri görselleştirin
+# <a name="visualize-data-from-azure-data-explorer-in-grafana"></a>Grafana 'de Azure Veri Gezgini verileri görselleştirme
 
-Grafana, sorgu ve veri görselleştirme, ardından oluşturup görselleştirmelerinizi üzerinde temel panoları paylaşma sağlayan bir analiz platformudur. Grafana sağlayan bir Azure Veri Gezgini *eklentisi*, bağlanma ve verileri Azure Veri Gezgini görselleştirmenizi sağlar. Bu makalede, Azure Veri Gezgini, Grafana için veri kaynağı olarak ayarlayın ve ardından örnek Küme verilerini görselleştirmek öğrenin.
+Grafana, verileri sorgulamanıza ve görselleştirmenize, sonra görselleştirmelerinizle ilgili panoları oluşturmanıza ve paylaşmanıza olanak tanıyan bir analiz platformudur. Grafana, Azure Veri Gezgini 'a bağlanmanızı ve verileri görselleştirmenizi sağlayan bir Azure Veri Gezgini *eklentisi*sağlar. Bu makalede, Grafana için bir veri kaynağı olarak Azure Veri Gezgini ayarlamayı ve sonra örnek bir kümeden verileri görselleştirmeyi öğreneceksiniz.
 
-Aşağıdaki videoda kullanarak Grafana'nın Azure Veri Gezgini eklentisini kullanma, Azure Veri Gezgini, Grafana için veri kaynağı olarak ayarlayın ve ardından verileri görselleştirmek bilgi edinebilirsiniz. 
+Grafana 'in Azure Veri Gezgini eklentisini kullanmayı, Azure Veri Gezgini Grafana için bir veri kaynağı olarak ayarlamayı ve sonra verileri görselleştirmeyi öğrenmek için aşağıdaki videoyu kullanın. 
 
 > [!VIDEO https://www.youtube.com/embed/fSR_qCIFZSA]
 
-Alternatif olarak [veri kaynağını yapılandırma](#configure-the-data-source) ve [verileri görselleştirme](#visualize-data) aşağıdaki makalede ayrıntılı.
+Alternatif olarak, aşağıdaki makalede açıklandığı gibi [veri kaynağını yapılandırabilir](#configure-the-data-source) ve [verileri görselleştirebilirsiniz](#visualize-data) .
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu nasıl tamamlamak için şunlara ihtiyacınız vardır:
+Bu makaleyi tamamlayabilmeniz için aşağıdakiler gerekir:
 
-* [Grafana sürüm 5.3.0 veya sonraki](https://docs.grafana.org/installation/) işletim sisteminiz için
+* İşletim sisteminiz için [Grafana sürüm 5.3.0 veya üzeri](https://docs.grafana.org/installation/)
 
-* [Azure Veri Gezgini eklentisini](https://grafana.com/plugins/grafana-azure-data-explorer-datasource/installation) Grafana için
+* Grafana için [Azure Veri Gezgini eklentisi](https://grafana.com/plugins/grafana-azure-data-explorer-datasource/installation)
 
-* StormEvents örnek veriler içeren bir kümesi. Daha fazla bilgi için [hızlı başlangıç: Bir Azure Veri Gezgini kümesi ile veritabanı oluşturma](create-cluster-database-portal.md) ve [örnek verileri Azure veri Gezgini'ne alma](ingest-sample-data.md).
+* StormEvents örnek verilerini içeren bir küme. Daha fazla bilgi için bkz. [hızlı başlangıç: azure Veri Gezgini kümesi ve veritabanı oluşturma](create-cluster-database-portal.md) ve [örnek verileri Azure Veri Gezgini](ingest-sample-data.md)ile alma.
 
     [!INCLUDE [data-explorer-storm-events](../../includes/data-explorer-storm-events.md)]
 
-## <a name="configure-the-data-source"></a>Veri kaynağını yapılandırma
-
-Azure Veri Gezgini, Grafana için veri kaynağı olarak yapılandırmak için aşağıdaki adımları gerçekleştirin. Şu adımları Bu bölümde daha ayrıntılı konulara değineceğiz:
-
-1. Bir Azure Active Directory (Azure AD), hizmet sorumlusu oluşturun. Hizmet sorumlusu tarafından Grafana, Azure Veri Gezgini hizmete erişmek için kullanılır.
-
-1. Azure AD hizmet sorumlusu ekleme *görüntüleyiciler* Azure Veri Gezgini veritabanı rolü.
-
-1. Azure AD hizmet sorumlusu bilgilerini temel Grafana bağlantı özelliklerini belirleyin ve ardından bağlantıyı test edin.
-
-### <a name="create-a-service-principal"></a>Hizmet sorumlusu oluşturma
-
-Hizmet sorumlusu oluşturabilirsiniz [Azure portalında](#azure-portal) veya bu adı kullanıyor [Azure CLI](#azure-cli) komut satırı deneyimi. Hangi yöntemin ne olursa olsun, sonraki adımlarda kullanacağınız dört bağlantı özellikleri için değerleri almak oluşturulduktan sonra kullandığınız.
-
-#### <a name="azure-portal"></a>Azure portal
-
-1. Hizmet sorumlusu oluşturmak için yönergeleri izleyin. [Azure portal belgeleri](/azure/active-directory/develop/howto-create-service-principal-portal).
-
-    1. İçinde [uygulamanızı bir role atama](/azure/active-directory/develop/howto-create-service-principal-portal#assign-the-application-to-a-role) bölümünde, bir rol atamak **okuyucu** Azure Veri Gezgini kümenize.
-
-    1. İçinde [oturum açma için değerleri alma](/azure/active-directory/develop/howto-create-service-principal-portal#get-values-for-signing-in) bölümünde, adımları ele üç özellik değerleri kopyalayın: **Dizin kimliği** (Kiracı kimliği), **uygulama kimliği**, ve **parola**.
-
-1. Azure portalında **abonelikleri** sonra hizmet sorumlusu oluşturduğunuz abonelik kimliği kopyalayın.
-
-    ![Abonelik kimliği - portal](media/grafana/subscription-id-portal.png)
-
-#### <a name="azure-cli"></a>Azure CLI
-
-1. Bir hizmet sorumlusu oluşturun. Uygun bir kapsamı ve rol türü `reader`.
-
-    ```azurecli
-    az ad sp create-for-rbac --name "https://{UrlToYourGrafana}:{PortNumber}" --role "reader" \
-                             --scopes /subscriptions/{SubID}/resourceGroups/{ResourceGroupName}
-    ```
-
-    Daha fazla bilgi için [Azure, Azure CLI ile hizmet sorumlusu oluşturma](/cli/azure/create-an-azure-service-principal-azure-cli).
-
-1. Komut aşağıdaki gibi ayarlayın bir sonuç döndürür. Üç özellik değerleri kopyalayın: **AppID**, **parola**, ve **Kiracı**.
-
-    ```json
-    {
-      "appId": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-      "displayName": "{UrlToYourGrafana}:{PortNumber}",
-      "name": "https://{UrlToYourGrafana}:{PortNumber}",
-      "password": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-      "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-    }
-    ```
-
-1. Aboneliklerinizin listesini alın.
-
-    ```azurecli
-    az account list --output table
-    ```
-
-    Uygun bir abonelik kimliği kopyalayın.
-
-    ![Abonelik kimliği - CLI](media/grafana/subscription-id-cli.png)
-
-### <a name="add-the-service-principal-to-the-viewers-role"></a>Görüntüleyiciler rolüne hizmet sorumlusu ekleme
-
-Hizmet sorumlusuna sahip olduğunuza göre ona ekleme *görüntüleyiciler* Azure Veri Gezgini veritabanı rolü. Bu görevi altında gerçekleştirebilirsiniz **izinleri** Azure portalında veya altında **sorgu** yönetim komutunu kullanarak.
-
-#### <a name="azure-portal---permissions"></a>Azure portalı - izinleri
-
-1. Azure portalında Veri Gezgini Azure kümenize gidin.
-
-1. İçinde **genel bakış** bölümünde, StormEvents örnek verilerle bir veritabanı seçin.
-
-    ![veritabanı seçin](media/grafana/select-database.png)
-
-1. Seçin **izinleri** ardından **ekleme**.
-
-    ![Veritabanı izinleri](media/grafana/database-permissions.png)
-
-1. Altında **veritabanı izinleri eklemek**seçin **Görüntüleyicisi** rolündeki **seçin sorumluları**.
-
-    ![Veritabanı izinleri ekleme](media/grafana/add-permission.png)
-
-1. Oluşturduğunuz hizmet sorumlusu arayın (sorumlu örnekte gösterildiği **mb grafana**). Asıl seçip **seçin**.
-
-    ![Azure portalında izinleri Yönet](media/grafana/new-principals.png)
-
-1. **Kaydet**’i seçin.
-
-    ![Azure portalında izinleri Yönet](media/grafana/save-permission.png)
-
-#### <a name="management-command---query"></a>Yönetim command - sorgu
-
-1. Azure portalında Veri Gezgini Azure kümenize gidip seçin **sorgu**.
-
-    ![Sorgu](media/grafana/query.png)
-
-1. Sorgu penceresinde aşağıdaki komutu çalıştırın. Uygulama Kimliğini kullanın ve Azure portalı ya da CLI Kiracı kimliği.
-
-    ```kusto
-    .add database {TestDatabase} viewers ('aadapp={ApplicationID};{TenantID}')
-    ```
-
-    Komut aşağıdaki gibi ayarlayın bir sonuç döndürür. Bu örnekte, ilk satır veritabanında varolan bir kullanıcı içindir ve yeni eklenen hizmet sorumlusu ikinci satırdır.
-
-    ![Sonuç kümesi](media/grafana/result-set.png)
+[!INCLUDE [data-explorer-configure-data-source](../../includes/data-explorer-configure-data-source.md)]
 
 ### <a name="specify-properties-and-test-the-connection"></a>Özellikleri belirtin ve bağlantıyı test edin
 
-Atanan hizmet sorumlusu ile *görüntüleyiciler* artık rol özellikleri Grafana Örneğinizde belirtin ve Azure Veri Gezgini için bağlantıyı sınayın.
+*Görüntüleyiciler* rolüne atanan hizmet sorumlusu sayesinde artık Grafana örneğinizdeki özellikleri belirtirsiniz ve Azure Veri Gezgini bağlantısını test edersiniz.
 
-1. Grafana sol taraftaki menüde, dişli simgesini seçip **veri kaynakları**.
+1. Grafana ' de, sol taraftaki menüden dişli simgesini ve ardından **veri kaynaklarını**seçin.
 
     ![Veri kaynakları](media/grafana/data-sources.png)
 
-1. Seçin **veri kaynağı Ekle**.
+1. **Veri kaynağı Ekle**' yi seçin.
 
-1. Üzerinde **veri kaynakları / yeni** sayfasında, veri kaynağı için bir ad girin ve ardından türü seçin **Azure Veri Gezgini Datasource**.
+1. **Veri kaynakları/yeni** sayfasında, veri kaynağı için bir ad girin ve **Azure Veri Gezgini veri kaynağı**türünü seçin.
 
     ![Bağlantı adı ve türü](media/grafana/connection-name-type.png)
 
-1. Kümenizin adını form https://{ClusterName} girin. {Region}. kusto.windows.net. Azure portal veya CLI diğer değerleri girin. Aşağıdaki resimde bir eşleme için aşağıdaki tabloya bakın.
+1. Kümenizin adını https://{ClusterName} biçiminde girin. {Region}. kusto. Windows. net. Azure portal veya CLı 'den diğer değerleri girin. Eşleme için aşağıdaki görüntünün altındaki tabloya bakın.
 
     ![Bağlantı özellikleri](media/grafana/connection-properties.png)
 
-    | Grafana UI | Azure portal | Azure CLI |
+    | Grafana UI | Azure portalında | Azure CLI |
     | --- | --- | --- |
-    | Abonelik Kimliği | ABONELİK KİMLİĞİ | SubscriptionId |
-    | Kiracı kimliği | Dizin kimliği | tenant |
+    | Abonelik Kimliği | ABONELIK KIMLIĞI | SubscriptionId |
+    | Kiracı kimliği | Dizin KIMLIĞI | tenant |
     | İstemci kimliği | Uygulama Kimliği | appId |
     | Gizli anahtar | Parola | password |
     | | | |
 
-1. Seçin **Kaydet ve Test**.
+1. **& testini kaydet**' i seçin.
 
-    Test başarılı olursa, sonraki bölüme gidin. Herhangi bir sorunla karşılaşırsanız Grafana ve gözden geçirme önceki adımlarda belirtilen değerleri kontrol edin.
+    Test başarılı olursa, sonraki bölüme gidin. Herhangi bir sorunla karşılaşırsanız, Grafana ' de belirttiğiniz değerleri kontrol edin ve önceki adımları gözden geçirin.
 
 ## <a name="visualize-data"></a>Verileri görselleştirme
 
-Azure Veri Gezgini, Grafana için veri kaynağı olarak yapılandırma bitirdikten sonra artık, verileri görselleştirme zamanı gelmiş demektir. Basit bir örneği aşağıda göstereceğiz ancak yapabileceğiniz çok daha fazla. Bakarak öneririz [Azure Veri Gezgini için sorgu yazma](write-queries.md) karşı örnek veri kümesini çalıştırmak için diğer sorgularının örnekleri için.
+Azure Veri Gezgini 'yi Grafana için bir veri kaynağı olarak yapılandırmayı tamamladınız, verileri görselleştirmeye zaman atalım. Burada temel bir örnek göstereceğiz, ancak yapabileceğiniz çok daha fazla şey var. Örnek veri kümesinde çalıştırılacak diğer sorguların örnekleri için [Azure Veri Gezgini yazma sorguları](write-queries.md) yapmanızı öneririz.
 
-1. Grafana sol taraftaki menüde artı simgesini seçip **Pano**.
+1. Grafana ' de, sol taraftaki menüden artı simgesini ve ardından **panoyu**seçin.
 
-    ![Pano oluşturma](media/grafana/create-dashboard.png)
+    ![Pano Oluştur](media/grafana/create-dashboard.png)
 
-1. Altında **Ekle** sekmesinde **Graph**.
+1. **Ekle** sekmesi altında **grafik**' i seçin.
 
-    ![Graf Ekle](media/grafana/add-graph.png)
+    ![Grafik Ekle](media/grafana/add-graph.png)
 
-1. Graf panelinde seçin **bölmesi başlığı** ardından **Düzenle**.
+1. Grafik panelinde **panel başlığı** ' nı ve ardından **Düzenle**' yi seçin.
 
-    ![Düzen paneli](media/grafana/edit-panel.png)
+    ![Düzenleme bölmesi](media/grafana/edit-panel.png)
 
-1. Bölmenin en altında seçin **veri kaynağı** ardından, yapılandırdığınız veri kaynağını seçin.
+1. Panelin alt kısmındaki **veri kaynağı** ' nı seçin ve ardından yapılandırdığınız veri kaynağını seçin.
 
     ![Veri kaynağı seçme](media/grafana/select-data-source.png)
 
-1. Aşağıdaki sorguda sorgu bölmesinde Kopyala ardından seçin **çalıştırma**. Sorgu olayların sayısı, örnek veri kümesi için günlük demetlerine.
+1. Sorgu bölmesinde aşağıdaki sorguyu kopyalayın ve **Çalıştır**' ı seçin. Sorgu, örnek veri kümesi için güne göre olay sayısını demetler.
 
     ```kusto
     StormEvents
@@ -198,22 +97,40 @@ Azure Veri Gezgini, Grafana için veri kaynağı olarak yapılandırma bitirdikt
 
     ![Sorgu çalıştırma](media/grafana/run-query.png)
 
-1. Varsayılan olarak son altı saat verileri kapsamlı olduğundan, grafik herhangi bir sonuç göstermez. Üst menüden **son 6 saat**.
+1. Grafik, en son altı saatin verileri için varsayılan olarak kapsam yaptığı için herhangi bir sonuç göstermez. Üstteki menüde **son 6 saat**' i seçin.
 
     ![Son altı saat](media/grafana/last-six-hours.png)
 
-1. 2007'de, bizim StormEvents örnek veri kümesinde bulunan yıl kapsayan özel bir aralık belirtin. **Uygula**’yı seçin.
+1. StormEvents örnek veri kümesine dahil edilen yılı 2007 içeren bir özel Aralık belirtin. **Uygula**’yı seçin.
 
-    ![Özel bir tarih aralığı](media/grafana/custom-date-range.png)
+    ![Özel tarih aralığı](media/grafana/custom-date-range.png)
 
-    Şimdi grafik, verileri güne göre kümelenmiş 2007'den gösterir.
+    Artık grafik, günlük 2007 ' deki verileri gösterir.
 
-    ![Tamamlanan grafiği](media/grafana/finished-graph.png)
+    ![Tamamlanmış grafik](media/grafana/finished-graph.png)
 
-1. Üst menüde Kaydet'i seçin simgesi: ![Kaydet simgesine](media/grafana/save-icon.png).
+1. Üstteki menüden Kaydet simgesini seçin: ![Kaydet simgesi](media/grafana/save-icon.png).
+
+## <a name="create-alerts"></a>Uyarı oluşturma
+
+1. Giriş panosu ' nda, **bildirim kanalları** ** > uyarı** ' nı seçerek yeni bir bildirim kanalı oluşturun
+
+    ![bildirim kanalı oluştur](media/grafana/create-notification-channel.png)
+
+1. Yeni bir **bildirim kanalı**oluşturun ve **kaydedin**.
+
+    ![Yeni bildirim kanalı oluştur](media/grafana/new-notification-channel-adx.png)
+
+1. **Panoda**, açılan listeden **Düzenle** ' yi seçin.
+
+    ![Panoda Düzenle ' yi seçin](media/grafana/edit-panel-4-alert.png)
+
+1. **Uyarı bölmesini açmak** için uyarı zil simgesini seçin. **Uyarı oluştur**' u seçin. **Uyarı** bölmesinde aşağıdaki özellikleri doldurun.
+
+    ![Uyarı özellikleri](media/grafana/alert-properties.png)
+
+1. Değişikliklerinizi kaydetmek için **panoyu kaydet** simgesini seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Azure Veri Gezgini için sorgu yazma](write-queries.md)
-
-* [Öğretici: Azure Power BI veri Gezgini'nde verileri görselleştirin](visualize-power-bi.md)

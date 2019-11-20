@@ -1,97 +1,98 @@
 ---
-title: Havuzlar - Azure Batch için VM boyutları seçin | Microsoft Docs
-description: Azure Batch havuzlarında işlem düğümleri için kullanılabilen VM boyutları arasından seçim yapma
+title: Havuzlar için VM boyutlarını seçin-Azure Batch | Microsoft Docs
+description: Azure Batch havuzlarda işlem düğümleri için kullanılabilir VM boyutları arasından seçim yapma
 services: batch
 documentationcenter: ''
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 editor: ''
 ms.assetid: ''
 ms.service: batch
 ms.workload: ''
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 07/01/2019
+ms.date: 09/12/2019
 ms.author: lahugh
 ms.custom: seodec18
-ms.openlocfilehash: 1848891a0a37235c9769b3cee18262239e19df5a
-ms.sourcegitcommit: 837dfd2c84a810c75b009d5813ecb67237aaf6b8
+ms.openlocfilehash: e3d96ad7783c43dba6b69f6b11acccf790d0d6c9
+ms.sourcegitcommit: 909ca340773b7b6db87d3fb60d1978136d2a96b0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67502655"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70983744"
 ---
-# <a name="choose-a-vm-size-for-compute-nodes-in-an-azure-batch-pool"></a>Bir Azure Batch havuzunda işlem düğümleri için VM boyutu seçme
+# <a name="choose-a-vm-size-for-compute-nodes-in-an-azure-batch-pool"></a>Bir Azure Batch havuzundaki işlem düğümleri için VM boyutu seçme
 
-Azure Batch havuzu için bir düğüm boyutu seçtiğinizde, neredeyse tüm VM boyutları Azure'da kullanıma sunulan arasından seçim yapabilirsiniz. Azure farklı iş yükleri için Linux ve Windows Vm'leri için bir dizi boyutları sunar.
+Bir Azure Batch havuzu için bir düğüm boyutu seçtiğinizde, Azure 'da kullanılabilir olan neredeyse tüm VM boyutlarının arasından seçim yapabilirsiniz. Azure, farklı iş yükleri için Linux ve Windows VM 'Leri için bir dizi boyut sunar.
 
-Bazı özel durumlar ve bir VM boyutu seçme sınırlamalar vardır:
+VM boyutu seçmenin bazı özel durumları ve sınırlamaları vardır:
 
-* Bazı VM serisi veya VM boyutları, Batch hizmetinde desteklenmez.
-* Bazı VM boyutları kısıtlı ve bunlar ayrılabilen önce özellikle etkinleştirilmesi gerekir.
+* Batch 'de bazı VM serileri veya VM boyutları desteklenmez.
+* Bazı VM boyutları kısıtlıdır ve ayrılabilmeleri için özel olarak etkinleştirilmesi gerekir.
 
-## <a name="supported-vm-series-and-sizes"></a>Desteklenen VM serisi ve boyutları
+## <a name="supported-vm-series-and-sizes"></a>Desteklenen VM Serisi ve boyutları
 
-### <a name="pools-in-virtual-machine-configuration"></a>Sanal makine yapılandırmasındaki havuzlarda
+### <a name="pools-in-virtual-machine-configuration"></a>Sanal makine yapılandırmasındaki havuzlar
 
-Sanal makine yapılandırmasında batch havuzları, neredeyse tüm VM boyutları destekler ([Linux](../virtual-machines/linux/sizes.md), [Windows](../virtual-machines/windows/sizes.md)). Desteklenen boyutlar ve kısıtlamaları hakkında daha fazla bilgi edinmek için aşağıdaki tabloya bakın.
+Sanal makine yapılandırmasındaki toplu iş havuzları neredeyse tüm VM boyutlarını destekler ([Linux](../virtual-machines/linux/sizes.md), [Windows](../virtual-machines/windows/sizes.md)). Desteklenen boyutlar ve kısıtlamalar hakkında daha fazla bilgi edinmek için aşağıdaki tabloya bakın.
 
-Tüm tanıtım veya listede Önizleme VM boyutları için destek garanti değildir.
+Listelenen tüm promosyon veya önizleme VM boyutları destek için garanti edilmez.
 
-| VM serisi  | Desteklenen boyutlar | Batch hesabının Havuz ayırma modu<sup>1</sup> |
+| VM serisi  | Desteklenen boyutlar | Batch hesabı havuzu ayırma modu<sup>1</sup> |
 |------------|---------|-----------------|
-| Temel A serisi | Tüm boyutları *dışında* Basic_A0 (A0) | Tüm |
-| A Serisi | Tüm boyutları *dışında* standard_a0 = | Tüm |
-| Av2 Serisi | Tüm boyutlar | Tüm |
-| B serisi | None | Kullanılamaz |
-| DC serisi | None | Kullanılamaz |
-| Dv2, Dsv2 serisi | Tüm boyutlar | Tüm |
-| Dv3, Dsv3 serisi | Tüm boyutlar | Tüm |
-| [Bellek için iyileştirilmiş boyutları](../virtual-machines/linux/sizes-memory.md) | None | Kullanılamaz |
-| Fsv2-serisi | Tüm boyutlar | Tüm |
-| H Serisi | Tüm boyutlar | Tüm |
-| HB serisi<sup>2</sup> | Tüm boyutlar | Tüm |
-| HC serisi<sup>2</sup> | Tüm boyutlar | Tüm |
-| Ls serisi | Tüm boyutlar | Tüm |
-| Lsv2 serisi | None | Kullanılamaz |
-| M serisi | İşler için standart_m64ms (düşük öncelikli yalnızca), işler için standart_m128s (yalnızca düşük öncelikli) | Tüm |  
-| NCv2 serisi<sup>2</sup> | Tüm boyutlar | Tüm |
-| NCv3 serisi<sup>2</sup> | Tüm boyutlar | Tüm |
-| ND serisi<sup>2</sup> | Tüm boyutlar | Tüm |
-| NDv2 serisi | Tüm boyutlar | Kullanıcı aboneliği modu |
-| NV serisi | Tüm boyutlar | Tüm |
-| NVv3 serisi | None | Kullanılamaz |
-| SAP HANA | None | Kullanılamaz |
+| Temel A serisi | Basic_A0 *hariç* tüm boyutlar (a0) | Any |
+| A Serisi | Standard_A0 *hariç* tüm boyutlar | Any |
+| Av2 Serisi | Tüm Boyutlar | Any |
+| B serisi | Yok. | Yok |
+| DC serisi | Yok. | Yok |
+| Dv2, DSv2 serisi | Tüm Boyutlar | Any |
+| Dv3, Dsv3 serisi | Tüm Boyutlar | Any |
+| Ev3, Esv3 serisi | Tüm Boyutlar | Any |
+| Fsv2-serisi | Tüm Boyutlar | Any |
+| H Serisi | Tüm Boyutlar | Any |
+| HB Serisi<sup>2</sup> | Tüm Boyutlar | Any |
+| HC Serisi<sup>2</sup> | Tüm Boyutlar | Any |
+| Ls serisi | Tüm Boyutlar | Any |
+| Lsv2 serisi | Yok. | Yok |
+| M serisi | Standard_M64ms (yalnızca düşük öncelikli), Standard_M128s (yalnızca düşük öncelikli) | Any |
+| Mv2 serisi | Yok. | Yok |
+| NC serisi | Tüm Boyutlar | Any |
+| NCv2-serisi<sup>2</sup> | Tüm Boyutlar | Any |
+| NCv3-serisi<sup>2</sup> | Tüm Boyutlar | Any |
+| ND serisi<sup>2</sup> | Tüm Boyutlar | Any |
+| NDv2 serisi | Tüm Boyutlar | Kullanıcı aboneliği modu |
+| NV serisi | Tüm Boyutlar | Any |
+| NVv3 serisi | Yok. | Yok |
+| SAP HANA | Yok. | Yok |
 
-<sup>1</sup> bazı yeni VM serisi başlangıçta kısmen desteklenir. Bu VM serisi ile Batch hesaplarını tarafından ayrılabilen **Havuz ayırma modu** kümesine **kullanıcı aboneliği**. Bkz: [yönetme Batch hesapları](batch-account-create-portal.md#additional-configuration-for-user-subscription-mode) Batch hesap yapılandırması hakkında daha fazla bilgi için. Bkz: [kotalar ve sınırlar](batch-quota-limit.md) kısmen desteklenen VM serisi için bu kota isteği öğrenmek için **kullanıcı aboneliği** Batch hesapları.  
+<sup>1</sup> bazı yeni VM serileri başlangıçta kısmen desteklenir. Bu VM Serisi, **havuz ayırma modu** **Kullanıcı aboneliğine**ayarlanmış olan Batch hesapları tarafından tahsis edilebilir. Batch hesabı yapılandırması hakkında daha fazla bilgi için bkz. [Batch hesaplarını yönetme](batch-account-create-portal.md#additional-configuration-for-user-subscription-mode) . **Kullanıcı aboneliği** Batch hesapları için kısmen desteklenen bu VM serisine nasıl kota isteneceğini öğrenmek için [Kotalar ve sınırlar](batch-quota-limit.md) bölümüne bakın.  
 
-<sup>2</sup> bu VM boyutları ayrılan sanal makine yapılandırmasında Batch havuzlarında, ancak belirli bir istemelisiniz [kota artışı](batch-quota-limit.md#increase-a-quota).
+<sup>2</sup> bu VM boyutları, sanal makine yapılandırmasındaki Batch havuzlarında tahsis edilebilir, ancak belirli bir [Kota artışı](batch-quota-limit.md#increase-a-quota)istemeniz gerekir.
 
-### <a name="pools-in-cloud-service-configuration"></a>Bulut hizmeti yapılandırması havuzları
+### <a name="pools-in-cloud-service-configuration"></a>Bulut hizmeti yapılandırmasındaki havuzlar
 
-Bulut hizmeti yapılandırmasında batch havuzları destekleyen tüm [bulut Hizmetleri için VM boyutları](../cloud-services/cloud-services-sizes-specs.md) **dışında** aşağıdakiler:
+Bulut hizmeti yapılandırmasındaki toplu iş havuzları aşağıdakiler **dışında** [Cloud Services için tüm VM boyutlarını](../cloud-services/cloud-services-sizes-specs.md) destekler:
 
-| VM serisi  | Desteklenmeyen boyutları |
+| VM serisi  | Desteklenmeyen Boyutlar |
 |------------|-------------------|
 | A Serisi   | Çok küçük       |
 | Av2 Serisi | Standard_A1_v2, Standard_A2_v2, Standard_A2m_v2 |
 
-## <a name="size-considerations"></a>Boyutu konuları
+## <a name="size-considerations"></a>Boyut konuları
 
-* **Uygulama gereksinimleri** -özelliklerini ve düğümler üzerinde çalıştırmanız uygulama gereksinimlerini göz önünde bulundurun. Uygulamanın çok iş parçacıklı olup olmadığı ve ne kadar bellek kullandığı gibi konular en uygun ve ekonomik düğüm boyutunu belirlemeye yardımcı olabilir. Çok örnekli için [MPI iş yükleri](batch-mpi.md) veya özelleştirilmiş göz önünde bulundurun CUDA uygulamaları [HPC](../virtual-machines/linux/sizes-hpc.md) veya [GPU özellikli](../virtual-machines/linux/sizes-gpu.md) VM boyutları, sırasıyla. (Bkz [kullanım RDMA özellikli veya GPU özellikli örnekler Batch havuzlarında](batch-pool-compute-intensive-sizes.md).)
+* **Uygulama gereksinimleri** -düğümlerde çalıştıracağınız uygulamanın özelliklerini ve gereksinimlerini göz önünde bulundurun. Uygulamanın çok iş parçacıklı olup olmadığı ve ne kadar bellek kullandığı gibi konular en uygun ve ekonomik düğüm boyutunu belirlemeye yardımcı olabilir. Çok örnekli [MPI iş yükleri](batch-mpi.md) veya CUDA uygulamaları için sırasıyla özel [HPC](../virtual-machines/linux/sizes-hpc.md) veya [GPU özellikli](../virtual-machines/linux/sizes-gpu.md) VM boyutlarını göz önünde bulundurun. (Bkz. [Batch havuzlarında RDMA özellikli veya GPU özellikli örnekler kullanma](batch-pool-compute-intensive-sizes.md).)
 
-* **Düğüm başına görevleri** -bir düğüm boyutu bir görevi bir düğümde aynı anda çalışır varsayarak normaldir. Ancak, birden fazla görevin (ve dolayısıyla Uygulama örneğinin) için avantajlı olabilir [paralel şekilde çalışan](batch-parallel-node-tasks.md) iş yürütme sırasında işlem düğümleri üzerinde. Bu durumda, paralel görev yürütmeye yönelik artan talebi karşılamak için bir çok çekirdekli düğüm boyutu yaygındır.
+* **Düğüm başına görevler** -tek seferde bir düğümde bir görevin çalıştığını varsayarak düğüm boyutu seçmek tipik bir davranıştır. Ancak, iş yürütme sırasında birden fazla görevin (ve dolayısıyla birden çok uygulama örneğinin) işlem düğümlerinde [paralel olarak çalıştırılması](batch-parallel-node-tasks.md) avantajlı olabilir. Bu durumda, paralel görev yürütmesinin arttığı talebe uyum sağlamak için çok düğümlü bir düğüm boyutu seçmek yaygındır.
 
-* **Yük düzeyleri farklı görevler için** -tüm bir havuzdaki düğümler aynı boyuttadır. Farklı sistem gereksinimlerine ve/veya yük düzeylerine sahip uygulamalar çalıştırmayı planlıyorsanız ayrı havuzlar oluşturmanız önerilir.
+* **Farklı görevler Için yük düzeyleri** -bir havuzdaki tüm düğümler aynı boyutta. Farklı sistem gereksinimlerine ve/veya yük düzeylerine sahip uygulamalar çalıştırmayı planlıyorsanız ayrı havuzlar oluşturmanız önerilir.
 
-* **Bölge kullanılabilirliği** -bir VM serisi veya boyutu gerçekleştirilemeyebilir bölgelerde Batch hesabınızı oluşturduğunuz yerdir. Bir boyut kullanılabilir olduğunu denetlemek için bkz: [bölgelere göre kullanılabilir ürünler](https://azure.microsoft.com/regions/services/).
+* **Bölge kullanılabilirliği** -Batch hesaplarınızı oluşturduğunuz bölgelerde bir VM serisi veya boyutu kullanılamayabilir. Bir boyutun kullanılabilir olduğunu denetlemek için bkz. [bölgeye göre kullanılabilir ürünler](https://azure.microsoft.com/regions/services/).
 
-* **Kotalar** - [çekirdek kotaları](batch-quota-limit.md#resource-quotas) grubunuzda hesabı için bir Batch havuzu ekleyebileceğiniz verilen boyuta düğümlerinin sayısını sınırlayabilir. Bir kota artırım talebinde bulunmak bkz [bu makalede](batch-quota-limit.md#increase-a-quota). 
+* **Kotalar** -Batch hesabınızdaki [çekirdekler kotaları](batch-quota-limit.md#resource-quotas) , bir Batch havuzuna ekleyebileceğiniz belirli boyuttaki düğümlerin sayısını sınırlayabilir. Kota artışı istemek için [Bu makaleye](batch-quota-limit.md#increase-a-quota)bakın. 
 
-* **Havuz yapılandırmasını** -bulut hizmeti yapılandırmasıyla karşılaştırıldığında sanal makine yapılandırma havuzu oluştururken genel olarak, daha fazla VM boyut seçenekleri vardır.
+* **Havuz yapılandırması** -genel olarak, sanal makine yapılandırmasında, bulut hizmeti yapılandırmasıyla karşılaştırıldığında bir havuz oluşturduğunuzda daha fazla VM boyutu seçeneğiniz vardır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Batch ayrıntılı genel bakış için bkz: [büyük ölçekli paralel işlem çözümleri geliştirme batch'le](batch-api-basics.md).
-* Yoğun işlem gücü kullanımlı VM boyutları hakkında daha fazla bilgi için bkz: [kullanım RDMA özellikli veya GPU özellikli örnekler Batch havuzlarında](batch-pool-compute-intensive-sizes.md).
+* Toplu Işe yönelik ayrıntılı genel bakış için bkz. [Batch ile büyük ölçekli paralel işlem çözümleri geliştirme](batch-api-basics.md).
+* İşlem yoğunluklu VM boyutlarını kullanma hakkında daha fazla bilgi için bkz. [Batch havuzlarında RDMA özellikli veya GPU özellikli örnekler kullanma](batch-pool-compute-intensive-sizes.md).

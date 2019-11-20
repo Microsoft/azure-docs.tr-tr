@@ -1,9 +1,9 @@
 ---
-title: Bir Azure Service Fabric kümesindeki sertifikaları yönetme | Microsoft Docs
-description: Yeni sertifikalar, geçiş sertifikası ekleyin ve sertifika için veya bir Service Fabric kümesinden kaldırmak açıklar.
+title: Azure Service Fabric kümesinde sertifikaları yönetme | Microsoft Docs
+description: Yeni sertifikaların nasıl ekleneceğini, sertifikanın nasıl aktarılacağını ve bir Service Fabric kümesinden veya bir kümeden sertifika nasıl kaldırılacağını açıklar.
 services: service-fabric
 documentationcenter: .net
-author: aljo-microsoft
+author: athinanthny
 manager: chakdan
 editor: ''
 ms.assetid: 91adc3d3-a4ca-46cf-ac5f-368fb6458d74
@@ -13,59 +13,59 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/13/2018
-ms.author: aljo
-ms.openlocfilehash: f1998ec2fe82b9fd52547fbccb208542b22bc949
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: atsenthi
+ms.openlocfilehash: a993c71e362a61b6861e001dfb5d6eca24873293
+ms.sourcegitcommit: bc193bc4df4b85d3f05538b5e7274df2138a4574
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66306909"
+ms.lasthandoff: 11/10/2019
+ms.locfileid: "73903283"
 ---
-# <a name="add-or-remove-certificates-for-a-service-fabric-cluster-in-azure"></a>Azure'da bir Service Fabric küme için sertifikaları kaldırın veya ekleyin
-Service Fabric'ın X.509 sertifikaları nasıl kullandığı hakkında bilgilenmeli ve hakkında bilgi sahibi olmanız önerilir [küme güvenliği senaryoları](service-fabric-cluster-security.md). Anlamanız gerekir bir küme sertifikası ve devam etmeden önce ne için kullanılır.
+# <a name="add-or-remove-certificates-for-a-service-fabric-cluster-in-azure"></a>Azure 'da bir Service Fabric kümesi için sertifika ekleme veya kaldırma
+Service Fabric X. 509.440 sertifikalarını nasıl kullandığını ve [küme güvenliği senaryolarını](service-fabric-cluster-security.md)nasıl öğrendiğini öğrenmeniz önerilir. Devam etmeden önce, bir küme sertifikasının ne olduğunu ve ne kullanıldığını anlamalısınız.
 
-Azure hizmeti dokularını SDK'ın varsayılan sertifika yük, davranıştır dağıtma ve tanımlanmış bir sertifika ile en uzak sona eren bir tarih geleceğe kullanma; bağımsız olarak, birincil veya ikincil yapılandırma tanımlarını. Klasik davranışa geri dönülüyor olmayan önerilen Gelişmiş eylem olduğundan ve "UseSecondaryIfNewer" ayarı parametre değeri Fabric.Code yapılandırmanızı içinde false olarak ayarlanması gerekir.
+Azure hizmet dokuları SDK 'sının varsayılan sertifika yükleme davranışı, son tarihi gelecekte olan tanımlı sertifikayı dağıtmaktır ve kullanır; birincil veya ikincil yapılandırma tanımlarından bağımsız olarak. Klasik davranışa geri dönmek önerilmeyen bir Gelişmiş eylemdir ve `Fabric.Code` yapılandırmanızda "Usesecondaryifdaha yeni" ayar parametre değerinin yanlış olarak ayarlanmasını gerektirir.
 
-Service fabric küme oluşturma sırasında istemci sertifikalarının yanı sıra sertifika güvenliği yapılandırırken iki küme sertifikaları, birincil ve ikincil bir belirtmenize olanak sağlar. Başvurmak [portal aracılığıyla azure kümesine oluşturma](service-fabric-cluster-creation-via-portal.md) veya [Azure Resource Manager aracılığıyla azure kümesine oluşturma](service-fabric-cluster-creation-via-arm.md) oluşturma zamanı en ayarlama ile ilgili ayrıntılar için. Yalnızca bir küme sertifikası seçeneğini belirlerseniz zaman oluşturmak, sonra birincil sertifikası kullanılır. Küme oluşturulduktan sonra ikincil yeni bir sertifika ekleyebilirsiniz.
+Service Fabric, istemci sertifikalarına ek olarak, küme oluşturma sırasında sertifika güvenliğini yapılandırırken, birincil ve ikincil olmak üzere iki küme sertifikası belirtmenize olanak tanır. Oluşturma zamanında ayarlama hakkında ayrıntılar için [Portal aracılığıyla bir Azure kümesi oluşturma](service-fabric-cluster-creation-via-portal.md) veya [Azure Resource Manager aracılığıyla bir Azure kümesi oluşturma](service-fabric-cluster-creation-via-arm.md) bölümüne bakın. Oluşturma zamanında yalnızca bir küme sertifikası belirtirseniz, bu, birincil sertifika olarak kullanılır. Küme oluşturulduktan sonra, ikincil olarak yeni bir sertifika ekleyebilirsiniz.
 
 > [!NOTE]
-> Güvenli bir küme için her zaman en az bir geçerli (iptal edilmiş değil ve süresinin dolmadığından) küme dağıtılan sertifikanın (birincil veya ikincil) (Aksi halde çalışmasını küme durdurur) gerekir. süre sonu, tüm geçerli sertifikaları ulaşmadan önce 90 gün sistem bir uyarı izleme ve ayrıca düğümde uyarı sistem durumu olayı oluşturur. Şu anda hiç e-posta veya var. Bu makalede Service Fabric gönderdiği herhangi bir bildirim 
+> Güvenli bir küme için, her zaman en az bir geçerli (iptal edilmemiş ve dolmayan) küme sertifikası (birincil veya ikincil), dağıtılan (Aksi takdirde, küme çalışmayı durduruyor) gerekir. Tüm geçerli sertifikaların süresi dolmadan 90 gün önce, sistem düğüm üzerinde bir uyarı izlemesi ve ayrıca bir uyarı durumu olayı oluşturur. Şu anda bu makalede Service Fabric bir e-posta veya başka bir bildirim yok. 
 > 
 > 
 
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-## <a name="add-a-secondary-cluster-certificate-using-the-portal"></a>Portalı kullanarak bir ikincil küme sertifikası ekleme
-Azure portalı üzerinden kullanmak Azure powershell ikincil küme sertifikası eklenemiyor. İşlem, bu belgede daha sonra ana hatlarıyla açıklanmıştır.
+## <a name="add-a-secondary-cluster-certificate-using-the-portal"></a>Portalı kullanarak ikincil küme sertifikası ekleme
+İkincil küme sertifikası Azure portal aracılığıyla eklenemiyor, Azure PowerShell 'i kullanın. İşlem bu belgede daha sonra özetlenmiştir.
 
-## <a name="remove-a-cluster-certificate-using-the-portal"></a>Portalı kullanarak bir küme sertifikası Kaldır
-Güvenli bir küme için her zaman en az bir geçerli (iptal edilmiş değil ve süresinin dolmadığından) sertifikası gerekir. En sona eren tarihe içine ile dağıtılan sertifika kullanımda olacaktır ve kaldırma küme çalışmasını Durdur yapın; Yalnızca kaldırmak için sertifikanın süresi doldu veya süresi en yakın kullanılmayan bir sertifika emin olun.
+## <a name="remove-a-cluster-certificate-using-the-portal"></a>Portalı kullanarak bir küme sertifikasını kaldırma
+Güvenli bir küme için, her zaman en az bir geçerli (iptal edilmemiş ve dolmayan) sertifikaya ihtiyaç duyarsınız. Gelecekteki süresi dolan tarihin en uzağında dağıtılan sertifika kullanımda olur ve bunu kaldırmak kümenizin çalışmasını durdurur; yalnızca süresi dolan sertifikayı veya Soonest süresi dolan kullanılmamış bir sertifikayı kaldırtığınızdan emin olun.
 
-İçin bir kullanılmayan küme güvenlik sertifikasının güvenlik bölümüne Git kaldırın ve kullanılmayan sertifikayı bağlam menüsünden 'Delete' seçeneğini belirleyin.
+Kullanılmayan bir küme güvenlik sertifikasını kaldırmak için Güvenlik bölümüne gidin ve kullanılmayan sertifikadaki bağlam menüsünden ' Sil ' seçeneğini belirleyin.
 
-Ardından amacınızla birincil olarak işaretlenmiş sertifikayı kaldırmak için ise, otomatik geçiş davranışını etkinleştirme süresi dolan tarihinden daha fazla ikincil sertifika birincil sertifika daha gelecekte dağıtma gerekecektir; Otomatik geçişi tamamlandıktan sonra birincil sertifikayı silin.
+Amaç, birincil olarak işaretlenmiş sertifikayı kaldırmaktır, sonra otomatik rollover davranışını etkinleştirerek, süresi dolan bir tarihi daha sonra birincil sertifikadan daha sonra dağıtmanız gerekir; otomatik geçiş tamamlandıktan sonra birincil sertifikayı silin.
 
-## <a name="add-a-secondary-certificate-using-resource-manager-powershell"></a>Resource Manager Powershell kullanarak bir ikincil sertifika Ekle
+## <a name="add-a-secondary-certificate-using-resource-manager-powershell"></a>Kaynak Yöneticisi PowerShell kullanarak ikincil sertifika ekleme
 > [!TIP]
-> Kullanarak bir ikincil sertifika eklemek için daha iyi ve daha kolay bir yolu artık yoktur [Ekle AzServiceFabricClusterCertificate](/powershell/module/az.servicefabric/add-azservicefabricclustercertificate) cmdlet'i. Bu bölümdeki adımları izlemeden gerek yoktur.  Ayrıca, ilk olarak oluşturmak ve kullanırken kümeyi dağıtmak için kullanılan şablon gerekmeyen [Ekle AzServiceFabricClusterCertificate](/powershell/module/az.servicefabric/add-azservicefabricclustercertificate) cmdlet'i.
+> Artık [Add-AzServiceFabricClusterCertificate](/powershell/module/az.servicefabric/add-azservicefabricclustercertificate) cmdlet 'ini kullanarak ikincil sertifika eklemenin daha iyi ve kolay bir yolu vardır. Bu bölümdeki adımların geri kalanını izlemeniz gerekmez.  Ayrıca, [Add-AzServiceFabricClusterCertificate](/powershell/module/az.servicefabric/add-azservicefabricclustercertificate) cmdlet 'ini kullanırken kümeyi oluşturmak ve dağıtmak için başlangıçta kullanılan şablona ihtiyacınız yoktur.
 
-Bu adımları Resource Manager nasıl çalışır ile ilgili bilgi sahibi olduğunuz ve Resource Manager şablonu kullanarak en az bir Service Fabric kümesi dağıttıysanız ve kullanışlı kümeyi oluşturmak için kullanılan şablonu varsayılır. JSON kullanarak memnun olduğunuz varsayılır.
+Bu adımlarda, Kaynak Yöneticisi nasıl çalıştığını ve bir Kaynak Yöneticisi şablonu kullanarak en az bir Service Fabric kümesini nasıl dağıttığınızı ve kümeyi kullanışlı bir şekilde ayarlamak için kullandığınız şablona sahip olduğunuz varsayılır. Ayrıca, JSON kullanmaya rahat bir şekilde yararlanacağınız varsayılır.
 
 > [!NOTE]
-> Örnek şablonu ve boyunca veya bir başlangıç noktası olarak izlemek için kullanabileceğiniz parametreler için arıyorsanız, ardından bunu indirmek [git deposu](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/Cert%20Rollover%20Sample). 
+> Bir başlangıç noktası olarak veya bir başlangıç noktası olarak izlemek için kullanabileceğiniz örnek bir şablon ve parametre arıyorsanız, bu [Git-deposu](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/Cert-Rollover-Sample)' ndan indirin. 
 > 
 > 
 
-### <a name="edit-your-resource-manager-template"></a>Resource Manager şablonunuzu düzenleyin
+### <a name="edit-your-resource-manager-template"></a>Kaynak Yöneticisi şablonunuzu düzenleme
 
-Aşağıdaki boyunca kolaylığı için örnek 5-VM-1-NodeType-Secure_Step2.JSON biz yapacak düzenlemeler içerir. Örnek kullanılabilir [git deposu](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/Cert%20Rollover%20Sample).
+Bunun yanı sıra, örnek 5-VM-1-NodeTypes-Secure_Step2. JSON, yaptığımız tüm düzenlemeleri içerir. örnek, [Git](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/Cert-Rollover-Sample)deposu ' te kullanılabilir.
 
 **Tüm adımları izlediğinizden emin olun**
 
-1. Resource Manager şablonu açın, küme dağıtmak için kullanılır. (Önceki depodan örnek indirdiyseniz, ardından güvenli bir kümeye dağıtmak için 5-VM-1-NodeType-Secure_Step1.JSON kullanın ve ardından bu şablonu açın).
+1. Kümenizi dağıtmak için kullandığınız Kaynak Yöneticisi şablonunu açın. (Örneği önceki depodan indirdiyseniz, güvenli bir küme dağıtmak için 5-VM-1-NodeTypes-Secure_Step1. JSON kullanın ve ardından bu şablonu açın).
 
-2. Ekleme **iki yeni parametrenin** "secCertificateThumbprint" ve "secCertificateUrlValue", şablon parametre kısmına "dize" yazın. Aşağıdaki kod parçacığını kopyalayın ve şablona ekleyin. Şablonunuzun kaynağına bağlı olarak, bu tanımlı, bu nedenle sonraki adıma geçin zaten olabilir. 
+2. Şablonunuzun parametre bölümüne "String" türünde **iki yeni** "seccertificatethumbprint" ve "secCertificateUrlValue" parametresi ekleyin. Aşağıdaki kod parçacığını kopyalayabilir ve şablona ekleyebilirsiniz. Şablonunuzun kaynağına bağlı olarak, bir sonraki adıma geçmek istiyorsanız, bu tanımlanmış olabilir. 
  
     ```json
        "secCertificateThumbprint": {
@@ -83,7 +83,7 @@ Aşağıdaki boyunca kolaylığı için örnek 5-VM-1-NodeType-Secure_Step2.JSON
     
     ```
 
-3. Değişiklik yapma **Microsoft.ServiceFabric/clusters** kaynak - şablonunuzda "Microsoft.ServiceFabric/clusters" kaynak tanımı bulun. Bu tanımın özellikleri altında "Sertifika" JSON bulabilirsiniz etiketi aşağıdaki JSON kod parçacığı gibi görünmelidir:
+3. **Microsoft. ServiceFabric/kümeler** kaynağında değişiklik yapma-şablonunuzda "Microsoft. servicefabric/kümeler" kaynak tanımını bulun. Bu tanımın özellikleri altında, aşağıdaki JSON kod parçacığına benzer olması gereken "Certificate" JSON etiketini bulacaksınız:
    
     ```JSON
           "properties": {
@@ -93,9 +93,9 @@ Aşağıdaki boyunca kolaylığı için örnek 5-VM-1-NodeType-Secure_Step2.JSON
          }
     ``` 
 
-    "ThumbprintSecondary" yeni bir etiket ekleyin ve "[parameters('secCertificateThumbprint')]" bir değer verin.  
+    "ThumbprintSecondary" yeni etiketini ekleyin ve "[Parameters (' secCertificateThumbprint ')]" değerini verin.  
 
-    Kaynak tanımı aşağıdaki gibi görünmelidir artık (şablon kaynağını bağlı olarak, bu tam olarak aşağıdaki kod parçacığında gibi olmayabilir). 
+    Böylece kaynak tanımı aşağıdaki gibi görünmelidir (şablonun kaynağına bağlı olarak, aşağıdaki kod parçacığına tam olarak benzemeyebilir). 
 
     ```JSON
           "properties": {
@@ -106,7 +106,7 @@ Aşağıdaki boyunca kolaylığı için örnek 5-VM-1-NodeType-Secure_Step2.JSON
          }
     ``` 
 
-    İsterseniz **sertifika alma**, ardından yeni bir sertifika birincil olarak belirtin ve geçerli birincil ikincil olarak taşıma. Bu, geçerli birincil sertifikanızın geçişi içinde yeni bir dağıtım adımı sertifikada sonuçlanır.
+    **Sertifikayı almak**istiyorsanız, yeni sertifikayı birincil olarak belirtin ve geçerli birincili ikincil olarak hareket ettirin. Bu, geçerli birincil sertifikanızın yeni sertifikaya tek bir dağıtım adımında geçişine neden olur.
     
     ```JSON
           "properties": {
@@ -117,13 +117,13 @@ Aşağıdaki boyunca kolaylığı için örnek 5-VM-1-NodeType-Secure_Step2.JSON
          }
     ``` 
 
-4. Değişiklik yapma **tüm** **Microsoft.Compute/virtualMachineScaleSets** kaynak tanımları - Microsoft.Compute/virtualMachineScaleSets kaynak tanımı bulun. "Publisher" kaydırın: "Microsoft.Azure.ServiceFabric", "virtualMachineProfile" altında.
+4. **Tüm** **Microsoft. COMPUTE/virtualMachineScaleSets** kaynak tanımlarında değişiklik yapın-Microsoft. COMPUTE/virtualMachineScaleSets kaynak tanımını bulun. "VirtualMachineProfile" altındaki "Publisher": "Microsoft. Azure. ServiceFabric" öğesine gidin.
 
-    Service Fabric yayımcı Ayarları'nda şöyle bir şey görmeniz gerekir.
+    Service Fabric yayımcı ayarları ' nda şuna benzer bir şey görmeniz gerekir.
     
     ![Json_Pub_Setting1][Json_Pub_Setting1]
     
-    Yeni sertifika girişler ekleyin
+    Yeni sertifika girdilerini buna ekleyin
     
     ```json
                    "certificateSecondary": {
@@ -134,11 +134,11 @@ Aşağıdaki boyunca kolaylığı için örnek 5-VM-1-NodeType-Secure_Step2.JSON
     
     ```
 
-    Özellikleri artık şöyle görünmelidir
+    Özellikler şimdi şöyle görünmelidir
     
     ![Json_Pub_Setting2][Json_Pub_Setting2]
     
-    İsterseniz **sertifika alma**, ardından yeni bir sertifika birincil olarak belirtin ve geçerli birincil ikincil olarak taşıma. Bu, geçerli sertifikanızın geçişi içinde yeni bir dağıtım adımı sertifikada sonuçlanır.     
+    **Sertifikayı almak**istiyorsanız, yeni sertifikayı birincil olarak belirtin ve geçerli birincili ikincil olarak hareket ettirin. Bu, geçerli sertifikanızın yeni sertifikaya tek bir dağıtım adımında geçişine neden olur.     
 
     ```json
                    "certificate": {
@@ -152,14 +152,14 @@ Aşağıdaki boyunca kolaylığı için örnek 5-VM-1-NodeType-Secure_Step2.JSON
                       },
     ```
 
-    Özellikleri artık şöyle görünmelidir    
+    Özellikler şimdi şöyle görünmelidir    
     ![Json_Pub_Setting3][Json_Pub_Setting3]
 
-5. Değişiklik yapma **tüm** **Microsoft.Compute/virtualMachineScaleSets** kaynak tanımları - Microsoft.Compute/virtualMachineScaleSets kaynak tanımı bulun. "VaultCertificates" gidin:, "OSProfile" altında. şunun gibi görünmelidir.
+5. **Tüm** **Microsoft. COMPUTE/VirtualMachineScaleSets** kaynak tanımlarında değişiklik yapın-Microsoft. COMPUTE/virtualMachineScaleSets kaynak tanımını bulun. "Oprofıle" altında "vaultCertificates": ("OSProfile") bölümüne gidin. Şuna benzer görünmelidir.
 
     ![Json_Pub_Setting4][Json_Pub_Setting4]
     
-    SecCertificateUrlValue ekleyin. Aşağıdaki kod parçacığını kullanın:
+    SecCertificateUrlValue öğesine ekleyin. Aşağıdaki kod parçacığını kullanın:
     
     ```json
                       {
@@ -168,19 +168,19 @@ Aşağıdaki boyunca kolaylığı için örnek 5-VM-1-NodeType-Secure_Step2.JSON
                       }
     
     ```
-    Sonuçta elde edilen Json aşağıdakine benzer görünmelidir.
+    Sonuçta elde edilen JSON şuna benzer görünmelidir.
     ![Json_Pub_Setting5][Json_Pub_Setting5]
 
 
 > [!NOTE]
-> 4 ve 5. adımları tüm Nodetypes/Microsoft.Compute/virtualMachineScaleSets kaynak tanımlarında şablonunuzda yinelenen olduğunu doğrulayın. Bunlardan biri kaçırmanıza sertifika üzerinde sanal makine ölçek kümesi ve kümenin (elde küme güvenlik için kullanabileceğiniz geçerli sertifika yok edersiniz; giderek dahil olmak üzere, kümenizdeki beklenmeyen sonuçlar doğuracağını yüklenmemiş Bu nedenle devam etmeden önce onay, çift.
+> Şablonunuzda tüm Nodetypes/Microsoft. COMPUTE/virtualMachineScaleSets kaynak tanımları için 4 ve 5. adımları tekrarlamadığınızdan emin olun. Bunlardan birini kaçırırsanız, sertifika bu sanal makine ölçek kümesine yüklenmez ve kümeniz de dahil olmak üzere kümenizde (kümenin Güvenlik için kullanabileceği geçerli bir sertifika yoksa) öngörülemeyen sonuçlara sahip olursunuz. Daha sonra devam etmeden önce, iki kez kontrol edin.
 > 
 > 
 
-### <a name="edit-your-template-file-to-reflect-the-new-parameters-you-added-above"></a>Yukarıda eklediğiniz yeni parametreleri yansıtacak şekilde şablon dosyanızı düzenleyin
-Örnekten kullanıyorsanız [git deposu](https://github.com/ChackDan/Service-Fabric/tree/master/ARM%20Templates/Cert%20Rollover%20Sample) örneği takip etmek için örnek 5-VM-1-NodeType-Secure.parameters_Step2.JSON içinde değişiklik başlatmak için 
+### <a name="edit-your-template-file-to-reflect-the-new-parameters-you-added-above"></a>Şablon dosyanızı, yukarıda eklediğiniz yeni parametreleri yansıtacak şekilde düzenleyin
+Daha sonra izlemek için [Git-](https://github.com/Azure-Samples/service-fabric-cluster-templates/tree/master/Cert-Rollover-Sample) deposunun örneğini kullanıyorsanız, örnek 5-VM-1-Nodetypes-Secure. PARAMETERS_STEP2. json dosyasında değişiklik yapmaya başlayabilirsiniz 
 
-Resource Manager şablonu parametreniz dosya düzenleme, secCertificateThumbprint ve secCertificateUrlValue için iki yeni parametreler eklendi. 
+Kaynak Yöneticisi şablonu parametre dosyanızı düzenleyin, secCertificateThumbprint ve secCertificateUrlValue için iki yeni parametreyi ekleyin. 
 
 ```JSON
     "secCertificateThumbprint": {
@@ -192,10 +192,10 @@ Resource Manager şablonu parametreniz dosya düzenleme, secCertificateThumbprin
 
 ```
 
-### <a name="deploy-the-template-to-azure"></a>Şablonu Azure'a dağıtma
+### <a name="deploy-the-template-to-azure"></a>Şablonu Azure 'a dağıtma
 
-- Şablonunuzu Azure'da dağıtmak artık hazırsınız. Bir Azure PS 1 + sürümü komut istemi açın.
-- Azure hesabınızda oturum açın ve belirli bir azure aboneliğini seçin. Bu, birden fazla azure aboneliğinize erişimi olan yeni başlayanlar için önemli bir adımdır.
+- Şimdi şablonunuzu Azure 'a dağıtmaya hazırsınız. Bir Azure PS sürüm 1 + komut istemi açın.
+- Azure hesabınızda oturum açın ve belirli Azure aboneliğini seçin. Bu, birden fazla Azure aboneliğine erişimi olan katlara yönelik önemli bir adımdır.
 
 ```powershell
 Connect-AzAccount
@@ -203,17 +203,17 @@ Select-AzSubscription -SubscriptionId <Subscription ID>
 
 ```
 
-Şablonu dağıtmadan önce test edin. Kümenizi şu anda dağıtılmış olan aynı kaynak grubunu kullanın.
+Dağıtmadan önce şablonu test edin. Kümenizin Şu anda dağıtıldığı kaynak grubunu kullanın.
 
 ```powershell
 Test-AzResourceGroupDeployment -ResourceGroupName <Resource Group that your cluster is currently deployed to> -TemplateFile <PathToTemplate>
 
 ```
 
-Şablon, kaynak grubuna dağıtın. Kümenizi şu anda dağıtılmış olan aynı kaynak grubunu kullanın. New-AzResourceGroupDeployment komutu çalıştırın. Varsayılan değer olduğundan modu belirtmek gerekmez **artımlı**.
+Şablonu kaynak grubunuza dağıtın. Kümenizin Şu anda dağıtıldığı kaynak grubunu kullanın. New-AzResourceGroupDeployment komutunu çalıştırın. Varsayılan değer **artımlı**olduğundan, bu modu belirtmeniz gerekmez.
 
 > [!NOTE]
-> Modu için tam olarak ayarlarsanız, şablonunuzda bulunmayan kaynaklar yanlışlıkla silebilirsiniz. Bu nedenle bu senaryoda kullanmayın.
+> Modu, tamamlanacak şekilde ayarlarsanız, şablonunuzda olmayan kaynakları yanlışlıkla silebilirsiniz. Bu nedenle, bu senaryoda kullanmayın.
 > 
 > 
 
@@ -221,7 +221,7 @@ Test-AzResourceGroupDeployment -ResourceGroupName <Resource Group that your clus
 New-AzResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName <Resource Group that your cluster is currently deployed to> -TemplateFile <PathToTemplate>
 ```
 
-Aynı PowerShell doldurulmuş bir örnek aşağıda verilmiştir.
+Aynı PowerShell 'in doldurulmuş bir örneği aşağıda verilmiştir.
 
 ```powershell
 $ResourceGroup2 = "chackosecure5"
@@ -232,9 +232,9 @@ New-AzResourceGroupDeployment -ResourceGroupName $ResourceGroup2 -TemplateParame
 
 ```
 
-Dağıtım tamamlandıktan sonra yeni sertifikayı kullanarak kümenize bağlanın ve bazı sorgular gerçekleştirin. Yapmak mümkün olduğunda. Ardından, eski sertifika silebilirsiniz. 
+Dağıtım tamamlandıktan sonra, yeni sertifikayı kullanarak kümenize bağlanın ve bazı sorgular gerçekleştirin. Yapabiliyorsanız. Daha sonra eski sertifikayı silebilirsiniz. 
 
-Kendinden imzalı bir sertifika kullanıyorsanız, bunları yerel TrustedPeople sertifika deposuna içeri aktarmak unutmayın.
+Kendinden imzalı bir sertifika kullanıyorsanız, bunları yerel Trustedkişilerim sertifika deponuza aktarmayı unutmayın.
 
 ```powershell
 ######## Set up the certs on your local box
@@ -242,7 +242,7 @@ Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\TrustedPe
 Import-PfxCertificate -Exportable -CertStoreLocation Cert:\CurrentUser\My -FilePath c:\Mycertificates\chackdanTestCertificate9.pfx -Password (ConvertTo-SecureString -String abcd123 -AsPlainText -Force)
 
 ```
-Hızlı başvuru için güvenli bir kümeye bağlanmak için komutu aşağıda verilmiştir 
+Hızlı başvuru için, güvenli bir kümeye bağlanma komutu aşağıda verilmiştir 
 
 ```powershell
 $ClusterName= "chackosecure5.westus.cloudapp.azure.com:19000"
@@ -256,43 +256,47 @@ Connect-serviceFabricCluster -ConnectionEndpoint $ClusterName -KeepAliveInterval
     -StoreLocation CurrentUser `
     -StoreName My
 ```
-Hızlı başvuru için küme durumu almak için komutu aşağıda verilmiştir
+Hızlı başvuru için, küme durumunu almak üzere komut şöyledir
 
 ```powershell
 Get-ServiceFabricClusterHealth 
 ```
 
-## <a name="deploying-client-certificates-to-the-cluster"></a>İstemci sertifikaları, kümeye dağıtma.
+## <a name="deploying-client-certificates-to-the-cluster"></a>İstemci sertifikalarını kümeye dağıtma.
 
-Bir keyvault düğümlerine dağıtılmış sertifikaları sağlamak için önceki adımları 5'te belirtildiği gibi aynı adımları kullanabilirsiniz. Yalnızca tanımlanır ve farklı parametreler kullanın.
-
-
-## <a name="adding-or-removing-client-certificates"></a>Ekleme veya istemci sertifikalarını kaldırma
-
-Küme sertifikalarını ek olarak, bir Service Fabric kümesinde yönetim işlemlerini gerçekleştirmek için istemci sertifikaları ekleyebilirsiniz.
-
-İki tür istemci sertifikaları - yönetici ekleyebilirsiniz veya salt okunur. Bunlar daha sonra yönetim işlemlerini ve sorgu işlemleri kümede erişimi denetlemek için kullanılabilir. Varsayılan olarak, küme sertifikaları izin verilen yönetici sertifikalar listesine eklenir.
-
-İstemci sertifikaları herhangi bir sayıda belirtebilirsiniz. Her eklendiği/silindiği bir yapılandırmasını güncelleştirmesi için Service Fabric kümesi sonuçlanır.
+Sertifikaların bir anahtar kasasından düğümlere dağıtılmasını sağlamak için yukarıdaki adımlarda özetlenen adımları kullanabilirsiniz. Yalnızca tanımlamanız ve farklı parametreler kullanmanız gerekir.
 
 
-### <a name="adding-client-certificates---admin-or-read-only-via-portal"></a>İstemci sertifikaları - yönetici ekleme veya salt okunur Portalı aracılığıyla
+## <a name="adding-or-removing-client-certificates"></a>Istemci sertifikaları ekleme veya kaldırma
 
-1. Güvenlik bölümüne gidin ve '+ kimlik doğrulaması' güvenlik bölümü üzerine düğmesi.
-2. 'Kimlik doğrulaması ekleme' bölümünü ' Kimlik doğrulaması türü' - 'Salt okunur istemci' veya 'Yönetici istemci' seçin
-3. Artık yetkilendirme yöntemi seçin. Bu, Service Fabric'e bu sertifikayı konu adı veya parmak izi'ni kullanarak şuna olup olmadığını gösterir. Genel olarak, bu konu adının yetkilendirme yöntemi kullanmak için en iyi güvenlik yöntemi değildir. 
+Küme sertifikalarına ek olarak, bir Service Fabric kümesinde yönetim işlemleri gerçekleştirmek için istemci sertifikaları ekleyebilirsiniz.
 
-![İstemci sertifikası Ekle][Add_Client_Cert]
+İki tür istemci sertifikası ekleyebilirsiniz-yönetici veya salt okunurdur. Bunlar daha sonra, kümedeki yönetici işlemlerine ve sorgu işlemlerine erişimi denetlemek için kullanılabilir. Varsayılan olarak, küme sertifikaları izin verilen yönetici sertifikaları listesine eklenir.
 
-### <a name="deletion-of-client-certificates---admin-or-read-only-using-the-portal"></a>İstemci sertifikaları - yönetici veya salt okunur portalı kullanarak silme
+herhangi bir sayıda istemci sertifikası belirtebilirsiniz. Her ekleme/silme işlemi Service Fabric kümesinde bir yapılandırma güncelleştirmesine neden olur
 
-İçin küme güvenlik, güvenlik bölümüne Git için kullanılan ikincil sertifika kaldırın ve belirli bir sertifika bağlam menüsünden 'Delete' seçeneğini belirleyin.
+
+### <a name="adding-client-certificates---admin-or-read-only-via-portal"></a>Portal aracılığıyla istemci sertifikaları ekleme-yönetici veya salt okuma
+
+1. Güvenlik bölümüne gidin ve güvenlik bölümünün üstündeki ' + Authentication ' düğmesini seçin.
+2. ' Kimlik doğrulaması Ekle ' bölümünde ' kimlik doğrulama türü '-' salt okunurdur ' veya ' admin Client ' seçeneklerini belirleyin
+3. Şimdi yetkilendirme yöntemini seçin. Bu, konu adı veya parmak izi kullanarak bu sertifikaya bakmak gerekip gerekmediğini Service Fabric belirtir. Genel olarak, konu adının yetkilendirme yöntemini kullanmak iyi bir güvenlik uygulaması değildir. 
+
+![Istemci sertifikası Ekle][Add_Client_Cert]
+
+### <a name="deletion-of-client-certificates---admin-or-read-only-using-the-portal"></a>Portalı kullanarak Istemci sertifikalarını silme-yönetici veya salt okuma
+
+Küme güvenliği için kullanılan ikincil sertifikayı kaldırmak için Güvenlik bölümüne gidin ve belirli bir sertifikadaki bağlam menüsünden ' Sil ' seçeneğini belirleyin.
+
+## <a name="adding-application-certificates-to-a-virtual-machine-scale-set"></a>Bir sanal makine ölçek kümesine uygulama sertifikaları ekleme
+
+Uygulamalarınız için kullandığınız bir sertifikayı kümenize dağıtmak için [Bu örnek PowerShell betiğine](scripts/service-fabric-powershell-add-application-certificate.md)bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Küme yönetimi hakkında daha fazla bilgi için bu makaleleri okuyun:
+Küme yönetimi hakkında daha fazla bilgi için şu makaleleri okuyun:
 
-* [Service Fabric kümesini yükseltme işlemi ve sizden beklentileri](service-fabric-cluster-upgrade.md)
-* [İstemciler için rol tabanlı erişim Kurulumu](service-fabric-cluster-security-roles.md)
+* [Küme yükseltme işlemini ve beklentilerini Service Fabric](service-fabric-cluster-upgrade.md)
+* [İstemciler için rol tabanlı erişim kurulumu](service-fabric-cluster-security-roles.md)
 
 <!--Image references-->
 [Add_Client_Cert]: ./media/service-fabric-cluster-security-update-certs-azure/SecurityConfigurations_13.PNG

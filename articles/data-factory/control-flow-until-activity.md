@@ -1,26 +1,25 @@
 ---
-title: Azure Data factory'de etkinlik kadar | Microsoft Docs
-description: Until etkinliği etkinlikle ilişkilendirilmiş olan koşul true olarak değerlendirilen veya zaman aşımına kadar bir dizi etkinliği döngüsel olarak yürütür.
+title: Azure Data Factory etkinlik tarihine kadar
+description: Until etkinliği, etkinlik ile ilişkili koşul doğru olarak değerlendirilene veya zaman aşımına uğrayana kadar bir dizi etkinliği yürütür.
 services: data-factory
 documentationcenter: ''
-author: sharonlo101
-manager: craigg
-ms.reviewer: douglasl
+author: djpmsft
+ms.author: daperlov
+manager: jroth
+ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
-ms.tgt_pltfrm: na
 ms.topic: conceptual
 ms.date: 01/10/2018
-ms.author: shlo
-ms.openlocfilehash: 5a053ab213390a12c5d2051a802a1fa98279c344
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ab24b4f3a819e2b44c68d052c355f10219eb1dc4
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66155163"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73679347"
 ---
-# <a name="until-activity-in-azure-data-factory"></a>Azure Data factory'de until etkinliği
-Until etkinliği aynı işlevselliği sağlayan bir do-kadar döngü yapısı programlama dillerinde sağlar. Etkinlikle ilişkilendirilmiş olan koşul doğru sonucunu verene kadar bir dizi etkinliği döngüsel olarak yürütür. Data Factory'de bitiş etkinliği için bir zaman aşımı değeri belirtebilirsiniz. 
+# <a name="until-activity-in-azure-data-factory"></a>Azure Data Factory etkinlik tarihine kadar
+Until etkinliği, programlama dillerinde bir do-Until döngü yapısının sağladığı işlevleri sağlar. Etkinlikle ilişkilendirilmiş olan koşul doğru sonucunu verene kadar bir dizi etkinliği döngüsel olarak yürütür. Data Factory'de bitiş etkinliği için bir zaman aşımı değeri belirtebilirsiniz. 
 
 ## <a name="syntax"></a>Sözdizimi
 
@@ -54,19 +53,19 @@ Until etkinliği aynı işlevselliği sağlayan bir do-kadar döngü yapısı pr
 
 Özellik | Açıklama | İzin verilen değerler | Gerekli
 -------- | ----------- | -------------- | --------
-name | Adını `Until` etkinlik. | String | Evet
-türü | Ayarlanmalıdır **kadar**. | String | Evet
-İfade | True veya false değerlendirmelidir ifadesi | Expression.  | Evet
-timeout | Do-burada belirtilen süre geçtikten sonra döngü zaman aşımına kadar. | dize. `d.hh:mm:ss` (veya) `hh:mm:ss`. Varsayılan değer 7 gündür. En yüksek değerdir: 90 gün. | Hayır
-Etkinlikler | İfade sonucunu verene kadar çalıştırılan etkinlik kümesini `true`. | Etkinlikleri dizisi. |  Evet
+ad | `Until` etkinliğin adı. | Dize | Evet
+type | To **until**olarak ayarlanmalıdır. | Dize | Evet
+ifadesini | True veya false sonucunu vermesi gereken ifade | İfadesini.  | Evet
+timeout | Do-Until döngüsü, belirtilen süreden sonra zaman aşımına uğrar. | dizisinde. `d.hh:mm:ss` (veya) `hh:mm:ss`. Varsayılan değer 7 gündür. Maksimum değer: 90 gün. | Hayır
+Etkinlikler | İfade `true`olarak değerlendirilene kadar yürütülen etkinlik kümesi. | Etkinlik dizisi. |  Evet
 
 ## <a name="example-1"></a>Örnek 1
 
 > [!NOTE]
-> Bu bölümde, JSON tanımları ve işlem hattını çalıştırmak için örnek PowerShell komutları sağlanır. Azure PowerShell ve JSON tanımları'ı kullanarak Data Factory işlem hattı oluşturmak için adım adım yönergeler içeren bir kılavuz için bkz. [öğretici: Azure PowerShell kullanarak veri fabrikası oluşturma](quickstart-create-data-factory-powershell.md).
+> Bu bölüm, işlem hattını çalıştırmak için JSON tanımları ve örnek PowerShell komutları sağlar. Azure PowerShell ve JSON tanımlarını kullanarak Data Factory işlem hattı oluşturmaya yönelik adım adım yönergeler için bkz. [öğretici: Azure PowerShell kullanarak veri fabrikası oluşturma](quickstart-create-data-factory-powershell.md).
 
-### <a name="pipeline-with-until-activity"></a>Until etkinliği ile işlem hattı
-Bu örnekte, işlem hattı iki etkinlik içerir: **Kadar** ve **bekleyin**. Bekle etkinliğinin Web etkinliği bir döngüde çalıştırmadan önce belirtilen süre boyunca bekler. Data Factory de ifadeler ve İşlevler hakkında bilgi edinmek için bkz. [ifade dili ve işlevleri](control-flow-expression-language-functions.md). 
+### <a name="pipeline-with-until-activity"></a>Etkinlik Until işlem hattı
+Bu örnekte, işlem hattının iki etkinliği vardır: **until** ve **wait**. Bekleme etkinliği, döngüsünde Web etkinliğini çalıştırmadan önce belirtilen süre boyunca bekler. Data Factory ifadeler ve işlevler hakkında bilgi edinmek için bkz. [Expression Language and Functions](control-flow-expression-language-functions.md). 
 
 ```json
 {
@@ -117,9 +116,9 @@ Bu örnekte, işlem hattı iki etkinlik içerir: **Kadar** ve **bekleyin**. Bekl
 ```
 
 ## <a name="example-2"></a>Örnek 2 
-Bu örnekteki işlem hattı verileri bir girdi klasöründen döngü içinde bir çıktı klasörüne kopyalar. Yineleme parametresinin değerini false olarak ayarlanır veya bir dakika sonra zaman aşımına döngüyü sonlandırır.   
+Bu örnekteki işlem hattı, verileri bir giriş klasöründen bir döngüde çıkış klasörüne kopyalar. Yineleme parametresinin değeri false olarak ayarlandığında veya bir dakika sonra zaman aşımına uğrarsa döngü sonlandırılır.   
 
-### <a name="pipeline-with-until-activity-adfv2quickstartpipelinejson"></a>Until etkinliği (c:\adfv2quickstartpsh) ile işlem hattı
+### <a name="pipeline-with-until-activity-adfv2quickstartpipelinejson"></a>Until etkinliği ile işlem hattı (Adfv2QuickStartPipeline. JSON)
 
 ```json
 {
@@ -192,7 +191,7 @@ Bu örnekteki işlem hattı verileri bir girdi klasöründen döngü içinde bir
 ```
 
 
-### <a name="azure-storage-linked-service-azurestoragelinkedservicejson"></a>Azure depolama bağlı hizmeti (C:\adfv2tutorial)
+### <a name="azure-storage-linked-service-azurestoragelinkedservicejson"></a>Azure depolama bağlı hizmeti (AzureStorageLinkedService. JSON)
 
 ```json
 {
@@ -209,8 +208,8 @@ Bu örnekteki işlem hattı verileri bir girdi klasöründen döngü içinde bir
 }
 ```
 
-### <a name="parameterized-azure-blob-dataset-blobdatasetjson"></a>Parametreli Azure Blob veri kümesi (C:\adfv2quickstartpsh)
-İşlem hattı ayarlar **folderPath** ya da değerine **outputPath1** veya **outputPath2** işlem hattı parametresi. 
+### <a name="parameterized-azure-blob-dataset-blobdatasetjson"></a>Parametreli Azure blob veri kümesi (BlobDataset. JSON)
+İşlem hattı **FolderPath** değerini, Işlem hattının **OutputPath1** ya da **outputPath2** parametresinin değerine ayarlar. 
 
 ```json
 {
@@ -236,7 +235,7 @@ Bu örnekteki işlem hattı verileri bir girdi klasöründen döngü içinde bir
 }
 ```
 
-### <a name="pipeline-parameter-json-pipelineparametersjson"></a>İşlem hattı parametresi JSON (C:\adfv2quickstartpsh)
+### <a name="pipeline-parameter-json-pipelineparametersjson"></a>Ardışık düzen parametresi JSON (PipelineParameters. JSON)
 
 ```json
 {
@@ -250,7 +249,7 @@ Bu örnekteki işlem hattı verileri bir girdi klasöründen döngü içinde bir
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Bu komutlar, JSON dosyaları klasöre kaydettiğiniz varsayın: C:\ADF. 
+Bu komutlar JSON dosyalarını klasörüne kaydettiğiniz varsayılmaktadır: C:\ADF. 
 
 ```powershell
 Connect-AzAccount
@@ -290,7 +289,7 @@ while ($True) {
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Data Factory tarafından desteklenen diğer denetim akışı etkinlikleri bakın: 
+Data Factory tarafından desteklenen diğer denetim akışı etkinliklerini görün: 
 
 - [If Koşulu Etkinliği](control-flow-if-condition-activity.md)
 - [İşlem Hattı Yürütme Etkinliği](control-flow-execute-pipeline-activity.md)

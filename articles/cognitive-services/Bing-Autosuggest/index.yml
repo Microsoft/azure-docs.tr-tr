@@ -1,92 +1,69 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Bing Otomatik Öneri Belgeleri
+summary: Bing Otomatik Öneri API'si Bing'e kısmi arama sorguları göndermenizi ve kullanıcı amacı ile eski aramalara dayalı olarak bir öneri listesi almanızı sağlar. Uygulamanızda kullanıcılar giriş yaparken göstermek üzere arama kutularını ve açılan listeleri önerilerle doldurmak için API'yi çağırın.
 metadata:
   document_id: ce69fd12-adf8-11e7-abc4-cec278b6b50a
-  title: 'Bing Otomatik Öneri Belgeleri - Öğreticiler, hızlı başlangıçlar, API başvuruları | Microsoft Docs'
+  title: Bing Otomatik Öneri Belgeleri - Öğreticiler, hızlı başlangıçlar, API başvuruları
+  titleSuffix: Azure Cognitive Services
   description: Kısmı bir sorguyu temel alarak önerilen sorguları edinmek için Bing Otomatik Öneri API’sini kullanmayı öğrenin. Öğreticilerde bu hizmeti kullanan uygulamaların nasıl derleneceği gösterilmektedir.
   services: cognitive-services
   author: aahill
   manager: nitinme
   ms.service: cognitive-services
   ms.subservice: bing-autosuggest
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 02/20/2019
+  ms.date: 10/28/2019
   ms.author: aahi
-abstract:
-  description: 'Bing Otomatik Öneri API’si Bing’e kısmi arama sorgusu terimi gönderip diğer kullanıcıların aradığı, önerilen sorguların bulunduğu bir liste almanıza olanak sağlar.  Örneğin kullanıcılar, arama teriminin her karakterini girdikçe siz bu API’yi çağırıp arama kutusunun açılan listesini önerilerle doldurabilirsiniz. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle Otomatik Öneri API’sini kullanmayı öğrenin.'
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/cognitive-services/bing-autosuggest/get-suggested-search-terms
-            html: <p>Bing Otomatik Öneri API’si hakkında bilgi edinin</p>
-            image:
-              src: ../media/index/i_overview.svg
-            title: Bing Otomatik Öneri API’si nedir?
-          - href: /azure/cognitive-services/bing-autosuggest/concepts/get-suggestions
-            html: <p>Gerçek zamanlı arama önerileri almayı öğreninsaat</p>
-            image:
-              src: ../media/index/i_guidelines.svg
-            title: Bing Otomatik Öneri API’sinden öneri alma
-          - href: /azure/cognitive-services/bing-autosuggest/language-support
-            html: <p>API’nin desteklediği dilleri öğrenin.</p>
-            image:
-              src: ../media/index/i_guidelines.svg
-            title: Desteklenen Diller
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Sorgu oluşturup JSON yanıtını görüntüleyerek Bing Otomatik Öneri API’sini kullanmaya başlayın:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: media/index/logo_csharp.svg
-            href: quickstarts/csharp
-            text: 'C&#35;'
-          - image:
-              src: media/index/logo_java.svg
-            href: quickstarts/java
-            text: Java
-          - image:
-              src: media/index/logo_nodejs.svg
-            href: quickstarts/nodejs
-            text: Node.js
-          - image:
-              src: media/index/logo_php.svg
-            href: quickstarts/php
-            text: PHP
-          - image:
-              src: media/index/logo_python.svg
-            href: quickstarts/python
-            text: Python
-          - image:
-              src: media/index/logo_ruby.svg
-            href: quickstarts/ruby
-            text: Ruby
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Bing Otomatik Öneri API’sini kullanarak uygulama geliştirmeyi öğrenin:'
-      - type: paragraph
-        text: <a href="tutorials/autosuggest.md">Tek sayfalı web uygulaması</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: API'ler
-            html: '<p><a href="https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference">Bing Otomatik Öneri API’si v7</a></p> <p><a href="https://docs.microsoft.com/rest/api/cognitiveservices/bing-autosuggest-api-v5-reference">Bing Otomatik Öneri API’si v5</p>'
-          - title: SDK’lar
-            html: '<p><a href="https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingautosuggest?view=azure-dotnet">.NET</a></p> <p><a href="https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/autosuggest">Go</a></p> <p><a href="https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/autosuggest?view=azure-java-stable">Java</a></p>'
-          - title: PowerShell
-            html: '<p><a href="https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services">Azure PowerShell</a></p>'
-          - title: CLI
-            html: '<p><a href="https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest">Azure CLI</a></p>'
+  ms.openlocfilehash: b0618f5bd0ed9deb1241dd3ff752a49686ca9073
+  ms.sourcegitcommit: 827248fa609243839aac3ff01ff40200c8c46966
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/07/2019
+  ms.locfileid: "73746127"
+landingContent:
+- title: Bing Otomatik Öneri API’si hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Bing Otomatik Öneri API’si nedir?
+      url: get-suggested-search-terms.md
+    - text: Bing Arama API'lerini karşılaştırma
+      url: ../bing-web-search/bing-api-comparison.md
+- title: Önerilen arama terimlerini alma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: C# kullanma
+      url: quickstarts/csharp.md
+    - text: Python’u kullanma
+      url: quickstarts/python.md
+    - text: Java'yı kullanma
+      url: quickstarts/java.md
+    - text: Node.js'yi kullanma
+      url: quickstarts/nodejs.md
+  - linkListType: tutorial
+    links:
+    - text: Tek sayfalı web uygulaması oluşturma
+      url: tutorials/autosuggest.md
+  - linkListType: how-to-guide
+    links:
+    - text: Önerilen terimleri kullanma
+      url: concepts/get-suggestions.md
+    - text: API istekleri gönderme
+      url: concepts/sending-requests.md
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Otomatik Öneri REST API'si v7
+      url: https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v7-reference
+    - text: Otomatik Öneri REST API'si v5
+      url: https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-autosuggest-api-v5-reference
+    - text: .NET SDK
+      url: https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingautosuggest?view=azure-dotnet
+    - text: Java SDK
+      url: https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/bingautosuggest?view=azure-java-stable
+    - text: Go SDK'sı
+      url: https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/autosuggest
+    - text: Node.js SDK'sı
+      url: https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-autosuggest/?view=azure-node-latest

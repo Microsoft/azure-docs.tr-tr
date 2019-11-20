@@ -2,30 +2,30 @@
 author: cephalin
 ms.service: app-service
 ms.topic: include
-ms.date: 11/03/2016
+ms.date: 08/12/2019
 ms.author: cephalin
-ms.openlocfilehash: 7aa0d232cf53eef9bd28c36b66e8fdae22a28db9
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 4f3236c0a167a2b6f7586c6cb5fea8e30f55a86c
+ms.sourcegitcommit: 0f54f1b067f588d50f787fbfac50854a3a64fff7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188173"
+ms.lasthandoff: 08/12/2019
+ms.locfileid: "68954069"
 ---
-## <a name="rest"></a>ZIP dosyası REST API'leri ile dağıtma 
+## <a name="rest"></a>ZIP dosyasını REST API 'lerle dağıtma 
 
-Kullanabileceğiniz [dağıtım hizmeti REST API'leri](https://github.com/projectkudu/kudu/wiki/REST-API) .zip dosyası, uygulamanızı Azure'a dağıtmak için. Dağıtmak için https://<app_name>.scm.azurewebsites.net/api/zipdeploy bir POST isteği gönderin. POST isteğinin ileti gövdesinde .zip dosyasını içermesi gerekir. Uygulamanızın dağıtım kimlik bilgileri, HTTP BASIC kimlik doğrulaması kullanılarak istekte belirtilir. Daha fazla bilgi için [.zip anında dağıtım başvurusu](https://github.com/projectkudu/kudu/wiki/Deploying-from-a-zip-file). 
+. Zip dosyasını Azure 'daki uygulamanıza dağıtmak için [dağıtım HIZMETI REST API 'lerini](https://github.com/projectkudu/kudu/wiki/REST-API) kullanabilirsiniz. Dağıtım yapmak için https://< app_name >. scm. azurewebsites. NET/API/zipdeploy 'a bir POST isteği gönderin. POST isteğinin ileti gövdesinde. zip dosyası içermesi gerekir. Uygulamanızın dağıtım kimlik bilgileri, HTTP BASIC kimlik doğrulaması kullanılarak istekte belirtilir. Daha fazla bilgi için bkz [. ZIP Push dağıtım başvurusu](https://github.com/projectkudu/kudu/wiki/Deploying-from-a-zip-file). 
 
-HTTP temel kimlik doğrulaması için App Service dağıtım kimlik bilgileriniz gerekir. Dağıtım kimlik bilgilerinizi ayarlamak hakkında bilgi için bkz. [ayarlayın ve kullanıcı düzeyi kimlik bilgilerini sıfırlama](../articles/app-service/deploy-configure-credentials.md#userscope).
+HTTP temel kimlik doğrulaması için App Service dağıtım kimlik bilgilerinizin olması gerekir. Dağıtım kimlik bilgilerinizi ayarlama hakkında bilgi için bkz. [Kullanıcı düzeyi kimlik bilgilerini ayarlama ve sıfırlama](../articles/app-service/deploy-configure-credentials.md#userscope).
 
-### <a name="with-curl"></a>CURL ile
+### <a name="with-curl"></a>Kıvrımlı ile
 
-Aşağıdaki örnek, .zip dosyasını dağıtmak için cURL aracını kullanır. Yer tutucuları değiştirmeniz `<username>`, `<password>`, `<zip_file_path>`, ve `<app_name>`. CURL tarafından istendiğinde parolayı yazın.
+Aşağıdaki örnek, bir. zip dosyasını dağıtmak için kıvrımlı aracı kullanır. `<username>`Yer tutucuları `<password>` değiştirin,`<app_name>`, ve. `<zip_file_path>` Kıvrımlı tarafından istendiğinde, parolayı yazın.
 
 ```bash
 curl -X POST -u <deployment_user> --data-binary @"<zip_file_path>" https://<app_name>.scm.azurewebsites.net/api/zipdeploy
 ```
 
-Bu istek anında dağıtım karşıya yüklenen .zip dosyasından tetikler. Kullanarak, güncel ve geçmiş dağıtımlar inceleyebilirsiniz `https://<app_name>.scm.azurewebsites.net/api/deployments` aşağıdaki cURL örnekte gösterildiği gibi uç nokta. Yeniden değiştirin `<app_name>` uygulamanızın adı ile ve `<deployment_user>` kullanıcı adıyla dağıtım kimlik bilgilerinizi.
+Bu istek, karşıya yüklenen. zip dosyasından gönderim dağıtımını tetikler. Aşağıdaki kıvrımlı örnekte gösterildiği gibi `https://<app_name>.scm.azurewebsites.net/api/deployments` uç noktasını kullanarak geçerli ve geçmiş dağıtımları inceleyebilirsiniz. Yeniden, uygulamanızın `<app_name>` adıyla ve `<deployment_user>` dağıtım kimlik bilgilerinizin Kullanıcı adıyla değiştirin.
 
 ```bash
 curl -u <deployment_user> https://<app_name>.scm.azurewebsites.net/api/deployments
@@ -33,22 +33,21 @@ curl -u <deployment_user> https://<app_name>.scm.azurewebsites.net/api/deploymen
 
 ### <a name="with-powershell"></a>PowerShell ile
 
-Aşağıdaki örnekte [Invoke-RestMethod](/powershell/module/microsoft.powershell.utility/invoke-restmethod) .zip dosyasını içeren bir istek gönderebilirsiniz. Yer tutucuları değiştirmeniz `<deployment_user>`, `<deployment_password>`, `<zip_file_path>`, ve `<app_name>`.
+Aşağıdaki örnek [Publish-AzWebapp](/powershell/module/az.websites/publish-azwebapp) ' i. zip dosyasını karşıya yükle kullanır. Yer tutucuları `<group-name>` `<app-name>`, ve ile `<zip-file-path>`değiştirin.
 
 ```powershell
-#PowerShell
-$username = "<deployment_user>"
-$password = "<deployment_password>"
-$filePath = "<zip_file_path>"
-$apiUrl = "https://<app_name>.scm.azurewebsites.net/api/zipdeploy"
-$base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $username, $password)))
-$userAgent = "powershell/1.0"
-Invoke-RestMethod -Uri $apiUrl -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -UserAgent $userAgent -Method POST -InFile $filePath -ContentType "multipart/form-data"
+Publish-AzWebapp -ResourceGroupName <group-name> -Name <app-name> -ArchivePath <zip-file-path>
 ```
 
-Bu istek anında dağıtım karşıya yüklenen .zip dosyasından tetikler. Güncel ve geçmiş dağıtımlar gözden geçirmek için aşağıdaki komutları çalıştırın. Yeniden değiştirin `<app_name>` yer tutucu.
+Bu istek, karşıya yüklenen. zip dosyasından gönderim dağıtımını tetikler. 
+
+Geçerli ve geçmiş dağıtımları gözden geçirmek için aşağıdaki komutları çalıştırın. Yeniden, ve `<deployment-user>` `<deployment-password>` yer`<app-name>` tutucularını değiştirin.
 
 ```bash
-$apiUrl = "https://<app_name>.scm.azurewebsites.net/api/deployments"
+$username = "<deployment-user>"
+$password = "<deployment-password>"
+$apiUrl = "https://<app-name>.scm.azurewebsites.net/api/deployments"
+$base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $username, $password)))
+$userAgent = "powershell/1.0"
 Invoke-RestMethod -Uri $apiUrl -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -UserAgent $userAgent -Method GET
 ```

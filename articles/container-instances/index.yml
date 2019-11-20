@@ -1,71 +1,80 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Container Instances Belgeleri
+### YamlMime:Landing
+title: Azure Container Instances belgeleri
+summary: Docker kapsayıcılarını yönetilen, sunucusuz Azure ortamında isteğe bağlı olarak çalıştırın. Azure Container Instances düzenleme olmaksızın yalıtılmış kapsayıcılarda çalıştırılabilen senaryolara yönelik bir çözümdür. Olay odaklı uygulamaları çalıştırın, kapsayıcı geliştirme işlem hattınızdan hızla dağıtın ve veri işlemesini çalıştırıp işleri oluşturun.
 metadata:
-  title: Azure Container Instances Belgeleri - Öğreticileri | Microsoft Docs
-  description: 'Azure Container Instances, herhangi bir sanal makine sağlamak ve daha yüksek düzeyde bir hizmeti benimsemek zorunda kalmadan Azure içinde kapsayıcı çalıştırmanızın en hızlı ve en kolay yoludur.'
-  services: container-instances
-  author: czeumault
-  manager: carolz
+  title: Azure Container Instances belgeleri - sunucusuz kapsayıcılar, isteğe bağlı
+  description: Docker kapsayıcılarını yönetilen, sunucusuz Azure ortamında çalıştırın.
+  services: 
   ms.service: container-instances
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 07/26/2017
-  ms.author: carolz
-abstract:
-  description: 'Azure Container Instances, herhangi bir sanal makine sağlamak ve daha yüksek düzeyde bir hizmeti benimsemek zorunda kalmadan Azure içinde kapsayıcı çalıştırmanızın en hızlı ve en kolay yoludur. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle kapsayıcı örneklerini oluşturmayı ve yönetmeyi öğrenin.<p>Eksiksiz bir kapsayıcı düzenleme çözümüne ihtiyaç duyuyorsanız bkz. <a href="/azure/aks/">Azure Kubernetes Hizmeti (AKS) belgeleri</a>.</p>'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Azure Container Instances ile kapsayıcı görüntülerini nasıl dağıtacağınızı öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_cligeneric.svg'
-            text: Azure CLI
-            href: /azure/container-instances/container-instances-quickstart
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_portal.svg'
-            text: Azure Portal
-            href: /azure/container-instances/container-instances-quickstart-portal
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_powershell.svg'
-            text: Azure PowerShell
-            href: /azure/container-instances/container-instances-quickstart-powershell
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Bir kapsayıcı görüntüsüne nasıl kod paketleyeceğinizi ve bu görüntüyü Azure Container Instance üzerinde nasıl çalıştıracağınızı öğrenin.
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/container-instances/container-instances-tutorial-prepare-app">Kapsayıcı görüntüsüne uygulama paketleme</a>
-          - html: <a href="/azure/container-instances/container-instances-tutorial-prepare-acr">Bir Azure Container Registry oluşturma ve kapsayıcı görüntüsünü karşıya yükleme</a>
-          - html: <a href="/azure/container-instances/container-instances-tutorial-deploy-app">Azure Container Instance üzerinde kapsayıcı görüntüsünü dağıtma</a>
-  - title: Microsoft Learn ile becerilerinizi geliştirin
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Azure Container Instances ile Docker kapsayıcılarını çalıştırma
-            href: /learn/modules/run-docker-with-azure-container-instances/
-            image:
-              src: /learn/achievements/run-docker-with-azure-container-instances.svg
-      - type: paragraph
-        text: <a href="/learn/browse/?products=azure-container-instances">Daha fazla etkileşimli öğrenme içeriği...</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/cli/azure/container">Azure CLI</a></p><p><a href="/powershell/module/az.containerinstance">PowerShell</a></p>
-          - title: Diller
-            html: <p><a href="/dotnet/api/overview/azure/containerinstance">.NET</a></p><p><a href="/python/api/overview/azure/containerinstance">Python</a></p><p><a href="/java/api/overview/azure/containerinstance">Java</a></p><p><a href="/javascript/api/overview/azure/containerinstances">Node.js</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/container-instances">REST API başvurusu</a></p><p><a href="/azure/templates/microsoft.containerinstance/containergroups">Resource Manager Şablonu</a></p>
+  ms.collection: collection
+  author: dlepow
+  ms.author: danlep
+  ms.date: 09/25/2019
+  ms.openlocfilehash: a031f70cfaad9369f79a0e18f3527250eb82bfeb
+  ms.sourcegitcommit: e9936171586b8d04b67457789ae7d530ec8deebe
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/27/2019
+  ms.locfileid: "71326964"
+landingContent:
+- title: Azure Container Instances hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Container Instances nedir?
+      url: container-instances-overview.md
+    - text: Kapsayıcı grupları
+      url: container-instances-container-groups.md
+    - text: SSS
+      url: container-instances-faq.md
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Kapsayıcı örneğini dağıtma - CLI
+      url: container-instances-quickstart.md
+    - text: Kapsayıcı örneğini dağıtma - Portal
+      url: container-instances-quickstart-portal.md
+  - linkListType: learn
+    links:
+    - text: Azure Container Instances ile Docker kapsayıcılarını çalıştırma
+      url: /learn/modules/run-docker-with-azure-container-instances/
+- title: Birden çok kapsayıcılı gruplar oluşturma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Kapsayıcı grubunu dağıtma - YAML
+      url: container-instances-multi-container-yaml.md
+    - text: Kapsayıcı grubunu dağıtma - şablon
+      url: container-instances-multi-container-group.md
+- title: Dağıtım senaryoları
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Sanal ağa bağlanma
+      url: container-instances-vnet.md
+    - text: Yeniden başlatma ilkesini yapılandırma
+      url: container-instances-restart-policy.md
+    - text: Ortam değişkenlerini belirleme
+      url: container-instances-environment-variables.md
+- title: Kapsayıcı uygulamalarını yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Kapsayıcıları durdurma ve başlatma
+      url: container-instances-stop-start.md
+    - text: Çalışan kapsayıcıları güncelleştirme
+      url: container-instances-update.md
+    - text: Kapsayıcılar arasında veri paylaşma
+      url: container-instances-volume-emptydir.md
+- title: Azure ile tümleştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Azure Container Registry üzerinden görüntü dağıtma
+      url: container-instances-using-azure-container-registry.md
+    - text: Yönetilen kimlik kullanma
+      url: container-instances-managed-identity.md
+    - text: Azure dosya paylaşımını bağlama
+      url: container-instances-volume-azure-files.md

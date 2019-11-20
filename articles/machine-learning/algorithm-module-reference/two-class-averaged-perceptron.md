@@ -1,65 +1,64 @@
 ---
-title: 'Karar ormanı regresyon: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Bir machine learning modeli ortalama perceptron algoritmadan yola çıkılarak oluşturmak için Azure Machine Learning hizmetinde iki sınıflı ortalama Perceptron modülünü kullanmayı öğrenin.
+title: 'Karar ormanı gerileme: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: Ortalama Perceptron algoritmaya dayalı bir makine öğrenimi modeli oluşturmak için Azure Machine Learning ' de Iki sınıftaki ortalama Perceptron modülünü nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
-ms.date: 05/02/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: f0fec525ed87f91cf102053383b2934aac4b71c0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: 379cddd9654cc897b49fd085d8df55fcd77a7ce8
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65029243"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73490362"
 ---
-# <a name="two-class-averaged-perceptron-module"></a>İki sınıflı ortalama Perceptron Modülü
+# <a name="two-class-averaged-perceptron-module"></a>İki sınıflı ortalama Perceptron modülü
 
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-Bir machine learning modeli ortalama perceptron algoritmadan yola çıkılarak oluşturmak için bu modülü kullanın.  
+Ortalama Perceptron algoritmasını temel alan bir makine öğrenimi modeli oluşturmak için bu modülü kullanın.  
   
-Bu sınıflandırma algoritmasıdır denetimli öğrenme yöntemidir ve gerektiren bir *etiketli veri kümesini*, bir etiket sütun içerir. Girdi olarak model ve etiketli veri kümesini sağlayarak modeli eğitmek [modeli eğitme](./train-model.md). Eğitim modeli, ardından yeni giriş örnekleri için değerleri tahmin etmek için kullanılabilir.  
+Bu sınıflandırma algoritması denetimli bir öğrenme yöntemidir ve etiket sütunu içeren etiketli bir *veri kümesi*gerektirir. Modeli [eğitmek](./train-model.md)için bir girdi olarak modeli ve etiketli veri kümesini sağlayarak modeli eğitebilirsiniz. Eğitilen model daha sonra yeni giriş örneklerinin değerlerini tahmin etmek için kullanılabilir.  
 
-### <a name="about-averaged-perceptron-models"></a>Ortalama perceptron modelleri hakkında
+### <a name="about-averaged-perceptron-models"></a>Ortalama Perceptron modelleri hakkında
 
-*Perceptron yöntemi Ortalama* sinir ağı erken ve basit bir sürümü. Bu yaklaşımda, doğrusal bir işleve göre ve ardından bir dizi özellik öğesinden türetilmiştir ağırlıkları birlikte birkaç olası çıktıları girişleri sınıflandırılır; bu nedenle adı "perceptron."
+*Ortalama Perceptron yöntemi* , bir sinir ağının erken ve basit sürümüdür. Bu yaklaşımda girişler, doğrusal bir işleve göre birkaç olası çıkış halinde sınıflandırılır ve sonra özellik vektöründen türetilmiş bir ağırlık kümesiyle birleştirilir, bu nedenle "Perceptron" adı.
 
-Daha basit perceptron modelleri doğrusal olarak ayrılabilir desenleri öğrenme ise uygun sinir ağları (özellikle derin sinir ağı) daha karmaşık sınıf sınırları modelleyebilirsiniz. Ancak, perceptrons daha hızlı ve sürekli eğitimlerle perceptrons servis taleplerini seri olarak işlemek için kullanılabilir.
+Daha basit Perceptron modelleri öğrenerek doğrusal desenleri öğrenirken, sinir Networks (özellikle derin sinir ağlar) daha karmaşık sınıf sınırlarını modelleyebilir. Ancak, perceptrons daha hızlıdır ve servis taleplerini hizmet olarak işledikleri için, perceptrons sürekli eğitim ile kullanılabilir.
 
-## <a name="how-to-configure-two-class-averaged-perceptron"></a>İki sınıflı ortalama Perceptron yapılandırma
+## <a name="how-to-configure-two-class-averaged-perceptron"></a>Iki sınıflı ortalama Perceptron yapılandırma
 
-1.  Ekleme **iki sınıflı ortalama Perceptron** denemenizi modülü.  
+1.  Ardışık düzene **Iki sınıftaki ortalama Perceptron** modülünü ekleyin.  
 
-2.  Model, ayarlayarak düşünürler nasıl istediğinizi belirtmek **Oluştur trainer modu** seçeneği.  
+2.  Model **oluşturma modunu** ayarlayarak modelin eğitilme şeklini belirleyin.  
   
-    -   **Tek bir parametre**: Model yapılandırmak istediğiniz nasıl biliyorsanız, belirli bir dizi bağımsız değişken olarak sağlayın.
+    -   **Tek parametre**: modeli nasıl yapılandırmak istediğinizi biliyorsanız bağımsız değişken olarak belirli bir değer kümesi sağlayın.
   
-3.  İçin **öğrenme oranı**, için bir değer belirtin *öğrenme oranı*. Öğrenme oranı denetim stokastik modeli test ve düzeltilmiş her seferinde kullanılır adım boyutunu değerleri.
+3.  **Öğrenme oranı**için *öğrenme oranı*için bir değer belirtin. Öğrenme oranı değerleri, her model test edildiğinde ve düzeltildiğinde, stochastik degradede kullanılan adımın boyutunu denetler.
   
-     Hızı daha küçük hale getirerek, model daha sık, içinde yerel bir platoya tıkanıp riskli test. Bir adım daha büyük hale getirerek, daha hızlı ve doğru en düşük değerleri overshooting at the risk of yakınsama.
+     Hızı daha az yaparak, yerel bir Play 'de kalmış olabileceğiniz riskle modeli daha sık test edersiniz. Adımı daha büyük yaparak, doğru Minima 'yı aşırı atma riskine göre daha hızlı bir şekilde yakınsama yapabilirsiniz.
   
-4.  İçin **en yüksek yineleme sayısı**, numarasını yazın eğitim verileri incelemek için algoritma istediğiniz saatleri.  
+4.  **En fazla yineleme sayısı**için, algoritmanın eğitim verilerini incelemesi için kaç kez istediğinizi yazın.  
   
-     Erken genellikle durdurma daha iyi Genelleştirme sağlar. Yineleme sayısının artırılması, overfitting at the risk of sığdırma artırır.
+     Erken durdurma daha iyi Genelleştirme sağlar. Yineleme sayısının artırılması, fazla sığdırma riski altında sığdırmayı geliştirir.
   
-5.  İçin **rastgele sayı doldurma**, isteğe bağlı olarak temel kullanılacak bir tamsayı girin. Bir çekirdek kullanarak denemeler arasında yeniden üretilebilirliğini çalıştıran emin olmak istiyorsanız önerilir.  
+5.  **Rastgele sayı çekirdek**için, isteğe bağlı olarak, çekirdek olarak kullanılacak bir tamsayı değeri yazın. İşlem hattının reproducibility arasında olmasını sağlamak istiyorsanız çekirdek kullanılması önerilir.  
   
-1.  Bir eğitim veri kümesi ve bir eğitim modüllerinin bağlayın:
+1.  Eğitim veri kümesini ve eğitim modüllerden birini bağlayın:
   
-    -   Ayarlarsanız **Oluştur trainer modu** için **tek parametre**, kullanın [modeli eğitme](train-model.md) modülü.
+    -   **Tek parametreye**oluşturma ve ayarlama **modunu** ayarlarsanız, [model eğitme](train-model.md) modülünü kullanın.
 
 ## <a name="results"></a>Sonuçlar
 
-Alıştırma tamamlandıktan sonra:
+Eğitim tamamlandıktan sonra:
 
-+ Çıkışı modelin parametreler, eğitimleri, öğrenilen özellik ağırlıkları özetini görmek için sağ [modeli eğitme](./train-model.md).
++ Modellerden öğrenilen Özellik ağırlıklarla birlikte modelin parametrelerinin özetini görmek için eğitim [modeli](./train-model.md)çıktısına sağ tıklayın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

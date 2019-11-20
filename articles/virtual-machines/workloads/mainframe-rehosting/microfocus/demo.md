@@ -2,15 +2,16 @@
 title: Micro odak Kurumsal Geliştirici 4.0 Azure sanal Makineler'de Micro odak CICS BankDemo ' ayarlayın
 description: Azure sanal makinelerinde (VM'ler) Micro odak Enterprise Server ve kurumsal Geliştirici kullanmayı öğrenmek için Micro odak BankDemo uygulamayı çalıştırın.
 author: sread
+ms.author: sread
 ms.date: 04/02/2019
 ms.topic: article
 ms.service: multiple
-ms.openlocfilehash: 7afe29cb98a294b2a30020ad48f8b27264386746
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4491fc137c2c85e2be605f5e58fde6fd422efbbe
+ms.sourcegitcommit: 6a42dd4b746f3e6de69f7ad0107cc7ad654e39ae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66304929"
+ms.lasthandoff: 07/07/2019
+ms.locfileid: "67621328"
 ---
 # <a name="set-up-micro-focus-cics-bankdemo-for-micro-focus-enterprise-developer-40-on-azure"></a>Micro odak Kurumsal Geliştirici 4.0 azure'da Micro odak CICS BankDemo ' ayarlayın
 
@@ -181,7 +182,7 @@ Sorgu, herhangi bir hata ile çalıştırmanız gerekir. İşlem tamamlandığı
 
      ![Bölge - bölge adı tanımlayın: BANKDEMO](media/08-demo-cics.png)
 
-7. **Son**'a tıklayın.
+7.           **Son**'a tıklayın.
 
 ## <a name="create-xa-resource-definitions"></a>XA Kaynak tanımları oluşturma
 

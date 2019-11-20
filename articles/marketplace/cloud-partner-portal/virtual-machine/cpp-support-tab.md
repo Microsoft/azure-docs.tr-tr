@@ -1,45 +1,46 @@
 ---
-title: Azure Marketi için bulut iş ortağı Portalı'nda sanal makine desteği sekmesi
-description: Bir Azure Market VM teklifi oluşturmak için kullanılan destek sekmesine açıklar.
+title: Azure Marketi için Bulut İş Ortağı Portalı sanal makine desteği sekmesi
+description: Azure Marketi VM teklifi oluşturma konusunda kullanılan destek sekmesini açıklar.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 04/25/2019
 ms.author: pabutler
-ms.openlocfilehash: 9763c8d520b8736d8f7d7bc5db81b75762cb98f9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fcf7a51e69e901ae04b29c4fb621d401d170d2f1
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64938201"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73808794"
 ---
-# <a name="virtual-machine-support-tab"></a>Sanal makine Destek sekmesi
+# <a name="virtual-machine-support-tab"></a>Sanal makine desteği sekmesi
 
-**Destek** sekmesinde **yeni teklif** sayfası, teknik ve kullanıcı kaynaklarını teklifiniz için desteği olanak tanır.  Bu üç alana ayrılır: **Mühendislik**, **müşteri desteği**, ve **destek URL'lerini**.
+**Yeni teklif** sayfasının **destek** sekmesi teklifiniz için teknik ve Kullanıcı Destek kaynakları sağlamanıza olanak sağlar.  Üç alana ayrılmıştır: **mühendislik**, **müşteri desteği**ve **Destek URL 'leri**.
 
-![Sanal makineler için yeni teklifi formdaki Destek sekmesi](./media/publishvm_012.png)
+![Sanal makineler için yeni teklif formundaki destek sekmesi](./media/publishvm_012.png)
 
 ## <a name="field-values"></a>Alan değerleri
 
-Aşağıdaki tabloda, amacı ve bu alanların içeriğini açıklar. Gerekli alanlar yıldız (*) indicted.
+Aşağıdaki tabloda bu alanların amacı ve içeriği açıklanmaktadır. Gerekli alanlar bir yıldız işareti (*) ile tanımlanır.
 
 |         Alan                 |       Açıklama                                                        |
 |        -------                |       ------------                                                       |
-| *Mühendislik birimi ilgili kişisi*     | Kuruluşunuz ile Microsoft arasındaki bir teknik konular ilgili kişisi olarak görev yapar. | 
-| **Ad\***                | Kişi veya teknik/mühendislik desteği hizmet veren Grup adı     |
-| **E-posta\***               | Bu teknik konular ilgili kişisi e-posta adresi                                      |
+| *Mühendislik Iletişim*     | Microsoft ve kuruluşunuz arasında teknik bir iletişim işlevi görür | 
+| **Ad\***                | Teknik/mühendislik desteği olarak hizmet veren kişinin veya grubun adı     |
+| **E-posta\***               | Bu teknik kişinin e-posta adresi                                      |
 | **Telefon\***               | Teknik destek için telefon numarası                                           |
-| *Müşteri desteği*        | Azure müşterileri tarafından açılmış destek biletlerini alır |
-| **Ad\***                | Kişi veya müşteri desteği hizmet veren Grup adı                  |
-| **E-posta\***               | E-posta adresi Müşteri desteği                                            |
+| *Müşteri desteği*        | Azure 'da müşteriler tarafından açılan destek biletlerini alır |
+| **Ad\***                | Müşteri desteği olarak hizmet veren kişinin veya grubun adı                  |
+| **E-posta\***               | Müşteri desteğinin e-posta adresi                                            |
 | **Telefon\***               | Müşteri desteği için telefon numarası                                            |
-| *Destek URL'si*            | Microsoft, müşterilerin destek bileti açtığınızda kullanacağı siteleri destekler |
-| **Genel Azure**          | Genel internet Destek sitesi URL'si                                         |
-| **Azure kamu Bulutu**| Kamu Bulutu Destek sitesi URL'si                                        |
+| *Destek URL 'Leri*            | Müşterileriniz destek biletlerini açtıklarında Microsoft 'un kullanacağı siteleri destekleme |
+| **Genel Azure**          | Genel internet desteği sitesi URL 'SI                                         |
+| **Azure Kamu Bulutu**| Kamu Bulutu destek sitesinin URL 'SI                                        |
 |  |  |
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Sonraki henüz doen şekilde varsa, sonlandırma, [sanal makine teknik varlıkları](./cpp-create-technical-assets.md).
+Daha önce yapmadıysanız, [sanal makine teknik varlıklarınızı](./cpp-create-technical-assets.md)sonlandırın.

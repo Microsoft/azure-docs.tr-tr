@@ -1,25 +1,26 @@
 ---
 title: Azure Container Registry'de içerik güveni
-description: Azure kapsayıcı kayıt defteriniz için içerik güvenini etkinleştirmeyi ve imzalı görüntüleri gönderip almayı öğrenin.
+description: Azure Container Registry 'niz için içerik güvenini etkinleştirmeyi ve imzalı görüntüleri gönderme ve çekme hakkında bilgi edinin.
 services: container-registry
 author: dlepow
+manager: gwallace
 ms.service: container-registry
-ms.topic: quickstart
-ms.date: 05/06/2019
+ms.topic: article
+ms.date: 09/06/2019
 ms.author: danlep
-ms.openlocfilehash: ca9ef32a830f56edb471256b3b9175ba0fbec51d
-ms.sourcegitcommit: 509e1583c3a3dde34c8090d2149d255cb92fe991
+ms.openlocfilehash: f14d4d32d2423b12786095da17305af605088fb7
+ms.sourcegitcommit: 29880cf2e4ba9e441f7334c67c7e6a994df21cfe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/27/2019
-ms.locfileid: "65069218"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71300431"
 ---
 # <a name="content-trust-in-azure-container-registry"></a>Azure Container Registry'de içerik güveni
 
-Azure Container Registry, Docker'ın uygulayan [içerik güven] [ docker-content-trust] gönderme ve imzalı görüntülerini çekmek etkinleştirme modeli. Bu makalede, içerik, kapsayıcı kayıt defterleri güvende etkinleştirme başlamanıza yardımcı olur.
+Azure Container Registry, Docker 'ın [içerik güven][docker-content-trust] modelini uygular ve imzalı görüntülerin gönderilmesi ve çekmelerini sağlar. Bu makale, kapsayıcı kayıt defterlerinde içerik güvenini etkinleştirmeye başlamanızı tanır.
 
 > [!NOTE]
-> İçerik güven özelliğidir [Premium SKU](container-registry-skus.md) Azure Container Registry'nin.
+> İçerik güveni, Azure Container Registry [PREMIUM SKU](container-registry-skus.md) 'sunun bir özelliğidir.
 
 ## <a name="how-content-trust-works"></a>İçerik güveni nasıl çalışır?
 
@@ -33,16 +34,16 @@ Güvenlik ön planda tutularak tasarlanmış olan tüm dağıtılmış sistemler
 
 ### <a name="signing-keys"></a>İmzalama anahtarları
 
-İçerik güveni, şifreli imzalama anahtarları kullanılarak yönetilir. Bu anahtarlar, kayıt defterindeki belirli bir depo ile ilişkilendirilir. Depo içindeki etiketlerin güven durumunu yönetmek için Docker istemcilerinin ve kayıt defterinizin kullandığı birçok imzalama anahtarı türü vardır. İçerik güvenini etkinleştirip kapsayıcı yayımlama ve tüketim işlem hattınızla tümleştirdiğinizde bu anahtarları dikkatli bir şekilde yönetmeniz gerekir. Daha fazla bilgi için bu makalenin ilerleyen bölümlerindeki [Anahtar yönetimi](#key-management) başlığına ve Docker belgelerindeki [İçerik güveni için anahtar yönetimi][docker-manage-keys] bölümüne bakın.
+İçerik güveni, şifreli imzalama anahtarları kullanılarak yönetilir. Bu anahtarlar, kayıt defterindeki belirli bir depo ile ilişkilendirilir. Depo içindeki etiketlerin güven durumunu yönetmek için Docker istemcilerinin ve kayıt defterinizin kullandığı birçok imzalama anahtarı türü vardır. İçerik güvenini etkinleştirip kapsayıcı yayımlama ve tüketim işlem hattınızla tümleştirdiğinizde bu anahtarları dikkatli bir şekilde yönetmeniz gerekir. Daha fazla bilgi için bu makalenin ilerleyen kısımlarında bulunan [anahtar yönetimi](#key-management) bölümüne bakın ve Docker belgelerinde [içerik güveni için anahtarları yönetin][docker-manage-keys] .
 
 > [!TIP]
-> Burada Docker'ın içerik güven modeline yüzeysel bir genel bakış sunulmaktadır. İçerik güveniyle ilgili ayrıntılı bilgiler için bkz. [Docker'da içerik güveni][docker-content-trust].
+> Burada Docker'ın içerik güven modeline yüzeysel bir genel bakış sunulmaktadır. İçerik güvenine ilişkin ayrıntılı bir tartışma için bkz. [Docker 'Da içerik güveni][docker-content-trust].
 
 ## <a name="enable-registry-content-trust"></a>Kayıt defteri içerik güvenini etkinleştirme
 
 Öncelikle kayıt defteri düzeyinde içerik güvenini etkinleştirmeniz gerekir. İçerik güvenini etkinleştirdikten sonra istemciler (kullanıcılar veya hizmetler) imzalı görüntüleri kayıt defterine gönderebilir. Kayıt defterinizde içerik güvenini etkinleştirmeniz, kayıt defterinin kullanımını yalnızca içerik güvenini etkinleştirmiş olan tüketicilerle sınırlamaz. İçerik güvenini etkinleştirmemiş tüketiciler de kayıt defterinizi normal bir şekilde kullanmaya devam edebilir. Ancak istemcilerinde içerik güvenini etkinleştirmiş olan tüketiciler kayıt defterinizde *yalnızca* imzalı görüntüleri görebilir.
 
-Kayıt defterinizde içerik güvenini etkinleştirmek için öncelikle Azure portaldan kayıt defterine gidin. Altında **ilkeleri**seçin **içerik güven** > **etkin** > **Kaydet**.
+Kayıt defterinizde içerik güvenini etkinleştirmek için öncelikle Azure portaldan kayıt defterine gidin. **İlkeler**altında **içerik güveni** > **etkin** > **Kaydet**' i seçin. Azure CLı 'de [az ACR config Content-Trust Update][az-acr-config-content-trust-update] komutunu da kullanabilirsiniz.
 
 ![Azure portalda kayıt defteri için içerik güvenini etkinleştirme][content-trust-01-portal]
 
@@ -73,13 +74,16 @@ docker build --disable-content-trust -t myacr.azurecr.io/myimage:v1 .
 
 ## <a name="grant-image-signing-permissions"></a>Görüntü imzalama izinleri verme
 
-Yalnızca izin verdiğiniz kullanıcılar veya sistemler kayıt defterinize güvenilen görüntü gönderebilir. Bir kullanıcıya (veya hizmet sorumlusu kullanan bir sisteme) güvenilen görüntü gönderme izni vermek için Azure Active Directory kimliklerine `AcrImageSigner` rolünü atayın. Ek olarak budur `AcrPush` (veya eşdeğer) registry'ye görüntüleri gönderme için gerekli rolü. Ayrıntılar için bkz [Azure Container Registry rolleri ve izinleri](container-registry-roles.md).
+Yalnızca izin verdiğiniz kullanıcılar veya sistemler kayıt defterinize güvenilen görüntü gönderebilir. Bir kullanıcıya (veya hizmet sorumlusu kullanan bir sisteme) güvenilen görüntü gönderme izni vermek için Azure Active Directory kimliklerine `AcrImageSigner` rolünü atayın. Bu, görüntüleri kayıt defterine göndermek `AcrPush` için gereken (veya eşdeğer) rolün yanı sıra. Ayrıntılar için bkz. [Azure Container Registry roller ve izinler](container-registry-roles.md).
+
+> [!NOTE]
+> Azure Container Registry 'nin [yönetici hesabına](container-registry-authentication.md#admin-account) güvenilen görüntü gönderme izni verilemez.
 
 Azure portalda ve Azure CLI ile `AcrImageSigner` rolünün atanmasıyla ilgili ayrıntılı bilgiler aşağıda verilmiştir.
 
 ### <a name="azure-portal"></a>Azure portal
 
-Azure portalında kayıt defterinize gidin ve ardından **erişim denetimi (IAM)**  > **rol ataması Ekle**. Altında **rol ataması Ekle**seçin `AcrImageSigner` altında **rol**, ardından **seçin** bir veya daha fazla kullanıcı ya da hizmet sorumluları, ardından **Kaydet**.
+Azure Portal Kayıt defterinize gidin ve ardından **erişim denetimi (IAM)**  > **rol ataması Ekle**' yi seçin. **Rol ataması Ekle** `AcrImageSigner` altında, **rol**altında öğesini seçin, ardından bir veya daha fazla Kullanıcı veya hizmet sorumlusu **seçin** , sonra **kaydedin**.
 
 Bu örnekte iki varlığa `AcrImageSigner` rolü atanmıştır: "service-principal" adlı bir hizmet sorumlusu ve "Azure User" adlı bir kullanıcı.
 
@@ -112,7 +116,8 @@ az role assignment create --scope $REGISTRY_ID --role AcrImageSigner --assignee 
 
 `<service principal ID>`, hizmet sorumlusunun **appId**, **objectId** veya **servicePrincipalNames** değerlerinden biri olabilir. Hizmet sorumluları veya Azure Container Registry ile çalışma hakkında daha fazla bilgi için bkz. [Hizmet sorumlularıyla Azure Container Registry kimlik doğrulaması](container-registry-auth-service-principal.md).
 
-Çalıştırın, herhangi bir rolü değişikliklerden sonra `az acr login` yeni rolleri etkili olması için Azure CLI için yerel kimlik belirteci yenilemek için.
+> [!IMPORTANT]
+> Herhangi bir rol değişikliği yapıldıktan sonra `az acr login` , yeni rollerin etkili olabilmesi için Azure CLI yerel kimlik belirtecini yenilemek üzere ' yi çalıştırın. Bir kimlik için rolleri doğrulama hakkında daha fazla bilgi için bkz. [RBAC ve Azure CLI kullanarak Azure kaynaklarına erişimi yönetme](../role-based-access-control/role-assignments-cli.md) ve [Azure kaynakları Için RBAC sorunlarını giderme](../role-based-access-control/troubleshooting.md).
 
 ## <a name="push-a-trusted-image"></a>Güvenilen görüntü gönderme
 
@@ -142,7 +147,7 @@ Successfully signed myregistry.azurecr.io/myimage:v1
 
 ## <a name="pull-a-trusted-image"></a>Güvenilen görüntüyü çekme
 
-Güvenilen görüntüyü çekmek için içerik güvenini etkinleştirin ve `docker pull` komutunu normal bir şekilde çalıştırın. Güvenilen görüntüleri çekmek için `AcrPull` rolü yeterli normal kullanıcılar için kullanılır. Ek rol ister bir `AcrImageSigner` rolü gereklidir. İçerik güvenini etkinleştiren tüketiciler yalnızca imzalı etikete sahip görüntüleri çekebilir. İmzalı etiket çekme örneği aşağıda verilmiştir:
+Güvenilen görüntüyü çekmek için içerik güvenini etkinleştirin ve `docker pull` komutunu normal bir şekilde çalıştırın. Güvenilen görüntüleri çekmek için, `AcrPull` rol normal kullanıcılar için yeterlidir. `AcrImageSigner` Rol gibi ek rol gerekli değildir. İçerik güvenini etkinleştiren tüketiciler yalnızca imzalı etikete sahip görüntüleri çekebilir. İmzalı etiket çekme örneği aşağıda verilmiştir:
 
 ```console
 $ docker pull myregistry.azurecr.io/myimage:signed
@@ -163,7 +168,7 @@ No valid trust data for unsigned
 
 ### <a name="behind-the-scenes"></a>Arka planda
 
-`docker pull` komutunu çalıştırdığınızda Docker istemcisi [Notary CLI][docker-notary-cli] ile aynı kitaplığı kullanarak çektiğiniz etiket için SHA-256 özet eşlemesi etiketini ister. İstemci güvenilen verilerdeki imzaları doğruladıktan sonra Docker Engine'den "özetle çekme" gerçekleştirmesini ister. Çekme işlemi sırasında Engine, SHA-256 sağlama toplamını kullanarak Azure kapsayıcı kayıt defterinden görüntü bildirimini ister ve doğrular.
+Çalıştırdığınızda `docker pull`Docker istemcisi, çekolduğunuz etiket için, SHA-256 Özet eşlemesini istemek üzere [noary CLI][docker-notary-cli] ile aynı kitaplığı kullanır. İstemci güvenilen verilerdeki imzaları doğruladıktan sonra Docker Engine'den "özetle çekme" gerçekleştirmesini ister. Çekme işlemi sırasında Engine, SHA-256 sağlama toplamını kullanarak Azure kapsayıcı kayıt defterinden görüntü bildirimini ister ve doğrular.
 
 ## <a name="key-management"></a>Anahtar yönetimi
 
@@ -173,13 +178,13 @@ No valid trust data for unsigned
 ~/.docker/trust/private
 ```
 
-Kök ve depo anahtarlarınızı sıkıştırılmış arşiv dosyasında ve çevrimdışı bir konumda (USB depolama cihazı gibi) yedekleyin. Örneğin, Bash içinde:
+Kök ve depo anahtarlarınızı bir arşivde sıkıştırarak ve güvenli bir konumda depolayarak yedekleyin. Örneğin, Bash içinde:
 
 ```bash
 umask 077; tar -zcvf docker_private_keys_backup.tar.gz ~/.docker/trust/private; umask 022
 ```
 
-Güvenilen görüntü gönderdiğinizde yerel ortamda oluşturulan kök ve depo anahtarlarına ek olarak Azure Container Registry tarafından oluşturulan ve depolanan anahtarlar da vardır. Docker içerik güveni uygulamasındaki çeşitli anahtarların ayrıntılı açıklaması için Docker belgelerinin [İçerik güveni için anahtar yönetimi][docker-manage-keys] bölümüne bakın.
+Güvenilen görüntü gönderdiğinizde yerel ortamda oluşturulan kök ve depo anahtarlarına ek olarak Azure Container Registry tarafından oluşturulan ve depolanan anahtarlar da vardır. Docker 'ın içerik güven uygulamasındaki çeşitli anahtarların ayrıntılı bir tartışması için ek Yönetim Kılavuzu dahil, bkz. Docker belgelerinde [içerik güveni için anahtarları yönetme][docker-manage-keys] .
 
 ### <a name="lost-root-key"></a>Kök anahtarın kaybolması
 
@@ -188,13 +193,15 @@ Kök anahtarınıza erişimi kaybederseniz etiketleri bu anahtarla imzalanmış 
 > [!WARNING]
 > Kayıt defterinizde içerik güvenini devre dışı bırakıp yeniden etkinleştirdiğinizde **kayıt defterinizdeki tüm depolarda bulunan imzalı etiketlerin tüm güven verileri silinir**. Bu eylem geri alınamaz. Azure Container Registry, silinen güven verilerini kurtaramaz. İçerik güvenini devre dışı bıraktığınızda görüntüler silinmez.
 
-Kayıt defterinizde içerik güvenini devre dışı bırakmak için Azure portaldan kayıt defterine gidin. Altında **ilkeleri**seçin **içerik güven** > **devre dışı bırakılmış** > **Kaydet**. Kayıt defterinizdeki tüm imzaların silineceğini belirten bir uyarı görüntülenir. Kayıt defterinizdeki tüm imzaları kalıcı olarak silmek için **Tamam**'ı seçin.
+Kayıt defterinizde içerik güvenini devre dışı bırakmak için Azure portaldan kayıt defterine gidin. **İlkeler**altında, **içerik güveni** > **devre dışı** > **Kaydet**' i seçin. Kayıt defterinizdeki tüm imzaların silineceğini belirten bir uyarı görüntülenir. Kayıt defterinizdeki tüm imzaları kalıcı olarak silmek için **Tamam**'ı seçin.
 
 ![Azure portalda kayıt defteri için içerik güvenini devre dışı bırakma][content-trust-03-portal]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [içerik Docker güvende] [ docker-content-trust] içeriğine güven hakkında ek bilgi için. Bu makalede birkaç önemli noktaya değinilmiş olsa da içerik güveni kapsamlı bir konudur ve Docker belgelerinde daha ayrıntılı olarak ele alınmıştır.
+* İçerik güveni hakkında daha fazla bilgi için bkz. [Docker 'Da içerik güveni][docker-content-trust] . Bu makalede birkaç önemli noktaya değinilmiş olsa da içerik güveni kapsamlı bir konudur ve Docker belgelerinde daha ayrıntılı olarak ele alınmıştır.
+
+* Bir Docker görüntüsü oluştururken ve gönderdiğinizde içerik güveninin kullanılması hakkında bir örnek için [Azure Pipelines](/azure/devops/pipelines/build/content-trust) belgelerine bakın.
 
 <!-- IMAGES> -->
 [content-trust-01-portal]: ./media/container-registry-content-trust/content-trust-01-portal.png
@@ -211,3 +218,4 @@ Bkz: [içerik Docker güvende] [ docker-content-trust] içeriğine güven hakkı
 
 <!-- LINKS - internal -->
 [azure-cli]: /cli/azure/install-azure-cli
+[az-acr-config-content-trust-update]: /cli/azure/acr/config/content-trust#az-acr-config-content-trust-update

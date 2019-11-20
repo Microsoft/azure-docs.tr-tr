@@ -1,4 +1,4 @@
-- name: Azure Sentinel Önizleme Belgeleri
+- name: Azure Sentinel Belgeleri
   href: index.yml
 - name: Genel Bakış
   href: overview.md
@@ -11,12 +11,22 @@
       href: quickstart-get-visibility.md
 - name: Öğreticiler
   items:
-    - name: Şüpheli tehditleri algılama
-      href: tutorial-detect-threats.md
-    - name: Durumları inceleme
+    - name: Tehditleri algılamak için yerleşik analizi kullanma
+      href: tutorial-detect-threats-built-in.md
+    - name: Tehditleri algılamak için özel kurallar oluşturma
+      href: tutorial-detect-threats-custom.md
+    - name: Verilerinizi izleme
+      href: tutorial-monitor-your-data.md
+    - name: Olayları araştırma
       href: tutorial-investigate-cases.md
     - name: Tehditlere yanıt verme
       href: tutorial-respond-threats-playbook.md
+- name: Kavramlar
+  items:
+    - name: Rolleri kullanarak izin atama
+      href: roles.md
+    - name: Gelişmiş çok aşamalı saldırı algılama
+      href: fusion.md
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Veri kaynaklarını bağlama
@@ -36,6 +46,8 @@
               href: connect-azure-ad-identity-protection.md
             - name: Azure Information Protection’ı bağlama
               href: connect-azure-information-protection.md
+            - name: Microsoft Defender ATP’yi bağlama
+              href: connect-microsoft-defender-advanced-threat-protection.md
             - name: Azure ATP'yi bağlama
               href: connect-azure-atp.md
             - name: Azure Güvenlik Merkezi’ni bağlama
@@ -52,6 +64,8 @@
           items:
             - name: Genel CEF’yi bağlama
               href: connect-common-event-format.md
+            - name: AWS’ye bağlanma
+              href: connect-aws.md
             - name: Barracuda’yı bağlama
               href: connect-barracuda.md
             - name: Check Point’i bağlama
@@ -62,14 +76,34 @@
               href: connect-fortinet.md
             - name: F5’i bağlama
               href: connect-f5.md
+            - name: F5 BIG-IP'yi bağlama
+              href: connect-f5-big-ip.md
             - name: Syslog’u bağlama
               href: connect-syslog.md
             - name: Symantec ICDX’i bağlama
               href: connect-symantec.md
             - name: Cisco’yu bağlama
               href: connect-cisco.md
+            - name: Barracuda CloudGen Firewall'u bağlama
+              href: connect-barracuda-cloudgen-firewall.md
+            - name: Citrix Analytics'i bağlama (Güvenlik)
+              href: connect-citrix-analytics.md
+            - name: ExtraHop Reveal(x)'i bağlama
+              href: connect-extrahop.md
+            - name: One Identity Safeguard
+              href: connect-one-identity.md
+            - name: Trend Micro Deep Security
+              href: connect-trend-micro.md
+            - name: Zscaler'i bağlama
+              href: connect-zscaler.md
         - name: Tehdit zekasını bağlama
           href: connect-threat-intelligence.md
+        - name: Azure Stack VM’lerini bağlama
+          href: connect-azure-stack.md
+    - name: Birden çok kiracı (MSSP)
+      href: multiple-tenants-service-providers.md
+    - name: Uyarıdan olay oluşturma
+      href: create-incidents-from-alerts.md
     - name: Avlanma
       href: hunting.md
       items:
@@ -77,8 +111,10 @@
           href: notebooks.md
         - name: Avlanmak için yer işaretlerini kullanma
           href: bookmarks.md
-    - name: Fusion etkinleştirme
-      href: connect-fusion.md
+        - name: Avlanmak için Livestream kullanma
+          href: livestream.md
+    - name: Azure Sentinel’ı kaldırma
+      href: offboard.md
 - name: Kaynaklar
   items:
     - name: Yararlı kaynaklar

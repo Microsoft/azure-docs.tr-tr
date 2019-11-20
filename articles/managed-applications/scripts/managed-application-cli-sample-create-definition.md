@@ -1,6 +1,6 @@
 ---
-title: Azure CLI betik örneği - Yönetilen uygulama tanımı oluşturma | Microsoft Docs
-description: Azure CLI betik örneği - Yönetilen uygulama tanımı oluşturma
+title: Yönetilen uygulama tanımı oluşturma-Azure CLı
+description: Abonelikte yönetilen uygulama tanımı oluşturan bir Azure CLı betik örneği sağlar.
 services: managed-applications
 documentationcenter: na
 author: tfitzmac
@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 10/25/2017
 ms.author: tomfitz
-ms.openlocfilehash: 79af2918c2342d1a0cc3b11763c30b35ab5e9f72
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: b5ac119aa2c4d79c046a6eeabe252801496caa1c
+ms.sourcegitcommit: f29fec8ec945921cc3a89a6e7086127cc1bc1759
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61043907"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72528920"
 ---
 # <a name="create-a-managed-application-definition-with-azure-cli"></a>Azure CLI ile yönetilen uygulama tanımı oluşturma
 

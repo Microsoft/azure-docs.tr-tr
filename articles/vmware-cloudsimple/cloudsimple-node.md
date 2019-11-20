@@ -1,61 +1,62 @@
 ---
-title: CloudSimple - Azure ile VMware çözümü için düğümleri genel bakış
+title: CloudSimple-Nodes 'a göre Azure VMware çözümü genel bakış
 description: CloudSimple düğümleri ve kavramları hakkında bilgi edinin.
 author: sharaths-cs
 ms.author: dikamath
-ms.date: 04/10/2019
+ms.date: 08/20/2019
 ms.topic: article
-ms.service: vmware
+ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: fb82e31d58d9955efc3b147eccf2b82b8768aeee
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 65afe26a98a53b00b72a1ea2b49799db2049b727
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67165795"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899026"
 ---
-# <a name="cloudsimple-nodes-overview"></a>CloudSimple düğümleri genel bakış
+# <a name="cloudsimple-nodes-overview"></a>CloudSimple düğümlerine genel bakış
 
-Bir düğümü olduğu:
+Düğümler, özel bulutun yapı taşlarıdır. Düğüm:
 
-* Adanmış bir çıplak bilgisayardan konak VMware ESXi hiper yöneticisine yüklendiği işlem  
-* Özel Bulutlar oluşturmak için bir birim sağlayabileceğiniz bilgi işlem veya ayrılmış  
-* Sağlama veya CloudSimple hizmetin kullanılabildiği bir bölgede yer ayırmak kullanılabilir
+* VMware ESXi hiper yöneticinin yüklü olduğu adanmış çıplak işlem Konağı  
+* Özel bulutlar oluşturmak için sağlayabileceğiniz veya ayırabileceğiniz bir bilgi işlem birimi
+* CloudSimple hizmetinin kullanılabildiği bir bölgede sağlama veya ayırma için kullanılabilir
 
-Düğüm, özel bulut yapı taşlarıdır.  Özel bir bulut oluşturmak için en az üç düğüm aynı SKU'ların gerekir.  Özel bir buluta genişletmek için ek düğümler ekleyin.  Mevcut bir kümeye düğüm ekleyebilirsiniz. Veya Azure portalında düğümleri sağlama ve bunları CloudSimple hizmetiyle ilişkilendirme yeni bir küme oluşturabilirsiniz.  Sağlanan tüm düğümleri CloudSimple hizmetinin altında görünür.  Sağlanan düğümlerinden CloudSimple portalında özel bir bulut oluşturun.
+Sağlanan düğümlerden özel bir bulut oluşturabilirsiniz. Özel bir bulut oluşturmak için aynı SKU 'nun en az üç düğümü gerekir. Özel bir bulutu genişletmek için ek düğümler ekleyin.  Mevcut bir kümeye düğüm ekleyebilir veya Azure portal düğümleri sağlayıp CloudSimple hizmetiyle ilişkilendirerek yeni bir küme oluşturabilirsiniz.  Sağlanan tüm düğümler CloudSimple hizmeti altında görünür.  
 
-## <a name="provisioned-nodes"></a>Sağlanan düğümleri
+## <a name="provisioned-nodes"></a>Sağlanan düğümler
 
-Sağlanan düğümleri Kullandıkça Öde kapasitesi sağlar. Düğümleri sağlama, hızlı bir şekilde isteğe bağlı olarak VMware kümenizi ölçeklendirme yardımcı olur. Düğümleri gerektiği gibi ekleyin veya VMware kümenizin sağlanan bir düğümü sil. sağlanan düğümleri aylık olarak faturalandırılır ve burada sağlanan abonelik için ücret:
+Sağlanan düğümler, Kullandıkça Öde kapasitesi sağlar. Sağlama düğümleri, VMware kümenizi isteğe bağlı olarak hızlıca ölçeklendirmenize yardımcı olur. Gerekli olan düğümleri ekleyebilir veya VMware kümenizi ölçeklendirmek için sağlanan bir düğümü silebilirsiniz. Sağlanan düğümler aylık olarak faturalandırılır ve sağlandıkları aboneliğe ücretlendirilir.
 
-* Kredi kartı ile Azure aboneliğinizin ödeme yaparsanız kart hemen faturalandırılır.
-* Fatura ile faturalandırılırsınız ücretleri, bir sonraki fatura üzerinde görünür.
+* Azure aboneliğiniz için kredi kartı ile ödeme yaparsanız, kart hemen faturalandırılır.
+* Faturaya göre faturalandırıldıysanız ücretler bir sonraki faturanızda görünür.
 
-## <a name="vmware-solution-by-cloudsimple-nodes-sku"></a>VMware çözümüyle CloudSimple düğümleri SKU
+## <a name="vmware-solution-by-cloudsimple-nodes-sku"></a>CloudSimple düğümleri SKU 'SU tarafından VMware çözümü
 
-Aşağıdaki türler düğümleri sağlama veya ayırma için kullanılabilir.
+Aşağıdaki düğüm türleri, sağlama veya ayırma için kullanılabilir.
 
-| SKU | CS28 - düğüm | CS36 - düğüm |
-|-----|-------------|-------------|
-| CPU | 2x2.2 GHz, 28 Çekirdeği (56 HT) | 2x2.3 GHz ve 36 çekirdek (72 HT) |
-| RAM | 256 GB | 512 GB |
-| Önbellek diski |  1.6 TB NVMe | 3.2-TB NVMe |
-| Disk kapasitesi | 5.625 ham TB | 11,25 TB ham |
-| Depolama türü | Tüm Flash | Tüm Flash |
+| SKU           | CS28-Node                 | CS36-Node                 | CS36m-Node                |
+|---------------|-----------------------------|-----------------------------|-----------------------------|
+| Bölge        | Doğu ABD, Batı ABD            | Doğu ABD, Batı ABD            | Batı Avrupa                 |
+| CPU           | 2x 2.2 GHz, 28 çekirdek (56 HT) | 2x 2.3 GHz, 36 çekirdek (72 HT) | 2x 2.3 GHz, 36 çekirdek (72 HT) |
+| RAM           | 256 GB                      | 512 GB                      | 576 GB                      |
+| Önbellek Diski    | 1,6-TB NVMe                 | 3,2-TB NVMe                 | 3,2-TB NVMe                 |
+| Kapasite diski | 5,625 TB RAW                | 11,25 TB RAW                | 15,36 TB RAW                |
+| Depolama türü  | Tüm Flash                   | Tüm Flash                   | Tüm Flash                   |
 
-## <a name="limits"></a>Limits
+## <a name="limits"></a>Sınırlar
 
-Aşağıdaki düğüm sınırlar özel Bulutlar için geçerlidir.
+Aşağıdaki düğüm limitleri özel bulutlar için geçerlidir.
 
-| Resource | Sınır |
+| Kaynak | Sınır |
 |----------|-------|
 | Özel bir bulut oluşturmak için düğüm sayısı alt sınırı | 3 |
-| En fazla özel bulut üzerinde bir kümedeki düğüm sayısını | 16 |
-| En fazla özel bulutta düğüm sayısı | 64 |
-| Yeni kümede düğüm sayısı alt sınırı | 3 |
+| Özel buluttaki bir kümede bulunan en fazla düğüm sayısı | 16 |
+| Özel buluttaki en fazla düğüm sayısı | 64 |
+| Yeni kümedeki düğüm sayısı alt sınırı | 3 |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Bilgi edinmek için nasıl [düğümleri sağlama](create-nodes.md)
-* Hakkında bilgi edinin [özel bulut](cloudsimple-private-cloud.md)
+* [Düğüm sağlamayı](create-nodes.md) öğrenin
+* [Özel bulutlar](cloudsimple-private-cloud.md) hakkında bilgi edinin

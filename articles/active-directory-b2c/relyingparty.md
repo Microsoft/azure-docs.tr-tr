@@ -1,6 +1,6 @@
 ---
-title: RelyingParty - Azure Active Directory B2C | Microsoft Docs
-description: Azure Active Directory B2C'de özel ilkesinin RelyingParty öğesi belirtin.
+title: RelyingParty-Azure Active Directory B2C | Microsoft Docs
+description: Azure Active Directory B2C özel bir ilkenin RelyingParty öğesini belirtin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,20 +10,20 @@ ms.topic: reference
 ms.date: 01/25/2019
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 2b5e9bfe6eaa9b84e259d941760792635a2994f4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b1bfa945843d185a46f1f1d79fd4dab0e991c769
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66512848"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71063803"
 ---
 # <a name="relyingparty"></a>RelyingParty
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-**RelyingParty** öğesi, Azure Active Directory (Azure AD) B2C'ye geçerli istek için zorlamak için kullanıcı yolculuğu belirtir. Ayrıca, bağlı taraf (RP) uygulaması gereken talepler listesinin verilen belirtecin bir parçası olarak belirtir. Bir web, mobil veya masaüstü uygulaması gibi bir RP uygulaması, RP ilke dosyasını çağırır. RP ilke dosyasını açarken, parola sıfırlama veya bir profil düzenleme gibi belirli bir görevi yürütür. Tek bir uygulama birden çok ilke kullanabilirsiniz ve birden çok uygulama aynı RP ilkesini kullanabilirsiniz. Tüm RP uygulamaları talepleri ile aynı belirteci alan ve kullanıcı aynı kullanıcı gezintisinde geçer.
+**RelyingParty** öğesi Azure Active Directory B2C (Azure AD B2C) için geçerli istek için zorlamak üzere Kullanıcı yolculuğunu belirtir. Ayrıca, bağlı olan taraf (RP) uygulamasının verilen belirtecin bir parçası olarak ihtiyacı olan taleplerin listesini de belirtir. Web, mobil veya masaüstü uygulaması gibi bir RP uygulaması, RP ilke dosyasını çağırır. RP ilke dosyası, oturum açma, parola sıfırlama veya bir profili düzenlemeyle ilgili belirli bir görevi yürütür. Birden çok uygulama aynı RP ilkesini kullanabilir ve tek bir uygulama birden çok ilke kullanabilir. Tüm RP uygulamaları taleplerle aynı belirteci alır ve Kullanıcı aynı kullanıcı yolculuğuna gider.
 
-Aşağıdaki örnekte gösterildiği bir **RelyingParty** öğesinde *B2C_1A_signup_signin* ilke dosyası:
+Aşağıdaki örnek *B2C_1A_signup_signin* ilke dosyasında bir **RelyingParty** öğesi gösterir:
 
 ```XML
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -54,7 +54,7 @@ Aşağıdaki örnekte gösterildiği bir **RelyingParty** öğesinde *B2C_1A_sig
     </UserJourneyBehaviors>
     <TechnicalProfile Id="PolicyProfile">
       <DisplayName>PolicyProfile</DisplayName>
-      <Description>The policy profile</Description> 
+      <Description>The policy profile</Description>
       <Protocol Name="OpenIdConnect" />
       <Metadata>collection of key/value pairs of data</Metadata>
       <OutputClaims>
@@ -74,17 +74,17 @@ Aşağıdaki örnekte gösterildiği bir **RelyingParty** öğesinde *B2C_1A_sig
 
 İsteğe bağlı **RelyingParty** öğesi aşağıdaki öğeleri içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| DefaultUserJourney | 1:1 | RP uygulaması için varsayılan kullanıcı yolculuğu. |
-| UserJourneyBehaviors | 0:1 | Kullanıcı yolculuğu davranışlarını kapsamı. |
-| TechnicalProfile | 1:1 | RP uygulaması tarafından desteklenen bir teknik profili. Teknik profili, RP uygulaması, Azure AD B2C başvurmak için bir sözleşme sağlar. |
+| Defaultuseryolculuğu | 1:1 | RP uygulaması için varsayılan kullanıcı yolculuğu. |
+| Kullanıcıbağlantısı Neyıdavranışları | 0:1 | Kullanıcı yolculuğu davranışlarının kapsamı. |
+| Teknisyen | 1:1 | RP uygulaması tarafından desteklenen teknik bir profil. Teknik profil, RP uygulamasının Azure AD B2C ile iletişim kurabilmesi için bir sözleşme sağlar. |
 
-## <a name="defaultuserjourney"></a>DefaultUserJourney
+## <a name="defaultuserjourney"></a>Defaultuseryolculuğu
 
-`DefaultUserJourney` Öğe tanımlayıcı genellikle temel ya da uzantıları ilkede tanımlanan kullanıcı yolculuğunun bir başvuru belirtir. Aşağıdaki örnekler belirtilen kaydolma veya oturum açma kullanıcı yolculuğu **RelyingParty** öğesi:
+`DefaultUserJourney` Öğesi, genellikle temel veya uzantılar ilkesinde tanımlanan Kullanıcı yolculuğu tanıtıcısına yönelik bir başvuru belirtir. Aşağıdaki örneklerde, **RelyingParty** öğesinde belirtilen kaydolma veya oturum açma Kullanıcı yolculuğu gösterilmektedir:
 
-*B2C_1A_signup_signin* İlkesi:
+*B2C_1A_signup_signin* ilkesi:
 
 ```XML
 <RelyingParty>
@@ -100,124 +100,124 @@ Aşağıdaki örnekte gösterildiği bir **RelyingParty** öğesinde *B2C_1A_sig
   ...
 ```
 
-**DefaultUserJourney** öğesi aşağıdaki öznitelik içeriyor:
+**Defaultuseryolculuney** öğesi aşağıdaki özniteliği içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| ReferenceId | Evet | Kullanıcı yolculuğu ilkesinde tanımlayıcısı. Daha fazla bilgi için [kullanıcı yolculuklarından](userjourneys.md) |
+| ReferenceId | Evet | İlkede Kullanıcı yolculuğu için bir tanımlayıcı. Daha fazla bilgi için bkz. [Kullanıcı yolculukları](userjourneys.md) |
 
-## <a name="userjourneybehaviors"></a>UserJourneyBehaviors
+## <a name="userjourneybehaviors"></a>Kullanıcıbağlantısı Neyıdavranışları
 
-**UserJourneyBehaviors** öğesi aşağıdaki öğeleri içerir:
+**Userınewydavranışlar** öğesi aşağıdaki öğeleri içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| SingleSignOn | 0:1 | Çoklu oturum açma (SSO) oturum davranışını kullanıcı yolculuğu kapsamı. |
-| Ssosession |0:1 | Oturumun kimlik doğrulama davranışı. Olası değerler: `Rolling` veya `Absolute`. `Rolling` Değeri (varsayılan) gösteren kullanıcının uygulamada sürekli olarak etkin olduğu sürece, kullanıcının oturum açmış durumda kalır. `Absolute` Değeri gösterir kullanıcı uygulama oturumu tarafından belirtilen bir süre sonra yeniden kimlik doğrulamaya zorlayabilir zorlanır yaşam süresi. |
-| SessionExpiryInSeconds | 0:1 | Bir tamsayı olarak belirtilen Azure AD B2C'in oturum tanımlama bilgisinin ömrü, başarılı kimlik doğrulamadan sonra kullanıcının tarayıcısında depolanan. |
-| JourneyInsights | 0:1 | Azure Application Insights izleme anahtarı. |
-| ContentDefinitionParameters | 0:1 | İçerik tanımı yük URI eklenecek anahtar-değer çiftlerinin bir listesi. |
+| SingleSignOn | 0:1 | Kullanıcı yolculuğunun tek oturum açma (SSO) oturum davranışının kapsamı. |
+| Ssosession |0:1 | Oturumun kimlik doğrulama davranışı. Olası değerler: `Rolling` veya `Absolute`. `Rolling` Değer (varsayılan), Kullanıcı uygulamada sürekli olarak etkin olduğu sürece kullanıcının oturum açmış olarak kaldığını gösterir. `Absolute` Değer, kullanıcının uygulama oturumu ömrü ile belirtilen zaman süresinden sonra yeniden kimlik doğrulaması zorlaması gerektiğini gösterir. |
+| Sessionexpirınseconds | 0:1 | Başarılı kimlik doğrulamasından sonra kullanıcının tarayıcısında depolanan bir tamsayı olarak belirtilen Azure AD B2C's oturum tanımlama bilgisinin ömrü. |
+| Bağlantı, Neyelik | 0:1 | Kullanılacak Azure Application Insights izleme anahtarı. |
+| ContentDefinitionParameters | 0:1 | İçerik tanımı yük URI 'sine eklenecek anahtar değer çiftlerinin listesi. |
 
 ### <a name="singlesignon"></a>SingleSignOn
 
-**SingleSignOn** öğesi şu özniteliği içerir:
+**SingleSignon** öğesi aşağıdaki öznitelikte yer alır:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| `Scope` | Evet | Çoklu oturum açma davranışı kapsamı. Olası değerler: `Suppressed`, `Tenant`, `Application`, veya `Policy`. `Suppressed` Değeri gösterir davranışı bastırılır. Örneğin, tek bir oturum açma oturumu, söz konusu olduğunda kullanıcı için hiçbir oturumu korunur ve kullanıcı bir kimlik sağlayıcısı seçim için her zaman istemde bulunulacak. `TrustFramework` Değeri gösterir davranışı güven Framework'teki tüm ilkeler için uygulanır. Örneğin, bir güven çerçevesi için iki ilke yolculuklarından arasında gezinme bir kullanıcı için bir kimlik sağlayıcısı seçim sorulmaz. `Tenant` Değeri gösterir davranışı kiracıdaki tüm ilkeleri uygulanır. Örneğin, bir kiracı için iki ilke yolculuklarından giderek bir kullanıcı için bir kimlik sağlayıcısı seçim sorulmaz. `Application` Değeri gösterir davranışı istekte uygulama yönelik tüm ilkeleri uygulanır. Örneğin, bir uygulama için iki ilke yolculuklarından arasında gezinme bir kullanıcı için bir kimlik sağlayıcısı seçim sorulmaz. `Policy` Değeri gösterir davranış yalnızca bir ilke için geçerlidir. Örneğin, bir güven çerçevesi için iki ilke yolculuklarından arasında gezinme bir kullanıcı için bir kimlik sağlayıcısı seçim ilkeleri arasında geçiş yaparken istenir. |
-| KeepAliveInDays | Evet | kullanıcının oturum açmış durumda kalır ne kadar süreyle denetler. KMSI'yi işlevselliği 0 kapatır değeri ayarlanamadı. Daha fazla bilgi için [Oturumumu açık bırak](active-directory-b2c-reference-kmsi-custom.md). |
+| `Scope` | Evet | Çoklu oturum açma davranışının kapsamı. Olası değerler: `Suppressed`, `Tenant`, `Application`veya. `Policy` `Suppressed` Değer, davranışın bastırıldığını gösterir. Örneğin, çoklu oturum açma oturumunda Kullanıcı için oturum korunmaz ve kullanıcıdan her zaman bir kimlik sağlayıcısı seçimi istenir. `TrustFramework` Değer, güven çerçevesindeki tüm ilkeler için davranışın uygulanacağını gösterir. Örneğin, bir güven çerçevesinin iki ilkesiyle ilgili olarak gezindikleri bir Kullanıcı, bir kimlik sağlayıcı seçimi istenmez. `Tenant` Değer, davranışın Kiracıdaki tüm ilkelere uygulanacağını gösterir. Örneğin, bir kiracı için iki ilke ile gezinmekte olan bir kullanıcıya bir kimlik sağlayıcısı seçimi istenmez. `Application` Değer, davranışın istek yapan uygulamanın tüm ilkelerine uygulanacağını gösterir. Örneğin, bir uygulama için iki ilke ile gezinmekte olan bir kullanıcıya bir kimlik sağlayıcısı seçimi istenmez. `Policy` Değer, davranışın yalnızca bir ilke için geçerli olduğunu gösterir. Örneğin, bir güven çerçevesi için iki ilke ile gezinerek bir Kullanıcı, ilkeler arasında geçiş yaparken bir kimlik sağlayıcısı seçimine sorulur. |
+| Keepaliveındays | Evet | Kullanıcının ne kadar süreyle oturum açdığına ilişkin denetim. Değerin 0 olarak ayarlanması, KMSI işlevini devre dışı bırakır. Daha fazla bilgi için bkz. Oturumumu [açık tut](active-directory-b2c-reference-kmsi-custom.md). |
 
-## <a name="journeyinsights"></a>JourneyInsights
+## <a name="journeyinsights"></a>Bağlantı, Neyelik
 
-**JourneyInsights** öğesi aşağıdaki öznitelikler içerir:
+I, **Newınghts** öğesi aşağıdaki öznitelikleri içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| TelemetryEngine | Evet | Değer olmalıdır `ApplicationInsights`. | 
-| Instrumentationkey | Evet | Application ınsights öğesi için izleme anahtarını içeren dize. |
-| DeveloperMode | Evet | Olası değerler: `true` veya `false`. Varsa `true`, Application Insights telemetri işleme ardışık düzeninden hızlandırır. Bu ayar, geliştirme için iyidir ancak ayrıntılı etkinlik günlükleri yalnızca özel ilkeler geliştirmede yardımcı olmak için tasarlanmış yüksek miktarlarda, kısıtlanmış. Geliştirme modunda, üretim ortamında kullanmayın. Geliştirme sırasında gönderilen ve kimlik sağlayıcılardan gelen tüm talepler günlükleri toplayın. Üretim ortamında kullandıysanız, PII (özel olarak tanımlanabilir bilgiler) sahip oldukları App Insights günlüğünde toplanan sorumluluğunu Geliştirici varsayar. Bu değer ayarlandığında bu ayrıntılı günlükleri yalnızca toplanır `true`.|
-| ClientEnabled | Evet | Olası değerler: `true` veya `false`. Varsa `true`, sayfa görünümü ve istemci tarafı hataları izlemek için Application Insights istemci tarafı komut dosyası gönderir. | 
-| ServerEnabled | Evet | Olası değerler: `true` veya `false`. Varsa `true`, mevcut UserJourneyRecorder JSON özel olay Application Insights'a gönderir. | 
-| TelemetryVersion | Evet | Değer olmalıdır `1.0.0`. | 
+| TelemetryEngine | Evet | Değer olmalıdır `ApplicationInsights`. |
+| Instrumentationkey | Evet | Application Insights öğesi için izleme anahtarını içeren dize. |
+| DeveloperMode | Evet | Olası değerler: `true` veya `false`. Application Insights `true`, işlem hattı aracılığıyla Telemetriyi bir şekilde yükseltir. Bu ayar geliştirme için iyidir, ancak yüksek birimlerde kısıtlıdır. ayrıntılı etkinlik günlükleri yalnızca özel ilkelerin geliştirilmesine yardımcı olmak için tasarlanmıştır. Üretim ortamında geliştirme modunu kullanmayın. Günlükler, geliştirme sırasında kimlik sağlayıcılardan gelen ve giden tüm talepleri toplar. Üretimde kullanılıyorsa, geliştirici, sahip oldukları App Insights günlüğünde toplanan PII (özel olarak tanımlanabilen bilgiler) için sorumluluğu kabul eder. Bu ayrıntılı Günlükler yalnızca bu değer olarak `true`ayarlandığında toplanır.|
+| ClientEnabled | Evet | Olası değerler: `true` veya `false`. `true`, İzleme sayfası görünümü ve istemci tarafı hataları için Application Insights istemci tarafı betiği gönderir. |
+| Sunucuetkin | Evet | Olası değerler: `true` veya `false`. Varsa `true`, Application Insights için var olan kullanıcıgünneyıkaydedicisi JSON 'sini özel bir olay olarak gönderir. |
+| TelemetryVersion | Evet | Değer olmalıdır `1.0.0`. |
 
-Daha fazla bilgi için [günlükleri toplama](active-directory-b2c-troubleshoot-custom.md)
+Daha fazla bilgi için bkz. [günlükleri toplama](active-directory-b2c-troubleshoot-custom.md)
 
 ## <a name="contentdefinitionparameters"></a>ContentDefinitionParameters
 
-Azure AD B2C'de özel ilkeleri kullanarak, bir sorgu dizesi parametresi gönderebilirsiniz. Parametreyi HTML uç noktanıza ileterek sayfa içeriğini dinamik olarak değiştirebilirsiniz. Örneğin web veya mobil uygulamanızdan ilettiğiniz bir parametreye göre Azure AD B2C kaydolma veya oturum açma sayfanızdaki arka plan görüntüsünü değiştirebilirsiniz. Azure AD B2C sorgu dizesi parametre aspx dosyası gibi dinamik HTML dosyasını geçirir. 
+Azure AD B2C özel ilkeleri kullanarak bir sorgu dizesinde bir parametre gönderebilirsiniz. Parametreyi HTML uç noktanıza ileterek sayfa içeriğini dinamik olarak değiştirebilirsiniz. Örneğin web veya mobil uygulamanızdan ilettiğiniz bir parametreye göre Azure AD B2C kaydolma veya oturum açma sayfanızdaki arka plan görüntüsünü değiştirebilirsiniz. Azure AD B2C, sorgu dizesi parametrelerini aspx dosyası gibi dinamik HTML dosyanıza geçirir.
 
-Aşağıdaki örnekte adlı bir parametre geçirir `campaignId` değeriyle `hawaii` sorgu dizesinde:
+Aşağıdaki örnek, sorgu dizesinde `campaignId` `hawaii` değeri olan adlı bir parametre geçirir:
 
 `https://login.microsoft.com/contoso.onmicrosoft.com/oauth2/v2.0/authorize?pB2C_1A_signup_signin&client_id=a415078a-0402-4ce3-a9c6-ec1947fcfb3f&nonce=defaultNonce&redirect_uri=http%3A%2F%2Fjwt.io%2F&scope=openid&response_type=id_token&prompt=login&campaignId=hawaii`
 
-**ContentDefinitionParameters** öğesi aşağıdaki öğeyi içerir:
+**Contentdefinitionparameters** öğesi aşağıdaki öğeyi içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| ContentDefinitionParameter | 0: n | İçerik tanımı yük URI sorgu dizesi olarak anahtar değer çifti içeren bir dize. |
+| ContentDefinitionParameter | 0: n | Bir içerik tanımı yük URI 'sinin sorgu dizesine eklenen anahtar değer çiftini içeren bir dize. |
 
-**ContentDefinitionParameter** öğesi aşağıdaki öznitelik içeriyor:
+**Contentdefinitionparameter** öğesi aşağıdaki özniteliği içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| Name | Evet | Anahtar değer çifti adı. |
+| Name | Evet | Anahtar değer çiftinin adı. |
 
-Daha fazla bilgi için [özel ilkeler kullanarak dinamik içerik ile kullanıcı arabirimini yapılandırma](active-directory-b2c-ui-customization-custom-dynamic.md)
+Daha fazla bilgi için bkz [. özel ilkeler kullanarak dinamik içerikle Kullanıcı arabirimini yapılandırma](active-directory-b2c-ui-customization-custom-dynamic.md)
 
-## <a name="technicalprofile"></a>TechnicalProfile
+## <a name="technicalprofile"></a>Teknisyen
 
-**TechnicalProfile** öğesi aşağıdaki öznitelik içeriyor:
+**Teknisyen** öğesi aşağıdaki özniteliği içerir:
 
 | Öznitelik | Gerekli | Açıklama |
-| --------- | -------- | ----------- | 
-| Kimlik | Evet | Değer olmalıdır `PolicyProfile`. |
+| --------- | -------- | ----------- |
+| Id | Evet | Değer olmalıdır `PolicyProfile`. |
 
-**TechnicalProfile** aşağıdaki öğeleri içerir:
+**Teknisyen** aşağıdaki öğeleri içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| displayName | 0:1 | Kullanıcılara görüntülenen teknik profili adını içeren dize. |
-| Açıklama | 0:1 | Kullanıcılara görüntülenen teknik profil açıklama içeren dize. |
+| DisplayName | 0:1 | Kullanıcılara görüntülenen teknik profilin adını içeren dize. |
+| Açıklama | 0:1 | Kullanıcılara görüntülenen teknik profilin açıklamasını içeren dize. |
 | Protocol | 1:1 | Federasyon için kullanılan protokol. |
-| Meta Veriler | 0:1 | Koleksiyonu *öğesi* bağlı olan taraf ve diğer topluluk katılımcılar arasındaki etkileşimi yapılandırmak için bir işlem sırasında uç noktasıyla iletişim protokolü tarafından kullanılan anahtar/değer çiftleri. |
-| OutputClaims | 0:1 | Teknik profilde çıktı olarak gerçekleştirilen talep türleri listesi. Bu öğelerin her biri başvuru içeren bir **ClaimType** önceden tanımlanmış **ClaimsSchema** bölüm veya bu ilke dosyası devraldığı bir ilke. |
-| SubjectNamingInfo | 0:1 | Konu adı belirteçleri kullanılır. |
+| Meta Veriler | 0:1 | Bağlı olan taraf ve diğer topluluk katılımcıları arasında etkileşimi yapılandırmak üzere bir işlem sırasında uç noktayla iletişim için kullanılan anahtar/değer çiftlerinin *öğe* koleksiyonu. |
+| Outputclaim | 0:1 | Teknik profilde çıkış olarak gerçekleştirilen talep türlerinin listesi. Bu öğelerin her biri, **Claimsschema** bölümünde veya bu ilke dosyasının devraldığı bir ilkede zaten tanımlanmış olan bir **ClaimType** başvurusu içerir. |
+| Subjectnamingınfo | 0:1 | Belirteçlerde kullanılan konu adı. |
 
-**Protokolü** öğesi aşağıdaki öznitelik içeriyor:
+**Protokol** öğesi aşağıdaki özniteliği içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| Name | Evet | Teknik profilinin bir parçası kullanılan bir Azure AD B2C tarafından desteklenen geçerli bir protokol adı. Olası değerler: `OpenIdConnect` veya `SAML2`. `OpenIdConnect` Değer için Openıd Connect 1.0 protokolü standart Openıd foundation belirtimi uyarınca temsil eder. `SAML2` OASIS belirtimi uyarınca SAML 2.0 protokolü standart temsil eder. SAML belirteci, üretim ortamında kullanmayın. |
+| Name | Evet | Teknik profilin bir parçası olarak kullanılan Azure AD B2C tarafından desteklenen geçerli bir protokol adı. Olası değerler: `OpenIdConnect` veya `SAML2`. Değer `OpenIdConnect` , OpenID Foundation belirtimine göre OpenID Connect 1,0 Protokol standardını temsil eder. , `SAML2` Oassıs belirtimine göre SAML 2,0 Protokol standardını temsil eder. Üretimde SAML belirteci kullanmayın. |
 
-## <a name="outputclaims"></a>OutputClaims
+## <a name="outputclaims"></a>Outputclaim
 
-**OutputClaims** öğesi aşağıdaki öğeyi içerir:
+**Outputclaim** öğesi aşağıdaki öğeyi içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| outputClaim | 0: n | Bağlı olan taraf için abone olur ilke için desteklenen bir beklenen talep türü adı. Bu talep, teknik profil için bir çıktı görevi görür. |
+| outputClaim | 0: n | Bağlı olan tarafın abone olduğu ilke için desteklenen listedeki beklenen talep türünün adı. Bu talep teknik profil için bir çıktı görevi görür. |
 
-**OutputClaim** öğesi aşağıdaki öznitelikler içerir:
-
-| Öznitelik | Gerekli | Açıklama |
-| --------- | -------- | ----------- |
-| ClaimTypeReferenceId | Evet | Bir başvuru bir **ClaimType** önceden tanımlanmış **ClaimsSchema** ilke dosyasının bir bölümünde. |
-| defaultValue | Hayır | Talep değeri boşsa, kullanılabilir bir varsayılan değer. |
-| PartnerClaimType | Hayır | Talep ClaimType tanımında yapılandırıldığı gibi farklı bir ad gönderir. |
-
-### <a name="subjectnaminginfo"></a>SubjectNamingInfo
-
-İle **SubjectNameingInfo** öğesi, belirteç konu değerini kontrol:
-- **JWT belirteci** - `sub` talep. Sorumlu olduğu hakkında bir uygulamanın kullanıcı gibi bilgileri belirteci onaylar budur. Bu değer sabittir ve yeniden atandı yeniden veya değiştirilemez. Bir kaynağa erişmek için belirteci kullanıldığında gibi güvenli yetkilendirme denetimleri gerçekleştirmek için kullanılabilir. Varsayılan olarak, konu talep, dizinde kullanıcının nesne kimliği ile doldurulur. Daha fazla bilgi için [belirteç, oturum ve çoklu oturum açma yapılandırması](active-directory-b2c-token-session-sso.md).
-- **SAML belirteci** - `<Subject><NameID>` konu öğeyi tanımlayan bir öğe.
-
-**SubjectNamingInfo** öğesi aşağıdaki öznitelik içeriyor:
+**Outputclaim** öğesi aşağıdaki öznitelikleri içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| ClaimType | Evet | Bir çıkış talebin başvuru **PartnerClaimType**. Çıkış talep bağlı olan taraf ilkesinde tanımlanmalıdır **OutputClaims** koleksiyonu. |
+| ClaimTypeReferenceId | Evet | İlke dosyasında **Claimsschema** bölümünde zaten tanımlanmış bir **ClaimType** başvurusu. |
+| Değerinin | Hayır | Talep değeri boş ise kullanılabilecek varsayılan değer. |
+| PartnerClaimType | Hayır | Talebi, ClaimType tanımında yapılandırıldığı şekilde farklı bir adla gönderir. |
 
-Aşağıdaki örnek, bir bağlı olan taraf, Openıd Connect tanımlamak gösterilmektedir. Konu adı bilgisi olarak yapılandırılmış `objectId`:
+### <a name="subjectnaminginfo"></a>Subjectnamingınfo
+
+**Subjectnameingınfo** öğesiyle, belirteç konusunun değerini denetlersiniz:
+- **JWT belirteci** - `sub` talep. Bu, belirtecin, uygulamanın kullanıcısı gibi bilgileri onaylama konusunda bir sorumluyla ilgilidir. Bu değer sabittir ve yeniden atanamaz veya tekrar kullanılamaz. Bu, belirtecin bir kaynağa erişmek için ne zaman kullanıldığı gibi güvenli yetkilendirme denetimleri gerçekleştirmek için de kullanılabilir. Varsayılan olarak, konu talebi, dizindeki kullanıcının nesne KIMLIĞIYLE doldurulur. Daha fazla bilgi için bkz. [belirteç, oturum ve çoklu oturum açma yapılandırması](active-directory-b2c-token-session-sso.md).
+- **SAML belirteci** - `<Subject><NameID>` konu öğesini tanımlayan öğe.
+
+**Subjectnamingınfo** öğesi aşağıdaki özniteliği içerir:
+
+| Öznitelik | Gerekli | Açıklama |
+| --------- | -------- | ----------- |
+| ClaimType | Evet | Çıkış talebinin **Partnerclaimtype**öğesine bir başvuru. Çıkış taleplerinin bağlı olan taraf ilkesi **Outputclaim** koleksiyonunda tanımlanması gerekir. |
+
+Aşağıdaki örnekte, bir OpenID Connect bağlı olan tarafın nasıl tanımlanacağı gösterilmektedir. Konu adı bilgisi şu şekilde `objectId`yapılandırılır:
 
 ```XML
 <RelyingParty>
@@ -237,7 +237,7 @@ Aşağıdaki örnek, bir bağlı olan taraf, Openıd Connect tanımlamak göster
   </TechnicalProfile>
 </RelyingParty>
 ```
-JWT belirteci içeren `sub` kullanıcı nesne kimliği ile talep:
+JWT belirteci kullanıcı ObjectID ile `sub` olan talebi içerir:
 
 ```JSON
 {

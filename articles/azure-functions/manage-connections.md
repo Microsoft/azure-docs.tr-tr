@@ -1,6 +1,6 @@
 ---
-title: Azure işlevleri'nde bağlantıları yönetme
-description: Statik bağlantı istemcileri kullanarak Azure işlevleri'nde performans sorunlarını önlemek öğrenin.
+title: Azure Işlevlerinde bağlantıları yönetme
+description: Statik bağlantı istemcileri kullanarak Azure Işlevlerinde performans sorunlarından kaçınmaya nasıl engel olabileceğinizi öğrenin.
 services: functions
 author: ggailey777
 manager: jeconnoc
@@ -8,43 +8,43 @@ ms.service: azure-functions
 ms.topic: conceptual
 ms.date: 02/25/2018
 ms.author: glenga
-ms.openlocfilehash: 69425129d5f049254a60032283ddc6ca2ab84d5c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 26702ae63dcb7aadb96b5bf77f96a44f7d6776f5
+ms.sourcegitcommit: 8e1fb03a9c3ad0fc3fd4d6c111598aa74e0b9bd4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65872687"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70114319"
 ---
-# <a name="manage-connections-in-azure-functions"></a>Azure işlevleri'nde bağlantıları yönetme
+# <a name="manage-connections-in-azure-functions"></a>Azure Işlevlerinde bağlantıları yönetme
 
-Bir işlev uygulaması işlevlerde kaynakları paylaşır. Bu paylaşılan kaynaklar arasında bağlantılar şunlardır: HTTP bağlantıları, veritabanı bağlantıları ve Azure depolama gibi hizmetleri. Birçok işlev eşzamanlı olarak çalışırken, kullanılabilir bağlantılar dışında çalıştırmak mümkündür. Bu makalede, gerekenden daha fazla bağlantı kullanmaktan kaçınmak için İşlevler kodu açıklanmaktadır.
+Bir işlev uygulamasındaki işlevler kaynakları paylaşır. Bu paylaşılan kaynaklar arasında bağlantılar: HTTP bağlantıları, veritabanı bağlantıları ve Azure depolama gibi hizmetlere bağlantılar. Aynı anda çok sayıda işlev çalıştığında, kullanılabilir bağlantıların tükenme olasılığı vardır. Bu makalede, işlevlerinizin, gerekenden daha fazla bağlantı kullanmaktan kaçınmak için nasıl kodleneceği açıklanır.
 
 ## <a name="connection-limit"></a>Bağlantı sınırı
 
-Bir işlev uygulaması kısmen çalıştığı için kullanılabilir bağlantı sayısı sınırlı bir [korumalı ortamda](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox). Korumalı alan kodunuza uygular kısıtlamaları bir giden bağlantı sayısı sınırı şu anda 600 etkin (1.200 toplam) bağlantıları örnek başına olduğu biridir. Bu sınıra ulaştığınızda, İşlevler çalışma zamanı günlüklere şu iletiyi Yazar: `Host thresholds exceeded: Connections`. Daha fazla bilgi için [işlevleri hizmet sınırları](functions-scale.md#service-limits).
+Bir işlev uygulaması bir [korumalı alan ortamında](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox)çalıştığından, kullanılabilir bağlantı sayısı kısmen sınırlıdır. Korumalı alanın kodunuzda hangi kısıtlamalardan biri, örnek başına 600 etkin (1.200 toplam) bağlantı olan giden bağlantı sayısı için bir sınırlamadır. Bu sınıra ulaştığınızda, işlevler çalışma zamanı şu iletiyi günlüklere Yazar: `Host thresholds exceeded: Connections`. Daha fazla bilgi için bkz. [işlevler hizmet limitleri](functions-scale.md#service-limits).
 
-Örnek başına sınırdır. Zaman [ölçek denetleyicisi ekler işlevi uygulama örneği](functions-scale.md#how-the-consumption-and-premium-plans-work) daha fazla isteklerini işlemek için her örnek, bir bağımsız bağlantı sınırı vardır. Genel bağlantı sınırı yoktur ve tüm etkin örnekler arasında 600'den çok fazla etkin bağlantılar olabilir anlamına gelir.
+Bu sınır örnek başına. Ölçek denetleyicisi daha fazla isteği işlemek için [işlev uygulama örnekleri eklerse](functions-scale.md#how-the-consumption-and-premium-plans-work) , her örneğin bağımsız bir bağlantı sınırı vardır. Bu, genel bağlantı sınırı olmadığı anlamına gelir ve tüm etkin örneklerde 600 ' den çok etkin bağlantınız olabilir.
 
-Sorunlarını giderirken, işlev uygulamanız için Application Insights etkinleştirdiğinizden emin olun. Application Insights, işlev uygulamalarınızı yürütmeleri gibi ölçümlerini görüntülemenizi sağlar. Daha fazla bilgi için [Application Insights'da telemetriyi görüntüleyin](functions-monitoring.md#view-telemetry-in-application-insights).  
+Sorun giderirken, işlev uygulamanız için Application Insights etkinleştirdiğinizden emin olun. Application Insights, yürütme gibi işlev uygulamalarınız için ölçümleri görüntülemenize olanak sağlar. Daha fazla bilgi için bkz. [Application Insights Telemetriyi görüntüleme](functions-monitoring.md#view-telemetry-in-application-insights).  
 
 ## <a name="static-clients"></a>Statik istemciler
 
-Daha fazla gerekli bağlantı bulunduran önlemek için her işlev Çağırma ile yenilerini oluşturmak yerine istemci örnekleri yeniden kullanın. İstemci bağlantıları için işlevinizi yazabilir herhangi bir dilde yeniden öneririz. Örneğin, .NET istemcileri gibi [HttpClient](https://msdn.microsoft.com/library/system.net.http.httpclient(v=vs.110).aspx), [DocumentClient](https://docs.microsoft.com/dotnet/api/microsoft.azure.documents.client.documentclient
-), ve statik, tek bir istemci kullanıyorsanız, Azure depolama istemci bağlantıları yönetebilir.
+Gerekenden daha fazla bağlantı tutmaya kaçınmak için, her bir işlev çağrısında yeni bir tane oluşturmak yerine istemci örneklerini yeniden kullanın. İşlevinizi yazmak isteyebileceğiniz herhangi bir dil için istemci bağlantılarını yeniden kullanmanızı öneririz. Örneğin, [HttpClient](https://msdn.microsoft.com/library/system.net.http.httpclient(v=vs.110).aspx), [documentclient](https://docs.microsoft.com/dotnet/api/microsoft.azure.documents.client.documentclient
+)ve Azure Storage istemcileri gibi .NET istemcileri, tek bir statik istemci kullanırsanız bağlantıları yönetebilir.
 
-Azure işlevleri uygulamada bir hizmete özgü istemci kullandığınız izlenmesi gereken bazı Kılavuzlar şunlardır:
+Azure Işlevleri uygulamasında hizmete özel bir istemci kullanırken izlenecek bazı yönergeler aşağıda verilmiştir:
 
-- *Sağlamadığı* yeni bir istemci her işlev Çağırma ile oluşturun.
-- *Yapmak* her işlev çağrısını kullanabilirsiniz statik, tek bir istemci oluşturun.
-- *Göz önünde bulundurun* aynı hizmetin farklı işlevlere kullanırsanız, paylaşılan bir yardımcı sınıfta statik, tek bir istemci oluşturma.
+- Her işlev çağrısında yeni bir istemci oluşturmayın.
+- Her işlev çağrısının kullanabileceği tek bir statik istemci oluşturun.
+- Farklı işlevler aynı hizmeti kullanıyorsa, paylaşılan bir yardımcı sınıfta tek bir statik istemci oluşturmayı *düşünün* .
 
-## <a name="client-code-examples"></a>İstemci kod örnekleri
+## <a name="client-code-examples"></a>İstemci kodu örnekleri
 
-Bu bölüm, oluşturma ve işlev kodunuzu istemcilerden kullanmak için en iyi uygulamaları gösterir.
+Bu bölümde, işlev kodunuzda istemcileri oluşturmak ve kullanmak için en iyi yöntemler gösterilmektedir.
 
 ### <a name="httpclient-example-c"></a>HttpClient örneği (C#)
 
-İşte bir örnek C# işlevini statik oluşturan kodu [HttpClient](https://msdn.microsoft.com/library/system.net.http.httpclient(v=vs.110).aspx) örneği:
+Statik bir [HttpClient](https://msdn.microsoft.com/library/system.net.http.httpclient(v=vs.110).aspx) örneği C# oluşturan işlev kodu örneği aşağıda verilmiştir:
 
 ```cs
 // Create a single, static HttpClient
@@ -57,19 +57,19 @@ public static async Task Run(string input)
 }
 ```
 
-Karşılaşılan bir soru hakkında [HttpClient](https://msdn.microsoft.com/library/system.net.http.httpclient(v=vs.110).aspx) "miyim dispose istemcim?",. NET'te olduğu Genel olarak, size uygulayan nesneleri atmak `IDisposable` bitirdiğinizde bunları kullanarak. Ancak bitti değildir çünkü statik istemcisini dispose yoksa işlev sona erdiğinde, kullanarak. Uygulamanızın süresi boyunca Canlı statik istemci kullanmanız gerekir.
+.NET 'teki [HttpClient](https://msdn.microsoft.com/library/system.net.http.httpclient(v=vs.110).aspx) hakkında sık sorulan sorular "İstemcimin atılmalıdır mi?" Genel olarak, bunları kullanarak işiniz bittiğinde uygulayan `IDisposable` nesneleri atıyorsunuz. Ancak, işlev sona erdiğinde bu işlemi yapmadığınızda, bir statik istemciyi atmayın. Statik istemcinin uygulamanızın süresini gerçek zamanlı olarak istiyor.
 
 ### <a name="http-agent-examples-javascript"></a>HTTP Aracısı örnekleri (JavaScript)
 
-Yerel yönetim seçenekleri, daha iyi bağlantıyı sağladığından, kullanmanız gereken [ `http.agent` ](https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_class_http_agent) yerel olmayan yöntemler yerine gibi sınıf `node-fetch` modülü. Bağlantı parametrelerini yapılandırılır seçeneklerde `http.agent` sınıfı. Ayrıntılı seçenekleri için kullanılabilir HTTP aracısıyla bkz [yeni aracı (\[seçenekleri\])](https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_new_agent_options).
+Daha iyi bağlantı yönetimi seçenekleri sağladığından, [`http.agent`](https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_class_http_agent) `node-fetch` modül gibi yerel olmayan yöntemler yerine yerel sınıfı kullanmanız gerekir. Bağlantı parametreleri, `http.agent` sınıfındaki seçenekler aracılığıyla yapılandırılır. HTTP aracısında kullanılabilen ayrıntılı seçenekler için, bkz. [Yeni Aracı (\[Seçenekler\])](https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_new_agent_options).
 
-Genel `http.globalAgent` sınıfı tarafından kullanılan `http.request()` tüm ilgili değerlerinde bu değerleri vardır. Bağlantı sınırları işlevleri yapılandırmak için önerilen yöntem en fazla küresel olarak ayarlamaktır. Aşağıdaki örnek, işlev uygulaması için yuva sayısı ayarlar:
+`http.globalAgent` Tarafından`http.request()` kullanılan genel sınıf, bu değerlerin tümünü kendi varsayılanlarına ayarlanmış olarak içerir. Işlevlerde bağlantı sınırlarını yapılandırmak için önerilen yöntem, genel olarak en yüksek sayıyı ayarlayamaktır. Aşağıdaki örnek, işlev uygulaması için maksimum yuva sayısını ayarlar:
 
 ```js
 http.globalAgent.maxSockets = 200;
 ```
 
- Aşağıdaki örnek, yalnızca bu istek için özel bir HTTP Aracısı ile yeni bir HTTP isteği oluşturur:
+ Aşağıdaki örnek yalnızca bu istek için özel bir HTTP aracısına sahip yeni bir HTTP isteği oluşturur:
 
 ```js
 var http = require('http');
@@ -81,8 +81,8 @@ http.request(options, onResponseCallback);
 
 ### <a name="documentclient-code-example-c"></a>DocumentClient kod örneği (C#)
 
-[DocumentClient](https://docs.microsoft.com/dotnet/api/microsoft.azure.documents.client.documentclient
-) Azure Cosmos DB örneğine bağlanır. Azure Cosmos DB belgeleri önerir, [tekil Azure Cosmos DB istemci uygulama ömrü boyunca kullanma](https://docs.microsoft.com/azure/cosmos-db/performance-tips#sdk-usage). Aşağıdaki örnek, bir işlevde yapmak için bir desen gösterir:
+[Documentclient](https://docs.microsoft.com/dotnet/api/microsoft.azure.documents.client.documentclient
+) bir Azure Cosmos DB örneğine bağlanır. Azure Cosmos DB belge, [Uygulamanızın ömrü boyunca tek bir Azure Cosmos db istemci kullanmanızı](https://docs.microsoft.com/azure/cosmos-db/performance-tips#sdk-usage)önerir. Aşağıdaki örnek, bir işlevinde bunu yapmak için bir model gösterir:
 
 ```cs
 #r "Microsoft.Azure.Documents.Client"
@@ -110,35 +110,35 @@ public static async Task Run(string input)
 }
 ```
 
-### <a name="cosmosclient-code-example-javascript"></a>CosmosClient kod örneği (JavaScript)
-[CosmosClient](/javascript/api/@azure/cosmos/cosmosclient) Azure Cosmos DB örneğine bağlanır. Azure Cosmos DB belgeleri önerir, [tekil Azure Cosmos DB istemci uygulama ömrü boyunca kullanma](../cosmos-db/performance-tips.md#sdk-usage). Aşağıdaki örnek, bir işlevde yapmak için bir desen gösterir:
+### <a name="cosmosclient-code-example-javascript"></a>CosmosClient kodu örneği (JavaScript)
+[CosmosClient](/javascript/api/@azure/cosmos/cosmosclient) bir Azure Cosmos DB örneğine bağlanır. Azure Cosmos DB belge, [Uygulamanızın ömrü boyunca tek bir Azure Cosmos db istemci kullanmanızı](../cosmos-db/performance-tips.md#sdk-usage)önerir. Aşağıdaki örnek, bir işlevinde bunu yapmak için bir model gösterir:
 
 ```javascript
 const cosmos = require('@azure/cosmos');
 const endpoint = process.env.COSMOS_API_URL;
-const masterKey = process.env.COSMOS_API_KEY;
+const key = process.env.COSMOS_API_KEY;
 const { CosmosClient } = cosmos;
 
-const client = new CosmosClient({ endpoint, auth: { masterKey } });
+const client = new CosmosClient({ endpoint, key });
 // All function invocations also reference the same database and container.
 const container = client.database("MyDatabaseName").container("MyContainerName");
 
 module.exports = async function (context) {
-    const { result: itemArray } = await container.items.readAll().toArray();
+    const { resources: itemArray } = await container.items.readAll().fetchAll();
     context.log(itemArray);
 }
 ```
 
 ## <a name="sqlclient-connections"></a>SqlClient bağlantıları
 
-İşlev kodunuzu .NET Framework veri sağlayıcısı, SQL Server için kullanabilirsiniz ([SqlClient](https://msdn.microsoft.com/library/system.data.sqlclient(v=vs.110).aspx)) SQL ilişkisel bir veritabanı bağlantısı yapma. Alttaki sağlayıcı ADO.NET üzerinde gibi kullanan veri çerçeveler için de budur [Entity Framework](https://msdn.microsoft.com/library/aa937723(v=vs.113).aspx). Farklı [HttpClient](https://msdn.microsoft.com/library/system.net.http.httpclient(v=vs.110).aspx) ve [DocumentClient](https://docs.microsoft.com/dotnet/api/microsoft.azure.documents.client.documentclient
-) bağlantıları, ADO.NET uygulayan varsayılan olarak bağlantı havuzu. Ancak yine de bağlantılar dışında çalışabileceğinden, veritabanı bağlantılarını iyileştirmeniz gerekir. Daha fazla bilgi için [SQL Server Connection Pooling (ADO.NET)](https://docs.microsoft.com/dotnet/framework/data/adonet/sql-server-connection-pooling).
+İşlev kodunuz, bir SQL ilişkisel veritabanına bağlantı kurmak için SQL Server ([SqlClient](https://msdn.microsoft.com/library/system.data.sqlclient(v=vs.110).aspx)) için .NET Framework veri sağlayıcısı kullanabilir. Bu aynı zamanda, [Entity Framework](https://msdn.microsoft.com/library/aa937723(v=vs.113).aspx)gibi ADO.NET kullanan veri çerçeveleri için temel sağlayıcıdır. [HttpClient](https://msdn.microsoft.com/library/system.net.http.httpclient(v=vs.110).aspx) ve [documentclient](https://docs.microsoft.com/dotnet/api/microsoft.azure.documents.client.documentclient
+) bağlantılarından farklı olarak, ADO.NET varsayılan olarak bağlantı havuzu uygular. Ancak hala bağlantı dışında çalışmaya devam edebilirsiniz. Daha fazla bilgi için bkz. [SQL Server bağlantı havuzu (ADO.net)](https://docs.microsoft.com/dotnet/framework/data/adonet/sql-server-connection-pooling).
 
 > [!TIP]
-> Entity Framework gibi bazı veri çerçeveleri genellikle bağlantı dizeleri alma **ConnectionStrings** yapılandırma dosyasının. SQL veritabanı bağlantı dizeleri için bu durumda, açıkça eklemelidir **bağlantı dizeleri** koleksiyonu, işlev uygulaması ayarları hem de [local.settings.json dosyasında](functions-run-local.md#local-settings-file) yerel projenizdeki. Örneği oluşturuyorsanız [SqlConnection](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection(v=vs.110).aspx) işlev kodunuzu bağlantı dizesi değerindeki saklamalısınız **uygulama ayarları** diğer bağlantı.
+> Entity Framework gibi bazı veri çerçeveleri, genellikle bir yapılandırma dosyasının **connectionStrings** bölümünden bağlantı dizelerini alır. Bu durumda, işlev uygulaması ayarlarınızın **bağlantı dizeleri** koleksiyonuna ve yerel projenizde [yerel. Settings. json dosyasında](functions-run-local.md#local-settings-file) SQL veritabanı bağlantı dizelerini açıkça eklemeniz gerekir. İşlev kodunuzda [SqlConnection](https://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection(v=vs.110).aspx) 'ın bir örneğini oluşturuyorsanız, bağlantı dizesi değerini diğer Bağlantılarınızdaki **uygulama ayarlarında** depolamanız gerekir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Statik istemciler neden öneririz hakkında daha fazla bilgi için bkz. [yanlış örnek oluşturma kötü modeli](https://docs.microsoft.com/azure/architecture/antipatterns/improper-instantiation/).
+Statik istemcileri neden önerdiğimiz hakkında daha fazla bilgi için bkz. [Hatalı örnek oluşturma kötü modeli](https://docs.microsoft.com/azure/architecture/antipatterns/improper-instantiation/).
 
-Daha fazla Azure işlevleri performans ipuçları için bkz: [Azure işlevleri'nin güvenilirliği ve performansı en iyi duruma getirme](functions-best-practices.md).
+Daha fazla Azure Işlevleri performans ipucu için bkz. [Azure işlevlerinin performansını ve güvenilirliğini iyileştirme](functions-best-practices.md).

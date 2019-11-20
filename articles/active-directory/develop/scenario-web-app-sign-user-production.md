@@ -1,6 +1,6 @@
 ---
-title: Web uygulaması oturum açtığında kullanıcıların (üretim taşıma) - Microsoft kimlik platformu
-description: Kullanıcılar (üretim taşıma) oturum açtığında bir web uygulaması oluşturmayı öğrenin
+title: Kullanıcıları oturum açan Web uygulaması (üretime geçme)-Microsoft Identity platform
+description: Kullanıcılara oturum açan bir Web uygulaması oluşturmayı öğrenin (üretime geçin)
 services: active-directory
 documentationcenter: dev-center-name
 author: jmprieur
@@ -11,38 +11,42 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 05/07/2019
+ms.date: 09/17/2019
 ms.author: jmprieur
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d41ad2518f885bbaa02dda3b01f0c02e9fc1d217
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: bd6717c132d32d54c16e7678695a09e35181a057
+ms.sourcegitcommit: c79aa93d87d4db04ecc4e3eb68a75b349448cd17
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65074718"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71086543"
 ---
-# <a name="web-app-that-signs-in-users---move-to-production"></a>Kullanıcılar - oturum açtığında taşımak için üretim web uygulaması
+# <a name="web-app-that-signs-in-users---move-to-production"></a>Kullanıcılara oturum açan Web uygulaması-üretime geçme
 
-Web API'leri çağırmak için bir belirteç almak nasıl öğrendiğinize göre üretim ortamına taşımak nasıl bilgi edinebilirsiniz.
+Artık, Web API 'Lerini çağırmak için bir belirteç edinmeyi öğrenmiş olduğunuza göre, bunu üretime taşımayı öğrenin.
 
 [!INCLUDE [Move to production common steps](../../../includes/active-directory-develop-scenarios-production.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-### <a name="calling-web-apis-scenario"></a>Arama web API senaryosu
+### <a name="calling-web-apis-scenario"></a>Web API 'Leri çağırma senaryosu
 
-Bir kez oturum açtığında web uygulaması kullanıcılara oturum açmış kullanıcılar adına web API'leri çağırabilirsiniz. Web uygulamasından çağırmak web API'leri, şu senaryonun nesnedir:
+Web uygulamanız kullanıcılar oturum açtığında, oturum açmış kullanıcılar adına Web API 'Leri çağırabilir. Web API 'Lerinden Web API 'Leri çağırmak aşağıdaki senaryonun nesnesidir:
 
 > [!div class="nextstepaction"]
 > [Web API'lerini çağıran web uygulaması](scenario-web-app-call-api-overview.md)
 
-### <a name="deep-dive---web-app-tutorial"></a>Derin Dalış - web uygulaması Öğreticisi
+### <a name="deep-dive---aspnet-core-web-app-tutorial"></a>Derin derinlemesine bakış-ASP.NET Core Web uygulaması öğreticisi
 
-Oturum açma kullanıcı ASP.NET Core öğreticisiyle diğer yollar hakkında bilgi edinin: [ms-kimlik-aspnetcore-webapp-tutorial](https://github.com/Azure-Samples/ms-identity-aspnetcore-webapp-tutorial). Bir aşamalı üretime hazır kod ile oturum açma ekleme dahil olmak üzere bir web uygulaması için öğreticidir.
+ASP.NET Core öğreticisi ile oturum açma kullanıcılarının diğer yolları hakkında bilgi edinin: [MS-Identity-aspnetcore-WebApp-öğreticisi](https://github.com/Azure-Samples/ms-identity-aspnetcore-webapp-tutorial). Bu örnek, ' deki hesaplara oturum açma ekleme dahil olmak üzere, bir Web uygulaması için üretime hazırlı kod içeren aşamalı bir öğreticidir:
 
-<!--- Removed the diagram as it's already shown in the above link to GitHub
+- Kuruluşunuz,
+- birden çok kuruluş,
+- iş veya okul hesapları ya da kişisel Microsoft hesabı,
+- [Azure AD B2C](https://aka.ms/aadb2c),
+- ya da ulusal bulutlarda.
 
-![Tutorial overview](media/scenarios/aspnetcore-webapp-tutorial.svg)
+### <a name="sample-code---java-web-app"></a>Örnek kod-Java Web uygulaması
 
---->
+GitHub 'daki örnekten Java Web uygulaması hakkında daha fazla bilgi edinin: [Kullanıcılara Microsoft Identity platformu ve çağrıları ile oturum açan bir Java Web uygulaması Microsoft Graph](https://github.com/Azure-Samples/ms-identity-java-webapp)

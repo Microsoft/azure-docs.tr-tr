@@ -7,14 +7,14 @@ manager: darosa
 ms.author: aschhab
 ms.date: 11/28/2018
 ms.topic: tutorial
-ms.service: event-hubs-messaging
+ms.service: event-hubs
 ms.custom: mvc
-ms.openlocfilehash: 9eea40a8ad2f08099b2662a0e7539c326d4d143e
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 0f7c7e348c154aab1deb10273346a5395599b745
+ms.sourcegitcommit: f10ae7078e477531af5b61a7fe64ab0e389830e8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60343707"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67605853"
 ---
 # <a name="tutorial-enable-virtual-networks-integration-and-firewalls-on-event-hubs-namespace"></a>Öğretici: Sanal ağ tümleştirme ve güvenlik duvarları, Event Hubs ad alanınızdaki etkinleştir
 
@@ -53,7 +53,7 @@ Mevcut bir Event Hubs ad alanı bir nedenle yararlanılacaktır bir Event Hubs a
 
 ## <a name="sign-in-to-the-azure-portal"></a>Azure portalında oturum açın
 
-Öncelikle [Azure portal][Azure portal]'a gidin ve Azure aboneliğinizi kullanarak oturum açın.
+İlk olarak, Git [Azure portalında][Azure portal] kullanarak Azure aboneliğinizde oturum açın.
 
 ## <a name="select-event-hubs-namespace"></a>Event Hubs ad alanını seçin
 

@@ -1,6 +1,6 @@
 ---
-title: Azure Logic Apps'ten SMTP'ye bağlanın | Microsoft Docs
-description: Görevleri ve e-posta hesabınız SMTP (Basit Posta Aktarım Protokolü) üzerinden Azure Logic Apps göndermek için iş akışlarını otomatikleştirin
+title: Azure Logic Apps 'ten SMTP 'ye Bağlan | Microsoft Docs
+description: Azure Logic Apps kullanarak SMTP (Basit Posta Aktarım Protokolü) hesabınız aracılığıyla e-posta gönderen görevleri ve iş akışlarını otomatikleştirin
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -11,65 +11,65 @@ ms.assetid: d4141c08-88d7-4e59-a757-c06d0dc74300
 ms.topic: article
 tags: connectors
 ms.date: 08/25/2018
-ms.openlocfilehash: 78b1eb6272fa97ef392e97723454d29cf56bb4bf
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1649f197d4dbd88e2b485ab32f254a2d09696a84
+ms.sourcegitcommit: bba811bd615077dc0610c7435e4513b184fbed19
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62106159"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70050750"
 ---
-# <a name="send-email-from-your-smtp-account-with-azure-logic-apps"></a>Azure Logic Apps ile SMTP hesabınızdan e-posta Gönder
+# <a name="send-email-from-your-smtp-account-with-azure-logic-apps"></a>Azure Logic Apps ile SMTP hesabınızdan e-posta gönderin
 
-Azure Logic Apps ve Basit Posta Aktarım Protokolü (SMTP) Bağlayıcısı ile otomatik görevler ve SMTP hesabınızdan e-posta gönderen iş akışları oluşturabilirsiniz. Ayrıca SMTP eylemleri çıktısını kullanan diğer eylemler olabilir. Örneğin, SMTP e-posta gönderdiğinde size Slack, ekibinizin Slack Bağlayıcısı ile bildirebilir. Logic apps kullanmaya yeni başladıysanız gözden [Azure Logic Apps nedir?](../logic-apps/logic-apps-overview.md)
+Azure Logic Apps ve Basit Posta Aktarım Protokolü (SMTP) bağlayıcısıyla, SMTP hesabınızdan e-posta gönderen otomatikleştirilmiş görevler ve iş akışları oluşturabilirsiniz. Ayrıca, diğer eylemlerdeki çıktıyı SMTP eylemleriyle kullanmasını sağlayabilirsiniz. Örneğin, SMTP 'niz bir e-posta gönderdikten sonra, bolluk bağlayıcısıyla ekibinize bolluk içinde bildirimde bulunabilir. Logic Apps 'e yeni başladıysanız [ne Azure Logic Apps](../logic-apps/logic-apps-overview.md) olduğunu gözden geçirin.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Azure aboneliği. Azure aboneliğiniz yoksa <a href="https://azure.microsoft.com/free/" target="_blank">ücretsiz bir Azure hesabı için kaydolun</a>. 
+* Azure aboneliği. Azure aboneliğiniz yoksa [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/). 
 
-* SMTP hesabı ve kullanıcı bilgilerinizi
+* SMTP hesabınız ve Kullanıcı kimlik bilgileriniz
 
-  Mantıksal uygulamanızı bir bağlantı oluşturun ve SMTP hesabınıza erişmek için kimlik bilgilerinizi yetkilendirin.
+  Kimlik bilgileriniz, mantıksal uygulamanızı bir bağlantı oluşturmak ve SMTP hesabınıza erişmek için yetkilendirin.
 
-* Hakkında temel bilgilere [mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md)
+* [Mantıksal uygulamalar oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md) hakkında temel bilgi
 
-* SMTP hesabınıza erişmek için istediğiniz mantıksal uygulaması. Bir Salesforce hesabınız varsa, bir SMTP eylemi kullanmak için mantıksal uygulamanızı gibi bir Salesforce tetikleyici bir tetikleyici ile başlayın.
+* SMTP hesabınıza erişmek istediğiniz mantıksal uygulama. Bir SMTP eylemi kullanmak için, bir Salesforce hesabınız varsa, bir Salesforce tetikleyicisi gibi bir tetikleyici ile mantıksal uygulamanızı başlatın.
 
-  Örneğin, mantıksal uygulamanız ile başlayabilirsiniz **bir kayıt oluşturulduğunda** Salesforce tetikleyici. 
-  Bu tetikleyici, bir müşteri adayı gibi yeni bir kayıt Salesforce'ta oluşturulan her zaman etkinleştirilir. 
-  Ardından bu tetikleyiciyle SMTP izleyebilirsiniz **e-posta Gönder** eylem. Yeni kayıt oluşturulduğunda bu şekilde, mantıksal uygulamanız yeni kayıtla ilgili SMTP hesabınızdan bir e-posta gönderir.
+  Örneğin, **bir kayıt** Salesforce tetikleyicisi oluşturulduğunda mantıksal uygulamanızı ile başlatabilirsiniz. 
+  Bu tetikleyici, Salesforce 'ta bir müşteri adayı gibi yeni bir kaydın oluşturulduğu her seferinde ateşlenir. 
+  Daha sonra bu tetikleyiciyi SMTP **e-posta gönder** eylemiyle izleyebilirsiniz. Bu şekilde, yeni kayıt oluşturulduğunda mantıksal uygulamanız, SMTP hesabınızdan yeni kayıtla ilgili bir e-posta gönderir.
 
-## <a name="connect-to-smtp"></a>SMTP'ye bağlanın
+## <a name="connect-to-smtp"></a>SMTP 'ye Bağlan
 
 [!INCLUDE [Create connection general intro](../../includes/connectors-create-connection-general-intro.md)]
 
-1. Oturum [Azure portalında](https://portal.azure.com)ve Logic Apps Tasarımcısı'nda mantıksal uygulamanızı açın, açık değilse.
+1. [Azure Portal](https://portal.azure.com)oturum açın ve daha önce açık değilse mantıksal uygulama Tasarımcısı 'nda mantıksal uygulamanızı açın.
 
-1. SMTP eylemi eklemek istediğiniz son adımı altında seçin **yeni adım**. 
+1. SMTP eylemi eklemek istediğiniz son adım altında **yeni adım**' ı seçin. 
 
-   Adımlar arasında bir eylem eklemek için işaretçinizi adımlar arasındaki okun üzerine getirin. 
-   Artı işaretini seçin ( **+** ), görünür ve ardından **Eylem Ekle**.
+   Adımlar arasında bir eylem eklemek için, işaretçinizi adımlar arasındaki oka taşıyın. 
+   Görüntülenen artı işaretini ( **+** ) seçin ve ardından **Eylem Ekle**' yi seçin.
 
-1. Arama kutusuna filtreniz olarak "smtp" girin. Eylemler listesinde, istediğiniz eylemi seçin.
+1. Arama kutusuna filtreniz olarak "SMTP" yazın. Eylemler listesi altında istediğiniz eylemi seçin.
 
-1. İstendiğinde, bu bağlantı bilgisini sağlayın:
+1. İstendiğinde, bu bağlantı bilgilerini sağlayın:
 
    | Özellik | Gerekli | Açıklama |
    |----------|----------|-------------|
-   | **Bağlantı Adı** | Evet | SMTP sunucunuz bağlantı için bir ad | 
+   | **Bağlantı Adı** | Evet | SMTP sunucunuza bağlantı için bir ad | 
    | **SMTP sunucu adresi** | Evet | SMTP sunucunuzun adresi | 
-   | **Kullanıcı adı** | Evet | SMTP hesabınız için kullanıcı adı | 
-   | **Parola** | Evet | SMTP hesabı için parola | 
-   | **SMTP sunucusu bağlantı noktası** | Hayır | Kullanmak istediğiniz SMTP sunucunuzun belirli bir bağlantı noktası | 
-   | **SSL etkinleştirilsin mi?** | Hayır | Etkinleştirmek veya devre dışı SSL şifrelemesi kapatabilirsiniz. | 
+   | **Kullanıcı adı** | Evet | SMTP hesabınız için Kullanıcı adınız | 
+   | **Parola** | Evet | SMTP hesabınız için parolanız | 
+   | **SMTP sunucusu bağlantı noktası** | Hayır | SMTP sunucunuzda kullanmak istediğiniz belirli bir bağlantı noktası | 
+   | **SSL etkinleştirilsin mi?** | Hayır | SSL şifrelemesini açın veya kapatın. | 
    |||| 
 
-1. Seçili eyleminiz için gerekli bilgileri sağlayın. 
+1. Seçtiğiniz eyleminiz için gerekli ayrıntıları sağlayın. 
 
-1. Mantıksal uygulamanızı kaydedin veya mantıksal uygulamanızın iş akışı oluşturmaya devam edin.
+1. Mantıksal uygulamanızı kaydedin veya mantıksal uygulamanızın iş akışını oluşturmaya devam edin.
 
 ## <a name="connector-reference"></a>Bağlayıcı başvurusu
 
-Tetikleyiciler ve Eylemler sınırları hakkında teknik ayrıntılar için bağlayıcının Openapı'nin açıklanmıştır (önceki adıyla Swagger) açıklama, bağlayıcının gözden [başvuru sayfası](/connectors/smtpconnector/).
+Bağlayıcının Openapı (eski adıyla Swagger) açıklaması tarafından tanımlanan Tetikleyiciler, Eylemler ve limitlerle ilgili teknik ayrıntılar için bağlayıcının [başvuru sayfasını](/connectors/smtpconnector/)gözden geçirin.
 
 ## <a name="get-support"></a>Destek alın
 
@@ -78,4 +78,4 @@ Tetikleyiciler ve Eylemler sınırları hakkında teknik ayrıntılar için bağ
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Diğer hakkında bilgi edinin [Logic Apps bağlayıcıları](../connectors/apis-list.md)
+* Diğer [Logic Apps bağlayıcıları](../connectors/apis-list.md) hakkında bilgi edinin

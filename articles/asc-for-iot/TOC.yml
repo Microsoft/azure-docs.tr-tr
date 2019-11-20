@@ -1,4 +1,4 @@
-- name: IoT için Azure Güvenlik Merkezi (ASC) Önizleme Belgeleri
+- name: IoT için Azure Güvenlik Merkezi Belgeleri
   href: index.yml
 - name: Genel Bakış
   href: overview.md
@@ -7,20 +7,25 @@
       href: architecture.md
     - name: Güvenlik aracıları
       href: security-agent-architecture.md
-    - name: Edge güvenlik modülü
+    - name: Microsoft Edge güvenlik modülü
       href: security-edge-architecture.md
     - name: Hizmet önkoşulları
       href: service-prerequisites.md
-    - name: IoT için ASC’yi kullanmaya başlama
+    - name: IoT için Azure Güvenlik Merkezi’ni kullanmaya başlama
       href: getting-started.md
+      items:
+        - name: IoT Hub
+          href: iot-hub-integration.md
+        - name: Güvenlik aracıları
+          href: security-agents.md
 - name: Hızlı Başlangıçlar
   expanded: true
   items:
-    - name: IoT Hub’da IoT için ASC’yi etkinleştirme
+    - name: IoT Hub’da IoT için Azure Güvenlik Merkezi’ni ekleme
       href: quickstart-onboard-iot-hub.md
     - name: Çözümünüzü yapılandırma
       href: quickstart-configure-your-solution.md
-    - name: IoT için ASC modül ikizi oluşturma
+    - name: IoT için Azure Güvenlik Merkezi’nin modül ikizini oluşturma
       href: quickstart-create-security-twin.md
     - name: Özel güvenlik uyarıları oluşturma
       href: quickstart-create-custom-alerts.md
@@ -34,6 +39,10 @@
       href: concept-security-alerts.md
     - name: Güvenlik önerileri
       href: concept-recommendations.md
+    - name: Taban çizgisi
+      href: concept-baseline.md
+    - name: Olay toplama
+      href: event-aggregation.md
     - name: Fiyatlandırma ve ilişkili maliyetler
       href: concept-pricing.md
 - name: Nasıl yapılır kılavuzları
@@ -48,7 +57,15 @@
           href: how-to-deploy-linux-cs.md
         - name: Linux cihazında C tabanlı güvenlik aracısı dağıtma
           href: how-to-deploy-linux-c.md
-    - name: Edge güvenlik modülünü dağıtma
+    - name: Güvenlik aracısında sorun giderme
+      items:
+        - name: IoT için Azure Güvenlik Merkezi Linux güvenlik aracısında sorun giderme
+          href: troubleshoot-agent.md
+        - name: Yerel yapılandırma C
+          href: azure-iot-security-local-configuration-c.md
+        - name: 'Yerel yapılandırma C#'
+          href: azure-iot-security-local-configuration-csharp.md
+    - name: Microsoft Edge güvenlik modülünü dağıtma
       href: how-to-deploy-edge.md
     - name: Güvenlik aracılarını yapılandırma
       href: how-to-agent-configuration.md
@@ -58,6 +75,8 @@
       href: how-to-security-data-access.md
     - name: Cihazı araştırma
       href: how-to-investigate-device.md
+    - name: Çözümünüzü özelleştirme
+      href: how-to-customize-solution.md
 - name: Kaynaklar
   items:
     - name: Sık sorulan sorular

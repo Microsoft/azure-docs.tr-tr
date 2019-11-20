@@ -1,116 +1,116 @@
 ---
-title: Microsoft Azure FXT Edge dosyalayıcı küme yapılandırması - düğüm ekleme
-description: Azure FXT Edge dosyalayıcı storage önbelleğine düğümleri ekleme
+title: Microsoft Azure FXT Edge Filer küme yapılandırması-düğüm ekleme
+description: Azure FXT Edge Filer depolama önbelleğine düğüm ekleme
 author: ekpgh
 ms.service: fxt-edge-filer
 ms.topic: tutorial
 ms.date: 06/20/2019
-ms.author: v-erkell
-ms.openlocfilehash: d84b98b4ab936bbb6978144eb2e89b5e19df7069
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.author: rohogue
+ms.openlocfilehash: 85ab9aaa3e184af7aa71a31eb3d8de1a20639c2a
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67543188"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72254934"
 ---
-# <a name="tutorial-add-cluster-nodes"></a>Öğretici: Küme Düğümleri Ekle 
+# <a name="tutorial-add-cluster-nodes"></a>Öğretici: küme düğümleri ekleme 
 
-Yeni bir Azure FXT Edge dosyalayıcı küme yalnızca tek bir düğüm oluşturulur. En az iki düğüm ekleme ve yüksek kullanılabilirlik başka yapılandırma yapmadan önce etkinleştirmeniz gerekir. 
+Yeni bir Azure FXT Edge Filer kümesi yalnızca bir düğüm ile oluşturulur. Diğer yapılandırmayı yapmadan önce en az iki düğüm eklemeli ve yüksek kullanılabilirliği etkinleştirmelisiniz. 
 
-Bu öğreticide, küme düğümleri eklemek ve yüksek kullanılabilirlik (HA) özelliği etkinleştirmek açıklanmaktadır. 
+Bu öğretici, küme düğümlerinin nasıl ekleneceğini ve yüksek kullanılabilirlik (HA) özelliğinin nasıl etkinleştirileceğini açıklar. 
 
 Bu öğreticide şunları öğreneceksiniz: 
 
 > [!div class="checklist"]
-> * FXT kümeye düğüm ekleme
-> * HA etkinleştirme
+> * FXT kümesine düğüm ekleme
+> * HA 'yi etkinleştirme
 
-Bu öğreticideki adımları tamamlamak için yaklaşık 45 dakika sürebilir.
+Bu öğreticideki adımların tamamlanması yaklaşık 45 dakika sürer.
 
-Bu öğreticiye başlamadan önce eklemek istediğiniz düğümlerde güç ve [ilk parolalarını ayarlama](fxt-node-password.md). 
+Bu öğreticiye başlamadan önce, eklemek istediğiniz düğümleri ve [ilk parolalarını ayarlayın](fxt-node-password.md). 
 
-## <a name="1-load-the-cluster-nodes-page"></a>1. Küme düğümleri sayfa yükleme
+## <a name="1-load-the-cluster-nodes-page"></a>1. küme düğümleri sayfasını yükleme
 
-Kümenin Denetim Masası'nı bir web tarayıcısında açın ve bir yönetici olarak oturum açın. (Ayrıntılı yönergeler genel bakış makalesinde altındaki olan [ayarları sayfaları](fxt-cluster-create.md#open-the-settings-pages).)
+Kümenin Denetim Masası ' nı bir Web tarayıcısında açın ve yönetici olarak oturum açın. (Ayrıntılı yönergeler genel bakış makalesinde, [ayarlar sayfalarını aç](fxt-cluster-create.md#open-the-settings-pages)' ın altında bulunur.)
 
-Denetim Masası gösterir **Pano** sekmesinde açıldığında. 
+Denetim masası açıldığında **Pano** sekmesini gösterir. 
 
-![Denetim Masası Pano (ilk sekme)](media/fxt-cluster-config/dashboard-1-node.png)
+![Denetim Masası panosu (ilk sekme)](media/fxt-cluster-config/dashboard-1-node.png)
 
-Bu görüntü tek bir düğüm ile yeni oluşturulan bir küme panosunu gösterir.
+Bu görüntüde, yeni oluşturulan kümenin tek bir düğüm ile panosu gösterilmektedir.
 
-## <a name="2-locate-the-node-to-add"></a>2. Düğümü eklemek için bulun
+## <a name="2-locate-the-node-to-add"></a>2. eklenecek düğümü bulun
 
-Düğümleri eklemek için tıklatın **ayarları** sekmesini **FXT düğümleri** sayfasını **küme** bölümü.
+Düğüm eklemek için **Ayarlar** sekmesine tıklayın ve **küme** bölümünde **FXT düğümleri** sayfasını seçin.
 
-![Denetim Masası Ayarları (ikinci sekme) kümesi ile sekmesindeki > FXT yüklenen düğümleri](media/fxt-cluster-config/settings-fxt-nodes.png)
+![Küme > FXT düğümleri yüklü olan denetim masası ayarları sekmesi (ikinci sekme)](media/fxt-cluster-config/settings-fxt-nodes.png)
 
-**FXT düğümleri - çıkarılamaz** listesinde gösterir tüm atanmamış FXT düğümleri (birçok veri merkezi, yalnızca birkaç sahiptir. Kümeye eklemek istediğiniz FXT düğümleri bulur.
+**FXT düğümleri-katılmamış** listede tüm atanmamış FXT düğümleri gösterilmektedir (çoğu veri merkezi yalnızca birkaç tane vardır. Kümeye eklemek istediğiniz FXT düğümlerini bulun.
 
 > [!Tip] 
-> Düğüm bulamazsa, istediğiniz **Unjoined** listesinde, bu gereksinimleri karşıladığından emin olun:
+> **Katılmayan** listede istediğiniz düğümü bulamıyorsanız, bu gereksinimleri karşıladığından emin olun:
 > 
-> * Açılana ve oluşmuş bir [kök parola ayarlama](fxt-node-password.md).
-> * Erişebileceğiniz bir ağa bağlı. VLAN kullanıyorsanız kümeyle aynı VLAN'da olması gerekir.
-> * Bonjour protokolüyle algılanabilir. 
+> * Açık ve bir [kök parolası ayarlanmış](fxt-node-password.md).
+> * Bu, erişebileceğiniz bir ağa bağlıdır. VLAN 'Lar kullanıyorsanız, kümeyle aynı VLAN 'da olması gerekir.
+> * Bonjour protokolde algılanabilir. 
 >
->   Bazı güvenlik duvarı ayarları, düğümlerin otomatik olarak algılamasını FXT işletim sistemi önleyen Bonjour tarafından kullanılan TCP/UDP bağlantı noktaları engelleyin.
+>   Bazı güvenlik duvarı ayarları Bonjour tarafından kullanılan TCP/UDP bağlantı noktalarını engeller ve bu, FXT işletim sisteminin düğümleri otomatik olarak algılamasını önler.
 > 
-> Eklemek istediğiniz düğümü listede değilse, bu çözümleri deneyin: 
+> Eklemek istediğiniz düğüm listede yoksa, şu çözümleri deneyin: 
 > 
-> * Tıklayın **el ile bulmak** IP adresine göre bulmak için düğme.
+> * **El Ile bulma** DÜĞMESINE tıklayarak IP adresine göre bulun.
 > 
-> * El ile geçici IP adresleri atayın. Bu, nadir olarak rastlanıyor ancak etiketli VLAN'ları kullanın ve düğümleri doğru ağda olmayan ya da kendi kendine atanan IP adresleri ağınızda izin vermiyor çözümüyse gerekli. Eski sürüm için bu belgedeki yönergeleri [el ile statik bir IP adresi ayarlamak](https://azure.github.io/Avere/legacy/create_cluster/4_8/html/static_ip.html).
+> * Geçici IP adreslerini el ile atayın. Bu çok nadir bir durumdur, ancak etiketli VLAN 'Lar kullandığınızda ve düğümler doğru ağda değilse veya ağınız kendi kendine atanan IP adreslerine izin vermediği durumlarda gerekli olabilir. [STATIK IP adresini el ile ayarlamak](https://azure.github.io/Avere/legacy/create_cluster/4_8/html/static_ip.html)için bu belgenin eski sürümündeki yönergeleri izleyin.
 
-Düğüm adı, IP adresi, yazılım sürümü ve uygunluk durumu listesinde görüntülenir. Genellikle, **durumu** ya da yazılı sütun "katılmak istiyor" ya da düğümü kümeye katılmak uygun hale getirir sistemini veya donanımı bir sorunu anlatır.
+Düğüm adı, IP adresi, yazılım sürümü ve uygunluk durumu listede görüntülenir. Genellikle, **durum** sütunu "katılmayı istiyor" diyor ya da düğümün kümeye katılması için uygun olmayan bir sistem veya donanım sorunu tanımlıyor.
 
-**Eylemleri** sütununun kümeye düğüm eklemek veya kendi yazılım güncelleştirme olanak tanıyan bir düğme. Güncelleştir düğmesine kümesindeki düğümlere eşleşen yazılım sürümünü otomatik olarak yükler.
+**Eylemler** sütununda, düğümü kümeye eklemenize veya yazılımının yazılımını güncelleştirmenize olanak sağlayan düğmeler bulunur. Güncelleştirme düğmesi, kümede zaten bulunan düğümlerle eşleşen yazılım sürümünü otomatik olarak kurar.
 
-Tüm küme düğümlerinin işletim sistemini aynı sürümünü kullanmanız gerekir, ancak bir düğüm eklemeden önce yazılım güncelleştirme gerekmez. Tıkladıktan sonra **birleştirme izin** düğmesi küme birleştirme işlemi otomatik olarak denetler ve kümesinde sürümle eşleşen işletim sistemi yazılım yükler.
+Bir kümedeki tüm düğümlerin işletim sistemi aynı sürümünü kullanması gerekir, ancak bir düğüm eklemeden önce yazılımı güncelleştirmeniz gerekmez. **Birleşime Izin ver** düğmesine tıkladıktan sonra küme JOIN işlemi, kümedeki sürümle eşleşen işletim sistemi yazılımını otomatik olarak denetler ve kurar.
 
-Bu sayfadaki seçenekler hakkında daha fazla bilgi edinmek için [ **küme** > **FXT düğümleri** ](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/gui_fxt_nodes.html) küme yapılandırma kılavuzu.
+Bu sayfadaki seçenekler hakkında daha fazla bilgi edinmek için küme yapılandırma kılavuzunda [ **küme** > **FXT düğümlerini** ](https://azure.github.io/Avere/legacy/ops_guide/4_7/html/gui_fxt_nodes.html) okuyun.
 
-## <a name="3-click-the-allow-to-join-button"></a>3. "İzin vermek için Join" düğmesine tıklayın 
+## <a name="3-click-the-allow-to-join-button"></a>3. "katılmasına Izin ver" düğmesine tıklayın 
 
-Tıklayın **birleştirmek izin*** düğmesine **eylemleri** sütun eklemek istediğiniz düğüm için.
+Eklemek istediğiniz düğümün **Eylemler sütunundaki eylemler** sütununda **katılığa izin ver*** düğmesine tıklayın.
 
-Düğmeye tıkladığınızda, kümeye eklemek için hazırlık yazılımını güncelleştirildikçe düğümün durumu değişebilir. 
+Düğmeye tıkladıktan sonra, yazılımın durumu, yazılım, kümeye ekleme hazırlığı sırasında güncelleştirildiğinden değişir. 
 
-Aşağıdaki görüntüde (önce eklenen bir işletim sistemi güncelleştirme almaktır büyük olasılıkla) Kümeye katılan sürecinde olan bir düğüm gösterir. Hiç düğme görünür **eylemleri** kümeye eklenen sürecinde olan düğümleri için sütun.
+Aşağıdaki görüntüde, kümeye katılma sürecinde olan bir düğüm gösterilmektedir (büyük olasılıkla, eklenmeden önce bir işletim sistemi güncelleştirmesi alıyor). Kümeye eklenmekte olan düğümler için **Eylemler** sütununda hiçbir düğme görünmez.
 
-![bir düğümün adını, IP adresi, yazılım sürümü, "katılmak için izin verilen" iletisi ve boş bir son sütunu gösteren düğüm tablosundaki bir satır](media/fxt-cluster-config/node-join-in-process.png)
+![düğüm tablosunun bir satırı, bir düğümün adını, IP adresini, yazılım sürümünü, "katılmasına Izin verildi" iletisini ve boş bir son sütunu gösterir](media/fxt-cluster-config/node-join-in-process.png)
 
-Birkaç dakika sonra yeni düğüm küme düğümleri en üstündeki listesinde görünmelidir **FXT düğümleri** Ayarları sayfası. 
+Birkaç dakika sonra yeni düğüm, **FXT düğümleri** ayarları sayfasının en üstündeki küme düğümleri listesinde görünmelidir. 
 
-Kümenize diğer düğümler eklemek için bu işlemi yineleyin. Başlamadan önce başka bir kümeye katılan tamamlamak bir düğüm için beklemenize gerek yoktur.
+Diğer düğümleri kümenize eklemek için bu işlemi tekrarlayın. Bir düğümün başka bir başlatmadan önce kümeye katılmasını bitirmesini beklemeniz gerekmez.
 
 ## <a name="enable-high-availability"></a>Yüksek kullanılabilirliği etkinleştir
 
-Kümeniz için ikinci bir düğüm ekledikten sonra yüksek kullanılabilirlik özelliği Pano yapılandırılmış Denetim Masası'ndaki bir uyarı iletisi görebilirsiniz. 
+Kümenize ikinci bir düğüm ekledikten sonra, Denetim Masası panosunda yüksek kullanılabilirlik özelliğinin yapılandırılmadığını belirten bir uyarı iletisi görebilirsiniz. 
 
-Yüksek kullanılabilirlik (HA) bir arıza durumunda diğer için dengelemek için küme düğümlerinin sağlar. HA varsayılan olarak etkin değildir.
+Yüksek kullanılabilirlik (HA), küme düğümlerinin bir tane kaldığında birbirlerine telafi etmesine olanak tanır. HA varsayılan olarak etkin değildir.
 
-!["Küme birden fazla düğüme sahip, ancak HA etkin değil..." iletisiyle birlikte Pano sekmesi Koşullar tabloda](media/fxt-cluster-config/no-ha-2-nodes.png)
+!["Küme birden fazla düğüme sahip, ancak HA etkin değil..." iletisiyle Pano sekmesi Koşullar tablosunda](media/fxt-cluster-config/no-ha-2-nodes.png)
 
 > [!Note] 
-> Kümede en az üç düğüm elde edene kadar HA etkinleştirmeyin.
+> Kümede en az üç düğüm olana kadar HA 'yi etkinleştirmeyin.
 
-HA üzerinde etkinleştirmek için bu yordamı izleyin: 
+HA 'yi açmak için bu yordamı izleyin: 
 
-1. Yük **yüksek kullanılabilirlik** sayfasını **küme** bölümünü **ayarları** sekmesi.
+1. **Ayarlar** sekmesinin **küme** bölümünde **yüksek kullanılabilirlik** sayfasını yükleyin.
 
-   ![HA yapılandırma sayfası (küme > yüksek kullanılabilirlik). "Etkinleştirme HA" onay kutusunu üstünde ve Gönder düğmesinin altındaki.](media/fxt-cluster-config/enable-ha.png)
+   ![HA yapılandırma sayfası (küme > yüksek kullanılabilirlik). "HA 'yi etkinleştir" onay kutusu en üstte ve Gönder düğmesi en altta.](media/fxt-cluster-config/enable-ha.png)
 
-2. Etiketli kutunun seçili olduğunu tıklayın **etkinleştirme HA** tıklatıp **Gönder** düğmesi. 
+2. **Ha etkinleştir** etiketli kutuya tıklayın ve **Gönder** düğmesine tıklayın. 
 
-Bir uyarı görünür **Pano** HA etkin olduğunu onaylamak için.
+Söz konusu HA 'nın etkin olduğunu onaylamak için **panoda** bir uyarı belirir.
 
-![İletiyi gösteren panoyu tablo "HA artık tam olarak yapılandırılmış"](media/fxt-cluster-config/ha-configured-alert.png)
+!["HA artık tam olarak yapılandırıldı" iletisini gösteren Pano tablosu](media/fxt-cluster-config/ha-configured-alert.png)
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Tüm düğümler, kümenizin ekledikten sonra Kurulum kümenizin uzun vadeli depolaması yapılandırıp devam.
+Tüm düğümleri kümenize ekledikten sonra, kümenizin uzun vadeli depolama alanını yapılandırarak kuruluma devam edin.
 
 > [!div class="nextstepaction"]
-> [Arka uç depolama ekleyebilir ve sanal ad alanı ayarlama](fxt-add-storage.md)
+> [Arka uç depolama alanı ekleme ve sanal ad alanını ayarlama](fxt-add-storage.md)

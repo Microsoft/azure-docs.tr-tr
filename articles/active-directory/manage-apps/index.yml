@@ -1,51 +1,109 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Uygulama Yönetimi Belgeleri
+### YamlMime:Landing
+title: Uygulama yönetimi belgeleri
+summary: Azure Active Directory bulut ve şirket içi uygulamalara güvenli ve sorunsuz erişim sağlar. Ayrıca parolaları yönetmeye gerek yoktur. Son kullanıcılarınız tek bir kez oturum açarak Office 365’e ve diğer binlerce uygulamaya erişebilir. Hızlı başlangıçlarımız, öğreticilerimiz ve rehberimizle uygulamaları nasıl yönetip dağıtacağınızı öğrenin.
 metadata:
-  title: Azure AD uygulama yönetimi belgeleri - Azure Active Directory
-  description: Azure Active Directory ile uygulamaları yönetip dağıtmayı öğrenin.
-  services: active-directory
-  author: barbkess
-  manager: daveba
-  layout: LandingPage
-  ms.assetid: null
+  title: Uygulama yönetimi belgeleri
+  description: Azure Active Directory bulut ve şirket içi uygulamalara güvenli ve sorunsuz erişim sağlar. Ayrıca parolaları yönetmeye gerek yoktur. Son kullanıcılarınız tek bir kez oturum açarak Office 365’e ve diğer binlerce uygulamaya erişebilir. Hızlı başlangıçlarımız, öğreticilerimiz ve rehberimizle uygulamaları nasıl yönetip dağıtacağınızı öğrenin.
   ms.service: active-directory
+  ms.subservice: app-mgmt
+  ms.workload: identity
   ms.topic: landing-page
-  ms.date: 09/14/2018
-  ms.author: barbkess
-abstract:
-  description: 'Azure Active Directory bulut ve şirket içi uygulamalara güvenli ve sorunsuz erişim sağlar. Ayrıca parolaları yönetmeye gerek yoktur. Son kullanıcılarınız tek bir kez oturum açarak Office 365’e ve diğer binlerce uygulamaya erişebilir. Hızlı başlangıçlarımız, öğreticilerimiz ve rehberimizle uygulamaları nasıl yönetip dağıtacağınızı öğrenin.'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: media/index/video.png
-      width: 250
-    title: 'Azure AD ile uygulamalarınıza güvenli erişim (1:47)'
-    href: 'https://youtu.be/BSUuXXcJKCk/'
-    width: 250
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Azure Active Directory üzerinden erişebilmeleri için kullanıcılara yönelik uygulama eklemeyi öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_protect.svg'
-            text: Uygulama ekleme
-            href: 'https://docs.microsoft.com/azure/active-directory/manage-apps/add-application-portal'
-          - image:
-              src: 'https://docs.microsoft.com/media/common/i_protect.svg'
-            text: Uygulamalarınızı görüntüleyin
-            href: 'https://docs.microsoft.com/azure/active-directory/manage-apps/view-applications-portal'
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Uygulamalarınız için basit ve güvenli bir oturum açma işlemini etkinleştirmeyi öğrenin.
-      - type: list
-        style: unordered
-        items:
-          - html: '<a href="https://docs.microsoft.com/azure/active-directory/saas-apps/">SaaS uygulaması öğreticileri</a>'
-          - html: <a href="/azure/active-directory/manage-apps/configure-single-sign-on-portal">Çoklu oturum açmayı yapılandırma</a>
+  ms.date: 10/10/2019
+  author: msmimart
+  ms.author: mimart
+  manager: celested
+  ms.openlocfilehash: 2b83d09932aaa39e31d04f30bc660541efcbb50b
+  ms.sourcegitcommit: cf36df8406d94c7b7b78a3aabc8c0b163226e1bc
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/09/2019
+  ms.locfileid: "73882796"
+landingContent:
+- title: Uygulama yönetimi hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Uygulama yönetimi nedir?
+      url: what-is-application-management.md
+    - text: SaaS uygulama öğreticileri
+      url: /azure/active-directory/saas-apps/
+- title: Bulut uygulamalarını ve çoklu oturum açmayı yönetme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Çoklu oturum açmayı anlama
+      url: what-is-single-sign-on.md
+    - text: Son kullanıcı deneyimleri
+      url: end-user-experiences.md
+  - linkListType: quickstart
+    links:
+    - text: Galeri uygulaması ekleme
+      url: add-application-portal.md
+  - linkListType: how-to-guide
+    links:
+    - text: Galeri dışı uygulama ekleme
+      url: add-non-gallery-app.md
+    - text: Çoklu oturum açmayı yapılandırma
+      url: configure-single-sign-on-non-gallery-applications.md
+    - text: Uygulamaya kullanıcı veya grup atama
+      url: assign-user-or-group-access-portal.md
+- title: Uygulamaya kullanıcı ve grup sağlama
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Otomatik kullanıcı sağlama nedir?
+      url: user-provisioning.md
+  - linkListType: concept
+    links:
+    - text: Kullanıcı ve grup sağlamak için SCIM’yi kullanma
+      url: use-scim-to-provision-users-and-groups.md
+  - linkListType: how-to-guide
+    links:
+    - text: Otomatik kullanıcı sağlamayı yapılandırma
+      url: configure-automatic-user-provisioning-portal.md
+    - text: Öznitelik eşlemelerini özelleştirme
+      url: customize-application-attributes.md
+    - text: Sağlama durumunu denetleme
+      url: application-provisioning-when-will-provisioning-finish-specific-user.md
+  - linkListType: reference
+    links:
+    - text: Öznitelik eşlemeleri için ifadeler yazma
+      url: functions-for-customizing-application-data.md
+- title: Uygulama Ara Sunucusu ile şirket içi uygulamalar yayımlama
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Uygulama Ara Sunucusu nedir?
+      url: what-is-application-proxy.md
+  - linkListType: concept
+    links:
+    - text: Uygulama Ara Sunucusunu planlama
+      url: application-proxy-deployment-plan.md
+  - linkListType: tutorial
+    links:
+    - text: Şirket içi uygulama ekleme
+      url: application-proxy-add-on-premises-application.md
+  - linkListType: how-to-guide
+    links:
+    - text: Ara sunucularla bağlayıcı yapılandırma
+      url: application-proxy-configure-connectors-with-proxy-servers.md
+    - text: Özel giriş sayfası yapılandırma
+      url: application-proxy-configure-custom-home-page.md
+  - linkListType: deploy
+    links:
+    - text: Uygulama Ara Sunucusu ile Uzak Masaüstü Yayımlama
+      url: application-proxy-integrate-with-remote-desktop-services.md
+    - text: Azure AD Uygulama Ara Sunucusu ile SharePoint’e uzaktan erişimi etkinleştirme
+      url: application-proxy-integrate-with-sharepoint-server.md
+- title: Uygulama teslim denetleyicileri ve ağlarla eski uygulamaları güvenli hale getirme
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Karma erişimi eski uygulamalar için güvenli hale getirme (bulutta ve şirket içinde)
+      url: secure-hybrid-access.md
+  - linkListType: how-to-guide
+    links:
+    - text: F5 Big-IP APM kullanarak uygulamalarınızı koruma
+      url: https://aka.ms/f5-hybridaccessguide
+    - text: Zscaler ZPA kullanarak uygulamalarınızı koruma
+      url: https://aka.ms/zscaler-hybridaccessguide

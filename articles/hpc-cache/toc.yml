@@ -1,0 +1,48 @@
+- name: Azure HPC Önbelleği belgeleri
+  href: index.yml
+- name: Genel Bakış
+  items:
+    - name: Azure HPC Önbelleği nedir?
+      href: hpc-cache-overview.md
+- name: Kavramlar
+  items:
+    - name: Toplanan ad alanını planlama
+      href: hpc-cache-namespace.md
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: Ön koşullar
+      href: hpc-cache-prereqs.md
+    - name: Önbelleği oluşturma
+      href: hpc-cache-create.md
+    - name: Depolama ekleme
+      items:
+        - name: Depolama hedefleri ekleme
+          href: hpc-cache-add-storage.md
+        - name: Verileri depolama hedeflerine taşıma (gerekirse)
+          items:
+            - name: Yeni Blob depolamayı önceden yükleme
+              href: hpc-cache-ingest.md
+            - name: Alternatif veri alma yöntemleri
+              items:
+                - name: Önbelleği paralel kopya ile doldurma
+                  href: hpc-cache-ingest-parallelcp.md
+                - name: Önbelleği msrsync ile doldurma
+                  href: hpc-cache-ingest-msrsync.md
+                - name: Önbelleği el ile dosya kopyalama ile doldurma
+                  href: hpc-cache-ingest-manual.md
+        - name: Depolama hedeflerini düzenleme
+          href: hpc-cache-edit-storage.md
+    - name: Önbelleğe bağlanma
+      href: hpc-cache-mount.md
+    - name: Önbelleği yönetme
+      href: hpc-cache-manage.md
+- name: Kaynaklar
+  items:
+    - name: Destek bileti açma
+      href: hpc-cache-support-ticket.md
+    - name: Blob depolama hesabı güvenlik duvarı ayarları geçici çözümü
+      href: hpc-cache-blob-firewall-fix.md
+    - name: Bölgesel kesintiden kurtulma
+      href: hpc-region-recovery.md
+    - name: Azure HPC Önbelleği ile Azure NetApp Files'ı kullanma
+      href: hpc-cache-netapp.md

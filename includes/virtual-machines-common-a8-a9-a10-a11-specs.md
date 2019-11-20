@@ -6,34 +6,34 @@ author: vermagit
 ms.service: virtual-machines
 ms.topic: include
 ms.date: 05/29/2018
-ms.author: azcspmt;jonbeck;cynthn;danlep;amverma
+ms.author: azcspmt;jonbeck;cynthn;amverma
 ms.custom: include file
-ms.openlocfilehash: 88d9491bae1fcc6acb7ab631514aa4f6244f593d
-ms.sourcegitcommit: 084630bb22ae4cf037794923a1ef602d84831c57
+ms.openlocfilehash: 0930fa371500125c15cd969b9e9f4b7a2853612e
+ms.sourcegitcommit: f2771ec28b7d2d937eef81223980da8ea1a6a531
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67538044"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71175004"
 ---
 ## <a name="deployment-considerations"></a>Dağıtma konuları
-* **Azure aboneliği** – fazla sayıda bilgi işlem yoğun örnekler dağıtın, Kullandıkça Öde aboneliğine veya diğer satın alma seçeneklerini göz önünde bulundurun. [Ücretsiz Azure hesabı](https://azure.microsoft.com/free/) kullanıyorsanız, yalnızca sınırlı sayıda Azure işlem çekirdeği kullanabilirsiniz.
+* **Azure aboneliği** : birkaç işlem yoğunluğu yoğun örneği dağıtmak için, Kullandıkça Öde aboneliğine veya diğer satın alma seçeneklerine göz önünde bulundurun. [Ücretsiz Azure hesabı](https://azure.microsoft.com/free/) kullanıyorsanız, yalnızca sınırlı sayıda Azure işlem çekirdeği kullanabilirsiniz.
 
-* **Fiyatlandırma ve kullanılabilirlik** -bu VM boyutları, yalnızca standart fiyatlandırma katmanında sunulur. Denetleme [bölgelere göre kullanılabilir ürünler](https://azure.microsoft.com/global-infrastructure/services/) Azure bölgesi içinde kullanılabilirlik için. 
-* **Çekirdek kota** – varsayılan değerinden Azure aboneliğinizdeki çekirdek kotasını artırmanız gerekebilir. Aboneliğiniz ayrıca H serisi dahil olmak üzere belirli sanal makine boyutu aileleri içinde dağıtabileceğiniz çekirdek sayısını sınırlayabilir. Bir kota artırım talebinde bulunmak [bir çevrimiçi müşteri destek isteği açın](../articles/azure-supportability/how-to-create-azure-support-request.md) ücret olmadan. (Varsayılan sınır, abonelik kategorisine bağlı olarak farklılık gösterebilir.)
+* **Fiyatlandırma ve kullanılabilirlik** -bu VM boyutları yalnızca standart fiyatlandırma katmanında sunulur. Azure bölgelerinde kullanılabilirlik için [bölgeye göre kullanılabilir ürünleri](https://azure.microsoft.com/global-infrastructure/services/) denetleyin. 
+* **Çekirdek kotası** – Azure aboneliğinizdeki çekirdek kotasını varsayılan değerden artırmanız gerekebilir. Aboneliğiniz Ayrıca, H serisi de dahil olmak üzere belirli VM boyutu ailelerinde dağıtabileceğiniz çekirdek sayısını sınırlayabilir. Kota artışı istemek için, ücretsiz [bir çevrimiçi müşteri destek isteği açın](../articles/azure-supportability/how-to-create-azure-support-request.md) . (Varsayılan sınırlar, abonelik kategorime bağlı olarak değişebilir.)
   
   > [!NOTE]
-  > Büyük ölçekli kapasite gereksinimleriniz varsa, Azure desteğine başvurun. Azure kotaları alacak olan limitleri, kapasite garantisi değil. Kotanızı bağımsız olarak, kullandığınız yalnızca çekirdekler için ücretlendirilirsiniz.
+  > Büyük ölçekli kapasite gereksinimleriniz varsa Azure desteği 'ne başvurun. Azure kotaları, kapasite garantisi değil kredi limitlerdir. Kotasından bağımsız olarak yalnızca kullandığınız çekirdekler için ücretlendirilirsiniz.
   > 
   > 
-* **Sanal ağ** Azure bir [sanal ağ](https://azure.microsoft.com/documentation/services/virtual-network/) yoğun işlem gücü kullanımlı örnekler kullanmak için gerekli değildir. Şirket içi kaynaklara erişmeye ihtiyacınız varsa ancak pek çok dağıtımı için en az bir bulut tabanlı Azure sanal ağı veya bir siteden siteye bağlantı gerekir. Gerektiğinde, örneklerini dağıtmak için yeni bir sanal ağ oluşturun. Yoğun işlem gücü kullanımlı VM'ler bir benzeşim grubundaki sanal ağa ekleme desteklenmiyor.
-* **Yeniden boyutlandırma** – kendi özelleştirilmiş donanım nedeniyle yalnızca aynı boyut ailesi (H serisi veya yoğun işlem gücü kullanımlı A serisi) işlem yoğunluklu örneklerinden boyutlandırabilirsiniz. Örneğin, yalnızca H serisi boyutlar H serisi bir VM'den diğer boyutlandırabilirsiniz. Ayrıca, bir bilgi işlem açısından yoğun olmayan boyutundan yoğun işlem gücü kullanımlı bir boyuta yeniden boyutlandırma desteklenmiyor.  
+* **Sanal ağ** : yoğun işlem yoğunluklu örnekleri kullanmak Için bir Azure [sanal ağı](https://azure.microsoft.com/documentation/services/virtual-network/) gerekli değildir. Ancak, birçok dağıtım için, şirket içi kaynaklara erişmeniz gerekiyorsa, en az bir bulut tabanlı Azure sanal ağı veya siteden siteye bağlantı gerekir. Gerektiğinde, örnekleri dağıtmak için yeni bir sanal ağ oluşturun. Benzeşim grubundaki bir sanal ağa işlem yoğunluklu VM 'Lerin eklenmesi desteklenmez.
+* **Yeniden boyutlandırma** – kendi özel donanımları nedeniyle, yalnızca aynı büyüklükte aile içindeki işlem yoğunluğu örnekleri yeniden boyutlandırabilirsiniz (H serisi veya Işlem yoğunluklu A serisi). Örneğin, bir h serisi VM 'yi yalnızca bir H serisi boyutundan diğerine yeniden boyutlandırabilirsiniz. Ayrıca, işlem yoğunluğu olmayan bir boyuttan işlem yoğunluğu yoğun bir boyut olarak yeniden boyutlandırılması desteklenmez.  
 
 ## <a name="rdma-capable-instances"></a>RDMA özellikli örnekler
-Bir alt işlem yoğunluklu örneklerinden (A8, A9, H16r, H16mr, HB ve HC) bir ağ arabirimi için doğrudan uzak bellek erişimi (RDMA) bağlantı özelliği. Seçili N serisi boyutları NC24rs yapılandırmaları (NC24rs_v2 ve NC24rs_v3) gibi 'r' ile belirtilen RDMA özelliğine sahiptir. Diğer VM boyutları için kullanılabilir standart Azure ağ arabiriminin yanı sıra bu arabirimidir. 
+Yoğun işlem yoğunluğu olan örneklerin (A8, A9, H16r, H16mr, HB ve HC) bir alt kümesi, uzak doğrudan bellek erişimi (RDMA) bağlantısı için bir ağ arabirimi özelliğidir. ' R ' ile ayrılmış, NC24rs konfigürasyonları (NC24rs_v2 ve NC24rs_v3) gibi seçili N serisi boyutlar da RDMA özellikli. Bu arabirim, diğer VM boyutlarının kullanabildiği standart Azure ağ arabirimine ek niteliğindedir. 
   
-Bu arabirim EDR oranlarda HB, HC, FDR H16r, H16mr ve RDMA özellikli N serisi sanal makineler için oranları ve QDR oranları A8 ve A9 sanal makineler için işletim bir InfiniBand (IB) ağ üzerinden iletişim kurmak RDMA özellikli örnekler sağlar. Bu RDMA özelliklerini belirli ileti geçirme arabirimi (MPI) uygulamaları performans ve ölçeklenebilirliği artırabilir. Hızı hakkında daha fazla bilgi için bu sayfada tablolarda ayrıntıları bakın.
+Bu arabirim, RDMA özellikli örneklerin bir InfiniBand (ıB) ağı üzerinden iletişim kurmasını, HB, HC, H16r, H16mr ve RDMA özellikli N serisi sanal makineler için de EDR ücretleri ve A8 ve A9 sanal makineler için QDR ücretleri ile çalışma olanağı sağlar. Bu RDMA özellikleri, bazı Ileti geçirme arabirimi (MPı) uygulamalarının ölçeklenebilirliğini ve performansını artırabilir. Hız hakkında daha fazla bilgi için bu sayfadaki tablolardaki ayrıntılara bakın.
 
 > [!NOTE]
-> Azure'da IP IB üzerinde yalnızca desteklenir SR-IOV özellikli VM'ler (SR-IOV Infiniband, şu anda HB ve HC). IB üzerinden RDMA, RDMA özellikli tüm örnekleri için desteklenir.
+> Azure 'da, ıB üzerinden IP yalnızca SR-ıOV etkinleştirilmiş VM 'lerde desteklenir (InfiniBand için SR-ıOV, şu anda HB ve HC). RDMA üzerinden RDMA, tüm RDMA özellikli örnekler için desteklenir.
 >
 

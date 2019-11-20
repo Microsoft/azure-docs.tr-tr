@@ -1,19 +1,18 @@
 ---
-title: 'Yapılandırma iş akışlarını - ExpressRoute bağlantı hattına: Azure | Microsoft Docs'
+title: 'Azure ExpressRoute: devre yapılandırma iş akışları'
 description: Bu sayfada, ExpressRoute bağlantı hattı ve eşlemeleri yapılandırmak için iş akışlarını gösterilir.
 services: expressroute
 author: cherylmc
 ms.service: expressroute
 ms.topic: conceptual
-ms.date: 12/07/2018
+ms.date: 09/18/2018
 ms.author: cherylmc
-ms.custom: seodec18
-ms.openlocfilehash: 3ffcc5ac2193e607573ceb93717258f5349d1f15
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ae6c2b7257ee6a8184f3a5bb002f24cb75a86d67
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60883207"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74083334"
 ---
 # <a name="expressroute-workflows-for-circuit-provisioning-and-circuit-states"></a>Devre sağlama ve devre durumları için ExpressRoute iş akışları
 Bu sayfa sağlama ve yüksek düzeyde yapılandırma iş akışlarını yönlendirme hizmeti size kılavuzluk eder.
@@ -29,7 +28,7 @@ Aşağıdaki şekil ve ilgili adımlarda, sağlanan bir ExpressRoute devresi iç
    
    * Azure özel eşlemeyi etkinleştirmesini - bu eşlemeyi bulut Hizmetleri içindeki sanal ağlar dağıtılan Vm'lere bağlanmak etkinleştirin.
 
-   * Microsoft eşlemesi etkinleştirme - bu erişim Office 365 ve Dynamics 365 için etkinleştirin. Ayrıca, tüm Azure PaaS hizmetlerine Microsoft eşlemesi üzerinden erişilebilir.
+   * Microsoft eşlemesini etkinleştir-Office 365 ' e erişmek için bunu etkinleştirin. Ayrıca, tüm Azure PaaS hizmetlerine Microsoft eşlemesi üzerinden erişilebilir.
      
      > [!IMPORTANT]
      > Ayrı bir ara sunucu kullan / hesaptan Microsoft'a bağlanmak için kenar kullanmak için Internet sağlamalısınız. ExpressRoute ve Internet için aynı edge kullanarak asimetrik yönlendirme neden ve ağınızın bağlantı kesintilerine neden olur.

@@ -1,44 +1,45 @@
 ---
-title: Azure IOT Edge modülü teklifi yayımlama | Azure Market
-description: Bir IOT Edge modülü teklifini yayımlamanın nasıl.
+title: Azure IoT Edge modül teklifini Yayımla | Azure Marketi
+description: IoT Edge modül teklifini yayımlama.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: dan-wesley
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 10/18/2018
 ms.author: pabutler
-ms.openlocfilehash: c853bd3bad9f02f6824c26fb5d18e9e59d921fe8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2310d7a7cad16009bbb58469190a77eedb0619f8
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942057"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73813827"
 ---
 # <a name="publish-iot-edge-module-offer"></a>IoT Edge modülü teklifini yayımlama
 
- Şirket bilgileri sağlayarak yeni bir teklif oluşturduktan sonra **yeni teklif** sayfasında teklif yayımlayabilirsiniz. Seçin **Yayımla** yayımlama işlemini başlatmak için.
+ **Yeni teklif** sayfasında bilgileri sağlayarak yeni bir teklif oluşturduktan sonra teklifi yayımlayabilirsiniz. Yayımlama işlemini başlatmak için **Yayımla** ' yı seçin.
 
-Aşağıdaki diyagramda "Canlı gitmek" bir teklif için yayımlama işlemi ana adımları gösterir.
+Aşağıdaki diyagramda "canlı çalış" teklifinin bir teklifiyle ilgili yayımlama işlemindeki ana adımlar gösterilmektedir.
 
-![IOT Edge modülü için yayımlama adımları sunar.](./media/iot-edge-module-publishing-steps.png)
+![IoT Edge modülü teklifi için yayımlama adımları](./media/iot-edge-module-publishing-steps.png)
 
-## <a name="detailed-description-of-publishing-steps"></a>Yayımlama adımları ayrıntılı bir açıklaması
+## <a name="detailed-description-of-publishing-steps"></a>Yayımlama adımlarının ayrıntılı açıklaması
 
-Aşağıdaki tabloda her adımı tamamlamak için bir zaman tahmin (maksimum) olan her yayımlama adımlarını açıklar.
+Aşağıdaki tabloda her bir adımı tamamlaması için bir süre Tahmini (maksimum) ile birlikte her bir yayımlama adımı açıklanmaktadır.
 <!-- P2: we need to tell them that if an offer seems stuck in a step, to know that they should file a support ticket (link to support ticket doc) -->
 
 
-|  **Yayımlama Adım**           | **saat**    | **Açıklama**                                                            |
+|  **Yayımlama adımı**           | **Işınızda**    | **Açıklama**                                                            |
 |  -------------------           | --------    | ---------------                                                            |
-| Önkoşulları doğrulama         | 15 dakika   | Bilgi sunan ve ayarlar doğrulanır sunar.                        |
-| Sertifika                  | 2 hafta | Teklif, Azure sertifika ekibi tarafından analiz edilir. Bu adım, virüsler, kötü amaçlı yazılım, emniyet uyumluluk ve güvenlik sorunları için tarama gerçekleştirir. Ayrıca bu IOT Edge modülü teklif tüm uygunluk ölçütlerini karşıladığını doğrular (bkz [önkoşulları](./cpp-prerequisites.md) ve [teknik varlıklarınızı hazırlama](./cpp-create-technical-assets.md)). Bir sorun bulunursa geri bildirim sağlanır. |
-| Paketleme | 1 saat  | Teklife ilişkin teknik varlıkları müşteri kullanılmak üzere hazırlanmıştır ve müşteri adayı sistemleri yapılandırılır ve kurulumu. |
-|  Yayımcı oturum kapatma             |  -        | Son yayımcı gözden geçirme ve teklif Canlı geçmeden önce onay. Teklifinizi (adımlarda teklif bilgi) seçili Aboneliklerdeki tüm gereksinimleri karşıladığından emin doğrulamak için dağıtabilirsiniz.  Seçin **Go Live** için teklifinizi sonraki adıma geçebilirsiniz. |
-| Paketleme                 | 1 saat | Sonlandırılmış bir teklifi Market'te üretim sistemlerine ve bölgelerde çoğaltılır. | 
-| Canlı                           | 4 gün |Teklif serbest, gerekli bölgelerde çoğaltılır ve genel kullanıma sunulan. |
+| Önkoşulları doğrulama         | 15 dk   | Teklif bilgileri ve teklif ayarları onaylanır.                        |
+| Sertifika                  | 2 hafta | Teklif, Azure Sertifika ekibi tarafından çözümlenir. Bu adım, virüsler, kötü amaçlı yazılım, güvenlik uyumluluğu ve güvenlik sorunları için taramalar gerçekleştirir. Ayrıca, bu IoT Edge modülü teklifinin tüm uygunluk ölçütlerini karşıladığını doğrular (bkz. [Önkoşullar](./cpp-prerequisites.md) ve [Teknik varlıklarınızı hazırlama](./cpp-create-technical-assets.md)). Sorun bulunursa geri bildirim sağlanır. |
+| Paketleme | 1 saat  | Teklifin teknik varlıkları müşteri kullanımı için paketlenmiştir ve müşteri adayı sistemleri yapılandırılır ve ayarlanır. |
+|  Yayımcının oturumu Kapat             |  -        | Teklifin etkin olmadan önce son yayımcı incelemesi ve onayı. Teklifinizi, tüm gereksinimlerinizi karşıladığından emin olmak için seçili aboneliklerde (teklif bilgileri adımlarında) dağıtabilirsiniz.  Teklifinizin bir sonraki adıma gidebilmesi için **canlı git** ' i seçin. |
+| Paketleme                 | 1 saat | Son teklif, market üretim sistemleri ve bölgelerinde çoğaltılır. | 
+| Canlı                           | 4 gün |Teklif serbest bırakılır, gerekli bölgelere çoğaltılır ve herkese açık hale getirilir. |
 
-Yayımlama işleminin tamamlanması 10 iş günü için izin ve teklif yayımlanır. Yayımlama işlemini tamamladıktan sonra IOT Edge modülü teklifinizi listelenir [Microsoft Azure Marketi](https://azuremarketplace.microsoft.com/marketplace/apps/category/internet-of-things?page=1&subcategories=iot-edge-modules).
+Yayımlama işleminin tamamlanabilmesi için 10 adede kadar iş gününe izin verin ve teklif serbest bırakılır. Yayımlama işlemini tamamladıktan sonra, IoT Edge modülü teklifiniz [Microsoft Azure Market](https://azuremarketplace.microsoft.com/marketplace/apps/category/internet-of-things?page=1&subcategories=iot-edge-modules)listelenecektir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure Marketi'nde var olan bir IOT Edge modülü teklifi güncelleştirme](./cpp-update-existing-offer.md)
+- [Azure Marketi 'nde mevcut bir IoT Edge modülü teklifini güncelleştirme](./cpp-update-existing-offer.md)

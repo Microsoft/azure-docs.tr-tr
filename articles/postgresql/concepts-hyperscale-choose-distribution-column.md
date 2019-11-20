@@ -1,78 +1,78 @@
 ---
-title: Dağıtım sütunları – hiper ölçekli (Citus) (Önizleme) PostgreSQL için Azure veritabanı'nda seçin
-description: Dağıtım sütunları hiper ölçekli senaryoları için iyi seçimler
+title: PostgreSQL için Azure veritabanı 'nda dağıtım sütunları seçin – hiper ölçek (Citus)
+description: PostgreSQL için Azure veritabanı 'nda ortak hiper ölçek senaryolarında dağıtım sütunlarını nasıl seçeceğinizi öğrenin.
 author: jonels-msft
 ms.author: jonels
 ms.service: postgresql
 ms.subservice: hyperscale-citus
 ms.topic: conceptual
 ms.date: 05/06/2019
-ms.openlocfilehash: e9fba14b8979f739fd29bc277e32fb544221d08a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a61c52773c4c6036a76d7b233988c713c1da861f
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65078993"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73482859"
 ---
-# <a name="choose-distribution-columns-in-azure-database-for-postgresql--hyperscale-citus-preview"></a>Dağıtım sütunları – hiper ölçekli (Citus) (Önizleme) PostgreSQL için Azure veritabanı'nda seçin
+# <a name="choose-distribution-columns-in-azure-database-for-postgresql--hyperscale-citus"></a>PostgreSQL için Azure veritabanı 'nda dağıtım sütunları seçin – hiper ölçek (Citus)
 
-Her tablonun dağıtım sütunu seçilmesi olan **en önemli birini** kararları modelleme. Hiper ölçekli satırları parçalardaki satırları dağıtım sütununun değerine göre depolar.
+Her tablonun dağıtım sütununu seçmek, yapacağınız en önemli modelleme kararlarından biridir. PostgreSQL için Azure veritabanı – Hyperscale (Citus), satırların dağıtım sütununun değerine göre parçaları parçalar halinde depolar.
 
-Doğru seçim grupları verileri yapmadan aynı fiziksel düğümlerde birlikte tüm SQL özellikleri için hızlı ve ekleme desteği sorgular ilgili. Sistem yavaş çalışır ve tüm SQL özellikleri düğümlere desteklemeyeceği bir yanlış seçim yapar.
+Doğru seçim, ilgili verileri aynı fiziksel düğümlerde gruplandırır, bu da sorguları hızlı bir şekilde yapar ve tüm SQL özellikleri için destek ekler. Yanlış bir seçim sistemin yavaş çalışmasını sağlar ve tüm SQL özelliklerini düğümler genelinde desteklemez.
 
-Bu bölümde dağıtım iki en yaygın hiper ölçekli senaryolar için sütun ipuçları sağlar.
+Bu makale, en yaygın iki hiper ölçek (Citus) senaryosu için dağıtım sütunu ipuçları sağlar.
 
-### <a name="multi-tenant-apps"></a>Çok Kiracılı uygulamalar
+### <a name="multi-tenant-apps"></a>Çok kiracılı uygulamalar
 
-Çok kiracılı mimari hiyerarşik veritabanı sorguları sunucu grubundaki düğümleri dağıtmak üzere modelleme biçimi kullanır.  Verileri hiyerarşisinin üstünde olarak da bilinen *Kiracı kimliği*ve her bir tabloda bir sütundaki depolanmış olması gerekir.
+Çok kiracılı mimari, sorguları sunucu grubundaki düğümlere dağıtmak için hiyerarşik bir veritabanı modelleme formu kullanır. Veri hiyerarşisinin en üstü *KIRACı kimliği* olarak bilinir ve her tablodaki bir sütunda depolanması gerekir.
 
-Hiper ölçekli sorgular içeren ve eşleşen tablo parça bulur hangi Kiracı kimliği olup olmadığını denetler. Bu sorgu parça içeren bir tek çalışan düğümüne yönlendirir. Çalışan bir sorgu ile aynı düğümde yerleştirilen ilgili tüm verileri birlikte bulundurma çağrılır.
+Hiper ölçek (Citus), hangi kiracı KIMLIĞINI içerdikleri ve eşleşen tablo parçacısını bulan sorguları denetler. Sorguyu, parçayı içeren tek bir çalışan düğümüne yönlendirir. Aynı düğüme yerleştirilmiş tüm ilgili verilerle bir sorgu çalıştırmak birlikte bulundurma olarak adlandırılır.
 
-Aşağıdaki diyagram, birlikte bulundurma çok kiracılı veri modelindeki gösterir. İki tablo, hesapları ve kampanyalar içerir ve her tarafından dağıtılmış `account_id`. Gölgeli kutular, parçaların hangi çalışan düğümü içerdiği her rengi temsil eder, temsil eder. Yeşil parçalar, bir çalışan düğümü ve diğerinde mavi birlikte depolanır. Nasıl bir birleştirme sorgusu Kampanyalar hesapları arasındaki gerekli tüm verilerin birlikte bir düğümde her iki tablonun hesabın aynısını kısıtlarken gerekir fark\_kimliği.
+Aşağıdaki diyagramda, çok kiracılı veri modelindeki birlikte bulundurma gösterilmektedir. Her biri `account_id`tarafından dağıtılan iki tablo, hesap ve kampanya içerir. Gölgeli kutular parçaları temsil eder. Yeşil parçalar bir çalışan düğümünde birlikte depolanır ve mavi parçalar başka bir çalışan düğümünde depolanır. Her iki tablo da aynı hesap\_kimliği ile sınırlandırıldığı zaman, hesaplar ve kampanyalar arasındaki JOIN sorgusunun tüm gerekli verileri tek bir düğümde nasıl bir araya vereceğini fark edin.
 
-![çok kiracılı birlikte bulundurma](media/concepts-hyperscale-choosing-distribution-column/multi-tenant-colocation.png)
+![Çok kiracılı birlikte bulundurma](media/concepts-hyperscale-choosing-distribution-column/multi-tenant-colocation.png)
 
-Bu tasarımda kendi şemanızı uygulamak için uygulamanızdaki bir kiracı nelerden belirleyin. Şirket, hesap, kuruluş veya müşteri ortak örnekler içerir. Sütun adı gibi bir şey olacaktır `company_id` veya `customer_id`. Her sorgularınızın inceleyin ve kendinize sorun: satırları aynı Kiracı kimliği ile ilgili tüm tabloları kısıtlamak için ek WHERE yan tümcelerini olsaydı işe yarar?
-Bir kiracı için çok kiracılı model sorguları kapsayan, satış veya envanter sorguları içinde belirli bir depolama örneği için kapsamlı.
+Bu tasarımı kendi şemanızda uygulamak için, uygulamanızda ne tür bir kiracı oluşturduğunu belirlemek için bu tasarımı yapın. Şirket, hesap, kuruluş veya müşteri ortak örnekleri içerir. Sütun adı `company_id` veya `customer_id`gibi bir şey olacaktır. Sorgularınızın her birini inceleyin ve sizinle aynı kiracı KIMLIĞINE sahip satırlara dahil olan tüm tabloları kısıtlamak için ek WHERE yan tümceleri varsa işe çalışırdı.
+Çok kiracılı modeldeki sorgular bir kiracıya kapsamlıdır. Örneğin, satış veya envanterdeki sorgular belirli bir mağaza kapsamında kapsamlandırılır.
 
-#### <a name="best-practices"></a>En İyi Uygulamalar
+#### <a name="best-practices"></a>En iyi uygulamalar
 
--   **Bölüm dağıtılmış tablolar genel Kiracı tarafından\_kimlik sütunu.** Örneğin, kiracılar, şirketler, Kiracı olduğu bir SaaS uygulamasında\_kimliği büyük olasılıkla şirket olması\_kimliği.
--   **Küçük kiracılar arası tablolar için başvuru tabloları dönüştürün.** Birden fazla Kiracı bilgileri küçük bir tabloya paylaştığınızda, bir başvuru tablosu dağıtın.
--   **Tüm uygulama sorgular filtresi Kiracı tarafından kısıtlamak\_kimliği.** Her sorgu, aynı anda tek bir kiracı için bilgi istemeniz gerekir.
+-   **Dağıtılmış tabloları ortak bir kiracı\_kimliği sütununa göre bölümleyin.** Örneğin, kiracıların şirketler olduğu bir SaaS uygulamasında, kiracı\_kimliği muhtemelen şirket\_kimliği olur.
+-   **Küçük bir çapraz kiracı tablolarını başvuru tablolarına dönüştürün.** Birden çok kiracı bir bilgi tablosunu paylaşıyorsa, onu başvuru tablosu olarak dağıtın.
+-   **Tüm uygulama sorgularını kiracı\_kimliğine göre filtrele 'yi kısıtla.** Her sorgu tek seferde bir kiracı için bilgi istemelidir.
 
-Okuma [çok kiracılı öğretici](./tutorial-design-database-hyperscale-multi-tenant.md) örneği, bu tür bir uygulama oluşturma.
+Bu tür bir uygulamanın nasıl oluşturulacağını gösteren bir örnek için [çok kiracılı öğreticiyi](./tutorial-design-database-hyperscale-multi-tenant.md) okuyun.
 
 ### <a name="real-time-apps"></a>Gerçek zamanlı uygulamalar
 
-Çok kiracılı mimari, hiyerarşik bir yapısı tanıtır ve verileri birlikte bulundurma Kiracı başına sorgularını yönlendirmek üzere kullanır. Bunun aksine, gerçek zamanlı mimarileri, verilerin yüksek düzeyde paralel işleme elde etmek için belirli dağıtım özelliklerine bağlıdır.
+Çok kiracılı mimari, hiyerarşik bir yapı sunar ve veri bulundurma kullanarak kiracı başına sorguları yönlendirebilir. Bunun aksine, gerçek zamanlı mimarilerin verilerin belirli dağıtım özelliklerine göre yüksek bir paralel işleme elde etmelerini sağlar.
 
-Gerçek zamanlı modelinde dağıtım sütunları için bir terim olarak "varlık kimliği" kullanın. Kullanıcılar, konak veya cihaz bunun normal varlıklardır.
+Gerçek zamanlı modeldeki dağıtım sütunları için bir terim olarak "varlık KIMLIĞI" kullanırız. Tipik varlıklar, kullanıcılar, konaklar veya cihazlardır.
 
-Tarih veya kategoriye göre gruplandırılmış sayısal Toplamalar için gerçek zamanlı sorgular genellikle isteyin. Hiper ölçekli, bu sorgular kısmi sonuçlar için her parça gönderir ve son yanıt Düzenleyici düğümde birleştirir. Sorguların hızlı mümkün olduğu kadar düğümü katkıda bulunuyorsanız ve hiçbir tek düğüm orantısız miktarda iş yapmalısınız çalıştırdığınızda.
+Gerçek zamanlı sorgular genellikle tarih veya kategoriye göre gruplanmış sayısal toplamalar ister. Hiper ölçek (Citus), bu sorguları her parçaya kısmi sonuçlar için gönderir ve düzenleyici düğümündeki son yanıtı ayrıştırır. Çok sayıda düğüm mümkün olduğunca en hızlı şekilde çalışır ve tek bir düğümün orantısız iş miktarı olması gerekir.
 
-#### <a name="best-practices"></a>En İyi Uygulamalar
+#### <a name="best-practices"></a>En iyi uygulamalar
 
--   **Dağıtım sütunu olarak yüksek ayarına sahip bir sütun seçin.** Karşılaştırma için bir \"durumu\" alan değerleri "Yeni" olan bir sipariş tabloda "Ücretli" ve "sevk" olduğunda dağıtım sütununun zayıf bir seçimdir. Bu, yalnızca birkaç bu değerler, veri tutabilen bir parça sayısı ve bu işlem düğüm sayısını sınırlar varsayar. Yüksek bir kardinalite ile sütunlar ek olarak, sık kullanılan group by yan tümcesi veya join anahtarlar olarak seçmek uygundur.
--   **Eşit dağıtım ile bir sütun seçin.** Tablo bazı yaygın değerlere dengesiz bir sütun üzerinde dağıtırsanız, veri tablosundaki belirli parçalarda accumulate eğilimindedir. Bu parçalardaki bulunduran düğümlerin diğerlerine göre daha fazla çalışmayı yapan sona erecek.
--   **Ortak sütunlarından olgu ve boyut tabloları dağıtın.**
-    Yalnızca bir dağıtım anahtarı olgu tablonuz olabilir. Başka bir anahtar birleştirme tabloları olgu tablosu ile birlikte bulunması zorunlu değildir. Ne sıklıkla birleştirilir ve katılma satırların boyutuna bağlı olarak birlikte bulundurmanıza olanak bir boyut seçin.
--   **Bazı boyut tabloları başvuru tablolara değiştirin.** Bir boyut tablosunu olgu tablosu ile birlikte olamaz, Boyut tablosuna tüm düğümlerin bir başvuru tablosu biçiminde kopyalarını dağıtarak sorgu performansını iyileştirebilir.
+-   **Dağıtım sütunu olarak yüksek kardinalite içeren bir sütun seçin.** Karşılaştırma için, sipariş tablosundaki yeni, ücretli ve sevk edilen değerlere sahip bir durum alanı, bir dağıtım sütunu yetersiz tercih edilir. Yalnızca, verileri tutan parça sayısını sınırlayan ve bunu işleyebilen düğümlerin sayısını sınırlayan yalnızca birkaç değeri kabul eder. Yüksek kardinalite içeren sütunlar arasında, genellikle Group by yan tümcelerinde veya JOIN anahtarları olarak kullanılan sütunları seçmek de iyi bir yoldur.
+-   **Eşit bir dağıtım içeren bir sütun seçin.** Belirli ortak değerlere eğilmiş bir sütunda bir tablo dağıtırsanız, tablodaki veriler belirli parçaların birikmesine eğilimindedir. Bu parçaları tutan düğümler diğer düğümlerden daha fazla çalışma yapıyor.
+-   **Olgu ve boyut tablolarını ortak sütunlarına dağıtın.**
+    Olgu tablonuz yalnızca bir dağıtım anahtarına sahip olabilir. Başka bir anahtara eklenen tablolar olgu tablosuna katılamaz. Hangi sıklıkta birleştirildiğini ve birleştirme satırlarının boyutunu temel alarak bir boyut seçin.
+-   **Bazı boyut tablolarını başvuru tablolarında değiştirin.** Bir boyut tablosu olgu tablosuyla birlikte bulundurulamıyor ise, boyut tablosunun kopyalarını bir başvuru tablosu formundaki tüm düğümlere dağıtarak sorgu performansını geliştirebilirsiniz.
 
-Okuma [gerçek zamanlı Pano öğretici](./tutorial-design-database-hyperscale-realtime.md) örneği, bu tür bir uygulama oluşturma.
+Bu tür bir uygulamanın nasıl oluşturulacağını gösteren bir örnek için [gerçek zamanlı Pano öğreticisini](./tutorial-design-database-hyperscale-realtime.md) okuyun.
 
-### <a name="timeseries-data"></a>Zaman serisi verileri
+### <a name="time-series-data"></a>Zaman serisi verileri
 
-Zaman serisi iş yükünü, uygulamalar eski bilgileri arşivleme sırasında son bilgilerini sorgulayın.
+Bir zaman serisi iş yükünde, uygulamalar eski bilgileri arşivlarken son bilgileri sorgular.
 
-Zaman serisi hiper ölçekli bilgilerinde modelleme en yaygın hata timestamp dağıtım sütunu kullanıyor. Saatini temel alan bir karma dağıtım zamanları görünüşte rastgele zaman aralıklarını parçalarda birlikte tutmak yerine farklı parçalar halinde dağıtacak. Sorgular genellikle zaman ilgili başvuru zaman aralıkları (örneğin en son veriler), bu nedenle böyle bir karma dağıtım Ağ Yükü sunulmasını sağlar.
+Hiper ölçekte (Citus) zaman serisi bilgilerini modelleyen en yaygın hata, zaman damgasının kendisini bir dağıtım sütunu olarak kullanmaktır. Zaman aralıklarını temel alan bir karma dağıtım, parçaları parçalar halinde birlikte tutmak yerine farklı parçalara rastgele olarak dağıtır. Zaman genellikle başvuru aralıklarını (örneğin, en son veriler) içeren sorgular. Bu tür bir karma dağıtım, ağ ek yüküne neden olur.
 
-#### <a name="best-practices"></a>En İyi Uygulamalar
+#### <a name="best-practices"></a>En iyi uygulamalar
 
--   **Bir zaman damgası dağıtım sütunu olarak seçmeyin.** Farklı dağıtım sütunu seçin. Çok kiracılı uygulama, Kiracı kimliği kullanın veya varlık kimliği gerçek zamanlı bir uygulama kullanma
--   **Bunun yerine zaman PostgreSQL tablo bölümleme kullanın.** Tablo bölümleme, büyük bir zaman sıralamalı veri tablosu her farklı zaman aralıkları içeren birden fazla devralınan tablolar halinde bölmek için kullanın.  Hiper ölçekli Postgres bölümlenmiş bir tablodaki dağıtma parçalar devralınan tablolar oluşturur.
+-   **Dağıtım sütunu olarak zaman damgası seçmeyin.** Farklı bir dağıtım sütunu seçin. Çok kiracılı bir uygulamada, kiracı KIMLIĞINI kullanın veya gerçek zamanlı bir uygulamada varlık KIMLIĞINI kullanın.
+-   **Bunun yerine PostgreSQL tablo bölümlemesini kullanın.** Zaman içinde oluşan büyük bir veriyi, farklı zaman aralıkları içeren her tablo ile birden fazla devralınmış tabloya bölmek için tablo bölümleme kullanın. Hiper ölçekte (Citus) bir Postgres bölümlenmiş tablo dağıtmak, devralınan tablolar için parçalar oluşturur.
 
-Okuma [zaman serisi öğretici](https://aka.ms/hyperscale-tutorial-timeseries) örneği, bu tür bir uygulama oluşturma.
+Bu tür bir uygulamanın nasıl oluşturulacağını gösteren bir örnek için [zaman serisi öğreticisini](https://aka.ms/hyperscale-tutorial-timeseries) okuyun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Bilgi nasıl [birlikte bulundurma](concepts-hyperscale-colocation.md) arasında sorguları çalıştırma hızlı Dağıtılmış veri yardımcı olur
+- Dağıtılmış veriler [arasındaki arada](concepts-hyperscale-colocation.md) bulunan sorguların hızla çalışmasına nasıl yardımcı olduğunu öğrenin.

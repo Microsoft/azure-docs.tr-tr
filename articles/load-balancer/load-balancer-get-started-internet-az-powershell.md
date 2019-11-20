@@ -1,10 +1,10 @@
 ---
-title: Bölgesel olarak yedekli frontend - Azure PowerShell ile bir yük dengeleyici oluşturma
-titlesuffix: Azure Load Balancer
-description: PowerShell kullanarak bir bölgesel olarak yedekli genel IP adresi ön ile genel Standard Load Balancer oluşturma konusunda bilgi edinin
+title: Bölgesel olarak yedekli ön uç Azure PowerShell yük dengeleyici oluşturma
+titleSuffix: Azure Load Balancer
+description: PowerShell kullanarak bölge yedekli genel IP adresi ön ucu ile Genel Standart Load Balancer oluşturma hakkında bilgi edinin
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 manager: twooley
 ms.service: load-balancer
 ms.devlang: na
@@ -13,17 +13,17 @@ ms.custom: seodec18
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/21/2019
-ms.author: kumud
-ms.openlocfilehash: 9cee3b68273fe98e70d558b5d01232bedf113224
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: allensu
+ms.openlocfilehash: 4f7cf5c7600a057a913be28ff4b2a44b241e6be5
+ms.sourcegitcommit: b1a8f3ab79c605684336c6e9a45ef2334200844b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66122131"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74049199"
 ---
 #  <a name="create-a-standard-load-balancer-with-zone-redundant-frontend-using-azure-powershell"></a>Azure PowerShell ile bölgesel olarak yedekli ön uç ile standart yük dengeleyici oluşturma
 
-Bu makalede adımları genel oluşturma işleminde [Standard Load Balancer](https://aka.ms/azureloadbalancerstandard) genel IP standart bir adres kullanarak bölgesel olarak yedekli bir ön uç ile.
+Bu makalede, genel bir IP standart adresi kullanılarak bölge yedekli ön uçta ortak [Standart Load Balancer](https://aka.ms/azureloadbalancerstandard) oluşturma adımları sağlanır.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
@@ -89,7 +89,7 @@ $probe = New-AzLoadBalancerProbeConfig -Name 'myHealthProbe' -Protocol Http -Por
 ```
 
 ## <a name="create-a-load-balancer"></a>Yük dengeleyici oluşturma
-Aşağıdaki komutu kullanarak bir Standard Load Balancer oluşturun:
+Aşağıdaki komutu kullanarak bir Standart Load Balancer oluşturun:
 
 ```azurepowershell-interactive
 $lb = New-AzLoadBalancer -ResourceGroupName myResourceGroup -Name 'MyLoadBalancer' -Location westeurope `

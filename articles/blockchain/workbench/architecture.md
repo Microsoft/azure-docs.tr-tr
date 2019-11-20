@@ -1,123 +1,123 @@
 ---
-title: Azure Blockchain Workbench mimarisi
-description: Azure Blockchain Workbench mimarisini ve bileşenlerini genel bakış.
+title: Azure blok zinciri çalışma ekranı önizleme mimarisi
+description: Azure blok zinciri çalışma ekranı önizleme mimarisine ve bileşenlerine genel bakış.
 services: azure-blockchain
 keywords: ''
 author: PatAltimore
 ms.author: patricka
-ms.date: 05/20/2019
-ms.topic: article
+ms.date: 09/05/2019
+ms.topic: conceptual
 ms.service: azure-blockchain
 ms.reviewer: brendal
 manager: femila
-ms.openlocfilehash: 5333f02edd6a4ff888e28ed36c2b78f75309f4d4
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 4613d441fd0d363654073d4832de19139a7781e7
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67060913"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73579734"
 ---
-# <a name="azure-blockchain-workbench-architecture"></a>Azure Blockchain Workbench mimarisi
+# <a name="azure-blockchain-workbench-preview-architecture"></a>Azure blok zinciri çalışma ekranı önizleme mimarisi
 
-Azure Blockchain Workbench, çeşitli Azure bileşenlerinden kullanarak bir çözüm sağlayarak blockchain uygulama geliştirmeyi basitleştirir. Blockchain Workbench'i Azure Marketi'nde bir çözüm şablonu kullanılarak dağıtılabilir. Şablon, modüller ve istemci uygulaması türü blok zinciri yığın dahil olmak üzere, dağıtma ve IOT tümleştirmeyi bileşenleri seçmenize olanak sağlar. Blockchain Workbench'i, uygulama dağıtıldıktan sonra bir web uygulaması, iOS uygulaması ve Android uygulaması erişim sağlar.
+Azure blok zinciri çalışma ekranı önizlemesi, çeşitli Azure bileşenlerini kullanarak bir çözüm sunarak blok zinciri uygulama geliştirmeyi basitleştirir. Blok zinciri çalışma ekranı, Azure Marketi 'ndeki bir çözüm şablonu kullanılarak dağıtılabilir. Şablon, dağıtım için blok zinciri yığını, istemci uygulaması türü ve IoT tümleştirmesi desteği dahil olmak üzere modülleri ve bileşenleri seçmenizi sağlar. Bir kez dağıtıldıktan sonra, blok zinciri çalışma ekranı bir Web uygulamasına, iOS uygulamasına ve Android uygulamasına erişim sağlar.
 
-![Blockchain Workbench'i mimarisi](./media/architecture/architecture.png)
+![Blok zinciri çalışma ekranı mimarisi](./media/architecture/architecture.png)
 
-## <a name="identity-and-authentication"></a>Kimlik ve kimlik doğrulaması
+## <a name="identity-and-authentication"></a>Kimlik ve kimlik doğrulama
 
-Blockchain Workbench'i kullanan, Kurumsal kimlikleri Azure Active Directory (Azure AD) kullanarak bir konsorsiyum ad'sini birleştirebilir. Workbench, Azure AD'de depolanan Kurumsal kimlikleri zincir kimliklerle yeni kullanıcı hesaplarını oluşturur. Kimlik eşleme kimliği doğrulanmış oturum açma için istemci API'leri ve uygulamaları kolaylaştırır ve kimlik doğrulama ilkeleri, kuruluşların kullanır. Workbench, Kurumsal kimlikleri verilen bir akıllı sözleşme belirli rollere ilişkilendirmek için özelliği de sağlar. Ayrıca, Workbench ayrıca eylemleri tanımlamak için bir mekanizma roller sağlar alabilir ve ne zaman.
+Blok zinciri çalışma ekranı kullanarak, bir konsorsiyum, Azure Active Directory (Azure AD) kullanarak kurumsal kimliklerini federasyona edebilir. Çalışma ekranı, Azure AD 'de depolanan kurumsal kimliklere sahip şirket içi kimlikler için yeni kullanıcı hesapları oluşturur. Kimlik eşleme, istemci API 'Lerinde ve uygulamalarında kimliği doğrulanmış oturum açmayı kolaylaştırır ve kuruluşların kimlik doğrulama ilkelerini kullanır. Çalışma ekranı ayrıca kurumsal kimlikleri belirli bir akıllı sözleşmede belirli rollerle ilişkilendirebilme olanağı sağlar. Ayrıca, çalışma zamanı bu rollerin gerçekleştirebileceği eylemleri ve ne zaman yapılacağını belirlemek için de bir mekanizma sağlar.
 
-Blockchain Workbench'i dağıtıldıktan sonra kullanıcılara istemci uygulamaları, REST tabanlı istemci API veya Mesajlaşma API'si aracılığıyla Blockchain Workbench ile etkileşim kurun. Her durumda, etkileşimleri, Azure Active Directory (Azure AD) veya cihaza özel kimlik bilgileri aracılığıyla kimliğinin doğrulanması gerekir.
+Blockzincirle çalışma ekranı dağıtıldıktan sonra, kullanıcılar, istemci uygulamaları, REST tabanlı istemci API 'SI veya mesajlaşma API 'SI aracılığıyla blok zinciri çalışma ekranı ile etkileşime geçebilir. Her durumda, Azure Active Directory (Azure AD) ya da cihaza özgü kimlik bilgileri aracılığıyla etkileşimlerin doğrulanması gerekir.
 
-Kullanıcılar kimliklerini bir konsorsiyum Azure AD için kendi e-posta adresinde bir e-posta davetiyesi katılımcılara göndererek federasyona. Oturum açılırken, bu kullanıcı adı, parola ve ilkeleri kullanarak kimlik doğrulaması yapılır. Örneğin, iki öğeli kimlik doğrulama kendi kuruluşları.
+Kullanıcılar, e-posta adresinde katılımcılara bir e-posta daveti göndererek kimliklerini bir konsorsiyum Azure AD 'ye devredebilir. Oturum açarken, bu kullanıcıların kimliği, parola ve ilkeleri kullanılarak doğrulanır. Örneğin, kuruluşunun iki öğeli kimlik doğrulaması.
 
-Azure AD, Blockchain Workbench'i erişimi olan tüm kullanıcıları yönetmek için kullanılır. Her cihaz için akıllı bir sözleşme bağlanma, Azure AD ile de ilişkilidir.
+Azure AD, blok zinciri çalışma ekranına erişimi olan tüm kullanıcıları yönetmek için kullanılır. Akıllı bir sözleşmeye bağlanan her cihaz, Azure AD ile de ilişkilendirilir.
 
-Azure AD, özel yönetici grubuna kullanıcılara atamak için de kullanılır. Yönetici grubu ile ilişkili kullanıcı hakları ve Eylemler içinde Blockchain Workbench'i sözleşmeleri dağıtma ve bir kullanıcı için izinleri vermeyi de dahil olmak üzere bir sözleşme erişmek için erişim verilir. Bu grup dışındaki kullanıcılara yönetici eylemlerine erişim yok.
+Ayrıca, Azure AD, kullanıcıları özel bir yönetici grubuna atamak için de kullanılır. Yönetici grubuyla ilişkili kullanıcılara, sözleşmeleri dağıtma ve bir kullanıcıya bir sözleşmeye erişim izni verme dahil olmak üzere blok zinciri çalışma ekranı içindeki haklar ve eylemlere erişim izni verilir. Bu grubun dışındaki kullanıcıların, yönetici eylemlerine erişimi yoktur.
 
 ## <a name="client-applications"></a>İstemci uygulamaları
 
-Workbench, web ve mobile (iOS, Android), doğrulama, test etme ve blok zinciri uygulamaları görüntülemek için kullanılan otomatik olarak oluşturulan istemci uygulamalar sağlar. Uygulama arabirimi akıllı sözleşme meta verileri temel alarak dinamik olarak oluşturulur ve tüm kullanım örneği barındırabilir. İstemci uygulamaları, kullanıcıya yönelik bir ön uç Blockchain Workbench tarafından oluşturulan tüm blok zinciri uygulamaları sunun. İstemci uygulamaları, Azure Active Directory (Azure AD) ile kullanıcıların kimliğini doğrulamak ve ardından uyarlanmış akıllı sözleşme iş bağlamında bir kullanıcı deneyimi sunar. Kullanıcı deneyimi yeni akıllı sözleşme örnekleri yetkili kişiler tarafından oluşturulmasını sağlar ve ardından akıllı sözleşmeyi temsil eden iş işleminde bazı türlerdeki işlemlerin uygun noktalarda yürütme yeteneği sunar.
+Çalışma ekranı, Web ve mobil için otomatik olarak oluşturulan istemci uygulamaları (iOS, Android) sağlar, bu da blok zinciri uygulamalarını doğrulamak, test etmek ve görüntülemek için kullanılabilir. Uygulama arabirimi akıllı anlaşma meta verileri temelinde dinamik olarak oluşturulur ve herhangi bir kullanım örneğine uyum sağlayabilir. İstemci uygulamaları, blok zinciri çalışma ekranı tarafından oluşturulan tam blok zinciri uygulamalarına kullanıcıya yönelik bir ön uç sağlar. İstemci uygulamaları Azure Active Directory (Azure AD) aracılığıyla kullanıcıların kimliğini doğrular ve ardından akıllı sözleşmenin iş bağlamına uyarlanmış bir kullanıcı deneyimi sunar. Kullanıcı deneyimi yetkili kişiler tarafından yeni akıllı anlaşma örnekleri oluşturulmasına olanak tanır ve ardından akıllı sözleşmenin gösterdiği iş işleminde uygun noktalarda belirli işlem türlerini yürütme özelliğini sunar.
 
-Web uygulamasında, Yönetici konsolunda yetkili kullanıcılar erişebilir. Konsolu, Azure AD'de Yönetici grubundaki kullanıcılar tarafından kullanılabilir ve aşağıdaki işlevlere erişim sağlar:
+Web uygulamasında yetkili kullanıcılar Yönetici Konsolu erişebilir. Konsol, Azure AD 'de Yönetici grubundaki kullanıcılar tarafından kullanılabilir ve aşağıdaki işlevlere erişim sağlar:
 
-* Nitelikli akıllı anlaşmalar popüler senaryolar için sağlanan Microsoft dağıtın. Örneğin, bir varlık aktarımı senaryo.
-* Karşıya yükleme ve kendi nitelikli akıllı anlaşmalar dağıtın.
-* Kullanıcı erişimi belirli bir rolü bağlamında akıllı sözleşme atayın.
+* Popüler senaryolar için Microsoft tarafından sunulan akıllı sözleşmeleri dağıtın. Örneğin, bir varlık aktarım senaryosu.
+* Kendi akıllı sözleşmelerini karşıya yükleyin ve dağıtın.
+* Belirli bir rol bağlamında akıllı sözleşmeye Kullanıcı erişimi atayın.
 
-Daha fazla bilgi için [github'daki Azure Blockchain Workbench örnek istemci uygulamaları](https://github.com/Azure-Samples/blockchain-devkit/tree/master/connect/mobile).
+Daha fazla bilgi için bkz. [GitHub 'Da Azure blok zinciri çalışma ekranı örnek istemci uygulamaları](https://github.com/Azure-Samples/blockchain-devkit/tree/master/connect/mobile).
 
-## <a name="gateway-service-api"></a>Ağ Geçidi Hizmeti API'si
+## <a name="gateway-service-api"></a>Ağ geçidi hizmeti API 'SI
 
-Blockchain Workbench'i REST tabanlı ağ geçidi hizmeti API'si içerir. Bir blok zincirine yazarken API oluşturur ve iletileri için bir olay aracısından teslim eder. Veri API'si tarafından istendiğinde, sorgular dışı SQL veritabanına gönderilir. SQL veritabanı bir zincir içi verileri zincir ve desteklenen nitelikli akıllı anlaşmalar için içerik ve yapılandırma bilgileri sağlayan meta verileri içerir. Sorguları, sözleşme için meta verileri tarafından sürekli bir biçimde dışı çoğaltmadan gerekli verileri döndürür.
+Blok zinciri çalışma ekranı, REST tabanlı bir ağ geçidi hizmeti API 'sini içerir. Bir blok zincirine yazarken, API bir olay aracısına ileti oluşturur ve gönderir. API tarafından veriler istendiğinde sorgular, zincir dışı SQL veritabanına gönderilir. SQL veritabanı, desteklenen akıllı sözleşmeler için bağlam ve yapılandırma bilgilerini sağlayan bir zincir veri ve meta veri çoğaltmasını içerir. Sorgular, yük dışı çoğaltmadaki gerekli verileri, sözleşmenin meta verileri tarafından bilgilendirilmiş bir biçimde döndürür.
 
-Geliştiricilerin, derleme veya Blockchain Workbench'i istemci uygulamalar üzerinde bağlı olmadan blockchain çözümlerini tümleştirmek için ağ geçidi hizmeti API'si erişebilirsiniz.
+Geliştiriciler, blok zinciri çalışma ekranı istemci uygulamalarına bağlı olmadan blok zinciri çözümlerini derlemek veya bütünleştirmek için ağ geçidi hizmeti API 'sine erişebilirler.
 
 > [!NOTE]
-> API'sine kimliği doğrulanmış erişimi etkinleştirmek için iki istemci uygulamaları Azure Active Directory'ye kaydedilir. Azure Active Directory, her uygulama türü farklı uygulama kayıtları gerektirir (yerel ve web). 
+> API 'ye kimliği doğrulanmış erişimi etkinleştirmek için, iki istemci uygulaması Azure Active Directory kaydedilir. Azure Active Directory her uygulama türü (yerel ve Web) için farklı uygulama kayıtları gerektirir. 
 
 ## <a name="message-broker-for-incoming-messages"></a>Gelen iletiler için ileti Aracısı
 
-Blockchain Workbench'i doğrudan ileti göndermek için isteyen geliştiriciler, doğrudan Service Bus iletileri gönderebilir. Örneğin, iletileri API sistem için tümleştirme veya IOT cihazları için kullanılabilir.
+Doğrudan blok zinciri çalışma ekranına ileti göndermek isteyen geliştiriciler, doğrudan Service Bus ileti gönderebilir. Örneğin, iletiler API 'SI sistemden sisteme tümleştirme veya IoT cihazları için kullanılabilir.
 
-## <a name="message-broker-for-downstream-consumers"></a>Aşağı Akış Tüketiciler için ileti Aracısı
+## <a name="message-broker-for-downstream-consumers"></a>Aşağı akış müşterileri için ileti Aracısı
 
-Uygulama yaşam döngüsü boyunca, olaylar gerçekleşir. Olaylar, ağ geçidi API'si tarafından veya bir kayıt defteri tetiklenebilir. Olay bildirimleri, olay tabanlı akış kod başlatabilirsiniz.
+Uygulamanın yaşam döngüsü boyunca olaylar oluşur. Olaylar, ağ geçidi API 'SI veya genel muhasebe tarafından tetiklenebilir. Olay bildirimleri olay temelinde aşağı akış kodu başlatabilir.
 
-Blockchain Workbench'i iki türde olay tüketicileri otomatik olarak dağıtır. Tek bir tüketici dışı SQL deposunun doldurulması için blok zinciri olayları tarafından tetiklenir. Diğer tüketici meta verilerini karşıya yükleme ve belgelerin depolanması ilgili API tarafından oluşturulan olayları yakalama sağlamaktır.
+Blok zinciri çalışma ekranı otomatik olarak iki tür olay tüketicileri dağıtır. Zincir dışı SQL Mağazası 'nı doldurmak için bir tüketici blok zinciri olayları tarafından tetiklenir. Diğer tüketici, belgelerin karşıya yüklenmesi ve depolanması ile ilgili API tarafından oluşturulan olaylar için meta verileri yakalar.
 
-## <a name="message-consumers"></a>İleti tüketiciler
+## <a name="message-consumers"></a>İleti tüketicileri
 
- İleti tüketiciler Service Bus'tan ileti alın. İleti Tüketiciler için temel alınan olay modeli için ek hizmetleri ve sistemleri uzantıları sağlar. Örneğin, CosmosDB doldurmak veya Azure akış analizi kullanarak iletileri değerlendirmek için destek ekleyebilirsiniz. Aşağıdaki bölümlerde, Blockchain Workbench'i dahil ileti tüketiciler açıklanmaktadır.
+ İleti tüketicileri Service Bus iletileri alır. İleti tüketicileri için temel olay modeli ek hizmet ve sistem uzantılarına izin verir. Örneğin, CosmosDB 'yi doldurmak veya Azure Akış Analizi 'ni kullanarak iletileri değerlendirmek için destek ekleyebilirsiniz. Aşağıdaki bölümlerde, blok zinciri çalışma ekranına eklenen ileti tüketicileri açıklanır.
 
-### <a name="distributed-ledger-consumer"></a>Dağıtılmış bir defter tüketici
+### <a name="distributed-ledger-consumer"></a>Dağıtılmış muhasebe tüketicisi
 
-Dağıtılmış kayıt defteri teknolojisini (DLT) iletiler için blok zinciri yazılacak işlemleri için meta verileri içerir. Tüketici, iletileri alır ve bir işlem Oluşturucu, imzalayan ve yönlendirici verileri gönderir.
+Dağıtılmış muhasebe teknolojisi (DLT) iletileri, blok zincirine yazılacak işlemler için meta verileri içerir. Tüketici, iletileri alır ve verileri bir işlem Oluşturucu, imzalayan ve yönlendiriciye iter.
 
-### <a name="database-consumer"></a>Veritabanı tüketici
+### <a name="database-consumer"></a>Veritabanı tüketicisi
 
-Veritabanı tüketici, Service Bus iletileri alır ve SQL veritabanı gibi ekli bir veritabanına veri gönderir.
+Veritabanı tüketicisi Service Bus iletileri alır ve verileri SQL veritabanı gibi eklenmiş bir veritabanına gönderir.
 
-### <a name="storage-consumer"></a>Depolama tüketici
+### <a name="storage-consumer"></a>Depolama tüketicisi
 
-Depolama tüketici, Service Bus iletileri alır ve bağlı bir depolama alanına veri gönderir. Örneğin, karma belgeleri, Azure depolamada depolamak.
+Depolama TÜKETİCİSİNDE Service Bus iletileri alır ve verileri ekli bir depolamaya gönderir. Örneğin, Azure depolama 'da karma belgeleri depolama.
 
-## <a name="transaction-builder-and-signer"></a>İşlem oluşturucusu ve imzalayan
+## <a name="transaction-builder-and-signer"></a>İşlem Oluşturucu ve imzalayan
 
-Gelen ileti Aracısı ileti blok zincirine yazılması, DLT tüketici tarafından işlenir. Yürütmek için istenen işlem için meta veriler içeren ileti alır ve ardından bilgileri gönderir, bir hizmet DLT tüketicisidir *işlem oluşturucusu ve imzalayan*. *İşlem oluşturucusu ve imzalayan* verileri ve istenen blockchain hedef dayalı bir blok zinciri işlem birleştirir. İşlem, birleştirilmiş bir kez imzalanır. Özel anahtarları Azure Key Vault'ta saklanır.
+Gelen ileti aracısıdır bir iletinin blok zincirine yazılması gerekiyorsa, bu, DLT tüketicisi tarafından işlenir. DLT tüketicisi, istenen bir işlemin yürütülmesi için meta verileri içeren iletiyi alan ve sonra *işlem Oluşturucu ve imzalayanın*bilgilerini gönderen bir hizmettir. *İşlem Oluşturucu ve imzalayan* , verileri ve istenen blok zinciri hedefini temel alan bir blok zinciri işlemini ayrıştırır. Bağlandıktan sonra işlem imzalanır. Özel anahtarlar Azure Key Vault depolanır.
 
- Blockchain Workbench'i Key Vault'tan uygun özel anahtarı alır ve Key Vault dışında hareket imzalar. İmzalandıktan sonra işlemin işlem yönlendiriciler ve defterler gönderilir.
+ Blok zinciri çalışma ekranı Key Vault uygun özel anahtarı alır ve işlemi Key Vault dışında imzalar. İmzalandıktan sonra işlem, işlem yönlendiricilerine ve defterlere gönderilir.
 
-## <a name="transaction-routers-and-ledgers"></a>İşlem yönlendiriciler ve defterler
+## <a name="transaction-routers-and-ledgers"></a>İşlem yönlendiricileri ve bağış cihazları
 
-İşlem yönlendiriciler ve defterler işaretli işlemleri alın ve bunları uygun blok zinciri için yönlendirir. Şu anda, Blockchain Workbench'i Ethereum, hedef blok zinciri destekler.
+İşlem yönlendiricileri ve defterler, imzalı işlemleri alır ve bunları uygun blok zincirine yönlendirir. Şu anda blok zinciri çalışma ekranı, hedef blok zinciri olarak Ethereum 'u destekliyor.
 
 ## <a name="dlt-watcher"></a>DLT İzleyicisi
 
-Dağıtılmış kayıt defteri teknolojisini (DLT) İzleyici Blockchain Workbench'i bağlı blok zincirleri üzerinde gerçekleşen olayları izler.
-Olaylar, kişiler ve sistemleri ilgili bilgileri yansıtır. Örneğin, yeni sözleşme örnekleri, yürütme işlemlerinin yanı sıra, durum değişiklikleri oluşturma. Olayları yakalanır ve aşağı akış tüketiciler tarafından tüketilebilecek giden ileti aracısı için gönderilebilir.
+Dağıtılmış bir muhasebe teknolojisi (DLT) İzleyicisi blok zinciri çalışma ekranına eklenen blok zincirlerinde gerçekleşen olayları izler.
+Olaylar, bireyler ve sistemlerle ilgili bilgileri yansıtır. Örneğin, yeni sözleşme örnekleri oluşturma, işlemlerin yürütülmesi ve durum değişiklikleri. Olaylar yakalanarak giden ileti aracısına gönderilir, bu nedenle aşağı akış tüketicileri tarafından tüketilebilir.
 
-Örneğin, SQL tüketici olayları izler, bunları kullanır ve SQL veritabanı dahil değerlerle doldurur. Kopya verileri zincir dışı deposunda çoğaltmasını mpgo.exe'nin sağlar.
+Örneğin, SQL tüketicisi olayları izler, bunları kullanır ve SQL veritabanını dahil edilen değerlerle doldurur. Kopyalama, zincir dışı bir depoda bir zincir veri çoğaltmasının yeniden kullanılmasını mümkün bir şekilde sunar.
 
 ## <a name="azure-sql-database"></a>Azure SQL veritabanı
 
-Blockchain Workbench'i bağlı Azure SQL veritabanı, sözleşme tanımları, yapılandırma meta verilerini ve blok zincirine yatırım depolanan verilerin SQL erişilebilir bir çoğaltma depolar. Bu verileri kolayca sorgulanan, görselleştirilmiş veya veritabanına doğrudan erişerek analiz edilir. Geliştiriciler ve diğer kullanıcılar veritabanı, raporlama, analiz veya veri merkezli diğer tümleştirmeler için kullanabilirsiniz. Örneğin, kullanıcılar işlem verilerini Power bı'da görselleştirebilirsiniz.
+Blok zinciri çalışma ekranına eklenen Azure SQL veritabanı, sözleşme tanımlarını, yapılandırma meta verilerini ve blok zincirinde depolanan verilerin SQL erişimli bir çoğaltmasını depolar. Bu veriler, veritabanına doğrudan erişerek kolayca sorgulanabilir, görselleştirilir veya analiz edilebilir. Geliştiriciler ve diğer kullanıcılar veritabanını raporlama, analiz veya diğer veri merkezli Tümleştirmeler için kullanabilir. Örneğin, kullanıcılar Power BI kullanarak işlem verilerini görselleştirebilir.
 
-Bu dışı depolama, veri SQL yerine bir blok zinciri defter büyük kuruluşlar için özelliği sağlar. Ayrıca, blockchain teknolojisi yığını belirsiz olduğundan standart bir şema üzerinde standart hale getirilirse dışı depolama raporları ve diğer yapıtları yeniden projeleri, senaryolar ve kuruluşlar arasında sağlar.
+Bu kapalı depolama alanı, kurumsal kuruluşların bir blok zinciri defteri yerine SQL 'de verileri sorgulamasına olanak sağlar. Ayrıca, blok zinciri teknolojisi yığınlarından bağımsız bir standart şemayı standartlaştırarak zincir dışı depolama, raporların ve diğer yapıların projeler, senaryolar ve kuruluşlar genelinde yeniden kullanılmasını mümkün hale getirir.
 
 ## <a name="azure-storage"></a>Azure Storage
 
-Azure depolama, sözleşmeler ve sözleşmeleri ile ilişkili meta verileri depolamak için kullanılır.
+Azure depolama, sözleşmelerle ilişkili sözleşmeleri ve meta verileri depolamak için kullanılır.
 
-Satın alma siparişleri ve konşimentoları, haber ve tıbbi tanımayı Polis gövdesi kameralar ve ana hareket resimler gibi bir continuum video kaynak kullanılan görüntülerine belgeleri blockchain merkezli senaryolarda bir rol oynar. Belgeleri doğrudan üzerinde blok zinciri yerleştirmek uygun değildir.
+Satın alma siparişlerinden ve konşimentoda, Haberler ve tıbbi imagery 'de kullanılan görüntülere, polis gövde kameralar ve önemli hareket resimleri gibi bir Continuum 'tan kaynaklanan videolar için, belgeler birçok blok zinciri merkezli senaryoda bir rol oynar. Belgeler blok zincirine doğrudan yerleştirmek için uygun değildir.
 
-Blockchain Workbench belgeleri veya diğer medya içeriği blok zinciri iş mantığı ile ekleme özelliği destekler. Bir belge veya medya içeriğin karmasını, blok zincirine yatırım depolanır ve gerçek belge veya medya içeriği, Azure Depolama'da saklanır. İlişkili işlem bilgilerini gelen ileti aracısı için teslim, paketlenir, imzalı ve blok zincirine yönlendirilir. Bu işlemi giden ileti Aracısı paylaşılan olayları tetikler. SQL DB, bu bilgileri kullanır ve daha sonra sorgulamak için DB gönderir. Aşağı Akış sistemlerine Ayrıca bu olaylar uygun şekilde hareket tüketebilir.
+Blok zinciri çalışma ekranı, blok zinciri iş mantığı ile belge veya diğer medya içeriği ekleme yeteneğini destekler. Belge veya medya içeriğinin karması blok zincirinde saklanır ve gerçek belge veya medya içeriği Azure Storage 'da depolanır. İlişkili işlem bilgileri gelen ileti aracısına dağıtılır, bu paket çalışır, imzalanır ve blok zincirine yönlendirilir. Bu işlem, giden ileti Aracısı aracılığıyla paylaşılan olayları tetikler. SQL DB bu bilgileri kullanır ve daha sonra sorgulamak üzere VERITABANıNA gönderir. Aşağı akış sistemleri, uygun şekilde hareket etmek için bu olayları da kullanabilir.
 
 ## <a name="monitoring"></a>İzleme
 
-Workbench, Application Insights ile Azure İzleyici uygulama günlüğü sağlar. Application Insights, Blockchain Workbench'i günlüğe kaydedilen tüm bilgileri depolamak için kullanılır ve hataları, uyarıları ve başarılı işlemleri içerir. Application Insights, Blockchain Workbench ile hata ayıklamak için geliştiriciler tarafından kullanılabilir. 
+Çalışma ekranı Application Insights ve Azure Izleyici kullanarak uygulama günlüğü sağlar. Application Insights, blok zinciri çalışma ekranındaki tüm günlüğe kaydedilen bilgileri depolamak için kullanılır ve hatalar, uyarılar ve başarılı işlemler içerir. Application Insights, geliştiriciler tarafından blok zinciri çalışma ekranı ile ilgili sorunları ayıklamak için kullanılabilir. 
 
-Azure İzleyici, ağın blok zinciri durumuyla ilgili bilgi sağlar. 
+Azure Izleyici, blok zinciri ağının durumu hakkında bilgi sağlar. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

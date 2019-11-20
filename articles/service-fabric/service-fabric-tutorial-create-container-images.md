@@ -13,17 +13,17 @@ ms.service: service-fabric
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 09/15/2017
+ms.date: 07/22/2019
 ms.author: suhuruli
 ms.custom: mvc
-ms.openlocfilehash: fe01d55b17c0f6f6dd6a621fbac0cf4d3a268ee3
-ms.sourcegitcommit: 009334a842d08b1c83ee183b5830092e067f4374
+ms.openlocfilehash: b5dba1f7e71149c37edc909d2bb43d708192bdbb
+ms.sourcegitcommit: 04ec7b5fa7a92a4eb72fca6c6cb617be35d30d0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66306775"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68385218"
 ---
-# <a name="tutorial-create-container-images-on-a-linux-service-fabric-cluster"></a>Öğretici: Bir Linux Service Fabric kümesinde kapsayıcı görüntüleri oluşturma
+# <a name="tutorial-create-container-images-on-a-linux-service-fabric-cluster"></a>Öğretici: Linux Service Fabric kümesinde kapsayıcı görüntüleri oluşturma
 
 Bu öğretici, Linux Service Fabric kümesinde kapsayıcıları kullanmayı gösteren öğretici serisinin ilk parçasıdır. Bu öğreticide, bir çoklu konteyner uygulaması Service Fabric ile kullanılmak üzere hazırlanmaktadır. Sonraki öğreticilerde, bu görüntüler Service Fabric uygulamasının bir parçası olarak kullanılır. Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:
 
@@ -88,7 +88,7 @@ tiangolo/uwsgi-nginx-flask   python3.6           590e17342131        5 days ago 
 
 ## <a name="deploy-azure-container-registry"></a>Azure Container Registry’yi dağıtma
 
-İlk çalıştırma **az login** Azure hesabınızda oturum açmak için komutu.
+İlk olarak, Azure hesabınızda oturum açmak için **az Login** komutunu çalıştırın.
 
 ```bash
 az login
@@ -136,7 +136,7 @@ Mevcut görüntülerin listesini görüntülemek için [docker images](https://d
 docker images
 ```
 
-Çıkış:
+Çıktı:
 
 ```bash
 REPOSITORY                   TAG                 IMAGE ID            CREATED              SIZE
@@ -166,7 +166,7 @@ docker tag azure-vote-front <acrName>.azurecr.io/azure-vote-front:v1
 
 Etiketledikten sonra, işlemi doğrulamak için ‘docker images’ komutunu çalıştırın.
 
-Çıkış:
+Çıktı:
 
 ```bash
 REPOSITORY                             TAG                 IMAGE ID            CREATED             SIZE
@@ -196,7 +196,7 @@ Azure Container Registry’nize gönderilen görüntülerin listesini döndürme
 az acr repository list --name <acrName> --output table
 ```
 
-Çıkış:
+Çıktı:
 
 ```bash
 Result
@@ -208,7 +208,7 @@ azure-vote-front
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, Github'dan bir uygulama çekilmiştir ve kapsayıcı görüntüleri oluşturulan ve bir kayıt defterine gönderilmiştir. Aşağıdaki adımlar tamamlandı:
+Bu öğreticide, bir uygulama GitHub 'dan çekilir ve kapsayıcı görüntüleri oluşturulup bir kayıt defterine gönderildi. Aşağıdaki adımlar tamamlandı:
 
 > [!div class="checklist"]
 > * Uygulama kaynağını GitHub’dan kopyalama

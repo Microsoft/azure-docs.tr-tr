@@ -1,21 +1,21 @@
 ---
 title: "Öğretici: Yüz tanıma API'siC#"
 titleSuffix: Azure Cognitive Services
-description: Bir görüntüdeki yüzlerin özelliklerini algılamak için Bilişsel Hizmetler Yüz Tanıma API’sini kullanan basit bir Windows uygulaması oluşturun.
+description: Bilişsel hizmetler yüz tanıma API'si bir resimdeki yüz özelliklerinin algılamak için kullanan bir Windows uygulaması oluşturun.
 services: cognitive-services
 author: ghogen
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: face-api
 ms.topic: tutorial
-ms.date: 05/07/2018
+ms.date: 07/03/2019
 ms.author: ghogen
-ms.openlocfilehash: 492161a9a47627db8a06686daf953e99ca652e02
-ms.sourcegitcommit: be9fcaace62709cea55beb49a5bebf4f9701f7c6
+ms.openlocfilehash: 7907a79289149d9e165dd6df0c09bee596e624e2
+ms.sourcegitcommit: f10ae7078e477531af5b61a7fe64ab0e389830e8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/17/2019
-ms.locfileid: "65827673"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67606808"
 ---
 # <a name="connecting-to-cognitive-services-face-api-by-using-connected-services-in-visual-studio"></a>Visual Studio’da Bağlı Hizmetler’i kullanarak Bilişsel Hizmetler Yüz Tanıma API’sine bağlanma
 
@@ -147,7 +147,7 @@ Bu makalede ve beraberindeki destek makalelerinde, Bilişsel Hizmetler Yüz Tan�
             });
         }
    ```
-    Bu adımdaki kod, bağlı hizmeti eklerken eklediğiniz anahtarı kullanarak Yüz Tanıma REST API’sine yapılan çağrı ile bir HTTP isteği oluşturur.
+    Bu adımda kod bağlı hizmet eklendiğinde, eklenen anahtar kullanılarak yüz REST API çağrısı ile bir HTTP isteği oluşturur.
 
 1. GetImageAsByteArray ve JsonPrettyPrint yardımcı işlevlerini ekleyin.
 
@@ -239,7 +239,7 @@ Bu makalede ve beraberindeki destek makalelerinde, Bilişsel Hizmetler Yüz Tan�
 
 Artık gerekli değilse kaynak grubunu silin. Böylece bilişsel hizmet ve ilgili kaynaklar silinir. Kaynak grubunu portal aracılığıyla silmek için:
 
-1. Portalın üst kısmındaki Arama kutusuna kaynak grubunuzun adını girin. Bu Hızlı Başlangıçta kullanılan kaynak grubunu arama sonuçlarında gördüğünüzde seçin.
+1. Portalın üst kısmındaki Arama kutusuna kaynak grubunuzun adını girin. Bu hızlı başlangıçta kullanılan kaynak grubunu arama sonuçlarında gördüğünüzde seçin.
 1. **Kaynak grubunu sil**'i seçin.
 1. **KAYNAK GRUBU ADINI YAZIN:** kutusuna kaynak grubunun adını yazın ve **Sil**’i seçin.
 

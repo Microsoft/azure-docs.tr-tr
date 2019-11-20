@@ -1,88 +1,88 @@
 ---
-title: REST kullanarak Bing konuşma tanıma API'sini kullanmaya başlama | Microsoft Docs
+title: REST kullanarak Bing Konuşma tanıma API 'SI ile çalışmaya başlama | Microsoft Docs
 titlesuffix: Azure Cognitive Services
-description: Konuşmayı metne dönüştürmek için Microsoft Bilişsel hizmetler konuşma tanıma API'si erişmek için REST kullanma.
+description: Konuşulan sesi metne dönüştürmek için Microsoft bilişsel hizmetler 'deki konuşma tanıma API 'sine erişmek için REST 'i kullanın.
 services: cognitive-services
-author: zhouwangzw
-manager: wolfma
+author: nitinme
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-speech
 ms.topic: article
 ms.date: 09/18/2018
-ms.author: zhouwang
+ms.author: nitinme
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: ead4026ecec4878c69bc21a9ebc989eaf3d69a13
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e962a12c6c27737f95e78e80036e51bac41147d5
+ms.sourcegitcommit: fbea2708aab06c19524583f7fbdf35e73274f657
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60515146"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70965779"
 ---
-# <a name="quickstart-use-the-bing-speech-recognition-rest-api"></a>Hızlı Başlangıç: Bing konuşma tanıma REST API'si kullanma
+# <a name="quickstart-use-the-bing-speech-recognition-rest-api"></a>Hızlı Başlangıç: Bing Konuşma tanımayı kullanın REST API
 
 [!INCLUDE [Deprecation note](../../../../includes/cognitive-services-bing-speech-api-deprecation-note.md)]
 
-Bulut tabanlı Bing konuşma hizmeti sayesinde konuşma kayıtlarını metne dönüştürmesine için REST API kullanarak uygulamalar geliştirebilirsiniz.
+Bulut tabanlı Bing Konuşma hizmetiyle, konuşma sesini metne dönüştürmek için REST API kullanarak uygulamalar geliştirebilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-### <a name="subscribe-to-the-speech-api-and-get-a-free-trial-subscription-key"></a>Konuşma tanıma API'si için abone olur ve ücretsiz deneme aboneliği anahtarını alma
+### <a name="subscribe-to-the-speech-api-and-get-a-free-trial-subscription-key"></a>Konuşma API 'sine abone olun ve ücretsiz deneme aboneliği anahtarı alın
 
-Konuşma tanıma API'si, Bilişsel hizmetler (daha önce Project Oxford) bir parçasıdır. Ücretsiz deneme aboneliği anahtarları alabilirsiniz [Bilişsel hizmetler abonelik](https://azure.microsoft.com/try/cognitive-services/) sayfası. Konuşma tanıma API'si belirledikten sonra seçin **API anahtarı alma** anahtarını almak için. Birincil ve ikincil anahtar döndürür. İki anahtarı kullanabilmeniz için her iki anahtarı aynı kotası bağlıdır.
+Konuşma API 'SI bilişsel hizmetler 'in (daha önce Project Oxford) bir parçasıdır. Bilişsel [Hizmetler aboneliği](https://azure.microsoft.com/try/cognitive-services/) sayfasından ücretsiz deneme aboneliği anahtarlarına sahip olabilirsiniz. Konuşma API 'sini seçtikten sonra anahtarı almak için **API anahtarı al** ' ı seçin. Birincil ve ikincil anahtar döndürür. Her iki anahtar de aynı kotaya bağlıdır, bu nedenle her iki anahtarı da kullanabilirsiniz.
 
 > [!IMPORTANT]
->* Bir abonelik anahtarı edinirler. REST API erişebilmeniz için önce olmalıdır bir [abonelik anahtarı](https://azure.microsoft.com/try/cognitive-services/).
+>* Abonelik anahtarı alın. REST API erişebilmeniz için önce bir [abonelik anahtarınız](https://azure.microsoft.com/try/cognitive-services/)olmalıdır.
 >
->* Abonelik anahtarınızı kullanın. Aşağıdaki REST örneklerinde YOUR_SUBSCRIPTION_KEY kendi abonelik anahtarı ile değiştirin.
+>* Abonelik anahtarınızı kullanın. Aşağıdaki REST örneklerinde, YOUR_SUBSCRIPTION_KEY değerini kendi abonelik anahtarınızla değiştirin.
 >
->* Başvurmak [kimlik doğrulaması](../how-to/how-to-authentication.md) sayfasını nasıl bir abonelik anahtarı edinirler.
+>* Abonelik anahtarı alma hakkında daha fazla [kimlik doğrulama](../how-to/how-to-authentication.md) sayfasına bakın.
 
-### <a name="prerecorded-audio-file"></a>Önceden kaydedilmiş bir ses dosyası
+### <a name="prerecorded-audio-file"></a>Önceden kaydedilmiş ses dosyası
 
-Bu örnekte, REST API'SİNİN nasıl kullanılacağı göstermek için kayıtlı bir ses dosyası kullanın. Kısa ifade belirten kendiniz bir ses dosyasını kaydedin. Örneğin, "Bugün gibi hava durumu nedir?" düşünelim. veya "izlemek için komik filmler bulun." Konuşma tanıma API'si, dış mikrofon giriş da destekler.
+Bu örnekte, REST API nasıl kullanacağınızı göstermek için kayıtlı bir ses dosyası kullanıyoruz. Kısa bir ifade söyleyen bir ses dosyasını kendiniz kaydedin. Örneğin, "bugün gibi hava durumu nedir?" deyin ya da "İzlenecek komik filmlerinizi bulun." Konuşma tanıma API 'SI, dış mikrofon girişini de destekler.
 
 > [!NOTE]
-> Örnek ilgili ses bir WAV dosyası olarak kaydedilir gerektirir **PCM tek kanal (tekli), 16 KHz**.
+> Örnek, sesin **PCM tek kanallı (mono), 16 kHz**Ile bir wav dosyası olarak kaydedilmesini gerektirir.
 
-## <a name="build-a-recognition-request-and-send-it-to-the-speech-recognition-service"></a>Derleme tanıma isteği ve konuşma tanıma Hizmeti'ne gönderin
+## <a name="build-a-recognition-request-and-send-it-to-the-speech-recognition-service"></a>Bir tanıma isteği oluşturun ve konuşma tanıma hizmetine gönderin
 
-Bir sonraki adımda konuşma tanıma, konuşma HTTP uç noktalarına uygun istek üstbilgi ve gövde ile bir POST isteği göndermektir.
+Konuşma tanıma için bir sonraki adım, uygun istek üst bilgisi ve gövdesi ile konuşma HTTP uç noktalarına bir POST isteği göndermektir.
 
 ### <a name="service-uri"></a>Hizmet URI'si
 
-URI tanımlanan konuşma tanıma hizmeti temel [tanıma modları](../concepts.md#recognition-modes) ve [tanıma diller](../concepts.md#recognition-languages):
+Konuşma tanıma hizmeti URI 'SI, [Tanıma modları](../concepts.md#recognition-modes) ve [tanıma dilleri](../concepts.md#recognition-languages)temel alınarak tanımlanmıştır:
 
 ```HTTP
 https://speech.platform.bing.com/speech/recognition/<RECOGNITION_MODE>/cognitiveservices/v1?language=<LANGUAGE_TAG>&format=<OUTPUT_FORMAT>
 ```
 
-`<RECOGNITION_MODE>` tanıma modunu belirtir ve aşağıdaki değerlerden biri olmalıdır: `interactive`, `conversation`, veya `dictation`. Bu bir URI gerekli kaynak yoludur. Daha fazla bilgi için [tanıma modları](../concepts.md#recognition-modes).
+`<RECOGNITION_MODE>`tanıma modunu belirtir ve aşağıdaki değerlerden biri olmalıdır: `interactive`, `conversation`, veya `dictation`. Bu, URI 'de gerekli bir kaynak yoludur. Daha fazla bilgi için bkz. [Tanıma modları](../concepts.md#recognition-modes).
 
-`<LANGUAGE_TAG>` Sorgu dizesinde gerekli bir parametredir. Ses dönüştürme için hedef dil tanımlar: Örneğin, `en-US` İngilizce (Amerika Birleşik Devletleri). Daha fazla bilgi için [tanıma diller](../concepts.md#recognition-languages).
+`<LANGUAGE_TAG>`Sorgu dizesinde gerekli bir parametredir. Ses dönüştürme için hedef dili tanımlar: Örneğin, `en-US` İngilizce (Birleşik Devletler). Daha fazla bilgi için bkz. [tanıma dilleri](../concepts.md#recognition-languages).
 
-`<OUTPUT_FORMAT>` Sorgu dizesinde isteğe bağlı bir parametredir. Kendi izin verilen değerler `simple` ve `detailed`. Varsayılan olarak, hizmet sonuçları döndürür. `simple` biçimi. Daha fazla bilgi için [çıkış biçimi](../concepts.md#output-format).
+`<OUTPUT_FORMAT>`Sorgu dizesinde isteğe bağlı bir parametredir. İzin verilen değerler ve `simple` ' `detailed`dir. Varsayılan olarak, hizmet sonuçları `simple` biçiminde döndürür. Daha fazla bilgi için bkz. [çıkış biçimi](../concepts.md#output-format).
 
-Hizmetin URI bazı örnekler aşağıdaki tabloda listelenmiştir.
+Hizmet URI 'lerinin bazı örnekleri aşağıdaki tabloda listelenmiştir.
 
 | Tanıma modu  | Dil | Çıkış biçimi | Hizmet URI'si |
 |---|---|---|---|
-| `interactive` | pt-BR | Varsayılan | https:\//speech.platform.bing.com/speech/recognition/interactive/cognitiveservices/v1?language=pt-BR |
-| `conversation` | en-US | Ayrıntılı | https:\//speech.platform.bing.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US & biçimi = ayrıntılı |
-| `dictation` | fr-FR | Basit | https:\//speech.platform.bing.com/speech/recognition/dictation/cognitiveservices/v1?language=fr-FR & biçimi basit = |
+| `interactive` | pt-BR | Varsayılan | https:\//Speech.platform.Bing.com/Speech/Recognition/interactive/cognitiveservices/v1?Language=pt-br |
+| `conversation` | en-US | Ayrıntılı | https:\//Speech.platform.Bing.com/Speech/Recognition/Conversation/cognitiveservices/v1?Language=en-US&Format=Detailed |
+| `dictation` | fr-FR | Basit | https:\//Speech.platform.Bing.com/Speech/Recognition/Dictation/cognitiveservices/v1?Language=fr-fr&Format=Simple |
 
 > [!NOTE]
-> Yalnızca uygulamanızın konuşma tanıma hizmeti çağırmak için REST API'leri kullanıyorsa, hizmet URI'si gereklidir. Aşağıdakilerden birini kullanırsanız [istemci kitaplıkları](GetStartedClientLibraries.md), genellikle bilmek hangi URI kullanılır gerekmez. İstemci kitaplıkları, yalnızca belirli bir istemci kitaplığı için geçerli olan farklı bir URI'leri, hizmet kullanıyor olabilir. Daha fazla bilgi için seçtiğiniz istemci kitaplığı bakın.
+> Hizmet URI 'SI yalnızca uygulamanız, konuşma tanıma hizmetini çağırmak için REST API 'Leri kullandığında gereklidir. [İstemci kitaplıklarından](GetStartedClientLibraries.md)birini kullanırsanız, genellıkle hangi URI 'nin kullanıldığını bilmeniz gerekmez. İstemci kitaplıkları yalnızca belirli bir istemci kitaplığı için geçerli olan farklı hizmet URI 'Leri kullanabilir. Daha fazla bilgi için, seçtiğiniz istemci kitaplığına bakın.
 
 ### <a name="request-headers"></a>İstek üst bilgileri
 
-Aşağıdaki alanlar, istek üstbilgisinde ayarlamanız gerekir:
+İstek üstbilgisinde aşağıdaki alanlar ayarlanmalıdır:
 
-- `Ocp-Apim-Subscription-Key`: Hizmete çağrı her zaman abonelik anahtarınızı geçmelidir `Ocp-Apim-Subscription-Key` başlığı. Konuşma hizmeti de yetkilendirmeyi destekler Abonelik anahtarları yerine belirteçler. Daha fazla bilgi için bkz. [Kimlik doğrulaması](../How-to/how-to-authentication.md).
-- `Content-type`: `Content-type` Alan biçimini ve ses akışı codec bileşenini açıklar. Şu anda yalnızca WAV dosyası ve PCM Mono 16000 kodlama desteklenir. Bu biçim içerik türü değeri `audio/wav; codec=audio/pcm; samplerate=16000`.
+- `Ocp-Apim-Subscription-Key`: Hizmeti her çağırdığınızda, abonelik anahtarınızı `Ocp-Apim-Subscription-Key` üstbilgiye geçirmeniz gerekir. Konuşma hizmeti, abonelik anahtarları yerine yetkilendirme belirteçlerinin geçirilmesini de destekler. Daha fazla bilgi için bkz. [Kimlik doğrulaması](../How-to/how-to-authentication.md).
+- `Content-type`: `Content-type` Alan, ses akışının biçimini ve codec 'ini tanımlar. Şu anda yalnızca WAV dosyası ve PCM mono 16000 kodlaması desteklenir. Bu biçim `audio/wav; codec=audio/pcm; samplerate=16000`için Content-Type değeri.
 
-`Transfer-Encoding` alanı isteğe bağlıdır. Bu alan ayarlamanız `chunked`, ses küçük öbeklere kesme. Daha fazla bilgi için [öbekli aktarım](../How-to/how-to-chunked-transfer.md).
+`Transfer-Encoding` alanı isteğe bağlıdır. Bu alanı olarak `chunked`ayarlarsanız, sesi küçük parçalara göre seçebilirsiniz. Daha fazla bilgi için bkz. [öbekli aktarım](../How-to/how-to-chunked-transfer.md).
 
-Bir örnek istek üstbilgisi aşağıda verilmiştir:
+Aşağıda bir örnek istek üst bilgisi verilmiştir:
 
 ```HTTP
 POST https://speech.platform.bing.com/speech/recognition/interactive/cognitiveservices/v1?language=en-US&format=detailed HTTP/1.1
@@ -94,12 +94,12 @@ Transfer-Encoding: chunked
 Expect: 100-continue
 ```
 
-### <a name="send-a-request-to-the-service"></a>Hizmetine bir istek gönderin
+### <a name="send-a-request-to-the-service"></a>Hizmete bir istek gönder
 
-Aşağıdaki örnek, konuşma REST Uç noktalara bir konuşma tanıma isteği göndermek nasıl gösterir. Kullandığı `interactive` tanıma modu.
+Aşağıdaki örnek, konuşma REST uç noktalarına bir konuşma tanıma isteğinin nasıl gönderileceğini gösterir. `interactive` Tanıma modunu kullanır.
 
 > [!NOTE]
-> Değiştirin `YOUR_AUDIO_FILE` ile önceden kaydedilmiş ses dosyanızın yolu. Değiştirin `YOUR_SUBSCRIPTION_KEY` kendi abonelik anahtarınızla.
+> Değiştirin `YOUR_AUDIO_FILE` ile önceden kaydedilmiş ses dosyanızın yolu. Kendi `YOUR_SUBSCRIPTION_KEY` abonelik anahtarınızla değiştirin.
 
 # <a name="powershelltabazure-powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -125,12 +125,12 @@ $RecoResponse
 
 ```
 
-# <a name="curltabcurl"></a>[Curl](#tab/curl)
+# <a name="curltabcurl"></a>[kıvr](#tab/curl)
 
-Bu örnek, Linux üzerinde bash ile curl kullanır. Platformunuzda bulunan kullanılabilir durumda değilse, curl yüklemeniz gerekebilir. Örnek, Windows, Git Bash, zsh ve diğer Kabukları Cygwin üzerinde de çalışır.
+Örnek, Bash ile Linux 'ta kıvrımlı kullanır. Platformda yoksa, kıvrımlı yüklemeniz gerekebilir. Örnek ayrıca Windows, git Bash, ZSH ve diğer kabukların Cygwin üzerinde de kullanılabilir.
 
 > [!NOTE]
-> Tutun `@` değiştirilirken ses dosya adından önce `YOUR_AUDIO_FILE` , önceden kaydedilmiş bir ses dosyası için yol olarak belirtir değerini `--data-binary` veri yerine bir dosya adı.
+> Değerin veri yerine bir dosya adı olduğunu `YOUR_AUDIO_FILE` `@` `--data-binary` gösterdiği için, önceden kaydedilmiş ses dosyasının yolunu ile değiştirirken ses dosyasının adından önce bırakın.
 
 ```
 curl -v -X POST "https://speech.platform.bing.com/speech/recognition/interactive/cognitiveservices/v1?language=en-us&format=detailed" -H "Transfer-Encoding: chunked" -H "Ocp-Apim-Subscription-Key: YOUR_SUBSCRIPTION_KEY" -H "Content-type: audio/wav; codec=audio/pcm; samplerate=16000" --data-binary @YOUR_AUDIO_FILE
@@ -176,14 +176,14 @@ using (FileStream fs = new FileStream(YOUR_AUDIO_FILE, FileMode.Open, FileAccess
 
 ---
 
-## <a name="process-the-speech-recognition-response"></a>Konuşma tanıma yanıtı işlemi
+## <a name="process-the-speech-recognition-response"></a>Konuşma tanıma yanıtını işleme
 
-İstek işlendikten sonra konuşma tanıma hizmeti sonuçları bir yanıt olarak JSON biçiminde döndürür.
+İstek işlendikten sonra, konuşma hizmeti yanıtları JSON biçiminde bir yanıt olarak döndürür.
 
 > [!NOTE]
-> Önceki kod bir hata verirse bakın [sorun giderme](../troubleshooting.md) olası nedenini bulmak için.
+> Önceki kod bir hata döndürürse, olası nedeni bulmak için bkz. [sorun giderme](../troubleshooting.md) .
 
-Aşağıdaki kod parçacığı yanıt akıştan nasıl edinebilirsiniz örneği gösterilmektedir.
+Aşağıdaki kod parçacığı, akıştan yanıtı nasıl okuyakullanabileceğinizi gösteren bir örnek gösterir.
 
 # <a name="powershelltabazure-powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -192,9 +192,9 @@ Aşağıdaki kod parçacığı yanıt akıştan nasıl edinebilirsiniz örneği 
 ConvertTo-Json $RecoResponse
 ```
 
-# <a name="curltabcurl"></a>[Curl](#tab/curl)
+# <a name="curltabcurl"></a>[kıvr](#tab/curl)
 
-Bu örnekte, curl doğrudan yanıt iletisini dize döndürür. JSON biçiminde göstermek istiyorsanız, ek araçlar, örneğin, jq kullanabilirsiniz.
+Bu örnekte, doğrudan kıvrımlı yanıt iletisini bir dizedeki geri döndürür. Bunu JSON biçiminde göstermek istiyorsanız, ek araçlar (örneğin, JQ) kullanabilirsiniz.
 
 ```
 curl -X POST "https://speech.platform.bing.com/speech/recognition/interactive/cognitiveservices/v1?language=en-us&format=detailed" -H "Transfer-Encoding: chunked" -H "Ocp-Apim-Subscription-Key: YOUR_SUBSCRIPTION_KEY" -H "Content-type: audio/wav; codec=audio/pcm; samplerate=16000" --data-binary @YOUR_AUDIO_FILE | jq
@@ -223,7 +223,7 @@ using (WebResponse response = request.GetResponse())
 
 ---
 
-Aşağıdaki örnek bir JSON yanıtı verilmiştir:
+Aşağıdaki örnek bir JSON yanıtdır:
 
 ```json
 OK
@@ -243,19 +243,19 @@ OK
 
 ## <a name="limitations"></a>Sınırlamalar
 
-REST API, bazı sınırlamalara sahiptir:
+REST API bazı sınırlamalar vardır:
 
-- Bu, yalnızca 15 saniye kadar ses akışı destekler.
-- Bunu Ara sonuçlar sırasında tanıma desteklemiyor. Kullanıcılar yalnızca son tanıma işleminin sonucu alır.
+- Yalnızca 15 saniyeye kadar ses akışını destekler.
+- Tanıma sırasında ara sonuçları desteklemez. Kullanıcılar yalnızca son tanıma sonucunu alır.
 
-Bu kısıtlamaları kaldırmak için konuşma özelliklerinden yararlanın [istemci kitaplıkları](GetStartedClientLibraries.md). Veya doğrudan çalışabileceğiniz [konuşma WebSocket Protokolü](../API-Reference-REST/websocketprotocol.md).
+Bu sınırlamaları kaldırmak için konuşma [istemci kitaplıklarını](GetStartedClientLibraries.md)kullanın. Ya da [konuşma WebSocket protokolü](../API-Reference-REST/websocketprotocol.md)ile doğrudan çalışabilirsiniz.
 
 ## <a name="whats-next"></a>Sırada ne var?
 
-- C#, Java, vb. REST API kullanma hakkında bilgi için bkz: [örnek uygulamalar](../samples.md).
-- Bulun ve hataları düzeltmek için bkz: [sorun giderme](../troubleshooting.md).
-- Daha gelişmiş özellikleri kullanmak için nasıl konuşma kullanarak başlamak bkz. [istemci kitaplıkları](GetStartedClientLibraries.md).
+- Java, vb. ' de C#REST API kullanmayı öğrenmek için, bu [örnek uygulamalara](../samples.md)bakın.
+- Hataları bulmak ve gidermek için bkz. [sorun giderme](../troubleshooting.md).
+- Daha gelişmiş özellikler kullanmak için bkz. konuşma [istemci kitaplıklarını](GetStartedClientLibraries.md)kullanarak çalışmaya başlama.
 
 ### <a name="license"></a>Lisans
 
-Tüm Bilişsel Hizmetleri SDK'lar ve örnekler MIT lisansı ile birlikte lisanslanır. Daha fazla bilgi için [lisans](https://github.com/Microsoft/Cognitive-Speech-STT-JavaScript/blob/master/LICENSE.md).
+Tüm bilişsel hizmetler SDK 'Ları ve örnekleri, MıT lisansıyla lisanslanır. Daha fazla bilgi için bkz. [Lisans](https://github.com/Microsoft/Cognitive-Speech-STT-JavaScript/blob/master/LICENSE.md).

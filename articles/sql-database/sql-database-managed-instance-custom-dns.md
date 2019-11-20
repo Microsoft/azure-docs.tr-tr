@@ -1,6 +1,6 @@
 ---
-title: Azure SQL veritabanı yönetilen örneği özel DNS | Microsoft Docs
-description: Bu konuda, bir Azure SQL veritabanı yönetilen örneği ile özel bir DNS yapılandırma seçenekleri açıklanmaktadır.
+title: Yönetilen örnek özel DNS
+description: Bu konu, Azure SQL veritabanı yönetilen örneği ile özel bir DNS için yapılandırma seçeneklerini açıklamaktadır.
 services: sql-database
 ms.service: sql-database
 ms.subservice: managed-instance
@@ -10,42 +10,28 @@ ms.topic: conceptual
 author: srdan-bozovic-msft
 ms.author: srbozovi
 ms.reviewer: sstein, bonova, carlrab
-manager: craigg
-ms.date: 12/13/2018
-ms.openlocfilehash: bb5890b883b6062d834b928bff28a26a3664fb64
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 07/17/2019
+ms.openlocfilehash: 3161d931c6e912c05c595db7f3c790da454dd5ed
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60700438"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73823349"
 ---
-# <a name="configuring-a-custom-dns-for-azure-sql-database-managed-instance"></a>Özel DNS yapılandırma için Azure SQL veritabanı yönetilen örneği
+# <a name="configuring-a-custom-dns-for-azure-sql-database-managed-instance"></a>Azure SQL veritabanı yönetilen örneği için özel DNS yapılandırma
 
-Azure SQL veritabanı yönetilen örneği, bir Azure dağıtılmalıdır [sanal ağ (VNet)](../virtual-network/virtual-networks-overview.md). Yönetilen örnek çözülmesi özel konak adlarını gerektiren birkaç senaryo vardır (örneğin, db posta, Bulut veya karma ortamınızdaki diğer SQL örneklerine bağlı sunucular). Bu durumda, Azure içinde özel bir DNS yapılandırmanız gerekir. Yönetilen örneği için kendi iç işleyişini aynı DNS kullandığından, sanal ağ DNS yapılandırmasını yönetilen örneği ile uyumlu olması gerekir.
+Azure SQL veritabanı yönetilen örneği bir Azure [sanal ağı (VNet)](../virtual-network/virtual-networks-overview.md)içinde dağıtılmalıdır. Yönetilen örnekten özel ana bilgisayar adlarının çözümlenemesinin gerekli olduğu birkaç senaryo (örneğin, DB posta, bağlı sunucular, bulut veya karma ortamınızdaki diğer SQL örneklerine) vardır. Bu durumda, Azure içinde özel bir DNS yapılandırmanız gerekir. 
 
-   > [!IMPORTANT]
-   > Özel DNS bölgenizdeki olsalar bile her zaman posta sunucuları, SQL sunucuları ve diğer hizmetler için tam etki alanı adlarını (FQDN) kullanın. Örneğin `smtp.contoso.com` posta sunucusu için olduğundan basit `smtp` düzgün şekilde çözümlenen olmayacaktır.
+Yönetilen örnek, iç işleyişi için aynı DNS 'yi kullandığından, özel DNS sunucusunu ortak etki alanı adlarını çözümleyebilecek şekilde yapılandırın.
 
-Özel bir DNS yapılandırmasını yapmak için yönetilen örneği ile uyumludur, şunları yapmanız gerekir:
+> [!IMPORTANT]
+> Her zaman posta sunucusu için tam etki alanı adı (FQDN), SQL Server örneği ve diğer hizmetler için, özel DNS bölgeniz içinde olsalar bile kullanın. Örneğin, `smtp` doğru çözümleyemeyeceği için posta sunucunuz için `smtp.contoso.com` kullanın. Aynı sanal ağ içinde SQL VM 'lerine bağlı sunucu veya çoğaltma oluşturmak için Ayrıca bir FQDN ve varsayılan DNS soneki gerekir. Örneğin, `SQLVM.internal.cloudapp.net`. Daha fazla bilgi için, bkz. [kendı DNS sunucunuzu kullanan ad çözümlemesi](https://docs.microsoft.com/azure/virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances#name-resolution-that-uses-your-own-dns-server).
 
-- Genel etki alanı adlarını çözümlemek için bu nedenle özel DNS sunucusunu yapılandırma
-- Sanal ağ DNS listesinin sonuna 168.63.129.16 Azure özyinelemeli çözümleyici DNS IP adresi yerleştirin
-
-## <a name="setting-up-custom-dns-servers-configuration"></a>Özel DNS sunucuları yapılandırma ayarlama
-
-1. Azure portalında sanal ağınızdaki özel DNS seçeneği bulun.
-
-   ![Özel dns seçeneği](./media/sql-database-managed-instance-custom-dns/custom-dns-option.png)
-
-2. Özel anahtar ve özel DNS sunucusu IP adresinizi ve bunun yanı sıra Azure'nın yinelemeli Çözümleyicileri IP adresi 168.63.129.16 girin.
-
-   ![Özel dns seçeneği](./media/sql-database-managed-instance-custom-dns/custom-dns-server-ip-address.png)
-
-   > [!IMPORTANT]
-   > Azure'nın yinelemeli çözümleyici DNS listesinde ayarlanmaması, herhangi bir nedenden dolayı özel DNS sunucuları kullanılamaz bir hatalı durumuna geçilmesidir yönetilen örneğe neden olabilir. Gelen durum yeni bir örneğini bir sanal ağ ile uyumlu ağ ilkeleri oluşturmanıza olanak gerektirebilir kurtarma, örnek düzeyinde veri oluşturun ve veritabanlarınızı geri yüklemek. Tüm özel DNS sunucuları bile başarısız olursa, DNS listedeki son girişi sağlar olarak Azure'nın yinelemeli çözümleyici ayarlama, ortak adları hala çözülebilir.
+> [!IMPORTANT]
+> Sanal ağ DNS sunucularının güncelleştirilmesi, yönetilen örneği hemen etkilemez. Yönetilen örnek DNS yapılandırması, DHCP kiralama süresi dolduktan sonra veya platform upgarade sonrasında, hangisi önce gerçekleşirse güncellenir. **Kullanıcıların, ilk yönetilen örneğini oluşturmadan önce sanal ağ DNS yapılandırmalarını ayarlaması önerilir.**
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Genel bakış için bkz. [yönetilen örnek nedir](sql-database-managed-instance.md)
-- Yeni bir yönetilen örneğin nasıl oluşturulacağını gösteren bir öğretici için bkz [bir yönetilen örnek oluşturma](sql-database-managed-instance-get-started.md).
-- Bir yönetilen örnek için bir VNet yapılandırma hakkında daha fazla bilgi için bkz: [yönetilen örnekleri için sanal ağ yapılandırması](sql-database-managed-instance-connectivity-architecture.md)
+- Genel bakış için bkz. [yönetilen örnek nedir?](sql-database-managed-instance.md)
+- Yeni bir yönetilen örnek oluşturma hakkında bir öğretici için bkz. [yönetilen örnek oluşturma](sql-database-managed-instance-get-started.md).
+- Bir sanal ağı yönetilen bir örnek için yapılandırma hakkında bilgi için bkz. [yönetilen örnekler Için VNET yapılandırması](sql-database-managed-instance-connectivity-architecture.md)

@@ -1,52 +1,51 @@
 ---
-title: El ile yüklemek veya Azure işlevleri bağlama uzantıları güncelleştirme
-description: Yükleme veya dağıtılmış bir işlev uygulamaları için Azure işlevleri bağlama uzantıları güncelleştirme öğrenin.
+title: Azure Işlevleri bağlama uzantılarını el ile yükler veya güncelleştirir
+description: Dağıtılan işlev uygulamaları için Azure Işlevleri bağlama uzantılarını yüklemeyi veya güncelleştirmeyi öğrenin.
 services: functions
 documentationcenter: na
 author: ggailey777
 manager: jeconnoc
-keywords: Azure işlevleri, İşlevler, bağlama uzantıları, NuGet, güncelleştirmeleri
+keywords: Azure işlevleri, işlevler, bağlama uzantıları, NuGet, güncelleştirmeler
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: reference
 ms.date: 09/26/2018
 ms.author: glenga
-ms.openlocfilehash: cda977ba59070c3ddaac05784277d6c0b5109f0f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7686a9b2df6df6b54851e9c9957186f76be3fafd
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61035769"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70085065"
 ---
-# <a name="manually-install-or-update-azure-functions-binding-extensions-from-the-portal"></a>El ile yüklemek veya portaldan Azure işlevleri bağlama uzantıları güncelleştirme
+# <a name="manually-install-or-update-azure-functions-binding-extensions-from-the-portal"></a>Portaldan Azure Işlevleri bağlama uzantılarını el ile yüklemeyi veya güncelleştirmeyi güncelleştirme
 
-Azure işlevleri sürüm 2.x çalışma zamanı, tetikleyiciler ve bağlamalar için kod uygulamak için bağlama uzantıları kullanır. Bağlama uzantıları NuGet paketleri içinde sağlanır. Bir uzantıyı kaydetmek için aslında bir paketini yükleyin. İşlevler geliştirme, bağlama uzantıları yükleme yolu geliştirme ortamınıza bağlıdır. Daha fazla bilgi için [kaydetme bağlama uzantıları](./functions-bindings-register.md) Tetikleyicileri ve bağlamaları makalesi.
+Azure Işlevleri sürüm 2. x çalışma zamanı, Tetikleyiciler ve bağlamalar için kod uygulamak üzere bağlama uzantıları kullanır. Bağlama uzantıları NuGet paketlerinde sağlanır. Bir uzantıyı kaydetmek için aslında bir paket yüklersiniz. İşlevleri geliştirirken, bağlama uzantılarını yüklediğiniz yol geliştirme ortamına bağlıdır. Daha fazla bilgi için bkz. Tetikleyiciler ve bağlamalar için [bağlama uzantılarını kaydetme](./functions-bindings-register.md) makalesi.
 
-Bazen el ile yüklemek veya Azure portalında bağlama uzantılarınızı güncelleştirmek gerekir. Örneğin, kayıtlı bir bağlama yeni bir sürüme güncelleştirmeniz gerekebilir. Ayrıca de yüklenemez, desteklenen bir bağlama kaydetmeniz gerekebilir **tümleştir** portalında sekmesi.
+Bazen Azure portal bağlama uzantılarınızı el ile yüklemeniz veya güncelleştirmeniz gerekir. Örneğin, kayıtlı bir bağlamayı daha yeni bir sürüme güncelleştirmeniz gerekebilir. Ayrıca, portaldaki **tümleştir** sekmesine yüklenebilen desteklenen bir bağlamayı kaydetmeniz gerekebilir.
 
-## <a name="install-a-binding-extension"></a>Bir bağlama uzantısını yükle
+## <a name="install-a-binding-extension"></a>Bağlama uzantısı yükler
 
-El ile yüklemek veya portalından Uzantıları'nı güncelleştirmek için aşağıdaki adımları kullanın.
+Uzantıları portala el ile yüklemek veya güncelleştirmek için aşağıdaki adımları kullanın.
 
-1. İçinde [Azure portalında](https://portal.azure.com), işlev uygulamanızı bulun ve seçin. Seçin **genel bakış** sekmenize **Durdur**.  Böylece değişiklik yapılabilmesi için işlev uygulaması durduruluyor dosyaları kilidini açar.
+1. [Azure Portal](https://portal.azure.com), işlev uygulamanızı bulun ve seçin. **Genel bakış** sekmesini seçin ve **Durdur**' u seçin.  İşlev uygulamasının durdurulması, değişikliklerin yapılabilmesi için dosyaların kilidini açar.
 
-1. Seçin **Platform özellikleri** sekmesi altında **geliştirme araçları** seçin **Gelişmiş araçlar (Kudu)** . Kudu uç noktası (`https://<APP_NAME>.scm.azurewebsites.net/`) yeni bir pencerede açılır.
+1. **Platform özellikleri** sekmesini seçin ve **geliştirme araçları** altında **Gelişmiş araçlar (kudu)** öğesini seçin. Kudu uç noktası (`https://<APP_NAME>.scm.azurewebsites.net/`) yeni bir pencerede açılır.
 
-1. Kudu penceresinde **hata ayıklama konsoluna** > **CMD**.  
+1. Kudu penceresinde **Hata Ayıkla konsol** > **cmd**' yi seçin.  
 
-1. Komut penceresinde gidin `D:\home\site\wwwroot` ve Sil simgesini seçin `bin` klasörü silinemedi. Seçin **Tamam** silme işlemini onaylamak için.
+1. Komut penceresinde öğesine `D:\home\site\wwwroot` gidin ve klasörü silmek `bin` için yanındaki Sil simgesini seçin. Silmeyi onaylamak için **Tamam ' ı** seçin.
 
-1. Düzenleme simgesini seçin `extensions.csproj` işlev uygulamasına bağlama uzantıları tanımlayan dosya. Proje dosyası çevrimiçi düzenleyicisinde açılır.
+1. `extensions.csproj` Dosyanın yanında, işlev uygulaması için bağlama uzantılarını tanımlayan Düzenle simgesini seçin. Proje dosyası çevrimiçi düzenleyicide açılır.
 
-1. Gereken eklemeleri ve güncelleştirmeleri **PackageReference** öğeler **ItemGroup**, ardından **Kaydet**. Geçerli desteklenen paket sürümleri listesini bulunabilir [paketleri yapmam gerekir mi?](https://github.com/Azure/azure-functions-host/wiki/Updating-your-function-app-extensions#what-nuget-packages-do-i-need) wiki makalesi. Üç tüm Azure depolama bağlamaları Microsoft.Azure.WebJobs.Extensions.Storage paketi gerektirir.
+1. **ItemGroup**Içinde, **packagereference** öğelerinin gerekli eklemelerini ve güncelleştirmelerini yapıp **Kaydet**' i seçin. Desteklenen paket sürümlerinin geçerli listesi, [hangi paketlere](https://github.com/Azure/azure-functions-host/wiki/Updating-your-function-app-extensions#what-nuget-packages-do-i-need) ihtiyacım var? wiki makalesinde bulunabilir. Üç Azure depolama bağlaması da Microsoft. Azure. WebJobs. Extensions. Storage paketini gerektirir.
 
-1. Gelen `wwwroot` başvurulan derlemelerde yeniden oluşturmak için aşağıdaki komutu çalıştırın, klasör `bin` klasör.
+1. Klasörde, başvurulan derlemeleri `bin` yeniden derlemek için aşağıdaki komutu çalıştırın. `wwwroot`
 
     ```cmd
     dotnet build extensions.csproj -o bin --no-incremental --packages D:\home\.nuget
     ```
 
-1. Geri **genel bakış** sekmesini Portalı'nda, **Başlat** işlev uygulamasını yeniden başlatmak için.
+1. Portalda **genel bakış** sekmesine döndüğünüzde, işlev uygulamasını yeniden başlatmak için **Başlat** ' ı seçin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

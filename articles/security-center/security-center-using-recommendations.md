@@ -1,80 +1,79 @@
 ---
-title: Güvenliği artırmak için Azure Güvenlik Merkezi'ni kullanarak önerileri | Microsoft Docs
-description: " Güvenlik ilkeleri ve öneriler, Azure Güvenlik Merkezi'nde güvenlik saldırısını önlemeye yardımcı olmak için kullanmayı öğrenin. "
+title: Güvenliği geliştirmek için Azure Güvenlik Merkezi önerilerini kullanma | Microsoft Docs
+description: " Güvenlik saldırısını azaltmaya yardımcı olması için Azure Güvenlik Merkezi 'nde güvenlik ilkeleri ve önerilerini nasıl kullanacağınızı öğrenin. "
 services: security-center
 documentationcenter: na
-author: monhaber
-manager: barbkess
-editor: ''
+author: memildin
+manager: rkarlin
 ms.assetid: ''
 ms.service: security-center
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 3/26/2019
-ms.author: v-mohabe
-ms.openlocfilehash: 60bb1c3b81ef990993a2ce659a2b189c9d8a0eba
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/22/2019
+ms.author: memildin
+ms.openlocfilehash: 69fa9d24d24c26a7d945c27e86739475f9883b27
+ms.sourcegitcommit: 8a717170b04df64bd1ddd521e899ac7749627350
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65967979"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71200688"
 ---
-# <a name="use-azure-security-center-recommendations-to-enhance-security"></a>Güvenliği artırmak için Azure Güvenlik Merkezi'ni kullanarak önerileri
-Güvenlik İlkesi yapılandırma ve sonra Azure Güvenlik Merkezi tarafından sağlanan öneriler uygulayarak bir önemli güvenlik olayı olasılığını azaltabilirsiniz. Bu makalede güvenlik ilkeleri ve öneriler Güvenlik Merkezi'nde güvenlik saldırısını önlemeye yardımcı olmak için nasıl kullanılacağını gösterir. 
+# <a name="use-azure-security-center-recommendations-to-enhance-security"></a>Güvenliği geliştirmek için Azure Güvenlik Merkezi önerilerini kullanın
+Bir güvenlik ilkesi yapılandırarak ve ardından Azure Güvenlik Merkezi tarafından sunulan önerileri uygulayarak önemli bir güvenlik olayı olasılığını azaltabilirsiniz. Bu makalede bir güvenlik saldırısını azaltmaya yardımcı olmak için Güvenlik Merkezi 'nde güvenlik ilkelerinin ve önerilerin nasıl kullanılacağı gösterilmektedir. 
 
-Güvenlik Merkezi, Azure kaynaklarınızın güvenlik durumunu analiz etmek için sürekli taramaları otomatik olarak çalıştırılır. Güvenlik Merkezi olası güvenlik açıklarını belirlediğinde, gerekli güvenlik denetimlerin yapılandırılması işlemi boyunca size rehberlik öneriler oluşturur. Güvenlik Merkezi önerilerini, aşağıdaki istisnalarla birlikte 24 saat içinde güncelleştirir:
+Güvenlik Merkezi, Azure kaynaklarınızın güvenlik durumunu çözümlemek için sürekli taramaları otomatik olarak çalıştırır. Güvenlik Merkezi olası güvenlik açıklarını belirlediğinde, gerekli güvenlik denetimlerini yapılandırma sürecinde size kılavuzluk eden öneriler oluşturur. Güvenlik Merkezi, önerilerini 24 saat içinde, aşağıdaki özel durumlarla güncelleştirir:
 
-- İşletim sistemi güvenlik yapılandırması önerileri 48 saat içinde güncelleştirilir.
-- Endpoint Protection sorunlarını önerileri 8 saat içinde güncelleştirilir.
+- İşletim sistemi güvenlik yapılandırması önerileri 48 saat içinde güncelleştirilir
+- Endpoint Protection sorunları önerileri 8 saat içinde güncelleştirilir
 
 ## <a name="scenario"></a>Senaryo
-Bu senaryo izleme Güvenlik Merkezi önerileri ve eylemi gerçekleştirmeden bir güvenlik olayı olasılığını azaltmaya yardımcı olmak için Güvenlik Merkezi'ni kullanmayı gösterir. Senaryo adlı kurgusal şirketin, Contoso ve Güvenlik Merkezi tarafından sunulan rollerini kullanır [planlama ve işlemler Kılavuzu](security-center-planning-and-operations-guide.md#security-roles-and-access-controls). Bu senaryoda, biz aşağıdaki kişilerin rollerine odaklandığınız:
+Bu senaryo, güvenlik merkezi önerilerini izleyerek ve işlem yaparak bir güvenlik olayının olasılığını azaltmaya yardımcı olmak için Güvenlik Merkezi 'ni nasıl kullanacağınızı gösterir. Senaryo, Güvenlik Merkezi [planlama ve işlemler kılavuzunda](security-center-planning-and-operations-guide.md#security-roles-and-access-controls)sunulan kurgusal Şirket, contoso ve rolleri kullanır. Bu senaryoda, aşağıdaki kişilerin rollerine odaklanıyoruz:
 
 ![Senaryo rolleri](./media/security-center-using-recommendations/scenario-roles.png)
 
-Contoso kısa süre önce şirket içi kaynaklarından bazılarını Azure'a taşımıştır. Contoso, kendi kaynaklarını koruyabilir ve bulut kaynaklarından bazılarını güvenlik açığını azaltmak istemektedir.
+Contoso yakın zamanda şirket içi kaynaklarından bazılarını Azure 'a geçirmiştir. Contoso, kaynaklarını korumak ve buluttaki kaynaklarından gelen güvenlik açıklarını azaltmak istiyor.
 
 ## <a name="use-azure-security-center"></a>Azure Güvenlik Merkezi’ni kullanma
-David, şubeden BT güvenlik kullanıcının, yerleşik Güvenlik Merkezi önleme ve güvenlik açıklarını algılama için Azure Güvenlik Merkezi'ne Contoso'nun Aboneliklerde zaten seçmiştir. 
+Contoso BT güvenliği 'nin sunduğu David, güvenlik açıklarını engellemek ve algılamak için Contoso 'nun Azure Güvenlik Merkezi aboneliklerine Güvenlik Merkezi 'ni eklemek üzere zaten seçilmiş. 
 
-Güvenlik Merkezi otomatik olarak Contoso'nun Azure kaynaklarınızın güvenlik durumunu analiz eder ve varsayılan güvenlik ilkelerini uygular. Güvenlik Merkezi olası güvenlik açıklarını belirlediğinde, oluşturduğu **önerileri** güvenlik ilkesi ayarlayın denetimleri göre. 
+Güvenlik Merkezi, contoso 'nun Azure kaynaklarının güvenlik durumunu otomatik olarak analiz eder ve varsayılan güvenlik ilkelerini uygular. Güvenlik Merkezi olası güvenlik açıklarını belirlediğinde, güvenlik ilkesinde ayarlanan denetimlere göre **öneriler** oluşturur. 
 
-David, Azure güvenlik standart katmanı, önerileri ve güvenlik özellikleri içeren tam paketini almak için tüm kendi abonelikler arasında çalışır. Ayrıca tüm kendi mevcut şirket içi kendisinin Güvenlik Merkezi'nin karma yararlanabilir, böylece buluta henüz geçirilmeyen sunucuları ekleme desteği HIS arasında Jeff [Windows](quick-onboard-windows-computer.md) ve [Linux](quick-onboard-linux-computer.md) sunucuları.
+David, sunulan tüm öneriler ve güvenlik özellikleri paketini almak için tüm aboneliklerinde Azure Güvenlik standardı katmanını çalıştırır. Jeff Ayrıca, [Windows](quick-onboard-windows-computer.md) ve [Linux](quick-onboard-linux-computer.md) sunucularında Güvenlik Merkezi 'nin karma desteğinden yararlanmasını sağlamak için henüz buluta geçirmemiş olan mevcut şirket içi sunucuların tümünü de onpanolar.
 
-Jeff, bir bulut iş yükü sahibi değil. Jeff, Contoso'nun güvenlik ilkelerine uygun güvenlik denetimleri uygulamak için sorumludur. 
+Jeff, bir bulut iş yükü sahibidir. Jeff, contoso güvenlik ilkelerine uygun olarak güvenlik denetimlerini uygulamaktan sorumludur. 
 
 Jeff aşağıdaki görevleri gerçekleştirir:
 
-- Güvenlik Merkezi tarafından sağlanan güvenlik önerilerini izleyin
-- Güvenlik önerileri değerlendirin ve o uygulama kapatmak veya seçemeyeceğini
-- Güvenlik önerilerini uygulama
+- Güvenlik Merkezi tarafından sunulan güvenlik önerilerini izleme
+- Güvenlik önerilerini değerlendirin ve önerileri uygulayıp uygulamamaları veya kapatmak için karar verin.
+- Güvenlik önerilerini Uygula
 
-### <a name="remediate-threats-using-recommendations"></a>Öneriler kullanarak tehditleri gidermeleri
-Jeff, kendi günlük izleme etkinliklerin bir parçası olarak Azure'a açar ve Güvenlik Merkezi açılır. 
+### <a name="remediate-threats-using-recommendations"></a>Önerileri kullanarak tehditleri düzeltin
+Günlük izleme etkinliklerinin bir parçası olarak, Jeff Azure 'da oturum açar ve Güvenlik Merkezi 'ni açar. 
 
-1. Jeff, kendi iş yükünün abonelikleri seçer.
+1. Jeff, iş yükünün aboneliklerini seçer.
 
-2. Jeff denetler HIS **puanı güvenli** almak için genel bir resim nasıl güvenli abonelikleri olan ve kendi puanı 548 olup olmadığını görür.
+2. Jeff, aboneliklerin ne kadar güvenli olduğunu gösteren genel bir bakış elde etmek için **güvenli puanı** denetler ve puanın 548 olduğunu görür.
 
-3. Jeff ilk işlemek için hangi önerilerin karar vermeniz gerekir. Jeff güvenli puanı tıklar ve önerileri ne kadar himself artırır üzerinde işlemeye başlar bu nedenle [puanı etkisi güvenli](security-center-secure-score.md).
+3. Jeff, ilk olarak hangi önerilerin işleneceğini belirlemek için gerekir. Jeff, güvenli puan ' i tıklatır ve [güvenli puan etkisini](security-center-secure-score.md)ne kadar geliştirdiğine göre önerileri işlemeye başlar.
 
-4. Jeff bağlı Vm'leri ve sunuculardan çok sayıda olduğundan, Jeff odaklanmak karar **işlem ve uygulamaları**.
+4. Jeff, çok sayıda bağlı VM ve sunucu içerdiğinden, Jeff **işlem ve uygulamalara**odaklanmaya karar verir.
 
-5. Jeff tıkladığında **işlem ve uygulamaları**, kendisinin öneriler listesini görür ve onları güvenli göre işler puan etkisi.
+5. Jeff, **işlem ve uygulamaları**tıklattığında, önerilerin bir listesini görür ve bunları güvenli Puanlama etkisine göre işler.
 
-6. Jeff Vm'lere birçok Internet'e vardır ve bağlantı noktalarının açık olduğundan, kendisinin kaygılı bir saldırgan sunucular üzerinde denetim geçirebilir. Jeff seçti şekilde (**tam zamanında VM erişimi**) [güvenlik-center-just-içinde-time.md].
+6. Jeff, Internet 'e yönelik çok sayıda sanal makineye sahiptir ve bağlantı noktaları kullanıma sunulduğundan, bir saldırganın sunucular üzerinde denetim kazanmasını sağlayacağından endişelenirler. Bu nedenle Jeff (**tam ZAMANıNDA VM erişimi**) [Security-Center-Just-in-time.MD] kullanmayı seçer.
 
-Jeff, Orta öncelikli öneriler ve yüksek öncelikli geçmeye devam eder ve mantığınız kararlarını verir. Güvenlik Merkezi tarafından ın hangi kaynakların etkilendiğini anlamak için ne güvenli puanı etkisi olması koşuluyla, hangi her öneri anlamına gelir ve düzeltme adımları nasıl her sorunu gidermek için her bir öneri Jeff ayrıntılı bilgilerine bakar.
+Jeff, yüksek öncelikli ve orta öncelikli önerilere ilerlemeye devam eder ve uygulama üzerinde kararlar verir. Her öneri için, Jeff, Güvenlik Merkezi tarafından hangi kaynakların etkilendiğini, ne kadar güvenli puanı etkilediğini, her bir önerinin ne anlama geldiğini, her bir sorunun nasıl azaltılacağını gösteren düzeltme adımlarını anlamak için sunulan ayrıntılı bilgilere bakar.
 
 ## <a name="conclusion"></a>Sonuç
-Güvenlik Merkezi'nde öneriler izleme, bir saldırı gerçekleşmeden önce güvenlik açıklarını ortadan kaldırmanıza yardımcı olur. Düzeltme önerileri, güvenli, Puanlama ve iş yüklerinizi güvenlik duruşunu geliştirin. Güvenlik Merkezi, dağıtma, güvenlik ilkeniz göre bunları değerlendirir ve bunların güvenliğini sağlamak için yeni öneriler yeni kaynaklar otomatik olarak bulur.
+Güvenlik Merkezi 'ndeki izleme önerileri, bir saldırı gerçekleşmeden önce güvenlik açıklarını ortadan kaldırmanıza yardımcı olur. Önerileri düzelttireceğiniz zaman, güvenli puanınızın ve iş yüklerinizin güvenlik sonrası güvenliğini iyileştirmenize neden olacak. Güvenlik Merkezi, dağıttığınız yeni kaynakları otomatik olarak bulur, güvenlik ilkenize göre değerlendirir ve bunların güvenliğini sağlamak için yeni öneriler sağlar.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Böylece zaman içinde kaynaklarınızın güvenliğini emin olun, düzenli olarak Güvenlik Merkezi önerileri kontrol yerinde izleme işlemi olduğundan emin olun.
+Kaynaklarınızın zaman içinde güvende tutulmasına emin olmak için Güvenlik Merkezi 'ndeki önerileri düzenli olarak kontrol ettiğiniz bir izleme sürecinizde olduğundan emin olun.
 
-Bu senaryoda güvenlik ilkeleri ve öneriler Güvenlik Merkezi'nde güvenlik saldırısını önlemeye yardımcı olmak için nasıl kullanılacağını gösterdi. Bkz: [olay yanıtı senaryosu](security-center-incident-response.md) olay yanıtı bir saldırı gerçekleşmeden önce planınızın olması hakkında bilgi edinmek için.
+Bu senaryo, güvenlik saldırısını azaltmaya yardımcı olmak için Güvenlik Merkezi 'nde güvenlik ilkelerini ve önerilerini nasıl kullanacağınızı gösterdi.
 
-İle tehditlere yanıt verin öğrenin [olay yanıtı](security-center-incident-response.md).
+[Güvenlik uyarılarını yönetme ve yanıtlama](security-center-managing-and-responding-alerts.md)ile tehditleri nasıl yanıtlayacağınızı öğrenin.

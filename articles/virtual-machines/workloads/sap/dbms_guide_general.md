@@ -1,6 +1,6 @@
 ---
-title: Azure sanal makineleri DBMS dağıtım SAP iş yükü için dikkate alınacak noktalar | Microsoft Docs
-description: SAP iş yükü Azure sanal makineleri DBMS dağıtım konuları
+title: SAP iş yükü için Azure sanal makineler DBMS dağıtımına yönelik konular | Microsoft Docs
+description: SAP iş yükü için Azure sanal makineler DBMS dağıtımına yönelik konular
 services: virtual-machines-linux,virtual-machines-windows
 documentationcenter: ''
 author: msjuergent
@@ -9,21 +9,20 @@ editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.service: virtual-machines-linux
-ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 12/04/2018
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 975289f338e638ed0209d4f6cf2a163ced996e42
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: a852ddc68a6f51e677e5ff2e641ada25f4bf0105
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67202935"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70101356"
 ---
-# <a name="considerations-for-azure-virtual-machines-dbms-deployment-for-sap-workload"></a>SAP iş yükü Azure sanal makineleri DBMS dağıtım konuları
+# <a name="considerations-for-azure-virtual-machines-dbms-deployment-for-sap-workload"></a>SAP iş yükü için Azure sanal makineler DBMS dağıtımına yönelik konular
 [1114181]: https://launchpad.support.sap.com/#/notes/1114181
 [1409604]: https://launchpad.support.sap.com/#/notes/1409604
 [1597355]: https://launchpad.support.sap.com/#/notes/1597355
@@ -49,329 +48,329 @@ ms.locfileid: "67202935"
 
 [!INCLUDE [learn-about-deployment-models](../../../../includes/learn-about-deployment-models-rm-include.md)]
 
-Bu kılavuzu belgelerine uygulamak ve Microsoft Azure üzerinde SAP yazılım dağıtmak nasıl bir parçasıdır. Bu kılavuzu okumadan önce okuma [planlama ve Uygulama Kılavuzu][planning-guide]. Bu belge, bir hizmet (Iaas) özellikleri Azure altyapısı kullanarak Microsoft Azure sanal makinelerinde (VM'ler) SAP ilgili DBMS sistemleri genel dağıtım yönlerini kapsar.
+Bu kılavuz, Microsoft Azure SAP yazılımının nasıl uygulanacağı ve dağıtılacağı hakkındaki belgelerin bir parçasıdır. Bu kılavuzu okumadan önce [planlama ve uygulama kılavuzunu][planning-guide]okuyun. Bu belge, Azure hizmet olarak altyapı (IaaS) yeteneklerini kullanarak Microsoft Azure sanal makinelerde (VM) SAP ile ilgili DBMS sistemlerinin genel dağıtım yönlerini ele alır.
 
-Kağıt yüklemeleri ve SAP yazılım dağıtımları için birincil kaynakları temsil eden platformları üzerinde SAP notları ve SAP yükleme belgelerine tamamlar.
+Kağıda, belirtilen platformlarda SAP yazılımının yüklemeleri ve dağıtımları için birincil kaynakları temsil eden SAP yükleme belgeleri ve SAP notları da bu şekilde tamamlar.
 
-Bu belgede, Azure Vm'lerinde SAP ilgili DBMS sistemleri çalıştırma konuları kullanıma sunulmuştur. Bu bölümde belirli DBMS sistemleri için birkaç başvurular var. Bunun yerine, belirli DBMS sistemleri içinde bu yazıda, sonra bu belgede ele alınır.
+Bu belgede, SAP ile ilgili DBMS sistemlerini Azure VM 'lerinde çalıştırmanın önemli noktaları tanıtılmaktadır. Bu bölümde belirli DBMS sistemlerine birkaç başvuru vardır. Bunun yerine, belirli DBMS sistemleri bu belge içinde, bu belgeden sonra işlenir.
 
 ## <a name="definitions"></a>Tanımlar
-Belgede aşağıdaki terimler kullanılır:
+Belge boyunca, bu terimler kullanılır:
 
-* **Iaas**: Hizmet olarak altyapı.
-* **PaaS**: Bir hizmet olarak Platform.
-* **SaaS**: Bir hizmet olarak yazılım.
-* **SAP bileşen**: Tek bir SAP uygulama ERP merkezi bileşeni (ECC), Business Warehouse (BW), çözüm Yöneticisi ya da Enterprise Portal (EP) gibi. Bileşenleri SAP NetWeaver tabanlı olmayan bir uygulama gibi iş nesneleri veya Geleneksel ABAP veya Java teknolojileri üzerinde temel alabilir.
-* **SAP ortamı**: Bir veya daha fazla SAP bileşenleri geliştirme, kalite güvencesi, eğitim, olağanüstü durum kurtarma veya üretim gibi bir iş işlevi gerçekleştirmek için mantıksal olarak gruplandırılır.
-* **SAP ortamı**: Bu terim, bir müşterinin tamamı SAP varlıkları başvurduğu BT yatay. SAP ortamının tüm üretim ve üretim dışı ortamlar içerir.
-* **SAP sistemine**: DBMS katmanı ve bir uygulama katmanı, örneğin, bir SAP ERP geliştirme sistemi birleşimi bir SAP Business Warehouse sistem veya bir SAP CRM üretim sistemini test. Azure dağıtımında, bu iki şirket içi ile Azure arasında bölünen desteklenmez. Sonuç olarak, bir SAP şirket içinde dağıtılabilir veya onun Azure'da dağıtılan sistemidir. Azure'da veya şirket içi bir SAP ortamının farklı sistemleri dağıtabilirsiniz. Örneğin, SAP CRM geliştirme dağıtma ve Azure'da sistemleri test ancak SAP CRM üretim sistemi şirket içinde dağıtın.
-* **Şirketler arası**: Burada VM'ler siteden siteye ve çok siteli sahip bir Azure aboneliğine dağıtılır veya Azure ExpressRoute bağlantısı arasında şirket içi veri merkezlerine senaryo ve Azure açıklar. Azure ortak belgeler, bu tür dağıtımlar şirketler arası senaryoları açıklanmıştır. 
+* **IaaS**: Hizmet olarak altyapı.
+* **PaaS**: Hizmet olarak platform.
+* **SaaS**: Hizmet olarak yazılım.
+* **Sap bileşeni**: ERP merkezi bileşeni (ECC), Iş ambarı (beyaz), çözüm Yöneticisi veya Enterprise Portal (EP) gibi bireysel bir SAP uygulaması. SAP bileşenleri geleneksel ABAP veya Java teknolojilerine veya Iş nesneleri gibi NetWeaver tabanlı olmayan bir uygulamaya dayalı olabilir.
+* **SAP ortamı**: Geliştirme, kalite güvencesi, eğitim, olağanüstü durum kurtarma veya üretim gibi bir iş işlevi gerçekleştirmek için mantıksal olarak gruplanmış bir veya daha fazla SAP bileşeni.
+* **SAP yatay**: Bu terim, bir müşterinin BT yatay içindeki tüm SAP varlıklarını ifade eder. SAP yatay, tüm üretim ve üretim dışı ortamları içerir.
+* **SAP sistemi**: Bir DBMS katmanının ve uygulama katmanının birleşimi; Örneğin, SAP ERP geliştirme sistemi, SAP Business Warehouse test sistemi veya SAP CRM üretim sistemi. Azure dağıtımlarında, bu iki katmanı şirket içi ve Azure arasında bölmek desteklenmez. Sonuç olarak, bir SAP sistemi şirket içinde dağıtılır ya da Azure 'da dağıtılır. SAP 'nin farklı sistemlerini Azure 'da veya şirket içinde dağıtabilirsiniz. Örneğin, Azure 'da SAP CRM geliştirme ve test sistemlerini dağıtabilir, ancak şirket içi SAP CRM üretim sistemini dağıtabilirsiniz.
+* **Şirketler arası**: VM 'Lerin şirket içi veri merkezleri ile Azure arasında siteden siteye, çok siteli veya Azure ExpressRoute bağlantısı olan bir Azure aboneliğine dağıtıldığı bir senaryoyu açıklar. Yaygın Azure belgelerinde, bu tür dağıtımlar şirketler arası senaryolar olarak da açıklanmaktadır. 
 
-    Bağlantı için şirket içi etki alanları, şirket içi Active Directory ve şirket içi DNS Azure'a genişletmek için nedenidir. Şirket içi yatay aboneliğin Azure varlıkları için genişletilir. Bu uzantı, sanal makineleri şirket içi etki alanının parçası olabilir. Şirket içi etki alanının etki alanı kullanıcıları, sunuculara erişmek ve bu vm'lerdeki DBMS Hizmetleri gibi hizmetleri çalıştırın. Sanal makineler arasında iletişim ve ad çözümlemesi, şirket içi dağıtılan ve Azure'da dağıtılan Vm'leri mümkündür. Bu senaryo, Azure üzerinde SAP varlıklarını dağıtmak için kullanılan en yaygın senaryodur. Daha fazla bilgi için [planlama ve tasarım VPN ağ geçidi için](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-plan-design).
+    Bağlantının nedeni şirket içi etki alanlarını, şirket içi Active Directory ve şirket içi DNS 'yi Azure 'a genişletmenin nedenidir. Şirket içi yatay, aboneliğin Azure varlıklarına genişletilir. Bu uzantıyla birlikte VM 'Ler, şirket içi etki alanının bir parçası olabilir. Şirket içi etki alanının etki alanı kullanıcıları sunuculara erişebilir ve bu VM 'lerde DBMS hizmetleri gibi hizmetleri çalıştırabilir. Şirket içinde dağıtılan VM 'Ler ve Azure 'da dağıtılan VM 'ler arasındaki iletişim ve ad çözümlemesi mümkündür. Bu senaryo, Azure 'da SAP varlıklarını dağıtmak için kullanılan en yaygın senaryodur. Daha fazla bilgi için bkz. [VPN Gateway Için planlama ve tasarım](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-plan-design).
 
 > [!NOTE]
-> Şirket içi dağıtımlarını SAP sistemlerini, SAP sistemlerini çalıştıran Azure sanal makineleri şirket içi etki alanının üyesi olduğu olan ve üretim SAP sistemlerini için desteklenir. Şirketler arası yapılandırmalar bölümleri dağıtmak için desteklenen veya SAP ortamlarını Azure'a tamamlayın. Hatta tam SAP ortamı Azure'da çalışan bir şirket içi etki alanının parçası olması için bu sanal makineler ve Active Directory/LDAP gerektirir. 
+> SAP sistemlerinin şirket içi dağıtımları, SAP sistemlerini çalıştıran Azure sanal makinelerinin şirket içi bir etki alanının üyesi olduğu ve üretim SAP sistemlerinde desteklendiği yerdir. Şirketler arası yapılandırma, parçaları dağıtmak veya Azure 'a tam SAP landscapes için desteklenir. Azure 'da tam SAP yatay ' i çalıştırmak, bu VM 'Lerin şirket içi etki alanı ve Active Directory/LDAP 'nin bir parçası olmasını gerektirir. 
 >
-> Belgelerinin önceki sürümleri, hibrit BT senaryolarını bahsedilmiştir. Terim *karma* bir şirket içi ile Azure arasında şirketler arası bağlantı olduğunu aslında kökü belirtilmemiş. Bu durumda, karma de Azure sanal makineleri şirket içi Active Directory'nin parçası olduğunu belirtir.
+> Belgelerin önceki sürümlerinde, karma BT senaryoları bahsedildi. *Karma* terim terimi, şirket Içi ve Azure arasında şirketler arası bağlantı olduğunu aslında kapsar. Bu durumda, karma Ayrıca Azure 'daki VM 'Lerin şirket içi Active Directory bir parçası olduğu anlamına gelir.
 >
 >
 
-Bazı Microsoft belge içi ve dışı karışık senaryo özellikle DBMS yüksek kullanılabilirlik yapılandırmaları için biraz farklı tanımlar. SAP ile ilgili belgeler söz konusu olduğunda, içi ve dışı karışık senaryo için siteden siteye veya özel boils [ExpressRoute](https://azure.microsoft.com/services/expressroute/) bağlantısını ve şirket içi ile Azure arasında dağıtılan bir SAP ortamının.
+Bazı Microsoft belgelerinde, özellikle de DBMS yüksek kullanılabilirlik yapılandırmalarında, şirket içi senaryolar biraz farklı şekilde açıklanmıştır. SAP ile ilgili belgeler söz konusu olduğunda, şirketler arası senaryo siteden siteye veya özel [ExpressRoute](https://azure.microsoft.com/services/expressroute/) bağlantısına ve şirket Içi ile Azure arasında DAĞıTıLAN bir SAP yataya kadar
 
 ## <a name="resources"></a>Kaynaklar
-Kullanılabilir diğer makaleler üzerinde SAP iş yükü Azure üzerinde. İle başlayan [azure'da SAP iş yükü: Başlama](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/get-started) ilgilendiğiniz alanı seçin.
+Azure 'da SAP iş yükünde başka makaleler de mevcuttur. Azure 'da [SAP iş yüküne başlayın: Kullanmaya](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/get-started) başlayın ve ardından ilgilendiğiniz alanı seçin.
 
-Aşağıdaki SAP notları bu belgede ele alan in regard to azure'da SAP ilgilidir.
+Aşağıdaki SAP notları, bu belgede ele alınan alanla ilgili olarak Azure 'daki SAP ile ilgilidir.
 
-| Not numarası | Unvan |
+| Dekont numarası | Başlık |
 | --- | --- |
-| [1928533] |Azure'da SAP uygulamaları: Desteklenen Ürünler ve Azure VM türleri |
-| [2015553] |Microsoft Azure üzerinde SAP: Destek önkoşulları |
-| [1999351] |Gelişmiş Azure için SAP izleme sorunlarını giderme |
-| [2178632] |Microsoft Azure üzerinde SAP için ölçümleri izleme anahtarı |
-| [1409604] |Sanallaştırma Windows üzerinde: Gelişmiş izleme |
+| [1928533] |Azure 'da SAP uygulamaları: Desteklenen Ürünler ve Azure VM türleri |
+| [2015553] |Microsoft Azure SAP: Destek önkoşulları |
+| [1999351] |SAP için gelişmiş Azure izleme sorunlarını giderme |
+| [2178632] |Microsoft Azure üzerinde SAP için anahtar izleme ölçümleri |
+| [1409604] |Windows 'da sanallaştırma: Gelişmiş izleme |
 | [2191498] |Azure ile Linux üzerinde SAP: Gelişmiş izleme |
-| [2039619] |Oracle veritabanı'nı kullanarak Microsoft Azure üzerinde SAP uygulamaları: Desteklenen ürünleri ve sürümleri |
-| [2233094] |DB6: Linux, UNIX ve Windows için IBM DB2 kullanarak azure'da SAP uygulamaları: Ek bilgiler |
-| [2243692] |Linux üzerinde Microsoft Azure (Iaas) sanal makine: SAP lisans sorunları |
+| [2039619] |Oracle veritabanını kullanarak Microsoft Azure SAP uygulamaları: Desteklenen Ürünler ve sürümler |
+| [2233094] |DB6: Linux, UNIX ve Windows için IBM DB2 kullanarak Azure 'da SAP uygulamaları: Ek bilgiler |
+| [2243692] |Microsoft Azure Linux (IaaS) sanal makinesi: SAP lisans sorunları |
 | [1984787] |SUSE LINUX Enterprise Server 12: Yükleme notları |
-| [2002167] |Red Hat Enterprise Linux 7.x: Yükleme ve yükseltme |
-| [2069760] |Oracle Linux 7.x SAP yükleme ve yükseltme |
-| [1597355] |Linux için takas alanı önerisi |
-| [2171857] |Oracle Database 12c: Linux üzerinde dosya sistemi desteği |
-| [1114181] |Oracle veritabanı 11g: Linux üzerinde dosya sistemi desteği |
+| [2002167] |Red Hat Enterprise Linux 7. x: Yükleme ve yükseltme |
+| [2069760] |Oracle Linux 7. x SAP yüklemesi ve yükseltmesi |
+| [1597355] |Linux için takas boşluğu önerisi |
+| [2171857] |Oracle Database 12c: Linux 'ta dosya sistemi desteği |
+| [1114181] |Oracle Database 11g: Linux 'ta dosya sistemi desteği |
 
 
-Linux için tüm SAP notları hakkında bilgi için bkz: [SAP topluluk wiki](https://wiki.scn.sap.com/wiki/display/HOME/SAPonLinuxNotes).
+Linux için tüm SAP notları hakkında daha fazla bilgi için bkz. [SAP Community wiki](https://wiki.scn.sap.com/wiki/display/HOME/SAPonLinuxNotes).
 
-Microsoft Azure Mimarisi ve Microsoft Azure sanal makinelerini nasıl dağıtılan ve çalıştırılan bilgisine ihtiyacınız vardır. Daha fazla bilgi için [Azure belgeleri](https://docs.microsoft.com/azure/).
+Microsoft Azure mimarisine ve Microsoft Azure sanal makinelerin nasıl dağıtıldığını ve çalıştığınıza yönelik bir bilgiye sahip olmanız gerekir. Daha fazla bilgi için bkz. [Azure belgeleri](https://docs.microsoft.com/azure/).
 
-Genel olarak, Windows, Linux ve DBMS yükleme ve yapılandırma temel olarak herhangi bir sanal makine veya şirket içinde yüklediğiniz çıplak metal makine aynıdır. Azure Iaas kullandığınızda, farklı olan bazı mimarisi ve sistem yönetimi uygulaması karar vardır. Bu belgede, özel mimari ve Azure Iaas kullandığınızda için hazırlıklı olmak için sistem yönetimi farklar açıklanmaktadır.
+Genel olarak, Windows, Linux ve DBMS yükleme ve yapılandırma temelde şirket içinde yüklediğiniz tüm sanal makineler veya çıplak makineler ile aynıdır. Azure IaaS kullandığınızda farklılık gösteren bazı mimari ve sistem yönetimi uygulama kararları vardır. Bu belgede, Azure IaaS kullandığınızda için hazırlanmaya yönelik belirli mimari ve sistem yönetimi farklılıkları açıklanmaktadır.
 
 
-## <a name="65fa79d6-a85f-47ee-890b-22e794f51a64"></a>RDBMS dağıtımlar için bir VM depolama yapısı
-Bu bölümde takip etmek için okuma ve bölümünde verilen bilgileri anlamak [Bu bölümde] [ deployment-guide-3] , [Dağıtım Kılavuzu][deployment-guide]. Anlama ve farklı VM serisi ve bu bölümü okumadan önce standart ve premium depolama arasındaki farkları bilmeniz gerekir. 
+## <a name="65fa79d6-a85f-47ee-890b-22e794f51a64"></a>RDBMS dağıtımları için bir sanal makinenin depolama yapısı
+Bu bölümü izlemek için [Dağıtım Kılavuzu][deployment-guide]'nun [Bu][deployment-guide-3] bölümünde sunulan bilgileri okuyun ve anlayın. Bu bölümü kullanmadan önce farklı VM Serisi ve standart ve Premium depolama arasındaki farkları anlamanız ve bilmeniz gerekir. 
 
-Azure Vm'leri için Azure depolama hakkında bilgi edinmek için bkz:
+Azure VM 'Leri için Azure depolama hakkında bilgi edinmek için bkz.:
 
-- [Azure Windows Vm'leri için yönetilen disklere giriş](../../windows/managed-disks-overview.md).
-- [Azure Linux VM'ler için yönetilen disklere giriş](../../linux/managed-disks-overview.md).
+- [Azure Windows VM 'leri için yönetilen disklere giriş](../../windows/managed-disks-overview.md).
+- [Azure Linux VM 'leri için yönetilen disklere giriş](../../linux/managed-disks-overview.md).
 
-Temel bir yapılandırmada, genellikle işletim sistemi, DBMS ve nihai SAP ikili dosyaları burada veritabanı dosyalarından ayrı bir dağıtım yapısı öneririz. Azure sanal makineler'de çalışan SAP sistemlerini temel VHD veya disk, işletim sistemi, veritabanı yönetim sistemi yürütülebilir dosyalarının ve SAP yürütülebilir dosyaları yüklü olmasını öneririz. 
+Temel yapılandırmada genellikle işletim sisteminin, DBMS 'nin ve en son SAP ikililerinin veritabanı dosyalarından ayrı olduğu bir dağıtım yapısı önerilir. Azure sanal makineler 'de çalışan SAP sistemlerinin temel VHD veya disk, işletim sistemi, veritabanı yönetim sistemi yürütülebilir dosyaları ve SAP yürütülebilir dosyaları ile yüklenmiş olması önerilir. 
 
-DBMS veri ve günlük dosyaları, standart depolama veya premium depolama alanında depolanır. Bunlar ayrı disklerin depolanan ve özgün Azure işletim sistemi görüntüsüne VM bağlı mantıksal diskleri. Linux dağıtımları için farklı öneriler, özellikle SAP HANA için belirtilmiştir.
+DBMS verileri ve günlük dosyaları standart depolama veya Premium depolama alanında depolanır. Bunlar ayrı disklerde depolanır ve özgün Azure işletim sistemi görüntüsü VM 'sine mantıksal diskler olarak eklenir. Linux dağıtımları için, özellikle SAP HANA için farklı öneriler belgelenmiştir.
 
-Disk düzeninizi planlarken, bu öğeler arasında en iyi dengeyi bulun:
+Disk düzeninizi planlarken, şu öğeler arasındaki en iyi dengeyi bulun:
 
-* Veri dosyalarının sayısını.
+* Veri dosyası sayısı.
 * Dosyaları içeren disk sayısı.
-* Tek bir diskin IOPS kotalar.
+* Tek bir diskin ıOPS kotaları.
 * Disk başına veri aktarım hızı.
-* VM boyutu olası ek veri diskleri sayısı.
-* VM toplam depolama aktarım hızı sağlar.
-* Gecikme süresi farklı Azure depolama türleri sağlar.
-* Sanal makine SLA'ları.
+* VM boyutu başına olası ek veri disklerinin sayısı.
+* Bir VM 'nin sağlayabileceğiniz genel depolama verimi.
+* Farklı Azure Depolama türlerinin sağladığı gecikme süresi.
+* VM SLA 'Ları
 
-Azure, bir veri disk başına IOPS kotası zorlar. Bu kotalar, standart depolama ve premium depolama üzerinde barındırılan diskleri için farklıdır. G/ç gecikme süresi, ayrıca iki depolama türleri arasında farklılık gösterir. Premium depolama, daha iyi g/ç gecikme süresi sunar. 
+Azure, veri diski başına bir ıOPS kotası uygular. Bu kotalar, standart depolama ve Premium depolamada barındırılan diskler için farklıdır. G/ç gecikmesi, iki depolama türü arasında da farklıdır. Premium Depolama, daha iyi g/ç gecikme süresi sağlar. 
 
-Her biri farklı VM türleri, sınırlı sayıda ekleyebileceğiniz diskleri sahiptir. Premium depolama yalnızca belirli VM türleri kullanabileceğiniz başka bir kısıtlaması yoktur. Genellikle, CPU ve bellek gereksinimlerine göre belirli bir VM'nin tür kullanmaya karar. Ayrıca, IOPS, gecikme süresi ve genellikle disk sayısını veya premium depolama disklerini türü ile ölçeklenir disk aktarım hızı gereksinimleri de düşünebilirsiniz. Her disk tarafından elde IOPS ve aktarım hızı sayısı, disk boyutu, özellikle premium depolama ile belirleyebilir.
-
-> [!NOTE]
-> DBMS dağıtımları için tüm veriler, işlem günlüğü için premium depolama kullanılması önerilir veya dosyaları Yinele. Üretim ve üretim dışı sistemlerini dağıtmak isteyip istemediğinizi önemi yoktur.
+Farklı sanal makine türlerinin her biri, iliştirebilmeniz gereken sınırlı sayıda veri diskine sahiptir. Farklı bir kısıtlama, yalnızca belirli VM türlerinin Premium depolamayı kullanabilledir. Genellikle, CPU ve bellek gereksinimlerine göre belirli bir sanal makine türünü kullanmaya karar verirsiniz. Ayrıca, genellikle disk sayısıyla veya Premium Depolama disklerinin türüne göre ölçeklenen ıOPS, gecikme süresi ve disk aktarım hızı gereksinimlerini de göz önünde bulundurmanız gerekebilir. IOPS sayısı ve her disk tarafından elde edilecek aktarım hızı, özellikle Premium Depolama ile disk boyutunu dikte edebilir.
 
 > [!NOTE]
-> Azure'dan yararlanmak için benzersiz [tek bir sanal makine SLA'sı](https://azure.microsoft.com/support/legal/sla/virtual-machines/v1_8/), bağlı olan tüm diskler temel VHD içeren premium depolama türü olmalıdır.
+> DBMS dağıtımları için tüm veriler, işlem günlüğü veya yineleme dosyaları için Premium depolama kullanımını öneririz. Üretim veya üretim dışı sistemler dağıtmak isteyip istemediğiniz önemli değildir.
 
 > [!NOTE]
-> Ana veritabanı dosyalarını barındıran, veri ve günlük dosyaları gibi Azure veri merkezlerine bitişik birlikte bulunan üçüncü taraf veri merkezlerinde bulunan depolama donanımı üzerinde SAP veritabanlarının desteklenmez. SAP iş yükleri için yerel bir Azure hizmeti olarak temsil edilen yalnızca depolama, veri ve işlem günlük dosyaları SAP veritabanları için desteklenir.
+> Azure 'un benzersiz [tek VM SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/v1_8/)'sından yararlanmak için, bağlı olan tüm DISKLERIN temel VHD 'yi içeren Premium depolama türü olması gerekir.
 
-Veritabanı dosyalarını ve günlük ve Yinele dosyaları ve kullandığınız Azure depolama türünü, IOPS, gecikme süresi ve aktarım hızı gereksinimleri tarafından tanımlanır. Yeterli IOPS için birden çok disk kullanın veya daha büyük bir premium depolama diski kullanmak için zorlanabilirsiniz. Birden çok disk kullanırsanız, bir yazılım stripe disklerde veri dosyaları ya da günlük içerir ve dosyaları yeniden oluşturun. Böyle durumlarda, IOPS ve disk aktarım hızı SLA'ları temel premium depolama diskleri veya standart depolama disklerinin ulaşılabilir maksimum IOPS için sonuç kümesi biriktirici.
+> [!NOTE]
+> Azure veri merkezlerine bitişik olan ve birlikte bulunan üçüncü taraf veri merkezlerinde bulunan depolama donanımlarında bulunan SAP veritabanlarının veri ve günlük dosyaları gibi ana veritabanı dosyalarını barındırma desteklenmez. SAP iş yükleri için, SAP veritabanlarının veri ve işlem günlük dosyaları için yalnızca yerel Azure hizmeti olarak temsil edilen depolama alanı desteklenir.
 
-Önceden belirtildiği gibi tek bir VHD neler sağlar, IOPS gereksinim aşarsa, VHD sayısı arasında veritabanı dosyaları için gereken IOPS sayısını dengeleyin. Disklerde IOPS yükünü dağıtmak için en kolay yolu, bir yazılım Şerit üzerinde farklı diskler oluşturmaktır. Ardından bir dizi veri dosyaları SAP DBMS gerekmez dışında yazılım stripe LUN'ları yerleştirin. stripe, disk sayısını taleplerini IOPS talepleri, disk aktarım hızı taleplerini ve birim tarafından yönetilir.
+Veritabanı dosyalarının yerleştirilmesi ve günlük ve yineleme dosyaları ve kullandığınız Azure depolama türü ıOPS, gecikme süresi ve verimlilik gereksinimleri tarafından tanımlanır. Yeterli ıOPS olması için birden çok disk kullanma veya daha büyük bir Premium Depolama diski kullanma zorlanabilir. Birden çok disk kullanıyorsanız, veri dosyalarını veya günlük ve kayıt dosyalarını içeren diskler arasında bir yazılım şeridi oluşturun. Bu gibi durumlarda, temel alınan Premium Depolama disklerinin ıOPS ve disk aktarım hızı ve standart depolama disklerinin maksimum ulaşılabilir ıOPS değeri, sonuçta elde edilen Stripe kümesi için birikicidir.
+
+Daha önce belirtildiği gibi, ıOPS gereksiniminizi tek bir VHD 'nin sağlayabileceği aşarsa, veritabanı dosyaları için gereken ıOPS sayısını bir dizi VHD 'lerde dengeleyin. IOPS yükünü diskler arasında dağıtmanın en kolay yolu, farklı diskler üzerinde bir yazılım şeridi oluşturmak için kullanılır. Ardından, yazılım Stripe dışına çıkan LUN 'Lara SAP DBMS 'nin bir dizi veri dosyasını yerleştirebilirsiniz. Stripe içindeki disk sayısı, IOPS taleplerine, disk işleme taleplerine ve birim taleplerine göre çalıştırılır.
 
 
 ---
 > ![Windows][Logo_Windows] Windows
 >
-> Eşlikli birden çok Azure VHD'leri arasında oluşturmak için Windows depolama alanları kullanmanızı öneririz. En düşük Windows Server 2012 R2 veya Windows Server 2016.
+> Birden çok Azure VHD üzerinde dizili kümeler oluşturmak için Windows depolama alanları kullanmanızı öneririz. En az Windows Server 2012 R2 veya Windows Server 2016 kullanın.
 >
 > ![Linux][Logo_Linux] Linux
 >
-> Yalnızca MDADM ve mantıksal birim Yöneticisi (LVM) bir Linux'ta yazılım RAID oluşturmak için desteklenir. Daha fazla bilgi için bkz.
+> Linux 'ta yazılım RAID oluşturmak için yalnızca MDADDM ve mantıksal birim Yöneticisi (LVM) desteklenir. Daha fazla bilgi için bkz.
 >
-> - [Linux'ta yazılım RAID yapılandırma](https://docs.microsoft.com/azure/virtual-machines/linux/configure-raid) MDADM kullanma
-> - [Azure'da Linux sanal makinesi üzerinde LVM'yi yapılandırma](https://docs.microsoft.com/azure/virtual-machines/linux/configure-lvm) LVM kullanma
+> - MDADDM kullanarak [Linux 'ta yazılım RAID yapılandırma](https://docs.microsoft.com/azure/virtual-machines/linux/configure-raid)
+> - LVM ['yi kullanarak Azure 'da bir LINUX VM 'de LVM 'Yi yapılandırma](https://docs.microsoft.com/azure/virtual-machines/linux/configure-lvm)
 >
 >
 
 ---
 
 > [!NOTE]
-> Azure depolama üç görüntü VHD tuttuğundan, bu, stripe ne zaman bir yedekleme yapılandırmak için anlam ifade etmez. Yalnızca şeritleme g/ç farklı VHD dağıtılan şekilde yapılandırmanız gerekir.
+> Azure depolama, VHD 'lerin üç görüntüsünü sağladığından, dizili bir artıklık yapılandırmak mantıklı değildir. Yalnızca, t/ç 'nin farklı VHD 'lere dağıtılması için şeridi yapılandırmanız gerekir.
 >
 
 ### <a name="managed-or-nonmanaged-disks"></a>Yönetilen veya yönetilmeyen diskler
-Bir Azure depolama hesabı, bir yönetim yapısı ve ayrıca sınırlamaları konusunun ' dir. Sınırlamalar, standart depolama hesapları ve premium depolama hesapları arasında farklılık gösterir. Özellikler ve sınırlamalar hakkında daha fazla bilgi için bkz: [Azure depolama ölçeklenebilirlik ve performans hedefleri](https://docs.microsoft.com/azure/storage/common/storage-scalability-targets).
+Bir Azure depolama hesabı, yönetim yapısıdır ve ayrıca Kısıtlamaların bir konusudur. Sınırlamalar, standart depolama hesapları ve Premium Depolama hesapları arasında farklılık gösterir. Yetenekler ve sınırlamalar hakkında daha fazla bilgi için bkz. [Azure Storage ölçeklenebilirlik ve performans hedefleri](https://docs.microsoft.com/azure/storage/common/storage-scalability-targets).
 
-Standart depolama için olduğunu bir sınır üzerindeki depolama hesabı başına IOPS unutmayın. İçeren satırı bkz **toplam istek oranı** makaledeki [Azure depolama ölçeklenebilirlik ve performans hedefleri](https://docs.microsoft.com/azure/storage/common/storage-scalability-targets). Azure aboneliği başına depolama hesabı sayısına ilk bir sınır yoktur. Bakiye bu depolama hesabı sınırları ulaşmaktan kaçınmak için VHD'ler farklı depolama hesapları arasında daha büyük SAP ortamı. Birden fazla binlerce VHD'ler ile birkaç yüz sanal makineler hakkında konuşurken yorucu bir süreç iş budur.
+Standart depolama için, depolama hesabı başına ıOPS 'de bir sınır olduğunu unutmayın. [Azure depolama ölçeklenebilirlik ve performans hedefleri](https://docs.microsoft.com/azure/storage/common/storage-scalability-targets)makalesindeki **toplam istek oranı** 'nı içeren satıra bakın. Ayrıca, Azure aboneliği başına depolama hesabı sayısı için bir başlangıç sınırı vardır. Bu depolama hesaplarının limitlerine ulaşmaktan kaçınmak için, farklı depolama hesaplarında daha büyük SAP için VHD 'leri dengeleyin. Bu, binlerce VHD 'den fazlasına sahip birkaç yüz sanal makine hakkında konuşuyorsanız sıkıcı bir çalışmadır.
 
-Başvurular ve öneriler için standart depolama bir SAP iş yüküyle birlikte DBMS dağıtımları için standart depolama kullanarak önerilmez çünkü bu kısa sınırlı [makale](https://blogs.msdn.com/b/mast/archive/2014/10/14/configuring-azure-virtual-machines-for-optimal-storage-performance.aspx)
+Bir SAP iş yükü ile birlikte DBMS dağıtımları için standart depolama kullanılması önerilmediği için, standart depolamaya yapılan başvurular ve öneriler bu kısa [makaleyle](https://blogs.msdn.com/b/mast/archive/2014/10/14/configuring-azure-virtual-machines-for-optimal-storage-performance.aspx) sınırlıdır
 
-Planlama ve farklı Azure depolama hesabında VHD dağıtma yönetim işlemlerini önlemek için Microsoft gelen [Azure yönetilen diskler](https://azure.microsoft.com/services/managed-disks/) 2017'de. Yönetilen diskler, standart depolama ve premium depolama için kullanılabilir. Yönetilen disklerin yönetilmeyen disklere kıyasla önemli avantajları şunlardır:
+Microsoft 'un farklı Azure depolama hesaplarında VHD planlama ve dağıtma konusunda yönetim çalışmasından kaçınmak için, Microsoft tarafından 2017 ' de [Azure yönetilen diskler](https://azure.microsoft.com/services/managed-disks/) kullanıma sunulmuştur. Yönetilen diskler standart depolama ve Premium Depolama için kullanılabilir. Yönetilen disklerin yönetilmeyen disklere kıyasla başlıca avantajları şunlardır:
 
-- Yönetilen diskler için Azure farklı VHD farklı bir depolama hesabı arasında otomatik olarak dağıtım sırasında dağıtır. Bu şekilde, depolama hesabı için veri hacmi, g/ç aktarım hızı, sınırlar ve IOPS isabet değildir.
-- Yönetilen diskleri kullanarak Azure depolama, Azure kullanılabilirlik kümeleri kavramlarını geliştirir. VM bir Azure kullanılabilirlik kümesinin parçasıysa, sanal makinenin bağlı disk ve taban VHD farklı hata ve güncelleme etki alanlarına dağıtılır.
+- Yönetilen diskler için Azure, farklı depolama hesaplarında farklı VHD 'leri dağıtım zamanında otomatik olarak dağıtır. Bu şekilde, veri hacmi, g/ç verimlilik ve ıOPS için depolama hesabı limitleri isabet edilmez.
+- Azure depolama, yönetilen diskleri kullanarak Azure kullanılabilirlik kümelerinin kavramlarını geliştirir. VM bir Azure kullanılabilirlik kümesinin parçasıysa, temel VHD ve bir sanal makinenin bağlı diski farklı hata ve güncelleştirme etki alanlarına dağıtılır.
 
 
 > [!IMPORTANT]
-> Azure yönetilen diskler avantajları göz önünde bulundurulduğunda, Azure yönetilen diskler DBMS dağıtımları ve SAP dağıtımları için genel kullanmanızı öneririz.
+> Azure yönetilen disklerinin avantajları söz konusu olduğunda, DBMS dağıtımları ve SAP dağıtımlarınız için Azure yönetilen disklerini genel olarak kullanmanızı öneririz.
 >
 
-Yönetilmeyen disklerden yönetilen disklere dönüştürme için bkz:
+Yönetilmeyen bilgisayardan yönetilen disklere dönüştürmek için bkz.:
 
-- [Bir Windows sanal makine yönetilmeyen disklerden yönetilen disklere dönüştürme](https://docs.microsoft.com/azure/virtual-machines/windows/convert-unmanaged-to-managed-disks).
-- [Linux sanal makinesi yönetilmeyen disklerden yönetilen disklere dönüştürme](https://docs.microsoft.com/azure/virtual-machines/linux/convert-unmanaged-to-managed-disks).
+- [Bir Windows sanal makinesini yönetilmeyen disklerden yönetilen disklere dönüştürme](https://docs.microsoft.com/azure/virtual-machines/windows/convert-unmanaged-to-managed-disks).
+- [Bir Linux sanal makinesini yönetilmeyen disklerden yönetilen disklere dönüştürme](https://docs.microsoft.com/azure/virtual-machines/linux/convert-unmanaged-to-managed-disks).
 
 
-### <a name="c7abf1f0-c927-4a7c-9c1d-c7b5b3b7212f"></a>VM'ler ve veri diskleri için önbelleğe alma
-VM'ler için diskler bağladığınızda, Azure depolamada bulunan bu diskleri VM arasındaki g/ç trafiğinin önbelleğe alınmış seçebilirsiniz. Standart ve premium depolama, önbellek bu tür için iki farklı teknolojileri kullanın.
+### <a name="c7abf1f0-c927-4a7c-9c1d-c7b5b3b7212f"></a>VM 'Ler ve veri diskleri için önbelleğe alma
+Diskleri VM 'lere bağladığınızda, sanal makine arasındaki g/ç trafiğinin Azure Storage 'da bulunan diskler arasında önbelleğe alınıp alınmayacağını seçebilirsiniz. Standart ve Premium Depolama, bu tür bir önbellek için iki farklı teknoloji kullanır.
 
-Aşağıdaki öneriler bu g/ç özelliklerini için standart DBMS varsayın:
+Aşağıdaki öneriler, bu g/ç özelliklerinin standart DBMS için olduğunu varsayar:
 
-- Bu çoğunlukla bir salt okunur bir veritabanının veri dosyalarını karşı iş yüküdür. Bu okuma performansı DBMS sistemi için kritik olan.
-- Veri dosyalarını karşı yazma artışları kontrol noktaları veya sabit bir akışa göre gerçekleşir. Bir gün ortalaması alınan, daha az yazma okuma daha vardır. Bu yazma, veri dosyalarını okuma, ters yönde uyumsuzdur ve tüm kullanıcı işlemleri tutmayın.
-- Günlük veya yineleme dosyası gereken herhangi bir işlem okumalardan vardır. İşlem günlüğü yedeklemeleri gerçekleştirirken büyük g/ç durumlardır.
-- Ana işlem veya yineleme günlük dosyalarını karşı yazma yüktür. G/ç olabilir bağımlı iş yükünü yapısını, 4 KB olarak veya diğer durumlarda, g/ç boyutu 1 MB veya daha fazla küçük.
-- Tüm yazma işlemlerini güvenilir bir biçimde diskte kalıcı gerekir.
+- Genellikle bir veritabanının veri dosyalarına karşı bir okuma iş yüküdür. Bu okumalar, DBMS sistemi için performans açısından kritik öneme sahiptir.
+- Veri dosyalarına yazma, denetim noktalarına veya sabit bir akışa göre artışlarıyla 'de gerçekleşir. Günde ortalama, okumadan daha az yazma vardır. Veri dosyalarından okumaların tersi, bu yazma işlemleri zaman uyumsuzdur ve herhangi bir Kullanıcı işlemi tutmayın.
+- İşlem günlüğünden veya yineleme dosyalarından her türlü okuma işlemi vardır. İşlem günlüğü yedeklemeleri gerçekleştirirken özel durumlar büyük g/ç.
+- İşlem veya yineleme günlük dosyalarına karşı ana yük yazılır. İş yükünün yapısına bağlı olarak, 1 MB veya daha fazla g/ç boyutu için g/ç küçük ya da 4 KB veya daha fazla g/ç boyutu olabilir.
+- Tüm yazmamaların diskte güvenilir bir biçimde kalıcı olması gerekir.
 
 Standart depolama için olası önbellek türleri şunlardır:
 
-* None
+* Yok.
 * Okuma
 * Okuma/Yazma
 
-Tutarlı ve belirleyici performansı elde etmek için DBMS ile ilgili veri dosyalarını içeren tüm diskleri, oturum ve dosya ve tablo alanı için yineleme için standart depolama alanında önbellek kümesi **NONE**. VHD tabanı önbelleğe almayı varsayılan kalabilir.
+Tutarlı ve belirleyici performans sağlamak için, DBMS ile ilgili veri dosyalarını içeren tüm diskler için standart depolamada önbelleğe alma, dosyaları günlüğe kaydetme ve yineleme ve tablo alanı **yok**olarak ayarlayın. Temel VHD 'nin önbelleğe alınması varsayılan olarak kalabilir.
 
-Premium depolama için aşağıdaki önbelleğe alma seçenekleri mevcuttur:
+Premium Depolama için aşağıdaki önbelleğe alma seçenekleri mevcuttur:
 
-* None
+* Yok.
 * Okuma
 * Okuma/yazma
-* Yok + yazma Hızlandırıcı, yalnızca Azure M serisi VM'ler için
-* Okuma + yazma Hızlandırıcı, yalnızca Azure M serisi VM'ler için
+* Hiçbiri + yalnızca Azure a serisi VM 'Ler için olan Yazma Hızlandırıcısı
+* Yalnızca Azure d serisi VM 'Ler için olan Yazma Hızlandırıcısı +.
 
-Premium depolama için biz kullanmanızı öneririz. **veri dosyaları için önbelleğe alma okuma** SAP veritabanı ve seçin **günlük dosyalarını şuraya diskler için önbelleğe alma**.
+Premium Depolama için SAP veritabanının **veri dosyaları Için okuma önbelleği** kullanmanızı ve **günlük dosyalarının diskleri için önbelleğe alma**seçeneğini seçmenizi öneririz.
 
-M serisi dağıtımları için Azure yazma Hızlandırıcı DBMS dağıtımınız için kullanmanızı öneririz. Ayrıntılar, kısıtlamalar ve Azure yazma Hızlandırıcı, dağıtım için bkz. [yazma hızlandırıcıyı etkinleştirme](https://docs.microsoft.com/azure/virtual-machines/windows/how-to-enable-write-accelerator).
+D serisi dağıtımlar için, DBMS dağıtımınız için Azure Yazma Hızlandırıcısı kullanmanızı öneririz. Ayrıntılar, kısıtlamalar ve Azure Yazma Hızlandırıcısı dağıtımı için bkz. [Enable yazma Hızlandırıcısı](https://docs.microsoft.com/azure/virtual-machines/windows/how-to-enable-write-accelerator).
 
 
 ### <a name="azure-nonpersistent-disks"></a>Azure kalıcı olmayan diskler
-VM dağıtıldıktan sonra azure sanal makineleri kalıcı olmayan diskler sunar. VM'yi yeniden başlatma söz konusu olduğunda, bu sürücülerde tüm içeriği silindikten. Bu bir biçimde hiçbir koşulda veri dosyaları ve veritabanı günlük ve Yinele dosyaları bu kalıcı olmayan sürücüler bulunmalıdır. Burada bu kalıcı olmayan sürücüler tempdb ve geçici açabilmek için uygun olabilir bazı veritabanları için özel durumlar olabilir. Bu kalıcı sürücülerini aktarım hızının, VM ailesi ile sınırlı olduğundan, A serisi VM'ler için bu sürücüler kullanmaktan kaçının. 
+VM dağıtıldıktan sonra Azure VM 'Ler kalıcı olmayan diskler sunar. VM önyüklemesi durumunda, bu sürücülerdeki tüm içerikler silinir. Bu, veri dosyaları ve günlüğe kaydetme ve veritabanlarının yeniden yineleme gibi kalıcı olmayan sürücülerde hiçbir koşul olmaması durumunda verilmiştir. Kalıcı olmayan sürücülerin tempdb ve temp Tablespaces için uygun olabileceği bazı veritabanları için özel durumlar olabilir. Kalıcı olmayan diskler söz konusu VM ailesiyle üretilen iş için sınırlı olduğundan, bu sürücüleri A serisi VM 'Ler için kullanmaktan kaçının. 
 
-Daha fazla bilgi için [azure'da Windows VM'ler geçici sürücüyü anlama](https://blogs.msdn.microsoft.com/mast/2013/12/06/understanding-the-temporary-drive-on-windows-azure-virtual-machines/).
-
----
-> ![Windows][Logo_Windows] Windows
->
-> Azure VM'de D sürücüsü Azure işlem düğümü üzerinde bazı yerel disk ile desteklenir kalıcı bir sürücüdür. Olduğundan kalıcı, VM yeniden başlatıldığında D sürücüsündeki içeriği yapılan tüm değişiklikler kaybolur. Depolanan dosyaları, oluşturulan dizinleri ve yüklenen uygulamaların değişiklikler içerir.
->
-> ![Linux][Logo_Linux] Linux
->
-> Azure sanal makineleri otomatik olarak bir sürücü üzerinde Azure işlem düğümünün yerel disk ile desteklenir, kalıcı bir sürücü /mnt/resource bağlayın. Olduğundan kalıcı, VM yeniden başlatıldığında/mnt/kaynak içerikte yapılan tüm değişiklikler kaybolur. Depolanan dosyaları, oluşturulan dizinleri ve yüklenen uygulamaların değişiklikler içerir.
->
->
-
----
-
-
-
-### <a name="10b041ef-c177-498a-93ed-44b3441ab152"></a>Microsoft Azure depolama dayanıklılık
-Microsoft Azure depolama, en az üç farklı depolama düğümlerinde işletim sistemi ve bağlı diskleri veya BLOB'ları ile temel VHD depolar. Bu depolama türü, yerel olarak yedekli depolama (LRS) olarak adlandırılır. Azure depolama tüm türleri için varsayılan seçenek LRS'dir.
-
-Diğer yedeklilik yöntemleri vardır. Daha fazla bilgi için [Azure depolama çoğaltma](https://docs.microsoft.com/azure/storage/common/storage-redundancy?toc=%2fazure%2fstorage%2fqueues%2ftoc.json).
-
-> [!NOTE]
->Premium depolama için depolama DBMS Vm'leri ve diskleri, veritabanı ve günlük ve dosyaları yeniden önerilen türüdür. Premium depolama için yalnızca yedeklilik yöntemi lrs'dir. Sonuç olarak, başka bir Azure bölgesi veya kullanılabilirlik bölgesi içinde veritabanı veri çoğaltmayı etkinleştirmek için veritabanı yöntemlerini yapılandırmak gerekir. SQL Server Always On, Oracle Data Guard ve HANA sistem çoğaltması veritabanı yöntemleri içerir.
-
-
-> [!NOTE]
-> DBMS dağıtımları için standart depolama için coğrafi olarak yedekli depolama (GRS) kullanılması önerilmez. GRS ciddi bir şekilde performansı etkiler ve yazma sırası arasında bir VM'ye bağlı farklı VHD dikkate değil. Yazma sırasını arasında farklı VHD potansiyel olarak uygularken değil çoğaltma hedef tarafta tutarsız veritabanlarını yol açar. Genellikle, kaynak VM yan olduğu gibi veritabanı ve günlük ve Yinele dosyaları birden çok VHD arasında yayılır, bu durum meydana gelir.
-
-
-
-## <a name="vm-node-resiliency"></a>VM düğüm dayanıklılık
-Azure Vm'leri için birkaç farklı SLA'lar sunar. Daha fazla bilgi için bkz. en son sürümü [sanal makineler için SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/v1_8/). DBMS katman uçtaki bir SAP sistemiyle kullanılabilirlik genellikle önemli olduğundan, kullanılabilirlik kümeleri, kullanılabilirlik ve Bakım olayları anlamanız gerekir. Bu kavramlarla ilgili daha fazla bilgi için bkz. [azure'daki Windows sanal makinelerin kullanılabilirliğini yönetme](https://docs.microsoft.com/azure/virtual-machines/windows/manage-availability) ve [Azure Linux sanal makinelerinin kullanılabilirliğini yönetme](https://docs.microsoft.com/azure/virtual-machines/linux/manage-availability).
-
-En az bir SAP iş yükü ile üretim DBMS senaryoları için önerilir:
-
-- Ayrı birer kullanılabilirlik kümesi aynı Azure bölgesinde iki sanal makine dağıtın.
-- Bu iki VM aynı Azure sanal ağı içinde çalıştırın ve NIC dışında aynı alt ağda eklenmiş.
-- İkinci VM ile etkin bir bekleme tutmak veritabanı yöntemlerini kullanın. Yöntemler, SQL Server Always On, Oracle Data Guard veya HANA sistem çoğaltması olabilir.
-
-Ayrıca üçüncü bir Azure bölgesindeki başka bir VM dağıtma ve başka bir Azure bölgesinde bir zaman uyumsuz çoğaltması sağlamak için aynı veritabanı yöntemlerini kullanabilirsiniz.
-
-Azure kullanılabilirlik kümeleri konusunda daha fazla bilgi için bkz: [Bu öğreticide](https://docs.microsoft.com/azure/virtual-machines/windows/tutorial-availability-sets).
-
-
-
-## <a name="azure-network-considerations"></a>Azure ağ konuları
-Şema, büyük ölçekli SAP dağıtımlarda kullanın [Azure sanal veri merkezi](https://docs.microsoft.com/azure/architecture/vdc/networking-virtual-datacenter). Sanal ağ yapılandırma, izinleri ve rol atamaları kuruluşunuzun farklı bölümleri için kullanın.
-
-Bu en iyi müşteri dağıtımları yüzlerce sonucudur:
-
-- SAP uygulama içine dağıtılır sanal ağlar, internet erişiminiz yok.
-- ' % S'veritabanı Vm'leri uygulama katmanı aynı sanal ağda çalıştırılır.
-- Sanal ağ içindeki sanal makineler özel IP adresini statik ayırma vardır. Daha fazla bilgi için [IP adresi türleri ve ayırma yöntemleri azure'da](https://docs.microsoft.com/azure/virtual-network/virtual-network-ip-addresses-overview-arm).
-- Yönlendirme kısıtlamalar DBMS VM'lerin *değil* yerel DBMS Vm'lerde yüklü güvenlik duvarları ile ayarlayın. Bunun yerine, trafik yönlendirme ile tanımlanan [ağ güvenlik grupları (Nsg'ler)](https://docs.microsoft.com/azure/virtual-network/security-overview).
-- Ayırın ve DBMS VM trafiğini yalıtmak için VM farklı Nıc'lere atayın. Her NIC, farklı bir IP adresi alır ve her NIC, farklı bir sanal ağ alt ağa atanır. Her alt ağ, farklı NSG kuralları vardır. Ağ trafiği ayrımı ve yalıtım yönlendirme bir ölçüdür. Ağ aktarım hızı için kota ayarlamak için kullanılmaz.
-
-> [!NOTE]
-> Azure aracılığıyla statik IP adresleri atayarak bunları tek tek sanal Nıc'lere atayın anlamına gelir. Sanal bir NIC'ye konuk işletim sistemi içinde statik IP adresleri atamayın Olgu üzerinde bazı Azure Hizmetleri gibi Azure Backup kullanan, en azından birincil sanal NIC'yi DHCP ve statik IP adresleri için ayarlanır. Daha fazla bilgi için [sanal makine yedekleme sorunlarını giderme Azure](https://docs.microsoft.com/azure/backup/backup-azure-vms-troubleshoot#networking). Bir VM'ye birden fazla statik IP adresleri atamak için birden çok sanal NIC bir VM'ye atayın.
->
-
-
-> [!IMPORTANT]
-> Yapılandırma [ağ sanal Gereçleri](https://azure.microsoft.com/solutions/network-appliances/) SAP uygulama, bir SAP NetWeaver - DBMS katman arasındaki iletişim yolunun, Hybris veya SAP S/4HANA tabanlı sistem için desteklenmiyor. Bu kısıtlama, işlevi ve Performans nedeniyle olur. Doğrudan bir SAP uygulama katmanı ve DBMS katman arasındaki iletişim yolunun olmalıdır. Kısıtlama içermez [uygulama güvenlik grubu (ASG) ve NSG kuralları](https://docs.microsoft.com/azure/virtual-network/security-overview) doğrudan iletişim yolunun ASG ve NSG kuralları izin veriyorsa. 
->
-> İçindeki ağ sanal Gereçleri desteklendiği olmayan diğer senaryolar şunlardır:
->
-> * Linux Pacemaker temsil eden bir Azure Vm'leri arasında iletişim yolları, düğümleri ve SBD cihazları açıklandığı gibi küme [SUSE Linux Enterprise Server SAP uygulamaları için Azure vm'lerde SAP NetWeaver için yüksek kullanılabilirlik](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-suse).
-> * Azure sanal makinelerini ve Windows Server genişleme dosya sunucusu (SOFS) arasındaki iletişim yolları ayarlayın açıklandığı kadar [SAP ASCS/SCS örneği ile Azure dosya paylaşımı kullanarak bir Windows Yük devretme kümesinde Küme](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-high-availability-guide-wsfc-file-share). 
->
-> Ağ sanal Gereçleri iletişim yolları, iki iletişim iş ortakları arasında kolayca çift ağ gecikmesi olabilir. Bunlar, SAP uygulama katmanı ve DBMS katmanı arasında kritik yollarda aktarım hızı da kısıtlayabilirsiniz. Bazı müşteri senaryolarda, ağ sanal Gereçleri Pacemaker Linux kümeleri başarısız olmasına neden olabilir. Linux Pacemaker düğümler arasındaki iletişimler SBD cihazını ağ sanal Gereci iletişim kurduğu durumlarda bunlar.
->
-
-> [!IMPORTANT]
-> Başka bir tasarım 's *değil* desteklenir SAP uygulama katmanı ve DBMS katman ayrımı olmayan farklı Azure sanal ağlarına [eşlenmiş](https://docs.microsoft.com/azure/virtual-network/virtual-network-peering-overview) birbiriyle. Farklı Azure sanal ağları kullanarak yerine bir Azure sanal ağ içindeki alt ağlar SAP uygulama katmanında ve DBMS katman ayırmak önerilir. 
->
-> Değil öneriye ve bunun yerine iki katmanı farklı sanal ağlara ayırmak karar verirseniz, iki sanal ağ olmalıdır [eşlenmiş](https://docs.microsoft.com/azure/virtual-network/virtual-network-peering-overview). 
->
-> Unutmayın, ağ trafiğini iki [eşlenmiş](https://docs.microsoft.com/azure/virtual-network/virtual-network-peering-overview) Azure sanal ağları olan aktarım maliyetleri tabidir. Birçok terabaytlarca oluşan büyük veri hacmi DBMS katman ve SAP uygulama katmanı arasında paylaşılmaz. SAP uygulama katmanında ve DBMS katmanı iki eşlenen Azure sanal ağları arasında arkadaşlarından, önemli maliyetleri birikebilir.
-
-DBMS dağıtım Azure kullanılabilirlik içinde üretim için iki VM kullanımı ayarlayın. Ayrıca, SAP uygulama katmanı ve iki DBMS VM yönetimi ve işlemleri trafiği için ayrı ayrı yönlendirme kullanın. Aşağıdaki resme bakın:
-
-![İki alt ağ içindeki iki sanal makine diyagramı](./media/virtual-machines-shared-sap-deployment-guide/general_two_dbms_two_subnets.PNG)
-
-
-### <a name="use-azure-load-balancer-to-redirect-traffic"></a>Trafiği yönlendirmek için Azure Load Balancer'ı kullanın
-SQL Server Always On veya HANA sistem çoğaltması gibi işlevler kullanılan özel sanal IP adresleri Azure yük dengeleyici yapılandırmasını gerektirir. Yük Dengeleyici etkin DBMS düğüm belirlemek ve özel olarak, etkin veritabanı düğümü trafiği yönlendirmek için araştırma bağlantı noktalarını kullanır. 
-
-Bir yük devretme veritabanı düğümü ise, yeniden yapılandırmak SAP uygulamasına gerek yoktur. Bunun yerine, en yaygın SAP uygulama mimarileri karşı özel sanal IP adresine bağlanın. Bu arada, yük dengeleyicinin trafiği özel sanal IP adresi karşı ikinci düğüme yönlendirerek düğüm yük devretme tepki verir.
-
-Azure'un sunduğu iki farklı [yük dengeleyici SKU'ları](https://docs.microsoft.com/azure/load-balancer/load-balancer-overview): temel SKU ve standart SKU. Azure kullanılabilirlik alanları genelinde dağıtmak istediğiniz sürece, temel Azure load balancer'a SKU ince ayar yapar.
-
-Her zaman her zaman yük dengeleyici ile yönlendirildiğinden SAP uygulama katmanı DBMS VM'ler arasındaki trafiği mi? Yanıt, yük dengeleyicinin nasıl yapılandırdığınıza bağlıdır. 
-
-Şu anda DBMS VM'ye gelen trafik her zaman yük dengeleyici üzerinden yönlendirilir. Giden trafik yol DBMS VM'den VM yük dengeleyici yapılandırmasına bağlıdır. uygulama katmanı. 
-
-Yük Dengeleyici noktalarının DirectServerReturn bir seçeneğini sunar. Bu seçeneği yapılandırıldıysa, SAP uygulama katmanına DBMS VM'den yönlendirilmiş trafiğidir *değil* yük dengeleyici üzerinden yönlendirilir. Bunun yerine, doğrudan uygulama katmanına gider. Noktalarının DirectServerReturn yapılandırılmamışsa, dönüş trafiği SAP uygulama katmanı için yük dengeleyici üzerinden yönlendirilir.
-
-SAP uygulama katmanı ve DBMS katmanı arasında konumlandırılmış yük Dengeleyiciler ile birlikte noktalarının DirectServerReturn yapılandırmanızı öneririz. Bu yapılandırma, iki katman arasındaki ağ gecikmesini azaltır.
-
-Bu yapılandırma ile SQL Server Always On ayarlamak nasıl bir örnek için bkz [Azure'da AlwaysOn Kullanılabilirlik grupları için ILB dinleyicisi yapılandırma](https://docs.microsoft.com/azure/virtual-machines/windows/sqlclassic/virtual-machines-windows-classic-ps-sql-int-listener).
-
-Azure'da SAP altyapısını dağıtımlarınız için bir başvuru olarak yayımlanan GitHub JSON şablonları kullanıyorsanız, bu İnceleme [bir SAP 3 katmanlı sistemi için şablonu](https://github.com/Azure/azure-quickstart-templates/tree/4099ad9bee183ed39b88c62cd33f517ae4e25669/sap-3-tier-marketplace-image-converged-md). Bu şablonda doğru ayarların yük dengeleyici için de görebilirsiniz.
-
-### <a name="azure-accelerated-networking"></a>Azure hızlandırılmış ağ iletişimi
-Daha fazla Azure sanal makineler arasındaki ağ gecikmesini azaltmak için seçtiğiniz öneririz [Azure hızlandırılmış ağ](https://azure.microsoft.com/blog/maximize-your-vm-s-performance-with-accelerated-networking-now-generally-available-for-both-windows-and-linux/). Bir SAP iş yükü için SAP uygulama katmanı ve SAP DBMS'yi katmanı için özellikle Azure Vm'leri dağıttığınızda, bunu kullanın.
-
-> [!NOTE]
-> Tüm VM türleri, hızlandırılmış ağ destekler. Önceki makalede hızlandırılmış ağ destekleyen bir VM türleri listeler.
->
+Daha fazla bilgi için bkz. [Azure 'Da Windows VM 'lerinde geçici sürücüyü anlama](https://blogs.msdn.microsoft.com/mast/2013/12/06/understanding-the-temporary-drive-on-windows-azure-virtual-machines/).
 
 ---
 > ![Windows][Logo_Windows] Windows
 >
-> Ağ Windows için hızlandırılmış ile Vm'leri dağıtma konusunda bilgi için bkz [hızlandırılmış ağ ile Windows sanal makine oluşturma](https://docs.microsoft.com/azure/virtual-network/create-vm-accelerated-networking-powershell).
+> Azure VM 'deki D sürücüsü, Azure işlem düğümündeki bazı yerel diskler tarafından desteklenen kalıcı olmayan bir sürücüdür. Kalıcı olmadığından, D sürücüsündeki içerikte yapılan değişiklikler VM yeniden başlatıldığında kaybedilir. Değişiklikler, depolanan dosyaları, oluşturulan dizinleri ve yüklenen uygulamaları içerir.
 >
 > ![Linux][Logo_Linux] Linux
 >
-> Linux dağıtım hakkında daha fazla bilgi için bkz. [hızlandırılmış ağ ile bir Linux sanal makinesi oluşturma](https://docs.microsoft.com/azure/virtual-network/create-vm-accelerated-networking-cli).
+> Linux Azure VM 'leri, Azure işlem düğümündeki yerel disklerle desteklenen kalıcı olmayan bir sürücü olan/mnt/Resource yolunda bir sürücüyü otomatik olarak bağlayabilir. Kalıcı olmadığından,/mnt/Resource dosyasındaki içerikte yapılan tüm değişiklikler, VM yeniden başlatıldığında kaybedilir. Değişiklikler, depolanan dosyaları, oluşturulan dizinleri ve yüklenen uygulamaları içerir.
+>
+>
+
+---
+
+
+
+### <a name="10b041ef-c177-498a-93ed-44b3441ab152"></a>Microsoft Azure Depolama dayanıklılık
+Microsoft Azure Depolama, temel VHD 'yi, işletim sistemi ve bağlı diskler veya bloblarla en az üç ayrı depolama düğümüne depolar. Bu tür bir depolama alanı yerel olarak yedekli depolama (LRS) olarak adlandırılır. LRS, Azure 'daki tüm depolama türleri için varsayılandır.
+
+Başka artıklık yöntemleri vardır. Daha fazla bilgi için bkz. [Azure Storage çoğaltma](https://docs.microsoft.com/azure/storage/common/storage-redundancy?toc=%2fazure%2fstorage%2fqueues%2ftoc.json).
+
+> [!NOTE]
+>Premium Depolama, DBMS VM 'Leri ve veritabanı ve günlük ve yineleme dosyalarını depolayan diskler için önerilen depolama türüdür. Premium Depolama için kullanılabilen tek yedekleme yöntemi LRS 'dir. Sonuç olarak, veritabanı veri çoğaltmasını başka bir Azure bölgesine veya kullanılabilirlik bölgesine etkinleştirmek için veritabanı yöntemlerini yapılandırmanız gerekir. Veritabanı yöntemleri SQL Server Always on, Oracle Data Guard ve HANA sistem çoğaltmasını içerir.
+
+
+> [!NOTE]
+> DBMS dağıtımları için, coğrafi olarak yedekli depolama (GRS) kullanımı standart depolama için önerilmez. GRS, performansı ciddi şekilde etkiler ve bir VM 'ye bağlı farklı VHD 'lerde yazma sırasını dikkate almaz. Farklı VHD 'lerde yazma sırasının, çoğaltma hedefi tarafında tutarsız veritabanlarına yol açmış olma olasılığı yoktur. Bu durum, veritabanı ve günlük ve yeniden yineleme dosyalarının, genellikle kaynak VM tarafında olduğu gibi birden çok VHD 'ye yayıldığı durumlarda meydana gelir.
+
+
+
+## <a name="vm-node-resiliency"></a>VM düğümü dayanıklılığı
+Azure, VM 'Ler için çeşitli farklı SLA 'Lar sunar. Daha fazla bilgi için bkz. [sanal makineler Için SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/v1_8/)'nın en son sürümü. DBMS katmanının genellikle SAP sisteminde kullanılabilirliğine önem sağladığından, kullanılabilirlik kümelerini, kullanılabilirlik bölgelerini ve bakım olaylarını anlamanız gerekir. Bu kavramlar hakkında daha fazla bilgi için bkz. Azure ['Da Windows sanal makinelerinin kullanılabilirliğini yönetme](https://docs.microsoft.com/azure/virtual-machines/windows/manage-availability) ve [Linux sanal makinelerinin kullanılabilirliğini yönetme](https://docs.microsoft.com/azure/virtual-machines/linux/manage-availability).
+
+SAP iş yüküne sahip üretim DBMS senaryolarının en düşük önerisi şunlardır:
+
+- Aynı Azure bölgesindeki ayrı bir kullanılabilirlik kümesinde iki VM dağıtın.
+- Bu iki VM 'yi aynı Azure sanal ağında çalıştırın ve NIC 'Lerin aynı alt ağlardan dışarı takılmış olmasını sağlayabilirsiniz.
+- İkinci VM ile etkin bir bekleme durumu tutmak için veritabanı yöntemlerini kullanın. Yöntemler SQL Server Always on, Oracle Data Guard veya HANA sistem çoğaltması olabilir.
+
+Ayrıca, başka bir Azure bölgesindeki üçüncü bir sanal makineyi dağıtabilir ve başka bir Azure bölgesinde zaman uyumsuz çoğaltma sağlamak için aynı veritabanı yöntemlerini kullanabilirsiniz.
+
+Azure kullanılabilirlik kümelerini ayarlama hakkında daha fazla bilgi için [Bu öğreticiye](https://docs.microsoft.com/azure/virtual-machines/windows/tutorial-availability-sets)bakın.
+
+
+
+## <a name="azure-network-considerations"></a>Azure ağ değerlendirmeleri
+Büyük ölçekli SAP dağıtımlarında [Azure sanal veri merkezi](https://docs.microsoft.com/azure/architecture/vdc/networking-virtual-datacenter)'nin şema ' i kullanın. Kuruluşunuzun farklı bölümlerine sanal ağ yapılandırmanız ve izinleriniz ve rol atamalarınız için bunu kullanın.
+
+Bu en iyi uygulamalar yüzlerce müşteri dağıtımı sonucudur:
+
+- SAP uygulamasının dağıtıldığı sanal ağlar internet erişimi yok.
+- Veritabanı VM 'Leri, uygulama katmanıyla aynı sanal ağda çalışır.
+- Sanal ağ içindeki VM 'Ler, özel IP adresinin statik bir ayırmasını vardır. Daha fazla bilgi için bkz. [Azure 'Da IP adresi türleri ve ayırma yöntemleri](https://docs.microsoft.com/azure/virtual-network/virtual-network-ip-addresses-overview-arm).
+- DBMS VM 'lerine ve bu kaynaklardan yönlendirme kısıtlamaları, yerel DBMS sanal makinelerinde yüklü olan güvenlik duvarları ile birlikte ayarlanmamış. Bunun yerine, trafik yönlendirme [ağ güvenlik grupları (NSG 'ler)](https://docs.microsoft.com/azure/virtual-network/security-overview)ile tanımlanır.
+- Trafiği DBMS VM 'ye ayırmak ve yalıtmak için VM 'ye farklı NIC 'ler atayın. Her NIC farklı bir IP adresi alır ve her NIC farklı bir sanal ağ alt ağına atanır. Her alt ağın farklı NSG kuralları vardır. Ağ trafiğinin yalıtımı veya ayrımı, yönlendirme için bir ölçüdür. Ağ işleme kotalarını ayarlamak için kullanılmaz.
+
+> [!NOTE]
+> Azure aracılığıyla statik IP adresleri atama, bunları ayrı sanal NIC 'lere atama anlamına gelir. Konuk işletim sistemi içinde bir sanal NIC 'ye statik IP adresleri atamayın. Azure Backup gibi bazı Azure Hizmetleri, en azından birincil sanal NIC 'nin statik IP adreslerine değil, DHCP olarak ayarlanmasıdır. Daha fazla bilgi için bkz. [Azure sanal makine yedeklemesi sorunlarını giderme](https://docs.microsoft.com/azure/backup/backup-azure-vms-troubleshoot#networking). Bir VM 'ye birden çok statik IP adresi atamak için, bir VM 'ye birden fazla sanal NIC atayın.
+>
+
+
+> [!IMPORTANT]
+> SAP uygulaması ile SAP NetWeaver-, Hybru-veya S/4HANA tabanlı SAP sisteminin DBMS katmanı arasındaki iletişim yolundaki [ağ sanal](https://azure.microsoft.com/solutions/network-appliances/) gereçlerini yapılandırma desteklenmez. Bu kısıtlama, işlevsellik ve performans nedenleriyle yapılır. SAP uygulama katmanı ve DBMS katmanı arasındaki iletişim yolu doğrudan bir tane olmalıdır. Kısıtlama, bu ASG ve NSG kuralları doğrudan iletişim yoluna izin veriyorsa, [uygulama güvenlik grubu (ASG) ve NSG kurallarını](https://docs.microsoft.com/azure/virtual-network/security-overview) içermez. 
+>
+> Ağ sanal gereçlerinin desteklenmeyen diğer senaryolar şunlardır:
+>
+> * [SAP uygulamalarında SUSE Linux Enterprise Server Azure VM 'LERINDE SAP NetWeaver Için yüksek kullanılabilirlik](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-suse)bölümünde açıklandığı gibi, Linux Paceyapıcısı küme düğümlerini ve SBD cihazlarını temsil eden Azure VM 'ler arasındaki iletişim yolları.
+> * Azure VM 'Ler ile Windows Server Genişleme Dosya Sunucusu (SOFS) arasındaki iletişim yolları, [Azure 'da bir dosya paylaşımının kullanıldığı bir Windows Yük devretme KÜMESINDE SAP ASCS/SCS örneği kümesinde](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-high-availability-guide-wsfc-file-share)açıklandığı şekilde ayarlanır. 
+>
+> İletişim yollarındaki ağ sanal gereçleri iki iletişim ortağı arasındaki ağ gecikmesini kolayca ikiye katmanızı sağlayabilir. Ayrıca, SAP uygulama katmanı ve DBMS katmanı arasındaki kritik yollarda üretilen işi kısıtlayabilir. Bazı müşteri senaryolarında, ağ sanal cihazları pacemaker Linux kümelerinin başarısız olmasına neden olabilir. Bunlar, Linux Paceüreticisi küme düğümleri arasındaki iletişimin bir ağ sanal gereci aracılığıyla SBD cihazlarıyla iletişim kurabileceği durumlardır.
+>
+
+> [!IMPORTANT]
+> Desteklenmeyen başka bir tasarım , SAP uygulama KATMANıNıN ve DBMS katmanının birbirleriyle eşlenmeyen farklı Azure sanal ağlarına yayılmasıdır. [](https://docs.microsoft.com/azure/virtual-network/virtual-network-peering-overview) Farklı Azure sanal ağları kullanmak yerine bir Azure sanal ağı içindeki alt ağları kullanarak SAP uygulama katmanını ve DBMS katmanını ayırt etmenizi öneririz. 
+>
+> Öneriyi izlemeden ve bunun yerine iki katmanı farklı sanal ağlara katmamaya karar verirseniz, iki sanal ağ eşlenmiş olmalıdır. [](https://docs.microsoft.com/azure/virtual-network/virtual-network-peering-overview) 
+>
+> İki Azure sanal ağı arasındaki ağ trafiğinin [](https://docs.microsoft.com/azure/virtual-network/virtual-network-peering-overview) aktarma maliyetlerine tabi olduğunu unutmayın. SAP uygulama katmanı ve DBMS katmanı arasında birçok terabayttan oluşan çok büyük veri hacmi alışverişi yapılır. SAP uygulama katmanının ve DBMS katmanının iki eşlenmiş Azure sanal ağı arasında ayrımı varsa, önemli maliyetler birikmesini sağlayabilirsiniz.
+
+Azure kullanılabilirlik kümesi içindeki üretim DBMS dağıtımınız için iki VM kullanın. Ayrıca, SAP uygulama katmanı için ayrı yönlendirme ve iki DBMS sanal makinesi için yönetim ve işlemler trafiği kullanın. Aşağıdaki resme bakın:
+
+![İki alt ağdaki iki VM 'nin diyagramı](./media/virtual-machines-shared-sap-deployment-guide/general_two_dbms_two_subnets.PNG)
+
+
+### <a name="use-azure-load-balancer-to-redirect-traffic"></a>Trafiği yeniden yönlendirmek için Azure Load Balancer kullanma
+SQL Server Always on veya HANA sistem çoğaltması gibi işlevselilerde kullanılan özel sanal IP adreslerinin kullanımı, bir Azure Yük dengeleyicinin yapılandırılmasını gerektirir. Yük dengeleyici, etkin DBMS düğümünü belirlemek ve trafiği yalnızca o etkin veritabanı düğümüne yönlendirmek için araştırma bağlantı noktalarını kullanır. 
+
+Veritabanı düğümünün yük devretmesi varsa, SAP uygulamasının yeniden yapılandırılması gerekmez. Bunun yerine, en yaygın SAP uygulama mimarileri özel sanal IP adresine karşı yeniden bağlanır. Bu arada, yük dengeleyici trafiği ikinci düğüme özel sanal IP adresine yönlendirerek düğüm yük devretmesine yeniden davranır.
+
+Azure iki farklı [yük dengeleyici SKU](https://docs.microsoft.com/azure/load-balancer/load-balancer-overview)'su sunar: temel bir SKU ve standart SKU. Azure kullanılabilirlik alanları genelinde dağıtmak istemiyorsanız, temel yük dengeleyici SKU 'SU iyi bir şekilde yapılır.
+
+DBMS VM 'Leri ile SAP uygulama katmanı arasındaki trafik her zaman yük dengeleyici üzerinden her zaman yönlendirilir mı? Yanıt, yük dengeleyiciyi nasıl yapılandırdığınıza bağlıdır. 
+
+Şu anda, DBMS sanal makinesine gelen trafik her zaman yük dengeleyici aracılığıyla yönlendirilir. DBMS VM 'den uygulama katmanı VM 'sine giden trafik yolu, yük dengeleyicinin yapılandırmasına bağlıdır. 
+
+Yük dengeleyici bir DirectServerReturn seçeneği sunar. Bu seçenek yapılandırılırsa, DBMS sanal makinesini SAP uygulama katmanına yönlendiren trafik yük dengeleyici üzerinden *yönlendirilmez* . Bunun yerine, doğrudan uygulama katmanına gider. DirectServerReturn yapılandırılmamışsa, SAP uygulama katmanının geri dönüş trafiği yük dengeleyici aracılığıyla yönlendirilir.
+
+DirectServerReturn ' i SAP uygulama katmanı ve DBMS katmanı arasında konumlandırılmış yük dengeleyiciler ile birlikte yapılandırmanızı öneririz. Bu yapılandırma iki katman arasındaki ağ gecikmesini azaltır.
+
+Bu yapılandırmayı SQL Server her zaman açık olarak ayarlama hakkında bir örnek için bkz. [Azure 'Da Always on kullanılabilirlik grupları için BIR ıLB dinleyicisi yapılandırma](https://docs.microsoft.com/azure/virtual-machines/windows/sqlclassic/virtual-machines-windows-classic-ps-sql-int-listener).
+
+Azure 'da SAP altyapı dağıtımlarınız için yayımlanmış GitHub JSON şablonlarını bir başvuru olarak kullanırsanız, bu [şablonu SAP 3 katmanlı bir sistem için](https://github.com/Azure/azure-quickstart-templates/tree/4099ad9bee183ed39b88c62cd33f517ae4e25669/sap-3-tier-marketplace-image-converged-md)inceleyin. Bu şablonda, yük dengeleyici için doğru ayarları da görebilirsiniz.
+
+### <a name="azure-accelerated-networking"></a>Azure hızlandırılmış ağ Iletişimi
+Azure VM 'Ler arasındaki ağ gecikmesini daha fazla azaltmak için [Azure hızlandırılmış ağ](https://azure.microsoft.com/blog/maximize-your-vm-s-performance-with-accelerated-networking-now-generally-available-for-both-windows-and-linux/)' ı seçmenizi öneririz. SAP iş yükü için Azure VM 'Leri dağıtırken, özellikle SAP uygulama katmanı ve SAP DBMS katmanı için bu uygulamayı kullanın.
+
+> [!NOTE]
+> Tüm VM türleri hızlandırılmış ağı desteklemez. Önceki makalede, hızlandırılmış ağı destekleyen VM türleri listelenmektedir.
+>
+
+---
+> ![Windows][Logo_Windows] Windows
+>
+> Windows için hızlandırılmış ağ ile VM 'Leri dağıtmayı öğrenmek için bkz. [hızlandırılmış ağ Ile Windows sanal makinesi oluşturma](https://docs.microsoft.com/azure/virtual-network/create-vm-accelerated-networking-powershell).
+>
+> ![Linux][Logo_Linux] Linux
+>
+> Linux dağıtımı hakkında daha fazla bilgi için bkz. [hızlandırılmış ağ Ile Linux sanal makinesi oluşturma](https://docs.microsoft.com/azure/virtual-network/create-vm-accelerated-networking-cli).
 >
 >
 
 ---
 
 > [!NOTE]
-> SUSE, Red Hat ve Oracle Linux söz konusu olduğunda, hızlandırılmış ağ ile son sürümlerde desteklenir. SLES 12 SP2 veya RHEL 7.2 gibi eski sürümleri, Azure hızlandırılmış ağ desteklemez.
+> SUSE, Red Hat ve Oracle Linux söz konusu olduğunda, hızlandırılmış ağ, son sürümlerde desteklenir. SLES 12 SP2 veya RHEL 7,2 gibi eski sürümler Azure hızlandırılmış ağını desteklemez.
 >
 
 
-## <a name="deployment-of-host-monitoring"></a>İzleme ana bilgisayarı dağıtımı
-Azure sanal makineler'de SAP uygulamaları üretim sırasında kullanım için SAP, Azure sanal makinelerini çalıştıran fiziksel ana bilgisayarlardan verilerin izleme ana bilgisayarı alma olanağı gerektirir. Belirli bir SAP konak Aracısı düzeltme eki düzeyi gereklidir, SAPOSCOL ve SAP konak Aracısı bu yeteneği sağlar. Tam düzeltme eki düzeyi SAP Not belgelenen [1409604].
+## <a name="deployment-of-host-monitoring"></a>Konak izlemenin dağıtımı
+SAP uygulamalarının Azure sanal makinelerinde üretim kullanımı için SAP, Azure sanal makinelerini çalıştıran fiziksel konaklardan konak izleme verilerini alma özelliği gerektirir. SAPOSCOL ve SAP konak aracısında bu yeteneği sağlayan belirli bir SAP konak Aracısı düzeltme eki düzeyi gereklidir. Tam düzeltme eki düzeyi SAP Note [1409604]' de belgelenmiştir.
 
-Bileşenlerin dağıtımına ilişkin ana verileri SAPOSCOL ve SAP konak Aracısı sunan ve bu bileşenlerden birini yaşam döngüsü yönetimi ile ilgili daha fazla bilgi için bkz. [Dağıtım Kılavuzu][deployment-guide].
+Konak verilerini SAPOSCOL ve SAP ana bilgisayar aracısına teslim eden bileşenlerin dağıtımı ve bu bileşenlerin yaşam döngüsü yönetimi hakkında daha fazla bilgi için bkz. [Dağıtım Kılavuzu][deployment-guide].
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Belirli bir DBMS hakkında daha fazla bilgi için bkz:
+Belirli bir DBMS hakkında daha fazla bilgi için bkz.:
 
 - [SAP iş yükü için SQL Server Azure Sanal Makineler DBMS dağıtımı](dbms_guide_sqlserver.md)
 - [SAP iş yükü için Oracle Azure Sanal Makineler DBMS dağıtımı](dbms_guide_oracle.md)
 - [SAP iş yükü için IBM DB2 Azure Sanal Makineler DBMS dağıtımı](dbms_guide_ibm.md)
 - [SAP iş yükü için SAP ASE Azure Sanal Makineler DBMS dağıtımı](dbms_guide_sapase.md)
-- [SAP maxDB, dinamik önbellek ve azure'da içerik sunucusu dağıtımı](dbms_guide_maxdb.md)
+- [Azure 'da SAP maxDB, canlı önbellek ve Içerik sunucusu dağıtımı](dbms_guide_maxdb.md)
 - [Azure işlemlerinde SAP HANA kılavuzu](hana-vm-operations.md)
-- [Azure sanal makineler için SAP HANA yüksek kullanılabilirlik](sap-hana-availability-overview.md)
-- [Azure sanal makineler'de SAP HANA için yedekleme Kılavuzu](sap-hana-backup-guide.md)
+- [Azure sanal makineleri için yüksek kullanılabilirlik SAP HANA](sap-hana-availability-overview.md)
+- [Azure sanal makinelerinde SAP HANA için yedekleme Kılavuzu](sap-hana-backup-guide.md)
 

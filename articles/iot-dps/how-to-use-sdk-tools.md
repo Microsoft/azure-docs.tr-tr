@@ -1,70 +1,69 @@
 ---
-title: Geliştirmeyi basitleştirmek için Azure IOT Hub cihaz sağlama hizmeti SDK'ları sağlanan araçları kullanın
-description: Bu belge, geliştirme için Azure IOT Hub cihaz sağlama hizmeti SDK'ları sağlanan araçları gözden geçirmeleri
-author: yzhong94
-ms.author: yizhon
+title: Geliştirmeyi basitleştirmek için Azure IoT Hub cihaz sağlama hizmeti SDK 'lerinde sunulan araçları kullanın
+description: Bu belgede, geliştirme için Azure IoT Hub cihaz sağlama hizmeti SDK 'lerinde sunulan araçlar incelenir
+author: robinsh
+ms.author: robinsh
 ms.date: 04/09/2018
 ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
-manager: arjmands
-ms.openlocfilehash: dc8c29b1c7d4e5056cb6aeee6335e32687fd547f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 4fd4913776a7d21405f62a28d452bd50cd22f046
+ms.sourcegitcommit: aa042d4341054f437f3190da7c8a718729eb675e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60627330"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68882999"
 ---
-# <a name="how-to-use-tools-provided-in-the-sdks-to-simplify-development-for-provisioning"></a>Geliştirme için sağlama işlemini basitleştirmek için SDK sağlanan araçları kullanma
-IOT Hub cihazı sağlama hizmeti sıfır dokunma ile sağlama işlemini kolaylaştıran just-ın-time [otomatik sağlama](concepts-auto-provisioning.md) güvenli ve ölçeklenebilir bir şekilde.  X.509 sertifikası veya Güvenilir Platform Modülü (TPM) biçiminde güvenlik kanıtlama gereklidir.  Microsoft ile işbirliği ayrıca [diğer güvenlik donanım iş ortaklarından](https://azure.microsoft.com/blog/azure-iot-supports-new-security-hardware-to-strengthen-iot-security/) IOT dağıtım güvenliğindeki emin olmak için. Donanım güvenlik gereksinimi anlama, geliştiriciler için oldukça zor olabilir. Azure IOT sağlama hizmeti SDK'ları kümesi geliştiriciler kolaylık katman sağlama hizmetinizle iletişim kurmasına yazma istemcilerin kullanabilmesi için sağlanır. SDK'ları örnekleri yaygın senaryolar ve bunun yanı sıra güvenlik kanıtlama geliştirme kolaylaştıran araçlar kümesi de sağlar.
+# <a name="how-to-use-tools-provided-in-the-sdks-to-simplify-development-for-provisioning"></a>Sağlama geliştirmeyi basitleştirmek için SDK 'larda sunulan araçları kullanma
+Cihaz sağlama hizmeti IoT Hub, güvenli ve ölçeklenebilir bir şekilde, tam zamanında [Otomatik sağlama](concepts-auto-provisioning.md) sağlayan, sağlama sürecini basitleştirir.  X. 509.440 sertifikası veya Güvenilir Platform Modülü (TPM) biçiminde güvenlik kanıtlama gereklidir.  Microsoft, IoT dağıtımını güvenli hale getirmek için [diğer güvenlik donanımı ortaklarıyla](https://azure.microsoft.com/blog/azure-iot-supports-new-security-hardware-to-strengthen-iot-security/) de işbirliği yapıyor. Donanım güvenlik gereksinimini anlamak geliştiriciler için oldukça zor olabilir. Geliştiricilerin sağlama hizmeti ile iletişim kuran istemcileri yazmak için kullanışlı bir katman kullanabilmesi için bir Azure IoT sağlama hizmeti SDK 'Sı kümesi sunulmaktadır. SDK 'lar Ayrıca yaygın senaryolar için örnekler ve geliştirmede güvenlik kanıtlamasını basitleştirecek bir araç kümesi sağlar.
 
 ## <a name="trusted-platform-module-tpm-simulator"></a>Güvenilir Platform Modülü (TPM) simülatör
-[TPM](https://docs.microsoft.com/azure/iot-dps/concepts-security) platform kimliğini doğrulamak için anahtarları güvenli bir şekilde depolamak için standart bir başvurabilir veya standart uygulama modülleri ile etkileşim kurmak için kullanılan g/ç arabirimi başvurabilir. TPM'ler ayrık donanım, tümleşik donanım, üretici yazılımı veya yazılım tabanlı bulunabilir.  Üretim ortamında TPM cihaz üzerinde ayrı donanım, tümleşik donanım olarak ya da bulunur ve üretici yazılımı tabanlı. Sınama aşamasında, bir yazılım tabanlı TPM simülatörünü geliştiricileri için sağlanır.  Bu simülatörü, yalnızca Windows platformunda şimdilik geliştirmek için kullanılabilir.
+[TPM](https://docs.microsoft.com/azure/iot-dps/concepts-security) , platformun kimliğini doğrulamak için anahtarları güvenli bir şekilde depolamak üzere bir standarda başvurabilir veya standart uygulayan modüllerle etkileşim kurmak için kullanılan g/ç arabirimine başvurabilir. TPMs ayrık donanım, tümleşik donanım, bellenim tabanlı veya yazılım tabanlı olarak bulunabilir.  Üretimde TPM, ayrı donanım, tümleşik donanım ya da bellenim tabanlı olarak cihazda bulunur. Test aşamasında, geliştiricilere yazılım tabanlı bir TPM simülatörü sağlanır.  Bu Benzetici, şimdilik yalnızca Windows platformunda geliştirme için kullanılabilir.
 
 TPM simülatörünü kullanma adımları şunlardır:
-1. [Geliştirme ortamınızı hazırlama](https://docs.microsoft.com/azure/iot-dps/quick-enroll-device-x509-java) ve GitHub deposunu kopyalayın:
+1. [Geliştirme ortamını hazırlayın](https://docs.microsoft.com/azure/iot-dps/quick-enroll-device-x509-java) ve GitHub deposunu kopyalayın:
    ```
    git clone https://github.com/Azure/azure-iot-sdk-java.git
    ```
-2. Altındaki TPM simülatörü klasörüne gidin ```azure-iot-sdk-java/provisioning/provisioning-tool/tpm-simulator/```.
-3. Cihaz sağlama için herhangi bir istemci uygulama çalıştırılmadan önce Simulator.exe çalıştırın.
-4. Kayıt kimliği ve onay anahtarını elde etmek için sağlama işlemi boyunca arka planda simülatör olanak tanır.  Her iki değerin yalnızca bir örneğini çalıştırma için geçerlidir.
+2. Altındaki ```azure-iot-sdk-java/provisioning/provisioning-tool/tpm-simulator/```TPM simülatörü klasörüne gidin.
+3. Cihaz sağlamak için herhangi bir istemci uygulamasını çalıştırmadan önce simülatör. exe ' yi çalıştırın.
+4. Kayıt KIMLIĞI ve onay anahtarı almak için sağlama işlemi boyunca benzeticinin arka planda çalışmasına izin verin.  Her iki değer de yalnızca bir çalıştırmanın bir örneği için geçerlidir.
 
-## <a name="x509-certificate-generator"></a>X.509 Sertifika Oluşturucu
-[X.509 sertifikaları](https://docs.microsoft.com/azure/iot-dps/concepts-security#x509-certificates) bir kanıtlama mekanizması olarak üretim ölçeği ve cihaz sağlamayı kolaylaştırmak için kullanılabilir.  Vardır [birkaç şekilde](https://docs.microsoft.com/azure/iot-hub/iot-hub-x509ca-overview#how-to-get-an-x509-ca-certificate) bir X.509 sertifikası almak için:
-* Üretim ortamı için ortak kök sertifika yetkilisinden bir X.509 CA sertifikası satın almayı öneririz.
-* Sınama ortamı için bir X.509 kök sertifika veya X.509 sertifika zincirini kullanarak oluşturabilirsiniz:
-    * OpenSSL: Sertifika oluşturma için betikler kullanabilirsiniz:
+## <a name="x509-certificate-generator"></a>X. 509.440 sertifika Oluşturucu
+[X. 509.440 sertifikaları](https://docs.microsoft.com/azure/iot-dps/concepts-security#x509-certificates) , üretimi ölçeklendirmek ve cihaz sağlamayı basitleştirmek için bir kanıtlama mekanizması olarak kullanılabilir.  X. 509.440 sertifikası almanın [birkaç yolu](https://docs.microsoft.com/azure/iot-hub/iot-hub-x509ca-overview#how-to-get-an-x509-ca-certificate) vardır:
+* Üretim ortamında, bir ortak kök sertifika yetkilisinden bir X. 509.440 CA sertifikası satın almayı öneririz.
+* Test ortamı için şunu kullanarak bir X. 509.952 kök sertifikası veya X. 509.440 sertifika zinciri oluşturabilirsiniz:
+    * OpenSSL Sertifika oluşturma için betikleri kullanabilirsiniz:
         * [Node.js](https://github.com/Azure/azure-iot-sdk-node/tree/master/provisioning/tools)
-        * [PowerShell veya Bash](https://github.com/Azure/azure-iot-sdk-c/blob/master/tools/CACertificates/CACertificateOverview.md)
+        * [PowerShell veya bash](https://github.com/Azure/azure-iot-sdk-c/blob/master/tools/CACertificates/CACertificateOverview.md)
         
-    * Cihaz kimliği bileşim motoru (DICE) öykünücüsü: İstemci sertifikaları TLS protokolünün ve X.509 kanıtlama göre ve DICE şifreleme cihaz kimliği için kullanılabilir.  [Bilgi](https://www.microsoft.com/research/publication/device-identity-dice-riot-keys-certificates/) DICE cihaz kimliği hakkında daha fazla bilgi.
+    * Cihaz kimliği bileşim altyapısı (zar) öykünücüsü: ZAR, TLS protokolüne ve X. 509.440 istemci sertifikalarına dayalı şifreleme cihaz kimliği ve kanıtlama için kullanılabilir.  ZAR ile cihaz kimliği hakkında daha fazla [bilgi edinin](https://www.microsoft.com/research/publication/device-identity-dice-riot-keys-certificates/) .
 
-### <a name="using-x509-certificate-generator-with-dice-emulator"></a>X.509 Sertifika Oluşturucu DICE öykünücü ile kullanma
-SDK'ları bir X.509 sertifikası Oluşturucu bulunan DICE öykünücüyle sağlamak [Java SDK'sı](https://github.com/Azure/azure-iot-sdk-java/tree/master/provisioning/provisioning-tools/provisioning-x509-cert-generator).  Bu oluşturucu, platformlar arası çalışır.  Oluşturulan sertifika, diğer dillerde geliştirme için kullanılabilir.
+### <a name="using-x509-certificate-generator-with-dice-emulator"></a>ZAR öykünücüsü ile X. 509.440 sertifika oluşturucuyu kullanma
+SDK 'lar, [Java SDK 'sında](https://github.com/Azure/azure-iot-sdk-java/tree/master/provisioning/provisioning-tools/provisioning-x509-cert-generator)yer alan bir X. 509.440 sertifika oluşturucuyu, bir zar öykünücüsünü sağlar.  Bu Oluşturucu platformlar arası bir şekilde çalışmaktadır.  Oluşturulan sertifika diğer dillerde geliştirme için kullanılabilir.
 
-Şu anda çalışırken bir kök sertifikası, bir ara sertifika, bir yaprak sertifikayı ve ilişkili özel anahtarı DICE öykünücü çıkarır.  Ancak, kök sertifika veya ara sertifika ayrı yaprak sertifikayı imzalamak için kullanılamaz.  Çok cihazlı yaprak sertifikaları imzalamak için bir imzalama sertifikası kullanıldığı grubu kayıt senaryoyu test etmek istiyorsanız, bir sertifikalar zincirinden üretmek için OpenSSL kullanabilirsiniz.
+Şu anda, zar öykünücüsü bir kök sertifika, bir ara sertifika, yaprak sertifikası ve ilişkili özel anahtar verir.  Ancak, kök sertifika veya ara sertifika ayrı bir yaprak sertifikayı imzalamak için kullanılamaz.  Birden çok cihazın yaprak sertifikalarını imzalamak için bir imzalama sertifikasının kullanıldığı grup kaydı senaryosunu test etmek istiyorsanız, bir sertifika zinciri oluşturmak için OpenSSL kullanabilirsiniz.
 
-Bu oluşturucu kullanılarak X.509 sertifikası oluşturmak için:
-1. [Geliştirme ortamınızı hazırlama](https://docs.microsoft.com/azure/iot-dps/quick-enroll-device-x509-java) ve GitHub deposunu kopyalayın:
+Bu oluşturucuyu kullanarak X. 509.440 sertifikası oluşturmak için:
+1. [Geliştirme ortamını hazırlayın](https://docs.microsoft.com/azure/iot-dps/quick-enroll-device-x509-java) ve GitHub deposunu kopyalayın:
    ```
    git clone https://github.com/Azure/azure-iot-sdk-java.git
    ```
-2. Kök azure-IOT-sdk-java ile değiştirin.
-3. Çalıştırma ```mvn install -DskipTests=true``` gerekli tüm paketleri indirmek ve SDK'yı derlemek için
-4. X.509 Certificate Generator içinde için kök dizinine gidin ```azure-iot-sdk-java/provisioning/provisioning-tools/provisioning-x509-cert-generator```.
-5. İle oluşturma ```mvn clean install```
+2. Kökü Azure-IoT-SDK-Java olarak değiştirin.
+3. Tüm ```mvn install -DskipTests=true``` gerekli paketleri indirmek ve SDK 'yı derlemek için Çalıştır
+4. ' De ```azure-iot-sdk-java/provisioning/provisioning-tools/provisioning-x509-cert-generator```X. 509.440 sertifika Oluşturucu köküne gidin.
+5. İle derleme```mvn clean install```
 6. Aşağıdaki komutları kullanarak aracı çalıştırın:
    ```
    cd target
    java -jar ./provisioning-x509-cert-generator-{version}-with-deps.jar
    ```
 7. İstendiğinde sertifikalarınız için _Common Name_ (Ortak Ad) girebilirsiniz.
-8. Yerel olarak aracının oluşturduğu bir **Client Cert**, **Client Cert Private Key**, **ara sertifika**ve **Root Cert**.
+8. Araç yerel olarak bir **Istemci sertifikası**, **Istemci sertifikası özel anahtarı**, **Ara Sertifika**ve **kök sertifika**oluşturur.
 
-**İstemci sertifikası** yaprak sertifikanın.  **İstemci sertifikası** ve ilişkili **Client Cert Private Key** cihaz istemcisi gereklidir. Seçtiğiniz hangi dile bağlı olarak, bu istemci uygulamasında koymak için bir mekanizma farklı olabilir.  Daha fazla bilgi için [hızlı Başlangıçlar](https://docs.microsoft.com/azure/iot-dps/quick-create-simulated-device-x509) üzerinde daha fazla bilgi için X.509 kullanarak sanal cihaz oluşturma.
+**Istemci sertifikası** , cihazdaki yaprak sertifikadır.  **Istemci sertifikası** ve Ilişkili **Istemci sertifikası özel anahtarı** cihaz istemcisinde gereklidir. Seçtiğiniz dile bağlı olarak, bunu istemci uygulamasına yerleştirme mekanizması farklı olabilir.  Daha fazla bilgi için bkz. daha fazla bilgi için bkz. sanal cihaz oluşturma ile sanal cihaz oluşturma sırasında [hızlı başlangıç](https://docs.microsoft.com/azure/iot-dps/quick-create-simulated-device-x509) .
 
-Bir kayıt grubu veya bireysel kayıt oluşturmak için kök sertifika veya Ara kullanılabilir [program aracılığıyla](https://docs.microsoft.com/azure/iot-dps/how-to-manage-enrollments-sdks) veya bu adı kullanıyor [portalı](https://docs.microsoft.com/azure/iot-dps/how-to-manage-enrollments).
+Kök sertifika veya ara, [programlama yoluyla](https://docs.microsoft.com/azure/iot-dps/how-to-manage-enrollments-sdks) veya [portalı](https://docs.microsoft.com/azure/iot-dps/how-to-manage-enrollments)kullanarak bir kayıt grubu ya da bireysel kayıt oluşturmak için kullanılabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Kullanarak geliştirme [Azure IOT SDK'sı]( https://github.com/Azure/azure-iot-sdks) Azure IOT Hub ve Azure IOT Hub cihazı sağlama hizmeti için
+* Azure IoT Hub ve Azure IoT Hub cihaz sağlama hizmeti için [Azure ıOT SDK 'sını]( https://github.com/Azure/azure-iot-sdks) kullanarak geliştirme

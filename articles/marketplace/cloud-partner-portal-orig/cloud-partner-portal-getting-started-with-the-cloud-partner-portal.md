@@ -1,59 +1,60 @@
 ---
-title: Başlarken | Azure Market
-description: Bulut iş ortağı portalını kullanmaya başlama.
+title: Başlarken | Azure Marketi
+description: Bulut İş Ortağı Portalı kullanmaya başlama.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: dan-wesley
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/14/2018
 ms.author: pabutler
-ms.openlocfilehash: 9d2c64479f65995c0eca756b86bd0a96a752867d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6065f0485b03a53fa55ae700831869998d9453cc
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935728"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73818368"
 ---
-# <a name="getting-started-with-the-cloud-partner-portal"></a>Bulut iş ortağı portalını kullanmaya başlama
+# <a name="getting-started-with-the-cloud-partner-portal"></a>Bulut İş Ortağı Portalı kullanmaya başlama
 
-Bu makale, bulut iş ortağı Portalı'nın bir kılavuz sağlar. Neler yapabileceğinizi öğrenin teklifleri ile çalışmak için bulut iş ortağı portalını kullanarak [Azure Marketi](https://azuremarketplace.microsoft.com/) ve [AppSource](https://appsource.microsoft.com/).
+Bu makalede Bulut İş Ortağı Portalı izlenecek yol sunulmaktadır. [Azure Marketi](https://azuremarketplace.microsoft.com/) ve [appsource](https://appsource.microsoft.com/)'ta tekliflerle çalışmak için bulut iş ortağı portalı kullanarak neler yapabileceğinizi öğrenin.
 
-<a name="portal-tour"></a>Portalı turu
+<a name="portal-tour"></a>Portal turu
 -----------
 
-Bulut iş ortağı portalı sunar ve bulutta başarılı bir iş çalıştırmak için ihtiyacınız olan her şeyi içerir. Büyük olasılıkla en sık kullanacağınız bu site bölümlerini hızlı bir genel bakış aşağıda verilmiştir.
+Bulut İş Ortağı Portalı, bulutta başarılı bir iş sunmak ve çalıştırmak için ihtiyacınız olan her şeyi içerir. Bu sitenin en sık kullanacağımız bölümlerine hızlı bir genel bakış sunulmaktadır.
 
 ### <a name="left-navigation-bar"></a>Sol gezinti çubuğu
 
-Portalda ilk geldiğinde daraltılabilir gezinti çubuğunu görmeniz gerekir. Burada, menü öğeleri arasında gezinebilirsiniz budur.
+Portala ilk kez girdiğinizde, daraltılabilir gezinti çubuğunu görmeniz gerekir. Bu, menü öğeleri arasında gezinebileceğiniz yerdir.
 
 ![Bulut İş Ortağı Portalı](./media/cloud-partner-portal-getting-started-with-the-cloud-partner-portal/cloud-partner-portal-page.png)
 
-Aşağıdaki öğelerin her biri hakkında daha fazla bilgi için menü çubuğunu kullanın:
+Aşağıdaki öğelerin her biri hakkında daha fazla bilgi edinmek için menü çubuğunu kullanın:
 
-- **Yeni Teklif** -Buraya yeni bir teklif kazandırın.
-- **Tüm teklifler** -durum ve tüm geçerli teklifler durumunu denetleyin.
-- **Kullanıcılar** - [şirketiniz erişimi yönetme ve denetleme](./cloud-partner-portal-manage-users.md).
-- **Bilgi** - öğrendiklerinizi hemen başlayın ve iş ortağı Portalı'nda yenilikleri yeniliklerden haberdar olun.
-- **Insights** -Bul ınsights ve ürün ve müşteri hakkındaki kullanım bilgileri öngörüleri portalını ziyaret ederek.
+- **Yeni teklif** -burada yeni bir teklif başlatın.
+- **Tüm teklifler** -tüm geçerli tekliflerinizin durumunu ve durumunu kontrol edin.
+- **Kullanıcılar** [, şirketiniz için erişimi yönetebilir ve kontrol](./cloud-partner-portal-manage-users.md)-.
+- **Öğrendiklerinizi** öğrenmeye başlayın ve Iş ortağı portalındaki yenilikler hakkında güncel kalın.
+- **Öngörüler** -Öngörüler portalını ziyaret ederek ürünleriniz ve müşterileriniz hakkında Öngörüler ve kullanım bilgileri bulabilirsiniz.
 
-### <a name="offer-page"></a>Teklif
+### <a name="offer-page"></a>Teklif sayfası
 
-Yeni bir teklif başlattığınızda veya teklifiniz düzenlemek için geri dönen sonra turu devam, birçok iş teklifi sayfasında yaparsınız. Burada teklifiniz için tüm ayarları yapılandırmak ve durumunun kontrol budur.
+Tura devam etmek için yeni bir teklif başlattığınızda veya teklifinizi düzenlemeye geri döndüğünüzde teklif sayfasında çok fazla iş gerçekleştirirsiniz. Teklifinizin tüm ayarlarını yapılandırdığınız ve durumunu kontrol ettiğiniz yerdir.
 
-![Teklif](./media/cloud-partner-portal-getting-started-with-the-cloud-partner-portal/offer-page.png)
+![Teklif sayfası](./media/cloud-partner-portal-getting-started-with-the-cloud-partner-portal/offer-page.png)
 
-Teklif sayfasında, şunları yapabilirsiniz:
-- İçerik ekleme veya iki üst düzey modlar arasında geçiş tarafından ürününüzün durumunu kontrol edin: **Düzenleyici** ve **durumu**.
-- Kullanım **Eylem çubuğu** açıkça ürününüzün değişikliklerini kaydetme ve giriş atma yönetme.
-- Gerekli arasında gezinmek **Forms** yazarken her teklif için ürününüzün ayarlarını değiştirin.
+Teklif sayfasında şunları yapabilirsiniz:
+- İki üst düzey mod arasında geçiş yaparak teklifinizin durumunu kontrol edin veya yapın: **Düzenleyici** ve **durum**.
+- Giriş hesabınızı kaydederek ve atarak teklifinizin değişikliklerini açık bir şekilde yönetmek için **eylem çubuğunu** kullanın.
+- Teklifinizin ayarlarını değiştirirken her teklif için gereken **Formlar** arasında gezinin.
 
 ### <a name="menu-bar"></a>Menü çubuğu
 
-Son olarak, ekranın üst kısmında, her zaman için üst menü çubuğundaki gitmek mümkün olacaktır. Bu menü, destek ve geri bildirim için etkileşimli eylemleri içerir. Tüm yayımcı hesabı bilgilerini de erişebilirsiniz.
+Son olarak, ekranınızın en üstünde, her zaman üstteki menü çubuğuna gidebileceksiniz. Bu menü, destek ve geri bildirim için etkileşimli eylemler içerir. Ayrıca, tüm yayımcı hesap bilgilerinizin da erişebilirsiniz.
 
 ![Menü çubuğu](./media/cloud-partner-portal-getting-started-with-the-cloud-partner-portal/menu-bar.png)
 
--   **Yardıma mı ihtiyacınız var?** -Hiç olmadığı kadar kafanız ve yardıma ihtiyacınız varsa bir destek isteği oluşturun ve belgelere bağlantılar bulma.
--   **Geri bildirim** -söylemek istediğiniz bir şey vardır? Bize buradan bildirin. Microsoft Azure Market ve Appsource'ta yayımlama işlemi genel bulut iş ortağı portalı deneyimini kolayca ve mümkün olduğunca sezgisel olarak olun ister. Önceliklendirme ve tüm geri bildirimleri gözden geçirin ve size her zaman gizliliğinize saygı gösteririz. Daha fazla bilgi için sorduğunuzda, yalnızca sizinle iletişim.
-- **Yayımcı hesabı** - ilk yayımcı olmak kabul etmek sözleşme yayımcı anlaşması göreceksiniz portalı ziyaret edin. Daha sonra yayımcı profilinizi düzenlemeler veya sözleşme yeniden ziyaret budur. Tekliflerinizi satabilmek için Geliştirici Merkezi hesabınızda eriştikleri budur.
+-   **Yardım mı gerekiyor?** -Daha önce karıştırdıysanız ve yardım gerekirse, destek isteği oluşturun ve belgelerin bağlantılarını bulun.
+-   **Geri bildirim** -söylemek istediğiniz bir şey var mı? Burada bize bakalım. Microsoft, Azure Marketi 'ni, AppSource Yayımlama sürecini ve genel bulut iş ortağı portalı deneyimini mümkün olduğunca kolay ve sezgisel hale getirmek istiyor. Tüm geri bildirimleri önceliklendirmemiz ve gözden geçiririz ve gizliliğe her zaman saygı duyuyoruz. Yalnızca daha fazla bilgi istediğinizde sizinle iletişim kuracağız.
+- **Yayımcı hesabı** -portalı ilk kez ziyaret ettiğinizde, Yayımcı Anlaşması sözleşmesinin bir yayımcı haline gelmesini kabul edeceğini görürsünüz. Bundan sonra bu, yayımcı profilinizde düzenleme yapabileceğiniz veya sözleşmeyi yeniden ziyaret ettiğiniz yerdir. Ayrıca, bu da geliştirme merkezi hesabınızı, tekliflerinizi satmaya yönelik olarak bağlayabileceğiniz yerdir.

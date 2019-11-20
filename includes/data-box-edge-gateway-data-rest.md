@@ -2,19 +2,18 @@
 author: alkohli
 ms.service: databox
 ms.topic: include
-ms.date: 04/16/2019
+ms.date: 08/21/2019
 ms.author: alkohli
-ms.openlocfilehash: 8a6ceee0f7db4b7b368dce1a28c8edc0b2b11180
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: eb55d993ad8960f821c2b72f0a53602166b7cc7e
+ms.sourcegitcommit: d3dced0ff3ba8e78d003060d9dafb56763184d69
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67189013"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69900594"
 ---
 Bekleyen veriler için:
 
-- BitLocker XTS-AES 256 bit şifrelemeyi, yerel verileri korumak için kullanılır.
-- Paylaşımlarında depolanan verilere erişimi sınırlıdır.
+- Paylaşımlardaki depolanan verilere erişim kısıtlıdır.
 
-    - Paylaşım verilere erişen SMB istemcileri paylaşımıyla ilişkili kullanıcı kimlik bilgileri gerekir. Bu kimlik bilgileri, paylaşımı oluşturulurken tanımlanır.
-    - Bir paylaşıma erişim NFS istemcilerinin IP adreslerini paylaşım oluşturulduğunda eklenmesi gerekir.
+    - Paylaşma verilerine erişen SMB istemcilerinin, paylaşımda ilişkili kullanıcı kimlik bilgileri olması gerekir. Bu kimlik bilgileri, paylaşma oluşturulduğunda tanımlanmıştır.
+    - Bir paylaşıma erişen NFS istemcilerinin IP adresleri, paylaşma oluşturulduğunda eklenmelidir.

@@ -1,9 +1,9 @@
 ---
-title: Çağrıları (üretim taşıma) - Microsoft kimlik platformu web API'leri, mobil uygulama
-description: Bir mobil uygulama oluşturmayı öğrenin çağrıları veritabanını web API'leri (üretim taşıma)
+title: Web API 'Lerini çağıran mobil uygulama (üretime geçiş)-Microsoft Identity platform
+description: Web API 'Lerini çağıran bir mobil uygulama oluşturmayı öğrenin (üretime geçin)
 services: active-directory
 documentationcenter: dev-center-name
-author: danieldobalian
+author: jmprieur
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
@@ -13,37 +13,39 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 05/07/2019
 ms.author: jmprieur
-ms.reviwer: brandwe
+ms.reviwer: jmprieur
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d8b6a5c2a29228de806088ea93e197d42bf1ab47
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 67788dd9257a0a4685313dce44c6a3dfb5e514df
+ms.sourcegitcommit: c556477e031f8f82022a8638ca2aec32e79f6fd9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65962343"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68413611"
 ---
-# <a name="mobile-app-that-calls-web-apis---move-to-production"></a>Web çağıran mobil uygulama API'ler - üretim ortamına taşıyın
+# <a name="mobile-app-that-calls-web-apis---move-to-production"></a>Web API 'Lerini çağıran mobil uygulama-üretime taşı
 
-Bu makalede, üretime geçmeden önce kalite ve uygulama güvenilirliği geliştirme konusunda ayrıntılar sağlar.
+Bu makalede, üretim ortamına taşımadan önce uygulamanızın kalite ve güvenilirliğini geliştirme hakkında ayrıntılı bilgi sağlanır.
 
 ## <a name="handling-errors-in-mobile-applications"></a>Mobil uygulamalardaki hataları işleme
 
-Hata koşulları sayısı, uygulamanızda bu noktada ortaya çıkabilir. İşlemeye yönelik temel senaryolar sessiz hataları ve etkileşim için geri dönüşler ' dir. Üretim için göz önünde bulundurmanız gereken diğer koşullar no-ağ durumlarda, hizmet kesintileri, yönetici onayı için gereksinimleri ve diğer senaryoya özel durumları içerir.
+Bu noktada uygulamanızda bazı hata koşulları oluşabilir. İşlenecek ana senaryolar sessiz arızalardır ve etkileşime geri dönüşlerdir. Üretime göz önünde bulundurmanız gereken diğer koşullar arasında ağ durumları, hizmet kesintileri, yönetici onayı gereksinimleri ve diğer senaryoya özgü durumlar yer alır.
 
-Bu koşulların nasıl ele alınacağını açıklar örnek kod ve wiki içeriği her MSAL kitaplığı sahiptir:
+Her MSAL kitaplığı, bu koşulların nasıl işleneceğini açıklayan örnek kod ve wiki içeriğine sahiptir:
 
-- [MSAL Android Wiki](https://github.com/AzureAD/microsoft-authentication-library-for-android)
-- [MSAL iOS Wiki](https://github.com/AzureAD/microsoft-authentication-library-for-objc/wiki)
-- [MSAL.NET Wiki](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki)
+- [MSAL Android wiki](https://github.com/AzureAD/microsoft-authentication-library-for-android)
+- [MSAL iOS wiki](https://github.com/AzureAD/microsoft-authentication-library-for-objc/wiki)
+- [MSAL.NET wiki](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki)
 
-## <a name="mitigating-and-investigating-issues"></a>Azaltma ve sorunlarını araştırma
+## <a name="mitigating-and-investigating-issues"></a>Sorunları azaltıcı ve araştırın
 
-Uygulamanızdaki sorunları tanılamak için veri toplamak için yardımcı olur. Veri türleri hakkında bilgi toplamak, MSAL platform Wiki konusuna bakın.
+Uygulamanızdaki sorunları tanılamak için veri toplamaya yardımcı olur. Toplayacağınız veri türleri hakkında daha fazla bilgi için bkz. MSAL platform wiksıs.
 
-- Kullanıcılar, karşılaştıkları sorunları olduğunda yardım isteyin. En iyi uygulama, yakalama ve geçici olarak günlüklerini depolamak ve kullanıcılar bunları burada karşıya bir konum sağlayın sağlamaktır. MSAL, kimlik doğrulaması hakkında ayrıntılı bilgi yakalayacak şekilde günlük uzantılar sağlar.
-- Varsa, kullanıcıların uygulamanıza nasıl oturum hakkında veri toplamak için MSAL aracılığıyla telemetri etkinleştirin.
+- Kullanıcılar, sorunlarla karşılaştığında yardım isteyebilir. En iyi uygulama, günlükleri yakalamak ve geçici olarak depolamak ve kullanıcıların bunları karşıya yükleyebilecekleri bir konum sağlamaktır. MSAL, kimlik doğrulamasıyla ilgili ayrıntılı bilgileri yakalamak için günlüğe kaydetme uzantıları sağlar.
+- Varsa, kullanıcıların uygulamanızda nasıl oturum açtığı hakkında veri toplamak için MSAL aracılığıyla Telemetriyi etkinleştirin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 [!INCLUDE [Move to production common steps](../../../includes/active-directory-develop-scenarios-production.md)]
+
+Örneklerden sunulan ek örnekleri deneyin [| Masaüstü ve mobil ortak istemci uygulamaları](sample-v2-code.md#desktop-and-mobile-public-client-apps)

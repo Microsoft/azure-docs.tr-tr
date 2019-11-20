@@ -1,39 +1,33 @@
 ---
-title: Azure İzleyici'de veri çözümü wire | Microsoft Docs
-description: Kablo, birleştirilmiş ağ ve performans verilerini Log Analytics aracılarını ile bilgisayarlardan verilerdir. Verilerin bağıntısını sağlamanıza yardımcı olmak için ağ verileri günlük verilerinizle birleştirilir.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: fc3d7127-0baa-4772-858a-5ba995d1519b
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici 'de tel veri çözümü | Microsoft Docs
+description: Kablo verileri, Log Analytics aracıları olan bilgisayarlardan birleştirilmiş ağ ve performans verileri. Verilerin bağıntısını sağlamanıza yardımcı olmak için ağ verileri günlük verilerinizle birleştirilir.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 10/03/2018
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: b7968de8ad4357241eb8d86d51e991f4bbab959d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/03/2018
+ms.openlocfilehash: 5e19c9bd47fe253f9a416b923ec0cb1748682842
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65601578"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72900584"
 ---
-# <a name="wire-data-20-preview-solution-in-azure-monitor"></a>Wire Data 2.0 (Önizleme) çözümü Azure İzleyici'de
+# <a name="wire-data-20-preview-solution-in-azure-monitor"></a>Azure Izleyici 'de Wire Data 2.0 (Önizleme) çözümü
 
 ![Wire Data sembolü](media/wire-data/wire-data2-symbol.png)
 
-Kablo, birleştirilmiş ağ ve performans verileri, ortamınızda Operations Manager tarafından izlenecek dahil olmak üzere Log Analytics aracısını ile bağlı Windows ve Linux bağlı bilgisayarlardan toplanan verilerdir. Verilerin bağıntısını sağlamanıza yardımcı olmak için ağ verileri diğer günlük verilerinizle birleştirilir.
+Çevre verileri, ortamınızdaki Operations Manager izlenenler de dahil olmak üzere, Windows bağlı ve Linux bağlantılı bilgisayarlardan Log Analytics aracısıyla toplanan birleştirilmiş ağ ve performans verileri. Verilerin bağıntısını sağlamanıza yardımcı olmak için ağ verileri diğer günlük verilerinizle birleştirilir.
 
 [!INCLUDE [azure-monitor-log-analytics-rebrand](../../../includes/azure-monitor-log-analytics-rebrand.md)]
 
-Log Analytics aracısını ek olarak kablo verileri çözüm BT altyapınıza bilgisayarlara yüklemek Microsoft bağımlılık Aracısı kullanır. Bağımlılık Aracıları [OSI modelinde](https://en.wikipedia.org/wiki/OSI_model) 2-3 ağ düzeyleri için bilgisayarlarınıza ve bilgisayarlarınızdan gönderilen ağ verilerini, ayrıca kullanılan çeşitli protokollerle bağlantı noktalarını izler. Verileri Azure İzleyicisi'ne gönderilir ve aracıları kullanma.  
+Log Analytics aracısına ek olarak, kablo verileri çözümü BT altyapınızdaki bilgisayarlara yüklediğiniz Microsoft bağımlılık aracılarını kullanır. Bağımlılık Aracıları [OSI modelinde](https://en.wikipedia.org/wiki/OSI_model) 2-3 ağ düzeyleri için bilgisayarlarınıza ve bilgisayarlarınızdan gönderilen ağ verilerini, ayrıca kullanılan çeşitli protokollerle bağlantı noktalarını izler. Veriler daha sonra Aracılar kullanılarak Azure Izleyici 'ye gönderilir.  
 
 >[!NOTE]
->Hizmet eşlemesi zaten dağıtmış olan veya hizmet eşlemesi dikkate veya [VM'ler için Azure İzleyici](../../azure-monitor/insights/vminsights-overview.md), yeni bir bağlantı ölçümleri veri toplamak ve depolamak iletilen verilerle karşılaştırılabilir bilgi sağlayan bir Azure İzleyicisi'nde kümesi yok.
+>Daha önce Hizmet Eşlemesi dağıttıysanız veya Hizmet Eşlemesi veya [VM'ler için Azure izleyici](../../azure-monitor/insights/vminsights-overview.md)düşünüyorsanız, Azure izleyici 'de toplayıp depolarlar ve depolarlar. böylece, Tel veriye karşılaştırılabilir bilgiler sağlayan yeni bir bağlantı ölçüm verileri kümesi vardır.
 
-Varsayılan olarak, Azure İzleyici, CPU, bellek, disk ve ağ performansı verileri belirtebileceğiniz diğer performans sayaçları yanı sıra Windows ve Linux yerleşik sayaçlar için veri kaydeder. Her aracı için, alt ağlar ve bilgisayar tarafından kullanılmakta olan uygulama düzeyi protokoller de dahil olmak üzere, ağ ve diğer verileri toplama işlemi gerçek zamanlı olarak yapılır.  Wire Data, alttaki TCP aktarım katmanında değil uygulama düzeyindeki ağ verilerine bakar.  Çözüm tek tek ACK'lere ve SYN'lere bakmaz.  Karşılıklı anlaşma tamamlandıktan sonra, bu canlı bir bağlantı olarak kabul edilir ve Bağlandı olarak işaretlenir. Söz konusu bağlantı, her iki taraf da yuvanın açık olduğunu ve verilerin ileri ve geri geçiş yapabildiğini kabul ettiği sürece canlı kalır.  Her iki tarafında bağlantı kapandıktan sonra bu bağlantı kesildi işaretlenir.  Bu nedenle, yalnızca başarıyla tamamlanan paketlerin bant genişliğini sayar; yeniden göndermeleri veya başarısız paketleri raporlamaz.
+Azure Izleyici, varsayılan olarak, Windows ve Linux 'ta yerleşik sayaçların yanı sıra, belirtebileceğiniz diğer performans sayaçlarından CPU, bellek, disk ve ağ performansı verileri için verileri günlüğe kaydeder. Her aracı için, alt ağlar ve bilgisayar tarafından kullanılmakta olan uygulama düzeyi protokoller de dahil olmak üzere, ağ ve diğer verileri toplama işlemi gerçek zamanlı olarak yapılır.  Wire Data, alttaki TCP aktarım katmanında değil uygulama düzeyindeki ağ verilerine bakar.  Çözüm, bireysel ACK ve SYNs 'e bakmıyor.  El sıkışma tamamlandığında, canlı bağlantı kabul edilir ve bağlı olarak işaretlenir. Söz konusu bağlantı, her iki taraf da yuvanın açık olduğunu ve verilerin ileri ve geri geçiş yapabildiğini kabul ettiği sürece canlı kalır.  Her iki taraf da bağlantıyı kapattığında, bağlantısı kesik olarak işaretlenir.  Bu nedenle, yalnızca başarıyla tamamlanan paketlerin bant genişliğini sayar; yeniden göndermeleri veya başarısız paketleri raporlamaz.
 
 [Cisco'nun NetFlow protokolüyle](https://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/ios-netflow/prod_white_paper0900aecd80406232.html) [sFlow](http://www.sflow.org/)'u veya başka bir yazılımı kullandıysanız, sinyal verilerinden gördüğünüz istatistikler ve veriler tanıdık gelecektir.
 
@@ -52,44 +46,44 @@ Yerleşik Günlük arama sorgusu türlerinden bazıları şunlardır:
 
 Sinyal verilerini kullanarak arama yaptığınızda, en önemli aracılar ve en önemli protokoller hakkındaki bilgileri görüntülemek için verileri filtreleyebilir ve gruplandırabilirsiniz. Öte yandan bazı bilgisayarların (IP adresleri/MAC adresleri) birbiriyle ne zaman, ne kadar süreyle iletişim kurduğunu ve ne kadar veri gönderildiği de görüntüleyebilirsiniz. Temelde, ağ trafiği hakkında arama tabanlı olan meta verileri görüntülersiniz.
 
-Bununla birlikte, meta verileri görüntülediğiniz için bunların kapsamlı bir sorun giderme işleminde kullanışlı olması şart değildir. Kablo verileri Azure İzleyici'de tam bir yakalama ağ veri değil.  Derin paket düzeyi sorun giderme işlemlerine yönelik değildir. Diğer koleksiyon yöntemler ile karşılaştırıldığında Aracı'yı kullanmanın avantajı, cihazları yükleyin, ağ anahtarlarını yeniden yapılandırma ya da karmaşık yapılandırmaları gerçekleştirin gerekmemesidir. Sinyal verileri yalnızca aracı tabanlıdır; bilgisayara aracıyı yüklersiniz ve o da kendi ağ trafiğini izler. Bir diğer avantajı da, kullanıcının yapı katmanına sahip olmadığı bulut sağlayıcılarında ya da barındıran hizmet sağlayıcısında veya Microsoft Azure'da çalıştırılan iş yüklerini izlemek istediğinizde ortaya çıkar.
+Bununla birlikte, meta verileri görüntülediğiniz için bunların kapsamlı bir sorun giderme işleminde kullanışlı olması şart değildir. Azure Izleyici 'deki tel veri, ağ verilerinin tam bir yakalaması değildir.  Derin paket düzeyi sorun giderme işlemlerine yönelik değildir. Diğer koleksiyon yöntemleriyle karşılaştırıldığında, aracıyı kullanmanın avantajı, gereçlerini yüklemenize, ağ anahtarlarınızı yeniden yapılandırmanıza veya karmaşık konfigürasyonlar gerçekleştirmenize gerek kalmaz. Sinyal verileri yalnızca aracı tabanlıdır; bilgisayara aracıyı yüklersiniz ve o da kendi ağ trafiğini izler. Bir diğer avantajı da, kullanıcının yapı katmanına sahip olmadığı bulut sağlayıcılarında ya da barındıran hizmet sağlayıcısında veya Microsoft Azure'da çalıştırılan iş yüklerini izlemek istediğinizde ortaya çıkar.
 
 ## <a name="connected-sources"></a>Bağlı kaynaklar
 
-Wire Data verilerini Microsoft Bağımlılık Aracısı'ndan alır. Bağımlılık Aracısı'nı, Azure İzleyici, bağlantı için Log Analytics aracısını bağlıdır. Başka bir deyişle, bir sunucuya yüklenmiş ve yapılandırılmış bağımlılık aracısını Log Analytics aracısını olması gerekir. Aşağıdaki tabloda Wire Data çözümü tarafından desteklenen bağlı kaynaklar açıklanır:
+Wire Data verilerini Microsoft Bağımlılık Aracısı'ndan alır. Dependency Agent, Azure Izleyici bağlantıları için Log Analytics aracısına bağlıdır. Bu, bir sunucuda Log Analytics aracısının yüklü olması ve bağımlılık aracısıyla yapılandırılması gerektiği anlamına gelir. Aşağıdaki tabloda Wire Data çözümü tarafından desteklenen bağlı kaynaklar açıklanır:
 
 | **Bağlı kaynak** | **Destekleniyor** | **Açıklama** |
 | --- | --- | --- |
-| Windows aracıları | Evet | Wire Data, Windows aracı bilgisayarlarından gelen verileri analiz eder ve toplar. <br><br> Ek olarak [Windows için Log Analytics aracısını](../../azure-monitor/platform/agent-windows.md), Windows aracıları Microsoft bağımlılık Aracısı gerektirir. İşletim sistemi sürümlerinin tam listesi için bkz. [Desteklenen işletim sistemleri](../../azure-monitor/insights/service-map-configure.md#supported-windows-operating-systems). |
-| Linux aracıları | Evet | Wire Data, Linux aracı bilgisayarlarından gelen verileri analiz eder ve toplar.<br><br> Ek olarak [Linux için Log Analytics aracısını](../../azure-monitor/learn/quick-collect-linux-computer.md), Linux aracıları Microsoft bağımlılık Aracısı gerektirir. İşletim sistemi sürümlerinin tam listesi için bkz. [Desteklenen işletim sistemleri](../../azure-monitor/insights/service-map-configure.md#supported-linux-operating-systems). |
-| System Center Operations Manager yönetim grubu | Evet | Wire Data, bağlantılı bir [System Center Operations Manager yönetim grubunda](../../azure-monitor/platform/om-agents.md) Windows ve Linux aracılarından gelen verileri analiz eder ve toplar. <br><br> Azure İzleyici System Center Operations Manager Aracısı bilgisayardan doğrudan bir bağlantı gereklidir. |
+| Windows aracıları | Yes | Wire Data, Windows aracı bilgisayarlarından gelen verileri analiz eder ve toplar. <br><br> Windows Agents, [Windows için Log Analytics aracısına](../platform/agent-windows.md)ek olarak Microsoft bağımlılık Aracısı 'nı gerektirir. İşletim sistemi sürümlerinin tam listesi için bkz. [Desteklenen işletim sistemleri](vminsights-enable-overview.md#supported-operating-systems). |
+| Linux aracıları | Yes | Wire Data, Linux aracı bilgisayarlarından gelen verileri analiz eder ve toplar.<br><br> Linux [için Log Analytics aracısına](../learn/quick-collect-linux-computer.md)ek olarak, Linux aracıları Microsoft bağımlılık Aracısı gerektirir. İşletim sistemi sürümlerinin tam listesi için bkz. [Desteklenen işletim sistemleri](vminsights-enable-overview.md#supported-operating-systems). |
+| System Center Operations Manager yönetim grubu | Yes | Wire Data, bağlantılı bir [System Center Operations Manager yönetim grubunda](../platform/om-agents.md) Windows ve Linux aracılarından gelen verileri analiz eder ve toplar. <br><br> System Center Operations Manager Aracısı bilgisayarından Azure Izleyici 'ye doğrudan bağlantı gereklidir. |
 | Azure depolama hesabı | Hayır | Wire Data verileri aracı bilgisayarlardan topladığından, Azure Depolama'dan toplayacağı veri yoktur. |
 
-Windows üzerinde Microsoft Monitoring Agent (MMA) System Center Operations Manager ve Azure İzleyici tarafından toplayın ve veri göndermek için kullanılır. Bağlama bağlı olarak aracıyı System Center Operations Manager Aracısı, Log Analytics aracısını, MMA veya doğrudan aracı olarak adlandırılır. System Center Operations Manager ve Azure İzleyici MMA biraz farklı sürümlerini sağlar. Bu sürümleri her System Center Operations Manager için Azure İzleyici veya her ikisine de bildirebilirsiniz.
+Windows 'da Microsoft Monitoring Agent (MMA), veri toplamak ve göndermek için hem System Center Operations Manager hem de Azure Izleyici tarafından kullanılır. Bağlama bağlı olarak, aracıya System Center Operations Manager Aracı, Log Analytics Aracısı, MMA veya doğrudan Aracı denir. System Center Operations Manager ve Azure Izleyici, MMA 'nın biraz farklı sürümlerini sağlar. Bu sürümler her rapor System Center Operations Manager, Azure Izleyici 'ye veya her ikisine de bağlanabilir.
 
-Linux üzerinde Linux için Log Analytics aracısını toplar ve bu verileri Azure İzleyicisi'ne gönderir. İletilen verilerle aracılar için Azure İzleyici doğrudan bağlı sunucularda veya Azure İzleyici, System Center Operations Manager Yönetim grupları bağlanan sunucular kullanabilirsiniz.
+Linux 'ta, Linux için Log Analytics Aracısı verileri toplayıp Azure Izleyici 'ye gönderir. Azure Izleyici 'ye doğrudan bağlı aracılarla veya System Center Operations Manager yönetim grupları aracılığıyla Azure Izleyici 'ye bağlanan sunucularda, Tel verileri kullanabilirsiniz.
 
-Bağımlılık Aracısı'nın kendisi hiçbir veri iletmez ve güvenlik duvarları veya bağlantı noktalarında hiçbir değişiklik yapılmasını gerektirmez. İletilen verilerle verileri her zaman Azure İzleyici, Log Analytics aracı tarafından doğrudan veya Log Analytics ağ geçidi üzerinden aktarılır.
+Bağımlılık Aracısı herhangi bir veri iletmez ve güvenlik duvarları veya bağlantı noktalarında değişiklik gerektirmez. Bu veriler, her zaman doğrudan veya Log Analytics ağ geçidi aracılığıyla Log Analytics Aracısı tarafından Azure Izleyici 'ye iletilir.
 
 ![aracı diyagramı](./media/wire-data/agents.png)
 
-Azure İzleyicisi'ne bağlı bir yönetim grubu ile System Center Operations Manager kullanıcı varsa:
+Azure Izleyici 'ye bağlı bir yönetim grubu System Center Operations Manager bir Kullanıcı kullanıyorsanız:
 
-- System Center Operations Manager aracılarının Azure İzleyicisi ile bağlantı Internet'e erişebiliyorsa ek yapılandırma gerekmiyor.
-- System Center Operations Manager aracılarının Internet üzerinden Azure İzleyici erişemediğinde System Center Operations Manager ile çalışmak için Log Analytics ağ geçidi yapılandırmanız gerekir.
+- System Center Operations Manager aracılarınız Azure Izleyici 'ye bağlanmak üzere internet 'e erişebil, ek yapılandırma gerekmez.
+- System Center Operations Manager aracılarınız Internet üzerinden Azure Izleyici 'ye erişegerekmiyorsa, Log Analytics ağ geçidini System Center Operations Manager ile çalışacak şekilde yapılandırmanız gerekir.
 
-Windows veya Linux bilgisayarlarınızın doğrudan hizmetine bağlanamıyor, Azure Log Analytics ağ geçidini kullanarak İzleyici bağlanmak için Log Analytics aracısını yapılandırmak gerekir. Log Analytics ağ geçidi'nden indirebileceğiniz [Microsoft Download Center](https://www.microsoft.com/download/details.aspx?id=52666).
+Windows veya Linux bilgisayarlarınız hizmete doğrudan bağlanamıyorsa, Log Analytics aracısını Log Analytics ağ geçidini kullanarak Azure Izleyici 'ye bağlanacak şekilde yapılandırmanız gerekir. Log Analytics ağ geçidini [Microsoft Indirme merkezi](https://www.microsoft.com/download/details.aspx?id=52666)' nden indirebilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 - [İçgörü ve Analiz](https://www.microsoft.com/cloud-platform/operations-management-suite-pricing) çözüm teklifi gereklidir.
 - Wire Data çözümünü önceki sürümünü kullanıyorsanız, önce o sürümü kaldırmalısınız. Ancak özgün Wire Data çözümüyle yakalanmış olan tüm veriler Wire Data 2.0'da ve günlük aramasında yine kullanılabilir.
-- Bağımlılık Aracısı'nı yükleme veya kaldırmak için yönetici ayrıcalıkları gereklidir.
-- Bağımlılık Aracısı 64 bit işletim sistemine sahip bir bilgisayara yüklenmelidir.
+- Bağımlılık aracısını yüklemek veya kaldırmak için yönetici ayrıcalıkları gerekir.
+- Bağımlılık aracısının 64 bitlik bir işletim sistemine sahip bir bilgisayara yüklenmesi gerekir.
 
 ### <a name="operating-systems"></a>İşletim sistemleri
 
-Aşağıdaki bölümlerde Bağımlılık Aracısı için desteklenen işletim sistemleri listelenir. Wire Data hiçbir işletim sisteminin 32 bit mimarilerini desteklemez.
+Aşağıdaki bölümlerde, bağımlılık Aracısı için desteklenen işletim sistemleri listelenmektedir. Wire Data hiçbir işletim sisteminin 32 bit mimarilerini desteklemez.
 
 #### <a name="windows-server"></a>Windows Server
 
@@ -102,63 +96,63 @@ Aşağıdaki bölümlerde Bağımlılık Aracısı için desteklenen işletim si
 
 #### <a name="windows-desktop"></a>Windows masaüstü
 
-- Windows 10, 1803
+- Windows 10 1803
 - Windows 10
 - Windows 8.1
 - Windows 8
 - Windows 7
 
 #### <a name="supported-linux-operating-systems"></a>Desteklenen Linux işletim sistemleri
-Aşağıdaki bölümlerde, Linux üzerinde bağımlılık aracısı için desteklenen işletim sistemleri listelenmiştir.  
+Aşağıdaki bölümlerde, Linux üzerinde bağımlılık Aracısı için desteklenen işletim sistemleri listelenmektedir.  
 
 - Yalnızca varsayılan ve SMP Linux çekirdek sürümleri desteklenir.
-- PAE ve Xen gibi standart dışı çekirdek sürümleri hiçbir Linux dağıtımında desteklenmez. Örneğin, "2.6.16.21-0.8-xen" sürüm dizesi sistemiyle desteklenmiyor.
+- PAE ve Xen gibi standart dışı çekirdek sürümleri hiçbir Linux dağıtımında desteklenmez. Örneğin, "2.6.16.21-0.8-Xen" yayın dizesiyle bir sistem desteklenmez.
 - Standart çekirdeklerin yeniden derlemeleri de dahil olmak üzere özel çekirdekler desteklenmez.
 
 ##### <a name="red-hat-linux-7"></a>Red Hat Linux 7
 
 | İşletim sistemi sürümü | Çekirdek sürümü |
 |:--|:--|
-| 7.4 | 3.10.0-693 |
-| 7.5 | 3.10.0-862 |
-| 7.6 | 3.10.0-957 |
+| 7,4 | 3.10.0-693 |
+| 7,5 | 3.10.0-862 |
+| 7,6 | 3.10.0-957 |
 
 ##### <a name="red-hat-linux-6"></a>Red Hat Linux 6
 
 | İşletim sistemi sürümü | Çekirdek sürümü |
 |:--|:--|
-| 6.9 | 2.6.32-696 |
-| 6.10 | 2.6.32-754 |
+| 6,9 | 2.6.32-696 |
+| 6,10 | 2.6.32-754 |
 
 ##### <a name="centosplus"></a>CentOSPlus
 | İşletim sistemi sürümü | Çekirdek sürümü |
 |:--|:--|
-| 6.9 | 2.6.32-696.18.7<br>2.6.32-696.30.1 |
-| 6.10 | 2.6.32-696.30.1<br>2.6.32-754.3.5 |
+| 6,9 | 2.6.32-696.18.7<br>2.6.32-696.30.1 |
+| 6,10 | 2.6.32-696.30.1<br>2.6.32-754.3.5 |
 
 ##### <a name="ubuntu-server"></a>Ubuntu Server
 
 | İşletim sistemi sürümü | Çekirdek sürümü |
 |:--|:--|
-| Ubuntu 18.04 | kernel 4.15.\*<br>4.18* |
-| Ubuntu 16.04.3 | Çekirdek 4.15. * |
-| 16.04 | 4.4.\*<br>4.8.\*<br>4.10.\*<br>4.11.\*<br>4.13.\* |
-| 14.04 | 3.13.\*<br>4.4.\* |
+| Ubuntu 18.04 | Çekirdek 4,15.\*<br>4,18 * |
+| Ubuntu 16.04.3 | Çekirdek 4,15. * |
+| 16,04 | 4,4. \*<br>4,8. \*<br>4,10. \*<br>4,11. \*<br>4,13. \* |
+| 14,04 | 3,13.\*<br>4,4. \* |
 
 ##### <a name="suse-linux-11-enterprise-server"></a>SUSE Linux 11 Enterprise Server
 
 | İşletim sistemi sürümü | Çekirdek sürümü
 |:--|:--|
-| 11 SP4 | 3.0.* |
+| 11 SP4 | 3,0. * |
 
-##### <a name="suse-linux-12-enterprise-server"></a>SUSE Linux 12 kuruluş sunucusu
+##### <a name="suse-linux-12-enterprise-server"></a>SUSE Linux 12 Enterprise Server
 
 | İşletim sistemi sürümü | Çekirdek sürümü
 |:--|:--|
-| 12 SP2 | 4.4. * |
-| 12 SP3 | 4.4. * |
+| 12 SP2 | 4,4. * |
+| 12 SP3 | 4,4. * |
 
-### <a name="dependency-agent-downloads"></a>Bağımlılık aracısını yükleme
+### <a name="dependency-agent-downloads"></a>Bağımlılık Aracısı İndirmeleri
 
 | Dosya | İşletim Sistemi | Sürüm | SHA-256 |
 |:--|:--|:--|:--|
@@ -171,25 +165,25 @@ Aşağıdaki bölümlerde, Linux üzerinde bağımlılık aracısı için destek
 
 Çalışma alanlarınızda Wire Data çözümünü yapılandırmak için aşağıdaki adımları uygulayın.
 
-1. Etkinlik günlüğü analizi çözümü etkinleştirme [Azure Market](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.WireData2OMS?tab=Overview) veya açıklanan işlemi kullanarak [çözüm galeri'sinden izleme Ekle](../../azure-monitor/insights/solutions.md).
-2. Veri almak istediğiniz her bilgisayara Bağımlılık Aracısı'nı yükleyin. Bağımlılık Aracısı en yakındaki komşularla bağlantıları izleyebildiğinden her bilgisayarda bir aracıya ihtiyacınız olmayabilir.
+1. Etkinlik Günlüğü Analizi çözümünü [Azure Marketi](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.WireData2OMS?tab=Overview) 'nden veya [Çözüm Galerisi izleme çözümlerini ekleme](../../azure-monitor/insights/solutions.md)bölümünde açıklanan işlemi kullanarak etkinleştirin.
+2. Veri almak istediğiniz her bilgisayara bağımlılık aracısını yükler. Bağımlılık Aracısı anında komşular için bağlantıları izleyebilir, bu nedenle her bilgisayarda bir aracıya ihtiyacınız olmayabilir.
 
 > [!NOTE]
 > Wire Data çözümünün önceki sürümünü yeni çalışma alanlarına ekleyemezsiniz. Özgün Wire Data çözümünü daha önce etkinleştirdiyseniz, bunu kullanmaya devam edebilirsiniz. Öte yandan, Wire Data 2.0'ı kullanmak için önce özgün sürümü kaldırmanız gerekir.
 > 
  
-### <a name="install-the-dependency-agent-on-windows"></a>Windows'da Bağımlılık Aracısı'nı yükleme
+### <a name="install-the-dependency-agent-on-windows"></a>Windows 'a bağımlılık Aracısı 'nı yükler
 
 Aracıyı yüklemek veya kaldırmak için yönetici ayrıcalıkları gereklidir.
 
-Bağımlılık Aracısı, Windows çalıştıran bilgisayarlara InstallDependencyAgent-Windows.exe ile yüklenir. Bu yürütülebilir dosyayı hiçbir seçenek olmadan çalıştırırsanız, etkileşimli yükleme yapmak için izleyebileceğiniz bir sihirbaz başlatır.
+Bağımlılık Aracısı, InstallDependencyAgent-Windows. exe ile Windows çalıştıran bilgisayarlara yüklenir. Bu yürütülebilir dosyayı hiçbir seçenek olmadan çalıştırırsanız, etkileşimli yükleme yapmak için izleyebileceğiniz bir sihirbaz başlatır.
 
-Windows çalıştıran her bilgisayara Bağımlılık Aracısı'nı yüklemek için aşağıdaki adımları kullanın:
+Windows çalıştıran her bilgisayara bağımlılık Aracısı 'nı yüklemek için aşağıdaki adımları kullanın:
 
-1. Yükleme adımlarını izleyerek Log Analytics aracısını [ortamınızda barındırılan Windows bilgisayarlardan verileri toplama](../../azure-monitor/platform/agent-windows.md).
-2. Önceki bölümde verilen bağlantıyı kullanarak Windows Bağımlılık Aracısı'nı indirin ve ardından şu komutu kullanarak aracıyı çalıştırın: `InstallDependencyAgent-Windows.exe`
+1. [Ortamınızda barındırılan Windows bilgisayarlarından veri toplama](../../azure-monitor/platform/agent-windows.md)bölümündeki adımları izleyerek Log Analytics aracısını yüklersiniz.
+2. Önceki bölümdeki bağlantıyı kullanarak Windows bağımlılık Aracısı 'nı indirin ve ardından aşağıdaki komutu kullanarak çalıştırın: `InstallDependencyAgent-Windows.exe`
 3. Sihirbazı izleyerek aracıyı yükleyin.
-4. Dependency Agent başlatılamazsa, ayrıntılı hata bilgileri için günlükleri denetleyin. Windows aracıları için günlük dizini: %Programfiles%\Microsoft Dependency Agent\logs.
+4. Bağımlılık Aracısı başlatılamazsa, ayrıntılı hata bilgileri için günlüklere bakın. Windows aracıları için günlük dizini: %Programfiles%\Microsoft Dependency Agent\logs.
 
 #### <a name="windows-command-line"></a>Windows komut satırı
 
@@ -202,19 +196,19 @@ InstallDependencyAgent-Windows.exe /?
 | <code>/?</code> | Komut satırı seçeneklerinin listesini alır. |
 | <code>/S</code> | Kullanıcıdan bilgi istenmeden sessiz yükleme gerçekleştirir. |
 
-Windows Bağımlılık Aracısı'nın dosyaları varsayılan olarak C:\Program Files\Microsoft Dependency Agent konumuna yerleştirilir.
+Windows bağımlılık aracısının dosyaları varsayılan olarak C:\Program Files\Microsoft Dependency Agent 'a yerleştirilir.
 
-### <a name="install-the-dependency-agent-on-linux"></a>Linux'ta Bağımlılık Aracısı'nı yükleme
+### <a name="install-the-dependency-agent-on-linux"></a>Linux 'a bağımlılık Aracısı 'nı yükler
 
 Aracıyı yüklemek veya yapılandırmak için kök erişimi gerekir.
 
-Bağımlılık Aracısı Linux bilgisayarlarına kendi kendine ayıklama ikili dosyası içeren InstallDependencyAgent-Linux64.bin kabuk betiğiyle yüklenir. Dosyayı çalıştırmak için _sh_ kullanın veya dosyanın kendisine yürütme izinleri ekleyin.
+Bağımlılık Aracısı, kendi kendine ayıklanan ikiliye sahip bir kabuk betiği olan InstallDependencyAgent-Linux64. bin aracılığıyla Linux bilgisayarlara yüklenir. Dosyayı çalıştırmak için _sh_ kullanın veya dosyanın kendisine yürütme izinleri ekleyin.
 
-Her Linux bilgisayarına Bağımlılık Aracısı'nı yüklemek için aşağıdaki adımları kullanın:
+Her bir Linux bilgisayara bağımlılık Aracısı 'nı yüklemek için aşağıdaki adımları kullanın:
 
-1. Yükleme adımlarını izleyerek Log Analytics aracısını [ortamınızda barındırılan Linux bilgisayarlardan verileri toplama](../../azure-monitor/learn/quick-collect-linux-computer.md#obtain-workspace-id-and-key).
-2. Önceki bölümde verilen bağlantıyı kullanarak Linux Bağımlılık Aracısı'nı indirin ve ardından bunu kök olarak yüklemek için şu komutu kullanın: sh InstallDependencyAgent-Linux64.bin
-3. Dependency Agent başlatılamazsa, ayrıntılı hata bilgileri için günlükleri denetleyin. Linux aracıları için günlük dizini: /var/opt/microsoft/dependency-agent/log.
+1. [Ortamınızda barındırılan Linux bilgisayarlardan veri toplama](../../azure-monitor/learn/quick-collect-linux-computer.md#obtain-workspace-id-and-key)bölümündeki adımları izleyerek Log Analytics aracısını yüklersiniz.
+2. Önceki bölümde bulunan bağlantıyı kullanarak Linux bağımlılık aracısını indirin ve ardından aşağıdaki komutu kullanarak onu kök olarak yükleyin: SH InstallDependencyAgent-Linux64. bin
+3. Bağımlılık Aracısı başlatılamazsa, ayrıntılı hata bilgileri için günlüklere bakın. Linux aracıları için günlük dizini: /var/opt/microsoft/dependency-agent/log.
 
 Yükleme bayraklarının listesini görmek için, yükleme programını aşağıda gösterildiği gibi `-help` bayrağıyla çalıştırın.
 
@@ -228,7 +222,7 @@ InstallDependencyAgent-Linux64.bin -help
 | <code>-s</code> | Kullanıcıdan bilgi istenmeden sessiz yükleme gerçekleştirir. |
 | <code>--check</code> | İzinleri ve işletim sistemini denetleyin ama aracıyı yüklemeyin. |
 
-Bağımlılık Aracısı'nın dosyaları aşağıdaki dizinlere yerleştirilir:
+Bağımlılık aracısına ait dosyalar aşağıdaki dizinlere yerleştirilir:
 
 | **Dosyalar** | **Konum** |
 | --- | --- |
@@ -240,7 +234,7 @@ Bağımlılık Aracısı'nın dosyaları aşağıdaki dizinlere yerleştirilir:
 
 ### <a name="installation-script-examples"></a>Yükleme betiği örnekleri
 
-Bağımlılık Aracısı'nı bir kerede birçok sunucuya kolayca dağıtmak için, betik kullanmak yararlı olabilir. Windows veya Linux'a Bağımlılık Aracısı'nı indirip yüklemek için aşağıdaki betik örneklerini kullanabilirsiniz.
+Bağımlılık aracısını aynı anda birçok sunucuya kolayca dağıtmak için bir betik kullanılmasına yardımcı olur. Windows veya Linux 'ta bağımlılık aracısını indirmek ve yüklemek için aşağıdaki betik örneklerini kullanabilirsiniz.
 
 #### <a name="powershell-script-for-windows"></a>Windows için PowerShell betiği
 
@@ -264,7 +258,7 @@ sh InstallDependencyAgent-Linux64.bin -s
 
 ### <a name="desired-state-configuration"></a>İstenen Durum Yapılandırması
 
-Bağımlılık Aracısı'nı Desired State Configuration yoluyla dağıtmak için, xPSDesiredStateConfiguration modülünü ve aşağıdaki gibi küçük bir kod kullanabilirsiniz:
+Bağımlılık aracısını Istenen durum yapılandırması aracılığıyla dağıtmak için xPSDesiredStateConfiguration modülünü ve aşağıdakiler gibi bir kod bitini kullanabilirsiniz:
 
 ```powershell
 Import-DscResource -ModuleName xPSDesiredStateConfiguration
@@ -277,7 +271,7 @@ Node $NodeName
 
 {
 
-    # Download and install the Dependency Agent
+    # Download and install the Dependency agent
 
     xRemoteFile DAPackage
 
@@ -317,19 +311,19 @@ Node $NodeName
 
 ```
 
-### <a name="uninstall-the-dependency-agent"></a>Bağımlılık Aracısı'nı kaldırma
+### <a name="uninstall-the-dependency-agent"></a>Bağımlılık aracısını kaldırma
 
-Aşağıdaki bölümler Bağımlılık Aracısı'nı kaldırmanıza yardımcı olabilir.
+Bağımlılık aracısını kaldırmanıza yardımcı olması için aşağıdaki bölümleri kullanın.
 
-#### <a name="uninstall-the-dependency-agent-on-windows"></a>Windows'da Bağımlılık Aracısı'nı kaldırma
+#### <a name="uninstall-the-dependency-agent-on-windows"></a>Windows 'da bağımlılık aracısını kaldırma
 
-Yöneticiler, Denetim Masası aracılığıyla Windows için Bağımlılık Aracısı'nı kaldırabilir.
+Yönetici, Windows için bağımlılık aracısını Denetim Masası üzerinden kaldırabilir.
 
-Bir yönetici Bağımlılık Aracısı'nı kaldırmak için %Programfiles%\Microsoft Dependency Agent\Uninstall.exe'yi çalıştırabilir.
+Yönetici ayrıca, bağımlılık aracısını kaldırmak için%Programfiles%\Microsoft Dependency Fıles\uninstall.exe komutunu da çalıştırabilir.
 
-#### <a name="uninstall-the-dependency-agent-on-linux"></a>Linux'ta Bağımlılık Aracısı'nı kaldırma
+#### <a name="uninstall-the-dependency-agent-on-linux"></a>Linux 'ta bağımlılık aracısını kaldırma
 
-Bağımlılık Aracısı'nı Linux'tan tümüyle kaldırmak için, hem aracının kendisini hem de aracıyla birlikte otomatik olarak yüklenen bağlayıcıyı kaldırmalısınız. Aşağıdaki tek komutu kullanarak ikisini de kaldırabilirsiniz:
+Bağımlılık aracısını Linux 'tan tamamen kaldırmak için aracının kendisini ve aracı ile otomatik olarak yüklenen bağlayıcıyı kaldırmanız gerekir. Aşağıdaki tek komutu kullanarak ikisini de kaldırabilirsiniz:
 
 ```
 rpm -e dependency-agent dependency-agent-connector
@@ -337,7 +331,7 @@ rpm -e dependency-agent dependency-agent-connector
 
 ## <a name="management-packs"></a>Yönetim paketleri
 
-Log Analytics çalışma alanında Wire Data etkinleştirildiğinde, söz konusu çalışma alanındaki tüm Windows sunucularına 300 KB'lık bir yönetim paketi gönderilir. System Center Operations Manager aracılarını bir [bağlı yönetim grubunda](../platform/om-agents.md) kullanıyorsanız, System Center Operations Manager'dan Bağımlılık İzleyicisi yönetim paketi dağıtılır. Aracıları doğrudan bağlantınız varsa, Azure İzleyici, Yönetim Paketi sunar.
+Log Analytics çalışma alanında Wire Data etkinleştirildiğinde, söz konusu çalışma alanındaki tüm Windows sunucularına 300 KB'lık bir yönetim paketi gönderilir. System Center Operations Manager aracılarını bir [bağlı yönetim grubunda](../platform/om-agents.md) kullanıyorsanız, System Center Operations Manager'dan Bağımlılık İzleyicisi yönetim paketi dağıtılır. Aracılar doğrudan bağlandıysa, Azure Izleyici yönetim paketini sunar.
 
 Yönetim paketinin adı Microsoft.IntelligencePacks.ApplicationDependencyMonitor'dır. Şu konuma yazılır: %Programfiles%\Microsoft Monitoring Agent\Agent\Health Service State\Management Packs. Yönetim paketi şu veri kaynağını kullanır: %Program files%\Microsoft Monitoring Agent\Agent\Health Service State\Resources&lt;AutoGeneratedID&gt;\Microsoft.EnterpriseManagement.Advisor.ApplicationDependencyMonitorDataSource.dll.
 
@@ -347,7 +341,7 @@ Yönetim paketinin adı Microsoft.IntelligencePacks.ApplicationDependencyMonitor
 
 - Wire Data çözümü Windows Server 2012 R2, Windows 8.1 ve daha sonraki işletim sistemlerini çalıştıran bilgisayarlardan veri alır.
 - Sinyal verilerini almak istediğiniz bilgisayarlarda Microsoft .NET Framework 4.0 veya üstü bulunmalıdır.
-- İletilen verilerle çözümü açıklanan işlemi kullanarak Log Analytics çalışma alanınıza eklemek [çözüm galeri'sinden izleme Ekle](solutions.md). Başka bir yapılandırma işlemi gerekmez.
+- [Çözüm Galerisi izleme çözümleri ekleme](solutions.md)bölümünde açıklanan işlemi kullanarak, Log Analytics çalışma alanınıza tel veri çözümünü ekleyin. Başka bir yapılandırma işlemi gerekmez.
 - Belirli bir çözümle ilişkili sinyal verilerini görüntülemek istiyorsanız, çözümün çalışma alanınıza önceden eklenmiş olması gerekir.
 
 Aracılarınız yüklendikten ve siz çözümü yükledikten sonra, çalışma alanınızda Wire Data 2.0 kutucuğu gösterilir.
@@ -390,17 +384,17 @@ Her giriş verileri türü için _WireData_ türünde bir kayıt oluşturulur. A
 
 | Özellik | Açıklama |
 |---|---|
-| Computer | Verilerin toplandığı bilgisayarın adı |
+| Bilgisayar | Verilerin toplandığı bilgisayarın adı |
 | TimeGenerated | Kaydın zamanı |
 | LocalIP | Yerel bilgisayarın IP adresi |
 | SessionState | Bağlantılı veya bağlantısı kesilmiş |
 | ReceivedBytes | Alınan bayt miktarı |
 | ProtocolName | Kullanılan ağ protokolünün adı |
 | IPVersion | IP sürümü |
-| Direction | Gelen veya giden |
+| Yön | Gelen veya giden |
 | MaliciousIP | Bilinen kötü amaçlı kaynağın IP adresi |
-| Severity | Kötü amaçlı olduğundan şüphe edilen yazılımın önem derecesi |
-| RemoteIPCountry | Ülke/bölge uzak IP adresi |
+| Önem Derecesi | Kötü amaçlı olduğundan şüphe edilen yazılımın önem derecesi |
+| RemoteIPCountry | Uzak IP adresinin ülkesi/bölgesi |
 | ManagementGroupName | Operations Manager yönetim grubunun adı |
 | SourceSystem | Verilerin toplandığı kaynak |
 | SessionStartTime | Oturumun başlangıç saati |
@@ -417,7 +411,6 @@ Her giriş verileri türü için _WireData_ türünde bir kayıt oluşturulur. A
 | ProcessName | İşlemin yıl ve dosya adı |
 | RemoteIPLongitude | IP boylam değeri |
 | RemoteIPLatitude | IP enlem değeri |
-
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

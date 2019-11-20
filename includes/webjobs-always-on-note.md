@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 02/19/2019
 ms.author: glenga
 ms.custom: include file
-ms.openlocfilehash: 14f2e663e3db81684a73c4ea093ed0403cbb09ed
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 82e5221daefaecb687ad9feb79305e546d4ec17e
+ms.sourcegitcommit: 198c3a585dd2d6f6809a1a25b9a732c0ad4a704f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188529"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68424171"
 ---
 > [!NOTE]
-> Bir web uygulaması 20 dakika işlem yapılmadığında zaman aşımı olabilir. Yalnızca gerçek bir web uygulama isteklerini Zamanlayıcı sıfırlayın. Uygulamanın yapılandırma Azure portalında görüntüleme ya da Gelişmiş araçlar siteye isteği gerçekleştiren (`https://<app_name>.scm.azurewebsites.net`) süreölçer sıfırlama. Zamanlanan Webjob'lar etkinleştirmek ya da uygulamanızı sürekli olarak çalışan **Always On** WebJobs güvenilir bir şekilde çalıştığından emin olmak için. Bu özellik yalnızca temel, standart ve Premium kullanılabilir [fiyatlandırma katmanları](https://azure.microsoft.com/pricing/details/app-service/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
+> Bir Web uygulaması 20 dakikadan sonra zaman aşımına uğrar. Yalnızca gerçek Web uygulamasına gönderilen istekler süreölçeri sıfırlar. Uygulamanın yapılandırmasını Azure Portal veya gelişmiş araçlar sitesine (`https://<app_name>.scm.azurewebsites.net`) istek yapmayı görüntülemek, zamanlayıcıyı sıfırlayamaz. Uygulamanız sürekli veya zamanlanmış (Zamanlayıcı tetikleyicisi) Web Işleri çalıştırıyorsa, Web Işlerinin güvenilir bir şekilde çalışmasını sağlamak için **her zaman açık** ' ı etkinleştirin. Bu özellik yalnızca temel, standart ve Premium [fiyatlandırma katmanlarında](https://azure.microsoft.com/pricing/details/app-service/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)kullanılabilir.

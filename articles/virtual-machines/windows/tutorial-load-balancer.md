@@ -1,29 +1,28 @@
 ---
-title: Öğretici - Azure’da Windows sanal makinelerinde yük dengeleme | Microsoft Docs
+title: Öğretici-Azure 'da Windows sanal makinelerinin yükünü dengeleme
 description: Bu öğreticide, üç Windows sanal makinesi arasında yüksek kullanılabilirliğe sahip ve güvenli uygulama için bir yük dengeleyici oluşturmak üzere Azure PowerShell kullanmayı öğreneceksiniz
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 12/03/2018
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: fbb0f10c425a732b566431d90ae341122fe9a5f6
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 05a796d7bbe08f8e560c6545f3ed37c0f54b9cf9
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60785015"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74067855"
 ---
-# <a name="tutorial-load-balance-windows-virtual-machines-in-azure-to-create-a-highly-available-application-with-azure-powershell"></a>Öğretici: Azure PowerShell ile yüksek oranda kullanılabilir bir uygulama oluşturmak için azure'da Windows sanal makineleri Yük Dengelemesi
+# <a name="tutorial-load-balance-windows-virtual-machines-in-azure-to-create-a-highly-available-application-with-azure-powershell"></a>Öğretici: Azure PowerShell ile yüksek oranda kullanılabilir bir uygulama oluşturmak için Azure’da Windows sanal makinelerinde yük dengeleme
 Yük dengeleme, gelen istekleri birden çok sanal makineye dağıtarak yüksek düzeyde kullanılabilirlik sunar. Bu öğreticide, Azure yük dengeleyicisinin trafiği dağıtan ve yüksek kullanılabilirlik sağlayan farklı bileşenleri hakkında bilgi edinebilirsiniz. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 
 > [!div class="checklist"]
@@ -31,11 +30,11 @@ Yük dengeleme, gelen istekleri birden çok sanal makineye dağıtarak yüksek d
 > * Yük dengeleyici durum yoklaması oluşturma
 > * Yük dengeleyici trafik kuralları oluşturma
 > * Temel bir IIS sitesi oluşturmak için Özel Betik Uzantısı kullanma
-> * Sanal makineler oluşturma ve yük dengeleyiciye ekleme
+> * Sanal makineler oluşturma ve yük dengeleyici oluşturma
 > * Çalışan yük dengeleyiciyi görüntüleme
 > * VM’leri yük dengeleyiciye ekleme ve kaldırma
 
-## <a name="azure-load-balancer-overview"></a>Azure yük dengeleyiciye genel bakış
+## <a name="azure-load-balancer-overview"></a>Azure yük dengeleyiciye genel bakışı
 Azure yük dengeleyici, gelen trafiği iyi durumdaki VM'ler arasında dağıtmak için yüksek kullanılabilirlik sağlayan bir 4. Katman (TCP, UDP) yük dengeleyicidir. Yük dengeleyici durum araştırması, her VM'deki belirli bir bağlantı noktasını izler ve trafiği yalnızca çalışır durumdaki VM'lere yönlendirir.
 
 Bir veya daha fazla genel IP adresi içeren bir ön uç IP yapılandırması tanımlayın. Bu ön uç IP yapılandırması yük dengeleyicinize ve uygulamalarınıza İnternet üzerinden erişilmesine izin verir. 
@@ -51,7 +50,7 @@ Azure Cloud Shell, bu makaledeki adımları çalıştırmak için kullanabilece�
 Cloud Shell'i açmak için kod bloğunun sağ üst köşesinden **Deneyin**'i seçmeniz yeterlidir. İsterseniz [https://shell.azure.com/powershell](https://shell.azure.com/powershell) adresine giderek Cloud Shell'i ayrı bir tarayıcı sekmesinde de başlatabilirsiniz. **Kopyala**’yı seçerek kod bloğunu kopyalayın, Cloud Shell’e yapıştırın ve Enter tuşuna basarak çalıştırın.
 
 ## <a name="create-azure-load-balancer"></a>Azure yük dengeleyici oluşturma
-Bu bölümde yük dengeleyicinin her bir bileşenini nasıl oluşturacağınız ve yapılandıracağınız açıklanmaktadır. Yük dengeleyicinizi oluşturmadan önce bir kaynak grubu oluşturun [yeni AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup). Aşağıdaki örnek *EastUS* konumunda *myResourceGroupLoadBalancer* adlı bir kaynak grubu oluşturur:
+Bu bölümde yük dengeleyicinin her bir bileşenini nasıl oluşturacağınız ve yapılandıracağınız açıklanmaktadır. Yük dengeleyiciyi oluşturabilmeniz için, [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup)ile bir kaynak grubu oluşturun. Aşağıdaki örnek *EastUS* konumunda *myResourceGroupLoadBalancer* adlı bir kaynak grubu oluşturur:
 
 ```azurepowershell-interactive
 New-AzResourceGroup `
@@ -60,7 +59,7 @@ New-AzResourceGroup `
 ```
 
 ### <a name="create-a-public-ip-address"></a>Genel IP adresi oluşturma
-Uygulamanıza İnternet’ten erişmek için yük dengeleyicinin genel IP adresi gereklidir. Bir genel IP adresiyle oluşturma [yeni AzPublicIpAddress](https://docs.microsoft.com/powershell/module/az.network/new-azpublicipaddress). Aşağıdaki örnek, *myResourceGroupLoadBalancer* kaynak grubunda *myPublicIP* adlı bir genel IP adresi oluşturur:
+Uygulamanıza İnternet’ten erişmek için yük dengeleyicinin genel IP adresi gereklidir. [New-Azpublicıpaddress](https://docs.microsoft.com/powershell/module/az.network/new-azpublicipaddress)ile genel bir IP adresi oluşturun. Aşağıdaki örnek, *myResourceGroupLoadBalancer* kaynak grubunda *myPublicIP* adlı bir genel IP adresi oluşturur:
 
 ```azurepowershell-interactive
 $publicIP = New-AzPublicIpAddress `
@@ -71,7 +70,7 @@ $publicIP = New-AzPublicIpAddress `
 ```
 
 ### <a name="create-a-load-balancer"></a>Yük dengeleyici oluşturma
-Sahip bir ön uç IP havuzu oluşturma [yeni AzLoadBalancerFrontendIpConfig](https://docs.microsoft.com/powershell/module/az.network/new-azloadbalancerfrontendipconfig). Aşağıdaki örnek, *myFrontEndPool* adlı bir ön uç IP havuzu oluşturur ve *myPublicIP* adresini ekler: 
+[New-Azloadbalancerfrontendıpconfig](https://docs.microsoft.com/powershell/module/az.network/new-azloadbalancerfrontendipconfig)ile bir ön uç IP havuzu oluşturun. Aşağıdaki örnek, *myFrontEndPool* adlı bir ön uç IP havuzu oluşturur ve *myPublicIP* adresini ekler: 
 
 ```azurepowershell-interactive
 $frontendIP = New-AzLoadBalancerFrontendIpConfig `
@@ -79,14 +78,14 @@ $frontendIP = New-AzLoadBalancerFrontendIpConfig `
   -PublicIpAddress $publicIP
 ```
 
-Bir arka uç adres havuzuyla oluşturma [yeni AzLoadBalancerBackendAddressPoolConfig](https://docs.microsoft.com/powershell/module/az.network/new-azloadbalancerbackendaddresspoolconfig). Kalan adımlarda VM’ler bu arka uç havuzuna eklenir. Aşağıdaki örnek, *myBackEndPool* adlı bir arka uç adres havuzu oluşturur:
+[New-Azloadbalancerbackendadddresspoolconfig](https://docs.microsoft.com/powershell/module/az.network/new-azloadbalancerbackendaddresspoolconfig)ile bir arka uç adres havuzu oluşturun. Kalan adımlarda VM’ler bu arka uç havuzuna eklenir. Aşağıdaki örnek, *myBackEndPool* adlı bir arka uç adres havuzu oluşturur:
 
 ```azurepowershell-interactive
 $backendPool = New-AzLoadBalancerBackendAddressPoolConfig `
   -Name "myBackEndPool"
 ```
 
-Şimdi yük dengeleyiciyle oluşturun [yeni AzLoadBalancer](https://docs.microsoft.com/powershell/module/az.network/new-azloadbalancer). Aşağıdaki örnek, önceki adımlarda oluşturulan ön uç ve arka uç IP havuzlarını kullanarak *myLoadBalancer* adlı bir yük dengeleyici oluşturur:
+Şimdi [New-AzLoadBalancer](https://docs.microsoft.com/powershell/module/az.network/new-azloadbalancer)ile yük dengeleyici oluşturun. Aşağıdaki örnek, önceki adımlarda oluşturulan ön uç ve arka uç IP havuzlarını kullanarak *myLoadBalancer* adlı bir yük dengeleyici oluşturur:
 
 ```azurepowershell-interactive
 $lb = New-AzLoadBalancer `
@@ -100,9 +99,9 @@ $lb = New-AzLoadBalancer `
 ### <a name="create-a-health-probe"></a>Durum araştırması oluşturma
 Yük dengeleyicinin uygulamanızın durumunu izlemesine izin vermek için durum araştırması kullanabilirsiniz. Durum yoklaması, durum denetimlerine verdikleri yanıtlara göre VM’leri dinamik olarak yük dengeleyici rotasyonuna ekler ve kaldırır. VM, 15 saniyelik aralıklarda art arda iki kez başarısız olursa varsayılan olarak yük dengeleyici dağıtımından kaldırılır. Bir protokolü temel alan bir durum araştırması veya uygulamanız için belirli bir sistem durumu denetim sayfası oluşturun. 
 
-Aşağıdaki örnek bir TCP araştırması oluşturur. Ayrıca daha ayrıntılı sistem durumu denetimleri için özel HTTP araştırmaları oluşturabilirsiniz. Özel bir HTTP yoklaması kullanırken *healthcheck.aspx* gibi bir durum denetimi sayfası oluşturmanız gerekir. Yük dengeleyicinin konağı rotasyonda tutması için yoklamanın **HTTP 200 OK** yanıtını döndürmesi gerekir.
+Aşağıdaki örnek bir TCP araştırması oluşturur. Ayrıca daha ayrıntılı sistem durumu denetimleri için özel HTTP araştırmaları oluşturabilirsiniz. Özel bir HTTP araştırması kullandığınızda *healthcheck.aspx* gibi bir sistem durumu denetimi sayfası oluşturmanız gerekir. Konağı dönüşüm içinde tutmak üzere araştırmanın yük dengeleyici için bir **HTTP 200 OK** yanıtı döndürmesi gerekir.
 
-TCP durum araştırması oluşturmak için kullandığınız [Ekle AzLoadBalancerProbeConfig](https://docs.microsoft.com/powershell/module/az.network/add-azloadbalancerprobeconfig). Aşağıdaki örnek her VM’yi *80* numaralı *TCP* bağlantı noktasında izleyen *myHealthProbe* adında bir durum yoklaması oluşturur:
+Bir TCP sistem durumu araştırması oluşturmak için [Add-AzLoadBalancerProbeConfig](https://docs.microsoft.com/powershell/module/az.network/add-azloadbalancerprobeconfig)komutunu kullanın. Aşağıdaki örnek *myHealthProbe* adında *TCP*’de *80* numaralı bağlantı noktasındaki her VM’yi izleyen bir durum araştırması oluşturur:
 
 ```azurepowershell-interactive
 Add-AzLoadBalancerProbeConfig `
@@ -114,7 +113,7 @@ Add-AzLoadBalancerProbeConfig `
   -ProbeCount 2
 ```
 
-Durum araştırmasını uygulamak için yük dengeleyiciyle güncelleştirme [kümesi AzLoadBalancer](https://docs.microsoft.com/powershell/module/az.network/set-azloadbalancer):
+Sistem durumu araştırmasını uygulamak için, [set-AzLoadBalancer](https://docs.microsoft.com/powershell/module/az.network/set-azloadbalancer)ile yük dengeleyiciyi güncelleştirin:
 
 ```azurepowershell-interactive
 Set-AzLoadBalancer -LoadBalancer $lb
@@ -123,7 +122,7 @@ Set-AzLoadBalancer -LoadBalancer $lb
 ### <a name="create-a-load-balancer-rule"></a>Yük dengeleyici kuralı oluşturma
 Trafiğin VM’lere dağıtımını tanımlamak için bir yük dengeleyici kuralı kullanılır. Gerekli kaynak ve hedef bağlantı noktalarının yanı sıra gelen trafik için ön uç IP yapılandırması ve trafiği almak için arka uç IP havuzu tanımlamanız gerekir. Yalnızca durumu iyi olan VM’lerin trafik almasını sağlamak için kullanılacak durum araştırmasını da tanımlamanız gerekir.
 
-İle bir yük dengeleyici kuralı oluşturma [Ekle AzLoadBalancerRuleConfig](https://docs.microsoft.com/powershell/module/az.network/add-azloadbalancerruleconfig). Aşağıdaki örnek, *myLoadBalancerRule* adlı bir yük dengeleyici kuralı oluşturur ve *80* numaralı *TCP* bağlantı noktasında trafiği dengeler:
+[Add-AzLoadBalancerRuleConfig](https://docs.microsoft.com/powershell/module/az.network/add-azloadbalancerruleconfig)ile bir yük dengeleyici kuralı oluşturun. Aşağıdaki örnek, *myLoadBalancerRule* adlı bir yük dengeleyici kuralı oluşturur ve *TCP*’de *80* numaralı bağlantı noktasında trafiği dengeler:
 
 ```azurepowershell-interactive
 $probe = Get-AzLoadBalancerProbeConfig -LoadBalancer $lb -Name "myHealthProbe"
@@ -139,17 +138,17 @@ Add-AzLoadBalancerRuleConfig `
   -Probe $probe
 ```
 
-İle Yük Dengeleyiciyi güncelleştirin [kümesi AzLoadBalancer](https://docs.microsoft.com/powershell/module/az.network/set-azloadbalancer):
+[Set-AzLoadBalancer](https://docs.microsoft.com/powershell/module/az.network/set-azloadbalancer)ile yük dengeleyiciyi güncelleştirin:
 
 ```azurepowershell-interactive
 Set-AzLoadBalancer -LoadBalancer $lb
 ```
 
 ## <a name="configure-virtual-network"></a>Sanal ağ yapılandırma
-VM’leri dağıtmadan ve dengeleyicinizi sınamadan önce yardımcı sanal ağ kaynaklarını oluşturun. Sanal ağlar hakkında daha fazla bilgi edinmek için [Azure Sanal Ağlarını Yönetme](tutorial-virtual-network.md) öğreticisine gözatın.
+VM’leri dağıtmadan ve dengeleyicinizi sınamadan önce yardımcı sanal ağ kaynaklarını oluşturun. Sanal ağlar hakkında daha fazla bilgi edinmek için [Azure Sanal Ağlarını Yönetme](tutorial-virtual-network.md) öğreticisine göz atın.
 
 ### <a name="create-network-resources"></a>Ağ kaynakları oluşturma
-İle sanal ağ oluşturma [yeni AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetwork). Aşağıdaki örnek *mySubnet* alt ağına sahip *myVnet* adında bir sanal ağ oluşturur:
+[New-AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetwork)ile bir sanal ağ oluşturun. Aşağıdaki örnek *mySubnet* alt ağına sahip *myVnet* adında bir sanal ağ oluşturur:
 
 ```azurepowershell-interactive
 # Create subnet config
@@ -166,7 +165,7 @@ $vnet = New-AzVirtualNetwork `
   -Subnet $subnetConfig
 ```
 
-Sanal NIC ile oluşturulur [yeni AzNetworkInterface](https://docs.microsoft.com/powershell/module/az.network/new-aznetworkinterface). Aşağıdaki örnek üç sanal NIC oluşturur. (Sonraki adımlarda uygulamanız için oluşturduğunuz her bir VM için bir sanal NIC). İstediğiniz zaman ek sanal NIC’ler ve VM’ler oluşturabilir ve bunları yük dengeleyiciye ekleyebilirsiniz:
+Sanal NIC 'ler [New-Aznetworkınterface](https://docs.microsoft.com/powershell/module/az.network/new-aznetworkinterface)ile oluşturulur. Aşağıdaki örnek üç sanal NIC oluşturur. (Sonraki adımlarda uygulamanız için oluşturduğunuz her bir VM için bir sanal NIC). İstediğiniz zaman ek sanal NIC’ler ve VM’ler oluşturabilir ve bunları yük dengeleyiciye ekleyebilirsiniz:
 
 ```azurepowershell-interactive
 for ($i=1; $i -le 3; $i++)
@@ -184,7 +183,7 @@ for ($i=1; $i -le 3; $i++)
 ## <a name="create-virtual-machines"></a>Sanal makineler oluşturma
 Uygulamanızın yüksek oranda kullanılabilir olmasını sağlamak için VM’lerinizi bir kullanılabilirlik kümesine yerleştirin.
 
-Bir kullanılabilirlik kümesi oluşturma [yeni AzAvailabilitySet](https://docs.microsoft.com/powershell/module/az.compute/new-azavailabilityset). Aşağıdaki örnek *myAvailabilitySet* adında bir kullanılabilirlik kümesi oluşturur:
+[New-AzAvailabilitySet](https://docs.microsoft.com/powershell/module/az.compute/new-azavailabilityset)ile bir kullanılabilirlik kümesi oluşturun. Aşağıdaki örnek *myAvailabilitySet* adında bir kullanılabilirlik kümesi oluşturur:
 
 ```azurepowershell-interactive
 $availabilitySet = New-AzAvailabilitySet `
@@ -202,7 +201,7 @@ VM’ler için [Get-Credential](https://msdn.microsoft.com/powershell/reference/
 $cred = Get-Credential
 ```
 
-İle Vm'leri oluşturabilirsiniz artık [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm). Aşağıdaki örnek, üç VM ve mevcut değilse gerekli olan sanal ağ bileşenlerini oluşturur:
+Artık [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm)Ile VM 'leri oluşturabilirsiniz. Aşağıdaki örnek, üç VM ve mevcut değilse gerekli olan sanal ağ bileşenlerini oluşturur:
 
 ```azurepowershell-interactive
 for ($i=1; $i -le 3; $i++)
@@ -227,7 +226,7 @@ PowerShell komut istemlerinin size döndürülmesi için `-AsJob` parametresi VM
 ### <a name="install-iis-with-custom-script-extension"></a>Özel Betik Uzantısı ile IIS yükleme
 [Windows sanal makinesini özelleştirme](tutorial-automate-vm-deployment.md) konulu önceki bir öğreticide, Windows için Özel Betik Uzantısı ile VM özelleştirmeyi nasıl otomatikleştirebileceğinizi öğrendiniz. Aynı yaklaşımı, VM'lerinizde IIS yüklemek ve yapılandırmak için kullanabilirsiniz.
 
-Kullanım [kümesi AzVMExtension](https://docs.microsoft.com/powershell/module/az.compute/set-azvmextension) özel betik uzantısı'nı yüklemek için. Uzantı, IIS web sunucusunu yüklemek için `powershell Add-WindowsFeature Web-Server` komutunu çalıştırır ve ardından VM’nin ana bilgisayar adını göstermek için *Default.htm* sayfasını güncelleştirir:
+Özel Betik uzantısını yüklemek için [set-Azvmexgerkomutunu](https://docs.microsoft.com/powershell/module/az.compute/set-azvmextension) kullanın. Uzantı, IIS web sunucusunu yüklemek için `powershell Add-WindowsFeature Web-Server` komutunu çalıştırır ve ardından VM’nin ana bilgisayar adını göstermek için *Default.htm* sayfasını güncelleştirir:
 
 ```azurepowershell-interactive
 for ($i=1; $i -le 3; $i++)
@@ -244,8 +243,8 @@ for ($i=1; $i -le 3; $i++)
 }
 ```
 
-## <a name="test-load-balancer"></a>Yük dengeleyiciyi test etme
-İle yük dengeleyicinizin genel IP adresini [Get-AzPublicIPAddress](https://docs.microsoft.com/powershell/module/az.network/get-azpublicipaddress). Aşağıdaki örnek, daha önce oluşturulan *myPublicIP* için IP adresini alır:
+## <a name="test-load-balancer"></a>Yük dengeleyiciyi sınama
+[Get-Azpublicıpaddress](https://docs.microsoft.com/powershell/module/az.network/get-azpublicipaddress)ile yük dengeleyicinizin genel IP adresini alın. Aşağıdaki örnek, daha önce oluşturulan *myPublicIP* için IP adresini alır:
 
 ```azurepowershell-interactive
 Get-AzPublicIPAddress `
@@ -257,14 +256,14 @@ Sonra da genel IP adresini bir web tarayıcısına girebilirsiniz. Aşağıdaki 
 
 ![Çalışan IIS web sitesi](./media/tutorial-load-balancer/running-iis-website.png)
 
-Yük dengeleyicinin trafiği, uygulamanızı çalıştıran üç VM’ye dağıtmasını görmek için web tarayıcınızı yenilemeye zorlayabilirsiniz.
+Yük dengeleyicinin trafiği, uygulamanızı çalıştıran üç VM’ye dağıtma işlemini görmek için web tarayıcınızı yenilemeye zorlayabilirsiniz.
 
 
 ## <a name="add-and-remove-vms"></a>VM’leri ekleme ve kaldırma
 Uygulamanızı çalıştıran VM’lerde işletim sistemi güncelleştirmelerini yükleme gibi bakım işlemleri gerçekleştirmeniz gerekebilir. Uygulamanıza gelen trafiği fazla trafiği yönetmek için ek VM’lere ihtiyaç duyabilirsiniz. Bu bölümde VM’yi yük dengeleyiciden nasıl kaldırabileceğiniz veya ekleyebileceğiniz gösterilmektedir.
 
 ### <a name="remove-a-vm-from-the-load-balancer"></a>VM’yi yük dengeleyiciden kaldırma
-İle ağ arabirim kartını alın [Get-AzNetworkInterface](https://docs.microsoft.com/powershell/module/az.network/get-aznetworkinterface), ardından *LoadBalancerBackendAddressPools* sanal NIC'nin özelliği *$null*. Son olarak, sanal NIC’yi güncelleştirin:
+[Get-Aznetworkınterface](https://docs.microsoft.com/powershell/module/az.network/get-aznetworkinterface)ile ağ arabirim kartını alın, sonra sanal NIC 'Nin *Loadbalancerbackendadddresspoir* özelliğini *$null*olarak ayarlayın. Son olarak, sanal NIC’yi güncelleştirin:
 
 ```azurepowershell-interactive
 $nic = Get-AzNetworkInterface `
@@ -274,10 +273,10 @@ $nic.Ipconfigurations[0].LoadBalancerBackendAddressPools=$null
 Set-AzNetworkInterface -NetworkInterface $nic
 ```
 
-Yük dengeleyicinin trafiği, uygulamanızı çalıştıran kalan iki VM’ye dağıtmasını görmek için web tarayıcınızı yenilemeye zorlayabilirsiniz. Artık VM üzerinde, işletim sistemi güncelleştirmeleri yükleme veya VM’yi yeniden başlatma gibi bakım işlemleri gerçekleştirebilirsiniz.
+Yük dengeleyicinin trafiği, uygulamanızı çalıştıran kalan iki VM’ye dağıtma işlemini görmek için web tarayıcınızı yenilemeye zorlayabilirsiniz. Artık işletim sistemi güncelleştirmelerini yükleme veya VM’yi yeniden başlatma gibi bakım işlemlerini VM üzerinde gerçekleştirebilirsiniz.
 
 ### <a name="add-a-vm-to-the-load-balancer"></a>Yük dengeleyiciye VM ekleme
-Sonra VM bakımını gerçekleştirme veya kapasiteyi genişletmeniz gerekiyorsa, ayarlama *LoadBalancerBackendAddressPools* sanal NIC'nin özelliği *BackendAddressPool* gelen [ Get-AzLoadBalancer](https://docs.microsoft.com/powershell/module/az.network/get-azloadbalancer):
+VM bakımını gerçekleştirdikten sonra veya kapasiteyi genişlettikten sonra, sanal NIC 'nin *Loadbalancerbackendavddresspoir* özelliğini [Get-Azloadbalancer](https://docs.microsoft.com/powershell/module/az.network/get-azloadbalancer)öğesinden *backendadddresspool* olarak ayarlayın:
 
 Yük dengeleyiciyi alın:
 
@@ -291,14 +290,14 @@ Set-AzNetworkInterface -NetworkInterface $nic
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, bir yük dengeleyici oluşturdunuz ve ona sanal makineler eklediniz. Şunları öğrendiniz:
+Bu öğreticide, bir yük dengeleyici oluşturdunuz ve buna sanal makineler eklediniz. Şunları öğrendiniz:
 
 > [!div class="checklist"]
 > * Azure yük dengeleyici oluşturma
 > * Yük dengeleyici durum yoklaması oluşturma
 > * Yük dengeleyici trafik kuralları oluşturma
 > * Temel bir IIS sitesi oluşturmak için Özel Betik Uzantısı kullanma
-> * Sanal makineler oluşturma ve yük dengeleyiciye ekleme
+> * Sanal makineler oluşturma ve yük dengeleyici oluşturma
 > * Çalışan yük dengeleyiciyi görüntüleme
 > * VM’leri yük dengeleyiciye ekleme ve kaldırma
 

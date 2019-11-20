@@ -1,34 +1,35 @@
 ---
-title: Azure PowerShell kullanarak SSL sonlandırma Key Vault ile sertifikaları yapılandırma
-description: Azure Application Gateway ile Key Vault için HTTPS etkin dinleyiciler için bağlı sunucu sertifikaları nasıl tümleştirilebileceğini öğrenmek.
+title: Key Vault sertifikalarla SSL sonlandırmasını yapılandırma-PowerShell
+titleSuffix: Azure Application Gateway
+description: HTTPS özellikli dinleyicilerine eklenen sunucu sertifikaları için Azure Application Gateway Key Vault nasıl tümleştirileceğini öğrenin.
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
 ms.topic: article
-ms.date: 4/22/2019
+ms.date: 11/14/2019
 ms.author: victorh
-ms.openlocfilehash: e011caa8c7a0c7383d16c81f4bff29d3c1c99f99
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c40c4cf9f25ce17bc7042191324aeb864696995f
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65827621"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74074594"
 ---
-# <a name="configure-ssl-termination-with-key-vault-certificates-by-using-azure-powershell"></a>Azure PowerShell kullanarak SSL sonlandırma Key Vault ile sertifikaları yapılandırma
+# <a name="configure-ssl-termination-with-key-vault-certificates-by-using-azure-powershell"></a>Azure PowerShell kullanarak SSL sonlandırmasını Key Vault sertifikalarla yapılandırma
 
-[Azure Key Vault](../key-vault/key-vault-whatis.md) platform yönetilen gizli dizi depoladığı gizli dizileri, anahtarlar ve SSL sertifikalarınızı korumak için kullanabilirsiniz. Azure Application Gateway, HTTPS etkin dinleyiciler için bağlı sunucu sertifikaları için (genel önizlemede) anahtar kasası ile tümleştirmeyi destekler. Bu destek, Application Gateway için v2 SKU sınırlıdır.
+[Azure Key Vault](../key-vault/key-vault-overview.md) , gizli dizileri, anahtarları ve SSL sertifikalarını korumak için kullanabileceğiniz, platform tarafından yönetilen bir gizli depodır. Azure Application Gateway, HTTPS özellikli dinleyicilerine eklenen sunucu sertifikaları için Key Vault (genel önizlemede) tümleştirmeyi destekler. Bu destek, Application Gateway v2 SKU 'SU ile sınırlıdır.
 
-Daha fazla bilgi için [sertifikaları Key Vault ile SSL sonlandırma](key-vault-certs.md).
+Daha fazla bilgi için bkz. [Key Vault sertifikalarla SSL sonlandırması](key-vault-certs.md).
 
-Bu makalede, application gateway SSL sonlandırma sertifikaları için anahtar kasanıza tümleştirmek için Azure PowerShell Betiği kullanmayı gösterir.
+Bu makalede, anahtar kasasını SSL sonlandırma sertifikaları için uygulama ağ geçidiniz ile bütünleştirmek üzere bir Azure PowerShell betiğini nasıl kullanacağınız gösterilmektedir.
 
-Bu makale Azure PowerShell modülü sürüm 1.0.0 gerekir veya üzeri. Sürümü bulmak için `Get-Module -ListAvailable Az` komutunu çalıştırın. Yükseltmeniz gerekirse, bkz. [Azure PowerShell modülünü yükleme](/powershell/azure/install-az-ps). Bu makalede komutları çalıştırmak için ayrıca çalıştırarak Azure ile bir bağlantı oluşturmak için ihtiyacınız `Connect-AzAccount`.
+Bu makale, Azure PowerShell modülü sürüm 1.0.0 veya üstünü gerektirir. Sürümü bulmak için `Get-Module -ListAvailable Az` komutunu çalıştırın. Yükseltmeniz gerekirse, bkz. [Azure PowerShell modülünü yükleme](/powershell/azure/install-az-ps). Bu makaledeki komutları çalıştırmak için, `Connect-AzAccount`çalıştırarak Azure ile bir bağlantı da oluşturmanız gerekir.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Başlamadan önce ManagedServiceIdentity Modülü yüklü olması gerekir:
+Başlamadan önce, Managedserviceıdentity modülünün yüklü olması gerekir:
 
 ```azurepowershell
 Install-Module -Name Az.ManagedServiceIdentity
@@ -38,7 +39,7 @@ Select-AzSubscription -Subscription <your subscription>
 
 ## <a name="example-script"></a>Örnek betik
 
-### <a name="set-up-variables"></a>Değişkenleri ayarlayın
+### <a name="set-up-variables"></a>Değişkenleri ayarlama
 
 ```azurepowershell
 $rgname = "KeyVaultTest"
@@ -47,7 +48,7 @@ $kv = "TestKeyVaultAppGw"
 $appgwName = "AppGwKVIntegration"
 ```
 
-### <a name="create-a-resource-group-and-a-user-managed-identity"></a>Bir kaynak grubu ve kullanıcı tarafından yönetilen bir kimlik oluşturma
+### <a name="create-a-resource-group-and-a-user-managed-identity"></a>Kaynak grubu ve Kullanıcı tarafından yönetilen kimlik oluşturma
 
 ```azurepowershell
 $resourceGroup = New-AzResourceGroup -Name $rgname -Location $location
@@ -55,7 +56,7 @@ $identity = New-AzUserAssignedIdentity -Name "appgwKeyVaultIdentity" `
   -Location $location -ResourceGroupName $rgname
 ```
 
-### <a name="create-a-key-vault-policy-and-certificate-to-be-used-by-the-application-gateway"></a>Bir anahtar kasası, ilke ve uygulama ağ geçidi tarafından kullanılacak bir sertifika oluşturun
+### <a name="create-a-key-vault-policy-and-certificate-to-be-used-by-the-application-gateway"></a>Uygulama Ağ Geçidi tarafından kullanılacak bir Anahtar Kasası, ilke ve sertifika oluşturma
 
 ```azurepowershell
 $keyVault = New-AzKeyVault -Name $kv -ResourceGroupName $rgname -Location $location -EnableSoftDelete 
@@ -78,14 +79,14 @@ $vnet = New-AzvirtualNetwork -Name "Vnet1" -ResourceGroupName $rgname -Location 
   -AddressPrefix "10.0.0.0/16" -Subnet @($sub1, $sub2)
 ```
 
-### <a name="create-a-static-public-virtual-ip-vip-address"></a>Statik bir genel sanal IP (VIP) adresi oluşturma
+### <a name="create-a-static-public-virtual-ip-vip-address"></a>Statik ortak sanal IP (VIP) adresi oluşturma
 
 ```azurepowershell
 $publicip = New-AzPublicIpAddress -ResourceGroupName $rgname -name "AppGwIP" `
   -location $location -AllocationMethod Static -Sku Standard
 ```
 
-### <a name="create-pool-and-front-end-ports"></a>Havuzu ve ön uç bağlantı noktası oluşturma
+### <a name="create-pool-and-front-end-ports"></a>Havuz ve ön uç bağlantı noktaları oluşturma
 
 ```azurepowershell
 $gwSubnet = Get-AzVirtualNetworkSubnetConfig -Name "appgwSubnet" -VirtualNetwork $vnet
@@ -98,13 +99,13 @@ $fp01 = New-AzApplicationGatewayFrontendPort -Name "port1" -Port 443
 $fp02 = New-AzApplicationGatewayFrontendPort -Name "port2" -Port 80
 ```
 
-### <a name="point-the-ssl-certificate-to-your-key-vault"></a>Noktası anahtar kasanıza SSL sertifikası
+### <a name="point-the-ssl-certificate-to-your-key-vault"></a>SSL sertifikasını anahtar kasanıza işaret edin
 
 ```azurepowershell
 $sslCert01 = New-AzApplicationGatewaySslCertificate -Name "SSLCert1" -KeyVaultSecretId $secretId
 ```
 
-### <a name="create-listeners-rules-and-autoscale"></a>Dinleyiciler, kuralları ve otomatik ölçeklendirme oluşturun
+### <a name="create-listeners-rules-and-autoscale"></a>Dinleyicileri, kuralları ve otomatik ölçeklendirmeyi oluşturma
 
 ```azurepowershell
 $listener01 = New-AzApplicationGatewayHttpListener -Name "listener1" -Protocol Https `
@@ -121,7 +122,7 @@ $autoscaleConfig = New-AzApplicationGatewayAutoscaleConfiguration -MinCapacity 3
 $sku = New-AzApplicationGatewaySku -Name Standard_v2 -Tier Standard_v2
 ```
 
-### <a name="assign-the-user-managed-identity-to-the-application-gateway"></a>Uygulama ağ geçidine kullanıcı tarafından yönetilen kimlik atama
+### <a name="assign-the-user-managed-identity-to-the-application-gateway"></a>Kullanıcı tarafından yönetilen kimliği uygulama ağ geçidine atama
 
 ```azurepowershell
 $appgwIdentity = New-AzApplicationGatewayIdentity -UserAssignedIdentityId $identity.Id

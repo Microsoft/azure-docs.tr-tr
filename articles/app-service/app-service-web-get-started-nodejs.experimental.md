@@ -1,5 +1,5 @@
 ---
-title: Node.js web uygulaması - Azure App Service oluşturma | Microsoft Docs
+title: Node. js web uygulaması oluşturma-Azure App Service | Microsoft Docs
 description: Azure App Service Web Uygulamalarında ilk Node.js Hello World uygulamanızı birkaç dakika içinde dağıtın.
 services: app-service\web
 documentationcenter: ''
@@ -10,17 +10,16 @@ ms.assetid: 582bb3c2-164b-42f5-b081-95bfcb7a502a
 ms.service: app-service-web
 ms.workload: web
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: quickstart
-ms.date: 02/21/2019
+ms.date: 08/23/2019
 ms.author: cephalin
 ms.custom: seodec18
-ms.openlocfilehash: 237f498d1ebe2b402c86f1a4aed66a7ed443ccfa
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 7d81dae25b793144bfe044f8434a6df181dbcd1b
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66139300"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70067397"
 ---
 # <a name="create-a-nodejs-web-app-in-azure"></a>Azure App Service'te Node.js web uygulaması oluşturma
 
@@ -28,11 +27,11 @@ ms.locfileid: "66139300"
 > Bu makalede bir uygulamanın Windows üzerinde App Service'e dağıtımı yapılır. _Linux_ üzerinde App Service'e dağıtım yapmak için bkz. [Linux üzerinde Azure App Service'te Node.js web uygulaması oluşturma](./containers/quickstart-nodejs.md).
 >
 
-[Azure App Service](overview.md), yüksek oranda ölçeklenebilen, kendi kendine düzeltme eki uygulayan bir web barındırma hizmeti sunar.  Bu hızlı başlangıçta, Azure App Service'te bir Node.js uygulaması dağıtma işlemi gösterilmektedir. Kullanarak web uygulamasını oluşturma [Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview), ancak bu komutları ile yerel olarak da çalıştırabilirsiniz [Azure CLI](/cli/azure/install-azure-cli). Kullanarak web uygulaması için örnek Node.js kodunu dağıtın [az webapp deployment kaynak config-zip](/cli/azure/webapp/deployment/source?view=azure-cli-latest#az-webapp-deployment-source-config-zip) komutu.  
+[Azure App Service](overview.md), yüksek oranda ölçeklenebilen, kendi kendine düzeltme eki uygulayan bir web barındırma hizmeti sunar.  Bu hızlı başlangıçta Azure App Service için bir Node. js uygulamasının nasıl dağıtılacağı gösterilmektedir. Web uygulamasını [Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview)kullanarak oluşturursunuz, ancak bu komutları [Azure CLI](/cli/azure/install-azure-cli)ile yerel olarak da çalıştırabilirsiniz. [Az WebApp Deployment Source config-zip](/cli/azure/webapp/deployment/source?view=azure-cli-latest#az-webapp-deployment-source-config-zip) komutunu kullanarak örnek Node. js kodunu Web uygulamasına dağıtırsınız.  
 
 ![Azure'da çalışan örnek uygulama](media/app-service-web-get-started-nodejs-poc/hello-world-in-browser.png)
 
-Mac, Windows veya Linux makinesi kullanarak buradaki adımları izleyebilirsiniz. Adımların tamamlanması yaklaşık üç dakika sürer.
+Mac, Windows veya Linux makinesi kullanarak buradaki adımları izleyebilirsiniz. Adımları tamamlamaya yaklaşık üç dakika sürer.
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
@@ -45,7 +44,7 @@ Cloud Shell'de bir quickstart dizini oluşturun ve o dizine geçin.
 ```azurecli-interactive
 mkdir quickstart
 
-cd quickstart
+cd $HOME/quickstart
 ```
 
 Ardından, örnek uygulama deposunu quickstart dizininize kopyalamak için aşağıdaki komutu çalıştırın.
@@ -65,14 +64,14 @@ Checking connectivity... done.
 ```
 
 > [!NOTE]
-> Örnek index.js process.env.PORT için dinleme bağlantı noktasını ayarlar. Bu ortam değişkeni, App Service tarafından atanır.
+> Örnek index. js, dinleme bağlantı noktasını işlemek için. env. PORT olarak ayarlar. Bu ortam değişkeni App Service tarafından atanır.
 >
 
 [!INCLUDE [Create resource group](../../includes/app-service-web-create-resource-group-scus.md)]
 
 [!INCLUDE [Create app service plan](../../includes/app-service-web-create-app-service-plan-scus.md)]
 
-## <a name="create-a-web-app"></a>Web uygulaması oluşturun
+## <a name="create-a-web-app"></a>Web uygulaması oluşturma
 
 Cloud Shell’de, [`az webapp create`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-create) komutuyla `myAppServicePlan` App Service planında bir web uygulaması oluşturun.
 
@@ -101,7 +100,7 @@ Web uygulaması oluşturulduğunda Azure CLI aşağıda yer alan çıktıdaki gi
 
 ### <a name="set-nodejs-runtime"></a>Node.js çalışma zamanını ayarlama
 
-Düğüm çalışma zamanı için 10.14.1 ayarlayın. Desteklenen tüm çalışma zamanları görmek için [`az webapp list-runtimes`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-list-runtimes) komutunu çalıştırın.
+Düğüm çalışma zamanını 10.14.1 olarak ayarlayın. Desteklenen tüm çalışma zamanları görmek için [`az webapp list-runtimes`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-list-runtimes) komutunu çalıştırın.
 
 ```azurecli-interactive
 # Bash and Powershell
@@ -114,11 +113,11 @@ Yeni oluşturduğunuz web uygulamasına göz atın. Değiştirin `<app_name>` be
 http://<app_name>.azurewebsites.net
 ```
 
-Yeni web uygulamanız aşağıdaki gibi görünmelidir: ![Boş web uygulaması sayfası](media/app-service-web-get-started-nodejs-poc/app-service-web-service-created.png)
+Yeni web uygulamanız aşağıdaki gibi görünmelidir: ![Boş Web uygulaması sayfası](media/app-service-web-get-started-nodejs-poc/app-service-web-service-created.png)
 
 ## <a name="deploy-zip-file"></a>ZIP dosyası dağıtma
 
-Cloud shell'de uygulamanızın kök dizinine gidin, örnek projeniz için yeni bir ZIP dosyası oluşturun.
+Cloud Shell, uygulamanızın kök dizinine gidin, örnek projeniz için yeni bir ZIP dosyası oluşturun.
 
 ```azurecli-interactive
 cd nodejs-docs-hello-world  
@@ -126,13 +125,13 @@ cd nodejs-docs-hello-world
 zip -r myUpdatedAppFiles.zip *.*
 ```
 
-ZIP dosyası kullanarak web uygulamanızı dağıtma [az webapp deployment kaynak config-zip](/cli/azure/webapp/deployment/source?view=azure-cli-latest#az-webapp-deployment-source-config-zip) komutu.  
+[Az WebApp Deployment Source config-ZIP](/cli/azure/webapp/deployment/source?view=azure-cli-latest#az-webapp-deployment-source-config-zip) komutunu kullanarak ZIP dosyasını Web uygulamanıza dağıtın.  
 
 ```azurecli-interactive
 az webapp deployment source config-zip --resource-group myResourceGroup --name <app_name> --src myUpdatedAppFiles.zip
 ```
 
-Bu komut ZIP içindeki dosyaları ve dizinleri App Service uygulama klasörünüze (`\home\site\wwwroot`) dağıtır ve uygulamayı yeniden başlatır. Ek özel derleme işlemi yapılandırılmışsa bu işlemler de çalışır. Daha fazla bilgi için [Kudu belgeleri](https://github.com/projectkudu/kudu/wiki/Deploying-from-a-zip-file).
+Bu komut ZIP içindeki dosyaları ve dizinleri App Service uygulama klasörünüze (`\home\site\wwwroot`) dağıtır ve uygulamayı yeniden başlatır. Ek özel derleme işlemi yapılandırılmışsa bu işlemler de çalışır. Daha fazla bilgi için bkz. [kudu belgeleri](https://github.com/projectkudu/kudu/wiki/Deploying-from-a-zip-file).
 
 ## <a name="browse-to-the-app"></a>Uygulamaya göz atma
 
@@ -153,9 +152,9 @@ Node.js örnek kodu bir Azure App Service web uygulamasında çalışıyor.
 
 ## <a name="update-and-redeploy-the-code"></a>Kodu güncelleştirme ve yeniden dağıtma
 
-Cloud Shell'de yazın `code index.js` Cloud Shell düzenleyiciyi açın.
+Cloud Shell, Cloud Shell düzenleyiciyi açmak `code index.js` için yazın.
 
-![Kodu index.js](media/app-service-web-get-started-nodejs-poc/code-indexjs.png)
+![Kod dizini. js](media/app-service-web-get-started-nodejs-poc/code-indexjs.png)
 
 `response.end` çağrısında metinde küçük bir değişiklik yapın:
 
@@ -163,9 +162,9 @@ Cloud Shell'de yazın `code index.js` Cloud Shell düzenleyiciyi açın.
 response.end("Hello Azure!");
 ```
 
-Yaptığınız değişiklikleri kaydedin ve düzenleyiciden çıkın. Kaydetmek için `^S` ve çıkmak için `^Q` komutunu kullanın.
+Değişikliklerinizi kaydedin ve düzenleyiciden çıkın. Kaydetmek için `^S` ve çıkmak için `^Q` komutunu kullanın.
 
-ZIP dosyası oluşturma ve dağıtma kullanarak [az webapp deployment kaynak config-zip](/cli/azure/webapp/deployment/source?view=azure-cli-latest#az-webapp-deployment-source-config-zip) komutu.  
+[Az WebApp Deployment Source config-ZIP](/cli/azure/webapp/deployment/source?view=azure-cli-latest#az-webapp-deployment-source-config-zip) komutunu kullanarak bir ZIP dosyası oluşturun ve dağıtın.  
 
 ```azurecli-interactive
 # Bash
@@ -178,11 +177,11 @@ az webapp deployment source config-zip --resource-group myResourceGroup --name <
 
 ![Azure'da çalışan güncelleştirilmiş örnek uygulama](media/app-service-web-get-started-nodejs-poc/hello-azure-in-browser.png)
 
-## <a name="manage-your-new-azure-app"></a>Yeni Azure uygulamanızı yönetme
+## <a name="manage-your-new-azure-app"></a>Yeni Azure uygulamanızı yönetin
 
 Oluşturduğunuz web uygulamasını yönetmek için <a href="https://portal.azure.com" target="_blank">Azure portalına</a> gidin.
 
-Sol menüden **uygulama hizmetleri**ve ardından Azure uygulamanızın adına tıklayın.
+Sol menüden **uygulama hizmetleri**' ne ve ardından Azure uygulamanızın adına tıklayın.
 
 ![Azure uygulamasına portal gezintisi](./media/app-service-web-get-started-nodejs-poc/nodejs-docs-hello-world-app-service-list.png)
 

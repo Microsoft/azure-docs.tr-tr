@@ -1,6 +1,6 @@
 ---
-title: Bir Azure AD galeri uygulamasına kullanıcı hazırlamanın nasıl yapılandırılacağını | Microsoft Docs
-description: Nasıl hızlı bir şekilde sağlama ve sağlamayı kaldırma zaten Azure AD uygulama galerisinde listelenmiş uygulamaları için zengin bir kullanıcı hesabı yapılandırabilirsiniz
+title: Azure AD Galeri uygulamasına kullanıcı sağlamayı yapılandırma | Microsoft Docs
+description: Azure AD uygulama galerisinde zaten listelenen uygulamalara zengin Kullanıcı hesabı sağlama ve sağlamayı kaldırma işlemlerini nasıl hızlı bir şekilde yapılandırabileceğinizi öğrenin
 services: active-directory
 documentationcenter: ''
 author: msmimart
@@ -16,44 +16,42 @@ ms.date: 07/11/2017
 ms.author: mimart
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: be43f0e100bc96de2be916cbf52bca7d3ba51431
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8bcc53b97b1187314404cfe075f6593f437e7bf4
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65784526"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72789055"
 ---
-# <a name="how-to-configure-user-provisioning-to-an-azure-ad-gallery-application"></a>Azure AD galeri uygulaması için kullanıcı sağlamayı yapılandırma
+# <a name="how-to-configure-user-provisioning-to-an-azure-ad-gallery-application"></a>Azure AD Galeri uygulamasına kullanıcı sağlamayı yapılandırma
 
-*Kullanıcı hesabı sağlama* , oluşturma, güncelleştirme ve/veya kullanıcı hesabı kayıtlarını bir uygulamanın yerel kullanıcı profili deposunda devre dışı bırakma işlemidir. Çoğu Bulut ve SaaS uygulamaları, kullanıcıların rol ve izinler kendi yerel kullanıcı profili deposunda saklar ve bu tür bir kullanıcı kaydı yerel depolarındaki varlığını olan *gerekli* çoklu oturum açma ve iş erişim için.
+*Kullanıcı hesabı sağlama* , bir uygulamanın yerel kullanıcı profili deposundaki kullanıcı hesabı kayıtlarını oluşturma, güncelleştirme ve/veya devre dışı bırakma işlemidir. Çoğu bulut ve SaaS uygulaması kullanıcı rolünü ve izinlerini kullanıcının kendi yerel kullanıcı profili deposunda depolar ve bu tür bir Kullanıcı kaydının, çoklu oturum açma ve çalışma için Kullanıcı yerel deposunda bulunması *gerekir* .
 
-Azure portalında **sağlama** bu uygulama için hangi sağlama modları desteklenir, kurumsal bir uygulamayı görüntüler için sekmesinde sol gezinti bölmesinde. Bu iki değerden biri olabilir:
+Azure portal, bir kurumsal uygulama için sol gezinti bölmesindeki **sağlama** sekmesi, bu uygulama için hangi sağlama modlarının desteklendiğini gösterir. Bu iki değerden biri olabilir:
 
-## <a name="configuring-an-application-for-manual-provisioning"></a>El ile sağlama için uygulamayı yapılandırma
+## <a name="configuring-an-application-for-manual-provisioning"></a>El Ile sağlama için bir uygulamayı yapılandırma
 
-*El ile* sağlama anlamına gelir kullanıcı hesaplarını bu uygulama tarafından sağlanan yöntemleri kullanarak el ile oluşturulması gerekir. Bu, bu uygulama için bir Yönetim Portalı'nda günlüğe kaydetme ve bir web tabanlı kullanıcı arabirimi kullanarak kullanıcı ekleme gelebilir. Veya, o uygulama tarafından sağlanan bir mekanizma kullanarak kullanıcı hesabı ayrıntıları içeren bir elektronik tablo karşıya. Uygulama tarafından sağlanan belgelere bakın veya wat mekanizmaları kullanılabilir olduğunu belirlemek için uygulamanın geliştiricisine başvurun.
+*El ile* sağlama, Kullanıcı hesaplarının uygulama tarafından sunulan yöntemler kullanılarak el ile oluşturulması gerektiği anlamına gelir. Bu, bu uygulama için bir yönetim portalında oturum açma ve Web tabanlı kullanıcı arabirimi kullanan kullanıcılar ekleme anlamına gelir. Ya da bu uygulama tarafından sunulan bir mekanizmayı kullanarak Kullanıcı hesabı ayrıntısı olan bir elektronik tablo karşıya yüklenebilir. Uygulama tarafından sağlanan belgelere başvurun veya hangi mekanizmaların kullanılabildiğini belirlemek için uygulama geliştiricisine başvurun.
 
-El ile belirli bir uygulama için gösterilen tek mod ise, hiçbir otomatik Azure AD Bağlayıcısı sağlama uygulama için henüz oluşturulduğunu anlamına gelir. Veya uygulamanın alacağı bir otomatik sağlama bağlayıcı oluşturmak önkoşul kullanıcı yönetimini API desteklemiyor anlamına gelir.
+*El ile* belirli bir uygulama için gösterilen tek mod ise, uygulama için henüz OTOMATIK Azure AD sağlama Bağlayıcısı olmadığı anlamına gelir. Ya da uygulamanın, bir otomatik sağlama Bağlayıcısı oluşturmak için kullanılan Microsoft 'un Kullanıcı yönetimi API 'sine yönelik önkoşulları desteklemediği anlamına gelir.
 
-Otomatik sağlama için belirli bir uygulama için destek talebinde bulunmak isterseniz, bir istek kullanarak doldurabilirsiniz [Azure Active Directory Uygulama isteklerini](https://aka.ms/aadapprequest).
+Belirli bir uygulama için otomatik sağlama desteği istemek isterseniz, [Azure Active Directory uygulama isteklerini](https://aka.ms/aadapprequest)kullanarak bir isteği doldurabilirsiniz.
 
-## <a name="configuring-an-application-for-automatic-provisioning"></a>Otomatik sağlama için uygulamayı yapılandırma
+## <a name="configuring-an-application-for-automatic-provisioning"></a>Otomatik sağlama için bir uygulamayı yapılandırma
 
-*Otomatik* bu uygulama için bir Azure AD Bağlayıcısı sağlama geliştirilmiştir anlamına gelir. Azure AD sağlama hizmeti ve nasıl çalıştığı hakkında daha fazla bilgi için bkz. [sağlama kaldırmayı Azure Active Directory ile SaaS uygulamalarına kullanıcı sağlamayı otomatikleştirin ve](https://docs.microsoft.com/azure/active-directory/active-directory-saas-app-provisioning).
+*Otomatik* , bu uygulama Için BIR Azure AD sağlama bağlayıcısının geliştirildiği anlamına gelir. Azure AD sağlama hizmeti ve nasıl çalıştığı hakkında daha fazla bilgi için bkz. [Azure Active Directory Ile SaaS uygulamalarına Kullanıcı sağlamayı ve sağlamayı kaldırmayı otomatikleştirme](https://docs.microsoft.com/azure/active-directory/active-directory-saas-app-provisioning).
 
-Belirli kullanıcılar ve gruplar için bir uygulama sağlama hakkında daha fazla bilgi için bkz. [kullanıcı hesabı, kurumsal uygulamalar için sağlamayı yönetme](https://docs.microsoft.com/azure/active-directory/active-directory-enterprise-apps-manage-provisioning).
+Bir uygulamaya belirli kullanıcılar ve gruplar sağlama hakkında daha fazla bilgi için bkz. [Enterprise Apps için Kullanıcı hesabı sağlamayı yönetme](https://docs.microsoft.com/azure/active-directory/active-directory-enterprise-apps-manage-provisioning).
 
-Etkinleştirme ve otomatik sağlama yapılandırmak için gereken gerçek adımlar, uygulamaya bağlı olarak farklılık gösterir.
+Otomatik sağlamayı etkinleştirmek ve yapılandırmak için gereken gerçek adımlar uygulamaya bağlı olarak değişir.
 
->[!NOTE]
->Uygulamanız için sağlama ve bu adımlar hem uygulama hem de sağlama bağlantısı oluşturmak için Azure AD'de yapılandırmak için aşağıdaki ayarlama özgü Kurulum öğretici bularak başlamanız gerekir. 
->
->
+> [!NOTE]
+> Uygulamanız için sağlamayı ayarlamaya özgü kurulum öğreticisini bularak ve sağlama bağlantısı oluşturmak için hem uygulamayı hem de Azure AD 'yi yapılandırmak üzere bu adımları takip ederek başlamanız gerekir. 
 
-Uygulama öğreticileri bulunabilir [nasıl Azure Active Directory ile SaaS uygulamalarını tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list).
+Uygulama öğreticileri, [SaaS uygulamalarını Azure Active Directory Ile tümleştirme hakkındaki öğreticiler listesinde](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)bulunabilir.
 
-Gözden geçirin ve hangi kullanıcı (veya grup) özellikleri akış Azure ad uygulama tanımlayan iş akışları ve öznitelik eşlemelerini yapılandırma sağlamayı ayarlama ayarlanırken dikkate alınması gereken önemli bir şey olabilir. Bu içerir "eşleştirme özelliği" ayarı benzersiz biçimde tanımlayan ve kullanıcılar/gruplar iki sistem arasındaki eşleştirmek için kullanılır. Bu önemli bir işlemle ilgili daha fazla bilgi için.
+Sağlamayı ayarlarken göz önünde bulundurmanız gereken önemli bir şey, Azure AD 'den uygulamaya hangi kullanıcı (veya grup) özelliklerinin akmasını tanımlayan öznitelik eşlemelerini ve iş akışlarını gözden geçirmeniz ve yapılandırmaktır. Bu, iki sistem arasında kullanıcıları/grupları benzersiz şekilde tanımlamak ve eşleştirmek için kullanılan "eşleşen özelliği" ayarlamayı içerir. Öznitelik eşlemeleri hakkında daha fazla bilgi için *sonraki adımlarda* yer alan bağlantıya bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[Kullanıcı Azure Active Directory'de SaaS uygulamaları için öznitelik eşlemelerini sağlama özelleştirme](https://docs.microsoft.com/azure/active-directory/active-directory-saas-customizing-attribute-mappings)
+[Azure Active Directory 'da SaaS uygulamaları için Kullanıcı hazırlama öznitelik eşlemelerini özelleştirme](https://docs.microsoft.com/azure/active-directory/active-directory-saas-customizing-attribute-mappings)
 

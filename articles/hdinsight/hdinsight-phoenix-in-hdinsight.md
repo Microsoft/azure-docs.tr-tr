@@ -1,52 +1,52 @@
 ---
-title: HDInsight - Azure HDInsight üzerinde Apache Phoenix
-description: ''
+title: HDInsight 'ta Apache Phoenix-Azure HDInsight
+description: Apache Phoenix genel bakış
 author: ashishthaps
+ms.author: ashishth
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
-ms.date: 01/19/2018
-ms.author: ashishth
-ms.openlocfilehash: 7d9aafeb920eab7f6a87061a135bf2e464add436
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/05/2019
+ms.openlocfilehash: 23c2a4e8c576f3f2355db0d903c43c9c5b24cc18
+ms.sourcegitcommit: 9dec0358e5da3ceb0d0e9e234615456c850550f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64698002"
+ms.lasthandoff: 10/14/2019
+ms.locfileid: "72311650"
 ---
-# <a name="apache-phoenix-in-hdinsight"></a>HDInsight üzerinde Apache Phoenix
+# <a name="apache-phoenix-in-azure-hdinsight"></a>Azure HDInsight 'ta Apache Phoenix
 
-[Apache Phoenix](https://phoenix.apache.org/) yüksek düzeyde paralel ilişkisel veritabanı katmanı üzerinde oluşturulan bir açık kaynak [Apache HBase](hbase/apache-hbase-overview.md). Phoenix, HBase üzerinde SQL benzeri sorguları kullanmanıza olanak sağlar. Phoenix, oluştur, Sil, SQL tabloları, dizinleri, görünümleri ve dizileri ve upsert satırları ayrı ayrı ve toplu değiştirme olanağı altında JDBC sürücüleri kullanır. Phoenix, HBase üzerinde düşük gecikme süreli uygulamaları oluşturmayı etkinleştirme sorgular derlemek için MapReduce kullanmak yerine noSQL yerel derleme kullanır. Phoenix, verilerle birlikte kod yürüten sunucu adres alanında istemci tarafından sağlanan kod çalıştırılmasını desteklemek üzere coprocessors ekler. Bu yaklaşım istemci/sunucu veri aktarımını en aza indirir.
+[Apache Phoenix](https://phoenix.apache.org/) , [Apache HBase](hbase/apache-hbase-overview.md)üzerinde oluşturulmuş açık kaynaklı, yüksek düzeyde paralel ilişkisel veritabanı katmanıdır. Phoenix, HBase üzerinde SQL benzeri sorgular kullanmanıza olanak sağlar. Phoenix, kullanıcıların SQL tabloları, dizinler, görünümler ve diziler oluşturma, silme, değiştirme ve tek tek ve toplu olarak satır oluşturma, silme, değiştirme ve silme gibi bir JDBC sürücülerini kullanır. Phoenix, sorguları derlemek için MapReduce kullanmak yerine noSQL yerel derlemesini kullanır ve bu, HBase üzerinde düşük gecikmeli uygulamalar oluşturulmasını sağlar. Phoenix, istemci tarafından sağlanan kodu sunucunun adres alanında çalıştırmayı desteklemek için ortak işlemciler ekler ve kodun verilerle birlikte yürütülmesi sağlanır. Bu yaklaşım, istemci/sunucu veri aktarımını en aza indirir.
 
-Apache Phoenix, olmayan-SQL benzeri bir sözdizimi kullanan geliştiricilerin büyük veri sorgularını açılır programlama yerine. Phoenix yüksek oranda optimize HBase için diğer araçları gibi [Apache Hive](hadoop/hdinsight-use-hive.md) ve Apache Spark SQL. Geliştiriciler için en büyük avantajı yüksek performansa sahip sorgular çok daha az kod yazıyor.
+Apache Phoenix, programlama yerine SQL benzeri bir sözdizimi kullanabilecek geliştiricilere büyük veri sorguları açar. Phoenix, [Apache Hive](hadoop/hdinsight-use-hive.md) ve SQL Apache Spark gibi diğer araçların aksine HBase için yüksek oranda iyileştirilmiştir. Geliştiricilerin avantajı çok daha az kod ile yüksek performanslı sorgular yazıyor.
 <!-- [Spark SQL](spark/apache-spark-sql-with-hdinsight.md)  -->
 
-Bir SQL sorgusu gönderdiğiniz zaman, Phoenix sorgu HBase yerel çağrıları derler ve iyileştirme paralel tarama (veya planı) çalıştırır. Bu Soyutlama Katmanı iş mantığını ve iş akışını kendi uygulamasına Phoenix'ın büyük veri depolama ve bunun yerine odaklanmak için MapReduce işleri yazmasını Geliştirici serbest bırakır.
+Bir SQL sorgusu gönderdiğinizde, Phoenix sorguyu HBase yerel çağrılarına derler ve taramayı (veya planı) iyileştirme için paralel olarak çalıştırır. Bu soyutlama katmanı, geliştiricilerin iş mantığı üzerine odaklanmak üzere MapReduce işleri yazmasını ve bu verilerin Phoenix 'in büyük veri depolaması etrafında iş akışını sağlar.
 
-## <a name="query-performance-optimization-and-other-features"></a>Sorgu performans iyileştirme ve diğer özellikler
+## <a name="query-performance-optimization-and-other-features"></a>Sorgu performansı iyileştirmesi ve diğer özellikler
 
-Apache Phoenix, HBase sorguları çeşitli performans iyileştirmeleri ve özellikler ekler.
+Apache Phoenix, HBase sorgularına birçok performans geliştirmesi ve özelliği ekler.
 
 ### <a name="secondary-indexes"></a>İkincil dizinler
 
-HBase birincil satır anahtarı lexicographically sıralanmış tek bir dizinde sahip. Bu kayıtlar, yalnızca satır anahtarı erişilebilir. Kayıtları satır anahtarı dışında herhangi bir sütun aracılığıyla erişen tüm verilerin gerekli filtre uygulanırken tarama gerektirir. İkincil bir dizinde sütunları veya dizini oluşturulmuş bir form ifadeler bu dizini aramaları ve aralığı izin vererek bir diğer satır anahtarı tarar.
+HBase 'in birincil satır anahtarında lexıgrafik olarak sıralanan tek bir dizini vardır. Bu kayıtlara yalnızca satır anahtarı üzerinden erişilebilir. Satır anahtarı dışında herhangi bir sütun aracılığıyla kayıtlara erişilmesi gereken filtre uygulanırken tüm verilerin taranmasını gerektirir. İkincil bir dizinde, dizine eklenen sütunlar veya ifadeler, bu dizinde aramalar ve Aralık taramalarına olanak sağlayan alternatif bir satır anahtarı oluşturur.
 
-İle ikincil bir dizin oluşturma `CREATE INDEX` komutu:
+@No__t-0 komutuyla ikincil dizin oluşturun:
 
 ```sql
 CREATE INDEX ix_purchasetype on SALTEDWEBLOGS (purchasetype, transactiondate) INCLUDE (bookname, quantity);
 ```
 
-Bu yaklaşım, tek dizinli sorgular yürütme üzerinden önemli ölçüde performans artışı sağlayabilir. İkincil dizin bu tür bir **dizin kapsayan**, sorguda bulunan sütunların tümünü içeren. Bu nedenle, tablo arama gerekli değildir ve tüm sorgu dizini karşılar.
+Bu yaklaşım, tek dizinli sorguları yürütmek için önemli bir performans artışı elde edebilir. Bu tür ikincil dizin, sorguya dahil edilen tüm sütunları içeren **kapsayan bir dizindir**. Bu nedenle, tablo araması gerekli değildir ve dizin tüm sorguyu karşılar.
 
 ### <a name="views"></a>Görünümler
 
-Phoenix görünümleri performans yaklaşık 100'den fazla fiziksel tablo oluşturduğunuzda düşmeye başladığı bir HBase sınırlamanın üstesinden gelmek için bir yol sağlar. Phoenix görünümlerini etkinleştirmek birden çok *sanal tablolar* temel alınan fiziksel HBase tablo paylaşmak için.
+Phoenix görünümleri, yaklaşık 100 fiziksel tablo oluştururken performansın düşmeye başladığı bir HBase sınırlamasını aşmak için bir yol sağlar. Phoenix görünümleri birden çok *sanal tablonun* temeldeki bir fiziksel HBase tablosunu paylaşmasını sağlar.
 
-Phoenix görünümü oluşturma, standart SQL görünümü sözdizimini kullanarak benzer. Devralınan kendi temel tablodan sütun yanı sıra görünümünüz için sütunları tanımlayabilirsiniz bir farktır. Ayrıca yeni ekleyebilirsiniz `KeyValue` sütunları.
+Phoenix görünümü oluşturmak, standart SQL görünümü sözdizimi kullanmaya benzer. Bunun farkı, kendi temel tablosundan devralınan sütunlara ek olarak görünümünizin sütunlarını tanımlayabilmeniz gerektiğidir. Ayrıca, yeni `KeyValue` sütunları da ekleyebilirsiniz.
 
-Örneğin, adında bir fiziksel tablo işte `product_metrics` aşağıdaki tanımıyla:
+Örneğin, aşağıdaki tanıma sahip `product_metrics` adlı bir fiziksel tablo aşağıda verilmiştir:
 
 ```sql
 CREATE  TABLE product_metrics (
@@ -57,7 +57,7 @@ CREATE  TABLE product_metrics (
     CONSTRAINT pk PRIMARY KEY (metric_type, created_by, created_date, metric_id));
 ```
 
-Ek sütunlar içeren bu tablo üzerine bir görünümü tanımlayın:
+Bu tablo üzerinde ek sütunlarla bir görünüm tanımlayın:
 
 ```sql
 CREATE VIEW mobile_product_metrics (carrier VARCHAR, dropped_calls BIGINT) AS
@@ -65,42 +65,42 @@ SELECT * FROM product_metrics
 WHERE metric_type = 'm';
 ```
 
-Daha fazla sütun daha eklemek için `ALTER VIEW` deyimi.
+Daha sonra daha fazla sütun eklemek için `ALTER VIEW` ifadesini kullanın.
 
-### <a name="skip-scan"></a>Skip tarama
+### <a name="skip-scan"></a>Taramayı atla
 
-Skip tarama bir bileşik dizin, bir veya daha fazla sütun benzersiz değerleri bulmak için kullanır. Aralık tarama, tarama, sonuçlanmıyor satır içi Atla tarama uygulayan [geliştirilmiş performans](https://phoenix.apache.org/performance.html#Skip-Scan). Tarama sırasında sonraki değer bulunana kadar ilk eşleşen değerin yanı sıra dizin atlanır.
+Atlama taraması, farklı değerleri bulmak için bileşik dizinin bir veya daha fazla sütununu kullanır. Bir Aralık taramasından farklı olarak, atlama taraması, satır içi tarama uygular ve [Gelişmiş performans](https://phoenix.apache.org/performance.html#Skip-Scan)sağlar. Tarama sırasında, sonraki değer bulunana kadar, eşleşen ilk değer dizinle birlikte atlanır.
 
-Skip tarama kullanan `SEEK_NEXT_USING_HINT` HBase filtre numaralandırması. Kullanarak `SEEK_NEXT_USING_HINT`, Atla tarama hangi anahtar kümesini veya anahtarlarının aralıkları izler, için her bir sütunun Aranmakta olan. Skip tarama ardından filtre değerlendirmesi sırasında geçilen ve bileşimlerinden olup olmadığını belirler bir anahtarı alır. Aksi halde, atlamak için bir sonraki en yüksek anahtar Atla tarama değerlendirir.
+Bir atlama taraması HBase filtresinin `SEEK_NEXT_USING_HINT` sabit listesini kullanır. @No__t-0 ' ı kullanarak atlama taraması, her sütunda hangi anahtar kümesinin veya anahtar aralıklarının arandığını izler. Atlama taraması, filtre değerlendirmesi sırasında kendisine geçirilmiş bir anahtar alır ve kombinasyondan biri olup olmadığını belirler. Aksi takdirde, atlama taraması, sonraki en yüksek anahtarı atlanacak şekilde değerlendirir.
 
 ### <a name="transactions"></a>İşlemler
 
-HBase satır düzeyinde işlemler sağlasa da, Phoenix ile tümleşir [Tephra](https://tephra.io/) tam satır içi ve geçici tablo işlem desteği eklemek için [ACID](https://en.wikipedia.org/wiki/ACID) semantiği.
+HBase, satır düzeyinde işlemler sağlarken, Phoenix, tam [ACID](https://en.wikipedia.org/wiki/ACID) semantiğine sahip çapraz satır ve çapraz tablo işlem desteği eklemek Için [tephra](https://tephra.io/) ile tümleşir.
 
-Olarak ile geleneksel SQL işlemleri, Phoenix işlem yöneticisi sağlanan işlemleri başarıyla atomik bir veri birimi üzerinde herhangi bir işlem etkin tabloda upsert işlem başarısız olursa işlemi geri alınıyor upserted, olduğundan emin olmak sağlar.
+Geleneksel SQL işlemlerinde olduğu gibi, Phoenix Transaction Manager aracılığıyla sağlanan işlemler, atomik bir veri biriminin başarılı bir şekilde geri alınmasını güvence altına aldığınızdan ve bu işlem, işlem etkinleştirilmiş herhangi bir tabloda, upsert işlem başarısız olursa işlem geri alınıyor.
 
-Phoenix hareketleri etkinleştirmek için bkz: [Apache Phoenix işlem belgeleri](https://phoenix.apache.org/transactions.html).
+Phoenix işlemlerini etkinleştirmek için [Apache Phoenix işlem belgelerine](https://phoenix.apache.org/transactions.html)bakın.
 
-Etkin işlemleri yeni bir tablo oluşturmak için `TRANSACTIONAL` özelliğini `true` içinde bir `CREATE` deyimi:
+İşlemler etkin olan yeni bir tablo oluşturmak için, `TRANSACTIONAL` özelliğini `CREATE` ifadesinde `true` olarak ayarlayın:
 
 ```sql
 CREATE TABLE my_table (k BIGINT PRIMARY KEY, v VARCHAR) TRANSACTIONAL=true;
 ```
 
-İşlem var olan bir tabloyu değiştirmek için aynı özelliği kullanan bir `ALTER` deyimi:
+Mevcut bir tabloyu işlemsel olacak şekilde değiştirmek için, `ALTER` ifadesinde aynı özelliği kullanın:
 
 ```sql
 ALTER TABLE my_other_table SET TRANSACTIONAL=true;
 ```
 
 > [!NOTE]  
-> İşlem olmayan olan geri işlemsel bir tabloda geçiş yapamazsınız.
+> İşlem tablosunu işlemsel olmayan şekilde geri geçirebilirsiniz.
 
-### <a name="salted-tables"></a>Salted tabloları
+### <a name="salted-tables"></a>Sallanan tablolar
 
-*Bölge sunucusu hotspotting* kayıtları için HBase ile sıralı anahtarları yazılırken ortaya çıkabilir. Kümenizde birden çok bölge sunucuları olsanız, okumalarınızın tüm yalnızca birinde oluşan. Bu yoğunluk, tüm kullanılabilir bölge sunucuları arasında dağıtılmasını yazma iş yükünüzü yerine, yalnızca bir yük işlediği hotspotting sorun oluşturur. Her bölge, bölge söz konusu boyut sınırına ulaştığında önceden tanımlanmış bir maksimum boyut olduğundan, iki küçük bölgelere ayrılmış durumdadır. Bu durum oluştuğunda, bu yeni bölgeler biri yeni etkin olma, tüm yeni kayıtlar alır.
+*Bölge sunucusu hotspool* , sıralı anahtarlarla HBase 'e sahip kayıtları yazarken meydana gelebilir. Kümenizde birden çok bölge sunucusu olsa da, yazmaların hepsi yalnızca bir tane üzerinde gerçekleşmiş olabilir. Bu yoğunlaşma, yazma iş yükünüzün tüm kullanılabilir bölge sunucularında dağıtılması yerine, yükü işleme sürecinde olan, en az bir sorun oluşturur. Her bölge önceden tanımlanmış en büyük boyuta sahip olduğundan, bir bölge bu boyut sınırına ulaştığında, iki küçük bölgeye ayrılır. Söz konusu olduğunda, bu yeni bölgelerden biri yeni etkin nokta haline gelir.
 
-Bu sorunu çözmek ve daha iyi performans elde etmek için böylece tüm bölge sunucuları eşit olarak kullanılan tablolar önceden bölün. Phoenix sağlar *salted tabloları*, saydam bir şekilde belirli bir tablonun satır anahtarı güvenlik bayt ekleme. Tablo salt bayt sınırlarına eşit yük dağıtımı bölge sunucuları arasında ilk aşaması sırasında tablonun emin olmak için önceden bölme. Bu yaklaşım, tüm yazma iyileştirme kullanılabilir bölge sunucuları arasında yazma iş yükü dağıtır ve performans okuyun. Tablo salt için belirtin `SALT_BUCKETS` tablo oluşturulduğunda özellik tablosu:
+Bu sorunu azaltmak ve tüm bölge sunucularının eşit olarak kullanılması için daha iyi bir performans, önceden bölünmüş tablolar elde etmek. Phoenix, belirli bir tablonun satır anahtarına saydam bir şekilde sallayan bayt ekleyerek, *sallanan tablolar*sağlar. Tablo, tablonun ilk aşamasında bölge sunucuları arasında eşit yük dağıtımına olanak sağlamak için, salt, anahtar bayt sınırlarına önceden bölünür. Bu yaklaşım, yazma iş yükünü tüm kullanılabilir bölge sunucularında dağıtır, yazma ve okuma performansını geliştirir. Tablo oluşturulduğunda `SALT_BUCKETS` tablo özelliğini bir tabloya göre belirlemek için:
 
 ```sql
 CREATE TABLE Saltedweblogs (
@@ -121,20 +121,20 @@ CREATE TABLE Saltedweblogs (
     shippingamount DOUBLE NULL) SALT_BUCKETS=4;
 ```
 
-## <a name="enable-and-tune-phoenix-with-apache-ambari"></a>Etkinleştirme ve Phoenix Apache Ambari ile ayarlama
+## <a name="enable-and-tune-phoenix-with-apache-ambari"></a>Apache ambarı ile Phoenix 'i etkinleştirme ve ayarlama
 
-HDInsight HBase kümesi içeren [Ambari UI](hdinsight-hadoop-manage-ambari.md) yapılandırma değişiklikleri yapmak için.
+An HDInsight HBase kümesi, yapılandırma değişiklikleri yapmak için [ambarı Kullanıcı arabirimini](hdinsight-hadoop-manage-ambari.md) içerir.
 
-1. Etkinleştirme veya devre dışı Phoenix ve Phoenix'ın sorgu zaman aşımı ayarlarını denetlemek için oturum açmak için Ambari Web kullanıcı arabirimini (`https://YOUR_CLUSTER_NAME.azurehdinsight.net`) Hadoop kullanıcı kimlik bilgilerinizi kullanarak.
+1. Phoenix 'i etkinleştirmek veya devre dışı bırakmak ve Phoenix 'in sorgu zaman aşımı ayarlarını denetlemek için, Hadoop Kullanıcı kimlik bilgilerinizi kullanarak ambarı Web Kullanıcı arabiriminde (`https://YOUR_CLUSTER_NAME.azurehdinsight.net`) oturum açın.
 
-2. Seçin **HBase** sol menüdeki hizmetler listesinden seçip **yapılandırmaları** sekmesi.
+2. Sol taraftaki menüdeki hizmetler listesinden **HBase** ' i seçin, sonra da **configs** sekmesini seçin.
 
-    ![Ambari HBase yapılandırma](./media/hdinsight-phoenix-in-hdinsight/ambari-hbase-config.png)
+    ![Apache ambarı HBase yapılandırması](./media/hdinsight-phoenix-in-hdinsight/ambari-hbase-config1.png)
 
-3. Bulma **Phoenix SQL** etkinleştirmek veya devre dışı phoenix ve sorgu zaman aşımı ayarlamak için yapılandırma bölümü.
+3. Phoenix 'i etkinleştirmek veya devre dışı bırakmak için **PHOENIX SQL** yapılandırma bölümünü bulun ve sorgu zaman aşımını ayarlayın.
 
-    ![Ambari Phoenix SQL yapılandırma bölümü](./media/hdinsight-phoenix-in-hdinsight/ambari-phoenix.png)
+    ![Ambarı Phoenix SQL yapılandırması bölümü](./media/hdinsight-phoenix-in-hdinsight/apache-ambari-phoenix.png)
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-* [HDInsight Linux tabanlı HBase kümeleriyle Apache Phoenix kullanma](hbase/apache-hbase-phoenix-squirrel-linux.md)
+* [HDInsight 'ta Linux tabanlı HBase kümeleriyle Apache Phoenix kullanma](hbase/apache-hbase-query-with-phoenix.md)

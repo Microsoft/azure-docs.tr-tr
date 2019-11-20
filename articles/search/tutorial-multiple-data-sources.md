@@ -1,115 +1,114 @@
 ---
-title: 'Öğretici: Birden çok veri kaynağına - Azure Search dizini'
-description: Birden çok veri kaynağından tek bir Azure Search dizinine veri aktarmak hakkında bilgi edinin.
-author: RobDixon22
-manager: HeidiSteen
-services: search
-ms.service: search
-ms.topic: tutorial
-ms.date: 06/21/2019
-ms.author: v-rodixo
-ms.custom: seodec2018
-ms.openlocfilehash: 8ce3c66432f3d2d0cb973886498aa46e7820698c
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+title: 'C#Öğretici: birden çok veri kaynağını Dizin'
+titleSuffix: Azure Cognitive Search
+description: Çoklu veri kaynaklarından verileri Dizin oluşturucular kullanarak tek bir Azure Bilişsel Arama dizinine aktarmayı öğrenin. Bu öğretici ve örnek kod ' de C#bulunur.
+manager: nitinme
+author: HeidiSteen
+ms.author: heidist
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
+ms.openlocfilehash: fbe3b9ada556f26bd559f040bf2ba5b22367abd0
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67485257"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74112217"
 ---
-# <a name="c-tutorial-combine-data-from-multiple-data-sources-in-one-azure-search-index"></a>C#Öğretici: Bir Azure Search dizini içinde birden çok veri kaynaklarından alınan verileri birleştirin
+# <a name="c-tutorial-combine-data-from-multiple-data-sources-in-one-azure-cognitive-search-index"></a>C#Öğretici: tek bir Azure Bilişsel Arama dizininde bulunan birden çok veri kaynağından verileri birleştirme
 
-Azure arama, içeri aktarma, analiz ve birden çok veri kaynaklarından alınan verileri tek bir birleştirilmiş aramada dizine dizin. Bu durumlarda burada yapılandırılmış verileri toplanır şekilli ve hatta düz metin verilerle metin, HTML, gibi diğer kaynaklardan destekler veya JSON belgeleri.
+Azure Bilişsel Arama, birden çok veri kaynağından alınan verileri tek bir Birleşik arama dizininde içeri aktarabilir, çözümleyebilir ve dizine alabilir. Bu, yapılandırılmış verilerin metin, HTML veya JSON belgeleri gibi diğer kaynaklardan daha az yapılandırılmış veya hatta düz metin verileriyle toplanmış olduğu durumları destekler.
 
-Bu öğreticide, Azure Blob Depolama belgelerini çizilmiş otel odası ayrıntıları birleştirmek ve Otel verileri bir Azure Cosmos DB veri kaynağından dizin açıklar. Sonuç, karmaşık veri türlerini içeren bir birleşik otel arama dizini olacaktır.
+Bu öğreticide, otel verilerinin bir Azure Cosmos DB veri kaynağından nasıl indeksedileceği ve Azure Blob depolama belgelerinden alınan otel odası ayrıntılarıyla birleştirilebileceğiniz açıklanır. Sonuç, karmaşık veri türleri içeren bir birleştirilmiş otel arama dizini olacaktır.
 
-Bu öğreticide C#, .NET SDK'sı Azure Search ve Azure portalı aşağıdaki görevleri gerçekleştirmek:
+Bu öğreticide C#, Azure BILIŞSEL arama .NET SDK ve aşağıdaki görevleri yapmak için Azure Portal kullanılmaktadır:
 
 > [!div class="checklist"]
-> * Örnek verileri karşıya yükleme ve veri kaynakları oluşturma
-> * Belge anahtarını tanımlama
-> * Tanımlama ve dizin oluşturma
-> * Azure Cosmos DB otel verileri dizini
-> * Blob depolamadan otelinden oda verilerini birleştirme
+> * Örnek verileri karşıya yükleme ve veri kaynaklarını oluşturma
+> * Belge anahtarını tanımla
+> * Dizini tanımlama ve oluşturma
+> * Azure Cosmos DB otel verilerinin dizinini oluştur
+> * BLOB depolama alanından otel odası verilerini birleştirme
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu hızlı başlangıçta, aşağıdaki hizmetleri, araçları ve verileri kullanılır. 
+Aşağıdaki hizmetler, Araçlar ve veriler bu hızlı başlangıçta kullanılır. 
 
-- [Azure Search hizmeti oluşturma](search-create-service-portal.md) veya [mevcut bir hizmet bulma](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices) geçerli aboneliğinizdeki. Bu öğretici için ücretsiz bir hizmet kullanabilirsiniz.
+- Geçerli aboneliğinizde [bir Azure bilişsel arama hizmeti oluşturun](search-create-service-portal.md) veya [var olan bir hizmeti bulun](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices) . Bu öğretici için ücretsiz bir hizmet kullanabilirsiniz.
 
-- [Bir Azure Cosmos DB hesabı oluşturmayı](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account) örnek otel verileri depolamak için.
+- Örnek otel verilerini depolamak için [bir Azure Cosmos DB hesabı oluşturun](https://docs.microsoft.com/azure/cosmos-db/create-cosmosdb-resources-portal) .
 
-- [Bir Azure depolama hesabı oluşturma](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account) örnek JSON depolamak için blob verileri.
+- Örnek JSON blob verilerini depolamak için [bir Azure depolama hesabı oluşturun](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account) .
 
-- [Visual Studio yükleme](https://visualstudio.microsoft.com/) IDE kullanılacak.
+- IDE olarak kullanmak için [Visual Studio 'Yu yükler](https://visualstudio.microsoft.com/) .
 
-### <a name="install-the-project-from-github"></a>Projeyi Github'dan yükleyin
+### <a name="install-the-project-from-github"></a>Projeyi GitHub 'dan yükler
 
-1. GitHub üzerinde örnek depoyu bulun: [azure-search-dotnet-samples](https://github.com/Azure-Samples/azure-search-dotnet-samples).
-1. Seçin **Kopyala veya indir** ve özel yerel kopyanızı deponun yapın.
-1. Visual Studio'yu açın ve zaten yüklü değilse, Microsoft Azure arama NuGet paketini yükleyin. İçinde **Araçları** menüsünde **NuGet Paket Yöneticisi** ardından **çözüm için NuGet paketlerini Yönet...** . Seçin **Gözat** sekmesinde ve arama kutusuna "Azure Search" yazın. Yükleme **Microsoft.Azure.Search** listesinde göründüğünde (9.0.1, sürümü veya üzeri). Yüklemeyi tamamlamak için ek iletişim kutularının tıklamanız gerekir.
+1. GitHub 'da örnek depoyu bulun: [Azure-Search-DotNet-Samples](https://github.com/Azure-Samples/azure-search-dotnet-samples).
+1. **Kopyala veya indir** ' i seçin ve deponun özel yerel kopyasını yapın.
+1. Visual Studio 'Yu açın ve henüz yüklenmemişse Bilişsel Arama NuGet paketini Microsoft Azure. **Araçlar** menüsünde **NuGet Paket Yöneticisi** ' ni ve ardından **çözüm için NuGet Paketlerini Yönet...** ' i seçin. **Araştır** sekmesinde, **Microsoft. Azure. Search** (sürüm 9.0.1 veya üzeri) ' i bulup daha sonra yükler. Yüklemeyi tamamlaması için ek iletişim kutularına tıklamacaksınız.
 
-    ![NuGet kullanarak Azure kitaplıkları eklemek](./media/tutorial-csharp-create-first-app/azure-search-nuget-azure.png)
+    ![Azure kitaplıklarını eklemek için NuGet kullanma](./media/tutorial-csharp-create-first-app/azure-search-nuget-azure.png)
 
-1. Visual Studio kullanarak, yerel depoya gidin ve çözüm dosyasını açın **AzureSearchMultipleDataSources.sln**.
+1. Visual Studio 'yu kullanarak yerel deponuza gidin ve **AzureSearchMultipleDataSources. sln**çözüm dosyasını açın.
 
-## <a name="get-a-key-and-url"></a>Bir anahtarı ve URL alma
+## <a name="get-a-key-and-url"></a>Anahtar ve URL al
 
-Azure Search hizmetiniz ile etkileşim için hizmet URL'si ve erişim anahtarı gerekir. İkisini de içeren bir arama hizmeti oluşturulur. Bu nedenle aboneliğinize Azure Search hizmetini eklediyseniz gerekli bilgileri almak için aşağıdaki adımları izleyin:
+Azure Bilişsel Arama hizmetinize etkileşimde bulunmak için hizmet URL 'SI ve erişim anahtarı gerekir. Her ikisiyle de bir arama hizmeti oluşturulur. bu nedenle, aboneliğinize Azure Bilişsel Arama eklediyseniz, gerekli bilgileri almak için aşağıdaki adımları izleyin:
 
-1. [Azure portalında oturum açın](https://portal.azure.com/)ve arama hizmetinizdeki **genel bakış** sayfa olduğunda URL'yi alın. Örnek uç nokta `https://mydemo.search.windows.net` şeklinde görünebilir.
+1. [Azure Portal oturum açın](https://portal.azure.com/)ve arama hizmetine **genel bakış** sayfasında URL 'yi alın. Örnek uç nokta `https://mydemo.search.windows.net` şeklinde görünebilir.
 
-1. İçinde **ayarları** > **anahtarları**, hizmette tam haklarına yönelik bir yönetici anahtarını alın. Bir gece yarısında gerektiği durumlarda iş sürekliliği için sağlanan iki birbirinin yerine yönetici anahtarı mevcuttur. Ekleme, değiştirme ve silme nesneler için istekleri birincil veya ikincil anahtar kullanabilirsiniz.
+1. **Ayarlar** > **anahtarlar**' da, hizmette tam haklar için bir yönetici anahtarı alın. Üzerinde bir tane almanız gereken iş sürekliliği için iki adet değiştirilebilir yönetici anahtarı vardır. Nesneleri eklemek, değiştirmek ve silmek için isteklerde birincil veya ikincil anahtarı kullanabilirsiniz.
 
-![Bir HTTP uç noktası ve erişim anahtarını alma](media/search-get-started-postman/get-url-key.png "bir HTTP uç noktası ve erişim anahtarını alma")
+![HTTP uç noktası ve erişim anahtarı al](media/search-get-started-postman/get-url-key.png "HTTP uç noktası ve erişim anahtarı al")
 
-Tüm istekleri hizmete gönderilen her istekte bir API anahtarı gerektirir. Geçerli bir anahtar, istek başına temelinde, uygulama gönderme isteği ve bunu işleyen hizmet arasında güven oluşturur.
+Tüm istekler hizmetinize gönderilen her istekte bir API anahtarı gerektirir. Geçerli bir anahtar, istek başına, isteği gönderen uygulama ve onu işleyen hizmet arasında güven oluşturur.
 
 ## <a name="prepare-sample-azure-cosmos-db-data"></a>Örnek Azure Cosmos DB verileri hazırlama
 
-Bu örnek iki küçük yedi kurgusal hotels açıklayan bir veri kümesini kullanır. Bir kümenin hotels açıklar ve bir Azure Cosmos DB veritabanına yüklenir. Başka bir küme otel odası ayrıntılarını içerir ve Azure Blob depolamaya yüklenecek yedi ayrı JSON dosyası olarak sağlanır.
+Bu örnek, yedi kurgusal oteli tanımlayan iki küçük veri kümesini kullanır. Bir küme, otelleri tanımlar ve bir Azure Cosmos DB veritabanına yüklenir. Diğer küme, otel odası ayrıntılarını içerir ve Azure Blob depolamaya yüklenecek yedi ayrı JSON dosyası olarak sağlanır.
 
-1. [Azure portalında oturum açın](https://portal.azure.com)ve ardından Azure Cosmos DB hesap genel bakış sayfanıza gidin.
+1. [Azure Portal oturum açın](https://portal.azure.com)ve Azure Cosmos DB hesabınıza genel bakış sayfasına gidin.
 
-1. Kapsayıcı Ekle menü çubuğundan tıklayın. "Yeni veritabanı oluştur" belirtin ve adını kullanın **otelinden oda db**. Girin **otelinden oda** için koleksiyon adı ve **/HotelId** bölüm anahtarı. Tıklayın **Tamam** veritabanı ve kapsayıcı oluşturmak için.
+1. Menü çubuğundan kapsayıcı Ekle ' ye tıklayın. "Yeni veritabanı oluştur" öğesini belirtin ve **otel-odalar-DB**adını kullanın. Koleksiyon adı için **oteller** ve bölüm anahtarı için **/Hotelıd** girin. Veritabanını ve kapsayıcıyı oluşturmak için **Tamam** ' ı tıklatın.
 
-   ![Azure Cosmos DB kapsayıcısı Ekle](media/tutorial-multiple-data-sources/cosmos-add-container.png "bir Azure Cosmos DB kapsayıcısı Ekle")
+   ![Azure Cosmos DB kapsayıcısı Ekle](media/tutorial-multiple-data-sources/cosmos-add-container.png "Azure Cosmos DB kapsayıcısı ekleme")
 
-1. Cosmos DB veri Gezgini'ne gidin ve seçin **öğeleri** öğesi altında **hotels** kapsayıcıda **otelinden oda db** veritabanı. Ardından **karşıya yükle öğesi** komut çubuğunda.
+1. Cosmos DB Veri Gezgini gidin ve **otel-odalar-DB** veritabanı içindeki **oteller** kapsayıcısı altında bulunan **Items** öğesini seçin. Ardından komut çubuğunda **öğeyi karşıya yükle** ' ye tıklayın.
 
-   ![Azure Cosmos DB koleksiyonuna](media/tutorial-multiple-data-sources/cosmos-upload.png "Cosmos DB koleksiyonu için karşıya yükleme")
+   ![Azure Cosmos DB koleksiyonuna yükle](media/tutorial-multiple-data-sources/cosmos-upload.png "Cosmos DB koleksiyonuna yükle")
 
-1. Karşıya yükleme panelinde klasör düğmesine tıklayın ve ardından dosyaya gidin **cosmosdb/HotelsDataSubset_CosmosDb.json** proje klasöründeki. Tıklayın **Tamam** karşıya yüklemeyi başlatmak için.
+1. Karşıya yükleme panelinde, klasör düğmesine tıklayın ve ardından proje klasöründeki **cosmosdb/HotelsDataSubset_CosmosDb. JSON** dosyasına gidin. Karşıya yüklemeyi başlatmak için **Tamam** ' ı tıklatın.
 
-   ![Karşıya yüklenecek Dosya Seç](media/tutorial-multiple-data-sources/cosmos-upload2.png "karşıya yüklenecek dosya seçin")
+   ![Karşıya yüklenecek dosyayı seçin](media/tutorial-multiple-data-sources/cosmos-upload2.png "Karşıya yüklenecek dosyayı seçin")
 
-1. Hotels koleksiyondaki öğelerin görünümünü yenilemek için Yenile düğmesini kullanın. Listelenen yedi yeni veritabanı belgeleri görmeniz gerekir.
+1. Oteller koleksiyonundaki öğelerin görünümünü yenilemek için Yenile düğmesini kullanın. Yedi yeni veritabanı belgesi listelendiğini görmeniz gerekir.
 
-## <a name="prepare-sample-blob-data"></a>Örnek blob verileri hazırlama
+## <a name="prepare-sample-blob-data"></a>Örnek blob verilerini hazırlama
 
-1. [Azure portalında oturum açın](https://portal.azure.com), Azure depolama hesabınıza gidin, tıklayın **Blobları**ve ardından **+ kapsayıcı**.
+1. [Azure Portal oturum açın](https://portal.azure.com), Azure depolama hesabınıza gidin, **Bloblar**' a tıklayın ve ardından **+ Container**' a tıklayın.
 
-1. [Bir blob kapsayıcısı oluşturursunuz](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal) adlı **otelinden oda** örnek otel odası JSON dosyalarını depolamak için. Genel erişim düzeyi geçerli değerleri birini ayarlayabilirsiniz.
+1. Örnek otel odası JSON dosyalarını depolamak için **otel odaları** adlı [bir blob kapsayıcısı oluşturun](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal) . Ortak erişim düzeyini geçerli değerlerinden herhangi birine ayarlayabilirsiniz.
 
-   ![Bir blob kapsayıcısı oluşturursunuz](media/tutorial-multiple-data-sources/blob-add-container.png "blob kapsayıcısı oluşturma")
+   ![Blob kapsayıcısı oluşturma](media/tutorial-multiple-data-sources/blob-add-container.png "Blob kapsayıcısı oluşturma")
 
-1. Kapsayıcıyı oluşturduktan sonra dosyayı açın ve seçin **karşıya** komut çubuğunda.
+1. Kapsayıcı oluşturulduktan sonra açın ve komut çubuğunda **karşıya yükle** ' yi seçin.
 
-   ![Komut çubuğunda karşıya](media/search-semi-structured-data/upload-command-bar.png "komut çubuğunda karşıya yükleme")
+   ![Komut çubuğuna yükle](media/search-semi-structured-data/upload-command-bar.png "Komut çubuğuna yükle")
 
-1. Örnek dosyalarını içeren klasöre gidin. Bunların tümünü seçin ve ardından **karşıya**.
+1. Örnek dosyaları içeren klasöre gidin. Tümünü seçip **karşıya yükle**' ye tıklayın.
 
-   ![Dosyaları karşıya yükleme](media/tutorial-multiple-data-sources/blob-upload.png "dosyaları karşıya yükle")
+   ![Dosyaları karşıya yükleme](media/tutorial-multiple-data-sources/blob-upload.png "Dosyaları karşıya yükleme")
 
-Karşıya yükleme tamamlandıktan sonra dosyalar veri kapsayıcısı için listede görünmelidir.
+Karşıya yükleme tamamlandıktan sonra dosyalar veri kapsayıcısının listesinde görünmelidir.
 
 ## <a name="set-up-connections"></a>Bağlantıları ayarlama
 
-Arama hizmeti ve veri kaynakları için bağlantı bilgilerini belirtilen **appsettings.json** çözümdeki dosyası. 
+Arama hizmeti ve veri kaynakları için bağlantı bilgileri, çözümdeki **appSettings. JSON** dosyasında belirtilir. 
 
-1. Visual Studio'da açın **AzureSearchMultipleDataSources.sln** dosya.
+1. Visual Studio 'da **AzureSearchMultipleDataSources. sln** dosyasını açın.
 
-1. Çözüm Gezgini'nde Düzenle **appsettings.json** dosya.  
+1. Çözüm Gezgini, **appSettings. JSON** dosyasını düzenleyin.  
 
 ```json
 {
@@ -122,46 +121,46 @@ Arama hizmeti ve veri kaynakları için bağlantı bilgilerini belirtilen **apps
 }
 ```
 
-İlk iki girişe, Azure Search hizmetinizin URL'si ve yönetici tuşlarını kullanın. Bir uç nokta, verilen `https://mydemo.search.windows.net`, örneğin, sağlamak için hizmet adı; `mydemo`.
+İlk iki giriş, Azure Bilişsel Arama hizmetiniz için URL ve yönetici anahtarlarını kullanır. Örneğin, sağlanacak hizmet adı `mydemo``https://mydemo.search.windows.net`uç noktası verilir.
 
-Sonraki girişleri hesap adlarını ve Azure Blob Depolama ve Azure Cosmos DB veri kaynakları için bağlantı dizesi bilgilerini belirtin.
+Sonraki girişler, Azure Blob depolama ve Azure Cosmos DB veri kaynakları için hesap adlarını ve bağlantı dizesi bilgilerini belirtir.
 
-### <a name="identify-the-document-key"></a>Belge anahtarını tanımlama
+### <a name="identify-the-document-key"></a>Belge anahtarını tanımla
 
-Azure Search'te anahtar alanı dizindeki her belgenin benzersiz olarak tanımlar. Her arama dizini türünde tam olarak bir anahtar alan olmalıdır `Edm.String`. Bu anahtar alanı dizine eklenen bir veri kaynağındaki her belge için mevcut olmalıdır. (Aslında, yalnızca gerekli bir alandır.)
+Azure Bilişsel Arama 'de, anahtar alanı dizindeki her belgeyi benzersiz bir şekilde tanımlar. Her arama dizininin `Edm.String`türünde tam olarak bir anahtar alanı olmalıdır. Bu anahtar alanı, dizine eklenen bir veri kaynağındaki her belge için mevcut olmalıdır. (Aslında, tek gerekli alandır.)
 
-Birden çok veri kaynaklarından alınan verileri için dizin oluşturulurken, her veri kaynağı anahtar değeri aynı anahtar alan olarak birleştirilmiş eşlenmelidir. Bu genellikle bazı ön anlamlı belge anahtarını dizininiz için tanımlamak ve her bir veri kaynağında mevcut olduğundan emin planlama yapmak gerekir.
+Birden çok veri kaynağından veri dizinlenirken, her veri kaynağı anahtar değeri, Birleşik dizindeki aynı anahtar alanıyla eşleşmelidir. Genellikle dizininiz için anlamlı bir belge anahtarı belirlemek için bazı önde bir planlama gerektirir ve her veri kaynağında bulunduğundan emin olun.
 
-Kaynak verileri için doğru dizin alanı yönlendirilebilir böylece azure Search dizin oluşturucularında alan eşlemeleri yeniden adlandırmak ve veri alanlarını dizin oluşturma işlemi sırasında bile yeniden biçimlendirmek için kullanabilirsiniz.
+Azure Bilişsel Arama Dizinleyicileri, dizin oluşturma işlemi sırasında veri alanlarını yeniden adlandırmak ve hatta yeniden biçimlendirmek için alan eşlemelerini kullanarak kaynak verilerin doğru Dizin alanına yönlendirilebilmesi için kullanılabilir.
 
-Örneğin, bizim örnek Azure Cosmos DB veri otel tanımlayıcı adlı **HotelId**. Ancak otelinden oda için JSON blob dosyalarını otel tanımlayıcı adlı **kimliği**. Program bu eşleyerek işler **kimliği** blob'lara alanını **HotelId** anahtar alan olarak.
+Örneğin, örnek Azure Cosmos DB verilerimizde, otel tanımlayıcısı **Hotelıd**olarak adlandırılır. Ancak, otel odalarına yönelik JSON blob dosyalarında, otel tanımlayıcısı **kimlik**olarak adlandırılır. Program bunu, **kimlik** alanını Bloblardan dizindeki **hotelıd** anahtar alanına eşleyerek işler.
 
 > [!NOTE]
-> Çoğu durumda, iyi belge anahtarları birleşik dizinler için varsayılan olarak bazı Dizin Oluşturucu tarafından oluşturulanlar gibi otomatik olarak oluşturulan belge anahtarları yapmayın. Genel olarak zaten var. bir anlamlı ve benzersiz anahtar değer kullanmak istemeniz veya veri kaynaklarınız için kolayca eklenebilir.
+> Çoğu durumda, varsayılan olarak bazı Dizin oluşturucular tarafından oluşturulan belgeler gibi otomatik olarak oluşturulmuş belge anahtarları, birleştirilmiş dizinler için iyi belge anahtarları oluşturmazlar. Genel olarak, içinde zaten bulunan veya veri kaynaklarınıza kolayca eklenebilen anlamlı, benzersiz bir anahtar değeri kullanmak isteyeceksiniz.
 
 ## <a name="understand-the-code"></a>Kodu anlama
 
-Verileri ve yapılandırma ayarları yerinde olduğunda, örnek program **AzureSearchMultipleDataSources.sln** derlemek ve çalıştırmak hazır olmanız gerekir.
+Veriler ve yapılandırma ayarları olduktan sonra, **AzureSearchMultipleDataSources. sln** dosyasındaki örnek program, derleme ve çalıştırmaya hazırlanmalıdır.
 
-Bu basit C#/.NET konsol uygulaması, aşağıdaki görevleri gerçekleştirir:
-* Veri yapısına dayalı yeni bir Azure Search dizini oluşturur C# (aynı zamanda adres ve alan sınıfları başvuran) otel sınıfı.
-* Bir Azure Cosmos DB veri kaynağı ve dizin alanları için Azure Cosmos DB veri eşleyen bir dizin oluşturur.
-* Otel verileri yüklemek için Azure Cosmos DB dizinleyici çalıştırır.
-* Bir Azure Blob Depolama veri kaynağı ve dizin alanları için JSON blob verilerini eşleyen bir dizin oluşturur.
-* Azure blob depolama dizin oluşturucu odaları verileri yüklemek için çalışır.
+Bu basit C#/.NET konsol uygulaması aşağıdaki görevleri gerçekleştirir:
+* C# Otel sınıfının veri yapısına dayalı yeni bir Azure bilişsel arama dizini oluşturur (Ayrıca adrese ve oda sınıflarına de başvurur).
+* Azure Cosmos DB verileri dizin alanlarıyla eşleyen bir Azure Cosmos DB veri kaynağı ve Dizin Oluşturucu oluşturur.
+* , Otel verilerini yüklemek için Azure Cosmos DB Dizin oluşturucuyu çalıştırır.
+* Bir Azure Blob depolama veri kaynağı ve JSON blob verilerini Dizin alanlarıyla eşleyen bir dizin oluşturucu oluşturur.
+* Oda verilerini yüklemek için Azure Blob depolama Dizin oluşturucuyu çalıştırır.
 
- Programı çalıştırmadan önce kod ve bu örnek için dizin ve dizin oluşturucu tanımlarını incelemek için bir dakikanızı ayırın. İlgili kod iki dosyada yer alır:
+ Programı çalıştırmadan önce, bu örneğe ilişkin kodu ve dizin ve Dizin Oluşturucu tanımlarını incelemek için bir dakikanızı alın. İlgili kod iki dosyada yer alır:
 
-  + **Hotel.cs** dizini tanımlayan şemayı içerir
-  + **Program.cs** Azure Search dizini, veri kaynağı ve dizin oluşturma ve birleştirilmiş sonuçlar dizine yükleme işlevler içerir.
+  + **Hotel.cs** , dizini tanımlayan şemayı içerir
+  + **Program.cs** , Azure bilişsel arama dizinini, veri kaynaklarını ve Dizin oluşturucuyu oluşturan ve Birleşik sonuçları dizine yükleyen işlevleri içerir.
 
-### <a name="define-the-index"></a>Bir dizin tanımla
+### <a name="define-the-index"></a>Dizini tanımlama
 
-Bu örnek program tanımlayın ve Azure Search dizini oluşturmak için .NET SDK'sını kullanır. Avantajlarından yararlanır [FieldBuilder](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.fieldbuilder) bir dizin yapısının oluşturmak için sınıf bir C# veri model sınıfı.
+Bu örnek program, bir Azure Bilişsel Arama dizini tanımlamak ve oluşturmak için .NET SDK 'sını kullanır. Bir C# veri modeli sınıfından dizin yapısı oluşturmak Için [FieldBuilder](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.fieldbuilder) sınıfından yararlanır.
 
-Veri modeli, aynı zamanda adres ve alan sınıfları başvuruları içeren otel sınıfı tarafından tanımlanır. Dizini için bir karmaşık veri yapısı oluşturmak için birden fazla sınıf tanımları aracılığıyla FieldBuilder tatbikatları aşağı. Meta veri etiketleri aranabilir veya sıralanabilir olup gibi her alanın özniteliklerini tanımlamak için kullanılır.
+Veri modeli, Otel Sınıfı tarafından tanımlanır ve bu da adres ve oda sınıflarına başvurular içerir. FieldBuilder, dizin için karmaşık bir veri yapısı oluşturmak üzere birden fazla sınıf tanımı aracılığıyla ayrıntıya gider. Meta veri etiketleri, her alanın, aranabilir veya sıralanabilir olup olmadığı gibi özniteliklerini tanımlamak için kullanılır.
 
-Aşağıdaki kod parçacıklarının gelen **Hotel.cs** dosyasını Göster nasıl tek bir alan ve başka bir veri modeli sınıfı, başvuru belirtilebilir.
+**Hotel.cs** dosyasındaki aşağıdaki kod parçacıkları, tek bir alanın ve başka bir veri modeli sınıfına yapılan başvurunun nasıl belirtime olduğunu gösterir.
 
 ```csharp
 . . . 
@@ -172,7 +171,7 @@ public Room[] Rooms { get; set; }
 . . .
 ```
 
-İçinde **Program.cs** bir ad ve bir alan koleksiyon tarafından üretilen ile tanımlanan dosya, dizin `FieldBuilder.BuildForType<Hotel>()` yöntemi ve şu şekilde oluşturulur:
+**Program.cs** dosyasında, Dizin `FieldBuilder.BuildForType<Hotel>()` yöntemi tarafından oluşturulan bir ad ve alan koleksiyonuyla tanımlanır ve sonra aşağıdaki gibi oluşturulur:
 
 ```csharp
 private static async Task CreateIndex(string indexName, SearchServiceClient searchService)
@@ -189,11 +188,11 @@ private static async Task CreateIndex(string indexName, SearchServiceClient sear
 }
 ```
 
-### <a name="create-azure-cosmos-db-data-source-and-indexer"></a>Azure Cosmos DB veri kaynağı ve dizin oluşturucu oluşturma
+### <a name="create-azure-cosmos-db-data-source-and-indexer"></a>Azure Cosmos DB veri kaynağı ve Dizin Oluşturucu oluşturma
 
-Sonraki ana program hotels veriler için Azure Cosmos DB veri kaynağı oluşturmak için mantığı içerir.
+Ardından ana program, otel verileri için Azure Cosmos DB veri kaynağı oluşturma mantığını içerir.
 
-İlk Azure Cosmos DB veritabanı adını bağlantı dizesine birleştirir. Ardından Azure Cosmos DB kaynaklarına [useChangeDetection] özelliği gibi belirli ayarlar dahil olmak üzere veri kaynağı nesnesi tanımlar.
+İlk olarak, Azure Cosmos DB veritabanı adını bağlantı dizesine ekler. Daha sonra veri kaynağı nesnesini tanımlar, örneğin, [useChangeDetection] özelliği gibi Azure Cosmos DB kaynaklarına özgü ayarlar.
 
   ```csharp
 private static async Task CreateAndRunCosmosDbIndexer(string indexName, SearchServiceClient searchService)
@@ -215,7 +214,7 @@ private static async Task CreateAndRunCosmosDbIndexer(string indexName, SearchSe
     await searchService.DataSources.CreateOrUpdateAsync(cosmosDbDataSource);
   ```
 
-Veri kaynağı oluşturulduktan sonra program adlı bir Azure Cosmos DB dizinleyici ayarlar **Otel-odaları-cosmos-dizin oluşturucu**.
+Veri kaynağı oluşturulduktan sonra program, **otel-odalar-Cosmos-Indexer**adlı bir Azure Cosmos DB Dizin Oluşturucu ayarlar.
 
 ```csharp
     Indexer cosmosDbIndexer = new Indexer(
@@ -235,13 +234,13 @@ Veri kaynağı oluşturulduktan sonra program adlı bir Azure Cosmos DB dizinley
     }
     await searchService.Indexers.CreateOrUpdateAsync(cosmosDbIndexer);
 ```
-Bu örnek birden çok kez çalıştırmak istediğiniz durumda program yeni bir tane oluşturmadan önce aynı ada sahip mevcut tüm dizin oluşturucular siler.
+Program, bu örneği birden çok kez çalıştırmak istemeniz durumunda yenisini oluşturmadan önce aynı ada sahip mevcut dizin oluşturucularının silinmesine izin vermez.
 
-Bu örnek dizin oluşturucu için bir zamanlama tanımlar günde bir kez çalışır. Gelecekte otomatik olarak yeniden çalıştırmak için dizin oluşturucuyu istemiyorsanız, bu çağrıdan schedule özelliği kaldırabilirsiniz.
+Bu örnek, Dizin Oluşturucu için bir zamanlama tanımlar, böylece günde bir kez çalıştırılır. Dizin oluşturucunun daha sonra otomatik olarak yeniden çalışmasını istemiyorsanız bu çağrıdan Schedule özelliğini kaldırabilirsiniz.
 
-### <a name="index-azure-cosmos-db-data"></a>Azure Cosmos DB dizin verileri
+### <a name="index-azure-cosmos-db-data"></a>Azure Cosmos DB verileri dizini
 
-Veri kaynağı ve dizin oluşturucu oluşturulduktan sonra Dizin Oluşturucu çalışan kodu kısa:
+Veri kaynağı ve Dizin Oluşturucu oluşturulduktan sonra, Dizin oluşturucuyu çalıştıran kod kısa olur:
 
 ```csharp
     try
@@ -254,13 +253,13 @@ Veri kaynağı ve dizin oluşturucu oluşturulduktan sonra Dizin Oluşturucu ça
     }
 ```
 
-Bu örnek, yürütme sırasında oluşabilecek hataları bildirmek için bir basit try-catch bloğu içerir.
+Bu örnek, yürütme sırasında ortaya çıkabilecek hataları raporlamak için basit bir try-catch bloğu içerir.
 
-Azure Cosmos DB dizinleyici çalıştırdıktan sonra arama dizini tam bir örnek otel belge kümesini içerir. Ancak, Azure Cosmos DB veri kaynağı yok odası ayrıntıları yer alan bu yana yer alan her otel için boş bir dizi olacaktır. Ardından, programı yüklemek ve oda verilerini birleştirmek için Blob depolama alanından çeker.
+Azure Cosmos DB Dizin Oluşturucu çalıştıktan sonra, arama dizini bir örnek otel belgeleri kümesi içerir. Ancak, Azure Cosmos DB veri kaynağında hiçbir Oda Ayrıntısı bulunmadığından, her otel için Odalar alanı boş bir dizi olacaktır. Daha sonra program, Oda verilerini yüklemek ve birleştirmek için BLOB depolama alanından çekmesini sağlar.
 
-### <a name="create-blob-storage-data-source-and-indexer"></a>BLOB Depolama veri kaynağı ve dizin oluşturucu oluşturma
+### <a name="create-blob-storage-data-source-and-indexer"></a>BLOB depolama veri kaynağı ve Dizin Oluşturucu oluştur
 
-Oda ayrıntıları almak için program ilk bir Blob Depolama veri kaynağını yedeklemeye JSON blob dosyaları tek tek başvurmak için ayarlar.
+Oda ayrıntılarını almak için, program ilk olarak tek bir JSON blob dosyası kümesine başvurmak üzere bir BLOB depolama veri kaynağı ayarlar.
 
 ```csharp
 private static async Task CreateAndRunBlobIndexer(string indexName, SearchServiceClient searchService)
@@ -275,7 +274,7 @@ private static async Task CreateAndRunBlobIndexer(string indexName, SearchServic
     await searchService.DataSources.CreateOrUpdateAsync(blobDataSource);
 ```
 
-Veri kaynağı oluşturulduktan sonra program adlı bir blob dizin oluşturucu ayarlar **Otel-odaları-blob-dizin oluşturucu**.
+Veri kaynağı oluşturulduktan sonra program, **otel-odalar-blob-Indexer**adlı bir blob Dizin Oluşturucu ayarlar.
 
 ```csharp
     // Add a field mapping to match the Id field in the documents to 
@@ -301,19 +300,19 @@ Veri kaynağı oluşturulduktan sonra program adlı bir blob dizin oluşturucu a
     await searchService.Indexers.CreateOrUpdateAsync(blobIndexer);
 ```
 
-Adlı bir anahtar alan JSON bloblarını içeren **kimliği** yerine **HotelId**. Kod `FieldMapping` yönlendirmek için dizin oluşturucuyu bildirmek için sınıf **kimliği** alan için değer **HotelId** belge anahtarında dizini.
+JSON blob 'ları **Hotelıd**yerine **ID** adlı bir anahtar alanı içerir. Kod, dizin oluşturucunun **kimlik** alanı değerini dizindeki **hotelıd** belge anahtarına yönlendirmesini söylemek için `FieldMapping` sınıfını kullanır.
 
-BLOB Depolama dizin oluşturucu, kullanılacak ayrıştırma modu tanımlayan parametrelerini kullanabilirsiniz. Ayrıştırma modu, tek bir belge ya da aynı blob içinde birden çok belge temsil bloblar için farklıdır. Kod için bu örnekte, her blob bir tek dizin belgeyi temsil eder. `IndexingParameters.ParseJson()` parametresi.
+BLOB depolama Dizin oluşturucular, kullanılacak ayrıştırma modunu tanımlayan parametreleri kullanabilir. Ayrıştırma modu, tek bir belgeyi veya aynı blob içindeki birden çok belgeyi temsil eden Bloblar için farklılık gösterir. Bu örnekte, her blob tek bir dizin belgesini temsil ettiğinden kod `IndexingParameters.ParseJson()` parametresini kullanır.
 
-Dizin Oluşturucu parametreler için JSON BLOB'ları ayrıştırma hakkında daha fazla bilgi için bkz. [dizin JSON BLOB'ları](search-howto-index-json-blobs.md). .NET SDK kullanarak bu parametreleri belirtme hakkında daha fazla bilgi için bkz. [IndexerParametersExtension](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.indexingparametersextensions) sınıfı.
+JSON Blobları için Dizin Oluşturucu ayrıştırma parametreleri hakkında daha fazla bilgi için bkz. [DIZIN JSON blob 'ları](search-howto-index-json-blobs.md). .NET SDK kullanarak bu parametreleri belirtme hakkında daha fazla bilgi için bkz. [IndexerParametersExtension](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.indexingparametersextensions) sınıfı.
 
-Bu örnek birden çok kez çalıştırmak istediğiniz durumda program yeni bir tane oluşturmadan önce aynı ada sahip mevcut tüm dizin oluşturucular siler.
+Program, bu örneği birden çok kez çalıştırmak istemeniz durumunda yenisini oluşturmadan önce aynı ada sahip mevcut dizin oluşturucularının silinmesine izin vermez.
 
-Bu örnek dizin oluşturucu için bir zamanlama tanımlar günde bir kez çalışır. Gelecekte otomatik olarak yeniden çalıştırmak için dizin oluşturucuyu istemiyorsanız, bu çağrıdan schedule özelliği kaldırabilirsiniz.
+Bu örnek, Dizin Oluşturucu için bir zamanlama tanımlar, böylece günde bir kez çalıştırılır. Dizin oluşturucunun daha sonra otomatik olarak yeniden çalışmasını istemiyorsanız bu çağrıdan Schedule özelliğini kaldırabilirsiniz.
 
-### <a name="index-blob-data"></a>Dizin blob verileri
+### <a name="index-blob-data"></a>Dizin blobu verileri
 
-Blob Depolama veri kaynağı ve dizin oluşturucu oluşturulduktan sonra Dizin Oluşturucu çalışan kod basittir:
+BLOB depolama veri kaynağı ve Dizin Oluşturucu oluşturulduktan sonra, Dizin oluşturucuyu çalıştıran kod basittir:
 
 ```csharp
     try
@@ -326,33 +325,33 @@ Blob Depolama veri kaynağı ve dizin oluşturucu oluşturulduktan sonra Dizin O
     }
 ```
 
-Dizin zaten Azure Cosmos DB veritabanındaki otel verilerle doldurulmuş olan olduğundan, blob dizin oluşturucu dizinde varolan belgeleri güncelleştirir ve odası ayrıntılarını ekler.
+Dizin Azure Cosmos DB veritabanından otel verileriyle doldurulduğundan, blob Indexer dizindeki mevcut belgeleri güncelleştirir ve Oda ayrıntılarını ekler.
 
 > [!NOTE]
-> Aynı anahtar olmayan alanları hem veri kaynaklarınızı ve bu alanları içindeki verileri varsa hangi dizin oluşturucu son çoğu çalıştırılmadan gelen değerlerin dizinini içerecektir sonra eşleşmiyor. Bizim örneğimizde, hem veri kaynaklarını içeren bir **HotelName** alan. Bazı verileri nedenden dolayı bu alan için aynı anahtar değerine sahip belgelerde farklı ise, ardından **HotelName** dizini veri kaynağındaki en son olacak dizinde depolanan değeri.
+> Her iki veri kaynağınız de aynı anahtar olmayan alanlara sahipseniz ve bu alanlardaki veriler eşleşmiyorsa, dizin, dizin oluşturucunun en son çalıştırıldığı değerleri içerir. Örneğimizde, her iki veri kaynağı da bir **Hotelname** alanı içerir. Bazı nedenlerle bu alandaki veriler farklıysa, aynı anahtar değerine sahip belgeler için, en son dizinlenen veri kaynağından gelen **barındırma adı** verileri dizinde depolanan değer olacaktır.
 
 ## <a name="search-your-json-files"></a>JSON dosyalarınızı arama
 
-Programını çalıştırdıktan sonra doldurulmuş arama dizinini kullanarak keşfedebilirsiniz [ **arama Gezgini** ](search-explorer.md) portalında.
+Program çalıştırıldıktan sonra, portalda [**Arama Gezgini**](search-explorer.md) 'ni kullanarak doldurulmuş arama dizinini inceleyebilirsiniz.
 
-Azure portalında arama hizmeti **genel bakış** sayfasında ve bulma **otelinden oda örnek** içinde dizin **dizinleri** listesi.
+Azure portal ' de, arama hizmeti **genel bakış** sayfasını açın ve **dizinler** listesinde **otel-odalar-Sample** dizinini bulun.
 
-  ![Azure Search dizinlerini listesi](media/tutorial-multiple-data-sources/index-list.png "liste, Azure Search dizinlerini")
+  ![Azure Bilişsel Arama dizinlerinin listesi](media/tutorial-multiple-data-sources/index-list.png "Azure Bilişsel Arama dizinlerinin listesi")
 
-Listenin otelinden oda örnek dizinde tıklayın. Dizini için bir arama Gezgini arabirimi görürsünüz. Terim "Lüks" gibi bir sorgu girin. En az bir belgede sonuçları görmeniz gerekir ve bu belgede yer nesnelerin bir listesini, odaları dizisinde göstermesi gerekir.
+Listedeki otel-odalar-örnek dizinine tıklayın. Dizin için bir arama Gezgini arabirimi görürsünüz. "Merkezlerini" gibi bir terim için bir sorgu girin. Sonuçlarda en az bir belge görmeniz gerekir ve bu belge, Oda dizisindeki bir oda nesnelerinin bir listesini göstermelidir.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Bir öğretici tamamlandıktan sonra temizlemenin en hızlı yolu, Azure Search hizmetini içeren kaynak grubunu silmektir. Kaynak grubunu silerek içindeki her şeyi kalıcı olarak silebilirsiniz. Portalda Azure Search hizmeti genel bakış sayfasında kaynak grubu adı var.
+Öğreticiden sonra temizlemenin en hızlı yolu, Azure Bilişsel Arama hizmetini içeren kaynak grubunu silmelidir. Kaynak grubunu silerek içindeki her şeyi kalıcı olarak silebilirsiniz. Portalda, kaynak grubu adı Azure Bilişsel Arama hizmetinin genel bakış sayfasında bulunur.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Çeşitli yaklaşımlar ve JSON bloblarını dizine ekleme için birden çok seçenek vardır. Veri kaynağınızı JSON içeriği içeriyorsa, hangi senaryonuz için en iyi çalıştığını görmek için bu seçenekleri gözden geçirebilirsiniz.
+JSON bloblarını dizine almanın çeşitli yaklaşımları ve birden çok seçeneği vardır. Kaynak verileriniz JSON içeriği içeriyorsa, senaryonuza en uygun olanı görmek için bu seçenekleri inceleyebilirsiniz.
 
 > [!div class="nextstepaction"]
-> [Azure Search Blob Dizin Oluşturucu kullanarak JSON bloblarını dizinleme](search-howto-index-json-blobs.md)
+> [Azure Bilişsel Arama blob Indexer kullanarak JSON bloblarını dizin oluşturma](search-howto-index-json-blobs.md)
 
-Yapılandırılmamış BLOB'ları veya tam metin içeriği oynatabilir zenginleştirilmiş verilerle bir veri kaynağından yapılandırılmış dizin verileri genişletmek isteyebilirsiniz. Aşağıdaki öğreticiye, .NET SDK kullanarak Azure Search ile birlikte Bilişsel Hizmetler'in nasıl kullanılacağını gösterir.
+Yapılandırılmamış bloblardan veya tam metin içeriğinden daha canlı zenginleştirilmiş veriler içeren bir veri kaynağından yapılandırılmış dizin verilerini artırmak isteyebilirsiniz. Aşağıdaki öğreticide, .NET SDK kullanılarak bilişsel hizmetler 'in Azure Bilişsel Arama ile birlikte nasıl kullanılacağı gösterilmektedir.
 
 > [!div class="nextstepaction"]
-> [Bir Azure Search dizini oluşturma ardışık düzen Bilişsel hizmetler API'lerini çağırma](cognitive-search-tutorial-blob-dotnet.md)
+> [Azure Bilişsel Arama Dizin oluşturma ardışık düzeninde Bilişsel Hizmetler API'si çağırma](cognitive-search-tutorial-blob-dotnet.md)

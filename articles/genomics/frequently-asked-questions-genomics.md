@@ -1,103 +1,90 @@
 ---
-title: 'Microsoft Genomiks: Sık sorulan sorular - SSS | Microsoft Docs'
-titleSuffix: Azure
-description: Microsoft Genomics hakkında genel soruların müşterilere yanıtlar isteyin.
+title: Sık sorulan sorular-SSS
+titleSuffix: Microsoft Genomics
+description: Teknik bilgiler, SLA ve faturalandırma dahil olmak üzere Microsoft Genomiks hizmeti kullanımı ile ilgili sık sorulan soruların yanıtlarını alın.
 services: genomics
 author: grhuynh
 manager: cgronlun
 ms.author: grhuynh
 ms.service: genomics
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 12/07/2017
-ms.openlocfilehash: 2bcbf9d145d9b8b5a3c42893235906d24516405c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4a2b66f95467e7f6cb99f632548351f827e259c3
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65792629"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73476437"
 ---
-# <a name="microsoft-genomics-common-questions"></a>Microsoft Genomiks: Sık sorulan sorular
+# <a name="microsoft-genomics-common-questions"></a>Microsoft Genomiks: genel sorular
 
-Bu makalede, Microsoft Genomics ilgili en sık kullanılan sorgular listelenir. Microsoft Genomics hizmeti hakkında daha fazla bilgi için bkz. [Microsoft Genomics nedir?](overview-what-is-genomics.md). Sorun giderme hakkında daha fazla bilgi için bkz. bizim [sorun giderme kılavuzu](troubleshooting-guide-genomics.md). 
-
-## <a name="what-is-the-microsoft-genomics-service-gatk-4-promotion"></a>Microsoft Genomics hizmet GATK 4 Yükseltme nedir?
-30 Haziran 2019 kadar hiçbir ücret ödemeden 20 WGS çalıştırmaları GATK4 ile Microsoft Genomics hizmeti sunmaktadır. Bu teklif kayıttaki katılmak [burada](https://aka.ms/msgatk4). 
-
-### <a name="what-are-the-common-issues-i-might-encounter-while-running-the-microsoft-genomics-service-gatk4-promotion"></a>Microsoft Genomics çalışırken karşılaşabileceğiniz genel sorunları nelerdir hizmet GATK4 yükseltme
-Karşılaşabileceğiniz genel hatalar ve bunların önerilen çözümü listesi aşağıda verilmiştir:
-
-| **İleti**                                                                                                                                                                                    | **Bunun nedeni**                                                                                                    | **Çözümleme**                                                                                                                                                                                                       |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `gatk4-promo` hesabınız için etkin değil. Daha fazla bilgi için bkz. https://docs.microsoft.com/azure/genomics/frequently-asked-questions-genomics                               | Etkinleştirilmekte olan olmadan Microsoft Genomics hizmetiyle GATK4 iş akışlarını çalıştırmak çalışıyorsunuz.       | Lütfen [burada](https://aka.ms/msgatk4) hesabınızı etkinleştirmek için. Deneme süresi 30 Haziran 2019 sona erdiğine dikkat edin. Bu tarihten sonra hesabınızı promosyon çalıştırmalar için etkinleştirmeniz mümkün olmayacaktır. |
-| Çalışan için teşekkür ederiz `gatk4-promo`. Deneme süreniz sona erdi. Daha fazla bilgi için https://docs.microsoft.com/azure/genomics/frequently-asked-questions-genomics                  | Takvim yılı sonunda GATK4 deneme süresi doldu ve çağırmaya çalışırken `gatk4-promo` işlem_adı.  | İşlem_adı parametreye geçiş `gatk4`, yerine `gatk4-promo`. Bu resmi gatk4 sürümüdür ve bu parametreyi kullanırsanız, iş akışınızı faturalandırılır.                                         |
-| Çalışan için teşekkür ederiz `gatk4-promo` tüm ayrılmış çalıştırmalarınızın kullandınız. Daha fazla bilgi için bkz. https://docs.microsoft.com/azure/genomics/frequently-asked-questions-genomics | Ayrıca, tüm promosyon, 20 çalıştırır GATK4 için başarıyla gönderdiniz.                               | Tüm yeni gatk4 çalıştıran kümesine işlem_adı bağımsız değişkeniyle gönderme `gatk4` yerine `gatk4-promo`. Bu parametreyi kullanırken, iş akışınızı faturalandırılır.                                                          |        
+Bu makalede, Microsoft Genomiks ile ilgili olabilecek en iyi sorgular listelenmektedir. Microsoft Genomiks hizmeti hakkında daha fazla bilgi için bkz. [Microsoft Genomiks nedir?](overview-what-is-genomics.md). Sorun giderme kılavuzu hakkında daha fazla bilgi için [sorun giderme kılavuzumuzu](troubleshooting-guide-genomics.md)inceleyin. 
 
 
-## <a name="can-i-run-gatk4-workflows-on-microsoft-genomics-without-signing-up-for-the-gatk4-promotion"></a>GATK4 yükseltme için kaydolmaya gerek olmadan Microsoft Genomics GATK4 iş akışları çalıştırabilir miyim?
-Evet, Microsoft Genomics hizmetin config.txt dosyasında için işlem_adı belirtin `gatk4`. Normal fatura ücretlerine göre faturalandırılır ve ücretsiz 20 çalıştırır unutmayın, Microsoft Genomics hesabınıza uygulanmaz.
+## <a name="how-do-i-run-gatk4-workflows-on-microsoft-genomics"></a>GATK4 iş akışlarını Microsoft Genomiks üzerinde Nasıl yaparım? çalıştırmak istiyor musunuz?
+Microsoft Genomiks hizmetinin config. txt dosyasında `gatk4`için işlem_adı ' ı belirtin. Düzenli faturalandırma ücretleri üzerinden faturalandırılabileceğinizi unutmayın.
 
 
+## <a name="what-is-the-sla-for-microsoft-genomics"></a>Microsoft Genomiks için SLA nedir?
+Microsoft Genomiks hizmeti 'nin iş akışı API 'SI isteklerini almak için kullanılabilir olduğu sürenin% 99,9 olacağını garanti ediyoruz. Daha fazla bilgi için bkz. [SLA](https://azure.microsoft.com/support/legal/sla/genomics/v1_0/).
 
-## <a name="what-is-the-sla-for-microsoft-genomics"></a>Microsoft Genomics için SLA'sı nedir?
-% 99,9 bir saat Microsoft Genomics hizmeti iş akışı API isteklerini almak kullanılabilir olacağını garanti ediyoruz. Daha fazla bilgi için [SLA](https://azure.microsoft.com/support/legal/sla/genomics/v1_0/).
-
-## <a name="how-does-the-usage-of-microsoft-genomics-show-up-on-my-bill"></a>Nasıl Microsoft Genomics kullanımı faturamda gösterilir?
-İş akışı başına işlenen gigabaz sayısına bağlı olarak Microsoft Genomics faturalandırır. Daha fazla bilgi için [fiyatlandırma](https://azure.microsoft.com/pricing/details/genomics/).
+## <a name="how-does-the-usage-of-microsoft-genomics-show-up-on-my-bill"></a>Microsoft Genomiks kullanımı faturamda nasıl görünür?
+Microsoft Genomiks, iş akışı başına işlenen gigabaz sayısına göre faturalandırılır. Daha fazla bilgi için bkz. [fiyatlandırma](https://azure.microsoft.com/pricing/details/genomics/).
 
 
-## <a name="where-can-i-find-a-list-of-all-possible-commands-and-arguments-for-the-msgen-client"></a>Tüm olası komutları ve bağımsız değişkenler listesini nereden bulabilirim `msgen` istemci?
-Çalıştırarak kullanılabilir komutları ve bağımsız değişkenler tam bir listesini alabilirsiniz `msgen help`. Daha fazla bağımsız değişken olmadan kullanılabilir Yardım listesini gösteren sağlanan varsa bölümlerinde, biri her biri için `submit`, `list`, `cancel`, ve `status`. Belirli bir komut için Yardım almak için şunu yazın `msgen help command`; Örneğin, `msgen help submit` teslim seçeneklerini listeler.
+## <a name="where-can-i-find-a-list-of-all-possible-commands-and-arguments-for-the-msgen-client"></a>`msgen` istemcisi için tüm olası komutların ve bağımsız değişkenlerin listesini nerede bulabilirim?
+`msgen help`çalıştırarak, kullanılabilir komutların ve bağımsız değişkenlerin tam listesini alabilirsiniz. Başka bir bağımsız değişken sağlanmadıysa, `submit`, `list`, `cancel`ve `status`her biri için bir tane olmak üzere kullanılabilir yardım bölümlerinin bir listesini gösterir. Belirli bir komut hakkında yardım almak için `msgen help command`yazın. Örneğin, `msgen help submit` tüm gönderme seçeneklerini listeler.
 
-## <a name="what-are-the-most-commonly-used-commands-for-the-msgen-client"></a>Komutlarında kullanılan en yaygın olarak nelerdir `msgen` istemci?
-En sık kullanılan komutlar için bağımsız değişkenleri olan `msgen` istemcisi içerir: 
+## <a name="what-are-the-most-commonly-used-commands-for-the-msgen-client"></a>`msgen` istemcisi için en sık kullanılan komutlar nelerdir?
+En sık kullanılan komutlar `msgen` istemci için bağımsız değişkendir: 
 
- |**Komutu**          |  **Alan açıklaması** |
+ |**Komut**          |  **Alan açıklaması** |
  |:--------------------|:-------------         |
- |`list`               |Size gönderilen işlerin bir listesini döndürür. Bağımsız değişkenler için bkz. `msgen help list`.  |
+ |`list`               |Gönderdiğiniz işlerin listesini döndürür. Bağımsız değişkenler için bkz. `msgen help list`.  |
  |`submit`             |Hizmetine bir iş akışı isteği gönderir. Bağımsız değişkenler için bkz. `msgen help submit`.|
- |`status`             |Tarafından belirtilen iş akışı durumunu döndüren `--workflow-id`. Ayrıca bkz: `msgen help status`. |
- |`cancel`             |Tarafından belirtilen iş akışı işleme iptal etmek için bir istek gönderir `--workflow-id`. Ayrıca bkz: `msgen help cancel`. |
+ |`status`             |`--workflow-id`tarafından belirtilen iş akışının durumunu döndürür. Ayrıca bkz. `msgen help status`. |
+ |`cancel`             |`--workflow-id`tarafından belirtilen iş akışının işlenmesini iptal etmek için bir istek gönderir. Ayrıca bkz. `msgen help cancel`. |
 
-## <a name="where-do-i-get-the-value-for---api-url-base"></a>Değeri nereden alabilirim `--api-url-base`?
-Azure portalına gidin ve Genomiks hesabı sayfanızı açın. Altında **Yönetim** başlığı seçin **erişim anahtarları**. Burada, hem API URL'sine ve erişim tuşlarınızı bulun.
+## <a name="where-do-i-get-the-value-for---api-url-base"></a>`--api-url-base`için değeri nereden alabilirim?
+Azure portal gidin ve Genomiks hesap sayfanızı açın. **Yönetim** başlığı altında **erişim tuşları**' nı seçin. Burada, API URL 'SI ve erişim anahtarlarınız bulunur.
 
-## <a name="where-do-i-get-the-value-for---access-key"></a>Değeri nereden alabilirim `--access-key`?
-Azure portalına gidin ve Genomiks hesabı sayfanızı açın. Altında **Yönetim** başlığı seçin **erişim anahtarları**. Burada, hem API URL'sine ve erişim tuşlarınızı bulun.
+## <a name="where-do-i-get-the-value-for---access-key"></a>`--access-key`için değeri nereden alabilirim?
+Azure portal gidin ve Genomiks hesap sayfanızı açın. **Yönetim** başlığı altında **erişim tuşları**' nı seçin. Burada, API URL 'SI ve erişim anahtarlarınız bulunur.
 
-## <a name="why-do-i-need-two-access-keys"></a>İki erişim tuşu neden gerekiyor?
-İki erişim tuşu ihtiyacınız (yeniden) güncelleştirmek istemeniz durumunda bunları hizmeti kullanımını kesintiye olmadan. Örneğin, ilk anahtarı güncelleştirmek istiyorsanız, tüm yeni iş akışları ikinci anahtarınızı olmalıdır. Daha sonra ilk anahtar güncelleştirmeden önce tamamlamak için ilk tuşu kullanarak tüm iş akışları için bekleyin.
+## <a name="why-do-i-need-two-access-keys"></a>Neden iki erişim anahtarına ihtiyacım var?
+Hizmetin kullanımını kesintiye uğramadan güncelleştirmek (yeniden oluşturmak) istemeniz durumunda iki erişim anahtarınız olması gerekir. Örneğin, ilk anahtarı güncelleştirmek istiyorsanız, tüm yeni iş akışlarının ikinci anahtarı kullanması gerekir. Ardından, ilk anahtarı güncelleştirmeden önce, ilk anahtarı kullanarak tüm iş akışlarının bitmesini bekleyin.
 
-## <a name="do-you-save-my-storage-account-keys"></a>Depolama hesabı anahtarlarımı kaydedebilirim?
-Depolama hesabı anahtarınızı, Microsoft Genomics hizmeti Çıkış dosyalarını, giriş dosyaları okuma ve yazma kısa süreli erişim belirteçleri oluşturmak için kullanılır. Varsayılan belirteç süresi 48 saattir. Belirteç süresi değiştirilebilir `-sas/--sas-duration` gönderme komutunun; seçenek değeri saattir.
+## <a name="do-you-save-my-storage-account-keys"></a>Depolama hesabı anahtarlarımı Kaydet?
+Depolama hesabı anahtarınız, giriş dosyalarınızı okumak ve çıktı dosyalarını yazmak üzere Microsoft Genomiks hizmeti için kısa süreli erişim belirteçleri oluşturmak üzere kullanılır. Varsayılan belirteç süresi 48 saattir. Belirteç süresi, Gönder komutunun `-sas/--sas-duration` seçeneğiyle değiştirilebilir; değer saat cinsinden.
 
-## <a name="what-genome-references-can-i-use"></a>Hangi genom başvuran kullanabilir miyim?
+## <a name="what-genome-references-can-i-use"></a>Hangi genom başvurularını kullanabilirim?
 
 Bu başvurular desteklenir:
 
- |Başvuru              | Değeri `-pa/--process-args` |
+ |Başvuru              | `-pa/--process-args` değeri |
  |:-------------         |:-------------                 |
  |b37                    | `R=b37m1`                     |
  |hg38                   | `R=hg38m1`                    |      
- |hg38 (alt çözümleme) | `R=hg38m1x`                   |  
+ |hg38 (alt analiz yok) | `R=hg38m1x`                   |  
  |hg19                   | `R=hg19m1`                    |    
 
-## <a name="how-do-i-format-my-command-line-arguments-as-a-config-file"></a>Bir yapılandırma dosyası olarak nasıl my komut satırı bağımsız değişkenleri biçimlendirme? 
+## <a name="how-do-i-format-my-command-line-arguments-as-a-config-file"></a>Komut satırı bağımsız değişkenlerimin bir yapılandırma dosyası olarak biçimlendirilmesi Nasıl yaparım?? 
 
-yapılandırma dosyaları şu biçimde msgen'i anlar:
-* Tüm seçenekleri anahtarlarından virgül ile ayrılmış değerleri olan anahtar-değer çiftleri olarak sağlanır.
-  Boşluk yoksayılır.
-* İle başlayan satırlar `#` göz ardı edilir.
-* Uzun biçimde herhangi bir komut satırı bağımsız değişkeni için bir anahtar şeridi oluşturma önde gelen, kısa çizgi ve alt çizgi ile kelimeler arasındaki çizgi değiştirerek dönüştürülebilir. Dönüştürme bazı örnekler şunlardır:
+msgen 'i yapılandırma dosyalarını aşağıdaki biçimde anlamıştır:
+* Tüm seçenekler, anahtar-değer çiftleri olarak anahtarlardan virgülle ayrılmış değerlerle birlikte sağlanır.
+  Boşluk yoksayıldı.
+* `#` başlayan satırlar yok sayılır.
+* Uzun biçimdeki herhangi bir komut satırı bağımsız değişkeni, önde gelen çizgileri gerçekleştirerek ve alt çizgi içeren kelimeler arasındaki tireleri değiştirerek bir anahtara dönüştürülebilir. Bazı dönüştürme örnekleri şunlardır:
 
-  |komut satırı bağımsız değişkeni            | Yapılandırma dosyası satırı |
+  |Komut satırı bağımsız değişkeni            | Yapılandırma dosyası satırı |
   |:-------------                   |:-------------                 |
   |`-u/--api-url-base https://url`  | *api_url_base: https://url*    |
-  |`-k/--access-key KEY`            | *access_key:Key*              |      
-  |`-pa/--process-args R=B37m1`     | *process_args:R-b37m1*        |  
+  |`-k/--access-key KEY`            | *access_key: anahtar*              |      
+  |`-pa/--process-args R=B37m1`     | *process_args: R-b37m1*        |  
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Microsoft Genomics kullanmaya başlamak için aşağıdaki kaynakları kullanın:
-- İlk iş akışınızı Microsoft Genomics hizmet aracılığıyla çalıştırarak başlayın. [Microsoft Genomics hizmeti üzerinden iş akışı çalıştırma](quickstart-run-genomics-workflow-portal.md)
-- Microsoft Genomics hizmeti tarafından işlenmesi için kendi verilerinizi göndermek: [eşleştirilmiş FASTQ](quickstart-input-pair-FASTQ.md) | [BAM](quickstart-input-BAM.md) | [birden fazla FASTQ veya BAM](quickstart-input-multiple.md) 
+Microsoft Genomiks ile çalışmaya başlamak için aşağıdaki kaynakları kullanın:
+- İlk iş akışınızı Microsoft Genomiks hizmeti aracılığıyla çalıştırarak başlayın. [Microsoft Genomiks hizmeti üzerinden iş akışı çalıştırma](quickstart-run-genomics-workflow-portal.md)
+- Microsoft Genomiks hizmeti tarafından işlenmek üzere kendi verilerinizi gönderme: [EŞLEŞTIRILMIŞ fastq](quickstart-input-pair-FASTQ.md) | [Bad](quickstart-input-BAM.md) | [birden çok fastq veya Baa](quickstart-input-multiple.md) 
 

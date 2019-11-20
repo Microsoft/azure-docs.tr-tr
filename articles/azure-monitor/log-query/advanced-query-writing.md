@@ -1,34 +1,28 @@
 ---
-title: Gelişmiş Azure İzleyicisi'nde sorgular | Microsoft Docs
-description: Bu makalede, Azure İzleyicisi'nde sorgular yazmak için Analytics portalı kullanmaya yönelik bir öğretici sağlar.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici 'de gelişmiş sorgular | Microsoft Docs
+description: Bu makalede, Azure Izleyici 'de sorgu yazmak için analiz portalını kullanmaya yönelik bir öğretici sunulmaktadır.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 11/15/2018
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 65713ed9c2d0635e776a7a7e5f205b6d55438ed4
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 11/15/2018
+ms.openlocfilehash: 8895224bef037c8c3f8b28a6085359837478d924
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60589584"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72894499"
 ---
-# <a name="writing-advanced-queries-in-azure-monitor"></a>Gelişmiş sorgular Azure İzleyici'de yazma
+# <a name="writing-advanced-queries-in-azure-monitor"></a>Azure Izleyici 'de gelişmiş sorgular yazma
 
 > [!NOTE]
-> Tamamlamanız gereken [Azure İzleyici Log Analytics ile çalışmaya başlama](get-started-portal.md) ve [sorguları ile çalışmaya başlama](get-started-queries.md) dersin tamamlamadan önce.
+> [Azure izleyici Log Analytics kullanmaya başlama](get-started-portal.md) ve bu dersi tamamlamadan önce [sorguları](get-started-queries.md) kullanmaya başlama işlemini tamamlamanız gerekir.
 
 [!INCLUDE [log-analytics-demo-environment](../../../includes/log-analytics-demo-environment.md)]
 
-## <a name="reusing-code-with-let"></a>Let koduyla yeniden kullanma
-Kullanım `let` sonuçları bir değişkene atayın ve sorgu daha sonra başvurmak için:
+## <a name="reusing-code-with-let"></a>Kodu izin ile yeniden kullanma
+Bir değişkene sonuçlar atamak ve bu sorguya daha sonra başvurmak için `let` kullanın:
 
 ```Kusto
 // get all events that have level 2 (indicates warning level)
@@ -40,7 +34,7 @@ warning_events
 | summarize count() by Computer 
 ```
 
-Ayrıca, değişkenler sabit değerler atayabilirsiniz. Bu, her sorgu çalıştırmanızda değiştirmek için gereken alanları parametrelerini ayarlamak için bir yöntem destekler. Bu parametre gerektiği gibi değiştirin. Örneğin, boş disk alanı ve boş bellek (yüzdebirliklerini), belirli bir zaman penceresinde hesaplamak için şunu yazın:
+Değişkenlere sabit değerler de atayabilirsiniz. Bu, sorguyu her çalıştırdığınızda değiştirmeniz gereken alanların parametrelerini ayarlamak için bir yöntemi destekler. Bu parametreleri gerektiği şekilde değiştirin. Örneğin, boş disk alanını ve boş belleği (yüzdebirlik değeri), belirli bir zaman penceresinde hesaplamak için:
 
 ```Kusto
 let startDate = datetime(2018-08-01T12:55:02);
@@ -58,10 +52,10 @@ Perf
 union FreeDiskSpace, FreeMemory
 ```
 
-Bu sorguyu daha sonra çalıştırdığınızda bitiş saati başlangıç değiştirmek kolaylaştırır.
+Bu, sorguyu bir sonraki çalıştırışınızda bitiş zamanının başlangıcını değiştirmeyi kolaylaştırır.
 
-### <a name="local-functions-and-parameters"></a>Yerel işlevler ve parametreleri
-Kullanım `let` deyimlerini aynı sorguda kullanılan işlevler oluşturun. Örneğin, bir datetime alanı (UTC biçimi) alan ve standart bir ABD biçimine dönüştürür bir fonksiyon tanımlayın. 
+### <a name="local-functions-and-parameters"></a>Yerel işlevler ve parametreler
+Aynı Sorguda kullanılabilecek işlevler oluşturmak için `let` deyimlerini kullanın. Örneğin, bir DateTime alanını alan (UTC biçiminde) bir işlev tanımlayın ve bunu standart ABD biçimine dönüştürür. 
 
 ```Kusto
 let utc_to_us_date_format = (t:datetime)
@@ -75,16 +69,16 @@ Event
 | project TimeGenerated, USTimeGenerated, Source, Computer, EventLevel, EventData 
 ```
 
-## <a name="print"></a>Yazdırma
-`print` tek bir sütun ve hesaplama sonucunu gösteren tek bir satır içeren bir tablo döndürür. Bu genellikle, basit bir hesaplama gereken durumlarda kullanılır. Örneğin, Pasifik saati geçerli zamanı bulup EST sahip bir sütun ekleyin:
+## <a name="print"></a>yazdırdığımda
+`print`, bir hesaplamanın sonucunu gösteren tek bir sütun ve tek bir satır içeren bir tablo döndürür. Bu, genellikle basit bir hesaplamanın gerektiği durumlarda kullanılır. Örneğin, PST 'deki geçerli saati bulmak ve EST ile bir sütun eklemek için:
 
 ```Kusto
 print nowPst = now()-8h
 | extend nowEst = nowPst+3h
 ```
 
-## <a name="datatable"></a>DataTable
-`datatable` bir veri kümesini tanımlamanızı sağlar. Ardından tabloda herhangi bir sorgu öğeleri eklemek kanal oluşturarak ve bir şeması ve bir değerler kümesi sağlar. Örneğin RAM kullanımını bir tablo oluşturun ve saatlik, ortalama değerini hesaplamak için:
+## <a name="datatable"></a>DataRow
+`datatable` bir veri kümesi tanımlamanızı sağlar. Bir şema ve bir değerler kümesi girip tabloyu diğer herhangi bir sorgu öğesine yönelolursunuz. Örneğin, bir RAM kullanımı tablosu oluşturmak ve Ortalama değerlerini saat başına hesaplamak için:
 
 ```Kusto
 datatable (TimeGenerated: datetime, usage_percent: double)
@@ -101,7 +95,7 @@ datatable (TimeGenerated: datetime, usage_percent: double)
 | summarize avg(usage_percent) by bin(TimeGenerated, 1h)
 ```
 
-DataTable yapıları ayrıca arama tablosu oluştururken çok yararlıdır. Örneğin, olay kimlikleri gibi tablo verilerini eşlemek için _SecurityEvent_ kullanarak olay türleri ile arama tablosu oluşturma, tablo, olay türü için başka bir yerde listelenen `datatable` ve bu datatable katılın  _SecurityEvent_ veri:
+Bir arama tablosu oluştururken DataTable yapıları de çok yararlı olur. Örneğin, _securityevent_ tablosundan olay kimlikleri gibi tablo verilerini başka bir yerde listelenen olay türlerine eşlemek için, `datatable` kullanarak olay türleriyle bir arama tablosu oluşturun ve bu DataTable 'ı _securityevent_ verileriyle birleştirin:
 
 ```Kusto
 let eventCodes = datatable (EventID: int, EventType:string)
@@ -130,12 +124,12 @@ SecurityEvent
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Diğer dersler kullanmak için bkz. [Kusto sorgu dili](/azure/kusto/query/) Azure İzleyici ile günlük verilerini:
+Azure Izleyici günlük verileriyle [kusto sorgu dilini](/azure/kusto/query/) kullanmaya yönelik diğer derslere bakın:
 
 - [Dize işlemleri](string-operations.md)
 - [Tarih ve saat işlemleri](datetime-operations.md)
 - [Toplama işlevleri](aggregations.md)
-- [Gelişmiş toplamaları](advanced-aggregations.md)
+- [Gelişmiş toplamalar](advanced-aggregations.md)
 - [JSON ve veri yapıları](json-data-structures.md)
-- [Birleşimler](joins.md)
-- [Grafikler](charts.md)
+- [Birleştirmeler](joins.md)
+- [Grafik](charts.md)

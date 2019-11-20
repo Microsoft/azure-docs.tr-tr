@@ -1,69 +1,64 @@
 ---
-title: Mevcut bir atamanın portalından güncelleştirme
-description: Mevcut bir Azure şemaları portalda atamadan güncelleştirme mekanizması hakkında bilgi edinin.
-author: DCtheGeek
-ms.author: dacoulte
+title: Portaldan mevcut bir atamayı güncelleştirme
+description: Azure 'de portaldan mevcut bir atamayı güncelleştirme mekanizması hakkında bilgi edinin.
 ms.date: 10/25/2018
 ms.topic: conceptual
-ms.service: blueprints
-manager: carmonm
-ms.custom: seodec18
-ms.openlocfilehash: c75bd8c3831bad0c8217f16315843cbe3824fe4d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f48f8cfb33a05e2bf8dcbe097d3a9eb3a5ebb9db
+ms.sourcegitcommit: 39da2d9675c3a2ac54ddc164da4568cf341ddecf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "63766608"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73960351"
 ---
-# <a name="how-to-update-an-existing-blueprint-assignment"></a>Var olan bir şema atamasını güncelleştirme
+# <a name="how-to-update-an-existing-blueprint-assignment"></a>Mevcut bir şema atamasını güncelleştirme
 
-Bir şema atandığında atama güncelleştirilebilir. Mevcut bir atamanın güncelleştirilmesi için birkaç nedeni vardır dahil olmak üzere:
+Bir şema atandığında, atama güncelleştirilebilen olabilir. Mevcut bir atamayı güncelleştirmek için aşağıdakiler de dahil olmak üzere çeşitli nedenler vardır:
 
-- Ekleme veya kaldırma [kaynak kilitleme](../concepts/resource-locking.md)
-- Değiştirin [dinamik parametreler](../concepts/parameters.md#dynamic-parameters)
-- Atama yeni bir yükseltme **yayımlanan** şema sürümü
+- [Kaynak kilitlemeyi](../concepts/resource-locking.md) ekleme veya kaldırma
+- [Dinamik parametrelerin](../concepts/parameters.md#dynamic-parameters) değerini değiştirme
+- Atamayı, şema 'in daha yeni **yayımlanmış** bir sürümüne yükseltin
 
-## <a name="updating-assignments"></a>Atamaları güncelleştiriliyor
+## <a name="updating-assignments"></a>Atamalar güncelleştiriliyor
 
-1. Seçin **tüm hizmetleri** sol bölmesinde. Arayın ve seçin **şemaları**.
+1. Sol bölmedeki **tüm hizmetler** ' i seçin. **Şemaları**arayın ve seçin.
 
-1. Seçin **şemaları atanan** sol sayfasında.
+1. Soldaki sayfadan **atanan** şemalar ' ı seçin.
 
-1. Şema atamasını şemaları listede sol. Ardından **güncelleştirme ataması** düğmesini veya şema atamasını sağ tıklayıp **güncelleştirme ataması**.
+1. Planlar listesinde, BLUEPRINT atamasını sol tıklatın. Ardından, **atamayı Güncelleştir** DÜĞMESINE tıklayın veya BLUEPRINT atamasını sağ tıklayıp **atamayı Güncelleştir**' i seçin.
 
-   ![Var olan bir şema atamasını güncelleştir](../media/update-existing-assignments/update-assignment.png)
+   ![Mevcut bir şema atamasını güncelleştirme](../media/update-existing-assignments/update-assignment.png)
 
-1. **Ata şema** sayfa özgün atama tüm değerlerle önceden doldurulmuş olarak yüklenecektir. Değiştirebileceğiniz **şema tanımı sürümü**, **kilit atama** durumunu ve herhangi bir şema tanımı üzerinde mevcut dinamik parametre. Tıklayın **atama** değişiklikleriniz bittiğinde.
+1. **Şema ata** sayfası, orijinal atamadan tüm değerlerle önceden doldurulmuş olarak yüklenir. **Şema tanım sürümünü**, **kilit atama** durumunu ve şema tanımında bulunan dinamik parametrelerden herhangi birini değiştirebilirsiniz. Değişiklik yapıldığında **ata** ' ya tıklayın.
 
-1. Yeni durum güncelleştirilmiş atama Ayrıntıları sayfasında bakın. Bu örnekte, eklediğimiz **kilitleme** atama.
+1. Güncelleştirilmiş atama ayrıntıları sayfasında, yeni durum ' a bakın. Bu örnekte, atamaya **kilitleme** ekledik.
 
-   ![Var olan bir şema atamasını - kilit modu değiştirildi güncelleştirildi](../media/update-existing-assignments/updated-assignment.png)
+   ![Mevcut bir şema ataması güncelleştirildi-kilit modu değişti](../media/update-existing-assignments/updated-assignment.png)
 
-1. Diğer ayrıntılarını keşfetmek **atama işlemleri** açılan listeyi kullanarak. İçindekiler tablosunu **yönetilen kaynakları** güncelleştirilerek seçilen atama işlemi.
+1. Açılan eklentiyi kullanarak diğer **atama işlemleriyle** ilgili ayrıntıları keşfedebilirsiniz. **Yönetilen kaynakların** tablosu seçili atama işlemine göre güncelleştirilir.
 
-   ![Şema atamasını atama işlemleri](../media/update-existing-assignments/assignment-operations.png)
+   ![Şema atamasının atama işlemleri](../media/update-existing-assignments/assignment-operations.png)
 
-## <a name="rules-for-updating-assignments"></a>Kuralları atamaları güncelleştiriliyor
+## <a name="rules-for-updating-assignments"></a>Atamaları güncelleştirme kuralları
 
-Güncelleştirilmiş atamaları dağıtımını birkaç önemli kurallara uygun olmalıdır. Bu kurallar, zaten dağıtılmış kaynaklar için ne olacağını belirler. Hangi eylemler gerçekleştirildikçe istenen değişikliği ve dağıtılmış veya güncelleştirilmesi yapıt kaynak türünü belirler.
+Güncelleştirilmiş atamaların dağıtımı, bazı önemli kurallara uyar. Bu kurallar, zaten dağıtılmış kaynaklara ne olduğunu belirlemek için belirlenir. Dağıtılan veya güncellenen yapıt kaynağının istenen değişikliği ve türü, hangi eylemlerin alınacağını tespit edilir.
 
 - Rol Atamaları
-  - Rol veya (kullanıcı, Grup veya uygulama) rolü atanan değişirse, yeni bir rol ataması oluşturulur. Daha önce dağıttığınız rol atamaları yerinde kalır.
+  - Rol ya da rol atanan (Kullanıcı, Grup veya uygulama) değişirse yeni bir rol ataması oluşturulur. Daha önce dağıtılan rol atamaları yerinde kalır.
 - İlke Atamaları
-  - İlke ataması parametrelerinin değiştirilirse mevcut atamanın güncelleştirilir.
-  - İlke ataması tanımı değiştirilirse, yeni ilke ataması oluşturulur. Daha önce dağıtılan ilke atamaları yerinde kalır.
-  - İlke atama yapıtındaki blueprint kaldırılırsa, ilke atamaları yerinde kalır dağıtıldı.
+  - İlke atamasının parametreleri değiştirilirse, mevcut atama güncellenir.
+  - İlke atamasının tanımı değiştirilirse yeni bir ilke ataması oluşturulur. Daha önce dağıtılan ilke atamaları yerinde kalır.
+  - İlke atama yapıtı Blueprint 'ten kaldırılırsa, dağıtılan ilke atamaları yerinde kalır.
 - Azure Resource Manager şablonları
-  - Şablon olarak Resource Manager üzerinden işlenir bir **PUT**. Her kaynak türü farklı bu eylemin işlediği gibi şemalar tarafından çalıştırıldığında bu eylem etkisini belirlemek dahil edilen her kaynak için belgeleri gözden geçirin.
+  - Şablon, Kaynak Yöneticisi aracılığıyla bir **PUT**olarak işlenir. Her kaynak türü bu eylemi farklı şekilde işlediğinde, bu eylemin, planlar tarafından çalıştırıldığında etkisini öğrenmek için dahil edilen her kaynak için belgeleri gözden geçirin.
 
-## <a name="possible-errors-on-updating-assignments"></a>Olası hataları üzerinde atamaları güncelleştiriliyor
+## <a name="possible-errors-on-updating-assignments"></a>Atamaları güncelleştirmede olası hatalar
 
-Atamalar güncelleştirilirken yürütüldüğünde sonu değişiklik yapmak mümkündür. Bir örnek, zaten dağıtıldıktan sonra bir kaynak grubu konumunu değişiyor. Tarafından desteklenen herhangi bir değişiklik [Azure Resource Manager](../../../azure-resource-manager/resource-group-overview.md) yapılması olabilir, ancak herhangi Azure Resource Manager aracılığıyla bir hata sonucunda da neden olur atama hatası değiştirebilirsiniz.
+Atamaları güncelleştirirken, yürütüldüğünde kesen değişiklikler yapmak mümkündür. Bir örnek, daha önce dağıtıldıktan sonra kaynak grubunun konumunu değiştiriyor. [Azure Resource Manager](../../../azure-resource-manager/resource-group-overview.md) tarafından desteklenen herhangi bir değişiklik yapılabilir, ancak Azure Resource Manager üzerinden bir hatayla sonuçlanarak yapılan herhangi bir değişiklik atamanın başarısızlığının oluşmasına neden olur.
 
-Atama bir kaç kez güncelleştirilebilir bir sınır yoktur. Bir hata oluşursa, hatayı belirlemek ve başka bir güncelleştirme için atama yapın.  Örnek hata senaryolar:
+Atamanın kaç kez güncelleştirilemeyebilir. Bir hata oluşursa, hatayı saptayın ve atamanın başka bir güncelleştirmesini yapın.  Örnek hata senaryoları:
 
-- Hatalı bir parametre
-- Varolan bir nesneye
+- Hatalı parametre
+- Zaten varolan bir nesne
 - Azure Resource Manager tarafından desteklenmeyen bir değişiklik
 
 ## <a name="next-steps"></a>Sonraki adımlar

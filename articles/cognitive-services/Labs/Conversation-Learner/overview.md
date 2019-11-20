@@ -1,7 +1,7 @@
 ---
-title: Konuşma Öğrenici nedir? -Microsoft Bilişsel hizmetler | Microsoft Docs
+title: Konuşma Öğrenici nedir? -Microsoft bilişsel hizmetler | Microsoft Docs
 titleSuffix: Azure
-description: Konuşma Öğrenici ve nasıl çalıştığı hakkında bilgi edinin.
+description: Conversation Learner ve nasıl çalıştığını öğrenin.
 services: cognitive-services
 author: nitinme
 manager: nolachar
@@ -10,38 +10,39 @@ ms.subservice: conversation-learner
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: nitinme
-ms.openlocfilehash: f8bc7590f2d7a622b4b1ffb21bfeccef89691fd5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: 725a1d3628fb320a58e073fe2d825af23b02c0bd
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66389507"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707012"
 ---
 # <a name="what-is-conversation-learner"></a>Konuşma Öğrenici nedir?
 
-Konuşma Öğrenici örnek etkileşimlerinden öğrenin damıtarak konuşma bağlamında kullanılabilen arabirimleri öğretmek ve oluşturmanıza olanak sağlar. 
+Conversation Learner, örnek etkileşimlerden öğrenmiş olan konuşma arabirimlerini derlemenize ve öğretebilmenizi sağlar. 
 
-Geleneksel yaklaşım, konuşma Öğrenici yanıtları artırmak ve daha ilgi çekici kullanıcı deneyimleri için bir iletişim kutusu uçtan uca bağlamında göz önünde bulundurur. Çok sayıda görev odaklı kapsayan kullanım örnekleri, makine öğrenimi robotlar ve daha sezgisel etkileşimleri spur kullanıcıları rahatsız ve ek müşteri hizmeti ücrete neden olma olasılığını akıllı aracıları arka planda konuşma Öğrenici uygular.
+Geleneksel yaklaşımlardan farklı olarak Conversation Learner, yanıtları geliştirmek ve daha ilgi çekici kullanıcı deneyimleri sunmak için bir iletişim kutusu uçtan uca bağlamını dikkate alır. Çok sayıda görev odaklı kullanım durumunu kapsayan Conversation Learner, botların ve akıllı aracıların kullanıcıları rahatsız etmek, ek müşteri hizmetleri maliyetlerine tabi hale getirmek ve daha sezgisel etkileşimler sunmak için arka planda makine öğrenimi uygular.
 
-Geliştiriciler, girdiklerini taklit ederek istedikleri Prototipik iletişim kutuları girerek başlayın. Daha fazla iletişim kutuları girildiği gibi Model öğrenir. Bot, modeli de çalışmaya başladığında, son kullanıcılara dağıtılabilir. Konuşma Öğrenici konuşmaları kullanıcılarla kaydeder ve geliştirici gözden geçirebilirsiniz. Hataları anlaþýlmaz, geliştirici üzerinde--nokta düzeltme yapabilir ve hemen retrained ve kullanılabilir modelidir.
+Geliştiriciler, taklit etmek istedikleri prototipte iletişim kutularını girerek başlar. Model daha fazla iletişim kutusu olarak öğrenir. Model düzgün çalışmaya başladıktan sonra, bot son kullanıcılara dağıtılabilir. Conversation Learner, kullanıcılarla ilgili konuşmaları günlüğe kaydeder ve geliştirici bunları gözden geçirebilir. Hatalar sposısa, geliştirici bir nokta düzeltmesi yapabilir ve model yeniden kullanıma sunulmuştur ve hemen kullanılabilir.
 
-Bu yaklaşım, el ile iletişim kutusu denetim mantığının kodlama azaltan ve işletme sahipleri veya etki alanı uzmanları damıtarak konuşma bağlamında kullanılabilen bir arabirim önceki makine öğrenimi bilgi katkıda bulunmak sağlar. Bot, akıllı cihaz veya akıllı Aracısı bir parçası olarak dağıtılan olsun, konuşma Öğrenici hızla yeni beceriler, davranışları ve yetkinlikleri yineleme ve bunların kalitesinin hızlı bir şekilde geliştirin. 
+Bu yaklaşım, iletişim denetim mantığının el ile kodlanmasını azaltır ve iş sahiplerinin veya etki alanı uzmanlarının, daha önceki bir makine öğrenimi bilgisi olmadan bir konuşma arabirimine katkıda bulunmasını sağlar. Conversation Learner, bir bot 'ın, akıllı cihazın veya akıllı aracının bir parçası olarak dağıtılmasının yanı sıra yeni becerileri, davranışları ve Uzmanlıklar hızla yineleyebilir ve kalitesini hızlı bir şekilde artırabilir. 
 
-Konuşma Öğrenici geliştiricilerin Microsoft Bot Framework ya da kendi altyapınızı kullanarak tek başına birden çok damıtarak konuşma bağlamında kullanılabilen kanallarından hızlı pazara açılma ve sürücü başarılı bitirmenize arttırırsınız güçlendirir.
+Conversation Learner, geliştiricilerin, Microsoft bot Framework veya tek başına altyapısını kullanarak birden çok konuşma kanalında hızla pazara ve başarılı bir şekilde çağrı yapmasına olanak sağlar.
 
-Summary ve vurgular:
+Özet ve vurgular:
 
-- Konuşma Öğrenici görev odaklı botlar oluşturmanın bir yapay ZEKA ilk yoludur.
+- Conversation Learner, görev odaklı botların oluşturulmasına yönelik ilk bir AI yoludur.
 
-- Bir uçtan uca yinelenen sinir ağı üzerinde (LSTM) kullanır ve konuşmaları doğrudan çok Aç örnekleri öğrenir. 
+- Uçtan uca bir yinelenen sinir ağı (LSTM) kullanır ve doğrudan konuşmaları çok yönlü örneklerinden öğrenir. 
 
-- Tasarımcılar, geliştiriciler, iş kullanıcıları ve çağrı merkezi çalışanları oluşturmasına ve botlar korumasına olanak tanır. 
+- Tasarımcılar, geliştiriciler, iş kullanıcıları ve çağrı merkezi çalışanları tarafından botları derleyip bakımını sağlar. 
 
-- İş kuralları ve kod genel anlamda express olanağı sağlar.
+- Kod içinde iş kurallarını ve yaygın anlamda anlamlı bir şekilde ifade etme yeteneği sağlar.
 
-- Oturumlarının eğitiminde sırasında sinir ağı modelinin sonraki beklenen eylemleri kümesini konuşmada puanlamak için kullanılır. Bot Geliştirici sonra doğru eylemi seçin ve düzgün yanıt sağlamak için ağ eğitin.
+- Eğitim oturumları sırasında, sinir ağ modeli, konuşmadaki bir sonraki beklenen eylem kümesini öğrenmek için kullanılır. Bot geliştiricisi daha sonra doğru eylemi seçebilir ve uygun yanıtı sağlamak için ağı eğitebilir.
  
-- Alıştırma tamamlandıktan sonra Geliştirici bot yanıtları düzeltmeler yapmak ve modeli yeniden eğitme Kullanıcı etkileşimlerine günlük iletişim kutularını kullanabilirsiniz. 
+- Eğitim tamamlandıktan sonra, geliştirici, bot yanıtlarına düzeltme yapmak ve modeli yeniden eğitme için Kullanıcı etkileşimlerinden günlük iletişim kutularını kullanabilir. 
 
-- Görevleri tamamlamak için etki alanına özgü ve üçüncü taraf API'leri çağırabilirsiniz.
+- , Görevleri tamamlamaya yönelik etki alanına özgü ve üçüncü taraf API 'Leri çağırabilir.
 

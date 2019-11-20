@@ -1,50 +1,50 @@
 ---
-title: REST API Konsolu - Content Moderator ile denetimi iş akışlarını tanımlayın
-titlesuffix: Azure Cognitive Services
-description: Azure içeriği Moderator İnceleme API'lerini, özel iş akışları ve içerik, ilkelere dayalı eşikleri tanımlamak için kullanabilirsiniz.
+title: REST API konsolu ile denetleme iş akışlarını tanımlama Content Moderator
+titleSuffix: Azure Cognitive Services
+description: İçerik ilkelerinize göre özel iş akışlarını ve eşikleri tanımlamak için Azure Content Moderator Review API 'Lerini kullanabilirsiniz.
 services: cognitive-services
-author: sanjeev3
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: content-moderator
-ms.topic: article
+ms.topic: conceptual
 ms.date: 03/14/2019
-ms.author: sajagtap
-ms.openlocfilehash: e150b1321f2fbd348e737222c752203281503643
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: pafarley
+ms.openlocfilehash: 3e58be4b94457d95d28cf6528b9151e4be1802cf
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60605877"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72754176"
 ---
-# <a name="define-and-use-moderation-workflows-rest"></a>Tanımlama ve denetleme iş akışları (REST) kullanma
+# <a name="define-and-use-moderation-workflows-rest"></a>Denetleme iş akışlarını tanımlama ve kullanma (REST)
 
-İçeriği daha verimli bir şekilde işlemek için kullanabileceğiniz bulut tabanlı özelleştirilmiş filtreler iş akışlarıdır. İş akışları çeşitli içerik farklı yollarla filtreleyebilir ve ardından uygun eylemi gerçekleştirin için hizmetler için bağlanabilirsiniz. Bu kılavuzda iş akışları oluşturup kullanacağınızı API konsolu üzerinden iş akışı REST API'lerini kullanmayı gösterir. API'leri yapısını anladığınızda, herhangi bir REST uyumlu platform çağrıları kolayca bağlantı noktası.
+İş akışları, içeriği daha verimli bir şekilde işlemek için kullanabileceğiniz bulut tabanlı özelleştirilmiş filtrelerdir. İş akışları, farklı yollarla içerik filtrelemek için çeşitli hizmetlere bağlanabilir ve ardından uygun eylemi gerçekleştirebilir. Bu kılavuzda, iş akışları oluşturmak ve kullanmak için, API konsolu aracılığıyla iş akışı REST API 'Lerinin nasıl kullanılacağı gösterilir. API 'lerin yapısını anladıktan sonra, bu çağrıları REST ile uyumlu herhangi bir platforma kolayca bağlayabilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Oturum açma veya hesap üzerinde Content Moderator oluşturmak [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com/) site.
+- Content Moderator [İnceleme aracı](https://contentmoderator.cognitive.microsoft.com/) sitesinde oturum açın veya hesap oluşturun.
 
-## <a name="create-a-workflow"></a>Bir iş akışı oluşturma
+## <a name="create-a-workflow"></a>İş akışı oluşturma
 
-Oluşturun veya bir iş akışı güncelleştirmek için Git **[iş akışı - oluştur veya Güncelleştir](https://westus2.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/5813b46b3f9b0711b43c4c59)** API başvuru sayfası ve anahtar bölgenize ilişkin düğmeyi seçin (Bu uç nokta URL'sini bulabileceğiniz **kimlik bilgileri**  sayfasının [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com/)). Bu, kolayca oluşturun ve REST API çağrılarının API Konsolu başlatır.
+Bir iş akışı oluşturmak veya güncelleştirmek için, **[Iş akışı-API başvurusu oluştur veya Güncelleştir](https://westus2.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/5813b46b3f9b0711b43c4c59)** sayfasına gidin ve anahtar bölgeniz için düğmeyi seçin (bunu [Inceleme aracının](https://contentmoderator.cognitive.microsoft.com/) **KIMLIK bilgileri** sayfasında uç nokta URL 'sinde bulabilirsiniz). Bu, REST API çağrılarını kolayca oluşturabileceğiniz ve çalıştırabileceğiniz API konsolunu başlatır.
 
-![İş akışı - oluşturma veya güncelleştirme sayfa bölge seçimi](images/test-drive-region.png)
+![İş akışı-sayfa bölgesi seçimini oluştur veya güncelleştir](images/test-drive-region.png)
 
-### <a name="enter-rest-call-parameters"></a>REST çağrısı parametreler girin
+### <a name="enter-rest-call-parameters"></a>REST çağrı parametrelerini girin
 
-İçin değerler girin **takım**, **workflowname**, ve **Ocp-Apim-Subscription-Key**:
+**Ekip**, **workflowname**ve **OCP-apim-Subscription-Key**değerlerini girin:
 
-- **Takım**: Ayarlarken oluşturduğunuz takım kimliği, [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com/) hesabı (bulunan **kimliği** gözden geçirme aracının kimlik bilgilerini ekranda alan).
-- **workflowname**: Eklemek için yeni bir iş akışı (veya var olan adı mevcut bir iş akışı güncelleştirmek istiyorsanız) adı.
-- **Ocp-Apim-Subscription-Key**: Content Moderator anahtar. Bunu şirket bulabilirsiniz **ayarları** sekmesinde [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com).
+- **ekip**: [İnceleme aracı](https://contentmoderator.cognitive.microsoft.com/) hesabınızı ayarlarken oluşturduğunuz takım kimliği (gözden geçirme aracınızın kimlik bilgileri ekranındaki **kimlik** alanında bulunur).
+- **workflowname**: mevcut bir iş akışını güncelleştirmek istiyorsanız eklenecek yeni bir iş akışının adı (veya var olan bir ad).
+- **OCP-apim-Subscription-Key**: Content moderator anahtarınız. Bunu [İnceleme aracının](https://contentmoderator.cognitive.microsoft.com) **Ayarlar** sekmesinde bulabilirsiniz.
 
-![İş akışı - güncelleştirme veya konsol Sorgu parametrelerinin ve üst bilgileri oluşturma](images/workflow-console-parameters.PNG)
+![İş akışı-konsol sorgu parametrelerini ve üstbilgilerini oluşturun veya güncelleştirin](images/workflow-console-parameters.PNG)
 
-### <a name="enter-a-workflow-definition"></a>Bir iş akışı tanımı girin
+### <a name="enter-a-workflow-definition"></a>İş akışı tanımı girin
 
-1. Düzen **istek gövdesi** JSON isteği ayrıntılarını girmek için kutusu **açıklama** ve **türü** (ya da `Image` veya `Text`).
-2. İçin **ifade**, varsayılan iş akışı JSON ifadesini kopyalayın. Son JSON dizesi şöyle görünmelidir:
+1. **Açıklama** ve **türe** ilişkin ayrıntıları içeren JSON isteğini girmek için **istek gövdesi** kutusunu düzenleyin (`Image` ya da `Text`).
+2. **İfade**için, varsayılan Iş akışı JSON ifadesini kopyalayın. Son JSON dizeniz şöyle görünmelidir:
 
 ```json
 {
@@ -76,33 +76,33 @@ Oluşturun veya bir iş akışı güncelleştirmek için Git **[iş akışı - o
 ```
 
 > [!NOTE]
-> Bu API kullanarak iş akışlarınızı için basit, karmaşık ve hatta iç içe geçmiş deyimler tanımlayabilirsiniz. [İş akışı - oluşturma veya güncelleştirme](https://westus2.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/5813b46b3f9b0711b43c4c59) belgeleri sahip daha karmaşık mantık örnekleri.
+> Bu API 'YI kullanarak iş akışlarınız için basit, karmaşık ve hatta iç içe geçmiş ifadeler tanımlayabilirsiniz. [Iş akışı-oluşturma veya güncelleştirme](https://westus2.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/5813b46b3f9b0711b43c4c59) belgelerinin daha karmaşık bir mantığa örnekleri vardır.
 
-### <a name="submit-your-request"></a>İsteğinizi gönderin
+### <a name="submit-your-request"></a>İsteğinizi gönderme
   
-**Gönder**’i seçin. İşlem başarılı olursa **yanıt durumu** olduğu `200 OK`ve **yanıt içeriği** kutusunda görüntüler `true`.
+**Gönder**’i seçin. İşlem başarılı olursa, **yanıt durumu** `200 OK` olur ve **yanıt içeriği** kutusu `true` görüntülenir.
 
 ### <a name="examine-the-new-workflow"></a>Yeni iş akışını inceleyin
 
-İçinde [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com/)seçin **ayarları** > **iş akışları**. Yeni akışınız, listede görünmesi gerekir.
+[İnceleme aracında](https://contentmoderator.cognitive.microsoft.com/), **Ayarlar**  > **iş akışları**' nı seçin. Yeni iş akışınız listede görünmelidir.
 
-![İş akışlarının listesini gözden geçirme aracı](images/workflow-console-new-workflow.PNG)
+![İş akışlarının araç listesini gözden geçirin](images/workflow-console-new-workflow.PNG)
 
-Seçin **Düzenle** akışınız için seçenek ve Git **Tasarımcısı** sekmesi. Burada, sezgisel bir JSON mantıksal temsilini görebilirsiniz.
+İş akışınız için **Düzenle** seçeneğini belirleyin ve **Tasarımcı** sekmesine gidin. Burada, JSON mantığının sezgisel bir gösterimini görebilirsiniz.
 
-![Seçili bir iş akışı için Tasarımcı sekmesi](images/workflow-console-new-workflow-designer.PNG)
+![Seçili iş akışı için Tasarımcı sekmesi](images/workflow-console-new-workflow-designer.PNG)
 
-## <a name="get-workflow-details"></a>İş akışı ayrıntılarını Al
+## <a name="get-workflow-details"></a>İş akışı ayrıntılarını al
 
-Varolan bir iş akışı ayrıntılarını almak için şu adrese gidin **[iş akışı - Get](https://westus.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/5813b44b3f9b0711b43c4c58)** API başvuru sayfası ve bölgenize ilişkin düğmeyi seçin (anahtarınızı yönetilir bölge).
+Mevcut bir iş akışı hakkındaki ayrıntıları almak için, **[Iş akışı-](https://westus.dev.cognitive.microsoft.com/docs/services/580519463f9b070e5c591178/operations/5813b44b3f9b0711b43c4c58)** API başvurusunu Al sayfasına gidin ve bölgeniz (anahtarınızın yönettiği bölge) için düğmeyi seçin.
 
-![İş akışı - Get kayıt seçimi](images/test-drive-region.png)
+![İş akışı-bölge seçimini al](images/test-drive-region.png)
 
-Yukarıdaki bölümde olduğu gibi REST çağrısı parametrelerini girin. Bu kez, emin **workflowname** varolan bir iş akışı adıdır.
+REST çağrı parametrelerini yukarıdaki bölümde olduğu gibi girin. Bu zamanın, **workflowname** öğesinin mevcut bir iş akışının adı olduğundan emin olun.
 
-![Sorgu parametrelerinin ve üst bilgileri Al](images/workflow-get-default.PNG)
+![Sorgu parametrelerini ve üstbilgilerini al](images/workflow-get-default.PNG)
 
-**Gönder**’i seçin. İşlem başarılı olursa **yanıt durumu** olduğu `200 OK`ve **yanıt içeriği** kutusu iş akışı aşağıdaki gibi bir JSON biçiminde görüntüler:
+**Gönder**’i seçin. İşlem başarılı olursa, **yanıt durumu** `200 OK` olur ve **yanıt içeriği** kutusu, iş AKıŞıNı aşağıdakine benzer şekilde JSON biçiminde görüntüler:
 
 ```json
 {
@@ -139,4 +139,4 @@ Yukarıdaki bölümde olduğu gibi REST çağrısı parametrelerini girin. Bu ke
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- İş akışlarıyla kullanmayı öğrenin [içerik denetimi işleri](try-review-api-job.md).
+- [İçerik denetleme işleriyle](try-review-api-job.md)iş akışlarını nasıl kullanacağınızı öğrenin.

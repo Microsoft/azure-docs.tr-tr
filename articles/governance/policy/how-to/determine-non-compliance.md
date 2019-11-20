@@ -1,55 +1,51 @@
 ---
 title: Uyumsuzluk nedenlerini belirleme
-description: Uyumlu olmayan bir kaynak olduğunda, çok sayıda olası nedeni vardır. Uyumsuzluk neyin neden olduğunu bulmak öğrenin.
-author: DCtheGeek
-ms.author: dacoulte
+description: Bir kaynak uyumsuz olduğunda birçok olası neden vardır. Uyumsuzluğun ne olduğunu öğrenin.
 ms.date: 04/26/2019
 ms.topic: conceptual
-ms.service: azure-policy
-manager: carmonm
-ms.openlocfilehash: fb7f238bb5c04bb03ee500b1b953895cc88c0596
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6f113080ab84fe7d159766e6543ff61b28f4ead2
+ms.sourcegitcommit: 39da2d9675c3a2ac54ddc164da4568cf341ddecf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66298933"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73959609"
 ---
 # <a name="determine-causes-of-non-compliance"></a>Uyumsuzluk nedenlerini belirleme
 
-Bir Azure kaynağı için bir ilke kuralı uyumlu olmadığı belirlendiğinde kaynağı ile uyumlu değil kural hangi kısmının anlamak yararlıdır. Hangi değişiklik uyumlu hale getirmek için daha önce uyumlu bir kaynak değiştirilmiş anlamak kullanışlıdır. Bu bilgileri bulmanın iki yolu vardır:
+Bir Azure kaynağının bir ilke kuralıyla uyumlu olmadığı belirlendiğinde, kuralın kaynağın hangi bölümünün uyumlu olmadığını anlamak yararlı olur. Ayrıca, daha önce uyumlu olmayan bir kaynağın uyumsuz hale getirmek için hangi değişikliğin değiştirilmediğini anlamak da yararlıdır. Bu bilgileri bulmanın iki yolu vardır:
 
 > [!div class="checklist"]
 > - [Uyumluluk ayrıntıları](#compliance-details)
-> - [Değişiklik geçmişi (Önizleme)](#change-history-preview)
+> - [Değişiklik geçmişi (Önizleme)](#change-history)
 
 ## <a name="compliance-details"></a>Uyumluluk ayrıntıları
 
-Uyumlu olmayan bir kaynak olduğunda, o kaynak için Uyumluluk ayrıntıları kullanılabilir **ilke uyumluluğunu** sayfası. Uyumluluk ayrıntıları bölmesinde aşağıdaki bilgileri içerir:
+Bir kaynak uyumsuz olduğunda, bu kaynağa ilişkin uyumluluk ayrıntıları **ilke uyumluluğu** sayfasından kullanılabilir. Uyumluluk ayrıntıları bölmesi aşağıdaki bilgileri içerir:
 
-- Ad, tür, konum ve kaynak kimliği gibi kaynak ayrıntıları
-- Uyumluluk durumu ve geçerli ilke ataması için son değerlendirme zaman damgası
-- Listesini _nedeniyle_ kaynak uyumsuzluk
+- Ad, tür, konum ve kaynak KIMLIĞI gibi kaynak ayrıntıları
+- Geçerli ilke atamasının en son değerlendirmesinin uyumluluk durumu ve zaman damgası
+- Kaynak uyumsuzluğu için _nedenler_ listesi
 
 > [!IMPORTANT]
-> Uyumluluk ayrıntıları olarak bir _uyumlu_ kaynak gösterir Özellikleri'nin geçerli değeri bu kaynak üzerinde kullanıcı olmalıdır **okuma** işlemi **türü** , Kaynak. Örneğin, varsa _uyumlu_ kaynak **Microsoft.Compute/virtualMachines** kullanıcının olmalıdır sonra **Microsoft.Compute/virtualMachines/read** işlem. Kullanıcının gerekli işlemi yoksa, bir erişim hatası görüntülenir.
+> _Uyumlu olmayan_ bir kaynağın uyumluluk ayrıntıları söz konusu kaynaktaki özelliklerin geçerli değerini gösteriyorsa, kullanıcının kaynak **türüne** **okuma** işlemi olması gerekir. Örneğin, _uyumlu olmayan_ kaynak **Microsoft. COMPUTE/virtualmachines** ise, kullanıcının **Microsoft. COMPUTE/virtualmachines/Read** işlemi olması gerekir. Kullanıcının gerekli işlemi yoksa, bir erişim hatası görüntülenir.
 
-Uyumluluk ayrıntıları görüntülemek için aşağıdaki adımları izleyin:
+Uyumluluk ayrıntılarını görüntülemek için aşağıdaki adımları izleyin:
 
 1. Azure portalında **Tüm hizmetler**’e tıkladıktan sonra **İlke**'yi arayıp seçerek Azure İlkesi hizmetini başlatın.
 
-1. Üzerinde **genel bakış** veya **Uyumluluk** sayfasında, ilke bir **uyumluluk durumu** diğer bir deyişle _uyumlu_.
+1. **Genel bakış** veya **Uyumluluk** sayfasında, **uyumluluk durumunda** _uyumlu olmayan_bir ilke seçin.
 
-1. Altında **kaynak Uyumluluk** sekmesinde **ilke uyumluluğunu** sayfasında sağ tıklayın veya bir kaynağın noktayı bir **uyumluluk durumu** diğer bir deyişle  _Uyumlu olmayan_. Ardından **uyumluluk ayrıntıları görüntüle**.
+1. **İlke uyumluluğu** sayfasının **kaynak uyumluluğu** sekmesinde, _uyumlu olmayan_bir **Uyumluluk durumundaki** kaynağın üç nokta simgesini sağ tıklayın veya seçin. Ardından **uyumluluk ayrıntılarını görüntüle**' yi seçin.
 
-   ![Görünümü uyumluluğu ayrıntıları seçeneği](../media/determine-non-compliance/view-compliance-details.png)
+   ![Uyumluluk ayrıntılarını görüntüleme seçeneği](../media/determine-non-compliance/view-compliance-details.png)
 
-1. **Uyumluluk ayrıntıları** bölmesi, geçerli bir ilke ataması kaynağın en son değerlendirme bilgileri görüntüler. Bu örnekte, alanın **Microsoft.Sql/servers/version** olduğu tespit edildiğinden _12.0_ while beklenen ilke tanımı _14.0_. Kaynak birden fazla nedenlerle uyumlu ise, her bu bölmesinde listelenir.
+1. **Uyumluluk ayrıntıları** bölmesi, kaynağın en son değerlendirmesinin bilgilerini geçerli ilke atamasına görüntüler. Bu örnekte, ilke tanımı _14,0_beklenirken **Microsoft. SQL/Servers/Version** alanı _12,0_ olarak bulunur. Kaynak birden çok nedenden dolayı uyumlu değilse, her biri bu bölmede listelenir.
 
-   ![Ayrıntılar bölmesinde uyumluluk ve uyumsuzluk nedenleri](../media/determine-non-compliance/compliance-details-pane.png)
+   ![Uyumluluk ayrıntıları bölmesi ve uyumsuzluğun nedenleri](../media/determine-non-compliance/compliance-details-pane.png)
 
-   İçin bir **auditIfNotExists** veya **Deployıfnotexists** ilke tanımı ayrıntıları dahil **details.type** özelliği ve diğer isteğe bağlı özellikleri. Bir liste için bkz. [auditIfNotExists özellikleri](../concepts/effects.md#auditifnotexists-properties) ve [Deployıfnotexists özellikleri](../concepts/effects.md#deployifnotexists-properties). **Kaynak son değerlendirme** ilgili bir kaynaktan geliyorsa **ayrıntıları** tanımının bölümü.
+   **Auditınotexists** veya **deployifnotexists** ilke tanımı için Ayrıntılar **. Type** özelliğini ve isteğe bağlı tüm özellikleri içerir. Bir liste için, bkz. [Auditınotexists Properties](../concepts/effects.md#auditifnotexists-properties) ve [deployifnotexists özellikleri](../concepts/effects.md#deployifnotexists-properties). **Son değerlendirilen kaynak** , tanımın **Ayrıntılar** bölümünden ilgili bir kaynaktır.
 
-   Örnek kısmi **Deployıfnotexists** tanımı:
+   Örnek kısmi **Deployifnotexists** tanımı:
 
    ```json
    {
@@ -74,83 +70,68 @@ Uyumluluk ayrıntıları görüntülemek için aşağıdaki adımları izleyin:
    }
    ```
 
-   ![Uyumluluk ayrıntıları bölmesinde - * ifNotExists](../media/determine-non-compliance/compliance-details-pane-existence.png)
+   ![Uyumluluk ayrıntıları bölmesi-* ifNotExists](../media/determine-non-compliance/compliance-details-pane-existence.png)
 
 > [!NOTE]
-> Bir özellik değeri olduğunda verileri korumak için bir _gizli_ yıldız geçerli değeri görüntüler.
+> Verileri korumak için, bir özellik değeri _gizli_ olduğunda, geçerli değer yıldız işaretlerini görüntüler.
 
-Bu ayrıntıları neden bir kaynak şu anda uyumlu olduğunu açıklayan, ancak değişikliğin uyumlu olmayan bir duruma neden olan bir kaynak için ne zaman yapıldığı gösterme. Bu bilgi için bkz: [değişiklik geçmişini (Önizleme)](#change-history-preview) aşağıda.
+Bu ayrıntılar, bir kaynağın Şu anda uyumsuz olduğunu, ancak kaynağın uyumsuz olmasına neden olan değişikliğin ne zaman yapıldığını göstermez. Bu bilgiler için aşağıdaki [değişiklik geçmişi (Önizleme)](#change-history) bölümüne bakın.
 
-### <a name="compliance-reasons"></a>Uyumluluk nedenleriyle
+### <a name="compliance-reasons"></a>Uyumluluk nedenleri
 
-Matris her olası eşler _neden_ sorumlu için [koşul](../concepts/definition-structure.md#conditions) ilke tanımı içinde:
+Aşağıdaki matris, her olası _nedeni_ ilke tanımındaki sorumlu [koşula](../concepts/definition-structure.md#conditions) eşler:
 
-|Reason | Koşul |
+|Neden | Koşul |
 |-|-|
-|Geçerli değer bir anahtar olarak hedef değer içermesi gerekir. |containsKey veya **değil** notContainsKey |
-|Hedef değer geçerli bir değer içermelidir. |içerir veya **değil** notContains |
-|Geçerli değer hedef değerine eşit olmalıdır. |eşittir veya **değil** notEquals |
-|Geçerli değer hedef değerinden daha küçük olmalıdır. |daha az veya **değil** greaterOrEquals |
-|Geçerli değer, hedef değerine eşit veya daha büyük olmalıdır. |greaterOrEquals veya **değil** daha az |
-|Geçerli değer hedef değerinden daha büyük olmalıdır. |büyük veya **değil** lessOrEquals |
-|Geçerli değer hedef değerine eşit veya daha az olmalıdır. |lessOrEquals veya **değil** büyük |
-|Geçerli bir değer bulunmalıdır. |Var. |
-|Hedef değer geçerli bir değer olmalıdır. |içinde veya **değil** notIn |
-|Hedef değer gibi geçerli bir değer olmalıdır. |gibi veya **değil** notLike |
-|Geçerli değeri hedef değer büyük/küçük harfe eşleşmesi gerekir. |eşleşen veya **değil** notMatch |
-|Geçerli değer harf olarak eşleşen hedef değer gerekir. |matchInsensitively veya **değil** notMatchInsensitively |
-|Geçerli değer bir anahtar olarak hedef değer içermemelidir. |notContainsKey veya **değil** containsKey|
-|Hedef değer geçerli bir değer içermemelidir. |notContains veya **değil** içerir |
-|Geçerli değer hedef değerine eşit olmalıdır. |notEquals veya **değil** eşittir |
-|Geçerli değer mevcut olmamalıdır. |**değil** var.  |
-|Hedef değer geçerli bir değer olmalıdır. |notIn veya **değil** içinde |
-|Hedef değer gibi geçerli bir değer olmalıdır. |notLike veya **değil** gibi |
-|Geçerli değer hedef değer küçük harf duyarsız eşleşmesi gerekir. |notMatch veya **değil** eşleşmesi |
-|Geçerli bir değer değil harf olarak eşleşen hedef değer gerekir. |notMatchInsensitively veya **değil** matchInsensitively |
-|İlke tanımı etkisi ayrıntılarında hiçbir ilgili kaynakları eşleştirin. |Bir kaynak türünün tanımlanan **then.details.type** ve ilgili tanımlanan kaynağa **varsa** ilke kuralı bölümü yok. |
+|Geçerli değer, anahtar olarak hedef değeri içermelidir. |containsKey veya notcontainskey **değil** |
+|Geçerli değer hedef değer içermelidir. |notcontains içerir veya **içermez** |
+|Geçerli değer, hedef değere eşit olmalıdır. |eşittir veya **Not** al |
+|Geçerli değer, hedef değerden küçük olmalıdır. |greaterOrEquals daha az veya **Not** |
+|Geçerli değer, hedef değere eşit veya ondan büyük olmalıdır. |greaterOrEquals veya daha az **değil** |
+|Geçerli değer, hedef değerden büyük olmalıdır. |daha büyük veya **azalmayan** öğeler |
+|Geçerli değer, hedef değere eşit veya ondan küçük olmalıdır. |Azallar veya daha büyük **değil** |
+|Geçerli değer mevcut olmalıdır. |bulunur |
+|Geçerli değer, hedef değerde olmalıdır. |notın içinde veya **değil** |
+|Geçerli değer hedef değer gibi olmalıdır. |Beğen gibi |
+|Geçerli değer, büyük/küçük harfe duyarlı olmalıdır ve hedef değerle eşleşmelidir. |Match veya notmatch **değil** |
+|Geçerli değer büyük/küçük harfe duyarsız olmalıdır ve hedef değerle eşleşmelidir. |matchInsensitively veya **Not** notMatchInsensitively |
+|Geçerli değer, anahtar olarak hedef değeri içermemelidir. |notContainsKey veya bir ContainsKey **değil**|
+|Geçerli değer, hedef değeri içermemelidir. |notContains veya **içermez** |
+|Geçerli değer hedef değere eşit olmamalı. |Not harfler veya eşit **değildir** |
+|Geçerli değer mevcut olmamalıdır. |**yok**  |
+|Geçerli değerin hedef değerde olmaması gerekir. |Notın veya **Not** |
+|Geçerli değer hedef değer gibi olmamalıdır. |notLike veya **Not** beğen |
+|Geçerli değer, büyük/küçük harfe duyarlı olmalıdır ve hedef değerle eşleşmelidir. |notMatch veya **Match** |
+|Geçerli değer büyük/küçük harfe duyarsız olmalıdır ve hedef değerle eşleşmez. |notMatchInsensitively veya **Not** matchInsensitively |
+|İlke tanımındaki efekt ayrıntılarıyla eşleşen ilgili kaynak yok. |**Daha sonra. details. Type** içinde tanımlanan ve ilke kuralının **IF** bölümünde tanımlanan kaynakla ilişkili bir kaynak türü yok. |
 
-## <a name="compliance-details-for-guest-configuration"></a>Konuk yapılandırması için Uyumluluk ayrıntıları
+## <a name="compliance-details-for-guest-configuration"></a>Konuk yapılandırması için uyumluluk ayrıntıları
 
-İçin _denetim_ ilkelerinde _Konuk yapılandırma_ kategori, sanal makine içinde değerlendirilen birden çok ayarları olabilir ve her bir ayar ayrıntılarını görüntülemek ihtiyacınız olacak. Örneğin, yüklü uygulamalar ve atama durumu listesi için Denetim ise _uyumlu_, belirli uygulamaları eksik olduğunu bilmeniz gerekir.
+_Konuk yapılandırma_ kategorisindeki _Auditınotexists_ ilkeleri için, VM 'de birden fazla ayar değerlendirilebilecek ve ayar başına ayrıntıları görüntülemeniz gerekir. Örneğin, parola ilkelerinin bir listesini denetliyoruz ve yalnızca birinin durumu _uyumlu değil_ise, hangi parola ilkelerinin uyumsuz olduğunu ve neden olduğunu bilmeniz gerekir.
 
-Ayrıca VM doğrudan oturum açmak için erişimi olmayabilir ancak VM neden olduğunu bildirmek gereken _uyumlu_. Örneğin, VM'ler doğru etki alanına ve geçerli etki alanı üyeliği raporlama ayrıntıları dahil denetim.
+Ayrıca, VM 'de doğrudan oturum açma erişimi de olmayabilir, ancak VM 'nin neden _uyumlu_olmadığı hakkında rapor etmeniz gerekir.
 
 ### <a name="azure-portal"></a>Azure portal
 
-1. Azure portalında **Tüm hizmetler**’e tıkladıktan sonra **İlke**'yi arayıp seçerek Azure İlkesi hizmetini başlatın.
+İlke uyumluluk ayrıntılarını görüntülemek için yukarıdaki bölümde bulunan adımları izleyerek başlayın.
 
-1. Üzerinde **genel bakış** veya **Uyumluluk** sayfasında, Konuk yapılandırma ilke tanımını içeren herhangi bir girişim için bir ilke ataması bu _uyumlu_.
+**Uyumluluk ayrıntıları** bölmesi görünümünde, **son değerlendirilen kaynağı**bağla ' ya tıklayın.
 
-1. Seçin bir _denetim_ girişim ilkesinde o _uyumlu_.
+   ![Auditınotexists tanım ayrıntılarını görüntüle](../media/determine-non-compliance/guestconfig-auditifnotexists-compliance.png)
 
-   ![Denetim tanımı ayrıntılarını görüntüle](../media/determine-non-compliance/guestconfig-audit-compliance.png)
+**Konuk atama** sayfası tüm kullanılabilir uyumluluk ayrıntılarını görüntüler. Görünümdeki her satır, makine içinde gerçekleştirilen bir değerlendirmeyi temsil eder. **Neden** sütununda, Konuk atamasının neden _uyumlu_ olmadığı açıklayan bir ifade gösterilmektedir. Örneğin, parola ilkelerini denetleriz, **Reason** sütununda her ayar için geçerli değer de dahil olmak üzere metin görüntülenir.
 
-1. Üzerinde **kaynak Uyumluluk** sekmesinde, aşağıdaki bilgileri sağlanır:
-
-   - **Ad** -Konuk yapılandırma atamalarını adı.
-   - **Üst kaynak** -sanal makinede bir _uyumlu_ seçili Konuk yapılandırma atamasını durumunda.
-   - **Kaynak türü** - _guestConfigurationAssignments_ tam adı.
-   - **Son Değerlendirme** - Konuk Yapılandırma hizmeti, Azure İlkesi hedef sanal makinenin durumu hakkında bildirimde en son ne zaman.
-
-   ![Uyumluluk ayrıntıları görüntüle](../media/determine-non-compliance/guestconfig-assignment-view.png)
-
-1. Konuk yapılandırma atama adı seçin **adı** açmak için sütun **kaynak Uyumluluk** sayfası.
-
-1. Seçin **görünümü kaynak** açmak için sayfanın üstünde düğme **Konuk atama** sayfası.
-
-**Konuk atama** sayfası, tüm kullanılabilir uyumluluk ayrıntılarını görüntüler. Her satır Görünümü'nde sanal makinenin içinde gerçekleştirilen değerlendirme temsil eder. İçinde **neden** sütun, Konuk atamanın neden olduğunu tanımlayan bir ifade _uyumlu_ gösterilir. Örneğin, Vm'leri bir etki alanına katılması, Denetim **neden** sütun, geçerli etki alanı üyeliği de dahil olmak üzere metin görüntüler.
-
-![Uyumluluk ayrıntıları görüntüle](../media/determine-non-compliance/guestconfig-compliance-details.png)
+![Uyumluluk ayrıntılarını görüntüle](../media/determine-non-compliance/guestconfig-compliance-details.png)
 
 ### <a name="azure-powershell"></a>Azure PowerShell
 
-Azure powershell'den uyumluluk ayrıntıları da görüntüleyebilirsiniz. İlk olarak, Konuk yapılandırma Modülü yüklü olduğundan emin olun.
+Azure PowerShell uyumluluk ayrıntılarını da görüntüleyebilirsiniz. İlk olarak, Konuk yapılandırma modülünün yüklü olduğundan emin olun.
 
 ```azurepowershell-interactive
 Install-Module Az.GuestConfiguration
 ```
 
-Aşağıdaki komutu kullanarak bir VM için tüm Konuk atamalarını geçerli durumunu görüntüleyebilirsiniz:
+Aşağıdaki komutu kullanarak, bir VM için tüm konuk atamalarının geçerli durumunu görüntüleyebilirsiniz:
 
 ```azurepowershell-interactive
 Get-AzVMGuestPolicyReport -ResourceGroupName <resourcegroupname> -VMName <vmname>
@@ -163,7 +144,7 @@ Audit that an application is installed inside Windows VMs                 {[Inst
 Audit that an application is not installed inside Windows VMs.            {[InstalledApplication]NotInstalledApplica...
 ```
 
-Yalnızca görüntülemek için _neden_ VM neden olduğunu açıklayan tümcecik _uyumlu olmayan_, yalnızca neden alt özelliği döndürür.
+Yalnızca VM 'nin neden _uyumsuz_olduğunu açıklayan _neden_ ifadesini görüntülemek için, yalnızca Child özelliğini döndürün.
 
 ```azurepowershell-interactive
 Get-AzVMGuestPolicyReport -ResourceGroupName <resourcegroupname> -VMName <vmname> | % ComplianceReasons | % Reasons | % Reason
@@ -173,10 +154,10 @@ Get-AzVMGuestPolicyReport -ResourceGroupName <resourcegroupname> -VMName <vmname
 The following applications are not installed: '<name>'.
 ```
 
-Ayrıca, sanal makine için kapsamda Konuk atamaları için Uyumluluk geçmişi çıkış sağlayabilir. Bu komutun çıktısı, sanal makine için her rapor ayrıntılarını içerir.
+Ayrıca, makinenin kapsamındaki Konuk atamaları için bir uyumluluk geçmişi de çıktısını alabilirsiniz. Bu komutun çıktısı, sanal makine için her bir raporun ayrıntılarını içerir.
 
 > [!NOTE]
-> Çıktı, büyük miktarda veri döndürebilir. Çıktı bir değişkende depolamak için önerilir.
+> Çıktı, büyük miktarda veri döndürebilir. Çıktıyı bir değişkende depolamanız önerilir.
 
 ```azurepowershell-interactive
 $guestHistory = Get-AzVMGuestPolicyStatusHistory -ResourceGroupName <resourcegroupname> -VMName <vmname>
@@ -191,7 +172,7 @@ PolicyDisplayName                                                         Compli
 <truncated>
 ```
 
-Bu görünüm basitleştirmek için **ShowChanged** parametresi. Bu komutun çıktısı, yalnızca uyumluluk durumu değişikliği izleyen raporlar içerir.
+Bu görünümü basitleştirmek için, **Showchanged** parametresini kullanın. Bu komutun çıktısı yalnızca uyumluluk durumunda değişiklik yapan raporları içerir.
 
 ```azurepowershell-interactive
 $guestHistory = Get-AzVMGuestPolicyStatusHistory -ResourceGroupName <resourcegroupname> -VMName <vmname> -ShowChanged
@@ -207,34 +188,34 @@ Audit that an application is installed inside Windows VMs.                Compli
 Audit that an application is installed inside Windows VMs                 NonCompliant                       02/09/2019 09:00:20 AM 02/09/2019 09:00:23 AM VM01  ../15ze1...
 ```
 
-## <a name="a-namechange-historychange-history-preview"></a><a name="change-history"/>Değişiklik geçmişi (Önizleme)
+## <a name="a-namechange-historychange-history-preview"></a>Değişiklik geçmişi <a name="change-history"/>(Önizleme)
 
-Yeni bir parçası olarak **genel Önizleme**, değişiklik geçmişini son 14 günün destekleyen tüm Azure kaynakları için kullanılabilir [tamamlama modu silme](../../../azure-resource-manager/complete-mode-deletion.md). Değişiklik geçmişi sağlar ayrıntılar hakkında bir değişiklik algıladığında ve _visual fark_ her değişiklik için. Resource Manager özelliklerini eklendiğinde, kaldırılmış veya değiştirilmiş bir değişiklik algılama tetiklenir.
+Yeni bir **genel önizlemenin**parçası olarak, değişiklik geçmişinin son 14 günü, [tamamlanmış mod silme Işlemini](../../../azure-resource-manager/complete-mode-deletion.md)destekleyen tüm Azure kaynakları için kullanılabilir. Değişiklik geçmişi bir değişikliğin ne zaman algılandığına ilişkin ayrıntıları ve her değişiklik için _görsel bir farkı_ sağlar. Kaynak Yöneticisi Özellikler eklendiğinde, kaldırıldığında veya değiştirilmediğinde değişiklik algılama tetiklenir.
 
 1. Azure portalında **Tüm hizmetler**’e tıkladıktan sonra **İlke**'yi arayıp seçerek Azure İlkesi hizmetini başlatın.
 
-1. Üzerinde **genel bakış** veya **Uyumluluk** sayfasında, herhangi bir ilke seçin **uyumluluk durumu**.
+1. **Genel bakış** veya **Uyumluluk** sayfasında, herhangi bir **uyumluluk durumunda**bir ilke seçin.
 
-1. Altında **kaynak Uyumluluk** sekmesinde **ilke uyumluluğunu** sayfasında, bir kaynak seçin.
+1. **İlke uyumluluğu** sayfasının **kaynak uyumluluğu** sekmesinde bir kaynak seçin.
 
-1. Seçin **değişiklik geçmişini (Önizleme)** sekmesinde **kaynak Uyumluluk** sayfası. Tüm mevcut görüntüleniyorsa listesini değişiklikleri algıladı.
+1. **Kaynak uyumluluğu** sayfasında **değişiklik geçmişi (Önizleme)** sekmesini seçin. Varsa, algılanan değişikliklerin bir listesi görüntülenir.
 
-   ![Kaynak uyumluluk sayfasında Azure İlkesi değişiklik geçmişi sekmesi](../media/determine-non-compliance/change-history-tab.png)
+   ![Kaynak uyumluluğu sayfasında Azure Ilke değiştirme geçmişi sekmesi](../media/determine-non-compliance/change-history-tab.png)
 
-1. Algılanan değişiklikler birini seçin. _Visual fark_ kaynak üzerinde sunulan için **değişiklik geçmişini** sayfası.
+1. Algılanan değişikliklerden birini seçin. Kaynak için _görsel fark_ , **değişiklik geçmişi** sayfasında sunulur.
 
-   ![Azure İlkesi değişiklik geçmişi görsel fark değişiklik geçmişi sayfasındaki](../media/determine-non-compliance/change-history-visual-diff.png)
+   ![Değişiklik geçmişi sayfasında Azure Ilkesi değişiklik geçmişi görsel farkı](../media/determine-non-compliance/change-history-visual-diff.png)
 
-_Visual fark_ aides içinde bir kaynak değişikliklerini tanımlama. Algılanan değişiklikler kaynağın geçerli uyumluluk durumu için ilişkili değil.
+Bir kaynakta yapılan değişiklikleri tanımlayan _görsel fark_ . Algılanan değişiklikler kaynağın geçerli uyumluluk durumuyla ilişkili olmayabilir.
 
-Değişiklik geçmişi verilerini sağlayan [Azure kaynak Graph](../../resource-graph/overview.md). Azure portalı bu bilgileri sorgulamak için bkz. [alma kaynak değişiklikleri](../../resource-graph/how-to/get-resource-changes.md).
+Değişiklik geçmişi verileri [Azure Kaynak Grafiği](../../resource-graph/overview.md)tarafından sağlanır. Bu bilgileri Azure portal dışında sorgulamak için bkz. [kaynak değişikliklerini al](../../resource-graph/how-to/get-resource-changes.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Gözden geçirme örneklere [Azure ilkesi örnekleri](../samples/index.md).
+- [Azure ilke örneklerindeki](../samples/index.md)örnekleri gözden geçirin.
 - [Azure İlkesi tanımı yapısını](../concepts/definition-structure.md) gözden geçirin.
 - [İlkenin etkilerini anlama](../concepts/effects.md) konusunu gözden geçirin.
-- Anlamak için nasıl [programlı olarak ilkeler oluşturma](programmatically-create.md).
-- Bilgi edinmek için nasıl [uyumluluk verilerini alma](getting-compliance-data.md).
-- Bilgi edinmek için nasıl [uyumlu olmayan kaynakları düzeltme](remediate-resources.md).
-- Bir yönetim grubu olan gözden geçirme [kaynaklarınızı Azure yönetim gruplarıyla düzenleme](../../management-groups/overview.md).
+- [Program aracılığıyla ilkelerin nasıl oluşturulduğunu](programmatically-create.md)anlayın.
+- [Uyumluluk verilerini nasıl alabileceğinizi](getting-compliance-data.md)öğrenin.
+- [Uyumlu olmayan kaynakları nasıl düzelteceğinizi](remediate-resources.md)öğrenin.
+- [Kaynakları Azure Yönetim gruplarıyla düzenleme](../../management-groups/overview.md)ile yönetim grubunun ne olduğunu inceleyin.

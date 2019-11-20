@@ -1,6 +1,6 @@
 ---
-title: 'Hızlı Başlangıç: Bir Azure HDInsight R konsolunu kullanmanın ML Hizmetleri kümesinde bir R betiği yürütün.'
-description: Bu hızlı başlangıçta, Azure HDInsight R konsolunu kullanmanın bir ML Hizmetleri kümesinde bir R betiği yürütün.
+title: 'Hızlı başlangıç: ML hizmetlerinde R betiği & R konsolu-Azure HDInsight'
+description: Hızlı başlangıçta, R konsolu 'nu kullanarak Azure HDInsight 'ta bir ML Hizmetleri kümesinde bir R betiği yürütülecektir.
 author: hrasheed-msft
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -8,29 +8,29 @@ ms.topic: quickstart
 ms.date: 06/19/2019
 ms.author: hrasheed
 ms.custom: mvc
-ms.openlocfilehash: 682ee4f44dcdd2619668645fa7a8aa22cb645273
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: af41a7569dedc9a56f67be8ae791d7185e0c7489
+ms.sourcegitcommit: 3486e2d4eb02d06475f26fbdc321e8f5090a7fac
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67450929"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73241606"
 ---
-# <a name="quickstart-execute-an-r-script-on-an-ml-services-cluster-in-azure-hdinsight-using-r-console"></a>Hızlı Başlangıç: Bir Azure HDInsight R konsolunu kullanmanın ML Hizmetleri kümesinde bir R betiği yürütün.
+# <a name="quickstart-execute-an-r-script-on-an-ml-services-cluster-in-azure-hdinsight-using-r-console"></a>Hızlı başlangıç: R konsolunu kullanarak Azure HDInsight 'ta bir ML Hizmetleri kümesinde R betiği yürütme
 
-ML Hizmetleri Azure HDInsight üzerinde R betiklerinin dağıtılmış hesaplamaları çalıştırmak için Apache Spark ve Apache Hadoop MapReduce kullanmayı sağlar. ML Hizmetleri işlem bağlamını ayarlayarak çağrıları nasıl yürütülür denetler. Bir küme kenar düğümüne kümeye bağlanın ve, R betikleri çalıştırmak için uygun bir yer sağlar. Bir kenar düğümüne ile çalıştırmanın RevoScaleR uç düğümü sunucusunun çekirdek üzerinde paralel dağıtılmış işlevleri seçeneğiniz vardır. Ayrıca bunları tüm küme düğümlerine RevoScaleR'ın Hadoop Map Reduce kullanarak çalıştırabilirsiniz veya Apache Spark işlem bağlamlarının.
+Azure HDInsight üzerinde ML Hizmetleri, R betiklerinin Apache Spark kullanmasına ve MapReduce Apache Hadoop Dağıtılmış hesaplamalar çalıştırmasına olanak tanır. ML Hizmetleri, işlem bağlamını ayarlayarak çağrıların nasıl yürütüleceğini denetler. Bir kümenin kenar düğümü, kümeye bağlanmak ve R betiklerinizi çalıştırmak için uygun bir yer sağlar. Edge düğümü ile, uç düğüm sunucusunun çekirdekleri arasında geri alınamaz şekilde dağıtılmış işlevleri çalıştırma seçeneğiniz vardır. Ayrıca, Iptal edilebilir ' in Hadoop haritasını azaltma veya Apache Spark işlem bağlamlarını kullanarak bunları kümenin düğümleri arasında çalıştırabilirsiniz.
 
-Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark'ı kullanarak gösteren R konsolu ile bir R betiğini çalıştırmayı öğrenin. Hesaplamaları bir kenar düğümünde yerel olarak gerçekleştirmek için bir işlem bağlamı tanımlar ve HDInsight kümesindeki düğümlere dağıtılmasını yeniden.
+Bu hızlı başlangıçta, r konsolu ile, dağıtılmış R hesaplamaları için Spark kullanmayı gösteren bir R betiği çalıştırmayı öğreneceksiniz. İşlem bağlamını, bir kenar düğümünde yerel olarak hesaplamalar ve HDInsight kümesindeki düğümlerde yeniden dağıtmak üzere tanımlarsınız.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* HDInsight üzerinde ML Hizmetleri kümesi. Bkz: [Apache Hadoop kümeleri oluşturma Azure portalını kullanarak](../hdinsight-hadoop-create-linux-clusters-portal.md) seçip **ML Hizmetleri** için **küme türü**.
+* HDInsight üzerinde bir ML Hizmetleri kümesi. Bkz. [Azure Portal kullanarak Apache Hadoop kümeleri oluşturma](../hdinsight-hadoop-create-linux-clusters-portal.md) ve **küme türü**için **ml Hizmetleri** seçme.
 
-* Bir SSH istemcisi. Daha fazla bilgi için [SSH kullanarak HDInsight (Apache Hadoop) bağlanma](../hdinsight-hadoop-linux-use-ssh-unix.md).
+* Bir SSH istemcisi. Daha fazla bilgi için bkz. [SSH kullanarak HDInsight 'A bağlanma (Apache Hadoop)](../hdinsight-hadoop-linux-use-ssh-unix.md).
 
 
-## <a name="connect-to-r-console"></a>R konsoluna Bağlan
+## <a name="connect-to-r-console"></a>R konsoluna bağlanma
 
-1. SSH kullanarak ML Hizmetleri HDInsight kümesinin kenar düğümüne bağlanın. Değiştirerek aşağıdaki komutu düzenleyin `CLUSTERNAME` , kümenizin adını ve ardından komutu girin:
+1. SSH kullanarak ML Hizmetleri HDInsight kümesinin kenar düğümüne bağlanın. `CLUSTERNAME` kümenizin adıyla değiştirerek aşağıdaki komutu düzenleyin ve ardından şu komutu girin:
 
     ```cmd
     ssh sshuser@CLUSTERNAME-ed-ssh.azurehdinsight.net
@@ -82,9 +82,9 @@ Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark'ı kulla
      rxHadoopCopyFromLocal(source, bigDataDirRoot)
     ```
 
-    Bu adımı tamamlamak için yaklaşık 10 dakika sürebilir.
+    Bu adımın tamamlanması yaklaşık 10 dakika sürebilir.
 
-1. Bazı veri bilgileri oluşturup iki veri kaynağı tanımlayabiliriz. R konsolunda aşağıdaki kodu girin:
+1. Veri bilgilerini oluşturun ve iki veri kaynağı tanımlayın. R konsoluna aşağıdaki kodu girin:
 
     ```R
     # Define the HDFS (WASB) file system
@@ -111,7 +111,7 @@ Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark'ı kulla
      formula = "ARR_DEL15 ~ ORIGIN + DAY_OF_WEEK + DEP_TIME + DEST"
     ```
 
-1. Kullanarak veriler üzerinde Lojistik regresyon çalıştırın **yerel** işlem bağlamında. R konsolunda aşağıdaki kodu girin:
+1. **Yerel** işlem bağlamını kullanarak, veriler üzerinde lojistik regresyon çalıştırın. R konsoluna aşağıdaki kodu girin:
 
     ```R
     # Set a local compute context
@@ -126,7 +126,7 @@ Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark'ı kulla
      summary(modelLocal)
     ```
 
-    Hesaplamaları yaklaşık 7 dakika içinde tamamlanır. Aşağıdaki kod parçacığına benzer satırlarla sona eren bir çıktı görmeniz gerekir:
+    Hesaplamalar yaklaşık 7 dakika içinde tamamlanmalıdır. Aşağıdaki kod parçacığına benzer satırlarla biten çıktıyı görmeniz gerekir:
 
     ```output
     Data: airOnTimeDataLocal (RxTextData Data Source)
@@ -156,7 +156,7 @@ Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark'ı kulla
       Number of iterations: 7
     ```
 
-1. Kullanarak aynı Lojistik regresyon çalıştırın **Spark** bağlamı. Spark bağlamı, işlemi HDInsight kümesindeki tüm çalışan düğümlerine dağıtır. R konsolunda aşağıdaki kodu girin:
+1. **Spark** bağlamını kullanarak aynı lojistik regresyonunu çalıştırın. Spark bağlamı, işlemi HDInsight kümesindeki tüm çalışan düğümlerine dağıtır. R konsoluna aşağıdaki kodu girin:
 
     ```R
     # Define the Spark compute context
@@ -174,7 +174,7 @@ Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark'ı kulla
      summary(modelSpark)
     ```
 
-    Hesaplamaları, 5 dakika içinde tamamlanır.
+    Hesaplamalar yaklaşık 5 dakika içinde tamamlanmalıdır.
 
 1. R konsolundan çıkmak için aşağıdaki komutu kullanın:
 
@@ -186,11 +186,11 @@ Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark'ı kulla
 
 Hızlı başlangıcı tamamladıktan sonra kümeyi silmek isteyebilirsiniz. HDInsight ile, verileriniz Azure Storage’da depolanır, böylece kullanılmadığında bir kümeyi güvenle silebilirsiniz. Ayrıca, kullanılmıyorken dahi HDInsight kümesi için sizden ücret kesilir. Küme ücretleri depolama ücretlerinin birkaç katı olduğundan, kullanılmadığında kümelerin silinmesi mantıklı olandır.
 
-Bir kümeyi silmek için bkz: [tarayıcınız, PowerShell veya Azure CLI kullanarak bir HDInsight kümesi silme](../hdinsight-delete-cluster.md).
+Bir kümeyi silmek için bkz. [tarayıcınızı, PowerShell 'i veya Azure CLI 'yı kullanarak HDInsight kümesini silme](../hdinsight-delete-cluster.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark'ı kullanarak gösterilen R konsolu ile bir R betiğini çalıştırmayı öğrendiniz.  Görüntülenip görüntülenmeyeceğini ve nasıl yürütme kenar düğümüne veya HDInsight kümesi Çekirdekte paralelleştirildi belirtmek için kullanılabilir seçenekleri öğrenmek için sonraki makaleye ilerleyin.
+Bu hızlı başlangıçta, dağıtılmış R hesaplamaları için Spark kullanmayı gösteren r konsolu ile R betiği çalıştırmayı öğrendiniz.  Bir sonraki makaleye ilerleyin ve yürütmenin kenar düğümünün veya HDInsight kümesinin çekirdekleri arasında paralel olup olmadığını belirtmek için kullanılabilir seçenekleri öğrenin.
 
 > [!div class="nextstepaction"]
->[İçin işlem bağlamı seçenekleri ML hizmetleri üzerinde HDInsight](./r-server-compute-contexts.md)
+>[HDInsight üzerinde ML Hizmetleri için işlem bağlamı seçenekleri](./r-server-compute-contexts.md)

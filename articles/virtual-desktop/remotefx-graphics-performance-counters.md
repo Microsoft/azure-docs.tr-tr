@@ -1,110 +1,106 @@
 ---
-title: Uzak Masaüstü - Azure grafik performans sorunlarını tanılama
-description: Bu makalede, Windows sanal masaüstü grafikleri ile performans sorunlarını tanılamak için Uzak Masaüstü Protokolü oturumlarda RemoteFX grafik sayaçları kullanmayı açıklar.
+title: Grafik performans sorunlarını tanılama uzak masaüstü-Azure
+description: Bu makalede, Windows sanal masaüstündeki grafiklerle ilgili performans sorunlarını tanılamak için Uzak Masaüstü Protokolü oturumlarında RemoteFX grafik sayaçlarının nasıl kullanılacağı açıklanır.
 services: virtual-desktop
-author: ChJenk
+author: Heidilohr
 ms.service: virtual-desktop
-ms.topic: troubleshoot
+ms.topic: troubleshooting
 ms.date: 05/23/2019
-ms.author: v-chjenk
-ms.openlocfilehash: 0b4113f1e0024415135aa99d1fb4e881efe448a3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: helohr
+ms.openlocfilehash: c41a433ee19969546e1db2aa583c72ed166b7ebf
+ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66499272"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73607473"
 ---
-# <a name="diagnose-graphics-performance-issues-in-remote-desktop"></a>Uzak Masaüstü grafik performans sorunlarını tanılayın
+# <a name="diagnose-graphics-performance-issues-in-remote-desktop"></a>Uzak Masaüstü 'nde grafik performans sorunlarını tanılama
 
-Sistem beklendiği gibi değil gerçekleştirdiğinizde, sorunun kaynağını belirlemek önemlidir. Bu makalede tanımlamak ve Uzak Masaüstü Protokolü (RDP) oturumları sırasında grafikler ile ilgili performans sorunlarını gidermenize yardımcı olur.
+Uzak oturumlarınızda deneyim kalitesi sorunlarını tanılamak için performans Izleyicisi 'nin RemoteFX grafik bölümü altında sayaçlar verilmiştir. Bu makale, bu sayaçları kullanarak Uzak Masaüstü Protokolü (RDP) oturumları sırasında grafiklerle ilgili performans sorunlarını belirlemenize ve düzeltmenize yardımcı olur.
 
-## <a name="find-your-remote-session-name"></a>Uzak oturumu adınızı bulun
+## <a name="find-your-remote-session-name"></a>Uzak oturum adınızı bulun
 
-Grafik performans sayaçları tanımlamak için uzak oturum adı gerekir. Windows sanal masaüstü Önizleme uzak oturumu adınızı tanımlamak için bu bölümdeki yönergeleri izleyin.
+Grafik performans sayaçlarını belirlemek için uzak oturum adınızın olması gerekir. Her sayacın örneğinizi tanımlamak için bu bölümdeki yönergeleri izleyin.
 
-1. Uzak oturumunuzdan Windows komut istemi açın.
-2. Çalıştırma **qwinsta** komutu.
-    - Oturumunuzu çok oturumu sanal makineler'de (VM) barındırılıyorsa: Oturum adınızla "rdp-tcp 37." gibi aynı soneki sonekidir her sayaç adı
-    - Sanal grafik işlem birimi (vGPU) destekleyen bir VM'de oturumunuz barındırılıyorsa: Sayaçları, sanal makinenizin yerine sunucusunda depolanır. Oturum adı, VM adı numarası yerine örnekleri gibi yer "Win8 Kurumsal VM."
+1. Uzak oturumınızdan Windows komut istemi 'ni açın.
+2. **Qwinsta** komutunu çalıştırın ve oturum adınızı bulun.
+    - Oturumunuz çok oturumlu bir sanal makinede (VM) barındırılıyorsa: her bir sayacın örneğiniz, oturum adınızın son eki olan ("RDP-TCP 37" gibi) aynı sayı ile düzeltilir.
+    - Oturumunuz sanal grafik Işlem birimlerini (vGPU) destekleyen bir VM 'de barındırılıyorsa: her bir sayacın örneği VM 'niz yerine sunucusunda depolanır. Sayaç örneklerinizin, "Win8 Enterprise VM" gibi oturum adındaki sayı yerine VM adı vardır.
 
 >[!NOTE]
-> Sayaçları RemoteFX adlarında olsa da, vGPU senaryoları içinde hem de Uzak Masaüstü grafik içerir.
+> Sayaçlar adlarında RemoteFX 'e sahip olsa da, vGPU senaryolarında uzak masaüstü grafikleri de içerirler.
 
 ## <a name="access-performance-counters"></a>Erişim performans sayaçları
 
-Performans sayaçları RemoteFX grafik çerçeve kodlama süresi gibi şeyleri izlemenize yardımcı olarak performans sorunlarını algılamanıza yardımcı ve çerçeveleri atlandı.
+Uzak oturum adınızı belirledikten sonra, uzak oturumunuz için RemoteFX grafik performans sayaçlarını toplamak üzere aşağıdaki yönergeleri izleyin.
 
-Uzak oturumu adınızı saptadıktan sonra uzak oturumunuz için RemoteFX grafik performans sayaçları toplamak için bu yönergeleri izleyin.
-
-1. Seçin **Başlat** > **Yönetimsel Araçlar** > **Performans İzleyicisi**.
-2. İçinde **Performans İzleyicisi** iletişim kutusunda **izleme araçları**seçin **Performans İzleyicisi**ve ardından **Ekle**.
-3. İçinde **Sayaç Ekle** iletişim kutusu, gelen **kullanılabilir sayaçları** listesinde, RemoteFX grafik için performans sayacı nesnesini genişletin.
+1. **Yönetim araçları** > **Performans İzleyicisi** > **Başlat** ' ı seçin.
+2. **Performans İzleyicisi** Iletişim kutusunda **izleme araçları**' nı genişletin, **Performans İzleyicisi**' ni seçin ve ardından **Ekle**' yi seçin.
+3. **Sayaç Ekle** iletişim kutusunda, **kullanılabilir sayaçlar** listesinden, RemoteFX grafikleri bölümünü genişletin.
 4. İzlenecek sayaçları seçin.
-5. İçinde **seçili örnekleri nesne** listesinde, seçilen sayaçları izlenmesi ve ardından belirli örnekler seçin **Ekle**. Kullanılabilir tüm örnekleri seçmek için **tüm örnekleri**.
-6. Sayaçlar ekledikten sonra seçin **Tamam**.
+5. **Seçilen nesne örnekleri** listesinde, seçilen sayaçlar için izlenecek belirli örnekleri seçin ve ardından **Ekle**' yi seçin. Tüm kullanılabilir sayaç örneklerini seçmek için **tüm örnekler**' i seçin.
+6. Sayaçları ekledikten sonra **Tamam**' ı seçin.
 
-Seçili performans sayaçlarını Performans İzleyicisi ekranda görünür.
+Seçilen performans sayaçları, performans Izleyicisi ekranında görünür.
 
 >[!NOTE]
->Her konakta etkin oturum kendi her performans sayacı örneği vardır.
+>Bir konaktaki her etkin oturum, her bir performans sayacının kendi örneğine sahiptir.
 
-## <a name="diagnosis"></a>Tanılama
+## <a name="diagnose-issues"></a>Sorunları tanılama
 
-Grafikler ile ilgili performans sorunlarını, genellikle dört kategoriye ayrılır:
+Grafiklerle ilgili performans sorunları genellikle dört kategoriye ayrılır:
 
-- Düşük kare oranı
+- Düşük çerçeve hızı
 - Rastgele takılması
-- Giriş yüksek gecikme süresi
-- Düşük kare kalitesi
+- Yüksek giriş gecikmesi
+- Kötü çerçeve kalitesi
 
-Giriş yüksek gecikme süresi düşük kare oranı ve rastgele takılması ele alarak başlayın. Sonraki bölümde, her kategoriye hangi performans sayaçlarını ölçmek bildirir.
+### <a name="addressing-low-frame-rate-random-stalls-and-high-input-latency"></a>Düşük çerçeve hızı, rastgele takılması ve yüksek giriş gecikmesini adresleme
 
-### <a name="performance-counters"></a>Performans sayaçları
+Önce çıkış çerçevelerini/Ikinci sayacı kontrol edin. İstemcinin kullanımına sunulan çerçevelerin sayısını ölçer. Bu değer, giriş çerçevelerinden/Ikinci sayaçtan azsa, çerçeveler atlanır. Performans sorunlarını belirlemek için Atlanan kare/saniye sayaçlarını kullanın.
 
-Bu bölüm, performans sorunlarını belirlemenize yardımcı olur.
+Atlanan üç tür çerçeve atlandı/Ikinci sayaç:
 
-İlk çıkış Frames/Second sayaç denetleyin. İstemciye sunulan kare sayısını ölçer. Bu değer giriş Frames/Second sayaç altındaysa, çerçeve atlanır. Performans sorunu tanımlamak için atlandı/saniye sayaçları çerçeveleri kullanın.
+- Atlanan çerçeve/saniye (yetersiz sunucu kaynağı)
+- Atlanan çerçeve/saniye (yetersiz ağ kaynağı)
+- Atlanan çerçeve/saniye (yetersiz Istemci kaynağı)
 
-Çerçeve atlandı/saniye sayaçları üç tür vardır:
+Atlanan herhangi bir çerçeve için yüksek bir değer, sorunun, sayacın izlediği kaynakla ilgili olduğunu gösterir. Örneğin, istemci aynı hızda çerçeveler kodunu çözmez ve sunmazsa, atlanan/saniye (Istemci kaynakları yetersiz) sayacı yüksek olur.
 
-- Atlanan/saniye çerçeveler (yetersiz ağ kaynakları)
-- Atlanan/saniye çerçeveler (yetersiz istemci kaynakları)
-- Saniye başına Atlanan çerçeveler (yeterli sunucu kaynakları)
+Çıkış çerçeveleri/Ikinci sayacı giriş çerçeveleri/Ikinci sayaç ile eşleşiyorsa, hala olağan dışı gecikme veya yanıt olduğunu fark ediyorsanız, ortalama kodlama süresi de olabilir. Kodlama, tek oturum (vGPU) senaryosunda sunucuda ve çoklu oturum senaryosunda sanal makinede gerçekleşen zaman uyumlu bir işlemdir. Ortalama kodlama süresi 33 MS altında olmalıdır. Ortalama kodlama süresi 33 MS altındaysa ancak hala performans sorunlarınız varsa, kullanmakta olduğunuz uygulama veya işletim sistemi ile ilgili bir sorun olabilir.
 
-Atlanan/saniye sayaçları anlamına gelir sorun kaynağa ilişkilidir çerçevelerin herhangi bir yüksek değerli sayaç izler. Örneğin, istemci kod çözme değil ve sunucunun aynı hızda mevcut çerçeve çerçeveleri sağlar, çerçeve atlandı/saniye (istemci kaynaklar yetersiz) sayacı yüksek olacaktır.
+Uygulamayla ilgili sorunları tanılama hakkında daha fazla bilgi için bkz. [Kullanıcı girişi gecikmesi performans sayaçları](https://docs.microsoft.com/windows-server/remote/remote-desktop-services/rds-rdsh-performance-counters).
 
-Çıkış Frames/Second sayaç giriş Frames/Second sayaç eşleşirse, olağan dışı lag hala henüz elinizde veya durduruyor, sorunu kodlama ortalama süresi olabilir. Kodlama tek oturum (vGPU) senaryosunda sunucuda ve çoklu oturum senaryosunda VM gerçekleşen zaman uyumlu bir işlemdir. Ortalama süre kodlama 33 MS'nin altında olmalıdır. Kodlama ortalama süre 33 MS'nin altında olan ancak hala performans sorunları varsa, kullanmakta olduğunuz işletim sistemi ve uygulama ile ilgili bir sorun olabilir.
+RDP, 33 MS ortalama bir kodlama süresini desteklediğinden, en fazla 30 kare/saniye bir giriş çerçevesi hızını destekler. 33 MS 'nin desteklenen en yüksek çerçeve hızının olduğunu unutmayın. Çoğu durumda, bir karenin kaynak tarafından RDP 'ye ne sıklıkta sağlandığını bağlı olarak, Kullanıcı tarafından karşılaşılan çerçeve ücreti daha düşük olacaktır. Örneğin, bir video izleme gibi görevler, tam bir giriş çerçevesi oranının 30 kare/saniye olmasını gerektirir, ancak bir belge sonucunu seyrek olarak düzenlemesi gibi daha az hesaplama gerektiren görevler, kullanıcının deneyim kalitesi.
 
-Uygulama ile ilgili sorunları tanılama hakkında daha fazla bilgi için bkz. [kullanıcı girişi gecikme performans sayaçları](https://docs.microsoft.com/windows-server/remote/remote-desktop-services/rds-rdsh-performance-counters).
+### <a name="addressing-poor-frame-quality"></a>Kötü çerçeve kalitesini adresleme
 
-RDP ortalama kodlama süresi 33 MS desteklediğinden, bir giriş kare hızı kadar 30 kare/saniye destekler. 33 ms desteklenen en yüksek kare hızı olduğuna dikkat edin. Çoğu durumda, kullanıcı tarafından deneyimli kare hızı ne sıklıkta bir çerçeve için RDP kaynağı tarafından sağlanan bağlı olarak, düşük olacaktır. Örneğin, bir video bir tam giriş kare hızı 30 kare/saniye gerektirir, ancak daha az kaynak yoğun görevleri seyrek bir word belgesini düzenleme gibi iyi bir kullanıcı deneyimi için Saniyedeki giriş, yüksek oranda gerektirmeyen izleme görevleri gibi.
-
-Çerçeve Kalite sorunlarını tanılamak için kare kalitesi sayacı kullanın. Bu sayaç, çıkış çerçeve kalitesini kaynak çerçeveyi kalitesini yüzdesi olarak ifade eder. Kalite kaybı nedeniyle RemoteFX olabilir veya grafik kaynağı için devralınmış olabilir. RemoteFX kalite kaybına neden olursa, sorunu daha yüksek kaliteli içerik göndermek için ağ veya sunucu kaynak yetersizliği olabilir.
+Çerçeve kalitesi sorunlarını tanılamak için çerçeve kalitesi sayacını kullanın. Bu sayaç, çıkış çerçevesinin kalitesini kaynak çerçeve kalitesinin yüzdesi olarak ifade eder. Kalite kaybı RemoteFX veya grafik kaynağına bağlı olabilir. RemoteFX kalite kaybına neden olduysa, sorun daha yüksek kaliteli içerik göndermek için ağ veya sunucu kaynaklarının bulunmaması olabilir.
 
 ## <a name="mitigation"></a>Risk azaltma
 
-Sunucu kaynaklarını performans sorununa neden oluyorsa, performansı artırmak için aşağıdaki şeylerden biri deneyin:
+Sunucu kaynakları performans sorunlarına neden oluyorsa, performansı artırmak için aşağıdaki yaklaşımlardan birini deneyin:
 
-- Konak başına oturumlarının sayısını azaltın.
-- Belleği arttırın ve işlem sunucusu üzerindeki kaynakları.
-- Bağlantı çözümleme bırakın.
+- Konak başına oturum sayısını azaltın.
+- Sunucudaki belleği ve işlem kaynaklarını artırın.
+- Bağlantının çözümlenme durumunu bırakın.
 
-Ağ kaynaklarını performans sorununa neden olan oturumu başına ağ kullanılabilirliğini artırmak için aşağıdaki şeylerden biri deneyin:
+Ağ kaynakları performans sorunlarına neden oluyorsa, oturum başına ağ kullanılabilirliğini geliştirmek için aşağıdaki yaklaşımlardan birini deneyin:
 
-- Konak başına oturumlarının sayısını azaltın.
-- Bağlantı çözümleme bırakın.
-- Daha yüksek bant genişliğine sahip ağ kullanın.
+- Konak başına oturum sayısını azaltın.
+- Daha yüksek bir bant genişliği ağı kullanın.
+- Bağlantının çözümlenme durumunu bırakın.
 
-İstemci kaynakları performans sorununa neden oluyorsa birini veya her ikisini performansını artırmak için şunları yapın:
+İstemci kaynakları soruna yol açıyorsa, performansı artırmak için aşağıdaki yaklaşımlardan birini deneyin:
 
-- En son uzak masaüstü istemcisini yükleyin.
-- Belleği arttırın ve işlem kaynaklarını istemci makine üzerinde.
+- En son uzak masaüstü istemcisini yükler.
+- İstemci makinesindeki belleği ve işlem kaynaklarını artırın.
 
 > [!NOTE]
-> Kaynak Frames/Second sayaç şu anda desteklemiyoruz. Şimdilik, kaynak Frames/Second sayaç her zaman 0 olarak ayarlanır.
+> Şu anda kaynak çerçevelerini/Ikinci sayacı desteklemiyoruz. Şimdilik, kaynak çerçeveler/Ikinci sayaç her zaman 0 ' ı görüntüler.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- GPU için iyileştirilmiş bir Azure sanal makine oluşturmak için bkz: [grafik işlem birimi (GPU) hızlandırma Windows sanal masaüstü Önizleme ortamı için yapılandırma](https://docs.microsoft.com/azure/virtual-desktop/configure-vm-gpu).
-- Sorun giderme ve yükseltme parçaları genel bakış için bkz. [genel bakış, geri bildirim ve destek sorunlarını giderme](https://docs.microsoft.com/azure/virtual-desktop/troubleshoot-set-up-overview).
-- Önizleme hizmeti hakkında daha fazla bilgi için bkz: [Windows Desktop Önizleme ortamı](https://docs.microsoft.com/azure/virtual-desktop/environment-setup).
+- GPU ile iyileştirilmiş bir Azure sanal makinesi oluşturmak için bkz. [Windows sanal masaüstü ortamı için grafik işleme birimi (GPU) hızlandırmasını yapılandırma](https://docs.microsoft.com/azure/virtual-desktop/configure-vm-gpu).
+- Sorun giderme ve yükseltme izlemelerine genel bakış için bkz. [sorun giderme genel bakış, geri bildirim ve destek](https://docs.microsoft.com/azure/virtual-desktop/troubleshoot-set-up-overview).
+- Hizmet hakkında daha fazla bilgi edinmek için bkz. [Windows masaüstü ortamı](https://docs.microsoft.com/azure/virtual-desktop/environment-setup).

@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Azure Active Directory Tümleştirmesi ile BitaBIZ | Microsoft Docs'
-description: Azure Active Directory ve BitaBIZ arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: Bıtabiz ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve BitaBIZ arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -8,6 +8,7 @@ manager: mtillman
 ms.reviewer: barbkess
 ms.assetid: 1a51e677-c62b-4aee-9c61-56926aaaa899
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
@@ -15,252 +16,252 @@ ms.topic: tutorial
 ms.date: 02/06/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7e52b5478bc4b483b793f155eab2f41246552d49
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 6f827945cbeccacfdf048865b6e89b6947fe7de9
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67106360"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73159375"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-bitabiz"></a>Öğretici: BitaBIZ ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-bitabiz"></a>Öğretici: Bıtabiz ile tümleştirme Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile BitaBIZ tümleştirme konusunda bilgi edinin.
-Azure AD ile BitaBIZ tümleştirme ile aşağıdaki avantajları sağlar:
+Bu öğreticide, Azure Active Directory (Azure AD) ile barındırtabiz tümleştirmeyi öğreneceksiniz.
+Bıtabiz 'i Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
 
-* BitaBIZ erişimi, Azure AD'de kontrol edebilirsiniz.
-* Otomatik olarak (çoklu oturum açma) BitaBIZ için kendi Azure AD hesapları ile oturum açmış, kullanıcıların etkinleştirebilirsiniz.
-* Hesaplarınız bir merkezi konumda - Azure portalında yönetebilir.
+* Azure AD 'de, Bıtabiz 'e erişimi olan denetimi yapabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla otomatik olarak şirket içine (çoklu oturum açma) oturum açmasını sağlayabilirsiniz.
+* Hesaplarınızı tek bir merkezi konumda yönetebilirsiniz-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla ayrıntı bilmek istiyorsanız, bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulama tümleştirmesi hakkında daha fazla bilgi edinmek istiyorsanız, bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile BitaBIZ yapılandırmak için aşağıdaki öğeler gerekir:
+Azure AD tümleştirmesini, Bıtabiz ile yapılandırmak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa, bir aylık deneme alabilirsiniz [burada](https://azure.microsoft.com/pricing/free-trial/)
-* Abonelik BitaBIZ çoklu oturum açma etkin
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, [burada](https://azure.microsoft.com/pricing/free-trial/) bir aylık deneme sürümü edinebilirsiniz
+* Bıtabiz çoklu oturum açma etkin abonelik
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* BitaBIZ destekler **SP ve IDP** tarafından başlatılan
+* Bıtabiz **SP ve ıDP** tarafından başlatılan SSO 'yu destekler
 
-## <a name="adding-bitabiz-from-the-gallery"></a>Galeriden BitaBIZ ekleme
+## <a name="adding-bitabiz-from-the-gallery"></a>Galeriden Bıtabiz ekleme
 
-Azure AD'de BitaBIZ tümleştirmesini yapılandırmak için BitaBIZ Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+Bıtabiz 'in Azure AD ile tümleştirilmesini yapılandırmak için, Galeriden yönetilen SaaS uygulamaları listenize bir ektabiz eklemeniz gerekir.
 
-**Galeriden BitaBIZ eklemek için aşağıdaki adımları gerçekleştirin:**
+**Galeriden Bıtabiz eklemek için aşağıdaki adımları uygulayın:**
 
-1. İçinde **[Azure portalında](https://portal.azure.com)** , sol gezinti panelinde tıklayın **Azure Active Directory** simgesi.
+1. **[Azure Portal](https://portal.azure.com)** sol gezinti panelinde **Azure Active Directory** simgesine tıklayın.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları** seçeneği.
+2. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar** seçeneğini belirleyin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Yeni uygulama eklemek için tıklatın **yeni uygulama** iletişim üst kısmındaki düğmesi.
+3. Yeni uygulama eklemek için, iletişim kutusunun üst kısmındaki **Yeni uygulama** düğmesine tıklayın.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **BitaBIZ**seçin **BitaBIZ** sonucu panelinden ardından **Ekle** uygulama eklemek için Ekle düğmesine.
+4. Arama kutusuna **bitabiz**yazın, sonuç panelinden **bitabiz** ' ı seçin ve ardından **Ekle** düğmesine tıklayarak uygulamayı ekleyin.
 
-     ![Sonuç listesinde BitaBIZ](common/search-new-app.png)
+     ![Sonuçlar listesinde BitaBIZ](common/search-new-app.png)
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+## <a name="configure-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Bu bölümde, yapılandırma ve Azure AD çoklu oturum açma BitaBIZ adlı bir test kullanıcı tabanlı test **Britta Simon**.
-Tek iş için oturum açma için bir Azure AD kullanıcısının BitaBIZ ilgili kullanıcı arasında bir bağlantı ilişkisi kurulması gerekir.
+Bu bölümde, Azure AD çoklu oturum açmayı, **Britta Simon**adlı bir test kullanıcısına göre Bıtabiz ile yapılandırıp test edersiniz.
+Çoklu oturum açma için, bir Azure AD kullanıcısı ile ilişkili kullanıcı arasındaki bir bağlantı ilişkisinin oluşturulması gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma BitaBIZ ile test etmek için aşağıdaki yapı taşlarını tamamlanması gerekir:
+Azure AD çoklu oturum açma 'yı bir arada yapılandırmak ve test etmek için aşağıdaki yapı taşlarını gerçekleştirmeniz gerekir:
 
-1. **[Azure AD çoklu oturum açmayı yapılandırmayı](#configure-azure-ad-single-sign-on)**  - bu özelliği kullanmak, kullanıcılarınızın etkinleştirmek için.
-2. **[BitaBIZ çoklu oturum açmayı yapılandırma](#configure-bitabiz-single-sign-on)**  - uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  - Azure AD çoklu oturum açma Britta Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  - Azure AD çoklu oturum açmayı kullanmak Britta Simon etkinleştirmek için.
-5. **[BitaBIZ test kullanıcısı oluşturma](#create-bitabiz-test-user)**  - kullanıcı Azure AD gösterimini bağlı BitaBIZ Britta simon'un bir karşılığı vardır.
-6. **[Çoklu oturum açmayı test](#test-single-sign-on)**  - yapılandırma çalışıp çalışmadığını doğrulayın.
+1. **[Azure AD çoklu oturum açma özelliğini yapılandırarak](#configure-azure-ad-single-sign-on)** kullanıcılarınızın bu özelliği kullanmasına olanak sağlayın.
+2. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[BitaBIZ çoklu oturum açmayı yapılandırın](#configure-bitabiz-single-sign-on)** .
+3. Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -Britta Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+4. Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirin.
+5. **[Bıtabiz test kullanıcısı oluşturun](#create-bitabiz-test-user)** -Kullanıcı IÇIN Azure AD gösterimine bağlı olan Bitta Simon 'da Britta Simon 'a sahip olmak.
+6. Yapılandırmanın çalışıp çalışmadığını doğrulamak için **[Çoklu oturum açmayı sınayın](#test-single-sign-on)** .
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalında etkinleştirin.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma özelliğini etkinleştirirsiniz.
 
-Azure AD çoklu oturum açma ile BitaBIZ yapılandırmak için aşağıdaki adımları gerçekleştirin:
+Azure AD çoklu oturum açmayı, Bıtabiz ile yapılandırmak için aşağıdaki adımları uygulayın:
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **BitaBIZ** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **iki** uygulama tümleştirme sayfasında, **Çoklu oturum açma**' yı seçin.
 
-    ![Çoklu oturum açma bağlantısı yapılandırma](common/select-sso.png)
+    ![Çoklu oturum açma bağlantısını yapılandırma](common/select-sso.png)
 
-2. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** iletişim kutusunda, **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçim modu](common/select-saml-option.png)
+    ![Çoklu oturum açma seçme modu](common/select-saml-option.png)
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **Düzenle** açmak için simgeyi **temel SAML yapılandırma** iletişim.
+3. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** Iletişim kutusunu açmak için **Düzenle** simgesine tıklayın.
 
     ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-4. Üzerinde **temel SAML yapılandırma** uygulamada yapılandırmak isterseniz, bölümü **IDP** modunda başlatılan aşağıdaki adımı uygulayın:
+4. **Temel SAML yapılandırması** bölümünde, uygulamayı **IDP** tarafından başlatılan modda yapılandırmak istiyorsanız aşağıdaki adımı uygulayın:
 
-    ![BitaBIZ etki alanı ve URL'ler tek oturum açma bilgileri](common/idp-identifier.png)
+    ![BitaBIZ etki alanı ve URL 'Ler çoklu oturum açma bilgileri](common/idp-identifier.png)
 
-    İçinde **tanımlayıcı** metin kutusuna şu biçimi kullanarak bir URL yazın:  `https://www.bitabiz.com/<instanceId>`
+    **Tanımlayıcı** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://www.bitabiz.com/<instanceId>`
 
     > [!NOTE]
-    > Yalnızca gösterimi için yukarıdaki URL'deki değerdir. Öğreticinin ilerleyen bölümlerinde açıklanan gerçek tanımlayıcı değerini güncelleştirin.
+    > Yukarıdaki URL 'deki değer yalnızca tanıtım amaçlıdır. Değeri, Öğreticinin ilerleyen kısımlarında açıklanan gerçek tanımlayıcı ile güncelleştirin.
 
-5. Tıklayın **ek URL'lerini ayarlayın** ve uygulamada yapılandırmak istiyorsanız, aşağıdaki adımı uygulayın **SP** başlatılan modu:
+5. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
 
     ![image](common/both-preintegrated-signon.png)
 
-    İçinde **oturum açma URL'si** metin kutusuna URL'yi yazın:  `https://www.bitabiz.com/dashboard`
+    **Oturum açma URL** 'si metin kutusuna URL 'yi yazın: `https://www.bitabiz.com/dashboard`
 
-6. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
+6. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** ' i gereksiniminize göre verilen seçeneklerden indirmek ve bilgisayarınıza kaydetmek için **İndir** ' e tıklayın.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-7. Üzerinde **BitaBIZ kümesi** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+7. **Set up Bıtabiz** bölümünde uygun URL 'leri gereksiniminize göre kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-    a. Oturum Açma URL'si:
+    a. Oturum açma URL 'SI
 
-    b. Azure Ad tanımlayıcısı
+    b. Azure AD tanımlayıcısı
 
-    c. Oturum Kapatma URL'si
+    c. Oturum kapatma URL 'SI
 
-### <a name="configure-bitabiz-single-sign-on"></a>BitaBIZ tek oturum açmayı yapılandırın
+### <a name="configure-bitabiz-single-sign-on"></a>Bıtabiz çoklu oturum açmayı yapılandırma
 
-1. Farklı bir web tarayıcı penceresinde BitaBIZ kiracınıza yönetici olarak oturum.
+1. Farklı bir Web tarayıcı penceresinde, yönetici olarak BitaBIZ kiracınızda oturum açın.
 
-2. Tıklayarak **Kurulum yönetici**.
+2. **Kurulum Yöneticisi**' ne tıklayın.
 
-    ![BitaBIZ yapılandırma](./media/bitabiz-tutorial/settings1.png)
+    ![Bıtabiz yapılandırması](./media/bitabiz-tutorial/settings1.png)
 
-3. Tıklayarak **Microsoft tümleştirmeler** altında **değer Ekle** bölümü.
+3. **Değer Ekle** bölümünde **Microsoft tümleştirmeleri** ' ne tıklayın.
 
-    ![BitaBIZ yapılandırma](./media/bitabiz-tutorial/settings2.png)
+    ![Bıtabiz yapılandırması](./media/bitabiz-tutorial/settings2.png)
 
-4. Bölümüne kaydırın **Microsoft Azure AD (etkinleştir çoklu oturum açma)** ve aşağıdaki adımları uygulayın:
+4. **Microsoft Azure AD (çoklu oturum açmayı etkinleştir)** bölümüne gidin ve aşağıdaki adımları gerçekleştirin:
 
-    ![BitaBIZ yapılandırma](./media/bitabiz-tutorial/settings3.png)
+    ![Bıtabiz yapılandırması](./media/bitabiz-tutorial/settings3.png)
 
-    a. Değeri Şuradan Kopyala: **varlık kimliği (Azure AD'de "tanımlayıcı")** metin kutusuna yapıştırın **tanımlayıcı** metin üzerinde **temel SAML yapılandırma** bölümünde Azure portalında . 
+    a. Değeri **VARLıK kimliğinden (Azure AD 'de "tanımlayıcı")** metin kutusuna kopyalayın ve Azure Portal IÇINDEKI **temel SAML yapılandırması** bölümünde yer alan **tanımlayıcı** metin kutusuna yapıştırın. 
 
-    b. İçinde **Azure AD çoklu oturum açma hizmeti URL'si** metin kutusu, yapıştırma **oturum açma URL'si**, hangi Azure Portalı'ndan kopyaladığınız.
+    b. **Azure AD çoklu oturum açma hizmeti URL 'si** metin kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'sini**yapıştırın.
 
-    c. İçinde **Azure AD SAML varlık kimliği** metin kutusu, yapıştırma **Azure Ad tanımlayıcısı**, hangi Azure Portalı'ndan kopyaladığınız.
+    c. **Azure AD SAML VARLıK kimliği** metin kutusunda, Azure Portal kopyaladığınız **Azure AD tanımlayıcısı**' nı yapıştırın.
 
-    d. İndirilen açın **Certificate(Base64)** dosyasını Not Defteri'nde, içeriğini, panoya kopyalayın ve ardından ona yapıştırın **Azure AD imzalama sertifikası (şifreli Base64)** metin.
+    d. İndirilen **sertifika (base64)** dosyanızı Not defteri 'nde açın, içeriğini panonuza kopyalayın ve **Azure AD Imzalama sertifikası (Base64 kodlamalı)** metin kutusuna yapıştırın.
 
-    e. İş e-posta etki alanınızı ekleme mycompany.com, diğer bir deyişle, ad **etki alanı adı** SSO bu e-posta etki alanı ile şirketinizdeki kullanıcılara atamak için metin (zorunlu).
+    e. Bu e-posta etki alanı (zorunlu DEĞIL) ile şirketinizdeki kullanıcılara SSO atamak için, **etki alanı adı** metin kutusuna MyCompany.com iş e-posta etki alanı adınızı ekleyin.
 
-    f. İşareti **SSO etkin** BitaBIZ hesabı.
+    f. **Devre dışı olan SSO 'yu devre dışı** bırak.
 
-    g. Tıklayın **Azure AD'ye yapılandırmayı kaydetmek** kaydedin ve SSO yapılandırma etkinleştirme.
+    g. SSO yapılandırmasını kaydetmek ve etkinleştirmek için **Azure AD yapılandırmasını kaydet** ' e tıklayın.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-Bu bölümün amacı, Britta Simon adlı Azure portalında bir test kullanıcısı oluşturmaktır.
+Bu bölümün amacı, Azure portal Britta Simon adlı bir test kullanıcısı oluşturmaktır.
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" ve "Tüm kullanıcılar" bağlantıları](common/users.png)
+    !["Kullanıcılar ve gruplar" ve "tüm kullanıcılar" bağlantıları](common/users.png)
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-3. Kullanıcı özellikleri, aşağıdaki adımları gerçekleştirin.
+3. Kullanıcı Özellikleri ' nde aşağıdaki adımları gerçekleştirin.
 
     ![Kullanıcı iletişim kutusu](common/user-properties.png)
 
-    a. İçinde **adı** alana **BrittaSimon**.
+    a. **Ad** alanına **Brittasıon**girin.
   
-    b. İçinde **kullanıcı adı** alan türü **brittasimon\@yourcompanydomain.extension**  
+    b. **Kullanıcı adı** alanında **brittasıon\@yourşirketnotlarıetki alanı. Extension** yazın  
     Örneğin, BrittaSimon@contoso.com
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından parola kutusunda görüntülenen değeri yazın.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından parola kutusunda görüntülenen değeri yazın.
 
     d. **Oluştur**’a tıklayın.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, Azure çoklu oturum açma kullanmak için BitaBIZ erişim vererek Britta Simon etkinleştirin.
+Bu bölümde, Bıtabiz 'e erişim vererek Azure çoklu oturum açma özelliğini kullanmak için Britta Simon 'u etkinleştirin.
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**, ardından **BitaBIZ**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **bitabiz**' ı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde **BitaBIZ**.
+2. Uygulamalar listesinde, **Bitabiz**' ı seçin.
 
-    ![Uygulamalar listesinde BitaBIZ bağlantı](common/all-applications.png)
+    ![Uygulamalar listesindeki BitaBIZ bağlantısı](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
-    !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-4. Tıklayın **Kullanıcı Ekle** düğmesine ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+4. **Kullanıcı Ekle** düğmesine tıklayın, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
     ![Atama Ekle bölmesi](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** 'a tıklayın kullanıcı listesinde **seçin** ekranın alt kısmındaki düğmesi.
+5. **Kullanıcılar ve gruplar** Iletişim kutusunda kullanıcılar listesinde **Britta Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-6. SAML onaylaması ardından içinde herhangi bir rolü değer bekleniyor durumunda **rolü Seç** 'a tıklayın listeden bir kullanıcı için uygun rolü Seç iletişim kutusu **seçin** ekranın alt kısmındaki düğmesi.
+6. SAML onaylama işlemi içinde herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, listeden Kullanıcı için uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
 
-7. İçinde **atama Ekle** iletişim tıklatın **atama** düğmesi.
+7. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-### <a name="create-bitabiz-test-user"></a>BitaBIZ test kullanıcısı oluşturma
+### <a name="create-bitabiz-test-user"></a>Bıtabiz test kullanıcısı oluşturma
 
-BitaBIZ için oturum açmak Azure AD kullanıcılarının etkinleştirmek için bunların BitaBIZ sağlanması gerekir.  
-BitaBIZ söz konusu olduğunda, sağlama bir el ile gerçekleştirilen bir görevdir.
+Azure AD kullanıcılarının, Bıtabiz 'da oturum açmasını sağlamak için, bunların Bıtabiz 'e sağlanması gerekir.  
+Bıtabiz söz konusu olduğunda, sağlama el ile gerçekleştirilen bir görevdir.
 
 **Bir kullanıcı hesabı sağlamak için aşağıdaki adımları gerçekleştirin:**
 
-1. BitaBIZ şirketinizin sitesi için bir yönetici olarak oturum açın.
+1. Bıtabiz şirket sitenizde yönetici olarak oturum açın.
 
-2. Tıklayarak **Kurulum yönetici**.
+2. **Kurulum Yöneticisi**' ne tıklayın.
 
-    ![BitaBIZ Kullanıcı Ekle](./media/bitabiz-tutorial/settings1.png)
+    ![Bıtabiz Kullanıcı ekleme](./media/bitabiz-tutorial/settings1.png)
 
-3. Tıklayarak **kullanıcı ekleme** altında **kuruluş** bölümü.
+3. **Kuruluş** altında **Kullanıcı Ekle** bölümüne tıklayın.
 
-    ![BitaBIZ Kullanıcı Ekle](./media/bitabiz-tutorial/user1.png)
+    ![Bıtabiz Kullanıcı ekleme](./media/bitabiz-tutorial/user1.png)
 
-4. Tıklayın **Ekle yeni çalışan**.
+4. **Yeni çalışan Ekle**' ye tıklayın.
 
-    ![BitaBIZ Kullanıcı Ekle](./media/bitabiz-tutorial/user2.png)
+    ![Bıtabiz Kullanıcı ekleme](./media/bitabiz-tutorial/user2.png)
 
-5. Üzerinde **Ekle yeni çalışan** iletişim sayfasında, aşağıdaki adımları gerçekleştirin:
+5. **Yeni çalışan Ekle** iletişim sayfasında, aşağıdaki adımları uygulayın:
 
-    ![BitaBIZ Kullanıcı Ekle](./media/bitabiz-tutorial/user3.png)
+    ![Bıtabiz Kullanıcı ekleme](./media/bitabiz-tutorial/user3.png)
 
-    a. İçinde **ad** metin kutusu, kullanıcının Britta gibi ilk tür adı.
+    a. **Ad** metin kutusuna, ilk Kullanıcı adını Britta gibi yazın.
 
-    b. İçinde **Soyadı** metin son Simon gibi kullanıcı adını yazın.
+    b. **Soyadı** metin kutusunda, Simon gibi kullanıcı adının soyadını yazın.
 
-    c. İçinde **e-posta** metin kutusuna kullanıcı e-posta adresi türünü ister Brittasimon@contoso.com.
+    c. **E-posta** metin kutusuna Brittasimon@contoso.comgibi kullanıcının e-posta adresini yazın.
 
-    d. Bir tarih seçin **gününü**.
+    d. **Çalışma tarihi**olarak bir tarih seçin.
 
-    e. Kullanıcı için ayarlanabilir diğer zorunlu olmayan kullanıcı öznitelikleri vardır. Lütfen [çalışan Kurulum Doc](https://help.bitabiz.dk/manage-or-set-up-your-account/on-boarding-employees/new-employee) daha fazla ayrıntı için.
+    e. Kullanıcı için ayarlanamayacak, zorunlu olmayan diğer Kullanıcı öznitelikleri vardır. Daha fazla ayrıntı için lütfen [çalışan kurulumu](https://help.bitabiz.dk/manage-or-set-up-your-account/on-boarding-employees/new-employee) belgelerine bakın.
 
-    f. Tıklayın **Kaydet çalışan**.
+    f. **Çalışanı kaydet**' e tıklayın.
 
     > [!NOTE]
-    > Azure Active Directory hesap sahibinin e-posta alır ve etkin hale gelir önce hesabını onaylamak için bir bağlantı izler.
+    > Azure Active Directory hesap sahibi bir e-posta alır ve etkin hale gelmeden önce hesaplarını doğrulamak için bir bağlantıyı izler.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
 
-Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edin.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-Erişim paneli BitaBIZ kutucuğa tıkladığınızda, size otomatik olarak SSO'yu ayarlama BitaBIZ için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde BitaBIZ kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız Bıtabiz 'da otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)

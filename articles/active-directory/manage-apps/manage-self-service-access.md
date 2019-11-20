@@ -1,6 +1,6 @@
 ---
-title: Self Servis uygulama atamasının nasıl yapılandırılacağını | Microsoft Docs
-description: Kullanıcıların kendi uygulamaları bulmak Self Servis uygulama erişimini etkinleştir
+title: Self Servis uygulama atamasını yapılandırma | Microsoft Docs
+description: Kullanıcıların kendi uygulamalarını bulmasına izin vermek için self servis uygulama erişimini etkinleştirme
 services: active-directory
 documentationcenter: ''
 author: msmimart
@@ -12,83 +12,83 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 04/02/2018
+ms.date: 10/23/2018
 ms.author: mimart
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 66b842fc1b438e2d0046b4359712c3537f568e5a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: dbeb25f1190754b4264cfbab9d8a03a6b65c4dff
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65824430"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72895961"
 ---
-# <a name="how-to-configure-self-service-application-assignment"></a>Self Servis uygulama atamasının nasıl yapılandırılacağını
+# <a name="how-to-configure-self-service-application-assignment"></a>Self Servis uygulama atamasını yapılandırma
 
-Kullanıcılarınıza kendi erişim panellerine uygulamalardan Self bulabilmesi için önce etkinleştirmeniz gerekir **Self Servis uygulama erişiminin** Self bulmak ve istek izin vermek istiyorsanız uygulamalara erişim.
+Kullanıcılarınızın erişim panelinden uygulamaları kendi kendine bulabilmesi için, kullanıcıların kendi kendine bulmasını ve erişim istemesini sağlamak istediğiniz uygulamalara **self servis uygulama erişimini** etkinleştirmeniz gerekir. Bu işlev, [Azure AD Galerisi](https://docs.microsoft.com/azure/active-directory/manage-apps/add-gallery-app)'nden eklenen, [Azure AD uygulama ara sunucusu](https://docs.microsoft.com/azure/active-directory/manage-apps/application-proxy) veya [Kullanıcı ya da yönetici izni](https://docs.microsoft.com/azure/active-directory/develop/application-consent-experience)aracılığıyla eklenen uygulamalar için kullanılabilir. 
 
-Bu özellik, bir BT grubu zamandan ve paradan tasarruf harika bir yoludur ve Azure Active Directory ile modern uygulamalar dağıtımının bir parçası olarak önemle tavsiye edilir.
+Bu özellik, bir BT grubu olarak zaman ve para tasarrufu yapmanız için harika bir yoldur ve Azure Active Directory ile modern uygulamalar dağıtımının bir parçası olarak önemle önerilir.
 
 Bu özelliği kullanarak şunları yapabilirsiniz:
 
--   Kullanıcıların uygulamaları kendi kendine keşfedin [uygulama erişim panelinde](https://myapps.microsoft.com/) BT grubu rahatsız etme olmadan.
+-   Kullanıcıların [uygulama erişim panelinden](https://myapps.microsoft.com/) bothering BT grubu olmadan uygulamaları kendi kendine bulmasına izin verin.
 
--   Erişim isteğinde bulundu bakın, erişimini kaldırmak ve kendilerine atanan rollerini yönetme önceden yapılandırılmış bir gruba kullanıcılar ekleyin.
+-   Bu kullanıcıları önceden yapılandırılmış bir gruba ekleyerek kimin erişimi olduğunu, erişimi kaldırabileceğini görebilir ve bunlara atanan rolleri yönetebilirsiniz.
 
--   İsteğe bağlı olarak, BT grubu zorunda değil, uygulama erişim istekleri onaylamak bir iş onaylayan izin verir.
+-   İsteğe bağlı olarak, bir iş onaylayanın uygulama erişim isteklerini onaylaması için BT grubunun olmaması gerekir.
 
--   İsteğe bağlı olarak bu uygulamaya erişimi onaylama en fazla 10 kişilere yapılandırın.
+-   İsteğe bağlı olarak, bu uygulamaya erişimi onaylayabilecek en fazla 10 kişi yapılandırın.
 
--   İsteğe bağlı olarak bir iş izin kullanıcılarla parolalar ayarlamak için onaylayan uygulamaya doğrudan iş onaylayanın oturum açmak için kullanabileceğiniz [uygulama erişim panelinde](https://myapps.microsoft.com/).
+-   İsteğe bağlı olarak, bir iş onaylayanın, kullanıcıların uygulamada oturum açmak için kullanabileceği parolaları ayarlamaya, iş onaylayanın [uygulama erişim panelinden](https://myapps.microsoft.com/)doğrudan izin verin.
 
--   İsteğe bağlı olarak otomatik olarak kullanıcıların doğrudan bir uygulama rolüne atanmış bir Self Servis atayın.
+-   İsteğe bağlı olarak otomatik olarak self servis atanan kullanıcıları doğrudan bir uygulama rolüne atar.
 
-## <a name="enable-self-service-application-access-to-allow-users-to-find-their-own-applications"></a>Kullanıcıların kendi uygulamaları bulmak Self Servis uygulama erişimini etkinleştir
+## <a name="enable-self-service-application-access-to-allow-users-to-find-their-own-applications"></a>Kullanıcıların kendi uygulamalarını bulmasına izin vermek için self servis uygulama erişimini etkinleştirme
 
-Self Servis uygulama erişiminin kullanıcıların uygulamaları kendi kendine bulmak harika bir yoludur bu uygulamalara erişimi onaylamak için iş grubuna isteğe bağlı olarak sağlar. Parola çoklu oturum uygulamalar'ın üzerinde sağ için kullanıcılara erişim panelleri üzerinden atanan kimlik bilgilerini yönetmek iş grubuna izin verebilirsiniz.
+Self Servis uygulama erişimi, kullanıcıların uygulamaları kendi kendine bulmasına izin vermek için harika bir yoldur ve isteğe bağlı olarak iş grubunun bu uygulamalara erişimi onaylamasını sağlar. İş grubunun, erişim panellerinden, parola çoklu oturum açma uygulamalarında bu kullanıcılara atanan kimlik bilgilerini yönetmesine izin verebilirsiniz.
 
 Bir uygulamaya Self Servis uygulama erişimini etkinleştirmek için aşağıdaki adımları izleyin:
 
-1.  Açık [ **Azure portalı** ](https://portal.azure.com/) ve oturum açma bir **genel yönetici.**
+1.  [**Azure Portal**](https://portal.azure.com/) açın ve **genel yönetici** olarak oturum açın.
 
-2.  Açık **Azure Active Directory uzantısını** tıklayarak **tüm hizmetleri** ana sol taraftaki gezinti menüsünün üstünde.
+2.  Ana sol taraftaki Gezinti menüsünün en üstündeki **tüm hizmetler** ' i tıklatarak **Azure Active Directory uzantısını** açın.
 
-3.  Yazın **"Azure Active Directory**" filtre arama kutusunu seçip **Azure Active Directory** öğesi.
+3.  Filtre arama kutusuna **"Azure Active Directory**" yazın ve **Azure Active Directory** öğesini seçin.
 
-4.  tıklayın **kurumsal uygulamalar** Azure Active Directory sol taraftaki gezinti menüsünde.
+4.  Azure Active Directory sol taraftaki gezinti menüsünden **Kurumsal uygulamalar** ' a tıklayın.
 
-5.  tıklayın **tüm uygulamaları** tüm uygulamaların bir listesini görüntülemek için.
+5.  tüm uygulamalarınızın listesini görüntülemek için **tüm uygulamalar** ' a tıklayın.
 
-    * Burada show istediğiniz uygulamayı göremiyorsanız kullanın **filtre** üst kısmındaki denetim **tüm uygulamalar listesini** ayarlayıp **Göster** seçeneğini **tüm Uygulamalar.**
+    * Burada görünmesini istediğiniz uygulamayı görmüyorsanız, **tüm uygulamalar listesinin** en üstündeki **filtre** denetimini kullanın ve **göster** seçeneğini **tüm uygulamalar** olarak ayarlayın.
 
-6.  Self Servis etkinleştirmek istediğiniz uygulamayı seçin listeden erişim.
+6.  Self servis erişimini listeden etkinleştirmek istediğiniz uygulamayı seçin.
 
-7.  Uygulama yüklendikten sonra tıklayın **Self Servis** uygulamanın sol taraftaki gezinti menüsünde.
+7.  Uygulama yüklendikten sonra, uygulamanın sol taraftaki gezinti menüsünden **Self-Service** ' e tıklayın.
 
-8.  Bu uygulama için Self Servis uygulama erişimini etkinleştirmek için kapatma **kullanıcıların bu uygulamaya erişim istemesine izin?** geç **Evet.**
+8.  Bu uygulama için self servis uygulama erişimini etkinleştirmek üzere **kullanıcıların bu uygulamaya erişim Istemesine Izin ver** ' i açın **. Evet** ' e geçin.
 
-9.  Ardından, isteyen kullanıcıların bu uygulamaya erişimi eklenmelidir grup seçmek için etiketi yanındaki seçiciyi **atanan kullanıcılar hangi gruba eklenir?** ve bir grubu seçin.
+9.  Ardından, bu uygulamaya erişim isteyen kullanıcıların eklenmesi gereken grubu seçmek için, **grubun atanması** gereken etiketin yanındaki seçiciye tıklayın ve bir grup seçin.
   
     > [!NOTE]
-    > Bu uygulamaya erişmek isteyen kullanıcıların eklenmesi gereken grup için kullanılacak şirket içinden eşitlenen gruplar desteklenmiyor.
+    > Şirket içinden eşitlenen grupların, bu uygulamaya erişim isteyen kullanıcıların eklenmesi için kullanılması desteklenmez.
   
-10. **İsteğe bağlı:** Önce bir iş onayı iste istiyorsanız kullanıcılara erişim verilir, Ayarla **bu uygulamaya erişim vermeden önce onay gerektirir?** geç **Evet**.
+10. **Isteğe bağlı:** Kullanıcıların erişimine izin verilmeden önce bir iş onayı gerektirmek istiyorsanız, **Bu uygulamaya erişim izni vermeden önce onay iste** seçeneğini belirleyin. **Evet**' e geçin.
 
-11. **İsteğe bağlı: Yalnızca, parola ile çoklu oturum üzerinde kullanan uygulamalar için** onaylanan kullanıcılar için bu uygulama için gönderilen parolaları belirlemek bu iş onaylayanlar izin vermek istediğiniz verilirse **kullanıcının parolalarını bunu onaylayanların izin ver Uygulama?**  geç **Evet**.
+11. **Isteğe bağlı: yalnızca parola çoklu oturum açma kullanan uygulamalar için,** bu iş onaylayanlara onaylanan kullanıcılar için bu uygulamaya gönderilen parolaları belirtmesini sağlamak istiyorsanız, **onaylayanlara bunun için Kullanıcı parolalarını ayarlama izni ver ' i ayarlayın Uygulama?** **Evet**olarak değiştirin.
 
-12. **İsteğe bağlı:** Bu uygulamaya erişimi onaylama için izin verilen iş onaylayanlar belirtmek için etiket yanındaki seçiciyi **kimin bu uygulamaya erişimi onaylama için verilir?** 10 adede kadar tek tek iş onaylayanları seçin.
+12. **Isteğe bağlı:** Bu uygulamaya erişimi onaylamaya izin verilen iş onaylayanlarını belirtmek için, **Bu uygulamaya erişimi onaylamaya izin verilen** etiketin yanındaki seçiciye tıklayın. en fazla 10 bireysel iş onaylayı seçmek için.
 
      > [!NOTE]
-     > Grupları desteklenmez.
+     > Gruplar desteklenmiyor.
      >
      >
 
-13. **İsteğe bağlı:** **Rolleri gösterdiğiniz uygulamalar için**, Self Servis onaylanan kullanıcılar role atamak istiyorsanız yanındaki seçiciyi **bu uygulamada kullanıcılar hangi role atanmış?** rolüne seçmek için Bu kullanıcılara atanmış olmalıdır.
+13. **Isteğe bağlı:** **rolleri kullanıma sunan uygulamalar için**, bir role self servis onaylı kullanıcılar atamak istiyorsanız, **Bu uygulamada kullanıcıların hangi rolün atanması gerektiğini seçin?** seçeneğinin yanındaki seçiciye tıklayın. bu kullanıcıların atanmalıdır.
 
-14. Tıklayın **Kaydet** tamamlamak için dikey pencerenin üstünde düğme.
+14. Son olarak dikey pencerenin en üstündeki **Kaydet** düğmesine tıklayın.
 
-Self Servis uygulama yapılandırmasını tamamladıktan sonra kullanıcılar için gidebilir, [uygulama erişim panelinde](https://myapps.microsoft.com/) tıklatıp **+ Ekle** Self Servis etkin uygulamaları bulmak için düğme erişim. İş onaylayan bir bildirim Ayrıca bkz: kendi [uygulama erişim panelinde](https://myapps.microsoft.com/). Kullanıcı onay gerektiren bir uygulama için erişim istedi gelmeyeceğini e-posta etkinleştirebilirsiniz. 
+Self Servis uygulama yapılandırmasını tamamladıktan sonra, kullanıcılar kendi [uygulama erişim paneline](https://myapps.microsoft.com/) gidebilir ve self servis erişimini etkinleştirdiğiniz uygulamaları bulmak Için **+ Ekle** düğmesine tıklamanıza izin verebilir. İş onaylayanları Ayrıca [uygulama erişimi panelinde](https://myapps.microsoft.com/)bir bildirim görür. Bir Kullanıcı onay gerektiren bir uygulamaya erişim isteğinde bulunduğunda bu e-postayı bildiren bir e-posta sağlayabilirsiniz. 
 
-Bu onay, birden çok onaylayıcısı belirtirseniz, herhangi bir tek onaylayan uygulamaya erişim onaylayan olabilir yani yalnızca tek bir onay iş akışlarını destekler.
+Bu onaylar yalnızca tek onay iş akışlarını destekler, yani birden çok onaylayan belirtirseniz, tek bir onaylayanın uygulamaya ne kadar bir onaylayan erişimi de
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[Azure Active Directory Self Servis Grup Yönetimi için ayarlama](../users-groups-roles/groups-self-service-management.md)
+[Self Servis Grup yönetimi için Azure Active Directory ayarlama](../users-groups-roles/groups-self-service-management.md)

@@ -15,14 +15,14 @@ ms.workload: NA
 ms.date: 05/11/2018
 ms.author: dekapur
 ms.custom: mvc
-ms.openlocfilehash: 69508628356a5f33073311e4d062d66875509192
-ms.sourcegitcommit: 009334a842d08b1c83ee183b5830092e067f4374
+ms.openlocfilehash: 048051a612793cbe82f82fbde482ed470ad3758c
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66302468"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73177832"
 ---
-# <a name="tutorial-create-aws-infrastructure-to-host-a-service-fabric-cluster"></a>Öğretici: Bir Service Fabric kümesini barındırmak için AWS altyapı oluşturun
+# <a name="tutorial-create-aws-infrastructure-to-host-a-service-fabric-cluster"></a>Öğretici: Bir Service Fabric kümesini barındıracak AWS altyapısı oluşturma
 
 Service Fabric tek başına kümeleri, kendi ortamınızı seçme ve Service Fabric’in benimsediği "her işletim sistemi, her bulut" yaklaşımının bir parçası olarak bir küme oluşturma seçeneği sunar. Bu öğretici serisinde, AWS üzerinde barındırılan bir tek başına küme oluşturacak ve içine bir uygulama yükleyeceksiniz.
 
@@ -33,7 +33,7 @@ Serinin birinci bölümünde şunları öğrenirsiniz:
 > [!div class="checklist"]
 > * Bir EC2 örnekleri kümesi oluşturma
 > * Güvenlik grubunu değiştirme
-> * Örneklerinden birinde oturum açın
+> * Örneklerden birinde oturum açın
 > * Service Fabric örneğini hazırlama
 
 ## <a name="prerequisites"></a>Önkoşullar
@@ -42,7 +42,7 @@ Bu öğreticiyi tamamlamak için bir AWS hesabınızın olması gerekir.  Henüz
 
 ## <a name="create-ec2-instances"></a>EC2 örnekleri oluşturma
 
-AWS konsolunda oturum açın > Enter **EC2** arama kutusuna > **EC2 sanal sunucularını bulutta**
+AWS konsolunda oturum açın > > **EC2 sanal sunucuları** ara kutusuna
 
 ![AWS konsol araması][aws-console]
 
@@ -50,7 +50,7 @@ AWS konsolunda oturum açın > Enter **EC2** arama kutusuna > **EC2 sanal sunucu
 
 ![EC2 örneği seçimi][aws-ec2instance]
 
-Seçin **t2.medium**, ardından **sonraki: Örnek Ayrıntıları yapılandırma**, sonraki ekranda değiştirmek için örnek sayısını `3`, ardından **Gelişmiş Ayrıntılar** bu bölümü genişletin.
+**t2.medium** öğesini ve ardından **İleri: Örnek Ayrıntılarını Yapılandırma**’yı seçin, sonraki ekranda örnek sayısını `3` olarak değiştirin, ardından **Gelişmiş Ayrıntılar**’ı seçerek bu seçimi genişletin.
 
 Service Fabric’te sanal makinelerinizi birbirine bağlamak için, altyapınızı barındıran VM’lerin aynı kimlik bilgilerine sahip olması gerekir.  Tutarlı kimlik bilgileri elde etmenin iki yaygın yolu vardır: tümünü aynı etki alanına eklemek veya her sanal makinede aynı yönetici parolasını ayarlamak.  Bu öğreticide, EC2 örneklerinin tümünü aynı parolaya ayarlamak için bir kullanıcı verileri betiği kullanacaksınız.  Bir üretim ortamında, ana bilgisayarların bir Windows etki alanına eklenmesi daha güvenlidir.
 
@@ -82,7 +82,7 @@ Service Fabric, kümenizdeki bağlantı noktaları arasında birkaç bağlantı 
 
 Bu bağlantı noktalarını genel erişime açmayı önlemek için yalnızca aynı güvenlik grubundaki ana bilgisayarlara açın. Güvenlik grubu kimliğini not alın (bu örnekte **sg-c4fb1eba**).  Ardından **Düzenle**’yi seçin.
 
-Sonra, güvenlik grubuna hizmet bağımlılıkları için dört kural ve Service Fabric için üç kural daha ekleyin. Birinci kural, temel bağlantı denetimleri için ICMP trafiğine izin vermektir. Diğer kurallar SMB ve Uzak Kayıt Defteri’ni etkinleştirmek için gereken bağlantı noktalarını açar.
+Sonra, güvenlik grubuna hizmet bağımlılıkları için dört kural ve Service Fabric için üç kural daha ekleyin. Birinci kural, temel bağlantı denetimleri için ICMP trafiğine izin vermektir. Diğer kurallar, uzak kayıt defterini etkinleştirmek için gerekli bağlantı noktalarını açar.
 
 Birinci kural için **Kural Ekle**’yi ve sonra açılır listeden **Tüm ICMP - IPv4**’ü seçin. Özel seçeneğinin yanındaki giriş kutusunu seçin ve yukarıdaki güvenlik grubu kimliğinizi girin.
 
@@ -110,7 +110,7 @@ Tüm IP adreslerini elde ettikten sonra bağlanacak bir örnek seçin, örneğe 
 
 Örneğinize başarıyla bağlandıktan sonra örnekler arasında bağlantı kurabilir ve ayrıca dosya paylaşabilirsiniz.  Tüm örneklerin IP adreslerini toplayın ve şu anda bağlı olmadığınız bir adresi seçin. **Başlat**’a gidin, `cmd` girip **Komut İstemi**’ni seçin.
 
-Bu örneklerde, aşağıdaki IP adresi için RDP bağlantısı kuruldu: 172.31.21.141. Tüm bağlantı test edin, ardından bir IP adresi için oluşur: 172.31.20.163.
+Bu örneklerde RDP bağlantısı şu IP adresiyle kurulmuştur: 172.31.21.141. Bu durumda tüm bağlantı testleri diğer IP adresinde gerçekleştirilir: 172.31.20.163.
 
 Temel bağlantının çalıştığını doğrulamak için ping komutunu kullanın.
 
@@ -118,30 +118,18 @@ Temel bağlantının çalıştığını doğrulamak için ping komutunu kullanı
 ping 172.31.20.163
 ```
 
-Çıktınız dört kez tekrar eden `Reply from 172.31.20.163: bytes=32 time<1ms TTL=128` gibi görünüyorsa, örnekler arasındaki bağlantınız çalışıyordur.  Şimdi aşağıdaki komutla SMB paylaşımınızın çalıştığını doğrulayın:
-
-```
-net use * \\172.31.20.163\c$
-```
-
-Çıktı olarak `Drive Z: is now connected to \\172.31.20.163\c$.` döndürülmelidir.
+Çıktınız dört kez tekrar eden `Reply from 172.31.20.163: bytes=32 time<1ms TTL=128` gibi görünüyorsa, örnekler arasındaki bağlantınız çalışıyordur.  
 
 ## <a name="prep-instances-for-service-fabric"></a>Service Fabric örneklerini hazırlama
 
-Sıfırdan oluşturuyorsanız fazladan birkaç adım uygulamanız gerekir.  Diğer bir deyişle, uzak kayıt defterinin çalıştığını doğrulamanız, SMB’yi etkinleştirmeniz ve SMB ile uzak kayıt defteri için gereken bağlantı noktalarını açmanız gerekir.
+Sıfırdan oluşturuyorsanız fazladan birkaç adım uygulamanız gerekir.  Yani, uzak kayıt defterinin çalıştığını doğrulamanız ve önkoşul bağlantı noktalarını açmanız gerekir.
 
 Kolaylaştırmak için, bu işlerin tümünü, kullanıcı veri betiğinizle örnekleri önyüklediğinizde eklemiştiniz.
-
-SMB’yi etkinleştirmek için şu PowerShell komutunu kullandınız:
-
-```powershell
-netsh advfirewall firewall set rule group="File and Printer Sharing" new enable=Yes
-```
 
 Buradaki güvenlik duvarında bağlantı noktalarını açmak için şu PowerShell komutunu kullanın:
 
 ```powershell
-New-NetFirewallRule -DisplayName "Service Fabric Ports" -Direction Inbound -Action Allow -RemoteAddress LocalSubnet -Protocol TCP -LocalPort 135, 137-139, 445
+New-NetFirewallRule -DisplayName "Service Fabric Ports" -Direction Inbound -Action Allow -RemoteAddress LocalSubnet -Protocol TCP -LocalPort 135, 137-139
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
@@ -151,7 +139,7 @@ Serinin birinci bölümünde üç EC2 örneğini başlatmayı ve Service Fabric 
 > [!div class="checklist"]
 > * Bir EC2 örnekleri kümesi oluşturma
 > * Güvenlik grubunu değiştirme
-> * Örneklerinden birinde oturum açın
+> * Örneklerden birinde oturum açın
 > * Service Fabric örneğini hazırlama
 
 Service Fabric’i kümenizde yapılandırmak için serinin ikinci bölümüne ilerleyin.

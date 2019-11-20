@@ -1,224 +1,224 @@
 ---
-title: Azure Site Recovery ile VMware Vm'lerini veya fiziksel sunucuları çok sayıda için Azure'da olağanüstü durum kurtarma ayarlama | Microsoft Docs
-description: Çok sayıda şirket içi VMware Vm'lerini veya fiziksel sunucuları için azure'a Azure Site Recovery ile olağanüstü durum kurtarma ayarlamayı öğrenin.
+title: Azure Site Recovery VMware/fiziksel olağanüstü durum kurtarmayı ölçeklendirin
+description: Çok sayıda şirket içi VMware VM veya Azure Site Recovery ile fiziksel sunucu için Azure 'da olağanüstü durum kurtarmayı ayarlamayı öğrenin.
 author: rayne-wiselman
 manager: carmonm
 ms.service: site-recovery
 ms.topic: conceptual
-ms.date: 05/14/2019
+ms.date: 11/14/2019
 ms.author: raynew
-ms.openlocfilehash: e96aafe61c0d8547ffca9e97bfd9e90c9529155f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e08c7d5f794611a92688e931f35da7482c04407f
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66237275"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74082214"
 ---
-# <a name="set-up-disaster-recovery-at-scale-for-vmware-vmsphysical-servers"></a>VMware Vm'lerini/fiziksel sunucuları için uygun ölçekte olağanüstü durum kurtarmayı ayarlama
+# <a name="set-up-disaster-recovery-at-scale-for-vmware-vmsphysical-servers"></a>VMware VM 'Leri/fiziksel sunucular için ölçekte olağanüstü durum kurtarmayı ayarlama
 
-Bu makalede şirket içi VMware Vm'leri veya fiziksel sunucular, üretim ortamında çok sayıda (> 1000) için azure'da olağanüstü durum kurtarma ayarlamayı açıklar kullanarak [Azure Site Recovery](site-recovery-overview.md) hizmeti.
+Bu makalede, [Azure Site Recovery](site-recovery-overview.md) hizmetini kullanarak şirket Içi VMware VM 'lerinin veya üretim ortamınızdaki fiziksel sunucuların büyük sayıları (> 1000) için Azure 'da olağanüstü durum kurtarmanın nasıl ayarlanacağı açıklanır.
 
 
-## <a name="define-your-bcdr-strategy"></a>BCDR stratejinizi tanımlayın
+## <a name="define-your-bcdr-strategy"></a>BCDR stratejinizi tanımlama
 
-İş sürekliliği ve olağanüstü durum kurtarma (BCDR) stratejisi kapsamında, kurtarma noktası hedeflerine (RPO'lar) ve iş kolu uygulamalarını ve iş yükleri için kurtarma zamanı hedeflerine (Rto'lar) tanımlayın. RTO ölçer süresi zaman ve hizmet düzeyi, içinde bir iş uygulaması veya işlem geri yüklenen ve sürekliliği sorunları önlemek için kullanılabilir olmalıdır.
-- Site Recovery, VMware Vm'leri ve fiziksel sunucuları için sürekli çoğaltma sağlar ve bir [SLA](https://azure.microsoft.com/support/legal/sla/site-recovery/v1_2/) RTO için.
-- VMware Vm'leri ve ihtiyacınız olan Azure kaynakları anlamak için büyük ölçekli bir olağanüstü durum kurtarma planlaması gibi kapasite hesaplamaları için kullanılacak bir RTO değeri belirtebilirsiniz.
+İş sürekliliği ve olağanüstü durum kurtarma (BCDR) stratejinizin bir parçası olarak, iş uygulamalarınız ve iş yükleriniz için kurtarma noktası hedeflerini (RPOs) ve kurtarma süresi hedeflerini (RTOs) tanımlarsınız. RTO, devam eden sorunları önlemek için bir iş uygulamasının veya işlemin geri yüklenmesi ve kullanılabilir olması gereken süre ve hizmet düzeyi sayısını ölçer.
+- Site Recovery, VMware VM 'Leri ve fiziksel sunucular için sürekli çoğaltma ve RTO için [SLA](https://azure.microsoft.com/support/legal/sla/site-recovery/v1_2/) sağlar.
+- VMware VM 'Leri için büyük ölçekli olağanüstü durum kurtarma ve ihtiyacınız olan Azure kaynaklarını farklı şekilde planlarken, kapasite hesaplamaları için kullanılacak bir RTO değeri belirtebilirsiniz.
 
 
 ## <a name="best-practices"></a>En iyi uygulamalar
 
-Büyük ölçekli bir olağanüstü durum kurtarma için genel bazı en iyi yöntemler. En iyi bu belgenin sonraki bölümlerinde daha ayrıntılı ele alınmıştır.
+Büyük ölçekli olağanüstü durum kurtarma için bazı genel en iyi uygulamalar. Bu en iyi uygulamalar, belgenin sonraki bölümlerinde daha ayrıntılı bir şekilde ele alınmıştır.
 
-- **Hedef gereksinimlerini tanımlamaya**: Olağanüstü durum kurtarma işlemini ayarladığınız önce kullanıma azure'da kapasite ve kaynak gereksinimlerini tahmin edin.
-- **Plan için Site Recovery bileşenlerini**: Hangi Site Recovery bileşenlerini (yapılandırma sunucusu, işlem sunucusu), tahmini kapasitenizi karşılamak gereken her şekil.
-- **Bir veya daha fazla genişleme işlem sunucusu ayarlayabilir**: Varsayılan olarak yapılandırma sunucusunda çalıştırılan işlem sunucusu kullanmayın. 
-- **En son güncelleştirmeleri çalıştırma**: Site Recovery ekibi, yeni sürümlerini düzenli olarak Site Recovery bileşenlerini serbest bırakır ve en son sürümleri çalıştırıyorsanız emin olmanız gerekir. İle yardımcı olmak için izleme [yenilikler](site-recovery-whats-new.md) güncelleştirmeleri ve [etkinleştirme ve güncelleştirmeleri yükleme](service-updates-how-to.md) bunlar release olarak.
-- **Proaktif izleme**: Olağanüstü durum kurtarma çalışır hale geldikçe çoğaltılan makinelerin altyapı kaynaklarını ve sistem proaktif olarak izlemeniz gerekir.
-- **Olağanüstü durum kurtarma tatbikatlarını**: Olağanüstü durum kurtarma tatbikatı düzenli olarak çalıştırmanız gerekir. Bunlar, üretim ortamınıza etkisi yoktur, ancak sağlamaya yardımcı olmak azure'a Bu yük devretme gerektiğinde beklendiği gibi çalışır.
+- **Hedef gereksinimleri belirleme**: olağanüstü durum kurtarmayı ayarlamadan önce Azure 'da kapasite ve kaynak gereksinimlerini tahmin edin.
+- **Site Recovery bileşenleri Için plan**yapın: tahmini kapasitenizi karşılamak için gereken Site Recovery bileşenlerini (yapılandırma sunucusu, işlem sunucuları) öğrenin.
+- **Bir veya daha fazla genişleme işlem sunucusu ayarlama**: yapılandırma sunucusunda varsayılan olarak çalışan işlem sunucusunu kullanmayın. 
+- **En son güncelleştirmeleri çalıştırın**: Site Recovery Team Site Recovery bileşenlerinin düzenli olarak yeni sürümlerini yayınlar ve en son sürümleri çalıştırdığınızdan emin olun. Bu konuda size yardımcı olmak için güncelleştirmeler için [yenilikleri](site-recovery-whats-new.md) izleyin ve güncelleştirmeleri yayınlarlar [ve yükler](service-updates-how-to.md) .
+- **İzleme**proaktif: olağanüstü durum kurtarma 'yı ve çalışır duruma getirmek için, çoğaltılan makinelerin durumunu ve sağlığını ve altyapı kaynaklarını önceden izlemeniz gerekir.
+- **Olağanüstü durum kurtarma ayrıntılarında**: olağanüstü durum kurtarma detaylarını düzenli olarak çalıştırmalısınız. Bu, üretim ortamınızda etkilenmez, ancak Azure 'a yük devretmenin gerektiğinde beklendiği gibi çalışmasını sağlamaya yardımcı olur.
 
 
 
-## <a name="gather-capacity-planning-information"></a>Kapasite planlama bilgileri toplayın
+## <a name="gather-capacity-planning-information"></a>Kapasite planlama bilgilerini toplayın
 
-Değerlendirmek ve hedef (Azure) kapasitenizi ihtiyaçlarınızı tahmin etmenize yardımcı olmak için şirket içi ortamınız hakkında bilgi toplayın.
-- VMware için bunu yapmak, VMware Vm'leri için dağıtım Planlayıcısını çalıştırın.
-- Fiziksel sunucuları için el ile bilgi toplayın.
+Hedef (Azure) kapasite gereksinimlerinizi değerlendirmenize ve tahmin etmenize yardımcı olmak için şirket içi ortamınız hakkında bilgi toplayın.
+- VMware için, bunu yapmak üzere VMware VM 'Leri için Dağıtım Planlayıcısı çalıştırın.
+- Fiziksel sunucular için bilgileri el ile toplayın.
 
-### <a name="run-the-deployment-planner-for-vmware-vms"></a>VMware Vm'leri için dağıtım Planlayıcısını çalıştırın
+### <a name="run-the-deployment-planner-for-vmware-vms"></a>VMware VM 'Leri için Dağıtım Planlayıcısı çalıştırma
 
-Dağıtım Planlayıcısını VMware şirket içi ortamınız hakkında bilgi toplamak için yardımcı olur.
+Dağıtım Planlayıcısı, VMware şirket içi ortamınız hakkında bilgi toplamanıza yardımcı olur.
 
-- Vm'leriniz için tipik bir değişim sıklığı temsil eden bir dönem için dağıtım Planlayıcısını çalıştırın. Bu, daha doğru tahminler ve öneriler oluşturur.
-- Planlayıcıyı üzerinde çalıştığı sunucudan aktarım hızını hesaplar olduğundan dağıtım Planlayıcısını configuration server makinesinde çalıştırmanızı öneririz. [Daha fazla bilgi edinin](site-recovery-vmware-deployment-planner-run.md#get-throughput) aktarım hızı ölçme hakkında.
-- Ayarlanan bir yapılandırma sunucusu henüz yoksa:
-    - [Genel bakışın](vmware-physical-azure-config-process-server-overview.md) Site Recovery bileşenlerinin.
-    - [Yapılandırma sunucusu ayarlarsınız](vmware-azure-deploy-configuration-server.md), dağıtım Planlayıcısını üzerinde çalıştırmak için.
+- VM 'leriniz için normal karmaşıklığı temsil eden bir dönemde Dağıtım Planlayıcısı çalıştırın. Bu, daha doğru tahminler ve öneriler oluşturur.
+- Planner, çalıştığı sunucudan üretilen işi hesaplarken, bu, yapılandırma sunucusu makinesinde Dağıtım Planlayıcısı çalıştırmanızı öneririz. Verimlilik ölçme hakkında [daha fazla bilgi edinin](site-recovery-vmware-deployment-planner-run.md#get-throughput) .
+- Henüz ayarlanmış bir yapılandırma sunucusu yoksa:
+    - Site Recovery bileşenlere [genel bakış alın](vmware-physical-azure-config-process-server-overview.md) .
+    - Üzerinde Dağıtım Planlayıcısı çalıştırmak için [bir yapılandırma sunucusu ayarlayın](vmware-azure-deploy-configuration-server.md).
 
-Ardından Planlayıcısı aşağıdaki gibi çalıştırın:
+Ardından, planlayıcısı aşağıdaki gibi çalıştırın:
 
-1. [Hakkında bilgi edinin](site-recovery-deployment-planner.md) dağıtım Planlayıcısını. Portaldan en son sürümü yükleyebilirsiniz veya [doğrudan indirin](https://aka.ms/asr-deployment-planner).
-2. Gözden geçirme [önkoşulları](site-recovery-deployment-planner.md#prerequisites) ve [en son güncelleştirmeleri](site-recovery-deployment-planner-history.md) için dağıtım Planlayıcısı ve [indirin ve ayıklayın](site-recovery-deployment-planner.md#download-and-extract-the-deployment-planner-tool) aracı.
-3. [Dağıtım Planlayıcısını çalıştırın](site-recovery-vmware-deployment-planner-run.md) yapılandırma sunucusunda.
-4. [Rapor oluşturma](site-recovery-vmware-deployment-planner-run.md#generate-report) tahminler ve öneri özetlemek için.
-5. Analiz [rapor önerileri](site-recovery-vmware-deployment-planner-analyze-report.md) ve [maliyet tahminleri](site-recovery-vmware-deployment-planner-cost-estimation.md).
+1. Dağıtım Planlayıcısı [hakkında bilgi edinin](site-recovery-deployment-planner.md) . Portaldan en son sürümü indirebilir veya [doğrudan indirebilirsiniz](https://aka.ms/asr-deployment-planner).
+2. Dağıtım Planlayıcısı için [önkoşulları](site-recovery-deployment-planner.md#prerequisites) ve [en son güncelleştirmeleri](site-recovery-deployment-planner-history.md) gözden geçirin ve aracı [indirip ayıklayın](site-recovery-deployment-planner.md#download-and-extract-the-deployment-planner-tool) .
+3. Yapılandırma sunucusunda [dağıtım planlayıcısı çalıştırın](site-recovery-vmware-deployment-planner-run.md) .
+4. Tahminleri ve önerileri özetlemek için [bir rapor oluşturun](site-recovery-vmware-deployment-planner-run.md#generate-report) .
+5. [Rapor önerilerini](site-recovery-vmware-deployment-planner-analyze-report.md) ve [maliyet tahminleri](site-recovery-vmware-deployment-planner-cost-estimation.md)' ni çözümleyin.
 
 >[!NOTE]
-> Varsayılan olarak, araç profil için yapılandırılır ve 1000'e kadar sanal makineler için bir rapor oluşturur. ASRDeploymentPlanner.exe.config dosyasındaki MaxVMsSupported anahtar değerini artırarak bu sınırı değiştirebilirsiniz.
+> Araç varsayılan olarak, en fazla 1000 VM için rapor profili ve rapor oluşturacak şekilde yapılandırılmıştır. ASRDeploymentPlanner. exe. config dosyasındaki MaxVMsSupported anahtar değerini artırarak bu sınırı değiştirebilirsiniz.
 
-## <a name="plan-target-azure-requirements-and-capacity"></a>Hedef (Azure) gereksinimleri ve kapasite planlama
+## <a name="plan-target-azure-requirements-and-capacity"></a>Hedef (Azure) gereksinimlerini ve kapasitesini planlayın
 
-Toplanan tahminler ve öneri kullanarak hedef kaynaklarını ve kapasiteyi için planlayabilirsiniz. VMware Vm'leri için dağıtım Planlayıcısı çalışmışsa faturaya bir dizi kullanabileceğiniz [rapor önerileri](site-recovery-vmware-deployment-planner-analyze-report.md#recommendations) yardımcı olacak.
+Toplanan tahminleri ve önerileri kullanarak hedef kaynakları ve kapasiteyi planlayabilirsiniz. VMware VM 'Leri için Dağıtım Planlayıcısı çalıştırdıysanız, size yardımcı olmak için bir dizi [rapor önerisi](site-recovery-vmware-deployment-planner-analyze-report.md#recommendations) kullanabilirsiniz.
 
-- **Uyumlu VM'ler**: Bu sayı, Azure'da olağanüstü durum kurtarma için hazır olan VM'lerin sayısını belirlemek için kullanın. Ağ bant genişliği ve Azure çekirdek hakkında öneriler bu sayısına dayanır.
-- **Gerekli ağ bant genişliği**: Uyumlu sanal makinelerin değişiklik çoğaltması için gereken bant genişliğini unutmayın. 
-    - Planlayıcıyı çalıştırdığınızda dakika cinsinden istenen RPO belirtin. Öneriler bu RPO, % 100 ve süre %90 karşılamak için gereken bant genişliğini gösterir. 
-    - Ağ bant genişliği önerilerini yapılandırma sunucusu ve Planner'da, önerilen işlem sunucularının toplam sayısı için gereken bant genişliğini göz önünde bulundurur.
-- **Gerekli Azure çekirdek**: Uyumlu sanal makinelerin sayısına göre temel Not Azure bölgesini hedef gereken çekirdek sayısı. Yeterli çekirdek yoksa, yük devretme işleminde Site Recovery gerekli Azure Vm'leri oluşturmak mümkün olmayacaktır.
-- **Önerilen VM toplu iş boyutu**: Önerilen toplu iş boyutu toplu işlemi için 72 saat içinde ilk çoğaltmayı tamamlamak için özelliği varsayılan olarak, bir % 100 RPO karşılamanın yanı sıra dayanır. Saat değeri değiştirilebilir.
+- **Uyumlu VM 'ler**: Azure 'a olağanüstü durum kurtarmaya yönelik VM 'lerin sayısını belirlemek için bu numarayı kullanın. Ağ bant genişliği ve Azure çekirdekleri ile ilgili öneriler bu sayıyı temel alır.
+- **Gerekli ağ bant genişliği**: uyumlu VM 'lerin Delta çoğaltması için gereken bant genişliğini aklınızda bulabilirsiniz. 
+    - Planlayıcısı çalıştırdığınızda, istenen RPO süresini dakikalar içinde belirtirsiniz. Öneriler, bu RPO %100 ve zamanın %90 ' ünü karşılamak için gereken bant genişliğini gösterir. 
+    - Ağ bant genişliği önerileri, planlayıcıda önerilen toplam yapılandırma sunucusu ve işlem sunucusu sayısı için gereken bant genişliğini dikkate alır.
+- **Gerekli Azure çekirdekleri**: uyumlu sanal makinelerin sayısına bağlı olarak, hedef Azure bölgesinde ihtiyacınız olan çekirdek sayısını göz önünde bulabilirsiniz. Yeterli çekirdekler yoksa, yük devretme Site Recovery, gerekli Azure sanal makinelerini oluşturamayacak.
+- **ÖNERILEN VM toplu iş boyutu**: önerilen toplu iş boyutu, toplu işlemin ilk çoğaltmasını 72 saat içinde varsayılan olarak bitirebilme, %100 ' i bir RPO 'ya göre değil. Saat değeri değiştirilebilir.
 
-Azure kaynakları, ağ bant genişliğini ve toplu işleme VM planlamak için bu önerileri kullanabilirsiniz.
+Azure kaynakları, ağ bant genişliği ve VM toplu işlem planlaması için bu önerileri kullanabilirsiniz.
 
-## <a name="plan-azure-subscriptions-and-quotas"></a>Azure abonelikleri ve kotalar planlama
+## <a name="plan-azure-subscriptions-and-quotas"></a>Azure abonelikleri ve kotaları planlayın
 
-Hedef abonelikte kullanılabilir kotalar yük devretme gerçekleştirmek için yeterli olduğundan emin olmak istiyoruz.
+Hedef abonelikteki kullanılabilir kotaların yük devretmeyi işlemek için yeterli olduğundan emin olmak istiyoruz.
 
 **Görev** | **Ayrıntılar** | **Eylem**
 --- | --- | ---
-**Çekirdek denetleme** | Kullanılabilir kota çekirdek eşit veya yük devretme sırasında toplam hedef sayısını aşan yoksa, yük devretme işlemleri başarısız olur. | VMware Vm'leri için dağıtım Planlayıcısı çekirdek öneri karşılamak için hedef abonelikte yeterli çekirdek sahip denetleyin.<br/><br/> Fiziksel sunucular için Azure çekirdek, el ile tahminleri karşıladığını denetleyin.<br/><br/> Azure portalında kotalar denetlenecek > **abonelik**, tıklayın **kullanım ve kotalar**.<br/><br/> [Daha fazla bilgi edinin](https://docs.microsoft.com/azure/azure-supportability/resource-manager-core-quotas-request) kota artırma hakkında.
-**Yük devretme limitlerini denetleme** | Yük devretme işlemleri sayısı, Site Recovery yük devretme sınırları aşacak gerekmez. |  Yük devretmeleri sınırları aşmanız halinde abonelikleri ekleyebilir ve birden fazla aboneliğe yük devretme veya bir abonelik için kotayı artırmak. 
+**Çekirdekleri denetleyin** | Kullanılabilir kotanın çekirdekleri, yük devretme sırasında toplam hedef sayısına eşit veya daha fazla değilse yük devretme başarısız olur. | VMware VM 'Leri için, hedef abonelikte Dağıtım Planlayıcısı temel öneriyi karşılamak üzere yeterince çekirdeğe sahip olup olmadığınızı denetleyin.<br/><br/> Fiziksel sunucular için Azure çekirdekleri el ile tahminleri karşıladığından emin olun.<br/><br/> Kotaları denetlemek için, Azure portal > **abonelikte**, **kullanım + kotalar**' a tıklayın.<br/><br/> Kotaları artırma hakkında [daha fazla bilgi edinin](https://docs.microsoft.com/azure/azure-supportability/resource-manager-core-quotas-request) .
+**Yük devretme sınırlarını denetle** | Yük devretme sayısı Site Recovery yük devretme sınırlarını aşamaz. |  Yük devretme işlemleri sınırları aşarsa, abonelikler ekleyebilir, birden fazla aboneliğe yük devreedebilir veya bir abonelik için kotayı artırabilirsiniz. 
 
 
 ### <a name="failover-limits"></a>Yük devretme sınırları
 
-Sınırları, makine başına üç disk olduğu varsayılırsa bir saat içinde desteklenen Site Recovery tarafından yük devretmeleri sayısını gösterir.
+Sınırlar, bir saat içinde Site Recovery tarafından desteklenen yük devretme sayısını belirtir ve makine başına üç disk kabul edilir.
 
-Ne anlama gelir uyumlu mu? Bir Azure VM başlatmak için Azure bazı sürücüleri önyükleme başlangıç durumda olmasını gerektirir ve otomatik olarak başlayacak şekilde ayarlamak için DHCP gibi hizmetler.
-- Uyumlu makineler zaten yerinde bu ayarlarına sahip olur.
-- Windows çalıştıran makineler için proaktif olarak uyumluluk denetleyin ve gerekirse uyumlu hale. [Daha fazla bilgi edinin](site-recovery-failover-to-azure-troubleshoot.md#failover-failed-with-error-id-170010).
-- Linux makineler yalnızca yük devretme zaman uyumlu duruma getirilir.
+Uyumluluk ne anlama geliyor? Azure VM 'yi başlatmak için, Azure 'un önyükleme başlatma durumunda bazı sürücülerin olması ve DHCP gibi hizmetlerin otomatik olarak başlayacak şekilde ayarlanması gerekir.
+- Uyumlu olan makineler bu ayarlara zaten sahip olur.
+- Windows çalıştıran makinelerde uyumluluğu önceden denetleyebilir ve gerekirse uyumlu hale getirebilirsiniz. [Daha fazla bilgi edinin](site-recovery-failover-to-azure-troubleshoot.md#failover-failed-with-error-id-170010).
+- Linux makineleri yalnızca yük devretme sırasında uyumlu hale getirilir.
 
-**Makine, Azure ile uyumludur?** | **Azure VM sınırları (yönetilen disk yük devretme)**
+**Makine Azure ile uyumlu mı?** | **Azure VM sınırları (yönetilen disk yük devretmesi)**
 --- | --- 
-Evet | 2000
+Yes | 2000
 Hayır | 1000
 
-- Sınırları, abonelik için hedef bölgede devam eden diğer işleri, diğer en az varsayılır.
-- Bazı Azure bölgeleri, küçük ve biraz daha düşük sınırlara sahip olabilir.
+- Sınırlar, aboneliğin hedef bölgesinde en az diğer işlerin devam ettiğini varsayar.
+- Bazı Azure bölgeleri daha küçüktür ve biraz daha düşük sınırlara sahip olabilir.
 
-## <a name="plan-infrastructure-and-vm-connectivity"></a>Altyapı ve VM bağlantısı planlama
+## <a name="plan-infrastructure-and-vm-connectivity"></a>Altyapı ve VM bağlantısı planlaması
 
-Azure'a yük devredildikten sonra iş yüklerinizi şirket içi olduğu gibi çalışır ve Azure Vm'lerinde çalışan iş yükleri erişmelerini sağlamak için gerekir.
+Azure 'a yük devretmeden sonra, iş yüklerinizin şirket içinde olduğu gibi çalışması ve kullanıcıların Azure VM 'lerinde çalışan iş yüklerine erişmesini sağlamak için gerekli olacaktır.
 
-- [Daha fazla bilgi edinin](site-recovery-active-directory.md#test-failover-considerations) hakkında başarısız, Active Directory ve DNS şirket içi altyapınızı Azure üzerinde.
-- [Daha fazla bilgi edinin](site-recovery-test-failover-to-azure.md#prepare-to-connect-to-azure-vms-after-failover) yük devretmeden sonra Azure Vm'lerine bağlanmak hazırlama hakkında daha fazla.
+- Active Directory veya DNS şirket içi altyapınızı Azure 'a devretmek hakkında [daha fazla bilgi edinin](site-recovery-active-directory.md#test-failover-considerations) .
+- Yük devretmeden sonra Azure VM 'lerine bağlanmaya hazırlanma hakkında [daha fazla bilgi edinin](site-recovery-test-failover-to-azure.md#prepare-to-connect-to-azure-vms-after-failover) .
 
 
 
-## <a name="plan-for-source-capacity-and-requirements"></a>Kaynak kapasitesi ve gereksinimleri için planlama
+## <a name="plan-for-source-capacity-and-requirements"></a>Kaynak kapasitesini ve gereksinimleri planlayın
 
-Yeterli yapılandırma sunucusu ve genişleme işlem sunucusu kapasite gereksinimlerini karşılamak için olması önemlidir. Büyük ölçekli dağıtıma başlamadan gibi bir yapılandırma sunucusu ve tek bir genişleme işlem sunucusu ile başlayın. Önceden belirlenmiş sınırları ulaşması gibi ek sunucular ekleyin.
+Kapasite gereksinimlerini karşılamak için yeterli yapılandırma sunucularınız ve genişleme işlem sunucularınız olması önemlidir. Büyük ölçekli dağıtımınıza başladığınızda, tek bir yapılandırma sunucusu ve tek bir genişleme işlem sunucusu ile çalışmaya başlayın. Önceden tanımlanmış sınırlara ulaştığınızda, ek sunucular ekleyin.
 
 >[!NOTE]
-> VMware Vm'leri için dağıtım Planlayıcısı ihtiyacınız yapılandırma hem de işlem sunucuları hakkında bazı öneriler sağlar. Dağıtım Planlayıcısı öneri aşağıdaki yerine aşağıdaki yordamlar, bulunan tabloları kullanmanızı öneririz. 
+> VMware VM 'Leri için Dağıtım Planlayıcısı, ihtiyacınız olan yapılandırma ve işlem sunucuları hakkında bazı öneriler sağlar. Aşağıdaki yordamlarda yer alan tabloları Dağıtım Planlayıcısı önerinin yerine kullanmanızı öneririz. 
 
 
-## <a name="set-up-a-configuration-server"></a>Yapılandırma sunucusunu ayarlama
+## <a name="set-up-a-configuration-server"></a>Yapılandırma sunucusu ayarlama
  
-Yapılandırma sunucusu kapasitesini çoğaltılan makineler sayısından etkilenir ve değil tarafından veri değişim sıklığı oranı. Ek yapılandırma sunucularına ihtiyacınız olup olmadığını anlamak için bu tanımlı VM sınırları kullanın.
+Yapılandırma sunucusu kapasitesi, veri dalgalanması hızına göre değil, çoğaltılan makine sayısından etkilenir. Ek yapılandırma sunucuları gerekip gerekmediğini anlamak için, bu tanımlı VM sınırlarını kullanın.
 
-**CPU** | **Bellek** | **Önbellek diski** | **Makine sınırı çoğaltılan**
+**CPU** | **Bellek** | **Önbellek diski** | **Çoğaltılan makine sınırı**
  --- | --- | --- | ---
-8 Vcpu<br> Yuva 2 * @ 2.5 Ghz 4 çekirdek | 16 GB | 600 TB | 550 makinelere<br> Her makine 100 GB'lık üç disk olduğu varsayılır.
+8 vCPU<br> 2 yuva * 4 çekirdek @ 2,5 GHz | 16 GB | 600 GB | 550 adede kadar makine<br> Her makinede her bir makinenin üç 100 GB diski olduğunu varsayar.
 
-- Bu sınırlar bir OVF şablonunu kullanarak yapılandırma sunucusunu temel alır.
-- Sınırları, varsayılan olarak yapılandırma sunucusunda çalıştırılan işlem sunucusu kullanmadığınızı varsayar.
+- Bu sınırlar, OVF şablonu kullanılarak ayarlanan bir yapılandırma sunucusunu temel alır.
+- Sınırlar, yapılandırma sunucusunda varsayılan olarak çalışan işlem sunucusunu kullanmadığınız varsayılır.
 
 Yeni bir yapılandırma sunucusu eklemeniz gerekiyorsa aşağıdaki yönergeleri izleyin:
 
-- [Yapılandırma sunucusu ayarlarsınız](vmware-azure-deploy-configuration-server.md) VMware VM'LERİNDE olağanüstü durum kurtarma için bir OVF şablonunu kullanarak.
-- [Yapılandırma sunucusu ayarlarsınız](physical-azure-set-up-source.md) fiziksel sunucuları için el ile veya VMware dağıtımları, bir OVF şablonunu kullanamazsınız.
+- Bir OVF şablonu kullanarak VMware VM olağanüstü durum kurtarma için [bir yapılandırma sunucusu ayarlayın](vmware-azure-deploy-configuration-server.md) .
+- Fiziksel sunucular için veya OVF şablonu kullanmıyorum VMware dağıtımları için el ile [bir yapılandırma sunucusu ayarlayın](physical-azure-set-up-source.md) .
 
-Bir yapılandırma sunucusunu ayarlama gibi dikkat edin:
+Bir yapılandırma sunucusu ayarlarken şunları unutmayın:
 
-- Bir yapılandırma sunucusunu ayarlayın, abonelik ve bunlar Kurulum sonrasında değiştirilmesi olmamalıdır beri içinde bulunduğu kasa göz önünde bulundurmanız önemlidir. Kasa değiştirmeniz gerekirse, kasa yapılandırma sunucusunun ilişkisini ve bunu yeniden kaydetmeniz gerekir. Bu kasada çoğaltma sanal makinelerinin durdurur.
-- Birden fazla ağ bağdaştırıcısı yapılandırma sunucusunu ayarlamak istiyorsanız, bu kümesi sırasında yapmalısınız. Yapılandırma sunucusunu kasaya kaydedildikten sonra bunu yapamaz.
+- Bir yapılandırma sunucusu ayarlarken, bu, kurulum sonrasında değiştirilmemesi gerektiğinden, içinde bulunduğu abonelik ve kasayı göz önünde bulundurmanız önemlidir. Kasayı değiştirmeniz gerekiyorsa, yapılandırma sunucusunun kasadan ilişkisini kaldırmak ve yeniden kaydetmeniz gerekir. Bu, kasadaki VM 'lerin çoğaltılmasını durduruyor.
+- Birden çok ağ bağdaştırıcısı ile bir yapılandırma sunucusu kurmak isterseniz, bunu ayarlama sırasında yapmanız gerekir. Bu, yapılandırma sunucusunu kasaya kaydettikten sonra bunu yapamazsınız.
 
-## <a name="set-up-a-process-server"></a>Bir işlem sunucusu ayarlama
+## <a name="set-up-a-process-server"></a>İşlem sunucusu ayarlama
 
-İşlem sunucusu kapasite, çoğaltma için etkinleştirilmiş makine sayısına göre değil ve veri değişim hızı etkilenir.
+İşlem sunucusu kapasitesi, çoğaltma için etkinleştirilen makinelerin sayısına göre değil, veri dalgalanma hızlarından etkilenir.
 
-- Büyük dağıtımlar için her zaman en az bir genişleme işlem sunucusu olmalıdır.
-- Ek sunuculara gerek olup olmadığını anlamak için aşağıdaki tabloyu kullanın.
-- En yüksek teknik özelliklerine sahip bir sunucu eklemenizi öneririz. 
+- Büyük dağıtımlarda, her zaman en az bir genişleme işlem sunucusu olmalıdır.
+- Ek sunuculara ihtiyacınız olup olmadığını anlamak için aşağıdaki tabloyu kullanın.
+- En yüksek özelliği olan bir sunucu eklemenizi öneririz. 
 
 
-**CPU** | **Bellek** | **Önbellek diski** | **Değişim oranı**
+**CPU** | **Bellek** | **Önbellek diski** | **Karmaşıklık oranı**
  --- | --- | --- | --- 
-12 Vcpu<br> Yuva 2 * @ 2.5 Ghz 6 çekirdek | 24 GB | 1 GB | Günde en fazla 2 TB
+12 vCPU<br> 2 yuva * 6 çekirdek @ 2,5 GHz | 24 GB | 1 GB | 2 TB 'a kadar gün
 
-İşlem sunucusu ayarlamadıysanız aşağıdaki gibi ayarlayın:
+İşlem sunucusunu aşağıdaki şekilde ayarlayın:
 
-1. Gözden geçirme [önkoşulları](vmware-azure-set-up-process-server-scale.md#prerequisites).
-2. Sunucu yükleme [portalı](vmware-azure-set-up-process-server-scale.md#install-from-the-ui), veya [komut satırı](vmware-azure-set-up-process-server-scale.md#install-from-the-command-line).
-3. Çoğaltılan makineler yeni sunucu kullanacak şekilde yapılandırın. Çoğaltılan makineler zaten varsa:
-    - Yapabilecekleriniz [taşıma](vmware-azure-manage-process-server.md#switch-an-entire-workload-to-another-process-server) yeni işlem sunucusu için bir işlem sunucu iş yükü.
-    - Alternatif olarak, [taşıma](vmware-azure-manage-process-server.md#move-vms-to-balance-the-process-server-load) belirli sanal makineler için yeni işlem sunucusu.
+1. [Önkoşulları](vmware-azure-set-up-process-server-scale.md#prerequisites)gözden geçirin.
+2. Sunucuyu [portala](vmware-azure-set-up-process-server-scale.md#install-from-the-ui)veya [komut satırından](vmware-azure-set-up-process-server-scale.md#install-from-the-command-line)yükler.
+3. Çoğaltılan makineleri yeni sunucuyu kullanacak şekilde yapılandırın. Zaten çoğaltma makineleriniz varsa:
+    - Tüm işlem sunucusu iş yükünü yeni işlem sunucusuna [taşıyabilirsiniz](vmware-azure-manage-process-server.md#switch-an-entire-workload-to-another-process-server) .
+    - Alternatif olarak, belirli VM 'Leri yeni işlem sunucusuna [taşıyabilirsiniz](vmware-azure-manage-process-server.md#move-vms-to-balance-the-process-server-load) .
 
 
 
-## <a name="enable-large-scale-replication"></a>Büyük ölçekli çoğaltmayı etkinleştirme
+## <a name="enable-large-scale-replication"></a>Büyük ölçekli çoğaltmayı etkinleştir
 
-Kapasite planlaması ve gerekli bileşenleri ve altyapı dağıtımı sonra çok sayıda sanal makineleri için çoğaltmayı etkinleştirin.
+Kapasiteyi planlayıp ve gerekli bileşen ve altyapıyı dağıttıktan sonra, çok sayıda VM için çoğaltmayı etkinleştirin.
 
-1. Sıralama makineleri gruplayın. Bir yığın içindeki sanal makineler için çoğaltmayı etkinleştirin ve ardından sonraki toplu geçin.
+1. Makineleri toplu işlerle sıralayın. Bir toplu iş içindeki VM 'Ler için çoğaltmayı etkinleştirin ve sonra bir sonraki toplu işe geçiş yapın.
 
-    - VMware Vm'leri için kullanabileceğiniz [önerilen VM toplu iş boyutu](site-recovery-vmware-deployment-planner-analyze-report.md#recommended-vm-batch-size-for-initial-replication) dağıtım Planlayıcısı raporu içinde.
-    - Fiziksel makineler için benzer bir boyut ve veri miktarı olan makinelere ve kullanılabilir ağ aktarım hızı göre toplu tanımlamak öneririz. Bir yandan etrafında aynı süre içinde kendi ilk çoğaltmayı tamamlamak büyük olasılıkla toplu makineler sağlamaktır.
+    - VMware VM 'Leri için Dağıtım Planlayıcısı raporunda [ÖNERILEN VM toplu iş boyutunu](site-recovery-vmware-deployment-planner-analyze-report.md#recommended-vm-batch-size-for-initial-replication) kullanabilirsiniz.
+    - Fiziksel makineler için, benzer boyut ve veri miktarına ve kullanılabilir ağ aktarım hızına sahip makinelere göre toplu işlemleri tanımlamanızı öneririz. Amacı, ilk çoğaltmasını aynı süre içinde bitirmesi muhtemel olan toplu makinelere yönelik olarak tasarlanmıştır.
     
-2. Disk değişim sıklığı bir makine için yüksek ya da dağıtım thePlanner sınırları aşıyor (günlük dökümleri veya geçici dosyaları gibi) makine çoğaltma yapmanız gerekmez, kritik olmayan dosyaları taşıyabilirsiniz. VMware Vm'leri için ayrı bir disk için bu dosyaları taşıyabilirsiniz ve ardından [o diski hariç](vmware-azure-exclude-disk.md) çoğaltmanın dışında.
-3. Çoğaltmayı etkinleştirmeden önce karşılamak makineleri denetleyin [çoğaltma gereksinimlerini](vmware-physical-azure-support-matrix.md#replicated-machines).
-4. Yapılandırma için bir çoğaltma ilkesi [VMware Vm'lerini](vmware-azure-set-up-replication.md#create-a-policy) veya [fiziksel sunucuları](physical-azure-disaster-recovery.md#create-a-replication-policy).
-5. İçin çoğaltmayı etkinleştirme [VMware Vm'lerini](vmware-azure-enable-replication.md) veya [fiziksel sunucuları](physical-azure-disaster-recovery.md#enable-replication). Seçili makineler için ilk çoğaltmayı devre dışı başlatıyor.
+2. Bir makineye yönelik disk dalgalanması yüksekse veya dağıtım planlayıcısının sınırlarını aşarsa, çoğaltma için ihtiyaç duymayan kritik olmayan dosyaları (örneğin, günlük dökümleri veya geçici dosyalar) makinede taşıyabilirsiniz. VMware VM 'Leri için, bu dosyaları ayrı bir diske taşıyabilir ve sonra [Bu diski](vmware-azure-exclude-disk.md) çoğaltmayla hariç bırakabilirsiniz.
+3. Çoğaltmayı etkinleştirmeden önce, makinelerin [çoğaltma gereksinimlerini](vmware-physical-azure-support-matrix.md#replicated-machines)karşıladığından emin olun.
+4. [VMware VM 'leri](vmware-azure-set-up-replication.md#create-a-policy) veya [fiziksel sunucular](physical-azure-disaster-recovery.md#create-a-replication-policy)için bir çoğaltma ilkesi yapılandırın.
+5. [VMware VM 'leri](vmware-azure-enable-replication.md) veya [fiziksel sunucular](physical-azure-disaster-recovery.md#enable-replication)için çoğaltmayı etkinleştirin. Bu, seçilen makineler için ilk çoğaltmayı kapatır.
 
 ## <a name="monitor-your-deployment"></a>Dağıtımınızı izleme
 
-Çoğaltma sanal makinelerinin ilk batch için kazandırın sonra dağıtımınızı şu şekilde izleme başlatın:  
+İlk VM toplu işi için çoğaltmayı başlattıktan sonra, dağıtımınızı şu şekilde izlemeye başlayın:  
 
 1. Çoğaltılan makinelerin sistem durumunu izlemek için bir olağanüstü durum kurtarma Yöneticisi atayın.
-2. [İzleme olayları](site-recovery-monitor-and-troubleshoot.md) çoğaltılan öğeler ve altyapı için.
-3. [Sistem izleme](vmware-physical-azure-monitor-process-server.md) genişleme işlem sunucularınızın.
-4. Almak için kaydolun [e-posta bildirimleri](https://docs.microsoft.com/azure/site-recovery/site-recovery-monitor-and-troubleshoot#subscribe-to-email-notifications) izlemeyi kolaylaştırmak için olaylar için.
-5. Kuralları normal [olağanüstü durum kurtarma tatbikatlarını](site-recovery-test-failover-to-azure.md), her şeyin beklendiği gibi çalıştığından emin olmak için.
+2. Çoğaltılan öğeler ve altyapı için [olayları izleyin](site-recovery-monitor-and-troubleshoot.md) .
+3. Genişleme işlem sunucularınızın [sistem durumunu izleyin](vmware-physical-azure-monitor-process-server.md) .
+4. Daha kolay izleme amacıyla olaylara yönelik [e-posta bildirimleri](https://docs.microsoft.com/azure/site-recovery/site-recovery-monitor-and-troubleshoot#subscribe-to-email-notifications) almak için kaydolun.
+5. Her şeyin beklendiği gibi çalıştığından emin olmak için düzenli [olağanüstü durum kurtarma detaylarını](site-recovery-test-failover-to-azure.md)yürütün.
 
 
-## <a name="plan-for-large-scale-failovers"></a>Büyük ölçekli yük devretmeleri planlama
+## <a name="plan-for-large-scale-failovers"></a>Büyük ölçekli yük devretme işlemleri için plan yapın
 
-Olağanüstü bir durumda, çok sayıda makineleri/iş yüklerini azure'a yük devretme yapmanız gerekebilir. Bu olay türü için aşağıdaki gibi hazırlayın.
+Olağanüstü bir durumda, çok sayıda makine/iş yükünü Azure 'a devretmek gerekebilir. Bu olay türü için aşağıdaki gibi hazırlanın.
 
-Yük devretme için şu şekilde önceden hazırlayabilirsiniz:
+Yük devretme için önceden aşağıdaki şekilde hazırlanabilirsiniz:
 
-- [Altyapınız ve Vm'leri hazırlama](#plan-infrastructure-and-vm-connectivity) böylece iş yüklerinizi yük devretmeden sonra kullanıma sunulacak ve böylece kullanıcıların Azure Vm'lerini erişebilir.
-- Not [yük devretme sınırları](#failover-limits) bu belgenin daha öncesinde. Yük devretme işlemleri bu sınırlar içinde kalacak emin olun.
-- Normal çalıştırma [olağanüstü durum kurtarma tatbikatlarını](site-recovery-test-failover-to-azure.md). Tatbikatları yardımcı olmak için:
-    - Yük devretmeden önce dağıtımınızdaki boşlukları bulun.
-    - Uygulamalarınız için uçtan uca RTO tahmin edin.
-    - İş yükleriniz için uçtan uca RPO'yu tahmin etmek.
-    - IP adresi aralığı çakışmaları belirleyin.
-    - Tatbikatları çalıştırırken, kullanmayın üretim ağları tatbikatları için üretim ve test ağlarda aynı alt ağ adları kullanmaktan kaçının ve yük devretme testi her ayrıntıya sonra temiz olmasını öneririz.
+- İş yüklerinizin yük devretmeden sonra kullanılabilmesi ve kullanıcıların Azure VM 'lerine erişebilmesi için [altyapınızı ve sanal makinelerinizi hazırlayın](#plan-infrastructure-and-vm-connectivity) .
+- Bu belgede daha önce geçen [Yük devretme sınırlarına](#failover-limits) göz önünde edin. Yük devretmeleri Bu limitlerin içinde olduğundan emin olun.
+- Düzenli [olağanüstü durum kurtarma detaylarını](site-recovery-test-failover-to-azure.md)çalıştırın. Detaydan yardım:
+    - Yük devretmeden önce dağıtımınızda boşluklar bulun.
+    - Uygulamalarınızın uçtan uca RTO tahminini yapın.
+    - İş yükleriniz için uçtan uca RPO 'yu tahmin edin.
+    - IP adres aralığı çakışmalarını belirler.
+    - Ayrıntıya gitme işlemleri yaparken, detaylara yönelik üretim ağlarını kullanmanıza, üretim ve test ağlarında aynı alt ağ adlarını kullanmaktan kaçınmanızı ve her ayrıntıdan sonra yük devretme testini temizleyeöneririz.
 
-Büyük ölçekli bir yük devretme çalıştırmak için şunları öneririz:
+Büyük ölçekli yük devretme çalıştırmak için şunları öneririz:
 
-1. İş yükü yük devretme için kurtarma planları oluşturun.
-    - Her bir kurtarma planı, en fazla 50 makine yük devretme tetikleyebilirsiniz.
-    - [Daha fazla bilgi edinin](recovery-plan-overview.md) kurtarma planları hakkında.
-2. Azure'da el ile gerçekleştirilen tüm görevleri otomatikleştirmek için kurtarma planları, Azure Otomasyonu runbook betikleri ekleyin. DNS vb. güncelleştiriliyor, yük dengeleyicileri yapılandırma tipik görevler içerir. [Daha fazla bilgi edinin](site-recovery-runbook-automation.md)
-2. Bunlar Azure ortamı ile uyumlu olacak şekilde devretmeden önce Windows makineleri hazırlayın. [Yük devretme sınırları](#plan-azure-subscriptions-and-quotas) uyumlu makinelerde daha yüksektir. [Daha fazla bilgi edinin](site-recovery-failover-to-azure-troubleshoot.md#failover-failed-with-error-id-170010) runbook'lar hakkında.
-4.  Yük devretme tetiklemek [başlangıç AzRecoveryServicesAsrPlannedFailoverJob](https://docs.microsoft.com/powershell/module/az.recoveryservices/start-azrecoveryservicesasrplannedfailoverjob?view=azps-2.0.0&viewFallbackFrom=azps-1.1.0) PowerShell cmdlet'i olan bir kurtarma planı.
+1. İş yükü yük devretmesi için kurtarma planları oluşturun.
+    - Her kurtarma planı, 50 adede kadar makinenin yük devretmesini tetikleyebilir.
+    - Kurtarma planları hakkında [daha fazla bilgi edinin](recovery-plan-overview.md) .
+2. Azure 'daki tüm el ile görevleri otomatikleştirmek için kurtarma planlarına Azure Otomasyonu runbook betikleri ekleyin. Tipik görevler yük dengeleyicileri yapılandırmayı, DNS 'yi güncellemeyi içerir. [Daha fazla bilgi](site-recovery-runbook-automation.md)
+2. Yük devretmeden önce, Windows makinelerini Azure ortamıyla uyumlu olacak şekilde hazırlayın. Uyumlu olan makineler için [Yük devretme limitleri](#plan-azure-subscriptions-and-quotas) daha yüksektir. Runbook 'lar hakkında [daha fazla bilgi edinin](site-recovery-failover-to-azure-troubleshoot.md#failover-failed-with-error-id-170010) .
+4.  Bir kurtarma planıyla birlikte [Start-AzRecoveryServicesAsrPlannedFailoverJob](https://docs.microsoft.com/powershell/module/az.recoveryservices/start-azrecoveryservicesasrplannedfailoverjob?view=azps-2.0.0&viewFallbackFrom=azps-1.1.0) PowerShell cmdlet 'i ile yük devretmeyi tetikleyin.
 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Site kurtarma İzleyicisi](site-recovery-monitor-and-troubleshoot.md)
+> [İzleyici Site Recovery](site-recovery-monitor-and-troubleshoot.md)

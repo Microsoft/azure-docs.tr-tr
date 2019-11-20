@@ -1,86 +1,82 @@
 ---
-title: Application Insights ile canlı Azure App Service uygulamalarının profilini | Microsoft Docs
-description: Azure App Service Application Insights Profiler ile canlı uygulamaları profil.
-services: application-insights
-documentationcenter: ''
-author: cweining
-manager: carmonm
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Application Insights ile canlı Azure App Service uygulamalar profili Microsoft Docs
+description: Azure App Service Application Insights Profiler ile canlı uygulamalar profilini yapın.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.reviewer: mbullwin
-ms.date: 08/06/2018
+author: cweining
 ms.author: cweining
-ms.openlocfilehash: 71a8a0e268c1b264a0a1a7f955f310bfddc830d2
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.date: 08/06/2018
+ms.reviewer: mbullwin
+ms.openlocfilehash: d463732fc8e8f488851a57fe520f138b101eb6cf
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67439950"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899949"
 ---
-# <a name="profile-live-azure-app-service-apps-with-application-insights"></a>Application Insights ile canlı Azure App Service uygulamalarını profili
+# <a name="profile-live-azure-app-service-apps-with-application-insights"></a>Application Insights ile canlı Azure App Service uygulamalar profili
 
-Profiler ASP.NET ve ASP.NET Core hakkında temel hizmet katmanı kullanarak Azure App Service üzerinde çalışan uygulamaların çalıştırabilirsiniz veya üzeri. Linux üzerinde Profiler'ı etkinleştirmek şu anda yalnızca aracılığıyla olası [bu yöntem](profiler-aspnetcore-linux.md).
+ASP.NET üzerinde profil oluşturucuyu ve temel hizmet katmanını veya üstünü kullanarak Azure App Service çalıştıran uygulamaları ASP.NET Core çalıştırabilirsiniz. Linux 'ta profil oluşturucuyu etkinleştirmek Şu anda yalnızca [Bu yöntem](profiler-aspnetcore-linux.md)aracılığıyla mümkündür.
 
-## <a id="installation"></a> Uygulamanız için Profiler'ı etkinleştir
-Bir uygulama için Profiler'ı etkinleştirmek için aşağıdaki yönergeleri izleyin. Farklı türde bir Azure hizmeti çalıştırıyorsanız, desteklenen platformlarda Profiler'ı etkinleştirmek için yönergeler şunlardır:
+## <a id="installation"></a>Uygulamanız için profil oluşturucuyu etkinleştirin
+Bir uygulama için profil oluşturucuyu etkinleştirmek üzere aşağıdaki yönergeleri izleyin. Farklı bir Azure hizmeti türü çalıştırıyorsanız, desteklenen diğer platformlarda profil oluşturucuyu etkinleştirme talimatları aşağıda verilmiştir:
 * [Cloud Services](../../azure-monitor/app/profiler-cloudservice.md?toc=/azure/azure-monitor/toc.json)
-* [Service Fabric uygulamaları](../../azure-monitor/app/profiler-servicefabric.md?toc=/azure/azure-monitor/toc.json)
+* [Service Fabric uygulamalar](../../azure-monitor/app/profiler-servicefabric.md?toc=/azure/azure-monitor/toc.json)
 * [Sanal Makineler](../../azure-monitor/app/profiler-vm.md?toc=/azure/azure-monitor/toc.json)
 
-Application Insights Profiler, uygulama hizmetleri çalışma zamanı bir parçası olarak önceden yüklenir. Aşağıdaki adımlar, uygulama hizmetiniz için etkinleştirme gösterilmektedir. App Insights SDK'sı, uygulamanızın derleme zamanında ekledik olsa bile bu adımları izleyin.
+Application Insights Profiler, App Services çalışma zamanının bir parçası olarak önceden yüklenir. Aşağıdaki adımlarda, App Service için nasıl etkinleştirileceği gösterilmektedir. Application Insights SDK 'sını uygulamanıza derleme zamanında dahil etseniz bile bu adımları izleyin.
 
-1. "Always On" ayarı, app service için etkinleştirin. App service'inizin altında genel ayarlar yapılandırma sayfasındaki ayarı güncelleştirebilirsiniz.
-1. Git **uygulama hizmetleri** bölmesinde Azure portalında.
-1. Gidin **Ayarları > Application Insights** bölmesi.
+1. App Service için "Always On" ayarını etkinleştirin. Ayarları, genel ayarlar altında App Service yapılandırma sayfasında güncelleştirebilirsiniz.
+1. Azure portal **App Services** bölmesine gidin.
+1. **Ayarlar > Application Insights** bölmesine gidin.
 
-   ![Uygulama Hizmetleri portalında App ınsights'ı etkinleştirme](./media/profiler/AppInsights-AppServices.png)
+   ![App Services portalında App Insights 'ı etkinleştirme](./media/profiler/AppInsights-AppServices.png)
 
-1. Ya da bölmede uygulamanızı izlemek için var olan App Insights kaynağı seçin veya yeni bir kaynak oluşturmak için yönergeleri izleyin. Ayrıca Profiler olduğundan emin olun **üzerinde**. Uygulama hizmetinizde farklı bir abonelikte Application Insights kaynağınıza ise, Application Insights'ı yapılandırmak için bu sayfayı kullanamazsınız. Yine de el ile gerekli uygulama ayarları, ancak oluşturarak bunu yapabilirsiniz el ile. [Sonraki bölümde Profiler el ile etkinleştirmek için yönergeler içerir.](#enable-profiler-manually-or-with-azure-resource-manager) 
+1. Uygulamanızı izlemek üzere yeni bir kaynak oluşturmak veya var olan bir Application Insights kaynağını seçmek için bölmedeki yönergeleri izleyin. Ayrıca, profil oluşturucunun **Açık**olduğundan da emin olun. Application Insights kaynağınız App Service farklı bir abonelikte yer alıyorsa Application Insights yapılandırmak için bu sayfayı kullanamazsınız. Gerekli uygulama ayarlarını el ile oluşturarak yine de bunu el ile yapabilirsiniz. [Sonraki bölümde, profil oluşturucuyu el ile etkinleştirmeye yönelik yönergeler yer alır.](#enable-profiler-manually-or-with-azure-resource-manager) 
 
    ![App Insights site uzantısı Ekle][Enablement UI]
 
-1. Profiler, artık bir uygulama hizmetleri uygulama ayarı kullanılarak etkinleştirilir.
+1. Profil Oluşturucu artık bir App Services uygulama ayarı kullanılarak etkinleştirildi.
 
-    ![Profiler uygulama ayarı][profiler-app-setting]
+    ![Profil Oluşturucu için uygulama ayarı][profiler-app-setting]
 
-## <a name="enable-profiler-manually-or-with-azure-resource-manager"></a>El ile veya Azure Resource Manager ile Profiler'ı etkinleştir
-Application Insights Profiler, Azure App Service uygulama ayarları oluşturarak etkinleştirilebilir. Yukarıda gösterilen seçenekler sayfası, bu uygulama ayarları oluşturur. Ancak, bir şablon ya da başka araçlar kullanarak bu ayarları oluşturulmasını otomatik hale getirebilirsiniz. Application Insights kaynağınıza farklı bir abonelikte, Azure App Service'in ise bu ayarlar da çalışır.
-Profiler'ı etkinleştirmek için gereken ayarları şunlardır:
+## <a name="enable-profiler-manually-or-with-azure-resource-manager"></a>Profil oluşturucuyu el ile veya Azure Resource Manager etkinleştirme
+Application Insights Profiler, Azure App Service için uygulama ayarları oluşturularak etkinleştirilebilir. Yukarıda gösterilen seçeneklere sahip sayfa sizin için bu uygulama ayarlarını oluşturur. Ancak bu ayarların oluşturulmasını, şablon veya başka yollarla otomatik hale getirebilirsiniz. Application Insights kaynağınız Azure App Service farklı bir abonelikte ise bu ayarlar da çalışacaktır.
+Profil oluşturucuyu etkinleştirmek için gereken ayarlar şunlardır:
 
 |Uygulama Ayarı    | Değer    |
 |---------------|----------|
-|APPINSIGHTS_INSTRUMENTATIONKEY         | Application Insights kaynağınızın iKey    |
+|APPINSIGHTS_INSTRUMENTATIONKEY         | Application Insights kaynağınız için Ikey    |
 |APPINSIGHTS_PROFILERFEATURE_VERSION | 1.0.0 |
-|DiagnosticServices_EXTENSION_VERSION | ~3 |
+|DiagnosticServices_EXTENSION_VERSION | ~ 3 |
 
 
-Kullanarak bu değerleri ayarlayabileceğiniz [Azure Resource Manager şablonları](../../azure-monitor/app/azure-web-apps.md#app-service-application-settings-with-azure-resource-manager), [Azure Powershell](https://docs.microsoft.com/powershell/module/az.websites/set-azwebapp), [Azure CLI](https://docs.microsoft.com/cli/azure/webapp/config/appsettings?view=azure-cli-latest).
+Bu değerleri [Azure Resource Manager şablonları](../../azure-monitor/app/azure-web-apps.md#app-service-application-settings-with-azure-resource-manager), [Azure POWERSHELL](https://docs.microsoft.com/powershell/module/az.websites/set-azwebapp), [Azure CLI](https://docs.microsoft.com/cli/azure/webapp/config/appsettings?view=azure-cli-latest)kullanarak ayarlayabilirsiniz.
 
-### <a name="enabling-profiler-for-other-clouds-manually"></a>Profiler için diğer bulutlarda el ile etkinleştirme
+### <a name="enabling-profiler-for-other-clouds-manually"></a>Diğer bulutlar için profil oluşturucuyu el ile etkinleştirme
 
-Diğer Bulutlar için Profiler'ı etkinleştirmek istiyorsanız, kullanabileceğiniz uygulama ayarları aşağıda.
+Diğer bulutlara yönelik profil oluşturucuyu etkinleştirmek istiyorsanız, aşağıdaki uygulama ayarlarını kullanabilirsiniz.
 
-|Uygulama Ayarı    | ABD kamu değerleri| Çin Bulutu |   
+|Uygulama Ayarı    | ABD devlet değerleri| Çin Bulutu |   
 |---------------|---------------------|-------------|
-|ApplicationInsightsProfilerEndpoint         | https://agent.serviceprofiler.azure.us    | https://profiler.applicationinsights.azure.cn |
-|ApplicationInsightsEndpoint | https://dc.applicationinsights.us | https://dc.applicationinsights.azure.cn |
+|Applicationınsightsprofilerendpoint         | https://agent.serviceprofiler.azure.us    | https://profiler.applicationinsights.azure.cn |
+|Applicationınsi, Sendpoint | https://dc.applicationinsights.us | https://dc.applicationinsights.azure.cn |
 
-## <a name="disable-profiler"></a>Profiler devre dışı bırak
+## <a name="disable-profiler"></a>Profil oluşturucuyu devre dışı bırak
 
-Durdurmak veya Profiler altında tek tek bir uygulamanın örneği için yeniden **Web işleri**Uygulama kaynağı'na gidin. Profiler'ı silmek için Git **uzantıları**.
+Tek bir uygulamanın örneği için profil oluşturucuyu durdurmak veya yeniden başlatmak için, **Web işleri**altında uygulama kaynağına gidin. Profil oluşturucuyu silmek için **uzantılara**gidin.
 
-![Bir web işi için Profiler devre dışı bırak][disable-profiler-webjob]
+![Web işi için profil oluşturucuyu devre dışı bırakma][disable-profiler-webjob]
 
-Profiler herhangi bir performans sorunu mümkün olduğunca erken bulmak için uygulamalarınızı tüm etkin olmasını öneririz.
+Herhangi bir performans sorununu mümkün olduğunca erken bulacak şekilde sağlamak için tüm uygulamalarınızda profil oluşturucunun etkin olmasını öneririz.
 
-Profiler'ın dosyaları WebDeploy değişiklikleri web uygulamanıza dağıtmak için kullanırken silinebilir. Silme işlemi sırasında dağıtım silindi, App_Data klasöründe hariç tutarak engelleyebilirsiniz. 
+Web uygulamanıza değişiklikler dağıtmak için WebDeploy kullanılırken profil oluşturucunun dosyaları silinebilir. App_Data klasörünün dağıtım sırasında silinmesini dışlayarak silme işlemini engelleyebilirsiniz. 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Visual Studio'da Application Insights ile çalışma](https://docs.microsoft.com/azure/application-insights/app-insights-visual-studio)
+* [Visual Studio 'da Application Insights çalışma](https://docs.microsoft.com/azure/application-insights/app-insights-visual-studio)
 
 [Enablement UI]: ./media/profiler/Enablement_UI.png
 [profiler-app-setting]:./media/profiler/profiler-app-setting.png

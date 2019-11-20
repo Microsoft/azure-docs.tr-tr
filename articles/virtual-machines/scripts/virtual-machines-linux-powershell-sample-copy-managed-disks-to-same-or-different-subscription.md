@@ -1,6 +1,6 @@
 ---
-title: Azure PowerShell betik örneği - yönetilen diskleri aynı veya farklı aboneliğe kopyalama (taşıma) | Microsoft Docs
-description: Azure PowerShell betik örneği - yönetilen diskleri aynı veya farklı aboneliğe kopyalama (taşıma)
+title: Azure PowerShell betik örneği-yönetilen diskleri aynı veya farklı aboneliğe kopyalama (taşıma)
+description: Azure PowerShell betik örneği-yönetilen diskleri aynı veya farklı aboneliğe kopyalama (taşıma)
 services: virtual-machines-linux
 documentationcenter: storage
 author: ramankumarlive
@@ -9,28 +9,27 @@ editor: tysonn
 tags: azure-service-management
 ms.assetid: ''
 ms.service: virtual-machines-linux
-ms.devlang: na
 ms.topic: sample
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 06/06/2017
 ms.author: ramankum
-ms.openlocfilehash: c063fc431578cafebac6fb412f15023ffcf70e17
-ms.sourcegitcommit: ad019f9b57c7f99652ee665b25b8fef5cd54054d
+ms.openlocfilehash: bb473a2f543c1621b99904b5a58dc7fc6625f6fc
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/02/2019
-ms.locfileid: "57248780"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74021459"
 ---
-# <a name="copy-managed-disks-in-the-same-subscription-or-different-subscription-with-powershell"></a>Yönetilen diskleri aynı abonelikte veya PowerShell ile farklı abonelikte kopyalama
+# <a name="copy-managed-disks-in-the-same-subscription-or-different-subscription-with-powershell"></a>Yönetilen diskleri aynı abonelikte veya PowerShell ile farklı bir abonelikte kopyalama
 
-Bu betik bir kopyasını mevcut bir yönetilen diski aynı aboneliğinden veya farklı bir abonelik oluşturur. Yeni disk, üst yönetilen diskin aynı bölgede oluşturulur.
+Bu betik, mevcut bir yönetilen diskin aynı abonelikte veya farklı abonelikte bir kopyasını oluşturur. Yeni disk, ana yönetilen diskle aynı bölgede oluşturulur.
 
 [!INCLUDE [sample-powershell-install](../../../includes/sample-powershell-install.md)]
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [updated-for-az-vm.md](../../../includes/updated-for-az-vm.md)]
+ 
 
 ## <a name="sample-script"></a>Örnek betik
 
@@ -42,8 +41,8 @@ Bu betik, kaynak yönetilen diskin kimliğini kullanarak hedef abonelikte yeni b
 
 | Komut | Notlar |
 |---|---|
-| [Yeni AzDiskConfig](https://docs.microsoft.com/powershell/module/az.compute/New-AzDiskConfig) | Disk oluşturmak için kullanılan disk yapılandırmasını oluşturur. Bu, kaynak kimliğini ve üst diski üst disk konumu olarak aynı konumu içerir.  |
-| [Yeni AzDisk](https://docs.microsoft.com/powershell/module/az.compute/New-AzDisk) | Parametre olarak geçirilen disk yapılandırmasını, disk adını ve kaynak grubu adını kullanarak bir disk oluşturur. |
+| [New-AzDiskConfig](https://docs.microsoft.com/powershell/module/az.compute/New-AzDiskConfig) | Disk oluşturmak için kullanılan disk yapılandırmasını oluşturur. Ana diskin kaynak kimliğini ve üst disk konumuyla aynı konumu içerir.  |
+| [New-AzDisk](https://docs.microsoft.com/powershell/module/az.compute/New-AzDisk) | Parametre olarak geçirilen disk yapılandırmasını, disk adını ve kaynak grubu adını kullanarak bir disk oluşturur. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

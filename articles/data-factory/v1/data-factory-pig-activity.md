@@ -1,31 +1,30 @@
 ---
-title: Pig etkinliği Azure Data Factory kullanarak verileri dönüştürme | Microsoft Docs
-description: Pig etkinliği Azure data factory'de bir üzerinde-istek/bilgisayarınızı kendi HDInsight kümesinde Pig betikleri çalıştırmak için nasıl kullanacağınızı öğrenin.
+title: Azure Data Factory Pig etkinliğini kullanarak verileri dönüştürme
+description: Bir Azure Data Factory 'de Pig etkinliğini kullanarak bir isteğe bağlı/kendi HDInsight kümeniz üzerinde Pig betikleri nasıl çalıştırabileceğinizi öğrenin.
 services: data-factory
 documentationcenter: ''
-author: sharonlo101
-manager: craigg
+author: djpmsft
+ms.author: daperlov
+manager: jroth
+ms.reviewer: maghan
 ms.assetid: 5af07a1a-2087-455e-a67b-a79841b4ada5
 ms.service: data-factory
 ms.workload: data-services
-ms.tgt_pltfrm: na
 ms.topic: conceptual
 ms.date: 01/10/2018
-ms.author: shlo
-robots: noindex
-ms.openlocfilehash: 78ee2c1ce402a29f1a9dfdd29f31daef09134eba
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a6861a22f853bb0b48eb7c9832adb251bc3467ca
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60611329"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73682388"
 ---
-# <a name="transform-data-using-pig-activity-in-azure-data-factory"></a>Pig etkinliği Azure Data Factory kullanarak verileri dönüştürme
+# <a name="transform-data-using-pig-activity-in-azure-data-factory"></a>Azure Data Factory Pig etkinliğini kullanarak verileri dönüştürme
 > [!div class="op_single_selector" title1="Dönüştürme etkinlikleri"]
 > * [Hive etkinliği](data-factory-hive-activity.md) 
 > * [Pig etkinliği](data-factory-pig-activity.md)
 > * [MapReduce etkinliği](data-factory-map-reduce.md)
-> * [Hadoop akış etkinliğinde](data-factory-hadoop-streaming-activity.md)
+> * [Hadoop akışı etkinliği](data-factory-hadoop-streaming-activity.md)
 > * [Spark etkinliği](data-factory-spark.md)
 > * [Machine Learning Batch Yürütme Etkinliği](data-factory-azure-ml-batch-execution-activity.md)
 > * [Machine Learning Kaynak Güncelleştirme Etkinliği](data-factory-azure-ml-update-resource-activity.md)
@@ -34,13 +33,13 @@ ms.locfileid: "60611329"
 > * [.NET özel etkinliği](data-factory-use-custom-activities.md)
 
 > [!NOTE]
-> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız bkz [Pig etkinliği, Data Factory kullanarak verileri dönüştürme](../transform-data-using-hadoop-pig.md).
+> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız, bkz. [Data Factory Pig etkinliğini kullanarak verileri dönüştürme](../transform-data-using-hadoop-pig.md).
 
 
-Data Factory, HDInsight Pig etkinliği [işlem hattı](data-factory-create-pipelines.md) üzerinde Pig sorguları yürüten [kendi](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) veya [üzerine](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) Windows/Linux tabanlı HDInsight kümesi. Bu makalede yapılar [veri dönüştürme etkinlikleri](data-factory-data-transformation-activities.md) makalesi, veri dönüştürme ve desteklenen dönüştürme etkinliklerinin genel bir bakış sunar.
+Bir [Data Factory işlem](data-factory-create-pipelines.md) hattındaki HDInsight Pig etkinliği, [kendi](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) veya [isteğe bağlı](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) Windows/Linux tabanlı HDInsight kümenizdeki Pig sorgularını yürütür. Bu makale, veri dönüştürme ve desteklenen dönüştürme etkinliklerine genel bir bakış sunan [veri dönüştürme etkinlikleri](data-factory-data-transformation-activities.md) makalesinde oluşturulur.
 
 > [!NOTE] 
-> Azure Data Factory kullanmaya yeni başladıysanız, okumak [Azure Data Factory'ye giriş](data-factory-introduction.md) ve öğretici uygulayın: [İlk veri işlem hattı oluşturma](data-factory-build-your-first-pipeline.md) bu makaleyi okuduktan önce. 
+> Azure Data Factory yeni kullanıyorsanız, [Azure Data Factory 'ye giriş](data-factory-introduction.md) ile okuyun ve öğreticiyi yapın: Bu makaleyi okumadan önce [ilk veri Işlem hattınızı oluşturun](data-factory-build-your-first-pipeline.md) . 
 
 ## <a name="syntax"></a>Sözdizimi
 
@@ -85,20 +84,20 @@ Data Factory, HDInsight Pig etkinliği [işlem hattı](data-factory-create-pipel
 
 | Özellik | Açıklama | Gerekli |
 | --- | --- | --- |
-| name |Etkinliğin adı |Evet |
-| description |Etkinliğin ne için kullanıldığını açıklayan metin |Hayır |
+| ad |Etkinliğin adı |Evet |
+| açıklama |Etkinliğin ne için kullanıldığını açıklayan metin |Hayır |
 | type |HDinsightPig |Evet |
-| inputs |Pig etkinlik tarafından kullanılan bir veya daha fazla giriş |Hayır |
-| outputs |Pig etkinliği tarafından üretilen bir veya daha fazla çıkışı |Evet |
-| linkedServiceName |Data Factory öğesinde bağlantılı hizmet olarak kayıtlı HDInsight kümesine başvuru |Evet |
-| script |Pig betiği satır içi belirtin |Hayır |
-| scriptPath |Pig betiği bir Azure blob depolama alanında Store ve dosyanın yolunu belirtin. 'Script' veya 'scriptPath' özelliğini kullanın. Her ikisi de birlikte kullanılamaz. Dosya adı büyük/küçük harfe duyarlıdır. |Hayır |
-| defines |Pig betiği içinde başvurmak için anahtar/değer çiftleri parametrelerini belirtin |Hayır |
+| girişi |Pig etkinliği tarafından tüketilen bir veya daha fazla giriş |Hayır |
+| çıkışı |Pig etkinliği tarafından üretilen bir veya daha fazla çıkış |Evet |
+| linkedServiceName |Data Factory bağlı hizmet olarak kaydedilen HDInsight kümesine başvuru |Evet |
+| betiğini çalıştırın |Pig betiğini satır içi olarak belirt |Hayır |
+| scriptPath |Pig betiğini bir Azure Blob depolama alanına depolayın ve dosyanın yolunu sağlayın. ' Script ' veya ' scriptPath ' özelliğini kullanın. İkisi birlikte kullanılamaz. Dosya adı büyük/küçük harfe duyarlıdır. |Hayır |
+| tanımlar |Pig betiği içinde başvurmak için parametreleri anahtar/değer çiftleri olarak belirtin |Hayır |
 
 ## <a name="example"></a>Örnek
-İstediğiniz analytics şirketiniz tarafından başlatılan oyun oynama oyuncu tarafından harcanan süreyi belirlemek oyun günlüklerinin bir örnek düşünelim.
+Bir oyun günlüğü analizinin bir örneğini, şirketiniz tarafından başlatılan oyuncuların oynatılması için harcadığı süreyi belirlemek istediğiniz yere göz atalım.
 
-Aşağıdaki örnek oyun günlük bir virgülle (,) dosyasıdır. Bu, aşağıdaki alanları – Profileıd, SessionStart, süre, Srcıpaddress ve GameType içerir.
+Aşağıdaki örnek oyun günlüğü, virgülle (,) ayrılmış bir dosyadır. Aşağıdaki alanları içerir: ProfileId, SessionStart, Duration, Srcıaddress ve GameType.
 
 ```
 1809,2014-05-04 12:04:25.3470000,14,221.117.223.75,CaptureFlag
@@ -108,7 +107,7 @@ Aşağıdaki örnek oyun günlük bir virgülle (,) dosyasıdır. Bu, aşağıda
 .....
 ```
 
-**Pig betiği** bu veriyi işlemek için:
+Bu verileri işlemek için **Pig betiği** :
 
 ```
 PigSampleIn = LOAD 'wasb://adfwalkthrough@anandsub14.blob.core.windows.net/samplein/' USING PigStorage(',') AS (ProfileID:chararray, SessionStart:chararray, Duration:int, SrcIPAddress:chararray, GameType:chararray);
@@ -120,18 +119,18 @@ PigSampleOut = Foreach GroupProfile Generate PigSampleIn.ProfileID, SUM(PigSampl
 Store PigSampleOut into 'wasb://adfwalkthrough@anandsub14.blob.core.windows.net/sampleoutpig/' USING PigStorage (',');
 ```
 
-Bir Data Factory işlem hattı, bu Pig betiği yürütmek için aşağıdaki adımları uygulayın:
+Bu Pig betiğini bir Data Factory işlem hattında yürütmek için aşağıdaki adımları uygulayın:
 
-1. Kaydetmek için bağlı hizmet oluşturma [kendi HDInsight işlem kümesi](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) veya yapılandırma [isteğe bağlı HDInsight işlem kümesi](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service). Bu bağlı hizmeti adlandıralım **HDInsightLinkedService**.
-2. Oluşturma bir [bağlı hizmet](data-factory-azure-blob-connector.md) verileri barındıran Azure Blob Depolama bağlantısını yapılandırmak için. Bu bağlı hizmeti adlandıralım **StorageLinkedService**.
-3. Oluşturma [veri kümeleri](data-factory-create-datasets.md) girdi ve çıktı verilerini gösteren. Giriş veri kümesi adlandıralım **PigSampleIn** ve çıktı veri kümesi **PigSampleOut**.
-4. Bir dosyada Azure Blob Depolama #2. adımda yapılandırılmış Pig sorgu kopyalayın. Verileri barındıran Azure depolama birinden sorgu dosyasını barındıran farklı ise, ayrı bir Azure depolama bağlı hizmet oluşturun. Etkinlik yapılandırması bağlı hizmette bakın. Kullanım **scriptPath** pig betik dosyasının yolunu belirtmek için ve **scriptLinkedService**. 
+1. [Kendi HDInsight işlem kümenizi](data-factory-compute-linked-services.md#azure-hdinsight-linked-service) kaydetmek veya [isteğe bağlı HDInsight işlem kümesini](data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service)yapılandırmak için bağlı bir hizmet oluşturun. Bu bağlı hizmeti **HDInsightLinkedService**arayalım.
+2. Verileri barındıran Azure Blob depolama ile bağlantıyı yapılandırmak için [bağlı bir hizmet](data-factory-azure-blob-connector.md) oluşturun. Bu bağlı hizmeti **StorageLinkedService**arayalım.
+3. Girişe ve çıkış verilerine işaret eden veri [kümeleri](data-factory-create-datasets.md) oluşturun. **Pigsamplein** giriş veri kümesini ve çıkış veri kümesi **Pigsampleout**' ı çağıralım.
+4. Pig sorgusunu, #2 adımında yapılandırılan Azure Blob depolama alanındaki bir dosyaya kopyalayın. Verileri barındıran Azure depolama, sorgu dosyasını barındıran bilgisayardan farklıysa, ayrı bir Azure depolama bağlı hizmeti oluşturun. Etkinlik yapılandırmasındaki bağlantılı hizmete bakın. **ScriptPath** kullanarak Pig betik dosyası ve **scriptlinkedservice**yolunu belirtin. 
    
    > [!NOTE]
-   > Kullanarak Pig betiği satır içi etkinliği tanımındaki sağlayabilirsiniz **betik** özelliği. Ancak, size tüm özel karakterleri kaçış için betik gereksinimleri olarak bu yaklaşım önerilmez ve hata ayıklama sorunlara neden olabilir. #4. adım izlemek için en iyi yöntem olacaktır.
+   > **Betik** özelliğini kullanarak etkinlik tanımında Pig betiğini satır içi olarak da sağlayabilirsiniz. Ancak, betikteki tüm özel karakterlerin kaçışması ve hata ayıklama sorunlarına neden olabileceği için bu yaklaşımı önermiyoruz. En iyi Yöntem #4 adımı takip etmek olacaktır.
    >
    >
-5. HDInsightPig etkinlikli işlem hattı oluşturursunuz. Bu etkinlik, HDInsight kümesinde Pig betiği çalıştırarak, girdi verilerini işleyen.
+5. HDInsightPig etkinliğiyle işlem hattını oluşturun. Bu etkinlik, HDInsight kümesinde Pig betiği çalıştırarak giriş verilerini işler.
 
     ```JSON
     {
@@ -165,15 +164,15 @@ Bir Data Factory işlem hattı, bu Pig betiği yürütmek için aşağıdaki ad�
       }
     }
     ```
-6. İşlem hattı dağıtın. Bkz: [komut zincirleri oluşturma](data-factory-create-pipelines.md) makale Ayrıntılar için. 
-7. Data factory izleme ve yönetim görünümlerini kullanarak işlem hattını izleyeceksiniz. Bkz: [izleme ve Data Factory işlem hatlarını yönetmek](data-factory-monitor-manage-pipelines.md) makale Ayrıntılar için.
+6. İşlem hattını dağıtın. Ayrıntılar için bkz. işlem [hatları oluşturma](data-factory-create-pipelines.md) makalesi. 
+7. Veri Fabrikası izleme ve yönetim görünümlerini kullanarak işlem hattını izleyin. Ayrıntılar için [Data Factory işlem hatlarını izleme ve yönetme](data-factory-monitor-manage-pipelines.md) makalesine bakın.
 
-## <a name="specifying-parameters-for-a-pig-script"></a>Pig betiği parametrelerini belirtme
-Aşağıdaki örneği göz önünde bulundurun: oyun günlüğünü Azure Blob Depolama'ya günlük içe alınan ve depolanan bir klasörde bölümlenmiş göre tarih ve saat. Pig betiği Parametreleştirme ve giriş klasörü konumu çalışma zamanı sırasında dinamik olarak geçirmek de tarih ve saat ile bölümlenmiş çıktı oluşturmak istiyorsunuz.
+## <a name="specifying-parameters-for-a-pig-script"></a>Pig betiği için parametreleri belirtme
+Aşağıdaki örneği göz önünde bulundurun: oyun günlükleri Azure Blob depolamada günlük olarak alınır ve Tarih ve saate göre bölümlenmiş bir klasörde depolanır. Pig betiğini parametreleştirmek ve giriş klasörü konumunu çalışma zamanında dinamik olarak geçirmek ve ayrıca tarih ve saat ile bölümlenen çıktıyı oluşturmak istersiniz.
 
-Parametreli Pig betiği'ni kullanmak için aşağıdakileri yapın:
+Parametreli Pig betiğini kullanmak için şunları yapın:
 
-* Parametreleri tanımlayın **tanımlar**.
+* **Tanımlar**içindeki parametreleri tanımlayın.
 
     ```JSON
     {
@@ -211,7 +210,7 @@ Parametreli Pig betiği'ni kullanmak için aşağıdakileri yapın:
       }
     }
     ```
-* Pig betik kullanarak parametreleri başvuran ' **$parameterName**' aşağıdaki örnekte gösterildiği gibi:
+* Pig komut dosyasında, aşağıdaki örnekte gösterildiği gibi, ' **$ParameterName**' kullanarak parametrelere başvurun:
 
     ```
     PigSampleIn = LOAD '$Input' USING PigStorage(',') AS (ProfileID:chararray, SessionStart:chararray, Duration:int, SrcIPAddress:chararray, GameType:chararray);
@@ -223,6 +222,6 @@ Parametreli Pig betiği'ni kullanmak için aşağıdakileri yapın:
 ## <a name="see-also"></a>Ayrıca Bkz.
 * [Hive etkinliği](data-factory-hive-activity.md)
 * [MapReduce etkinliği](data-factory-map-reduce.md)
-* [Hadoop akış etkinliğinde](data-factory-hadoop-streaming-activity.md)
+* [Hadoop akışı etkinliği](data-factory-hadoop-streaming-activity.md)
 * [Spark programlarını çağırma](data-factory-spark.md)
 * [R betiklerini çağırma](https://github.com/Azure/Azure-DataFactory/tree/master/Samples/RunRScriptUsingADFSample)

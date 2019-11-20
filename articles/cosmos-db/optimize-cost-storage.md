@@ -1,47 +1,47 @@
 ---
-title: Azure Cosmos DB'de depolama maliyetini en iyi duruma getirme
-description: Bu makalede, Azure Cosmos DB'de depolanan verilerin depolama maliyetlerini yönetmek açıklanmaktadır
-author: rimman
+title: Depolama maliyetini en uygun Azure Cosmos DB
+description: Bu makalede, Azure Cosmos DB depolanan veriler için depolama maliyetlerinin nasıl yönetileceği açıklanmaktadır
+author: markjbrown
+ms.author: mjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 05/21/2019
-ms.author: rimman
-ms.openlocfilehash: 71f1f8896126728277ba6f0bf2c0ded1b2a608b7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1508adda761fcba7ba70df3bb212d3eb4e32f242
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65967251"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72754954"
 ---
-# <a name="optimize-storage-cost-in-azure-cosmos-db"></a>Azure Cosmos DB'de depolama maliyetini en iyi duruma getirme
+# <a name="optimize-storage-cost-in-azure-cosmos-db"></a>Depolama maliyetini en uygun Azure Cosmos DB
 
-Azure Cosmos DB, sınırsız depolama ve aktarım hızı sunar. Azure Cosmos kapsayıcılar veya veritabanları sağlamak ve yapılandırmak için sahip, aktarım hızı depolama tüketim temelinde faturalandırılır. Tükettiğiniz yalnızca mantıksal depolama birimi için faturalandırılır ve herhangi bir depolama alanı önceden ayırmanıza gerek yoktur. Depolama göre otomatik olarak yukarı ve aşağı ölçeklendirir ekler veya bir Azure Cosmos DB kapsayıcısı için veriler.
+Azure Cosmos DB, sınırsız depolama ve aktarım hızı sunar. Azure Cosmos kapsayıcılarınızda veya veritabanlarında sağlamanız/yapılandırmanız gereken aktarım hızının aksine, depolama alanı tüketim temelinde faturalandırılır. Yalnızca kullandığınız mantıksal depolama alanı için faturalandırılır ve herhangi bir depolamayı önceden ayırmanız gerekmez. Depolama, bir Azure Cosmos kapsayıcısına eklediğiniz veya kaldırdığınız verilere göre otomatik olarak ölçeği artırır ve kapatır.
 
 ## <a name="storage-cost"></a>Depolama maliyeti
 
-Depolama GB birimle faturalandırılır. Yerel SSD destekli depolama, verilerinizi tarafından kullanılan ve dizin oluşturma. Kullanılan toplam depolama alanı verileri için gerekli olan depolama ve Azure Cosmos DB burada kullandığınız tüm bölgeler arasında kullanılan dizinlerin eşittir. Genel olarak bir Azure Cosmos hesabı üç bölgeler arasında çoğaltmak, her üç konusu bölgeler toplam depolama maliyeti için ödeme yaparsınız. Depolama gereksinimi tahmin etmek için bkz: [kapasite Planlayıcısı](https://www.documentdb.com/capacityplanner) aracı. Azure Cosmos DB'de depolama maliyetini 0,25 dolar GB'dir/ay bkz [fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/cosmos-db/) en son güncelleştirmeler için. Azure Cosmos kapsayıcınızı tarafından kullanılan depolama alanını belirlemek için uyarılar ayarlayın depolama alanınızı izlemek için bkz [İzleyici Azure Cosmos DB](monitor-accounts.md)) makalesi.
+Depolama birimi, GBs birimiyle faturalandırılır. Yerel SSD ile desteklenen depolama, verileriniz ve dizin oluşturma tarafından kullanılır. Kullanılan toplam depolama alanı, Azure Cosmos DB kullandığınız tüm bölgelerde kullanılan veriler ve dizinler için gereken depolama alanına eşittir. Azure Cosmos hesabını üç bölgede genel olarak çoğaltdıysanız, bu üç bölgenin her birinde toplam depolama maliyeti üzerinden ödeme yaparsınız. Depolama gereksinimini tahmin etmek için bkz. [Kapasite planlayıcısı](https://www.documentdb.com/capacityplanner) aracı. Azure Cosmos DB 'deki depolama maliyeti $0,25 GB/ay, en son güncelleştirmeler için [fiyatlandırma sayfasına](https://azure.microsoft.com/pricing/details/cosmos-db/) bakın. Azure Cosmos Kapsayıcınız tarafından kullanılan depolamayı, depolama alanınızı izlemek için, bkz. [izleyici Azure Cosmos DB](monitor-accounts.md)) makaleyi tespit etmek için uyarılar ayarlayabilirsiniz.
 
-## <a name="optimize-cost-with-item-size"></a>Maliyet öğe boyutu ile en iyi duruma getirme
+## <a name="optimize-cost-with-item-size"></a>Öğe boyutuyla maliyeti iyileştirin
 
-Azure Cosmos DB öğesi boyutunun 2 MB olmasını bekliyor veya en iyi performans ve maliyet avantajları için daha az. Depolamak için herhangi bir öğeyi veri 2 MB'tan büyük gerekiyorsa öğesi şema yeniden tasarlamayı göz önünde bulundurun. Şemayı yeniden tasarlamanız olamaz ender olayda öğesi alt öğesi Böl ve bunları mantıksal olarak bir ortak identifier(ID) ile bağlayabilirsiniz. Tüm Azure Cosmos DB özellikleri için mantıksal tanımlayıcı bağlama göre tutarlı bir şekilde çalışmaz.
+Azure Cosmos DB, en iyi performans ve maliyet avantajları için öğe boyutunun 2 MB veya daha az olmasını bekler. 2 MB 'tan fazla veri depolamak için herhangi bir öğeye ihtiyacınız varsa, öğe şemasını yeniden tasarlamayı düşünün. Şemayı yeniden tasarlayamayacağınızı nadir bir olayda, öğeyi alt öğeleri içine bölebilir ve ortak bir tanımlayıcı (ID) ile mantıksal olarak bağlayabilirsiniz. Tüm Azure Cosmos DB özellikleri, bu mantıksal tanımlayıcıya bağlayarak sürekli olarak çalışır.
 
-## <a name="optimize-cost-with-indexing"></a>Dizin oluşturma ile maliyeti iyileştirin
+## <a name="optimize-cost-with-indexing"></a>Dizin oluşturma ile maliyeti iyileştirme
 
-Varsayılan olarak, veriler otomatik olarak, hangi tüketilen toplam depolama alanı artırabilirsiniz dizine alınır. Ancak, bu ek yükü azaltmak için özel dizin ilkeleri uygulayabilirsiniz. İlke ile ayarlanan değil otomatik dizin oluşturma, öğe boyutunun yaklaşık 10-%20 olur. Kaldırma veya dizin ilkeleri özelleştirme ödemeyin ekstra maliyet yazma ve ek aktarım hızı kapasitesine gerekmez. Bkz: [Azure Cosmos DB'de dizinleme](indexing-policies.md) özel dizin oluşturma ilkeleri yapılandırmak için. Önce ilişkisel veritabanları ile çalıştıysanız, "her şeyi dizine" depolama veya üzeri Katlama anlamına düşünebilirsiniz. Ancak, Azure Cosmos DB'de ORTANCA durumda bu çok daha düşüktür. Azure Cosmos DB'de dizin depolama yükü (10-%20) genellikle düşük bir düşük depolama ayak izini için tasarlandığından bile otomatik dizin oluşturma, ile. Dizin oluşturma ilkesini yöneterek artırabilen dizin Ayak izi ve sorgu performansını daha ayrıntılı bir şekilde denetleyebilirsiniz.
+Varsayılan olarak, veriler otomatik olarak dizinlenir ve bu, tüketilen toplam depolamayı artırabilir. Bununla birlikte, bu ek yükü azaltmak için özel dizin ilkeleri de uygulayabilirsiniz. İlke aracılığıyla ayarlanmayan otomatik dizin oluşturma işlemi, öğe boyutunun% 10-20 ' sidir. Dizin ilkelerini kaldırarak veya özelleştirerek, yazma işlemleri için ek ücret ödemezsiniz ve ek verimlilik kapasitesi gerektirmez. Özel dizin oluşturma ilkelerini yapılandırmak için [Azure Cosmos DB 'de dizin oluşturma](indexing-policies.md) bölümüne bakın. Daha önce ilişkisel veritabanları ile çalıştıysanız, "her şeyi dizine" veya daha yüksek depolama alanının kattığını düşünebilirsiniz. Ancak, Azure Cosmos DB, ortanca durumunda çok daha düşüktür. Azure Cosmos DB, dizinin depolama ek yükü genellikle düşüktür (% 10-20) alt depolama alanı için tasarlandığından, Otomatik Dizin oluşturma özelliği de vardır. Dizin oluşturma ilkesini yöneterek Dizin parmak izini ve sorgu performansını daha ayrıntılı bir şekilde kontrol edebilirsiniz.
 
-## <a name="optimize-cost-with-time-to-live-and-change-feed"></a>Canlı ve değişiklik akışını zaman maliyeti iyileştirin
+## <a name="optimize-cost-with-time-to-live-and-change-feed"></a>Yaşam süresi ile maliyeti iyileştirin ve akışı değiştirin
 
-Sonra artık gereksiniminiz düzgün bir şekilde Azure Cosmos hesabınızdan kullanarak silebilirsiniz [yaşam süresi](time-to-live.md), [değişiklik akışını](change-feed.md) veya eski verileri Azure blob depolama gibi başka bir veri deposuna geçirebilirsiniz veya Azure veri ambarı. Yaşam süresi veya TTL, Azure Cosmos DB öğeleri belirli bir zaman aralığına sonra otomatik olarak bir kapsayıcıdan silme olanağı sağlar. Varsayılan olarak, zaman kapsayıcı düzeyinde canlı ve geçersiz kılma değeri öğe başına temelinde ayarlayabilirsiniz. Bir kapsayıcı veya bir öğe düzeyinde TTL ayarladıktan sonra Azure Cosmos DB son değiştirme zamanı beri bir süre sonra otomatik olarak bu öğeleri kaldırır. Değişiklik akışı kullanarak, Azure Cosmos DB'de ya da başka bir kapsayıcı veya dış veri deposuna verileri geçirebilirsiniz. Sıfır kesinti geçiş alır ve istediğiniz zaman geçişini, Bitti, silmek veya kaynak Azure Cosmos kapsayıcı silmek için yaşam süresi yapılandırabilirsiniz.
+Verilere artık ihtiyaç duyduktan sonra, verileri [canlı](time-to-live.md)hale getirerek Azure Cosmos hesabınızdan kolaylıkla silebilir, [akışı değiştirebilir](change-feed.md) veya eski verileri Azure Blob depolama veya Azure veri ambarı gibi başka bir veri deposuna geçirebilirsiniz. Yaşam süresi veya TTL ile, Azure Cosmos DB belirli bir süre sonra bir kapsayıcıdan otomatik olarak öğe silme olanağı sağlar. Varsayılan olarak, kapsayıcı düzeyinde yaşam süresi ayarlayabilir ve değeri öğe temelinde geçersiz kılabilirsiniz. TTL 'yi bir kapsayıcıda veya bir öğe düzeyinde ayarladıktan sonra, Azure Cosmos DB son değiştirilme zamanından bu yana geçen süre sonunda bu öğeleri otomatik olarak kaldırır. Değişiklik akışını kullanarak verileri Azure Cosmos DB veya bir dış veri deposuna başka bir kapsayıcıya geçirebilirsiniz. Geçiş işlemi sıfır bir süre sürer ve geçişi tamamladığınızda, kaynak Azure Cosmos kapsayıcısını silmek için yaşam süresini silebilir veya yapılandırabilirsiniz.
 
 ## <a name="optimize-cost-with-rich-media-data-types"></a>Zengin medya veri türleriyle maliyeti iyileştirin 
 
-Zengin medya türleri, örneğin, videolar, resimler, vs. depolamak istiyorsanız Azure Cosmos DB içinde birkaç seçenek vardır. Azure Cosmos öğeleri olarak bu zengin medya türleri depolamak bir seçenektir. Öğe başına 2 MB'lık bir sınır yoktur ve birden çok alt öğeler veri öğesi zincirleme tarafından bu sınırı önleyebilirsiniz. Veya Azure Blob storage'da depolamak ve bunları Azure Cosmos öğelerinizi başvurmak için meta verileri kullanın. Bir dizi Artıları ve eksileri bu yaklaşım vardır. İlk yaklaşım gecikme süresi, aktarım hızı SLA'ları ve normal Azure Cosmos öğelerinizi yanı sıra zengin medya veri türleri için anahtar teslim küresel dağıtım özellikleri açısından en iyi performansı alır. Ancak daha yüksek bir fiyatla desteği sunulmaktadır. Ortam Azure Blob Depolama alanında depolayarak, genel maliyetlerinizi düşürün. Gecikme süresinin kritik olduğu, premium depolama, Azure Cosmos öğelerinden başvurulan zengin medya dosyaları için de kullanabilirsiniz. Bu yerel olarak coğrafi kısıtlama aşmak için daha düşük maliyetle uç sunucu görüntülerini sunmak için CDN ile tümleşir. Bu senaryo ile olumsuz tarafı, iki hizmet ile - Azure Cosmos DB ve işletimsel maliyetlerinizi artırabilir Azure Blob Depolama, dağıtılacak sahip olduğunu belirtir. 
+Zengin medya türlerini (örneğin, videolar, görüntüler vb.) depolamak istiyorsanız, Azure Cosmos DB çeşitli seçenekleriniz vardır. Bunlardan biri, bu zengin medya türlerini Azure Cosmos öğeleri olarak depobir seçenektir. Öğe başına 2 MB 'lik bir sınır vardır ve veri öğesini birden çok alt tabloya zincirleyerek bu sınırdan kaçınabilirsiniz. Ya da Azure Blob depolama alanında bunları saklayabilir ve meta verileri Azure Cosmos öğelerinizden başvurmak için kullanabilirsiniz. Bu yaklaşımda birçok sayıda SP2 ve olumsuz yönleri vardır. İlk yaklaşım, düzenli Azure Cosmos öğelerinize ek olarak zengin medya veri türleri için gecikme süresi ve aktarım hızı küresel dağıtım özelliklerine sahip en iyi performansı sağlar. Ancak destek daha yüksek bir fiyatla sunulmaktadır. Medyayı Azure Blob depolamada depolayarak genel maliyetlerinizi düşürebilirsiniz. Gecikme süresi kritik ise, Azure Cosmos öğelerinden başvurulan zengin medya dosyaları için Premium Depolama kullanabilirsiniz. Bu, coğrafi kısıtlamayı aşmak için uç sunucudan daha düşük maliyetli görüntüler sunacak şekilde yerel olarak CDN ile tümleşir. Bu senaryonun aşağı tarafında, işlem maliyetlerini artıran iki hizmet Azure Cosmos DB ve Azure Blob depolama ile uğraşmanız gerekir. 
 
-## <a name="check-storage-consumed"></a>Tüketilen depolama alanını kontrol edin
+## <a name="check-storage-consumed"></a>Tüketilen depolamayı denetle
 
-Bir Azure Cosmos kapsayıcı depolama kullanımını denetlemek için kapsayıcıdaki bir baş veya GET isteği çalıştırın ve incelemek `x-ms-request-quota` ve `x-ms-request-usage` üstbilgileri. Alternatif olarak, .NET SDK ile çalışırken kullanabileceğiniz [DocumentSizeQuota](https://docs.microsoft.com/previous-versions/azure/dn850325(v%3Dazure.100)), ve [DocumentSizeUsage](https://msdn.microsoft.com/library/azure/dn850324.aspx) tüketilen depolama alanı almak için özellikleri.
+Azure Cosmos kapsayıcısının depolama tüketimini denetlemek için, kapsayıcıda bir HEAD veya GET isteği çalıştırabilir ve `x-ms-request-quota` ve `x-ms-request-usage` üst bilgilerini inceleyebilirsiniz. Alternatif olarak, .NET SDK ile çalışırken, kullanılan depolamayı almak için [Documentsizequota](https://docs.microsoft.com/previous-versions/azure/dn850325(v%3Dazure.100))ve [documentsizeusage](https://msdn.microsoft.com/library/azure/dn850324.aspx) özelliklerini kullanabilirsiniz.
 
-## <a name="using-sdk"></a>SDK'sını kullanma
+## <a name="using-sdk"></a>SDK 'Yı kullanma
 
 ```csharp
 // Measure the item size usage (which includes the index size)
@@ -52,12 +52,12 @@ Console.WriteLine("Item size quota: {0}, usage: {1}", collectionInfo.DocumentQuo
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Aşağıdaki makalelerde Azure Cosmos DB'de maliyet iyileştirmesi hakkında daha fazla bilgi edinmek için sonraki geçebilirsiniz:
+Daha sonra, aşağıdaki makalelerle Azure Cosmos DB maliyet iyileştirmesi hakkında daha fazla bilgi edinebilirsiniz:
 
-* Daha fazla bilgi edinin [en iyi duruma getirme için geliştirme ve test etme](optimize-dev-test.md)
-* Daha fazla bilgi edinin [Azure Cosmos DB faturanızı anlama](understand-your-bill.md)
-* Daha fazla bilgi edinin [aktarım hızı maliyeti en iyi duruma getirme](optimize-cost-throughput.md)
-* Daha fazla bilgi edinin [okuma ve yazma işlemleri maliyetini en iyi duruma getirme](optimize-cost-reads-writes.md)
-* Daha fazla bilgi edinin [sorguları maliyetini en iyi duruma getirme](optimize-cost-queries.md)
-* Daha fazla bilgi edinin [çok bölgeli Azure Cosmos hesapları maliyetini en iyi duruma getirme](optimize-cost-regions.md)
+* [Geliştirme ve test Için iyileştirme](optimize-dev-test.md) hakkında daha fazla bilgi edinin
+* [Azure Cosmos DB Faturanızı Anlama](understand-your-bill.md) hakkında daha fazla bilgi edinin
+* [Verimlilik maliyetini iyileştirme](optimize-cost-throughput.md) hakkında daha fazla bilgi edinin
+* [Okuma ve yazma maliyetlerini iyileştirme](optimize-cost-reads-writes.md) hakkında daha fazla bilgi edinin
+* [Sorguların maliyetini En Iyi duruma getirme](optimize-cost-queries.md) hakkında daha fazla bilgi edinin
+* [Çok bölgeli Azure Cosmos hesaplarının maliyetini En Iyi duruma getirme](optimize-cost-regions.md) hakkında daha fazla bilgi edinin
 

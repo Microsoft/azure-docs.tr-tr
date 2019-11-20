@@ -1,30 +1,30 @@
 ---
-title: Azure güvenlik duvarı kuralı işleme mantığı
-description: Azure güvenlik duvarı kuralı işleme mantığı hakkında bilgi edinin
+title: Azure Güvenlik Duvarı kural işleme mantığı
+description: Azure Güvenlik duvarında NAT kuralları, ağ kuralları ve uygulamalar kuralları vardır. Kurallar kural türüne göre işlenir.
 services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: article
-ms.date: 9/27/2018
+ms.date: 11/19/2018
 ms.author: victorh
-ms.openlocfilehash: 12d86793c0d75413559aad77c558c4adb7ac91af
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0fc11221e0ff79d6e17b93282403792fc135c2a4
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64681585"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74166782"
 ---
-# <a name="azure-firewall-rule-processing-logic"></a>Azure güvenlik duvarı kuralı işleme mantığı
-Azure güvenlik duvarı, NAT kuralları, ağ kuralları ve uygulamaları kuralları vardır. Kuralları kural türüne göre işlenir.
+# <a name="azure-firewall-rule-processing-logic"></a>Azure Güvenlik Duvarı kural işleme mantığı
+Azure Güvenlik duvarında NAT kuralları, ağ kuralları ve uygulamalar kuralları vardır. Kurallar kural türüne göre işlenir.
 
 
 ## <a name="network-rules-and-applications-rules"></a>Ağ kuralları ve uygulama kuralları 
-Ağ, uygulanan ve ardından uygulama kuralları kurallardır. Kuralları sonlandırılıyor. Ağ kuralları bir eşleşme bulunursa, bu nedenle daha sonra uygulama kuralları işlenmez.  Ağ kuralı eşleşmesi yoksa ve paket protokolü HTTP/HTTPS ise bu durumda paket uygulama kuralları tarafından değerlendirilir. Ardından hala eşleşme bulunursa, paket altyapı kural koleksiyonunda değerlendirilir. Ardından hala eşleşme yoksa paket varsayılan olarak reddedilir.
+Ağ kuralları önce uygulanır, sonra uygulama kuralları. Kurallar sonlandırılıyor. Bu nedenle, ağ kurallarında bir eşleşme bulunursa uygulama kuralları işlenmez.  Ağ kuralı eşleşmesi yoksa ve paket protokolü HTTP/HTTPS ise bu durumda paket uygulama kuralları tarafından değerlendirilir. Hala eşleşme bulunamazsa paket, altyapı kuralı koleksiyonuna göre değerlendirilir. Ardından hala eşleşme yoksa paket varsayılan olarak reddedilir.
 
 ## <a name="nat-rules"></a>NAT kuralları
-Gelen bağlantı açıklandığı gibi hedef ağ adresi çevirisi (dnat'ı) yapılandırarak etkinleştirilebilir [Öğreticisi: Azure güvenlik duvarı Azure portalını kullanarak dnat'ı ile gelen trafiği filtreleyecek](tutorial-firewall-dnat.md). Öncelikle, dnat'ı kuralları uygulanır. Bir eşleşme bulunursa, çevrilmiş trafiğine izin verecek şekilde karşılık gelen örtük bir ağ kuralı eklenir. Bu davranışı, çevrilen trafikle eşleşen reddetme kuralları olan bir ağ kural koleksiyonunu açıkça ekleyerek geçersiz kılabilirsiniz. Hiçbir uygulama kuralları, bu bağlantıları için uygulanır.
+Gelen bağlantı [, öğretici: Azure Güvenlik Duvarı ile gelen trafiği Azure Portal kullanarak](tutorial-firewall-dnat.md)hedef ağ adresi çevirisi (DNAT) yapılandırılarak etkinleştirilebilir. DNAT kuralları önce uygulanır. Bir eşleşme bulunursa, çevrilmiş trafiğe izin veren örtülü olarak karşılık gelen bir ağ kuralı eklenir. Bu davranışı, çevrilen trafikle eşleşen reddetme kuralları olan bir ağ kural koleksiyonunu açıkça ekleyerek geçersiz kılabilirsiniz. Bu bağlantılar için uygulama kuralı uygulanmaz.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bilgi edinmek için nasıl [dağıtma ve bir Azure güvenlik duvarı yapılandırma](tutorial-firewall-deploy-portal.md).
+- [Azure Güvenlik duvarını dağıtmayı ve yapılandırmayı](tutorial-firewall-deploy-portal.md)öğrenin.

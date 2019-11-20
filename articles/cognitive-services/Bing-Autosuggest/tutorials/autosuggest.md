@@ -1,23 +1,23 @@
 ---
-title: "Öğretici: Otomatik önerileri Bing otomatik öneri API'si kullanarak sonuçlarını alma"
-titlesuffix: Azure Cognitive Services
-description: Bing Otomatik Öneri özelliğini kullanma adımlarını gösterir.
+title: "Öğretici: Bing Otomatik Öneri API'si kullanarak otomatik öneri sonuçları alma"
+titleSuffix: Azure Cognitive Services
+description: Bu öğreticide, kullanıcıların Bing Otomatik Öneri API'si sorgulamasına ve sorgu sonuçlarını görüntülemesine izin veren bir Web sayfası oluşturacaksınız.
 services: cognitive-services
-author: v-jaswel
+author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-autosuggest
 ms.topic: tutorial
-ms.date: 02/20/2019
-ms.author: v-jaswel
-ms.openlocfilehash: 8a338eb6ea3dfeea2027d44487138f290f6c8803
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.date: 09/13/2019
+ms.author: aahi
+ms.openlocfilehash: 1408faf09ef8950fb0d86f8a036269da2963e3d4
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60309360"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74072834"
 ---
-# <a name="tutorial-get-search-suggestions-on-a-web-page"></a>Öğretici: Bir web sayfasında arama önerileri alın
+# <a name="tutorial-get-search-suggestions-on-a-web-page"></a>Öğretici: bir Web sayfasında arama önerileri alın
 
 Bu öğreticide kullanıcıların Bing Otomatik Öneri API'sini sorgulamasını sağlayan bir Web sayfası oluşturacağız.
 

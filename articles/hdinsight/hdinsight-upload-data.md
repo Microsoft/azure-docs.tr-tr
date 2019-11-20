@@ -1,67 +1,66 @@
 ---
-title: HDInsight, Apache Hadoop işleri için veri yükleme
-description: Klasik Azure CLI, Azure Depolama Gezgini, Azure PowerShell, Hadoop komut satırı veya Sqoop kullanarak HDInsight, Apache Hadoop işleri için erişim verileri ve nasıl yükleneceğini öğrenin.
+title: HDInsight 'ta Apache Hadoop işleri için veri yükleme
+description: Azure klasik CLı, Azure Depolama Gezgini, Azure PowerShell, Hadoop komut satırı veya Sqoop kullanarak HDInsight 'ta Apache Hadoop işleri için verileri karşıya yükleme ve verilere erişme hakkında bilgi edinin.
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdiseo17may2017
 ms.topic: conceptual
-ms.date: 06/03/2019
-ms.openlocfilehash: fceea6273f00fdf16d8934533f08bc3494795bc4
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.date: 10/29/2019
+ms.openlocfilehash: 7eb1f7e1ce02a30f84cb520438f60fcbcfa3a965
+ms.sourcegitcommit: b45ee7acf4f26ef2c09300ff2dba2eaa90e09bc7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67433274"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73100138"
 ---
-# <a name="upload-data-for-apache-hadoop-jobs-in-hdinsight"></a>HDInsight, Apache Hadoop işleri için veri yükleme
+# <a name="upload-data-for-apache-hadoop-jobs-in-hdinsight"></a>HDInsight 'ta Apache Hadoop işleri için veri yükleme
 
-Azure HDInsight, Azure depolama ve Azure Data Lake Storage (Gen1 ve 2. nesil) üzerinden bir tam özellikli Hadoop dağıtılmış dosya sistemi (HDFS) sağlar. Azure depolama ve Data Lake depolama Gen1 ve 2. nesil HDFS uzantıları müşterilere sorunsuz bir deneyim sağlamak için tasarlanmıştır. Bunlar Hadoop ekosistemindeki doğrudan yönettiği veriler üzerinde çalışılacak bileşenler kümesinin etkinleştirin. Azure depolama, Data Lake depolama Gen1 ve 2. nesil depolama verilerinin ve bu verileri hesaplamaları için optimize edilmiş farklı dosya sistemleridir. Azure depolama kullanmanın avantajları hakkında bilgi için [HDInsight ile Azure depolama kullanma](hdinsight-hadoop-use-blob-storage.md), [kullanım Data Lake depolama Gen1 HDInsight ile](hdinsight-hadoop-use-data-lake-store.md), ve [kullanım Data Lake depolama 2. nesil ile HDInsight](hdinsight-hadoop-use-data-lake-storage-gen2.md).
+Azure HDInsight, Azure Azure Data Lake Storage Depolama üzerinden tam özellikli bir Hadoop Dağıtılmış dosya sistemi (ıGen1 ve Gen2) sağlar. Azure depolama ve Data Lake Storage 1. ve Gen2, müşteriler için sorunsuz bir deneyim sunmak üzere, bir. Bu kişiler, Hadoop ekosistemindeki tüm bileşen kümesini doğrudan yönettiği verilerde çalışacak şekilde etkinleştirir. Azure Storage, Data Lake Storage 1. ve Gen2, verilerin depolanması ve bu verilerde hesaplamalar için optimize edilmiş farklı dosya sistemleridir. Azure Storage kullanmanın avantajları hakkında daha fazla bilgi için bkz. [HDInsight Ile Azure depolama 'Yı kullanma](hdinsight-hadoop-use-blob-storage.md), [HDInsight ile Data Lake Storage 1. kullanma](hdinsight-hadoop-use-data-lake-store.md)ve [HDInsight ile Data Lake Storage 2. kullanma](hdinsight-hadoop-use-data-lake-storage-gen2.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Başlamadan önce aşağıdaki gereksinimleri dikkate alın:
 
-* Bir Azure HDInsight kümesi. Yönergeler için [Azure HDInsight ile çalışmaya başlama](hadoop/apache-hadoop-linux-tutorial-get-started.md) veya [oluşturma HDInsight kümeleri](hdinsight-hadoop-provision-linux-clusters.md).
-* Aşağıdaki makalelerdeki bilgi:
+* Bir Azure HDInsight kümesi. Yönergeler için bkz. [Azure HDInsight kullanmaya başlama](hadoop/apache-hadoop-linux-tutorial-get-started.md) veya [HDInsight kümeleri oluşturma](hdinsight-hadoop-provision-linux-clusters.md).
+* Aşağıdaki makaleler hakkında bilgi:
+    * [HDInsight ile Azure depolama kullanma](hdinsight-hadoop-use-blob-storage.md)
+    * [HDInsight ile Data Lake Storage 1. kullanma](hdinsight-hadoop-use-data-lake-store.md)
+    * [HDInsight ile Data Lake Storage 2. kullanma](hdinsight-hadoop-use-data-lake-storage-gen2.md)  
 
-    - [HDInsight ile Azure Depolama'yı kullanma](hdinsight-hadoop-use-blob-storage.md)
-    - [Data Lake depolama Gen1 HDInsight ile kullanma](hdinsight-hadoop-use-data-lake-store.md)
-    - [Data Lake depolama Gen2 HDInsight ile kullanma](hdinsight-hadoop-use-data-lake-storage-gen2.md)  
-
-## <a name="upload-data-to-azure-storage"></a>Verileri Azure Depolama'ya yükleme
+## <a name="upload-data-to-azure-storage"></a>Azure depolama 'ya veri yükleme
 
 ## <a name="utilities"></a>Altyapı Hizmetleri
-Microsoft Azure depolama ile çalışmak için aşağıdaki yardımcı programlarını sağlar:
 
-| Aracı | Linux | OS X | Windows |
+Microsoft, Azure depolama ile çalışmak için aşağıdaki yardımcı programları sağlar:
+
+| Araç | Linux | OS X | Windows |
 | --- |:---:|:---:|:---:|
-| [Azure portal](../storage/blobs/storage-quickstart-blobs-portal.md) |✔ |✔ |✔ |
+| [Azure portalda](../storage/blobs/storage-quickstart-blobs-portal.md) |✔ |✔ |✔ |
 | [Azure CLI](../storage/blobs/storage-quickstart-blobs-cli.md) |✔ |✔ |✔ |
 | [Azure PowerShell](../storage/blobs/storage-quickstart-blobs-powershell.md) | | |✔ |
 | [AzCopy](../storage/common/storage-use-azcopy-v10.md) |✔ | |✔ |
 | [Hadoop komutu](#commandline) |✔ |✔ |✔ |
 
-
 > [!NOTE]  
-> Hadoop komutu yalnızca HDInsight kümesi üzerinde kullanılabilir. Komutu, yalnızca verileri yerel dosya sisteminden Azure Depolama'ya yükleme sağlar.  
-
+> Hadoop komutu yalnızca HDInsight kümesinde kullanılabilir. Komutu yalnızca yerel dosya sisteminden Azure depolama 'ya veri yüklemeye izin verir.  
 
 ## <a id="commandline"></a>Hadoop komut satırı
-Hadoop komut satırı, yalnızca veri kümesi baş düğümünde mevcut olduğunda, verileri Azure depolama blobu depolamak için yararlıdır.
 
-Hadoop komutu kullanabilmek için önce baş kullanarak bağlanmalısınız [SSH veya PuTTY](hdinsight-hadoop-linux-use-ssh-unix.md).
+Hadoop komut satırı yalnızca, veriler küme baş düğümünde zaten mevcut olduğunda Azure Storage blob 'a veri depolamak için yararlıdır.
 
-Bağlantı kurulduktan sonra dosya depolama alanına yüklemek için aşağıdaki söz dizimini kullanabilirsiniz.
+Hadoop komutunu kullanmak için önce [SSH veya PuTTY](hdinsight-hadoop-linux-use-ssh-unix.md)kullanarak baş düğümüne 'a bağlanmanız gerekir.
+
+Bağlandıktan sonra bir dosyayı depolamaya yüklemek için aşağıdaki sözdizimini kullanabilirsiniz.
 
 ```bash
-hadoop -copyFromLocal <localFilePath> <storageFilePath>
+hadoop fs -copyFromLocal <localFilePath> <storageFilePath>
 ```
 
 Örneğin, `hadoop fs -copyFromLocal data.txt /example/data/data.txt`
 
-HDInsight için varsayılan dosya sistemi Azure Storage'da /example/data.txt gerçekte Azure Depolama'da olduğu. Dosyayı farklı de başvurabilirsiniz:
+HDInsight için varsayılan dosya sistemi Azure Storage 'da olduğundan,/example/Data/Data.txt aslında Azure Storage 'da bulunur. Ayrıca dosyaya şu şekilde bakabilirsiniz:
 
     wasbs:///example/data/data.txt
 
@@ -69,44 +68,49 @@ or
 
     wasbs://<ContainerName>@<StorageAccountName>.blob.core.windows.net/example/data/davinci.txt
 
-Dosyalarla diğer Hadoop komutlarını bir listesi için bkz. [https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html)
+Dosyalarla çalışan diğer Hadoop komutlarının bir listesi için bkz. [https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html)
 
 > [!WARNING]  
-> Apache HBase kümelerinde veri yazma 256 KB olduğunda kullanılan boyutu varsayılan engelleyin. Bu HBase API'lerini veya REST API'leri kullanırken düzgün çalışır durumdayken `hadoop` veya `hdfs dfs` ~ 12 GB'tan büyük veri hatayla sonuçlanır yazmak için komutları. Daha fazla bilgi için bkz. [blob yazma için depolama özel durumu](#storageexception) bu makaledeki bir bölüm.
+> Apache HBase kümelerinde, veri yazılırken kullanılan varsayılan blok boyutu 256 KB 'dir. Bu, HBase API 'Leri veya REST API 'Leri kullanırken, en fazla ~ 12 GB 'den büyük verileri yazmak için `hadoop` veya `hdfs dfs` komutlarını kullanarak bir hatayla sonuçlanır. Daha fazla bilgi için bu makaledeki [BLOB 'da yazma için depolama özel durumu](#storageexception) bölümüne bakın.
 
-## <a name="graphical-clients"></a>Grafik istemciler
-Azure depolama ile çalışmak için bir grafik arabirim sağlayan çeşitli uygulamalar vardır. Aşağıdaki tabloda, birkaç bu uygulamaların bir listesi verilmiştir:
+## <a name="graphical-clients"></a>Grafik istemcileri
+
+Azure depolama ile çalışmak için grafik arabirimi sağlayan çeşitli uygulamalar da vardır. Aşağıdaki tabloda bu uygulamaların bir listesi verilmiştir:
 
 | İstemci | Linux | OS X | Windows |
 | --- |:---:|:---:|:---:|
 | [HDInsight için Microsoft Visual Studio Araçları](hadoop/apache-hadoop-visual-studio-tools-get-started.md#explore-linked-resources) |✔ |✔ |✔ |
 | [Azure Depolama Gezgini](../storage/blobs/storage-quickstart-blobs-storage-explorer.md) |✔ |✔ |✔ |
-| [Cerulea](https://www.cerebrata.com/products/cerulean/features/azure-storage) | | |✔ |
+| [Cerulet](https://www.cerebrata.com/products/cerulean/features/azure-storage) | | |✔ |
 | [CloudXplorer](https://clumsyleaf.com/products/cloudxplorer) | | |✔ |
-| [Microsoft Azure için cloudBerry Gezgini](https://www.cloudberrylab.com/free-microsoft-azure-explorer.aspx) | | |✔ |
-| [Cyberduck](https://cyberduck.io/) | |✔ |✔ |
+| [Microsoft Azure için Cloudbraz Explorer](https://www.cloudberrylab.com/free-microsoft-azure-explorer.aspx) | | |✔ |
+| [Sizack](https://cyberduck.io/) | |✔ |✔ |
 
+## <a name="mount-azure-storage-as-local-drive"></a>Azure Storage 'ı yerel sürücü olarak bağlama
 
-## <a name="mount-azure-storage-as-local-drive"></a>Azure depolama yerel sürücü olarak takmak
-Bkz: [yerel sürücü olarak bağlama Azure Depolama'ya](https://blogs.msdn.com/b/bigdatasupport/archive/2014/01/09/mount-azure-blob-storage-as-local-drive.aspx).
+Bkz. [Azure Storage 'ı yerel sürücü olarak bağlama](https://blogs.msdn.com/b/bigdatasupport/archive/2014/01/09/mount-azure-blob-storage-as-local-drive.aspx).
 
-## <a name="upload-using-services"></a>Hizmetleri kullanarak karşıya yükle
+## <a name="upload-using-services"></a>Hizmetleri kullanarak karşıya yükleme
+
 ### <a name="azure-data-factory"></a>Azure Data Factory
-Azure Data Factory hizmeti, kolaylaştırılmış, ölçeklenebilir ve güvenilir veri üretim komut zincirlerinde veri depolama, veri işleme ve veri taşıma hizmetleri oluşturmak için tam olarak yönetilen bir hizmettir.
+
+Azure Data Factory hizmeti, veri depolama, veri işleme ve veri taşıma hizmetlerini kolaylaştırılmış, ölçeklenebilir ve güvenilir veri üretimi işlem hatları halinde oluşturmaya yönelik tam olarak yönetilen bir hizmettir.
 
 |Depolama türü|Belgeler|
 |----|----|
-|Azure Blob depolama|[Azure Data Factory kullanarak veya Azure Blob depolamadan/depolamaya veri kopyalayın](../data-factory/connector-azure-blob-storage.md)|
-|Azure Data Lake Storage Gen1|[Azure Data Factory kullanarak Azure Data Lake depolama Gen1 gelen veya veri kopyalama](../data-factory/connector-azure-data-lake-store.md)|
-|Azure Data Lake Storage Gen2 |[Azure Data Lake depolama Gen2 Azure Data Factory ile veri yükleme](../data-factory/load-azure-data-lake-storage-gen2.md)|
+|Azure Blob depolama|[Azure Data Factory kullanarak Azure Blob depolama alanına veya veri kopyalama](../data-factory/connector-azure-blob-storage.md)|
+|Azure Data Lake Storage Gen1|[Azure Data Factory kullanarak Azure Data Lake Storage 1. veri kopyalama](../data-factory/connector-azure-data-lake-store.md)|
+|Azure Data Lake Storage Gen2 |[Azure Data Factory ile Azure Data Lake Storage 2. verileri yükleme](../data-factory/load-azure-data-lake-storage-gen2.md)|
 
 ### <a id="sqoop"></a>Apache Sqoop
-Sqoop, Hadoop ve ilişkisel veritabanları arasında veri aktarmak için tasarlanmış bir araçtır. SQL Server, MySQL veya Oracle Hadoop dağıtılmış dosya sistemi (HDFS) ile Hadoop MapReduce veya Hive ile verileri dönüştürün ve ardından bir RDBMS'de geri verileri dışarı aktarma gibi bir ilişkisel veritabanı yönetim sistemi (RDBMS), verileri içeri aktarmak için kullanabilirsiniz.
 
-Daha fazla bilgi için [HDInsight ile Sqoop kullanma](hadoop/hdinsight-use-sqoop.md).
+Sqoop, Hadoop ve ilişkisel veritabanları arasında veri aktarmak için tasarlanan bir araçtır. SQL Server, MySQL veya Oracle gibi bir ilişkisel veritabanı yönetim sisteminden (RDBMS) verileri Hadoop Dağıtılmış dosya sistemine (ISE) içeri aktarmak, Hadoop 'daki verileri MapReduce veya Hive 'e dönüştürmek ve ardından verileri bir RDBMS 'ye geri aktarmak için kullanabilirsiniz.
 
-### <a name="development-sdks"></a>Geliştirme SDK'ları
-Azure depolama, bir Azure SDK'sından aşağıdaki programlama dilleri kullanılarak da erişilebilir:
+Daha fazla bilgi için bkz. [HDInsight Ile Sqoop kullanma](hadoop/hdinsight-use-sqoop.md).
+
+### <a name="development-sdks"></a>Geliştirme SDK 'Ları
+
+Azure depolama 'ya aşağıdaki programlama dillerinden bir Azure SDK 'Sı kullanılarak da erişilebilir:
 
 * .NET
 * Java
@@ -115,11 +119,13 @@ Azure depolama, bir Azure SDK'sından aşağıdaki programlama dilleri kullanıl
 * Python
 * Ruby
 
-Azure SDK'ları yükleme hakkında daha fazla bilgi için bkz. [Azure indirmeleri](https://azure.microsoft.com/downloads/)
+Azure SDK 'larını yükleme hakkında daha fazla bilgi için bkz. [Azure İndirmeleri](https://azure.microsoft.com/downloads/)
 
 ## <a name="troubleshooting"></a>Sorun giderme
-### <a id="storageexception"></a>Blob yazma için depolama özel durumu
-**Belirtiler**: Kullanırken `hadoop` veya `hdfs dfs` ~ 12 GB olan dosyaları yazmak için komutları daha büyük bir HBase kümesi, aşağıdaki hatalardan biriyle karşılaşabilirsiniz:
+
+### <a id="storageexception"></a>Blob üzerinde yazma için depolama özel durumu
+
+**Belirtiler**: bir HBase kümesinde ~ 12 GB veya daha büyük olan dosyaları yazmak için `hadoop` veya `hdfs dfs` komutlarını kullanırken aşağıdaki hatayla karşılaşabilirsiniz:
 
     ERROR azure.NativeAzureFileSystem: Encountered Storage Exception for write on Blob : example/test_large_file.bin._COPYING_ Exception details: null Error Code : RequestBodyTooLarge
     copyFromLocal: java.io.IOException
@@ -141,31 +147,32 @@ Azure SDK'ları yükleme hakkında daha fazla bilgi için bkz. [Azure indirmeler
             at com.microsoft.azure.storage.blob.BlobOutputStream$1.call(BlobOutputStream.java:354)
             ... 7 more
 
-**Neden**: Bir blok boyutu 256 KB Azure depolama alanına yazarken varsayılan HDInsight üzerinde HBase kümeleri. HBase API'lerini veya REST API'leri için çalışırken, bir hata kullanırken sonuç `hadoop` veya `hdfs dfs` komut satırı yardımcı programları.
+**Neden**: HDInsight kümelerinde HBase, Azure depolama 'ya yazarken varsayılan olarak 256 KB 'lik bir blok boyutuna sahiptir. HBase API 'Leri veya REST API 'Leri için çalışırken, `hadoop` veya `hdfs dfs` komut satırı yardımcı programları kullanılırken bir hatayla sonuçlanır.
 
-**Çözüm**: Kullanım `fs.azure.write.request.size` daha büyük bir blok boyutunu belirtin. Kullanım başına temelinde kullanarak bunu yapabilirsiniz `-D` parametresi. Aşağıdaki komutu kullanarak bu parametre ile bir örnektir `hadoop` komutu:
+**Çözüm**: daha büyük bir blok boyutu belirtmek için `fs.azure.write.request.size` kullanın. Bunu, `-D` parametresini kullanarak kullanım başına temelinde yapabilirsiniz. Aşağıdaki komut, `hadoop` komutuyla bu parametreyi kullanan bir örnektir:
 
 ```bash
 hadoop -fs -D fs.azure.write.request.size=4194304 -copyFromLocal test_large_file.bin /example/data
 ```
 
-Ayrıca değerini artırabilirsiniz `fs.azure.write.request.size` Apache Ambari kullanarak Global olarak. Aşağıdaki adımlar, Ambari Web kullanıcı arabiriminde değeri değiştirmek için kullanılabilir:
+Ayrıca, Apache ambarı 'nı kullanarak `fs.azure.write.request.size` değerini küresel olarak artırabilirsiniz. Aşağıdaki adımlar, ambarı Web Kullanıcı arabirimindeki değeri değiştirmek için kullanılabilir:
 
-1. Tarayıcınızda, kümeniz için Ambari Web kullanıcı arabirimini gidin. Bu `https://CLUSTERNAME.azurehdinsight.net`burada `CLUSTERNAME` kümenizin adıdır.
+1. Tarayıcınızda kümeniz için ambarı Web Kullanıcı arabirimine gidin. Bu `https://CLUSTERNAME.azurehdinsight.net`, `CLUSTERNAME` kümenizin adıdır.
 
-    İstendiğinde, küme için yönetim adını ve parolasını girin.
-2. Ekranın sol tarafından seçin **HDFS**ve ardından **yapılandırmaları** sekmesi.
-3. İçinde **Filtresi...**  alanına `fs.azure.write.request.size`. Bu alanı ve sayfanın ortasındaki geçerli değeri görüntüler.
-4. Değer 262144 (256 KB) yeni değerle değiştirin. Örneğin, 4194304 (4 MB).
+    İstendiğinde, kümenin yönetici adını ve parolasını girin.
+2. Ekranın sol tarafında, bu ' ı seçin ve ardından **configs** **sekmesini seçin.**
+3. **Filter...** alanına `fs.azure.write.request.size`girin. Bu, alanı ve geçerli değeri sayfanın ortasında görüntüler.
+4. 262144 (256 KB) değerini yeni değerle değiştirin. Örneğin, 4194304 (4 MB).
 
-    ![Ambari Web kullanıcı Arabirimi aracılığıyla değerini değiştirme görüntüsü](./media/hdinsight-upload-data/hbase-change-block-write-size.png)
+    ![Ambarı Web Kullanıcı arabirimi üzerinden değerin değiştirilmesinin görüntüsü](./media/hdinsight-upload-data/hbase-change-block-write-size.png)
 
-Ambari kullanarak daha fazla bilgi için bkz: [yönetme HDInsight kümeleri Apache Ambari Web kullanıcı arabirimini kullanarak](hdinsight-hadoop-manage-ambari.md).
+Ambarı kullanma hakkında daha fazla bilgi için bkz. [Apache ambarı Web Kullanıcı arabirimini kullanarak HDInsight kümelerini yönetme](hdinsight-hadoop-manage-ambari.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-HDInsight ile verileri alma anladığınıza göre Analiz gerçekleştirme hakkında bilgi edinmek için bu makaleleri okuyun:
 
-* [Azure HDInsight ile çalışmaya başlama](hadoop/apache-hadoop-linux-tutorial-get-started.md)
-* [Program aracılığıyla Apache Hadoop işlerini gönderme](hadoop/submit-apache-hadoop-jobs-programmatically.md)
-* [Apache Hive, HDInsight ile kullanma](hadoop/hdinsight-use-hive.md)
-* [Apache Pig, HDInsight ile kullanma](hadoop/hdinsight-use-pig.md)
+HDInsight 'a nasıl veri alınacağını anladığınıza göre, analiz yapmayı öğrenmek için aşağıdaki makaleleri okuyun:
+
+* [Azure HDInsight 'ı kullanmaya başlama](hadoop/apache-hadoop-linux-tutorial-get-started.md)
+* [Apache Hadoop işleri programlı olarak gönderme](hadoop/submit-apache-hadoop-jobs-programmatically.md)
+* [HDInsight ile Apache Hive kullanma](hadoop/hdinsight-use-hive.md)
+* [HDInsight ile Apache Pig kullanma](hadoop/hdinsight-use-pig.md)

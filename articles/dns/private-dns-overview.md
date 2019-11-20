@@ -1,93 +1,81 @@
 ---
 title: Azure Özel DNS nedir?
-description: Barındırma hizmeti Microsoft Azure özel DNS genel bakış.
+description: Microsoft Azure üzerinde özel DNS barındırma hizmetine genel bakış.
 services: dns
 author: vhorne
 ms.service: dns
 ms.topic: overview
 ms.date: 6/12/2019
 ms.author: victorh
-ms.openlocfilehash: aedace031eaedf2709993b5185979e8777821759
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 152087ab3dc20dfc95cfeaa0353d961917d362d6
+ms.sourcegitcommit: 4d177e6d273bba8af03a00e8bb9fe51a447196d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67444832"
+ms.lasthandoff: 10/04/2019
+ms.locfileid: "71959343"
 ---
 # <a name="what-is-azure-private-dns"></a>Azure Özel DNS nedir?
 
-> [!IMPORTANT]
-> Azure özel DNS şu anda genel Önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir.
-> Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+Etki alanı adı sistemi veya DNS, bir hizmet adını IP adresine çevirmekten (veya çözümlemeden) sorumludur.  Azure DNS, Microsoft Azure altyapısını kullanarak ad çözümlemesi sağlayan DNS etki alanları için bir barındırma hizmetidir. İnternet 'e yönelik DNS etki alanlarını desteklemeye ek olarak, Azure DNS özel DNS bölgelerini de destekler.
 
-DNS veya etki alanı adı sistemi çevirmek için sorumludur (veya çözümleme) bir hizmet adı, IP adresi.  Azure DNS bir barındırma DNS etki alanları için Microsoft Azure altyapısı kullanılarak ad çözümlemesi olanağı sağlayan bir hizmettir. İnternet'e yönelik DNS etki alanlarınızı hizmetinin yanı sıra, Azure DNS özel DNS bölgelerini de destekler.
+Azure Özel DNS, bir sanal ağdaki etki alanı adlarını yönetmek ve çözümlemek için özel bir DNS çözümü eklemeye gerek kalmadan güvenilir, güvenli bir DNS hizmeti sağlar. Özel DNS bölgelerini kullanarak, bugün kullanılabilir olan Azure tarafından sağlanan adlar yerine kendi özel etki alanı adlarınızı kullanabilirsiniz. Özel etki alanı adları kullanmak, sanal ağ mimarinizi kuruluşunuzun ihtiyaçlarına en iyi şekilde uyarlamanıza yardımcı olur. Bir sanal ağ içinde ve sanal ağlar arasında sanal makineler (VM) için ad çözümlemesi sağlar. Ayrıca, bölge adlarını bir bölünmüş ufuk görünümüyle yapılandırarak özel ve ortak bir DNS bölgesinin adı paylaşmasına izin verir.
 
-Azure özel DNS yönetmek ve özel bir DNS çözümü eklemek zorunda kalmadan bir sanal ağdaki etki alanı adlarını çözümlemek için güvenilir, güvenli DNS hizmeti sağlar. Özel DNS bölgelerini kullanarak, Azure tarafından sağlanan mevcut adların yerine kendi özel etki alanı adlarını kullanabilirsiniz. Özel etki alanı adlarını kullanarak, sanal ağ Mimarinizi en iyi karşılayacak şekilde uyarlamak için kuruluşunuzun gereksinimlerine yardımcı olur. Sanal makineler (VM) bir sanal ağdaki ve sanal ağlar arasında ad çözümleme sağlar. Ayrıca, bölge adlarını özel ve Genel DNS bölgelerinin adı paylaşmasına izin veren bir split-horizon görünümünde ile yapılandırabilirsiniz.
+Özel bir DNS bölgesinin kayıtlarını sanal ağınızdan çözümlemek için, sanal ağı bölgeye bağlamanız gerekir. Bağlı sanal ağlar tam erişime sahiptir ve özel bölgede yayınlanan tüm DNS kayıtlarını çözümleyebilir. Ayrıca, bir sanal ağ bağlantısında de oto kaydı etkinleştirebilirsiniz. Bir sanal ağ bağlantısında oto kaydını etkinleştirirseniz, bu sanal ağdaki sanal makinelerin DNS kayıtları özel bölgeye kaydedilir. Oto kayıt etkinleştirildiğinde Azure DNS, bir sanal makine oluşturulduğunda bölge kayıtlarını da güncelleştirir, ' IP adresini değiştirir veya silinir.
 
-Özel bir DNS bölgesi sanal ağınızdan gelen kayıtları çözmek için sanal ağ ile bölgeye bağlamanız gerekir. Bağlı sanal ağlar tam erişimi vardır ve özel bölgesinde yayımlanan tüm DNS kayıtlarının çözebilirsiniz. Ayrıca, bir sanal ağ bağlantısını otomatik kayıt etkinleştirebilirsiniz. Bir sanal ağ bağlantısını otomatik kayıt etkinleştirirseniz, bu sanal ağ üzerindeki sanal makineler için DNS kayıtlarını özel bölgesinde kaydedilir. Otomatik kayıt etkin olduğunda, bir sanal makine oluşturulan her değiştiğinde Azure DNS de bölge kayıtları güncelleştirir, ' IP adresi ya da silinir.
-
-![DNS'ye genel bakış](./media/private-dns-overview/scenario.png)
+![DNS genel bakış](./media/private-dns-overview/scenario.png)
 
 > [!NOTE]
-> En iyi uygulama, kullanmayın bir *.local* özel DNS bölgeniz için etki alanı. Tüm işletim sistemleri bu destekler.
+> En iyi uygulama olarak, özel DNS bölgeniz için bir *. Local* etki alanı kullanmayın. Tüm işletim sistemleri bunu desteklemez.
 
-## <a name="benefits"></a>Avantajlar
+## <a name="benefits"></a>Yararları
 
-Azure özel DNS aşağıdaki avantajları sağlar:
+Azure Özel DNS aşağıdaki avantajları sağlar:
 
-* **Özel DNS çözümler gereksinimini ortadan kaldırır**. Daha önce birçok müşterinin sanal ağlarında DNS bölgelerini yönetmek için özel DNS çözümler oluşturuldu. Artık DNS bölgeleri oluşturma ve özel DNS çözümlerini yönetme yükünden kaldırır yerel Azure altyapısını kullanarak da yönetebilirsiniz.
+* **Özel DNS çözümleri gereksinimini ortadan kaldırır**. Daha önce, birçok müşteri, sanal ağındaki DNS bölgelerini yönetmek için özel DNS çözümleri oluşturmuştur. Artık özel DNS çözümlerini oluşturma ve yönetme yükünü ortadan kaldıran yerel Azure altyapısını kullanarak DNS bölgelerini yönetebilirsiniz.
 
-* **Tüm yaygın DNS kayıt türlerini kullanın**. Azure DNS, A, AAAA, CNAME, MX, PTR, SOA, SRV ve TXT kayıtlarını destekler.
+* **Tüm ortak DNS kayıtları türlerini kullanın**. Azure DNS, bir, AAAA, CNAME, MX, PTR, SOA, SRV ve TXT kayıtlarını destekler.
 
-* **Otomatik ana bilgisayar adı kayıt yönetimi**. Özel DNS kayıtlarınızı barındırma yanı sıra Azure belirtilen sanal ağlarda bulunan sanal makineler için ana bilgisayar adı kayıtlarını otomatik olarak korur. Bu senaryoda, gerek kalmadan özel DNS çözümler oluşturma veya uygulamaları değiştirmek için kullandığınız etki alanı adlarını iyileştirebilirsiniz.
+* **Otomatik ana bilgisayar adı kayıt yönetimi**. Özel DNS kayıtlarınızı barındırmakla birlikte, Azure belirtilen sanal ağlardaki VM 'Ler için ana bilgisayar adı kayıtlarını otomatik olarak korur. Bu senaryoda, özel DNS çözümleri oluşturmaya veya uygulamaları değiştirmeye gerek kalmadan kullandığınız etki alanı adlarını iyileştirebilirsiniz.
 
-* **Sanal ağlar arasında ana bilgisayar adı çözümlemesi**. Azure tarafından sağlanan ana bilgisayar adlarından farklı olarak, özel DNS bölgelerini sanal ağlar arasında paylaşılabilir. Bu özellik, sanal ağ eşlemesi gibi arası ağ ve hizmet bulma senaryolarını basitleştirir.
+* **Sanal ağlar arasında konak adı çözümlemesi**. Azure tarafından sunulan ana bilgisayar adlarından farklı olarak, özel DNS bölgeleri sanal ağlar arasında paylaşılabilir. Bu özellik, sanal ağ eşlemesi gibi ağlar arası ve hizmet bulma senaryolarını basitleştirir.
 
-* **Alışık olduğunuz araçları ve kullanıcı deneyimi**. Öğrenme eğrisini azaltmak için bu hizmeti Azure DNS tanınmış Araçlar (Azure portalı, Azure PowerShell, Azure CLI, Azure Resource Manager şablonları ve REST API) kullanır.
+* **Tanıdık araçlar ve Kullanıcı deneyimi**. Bu hizmet, öğrenme eğrisini azaltmak için iyi kurulu Azure DNS araçları (Azure portal, Azure PowerShell, Azure CLı, Azure Resource Manager şablonları ve REST API) kullanır.
 
-* **Bölme DNS desteği**. Azure DNS ile aynı ada sahip bir sanal ağ içinde ve genel internet'ten farklı yanıtlardan çözümlenmesi bölgeler oluşturabilirsiniz. Bölme DNS için tipik bir senaryo, ayrılmış bir sanal ağınız içindeki kullanım için bir hizmet sürümünü sağlamaktır.
+* **Bölünmüş ufuk DNS desteği**. Azure DNS ile, bir sanal ağ içinden ve genel İnternet 'ten farklı yanıtlara çözüm veren aynı ada sahip bölgeler oluşturabilirsiniz. Bölünmüş ufku DNS için tipik bir senaryo, sanal ağınızın içinde kullanılmak üzere bir hizmetin adanmış bir sürümünü sağlamaktır.
 
-* **Tüm Azure bölgelerinde kullanılabilir**. Azure DNS özel bölgelerini özelliği, Azure genel bulutundaki tüm Azure bölgelerinde kullanılabilir.
+* **Tüm Azure bölgelerinde kullanılabilir**. Azure DNS özel bölgeler özelliği, Azure genel bulutundaki tüm Azure bölgelerinde kullanılabilir.
 
 ## <a name="capabilities"></a>Özellikler
 
-Azure DNS, aşağıdaki özellikleri sağlar:
+Azure DNS aşağıdaki özellikleri sağlar:
 
-* **Özel bir bölgeye otomatik kayıt etkin ile bağlı bir sanal ağdan sanal makinelerin otomatik kayıt**. Sanal makineler kayıtlı (eklendi) için özel IP adreslerine işaret eden bir kayıt olarak özel bölgeye olur. Bir sanal makinede etkin otomatik kayıt içeren bir sanal ağa bağlantı silindiğinde, Azure DNS bağlı özel bölgeden karşılık gelen DNS kaydını da otomatik olarak kaldırır.
+* **Otomatik kayıt etkin olan bir özel bölgeye bağlı bir sanal ağ sanal makinelerin otomatik olarak kaydı**. Sanal makineler, özel IP adreslerine işaret eden kayıtlar olarak özel bölgeye kaydedilir (eklenir). Bir sanal ağ bağlantısı içindeki otomatik kayıt etkinken bir sanal makine silindiğinde, ilgili DNS kaydını otomatik olarak bağlı özel bölgeden da kaldırır Azure DNS.
 
-* **İleriye doğru DNS çözümlemesi, özel bölgesiyle bağlantılı sanal ağlar desteklenir**. DNS çözümlemesi arası sanal ağ için olduğunu açık bağımlılığı olmayan sanal ağlar birbiriyle eşlenmiş gibi. Ancak, diğer senaryolar (örneğin, HTTP trafiğini) için sanal ağları eşleyebilme isteyebilirsiniz.
+* **ILERI DNS çözümlemesi, özel bölgeye bağlı sanal ağlar arasında desteklenir**. Çapraz sanal ağ DNS çözümlemesi için, sanal ağların birbirleriyle eşlenme gibi açık bir bağımlılık yoktur. Bununla birlikte, sanal ağların diğer senaryolar için (örneğin, HTTP trafiği) eşdüzey olmasını isteyebilirsiniz.
 
-* **Geriye doğru DNS araması sanal ağ kapsamı içinde desteklenen**. Özel bir bölgesi için atanmış sanal ağ içindeki özel bir IP için ters DNS araması konak/kayıt adı ve bölge adı soneki içeren FQDN döndürür.
+* **Ters DNS araması, sanal ağ kapsamı içinde desteklenir**. Özel bir bölgeye atanan sanal ağ içindeki özel bir IP için ters DNS araması, ana bilgisayar/kayıt adını ve sonek olarak bölge adını içeren FQDN 'yi döndürür.
 
-## <a name="known-issues"></a>Bilinen sorunlar
-Bilinen hataları ve sorunları Önizleme sürümünde aşağıdaki öğeler şunlardır:
-* Özel bir DNS bölgesi için bağlı bir sanal ağ silerseniz, özel DNS bölgesi bağlantılar silmez. Sanal ağ ile aynı adı ve kaynak grubu oluşturmanız ve tüm özel DNS bölgesi için bağlantısını yeniden denemek bağlantı başarısız olur. Bu sorunu geçici olarak çözmek için farklı bir kaynak grubunda veya farklı bir adla aynı kaynak grubunda sanal ağ oluşturun.
-* Bir sanal ağ başka bir kaynak grubuna veya aboneliğe taşıma, özel DNS bölgesi için bağlantıları güncelleştirmez. Taşınan sanal ağ için ad çözümlemesi çalışmaya, ancak özel DNS bölgenizi, sanal ağ bağlantıları'nı görüntülediğinizde, sanal ağın eski ARM kimlikleri görürsünüz devam eder.
-* Şu anda barındırılan BAE Kuzey BAE Orta, Güney Afrika Batı, Güney Afrika Kuzey, Doğu Kanada, Fransa Güney bağlı sanal ağlar başarısız olabilir ve aralıklı DNS çözümlemesi sorunları görebilirsiniz. 
+## <a name="other-considerations"></a>Diğer konular
 
+Azure DNS aşağıdaki sınırlamalara sahiptir:
 
-## <a name="other-considerations"></a>Dikkat edilecek diğer noktalar
-
-Azure DNS, aşağıdaki sınırlamalara sahiptir:
-
-* VM DNS kayıtlarının otomatik kayıt etkinse, gibi belirli bir sanal ağ için yalnızca bir özel bölge bağlanabilir. Ancak, tek bir DNS bölgesi için birden çok sanal ağı bağlayabilirsiniz.
-* Yalnızca bağlı sanal ağ özel IP alanı için ters DNS çalışır
-* Bağlı bir sanal ağ için özel bir IP için ters DNS "internal.cloudapp.net" sanal makine için varsayılan ön ek olarak döndürür. Özel bir IP ile varsayılan 2 FQDN'leri soneki döndürür için özel bir bölgeye otomatik kayıt etkin ile bağlı sanal ağlar için ters DNS *internal.cloudapp.net* ve başka bir özel bölge soneki.
-* Koşullu iletme, şu anda yerel olarak desteklenmiyor. Azure ve şirket içi ağlar arasında çözüm sağlamak için. Bkz: [VM'ler ve rol örnekleri için ad çözümlemesi](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md)
+* Belirli bir sanal ağ, VM DNS kayıtlarının otomatik kaydı etkinse yalnızca bir özel bölgeye bağlanabilir. Ancak, birden çok sanal ağı tek bir DNS bölgesine bağlayabilirsiniz.
+* Ters DNS yalnızca bağlı sanal ağdaki özel IP alanı için geçerlidir
+* Bağlı bir sanal ağın özel IP adresi için ters DNS, sanal makine için varsayılan sonek olarak *internal.cloudapp.net* döndürür. Gizli bir IP adresi için bir özel bölgeye bağlı sanal ağlar için, bir özel IP adresi için ters DNS iki FQDN döndürür: biri varsayılan sonek *internal.cloudapp.net* ve özel bölge sonekiyle bir diğeri.
+* Koşullu iletme Şu anda yerel olarak desteklenmiyor. Azure ile şirket içi ağlar arasında çözünürlüğü etkinleştirmek için. Bkz. [VM 'ler ve rol örnekleri Için ad çözümlemesi](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md)
  
 ## <a name="pricing"></a>Fiyatlandırma
 
-Fiyatlandırma bilgileri için bkz: [Azure DNS fiyatlandırma](https://azure.microsoft.com/pricing/details/dns/).
+Fiyatlandırma bilgileri için bkz. [Azure DNS fiyatlandırması](https://azure.microsoft.com/pricing/details/dns/).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Kullanarak Azure DNS özel bölgesi oluşturmayı öğrenin [Azure PowerShell](./private-dns-getstarted-powershell.md) veya [Azure CLI](./private-dns-getstarted-cli.md).
+* [Azure PowerShell](./private-dns-getstarted-powershell.md) veya [Azure CLI](./private-dns-getstarted-cli.md)kullanarak Azure DNS bir özel bölge oluşturmayı öğrenin.
 
-* Bazı ortak hakkında okuyun [özel bölge senaryoları](./private-dns-scenarios.md) Azure DNS'te özel bölgeler ile gerçekleştirilebilecek.
+* Azure DNS özel bölgelerle gerçekleştirilen bazı yaygın [özel bölge senaryoları](./private-dns-scenarios.md) hakkında bilgi edinin.
 
-* Yaygın sorular ve yanıtlar hakkında Azure DNS özel bölgeleri için de dahil olmak üzere belirli bir davranışı, belirli türde operasyonlar beklediğiniz, bakın [özel DNS SSS](./dns-faq-private.md).
+* Belirli işlemler için bekleneceğiniz belirli davranış dahil olmak üzere Azure DNS özel bölgeler hakkında sık sorulan sorular ve yanıtlar için, bkz. [özel DNS SSS](./dns-faq-private.md).
 
-* DNS bölgeleri ve kayıtları hakkında ederek bilgi [DNS bölgeleri ve kayıtları genel bakış](dns-zones-records.md).
+* DNS bölgelerini ve [kayıtları](dns-zones-records.md)ziyaret ederek DNS bölgeleri ve kayıtları hakkında bilgi edinin.
 
-* Azure'un diğer önemli [ağ özelliklerinden](../networking/networking-overview.md) bazıları hakkında bilgi edinin.
+* Azure 'un diğer önemli [ağ özellikleri](../networking/networking-overview.md) hakkında bilgi edinin.

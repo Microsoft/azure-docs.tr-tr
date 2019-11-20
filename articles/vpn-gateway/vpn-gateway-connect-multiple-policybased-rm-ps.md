@@ -1,75 +1,75 @@
 ---
-title: 'Birden çok şirket içi ilke tabanlı VPN cihazı Azure VPN ağ geçitlerine bağlanın: Azure Resource Manager: PowerShell | Microsoft Docs'
-description: Bir Azure rota tabanlı VPN ağ geçidi için Azure Resource Manager ve PowerShell kullanarak birden çok ilke tabanlı VPN cihazı yapılandırma.
+title: 'Azure VPN Gateway: ağ geçitlerini birden çok şirket içi ilke tabanlı VPN cihazına bağlama'
+description: Azure Resource Manager ve PowerShell kullanarak birden çok ilke tabanlı VPN cihazına Azure rota tabanlı bir VPN ağ geçidi yapılandırın.
 services: vpn-gateway
 documentationcenter: na
 author: yushwang
 ms.service: vpn-gateway
 ms.topic: conceptual
-ms.date: 11/30/2018
+ms.date: 10/17/2019
 ms.author: yushwang
-ms.openlocfilehash: 9085d5ee21b1e955b7d9416a379ee730ba26ad3e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f307e37debe47d2d352b1a375259fe7a0d6dd3cd
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66150097"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74146707"
 ---
-# <a name="connect-azure-vpn-gateways-to-multiple-on-premises-policy-based-vpn-devices-using-powershell"></a>PowerShell kullanarak birden fazla şirket içi ilke tabanlı VPN cihazı Azure VPN ağ geçitlerini bağlama
+# <a name="connect-azure-vpn-gateways-to-multiple-on-premises-policy-based-vpn-devices-using-powershell"></a>PowerShell kullanarak Azure VPN ağ geçitlerini birden çok şirket içi ilke tabanlı VPN cihazına bağlama
 
-Bu makalede S2S VPN bağlantıları üzerinde özel IPSec/IKE ilkeleri yararlanarak birden çok şirket içi ilke tabanlı VPN cihazına bağlanmak için bir Azure rota tabanlı VPN ağ geçidini yapılandırmanıza yardımcı olur.
+Bu makale, Azure rota tabanlı bir VPN ağ geçidini, S2S VPN bağlantılarında özel IPSec/ıKE ilkeleri kullanan birden çok şirket içi ilke tabanlı VPN cihazına bağlanmak üzere yapılandırmanıza yardımcı olur.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="about"></a>İlke tabanlı ve rota tabanlı VPN ağ geçitleri hakkında
 
-İlke - *karşılaştırması* rota tabanlı VPN cihazı farklı IPSec trafik seçicileri bir bağlantıda nasıl ayarlanır:
+İlke-ve rota tabanlı VPN cihazları, IPSec trafik seçicilerin bir bağlantıda nasıl *ayarlananlara* göre farklılık gösterir:
 
-* **İlke tabanlı** VPN cihazları nasıl şifrelenmiş/şifresi IPSec tüneller trafiği tanımlamak için her iki ağ ön ekleri birleşimlerini kullanın. Ayrıca, güvenlik duvarı cihazlarda paket filtreleme işlemleri genellikle oluşturulmuştur. IPSec tüneli şifreleme ve şifre çözme, filtreleme ve işleme paketi eklenir.
-* **Rota tabanlı** VPN cihazları herhangi bir ağdan herhangi (joker karakterler) trafik seçicileri kullanın ve IPSec tüneli farklı tablolar doğrudan trafik yönlendirme/iletme olanak tanır. Genellikle, her bir IPSec tünel ağ arabirimiyle ya da VTI (sanal tunnel arabirimi) nerede modellenmiş yönlendirici platformlarda oluşturulmuştur.
+* **İlke tabanlı** VPN cihazları, trafiğin IPsec tünelleriyle nasıl şifrelendiğini/çözülemediğini tanımlamak için her iki ağdan gelen ön eklerin birleşimini kullanır. Genellikle paket filtrelemesi gerçekleştiren güvenlik duvarı cihazlarında oluşturulur. IPSec tünel şifreleme ve şifre çözme, paket filtreleme ve işleme motoruna eklenir.
+* **Rota tabanlı** VPN cihazları herhangi bir ile herhangi bir (joker karakter) trafik seçicileri kullanır ve tabloları yönlendirme/iletme tablolarının farklı IPSec tünellerinin doğrudan trafiğine izin verir. Genellikle her ıpsec tünelinin bir ağ arabirimi veya VTı (sanal tünel arabirimi) olarak modellendiği yönlendirici platformları üzerine kurulmuştur.
 
-Aşağıdaki diyagramlarda iki modeli seçin:
+Aşağıdaki diyagramlar iki modeli vurgulayacaktır:
 
 ### <a name="policy-based-vpn-example"></a>İlke tabanlı VPN örneği
-![İlke tabanlı](./media/vpn-gateway-connect-multiple-policybased-rm-ps/policybasedmultisite.png)
+![ilke tabanlı](./media/vpn-gateway-connect-multiple-policybased-rm-ps/policybasedmultisite.png)
 
 ### <a name="route-based-vpn-example"></a>Rota tabanlı VPN örneği
-![Rota tabanlı](./media/vpn-gateway-connect-multiple-policybased-rm-ps/routebasedmultisite.png)
+![rota tabanlı](./media/vpn-gateway-connect-multiple-policybased-rm-ps/routebasedmultisite.png)
 
 ### <a name="azure-support-for-policy-based-vpn"></a>İlke tabanlı VPN için Azure desteği
-Şu anda Azure VPN ağ geçitleri hem modunu destekler: rota tabanlı VPN ağ geçitleri ve ilke tabanlı VPN ağ geçitleri. Farklı belirtimlerinde sonucunda, farklı platformlarda iç oluşturulur:
+Şu anda Azure, her iki VPN ağ geçidi modunu destekler: rota tabanlı VPN ağ geçitleri ve ilke tabanlı VPN ağ geçitleri. Farklı belirtimlerle sonuçlanan farklı iç platformlar üzerinde oluşturulmuştur:
 
-|                          | **PolicyBased VPN ağ geçidi** | **RouteBased VPN ağ geçidi**               |
-| ---                      | ---                         | ---                                      |
-| **Azure ağ geçidi SKU'su**    | Temel                       | Temel, standart, yüksek performanslı, VpnGw1, VpnGw2, VpnGw3 |
-| **IKE sürümü**          | IKEv1                       | IKEv2                                    |
-| **Maks. S2S bağlantıları** | **1**                       | Temel/standart: 10<br> Yüksek performanslı: 30 |
-|                          |                             |                                          |
+|                          | **PolicyBased VPN Gateway** | **RouteBased VPN Gateway**       |**RouteBased VPN Gateway**                          |
+| ---                      | ---                         | ---                              |---                                                 |
+| **Azure ağ geçidi SKU 'SU**    | Temel                       | Temel                            | Standart, HighPerformance, VpnGw1, VpnGw2, VpnGw3  |
+| **IKE sürümü**          | IKEv1                       | IKEv2                            | IKEv1 ve IKEv2                                    |
+| **Biçimlendir. S2S bağlantıları** | **1**                       | 10                               |Standart: 10<br> Diğer SKU 'Lar: 30                     |
+|                          |                             |                                  |                                                    |
 
-Özel IPSec/IKE İlkesi ile ön ek tabanlı trafik seçicileri seçeneği ile kullanılacak Azure rota tabanlı VPN ağ geçitleri artık yapılandırabilirsiniz "**PolicyBasedTrafficSelectors**", şirket içi ilke tabanlı VPN cihazı için bağlanmak için. Bu özellik, bir Azure sanal ağı birbirine bağlamanızı sağlar ve VPN ağ geçidine birden çok şirket ilke tabanlı VPN/güvenlik duvarı cihazına, tek bir bağlantı sınırı geçerli Azure ilke tabanlı VPN Gateway bileşenlerinden kaldırılıyor.
+Özel IPSec/ıKE ilkesiyle artık Azure rota tabanlı VPN ağ geçitlerini, şirket içi ilke tabanlı VPN cihazlarına bağlanmak için "**PolicyBasedTrafficSelectors**" seçeneği ile önek tabanlı trafik seçicileri kullanacak şekilde yapılandırabilirsiniz. Bu özellik, Azure sanal ağ ve VPN Gateway 'den birden çok şirket içi ilke tabanlı VPN/güvenlik duvarı cihazına bağlanmanızı sağlar ve tek bağlantı sınırını geçerli Azure ilke tabanlı VPN ağ geçitlerinden kaldırır.
 
 > [!IMPORTANT]
-> 1. Bu bağlantıyı etkinleştirmek için şirket içi ilke tabanlı VPN cihazı desteklemelidir **Ikev2** Azure rota tabanlı VPN ağ geçitlerine bağlanmak için. VPN cihaz spesifikasyonlara denetleyin.
-> 2. Şirket içi ağlar ile Bu mekanizma ilke tabanlı VPN cihazına bağlanma, yalnızca Azure sanal ağına bağlanabilir; **diğer şirket içi ağlara veya sanal ağlar aynı Azure VPN ağ geçidi üzerinden geçiş yapılamıyor**.
-> 3. Yapılandırma seçeneği, özel IPSec/IKE bağlantı İlkesi bir parçasıdır. İlke tabanlı trafik Seçici seçeneği etkinleştirirseniz, tüm ilke (IPSec/IKE şifreleme ve bütünlüğü algoritmalar, anahtar güçleriyle ve SA yaşam süreleri) belirtmeniz gerekir.
+> 1. Bu bağlantıyı etkinleştirmek için, şirket içi ilke tabanlı VPN cihazlarınızın Azure rota tabanlı VPN ağ geçitlerine bağlanmak için **Ikev2** 'yi desteklemesi gerekir. VPN cihazı belirtimlerinizi kontrol edin.
+> 2. Bu mekanizmaya sahip ilke tabanlı VPN cihazları aracılığıyla bağlanan şirket içi ağlar yalnızca Azure sanal ağına bağlanabilir; **aynı Azure VPN ağ geçidi üzerinden diğer şirket içi ağlara veya sanal ağlara geçiş yapılamaz**.
+> 3. Yapılandırma seçeneği, Özel IPSec/ıKE bağlantı ilkesinin bir parçasıdır. İlke tabanlı trafik Seçicisi seçeneğini etkinleştirirseniz, tam ilkeyi (IPSec/ıKE şifreleme ve bütünlük algoritmaları, anahtar güçleri ve SA yaşam süreleri) belirtmeniz gerekir.
 
-Aşağıdaki diyagram, Azure VPN ağ geçidi üzerinden geçiş yönlendirmesi ilke tabanlı seçeneğiyle neden çalışmıyor gösterir:
+Aşağıdaki diyagramda Azure VPN Gateway aracılığıyla geçiş yönlendirmenin neden ilke tabanlı seçenekle çalışmadığına ilişkin bir sorun gösterilmektedir:
 
-![İlke tabanlı geçiş](./media/vpn-gateway-connect-multiple-policybased-rm-ps/policybasedtransit.png)
+![ilke tabanlı Aktarım](./media/vpn-gateway-connect-multiple-policybased-rm-ps/policybasedtransit.png)
 
-Diyagramda gösterildiği gibi Azure VPN ağ geçidi, şirket içi ağ ön ekleri ancak çapraz bağlantısından öneklerini her için sanal ağ arasında trafik seçicileri sahiptir. Örneğin, site 2, bölge 3 ve 4 site her VNet1'sırasıyla iletişim kurabilir, ancak birbirine Azure VPN ağ geçidi üzerinden bağlanamaz şirket içi. Bu yapılandırma altında Azure VPN ağ geçidinde kullanılamıyor cross-connect trafik seçicileri diyagramda gösterilmektedir.
+Diyagramda gösterildiği gibi, Azure VPN ağ geçidi, çapraz bağlantı öneklerini değil, sanal ağdan her bir şirket içi ağ öneklerine yönelik trafik seçicileri içerir. Örneğin, şirket içi site 2, site 3 ve site 4 her biri sırasıyla VNet1 ile iletişim kurabilir, ancak Azure VPN ağ geçidi üzerinden birbirlerine bağlanamaz. Diyagramda bu yapılandırma altındaki Azure VPN Gateway 'de kullanılamayan çapraz bağlantı trafik seçicileri gösterilmektedir.
 
-## <a name="configurepolicybased"></a>İlke tabanlı trafik seçicileri üzerinde bağlantı yapılandırma
+## <a name="configurepolicybased"></a>Bağlantıda ilke tabanlı trafik seçicileri yapılandırma
 
-Bu makaledeki yönergeleri aynı örnekte açıklandığı gibi izleyin [S2S veya VNet-VNet bağlantıları için IPSec/IKE yapılandırma İlkesi](vpn-gateway-ipsecikepolicy-rm-powershell.md) S2S VPN bağlantısı kuracak şekilde. Bu, aşağıdaki diyagramda gösterilmiştir:
+Bu makaledeki yönergeler, S2S VPN bağlantısı kurmak üzere [S2S veya VNET-VNET bağlantıları Için IPSec/IKE Ilkesini yapılandırma](vpn-gateway-ipsecikepolicy-rm-powershell.md) bölümünde açıklananla aynı örneği izler. Bu, aşağıdaki diyagramda gösterilmiştir:
 
-![s2s-policy](./media/vpn-gateway-connect-multiple-policybased-rm-ps/s2spolicypb.png)
+![S2S-ilke](./media/vpn-gateway-connect-multiple-policybased-rm-ps/s2spolicypb.png)
 
 Bu bağlantıyı etkinleştirmek için iş akışı:
-1. Sanal ağ, VPN ağ geçidi ve yerel ağ geçidi için şirketler arası bağlantı oluşturma
-2. Bir IPSec/IKE ilkesi oluşturma
-3. Bir S2S veya VNet-VNet bağlantı oluşturduğunuzda ilkenin geçerli ve **ilke tabanlı trafik seçicileri etkinleştirme** bağlantı
-4. Bağlantıyı zaten oluşturduysanız, uygulama veya mevcut bir bağlantı ilkesini güncelleştirme
+1. Şirket içi bağlantınız için sanal ağ, VPN Gateway ve yerel ağ geçidi oluşturma
+2. IPSec/ıKE ilkesi oluşturma
+3. Bir S2S veya VNet-VNet bağlantısı oluştururken ilkeyi uygulayın ve bağlantıda **ilke tabanlı trafik seçicileri etkinleştirin**
+4. Bağlantı zaten oluşturulduysa, var olan bir bağlantıya ilke uygulayabilir veya ilkeyi güncelleştirebilirsiniz
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
@@ -77,13 +77,13 @@ Azure aboneliğiniz olduğunu doğrulayın. Henüz Azure aboneliğiniz yoksa [MS
 
 [!INCLUDE [powershell](../../includes/vpn-gateway-cloud-shell-powershell-about.md)]
 
-## <a name="enablepolicybased"></a>İlke tabanlı trafik seçicileri bağlantısı etkinleştirme
+## <a name="enablepolicybased"></a>Bağlantıda ilke tabanlı trafik seçicileri etkinleştirme
 
-Tamamladığınızdan emin olun [yapılandırma IPSec/IKE İlkesi makale 3. Kısım](vpn-gateway-ipsecikepolicy-rm-powershell.md) bu bölümü için. Aşağıdaki örnek, aynı parametre ve adımları kullanır:
+Bu bölüm için [IPSec/IKE Ilkesini Yapılandır makalesinin 3. kısmını](vpn-gateway-ipsecikepolicy-rm-powershell.md) tamamladığınızdan emin olun. Aşağıdaki örnek, aynı parametreleri ve adımları kullanır:
 
-### <a name="step-1---create-the-virtual-network-vpn-gateway-and-local-network-gateway"></a>1\. adım - sanal ağ VPN ağ geçidi ve yerel ağ geçidi oluşturma
+### <a name="step-1---create-the-virtual-network-vpn-gateway-and-local-network-gateway"></a>1\. adım-sanal ağ, VPN Gateway ve yerel ağ geçidi oluşturma
 
-#### <a name="1-connect-to-your-subscription-and-declare-your-variables"></a>1. Aboneliğinize bağlanın ve değişkenlerinizi bildirme
+#### <a name="1-connect-to-your-subscription-and-declare-your-variables"></a>1. aboneliğinize bağlanın ve değişkenlerinizi bildirin
 
 [!INCLUDE [sign in](../../includes/vpn-gateway-cloud-shell-ps-login.md)]
 
@@ -114,7 +114,7 @@ $LNGPrefix62   = "10.62.0.0/16"
 $LNGIP6        = "131.107.72.22"
 ```
 
-#### <a name="2-create-the-virtual-network-vpn-gateway-and-local-network-gateway"></a>2. Sanal ağ VPN ağ geçidi ve yerel ağ geçidi oluşturma
+#### <a name="2-create-the-virtual-network-vpn-gateway-and-local-network-gateway"></a>2. sanal ağı, VPN ağ geçidini ve yerel ağ geçidini oluşturun
 
 Bir kaynak grubu oluşturun.
 
@@ -122,7 +122,7 @@ Bir kaynak grubu oluşturun.
 New-AzResourceGroup -Name $RG1 -Location $Location1
 ```
 
-Sanal ağ TestVNet1 üç alt ağ ve VPN ağ geçidi oluşturmak için aşağıdaki örneği kullanın. Değerleri değiştirmek istiyorsanız, ağ geçidi alt ağınızı her zaman özel olarak 'GatewaySubnet' adını önemlidir. Başka bir ad kullanırsanız ağ geçidi oluşturma işleminiz başarısız olur.
+Üç alt ağ ve VPN ağ geçidi ile sanal ağ TestVNet1 oluşturmak için aşağıdaki örneği kullanın. Değerleri yerine koymak istiyorsanız, ağ geçidi alt ağınızın özel olarak ' GatewaySubnet ' olarak adlandırılmalıdır. Başka bir ad kullanırsanız ağ geçidi oluşturma işleminiz başarısız olur.
 
 ```azurepowershell-interactive
 $fesub1 = New-AzVirtualNetworkSubnetConfig -Name $FESubName1 -AddressPrefix $FESubPrefix1
@@ -141,23 +141,23 @@ New-AzVirtualNetworkGateway -Name $GWName1 -ResourceGroupName $RG1 -Location $Lo
 New-AzLocalNetworkGateway -Name $LNGName6 -ResourceGroupName $RG1 -Location $Location1 -GatewayIpAddress $LNGIP6 -AddressPrefix $LNGPrefix61,$LNGPrefix62
 ```
 
-### <a name="step-2---create-a-s2s-vpn-connection-with-an-ipsecike-policy"></a>2\. adım - bir IPSec/IKE İlkesi ile bir S2S VPN bağlantısı oluşturma
+### <a name="step-2---create-a-s2s-vpn-connection-with-an-ipsecike-policy"></a>2\. adım-IPSec/ıKE ilkesiyle bir S2S VPN bağlantısı oluşturma
 
-#### <a name="1-create-an-ipsecike-policy"></a>1. Bir IPSec/IKE ilkesi oluşturma
+#### <a name="1-create-an-ipsecike-policy"></a>1. IPSec/ıKE ilkesi oluşturma
 
 > [!IMPORTANT]
-> Bağlantıda "UsePolicyBasedTrafficSelectors" seçeneğini etkinleştirmek için bir IPSec/IKE İlkesi oluşturmanız gerekir.
+> Bağlantıda "UsePolicyBasedTrafficSelectors" seçeneğini etkinleştirmek için bir IPSec/ıKE ilkesi oluşturmanız gerekir.
 
-Aşağıdaki örnek, bu algoritmalar ve parametrelerle IPSec/IKE ilkesi oluşturur:
-* Ikev2: AES256, SHA384 DHGroup24
-* IPSec: AES256, SHA256, PFS hiçbiri, SA yaşam süresi 14400 saniye ve değeri 102400000 KB'dir
+Aşağıdaki örnek, bu algoritmalara ve parametrelere sahip bir IPSec/ıKE ilkesi oluşturur:
+* Ikev2: AES256, SHA384, DHGroup24
+* IPSec: AES256, SHA256, PFS yok, SA yaşam süresi 14400 saniye & 102400000KB
 
 ```azurepowershell-interactive
 $ipsecpolicy6 = New-AzIpsecPolicy -IkeEncryption AES256 -IkeIntegrity SHA384 -DhGroup DHGroup24 -IpsecEncryption AES256 -IpsecIntegrity SHA256 -PfsGroup None -SALifeTimeSeconds 14400 -SADataSizeKilobytes 102400000
 ```
 
-#### <a name="2-create-the-s2s-vpn-connection-with-policy-based-traffic-selectors-and-ipsecike-policy"></a>2. S2S VPN bağlantısı ilke tabanlı trafik seçicileri ve IPSec/IKE İlkesi ile oluşturma
-Bir S2S VPN bağlantısı oluşturun ve önceki adımda oluşturduğunuz IPsec/IKE ilke uygulayın. Ek parametre dikkat "-UsePolicyBasedTrafficSelectors $True" ilke tabanlı trafik seçicileri bağlantı sağlar.
+#### <a name="2-create-the-s2s-vpn-connection-with-policy-based-traffic-selectors-and-ipsecike-policy"></a>2. ilke tabanlı trafik seçicileri ve IPSec/ıKE ilkesiyle S2S VPN bağlantısını oluşturun
+Bir S2S VPN bağlantısı oluşturun ve önceki adımda oluşturulan IPSec/ıKE ilkesini uygulayın. Bağlantıda ilke tabanlı trafik seçicileri sağlayan "-UsePolicyBasedTrafficSelectors $True" ek parametresini unutmayın.
 
 ```azurepowershell-interactive
 $vnet1gw = Get-AzVirtualNetworkGateway -Name $GWName1  -ResourceGroupName $RG1
@@ -166,13 +166,13 @@ $lng6 = Get-AzLocalNetworkGateway  -Name $LNGName6 -ResourceGroupName $RG1
 New-AzVirtualNetworkGatewayConnection -Name $Connection16 -ResourceGroupName $RG1 -VirtualNetworkGateway1 $vnet1gw -LocalNetworkGateway2 $lng6 -Location $Location1 -ConnectionType IPsec -UsePolicyBasedTrafficSelectors $True -IpsecPolicies $ipsecpolicy6 -SharedKey 'AzureA1b2C3'
 ```
 
-Adımları tamamladıktan sonra S2S VPN bağlantısı tanımlanan IPsec/IKE ilkesini kullanın ve ilke tabanlı trafik seçicileri bağlantıda etkinleştirin. Daha fazla bağlantı, ek şirket içi ilke tabanlı VPN cihazı için aynı Azure VPN ağ geçidini eklemek için aynı adımları yineleyebilirsiniz.
+Adımları tamamladıktan sonra, S2S VPN bağlantısı tanımlanan IPsec/ıKE ilkesini kullanır ve bağlantıda ilke tabanlı trafik seçicileri etkinleştirir. Aynı Azure VPN ağ geçidinden şirket içi ilke tabanlı ek VPN cihazlarına daha fazla bağlantı eklemek için aynı adımları tekrarlayabilirsiniz.
 
-## <a name="update-policy-based-traffic-selectors-for-a-connection"></a>İlke tabanlı trafik seçicileri için bir bağlantı güncelleştirme
-Son bölümde, var olan bir S2S VPN bağlantısı için ilke tabanlı trafik seçicileri seçeneği güncelleştirme gösterilir.
+## <a name="update-policy-based-traffic-selectors-for-a-connection"></a>Bir bağlantı için ilke tabanlı trafik seçicileri güncelleştirme
+Son bölümde, mevcut bir S2S VPN bağlantısı için ilke tabanlı trafik seçicileri seçeneğinin nasıl güncelleşgörüntüleneceği gösterilmektedir.
 
-### <a name="1-get-the-connection"></a>1. Bağlantı Al
-Bağlantı kaynağı alın.
+### <a name="1-get-the-connection"></a>1. bağlantıyı alın
+Bağlantı kaynağını alın.
 
 ```azurepowershell-interactive
 $RG1          = "TestPolicyRG1"
@@ -180,20 +180,20 @@ $Connection16 = "VNet1toSite6"
 $connection6  = Get-AzVirtualNetworkGatewayConnection -Name $Connection16 -ResourceGroupName $RG1
 ```
 
-### <a name="2-check-the-policy-based-traffic-selectors-option"></a>2. İlke tabanlı trafik seçicileri seçeneği işaretleyin
-Aşağıdaki satırı, ilke tabanlı trafik seçicileri bağlantı için kullanılıp kullanılmayacağını gösterir:
+### <a name="2-check-the-policy-based-traffic-selectors-option"></a>2. ilke tabanlı trafik seçicileri seçeneğini denetleyin
+Aşağıdaki satırda, bağlantı için ilke tabanlı trafik seçicileri kullanılıp kullanılmayacağını gösterilmektedir:
 
 ```azurepowershell-interactive
 $connection6.UsePolicyBasedTrafficSelectors
 ```
 
-Satır döndürürse "**True**", ardından, ilke tabanlı trafik seçiciler, bağlantıda yapılandırılır; Aksi halde döndürür "**False**."
+Satır "**true**" döndürürse, bağlantı üzerinde ilke tabanlı trafik seçicileri yapılandırılır; Aksi takdirde "**false**" döndürür.
 
-### <a name="3-enabledisable-the-policy-based-traffic-selectors-on-a-connection"></a>3. Bir bağlantısı ilke tabanlı trafik seçicileri etkinleştir/devre dışı bırak
-Bağlantı kaynağı edindikten sonra etkinleştirebilir veya devre dışı bırakma seçeneği.
+### <a name="3-enabledisable-the-policy-based-traffic-selectors-on-a-connection"></a>3. bir bağlantıda ilke tabanlı trafik seçicileri etkinleştirme/devre dışı bırakma
+Bağlantı kaynağını edindikten sonra, seçeneğini etkinleştirebilir veya devre dışı bırakabilirsiniz.
 
-#### <a name="to-enable-usepolicybasedtrafficselectors"></a>UsePolicyBasedTrafficSelectors etkinleştirmek için
-Aşağıdaki örnekte, ilke tabanlı trafik seçicileri seçeneğini etkinleştirir ancak IPSec/IKE ilke değişmeden kalır:
+#### <a name="to-enable-usepolicybasedtrafficselectors"></a>UsePolicyBasedTrafficSelectors 'i etkinleştirmek için
+Aşağıdaki örnek, ilke tabanlı trafik seçicileri seçeneğini sunar, ancak IPSec/ıKE ilkesini değişmeden bırakır:
 
 ```azurepowershell-interactive
 $RG1          = "TestPolicyRG1"
@@ -204,7 +204,7 @@ Set-AzVirtualNetworkGatewayConnection -VirtualNetworkGatewayConnection $connecti
 ```
 
 #### <a name="to-disable-usepolicybasedtrafficselectors"></a>UsePolicyBasedTrafficSelectors devre dışı bırakmak için
-Aşağıdaki örnekte, ilke tabanlı trafik seçicileri seçeneği devre dışı bırakır, ancak değişmeden IPSec/IKE İlkesi bırakır:
+Aşağıdaki örnek, ilke tabanlı trafik seçicileri seçeneğini devre dışı bırakır, ancak IPSec/ıKE ilkesini değişmeden bırakır:
 
 ```azurepowershell-interactive
 $RG1          = "TestPolicyRG1"
@@ -217,4 +217,4 @@ Set-AzVirtualNetworkGatewayConnection -VirtualNetworkGatewayConnection $connecti
 ## <a name="next-steps"></a>Sonraki adımlar
 Bağlantınız tamamlandıktan sonra sanal ağlarınıza sanal makineler ekleyebilirsiniz. Adımlar için bkz. [Sanal Makine Oluşturma](../virtual-machines/virtual-machines-windows-hero-tutorial.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
-Ayrıca gözden [S2S VPN veya VNet-VNet bağlantıları için IPSec/IKE yapılandırma İlkesi](vpn-gateway-ipsecikepolicy-rm-powershell.md) özel IPSec/IKE ilkeleri hakkında daha fazla ayrıntı için.
+Özel IPSec/ıKE ilkeleri hakkında daha fazla bilgi için [bkz. S2S VPN veya VNET-VNET bağlantıları Için IPSec/IKE Ilkesini yapılandırma](vpn-gateway-ipsecikepolicy-rm-powershell.md) .

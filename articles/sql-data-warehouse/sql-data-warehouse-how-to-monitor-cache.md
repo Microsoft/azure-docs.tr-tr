@@ -1,6 +1,6 @@
 ---
-title: Gen2 önbelleğinizi en iyi duruma getirme | Microsoft Docs
-description: Azure portalını kullanarak Gen2 önbelleğinizi izlemeyi öğrenin.
+title: Gen2 önbelleğinizi iyileştirin
+description: Azure portal kullanarak Gen2 önbelleğinizi izlemeyi öğrenin.
 services: sql-data-warehouse
 author: kevinvngo
 manager: craigg
@@ -10,47 +10,47 @@ ms.topic: conceptual
 ms.date: 09/06/2018
 ms.author: kevin
 ms.reviewer: igorstan
-ms.openlocfilehash: 26791aecb2ca57b31358d3385d07230c73c84904
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b33f7cedca4ef130eefa28c1dbaaedd82d11a9e4
+ms.sourcegitcommit: 359930a9387dd3d15d39abd97ad2b8cb69b8c18b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61474428"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73645762"
 ---
 # <a name="how-to-monitor-the-gen2-cache"></a>Gen2 önbelleğini izleme
-Gen2 depolama mimarisi, en sık Sorgulanmış columnstore segmentleri NVMe SSD tabanlı Gen2 veri ambarları için tasarlanmış bulunan bir önbellekte otomatik olarak katmanlandırır. Sorgularınızın önbelleğinde bulunan segmentleri aldığınızda daha yüksek performans alırlar. Bu makalede, izleme ve iş yükünüz Gen2 önbellek en iyi şekilde yararlanma olup olmadığını belirleyerek yavaş sorgu performansı sorunlarını giderme açıklar.  
-## <a name="troubleshoot-using-the-azure-portal"></a>Azure portalını kullanarak sorun giderme
-Azure İzleyici, sorgu performansı sorunlarını gidermek için 2. nesil önbellek ölçümlerini görüntülemek için kullanabilirsiniz. İlk Azure portalına gidin ve üzerinde İzleyicisi'ni tıklatın:
+Gen2 depolama mimarisi, en sık sorgulanan columnstore segmentlerinizi, Gen2 veri ambarları için tasarlanan NVMe tabanlı SSD 'lerde bulunan bir önbellekte otomatik olarak katmanlar. Sorgularınızı önbellekte bulunan segmentleri aldığında daha fazla performans yapılır. Bu makalede, iş yükünüzün Gen2 önbelleğini en iyi şekilde kullanıp kullanmadığını belirleyerek yavaş sorgu performansının nasıl izleneceği ve giderileceği açıklanır.  
+## <a name="troubleshoot-using-the-azure-portal"></a>Azure portal kullanarak sorun giderme
+Sorgu performansının sorunlarını gidermek için Azure Izleyici 'yi Gen2 önbellek ölçümlerini görüntülemek için kullanabilirsiniz. Önce Azure portal gidin ve Izleyiciyi tıklatın:
 
 ![Azure İzleyici](./media/sql-data-warehouse-cache-portal/cache_0.png)
 
-Ölçümleri düğmesini seçip doldurun **abonelik**, **kaynak** **grubu**, **kaynak türü**, ve **kaynak adı** veri ambarınızın.
+Ölçümler düğmesini seçin ve **abonelik**, **kaynak** **grubu**, **kaynak türü**ve veri ambarınızın **kaynak adını** girin.
 
-Gen2 önbelleği sorunlarını giderme için ana ölçümler **önbellek isabet yüzdesi** ve **önbelleği kullanılan yüzde**. Bu iki ölçümleri görüntülemek için Azure ölçüm grafiğini yapılandırın.
+Gen2 önbelleğinde sorun gidermeye yönelik temel ölçümler, **önbellek isabet yüzdesi** ve **kullanılan önbellek yüzdesidir**. Bu iki ölçümü göstermek için Azure ölçüm grafiğini yapılandırın.
 
 ![Önbellek ölçümleri](./media/sql-data-warehouse-cache-portal/cache_1.png)
 
 
-## <a name="cache-hit-and-used-percentage"></a>Önbellek isabet ve kullanılan yüzdesi
-Aşağıdaki matris önbellek ölçümlerini değerlerine göre senaryosu açıklanmaktadır:
+## <a name="cache-hit-and-used-percentage"></a>Önbellek isabeti ve kullanılan yüzde
+Aşağıdaki matris, önbellek ölçümlerinin değerlerine göre senaryolar anlatmaktadır:
 
-|                                | **Yüksek Önbellek isabet yüzdesi** | **Düşük önbellek isabet yüzdesi** |
+|                                | **Yüksek önbellek isabet yüzdesi** | **Düşük önbellek isabet yüzdesi** |
 | :----------------------------: | :---------------------------: | :--------------------------: |
-| **Yüksek kullanılan önbellek yüzdesi** |          Senaryo 1           |          Senaryo 2          |
-| **Düşük kullanılan önbellek yüzdesi**  |          Senaryo 3           |          Senaryo 4          |
+| **Yüksek önbellek kullanılan yüzde** |          Senaryo 1           |          Senaryo 2          |
+| **Düşük önbellek kullanılan yüzde**  |          Senaryo 3           |          Senaryo 4          |
 
-**Senaryo 1:** Önbelleğinizi en verimli şekilde kullanıyor. [Sorun giderme](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-manage-monitor) sorgularınızı yavaşlatmasını diğer alanları.
+**Senaryo 1:** Önbelleğinizi en iyi şekilde kullanıyorsunuz. Sorgularınızın yavaşlatılabilen diğer alanlarla [Ilgili sorunları giderin](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-manage-monitor) .
 
-**Senaryo 2:** Geçerli Çalışma Veri kümenizi düşük neden önbelleğe sığamıyorsa önbellek isabet yüzdesi fiziksel okuma nedeniyle. Performans düzeyinizi ölçeklendirmeyi düşünün ve önbelleğini doldurmak için iş yükünüzü yeniden çalıştırın.
+**Senaryo 2:** Geçerli çalışma verileri kümesi, fiziksel okumalar nedeniyle düşük önbellek okuması yüzdesine neden olan önbelleğe sığmayacak. Performans düzeyinizi ölçeklendirmenizi ve önbelleği doldurmak için iş yükünüzü yeniden çalıştırmayı göz önünde bulundurun.
 
-**Senaryo 3:** Sorgunuzu önbelleğe ilgisi olmayan nedenlerden dolayı yavaş çalıştığından emin olma olasılığı yüksektir. [Sorun giderme](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-manage-monitor) sorgularınızı yavaşlatmasını diğer alanları. Ayrıca düşünebilirsiniz [örneğinizin ölçeklendirme](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-manage-monitor) maliyet tasarrufu için önbellek boyutunu azaltmak için. 
+**Senaryo 3:** Önbelleğiniz, önbellekte ilgisiz olan nedenlerden dolayı yavaş çalışıyor olabilir. Sorgularınızın yavaşlatılabilen diğer alanlarla [Ilgili sorunları giderin](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-manage-monitor) . Ayrıca, maliyetleri kaydetmek için önbelleğin boyutunu azaltmak üzere [örneğinizi ölçeklendirmeye](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-manage-monitor) de göz önünde bulundurmanız gerekir. 
 
-**Senaryo 4:** Sorgunuzu yavaş neden neden olabilecek bir soğuk önbellek var. Çalışma kümenizin artık, önbelleğe alınması gerektiği gibi sorgunuzu yeniden deneyin. 
+**Senaryo 4:** Sorgunuzun yavaşlamasına neden olabilecek bir soğuk önbelleğiniz vardı. Çalışma Veri kümeniz şimdi önbelleğe alınmış olması gerektiği için sorgunuzu yeniden çalıştırmayı deneyin. 
 
-**Önemli: Önbellek isabet yüzdesi veya kullanılan önbellek yüzdesini güncelleştirilmiyor iş yükünüzü yeniden çalıştırdıktan sonra çalışma kümenizin zaten bellekte bulunan bağlantısız. Yalnızca kümelenmiş columnstore tablolarını önbelleğe alındığını unutmayın.**
+**Önemli: iş yükünüzü yeniden çalıştırdıktan sonra önbellek isabet yüzdesi veya kullanılan önbellek yüzdesi güncelleştirilse, çalışma kümesi bellekte zaten bulunabilir. Note yalnızca kümelenmiş columnstore tabloları önbelleğe alınır.**
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Genel sorgu performansını ayarlama ile ilgili daha fazla bilgi için bkz: [izleme sorgu yürütme](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-manage-monitor#monitor-query-execution).
+Genel sorgu performansı ayarlama hakkında daha fazla bilgi için bkz. [izleyici sorgu yürütme](https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-manage-monitor#monitor-query-execution).
 
 
 <!--Image references-->

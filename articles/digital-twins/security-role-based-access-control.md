@@ -1,47 +1,47 @@
 ---
-title: Azure dijital İkizlerini rol tabanlı erişim denetimini anlama | Microsoft Docs
-description: Rol tabanlı erişim denetimi ile dijital İkizlerini kimlik doğrulaması hakkında bilgi edinin.
-author: lyrana
-manager: alinast
+title: Rol tabanlı erişim denetimini anlama-Azure dijital TWINS | Microsoft Docs
+description: Azure dijital TWINS 'de rol tabanlı erişim denetimi ve izinleri yönetme hakkında bilgi edinin.
+ms.author: alinast
+author: alinamstanciu
+manager: bertvanhoof
 ms.service: digital-twins
 services: digital-twins
 ms.topic: conceptual
-ms.date: 12/27/2018
-ms.author: lyrana
-ms.openlocfilehash: bfc73a71a0ccda5c135e6a740d6f63bd37522a9b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 09/30/2019
+ms.openlocfilehash: e89a8f98d92e92fa8afe93340576b14ff1dd5051
+ms.sourcegitcommit: 961468fa0cfe650dc1bec87e032e648486f67651
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60534153"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72249193"
 ---
-# <a name="role-based-access-control-in-azure-digital-twins"></a>Azure dijital İkizlerini rol tabanlı erişim denetimi
+# <a name="role-based-access-control-in-azure-digital-twins"></a>Azure dijital TWINS 'de rol tabanlı erişim denetimi
 
-Azure dijital İkizlerini, belirli veri kaynakları ve uzamsal grafınızı eylemleri için tam erişim denetimi sağlar. Bunu ayrıntılı rolü ve rol tabanlı erişim denetimi (RBAC) olarak adlandırılan izin Yönetimi yapar. RBAC oluşur _rolleri_ ve _rol atamaları_. Rol izinlerinin düzeyini belirleyin. Rol atamaları bir rol, bir kullanıcı veya cihaz ile ilişkilendirin.
+Azure dijital TWINS, uzamsal grafiğinizde belirli veriler, kaynaklar ve eylemler üzerinde kesin erişim denetimi imkanı sunar. Bu, ayrıntılı rol ve [rol tabanlı erişim denetimi](https://docs.microsoft.com/azure/role-based-access-control/) (RBAC) adlı izin yönetimini kolaylaştırır. RBAC, _Roller_ ve _rol atamalarından_oluşur. Roller, izin düzeyini belirler. Rol atamaları bir rolü kullanıcı veya cihazla ilişkilendirir.
 
-RBAC kullanarak, için izin verilebilir:
+RBAC kullanarak, izin verilebilir:
 
 - Bir kullanıcı.
 - Bir cihaz.
-- Bir hizmet sorumlusu.
-- Bir kullanıcı tanımlı işlev.
-- Bir etki alanına ait tüm kullanıcılar.
+- Hizmet sorumlusu.
+- Kullanıcı tanımlı bir işlev.
+- Bir etki alanına ait olan tüm kullanıcılar.
 - Bir kiracı.
 
-Erişim düzeyini de ince ayar olabilir.
+Erişim derecesi de ince ayar yapılabilir.
 
-Uzamsal grafiğin devralınan izinleri RBAC benzersizdir.
+RBAC, uzamsal grafiğin Devralındığı izinlerle benzersizdir.
 
 ## <a name="what-can-i-do-with-rbac"></a>RBAC ile ne yapabilirim?
 
-Bir geliştirici için RBAC kullanabilirsiniz:
+Geliştirici, RBAC 'yi kullanarak şunları alabilir:
 
-- Bir kullanıcının tüm bir yapı için veya yalnızca belirli bir oda veya kat için cihazları yönetme olanağı vermesi.
-- Bir yönetici genel erişim tüm uzamsal grafik düğümleri bir grafın tamamında veya yalnızca bir bölümünü graf verin.
-- Erişim anahtarlarını dışında grafik bir destek uzmanı okuma erişimi verin.
-- Her bir üyenin tüm graf nesneleri bir etki alanı okuma erişimi verin.
+- Kullanıcıya, tüm bina için veya yalnızca belirli bir oda veya zemin için cihazları yönetme yeteneği verin.
+- Tüm grafik veya yalnızca grafiğin bir bölümü için tüm uzamsal grafik düğümlerine yönetici genel erişimi verin.
+- Erişim tuşları dışında, grafiğe bir destek uzmanı okuma erişimi verin.
+- Tüm grafik nesnelerine bir etki alanı okuma erişiminin her üyesine izin verin.
 
-## <a name="rbac-best-practices"></a>RBAC en iyi uygulamalar
+## <a name="rbac-best-practices"></a>RBAC en iyi uygulamaları
 
 [!INCLUDE [digital-twins-permissions](../../includes/digital-twins-rbac-best-practices.md)]
 
@@ -49,38 +49,40 @@ Bir geliştirici için RBAC kullanabilirsiniz:
 
 ### <a name="role-definitions"></a>Rol tanımları
 
-Rol tanımının, izinleri ve rol oluşturan diğer özniteliklerini oluşan bir koleksiyondur. Rol tanımının dahil izin verilen işlemler listeler *Oluştur*, *okuma*, *güncelleştirme*, ve *Sil* herhangi ile nesnesinin Rol gerçekleştirebilir. Nesne türleri izinleri uygulamak belirtir.
+Rol tanımı bir rol oluşturan izinlerin ve diğer özniteliklerin koleksiyonudur. Rol tanımı, bu role sahip herhangi bir nesnenin gerçekleştirebileceği *oluşturma*, *okuma*, *güncelleştirme*ve *silme* işlemlerini içeren izin verilen işlemleri listeler. Ayrıca, izinlerin hangi nesne türlerine uygulanacağını de belirtir.
 
 [!INCLUDE [digital-twins-roles](../../includes/digital-twins-roles.md)]
 
 >[!NOTE]
-> Önceki rolleri için tam tanımları almak için sistem/roller API sorgulayın.
-> Okuyarak daha fazla bilgi edinin [oluşturma ve rol atamalarını yönetme](./security-create-manage-role-assignments.md#all).
+> Önceki rollerin tam tanımlarını almak için, sistem/rol API 'sini sorgulayın.
+> [Rol atamaları oluşturmayı ve yönetmeyi](./security-create-manage-role-assignments.md#retrieve-all-roles)okuyarak daha fazla bilgi edinin.
 
-### <a name="object-identifier-types"></a>Nesne tanımlayıcısı türleri
+### <a name="object-identifier-types"></a>Nesne tanımlayıcı türleri
 
 [!INCLUDE [digital-twins-object-types](../../includes/digital-twins-object-id-types.md)]
 
 >[!TIP]
-> Hizmet sorumlunuzu okuyarak izinleri öğrenin [oluşturma ve rol atamalarını yönetme](./security-create-manage-role-assignments.md#grant).
+> [Rol atamaları oluşturma ve yönetme](./security-create-manage-role-assignments.md#grant-permissions-to-your-service-principal)konusunu okuyarak hizmet sorumlusuna izin verme hakkında bilgi edinin.
 
-Aşağıdaki başvuru belgeleri makaleler açıklar:
+Aşağıdaki başvuru belgesi makaleleri şunları anlatmaktadır:
 
-- Nasıl yapılır [sorgu veya bir kullanıcı nesnesi kimliği](https://docs.microsoft.com/powershell/module/azuread/get-azureaduser?view=azureadps-2.0).
-- Nasıl yapılır [nesne Kimliğini almak için bir hizmet sorumlusu](https://docs.microsoft.com/powershell/module/az.resources/get-azadserviceprincipal).
-- Nasıl yapılır [nesne Kimliğini almak için Azure AD kiracısı](../active-directory/develop/quickstart-create-new-tenant.md).
+- [Bir Kullanıcı Için sorgu veya nesne kimliği](https://docs.microsoft.com/powershell/module/azuread/get-azureaduser?view=azureadps-2.0).
+- [Hizmet sorumlusu için nesne kimliğini edinme](https://docs.microsoft.com/powershell/module/az.resources/get-azadserviceprincipal).
+- [Bir Azure AD kiracısı için nesne kimliğini alma](../active-directory/develop/quickstart-create-new-tenant.md).
 
 ## <a name="role-assignments"></a>Rol atamaları
 
-Azure dijital İkizlerini rol atama gibi bir kullanıcı ya da Azure AD kiracısı, bir nesne bir rolü ve bir alan ile ilişkilendirir. Bu alana ait tüm nesneleri için izinleri verilir. Tüm uzamsal grafiğin altındaki alanı içerir.
+Bir Azure dijital TWINS rol ataması, bir kullanıcı veya Azure AD kiracısı gibi bir nesneyi bir rol ve boşluk ile ilişkilendirir. Bu alana ait olan tüm nesnelere izinler verilir. Alan, altındaki tüm uzamsal grafiği içerir.
 
-Örneğin, bir kullanıcı rolüne sahip bir rol ataması verilen `DeviceInstaller` uzamsal grafiğin kök düğüm için temsil eden bir yapı. Kullanıcı daha sonra okuyabilir ve cihazlar için düğüm ve diğer tüm alt alanları binada güncelleştirin.
+Örneğin, bir kullanıcıya bir yapı temsil eden uzamsal grafiğin kök düğümü için `DeviceInstaller` rolüne sahip bir rol ataması verilir. Kullanıcı daha sonra bu düğüm ve binanın diğer tüm alt alanları için cihazları okuyabilir ve güncelleştirebilir.
 
-Alıcıya izin vermek için bir rol ataması oluşturun. İzinleri iptal etmek için rol atamasını kaldırın.
+Bir alıcıya izin vermek için bir rol ataması oluşturun. İzinleri iptal etmek için rol atamasını kaldırın.
 
 >[!IMPORTANT]
-> Rol atamaları hakkında daha fazla bilgi edinmek [oluşturma ve rol atamalarını yönetme](./security-create-manage-role-assignments.md).
+> [Rol atamaları oluşturma ve yönetme](./security-create-manage-role-assignments.md)ile rol atamaları hakkında daha fazla bilgi edinin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla hakkında oluşturup Azure dijital İkizlerini rol atamalarını yönetmek öğrenmek için [oluşturma ve rol atamalarını yönetmek](./security-create-manage-role-assignments.md).
+- Azure dijital TWINS rol atamaları oluşturma ve yönetme hakkında daha fazla bilgi edinmek için [rol atamaları oluşturma ve yönetme](./security-create-manage-role-assignments.md)konusunu okuyun.
+
+- [Azure Için RBAC](https://docs.microsoft.com/azure/role-based-access-control/)hakkında daha fazla bilgi edinin.

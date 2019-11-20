@@ -1,57 +1,53 @@
 ---
-title: Azure Önizleme Gözcü Barracuda verilere | Microsoft Docs
-description: Gözcü Azure için Barracuda veri bağlanmayı öğreneceksiniz.
+title: Barçcuda verilerini Azure Sentinel 'e bağlama | Microsoft Docs
+description: Barbcuda verilerini Azure Sentinel 'e bağlamayı öğrenin.
 services: sentinel
 documentationcenter: na
 author: rkarlin
 manager: rkarlin
 editor: ''
 ms.assetid: 3b33b4aa-7286-4d79-b461-8e1812edc2e1
-ms.service: sentinel
+ms.service: azure-sentinel
+ms.subservice: azure-sentinel
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/17/2019
+ms.date: 10/13/2019
 ms.author: rkarlin
-ms.openlocfilehash: 350d2c6253a417637c7ec8f2e38919dc4b969340
-ms.sourcegitcommit: 156b313eec59ad1b5a820fabb4d0f16b602737fc
+ms.openlocfilehash: 5142204db86158937c16d19bf52fb677099598a5
+ms.sourcegitcommit: e0a1a9e4a5c92d57deb168580e8aa1306bd94723
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67190783"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72284666"
 ---
-# <a name="connect-your-barracuda-appliance"></a>Barracuda gerecinize bağlanma 
+# <a name="connect-your-barracuda-appliance"></a>Barvacuda gerecinizi bağlama 
 
-> [!IMPORTANT]
-> Azure Sentinel şu anda genel Önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
-Barracuda Web uygulaması Güvenlik Duvarı (WAF) Bağlayıcısı, Azure panoları görüntülemesine, özel uyarıları oluşturma ve araştırma geliştirmek için Gözcü ile Barracuda günlüklerinizi kolayca bağlanmanızı sağlar. Bu, kuruluşunuzun ağ daha fazla öngörü sağlar ve güvenlik işlemi yeteneklerinizi geliştirir. Azure Sentinel arasındaki yerel tümleştirme yararlanır **Barracuda** ve Microsoft Monitoring Agent'ı sorunsuz tümleştirme sağlamak için. 
+
+Barbcuda Web uygulaması güvenlik duvarı (WAF) Bağlayıcısı, Bariscuda günlüklerinizi Azure Sentinel ile kolayca bağlamanıza, panoları görüntüleyebilir, özel uyarılar oluşturabilir ve araştırmayı iyileştirmenize olanak tanır. Bu, kuruluşunuzun ağı hakkında daha ayrıntılı bilgi verir ve güvenlik işlemi yeteneklerini geliştirir. Azure Sentinel, sorunsuz tümleştirme sağlamak için **barnacuda** ve Log Analytics Aracısı arasındaki yerel tümleştirmeden yararlanır. 
 
 
 > [!NOTE]
-> Veriler Azure Gözcü çalıştırıyorsanız çalışma alanının coğrafi konumda depolanır.
+> Veriler, Azure Sentinel çalıştırdığınız çalışma alanının coğrafi konumunda depolanır.
 
-## <a name="configure-and-connect-barracuda-waf"></a>Barracuda WAF bağlayın ve yapılandırın
-Barracuda Web uygulaması güvenlik duvarı, tümleştirme ve doğrudan Azure Gözcü aracılığıyla Microsoft Monitoring Agent için günlükleri dışarı aktarabilirsiniz.
-1. Git [Barracuda WAF yapılandırması akış](https://campus.barracuda.com/product/webapplicationfirewall/doc/73696965/configure-the-barracuda-web-application-firewall-to-integrate-with-the-oms-server-and-export-logs/), bu parametreleri kullanarak bağlantı kurmak için yönergeleri izleyin:
-    - **Çalışma alanı kimliği**: Azure Gözcü Barracuda Bağlayıcısı sayfasından, çalışma alanı kimliği değerini kopyalayın.
-    - **Birincil anahtar**: Azure Gözcü Barracuda Bağlayıcısı sayfasından, birincil anahtar değerini kopyalayın.
-2. Gözcü Azure portalında, dağıtılan Azure Gözcü çalışma alanına gidin ve üç noktasını (...) seçin ve satır sonunda **Gelişmiş ayarlar**. 
-1. Seçin **veri** ardından **Syslog**.
-1. Barracuda ayarladığınız tesis var ve önem derecesini ayarlayın ve tıklayın emin **Kaydet**.
-6. İlgili şema Barracuda olayları Log Analytics'te kullanmak için arama **CommonSecurityLog** ve **barracuda_CL**.
+## <a name="configure-and-connect-barracuda-waf"></a>Barçcuda WAF 'yi yapılandırma ve bağlama
+Barbcuda Web uygulaması güvenlik duvarı, Log Analytics Aracısı aracılığıyla günlükleri doğrudan Azure Sentinel 'e tümleştirebilir ve dışarı aktarabilir.
+1. [Barbcuda WAF yapılandırma akışına](https://campus.barracuda.com/product/webapplicationfirewall/doc/73696965/configure-the-barracuda-web-application-firewall-to-integrate-with-the-oms-server-and-export-logs/)gidin ve aşağıdaki parametreleri kullanarak bağlantıyı ayarlamak için yönergeleri izleyin:
+    - **Çalışma alanı kimliği**: çalışma alanı kimliğinizin değerini Azure Sentinel Barraycuda bağlayıcı sayfasından kopyalayın.
+    - **Birincil anahtar**: Azure Sentinel Barkıcuda bağlayıcı sayfasından birincil anahtarınızın değerini kopyalayın.
+1. Barbcuda olayları için Log Analytics ilgili şemayı kullanmak için, **Commonsecuritylog** ve **barracuda_CL**için arama yapın.
 
 
 ## <a name="validate-connectivity"></a>Bağlantıyı doğrula
 
-Çalınıyor Log Analytics'te görünmesini günlüklerinizi başlatana kadar 20 dakika sürebilir. 
+Günlüklerinizin Log Analytics görünene kadar 20 dakikadan bu kadar bir zaman çıkabilir. 
 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu belgede, Azure Gözcü için Barracuda cihazları bağlayın öğrendiniz. Azure Gözcü hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
-- Bilgi nasıl [görünürlük almak, veri ve olası tehditleri](quickstart-get-visibility.md).
-- Başlama [Azure Gözcü kullanarak tehditleri algılama](tutorial-detect-threats.md).
+Bu belgede Barbcuda gereçlerini Azure Sentinel 'e bağlamayı öğrendiniz. Azure Sentinel hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+- [Verilerinize nasıl görünürlük alabileceğinizi ve olası tehditleri](quickstart-get-visibility.md)öğrenin.
+- [Azure Sentinel ile tehditleri algılamaya](tutorial-detect-threats-built-in.md)başlayın.
 

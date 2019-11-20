@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Azure Active Directory ile otomatik kullanıcı hazırlama için Slack yapılandırma | Microsoft Docs'
-description: Slack için otomatik olarak sağlama ve devre dışı bırakma sağlama kullanıcı hesapları için Azure Active Directory yapılandırmayı öğrenin.
+title: 'Öğretici: Azure Active Directory ile otomatik Kullanıcı sağlama için bolluk yapılandırma | Microsoft Docs'
+description: Kullanıcı hesaplarını bolluk 'e otomatik olarak sağlamak ve devre dışı bırakmak için Azure Active Directory yapılandırmayı öğrenin.
 services: active-directory
 documentationcenter: ''
 author: ArvindHarinder1
@@ -15,114 +15,116 @@ ms.topic: article
 ms.date: 03/27/2019
 ms.author: arvinh
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 036112027fcf210f0ac2ff1e631c8b0bd4b5e9ef
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4a294254bd52db89179c5644ea7a0f0f04027f30
+ms.sourcegitcommit: 13a289ba57cfae728831e6d38b7f82dae165e59d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65964386"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68932483"
 ---
-# <a name="tutorial-configure-slack-for-automatic-user-provisioning"></a>Öğretici: Slack için otomatik kullanıcı hazırlama yapılandırın
+# <a name="tutorial-configure-slack-for-automatic-user-provisioning"></a>Öğretici: Otomatik Kullanıcı sağlaması için bolluk yapılandırma
 
-Slack ve Azure'daki gerçekleştirmesi gereken adımları göstermek için bu öğreticinin amacı olan otomatik olarak sağlama ve devre dışı bırakma sağlama kullanıcı hesaplarına AD'den Azure AD'ye Slack.
+Bu öğreticinin amacı, Azure AD 'den bolluk 'ye Kullanıcı hesaplarını otomatik olarak sağlamak ve devre dışı bırakmak için bolluk ve Azure AD 'de gerçekleştirmeniz gereken adımları gösteriyoruz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu öğreticide özetlenen senaryo, aşağıdaki öğeleri zaten sahip olduğunuzu varsayar:
+Bu öğreticide özetlenen senaryo, aşağıdaki öğelerin zaten olduğunu varsayar:
 
 * Azure Active Directory kiracısı
-* Bir Slack Kiracı ile [planı artı](https://aadsyncfabric.slack.com/pricing) ya da daha iyi etkin
-* Slack takım Yöneticisi izinlerine sahip bir kullanıcı hesabı
+* [Artı planı](https://aadsyncfabric.slack.com/pricing) veya daha iyi etkinleştirilmiş bir bolluk kiracısı
+* Ekip Yöneticisi izinleri ile bolluk içinde bir kullanıcı hesabı
 
-Not: Azure AD tümleştirmesi sağlama dayanan [Slack SCIM API](https://api.slack.com/scim), Slack takımlar için kullanılabildiği artı planlayabilir ya da daha iyi.
+Not: Azure AD sağlama tümleştirmesi, artı planı veya daha iyi bir deyişle bolluk ekipleri tarafından kullanılabilen [bolluk SCIM API](https://api.slack.com/scim)'sini kullanır.
 
-## <a name="assigning-users-to-slack"></a>Slack için kullanıcı atama
+## <a name="assigning-users-to-slack"></a>Kullanıcıları bolluk 'e atama
 
-Azure Active Directory "atamaları" adlı bir kavram, hangi kullanıcıların seçilen uygulamalara erişimi alması belirlemek için kullanır. Otomatik kullanıcı hesabı sağlama bağlamında, yalnızca kullanıcıların ve grupların, "Azure AD'de bir uygulama için atandı" eşitlenecektir.
+Azure Active Directory, hangi kullanıcıların seçili uygulamalara erişim alacağını belirleyebilmek için "atamalar" adlı bir kavram kullanır. Otomatik Kullanıcı hesabı sağlama bağlamında, yalnızca Azure AD 'de bir uygulamaya "atanmış" olan kullanıcılar ve gruplar eşitlenir.
 
-Yapılandırma ve sağlama hizmetini etkinleştirmeden önce hangi kullanıcılara ve/veya Azure AD'de grupları Slack uygulamanıza erişmek isteyen kullanıcılar temsil karar vermeniz gerekir. Karar sonra buradaki yönergeleri izleyerek bu kullanıcılar Slack uygulamanıza atayabilirsiniz:
+Sağlama hizmetini yapılandırmadan ve etkinleştirmeden önce, Azure AD 'deki hangi kullanıcıların ve/veya grupların bolluk uygulamanıza erişmesi gereken kullanıcıları temsil ettiğini belirlemeniz gerekir. Karar verdikten sonra buradaki yönergeleri izleyerek bu kullanıcıları bolluk uygulamanıza atayabilirsiniz:
 
-[Kurumsal bir uygulamayı kullanıcı veya grup atama](../manage-apps/assign-user-or-group-access-portal.md)
+[Kurumsal uygulamaya Kullanıcı veya Grup atama](../manage-apps/assign-user-or-group-access-portal.md)
 
-### <a name="important-tips-for-assigning-users-to-slack"></a>Slack için kullanıcı atama önemli ipuçları
+### <a name="important-tips-for-assigning-users-to-slack"></a>Bolluk 'e Kullanıcı atamaya yönelik önemli ipuçları
 
-* Önerilir tek bir Azure AD kullanıcı sağlama yapılandırmayı test etmek için Slack atanır. Ek kullanıcılar ve/veya grupları daha sonra atanabilir.
+* Sağlama yapılandırmasını test etmek için tek bir Azure AD kullanıcısına bolluk atanması önerilir. Ek kullanıcılar ve/veya grupları daha sonra atanabilir.
 
-* Bir kullanıcı için Slack atarken seçmelisiniz **kullanıcı** ya da "Grup" rol ataması iletişim. "Varsayılan erişim" rolü sağlama için çalışmaz.
+* Bir kullanıcıyı bolluk 'e atarken, atama iletişim kutusunda **Kullanıcı** veya "Grup" rolünü seçmeniz gerekir. "Varsayılan erişim" rolü sağlama için çalışmaz.
 
-## <a name="configuring-user-provisioning-to-slack"></a>Slack için kullanıcı sağlamayı yapılandırma 
+## <a name="configuring-user-provisioning-to-slack"></a>Kullanıcı sağlamayı bolluk olarak yapılandırma 
 
-Bu bölümde, Azure AD sağlama API'si Slack'ın kullanıcı hesabına bağlanma aracılığıyla size yol gösterir ve sağlama hizmeti oluşturmak için yapılandırma güncelleştirmesi ve atanan kullanıcı hesapları Azure AD'de kullanıcı ve Grup atamasına dayalı Slack içinde devre dışı bırak.
+Bu bölümde, Azure AD 'nizi bolluk 'in Kullanıcı hesabı sağlama API 'sine bağlama ve sağlama hizmeti 'ni, Azure AD 'de Kullanıcı ve grup atamasına göre bolluk içinde atanan kullanıcı hesaplarını oluşturmak, güncelleştirmek ve devre dışı bırakmak için yapılandırma işlemi kılavuzluk eder.
 
-**İpucu:** Uygulamayı da seçebilirsiniz SAML tabanlı çoklu oturum açma için Slack etkin, yönergeleri izleyerek sağlanan [Azure portalında](https://portal.azure.com). Bu iki özellik birbirine tamamlayıcı rağmen otomatik sağlama bağımsız olarak, çoklu oturum açma yapılandırılabilir.
+**İpucu:** Ayrıca, [Azure Portal](https://portal.azure.com)' de sağlanan yönergeleri izleyerek bolluk için SAML tabanlı çoklu oturum açma 'yı da tercih edebilirsiniz. Çoklu oturum açma özelliği otomatik sağlanmadan bağımsız olarak yapılandırılabilir, ancak bu iki özellik birbirini karmaşıdirebilirler.
 
-### <a name="to-configure-automatic-user-account-provisioning-to-slack-in-azure-ad"></a>Otomatik kullanıcı hesabı için Slack Azure AD'de sağlama yapılandırmak için:
+### <a name="to-configure-automatic-user-account-provisioning-to-slack-in-azure-ad"></a>Azure AD 'de otomatik Kullanıcı hesabı sağlamayı bolluk olarak yapılandırmak için:
 
-1. İçinde [Azure portalında](https://portal.azure.com), Gözat **Azure Active Directory > Kurumsal uygulamaları > tüm uygulamaları** bölümü.
+1. [Azure portal](https://portal.azure.com) **Azure Active Directory > Enterprise Apps > tüm uygulamalar** bölümüne gidin.
 
-2. Çoklu oturum açma için Slack zaten yapılandırdıysanız arama alanını kullanarak Slack Örneğiniz için arama yapın. Aksi takdirde seçin **Ekle** araması **Slack** uygulama galerisinde. Arama sonuçlarından Slack seçin ve uygulama listenize ekleyin.
+2. Çoklu oturum açma için bolluk 'i zaten yapılandırdıysanız arama alanını kullanarak bolluk örneğinizi arayın. Aksi takdirde, **Ekle** ' yi seçin ve uygulama galerisinde **bolluk** araması yapın. Arama sonuçlarından bolluk ' i seçin ve uygulama listenize ekleyin.
 
-3. Slack örneğinizi seçin ve ardından **sağlama** sekmesi.
+3. Bolluk örneğinizi seçin, sonra **sağlama** sekmesini seçin.
 
-4. Ayarlama **hazırlama modu** için **otomatik**.
+4. **Sağlama modunu** **Otomatik**olarak ayarlayın.
 
-   ![Slack sağlama](./media/slack-provisioning-tutorial/Slack1.PNG)
+   ![Bolluk sağlama](./media/slack-provisioning-tutorial/Slack1.PNG)
 
-5. Altında **yönetici kimlik bilgileri** bölümünde **Authorize**. Bu, yeni bir tarayıcı penceresinde bir Slack yetkilendirme iletişim kutusu açılır.
+5. **Yönetici kimlik bilgileri** bölümünde **Yetkilendir**' e tıklayın. Bu, yeni bir tarayıcı penceresinde bir bolluk yetkilendirme iletişim kutusu açar.
 
-6. Yeni pencerede, Slack takım yöneticisi hesabınızı kullanarak oturum açın. Sonuç yetkilendirme iletişim için sağlamayı etkinleştirmek için istediğiniz Slack takımı seçin ve ardından **Authorize**. Tamamlandığında, sağlama yapılandırmasını tamamlamak için Azure portalına dönün.
+6. Yeni pencerede, ekip yönetici hesabınızı kullanarak bolluk içinde oturum açın. elde edilen yetkilendirme iletişim kutusunda, sağlamayı etkinleştirmek istediğiniz bolluk ekibini seçin ve sonra **Yetkilendir**' i seçin. Tamamlandıktan sonra sağlama yapılandırmasını gerçekleştirmek için Azure portal döndürün.
 
-    ![Yetkilendirme iletişim](./media/slack-provisioning-tutorial/Slack3.PNG)
+    ![Yetkilendirme Iletişim kutusu](./media/slack-provisioning-tutorial/Slack3.PNG)
 
-7. Azure portalında **Test Bağlantısı** Azure emin olmak için AD, Slack uygulamanıza bağlanabilirsiniz. Bağlantı başarısız olursa, Slack hesabınızı takım Yöneticisi izinlerine sahip olduğundan emin olun ve "Yetkilendir" adımı yeniden deneyin.
+7. Azure portal, Azure AD 'nin bolluk uygulamanıza bağlanabildiğinden emin olmak için **Bağlantıyı Sına** ' ya tıklayın. Bağlantı başarısız olursa, bolluk hesabınızda Takım Yöneticisi izinlerine sahip olduğundan emin olun ve "Yetkilendir" adımını yeniden deneyin.
 
-8. Bir kişi veya grup sağlama hatası bildirimlerini alması gereken e-posta adresini girin **bildirim e-posta** alan ve aşağıdaki onay kutusunu işaretleyin.
+8. **Bildirim e-postası** alanında sağlama hatası bildirimleri alması gereken bir kişinin veya grubun e-posta adresini girin ve aşağıdaki onay kutusunu işaretleyin.
 
 9. **Kaydet**’e tıklayın.
 
-10. Eşlemeleri bölümü altında seçin **eşitleme Azure Active Directory Kullanıcıları için Slack**.
+10. Eşlemeler bölümünde **Azure Active Directory Kullanıcıları bolluğu ' ne kadar yap**' ı seçin.
 
-11. İçinde **öznitelik eşlemelerini** bölümünde, Azure AD'den Slack için eşitlenecek kullanıcı özniteliklerini gözden geçirin. Seçilen öznitelikler olarak Not **eşleşen** özellikleri, Slack kullanıcı hesaplarını güncelleştirme işlemleri eşleştirmek için kullanılır. Değişiklikleri kaydetmek için Kaydet düğmesini seçin.
+11. **Öznitelik eşlemeleri** bölümünde, Azure AD 'den bolluk 'e eşitlenecek Kullanıcı özniteliklerini gözden geçirin. **Eşleşen** özellikler olarak seçilen özniteliklerin, güncelleştirme Işlemleri için bolluk içindeki kullanıcı hesaplarıyla eşleşmesi için kullanılacağını unutmayın. Değişiklikleri kaydetmek için Kaydet düğmesini seçin.
 
-12. Azure AD sağlama hizmeti için Slack etkinleştirmek için değiştirin **sağlama durumu** için **üzerinde** içinde **ayarları** bölümü
+12. Azure AD sağlama hizmetini bolluk için etkinleştirmek üzere **Ayarlar** bölümünde **sağlama durumunu** **Açık** olarak değiştirin
 
 13. **Kaydet**’e tıklayın.
 
-Bu, herhangi bir kullanıcı ve/veya Slack kullanıcılar ve Gruplar bölümünde atanan grupları ilk eşitlemeyi başlatır. İlk eşitleme hizmeti çalışıyor olarak yaklaşık her 10 dakikada oluşan sonraki eşitlemeler uzun sürer. Kullanabileceğiniz **eşitleme ayrıntıları** bölüm ilerlemeyi izlemek ve Slack uygulamanızdan sağlama hizmeti tarafından gerçekleştirilen tüm eylemler açıklayan Etkinlik raporlarını sağlama için bağlantıları izleyin.
+Bu, kullanıcılar ve Gruplar bölümünde bolluk 'e atanan tüm Kullanıcı ve/veya grupların ilk eşitlemesini başlatır. İlk eşitlemenin daha sonra, hizmetin çalıştığı sürece yaklaşık 10 dakikada bir sonraki eşitlemeler tarafından gerçekleştirilmesi daha uzun sürer. İşlem ilerlemesini izlemek ve sağlama hizmeti tarafından gerçekleştirilen tüm eylemleri bolluk uygulamanızda açıklayan etkinlik raporlarını sağlamak için **eşitleme ayrıntıları** bölümünü kullanabilirsiniz.
 
-## <a name="optional-configuring-group-object-provisioning-to-slack"></a>[İsteğe bağlı] Grup nesne için Slack sağlama yapılandırma
+## <a name="optional-configuring-group-object-provisioning-to-slack"></a>Seçim Grup nesnesi sağlamayı bolluk olarak yapılandırma
 
-İsteğe bağlı olarak, Azure ad grubu nesne için Slack sağlamayı etkinleştirebilirsiniz. Bu, "kullanıcı gruplarını atamasını" farklıdır, Slack için gerçek grup nesnesinin üyelerinin yanı sıra, Azure AD'den çoğaltılır. Örneğin, Azure AD'de "Grubum" adlı bir grubu varsa, "My grubu" adlı bir aynı grup Slack içinde oluşturulur.
+İsteğe bağlı olarak, Azure AD 'den bolluk 'e Grup nesneleri sağlamayı etkinleştirebilirsiniz. Bu, üyelerine ek olarak gerçek grup nesnesinin Azure AD 'den bolluk 'e çoğaltılacağı "Kullanıcı grupları atama" işleminden farklıdır. Örneğin, Azure AD 'de "grubum" adlı bir grubunuz varsa, bolluk içinde "My Group" adlı özdeş bir grup oluşturulur.
 
-### <a name="to-enable-provisioning-of-group-objects"></a>Grup nesnelerin sağlamayı etkinleştirmek için:
+### <a name="to-enable-provisioning-of-group-objects"></a>Grup nesnelerinin sağlamasını etkinleştirmek için:
 
-1. Eşlemeleri bölümü altında seçin **eşitleme Azure Active Directory gruplarına Slack**.
+1. Eşlemeler bölümünde **Azure Active Directory gruplarını bolluk olarak eşitler**' ı seçin.
 
-2. Öznitelik eşlemesi dikey penceresinde, etkin Evet olarak ayarlayın.
+2. Öznitelik eşleme dikey penceresinde, etkin ' i Evet olarak ayarlayın.
 
-3. İçinde **öznitelik eşlemelerini** bölümünde, Azure AD'den Slack için eşitlenecek grup öznitelikleri gözden geçirin. Seçilen öznitelikler olarak Not **eşleşen** özellikleri güncelleştirme işlemleri için Slack gruplarında eşleştirmek için kullanılır. 
+3. **Öznitelik eşlemeleri** bölümünde, Azure AD 'den bolluk 'e eşitlenecek grup özniteliklerini gözden geçirin. **Eşleşen** özellikler olarak seçilen özniteliklerin, güncelleştirme Işlemleri için bolluk içindeki grupları eşleştirmek için kullanılacağını unutmayın. 
 
 4. **Kaydet**’e tıklayın.
 
-Bu sonucu Slack içinde atanmış herhangi bir grup nesne **kullanıcılar ve gruplar** Slack için Azure AD'den tam olarak eşitlenmekte olan bölüm. Kullanabileceğiniz **eşitleme ayrıntıları** bölüm ilerlemeyi izlemek ve Slack uygulamanızdan sağlama hizmeti tarafından gerçekleştirilen tüm eylemler açıklayan etkinlik günlüklerini sağlama için bağlantıları izleyin.
+Bu, **Kullanıcılar ve gruplar** bölümündeki bolluk 'e atanan tüm grup NESNELERININ Azure AD 'den bolluk 'e tam olarak eşitlendiği bir sonuç olarak sonuçlanır. İşlem ilerlemesini izlemek ve sağlama hizmeti tarafından gerçekleştirilen tüm eylemleri bolluk uygulamanızda açıklayan etkinlik günlüklerini sağlamak için **eşitleme ayrıntıları** bölümünü kullanabilirsiniz.
 
 Azure AD günlüklerini sağlama okuma hakkında daha fazla bilgi için bkz. [hesabı otomatik kullanıcı hazırlama raporlama](../manage-apps/check-status-user-account-provisioning.md).
 
 ## <a name="connector-limitations"></a>Bağlayıcı sınırlamaları
 
-* Slack'ın yapılandırırken **displayName** öznitelik, aşağıdaki davranışları unutmayın:
+* Bolluk **DisplayName** özniteliğini yapılandırırken aşağıdaki davranışlardan haberdar olun:
 
-  * Değerleri (örneğin 2 kullanıcılar, aynı görünen adı olabilir) tamamen benzersiz değil
+  * Değerler tamamen benzersiz değildir (ör. 2 Kullanıcı aynı görünen ada sahip olabilir)
 
-  * İngilizce olmayan karakterler, boşluk, büyük/küçük harf destekler. 
+  * Ingilizce olmayan karakterleri, boşlukları, büyük harfleri destekler. 
   
-  * Noktalama, nokta, alt çizgi, kısa çizgi, kesme, köşeli ayraçlar içerir izin (örneğin **([{}])** ) ve ayırıcılar (örneğin **, /;** ).
+  * İzin verilen noktalama noktalar, alt çizgiler, tireler, kesme işareti, köşeli ayraçlar (ör. **([{}])** ) ve ayırıcılar (ör. **,/;** ) içerir.
   
-  * Bu iki ayar Slack'ın çalışma alanına/kuruluşta - yapılandırıldıysa yalnızca güncelleştirmeleri **profil eşitleme etkin** ve **kullanıcılar, kullanıcıların görünen adı değiştirilemez**.
+  * Yalnızca bu iki ayar, bolluk 'in çalışma alanında/kuruluşta yapılandırılmışsa, **profil eşitlemesi etkinleştirilir** ve **Kullanıcılar kendi görünen adlarını değiştiremezler**.
   
-  * Slack'ın **kullanıcıadı** özniteliğine sahip altında 21 karakter olmalı ve benzersiz bir değere sahip.
+* Bolluk **Kullanıcı adı** özniteliği 21 karakterden oluşmalıdır ve benzersiz bir değere sahip olmalıdır.
+
+* Bolluk yalnızca **Kullanıcı adı** ve **e-posta**öznitelikleriyle eşleştirmeye izin verir.  
 
 ## <a name="additional-resources"></a>Ek Kaynaklar
 
-* [Kullanıcı hesabı, kurumsal uygulamalar için sağlamayı yönetme](../manage-apps/configure-automatic-user-provisioning-portal.md)
+* [Kurumsal uygulamalar için Kullanıcı hesabı sağlamayı yönetme](../manage-apps/configure-automatic-user-provisioning-portal.md)
 * [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](../manage-apps/what-is-single-sign-on.md)

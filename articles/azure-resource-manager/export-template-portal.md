@@ -1,122 +1,115 @@
 ---
-title: Azure portalını kullanarak Azure Resource Manager şablonunu dışarı aktarma
-description: Bir Azure Resource Manager şablonu, aboneliğinizdeki kaynaklar dışarı aktarmak için Azure portalını kullanın.
-author: tfitzmac
-ms.service: azure-resource-manager
+title: Azure portal şablonu dışarı aktarma
+description: Aboneliğinizdeki kaynaklardan bir Azure Resource Manager şablonu dışarı aktarmak için Azure portal kullanın.
 ms.topic: conceptual
-ms.date: 06/19/2019
-ms.author: tomfitz
-ms.openlocfilehash: e482bf99013b9bec9dfbf64c4e8ad5a8a43ff540
-ms.sourcegitcommit: 2d3b1d7653c6c585e9423cf41658de0c68d883fa
+ms.date: 10/11/2019
+ms.openlocfilehash: 6e05a8bff27e56bc5942a7c16ab63921c489f44c
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67296318"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74149861"
 ---
-# <a name="single-and-multi-resource-export-to-template-in-azure-portal"></a>Azure portalında şablon için tek ve birden çok kaynak dışarı aktarma
+# <a name="single-and-multi-resource-export-to-a-template-in-azure-portal"></a>Azure portal bir şablona tek ve çoklu kaynak verme
 
-Azure Resource Manager şablonları oluşturmaya yardımcı olmak için var olan kaynaklardan bir şablonu dışarı aktarabilirsiniz. Dışarı aktarılan şablon JSON söz dizimi ve kaynaklarınızı dağıtma özelliklerini anlamanıza yardımcı olur. Gelecekteki dağıtımlar otomatikleştirmek için dışarı aktarılan şablonu ile başlayın ve senaryonuz için değiştirin.
+Azure Resource Manager şablonları oluşturmaya yardımcı olmak için, var olan kaynaklardan bir şablonu dışarı aktarabilirsiniz. Verdiğiniz şablon, JSON sözdizimini ve kaynaklarınızı dağıtan özellikleri anlamanıza yardımcı olur. Gelecekteki dağıtımları otomatik hale getirmek için, verdiğiniz şablonla başlayın ve senaryonuz için değiştirin.
 
-Resource Manager için bir şablonu dışarı aktarma için bir veya daha fazla kaynak seçmenizi sağlar. Tam olarak şablonda ihtiyacınız olan kaynakları üzerinde odaklanabilirsiniz.
+Kaynak Yöneticisi bir şablona dışarı aktarmak için bir veya daha fazla kaynak seçmenizi sağlar. Şablonda ihtiyacınız olan kaynaklara tam olarak odaklanırsınız.
 
-Bu makalede, portal üzerinden şablonlarını dışarı aktarma gösterilmektedir. Ayrıca [Azure CLI](manage-resource-groups-cli.md#export-resource-groups-to-templates), [Azure PowerShell](manage-resource-groups-powershell.md#export-resource-groups-to-templates), veya [REST API](/rest/api/resources/resourcegroups/exporttemplate).
+Bu makalede, Portal üzerinden şablonların nasıl dışarı aktarılacağı gösterilmektedir. [Azure CLI](manage-resource-groups-cli.md#export-resource-groups-to-templates), [Azure PowerShell](manage-resource-groups-powershell.md#export-resource-groups-to-templates)veya [REST API](/rest/api/resources/resourcegroups/exporttemplate)de kullanabilirsiniz.
 
-## <a name="choose-the-right-export-option"></a>Doğru dışa aktarma seçeneği seçin
+## <a name="choose-the-right-export-option"></a>Doğru dışa aktarma seçeneğini belirleyin
 
 Şablonu dışarı aktarmanın iki yolu vardır:
 
-* **Kaynak grubu ya da kaynak dışarı aktarma**. Bu seçenek, mevcut kaynaklardan yeni bir şablon oluşturur. Dışarı aktarılan kaynak grubunun geçerli durumu "snapshot" şablonudur. Bir kaynak grubunun tamamını ya da kaynak grubu içindeki belirli kaynaklar dışarı aktarabilirsiniz.
+* **Kaynak grubundan veya kaynaktan dışarı aktarın**. Bu seçenek, mevcut kaynaklardan yeni bir şablon oluşturur. Bu şablon, kaynak grubunun geçerli durumunun "Snapshot" ' dır. Kaynak grubunun tamamını veya kaynak grubu içindeki belirli kaynakları dışarı aktarabilirsiniz.
 
-* **Dağıtımdan önce veya geçmişinden dışarı aktarma**. Bu seçenek, dağıtım için kullanılan bir şablon tam bir kopyasını alır.
+* **Dağıtımdan veya geçmişten önce dışarı aktarın**. Bu seçenek, dağıtım için kullanılan bir şablonun tam bir kopyasını alır.
 
-Belirlediğiniz seçeneğe bağlı olarak, dışarı aktarılan şablonları farklı niteliklere sahip.
+Seçtiğiniz seçeneğe bağlı olarak, içe aktarılmış şablonların farklı nitelikleri vardır.
 
-| Kaynak grubuna ya da kaynağa | Dağıtımdan önce veya geçmişi |
+| Kaynak grubu veya kaynaktan | Dağıtımdan veya geçmişten önce |
 | --------------------- | ----------------- |
-| Şablon anlık görüntü kaynakların geçerli durumu. Bu, herhangi bir el ile dağıtımdan sonra yapılan değişiklikler içerir. | Şablon, dağıtım sırasında yalnızca kaynakların durumunu gösterir. Dağıtımı olmayan sonra dahil yaptığınız tüm el ile yapılan değişiklikler. |
-| Bir kaynak grubundan dışarı aktarmak için hangi kaynakların seçebilirsiniz. | Belirli bir dağıtımı için tüm kaynakları dahil edilir. Bu kaynakların alt kümesini seçin veya farklı bir zamanda eklenen kaynakları ekleyin. |
-| Şablon dağıtımı sırasında ayarladığınız normalde mıydı bazı özellikler dahil olmak üzere, kaynakların tüm özellikleri içerir. Kaldırın veya şablonu yeniden kullanmadan önce bu özelliklerini temizleme isteyebilirsiniz. | Şablon dağıtımı için gerekli özellikleri içerir. Kullanıma hazır şablonudur. |
-| Şablon, büyük olasılıkla tüm için yeniden kullanılması gereken parametreler içermez. Çoğu özellik değerleri, şablonda sabit kodlanmış. Diğer ortamlarda şablonu yeniden dağıtmak için kaynakları yapılandırma yeteneğini artırmak parametrelerini eklemeniz gerekir. | Şablonu yeniden dağıtmak farklı ortamlarda kolaylaştırır parametreleri içerir. |
+| Şablon, kaynakların geçerli durumunun anlık görüntüsüdür. Dağıtımdan sonra yaptığınız el ile yapılan tüm değişiklikleri içerir. | Şablon, dağıtım sırasında yalnızca kaynakların durumunu gösterir. Dağıtımdan sonra yaptığınız tüm el ile değişiklikler dahil edilmez. |
+| Bir kaynak grubundan dışarı aktarılacak kaynakları seçebilirsiniz. | Belirli bir dağıtımın tüm kaynakları dahil edilmiştir. Bu kaynakların bir alt kümesini seçemezsiniz veya farklı bir zamanda eklenen kaynaklar ekleyebilirsiniz. |
+| Şablon, genellikle dağıtım sırasında ayarladığınız bazı özellikler dahil olmak üzere, kaynakların tüm özelliklerini içerir. Şablonu yeniden kullanmadan önce bu özellikleri kaldırmak veya temizlemek isteyebilirsiniz. | Şablon yalnızca dağıtım için gereken özellikleri içerir. Şablon kullanıma hazırdır. |
+| Şablon muhtemelen yeniden kullanım için gereken tüm parametreleri içermez. Çoğu özellik değeri, şablonda sabit olarak kodlanır. Diğer ortamlarda şablonu yeniden dağıtmak için, kaynakları yapılandırma özelliğini artıran parametreler eklemeniz gerekir. | Şablon, farklı ortamlarda yeniden dağıtmayı kolaylaştıran parametreler içerir. |
 
-Bir kaynak grubu ya da kaynak şablonu dışarı aktarma olduğunda:
+Şablonu bir kaynak grubu veya kaynağından dışarı aktarın, ne zaman:
 
-* Kaynakları özgün dağıtım sonrasında yapılan değişiklikleri yakalamak gerekir.
-* Hangi kaynakların dışarı seçmek istiyorum.
+* Başlangıçtaki dağıtımdan sonra yapılan kaynaklardaki değişiklikleri yakalamanız gerekir.
+* Hangi kaynakların verildiğini seçmek istiyorsunuz.
 
-Dağıtımdan önce veya geçmişinden şablonu dışarı aktarma olduğunda:
+Şablonu dağıtımdan önce veya geçmişten önce dışarı aktarın, ne zaman:
 
-* Bir kolayca yeniden şablonu kullanmanız gerekir.
-* Özgün dağıtım sonrasında yaptığınız değişiklikleri eklemeniz gerekmez.
+* Kullanımı kolay bir şablon istiyorsunuz.
+* Özgün dağıtımdan sonra yaptığınız değişiklikleri eklemeniz gerekmez.
 
-## <a name="export-template-from-resource-group"></a>Şablonu kaynak grubundan dışarı aktarma
+## <a name="export-template-from-a-resource-group"></a>Bir kaynak grubundan şablonu dışarı aktarma
 
-Bir veya daha fazla kaynak bir kaynak grubundan dışarı aktarmak için:
+Bir kaynak grubundan bir veya daha fazla kaynağı dışarı aktarmak için:
 
 1. Dışarı aktarmak istediğiniz kaynakları içeren kaynak grubunu seçin.
 
-1. Kaynak grubundaki tüm kaynakları dışarı aktarmak için tüm seçin ve ardından **şablonu dışarı aktarma**. **Şablonu dışarı aktarma** seçenek haline gelir etkinleştirilebilmesi için en az bir kaynak seçtikten sonra.
+1. Onay kutularını seçerek bir veya daha fazla kaynak seçin.  Tümünü seçmek için, **adının**solundaki onay kutusunu seçin. **Şablonu dışarı aktar** menü öğesi yalnızca en az bir kaynak seçildikten sonra etkin hale gelir.
 
-   ![Tüm kaynakları Dışarı Aktar](./media/export-template-portal/select-all-resources.png)
+   ![Tüm kaynakları dışarı aktar](./media/export-template-portal/select-all-resources.png)
 
-1. Dışarı aktarma için belirli kaynaklara seçmek için bu kaynakları yanındaki onay kutularını seçin. Ardından, **şablonu dışarı aktarma**.
+    Ekran görüntüsünde yalnızca depolama hesabı seçilir.
+1. **Şablonu dışarı aktar**' ı seçin.
 
-   ![Dışarı aktarılacak kaynakları seçin](./media/export-template-portal/select-resources.png)
+1. İçe aktarılmış şablon görüntülenir ve indirilebilir ve dağıtılabilir.
 
-1. Dışarı aktarılan şablon, görüntülenir ve indirilebilir.
+   ![Şablonu göster](./media/export-template-portal/show-template.png)
 
-   ![Şablonu Göster](./media/export-template-portal/show-template.png)
+## <a name="export-template-from-a-resource"></a>Şablondan bir kaynağı dışarı aktar
 
-## <a name="export-template-from-resource"></a>Şablonu kaynak grubundan dışarı aktarma
+Bir kaynağı dışarı aktarmak için:
 
-Bir kaynak dışarı aktarmak için:
+1. Dışarı aktarmak istediğiniz kaynağı içeren kaynak grubunu seçin.
 
-1. Dışarı aktarmak istediğiniz kaynak içeren kaynak grubunu seçin.
+1. Kaynağı açmak için dışarı aktarmak istediğiniz kaynağı seçin.
 
-1. Dışarı aktarmak için kaynağı seçin.
+1. Bu kaynak için sol bölmedeki **şablonu dışarı aktar** ' ı seçin.
 
-   ![Kaynak seçin](./media/export-template-portal/select-link-resource.png)
+   ![Kaynağı dışarı aktar](./media/export-template-portal/export-single-resource.png)
 
-1. Bu kaynak için seçin **şablonu dışarı aktarma** sol bölmesinde.
+1. İçe aktarılmış şablon görüntülenir ve indirilebilir ve dağıtılabilir. Şablon yalnızca tek bir kaynağı içerir.
 
-   ![Kaynak dışarı aktarma](./media/export-template-portal/export-single-resource.png)
+## <a name="export-template-before-deployment"></a>Dağıtımdan önce şablonu dışarı aktar
 
-1. Dışarı aktarılan şablon, görüntülenir ve indirilebilir. Bu şablon, yalnızca tek bir kaynak içerir.
-
-## <a name="export-template-before-deployment"></a>Dağıtımdan önce şablonu dışarı aktarma
-
-1. Dağıtmak istediğiniz Azure hizmeti seçin.
+1. Dağıtmak istediğiniz Azure hizmetini seçin.
 
 1. Yeni hizmet için değerleri girin.
 
-1. Doğrulama geçirmeden sonra ancak dağıtıma başlamadan önce seçin **Otomasyon için bir şablonunu indirebilirsiniz**.
+1. Doğrulamayı geçirdikten sonra, ancak dağıtımı başlatmadan önce **Otomasyon için bir şablon indir**' i seçin.
 
    ![Şablon indirme](./media/export-template-portal/download-before-deployment.png)
 
-1. Şablon görüntülenir ve indirme için kullanılabilir.
+1. Şablon görüntülenir ve indirileceği ve dağıtım için kullanılabilir.
 
-   ![Şablonu Göster](./media/export-template-portal/show-template-before-deployment.png)
 
-## <a name="export-template-after-deployment"></a>Dağıtımdan sonra şablonu dışarı aktarma
+## <a name="export-template-after-deployment"></a>Dağıtımdan sonra şablonu dışarı aktar
 
-Var olan kaynakları dağıtmak için kullanılan şablonu dışarı aktarabilirsiniz. Size tam dağıtım için kullanılan bir şablonudur.
+Mevcut kaynakları dağıtmak için kullanılan şablonu dışarı aktarabilirsiniz. Aldığınız şablon tam olarak dağıtım için kullanılan bir şablondur.
 
 1. Dışarı aktarmak istediğiniz kaynak grubunu seçin.
 
-1. Altındaki bağlantıyı seçin **dağıtımları**.
+1. **Dağıtımlar**altındaki bağlantıyı seçin.
 
-   ![Dağıtım geçmişi seçin](./media/export-template-portal/select-deployment-history.png)
+   ![Dağıtım geçmişini seçin](./media/export-template-portal/select-deployment-history.png)
 
-1. Dağıtımlardan biri dağıtım geçmişinden seçin.
+1. Dağıtım geçmişinden dağıtımlardan birini seçin.
 
-   ![Dağıtımını seçin](./media/export-template-portal/select-details.png)
+   ![Dağıtım seçin](./media/export-template-portal/select-details.png)
 
-1. Seçin **şablon**. Bu dağıtım için kullanılan şablon görüntülenir ve indirme için kullanılabilir.
+1. **Şablon**seçin. Bu dağıtım için kullanılan şablon görüntülenir ve indirilmek üzere kullanılabilir.
 
    ![Şablonu seçin](./media/export-template-portal/show-template-from-history.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Nasıl şablonlarıyla dışarı aktarıldığı öğretilir [Azure CLI](manage-resource-groups-cli.md#export-resource-groups-to-templates), [Azure PowerShell](manage-resource-groups-powershell.md#export-resource-groups-to-templates), veya [REST API](/rest/api/resources/resourcegroups/exporttemplate).
-- Resource Manager şablon söz dizimi bilgi edinmek için [yapısını ve Azure Resource Manager şablonları söz dizimini anlamak](./resource-group-authoring-templates.md).
-- Şablonları geliştirme hakkında bilgi edinmek için [adım adım öğreticiler](/azure/azure-resource-manager/).
-- Azure Resource Manager Şablon Şemaları görüntülemek için bkz: [şablon başvurusu](/azure/templates/).
+- [Azure CLI](manage-resource-groups-cli.md#export-resource-groups-to-templates), [Azure PowerShell](manage-resource-groups-powershell.md#export-resource-groups-to-templates)veya [REST API](/rest/api/resources/resourcegroups/exporttemplate)ile şablonları dışarı aktarmayı öğrenin.
+- Kaynak Yöneticisi Şablon sözdizimini öğrenmek için bkz. [Azure Resource Manager şablonlarının yapısını ve sözdizimini anlayın](./resource-group-authoring-templates.md).
+- Şablon geliştirmeyi öğrenmek için [adım adım öğreticiler](/azure/azure-resource-manager/)bölümüne bakın.
+- Azure Resource Manager şablonu şemalarını görüntülemek için bkz. [şablon başvurusu](/azure/templates/).

@@ -1,6 +1,6 @@
 ---
-title: Özel ölçüm kullanarak azure'da otomatik ölçeklendirme
-description: Kaynağınızı azure'da özel bir ölçü olarak ölçeklendirmeyi öğrenin.
+title: Özel ölçüm kullanarak Azure 'da otomatik ölçeklendirme
+description: Azure 'da kaynağı özel ölçüm ile ölçeklendirmenin nasıl yapılacağını öğrenin.
 author: anirudhcavale
 services: azure-monitor
 ms.service: azure-monitor
@@ -8,40 +8,40 @@ ms.topic: conceptual
 ms.date: 05/07/2017
 ms.author: ancav
 ms.subservice: autoscale
-ms.openlocfilehash: e6423f2ce3659fd3dd738dcc8a990261bc7bf60c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: f83c68dd2f2ddbb73974a2ea4e91e746308945c6
+ms.sourcegitcommit: 39da2d9675c3a2ac54ddc164da4568cf341ddecf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60334373"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73958107"
 ---
-# <a name="get-started-with-auto-scale-by-custom-metric-in-azure"></a>Otomatik ölçeklendirme ile azure'da özel bir ölçü olarak kullanmaya başlayın
-Bu makalede, Azure portalındaki özel ölçüm kaynağınızı ölçeklendirilmesine açıklar.
+# <a name="get-started-with-auto-scale-by-custom-metric-in-azure"></a>Azure 'da özel ölçüm ile otomatik ölçeklendirmeyi kullanmaya başlama
+Bu makalede, Azure portal bir özel ölçüm tarafından kaynağınızın nasıl ölçekleneceğini açıklanmaktadır.
 
-Azure İzleyici otomatik ölçeklendirme için yalnızca geçerlidir [sanal makine ölçek kümeleri](https://azure.microsoft.com/services/virtual-machine-scale-sets/), [Cloud Services](https://azure.microsoft.com/services/cloud-services/), [App Service - Web Apps](https://azure.microsoft.com/services/app-service/web/), ve [APIManagementHizmetleri](https://docs.microsoft.com/azure/api-management/api-management-key-concepts).
+Azure Izleyici otomatik ölçeklendirme yalnızca [Sanal Makine Ölçek Kümeleri](https://azure.microsoft.com/services/virtual-machine-scale-sets/), [Cloud Services](https://azure.microsoft.com/services/cloud-services/), [App Service-Web Apps](https://azure.microsoft.com/services/app-service/web/)ve [API Management Hizmetleri](https://docs.microsoft.com/azure/api-management/api-management-key-concepts)için geçerlidir.
 
-## <a name="lets-get-started"></a>Sağlar kullanmaya başlayın
-Bu makalede, application ınsights ile yapılandırılmış bir web uygulaması sahibi olduğunuzu varsayar. Zaten yoksa, şunları yapabilirsiniz [ASP.NET Web siteniz için Application ınsights'ı ayarlama][1]
+## <a name="lets-get-started"></a>Başlamanıza izin verir
+Bu makalede, Application Insights 'ın yapılandırıldığı bir Web uygulamasına sahip olduğunuz varsayılır. Henüz bir hesabınız yoksa, [ASP.NET Web siteniz için Application Insights ayarlayabilirsiniz][1]
 
-- Açık [Azure portalı][2]
-- Sol gezinti bölmesinde Azure İzleyici simgesine tıklayın.
-  ![Azure İzleyicisi'ni başlatma][3]
-- Otomatik ölçeklendirme ayarı için otomatik ölçeklendirme, geçerli bir otomatik ölçeklendirme durumu ile birlikte geçerli olan tüm kaynakları görüntülemek için tıklatın ![Azure İzleyici otomatik ölçeklendirme keşfedin][4]
-- Azure İzleyicisi'nde 'Otomatik ölçeklendirme' dikey penceresini açın ve ölçeklendirmek için istediğiniz bir kaynak seçin
-  > Not: App ınsights yapılandırılmış olan bir web uygulaması ile ilişkili bir app service planı aşağıdaki adımları kullanın.
-- Kaynak için ölçek ayarı dikey penceresinde, özel olarak geçerli örnek sayısını 1 olduğuna dikkat edin. 'Otomatik ölçeklendirmeyi etkinleştirme üzerinde' tıklayın.
-  ![Yeni web uygulaması için ölçek ayarı][5]
-- Ölçek ayarı ve "Bir kural Ekle'yi" tıklayın için bir ad sağlayın. Bir bağlam bölmesinde sağ tarafı olarak açılır ölçek kuralı seçeneklerini dikkat edin. Varsayılan olarak, kaynak CPU yüzdesi % 70'i aşarsa, örnek sayınız 1 ile ölçeklendirme seçeneği ayarlar. "Application Insights" üst ölçüm kaynağı değiştirme, app ınsights kaynağı 'Resource' açılır menüde seçip dayalı özel ölçüm ölçeklendirmek istediğiniz üzerinde.
-  ![Özel bir ölçüme göre ölçeklendirin][6]
-- Yukarıdaki adıma benzer şekilde, ölçeklendirme ve özel ölçüm eşiğin altında ise ölçek sayısı 1 ile azaltma ölçek kuralı ekleyin.
-  ![CPU üzerinde göre ölçeklendirin][7]
-- Ayarladığınız örnek limitleri. Özel ölçüm dalgalanmaları bağlı olarak 2-5 örnekleri arasında ölçeklendirme istiyorsanız, örneğin, 'minimum' için '2', 'maksimum.', '5' ve 'default' için ' 2' ayarlayın
-  > Not: Kaynak ölçümlerin okunmasıyla bir sorun olduğunu ve geçerli kapasite, varsayılan kapasitenin altında olduğu durumda, ardından kaynak kullanılabilirliğini sağlamak için otomatik ölçeklendirme varsayılan değer olarak ölçeklendirilir. Geçerli kapasite, varsayılan kapasiteden zaten yüksektir, otomatik ölçeklendirme, ölçeği değil.
-- 'Kaydet' tıklayın
+- [Azure Portal][2] açın
+- Sol gezinti bölmesinde Azure Izleyici simgesine tıklayın.
+  Azure Izleyici 'yi başlatmak ![][3]
+- Otomatik ölçeklendirmenin geçerli olduğu tüm kaynakları görüntülemek için otomatik ölçeklendirme ayarı ' na tıklayın ![Azure izleyici 'de otomatik ölçeklendirmeyi bulun][4]
+- Azure Izleyici 'de ' otomatik ölçeklendirme ' dikey penceresini açın ve ölçeklendirmek istediğiniz kaynağı seçin
+  > Unutmayın: aşağıdaki adımlarda, Application Insights 'ın yapılandırıldığı bir Web uygulamasıyla ilişkili bir App Service planı kullanılır.
+- Kaynak için ölçek ayarı dikey penceresinde, geçerli örnek sayısı ' nın 1 olduğuna dikkat edin. ' Otomatik ölçeklendirmeyi etkinleştir ' seçeneğine tıklayın.
+  Yeni Web uygulaması için ölçek ayarı ![][5]
+- Ölçek ayarı için bir ad girin ve "kural ekle" seçeneğine tıklayın. Sağ taraftaki bağlam bölmesi olarak açılan ölçek kuralı seçeneklerine dikkat edin. Varsayılan olarak, kaynağın CPU yüzdesi %70 ' ü aşarsa, örnek sayınız 1 ' i ölçeklendirme seçeneğini ayarlar. En üstteki ölçüm kaynağını "Application Insights" olarak değiştirin, ' kaynak ' açılan menüsünde App Insights kaynağını seçin ve ardından ölçeklendirmek istediğiniz özel ölçümü seçin.
+  Özel ölçüme göre ölçeği ![][6]
+- Yukarıdaki adıma benzer şekilde, özel ölçüm bir eşiğin altındaysa ölçek sayısını 1 ' e ölçeklendirecek bir ölçek kuralı ekleyin.
+  ![CPU][7] göre ölçeklendirin
+- Örnek sınırlarını ayarlayın. Örneğin, özel ölçüm dalgalanmalarına bağlı olarak 2-5 örnek arasında ölçeklendirme yapmak istiyorsanız, ' en az ' değerini ' 2 ', ' en yüksek ' değerini ' 5 ' ve ' default ' olarak ' 2 ' olarak ayarlayın
+  > Note: kaynak ölçümlerini okurken bir sorun olması ve geçerli kapasitenin varsayılan kapasitenin altında olduğundan emin olmak için, otomatik ölçeklendirme, kaynak kullanılabilirliğini sağlamak üzere varsayılan değere ölçeklendirecektir. Geçerli kapasite varsayılan kapasiteden daha yüksekse, otomatik ölçeklendirme bu şekilde ölçeklenmez.
+- ' Kaydet 'e tıklayın
 
-Tebrikler. Artık web uygulamanıza özel bir ölçüme göre otomatik ölçeklendirme ayarını ölçek oluşturuldu.
+Tebrikler. Artık ölçek ayarınızı, Web uygulamanızı özel bir ölçüme göre otomatik olarak ölçeklendirmek için başarıyla oluşturdunuz.
 
-> Not: Aynı adımları VMSS veya Bulut hizmet rolü ile kullanmaya başlamak için geçerlidir.
+> Note: bir VMSS veya bulut hizmeti rolü ile çalışmaya başlamak için aynı adımlar geçerlidir.
 
 <!--Reference-->
 [1]: https://docs.microsoft.com/azure/application-insights/app-insights-asp-net

@@ -1,6 +1,6 @@
 ---
-title: Azure'da sanal makine ölçek için bakım bildirimleri ayarlar | Microsoft Docs
-description: Bakım bildirimleri görüntüleyin ve Azure'da sanal makine ölçek kümeleri için Self Servis bakım başlatın.
+title: Azure 'da sanal makine ölçek kümeleri için bakım bildirimleri | Microsoft Docs
+description: Azure 'da bakım bildirimlerini görüntüleyin ve sanal makine ölçek kümeleri için self servis bakımını başlatın.
 services: virtual-machine-scale-sets
 documentationcenter: ''
 author: shants123
@@ -12,155 +12,165 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/09/2018
+ms.date: 08/20/2019
 ms.author: shants
-ms.openlocfilehash: 31d4829c6adaf4bd5392ef393dcaefbeb7dc6255
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 413301fd8b6b4b2a3b60501378cf6da23cc38d81
+ms.sourcegitcommit: 3f78a6ffee0b83788d554959db7efc5d00130376
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60618464"
+ms.lasthandoff: 08/26/2019
+ms.locfileid: "70018855"
 ---
-# <a name="planned-maintenance-notifications-for-virtual-machine-scale-sets"></a>Sanal makine ölçek kümeleri için planlı bakım bildirimlerini
+# <a name="planned-maintenance-notifications-for-virtual-machine-scale-sets"></a>Sanal Makine Ölçek Kümeleri için planlı bakım bildirimleri
 
 
-Azure güncelleştirmeleri güvenilirlik, performans ve sanal makineler (VM) konak altyapısının güvenliğini iyileştirmek için düzenli olarak gerçekleştirir. Güncelleştirmeleri barındırma ortamına düzeltme eki veya yükseltme ve donanım yetkisini alma içerebilir. Çoğu güncelleştirme, barındırılan sanal makineleri etkilemez. Ancak, güncelleştirmeleri bu senaryolarda Vm'leri etkiler:
+Azure, sanal makineler (VM) için konak altyapısının güvenilirliğini, performansını ve güvenliğini geliştirmek üzere düzenli aralıklarla güncelleştirmeler gerçekleştirir. Güncelleştirmeler, barındırma ortamına düzeltme eki uygulama veya donanım yükseltme ve yetkisini alma içerebilir. Çoğu güncelleştirme barındırılan VM 'Leri etkilemez. Ancak, güncelleştirmeler şu senaryolarda VM 'Leri etkiler:
 
-- Bakım yeniden başlatma gerektirmez, Azure VM konak güncelleştirilirken duraklatmak için yerinde geçiş kullanır. Yeniden başlatma gerektirmez bakım işlemleri hata etki alanı tarafından uygulanan hata etki alanı var. Tüm uyarı sistem durumu sinyali alınırsa ilerleme durduruldu.
+- Bakım için yeniden başlatma gerektirmiyorsa, Azure, konak güncelleştirilirken VM 'yi duraklatmak için yerinde geçiş kullanır. Yeniden başlatma gerektirmeyen bakım işlemleri hata etki alanı hata etki alanına göre uygulanır. Herhangi bir uyarı sistem durumu sinyali alındığında ilerleme durdurulur.
 
-- Bakım yeniden başlatma gerektirirse, ne zaman bunu planlı bakım gösteren bir bildirim alırsınız. Bu gibi durumlarda, bir zaman penceresi sizin için en uygun, bakım kendiniz başlatabilirsiniz sunulur.
+- Bakım için yeniden başlatma gerekiyorsa, bakımın ne zaman planlandığına ilişkin bir uyarı alırsınız. Bu durumlarda, sizin için uygun olduğunda Bakımı kendiniz başlatabileceğiniz 35 gün olan bir zaman penceresi vermiş olursunuz.
 
 
-Yeniden başlatma gerektiren bir planlı bakım içinde Dalgalar zamanlanır. Her dalgada farklı kapsamı (bölge) vardır:
+Yeniden başlatma gerektiren planlı bakım dalgaları 'nda zamanlanır. Her bir dalga farklı kapsama (bölgelere) sahiptir:
 
-- Bir dalga müşterilere bir bildirim ile başlar. Varsayılan olarak, ikincil sahipler ve abonelik sahibi için bildirim gönderilir. Azure'ı kullanarak bildirimlere alıcıları ve e-posta, SMS ve Web kancaları gibi Mesajlaşma seçenekleri ekleyebilirsiniz [etkinlik günlüğü uyarıları](../azure-monitor/platform/activity-logs-overview.md).  
-- Bildirimi, bir *Self Servis penceresi* kullanılabilir hale getirilir. Bu pencere sırasında sanal makinelerinizin dalgada içerdiği bulabilirsiniz. Bakım zamanlama kendi gereksinimlerine göre proaktif olarak başlatabilirsiniz.
-- Sonra Self Servis penceresinde bir *zamanlanan bakım penceresinden* başlar. Belirli bir noktada bu penceresi sırasında Azure zamanlar ve gerekli bakım, VM için geçerlidir. 
+- Bir dalga, müşterilere yönelik bir bildirimle başlar. Varsayılan olarak, bildirim abonelik sahibine ve ortak sahiplerine gönderilir. Azure [etkinlik günlüğü uyarılarını](../azure-monitor/platform/activity-logs-overview.md)kullanarak e-posta, SMS ve Web kancaları gibi alıcılar ve mesajlaşma seçeneklerini bildirimlere ekleyebilirsiniz.  
+- Bildirim ile *self servis penceresi* kullanılabilir hale getirilir. Genellikle 35 gün olan bu pencere sırasında, sanal makinelerinizi dalgaya dahil edildiğini bulabilirsiniz. Bakım, kendi zamanlama gereksinimlerinize göre proaktif olarak başlatılabilir.
+- Self Servis penceresinden sonra, *Zamanlanmış bir bakım penceresi* başlar. Bu pencere sırasında bir noktada, Azure tarafından zamanlama ve gerekli bakım sanal makinenize uygulanıyor. 
 
-Bakımı Başlat ve ne zaman Azure bakım otomatik olarak başlatılacak bilerek, sanal Makinenizin yeniden başlatma için yeterli süre vermek amacıyla iki pencereleri aşağıdakiler amacı var.
+İki Windows 'taki amaç, bakım başlatmak için size yeterli zaman sunmaktır ve Azure 'un bakımın otomatik olarak ne zaman başlatılacağını öğrenirken VM 'nizi yeniden başlatabilir.
 
-Azure portalı, PowerShell, REST API ve Azure CLI için bakım pencerelerini, sanal makine ölçek kümesi Vm'lerine sorgulamaya ve Self Servis bakım başlatmak için kullanabilirsiniz.
+Azure portal, PowerShell, REST API ve Azure CLı kullanarak sanal makine ölçek kümesi VM 'lerinize yönelik bakım pencerelerini sorgulayabilir ve self servis bakımını başlatabilirsiniz.
 
-## <a name="should-you-start-maintenance-during-the-self-service-window"></a>Self Servis penceresi sırasında bakım başlamanız gerekir?  
+## <a name="should-you-start-maintenance-during-the-self-service-window"></a>Self servis penceresi sırasında bakım başlatmanız mı gerekiyor?  
 
-Aşağıdaki yönergeler bakım seçtiğiniz bir zamanda başlatmak karar vermenize yardımcı olabilir.
+Aşağıdaki kılavuzlar, seçtiğiniz zamanda bakımın başlatılıp başlatılmayacağını belirlemenize yardımcı olabilir.
 
 > [!NOTE] 
-> Self Servis bakım tüm Vm'leriniz için kullanılabilir olmayabilir. Önleyici yeniden dağıtma VM'niz için kullanılabilir olup olmadığını belirlemek için nelere **Şimdi Başlat** bakım durumu. Şu anda Azure Cloud Services (Web/çalışan rolü) ve Azure Service Fabric için Self Servis bakım kullanılamıyor.
+> Self servis bakımı, tüm sanal makinelerinize uygun olmayabilir. VM 'niz için öngörülü yeniden dağıtma 'nın kullanılabilir olup olmadığını anlamak için bakım durumu ' nda **Şimdi Başlat** ' a bakın. Şu anda self servis bakımı Azure Cloud Services (Web/çalışan rolü) ve Azure Service Fabric için kullanılamaz.
 
 
-Self Servis bakım kullanan dağıtımlar için önerilen değil *kullanılabilirlik kümeleri*. Kullanılabilirlik, yüksek oranda kullanılabilir ayarlar yalnızca bir hangi güncelleştirme etki alanı herhangi bir zamanda etkilenir kümeleridir. Kullanılabilirlik kümeleri için:
+*Kullanılabilirlik kümelerini*kullanan dağıtımlar için self servis bakımı önerilmez. Kullanılabilirlik kümeleri, her zaman yalnızca bir güncelleştirme etki alanının etkilediği yüksek oranda kullanılabilir kurulumlardır. Kullanılabilirlik kümeleri için:
 
-- Bakım tetikleyicisi Azure'a bırakın. Yeniden başlatma gerektiren bir bakım Bakımı güncelleme etki alanı güncelleştirme etki alanına göre yapılır. Güncelleştirme etki alanlarını mutlaka sırayla bakım almaz. Bir güncelleştirme etki alanları arasında 30 dakikalık duraklama yoktur.
-- Kapasite (1/güncelleştirme etki alanı sayısı) bazıları geçici kaybı önemliyse, bakım süresi boyunca ek örnekleri ayırarak kaybı kolayca dengeleyebilirsiniz.
-- Yeniden başlatma gerektirmez bakım güncelleştirmeleri hata etki alanı düzeyinde uygulanır. 
+- Azure 'un Bakımı tetiklemesine izin verin. Yeniden başlatma gerektiren bakım için, bakım, etki alanını güncelleştir etki alanı ile güncelleştirme yapılır. Güncelleştirme etki alanları, bakım sırayla her zaman almamıştır. Güncelleştirme etki alanları arasında 30 dakikalık bir duraklama vardır.
+- Kapasiteniz (1/güncelleştirme etki alanı sayısı) için geçici bir sorun varsa, bakım dönemi boyunca ek örnekler ayırarak kaybı için kolayca telafi sağlayabilirsiniz.
+- Yeniden başlatma gerektirmeyen bakım için, güncelleştirmeler hata etki alanı düzeyinde uygulanır. 
     
-**Yoksa** Self Servis bakım aşağıdaki senaryolarda kullanın: 
+Aşağıdaki senaryolarda self servis bakımını kullanmayın: 
 
-- Vm'lerinizi sıkça el ile DevTest Labs'i kullanarak, otomatik kapatma kullanarak veya bir zamanlamaya uygun olarak kapatırsanız. Bu senaryolarda, Self Servis bakım, bakım durumu geri dönmesi ve ek kapalı kalma durumlarına neden.
-- Kısa süreli Vm'lerde bildiğinizden nedeni bakım dalgasının bitiminden önce silinecek. 
-- Güncelleştirmeden sonra korumak istediğiniz yerel (kısa ömürlü) disk depolanan büyük durumuna sahip iş yükleri için. 
-- Genellikle, sanal Makinenizin boyutlandırırsanız. Bu senaryo, bakım durumu geri. 
-- 15 dakika önce proaktif bir yük devretme veya iş yükü normal şekilde kapatılmasını etkinleştirmek zamanlanmış olaylar benimseyen bakım kapatma başlar.
+- Sanal makinelerinizi, el ile, DevTest Labs kullanarak, otomatik kapatmayı kullanarak ya da bir zamanlamayı izleyerek kapatırsanız. Bu senaryolarda self servis bakımı, bakım durumunu döndürebilir ve ek kapalı kalma süresi oluşmasına neden olabilir.
+- Bildiğiniz kısa süreli VM 'lerde, bakım dalgasının sonundan önce silineceğini görürsünüz. 
+- Güncelleştirmeden sonra sürdürmek istediğiniz yerel (kısa ömürlü) diskte büyük bir duruma sahip iş yükleri için. 
+- VM 'nizi sık sık yeniden boyutlandırırsanız. Bu senaryo bakım durumunu döndürebilir. 
+- Bakım kapatması başlamadan önce proaktif yük devretme veya daha kısa süre önce iş yükünüz için 15 dakika kapanma sağlayan zamanlanmış olayları benimsediğiniz takdirde.
 
-**Yapmak** VM'nizi zamanlanan bakım aşaması sırasında kesintisiz çalıştırmayı planladığınız ve önceki counterindications hiçbiri geçerli Self Servis Bakımı kullanın. 
+Zamanlanmış bakım aşamasında sanal makineyi kesintisiz olarak çalıştırmayı planlıyorsanız ve önceki onay göstergelerden hiçbiri uygulanmamışsa self servis bakımını kullanın. 
 
-Self Servis bakım aşağıdaki durumlarda kullanmak en iyisidir:
+Aşağıdaki durumlarda self servis bakımını kullanmak en iyisidir:
 
-- Yönetim veya müşteriniz için bir tam bakım penceresi iletişim kurması gerekir. 
-- Belirli bir tarihte bakım tamamlanması gerekir. 
-- Çok katmanlı uygulama güvenli kurtarma sağlamak için bir bakım, örneğin, bir dizi denetim gerekir.
-- 30 dakikadan fazla VM kurtarma süresi iki güncelleştirme etki alanları arasında ihtiyacınız vardır. Güncelleştirme etki alanları arasındaki zamanı denetlemek için bakım teker teker Vm'leri bir güncelleştirme etki alanınızda tetiklemesi gerekir.
+- Yönetim veya müşterinizin tam bir bakım penceresi ile iletişim kurması gerekir. 
+- Bakımı belirli bir tarihle doldurmanız gerekir. 
+- Güvenli kurtarmayı güvence altına almak için örneğin, çok katmanlı bir uygulamada bakım sırasını kontrol etmeniz gerekir.
+- İki güncelleştirme etki alanı arasında 30 dakikadan daha fazla VM kurtarma süresi gerekir. Güncelleştirme etki alanları arasındaki süreyi denetlemek için, sanal makinelerinizdeki her seferinde tek bir güncelleştirme etki alanında bakım tetiklemeniz gerekir.
 
  
-## <a name="view-virtual-machine-scale-sets-that-are-affected-by-maintenance-in-the-portal"></a>Portalda bakım tarafından etkilenen sanal makine ölçek kümeleri
+## <a name="view-virtual-machine-scale-sets-that-are-affected-by-maintenance-in-the-portal"></a>Portalda bakımın etkilediği sanal makine ölçek kümelerini görüntüle
 
-Bir planlı bakım dalgası zamanlandıysa, Azure portalını kullanarak gelecek bakım dalgasından etkilenen sanal makine ölçek kümeleri listesini görüntüleyebilirsiniz. 
+Planlı bir bakım dalgası zamanlandığında, Azure portal kullanarak yaklaşan bakım dalgasının etkilediği sanal makine ölçek kümelerinin listesini görüntüleyebilirsiniz. 
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Sol menüde **tüm hizmetleri**ve ardından **sanal makine ölçek kümeleri**.
-3. Altında **sanal makine ölçek kümeleri**seçin **sütunları Düzenle** kullanılabilir sütunlar listesini açın.
-4. İçinde **kullanılabilir sütunlar** bölümünden **Self Servis Bakım**, ve ardından taşımak için **Seçili sütunlar** listesi. **Uygula**’yı seçin.  
+2. Sol taraftaki menüden **tüm hizmetler**' i seçin ve ardından **Sanal Makine Ölçek Kümeleri**' ni seçin.
+3. **Sanal Makine Ölçek Kümeleri**altında, **Sütunları Düzenle** ' yi seçerek kullanılabilir sütunların listesini açın.
+4. **Kullanılabilir sütunlar** bölümünde **self servis bakımı**' nı seçin ve ardından **Seçili sütunlar** listesine taşıyın. **Uygula**’yı seçin.  
 
-    Yapmak **Self Servis Bakım** bulmak için aşağı açılan seçeneğinde değiştirebilirsiniz daha kolay öğesi **kullanılabilir sütunlar** bölümü **tüm** için  **Özellikleri**.
+    **Self servis bakım** öğesinin daha kolay bulunmasını kolaylaştırmak Için, **kullanılabilir sütunlar** bölümündeki açılır seçeneği **Tüm** **Özellikler**' e değiştirebilirsiniz.
 
-**Self Servis Bakım** sütunu şimdi sanal makine ölçek kümeleri listesinde görünür. Her sanal makine ölçek kümesi, Self Servis bakım sütun için aşağıdaki değerlerden biri olabilir:
+**Self servis bakım** sütunu artık sanal makine Ölçek Kümeleri listesinde görünür. Her sanal makine ölçek kümesi, self servis bakım sütunu için aşağıdaki değerlerden birine sahip olabilir:
 
-| Değer | Açıklama |
+| Value | Açıklama |
 |-------|-------------|
-| Evet | Sanal makine ölçek kümenizdeki en az bir VM içinde Self Servis bir penceredir. Bu Self Servis penceresi sırasında herhangi bir zamanda bakım başlayabilirsiniz. | 
-| Hayır | VM, bir Self Servis penceresinde etkilenen sanal makine ölçek ayarlanır. | 
-| - | Sanal makine ölçek kümeleri, planlı bakım dalgası parçası değildir.| 
+| Evet | Sanal makine ölçek kümesindeki en az bir VM self servis penceresinde. Bu self servis penceresi sırasında istediğiniz zaman bakım başlatabilirsiniz. | 
+| Hayır | Etkilenen sanal makine ölçek kümesindeki bir self servis penceresinde VM yok. | 
+| - | Sanal makineleriniz ölçek kümeleriniz planlı bir bakım dalgasının parçası değildir.| 
 
-## <a name="notification-and-alerts-in-the-portal"></a>Bildirim ve Portalı'nda uyarılar
+## <a name="notification-and-alerts-in-the-portal"></a>Portalda bildirim ve uyarılar
 
-Azure aboneliğine sahip ve ikincil sahipler gruba e-posta göndererek planlı bakım için zamanlama iletişim kurar. Etkinlik günlüğü uyarıları oluşturarak bu iletişimi alıcıları ve kanallar ekleyebilirsiniz. Daha fazla bilgi için [Azure etkinlik günlüğü ile abonelik etkinliğini İzle](../azure-monitor/platform/activity-logs-overview.md).
+Azure, abonelik sahibine ve ortak sahipler grubuna bir e-posta göndererek planlı bakım için bir zamanlama iletişim kurar. Etkinlik günlüğü uyarıları oluşturarak bu iletişime alıcılar ve kanallar ekleyebilirsiniz. Daha fazla bilgi için bkz. [Azure etkinlik günlüğü ile abonelik izleme etkinliği](../azure-monitor/platform/activity-logs-overview.md).
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Sol menüde **İzleyici**. 
-3. İçinde **İzleyici - uyarılar (Klasik)** bölmesinde **+ etkinlik günlüğü uyarısı Ekle**.
-4. Üzerinde **etkinlik günlüğü uyarısı Ekle** sayfasında, seçin veya istenen bilgileri girin. İçinde **ölçütleri**, aşağıdaki değerleri ayarlayın sağlayın:
-   - **Olay kategorisi**: Seçin **hizmet durumunu**.
-   - **Hizmetleri**: Seçin **sanal makine ölçek kümeleri ve sanal makineler**.
-   - **Tür**: Seçin **planlı Bakım**. 
+2. Sol taraftaki menüden **izleyici**' yi seçin. 
+3. **İzleyici-uyarılar (klasik)** bölmesinde **+ etkinlik günlüğü uyarısı Ekle**' yi seçin.
+4. **Etkinlik günlüğü uyarısı Ekle** sayfasında istenen bilgileri seçin veya girin. **Ölçütlerde**aşağıdaki değerleri ayarladığınızdan emin olun:
+   - **Olay kategorisi**: **Hizmet Durumu**’nu seçin.
+   - **Hizmetler**: **Sanal makine ölçek kümelerini ve sanal makineleri**seçin.
+   - **Şunu yazın**: **Planlı bakım**' ı seçin. 
     
-Etkinlik günlüğü uyarılarının nasıl yapılandırılacağı hakkında daha fazla bilgi için bkz: [oluşturma etkinlik günlüğü uyarıları](../azure-monitor/platform/activity-log-alerts.md)
+Etkinlik günlüğü uyarılarını yapılandırma hakkında daha fazla bilgi edinmek için bkz. [etkinlik günlüğü uyarıları oluşturma](../azure-monitor/platform/activity-log-alerts.md)
     
     
-## <a name="start-maintenance-on-your-virtual-machine-scale-set-from-the-portal"></a>Portaldan sanal makine ölçek kümesinde Bakımı Başlat
+## <a name="start-maintenance-on-your-virtual-machine-scale-set-from-the-portal"></a>Portaldan sanal makine ölçek kümesi üzerinde bakım başlatın
 
-Sanal makine ölçek kümeleri genel bakış, bakım ile ilgili daha fazla ayrıntı görebilirsiniz. Sanal makine ölçek kümesindeki en az bir VM içinde planlı bakım dalgası yer alıyorsa, yeni bir bildirim Şerit sayfanın üst kısımda eklenir. Gitmek için bildirim Şerit seçin **Bakım** sayfası. 
+Daha fazla bakım ile ilgili ayrıntıları sanal makine ölçek kümelerine genel bakış bölümüne bakabilirsiniz. Planlı bakım dalgasına sanal makine ölçek kümesindeki en az bir VM eklenirse, sayfanın üstüne yakın yeni bir bildirim şeridi eklenir. **Bakım** sayfasına gitmek için bildirim şeridini seçin. 
 
-Üzerinde **Bakım** sayfasında, hangi sanal makine örneği planlı bakımdan etkilenir görebilirsiniz. Bakım başlatmak için etkilenen sanal Makineye karşılık gelen onay kutusunu seçin. Ardından, **Başlat Bakım**.
+**Bakım** sayfasında, hangi VM örneğinin planlı bakımın etkilendiğini görebilirsiniz. Bakımı başlatmak için, etkilenen VM 'ye karşılık gelen onay kutusunu seçin. Ardından, **Bakımı Başlat**' ı seçin.
 
-Bakım başlattıktan sonra etkilenen sanal makine ölçek kümenizdeki VM'lerin bakım yapmak ve geçici olarak kullanılamıyor. Self Servis penceresi Kaçırıldı, sanal makine ölçek kümeniz, Azure tarafından korunur, zaman penceresi yine de görebilirsiniz.
+Bakım başladıktan sonra, sanal makine ölçek kümesindeki etkilenen VM 'Ler yerinde bakımda ve geçici olarak kullanılamaz. Self servis penceresini kaçırdıysanız, sanal makine ölçek kümesi Azure tarafından korunacağı zaman penceresini yine de görebilirsiniz.
  
 ## <a name="check-maintenance-status-by-using-powershell"></a>PowerShell kullanarak bakım durumunu denetleme
 
-Sanal makine ölçek kümelerinizdeki Vm'lere bakım için zamanlanmış zaman görmek için Azure PowerShell kullanabilirsiniz. Planlı bakım bilgileri kullanılabilir kullanarak [Get-AzVmss](https://docs.microsoft.com/powershell/module/az.compute/get-azvmss) cmdlet'ini kullandığınızda `-InstanceView` parametresi.
+Sanal makine ölçek kümelerindeki VM 'Lerin bakım için zamanlandığını görmek için Azure PowerShell kullanabilirsiniz. Planlı bakım bilgileri, `-InstanceView` parametresini kullandığınızda [Get-azvmss](https://docs.microsoft.com/powershell/module/az.compute/get-azvmss) cmdlet 'i kullanılarak kullanılabilir.
  
-Yalnızca bunu planlı bakım bakım bilgileri döndürülür. Sanal makine örneği etkileyen herhangi bir bakım zamanlanırsa, cmdlet herhangi bir bakım bilgi döndürmüyor. 
+Bakım bilgileri yalnızca bakım planlandığından döndürülür. VM örneğini etkileyen bakım zamanlanmamışsa, cmdlet herhangi bir bakım bilgisi döndürmez. 
 
 ```powershell
 Get-AzVmss -ResourceGroupName rgName -VMScaleSetName vmssName -InstanceId id -InstanceView
 ```
 
-Aşağıdaki özellikler altında döndürülür **MaintenanceRedeployStatus**: 
+Aşağıdaki özellikler **MaintenanceRedeployStatus**altında döndürülür: 
 
-| Değer | Açıklama |
+| Value | Açıklama   |
+|-------|---------------|
+| IsCustomerInitiatedMaintenanceAllowed | Şu anda VM 'de bakım başlatılıp başlatılmayacağını belirtir. |
+| PreMaintenanceWindowStartTime         | VM 'niz üzerinde bakım başlatabilmeniz için bakım self servis penceresinin başlangıcı. |
+| PreMaintenanceWindowEndTime           | VM 'niz üzerinde bakım başlatabilmeniz için bakım self servis penceresinin sonu. |
+| MaintenanceWindowStartTime            | Azure 'un VM 'niz üzerinde bakım başlattığı zamanlanan bakım başlangıcı. |
+| MaintenanceWindowEndTime              | Azure 'un VM 'niz üzerinde Bakımı başlattığı bakım zamanlandı penceresinin sonu. |
+| LastOperationResultCode               | VM 'de son bakım başlatma denemesinin sonucu. |
 
-|-------|---------------| | IsCustomerInitiatedMaintenanceAllowed | Bakım VM üzerinde şu anda başlatabilirsiniz olup olmadığını gösterir. | | PreMaintenanceWindowStartTime | Sanal makinenizde bakım başlatabilir, bakım penceresinin Self Servis başlangıcı. | | PreMaintenanceWindowEndTime | Sanal makinenizde bakım başlatabilir, bakım penceresinin Self Servis bitiş olayı. | | MaintenanceWindowStartTime | Başlangıç zamanlanmış bakım Azure vm'nizdeki bakım işlemini başlatır. | | MaintenanceWindowEndTime | Azure vm'nizdeki bakım işlemini başlatır zamanlanmış bakım penceresinin sonu. | | LastOperationResultCode | VM'de bakım başlatmak için son girişimi sonucu. |
 
 
+### <a name="start-maintenance-on-your-vm-instance-by-using-powershell"></a>PowerShell kullanarak VM örneğiniz üzerinde bakım başlatma
 
-### <a name="start-maintenance-on-your-vm-instance-by-using-powershell"></a>PowerShell kullanarak sanal makine Örneğinize Bakımı Başlat
-
-Bakım, bir VM'de başlatabilirsiniz **IsCustomerInitiatedMaintenanceAllowed** ayarlanır **true**. Kullanım [kümesi AzVmss](/powershell/module/az.compute/set-azvmss) cmdlet'iyle `-PerformMaintenance` parametresi.
+**IsCustomerInitiatedMaintenanceAllowed** **true**olarak ayarlandıysa, bir VM üzerinde bakım başlatabilirsiniz. `-PerformMaintenance` Parametresiyle [set-azvmss](/powershell/module/az.compute/set-azvmss) cmdlet 'ini kullanın.
 
 ```powershell
 Set-AzVmss -ResourceGroupName rgName -VMScaleSetName vmssName -InstanceId id -PerformMaintenance 
 ```
 
-## <a name="check-maintenance-status-by-using-the-cli"></a>CLI kullanarak bakım durumunu denetleme
+## <a name="check-maintenance-status-by-using-the-cli"></a>CLı kullanarak bakım durumunu denetleme
 
-Planlı bakım bilgileri kullanarak görüntüleyebileceğiniz [az vmss seznamu](/cli/azure/vmss?view=azure-cli-latest#az-vmss-list-instances).
+Planlanan bakım bilgilerini [az VMSS List-Instances](/cli/azure/vmss?view=azure-cli-latest#az-vmss-list-instances)kullanarak görüntüleyebilirsiniz.
  
-Yalnızca bunu planlı bakım bakım bilgileri döndürülür. Sanal makine örneği etkileyen herhangi bir bakım planlandıysa komutu herhangi bir bakım bilgi döndürmüyor. 
+Bakım bilgileri yalnızca bakım planlandığından döndürülür. VM örneğini etkileyen bakım zamanlanmamışsa, komut herhangi bir bakım bilgisi döndürmez. 
 
 ```azure-cli
 az vmss list-instances -g rgName -n vmssName --expand instanceView
 ```
 
-Aşağıdaki özellikler altında döndürülür **MaintenanceRedeployStatus** her bir VM örneği için: 
+Aşağıdaki özellikler her bir sanal makine örneği için **MaintenanceRedeployStatus** altında döndürülür: 
 
-| Değer | Açıklama |
+| Value | Açıklama   |
+|-------|---------------|
+| IsCustomerInitiatedMaintenanceAllowed | Şu anda VM 'de bakım başlatılıp başlatılmayacağını belirtir. |
+| PreMaintenanceWindowStartTime         | VM 'niz üzerinde bakım başlatabilmeniz için bakım self servis penceresinin başlangıcı. |
+| PreMaintenanceWindowEndTime           | VM 'niz üzerinde bakım başlatabilmeniz için bakım self servis penceresinin sonu. |
+| MaintenanceWindowStartTime            | Azure 'un VM 'niz üzerinde bakım başlattığı zamanlanan bakım başlangıcı. |
+| MaintenanceWindowEndTime              | Azure 'un VM 'niz üzerinde Bakımı başlattığı bakım zamanlandı penceresinin sonu. |
+| LastOperationResultCode               | VM 'de son bakım başlatma denemesinin sonucu. |
 
-|-------|---------------| | IsCustomerInitiatedMaintenanceAllowed | Bakım VM üzerinde şu anda başlatabilirsiniz olup olmadığını gösterir. | | PreMaintenanceWindowStartTime | Sanal makinenizde bakım başlatabilir, bakım penceresinin Self Servis başlangıcı. | | PreMaintenanceWindowEndTime | Sanal makinenizde bakım başlatabilir, bakım penceresinin Self Servis bitiş olayı. | | MaintenanceWindowStartTime | Başlangıç zamanlanmış bakım Azure vm'nizdeki bakım işlemini başlatır. | | MaintenanceWindowEndTime | Azure vm'nizdeki bakım işlemini başlatır zamanlanmış bakım penceresinin sonu. | | LastOperationResultCode | VM'de bakım başlatmak için son girişimi sonucu. |
 
+### <a name="start-maintenance-on-your-vm-instance-by-using-the-cli"></a>CLı kullanarak VM örneğiniz üzerinde bakım başlatın
 
-### <a name="start-maintenance-on-your-vm-instance-by-using-the-cli"></a>CLI kullanarak sanal makine Örneğinize Bakımı Başlat
-
-Aşağıdaki çağrısı, bir sanal makine örneğinde bakım başlatır `IsCustomerInitiatedMaintenanceAllowed` ayarlanır **true**:
+Aşağıdaki çağrı, `IsCustomerInitiatedMaintenanceAllowed` **doğru**olarak ayarlandıysa bir VM örneği üzerinde bakım başlatır:
 
 ```azure-cli
 az vmss perform-maintenance -g rgName -n vmssName --instance-ids id
@@ -168,47 +178,47 @@ az vmss perform-maintenance -g rgName -n vmssName --instance-ids id
 
 ## <a name="faq"></a>SSS
 
-**S: Neden Vm'lerimin şimdi yeniden başlatmak gerekiyor?**
+**S: Neden VM 'lerimi şimdi yeniden başlatmanız gerekiyor?**
 
-**C:** Çoğu güncelleştirmeler ve yükseltmeler Azure platformuna yönelik bazı durumlarda, sanal makine kullanılabilirliği etkilemez ancak biz Azure'da barındırılan sanal makineleri yeniden başlatılmasını önlemek olamaz. Biz, VM yeniden başlatılmasına yol açacak sunucularımızı yeniden bırakmamızı değişiklikler birikti.
+**C:** Azure platformunda yapılan güncelleştirmelerin ve yükseltmelerin çoğu VM kullanılabilirliğini etkilemese de, bazı durumlarda Azure 'da barındırılan VM 'Leri yeniden başlatmayı önleyemiyorum. VM 'nin yeniden başlatılmasına neden olacak sunucularımızı yeniden başlatmamızı gerektiren birkaç değişikliği biriktireceğiz.
 
-**S: Takip ettiğim, önerilerinizi kullanılabilirlik kullanarak yüksek kullanılabilirlik için ayarlayın, güvenli karşılıyor muyum?**
+**S: Kullanılabilirlik kümesi kullanarak yüksek kullanılabilirliğe yönelik önerilerinizi izlediğimde, güvenli mıyım?**
 
-**C:** Bir kullanılabilirlik dağıtılan sanal makinelerin ayarlamak veya sanal makine ölçek kümelerini güncelleştirme etki alanları kullanın. Bakımın gerçekleştirildiği sırada Azure güncelleştirme etki alanı kısıtlamasına uyar ve farklı güncelleştirme etki alanı (içinde aynı kullanılabilirlik kümesine) Vm'lerden yeniden değil. Ayrıca Azure Vm'leri için sonraki grubuna taşımadan önce en az 30 dakika bekler. 
+**C:** Bir kullanılabilirlik kümesinde veya sanal makine ölçek kümelerinde dağıtılan sanal makineler güncelleştirme etki alanlarını kullanır. Azure, bakım gerçekleştirirken güncelleştirme etki alanı kısıtlamasını kabul eder ve farklı bir güncelleştirme etki alanından (aynı Kullanılabilirlik kümesi içinde) VM 'Leri yeniden başlatmaz. Azure, sonraki VM grubuna geçmeden önce en az 30 dakika bekler. 
 
-Yüksek kullanılabilirlik hakkında daha fazla bilgi için bkz: [azure'da sanal makineler için kullanılabilirlik ve bölgeler](../virtual-machines/windows/regions-and-availability.md).
+Yüksek kullanılabilirlik hakkında daha fazla bilgi için bkz. [Azure 'da sanal makineler Için bölgeler ve kullanılabilirlik](../virtual-machines/windows/availability.md).
 
-**S: Planlı bakım hakkında nasıl uyarılabilirim?**
+**S: Planlı bakım hakkında nasıl bildirim alabilirim?**
 
-**C:** Bir planlı bakım dalgası bir veya daha fazla Azure bölgesine bir zamanlama ayarlayarak başlar. Kısa süre sonra abonelik sahipleri (bir e-posta abonelik başına) için bir e-posta bildirimi gönderilir. Etkinlik günlüğü uyarıları kullanarak Kanallar ve bu bildirim için alıcı ekleyebilirsiniz. Planlı bakım zaten zamanlanmış bir bölge için bir VM dağıtırsanız, bildirim almaz. Bunun yerine, VM'nin bakım durumunu denetleyin.
+**C:** Planlı bir bakım dalgası, bir veya daha fazla Azure bölgesine zamanlama ayarlayarak başlar. Yakında, abonelik sahiplerine bir e-posta bildirimi gönderilir (abonelik başına bir e-posta). Bu bildirim için, etkinlik günlüğü uyarılarını kullanarak kanal ve alıcı ekleyebilirsiniz. Bir VM 'yi planlanmış bakımın zaten zamanlandığı bir bölgeye dağıtırsanız, bildirimi almazsınız. Bunun yerine, VM 'nin bakım durumunu kontrol edin.
 
-**S: Portal, PowerShell veya CLI planlı bakıma dair herhangi bir göstergesi göremiyorum. Ne oldu?**
+**S: Portal, PowerShell veya CLı 'de planlı bakım hakkında herhangi bir gösterge görmüyorum. Ne oldu?**
 
-**C:** İlgili bilgiler için planlı bakım bir planlı bakımdan etkilenen sanal makineleri için planlı bakım dalgası sırasında kullanılabilir. Veri görmüyorsanız, nedeni bakım dalgasının zaten olabilir, tamamlanmış (veya başlatılmamış) ya da sanal makinenizin zaten güncelleştirilmiş bir sunucuda barındırılabilir.
+**C:** Planlı bakımla ilgili bilgiler, planlanan bakım dalgasının yalnızca planlanmış bakımın etkilediği VM 'Ler için kullanılabilir. Veri görmüyorsanız, bakım dalgası zaten bitmiş (veya başlatılmamış) veya VM 'niz güncelleştirilmiş bir sunucuda zaten barındırılıyor olabilir.
 
-**S: Tam olarak ne zaman VM'me etkilenecek bilmenin bir yolu var mı?**
+**S: VM 'im etkilenmeden tam olarak bilmeniz için bir yol var mı?**
 
-**C:** Biz zamanlamayı ayarladığınızda, birkaç gün zaman penceresi tanımlarız. Sunucuların (ve VM’lerin) bu pencere içindeki sırası tam olarak bilinmez. Sanal makinelerinizin güncelleştirilmesi kesin zaman bilmek istiyorsanız, kullanabileceğiniz [zamanlanmış olaylar](../virtual-machines/windows/scheduled-events.md). Zamanlanmış olaylar kullandığınızda, sorgu içinde VM ve VM yeniden başlatmadan önce 15 dakikalık bildirim alırsınız.
+**C:** Zamanlamayı belirlediğimiz zaman, birkaç güne ait bir zaman penceresi tanımladık. Sunucuların (ve VM’lerin) bu pencere içindeki sırası tam olarak bilinmez. VM 'nizin güncelleştirileceği tam süreyi biliyorsanız, [zamanlanan olayları](../virtual-machines/windows/scheduled-events.md)kullanabilirsiniz. Zamanlanmış olayları kullandığınızda VM 'nin içinden sorgulama yapabilir ve VM yeniden başlatmadan önce 15 dakikalık bir bildirim alabilirsiniz.
 
-**S: Sanal Makinem yeniden başlatılması ne kadar sürer?**
+**S: VM 'mi yeniden başlatmak için ne kadar sürer?**
 
-**C:**  Sanal makinenizin boyutuna bağlı olarak, yeniden başlatma için Self Servis bakım penceresi sırasında birkaç dakika sürebilir. Azure tarafından başlatılan yeniden başlatma sırasında zamanlanan bakım penceresinde, başlatma işlemi genellikle yaklaşık 25 dakika sürer. Cloud Services (Web/çalışan rolü), sanal makine ölçek kümeleri, kullandığınız ya da kullanılabilirlik kümeleri, zamanlanan bakım penceresi sırasında (güncelleştirme etki alanı) sanal makinelerinin her grubu arasında 30 dakika verilir. 
+**C:**  SANAL makinenizin boyutuna bağlı olarak, yeniden başlatma işlemi, self servis bakım penceresi sırasında birkaç dakika sürebilir. Zamanlanan bakım penceresinde Azure tarafından başlatılan yeniden başlatmalar sırasında, yeniden başlatma işlemi genellikle yaklaşık 25 dakika sürer. Cloud Services (Web/çalışan rolü), sanal makine ölçek kümeleri veya kullanılabilirlik kümeleri kullanıyorsanız, zamanlanan bakım penceresi sırasında her bir VM grubu (güncelleştirme etki alanı) arasında 30 dakika verilir. 
 
-**S: Vm'lerimi üzerinde herhangi bir bakım bilgi göremiyorum. Sorun nedir?**
+**S: Sanal makinelerimde hiçbir bakım bilgisi görmüyorum. Sorun nedir?**
 
-**C:** Neden tüm bakım bilgileri Vm'lerinizde göremeyebilirsiniz birkaç nedeni vardır:
-   - Olarak işaretlenmiş bir abonelik kullanıyorsanız *Microsoft Internal*.
-   - Sanal makineleriniz için bakım zamanlanmaz. Nedeni bakım dalgasının sona erdi, iptal edildi veya Vm'lerinizi artık bundan etkilenen böylece değiştirilmiş olabilir.
-   - Sahip olmadığınız **Bakım** sütun için VM listesi görünümünüze eklendi. Görünümü el ile eklemeniz gerekir, varsayılan olmayan sütunları görmek için yapılandırırsanız bu sütun varsayılan görünüme ekledik ancak **Bakım** VM listesi görünümünüze sütunu.
+**C:** Sanal makinelerinizdeki bakım bilgilerini görmemenizin birkaç nedeni vardır:
+   - *Microsoft iç*olarak işaretlenmiş bir abonelik kullanıyorsunuz.
+   - VM 'niz bakım için zamanlanmadı. Bakım dalgasının sonlandırılması, iptal edilmiş olması veya sanal makinelerinizin bundan sonra bundan etkilenmemesi için değiştirilmiş olabilir.
+   - VM listesi görünüminizdeki **bakım** sütunu eklenmemiş. Bu sütunu varsayılan görünüme eklediğimiz halde, görünümünüzü varsayılan olmayan sütunları görmek üzere yapılandırırsanız, **bakım** sütununu VM listesi görünümünizin el ile eklemeniz gerekir.
 
-**S: Sanal Makinem için ikinci kez bakım için zamanlanır. Neden?**
+**S: VM 'im, ikinci kez bakım için zamanlandı. Neden?**
 
-**C:** Sonra zaten, bakım tamamlandı ve yeniden çeşitli kullanım örnekleri, sanal Makinenizin bakım için zamanlandı:
-   - Biz nedeni bakım dalgasının iptal edildi ve farklı bir yük ile yeniden. Hatalı bir yükü algıladık ve yalnızca bir ek yükü dağıtmak gerekiyor olabilir.
-   - Makinenizin olduğu *taşınarak hizmet* başka bir düğüme bir donanım hatası nedeniyle.
-   - Durdurmak için seçtiğiniz (serbest bırakın) ve VM'yi yeniden başlatın.
-   - Sahip olduğunuz **otomatik kapatma** VM için etkinleştirilmiş.
+**C:** Birkaç kullanım durumunda, bakımını zaten tamamladıktan ve yeniden dağıtıldıktan sonra sanal ağınız bakım için zamanlanır:
+   - Bakım dalgasını iptal etmiş ve farklı bir yük ile yeniden başlattık. Hatalı bir yük algıladığımız ve yalnızca ek yük dağıtmemiz gereken bir durum olabilir.
+   - VM 'niz bir donanım hatası nedeniyle başka bir düğüme *hizmet ısımıştır* .
+   - Durdurmayı (serbest bırakma) seçtiniz ve VM 'yi yeniden başlatın.
+   - VM için **otomatik olarak kapatılacak** .
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Kullanarak VM içinden bakım olayları kaydetme hakkında bilgi [zamanlanmış olaylar](../virtual-machines/windows/scheduled-events.md).
+[Zamanlanan olayları](../virtual-machines/windows/scheduled-events.md)kullanarak VM içinden bakım olaylarına nasıl kaydolacağınızı öğrenin.

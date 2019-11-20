@@ -1,53 +1,52 @@
 ---
-title: Azure'da bir Windows sanal makinesi yeniden boyutlandırmak için PowerShell kullanma | Microsoft Docs
-description: Azure Powershell kullanarak Resource Manager dağıtım modelinde oluşturulan bir Windows sanal makine yeniden boyutlandırın.
+title: Azure 'da bir Windows sanal makinesini yeniden boyutlandırmak için PowerShell 'i kullanma
+description: Azure PowerShell kullanarak Kaynak Yöneticisi dağıtım modelinde oluşturulan bir Windows sanal makinesini yeniden boyutlandırın.
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: 057ff274-6dad-415e-891c-58f8eea9ed78
 ms.service: virtual-machines-windows
 ms.workload: na
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 05/30/2018
 ms.author: cynthn
-ms.openlocfilehash: 3dc6ea7419e3ee1f24d19447a7a33e5556ffc70f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4b30f2fd8e095b00898e083e33c23c7c9a915b99
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64688716"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74073361"
 ---
-# <a name="resize-a-windows-vm"></a>Bir Windows VM yeniden boyutlandırma
+# <a name="resize-a-windows-vm"></a>Windows VM 'yi yeniden boyutlandırma
 
-Bu makalede, bir VM'yi farklı bir taşıma işlemini göstermektedir [VM boyutu](sizes.md) Azure Powershell kullanarak.
+Bu makalede, Azure PowerShell kullanarak bir VM 'yi farklı bir [VM boyutuna](sizes.md) nasıl taşıyacağınız gösterilmektedir.
 
-Bir sanal makine (VM) oluşturduktan sonra VM boyutunu değiştirerek artırıp azaltın VM ölçeklendirebilirsiniz. Bazı durumlarda, ilk VM ayırması gerekir. Yeni boyut şu anda sanal Makineyi barındıran donanım kümesinde kullanılabilir değilse, bu durum oluşabilir.
+Bir sanal makine (VM) oluşturduktan sonra VM boyutunu değiştirerek VM 'yi yukarı veya aşağı ölçeklendirebilirsiniz. Bazı durumlarda, önce VM 'yi serbest bırakın. Yeni boyut, şu anda VM 'yi barındıran donanım kümesinde yoksa bu durum oluşabilir.
 
-Premium depolama, sanal Makinenizin kullanıyorsa, seçtiğinizden emin olun. bir **s** boyutu Premium depolama desteği almak için bir sürümü. Örneğin, Standard_E4 tercih**s**_v3 işler için standart_e4_v3 yerine.
+VM 'niz Premium Depolama kullanıyorsa, Premium Depolama desteğini almak için boyutun bir **s** sürümünü seçtiğinizden emin olun. Örneğin, Standard_E4_v3 yerine Standard_E4**s**_v3 seçin.
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
-## <a name="resize-a-windows-vm-not-in-an-availability-set"></a>Bir kullanılabilirlik kümesindeki Windows VM'yi yeniden boyutlandırma
+## <a name="resize-a-windows-vm-not-in-an-availability-set"></a>Bir kullanılabilirlik kümesinde değil Windows VM 'yi yeniden boyutlandırma
 
-Bazı değişkenleri ayarlayın. Değerleri kendi bilgilerinizle değiştirin.
+Bazı değişkenleri ayarlayın. Değerleri kendi bilgileriniz ile değiştirin.
 
 ```powershell
 $resourceGroup = "myResourceGroup"
 $vmName = "myVM"
 ```
 
-Sanal Makinenin barındırıldığı donanım kümesinde kullanılabilir VM boyutlarını listeler. 
+VM 'nin barındırıldığı donanım kümesinde kullanılabilir olan VM boyutlarını listeleyin. 
    
 ```powershell
 Get-AzVMSize -ResourceGroupName $resourceGroup -VMName $vmName 
 ```
 
-İstediğiniz boyuta listeleniyorsa, VM'yi yeniden boyutlandırma için aşağıdaki komutları çalıştırın. İstenen boyut listede yoksa, 3. adıma geçin.
+İstediğiniz boyut listeleniyorsa, sanal makineyi yeniden boyutlandırmak için aşağıdaki komutları çalıştırın. İstenen boyut listelenmemişse adım 3 ' e gidin.
    
 ```powershell
 $vm = Get-AzVM -ResourceGroupName $resourceGroup -VMName $vmName
@@ -55,7 +54,7 @@ $vm.HardwareProfile.VmSize = "<newVMsize>"
 Update-AzVM -VM $vm -ResourceGroupName $resourceGroup
 ```
 
-İstediğiniz boyuta, VM ayırması için aşağıdaki komutları çalıştırın listede yoksa, yeniden boyutlandırabilir ve VM'yi yeniden başlatın. Değiştirin  **\<newVMsize >** istediğiniz boyuta sahip.
+İstediğiniz boyut listelenmemişse, VM 'yi serbest bırakmak, yeniden boyutlandırmak ve VM 'yi yeniden başlatmak için aşağıdaki komutları çalıştırın. **\<newVMsize >** istediğiniz boyutla değiştirin.
    
 ```powershell
 Stop-AzVM -ResourceGroupName $resourceGroup -Name $vmName -Force
@@ -66,26 +65,26 @@ Start-AzVM -ResourceGroupName $resourceGroup -Name $vmName
 ```
 
 > [!WARNING]
-> VM serbest bırakılıyor, sanal Makineye atanan dinamik IP adreslerini serbest bırakır. İşletim sistemi ve veri diskleri etkilenmez. 
+> VM 'nin ayırmayı kaldırma, sanal makineye atanan tüm dinamik IP adreslerini yayınlar. İşletim sistemi ve veri diskleri etkilenmez. 
 > 
 > 
 
-## <a name="resize-a-windows-vm-in-an-availability-set"></a>Bir kullanılabilirlik kümesinde Windows VM'yi yeniden boyutlandırma
+## <a name="resize-a-windows-vm-in-an-availability-set"></a>Bir kullanılabilirlik kümesindeki Windows VM 'yi yeniden boyutlandırma
 
-Bir kullanılabilirlik kümesindeki bir sanal makine için yeni boyut şu anda VM'yi barındıran donanım kümesinde kullanılabilir durumda değilse, kullanılabilirlik kümesindeki tüm sanal makineler, sanal Makineyi yeniden boyutlandırmak için serbest bırakılması gerekir. Diğer sanal makinelerin boyutunu kullanılabilirlik sonra bir sanal makine yeniden boyutlandırıldı kümesinde güncelleştirme gerekebilir. Bir kullanılabilirlik kümesindeki bir VM'nin yeniden boyutlandırmak için aşağıdaki adımları gerçekleştirin.
+Bir kullanılabilirlik kümesindeki bir VM için yeni boyut, şu anda VM 'yi barındıran donanım kümesinde yoksa, VM 'nin yeniden boyutlandırılması için kullanılabilirlik kümesindeki tüm VM 'Lerin serbest bırakılmasıyla sonuçlanır. Ayrıca, bir VM yeniden boyutlandırılırken kullanılabilirlik kümesindeki diğer VM 'lerin boyutunu güncelleştirmeniz gerekebilir. Bir kullanılabilirlik kümesindeki bir VM 'yi yeniden boyutlandırmak için aşağıdaki adımları gerçekleştirin.
 
 ```powershell
 $resourceGroup = "myResourceGroup"
 $vmName = "myVM"
 ```
 
-Sanal Makinenin barındırıldığı donanım kümesinde kullanılabilir VM boyutlarını listeler. 
+VM 'nin barındırıldığı donanım kümesinde kullanılabilir olan VM boyutlarını listeleyin. 
    
 ```powershell
 Get-AzVMSize -ResourceGroupName $resourceGroup -VMName $vmName 
 ```
 
-İstenen boyut listeleniyorsa, VM'yi yeniden boyutlandırma için aşağıdaki komutları çalıştırın. Bu listede yoksa, sonraki bölüme gidin.
+İstenen boyut listeleniyorsa, sanal makineyi yeniden boyutlandırmak için aşağıdaki komutları çalıştırın. Listede yoksa bir sonraki bölüme gidin.
    
 ```powershell
 $vm = Get-AzVM -ResourceGroupName $resourceGroup -VMName $vmName 
@@ -93,9 +92,9 @@ $vm.HardwareProfile.VmSize = "<newVmSize>"
 Update-AzVM -VM $vm -ResourceGroupName $resourceGroup
 ```
     
-İstediğiniz boyuta listede yoksa kullanılabilirlik kümesindeki tüm sanal makineler serbest bırakın, Vm'leri yeniden boyutlandırma ve yeniden başlatmak için aşağıdaki adımlarla devam edin.
+İstediğiniz boyut listelenmemişse, kullanılabilirlik kümesindeki tüm VM 'Leri serbest bırakmak, VM 'Leri yeniden boyutlandırmak ve yeniden başlatmak için aşağıdaki adımlarla devam edin.
 
-Kullanılabilirlik kümesindeki tüm sanal makineler durdurun.
+Kullanılabilirlik kümesindeki tüm VM 'Leri durdurun.
    
 ```powershell
 $as = Get-AzAvailabilitySet -ResourceGroupName $resourceGroup
@@ -107,7 +106,7 @@ foreach ($vmId in $vmIDs){
     } 
 ```
 
-Yeniden boyutlandırma ve kullanılabilirlik kümesindeki Vm'leri yeniden başlatma.
+Kullanılabilirlik kümesindeki VM 'Leri yeniden boyutlandırın ve yeniden başlatın.
    
 ```powershell
 $newSize = "<newVmSize>"
@@ -125,5 +124,5 @@ $vmIds = $as.VirtualMachinesReferences
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Ek ölçeklenebilirlik için birden fazla VM örneği çalıştırın ve ölçeği genişletme. Daha fazla bilgi için [bir sanal makine ölçek kümesi'nde Windows makineleri otomatik ölçeklendirme](../../virtual-machine-scale-sets/virtual-machine-scale-sets-windows-autoscale.md).
+Ek ölçeklenebilirlik için birden fazla sanal makine örneği çalıştırın ve ölçeği ölçeklendirin. Daha fazla bilgi için bkz. [sanal makine ölçek kümesindeki Windows makinelerini otomatik olarak ölçeklendirme](../../virtual-machine-scale-sets/virtual-machine-scale-sets-windows-autoscale.md).
 

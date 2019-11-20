@@ -1,41 +1,42 @@
 ---
-title: Bulut iş ortağı Portalı Yönetimi | Azure Market
-description: Azure Market bulut iş ortağı portalı hesaplarını yönetmek kullanılabilen işlemleri türlerini açıklar.
+title: Bulut İş Ortağı Portalı yönetimi | Azure Marketi
+description: Azure Marketi için Bulut İş Ortağı Portalı hesaplarını yönetmek için kullanılabilir işlem türlerini açıklar.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 04/01/2019
 ms.author: pabutler
-ms.openlocfilehash: 58451dd225a4f0625a6922bde672a6928ea50943
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 012af63f7374093e08cca2b8458d862b900f3981
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66257485"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819132"
 ---
-# <a name="cloud-partner-portal-management"></a>Bulut iş ortağı Portalı Yönetimi
+# <a name="cloud-partner-portal-management"></a>Bulut İş Ortağı Portalı yönetimi
 
-Bu bölümde türlerini kullanmak için gerekli hesaplarını oluşturmak ve yönetmek kullanılabilen işlemleri açıklar [bulut iş ortağı portalı](https://cloudpartner.azure.com).  Bu hesaplar için gerekli olan [Azure Marketi](https://azuremarketplace.microsoft.com) ve [AppSource](https://appsource.microsoft.com).  
+Bu bölümde, [bulut iş ortağı portalı](https://cloudpartner.azure.com)kullanmak için gereken hesapları oluşturmak ve yönetmek için kullanılabilir işlem türleri açıklanmaktadır.  Bu hesaplar [Azure Market](https://azuremarketplace.microsoft.com) ve [appsource](https://appsource.microsoft.com)için gereklidir.  
 
 
 ## <a name="background-information"></a>Arka plan bilgileri
 
-Bulut iş ortağı Portalı'nı kullanmadan önce aşağıdaki makaleleri ile planladığınızdan:
+Bulut İş Ortağı Portalı kullanmadan önce, aşağıdaki makaleleri öğrenmeniz gerekir:
 
-- [Azure Market ilkeleri ve koşulları](../../policies-terms.md) çeşitli yasal ve teknik gereksinimleri ve kullanıcıları ve yayımcılar için uygulanan kuralları listeler [Azure Marketi](https://azuremarketplace.microsoft.com) ve [AppSource](https://appsource.microsoft.com).
-- [Bulut Market yayımcısı haline](https://docs.microsoft.com/azure/marketplace/become-publisher) resmi bir Microsoft bulut yayımcısı olmaya gerekli tüm adımları genel bir bakış sağlar.
+- [Azure Market ilkeleri ve koşulları](../../policies-terms.md) , [Azure Market](https://azuremarketplace.microsoft.com) ve [appsource](https://appsource.microsoft.com)kullanıcılarına ve yayımcılarına uygulanan çeşitli yasal ve teknik gereksinimleri ve kuralları listeler.
+- [Bulut marketi yayımcısı](https://docs.microsoft.com/azure/marketplace/become-publisher) , resmi Microsoft bulut yayımcısı olmak için gereken tüm adımlara genel bir bakış sağlar.
 
 
 ## <a name="account-creation-and-management"></a>Hesap oluşturma ve yönetme
 
-Bu bölüm, Market yayımcı hesaplarını yönetme açıklayan makaleleri içerir.
+Bu bölüm, Market yayımcı hesaplarının nasıl yönetileceğini açıklayan aşağıdaki makaleleri içerir.
 
-- [Hesapları yönetmek için Önkoşullar](./cpp-manage-prerequisites.md) kayıtlı buluta yayımcı, bulut iş ortağı portalını kullanarak gereksinim haline açıklanmaktadır.
-- [Azure Market ve AppSource yayımcı profilini yönetme](./cpp-manage-publisher-profile.md) görüntüleme ve yönetme, Microsoft Market yayımcı profilinizi bulut iş ortağı portalı nasıl kullanıldığını açıklar. 
-- [Bulut iş ortağı portalında kullanıcıları yönetme](./cpp-manage-users.md) hesabı ve birden çok kişinin aynı teklifleri üzerinde çalışmasına izin vermek için kendi erişimi yönetmek nasıl yayımlama, kuruluşunuzun bulut kullanıcıları ekleyin.
+- [Hesapların yönetilmesi Için Önkoşullar](./cpp-manage-prerequisites.md) , bulut Iş ortağı portalını kullanma gereksinimi olan kayıtlı bir bulut yayıncısı olmak üzere nasıl yapılacağını açıklar.
+- [Azure Marketi 'ni ve AppSource yayımcı profilini yönetme](./cpp-manage-publisher-profile.md) Microsoft Market yayımcı profilinizi görüntülemek ve yönetmek için bulut iş ortağı portalı kullanmayı açıklar. 
+- [Bulut iş ortağı portalı kullanıcıları yönetmek](./cpp-manage-users.md) , kuruluşunuzun bulut yayımlama hesabına Kullanıcı ekleme ve birden çok kişinin aynı tekliflerle çalışmasına izin vermek için erişiminin nasıl yönetileceği.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Karşılamanız gereken [hesapları yönetmek için Önkoşullar](./cpp-manage-prerequisites.md) devam etmeden önce.  Daha sonra da göz önüne almanız [bulut iş ortağı portalı Turu](../portal-tour/cpp-portal-tour.md) portal kullanıcı arabirimi tanımak için.
+Devam etmeden önce [hesapları yönetmek Için önkoşulları](./cpp-manage-prerequisites.md) karşılamanız gerekir.  Daha sonra, portalın Kullanıcı arabirimine alışmak için [bulut iş ortağı portalı turu](../portal-tour/cpp-portal-tour.md) da almalısınız.

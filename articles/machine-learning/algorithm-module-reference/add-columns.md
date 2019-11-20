@@ -1,50 +1,49 @@
 ---
-title: 'Sütunları ekleyin: Modül başvurusu'
-titleSuffix: Azure Machine Learning service
-description: Sütun Ekle modülü, iki veri kümeleri birleştirmek için Azure Machine Learning hizmetinde kullanmayı öğrenin.
+title: 'Sütun ekleme: modül başvurusu'
+titleSuffix: Azure Machine Learning
+description: İki veri kümesini birleştirmek için Azure Machine Learning sütun Ekle modülünü nasıl kullanacağınızı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: xiaoharper
 ms.author: zhanxia
-ms.date: 05/02/2019
-ROBOTS: NOINDEX
-ms.openlocfilehash: f1e087e97007c6ba271651a9791c7c3b38a9b9b7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/22/2019
+ms.openlocfilehash: 55981279cb1902424d1a0f77af097dc379d7222f
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65029363"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73493968"
 ---
-# <a name="add-columns-module"></a>Sütunları Modül Ekle
+# <a name="add-columns-module"></a>Sütun ekleme modülü
 
-Bu makalede bir modül, Azure Machine Learning hizmeti için görsel arabirim (Önizleme).
+Bu makalede Azure Machine Learning tasarımcısında modül (Önizleme) açıklanmaktadır.
 
-İki veri kümeleri birleştirmek için bu modülü kullanın. Tek bir veri kümesi oluşturmak için giriş olarak belirttiğiniz iki veri kümelerindeki tüm sütunları birleştirin. İkiden fazla veri kümeleri birleştirmek gerekiyorsa, çeşitli örneklerini kullanın **Sütun Ekle**.
+İki veri kümesini birleştirmek için bu modülü kullanın. Tek bir veri kümesi oluşturmak için giriş olarak belirttiğiniz iki veri kümesindeki tüm sütunları birleştirebilirsiniz. İkiden fazla veri kümesini birleştirmeniz gerekiyorsa, **sütun Ekle**' nin birkaç örneğini kullanın.
 
 
 
 ## <a name="how-to-configure-add-columns"></a>Sütun Ekle yapılandırma
-1. Ekle **Sütun Ekle** denemenizi modülü.
+1. İşlem hattınızla **sütun ekleme** modülünü ekleyin.
 
-2. Birleştirmek istediğiniz iki veri kümesi bağlanın. İkiden fazla veri kümeleri birleştirmek istiyorsanız, çeşitli birleşimlerini araya zincirleyebilirsiniz **Sütun Ekle**.
+2. Birleştirmek istediğiniz iki veri kümesini bağlayın. İkiden fazla veri kümesini birleştirmek istiyorsanız, **sütun Ekle**' nin birkaç birleşimini birlikte zincirleyebilirsiniz.
 
-    - Farklı sayıda satıra sahip iki sütun birleştirmek mümkündür. Çıktı veri kümesi, daha küçük kaynak sütunundaki her satır için eksik değerleri ile doldurulur.
+    - Farklı sayıda satıra sahip iki sütunu birleştirmek mümkündür. Çıktı veri kümesi, daha küçük kaynak sütunundaki her bir satır için eksik değerlerle doldurulur.
 
-    - Sütunları eklemek için tek tek seçemezsiniz. Kullandığınızda, her veri kümesinden alınan tüm sütunları bitiştirilir **Sütun Ekle**. Yalnızca bir sütun alt kümesi eklemek istiyorsanız, bu nedenle, istediğiniz sütunları içeren bir veri kümesini oluşturmak için veri kümesindeki sütunları seçme kullanın.
+    - Eklenecek sütunları tek tek seçemezsiniz. **Sütun Ekle**kullandığınızda her bir veri kümesindeki tüm sütunlar birleştirilir. Bu nedenle, sütunların yalnızca bir alt kümesini eklemek istiyorsanız, istediğiniz sütunları içeren bir veri kümesi oluşturmak için veri kümesinde sütunları seç ' i kullanın.
 
-3. Denemeyi çalıştırın.
+3. İşlem hattını çalıştırma.
 
 ### <a name="results"></a>Sonuçlar
-Denemeyi çalıştırdıktan sonra:
+İşlem hattı çalıştırıldıktan sonra:
 
-- Yeni veri kümesini ilk satırlarını görmek için çıkışı sağ **Sütun Ekle** ve görsel öğe seçin.
+- Yeni veri kümesinin ilk satırlarını görmek için **sütun Ekle** ' nin çıktısına sağ tıklayın ve Görselleştir ' i seçin.
 
-Yeni veri kümesinde sütun sayısı iki giriş veri kümeleri sütunlarının toplamına eşittir.
+Yeni veri kümesindeki sütun sayısı, her iki giriş veri kümesinin sütunlarının toplamına eşittir.
 
-Giriş veri kümelerinde aynı ada sahip iki sütun varsa sütunun adı için sayısal bir sonek eklenir. Örneğin, TargetOutcome adlı bir sütunun iki örneği varsa, sol sütunda yeniden adlandırılması TargetOutcome_1 ve sağ sütunda TargetOutcome_2 yeniden adlandırıldı.
+Giriş veri kümelerinde aynı ada sahip iki sütun varsa, sütunun adına bir sayısal sonek eklenir. Örneğin, Targetoutal adlı bir sütunun iki örneği varsa, sol sütun TargetOutcome_1 olarak yeniden adlandırılır ve doğru sütun TargetOutcome_2 olarak yeniden adlandırılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [kullanılabilir modül kümesini](module-reference.md) Azure Machine Learning hizmetine. 
+Azure Machine Learning için [kullanılabilen modül kümesine](module-reference.md) bakın. 

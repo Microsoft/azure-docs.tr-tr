@@ -1,105 +1,101 @@
 ---
-title: Azure Application Insights işlem tanılamaları | Microsoft Docs
-description: Application Insights uçtan uca işlem tanılamaları
-services: application-insights
-documentationcenter: .net
-author: mrbullwinkle
-manager: carmonm
-ms.service: application-insights
-ms.workload: TBD
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights Işlem tanılama | Microsoft Docs
+description: Uçtan uca işlem tanılamayı Application Insights
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: mrbullwinkle
+ms.author: mbullwin
 ms.date: 01/19/2018
 ms.reviewer: sdash
-ms.author: mbullwin
-ms.openlocfilehash: c6c44525018e2115f1df8ed2d3f15432b95490c6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1ed3713fe4a6c9403be13f444d0409af459a1e70
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60783735"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899564"
 ---
-# <a name="unified-cross-component-transaction-diagnostics"></a>Birleşik bileşenler arası işlem tanılamaları
+# <a name="unified-cross-component-transaction-diagnostics"></a>Birleştirilmiş çapraz bileşen işlem tanılaması
 
-Birleşik tanılama koreluje s sunucu tarafı telemetri tek bir görünümde tüm Application Insights'ın izlenen bileşenler genelinde karşılaşırsınız. Ayrı bir izleme anahtarı ile birden çok kaynaklarınız varsa önemi yoktur. Application Insights temel ilişki algılar ve uygulama bileşeni, bağımlılık veya bir işlem yavaşlama veya hata özel durum kolayca tanılamanıza olanak tanır.
+Birleşik tanılama deneyimi, sunucu tarafı telemetrisini tüm Application Insights izlenen bileşenlerinizin tamamında tek bir görünümde otomatik olarak ilişkilendirir. Ayrı izleme anahtarlarına sahip birden fazla kaynağınız varsa bu değildir. Application Insights, temel ilişkiyi algılar ve bir işlem yavaşlama veya hatasına neden olan uygulama bileşenini, bağımlılığı veya özel durumu kolayca tanılamanıza olanak sağlar.
 
-## <a name="what-is-a-component"></a>Bir bileşen nedir?
+## <a name="what-is-a-component"></a>Bileşen nedir?
 
-Bağımsız bir şekilde dağıtılabilen dağıtılmış mikro uygulamanızın parçalarını bileşenlerdir. Geliştiriciler ve işlem ekipleri bu uygulama bileşenleri tarafından oluşturulan telemetri erişimi veya kod düzeyinde görünürlüğe sahip.
+Bileşenler, dağıtılmış/mikro hizmetler uygulamanızın bağımsız olarak dağıtılabilir parçalarından oluşur. Geliştiriciler ve işlemler ekiplerinde kod düzeyinde görünürlük veya bu uygulama bileşenleri tarafından oluşturulan telemetri erişimi vardır.
 
-* Bileşenleri "gözlemlenen" dış bağımlılıkları SQL gibi farklı takım/kuruluşunuz olmayabilir EventHub vb. erişim (kod veya telemetri).
-* Bileşenleri rol/sunucu/kapsayıcı örnekleri herhangi bir sayıda çalışır.
-* Bileşenleri ayrı bir Application Insights izleme anahtarı (abonelikler farklı olsa bile) olması ya da farklı roller için tek bir Application Insights izleme anahtarı raporlama gerçekleştirebilirsiniz. Yeni deneyimi nasıl bunlar ayarlanan bakılmaksızın tüm bileşenler genelinde ayrıntıları gösterir.
+* Bileşenler, takımınızın/kuruluşunuzun erişimi olmayan (kod veya telemetri) SQL, EventHub vb. gibi "gözlemlenen" dış bağımlılıklardan farklıdır.
+* Bileşenler herhangi bir sayıda sunucu/rol/kapsayıcı örneği üzerinde çalışır.
+* Bileşenler Application Insights izleme anahtarlarına (abonelikler farklıysa bile) veya tek bir Application Insights izleme anahtarına rapor veren farklı rollere sahip olabilir. Yeni deneyim, nasıl ayarlandıklarından bağımsız olarak tüm bileşenler genelinde ayrıntıları gösterir.
 
 > [!NOTE]
-> * **İlgili öğe bağlantıları eksik?** Tüm ilişkili telemetri bulunan [üst](#cross-component-transaction-chart) ve [alt](#all-telemetry-with-this-operation-id) sol tarafındaki bölümlerini. 
+> * **İlgili öğe bağlantıları eksik mı?** Tüm ilgili telemetri, sol taraftaki [en üst](#cross-component-transaction-chart) ve [alt](#all-telemetry-with-this-operation-id) bölümlerde bulunur. 
 
 ## <a name="transaction-diagnostics-experience"></a>İşlem tanılama deneyimi
-Bu görünüm dört bölümden oluşur: sonuçları listesi, bileşenler arası işlem grafik, bu işlem ve Ayrıntılar bölmesinde soldaki herhangi bir telemetri seçili öğe için ilgili tüm telemetri zaman sıralı listesi.
+Bu görünümde dört temel bölüm bulunur: sonuçlar listesi, bir çapraz bileşen işlem grafiği, bu işlemle ilgili tüm Telemetriyi bir zaman sırası listesi ve sol taraftaki seçili telemetri öğesi için Ayrıntılar bölmesi.
 
-![Anahtar bölümleri](media/transaction-diagnostics/4partsCrossComponent.png)
+![Anahtar parçalar](media/transaction-diagnostics/4partsCrossComponent.png)
 
-## <a name="cross-component-transaction-chart"></a>Bileşenler arası işlem grafiği
+## <a name="cross-component-transaction-chart"></a>Çapraz bileşen işlem grafiği
 
-Bu grafiği yatay bir çubuk olan bir zaman çizelgesi istekleri ve bağımlılıkları süresince bileşenlerinde sağlar. Toplanan herhangi bir özel durum da zaman çizelgesinde işaretlenir.
+Bu grafik, bileşenler arasındaki isteklerin ve bağımlılıkların süresi için yatay çubuklarla bir zaman çizelgesi sağlar. Toplanan tüm özel durumlar da zaman çizelgesinde işaretlenir.
 
-* Bu grafik en üst satıra giriş noktasını temsil eder. Birinci Bileşen gelen istek bu işlem sırasında çağrılır. İşlemin tamamlanması için geçen toplam süre süresidir.
-* Dış bağımlılıklara yapılan çağrıları bağımlılık türünü temsil eden bir simge ile basit daraltılabilir olmayan satırlar var.
-* Diğer bileşenleri çağrıları daraltılabilir satırları aynıdır. Her satır, bileşen çağrılan belirli bir işlemi karşılık gelir.
-* Varsayılan, isteği, bağımlılık veya özel durum, seçtiğiniz sağ tarafta görüntülenir.
-* Görmek için herhangi bir satırı seçin, [ayrıntıları sağda](#details-of-the-selected-telemetry). 
+* Bu grafikteki en üst satır, bu işlemde çağrılan ilk bileşene gelen istek olan giriş noktasını temsil eder. Süre, işlemin tamamlaması için geçen toplam süredir.
+* Dış bağımlılıklara yapılan çağrılar, bağımlılık türünü temsil eden simgelerle birlikte, daraltılamayan basit satırlardır.
+* Diğer bileşenlere yapılan çağrılar daraltılabilir satırlardır. Her satır, bileşende çağrılan belirli bir işleme karşılık gelir.
+* Varsayılan olarak, seçtiğiniz istek, bağımlılık veya özel durum sağ tarafta görüntülenir.
+* [Ayrıntılarını sağ](#details-of-the-selected-telemetry)tarafta görmek için herhangi bir satır seçin. 
 
 > [!NOTE]
-> Diğer bileşenleri çağrısına sahip iki satır: bir satır arayana bileşenin giden çağrısından (bağımlılık) temsil eder ve iki satırdan adlı bileşenin gelen isteğiyle karşılık gelir. Önde gelen simge ve süresi çubukları ayrı stilini bunları ayırt yardımcı olur.
+> Diğer bileşenlere yapılan çağrılar iki satıra sahiptir: bir satır, çağıran bileşeninden giden çağrıyı (bağımlılık) temsil eder ve diğer satır çağrılan bileşendeki gelen isteğe karşılık gelir. Süre çubuklarının önde gelen simgesi ve farklı stillendirme, aralarında ayrım yapmanıza yardımcı olur.
 
-## <a name="all-telemetry-with-this-operation-id"></a>Bu işlem kimliğine sahip tüm telemetri
+## <a name="all-telemetry-with-this-operation-id"></a>Bu Işlem kimliği ile tüm telemetri
 
-Bu bölümde, bu işlem için ilgili telemetri zaman dizisindeki düz liste görünümü gösterilir. Ayrıca özel olaylar ve işlem grafiği görüntülenmiyor izlemeleri gösterir. Belirli bir bileşeni/çağrısı tarafından oluşturulan telemetri için bu listeyi filtreleyebilirsiniz. Karşılık gelen görmek için bu listede tüm telemetri öğesinin seçebileceğiniz [ayrıntıları sağda](#details-of-the-selected-telemetry).
+Bu bölümde, bu işlemle ilgili tüm Telemetriyi bir zaman dizisinde düz liste görünümü gösterilmektedir. Ayrıca, özel olayları ve işlem grafiğinde görüntülenmeyen izlemeleri gösterir. Bu listeyi, belirli bir bileşen/çağrı tarafından oluşturulan telemetriye filtreleyebilirsiniz. İlgili [ayrıntıları sağda](#details-of-the-selected-telemetry)görmek için bu listedeki herhangi bir telemetri öğesini seçebilirsiniz.
 
-![Zaman serisi tüm telemetri](media/transaction-diagnostics/allTelemetryDrawerOpened.png)
+![Tüm Telemetriyi zaman dizisi](media/transaction-diagnostics/allTelemetryDrawerOpened.png)
 
-## <a name="details-of-the-selected-telemetry"></a>Seçili telemetri ayrıntıları
+## <a name="details-of-the-selected-telemetry"></a>Seçili Telemetriyi ayrıntıları
 
-Daraltılabilir bu bölme, işlem grafik veya listesinden herhangi bir seçili öğe ayrıntılarını gösterir. "Show all" tüm toplanan standart özniteliklerini listeler. Herhangi bir özel özniteliği ayrı olarak standart kümesi listelenmiştir. "..." Yığın İzleme penceresini izleme kopyalamak için bir seçenek aşağıda üzerinde tıklayın. "Açık profiler izlemeleri" veya "Aç hata ayıklama anlık görüntüsü" kod düzeyi tanılama ilgili ayrıntı bölmelerinde gösterir.
+Bu daraltılabilir bölmede, işlem grafiğindeki veya listedeki seçili öğelerin ayrıntıları gösterilir. "Tümünü göster", toplanan tüm standart öznitelikleri listeler. Özel öznitelikler standart kümesinin altında ayrı olarak listelenir. "..." Seçeneğine tıklayın izlemeyi kopyalamak için bir seçenek almak üzere yığın izleme penceresinin altında. "Profil Oluşturucu izlemelerini aç" veya "hata ayıklama anlık görüntüsünü aç", ilgili ayrıntı bölmelerinde kod düzeyi tanılamayı gösterir.
 
 ![Özel durum ayrıntısı](media/transaction-diagnostics/exceptiondetail.png)
 
 ## <a name="search-results"></a>Arama sonuçları
 
-Daraltılabilir bu bölme filtre ölçütlerini karşılayan diğer sonuçları gösterilmektedir. Herhangi bir sonuç ilgili ayrıntılarını yukarıda listelenen 3 bölümden güncelleştirmek için tıklayın. Örnekleme herhangi biri etkin olsa bile, tüm bileşenlerden kullanılabilir ayrıntılarını sağlamak büyük olasılıkla örnekleri bulmak deneyin. Bunlar, "önerilen" örnek olarak gösterilir.
+Bu daraltılabilir bölmede, filtre ölçütlerine uyan diğer sonuçlar gösterilir. Yukarıda listelenen 3 bölümden ilgili ayrıntıları güncelleştirmek için herhangi bir sonuca tıklayın. Örnekleme herhangi bir uygulamada etkin olsa bile tüm bileşenlerden ayrıntıları sağlamak için en olası örnekleri bulmaya çalışırız. Bunlar "önerilen" örnekler olarak gösterilir.
 
 ![Arama sonuçları](media/transaction-diagnostics/searchResults.png)
 
-## <a name="profiler-and-snapshot-debugger"></a>Profiler ve anlık görüntü hata ayıklayıcısı
+## <a name="profiler-and-snapshot-debugger"></a>Profil Oluşturucu ve anlık görüntü hata ayıklayıcısı
 
-[Application Insights profiler](../../azure-monitor/app/profiler.md) veya [anlık görüntü hata ayıklayıcısı](snapshot-debugger.md) Yardım ile kod düzeyi tanılama performans ve başarısızlık sorunların. Bu deneyim ile anlık görüntülerden herhangi bir bileşeni tek bir'a tıklayın veya profil oluşturucu izlemeleri görebilirsiniz.
+[Application Insights profil oluşturucu](../../azure-monitor/app/profiler.md) veya [anlık görüntü hata ayıklayıcısı](snapshot-debugger.md) , performans ve başarısızlık sorunlarının kod düzeyinde tanılamada yardımcı olur. Bu deneyimle, tek bir tıklama ile herhangi bir bileşenden profil oluşturucu izlemelerini veya anlık görüntüleri görebilirsiniz.
 
-Profiler çalışmaya alınamadı, lütfen başvurun **serviceprofilerhelp\@microsoft.com**
+Profil oluşturucuyu çalışma konusunda alamazsanız lütfen **serviceprofilerhelp\@Microsoft.com** başvurun
 
-Snapshot Debugger çalışma alınamadı, lütfen başvurun **snapshothelp\@microsoft.com**
+Snapshot Debugger çalışmadıysanız, lütfen **anlık görüntüyle iletişime geçin\@Microsoft.com**
 
-![Profiler tümleştirme](media/transaction-diagnostics/profilerTraces.png)
+![Profil Oluşturucu tümleştirmesi](media/transaction-diagnostics/profilerTraces.png)
 
 ## <a name="faq"></a>SSS
 
-*Grafik üzerinde tek bir bileşen görüyorum ve diğerleri yalnızca dış bağımlılıkları olmadan, bu bileşenler içerisinden ne ayrıntılı olarak gösterildiğini.*
+*Grafik üzerinde tek bir bileşen görüyorum ve diğerleri yalnızca dış bağımlılıklar olarak gösterildiğimde bu bileşenlere ne olduğuna ilişkin hiçbir ayrıntı yoktur.*
 
 Olası nedenler:
 
-* Diğer bileşenlerle, Application Insights ile izlenen?
-* Bunlar, en son kararlı Application Insights SDK'sını kullanıyor musunuz?
-* Bu bileşenler ayrı bir Application Insights kaynaklarını ise, telemetri için gerekli erişim gerekiyor?
+* Diğer bileşenler Application Insights ile işaretlenmiş mı?
+* En son kararlı Application Insights SDK 'sını kullanıyor musunuz?
+* Bu bileşenler Application Insights kaynakları ayırdıysanız, telemetrisine erişiminizin olması gerekir mi?
 
-Erişiminiz ve bileşenlerinin en son Application Insights SDK'ları ile işaretlenmiş, en sağdaki geri bildirim kanalı aracılığıyla bize bildirin.
+Erişiminiz varsa ve bileşenler en son Application Insights SDK 'lar ile birlikte işaretlenmiş ise, en iyi geri bildirim kanalı üzerinden bize bilgi verin.
 
-*Bağımlılıklar için yinelenen satırları görüyorum. Bu beklenen bir durumdur?*
+*Bağımlılıklar için yinelenen satırlar görüyorum. Bu beklensin mi?*
 
-Şu anda, biz yerine gelen istek ayrı giden bağımlılık çağrısının gösteriliyor. Genellikle, iki çağrıları yalnızca gidiş dönüş ağ nedeniyle farklı olan süre değeri ile aynı görünür. Önde gelen simge ve süresi çubukları ayrı stilini bunları ayırt yardımcı olur. Bu verilerini sunumu karmaşıktır? Görüşlerinizi bize bildirin!
+Şu anda gelen istekten ayrı giden bağımlılık çağrısını gösteriyoruz. Genellikle, iki çağrı, ağ gidiş dönüş nedeniyle yalnızca Duration değeri farklı olacak şekilde aynı şekilde görünür. Süre çubuklarının önde gelen simgesi ve farklı stillendirme, aralarında ayrım yapmanıza yardımcı olur. Verilerin bu sunumu kafa karıştırıcı mı? Görüşlerinizi bize iletin!
 
-*Peki saat farklı bileşen örneklerinde eğriltir?*
+*Farklı bileşen örneklerinde saatin ne kadar eğilen?*
 
-Zaman çizelgelerini saat farklarından işlem grafikteki için ayarlanır. Ayrıntılar bölmesinde veya Analiz kullanarak tam zaman damgaları görebilirsiniz.
+Zaman çizelgeleri, işlem grafiğindeki saat eğelerine göre ayarlanır. Tam zaman damgasını Ayrıntılar bölmesinde veya analiz kullanarak görebilirsiniz.
 
-*Yeni deneyimi ilgili öğeleri sorguların çoğu neden eksik?*
+*Yeni deneyim neden birçok ilgili öğe sorgusu eksik?*
 
-Bu tasarım gereğidir. İlgili olan tüm öğeler, tüm bileşenleri genelindeki zaten sol tarafındaki (üst ve alt bölümleri) kullanılabilir. Sol tarafta kapsamıyordur ilgili öğeleri iki yeni bir deneyimi vardır: beş dakikadan önce ve sonra bu olay ve kullanıcı zaman çizelgesini tüm telemetri.
+Bu tasarım gereğidir. Tüm bileşenler genelinde tüm ilgili öğeler zaten sol tarafta (üst ve alt bölümler) kullanılabilir. Yeni deneyim, sol taraftaki iki ilişkili öğeye sahiptir: Bu olaydan ve sonrasında beş dakikadan önceki ve sonraki tüm telemetri ve Kullanıcı zaman çizelgesi.

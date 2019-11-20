@@ -1,61 +1,61 @@
 ---
-title: PostgreSQL - tek bir sunucu için Azure veritabanı'nda Query Store kullanım senaryoları
-description: Bu makalede, PostgreSQL - tek bir sunucu için bazı senaryolar için Azure veritabanı'nda Query Store açıklanır.
+title: PostgreSQL için Azure veritabanı 'nda sorgu deposu kullanım senaryoları-tek sunucu
+description: Bu makalede PostgreSQL için Azure veritabanı-tek sunucu 'da sorgu deposu için bazı senaryolar açıklanmaktadır.
 author: rachel-msft
 ms.author: raagyema
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 5/6/2019
-ms.openlocfilehash: 029c595ba983d3b758568fbacaf6577014d893db
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3cdb0d4e00e667b0369cdf612662830f18dc5fb8
+ms.sourcegitcommit: a4b5d31b113f520fcd43624dd57be677d10fc1c0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65067312"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70764268"
 ---
-# <a name="usage-scenarios-for-query-store"></a>Query Store kullanım senaryoları
+# <a name="usage-scenarios-for-query-store"></a>Sorgu deposu için kullanım senaryoları
 
-**Şunlara uygulanır:** -Tek bir sunucu 9.6 ve 10 olan PostgreSQL için Azure veritabanı
+**Şunlara uygulanır:** PostgreSQL için Azure veritabanı-tek sunuculu sürümler 9,6, 10, 11
 
-Query Store çeşitli izleme ve bakımı öngörülebilir iş yükü performansının kritik olduğu senaryolarda kullanabilirsiniz. Aşağıdaki örnekleri dikkate alın: 
-- Tanımlama ve pahalı en sık kullanılan sorgular ayarlama 
+Sorgu deposunu, tahmin edilebilir iş yükü performansının izlenmesi ve sürdürülmesi açısından çok çeşitli senaryolarda kullanabilirsiniz. Aşağıdaki örnekleri göz önünde bulundurun: 
+- En yüksek maliyetli sorguları tanımlama ve ayarlama 
 - A / B testi 
-- Yükseltme sırasında performans kararlı tutma 
-- Tanımlama ve geçici iş yükleri geliştirme 
+- Yükseltmeler sırasında performansın kararlı tutulması 
+- Geçici iş yüklerini tanımlama ve geliştirme 
 
-## <a name="identify-and-tune-expensive-queries"></a>Tanımlamak ve pahalı sorgu ayarlama 
+## <a name="identify-and-tune-expensive-queries"></a>Pahalı sorguları tanımla ve ayarla 
 
-### <a name="identify-longest-running-queries"></a>Uzun çalışan sorguları belirleyin 
-Kullanım [sorgu performansı İçgörüleri](concepts-query-performance-insight.md) en uzun çalışan sorguların hızlı bir şekilde tanımlamak için Azure portalında görünümü. Bu sorguları genellikle önemli ölçüde kaynakları kullanma eğilimindedir. Uzun süre çalışan sorularınızı en iyi duruma getirme, kaynakları kullanmak için sistem üzerinde çalışan diğer sorgular tarafından azaltarak performansı artırabilir. 
+### <a name="identify-longest-running-queries"></a>En uzun çalışan sorguları tanımla 
+En uzun çalışan sorguları hızlı bir şekilde tanımlamak için Azure portal [sorgu performansı içgörüleri](concepts-query-performance-insight.md) görünümünü kullanın. Bu sorgular tipik olarak önemli miktarda kaynak tüketme eğilimindedir. En uzun çalışan sorularınızı iyileştirmek, kaynakları sisteminizde çalışan diğer sorgular tarafından kullanılmak üzere boşaltarak performansı iyileştirebilir. 
 
-### <a name="target-queries-with-performance-deltas"></a>Performans deltaları hedef sorguları 
-Query Store performans verilerini zaman pencereleri halinde böler, böylece zaman içinde bir sorgu performansını izleyebilirsiniz. Bu tam olarak belirlemenize, sorguları katkıda bulunuyorsanız harcanan toplam zamanı arasında bir artış yardımcı olur. Sonuç olarak, hedeflenen iş yükünüz sorun giderme yapabilirsiniz.
+### <a name="target-queries-with-performance-deltas"></a>Performans değişimleri ile hedef sorgular 
+Sorgu deposu, performans verilerini zaman içinde dilimlerler, böylece bir sorgunun zaman içinde performansını izleyebilirsiniz. Bu, tam zamanında harcanan bir artışa hangi sorguların katkıda olduğunu belirlemenize yardımcı olur. Sonuç olarak, iş yükünüzün hedeflenen sorunlarını giderme işlemlerini gerçekleştirebilirsiniz.
 
-### <a name="tuning-expensive-queries"></a>Sorgular pahalı ayarlama 
-Bir sorgu ile performansın tespit ederken, sorunun doğasına üzerinde gerçekleştirdiğiniz eylemi bağlıdır: 
-- Kullanım [performans önerileri](concepts-performance-recommendations.md) olmadığını belirlemek için dizinleri önerilir. Evet ise, dizin oluşturma ve sonra dizini oluşturduktan sonra sorgu performansını değerlendirmek için Query Store kullanın. 
-- İstatistikleri sorgu tarafından kullanılan temel alınan tablolar için güncel olduğundan emin olun.
-- Pahalı sorguları yeniden yazmak göz önünde bulundurun. Örneğin, sorgu parametreleştirmesinin avantajlarından yararlanın ve dinamik SQL kullanımını azaltabilirsiniz. Veri filtreleme veritabanı tarafında, uygulama tarafından değil, uygulama gibi verileri okunurken, en iyi mantığını uygular. 
+### <a name="tuning-expensive-queries"></a>Maliyetli sorguları ayarlama 
+Bir sorguyu, iyi performans performansı ile belirlediğinizde, yaptığınız eylem sorunun doğasına bağlıdır: 
+- Önerilen dizinlerin olup olmadığını anlamak için [performans önerilerini](concepts-performance-recommendations.md) kullanın. Yanıt Evet ise, dizini oluşturun ve ardından sorgu deposunu kullanarak dizini oluşturduktan sonra sorgu performansını değerlendirin. 
+- Sorgu tarafından kullanılan temel tablolar için istatistiklerin güncel olduğundan emin olun.
+- Pahalı sorguları yeniden yazmayı düşünün. Örneğin, sorgu Parametreleştirme özelliğinden yararlanın ve dinamik SQL kullanımını küçültün. Uygulama tarafında değil, veritabanı tarafında veri filtreleme uygulama gibi verileri okurken en iyi mantığı uygulayın. 
 
 
 ## <a name="ab-testing"></a>A / B testi 
-Önce ve sonra bir uygulama değişikliği tanıtmak için planlama iş yükü performansını karşılaştırmak için Query Store kullanın. Query Store ortam veya uygulamanın etkisini değerlendirmek için kullanılan senaryo örnekleri, iş yükü performansı değiştirin: 
-- Bir uygulamanın yeni bir sürümü alınıyor. 
-- Ek kaynaklar sunucuya ekleme. 
+Kullanmayı planladığınız bir uygulama değişikliğinden önce ve sonra iş yükü performansını karşılaştırmak için sorgu deposu kullanın. Ortamın veya uygulamanın etkisini değerlendirmek için, iş yükü performansına yönelik değişiklik yapmak üzere sorgu deposu kullanmaya yönelik senaryolar örnekleri: 
+- Uygulamanın yeni bir sürümünü kullanıma alma. 
+- Sunucuya ek kaynaklar ekleniyor. 
 - Pahalı sorgular tarafından başvurulan tablolarda eksik dizinler oluşturuluyor. 
  
-Tüm bu senaryolar aşağıdaki iş akışı geçerlidir: 
-1. İş yükünüz performans taban çizgisi oluşturmak için önce planlanan değişiklik Query Store ile çalıştırın. 
-2. Zaman denetlenen anda uygulama değişiklikler uygulanır. 
-3. İş yükü değişiklikten sonra performans sistem görüntüsü oluşturmak için yeteri kadar çalıştırmaya devam edin. 
-4. Öğesinden önce ve sonra değişiklik sonuçlarını karşılaştırın. 
-5. Değişikliği veya geri alma tutmaya karar verin. 
+Bu senaryolardan herhangi birinde, aşağıdaki iş akışını uygulayın: 
+1. Performans temeli oluşturmak için planlı değişiklikten önce iş yükünüzü sorgu deposu ile çalıştırın. 
+2. Uygulama değişiklik (ler) i denetimli anda uygulama değişikliği. 
+3. Değişiklikten sonra sistemin performans görüntüsünü oluşturmak için yeterince uzun süren iş yükünü çalıştırmaya devam edin. 
+4. Değişiklikten önceki ve sonraki sonuçları karşılaştırın. 
+5. Değişiklik veya geri alma işleminin tutulup tutulmayacağını belirleyin. 
 
 
-## <a name="identify-and-improve-ad-hoc-workloads"></a>Tanımlayın ve geçici iş yükleri artırın 
-Bazı iş yükleri, genel uygulama performansını artırmak için ayar yapabilirsiniz baskın sorgular yoktur. Bu iş yüklerini göreceli olarak çok sayıda benzersiz sorguları ile bunların sistem kaynaklarının bir kısmını kullanan her biri genellikle belirlenir. Her benzersiz sorgu seyrek, bu nedenle tek çalışma zamanı tüketimi için kritik değildir yürütülür. Öte yandan, uygulama her zaman yeni sorgular oluşturan koşuluyla, sistem kaynaklarının büyük bir kısmı en iyi sorgu derleme üzerinde harcanır. Genellikle, bu durum uygulamanızı sorgular (yerine saklı yordamları ya da parametreli sorgular kullanma) oluşturuyorsa veya varsayılan olarak sorgular oluşturmak, nesne ilişkisel eşleme çerçeveleri dayanıyorsa'olmuyor 
+## <a name="identify-and-improve-ad-hoc-workloads"></a>Geçici iş yüklerini tanımla ve geliştir 
+Bazı iş yükleri, genel uygulama performansını geliştirmek için ayarlayabildiğiniz bir baskın sorgu içermez. Bu iş yükleri genellikle görece çok sayıda benzersiz sorguyla belirlenir, her biri sistem kaynaklarının bir kısmını alır. Her benzersiz sorgu seyrek yürütülür, bu nedenle çalışma zamanının tek tek kullanımı kritik değildir. Diğer taraftan, uygulamanın her seferinde yeni sorgular üretmesine karşın, sistem kaynaklarının önemli bir kısmı sorgu derlemesi üzerinde harcanmıştır ve bu da en uygun değildir. Genellikle, uygulamanız sorgu oluşturduğunda (saklı yordamları veya parametreli sorgular kullanmak yerine) veya varsayılan olarak sorgu üreten nesne ilişkisel eşleme çerçevelerine dayanıyorsa bu durum oluşur. 
  
-Uygulama kodu denetiminde olması durumunda, saklı yordamları ya da parametreli sorgular kullanmayı veri erişim katmanı yeniden yazmayı düşünebilirsiniz. Ancak, bu durum Ayrıca uygulama değişiklikleri tüm veritabanını (tüm sorguları) veya sorguyu şablonları ile aynı sorgu karma sorgu parametreleştirmesinin zorlayarak geliştirilebilir. 
+Uygulama kodunun denetimini kullanıyorsanız, saklı yordamları veya parametreli sorguları kullanmak için veri erişim katmanını yeniden yazmayı düşünebilirsiniz. Bununla birlikte, bu durum, tüm veritabanı (tüm sorgular) veya aynı sorgu karması olan tek tek sorgu şablonları için sorgu parametrelemeyi zorlayarak uygulama değişiklikleri olmadan da geliştirilebilir. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Daha fazla bilgi edinin [Query Store kullanmak için en iyi yöntemler](concepts-query-store-best-practices.md)
+- [Sorgu deposunu kullanmaya yönelik en iyi uygulamalar](concepts-query-store-best-practices.md) hakkında daha fazla bilgi edinin

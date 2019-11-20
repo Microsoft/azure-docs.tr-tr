@@ -1,6 +1,6 @@
 ---
-title: Bir Azure Resource Manager şablonu kullanarak Azure IOT Hub için ileti yönlendirmeyi yapılandırma | Microsoft Docs
-description: Bir Azure Resource Manager şablonu kullanarak Azure IOT Hub için ileti yönlendirmeyi yapılandırma
+title: Azure Resource Manager şablonu kullanarak Azure IoT Hub için ileti yönlendirmeyi yapılandırma
+description: Azure Resource Manager şablonu kullanarak Azure IoT Hub için ileti yönlendirmeyi yapılandırma
 author: robinsh
 manager: philmeagit st
 ms.service: iot-hub
@@ -9,14 +9,14 @@ ms.topic: tutorial
 ms.date: 03/25/2019
 ms.author: robinsh
 ms.custom: mvc
-ms.openlocfilehash: d7b8c0685cf92341241575d3e67c09a759f5c190
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 8f245653a8b84944e1e8a3f48a49992f0065be58
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66163304"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74084400"
 ---
-# <a name="tutorial-use-an-azure-resource-manager-template-to-configure-iot-hub-message-routing"></a>Öğretici: IOT Hub ileti yönlendirme yapılandırmak için bir Azure Resource Manager şablonu kullanma
+# <a name="tutorial-use-an-azure-resource-manager-template-to-configure-iot-hub-message-routing"></a>Öğretici: IoT Hub ileti yönlendirmeyi yapılandırmak için Azure Resource Manager şablonu kullanma
 
 [!INCLUDE [iot-hub-include-routing-intro](../../includes/iot-hub-include-routing-intro.md)]
 
@@ -26,75 +26,75 @@ ms.locfileid: "66163304"
 
 [!INCLUDE [iot-hub-include-create-routing-description](../../includes/iot-hub-include-create-routing-description.md)]
 
-## <a name="download-the-template-and-parameters-file"></a>Şablon ve parametreleri dosyasını indirin
+## <a name="download-the-template-and-parameters-file"></a>Şablon ve parametre dosyasını indirin
 
-Bu öğreticinin ikinci bölümü, indirin ve IOT Hub'ına ileti göndermek için bir Visual Studio uygulamayı çalıştırın. Azure Resource Manager şablonu ve parametre dosyasını yanı sıra, Azure CLI ve PowerShell betikleri içeren, indirme klasörü yok.
+Bu öğreticinin ikinci bölümünde, IoT Hub iletileri göndermek için bir Visual Studio uygulaması indirip çalıştırırsınız. Bu indirmenin, Azure CLı ve PowerShell betikleri ile birlikte Azure Resource Manager şablonu ve parametreleri dosyasını içeren bir klasör vardır.
 
-Bir tane indirin [Azure IOT C# örnekleri](https://github.com/Azure-Samples/azure-iot-samples-csharp/archive/master.zip) şimdi. Master.zip dosyanın sıkıştırmasını açın. Resource Manager şablonu ve parametreleri dosyası olan olarak//iot-hub/Tutorials/Routing/SimulatedDevice/resources **template_iothub.json** ve **template_iothub_parameters.json**.
+Devam edin ve [Azure IoT C# örneklerini](https://github.com/Azure-Samples/azure-iot-samples-csharp/archive/master.zip) şimdi indirin. Master. zip dosyasını ayıklayın. Kaynak Yöneticisi şablonu ve parametreler dosyası, **template_iothub. JSON** ve **template_iothub_parameters. JSON**olarak/iot-hub/Tutorials/Routing/SimulatedDevice/resources/.
 
 ## <a name="create-your-resources"></a>Kaynaklarınızı oluşturun
 
-Tüm kaynaklarınızı oluşturmak için bir Azure Kaynak Yöneticisi (RM) şablonunu kullanma dağıtacağız. Azure CLI ve PowerShell betikleri birkaç satır aynı anda çalıştırabilirsiniz. RM şablonu, tek bir adımda dağıtılır. Bu makalede, ayrı ayrı her biri anlamanıza yardımcı olması için bölümleri gösterilmektedir. Ardından, şablonu dağıtmak ve test için sanal cihaz oluşturmak nasıl gösterilir. Şablon dağıtıldıktan sonra ileti yönlendirme yapılandırması portalında görüntüleyebilirsiniz.
+Tüm kaynaklarınızı oluşturmak için bir Azure Resource Manager (RM) şablonu kullanacaksınız. Azure CLı ve PowerShell betikleri, tek seferde birkaç satır çalıştırabilir. Bir RM şablonu tek bir adımda dağıtılır. Bu makalede, her birini anlamanıza yardımcı olmak için bölümler ayrı olarak gösterilir. Daha sonra, şablonu nasıl dağıtacağınızı ve test için sanal cihaz oluşturmayı gösterir. Şablon dağıtıldıktan sonra, portalda ileti yönlendirme yapılandırması ' nı görüntüleyebilirsiniz.
 
-IOT hub'ı adı ve depolama hesabı adı gibi genel olarak benzersiz olması gereken birkaç kaynak adları vardır. Adlandırma kaynakları daha kolay hale getirmek için bu kaynak adları geçerli tarih/saatten oluşturulan rastgele alfasayısal değer eklemek için ayarlanır. 
+IoT Hub adı ve depolama hesabı adı gibi genel olarak benzersiz olması gereken birkaç kaynak adı vardır. Kaynakların adlandırılmasını kolaylaştırmak için bu kaynak adları, geçerli tarih/saatten oluşturulan rastgele alfasayısal bir değer eklemek üzere ayarlanır. 
 
-Şablon bakarsanız, burada değişkenleri için geçirilen parametre bu kaynakları ayarlanmıştır ve birleştirme görürsünüz *randomValue* parametre. 
+Şablona bakarsanız, geçirilen parametreyi alan ve *Rasgelevalue değerini* parametresine bağlayan bu kaynaklar için değişkenlerin ayarlandığını görürsünüz. 
 
-Aşağıdaki bölümde, kullanılan parametreler açıklanmaktadır.
+Aşağıdaki bölümde kullanılan parametreler açıklanmaktadır.
 
 ### <a name="parameters"></a>Parametreler
 
-Bu parametreleri çoğunu varsayılan değerlere sahiptir. İle biten olanları **_in** ile birleştirilmiş *randomValue* genel olarak benzersiz olacak şekilde. 
+Bu parametrelerin çoğu varsayılan değerlere sahiptir. **_İn** ile biten olanlar, genel olarak benzersiz hale getirilmesi Için *rasgeledeğer* ile birleştirilir. 
 
-**randomValue**: Bu değer, geçerli şablon dağıtırken tarih oluşturulur. Bu alan şablonunda oluşturuldukça Parametreler dosyasında değil.
+**rasgelevalue**: Bu değer, şablonu dağıtırken geçerli tarih/saat içinden oluşturulur. Bu alan, şablonda oluşturulduğu gibi parametreler dosyasında değildir.
 
-**Subscriptionıd**: Bu alan, şablonu dağıttığınız aboneliğe ayarlanır. Bu alan, ayarlandığından Parametreler dosyasında değil.
+**SubscriptionID**: Bu alan, şablonu dağıttığınız abonelik için ayarlanır. Bu alan, sizin için ayarlandığından Parametreler dosyasında değildir.
 
-**IoTHubName_in**: Genel olarak benzersiz olması randomValue ile birleştirilmiş temel IOT hub'ı ad alanıdır.
+**IoTHubName_in**: Bu alan, genel olarak benzersiz olması Için rasgeledeğeri ile birleştirilmiş temel IoT Hub adıdır.
 
-**Konum**: Bu alan, içine, "gibi westus" dağıtmakta olduğunuz Azure bölgesidir.
+**konum**: Bu alan, "westus" gibi dağıttığınız Azure bölgesidir.
 
-**consumer_group**: Bu alan, yönlendirme uç noktası aracılığıyla gelen iletiler için tüketici grubudur. Azure Stream analytics'te sonuçları filtrelemek için kullanılır. Örneğin, var. tüm akış her şeyi alın veya veri kümesine consumer_group ile gelen varsa **Contoso**, sonra da, bir Azure Stream Analytics akışı (ve Power BI raporu) yalnızca girişler gösterecek şekilde ayarlayabilirsiniz. Bu alan, bu öğreticinin 2 kullanılır.
+**consumer_group**: Bu alan, yönlendirme uç noktasından gelen iletiler için bir tüketici grubu kümesidir. Azure Stream Analytics sonuçları filtrelemek için kullanılır. Örneğin, her şeyi alacağınız tüm akış, veya consumer_group **contoso**olarak ayarlanan verilerle birlikte geliyorsa, yalnızca bu girişleri göstermek için bir Azure Stream Analytics akışı (ve Power BI raporu) ayarlayabilirsiniz. Bu alan, Bu öğreticinin 2. bölümünde kullanılır.
 
-**sku_name**: Bu alan için IOT hub'ı ölçeklendirme olur. Bu değer, S1 olmalıdır veya üzeri; Ücretsiz katmanı, birden fazla uç noktası izin vermediğinden bu öğretici için çalışmaz.
+**sku_name**: Bu alan, IoT Hub için ölçeklendiriliyor. Bu değer S1 veya üzeri olmalıdır; Bu öğreticide, birden çok uç noktaya izin verilmediğinden ücretsiz bir katman çalışmıyor.
 
-**sku_units**: Bu alan gider **sku_name**, kullanılabilir bir IOT Hub birimlerinin sayısı.
+**sku_units**: bu alan **sku_name**ve kullanılabilecek IoT Hub birimi sayısıdır.
 
-**d2c_partitions**: Olay akışı için kullanılan bölüm sayısı alandır.
+**d2c_partitions**: Bu alan, olay akışı için kullanılan bölüm sayısıdır.
 
-**storageAccountName_in**: Bu alan, oluşturulacak depolama hesabının adıdır. İletiler, depolama hesabındaki bir kapsayıcıya yönlendirilir. Bu alan, küresel olarak benzersiz olacak şekilde randomValue ile birleştirilir.
+**storageAccountName_in**: Bu alan, oluşturulacak depolama hesabının adıdır. İletiler, depolama hesabındaki bir kapsayıcıya yönlendirilir. Bu alan, genel olarak benzersiz hale getirilmesi için Rasgeledeğeri ile birleştirilir.
 
-**storageContainerName**: Bu alanı depolama hesabına yönlendirilmesi ileti depolandığı kapsayıcı adıdır.
+**Storagecontainername**: Bu alan, depolama hesabına yönlendirilen iletilerin depolandığı kapsayıcının adıdır.
 
-**storage_endpoint**: İleti yönlendirme tarafından kullanılan depolama hesabı uç noktası için ad alanıdır.
+**storage_endpoint**: Bu alan, ileti yönlendirme tarafından kullanılan depolama hesabı uç noktasının adıdır.
 
-**service_bus_namespace_in**: Oluşturulacak Service Bus ad alanıdır. Bu değer, genel olarak benzersiz olacak şekilde randomValue ile birleştirilir.
+**service_bus_namespace_in**: Bu alan, oluşturulacak Service Bus ad alanının adıdır. Bu değer, genel olarak benzersiz hale getirmek için Rasgeledeğeri ile birleştirilir.
 
-**service_bus_queue_in**: Bu alan iletileri yönlendirmek için kullanılan Service Bus kuyruğu adıdır. Bu değer, genel olarak benzersiz olacak şekilde randomValue ile birleştirilir.
+**service_bus_queue_in**: Bu alan, iletileri yönlendirme için kullanılan Service Bus sırasının adıdır. Bu değer, genel olarak benzersiz hale getirmek için Rasgeledeğeri ile birleştirilir.
 
-**AuthRules_sb_queue**: Sıra için bağlantı dizesini almak için kullanılan hizmet veri yolu kuyruğu için yetkilendirme kuralları alandır.
+**AuthRules_sb_queue**: Bu alan, kuyruğa yönelik bağlantı dizesini almak için kullanılan Service Bus kuyruğu için yetkilendirme kurallarıdır.
 
 ### <a name="variables"></a>Değişkenler
 
-Bu değerler, şablonda kullanılır ve çoğunlukla parametrelerinden türetilir.
+Bu değerler şablonda kullanılır ve genellikle parametrelerden türetilir.
 
-**queueAuthorizationRuleResourceId**: Service Bus kuyruğu için yetkilendirme kuralı için ResourceId alandır. ResourceId sırayla sıra için bağlantı dizesini almak için kullanılır.
+**queueAuthorizationRuleResourceId**: Bu alan, Service Bus kuyruğu yetkilendirme kuralının RESOURCEID alanıdır. RESOURCEID, sıranın bağlantı dizesini almak için kullanılır.
 
-**iotHubName**: Bu alan birleştirilmiş randomValue atandıktan sonra IOT hub'ı adıdır. 
+**Iothubname**: Bu alan, rasgeledeğeri bitiştirilmiş olduktan sonra IoT Hub adıdır. 
 
-**StorageAccountName**: Bu alan birleştirilmiş randomValue atandıktan sonra depolama hesabının adıdır. 
+**storageAccountName**: Bu alan, rastgele değer eklendikten sonra depolama hesabının adıdır. 
 
-**service_bus_namespace**: Bu alan, birleştirilmiş randomValue atandıktan sonra ad alanıdır.
+**service_bus_namespace**: Bu alan, rasgelevalue eklenmiş olduktan sonra ad alanıdır.
 
-**service_bus_queue**: Bu alan, birleştirilmiş randomValue atandıktan sonra Service Bus kuyruk adı olur.
+**service_bus_queue**: Bu alan, rasgelevalue eklenmiş olduktan sonra Service Bus kuyruk adıdır.
 
-**sbVersion**: Kullanılacak hizmet veri yolu API'sini sürümü. Bu durumda, "2017-04-01" olur.
+**Sbversion**: kullanılacak Service Bus API sürümü. Bu durumda, "2017-04-01" olur.
 
-### <a name="resources-storage-account-and-container"></a>Kaynaklar: Depolama hesabı ve kapsayıcı
+### <a name="resources-storage-account-and-container"></a>Kaynaklar: depolama hesabı ve kapsayıcı
 
-Oluşturulan ilk kaynak iletileri yönlendirilen kapsayıcısı ile birlikte depolama hesabıdır. Kapsayıcı, depolama hesabı altındaki bir kaynaktır. Bunun bir `dependsOn` yan tümcesi depolama hesabı için depolama hesabı gerekmeden, kapsayıcıya önce oluşturulabilir.
+Oluşturulan ilk kaynak depolama hesabıdır ve iletilerin yönlendirildiği kapsayıcı ile birlikte. Kapsayıcı, depolama hesabı altındaki bir kaynaktır. Depolama hesabı için bir `dependsOn` yan tümcesine sahiptir ve depolama hesabının kapsayıcının öncesinde oluşturulmasını gerektirir.
 
-Bu bölümde benzer aşağıda verilmiştir:
+Bu bölümün şöyle görünmesi aşağıda verilmiştir:
 
 ```json
 {
@@ -126,7 +126,7 @@ Bu bölümde benzer aşağıda verilmiştir:
 
 ### <a name="resources-service-bus-namespace-and-queue"></a>Kaynaklar: Service Bus ad alanı ve kuyruk
 
-Oluşturulan ikinci Service Bus ad alanı, Service Bus kuyruğuna iletiler yönlendirilen yanı sıra bir kaynaktır. SKU standart olarak ayarlanır. API sürümü değişkenlerinden alınır. Ayrıca, bu bölümde (durum: etkin) dağıttığında, Service Bus ad alanı etkinleştirmek için ayarlanır. 
+Oluşturulan ikinci kaynak, iletilerin yönlendirildiği Service Bus kuyruğu ile birlikte Service Bus ad alanıdır. SKU standart olarak ayarlanır. API sürümü değişkenlerden alınır. Ayrıca, bu bölümü dağıtırken Service Bus ad alanını etkinleştirmek üzere ayarlanır (durum: etkin). 
 
 ```json
 {
@@ -149,7 +149,7 @@ Oluşturulan ikinci Service Bus ad alanı, Service Bus kuyruğuna iletiler yönl
 }
 ```
 
-Bu bölümde, Service Bus kuyruğu oluşturur. Bu komut dosyasının parçası olan bir `dependsOn` ad alanı sağlar yan tümcesi, kuyrukta oluşturulur.
+Bu bölüm Service Bus kuyruğu oluşturur. Betiğin bu bölümünde, ad alanının kuyruktan önce oluşturulmasını sağlayan bir `dependsOn` yan tümcesi vardır.
 
 ```json
 {
@@ -165,11 +165,11 @@ Bu bölümde, Service Bus kuyruğu oluşturur. Bu komut dosyasının parçası o
 }
 ```
 
-### <a name="resources-iot-hub-and-message-routing"></a>Kaynaklar: IOT Hub ve ileti yönlendirme
+### <a name="resources-iot-hub-and-message-routing"></a>Kaynaklar: IoT Hub ve ileti yönlendirme
 
-Depolama hesabı ve Service Bus kuyruğu oluşturulan, iletileri kendisine yönlendiren IOT hub'ı oluşturun. RM şablonu kullanan `dependsOn` Service Bus kaynakları ve depolama hesabı oluşturmadan önce hub'ı oluşturma dener biçimde yan tümceleri. 
+Depolama hesabı ve Service Bus kuyruğu oluşturuldığına göre, iletileri bunlara yönlendiren IoT Hub oluşturursunuz. RM şablonu, Service Bus kaynakları ve depolama hesabı oluşturulmadan önce hub 'ı oluşturmayı denememesi için `dependsOn` yan tümceleri kullanır. 
 
-IOT hub'ı bölümün ilk bölümü aşağıda verilmiştir. Bu şablonun parçası bağımlılıklarını ayarlar ve özellikler ile başlar.
+IoT Hub bölümünün ilk bölümü aşağıda verilmiştir. Şablonun bu bölümü bağımlılıkları ayarlar ve özelliklerle başlar.
 
 ```json
 {
@@ -191,11 +191,11 @@ IOT hub'ı bölümün ilk bölümü aşağıda verilmiştir. Bu şablonun parça
             },
 ```
 
-Sonraki bölümde IOT Hub ileti yönlendirme yapılandırması için bir bölümüdür. Öncelikle uç noktalar için bölümüdür. Service Bus kuyruğu ve bağlantı dizeleri dahil olmak üzere depolama hesabına yönlendirme uç noktaları bu şablonunun parçası ayarlar.
+Sonraki bölüm, IoT Hub için ileti yönlendirme yapılandırması bölümüdür. Öncelikle bitiş noktaları için bölümdür. Şablonun bu bölümü, bağlantı dizeleri de dahil olmak üzere Service Bus kuyruğu ve depolama hesabı için yönlendirme uç noktalarını ayarlar.
 
-Sıra için bağlantı dizesi oluşturmak için alınan satır içi olduğu queueAuthorizationRulesResourcedId gerekir. Depolama hesabı için bağlantı dizesi oluşturmak için birincil depolama anahtarı almak ve sonra bağlantı dizesini biçiminde kullanın.
+Kuyruğun bağlantı dizesini oluşturmak için, satır içi alınan Queueauthorizationkurallarını Resourcedıd öğesine ihtiyacınız vardır. Depolama hesabı için bağlantı dizesi oluşturmak üzere birincil depolama anahtarını alır ve bağlantı dizesinin biçiminde kullanırsınız.
 
-Blob biçimi ayarlandığı uç nokta yapılandırması da olduğu `AVRO` veya `JSON`.
+Uç nokta yapılandırması Ayrıca BLOB biçimini `AVRO` veya `JSON`olarak ayarladığınız yerdir.
 
 [!INCLUDE [iot-hub-include-blob-storage-format](../../includes/iot-hub-include-blob-storage-format.md)]
 
@@ -229,9 +229,9 @@ Blob biçimi ayarlandığı uç nokta yapılandırması da olduğu `AVRO` veya `
     },
 ```
 
-Sonraki bölümde, uç noktalara ileti yollarını içindir. Bir kümesi var. Yukarı her uç nokta için bir Service Bus kuyruğu için ve bir depolama hesabı kapsayıcısının olmasını
+Bu sonraki bölüm, uç noktalara ileti yolları içindir. Her uç nokta için bir küme bulunur, bu nedenle Service Bus kuyruğu ve diğeri depolama hesabı kapsayıcısı için bir tane vardır.
 
-Depolama'ya yönlendirilen iletileri için sorgu koşulu olduğunu unutmayın `level="storage"`, ve Service Bus kuyruğuna yönlendirilen iletileri için sorgu koşulu `level="critical"`.
+Depolamaya yönlendirilmekte olan iletilerin sorgu koşulunun `level="storage"`olduğunu ve Service Bus kuyruğuna yönlendirilmekte olan iletilerin sorgu koşulunun `level="critical"`olduğunu unutmayın.
 
 ```json
 "routes": [
@@ -256,7 +256,7 @@ Depolama'ya yönlendirilen iletileri için sorgu koşulu olduğunu unutmayın `l
 ],
 ```
 
-Bu json varsayılan bilgileri ve hub için SKU içeren IOT hub'ı bölümün geri kalanında gösterir.
+Bu JSON, Hub için varsayılan bilgileri ve SKU 'YU içeren IoT Hub bölümünün geri kalanını gösterir.
 
 ```json
             "fallbackRoute": {
@@ -303,7 +303,7 @@ Bu json varsayılan bilgileri ve hub için SKU içeren IOT hub'ı bölümün ger
 
 ### <a name="resources-service-bus-queue-authorization-rules"></a>Kaynaklar: Service Bus kuyruğu yetkilendirme kuralları
 
-Service Bus kuyruğu yetkilendirme kuralı, Service Bus kuyruğu için bağlantı dizesini almak için kullanılır. Bunu kullanan bir `dependsOn` yan tümcesi emin olmak için önce Service Bus ad alanı ve Service Bus kuyruğu oluşturulmadı.
+Service Bus kuyruğu yetkilendirme kuralı, Service Bus sırasının bağlantı dizesini almak için kullanılır. Service Bus ad alanı ve Service Bus sırasından önce oluşturulmadığından emin olmak için bir `dependsOn` yan tümcesi kullanır.
 
 ```json
 {
@@ -326,7 +326,7 @@ Service Bus kuyruğu yetkilendirme kuralı, Service Bus kuyruğu için bağlant�
 
 ### <a name="resources-consumer-group"></a>Kaynaklar: Tüketici grubu
 
-Bu bölümde, bu öğreticinin ikinci bölümünde Azure Stream Analytics tarafından kullanılacak bir tüketici grubu için IOT hub'ı veri oluşturun.
+Bu bölümde, Bu öğreticinin ikinci bölümünde Azure Stream Analytics tarafından kullanılacak IoT Hub verileri için bir tüketici grubu oluşturacaksınız.
 
 ```json
 {
@@ -339,9 +339,9 @@ Bu bölümde, bu öğreticinin ikinci bölümünde Azure Stream Analytics taraf�
 }
 ```
 
-### <a name="resources-outputs"></a>Kaynaklar: Çıkışlar
+### <a name="resources-outputs"></a>Kaynaklar: çıktılar
 
-Görüntülenecek geri dağıtım betiği için bir değer göndermek istiyorsanız, bir çıkış bölümü kullanın. Bu şablon parçası, Service Bus kuyruğu için bağlantı dizesini döndürür. Bir değer gerekli değildir döndüren, çağıran kodun sonuçları döndürmek nasıl bir örnek olarak eklemiştir.
+Görüntülenecek dağıtım betiğine bir değer göndermek istiyorsanız bir çıkış bölümü kullanırsınız. Şablonun bu bölümü Service Bus kuyruğu için bağlantı dizesini döndürür. Bir değer döndürülmesi gerekli değildir, bu, sonuçların çağırma betiğine nasıl döndürüldüğünü gösteren bir örnek olarak eklenmiştir.
 
 ```json
 "outputs": {
@@ -352,33 +352,33 @@ Görüntülenecek geri dağıtım betiği için bir değer göndermek istiyorsan
   }
 ```
 
-## <a name="deploy-the-rm-template"></a>RM şablonu dağıtma
+## <a name="deploy-the-rm-template"></a>RM şablonunu dağıtma
 
-Şablonu Azure'a dağıtmak için şablonu ve parametre dosyasını Azure Cloud shell'e yüklemeniz ve sonra şablonu dağıtmak için bir komut yürütün. Azure Cloud Shell'i açın ve oturum açın. Bu örnek PowerShell'i kullanmaktadır.
+Şablonu Azure 'a dağıtmak için şablonu ve parametreler dosyasını Azure Cloud Shell yükleyin ve ardından şablonu dağıtmak için bir komut dosyası yürütün. Azure Cloud Shell açın ve oturum açın. Bu örnek PowerShell kullanır.
 
-Dosyaları karşıya yüklemek için seçin **dosyaları karşıya yükleme/indirme** simgesi menü çubuğundaki karşıya yükleme seçin.
+Dosyaları karşıya yüklemek için, menü çubuğunda **dosyaları karşıya yükle/indir** simgesini seçin ve ardından karşıya yükle ' yi seçin.
 
-![Cloud Shell menü çubuğu vurgulanmış dosyaları karşıya yükleme/indirme](media/tutorial-routing-config-message-routing-RM-template/CloudShell_upload_files.png)
+![Karşıya yükle/Indir dosyaları vurgulanmış menü çubuğu Cloud Shell](media/tutorial-routing-config-message-routing-RM-template/CloudShell_upload_files.png)
 
-Yerel diskinizde dosyaları bulmak ve onları seçin ve ardından açılır dosya Gezgini'ni **açık**.
+Yerel diskinizdeki dosyaları bulmak için açılan dosya gezginini kullanın ve sonra **Aç**' ı seçin.
 
-Dosyalar karşıya yüklendikten sonra sonuçları iletişim aşağıdaki görüntüye benzer bir şey gösterir.
+Dosyalar karşıya yüklendikten sonra, bir sonuç iletişim kutusu aşağıdaki görüntüye benzer bir şey gösterir.
 
-![Cloud Shell menü çubuğu vurgulanmış dosyaları karşıya yükleme/indirme](media/tutorial-routing-config-message-routing-RM-template/CloudShell_upload_results.png)
+![Karşıya yükle/Indir dosyaları vurgulanmış menü çubuğu Cloud Shell](media/tutorial-routing-config-message-routing-RM-template/CloudShell_upload_results.png)
 
-Dosyalar, Cloud Shell'i örneğiniz tarafından kullanılan paylaşımına yüklenir. 
+Dosyalar, Cloud Shell örneğiniz tarafından kullanılan paylaşıma yüklenir. 
 
-Dağıtım gerçekleştirmek için betiği çalıştırın. Bu komut dosyasının son satırının döndürülmesi için--Service Bus kuyruğu bağlantı dizesi ayarlanmış değişken alır.
+Dağıtımı gerçekleştirmek için betiği çalıştırın. Bu betiğin son satırı döndürülecek şekilde ayarlanan değişkeni alır--Service Bus kuyruğu bağlantı dizesi.
 
-Bu değişkenler bu komut dosyasında ayarlanır.
+Betik, bu değişkenleri ayarlar ve kullanır:
 
-**$RGName** şablonu dağıtmak hangi kaynak grubu adı. Bu alan, şablonu dağıtmadan önce oluşturulur.
+**$RGName** , şablonun dağıtılacağı kaynak grubu adıdır. Bu alan, şablon dağıtılmadan önce oluşturulur.
 
-**$location** "westus" gibi bir şablon için kullanılacak Azure konumdur.
+**$Location** , şablon Için kullanılacak Azure konumudur (örneğin, "westus").
 
-**deploymentname** bir addır döndüren değişken değerini almak için dağıtımına atanamıyor.
+**DeploymentName** , döndürülen değişken değerini almak için dağıtıma atadığınız addır.
 
-PowerShell Betiği aşağıda verilmiştir. Bu PowerShell Betiği kopyalayın ve Cloud Shell penceresine yapıştırın ve sonra çalıştırmak için Enter tuşuna basın.
+PowerShell betiği aşağıda verilmiştir. Bu PowerShell betiğini kopyalayın ve Cloud Shell penceresine yapıştırın ve sonra çalıştırmak için ENTER tuşuna basın.
 
 ```powershell
 $RGName="ContosoResources"
@@ -406,19 +406,19 @@ New-AzResourceGroupDeployment `
 (Get-AzResourceGroupDeployment -ResourceGroupName $RGName -Name $deploymentname).Outputs.sbq_connectionString.value
 ```
 
-Betik hataları varsa, betik üzerinde yerel olarak düzenleme, yeniden Cloud shell'e yükleyin ve betiğini yeniden çalıştırın. Betik çalıştırma işlemi başarıyla sonlandıktan sonra sonraki adıma devam edin.
+Betik hatalarıyla karşılaşırsanız, betiği yerel olarak düzenleyebilir, Cloud Shell yeniden karşıya yükleyebilir ve betiği yeniden çalıştırabilirsiniz. Betik başarıyla çalışmaya başladıktan sonra, bir sonraki adımla devam edin.
 
 ## <a name="create-simulated-device"></a>Sanal cihaz oluşturma
 
 [!INCLUDE [iot-hub-include-create-simulated-device-portal](../../includes/iot-hub-include-create-simulated-device-portal.md)]
 
-## <a name="view-message-routing-in-the-portal"></a>Portalda ileti yönlendirme görüntüleyin
+## <a name="view-message-routing-in-the-portal"></a>Portalda ileti yönlendirmeyi görüntüleme
 
 [!INCLUDE [iot-hub-include-view-routing-in-portal](../../includes/iot-hub-include-view-routing-in-portal.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Tüm kaynakları ayarlamak ve ileti yollarını yapılandırılmış göre işlemek ve yönlendirilmiş iletiler hakkındaki bilgileri görüntülemek hakkında bilgi edinmek için sonraki öğreticiye ilerleyin.
+Tüm kaynakları ayarlamış olduğunuza ve ileti yolları yapılandırıldıktan sonra, yönlendirilen iletilerle ilgili bilgileri nasıl işleyeceğini ve görüntüleyeceğinizi öğrenmek için sonraki öğreticiye ilerleyin.
 
 > [!div class="nextstepaction"]
-> [2. Kısım - ileti yönlendirme sonuçlarını görüntüleme](tutorial-routing-view-message-routing-results.md)
+> [Bölüm 2-ileti yönlendirme sonuçlarını görüntüleme](tutorial-routing-view-message-routing-results.md)

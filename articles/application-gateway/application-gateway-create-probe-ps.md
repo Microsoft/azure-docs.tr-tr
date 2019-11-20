@@ -1,51 +1,44 @@
 ---
-title: Özel bir araştırma - Azure Application Gateway - PowerShell oluşturma | Microsoft Docs
-description: Resource Manager'da PowerShell kullanarak Application Gateway için özel bir araştırma oluşturmayı öğrenin
+title: PowerShell kullanarak özel bir araştırma oluşturma
+titleSuffix: Azure Application Gateway
+description: PowerShell kullanarak Application Gateway için özel bir araştırma oluşturmayı öğrenin Kaynak Yöneticisi
 services: application-gateway
-documentationcenter: na
 author: vhorne
-manager: jpconnock
-editor: ''
-tags: azure-resource-manager
-ms.assetid: 68feb660-7fa4-4f69-a7e4-bdd7bdc474db
 ms.service: application-gateway
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 04/26/2017
+ms.date: 11/14/2019
 ms.author: victorh
-ms.openlocfilehash: acd70bacd23755cd764bc782a297d80db3622424
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1fef24f4065ca6fc749f35a07143487e049ee6ea
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66135238"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74075269"
 ---
-# <a name="create-a-custom-probe-for-azure-application-gateway-by-using-powershell-for-azure-resource-manager"></a>Azure Resource Manager için PowerShell kullanarak Azure Application Gateway için özel bir araştırma oluşturma
+# <a name="create-a-custom-probe-for-azure-application-gateway-by-using-powershell-for-azure-resource-manager"></a>Azure Resource Manager için PowerShell 'i kullanarak Azure Application Gateway için özel bir araştırma oluşturma
 
 > [!div class="op_single_selector"]
-> * [Azure portal](application-gateway-create-probe-portal.md)
+> * [Azure Portal](application-gateway-create-probe-portal.md)
 > * [Azure Resource Manager PowerShell](application-gateway-create-probe-ps.md)
 > * [Azure Klasik PowerShell](application-gateway-create-probe-classic-ps.md)
 
-Bu makalede PowerShell ile mevcut bir application gateway için özel bir araştırma ekleyin. Özel araştırmalar, belirli bir sistem durumu denetimi sayfası olan uygulamalar için veya başarılı bir yanıt varsayılan web uygulaması üzerinde sağlamayan uygulamalar için yararlıdır.
+Bu makalede, var olan bir Application Gateway 'e PowerShell ile özel bir araştırma eklersiniz. Özel yoklamalar, belirli bir sistem durumu denetimi sayfası veya varsayılan Web uygulamasında başarılı bir yanıt sağlamayan uygulamalar için yararlıdır.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 [!INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
 
-## <a name="create-an-application-gateway-with-a-custom-probe"></a>Application gateway ile özel bir araştırma oluşturma
+## <a name="create-an-application-gateway-with-a-custom-probe"></a>Özel araştırmasına sahip bir uygulama ağ geçidi oluşturma
 
-### <a name="sign-in-and-create-resource-group"></a>Oturum açma ve kaynak grubu oluşturma
+### <a name="sign-in-and-create-resource-group"></a>Oturum aç ve kaynak grubu oluştur
 
-1. Kullanım `Connect-AzAccount` kimliğini doğrulamak için.
+1. Kimlik doğrulamak için `Connect-AzAccount` kullanın.
 
    ```powershell
    Connect-AzAccount
    ```
 
-1. Hesap aboneliklerini edinin.
+1. Hesap için abonelikleri alın.
 
    ```powershell
    Get-AzSubscription
@@ -57,19 +50,19 @@ Bu makalede PowerShell ile mevcut bir application gateway için özel bir araşt
    Select-AzSubscription -Subscriptionid '{subscriptionGuid}'
    ```
 
-1. Bir kaynak grubu oluşturun. Mevcut bir kaynak grubu varsa, bu adımı atlayabilirsiniz.
+1. Bir kaynak grubu oluşturun. Mevcut bir kaynak grubunuz varsa, bu adımı atlayabilirsiniz.
 
    ```powershell
    New-AzResourceGroup -Name appgw-rg -Location 'West US'
    ```
 
-Azure Resource Manager, tüm kaynak gruplarının bir konum belirtmesini gerektirir. Bu konum, kaynak grubundaki kaynaklar için varsayılan konum olarak kullanılır. Tüm uygulama ağ geçidi oluşturma komutlarının aynı kaynak grubunu kullandığından emin olun.
+Azure Resource Manager, tüm kaynak gruplarının bir konum belirtmesini gerektirir. Bu konum, kaynak grubundaki kaynaklar için varsayılan konum olarak kullanılır. Uygulama ağ geçidi oluşturmak için tüm komutların aynı kaynak grubunu kullanmasını sağlayın.
 
-Önceki örnekte adlı bir kaynak grubu oluşturduk **appgw-RG** konumda **Batı ABD**.
+Yukarıdaki örnekte, **Batı ABD**konumunda **APPGW-RG** adlı bir kaynak grubu oluşturduk.
 
 ### <a name="create-a-virtual-network-and-a-subnet"></a>Sanal ağ ve alt ağ oluşturma
 
-Aşağıdaki örnek, bir sanal ağ ve uygulama ağ geçidi için bir alt ağ oluşturur. Uygulama ağ geçidini kullanmak için kendi alt ağına gerektirir. Bu nedenle, uygulama ağ geçidi için oluşturulan alt ağı oluşturulması ve kullanılan diğer alt ağlar için izin vermek için sanal ağın adres alanı değerinden küçük olmalıdır.
+Aşağıdaki örnek, uygulama ağ geçidi için bir sanal ağ ve bir alt ağ oluşturur. Application Gateway 'in kullanım için kendi alt ağı gerekir. Bu nedenle, uygulama ağ geçidi için oluşturulan alt ağ, diğer alt ağların oluşturulup kullanılmasına izin vermek için VNET 'in adres alanından daha küçük olmalıdır.
 
 ```powershell
 # Assign the address range 10.0.0.0/24 to a subnet variable to be used to create a virtual network.
@@ -84,7 +77,7 @@ $subnet = $vnet.Subnets[0]
 
 ### <a name="create-a-public-ip-address-for-the-front-end-configuration"></a>Ön uç yapılandırma için genel bir IP adresi oluşturun
 
-Batı ABD bölgesi için **appgw-rg** kaynak grubunda **publicIP01** genel bir IP kaynağı oluşturun. Bu örnekte uygulama ağ geçidi ön uç IP adresi için bir genel IP adresi kullanır.  Uygulama ağ geçidi gerektirir, bu nedenle dinamik olarak oluşturulmuş bir DNS adı sağlamak için genel IP adresi `-DomainNameLabel` genel IP adresi oluşturma sırasında belirtilemez.
+Batı ABD bölgesi için **appgw-rg** kaynak grubunda **publicIP01** genel bir IP kaynağı oluşturun. Bu örnek, uygulama ağ geçidinin ön uç IP adresi için genel bir IP adresi kullanır.  Application Gateway genel IP adresinin dinamik olarak oluşturulan bir DNS adına sahip olmasını gerektirir, bu nedenle genel IP adresi oluşturma sırasında `-DomainNameLabel` belirtilemez.
 
 ```powershell
 $publicip = New-AzPublicIpAddress -ResourceGroupName appgw-rg -Name publicIP01 -Location 'West US' -AllocationMethod Dynamic
@@ -92,17 +85,17 @@ $publicip = New-AzPublicIpAddress -ResourceGroupName appgw-rg -Name publicIP01 -
 
 ### <a name="create-an-application-gateway"></a>Uygulama ağ geçidi oluşturma
 
-Tüm yapılandırma öğelerini ayarlamanız, uygulama ağ geçidi oluşturmadan önce ayarlayın. Aşağıdaki örnek bir uygulama ağ geçidi kaynağı için gerekli olan yapılandırma öğelerini oluşturur.
+Uygulama ağ geçidini oluşturmadan önce tüm yapılandırma öğelerini ayarlarsınız. Aşağıdaki örnek, bir uygulama ağ geçidi kaynağı için gereken yapılandırma öğelerini oluşturur.
 
 | **Bileşen** | **Açıklama** |
 |---|---|
-| **Ağ geçidi IP yapılandırması** | Bir uygulama ağ geçidi için bir IP yapılandırması.|
-| **Arka uç havuzu** | IP adresleri, FQDN'ın veya web uygulamasını barındıran uygulama sunucuları için NIC havuzu|
-| **Durum araştırması** | Arka uç havuzu üyelerine durumunu izlemek için kullanılan özel bir araştırma|
-| **HTTP ayarları** | Ayarları dahil olmak üzere, bağlantı noktası, protokol, tanımlama bilgisi temelli benzeşimi, araştırma ve zaman aşımı koleksiyonu.  Bu ayarlar, trafik için arka uç havuzu üyelerine nasıl yönlendirileceğini belirler.|
-| **Ön uç bağlantı noktası** | Uygulama ağ geçidi üzerinde trafiği dinlediği bağlantı noktası|
-| **Dinleyici** | Bir protokol, ön uç IP yapılandırması ve ön uç bağlantı noktası birleşimi. Gelen istekler için dinleyen ne budur.
-|**Kural**| Yollar, trafik uygun arka uç HTTP ayarları temel alarak.|
+| **Ağ geçidi IP yapılandırması** | Uygulama ağ geçidi için bir IP yapılandırması.|
+| **Arka uç havuzu** | Web uygulamasını barındıran uygulama sunucularına yönelik IP adresleri, FQDN 'ler veya NIC 'ler havuzu|
+| **Durum araştırması** | Arka uç havuzu üyelerinin durumunu izlemek için kullanılan özel bir araştırma|
+| **HTTP ayarları** | Bağlantı noktası, protokol, tanımlama bilgisi tabanlı benzeşim, araştırma ve zaman aşımı dahil olmak üzere ayarların koleksiyonu.  Bu ayarlar trafiğin arka uç havuzu üyelerine nasıl yönlendirildiğini belirleme|
+| **Ön uç bağlantı noktası** | Uygulama ağ geçidinin trafiği dinlediği bağlantı noktası|
+| **Oluşturulurken** | Protokol, ön uç IP yapılandırması ve ön uç bağlantı noktası birleşimi. Bu, gelen istekleri dinler.
+|**Kural**| Trafiği HTTP ayarlarına bağlı olarak uygun arka uca yönlendirir.|
 
 ```powershell
 # Creates an application gateway Frontend IP configuration named gatewayIP01
@@ -136,9 +129,9 @@ $sku = New-AzApplicationGatewaySku -Name Standard_Small -Tier Standard -Capacity
 $appgw = New-AzApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg -Location 'West US' -BackendAddressPools $pool -Probes $probe -BackendHttpSettingsCollection $poolSetting -FrontendIpConfigurations $fipconfig  -GatewayIpConfigurations $gipconfig -FrontendPorts $fp -HttpListeners $listener -RequestRoutingRules $rule -Sku $sku
 ```
 
-## <a name="add-a-probe-to-an-existing-application-gateway"></a>Bir araştırma eklemek için var olan bir uygulama ağ geçidi
+## <a name="add-a-probe-to-an-existing-application-gateway"></a>Mevcut bir Application Gateway 'e araştırma ekleme
 
-Aşağıdaki kod parçacığı var olan bir uygulama ağ geçidi için bir araştırma ekler.
+Aşağıdaki kod parçacığı, var olan bir uygulama ağ geçidine bir araştırma ekler.
 
 ```powershell
 # Load the application gateway resource into a PowerShell variable by using Get-AzApplicationGateway.
@@ -154,9 +147,9 @@ $getgw = Set-AzApplicationGatewayBackendHttpSettings -ApplicationGateway $getgw 
 Set-AzApplicationGateway -ApplicationGateway $getgw
 ```
 
-## <a name="remove-a-probe-from-an-existing-application-gateway"></a>Var olan bir uygulama ağ geçidi'nden bir araştırma Kaldır
+## <a name="remove-a-probe-from-an-existing-application-gateway"></a>Mevcut bir Application Gateway 'ten bir araştırma kaldırma
 
-Aşağıdaki kod parçacığı bir araştırma var olan bir uygulama ağ geçidi'nden kaldırır.
+Aşağıdaki kod parçacığı, var olan bir Application Gateway 'ten bir araştırma kaldırır.
 
 ```powershell
 # Load the application gateway resource into a PowerShell variable by using Get-AzApplicationGateway.
@@ -204,5 +197,5 @@ DnsSettings              : {
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-SSL yük boşaltma ederek yapılandırmayı öğrenin: [SSL yük boşaltmasını yapılandırma](application-gateway-ssl-arm.md)
+SSL boşaltma yapılandırmasını ziyaret ederek yapılandırmayı öğrenin: [SSL yük boşaltma yapılandırma](application-gateway-ssl-arm.md)
 

@@ -3,9 +3,8 @@ title: Azure Güvenlik Merkezi'nde Olayları ve Uyarıları Araştırma | Micros
 description: Bu belge Azure Güvenlik Merkezi'ndeki araştırma özelliğini kullanarak güvenlik olaylarını ve uyarılarını araştırmanıza yardımcı olur.
 services: security-center
 documentationcenter: na
-author: rkarlin
-manager: barbkess
-editor: ''
+author: memildin
+manager: rkarlin
 ms.assetid: a8e894a9-8781-4749-ae8f-8c8e01658566
 ms.service: security-center
 ms.devlang: na
@@ -13,19 +12,19 @@ ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/29/2018
-ms.author: rkarlin
-ms.openlocfilehash: 55def52d248babd439227cdcd4170c0a3ca91bb1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: memildin
+ms.openlocfilehash: 32cc4b01d68ee7a15ae7cfa2259d234cbcd143c4
+ms.sourcegitcommit: 8a717170b04df64bd1ddd521e899ac7749627350
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64569830"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71202053"
 ---
-# <a name="investigate-incidents-and-alerts-in-azure-security-center-preview"></a>Azure Güvenlik Merkezi'nde Olayları ve Uyarıları Araştırma (Önizleme)
-Bu belge Azure Güvenlik Merkezi'ndeki araştırma özelliğini kullanarak güvenlik olaylarını ve uyarılarını araştırmanıza yardımcı olur.
+# <a name="investigate-incidents-and-alerts-in-azure-security-center-retired"></a>Azure Güvenlik Merkezi 'nde olayları ve uyarıları araştırın (kullanımdan kaldırıldı)
+Bu belge, güvenlik olaylarını ve uyarılarını araştırmak için Azure Güvenlik Merkezi 'nde araştırma özelliğini (Önizleme) kullanmanıza yardımcı olur.
 
 > [!NOTE]
-> Uyarıları ve olaylarının araştırma deneyimi, 31 Temmuz 2019 üzerinde kullanımdan kaldırılacaktır. Daha fazla bilgi ve diğer hizmetler için bkz. [devre dışı bırakılması, Güvenlik Merkezi özelliklerini (Temmuz 2019)](security-center-features-retirement-july2019.md#menu_investigate).
+> Uyarılar ve olaylar araştırma (Önizleme) deneyimi 31 Temmuz 2019 tarihinde kullanımdan kaldırılmıştır. Daha fazla bilgi ve diğer hizmetler için bkz. [Güvenlik Merkezi özelliklerini devre dışı bırakma (2019 Temmuz)](security-center-features-retirement-july2019.md#menu_investigate).
 
 ## <a name="what-is-investigation-in-security-center"></a>Güvenlik Merkezi'ndeki araştırma özelliği nedir?
 Güvenlik Merkezi'ndeki araştırma özelliği olası bir [güvenlik olayını](https://docs.microsoft.com/azure/security-center/security-center-incident) önceliklendirmenizi, kapsamını anlamanızı ve kök nedenini tespit etmenizi sağlar.
@@ -34,8 +33,8 @@ Bu özelliğin amacı, araştırmakta olduğunuz olayla ilgili bulunan tüm varl
 
 
 > [!NOTE]
-> * [Özel uyarılar](security-center-custom-alert.md) Güvenlik Merkezi'nin araştırma özelliği desteklenmez.
-> * Araştırma, yalnızca Windows sunuculardan toplanan verilere bağlı uyarılar için desteklenir.
+> * [Özel uyarılar](security-center-custom-alert.md) Güvenlik Merkezi 'nin araştırma özelliğinde desteklenmez.
+> * Araştırma yalnızca Windows sunucularından toplanan verileri temel alan uyarılar için desteklenir.
 
 
 ## <a name="how-investigation-works"></a>Araştırma özelliği nasıl çalışır?
@@ -71,11 +70,11 @@ Bir olay yalnızca kullanıcı belirli bir uyarı için **Araştırma başlat** 
 
 ![Ara](./media/security-center-investigation/security-center-investigation-fig5.png)
 
-### <a name="exploration"></a>Araştırma
+### <a name="exploration"></a>Keşif
 
 **Araştırma** sekmesi araştırmacının varlıkla ilgili çeşitli sorunlara ait verileri incelemesini sağlar. Örneğin bir makine araştırıldığında üzerinde yürütülen işlemlerin listesi araştırma sekmesinde görüntülenir. Bazı durumlarda araştırma sekmesinde şüpheli sorunlara işaret edebilecek veriler sunulur. Araştırmacı verilere sekme içinde göz atabilir veya arama ekranında açarak büyük veri kümelerini incelemenin yanı sıra filtreleme ve Excel'e aktarma gibi gelişmiş arama seçeneklerini kullanabilir.
 
-![Araştırma](./media/security-center-investigation/security-center-investigation-fig6.png)
+![Keşif](./media/security-center-investigation/security-center-investigation-fig6.png)
 
 ### <a name="timeline"></a>Zaman çizelgesi
 
@@ -99,7 +98,7 @@ Aşağıdaki öğeler seçilen zaman kapsamından bağımsız olarak gösterilir
 
 ## <a name="how-to-perform-an-investigation"></a>Nasıl araştırma yapabilirim?
 
-Araştırmanızı bir güvenlik olayı veya bir uyarıdan başlatabilirsiniz. Belirlediğiniz seçenek ihtiyaçlarınıza göre değişiklik gösterecektir. Aşağıdaki adımlar bir uyarıdan araştırma başlatmak için kullanılır:
+Araştırmanızı bir güvenlik olayı veya bir uyarıdan başlatabilirsiniz. Belirlediğiniz seçenek ihtiyaçlarınıza göre değişiklik gösterecektir. Aşağıdaki adımlar, bir uyarıdan bir araştırmaya başlamak için kullanılır:
 
 1.  **Güvenlik Merkezi** panosunu açın.
 2.  **Güvenlik Uyarıları**'na tıklayın ve araştırmak istediğiniz olayı seçin.

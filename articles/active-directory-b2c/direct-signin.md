@@ -1,6 +1,6 @@
 ---
-title: Doğrudan Azure Active Directory B2C kullanarak oturum ayarlama | Microsoft Docs
-description: Oturum açma adı önceden veya düz bir sosyal kimlik sağlayıcısına yeniden yönlendirme öğrenin.
+title: Azure Active Directory B2C kullanarak doğrudan oturum açma ayarla | Microsoft Docs
+description: Oturum açma adını önceden ayarlamayı veya bir sosyal kimlik sağlayıcısına doğrudan yönlendirmeyi öğrenin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,26 +10,26 @@ ms.topic: conceptual
 ms.date: 06/18/2018
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 869097ac3b91e55d5dbf948680450f31efafd359
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8c0f3d8f3f49001e1326688ccc794e19d1148e5d
+ms.sourcegitcommit: fa45c2bcd1b32bc8dd54a5dc8bc206d2fe23d5fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66511103"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67846900"
 ---
-# <a name="set-up-direct-sign-in-using-azure-active-directory-b2c"></a>Doğrudan Azure Active Directory B2C kullanarak oturum ayarlayın
+# <a name="set-up-direct-sign-in-using-azure-active-directory-b2c"></a>Azure Active Directory B2C kullanarak doğrudan oturum açma ayarlama
 
-Oturum açma için Azure Active Directory (AD) B2C'yi kullanarak uygulamanızı ayarlarken, oturum açma adı veya doğrudan oturum açma, bir Microsoft hesabı Facebook veya LinkedIn gibi belirli sosyal kimlik sağlayıcısı için önceden doldurabilir. 
+Azure Active Directory (AD) B2C kullanarak uygulamanız için oturum açma ayarlarken, oturum açma adını veya doğrudan oturum açmayı Facebook, LinkedIn veya bir Microsoft hesabı gibi belirli bir sosyal kimlik sağlayıcısına önceden girebilirsiniz.
 
-## <a name="prepopulate-the-sign-in-name"></a>Önceden oturum açma adı
+## <a name="prepopulate-the-sign-in-name"></a>Oturum açma adını önceden girme
 
-Oturum açma kullanıcı yolculuğu sırasında belirli bir kullanıcı veya etki alanı adı bir bağlı taraf uygulaması hedefleyebilir. Bir kullanıcı bir uygulama belirtebilirsiniz, yetkilendirme isteğinde hedeflenirken `login_hint` sorgu parametresi ile oturum açma kullanıcı adı. Kullanıcı yalnızca parola sağlaması gerekir ancak azure AD B2C oturum açma adını otomatik olarak doldurur.
+Bir oturum açma Kullanıcı yolculuğu sırasında, bağlı olan taraf uygulaması belirli bir kullanıcı veya etki alanı adını hedefleyebilir. Bir Kullanıcı hedeflenirken, bir uygulama yetkilendirme isteğinde `login_hint` , sorgu parametresini Kullanıcı oturum açma adı ile belirtebilir. Azure AD B2C oturum açma adını otomatik olarak doldurur, ancak kullanıcının yalnızca parola sağlaması gerekir.
 
-![oturum açma ipucunu kullanarak](./media/direct-signin/login-hint.png) 
+![URL 'de vurgulanan login_hint sorgu param ile oturum açma sayfası](./media/direct-signin/login-hint.png)
 
-Kullanıcı oturum açma metin kutusundaki değeri değiştiremezsiniz.
+Kullanıcı, oturum açma metin kutusundaki değeri değiştirebilir.
 
-Özel bir ilke kullanıyorsanız, geçersiz kılma `SelfAsserted-LocalAccountSignin-Email` teknik profili. İçinde `<InputClaims>` bölümünde, signInName talebi için DefaultValue `{OIDC:LoginHint}`. `{OIDC:LoginHint}` Değişken değerini içeren `login_hint` parametresi. Azure AD B2C signInName talep değerini okur ve signInName textbox önceden doldurur.
+Özel bir ilke kullanıyorsanız, `SelfAsserted-LocalAccountSignin-Email` teknik profili geçersiz kılın. Bölümünde, signınname talebinin DefaultValue değerini olarak `{OIDC:LoginHint}`ayarlayın. `<InputClaims>` Değişkeni, `login_hint` parametresinin değerini içerir. `{OIDC:LoginHint}` Azure AD B2C, Signınname talebinin değerini okur ve Signınname metin kutusunu önceden doldurur.
 
 ```xml
 <ClaimsProvider>
@@ -45,13 +45,13 @@ Kullanıcı oturum açma metin kutusundaki değeri değiştiremezsiniz.
 </ClaimsProvider>
 ```
 
-## <a name="redirect-sign-in-to-a-social-provider"></a>Sosyal sağlayıcılar için oturum açma yeniden yönlendirme
+## <a name="redirect-sign-in-to-a-social-provider"></a>Oturum açma oturumunu bir sosyal sağlayıcıya yönlendirin
 
-Uygulamanız Google, Facebook veya LinkedIn gibi sosyal medya hesaplarını eklemek için oturum açma yolculuğu yapılandırılıp yapılandırılmadığını belirtebilmeniz için `domain_hint` parametresi. Bu sorgu parametresi, sosyal kimlik sağlayıcısı oturum açma için kullanılması gereken hakkında Azure AD B2C'ye bir ipucu sağlar. Örneğin, uygulama belirtiyorsa `domain_hint=facebook.com`, oturum açma doğrudan Facebook oturum açma sayfasına gider.
+Uygulamanızın Facebook, LinkedIn veya Google gibi sosyal hesapları içermesi için oturum açma yolculuğunu yapılandırdıysanız, `domain_hint` parametresini belirtebilirsiniz. Bu sorgu parametresi, oturum açma için kullanılması gereken sosyal kimlik sağlayıcısı hakkında Azure AD B2C için bir ipucu sağlar. Örneğin, uygulama belirtiyorsa `domain_hint=facebook.com`, oturum açma doğrudan Facebook oturum açma sayfasına gider.
 
-![etki alanı ipucu kullanma](./media/direct-signin/domain-hint.png) 
+![URL 'de vurgulanan domain_hint sorgu param ile oturum açma sayfası](./media/direct-signin/domain-hint.png)
 
-Özel bir ilke kullanıyorsanız, etki alanı adını kullanarak yapılandırabilirsiniz `<Domain>domain name</Domain>` herhangi bir XML öğesi `<ClaimsProvider>`. 
+Özel bir ilke kullanıyorsanız, herhangi `<Domain>domain name</Domain>` `<ClaimsProvider>`bir XML öğesini kullanarak etki alanı adını yapılandırabilirsiniz.
 
 ```xml
 <ClaimsProvider>

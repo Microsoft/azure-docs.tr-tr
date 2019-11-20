@@ -1,45 +1,40 @@
 ---
-title: Azure İzleyici'de veri konumlarını izleme | Microsoft Docs
-description: İzleme verilerine Azure İzleyicisi'ni bir veri platformu da dahil olmak üzere Azure'da nerede depolandığını farklı konumlara açıklar.
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: tysonn
+title: Azure Izleyici 'de veri konumlarını izleme | Microsoft Docs
+description: Azure Izleyici veri platformu dahil olmak üzere Azure 'da izlenen verilerin depolandığı farklı konumları açıklar.
 ms.service: azure-monitor
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 05/21/2019
+ms.subservice: ''
+ms.topic: conceptual
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: 1d92973e32e9c694b1d0488753b9a701e7d71a5d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 05/21/2019
+ms.openlocfilehash: 2ec1f0161713c7014f71fb3eaee31b0abdf52902
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66416904"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72932552"
 ---
-# <a name="monitoring-data-locations-in-azure-monitor"></a>Azure İzleyici'de izleme verileri konumları
+# <a name="monitoring-data-locations-in-azure-monitor"></a>Azure Izleyici 'de veri konumlarını izleme
 
-Azure İzleyicisi'ni temel alan bir [veri platformu](data-platform.md) , [günlükleri](data-platform-logs.md) ve [ölçümleri](data-platform-metrics.md) açıklandığı [Azure İzleyici, veri platformu](data-platform.md). Azure kaynakları verilerinden izleme yazılabilir diğer konumlara yine de ya da önce Azure İzleyici ya da ek senaryoları destekleyecek şekilde kopyalanır. 
+Azure Izleyici, [Azure izleyici veri platformunda](data-platform.md)açıklandığı şekilde [günlüklerin](data-platform-logs.md) ve [ölçümlerin](data-platform-metrics.md) [veri platformunu](data-platform.md) temel alır. Azure kaynaklarından verileri izleme, Azure Izleyici 'ye kopyalanmadan veya ek senaryoları destekleyecek şekilde diğer konumlara yazılabilir. 
 
 ## <a name="monitoring-data-locations"></a>İzleme veri konumları
 
-Aşağıdaki tabloda, farklı konumlar izleme verilerini azure'da nereye gönderilir ve erişmek için farklı yöntemler tanımlar.
+Aşağıdaki tabloda, Azure 'daki izleme verilerinin gönderildiği ve buna erişmek için farklı yöntemlerin bulunduğu farklı konumlar tanımlanmaktadır.
 
-| Location | Açıklama | Erişim yöntemi |
+| Konum | Açıklama | Erişim yöntemleri |
 |:---|:---|:---|:--|
-| Azure İzleyici ölçümleri | Zaman serisi veritabanına zaman damgası veri çözümlemesi için iyileştirilmiştir. | [Ölçüm Gezgini](metrics-getting-started.md)<br>[Azure İzleyici ölçüm API'si](/rest/api/monitor/metrics) |
-| Azure İzleyici günlüklerine    | Azure Veri Gezgini bir güçlü analiz altyapısı ve zengin sorgu dili sağlayan temel Analytics çalışma alanını açın. | [Log Analytics](../log-query/portals.md)<br>[Log Analytics API'si](https://dev.loganalytics.io/)<br>[Application Insights API](https://dev.applicationinsights.io/reference/get-query) |
-| Etkinlik günlüğü | Etkinlik günlüğü verileri diğer verileri analiz için Azure İzleyici günlüklerine gönderilen en yararlı olsa da için doğrudan Azure portalında görüntülenebilir, ayrıca, kendi toplanır. | [Azure portal](activity-log-view.md#azure-portal)<br>[Azure İzleyici olayları API'si](/rest/api/monitor/eventcategories) |
-| Azure Storage | Bazı veri kaynakları, doğrudan Azure depolama alanına yazmak ve oturum açtığı verileri taşımak için yapılandırılması gerekir. Azure depolama, arşivleme ve dış sistemlerle tümleştirme için veri gönderebilir.  | [Depolama Analizi](/rest/api/storageservices/storage-analytics)<br>[Sunucu Gezgini](/visualstudio/azure/vs-azure-tools-storage-resources-server-explorer-browse-manage)<br>[Depolama Gezgini](/azure/vs-azure-tools-storage-manage-with-storage-explorer?tabs=windows) |
-| Event Hubs | Azure Event Hubs'ın diğer konumlara akış verileri gönderebilirsiniz. | [Depolama'ya yakalama](../../event-hubs/event-hubs-capture-overview.md)  |
-| VM'ler için Azure İzleyici | VM'ler için Azure İzleyici, Azure portalında izleme deneyimini tarafından kullanılan özel bir konuma iş yükü sistem durumu verilerini depolar. | [Azure portal](../insights/vminsights-overview.md)<br>[İş yükü İzleyicisi REST API](https://docs.microsoft.com/rest/api/monitor/microsoft.workloadmonitor/components)<br>[Azure kaynak durumu REST API](https://docs.microsoft.com/rest/api/resourcehealth/)  |
-| Uyarılar | Azure İzleyici tarafından oluşturulan uyarıların. | [Azure portal](alerts-managing-alert-instances.md)<br>[Uyarı Yönetimi REST API'si](https://docs.microsoft.com/rest/api/monitor/alertsmanagement/alerts) |
+| Azure Izleyici ölçümleri | Zaman damgalı verileri çözümlemek için en iyi duruma getirilmiş zaman serisi veritabanı. | [Ölçüm Gezgini](metrics-getting-started.md)<br>[Azure Izleyici ölçümleri API 'SI](/rest/api/monitor/metrics) |
+| Azure İzleyici Günlükleri    | Güçlü bir analiz altyapısı ve zengin sorgu dili sağlayan Azure Veri Gezgini temel alan Log Analytics çalışma alanı. | [Log Analytics](../log-query/portals.md)<br>[Log Analytics API 'SI](https://dev.loganalytics.io/)<br>[Application Insights API 'SI](https://dev.applicationinsights.io/reference/get-query) |
+| Etkinlik günlüğü | Etkinlik günlüğünden alınan veriler, diğer verilerle analiz etmek üzere Azure Izleyici günlüklerine gönderildiğinde en yararlı seçenektir, ancak aynı zamanda kendi Azure portal doğrudan görüntülenebilmesi için kendi üzerinde de toplanır. | [Azure portalda](activity-log-view.md#azure-portal)<br>[Azure Izleme olayları API 'SI](/rest/api/monitor/eventcategories) |
+| Azure Depolama | Bazı veri kaynakları doğrudan Azure depolama 'ya yazılır ve verileri günlüklere taşımak için yapılandırma gerektirir. Ayrıca, arşivleme ve dış sistemlerle tümleştirme için Azure depolama 'ya veri gönderebilirsiniz.  | [Depolama Analizi](/rest/api/storageservices/storage-analytics)<br>[Sunucu Gezgini](/visualstudio/azure/vs-azure-tools-storage-resources-server-explorer-browse-manage)<br>[Depolama Gezgini](/azure/vs-azure-tools-storage-manage-with-storage-explorer?tabs=windows) |
+| Event Hubs | Verileri diğer konumlara aktarmak için Azure Event Hubs 'a gönderin. | [Depolamaya yakala](../../event-hubs/event-hubs-capture-overview.md)  |
+| VM'ler için Azure İzleyici | VM'ler için Azure İzleyici iş yükü sistem durumu verilerini, izleme deneyimi tarafından Azure portal tarafından kullanılan özel bir konumda depolar. | [Azure portalda](../insights/vminsights-overview.md)<br>[İş yükü İzleyicisi REST API](https://docs.microsoft.com/rest/api/monitor/microsoft.workloadmonitor/components)<br>[Azure Kaynak durumu REST API](https://docs.microsoft.com/rest/api/resourcehealth/)  |
+| Uyarılar | Azure Izleyici tarafından oluşturulan uyarılar. | [Azure portalda](alerts-managing-alert-instances.md)<br>[Uyarı yönetimi REST API](https://docs.microsoft.com/rest/api/monitor/alertsmanagement/alerts) |
 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Farklı kaynakları bakın [İzleme verilerine Azure İzleyicisi tarafından toplanan](data-sources.md).
-- Hakkında bilgi edinin [türü izleme verilerinin Azure İzleyici tarafından toplanan](data-platform.md) ve görüntüleme ve bu verileri analiz etme.
+- [Azure izleyici tarafından toplanan farklı izleme verileri](data-sources.md)kaynaklarına bakın.
+- [Azure izleyici tarafından toplanan izleme verilerinin türleri](data-platform.md) ve bu verilerin nasıl görüntüleneceği ve çözümleneceği hakkında bilgi edinin.

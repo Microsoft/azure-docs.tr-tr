@@ -1,48 +1,49 @@
 ---
-title: Ayarları desteklemek için bir Azure Containers görüntüsünü | Azure Market
-description: Bir Azure kapsayıcı desteği ayarlarını yapılandırın.
+title: Azure kapsayıcıları görüntüsü için destek ayarları | Azure Marketi
+description: Azure kapsayıcısı için destek ayarlarını yapılandırın.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: dan-wesley
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 04/24/2019
 ms.author: pabutler
-ms.openlocfilehash: 71436d7ee82d9e5162780719d9a7a063fa903c6e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 144512683e6afa643639ba12b071e2a3ed7e01bd
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942573"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73823100"
 ---
 # <a name="container-support-tab"></a>Kapsayıcı desteği sekmesi
 
-Kullanım **Destek** sekmesinde **yeni teklif** teknik ve kullanıcı kaynaklarını teklifiniz için desteği sayfası.  Aşağıdaki giriş alanları, destek formunda sağlanır: **İlgili kişi mühendislik**, **müşteri desteği**, ve **destek URL'lerini**. Gerekli alan adına eklenmiş bir yıldız işareti (*) gösterir.
+Teklifiniz için teknik ve Kullanıcı Destek kaynakları sağlamak üzere **yeni teklif** sayfasının **destek** sekmesini kullanın.  Aşağıdaki giriş alanlarında destek formu: **mühendislik iletişim**, **müşteri desteği**ve **Destek URL 'leri**verilmiştir. Alan adının sonuna bir yıldız işareti (*), gerekli olduğunu gösterir.
 
 
-## <a name="support-form-fields"></a>Form alanlarını destekler
+## <a name="support-form-fields"></a>Destek formu alanları
 
-Mühendislik birimi ilgili kişisi ve müşteri desteği alanları için gerekli bilgileri sağlayın.
+Mühendislik Ilgili kişisi ve müşteri desteği alanları için gerekli bilgileri sağlayın.
 
 
-### <a name="engineering-contact"></a>Mühendislik birimi ilgili kişisi
+### <a name="engineering-contact"></a>Mühendislik Iletişim
 
-Mühendislik ilgili teknik konular ilgili kişisi kuruluşunuz ve Microsoft arasında olur. Gerekli alanlar yıldız (*) indicted.
+Mühendislik ilgili kişisi, kuruluşunuz ile Microsoft arasındaki teknik bir kişiniz. Gerekli alanlar bir yıldız işareti (*) ile tanımlanır.
 
-- **Adı\***  -kişi veya teknik/mühendislik desteği hizmet veren Grup adı.
-- **E-posta\***  -e-posta adresini bu teknik konular ilgili kişisi.
-- **Telefon\***  -için teknik destek telefon numarası.
+- **Ad\*** -teknik/mühendislik desteği olarak hizmet veren kişinin veya grubun adı.
+- **E-posta\*** -bu teknik kişinin e-posta adresi.
+- **Telefon\*** -teknik destek için telefon numarası.
 
 
 ### <a name="customer-support"></a>Müşteri Desteği
 
-Müşteri desteğine başvurun, Azure müşterileri tarafından açılmış destek biletlerini alır.  Gerekli alanlar yıldız (*) indicted.
+Müşteri desteği ilgili kişisi, Azure 'da müşteriler tarafından açılan destek biletlerini alır.  Gerekli alanlar bir yıldız işareti (*) ile tanımlanır.
 
-- **Adı\***  -kişi veya grup müşteri desteği veren adı.
-- **E-posta\***  -e-posta adresi bu desteğe başvurun.
-- **Telefon\***  -müşteri desteği için telefon numarası.
+- **Ad\*** -müşteri desteği olarak hizmet veren kişinin veya grubun adı.
+- **E-posta\*** -bu destek kişisinin e-posta adresi.
+- **Telefon\*** -müşteri desteği için telefon numarası.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Destek bilgileri sağlayan tamamladıktan sonra hazır [teklifinizi yayımlayın](./cpp-publish-offer.md). 
+Destek bilgilerini sağlamayı tamamladıktan sonra [teklifinizi yayımlamaya](./cpp-publish-offer.md)hazırsınız demektir. 
 

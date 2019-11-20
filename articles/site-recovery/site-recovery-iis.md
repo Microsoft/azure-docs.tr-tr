@@ -1,60 +1,60 @@
 ---
-title: Olağanüstü durum kurtarma ayarlama fo çok katmanlı bir Azure Site RECOVERY'yi kullanarak IIS tabanlı web uygulamasının | Microsoft Docs
-description: Azure Site RECOVERY'yi kullanarak IIS web grubu sanal makinelerini çoğaltma öğrenin.
+title: Azure Site Recovery kullanarak bir IIS Web uygulaması için olağanüstü durum kurtarmayı ayarlama
+description: Azure Site Recovery kullanarak IIS Web grubu sanal makinelerini çoğaltma hakkında bilgi edinin.
 author: mayurigupta13
 manager: rochakm
 ms.service: site-recovery
 ms.topic: article
 ms.date: 11/27/2018
 ms.author: mayg
-ms.openlocfilehash: 66b9342f1a67c4c9d35fda447a297cc64d048c1e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 513a0f28fc03cbf24e35112245c9756d5ce00783
+ms.sourcegitcommit: 44c2a964fb8521f9961928f6f7457ae3ed362694
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66480302"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73954662"
 ---
-# <a name="set-up-disaster-recovery-for-a-multi-tier-iis-based-web-application"></a>Çok katmanlı bir IIS tabanlı web uygulamasının olağanüstü durum kurtarmayı ayarlayın
+# <a name="set-up-disaster-recovery-for-a-multi-tier-iis-based-web-application"></a>Çok katmanlı bir IIS tabanlı Web uygulaması için olağanüstü durum kurtarmayı ayarlama
 
-Uygulama yazılımı, bir kuruluştaki iş üretkenliğini altyapısıdır. Çeşitli web uygulamaları bir kuruluştaki farklı amaçla kullanılabilir. Bordro işleme, finansal uygulamalar ve müşterilere yönelik Web siteleri, uygulamalar gibi bazı uygulamalar, bir kuruluş için önemli olabilir. Üretkenlik kaybını önlemek için bu uygulamalara sürekli olarak çalışır ve çalışıyor olması kuruluş için önemli. Daha da önemlisi, bu uygulamaları sürekli kullanılabilir olması marka veya görüntü kuruluşun zarar önlemeye yardımcı olabilir.
+Uygulama yazılımı, bir kuruluştaki iş üretkenlik altyapısıdır. Çeşitli web uygulamaları, bir kuruluşta farklı amaçlar sunabilir. Bordro işleme, finansal uygulamalar ve müşteriye yönelik Web siteleri için kullanılan uygulamalar gibi bazı uygulamalar, bir kuruluş için kritik öneme sahip olabilir. Üretkenlik kaybını engellemek için, kuruluşun bu uygulamaların sürekli olarak çalışır duruma gelmesi önemlidir. Daha da önemlisi, bu uygulamaların sürekli olarak kullanılabilir olması, kuruluşun marka veya görüntüsünün zarar görmesini önlemeye yardımcı olabilir.
 
-Kritik web uygulamaları genellikle ayarlandığı çok katmanlı uygulamalar: web, veritabanı ve uygulama farklı üzerinde katmanlarıdır. Çeşitli katmanlarda yayılmasını yanı sıra, uygulamaların da birden çok sunucu her katmanında trafiği Yük Dengelemesi için kullanabilirsiniz. Ayrıca, statik IP adresi eşlemeleri çeşitli katmanları arasında ve web sunucusundaki dayalı olabilir. Özellikle birden çok Web siteleri web sunucusunda yapılandırılmış olması halinde yük devretmede, bu eşlemelerin bazıları güncelleştirilmesi gerekir. Web uygulamalarında SSL kullanıyorsanız, sertifika bağlamaları güncelleştirmeniz gerekir.
+Kritik Web uygulamaları genellikle çok katmanlı uygulamalar olarak ayarlanır: Web, veritabanı ve uygulama farklı katmandadır. Uygulamalar, çeşitli katmanlara yayılmaya ek olarak, trafiğin yükünü dengelemek için her katmanda birden çok sunucu da kullanabilir. Ayrıca, çeşitli katmanlar ve Web sunucusu arasındaki eşlemeler statik IP adreslerini temel alabilir. Yük devretmede, özellikle Web sunucusunda birden fazla Web sitesi yapılandırılmışsa, bu eşlemlerden bazılarının güncellenmesi gerekir. Web uygulamaları SSL kullanıyorsa, sertifika bağlamalarını güncelleştirmeniz gerekir.
 
-Çeşitli yapılandırma dosyaları, kayıt defteri ayarlarını, bağlamaları, özel bileşenlerin (COM veya .NET), içerik ve sertifikaları yedekleme tabanlı olmayan bir çoğaltma üzerinde geleneksel kurtarma yöntemleri içerir. Dosyaları el ile yapılacak adımlar bir dizi aracılığıyla kurtarılabilir. Yedekleme ve dosyaları el ile kurtarma geleneksel kurtarma yöntemlerini hantal, hata yapmaya açık ve ölçeklenebilir değildir. Örneğin, kolayca sertifikalarını yedeklemek unutursanız. Yük devretmeden sonra seçeneği yoktur ancak sunucu için yeni sertifikalar satın almak için sol.
+Çoğaltmayı temel almayan geleneksel kurtarma yöntemleri çeşitli yapılandırma dosyalarını, kayıt defteri ayarlarını, bağlamaları, özel bileşenleri (COM veya .NET), içeriği ve sertifikaları yedeklemeyi içerir. Dosyalar, el ile gerçekleştirilen bir adım kümesi aracılığıyla kurtarılır. Dosyaları yedeklemeye ve el ile kurtarmaya yönelik geleneksel kurtarma yöntemleri, çok sayıda, hataya açıktır ve ölçeklenebilir değildir. Örneğin, sertifikaları yedeklemeyi kolayca unutmanız gerekebilir. Yük devretmeden sonra, hiçbir seçim yapmadan kalır, ancak sunucu için yeni sertifikalar satın alabilirsiniz.
 
-İyi bir olağanüstü durum kurtarma çözümü destekleyen modelleme kurtarma planları karmaşık uygulama mimarileri için. Ayrıca Katmanlar arasındaki uygulama eşlemeleri işlemek için kurtarma planına özelleştirilmiş adımlar eklemeniz mümkün olması gerekir. Olağanüstü bir durum varsa, uygulama eşlemeleri için daha düşük bir RTO liderlikte yardımcı olan tek tıklamayla, görüntüsü emin bir çözüm sağlar.
+İyi bir olağanüstü durum kurtarma çözümü, karmaşık uygulama mimarileri için modelleme kurtarma planlarını destekler. Ayrıca, Katmanlar arasındaki Uygulama eşlemelerini işlemek için kurtarma planına özelleştirilmiş adımlar ekleyebilmelisiniz. Bir olağanüstü durum varsa, uygulama eşlemeleri, daha düşük bir RTO 'ya yol açmaya yardımcı olan tek tıklamayla, dikkat çekmeye yönelik bir çözüm sağlar.
 
-Bu makalede, Internet Information Services (IIS) kullanarak temel alan bir web uygulaması korunacak açıklanır [Azure Site Recovery](site-recovery-overview.md). Makale, bir üç katmanlı, IIS tabanlı web uygulaması Azure, olağanüstü durum kurtarma tatbikatı yapmak nasıl ve uygulamayı azure'a yük devretme işlemini çoğaltmak için en iyi uygulamaları kapsar.
+Bu makalede [Azure Site Recovery](site-recovery-overview.md)kullanarak Internet INFORMATION SERVICES (IIS) tabanlı bir Web uygulamasını nasıl koruyabileceğiniz açıklanır. Makale, üç katmanlı, IIS tabanlı bir Web uygulamasını Azure 'a çoğaltmaya, olağanüstü durum kurtarma detayına ve uygulamanın yükünü Azure 'a nasıl devretireceğinizi gösteren en iyi yöntemleri içerir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Başlamadan önce aşağıdaki görevleri gerçekleştirmek nasıl bildiğinizden emin olun:
+Başlamadan önce, aşağıdaki görevleri nasıl yapabileceğinizi öğrendiğinizden emin olun:
 
-* [Bir sanal makineyi Azure'a çoğaltın](vmware-azure-tutorial.md)
-* [Bir kurtarma ağı tasarlama](site-recovery-network-design.md)
-* [Azure'a yük devretme testi yapın](site-recovery-test-failover-to-azure.md)
-* [Azure'a yük devretme yapın](site-recovery-failover.md)
-* [Bir etki alanı denetleyicisi çoğaltma](site-recovery-active-directory.md)
+* [Bir sanal makineyi Azure 'a çoğaltma](vmware-azure-tutorial.md)
+* [Kurtarma ağını tasarlama](site-recovery-network-design.md)
+* [Azure 'a yük devretme testi yapın](site-recovery-test-failover-to-azure.md)
+* [Azure 'a yük devretme](site-recovery-failover.md)
+* [Bir etki alanı denetleyicisini çoğaltma](site-recovery-active-directory.md)
 * [SQL Server çoğaltma](site-recovery-sql.md)
 
-## <a name="deployment-patterns"></a>Dağıtım modelleri
-Bir IIS tabanlı web uygulamasının genellikle aşağıdaki dağıtım desenlerden birini izler:
+## <a name="deployment-patterns"></a>Dağıtım desenleri
+IIS tabanlı bir Web uygulaması, genellikle aşağıdaki dağıtım desenlerinden birini izler:
 
-**Dağıtım modeli 1**
+**Dağıtım kalıbı 1**
 
-Uygulama isteği yönlendirme (ARR), bir IIS sunucusu ve SQL Server ile bir IIS tabanlı web grubu.
+Uygulama Isteği yönlendirme (ARR), IIS sunucusu ve SQL Server bir IIS tabanlı Web grubu.
 
-![Üç katmanı olan bir IIS tabanlı web grubu diyagramı](./media/site-recovery-iis/deployment-pattern1.png)
+![Üç katmanı olan IIS tabanlı bir Web grubunun diyagramı](./media/site-recovery-iis/deployment-pattern1.png)
 
-**Dağıtım modeli 2**
+**Dağıtım kalıbı 2**
 
-ARR, IIS sunucusu, bir uygulama sunucusu ve SQL Server ile bir IIS tabanlı web grubu.
+ARR, IIS sunucusu, bir uygulama sunucusu ve SQL Server olan IIS tabanlı bir Web grubu.
 
-![Dört katman olan bir IIS tabanlı web grubu diyagramı](./media/site-recovery-iis/deployment-pattern2.png)
+![Dört katmanı olan IIS tabanlı bir Web grubunun diyagramı](./media/site-recovery-iis/deployment-pattern2.png)
 
 ## <a name="site-recovery-support"></a>Site Recovery desteği
 
-Bu makaledeki örnekler için IIS 7.5 üzerinde Windows Server 2012 R2 Enterprise ile VMware sanal makinelerini kullanın. Site Recovery çoğaltma uygulamaya özgü olmadığından, bu makaledeki önerileri IIS farklı sürümlerini yanı sıra, aşağıdaki tabloda listelenen senaryolarda uygulama beklenir.
+Bu makaledeki örneklerde, Windows Server 2012 R2 Enterprise üzerinde IIS 7,5 ile VMware sanal makinelerini kullanırız. Site Recovery çoğaltma uygulamaya özgü olmadığından, bu makaledeki önerilerin aşağıdaki tabloda listelenen senaryolarda ve farklı IIS sürümleri için uygulanması beklenmektedir.
 
 ### <a name="source-and-target"></a>Kaynak ve hedef
 
@@ -62,45 +62,45 @@ Senaryo | İkincil siteye | Azure’a
 --- | --- | ---
 Hyper-V | Yes | Yes
 VMware | Yes | Yes
-Fiziksel sunucu | Hayır | Evet
-Azure|NA|Evet
+Fiziksel sunucu | Hayır | Yes
+Azure|NA|Yes
 
-## <a name="replicate-virtual-machines"></a>Çoğaltma sanal makineler
+## <a name="replicate-virtual-machines"></a>Sanal makineleri çoğaltma
 
-Tüm IIS web grubu sanal makineleri Azure'a çoğaltmaya başlamak için sunulan yönergeleri [Azure Site recovery'de yük devretme testi](site-recovery-test-failover-to-azure.md).
+Tüm IIS Web grubu sanal makinelerini Azure 'a Çoğaltmaya başlamak için [Site Recovery 'de Azure 'a yük devretme testi](site-recovery-test-failover-to-azure.md)' nde yer alan yönergeleri izleyin.
 
-Statik bir IP adresi kullanıyorsanız, yararlanmak için sanal makine istediğiniz IP adresini belirtebilirsiniz. IP adresi ayarlamak için şuraya gidin: **işlem ve ağ ayarları** > **hedef IP**.
+Statik bir IP adresi kullanıyorsanız, sanal makinenin geçirmesine istediğiniz IP adresini belirtebilirsiniz. IP adresini ayarlamak için, **hedef ıp** > **işlem ve ağ ayarları** ' na gidin.
 
-![Hedef IP Site Recovery işlem ve ağ bölmesinde ayarlanacağı gösteren ekran görüntüsü](./media/site-recovery-active-directory/dns-target-ip.png)
+![Site Recovery Işlem ve ağ bölmesinde hedef IP 'nin nasıl ayarlanacağını gösteren ekran görüntüsü](./media/site-recovery-active-directory/dns-target-ip.png)
 
 ## <a name="create-a-recovery-plan"></a>Kurtarma planı oluşturma
-Bir kurtarma planı yük devretme sırasında çok katmanlı bir uygulama çeşitli katmanları sıralama destekler. Sıralama, özel olarak uygulama tutarlılığı sürdürmeye yardımcı olur. Çok katmanlı web uygulaması için bir kurtarma planı oluşturduğunuzda, tam adımlar açıklanan [Site Recovery kullanarak bir kurtarma planı oluşturma](site-recovery-create-recovery-plans.md).
+Kurtarma planı, yük devretme sırasında çok katmanlı bir uygulamadaki çeşitli katmanların sıralamasını destekler. Sıralama, uygulama tutarlılığını sürdürmenize yardımcı olur. Çok katmanlı bir Web uygulaması için bir kurtarma planı oluşturduğunuzda [Site Recovery kullanarak kurtarma planı oluşturma](site-recovery-create-recovery-plans.md)bölümünde açıklanan adımları uygulayın.
 
-### <a name="add-virtual-machines-to-failover-groups"></a>Sanal makine için yük devretme grupları ekleyin
-Tipik bir çok katmanlı IIS web uygulamasını aşağıdaki bileşenlerden oluşur:
-* SQL sanal makinelerin bulunduğu bir veritabanı katmanı.
-* Bir IIS sunucusu oluşan web katmanı ve bir uygulama katmanı. 
+### <a name="add-virtual-machines-to-failover-groups"></a>Yük devretme gruplarına sanal makineler ekleme
+Tipik bir çok katmanlı IIS Web uygulaması aşağıdaki bileşenlerden oluşur:
+* SQL sanal makineleri olan bir veritabanı katmanı.
+* IIS sunucusundan ve uygulama katmanından oluşan Web katmanı. 
 
-Sanal makineleri katmanını temel alan farklı gruplara ekleyin:
+Katmana bağlı olarak farklı gruplara sanal makineler ekleyin:
 
-1. Bir kurtarma planı oluşturun. Grup 1 altında veritabanı katmanı sanal makine ekleyin. Bu, veritabanı katmanı sanal makinelerinin Kapat son ve ilk duruma sağlar.
-1. 2\. Grup altında uygulama katmanı sanal makine ekleyin. Bu, veritabanı katmanı olana sonra uygulama katmanı sanal makineler getirilir, sağlar.
-1. Web katmanı sanal makinelerinin grubu 3'te ekleyin. Bu uygulama katmanı olana sonra web katmanı sanal makineler getirilir, sağlar.
-1. Yük Dengeleme sanal makine grubu 4'te ekleyin. Bu, web katmanı olana sonra sanal makinelerin yük dengelemesini yük getirilir olmasını sağlar.
+1. Kurtarma planı oluşturun. Veritabanı katmanı sanal makinelerini Grup 1 ' in altına ekleyin. Bu, veritabanı katmanı sanal makinelerinin en son kapanmasını ve ilk olarak alınmasını sağlar.
+1. Uygulama katmanı sanal makinelerini Grup 2 ' ye ekleyin. Bu, veritabanı katmanı oluşturulduktan sonra uygulama katmanı sanal makinelerinin kullanılabilmesini sağlar.
+1. Web katmanı sanal makinelerini Grup 3 ' te ekleyin. Bu, uygulama katmanı oluşturulduktan sonra Web katmanı sanal makinelerinin kullanılabilmesini sağlar.
+1. Grup 4 ' te yük dengeleme sanal makineleri ekleyin. Bu, Web katmanı oluşturulduktan sonra Yük Dengeleme sanal makinelerinin alınmasını sağlar.
 
-Daha fazla bilgi için [kurtarma planını özelleştirin](site-recovery-runbook-automation.md#customize-the-recovery-plan).
+Daha fazla bilgi için bkz. [Kurtarma planını özelleştirme](site-recovery-runbook-automation.md#customize-the-recovery-plan).
 
 
-### <a name="add-a-script-to-the-recovery-plan"></a>Kurtarma planı için bir komut dosyası Ekle
-IIS web grubu düzgün çalışması Azure sanal makineleri yük devretme sonrası veya test yük devretmesi sırasında bazı işlemler yapmanız gerekebilir. Bazı yük devretme sonrası işlemleri otomatik hale getirebilirsiniz. Örneğin, DNS girişini güncelleştirmek, bir site bağlaması değiştirme veya kurtarma planına betikleri ekleyerek bir bağlantı dizesini değiştirin. [VMM komut bir kurtarma planına ekleyin](site-recovery-how-to-add-vmmscript.md) bir betik kullanarak otomatik görevler ayarlama işlemi açıklanmaktadır.
+### <a name="add-a-script-to-the-recovery-plan"></a>Kurtarma planına bir komut dosyası ekleyin
+IIS Web grubunun düzgün çalışması için, Azure sanal makinelerinde yük devretme sonrası veya yük devretme testi sırasında bazı işlemler yapmanız gerekebilir. Bazı yük devretme sonrası işlemleri otomatik hale getirebilirsiniz. Örneğin, DNS girişini güncelleştirebilir, bir site bağlamasını değiştirebilir veya ilgili betikleri kurtarma planına ekleyerek bir bağlantı dizesini değiştirebilirsiniz. Bir [Kurtarma PLANıNA VMM betiği ekleme](site-recovery-how-to-add-vmmscript.md) bir betiği kullanarak otomatikleştirilmiş görevlerin nasıl ayarlanacağını açıklar.
 
-#### <a name="dns-update"></a>DNS güncelleştirme
-DNS, DNS dinamik güncelleştirmesi için yapılandırıldıysa, bunlar başlattığınızda sanal makinelerin DNS genellikle yeni IP adresiyle güncelleştirin. Sanal makineler yeni IP adresleri ile DNS güncelleme, eklemek için açık bir adım eklemek istiyorsanız bir [DNS IP güncelleştirmek için betik](https://aka.ms/asr-dns-update) kurtarma planı grupları üzerinde bir yük devretme sonrası eylem olarak.  
+#### <a name="dns-update"></a>DNS güncelleştirmesi
+DNS dinamik DNS güncelleştirmesi için yapılandırılmışsa, sanal makineler genellikle DNS 'yi yeni IP adresiyle güncelleştirir. DNS 'yi sanal makinelerin yeni IP adresleriyle güncelleştirmek üzere açık bir adım eklemek istiyorsanız, DNS 'deki IP 'yi kurtarma planı gruplarında yük devretme sonrası eylem olarak [güncelleştirmek üzere bir komut dosyası](https://aka.ms/asr-dns-update) ekleyin.  
 
-#### <a name="connection-string-in-an-applications-webconfig"></a>Bir uygulamanın web.config dosyasında bağlantı dizesi
-Web sitesi iletişim kuran bir veritabanı bağlantı dizesini belirtir. Bağlantı dizesi veritabanı sanal makinenin adı taşıyan başka bir adım gerekli yük devretme sonrası vardır. Uygulama, otomatik olarak veritabanı ile iletişim kurabilir. Ayrıca, veritabanı sanal makine için IP adresi tutulursa, bağlantı dizesini güncelleştirmeniz gerekiyor olması değil. 
+#### <a name="connection-string-in-an-applications-webconfig"></a>Uygulamanın Web. config dosyasındaki bağlantı dizesi
+Bağlantı dizesi, Web sitesinin iletişim kurduğu veritabanını belirtir. Bağlantı dizesi, veritabanı sanal makinesinin adını taşıyorsa yük devretme sonrası başka bir adım gerekmez. Uygulama veritabanıyla otomatik olarak iletişim kurabilir. Ayrıca, veritabanı sanal makinesi için IP adresi korunursa bağlantı dizesinin güncelleştirilmesi gerekmez. 
 
-Bağlantı dizesi bir IP adresi kullanarak veritabanı sanal makine başvurursa, güncelleştirilmiş yük devretme sonrası olması gerekiyor. Örneğin, aşağıdaki bağlantı dizesi noktalarının IP ile veritabanına 127.0.1.2 adres:
+Bağlantı dizesi bir IP adresi kullanarak veritabanı sanal makinesine başvuruyorsa, bunun yük devretme sonrası güncelleştirilmesi gerekir. Örneğin, aşağıdaki bağlantı dizesi veritabanına 127.0.1.2 IP adresiyle işaret eder:
 
         <?xml version="1.0" encoding="utf-8"?>
         <configuration>
@@ -109,54 +109,54 @@ Bağlantı dizesi bir IP adresi kullanarak veritabanı sanal makine başvurursa,
         </connectionStrings>
         </configuration>
 
-Web katmanı bağlantı dizesinde güncelleştirmek için ekleme bir [IIS bağlantı güncelleştirme betiğini](https://gallery.technet.microsoft.com/Update-IIS-connection-2579aadc) 3. Grup kurtarma planında sonra.
+Web katmanındaki bağlantı dizesini güncelleştirmek için, kurtarma planında Grup 3 ' den sonra bir [IIS bağlantı güncelleştirme betiği](https://gallery.technet.microsoft.com/Update-IIS-connection-2579aadc) ekleyin.
 
 #### <a name="site-bindings-for-the-application"></a>Uygulama için site bağlamaları
-Her site, bağlama bilgileri içerir. Bağlama bilgileri bağlama, hangi IIS sunucu isteklerini site, bağlantı noktası numarası ve site için ana bilgisayar adları için dinleyen IP adresi türünü içerir. Yük devretme sırasında bunlarla ilişkili IP adresini bir değişiklik olursa bu bağlamaları güncelleştirmeniz gerekebilir.
+Her site bağlama bilgilerinden oluşur. Bağlama bilgileri, bağlamanın türünü, IIS sunucusunun site isteklerini dinlediği IP adresini, bağlantı noktası numarasını ve site için ana bilgisayar adlarını içerir. Yük devretme sırasında kendileriyle ilişkili IP adresinde bir değişiklik varsa, bu bağlamaları güncelleştirmeniz gerekebilir.
 
 > [!NOTE]
 >
-> Site bağlaması yaparsanız **Tümü Atanmamış**, bu bağlama yük devretme sonrası güncelleştirmeniz gerekmez. Ayrıca, bir site ile ilişkili IP adresi değiştirilen yük devretme sonrası değilse, site bağlaması güncelleştirmek gerekmez. (IP adresi elde tutulmasını birincil ve kurtarma sitelerine atanmış alt ağların ve ağ mimarisini bağlıdır. Güncelleştiren kuruluşunuz için uygun olmayabilir.)
+> Site bağlamayı **atanmamış**olarak ayarlarsanız, bu bağlama sonrası yük devretmeyi güncelleştirmeniz gerekmez. Ayrıca, bir siteyle ilişkilendirilmiş IP adresi yük devretme sonrası değiştirildiyse, site bağlamayı güncelleştirmeniz gerekmez. (IP adresini bekletme, birincil ve kurtarma sitelerine atanan ağ mimarisine ve alt ağlara bağlıdır. Bunları güncelleştirmek, kuruluşunuz için uygun olmayabilir.)
 
-![SSL bağlaması ayarını gösteren ekran görüntüsü](./media/site-recovery-iis/sslbinding.png)
+![SSL bağlamasını ayarlamayı gösteren ekran görüntüsü](./media/site-recovery-iis/sslbinding.png)
 
-IP adresi bir site ile ilişkili tüm site bağlamaları, yeni IP adresiyle güncelleştirin. Site bağlamaları değiştirmek için ekleme bir [IIS web katmanı güncelleştirme betiğini](https://aka.ms/asr-web-tier-update-runbook-classic) 3. Grup kurtarma planında sonra.
+IP adresini bir siteyle ilişkilendirdiyseniz, tüm site bağlamalarını yeni IP adresiyle güncelleştirin. Site bağlamalarını değiştirmek için kurtarma planında Grup 3 ' den sonra bir [IIS Web katmanı güncelleştirme betiği](https://aka.ms/asr-web-tier-update-runbook-classic) ekleyin.
 
-#### <a name="update-the-load-balancer-ip-address"></a>Yük Dengeleyici IP adresi güncelleştir
-Bir ARR sanal IP adresini güncelleştirmek için makine varsa ekleyin bir [IIS ARR yük devretme betiği](https://aka.ms/asr-iis-arrtier-failover-script-classic) grubu 4 '.
+#### <a name="update-the-load-balancer-ip-address"></a>Yük dengeleyici IP adresini güncelleştirme
+Bir ARR sanal makineniz varsa, IP adresini güncelleştirmek için, Grup 4 ' den sonra bir [IIS ARR yük devretme betiği](https://aka.ms/asr-iis-arrtier-failover-script-classic) ekleyin.
 
-#### <a name="ssl-certificate-binding-for-an-https-connection"></a>Bir HTTPS bağlantısı için SSL sertifikası bağlama
-Bir Web sitesi web sunucusu ve kullanıcının tarayıcı arasında güvenli bir bağlantı sağlamaya yardımcı olur ilişkili bir SSL sertifikası olabilir. Web sitesi bir HTTPS bağlantısı varsa ve aynı zamanda bir ilişkili site olan HTTPS bağlaması IIS sunucusu IP adresi için bir SSL sertifikası bağlaması, IIS sanal makine yük devretme sonrası IP adresine sahip sertifika için yeni bir site bağlaması eklemeniz gerekir.
+#### <a name="ssl-certificate-binding-for-an-https-connection"></a>HTTPS bağlantısı için SSL sertifikası bağlama
+Web sitesi, Web sunucusu ile kullanıcının tarayıcısı arasında güvenli bir iletişim sağlamaya yardımcı olan ilişkili bir SSL sertifikasına sahip olabilir. Web sitesinde bir HTTPS bağlantısı varsa ve aynı zamanda bir SSL sertifikası bağlaması olan IIS sunucusunun IP adresine ilişkili bir HTTPS site bağlaması varsa, sertifika için IIS sanal makinesinin IP adresine yönelik yeni bir site bağlaması eklemeniz gerekir.
 
-SSL sertifikası, bu bileşenlerin karşı verilebilir:
+SSL sertifikası bu bileşenlere göre verilebilir:
 
 * Web sitesinin tam etki alanı adı.
-* Sunucu adı.
-* Etki alanı adı için joker karakter sertifikası.  
-* Bir IP adresi. IIS sunucusu IP adresini karşı SSL sertifikası verilirse, başka bir SSL sertifikası Azure sitesindeki IIS sunucusu IP adresini karşı verilmesi gerekir. Bu sertifika için ek SSL bağlaması oluşturulması gerekir. Bu nedenle, IP adresi karşı bir SSL sertifikası kullanmamanızı öneririz. Bu seçenek, daha az yaygın olarak kullanılır ve uygun olarak yeni sertifika yetkilisi/tarayıcı Forumu değişiklikler yakında kullanımdan kaldırılacak.
+* Sunucunun adı.
+* Etki alanı adı için bir joker karakter sertifikası.  
+* Bir IP adresi. SSL sertifikası IIS sunucusunun IP adresine karşı verildiyse, Azure sitesindeki IIS sunucusunun IP adresine karşı başka bir SSL sertifikasının verilmesi gerekir. Bu sertifika için ek bir SSL bağlamasının oluşturulması gerekir. Bu nedenle, IP adresine karşı verilen bir SSL sertifikası kullanmanızı öneririz. Bu seçenek daha az yaygın olarak kullanılır ve yeni sertifika yetkilisi/tarayıcı Forum değişikliklerine göre yakında kullanım dışı olacaktır.
 
-#### <a name="update-the-dependency-between-the-web-tier-and-the-application-tier"></a>Web katmanı ve uygulama katmanı arasında bağımlılık güncelleştir
-Sanal makinelerin IP adresine göre bir uygulamaya özgü bağımlılığı varsa, bu bağımlılık yük devretme sonrası güncelleştirmeniz gerekir.
+#### <a name="update-the-dependency-between-the-web-tier-and-the-application-tier"></a>Web katmanı ve uygulama katmanı arasındaki bağımlılığı güncelleştirme
+Sanal makinelerin IP adresini temel alan uygulamaya özgü bir bağımlılığı varsa, bu bağımlılık yük devretmesini güncelleştirmeniz gerekir.
 
 ## <a name="run-a-test-failover"></a>Yük devretme testi çalıştırma
 
-1. Azure portalında kurtarma Hizmetleri kasanızı seçin.
-2. IIS web grubu için oluşturulan kurtarma planı seçin.
+1. Azure portal, kurtarma hizmetleri kasanızı seçin.
+2. IIS Web grubu için oluşturduğunuz kurtarma planını seçin.
 3. **Yük Devretme Testi**'ni seçin.
-4. Test yük devretme işlemini başlatmak için kurtarma noktası ve Azure sanal ağı'nı seçin.
-5. İkincil bir ortamı yukarı olduğunda doğrulamaları gerçekleştirebilirsiniz.
-6. Yük devretme test ortamı temizlemek için doğrulamaları tamamlandığı zaman seçin **doğrulamaların tamamlanması**.
+4. Yük devretme testi işlemini başlatmak için kurtarma noktasını ve Azure sanal ağını seçin.
+5. İkincil ortam çalışır duruma geldiğinde, doğrulamaları yapabilirsiniz.
+6. Doğrulamalar tamamlandığında, test yük devretme ortamını temizlemek için **doğrulama Tamam**' ı seçin.
 
-Daha fazla bilgi için [Azure Site recovery'de yük devretme testi](site-recovery-test-failover-to-azure.md).
+Daha fazla bilgi için bkz. [Azure 'a yük devretmeyi test etme Site Recovery](site-recovery-test-failover-to-azure.md).
 
 ## <a name="run-a-failover"></a>Yük devretme çalıştırma
 
-1. Azure portalında kurtarma Hizmetleri kasanızı seçin.
-1. IIS web grubu için oluşturulan kurtarma planı seçin.
+1. Azure portal, kurtarma hizmetleri kasanızı seçin.
+1. IIS Web grubu için oluşturduğunuz kurtarma planını seçin.
 1. **Yük devretme**'yi seçin.
 1. Yük devretme işlemini başlatmak için kurtarma noktasını seçin.
 
-Daha fazla bilgi için [Site recovery'de yük devretme](site-recovery-failover.md).
+Daha fazla bilgi için bkz. [Site Recovery 'de yük devretme](site-recovery-failover.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Daha fazla bilgi edinin [diğer uygulamaların çoğaltılması](site-recovery-workload.md) Site Recovery kullanarak.
+* Site Recovery kullanarak [diğer uygulamaları çoğaltma](site-recovery-workload.md) hakkında daha fazla bilgi edinin.

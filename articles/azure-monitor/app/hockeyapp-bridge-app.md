@@ -1,72 +1,67 @@
 ---
-title: Azure Application ınsights HockeyApp verileri araştırma | Microsoft Docs
-description: Kullanım ve Application Insights ile Azure uygulama performansını analiz edin.
-services: application-insights
-documentationcenter: windows
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: 97783cc6-67d6-465f-9926-cb9821f4176e
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights 'de HockeyApp verilerini keşfetme | Microsoft Docs
+description: Azure uygulamanızın kullanımını ve performansını Application Insights ile çözümleyin.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 03/30/2017
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: 79adfbfde25903bfe92c94507071c9d0fe303ef1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 03/30/2017
+ms.openlocfilehash: b14cd38a1db6804a00883ded0b38511fa46c3a52
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60898750"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72819590"
 ---
-# <a name="exploring-hockeyapp-data-in-application-insights"></a>Application ınsights'ta HockeyApp verileri araştırma
+# <a name="exploring-hockeyapp-data-in-application-insights"></a>Application Insights 'de HockeyApp verilerini keşfetme
 
 > [!NOTE]
-> HockeyApp, artık yeni uygulamalar için kullanılabilir. HockeyApp var olan dağıtımlar çalışmaya devam eder. Visual Studio App Center artık önerilen Microsoft gelen yeni mobil uygulamaları izlemek için bir hizmettir. [App Center ve Application Insights ile uygulamalarınızı ayarlama hakkında bilgi edinin](../../azure-monitor/learn/mobile-center-quickstart.md).
+> HockeyApp artık yeni uygulamalar için kullanılamaz. Mevcut HockeyApp dağıtımları çalışmaya devam edecektir. Visual Studio App Center artık yeni mobil uygulamaları izlemek için Microsoft 'tan önerilen hizmettir. [App Center ve Application Insights ile uygulamalarınızı ayarlamayı öğrenin](../../azure-monitor/learn/mobile-center-quickstart.md).
 
-[HockeyApp](https://azure.microsoft.com/services/hockeyapp/) Canlı Masaüstü ve mobil uygulamaları izlemeye yönelik bir hizmettir. HockeyApp od özel gönderebilir ve kullanımını izlemek ve (kilitlenme verilerini alma) ek tanılama konusunda yardımcı olmak için telemetri izleme. Bu akış telemetri güçlü kullanarak sorgulanabilir [Analytics](../../azure-monitor/app/analytics.md) özelliği [Azure Application Insights](../../azure-monitor/app/app-insights-overview.md). Ayrıca, aşağıdakileri yapabilirsiniz [özel dışarı aktarma ve izleme telemetri](export-telemetry.md). Bu özellikleri etkinleştirmek için Application Insights için HockeyApp özel veri aktaran bir köprü ayarlayın.
+[HockeyApp](https://azure.microsoft.com/services/hockeyapp/) , canlı masaüstü ve mobil uygulamaları izlemeye yönelik bir hizmettir. HockeyApp adresinden, kullanımı ve tanılama 'yı izlemek için özel ve izleme telemetrisi gönderebilirsiniz (kilitlenme verilerini almaya ek olarak). Bu telemetri akışı, [Azure Application Insights](../../azure-monitor/app/app-insights-overview.md)güçlü [analiz](../../azure-monitor/app/analytics.md) özelliği kullanılarak sorgulanabilir. Ayrıca, [özel ve izleme telemetrisini de dışarı aktarabilirsiniz](export-telemetry.md). Bu özellikleri etkinleştirmek için, Application Insights HockeyApp özel verileri aktaran bir köprü ayarlarsınız.
 
 ## <a name="the-hockeyapp-bridge-app"></a>HockeyApp Köprüsü uygulaması
-HockeyApp Köprüsü uygulaması özel HockeyApp ve Application ınsights izleme telemetrisi analiz ve sürekli dışarı aktarma özellikleri erişim sağlayan bir çekirdek özelliğidir. HockeyApp Köprüsü uygulaması oluşturulduktan sonra HockeyApp tarafından toplanan özel ve izleme olaylarını bu özelliklerden erişilebilir. Şimdi bu köprüsü uygulamalarından birini ayarlamayı öğrenin.
+HockeyApp Köprüsü uygulaması, analiz ve sürekli dışa aktarma özellikleri aracılığıyla Application Insights özel ve izleme telemetrinize erişmenizi sağlayan temel özelliktir. HockeyApp Köprüsü uygulamasının oluşturulmasından sonra, HockeyApp tarafından toplanan özel ve izleme olayları bu özelliklerden erişilebilir olur. Şimdi bu köprü uygulamalarından birini ayarlamayı görelim.
 
-Hesap ayarları, HockeyApp içinde Aç [API belirteçleri](https://rink.hockeyapp.net/manage/auth_tokens). Yeni bir belirteç oluşturun veya mevcut bir yeniden. En düşük hakları, "salt okunur" gerekir. Bir kopyasını API belirteci alır.
+HockeyApp ' de, hesap ayarları, [API belirteçleri](https://rink.hockeyapp.net/manage/auth_tokens)' ni açın. Yeni bir belirteç oluşturun ya da var olan bir belirteci yeniden kullanın. Gereken en düşük haklar "salt okunurdur". API belirtecinin bir kopyasını alın.
 
-![HockeyApp API belirteci alma](./media/hockeyapp-bridge-app/01.png)
+![HockeyApp API belirteci al](./media/hockeyapp-bridge-app/01.png)
 
-Microsoft Azure portal'ı açın ve [Application Insights kaynağı oluşturma](../../azure-monitor/app/create-new-resource.md ). Uygulama türü "İçin HockeyApp Köprüsü uygulaması" olarak ayarlayın:
+Microsoft Azure portal açın ve [bir Application Insights kaynağı oluşturun](../../azure-monitor/app/create-new-resource.md ). Uygulama türünü "HockeyApp Bridge uygulaması" olarak ayarlayın:
 
 ![Yeni Application Insights kaynağı](./media/hockeyapp-bridge-app/02.png)
 
-Bir ad ayarlayın gerekmez; bu HockeyApp adından otomatik olarak ayarlanır.
+Ad ayarlamanız gerekmez-Bu, otomatik olarak HockeyApp adından ayarlanır.
 
-HockeyApp köprüsü alanlar görüntülenir. 
+HockeyApp Bridge alanları görüntülenir. 
 
-![Köprü alanlar girin](./media/hockeyapp-bridge-app/03.png)
+![Köprü alanlarını girin](./media/hockeyapp-bridge-app/03.png)
 
-Daha önce not ettiğiniz HockeyApp belirteci girin. Bu eylem "HockeyApp uygulaması" açılan menüsünün HockeyApp tüm uygulamalarınız ile doldurur. Kullanmak istediğiniz birini seçin ve kalan alanları doldurun. 
+Daha önce not ettiğiniz HockeyApp belirtecini girin. Bu eylem, "HockeyApp uygulaması" açılır menüsünü tüm HockeyApp uygulamalarınızla doldurur. Kullanmak istediğiniz birini seçin ve kalan alanları doldurun. 
 
-Yeni kaynak açın. 
+Yeni kaynağı açın. 
 
-Veri akışını başlatmak için bir süre sürer.
+Verilerin akışa başlaması biraz zaman aldığını unutmayın.
 
-![Application Insights kaynağı verileri bekleniyor](./media/hockeyapp-bridge-app/04.png)
+![Verileri bekleyen Application Insights kaynak](./media/hockeyapp-bridge-app/04.png)
 
-İşte bu kadar! HockeyApp belgelenmiş uygulamanızda bu noktadan itibaren toplanan özel ve izleme verileri artık Ayrıca, Application Insights analiz ve sürekli dışarı aktarma özellikleri kullanılabilir.
+İşte bu kadar! HockeyApp tarafından izlenen uygulamanızda toplanan özel ve izleme verileri artık Application Insights analiz ve sürekli dışa aktarma özelliklerinde de sunulmaktadır.
 
-Kısa bir süre için kullanıma sunuldu bu özelliklerin her biri gözden geçirelim.
+Şimdi kullanabileceğiniz bu özelliklerin her birini kısaca gözden geçirelim.
 
 ## <a name="analytics"></a>Analiz
-Analytics, geçici tanılayın ve nedenlerini ve desenleri daha hızlı keşfedeceksiniz telemetrinizi analiz etmenize imkan sağlar, verileri sorgulamak için güçlü bir araçtır.
+Analiz, verilerinizin geçici olarak sorgulanmasına yönelik güçlü bir araçtır. Bu, telemetrinizi tanılamanıza ve analiz etmenize ve temel nedenler ile desenleri hızlı bir şekilde bulmanıza olanak tanır.
 
 ![Analiz](./media/hockeyapp-bridge-app/05.png)
 
-* [Analytics hakkında daha fazla bilgi edinin](../../azure-monitor/log-query/get-started-portal.md)
+* [Analiz hakkında daha fazla bilgi edinin](../../azure-monitor/log-query/get-started-portal.md)
 
 ## <a name="continuous-export"></a>Sürekli dışarı aktarma
-Sürekli dışarı aktarma, bir Azure Blob Depolama kapsayıcısına verilerinizi vermenize olanak sağlar. Verileriniz şu anda Application Insights tarafından sunulan saklama süresinden daha uzun süre tutmanız gerekiyorsa bu çok kullanışlıdır. Blob storage'da verileri tutmak, SQL veritabanı veya depolama çözümü, tercih edilen veri işleyin.
+Sürekli dışarı aktarma, verilerinizi bir Azure Blob depolama kapsayıcısına vermenize olanak tanır. Bu, verilerinizi Application Insights tarafından sunulan saklama süresinden daha uzun süre tutmanız gerektiğinde çok yararlı olur. Verileri blob depolamada tutabilir, bir SQL veritabanında veya tercih ettiğiniz veri ambarı çözümünüz olarak işleyebilirsiniz.
 
 [Sürekli dışarı aktarma hakkında daha fazla bilgi edinin](export-telemetry.md)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Verilerinizi analiz uygulama](../../azure-monitor/log-query/get-started-portal.md)
+* [Verilerinize analiz uygulayın](../../azure-monitor/log-query/get-started-portal.md)
 

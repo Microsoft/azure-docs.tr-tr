@@ -1,25 +1,25 @@
 ---
-title: Video içeriğinde içeriklere analiz C# -Content Moderator
-titlesuffix: Azure Cognitive Services
-description: Video içeriği için içerik Moderator SDK'sını kullanarak .NET için çeşitli içeriklere analiz etme
+title: Content Moderator, C# sakıncalı malzeme için video içeriğini analiz edin.
+titleSuffix: Azure Cognitive Services
+description: .NET için Content Moderator SDK kullanarak çeşitli sakıncalı malzemeler için video içeriğini çözümleme
 services: cognitive-services
-author: sanjeev3
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 01/10/2019
-ms.author: sajagtap
-ms.openlocfilehash: 7e987c1249360b14fddf8af57c61fdd1a46ee6c5
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: pafarley
+ms.openlocfilehash: 71858755fe31823d4d7ef8623b915db851530116
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60605343"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72755230"
 ---
-# <a name="analyze-video-content-for-objectionable-material-in-c"></a>Video içeriğinde içeriklere analiz edinC#
+# <a name="analyze-video-content-for-objectionable-material-in-c"></a>' Deki sakıncalı malzeme için video içeriğini çözümleC#
 
-Bu makalede bilgiler sağlanmaktadır ve yardımcı olması için kod örnekleri, kullanmaya başlama [.NET için içerik Moderator SDK'sı](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.ContentModerator/) video içeriği yetişkinlere yönelik veya müstehcen içerik için tarayın.
+Bu makalede, [.NET için Content moderator SDK 'yı](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.ContentModerator/) kullanmaya başlamanıza yardımcı olacak bilgiler ve kod örnekleri, yetişkinlere yönelik içerik ve video içeriğini taramak
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun. 
 
@@ -28,39 +28,39 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 ## <a name="set-up-azure-resources"></a>Azure kaynakları ayarlama
 
-Content Moderator'ın video denetimi özelliği, ücretsiz bir genel önizleme olarak kullanılabilir **medya İşlemci** Azure Media Services (AMS). Azure Media Services, depolama ve akışla aktarma video içeriği için özel bir Azure hizmeti ' dir. 
+Content Moderator video denetleme özelliği, Azure Media Services (AMS) içinde ücretsiz bir genel önizleme **medyası işlemcisi** olarak sunulmaktadır. Azure Media Services, video içeriğini depolamaya ve akışa yönelik özel bir Azure hizmetidir. 
 
 ### <a name="create-an-azure-media-services-account"></a>Azure Media Services hesabı oluşturma
 
-Bölümündeki yönergeleri [bir Azure Media Services hesabı oluşturma](https://docs.microsoft.com/azure/media-services/media-services-portal-create-account) AMS'ye abone ve ilişkili Azure depolama hesabı oluşturun. Bu depolama hesabında yeni bir Blob Depolama kapsayıcısı oluşturun.
+AMS 'ye abone olmak ve ilişkili bir Azure depolama hesabı oluşturmak için [Azure Media Services hesabı oluşturma](https://docs.microsoft.com/azure/media-services/media-services-portal-create-account) bölümündeki yönergeleri izleyin. Bu depolama hesabında, yeni bir BLOB depolama kapsayıcısı oluşturun.
 
-### <a name="create-an-azure-active-directory-application"></a>Bir Azure Active Directory uygulaması oluşturma
+### <a name="create-an-azure-active-directory-application"></a>Azure Active Directory uygulaması oluşturma
 
-Azure portal ve seçin, yeni AMS aboneliğinize gidin **API erişimi** yan menüsünde. Seçin **hizmet sorumlusu ile Azure Media Services'e bağlanma**. Değeri Not **REST API uç noktası** alan; ihtiyaç duyacağınız bunu daha sonra.
+Azure portal yeni AMS aboneliğinize gidin ve Yan menüden **API erişimi** ' ni seçin. **Hizmet sorumlusu ile Azure Media Services Bağlan**' ı seçin. **REST API uç noktası** alanındaki değeri aklınızda edin; Buna daha sonra ihtiyacınız olacak.
 
-İçinde **Azure AD uygulaması** bölümünden **Yeni Oluştur** ve yeni adı Azure AD uygulama kaydı (örneğin, "VideoModADApp"). Tıklayın **Kaydet** ve uygulama yapılandırılmış birkaç dakika bekleyin. Ardından, yeni uygulama kaydı altında görmelisiniz **Azure AD uygulaması** sayfasının bölümünde.
+**Azure AD uygulaması** bölümünde **Yeni oluştur** ' u SEÇIN ve yeni Azure AD uygulama kaydınızı adlandırın (örneğin, "VideoModADApp"). **Kaydet** ' e tıklayın ve uygulama yapılandırıldıktan sonra birkaç dakika bekleyin. Ardından, yeni uygulama kaydınızı sayfanın **Azure AD uygulaması** bölümünde görmeniz gerekir.
 
-Uygulama kaydınızı seçip tıklayın **uygulamasını Yönet** altındaki düğmesi. Değeri Not **uygulama kimliği** alan; ihtiyaç duyacağınız bunu daha sonra. Seçin **ayarları** > **anahtarları**ve yeni bir anahtar (örneğin, "VideoModKey") için bir açıklama girin. Tıklayın **Kaydet**ve ardından yeni anahtar değeri dikkat edin. Bu dizeyi kopyalayın ve güvenli bir yere kaydedin.
+Uygulama kaydınızı seçin ve altındaki **Uygulamayı Yönet** düğmesine tıklayın. **Uygulama kimliği** alanındaki değeri aklınızda edin; Buna daha sonra ihtiyacınız olacak. **Ayarlar**  > **anahtarlar**' ı seçin ve yeni anahtar için bir açıklama girin (örneğin, "videomodkey"). **Kaydet**' e tıklayın ve ardından yeni anahtar değerine dikkat edin. Bu dizeyi kopyalayın ve güvenli bir yere kaydedin.
 
-Yukarıdaki işlem daha kapsamlı bir kılavuz için bkz: [Azure AD kimlik doğrulamayı kullanmaya başlama](https://docs.microsoft.com/azure/media-services/media-services-portal-get-started-with-aad).
+Yukarıdaki işlemin daha kapsamlı bir yolu için bkz. [Azure AD kimlik doğrulamasıyla çalışmaya başlama](https://docs.microsoft.com/azure/media-services/media-services-portal-get-started-with-aad).
 
-Bunu yaptıktan sonra iki farklı şekilde video denetimi Medya işleyicisi kullanabilirsiniz.
+Bunu yaptıktan sonra, video denetlemesi medya işlemcisini iki farklı yolla kullanabilirsiniz.
 
-## <a name="use-azure-media-services-explorer"></a>Azure Media Services Gezgini kullanma
+## <a name="use-azure-media-services-explorer"></a>Azure Media Services Gezginini Kullanma
 
-Azure Media Services Gezgin AMS için kullanıcı dostu bir ön uç ' dir. AMS hesabınıza gidin, karşıya video yükleme ve Content Moderator Medya işleyicisi ile içerik taraması için kullanın. Buradan indirip [GitHub](https://github.com/Azure/Azure-Media-Services-Explorer/releases), veya [Azure Media Services Gezgin blog gönderisi](https://azure.microsoft.com/blog/managing-media-workflows-with-the-new-azure-media-services-explorer-tool/) daha fazla bilgi için.
+Azure Media Services gezgin, AMS için Kullanıcı dostu bir ön uçta bulunur. AMS hesabınıza gözatıp videoları karşıya yüklemeyi ve Content Moderator medya işlemcisi ile içerik taramayı sağlamak için bu uygulamayı kullanın. Dosyayı [GitHub](https://github.com/Azure/Azure-Media-Services-Explorer/releases)'dan indirip yükleyin veya daha fazla bilgi Için [Azure Media Services Gezgini blog](https://azure.microsoft.com/blog/managing-media-workflows-with-the-new-azure-media-services-explorer-tool/) gönderisine bakın.
 
-![Content Moderator ile Azure Media Services Gezgini](images/ams-explorer-content-moderator.PNG)
+![Content Moderator ile gezgin Azure Media Services](images/ams-explorer-content-moderator.PNG)
 
 ## <a name="create-the-visual-studio-project"></a>Visual Studio projesini oluşturma
 
-1. Visual Studio'da yeni bir oluşturma **konsol uygulaması (.NET Framework)** adlandırın ve proje **VideoModeration**. 
+1. Visual Studio 'da yeni bir **konsol uygulaması (.NET Framework)** projesi oluşturun ve bunu **videodenetlemesi**olarak adlandırın. 
 1. Çözümünüzde başka projeler de varsa, tek başlangıç projesi olarak bunu seçin.
 1. Gereken NuGet paketlerini alın. Çözüm Gezgini'nde projenize sağ tıklayın ve **NuGet Paketlerini Yönet**'i seçin; ardından aşağıdaki projeleri bulun ve yükleyin:
-    - windowsazure.mediaservices
-    - windowsazure.mediaservices.extensions
+    - windowsazure. mediaservices
+    - windowsazure. mediaservices. Extensions
 
-## <a name="add-video-moderation-code"></a>Video denetimi kod ekleyin
+## <a name="add-video-moderation-code"></a>Video denetleme kodu ekle
 
 Ardından, temel bir içerik moderasyonu senaryosu uygulamak için kodu bu kılavuzdan kopyalayıp projenize yapıştıracaksınız.
 
@@ -81,9 +81,9 @@ using Microsoft.WindowsAzure.Storage.Auth;
 using System.Collections.Generic;
 ```
 
-### <a name="set-up-resource-references"></a>Kaynak başvurularını Ayarla
+### <a name="set-up-resource-references"></a>Kaynak başvurularını ayarlama
 
-Aşağıdaki statik alanları _Program.cs_ dosyasındaki **Program** sınıfına ekleyin. Bu alanlar, AMS aboneliğinize bağlanmak için gerekli bilgileri tutun. Bunları, yukarıdaki adımlarda aldığınız değerlerle doldurun. Unutmayın `CLIENT_ID` olduğu **uygulama kimliği** Azure AD uygulamanızı değerini ve `CLIENT_SECRET` "Bu uygulama için oluşturduğunuz VideoModKey" değeridir.
+Aşağıdaki statik alanları _Program.cs_ dosyasındaki **Program** sınıfına ekleyin. Bu alanlar, AMS aboneliğinize bağlanmak için gereken bilgileri tutar. Bunları yukarıdaki adımlarda aldığınız değerlerle birlikte doldurabilirsiniz. @No__t_0 Azure AD uygulamanızın **uygulama kimliği** değeri olduğunu ve `CLIENT_SECRET` bu uygulama için oluşturduğunuz "VideoModKey" değerinin olduğunu unutmayın.
 
 ```csharp
 // declare constants and globals
@@ -118,9 +118,9 @@ private static readonly string CONTENT_MODERATOR_PRESET_FILE = "preset.json";
 
 ```
 
-Yerel bir video dosyası (en basit durumda) kullanmak istiyorsanız, projeye ekleyin ve yol olarak girin `INPUT_FILE` (yürütme dizine göre olan göreli yolları) değeri.
+Yerel bir video dosyası (en basit durum) kullanmak istiyorsanız, projeye ekleyin ve yolunu `INPUT_FILE` değeri olarak girin (göreli yollar yürütme dizinine göre değişir).
 
-Oluşturmanız gerekecektir _preset.json_ dosyasını geçerli dizinde ve sürüm numarasını belirtmek için kullanın. Örneğin:
+Ayrıca, geçerli dizinde _önceden ayarlanmış. JSON_ dosyasını oluşturmanız ve bir sürüm numarası belirtmek için kullanmanız gerekir. Örnek:
 
 ```JSON
 {
@@ -128,9 +128,9 @@ Oluşturmanız gerekecektir _preset.json_ dosyasını geçerli dizinde ve sürü
 }
 ```
 
-### <a name="load-the-input-videos"></a>Giriş video yükleme
+### <a name="load-the-input-videos"></a>Giriş video (ler) i Yükle
 
-**Ana** yöntemi **Program** sınıfı oluşturur bir Azure medya içeriği ve bir Azure depolama bağlamı (blob depolama alanında videolarınızı olması durumunda). Geri kalan kod, bir yerel klasör, blob ya da bir Azure depolama kapsayıcısı içinde birden çok BLOB'lar video tarar. Tüm seçenekleri diğer kod satırları açıklama satırı yaparak deneyebilirsiniz.
+**Program** sınıfının **Main** yöntemi bir Azure Medya bağlamı ve ardından bir Azure depolama bağlamı oluşturur (videolarınızın BLOB depolama alanında olması durumunda). Kalan kod, bir Azure depolama kapsayıcısı içindeki yerel bir klasörden, Blobun veya birden çok blobdan bir videoyu tarar. Diğer kod satırlarına açıklama ekleyerek tüm seçenekleri deneyebilirsiniz.
 
 ```csharp
 // Create Azure Media Context
@@ -156,9 +156,9 @@ RunContentModeratorJob(asset);
 // RunContentModeratorJobOnBlobs();
 ```
 
-### <a name="create-an-azure-media-context"></a>Azure medya içeriği oluşturma
+### <a name="create-an-azure-media-context"></a>Azure Medya bağlamı oluşturma
 
-**Program** sınıfına aşağıdaki yöntemi ekleyin. AMS ile iletişime izin verecek şekilde AMS kimlik bilgilerinizi kullanır.
+**Program** sınıfına aşağıdaki yöntemi ekleyin. Bu, AMS ile iletişime izin vermek için AMS kimlik bilgilerinizi kullanır.
 
 ```csharp
 // Creates a media context from azure credentials
@@ -177,9 +177,9 @@ static void CreateMediaContext()
 }
 ```
 
-### <a name="add-the-code-to-create-an-azure-storage-context"></a>Bir Azure depolama bağlamı oluşturmak için kod ekleyin
+### <a name="add-the-code-to-create-an-azure-storage-context"></a>Azure depolama bağlamı oluşturmak için kod ekleme
 
-**Program** sınıfına aşağıdaki yöntemi ekleyin. Depolama kimlik bilgilerinizi oluşturulan depolama bağlamı, blob depolamaya erişmek için kullanın.
+**Program** sınıfına aşağıdaki yöntemi ekleyin. Blob depolamaya erişmek için depolama kimlik bilgilerinizle oluşturulan depolama bağlamını kullanırsınız.
 
 ```csharp
 // Creates a storage context from the AMS associated storage name and key
@@ -194,10 +194,10 @@ static void CreateStorageContext()
 }
 ```
 
-### <a name="add-the-code-to-create-azure-media-assets-from-local-file-and-blob"></a>Yerel dosya ve blob Azure medya varlıkları oluşturmak için kod ekleyin
+### <a name="add-the-code-to-create-azure-media-assets-from-local-file-and-blob"></a>Yerel dosya ve BLOB 'dan Azure Medya varlıkları oluşturmak için kodu ekleyin
 
-Content Moderator medya işleyicisini işler üzerinde çalıştığı **varlıklar** Azure Media Services platformunda içinde.
-Bu yöntemler, yerel bir dosya veya ilişkili bir blob varlıklar oluşturun.
+Content Moderator medya işlemcisi, işleri Azure Media Services platformu içindeki **varlıklar** üzerinde çalıştırır.
+Bu yöntemler, varlıkları yerel bir dosyadan veya ilişkili bir Blobun oluşturur.
 
 ```csharp
 // Creates an Azure Media Services Asset from the video file
@@ -214,7 +214,7 @@ static IAsset CreateAssetfromBlob(CloudBlockBlob Blob)
 }
 ```
 
-### <a name="add-the-code-to-scan-a-collection-of-videos-as-blobs-within-a-container"></a>Bir kapsayıcı içindeki videoları (BLOB) olarak koleksiyonunu taramak için kod ekleyin
+### <a name="add-the-code-to-scan-a-collection-of-videos-as-blobs-within-a-container"></a>Bir kapsayıcı içindeki bir video koleksiyonunu (blob olarak) taramak için kodu ekleyin
 
 ```csharp
 // Runs the Content Moderator Job on all Blobs in a given container name
@@ -250,7 +250,7 @@ static IEnumerable<IListBlobItem> GetBlobsList()
 }
 ```
 
-### <a name="add-the-method-to-run-the-content-moderator-job"></a>Content Moderator işi çalıştırmak için bir yöntem ekleyin
+### <a name="add-the-method-to-run-the-content-moderator-job"></a>Content Moderator Işini çalıştırmak için yöntemini ekleyin
 
 ```csharp
 // Run the Content Moderator job on the designated Asset from local file or blob storage
@@ -316,9 +316,9 @@ static void RunContentModeratorJob(IAsset asset)
 }
 ```
 
-### <a name="add-helper-functions"></a>Yardımcı işlevleri ekleme
+### <a name="add-helper-functions"></a>Yardımcı işlevler ekleme
 
-Bu yöntemler, Azure Media Services varlığından Content Moderator çıktı dosyası (JSON) indirin ve programın çalışma durumunu konsola oturum açabilmesi adına denetimi işinin durumunu izlemenize yardımcı olması.
+Bu yöntemler, Azure Media Services varlıklarından Content Moderator çıkış dosyasını (JSON) indirir ve programın çalışan bir durumu konsola kaydetmesini sağlamak için denetleme işinin durumunu izlemeye yardımcı olur.
 
 ```csharp
 static void DownloadAsset(IAsset asset, string outputDirectory)
@@ -361,18 +361,18 @@ static void StateChanged(object sender, JobStateChangedEventArgs e)
 
 ### <a name="run-the-program-and-review-the-output"></a>Programı çalıştırma ve çıktıyı gözden geçirme
 
-İçerik denetleme iş tamamlandıktan sonra JSON yanıtı analiz edin. Bu, bu öğelerden oluşur:
+Içerik denetleme işi tamamlandıktan sonra JSON yanıtını çözümleyin. Şu öğelerden oluşur:
 
-- Video bilgilerinin özeti
-- **Görüntüleri** olarak "**parçaları**"
-- **Anahtar çerçeveler** olarak "**olayları**" ile bir **reviewRecommended "(= true veya false)"** bayrağı temel alarak **yetişkinlere yönelik** ve **Racy** puanları
-- **Başlangıç**, **süresi**, **totalDuration**, ve **zaman damgası** "dalgalanmasındaki" olan. Bölen **ölçeği** saniyeler içinde numarasını almak için.
+- Video bilgileri Özeti
+- "**Parçalar**" olarak **anlık görüntüleri**
+- " **(= True veya false)"** adlı "**Olaylar**" olarak, **yetişkin** ve **kcy** puanlarını temel alan **ana çerçeveler**
+- **Başlangıç**, **süre**, **TotalDuration**ve **zaman damgası** "ticks" dir. Sayıyı saniye cinsinden almak için **zaman ölçeğinde** ayırın.
  
 > [!NOTE]
-> - `adultScore` cinsel açık veya bazı durumlarda yetişkinlere yönelik olarak kabul içeriği olası durum ve tahmin puanı temsil eder.
-> - `racyScore` cinsel müstehcen veya bazı durumlarda yetişkin olarak kabul içeriği olası durum ve tahmin puanı temsil eder.
-> - `adultScore` ve `racyScore` 0 ile 1 arasındadır. Yüksek puanı, kategori uygun olabilir yüksek modeli tahmin etmektir. Bu önizleme, el ile kodlanmış sonuçları yerine istatistiksel bir model kullanır. Her kategori için gereksinimlerinizi nasıl hizalandığını belirlemek için kendi içeriğe sahip test etmenizi öneririz.
-> - `reviewRecommended` true veya false iç puanına göre eşikleri bağlı değil. Müşteriler, bu değeri kullanın veya kendi içerik ilkelere dayalı özel eşikler karar değerlendirmelisiniz.
+> - `adultScore`, belirli durumlarda cinsel açık veya yetişkin olarak kabul edilebilir içeriğin olası varlığını ve tahmin Puanını temsil eder.
+> - `racyScore`, belirli durumlarda cinsel veya kötü bir şekilde düşünüldüksel olabilecek içeriğin olası varlığını ve tahmin Puanını temsil eder.
+> - `adultScore` ve `racyScore` 0 ile 1 arasındadır. Puan arttıkça, modelin daha yüksek olması kategorinin uygulanabilir olabileceğini tahmin edilir. Bu önizleme el ile kodlanmış sonuçlar yerine istatistiksel bir modeli kullanır. Her kategorinin gereksinimlerinize göre nasıl hizalanacağını öğrenmek için kendi içeriklerinizi test etmenizi öneririz.
+> - `reviewRecommended`, iç puan eşiklerine bağlı olarak doğru ya da yanlış olur. Müşteriler, bu değerin kullanılıp kullanılmayacağını ya da içerik ilkelerine bağlı olarak özel eşiklere karar vermesini değerlendirmelidir.
 
 ```json
 {
@@ -428,10 +428,10 @@ static void StateChanged(object sender, JobStateChangedEventArgs e)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Nasıl oluşturacağınızı öğrenin [video incelemeleri](video-reviews-quickstart-dotnet.md) , denetimi çıktısından.
+Denetleme çıktıınızdan [video İncelemeleri](video-reviews-quickstart-dotnet.md) oluşturmayı öğrenin.
 
-Ekleme [döküm denetimi](video-transcript-moderation-review-tutorial-dotnet.md) video, incelemeleri için.
+Video incelemelerinizin [dökümünü](video-transcript-moderation-review-tutorial-dotnet.md) ekleyin.
 
-Yapı hakkında ayrıntılı öğretici kullanıma bir [tamamlamak video ve döküm denetimi çözümü](video-transcript-moderation-review-tutorial-dotnet.md).
+[Kapsamlı bir video ve](video-transcript-moderation-review-tutorial-dotnet.md)döküm denetimi çözümü oluşturma hakkında ayrıntılı öğreticiye göz atın.
 
-[Visual Studio çözümü indirme](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/ContentModerator) bu ve diğer Content Moderator hızlı başlangıçlar için .NET için.
+.NET için bu ve diğer Content Moderator hızlı başlangıçlara yönelik [Visual Studio çözümünü indirin](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/ContentModerator) .

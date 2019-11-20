@@ -1,81 +1,81 @@
 ---
-title: Azure Site Recovery ile olağanüstü durum kurtarma için bir kurtarma planı için bir betik ekleyin | Microsoft Docs
-description: Kurtarma planlarına VMM bulutlarındaki Hyper-V VM'lerin olağanüstü durum kurtarma için VMM komut dosyası eklemeyi öğrenin.
+title: Azure Site Recovery bir kurtarma planına betik ekleme
+description: VMM bulutlarındaki Hyper-V VM 'lerinin olağanüstü durum kurtarması için bir kurtarma planına VMM betiği eklemeyi öğrenin.
 author: rajani-janaki-ram
 manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/27/2018
 ms.author: rajanaki
-ms.openlocfilehash: ea6d969ed6612f947e3c73c438738bd98ac2bb30
-ms.sourcegitcommit: 1289f956f897786090166982a8b66f708c9deea1
+ms.openlocfilehash: 6902876e066649ae4dff4134fb8cc462f30dd0b7
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "64700456"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74084865"
 ---
-# <a name="add-a-vmm-script-to-a-recovery-plan"></a>VMM komut dosyası için bir kurtarma planı Ekle
+# <a name="add-a-vmm-script-to-a-recovery-plan"></a>Kurtarma planına VMM betiği ekleme
 
-Bu makalede System Center Virtual Machine Manager (VMM) bir komut dosyası oluşturma ve bir kurtarma planında eklemek [Azure Site Recovery](site-recovery-overview.md).
+Bu makalede, bir System Center Virtual Machine Manager (VMM) komut dosyasının nasıl oluşturulacağı ve [Azure Site Recovery](site-recovery-overview.md)bir kurtarma planına nasıl ekleneceği açıklanmaktadır.
 
-Alt bu makalenin veya üzerinde yorum veya sorularınız sonrası [Azure kurtarma Hizmetleri Forumu](https://social.msdn.microsoft.com/forums/azure/home?forum=hypervrecovmgr).
+Bu makalenin alt kısmında veya [Azure kurtarma hizmetleri Forumu](https://social.msdn.microsoft.com/forums/azure/home?forum=hypervrecovmgr)' nda herhangi bir yorum veya soru gönderin.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-Kurtarma planlarınızda PowerShell betiklerini kullanabilirsiniz. Kurtarma planından erişilebilir olması için betik yazma ve komut dosyasını VMM kitaplığına yerleştirin. Betik yazarken aşağıdaki konuları göz önünde bulundurun:
+Kurtarma planlarınızda PowerShell betikleri kullanabilirsiniz. Kurtarma planından erişilebilmesi için betiği yazıp VMM kitaplığına yerleştirmeniz gerekir. Betiği yazarken aşağıdaki noktaları göz önünde bulundurun:
 
-* Özel durumlar düzgün bir şekilde işlenir böylece betikleri'nın try-catch bloklarını kullandığınızdan emin olun.
-    - Betikte bir özel durum oluşursa, betik çalıştıran durdurur ve görev başarısız olarak gösterilir.
-    - Bir hata oluşursa, betik geri kalanında çalıştırılmaz.
+* Özel durumların düzgün şekilde işlenebilmesi için betiklerin try-catch bloklarını kullandığından emin olun.
+    - Betikte bir özel durum oluşursa, betik çalışmayı durdurduktan sonra görev başarısız olarak gösterilir.
+    - Bir hata oluşursa betiğin geri kalanı çalıştırılmaz.
     - Planlanmamış yük devretme çalıştırdığınızda bir hata oluşursa, kurtarma planı devam eder.
-    - Planlı yük devretme çalıştırdığınızda bir hata oluşursa, kurtarma planı durdurur. Betik, beklendiği gibi çalıştığını denetleyin ve kurtarma planı yeniden çalıştırın düzeltin.
-        - `Write-Host` Komutu, bir kurtarma planı betikte çalışmaz. Kullanırsanız `Write-Host` komutu bir betikte, komut dosyası başarısız olur. Çıktı oluşturmak için sırayla ana kodunuzu çalıştıran bir proxy betiği oluşturun. Tüm çıkış kullanıma cmdlet'iyle yönetilir sağlamak için kullanın **\> \>** komutu.
-        - 600 saniye içinde döndürmezse betik zaman aşımına uğradı.
-        - Herhangi bir şey STDERR yazılmışsa, betiği başarısız olarak sınıflandırılır. Bu bilgiler, betik yürütme ayrıntıları görüntülenir.
+    - Planlı Yük devretme çalıştırdığınızda bir hata oluşursa, kurtarma planı duraklar. Betiği düzelttikten sonra beklendiği gibi çalıştığını denetleyip kurtarma planını yeniden çalıştırın.
+        - `Write-Host` komutu bir kurtarma planı komut dosyasında çalışmıyor. Bir betikte `Write-Host` komutunu kullanırsanız, komut dosyası başarısız olur. Çıkış oluşturmak için, ana komut dosyanızı çalıştıran bir proxy betiği oluşturun. Tüm çıktının kullanıma hazır olduğundan emin olmak için **\>\>** komutunu kullanın.
+        - Kod, 600 saniye içinde döndürülmezse zaman aşımına uğrar.
+        - STDERR 'e herhangi bir şey yazılmışsa, komut dosyası başarısız olarak sınıflandırılır. Bu bilgiler betik yürütme ayrıntılarında görüntülenir.
 
-* Bir kurtarma planı betiklerde VMM hizmet hesabı bağlamında çalıştırın. Bu hesap betiğin bulunduğu uzak paylaşımı için izinleri okuduğundan emin olun. Betiğin VMM hizmet hesabıyla aynı düzeyde kullanıcı hakları ile çalışmasını test edin.
-* VMM cmdlet, bir Windows PowerShell modülüne teslim edilir. Modülü, VMM konsolunu yüklediğinizde yüklenir. Modülü, komut dosyanıza yüklemek için betikte aşağıdaki komutu kullanın: 
+* Kurtarma planındaki betikler VMM hizmet hesabı bağlamında çalışır. Bu hesabın, betiğin bulunduğu uzak paylaşımda okuma izinlerine sahip olduğundan emin olun. Betiği VMM hizmet hesabıyla aynı düzeyde kullanıcı haklarıyla çalışacak şekilde test edin.
+* VMM cmdlet 'leri bir Windows PowerShell modülünde dağıtılır. Modül, VMM konsolunu yüklediğinizde yüklenir. Modülünü betiğe yüklemek için komut dosyasında aşağıdaki komutu kullanın: 
 
     `Import-Module -Name virtualmachinemanager`
 
-    Daha fazla bilgi için [VMM ve Windows PowerShell ile çalışmaya başlama](https://technet.microsoft.com/library/hh875013.aspx).
-* En az bir kitaplık sunucusu VMM dağıtımınız olduğundan emin olun. Varsayılan olarak, bir VMM sunucusu için kitaplık paylaşım yolu, VMM sunucusunda yerel olarak bulunur. Klasör MSCVMMLibrary adıdır.
+    Daha fazla bilgi için bkz. [Windows PowerShell ve VMM ile çalışmaya başlama](https://technet.microsoft.com/library/hh875013.aspx).
+* VMM dağıtımınızda en az bir kitaplık sunucusuna sahip olduğunuzdan emin olun. Varsayılan olarak, VMM sunucusunun kitaplık paylaşma yolu VMM sunucusunda yerel olarak bulunur. Klasör adı MSCVMMLibrary ' dir.
 
-  Kitaplık yoluna uzaktan (veya yerel ancak MSCVMMLibrary ile paylaşılan olup olmadığını) ise, kullanarak paylaşım aşağıdaki gibi yapılandırın \\libserver2.contoso.com\share\ örnek olarak:
+  Kitaplık paylaşım yolunuz uzak ise (veya yerel ise ve MSCVMMLibrary ile paylaşılmışsa), bir örnek olarak \\libserver2. contoso. com\share\ kullanarak, aşağıdaki gibi bir paylaşım yapılandırın:
   
-  1. Kayıt Defteri Düzenleyicisi'ni açın ve ardından Git **HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\Azure Site Recovery\Registration**.
+  1. Kayıt defteri düzenleyicisini açın ve **HKEY_LOCAL_MACHINE \SOFTWARE\MICROSOFT\Azure site Recovery\Registration**adresine gidin.
 
-  1. Değerini **ScriptLibraryPath** için  **\\\libserver2.contoso.com\share\\** . Tam FQDN'yi belirtin. Konum paylaşımı için izinler sağlayın. Bu paylaşım kök düğümüdür. Vmm'de kök düğümü olup olmadığını denetlemek için Kitaplığı'nda kök düğümüne gidin. Açılır yolun kökünü yoldur. Değişkeninde kullanmanız gereken yolu budur.
+  1. **Scriptlibrarypath** için değeri **\\\libserver2.contoso.com\share\\** olacak şekilde değiştirin. Tam FQDN 'yi belirtin. Paylaşma konumuna izin verin. Bu, paylaşımın kök düğümüdür. Kök düğümü denetlemek için, VMM 'de, kitaplıktaki kök düğüme gidin. Açılan yol yolun köküdür. Bu, değişkeninde kullanmanız gereken yoldur.
 
-  1. Betik, VMM hizmet hesabıyla aynı düzeyde kullanıcı hakları olan bir kullanıcı hesabı kullanarak test edin. Bu kullanıcı haklarını kullanarak, bir tek başına, test edilmiş betiklerin kurtarma planlarıyla, çalıştırıldıkları aynı şekilde doğrular. VMM sunucusunda şu şekilde atlamak için yürütme ilkesini ayarlayın:
+  1. VMM hizmet hesabıyla aynı düzeyde kullanıcı haklarına sahip bir kullanıcı hesabı kullanarak betiği test edin. Bu kullanıcı haklarının kullanılması, tek başına çalıştırılan ve sınanan betiklerin kurtarma planlarında çalıştıkları şekilde çalıştığını doğrular. VMM sunucusunda, yürütme ilkesini aşağıdaki gibi geçiş olarak ayarlayın:
 
-     a. Açık **64 bit Windows PowerShell** konsolunu yönetici olarak.
+     a. Yönetici olarak **64-bit Windows PowerShell** konsolunu açın.
      
-     b. Girin **Set-executionpolicy atlama**. Daha fazla bilgi için [Set-ExecutionPolicy cmdlet'ini kullanarak](https://technet.microsoft.com/library/ee176961.aspx).
+     b. **Set-executionpolicy bypass**girin. Daha fazla bilgi için bkz. [set-ExecutionPolicy cmdlet 'Ini kullanma](https://technet.microsoft.com/library/ee176961.aspx).
 
      > [!IMPORTANT]
-     > Ayarlama **Set-executionpolicy atlama** yalnızca 64 bit PowerShell konsolundaki. Komut dosyaları için 32-bit PowerShell konsolunda ayarlarsanız çalıştırmayın.
+     > **Set-executionpolicy bypass** yalnızca 64-bit PowerShell konsolunda ayarlanır. Bunu 32-bit PowerShell konsolu için ayarlarsanız betikler çalıştırılmaz.
 
-## <a name="add-the-script-to-the-vmm-library"></a>Betiğin VMM kitaplığına ekleme
+## <a name="add-the-script-to-the-vmm-library"></a>Betiği VMM kitaplığına ekleme
 
-Bir VMM kaynak site varsa, VMM sunucusunda bir komut dosyası oluşturabilirsiniz. Ardından, betiği kurtarma planınıza dahil.
+VMM kaynak siteniz varsa, VMM sunucusunda bir komut dosyası oluşturabilirsiniz. Ardından, betiği kurtarma planınıza dahil edin.
 
-1. Kitaplık paylaşımında, yeni bir klasör oluşturun. Örneğin, \<VMM Sunucu adı > \MSSCVMMLibrary\RPScripts. Kaynak klasöre yerleştirin ve VMM sunucuları hedefleyin.
-1. Komut dosyası oluşturun. Örneğin, komut dosyası RPScript adlandırın. Komut dosyası beklendiği gibi çalıştığını doğrulayın.
-1. Betikte yerleştirin \<VMM Sunucu adı > kaynak ve hedef VMM sunucularında \MSSCVMMLibrary klasör.
+1. Kitaplık paylaşımında yeni bir klasör oluşturun. Örneğin, > \Msscvmmlibrary\rpscriptsvmm sunucu adını \<. Klasörü kaynak ve hedef VMM sunucularına yerleştirin.
+1. Betiği oluşturun. Örneğin, komut dosyası RPScript olarak adlandırın. Betiğin beklendiği gibi çalıştığını doğrulayın.
+1. Betiği, kaynak ve hedef VMM sunucularındaki \<VMM sunucu adı > \MSSCVMMLibrary klasörüne yerleştirin.
 
-## <a name="add-the-script-to-a-recovery-plan"></a>Bir kurtarma planı için komut dosyası Ekle
+## <a name="add-the-script-to-a-recovery-plan"></a>Betiği bir kurtarma planına ekleyin
 
-Kurtarma planına eklenen Vm'leri veya çoğaltma gruplarına ve planı oluşturduktan sonra gruba betiği ekleyebilirsiniz.
+Bir kurtarma planına VM 'Ler veya çoğaltma grupları ekledikten ve planı oluşturduktan sonra, betiği gruba ekleyebilirsiniz.
 
 1. Kurtarma planını açın.
-1. İçinde **adım** listesinde, bir öğe seçin. Ardından, ya da seçin **betik** veya **el ile eylemi**.
-1. Betik veya eylem önce veya sonra seçili öğe eklenip eklenmeyeceğini belirtin. Betik konumu yukarı veya aşağı taşımak, seçmek **Yukarı Taşı** ve **Aşağı Taşı** düğmeleri.
-1. VMM komut dosyası eklerseniz, seçin **yük devretme VMM betiği**. İçinde **betik yolu**, paylaşıma göreli yolunu girin. Örneğin, **\RPScripts\RPScript.PS1**.
-1. Azure Otomasyonu runbook'u eklerseniz, runbook bulunduğu Otomasyon hesabı belirtin. Ardından, kullanmak istediğiniz Azure runbook betiği seçin.
-1. Komut dosyası beklendiği gibi çalıştığından emin olmak için bir yük devretme kurtarma planı yapın.
+1. **Adım** listesinde bir öğe seçin. Ardından, **komut dosyası** veya **el ile eylem**' i seçin.
+1. Seçili öğeden önce veya sonra betik ya da eylemin eklenip eklenmeyeceğini belirtin. Betiğin konumunu yukarı veya aşağı taşımak için **Yukarı taşı** ve **aşağı taşı** düğmelerini seçin.
+1. Bir VMM betiği eklerseniz, **VMM betiğine yük devretme**' yı seçin. **Betik yolu**' nda, paylaşımın göreli yolunu girin. Örneğin, **\Rpscripts\rpscript.exe. ps1**yazın.
+1. Bir Azure Otomasyonu runbook 'u eklerseniz, runbook 'un bulunduğu Otomasyon hesabını belirtin. Ardından, kullanmak istediğiniz Azure runbook betiğini seçin.
+1. Betiğin beklendiği gibi çalıştığından emin olmak için kurtarma planının yük devretmesini test edin.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Daha fazla bilgi edinin [devretme testlerini çalıştırma](site-recovery-failover.md).
+* [Yük devretme çalıştırma](site-recovery-failover.md)hakkında daha fazla bilgi edinin.
 

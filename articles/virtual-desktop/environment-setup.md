@@ -1,67 +1,67 @@
 ---
-title: Windows sanal masaüstü Önizleme ortam - Azure
-description: Bir Windows sanal masaüstü Önizleme ortamı temel öğeleri.
+title: Windows sanal masaüstü ortamı-Azure
+description: Windows sanal masaüstü ortamının temel öğeleri.
 services: virtual-desktop
 author: Heidilohr
 ms.service: virtual-desktop
 ms.topic: conceptual
 ms.date: 04/12/2019
 ms.author: helohr
-ms.openlocfilehash: 6aa6c7326759e480235df5fe9d4b0878cd11024d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 23bf9be8e3e5f1c52546faa9ed5171c140eba59a
+ms.sourcegitcommit: 5f0f1accf4b03629fcb5a371d9355a99d54c5a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65142379"
+ms.lasthandoff: 09/30/2019
+ms.locfileid: "71676617"
 ---
-# <a name="windows-virtual-desktop-preview-environment"></a>Windows sanal masaüstü Önizleme ortamı
+# <a name="windows-virtual-desktop-environment"></a>Windows Sanal Masaüstü ortamı
 
-Windows sanal masaüstü Önizleme kullanıcıların sanallaştırılmış Masaüstü ve RemoteApps için kolay ve güvenli erişim sağlayan bir hizmettir. Bu konu Windows Sanal Masaüstü ortamının genel yapısı hakkında daha fazla bit bildirir.
+Windows sanal masaüstü, kullanıcıların sanallaştırılmış masaüstlerine ve RemoteApps 'e kolay ve güvenli bir şekilde erişmesini sağlayan bir hizmettir. Bu konu, Windows sanal masaüstü ortamının genel yapısı hakkında biraz daha fazla bilgi sağlayacaktır.
 
-## <a name="tenants"></a>Kiracılar
+## <a name="tenants"></a>Kira
 
-Windows sanal masaüstü Kiracı, Windows sanal masaüstü ortamınızı yönetmek için birincil arabirimidir. Azure Active Directory'ye ortama oturum açacak kullanıcıları içeren her bir Windows sanal masaüstü Kiracı ilişkilendirilmiş olması gerekir. Windows sanal masaüstü kiracıdan kullanıcılarınızın iş yüklerini çalıştırmak için ana bilgisayar havuzları oluşturarak başlayabilirsiniz.
+Windows sanal masaüstü kiracısı, Windows sanal masaüstü ortamınızı yönetmeye yönelik birincil arabirimdir. Her Windows sanal masaüstü kiracının, ortamda oturum açan kullanıcıları içeren Azure Active Directory ilişkilendirilmesi gerekir. Windows sanal masaüstü kiracısında, kullanıcılarınızın iş yüklerini çalıştırmak için konak havuzları oluşturmaya başlayabilirsiniz.
 
-## <a name="host-pools"></a>Ana bilgisayar havuzları
+## <a name="host-pools"></a>Konak havuzları
 
-Bir konak havuzu, Windows sanal masaüstü Aracısı'nı çalıştırdığınızda, Windows sanal masaüstü oturum ana bilgisayarları olarak kaydeden Azure sanal makineler koleksiyonudur. Bir konak havuzundaki tüm oturumu konak sanal makinelerin tutarlı bir kullanıcı deneyimi için aynı görüntü kaynağı.
+Konak havuzu, Windows sanal masaüstü aracısını çalıştırdığınızda oturum ana bilgisayarları olarak Windows sanal masaüstüne kaydeden Azure sanal makineleri koleksiyonudur. Bir konak havuzundaki tüm oturum ana bilgisayarları sanal makineleri, tutarlı bir kullanıcı deneyimi için aynı görüntüden kaynaklıdır.
 
-Bir konak havuzu iki tür biri olabilir:
+Bir konak havuzu iki türden biri olabilir:
 
-- Kişisel, burada her oturumu ana bilgisayarı bireysel kullanıcılara atanır.
-- Havuza, burada oturum ana konak havuz içindeki bir uygulama grubu için yetkili herhangi bir kullanıcı bağlantılarını kabul edebilir.
+- Her oturum ana bilgisayarının bireysel kullanıcılara atandığı kişisel.
+- Oturum ana bilgisayarlarının, ana bilgisayar havuzu içindeki bir uygulama grubuna yetkili olan herhangi bir kullanıcının bağlantısını kabul edebileceği havuza alınmış.
 
-Kaç oturum her oturumu ana bilgisayarı alabilir, uygulamanın Yük Dengeleme davranışını değiştirmek için konak havuzu ve kullanıcı oturumu Konaklara Windows sanal masaüstü oturumları için oturum açmış durumdayken konak havuzdaki yapabileceklerinizi ek özellikleri ayarlayabilirsiniz. Kullanıcılara uygulama grupları aracılığıyla yayımlanan kaynak denetim.
+Yük Dengeleme davranışını değiştirmek için konak havuzunda ek özellikler ayarlayabilirsiniz, her bir oturum ana bilgisayarının kaç oturumu yapabilecekleri ve kullanıcının Windows Sanal Masaüstü oturumlarında oturum açdıkları ana bilgisayar havuzundaki oturum konakları için neler yapabileceğini seçebilirsiniz. Uygulama grupları aracılığıyla kullanıcılara yayınlanan kaynakları kontrol edersiniz.
 
 ## <a name="app-groups"></a>Uygulama grupları
 
-Bir uygulama grubu, konak havuzu oturum ana bilgisayarda yüklü uygulamaların bir mantıksal grubudur. Bir uygulama grubu, iki tür biri olabilir:
+Uygulama grubu, ana bilgisayar havuzundaki oturum ana bilgisayarlarına yüklenen uygulamaların mantıksal gruplandırmasıdır. Bir uygulama grubu iki türden biri olabilir:
 
-- RemoteApp kullanıcıları RemoteApps eriştiği, ayrı ayrı seçin ve uygulama grubuna yayımlayın
-- Kullanıcıların tam masaüstü eriştiği Masaüstü
+- Kullanıcılar, bireysel olarak seçtiğiniz ve uygulama grubuna yayımladığınız RemoteApps 'e erişen RemoteApp
+- Kullanıcılar tam masaüstüne erişen Masaüstü
 
-Varsayılan olarak, her bir ana makine havuzu oluşturduğunuzda ("Masaüstü uygulama grubu" adlı) bir masaüstü uygulaması grubu otomatik olarak oluşturulur. Bu uygulama grubu dilediğiniz zaman kaldırabilirsiniz. Ancak, bir masaüstü uygulaması grubu bulunduğu sürece başka bir masaüstü uygulaması grubu konak havuzunda oluşturulamıyor. RemoteApps yayımlamak için bir RemoteApp uygulama grubu oluşturmanız gerekir. Farklı alt senaryolara uyum sağlamak için birden fazla RemoteApp uygulama grupları oluşturabilirsiniz. Farklı RemoteApp uygulama grupları, çakışan RemoteApps de içerebilir.
+Varsayılan olarak, bir masaüstü uygulama grubu ("Masaüstü uygulama grubu" adlı), her bir konak havuzu oluşturduğunuzda otomatik olarak oluşturulur. Bu uygulama grubunu dilediğiniz zaman kaldırabilirsiniz. Ancak, bir masaüstü uygulama grubu varken konak havuzunda başka bir masaüstü uygulama grubu oluşturamazsınız. RemoteApps 'i yayımlamak için bir RemoteApp uygulama grubu oluşturmanız gerekir. Farklı çalışan senaryolarına uyum sağlamak için birden çok RemoteApp uygulama grubu oluşturabilirsiniz. Farklı RemoteApp uygulama grupları, çakışan RemoteApps de içerebilir.
 
-Kaynakları kullanıcılara yayımlamak için uygulama gruplara atamanız gerekir. Kullanıcılar uygulama gruplarına atarken, şunları göz önünde bulundurun:
+Kaynakları kullanıcılara yayımlamak için, bunları uygulama gruplarına atamanız gerekir. Uygulama gruplarına kullanıcı atarken şunları göz önünde bulundurun:
 
-- Bir kullanıcı Masaüstü uygulama grubu hem de RemoteApp uygulama grubu aynı konak havuzda atanamaz.
-- Bir kullanıcı birden çok uygulama grupları aynı konak havuzdaki atanabilir ve kendi akış her iki uygulama grupları birikmesi olacaktır.
+- Bir kullanıcı aynı konak havuzundaki bir masaüstü uygulama grubuna ve RemoteApp uygulama grubuna atanamaz.
+- Bir kullanıcı aynı konak havuzu içindeki birden çok uygulama grubuna atanabilir ve akışları her iki uygulama grubunun birikmesi olacaktır.
 
 ## <a name="tenant-groups"></a>Kiracı grupları
 
-Windows sanal masaüstü, Windows sanal masaüstü kiracının nerede kurulumu ve yapılandırması çoğu olur. Windows sanal masaüstü Kiracı konak havuzları, uygulama grupları ve uygulama grubu kullanıcı atamalarını içerir. Ancak, özellikle bir bulut hizmeti sağlayıcısı (CSP) veya bir barındırma iş ortağı yöneticisiyseniz, tek bir seferde birden çok Windows sanal masaüstü kiracılar yönetme gereken belirli durumlar olabilir. Bu durumda, her biri müşterilerin Windows sanal masaüstü kiracılar koyun ve erişimini merkezi olarak yönetmek için özel bir Windows sanal masaüstü Kiracı grubu kullanabilirsiniz. Ancak, yalnızca tek bir Windows sanal masaüstü kiracısı yönetiyorsanız, Kiracı grubu kavramı geçerli değildir ve çalışır ve varsayılan Kiracı grubu mevcut kiracınız yönetmeye devam.
+Windows sanal masaüstü 'nde, Windows sanal masaüstü kiracısı, çoğu kurulum ve yapılandırmanın gerçekleştiği yerdir. Windows sanal masaüstü kiracısı konak havuzlarını, uygulama gruplarını ve uygulama grubu Kullanıcı atamalarını içerir. Ancak, özellikle bir bulut hizmeti sağlayıcısı (CSP) veya barındırma iş ortağıysanız, birden çok Windows sanal masaüstü kiracıyı aynı anda yönetmeniz gereken bazı durumlar olabilir. Bu durumlarda, müşterilerin Windows sanal masaüstü kiracılarının her birini yerleştirmek ve erişimi merkezi olarak yönetmek için özel bir Windows sanal masaüstü kiracı grubu kullanabilirsiniz. Ancak, yalnızca tek bir Windows sanal masaüstü kiracısı yönetiyorsanız, kiracı grubu kavramı uygulanmaz ve varsayılan kiracı grubunda bulunan kiracınızı çalıştırmaya ve yönetmeye devam edebilirsiniz.
 
 ## <a name="end-users"></a>Son kullanıcılar
 
-Kullanıcılar kendi uygulama gruplarına atadıktan sonra Windows sanal masaüstü istemcilerden herhangi biri ile bir Windows sanal masaüstü dağıtımı bağlanabilirsiniz.
+Kullanıcıları uygulama gruplarına atadıktan sonra, Windows Sanal Masaüstü istemcilerinden herhangi birine sahip bir Windows sanal masaüstü dağıtımına bağlanabilirler.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Temsilci erişimi ve rolleri kullanıcılara atama hakkında daha fazla bilgi [Temsilcili erişim Windows sanal masaüstü önizlemede](delegated-access-virtual-desktop.md).
+Temsilci erişimi hakkında daha fazla bilgi edinin ve [Windows sanal masaüstü 'Nde temsilci erişimi olan](delegated-access-virtual-desktop.md)kullanıcılara roller atama hakkında daha fazla bilgi edinin.
 
-Windows sanal masaüstü kiracınızı ayarladığınızda öğrenmek için bkz. [Windows sanal masaüstü Önizleme'de bir kiracı oluşturmanız](tenant-setup-azure-active-directory.md).
+Windows sanal masaüstü kiracınızı ayarlamayı öğrenmek için bkz. [Windows sanal masaüstü 'nde kiracı oluşturma](tenant-setup-azure-active-directory.md).
 
-Windows sanal masaüstüne bağlanma hakkında bilgi almak için aşağıdaki makalelerden birine bakın:
+Windows sanal masaüstüne nasıl bağlanacağınızı öğrenmek için aşağıdaki makalelerden birine bakın:
 
-- [Windows 10 veya Windows 7 bağlanın](connect-windows-7-and-10.md)
-- [Bir web tarayıcısından bağlanma](connect-web.md)
+- [Windows 10 veya Windows 7 ' den bağlan](connect-windows-7-and-10.md)
+- [Web tarayıcısından Bağlan](connect-web.md)

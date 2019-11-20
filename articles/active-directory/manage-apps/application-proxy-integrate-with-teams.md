@@ -16,19 +16,18 @@ ms.author: mimart
 ms.reviewer: harshja
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9e9b043b27f624a3d9f38fb2299f9e49f0ffedda
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 037e005993a54e525560571a6d893197af99b6a0
+ms.sourcegitcommit: 47ce9ac1eb1561810b8e4242c45127f7b4a4aa1a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65783431"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67807768"
 ---
 # <a name="access-your-on-premises-applications-through-microsoft-teams"></a>Şirket içi uygulamalarınızı, Microsoft Teams erişim
 
-Azure Active Directory Uygulama Ara sunucusu, çoklu oturum açma nerede olursa olsun şirket içi uygulamalara sağlar. Microsoft Teams, tek bir yerde işbirliği çalışmalarınızı kolaylaştırır. İki birlikte tümleştirilmesi, kullanıcılarınızın üretken ekip herhangi bir durumda olabilir anlamına gelir. 
+Azure Active Directory Uygulama Ara sunucusu, çoklu oturum açma nerede olursa olsun şirket içi uygulamalara sağlar. Microsoft Teams, tek bir yerde işbirliği çalışmalarınızı kolaylaştırır. İki birlikte tümleştirilmesi, kullanıcılarınızın üretken ekip herhangi bir durumda olabilir anlamına gelir.
 
 Kullanıcılarınıza bulut uygulamaları için takımlar kanallarını da ekleyebilirsiniz [sekmeleri kullanarak](https://support.office.com/article/Video-Using-Tabs-7350a03e-017a-4a00-a6ae-1c9fe8c497b3?ui=en-US&rs=en-US&ad=US), ancak ne şirket içi SharePoint siteleri veya olan planlama aracı barındırılan? Uygulama proxy'si çözümüdür. Bunlar her zaman uygulamalarını uzaktan erişmek için kullandıkları aynı dış URL'leri kullanarak kendi kanallara uygulama proxy'si aracılığıyla yayımlanan uygulamalar ekleyebilirsiniz. Ve uygulama proxy'si Azure Active Directory doğruladığından, kullanıcılarınızın çoklu oturum açma deneyimini elde edin.
-
 
 ## <a name="install-the-application-proxy-connector-and-publish-your-app"></a>Uygulama Ara sunucusu bağlayıcısını yüklemek ve uygulamanızı yayımlayın
 
@@ -42,19 +41,19 @@ Uygulama proxy'si aracılığıyla uygulama yayımladıktan sonra bunlar bir sek
 
 1. Bu uygulama ekleme ve seçmek için istediğiniz Teams kanalına gidin **+** sekme eklemek için.
 
-   ![Sekme Ekle](./media/application-proxy-integrate-with-teams/add-tab.png)
+   ![Seçin + Teams'de sekme eklemek için](./media/application-proxy-integrate-with-teams/add-tab.png)
 
-2. Seçin **Web sitesi** sekmesi seçenekleri.
+1. Seçin **Web sitesi** sekmesi seçenekleri.
 
-   ![Bir Web sitesi Ekle](./media/application-proxy-integrate-with-teams/website.png)
+   ![Web sitesi Ekle sekmesi ekran seçin](./media/application-proxy-integrate-with-teams/website.png)
 
-3. Sekme bir ad verin ve URL için uygulama proxy'si dış URL'yi ayarlayın. 
+1. Sekme bir ad verin ve URL için uygulama proxy'si dış URL'yi ayarlayın.
 
-   ![Sekme adı ve URL Yapılandır](./media/application-proxy-integrate-with-teams/tab-name-url.png)
+   ![Sekme adını ve dış URL Ekle](./media/application-proxy-integrate-with-teams/tab-name-url.png)
 
-Bir takım üyesi sekmesi ekler. sonra bu kanal herkes için gösterilir. Uygulamaya sahip tüm kullanıcılar için Microsoft Teams kullandıkları kimlik bilgileri ile çoklu oturum açma erişimi alın. Uygulamaya sahip olmayan kullanıcılardan teams'de sekmesinde görebilirsiniz, ancak bunları izinleri şirket içi uygulama ve uygulamayı Azure portalı yayımlanmış sürümüne size kadar engellenir. 
+Bir takım üyesi sekmesi ekler. sonra bu kanal herkes için gösterilir. Uygulamaya sahip tüm kullanıcılar için Microsoft Teams kullandıkları kimlik bilgileri ile çoklu oturum açma erişimi alın. Uygulamaya sahip olmayan kullanıcılardan teams'de sekmesinde görebilirsiniz, ancak bunları izinleri şirket içi uygulama ve uygulamayı Azure portalı yayımlanmış sürümüne size kadar engellenir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - Bilgi edinmek için nasıl [şirket içi SharePoint siteleri yayımlama](application-proxy-integrate-with-sharepoint-server.md) uygulama ara sunucusu ile.
-- Uygulamalarınızı kullanmak için yapılandırma [özel etki alanları](application-proxy-configure-custom-domain.md) , dış URL. 
+- Uygulamalarınızı kullanmak için yapılandırma [özel etki alanları](application-proxy-configure-custom-domain.md) , dış URL.

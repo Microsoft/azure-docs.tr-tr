@@ -1,6 +1,6 @@
 ---
-title: Azure Active Directory'de Web uygulamaları
-description: Web apps nedir ve temel Protokolü akış, kayıt ve bu uygulama türü için belirteci süre sonu açıklar.
+title: Azure Active Directory Web Apps
+description: Bu uygulama türü için Web uygulamalarının ne olduğunu ve protokol akışı, kayıt ve belirteç süre sonu hakkındaki temel bilgileri açıklar.
 services: active-directory
 documentationcenter: ''
 author: rwike77
@@ -17,44 +17,44 @@ ms.author: ryanwi
 ms.reviewer: saeeda, jmprieur, andret
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d15d76f4c16fa89b41ebfc10c9617c4709203d38
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3d41cd23d551e4834bf6b94f513e36ff46c1cd45
+ms.sourcegitcommit: 0576bcb894031eb9e7ddb919e241e2e3c42f291d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65544718"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72373657"
 ---
 # <a name="web-apps"></a>Web uygulamaları
 
-Web apps, bir kullanıcının bir web uygulaması için bir web tarayıcısında kimliğini uygulamalardır. Bu senaryoda, Azure AD'de oturum açmak için kullanıcının tarayıcısına web uygulamasının yönlendirir. Azure AD oturum açma yanıt içeren bir güvenlik belirteci kullanıcı hakkında talepler kullanıcının tarayıcısından döndürür. Bu senaryo, Openıd Connect, SAML 2.0 ve WS-Federasyon protokollerini kullanarak oturum açmayı destekler.
+Web Apps, Web tarayıcısında bir kullanıcının kimliğini bir Web uygulamasına doğrulayan uygulamalardır. Bu senaryoda Web uygulaması, kullanıcının tarayıcısını Azure AD 'de oturum açmak üzere yönlendirir. Azure AD, kullanıcının tarayıcısı aracılığıyla bir güvenlik belirtecinde Kullanıcı hakkında talepler içeren bir oturum açma yanıtı döndürür. Bu senaryo, OpenID Connect, SAML 2,0 ve WS-Federation protokollerini kullanarak oturum açmayı destekler.
 
 ## <a name="diagram"></a>Diyagram
 
-![Tarayıcıdan web uygulamasına yönelik kimlik doğrulama akışı](./media/authentication-scenarios/web_browser_to_web_api.png)
+![Tarayıcı için Web uygulamasına yönelik kimlik doğrulama akışı](./media/authentication-scenarios/web_browser_to_web_api.png)
 
-## <a name="protocol-flow"></a>Akış Protokolü
+## <a name="protocol-flow"></a>Protokol akışı
 
-1. Bir kullanıcı oturum açmak için gereksinimleri ve uygulama ziyaret ettiğinde, bir oturum açma isteği için kimlik doğrulama uç noktası aracılığıyla Azure AD'de yönlendirilir.
-1. Oturum açma sayfasında oturum açtığında kullanıcı.
-1. Kimlik doğrulaması başarılı olursa, Azure AD kimlik doğrulama belirteci oluşturur ve uygulamanın yanıt URL'si Azure portalında yapılandırılmış bir oturum açma yanıtı döndürür. Bir üretim uygulaması için bu yanıt URL'si HTTPS olmalıdır. Döndürülen belirteç, Azure AD ve kullanıcı belirteci doğrulamak için uygulama tarafından gerekli olan talepleri içerir.
-1. Uygulama, bir ortak imzalama anahtar ve veren bilgi kullanılabilir Azure AD için Federasyon meta veri belge kullanarak belirteci doğrular. Uygulama belirteci doğruladıktan sonra kullanıcı ile yeni bir oturum başlatır. Bu oturumun süresi sona erene kadar uygulamaya erişmek kullanıcı izin verir.
+1. Bir Kullanıcı uygulamayı ziyaret ettiğinde ve oturum açması gerektiğinde, Azure AD 'de kimlik doğrulama uç noktası için bir oturum açma isteği aracılığıyla yeniden yönlendirilir.
+1. Kullanıcı oturum açma sayfasında oturum açar.
+1. Kimlik doğrulaması başarılı olursa, Azure AD bir kimlik doğrulama belirteci oluşturur ve uygulamanın Azure portal yapılandırılan yanıt URL 'sine bir oturum açma yanıtı döndürür. Bir üretim uygulaması için, bu yanıt URL 'SI HTTPS olmalıdır. Döndürülen belirteç, Kullanıcı ve belirteci doğrulamak için uygulamanın gerektirdiği Azure AD taleplerini içerir.
+1. Uygulama, Azure AD için Federasyon meta verileri belgesinde bulunan ortak bir imzalama anahtarı ve veren bilgilerini kullanarak belirteci doğrular. Uygulama belirteci doğruladıktan sonra, Kullanıcı ile yeni bir oturum başlatır. Bu oturum, kullanıcının süresi dolana kadar uygulamaya erişmesine izin verir.
 
 ## <a name="code-samples"></a>Kod örnekleri
 
-Web tarayıcısına web uygulaması senaryoları için kod örneklere bakın. Ve, sık sık yeni örnekler eklendikçe yeniden denetleyin.
+Web tarayıcısı için kod örneklerine bakın Web uygulaması senaryoları. Yeni örnekler sık sık eklendikçe, daha sonra da yeniden kontrol edin.
 
 ## <a name="app-registration"></a>Uygulama kaydı
 
-Bir web uygulamasını kaydetmek için bkz: [bir uygulamayı kaydetme](quickstart-register-app.md).
+Bir Web uygulamasını kaydetmek için bkz. [uygulamayı kaydetme](quickstart-register-app.md).
 
-* Tek bir Kiracı - yalnızca kuruluşunuz için bir uygulama oluşturuyorsanız, bunu şirketinizin dizininde Azure portalını kullanarak kayıtlı olması gerekir.
-* Çok kiracılı - kuruluşunuzun dışındaki kullanıcılar tarafından kullanılabilen bir uygulama oluşturuyorsanız bunu şirketinizin dizinde kayıtlı olması gerekir, ancak da uygulamayı kullanarak her kuruluşun dizininde kayıtlı olması gerekir. Uygulamanızı directory'lerinde kullanılabilir hale getirme için uygulamanıza onay verme tanıyan müşterileriniz için bir kayıt işlemi dahil edebilirsiniz. Bunlar, uygulamanız için oturum açarken uygulama izinleri gösteren bir iletişim kutusu, ardından onay seçeneği ile sunulur. Gerekli izinlere bağlı olarak diğer kuruluştaki bir yöneticisinin izni vermek için gerekebilir. Kullanıcı veya yönetici onay verdiğinde, uygulama, dizinde kayıtlı.
+* Tek kiracı-yalnızca kuruluşunuz için bir uygulama oluşturuyorsanız, Azure portal kullanılarak şirketinizin dizinine kayıtlı olması gerekir.
+* Çok kiracılı-kuruluşunuzun dışındaki kullanıcılar tarafından kullanılabilecek bir uygulama oluşturuyorsanız, şirketinizin dizinine kayıtlı olması gerekir, ancak aynı zamanda uygulamanın kullanacağı her bir kuruluşun dizinine kayıtlı olması gerekir. Uygulamanızı dizininde kullanılabilir hale getirmek için müşterilerinizin uygulamanıza izin vermesini sağlayan bir kaydolma işlemi ekleyebilirsiniz. Uygulamanıza kaydolduklarında, uygulamaya gereken izinleri gösteren bir iletişim kutusu görüntülenir ve ardından onay seçeneği sunulur. Gerekli izinlere bağlı olarak, diğer kuruluştaki bir yöneticinin onay vermesi gerekebilir. Kullanıcı veya yönetici, uygulama kendi dizinine kaydedilir.
 
 ## <a name="token-expiration"></a>Belirteç süre sonu
 
-Azure AD tarafından verilen belirtecin süresi dolduğunda, kullanıcının oturum sona erer. Uygulamanızı bir işlem yapılmadan geçen süre üzerinde bağlı olarak kullanıcılara imzalama gibi isterseniz, bu süre içinde kısaltabilirsiniz. Oturumun süresi dolduğunda, kullanıcı yeniden oturum açmanız istenir.
+Azure AD tarafından verilen belirtecin ömrü sona erdiğinde kullanıcının oturumunun süresi dolar. Uygulamanız, istenirse bu zaman dilimini kısaltıp bir süre işlem yapılmayan bir döneme göre Kullanıcı oturumu açabilir. Oturumun süresi dolarsa, kullanıcıdan yeniden oturum açması istenir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Diğer hakkında daha fazla bilgi [uygulama türleri ve senaryolar](app-types.md)
-* Azure AD hakkında bilgi edinin [kimlik doğrulaması temelleri](authentication-scenarios.md)
+* Diğer [uygulama türleri ve senaryolar](app-types.md) hakkında daha fazla bilgi edinin
+* Azure AD [kimlik doğrulaması temelleri](v1-authentication-scenarios.md) hakkında bilgi edinin

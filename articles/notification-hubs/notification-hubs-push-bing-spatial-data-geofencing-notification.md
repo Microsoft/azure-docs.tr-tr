@@ -1,12 +1,12 @@
 ---
-title: Azure Notification Hubs ve Bing Uzamsal Veri ile coğrafi bölge sınırlamalı anında iletme bildirimleri | Microsoft Belgeleri
+title: Azure Notification Hubs ve Bing uzamsal verileri kullanarak anında iletme bildirimleri gönderin | Microsoft Docs
 description: Bu öğreticide, Azure Notification Hubs ve Bing Uzamsal Veri ile konum temelli anında iletme bildirimleri göndermeyi öğreneceksiniz.
 services: notification-hubs
 documentationcenter: windows
-keywords: anında iletme bildirimi, anında iletme bildirimi
-author: jwargo
-manager: patniko
-editor: spelluru
+keywords: anında iletme bildirimleri, anında iletme bildirimleri
+author: sethmanheim
+manager: femila
+editor: jwargo
 ms.assetid: f41beea1-0d62-4418-9ffc-c9d70607a1b7
 ms.service: notification-hubs
 ms.workload: mobile
@@ -15,15 +15,17 @@ ms.devlang: dotnet
 ms.topic: tutorial
 ms.custom: mvc
 ms.date: 01/04/2019
-ms.author: jowargo
-ms.openlocfilehash: 9baeb1c21252f8b7f7b24debde48108532d9865c
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.author: sethm
+ms.reviewer: jowargo
+ms.lastreviewed: 01/04/2019
+ms.openlocfilehash: 510e2648db3076a0e3ee2535c6058f7ed212f558
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61460174"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72387491"
 ---
-# <a name="tutorial-push-location-based-notifications-with-azure-notification-hubs-and-bing-spatial-data"></a>Öğretici: Azure Notification Hubs ve Bing uzamsal veri ile konum temelli bildirimler gönderme
+# <a name="tutorial-send-location-based-push-notifications-with-azure-notification-hubs-and-bing-spatial-data"></a>Öğretici: Azure Notification Hubs ve Bing uzamsal veriler ile konum temelli anında iletme bildirimleri gönderme
 
 Bu öğreticide, Azure Notification Hubs ve Bing Uzamsal Veri ile konum temelli anında iletme bildirimleri göndermeyi öğreneceksiniz.
 
@@ -37,7 +39,7 @@ Bu öğreticide, aşağıdaki adımları gerçekleştireceksiniz:
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* **Azure aboneliği**. Azure aboneliğiniz yoksa, [ücretsiz bir Azure hesabı oluşturun](https://azure.microsoft.com/free/) başlamadan önce.
+* **Azure aboneliği**. Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir Azure hesabı oluşturun](https://azure.microsoft.com/free/) .
 * [Visual Studio 2015 Güncelleştirme 1](https://www.visualstudio.com/downloads/download-visual-studio-vs.aspx) veya üzeri ([Community Edition](https://go.microsoft.com/fwlink/?LinkId=691978&clcid=0x409)).
 * [Azure SDK](https://azure.microsoft.com/downloads/)'nın en son sürümü.
 * [Bing Haritalar Geliştirme Merkezi hesabı](https://www.bingmapsportal.com/) (ücretsiz bir tane oluşturabilir ve Microsoft hesabınızla ilişkilendirebilirsiniz).
@@ -51,7 +53,7 @@ Bu öğreticide, aşağıdaki adımları gerçekleştireceksiniz:
 3. Bir veri kaynağınız yoksa, veri kaynağı oluşturma bağlantısını görürsünüz. **Veri kaynağı olarak yükle**’yi seçin. Ayrıca **Veri kaynakları** > **Veri yükle** menüsünü kullanabilirsiniz.
 
     ![](./media/notification-hubs-geofence/bing-maps-create-data.png)
-4. Bir dosya oluşturun `NotificationHubsGeofence.pipe` aşağıdaki içeriğe sahip sabit sürücünüzde: Bu öğreticide, bir San Francisco rıhtımının alanı çerçeve bir örnek kanal tabanlı dosya kullanın:
+4. Aşağıdaki içeriğe sahip sabit sürücünüzde bir dosya @no__t (0) oluşturun: Bu öğreticide, San Francisco kasasının bir alanını gösteren örnek bir kanal tabanlı dosya kullanırsınız:
 
     ```text
     Bing Spatial Data Services, 1.0, TestBoundaries
@@ -64,7 +66,7 @@ Bu öğreticide, aşağıdaki adımları gerçekleştireceksiniz:
     ![](./media/notification-hubs-geofence/bing-maps-geofence.png)
 5. **Veri kaynağını karşıya yükleyin** sayfasında aşağıdaki eylemleri yapın:
    1. **Veri biçimi** için **kanal**’ı seçin.
-   2. Göz atın ve seçim `NotificationHubGeofence.pipe` önceki adımda oluşturulan dosya.
+   2. Önceki adımda oluşturduğunuz `NotificationHubGeofence.pipe` dosyasına gözatıp seçin.
    3. **Karşıya Yükle** düğmesini seçin.
 
       > [!NOTE]

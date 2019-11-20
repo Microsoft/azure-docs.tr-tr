@@ -1,74 +1,76 @@
 ---
-title: PowerShell - Azure ile HDInsight Apache Hadoop kümelerini yönetme
-description: Azure PowerShell kullanarak HDInsight, Apache Hadoop kümeleri için yönetim görevlerini gerçekleştirmeyi öğreneceksiniz.
-ms.reviewer: tyfox
+title: PowerShell ile Apache Hadoop kümelerini yönetme-Azure HDInsight
+description: Azure PowerShell kullanarak HDInsight 'ta Apache Hadoop kümeleri için yönetim görevleri gerçekleştirmeyi öğrenin.
 author: hrasheed-msft
+ms.author: hrasheed
+ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 04/17/2019
-ms.author: tylerfox
-ms.openlocfilehash: f7c894bcb3183714a76578a6750c8e85493e3094
-ms.sourcegitcommit: 79496a96e8bd064e951004d474f05e26bada6fa0
+ms.openlocfilehash: b3cdc673d5d99229e3e6934d85cae55f79590830
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67508066"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73494398"
 ---
-# <a name="manage-apache-hadoop-clusters-in-hdinsight-by-using-azure-powershell"></a>Azure PowerShell kullanarak HDInsight Apache Hadoop kümelerini yönetme
+# <a name="manage-apache-hadoop-clusters-in-hdinsight-by-using-azure-powershell"></a>HDInsight 'ta Azure PowerShell kullanarak Apache Hadoop kümelerini yönetme
 [!INCLUDE [selector](../../includes/hdinsight-portal-management-selector.md)]
 
-Azure PowerShell, denetlemek ve iş yüklerinizi azure'da yönetimini ve dağıtımı otomatik hale getirmek için kullanılabilir. Bu makalede, nasıl yöneteceğinizi öğrenin [Apache Hadoop](https://hadoop.apache.org/) Az Azure PowerShell modülünü kullanarak Azure HDInsight kümeleri. HDInsight PowerShell cmdlet'leri listesi için bkz: [Az.HDInsight başvuru](https://docs.microsoft.com/powershell/module/az.hdinsight).
+Azure PowerShell, Azure 'da iş yüklerinizin dağıtımını ve yönetimini denetlemek ve otomatik hale getirmek için kullanılabilir. Bu makalede, Azure PowerShell az modülünü kullanarak Azure HDInsight 'ta [Apache Hadoop](https://hadoop.apache.org/) kümelerini yönetmeyi öğreneceksiniz. HDInsight PowerShell cmdlet 'lerinin listesi için, [az. HDInsight başvurusuna](https://docs.microsoft.com/powershell/module/az.hdinsight)bakın.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
+[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+
 * Azure aboneliği. Bkz. [Azure ücretsiz deneme sürümü alma](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/).
 
-* PowerShell [Az modül](https://docs.microsoft.com/powershell/azure/overview) yüklü.
+* PowerShell [az Module](https://docs.microsoft.com/powershell/azure/overview) yüklendi.
 
 ## <a name="create-clusters"></a>Küme oluşturma
-Bkz: [Azure PowerShell kullanarak HDInsight oluşturma Linux tabanlı kümeler](hdinsight-hadoop-create-linux-clusters-azure-powershell.md)
+Bkz. [Azure PowerShell kullanarak HDInsight 'Ta Linux tabanlı kümeler oluşturma](hdinsight-hadoop-create-linux-clusters-azure-powershell.md)
 
-## <a name="list-clusters"></a>Kümeleri listeleme
-Geçerli Abonelikteki tüm kümelerini listelemek için aşağıdaki komutu kullanın:
+## <a name="list-clusters"></a>Kümeleri Listele
+Geçerli abonelikteki tüm kümeleri listelemek için aşağıdaki komutu kullanın:
 
 ```powershell
 Get-AzHDInsightCluster
 ```
 
-## <a name="show-cluster"></a>Kümenin Göster
-Geçerli abonelikte belirli bir küme ayrıntılarını görüntülemek için aşağıdaki komutu kullanın:
+## <a name="show-cluster"></a>Kümeyi göster
+Geçerli abonelikteki belirli bir kümenin ayrıntılarını göstermek için aşağıdaki komutu kullanın:
 
 ```powershell
 Get-AzHDInsightCluster -ClusterName <Cluster Name>
 ```
 
 ## <a name="delete-clusters"></a>Kümeleri Sil
-Bir kümeyi silmek için aşağıdaki komutu kullanın:
+Kümeyi silmek için aşağıdaki komutu kullanın:
 
 ```powershell
 Remove-AzHDInsightCluster -ClusterName <Cluster Name>
 ```
 
-Kümeyi içeren kaynak grubunu kaldırarak bir küme de silebilirsiniz. Bir kaynak grubunun silinmesi, varsayılan depolama hesabı dahil olmak üzere grubundaki tüm kaynakları siler.
+Kümeyi içeren kaynak grubunu kaldırarak da bir kümeyi silebilirsiniz. Bir kaynak grubunu silmek, varsayılan depolama hesabı da dahil olmak üzere gruptaki tüm kaynakları siler.
 
 ```powershell
 Remove-AzResourceGroup -Name <Resource Group Name>
 ```
 
 ## <a name="scale-clusters"></a>Kümeleri ölçeklendirme
-Özellik ölçeklendirme kümesi Azure HDInsight kümesini yeniden oluşturmak zorunda kalmadan çalışan bir küme tarafından kullanılan çalışan düğümlerinin sayısını değiştirmenize izin verir.
+Küme ölçekleme özelliği, kümeyi yeniden oluşturmaya gerek kalmadan Azure HDInsight 'ta çalışan bir küme tarafından kullanılan çalışan düğümlerinin sayısını değiştirmenize izin verir.
 
-HDInsight tarafından desteklenen küme her tür veri düğümü sayısı değiştirmenin etkisi:
+HDInsight tarafından desteklenen her küme türü için veri düğümlerinin sayısını değiştirmenin etkisi:
 
 * Apache Hadoop
 
-    Sorunsuz bir şekilde, bekleyen veya çalışan tüm işleri etkilemeden çalışan bir Hadoop kümesinde çalışan düğümleri sayısını artırabilirsiniz. İşlem devam ederken yeni işleri da gönderilebilir. Böylece küme her zaman işlevsel bir durumda bırakılır bir ölçeklendirme işlemi hataları düzgün bir şekilde ele alınır.
+    Bekleyen veya çalışan bir işi etkilemeden, çalışan bir Hadoop kümesinde çalışan düğümlerinin sayısını sorunsuzca artırabilirsiniz. İşlem devam ederken yeni işler de gönderilebilir. Ölçeklendirme işlemindeki başarısızlık, kümenin her zaman işlevsel bir durumda bırakılması için düzgün şekilde işlenir.
 
-    Bir Hadoop kümesini veri düğümü sayısını azaltarak ölçeklendiğinde, kümedeki hizmetlerinden bazılarını yeniden başlatılır. Hizmetleri yeniden başlatma bekleyen işleri tüm çalışan ve ölçeklendirme işleminin tamamlanması sırasında başarısız olmasına neden olur. İşlemi tamamlandıktan sonra ancak, işleri yeniden oluşturabilirsiniz.
+    Bir Hadoop kümesi, veri düğümleri sayısını azaltarak aşağı ölçeklendirilirse, kümedeki hizmetlerin bazıları yeniden başlatılır. Hizmetleri yeniden başlatmak, tüm çalışan ve bekleyen işlerin ölçeklendirme işleminin tamamlanmasından sonra başarısız olmasına neden olur. Ancak, işlem tamamlandıktan sonra işleri yeniden gönderebilirsiniz.
 * Apache HBase
 
-    Sorunsuz bir şekilde ekleyebilir veya çalışırken düğümleri HBase kümenize kaldırın. Bölge sunucuları ölçeklendirme işlemi tamamladıktan birkaç dakika içinde otomatik olarak dengelenir. Ancak, el ile küme baş düğümüne oturum açarak bölgesel sunucular dengelemek ve ardından bir komut istemi penceresinden aşağıdaki komutları çalıştırın:
+    Çalışırken HBase kümenize düğümleri sorunsuzca ekleyebilir veya kaldırabilirsiniz. Bölgesel sunucular, ölçeklendirme işleminin tamamlanması birkaç dakika içinde otomatik olarak dengelenir. Ancak, kümenin baş düğümüne ' da oturum açarak bölgesel sunucuları el ile dengeleyebilir ve ardından bir komut istemi penceresinden aşağıdaki komutları çalıştırabilirsiniz:
 
     ```bash
     pushd %HBASE_HOME%\bin
@@ -78,20 +80,20 @@ HDInsight tarafından desteklenen küme her tür veri düğümü sayısı deği�
 
 * Apache Storm
 
-    Sorunsuz bir şekilde ekleyebilir veya çalışırken Storm kümenize veri düğümleri kaldırma. Ancak, ölçeklendirme işlemi başarıyla tamamlandıktan sonra topoloji yeniden dengelemeniz gerekir.
+    Veri düğümlerini, çalışırken fırtınası kümenize sorunsuzca ekleyebilir veya kaldırabilirsiniz. Ancak ölçeklendirme işleminin başarılı bir şekilde tamamlandıktan sonra topolojiyi yeniden dengelemeniz gerekir.
 
-    Yeniden Dengeleme iki şekilde gerçekleştirilebilir:
+    Yeniden dengeleme iki şekilde sağlanabilir:
 
-  * Storm web kullanıcı Arabirimi
-  * Komut satırı arabirimi (CLI) aracı
+  * Fırtınası Web Kullanıcı arabirimi
+  * Komut satırı arabirimi (CLı) aracı
 
-    Başvurmak [Apache Storm belgeleri](https://storm.apache.org/documentation/Understanding-the-parallelism-of-a-Storm-topology.html) daha fazla ayrıntı için.
+    Daha fazla bilgi için [Apache Storm belgelerine](https://storm.apache.org/documentation/Understanding-the-parallelism-of-a-Storm-topology.html) bakın.
 
-    HDInsight kümesinde Storm web kullanıcı Arabirimi kullanılabilir:
+    Fırtınası Web Kullanıcı arabirimi HDInsight kümesinde kullanılabilir:
 
-    ![HDInsight storm ölçek yeniden Dengeleme](./media/hdinsight-administer-use-powershell/hdinsight.portal.scale.cluster.png)
+    ![HDInsight fırtınası ölçeği yeniden dengeleme](./media/hdinsight-administer-use-powershell/portal-scale-cluster.png)
 
-    Storm topolojiyi yeniden dengelemek için CLI komutunu kullanmak nasıl bir örnek aşağıdadır:
+    Aşağıda, bir örneğin, bir fırtınası topolojisini yeniden dengelemek için CLı komutunun nasıl kullanılacağı gösterilmektedir:
 
     ```cli
     ## Reconfigure the topology "mytopology" to use 5 worker processes,
@@ -100,23 +102,23 @@ HDInsight tarafından desteklenen küme her tür veri düğümü sayısı deği�
     $ storm rebalance mytopology -n 5 -e blue-spout=3 -e yellow-bolt=10
     ```
 
-Azure PowerShell kullanarak Hadoop kümenizin boyutunu değiştirmek için bir istemci makineden aşağıdaki komutu çalıştırın:
+Azure PowerShell kullanarak Hadoop kümesi boyutunu değiştirmek için bir istemci makinesinden aşağıdaki komutu çalıştırın:
 
 ```powershell
 Set-AzHDInsightClusterSize -ClusterName <Cluster Name> -TargetInstanceCount <NewSize>
 ```
 
 
-## <a name="grantrevoke-access"></a>GRANT/revoke-access
-HDInsight kümeleri aşağıdaki HTTP web Hizmetleri (Bu hizmetlerin tümü, RESTful uç noktalarına sahip) sahip:
+## <a name="grantrevoke-access"></a>Erişim verme/iptal etme
+HDInsight kümeleri aşağıdaki HTTP Web hizmetlerine sahiptir (Bu hizmetlerin tümü, yeniden oluşan uç noktalara sahiptir):
 
 * ODBC
 * JDBC
 * Ambari
 * Oozie
-* Templeton da
+* Templeton
 
-Varsayılan olarak, bu hizmetler için erişim verilir. İptal etme / erişim izni. İptal etmek için:
+Varsayılan olarak, bu hizmetler erişim için verilir. Erişimi iptal edebilir/atayabilirsiniz. İptal etmek için:
 
 ```powershell
 Revoke-AzHDInsightHttpServicesAccess -ClusterName <Cluster Name>
@@ -140,15 +142,15 @@ Grant-AzHDInsightHttpServicesAccess -ClusterName $clusterName -HttpCredential $c
 ```
 
 > [!NOTE]  
-> Verme/erişimini iptal ederek, küme kullanıcı adını ve parolasını sıfırlayın.
+> Erişimi vererek/iptal ederek, küme kullanıcı adını ve parolasını sıfırladınız.
 
-Ayrıca verme ve erişimi iptal ediliyor portalı üzerinden yapılabilir. Bkz: [yönetme Apache Hadoop, Azure portalını kullanarak HDInsight kümeleri](hdinsight-administer-use-portal-linux.md).
+Erişim verme ve iptal etme, Portal üzerinden de yapılabilir. Bkz. [HDInsight 'ta Apache Hadoop kümelerini Azure Portal kullanarak yönetme](hdinsight-administer-use-portal-linux.md).
 
-## <a name="update-http-user-credentials"></a>HTTP kullanıcısı kimlik bilgilerini güncelleştirme
-Aynı Grant/revoke HTTP erişim yordam var. Kümenin HTTP erişim verilmişse, öncelikle iptal gerekir.  ' İ tıklatın ve ardından yeni HTTP kullanıcı kimlik bilgileriyle erişim verin.
+## <a name="update-http-user-credentials"></a>HTTP Kullanıcı kimlik bilgilerini güncelleştirme
+HTTP erişimini verme/iptal etme ile aynı yordamdır. Kümeye HTTP erişimi verildiyse, önce onu iptal etmeniz gerekir.  Ardından, yeni HTTP Kullanıcı kimlik bilgileriyle erişime izin verin.
 
-## <a name="find-the-default-storage-account"></a>Varsayılan depolama hesabı bulunamadı
-Aşağıdaki PowerShell Betiği, varsayılan depolama hesabı adını ve ilgili bilgi almak gösterilmektedir:
+## <a name="find-the-default-storage-account"></a>Varsayılan depolama hesabını bulun
+Aşağıdaki PowerShell betiği, varsayılan depolama hesabı adının ve ilgili bilgilerin nasıl alınacağını gösterir:
 
 ```powershell
 #Connect-AzAccount
@@ -174,8 +176,8 @@ if ($defaultStoreageType -eq "blob")
 ```
 
 
-## <a name="find-the-resource-group"></a>Kaynak Grup bulunamıyor
-Resource Manager modunda her HDInsight kümesinde bir Azure kaynak grubuna aittir.  Kaynak grubunu bulmak için:
+## <a name="find-the-resource-group"></a>Kaynak grubunu bulma
+Kaynak Yöneticisi modunda, her HDInsight kümesi bir Azure Kaynak grubuna aittir.  Kaynak grubunu bulmak için:
 
 ```powershell
 $clusterName = "<HDInsight Cluster Name>"
@@ -185,32 +187,32 @@ $resourceGroupName = $cluster.ResourceGroup
 ```
 
 
-## <a name="submit-jobs"></a>İş gönderme
-**MapReduce işleri göndermek için**
+## <a name="submit-jobs"></a>İşleri gönder
+**MapReduce işlerini göndermek için**
 
-Bkz: [dahil HDInsight MapReduce örneklerini çalıştırma](hadoop/apache-hadoop-run-samples-linux.md).
+Bkz. [HDInsight 'ta bulunan MapReduce örneklerini çalıştırma](hadoop/apache-hadoop-run-samples-linux.md).
 
 **Apache Hive işleri göndermek için**
 
-Bkz: [PowerShell kullanarak Apache Hive sorgularını çalıştırma](hadoop/apache-hadoop-use-hive-powershell.md).
+Bkz. [PowerShell kullanarak Apache Hive sorguları çalıştırma](hadoop/apache-hadoop-use-hive-powershell.md).
 
 **Apache Sqoop işleri göndermek için**
 
-Bkz: [HDInsight ile Apache Sqoop'u kullanma](hadoop/hdinsight-use-sqoop.md).
+Bkz. [HDInsight Ile Apache Sqoop kullanma](hadoop/hdinsight-use-sqoop.md).
 
-**Apache Oozie iş göndermek için**
+**Apache Oozie işleri göndermek için**
 
-Bkz: [tanımlamak ve iş akışı çalıştırma HDInsight için Apache Hadoop ile Apache Oozie kullanma](hdinsight-use-oozie-linux-mac.md).
+Bkz. [HDInsight 'ta bir iş akışı tanımlamak ve çalıştırmak için Apache Hadoop Ile Apache Oozie kullanma](hdinsight-use-oozie-linux-mac.md).
 
 ## <a name="upload-data-to-azure-blob-storage"></a>Azure Blob depolama alanına veri yükleme
 
-Bkz: [HDInsight için verileri karşıya yükleme](hdinsight-upload-data.md).
+Bkz. [HDInsight 'a veri yükleme](hdinsight-upload-data.md).
 
 ## <a name="see-also"></a>Ayrıca Bkz.
 
 * [HDInsight cmdlet başvurusu belgeleri](https://msdn.microsoft.com/library/azure/dn479228.aspx)
-* [Azure portalını kullanarak HDInsight Apache Hadoop kümelerini yönetme](hdinsight-administer-use-portal-linux.md)
-* [Bir komut satırı arabirimi ile HDInsight'ı yönetme](hdinsight-administer-use-command-line.md)
+* [HDInsight 'ta Apache Hadoop kümelerini Azure portal kullanarak yönetin](hdinsight-administer-use-portal-linux.md)
+* [Bir komut satırı arabirimi kullanarak HDInsight 'ı yönetme](hdinsight-administer-use-command-line.md)
 * [HDInsight kümeleri oluşturma](hdinsight-hadoop-provision-linux-clusters.md)
-* [Program aracılığıyla Apache Hadoop işlerini gönderme](hadoop/submit-apache-hadoop-jobs-programmatically.md)
-* [Azure HDInsight ile çalışmaya başlama](hadoop/apache-hadoop-linux-tutorial-get-started.md)
+* [Apache Hadoop işleri programlı olarak gönderme](hadoop/submit-apache-hadoop-jobs-programmatically.md)
+* [Azure HDInsight 'ı kullanmaya başlama](hadoop/apache-hadoop-linux-tutorial-get-started.md)

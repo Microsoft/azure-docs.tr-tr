@@ -1,37 +1,40 @@
 ---
-title: Azure Veri Gezgini'ni kullanarak Azure Data Lake veri sorgulama
-description: Azure Veri Gezgini'ni kullanarak Azure Data Lake veri sorgulamayı öğrenin.
+title: Azure Data Lake Azure Veri Gezgini kullanarak verileri sorgulama
+description: Azure Data Lake Azure Veri Gezgini kullanarak verileri sorgulamayı öğrenin.
 author: orspod
 ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 06/25/2019
-ms.openlocfilehash: d6a58d144482e17f7e4b615134115d1da46af6f0
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.date: 07/17/2019
+ms.openlocfilehash: b0056df16dccaf1dc7e94aad1a2c6c262ffd89ee
+ms.sourcegitcommit: 49c4b9c797c09c92632d7cedfec0ac1cf783631b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67453183"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70383371"
 ---
-# <a name="query-data-in-azure-data-lake-using-azure-data-explorer-preview"></a>Azure Data Lake, Azure Veri Gezgini (Önizleme) kullanarak verileri Sorgulama
+# <a name="query-data-in-azure-data-lake-using-azure-data-explorer-preview"></a>Azure Data Lake Azure Veri Gezgini kullanarak verileri sorgulama (Önizleme)
 
-Azure Data Lake Store, büyük veri analizi için yüksek oranda ölçeklenebilir ve ekonomik veri lake çözümüdür. İçgörülere daha hızlı bir şekilde ulaşabilmeniz için yüksek performanslı dosya sisteminin gücünü büyük ölçek ve tasarrufla sunar. Analiz iş yükleri için iyileştirilmiş olan Data Lake Storage Gen2, Azure Blob Depolama özelliklerini geliştirir.
+Azure Data Lake Storage, büyük veri analizi için yüksek düzeyde ölçeklenebilir ve ekonomik bir Data Lake çözümüdür. İçgörülere daha hızlı bir şekilde ulaşabilmeniz için yüksek performanslı dosya sisteminin gücünü büyük ölçek ve tasarrufla sunar. Analiz iş yükleri için iyileştirilmiş olan Data Lake Storage Gen2, Azure Blob Depolama özelliklerini geliştirir.
  
-Azure Veri Gezgini, Azure Blob Depolama ile tümleşir ve Azure Data Lake depolama hızlı sağlama Gen2, önbelleğe alınmış ve veri gölü'nde erişim dizini. Analiz ve veri gölü, Azure Veri Gezgini içine önceki alma olmadan'nde sorgu. Alınan ve uningested yerel lake veri üzerinde aynı anda sorgulayabilirsiniz.  
+Azure Veri Gezgini, Azure Blob depolama ve Azure Data Lake Storage 2. tümleştirilerek, Gölü verilere hızlı, önbelleğe alınmış ve dizinli erişim sağlar. Azure Veri Gezgini 'a girmeden önce Gölü verileri analiz edebilir ve sorgulayabilirsiniz. Ayrıca, alınan ve toplanan yerel Gölü verileri aynı anda sorgulayabilirsiniz.  
 
 > [!TIP]
-> Azure Veri Gezgini içinde veri alımı en iyi sorgu performansını gerektirir. Azure Data Lake depolama Gen2 verilerde sorgu önceki alma olmadan özelliği yalnızca geçmiş verileri veya nadiren sorgulanan veriler için kullanılmalıdır.
+> En iyi sorgu performansı, verileri Azure Veri Gezgini 'e göre gerekli hale getiriliyor. Önceki giriş yapılmadan Azure Data Lake Storage 2. verileri sorgulama özelliği yalnızca geçmiş veriler veya nadiren sorgulanan veriler için kullanılmalıdır.
  
-## <a name="optimize-query-performance-in-the-lake"></a>Gölü'nde sorgu performansını iyileştirme 
+## <a name="optimize-query-performance-in-the-lake"></a>Gölü sorgu performansını iyileştirme 
 
-* Performans ve en iyi duruma getirilmiş sorgu süresini bölüm veri.
-* (En iyi sıkıştırma gzip, en iyi performans için lz4) performansı için verileri sıkıştırın.
-* Azure Veri Gezgini kümeniz ile aynı bölgede ile Azure Blob Depolama veya Azure Data Lake depolama Gen2'ı kullanın. 
+* İyileştirilmiş performans ve iyileştirilmiş sorgu süresi için verileri bölümleme.
+* İyileştirilmiş performans (en iyi performans için lz4) için verileri sıkıştırın.
+* Azure Blob depolama veya Azure Data Lake Storage 2. Azure Veri Gezgini kümenizle aynı bölge ile kullanın. 
 
-## <a name="create-an-external-table"></a>Bir dış tablo oluşturma
+## <a name="create-an-external-table"></a>Dış tablo oluşturma
 
-1. Kullanım `.create external table` Azure veri Gezgini'nde bir dış tablo oluşturma için komutu. Yeni bir dış tablo gibi komutları `.show`, `.drop`, ve `.alter` bölümünde belgelendirilen [dış tablo komutları](/azure/kusto/management/externaltables).
+ > [!NOTE]
+ > Şu anda desteklenen depolama hesapları Azure Blob depolama veya Azure Data Lake Storage 2. Şu anda desteklenen veri biçimleri JSON, CSV, TSV ve txt ' dir.
+
+1. Azure Veri Gezgini 'de dış tablo oluşturmak için komutunukullanın.`.create external table` `.show` ,`.drop`Ve gibi`.alter` ek dış tablo komutları [dış tablo komutlarında](/azure/kusto/management/externaltables)belgelenmiştir.
 
     ```Kusto
     .create external table ArchivedProducts(
@@ -42,38 +45,74 @@ Azure Veri Gezgini, Azure Blob Depolama ile tümleşir ve Azure Data Lake depola
     dataformat=csv (h@'http://storageaccount.blob.core.windows.net/container1;secretKey') 
     with (compressed = true)  
     ```
-
-    Bu sorgu, günlük bölümler oluşturur *container1/yyyy/MM/dd/all_exported_blobs.csv*. Performans artışı ile daha ayrıntılı bölümleme bekleniyor. Örneğin, sorgular Yukarıdakilerden biri gösterildiği gibi günlük bölümler ile dış tablolar üzerinden aylık bölümlenmiş tabloları ile bu sorgular daha iyi performans sahip olur.
-
+    
     > [!NOTE]
-    > Şu anda desteklenen depolama hesapları, Azure Blob Depolama veya Azure Data Lake depolama Gen2 ' dir. Şu anda desteklenen veri biçimlerini, csv, tsv ve txt vardır.
+    > * Daha ayrıntılı bölümlendirme ile artan performans beklenir. Örneğin, günlük bölümleri olan dış tablolar üzerinde sorgular, aylık bölümlenmiş tablolarla bu sorgulardan daha iyi performansa sahip olacaktır.
+    > * Bölümler içeren bir dış tablo tanımladığınızda, depolama yapısının aynı olması beklenir.
+Örneğin, tablo YYYY/AA/GG biçiminde bir tarih saat bölümüyle tanımlanmışsa (varsayılan), URI depolama dosya yolu *kapsayıcı1/yyyy/aa/gg/all_exported_blobs*olmalıdır. 
+    > * Dış tablo bir tarih saat sütunuyla bölümlense, sorgunuza kapalı bir Aralık için her zaman bir zaman filtresi ekleyin (örneğin, sorgu- `ArchivedProducts | where Timestamp between (ago(1h) . 10m)` -bundan daha iyi (açılan Aralık) bir- `ArchivedProducts | where Timestamp > ago(1h)` ) gerçekleştirmelidir. 
 
-1. Dış tablo Web kullanıcı arabirimini'nın sol bölmesinde görünür
+1. Dış tablo, Web Kullanıcı arabiriminin sol bölmesinde görünür
 
-    ![Dış tablo Web kullanıcı Arabirimi](media/data-lake-query-data/external-tables-web-ui.png)
+    ![Web Kullanıcı arabiriminde dış tablo](media/data-lake-query-data/external-tables-web-ui.png)
+
+### <a name="create-an-external-table-with-json-format"></a>JSON biçiminde bir dış tablo oluşturma
+
+JSON biçiminde bir dış tablo oluşturabilirsiniz. Daha fazla bilgi için bkz. [dış tablo komutları](/azure/kusto/management/externaltables)
+
+1. *Externaltablejson*adlı bir tablo oluşturmak için komutunukullanın:`.create external table`
+
+    ```kusto
+    .create external table ExternalTableJson (rownumber:int, rowguid:guid) 
+    kind=blob
+    dataformat=json
+    ( 
+       h@'http://storageaccount.blob.core.windows.net/container1;secretKey'
+    )
+    with 
+    (
+       docstring = "Docs",
+       folder = "ExternalTables",
+       namePrefix="Prefix"
+    ) 
+    ```
  
+1. JSON biçimi, aşağıda gösterildiği gibi sütunlara eşleme oluşturma konusunda ikinci bir adım gerektirir. Aşağıdaki sorguda, *MappingName*adlı belirli bir JSON eşlemesi oluşturun:
+
+    ```kusto
+    .create external table ExternalTableJson json mapping "mappingName" '[{ "column" : "rownumber", "datatype" : "int", "path" : "$.rownumber"},{ "column" : "rowguid", "path" : "$.rowguid" }]' 
+    ```
+
 ### <a name="external-table-permissions"></a>Dış tablo izinleri
  
-* Veritabanı kullanıcısı, bir dış tablo oluşturabilirsiniz. Tablo Oluşturucusu otomatik olarak tablo yönetici olur.
-* Küme, veritabanı veya tablo yönetici mevcut bir tabloyu düzenleyebilirsiniz.
-* Herhangi bir veritabanı kullanıcısı veya okuyucu bir dış tablo sorgulayabilirsiniz.
+* Veritabanı kullanıcısı bir dış tablo oluşturabilir. Tablo Oluşturucu otomatik olarak tablo Yöneticisi olur.
+* Küme, veritabanı veya tablo Yöneticisi mevcut bir tabloyu düzenleyebilir.
+* Herhangi bir veritabanı kullanıcısı veya okuyucu, bir dış tabloyu sorgulayabilir.
  
-## <a name="query-an-external-table"></a>Sorgu bir dış tablo
+## <a name="query-an-external-table"></a>Dış tabloyu sorgulama
  
-Dış bir tabloyu sorgulamak üzere kullanmak `external_table()` işlev ve işlev bağımsız değişken olarak tablo adı sağlayın. Sorgu geri kalanı standart Kusto sorgu dilidir.
+Bir dış tabloyu sorgulamak için `external_table()` işlevini kullanın ve işlev bağımsız değişkeni olarak tablo adını sağlayın. Sorgunun geri kalanı standart kusto sorgu dilidir.
 
 ```Kusto
 external_table("ArchivedProducts") | take 100
 ```
 
 > [!TIP]
-> IntelliSense, dış tablo sorguları üzerinde şu anda desteklenmemektedir.
+> IntelliSense, dış tablo sorgularında Şu anda desteklenmiyor.
 
-## <a name="query-external-and-ingested-data-together"></a>Dış ve alınan verileri birlikte sorgulama
+### <a name="query-an-external-table-with-json-format"></a>JSON biçimiyle bir dış tablo sorgula
 
-Dış tablolar hem aynı sorgu içinde alınan veri tabloları sorgulama yapabilirsiniz. [ `join` ](/azure/kusto/query/joinoperator) Veya [ `union` ](/azure/kusto/query/unionoperator) ek verileri Azure Veri Gezgini, SQL Server veya diğer kaynaklar ile dış tablo. Kullanım bir [ `let( ) statement` ](/azure/kusto/query/letstatement) bir dış tablo başvurusu için Toplu özellik adı atamak için.
+JSON biçimine sahip bir dış tabloyu sorgulamak için, `external_table()` işlevini kullanın ve işlev bağımsız değişkenleri olarak hem tablo adını hem de eşleme adını sağlayın. Aşağıdaki sorguda, *MappingName* belirtilmemişse, daha önce oluşturduğunuz bir eşleme kullanılacaktır.
 
-Aşağıdaki örnekte *ürünleri* alınan veri tablosu ve *ArchivedProducts* Azure Data Lake depolama Gen2 verileri içeren bir dış tablo:
+```kusto
+external_table(‘ExternalTableJson’, ‘mappingName’)
+```
+
+## <a name="query-external-and-ingested-data-together"></a>Dış ve alınan verileri birlikte sorgula
+
+Aynı sorgu içinde hem harici tabloları hem de alınan veri tablolarını sorgulayabilirsiniz. Siz [`join`](/azure/kusto/query/joinoperator) [veya`union`](/azure/kusto/query/unionoperator) dış tabloyu Azure Veri Gezgini, SQL Server veya diğer kaynaklardan ek verilerle birlikte kullanabilirsiniz. Bir dış [`let( ) statement`](/azure/kusto/query/letstatement) Tablo başvurusuna bir Özet adı atamak için bir kullanın.
+
+Aşağıdaki örnekte, *Ürünler* bir veri tablosu ve *ArchivedProducts* Azure Data Lake Storage 2. veri içeren bir dış tablodur:
 
 ```kusto
 let T1 = external_table("ArchivedProducts") |  where TimeStamp > ago(100d);
@@ -81,16 +120,16 @@ let T = Products; //T is an internal table
 T1 | join T on ProductId | take 10
 ```
 
-## <a name="query-taxirides-external-table-in-the-help-cluster"></a>Sorgu *TaxiRides* Yardım kümesindeki dış tablo
+## <a name="query-taxirides-external-table-in-the-help-cluster"></a>Yardım kümesindeki *Taxırides* dış tablosunu sorgula
 
-*TaxiRides* örnek veri kümesini, New York City taksi verilerini içerir [NYC taksi ve Limousine komisyon](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
+*Taxırides* örnek veri kümesi, [NYC TAXI ve Limousine Komisyonu](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)'ndan yeni York City TAXI verileri içerir.
 
-### <a name="create-external-table-taxirides"></a>Create External table *TaxiRides* 
+### <a name="create-external-table-taxirides"></a>Dış tablo *Vergilenirides* oluşturma 
 
 > [!NOTE]
-> Bu bölümde gösterilmiştir oluşturmak için kullanılan sorgu *TaxiRides* external table içinde *yardımcı* kümesi. Bu tablo zaten oluşturulduğundan bu bölümü atlayarak gerçekleştirmek [sorgu *TaxiRides* dış tablo verilerini](#query-taxirides-external-table-data). 
+> Bu bölümde, *Yardım* kümesinde *Taxırides* dış tablosunu oluşturmak için kullanılan sorgu gösterilmektedir. Bu tablo zaten oluşturulduğundan, bu bölümü atlayabilir ve [sorgu *Taxırides* dış tablo verilerini](#query-taxirides-external-table-data)gerçekleştirebilirsiniz. 
 
-1. Aşağıdaki sorgu, dış tablo oluşturmak için kullanılan *TaxiRides* Yardım kümesindeki. 
+1. Aşağıdaki sorgu, yardım kümesindeki dış tablo *Vergilenirilerini* oluşturmak için kullanılmıştır. 
 
     ```kusto
     .create external table TaxiRides
@@ -151,20 +190,20 @@ T1 | join T on ProductId | take 10
     partition by bin(pickup_datetime, 1d)
     dataformat=csv
     ( 
-    h@'https://externalkustosamples.blob.core.windows.net/taxiridesbyday?st=2019-06-18T14%3A59%3A00Z&se=2029-06-19T14%3A59%3A00Z&sp=rl&sv=2016-05-31&sr=c&sig=yEaO%2BrzFHzAq7lvd4d9PeQ%2BTi3AWnho8Rn8hGU0X30M%3D'
+        h@'http://storageaccount.blob.core.windows.net/container1;secretKey''
     )
     ```
-1. Sonuçta elde edilen tablo oluşturulduğu *yardımcı* küme:
+1. Sonuç tablosu, *Yardım* kümesinde oluşturulmuştur:
 
-    ![TaxiRides dış tablo](media/data-lake-query-data/taxirides-external-table.png) 
+    ![Taxırides dış tablo](media/data-lake-query-data/taxirides-external-table.png) 
 
-### <a name="query-taxirides-external-table-data"></a>Sorgu *TaxiRides* dış tablo verileri 
+### <a name="query-taxirides-external-table-data"></a>*Taxırides* dış tablo verilerini sorgula 
 
-Oturum [ https://dataexplorer.azure.com/clusters/help/databases/Samples ](https://dataexplorer.azure.com/clusters/help/databases/Samples) Sorgulanacak *TaxiRides* dış tablo. 
+[https://dataexplorer.azure.com/clusters/help/databases/Samples](https://dataexplorer.azure.com/clusters/help/databases/Samples) *Taxırides* dış tablosunu sorgulamak için ' de oturum açın. 
 
-#### <a name="query-taxirides-external-table-without-partitioning"></a>Sorgu *TaxiRides* bölümleme olmadan dış tablo
+#### <a name="query-taxirides-external-table-without-partitioning"></a>Bölümlendirme olmadan *Taxırides* dış tablosunu sorgula
 
-[Bu sorguyu çalıştırmak](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAx3LSwqAMAwFwL3gHYKreh1xL7F9YrCtElP84OEV9zM4DZo5DsZjhGt6PqWTgL1p6+qhvaTEKjeI/FqyuZbGiwJf63QAi9vEL2UbAhtMEv6jyAH6+VhS9jOr1dULfUgAm2cAAAA=) dış tablosunda *TaxiRides* sürmeye haftanın her günü için tüm veri kümesinde göstermek için. 
+[Bu sorguyu](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAx3LSwqAMAwFwL3gHYKreh1xL7F9YrCtElP84OEV9zM4DZo5DsZjhGt6PqWTgL1p6+qhvaTEKjeI/FqyuZbGiwJf63QAi9vEL2UbAhtMEv6jyAH6+VhS9jOr1dULfUgAm2cAAAA=) , haftanın her günü için veri kümesinin tamamına göre değer kümesi olarak belirleyen *Taxırides* üzerinde çalıştırın. 
 
 ```kusto
 external_table("TaxiRides")
@@ -172,13 +211,13 @@ external_table("TaxiRides")
 | render columnchart
 ```
 
-Bu sorgu, haftanın en yoğun saatinde gösterir. Bu sorgu, veri bölümlenmiş olmadığından bu yana (en fazla birkaç dakika) sonuçları döndürmek için bir uzun zaman alabilir.
+Bu sorgu, haftanın en yoğun gününü gösterir. Veriler bölümlenmemiş olduğundan, bu sorgunun sonuçları döndürmesi uzun sürebilir (birkaç dakikaya kadar).
 
-![bölümlenmemiş sorgu oluşturma](media/data-lake-query-data/taxirides-no-partition.png)
+![bölümlenmemiş sorguyu işle](media/data-lake-query-data/taxirides-no-partition.png)
 
-#### <a name="query-taxirides-external-table-with-partitioning"></a>Dış tablo bölümleme ile TaxiRides sorgulama 
+#### <a name="query-taxirides-external-table-with-partitioning"></a>Bölümlendirme ile Taxırides dış tablosunu sorgula 
 
-[Bu sorguyu çalıştırmak](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA13NQQqDMBQE0L3gHT6ukkVF3fQepXv5SQYMNWmIP6ilh68WuinM6jHMYBPkyPMobGao5s6bv3mHpdF19aZ1QgYlbx8ljY4F4gPIQFYgkvqJGrr+eun6I5ralv58OP27t5QQOPsXiOyzRFGazE6WzSh7wtnIiA75uISdOEtdfQDLWmP+ogAAAA==) dış tablosunda *TaxiRides* taxi cab türleri (sarı veya yeşil), Ocak 2017'de kullanılan gösteriliyor. 
+[Bu sorguyu](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA13NQQqDMBQE0L3gHT6ukkVF3fQepXv5SQYMNWmIP6ilh68WuinM6jHMYBPkyPMobGao5s6bv3mHpdF19aZ1QgYlbx8ljY4F4gPIQFYgkvqJGrr+eun6I5ralv58OP27t5QQOPsXiOyzRFGazE6WzSh7wtnIiA75uISdOEtdfQDLWmP+ogAAAA==) , Ocak 2017 ' de kullanılan TAXI cab türlerini (sarı veya yeşil) gösteren dış tabloda *vergi Irides* üzerinde çalıştırın. 
 
 ```kusto
 external_table("TaxiRides")
@@ -187,12 +226,12 @@ external_table("TaxiRides")
 | render piechart
 ```
 
-Bu sorgu, sorgu süresini ve performansı iyileştirir bölümleme, kullanır. Sorgu, bölümlenmiş sütun (pickup_datetime) filtreler ve birkaç saniye içinde sonuçlarını döndürür.
+Bu sorgu, sorgu süresini ve performansını en iyi duruma getirmek için bölümleme kullanır. Sorgu bölümlenmiş bir sütunda (pickup_datetime) filtreler ve sonuçları birkaç saniye döndürür.
 
-![bölümlenmiş bir sorgu oluşturma](media/data-lake-query-data/taxirides-with-partition.png)
+![bölümlenmiş sorguyu işle](media/data-lake-query-data/taxirides-with-partition.png)
   
-Dış tablo üzerinde çalıştırmak için ek sorgular yazabilirsiniz *TaxiRides* ve veriler hakkında daha fazla bilgi edinin. 
+Dış tablo *Vergilenides* üzerinde çalışacak ek sorgular yazabilir ve veriler hakkında daha fazla bilgi edinebilirsiniz. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure Veri Gezgini'ni kullanarak Azure Data Lake, verilerinizi sorgulayın. Öğrenme [sorguları yazma](write-queries.md) ve ek Öngörüler verilerinizden türetilir.
+Azure Veri Gezgini kullanarak Azure Data Lake verilerinizi sorgulayın. [Sorguları yazmayı](write-queries.md) ve verilerinizden ek Öngörüler türetireceğinizi öğrenin.

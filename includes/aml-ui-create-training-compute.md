@@ -2,40 +2,51 @@
 title: include dosyası
 description: include dosyası
 services: machine-learning
-author: sdgilley
+author: peterclu
 ms.service: machine-learning
-ms.author: sgilley
+ms.author: peterlu
 manager: cgronlund
 ms.custom: include file
 ms.topic: include
-ms.date: 05/06/2019
-ms.openlocfilehash: cf35651f7dd839e8792029851b9bfe278036624c
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.date: 10/09/2019
+ms.openlocfilehash: 1ee90e0c99234497b072bbee0b92d76129baea48
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188988"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73929635"
 ---
-Bir deney işlem hedefi, çalışma alanınıza bağlı bir işlem kaynağı çalışır.  İşlem hedefi oluşturduktan sonra sonraki çalıştırmalar için yeniden kullanabilirsiniz.
+İşlem hattı, çalışma alanınıza eklenmiş bir işlem kaynağı olan işlem hedefi üzerinde çalışır. Bir işlem hedefi oluşturduktan sonra, gelecekteki çalıştırmalar için onu yeniden kullanabilirsiniz.
 
-1. Seçin **çalıştırma** kısımdaki denemeyi çalıştırın.
+1. İşlem hattını çalıştırmak için tuvalin en üstünde **Çalıştır** ' ı seçin.
 
-     ![Denemeyi çalıştırma](./media/aml-ui-create-training-compute/run-experiment.png)
+1. **Ayarlar** bölmesi göründüğünde, **işlem hedefini seç**' i seçin.
 
-1. Zaman **Kurulum işlem hedefleri** iletişim kutusu açılır, çalışma alanınızı bir işlem kaynağı zaten varsa, seçebilirsiniz şimdi.  Aksi takdirde seçin **Yeni Oluştur**.
+    Zaten kullanılabilir bir işlem hedefi varsa, bu işlem hattını çalıştırmak için seçin.
 
     > [!NOTE]
-    > Görsel arabirim yalnızca Machine Learning işlem hedefler üzerinde denemeler çalıştırabilirsiniz. Diğer işlem hedefleri gösterilmez.
+    > Tasarımcı yalnızca Azure Machine Learning Işlem hedeflerinde denemeleri çalıştırabilir. Diğer işlem hedefleri gösterilmez.
 
-1. İşlem kaynağı için bir ad belirtin.
+1. İşlem kaynağı için bir ad girin.
 
-1. **Çalıştır**'ı seçin.
+1. **Kaydet**’i seçin.
 
     ![Kurulum işlem hedefi](./media/aml-ui-create-training-compute/set-compute.png)
 
-    İşlem kaynağı artık oluşturulur. Denemeyi sağ üst köşesinde bulunan durumunu görüntüleyin. 
+1. **Çalıştır**'ı seçin.
+
+1. İşlem **hattı çalıştırmasını ayarla** iletişim kutusunda, **deneme**için **+ Yeni deneme** ' yı seçin.
 
     > [!NOTE]
-    > Bir işlem kaynağı oluşturmak için yaklaşık 5 dakika sürer. Kaynak oluşturulduktan sonra yeniden kullanmak ve gelecekteki çalışmalarını bu bekleme süresi atlayın.
+    > Denemeleri Group benzer işlem hattı birlikte çalışır. Birden çok kez işlem hattı çalıştırırsanız, art arda çalıştırmalar için aynı denemeyi seçebilirsiniz.
+
+    1. **Deneme adı**için açıklayıcı bir ad girin.
+
+    1. **Çalıştır**'ı seçin.
+    
+    Çalışma durumunu ve ayrıntılarını tuvalin sağ üst kısmında görüntüleyebilirsiniz.
+
+    > [!NOTE]
+    > İşlem kaynağının oluşturulması yaklaşık beş dakika sürer. Kaynak oluşturulduktan sonra yeniden kullanabilir ve gelecekteki çalıştırmalar için bu bekleme süresini atlayabilirsiniz.
     >
-    > Bilgi işlem maliyetinden tasarruf etmek boşta olduğunda 0 düğümlerini otomatik ölçeklendirme yapar.  Bir gecikmeden sonra yeniden kullandığınızda, yeniden eşitlenene kadar yeniden bekleme süresi yaklaşık 5 dakika karşılaşabilirsiniz.
+    > Maliyet tasarrufu için boşta kaldığında işlem kaynağı sıfır düğümlere otomatik olarak ölçeklendirilir. Bir gecikmeden sonra yeniden kullandığınızda, yeniden ölçeklendirilirken yaklaşık beş dakikalık bekleme süresi yaşayabilirsiniz.

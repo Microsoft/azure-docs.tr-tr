@@ -1,7 +1,7 @@
 ---
-title: Yüzleri - görüntü işleme algılama
+title: Yüz Algılama-Görüntü İşleme
 titleSuffix: Azure Cognitive Services
-description: Görüntü işleme API'si, yüz algılama özelliğiyle ilgili kavramları öğrenin.
+description: Görüntü İşleme API'si yüz algılama özelliği ile ilgili kavramları öğrenin.
 services: cognitive-services
 author: PatrickFarley
 manager: nitinme
@@ -11,23 +11,23 @@ ms.topic: conceptual
 ms.date: 04/17/2019
 ms.author: pafarley
 ms.custom: seodec18
-ms.openlocfilehash: 699192aba87bb009d7dbddddcc9579883bb71db9
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3675acf59c6889dd00c8f26089f509bbcd3c724e
+ms.sourcegitcommit: 124c3112b94c951535e0be20a751150b79289594
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60368144"
+ms.lasthandoff: 08/10/2019
+ms.locfileid: "68945242"
 ---
-# <a name="face-detection-with-computer-vision"></a>Yüz algılama ile görüntü işleme
+# <a name="face-detection-with-computer-vision"></a>Görüntü İşleme ile yüz algılama
 
-Görüntü işleme, görüntü İnsan yüzlerini algılayın ve yaş, cinsiyet ve algılanan her yüz için dikdörtgen oluşturur. 
+Görüntü İşleme, görüntü içindeki insan yüzlerini algılayabilir ve algılanan her yüz için yaş, cinsiyet ve dikdörtgen oluşturabilir. 
 
 > [!NOTE]
-> Bu özellik ayrıca Azure tarafından sunulan [yüz](/azure/cognitive-services/face/) hizmeti. Yüz tanıma gibi analiz, yüz tanıma ve algılama konusunda sizi uyarmayı bu seçenek daha ayrıntılı bakın. 
+> Bu özellik ayrıca Azure [yüz](/azure/cognitive-services/face/) hizmeti tarafından sunulur. Yüz tanıma ve poz algılama gibi daha ayrıntılı yüz analizi için bu alternatif bölümüne bakın. 
 
 ## <a name="face-detection-examples"></a>Yüz algılama örnekleri
 
-Aşağıdaki örnek, tek bir insan yüz içeren bir görüntü için görüntü işleme tarafından döndürülen JSON yanıtı gösterir.
+Aşağıdaki örnek, tek bir insan yüzü içeren bir görüntü için Görüntü İşleme tarafından döndürülen JSON yanıtını gösterir.
 
 ![Görüntü Analizi Damdaki Kadının Yüzü](./Images/woman_roof_face.png)
 
@@ -54,9 +54,9 @@ Aşağıdaki örnek, tek bir insan yüz içeren bir görüntü için görüntü 
 }
 ```
 
-Sonraki örnek, birden fazla insan yüzlerini içeren bir görüntü için döndürülen JSON yanıtı gösterir.
+Sonraki örnekte, birden çok insan yüzü içeren bir görüntü için döndürülen JSON yanıtı gösterilmektedir.
 
-![İşleme ailesi fotoğraf yüz analiz edin](./Images/family_photo_face.png)
+![Vizyon aile fotoğraf yüzünüzü analiz etme](./Images/family_photo_face.png)
 
 ```json
 {
@@ -113,4 +113,4 @@ Sonraki örnek, birden fazla insan yüzlerini içeren bir görüntü için dönd
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [analiz görüntü](https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa) başvuru yüz algılama özelliğinin nasıl kullanılacağı hakkında daha fazla bilgi edinmek için belgeleri.
+Yüz algılama özelliğini kullanma hakkında daha fazla bilgi için bkz. [görüntü başvurusunu çözümle](https://westus.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa) belgeleri.

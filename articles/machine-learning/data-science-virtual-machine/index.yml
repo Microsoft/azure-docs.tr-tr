@@ -1,59 +1,64 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Veri Bilimi Sanal Makinesi Belgeleri
+### YamlMime:Landing
+title: Azure Veri Bilimi Sanal Makinesi belgeleri
+summary: Azure Veri Bilimi Sanal Makinesi (DSVM) veri bilimi ve makine öğrenmesi araçları içeren ve önceden yüklenen bir sanal makine görüntüsüdür. Gelişmiş analiz için akıllı uygulamalar oluşturmak amacıyla bu VM’yi kullanın.
 metadata:
-  title: Veri Bilimi Sanal Makineleriyle İlgili Belgeler - Azure
-  description: Azure bulutunda veri bilimi için özel olarak oluşturulmuş deneysel bir ortam olan Veri Bilimi Sanal Makinesi’ni kullanmayı öğrenin. Gelişmiş analiz için akıllı uygulamalar derlemeye hızlı giriş yapmak için önceden yüklenmiş ve önceden yapılandırılmış birçok popüler veri bilimi araçlarına ve diğer araçlara sahiptir.
-  services: machine-learning
-  author: gopitk
-  manager: cgronlun
+  title: Veri Bilimi Sanal Makinesi belgeleri - Azure
+  description: Azure Veri Bilimi Sanal Makinesi (DSVM) veri bilimi ve makine öğrenmesi araçları içeren ve önceden yüklenen bir sanal makine görüntüsüdür.
   ms.service: machine-learning
   ms.subservice: data-science-vm
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 01/18/2018
-  ms.author: gokuma
-abstract:
-  description: 'Veri Bilimi ve Kapsamlı Öğrenim Sanal Makineleri, Azure’da gelişmiş analiz için akıllı uygulamalar oluşturmak amacıyla kullanılan veri bilimi araçlarıyla yüklü VM görüntüleridir.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Windows veya Linux tabanlı bir Veri Bilimi VM’sini nasıl ayarlayacağınızı öğrenin:'
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="provision-vm.md">Windows</a>
-          - html: <a href="linux-dsvm-intro.md">Linux CentOS</a>
-          - html: <a href="dsvm-ubuntu-intro.md">Linux Ubuntu</a>
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Veri Bilimi VM’lerini nasıl sağlayacağınızı ve kullanacağınızı öğrenin:'
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="provision-vm">Bir Windows DSVM’sini sağlama</a>
-          - html: <a href="vm-do-ten-things">Bir Windows DSVM’sini kullanma</a>
-          - html: <a href="linux-dsvm-intro">Bir Linux CentOS DSVM’sini sağlama</a>
-          - html: <a href="dsvm-ubuntu-intro">Bir Linux Ubuntu DSVM’sini sağlama</a>
-          - html: <a href="linux-dsvm-walkthrough">Bir Linux DSVM’sini kullanma</a>
-  - title: Diğer Azure Machine Learning Teknolojileri
-    items:
-      - type: paragraph
-        text: 'Azure Machine Learning’de kullanılabilen diğer teknolojiler:'
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Azure Machine Learning hizmeti (önizleme)
-            href: /azure/machine-learning/service/
-            image:
-              src: media/index/i_machine-learning.svg
-              href: /azure/machine-learning/service/
-          - title: Azure Machine Learning Studio
-            href: /azure/machine-learning/studio/
-            image:
-              src: media/index/machine-learning-studio.svg
-              href: /azure/machine-learning/studio/
+  ms.collection: collection
+  author: gvashishtha
+  ms.author: gopalv
+  ms.date: 09/13/2019
+  ms.openlocfilehash: db6cebf4b4114a97fd86a173208cc639a5e1f7ed
+  ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/04/2019
+  ms.locfileid: "73500148"
+landingContent:
+- title: DSVM’nizi kullanmaya başlayın
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: DSVM nedir?
+      url: overview.md
+    - text: Coğrafi Yapay Zeka DSVM’si nedir?
+      url: geo-ai-dsvm-overview.md
+    - text: DSVM'ye Dahil Edilen Araçlar
+      url: tools-included.md
+    - text: Sürüm Notları
+      url: release-notes.md
+  - linkListType: get-started
+    links:
+    - text: Windows DSVM’si oluşturma
+      url: provision-vm.md
+    - text: Ubuntu DSVM’si oluşturma
+      url: dsvm-ubuntu-intro.md
+    - text: CentOS DSVM’si oluşturma
+      url: linux-dsvm-intro.md
+    - text: Coğrafi AI DSVM’si oluşturma
+      url: provision-geo-ai-dsvm.md
+- title: DSVM’nizi yönetme
+  linkLists:
+  - linkListType: architecture
+    links:
+    - text: Kurumsal güvenlik ve rehberlik
+      url: dsvm-enterprise-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Otomatik ölçeklendirilmiş DSVM havuzları oluşturma
+      url: dsvm-pools.md
+    - text: Active Directory ile tümleştirme
+      url: dsvm-common-identity.md
+    - text: Kaynak erişim kimlik bilgilerini koruma
+      url: dsvm-secure-access-keys.md
+- title: Diğer Azure Machine Learning teknolojileri
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: Azure Machine Learning
+      url: /azure/machine-learning/
+    - text: ML ürünlerimizi karşılaştırın
+      url: https://docs.microsoft.com/azure/architecture/data-guide/technology-choices/data-science-and-machine-learning?context=azure/machine-learning/studio/context/ml-context

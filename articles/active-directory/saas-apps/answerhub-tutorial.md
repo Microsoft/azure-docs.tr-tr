@@ -1,6 +1,6 @@
 ---
-title: 'Öğretici: Azure Active Directory Tümleştirmesi ile AnswerHub | Microsoft Docs'
-description: Azure Active Directory ve AnswerHub arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici: AnswerHub ile tümleştirme Azure Active Directory | Microsoft Docs'
+description: Azure Active Directory ve AnswerHub arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -8,6 +8,7 @@ manager: mtillman
 ms.reviewer: barbkess
 ms.assetid: 818b91d7-01df-4b36-9706-f167c710a73c
 ms.service: active-directory
+ms.subservice: saas-app-tutorial
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
@@ -15,244 +16,244 @@ ms.topic: tutorial
 ms.date: 01/17/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e51c37f983162b82747760b05e2ec5e4e6553c0b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a124832bd42a0a144ebc6000b818fb825aa422ef
+ms.sourcegitcommit: 0b1a4101d575e28af0f0d161852b57d82c9b2a7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67106940"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73152998"
 ---
-# <a name="tutorial-azure-active-directory-integration-with-answerhub"></a>Öğretici: AnswerHub ile Azure Active Directory Tümleştirme
+# <a name="tutorial-azure-active-directory-integration-with-answerhub"></a>Öğretici: AnswerHub ile tümleştirme Azure Active Directory
 
-Bu öğreticide, Azure Active Directory (Azure AD) ile AnswerHub tümleştirme konusunda bilgi edinin.
-AnswerHub Azure AD ile tümleştirme şu avantajları sağlar:
+Bu öğreticide, AnswerHub 'i Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz.
+AnswerHub Azure AD ile tümleştirmek şu avantajları sağlar:
 
-* Azure AD AnswerHub erişimi denetlemek için kullanabilirsiniz.
-* (Çoklu oturum açma) ile kendi Azure AD hesapları için AnswerHub otomatik olarak oturum açın, kullanıcılarınızın izin verebilirsiniz.
-* Hesaplarınız bir merkezi konumdan yönetebilirsiniz: Azure portalı.
+* Azure AD 'yi, AnswerHub 'e kimlerin erişebileceğini denetlemek için kullanabilirsiniz.
+* Kullanıcılarınızın Azure AD hesaplarıyla (çoklu oturum açma) AnswerHub 'de otomatik olarak oturum açmasını sağlayabilirsiniz.
+* Hesaplarınızı merkezi bir konumdan yönetebilirsiniz: Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla bilgi için bkz. [Azure Active Directory'de uygulamalar için çoklu oturum açma](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
-Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory uygulamalarda çoklu oturum açma](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure AD Tümleştirmesi ile AnswerHub yapılandırmak için aşağıdakiler gerekir:
+Azure AD tümleştirmesini AnswerHub ile yapılandırmak için aşağıdakiler gerekir:
 
-* Azure AD aboneliğiniz. Bir Azure AD ortamını yoksa başlayabilirsiniz bir [bir aylık deneme](https://azure.microsoft.com/pricing/free-trial/).
-* Tekli etkin oturum sahip bir AnswerHub aboneliği.
+* Bir Azure AD aboneliği. Bir Azure AD ortamınız yoksa, bir [aylık denemeyi](https://azure.microsoft.com/pricing/free-trial/)başlatabilirsiniz.
+* Çoklu oturum açma özelliği etkin olan bir AnswerHub aboneliği.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD çoklu oturum açma bir test ortamında test edin.
+Bu öğreticide, Azure AD çoklu oturum açmayı bir test ortamında yapılandırıp test edersiniz.
 
-* AnswerHub SP tarafından başlatılan SSO'yu destekler.
+* AnswerHub, SP tarafından başlatılan SSO 'yu destekler.
 
-## <a name="add-answerhub-from-the-gallery"></a>Galeriden AnswerHub Ekle
+## <a name="add-answerhub-from-the-gallery"></a>Galeriden AnswerHub ekleme
 
-Azure AD'de AnswerHub tümleştirmesini ayarlamak için AnswerHub Galeriden yönetilen SaaS uygulamalarınıza eklemeniz gerekir.
+AnswerHub 'in Azure AD 'ye tümleştirmesini ayarlamak için galerideki AnswerHub 'yi yönetilen SaaS uygulamalarınıza eklemeniz gerekir.
 
 **Galeriden AnswerHub eklemek için:**
 
-1. İçinde [Azure portalında](https://portal.azure.com), sol bölmede seçin **Azure Active Directory**.
+1. [Azure Portal](https://portal.azure.com)sol bölmedeki **Azure Active Directory**' ı seçin.
 
     ![Azure Active Directory düğmesi](common/select-azuread.png)
 
-2. Git **kurumsal uygulamalar**ve ardından **tüm uygulamaları**.
+2. **Kurumsal uygulamalar**' a gidin ve **tüm uygulamalar**' ı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-3. Bir uygulama eklemek için seçin **yeni uygulama** pencerenin üst kısmındaki.
+3. Bir uygulama eklemek için pencerenin üst kısmındaki **Yeni uygulama** ' yı seçin.
 
-    ![Yeni Uygulama düğmesi](common/add-new-app.png)
+    ![Yeni uygulama düğmesi](common/add-new-app.png)
 
-4. Arama kutusuna **AnswerHub**. Seçin **AnswerHub** sonuç listesini ve ardından **Ekle**.
+4. Arama kutusuna **AnswerHub**girin. Sonuçlar listesinde **AnswerHub** ' ı seçin ve ardından **Ekle**' yi seçin.
 
      ![Sonuç listesinde AnswerHub](common/search-new-app.png)
 
-## <a name="set-up-and-test-azure-ad-single-sign-on"></a>Ayarlama ve Azure AD çoklu oturum açma testi
+## <a name="set-up-and-test-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı ayarlama ve test etme
 
-Bu bölümde, yapılandırın ve Azure AD çoklu oturum açma ile AnswerHub Britta Simon adlı bir test kullanıcısı kullanarak test edin.
-Çoklu oturum açma için AnswerHub içinde bir Azure AD kullanıcısı ile ilgili kullanıcı arasında bir bağlantı yapmanız gerekir.
+Bu bölümde, Britta Simon adlı bir test kullanıcısını kullanarak AnswerHub ile Azure AD çoklu oturum açmayı yapılandırıp test edersiniz.
+Çoklu oturum açma için, AnswerHub içinde bir Azure AD kullanıcısı ile buna karşılık gelen kullanıcı arasında bir bağlantı kurmanız gerekir.
 
-Yapılandırma ve Azure AD çoklu oturum açma AnswerHub ile test etmek için bu görevi tamamlamanız gerekir:
+Azure AD çoklu oturum açmayı AnswerHub ile yapılandırmak ve test etmek için şu görevleri gerçekleştirmeniz gerekir:
 
-1. [Azure AD çoklu oturum açmayı yapılandırma](#configure-azure-ad-single-sign-on) kullanıcılarınızın özelliği kullanmak etkinleştirmek için.
-2. [AnswerHub çoklu oturum açmayı yapılandırma](#configure-answerhub-single-sign-on) çoklu oturum açma ayarları uygulama tarafında ayarlamak için.
-3. [Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user) Britta Simon adlı.
-4. [Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user) Britta Simon, Azure AD çoklu oturum açma kullanmak üzere etkinleştirmek için.
-5. Karşılık gelir ve Azure AD test kullanıcıya bağlı AnswerHub test kullanıcısı oluşturun.
-6. [Çoklu oturum açmayı test](#test-single-sign-on) yapılandırma çalıştığını doğrulayın.
+1. Kullanıcılarınızın özelliğini kullanmasını sağlamak için [Azure AD çoklu oturum açmayı yapılandırın](#configure-azure-ad-single-sign-on) .
+2. Uygulama tarafında çoklu oturum açma ayarlarını ayarlamak için [AnswerHub çoklu oturum açmayı yapılandırın](#configure-answerhub-single-sign-on) .
+3. Britta Simon adlı [bir Azure AD test kullanıcısı oluşturun](#create-an-azure-ad-test-user) .
+4. Azure AD 'de çoklu oturum açma özelliğini kullanarak Britta Simon 'u etkinleştirmek için [Azure AD test kullanıcısını atayın](#assign-the-azure-ad-test-user) .
+5. Azure AD test kullanıcısına bağlı olan ve öğesine karşılık gelen bir AnswerHub test kullanıcısı oluşturun.
+6. Yapılandırmanın çalıştığını doğrulamak için [Çoklu oturum açmayı test](#test-single-sign-on) edin.
 
-### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırın
+### <a name="configure-azure-ad-single-sign-on"></a>Azure AD çoklu oturum açmayı yapılandırma
 
-Bu bölümde, Azure AD çoklu oturum açma Azure portalındaki ayarlarsınız.
+Bu bölümde, Azure portal Azure AD çoklu oturum açma 'yı ayarlarsınız.
 
-**Azure AD çoklu oturum açma ile AnswerHub yapılandırmak için:**
+**Azure AD çoklu oturum açmayı AnswerHub ile yapılandırmak için:**
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **AnswerHub** uygulama tümleştirme sayfasında **çoklu oturum açma**.
+1. [Azure Portal](https://portal.azure.com/), **AnswerHub** uygulama tümleştirmesi sayfasında, **Çoklu oturum açma**' yı seçin.
 
     ![Çoklu oturum açma düğmesi](common/select-sso.png)
 
-2. İçinde **tek bir oturum açma yönteminizi seçmeniz** Seç iletişim kutusunda **SAML/WS-Federasyon** modu, çoklu oturum açmayı etkinleştirmek için.
+2. Çoklu oturum **açma yöntemi seç** iletişim kutusunda, çoklu oturum açmayı etkinleştirmek için **SAML/WS-Besme** modunu seçin.
 
-    ![Çoklu oturum açma seçin yöntemi iletişim kutusu](common/select-saml-option.png)
+    ![Çoklu oturum açma yöntemi seçme iletişim kutusu](common/select-saml-option.png)
 
-3. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlayın** sayfasında, açmak için Düzenle simgesine **temel SAML yapılandırma** iletişim kutusu.
+3. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **temel SAML yapılandırması** iletişim kutusunu açmak için Düzenle simgesini seçin.
 
-    ![SAML sayfası ile çoklu oturum açmayı ayarlayın](common/edit-urls.png)
+    ![SAML sayfasıyla çoklu oturum açmayı ayarlama](common/edit-urls.png)
 
-4. İçinde **temel SAML yapılandırma** bölümünde, aşağıdaki adımları tamamlayın:
+4. **Temel SAML yapılandırması** bölümünde aşağıdaki adımları uygulayın:
 
-    ![Temel bir SAML yapılandırma bölümü](common/sp-identifier.png)
+    ![Temel SAML yapılandırma bölümü](common/sp-identifier.png)
 
-    a. İçinde **oturum açma URL'si** kutusuna, bu düzen bir URL girin: `https://<company>.answerhub.com`
+    a. **Oturum açma URL 'si** kutusunda, bu düzene sahıp bir URL girin: `https://<company>.answerhub.com`
 
-    b. İçinde **tanımlayıcı (varlık kimliği)** kutusuna, bu düzen bir URL girin: `https://<company>.answerhub.com`
+    b. **Tanımlayıcı (VARLıK kimliği)** kutusunda, bu düzene sahıp bir URL girin: `https://<company>.answerhub.com`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerleri tanımlayıcısı ve gerçek oturum açma URL'si ile güncelleştirin. İlgili kişi [AnswerHub Destek ekibine](mailto:success@answerhub.com) değerleri alabilirsiniz. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bu değerleri, gerçek oturum açma URL 'SI ve tanımlayıcısı ile güncelleştirin. Değerleri almak için [AnswerHub destek ekibine](mailto:success@answerhub.com) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-5. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünden **indirme** yanındaki bağlantı **sertifika (Base64)** , gereksinimlerinize göre ve sertifikayı bilgisayarınızda kaydedin.
+5. **SAML Ile çoklu oturum açmayı ayarlama** sayfasında, **SAML imzalama sertifikası** bölümünde, **sertifika (base64)** yanındaki **indirme** bağlantısını, gereksinimlerinize göre seçin ve sertifikayı bilgisayarınıza kaydedin.
 
     ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-6. İçinde **AnswerHub kümesi** bölümünde, uygun URL'yi veya URL'leri, gereksinimlerinize göre kopyalayın.
+6. **AnswerHub ayarla** bölümünde, gereksinimlerinize göre uygun URL 'Yi veya URL 'leri kopyalayın.
 
-    ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-   Bu URL'ler kopyalayabilirsiniz:
-    - Oturum Açma URL'si:
+   Şu URL 'Leri kopyalayabilirsiniz:
+    - Oturum açma URL 'SI
 
-    - Azure AD Tanımlayıcısı
+    - Azure AD tanımlayıcısı
 
-    - Oturum Kapatma URL'si
+    - Oturum kapatma URL 'SI
 
-### <a name="configure-answerhub-single-sign-on"></a>AnswerHub çoklu oturum açmayı yapılandırın
+### <a name="configure-answerhub-single-sign-on"></a>AnswerHub çoklu oturum açmayı yapılandırma
 
-Bu bölümde, AnswerHub için çoklu oturum açmayı ayarlayın.  
+Bu bölümde, AnswerHub için çoklu oturum açma ayarlarsınız.  
 
 **AnswerHub çoklu oturum açmayı yapılandırmak için:**
 
-1. Farklı bir web tarayıcı penceresinde AnswerHub şirketinizin sitesi için bir yönetici olarak oturum açın
+1. Farklı bir Web tarayıcısı penceresinde, AnswerHub şirket sitenizde yönetici olarak oturum açın.
 
     > [!NOTE]
-    > AnswerHub yapılandırırken Yardım gerekirse başvurun [AnswerHub Destek ekibine](mailto:success@answerhub.com.).
+    > AnswerHub yapılandırması için yardıma ihtiyacınız varsa, [AnswerHub destek ekibine](mailto:success@answerhub.com.)başvurun.
 
-2. Git **Yönetim**.
+2. **Yönetim**bölümüne gidin.
 
-3. Üzerinde **kullanıcı ve grupları** , sol bölmede sekmesinde **sosyal ayarları** bölümünden **SAML Kurulumu**.
+3. **Kullanıcı ve gruplar** sekmesindeki sol bölmede, **sosyal ayarlar** bölümünde **SAML kurulumu**' nu seçin.
 
-4. Üzerinde **IDP yapılandırma** sekmesinde, aşağıdaki adımları tamamlayın:
+4. **IDP yapılandırması** sekmesinde, şu adımları izleyin:
 
-    ![Kullanıcılar ve Gruplar sekmesinde](./media/answerhub-tutorial/ic785172.png "SAML Kurulumu")  
+    ![Kullanıcılar & gruplar sekmesi](./media/answerhub-tutorial/ic785172.png "SAML kurulumu")  
   
-    a. İçinde **IDP'nin oturum açma URL'si** kutusu, yapıştırma **oturum açma URL'si** Azure portaldan kopyaladığınız.
+    a. **IDP oturum açma URL 'si** kutusunda, Azure Portal kopyaladığınız **oturum açma URL 'sini** yapıştırın.
   
-    b. İçinde **IDP oturum kapatma URL'si** kutusu, yapıştırma **oturum kapatma URL'si** Azure portaldan kopyaladığınız.
+    b. **IDP oturum kapatma URL 'si** kutusunda, Azure Portal kopyaladığınız **oturum kapatma URL** 'sini yapıştırın.
 
-    c. İçinde **IDP ad tanımlayıcı biçimi** kutusuna **tanımlayıcı** seçili değer **kullanıcı öznitelikleri** bölümünde Azure portalında.
+    c. **IDP ad tanımlayıcı biçimi** kutusunda, Azure Portal **Kullanıcı öznitelikleri** bölümünde seçili **tanımlayıcı** değeri girin.
   
-    d. Seçin **anahtarlara ve sertifikalara**.
+    d. **Anahtarlar ve Sertifikalar ' ı**seçin.
 
-5. İçinde **anahtarlara ve sertifikalara** bölümünde, aşağıdaki adımları tamamlayın:
+5. **Anahtarlar ve sertifikalar** bölümünde, şu adımları izleyin:
 
-    ![Anahtarlara ve sertifikalara bölüm](./media/answerhub-tutorial/ic785173.png "anahtarlar ve sertifikalar")  
+    ![Anahtarlar ve sertifikalar bölümü](./media/answerhub-tutorial/ic785173.png "Anahtarlar ve sertifikalar")  
 
-    a. Not Defteri'nde Azure portalından indirdiğiniz Base64 kodlu bir sertifika açın, içeriğini kopyalayın ve ardından içeriği yapıştırın **IDP ortak anahtarı (x 509 biçimi)** kutusu.
+    a. Not defteri 'nde Azure portal indirdiğiniz base64 kodlu sertifikayı açın, içeriğini kopyalayın ve ardından içeriği **IDP ortak anahtarı (x509 biçimi)** kutusuna yapıştırın.
   
     b. **Kaydet**’i seçin.
 
-6. Üzerinde **IDP yapılandırma** sekmesinde **Kaydet** yeniden.
+6. **IDP yapılandırması** sekmesinde yeniden **Kaydet** ' i seçin.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-Bu bölümde, Azure portalında Britta Simon adlı bir test kullanıcısı oluşturun.
+Bu bölümde, Azure portal Britta Simon adlı bir test kullanıcısı oluşturacaksınız.
 
 **Bir Azure AD test kullanıcısı oluşturmak için:**
 
-1. Azure portalında, sol bölmede seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
+1. Azure portal, sol bölmedeki **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
 
-    ![Azure Active Directory, kullanıcılar, tüm kullanıcılar'ı seçin](common/users.png)
+    ![Azure Active Directory, kullanıcılar, tüm kullanıcılar ' ı seçin](common/users.png)
 
-2. Seçin **yeni kullanıcı** ekranın üstünde.
+2. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
 
-    ![Yeni kullanıcı düğmesi](common/new-user.png)
+    ![Yeni Kullanıcı düğmesi](common/new-user.png)
 
-3. Kullanıcı özellikleri, aşağıdaki adımları tamamlayın.
+3. Kullanıcı özelliklerinde, bu adımları izleyin.
 
     ![Kullanıcı özellikleri](common/user-properties.png)
 
-    a. İçinde **adı** kutusuna **BrittaSimon**.
+    a. **Ad** kutusuna **Brittasıon**yazın.
   
-    b. İçinde **kullanıcı adı** kutusuna **brittasimon\@< yourcompanydomain.extension >** .  
+    b. **Kullanıcı adı** kutusuna **brittasıon\@< yourcompanydomain. Extension >** girin.  
     Örneğin, BrittaSimon@contoso.com.
 
-    c. Seçin **Show parola** onay kutusunu işaretleyin ve ardından görüntülenen değeri yazın **parola** kutusu.
+    c. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
 
-    d. **Oluştur**’u seçin.
+    d. **Oluştur**'u seçin.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-Bu bölümde, Azure AD çoklu oturum açma için AnswerHub erişim vererek kullanmak için Britta Simon ayarlayın.
+Bu bölümde, Kullanıcı AnswerHub 'ye erişim izni vererek Azure AD çoklu oturum açma 'yı kullanmak için Kullanıcı Britta Simon 'u ayarlarsınız.
 
-**Azure AD test kullanıcı atamak için:**
+**Azure AD test kullanıcısını atamak için:**
 
-1. Azure portalında **kurumsal uygulamalar**seçin **tüm uygulamaları**ve ardından **AnswerHub**.
+1. Azure portal **Kurumsal uygulamalar**' ı seçin, **tüm uygulamalar**' ı seçin ve ardından **AnswerHub**' ı seçin.
 
     ![Kurumsal uygulamalar dikey penceresi](common/enterprise-applications.png)
 
-2. Uygulamalar listesinde seçin **AnswerHub**.
+2. Uygulamalar listesinde **AnswerHub**' yi seçin.
 
     ![Uygulamalar listesi](common/all-applications.png)
 
-3. Soldaki menüde **kullanıcılar ve gruplar**.
+3. Soldaki menüde **Kullanıcılar ve gruplar**' ı seçin.
 
     ![Kullanıcıları ve grupları seçin](common/users-groups-blade.png)
 
-4. Seçin **Kullanıcı Ekle**ve ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim kutusu.
+4. **Kullanıcı Ekle**' yi seçin ve sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-    ![Atama bölmesi ekleme](common/add-assign-user.png)
+    ![Atama bölmesi Ekle](common/add-assign-user.png)
 
-5. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **Britta Simon** içinde **kullanıcılar** listeleyin ve ardından **seçin** kısmındaki düğmesi ekranı.
+5. **Kullanıcılar ve gruplar** Iletişim kutusunda **Kullanıcılar** listesinden **Britta Simon** ' ı seçin ve ardından ekranın altındaki **Seç** düğmesini seçin.
 
-6. SAML onaylaması rol değeri de beklediğiniz varsa **rolü Seç** iletişim kutusunda, listeden bir kullanıcı için uygun rolü seçin. 
+6. SAML assertion 'da bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin. 
 
-7. Seçin **seçin** ekranın alt kısmındaki düğmesi.
+7. Ekranın alt kısmındaki **Seç** düğmesini seçin.
 
-8. İçinde **atama Ekle** iletişim kutusunda **atama**.
+8. **Atama Ekle** Iletişim kutusunda **ata**' yı seçin.
 
-### <a name="create-an-answerhub-test-user"></a>Bir AnswerHub test kullanıcısı oluşturma
+### <a name="create-an-answerhub-test-user"></a>AnswerHub test kullanıcısı oluşturma
 
-Azure AD kullanıcıları için AnswerHub oturum açmak etkinleştirmek için AnswerHub eklemeniz gerekir. Bu görev AnswerHub içinde el ile gerçekleştirilir.
+Azure AD kullanıcılarının AnswerHub 'de oturum açmasını sağlamak için bunları AnswerHub 'ye eklemeniz gerekir. AnswerHub ' de, bu görev el ile yapılır.
 
 **Bir kullanıcı hesabı ayarlamak için:**
 
-1. Oturum açın, **AnswerHub** yönetici olarak şirketin site
+1. **AnswerHub** şirket sitenizde yönetici olarak oturum açın.
 
-2. Git **Yönetim**.
+2. **Yönetim**bölümüne gidin.
 
-3. Seçin **kullanıcıları ve grupları** sekmesi.
+3. **Kullanıcılar & grupları** sekmesini seçin.
 
-4. Sol bölmede, **Kullanıcıları Yönet** bölümünden **oluşturun veya içeri aktarma kullanıcı**ve ardından **kullanıcıları ve grupları**.
+4. Sol bölmedeki **Kullanıcıları Yönet** bölümünde, **Kullanıcı oluştur veya içeri aktar**' ı seçin ve ardından **Kullanıcılar & grupları**' nı seçin.
 
-   ![Kullanıcılar ve Gruplar sekmesinde](./media/answerhub-tutorial/ic785175.png "kullanıcıları ve grupları")
+   ![Kullanıcılar & gruplar sekmesi](./media/answerhub-tutorial/ic785175.png "Kullanıcılar & grupları")
 
-5. Uygun kutulara girin **e-posta adresi**, **kullanıcıadı**, ve **parola** ekleyin ve ardından istediğiniz geçerli bir Azure AD hesabı **Kaydet** .
+5. Uygun kutulara, eklemek istediğiniz geçerli bir Azure AD hesabının **e-posta adresini**, **Kullanıcı adını**ve **parolasını** girin ve ardından **Kaydet**' i seçin.
 
 > [!NOTE]
-> Azure AD kullanıcı hesaplarını ayarlamak için AnswerHub API sağladığı ya da diğer kullanıcı hesabı oluşturma araçları kullanabilirsiniz.
+> Azure AD Kullanıcı hesaplarını ayarlamak için AnswerHub tarafından sunulan başka bir kullanıcı hesabı oluşturma aracını veya API 'YI kullanabilirsiniz.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
 
-Bu bölümde, erişim paneli kullanarak Azure AD çoklu oturum açma yapılandırmanızı test.
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-Erişim Paneli'nde AnswerHub kutucuğu seçtiğinizde, otomatik olarak SSO'yu ayarlama AnswerHub için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Erişim panelinde AnswerHub kutucuğunu seçtiğinizde, SSO 'yu ayarladığınız AnswerHub için otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-- [Azure Active Directory ile SaaS uygulamalarını tümleştirme konusundaki öğreticiler](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirmek için öğreticiler](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
 - [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
 

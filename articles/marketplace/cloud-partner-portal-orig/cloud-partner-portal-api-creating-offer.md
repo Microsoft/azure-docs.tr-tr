@@ -1,23 +1,24 @@
 ---
-title: Oluşturma veya değiştirme teklif | Azure Market
-description: Yeni bir oluşturmak veya güncelleştirmek için API ve var olan bir teklif.
+title: Teklif oluşturma veya değiştirme | Azure Marketi
+description: Yeni bir veya güncelleştirme ve mevcut teklif oluşturmak için API.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: reference
 ms.date: 09/13/2018
 ms.author: pabutler
-ms.openlocfilehash: 55f6aa60c836d55333e1c5b02a44114b91df822d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: bfb9cfbe2c63caafef8487015f42a05b98afa29c
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935515"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73819712"
 ---
-<a name="create-or-modify-an-offer"></a>Oluşturun veya bir teklife değiştirin
+<a name="create-or-modify-an-offer"></a>Teklif oluşturma veya değiştirme
 =========================
 
-Bu çağrı, belirli bir teklif yayımcı ad alanı içindeki güncelleştirir veya yeni bir teklif oluşturur.
+Bu çağrı, yayımcı ad alanı içinde belirli bir teklifi güncelleştirir veya yeni bir teklif oluşturur.
 
   `PUT https://cloudpartner.azure.com/api/publishers/<publisherId>/offers/<offerId>?api-version=2017-10-31`
 
@@ -27,12 +28,12 @@ Bu çağrı, belirli bir teklif yayımcı ad alanı içindeki güncelleştirir v
 
 |  **Ad**         |  **Açıklama**                      |  **Veri türü**  |
 |  --------         |  ----------------                     |  -------------  |
-| publisherId       |  Örneğin, yayımcı tanımlayıcısı `contoso` |   String |
-| OfferId           |  Teklif tanımlayıcısı                     |   String        |
-| API sürümü       |  API'nin en son sürümü            |   Tarih           |
+| PublisherId       |  Yayımcı tanımlayıcı, örneğin `contoso` |   Dize |
+| OfferId           |  Teklif tanımlayıcısı                     |   Dize        |
+| api sürümü       |  API 'nin en son sürümü            |   Tarih           |
 |  |  |  |
 
-<a name="header"></a>Üstbilgi
+<a name="header"></a>Üst bilgi
 ------
 
 |  **Ad**        |  **Değer**               |
@@ -45,7 +46,7 @@ Bu çağrı, belirli bir teklif yayımcı ad alanı içindeki güncelleştirir v
 <a name="body-example"></a>Gövde örneği
 ------------
 
-Aşağıdaki örnek, bir teklif OfferId ile oluşturur `contosovirtualmachine`.
+Aşağıdaki örnek, `contosovirtualmachine`OfferId ile bir teklif oluşturur.
 
 ### <a name="request"></a>İstek
 
@@ -239,23 +240,23 @@ Aşağıdaki örnek, bir teklif OfferId ile oluşturur `contosovirtualmachine`.
 ```
 
 > [!NOTE]
-> Bu teklif değiştirmek için ekleme bir **IF-Match** ayarlamak * yukarıdaki isteği. Aynı istek gövdesi olarak yukarıdaki kullanın, ancak bu değerleri istediğiniz gibi değiştirin. 
+> Bu teklifi değiştirmek için yukarıdaki isteğe bir **IF-Match** üst bilgisini * olarak ayarlayın. Yukarıdaki gibi aynı istek gövdesini kullanın, ancak değerleri istediğiniz şekilde değiştirin. 
 
 
 ### <a name="response-status-codes"></a>Yanıt durum kodları
 
-| **Kod**  |  **Açıklama**                                                                            |
+| **Kodudur**  |  **Açıklama**                                                                            |
 | --------  |  ---------------                                                                            |
 |  200      | `OK`. İstek başarıyla işlendi ve teklif başarıyla değiştirildi.           |
 |  201      | `Created`. İstek başarıyla işlendi ve teklif başarıyla oluşturuldu.   |
-|  400      | `Bad/Malformed request`. Hata yanıt gövdesi, daha fazla bilgi sağlayabilir.            |
-|  403      | `Forbidden`. İstemci, istenen ad alanına erişimi yoktur.                     |
+|  400      | `Bad/Malformed request`. Hata yanıtı gövdesi daha fazla bilgi sağlayabilir.            |
+|  403      | `Forbidden`. İstemcinin istenen ad alanına erişimi yok.                     |
 |  404      | `Not found`. İstemci tarafından başvurulan varlık yok.                           |
-|  412      | Sunucu, istemci isteğinde belirtilen önkoşulları birini karşılamıyor. İstemci isteğiyle gönderilen ETAG denetlemeniz gerekir. |
+|  412      | Sunucu istekte bulunan istekten birini karşılamıyor. İstemci, istekle gönderilen ETAG öğesini denetlemelidir. |
 |  |  |
 
 
-<a name="uploading-artifacts"></a>Yapıtlar yükleniyor
+<a name="uploading-artifacts"></a>Yapıtlar karşıya yükleniyor
 -------------------
 
-Yapılar, resimleri ve logoları, gibi web üzerinde erişilebilir bir konuma karşıya yükleyerek, daha sonra her bir URI olarak yukarıdaki örnekte olduğu gibi bir PUT İsteği dahil olmak üzere paylaşılan. Sistem, bu dosyalar Azure Market'e deposunda mevcut değildir ve bu dosyaları Depolama'ya indirme algılar.  Sonuç olarak, sonraki GET istekleri bu dosyalar için bir Azure Market hizmet URL'si döndürür bulabilirsiniz.
+Görüntüler ve amblemler gibi yapıtlar, Web üzerinde erişilebilir bir konuma karşıya yükleyerek ve ardından her biri, yukarıdaki örnekte olduğu gibi, PUT isteğinde bir URI olarak dahil olmak üzere paylaşılmalıdır. Sistem bu dosyaların Azure Market depolamada mevcut olup olmadığı tespit eder ve bu dosyaları depolama alanına indirir.  Sonuç olarak, gelecekteki GET isteklerinin bu dosyalar için bir Azure Market hizmeti URL 'SI döndürabileceğini görürsünüz.

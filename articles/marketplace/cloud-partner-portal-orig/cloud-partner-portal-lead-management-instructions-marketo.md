@@ -1,52 +1,53 @@
 ---
-title: Marketo müşteri adayı yönetimini yapılandırma | Azure Market
-description: Azure Market müşterileri için Marketo için sağlama yönetimi yapılandırın.
+title: Marketo 'da lider yönetimini yapılandırma | Azure Marketi
+description: Azure Market müşterileri için Marketo için lider yönetimini yapılandırın.
 services: Azure, Marketplace, Cloud Partner Portal,
 author: dan-wesley
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 09/14/2018
 ms.author: pabutler
-ms.openlocfilehash: d749a92a1837bad053dc586477bfc27fc65299fa
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7949507c8c7ef57cded25cde8579c1945aa93a81
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935222"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73825209"
 ---
-# <a name="configure-lead-management-in-marketo"></a>Marketo müşteri adayı yönetimini yapılandırma
+# <a name="configure-lead-management-in-marketo"></a>Marketo 'da lider yönetimini yapılandırma
 
-Bu makalede, Microsoft müşteri adaylarını işlemek için Marketo ayarlama açıklanır.
+Bu makalede, Microsoft satış fırsatlarını işlemek üzere Marketo 'nın nasıl ayarlanacağı açıklanır.
 
-1. Marketo için oturum açın.
-2. Seçin **tasarım Studio**.
-    ![Marketo tasarım Studio](./media/cloud-partner-portal-lead-management-instructions-marketo/marketo1.png)
+1. Marketo 'da oturum açın.
+2. **Design Studio**' yı seçin.
+    ![Marketo Design Studio](./media/cloud-partner-portal-lead-management-instructions-marketo/marketo1.png)
 
-3.  Seçin **yeni formu**.
-    ![Marketo yeni formu](./media/cloud-partner-portal-lead-management-instructions-marketo/marketo2.png)
+3.  **Yeni form**' u seçin.
+    ![Marketo yeni form](./media/cloud-partner-portal-lead-management-instructions-marketo/marketo2.png)
 
-4.  Yeni Form gerekli alanları doldurun ve ardından **Oluştur**.
-    ![Marketo yeni form oluşturma](./media/cloud-partner-portal-lead-management-instructions-marketo/marketo3.png)
+4.  Yeni formdaki gerekli alanları doldurup **Oluştur**' u seçin.
+    ![Marketo yeni form oluştur](./media/cloud-partner-portal-lead-management-instructions-marketo/marketo3.png)
 
-4.  Alan hakkında ayrıntılı bilgi seçin **son**.
-    ![Marketo son formu](./media/cloud-partner-portal-lead-management-instructions-marketo/marketo4.png)
+4.  Alan ayrıntıları sayfasında **son**' u seçin.
+    ![Marketo son form](./media/cloud-partner-portal-lead-management-instructions-marketo/marketo4.png)
 
-5.  Onayla ve kapatın.
+5.  Onaylayın ve kapatın.
 
-6.  MarketplaceLeadBacked sekmesinde **ekleme kodu**.
+6.  Marketplaceleaddesteklenen sekmesinde **kodu ekle**' yi seçin.
     ![Marketo ekleme kodu seçeneği](./media/cloud-partner-portal-lead-management-instructions-marketo/marketo5.png)
 
-7.  Marketo kod ekleme, aşağıdaki örneğe benzer bir kod görüntüler.
+7.  Marketo ekleme kodu, aşağıdaki örneğe benzer bir kod görüntüler.
 
 `<script src="//app-ys12.marketo.com/js/forms2/js/forms2.min.js"></script>`
 
     <form id="mktoForm_1179"></form>
     <script>MktoForms2.loadForm("("//app-ys12.marketo.com", "123-PQR-789", 1179);</script>
 
-1. Ekleme kodu, yapılandırabilmek için gösterilen değerleri kopyalayın **sunucu kimliği**, **Munchkin kimliği**, ve **Form kimliği** bulut iş ortağı portalı Marketo alanları.
+1. Ekleme kodunda gösterilen değerleri kopyalayın, bu sayede **sunucu kimliği**, bir **kimlik kimliği**ve **form kimliğini** bulut iş ortağı portalı Marketo alanlarında yapılandırabilirsiniz.
 
-Sonraki örnek, Marketo katıştırma kod örneğindeki ihtiyacınız kimliklerini almak için bir kılavuz olarak kullanın.
+Bir sonraki örneği, Marketo ekleme kodu örneğinde ihtiyacınız olan kimlikleri alma kılavuzu olarak kullanın.
 
-- Server Id = **ys12**
-- Munchkin Id = **123-PQR-789**
+- Sunucu kimliği = **ys12**
+- Munchkabağı No = **123-PQR-789**
 - Form kimliği = **1179**\

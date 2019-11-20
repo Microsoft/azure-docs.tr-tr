@@ -1,87 +1,108 @@
 ---
-title: Azure İzleyicisi'ni yapılandırmak için kapsayıcı aracısı veri toplama | Microsoft Docs
-description: Bu makalede Azure İzleyici stdout/stderr denetlemek kapsayıcı aracısı için yapılandırabilirsiniz ve ortam değişkenlerini toplamayla nasıl açıklanmaktadır.
-services: azure-monitor
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: tysonn
-ms.assetid: ''
+title: Kapsayıcılar için Azure Izleyici aracı veri toplamayı yapılandırma | Microsoft Docs
+description: Bu makalede stdout/stderr ve ortam değişkenleri günlük toplamayı denetlemek için kapsayıcılar aracısının Azure Izleyicisini nasıl yapılandırabileceğiniz açıklanmaktadır.
 ms.service: azure-monitor
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 06/22/2019
+ms.subservice: ''
+ms.topic: conceptual
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: 1e7506e311c38d87371dd1b65440b6fb41a7ce78
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.date: 10/15/2019
+ms.openlocfilehash: deab16f3b80ada12a7167e90922dc38f3012be91
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67341655"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73478700"
 ---
-# <a name="configure-agent-data-collection-for-azure-monitor-for-containers"></a>Kapsayıcılar için Azure İzleyici aracı verileri toplamayı yapılandır
+# <a name="configure-agent-data-collection-for-azure-monitor-for-containers"></a>Kapsayıcılar için Azure Izleyici için aracı veri toplamayı yapılandırma
 
-Kapsayıcılar için Azure İzleyici kapsayıcı iş yükleri için yönetilen Kubernetes kümelerini kapsayıcı Aracısı'ndan Azure Kubernetes Service (AKS) barındırılan dağıtılan stdout, stderr ve ortam değişkenlerini toplar. Bu deneyim denetlemek için Kubernetes ConfigMaps özel oluşturarak aracısını veri toplama ayarları yapılandırabilirsiniz. Bu makalede ConfigMap oluşturma ve gereksinimlerinize göre veri toplamasını yapılandırmadan gösterilmektedir.
+Kapsayıcılar için Azure Izleyici, Kapsayıcılı aracıdan Azure Kubernetes Service (AKS) üzerinde barındırılan yönetilen Kubernetes kümelerine dağıtılan kapsayıcı iş yüklerinden stdout, stderr ve ortam değişkenlerini toplar. Bu deneyimi denetlemek için özel bir Kubernetes ConfigMaps oluşturarak, aracı veri toplama ayarlarını yapılandırabilirsiniz. 
 
-## <a name="configure-your-cluster-with-custom-data-collection-settings"></a>Özel veri toplama ayarları ile kümenizi yapılandırma
+Bu makalede, gereksinimlerinize göre ConfigMap oluşturmayı ve veri toplamayı yapılandırmayı gösterir.
 
-Kolayca sıfırdan oluşturmak zorunda kalmadan özelleştirmelerinizle düzenlemenize olanak sağlayan bir şablon ConfigMap dosyası sağlanır. Başlamadan önce Kubernetes belgeleri hakkında gözden geçirmeniz gereken [ConfigMaps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) ve oluşturma, yapılandırma ve dağıtma ConfigMaps nasıl ile kendinizi alıştırın. Bu, stderr ve stdout ad alanı başına veya tüm küme ve kümedeki tüm pod'ların / düğümler arasında çalışan herhangi bir kapsayıcı için ortam değişkenlerini filtrelemek olanak tanır.
+## <a name="configmap-file-settings-overview"></a>ConfigMap dosya ayarlarına genel bakış
+
+Bunu sıfırdan oluşturmak zorunda kalmadan özelleştirmelerinizle kolayca düzenlemenizi sağlayan bir şablon ConfigMap dosyası sağlanır. Başlamadan önce, [configmaps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) hakkında Kubernetes belgelerini gözden geçirmeniz ve configmaps oluşturma, yapılandırma ve dağıtma konusunda bilgi edinin. Bu, ad alanı başına veya tüm küme genelinde stderr ve STDOUT filtrelemenize ve kümedeki tüm düğüm/düğümlerde çalışan herhangi bir kapsayıcı için ortam değişkenlerine izin verir.
 
 >[!IMPORTANT]
->Microsoft bu özellik tarafından desteklenen en düşük aracı sürümü, / oms:ciprod06142019 veya üzeri. 
+>Kapsayıcı iş yüklerinden stdout, stderr ve ortam değişkenlerini toplamak için desteklenen en düşük aracı sürümü ciprod06142019 veya üzeri. Aracı sürümünüzü doğrulamak için **düğüm** sekmesinde bir düğüm seçin ve Özellikler bölmesinde **Aracı görüntüsü etiketi** özelliğinin değeri. Aracı sürümleri ve her sürüme nelerin dahil olduğu hakkında ek bilgi için bkz. [Aracı sürüm notları](https://github.com/microsoft/Docker-Provider/tree/ci_feature_prod).
 
-### <a name="overview-of-configurable-data-collection-settings"></a>Yapılandırılabilir veri toplama ayarları genel bakış
+### <a name="data-collection-settings"></a>Veri toplama ayarları
 
-Veri toplamayı denetlemek için yapılandırılabilir ayarları şunlardır:
+Aşağıda, veri toplamayı denetlemek için yapılandırılabilecek ayarlar verilmiştir.
 
-|Anahtar |Veri türü |Value |Açıklama |
+|Anahtar |Veri türü |Değer |Açıklama |
 |----|----------|------|------------|
-|`schema-version` |Dize (büyük/küçük harfe duyarlı) |v1 |Bu, bu ConfigMap ayrıştırılırken aracı tarafından kullanılan şema sürümüdür. Şu anda desteklenen şema sürümü v1 ' dir. Bu değer değiştirme desteklenmez ve ConfigMap değerlendirildiğinde reddedilir.|
-|`config-version` |String | | Bu yapılandırma dosyasının sürümü kaynak denetim sistemi/deponuzda izlemek için özelliğini destekler. İzin verilen karakter sayısı üst sınırı 10 olan ve diğer tüm karakterler kesildi. |
-|`[log_collection_settings.stdout] enabled =` |Boolean | TRUE veya false | STDOUT kapsayıcı günlük toplama etkinse bu denetler. Ayarlandığında `true` ve ad alanı için stdout günlük toplama hariç tutulan (`log_collection_settings.stdout.exclude_namespaces` ayara bakın), stdout günlükleri tüm pod'ların / küme içindeki düğümler arasında tüm kapsayıcılardan toplanacak. İçinde ConfigMaps belirtilmezse, varsayılan değer: `enabled = true`. |
-|`[log_collection_settings.stdout] exclude_namespaces =`|String | Virgülle ayrılmış bir dizi |Kubernetes ad alanları için hangi stdout günlükleri toplanmayacak dizisi. Bu ayar etkilidir yalnızca `log_collection_settings.stdout.enabled` ayarlanır `true`. İçinde ConfigMap belirtilmezse, varsayılan değer: `exclude_namespaces = ["kube-system"]`.|
-|`[log_collection_settings.stderr] enabled =` |Boolean | TRUE veya false |Stderr kapsayıcı günlük toplama etkinse bu denetler. Ayarlandığında `true` ve ad alanı için stdout günlük toplama hariç tutulan (`log_collection_settings.stderr.exclude_namespaces` ayarı), stderr günlüklerini tüm pod'ların / küme içindeki düğümler arasında tüm kapsayıcılardan toplanacak. İçinde ConfigMaps belirtilmezse, varsayılan değer: `enabled = true`. |
-|`[log_collection_settings.stderr] exclude_namespaces =` |String |Virgülle ayrılmış bir dizi |Kubernetes ad alanları için hangi stderr günlüklerini toplanmayacak dizisi. Bu ayar etkilidir yalnızca `log_collection_settings.stdout.enabled` ayarlanır `true`. İçinde ConfigMap belirtilmezse, varsayılan değer: `exclude_namespaces = ["kube-system"]`. |
-| `[log_collection_settings.env_var] enabled =` |Boolean | TRUE veya false | Bu ortam değişkeni toplama etkinse denetler. Ayarlandığında `false`, hiçbir ortam değişkenleri tüm pod'ların / küme içindeki düğümler arasında çalışan herhangi bir kapsayıcı için toplanır. İçinde ConfigMap belirtilmezse, varsayılan değer: `enabled = true`. |
+|`schema-version` |Dize (büyük/küçük harfe duyarlı) |v1 |Bu, bu ConfigMap ayrıştırılırken aracı tarafından kullanılan şema sürümüdür. Şu anda desteklenen şema sürümü v1. Bu değerin değiştirilmesi desteklenmez ve ConfigMap değerlendirildiğinde reddedilir.|
+|`config-version` |Dize | | , Kaynak denetimi sisteminizde/deponuzda bu yapılandırma dosyasının sürümünün izini sürme yeteneğini destekler. İzin verilen en fazla karakter sayısı 10 ' dur ve diğer tüm karakterler kesilir. |
+|`[log_collection_settings.stdout] enabled =` |Boole | true veya false | Bu, stdout kapsayıcı günlüğü koleksiyonunun etkinleştirilip etkinleştirilmediğini denetler. `true` olarak ayarlandığında ve STDOUT günlük toplama için hiçbir ad alanı dışlanmazsa (aşağıdaki`log_collection_settings.stdout.exclude_namespaces` ayarı), stdout günlükleri kümedeki tüm düğüm/düğümler genelinde tüm kapsayıcılardan toplanacaktır. ConfigMaps içinde belirtilmemişse, varsayılan değer `enabled = true`olur. |
+|`[log_collection_settings.stdout] exclude_namespaces =`|Dize | Virgülle ayrılmış dizi |Stdout günlüklerinin toplanmayacak Kubernetes ad alanları dizisi. Bu ayar yalnızca `log_collection_settings.stdout.enabled` `true`olarak ayarlandıysa geçerlidir. ConfigMap içinde belirtilmemişse, varsayılan değer `exclude_namespaces = ["kube-system"]`olur.|
+|`[log_collection_settings.stderr] enabled =` |Boole | true veya false |Bu, stderr kapsayıcı günlüğü koleksiyonunun etkinleştirilip etkinleştirilmediğini denetler. `true` olarak ayarlandığında ve STDOUT günlük toplama (`log_collection_settings.stderr.exclude_namespaces` ayarı) için hiçbir ad alanı dışlanmadığı zaman, stderr günlükleri kümedeki tüm düğüm/düğümler genelinde tüm kapsayıcılardan toplanacaktır. ConfigMaps içinde belirtilmemişse, varsayılan değer `enabled = true`olur. |
+|`[log_collection_settings.stderr] exclude_namespaces =` |Dize |Virgülle ayrılmış dizi |Stderr günlüklerinin toplanmayacak Kubernetes ad alanları dizisi. Bu ayar yalnızca `log_collection_settings.stdout.enabled` `true`olarak ayarlandıysa geçerlidir. ConfigMap içinde belirtilmemişse, varsayılan değer `exclude_namespaces = ["kube-system"]`olur. |
+| `[log_collection_settings.env_var] enabled =` |Boole | true veya false | Bu ayar, kümedeki tüm pods 'ler/düğümler genelinde ortam değişkeni toplamayı denetler ve ConfigMaps içinde belirtilmediğinde varsayılan olarak `enabled = true`. Ortam değişkenlerinin toplanması genel olarak etkinleştirilmişse, ortam değişkenini `AZMON_COLLECT_ENV` bir Dockerfile ayarı veya altındaki [pod için yapılandırma dosyasında](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/) **yanlış** olarak ayarlayarak belirli bir kapsayıcı için devre dışı bırakabilirsiniz. **env:** bölümü. Ortam değişkenlerinin toplanması genel olarak devre dışıysa, belirli bir kapsayıcı için koleksiyonu etkinleştiremezsiniz (yani, kapsayıcı düzeyinde uygulanabilecek tek geçersiz kılma, genel olarak etkinleştirildiğinde koleksiyonu devre dışı bırakmalıdır.). |
 
-### <a name="configure-and-deploy-configmaps"></a>Yapılandırma ve ConfigMaps dağıtma
+ConfigMaps genel bir liste ve aracıya yalnızca bir ConfigMap uygulanmış olabilir. Koleksiyonlar üzerine başka bir ConfigMaps olamaz.
 
-Yapılandırma ve kümenize ConfigMap yapılandırma dosyanızı dağıtmak için aşağıdaki adımları gerçekleştirin.
+## <a name="configure-and-deploy-configmaps"></a>ConfigMaps yapılandırma ve dağıtma
 
-1. [İndirme](https://github.com/microsoft/OMS-docker/blob/ci_feature_prod/Kubernetes/container-azm-ms-agentconfig.yaml) şablon ConfigMap yaml dosyası ve kapsayıcı-azm-ms-agentconfig.yaml kaydedin.  
-1. Özelleştirmeleriniz ile ConfigMap yaml dosyasını düzenleyin. 
+ConfigMap yapılandırma dosyanızı yapılandırmak ve kümenize dağıtmak için aşağıdaki adımları gerçekleştirin.
 
-    - Belirli ad alanları için stdout günlük toplama dışarıda bırakmak için aşağıdaki örneği kullanarak anahtar/değer yapılandırma: `[log_collection_settings.stdout] enabled = true exclude_namespaces = ["my-namespace-1", "my-namespace-2"]`.
-    - Belirli bir kapsayıcı için ortam değişkeni koleksiyonunu devre dışı bırakmak için anahtar/değer kümesi `[log_collection_settings.env_var] enabled = true` değişken koleksiyonu etkinleştirmek ve adımları [burada](container-insights-manage-agent.md#how-to-disable-environment-variable-collection-on-a-container) belirli kapsayıcısı için yapılandırmayı tamamlamak için.
-    - Stderr günlük toplama küme çapında devre dışı bırakmak için aşağıdaki örneği kullanarak anahtar/değer yapılandırma: `[log_collection_settings.stderr] enabled = false`.
+1. ConfigMap YAML dosyasını şablon olarak [indirin](https://github.com/microsoft/OMS-docker/blob/ci_feature_prod/Kubernetes/container-azm-ms-agentconfig.yaml) ve kapsayıcı-AZM-MS-agentconfig. YAML olarak kaydedin.  
 
-1. Kubectl aşağıdaki komutu çalıştırarak ConfigMap oluşturun: `kubectl apply -f <configmap_yaml_file.yaml>`.
+2. Stdout, stderr ve/veya ortam değişkenlerini toplamak için, özelleştirmelerinizle ConfigMap YAML dosyasını düzenleyin.
+
+    - Stdout günlük toplama için belirli ad alanlarını dışlamak üzere anahtarı/değeri aşağıdaki örneği kullanarak yapılandırırsınız: `[log_collection_settings.stdout] enabled = true exclude_namespaces = ["my-namespace-1", "my-namespace-2"]`.
+    
+    - Belirli bir kapsayıcı için ortam değişkeni toplamayı devre dışı bırakmak için, anahtar/değer `[log_collection_settings.env_var] enabled = true` değişken toplamayı küresel olarak etkinleştirecek şekilde ayarlayın ve ardından belirli bir kapsayıcının yapılandırmasını gerçekleştirmek için [buradaki](container-insights-manage-agent.md#how-to-disable-environment-variable-collection-on-a-container) adımları izleyin.
+    
+    - Stderr günlük toplama kümesi genelinde devre dışı bırakmak için anahtar/değer aşağıdaki örneği kullanarak yapılandırılır: `[log_collection_settings.stderr] enabled = false`.
+
+3. Aşağıdaki kubectl komutunu çalıştırarak ConfigMap oluşturun: `kubectl apply -f <configmap_yaml_file.yaml>`.
     
     Örnek: `kubectl apply -f container-azm-ms-agentconfig.yaml`. 
     
-    Yapılandırma değişikliğinin etkili almadan önce tamamlanması birkaç dakika sürebilir ve tüm omsagent pod'ların kümesinde başlayacak. Yeniden başlatma tüm omsagent pod'ları için sıralı bir yeniden başlatma, tümü aynı anda yeniden başlatın. Yeniden başlatma tamamlandıktan sonra bir ileti aşağıdakine benzer ve sonucu içeren görüntülenir: `configmap "container-azm-ms-agentconfig" created`.
+    Yapılandırma değişikliğinin, yürürlüğe girmeden önce tamamlanması birkaç dakika sürebilir ve kümedeki tüm omsagent 'lar yeniden başlatılır. Yeniden başlatma, tüm omsagent pods için aynı anda yeniden başlatma işlemi için bir yeniden başlatma işlemi yapılır. Yeniden başlatmalar tamamlandığında aşağıdakine benzer bir ileti görüntülenir ve sonuç: `configmap "container-azm-ms-agentconfig" created`.
 
-Yapılandırma başarıyla uygulandı doğrulamak için bir aracı pod günlüklerini gözden geçirmek için aşağıdaki komutu kullanın: `kubectl logs omsagent-fdf58 -n=kube-system`. Osmagent pod'ları yapılandırma hatalarından varsa, çıkış aşağıdakine benzer hatalar gösterir:
+4. Aşağıdaki kubectl komutunu çalıştırarak ConfigMap oluşturun: `kubectl apply -f <configmap_yaml_file.yaml>`.
+    
+    Örnek: `kubectl apply -f container-azm-ms-agentconfig.yaml`. 
+    
+    Yapılandırma değişikliğinin, yürürlüğe girmeden önce tamamlanması birkaç dakika sürebilir ve kümedeki tüm omsagent 'lar yeniden başlatılır. Yeniden başlatma, tüm omsagent pods için aynı anda yeniden başlatma işlemi için bir yeniden başlatma işlemi yapılır. Yeniden başlatmalar tamamlandığında aşağıdakine benzer bir ileti görüntülenir ve sonuç: `configmap "container-azm-ms-agentconfig" created`.
+
+## <a name="verify-configuration"></a>Yapılandırmayı Doğrula 
+
+Yapılandırmanın başarıyla uygulandığını doğrulamak için şu komutu kullanarak bir aracı Pod öğesinden günlükleri gözden geçirin: `kubectl logs omsagent-fdf58 -n=kube-system`. Omsagent pods 'den yapılandırma hataları varsa, çıktıda aşağıdakine benzer hatalar gösterilir:
 
 ``` 
 ***************Start Config Processing******************** 
 config::unsupported/missing config schema version - 'v21' , using defaults
 ```
 
-Hatalar, yeniden başlatın ve varsayılan yapılandırmayı kullanmak için neden dosya ayrıştırması omsagent engelliyor. ConfigMap içinde hataları düzelttikten sonra yaml dosyası kaydedip komutunu çalıştırarak güncelleştirilmiş ConfigMaps uygulayabileceğiniz: `kubectl apply -f <configmap_yaml_file.yaml`.
+Yapılandırma değişikliklerini uygulamayla ilgili hatalar İnceleme için de kullanılabilir. Yapılandırma değişikliklerinde ek sorun giderme işlemleri gerçekleştirmek için aşağıdaki seçenekler kullanılabilir:
 
-## <a name="applying-updated-configmap"></a>Uygulama ConfigMap güncelleştirildi
+- Aynı `kubectl logs` komutunu kullanarak bir aracı Pod günlüklerinden. 
 
-Kümeniz için zaten bir ConfigMap dağıttıktan ve daha yeni yapılandırmayla güncelleştirmek istediğiniz, yalnızca daha önce kullandınız ve sonra önceden olduğu gibi aynı komutu kullanarak geçerli ConfigMap dosyayı düzenleyebilirsiniz `kubectl apply -f <configmap_yaml_file.yaml`.
+- Canlı Günlükler. Canlı günlüklerde aşağıdakine benzer hatalar gösterilir:
 
-Yapılandırma değişikliğinin etkili almadan önce tamamlanması birkaç dakika sürebilir ve tüm omsagent pod'ların kümesinde başlayacak. Yeniden başlatma tüm omsagent pod'ları için sıralı bir yeniden başlatma, tümü aynı anda yeniden başlatın. Yeniden başlatma tamamlandıktan sonra bir ileti aşağıdakine benzer ve sonucu içeren görüntülenir: `configmap "container-azm-ms-agentconfig" updated`.
+    ```
+    config::error::Exception while parsing config map for log collection/env variable settings: \nparse error on value \"$\" ($end), using defaults, please check config map for errors
+    ```
+
+- Log Analytics çalışma alanınızdaki **KubeMonAgentEvents** tablosundan. Veriler, yapılandırma hataları için *hata* önem derecesine sahip saatte bir gönderilir. Herhangi bir hata yoksa, tablodaki *girişte, hiçbir hata raporlayan önem derecesine*sahip veriler olur. **Etiketler** özelliği, hatanın oluştuğu Pod ve kapsayıcı kimliği ve ayrıca ilk oluşum, son oluşum ve Son saatteki sayı hakkında daha fazla bilgi içerir.
+
+Hatalar omsagent 'ın dosyayı ayrıştırmasını önler, yeniden başlatılmasına ve varsayılan yapılandırmayı kullanmasına neden olur. ConfigMap 'teki hataları düzelttikten sonra, YAML dosyasını kaydedin ve şu komutu çalıştırarak güncelleştirilmiş ConfigMaps 'leri uygulayın: `kubectl apply -f <configmap_yaml_file.yaml`.
+
+## <a name="applying-updated-configmap"></a>Güncelleştirilmiş ConfigMap uygulanıyor
+
+Kümenize zaten bir ConfigMap dağıttıysanız ve daha yeni bir yapılandırmayla güncelleştirmek istiyorsanız, daha önce kullandığınız ConfigMap dosyasını düzenleyebilir ve sonra, `kubectl apply -f <configmap_yaml_file.yaml`aynı komutu kullanarak uygulayabilirsiniz.
+
+Yapılandırma değişikliğinin, yürürlüğe girmeden önce tamamlanması birkaç dakika sürebilir ve kümedeki tüm omsagent 'lar yeniden başlatılır. Yeniden başlatma, tüm omsagent pods için aynı anda yeniden başlatma işlemi için bir yeniden başlatma işlemi yapılır. Yeniden başlatmalar tamamlandığında aşağıdakine benzer bir ileti görüntülenir ve sonuç: `configmap "container-azm-ms-agentconfig" updated`.
 
 ## <a name="verifying-schema-version"></a>Şema sürümü doğrulanıyor
 
-Desteklenen yapılandırma şeması sürümleri omsagent pod üzerindeki pod ek açıklama (şema sürümleri) olarak kullanılabilir. Bunları şu kubectl komutla görebilirsiniz: `kubectl describe pod omsagent-fdf58 -n=kube-system`
+Desteklenen yapılandırma şeması sürümleri, omsagent pod üzerinde pod ek açıklaması (şema-sürümler) olarak kullanılabilir. Aşağıdaki kubectl komutuyla bunları görebilirsiniz: `kubectl describe pod omsagent-fdf58 -n=kube-system`
 
-Çıktı ek açıklama şema sürümleriyle şuna benzer şekilde gösterilir:
+Bu çıktı, ek açıklama şeması sürümleriyle aşağıdakine benzer şekilde görünür:
 
 ```
     Name:           omsagent-fdf58
@@ -98,5 +119,8 @@ Desteklenen yapılandırma şeması sürümleri omsagent pod üzerindeki pod ek 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Azure İzleyici ve diğer yönleri AKS kümenizi izlemek öğrenme devam etmek için bkz: [görünümü Azure Kubernetes hizmeti sistem durumu](container-insights-analyze.md).
-- Görünüm [sorgu örnekleri oturum](container-insights-log-search.md#search-logs-to-analyze-data) önceden tanımlanmış sorgular ve değerlendirme veya uyarı, görselleştirme veya kümelerinizi çözümleme için özelleştirmek için örnekler görmek için.
+- Kapsayıcılar için Azure Izleyici, önceden tanımlanmış bir uyarı kümesi içermez. DevOps veya işletimsel işlemlerinizi ve yordamlarınızı desteklemek üzere yüksek CPU ve bellek kullanımı için önerilen uyarılar oluşturmayı öğrenmek üzere [kapsayıcılar Için Azure izleyici ile performans uyarılarını oluşturma](container-insights-alerts.md) ' yı gözden geçirin.
+
+- İzleme etkinken, AKS veya hibrit kümeniz ve üzerinde çalışan iş yüklerinizin sistem durumunu ve kaynak kullanımını toplayıp, kapsayıcılar için Azure Izleyicisini [nasıl kullanacağınızı](container-insights-analyze.md) öğrenin.
+
+- Daha önceden tanımlanmış sorguları ve Uyarıları izlemek için değerlendirmek veya özelleştirmek üzere ön tanımlı sorguları ve örnekleri görmek için [günlük sorgusu örneklerini](container-insights-log-search.md#search-logs-to-analyze-data) görüntüleyin, kümelerinizi görselleştirmeyi veya çözümlemeyi inceleyin.

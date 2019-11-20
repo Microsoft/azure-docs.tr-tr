@@ -6,14 +6,14 @@ author: jimzim
 ms.author: jzim
 manager: jeconnoc
 ms.topic: tutorial
-ms.service: openshift
+ms.service: container-service
 ms.date: 05/06/2019
-ms.openlocfilehash: 627acbfc1f3a460cbb94e322c43445a55fce1ffa
-ms.sourcegitcommit: 009334a842d08b1c83ee183b5830092e067f4374
+ms.openlocfilehash: 0ad70f4c3681705377a350fee8b02a55c526f26c
+ms.sourcegitcommit: 2e4b99023ecaf2ea3d6d3604da068d04682a8c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66306159"
+ms.lasthandoff: 07/09/2019
+ms.locfileid: "67669347"
 ---
 # <a name="tutorial-delete-an-azure-red-hat-openshift-cluster"></a>Öğretici: Azure Red Hat OpenShift küme silme
 
@@ -36,7 +36,7 @@ Bu öğreticiye başlamadan önce:
 
 * Bir küme oluşturma [Azure Red Hat OpenShift küme oluşturma](tutorial-create-cluster.md) öğretici.
 
-## <a name="step-1-sign-in-to-azure"></a>1. Adım: Oturum açın: Azure
+## <a name="step-1-sign-in-to-azure"></a>1\. adım: Azure'da oturum açma
 
 Azure CLI'yi yerel olarak çalıştırıyorsanız, çalıştırma `az login` için Azure'da oturum açın.
 
@@ -46,7 +46,7 @@ az login
 
 Birden çok aboneliğe erişiminiz çalıştırırsanız `az account set -s {subscription ID}` değiştirerek `{subscription ID}` kullanmak istediğiniz aboneliği ile.
 
-## <a name="step-2-delete-the-cluster"></a>2. Adım: Küme silme
+## <a name="step-2-delete-the-cluster"></a>2\. adım: Küme silme
 
 Bir Bash Terminali açın ve kümenizin adını değişken küme_adı ayarlayın:
 

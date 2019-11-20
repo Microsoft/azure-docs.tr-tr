@@ -1,23 +1,23 @@
 ---
-title: NVA faaliyetidir için bir Azure sanal WAN sanal hub yönlendirme tablosu oluşturma | Microsoft Docs
-description: Sanal WAN sanal hub rota tablosu trafiği ağ sanal Gereci ilerletebilir.
+title: 'Sanal WAN: NVA: Azure PowerShell sanal hub yol tablosu oluşturma'
+description: Sanal WAN sanal hub yol tablosu, trafiği bir ağ sanal gerecine yönlendiren.
 services: virtual-wan
 author: cherylmc
 ms.service: virtual-wan
 ms.topic: conceptual
-ms.date: 01/09/2019
+ms.date: 11/12/2019
 ms.author: cherylmc
 Customer intent: As someone with a networking background, I want to work with routing tables for NVA.
-ms.openlocfilehash: fc8dd6770efa1c057a56374ddc0094c2d88d2eb5
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 2d8922084dbe30c2dbe494028f2e5a1497fb3759
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60457614"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74015003"
 ---
-# <a name="create-a-virtual-hub-route-table-to-steer-traffic-to-a-network-virtual-appliance"></a>Bir ağ sanal Gerecinin trafik faaliyetidir için sanal Hub yönlendirme tablosu oluşturma
+# <a name="create-a-virtual-hub-route-table-to-steer-traffic-to-a-network-virtual-appliance"></a>Trafiği bir ağ sanal gerecine yönlendiren bir sanal hub yol tablosu oluşturun
 
-Bu makalede bir ağ sanal gerecine trafiği sanal Hub'ından faaliyetidir gösterilmektedir. 
+Bu makalede, bir sanal hub 'dan bir ağ sanal gerecine nasıl trafik ekleneceği gösterilmektedir. 
 
 ![Sanal WAN diyagramı](./media/virtual-wan-route-table/vwanroute.png)
 
@@ -25,10 +25,10 @@ Bu makalede şunları öğreneceksiniz:
 
 * WAN oluşturma
 * Hub oluşturma
-* Sanal ağ bağlantıları hub'ı oluşturma
-* Hub yönlendirme oluşturma
+* Hub sanal ağ bağlantıları oluşturma
+* Hub yolu oluşturma
 * Yönlendirme tablosu oluşturma
-* Rota tablosunu Uygula
+* Yol tablosunu uygulama
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
@@ -36,18 +36,18 @@ Bu makalede şunları öğreneceksiniz:
 
 Aşağıdaki ölçütleri karşıladığınızı doğrulayın:
 
-1. Bir ağ sanal Gereci (NVA) var. Seçtiğiniz Azure Marketi'nden bir sanal ağda genellikle sağlandığında bir üçüncü taraf yazılım budur.
-2. NVA ağ arabirimine atanan bir özel IP var. 
-3. NVA sanal hub'ı dağıtılamıyor. Ayrı bir Vnet'te dağıtılması gerekir. Bu makale için NVA sanal ağ 'DMZ VNet' adlandırılır.
-4. Bir 'DMZ VNet' olabilir veya birçok sanal ağa bağlı. Bu makalede, bu sanal ağ 'Dolaylı bağlı sanal ağ' denir. Bu sanal ağlar DMZ VNet eşlemesi kullanarak sanal ağa bağlanabilir.
-5. 2 sanal ağ zaten oluşturulmuş olduğunu doğrulayın. Bu uç sanal ağları kullanılır. Bu makale için sanal ağ uç adres alanlarının 10.0.2.0/24 ve 10.0.3.0/24 var. Sanal ağ oluşturma hakkında bilgi gerekirse bkz [PowerShell kullanarak sanal ağ oluşturma](../virtual-network/quick-create-powershell.md).
-6. Tüm sanal ağlarda hiçbir sanal ağ geçitleri olduğundan emin olun.
+1. Bir ağ sanal gereci (NVA) vardır. Bu, genellikle bir sanal ağda Azure Marketi 'nden sağlanan bir üçüncü taraf yazılımdır.
+2. NVA ağ arabirimine atanmış özel bir IP 'si var. 
+3. NVA sanal hub 'da dağıtılamıyor. Ayrı bir sanal ağa dağıtılması gerekir. Bu makalede, NVA VNet ' DMZ VNet ' olarak adlandırılır.
+4. ' DMZ VNet ' öğesine bağlı bir veya daha fazla sanal ağ olabilir. Bu makalede, bu VNet ' dolaylı bağlı olan VNet ' olarak adlandırılır. Bu sanal ağlar VNet eşlemesi kullanılarak DMZ VNet 'e bağlanabilir.
+5. Daha önce oluşturulmuş 2 sanal ağlarınızın olduğunu doğrulayın. Bunlar, bağlı olan VNET 'ler olarak kullanılacaktır. Bu makalede, VNet bağlı bileşen adres alanları 10.0.2.0/24 ve 10.0.3.0/24 ' dir. VNet oluşturma hakkında bilgi için bkz. [PowerShell kullanarak sanal ağ oluşturma](../virtual-network/quick-create-powershell.md).
+6. Hiçbir VNET 'te sanal ağ geçidi bulunmadığından emin olun.
 
-## <a name="signin"></a>1. Oturum aç
+## <a name="signin"></a>1. oturum aç
 
-Resource Manager PowerShell cmdlet'lerinin en son sürümünü yüklediğinizden emin olun. PowerShell cmdlet'lerini yükleme hakkında daha fazla bilgi için bkz. [Azure PowerShell'i yükleme ve yapılandırma](/powershell/azure/install-az-ps). Bu önemlidir, çünkü cmdlet’lerin daha önceki sürümleri bu alıştırma için gereken geçerli değerleri içermez.
+Kaynak Yöneticisi PowerShell cmdlet 'lerinin en son sürümünü yüklediğinizden emin olun. PowerShell cmdlet'lerini yükleme hakkında daha fazla bilgi için bkz. [Azure PowerShell'i yükleme ve yapılandırma](/powershell/azure/install-az-ps). Bu önemlidir, çünkü cmdlet’lerin daha önceki sürümleri bu alıştırma için gereken geçerli değerleri içermez.
 
-1. PowerShell Konsolunuzu yükseltilmiş ayrıcalıklarla açın ve Azure hesabınızda oturum açın. Bu cmdlet, oturum açma kimlik bilgilerini ister. Azure PowerShell için kullanılabilir olacak şekilde oturum açtıktan sonra hesap ayarlarınızı indirir.
+1. PowerShell konsolunuzu yükseltilmiş ayrıcalıklarla açın ve Azure hesabınızda oturum açın. Bu cmdlet sizden oturum açma kimlik bilgilerini ister. Oturum açtıktan sonra, Azure PowerShell için kullanılabilir olmaları için hesap ayarlarınızı indirir.
 
    ```powershell
    Connect-AzAccount
@@ -63,7 +63,7 @@ Resource Manager PowerShell cmdlet'lerinin en son sürümünü yüklediğinizden
    Select-AzSubscription -SubscriptionName "Name of subscription"
    ```
 
-## <a name="rg"></a>2. Kaynak oluşturma
+## <a name="rg"></a>2. kaynak oluşturma
 
 1. Bir kaynak grubu oluşturun.
 
@@ -75,15 +75,15 @@ Resource Manager PowerShell cmdlet'lerinin en son sürümünü yüklediğinizden
    ```powershell
    $virtualWan = New-AzVirtualWan -ResourceGroupName "testRG" -Name "myVirtualWAN" -Location "West US"
    ```
-3. Bir sanal hub'ı oluşturun.
+3. Sanal bir hub oluşturun.
 
    ```powershell
-   New-AzVirtualHub -VirtualWan $virtualWan -ResourceGroupName "testRG" -Name "westushub" -AddressPrefix "10.0.1.0/24"
+   New-AzVirtualHub -VirtualWan $virtualWan -ResourceGroupName "testRG" -Name "westushub" -AddressPrefix "10.0.1.0/24" -Location "West US"
    ```
 
-## <a name="connections"></a>3. Bağlantılar oluşturun
+## <a name="connections"></a>3. bağlantı oluşturma
 
-Hub sanal ağ bağlantıları sanal hub'ına dolaylı uç sanal ağ ve DMZ sanal ağ oluşturun.
+Dolaylı bağlı olan VNet 'ten ve DMZ VNet 'ten sanal hub 'a hub sanal ağ bağlantıları oluşturun.
 
   ```powershell
   $remoteVirtualNetwork1= Get-AzVirtualNetwork -Name "indirectspoke1" -ResourceGroupName "testRG"
@@ -95,25 +95,25 @@ Hub sanal ağ bağlantıları sanal hub'ına dolaylı uç sanal ağ ve DMZ sanal
   New-AzVirtualHubVnetConnection -ResourceGroupName "testRG" -VirtualHubName "westushub" -Name  "testvnetconnection3" -RemoteVirtualNetwork $remoteVirtualNetwork3
   ```
 
-## <a name="route"></a>4. Sanal hub yönlendirme oluşturma
+## <a name="route"></a>4. sanal hub yolu oluşturma
 
-Bu makalede 10.0.2.0/24 ve 10.0.3.0/24 dolaylı uç sanal ağ adres alanları: ve DMZ NVA ağ arabiriminin özel IP adresi 10.0.4.5 olan.
+Bu makalede, dolaylı bağlı olan VNet adres alanları 10.0.2.0/24 ve 10.0.3.0/24 ' dir ve DMZ NVA ağ arabirimi özel IP adresi 10.0.4.5 ' dir.
 
 ```powershell
 $route1 = New-AzVirtualHubRoute -AddressPrefix @("10.0.2.0/24", "10.0.3.0/24") -NextHopIpAddress "10.0.4.5"
 ```
 
-## <a name="applyroute"></a>5. Sanal hub yönlendirme tablosu oluşturma
+## <a name="applyroute"></a>5. bir sanal hub yol tablosu oluşturun
 
-Bir sanal hub yol tablosu oluşturun ve ardından oluşturulan Yönlendirme uygulayabilir.
+Bir sanal hub yol tablosu oluşturun, sonra oluşturulan yolu buna uygulayın.
  
 ```powershell
 $routeTable = New-AzVirtualHubRouteTable -Route @($route1)
 ```
 
-## <a name="commit"></a>6. Değişiklikleri
+## <a name="commit"></a>6. değişiklikleri işleyin
 
-Sanal hub'ıyla değişiklikleri uygulayın.
+Değişiklikleri sanal hub 'a işleyin.
 
 ```powershell
 Update-AzVirtualHub -VirtualWanId $virtualWan.Id -ResourceGroupName "testRG" -Name "westushub" -RouteTable $routeTable

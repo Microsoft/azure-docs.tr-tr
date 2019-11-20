@@ -1,7 +1,7 @@
 ---
-title: Özel Docker görüntüsü kullanarak bir model dağıtma
-titleSuffix: Azure Machine Learning service
-description: Azure Machine Learning hizmeti Modellerinizi dağıtırken özel Docker görüntüsü kullanmayı öğrenin. Eğitilen bir modelin dağıtım yaparken, ana görüntü, web sunucusu ve hizmeti çalıştırmak için gereken diğer bileşenleri için bir Docker görüntüsü oluşturulur. Azure Machine Learning hizmeti için varsayılan bir görüntü sağlarken kendi görüntünüzü de kullanabilirsiniz.
+title: Özel Docker görüntüsü ile modeller dağıtma
+titleSuffix: Azure Machine Learning
+description: Azure Machine Learning modellerinizi dağıttığınızda özel bir Docker temel görüntüsünü nasıl kullanacağınızı öğrenin. Azure Machine Learning, sizin için varsayılan bir temel görüntü sağlar, ayrıca kendi temel görüntünüzü da kullanabilirsiniz.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,112 +9,120 @@ ms.topic: conceptual
 ms.author: jordane
 author: jpe316
 ms.reviewer: larryfr
-ms.date: 06/05/2019
-ms.openlocfilehash: 29fdb200075a5b5843944a7a890cc2f8ad61f1ee
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.date: 08/22/2019
+ms.openlocfilehash: b34ef305a6f1cf41c7b7bdcf415e1a91653ad878
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67543847"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73932112"
 ---
-# <a name="deploy-a-model-using-a-custom-docker-image"></a>Özel Docker görüntüsü kullanarak model dağıtma
+# <a name="deploy-a-model-using-a-custom-docker-base-image"></a>Özel bir Docker temel görüntüsü kullanarak model dağıtma
+[!INCLUDE [applies-to-skus](../../../includes/aml-applies-to-basic-enterprise-sku.md)]
 
-Azure Machine Learning hizmeti ile eğitilmiş modeller dağıtırken özel Docker görüntüsü kullanmayı öğrenin.
+Azure Machine Learning ile eğitilen modeller dağıttığınızda özel bir Docker temel görüntüsünü nasıl kullanacağınızı öğrenin.
 
-Eğitilen bir modelin bir web hizmeti veya IOT Edge cihazına dağıtırken bir Docker görüntüsü oluşturulur. Bu görüntü, model, conda ortam ve modelini kullanmak için gerekli varlıkları içerir. Ayrıca, bir web hizmeti ve Azure IOT Hub ile çalışmak için gereken bileşenleri olarak dağıtıldığında gelen istekleri işlemek için bir web sunucusu içerir.
+Eğitilen bir modeli bir Web hizmetine veya IoT Edge cihaza dağıttığınızda, gelen istekleri işlemek için bir Web sunucusu içeren bir paket oluşturulur.
 
-Azure Machine Learning hizmeti varsayılan bir Docker görüntüsü sağlar. böylece oluşturma hakkında endişelenmeniz gerekmez. Olarak oluşturduğunuz özel bir görüntü kullanabilirsiniz bir _temel görüntü_. Bir dağıtım için bir görüntü oluşturulduğunda, temel görüntü başlangıç noktası olarak kullanılır. Bu, temel işletim sistemi ve bileşenleri sağlar. Dağıtım işlemi modeliniz, conda ortam ve diğer varlıklar gibi ek bileşenler dağıtmadan önce resim ardından ekler.
+Azure Machine Learning, bir varsayılan Docker temel görüntüsü sağlar, bu sayede bir tane oluşturmak için endişelenmenize gerek kalmaz. Ayrıca, belirli bir temel görüntü seçmek için Azure Machine Learning __ortamları__ kullanabilir veya sağladığınız özel bir tane kullanabilirsiniz.
 
-Genellikle, bileşen sürümleri denetlemek veya dağıtım sırasında zamandan istediğinizde bir özel görüntü oluşturun. Örneğin, Python, Conda veya başka bir bileşen belirli bir sürüme standart hale getirmek isteyebilirsiniz. Burada yükleme işlemi uzun süren modelinizi tarafından gerekli yazılımları yüklemek isteyebilirsiniz. Temel görüntü oluşturulurken yazılım yükleme, her dağıtım için yüklemek gerekmediği anlamına gelir.
+Bir temel görüntü, bir dağıtım için görüntü oluşturulduğunda başlangıç noktası olarak kullanılır. Temel işletim sistemi ve bileşenleri sağlar. Dağıtım işlemi daha sonra modelinize, Conda ortamı ve diğer varlıklar gibi ek bileşenleri, dağıtılmadan önce görüntüye ekler.
+
+Genellikle, bağımlılıklarınızı yönetmek için Docker 'ı kullanmak istediğinizde, bileşen sürümleri üzerinde daha sıkı denetim sağlamak veya dağıtım sırasında zamandan tasarruf etmek istediğinizde özel bir temel görüntü oluşturursunuz. Örneğin, belirli bir Python, Conda veya başka bir bileşen sürümünde standartlaştırmak isteyebilirsiniz. Ayrıca, modelinize gereken yazılımı yükleme işleminin uzun sürme süresini de yüklemek isteyebilirsiniz. Temel görüntü oluştururken yazılımı yüklemek, her dağıtım için yüklemeniz gerekmediği anlamına gelir.
 
 > [!IMPORTANT]
-> Model dağıtımı, web sunucusu gibi temel bileşenleri veya IOT Edge bileşenleri geçersiz kılamaz. Bu bileşenler, test ve Microsoft tarafından desteklenen bilinen bir çalışma ortamı sağlar.
+> Bir modeli dağıtırken, Web sunucusu veya IoT Edge bileşenleri gibi temel bileşenleri geçersiz kılamazsınız. Bu bileşenler, Microsoft tarafından sınanmış ve desteklenen, bilinen bir çalışma ortamı sağlar.
 
 > [!WARNING]
-> Microsoft tarafından bir özel görüntü neden olduğu sorunları gidermeye yardımcı olmak mümkün olmayabilir. Sorunlarla karşılaşırsanız, varsayılan görüntü veya görüntüye belirli sorun olup olmadığını görmek için Microsoft sağlar görüntülerden birini kullanmak için istenebilir.
+> Microsoft, özel bir görüntünün neden olduğu sorunları gidermenize yardımcı olabilir. Sorunlarla karşılaşırsanız, sorunun yansımanıza özgü olup olmadığını görmek için varsayılan görüntüyü veya Microsoft 'un sağladığı görüntülerden birini kullanmanız istenebilir.
 
-Bu belge, iki bölüme ayrılır:
+Bu belge iki bölüme ayrılmıştır:
 
-* Özel bir görüntü oluşturun: Özel görüntü oluşturma ve Machine Learning CLI ve Azure CLI kullanarak bir Azure Container Registry kimlik doğrulaması yapılandırma bilgilerini yöneticileri ve DevOps sağlar.
-* Özel görüntü kullanma: Python SDK'sı veya ML CLI eğitilen bir modelin dağıtırken özel görüntüleri kullanma hakkında bilgi veri Bilimcilerine ve DevOps/MLOps sağlar.
+* Özel bir temel görüntü oluşturma: özel görüntü oluşturma ve Azure CLı ve Machine Learning CLı kullanarak Azure Container Registry kimlik doğrulamasını yapılandırma konusunda yöneticilere ve DevOps 'a bilgi sağlar.
+* Özel bir temel görüntü kullanarak bir model dağıtma: Python SDK veya ML CLı 'dan eğitilen bir model dağıtırken özel görüntüler kullanma hakkında veri bilimcileri ve DevOps/ML mühendislerine yönelik bilgiler sağlar.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Azure Machine Learning hizmeti çalışma. Daha fazla bilgi için [çalışma alanı oluşturma](setup-create-workspace.md) makalesi.
-* Azure Machine SDK Learning. Daha fazla bilgi için Python SDK'sı bölümüne bakın. [çalışma alanı oluşturma](setup-create-workspace.md#sdk) makalesi.
+* Bir Azure Machine Learning çalışma grubu. Daha fazla bilgi için [çalışma alanı oluşturma](how-to-manage-workspace.md) makalesine bakın.
+* [Azure MACHINE LEARNING SDK](https://docs.microsoft.com/python/api/overview/azure/ml/install?view=azure-ml-py). 
 * [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
-* [CLI uzantısını Azure Machine Learning için](reference-azure-machine-learning-cli.md).
-* Bir [Azure Container Registry](/azure/container-registry) veya internet üzerinden erişilebilir diğer Docker kayıt defteri.
-* Bu belgedeki adımlarda oluşturma ve kullanma ile ilgili bilgi sahibi olduğunuz varsayılır bir __çıkarımı yapılandırma__ nesne modeli dağıtımının bir parçası olarak. Daha fazla bilgi için "dağıtmaya hazırlanma" bölümüne bakın. [dağıtılacağı yeri ve nasıl](how-to-deploy-and-where.md#prepare-to-deploy).
+* [Azure Machine Learning Için CLI uzantısı](reference-azure-machine-learning-cli.md).
+* Internet üzerinden erişilebilen bir [Azure Container Registry](/azure/container-registry) veya başka bir Docker kayıt defteri.
+* Bu belgedeki adımlarda, model dağıtımının bir parçası olarak bir __çıkarım yapılandırma__ nesnesi oluşturma ve kullanma hakkında bilgi sahibi olduğunuz varsayılır. Daha fazla bilgi için, uygulamasının [dağıtılacağı ve nasıl yapılacağı hakkında](how-to-deploy-and-where.md#prepare-to-deploy)"dağıtmaya hazırlanma" bölümüne bakın.
 
-## <a name="create-a-custom-image"></a>Özel görüntü oluşturma
+## <a name="create-a-custom-base-image"></a>Özel bir temel görüntü oluşturma
 
-Bu bölümdeki bilgiler, Docker görüntülerini depolamak için bir Azure Container Registry kullandığınızı varsayar. Azure Machine Learning hizmeti için özel görüntüleri oluşturmak için planlarken aşağıdaki denetim listesini kullanın:
+Bu bölümdeki bilgiler, Docker görüntülerini depolamak için bir Azure Container Registry kullandığınızı varsayar. Azure Machine Learning için özel görüntüler oluşturmayı planlarken aşağıdaki denetim listesini kullanın:
 
-* Azure Machine Learning hizmeti çalışma alanında veya tek başına bir Azure Container Registry için oluşturulmuş Azure Container Registry kullanacak mısınız?
+* Azure Machine Learning çalışma alanı veya tek başına Azure Container Registry oluşturulan Azure Container Registry kullanacaksınız?
 
-    Görüntüleri kullanarak, depolanan __çalışma alanı için kapsayıcı kayıt defteri__, kayıt defterinde kimlik doğrulaması gerekmez. Kimlik doğrulaması, çalışma alanı tarafından işlenir.
+    __Çalışma alanı için kapsayıcı kayıt defterinde__depolanan görüntüleri kullanırken, kayıt defterinde kimlik doğrulaması yapmanız gerekmez. Kimlik doğrulaması, çalışma alanı tarafından işlenir.
 
     > [!WARNING]
-    > Çalışma alanınız için Azure Container Rzegistry olduğu __denenmesi veya model dağıtma ilk kez oluşturulan__ çalışma alanını kullanma. Yeni bir çalışma alanı oluşturduğunuz ancak değil eğitilmiş ve bir model oluşturdunuz, hiçbir Azure Container Registry için çalışma alanı bulunur.
+    > Çalışma alanınızın Azure Container Registry, çalışma alanını kullanarak __bir modeli eğitmeniz veya dağıtmanız için ilk kez oluşturulur__ . Yeni bir çalışma alanı oluşturduysanız ancak bir model veya bir model oluşturmadıysanız, çalışma alanı için Azure Container Registry olmaz.
 
-    Çalışma alanınız için Azure Container Registry adı alma hakkında daha fazla bilgi için bkz: [Get kapsayıcı kayıt defteri adı](#getname) bu makalenin.
+    Çalışma alanınızın Azure Container Registry adını alma hakkında daha fazla bilgi için bu makaledeki [kapsayıcı kayıt defteri adı alma](#getname) bölümüne bakın.
 
-    Görüntüleri kullanarak, depolanan bir __tek başına kapsayıcı kayıt defteri__, en azından okuma erişimi bir hizmet sorumlusu yapılandırmanız gerekecektir. Ardından kayıt defterinden görüntüleri kullanan herkes için hizmet sorumlusu kimliği (kullanıcı adı) ve parola'ni sağlayın. Kapsayıcı kayıt defteri genel olarak erişilebilir yaptığınız varsa istisnadır.
+    __Tek başına kapsayıcı kayıt defterinde__depolanan görüntüleri kullanırken, en azından okuma erişimi olan bir hizmet sorumlusu yapılandırmanız gerekecektir. Daha sonra, kayıt defterinden görüntüleri kullanan herkese hizmet asıl KIMLIĞI (Kullanıcı adı) ve parola sağlarsınız. Özel durum, kapsayıcı kayıt defterini herkese açık bir şekilde erişilebilir hale getirir.
 
-    Özel bir Azure Container Registry oluşturma hakkında daha fazla bilgi için bkz. [özel kapsayıcı kayıt defteri oluşturma](/azure/container-registry/container-registry-get-started-azure-cli).
+    Özel Azure Container Registry oluşturma hakkında bilgi için bkz. [özel kapsayıcı kayıt defteri oluşturma](/azure/container-registry/container-registry-get-started-azure-cli).
 
-    Azure Container Registry ile hizmet sorumlularını kullanma hakkında daha fazla bilgi için bkz: [hizmet sorumluları ile Azure Container Registry kimlik doğrulaması](/azure/container-registry/container-registry-auth-service-principal).
+    Azure Container Registry ile hizmet sorumlularını kullanma hakkında daha fazla bilgi için bkz. [hizmet sorumluları ile Azure Container Registry kimlik doğrulaması](/azure/container-registry/container-registry-auth-service-principal).
 
-* Azure Container Registry ve görüntü bilgileri: Görüntü adı kullanmak için gereken herkes için sağlar. Örneğin, adlı bir görüntü `myimage`adlı bir kayıt defterinde saklanan `myregistry`, başvurulan `myregistry.azurecr.io/myimage` görüntü için model dağıtımı kullanırken
+* Azure Container Registry ve görüntü bilgileri: görüntü adını, kullanması gereken herkese sunun. Örneğin, `myregistry`adlı bir kayıt defterinde depolanan `myimage`adlı bir görüntü, model dağıtımı için görüntü kullanılırken `myregistry.azurecr.io/myimage` olarak başvurulur
 
-* Resim gereksinimleri: Azure Machine Learning hizmeti yalnızca aşağıdaki yazılım sağlayan Docker görüntüleri destekler:
+* Görüntü gereksinimleri: Azure Machine Learning yalnızca aşağıdaki yazılımları sağlayan Docker görüntülerini destekler:
 
-    * Ubuntu 16.04 veya büyük.
-    * Conda 4.5. # veya büyük.
+    * Ubuntu 16,04 veya üzeri.
+    * Conda 4.5. # veya üzeri.
     * Python 3.5. # veya 3.6. #.
 
 <a id="getname"></a>
 
-### <a name="get-container-registry-information"></a>Kapsayıcı kayıt defteri bilgilerini alma
+### <a name="get-container-registry-information"></a>Kapsayıcı kayıt defteri bilgilerini al
 
-Bu bölümde, Azure Machine Learning hizmeti çalışma alanınız için Azure Container Registry adı alma konusunda bilgi edinin.
+Bu bölümde, Azure Machine Learning çalışma alanınızın Azure Container Registry adını nasıl alabileceğinizi öğrenin.
 
 > [!WARNING]
-> Çalışma alanınız için Azure kapsayıcı kayıt defteri __denenmesi veya model dağıtma ilk kez oluşturulan__ çalışma alanını kullanma. Yeni bir çalışma alanı oluşturduğunuz ancak değil eğitilmiş ve bir model oluşturdunuz, hiçbir Azure Container Registry için çalışma alanı bulunur.
+> Çalışma alanınızın Azure Container Registry, çalışma alanını kullanarak __bir modeli eğitmeniz veya dağıtmanız için ilk kez oluşturulur__ . Yeni bir çalışma alanı oluşturduysanız ancak bir model veya bir model oluşturmadıysanız, çalışma alanı için Azure Container Registry olmaz.
 
-Zaten eğitim almış veya dağıtılan modeller Azure Machine Learning hizmetini kullanarak, çalışma alanınız için bir kapsayıcı kayıt defteri oluşturuldu. Bu kapsayıcı kayıt defteri adını bulmak için aşağıdaki adımları kullanın:
+Azure Machine Learning kullanarak modeller zaten eğitimişseniz veya dağıttıysanız, çalışma alanınız için bir kapsayıcı kayıt defteri oluşturulmuştur. Bu kapsayıcı kayıt defterinin adını bulmak için aşağıdaki adımları kullanın:
 
-1. Yeni kabuğu veya komut istemi açın ve Azure aboneliğinize kimliğini doğrulamak için aşağıdaki komutu kullanın:
+1. Yeni bir kabuk veya komut istemi açın ve Azure aboneliğinizde kimlik doğrulaması yapmak için aşağıdaki komutu kullanın:
 
     ```azurecli-interactive
     az login
     ```
 
-    Abonelik kimliğini doğrulamak için yönergeleri izleyin.
+    Abonelikte kimlik doğrulaması yapmak için istemleri izleyin.
 
-2. Çalışma alanı için kapsayıcı kayıt defteri listelemek için aşağıdaki komutu kullanın. Değiştirin `<myworkspace>` , Azure Machine Learning hizmet çalışma alanı adına sahip. Değiştirin `<resourcegroup>` çalışma alanınızı içeren Azure kaynak grubu ile:
+2. Çalışma alanının kapsayıcı kayıt defterini listelemek için aşağıdaki komutu kullanın. `<myworkspace>`, Azure Machine Learning çalışma alanınızın adıyla değiştirin. `<resourcegroup>`, çalışma alanınızı içeren Azure Kaynak grubuyla değiştirin:
 
     ```azurecli-interactive
     az ml workspace show -w <myworkspace> -g <resourcegroup> --query containerRegistry
     ```
 
-    Döndürülen bilgileri aşağıdaki metne benzer:
+    [!INCLUDE [install extension](../../../includes/machine-learning-service-install-extension.md)]
+
+    Döndürülen bilgiler aşağıdaki metne benzer:
 
     ```text
     /subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.ContainerRegistry/registries/<registry_name>
     ```
 
-    `<registry_name>` Çalışma alanınız için Azure Container Registry adı bir değerdir.
+    `<registry_name>` değeri, çalışma alanınızın Azure Container Registry adıdır.
 
-### <a name="build-a-custom-image"></a>Özel bir görüntü oluşturun
+### <a name="build-a-custom-base-image"></a>Özel bir temel görüntü oluşturma
 
-Bu bölümü gözden geçirme, Azure Container Registry'de özel bir Docker görüntüsü oluşturma adımları.
+Bu bölümdeki adımlar, Azure Container Registry özel bir Docker görüntüsü oluşturma konusunda yol gösterir.
 
-1. Adlı yeni bir metin dosyası oluşturun `Dockerfile`ve aşağıdaki metin içeriği kullanın:
+1. `Dockerfile`adlı yeni bir metin dosyası oluşturun ve içerik olarak aşağıdaki metni kullanın:
 
     ```text
     FROM ubuntu:16.04
+
+    ARG CONDA_VERSION=4.5.12
+    ARG PYTHON_VERSION=3.6
 
     ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
     ENV PATH /opt/miniconda/bin:$PATH
@@ -124,108 +132,132 @@ Bu bölümü gözden geçirme, Azure Container Registry'de özel bir Docker gör
         apt-get clean && \
         rm -rf /var/lib/apt/lists/*
 
-    RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.12-Linux-x86_64.sh -O ~/miniconda.sh && \
+    RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh -O ~/miniconda.sh && \
         /bin/bash ~/miniconda.sh -b -p /opt/miniconda && \
         rm ~/miniconda.sh && \
         /opt/miniconda/bin/conda clean -tipsy
 
-    RUN conda install -y python=3.6 && \
+    RUN conda install -y conda=${CONDA_VERSION} python=${PYTHON_VERSION} && \
         conda clean -aqy && \
         rm -rf /opt/miniconda/pkgs && \
         find / -type d -name __pycache__ -prune -exec rm -rf {} \;
     ```
 
-2. Bir kabuk veya komut istemi, Azure Container Registry'ye kimliğini doğrulamak için aşağıdakileri kullanın. Değiştirin `<registry_name>` görüntüyü depolamak istediğiniz kapsayıcı kayıt defteri adı:
+2. Bir kabuktan veya komut isteminden Azure Container Registry kimlik doğrulaması yapmak için aşağıdakileri kullanın. `<registry_name>`, görüntüyü depolamak istediğiniz kapsayıcı kayıt defterinin adıyla değiştirin:
 
     ```azurecli-interactive
     az acr login --name <registry_name>
     ```
 
-3. Dockerfile karşıya yükleme ve bunları oluşturmak için aşağıdaki komutu kullanın. Değiştirin `<registry_name>` görüntüyü depolamak istediğiniz kapsayıcı kayıt defteri adı:
+3. Dockerfile dosyasını karşıya yüklemek ve derlemek için aşağıdaki komutu kullanın. `<registry_name>`, görüntüyü saklamak istediğiniz kapsayıcı kayıt defterinin adıyla değiştirin:
 
     ```azurecli-interactive
     az acr build --image myimage:v1 --registry <registry_name> --file Dockerfile .
     ```
 
-    Derleme işlemi sırasında komut satırına yedeklemek için bilgi akışla aktarılır. Derleme başarılı olursa aşağıdaki metne benzer bir ileti alırsınız:
+    Yapı işlemi sırasında bilgiler komut satırına geri kaydedilir. Yapı başarılı olursa aşağıdaki metne benzer bir ileti alırsınız:
 
     ```text
     Run ID: cda was successful after 2m56s
     ```
 
-Bir Azure Container Registry ile görüntü derleme hakkında daha fazla bilgi için bkz. [oluşturup Azure Container kayıt defteri görevleri kullanarak bir kapsayıcı görüntüsünü çalıştırın](https://docs.microsoft.com/azure/container-registry/container-registry-quickstart-task-cli)
+Azure Container Registry görüntü oluşturma hakkında daha fazla bilgi için bkz. [Azure Container Registry görevleri kullanarak kapsayıcı görüntüsü oluşturma ve çalıştırma](https://docs.microsoft.com/azure/container-registry/container-registry-quickstart-task-cli)
 
-Bir Azure Container Registry'ye mevcut görüntü karşıya daha fazla bilgi için bkz: [özel bir Docker kapsayıcı kayıt defterine ilk görüntünüzü itme](/azure/container-registry/container-registry-get-started-docker-cli).
+Mevcut görüntüleri bir Azure Container Registry karşıya yükleme hakkında daha fazla bilgi için, bkz. [ilk görüntünüzü özel bir Docker kapsayıcı kayıt defterine gönderme](/azure/container-registry/container-registry-get-started-docker-cli).
 
-## <a name="use-a-custom-image"></a>Özel görüntü kullanma
+## <a name="use-a-custom-base-image"></a>Özel bir temel görüntü kullanma
 
-Özel görüntü kullanmak için aşağıdaki bilgiler gereklidir:
+Özel bir görüntü kullanmak için aşağıdaki bilgilere ihtiyacınız vardır:
 
-* __Görüntü adı__. Örneğin, `mcr.microsoft.com/azureml/o16n-sample-user-base/ubuntu-miniconda` Microsoft tarafından sağlanan temel bir Docker görüntüsü yoludur.
-* Görüntü ise bir __özel depoya__, aşağıdaki bilgiler gereklidir:
+* __Görüntü adı__. Örneğin, `mcr.microsoft.com/azureml/o16n-sample-user-base/ubuntu-miniconda`, Microsoft tarafından sunulan temel bir Docker görüntüsünün yoludur.
+* Görüntü __özel bir depodadır__, aşağıdaki bilgilere ihtiyacınız vardır:
 
     * Kayıt defteri __adresi__. Örneğin, `myregistry.azureecr.io`.
-    * Bir hizmet sorumlusu __kullanıcıadı__ ve __parola__ kayıt defterine okuma erişimine sahip.
+    * Kayıt defterine okuma erişimi olan bir hizmet sorumlusu __Kullanıcı adı__ ve __parolası__ .
 
-    Bu bilgiler yoksa yöneticinin içeren görüntünüzü Azure Container Registry için konuşun.
+    Bu bilgilere sahip değilseniz, görüntünüzü içeren Azure Container Registry için yöneticiye konuşun.
 
-### <a name="publicly-available-images"></a>Genel kullanıma açık görüntüleri
+### <a name="publicly-available-base-images"></a>Genel kullanıma açık temel görüntüler
 
-Microsoft, bu bölümdeki adımları kullanılabilir bir genel olarak erişilebilir deposundaki birkaç docker görüntüleri sağlar:
+Microsoft, bu bölümdeki adımlarla kullanılabilecek, herkese açık bir şekilde erişilebilir bir depoda çeşitli Docker görüntüleri sağlar:
 
-| Image | Açıklama |
+| Görüntü | Açıklama |
 | ----- | ----- |
-| `mcr.microsoft.com/azureml/o16n-sample-user-base/ubuntu-miniconda` | Azure Machine Learning hizmeti için temel görüntü |
-| `mcr.microsoft.com/azureml/onnxruntime:v0.4.0` | ONNX çalışma zamanı içerir. |
-| `mcr.microsoft.com/azureml/onnxruntime:v0.4.0-cuda10.0-cudnn7` | ONNX çalışma zamanı ve CUDA bileşenleri içerir. |
-| `mcr.microsoft.com/azureml/onnxruntime:v0.4.0-tensorrt19.03` | ONNX çalışma zamanı ve TensorRT içerir. |
+| `mcr.microsoft.com/azureml/o16n-sample-user-base/ubuntu-miniconda` | Azure Machine Learning için temel görüntü |
+| `mcr.microsoft.com/azureml/onnxruntime:latest` | CPU ınzoni için ONNX çalışma zamanını içerir |
+| `mcr.microsoft.com/azureml/onnxruntime:latest-cuda` | GPU için ONNX çalışma zamanını ve CUDA 'yı içerir |
+| `mcr.microsoft.com/azureml/onnxruntime:latest-tensorrt` | GPU için ONNX çalışma zamanını ve TensorRT 'yi içerir |
+| `mcr.microsoft.com/azureml/onnxruntime:latest-openvino-vadm ` | Movidius TM myriadx VPUs tabanlı Intel<sup> </sup> Vision Hızlandırıcısı tasarımı için Onnx<sup></sup> çalışma zamanı ve openvino içerir |
+| `mcr.microsoft.com/azureml/onnxruntime:latest-openvino-myriad` | Intel<sup> </sup> Movidius<sup>TM</sup> USB etiketleri Için onnx çalışma zamanı ve openvino içerir |
+
+ONNX çalışma zamanı temel görüntüleri hakkında daha fazla bilgi için GitHub deposu 'ndaki [Onnx Runtime dockerfile bölümüne](https://github.com/microsoft/onnxruntime/blob/master/dockerfiles/README.md) bakın.
 
 > [!TIP]
-> Bu görüntüler genel kullanıma açık olduğundan, bunları kullanırken bir adresi, kullanıcı adı veya parola sağlamanız gerekmez.
+> Bu görüntüler genel kullanıma sunulduğundan, bunları kullanırken bir adres, Kullanıcı adı veya parola sağlamanız gerekmez.
 
-> [!IMPORTANT]
-> CUDA veya TensorRT kullanan Microsoft görüntüleri yalnızca Microsoft Azure hizmetleri üzerinde kullanılmalıdır.
+Daha fazla bilgi için bkz. [Azure Machine Learning kapsayıcılar](https://github.com/Azure/AzureML-Containers).
 
 > [!TIP]
->__Modelinizin Azure Machine Learning işlem eğitildi__kullanarak __1.0.22 sürümü veya üzeri__ Azure Machine Learning SDK'sının eğitim sırasında bir görüntü oluşturulur. Bu görüntü adını bulmak için kullanmak `run.properties["AzureML.DerivedImageName"]`. Aşağıdaki örnek, bu görüntünün nasıl kullanılacağını gösterir:
+>__Modelinize Azure Machine Learning işlem üzerinde eğitim varsa__, __sürüm 1.0.22 veya__ Azure Machine Learning SDK 'sının bir üstünü kullanarak eğitim sırasında bir görüntü oluşturulur. Bu görüntünün adını saptamak için `run.properties["AzureML.DerivedImageName"]`kullanın. Aşağıdaki örnek, bu görüntünün nasıl kullanılacağını gösterir:
 >
 > ```python
 > # Use an image built during training with SDK 1.0.22 or greater
 > image_config.base_image = run.properties["AzureML.DerivedImageName"]
 > ```
 
-### <a name="use-an-image-with-the-azure-machine-learning-sdk"></a>Görüntü Azure Machine Learning SDK ile birlikte kullanın.
+### <a name="use-an-image-with-the-azure-machine-learning-sdk"></a>Azure Machine Learning SDK ile görüntü kullanma
 
-Özel görüntü kullanmak için ayarlanmış `base_image` özelliği [çıkarımı yapılandırma nesnesi](https://docs.microsoft.com/python/api/azureml-core/azureml.core.model.inferenceconfig?view=azure-ml-py) görüntü adresine:
+**Çalışma alanınızın Azure Container Registry**depolanan bir görüntüyü veya genel olarak **erişilebilen bir kapsayıcı kayıt defterini**kullanmak için aşağıdaki [ortam](https://docs.microsoft.com/python/api/azureml-core/azureml.core.environment.environment?view=azure-ml-py) özniteliklerini ayarlayın:
 
-```python
-# use an image from a registry named 'myregistry'
-inference_config.base_image = "myregistry.azurecr.io/myimage:v1"
-```
-
-Bu biçim, genel olarak erişilebilir olan, çalışma alanı ve kapsayıcı kayıt defterleri için Azure Container Registry'de depolanan her iki görüntüleri için çalışır. Örneğin, aşağıdaki kod, Microsoft tarafından sağlanan varsayılan bir görüntü kullanır:
++ `docker.enabled=True`
++ `docker.base_image`: görüntünün kayıt defterine ve yoluna ayarlayın.
 
 ```python
-# use an image available in public Container Registry without authentication
-inference_config.base_image = "mcr.microsoft.com/azureml/o16n-sample-user-base/ubuntu-miniconda"
+from azureml.core import Environment
+# Create the environment
+myenv = Environment(name="myenv")
+# Enable Docker and reference an image
+myenv.docker.enabled = True
+myenv.docker.base_image = "mcr.microsoft.com/azureml/o16n-sample-user-base/ubuntu-miniconda"
 ```
 
-Bir görüntüden kullanmak için bir __özel kapsayıcı kayıt defteri__ olmayan çalışma alanınızda, deponun ve bir kullanıcı adı ve parola adresini belirtmeniz gerekir:
+Çalışma alanınızda olmayan __özel bir kapsayıcı kayıt defterinden__ bir görüntü kullanmak için, deponun adresini ve Kullanıcı adını ve parolayı belirtmek üzere `docker.base_image_registry` kullanmanız gerekir:
 
 ```python
-# Use an image available in a private Container Registry
-inference_config.base_image = "myregistry.azurecr.io/mycustomimage:1.0"
-inference_config.base_image_registry.address = "myregistry.azurecr.io"
-inference_config.base_image_registry.username = "username"
-inference_config.base_image_registry.password = "password"
+# Set the container registry information
+myenv.docker.base_image_registry.address = "myregistry.azurecr.io"
+myenv.docker.base_image_registry.username = "username"
+myenv.docker.base_image_registry.password = "password"
 ```
 
-### <a name="use-an-image-with-the-machine-learning-cli"></a>Machine Learning CLI ile bir görüntü kullanma
+Ortamı tanımladıktan sonra, model ve Web hizmeti 'nin çalışacağı çıkarım ortamını tanımlamak için bunu bir [ınısenceconfig](https://docs.microsoft.com/python/api/azureml-core/azureml.core.model.inferenceconfig?view=azure-ml-py) nesnesiyle birlikte kullanın.
+
+```python
+from azureml.core.model import InferenceConfig
+# Use environment in InferenceConfig
+inference_config = InferenceConfig(entry_script="score.py",
+                                   environment=myenv)
+```
+
+Bu noktada, dağıtıma devam edebilirsiniz. Örneğin, aşağıdaki kod parçacığı, çıkarım yapılandırması ve özel görüntü kullanarak bir Web hizmetini yerel olarak dağıtır:
+
+```python
+from azureml.core.webservice import LocalWebservice, Webservice
+
+deployment_config = LocalWebservice.deploy_configuration(port=8890)
+service = Model.deploy(ws, "myservice", [model], inference_config, deployment_config)
+service.wait_for_deployment(show_output = True)
+print(service.state)
+```
+
+Dağıtım hakkında daha fazla bilgi için bkz. [Azure Machine Learning modelleri dağıtma](how-to-deploy-and-where.md).
+
+### <a name="use-an-image-with-the-machine-learning-cli"></a>Machine Learning CLı ile görüntü kullanma
 
 > [!IMPORTANT]
-> Şu anda Machine Learning CLI görüntülerini Azure Container Registry'den çalışma alanı veya genel olarak erişilebilir depoları için kullanabilirsiniz. Tek başına özel defterlerinden görüntüleri kullanamazsınız.
+> Şu anda Machine Learning CLı, çalışma alanınız veya genel olarak erişilebilen depolarınız için Azure Container Registry görüntüleri kullanabilir. Tek başına özel kayıt defterlerinden görüntüleri kullanamaz.
 
-Machine Learning CLI kullanarak bir model dağıtımına özel görüntüyü başvuran bir çıkarımı yapılandırma dosyası belirtin. Aşağıdaki JSON belgesini görüntüyü public kapsayıcı kayıt defterindeki nasıl başvurulacağını gösterir:
+Machine Learning CLı kullanarak bir model dağıttığınızda, Özel görüntüye başvuran bir çıkarım yapılandırma dosyası sağlarsınız. Aşağıdaki JSON belgesi, ortak kapsayıcı kayıt defterindeki bir görüntüye nasıl başvurululacağını gösterir:
 
 ```json
 {
@@ -240,15 +272,15 @@ Machine Learning CLI kullanarak bir model dağıtımına özel görüntüyü ba�
 }
 ```
 
-Bu dosya ile kullanılır `az ml model deploy` komutu. `--ic` Parametresi çıkarımı yapılandırma dosyasını belirtmek için kullanılır.
+Bu dosya `az ml model deploy` komutuyla birlikte kullanılır. `--ic` parametresi, çıkarım yapılandırma dosyasını belirtmek için kullanılır.
 
 ```azurecli
 az ml model deploy -n myservice -m mymodel:1 --ic inferenceconfig.json --dc deploymentconfig.json --ct akscomputetarget
 ```
 
-"Model kaydı, profil oluşturma ve dağıtımını" bölümünü ML CLI'yı kullanarak bir model dağıtımına ilişkin daha fazla bilgi için bkz. [CLI uzantısını Azure Machine Learning hizmeti için](reference-azure-machine-learning-cli.md#model-registration-profiling-deployment) makalesi.
+ML CLı kullanarak model dağıtma hakkında daha fazla bilgi için, [Azure Machine Learning Için CLI uzantısının](reference-azure-machine-learning-cli.md#model-registration-profiling-deployment) "model kaydı, profil oluşturma ve dağıtım" bölümüne bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Daha fazla bilgi edinin [dağıtılacağı yeri ve nasıl](how-to-deploy-and-where.md).
-* Bilgi nasıl [eğitme ve Azure işlem hatları kullanarak makine öğrenimi modelleri dağıtma](/azure/devops/pipelines/targets/azure-machine-learning?view=azure-devops).
+* [Dağıtım ve nasıl yapılacağı](how-to-deploy-and-where.md)hakkında daha fazla bilgi edinin.
+* [Azure Pipelines kullanarak makine öğrenimi modellerini eğitme ve dağıtmayı](/azure/devops/pipelines/targets/azure-machine-learning?view=azure-devops)öğrenin.

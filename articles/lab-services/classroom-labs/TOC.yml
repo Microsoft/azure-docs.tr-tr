@@ -1,0 +1,96 @@
+- name: Lab Services belgeleri
+  href: index.yml
+- name: DevTest Labs belgelerine geçiş yapma
+  href: ../devtest-lab-overview.md
+- name: Genel Bakış
+  items:
+    - name: Sınıf Laboratuvarları Hakkında
+      href: classroom-labs-overview.md
+    - name: Lab Services ve DevTest Labs hakkında
+      href: ../lab-services-overview.md?toc=%2fazure%2flab-services%2fclassroom-labs%2ftoc.json
+- name: Öğreticiler
+  items:
+    - name: Bir laboratuvar hesabı ayarlama
+      href: tutorial-setup-lab-account.md
+    - name: Bir sınıf laboratuvarı ayarlama
+      href: tutorial-setup-classroom-lab.md
+    - name: Bir sınıf laboratuvarına erişim
+      href: tutorial-connect-virtual-machine-classroom-lab.md
+    - name: Sınıf laboratuvarının kullanımını izleme
+      href: tutorial-track-usage.md
+- name: Kavramlar
+  items:
+    - name: Sınıf Laboratuvarları kavramları
+      href: classroom-labs-concepts.md
+    - name: Senaryolar
+      items:
+        - name: Sınıfları yönetmek için laboratuvarları kullanma
+          href: classroom-labs-scenarios.md
+- name: Nasıl yapılır kılavuzları
+  items:
+    - name: Sınıf laboratuvarları - sınıf türleri
+      items:
+        - name: Sınıf türlerine genel bakış
+          href: class-types.md
+        - name: Doğal işleme içinde derin öğrenme
+          href: class-type-deep-learning-natural-processing.md
+        - name: Linux üzerinde kabuk betiği oluşturma
+          href: class-type-shell-scripting-linux.md
+        - name: Etik korsanlık
+          href: class-type-ethical-hacking.md
+    - name: Laboratuvar hesabı oluşturma ve yapılandırma (laboratuvar hesabı sahibi)
+      items:
+        - name: Laboratuvar hesabı oluşturma ve yönetme
+          href: how-to-manage-lab-accounts.md
+        - name: Laboratuvar hesaplarını yapılandırma
+          href: how-to-configure-lab-accounts.md
+        - name: Laboratuvarlarınızı eş sanal ağa bağlama
+          href: how-to-connect-peer-virtual-network.md
+        - name: Paylaşılan görüntü galerisi ekleme ve kaldırma
+          href: how-to-attach-detach-shared-image-gallery.md
+    - name: Sınıf laboratuvarı oluşturma ve yapılandırma (eğitmen)
+      items:
+        - name: Sınıf laboratuvarları oluşturma ve yönetme
+          href: how-to-manage-classroom-labs.md
+        - name: Panoyu kullanma
+          href: use-dashboard.md
+        - name: 'Şablonları ayarlama, özelleştirme ve yayımlama'
+          href: how-to-create-manage-template.md
+        - name: Sanal makine havuzunu ayarlama ve yönetme
+          href: how-to-set-virtual-machine-passwords.md
+        - name: Laboratuvar kullanıcılarını ekleme ve yönetme
+          href: how-to-configure-student-usage.md
+        - name: Zamanlamaları oluşturma ve yönetme
+          href: how-to-create-schedules.md
+        - name: Paylaşılan görüntü galerisi kullanma
+          href: how-to-use-shared-image-gallery.md
+        - name: Linux için uzak masaüstü bağlantısını etkinleştirme
+          href: how-to-enable-remote-desktop-linux.md
+        - name: Şablon VM üzerinde iç içe yerleştirilmiş sanallaştırmayı etkinleştirme
+          href: how-to-enable-nested-virtualization-template-vm.md
+        - name: Bir şablon VM'sinin içinde birden çok VM ile ortam oluşturma
+          href: how-to-enable-multi-vm-environment.md
+    - name: Sınıf laboratuvarlarında VM’lere bağlanma (öğrenci)
+      items:
+        - name: Sınıf laboratuvarlarına erişim
+          href: how-to-use-classroom-lab.md
+        - name: Linux sanal makineleri için uzak masaüstü bağlantısını kullanma
+          href: how-to-use-remote-desktop-linux-student.md
+        - name: Sanal makineler için parola ayarlama veya sıfırlama
+          href: how-to-set-virtual-machine-passwords-student.md
+- name: Başvuru
+  items:
+    - name: REST API
+      href: 'https://docs.microsoft.com/rest/api/labservices/'
+    - name: Az.LabServices PowerShell modülü (önizleme)
+      href: reference-powershell-module.md
+- name: Kaynaklar
+  items:
+    - name: Azure güncelleştirmeleri
+      href: 'https://azure.microsoft.com/updates/?product=lab-services'
+    - name: Fiyatlandırma
+      href: 'https://azure.microsoft.com/pricing/details/lab-services/'
+    - name: Stack Overflow
+      href: 'https://stackoverflow.com/questions/tagged/azure-lab-services'
+    - name: Sık sorulan sorular
+      href: classroom-labs-faq.md

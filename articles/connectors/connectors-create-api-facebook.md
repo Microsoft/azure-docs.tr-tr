@@ -1,45 +1,48 @@
 ---
-title: Facebook - Azure Logic Apps'i bağlama | Microsoft Docs
-description: Zaman Çizelgesi ve sayfa Facebook REST API'leri ve Azure Logic Apps ile yönetme
-author: ecfan
-manager: jeconnoc
-ms.author: estfan
-ms.date: 11/07/2016
-ms.topic: article
-ms.service: logic-apps
+title: Facebook 'a bağlanma-Azure Logic Apps
+description: Facebook REST API 'Leri ve Azure Logic Apps zaman çizelgenizi ve sayfanızı yönetin
 services: logic-apps
-ms.reviewer: klam, LADocs
+ms.service: logic-apps
 ms.suite: integration
+author: ecfan
+ms.author: estfan
+manager: carmonm
+ms.reviewer: klam, LADocs
+ms.topic: conceptual
+ms.date: 11/07/2016
 tags: connectors
-ms.openlocfilehash: 25595127d913d3cd093e0af3d7916e33fc7cb352
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 83431184d7e9c5970ece6af143ee9b5166da96d5
+ms.sourcegitcommit: bba811bd615077dc0610c7435e4513b184fbed19
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62105985"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70050942"
 ---
-# <a name="get-started-with-the-facebook-connector"></a>Facebook Bağlayıcısı ile çalışmaya başlama
-Facebook'a bağlanın ve zaman tünelinde gönderi yapın, sayfa akışı ve daha fazlasını edinin. Facebook ile şunları yapabilirsiniz:
+# <a name="manage-your-facebook-timeline-and-page-by-using-azure-logic-apps"></a>Azure Logic Apps kullanarak Facebook zaman çizelgenizi ve sayfanızı yönetme
 
-* Facebook'tan alma verileri temel alan, iş akışınızı oluşturun. 
+Facebook 'a bağlanın ve bir zaman çizelgesinde gönderi yapın, sayfa akışı alın ve daha fazlasını yapın. Facebook ile şunları yapabilirsiniz:
+
+* Facebook 'tan aldığınız verilere göre iş akışınızı oluşturun. 
 * Yeni bir gönderi alındığında bir tetikleyici kullanın.
-* Zaman tünelinde gönderi kullanım Eylemler ve sayfa akışı alın. Bu Eylemler, yanıt alın ve çıkış diğer eylemler için kullanılabilir yapın. Örneğin, zaman çizelgesinde yeni bir gönderi olduğunda, bu postayı alın ve Twitter akışınızı gönderin. 
+* Zaman çizelgenize gönderi yapan eylemleri kullanın, sayfa akışı alın ve daha fazlasını yapın. Bu eylemler bir yanıt alır ve daha sonra çıktıyı diğer eylemler için kullanılabilir hale getirir. Örneğin, zaman çizelgenizde yeni bir gönderi olduğunda, bu gönderiyi alıp Twitter akışınıza gönderebilirsiniz. 
 
-Şimdi mantıksal uygulama oluşturmaya başlama, bkz: [mantıksal uygulama oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md).
+Şimdi bir mantıksal uygulama oluşturarak çalışmaya başlamak için bkz. [mantıksal uygulama oluşturma](../logic-apps/quickstart-create-first-logic-app-workflow.md).
 
-## <a name="create-a-connection-to-facebook"></a>Facebook bağlantı oluşturun
-Bu bağlayıcı için logic apps eklediğinizde, mantıksal uygulamalar, Facebook'a bağlanın yetkilendirmeniz gerekir.
+## <a name="create-a-connection-to-facebook"></a>Facebook bağlantısı oluşturma
 
-1. Facebook hesabınızda oturum açın
-2. Seçin **Authorize**ve bağlanma ve sorgulama, Facebook, logic apps olanak tanır. 
+Bu bağlayıcıyı Logic Apps 'e eklediğinizde, Facebook 'ınızla bağlantı kurmak için Logic Apps 'i yetkilendirmelisiniz.
+
+1. Facebook hesabınızda oturum açın.
+
+2. **Yetkilendir**' i seçin ve mantıksal uygulamalarınızın Facebook 'a bağlanıp bunları kullanmasına izin verin. 
 
 > [!INCLUDE [Steps to create a connection to Facebook](../../includes/connectors-create-api-facebook.md)]
 > 
 
+## <a name="connector-reference"></a>Bağlayıcı başvurusu
 
-## <a name="connector-specific-details"></a>Özel bağlayıcı ayrıntıları
+Bağlayıcının Openapı (eski adıyla Swagger) dosyasında açıklandığı gibi Tetikleyiciler, Eylemler ve sınırlar gibi teknik ayrıntılar için [bağlayıcının başvuru sayfasına](/connectors/facebook/)bakın.
 
-Tetikleyiciler ve eylemlerin swagger'da tanımlanan görüntüleyebilir ve ayrıca herhangi bir sınırlama Bkz [bağlayıcı ayrıntıları](/connectors/facebook/).
+## <a name="next-steps"></a>Sonraki adımlar
 
-## <a name="more-connectors"></a>Daha fazla bağlayıcı
-Geri Git [API listesi](apis-list.md).
+* Diğer [Logic Apps bağlayıcıları](../connectors/apis-list.md) hakkında bilgi edinin

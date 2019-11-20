@@ -4,14 +4,14 @@ ms.service: container-service
 ms.topic: include
 ms.date: 11/09/2018
 ms.author: danlep
-ms.openlocfilehash: 39bb75a6f834789f91cb590ffebb72f45624eb25
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: c7b9e3a9eb5c906fa598da9c8c547cb542ecb719
+ms.sourcegitcommit: 94ee81a728f1d55d71827ea356ed9847943f7397
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188924"
+ms.lasthandoff: 08/26/2019
+ms.locfileid: "70036795"
 ---
-# <a name="deprecated-securing-docker-containers-in-azure-container-service"></a>(KULLANIM DIŞI) Azure Container Service'teki Docker kapsayıcıları güvenli hale getirme
+# <a name="deprecated-securing-docker-containers-in-azure-container-service"></a>Kullanım DıŞı Azure Container Service Docker kapsayıcılarının güvenliğini sağlama
 
 [!INCLUDE [ACS deprecation](container-service-deprecation.md)]
 
@@ -34,7 +34,7 @@ Kuruluşlar güvenliğe büyük önem verir ve kendilerini güvenlik saldırıla
 
 Özel bir kayıt defteri kullanırken bile, ek güvenlik doğrulaması için görüntü tarama çözümleri kullanmak iyi bir fikirdir. Kapsayıcı görüntüsündeki her yazılım katmanı, kapsayıcı görüntüsündeki diğer katmanlardan bağımsız olarak güvenlik açıklarına potansiyel olarak yatkındır. Şirketler üretim iş yüklerini kapsayıcı teknolojilerini temel alarak dağıtmaya başladıkça kuruluşları güvenlik tehditlerinden koruyan görüntü tarama özelliği de önem kazanmaktadır. 
 
-[Twistlock](https://www.twistlock.com/2016/11/07/twistlock-supports-azure-container-registry), [Aqua Security](http://blog.aquasec.com/image-vulnerability-scanning-in-azure-container-registry) ve benzeri güvenlik izleme ve tarama çözümleri, özel bir kayıt defterindeki kapsayıcı görüntülerini taramak ve olası güvenlik açıklarını tanımlamak için kullanılabilir. Farklı çözümlerin sağladığı tarama derinliğini anlamak önemlidir. Örneğin, bazı çözümleri görüntü katmanlarını yalnızca bilinen güvenlik açıklarına karşı doğrulayabilir. Bu çözümler belirli paket yöneticisi yazılımları aracılığıyla oluşturulmuş görüntü katmanı yazılımlarını doğrulayamayabilir. Diğer çözümler daha ayrıntılı tarama tümleştirmesine sahiptir ve tüm paketlenmiş yazılımlarda güvenlik açıkları bulabilir.
+[Twistlock](https://www.twistlock.com/2016/11/07/twistlock-supports-azure-container-registry), [Aqua Security](https://blog.aquasec.com/image-vulnerability-scanning-in-azure-container-registry) ve benzeri güvenlik izleme ve tarama çözümleri, özel bir kayıt defterindeki kapsayıcı görüntülerini taramak ve olası güvenlik açıklarını tanımlamak için kullanılabilir. Farklı çözümlerin sağladığı tarama derinliğini anlamak önemlidir. Örneğin, bazı çözümleri görüntü katmanlarını yalnızca bilinen güvenlik açıklarına karşı doğrulayabilir. Bu çözümler belirli paket yöneticisi yazılımları aracılığıyla oluşturulmuş görüntü katmanı yazılımlarını doğrulayamayabilir. Diğer çözümler daha ayrıntılı tarama tümleştirmesine sahiptir ve tüm paketlenmiş yazılımlarda güvenlik açıkları bulabilir.
 
 ### <a name="production-deployment-rules-and-audit"></a>Üretim dağıtım kuralları ve denetim
 Bir uygulama üretime dağıtıldığında, üretim ortamlarında kullanılan görüntülerin güvenli olduğundan ve güvenlik açığı içermediğinden emin olmak için birkaç kural ayarlamak gerekir.
@@ -58,11 +58,11 @@ Azure Container Service'de kullanılabilir her düzenleyicinin kendi güvenlik �
 
 Düzenleyicilere özgü diğer güvenlik bilgileri için aşağıdaki kaynaklara bakın:
 
-* **Kubernetes**: [Kubernetes dağıtımı için önerilen güvenlik uygulamaları](https://kubernetes.io/blog/2016/08/security-best-practices-kubernetes-deployment/)
+* **Kubernetes**: [Kubernetes dağıtımı için En Iyi güvenlik uygulamaları](https://kubernetes.io/blog/2016/08/security-best-practices-kubernetes-deployment/)
 
 * **DC/OS**: [Kümenizin güvenliğini sağlama](http://docs.mesosphere.com/1.12/administering-clusters/securing-your-cluster)
 
-* **Docker Swarm**: [Docker güvenliği](https://www.docker.com/docker-security)
+* **Docker Sısınma**: [Docker güvenliği](https://www.docker.com/docker-security)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

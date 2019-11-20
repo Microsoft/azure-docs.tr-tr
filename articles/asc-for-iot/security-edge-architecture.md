@@ -1,70 +1,67 @@
 ---
-title: IOT güvenlik modülü IOT Edge için Azure Güvenlik Merkezi'ni anlama | Microsoft Docs
-description: İçin IOT Edge mimarisini ve IOT güvenlik modülü için Azure Güvenlik Merkezi özelliklerini anlayın.
+title: IoT Edge IoT güvenlik modülü için Azure Güvenlik Merkezi 'ni anlama | Microsoft Docs
+description: IoT Edge için IoT güvenlik modülü için Azure Güvenlik Merkezi 'nin mimarisini ve yeteneklerini anlayın.
 services: asc-for-iot
-ms.service: ascforiot
+ms.service: asc-for-iot
 documentationcenter: na
 author: mlottner
 manager: rkarlin
 editor: ''
 ms.assetid: e78523ae-d70a-456a-818d-f8b1b025d7cb
+ms.subservice: asc-for-iot
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/25/2019
+ms.date: 07/23/2019
 ms.author: mlottner
-ms.openlocfilehash: 847d6238bd42dc7da723dcc9acd47ed09c16dbf9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 148c68234a937efde554ef00a6014cdc1a350f34
+ms.sourcegitcommit: 9fba13cdfce9d03d202ada4a764e574a51691dcd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65200592"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71315900"
 ---
-# <a name="azure-iot-edge-security-module"></a>Azure IOT Edge güvenlik modülü
+# <a name="azure-iot-edge-security-module"></a>Azure IoT Edge güvenlik modülü
 
-> [!IMPORTANT]
-> IOT için Azure Güvenlik Merkezi şu anda genel Önizleme aşamasındadır.
-> Bu önizleme sürümü, bir hizmet düzeyi sözleşmesi olmadan sağlanmaktadır ve üretim worklo§1ads için önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir. Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+[Azure IoT Edge](https://docs.microsoft.com/azure/iot-edge/) kenarda iş akışlarını yönetmek ve gerçekleştirmek için güçlü özellikler sunar.
+IoT ortamlarında IoT Edge oynadığı anahtar bölüm, kötü amaçlı aktörler için özellikle çekici hale gelir.
 
-[Azure IOT Edge](https://docs.microsoft.com/azure/iot-edge/) yönetmek ve iş akışlarını uçta gerçekleştirmek için güçlü özellikler sunar.
-IOT Edge, IOT ortamlarda oynadığı anahtar bölümü yapmak, özellikle çekici kötü amaçlı aktörler için.
+IoT güvenlik modülü için Azure Güvenlik Merkezi, IoT Edge cihazlarınız için kapsamlı bir güvenlik çözümü sağlar.
+IoT modülü için Azure Güvenlik Merkezi, Işletim sistemi ve kapsayıcı sisteminizdeki ham güvenlik verilerini, uygulanabilir güvenlik önerileri ve uyarılara toplar, toplar ve analiz eder.
 
-IOT güvenlik modülü için Azure Güvenlik Merkezi (ASC), cihazları, IOT Edge için kapsamlı güvenlik çözümü sağlar.
-ASC IOT modülü için toplar, toplar ve eyleme dönüştürülebilir güvenlik önerileri ve uyarılar içinde işletim sistemi ve kapsayıcı sistemi ham güvenlik verileri analiz eder.
+IoT cihazlarına yönelik IoT güvenlik aracıları için Azure Güvenlik Merkezi 'ne benzer şekilde, IoT Edge modülü için Azure Güvenlik Merkezi, ikizi modülü aracılığıyla yüksek düzeyde özelleştirilebilir.
+Daha fazla bilgi için bkz. [aracınızı yapılandırma](how-to-agent-configuration.md) .
 
-ASC IOT cihazlarının IOT güvenlik aracılar için ASC IOT Edge modülü, modül ikizi yüksek oranda özelleştirilebilen benzer.
-Bkz: [aracınızı yapılandırmak](how-to-agent-configuration.md) daha fazla bilgi için.
+IoT Edge IoT güvenlik modülü için Azure Güvenlik Merkezi aşağıdaki özellikleri sunmaktadır:
 
-ASC IOT güvenlik modülü IOT Edge için aşağıdaki özellikleri sunar:
-
-- Temel işletim sistemi (Linux) ve IOT Edge kapsayıcı sistemleri ham güvenlik olaylarını toplar.
+- Temel Işletim sistemi (Linux) ve IoT Edge kapsayıcı sistemlerinden ham güvenlik olayları toplar.
   
-  Bkz: [ASC IOT Aracısı yapılandırması için](how-to-agent-configuration.md) kullanılabilir güvenlik veri toplayıcıları hakkında daha fazla bilgi edinmek için.
+  Kullanılabilir güvenlik veri toplayıcıları hakkında daha fazla bilgi edinmek için bkz. [IoT Aracısı yapılandırması Için Azure Güvenlik Merkezi](how-to-agent-configuration.md) .
 
-- IOT Edge dağıtımı analizini bildirimleri.
+- IoT Edge dağıtım bildirimlerinin analizi.
 
-- Üzerinden gönderilen iletilere ham güvenlik olaylarını toplar [IOT Edge hub'ı](https://docs.microsoft.com/azure/iot-edge/iot-edge-runtime#iot-edge-hub).
+- [IoT Edge hub](https://docs.microsoft.com/azure/iot-edge/iot-edge-runtime#iot-edge-hub)aracılığıyla gönderilen iletilere ham güvenlik olayları toplar.
 
-- Güvenlik modül ikizi aracılığıyla yapılandırmasını kaldırın.
+- İkizi güvenlik modülünün kullanımıyla yapılandırmayı kaldırın.
 
-  Bkz: [bir ASC IOT aracısı için yapılandırma](how-to-agent-configuration.md) daha fazla bilgi için.
+  Daha fazla bilgi edinmek için bkz. [IoT Aracısı Için Azure Güvenlik Merkezi 'Ni yapılandırma](how-to-agent-configuration.md) .
 
-ASC IOT güvenlik modülü IOT Edge için IOT Edge altında bir ayrıcalıklı modda çalışır.
-Ayrıcalıklı modu, işletim sistemi izlemek üzere işlem modülü ve diğer IOT Edge modülleri izin vermek için gereklidir.
+IoT Edge için Azure Güvenlik Merkezi, IoT Edge altında ayrıcalıklı modda çalışır.
+Modülün Işletim sistemini ve diğer IoT Edge modüllerini izlemesine izin vermek için ayrıcalıklı mod gerekir.
 
-## <a name="agent-supported-platforms"></a>Aracı, desteklenen platformlar
+## <a name="module-supported-platforms"></a>Modül desteklenen platformlar
 
-ASC IOT güvenlik modülü IOT Edge için şu anda yalnızca Linux için kullanılabilir.
+IoT Edge için Azure Güvenlik Merkezi for IoT güvenlik modülü şu anda yalnızca Linux 'ta kullanılabilir. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, hakkında mimarisini ve özelliklerini ASC, IOT güvenlik modülü IOT Edge için bilgi edindiniz.
+Bu makalede, IoT Edge için IoT güvenlik modülü için Azure Güvenlik Merkezi 'nin mimarisi ve özellikleri hakkında bilgi edindiniz.
 
-ASC ile IOT dağıtımı için Başlarken devam etmek için aşağıdaki makaleleri kullanın:
+IoT dağıtımı için Azure Güvenlik Merkezi 'ni kullanmaya devam etmek için aşağıdaki makaleleri kullanın:
 
-- Dağıtma [IOT Edge için güvenlik modülü](how-to-deploy-edge.md)
-- Bilgi edinmek için nasıl [güvenlik modülünüzde yapılandırma](how-to-agent-configuration.md)
-- ASC gözden geçirmek için IOT [hizmet önkoşulları](service-prerequisites.md)
-- Bilgi edinmek için nasıl [ASC etkinleştirmek için IOT hub'ınızdaki IOT hizmeti](quickstart-onboard-iot-hub.md)
-- Hizmet hakkında daha fazla bilgi [ASC için IOT hakkında SSS](resources-frequently-asked-questions.md)
+- [IoT Edge için güvenlik modülünü](how-to-deploy-edge.md) dağıtma
+- [Güvenlik modülünüzü yapılandırmayı](how-to-agent-configuration.md) öğrenin
+- IoT [hizmeti önkoşulları](service-prerequisites.md) Için Azure Güvenlik Merkezi 'ni gözden geçirin
+- [IoT Hub IoT hizmeti Için Azure Güvenlik Merkezi 'ni nasıl etkinleştirebileceğinizi](quickstart-onboard-iot-hub.md) öğrenin
+- [IoT Için Azure Güvenlik Merkezi](resources-frequently-asked-questions.md) 'nden hizmet hakkında daha fazla bilgi edinin

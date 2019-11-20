@@ -1,6 +1,6 @@
 ---
-title: Yineleme tetikleyicisi - Azure Logic Apps ile yinelenen görevleri zamanlama
-description: Zamanlama ve yinelenme tetikleyicisi Azure Logic Apps ile yinelenen otomatik görevler ve iş akışları çalıştırma
+title: Yinelenen görevleri ve iş akışlarını zamanlama-Azure Logic Apps
+description: Yineleme tetikleyicisiyle yinelenen otomatik görevleri ve iş akışlarını zamanlayın ve çalıştırın Azure Logic Apps
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -9,88 +9,88 @@ ms.author: estfan
 ms.reviewer: deli, klam, LADocs
 ms.topic: conceptual
 ms.date: 05/25/2019
-ms.openlocfilehash: f5fc778ee4d8f91232bc732cc276f642f748b29d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8715bbcb6926fbfc2f77bd05d0ce036a6255eb85
+ms.sourcegitcommit: d37991ce965b3ee3c4c7f685871f8bae5b56adfa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66297509"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72679070"
 ---
-# <a name="create-schedule-and-run-recurring-tasks-and-workflows-with-the-recurrence-trigger-in-azure-logic-apps"></a>Oluşturmanıza, zamanlamanıza ve Azure Logic apps'te yineleme tetikleyicisi ile yinelenen görevleri ve iş akışları çalıştırma
+# <a name="create-schedule-and-run-recurring-tasks-and-workflows-with-the-recurrence-trigger-in-azure-logic-apps"></a>Azure Logic Apps 'de yinelenme tetikleyicisiyle yinelenen görevleri ve iş akışlarını oluşturma, zamanlama ve çalıştırma
 
-Görevler, işlemleri veya işleri düzenli olarak belirli bir zamanlamaya göre çalıştırmak için yerleşik ile mantıksal uygulama iş akışınızı başlatabilirsiniz **yinelenme - zamanlama** tetikleyici. İş akışı ve bir yineleme için iş akışının yinelenen başlatmak için bir saat dilimi yanı sıra bir tarih ve saat ayarlayabilirsiniz. Yinelenme için herhangi bir nedenle kaçırdıysanız, bu tetikleyici, sonraki zamanlanan aralıklarla yinelenen devam eder. Yerleşik zamanlama Tetikleyicileri ve eylemleri hakkında daha fazla bilgi için bkz. [zamanlama ve otomatik olarak yinelenen bir çalıştırma, görevleri ve Azure Logic Apps ile iş akışlarını](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md).
+Görevleri, işlemleri veya işleri Belirli bir zamanlamaya göre düzenli olarak çalıştırmak için, mantıksal uygulama iş akışınızı yerleşik **yinelenme zamanlaması** tetikleyicisiyle başlatabilirsiniz. İş akışını başlatmak için bir tarih ve saat ve zaman dilimini ve bu iş akışını yinelemek için bir yinelenme belirleyebilirsiniz. Herhangi bir nedenle Yinelenmeler kaçırıldığında, bu tetikleyici zamanlanan bir sonraki aralıkta tekrarlamaya devam eder. Yerleşik zamanlama Tetikleyicileri ve eylemleri hakkında daha fazla bilgi için bkz. [Azure Logic Apps ile yinelenen otomatik, görev ve iş akışlarını zamanlama ve çalıştırma](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md).
 
-Daha gelişmiş yinelenme ve karmaşık zamanlamalar yanı sıra bu tetikleyiciyi destekleyen bazı desenleri şunlardır:
+Daha gelişmiş Yinelenmeler ve karmaşık zamanlamalarla birlikte bu tetikleyicinin desteklediği bazı desenler aşağıda verilmiştir:
 
-* Hemen çalıştırma ve yineleme her *n* saniye, dakika, saat, gün, hafta veya ayda sayısı.
+* Hemen çalıştırın ve her *n* saniye, dakika, saat, gün, hafta veya ay sayısını yineleyin.
 
-* Başlangıç bir belirli bir tarih ve saatte, ardından çalıştırın ve yineleme her *n* saniye, dakika, saat, gün, hafta veya ayda sayısı.
+* Belirli bir tarih ve saatte başlayıp, her *n* saniye, dakika, saat, gün, hafta veya ay çalıştırın ve tekrarlayın.
 
-* Çalıştırın ve bir veya daha fazla zaman her gün 8:00:00 ve 17:00:00 Örneğin, tekrarlayın.
+* Her gün bir veya daha fazla kez çalıştırın, örneğin, 8:00 ve 5:00 PM.
 
-* Çalıştırın ve her hafta, ancak yalnızca Cumartesi ve Pazar gibi belirli bir gün için yineleyin.
+* Her hafta yalnızca Cumartesi ve Pazar gibi belirli günler için çalıştırın ve tekrarlayın.
 
-* Çalıştırın ve her hafta, ancak yalnızca belirli günleri ve saatleri, Pazartesi ile Cuma günleri saat 8: 00'da ve 17:00 gibi için yineleyin.
+* Her hafta bir kez çalıştırın ve tekrarlayın, ancak yalnızca belirli günler ve saatler için (örneğin, Pazartesi ile Cuma arası, 8:00 ve 5:00 PM).
 
-Bu tetikleyici ve kayan pencere tetikleyicisi arasındaki farklar veya yinelenen iş akışları zamanlama hakkında daha fazla bilgi için bkz: [zamanlama ve çalıştırma yinelenen görevler, süreçleri ve Azure Logic Apps ile iş akışlarını otomatik](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md).
+Bu tetikleyici ve kayan pencere tetikleyicisi arasındaki farklar veya yinelenen iş akışlarını zamanlama hakkında daha fazla bilgi için, bkz. [Azure Logic Apps ile yinelenen otomatik görevler, süreçler ve iş akışlarını zamanlama ve çalıştırma](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md).
 
 > [!TIP]
-> Mantıksal uygulamanızı tetikleyecek ve gelecekteki bakın yalnızca bir kez çalıştırmak istiyorsanız [işler yalnızca bir kez çalıştır](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md#run-once).
+> Mantıksal uygulamanızı tetiklemek ve gelecekte yalnızca bir kez çalıştırmak istiyorsanız, bkz. [işleri yalnızca bir kez çalıştır](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md#run-once).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Azure aboneliği. Bir aboneliğiniz yoksa, şunları yapabilirsiniz [ücretsiz bir Azure hesabı için kaydolun](https://azure.microsoft.com/free/).
+* Azure aboneliği. Aboneliğiniz yoksa [ücretsiz bir Azure hesabı için kaydolabilirsiniz](https://azure.microsoft.com/free/).
 
-* Hakkında temel bilgilere [logic apps](../logic-apps/logic-apps-overview.md). Logic apps kullanmaya yeni başladıysanız öğrenin [ilk mantıksal uygulamanızı oluşturmak nasıl](../logic-apps/quickstart-create-first-logic-app-workflow.md).
+* [Logic Apps](../logic-apps/logic-apps-overview.md)hakkında temel bilgi. Logic Apps 'e yeni başladıysanız, [ilk mantıksal uygulamanızı oluşturmayı](../logic-apps/quickstart-create-first-logic-app-workflow.md)öğrenin.
 
-## <a name="add-recurrence-trigger"></a>Yineleme tetikleyicisi Ekle
+## <a name="add-recurrence-trigger"></a>Yinelenme tetikleyicisi Ekle
 
-1. [Azure Portal](https://portal.azure.com) oturum açın. Boş bir mantıksal uygulama oluşturma.
+1. [Azure Portal](https://portal.azure.com)’ında oturum açın. Boş bir mantıksal uygulama oluşturma.
 
-1. Mantıksal Uygulama Tasarımcısı, arama kutusuna göründükten sonra filtreniz olarak "yinelenme" girin. Tetikleyiciler listesinden, mantıksal uygulama iş akışınızı ilk adımı olarak şu tetikleyiciyi seçin: **Yineleme**
+1. Mantıksal uygulama Tasarımcısı görüntülendikten sonra arama kutusuna filtreniz olarak "yinelenme" yazın. Tetikleyiciler listesinden, mantıksal uygulama iş akışınızın ilk adımı olarak bu tetikleyiciyi seçin: **yinelenme**
 
-   !["Yinelenme" tetikleyicisini seçin](./media/connectors-native-recurrence/add-recurrence-trigger.png)
+   !["Yinelenme" tetikleyicisi seçin](./media/connectors-native-recurrence/add-recurrence-trigger.png)
 
-1. Yinelenme aralığını ve sıklığını ayarlayın. Bu örnekte, her hafta, iş akışınızı çalıştırmak için bu özellikleri ayarlayın.
+1. Yinelenme aralığını ve sıklığını ayarlayın. Bu örnekte, iş akışınızı her hafta çalıştırmak için bu özellikleri ayarlayın.
 
-   ![Kümesi aralığı ve sıklığı](./media/connectors-native-recurrence/recurrence-trigger-details.png)
+   ![Aralık ve sıklığı ayarlama](./media/connectors-native-recurrence/recurrence-trigger-details.png)
 
-   | Özellik | Gerekli | JSON adı | Tür | Açıklama |
+   | Özellik | Gereklidir | JSON adı | Tür | Açıklama |
    |----------|----------|-----------|------|-------------|
-   | **Aralık** | Evet | interval | Integer | İş akışı sıklığı temel alarak çalışan ne sıklıkta açıklar pozitif bir tamsayı. Minimum ve maksimum aralıkları şunlardır: <p>-Ay: 1-16 ay </br>-Günü: 1-500 gün </br>-Saat: 12.000 1 saat </br>-Dakikası: 1-72,000 dakika </br>-Saniye: 1-9,999,999 saniye<p>Örneğin, aralığı 6'dır ve "Month" sıklığıdır yinelenme her 6 ayda olur. |
-   | **Sıklık** | Evet | frequency | String | Yineleme için zaman birimi: **İkinci**, **dakika**, **saat**, **gün**, **hafta**, veya **ay** |
+   | **Aralık** | Yes | interval | Tamsayı | İş akışının sıklık temelinde ne sıklıkta çalışacağını açıklayan pozitif bir tamsayı. En düşük ve en büyük aralıklar aşağıda verilmiştir: <p>-Ay: 1-16 ay </br>Gün: 1-500 gün </br>-Saat: 1-12000 saat </br>-Dakika: 1-72000 dakika </br>-İkinci: 1-9999999 saniye<p>Örneğin, Aralık 6 ve Sıklık "month" ise, yinelenme 6 aydır. |
+   | **Sıklık** | Yes | frequency | Dize | Yinelenme için zaman birimi: **saniye**, **dakika**, **saat**, **gün**, **hafta**veya **ay** |
    ||||||
 
-   Daha fazla zamanlama seçeneklerini açın **yeni parametre Ekle** listesi. 
-   Seçtiğiniz herhangi bir seçenek Tetikle seçimi yaptıktan sonra görünür.
+   Daha fazla zamanlama seçeneği için **yeni parametre Ekle** listesini açın. 
+   Seçtiğiniz tüm seçenekler, seçimden sonra tetikde görünür.
 
    ![Gelişmiş zamanlama seçenekleri](./media/connectors-native-recurrence/recurrence-trigger-more-options-details.png)
 
-   | Özellik | Gerekli | JSON adı | Tür | Açıklama |
+   | Özellik | Gereklidir | JSON adı | Tür | Açıklama |
    |----------|----------|-----------|------|-------------|
-   | **Saat dilimi** | Hayır | timeZone | String | Bu tetikleyiciyi kabul etmez çünkü yalnızca bir başlangıç zamanı belirttiğinizde geçerlidir [UTC farkı](https://en.wikipedia.org/wiki/UTC_offset). Uygulamak istediğiniz saat dilimini seçin. |
-   | **Başlangıç saati** | Hayır | startTime | String | Bir başlangıç tarihi ve saati şu biçimde belirtin: <p>YYYY-MM-ddTHH bir saat dilimi seçerseniz <p>veya <p>YYYY-AA-saat dilimi seçmezseniz ssZ <p>Örneğin, 18 Eylül 2017 2: 00'da isterseniz, ardından belirtin "2017-09-18T14:00:00" Pasifik Standart Saati gibi bir saat dilimi seçin. Ya da belirtin "2017-09-18T14:00:00Z" olmadan bir saat dilimi. <p>**Not:** Bu başlangıç zamanı izlemelidir [ISO 8601 tarih saat belirtimi](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) içinde [UTC tarih saat biçiminde](https://en.wikipedia.org/wiki/Coordinated_Universal_Time), olmadan bir [UTC farkı](https://en.wikipedia.org/wiki/UTC_offset). Bir saat dilimi seçmezseniz, sonunda boşluk olmadan "Z" harfi eklemeniz gerekir. Bu "Z" eş değeri başvuruyor [Denizcilik zaman](https://en.wikipedia.org/wiki/Nautical_time). <p>Basit zamanlamalar için ilk yinelenme, başlangıç zamanıdır sırada karmaşık zamanlamalar için tetikleyici başlangıç saatinden herhangi bir erken etkinleşmez. [*Başlangıç tarihi ve saati kullanabilirim, yolları nelerdir?* ](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md#start-time) |
-   | **Şu günlerde** | Hayır | weekDays | Dize veya dize dizisi | "Week" seçeneğini belirlerseniz, iş akışını çalıştırmak istediğiniz bir veya daha fazla gün seçebilirsiniz: **Pazartesi**, **Salı**, **Çarşamba**, **Perşembe**, **Cuma**, **Cumartesi**, ve **Pazar** |
-   | **Şu saatlerde** | Hayır | hours | Tamsayı veya tamsayı dizisi | "Day" veya "Week" seçeneğini belirlerseniz, bir veya daha fazla tamsayılar 0 ile 23 iş akışını çalıştırmak istediğinizde için günün saat olarak seçebilirsiniz. <p><p>Örneğin, "10", "12" ve "14" belirtirseniz, 10 AM, PM 12 ve gün saat 2 PM Al, ancak yinelenme başladığında dakika gün sayısı temel alınarak hesaplanır. Günün dakikasının ayarlamak için değerini belirtin. **başından bu dakika** özelliği. |
-   | **Şu dakikalarda** | Hayır | minutes | Tamsayı veya tamsayı dizisi | "Day" veya "Week" seçeneğini belirlerseniz, bir veya daha fazla tamsayılar 0 ile 59 arasında iş akışını çalıştırmak istediğinizde saat dakika seçebilirsiniz. <p>Örneğin, "30" dakika işareti belirtebilirsiniz ve önceki örnekte için günün saatlerini kullanarak 10:30 AM, alın 12:30 PM ve 2:30 PM. |
+   | **Saat dilimi** | Hayır | timeZone | Dize | Yalnızca bir başlangıç saati belirttiğinizde geçerlidir çünkü bu tetikleyici [UTC sapmasını](https://en.wikipedia.org/wiki/UTC_offset)kabul etmez. Uygulamak istediğiniz saat dilimini seçin. |
+   | **Başlangıç saati** | Hayır | startTime | Dize | Bu biçimde bir başlangıç tarihi ve saati belirtin: <p>YYYY-MM-DDThh: mm: ss saat dilimi seçerseniz <p>-veya- <p>YYYY-MM-DDThh: mm: ssZ saat dilimi seçme <p>Örneğin, 18 Eylül 2017, 2:00 PM üzerinde istiyorsanız, "2017-09-18T14:00:00" belirtin ve Pasifik standart saati gibi bir saat dilimi seçin. Ya da saat dilimi olmadan "2017-09-18T14:00:00Z" belirtin. <p>**Note:** Bu başlangıç saati, gelecekte en fazla 49 yıla sahiptir ve UTC [8601 tarih saat belirtimini](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) UTC [Tarih saat biçiminde](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)izlemelidir, ancak [UTC bir fark](https://en.wikipedia.org/wiki/UTC_offset)olmadan gelmelidir. Bir saat dilimi seçmezseniz, sonunda boşluk olmadan "Z" harfini eklemeniz gerekir. Bu "Z", eşdeğer [nadeniz saati](https://en.wikipedia.org/wiki/Nautical_time)anlamına gelir. <p>Basit zamanlamalar için başlangıç zamanı ilk oluşumdır, ancak karmaşık zamanlamalar için tetikleyici başlangıç zamanından daha önce harekete geçmez. [*Başlangıç tarihini ve saatini kullanmanın yolları nelerdir?* ](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md#start-time) |
+   | **Şu günlerde** | Hayır | weekDays | Dize veya dize dizisi | "Hafta" seçeneğini belirlerseniz, iş akışını çalıştırmak istediğinizde bir veya daha fazla gün seçebilirsiniz: **Pazartesi**, **Salı**, **Çarşamba**, **Perşembe**, **Cuma**, **Cumartesi**ve **Pazar** |
+   | **Şu saatlerde** | Hayır | saat | Tamsayı veya tamsayı dizisi | "Gün" veya "hafta" seçeneğini belirlerseniz, iş akışını çalıştırmak istediğiniz günün saati olarak 0 ile 23 arasında bir veya daha fazla tamsayı seçebilirsiniz. <p><p>Örneğin, "10", "12" ve "14" belirtirseniz günün saati için 10 har, 12 PM ve 2 PM elde edersiniz, ancak günün tutanakları yineleme başladığı zaman temel alınarak hesaplanır. Günün dakikalarını ayarlamak için, **Bu dakika** özelliği için değeri belirtin. |
+   | **Şu dakikalarda** | Hayır | dakika | Tamsayı veya tamsayı dizisi | "Gün" veya "hafta" seçeneğini belirlerseniz, iş akışını çalıştırmak istediğiniz saatin dakikası olarak 0 ile 59 arasında bir veya daha fazla tamsayı seçebilirsiniz. <p>Örneğin, "30" öğesini dakika işareti olarak belirtebilir ve günün saati için önceki örneği kullanarak 10:30, 12:30 PM ve 2:30 PM kazanın. |
    |||||
 
-   Örneğin, 4 Eylül 2017, Pazartesi, bugün olduğunu varsayın. Aşağıdaki yinelenme tetikleyicisini etkinleşmez *herhangi erken* başlangıç tarihi ve saati olduğu 18 Eylül 2017, Pazartesi 08: 00'te Pasifik saati. Yinelenme zamanlaması 10:30 AM, ancak ayarlanmış 12:30 PM ve 2:30 PM yalnızca Pazartesi günleri. Bu nedenle ilk kez tetiklenir ve bir mantıksal uygulama iş akışı örneği oluşturur, 10: 30'da olduğu. Başlangıç iş ne zaman hakkında daha fazla bilgi için bkz: [start zamanı örnekleri](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md#start-time).
+   Örneğin, bugün Pazartesi, 4 Eylül 2017 olduğunu varsayalım. Aşağıdaki yineleme tetikleyicisi başlangıç tarihi ve saatinden daha *önce* harekete geçmez. Bu, 18 Eylül 2017, 8:00. pst ' de 00 ' dır. Ancak, yineleme zamanlaması 10:30, 12:30 PM ve 2:30 PM için yalnızca Mondays için ayarlanır. Bu nedenle tetikleyici ilk kez ateşlenir ve bir Logic App iş akışı örneği oluşturduğunda 10:30 ' de olur. Başlangıç sürelerinin nasıl çalıştığı hakkında daha fazla bilgi edinmek için bu [Başlangıç saati örneklerine](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md#start-time)bakın.
 
-   12:30 PM ve 2:30 PM, gelecekteki çalışmalarını aynı gün gerçekleşir. Her yineleme, kendi iş akışı örneği oluşturur. Bundan sonra tüm yeniden sonraki Pazartesi tüm zamanlama tekrarlar. [*Diğer bir örnek örnekleri nelerdir?* ](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md#example-recurrences)
+   Gelecekteki çalıştırmalar, aynı günde 12:30 PM ve 2:30 PM 'de gerçekleşir. Her yinelenme kendi iş akışı örneğini oluşturur. Bundan sonra, tüm zamanlama sonraki Pazartesi günü tekrar yinelenir. [*Diğer örnek örnekleri nelerdir?* ](../logic-apps/concepts-schedule-automated-recurring-tasks-workflows.md#example-recurrences)
 
    ![Gelişmiş zamanlama örneği](./media/connectors-native-recurrence/recurrence-trigger-more-options-advanced-schedule.png)
 
    > [!NOTE]
-   > Yalnızca "Day" veya "Week" sıklığı seçtiğinizde, belirtilen yinelenme için Önizleme tetikleyici gösterir.
+   > Tetikleyici, yalnızca sıklık olarak "gün" veya "hafta" seçeneğini belirlediğinizde belirttiğiniz yineleme için bir önizleme gösterir.
 
-1. Şimdi diğer eylemlerle kalan iş akışınızı oluşturun. Ekleyebileceğiniz diğer eylemler için bkz. [Azure Logic Apps için Bağlayıcılar](../connectors/apis-list.md).
+1. Şimdi diğer eylemlerle kalan iş akışınızı derleyin. Ekleyebileceğiniz daha fazla eylem için bkz. [bağlayıcılar Azure Logic Apps](../connectors/apis-list.md).
 
-## <a name="workflow-definition---recurrence"></a>İş akışı tanımı - yinelenme
+## <a name="workflow-definition---recurrence"></a>İş akışı tanımı-yinelenme
 
-JSON kullanan mantıksal uygulamanızın temel iş akışı tanımında görüntüleyebileceğiniz [yinelenme tetikleyicisi tanımı](../logic-apps/logic-apps-workflow-actions-triggers.md#recurrence-trigger) seçtiğiniz seçeneklere sahip. Bu tanım tasarımcı araç çubuğunda görüntülemek için seçin **kod görünümü**. Tasarımcıya geri dönmek için tasarımcı araç çubuğunda seçin **Tasarımcısı**.
+Mantıksal uygulamanızın, JSON kullanan temel alınan iş akışı tanımında, [yineleme tetikleyicisi tanımını](../logic-apps/logic-apps-workflow-actions-triggers.md#recurrence-trigger) seçtiğiniz seçeneklerle görüntüleyebilirsiniz. Bu tanımı görüntülemek için tasarımcı araç çubuğunda **kod görünümü**' ne tıklayın. Tasarımcıya dönmek için tasarımcı araç çubuğunda **Tasarımcı**' yı seçin.
 
-Bu örnekte, temel alınan bir iş akışı tanımında bir yinelenme tetikleyicisi tanımı nasıl görünebileceği gösterilmiştir:
+Bu örnek, bir yinelenme tetikleyicisi tanımının temel alınan bir iş akışı tanımına nasıl görünebileceğini gösterir:
 
 ``` json
 "triggers": {
@@ -121,5 +121,5 @@ Bu örnekte, temel alınan bir iş akışı tanımında bir yinelenme tetikleyic
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Gecikmeli eylemleri akışlarıyla Duraklat](../connectors/connectors-native-delay.md)
+* [Gecikme eylemleriyle iş akışlarını duraklatma](../connectors/connectors-native-delay.md)
 * [Logic Apps için bağlayıcılar](../connectors/apis-list.md)

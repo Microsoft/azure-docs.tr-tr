@@ -1,54 +1,53 @@
 ---
-title: Avere vFXT DNS - Azure
-description: Bir DNS sunucusunu Avere vFXT ile Azure için hepsini bir kez deneme yük dengelemeyi yapılandırma
+title: Avere vFXT DNS-Azure
+description: Azure için avere vFXT ile hepsini bir kez deneme yük dengelemesi için bir DNS sunucusu yapılandırma
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 10/31/2018
-ms.author: v-erkell
-ms.openlocfilehash: 9fd9eaf1e62d063026e0e656346baaaade87064f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: rohogue
+ms.openlocfilehash: c28189bf227a6a81ae9e72e889a0dc598cd7949e
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60410144"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72256271"
 ---
 # <a name="avere-cluster-dns-configuration"></a>Avere kümesi DNS yapılandırması
 
-Bu bölümde, DNS sistemini Yük Dengeleme Avere vFXT kümenizi yapılandırma temellerini açıklar. 
+Bu bölümde, avere vFXT kümenizin yük dengelemesi için bir DNS sisteminin yapılandırılmasına ilişkin temel bilgiler açıklanmaktadır. 
 
-Bu belge *içermemesi* ayarlamaya ve bir DNS sunucusu Azure ortamında yönetmeye yönelik yönergeler. 
+Bu belge, Azure ortamında bir DNS sunucusu ayarlamaya ve yönetmeye yönelik yönergeler *içermez* . 
 
-Yük Dengeleme için DNS hepsini bir kez deneme kullanmak yerine, azure'da vFXT kümeyi el ile uygulanan yöntemleri bağlı oldukları zaman istemciler arasında eşit şekilde IP adresleri atamak kullanmayı düşünün. Çeşitli yöntemler açıklanmıştır [Avere küme bağlama](avere-vfxt-mount-clients.md). 
+Azure 'da bir vFXT kümesini yük dengelemek için hepsini bir kez deneme DNS kullanmak yerine, bağlandıkları zaman istemciler arasında IP adreslerini eşit bir şekilde atamak için el ile gerçekleştirilen yöntemleri kullanmayı düşünün. Çeşitli yöntemler [avere kümesini bağlama](avere-vfxt-mount-clients.md)bölümünde açıklanmaktadır. 
 
-Bir DNS sunucusu kullanılıp kullanılmayacağı verirken bunları göz önünde bulundurun: 
+Bir DNS sunucusunun kullanılıp kullanılmayacağını saptarken şunları göz önünde bulundurun: 
 
-* Sisteminizi NFS istemciler tarafından erişilirse, DNS kullanarak gerekli değildir - sayısal IP adresleri kullanarak tüm ağ adresleri belirtmek mümkündür. 
+* Sisteminiz yalnızca NFS istemcileri tarafından erişiliyorsa DNS kullanımı gerekli değildir-sayısal IP adresleri kullanarak tüm ağ adreslerini belirtmek mümkündür. 
 
-* Sisteminiz SMB (CIFS) erişim destekliyorsa, Active Directory sunucusu için bir DNS etki alanı belirtmeniz gerekir çünkü DNS gereklidir.
+* Sisteminiz SMB (CIFS) erişimini destekliyorsa, DNS gerekir, çünkü Active Directory sunucusu için bir DNS etki alanı belirtmeniz gerekir.
 
-* Kerberos kimlik doğrulamasını kullanmak istiyorsanız DNS gereklidir.
+* Kerberos kimlik doğrulaması kullanmak istiyorsanız DNS gereklidir.
 
-## <a name="load-balancing"></a>Yük dengeleme
+## <a name="load-balancing"></a>Yük Dengeleme
 
-Genel yük dağıtmak için hepsini bir kez deneme yük dağıtımı için istemciye yönelik IP adreslerini kullanmak için bir DNS etki alanınızı yapılandırın.
+Genel yükü dağıtmak için DNS etki alanınızı, istemciye yönelik IP adresleri için hepsini bir kez deneme yük dağıtımı kullanacak şekilde yapılandırın.
 
 ## <a name="configuration-details"></a>Yapılandırma ayrıntıları
 
-İstemciler kümeye erişirken RRDNS isteklerinde kullanılabilir tüm arabirimleri arasında otomatik olarak dengeler.
+İstemciler kümeye erişirken, RRDNS, tüm kullanılabilir arabirimler arasında isteklerini otomatik olarak dengeler.
 
-En iyi performans için aşağıdaki diyagramda gösterildiği gibi istemci kullanıma yönelik küme adresleri işlemek için DNS sunucunuzu yapılandırın.
+En iyi performans için, DNS sunucunuzu aşağıdaki diyagramda gösterildiği gibi istemciye yönelik küme adreslerini işleyecek şekilde yapılandırın.
 
-Bir küme vserver sol tarafta gösterilir ve IP adresleri Merkezi'nde ve sağdaki görünür. Her istemci erişim noktası ile bir yapılandırma kayıtları ve gösterildiği gibi işaretçiler.
+Sol tarafta bir küme vServer gösterilir ve IP adresleri ortadaki ve sağ tarafta görüntülenir. Her bir istemci erişim noktasını, gösterildiği gibi bir kayıt ve işaretçilerle yapılandırın.
 
-![Avere kümesi hepsini bir kez deneme DNS diyagramı](media/avere-vfxt-rrdns-diagram.png) 
-<!--- separate text description file provided  [diagram text description](avere-vfxt-rrdns-alt-text.md) -->
+![Avere Cluster hepsini bir kez deneme DNS diyagramı @ no__t-1<!--- separate text description file provided  [diagram text description](avere-vfxt-rrdns-alt-text.md) -->
 
-Her istemci kullanıma yönelik IP adresi, küme tarafından iç kullanım için benzersiz bir ad olmalıdır. (Bu diyagramda, istemci IP'leri vs1 adlandırıldığı-istemci - IP-* anlaşılması için ancak üretimde büyük olasılıkla istemci * gibi daha kısa, bir şey kullanmanız gerekir.)
+Her bir istemciye yönelik IP adresinin, küme tarafından iç kullanım için benzersiz bir adı olmalıdır. (Bu diyagramda istemci IP 'Leri, açıklık için VS1-Client-IP-* olarak adlandırılır, ancak üretimde, istemci * gibi daha kısa bir ad kullanmanız gerekir.)
 
-İstemciler, sunucu bağımsız değişken olarak vserver adıyla kümeye bağlayın. 
+İstemciler, sanal sunucu adını sunucu bağımsız değişkeni olarak kullanarak kümeyi bağlayabilir. 
 
-DNS sunucunuzun değiştirme ``named.conf`` dosyası için vserver sorgular için döngüsel sırayı ayarlamak için. Bu seçenek, tüm kullanılabilir değerleri arasında geçiş sırasında uygulamaları olmasını sağlar. Aşağıdaki gibi bir deyim ekleyin:
+DNS sunucunuzun ``named.conf`` dosyasını değiştirip sanal sunucunuza sorgular için döngüsel sıra ayarlayın. Bu seçenek, tüm kullanılabilir değerlerin üzerinden kaydırılmasını sağlar. Aşağıdakine benzer bir ifade ekleyin:
 
 ```
 options {
@@ -58,7 +57,7 @@ options {
 };
 ```
 
-DNS düzgün yapılandırma örneği nsupdate aşağıdakileri sağlar:
+Aşağıdaki nsupdate komutları DNS yapılandırmasına doğru bir örnek sağlar:
 
 ```
 update add vserver1.example.com. 86400 A 10.0.0.10
@@ -74,12 +73,12 @@ update add 12.0.0.10.in-addr.arpa. 86400 PTR vs1-client-IP-12.example.com
 
 ## <a name="cluster-dns-settings"></a>Küme DNS ayarları
 
-İçinde vFXT kümenin kullandığı DNS sunucusunu belirtmenizi **küme** > **yönetim ağ** Ayarları sayfası. Bu sayfadaki ayarlar şunlardır:
+VFXT kümesinin **küme** > **Yönetim ağı** ayarları sayfasında kullandığı DNS sunucusunu belirtin. Bu sayfadaki ayarlar şunlardır:
 
 * DNS sunucusu adresi
 * DNS etki alanı adı
 * DNS arama etki alanları
 
-Okuma [DNS ayarlarını](<https://azure.github.io/Avere/legacy/ops_guide/4_7/html/gui_admin_network.html#gui-dns>) bu sayfayı kullanma hakkında daha fazla ayrıntı için Avere küme yapılandırma Kılavuzu'nda.
+Bu sayfayı kullanma hakkında daha fazla bilgi için avere kümesi yapılandırma kılavuzundaki [DNS ayarlarını](<https://azure.github.io/Avere/legacy/ops_guide/4_7/html/gui_admin_network.html#gui-dns>) okuyun.
 
 

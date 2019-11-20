@@ -1,6 +1,6 @@
 ---
-title: Azure Service Fabric kapsayıcı uygulaması bildirim örnekleri | Microsoft Docs
-description: Uygulama yapılandırma ve hizmet çok kapsayıcılı bir Service Fabric uygulaması için bildirim ayarları hakkında bilgi edinin.
+title: Azure Service Fabric kapsayıcısı uygulama bildirimi örnekleri
+description: Çok Kapsayıcılı Service Fabric bir uygulama için uygulama ve hizmet bildirimi ayarlarını yapılandırmayı öğrenin.
 services: service-fabric
 documentationcenter: na
 author: peterpogorski
@@ -14,25 +14,25 @@ ms.tgt_pltfrm: na
 ms.workload: multiple
 ms.date: 06/08/2018
 ms.author: pepogors
-ms.openlocfilehash: 622e6f7552d91cdb9ccf3668c302496c68a5920f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 2d79f7dbf492b9473bcff147891df308674a8cf0
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60719252"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74013240"
 ---
 # <a name="multi-container-application-and-service-manifest-examples"></a>Birden çok kapsayıcılı uygulama ve hizmet bildirimi örnekleri
-Çok kapsayıcılı bir Service Fabric uygulaması için uygulama ve hizmet bildirimleri örnekleri aşağıda verilmiştir. Bu örnekler amacı hangi ayarlar kullanılabilir ve bunların nasıl kullanılacağını göstermektir. Bu uygulama ve hizmet bildirimleri dayalı [Windows Server 2016 kapsayıcı örnek](https://github.com/Azure-Samples/service-fabric-containers/tree/master/Windows) bildirimleri.
+Aşağıda, çok Kapsayıcılı Service Fabric bir uygulama için uygulama ve hizmet bildirimlerinin örnekleri verilmiştir. Bu örneklerin amacı, hangi ayarların kullanılabildiğini ve bunların nasıl kullanılacağını gösterir. Bu uygulama ve hizmet bildirimleri [Windows Server 2016 kapsayıcı örnek](https://github.com/Azure-Samples/service-fabric-containers/tree/master/Windows) bildirimlerini temel alır.
 
-Aşağıdaki özellikleri gösterilmiştir:
+Aşağıdaki özellikler gösteriliyor:
 
-|Bildirimi|Özellikler|
+|Bildirim|Özellikler|
 |---|---|
-|[Uygulama bildirimi](#application-manifest)| [ortam değişkenlerini geçersiz kılmak](service-fabric-get-started-containers.md#configure-and-set-environment-variables), [kapsayıcı bağlantı noktasından konak eşlemeyi yapılandırma](service-fabric-get-started-containers.md#configure-container-port-to-host-port-mapping-and-container-to-container-discovery), [kapsayıcı kayıt defteri kimlik doğrulamasını yapılandırma](service-fabric-get-started-containers.md#configure-container-registry-authentication), [kaynak İdaresi](service-fabric-resource-governance.md), [yalıtım modunu](service-fabric-get-started-containers.md#configure-isolation-mode), [işletim sistemi derleme özgü kapsayıcı görüntüleri belirtme](service-fabric-get-started-containers.md#specify-os-build-specific-container-images)| 
-|[FrontEndService hizmet bildirimi](#frontendservice-service-manifest)| [ortam değişkenlerini ayarlama](service-fabric-get-started-containers.md#configure-and-set-environment-variables), [bir uç nokta yapılandırma](service-fabric-get-started-containers.md#configure-communication), komutları kapsayıcıya geçirmek [sertifika bir kapsayıcıya alma](service-fabric-securing-containers.md)| 
-|[BackEndService hizmet bildirimi](#backendservice-service-manifest)|[ortam değişkenlerini ayarlama](service-fabric-get-started-containers.md#configure-and-set-environment-variables), [bir uç nokta yapılandırma](service-fabric-get-started-containers.md#configure-communication), [birim sürücüsü yapılandırma](service-fabric-containers-volume-logging-drivers.md)| 
+|[Uygulama bildirimi](#application-manifest)| [ortam değişkenlerini geçersiz kılma](service-fabric-get-started-containers.md#configure-and-set-environment-variables), [kapsayıcı bağlantı noktasından konağa eşleme](service-fabric-get-started-containers.md#configure-container-port-to-host-port-mapping-and-container-to-container-discovery), [kapsayıcı kayıt defteri kimlik doğrulamasını yapılandırma](service-fabric-get-started-containers.md#configure-container-repository-authentication), [kaynak](service-fabric-resource-governance.md)yönetimi, [yalıtım modunu](service-fabric-get-started-containers.md#configure-isolation-mode)yapılandırma, [işletim sistemi oluşturmaya özgü kapsayıcı görüntülerini belirleme](service-fabric-get-started-containers.md#specify-os-build-specific-container-images)| 
+|[FrontEndService hizmet bildirimi](#frontendservice-service-manifest)| [ortam değişkenlerini ayarlama](service-fabric-get-started-containers.md#configure-and-set-environment-variables), [uç nokta yapılandırma](service-fabric-get-started-containers.md#configure-communication), kapsayıcıya komut geçirme, bir [sertifikayı kapsayıcıya aktarma](service-fabric-securing-containers.md)| 
+|[BackEndService hizmeti bildirimi](#backendservice-service-manifest)|[ortam değişkenlerini ayarlama](service-fabric-get-started-containers.md#configure-and-set-environment-variables), [uç nokta yapılandırma](service-fabric-get-started-containers.md#configure-communication), [birim sürücüsünü yapılandırma](service-fabric-containers-volume-logging-drivers.md)| 
 
-Bkz: [uygulama bildirim öğeleri](#application-manifest-elements), [FrontEndService hizmet bildirim öğeleri](#frontendservice-service-manifest-elements), ve [BackEndService hizmet bildirim öğeleri](#backendservice-service-manifest-elements) özel hakkında daha fazla bilgi için XML öğeleri.
+Belirli XML öğeleri hakkında daha fazla bilgi için bkz. [uygulama bildirimi öğeleri](#application-manifest-elements), [frontendservice hizmet bildirimi öğeleri](#frontendservice-service-manifest-elements)ve [BackendService hizmet bildirimi öğeleri](#backendservice-service-manifest-elements) .
 
 ## <a name="application-manifest"></a>Uygulama bildirimi
 
@@ -215,7 +215,7 @@ Bkz: [uygulama bildirim öğeleri](#application-manifest-elements), [FrontEndSer
 </ServiceManifest>
 ```
 
-## <a name="backendservice-service-manifest"></a>BackEndService hizmet bildirimi
+## <a name="backendservice-service-manifest"></a>BackEndService hizmeti bildirimi
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -264,157 +264,157 @@ Bkz: [uygulama bildirim öğeleri](#application-manifest-elements), [FrontEndSer
 </ServiceManifest>
 ```
 
-## <a name="application-manifest-elements"></a>Uygulama bildirimi öğesi
+## <a name="application-manifest-elements"></a>Uygulama bildirim öğeleri
 ### <a name="applicationmanifest-element"></a>ApplicationManifest öğesi
-Uygulama türü ve sürümü bildirimli olarak açıklar. Uygulama türü oluşturmak için bir veya daha fazla hizmet bildirimleri bağlı hizmetlerin başvurulur. Bağlı hizmetler, yapılandırma ayarlarını parametreli uygulama ayarları kullanarak geçersiz kılınabilir. Varsayılan Hizmetleri, hizmet şablonları, ilkeleri, ilkeleri, tanılama ayarı ve ayrıca uygulama düzeyinde bildirilen sertifikaları verebilir. Daha fazla bilgi için [ApplicationManifest öğesi](service-fabric-service-model-schema-elements.md#ApplicationManifestElementApplicationManifestTypeComplexType)
+Uygulama türünü ve sürümünü bildirimli olarak açıklar. Bileşen hizmetlerinin bir veya daha fazla hizmet bildirimine bir uygulama türü oluşturmak için başvurulur. Yapısal hizmetlerin yapılandırma ayarları, parametreli uygulama ayarları kullanılarak geçersiz kılınabilir. Varsayılan hizmetler, hizmet şablonları, sorumlular, ilkeler, tanılama kurulumu ve sertifikalar uygulama düzeyinde de bildirilebilecek. Daha fazla bilgi için bkz. [ApplicationManifest öğesi](service-fabric-service-model-schema-elements.md#ApplicationManifestElementApplicationManifestTypeComplexType)
 
-### <a name="parameters-element"></a>Parametre öğesi
-Bu uygulama bildiriminde kullanılan parametreleri bildirir. Uygulama oluşturulur ve uygulama veya hizmet yapılandırma ayarlarını geçersiz kılmak için kullanılabilir olduğunda bu parametre değeri sağlanabilir. Daha fazla bilgi için [parametreleri öğesi](service-fabric-service-model-schema-elements.md#ParametersElementanonymouscomplexTypeComplexTypeDefinedInApplicationManifestTypecomplexType)
+### <a name="parameters-element"></a>Parameters öğesi
+Bu uygulama bildiriminde kullanılan parametreleri bildirir. Uygulama örneği oluşturulduğunda ve uygulama ya da hizmet yapılandırma ayarlarını geçersiz kılmak için kullanılabilir olduğunda, bu parametrelerin değeri sağlanabilir. Daha fazla bilgi için bkz. [Parameters öğesi](service-fabric-service-model-schema-elements.md#ParametersElementanonymouscomplexTypeComplexTypeDefinedInApplicationManifestTypecomplexType)
 
 ### <a name="parameter-element"></a>Parameter öğesi
-Bu bildirimde kullanılmak üzere bir uygulama parametresi. Parametre değeri uygulama Örnekleme sırasında değiştirilebilir veya herhangi bir değer sağlanmazsa varsayılan değeri kullanılır. Daha fazla bilgi için [Parameter öğesi](service-fabric-service-model-schema-elements.md#ParameterElementanonymouscomplexTypeComplexTypeDefinedInParameterselement)
+Bu bildirimde kullanılacak bir uygulama parametresi. Parametre değeri uygulama örneği oluşturma sırasında değiştirilebilir veya hiçbir değer sağlanmazsa varsayılan değer kullanılır. Daha fazla bilgi için bkz. [Parameter öğesi](service-fabric-service-model-schema-elements.md#ParameterElementanonymouscomplexTypeComplexTypeDefinedInParameterselement)
 
 ### <a name="servicemanifestimport-element"></a>Servicemanifestımport öğesi
-Hizmet geliştiricisi tarafından oluşturulan bir hizmet bildirimi alır. Uygulamadaki her bir bağlı hizmet için bir hizmet bildirimi aktarılması gerekir. Yapılandırmayı geçersiz kılar ve ilkeleri hizmet bildirimi için bildirilebilir. Daha fazla bilgi için [Servicemanifestımport öğesi](service-fabric-service-model-schema-elements.md#ServiceManifestImportElementanonymouscomplexTypeComplexTypeDefinedInApplicationManifestTypecomplexType)
+Hizmet geliştiricisi tarafından oluşturulan bir hizmet bildirimini içeri aktarır. Uygulamadaki her bir bileşen hizmeti için bir hizmet bildirimi içeri aktarılmalıdır. Yapılandırma geçersiz kılmaları ve ilkeler hizmet bildirimi için bildirilebilecek. Daha fazla bilgi için bkz. [Servicemanifestımport öğesi](service-fabric-service-model-schema-elements.md#ServiceManifestImportElementanonymouscomplexTypeComplexTypeDefinedInApplicationManifestTypecomplexType)
 
 ### <a name="servicemanifestref-element"></a>ServiceManifestRef öğesi
-Hizmet bildirimi, başvuruya göre alır. Şu anda hizmet bildirim dosyasını (ServiceManifest.xml) yapı paketinde bulunmalıdır. Daha fazla bilgi için [ServiceManifestRef öğesi](service-fabric-service-model-schema-elements.md#ServiceManifestRefElementServiceManifestRefTypeComplexTypeDefinedInServiceManifestImportelement)
+Hizmet bildirimini başvuruya göre içeri aktarır. Şu anda hizmet bildirim dosyası (ServiceManifest. xml) yapı paketinde mevcut olmalıdır. Daha fazla bilgi için bkz. [Servicemanifestref öğesi](service-fabric-service-model-schema-elements.md#ServiceManifestRefElementServiceManifestRefTypeComplexTypeDefinedInServiceManifestImportelement)
 
-### <a name="policies-element"></a>İlke öğesi
-İçeri aktarılan bir hizmet bildiriminde uygulanacak ilkeler (uç nokta bağlama, paket paylaşımı, farklı çalıştır ve güvenlik erişim) açıklar. Daha fazla bilgi için [ilkeleri öğesi](service-fabric-service-model-schema-elements.md#PoliciesElementServiceManifestImportPoliciesTypeComplexTypeDefinedInServiceManifestImportelement)
+### <a name="policies-element"></a>Policies öğesi
+İçeri aktarılan hizmet bildirimine uygulanacak ilkeleri (bitiş noktası bağlama, paket paylaşımı, farklı çalıştır ve güvenlik erişimi) açıklar. Daha fazla bilgi için bkz. [Policies öğesi](service-fabric-service-model-schema-elements.md#PoliciesElementServiceManifestImportPoliciesTypeComplexTypeDefinedInServiceManifestImportelement)
 
-### <a name="servicepackageresourcegovernancepolicy-element"></a>ServicePackageResourceGovernancePolicy öğesi
-Tüm hizmet paketi düzeyinde mi uygulanacağına kaynak İdaresi İlkesi tanımlar. Daha fazla bilgi için [ServicePackageResourceGovernancePolicy öğesi](service-fabric-service-model-schema-elements.md#ServicePackageResourceGovernancePolicyElementServicePackageResourceGovernancePolicyTypeComplexTypeDefinedInServiceManifestImportPoliciesTypecomplexTypeDefinedInServicePackageTypecomplexType)
+### <a name="servicepackageresourcegovernancepolicy-element"></a>Servicepackageresourcehüküancepolicy öğesi
+Tüm hizmet paketinin düzeyinde uygulanan kaynak idare ilkesini tanımlar. Daha fazla bilgi için bkz. [Servicepackageresourcegovernancepolicy öğesi](service-fabric-service-model-schema-elements.md#ServicePackageResourceGovernancePolicyElementServicePackageResourceGovernancePolicyTypeComplexTypeDefinedInServiceManifestImportPoliciesTypecomplexTypeDefinedInServicePackageTypecomplexType)
 
-### <a name="resourcegovernancepolicy-element"></a>ResourceGovernancePolicy öğesi
-Kod paketi için kaynak sınırları belirtir. Daha fazla bilgi için [ResourceGovernancePolicy öğesi](service-fabric-service-model-schema-elements.md#ResourceGovernancePolicyElementResourceGovernancePolicyTypeComplexTypeDefinedInServiceManifestImportPoliciesTypecomplexTypeDefinedInDigestedCodePackageelementDefinedInDigestedEndpointelement)
+### <a name="resourcegovernancepolicy-element"></a>Resourcehüküancepolicy öğesi
+Bir kod paketi için kaynak sınırlarını belirtir. Daha fazla bilgi için bkz. [Resourcehüküancepolicy öğesi](service-fabric-service-model-schema-elements.md#ResourceGovernancePolicyElementResourceGovernancePolicyTypeComplexTypeDefinedInServiceManifestImportPoliciesTypecomplexTypeDefinedInDigestedCodePackageelementDefinedInDigestedEndpointelement)
 
-### <a name="containerhostpolicies-element"></a>Healthcheck öğesi
-Kapsayıcı konağında etkinleştirdiğiniz için ilkeleri belirtir. Daha fazla bilgi için [Healthcheck öğesi](service-fabric-service-model-schema-elements.md#ContainerHostPoliciesElementContainerHostPoliciesTypeComplexTypeDefinedInServiceManifestImportPoliciesTypecomplexTypeDefinedInDigestedCodePackageelement)
+### <a name="containerhostpolicies-element"></a>ContainerHostPolicies öğesi
+Kapsayıcı Konakları etkinleştirme ilkelerini belirtir. Daha fazla bilgi için bkz. [Containerhostpolicies öğesi](service-fabric-service-model-schema-elements.md#ContainerHostPoliciesElementContainerHostPoliciesTypeComplexTypeDefinedInServiceManifestImportPoliciesTypecomplexTypeDefinedInDigestedCodePackageelement)
 
-### <a name="repositorycredentials-element"></a>RepositoryCredentials öğesi
-Kapsayıcı görüntüsünü çekme görüntülerden depoya için kimlik bilgileri. Daha fazla bilgi için [RepositoryCredentials öğesi](service-fabric-service-model-schema-elements.md#RepositoryCredentialsElementRepositoryCredentialsTypeComplexTypeDefinedInContainerHostPoliciesTypecomplexType)
+### <a name="repositorycredentials-element"></a>Depobilgileri öğesi
+Görüntüleri çekmek için kapsayıcı görüntüsü deposunun kimlik bilgileri. Daha fazla bilgi için bkz. [Depoıkimlik bilgileri öğesi](service-fabric-service-model-schema-elements.md#RepositoryCredentialsElementRepositoryCredentialsTypeComplexTypeDefinedInContainerHostPoliciesTypecomplexType)
 
 ### <a name="portbinding-element"></a>PortBinding öğesi
-İfşa edilen kapsayıcı bağlantı noktasına bağlamak üzere hangi uç nokta kaynağı belirtir. Daha fazla bilgi için [PortBinding öğesi](service-fabric-service-model-schema-elements.md#PortBindingElementPortBindingTypeComplexTypeDefinedInServicePackageContainerPolicyTypecomplexTypeDefinedInContainerHostPoliciesTypecomplexType)
+Gösterilen kapsayıcı bağlantı noktasına bağlanacak bitiş noktası kaynağını belirtir. Daha fazla bilgi için bkz. [Portbinding öğesi](service-fabric-service-model-schema-elements.md#PortBindingElementPortBindingTypeComplexTypeDefinedInServicePackageContainerPolicyTypecomplexTypeDefinedInContainerHostPoliciesTypecomplexType)
 
-### <a name="volume-element"></a>Birim öğesi
-Kapsayıcıya bağlı birimin belirtir. Daha fazla bilgi için [birim öğesi](service-fabric-service-model-schema-elements.md#VolumeElementContainerVolumeTypeComplexTypeDefinedInContainerHostPoliciesTypecomplexType)
+### <a name="volume-element"></a>Volume öğesi
+Kapsayıcıya bağlanacak birimi belirtir. Daha fazla bilgi için bkz. [Volume öğesi](service-fabric-service-model-schema-elements.md#VolumeElementContainerVolumeTypeComplexTypeDefinedInContainerHostPoliciesTypecomplexType)
 
 ### <a name="driveroption-element"></a>DriverOption öğesi
-Sürücü Seçenekleri'sürücüsüne geçirilecek. Daha fazla bilgi için [DriverOption öğesi](service-fabric-service-model-schema-elements.md#DriverOptionElementDriverOptionTypeComplexTypeDefinedInContainerLoggingDriverTypecomplexTypeDefinedInContainerVolumeTypecomplexType)
+Sürücüye geçirilecek sürücü seçenekleri. Daha fazla bilgi için bkz. [Driveroption öğesi](service-fabric-service-model-schema-elements.md#DriverOptionElementDriverOptionTypeComplexTypeDefinedInContainerLoggingDriverTypecomplexTypeDefinedInContainerVolumeTypecomplexType)
 
-### <a name="imageoverrides-element"></a>ImageOverrides öğesi
-Windows Server kapsayıcıları, işletim Sisteminin farklı sürümleri arasında uyumlu olmayabilir.  Kapsayıcı başına birden çok işletim sistemi görüntüsü belirtin ve bunların işletim Sisteminin derleme sürümleriyle etiketleyin. İşletim sistemi derleme sürümü "winver" bir Windows komut isteminde çalıştırarak alın. Temel işletim sistemi derleme sürümü 16299 (Windows Server 1709 sürümü) varsa, Service Fabric, Os ile etiketlenmiş kapsayıcı görüntüsünü seçer. "16299" =. Etiketsiz bir kapsayıcı görüntüsü, işletim sistemi sürümleri arasında iş kabul edilir ve hizmet bildiriminde belirtilen görüntünün geçersiz kılar. Daha fazla bilgi için [ImageOverrides öğesi](service-fabric-service-model-schema-elements.md#ImageOverridesElementImageOverridesTypeComplexTypeDefinedInContainerHostPoliciesTypecomplexType)
+### <a name="imageoverrides-element"></a>Imagekılmalar öğesi
+Windows Server kapsayıcıları, işletim sisteminin farklı sürümleri arasında uyumlu olmayabilir.  Kapsayıcı başına birden çok işletim sistemi görüntüsü belirtebilir ve bunları işletim sisteminin derleme sürümleriyle etiketleyebilirsiniz. Bir Windows komut isteminde "winver" komutunu çalıştırarak işletim sisteminin derleme sürümünü alın. Temel alınan işletim sistemi derleme sürümü 16299 (Windows Server sürüm 1709) ise, Service Fabric OS = "16299" ile etiketlenmiş kapsayıcı görüntüsünü seçer. Etiketlenmemiş bir kapsayıcı görüntüsünün işletim sisteminin tüm sürümlerinde çalıştığı ve hizmet bildiriminde belirtilen görüntünün üzerine belirlediği varsayılır. Daha fazla bilgi için bkz. [ımagekılmalar öğesi](service-fabric-service-model-schema-elements.md#ImageOverridesElementImageOverridesTypeComplexTypeDefinedInContainerHostPoliciesTypecomplexType)
 
-### <a name="image-element"></a>Görüntü öğesi
-Başlatılacak olan işletim sistemi derleme sürüm numarasına karşılık gelen kapsayıcı görüntüsü. İşletim sistemi özniteliği belirtilmezse, kapsayıcı görüntüsünün işletim sistemi sürümleri arasında iş kabul edilir ve hizmet bildiriminde belirtilen görüntünün geçersiz kılar. Daha fazla bilgi için [görüntü öğesi](service-fabric-service-model-schema-elements.md#ImageElementImageTypeComplexTypeDefinedInImageOverridesTypecomplexType)
+### <a name="image-element"></a>Image öğesi
+Başlatılacak işletim sistemi derleme sürüm numarasına karşılık gelen kapsayıcı görüntüsü. Işletim sistemi özniteliği belirtilmemişse, kapsayıcı görüntüsünün işletim sisteminin tüm sürümlerinde çalıştığı varsayılır ve hizmet bildiriminde belirtilen görüntüyü geçersiz kılar. Daha fazla bilgi için bkz. [görüntü öğesi](service-fabric-service-model-schema-elements.md#ImageElementImageTypeComplexTypeDefinedInImageOverridesTypecomplexType)
 
 ### <a name="environmentoverrides-element"></a>EnvironmentOverrides öğesi
- Daha fazla bilgi için [EnvironmentOverrides öğesi](service-fabric-service-model-schema-elements.md#EnvironmentOverridesElementEnvironmentOverridesTypeComplexTypeDefinedInServiceManifestImportelement)
+ Daha fazla bilgi için bkz. [EnvironmentOverrides öğesi](service-fabric-service-model-schema-elements.md#EnvironmentOverridesElementEnvironmentOverridesTypeComplexTypeDefinedInServiceManifestImportelement)
 
-### <a name="environmentvariable-element"></a>Değişkeninin öğesi
-ortam değişkeni. Daha fazla bilgi için [değişkeninin öğesi](service-fabric-service-model-schema-elements.md#EnvironmentVariableElementEnvironmentVariableOverrideTypeComplexTypeDefinedInEnvironmentOverridesTypecomplexType)
+### <a name="environmentvariable-element"></a>EnvironmentVariable öğesi
+Ortam değişkeni. Daha fazla bilgi için bkz. [Environmentvariable öğesi](service-fabric-service-model-schema-elements.md#EnvironmentVariableElementEnvironmentVariableOverrideTypeComplexTypeDefinedInEnvironmentOverridesTypecomplexType)
 
 ### <a name="certificateref-element"></a>CertificateRef öğesi
-X X509 hakkında bilgiler için kapsayıcı ortamında kullanıma için olan sertifika. Sertifika yüklü olmalıdır tüm küme düğümlerinin LocalMachine deposundaki.
-Uygulama başlatıldığında, çalışma zamanı sertifikayı okur ve bir PFX dosyası ve (Windows) parolasını ya da bir PEM dosyası (Linux) oluşturur.
-Parola ve PFX dosyasını Certificates_ServicePackageName_CodePackageName_CertName_PFX ve Certificates_ServicePackageName_CodePackageName_CertName_Password ortam değişkenlerini kullanarak kapsayıcıda erişilebilir. PEM dosyasını Certificates_ServicePackageName_CodePackageName_CertName_PEM ve Certificates_ServicePackageName_CodePackageName_CertName_PrivateKey ortam değişkenlerini kullanarak kapsayıcıda erişilebilir. Daha fazla bilgi için [CertificateRef öğesi](service-fabric-service-model-schema-elements.md#CertificateRefElementContainerCertificateTypeComplexTypeDefinedInContainerHostPoliciesTypecomplexType)
+Kapsayıcı ortamına sunulacak bir x509 sertifikası hakkındaki bilgileri belirtir. Sertifika, tüm küme düğümlerinin LocalMachine deposunda yüklü olmalıdır.
+Uygulama başlatıldığında, çalışma zamanı sertifikayı okur ve bir PFX dosyası ve parola (Windows üzerinde) veya ped dosyası (Linux üzerinde) oluşturur.
+PFX dosya ve parolaya Certificates_ServicePackageName_CodePackageName_CertName_PFX ve Certificates_ServicePackageName_CodePackageName_CertName_Password ortam değişkenleri kullanılarak kapsayıcıda erişilebilir. PED dosyasına Certificates_ServicePackageName_CodePackageName_CertName_PEM ve Certificates_ServicePackageName_CodePackageName_CertName_PrivateKey ortam değişkenleri kullanılarak kapsayıcıda erişilebilir. Daha fazla bilgi için bkz. [CertificateRef öğesi](service-fabric-service-model-schema-elements.md#CertificateRefElementContainerCertificateTypeComplexTypeDefinedInContainerHostPoliciesTypecomplexType)
 
 ### <a name="defaultservices-element"></a>DefaultServices öğesi
-Bu uygulama türüne karşı bir uygulama örneği olduğunda otomatik olarak oluşturulan hizmet örnekleri bildirir. Daha fazla bilgi için [DefaultServices öğesi](service-fabric-service-model-schema-elements.md#DefaultServicesElementDefaultServicesTypeComplexTypeDefinedInApplicationManifestTypecomplexTypeDefinedInApplicationInstanceTypecomplexType)
+Bu uygulama türüne karşı her uygulama oluşturulduğunda otomatik olarak oluşturulan hizmet örneklerini bildirir. Daha fazla bilgi için bkz. [DefaultServices öğesi](service-fabric-service-model-schema-elements.md#DefaultServicesElementDefaultServicesTypeComplexTypeDefinedInApplicationManifestTypecomplexTypeDefinedInApplicationInstanceTypecomplexType)
 
 ### <a name="service-element"></a>Hizmet öğesi
-Uygulama başlatıldığında otomatik olarak oluşturulması için bir hizmet bildirir. Daha fazla bilgi için [hizmet öğesi](service-fabric-service-model-schema-elements.md#ServiceElementanonymouscomplexTypeComplexTypeDefinedInDefaultServicesTypecomplexType)
+Uygulama örneği oluşturulduğunda otomatik olarak oluşturulacak bir hizmet bildirir. Daha fazla bilgi için bkz. [hizmet öğesi](service-fabric-service-model-schema-elements.md#ServiceElementanonymouscomplexTypeComplexTypeDefinedInDefaultServicesTypecomplexType)
 
 ### <a name="statelessservice-element"></a>StatelessService öğesi
-Durum bilgisi olmayan hizmet tanımlar. Daha fazla bilgi için [StatelessService öğesi](service-fabric-service-model-schema-elements.md#StatelessServiceElementStatelessServiceTypeComplexTypeDefinedInServiceTemplatesTypecomplexTypeDefinedInServiceelement)
+Durum bilgisi olmayan bir hizmet tanımlar. Daha fazla bilgi için bkz. [Statelessservice öğesi](service-fabric-service-model-schema-elements.md#StatelessServiceElementStatelessServiceTypeComplexTypeDefinedInServiceTemplatesTypecomplexTypeDefinedInServiceelement)
 
 
-## <a name="frontendservice-service-manifest-elements"></a>FrontEndService hizmet bildirim öğeleri
+## <a name="frontendservice-service-manifest-elements"></a>FrontEndService hizmet bildirimi öğeleri
 ### <a name="servicemanifest-element"></a>ServiceManifest öğesi
-Bildirimli olarak hizmet türü ve sürümü açıklanmaktadır. Bu, birlikte bir veya daha fazla hizmet türlerini desteklemek için bir hizmet paketi oluşturan bağımsız olarak yükseltilebilir kod, yapılandırma ve veri paketleri listeler. Kaynaklar, tanılama ayarları ve hizmet türü, sistem durumu özellikleri ve ölçümler, Yük Dengeleme gibi hizmet meta verileri ayrıca belirtilir. Daha fazla bilgi için [ServiceManifest öğesi](service-fabric-service-model-schema-elements.md#ServiceManifestElementServiceManifestTypeComplexType)
+Hizmet türünü ve sürümü bildirimli olarak açıklar. Bir veya daha fazla hizmet türünü desteklemek üzere bir hizmet paketi oluşturan bağımsız olarak yükseltilebilir kodu, yapılandırmayı ve veri paketlerini listeler. Kaynaklar, Tanılama ayarları ve hizmet türü, sistem durumu özellikleri ve yük dengeleme ölçümleri gibi hizmet meta verileri de belirtilir. Daha fazla bilgi için bkz. [Servicemanifest öğesi](service-fabric-service-model-schema-elements.md#ServiceManifestElementServiceManifestTypeComplexType)
 
-### <a name="servicetypes-element"></a>ServiceTypes öğesi
-Bu bildirimdeki bir CodePackage tarafından desteklenen hangi hizmet türlerini tanımlar. Bu hizmet türlerinden birini karşı bir hizmet örneği oluşturulduğunda, bunların giriş noktaları çalıştırarak bu bildirimde belirtilen tüm kod paketlerinin etkinleştirilir. Hizmet türlerini, bildirim düzeyini ve kod paket düzeyinde bildirilir. Daha fazla bilgi için [ServiceTypes öğesi](service-fabric-service-model-schema-elements.md#ServiceTypesElementServiceAndServiceGroupTypesTypeComplexTypeDefinedInServiceManifestTypecomplexType)
+### <a name="servicetypes-element"></a>ServiceType öğesi
+Bu bildirimde bir CodePackage tarafından desteklenen hizmet türlerini tanımlar. Bu hizmet türlerinden birine karşı bir hizmet örneği oluşturulduğunda, bu bildirimde belirtilen tüm kod paketleri giriş noktaları çalıştırılarak etkinleştirilir. Hizmet türleri, kod paketi düzeyi değil, bildirim düzeyinde belirtilir. Daha fazla bilgi için bkz. [serviceType öğesi](service-fabric-service-model-schema-elements.md#ServiceTypesElementServiceAndServiceGroupTypesTypeComplexTypeDefinedInServiceManifestTypecomplexType)
 
 ### <a name="statelessservicetype-element"></a>StatelessServiceType öğesi
-Durum bilgisi olmayan hizmet türünü tanımlar. Daha fazla bilgi için [StatelessServiceType öğesi](service-fabric-service-model-schema-elements.md#StatelessServiceTypeElementStatelessServiceTypeTypeComplexTypeDefinedInServiceAndServiceGroupTypesTypecomplexTypeDefinedInServiceTypesTypecomplexType)
+Durum bilgisi olmayan bir hizmet türünü açıklar. Daha fazla bilgi için bkz. [Statelessservicetype öğesi](service-fabric-service-model-schema-elements.md#StatelessServiceTypeElementStatelessServiceTypeTypeComplexTypeDefinedInServiceAndServiceGroupTypesTypecomplexTypeDefinedInServiceTypesTypecomplexType)
 
 ### <a name="codepackage-element"></a>CodePackage öğesi
-Tanımladığınız hizmet türünü destekleyen bir kod paketi açıklar. Bu hizmet türlerinden birini karşı bir hizmet örneği oluşturulduğunda, bunların giriş noktaları çalıştırarak bu bildirimde belirtilen tüm kod paketlerinin etkinleştirilir. Sonuçta elde edilen işlemler, çalışma zamanında desteklenen hizmet türlerinin kaydetme beklenir. Birden çok kod paketleri olduğunda, sistemin bildirilen hizmet türlerini herhangi biri için görünür olduğunda, tüm etkinleştirilir. Daha fazla bilgi için [CodePackage öğesi](service-fabric-service-model-schema-elements.md#CodePackageElementCodePackageTypeComplexTypeDefinedInServiceManifestTypecomplexTypeDefinedInDigestedCodePackageelement)
+Tanımlı bir hizmet türünü destekleyen bir kod paketi açıklar. Bu hizmet türlerinden birine karşı bir hizmet örneği oluşturulduğunda, bu bildirimde belirtilen tüm kod paketleri giriş noktaları çalıştırılarak etkinleştirilir. Elde edilen işlemlerin, çalışma zamanında desteklenen hizmet türlerini kaydetmesi beklenmektedir. Birden çok kod paketi olduğunda, her sistem, belirtilen hizmet türlerinden birini her ararken etkinleştirilir. Daha fazla bilgi için bkz. [CodePackage öğesi](service-fabric-service-model-schema-elements.md#CodePackageElementCodePackageTypeComplexTypeDefinedInServiceManifestTypecomplexTypeDefinedInDigestedCodePackageelement)
 
 ### <a name="entrypoint-element"></a>EntryPoint öğesi
-Giriş noktası tarafından belirtilen yürütülebilir genellikle uzun süre çalışan hizmet yöneticisidir. Ayrı bir Kurulum giriş noktası varlığını, hizmet ana bilgisayarı uzun sürelerle yüksek ayrıcalıklarla çalıştır gereğini ortadan kaldırır. Giriş noktası tarafından belirtilen yürütülebilir SetupEntryPoint başarıyla çıktıktan sonra çalıştırılır. Sonuçta elde edilen işlem izlenir ve hiç olmadığı kadar sonlandırır veya çöküyor (başlayarak tekrar SetupEntryPoint) yeniden. Daha fazla bilgi için [EntryPoint öğesi](service-fabric-service-model-schema-elements.md#EntryPointElementEntryPointDescriptionTypeComplexTypeDefinedInCodePackageTypecomplexType)
+Giriş noktası tarafından belirtilen yürütülebilir dosya genellikle uzun süre çalışan hizmet ana bilgisayarı. Ayrı bir kurulum giriş noktasının varlığı, hizmet ana bilgisayarını uzun süreler boyunca yüksek ayrıcalıklarla çalıştırmak zorunda kalmaktan kaçınır. Giriş noktası tarafından belirtilen yürütülebilir dosya, SetupEntryPoint başarıyla çıktıktan sonra çalıştırılır. Elde edilen işlem sonlandırıldığında veya kilitlenirse, ortaya çıkan işlem izlenir ve yeniden başlatılır (SetupEntryPoint ile yeniden başlar). Daha fazla bilgi için bkz. [entryPoint öğesi](service-fabric-service-model-schema-elements.md#EntryPointElementEntryPointDescriptionTypeComplexTypeDefinedInCodePackageTypecomplexType)
 
 ### <a name="containerhost-element"></a>ContainerHost öğesi
- Daha fazla bilgi için [ContainerHost öğesi](service-fabric-service-model-schema-elements.md#ContainerHostElementContainerHostEntryPointTypeComplexTypeDefinedInEntryPointDescriptionTypecomplexType)
+ Daha fazla bilgi için bkz. [Containerhost öğesi](service-fabric-service-model-schema-elements.md#ContainerHostElementContainerHostEntryPointTypeComplexTypeDefinedInEntryPointDescriptionTypecomplexType)
 
-### <a name="imagename-element"></a>IMAGENAME öğesi
-Depo ve görüntü https://hub.docker.com veya Azure Container Registry. Daha fazla bilgi için [IMAGENAME öğesi](service-fabric-service-model-schema-elements.md#ImageNameElementxs:stringComplexTypeDefinedInContainerHostEntryPointTypecomplexType)
+### <a name="imagename-element"></a>GörüntüAdı öğesi
+https://hub.docker.com veya Azure Container Registry üzerindeki depo ve görüntü. Daha fazla bilgi için bkz. [GörüntüAdı öğesi](service-fabric-service-model-schema-elements.md#ImageNameElementxs:stringComplexTypeDefinedInContainerHostEntryPointTypecomplexType)
 
 ### <a name="environmentvariables-element"></a>EnvironmentVariables öğesi
-Ortam değişkenleri, kapsayıcı veya exe geçirin.  Daha fazla bilgi için [EnvironmentVariables öğesi](service-fabric-service-model-schema-elements.md#EnvironmentVariablesElementEnvironmentVariablesTypeComplexTypeDefinedInCodePackageTypecomplexType)
+Ortam değişkenlerini kapsayıcısına veya exe 'ye geçirin.  Daha fazla bilgi için bkz. [EnvironmentVariables öğesi](service-fabric-service-model-schema-elements.md#EnvironmentVariablesElementEnvironmentVariablesTypeComplexTypeDefinedInCodePackageTypecomplexType)
 
-### <a name="environmentvariable-element"></a>Değişkeninin öğesi
-ortam değişkeni. Daha fazla bilgi için [değişkeninin öğesi](service-fabric-service-model-schema-elements.md#EnvironmentVariableElementEnvironmentVariableOverrideTypeComplexTypeDefinedInEnvironmentOverridesTypecomplexType)
+### <a name="environmentvariable-element"></a>EnvironmentVariable öğesi
+Ortam değişkeni. Daha fazla bilgi için bkz. [Environmentvariable öğesi](service-fabric-service-model-schema-elements.md#EnvironmentVariableElementEnvironmentVariableOverrideTypeComplexTypeDefinedInEnvironmentOverridesTypecomplexType)
 
 ### <a name="configpackage-element"></a>ConfigPackage öğesi
-Bildiren bir klasör adı özniteliği tarafından adlandırılan bir Settings.xml dosyasının içerir. Bu dosya, çalışma zamanında işlem okuyabilen kullanıcı tanımlı, anahtar-değer çifti ayarları bölümlerini içerir. Yalnızca ConfigPackage sürümü değişti, yükseltme sırasında daha sonra çalışan işlemi yeniden başlatılmaz. Bunun yerine, bunlar dinamik olarak yeniden yüklenebilir, böylece yapılandırma ayarları değişti işlemi bir geri çağırma bildirir. Daha fazla bilgi için [ConfigPackage öğesi](service-fabric-service-model-schema-elements.md#ConfigPackageElementConfigPackageTypeComplexTypeDefinedInServiceManifestTypecomplexTypeDefinedInDigestedConfigPackageelement)
+Bir Settings. xml dosyası içeren name özniteliğiyle adlandırılan bir klasörü bildirir. Bu dosya, işlemin çalışma zamanında okuyabildiği Kullanıcı tanımlı, anahtar-değer çifti ayarlarının bölümlerini içerir. Yükseltme sırasında, yalnızca ConfigPackage sürümü değiştiyse, çalışan işlem yeniden başlatılmaz. Bunun yerine, bir geri çağırma işlemi, dinamik olarak yeniden yüklenmesi için yapılandırma ayarlarının değiştiği süreci bilgilendirir. Daha fazla bilgi için bkz. [Configpackage öğesi](service-fabric-service-model-schema-elements.md#ConfigPackageElementConfigPackageTypeComplexTypeDefinedInServiceManifestTypecomplexTypeDefinedInDigestedConfigPackageelement)
 
-### <a name="datapackage-element"></a>Nın DataPackage öğesi
-Statik veri dosyalarının bulunduğu Name özniteliği tarafından adlı bir klasör, bildirir. Service Fabric, tüm exe ve herhangi bir hizmet bildiriminde listelenen veri paketleri yükseltildiğinde konak ve Destek paketlerinde belirtilen DLLHOSTs dönüşüm. Daha fazla bilgi için [nın DataPackage öğesi](service-fabric-service-model-schema-elements.md#DataPackageElementDataPackageTypeComplexTypeDefinedInServiceManifestTypecomplexTypeDefinedInDigestedDataPackageelement)
+### <a name="datapackage-element"></a>DataPackage öğesi
+Statik veri dosyalarını içeren name özniteliğiyle adlandırılan bir klasörü bildirir. Service Fabric, hizmet bildiriminde listelenen veri paketlerinden herhangi biri yükseltildiğinde konak ve destek paketlerinde belirtilen tüm EXEs ve Dllkonakları geri dönüştürecek. Daha fazla bilgi için bkz. [DataPackage öğesi](service-fabric-service-model-schema-elements.md#DataPackageElementDataPackageTypeComplexTypeDefinedInServiceManifestTypecomplexTypeDefinedInDigestedDataPackageelement)
 
-### <a name="resources-element"></a>Kaynaklar öğesi
-Derlenmiş kodunu değiştirmeden bildirilen ve hizmet dağıtıldığında değiştirildi. Bu hizmet tarafından kullanılan kaynakları açıklar. Bu kaynaklara erişim, uygulama bildiriminin sorumluları ve ilkeleri bölümleri denetlenir. Daha fazla bilgi için [kaynaklar öğesi](service-fabric-service-model-schema-elements.md#ResourcesElementResourcesTypeComplexTypeDefinedInServiceManifestTypecomplexType)
+### <a name="resources-element"></a>Resources öğesi
+Bu hizmet tarafından kullanılan ve derlenen kodu değiştirmeden bildirilebilecek ve hizmet dağıtıldığında değiştirilebilen kaynakları açıklar. Bu kaynaklara erişim, uygulama bildiriminin asıl ve Ilke bölümleri aracılığıyla denetlenir. Daha fazla bilgi için bkz. [Resources öğesi](service-fabric-service-model-schema-elements.md#ResourcesElementResourcesTypeComplexTypeDefinedInServiceManifestTypecomplexType)
 
-### <a name="endpoints-element"></a>Bitiş öğesi
-Hizmet uç noktalarını tanımlar. Daha fazla bilgi için [bitiş öğesi](service-fabric-service-model-schema-elements.md#EndpointsElementanonymouscomplexTypeComplexTypeDefinedInResourcesTypecomplexType)
+### <a name="endpoints-element"></a>Endpoints öğesi
+Hizmetin uç noktalarını tanımlar. Daha fazla bilgi için bkz. [uç noktalar öğesi](service-fabric-service-model-schema-elements.md#EndpointsElementanonymouscomplexTypeComplexTypeDefinedInResourcesTypecomplexType)
 
-### <a name="endpoint-element"></a>Uç nokta öğesi
-Daha fazla bilgi için [bitiş öğesi](service-fabric-service-model-schema-elements.md#EndpointElementEndpointOverrideTypeComplexTypeDefinedInEndpointselement)
+### <a name="endpoint-element"></a>Endpoint öğesi
+Daha fazla bilgi için bkz. [Endpoint öğesi](service-fabric-service-model-schema-elements.md#EndpointElementEndpointOverrideTypeComplexTypeDefinedInEndpointselement)
 
 
-## <a name="backendservice-service-manifest-elements"></a>BackEndService hizmet bildirim öğeleri
+## <a name="backendservice-service-manifest-elements"></a>BackEndService bildirim öğeleri
 ### <a name="servicemanifest-element"></a>ServiceManifest öğesi
-Bildirimli olarak hizmet türü ve sürümü açıklanmaktadır. Bu, birlikte bir veya daha fazla hizmet türlerini desteklemek için bir hizmet paketi oluşturan bağımsız olarak yükseltilebilir kod, yapılandırma ve veri paketleri listeler. Kaynaklar, tanılama ayarları ve hizmet türü, sistem durumu özellikleri ve ölçümler, Yük Dengeleme gibi hizmet meta verileri ayrıca belirtilir. Daha fazla bilgi için [ServiceManifest öğesi](service-fabric-service-model-schema-elements.md#ServiceManifestElementServiceManifestTypeComplexType)
+Hizmet türünü ve sürümü bildirimli olarak açıklar. Bir veya daha fazla hizmet türünü desteklemek üzere bir hizmet paketi oluşturan bağımsız olarak yükseltilebilir kodu, yapılandırmayı ve veri paketlerini listeler. Kaynaklar, Tanılama ayarları ve hizmet türü, sistem durumu özellikleri ve yük dengeleme ölçümleri gibi hizmet meta verileri de belirtilir. Daha fazla bilgi için bkz. [Servicemanifest öğesi](service-fabric-service-model-schema-elements.md#ServiceManifestElementServiceManifestTypeComplexType)
 
-### <a name="servicetypes-element"></a>ServiceTypes öğesi
-Bu bildirimdeki bir CodePackage tarafından desteklenen hangi hizmet türlerini tanımlar. Bu hizmet türlerinden birini karşı bir hizmet örneği oluşturulduğunda, bunların giriş noktaları çalıştırarak bu bildirimde belirtilen tüm kod paketlerinin etkinleştirilir. Hizmet türlerini, bildirim düzeyini ve kod paket düzeyinde bildirilir. Daha fazla bilgi için [ServiceTypes öğesi](service-fabric-service-model-schema-elements.md#ServiceTypesElementServiceAndServiceGroupTypesTypeComplexTypeDefinedInServiceManifestTypecomplexType)
+### <a name="servicetypes-element"></a>ServiceType öğesi
+Bu bildirimde bir CodePackage tarafından desteklenen hizmet türlerini tanımlar. Bu hizmet türlerinden birine karşı bir hizmet örneği oluşturulduğunda, bu bildirimde belirtilen tüm kod paketleri giriş noktaları çalıştırılarak etkinleştirilir. Hizmet türleri, kod paketi düzeyi değil, bildirim düzeyinde belirtilir. Daha fazla bilgi için bkz. [serviceType öğesi](service-fabric-service-model-schema-elements.md#ServiceTypesElementServiceAndServiceGroupTypesTypeComplexTypeDefinedInServiceManifestTypecomplexType)
 
 ### <a name="statelessservicetype-element"></a>StatelessServiceType öğesi
-Durum bilgisi olmayan hizmet türünü tanımlar. Daha fazla bilgi için [StatelessServiceType öğesi](service-fabric-service-model-schema-elements.md#StatelessServiceTypeElementStatelessServiceTypeTypeComplexTypeDefinedInServiceAndServiceGroupTypesTypecomplexTypeDefinedInServiceTypesTypecomplexType)
+Durum bilgisi olmayan bir hizmet türünü açıklar. Daha fazla bilgi için bkz. [Statelessservicetype öğesi](service-fabric-service-model-schema-elements.md#StatelessServiceTypeElementStatelessServiceTypeTypeComplexTypeDefinedInServiceAndServiceGroupTypesTypecomplexTypeDefinedInServiceTypesTypecomplexType)
 
 ### <a name="codepackage-element"></a>CodePackage öğesi
-Tanımladığınız hizmet türünü destekleyen bir kod paketi açıklar. Bu hizmet türlerinden birini karşı bir hizmet örneği oluşturulduğunda, bunların giriş noktaları çalıştırarak bu bildirimde belirtilen tüm kod paketlerinin etkinleştirilir. Sonuçta elde edilen işlemler, çalışma zamanında desteklenen hizmet türlerinin kaydetme beklenir. Birden çok kod paketleri olduğunda, sistemin bildirilen hizmet türlerini herhangi biri için görünür olduğunda, tüm etkinleştirilir. Daha fazla bilgi için [CodePackage öğesi](service-fabric-service-model-schema-elements.md#CodePackageElementCodePackageTypeComplexTypeDefinedInServiceManifestTypecomplexTypeDefinedInDigestedCodePackageelement)
+Tanımlı bir hizmet türünü destekleyen bir kod paketi açıklar. Bu hizmet türlerinden birine karşı bir hizmet örneği oluşturulduğunda, bu bildirimde belirtilen tüm kod paketleri giriş noktaları çalıştırılarak etkinleştirilir. Elde edilen işlemlerin, çalışma zamanında desteklenen hizmet türlerini kaydetmesi beklenmektedir. Birden çok kod paketi olduğunda, her sistem, belirtilen hizmet türlerinden birini her ararken etkinleştirilir. Daha fazla bilgi için bkz. [CodePackage öğesi](service-fabric-service-model-schema-elements.md#CodePackageElementCodePackageTypeComplexTypeDefinedInServiceManifestTypecomplexTypeDefinedInDigestedCodePackageelement)
 
 ### <a name="entrypoint-element"></a>EntryPoint öğesi
-Giriş noktası tarafından belirtilen yürütülebilir genellikle uzun süre çalışan hizmet yöneticisidir. Ayrı bir Kurulum giriş noktası varlığını, hizmet ana bilgisayarı uzun sürelerle yüksek ayrıcalıklarla çalıştır gereğini ortadan kaldırır. Giriş noktası tarafından belirtilen yürütülebilir SetupEntryPoint başarıyla çıktıktan sonra çalıştırılır. Sonuçta elde edilen işlem izlenir ve hiç olmadığı kadar sonlandırır veya çöküyor (başlayarak tekrar SetupEntryPoint) yeniden. Daha fazla bilgi için [EntryPoint öğesi](service-fabric-service-model-schema-elements.md#EntryPointElementEntryPointDescriptionTypeComplexTypeDefinedInCodePackageTypecomplexType)
+Giriş noktası tarafından belirtilen yürütülebilir dosya genellikle uzun süre çalışan hizmet ana bilgisayarı. Ayrı bir kurulum giriş noktasının varlığı, hizmet ana bilgisayarını uzun süreler boyunca yüksek ayrıcalıklarla çalıştırmak zorunda kalmaktan kaçınır. Giriş noktası tarafından belirtilen yürütülebilir dosya, SetupEntryPoint başarıyla çıktıktan sonra çalıştırılır. Elde edilen işlem sonlandırıldığında veya kilitlenirse, ortaya çıkan işlem izlenir ve yeniden başlatılır (SetupEntryPoint ile yeniden başlar). Daha fazla bilgi için bkz. [entryPoint öğesi](service-fabric-service-model-schema-elements.md#EntryPointElementEntryPointDescriptionTypeComplexTypeDefinedInCodePackageTypecomplexType)
 
 ### <a name="containerhost-element"></a>ContainerHost öğesi
-Daha fazla bilgi için [ContainerHost öğesi](service-fabric-service-model-schema-elements.md#ContainerHostElementContainerHostEntryPointTypeComplexTypeDefinedInEntryPointDescriptionTypecomplexType)
+Daha fazla bilgi için bkz. [Containerhost öğesi](service-fabric-service-model-schema-elements.md#ContainerHostElementContainerHostEntryPointTypeComplexTypeDefinedInEntryPointDescriptionTypecomplexType)
 
-### <a name="imagename-element"></a>IMAGENAME öğesi
-Depo ve görüntü https://hub.docker.com veya Azure Container Registry. Daha fazla bilgi için [IMAGENAME öğesi](service-fabric-service-model-schema-elements.md#ImageNameElementxs:stringComplexTypeDefinedInContainerHostEntryPointTypecomplexType)
+### <a name="imagename-element"></a>GörüntüAdı öğesi
+https://hub.docker.com veya Azure Container Registry üzerindeki depo ve görüntü. Daha fazla bilgi için bkz. [GörüntüAdı öğesi](service-fabric-service-model-schema-elements.md#ImageNameElementxs:stringComplexTypeDefinedInContainerHostEntryPointTypecomplexType)
 
 ### <a name="commands-element"></a>Commands öğesi
-Virgülle ayrılmış listesini komutları kapsayıcıya geçirin. Daha fazla bilgi için [Commands öğesi](service-fabric-service-model-schema-elements.md#CommandsElementxs:stringComplexTypeDefinedInContainerHostEntryPointTypecomplexType)
+Kapsayıcıya virgülle ayrılmış komutların bir listesini geçirin. Daha fazla bilgi için bkz. [Commands öğesi](service-fabric-service-model-schema-elements.md#CommandsElementxs:stringComplexTypeDefinedInContainerHostEntryPointTypecomplexType)
 
 ### <a name="environmentvariables-element"></a>EnvironmentVariables öğesi
-Ortam değişkenleri, kapsayıcı veya exe geçirin.  Daha fazla bilgi için [EnvironmentVariables öğesi](service-fabric-service-model-schema-elements.md#EnvironmentVariablesElementEnvironmentVariablesTypeComplexTypeDefinedInCodePackageTypecomplexType)
+Ortam değişkenlerini kapsayıcısına veya exe 'ye geçirin.  Daha fazla bilgi için bkz. [EnvironmentVariables öğesi](service-fabric-service-model-schema-elements.md#EnvironmentVariablesElementEnvironmentVariablesTypeComplexTypeDefinedInCodePackageTypecomplexType)
 
-### <a name="environmentvariable-element"></a>Değişkeninin öğesi
-ortam değişkeni. Daha fazla bilgi için [değişkeninin öğesi](service-fabric-service-model-schema-elements.md#EnvironmentVariableElementEnvironmentVariableOverrideTypeComplexTypeDefinedInEnvironmentOverridesTypecomplexType)
+### <a name="environmentvariable-element"></a>EnvironmentVariable öğesi
+Ortam değişkeni. Daha fazla bilgi için bkz. [Environmentvariable öğesi](service-fabric-service-model-schema-elements.md#EnvironmentVariableElementEnvironmentVariableOverrideTypeComplexTypeDefinedInEnvironmentOverridesTypecomplexType)
 
 ### <a name="configpackage-element"></a>ConfigPackage öğesi
-Bildiren bir klasör adı özniteliği tarafından adlandırılan bir Settings.xml dosyasının içerir. Bu dosya, çalışma zamanında işlem okuyabilen kullanıcı tanımlı, anahtar-değer çifti ayarları bölümlerini içerir. Yalnızca ConfigPackage sürümü değişti, yükseltme sırasında daha sonra çalışan işlemi yeniden başlatılmaz. Bunun yerine, bunlar dinamik olarak yeniden yüklenebilir, böylece yapılandırma ayarları değişti işlemi bir geri çağırma bildirir. Daha fazla bilgi için [ConfigPackage öğesi](service-fabric-service-model-schema-elements.md#ConfigPackageElementConfigPackageTypeComplexTypeDefinedInServiceManifestTypecomplexTypeDefinedInDigestedConfigPackageelement)
+Bir Settings. xml dosyası içeren name özniteliğiyle adlandırılan bir klasörü bildirir. Bu dosya, işlemin çalışma zamanında okuyabildiği Kullanıcı tanımlı, anahtar-değer çifti ayarlarının bölümlerini içerir. Yükseltme sırasında, yalnızca ConfigPackage sürümü değiştiyse, çalışan işlem yeniden başlatılmaz. Bunun yerine, bir geri çağırma işlemi, dinamik olarak yeniden yüklenmesi için yapılandırma ayarlarının değiştiği süreci bilgilendirir. Daha fazla bilgi için bkz. [Configpackage öğesi](service-fabric-service-model-schema-elements.md#ConfigPackageElementConfigPackageTypeComplexTypeDefinedInServiceManifestTypecomplexTypeDefinedInDigestedConfigPackageelement)
 
-### <a name="resources-element"></a>Kaynaklar öğesi
-Derlenmiş kodunu değiştirmeden bildirilen ve hizmet dağıtıldığında değiştirildi. Bu hizmet tarafından kullanılan kaynakları açıklar. Bu kaynaklara erişim, uygulama bildiriminin sorumluları ve ilkeleri bölümleri denetlenir. Daha fazla bilgi için [kaynaklar öğesi](service-fabric-service-model-schema-elements.md#ResourcesElementResourcesTypeComplexTypeDefinedInServiceManifestTypecomplexType)
+### <a name="resources-element"></a>Resources öğesi
+Bu hizmet tarafından kullanılan ve derlenen kodu değiştirmeden bildirilebilecek ve hizmet dağıtıldığında değiştirilebilen kaynakları açıklar. Bu kaynaklara erişim, uygulama bildiriminin asıl ve Ilke bölümleri aracılığıyla denetlenir. Daha fazla bilgi için bkz. [Resources öğesi](service-fabric-service-model-schema-elements.md#ResourcesElementResourcesTypeComplexTypeDefinedInServiceManifestTypecomplexType)
 
-### <a name="endpoints-element"></a>Bitiş öğesi
-Hizmet uç noktalarını tanımlar. Daha fazla bilgi için [bitiş öğesi](service-fabric-service-model-schema-elements.md#EndpointsElementanonymouscomplexTypeComplexTypeDefinedInResourcesTypecomplexType)
+### <a name="endpoints-element"></a>Endpoints öğesi
+Hizmetin uç noktalarını tanımlar. Daha fazla bilgi için bkz. [uç noktalar öğesi](service-fabric-service-model-schema-elements.md#EndpointsElementanonymouscomplexTypeComplexTypeDefinedInResourcesTypecomplexType)
 
-### <a name="endpoint-element"></a>Uç nokta öğesi
- Daha fazla bilgi için [bitiş öğesi](service-fabric-service-model-schema-elements.md#EndpointElementEndpointOverrideTypeComplexTypeDefinedInEndpointselement)
+### <a name="endpoint-element"></a>Endpoint öğesi
+ Daha fazla bilgi için bkz. [Endpoint öğesi](service-fabric-service-model-schema-elements.md#EndpointElementEndpointOverrideTypeComplexTypeDefinedInEndpointselement)
 

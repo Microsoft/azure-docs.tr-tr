@@ -4,7 +4,7 @@ description: Azure'da HPC için MPI ayarlama konusunda bilgi edinin.
 services: virtual-machines
 documentationcenter: ''
 author: vermagit
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines
@@ -12,12 +12,12 @@ ms.workload: infrastructure-services
 ms.topic: article
 ms.date: 05/15/2019
 ms.author: amverma
-ms.openlocfilehash: 5356a033dbc3d989dd27019f03b1fe36035ff9a4
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 541e42a72ea604c4d71dc546b14dea2f0857bcc1
+ms.sourcegitcommit: 66237bcd9b08359a6cce8d671f846b0c93ee6a82
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67441644"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67797506"
 ---
 # <a name="set-up-message-passing-interface-for-hpc"></a>İleti geçirme arabirimi oluşturan için HPC Kümesi
 
@@ -126,7 +126,7 @@ Sabitleme işlemi düzgün şekilde 15, 30 ve 60 PPN için varsayılan olarak ç
 
 ## <a name="osu-mpi-benchmarks"></a>OSU MPI Kıyaslama
 
-[MPI OSU Kıyaslama'ı indirin] [ http://mvapich.cse.ohio-state.edu/benchmarks/ ](http://mvapich.cse.ohio-state.edu/benchmarks/) ve untar.
+[OSU MPI Kıyaslama indirme](http://mvapich.cse.ohio-state.edu/benchmarks/) ve untar.
 
 ```bash
 wget http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-5.5.tar.gz
@@ -146,7 +146,7 @@ MPI Kıyaslama altındadır `mpi/` klasör.
 
 ## <a name="discover-partition-keys"></a>Bölüm anahtarları keşfedin
 
-Diğer Vm'lerle iletişim kurmak için bölüm anahtarları (p-keys) keşfedin.
+Diğer Vm'lerle aynı kiracıda (kullanılabilirlik kümesi veya VM ölçek kümesi) ile iletişim kurmak için bölüm anahtarları (p-keys) keşfedin.
 
 ```bash
 /sys/class/infiniband/mlx5_0/ports/1/pkeys/0
@@ -164,13 +164,15 @@ cat /sys/class/infiniband/mlx5_0/ports/1/pkeys/1
 
 Varsayılan (0x7fff) bölüm anahtarı dışında bir bölümü kullanın. Temizlenecek p-anahtarın Tamamlama UCX gerektirir. Örneğin, UCX_IB_PKEY 0x000b 0x800b için olarak ayarlayın.
 
+Ayrıca, Kiracı (AVSet veya VMSS) mevcut olduğu sürece, PKEYs aynı kalmasını unutmayın. Düğümleri eklenen ve Silinen olsa bile bu geçerlidir. Yeni kiracılar farklı PKEYs alın.
+
 
 ## <a name="set-up-user-limits-for-mpi"></a>Kullanıcı sınırları ' için MPI Kümesi
 
 Kullanıcı sınırları ' için MPI ayarlayın.
 
 ```bash
-cat << EOF >> /etc/security/limits.conf
+cat << EOF | sudo tee -a /etc/security/limits.conf
 *               hard    memlock         unlimited
 *               soft    memlock         unlimited
 *               hard    nofile          65535

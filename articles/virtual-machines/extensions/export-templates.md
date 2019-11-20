@@ -1,72 +1,71 @@
 ---
-title: VM uzantıları içeren Azure kaynak grupları dışarı aktarma | Microsoft Docs
-description: Sanal makine uzantıları içeren Resource Manager şablonlarını dışarı aktarma.
+title: VM uzantıları içeren Azure kaynak gruplarını dışarı aktarma
+description: Sanal makine uzantılarını içeren Kaynak Yöneticisi şablonlarını dışarı aktarın.
 services: virtual-machines-windows
 documentationcenter: ''
-author: roiyz-msft
-manager: jeconnoc
+author: axayjo
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: 7f4e2ca6-f1c7-4f59-a2cc-8f63132de279
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 12/05/2016
-ms.author: roiyz
-ms.openlocfilehash: f56cfeeede393dbdb9632ea4120d3a81e89f3f7c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: akjosh
+ms.openlocfilehash: 79991dad96742109817d579b951082d1a30e3951
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61484049"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74073119"
 ---
-# <a name="exporting-resource-groups-that-contain-vm-extensions"></a>VM uzantıları içeren kaynak grupları dışarı aktarma
+# <a name="exporting-resource-groups-that-contain-vm-extensions"></a>VM uzantılarını içeren kaynak gruplarını dışarı aktarma
 
-Azure kaynak grupları daha sonra yeniden yeni bir Resource Manager şablonuna dışarı aktarılabilir. Verme işlemi var olan kaynakları yorumlar ve Resource Manager şablonu dağıtırken oluşturur benzer bir kaynak grubunda sonuçlanır. Sanal makine uzantıları içeren bir kaynak grubu karşı kaynak grubunu dışarı aktarma seçeneği kullanılırken, çeşitli öğeleri uzantısı uyumluluğu gibi ele alınması gereken ve ayarların korumalı.
+Azure Kaynak grupları, daha sonra yeniden dağıtılabilecek yeni bir Kaynak Yöneticisi şablona aktarılabilir. Dışarı aktarma işlemi var olan kaynakları Yorumlar ve dağıtılan sonuçları benzer bir kaynak grubunda elde eden bir Kaynak Yöneticisi şablonu oluşturur. Kaynak grubu dışa aktarma seçeneğini, sanal makine uzantılarını içeren bir kaynak grubuna karşı kullanırken, uzantı uyumluluğu ve korumalı ayarlar gibi bazı öğelerin göz önünde bulundurulmaları gerekir.
 
-Bu belge ayrıntıları listesi dahil olmak üzere, sanal makine uzantıları ile ilgili kaynak grubunu dışarı aktarma işleminin nasıl çalıştığı uzantıları desteklenen ve veri işleme hakkında ayrıntılı bilgi güvenliği.
+Bu belgede, desteklenen uzantıların listesi ve güvenli verileri işleme ayrıntıları dahil olmak üzere, kaynak grubu dışarı aktarma işleminin sanal makine uzantılarıyla ilgili olarak nasıl çalıştığı açıklanır.
 
 ## <a name="supported-virtual-machine-extensions"></a>Desteklenen sanal makine uzantıları
 
-Çok sayıda sanal makine uzantıları artık kullanılabilir. Tüm Uzantılar "Otomasyon betiği" özelliğini kullanarak bir Resource Manager şablonu aktarılabilir. Sanal makine uzantısı desteklenmiyor, el ile dışarı aktarılan şablonun yerleştirilmesi gerekir.
+Birçok sanal makine uzantısı mevcuttur. Tüm uzantılar, "Otomasyon betiği" özelliği kullanılarak bir Kaynak Yöneticisi şablonuna verilemez. Bir sanal makine uzantısı desteklenmiyorsa, el ile verilen şablona geri yerleştirilmesi gerekir.
 
-Aşağıdaki uzantılar Otomasyon betiği özelliğiyle dışarı aktarılabilir.
+Aşağıdaki uzantılar Otomasyon betiği özelliği ile birlikte aktarılabilir.
 
 | Dahili numara ||||
 |---|---|---|---|
-| Acronis yedekleme | Datadog Windows Aracısı | Linux için düzeltme eki uygulama işletim sistemi | VM anlık görüntüsü Linux
-| Acronis yedekleme Linux | Docker uzantısı | Puppet aracı |
-| BG bilgileri | DSC Uzantısı | Site 24 x 7 Apm İçgörüleri |
-| BMC CTM aracı Linux | Dynatrace Linux | Site 24 x 7 Linux sunucusu |
-| BMC CTM Aracısı Windows | Dynatrace Windows | Site 24 x 7 Windows sunucusu |
-| Chef istemci | HPE güvenlik uygulama Defender | Trend Micro DSA |
-| Özel Betik | Iaas kötü amaçlı yazılımdan koruma | Trend Micro DSA Linux |
-| Özel Betik Uzantısı | Iaas tanılama | Linux için VM erişimi |
-| Linux özel betiği | Linux Chef istemci | Linux için VM erişimi |
-| Datadog Linux Aracısı | Linux tanılama | Sanal Makine Anlık Görüntüsü |
+| Acronis Yedekleme | Dataköpek Windows Aracısı | Linux Için işletim sistemi düzeltme eki uygulama | VM anlık görüntüsü Linux
+| Acronis Yedekleme Linux | Docker uzantısı | Pupevcil hayvan Aracısı |
+| Bg bilgileri | DSC Uzantısı | Site 7/24 APM öngörüleri |
+| BMC CTı Aracısı Linux | DynaTrace Linux | Site 7/24 Linux sunucusu |
+| BMC CTı aracı pencereleri | DynaTrace pencereleri | Site 7/24 Windows Server |
+| Chef Istemcisi | HPE güvenlik uygulaması Defender | Eğilim mikro DSA |
+| Özel Betik | IaaS kötü amaçlı yazılımdan koruma | Eğilim mikro DSA Linux |
+| Özel Betik Uzantısı | IaaS tanılaması | Linux Için VM erişimi |
+| Linux için özel betik | Linux Chef Istemcisi | Linux Için VM erişimi |
+| Dataköpek Linux Aracısı | Linux tanısı | Sanal Makine Anlık Görüntüsü |
 
 ## <a name="export-the-resource-group"></a>Kaynak grubunu dışarı aktarma
 
-Bir kaynak grubu yeniden kullanılabilir bir şablona dışarı aktarmak için aşağıdaki adımları tamamlayın:
+Bir kaynak grubunu yeniden kullanılabilir bir şablona dışarı aktarmak için aşağıdaki adımları izleyin:
 
 1. Azure portalında oturum açın
-2. Hub menüsünde kaynak grupları
-3. Hedef kaynak grubu listesinden seçin.
-4. Kaynak grubu dikey penceresinde, Otomasyon betiği'a tıklayın.
+2. Hub menüsünde kaynak grupları ' na tıklayın.
+3. Listeden hedef kaynak grubunu seçin
+4. Kaynak grubu dikey penceresinde Otomasyon betiği ' ne tıklayın.
 
-![Şablonu dışarı aktarma](./media/export-templates/template-export.png)
+![Şablon dışarı aktarma](./media/export-templates/template-export.png)
 
-Azure Resource Manager otomasyonları betik, bir Resource Manager şablonu, bir parametre dosyası ve PowerShell ve Azure CLI gibi birkaç örnek dağıtım betikleri oluşturur. Bu noktada, dışarı aktarılan şablon, yeni bir şablon olarak Şablon Kitaplığı'na eklenen veya Dağıt düğmesini kullanarak yeniden Yükle düğmesini kullanarak yüklenebilir.
+Azure Resource Manager akışlarını otomatikleştirin betiği, bir kaynak yöneticisi şablonu, bir parametre dosyası ve PowerShell ve Azure CLI gibi birkaç örnek dağıtım betiği üretir. Bu noktada, içe aktarılmış şablon, şablon kitaplığına yeni bir şablon olarak eklenen veya Dağıt düğmesi kullanılarak yeniden dağıtılan indirme düğmesi kullanılarak indirilebilir.
 
-## <a name="configure-protected-settings"></a>Korumalı ayarlarını yapılandırma
+## <a name="configure-protected-settings"></a>Korumalı ayarları Yapılandır
 
-Kimlik bilgileri ve yapılandırma dizeleri gibi hassas verileri şifreler korumalı ayarlarını yapılandırma, birçok Azure sanal makine uzantıları içerir. Otomasyon betiği ile korunan ayarları dışa aktarılmaz. Gerekirse, korumalı ayarları yeniden gerekiyorsa, içinde dışarı aktarılan şablonu.
+Birçok Azure sanal makine uzantısı, kimlik bilgileri ve yapılandırma dizeleri gibi hassas verileri şifreleyen bir korumalı ayarlar yapılandırması içerir. Korumalı ayarlar Otomasyon betiğine aktarılmaz. Gerekirse, korumalı ayarların, oluşturulan şablonlu öğesine yeniden eklenmesi gerekir.
 
-### <a name="step-1---remove-template-parameter"></a>Adım 1 - Remove şablon parametresi
+### <a name="step-1---remove-template-parameter"></a>1\. adım-şablon parametresini kaldır
 
-Kaynak grubunu dışarı aktarılırken dışarı aktarılan korumalı ayarlar için bir değer sağlamak için tek bir şablon parametresi oluşturulur. Bu parametre kaldırılabilir. Parametre kaldırmak için parametre listesinde arayın ve bu JSON örneğe benzer parametreyi silin.
+Kaynak grubu verildiğinde,, dışarıya aktarılmış korumalı ayarlara bir değer sağlamak için tek bir şablon parametresi oluşturulur. Bu parametre kaldırılabilir. Parametreyi kaldırmak için parametre listesini inceleyin ve bu JSON örneğine benzeyen parametreyi silin.
 
 ```json
 "extensions_extensionname_protectedSettings": {
@@ -75,11 +74,11 @@ Kaynak grubunu dışarı aktarılırken dışarı aktarılan korumalı ayarlar i
 }
 ```
 
-### <a name="step-2---get-protected-settings-properties"></a>Adım 2 - Get korumalı ayarları özellikleri
+### <a name="step-2---get-protected-settings-properties"></a>2\. adım-korumalı ayarların özelliklerini al
 
-Her korunan ayarın gerekli özellikler kümesi olduğundan, bu özelliklerin bir listesi gerekir toplanması. Her korunan ayarları yapılandırma parametresi bulunabilir [github'daki Azure Resource Manager şema](https://raw.githubusercontent.com/Azure/azure-resource-manager-schemas/master/schemas/2015-08-01/Microsoft.Compute.json). Bu şema, bu belgenin genel bakış bölümünde listelenen uzantıları için parametre kümeleri yalnızca içerir. 
+Korunan her ayarın gerekli özellikler kümesi olduğundan, bu özelliklerin bir listesinin toplanması gerekir. Korumalı ayarlar yapılandırmasının her parametresi, [GitHub 'daki Azure Resource Manager şemasında](https://raw.githubusercontent.com/Azure/azure-resource-manager-schemas/master/schemas/2015-08-01/Microsoft.Compute.json)bulunabilir. Bu şema yalnızca bu belgenin genel bakış bölümünde listelenen uzantıların parametre kümelerini içerir. 
 
-Şema depo içinde bu örnek için istenen uzantısı için aramak `IaaSDiagnostics`. Uzantıları `protectedSettings` nesne bulunan, her parametresinin not alın. Örneğinde `IaasDiagnostic` uzantısı, Parametreler gerektiren `storageAccountName`, `storageAccountKey`, ve `storageAccountEndPoint`.
+Şema deposu içinden, istenen uzantıyı arayın, bu örnekte `IaaSDiagnostics`. Uzantılar `protectedSettings` nesne bulduktan sonra her bir parametreye göz atın. `IaasDiagnostic` uzantısının örneğinde, gerekli parametreler `storageAccountName`, `storageAccountKey`ve `storageAccountEndPoint`.
 
 ```json
 "protectedSettings": {
@@ -103,11 +102,11 @@ Her korunan ayarın gerekli özellikler kümesi olduğundan, bu özelliklerin bi
 }
 ```
 
-### <a name="step-3---re-create-the-protected-configuration"></a>3\. adım - korumalı yapılandırmayı yeniden oluşturma
+### <a name="step-3---re-create-the-protected-configuration"></a>3\. adım-korumalı yapılandırmayı yeniden oluşturma
 
-Dışarı aktarılan şablona arama `protectedSettings` ve gerekli bir uzantı parametrelerinden ve her biri için bir değer içeren yeni bir tane dışarı aktarılan korumalı ayar nesnesini değiştirin.
+İçe aktarılmış şablonda, `protectedSettings` için arama yapın ve bu korumalı ayar nesnesini, gerekli uzantı parametrelerini ve her biri için bir değeri içeren yeni bir ile değiştirin.
 
-Örneğinde `IaasDiagnostic` uzantısı, yeni korumalı ayarı yapılandırması aşağıdaki örnekteki gibi görünür:
+`IaasDiagnostic` uzantısının örneğinde, yeni korumalı ayar yapılandırması aşağıdaki örnekteki gibi görünür:
 
 ```json
 "protectedSettings": {
@@ -117,7 +116,7 @@ Dışarı aktarılan şablona arama `protectedSettings` ve gerekli bir uzantı p
 }
 ```
 
-Son uzantısı kaynağın aşağıdaki JSON örneğe benzer:
+Son uzantı kaynağı aşağıdaki JSON örneğine benzer şekilde görünür:
 
 ```json
 {
@@ -149,9 +148,9 @@ Son uzantısı kaynağın aşağıdaki JSON örneğe benzer:
 }
 ```
 
-Şablon parametreleri özellik değerlerini sağlamak için kullanıyorsanız, bunlar oluşturulması gerekir. Şablon parametreleri değerlerini ayarlama korumalı oluştururken kullandığınızdan emin olun `SecureString` parametre türü hassas değerleri güvenli hale getirilir. Parametreleri kullanma hakkında daha fazla bilgi için bkz. [Azure Resource Manager şablonları yazma](../../resource-group-authoring-templates.md).
+Özellik değerleri sağlamak için şablon parametreleri kullanılıyorsa, bunların oluşturulması gerekir. Korumalı ayar değerleri için şablon parametreleri oluştururken, hassas değerlerin güvenliğini sağlamak için `SecureString` parametre türünü kullandığınızdan emin olun. Parametreleri kullanma hakkında daha fazla bilgi için bkz. [Azure Resource Manager şablonları yazma](../../resource-group-authoring-templates.md).
 
-Örneğinde `IaasDiagnostic` uzantısı, aşağıdaki parametreleri Resource Manager şablonu parametreleri bölümünde oluşturulacaktır.
+`IaasDiagnostic` uzantısının örneğinde, Kaynak Yöneticisi şablonunun parametreler bölümünde aşağıdaki parametreler oluşturulur.
 
 ```json
 "storageAccountName": {
@@ -164,4 +163,4 @@ Son uzantısı kaynağın aşağıdaki JSON örneğe benzer:
 }
 ```
 
-Bu noktada, şablon, herhangi bir şablon dağıtım yöntemini kullanılarak dağıtılabilir.
+Bu noktada, şablon herhangi bir şablon dağıtım yöntemi kullanılarak dağıtılabilir.

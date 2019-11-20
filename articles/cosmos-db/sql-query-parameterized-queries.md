@@ -1,25 +1,25 @@
 ---
-title: Azure Cosmos DB'de parametreli sorgular
-description: Parametreli SQL sorguları hakkında bilgi edinin
+title: Azure Cosmos DB parametreli sorgular
+description: SQL parametreli sorgular hakkında bilgi edinin
 author: timsander1
 ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 05/30/2019
 ms.author: tisande
-ms.openlocfilehash: 2bfc22346c1dd43d7d3c2937ffc286e48ae774d0
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: 45c1344c32e35f60f35ba8ed105e912d92574cce
+ms.sourcegitcommit: e97a0b4ffcb529691942fc75e7de919bc02b06ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67342841"
+ms.lasthandoff: 09/15/2019
+ms.locfileid: "71003604"
 ---
-# <a name="parameterized-queries-in-azure-cosmos-db"></a>Azure Cosmos DB'de parametreli sorgular
+# <a name="parameterized-queries-in-azure-cosmos-db"></a>Azure Cosmos DB parametreli sorgular
 
-Cosmos DB, tanıdık gösterimi ' @'ile ifade edilen parametrelerle sorguları destekler. Parametreli SQL sağlam işleme ve kullanıcı girdisini kaçış sağlar ve SQL ekleme üzerinden verilerin yanlışlıkla açığa çıkmaya engeller.
+Cosmos DB tanıdık @ gösterimi tarafından ifade edilen parametrelere sahip sorguları destekler. Parametreli SQL, Kullanıcı girişi için güçlü işleme ve kaçış sağlar ve SQL ekleme aracılığıyla verilerin yanlışlıkla açıklanmasını önler.
 
 ## <a name="examples"></a>Örnekler
 
-Örneğin, alan bir sorgu yazabileceğiniz `lastName` ve `address.state` parametre olarak ve çeşitli değerleri için yürütme `lastName` ve `address.state` kullanıcı girişini temel alarak.
+Örneğin, parametreleri `lastName` alan ve `address.state` olarak bir sorgu yazabilir ve kullanıcı girişine göre çeşitli değerleri `lastName` ve `address.state` bunları çalıştırabilirsiniz.
 
 ```sql
     SELECT *
@@ -27,7 +27,7 @@ Cosmos DB, tanıdık gösterimi ' @'ile ifade edilen parametrelerle sorguları d
     WHERE f.lastName = @lastName AND f.address.state = @addressState
 ```
 
-Ardından, aşağıdaki gibi bir JSON sorgusu olarak Cosmos DB'ye bu istek gönderebilirsiniz:
+Daha sonra bu isteği aşağıdaki gibi parametreli bir JSON sorgusu olarak Cosmos DB gönderebilirsiniz:
 
 ```sql
     {
@@ -39,7 +39,7 @@ Ardından, aşağıdaki gibi bir JSON sorgusu olarak Cosmos DB'ye bu istek gönd
     }
 ```
 
-Aşağıdaki örnekte, ilk bağımsız değişkeni parametreli bir sorgu ile ayarlar: 
+Aşağıdaki örnek, en üstteki bağımsız değişkeni parametreli bir sorgu ile ayarlar: 
 
 ```sql
     {
@@ -50,10 +50,10 @@ Aşağıdaki örnekte, ilk bağımsız değişkeni parametreli bir sorgu ile aya
     }
 ```
 
-Parametre değerleri geçerli bir JSON olabilir: dizeler, sayılar ve Boole değerlerini, null, hatta diziler veya JSON iç içe geçmiş. Cosmos DB, şemasız olduğu parametreleri karşı herhangi bir tür doğrulanmış değil.
+Parametre değerleri geçerli bir JSON olabilir: dizeler, sayılar, Boole değerleri, null, hatta diziler veya iç içe geçmiş JSON. Cosmos DB şemaya daha az olduğundan, parametreler hiçbir türe göre doğrulanmaz.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure Cosmos DB .NET örnekleri](https://github.com/Azure/azure-cosmosdb-dotnet)
+- [Azure Cosmos DB .NET örnekleri](https://github.com/Azure/azure-cosmos-dotnet-v3)
 - [Belge verilerini modelleme](modeling-data.md)

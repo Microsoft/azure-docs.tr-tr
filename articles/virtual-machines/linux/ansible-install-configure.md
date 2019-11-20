@@ -1,23 +1,23 @@
 ---
-title: Hızlı Başlangıç - azure'da Linux sanal makinelerinde yükleme Ansible | Microsoft Docs
-description: Bu hızlı başlangıçta, yükleme ve Ubuntu, CentOS ve SLES üzerindeki Azure kaynaklarını yönetmek için ansible'ı yapılandırma hakkında bilgi edinin
+title: Hızlı başlangıç-Azure 'da Linux sanal makinelerine erişilebilir bir şekilde yükler
+description: Bu hızlı başlangıçta, Ubuntu, CentOS ve SLES üzerinde Azure kaynaklarını yönetmek için nasıl yüklenip yapılandırılacağı hakkında bilgi edinin
 keywords: ansible, azure, devops, bash, cloudshell, playbook, bash
 ms.topic: quickstart
 ms.service: ansible
 author: tomarchermsft
-manager: jeconnoc
+manager: gwallace
 ms.author: tarcher
 ms.date: 04/30/2019
-ms.openlocfilehash: 60cefe24feab9de4262e81eb1bc313aeadc7eb05
-ms.sourcegitcommit: 6f043a4da4454d5cb673377bb6c4ddd0ed30672d
+ms.openlocfilehash: a1ea5814ffd201456a2751b37b77f3062cac789a
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65409249"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037064"
 ---
-# <a name="quickstart-install-ansible-on-linux-virtual-machines-in-azure"></a>Hızlı Başlangıç: Azure'da Linux sanal makinelerinde Ansible'ı yükleme
+# <a name="quickstart-install-ansible-on-linux-virtual-machines-in-azure"></a>Hızlı başlangıç: Azure 'da Linux sanal makinelerine erişilebilir bir şekilde yüklemeyin
 
-Ansible, ortamınızdaki kaynakların dağıtımını ve yapılandırılmasını otomatikleştirmenizi sağlar. Bu makalede, bazı yaygın Linux dağıtımları için ansible'ı yapılandırma gösterilmektedir. Ansible'ı üzerinde diğer dağıtım paketlerini yüklemek için belirli platform için yüklü paketleri ayarlayın. 
+Ansible, ortamınızdaki kaynakların dağıtımını ve yapılandırılmasını otomatikleştirmenizi sağlar. Bu makalede, en yaygın Linux kaldırmalar için nasıl yapılandırma yapılacağı gösterilmektedir. Diğer distrolar üzerinde anormal yükleme yapmak için, belirli platformunuz için yüklü paketleri ayarlayın. 
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -35,100 +35,100 @@ Linux makinenizde oturum açın ve Ansible yükleme adımları için aşağıdak
 
 ### <a name="centos-74"></a>CentOS 7.4
 
-Bu bölümde, CentOS, ansible'ı kullanmak için yapılandırın.
+Bu bölümde, CentOS 'ı anda kullanacak şekilde yapılandırırsınız.
 
 1. Bir terminal penceresi açın.
 
-1. Azure Python SDK'sı modüller için gerekli paketleri yüklemek için aşağıdaki komutu girin:
+1. Azure Python SDK modülleri için gereken paketleri yüklemek üzere aşağıdaki komutu girin:
 
     ```bash
     sudo yum check-update; sudo yum install -y gcc libffi-devel python-devel openssl-devel epel-release
     sudo yum install -y python-pip python-wheel
     ```
 
-1. Ansible'ı gerekli paketleri yüklemek için aşağıdaki komutu girin:
+1. Gerekli paketleri yüklemek için aşağıdaki komutu girin:
 
     ```bash
     sudo pip install ansible[azure]
     ```
 
-1. [Azure kimlik bilgileri oluşturma](#create-azure-credentials).
+1. [Azure kimlik bilgilerini oluşturun](#create-azure-credentials).
 
 ### <a name="ubuntu-1604-lts"></a>Ubuntu 16.04 LTS
 
-Bu bölümde, Ubuntu ansible'ı kullanmak için yapılandırın.
+Bu bölümde, Ubuntu 'ı kullanmak üzere yapılandırırsınız.
 
 1. Bir terminal penceresi açın.
 
-1. Azure Python SDK'sı modüller için gerekli paketleri yüklemek için aşağıdaki komutu girin:
+1. Azure Python SDK modülleri için gereken paketleri yüklemek üzere aşağıdaki komutu girin:
 
     ```bash
     sudo apt-get update && sudo apt-get install -y libssl-dev libffi-dev python-dev python-pip
     ```
 
-1. Ansible'ı gerekli paketleri yüklemek için aşağıdaki komutu girin:
+1. Gerekli paketleri yüklemek için aşağıdaki komutu girin:
 
     ```bash
     sudo pip install ansible[azure]
     ```
 
-1. [Azure kimlik bilgileri oluşturma](#create-azure-credentials).
+1. [Azure kimlik bilgilerini oluşturun](#create-azure-credentials).
 
 ### <a name="sles-12-sp2"></a>SLES 12 SP2
 
-Bu bölümde, SLES ansible'ı kullanmak için yapılandırın.
+Bu bölümde, SLES 'yi kullanmak için yapılandıracaksınız.
 
 1. Bir terminal penceresi açın.
 
-1. Azure Python SDK'sı modüller için gerekli paketleri yüklemek için aşağıdaki komutu girin:
+1. Azure Python SDK modülleri için gereken paketleri yüklemek üzere aşağıdaki komutu girin:
 
     ```bash
     sudo zypper refresh && sudo zypper --non-interactive install gcc libffi-devel-gcc5 make \
         python-devel libopenssl-devel libtool python-pip python-setuptools
     ```
 
-1. Ansible'ı gerekli paketleri yüklemek için aşağıdaki komutu girin:
+1. Gerekli paketleri yüklemek için aşağıdaki komutu girin:
 
     ```bash
     sudo pip install ansible[azure]
     ```
 
-1. Çakışan Python cryptography paketi kaldırmak için aşağıdaki komutu girin:
+1. Çakışan Python şifreleme paketini kaldırmak için aşağıdaki komutu girin:
 
     ```bash
     sudo pip uninstall -y cryptography
     ```
 
-1. [Azure kimlik bilgileri oluşturma](#create-azure-credentials).
+1. [Azure kimlik bilgilerini oluşturun](#create-azure-credentials).
 
 ## <a name="create-azure-credentials"></a>Azure kimlik bilgilerini oluşturma
 
-Ansible kimlik bilgilerini yapılandırmak için aşağıdaki bilgiler gereklidir:
+Anormal kimlik bilgilerini yapılandırmak için aşağıdaki bilgilere ihtiyacınız vardır:
 
-* Azure abonelik Kimliğinizi 
+* Azure abonelik KIMLIĞINIZ 
 * Hizmet sorumlusu değerleri
 
-Hizmet sorumlusu değerleri, Ansible Tower veya Jenkins kullanıyorsanız, ortam değişkenleri olarak bildirin.
+Anormal Tower veya Jenkins kullanıyorsanız, hizmet sorumlusu değerlerini ortam değişkenleri olarak bildirin.
 
-Ansible'ı kimlik bilgileri aşağıdaki tekniklerden birini kullanarak yapılandırın:
+Aşağıdaki tekniklerden birini kullanarak anormal kimlik bilgilerini yapılandırın:
 
 - [Ansible kimlik bilgileri dosyası oluşturma](#file-credentials)
 - [Ansible ortam değişkenlerini kullanma](#env-credentials)
 
 ### <a name="span-idfile-credentials-create-ansible-credentials-file"></a><span id="file-credentials"/> Ansible kimlik bilgileri dosyası oluşturma
 
-Bu bölümde, Ansible için kimlik bilgilerini sağlamak için bir yerel kimlik bilgileri dosyası oluşturun. 
+Bu bölümde, kimlik bilgilerini sağlamak için bir yerel kimlik bilgileri dosyası oluşturacaksınız. 
 
-Ansible kimlik tanımlama hakkında daha fazla bilgi için bkz. [kimlik bilgilerini sağlayarak Azure modüllerine](https://docs.ansible.com/ansible/guide_azure.html#providing-credentials-to-azure-modules).
+Anormal kimlik bilgilerini tanımlama hakkında daha fazla bilgi için bkz. [Azure modüllerine kimlik bilgileri sağlama](https://docs.ansible.com/ansible/guide_azure.html#providing-credentials-to-azure-modules).
 
-1. Adlı bir dosya için bir geliştirme ortamı oluşturma `credentials` konak sanal makinede:
+1. Bir geliştirme ortamı için konak sanal makinesinde `credentials` adlı bir dosya oluşturun:
 
     ```bash
     mkdir ~/.azure
     vi ~/.azure/credentials
     ```
 
-1. Dosyasına aşağıdaki satırları ekleyin. Yer tutucuları hizmet asıl değerlerle değiştirin.
+1. Dosyasına aşağıdaki satırları ekleyin. Yer tutucuları hizmet sorumlusu değerleriyle değiştirin.
 
     ```bash
     [default]
@@ -142,11 +142,11 @@ Ansible kimlik tanımlama hakkında daha fazla bilgi için bkz. [kimlik bilgiler
 
 ### <a name="span-idenv-credentialsuse-ansible-environment-variables"></a><span id="env-credentials"/>Ansible ortam değişkenlerini kullanma
 
-Bu bölümde, Ansible kimlik bilgilerinizi yapılandırmak için hizmet sorumlusu değerleri dışarı aktarın.
+Bu bölümde, anormal kimlik bilgilerinizi yapılandırmak için hizmet sorumlusu değerlerini dışarı aktarcaksınız.
 
 1. Bir terminal penceresi açın.
 
-1. Hizmet sorumlusu değerleri dışarı aktarın:
+1. Hizmet sorumlusu değerlerini dışarı aktar:
 
     ```bash
     export AZURE_SUBSCRIPTION_ID=<your-subscription_id>
@@ -155,13 +155,13 @@ Bu bölümde, Ansible kimlik bilgilerinizi yapılandırmak için hizmet sorumlus
     export AZURE_TENANT=<security-principal-tenant>
     ```
 
-## <a name="verify-the-configuration"></a>yapılandırıldığını doğrulayın
+## <a name="verify-the-configuration"></a>Yapılandırmayı doğrulama
 
-Başarılı yapılandırmasını doğrulamak için bir Azure kaynak grubu oluşturmak için ansible'ı kullanın.
+Başarılı yapılandırmayı doğrulamak için, bir Azure Kaynak grubu oluşturmak için anda kullanın.
 
 [!INCLUDE [create-resource-group-with-ansible.md](../../../includes/ansible-snippet-create-resource-group.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"] 
-> [Hızlı Başlangıç: Ansible'ı kullanarak Azure'da bir Linux sanal makinesi yapılandırma](./ansible-create-vm.md)
+> [Hızlı başlangıç: Azure 'da bir Linux sanal makinesini kullanarak yapılandırma](./ansible-create-vm.md)

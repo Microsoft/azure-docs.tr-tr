@@ -1,59 +1,52 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Ayrılmış HSM Belgeleri
+### YamlMime:Landing
+title: Azure Ayrılmış HSM belgeleri
+summary: Azure Ayrılmış HSM hesabınızı kullanarak bulut kaynaklarınıza, uygulamalarınıza ve çözümlerinize erişen ve bunları şifreleyen anahtarlar oluşturma ve bunları koruma hakkında bilgi edinin. Öğreticiler, API başvuruları ve daha fazlası.
 metadata:
-  title: 'Azure Ayrılmış HSM Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
-  meta.description: 'Learn how to use Azure Dedicated HSM to create and maintain keys that access and encrypt your cloud resources, apps, and solutions. Tutorials, API references, and more.'
+  title: Azure Ayrılmış HSM belgeleri
+  description: Azure Ayrılmış HSM hesabınızı kullanarak bulut kaynaklarınıza, uygulamalarınıza ve çözümlerinize erişen ve bunları şifreleyen anahtarlar oluşturma ve bunları koruma hakkında bilgi edinin. Öğreticiler, API başvuruları ve daha fazlası.
   services: dedicated-hsm
-  author: barclayn
-  manager: barbkess
-  layout: LandingPage
-  ms.assetid: null
   ms.service: dedicated-hsm
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 11/21/2018
-  ms.author: barclayn
-abstract:
-  description: Ayrılmış HSM işlevselliği ve ortamınıza uygun olup olmadığı hakkında daha fazla bilgi edinin.
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/dedicated-hsm/overview
-            html: <p>Azure Ayrılmış HSM’nin ne olduğunu öğrenin.</p>
-            image:
-              src: media/index/hsm.svg
-            title: Azure Ayrılmış HSM’ye genel bakış
-          - href: /azure/dedicated-hsm/faq
-            html: <p>Ayrılmış HSM kullanımına yönelik tasarım konusunda dikkat edilmesi gerekenler</p>
-            image:
-              src: media/index/guide.svg
-            title: Dağıtım mimarisine karar verme
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: ''
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: media/index/cli.svg
-            text: Azure CLI
-            href: /azure/dedicated-hsm/tutorial-deploy-hsm-cli
-          - image:
-              src: media/index/logo_powershell.svg
-            text: PowerShell
-            href: /azure/dedicated-hsm/tutorial-deploy-hsm-powershell
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: SSS
-            html: <p><a href="/azure/dedicated-hsm/faq/">Sık sorulan sorular</a></p>
+  author: msmbaldwin
+  ms.author: mbaldwin
+  manager: rkarlin
+  ms.date: 09/19/2019
+  ms.openlocfilehash: 9e592fdb5fa87487f131bb0aca0c6176175e5385
+  ms.sourcegitcommit: 29880cf2e4ba9e441f7334c67c7e6a994df21cfe
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/26/2019
+  ms.locfileid: "71300096"
+landingContent:
+- title: Ayrılmış HSM hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Ayrılmış HSM nedir?
+      url: overview.md
+  - linkListType: concept
+    links:
+    - text: Yüksek kullanılabilirlik
+      url: high-availability.md
+    - text: Fiziksel güvenlik
+      url: physical-security.md
+    - text: Ağ
+      url: networking.md
+    - text: Desteklenebilirlik
+      url: supportability.md
+    - text: İzleme
+      url: monitoring.md
+- title: Başlarken
+  linkLists:
+  - linkListType: deploy
+    links:
+    - text: Azure CLI ile sanal ağa dağıtma
+      url: tutorial-deploy-hsm-cli.md
+    - text: Azure PowerShell ile sanal ağa dağıtma
+      url: tutorial-deploy-hsm-powershell.md
+- title: Senaryolar
+  linkLists:
+  - linkListType: architecture
+    links:
+    - text: Azure Ayrılmış HSM dağıtım mimarisi
+      url: deployment-architecture.md

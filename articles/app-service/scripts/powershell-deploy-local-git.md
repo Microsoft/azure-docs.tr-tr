@@ -1,5 +1,5 @@
 ---
-title: Azure PowerShell betik örneği - uygulama oluşturma ve yerel Git deposundan dağıtın | Microsoft Docs
+title: Betik örneğini Azure PowerShell-uygulama oluşturma ve yerel git deposundan dağıtma | Microsoft Docs
 description: Azure PowerShell Betik Örneği - Bir web uygulaması oluşturma ve yerel Git deposundan kod dağıtma
 services: app-service\web
 documentationcenter: ''
@@ -10,17 +10,16 @@ tags: azure-service-management
 ms.assetid: 5a927f23-8e70-45fd-9aae-980d4e7a007d
 ms.service: app-service-web
 ms.workload: web
-ms.devlang: na
 ms.topic: sample
 ms.date: 03/20/2017
 ms.author: cephalin
 ms.custom: mvc
-ms.openlocfilehash: 80d1b295db7d1eb1e0ea0dda9522aa3875ea882d
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 670660c3618124339c6d6ab416aa9baa4d5ca2ca
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66136435"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70098335"
 ---
 # <a name="create-a-web-app-and-deploy-code-from-a-local-git-repository"></a>Bir web uygulaması oluşturma ve yerel Git deposundan kod dağıtma
 

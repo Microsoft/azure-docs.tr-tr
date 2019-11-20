@@ -1,39 +1,34 @@
 ---
-title: Akıllı algılama - olağan dışı özel durum hacmindeki artışı, Azure Application ınsights | Microsoft Docs
-description: Azure Application Insights ile uygulama özel durumları için özel durum hacmindeki olağan dışı modelleri izleyin.
-services: application-insights
-documentationcenter: ''
-author: mrbullwinkle
-manager: carmonm
-ms.assetid: ea2a28ed-4cd9-4006-bd5a-d4c76f4ec20b
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Akıllı algılama-özel durum biriminde olağan dışı artış, Azure Application Insights | Microsoft Docs
+description: Özel durum hacminde olağan olmayan desenler için Azure Application Insights ile uygulama özel durumlarını izleyin.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 12/08/2017
+author: mrbullwinkle
 ms.author: mbullwin
-ms.openlocfilehash: a6e7e8e01ccb623a3ff340c318c9c238c919cb38
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 12/08/2017
+ms.openlocfilehash: fa7669b78caabb95b08200e83ed18ea982ce9ac9
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61298593"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72820610"
 ---
-# <a name="abnormal-rise-in-exception-volume-preview"></a>Olağan dışı özel durum hacmindeki artışı (Önizleme)
+# <a name="abnormal-rise-in-exception-volume-preview"></a>Özel durum biriminde olağan dışı artış (Önizleme)
 
-Application ınsights'ı otomatik olarak uygulamanızda oluşturulan özel durumları inceler ve olağan dışı, özel durum telemetrisi yaklaşımlar hakkında uyarır.
+Application Insights uygulamanızda oluşturulan özel durumları otomatik olarak analiz eder ve özel durum telemetrinizdeki olağan dışı desenler hakkında sizi uyarabilir.
 
-Bu özellik dışında hiçbir özel kurulum gerektiren [özel durum bildirimini yapılandırma](https://docs.microsoft.com/azure/application-insights/app-insights-asp-net-exceptions#set-up-exception-reporting) uygulamanız için. Uygulamanızın yeterli özel durum telemetrisi oluşturduğunda etkin değil.
+Bu özellik, uygulamanız için [özel durum raporlamayı yapılandırmadan](https://docs.microsoft.com/azure/application-insights/app-insights-asp-net-exceptions#set-up-exception-reporting) farklı bir kurulum gerektirmez. Uygulamanız yeterli sayıda özel durum telemetrisi oluşturduğunda etkin olur.
 
-## <a name="when-would-i-get-this-type-of-smart-detection-notification"></a>Bu tür bir akıllı algılama bildirim ne zaman elde edersiniz?
-Uygulamanızın olağandışı artışı belirli bir türdeki özel durumların sayısı için bir gün içinde son yedi gün hesaplanan temel karşılaştırıldığında varsa bu tür bir bildirim alabilirsiniz.
-Makine öğrenimi algoritmaları artış özel durum sayısı, uygulama kullanımınızı doğal bir büyüme göz önünde bulundurularak algılamak için kullanılıyor.
+## <a name="when-would-i-get-this-type-of-smart-detection-notification"></a>Bu tür akıllı algılama bildirimini ne zaman alabilirim?
+Bu tür bir bildirime, uygulamanız bir gün içinde belirli bir tür özel durum sayısında, önceki yedi gün içinde hesaplanan bir taban çizgisine kıyasla olağan dışı bir artış yaşanıyorsa elde edebilirsiniz.
+Makine öğrenimi algoritmaları, uygulama kullanımınızın doğal bir büyümesini hesaba katlarken özel durum sayısı artışı algılamak için kullanılır.
 
-## <a name="does-my-app-definitely-have-a-problem"></a>Uygulamamı kesinlikle bir sorun var mı?
-Hayır, bir bildirim uygulamanızı kesinlikle bir sorun olduğu anlamına gelmez. Aşırı sayıda özel genellikle uygulama sorununu gösterir ancak zararsız ve doğru şekilde uygulamanız tarafından işlenen bu özel durumlar olabilir.
+## <a name="does-my-app-definitely-have-a-problem"></a>Uygulamamın kesinlikle bir sorunu var mı?
+Hayır, bir bildirim uygulamanızın kesinlikle bir sorun olduğu anlamına gelmez. Aşırı sayıda özel durum genellikle bir uygulama sorununa işaret etse de, bu özel durumlar sizin uygulamanız tarafından zararsız olabilir ve doğru şekilde işlenebilir.
 
-## <a name="how-do-i-fix-it"></a>Bunu nasıl düzeltirim?
-Bildirimler tanılama işleminde desteklemek için tanılama bilgileri içerir:
-1. **Değerlendirme.** Bildirim kaç kullanıcının veya kaç istek etkilendiğini gösterir. Bu sorun için bir öncelik atamanıza yardımcı olabilir.
-2. **Kapsam.** Sorun, tüm trafiği veya yalnızca bazı işlem etkileniyor? Bu bilgiler gelen bildirim elde edilebilir.
-3. **Tanılayın.** Algılama içinden, özel durum türü yanı sıra özel durum oluştu yöntemi hakkında bilgi içerir. İlgili öğeler de kullanabilirsiniz ve daha fazla yardımcı olacak bilgiler için destek bağlama raporları sorunu tanılayın.
+## <a name="how-do-i-fix-it"></a>Nasıl yaparım? düzeltilsin mi?
+Bildirimler tanılama sürecinde desteklanacak tanılama bilgilerini içerir:
+1. **Değerlendirme.** Bildirim, kaç kullanıcının veya kaç isteğin etkilendiğini gösterir. Bu, soruna bir öncelik atamanıza yardımcı olabilir.
+2. **Kapsam.** Sorun tüm trafiği etkiliyor mu, yoksa yalnızca bir işlem mi? Bu bilgiler bildirimden elde edilebilir.
+3. **Tanın.** Algılama, özel durumun oluşturulduğu yöntemin yanı sıra özel durum türü hakkında bilgiler içerir. Sorunu daha da tanılamanıza yardımcı olması için, destek bilgilerine bağlanan ilgili öğeleri ve raporları da kullanabilirsiniz.

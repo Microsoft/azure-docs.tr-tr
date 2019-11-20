@@ -1,7 +1,7 @@
 ---
-title: Docker compose kapsayıcı tarifleri
+title: Birden çok kapsayıcıyı dağıtmak için Docker Compose kullanma
 titleSuffix: Azure Cognitive Services
-description: Bilişsel hizmetler birden çok kapsayıcı dağıtmayı öğrenin. Bu yordam, birden fazla Docker kapsayıcı görüntüleri Docker Compose ile düzenlemek nasıl gösterir.
+description: Birden çok bilişsel hizmet kapsayıcılarını dağıtmayı öğrenin. Bu makalede, Docker Compose kullanarak birden çok Docker kapsayıcı görüntüsünü nasıl düzenleyeceğinizi gösterilmektedir.
 services: cognitive-services
 author: IEvangelist
 manager: nitinme
@@ -10,43 +10,43 @@ ms.service: cognitive-services
 ms.topic: conceptual
 ms.date: 06/26/2019
 ms.author: dapine
-ms.openlocfilehash: 8afb7e866bc2a5fefe28a71653c4a2a87fdc7a5b
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 95ec80af88e0b89f61bebed08f4b96a09947f401
+ms.sourcegitcommit: f5075cffb60128360a9e2e0a538a29652b409af9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67445787"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68311545"
 ---
-# <a name="use-multiple-containers-in-a-private-network-with-docker-compose"></a>Docker Compose ile özel bir ağda birden fazla kapsayıcılar kullanma
+# <a name="use-docker-compose-to-deploy-multiple-containers"></a>Birden çok kapsayıcıyı dağıtmak için Docker Compose kullanma
 
-Bilişsel hizmetler birden çok kapsayıcı dağıtmayı öğrenin. Bu yordam, birden fazla Docker kapsayıcı görüntüleri Docker Compose ile düzenlemek nasıl gösterir.
+Bu makalede, birden çok Azure bilişsel hizmet kapsayıcısının nasıl dağıtılacağı gösterilir. Özellikle birden çok Docker kapsayıcı görüntüsünü düzenlemek için Docker Compose kullanmayı öğreneceksiniz.
 
-> [Docker Compose](https://docs.docker.com/compose/) tanımlama ve çok kapsayıcılı Docker uygulamaları çalıştırmak için bir araçtır. Oluşturma ile uygulamanızın Hizmetleri'ni yapılandırmak için bir YAML dosyası kullanın. Ardından, tek bir komutla oluşturun ve tüm hizmetleri yapılandırmanızdan başlatın.
+> [Docker Compose](https://docs.docker.com/compose/) , çok Kapsayıcılı Docker uygulamalarını tanımlamaya ve çalıştırmaya yönelik bir araçtır. Oluşturma bölümünde, uygulamanızın hizmetlerini yapılandırmak için bir YAML dosyası kullanırsınız. Ardından, tek bir komut çalıştırarak, yapılandırmadan tüm hizmetleri oluşturup başlatabilirsiniz.
 
-Uygun olduğunda, birden çok kapsayıcı görüntülerini tek ana bilgisayar işlemlerini zorlayıcı olabilir. Bu makalede, biz metin tanıma hizmeti ve Form tanıyıcı hizmeti birlikte çekeceği.
+Tek bir ana bilgisayarda birden çok kapsayıcı görüntüsünü düzenlemek yararlı olabilir. Bu makalede, Metin Tanıma ve form tanıyıcı kapsayıcılarını birlikte ekleyeceğiz.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu yordam, yüklü ve yerel olarak çalıştırma çeşitli araçlar gerektirir.
+Bu yordam, yüklenmesi ve yerel olarak çalıştırılması gereken çeşitli araçlar gerektirir:
 
-* Bir Azure aboneliği kullanın. Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
-* [Docker altyapısı](https://www.docker.com/products/docker-engine) ve Docker CLI'yı bir konsol penceresi içinde çalıştığını doğrulayın.
-* Doğru fiyatlandırma katmanı ile bir Azure kaynağı. Tüm fiyatlandırma katmanları bu kapsayıcısı ile çalışır:
-  * **Görüntü işleme** kaynak F0 veya standart fiyatlandırma katmanlarını yalnızca.
-  * **Form tanıyıcı** kaynak F0 veya standart fiyatlandırma katmanlarını yalnızca.
-  * **Bilişsel Hizmetler** kaynak fiyatlandırma katmanı S0 ile.
+* Azure aboneliği. Aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
+* [Docker altyapısı](https://www.docker.com/products/docker-engine). Docker CLı 'nın konsol penceresinde çalıştığından emin olun.
+* Doğru fiyatlandırma katmanına sahip bir Azure kaynağı. Yalnızca şu fiyatlandırma katmanları bu kapsayıcmayla çalışır:
+  * Yalnızca F0 veya standart fiyatlandırma katmanıyla **görüntü işleme** kaynak.
+  * Yalnızca F0 veya standart fiyatlandırma katmanı olan bir **tür tanıyıcı** kaynağı.
+  * S0 fiyatlandırma katmanı ile bilişsel **Hizmetler** kaynağı.
 
-## <a name="request-access-to-the-container-registry"></a>Kapsayıcı kayıt defterine erişim isteği
+## <a name="request-access-to-the-container-registry"></a>Kapsayıcı kayıt defterine erişim isteme
 
-Başvurunuzu [Bilişsel hizmetler konuşma kapsayıcıları istek formunu](https://aka.ms/speechcontainerspreview/) kapsayıcıya erişim istemek için. 
+Bilişsel [Hizmetler konuşma kapsayıcıları istek formunu](https://aka.ms/speechcontainerspreview/)doldurun ve iletin. 
 
 [!INCLUDE [Request access to the container registry](../../../includes/cognitive-services-containers-request-access-only.md)]
 
 [!INCLUDE [Authenticate to the container registry](../../../includes/cognitive-services-containers-access-registry.md)]
 
-## <a name="docker-compose-file"></a>Docker compose dosyası
+## <a name="docker-compose-file"></a>Docker Compose dosyası
 
-YAML dosyası tüm hizmetlerin dağıtılması için tanımlar. Bu hizmetler üzerinde kullanan bir `DockerFile` veya var olan bir kapsayıcı görüntüsü bu durumda kullanacağız iki Önizleme görüntüleri. Kopyalayın ve yapıştırın aşağıdaki YAML dosyası olarak kaydedin *docker compose.yaml*. Uygun sağlamak _apikey_, _fatura_, ve _uç noktası URI'si_ değerler _docker-compose.yml_ aşağıdaki dosya.
+YAML dosyası, dağıtılacak tüm hizmetleri tanımlar. Bu hizmetler, `DockerFile` ya da mevcut bir kapsayıcı görüntüsünü kullanır. Bu durumda, iki önizleme görüntüsü kullanacağız. Aşağıdaki YAML dosyasını kopyalayıp yapıştırın ve *Docker-Compose. YAML*olarak kaydedin. Dosyada uygun **apikey**, **faturalandırma**ve **dosyasında değiştirilecek endpointUri** değerlerini sağlayın.
 
 ```yaml
 version: '3.7'
@@ -61,10 +61,10 @@ services:
        FormRecognizer__ComputerVisionEndpointUri: # < Your form recognizer URI >
     volumes:
        - type: bind
-         source: e:\publicpreview\output
+         source: E:\publicpreview\output
          target: /output
        - type: bind
-         source: e:\publicpreview\input
+         source: E:\publicpreview\input
          target: /input
     ports:
       - "5010:5000"
@@ -80,22 +80,22 @@ services:
 ```
 
 > [!IMPORTANT]
-> Konak makinedeki altında belirtilen dizinler oluşturma `volumes` düğümü. Bu, dizinleri birim bağlamaları ile yansımayı çalışmadan önce bulunmalıdır gereklidir.
+> Konak makinede **birimler** düğümü altında belirtilen dizinleri oluşturun. Bu yaklaşım, birim bağlamaları kullanarak bir görüntüyü bağlamayı denemeden önce dizinlerin mevcut olması gerektiği için gereklidir.
 
-## <a name="start-the-configured-docker-compose-services"></a>Başlangıç yapılandırılmış bir docker compose Hizmetleri
+## <a name="start-the-configured-docker-compose-services"></a>Yapılandırılmış Docker Compose hizmetlerini başlatın
 
-Tüm tanımlı hizmetin yaşam döngüsü yönetimini bir docker compose dosyası sağlar; başlatma/durdurma ve yeniden oluşturma hizmetleri, hizmet durumu ve günlük akışını görüntüleme. Proje dizininden bir komut satırı arabirimi açın (burada *docker compose.yaml* dosyası yer alır).
+Bir Docker Compose dosyası, tanımlı hizmetin yaşam döngüsünün tüm aşamaları yönetimine izin verebilir: Hizmetleri başlatma, durdurma ve yeniden oluşturma. hizmet durumunu görüntüleme; ve günlük akışını günlüğe kaydedin. Proje dizininden (Docker-Compose. YAML dosyasının bulunduğu) bir komut satırı arabirimi açın.
 
 > [!NOTE]
-> Hataları önlemek için ana makinenin doğru sürücüleri ile paylaşıyor olun **Docker altyapısı**. Örneğin, varsa *e:\publicpreview* dizin olarak kullanılan *docker compose.yaml* paylaşmak *E sürücü* docker ile.
+> Hataları önlemek için konak makinenin, diskleri Docker altyapısına doğru şekilde paylaştığından emin olun. Örneğin, E:\publicpreview Docker-Compose. YAML dosyasında bir dizin olarak kullanılıyorsa, E sürücüsünü Docker ile paylaşabilirsiniz.
 
-Tanımlanan tüm hizmetleri başlatın (veya yeniden başlatmak için) aşağıdaki komutu yürütün komut satırı arabiriminden *docker compose.yaml*:
+Komut satırı arabiriminden, Docker-Compose. YAML dosyasında tanımlanan tüm hizmetleri başlatmak (veya yeniden başlatmak) için aşağıdaki komutu yürütün:
 
 ```console
 docker-compose up
 ```
 
-İlk yürütme süresi `docker-compose up` komutu bu yapılandırmayla **Docker** altında yapılandırılmış görüntülerini çeker `services` indiriliyor/bunları bağlama düğüm--:
+Docker bu yapılandırmayı kullanarak **Docker-Compose up** komutunu ilk kez yürüttüğünde, **Hizmetler** düğümü altında yapılandırılan görüntüleri çeker ve sonra bunları indirir ve bağlar:
 
 ```console
 Pulling forms (containerpreview.azurecr.io/microsoft/cognitive-services-form-recognizer:)...
@@ -126,7 +126,7 @@ c56511552241: Waiting
 e91d2aa0f1ad: Downloading [==============================================>    ]  162.2MB/176.1MB
 ```
 
-Görüntüleri indirilir ve sonra görüntü Hizmetleri başlatılır.
+Görüntüler indirildikten sonra görüntü hizmetleri başlatılır:
 
 ```console
 Starting docker_ocr_1   ... done
@@ -158,11 +158,11 @@ ocr_1    | Now listening on: http://0.0.0.0:5000
 ocr_1    | Application started. Press Ctrl+C to shut down.
 ```
 
-## <a name="verify-the-service-availability"></a>Hizmet kullanılabilirliğini doğrulayın
+## <a name="verify-the-service-availability"></a>Hizmet kullanılabilirliğini doğrulama
 
 [!INCLUDE [Tip for using docker list](../../../includes/cognitive-services-containers-docker-list-tip.md)]
 
-Aşağıda bir örnek çıktı verilmiştir:
+İşte örnek bir çıktı:
 
 ```
 IMAGE ID            REPOSITORY                                                                 TAG
@@ -170,19 +170,19 @@ IMAGE ID            REPOSITORY                                                  
 4be104c126c5        containerpreview.azurecr.io/microsoft/cognitive-services-recognize-text    latest
 ```
 
-### <a name="test-the-recognize-text-container"></a>Test tanı metin kapsayıcısı
+### <a name="test-the-recognize-text-container"></a>Metin Tanıma kapsayıcısını test etme
 
-Konak makinedeki bir tarayıcıyı açın ve gidin `localhost` ile belirtilen bağlantı noktasından *docker compose.yaml*, örneğin, `http://localhost:5021/swagger/index.html`. Bu özellik Try kullanabileceğiniz tanı metin uç nokta test etmek için API.
+Ana makinede bir tarayıcı açın ve Docker-Compose  . YAML dosyasından http://localhost:5021/swagger/index.html belirtilen bağlantı noktasını kullanarak localhost 'a gidin. Metin Tanıma uç noktasını test etmek için API 'de "dene" özelliğini kullanabilirsiniz.
 
-![Metin Swagger tanıması](media/recognize-text-swagger-page.png)
+![Metin Tanıma kapsayıcı](media/recognize-text-swagger-page.png)
 
-### <a name="test-the-form-recognizer-container"></a>Test form tanıyıcı kapsayıcısı
+### <a name="test-the-form-recognizer-container"></a>Form tanıyıcı kapsayıcısını test etme
 
-Konak makinedeki bir tarayıcıyı açın ve gidin `localhost` ile belirtilen bağlantı noktasından *docker compose.yaml*, örneğin, `http://localhost:5010/swagger/index.html`. Bu özellik Try kullanabileceğiniz form tanıyıcı uç nokta test etmek için API.
+Ana makinede bir tarayıcı açın ve Docker-Compose  . YAML dosyasından http://localhost:5010/swagger/index.html belirtilen bağlantı noktasını kullanarak localhost 'a gidin. Form tanıyıcı uç noktasını test etmek için API 'de "dene" özelliğini kullanabilirsiniz.
 
-![Form tanıyıcı Swagger](media/form-recognizer-swagger-page.png)
+![Form tanıyıcı kapsayıcısı](media/form-recognizer-swagger-page.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Bilişsel hizmetler, kapsayıcılar](../cognitive-services-container-support.md)
+> [Bilişsel hizmetler kapsayıcıları](../cognitive-services-container-support.md)

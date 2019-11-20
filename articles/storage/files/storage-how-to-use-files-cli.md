@@ -1,21 +1,20 @@
 ---
 title: Azure CLI kullanarak Azure dosya paylaşımlarını yönetme için hızlı başlangıç
 description: Bu hızlı başlangıcı Azure dosyalarını yönetmek için Azure CLI kullanma hakkında bilgi edinmek için kullanın.
-services: storage
 author: roygara
 ms.service: storage
 ms.topic: quickstart
 ms.date: 10/26/2018
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 43a5a72ac32d8ed3510cecb505f5e62cf91d7106
-ms.sourcegitcommit: 44a85a2ed288f484cc3cdf71d9b51bc0be64cc33
+ms.openlocfilehash: 93baf275e93c28283836a92c71eb9b24151392fc
+ms.sourcegitcommit: 800f961318021ce920ecd423ff427e69cbe43a54
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2019
-ms.locfileid: "64710802"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68699588"
 ---
-# <a name="quickstart-create-and-manage-azure-file-shares-using-azure-cli"></a>Hızlı Başlangıç: Oluşturma ve Azure CLI kullanarak Azure dosya paylaşımlarını yönetme
+# <a name="quickstart-create-and-manage-azure-file-shares-using-azure-cli"></a>Hızlı Başlangıç: Azure CLı kullanarak Azure dosya paylaşımları oluşturma ve yönetme
 Bu kılavuzda, Azure CLI kullanarak [Azure dosya paylaşımları](storage-files-introduction.md) ile çalışmanın temel kuralları gösterilmektedir. Azure dosya paylaşımları diğer dosya paylaşımları gibidir, ancak bulutta depolanır ve Azure platformu tarafından desteklenir. Azure dosya paylaşımları endüstri standardı SMB protokolünü destekler ve birden çok makine, uygulama ve örnek arasında dosya paylaşmayı olanaklı kılar. 
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
@@ -45,7 +44,7 @@ az group create --name myResourceGroup --location eastus
 ## <a name="create-a-storage-account"></a>Depolama hesabı oluşturma
 Depolama hesabı, Azure dosya paylaşımlarını veya bloblar veya sorgular gibi diğer depolama kaynaklarını dağıtabileceğiniz, paylaşılan bir depolama havuzudur. Bir depolama hesabında sınırsız sayıda dosya paylaşımı olabilir. Bir paylaşım, depolama hesabının kapasite limitlerine kadar sınırsız sayıda dosyayı depolayabilir.
 
-Aşağıdaki örnekte, [az storage account create](/cli/azure/storage/account) komutu kullanılarak *mystorageaccount\<random number\>* adlı bir depolama hesabı oluşturulur ve bu depolama hesabının adı `$STORAGEACCT` değişkenine yerleştirilir. Depolama hesabı adları benzersiz olmalıdır; bu nedenle "mystorageacct" benzersiz bir ad ile değiştirdiğinizden emin olun.
+Aşağıdaki örnekte, [az storage account create](/cli/azure/storage/account) komutu kullanılarak *mystorageaccount\<random number\>* adlı bir depolama hesabı oluşturulur ve bu depolama hesabının adı `$STORAGEACCT` değişkenine yerleştirilir. Depolama hesabı adları benzersiz olmalıdır; bu nedenle "mystorageacct" öğesini benzersiz bir adla değiştirdiğinizden emin olun.
 
 ```azurecli-interactive 
 STORAGEACCT=$(az storage account create \
@@ -87,15 +86,15 @@ Bir dosya paylaşımını SMB ile bağlayabilmeniz için işletim sisteminize g�
 - [Windows](storage-how-to-use-files-windows.md)
 
 ### <a name="using-an-azure-file-share-with-the-file-rest-protocol"></a>Dosya REST protokolü ile bir Azure dosya paylaşımını kullanma 
-Olası çalışma (HTTP REST çağrılarını kendiniz handcrafting) doğrudan dosya REST protokolü ile doğrudan, ancak dosya REST protokolü kullanmak için en yaygın yolu Azure CLI aracını [Azure PowerShell Modülü](storage-how-to-use-files-powershell.md), veya bir Azure depolama SDK'sı , her biri kendi tercih ettiğiniz betik programlama dilinde dosya REST Protokolü çevresinde güzel bir sarmalayıcı sağlar.  
+Dosya REST protokolü doğrudan ile doğrudan çalışabilir (el ile REST HTTP çağrıları), ancak dosya REST protokolünü kullanmanın en yaygın yolu Azure CLı, [Azure PowerShell modülünü](storage-how-to-use-files-powershell.md)veya bir Azure depolama SDK 'sını, hepsi de seçtiğiniz komut dosyası/programlama dilinde Dosya REST Protokolü etrafında iyi bir sarmalayıcı.  
 
 Kullanabilmeyi umdukları mevcut uygulama ve araçlarını kullanmalarına izin vereceği için Azure Dosyaları kullanıcılarının çoğunluğunun Azure dosya paylaşımları ile SMP protokolü üzerinden çalışmasını bekliyoruz, ancak SMB yerine Dosya REST API'si kullanmanın aşağıdaki gibi bazı avantajları bulunmaktadır:
 
 - Dosya paylaşımınıza (SMB üzerinden dosya paylaşımı bağlayamayan) Azure Bash Cloud Shell'den göz atıyorsanız.
-- Engeli kaldırılmış 445 numaralı bağlantı noktası olmayan şirket içi istemcileri gibi bir SMB paylaşımına bağlayamayan bir istemciden bir betik veya uygulama yürütme gerekir.
+- 445 numaralı bağlantı noktasına sahip olmayan şirket içi istemciler gibi bir SMB paylaşımının takılamaz bir istemciden bir betiği veya uygulamayı yürütmeniz gerekir.
 - [Azure İşlevleri](../../azure-functions/functions-overview.md) gibi sunucusuz kaynaklardan yararlanıyorsanız. 
 
-Aşağıdaki örnekler Azure dosya paylaşımınıza dosya REST protokolü ile yönetmek için Azure CLI'yı kullanmayı gösterir. 
+Aşağıdaki örneklerde Azure CLı kullanarak Azure dosya paylaşımınızı Dosya REST protokolüyle nasıl işleyebileceğiniz gösterilmektedir. 
 
 ### <a name="create-a-directory"></a>Dizin oluşturma
 Azure dosya paylaşımınızın kökünde *myDirectory* adlı yeni bir dizin oluşturmak için [`az storage directory create`](/cli/azure/storage/directory) komutunu kullanın:
@@ -108,7 +107,7 @@ az storage directory create \
    --name "myDirectory" 
 ```
 
-### <a name="upload-a-file"></a>Dosyayı karşıya yükleme
+### <a name="upload-a-file"></a>Karşıya dosya yükle
 [`az storage file upload`](/cli/azure/storage/file) komutunu kullanarak bir dosyayı karşıya yükleme işlemini göstermek için öncelikle Cloud Shell karalama sürücüsünde karşıya yüklenecek bir dosya oluşturun. Aşağıdaki örnekte dosyayı oluşturup karşıya yüklersiniz:
 
 ```azurecli-interactive
@@ -135,7 +134,7 @@ az storage file list \
     --output table
 ```
 
-### <a name="download-a-file"></a>Dosya indirme
+### <a name="download-a-file"></a>Dosya indir
 Cloud Shell karalama sürücünüze yüklediğiniz dosyanın bir kopyasını indirmek için [`az storage file download`](/cli/azure/storage/file) komutunu kullanabilirsiniz:
 
 ```azurecli-interactive

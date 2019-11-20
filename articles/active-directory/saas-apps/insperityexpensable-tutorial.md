@@ -15,12 +15,12 @@ ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/25/2019
 ms.author: jeedes
-ms.openlocfilehash: dd0c35d23541512e1ed021a57526ac50f7a68e26
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 43b24bec557d1cc879be9568bea451f1a8b0b310
+ms.sourcegitcommit: c0419208061b2b5579f6e16f78d9d45513bb7bbc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67100139"
+ms.lasthandoff: 07/08/2019
+ms.locfileid: "67625313"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-insperity-expensable"></a>Öğretici: Azure Active Directory tümleştirmesiyle Insperity ExpensAble
 
@@ -108,7 +108,7 @@ Azure AD çoklu oturum açma Insperity ExpensAble ile yapılandırmak için aşa
     İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın:  `https://server.expensable.com/esapp/Authenticate?companyId=<company ID>`
 
     > [!NOTE]
-    > Değer, gerçek değil. Değerini gerçek oturum açma URL'si ile güncelleştirin. İlgili kişi [Insperity ExpensAble istemci Destek ekibine](http://expensable.com/support/support-overview) değeri alınamıyor. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Değer, gerçek değil. Değerini gerçek oturum açma URL'si ile güncelleştirin. İlgili kişi [Insperity ExpensAble istemci Destek ekibine](https://www.insperity.com/products/expense-management/support/express/) değeri alınamıyor. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
 
 5. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlanmış** sayfasında **SAML imzalama sertifikası** bölümünde **indirme** indirmek için **sertifika (Base64)** bilgisayarınızdaki belirli seçenekler ihtiyacınıza göre ve kaydedin.
 
@@ -126,7 +126,7 @@ Azure AD çoklu oturum açma Insperity ExpensAble ile yapılandırmak için aşa
 
 ### <a name="configure-insperity-expensable-single-sign-on"></a>Insperity ExpensAble çoklu oturum açmayı yapılandırın
 
-Çoklu oturum açmayı yapılandırma **Insperity ExpensAble** tarafı, indirilen göndermek için ihtiyacınız **sertifika (Base64)** ve uygun Azure portalına kopyalanan URL'lerden [Insperity ExpensAble Destek](http://expensable.com/support/support-overview). Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
+Çoklu oturum açmayı yapılandırma **Insperity ExpensAble** tarafı, indirilen göndermek için ihtiyacınız **sertifika (Base64)** ve uygun Azure portalına kopyalanan URL'lerden [Insperity ExpensAble Destek](https://www.insperity.com/products/expense-management/support/express/). Bunlar, her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın.
 
 ### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
 
@@ -181,7 +181,7 @@ Bu bölümde, Azure çoklu oturum açma Insperity ExpensAble için erişim verer
 
 ### <a name="create-insperity-expensable-test-user"></a>Insperity ExpensAble test kullanıcısı oluşturma
 
-Bu bölümde, Britta Simon Insperity ExpensAble adlı bir kullanıcı oluşturun. Çalışmak [Insperity ExpensAble Destek ekibine](http://expensable.com/support/support-overview) Insperity ExpensAble platform kullanıcıları eklemek için. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
+Bu bölümde, Britta Simon Insperity ExpensAble adlı bir kullanıcı oluşturun. Çalışmak [Insperity ExpensAble Destek ekibine](https://www.insperity.com/products/expense-management/support/express/) Insperity ExpensAble platform kullanıcıları eklemek için. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
 
 ### <a name="test-single-sign-on"></a>Çoklu oturum açma testi
 

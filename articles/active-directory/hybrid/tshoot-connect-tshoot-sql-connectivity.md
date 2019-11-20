@@ -1,6 +1,6 @@
 ---
 title: 'Azure AD Connect: SQL bağlantı sorunlarını giderme | Microsoft Docs'
-description: Azure AD Connect ile oluşan SQL bağlantı sorunlarını gidermek nasıl açıklar.
+description: Azure AD Connect oluşan SQL bağlantı sorunlarını nasıl giderebileceğinizi açıklar.
 services: active-directory
 documentationcenter: ''
 author: billmath
@@ -14,41 +14,41 @@ ms.date: 05/14/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: dea88951682c24d2a470d5bd7646722481e4db2f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: cde94dce13eeb7536f72fb0dcd937265960c7314
+ms.sourcegitcommit: adc1072b3858b84b2d6e4b639ee803b1dda5336a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60381397"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70842699"
 ---
-# <a name="troubleshoot-sql-connectivity-issues-with-azure-ad-connect"></a>Azure AD Connect ile SQL bağlantı sorunlarını giderme
-Bu makalede, Azure AD Connect ile SQL Server arasındaki bağlantı sorunlarını gidermek açıklanmaktadır. 
+# <a name="troubleshoot-sql-connectivity-issues-with-azure-ad-connect"></a>Azure AD Connect SQL bağlantı sorunlarını giderme
+Bu makalede Azure AD Connect ve SQL Server arasındaki bağlantı sorunlarının nasıl giderileceği açıklanmaktadır. 
 
-Aşağıdaki ekran görüntüsünde, SQL Server bulunamazsa tipik bir hata gösterir.
+Aşağıdaki ekran görüntüsünde, SQL Server bulunamazsa tipik bir hata gösterilir.
 
 ![SQL hatası](./media/tshoot-connect-tshoot-sql-connectivity/sql1.png)
 
 ## <a name="troubleshooting-steps"></a>Sorun giderme adımları
-Bir powershell penceresi açın ve ADSyncTools Powershell modülünü içeri aktarın
+Bir PowerShell penceresi açın ve ADSyncTools PowerShell modülünü Içeri aktarın
 
 ``` powershell
 Import-Module "C:\Program Files\Microsoft Azure Active Directory Connect\Tools\AdSyncTools.psm1" 
 ```
 
 >[!NOTE]
->Install-Module gerektirir güncelleştirme [PowerShell 5.0 (WMF 5.0)](https://www.microsoft.com/download/details.aspx?id=50395) veya üzeri;  
-Veya yükleme [PackageManagement PowerShell modülleri Önizleme - Mart 2016 için PowerShell 3.0/4.0](https://www.microsoft.com/download/details.aspx?id=51451) 
+>Install-Module, [PowerShell 5,0 (WMF 5,0)](https://www.microsoft.com/download/details.aspx?id=50395) veya üzeri için güncelleştirme gerektirir;  
+Ya da [PackageManagement PowerShell modülleri Için önizleme-PowerShell 3.0/4.0 Için mart 2016](/powershell/module/PackageManagement) 
 
-- **Tüm komutları göster**: `Get-Command -Module AdSyncTools` 
-- **Powershell işlevi yürütme**: `Connect-ADSyncDatabase` aşağıdaki parametrelere sahip
-    - Sunucu. SQL Server adı.
-    - örneği. (İsteğe bağlı) SQL Server örneği adı ve isteğe bağlı olarak kullanmak istediğiniz bağlantı noktası numarası. Varsayılan örneği kullanmak için bu parametreyi belirtmeyin.
-    - Kullanıcı adı. (İsteğe bağlı) Bağlanmak için kullanıcı hesabı. Boş bırakılırsa, şu anda oturum açmış kullanıcı kullanılacaktır. Bu Azure ADConnect SQL bağlantısı için oluşturduğunuz özel hizmet hesabı olmalıdır bir uzak SQL Server'a bağlanıyorsanız. Azure AD Connect için uzak bir SQL server kimlik doğrulaması için Azure AD Connect eşitleme hizmeti hesabının kullanır.
-    - Parola. (İsteğe bağlı) Sağlanan kullanıcı adının parolası.
+- **Tüm komutları göster**:`Get-Command -Module AdSyncTools` 
+- Aşağıdaki parametrelerle **PowerShell işlevini yürütün**: `Connect-ADSyncDatabase`
+    - Server. SQL Server adı.
+    - Instance. Seçim Kullanmak istediğiniz SQL Server örnek adı ve isteğe bağlı olarak bağlantı noktası numarası. Varsayılan örneği kullanmak için bu parametreyi belirtmeyin.
+    - Nitelen. Seçim Bağlanılacak Kullanıcı hesabı. Boş bırakılırsa, şu anda oturum açmış olan kullanıcının kullanılması gerekir. Uzak bir SQL Server bağlanıyorsanız, bu, Azure AD Connect SQL bağlantısı için oluşturduğunuz özel hizmet hesabı olmalıdır. Azure AD Connect, uzak bir SQL Server 'da kimlik doğrulamak için Azure AD Connect eşitleme hizmeti hesabını kullanır.
+    - Parolayı. Seçim Belirtilen Kullanıcı adı için parola.
 
-Bu powershell işlevi, belirtilen SQL Server ve örnek geçirilen kimlik bilgilerini kullanarak bağlanmaya veya geçerli kullanıcının kimlik bilgilerini kullanın. SQL Server betik etkin protokoller ve bağlantı noktalarını belirlemek için SQL Browser hizmetine bağlanmaya çalışır bulunamazsa.
+Bu PowerShell işlevi, geçirilen kimlik bilgilerini kullanarak belirtilen SQL Server ve örneğe bağlamayı dener veya geçerli kullanıcının kimlik bilgilerini kullanır. SQL Server bulunamıyorsa, komut dosyası, etkin protokolleri ve bağlantı noktalarını belirleyebilmek için SQL Browser hizmetine bağlanmaya çalışacaktır.
 
-Örnek: yalnızca bir sunucu adı kullanma
+Yalnızca bir sunucu adını kullanan örnek:
 ```
 PS C:\Program Files\Microsoft Azure Active Directory Connect\Tools> import-module .\AdSyncTools.psm1
 
@@ -85,7 +85,7 @@ Container                        :
 PS C:\Program Files\Microsoft Azure Active Directory Connect\Tools> 
 ```
 
-Örnek: mevcut olmayan bir örneği ve bağlantı noktası numarası kullanarak
+Mevcut olmayan bir örnek ve bağlantı noktası numarası kullanan örnek:
 
 ```
 PS C:\Program Files\Microsoft Azure Active Directory Connect\tools> Connect-AdSyncDatabase -Server SQL1 -Instance "INSTANCE1"

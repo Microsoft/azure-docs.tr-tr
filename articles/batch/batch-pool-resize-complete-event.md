@@ -1,54 +1,57 @@
 ---
-title: Azure Batch havuzu yeniden boyutlandırma tamamlama olayı | Microsoft Docs
-description: Batch havuzu başvurusunu yeniden boyutlandırma tamamlama olayı.
+title: Azure Batch havuzu yeniden boyutlandırma Tamam olayı | Microsoft Docs
+description: Batch havuzu yeniden boyutlandırma için başvuru Tamam olayı.
 services: batch
 author: laurenhughes
-manager: jeconnoc
+manager: gwallace
 ms.assetid: ''
 ms.service: batch
-ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: ''
 ms.workload: big-compute
 ms.date: 04/20/2017
 ms.author: lahugh
-ms.openlocfilehash: 87c98b89a49adbad88841dccbd4ba47d370b2be7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8c0843db216ff99aabfda9074ee751597b43a2a2
+ms.sourcegitcommit: 267a9f62af9795698e1958a038feb7ff79e77909
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60776431"
+ms.lasthandoff: 09/04/2019
+ms.locfileid: "70258398"
 ---
 # <a name="pool-resize-complete-event"></a>Havuz yeniden boyutlandırma tamamlama olayı
 
- Havuz yeniden boyutlandırma tamamlandıysa veya başarısız olduğunda bu olay yayılır.
+ Bu olay, bir havuz yeniden boyutlandırılması tamamlandığında veya başarısız olduğunda yayınlanır.
 
- Aşağıdaki örnek boyutu artar ve başarıyla tamamlanmış bir havuzu için havuz yeniden boyutlandırma tamamlama olayı gövdesi gösterir.
+ Aşağıdaki örnek, boyutu arttığı ve başarıyla tamamlanan bir havuz için havuz yeniden boyutlandırma tamamlandı olayının gövdesini gösterir.
 
 ```
 {
-    "id": "p_1_0_01503750-252d-4e57-bd96-d6aa05601ad8",
+    "id": "myPool",
     "nodeDeallocationOption": "invalid",
-    "currentDedicated": 4,
-    "targetDedicated": 4,
+        "currentDedicatedNodes": 10,
+        "targetDedicatedNodes": 10,
+    "currentLowPriorityNodes": 5,
+        "targetLowPriorityNodes": 5,
     "enableAutoScale": false,
     "isAutoPool": false,
     "startTime": "2016-09-09T22:13:06.573Z",
     "endTime": "2016-09-09T22:14:01.727Z",
-    "result": "Success",
-    "resizeError": "The operation succeeded"
+    "resultCode": "Success",
+    "resultMessage": "The operation succeeded"
 }
 ```
 
-|Öğe|Tür|Notlar|
+|Öğe|Type|Notlar|
 |-------------|----------|-----------|
-|id|String|Havuz kimliği.|
-|nodeDeallocationOption|String|Havuz boyutu azalıyorsa ne zaman düğüm havuzdan kaldırılabilir belirtir.<br /><br /> Olası değerler şunlardır:<br /><br /> **yeniden kuyruğa alma** – çalışan görevleri sonlandırın ve yeniden kuyruğa ekleyin. İş etkinleştirildiğinde görevler yeniden çalıştırılır. Görevleri sonlandırıldı hemen sonra düğümleri kaldırma.<br /><br /> **sonlandırma** – çalışan görevleri sonlandır. Görevleri yeniden çalışmaz. Görevleri sonlandırıldı hemen sonra düğümleri kaldırma.<br /><br /> **net_offline_option** – tamamlanması şu anda çalışan görevlerin izin ver. Hiç yeni görev beklenirken zamanlayın. Tüm görevler tamamlandığında düğümleri kaldırma.<br /><br /> **Retaineddata** -izin şu anda çalışan görevlerin tamamlayın ve ardından tüm veri tutma sürelerinin sona görev için bekleyin. Hiç yeni görev beklenirken zamanlayın. Tüm görev bekletme süreleri dolmuş olduğunda düğümleri kaldırma.<br /><br /> Yeniden kuyruğa alma varsayılan değerdir.<br /><br /> Havuz boyutunu artırma sonra değeri şuna ayarlı **geçersiz**.|
-|currentDedicated|Int32|Havuza atanmış işlem düğümleri sayısı.|
-|targetDedicated|Int32|Havuz için istenen işlem düğümleri sayısı.|
-|enableAutoScale|Bool|Havuz boyutunu otomatik olarak zaman içinde ayarlar olup olmadığını belirtir.|
-|isAutoPool|Bool|Havuza bir işin AutoPool mekanizması oluşturulup oluşturulmadığını belirtir.|
-|startTime|DateTime|Havuz yeniden boyutlandırma zaman başlatıldı.|
-|endTime|DateTime|Tamamlanan havuz yeniden boyutlandırma zaman.|
-|ResultCode|String|Yeniden boyutlandırma sonucu.|
-|Sonuç iletisi|String|Yeniden boyutlandırma hatası sonucunun ayrıntılarını içerir.<br /><br /> Yeniden boyutlandırma başarıyla tamamlandı, işlemin başarılı olduğunu belirtir.|
+|`id`|Dize|Havuzun KIMLIĞI.|
+|`nodeDeallocationOption`|Dize|Havuz boyutu azaltılmışsa, havuzdan düğümlerin ne zaman kaldırılabileceği belirtir.<br /><br /> Olası değerler şunlardır:<br /><br /> **yeniden kuyruğa alma** – çalışan görevleri sonlandırır ve yeniden kuyruğa alma onları sonlandırın. Görevler, iş etkinleştirildiğinde yeniden çalışacaktır. Görevler sonlandırıldıktan hemen sonra düğümleri kaldırın.<br /><br /> **Sonlandır** – çalışan görevleri sonlandırın. Görevler yeniden çalıştırılmaz. Görevler sonlandırıldıktan hemen sonra düğümleri kaldırın.<br /><br /> **taskcompletion** : Şu anda çalışan görevlerin tamamlanmasına izin verin. Beklerken yeni görev zamanlayın. Tüm görevler tamamlandığında düğümleri kaldırın.<br /><br /> **Retaineddata** -çalışmakta olan görevlerin tamamlanmasına izin verin, ardından tüm görev verilerini bekletme dönemlerinin süre sonu için bekleyin. Beklerken yeni görev zamanlayın. Tüm görev bekletme dönemlerinin süresi dolduğunda düğümleri kaldırın.<br /><br /> Varsayılan değer yeniden kuyruğa alma ' dir.<br /><br /> Havuz boyutu artarak değer **geçersiz**olarak ayarlanır.|
+|`currentDedicatedNodes`|Int32|Havuza atanmış olan ayrılmış işlem düğümlerinin sayısı.|
+|`targetDedicatedNodes`|Int32|Havuz için istenen ayrılmış işlem düğümlerinin sayısı.|
+|`currentLowPriorityNodes`|Int32|Havuza atanmış olan düşük öncelikli işlem düğümlerinin sayısı.|
+|`targetLowPriorityNodes`|Int32|Havuz için istenen düşük öncelikli işlem düğümlerinin sayısı.|
+|`enableAutoScale`|Bool|Havuz boyutunun zaman içinde otomatik olarak görüntülenip görüntülenmeyeceğini belirtir.|
+|`isAutoPool`|Bool|Havuzun bir işin oto havuzu mekanizması aracılığıyla oluşturulup oluşturulmayacağını belirtir.|
+|`startTime`|DateTime|Havuz yeniden boyutlandırmanın başladığı zaman.|
+|`endTime`|DateTime|Havuzun yeniden boyutlandırılması zamanı tamamlandı.|
+|`resultCode`|Dize|Yeniden boyutlandırmanın sonucu.|
+|`resultMessage`|Dize| Sonuç hakkında ayrıntılı bir ileti.<br /><br /> Yeniden boyutlandırma başarıyla tamamlanırsa işlemin başarılı olduğunu bildirir.|

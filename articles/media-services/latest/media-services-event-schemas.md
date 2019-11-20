@@ -537,8 +537,8 @@ Veri nesnesi, aşağıdaki özelliklere sahiptir:
 | typeOfTrackWithMinLastTimestamp | string | En düşük son zaman damgası ile izleme (ses veya video) türü. |
 | maxLastTimestamp | string | Tüm parçaları (ses veya video) arasında tüm zaman damgaları en fazla. |
 | typeOfTrackWithMaxLastTimestamp | string | En son zaman damgası ile izleme (ses veya video) türü. |
-| TimescaleOfMinLastTimestamp| string | "MinLastTimestamp" temsil edilen bir zaman ölçeğine göre alır.|
-| TimescaleOfMaxLastTimestamp| string | "MaxLastTimestamp" temsil edilen bir zaman ölçeğine göre alır.|
+| timescaleOfMinLastTimestamp| string | "MinLastTimestamp" temsil edilen bir zaman ölçeğine göre alır.|
+| timescaleOfMaxLastTimestamp| string | "MaxLastTimestamp" temsil edilen bir zaman ölçeğine göre alır.|
 
 ### <a name="liveeventincomingvideostreamsoutofsync"></a>LiveEventIncomingVideoStreamsOutOfSync
 

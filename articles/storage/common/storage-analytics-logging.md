@@ -1,67 +1,68 @@
 ---
-title: Azure depolama analizi günlük kaydı
-description: Azure depolama karşı yapılan isteklerin ayrıntılarını günlüğe kaydetme hakkında bilgi edinin.
-services: storage
+title: Günlüğe kaydetme Azure Depolama Analizi
+description: Azure depolama 'ya karşı yapılan isteklerle ilgili ayrıntıları günlüğe kaydetme hakkında bilgi edinin.
 author: normesta
 ms.service: storage
-ms.topic: article
+ms.subservice: common
+ms.topic: conceptual
 ms.date: 03/11/2019
 ms.author: normesta
 ms.reviewer: fryu
-ms.subservice: common
-ms.openlocfilehash: a77cf20be30361abf6590dbd53bdb07c327eb9d8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3b61e8680ef2484b1ad42837711adef171fdde25
+ms.sourcegitcommit: 7efb2a638153c22c93a5053c3c6db8b15d072949
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65204984"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72882631"
 ---
-# <a name="azure-storage-analytics-logging"></a>Azure depolama analizi günlük kaydı
+# <a name="azure-storage-analytics-logging"></a>Azure depolama Analizi günlüğü
 
-Depolama analizi, başarılı ve başarısız istekler hakkında ayrıntılı bilgi için bir depolama hizmetine kaydeder. Bu bilgiler, tek tek istekleri izlemek için ve bir depolama hizmeti ile ilgili sorunları tanılamak için kullanılabilir. Bir en iyi çaba ilkesine göre istekleri günlüğe kaydedilir.
+Depolama Analizi, başarılı ve başarısız isteklerle ilgili ayrıntılı bilgileri bir depolama hizmetine kaydeder. Bu bilgiler, bireysel istekleri izlemek ve bir depolama hizmetiyle ilgili sorunları tanılamak için kullanılabilir. İstekler en iyi çaba temelinde günlüğe kaydedilir.
 
- Depolama analizi günlük depolama hesabınız için varsayılan olarak etkin değildir. İçinde etkinleştirebilirsiniz [Azure portalında](https://portal.azure.com/); Ayrıntılar için bkz: [Azure portalında depolama hesabı izleme](/azure/storage/storage-monitor-storage-account). Depolama analizi REST API veya istemci kitaplığı aracılığıyla programlı olarak da etkinleştirebilirsiniz. Kullanım [Blob hizmeti özelliklerini almak](https://docs.microsoft.com/rest/api/storageservices/Blob-Service-REST-API), [kuyruk hizmeti özelliklerini almak](https://docs.microsoft.com/rest/api/storageservices/Get-Queue-Service-Properties), ve [tablo hizmeti özelliklerini almak](https://docs.microsoft.com/rest/api/storageservices/Get-Table-Service-Properties) her hizmet için depolama analizi etkinleştirme işlemleri.
+ Depolama Analizi günlüğü, depolama hesabınız için varsayılan olarak etkinleştirilmemiştir. Bunu [Azure Portal](https://portal.azure.com/)etkinleştirebilirsiniz; Ayrıntılar için bkz. [Azure Portal bir depolama hesabını izleme](/azure/storage/storage-monitor-storage-account). Ayrıca, REST API veya istemci kitaplığı aracılığıyla Depolama Analizi programlı bir şekilde etkinleştirebilirsiniz. Her hizmet için Depolama Analizi etkinleştirmek üzere [BLOB hizmeti özelliklerini al](https://docs.microsoft.com/rest/api/storageservices/Blob-Service-REST-API), [kuyruk hizmeti özelliklerini al](https://docs.microsoft.com/rest/api/storageservices/Get-Queue-Service-Properties)ve [Tablo hizmeti özelliklerini](https://docs.microsoft.com/rest/api/storageservices/Get-Table-Service-Properties) Al işlemlerini kullanın.
 
- Hizmet uç noktasına karşı yapılan istekler varsa, günlük girişi oluşturulur. Örneğin, Blob hizmetine ilişkin günlükleri bir depolama hesabı, Blob uç noktası ancak kendi tablo veya kuyruk uç etkinliği varsa oluşturulur.
+ Günlük girişleri yalnızca hizmet uç noktasında yapılan istekler varsa oluşturulur. Örneğin, bir depolama hesabının kendi BLOB uç noktasında etkinliği varsa ancak tablo veya sıra uç noktalarında etkinlik varsa, yalnızca blob hizmetiyle ilgili günlükler oluşturulur.
 
 > [!NOTE]
->  Depolama analizi günlük kaydı şu anda yalnızca Blob, kuyruk ve tablo hizmetler için kullanılabilir. Ancak, premium depolama hesabı desteklenmiyor.
+>  Depolama Analizi günlüğe kaydetme şu anda yalnızca blob, kuyruk ve tablo Hizmetleri için kullanılabilir. Ancak, Premium depolama hesabı desteklenmez.
 
-## <a name="requests-logged-in-logging"></a>İstekleri oturum açanlar
-### <a name="logging-authenticated-requests"></a>Kimlik doğrulaması günlüğe kaydetme istekleri
+[!INCLUDE [storage-multi-protocol-access-preview](../../../includes/storage-multi-protocol-access-preview.md)]
 
- Aşağıdaki türde kimliği doğrulanmış istekler kaydedilir:
+## <a name="requests-logged-in-logging"></a>Günlüğe kaydedilen istekler
+### <a name="logging-authenticated-requests"></a>Kimliği doğrulanmış istekleri günlüğe kaydetme
+
+ Aşağıdaki kimlik doğrulamalı istek türleri günlüğe kaydedilir:
 
 - Başarılı istekler
-- Başarısız istek, zaman aşımı, azaltma, ağ, yetkilendirme ve başka hatalar da dahil olmak üzere
-- Paylaşılan erişim imzası (SAS) veya başarılı ve başarısız istekleri dahil olmak üzere, OAuth kullanarak istekleri
-- Analiz veri istekleri
+- Zaman aşımı, azaltma, ağ, yetkilendirme ve diğer hatalar da dahil olmak üzere başarısız istekler
+- Başarısız ve başarılı istekler dahil, paylaşılan erişim Imzası (SAS) veya OAuth kullanan istekler
+- Analiz verilerine yönelik istekler
 
-  Depolama analizi kendisini günlük oluşturma veya silme gibi tarafından yapılan istekleri günlüğe kaydedilmez. Günlüğe kaydedilen verilerin tam bir listesi belgelenen [depolama analizi günlüğe yazılan işlemler ve durum iletileri](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages) ve [depolama analizi günlük biçimi](/rest/api/storageservices/storage-analytics-log-format) konuları.
+  Günlük oluşturma veya silme gibi Depolama Analizi kendisi tarafından yapılan istekler günlüğe kaydedilmez. Günlüğe kaydedilen verilerin tam listesi, [depolama Analizi günlüğe kaydedilmiş işlemler ve durum iletileri](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages) ve [depolama Analizi günlük biçimi](/rest/api/storageservices/storage-analytics-log-format) konularında belgelenmiştir.
 
-### <a name="logging-anonymous-requests"></a>Anonim istekler günlüğe kaydetme
+### <a name="logging-anonymous-requests"></a>Anonim istekleri günlüğe kaydetme
 
- Aşağıdaki türde anonim istekler kaydedilir:
+ Aşağıdaki anonim istek türleri günlüğe kaydedilir:
 
 - Başarılı istekler
 - Sunucu hataları
-- İstemci ve sunucu zaman aşımı hataları
-- 304 (değiştirilmedi) hata koduyla başarısız GET istekleri
+- İstemci ve sunucu için zaman aşımı hataları
+- 304 hata koduyla başarısız olan istek ALıNAMADı (değiştirilmedi)
 
-  Diğer tüm başarısız anonim istekler günlüğe kaydedilmez. Günlüğe kaydedilen verilerin tam bir listesi belgelenen [depolama analizi günlüğe yazılan işlemler ve durum iletileri](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages) ve [depolama analizi günlük biçimi](/rest/api/storageservices/storage-analytics-log-format) konuları.
+  Diğer tüm başarısız anonim istekler günlüğe kaydedilmez. Günlüğe kaydedilen verilerin tam listesi, [depolama Analizi günlüğe kaydedilmiş işlemler ve durum iletileri](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages) ve [depolama Analizi günlük biçimi](/rest/api/storageservices/storage-analytics-log-format) konularında belgelenmiştir.
 
-## <a name="how-logs-are-stored"></a>Günlükler nasıl depolanır
+## <a name="how-logs-are-stored"></a>Günlüklerin nasıl depolandığı
 
-Tüm günlükler adlı bir kapsayıcıda blok bloblarını depolanır `$logs`, otomatik olarak oluşturulan depolama hesabı için depolama analizi etkin olduğunda. `$logs` Kapsayıcı bulunduğu depolama hesabının blob ad alanı örnek: `http://<accountname>.blob.core.windows.net/$logs`. Depolama analizi etkinleştirildikten sonra bu kapsayıcı içeriğini silinebilir silinemiyor. Bir kapsayıcıya doğrudan gitmek için depolama tarama aracı kullanırsanız, günlük verilerinizi içeren tüm blobları görürsünüz.
+Tüm Günlükler, bir depolama hesabı için Depolama Analizi etkinleştirildiğinde otomatik olarak oluşturulan `$logs`adlı kapsayıcıda Blok Bloblarında depolanır. `$logs` kapsayıcı, depolama hesabının blob ad alanında bulunur, örneğin: `http://<accountname>.blob.core.windows.net/$logs`. Depolama Analizi etkinleştirildikten sonra içerikleri silinebilse de bu kapsayıcı silinemez. Doğrudan kapsayıcıya gitmek için depolama tarama aracınızı kullanıyorsanız, günlüğe kaydetme verilerinizi içeren tüm Blobları görürsünüz.
 
 > [!NOTE]
->  `$logs` Kapsayıcı listesi kapsayıcıları işlemi gibi bir kapsayıcı listeleme işlemi gerçekleştirildiğinde görüntülenmez. Doğrudan erişilmelidir. Örneğin, BLOB'ları erişmeye Blobları listeleme işlemi kullanabilirsiniz `$logs` kapsayıcı.
+>  `$logs` kapsayıcı, liste kapsayıcıları işlemi gibi bir kapsayıcı listeleme işlemi gerçekleştirildiğinde görüntülenmez. Doğrudan erişilmesi gerekir. Örneğin, `$logs` kapsayıcısındaki bloblara erişmek için Blobları Listele işlemini kullanabilirsiniz.
 
-Depolama analizi istekleri günlüğe gibi ara sonuçlar bloklar olarak yükleyeceksiniz. Düzenli olarak, depolama analizi bu blokları işleme ve bir blob olarak kullanılmasını. Günlük verilerine, BLOB'ları görünmesi bir saate kadar sürebilir **$logs** kapsayıcı için depolama hizmeti günlük yazıcılar aktarır sıklığı. Yinelenen kayıtları aynı saat içinde oluşturulan günlükler için mevcut olmayabilir. Bir kayıt yinelenen olup olmadığını kontrol ederek belirleyebilirsiniz **RequestId** ve **işlemi** sayı.
+İstekler günlüğe kaydedildiğinde Depolama Analizi, ara sonuçları bloklar olarak karşıya yükler. Düzenli aralıklarla, Depolama Analizi bu blokları yapar ve bunları bir blob olarak kullanılabilir hale getirir. Depolama hizmetinin günlük yazıcılarını boşaltdığı sıklık nedeniyle, günlük verilerinin **$logs** kapsayıcısındaki bloblarda görünmesi bir saate kadar sürebilir. Aynı saat içinde oluşturulan Günlükler için yinelenen kayıtlar var olabilir. **RequestId** ve **işlem** numarasını denetleyerek bir kaydın yinelenen olup olmadığını belirleyebilirsiniz.
 
-Her saat için birden çok dosya ile günlük veri hacmi yüksek varsa, günlük blob meta veri alanları inceleyerek içerdiği verileri belirlemek için blob meta verilerini kullanabilirsiniz. Bazen olabileceğinden bir gecikme veriler günlük dosyalarına yazılır olsa da kullanışlıdır: blob adı yerine daha doğru bir göstergesi blob içeriğinin blob meta verilerini sağlar.
+Her saat için birden çok dosya içeren yüksek miktarda günlük veriniz varsa, blob meta verileri alanlarını inceleyerek günlüğün hangi verileri içerdiğini belirlemek için blob meta verilerini kullanabilirsiniz. Bu Ayrıca, veriler günlük dosyalarına yazılırken bir gecikme olabileceğinden da yararlıdır: blob meta verileri, Blob içeriğinin blob adından daha doğru bir şekilde göstergesidir.
 
-Çoğu depolama gözatma araçları BLOB meta verilerini görüntülemek etkinleştirme; Ayrıca, PowerShell kullanarak bu bilgileri okuyabilirsiniz veya programlama yoluyla. Aşağıdaki PowerShell kod parçacığı bir zaman belirtmek için adı ve meta verileri içeren yalnızca günlükler tanımlamak için günlük BLOB listesini filtreleme ilişkin bir örnektir **yazma** operations.  
+Çoğu depolama gözatma araçları, Blobların meta verilerini görüntülemenizi sağlar; Ayrıca, bu bilgileri PowerShell veya programlı olarak kullanarak da okuyabilirsiniz. Aşağıdaki PowerShell kod parçacığı, bir zaman belirtmek için günlük bloblarının listesini ada göre filtreleme ve yalnızca **yazma** işlemleri içeren günlükleri tanımlamak için meta veriler ile ilgili bir örnektir.  
 
  ```powershell
  Get-AzureStorageBlob -Container '$logs' |  
@@ -77,89 +78,89 @@ Her saat için birden çok dosya ile günlük veri hacmi yüksek varsa, günlük
  }  
  ```  
 
-Blobları program aracılığıyla listeleme hakkında daha fazla bilgi için bkz: [Blob kaynaklarını numaralandırma](https://msdn.microsoft.com/library/azure/hh452233.aspx) ve [ayarlama ve alma özellikleri ve meta verileri Blob kaynakları için](https://msdn.microsoft.com/library/azure/dd179404.aspx).  
+Blob 'ları program aracılığıyla listeleme hakkında bilgi için bkz. blob [kaynaklarını numaralandırma](https://msdn.microsoft.com/library/azure/hh452233.aspx) ve [BLOB kaynakları Için özellikleri ve meta verileri ayarlama ve alma](https://msdn.microsoft.com/library/azure/dd179404.aspx).  
 
 ### <a name="log-naming-conventions"></a>Günlük adlandırma kuralları
 
- Şu biçimde her bir günlüğe yazılır:
+ Her günlük aşağıdaki biçimde yazılır:
 
  `<service-name>/YYYY/MM/DD/hhmm/<counter>.log`
 
- Aşağıdaki tabloda günlük adı içindeki her bir öznitelik açıklanmaktadır:
+ Aşağıdaki tabloda, günlük adındaki her bir öznitelik açıklanmaktadır:
 
 |Öznitelik|Açıklama|
 |---------------|-----------------|
-|`<service-name>`|Depolama hizmeti adı. Örneğin: `blob`, `table`, veya `queue`|
-|`YYYY`|Günlüğü için dört basamaklı yıl. Örneğin, `2011`|
-|`MM`|İki haneli ay günlüğü için. Örneğin, `07`|
-|`DD`|İki basamaklı gün için günlük. Örneğin, `31`|
-|`hh`|Günlükler için başlangıç saati gösteren iki basamaklı saat, 24 saati UTC biçiminde. Örneğin, `18`|
-|`mm`|Günlükleri başlangıç dakika gösteren iki basamaklı bir sayı. **Not:**  Bu değer, depolama analizi geçerli sürümde desteklenmiyor ve değeri her zaman olacaktır `00`.|
-|`<counter>`|Altı basamaklı bir saat içinde süre depolama hizmeti için oluşturulan günlük bloblarını sayısını gösteren sıfır tabanlı bir sayacı. Bu sayaç başlar `000000`. Örneğin, `000001`|
+|`<service-name>`|Depolama hizmetinin adı. Örneğin: `blob`, `table`veya `queue`|
+|`YYYY`|Günlük için dört basamaklı yıl. Örneğin, `2011`|
+|`MM`|Günlüğün iki basamaklı ayı. Örneğin, `07`|
+|`DD`|Günlüğün iki basamaklı günü. Örneğin, `31`|
+|`hh`|24 saat UTC biçiminde Günlükler için başlangıç saatini gösteren iki basamaklı saat. Örneğin, `18`|
+|`mm`|Günlükler için başlangıç dakikasını gösteren iki basamaklı sayı. **Note:**  Bu değer, geçerli Depolama Analizi sürümünde desteklenmez ve değeri her zaman `00`olur.|
+|`<counter>`|Bir saatlik zaman diliminde depolama hizmeti için oluşturulan günlük bloblarının sayısını belirten altı basamaklı sıfır tabanlı bir sayaç. Bu sayaç `000000`başlar. Örneğin, `000001`|
 
- Yukarıdaki örneklerde birleştiren bir tam örnek günlük adı verilmiştir:
+ Aşağıda, Yukarıdaki örnekleri birleştiren bir örnek günlük adı verilmiştir:
 
  `blob/2011/07/31/1800/000001.log`
 
- Yukarıdaki günlük erişmek için kullanılan URI bir örnek verilmiştir:
+ Aşağıda, yukarıdaki günlüğe erişmek için kullanılabilecek bir örnek URI verilmiştir:
 
  `https://<accountname>.blob.core.windows.net/$logs/blob/2011/07/31/1800/000001.log`
 
- Depolama isteği günlüğe kaydedildiğinde, sonuçta elde edilen günlük adı istenen işlem tamamlandığında bir saate ilişkilendirir. Örneğin, günlük 6:30 PM 31/7/2011'adresindeki GetBlob isteği tamamlanmışsa, aşağıdaki ön ekine sahip yazılacak: `blob/2011/07/31/1800/`
+ Bir depolama isteği günlüğe kaydedildiğinde, sonuçta elde edilen günlük adı, istenen işlem tamamlandığında saat ile ilişkili olur. Örneğin, 7/31/2011 tarihinde bir GetBlob isteği tamamlanırsa, günlük şu önekle yazılır: `blob/2011/07/31/1800/`
 
-### <a name="log-metadata"></a>Log meta verileri
+### <a name="log-metadata"></a>Günlük meta verileri
 
- Tüm günlük bloblarını blob içerdiği günlük verileri tanımlamak için kullanılan meta verileriyle depolanır. Aşağıdaki tabloda, her meta veri özniteliği açıklanmaktadır:
+ Tüm günlük Blobları, blob 'un içerdiği günlüğe kaydetme verilerini belirlemek için kullanılabilecek meta verilerle depolanır. Aşağıdaki tabloda her meta veri özniteliği açıklanmaktadır:
 
 |Öznitelik|Açıklama|
 |---------------|-----------------|
-|`LogType`|Günlük Okuma, yazma veya silme işlemleri için ilgili bilgileri içerip içermediğini açıklar. Bu değer, bir tür veya üçünü virgülle ayrılmış bir birleşimini içerebilir.<br /><br /> Örnek 1: `write`<br /><br /> Örnek 2: `read,write`<br /><br /> Örnek 3: `read,write,delete`|
-|`StartTime`|En erken zamanı biçiminde günlüğündeki bir girişi `YYYY-MM-DDThh:mm:ssZ`. Örneğin, `2011-07-31T18:21:46Z`|
-|`EndTime`|En son saati biçiminde günlüğündeki bir girişi `YYYY-MM-DDThh:mm:ssZ`. Örneğin, `2011-07-31T18:22:09Z`|
-|`LogVersion`|Günlük biçimi sürümü.|
+|`LogType`|Günlük okuma, yazma veya silme işlemleriyle ilgili bilgiler içerip içermediğini açıklar. Bu değer, virgülle ayrılmış olarak bir tür ya da üç tane birleşimi içerebilir.<br /><br /> Örnek 1: `write`<br /><br /> Örnek 2: `read,write`<br /><br /> Örnek 3: `read,write,delete`|
+|`StartTime`|Günlükteki bir girdinin en erken zamanı, `YYYY-MM-DDThh:mm:ssZ`biçiminde. Örneğin, `2011-07-31T18:21:46Z`|
+|`EndTime`|Günlükteki bir girdinin en son saati, `YYYY-MM-DDThh:mm:ssZ`biçiminde. Örneğin, `2011-07-31T18:22:09Z`|
+|`LogVersion`|Günlük biçiminin sürümü.|
 
- Aşağıdaki listede, Yukarıdaki örneklerde kullanarak tam bir örnek meta veri görüntüler:
+ Aşağıdaki liste Yukarıdaki örnekleri kullanarak tüm örnek meta verileri görüntüler:
 
 -   `LogType=write`
 -   `StartTime=2011-07-31T18:21:46Z`
 -   `EndTime=2011-07-31T18:22:09Z`
 -   `LogVersion=1.0`
 
-## <a name="enable-storage-logging"></a>Depolama günlük kaydını etkinleştirme
+## <a name="enable-storage-logging"></a>Depolama günlük kaydını etkinleştir
 
-Azure portalı, PowerShell ve depolama SDK'ları ile depolama günlük kaydını etkinleştirebilirsiniz.
+Azure portal, PowerShell ve depolama SDK 'Ları ile depolama günlük kaydını etkinleştirebilirsiniz.
 
-### <a name="enable-storage-logging-using-the-azure-portal"></a>Azure portalını kullanarak depolama günlük kaydını etkinleştirme  
+### <a name="enable-storage-logging-using-the-azure-portal"></a>Azure portal kullanarak depolama günlüğünü etkinleştirme  
 
-Azure Portalı'nda **tanılama ayarları (Klasik)** dikey penceresine denetim depolama günlüğü, erişilebilir **izleme (Klasik)** bir depolama hesabının bölümünü **menü dikey penceresi** .
+Azure portal, depolama hesabının **menü dikey**penceresinin **izleme (klasik)** bölümünde erişilebilen depolama günlüğünü denetlemek için **Tanılama ayarları (klasik)** dikey penceresini kullanın.
 
-Günlüğe kaydetmek istediğiniz depolama hizmetleri ve günlüğe kaydedilen verileri saklama süresini (gün cinsinden) belirtebilirsiniz.  
+Günlüğe kaydetmek istediğiniz depolama hizmetlerini ve günlüğe kaydedilen veriler için bekletme süresini (gün cinsinden) belirtebilirsiniz.  
 
-### <a name="enable-storage-logging-using-powershell"></a>PowerShell kullanarak depolama günlük kaydını etkinleştirme  
+### <a name="enable-storage-logging-using-powershell"></a>PowerShell kullanarak depolama günlüğünü etkinleştirme  
 
- Depolama günlüğü, depolama hesabınızdaki Azure PowerShell cmdlet'ini kullanarak yapılandırmak için yerel makinenizde PowerShell'i kullanabilirsiniz **Get-AzureStorageServiceLoggingProperty** cmdlet'ivegeçerliayarlarıalmakiçin **Set-AzureStorageServiceLoggingProperty** geçerli ayarları değiştirmek için.  
+ Geçerli ayarları ve cmdlet **'ı almak Için Get-AzureStorageServiceLoggingProperty cmdlet 'ini kullanarak depolama hesabınızda depolama günlüğü yapılandırmak Için yerel makinenizde PowerShell kullanabilirsiniz Azure PowerShell.** Geçerli ayarları değiştirmek için-AzureStorageServiceLoggingProperty ayarlayın.  
 
- Depolama günlük kaydı denetimi cmdlet'lerini bir **LoggingOperations** oturum için istek türleri virgülle ayrılmış listesini içeren bir dize parametresi. Üç olası istek türleri **okuma**, **yazma**, ve **Sil**. Günlüğe kaydetmeyi geçiş yapmak için değerini kullanın. **hiçbiri** için **LoggingOperations** parametresi.  
+ Depolama günlüğünü denetleyen cmdlet 'ler, günlüğe kaydedilecek istek türleri için virgülle ayrılmış bir liste içeren bir **Loggingoperations** parametresi kullanır. Olası üç istek türü **okuma**, **yazma**ve **silme**. Günlüğe kaydetmeyi devre dışı bırakmak için, **Loggingoperations** parametresi için **none** değerini kullanın.  
 
- Günlüğünü okuma için aşağıdaki komutu geçer, yazma ve saklama süresi beş gün olarak ayarlanmış varsayılan depolama hesabınızdaki kuyruk hizmeti isteklerinde Sil:  
+ Aşağıdaki komut, bekletme için beş güne ayarlanmış varsayılan depolama hesabınızdaki Kuyruk hizmeti okuma, yazma ve silme istekleri için günlüğe kaydetme yapar:  
 
 ```powershell
 Set-AzureStorageServiceLoggingProperty -ServiceType Queue -LoggingOperations read,write,delete -RetentionDays 5  
 ```  
 
- Aşağıdaki komut, tablo hizmeti, varsayılan depolama hesabı için günlük kaydını devre dışı geçer:  
+ Aşağıdaki komut, varsayılan depolama hesabınızda tablo hizmeti için günlüğe kaydetmeyi kapatır:  
 
 ```powershell
 Set-AzureStorageServiceLoggingProperty -ServiceType Table -LoggingOperations none  
 ```  
 
- Azure PowerShell cmdlet'lerini, Azure aboneliğiniz ile çalışmak için yapılandırma ve kullanılacak varsayılan depolama hesabı seçme hakkında daha fazla bilgi için bkz: [Azure PowerShell'i yükleme ve yapılandırma işlemini](https://azure.microsoft.com/documentation/articles/install-configure-powershell/).  
+ Azure PowerShell cmdlet 'lerinin Azure aboneliğinizle çalışacak şekilde nasıl yapılandırılacağı ve kullanılacak varsayılan depolama hesabını nasıl seçeceksiniz hakkında bilgi için bkz.: [Azure PowerShell nasıl yüklenir ve yapılandırılır](https://azure.microsoft.com/documentation/articles/install-configure-powershell/).  
 
-### <a name="enable-storage-logging-programmatically"></a>Depolamayı programlı olarak günlüğü etkinleştir  
+### <a name="enable-storage-logging-programmatically"></a>Depolama günlüğünü programlı olarak etkinleştir  
 
- Azure portal veya Azure PowerShell Cmdlet'lerine denetim günlüğü depolama kullanmanın yanı sıra, Azure depolama API'lerden birini kullanabilirsiniz. Örneğin, bir .NET dil kullanıyorsanız, depolama istemcisi kitaplığı kullanabilirsiniz.  
+ Depolama günlüğünü denetlemek için Azure portal veya Azure PowerShell cmdlet 'lerini kullanmanın yanı sıra Azure Storage API 'Lerinden birini de kullanabilirsiniz. Örneğin, bir .NET dili kullanıyorsanız, depolama Istemci kitaplığını kullanabilirsiniz.  
 
- Sınıfları **CloudBlobClient**, **CloudQueueClient**, ve **CloudTableClient** tüm yöntemlerine sahip **SetServiceProperties** ve **SetServicePropertiesAsync** süren bir **ServiceProperties** bir parametre olarak nesne. Kullanabileceğiniz **ServiceProperties** depolama günlük yapılandırma nesnesi. Örneğin, aşağıdaki C# parçacığı günlüğe kaydedilir ve sıra günlüğü saklama süresini nasıl değiştirileceğini gösterir:  
+ **Cloudblobclient**, **Cloudqueueclient**ve **cloudtableclient** sınıflarının hepsi, bir **serviceproperties** nesnesi olan **setserviceproperties** ve **SetServicePropertiesAsync** gibi yöntemlere sahiptir parametresinin. Depolama günlüğünü yapılandırmak için **Serviceproperties** nesnesini kullanabilirsiniz. Örneğin, aşağıdaki C# kod parçacığında günlüğe nelerin kaydedildiğini ve kuyruk günlüğe kaydetme için bekletme süresini nasıl değiştirebileceğiniz gösterilmektedir:  
 
 ```csharp
 var storageAccount = CloudStorageAccount.Parse(connStr);  
@@ -172,37 +173,34 @@ serviceProperties.Logging.RetentionDays = 2;
 queueClient.SetServiceProperties(serviceProperties);  
 ```  
 
- Depolama günlüğü yapılandırmak için bir .NET dili kullanma hakkında daha fazla bilgi için bkz. [depolama istemci kitaplığı başvurusu](https://msdn.microsoft.com/library/azure/dn261237.aspx).  
+ Depolama günlüğünü yapılandırmak üzere .NET dili kullanma hakkında daha fazla bilgi için bkz. [depolama Istemci kitaplığı başvurusu](https://msdn.microsoft.com/library/azure/dn261237.aspx).  
 
- Depolama REST API kullanarak oturum yapılandırma hakkında genel bilgi için bkz. [etkinleştirme ve yapılandırma depolama analizi](https://msdn.microsoft.com/library/azure/hh360996.aspx).  
+ REST API kullanarak depolama günlüğünü yapılandırma hakkında genel bilgi için, bkz. [depolama Analizi etkinleştirme ve yapılandırma](https://msdn.microsoft.com/library/azure/hh360996.aspx).  
 
-## <a name="download-storage-logging-log-data"></a>Günlük veri günlüğü depolama indirin
+## <a name="download-storage-logging-log-data"></a>Depolama günlüğü günlük verilerini indirin
 
- Günlük verilerinizi analiz edin ve görüntülemek için bir yerel makineye ilgilendiğiniz günlük verileri içeren BLOB'ları indirmelisiniz. Birçok depolama tarama araçlarını depolama hesabınızdan blobları indirmek etkinleştirme; komut satırı Azure kopyalama aracı sağlanan Azure depolama ekibi de kullanabilirsiniz (**AzCopy**) günlük verilerinizi indirilemedi.  
+ Günlük verilerinizi görüntülemek ve analiz etmek için ilgilendiğiniz günlük verilerini içeren Blobları yerel bir makineye indirmeniz gerekir. Birçok depolama Tarama Aracı, depolama hesabınızdan blob 'ları indirmelerini sağlar; Günlük verilerinizi indirmek için Azure depolama ekibi tarafından sunulan komut satırı Azure kopyalama aracı [AzCopy](storage-use-azcopy-v10.md) ' i de kullanabilirsiniz.  
 
- İlgilendiğiniz günlük verilerini indirdiğinizden emin olun ve aynı günlük verilerini birden çok kez yüklenmesini önlemek için:  
+ İlgilendiğiniz günlük verilerini indirdiğinizden ve aynı günlük verilerinin birden çok kez indirilmesinden kaçınmak için:  
 
--   Tarih kullanın ve zaman adlandırma kuralı, BLOB'ları izlemek için günlük verileri içeren BLOB'ları için birden çok kez aynı verilerin yeniden yüklenmesini önlemek analiz için önce indirilip.  
+-   Aynı verileri birden çok kez yeniden indirmeyi önlemek için, analiz için zaten indirdiğiniz blob 'ları izlemek üzere günlük verilerini içeren Blobların tarih ve saat adlandırma kuralını kullanın.  
 
--   Meta veriler, blob indirmek için gereken tam blob tanımlamak için günlük verileri tutan belirli bir süre belirlemek için günlük verileri içeren BLOB'ları üzerinde kullanın.  
+-   Blob 'un, indirme için gereken tam blobu tanımlamak üzere günlük verilerini tuttuğu belirli bir dönemi belirlemek için günlük verilerini içeren bloblarda bulunan meta verileri kullanın.  
 
-> [!NOTE]
->  AzCopy Azure SDK'ın bir parçasıdır, ancak her zaman en son sürümü karşıdan yükleyebileceğiniz [ https://aka.ms/AzCopy ](https://aka.ms/AzCopy). Varsayılan olarak, AzCopy klasöre yüklenir **C:\Program Files (x86) \Microsoft SDKs\Windows Azure\AzCopy**, ve bir komut istemi veya PowerShell penceresinde aracı çalıştırmak denemeden önce bu klasörü yolunuza eklemeniz gerekir.  
+AzCopy kullanmaya başlamak için bkz. [AzCopy ile çalışmaya başlama](storage-use-azcopy-v10.md) 
 
- Aşağıdaki örnek, kuyruk hizmeti saat 11: 00-20 Mayıs 2014'te 09 AM ve 10'da başlayan için günlük verileri nasıl indirebileceğiniz gösterir. **/S** parametresi neden olur tarihler ve saatler günlük dosya adlarında; dayalı bir yerel klasör yapısını oluşturmak AzCopy **/V** parametresi neden olur; ayrıntılı çıktı üretmek AzCopy **/Y** parametresi, tüm yerel dosyaları üzerine yazmak AzCopy neden olur. Değiştirin **< yourstorageaccount\>**  değiştirme ve depolama hesabı adı ile **< yourstoragekey\>**  depolama hesabınızın anahtarıyla.  
+Aşağıdaki örnek, 15 Mayıs, 10:00 ve 11 Mayıs 2014 Mayıs 'ta başlayan saat için kuyruk hizmeti günlük verilerini nasıl indirebileceğiniz gösterilmektedir.
 
 ```
-AzCopy 'http://<yourstorageaccount>.blob.core.windows.net/$logs/queue'  'C:\Logs\Storage' '2014/05/20/09' '2014/05/20/10' '2014/05/20/11' /sourceKey:<yourstoragekey> /S /V /Y  
-```  
+azcopy copy 'https://mystorageaccount.blob.core.windows.net/$logs/queue' 'C:\Logs\Storage' --include-path '2014/05/20/09;2014/05/20/10;2014/05/20/11' --recursive
+```
 
- AzCopy, ayrıca bazı yararlı parametreler nasıl karşıdan yüklerken dosyaların son değiştirilme saati ayarlar denetleyen sahiptir ve olup daha eski veya yerel makinenizde zaten mevcut olan tüm dosyaları daha yeni olan dosyaları indirmek dener. Uygulamayı yeniden başlatılabilir modunda da çalıştırabilirsiniz. Tüm Ayrıntılar için Yardım'ı çalıştırarak görüntülemek **AzCopy /?** komutu.  
+Belirli dosyaları indirme hakkında daha fazla bilgi edinmek için bkz. [belirli dosyaları indirme](https://docs.microsoft.com/azure/storage/common/storage-use-azcopy-blobs?toc=%2fazure%2fstorage%2fblobs%2ftoc.json#download-specific-files).
 
- Günlük verilerinizi programlama yoluyla indirmek nasıl bir örnek için blog gönderisine bakın [Windows Azure depolama günlüğü: İstekleri izlemek için depolama günlüklerini kullanarak](https://blogs.msdn.com/b/windowsazurestorage/archive/2011/08/03/windows-azure-storage-logging-using-logs-to-track-storage-requests.aspx) ve arama sayfasında "DumpLogs" sözcüğü için.  
-
- Günlük verilerinizi yüklendiğinde, günlük girişlerini dosyalarında görüntüleyebilirsiniz. Bu günlük dosyaları, Microsoft Message Analyzer dahil olmak üzere diğer birçok günlük araçları ayrıştırmak için okuma sınırlandırılmış metin biçimi kullanın (daha fazla bilgi için kılavuzuna bakın [izleme Diagnosing ve sorun giderme Microsoft Azure depolama](storage-monitoring-diagnosing-troubleshooting.md)). Biçimlendirme, filtreleme, sıralama, günlük dosyalarının içeriğini arama ad farklı özellikleri farklı araçları vardır. Depolama günlüğü, günlük dosyası biçimi ve içerik hakkında daha fazla bilgi için bkz. [depolama analizi günlük biçimi](/rest/api/storageservices/storage-analytics-log-format) ve [depolama analizi günlüğe yazılan işlemler ve durum iletileri](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages).
+Günlük verilerinizi indirdiyseniz, dosyalardaki günlük girişlerini görüntüleyebilirsiniz. Bu günlük dosyaları, Microsoft Message Analyzer da dahil olmak üzere çok sayıda günlük okuma aracının ayrıştırabildiği sınırlı bir metin biçimini kullanır (daha fazla bilgi için bkz. kılavuz [izleme, tanılama ve sorun giderme Microsoft Azure depolama](storage-monitoring-diagnosing-troubleshooting.md)). Farklı araçların, günlük dosyalarınızın içeriğini biçimlendirmek, filtrelemek, sıralamak ve ad aramak için farklı özellikleri vardır. Depolama günlüğü günlük dosyası biçimi ve içeriği hakkında daha fazla bilgi için bkz. [depolama Analizi günlük biçimi](/rest/api/storageservices/storage-analytics-log-format) ve [depolama Analizi günlüğe kaydedilmiş Işlemler ve durum iletileri](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Depolama analizi günlük biçimi](/rest/api/storageservices/storage-analytics-log-format)
-* [Depolama analizi işlemleri ve durum iletileri günlüğe kaydedilir.](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages)
-* [Storage Analytics ölçümleri (Klasik)](storage-analytics-metrics.md)
+* [Depolama Analizi günlük biçimi](/rest/api/storageservices/storage-analytics-log-format)
+* [Günlüğe kaydedilen Işlemleri ve durum Iletilerini Depolama Analizi](/rest/api/storageservices/storage-analytics-logged-operations-and-status-messages)
+* [Depolama Analizi ölçümleri (klasik)](storage-analytics-metrics.md)

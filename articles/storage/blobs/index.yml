@@ -1,0 +1,161 @@
+### YamlMime:Landing
+title: Azure Blob depolama belgeleri
+summary: Azure Blob depolama, Microsoft’un buluta yönelik nesne depolama çözümüdür. Blob depolama, çok miktarda yapılandırılmamış veriyi depolamak için iyileştirilmiştir.
+metadata:
+  title: Azure Blob depolama belgeleri
+  description: Azure Blob depolama, Microsoft’un buluta yönelik nesne depolama çözümüdür. Blob depolama, çok miktarda yapılandırılmamış veriyi depolamak için iyileştirilmiştir.
+  services: storage
+  ms.service: storage
+  ms.subservice: blobs
+  ms.topic: landing-page
+  ms.collection: collection
+  author: normesta
+  ms.author: normesta
+  ms.date: 08/20/2019
+  ms.openlocfilehash: f3e1abc46b79953d5a6d44abe4e7a5cecfa256be
+  ms.sourcegitcommit: 359930a9387dd3d15d39abd97ad2b8cb69b8c18b
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/06/2019
+  ms.locfileid: "73646814"
+landingContent:
+- title: Blob depolama hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Blob depolama nedir?
+      url: storage-blobs-overview.md
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Blobları karşıya yükleme, indirme ve listeleme - portal
+      url: storage-quickstart-blobs-portal.md
+    - text: Blobları yönetmek için Depolama Gezgini'ni kullanma
+      url: storage-quickstart-blobs-storage-explorer.md
+  - linkListType: concept
+    links:
+    - text: Depolama hesabına genel bakış
+      url: ../common/storage-account-overview.md
+    - text: Veri yedekliği
+      url: ../common/storage-redundancy.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+  - linkListType: how-to-guide
+    links:
+    - text: Depolama hesabı oluşturma
+      url: ../common/storage-quickstart-create-account.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - text: Blok blobu depolama hesabı oluşturma
+      url: storage-blob-create-account-block-blob.md
+    - text: Özel etki alanı yapılandırma
+      url: storage-custom-domain-name.md
+- title: Blob verilerini arama ve anlama
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Blob verilerini anlamak için AI kullanma
+      url: ../../search/search-blob-ai-integration.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - text: Blob içeriğinizi arama
+      url: ../../search/search-blob-storage-integration.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+- title: Analiz ve içgörüler
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Data Lake Storage Gen2
+      url: data-lake-storage-introduction.md
+  - linkListType: quickstart
+    links:
+    - text: Databricks ile verileri çözümleme
+      url: data-lake-storage-quickstart-create-databricks-account.md
+  - linkListType: concept
+    links:
+    - text: Büyük verileri işleme
+      url: data-lake-storage-data-scenarios.md
+    - text: Çoklu protokol erişimi
+      url: data-lake-storage-multi-protocol-access.md
+    - text: En iyi uygulamalar
+      url: data-lake-storage-best-practices.md
+  - linkListType: tutorial
+    links:
+    - text: Azure Databricks ile verileri ayıklama, dönüştürme ve yükleme
+      url: ../../azure-databricks/databricks-extract-load-sql-data-warehouse.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - text: Azure HDInsight üzerinde Apache Hive ile verileri ayıklama, dönüştürme ve yükleme
+      url: data-lake-storage-tutorial-extract-transform-load-hive.md
+    - text: Event Grid kullanarak Databricks tablolarına veri ekleme
+      url: data-lake-storage-events.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+  - linkListType: how-to-guide
+    links:
+    - text: Azure HDInsight kümeleriyle kullanma
+      url: ../../hdinsight/hdinsight-hadoop-use-data-lake-storage-gen2.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - text: Power BI ile kullanma
+      url: data-lake-storage-use-power-bi.md
+- title: Uygulama geliştirme
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: .NET’i kullanma
+      url: storage-quickstart-blobs-dotnet.md
+    - text: Python kullanma
+      url: storage-quickstart-blobs-python.md
+    - text: Olayları web uç noktasına yönlendirme
+      url: ../../event-grid/blob-event-quickstart-portal.md
+    - text: Statik web sitesi barındırma
+      url: storage-blob-static-website-how-to.md
+  - linkListType: concept
+    links:
+    - text: Olayları işleme
+      url: storage-blob-event-overview.md
+    - text: Statik web siteleri
+      url: storage-blob-static-website.md
+  - linkListType: tutorial
+    links:
+    - text: Görüntü verilerini karşıya yüklemek için web uygulaması oluşturma
+      url: storage-upload-process-images.md
+- title: Güvenliği ve kimliği yönetme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Azure Depolama’ya erişimi yetkilendirme
+      url: ../common/storage-auth.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - text: Data Lake erişim denetimi
+      url: data-lake-storage-access-control.md
+  - linkListType: how-to-guide
+    links:
+    - text: Azure AD hesabıyla blob verilerine erişme
+      url: ../common/storage-access-blobs-queues-portal.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - text: RBAC ile erişim haklarını yönetme
+      url: ../common/storage-auth-aad-rbac-portal.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - text: Blob depolamaya erişimi yetkilendirmek için yönetilen kimlik kullanma
+      url: ../common/storage-auth-aad-msi.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+- title: Veri aktarma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Veri aktarımı çözümlerini karşılaştırma
+      url: ../common/storage-choose-data-transfer-solution.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - text: Çevrimdışı aktarım için Azure Data Box kullanma
+      url: ../../databox/data-box-overview.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+  - linkListType: how-to-guide
+    links:
+    - text: AzCopy ile aktarma
+      url: ../common/storage-use-azcopy-v10.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - text: Azure Data Factory ile aktarma
+      url: ../../data-factory/connector-azure-blob-storage.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+- title: Performans ve ölçeklenebilirlik
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Ölçeklenebilirlik ve performans
+      url: ../common/storage-scalability-targets.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+    - text: Performans ve ölçeklenebilirlik denetim listesi
+      url: ../common/storage-performance-checklist.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+  - linkListType: tutorial
+    links:
+    - text: Performansı ve ölçeklenebilirliği iyileştirme
+      url: ../common/storage-use-azcopy-v10.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json
+- title: Verileri yedekleme ve arşivleme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Sık erişimli, seyrek erişimli ve arşiv depolama
+      url: storage-blob-storage-tiers.md
+    - text: Blob depolama yaşam döngüsünü yönetme
+      url: storage-lifecycle-management-concepts.md

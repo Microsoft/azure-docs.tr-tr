@@ -1,136 +1,132 @@
 ---
-title: Azure Application Insights Profiler ile üretim uygulamalarında profil | Microsoft Docs
-description: Web sunucusu kodunuza etkin yolu ile düşük Ayak izi profil oluşturucu tanımlar.
-services: application-insights
-documentationcenter: ''
-author: cweining
-manager: carmonm
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure 'da üretim uygulamalarını Application Insights Profiler ile profili | Microsoft Docs
+description: Web sunucusu kodunuzda düşük boyutlu bir profil Oluşturucu ile etkin yolu belirler.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.reviewer: mbullwin
-ms.date: 08/06/2018
+author: cweining
 ms.author: cweining
-ms.openlocfilehash: c07b325f3de6cd2cf3aaa436736786d2cdc42881
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 08/06/2018
+ms.reviewer: mbullwin
+ms.openlocfilehash: fc152aab6d0e62ac5656b50834ce17278bb6676e
+ms.sourcegitcommit: 8e271271cd8c1434b4254862ef96f52a5a9567fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60306335"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72820511"
 ---
-# <a name="profile-production-applications-in-azure-with-application-insights"></a>Azure Application Insights ile profil üretim uygulamaları
-## <a name="enable-application-insights-profiler-for-your-application"></a>Uygulamanız için Application Insights Profiler ' ı etkinleştir
+# <a name="profile-production-applications-in-azure-with-application-insights"></a>Application Insights ile Azure 'da üretim uygulamaları profilini yapın
+## <a name="enable-application-insights-profiler-for-your-application"></a>Uygulamanız için Application Insights Profiler etkinleştirme
 
-Azure Application Insights Profiler, üretim ortamında çalışan uygulamalar için performans izleme sağlar. Profiler, kullanıcılarınız olumsuz biçimde etkilemeden uygun ölçekte otomatik olarak verileri yakalar. Profiler zaman belirli bir web isteği işleme uzun sürüyor "etkin" kod yolu belirlemenize yardımcı olur. 
+Azure Application Insights Profiler, Azure 'da üretimde çalışan uygulamalar için performans izlemeleri sağlar. Profil Oluşturucu, kullanıcılarınızı olumsuz şekilde etkilemeden verileri otomatik olarak ölçeklendirerek yakalar. Profiler, belirli bir web isteğini işlerken en uzun süreyi alan "sık erişimli" kod yolunu belirlemenize yardımcı olur. 
 
-Profiler aşağıdaki Azure hizmetleri üzerinde dağıtılan .NET uygulamalarıyla çalışır. Her hizmet türü için Profiler'ı etkinleştirmek için özel yönergeler aşağıdaki bağlantılarda içindir.
+Profil Oluşturucu, aşağıdaki Azure hizmetlerinde dağıtılan .NET uygulamalarıyla birlikte çalışmaktadır. Her hizmet türü için profil oluşturucuyu etkinleştirmeye yönelik belirli yönergeler aşağıdaki bağlantılardadır.
 
-* [Azure uygulama hizmeti](profiler.md?toc=/azure/azure-monitor/toc.json)
+* [Azure App Service](profiler.md?toc=/azure/azure-monitor/toc.json)
 * [Azure Cloud Services](profiler-cloudservice.md?toc=/azure/azure-monitor/toc.json)
 * [Azure Service Fabric](profiler-servicefabric.md?toc=/azure/azure-monitor/toc.json)
-* [Azure sanal makineler ve sanal makine ölçek kümeleri](profiler-vm.md?toc=/azure/azure-monitor/toc.json)
-* [**Önizleme** ASP.NET Core Azure Linux Web uygulamaları](profiler-aspnetcore-linux.md?toc=/azure/azure-monitor/toc.json) 
+* [Azure sanal makineleri ve sanal makine ölçek kümeleri](profiler-vm.md?toc=/azure/azure-monitor/toc.json)
+* [**Önizleme** ASP.NET Core Azure Linux Web Apps](profiler-aspnetcore-linux.md?toc=/azure/azure-monitor/toc.json) 
 
-Profiler etkinleştirildi, ancak izlemeleri görmüyorsanız, kontrol bizim [sorun giderme kılavuzu](profiler-troubleshooting.md?toc=/azure/azure-monitor/toc.json).
+Profil oluşturucuyu etkinleştirdiyseniz, ancak izlemeleri görmüyorsanız, [sorun giderme kılavuzumuzu](profiler-troubleshooting.md?toc=/azure/azure-monitor/toc.json)kontrol edin.
 
-## <a name="view-profiler-data"></a>Profiler verileri görüntüleme
+## <a name="view-profiler-data"></a>Profil oluşturucu verilerini görüntüle
 
-İzlemeleri karşıya yüklemek Profiler için uygulamanızı etkin bir şekilde işleme isteklerinin olması gerekir. Bir deney yapıyorsanız, istekleri web uygulamanıza kullanarak oluşturabileceğiniz [Application Insights performans testi](https://docs.microsoft.com/vsts/load-test/app-service-web-app-performance-test). Yeni Profiler'ı etkinleştirdiyseniz, kısa bir yük testi çalıştırabilirsiniz. Yük testi çalışırken seçin **profili artık** düğmesini [ **Profiler ayarları** bölmesinde](profiler-settings.md#profiler-settings-pane). Profiler çalışırken rastgele yaklaşık saatte bir ve iki dakikalık bir süre boyunca profilleri. Uygulama istekleri gitmenize işliyorsa, Profiler izlemeleri saatte yükler.
+İzlemeleri karşıya yüklemek için profil oluşturucunun, uygulamanızın istekleri etkin bir şekilde işlemesi gerekir. Deneme yapıyorsanız, [Application Insights performans testi](https://docs.microsoft.com/vsts/load-test/app-service-web-app-performance-test)kullanarak Web uygulamanıza istek oluşturabilirsiniz. Profil oluşturucuyu yeni etkinleştirdiyseniz, kısa bir yük testi çalıştırabilirsiniz. Yük testi çalışırken, profil [ **Oluşturucu ayarları** bölmesinde](profiler-settings.md) **Şimdi profil** düğmesini seçin. Profil Oluşturucu çalışırken, bir saatte bir kez ve iki dakikalık bir süre boyunca rastgele bir profil oluşturulur. Uygulamanız sürekli bir istek akışını işliyorsa, profil oluşturucu karşıya yüklemeleri her saat için izler.
 
-Uygulamanız bazı trafik alır ve Profiler izlemeleri karşıya yüklemek için zaman bulana sonra görüntülemek üzere izlemesi olmalıdır. Bu işlem, 5-10 dakika sürebilir. Görüntülenecek izlemeler, buna **performans** bölmesinde **eylemleri**ve ardından **Profiler izlemeleri** düğmesi.
+Uygulamanız bazı trafiği aldıktan sonra ve profil oluşturucunun izlemeleri karşıya yükleme zamanı varsa, görüntülenecek izlemelere sahip olmanız gerekir. Bu işlem, 5 ila 10 dakika sürebilir. İzlemeleri görüntülemek için **performans** bölmesinde **eylemleri al**' ı seçin ve ardından **Profil Oluşturucu izlemeleri** düğmesini seçin.
 
-![Application Insights performans bölmesi Önizleme Profiler izlemeleri][performance-blade]
+![Application Insights performans bölmesi önizleme profil oluşturucu izlemeleri][performance-blade]
 
-Bir istek yürütülürken harcanan süre kod düzeyinde dökümünü görüntülemek için bir örnek seçin.
+İsteği yürütmek için harcanan sürenin kod düzeyinde dökümünü görüntülemek için bir örnek seçin.
 
 ![Application Insights izleme Gezgini][trace-explorer]
 
-İzleme Gezgini, aşağıdaki bilgileri görüntüler:
+İzleme Gezgini aşağıdaki bilgileri görüntüler:
 
-* **Etkin yolu Göster**: Açılır en büyük düğüm yaprak veya en az bir şey kapatın. Çoğu durumda bu, bir performans sorununun düğümüdür.
-* **Etiket**: İşlev veya olayın adı. Ağaç karışık kod ve, SQL gibi oluşan olaylar ve HTTP olayları görüntüler. Üst olay genel istek süresini temsil eder.
-* **Geçen**: İşlem başlangıcı ve işleminin sonunu arasındaki zaman aralığı.
-* **Zaman**: İşlev veya olay ilişkisinde diğer işlevlere çalıştığı süre.
+* **Etkin yolu göster**: en büyük yaprak düğümü veya en az bir kapanış açar. Çoğu durumda bu düğüm performans sorununa yaklaştı.
+* **Etiket**: işlevin veya etkinliğin adı. Ağaç, SQL ve HTTP olayları gibi oluşan kod ve olayların bir karışımını görüntüler. En üstteki olay genel istek süresini temsil eder.
+* **Geçen**: işlemin başlangıcı ile işlemin sonu arasındaki zaman aralığı.
+* **Ne zaman**: işlevin veya etkinliğin diğer işlevlerle ilişkili olarak çalıştığı zaman.
 
-## <a name="how-to-read-performance-data"></a>Performans verileri okuma
+## <a name="how-to-read-performance-data"></a>Performans verilerini okuma
 
-Microsoft Hizmet Profil Oluşturucu örnekleme yöntemleri ve araçları, uygulamanızın performansını çözümlemek için kullanır. Ayrıntılı koleksiyonu devam ederken, hizmet profil oluşturucu her makine CPU yönerge işaretçisini her bir milisaniyeden kısa örnekler. Her örnek, şu anda yürütülmekte olan iş parçacığının tam çağrı yığınını yakalar. Bu iş parçacığı, hem yüksek düzeyde hem de düşük düzeyde soyutlama neler hakkında ayrıntılı bilgi verir. Hizmet Profil Oluşturucu, aynı zamanda etkinlik bağıntısı ve nedensellik ilişkilerini bağlam olayları, görev paralel kitaplığı (TPL) olayları ve iş parçacığı havuzu olayları değiştirme dahil olmak üzere, izlemek için diğer olayları toplar.
+Microsoft hizmet profili Oluşturucu, uygulamanızın performansını analiz etmek için bir örnekleme yöntemleri ve izleme birleşimi kullanır. Ayrıntılı koleksiyon devam ederken, hizmet profili Oluşturucu her bir makine CPU 'nun her milisaniyelik yönerge işaretçisini örnekler. Her örnek, şu anda yürütülmekte olan iş parçacığının tüm çağrı yığınını yakalar. Bu iş parçacığının ne yaptığını, hem yüksek düzeyde hem de düşük bir soyutlama düzeyinde ayrıntılı bilgiler verir. Hizmet profili Oluşturucu, bağlam değiştirme olayları, görev paralel kitaplığı (TPL) olayları ve iş parçacığı havuzu olayları da dahil olmak üzere etkinlik bağıntısını ve kullanılabilirliğini izlemek için diğer olayları da toplar.
 
-Zaman Çizelgesi Görünümü'nde görüntülenen çağrı yığınını izleme ve örnekleme sonucudur. Her örnek, iş parçacığının tam çağrı yığınını yakaladığından, Microsoft .NET Framework ve başvuru diğer çerçeveler kod içerir.
+Zaman çizelgesi görünümünde görüntülenen çağrı yığını örnekleme ve izleme sonucudur. Her örnek iş parçacığının tüm çağrı yığınını yakaladığından, Microsoft .NET Framework 'ten ve başvurduğunuz diğer çerçevelerden kod içerir.
 
-### <a id="jitnewobj"></a>Nesne ayırma (clr! JIT\_yeni veya clr! JIT\_Newarr1)
+### <a id="jitnewobj"></a>Nesne ayırma (clr! JıT\_yeni veya clr! JıT\_Newarr1)
 
-**CLR! JIT\_yeni** ve **clr! JIT\_Newarr1** .NET Framework yönetilen yığından bellek ayırma yardımcı işlevleri. **CLR! JIT\_yeni** nesne ayrıldığında çağrılır. **CLR! JIT\_Newarr1** bir nesne dizisi ayrıldığında çağrılır. Bu iki işlev, genellikle hızlı ve süresi görece küçük miktarlarda gerçekleştirin. Varsa **clr! JIT\_yeni** veya **clr! JIT\_Newarr1** çok zaman zaman çizelgesi, kod içinde sürer birçok nesne ayırma ve önemli miktarda bellek kullanma.
+**clr! JıT\_yeni** ve **clr! JıT\_Newarr1** , yönetilen bir yığından bellek ayıran .NET Framework yardımcı işlevlerdir. **clr! JıT\_yeni** bir nesne ayrıldığında çağrılır. **clr!** Bir nesne dizisi AYRıLDıĞıNDA jıt\_Newarr1 çağrılır. Bu iki işlev genellikle hızlıdır ve görece az miktarda zaman alır. Eğer **clr! JıT\_yeni** veya **clr! JıT\_Newarr1** zaman çizelgenizde çok zaman alır, kod birçok nesne ayırarak ve önemli miktarda bellek tüketiyor olabilir.
 
-### <a id="theprestub"></a>Kod (clr! yükleniyor ThePreStub)
+### <a id="theprestub"></a>Kod yükleniyor (clr! ThePreStub)
 
-**CLR! ThePreStub** .NET Framework'teki ilk kez yürütülecek kodu hazırlar yardımcı işlevdir. Bu yürütme genellikle içerir, ancak tam zamanında (JIT) derleme için sınırlı değildir. Her C# yöntemi **clr! ThePreStub** işlemi sırasında en fazla bir kez çağrılmalıdır.
+**clr! ThePreStub** , kodu ilk kez yürütmek üzere hazırlayan .NET Framework bir yardımcı işlevdir. Bu yürütme genellikle tam zamanında (JıT) derlemeyi içerir ancak bunlarla sınırlı değildir. Her C# Yöntem için **clr!** Bir işlem sırasında, ön saplama en fazla bir kez çağrılmalıdır.
 
-Varsa **clr! ThePreStub** uzun sürüyorsa bir istek, istek için olan bu yöntemin ilk öğe. İlk yöntem yüklemek .NET Framework çalışma zamanı için zaman büyük/küçük harf önemlidir. Önce kullanıcılarınızın erişim veya Native Image Generator (ngen.exe) çalıştırmayı göz önünde bulundurun, derlemelerini söz konusu bölümü kod yürüten bir Isınma sürecinden göz önünde bulundurabilirsiniz.
+Eğer **clr! Ön saplama** bir istek için uzun bir süre sürer, istek bu yöntemi yürütmek için birinci bir yöntemdir. .NET Framework çalışma zamanının ilk yöntemi yüklemesi için zaman önemlidir. Kullanıcılarınızın erişemez veya yerel görüntü Oluşturucu (Ngen. exe) derlemelerinize çalıştırmayı düşünmeden önce kodun bu kısmını yürüten bir ısınma işlemi kullanmayı düşünebilirsiniz.
 
-### <a id="lockcontention"></a>Kilit çakışması (clr! JITutil\_MonContention veya clr! JITutil\_MonEnterWorker)
+### <a id="lockcontention"></a>Kilit çakışması (clr! Monçekişme veya clr\_Jlıutil! Jutil\_MonEnterWorker)
 
-**CLR! JITutil\_MonContention** veya **clr! JITutil\_MonEnterWorker** geçerli iş parçacığının bir kilidi serbest bırakılması beklediğini belirtir. Yürüttüğünüzde genellikle bu metni görüntülenir bir C# **kilit** deyimi, çağırma **Monitor.Enter** yöntemi veya yöntem ile çağrılacak **Methodımploptions.Synchronized**özniteliği. Genellikle kilit çakışması oluşur, iş parçacığı _A_ kilit ve iş parçacığı edinme _B_ iş parçacığı önce aynı kilit almaya çalıştığında _A_ serbest.
+**clr! Monçekişme veya clr\_Jlıutil** **! Jutil\_MonEnterWorker** , geçerli iş parçacığının bir kilidin serbest bırakılacağını beklediğini gösterir. Bu metin genellikle bir C# **kilit** ifadesini yürüttüğünüzde, **Monitor. ENTER** metodunu çağırdığınızda veya **MethodImplOptions. eşitlenmiş** özniteliğiyle bir yöntemi çağırdığınızda görüntülenir. Kilit çakışması genellikle _iş parçacığı bir_ kilit aldığında ve _B_ _iş parçacığı BT tarafından serbest bırakmadan_ önce aynı kilidi almaya çalıştığında oluşur.
 
-### <a id="ngencold"></a>Kod ([SOĞUK]) yükleniyor
+### <a id="ngencold"></a>Kod yükleniyor ([soğuk])
 
-Yöntem adı içeriyorsa **[SOĞUK]** , gibi **mscorlib.ni! [ COLD]System.Reflection.CustomAttribute.IsDefined**, .NET Framework çalışma zamanı tarafından iyileştirilmedi ilk kez kod yürütüyordur [profil temelli iyileştirme](/cpp/build/profile-guided-optimizations). Her yöntem için en fazla bir kez işlemi sırasında görüntülenmesi gerekir.
+Yöntem adı **[soğuk]** içeriyorsa, **mscorlib.ni! [ SOĞUK] System. Reflection. CustomAttribute. IsDefined**.NET Framework çalışma zamanı, [Profil temelli iyileştirme](/cpp/build/profile-guided-optimizations)tarafından en iyi duruma getirilmeyen ilk kez kodu yürütüyor. Her yöntem için, işlem sırasında en fazla bir kez görüntülenmelidir.
 
-Bir isteğin süresi önemli miktarda kod yükleniyor aldığı durumlarda yöntemi iyileştirilmemiş bölümünü yürütmek için birinci isteğidir. Kullanıcılarınızın erişim önce söz konusu bölümü kod yürüten bir Isınma işlem kullanmayı düşünün.
+Kod yükleme bir istek için önemli miktarda zaman alıyorsa istek, metodun en iyi duruma getirilmeyen kısmını yürütmek için ilk bir seçenektir. Kullanıcılarınızın ona erişmeden önce kodun bu bölümünü yürüten bir ısınma işlemi kullanmayı düşünün.
 
 ### <a id="httpclientsend"></a>HTTP isteği gönder
 
-Yöntemler gibi **HttpClient.Send** kod tamamlanması için bir HTTP isteği beklediğini belirtir.
+**HttpClient. Send** gibi yöntemler, kodun bir http isteğinin tamamlanmasını beklediğini gösterir.
 
 ### <a id="sqlcommand"></a>Veritabanı işlemi
 
-Yöntemler gibi **SqlCommand.Execute** kod veritabanı işlemin tamamlanmasını beklediğini belirtir.
+**SqlCommand. Execute** gibi yöntemler, kodun bir veritabanı işleminin bitmesini beklediğini gösterir.
 
-### <a id="await"></a>Bekleniyor (AWAIT\_saat)
+### <a id="await"></a>Bekleniyor (AWAIT\_süre)
 
-**AWAIT\_zaman** kod başka bir görevin tamamlanmasını beklediğini belirtir. Bu gecikme ile genellikle gerçekleşir C# **AWAIT** deyimi. Ne zaman yaptığını bir C# **AWAIT**, iş parçacığı geriye doğru alır ve denetimi iş parçacığı havuzuna döndürür ve bekleyen engellenmiş iş parçacığı yok **AWAIT** tamamlanması. Ancak, mantıksal olarak, iş parçacığı, yaptığınız **AWAIT** "engellenmiş" ve işlemin tamamlanmasını bekliyor. **AWAIT\_zaman** deyimi görevin sonlanmasını bekleyen engellenen süreyi gösterir.
+**AWAIT\_zamanı** , kodun başka bir görevin bitmesini beklediğini gösterir. Bu gecikme genellikle C# **AWAIT** ifadesiyle oluşur. Kod bir C# **AWAIT**yaparken, iş parçacığı geri almıyor ve denetim iş parçacığı havuzuna geri döndürüyor ve **AWAIT** 'in bitmesi beklenirken engellenen iş parçacığı yok. Ancak mantıksal olarak, **AWAIT** olan iş parçacığı "engelleniyor" olur ve işlemin tamamlanmasını bekler. **AWAIT\_TIME** ifadesinde, görevin bitmesi için bekleyen engellenme süresi gösterilir.
 
 ### <a id="block"></a>Engellenme süresi
 
-**BLOCKED_TIME** kullanılabilir olması başka bir kaynak kodu beklediğini belirtir. Örneğin, bir eşitleme nesnesi, kullanılabilir olması için bir iş parçacığı veya son isteği bekliyor olabilir.
+**BLOCKED_TIME** , kodun başka bir kaynağın kullanılabilir olmasını beklediğini gösterir. Örneğin, bir eşitleme nesnesi için bir iş parçacığının kullanılabilir olması veya bir isteğin bitmesi bekleniyor olabilir.
 
 ### <a name="unmanaged-async"></a>Yönetilmeyen zaman uyumsuz
 
-.NET framework ETW olayları yayar ve böylece iş parçacıkları arasında zaman uyumsuz çağrılar izlenebilir etkinlik kimlikleri iş parçacıkları arasında geçirir. Profil Oluşturucu hangi iş parçacığı ve iş parçacığında hangi işlevleriniz gerektirdikçe bildiremez şekilde yönetilmeyen kod (yerel kod için) ve bazı eski stil zaman uyumsuz kod bu olayları ve etkinlik kimliği eksik. Bu, çağrı yığınında 'Yönetilmeyen Async' etiketlenir. ETW dosyayı karşıdan yükleyin, kullanmanız mümkün olabilir [PerfView](https://github.com/Microsoft/perfview/blob/master/documentation/Downloading.md) neler olduğunu daha fazla bilgiler alın.
+.NET Framework ETW olaylarını yayar ve zaman uyumsuz çağrıların iş parçacıkları arasında izlenmesini sağlamak için iş parçacıkları arasında etkinlik kimliklerini geçirir. Yönetilmeyen kod (yerel kod) ve zaman uyumsuz kodun bazı eski stillerinde bu olaylar ve etkinlik kimlikleri eksiktir, bu nedenle profil oluşturucu iş parçacığı hangi iş parçacığını ve hangi işlevlerin çalıştığını söylemez. Bu, çağrı yığınında ' yönetilmeyen Async ' olarak etiketlenir. ETW dosyasını indirdiğinizde, neler olduğuna ilişkin daha fazla bilgi almak için [PerfView](https://github.com/Microsoft/perfview/blob/master/documentation/Downloading.md) 'ı kullanabilirsiniz.
 
 ### <a id="cpu"></a>CPU süresi
 
-CPU yönerge Yürütülüyor meşgul.
+Bu, yönergeleri yürütürken CPU meşguldür.
 
-### <a id="disk"></a>Disk Zamanı
+### <a id="disk"></a>Disk zamanı
 
-Disk işlemleri uygulama gerçekleştiriyor.
+Uygulama, disk işlemleri gerçekleştiriyor.
 
 ### <a id="network"></a>Ağ süresi
 
-Uygulama ağ işlemlerini gerçekleştiriyor.
+Uygulama ağ işlemleri gerçekleştiriyor.
 
-### <a id="when"></a>Zaman sütunu
+### <a id="when"></a>Ne zaman sütunu
 
-**Olduğunda** bir düğüm için toplanan kapsamlı örnek zaman içinde nasıl farklılık, bir görselleştirme sütundur. Toplam istek aralığını 32 zaman demetlerin içine ayrılmıştır. Bu düğüm için kapsamlı örnekler 32 bu demetleri içinde toplanır. Her bir demete çubuğu olarak temsil edilir. Çubuk Yüksekliği ölçeklendirilmiş bir değeri temsil eder. İşaretlenmiş düğümleri için **CPU_TIME** veya **BLOCKED_TIME**, veya tüketen bir kaynağa (CPU, disk veya iş parçacığı gibi) için açık bir ilişkisi olduğu çubuğu tüketimi birini temsil eder Demet sırasında kaynaklar. Bu ölçümler için birden fazla kaynak tüketmeye tarafından yüzde 100'den büyük bir değer almak mümkündür. Örneğin, ortalama olarak, bir aralık boyunca iki CPU kullanırsanız yüzde 200 alın.
+**Ne zaman** sütunu, düğüm için toplanan örnekleri zaman içinde farklılık gösterir. İsteğin toplam aralığı 32 zaman demetlerine bölünür. Bu düğüm için kapsamlı örnekler bu 32 demetlerine göre biriktirilir. Her demet bir çubuk olarak temsil edilir. Çubuğun yüksekliği ölçeklendirilmiş bir değeri temsil eder. **CPU_TIME** veya **BLOCKED_TIME**olarak işaretlenmiş veya bir kaynağı (örneğin, bir CPU, disk veya iş parçacığı) tüketmeye yönelik belirgin bir ilişki olduğu durumlarda, çubuk demet sırasında kaynaklardan birinin tüketimini temsil eder. Bu ölçümler için, birden fazla kaynak tüketerek yüzde 100 ' den büyük bir değer almak mümkündür. Örneğin, bir Aralık sırasında ortalama ve iki CPU kullanırsanız, yüzde 200 ' ı alırsınız.
 
 ## <a name="limitations"></a>Sınırlamalar
 
-Varsayılan veri saklama süresi, beş gündür. Gün başına alınan en fazla veri 10 GB'tır.
+Varsayılan veri saklama süresi beş gündür. Gün başına alınan en fazla veri 10 GB 'tır.
 
-Profiler bu hizmeti kullanmak için herhangi bir ücreti yoktur. Bunu kullanmak için web uygulamanızı olmalıdır en az temel katmanı, Azure App Service'in Web Apps özelliğinde barındırılan.
+Profil Oluşturucu hizmeti kullanımı için herhangi bir ücret alınmaz. Bunu kullanabilmeniz için, Web uygulamanızın en azından Azure App Service Web Apps özelliğinin temel katmanında barındırılması gerekir.
 
-## <a name="overhead-and-sampling-algorithm"></a>Ek yükü ve örnekleme algoritması
+## <a name="overhead-and-sampling-algorithm"></a>Ek yük ve örnekleme algoritması
 
-Profiler rastgele Profiler izlemeleri yakalama için etkinleştirilmiş olan bir uygulama her sanal makinede iki dakika başı çalıştırır. Profiler çalıştırırken sunucu yüzde 15 CPU yükü 5'ten ekler.
+Profiler, izlemeleri yakalamak için etkin olan uygulamayı barındıran her bir sanal makinede her bir saatte iki dakikada bir çalışır. Profil Oluşturucu çalışırken, sunucuya 5 ' ten %15 ' e kadar CPU ek yükü ekler.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Application Insights Profiler, Azure uygulamanız için etkinleştirin. Ayrıca bkz:
+Azure uygulamanız için Application Insights Profiler etkinleştirin. Ayrıca bkz:
 * [Uygulama Hizmetleri](profiler.md?toc=/azure/azure-monitor/toc.json)
 * [Azure Cloud Services](profiler-cloudservice.md?toc=/azure/azure-monitor/toc.json)
 * [Azure Service Fabric](profiler-servicefabric.md?toc=/azure/azure-monitor/toc.json)
-* [Azure sanal makineler ve sanal makine ölçek kümeleri](profiler-vm.md?toc=/azure/azure-monitor/toc.json)
+* [Azure sanal makineleri ve sanal makine ölçek kümeleri](profiler-vm.md?toc=/azure/azure-monitor/toc.json)
 
 
 [performance-blade]: ./media/profiler-overview/performance-blade-v2-examples.png

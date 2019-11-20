@@ -1,155 +1,155 @@
 ---
-title: Azure için Avere vFXT dağıtma
-description: Azure'da Avere vFXT kümesi dağıtma adımları
+title: Azure için avere vFXT dağıtma
+description: Azure 'da avere vFXT kümesini dağıtma adımları
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 04/05/2019
-ms.author: v-erkell
-ms.openlocfilehash: 7ded66c29f12b8f68746726ca6c126bffbc51f0d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: rohogue
+ms.openlocfilehash: 6ddf950bf2d138a94675ee394109a0d227ea206b
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60410330"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72255460"
 ---
-# <a name="deploy-the-vfxt-cluster"></a>vFXT kümesini dağıtma
+# <a name="deploy-the-vfxt-cluster"></a>VFXT kümesini dağıtma
 
-Bu yordamı, Azure Marketi'nde kullanılabilir Dağıtım Sihirbazı kullanarak adımları açıklanmaktadır. Sihirbaz, bir Azure Resource Manager şablonu kullanarak küme otomatik olarak dağıtır. Parametreleri girin ve tıklayın sonra **Oluştur**, Azure, otomatik olarak aşağıdaki adımları gerçekleştirir:
+Bu yordam, Azure Marketi 'nden sunulan Dağıtım Sihirbazı 'nı kullanarak size kılavuzluk eder. Sihirbaz Azure Resource Manager şablonu kullanarak kümeyi otomatik olarak dağıtır. Forma parametreleri girdikten ve **Oluştur**' a tıkladıktan sonra, Azure bu adımları otomatik olarak tamamlar:
 
-* Kümeyi yönetmek ve dağıtmak için gereken yazılımları içeren temel bir VM kümesi denetleyiciyi oluşturur.
-* Kaynak grubunu ve sanal ağ altyapısı, yeni öğeler oluşturma gibi ayarlar.
-* Küme düğümü sanal makineleri oluşturur ve bunları Avere kümesi olarak yapılandırır.
-* İstenirse, yeni bir Azure Blob kapsayıcısı oluşturur ve küme çekirdek dosyalayıcı yapılandırır.
+* Kümeyi dağıtmak ve yönetmek için gereken yazılımları içeren temel bir VM olan küme denetleyicisini oluşturur.
+* Yeni öğe oluşturma da dahil olmak üzere kaynak grubu ve sanal ağ altyapısını ayarlar.
+* Küme düğümü sanal makinelerini oluşturur ve avere kümesi olarak yapılandırır.
+* İsteniyorsa, yeni bir Azure Blob kapsayıcısı oluşturur ve bunu bir küme çekirdeği fili olarak yapılandırır.
 
-Bu belgedeki yönergeleri uyguladıktan sonra bir sanal ağ, bir alt ağ, bir denetleyici ve aşağıdaki çizimde gösterildiği gibi bir vFXT küme olacaktır. Bu diyagram bir yeni Blob Depolama kapsayıcısında (gösterilmez yeni bir depolama hesabı,) ve alt ağ içinde Microsoft depolama için hizmet uç noktası içeren isteğe bağlı Azure Blob çekirdek dosyalayıcı gösterir. 
+Bu belgedeki yönergeleri uyguladıktan sonra, aşağıdaki diyagramda gösterildiği gibi bir sanal ağ, bir alt ağ, denetleyici ve bir vFXT kümesi olacaktır. Bu diyagramda yeni bir BLOB depolama kapsayıcısı (yeni bir depolama hesabında, gösterilmez) ve alt ağ içinde Microsoft Storage için bir hizmet uç noktası içeren isteğe bağlı Azure Blob çekirdek filleyicisi gösterilmektedir. 
 
-![üç Eşmerkezli dikdörtgenler Avere küme bileşenleri gösteren diyagram. Dış dikdörtgen 'Kaynak grubu' ve '(isteğe bağlı) depolama Blob' etiketli bir Altıgene içeriyor. Sonraki dikdörtgende etiketli ' sanal ağ: 10.0.0.0/16' ve herhangi bir benzersiz bileşeni içermiyor. En içteki dikdörtgen 'Subnet:10.0.0.0/24' ve 'Küme denetleyici', 'vFXT düğümleri (vFXT küme)' olarak etiketlenen üç VM ve 'Hizmet uç noktası' etiketli bir Altıgene yığınını etiketli bir sanal makine içeriyor. Hizmet uç noktası (aynı alt ağ içinde) ve (aynı kaynak grubunda bir sanal ağ ve alt ağ dışında) blob depolama bağlama bir ok mevcuttur. Ok, sanal ağ sınırlarını ve alt ağ geçirir.](media/avere-vfxt-deployment.png)  
+![avere küme bileşenleriyle üç eşmerkezli dikdörtgeni gösteren diyagram. Dış dikdörtgen ' Resource Group ' olarak etiketlidir ve bir altıon etiketli ' Blob depolama alanı (isteğe bağlı) ' içeriyor. ' Deki sonraki dikdörtgen ' sanal ağ: 10.0.0.0/16 ' etiketlidir ve hiçbir benzersiz bileşen içermez. En içteki dikdörtgen ' subnet: 10.0.0.0/24 ' olarak etiketlidir ve ' küme denetleyicisi ' etiketli bir VM, ' vFXT düğümleri (vFXT kümesi) ' etiketli üç VM 'nin bir yığını ve ' hizmet uç noktası ' etiketli bir altıon ' ı içerir. Hizmet uç noktasını (alt ağ içinde olan) ve BLOB depolama alanını (kaynak grubunda alt ağ ve VNET dışında) bağlayan bir ok vardır. Ok, alt ağ ve sanal ağ sınırları üzerinden geçer.](media/avere-vfxt-deployment.png)  
 
-Oluşturma şablonu kullanmadan önce şu önkoşulların giderdik emin olun:  
+Oluşturma şablonunu kullanmadan önce, şu önkoşullara değindiğinizden emin olun:  
 
-1. [Yeni Abonelik](avere-vfxt-prereqs.md#create-a-new-subscription)
+1. [Yeni abonelik](avere-vfxt-prereqs.md#create-a-new-subscription)
 1. [Abonelik sahibi izinleri](avere-vfxt-prereqs.md#configure-subscription-owner-permissions)
-1. [Kota vFXT kümesi için](avere-vfxt-prereqs.md#quota-for-the-vfxt-cluster)
-1. [(Gerekirse) depolama hizmet uç noktası](avere-vfxt-prereqs.md#create-a-storage-service-endpoint-in-your-virtual-network-if-needed) - için gerekli kullanarak mevcut bir sanal ağ ve blob depolama oluşturma dağıtır
+1. [VFXT kümesi için kota](avere-vfxt-prereqs.md#quota-for-the-vfxt-cluster)
+1. [Depolama hizmeti uç noktası (gerekirse)](avere-vfxt-prereqs.md#create-a-storage-service-endpoint-in-your-virtual-network-if-needed) -var olan bir sanal ağ kullanılarak dağıtımlar için gereklidir ve BLOB depolama alanı oluşturuluyor
 
-Küme dağıtım adımları ve planlama hakkında daha fazla bilgi için okuma [Avere vFXT sisteminizi planlama](avere-vfxt-deploy-plan.md) ve [dağıtımına genel bakış](avere-vfxt-deploy-overview.md).
+Küme dağıtım adımları ve planlaması hakkında daha fazla bilgi için [avere vFXT sisteminizin](avere-vfxt-deploy-plan.md) ve [dağıtıma genel bakış](avere-vfxt-deploy-overview.md)konusunu okuyun.
 
-## <a name="create-the-avere-vfxt-for-azure"></a>Azure için Avere vFXT oluşturma
+## <a name="create-the-avere-vfxt-for-azure"></a>Azure için avere vFXT 'yi oluşturma
 
-Azure portalında oluşturma şablonu Avere için arama ve "Avere vFXT Azure ARM şablonu için" seçerek erişebilirsiniz. 
+Avere araması yaparak Azure portal oluşturma şablonuna erişin ve "Azure ARM şablonu için avere vFXT" seçeneğini seçin. 
 
-!["Yeni > Market > her şey" ekmek Azure portalıyla gösteren tarayıcı penceresinde kalbimdeki. Her şeyi sayfasında, arama alanına sahip terimi "avere" ve "Avere vFXT Azure ARM şablonu için" ikinci sonucu özetlenen vurgulamak için kırmızı renkte.](media/avere-vfxt-template-choose.png)
+![Crumbs "Yeni > Market > her şeyi Azure portal gösteren tarayıcı penceresi. Her şey sayfasında, arama alanı "avere" terimini ve ikinci sonuç olarak "avere vFXT for Azure ARM şablonu", vurgulamak için kırmızı renkle özetlenmektedir.](media/avere-vfxt-template-choose.png)
 
-Azure ARM şablonu sayfasının Avere vFXT ayrıntıları okuduktan sonra tıklayın **Oluştur** başlamak için. 
+Azure ARM şablonu için avere vFXT ' deki ayrıntıları okuduktan sonra başlamak için **Oluştur** ' a tıklayın. 
 
-![Dağıtım şablonu gösteren'ın ilk sayfasında ile Azure Market](media/avere-vfxt-deploy-first.png)
+![Dağıtım şablonunun ilk sayfasıyla Azure Marketi](media/avere-vfxt-deploy-first.png)
 
-Şablon dört adımı - iki bilgi toplama sayfaları ayrıca doğrulama ve onay adımları bölünür. 
+Şablon dört adımdan ayrılır-iki bilgi toplama sayfası, ayrıca doğrulama ve onay adımları. 
 
-* Sayfa bir VM kümesi denetleyicisinin ayarlarını odaklanır. 
-* İki sayfa alt ağlar ve depolama gibi ilişkili kaynakları ve küme oluşturmak için parametreler toplar. 
-* Sayfa üç ayarları özetlenmekte ve yapılandırmasını doğrular. 
-* Sayfa dört yazılım hüküm ve koşullar açıklanır ve küme oluşturma işlemini başlatmanıza olanak tanır. 
+* Tek sayfa, küme denetleyicisi sanal makinesinin ayarlarına odaklanır. 
+* İkinci sayfa, küme oluşturmak için parametreleri ve alt ağlar ve depolama gibi ilişkili kaynakları toplar. 
+* Sayfa üç, ayarları özetler ve yapılandırmayı doğrular. 
+* Sayfa dört, yazılım hüküm ve koşullarını açıklar ve küme oluşturma işlemini başlatabilmeniz için izin verir. 
 
-## <a name="page-one-parameters---cluster-controller-information"></a>Bir parametre - küme denetleyicisi bilgileri sayfası
+## <a name="page-one-parameters---cluster-controller-information"></a>Sayfa bir parametre-küme denetleyicisi bilgileri
 
-Dağıtım Şablonu'nın ilk sayfasında, küme denetleyiciyle ilgili bilgileri toplar. 
+Dağıtım şablonunun ilk sayfası, küme denetleyicisi hakkında bilgi toplar. 
 
-![Dağıtım şablonunu, ilk sayfa](media/avere-vfxt-deploy-1.png)
+![Dağıtım şablonunun ilk sayfası](media/avere-vfxt-deploy-1.png)
 
-Aşağıdaki bilgileri doldurun:
+Aşağıdaki bilgileri girin:
 
-* **Küme Denetleyici adı** -küme denetleyicisi VM adını ayarlayın.
+* **Küme denetleyicisi adı** -küme denetleyicisi sanal makinesinin adını ayarlayın.
 
-* **Denetleyici kullanıcı adı** -VM kümesi denetleyicisi için kök kullanıcı adı girin. 
+* **Denetleyici Kullanıcı adı** -küme denetleyicisi sanal makinesi için kök Kullanıcı adı ' nı girin. 
 
-* **Kimlik doğrulama türü** -parola veya denetleyiciye bağlanmak için SSH ortak anahtarı kimlik doğrulaması'nı seçin. SSH ortak anahtar yöntemi önerilir. Okuma [oluşturma ve SSH anahtarlarını kullanma](https://docs.microsoft.com/azure/virtual-machines/linux/ssh-from-windows) yardıma ihtiyacınız varsa.
+* **Kimlik doğrulama türü** -denetleyiciye bağlanmak için parola veya SSH ortak anahtar kimlik doğrulaması ' nı seçin. SSH ortak anahtar yöntemi önerilir; yardıma ihtiyacınız varsa [SSH anahtarlarını oluşturma ve kullanma hakkında](https://docs.microsoft.com/azure/virtual-machines/linux/ssh-from-windows) bilgi edinin.
 
-* **Parola** veya **SSH ortak anahtarı** -seçtiğiniz kimlik doğrulaması türüne bağlı olarak, RSA ortak anahtarını veya sonraki alanları bir parola sağlamalısınız. Bu kimlik bilgisi, daha önce sağlanan kullanıcı adı ile kullanılır.
+* **Parola** veya **SSH ortak anahtarı** -seçtiğiniz kimlik doğrulama türüne bağlı olarak, bir RSA ortak anahtarı veya bir parolayı bir sonraki alanlarda belirtmeniz gerekir. Bu kimlik bilgisi, daha önce sağlanmış olan kullanıcı adıyla birlikte kullanılır.
 
-* **Abonelik** -Avere vFXT için aboneliği seçin. 
+* **Abonelik** -avere vFXT için aboneliği seçin. 
 
-* **Kaynak grubu** - Avere vFXT kümesi için mevcut bir boş bir kaynak grubunu seçin veya "Yeni Oluştur" a tıklayın ve yeni bir kaynak grubu adı girin. 
+* **Kaynak grubu** -avere vFXT kümesi için mevcut bir boş kaynak grubu seçin veya "Yeni oluştur" a tıklayın ve yeni bir kaynak grubu adı girin. 
 
-* **Konum** -küme ve kaynaklarınıza Azure konumu seçin.
+* **Konum** -kümeniz ve kaynaklarınız için Azure konumunu seçin.
 
-Tıklayın **Tamam** bittiğinde. 
+Bittiğinde **Tamam** ' a tıklayın. 
 
 > [!NOTE]
-> Küme denetleyicisinin bir genel kullanıma yönelik IP adresine sahip istiyorsanız, var olan bir ağ seçmek yerine küme için yeni bir sanal ağ oluşturun. İki sayfada ayarıdır.
+> Küme denetleyicisinin herkese açık bir IP adresi olmasını istiyorsanız, var olan bir ağ seçmek yerine küme için yeni bir sanal ağ oluşturun. Bu ayar iki sayfada bulunur.
 
-## <a name="page-two-parameters---vfxt-cluster-information"></a>İki parametre - vFXT küme bilgileri sayfası
+## <a name="page-two-parameters---vfxt-cluster-information"></a>Sayfa iki parametre-vFXT küme bilgileri
 
-Dağıtım şablonu ikinci sayfasında, küme boyutu, düğüm türü, önbellek boyutunu ve diğer ayarları arasında depolama parametrelerini ayarlamanıza olanak sağlar. 
+Dağıtım şablonunun ikinci sayfası, küme boyutunu, düğüm türünü, önbellek boyutunu ve depolama parametrelerini diğer ayarlar arasında ayarlamanıza olanak sağlar. 
 
-![İkinci sayfasında dağıtım şablonu](media/avere-vfxt-deploy-2.png)
+![Dağıtım şablonunun ikinci sayfası](media/avere-vfxt-deploy-2.png)
 
-* **Avere vFXT küme düğümü sayısını** -kümede kullanmak için düğüm sayısını seçin. En az üç düğüm olmalıdır ve en fazla on iki. 
+* **Avere vFXT küme düğümü sayısı** -kümede kullanılacak düğüm sayısını seçin. En az üç düğüm ve en yüksek değer on iki. 
 
-* **Küme yönetim parolası** -küme yönetimi için bir parola oluşturun. Bu parola kullanıcı adını kullanılacak ```admin``` küme Denetim Masası'na kümesini izlemek için ve ayarlarını yapılandırmak için oturum açmak için.
+* **Küme yönetimi parolası** -küme yönetimi için parola oluşturun. Bu parola, kümeyi izlemek ve ayarları yapılandırmak üzere küme Denetim Masası 'nda oturum açmak için Kullanıcı adı ```admin``` ile birlikte kullanılacaktır.
 
-* **Avere vFXT küme adı** -küme benzersiz bir ad verin. 
+* **Avere vFXT küme adı** -kümeye benzersiz bir ad verin. 
 
-* **Boyutu** -Bu bölümde küme düğümleri için kullanılacak VM türü gösterilmektedir. Yalnızca bir önerilen seçenek olmakla **değiştirme boyutu** bağlantı, bu örnek türü ve fiyatlandırma hesaplayıcısını yönelik bağlantı ayrıntılarını içeren bir tablo açar.  
+* **Boyut** -Bu bölüm, küme düğümleri IÇIN kullanılacak VM türünü gösterir. Yalnızca önerilen bir seçenek olsa da, **değişiklik boyutu** bağlantısı bu örnek türüyle ilgili ayrıntıları ve Fiyatlandırma Hesaplayıcı bağlantısını içeren bir tablo açar.  
 
-* **Önbellek boyutu düğüm başına** -toplam önbellek boyutunu Avere vFXT kümenizdeki düğümleri sayı ile çarpılan düğüm başına önbellek boyutu böylece küme önbellek küme düğümleri arasında yayılır. 
+* **Düğüm başına önbellek boyutu** -küme önbelleği küme düğümlerine yayılır, bu nedenle avere vFXT kümenizdeki toplam önbellek boyutu düğüm sayısıyla çarpılan düğüm başına önbellek boyutu olur. 
 
-  Önerilen yapılandırma, Standard_E32s_v3 düğüm için düğüm başına 4 TB kullanmaktır.
+  Önerilen yapılandırma, Standard_E32s_v3 düğümleri için düğüm başına 4 TB kullanmaktır.
 
-* **Sanal ağ** - küme barındırmak için yeni bir vnet tanımlayın veya açıklanan önkoşulları karşılayan mevcut bir vnet seçin [Avere vFXT sisteminizi planlama](avere-vfxt-deploy-plan.md#resource-group-and-network-infrastructure). 
+* **Sanal ağ** -kümeyi barındırmak için yeni bir VNET tanımlayın veya [avere Vfxt sisteminizi planlayın](avere-vfxt-deploy-plan.md#resource-group-and-network-infrastructure)bölümünde açıklanan önkoşulları karşılayan mevcut bir sanal ağı seçin. 
 
   > [!NOTE]
-  > Yeni bir vnet oluşturun, yeni özel ağa erişebilmesi için küme denetleyicisi bir genel IP adresi gerekir. Mevcut bir sanal ağı seçerseniz, küme denetleyicisi bir genel IP adresi olmadan yapılandırılır. 
+  > Yeni bir sanal ağ oluşturursanız, yeni özel ağa erişebilmek için küme denetleyicisinin ortak bir IP adresi olur. Mevcut bir sanal ağı seçerseniz, küme denetleyicisi genel bir IP adresi olmadan yapılandırılır. 
   > 
-  > Herkese görünür bir IP adresi kümesi denetleyicisinde vFXT kümesine kolay erişim sağlar, ancak küçük bir güvenlik riski oluşturur. 
-  >  * Bir genel IP adresi kümesi denetleyicisinde Avere vFXT küme dışında özel alt ağa bağlanmak için bir atlama konağı olarak kullanmanıza olanak sağlar.
-  >  * Genel bir IP adresi denetleyicisinde ayarlamazsanız, kümeye erişmek için başka bir atlama konak, bir VPN bağlantısı veya ExpressRoute kullanmanız gerekir. Örneğin, önceden yapılandırılmış bir VPN bağlantısı olan bir sanal ağ içindeki denetleyiciyi oluşturun.
-  >  * Genel bir IP adresi ile bir denetleyici oluşturursanız, bir ağ güvenlik grubuyla denetleyicisi VM'SİNİN korumanız gerekir. Varsayılan olarak Avere vFXT Azure dağıtımı için bir ağ güvenlik grubu oluşturur ve yalnızca bağlantı noktası 22 genel IP adresleri ile denetleyicileri için gelen erişimi kısıtlar. Sistem kilitleyerek daha iyi koruyabilirsiniz, IP kaynak adresi aralığı - erişim tuşunu diğer bir deyişle, yalnızca gelen bağlantılara makineler kümeye erişim için kullanmayı düşündüğünüz izin verin.
+  > Küme denetleyicisindeki genel olarak görünen bir IP adresi, vFXT kümesine daha kolay erişim sağlar, ancak küçük bir güvenlik riski oluşturur. 
+  >  * Küme denetleyicisindeki genel bir IP adresi, özel alt ağın dışından avere vFXT kümesine bağlanmak için bir geçiş ana bilgisayarı olarak kullanmanıza olanak tanır.
+  >  * Denetleyicide genel bir IP adresi ayarlanmamışsa, kümeye erişmek için başka bir geçiş ana bilgisayarı, bir VPN bağlantısı veya ExpressRoute kullanmanız gerekir. Örneğin, denetleyiciyi, zaten yapılandırılmış bir VPN bağlantısı olan bir sanal ağ içinde oluşturun.
+  >  * Genel IP adresi olan bir denetleyici oluşturursanız, denetleyici VM 'sini bir ağ güvenlik grubuyla korumanız gerekir. Varsayılan olarak, Azure dağıtımı için avere vFXT bir ağ güvenlik grubu oluşturur ve genel IP adreslerine sahip denetleyiciler için yalnızca bağlantı noktası 22 ' ye gelen erişimi kısıtlar. IP kaynak adreslerinize erişimi kilitleyerek, diğer bir deyişle, yalnızca küme erişimi için kullanmayı düşündüğünüz makinelerden gelen bağlantılara izin vererek sistemi daha da koruyabilirsiniz.
 
-  Dağıtım şablonu, ayrıca Küme alt ağdan yalnızca IP'ler için kilitli ağ erişim denetimi ile Azure Blob Depolama için depolama hizmet uç noktası ile yeni vnet'in yapılandırır. 
+  Dağıtım şablonu Ayrıca yeni VNET 'i Azure Blob depolama için bir depolama hizmeti uç noktası ile ve ağ erişim denetimi 'nin yalnızca küme alt ağındaki IP 'lere kilitlediği şekilde yapılandırır. 
 
-* **Alt ağ** - var olan sanal ağınızdan bir alt ağ seçin veya yeni bir tane oluşturun. 
+* **Alt ağ** -var olan sanal ağınızdan bir alt ağ seçin veya yeni bir tane oluşturun. 
 
-* **Oluşturma ve blob depolama kullanma** -seçin **true** yeni bir Azure Blob kapsayıcısı oluşturmak ve bunu yeni Avere vFXT küme için arka uç depolama olarak yapılandırmak için. Bu seçenek ayrıca küme ve Küme alt ağı içinde Microsoft Depolama hizmet uç noktası olarak aynı kaynak grubunda yeni bir depolama hesabı oluşturur. 
+* **BLOB depolama oluşturma ve kullanma** -yeni bir Azure Blob kapsayıcısı oluşturmak ve bunu yeni avere vFXT kümesi için arka uç depolama olarak yapılandırmak için **true** seçeneğini belirleyin. Bu seçenek ayrıca küme ile aynı kaynak grubunda ve küme alt ağı içindeki bir Microsoft Storage hizmeti uç noktası içinde yeni bir depolama hesabı oluşturur. 
   
-  Bir sanal ağınız sağlarsanız, kümeyi oluşturmadan önce depolama hizmet uç noktası olmalıdır. (Daha fazla bilgi için okuma [Avere vFXT sisteminizi planlama](avere-vfxt-deploy-plan.md).)
+  Var olan bir sanal ağı sağlarsanız, kümeyi oluşturmadan önce bir depolama hizmeti uç noktası olması gerekir. (Daha fazla bilgi için [avere vFXT sisteminizin planını](avere-vfxt-deploy-plan.md)okuyun.)
 
-  Bu alan kümesine **false** yeni bir kapsayıcı oluşturmak istemiyorsanız. Bu durumda, ekleme ve Küme oluşturulduktan sonra depolama yapılandırmanız gerekir. Okuma [depolamayı yapılandırma](avere-vfxt-add-storage.md) yönergeler için. 
+  Yeni bir kapsayıcı oluşturmak istemiyorsanız bu alanı **false** olarak ayarlayın. Bu durumda, kümeyi oluşturduktan sonra depolamayı iliştirmeli ve yapılandırmalısınız. Yönergeler için [depolamayı yapılandırma](avere-vfxt-add-storage.md) makalesini okuyun. 
 
-* **(Yeni) Depolama hesabı** : yeni bir Azure Blob kapsayıcısı oluşturma girin, yeni depolama hesabı için bir ad. 
+* **(Yeni) depolama hesabı** -yeni bir Azure Blob kapsayıcısı oluşturuyorsanız, yeni depolama hesabı için bir ad girin. 
 
 ## <a name="validation-and-purchase"></a>Doğrulama ve satın alma
 
-Sayfa üç yapılandırma özetler ve parametrelerini doğrular. Doğrulama başarılı olduktan sonra tıklayın **Tamam** devam etmek için düğmesine. 
+Üç sayfa yapılandırmayı özetler ve parametreleri doğrular. Doğrulama başarılı olduktan sonra devam etmek için **Tamam** düğmesine tıklayın. 
 
-![Üçüncü sayfasında, dağıtım şablonu - doğrulama](media/avere-vfxt-deploy-3.png)
+![Dağıtım şablonunun üçüncü sayfası-doğrulama](media/avere-vfxt-deploy-3.png)
 
-Dört sayfasında, gerekli tüm iletişim bilgileri girin ve tıklayın **Oluştur** koşullarını kabul edin ve Azure kümesine için Avere vFXT oluşturma düğmesi. 
+4\. sayfada, gerekli iletişim bilgilerini girin ve **Oluştur** düğmesine tıklayarak koşulları kabul edin ve Azure kümesi Için avere vFXT 'yi oluşturun. 
 
-![Dağıtım şablonu - hüküm ve koşullar, dördüncü sayfasında düğme oluşturma](media/avere-vfxt-deploy-4.png)
+![Dağıtım şablonunun dördüncü sayfası-hüküm ve koşullar, Oluştur düğmesi](media/avere-vfxt-deploy-4.png)
 
-Küme dağıtımı, 15-20 dakika sürer.
+Küme dağıtımı 15-20 dakika sürer.
 
-## <a name="gather-template-output"></a>Şablon çıktısı toplayın
+## <a name="gather-template-output"></a>Şablon çıktısını topla
 
-Avere vFXT şablon kümesi oluşturma tamamlandığında, yeni kümeye hakkında bazı önemli bilgiler çıkarır. 
+Avere vFXT şablonu kümeyi oluşturmayı bitirdiğinde, yeni küme hakkında bazı önemli bilgiler verir. 
 
 > [!TIP]
-> Yönetim IP adresi şablonu çıktısını kopyaladığınızdan emin olun. Bu adres kümeyi yönetmek için ihtiyacınız.
+> Şablon çıktısından yönetim IP adresini kopyalamadığınızdan emin olun. Kümeyi yönetmek için bu adrese ihtiyacınız vardır.
 
-Bu bilgileri bulmak için bu yordamı izleyin:
+Bu bilgileri bulmak için şu yordamı izleyin:
 
-1. Küme denetleyiciniz için kaynak grubuna gidin.
+1. Küme denetleyicinizin kaynak grubuna gidin.
 
-1. Sol taraftaki **dağıtımları**, ardından **microsoft avere.vfxt şablon**.
+1. Sol tarafta **dağıtımlar**' a ve ardından **Microsoft-avere. vfxt-Template**' e tıklayın.
 
-   ![Microsoft-avere.vfxt-şablon dağıtım adı altında bir tablodaki gösteren ve sol seçili dağıtımları olan kaynak grubu portal sayfası](media/avere-vfxt-outputs-deployments.png)
+   ![Solda ve Microsoft-avere. vfxt-Template seçili dağıtımlar içeren kaynak grubu portalı sayfası dağıtım adı altındaki bir tabloda gösteriliyor](media/avere-vfxt-outputs-deployments.png)
 
-1. Sol taraftaki **çıkışları**. Her alan değerleri kopyalayın. 
+1. Sol tarafta, **çıktılar**' e tıklayın. Her alandaki değerleri kopyalayın. 
 
-   ![etiketleri sağındaki alanları sayfasını gösteren SSHSTRING, RESOURCE_GROUP, konum, NETWORK_RESOURCE_GROUP, ağ, alt ağ, SUBNET_ID, VSERVER_IPs ve MGMT_IP değerleri çıkarır](media/avere-vfxt-outputs-values.png)
+   ![etiketlerin sağ tarafındaki alanlarda SSHSTRING, RESOURCE_GROUP, LOCATION, NETWORK_RESOURCE_GROUP, NETWORK, SUBNET, SUBNET_ID, VSERVER_IPs ve MGMT_IP değerlerini gösteren sayfa çıkışları](media/avere-vfxt-outputs-values.png)
 
 ## <a name="next-step"></a>Sonraki adım
 
-Kümenin çalıştığından ve yönetim IP adresini bilmeniz göre yapabilecekleriniz [Küme Yapılandırma Aracı'na bağlanma](avere-vfxt-cluster-gui.md) desteğini etkinleştirmek için depolama gerekli ve diğer küme ayarlarını özelleştirme ekleyin.
+Artık küme çalışıyor olduğuna ve yönetim IP adresini bildiğinize göre, desteği etkinleştirmek, gerekirse depolama eklemek ve diğer küme ayarlarını özelleştirmek için [küme yapılandırma aracına bağlanabilirsiniz](avere-vfxt-cluster-gui.md) .

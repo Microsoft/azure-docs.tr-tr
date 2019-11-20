@@ -7,6 +7,7 @@
     - name: App Service Mobile Apps ile Tümleştirme
       href: notification-hubs-app-service.md
 - name: Hızlı Başlangıçlar
+  expanded: true
   items:
     - name: Bildirim hub'ı oluşturma - Azure portalı
       href: create-notification-hub-portal.md
@@ -36,6 +37,8 @@
               href: notification-hubs-aspnet-backend-gcm-android-push-to-user-google-notification.md
     - name: iOS
       items:
+        - name: iOS 13 için Notification Hubs güncelleştirmeleri
+          href: push-notification-updates-ios-13.md
         - name: iOS uygulamalarına istek bildirimi gönderme
           items:
             - name: Objective-C

@@ -2,7 +2,7 @@
 documentType: LandingData
 title: Azure Tarafından Yönetilen Uygulamalarla İlgili Belgeler
 metadata:
-  title: 'Azure Tarafından Yönetilen Uygulamalarla İlgili Belgeler - Öğreticiler, API Başvurusu'
+  title: Azure Tarafından Yönetilen Uygulamalarla İlgili Belgeler
   description: 'Azure Tarafından Yönetilen Uygulamaları kullanarak, tüketicilerin daha kolay şekilde çalıştırabileceği bulut çözümleri yayımlayın.'
   services: managed-applications
   author: tfitzmac

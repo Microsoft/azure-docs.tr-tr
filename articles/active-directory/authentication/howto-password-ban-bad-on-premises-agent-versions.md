@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: jsimmons
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 60ce66b079942944176540826c7f3e7a91b070d2
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: c024954053588537ac3363703876f716a38f41d9
+ms.sourcegitcommit: c105ccb7cfae6ee87f50f099a1c035623a2e239b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60358217"
+ms.lasthandoff: 07/09/2019
+ms.locfileid: "67702942"
 ---
 # <a name="azure-ad-password-protection-agent-version-history"></a>Azure AD parola koruması Aracı sürüm geçmişi
 
@@ -38,7 +38,7 @@ Yayın Tarihi: 3/13/2019
   * Yazılım sürümü ve Azure kiracısına ilişkin veriler yalnızca DC aracılar ve proxy'ler 1.2.116.0 sürümünü çalıştıran veya sonraki kullanılabilir.
   * Azure Kiracı verilerini bir yeniden kayıt (veya yenileme) proxy kadar bildirilmeyebilir veya orman oluştu.
 * Proxy Hizmeti, artık .NET 4.7 yüklü olmasını gerektirir.
-  * .NET 4.7 zaten tamamen güncelleştirilmiş bir Windows sunucusuna yüklenmesi gerekir. Durum bu değilse, indirmek ve bulunan yükleyiciyi çalıştırın [Windows için .NET Framework 4.7 çevrimdışı yükleyici](https://support.microsoft.com/en-us/help/3186497/the-net-framework-4-7-offline-installer-for-windows).
+  * .NET 4.7 zaten tamamen güncelleştirilmiş bir Windows sunucusuna yüklenmesi gerekir. Durum bu değilse, indirmek ve bulunan yükleyiciyi çalıştırın [Windows için .NET Framework 4.7 çevrimdışı yükleyici](https://support.microsoft.com/help/3186497/the-net-framework-4-7-offline-installer-for-windows).
   * Sunucu Çekirdeği sistemlerine başarılı şekilde almak için .NET 4.7 yükleyici için /q bayrak geçirmek için gerekli olabilir.
 * Proxy Hizmeti, artık otomatik yükseltmeyi destekler. Otomatik yükseltme yüklü yan yana Proxy hizmeti olan Microsoft Azure AD Connect aracı Updater hizmeti kullanır. Otomatik yükseltme varsayılan olarak açıktır.
 * Otomatik yükseltme etkinleştirilebilir veya Set-AzureADPasswordProtectionProxyConfiguration cmdlet'i kullanılarak devre dışı. Geçerli ayarı, Get-AzureADPasswordProtectionProxyConfiguration cmdlet'ini kullanarak sorgulanabilir.

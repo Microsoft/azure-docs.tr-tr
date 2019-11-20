@@ -1,81 +1,100 @@
 ---
-title: Unity ile proje akustik hızlı
+title: Unity ile Project Acoustics hızlı başlangıç
 titlesuffix: Azure Cognitive Services
-description: Örnek içeriği kullanma, tasarım denetimleri Unity proje akustik ile denemeler yapın ve Windows Masaüstü için dağıtın.
+description: Unity 'de Project Acoustics tasarım denetimleriyle denemek ve Windows masaüstüne dağıtmak için örnek içeriği kullanın.
 services: cognitive-services
-author: kegodin
+author: NoelCross
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: acoustics
 ms.topic: quickstart
 ms.date: 03/20/2019
-ms.author: kegodin
-ms.openlocfilehash: 1c790e0fa726c719d5b888d42b5f59739777566b
-ms.sourcegitcommit: 2028fc790f1d265dc96cf12d1ee9f1437955ad87
+ms.author: noelc
+ROBOTS: NOINDEX
+ms.openlocfilehash: fabdd221ef99414eae0156babbd76dedb1f0745d
+ms.sourcegitcommit: 824e3d971490b0272e06f2b8b3fe98bbf7bfcb7f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/30/2019
-ms.locfileid: "64917112"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72243015"
 ---
-# <a name="project-acoustics-unity-quickstart"></a>Proje akustik Unity hızlı başlangıç
-Kullanım proje akustik içeriğin benzetim destekli tasarım denetimleriyle denemek Unity için örnek.
+# <a name="project-acoustics-unity-quickstart"></a>Project Acoustics Unity hızlı başlangıç
+Simülasyon ile desteklenen tasarım denetimleriyle denemek için Unity için Project Acoustics örnek içeriğini kullanın.
 
 Yazılım gereksinimleri:
-* [Unity 2018.2 +](https://unity3d.com) Windows için
-* [Proje akustik örnek içerik paketi](https://www.microsoft.com/download/details.aspx?id=57346)
+* Windows için [Unity 2018.2 +](https://unity3d.com)
+* [Project Acoustics örnek içerik paketi](https://www.microsoft.com/download/details.aspx?id=57346)
 
-Ne örnek paketine dahildir?
-* Unity Sahne geometri, ses kaynakları ve oyun denetimleri
-* Proje akustik eklentisi 
-* Sahne için oluşturulan akustik varlıklar
+Örnek pakete neler dahildir?
+* Geometri, ses kaynakları ve oyunplay denetimleriyle Unity sahneyi
+* Project Acoustics eklentisi
+* Sahne için bakmış Acoustics varlıkları
 
 ## <a name="import-the-sample-package"></a>Örnek paketi içeri aktarma
-Örnek paketi için yeni bir Unity proje içeri aktarın. 
-* Unity içinde Git **varlıklar > paketi İçeri Aktar > özel paket...**
+Örnek paketi yeni bir Unity projesine aktarın.
+1. Unity 'de **varlıklar**' a  > **paketi içeri aktar** > **özel paket**' e gidin.
 
-    ![Ekran görüntüsü, Unity paketini İçeri Aktar seçenekleri](media/import-package.png)  
+    ![Unity Içeri aktarma paketi seçenekleri](media/import-package.png)  
 
-* Seçin **ProjectAcoustics.unitypackage**
+1. **Projectacoustik. unitypackage**' ı seçin.
 
-Varolan bir projeye paketi içe aktarıyorsanız, bkz. [Unity tümleştirmesi](unity-integration.md) için ek adımlar ve notlar.
+1. Unity paketini projenize bütünleştirmek için **Içeri aktar** düğmesini seçin.  
+  
+    ![Unity Içeri aktarma paketi iletişim kutusu](media/import-dialog.png)  
 
-## <a name="restart-unity"></a>Unity yeniden başlatın
-Akustik Araç Seti hazırlama kısmı .NET 4.x komut dosyası çalışma zamanı sürümünü gerektirir. Paketi içeri aktarma, Unity oynatıcı ayarlarını güncelleştirir. Etkili olması için bu ayar için Unity yeniden başlatın.
+Paketi var olan bir projeye içeri aktarmak için bkz. ek adımlar ve notlar için [Unity tümleştirmesi](unity-integration.md) .
 
-Bu ayar etkin açarak sürdü doğrulayabilirsiniz **Player ayarları**:
+>[!NOTE]
+>İçeri aktarma işlemi tamamlandıktan sonra konsol günlüğünde çeşitli hata iletileri görüntülenir. Sonraki adıma geçin ve Unity 'yi yeniden başlatın.
 
-![Unity Player ayarları ekran paneli](media/player-settings.png)
+## <a name="restart-unity"></a>Unity 'yi yeniden Başlat
+Acoustics araç setinin hazırlama kısmı .NET 4 gerektirir. *x* Scripting Runtime sürümü. Paket içeri aktarma, Unity oynatıcı ayarlarınızı güncelleştirir. Bu ayarın etkili olması için Unity 'yi yeniden başlatın. Ayarın geçerli olduğunu doğrulamak için **oynatıcı** ayarları ' nı açın:
 
-![.NET 4. 5'in seçili paneliyle Unity Player ayarları ekran görüntüsü](media/net45.png)
+![Unity proje ayarları menüsü](media/player-settings.png)  
 
-## <a name="experiment-with-design-controls"></a>Tasarım denetimleri ile denemeler yapın
-Örnek sahnede açın **ProjectAcousticsSample** klasörü ve Unity Düzenleyicisi'nde Oynat düğmesini tıklatın. Kullanım W, A, S, D ve fareyi hareket etmek için. Sahne ve akustik olmadan nasıl sesleri Karşılaştırılacak basın **R** katmana metin kırmızıya döner ve diyor kadar düğmesi "Akustik: Devre dışı bırakıldı." Diğer denetimlerin klavye kısayollarını görmek için **F1** tuşuna basın. Ayrıca gerçekleştirmek için bir eylem seçmek için sağ tıklayarak sonra eylemi gerçekleştirmek için sol tıklayarak kalmayacak denetimlerdir.
+![.NET 4. x seçiliyken Unity oynatıcı ayarları paneli](media/net45.png)  
 
-Betik **AcousticsAdjust** kaynak başına tasarım parametrelerini sağlayan örnek görünümde ses kaynaklarına bağlı. 
+>[!NOTE]
+>Bu ekran görüntüsü Unity 2018 ' den alınmıştır. *x*. Görüntü, Unity 'nin daha yeni sürümlerinde farklılık gösterebilir.
 
-![Unity AcousticsAdjust ekran komut dosyası](media/acoustics-adjust.png)
+## <a name="open-the-project-acoustics-bake-window"></a>Project Acoustics hazırlama penceresini açın
+Unity 'de **pencere** menüsünde **Acoustics** öğesini seçin.
 
-Aşağıda bazı sağlanan denetimleriyle üretilen efektleri keşfediyor. Her denetimi ile ilgili ayrıntılı bilgi için bkz. [proje akustik Unity tasarım öğretici](unreal-workflow.md).
+![Pencere menüsünde Acoustics seçeneği vurgulanmış olan Unity Düzenleyicisi](media/window-acoustics.png)
 
-### <a name="modify-distance-based-attenuation"></a>Uzaklık tabanlı zayıflama değiştirme
-Ses DSP sağladığı **proje akustik** Unity spatializer eklentisinin Unity düzenleyicide yerleşik olarak bulunan kaynak başına uzaklık tabanlı zayıflama dikkate alır. Denetimler için uzaklık tabanlı zayıflama bulunduğunuz **ses kaynak** bileşeni bulunan **denetçisi** altında ses panelinden kaynakları **3B ses ayarları**:
+Kayan **Acoustics** penceresi açılır. Bu pencere, akustik simülasyonu 'nin özelliklerini ayarladığınız yerdir.
 
-![Ekran görüntüsü, Unity uzaklık zayıflama Seçenekleri paneli](media/distance-attenuation.png)
+![Acoustics penceresi açık olan Unity Düzenleyicisi](media/unity-editor-plugin-window.png)  
 
-Proje akustik player konum etrafındaki ortalanmış bir "benzetimi bölge" kutusu hesaplama gerçekleştirir. Örnek paketinin akustik varlıkları 45 player çevreleyen milyon simülasyonu bölge boyutuna sahip desteklenmiş olduğundan, ses zayıflama 0 olarak yaklaşık 45 m kalan şekilde tasarlanmalıdır.
+## <a name="experiment-with-the-design-controls"></a>Tasarım denetimleriyle deneyin
+*Projectacousticssample* klasöründe örnek sahneyi açın ve Unity düzenleyicisinde Oynat düğmesini seçin. Gezinmek için W, A, S ve D tuşlarını ve fareyi kullanın. Sahnenin Acoustics ve olmadan nasıl seslendiğini karşılaştırmak için, kaplama metni kırmızıya dönüşene kadar R tuşunu ve "Acoustics: Disabled" öğesini gösterir. Daha fazla denetim için klavye kısayollarını görmek için F1 ' i seçin. Ayrıca, bir eylem seçmek için sağ tıklayabilir ve ardından bu eylemi yapmak için sol ' a tıklayabilirsiniz.
 
-### <a name="modify-occlusion-and-transmission"></a>Kapatma ve iletim değiştirme
-* Varsa **kapatma** çarpanı (varsayılan değer 1) 1'den büyük olduğundan, kapatma exaggerated. 1'den küçük yapar ayarlama kapatma efekt daha hafif.
+*AcousticsAdjust* betiği, örnek sahnedeki ses kaynaklarına iliştirilir. Kaynak başına tasarım parametrelerine izin vermez.
 
-* Wall ile aktarımını etkinleştirmek için taşıma **iletim (dB)** kaydırıcı, en düşük düzey kapalı. 
+![Unity AcousticsAdjust betiği](media/acoustics-adjust.png)
 
-### <a name="modify-wetness-for-a-source"></a>Bir kaynak için wetness değiştirme
-* Nasıl hızlı bir şekilde wetness uzaklığı ile değişiklikleri değiştirmek için kullanın **Algısal uzaklık Warp**. **Proje akustik** ıslak düzgün uzaklığı ile değişir ve Algısal uzaklık ipuçlarını sağlama düzeylerine benzetimi alanından boyunca hesaplar. Uzaklık warp artırılması, bu etkiyi uzaklık ilgili ıslak düzeyleri artırarak arttırdığınızda. 1 değerinden çarpıtma değerleri değiştirme uzaklığı tabanlı reverberation daha hafif olun. Bu etkiyi ayrıca daha ayrıntılı ayrıntılı olarak ayarlayarak ayarlanabilir **Wetness (dB)**.
+Aşağıdaki bölümler, kullanılabilir denetimleri kullanarak oluşturabileceğiniz bazı etkileri keşfedebilir. Her denetim hakkında ayrıntılı bilgi için [Project Acoustics Unity tasarım öğreticisine](unity-workflow.md)bakın.
 
-* Ayarlayarak boşluğu boyunca decay süresini artırmak **Decay zaman ölçeği**. Belirli kaynak dinleyici konumu çifti için benzetim sonucu 1.5s, decay saati ise ve **Decay zaman ölçeği** ayarlı 2'ye kaynağa decay 3s zamandır.
+### <a name="modify-distance-based-attenuation"></a>Uzaklık tabanlı zayıflamayı değiştirme
+**Project Acoustics** Unity spatializer eklentisindeki ses dijital sinyal Işleme, Unity Düzenleyicisi 'nde yerleşik olarak bulunan kaynak başına uzaklık tabanlı zayıflamasına uyar. Uzaklık tabanlı zayıflalama denetimleri, **3B ses ayarları**altındaki ses kaynakları **denetçisi** panelinde bulunan **ses kaynağı** bileşenidir:
+
+![Unity uzaklık zayıflalama seçenekleri bölmesi](media/distance-attenuation.png)
+
+Project Acoustics, oynatıcı konum etrafında ortalanan bir "simülasyon bölgesi" kutusunda hesaplar. Örnek paketteki Acoustics varlıkları, oyuncu etrafında 45 ölçüm benzetimi bölge boyutuna bakmıştı. Bu nedenle, ses zayıflalama, 45 ile yaklaşık 0 ' a düşecek şekilde tasarlanmalıdır.
+
+### <a name="modify-occlusion-and-transmission"></a>Occlusiyon ve iletimi değiştirme
+* **Occlusiyon** çarpanı 1 ' den büyükse (varsayılan 1 ' dir), occlusiyon kullanılır. Daha hafif hale getirmek için, bunu 1 ' den küçük olarak ayarlayın.
+
+* Duvar üzerinden iletimi etkinleştirmek için, **iletim (DB)** kaydırıcısını en düşük ayardan uzağa taşıyın.
+
+### <a name="modify-wetness-for-a-source"></a>Bir kaynak için wetliği değiştirme
+* Mesafede ne kadar hızlı bir şekilde değişiklik yapıldığını değiştirmek için, **algısal mesafe warp**kullanın. Simülasyon aracılığıyla Project Acoustics, algısal uzaklık ipuçları sağlayan ve uzaklığın düzgün şekilde değişen ıslak düzeylerini hesaplar. Uzaklık çarpmasının artırılması, mesafeyi ilgili ıslak düzeylerini artırarak bu etkiyi ayırır. 1 ' den küçük değerleri çarpıtma, uzaklık tabanlı ters getirme değişikliğini daha hafif hale getirir.
+
+   Bu etkiye yönelik daha ayrıntılı ayarlamalar yapmak için, **Wettik (DB)** ayarını değiştirin.
+
+* Boşluk boyunca zaman ölçeğini artırmak için, **Decay zaman ölçeğini**ayarlayın. Belirli bir kaynak dinleyicisi konum çiftinin simülasyon sonucu 1,5 saniyelik bir zaman alıyorsa ve **Decay zaman ölçeği** 2 olarak ayarlandıysa, kaynağa uygulanan Decay süresi 3 saniyedir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Tüm ayrıntıları okuyun [Unity tabanlı proje akustik denetimleri tasarlama](unity-workflow.md)
-* Kavramları daha iyi keşfedilebilmesi [tasarım işlemi](design-process.md)
-* [Bir Azure hesabı oluşturun](create-azure-account.md) ön hazırlama keşfedin ve hazırlama işlemleri
-
+* [Unity tabanlı proje Acoustics tasarım denetimlerinde](unity-workflow.md)ayrıntıları okuyun.
+* [Tasarım sürecinin](design-process.md)arkasındaki kavramları daha ayrıntılı bir şekilde araştırın.
+* Ön ek ve hazırlama sürecini araştırmak için [bir Azure hesabı oluşturun](create-azure-account.md) .

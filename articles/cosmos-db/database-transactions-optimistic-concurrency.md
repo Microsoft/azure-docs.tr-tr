@@ -1,67 +1,67 @@
 ---
-title: Veritabanı işlemleri ve Azure Cosmos DB'de iyimser eşzamanlılık denetimi
-description: Bu makalede veritabanı işlemleri ve Azure Cosmos DB'de iyimser eşzamanlılık denetimi
-author: rimman
+title: Azure Cosmos DB 'de veritabanı işlemleri ve iyimser eşzamanlılık denetimi
+description: Bu makalede, Azure Cosmos DB veritabanı işlemleri ve iyimser eşzamanlılık denetimi açıklanmaktadır
+author: markjbrown
+ms.author: mjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 05/21/2019
-ms.author: rimman
+ms.date: 07/23/2019
 ms.reviewer: sngun
-ms.openlocfilehash: 1da5dabad04d72c903072a33dfb7b0229f99c62d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 4c263b32b7ededb9e5169e80a29806f322a3c849
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65978981"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72755163"
 ---
 # <a name="transactions-and-optimistic-concurrency-control"></a>İşlemler ve iyimser eşzamanlılık denetimi
 
-Veritabanı işlemleri verileri eşzamanlı değişikliklerle başa çıkmak için bir güvenli ve öngörülebilir programlama modeli sağlar. Geleneksel ilişkisel veritabanları, SQL Server gibi tetiklenir ve/veya depolanan yordamları kullanarak iş mantığı yazmanıza izin, doğrudan veritabanı altyapısının içinde yürütme için sunucuya gönderin. İki farklı programlama dili (işlem olmayan) uygulama programlama dili gibi JavaScript, Python, işlem için gerekli olan geleneksel veri tabanlarına C#, Java vb. ve işlem programlama dili () T-SQL gibi), veritabanı tarafından yerel olarak yürütülür.
+Veritabanı işlemleri, verilerdeki eşzamanlı değişikliklerle başa çıkmak için güvenli ve öngörülebilir bir programlama modeli sağlar. SQL Server gibi geleneksel ilişkisel veritabanları, depolanan yordamları ve/veya Tetikleyicileri kullanarak iş mantığını yazmanızı sağlar, bu dosyayı doğrudan veritabanı altyapısının içinde yürütülmek üzere sunucuya gönderir. Geleneksel ilişkisel veritabanlarında, JavaScript, Python, C#, Java, vb. gibi (işlemsel olmayan) uygulama programlama dili ve işlem programlama dili gibi iki farklı programlama dili ile uğraşmanız gerekir ( veritabanı tarafından yerel olarak yürütülen T-SQL gibi).
 
-Anlık görüntü yalıtımıyla ACID (kararlılık, tutarlılık, yalıtım, dayanıklılık) uyumlu işlemler tam veritabanı altyapısı, Azure Cosmos DB destekler. Tüm veritabanı işlemlerinin kapsamı içinde bir kapsayıcının [mantıksal bölüm](partition-data.md) işlemsel olarak bölümün çoğaltması tarafından barındırılır veritabanı altyapısının içinde yürütülür. Bu işlemlerin her ikisi de dahil (mantıksal bölüm içindeki bir veya daha fazla öğe güncelleştirme) yazma ve okuma işlemleri. Aşağıdaki tabloda, farklı işlemler ve işlem türleri gösterilmektedir:
+Azure Cosmos DB veritabanı altyapısı, anlık görüntü yalıtımıyla tam ACID (Atomicity, tutarlılık, yalıtım, dayanıklılık) uyumlu işlemleri destekler. Bir kapsayıcının [mantıksal bölümünün](partition-data.md) kapsamındaki tüm veritabanı işlemleri, Bölüm çoğaltması tarafından barındırılan veritabanı altyapısında işlem içinde yürütülür. Bu işlemler hem yazma (mantıksal bölümün içindeki bir veya daha fazla öğeyi güncelleştirme) hem de okuma işlemlerini içerir. Aşağıdaki tabloda farklı işlemler ve işlem türleri gösterilmektedir:
 
-| **İşlem**  | **İşlem türü** | **Tek veya çoklu öğe işlem** |
+| **İşlem**  | **İşlem türü** | **Tek veya çoklu öğe Işlemi** |
 |---------|---------|---------|
-| (Ön/son tetikleyici) Ekle | Yazma | İşlem tek öğe |
-| (Bir ön/son tetikleyici) Ekle | Yazma ve okuma | Birden çok öğe işlem |
-| (Ön/son tetikleyici) değiştirin | Yazma | İşlem tek öğe |
-| (Bir ön/son tetikleyici) değiştirin | Yazma ve okuma | Birden çok öğe işlem |
-| Upsert (olmadan, bir ön/son tetikleyici) | Yazma | İşlem tek öğe |
-| Upsert (ile ön/son tetikleyici) | Yazma ve okuma | Birden çok öğe işlem |
-| (Ön/son tetikleyici) Sil | Yazma | İşlem tek öğe |
-| (Bir ön/son tetikleyici) Sil | Yazma ve okuma | Birden çok öğe işlem |
-| Saklı yordamı yürütme | Yazma ve okuma | Birden çok öğe işlem |
-| Sistem tarafından başlatılan bir birleştirme yordamının yürütülmesi | Yazma | Birden çok öğe işlem |
-| Sistem tarafından başlatılan bir öğe süre sonu (TTL) alarak öğeleri silme yürütme | Yazma | Birden çok öğe işlem |
-| Okuma | Okuma | Tek öğeli işlem |
-| Değişiklik Akışı | Okuma | Birden çok öğe işlem |
-| Sayfalandırılmış okuma | Okuma | Birden çok öğe işlem |
-| Sayfalandırılmış sorgu | Okuma | Birden çok öğe işlem |
-| UDF sayfalandırılmış sorgunun bir parçası olarak yürütün | Okuma | Birden çok öğe işlem |
+| Ekle (ön/son tetikleyici olmadan) | Yazma | Tek öğe işlemi |
+| Insert (bir ön/son tetikleyici ile) | Yazma ve okuma | Çoklu öğe işlemi |
+| Değiştir (ön/son tetikleyici olmadan) | Yazma | Tek öğe işlemi |
+| Değiştir (bir ön/son tetikleyici ile) | Yazma ve okuma | Çoklu öğe işlemi |
+| Upsert (ön/son tetikleyici olmadan) | Yazma | Tek öğe işlemi |
+| Upsert (bir ön/son tetikleyici ile) | Yazma ve okuma | Çoklu öğe işlemi |
+| Sil (ön/son tetikleyici olmadan) | Yazma | Tek öğe işlemi |
+| Sil (bir ön/son tetikleyici ile) | Yazma ve okuma | Çoklu öğe işlemi |
+| Saklı yordamı Yürüt | Yazma ve okuma | Çoklu öğe işlemi |
+| Sistemin bir birleştirme yordamının yürütülmesi başlatıldı | Yazma | Çoklu öğe işlemi |
+| Bir öğenin süre sonu (TTL) temelinde öğelerin silinmesinin sistem tarafından başlatılması | Yazma | Çoklu öğe işlemi |
+| Okuma | Okuma | Tek öğe işlem |
+| Değişiklik Akışı | Okuma | Çoklu öğe işlemi |
+| Sayfalandırılmış okuma | Okuma | Çoklu öğe işlemi |
+| Sayfalandırılmış sorgu | Okuma | Çoklu öğe işlemi |
+| Sayfalandırılmış sorgunun bir parçası olarak UDF yürütün | Okuma | Çoklu öğe işlemi |
 
-## <a name="multi-item-transactions"></a>Birden çok öğe işlemleri
+## <a name="multi-item-transactions"></a>Çoklu öğe işlemleri
 
-Azure Cosmos DB yazmanıza olanak verir [saklı yordamlar, Tetikleyiciler ön/son, kullanıcı-tanımlı-işlevler (UDF'ler)](stored-procedures-triggers-udfs.md) ve birleştirme JavaScript yordamları. Azure Cosmos DB, veritabanı altyapısının içinde JavaScript yürütme yerel olarak destekler. Saklı yordamlar kaydedebilirsiniz, ön/son Tetikleyicileri ve kullanıcı-tanımlı-işlevler (UDF'ler) birleştirme yordamları bir kapsayıcı ve daha sonra bunları işlemsel olarak Azure Cosmos veritabanı altyapısının içinde yürütün. İçinde JavaScript uygulama mantığının yazma doğal ifade denetim akışı, değişken kapsamı, atama ve özel durum işleme temelleri JavaScript dilinde doğrudan veritabanı işlemleri içinde tümleştirme sağlar.
+Azure Cosmos DB, JavaScript 'te [saklı yordamlar, ön ve son Tetikleyiciler, Kullanıcı tanımlı işlevler (UDF 'ler)](stored-procedures-triggers-udfs.md) ve birleştirme yordamları yazmanızı sağlar. Azure Cosmos DB, veritabanı altyapısının içinde JavaScript yürütmesini yerel olarak destekler. Saklı yordamları, ön ve son Tetikleyicileri, Kullanıcı tanımlı işlevleri (UDF 'ler) ve birleştirme yordamlarını bir kapsayıcı üzerinde kaydedebilir ve daha sonra bunları Azure Cosmos veritabanı altyapısı içinde işlem temelli olarak yürütebilirsiniz. JavaScript 'e uygulama mantığı yazmak, denetim akışının doğal ifadesine, değişken kapsamı, atamaya ve veritabanı işlemlerinde doğrudan JavaScript dilinde özel durum işleme temelleri tümleştirilmesine olanak tanır.
 
-JavaScript tabanlı saklı yordamlar, Tetikleyiciler, UDF'ler ve birleştirme yordamları anlık görüntü yalıtımıyla çevresel ACID işlemi içinde mantıksal bölüm içindeki tüm öğelerde sarmalanır. Yürütme sürecinde JavaScript programı bir özel durum oluşturursa tüm işlem iptal edilir ve geri alındı. Sonuçta elde edilen programlama modeli basittir güçlü. JavaScript geliştiricileri yine de tanıdık dillerini kullanarak oluşturur ancak kalıcı bir programlama modeli ve kitaplık temelleri alın.
+JavaScript tabanlı saklı yordamlar, Tetikleyiciler, UDF 'ler ve birleştirme yordamları, mantıksal bölümün içindeki tüm öğelerde anlık görüntü yalıtımıyla bir çevresel ACID işlemi içinde sarmalanır. Yürütülmesi sırasında, JavaScript programı bir özel durum oluşturursa tüm işlem durdurulur ve geri alınır. Ortaya çıkan programlama modeli basit ancak güçlü bir işlemdir. JavaScript geliştiricileri, bildiğiniz dil yapılarını ve kitaplık temel öğelerini kullanmaya devam ederken dayanıklı bir programlama modeli alırlar.
 
-Doğrudan veritabanı altyapısının içinde JavaScript yürütme yeteneği, performans ve veritabanı işlemleri bir kapsayıcı öğeler karşı işlem tabanlı olarak yürütülmesini sağlar. Ayrıca, Azure Cosmos veritabanı altyapısı, yerel olarak JSON ve JavaScript desteklediğinden, bir uygulamanın türü sistemleri ve veritabanı arasında hiçbir empedans uyuşmazlığı yoktur.
+Doğrudan veritabanı altyapısının içinde JavaScript yürütme özelliği, bir kapsayıcının öğelerine karşı veritabanı işlemlerinin performans ve işlem yürütme işlemlerini sağlar. Ayrıca, Azure Cosmos veritabanı altyapısı JSON ve JavaScript 'i yerel olarak desteklediğinden, bir uygulamanın tür sistemleri ve veritabanı arasında kesin bir uyumsuzluk yoktur.
 
 ## <a name="optimistic-concurrency-control"></a>İyimser eşzamanlılık denetimi 
 
-İyimser eşzamanlılık denetimi, kayıp güncelleştirmelerden sağlar ve siler. Eş zamanlı, çakışan işlemleri normal kötümser öğesine sahip mantıksal bölüm tarafından barındırılan Veritabanı Altyapısı'nın kilitleme için tabi. Mantıksal bölüm içindeki bir öğenin en son sürüme güncelleştirmek iki eş zamanlı işlem denediğinizde, bunlardan birini kazanma ve diğer başarısız olur. Daha eski bir öğenin değerini okuma aynı anda aynı öğesi güncelleştirilmeye çalışılıyor, bir veya iki işlemleri daha önce, ancak veritabanı ya da daha önce okunan değerle çakışan bir işlem olup olmadığını gerçekten bilmez öğesinin en son değeri. Neyse ki, bu durum ile algılanabilir **iyimser eşzamanlılık denetimini (OCC)** önce izin vermek, iki işlem veritabanı altyapısının içinde işlem sınırı girin. OCC yanlışlıkla başkaları tarafından yapılan değişikliklerin üzerine yazmasını verilerinizi korur. Ayrıca diğerleri kendi değişikliklerini yanlışlıkla üzerine yazılmasını engeller.
+İyimser eşzamanlılık denetimi, kayıp güncelleştirmeleri ve silmeleri engellemenizi sağlar. Eşzamanlı, çakışan işlemler, öğenin sahibi olan mantıksal bölüm tarafından barındırılan veritabanı altyapısının normal kötümser kilitlemesinde tabi. İki eşzamanlı işlem, bir mantıksal bölüm içindeki bir öğenin en son sürümünü güncelleştirmeye çalıştığında, bunlardan biri kazanıyacaktır ve diğeri başarısız olur. Bununla birlikte, aynı öğeyi aynı anda güncelleştirmeye çalışan bir veya iki işlem daha önce öğenin daha eski bir değerini okuseydi, veritabanı daha önce veya her iki çakışan işlemin öğenin en son değeri olan veya her ikisi tarafından daha önce okunan değerin ne olduğunu bilmez. Neyse ki, bu durum **Iyimser eşzamanlılık denetimi (OCC)** ile birlikte algılanarak iki işlemin veritabanı altyapısının içinde işlem sınırını girmelerini önlenebilir. OCC, verilerinizi yanlışlıkla başkalarının yaptığı değişikliklerin üzerine yazmalarını önler. Ayrıca başkalarının kendi değişikliklerinizi yanlışlıkla üzerine yazmasını engeller.
 
-Bir öğenin eş zamanlı güncelleştirmelerin OCC için Azure Cosmos DB'nin iletişim protokolü katmanı tarafından tabi. Azure Cosmos veritabanı, (silinmesi ya da güncelleştirmekte) öğenin istemci tarafı sürümü Azure Cosmos kapsayıcısında öğenin sürümü ile aynı olmasını sağlar. Bu, başkalarının ve yazar tarafından yanlışlıkla üzerine yazma korunmasını garanti eder. Çok kullanıcılı bir ortamda, iyimser eşzamanlılık denetimi yanlışlıkla silme veya öğenin yanlış sürümünü güncelleştirme korur. Bu nedenle, öğeleri Meşhur "kayıp güncelleştirmesi" veya "kayıp Sil" sorunlara karşı korunur.
+Bir öğenin eşzamanlı güncelleştirmeleri, Azure Cosmos DB 'in iletişim protokolü katmanına göre OCC ile tabi. Azure Cosmos veritabanı, güncelleştirdiğiniz (veya sildiğiniz) öğenin istemci tarafı sürümünün Azure Cosmos kapsayıcısındaki öğenin sürümüyle aynı olmasını sağlar. Bu, yazma işlemlerinin yanlışlıkla başkalarının üzerine yazılmasına karşı korunmasını sağlar ve tam tersi de geçerlidir. Çok kullanıcılı bir ortamda, iyimser eşzamanlılık denetimi bir öğenin yanlış sürümünü yanlışlıkla silmenizi veya güncelleştirmenizi önler. Bu nedenle, öğeler "kayıp güncelleştirme" veya "kayıp silme" sorunlarına karşı korunur.
 
-Bir Azure Cosmos kapsayıcısında depolanan her öğe sahip sistem tanımlı `_etag` özelliği. Değerini `_etag` otomatik olarak oluşturulur ve öğesi her güncelleştirildiğinde, sunucu tarafından güncelleştirilir. `_etag` sağlanan istemci ile kullanılabilir `if-match` öğeyi koşullu olarak güncelleştirilip güncelleştirilemeyeceğini karar vermek sunucu izin vermek için istek üst bilgisi. Değerini `if-match` üst bilgi değeri ile eşleşen `_etag` sunucuda öğesi sonra güncelleştirilir. Varsa değerini `if-match` istek üstbilgisi geçerli artık, sunucu işlemi reddeder bir "HTTP 412 önkoşul hatası" yanıt iletisi. İstemci ardından sunucuda öğesinin geçerli sürümü almak veya kendi Server'daki öğenin sürümü geçersiz kılmak için öğeyi yeniden getirin `_etag` öğe için bir değer. Ayrıca, `_etag` kullanılabilir `if-none-match` yeniden getirmesi kaynağının gerekli olup olmadığını belirlemek için başlığı. 
+Bir Azure Cosmos kapsayıcısında depolanan her öğe için sistem tanımlı `_etag` özelliği vardır. @No__t_0 değeri, öğe her güncelleştirildiği zaman otomatik olarak oluşturulur ve sunucu tarafından güncelleştirilir. `_etag`, sunucunun bir öğenin koşullu olarak güncelleştirilip güncelleştirilmediğini meyeceğine karar vermesini sağlamak için istemci tarafından sağlanan `if-match` istek üst bilgisi ile kullanılabilir. @No__t_0 üst bilgisinin değeri sunucudaki `_etag` değeriyle eşleşiyor, öğe güncellenir. @No__t_0 istek üst bilgisinin değeri artık geçerli değilse, sunucu işlemi "HTTP 412 Önkoşul hatası" Yanıt iletisiyle reddeder. İstemci daha sonra öğenin geçerli sürümünü elde etmek için öğeyi yeniden alabilir veya öğe için kendi `_etag` değeri ile sunucudaki öğenin sürümünü geçersiz kılabilir. Ayrıca, bir kaynağın tekrar al gerekip gerekmediğini öğrenmek için `_etag` `if-none-match` üstbilgisiyle birlikte kullanılabilir. 
 
-Öğenin `_etag` öğesi her güncelleştirildiğinde değişiklikleri değeri. Değiştirme öğesi işlemlerini için `if-match` açıkça istek seçenekleri bir parçası olarak ifade edilmelidir. Örnek kodda bir örnek için bkz [GitHub](https://github.com/Azure/azure-documentdb-dotnet/blob/master/samples/code-samples/DocumentManagement/Program.cs#L398-L446). `_etag` değerleri, saklı yordam tarafından dokunulan tüm yazılmış öğeler için örtük olarak denetlenir. Herhangi bir çakışma algılanması durumunda, saklı yordam işlemin geri alınması ve bir özel durum. Bu yöntemde tüm ya da hiçbir yazma saklı yordam içinde atomik olarak uygulanır. Bu güncelleştirmeleri yeniden uygulayın ve özgün istemci isteği yeniden denemek için uygulamaya bir sinyaldir.
+Öğenin `_etag` değeri, öğe her güncelleştirildiği zaman değişir. Öğe değiştirme işlemleri için `if-match`, istek seçeneklerinin bir parçası olarak açıkça ifade edilmesi gerekir. Örnek için [GitHub](https://github.com/Azure/azure-documentdb-dotnet/blob/master/samples/code-samples/DocumentManagement/Program.cs#L398-L446)'daki örnek koda bakın. `_etag` değerler, saklı yordamın dokunabileceği tüm yazılı öğeler için örtülü olarak denetlenir. Herhangi bir çakışma algılanırsa, saklı yordam işlemi geri alacak ve bir özel durum oluşturur. Bu yöntemle, saklı yordam içinde tüm veya yazma işlemleri otomatik olarak uygulanır. Bu, güncelleştirmeleri yeniden uygulamak ve özgün istemci isteğini yeniden denemek için uygulamaya yönelik bir sinyaldir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Hakkında daha fazla veritabanı işlemleri ve iyimser eşzamanlılık denetimi için aşağıdaki makalelere bakın:
+Aşağıdaki makalelerde veritabanı işlemleri ve iyimser eşzamanlılık denetimi hakkında daha fazla bilgi edinin:
 
-- [Azure Cosmos veritabanı, kapsayıcıları ve öğeleri ile çalışma](databases-containers-items.md)
+- [Azure Cosmos veritabanları, kapsayıcılar ve öğeleriyle çalışma](databases-containers-items.md)
 - [Tutarlılık düzeyleri](consistency-levels.md)
-- [Çakışma türlerini ve çözümleme ilkeleri](conflict-resolution-policies.md)
-- [Saklı yordamlar, tetikleyiciler ve kullanıcı tanımlı işlevler](stored-procedures-triggers-udfs.md)
+- [Çakışma türleri ve çözümleme ilkeleri](conflict-resolution-policies.md)
+- [Saklı yordamlar, Tetikleyiciler ve Kullanıcı tanımlı işlevler](stored-procedures-triggers-udfs.md)

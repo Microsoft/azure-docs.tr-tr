@@ -1,28 +1,22 @@
 ---
-title: Azure Data Factory’ye Giriş | Microsoft Docs
+title: Azure Data Factory'ye giriş
 description: Verilerin taşınmasını ve dönüştürülmesini düzenleyen ve otomatikleştiren bir bulut veri tümleştirme hizmeti olan Azure Data Factory hakkında bilgi edinin.
 services: data-factory
 documentationcenter: ''
-author: sharonlo101
-manager: craigg
-ms.reviewer: douglasl
+author: djpmsft
+ms.author: daperlov
 ms.service: data-factory
 ms.workload: data-services
-ms.tgt_pltfrm: na
 ms.topic: overview
-ms.date: 01/11/2018
-ms.author: shlo
-ms.openlocfilehash: 66ea269e2f29bfd39cdb81086391e0277474219d
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.date: 09/30/2019
+ms.openlocfilehash: e23268d21b01435aa71d4f471afc6d37ee9e9c1d
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "61456385"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73672696"
 ---
-# <a name="introduction-to-azure-data-factory"></a>Azure Data Factory'ye giriş 
-> [!div class="op_single_selector" title1="Select the version of Data Factory service you are using:"]
-> * [Sürüm 1](v1/data-factory-introduction.md)
-> * [Geçerli sürüm](introduction.md)
+# <a name="what-is-azure-data-factory"></a>Azure Data Factory nedir?
 
 Büyük veri dünyasında ham ve düzensiz veriler genellikle ilişkisel, ilişkisel olmayan ve diğer depolama sistemlerinde depolanır. Ancak, ham veriler kendi başlarına analiz uzmanlarına, veri bilimcilerine veya iş karar mekanizmalarına anlamlı bilgiler sağlamak için uygun bağlama veya anlama sahip değildir. 
 
@@ -34,16 +28,15 @@ Bu günlükleri analiz etmek için, şirketin şirket içi veri deposunda buluna
 
 Öngörüler elde etmek için, bulutta (Azure HDInsight) bir Spark kümesi kullanarak birleştirilmiş verileri işlemeyi ve bunlara ilişkin bir raporu kolayca oluşturmak üzere dönüştürülmüş verileri Azure SQL Veri Ambarı gibi bir bulut veri ambarında yayımlamayı planlamaktadır. Şirket bu iş akışını otomatik hale getirmeyi ve günlük düzende izleyip yönetmeyi istemektedir. Ayrıca bu iş akışının blob depolama kapsayıcısına dosya geldiğinde yürütülmesini istemektedir.
 
-Azure Data Factory, bu tür veri senaryolarını çözen platformdur. *Bulutta veri hareketi ve veri dönüştürmeyi düzenleyip otomatikleştirmek için veri odaklı iş akışları oluşturmanıza olanak tanıyan, bulut tabanlı bir veri tümleştirme hizmetidir*. Azure Data Factory platformunu kullanarak farklı veri depolarından veri alabilen veri odaklı iş akışları (işlem hattı olarak adlandırılır) oluşturabilir ve zamanlayabilirsiniz. Bu platform Azure HDInsight Hadoop, Spark, Azure Data Lake Analytics ve Azure Machine Learning gibi işlem hizmetlerini kullanarak verileri işleyip dönüştürebilir. 
+Azure Data Factory, bu tür veri senaryolarını çözen platformdur. Veri *hareketini düzenlemek ve verileri ölçeklendirmeye dönüştürmek için veri odaklı iş akışları oluşturmanıza olanak sağlayan bulut tabanlı ETL ve veri tümleştirme hizmetidir*. Azure Data Factory platformunu kullanarak farklı veri depolarından veri alabilen veri odaklı iş akışları (işlem hattı olarak adlandırılır) oluşturabilir ve zamanlayabilirsiniz. Verileri görsel olarak veri akışları ile veya Azure HDInsight Hadoop, Azure Databricks ve Azure SQL veritabanı gibi işlem hizmetlerini kullanarak dönüştüren karmaşık ETL işlemleri oluşturabilirsiniz. 
 
-Ayrıca çıktı verilerini iş zekası (BI) uygulamalarının kullanması için Azure SQL Veri Ambarı gibi veri depolarında yayımlayabilirsiniz. Sonuç olarak, Azure Data Factory sayesinde ham veriler daha iyi iş kararları için anlamlı veri depoları ve veri gölleri halinde düzenlenebilir.
+Ayrıca, dönüştürülmüş verilerinizi iş zekası (BI) uygulamaları için Azure SQL veri ambarı gibi veri depolarında yayımlayabilirsiniz. Sonuç olarak, Azure Data Factory sayesinde ham veriler daha iyi iş kararları için anlamlı veri depoları ve veri gölleri halinde düzenlenebilir.
 
-![Data Factory'nin üstten görünümü](media/introduction/big-picture.png)
+![Data Factory'nin üstten görünümü](media/data-flow/overview.png)
 
 ## <a name="how-does-it-work"></a>Nasıl çalışır?
-Azure Data Factory’deki işlem hatları (veri odaklı iş akışları) genellikle aşağıdaki dört adımı gerçekleştirir:
 
-![Veri temelli bir iş akışının dört adımı](media/introduction/four-steps-of-a-workflow.png)
+Data Factory, veri mühendislerine yönelik tam uçtan uca bir platform sağlayan bir dizi birbirine bağlı sistem içerir.
 
 ### <a name="connect-and-collect"></a>Bağlanma ve toplama
 
@@ -53,16 +46,18 @@ Bilgi üretim sistemi oluşturmanın ilk adımı hizmet olarak yazılım (SaaS) 
 
 Data Factory olmadığında, kuruluşların bu veri kaynaklarını ve işleme çalışmalarını tümleştirmek için özel veri taşıma bileşenleri oluşturması veya özel hizmetler yazması gerekir. Bu tür sistemleri tümleştirmenin ve bakımını yapmanın maliyeti yüksektir. Buna ek olarak bu sistemlerde tamamen yönetilebilir bir hizmetin sunduğu kurumsal sınıf izleme, uyarı oluşturma ve denetim özellikleri mevcut değildir.
 
-Data Factory ile, veri işlem hattında [Kopyalama Etkinliği](copy-activity-overview.md)’ni kullanarak hem şirket içinde hem de buluttaki kaynak veri depolarını daha fazla analiz için merkezi bir veri deposuna taşıyabilirsiniz. Örneğin, Azure Data Lake Store'da veri toplayabilir ve daha sonra Azure Data Lake Analytics işlem hizmetini kullanarak verileri dönüştürebilirsiniz. Verileri Azure Blob depolama alanından toplayıp daha sonra Azure HDInsight Hadoop kümesi kullanarak da dönüştürebilirsiniz.
+Data Factory ile, veri işlem hattında [Kopyalama Etkinliği](copy-activity-overview.md)’ni kullanarak hem şirket içinde hem de buluttaki kaynak veri depolarını daha fazla analiz için merkezi bir veri deposuna taşıyabilirsiniz. Örneğin, Azure Data Lake Storage verileri toplayabilir ve Azure Data Lake Analytics bir işlem hizmeti kullanarak verileri daha sonra dönüştürebilirsiniz. Verileri Azure Blob depolama alanından toplayıp daha sonra Azure HDInsight Hadoop kümesi kullanarak da dönüştürebilirsiniz.
 
 ### <a name="transform-and-enrich"></a>Dönüştürme ve zenginleştirme
-Veriler buluttaki merkezi bir veri deposuna sunulduktan sonra toplanan verileri HDInsight Hadoop, Spark, Data Lake Analytics ve Machine Learning gibi işlem hizmetlerini kullanarak işleyin veya dönüştürün. Üretim ortamlarının güvenilir verilerle beslenmesi için sürdürülebilir ve denetlenebilir bir zamanlamaya göre dönüştürülmüş verileri güvenilir bir şekilde üretmeniz gerekir.
+Veriler buluttaki merkezi bir veri deposunda mevcut olduktan sonra, toplanan verileri ADF eşleme veri akışlarını kullanarak işleyin veya dönüştürün. Veri akışları, veri mühendislerinin Spark kümelerini veya Spark programlamayı anlamaya gerek kalmadan Spark üzerinde yürütülen veri dönüştürme grafikleri oluşturmasına ve bakımını uygulamasına olanak tanır.
 
-### <a name="publish"></a>Yayımlama
-Ham veriler iş için kullanılabilir biçime getirildikten sonra, verileri Azure Veri Ambarı, Azure SQL Veritabanı, Azure CosmosDB'ye veya şirket kullanıcılarınızın iş zekası araçlarından işaret edebildiği herhangi bir analiz altyapısına yükleyebilirsiniz.
+Dönüştürmeleri el ile kodlayarak, ADF, HDInsight Hadoop, Spark, Data Lake Analytics ve Machine Learning gibi işlem hizmetlerinde dönüşümlerinizi yürütmek için dış etkinlikleri destekler.
+
+### <a name="cicd-and-publish"></a>CI/CD ve yayımlama
+Data Factory, Azure DevOps ve GitHub kullanarak veri işlem hatlarınızın CI/CD 'si için tam destek sunar. Bu, tamamlanmış ürünü yayımlamadan önce ETL işlemlerinizi artımlı olarak geliştirmenize ve sunmanıza olanak tanır. Ham veriler iş için kullanılabilir biçime getirildikten sonra, verileri Azure Veri Ambarı, Azure SQL Veritabanı, Azure CosmosDB'ye veya şirket kullanıcılarınızın iş zekası araçlarından işaret edebildiği herhangi bir analiz altyapısına yükleyebilirsiniz.
 
 ### <a name="monitor"></a>İzleme
-Veri tümleştirme işlem hattınızı başarıyla oluşturup dağıtarak iyileştirilmiş verilerden iş değeri elde ettikten sonra, başarı ve hata oranları için zamanlanmış etkinlikleri ve işlem hatlarını izleyin. Azure Data Factory, Azure İzleyici, API, PowerShell, Azure İzleyici günlüklerine ve Azure portalındaki sistem durumu panelleri aracılığıyla işlem hattı izlemek için yerleşik destek sunmaktadır.
+Veri tümleştirme işlem hattınızı başarıyla oluşturup dağıtarak iyileştirilmiş verilerden iş değeri elde ettikten sonra, başarı ve hata oranları için zamanlanmış etkinlikleri ve işlem hatlarını izleyin. Azure Data Factory, Azure Izleyici, API, PowerShell, Azure Izleyici günlükleri ve Azure portal sistem durumu bölmeleri aracılığıyla işlem hattı izleme için yerleşik desteğe sahiptir.
 
 ## <a name="top-level-concepts"></a>Üst düzey kavramlar
 Azure aboneliğinin bir veya birden çok Azure Data Factory örneği (veya veri fabrikası) olabilir. Azure Data Factory dört temel bileşenden oluşur. Bu bileşenler, üzerinde veri taşıma ve dönüştürme adımları ile veri odaklı iş akışları oluşturabileceğiniz platformu sağlamak üzere birlikte çalışır.
@@ -71,6 +66,9 @@ Azure aboneliğinin bir veya birden çok Azure Data Factory örneği (veya veri 
 Bir veri fabrikasında bir veya daha fazla işlem hattı olabilir. İşlem hattı, bir iş birimini gerçekleştirmeye yönelik mantıksal bir etkinlik grubudur. İşlem hattındaki etkinlikler birlikte bir görev gerçekleştirir. Örneğin, bir işlem hattı Azure blobundan verileri alan ve ardından HDInsight kümesinde Hive sorgusu çalıştırarak verileri bölümlere ayıran bir grup etkinlik içerebilir. 
 
 İşlem hattının avantajı, etkinliklerin her birini tek tek yönetmek yerine bir küme olarak yönetmenize olanak tanımasıdır. Bir işlem hattındaki etkinlikler, sırayla çalışmak üzere birbirine zincirlenebilir veya paralel olarak birbirinden bağımsız çalışabilir.
+
+### <a name="mapping-data-flows"></a>Veri akışlarını eşleme
+Herhangi bir boyuttaki verileri dönüştürmek için kullanabileceğiniz veri dönüştürme mantığının grafiklerini oluşturun ve yönetin. Yeniden kullanılabilir bir veri dönüştürme yordamları kitaplığı oluşturabilir ve bu işlemleri ADF işlem hatlarınızın ölçeği genişletilmiş bir şekilde yürütebilirsiniz. Data Factory, mantığınızı, ihtiyacınız olduğunda açılan ve aşağı dönerek bir Spark kümesinde yürütecektir. Kümeleri yönetmeniz veya korumanız gerekmez.
 
 ### <a name="activity"></a>Etkinlik
 Etkinlikler bir işlem hattındaki işleme adımını temsil eder. Örneğin, bir veri deposundan başka bir veri deposuna veri kopyalamak için kopyalama etkinliğini kullanabilirsiniz. Benzer şekilde, verilerinizi dönüştürmek veya analiz etmek amacıyla Azure HDInsight kümesinde bir Hive sorgusu çalıştıran bir Hive etkinliği kullanabilirsiniz. Data Factory üç tür etkinliği destekler: veri taşıma etkinlikleri, veri dönüştürme etkinlikleri ve denetim etkinlikleri.
@@ -94,7 +92,7 @@ Tetikleyiciler, bir işlem hattı çalıştırmasının başlatılması gereken 
 İşlem hattı çalıştırması, işlem hattı yürütme örneğidir. İşlem hattı çalıştırmaları örneği genelde bağımsız değişkenlerin işlem hatlarında tanımlanan parametrelere iletilmesiyle oluşturulur. Bağımsız değişkenler el ile veya tetikleyici tanımı içinde geçirilebilir.
 
 ### <a name="parameters"></a>Parametreler
-Parametreler salt okunur yapılandırmanın anahtar-değer çiftleridir.  Parametreler işlem hattında tanımlanır. Tanımlı parametrelerin bağımsız değişkenleri, bir tetikleyici tarafından oluşturulan çalıştırma bağlamı veya el ile yürütülen işlem hattından yürütme sırasında geçirilir. İşlem hattındaki etkinlikler parametre değerlerini kullanır.
+Parametreler salt okunur yapılandırmanın anahtar-değer çiftleridir.  Parametreler ardışık düzen içinde tanımlanmıştır. Tanımlı parametrelerin bağımsız değişkenleri, bir tetikleyici tarafından oluşturulan çalıştırma bağlamı veya el ile yürütülen işlem hattından yürütme sırasında geçirilir. İşlem hattındaki etkinlikler parametre değerlerini kullanır.
 
 Veri kümesi, türü kesin olarak belirtilmiş bir parametre ve yeniden kullanılabilir/başvurulabilir bir varlıktır. Bir etkinlik, veri kümelerine başvurabilir ve veri kümesi tanımında belirtilen özellikleri kullanabilir.
 
@@ -103,33 +101,16 @@ Bağlı hizmet de türü kesin olarak belirtilmiş ve veri deposu ya da işlem o
 ### <a name="control-flow"></a>Denetim akışı
 Denetim akışı, işlem hattı düzeyinde ve işlem hattı talep üzerine ya da bir tetikleyiciden çağrılırken geçirilen bağımsız değişkenlerde tanımlanabilen dizi, dallanma ve parametrelerdeki zincirleme etkinliklerini içeren işlem hattı etkinliklerinin düzenlenmesidir. Ayrıca özel durum geçirme ve döngü kapsayıcılarını, diğer bir deyişle For-each yineleyicilerini içerir.
 
+### <a name="variables"></a>Değişkenler
+Değişkenler, geçici değerleri depolamak için ardışık düzen içinde kullanılabilir ve ayrıca işlem hatları, veri akışları ve diğer etkinlikler arasında değer geçirmeyi etkinleştirmek için parametrelerle birlikte kullanılabilir.
 
-Data Factory kavramları hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
+## <a name="next-steps"></a>Sonraki adımlar
+Araştırılacak sonraki adım belgelerde aşağıdaki önemli adımları bulabilirsiniz:
 
 - [Veri kümeleri ve bağlı hizmetler](concepts-datasets-linked-services.md)
 - [İşlem hatları ve etkinlikler](concepts-pipelines-activities.md)
 - [Tümleştirme çalışma zamanı](concepts-integration-runtime.md)
-
-## <a name="supported-regions"></a>Desteklenen bölgeler
-
-Data Factory kullanılabildiği şu anda Azure bölgelerinin listesi için aşağıdaki sayfada faiz ve ardından genişletin bölgeleri seçin **Analytics** bulunacak **Data Factory**: [Bölgelere göre kullanılabilir ürünler](https://azure.microsoft.com/global-infrastructure/services/). Ancak, verileri veri depoları arasında taşımak ve işlem hizmetlerini kullanarak verileri işlemek amacıyla data factory başka Azure bölgelerindeki veri depolarına ve işlem hizmetlerine erişebilir.
-
-Azure Data Factory’nin kendisi verileri depolamaz. Veri taşımayı desteklenen veri depoları arasında, verilerin işlenmesini de başka bölgelerde veya şirket içi bir ortamda işlem hizmetleri kullanarak düzenlemek için veri temelinde iş akışları oluşturmanızı sağlar. Hem programlama, hem de kullanıcı arabirimi mekanizmalarını kullanarak iş akışlarını izlemenizi ve yönetmenizi de sağlar.
-
-Data Factory yalnızca belirli bölgelerde kullanılabilir olsa da, Data Factory'de veri taşımayı destekleyen hizmet birçok bölgede küresel olarak kullanılabilmektedir. Bir veri deposunun güvenlik duvarı ardında kaldığı durumlarda şirket içi ortamınızda yüklü bir Şirket İçinde Barındırılan Integration Runtime bunun yerine verileri taşır.
-
-Örneğin, Azure HDInsight kümesi ve Azure Machine Learning gibi işlem ortamlarınızın Batı Avrupa bölgesinde çalıştığını varsayalım. Doğu ABD veya Doğu ABD 2’de bir Azure Data Factory örneği oluşturup geliştirebilir ve bunu Batı Avrupa’daki işlem ortamlarınızda iş zamanlamak için kullanabilirsiniz. Data Factory'nin işlem ortamınızda işi tetiklemesi birkaç milisaniye alsa da, bilgi işlem ortamınızda işin çalıştırılma süresi değişmez.
-
-## <a name="accessibility"></a>Erişilebilirlik
-
-Azure Portal'da Data Factory kullanıcı deneyimi erişilebilirdir.
-
-## <a name="compare-with-version-1"></a>Sürüm 1 ile karşılaştırma
-Data Factory geçerli sürümü ile 1 numaralı sürümleri arasındaki farkların listesi için bkz. [Sürüm 1 ile karşılaştırma](compare-versions.md). 
-
-## <a name="next-steps"></a>Sonraki adımlar
-Aşağıdaki araçlardan/SDK’lardan birini kullanarak Data Factory işlem hattı oluşturmaya başlayın: 
-
+- [Veri akışlarını eşleme](concepts-data-flow-overview.md)
 - [Azure portalındaki Data Factory kullanıcı arabirimi](quickstart-create-data-factory-portal.md)
 - [Azure portalındaki Veri Kopyalama aracı](quickstart-create-data-factory-copy-data-tool.md)
 - [PowerShell](quickstart-create-data-factory-powershell.md)

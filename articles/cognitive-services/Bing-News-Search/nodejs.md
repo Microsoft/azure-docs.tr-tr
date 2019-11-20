@@ -1,7 +1,7 @@
 ---
-title: "Hızlı Başlangıç: Node.js - Bing haber arama REST API'si ile bir haber arama yapın"
-titlesuffix: Azure Cognitive Services
-description: Bu hızlı başlangıçta, Node.js kullanarak Bing haber arama REST API'si için bir istek göndermek için kullanın ve bir JSON yanıtı alırsınız.
+title: 'Hızlı Başlangıç: Node. js ile bir haber araması gerçekleştirin Bing Haber Arama REST API'
+titleSuffix: Azure Cognitive Services
+description: Node. js kullanarak Bing Haber Arama REST API isteği göndermek ve bir JSON yanıtı almak için bu hızlı başlangıcı kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -11,14 +11,14 @@ ms.topic: quickstart
 ms.date: 6/18/2019
 ms.author: aahi
 ms.custom: seodec2018
-ms.openlocfilehash: 1fb2676fb1513ab4955ffa35c559b2ae36e0efd0
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: 501ae6107232287011388bb67e64a1ae3fe5f7e3
+ms.sourcegitcommit: 198c3a585dd2d6f6809a1a25b9a732c0ad4a704f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67203309"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68423735"
 ---
-# <a name="quickstart-perform-a-news-search-using-nodejs-and-the-bing-news-search-rest-api"></a>Hızlı Başlangıç: Node.js ve Bing haber arama REST API'si kullanarak bir haber arama yapın
+# <a name="quickstart-perform-a-news-search-using-nodejs-and-the-bing-news-search-rest-api"></a>Hızlı Başlangıç: Node. js ve Bing Haber Arama REST API kullanarak bir haber araması gerçekleştirin
 
 İlk Bing Resim Arama API’si çağrınızı yapmak ve bir JSON yanıtı almak için bu hızlı başlangıcı kullanın. Bu basit JavaScript uygulaması, API’ye bir arama sorgusu gönderir ve ham sonuçları görüntüler.
 
@@ -30,7 +30,7 @@ Bu örneğin kaynak kodu [GitHub](https://github.com/Azure-Samples/cognitive-ser
 
 * [Node.js](https://nodejs.org/en/download/)’in en son sürümü.
 
-* [JavaScript isteği kitaplığı](https://github.com/request/request)
+* [JavaScript Istek kitaplığı](https://github.com/request/request)
 
 [!INCLUDE [cognitive-services-bing-news-search-signup-requirements](../../../includes/cognitive-services-bing-news-search-signup-requirements.md)]
 
@@ -71,7 +71,7 @@ Ayrıca bkz: [Bilişsel hizmetler fiyatlandırması - Bing arama API'si](https:/
         });
         ```
 
-    3. Olduğunda bir **son** bayrağı sinyal, JSON ve üst bilgileri görüntülenebilir.
+    3. Bir **bitiş** bayrağına işaret EDILDIĞINDE, JSON ve üstbilgiler görüntülenebilir.
 
         ```javascript
         response.on('end', function () {

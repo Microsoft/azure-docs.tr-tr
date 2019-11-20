@@ -1,64 +1,64 @@
 ---
-title: Azure güvenlik duvarı Azure standart Load Balancer ile tümleştirin
-description: Azure güvenlik duvarı Azure Standard Load Balancer ile tümleştirmeyi öğrenin
+title: Azure Güvenlik Duvarı’nı Azure Standart Load Balancer ile tümleştirme
+description: Bir Azure Güvenlik duvarını bir Azure Standart Load Balancer (genel veya dahili) ile bir sanal ağ ile tümleştirebilirsiniz.
 services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: article
-ms.date: 4/1/2019
+ms.date: 11/19/2019
 ms.author: victorh
-ms.openlocfilehash: 7ee92a7508918635849caafab4632bbba81ee628
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 91f34d06532b2d7f56d293df40939212a4f3d68c
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60193790"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74167064"
 ---
-# <a name="integrate-azure-firewall-with-azure-standard-load-balancer"></a>Azure güvenlik duvarı Azure standart Load Balancer ile tümleştirin
+# <a name="integrate-azure-firewall-with-azure-standard-load-balancer"></a>Azure Güvenlik Duvarı’nı Azure Standart Load Balancer ile tümleştirme
 
-Azure standart Load Balancer (public veya internal) ile bir sanal ağa, bir Azure güvenlik duvarı tümleştirebilirsiniz. 
+Bir Azure Güvenlik duvarını bir Azure Standart Load Balancer (genel veya dahili) ile bir sanal ağ ile tümleştirebilirsiniz. 
 
-Bu çok daha kolay bir tasarım olduğu için tercih edilen tasarım, Azure güvenlik duvarı ile iç yük dengeleyici tümleştirme sağlamaktır. Dağıtılan bir hesabınız ve yerinde tutmak istiyorsanız, bir genel yük dengeleyici kullanabilirsiniz. Ancak, herkese açık yük dengeleyici senaryosu işlevsellikle bozabilir bir asimetrik yönlendirme sorununu farkında olmanız gerekir.
+Tercih edilen tasarım, çok daha basit bir tasarım olduğundan, Azure Güvenlik duvarınızla iç yük dengeleyiciyi tümleştirmelidir. Zaten bir dağıtılmışsa ve devam etmek istiyorsanız, ortak yük dengeleyici kullanabilirsiniz. Ancak, ortak yük dengeleyici senaryosuyla işlevselliği kesintiye uğramış bir asimetrik yönlendirme sorunuyla haberdar olmanız gerekir.
 
-Azure Load Balancer hakkında daha fazla bilgi için bkz: [Azure Load Balancer nedir?](../load-balancer/load-balancer-overview.md)
+Azure Load Balancer hakkında daha fazla bilgi için bkz. [Azure Load Balancer nedir?](../load-balancer/load-balancer-overview.md)
 
-## <a name="public-load-balancer"></a>Herkese açık yük dengeleyici
+## <a name="public-load-balancer"></a>Ortak yük dengeleyici
 
-Bir genel yük dengeleyici ile bir genel ön uç IP adresini yük dengeleyici dağıtılır.
+Ortak yük dengeleyici ile yük dengeleyici, genel ön uç IP adresi ile dağıtılır.
 
 ### <a name="asymmetric-routing"></a>Asimetrik yönlendirme
 
-Asimetrik yönlendirme, burada, bir paket için hedef bir yolunu alır ve kaynak döndürülürken başka bir yol alır girebiliriz. Güvenlik duvarının özel IP adresine giderek varsayılan yol bir alt ağ olan ve herkese açık yük dengeleyici kullanıyorsanız bu sorun oluşur. Bu durumda, gelen yük dengeleyici trafik kendi genel IP adresi alınır ancak bir dönüş yolu güvenlik duvarının özel IP adresi üzerinden gider. Güvenlik Duvarı, durum bilgisi olduğundan, Güvenlik Duvarı bu tür bir yerleşik oturumu farkında olmadığından System.Numerics.vectors.dll gelen paket bırakılır.
+Asimetrik yönlendirme, bir paketin hedefe bir yol aldığı ve kaynağa dönme sırasında başka bir yol aldığı yerdir. Bu sorun, bir alt ağın güvenlik duvarının özel IP adresine giderken bir varsayılan yolu olduğunda ve bir ortak yük dengeleyici kullanıyorsanız oluşur. Bu durumda, gelen yük dengeleyici trafiği genel IP adresi aracılığıyla alınır, ancak döndürülen yol güvenlik duvarının özel IP adresinden geçer. Güvenlik duvarı durum bilgisi olduğundan, güvenlik duvarı bu tür bir oturumun farkında olmadığından döndürülen paketi bırakır.
 
-### <a name="fix-the-routing-issue"></a>Yönlendirme sorunu düzeltin
+### <a name="fix-the-routing-issue"></a>Yönlendirme sorununu çözme
 
-Bir alt ağa bir Azure güvenlik duvarı dağıttığınızda, tek bir adımda güvenlik duvarının AzureFirewallSubnet üzerinde bulunan özel IP adresi üzerinden alt yönlendirmeye paketleri için bir varsayılan rota oluşturmaktır. Daha fazla bilgi için [Öğreticisi: Dağıtma ve Azure Azure portalını kullanarak güvenlik duvarı yapılandırma](tutorial-firewall-deploy-portal.md#create-a-default-route).
+Bir Azure Güvenlik duvarını bir alt ağa dağıttığınızda, tek bir adım, paketleri güvenlik duvarının AzureFirewallSubnet konumundaki özel IP adresi aracılığıyla yönlendiren alt ağ için varsayılan bir yol oluşturmaktır. Daha fazla bilgi için bkz. [öğretici: Azure Güvenlik duvarını Azure Portal kullanarak dağıtma ve yapılandırma](tutorial-firewall-deploy-portal.md#create-a-default-route).
 
-Güvenlik Duvarı, yük dengeleyici senaryosu yapılırsa, Internet trafiğinizi, güvenlik duvarınızın genel IP adresi gelen istersiniz. Burada, güvenlik duvarı, yük dengeleyicinin genel IP adresi NAT paketleri ve güvenlik duvarı kuralları geçerlidir. Sorunun gerçekleştiği budur. Paket gelen Güvenlik Duvarı'nın genel IP adresi, ancak Güvenlik Duvarı (varsayılan yolu kullanarak) özel IP adresi döndürür.
-Bu sorunu önlemek için bir Güvenlik Duvarı'nın genel IP adresi için ek konak yolu oluşturun. Güvenlik Duvarı'nın genel IP adresine giden paketlerin Internet üzerinden yönlendirilir. Bu, güvenlik duvarının özel IP adresi için varsayılan yolu alma önler.
+Yük dengeleyici senaryonuza güvenlik duvarını tanıtdığınızda, Internet trafiğinizin güvenlik duvarınızın genel IP adresi aracılığıyla gelmesini istersiniz. Buradan güvenlik duvarı, güvenlik duvarı kurallarını ve NAT 'ları yük dengeleyicinin genel IP adresine uygular. Bu, sorunun oluştuğu yerdir. Paketler, güvenlik duvarının genel IP adresine ulaşır, ancak özel IP adresi (varsayılan yol kullanılarak) aracılığıyla güvenlik duvarına geri döner.
+Bu sorundan kaçınmak için, güvenlik duvarının genel IP adresi için ek bir ana bilgisayar yolu oluşturun. Güvenlik duvarının genel IP adresine giden paketler Internet üzerinden yönlendirilir. Bu, güvenlik duvarının özel IP adresine varsayılan yolu almayı önler.
 
 ![Asimetrik yönlendirme](media/integrate-lb/Firewall-LB-asymmetric.png)
 
-Örneğin, aşağıdaki bir Güvenlik Duvarı'nın genel IP adresi 13.86.122.41 ve özel IP adresi 10.3.1.4 yollardır.
+Örneğin, aşağıdaki rotalar genel IP adresi 13.86.122.41 ve 10.3.1.4 özel IP adresi için bir güvenlik duvarına yöneliktir.
 
 ![Yol tablosu](media/integrate-lb/route-table.png)
 
 ## <a name="internal-load-balancer"></a>İç yük dengeleyici
 
-Bir iç yük dengeleyiciyle bir özel ön uç IP adresini yük dengeleyici dağıtılır.
+İç yük dengeleyici ile, yük dengeleyici özel bir ön uç IP adresi ile dağıtılır.
 
-Bu senaryo ile asimetrik yönlendirme sorun yoktur. Gelen paketleri, güvenlik duvarının genel IP adresinde geldiğinde, load balancer'ın özel IP adresine çevrilir ve aynı dönüş yolu kullanarak Güvenlik Duvarı'nın özel IP adresine döndürür.
+Bu senaryoyla ilgili bir asimetrik yönlendirme sorunu yok. Gelen paketler, güvenlik duvarının genel IP adresine ulaşır, yük dengeleyicinin özel IP adresine çevrilir ve ardından aynı dönüş yolunu kullanarak güvenlik duvarının özel IP adresine geri döner.
 
-Bu nedenle, bu senaryo için herkese açık yük dengeleyici senaryosu benzer dağıtabilirsiniz, ancak güvenlik duvarı gerek kalmadan genel IP adresinin ana bilgisayar yolu.
+Dolayısıyla, bu senaryoyu ortak yük dengeleyici senaryosuna benzer ancak güvenlik duvarı genel IP adresi ana bilgisayar yoluna gerek kalmadan dağıtabilirsiniz.
 
 ## <a name="additional-security"></a>Ek güvenlik
 
-Daha fazla yük dengeli senaryonuz güvenliğini artırmak için ağ güvenlik grupları (Nsg'ler) kullanabilirsiniz.
+Yük dengeli senaryonuzun güvenliği artırmak için ağ güvenlik grupları (NSG 'ler) kullanabilirsiniz.
 
-Örneğin, yük dengeli sanal makineler yer aldığı arka uç alt ağa bir NSG oluşturabilirsiniz. Gelen güvenlik duvarı IP adresini/bağlantı noktasından gelen trafiğe izin veren.
+Örneğin, yük dengeli sanal makinelerin bulunduğu arka uç alt ağında bir NSG oluşturabilirsiniz. Güvenlik Duvarı IP adresinden/bağlantı noktasından gelen trafiğe izin ver.
 
-Nsg'ler hakkında daha fazla bilgi için bkz. [güvenlik grupları](../virtual-network/security-overview.md).
+NSG 'ler hakkında daha fazla bilgi için bkz. [güvenlik grupları](../virtual-network/security-overview.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Bilgi edinmek için nasıl [dağıtma ve bir Azure güvenlik duvarı yapılandırma](tutorial-firewall-deploy-portal.md).
+- [Azure Güvenlik duvarını dağıtmayı ve yapılandırmayı](tutorial-firewall-deploy-portal.md)öğrenin.

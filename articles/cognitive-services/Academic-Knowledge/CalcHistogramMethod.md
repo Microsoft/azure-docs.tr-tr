@@ -1,7 +1,7 @@
 ---
-title: CalcHistogram yöntemi - akademik bilgi API'si
+title: CalcHistogram yöntemi-Akademik Bilgi API
 titlesuffix: Azure Cognitive Services
-description: Dağıtım bir dizi kağıt varlık ait öznitelik değerleri hesaplamak için CalcHistogram yöntemini kullanın.
+description: Bir kağıt varlıkları kümesinin öznitelik değerlerinin dağılımını hesaplamak için CalcHistogram yöntemini kullanın.
 services: cognitive-services
 author: alch-msft
 manager: nitinme
@@ -10,16 +10,17 @@ ms.subservice: academic-knowledge
 ms.topic: conceptual
 ms.date: 03/27/2017
 ms.author: alch
-ms.openlocfilehash: a228c5b90e47c9c24c5da70484a1a28f9a3054b1
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ROBOTS: NOINDEX
+ms.openlocfilehash: 9e84b1ad37b3224ec5553d0a66ba0fc84bc88f55
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60498844"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68705076"
 ---
 # <a name="calchistogram-method"></a>CalcHistogram yöntemi
 
-**Calchistogram** REST API, bir dizi kağıt varlık ait öznitelik değerleri dağıtım hesaplamak için kullanılır.          
+**Calchistogram** REST API, bir dizi bir varlık için öznitelik değerlerinin dağıtımını hesaplamak üzere kullanılır.          
 
 
 **REST uç noktası:**
@@ -30,49 +31,49 @@ https:// westus.api.cognitive.microsoft.com/academic/v1.0/calchistogram?
 
 ## <a name="request-parameters"></a>İstek Parametreleri
 
-Ad  |Değer | Gerekli mi?  |Açıklama
+Ad  |Value | Gerekli mi?  |Açıklama
 -----------|----------|--------|----------
-**ifade**    |Metin dizesi | Evet  |Varlıkları histogramlar hesaplanacağı belirten bir sorgu ifadesi.
-**Model** |Metin dizesi | Hayır |Sorgulamak istediğiniz model adını seçin.  Değer şu anda, varsayılan olarak *son*.
-**Öznitelikleri** | Metin dizesi | Hayır<br>Varsayılan: | Yanıta dahil öznitelik değerleri belirten bir virgülle ayrılmış listesi. Öznitelik adları büyük/küçük harfe duyarlıdır.
-**count** |Sayı | Hayır<br>Varsayılan: 10 |Döndürülecek sonuç sayısı.
-**uzaklık**  |Sayı | Hayır<br>Varsayılan: 0 |Döndürülecek ilk sonuç dizini.
-**zaman aşımı**  |Sayı | Hayır<br>Varsayılan: 1000 |Milisaniye cinsinden zaman aşımı. Zaman aşımı dolmadan bulunan ınterpretations döndürülür.
+**ifadeyi**    |Metin dizesi | Evet  |Histogramlarını hesaplanacak varlıkları belirten bir sorgu ifadesi.
+**modelinizi** |Metin dizesi | Hayır |Sorgulamak istediğiniz modelin adını seçin.  Şu anda, varsayılan değer *en*sonuncusudur.
+**özelliklerine** | Metin dizesi | Hayır<br>varsayılanını | Yanıta dahil olan öznitelik değerlerini belirten, virgülle ayrılmış bir liste. Öznitelik adları büyük/küçük harfe duyarlıdır.
+**count** |Number | Hayır<br>Varsayılan: 10 |Döndürülecek sonuç sayısı.
+**konumu**  |Number | Hayır<br>Varsayılan: 0 |Döndürülecek ilk sonucun dizini.
+**aş**  |Number | Hayır<br>Varsayılan: 1000 |Milisaniye cinsinden zaman aşımı. Zaman aşımı sona erdiğinde yalnızca yorumlamalar döndürülüyor.
 
 ## <a name="response-json"></a>Yanıt (JSON)
 
 Ad | Açıklama
 --------|---------
-**ifade**  |İfade parametre istek.
+**ifadeyi**  |İstekten expr parametresi.
 **num_entities** | Eşleşen varlıkların toplam sayısı.
-**histogramlar** |  Bir istekte belirtilen her bir öznitelik histogramları dizisi.
-**[x] histogramlar .attribute** | Histogram üzerine Hesaplandı özniteliğinin adı.
-**[x] histogramlar .distinct_values** | Bu öznitelik için varlıklar eşleşen arasında farklı değerleri sayısı.
-**[x] histogramlar .total_count** | Değer örnekleri arasında bu öznitelik için varlıklar eşleşen toplam sayısı.
-**[x] histogramlar .histogram** | Bu öznitelik için histogram verileri.
-**[x] .histogram [y] .value histogramlar** |  Öznitelik için bir değer.
-**[x] [y] .histogram .logprob histogramlar**  |Varlıkları bu öznitelik değeri ile eşleşen toplam doğal logaritmayı olasılık.
-**[x] [y] .histogram .count histogramlar**  |Bu öznitelik değeri ile eşleşen varlıkların sayısı.
-**İptal edildi** | İstek zaman aşımına uğrarsa true.
+**histogramlar** |  İstekte belirtilen her öznitelik için bir çubuk histooluşan dizi.
+**çubuk grafikler [x]. öznitelik** | Histogram 'ın hesaplandığı özniteliğin adı.
+**çubuk grafikler [x]. distinct_values** | Bu öznitelik için eşleşen varlıklar arasındaki farklı değer sayısı.
+**çubuk grafikler [x]. total_count** | Bu öznitelik için eşleşen varlıklar arasındaki toplam değer örneği sayısı.
+**çubuk grafikler [x]. histogram** | Bu öznitelik için histogram verileri.
+**çubuk grafikler [x]. histogram [y]. değer** |  Öznitelik için bir değer.
+**çubuk grafikler [x]. histogram [y]. logprob**  |Bu öznitelik değeri ile eşleşen varlıkların toplam doğal günlük olasılığı.
+**çubuk grafikler [x]. histogram [y]. Count**  |Bu öznitelik değerine sahip eşleşen varlık sayısı.
+**kesilmiş** | İstek zaman aşımına uğradı doğru.
 
 
 #### <a name="example"></a>Örnek:
 ```
 https:// westus.api.cognitive.microsoft.com/academic/v1.0/calchistogram?expr=And(Composite(AA.AuN=='jaime teevan'),Y>2012)&attributes=Y,F.FN&count=4
 ```
-<br>Bu örnekte, bir çubuk grafik, yayın sayısı yıla göre belirli bir yazar için 2010'dan itibaren oluşturmak için biz ilk sorgu ifadesi kullanarak oluşturabilirsiniz **yorumlama** sorgu dizesi API'SİYLE: *tarafından incelemeler jaime teevan 2012 sonra*.
+<br>Bu örnekte, 2010 tarihinden itibaren belirli bir yazar için yıla göre yayın sayısı için bir histogram oluşturmak amacıyla, ilk olarak sorgu dizesi ile **yorumlanan** API 'yi sorgu dizesiyle oluşturma *2012*:
 
 ```
 https:// westus.api.cognitive.microsoft.com/academic/v1.0/interpret?query=papers by jaime teevan after 2012
 ```
-<br>İfade yorumlama API döndürülen ilk yorumu içinde *ve (bileşik (AA. AuN == 'jaime teevan'), Y > 2012)* .
-<br>Bu ifade değeri içinde geçirilerek **calchistogram** API. *Attributes=Y,F.FN* parametre kağıt sayıları dağıtımlarını yıl ve çalışma alanı tarafından örneğin olması gerektiğini belirtir:
+<br>Yorumlama API 'sinden döndürülen ilk yorumdaki ifade *ve (bileşik (aa. AuN = = ' JAIME Teevan '), Y > 2012)* .
+<br>Bu ifade değeri daha sonra **calchistogram** API 'sine geçirilir. *Attributes = Y, F. FN* parametresi, kağıt sayısı dağılımlarının yıl ve çalışma alanına göre olması gerektiğini belirtir, örneğin:
 ```
 https:// westus.api.cognitive.microsoft.com/academic/v1.0/calchistogram?expr=And(Composite(AA.AuN=='jaime teevan'),Y>2012)&attributes=Y,F.FN&count=4
 ```
-<br>Bu istek için yanıt, ilk sorgu ifadesiyle eşleşen 37 incelemeler olduğunu gösterir.  İçin *yıl* öznitelik, bir sorgu belirtilen 2012 (yani 2013, 2014 ve 2015) sonra her yıl için 3 farklı değerleri vardır.  3 farklı değerleri üzerinde toplam kağıt 37 sayısıdır.  Her *yıl*, değer, toplam doğal logaritmayı olasılık ve eşleşen varlık sayısı histogram gösterir.     
+<br>Bu isteğin yanıtı öncelikle sorgu ifadesiyle eşleşen 37 kağıtların olduğunu gösterir.  *Year* özniteliği için, sorguda belirtilen 2012 (örn. 2013, 2014 ve 2015) sonrasında her yıl için 3 farklı değer vardır.  3 farklı değer üzerinden toplam kağıt sayısı 37 ' dir.  Histogram, her *yıl*için değeri, toplam doğal günlük olasılığını ve eşleşen varlıkların sayısını gösterir.     
 
-Histogram için *, alanı çalışma* 34 farklı çalışma alanları gösterir. Bir inceleme birden çok çalışma alanlarıyla ilişkili olarak toplam sayısı (53) eşleşen varlıkları sayısından büyük olamaz.  Yanıt 34 farklı değerleri olsa da, yalnızca üst 4 nedeniyle içeriyor. *sayısı = 4* parametresi.
+*Çalışma alanının* histogramı, 34 farklı çalışma alanı olduğunu gösterir. Bir kağıt, çok sayıda çalışma alanıyla ilişkilendirilebileceğinden, toplam sayı (53) eşleşen varlıkların sayısından daha büyük olabilir.  Farklı 34 değerler olsa da, yanıt yalnızca *Count = 4* parametresi nedeniyle ilk 4 ' ü içerir.
 
 ```JSON
 {

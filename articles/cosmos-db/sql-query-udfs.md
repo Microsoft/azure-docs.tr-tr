@@ -1,25 +1,25 @@
 ---
-title: Kullanıcı tanımlı işlevler (UDF'ler) olarak Azure Cosmos DB'de
-description: Azure Cosmos DB'de kullanıcı tanımlı işlevleri hakkında bilgi edinin.
+title: Azure Cosmos DB 'de Kullanıcı tanımlı işlevler (UDF 'ler)
+description: Azure Cosmos DB içindeki kullanıcı tanımlı işlevler hakkında bilgi edinin.
 author: markjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 05/31/2019
 ms.author: mjbrown
-ms.openlocfilehash: e168e450230720f4ad78516e6edcdc3aa08ba3e1
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: b67202da7293ef55cfe3390ca676f7944da80fba
+ms.sourcegitcommit: e42c778d38fd623f2ff8850bb6b1718cdb37309f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67342442"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69614323"
 ---
-# <a name="user-defined-functions-udfs-in-azure-cosmos-db"></a>Kullanıcı tanımlı işlevler (UDF'ler) olarak Azure Cosmos DB'de
+# <a name="user-defined-functions-udfs-in-azure-cosmos-db"></a>Azure Cosmos DB 'de Kullanıcı tanımlı işlevler (UDF 'ler)
 
-SQL API'si, kullanıcı tanımlı işlevler (UDF'ler) için destek sağlar. Skaler UDF ile sıfır veya daha fazla bağımsız değişkenleri geçirmek ve tek bir bağımsız değişken sonuç döndürür. API'nin her bağımsız değişken geçerli JSON değerleri teşekkür denetler.  
+SQL API 'SI, Kullanıcı tanımlı işlevler (UDF 'ler) için destek sağlar. Skaler UDF 'ler ile sıfır veya daha fazla bağımsız değişken geçirebilir ve tek bir bağımsız değişken sonucu döndürebilirsiniz. API, her bağımsız değişkeni geçerli JSON değerleri olarak denetler.  
 
-API'si UDF'leri kullanarak özel uygulama mantığını destekleyecek şekilde SQL söz dizimi genişletir. SQL API'si ile UDF'ler kaydetmek ve bunları SQL sorgularında başvurun. Aslında, UDF'ler exquisitely sorgularından çağırmak için tasarlanmıştır. Bir corollary UDF'ler saklı yordamları ve Tetikleyicileri gibi diğer JavaScript türleri gibi bağlam nesnesi için erişiminiz yok. Sorgular salt okunurdur ve birincil veya ikincil çoğaltma üzerinde çalıştırabilirsiniz. Diğer JavaScript türlerinin aksine, UDF'ler, ikincil çoğaltmalarda çalışacak şekilde tasarlanmıştır.
+API, UDF 'Leri kullanarak özel uygulama mantığını desteklemek için SQL sözdizimini genişletir. UDF 'Leri SQL API ile kaydedebilir ve SQL sorgularında bunlara başvurabilirsiniz. Aslında, UDF'ler exquisitely sorgularından çağırmak için tasarlanmıştır. Bir eş olarak, UDF 'ler, saklı yordamlar ve tetikleyiciler gibi diğer JavaScript türleri gibi bağlam nesnesine erişemez. Sorgular salt okunurdur ve birincil ya da ikincil çoğaltmalarda çalıştırılabilir. Diğer JavaScript türlerinden farklı olarak UDF 'ler, ikincil çoğaltmalarda çalışacak şekilde tasarlanmıştır.
 
-Aşağıdaki örnek bir öğe kapsayıcısı altında bir UDF Cosmos DB veritabanına kaydeder. Örnek adı olan bir UDF oluşturur `REGEX_MATCH`. İki JSON dizesi değerini kabul `input` ve `pattern`, ve ilk eşleşme ikinci desen belirtilmişse denetimleri kullanarak JavaScript'in `string.match()` işlevi.
+Aşağıdaki örnek, Cosmos veritabanındaki bir öğe kapsayıcısı altına bir UDF kaydeder. Örnek, `REGEX_MATCH`adı olan bir udf oluşturur. İki JSON dize değerini `input` `pattern`kabul eder ve ilk kez, JavaScript 'in `string.match()` işlevi kullanılarak ikinci öğesinde belirtilen Düzenle eşleşip eşleşmediğini denetler.
 
 ## <a name="examples"></a>Örnekler
 
@@ -37,14 +37,14 @@ Aşağıdaki örnek bir öğe kapsayıcısı altında bir UDF Cosmos DB veritaba
            regexMatchUdf).Result;  
 ```
 
-Şimdi bu UDF bir sorgu projeksiyon kullanın. Büyük/küçük harfe ön ekine sahip UDF nitelemelidir `udf.` bunları sorgulara çağırırken.
+Şimdi bu UDF 'yi bir sorgu projeksiyonu içinde kullanın. UDF 'leri sorgular içerisinden çağırırken büyük/küçük harfe duyarlı `udf.` önekiyle nitelemeniz gerekir.
 
 ```sql
     SELECT udf.REGEX_MATCH(Families.address.city, ".*eattle")
     FROM Families
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
     [
@@ -57,7 +57,7 @@ Sonuçlar şu şekildedir:
     ]
 ```
 
-İle tam UDF kullanabileceğiniz `udf.` aşağıdaki örnekteki gibi bir filtre içinde öneki:
+Aşağıdaki örnekte olduğu gibi, bir filtrenin içindeki `udf.` önekiyle nitelenmiş UDF 'yi kullanabilirsiniz:
 
 ```sql
     SELECT Families.id, Families.address.city
@@ -65,7 +65,7 @@ Sonuçlar şu şekildedir:
     WHERE udf.REGEX_MATCH(Families.address.city, ".*eattle")
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
     [{
@@ -74,9 +74,9 @@ Sonuçlar şu şekildedir:
     }]
 ```
 
-Esas olarak, UDF'ler izdüşümler ve filtreler kullandığınız geçerli bir skaler ifadelerin ' dir.
+Temelde, UDF 'ler, hem projeksiyonde hem de filtrelerde kullanabileceğiniz geçerli skaler ifadeleridir.
 
-UDF'ler gücüyle genişletmek için koşullu mantık ile başka bir örneğe bakın:
+UDF 'nin gücünden birini genişletmek için koşullu mantığa başka bir örneğe bakın:
 
 ```javascript
        UserDefinedFunction seaLevelUdf = new UserDefinedFunction()
@@ -100,14 +100,14 @@ UDF'ler gücüyle genişletmek için koşullu mantık ile başka bir örneğe ba
                 seaLevelUdf);
 ```
 
-Aşağıdaki örnek UDF uygular:
+Aşağıdaki örnek UDF 'yi alıştırmalar:
 
 ```sql
     SELECT f.address.city, udf.SEALEVEL(f.address.city) AS seaLevel
     FROM Families f
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
      [
@@ -122,12 +122,12 @@ Sonuçlar şu şekildedir:
     ]
 ```
 
-Başvurulan özellikleri tarafından UDF parametreler JSON değeri kullanılamaz, parametre olarak kabul edilir tanımsız ve UDF çağrısı atlandı. Benzer şekilde, UDF sonucu tanımlanmamış ise, sonuçta bulunmaz.
+UDF parametreleri tarafından başvurulan Özellikler JSON değerinde kullanılamıyorsa, parametre tanımsız olarak değerlendirilir ve UDF çağrısı atlanır. Benzer şekilde, UDF 'nin sonucu tanımsızdır, sonuca dahil değildir.
 
-Önceki örneklerde gösterildiği gibi UDF'ler JavaScript dilinin gücünü SQL API'si ile tümleştirin. UDF yerleşik JavaScript çalışma zamanı Özellikleri'nın yardımıyla karmaşık yordam, koşullu mantık yapmak için zengin bir programlanabilir arabirimi sağlar. SQL API'si bağımsız değişkenler UDF için her kaynak öğesi için geçerli nerede veya SELECT yan tümcesi sağlar aşaması. Sonuç, sorunsuz bir şekilde genel yürütme işlem hattında eklenmiştir. Özet olarak, karmaşık iş mantığı sorguları bir parçası olarak yapmak için harika Araçlar UDF'ler var.
+Yukarıdaki örneklerde gösterildiği gibi, UDF 'ler, JavaScript dilinin gücünden SQL API 'SI ile tümleşir. UDF 'ler, yerleşik JavaScript çalışma zamanı özellikleri yardımıyla karmaşık yordamla, koşullu mantığa yönelik zengin bir programlanabilir arabirim sağlar. SQL API 'SI, geçerli WHERE veya SELECT yan tümcesi aşamasında her kaynak öğe için UDF 'ler için bağımsız değişkenler sağlar. Sonuç, genel yürütme ardışık düzenine sorunsuz bir şekilde dahil edilir. Özet olarak, UDF 'ler, sorguların bir parçası olarak karmaşık iş mantığı yapmak için harika araçlardır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure Cosmos DB'ye giriş](introduction.md)
+- [Azure Cosmos DB giriş](introduction.md)
 - [Sistem işlevleri](sql-query-system-functions.md)
-- [toplamaları](sql-query-aggregates.md)
+- [Toplar](sql-query-aggregates.md)

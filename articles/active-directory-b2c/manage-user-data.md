@@ -1,6 +1,6 @@
 ---
-title: Azure Active Directory B2C kullanıcı verilerini yönetme | Microsoft Docs
-description: Silme veya Azure AD B2C kullanıcı verilerini dışarı aktarma konusunda bilgi edinin.
+title: Azure Active Directory B2C Kullanıcı verilerini yönetme | Microsoft Docs
+description: Azure AD B2C Kullanıcı verilerini silme veya dışarı aktarma hakkında bilgi edinin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -11,55 +11,55 @@ ms.date: 05/06/2018
 ms.author: marsma
 ms.subservice: B2C
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 4cbca467b50dd0e43132b6d09dc0785c501fca0f
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: 78726620db119abf617be8a30cf03697b04e382b
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67204688"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71064075"
 ---
-# <a name="manage-user-data-in-azure-active-directory-b2c"></a>Azure Active Directory B2C kullanıcı verilerini yönetme
+# <a name="manage-user-data-in-azure-active-directory-b2c"></a>Azure Active Directory B2C Kullanıcı verilerini yönetme
 
- Bu makalede ele alınmaktadır tarafından sağlanan işlemler kullanarak Azure Active Directory (Azure AD) B2C kullanıcı verilerini nasıl yönetebileceğinizi [Azure Active Directory Graph API'si](/previous-versions/azure/ad/graph/api/api-catalog). Kullanıcı verileri yönetmek, silme veya denetim günlüklerinden verileri dışarı aktarma içerir.
+ Bu makalede [Azure Active Directory Graph API](/previous-versions/azure/ad/graph/api/api-catalog)tarafından sunulan işlemleri kullanarak Azure Active Directory B2C (Azure AD B2C) içindeki kullanıcı verilerini nasıl yönetebileceğinizi ele alınmaktadır. Kullanıcı verilerinin yönetilmesi, denetim günlüklerinden verileri silme veya dışarı aktarmaya dahildir.
 
 [!INCLUDE [gdpr-intro-sentence.md](../../includes/gdpr-intro-sentence.md)]
 
 ## <a name="delete-user-data"></a>Kullanıcı verilerini sil
 
-Kullanıcı verileri, Denetim günlüklerinde ve Azure AD B2C dizininde depolanır. Tüm kullanıcı Denetim verilerinin 7 gün içinde Azure AD B2C için korunur. Bu 7 günlük süre içinde kullanıcı verilerini silmek istiyorsanız, kullanabileceğiniz [kullanıcı silme](/previous-versions/azure/ad/graph/api/users-operations#DeleteUser) işlemi. Bir silme işlemi, veri bulunduğu her Azure AD B2C kiracıları için gerekli değildir. 
+Kullanıcı verileri Azure AD B2C dizininde ve denetim günlüklerinde depolanır. Tüm Kullanıcı denetim verileri Azure AD B2C 7 gün boyunca tutulur. Bu 7 günlük süre içinde kullanıcı verilerini silmek istiyorsanız, [Kullanıcı silme](/previous-versions/azure/ad/graph/api/users-operations#DeleteUser) işlemini kullanabilirsiniz. Verilerin bulunabileceği Azure AD B2C kiracıların her biri için SILME işlemi gereklidir.
 
-Her Azure AD B2C kullanıcı nesne kimliği atanır. Nesne Kimliğini Azure AD B2C kullanıcı verilerini silmek için kullanabilmeniz için benzersiz bir tanımlayıcı sağlar. Mimarinizi bağlı olarak, Finans, pazarlama gibi diğer hizmetlerde, kullanışlı bağıntı tanımlayıcısı nesne kimliği olabilir ve müşteri ilişkileri yönetim veritabanları. 
+Azure AD B2C içindeki her kullanıcıya bir nesne KIMLIĞI atanır. Nesne KIMLIĞI, Azure AD B2C Kullanıcı verilerini silmek için kullanabileceğiniz belirsiz bir tanımlayıcı sağlar. Mimarinize bağlı olarak, nesne KIMLIĞI finans, pazarlama ve müşteri ilişkisi yönetim veritabanları gibi diğer hizmetler genelinde yararlı bir bağıntı tanımlayıcısı olabilir.
 
-Bir kullanıcı için nesne Kimliğini almak için en doğru şekilde, bir Azure AD B2C ile kimlik doğrulaması yolculuğunun bir parçası olarak elde edilir. Çevrimdışı bir süreç başka yöntemler kullanarak veriler için geçerli bir isteği bir kullanıcıdan alırsanız bir müşteri hizmetleri desteği göre arama gibi aracı, olabilir kullanıcıyı bulun ve ilişkili nesne kimliğini not alın. 
+Bir kullanıcının nesne KIMLIĞINI almanın en doğru yolu, Azure AD B2C ile bir kimlik doğrulama yolculuğunun parçası olarak bunu elde kullanmaktır. Başka yöntemler kullanarak bir kullanıcıdan veri için geçerli bir istek alırsanız, müşteri hizmeti destek aracısına göre arama gibi bir çevrimdışı işlem, kullanıcıyı bulmak ve ilişkili nesne KIMLIĞINI aramak için gerekli olabilir.
 
-Aşağıdaki örnekte, olası veri silme akış gösterilmektedir:
+Aşağıdaki örnekte olası bir veri silme akışı gösterilmektedir:
 
-1. Kullanıcı oturum açtığında ve seçer **verilerimi Sil**.
-2. Uygulama içinde bir yönetim bölümündeki uygulama verilerini silmek için bir seçenek sunar.
-3. Uygulamayı bir Azure AD B2C kimlik doğrulaması zorlar. Azure AD B2C, kullanıcının uygulamaya nesne Kimliğine sahip bir belirteç sağlar. 
-4. Belirteç, uygulama ve kullanıcı verilerini Azure AD Graph API'sine yapılan bir çağrı ile silmek için kullanılan kimliği nesne tarafından alınır. Azure AD Graph API, kullanıcı verilerini siler ve bir durum kodu 200 Tamam döndürür.
-5. Uygulama kullanıcı verilerini silmeyi nesne kimliği veya diğer tanımlayıcıları kullanarak gerektiği gibi diğer Kurumsal sistemlere düzenler.
-6. Uygulama verileri silinmesini onaylıyor ve kullanıcıya sıradaki adımları sunmaktadır.
+1. Kullanıcı oturum açar ve **verilerimi Sil**' i seçer.
+2. Uygulama, uygulamanın bir yönetim bölümünde yer alan verileri silme seçeneği sunar.
+3. Uygulama, bir kimlik doğrulamasını Azure AD B2C zorlar. Azure AD B2C, kullanıcının nesne KIMLIĞI ile uygulamaya geri bir belirteç sağlar.
+4. Belirteç uygulama tarafından alınır ve nesne KIMLIĞI, Azure AD Graph API çağrısıyla Kullanıcı verilerini silmek için kullanılır. Azure AD Graph API, Kullanıcı verilerini siler ve 200 Tamam bir durum kodu döndürür.
+5. Uygulama, nesne KIMLIĞINI veya diğer tanımlayıcıları kullanarak gerektiğinde Kullanıcı verilerinin diğer kuruluş sistemlerinde silinmesini sağlar.
+6. Uygulama, verilerin silinmesini onaylar ve kullanıcıya sonraki adımları sağlar.
 
-## <a name="export-customer-data"></a>Müşteri verilerini dışarı aktarma
+## <a name="export-customer-data"></a>Müşteri verilerini dışarı aktar
 
-Müşteri verileri, Azure AD B2C'den dışarı aktarma işleminin silme işlemine benzer.
+Azure AD B2C Müşteri verilerini dışarı aktarma işlemi silme işlemine benzerdir.
 
-Azure AD B2C kullanıcı verilerini sınırlıdır:
+Azure AD B2C Kullanıcı verileri şu şekilde sınırlıdır:
 
-- **Azure Active Directory'de depolanan verileri**: Nesne kimliği veya tüm oturum açma adı, e-posta adresi veya kullanıcı adı gibi kullanarak bir Azure AD B2C kimlik doğrulaması kullanıcı yolculuğu veri alabilir. 
-- **Kullanıcıya özgü denetim olayları raporu**: Nesne Kimliği'ni kullanarak verileri dizinleyebilirsiniz.
+- **Azure Active Directory depolanan veriler**: Bir Azure AD B2C kimlik doğrulaması Kullanıcı yolculuğunda verileri, nesne KIMLIĞINI veya bir e-posta adresi veya Kullanıcı adı gibi herhangi bir oturum açma adını kullanarak elde edebilirsiniz.
+- **Kullanıcıya özgü denetim olayları raporu**: Nesne KIMLIĞINI kullanarak veri dizini oluşturabilirsiniz.
 
-Bir dışarı aktarma veri akışı aşağıdaki örnekte açıklanan adımları uygulama tarafından gerçekleştirilen olarak da bir arka uç işleme veya dizindeki Yönetici rolüne sahip bir kullanıcı tarafından gerçekleştirilebilir:
+Aşağıdaki bir dışarı aktarma veri akışı örneğinde, uygulama tarafından gerçekleştirilmekte olan adımlar, bir arka uç işlemi ya da dizinde yönetici rolü olan bir kullanıcı tarafından da gerçekleştirilebilir:
 
-1. Kullanıcı uygulamayı açar. Azure AD B2C, Azure multi-Factor Authentication ile kimlik doğrulaması gerekirse zorlar.
-2. Uygulama, kullanıcı öznitelikleri almak için Azure AD Graph API işlemini çağırmak için kullanıcı kimlik bilgilerini kullanır. Azure AD Graph API, öznitelik verileri JSON biçiminde sağlar. Şemasına bağlı olarak, bir kullanıcı ile ilgili tüm kişisel verileri içerecek şekilde kimliği belirteç içeriği ayarlayabilirsiniz.
-3. Uygulama kullanıcı Denetim etkinliği alır. Azure AD Graph API uygulamasına olay verilerini sağlar.
-4. Uygulama verileri bir araya toplar ve kullanıcı tarafından kullanılabilir hale getirir.
+1. Kullanıcı uygulamada oturum açar. Azure AD B2C gerekirse Azure Multi-Factor Authentication kimlik doğrulamasını zorlar.
+2. Uygulama, Kullanıcı özniteliklerini almak üzere bir Azure AD Graph API işlemini çağırmak için Kullanıcı kimlik bilgilerini kullanır. Azure AD Graph API, öznitelik verilerini JSON biçiminde sağlar. Şemaya bağlı olarak, KIMLIK belirteç içeriğini bir kullanıcıyla ilgili tüm kişisel verileri içerecek şekilde ayarlayabilirsiniz.
+3. Uygulama, Kullanıcı denetim etkinliğini alır. Azure AD Graph API, uygulamaya olay verileri sağlar.
+4. Uygulama, verileri toplar ve Kullanıcı tarafından kullanılabilir hale getirir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Kullanıcıların uygulamanızı nasıl eriştiğini yönetme konusunda bilgi almak için bkz: [kullanıcı erişimini yönetme](manage-user-access.md).
+- Kullanıcıların uygulamanıza nasıl erişebileceğini yönetme hakkında bilgi edinmek için bkz. [Kullanıcı erişimini yönetme](manage-user-access.md).
 
 
 

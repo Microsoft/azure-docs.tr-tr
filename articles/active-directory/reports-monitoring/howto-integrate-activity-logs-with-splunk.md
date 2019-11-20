@@ -1,6 +1,6 @@
 ---
-title: Azure Active Directory günlükleri Azure İzleyicisi'ni kullanarak Splunk ile tümleştirme | Microsoft Docs
-description: Azure Active Directory günlükleri Azure İzleyicisi'ni kullanarak SumoLogic ile tümleştirmeyi öğrenin
+title: Azure Izleyici 'yi kullanarak splunk 'ı tümleştirme | Microsoft Docs
+description: Azure Izleyici kullanarak Azure Active Directory günlüklerini SumoLogic ile tümleştirmeyi öğrenin
 services: active-directory
 documentationcenter: ''
 author: MarkusVi
@@ -17,39 +17,39 @@ ms.date: 05/13/2019
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8f30e19a351f7b25f995a85cfd566bcba091ac27
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7da3a545847382f8fed192a6ec4fe2ac75bb8b35
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65597829"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74014402"
 ---
-# <a name="how-to-integrate-azure-active-directory-logs-with-splunk-using-azure-monitor"></a>Nasıl yapılır: Azure İzleyicisi'ni kullanarak Splunk ile Azure Active Directory günlükleri tümleştirme
+# <a name="how-to-integrate-azure-active-directory-logs-with-splunk-using-azure-monitor"></a>Nasıl yapılır: Azure Izleyici kullanarak splunk ile Azure Active Directory günlüklerini tümleştirme
 
-Bu makalede, Azure İzleyicisi'ni kullanarak Azure Active Directory (Azure AD) günlükleri Splunk ile tümleştirmeyi öğrenin. Splunk ile olay hub'ı tümleştirdikten sonra ve bir Azure olay hub'ına ilk günlükleri yönlendirebilirsiniz.
+Bu makalede, Azure Izleyici 'yi kullanarak Azure Active Directory (Azure AD) günlüklerini splunk ile tümleştirmeyi öğreneceksiniz. Önce günlükleri bir Azure Olay Hub 'ına yönlendirdiğinizde Olay Hub 'ını splunk ile tümleştirin.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 Bu özelliği kullanmak için şunlara ihtiyacınız vardır:
-* Azure AD etkinlik içeren bir Azure olay hub'ına kaydeder. Bilgi edinmek için nasıl [, etkinlik günlükleri Olay hub'ına akış](quickstart-azure-monitor-stream-logs-to-event-hub.md). 
-* Azure İzleyici eklenti Splunk için. [İndirme ve yapılandırma Splunk örneğinizin](https://github.com/Microsoft/AzureMonitorAddonForSplunk/blob/master/README.md).
+* Azure AD etkinlik günlüklerini içeren bir Azure Olay Hub 'ı. [Etkinlik günlüklerinizi bir olay hub 'ına akışa](quickstart-azure-monitor-stream-logs-to-event-hub.md)alma hakkında bilgi edinin. 
+* Splunk için Azure Izleyici eklentisi. [Splunk örneğinizi indirin ve yapılandırın](https://github.com/Microsoft/AzureMonitorAddonForSplunk/blob/master/README.md).
 
-## <a name="integrate-azure-active-directory-logs"></a>Azure Active Directory günlükleri tümleştirme 
+## <a name="integrate-azure-active-directory-logs"></a>Azure Active Directory günlüklerini tümleştirme 
 
-1. Splunk örneğinizi açın ve seçin **veri özeti**.
+1. Splunk örneğinizi açın ve **veri özeti**' ni seçin.
 
     !["Veri özeti" düğmesi](./media/howto-integrate-activity-logs-with-splunk/DataSummary.png)
 
-2. Seçin **Sourcetypes** sekmesine tıklayın ve ardından **amal: aadal:audit**
+2. **Sourcetypes** sekmesini seçin ve ardından **Amal: aadal: Audit** ' i seçin
 
-    ![Veri Özet Sourcetypes sekmesi](./media/howto-integrate-activity-logs-with-splunk/sourcetypeaadal.png)
+    ![Veri özeti Sourcetypes sekmesi](./media/howto-integrate-activity-logs-with-splunk/sourcetypeaadal.png)
 
-    Azure AD etkinlik günlükleri, aşağıdaki şekilde gösterilmiştir:
+    Azure AD etkinlik günlükleri aşağıdaki şekilde gösterilmiştir:
 
     ![Etkinlik günlükleri](./media/howto-integrate-activity-logs-with-splunk/activitylogs.png)
 
 > [!NOTE]
-> (Örneğin, bir ara sunucu kullanarak ya da Splunk bulutta çalıştırılan) Splunk Örneğinizde bir eklenti yükleyemezse, bu olayları Splunk HTTP olay Toplayıcıya iletir. Bunu yapmak için bunu kullanın [Azure işlevi](https://github.com/Microsoft/AzureFunctionforSplunkVS), olay hub'ındaki yeni iletileri tarafından tetiklenen. 
+> Splunk örneğiniz için bir eklenti yükleyemezseniz (örneğin, bir ara sunucu kullanıyorsanız veya splunk bulutu üzerinde çalıştırıyorsanız), bu olayları splunk HTTP olay toplayıcısına iletebilirsiniz. Bunu yapmak için, Olay Hub 'ında yeni iletiler tarafından tetiklenen bu [Azure işlevini](https://github.com/Microsoft/AzureFunctionforSplunkVS)kullanın. 
 >
 
 ## <a name="next-steps"></a>Sonraki adımlar

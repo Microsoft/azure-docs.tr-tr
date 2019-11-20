@@ -1,87 +1,88 @@
 ---
-title: Yayımlama bölgeleri & uç noktaları
+title: Yayımlama bölgeleri & uç noktaları-LUSıS
 titleSuffix: Azure Cognitive Services
-description: çok sayıda tüm yayımlama bölge 3 yazma bölgeleri ve bunların portalları destekler. LUIS uygulamanızı yayımladığınız bölge, bölge veya Azure portalında bir Azure LUIS uç noktası anahtarı oluştururken belirttiğiniz konuma karşılık gelir. LUIS, otomatik olarak bir uygulama yayımladığınızda, bir anahtar ile ilişkili bölge için uç nokta URL'si oluşturur.
+description: Azure portal belirtilen bölge, LUO uygulamasını yayımlayacağınız yer ve aynı bölge için bir uç nokta URL 'SI oluşturulur.
 services: cognitive-services
 author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
-ms.date: 04/02/2019
+ms.topic: conceptual
+ms.date: 07/31/2019
 ms.author: diberry
-ms.openlocfilehash: 20ea2eb632a6d685351178691cc3d0f58a567902
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: fe4436afe56e631ae308b70ae35b1fb4a7c32e11
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60599279"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73669183"
 ---
-# <a name="authoring-and-publishing-regions-and-the-associated-keys"></a>Bölgeler ve ilişkili anahtarları yayımlama ve yazma
+# <a name="authoring-and-publishing-regions-and-the-associated-keys"></a>Yazma ve yayımlama bölgeleri ve ilişkili anahtarlar
 
-Üç yazma bölgesine karşılık gelen LUIS portallarını tarafından desteklenir. Birden fazla bölgeye LUIS uygulaması yayımlamak için bölge başına en az bir anahtar gerekir. 
+Üç yazma bölgesi, karşılık gelen LUI portalları tarafından desteklenir. Bir LUO uygulamasını birden fazla bölgeye yayımlamak için, bölge başına en az bir anahtara ihtiyacınız vardır. 
 
 <a name="luis-website"></a>
 
-## <a name="luis-authoring-regions"></a>LUIS yazma bölgeleri
-Bölgeye göre üç LUIS yazarlık Portal vardır. Yazar ve aynı bölgede yayımlama gerekir. 
+## <a name="luis-authoring-regions"></a>LUSıS yazma bölgeleri
+Bölgeye göre üç LUı yazma portalı vardır. Aynı bölgede oluşturmanız ve yayımlamanız gerekir. 
 
-|LUIS|Yazma bölgesi|Azure bölgesi adı|
+|LUIS|Yazma bölgesi|Azure bölge adı|
 |--|--|--|
-|[www.luis.ai][www.luis.ai]|ABD<br>Avrupa'değil<br>Avustralya'değil| `westus`|
-|[AU.luis.ai][au.luis.ai]|Avustralya| `australiaeast`|
-|[EU.luis.ai][eu.luis.ai]|Avrupa|`westeurope`|
+|[www.luis.ai][www.luis.ai]|ABD<br>Avrupa değil<br>Avustralya değil| `westus`|
+|[au.luis.ai][au.luis.ai]|Avustralya| `australiaeast`|
+|[eu.luis.ai][eu.luis.ai]|Avrupa|`westeurope`|
 
-Yazma bölgeleri sahip [eşleştirilmiş bölgeleri yük devretme](https://docs.microsoft.com/azure/best-practices-availability-paired-regions). 
+Yazma bölgeleri, [Yük devretme bölgelerini eşleştirilmiştir](https://docs.microsoft.com/azure/best-practices-availability-paired-regions). 
 
 <a name="regions-and-azure-resources"></a>
 
-## <a name="publishing-regions-and-azure-resources"></a>Yayımlama bölgeler ve Azure kaynakları
-Uygulama LUIS Portalı'nda eklenen LUIS kaynaklarla ilişkili tüm bölgeler için yayımlanır. Örneğin, üzerinde oluşturulan bir uygulama için [www.luis.ai][www.luis.ai], bir Bilişsel hizmet LUIS ya da kaynak oluşturursanız **westus** ve [uygulamaya bir kaynak olarak ekleyin ](luis-how-to-azure-subscription.md), uygulama o bölgenin yayımlanır. 
+## <a name="publishing-regions-and-azure-resources"></a>Yayımlama bölgeleri ve Azure kaynakları
+Uygulama, Lue portalına eklenen LUO kaynaklarıyla ilişkili tüm bölgelerde yayımlanır. Örneğin, [www.Luis.ai][www.luis.ai]üzerinde oluşturulan bir uygulama için, **WESTUS** 'de bir lusıs veya bilişsel hizmet kaynağı oluşturup [bunu bir kaynak olarak uygulamaya eklerseniz](luis-how-to-azure-subscription.md), uygulama o bölgede yayımlanır. 
 
-## <a name="public-apps"></a>Genel uygulamalar
-LUIS kaynak bölge tabanlı anahtarı bir kullanıcıyla hangi bölge kendi kaynak anahtarı ile ilişkili uygulama erişebilmesi için tüm bölgelerde genel bir uygulama yayımlanır.
+## <a name="public-apps"></a>Ortak uygulamalar
+Ortak bir uygulama tüm bölgelerde yayımlanır, böylece bölge tabanlı bir LUTO kaynak anahtarı olan bir Kullanıcı, kaynak anahtarı ile ilişkili olan herhangi bir bölgede uygulamaya erişebilir.
 
 <a name="publishing-regions"></a>
 
-## <a name="publishing-regions-are-tied-to-authoring-regions"></a>Yayımlama bölgeleri bölgeleri yazma ile bağlıdır.
+## <a name="publishing-regions-are-tied-to-authoring-regions"></a>Yayımlama bölgeleri yazma bölgelerine bağlıdır
 
-Yazma bölgesi uygulama yalnızca bir karşılık gelen yayımlanabilir bölge yayımlayın. Uygulamanız şu anda geliştirme yanlış bölgede ise, uygulamayı dışarı aktarma ve yayımlama bölgeniz için doğru yazma bölgesini almak. 
+Yazma bölgesi uygulaması yalnızca ilgili yayımlama bölgesine yayımlanabilir. Uygulamanız Şu anda yanlış yazma bölgedeyse, uygulamayı dışarı aktarın ve yayımlama bölgeniz için doğru yazma bölgesine aktarın. 
 
-LUIS uygulamalar üzerinde oluşturulan https://www.luis.ai tüm uç noktalar için yayımlanan [Avrupa](#publishing-to-europe) ve [Avustralya](#publishing-to-australia) bölgeleri. 
+https://www.luis.ai oluşturulan Lua uygulamaları, [Avrupa](#publishing-to-europe) ve [Avustralya](#publishing-to-australia) bölgeleri hariç tüm uç noktalara yayımlanabilir. 
 
-## <a name="publishing-to-europe"></a>Avrupa yayımlama
+## <a name="publishing-to-europe"></a>Avrupa 'da yayımlama
 
-Uygulamaları LUIS oluşturduğunuz Avrupa bölgelerine yayımlamak için https://eu.luis.ai yalnızca. LUIS, herhangi bir başka Avrupa bölgesinde bir anahtar kullanarak yayımlamak çalışırsanız, bir uyarı iletisi görüntüler. Bunun yerine, https://eu.luis.ai. LUIS uygulama oluşturulma [ https://eu.luis.ai ] [ eu.luis.ai] diğer bölgelere otomatik olarak geçirilmez. Dışarı aktarma ve ardından geçirmek için LUIS uygulaması alın.
+Avrupa bölgelerine yayımlamak için yalnızca https://eu.luis.ai ' de LUSıS uygulamaları oluşturursunuz. Avrupa bölgesinde bir anahtar kullanarak başka bir yerde yayımlamayı denerseniz, Luz bir uyarı mesajı görüntüler. Bunun yerine https://eu.luis.aikullanın. [https://eu.luis.ai][eu.luis.ai] ' de oluşturulan lusıs uygulamaları, diğer bölgelere otomatik olarak geçirilmez. ' İ dışa aktarıp, daha sonra geçirmek için LUO uygulamasını içeri aktarın.
 
-## <a name="europe-publishing-regions"></a>Yayımlama Avrupa bölgelerinde
+## <a name="europe-publishing-regions"></a>Avrupa yayımlama bölgeleri
 
- Genel bölge | API bölge yazma & Web sitesi geliştirme| Yayımlama & bölgesi sorgulama<br>`API region name`   |  Uç nokta URL'si biçimi   |
+ Genel bölge | Yazma API bölgesi & yazma Web sitesi| Bölge & yayımlanıyor<br>`API region name`   |  Uç nokta URL biçimi   |
 |-----|------|------|------|
-| [Avrupa](#publishing-to-europe)| `westeurope`<br>[EU.luis.ai][eu.luis.ai]| Fransa Orta<br>`francecentral`     | https://francecentral.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   | 
-| [Avrupa](#publishing-to-europe)| `westeurope`<br>[EU.luis.ai][eu.luis.ai]| Kuzey Avrupa<br>`northeurope`     | https://northeurope.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   | 
-| [Avrupa](#publishing-to-europe) | `westeurope`<br>[EU.luis.ai][eu.luis.ai]| Batı Avrupa<br>`westeurope`    |  https://westeurope.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   | 
-| [Avrupa](#publishing-to-europe) | `westeurope`<br>[EU.luis.ai][eu.luis.ai]| Birleşik Krallık Güney<br>`uksouth`    |  https://uksouth.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   |
+| [Avrupa](#publishing-to-europe)| `westeurope`<br>[eu.luis.ai][eu.luis.ai]| Fransa Orta<br>`francecentral`     | https://francecentral.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   | 
+| [Avrupa](#publishing-to-europe)| `westeurope`<br>[eu.luis.ai][eu.luis.ai]| Kuzey Avrupa<br>`northeurope`     | https://northeurope.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   | 
+| [Avrupa](#publishing-to-europe) | `westeurope`<br>[eu.luis.ai][eu.luis.ai]| Batı Avrupa<br>`westeurope`    |  https://westeurope.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   | 
+| [Avrupa](#publishing-to-europe) | `westeurope`<br>[eu.luis.ai][eu.luis.ai]| Birleşik Krallık Güney<br>`uksouth`    |  https://uksouth.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   |
 
-## <a name="publishing-to-australia"></a>Avustralya yayımlama
+## <a name="publishing-to-australia"></a>Avustralya 'da yayımlama
 
-Avustralya bölgeleri için yayımlamak için LUIS uygulamaları oluşturmanız https://au.luis.ai yalnızca. LUIS, herhangi bir başka Avustralya bölgesinde bir anahtar kullanarak yayımlamak çalışırsanız, bir uyarı iletisi görüntüler. Bunun yerine, https://au.luis.ai. LUIS uygulama oluşturulma [ https://au.luis.ai ] [ au.luis.ai] diğer bölgelere otomatik olarak geçirilmez. Dışarı aktarma ve ardından geçirmek için LUIS uygulaması alın.
+Avustralya bölgelerinde yayımlamak için yalnızca https://au.luis.ai HALSıS uygulamaları oluşturursunuz. Avustralya bölgesindeki bir anahtar kullanarak başka bir yerde yayımlamayı denerseniz, Luz bir uyarı mesajı görüntüler. Bunun yerine https://au.luis.aikullanın. [https://au.luis.ai][au.luis.ai] ' de oluşturulan lusıs uygulamaları, diğer bölgelere otomatik olarak geçirilmez. ' İ dışa aktarıp, daha sonra geçirmek için LUO uygulamasını içeri aktarın.
 
-## <a name="australia-publishing-regions"></a>Yayımlama Avustralya bölgeleri
+## <a name="australia-publishing-regions"></a>Avustralya yayımlama bölgeleri
 
- Genel bölge | API bölge yazma & Web sitesi geliştirme| Yayımlama & bölgesi sorgulama<br>`API region name`   |  Uç nokta URL'si biçimi   |
+ Genel bölge | Yazma API bölgesi & yazma Web sitesi| Bölge & yayımlanıyor<br>`API region name`   |  Uç nokta URL biçimi   |
 |-----|------|------|------|
-| [Avustralya](#publishing-to-australia) | `australiaeast`<br>[AU.luis.ai][au.luis.ai]| Avustralya Doğu<br>`australiaeast`     |  https://australiaeast.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   |
+| [Avustralya](#publishing-to-australia) | `australiaeast`<br>[au.luis.ai][au.luis.ai]| Avustralya Doğu<br>`australiaeast`     |  https://australiaeast.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   |
 
 ## <a name="publishing-to-other-regions"></a>Diğer bölgelere yayımlama
 
-Uygulamaları LUIS oluşturduğunuz diğer bölgelere yayımlamak için [ https://www.luis.ai ](https://www.luis.ai) yalnızca. 
+Diğer bölgelere yayımlamak için yalnızca [https://www.luis.ai](https://www.luis.ai) halsıs uygulamaları oluşturursunuz. 
 
-## <a name="other-publishing-regions"></a>Yayımlama diğer bölgeler
+## <a name="other-publishing-regions"></a>Diğer yayımlama bölgeleri
 
- Genel bölge | API bölge yazma & Web sitesi geliştirme| Yayımlama & bölgesi sorgulama<br>`API region name`   |  Uç nokta URL'si biçimi   |
+ Genel bölge | Yazma API bölgesi & yazma Web sitesi| Bölge & yayımlanıyor<br>`API region name`   |  Uç nokta URL biçimi   |
 |-----|------|------|------|
+| Afrika | `westus`<br>[www.luis.ai][www.luis.ai]| Güney Afrika Kuzey<br>`southafricanorth` |  https://southafricanorth.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   |
 | Asya | `westus`<br>[www.luis.ai][www.luis.ai]| Orta Hindistan<br>`centralindia` |  https://centralindia.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   |
 | Asya | `westus`<br>[www.luis.ai][www.luis.ai]| Doğu Asya<br>`eastasia`     |  https://eastasia.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   |
 | Asya | `westus`<br>[www.luis.ai][www.luis.ai]| Japonya Doğu<br>`japaneast`     |   https://japaneast.api.cognitive.microsoft.com/luis/v2.0/apps/YOUR-APP-ID?subscription-key=YOUR-SUBSCRIPTION-KEY   |
@@ -101,26 +102,26 @@ Uygulamaları LUIS oluşturduğunuz diğer bölgelere yayımlamak için [ https:
 
 ## <a name="endpoints"></a>Uç Noktalar
 
-LUIS, şu anda 2 uç noktalar vardır: biri yazma ve sorgu tahmin analizi için bir tane.
+LUSıS Şu anda 2 uç noktaya sahiptir: bir diğeri sorgu tahmin analizi için.
 
 |Amaç|URL'si|
 |--|--|
 |Yazma|`https://{region}.api.cognitive.microsoft.com/luis/api/v2.0/apps/{appID}/`|
-|Metin analizi (sorgu tahmin)|`https://{region}.api.cognitive.microsoft.com/luis/v2.0/apps/{appId}?q={q}[&timezoneOffset][&verbose][&spellCheck][&staging][&bing-spell-check-subscription-key][&log]`|
+|Metin Analizi (sorgu tahmini)|`https://{region}.api.cognitive.microsoft.com/luis/v2.0/apps/{appId}?q={q}[&timezoneOffset][&verbose][&spellCheck][&staging][&bing-spell-check-subscription-key][&log]`|
 
-Küme ayracı ile belirtilen parametreler, aşağıdaki tabloda açıklanmaktadır `{}`, önceki tabloda.
+Aşağıdaki tabloda, önceki tabloda `{}`küme ayraçları ile belirtilen parametreler açıklanmaktadır.
 
 |Parametre|Amaç|
 |--|--|
-|bölge|Farklı bölgelerdeki Azure bölgesi - yazma ve yayımlama sahip|
-|Uygulama Kimliği|URL rotasına kullanılan ve uygulama panosunda bulunan LUIS uygulama kimliği|
-|q|Sohbet Robotu gibi istemci uygulamasından gönderilen utterance metin|
+|bölgesinde kullanılamıyor|Azure bölgesi-yazma ve yayımlamanın farklı bölgeleri vardır|
+|AppID|, URL rotasında kullanılan ve uygulama panosunda bulunan LUSıS uygulama KIMLIĞI|
+|ç|sohbet bot gibi istemci uygulamasından gönderilen söylenişi metni|
 
 ## <a name="failover-regions"></a>Yük devretme bölgeleri
 
-Her bir bölgeye yük devretme için ikincil bir bölgeye sahiptir. Avrupa ve Avustralya içinde üzerinden başarısız üzerinden Avrupa başarısız Avustralya içinde.
+Her bölgenin yük devretmek için bir ikincil bölgesi vardır. Avrupa, Avrupa ve Avustralya 'Nın içinde devredilmekte ve Avustralya 'Nın içinde devredildi.
 
-Yazma bölgeleri sahip [eşleştirilmiş bölgeleri yük devretme](https://docs.microsoft.com/azure/best-practices-availability-paired-regions). 
+Yazma bölgeleri, [Yük devretme bölgelerini eşleştirilmiştir](https://docs.microsoft.com/azure/best-practices-availability-paired-regions). 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

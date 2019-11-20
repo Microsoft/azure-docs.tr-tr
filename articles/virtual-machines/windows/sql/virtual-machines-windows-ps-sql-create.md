@@ -1,6 +1,6 @@
 ---
-title: Azure PowerShell ile SQL Server Vm'leri için sağlama Kılavuzu | Microsoft Docs
-description: SQL Server sanal makine galeri görüntüleri ile Azure VM oluşturmak için adımları ve PowerShell komutları sağlar.
+title: Azure PowerShell sahip SQL Server VM 'Ler için sağlama kılavuzu | Microsoft Docs
+description: SQL Server sanal makine galeri görüntüleri ile Azure VM oluşturmak için adımlar ve PowerShell komutları sağlar.
 services: virtual-machines-windows
 documentationcenter: na
 author: MashaMSFT
@@ -9,23 +9,22 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: 98d50dd8-48ad-444f-9031-5378d8270d7b
 ms.service: virtual-machines-sql
-ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 12/21/2018
 ms.author: mathoma
 ms.reviewer: jroth
-ms.openlocfilehash: edf5f2b681123243f55b1c2bf19a500e68171c0e
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 072c58377645c807328bfcd79028daad70df7338
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66165743"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70102103"
 ---
-# <a name="how-to-provision-sql-server-virtual-machines-with-azure-powershell"></a>Azure PowerShell ile SQL Server sanal makineleri sağlama
+# <a name="how-to-provision-sql-server-virtual-machines-with-azure-powershell"></a>Azure PowerShell ile SQL Server sanal makineler sağlama
 
-Bu kılavuz, Azure PowerShell ile Windows SQL Server Vm'leri oluşturmak için seçenekleri açıklar. Daha fazla varsayılan değerlerle kolaylaştırılmış bir Azure PowerShell örnek için bkz [SQL VM Azure PowerShell Hızlı Başlangıç](quickstart-sql-vm-create-powershell.md).
+Bu kılavuzda, Azure PowerShell sahip Windows SQL Server VM 'Leri oluşturma seçenekleriniz açıklanmaktadır. Daha fazla varsayılan değere sahip kolaylaştırılmış Azure PowerShell bir örnek için bkz. [SQL VM Azure PowerShell hızlı başlangıç](quickstart-sql-vm-create-powershell.md).
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
@@ -33,21 +32,21 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 ## <a name="configure-your-subscription"></a>Aboneliğinizi yapılandırma
 
-1. PowerShell'i açın ve çalıştırarak Azure hesabınıza erişim oluşturmanız **Connect AzAccount** komutu.
+1. PowerShell 'i açın ve **Connect-AzAccount** komutunu çalıştırarak Azure hesabınıza erişim sağlayın.
 
    ```powershell
    Connect-AzAccount
    ```
 
-1. Kimlik bilgilerinizi girmeniz için bir ekran görürsünüz. Azure portala giriş yapmak için aynı e-posta adresini ve parolayı kullanın.
+1. Kimlik bilgilerinizi girmek için bir ekran görmeniz gerekir. Azure portala giriş yapmak için aynı e-posta adresini ve parolayı kullanın.
 
-## <a name="define-image-variables"></a>Görüntü değişkenleri tanımlayın
-Değerleri yeniden ve betik oluşturma işlemini basitleştirmek için değişken sayısı tanımlayarak başlatın. Ancak adlandırma kısıtlamaları Ad uzunlukları ve özel karakterler için sağlanan değerler değiştirirken ilgili uyumlu parametre değerlerini değiştirin.
+## <a name="define-image-variables"></a>Görüntü değişkenlerini tanımlama
+Değerleri yeniden kullanmak ve betik oluşturmayı basitleştirmek için, bir dizi değişken tanımlayarak başlayın. Parametre değerlerini istediğiniz gibi değiştirin, ancak girilen değerleri değiştirirken ad uzunlukları ve özel karakterlerle ilgili adlandırma kısıtlamalarının farkında olun.
 
 ### <a name="location-and-resource-group"></a>Konum ve kaynak grubu
-Veri bölgesi ve diğer VM kaynakları oluşturduğunuz kaynak grubunu tanımlayın.
+Diğer VM kaynaklarını oluşturduğunuz veri bölgesini ve kaynak grubunu tanımlayın.
 
-Daha sonra bu değişkenleri başlatmak için bu cmdlet'leri çalıştırmak ve istediğiniz gibi değiştirin.
+İstediğiniz gibi değiştirin ve bu değişkenleri başlatmak için bu cmdlet 'leri çalıştırın.
 
 ```powershell
 $Location = "SouthCentralUS"
@@ -55,27 +54,27 @@ $ResourceGroupName = "sqlvm2"
 ```
 
 ### <a name="storage-properties"></a>Depolama özellikleri
-Depolama hesabı ve sanal makine tarafından kullanılan depolama türünü tanımlar.
+Sanal makine tarafından kullanılacak depolama hesabını ve depolama türünü tanımlayın.
 
-Ardından bu değişkenlerini başlatmak için aşağıdaki cmdlet'i çalıştırın ve istediğiniz gibi değiştirin. Kullanmanızı öneririz [premium SSD](../disks-types.md#premium-ssd) üretim iş yükleri için.
+İstediğiniz gibi değiştirin ve ardından bu değişkenleri başlatmak için aşağıdaki cmdlet 'i çalıştırın. Üretim iş yükleri için [Premium SSD 'ler](../disks-types.md#premium-ssd) kullanmanızı öneririz.
 
 ```powershell
 $StorageName = $ResourceGroupName + "storage"
 $StorageSku = "Premium_LRS"
 ```
 
-### <a name="network-properties"></a>Ağ Özellikleri
-Sanal makinedeki ağ tarafından kullanılan özellikleri tanımlar. 
+### <a name="network-properties"></a>Ağ özellikleri
+Ağ tarafından sanal makinede kullanılacak özellikleri tanımlayın. 
 
 - Ağ arabirimi
-- TCP/IP'yi ayırma yöntemi
+- TCP/IP ayırma yöntemi
 - Sanal ağ adı
 - Sanal alt ağ adı
-- IP adresi aralığı için sanal ağ
-- IP adresi aralığı alt ağ için
-- Genel etki alanı adı etiketi
+- Sanal ağ için IP adresi aralığı
+- Alt ağ için IP adresi aralığı
+- Ortak etki alanı adı etiketi
 
-Daha sonra bu değişkenleri başlatmak için bu cmdlet'i çalıştırmak ve istediğiniz gibi değiştirin.
+İstediğiniz gibi değiştirin ve ardından bu değişkenleri başlatmak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 $InterfaceName = $ResourceGroupName + "ServerInterface"
@@ -89,9 +88,9 @@ $DomainName = $ResourceGroupName
 ```
 
 ### <a name="virtual-machine-properties"></a>Sanal makine özellikleri
-Sanal makine adı, bilgisayar adı, sanal makine boyutu ve sanal makine için işletim sistemi disk adı tanımlayın.
+Sanal makinenin sanal makine adını, bilgisayar adını, sanal makine boyutunu ve işletim sistemi disk adını tanımlayın.
 
-Daha sonra bu değişkenleri başlatmak için bu cmdlet'i çalıştırmak ve istediğiniz gibi değiştirin.
+İstediğiniz gibi değiştirin ve ardından bu değişkenleri başlatmak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 $VMName = $ResourceGroupName + "VM"
@@ -100,17 +99,17 @@ $VMSize = "Standard_DS13"
 $OSDiskName = $VMName + "OSDisk"
 ```
 
-### <a name="choose-a-sql-server-image"></a>Bir SQL Server görüntüsü seçin
+### <a name="choose-a-sql-server-image"></a>SQL Server görüntüsü seçin
 
 Sanal makine için kullanılacak SQL Server görüntüsünü tanımlamak için aşağıdaki değişkenleri kullanın. 
 
-1. İlk olarak, tüm SQL Server görüntü teklifleriyle listesinde `Get-AzVMImageOffer` komutu. Bu komut, Azure Portalı'nda kullanılabilir olan geçerli görüntüleri ve ayrıca yalnızca PowerShell ile yüklenebilir eski görüntüler listeler:
+1. İlk olarak, `Get-AzVMImageOffer` komutuyla SQL Server görüntü tekliflerinin tümünü listeleyin. Bu komut, Azure portalında kullanılabilen geçerli görüntüleri ve yalnızca PowerShell ile yüklenebilen eski görüntüleri listeler:
 
    ```powershell
    Get-AzVMImageOffer -Location $Location -Publisher 'MicrosoftSQLServer'
    ```
 
-1. Bu öğretici için Windows Server 2016 üzerinde SQL Server 2017 belirtmek için aşağıdaki değişkenleri kullanın.
+1. Bu öğreticide, Windows Server 2016 üzerinde SQL Server 2017 belirtmek için aşağıdaki değişkenleri kullanın.
 
    ```powershell
    $OfferName = "SQL2017-WS2016"
@@ -118,31 +117,31 @@ Sanal makine için kullanılacak SQL Server görüntüsünü tanımlamak için a
    $Version = "latest"
    ```
 
-1. Ardından, teklifiniz için kullanılabilir sürümler listesinde.
+1. Daha sonra teklifiniz için kullanılabilir sürümleri listeleyin.
 
    ```powershell
    Get-AzVMImageSku -Location $Location -Publisher 'MicrosoftSQLServer' -Offer $OfferName | Select Skus
    ```
 
-1. Bu öğreticide, SQL Server 2017 Developer edition kullanın (**SQLDEV**). Developer sürümü test ve geliştirme için ücretsiz lisanslıdır ve yalnızca VM çalıştırmanın maliyeti için ödeme yaparsınız.
+1. Bu öğretici için SQL Server 2017 Developer Edition 'ı (**SQLDev**) kullanın. Geliştirici sürümü, test ve geliştirme için serbestçe lisanslanır ve yalnızca VM 'yi çalıştırmanın maliyeti için ödeme yaparsınız.
 
    ```powershell
    $Sku = "SQLDEV"
    ```
 
 ## <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
-Resource Manager dağıtım modeliyle, oluşturduğunuz ilk nesnenin kaynak grubudur. Kullanım [yeni AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup) bir Azure kaynak grubu ve kaynaklarını oluşturmak için cmdlet'i. Kaynak grubu adı ve konumu için daha önce başlatılmış değişkenleri belirtin.
+Kaynak Yöneticisi dağıtım modeliyle, oluşturduğunuz ilk nesne kaynak grubudur. [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup) cmdlet 'ini kullanarak bir Azure Kaynak grubu ve kaynakları oluşturun. Kaynak grubu adı ve konumu için daha önce oluşturduğunuz değişkenleri belirtin.
 
-Yeni kaynak grubunuzu oluşturmak için bu cmdlet'i çalıştırın.
+Yeni kaynak grubunuzu oluşturmak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 New-AzResourceGroup -Name $ResourceGroupName -Location $Location
 ```
 
 ## <a name="create-a-storage-account"></a>Depolama hesabı oluşturma
-Sanal makine işletim sistemi diski ve SQL Server veri ve günlük dosyaları için depolama kaynaklarını gerektirir. Kolaylık olması için her ikisi için tek bir diske oluşturacaksınız. Ek diskleri ekleyebilirsiniz daha sonra kullanarak [Ekle-Azure Disk](https://docs.microsoft.com/powershell/module/servicemanagement/azure/add-azuredisk) adanmış diskler üzerinde SQL Server verilerini ve günlük yerleştirmek için cmdlet dosyaları. Kullanım [yeni AzStorageAccount](https://docs.microsoft.com/powershell/module/az.storage/new-azstorageaccount) yeni kaynak grubunuzda bir standart depolama hesabı oluşturmak için cmdlet'i. Depolama hesabı adı, depolama Sku adı ve konumu için daha önce başlatılmış değişkenleri belirtin.
+Sanal makine, işletim sistemi diski ve SQL Server veri ve günlük dosyaları için depolama kaynakları gerektirir. Kolaylık olması için her ikisi için tek bir disk oluşturacaksınız. SQL Server verilerinizi ve günlük dosyalarını ayrılmış disklere yerleştirmek için [Add-Azure disk](https://docs.microsoft.com/powershell/module/servicemanagement/azure/add-azuredisk) cmdlet 'ini kullanarak daha sonra ek diskler ekleyebilirsiniz. Yeni kaynak grubunuzda standart bir depolama hesabı oluşturmak için [New-AzStorageAccount](https://docs.microsoft.com/powershell/module/az.storage/new-azstorageaccount) cmdlet 'ini kullanın. Depolama hesabı adı, depolama SKU adı ve konum için daha önce oluşturduğunuz değişkenleri belirtin.
 
-Yeni depolama hesabınızı oluşturmak için bu cmdlet'i çalıştırın.
+Yeni depolama hesabınızı oluşturmak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 $StorageAccount = New-AzStorageAccount -ResourceGroupName $ResourceGroupName `
@@ -151,31 +150,31 @@ $StorageAccount = New-AzStorageAccount -ResourceGroupName $ResourceGroupName `
 ```
 
 > [!TIP]
-> Depolama hesabı oluşturma birkaç dakika sürebilir.
+> Depolama hesabı oluşturmak birkaç dakika sürebilir.
 
 ## <a name="create-network-resources"></a>Ağ kaynakları oluşturma
-Sanal makine ağ kaynaklarının sayısını için ağ bağlantısı gerektirir.
+Sanal makine, ağ bağlantısı için birkaç ağ kaynağı gerektirir.
 
-* Her sanal makine bir sanal ağ gerektirir.
-* Bir sanal ağ, tanımlanan en az bir alt ağ olması gerekir.
-* Bir ağ arabirimi, genel veya özel bir IP adresi ile tanımlanmalıdır.
+* Her sanal makine için bir sanal ağ gerekir.
+* Bir sanal ağda en az bir alt ağ tanımlanmış olmalıdır.
+* Bir ağ arabirimi, genel veya özel bir IP adresiyle tanımlanmalıdır.
 
-### <a name="create-a-virtual-network-subnet-configuration"></a>Bir sanal ağ alt ağ yapılandırması
-Sanal ağınız için bir alt ağ yapılandırması oluşturmaya başlayın. Bu öğretici için varsayılan alt ağ kullanarak oluşturma [yeni AzVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetworksubnetconfig) cmdlet'i. Alt ağ adı ve adres ön eki için daha önce başlatılmış değişkenleri belirtin.
+### <a name="create-a-virtual-network-subnet-configuration"></a>Sanal ağ alt ağı yapılandırması oluşturma
+Sanal ağınız için bir alt ağ yapılandırması oluşturarak başlayın. Bu öğretici için, [New-AzVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetworksubnetconfig) cmdlet 'ini kullanarak bir varsayılan alt ağ oluşturun. Alt ağ adı ve adres ön eki için daha önce oluşturduğunuz değişkenleri belirtin.
 
 > [!NOTE]
-> Bu cmdlet kullanarak sanal ağ alt ağ yapılandırmasını ek özelliklerini tanımlayabilirsiniz, ancak, bu öğreticinin kapsamı dışındadır.
+> Bu cmdlet 'i kullanarak sanal ağ alt ağı yapılandırmasının ek özelliklerini tanımlayabilirsiniz, ancak Bu öğreticinin kapsamı dışındadır.
 
-Sanal alt ağ yapılandırmanızı oluşturmak için bu cmdlet'i çalıştırın.
+Sanal alt ağ yapılandırmanızı oluşturmak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 $SubnetConfig = New-AzVirtualNetworkSubnetConfig -Name $SubnetName -AddressPrefix $VNetSubnetAddressPrefix
 ```
 
 ### <a name="create-a-virtual-network"></a>Sanal ağ oluşturma
-Ardından, yeni kaynak grubu kullanarak sanal ağınızı oluşturma [yeni AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetwork) cmdlet'i. Adı, konumu ve adres ön eki için daha önce başlatılmış değişkenleri belirtin. Önceki adımda tanımlanan alt ağ yapılandırmasını kullanın.
+Sonra, [New-AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/new-azvirtualnetwork) cmdlet 'ini kullanarak yeni kaynak grubunuzda Sanal ağınızı oluşturun. Ad, konum ve adres ön eki için daha önce oluşturduğunuz değişkenleri belirtin. Önceki adımda tanımladığınız alt ağ yapılandırmasını kullanın.
 
-Sanal ağınızı oluşturmak için bu cmdlet'i çalıştırın.
+Sanal ağınızı oluşturmak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 $VNet = New-AzVirtualNetwork -Name $VNetName `
@@ -183,13 +182,13 @@ $VNet = New-AzVirtualNetwork -Name $VNetName `
    -AddressPrefix $VNetAddressPrefix -Subnet $SubnetConfig
 ```
 
-### <a name="create-the-public-ip-address"></a>Genel IP adresi oluşturma
-Sanal ağınızda tanımlanmış, sanal makine bağlantısı için bir IP adresi yapılandırmanız gerekir. Bu öğretici için dinamik IP adresleme Internet bağlantısı desteklemek için kullanarak genel bir IP adresi oluşturun. Kullanım [yeni AzPublicIpAddress](https://docs.microsoft.com/powershell/module/az.network/new-azpublicipaddress) genel IP adresini yeni kaynak grubunuzu oluşturmak için cmdlet'i. Adı, konum, ayırma yöntemini ve DNS etki alanı adı etiketi için daha önce başlatılmış değişkenleri belirtin.
+### <a name="create-the-public-ip-address"></a>Genel IP adresini oluşturma
+Sanal ağınız tanımlandığına göre, sanal makine bağlantısı için bir IP adresi yapılandırmanız gerekir. Bu öğreticide, Internet bağlantısını desteklemek için dinamik IP adresleme 'yi kullanarak genel bir IP adresi oluşturun. Yeni kaynak grubunuzda genel IP adresini oluşturmak için [New-Azpublicıpaddress](https://docs.microsoft.com/powershell/module/az.network/new-azpublicipaddress) cmdlet 'ini kullanın. Ad, konum, ayırma yöntemi ve DNS etki alanı adı etiketi için daha önce oluşturduğunuz değişkenleri belirtin.
 
 > [!NOTE]
-> Bu cmdlet kullanarak genel IP adresini ek özelliklerini tanımlayabilirsiniz, ancak bu ilk Bu öğreticinin kapsamı dışındadır. Statik bir adres ile özel bir adres veya adres da oluşturabilirsiniz, ancak, ayrıca bu öğreticinin kapsamı dışındadır.
+> Bu cmdlet 'i kullanarak genel IP adresinin ek özelliklerini tanımlayabilirsiniz, ancak bu ilk öğreticinin kapsamı dışındadır. Ayrıca, Bu öğreticinin kapsamı dışında bir özel adres veya bir adresi de oluşturabilirsiniz.
 
-Genel IP adresi oluşturmak için bu cmdlet'i çalıştırın.
+Genel IP adresinizi oluşturmak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 $PublicIp = New-AzPublicIpAddress -Name $InterfaceName `
@@ -197,17 +196,17 @@ $PublicIp = New-AzPublicIpAddress -Name $InterfaceName `
    -AllocationMethod $TCPIPAllocationMethod -DomainNameLabel $DomainName
 ```
 
-### <a name="create-the-network-security-group"></a>Ağ güvenlik grubu oluşturma
-VM ve SQL Server trafiği güvenli hale getirmek için bir ağ güvenlik grubu oluşturun.
+### <a name="create-the-network-security-group"></a>Ağ güvenlik grubunu oluşturma
+VM 'yi ve SQL Server trafiği güvenli hale getirmek için bir ağ güvenlik grubu oluşturun.
 
-1. İlk olarak Uzak Masaüstü bağlantılarına izin verecek şekilde RDP için bir ağ güvenlik grubu kuralı oluşturun.
+1. İlk olarak, Uzak Masaüstü bağlantılarına izin vermek için RDP için bir ağ güvenlik grubu kuralı oluşturun.
 
    ```powershell
    $NsgRuleRDP = New-AzNetworkSecurityRuleConfig -Name "RDPRule" -Protocol Tcp `
       -Direction Inbound -Priority 1000 -SourceAddressPrefix * -SourcePortRange * `
       -DestinationAddressPrefix * -DestinationPortRange 3389 -Access Allow
    ```
-1. 1433 numaralı TCP bağlantı noktası üzerinde trafiğe izin veren bir ağ güvenlik grubu kuralı yapılandırın. Bunun yapılması internet üzerinden SQL Server'a bağlantılar sağlar.
+1. TCP bağlantı noktası 1433 ' de trafiğe izin veren bir ağ güvenlik grubu kuralı yapılandırın. Bunun yapılması Internet üzerinden SQL Server bağlantılar sağlar.
 
    ```powershell
    $NsgRuleSQL = New-AzNetworkSecurityRuleConfig -Name "MSSQLRule"  -Protocol Tcp `
@@ -215,7 +214,7 @@ VM ve SQL Server trafiği güvenli hale getirmek için bir ağ güvenlik grubu o
       -DestinationAddressPrefix * -DestinationPortRange 1433 -Access Allow
    ```
 
-1. Ağ güvenlik grubu oluşturun.
+1. Ağ güvenlik grubunu oluşturun.
 
    ```powershell
    $Nsg = New-AzNetworkSecurityGroup -ResourceGroupName $ResourceGroupName `
@@ -223,10 +222,10 @@ VM ve SQL Server trafiği güvenli hale getirmek için bir ağ güvenlik grubu o
       -SecurityRules $NsgRuleRDP,$NsgRuleSQL
    ```
 
-### <a name="create-the-network-interface"></a>Ağ arabirimini oluşturun
-Sanal makineniz için ağ arabirimi oluşturmak artık hazırsınız. Kullanım [yeni AzNetworkInterface](https://docs.microsoft.com/powershell/module/az.network/new-aznetworkinterface) cmdlet'ini yeni kaynak grubunuz, ağ arabirimini oluşturun. Adı, konum, alt ağ ve daha önce tanımlanan genel IP adresi belirtin.
+### <a name="create-the-network-interface"></a>Ağ arabirimini oluşturma
+Artık sanal makineniz için ağ arabirimini oluşturmaya hazırsınız. Yeni kaynak grubunuzda ağ arabiriminizi oluşturmak için [New-Aznetworkınterface](https://docs.microsoft.com/powershell/module/az.network/new-aznetworkinterface) cmdlet 'ini kullanın. Daha önce tanımlanan adı, konumu, alt ağı ve genel IP adresini belirtin.
 
-Ağ Arabiriminizin oluşturmak için bu cmdlet'i çalıştırın.
+Ağ arabiriminizi oluşturmak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 $Interface = New-AzNetworkInterface -Name $InterfaceName `
@@ -235,41 +234,41 @@ $Interface = New-AzNetworkInterface -Name $InterfaceName `
    -NetworkSecurityGroupId $Nsg.Id
 ```
 
-## <a name="configure-a-vm-object"></a>Bir VM nesnesine yapılandırın
-Depolama ve ağ kaynaklarını tanımlanır, sanal makine için işlem kaynaklarını tanımlayın hazırsınız.
+## <a name="configure-a-vm-object"></a>VM nesnesi yapılandırma
+Depolama ve ağ kaynakları tanımlandığına göre, sanal makine için işlem kaynaklarını tanımlamaya hazır olursunuz.
 
-- Sanal makine boyutu ve çeşitli işletim sistemi özelliklerini belirtin.
+- Sanal makine boyutunu ve çeşitli işletim sistemi özelliklerini belirtin.
 - Daha önce oluşturduğunuz ağ arabirimini belirtin.
-- BLOB Depolama tanımlayın.
-- İşletim sistemi diski belirtin.
+- Blob depolamayı tanımlayın.
+- İşletim sistemi diskini belirtin.
 
-### <a name="create-the-vm-object"></a>VM nesnesini oluşturun
-Sanal makine boyutunu belirleyerek başlayın. Bu öğreticide, bir DS13 belirtin. Kullanım [yeni AzVMConfig](https://docs.microsoft.com/powershell/module/az.compute/new-azvmconfig) bir sanal makine yapılandırılabilir nesnesi oluşturmak için cmdlet'i. Ad ve boyut için daha önce başlatılmış değişkenleri belirtin.
+### <a name="create-the-vm-object"></a>VM nesnesi oluşturma
+Sanal makine boyutunu belirterek başlayın. Bu öğretici için bir DS13 belirtin. Yapılandırılabilir bir sanal makine nesnesi oluşturmak için [New-AzVMConfig](https://docs.microsoft.com/powershell/module/az.compute/new-azvmconfig) cmdlet 'ini kullanın. Ad ve boyut için daha önce oluşturduğunuz değişkenleri belirtin.
 
-Sanal makine nesnesini oluşturmak için bu cmdlet'i çalıştırın.
+Sanal makine nesnesini oluşturmak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 $VirtualMachine = New-AzVMConfig -VMName $VMName -VMSize $VMSize
 ```
 
-### <a name="create-a-credential-object-to-hold-the-name-and-password-for-the-local-administrator-credentials"></a>Adı ve parola yerel yönetici kimlik bilgileri tutmak için bir kimlik bilgisi nesnesini oluşturun
-Sanal makine için işletim sistemi özelliklerini ayarlayabilmek için önce güvenli bir dize olarak yerel yönetici hesabının kimlik bilgilerini sağlamanız gerekir. Bunu gerçekleştirmek için kullanın [Get-Credential](https://technet.microsoft.com/library/hh849815.aspx) cmdlet'i.
+### <a name="create-a-credential-object-to-hold-the-name-and-password-for-the-local-administrator-credentials"></a>Yerel yönetici kimlik bilgileri için adı ve parolayı tutacak bir kimlik bilgisi nesnesi oluşturun
+Sanal makine için işletim sistemi özelliklerini ayarlamadan önce, yerel yönetici hesabının kimlik bilgilerini güvenli bir dize olarak sağlamanız gerekir. Bunu gerçekleştirmek için [Get-Credential](https://technet.microsoft.com/library/hh849815.aspx) cmdlet 'ini kullanın.
 
-Aşağıdaki cmdlet'i çalıştırın ve PowerShell kimlik bilgileri isteği penceresinde, adı ve sanal makinede yerel yönetici hesabı için kullanılacak parolayı yazın.
+Aşağıdaki cmdlet 'i çalıştırın ve PowerShell kimlik bilgisi isteği penceresinde, sanal makinedeki yerel yönetici hesabı için kullanılacak adı ve parolayı yazın.
 
 ```powershell
 $Credential = Get-Credential -Message "Type the name and password of the local administrator account."
 ```
 
-### <a name="set-the-operating-system-properties-for-the-virtual-machine"></a>Sanal makine için işletim sistemi özelliklerini ayarlama
-İle sanal makinenin işletim sistemi özelliklerini ayarlamak hazır artık [kümesi AzVMOperatingSystem](https://docs.microsoft.com/powershell/module/az.compute/set-azvmoperatingsystem) cmdlet'i.
+### <a name="set-the-operating-system-properties-for-the-virtual-machine"></a>Sanal makine için işletim sistemi özelliklerini ayarla
+Artık, sanal makinenin işletim sistemi özelliklerini [set-AzVMOperatingSystem](https://docs.microsoft.com/powershell/module/az.compute/set-azvmoperatingsystem) cmdlet 'i ile ayarlamaya hazırsınız.
 
-- İşletim sistemi türü Windows ayarlayın.
-- Gerekli [sanal makine Aracısı](../../extensions/agent-windows.md) yüklenecek.
-- Cmdlet, otomatik güncelleştirme etkinleştirir belirtin.
-- Sanal makine adı, bilgisayar adını ve kimlik bilgisi için daha önce başlatılmış değişkenleri belirtin.
+- İşletim sisteminin türünü Windows olarak ayarlayın.
+- [Sanal makine aracısının](../../extensions/agent-windows.md) yüklenmesini gerektir.
+- Cmdlet 'in otomatik güncelleştirmeyi etkinleştirmesine izin vermez.
+- Sanal makine adı, bilgisayar adı ve kimlik bilgisi için daha önce oluşturduğunuz değişkenleri belirtin.
 
-Sanal makineniz için işletim sistemi özelliklerini ayarlamak için bu cmdlet'i çalıştırın.
+Sanal makinenizin işletim sistemi özelliklerini ayarlamak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 $VirtualMachine = Set-AzVMOperatingSystem -VM $VirtualMachine `
@@ -277,42 +276,42 @@ $VirtualMachine = Set-AzVMOperatingSystem -VM $VirtualMachine `
    -ProvisionVMAgent -EnableAutoUpdate
 ```
 
-### <a name="add-the-network-interface-to-the-virtual-machine"></a>Sanal makineye bir ağ arabirimi ekleyin
-Ardından, [Ekle AzVMNetworkInterface](https://docs.microsoft.com/powershell/module/az.compute/add-azvmnetworkinterface) cmdlet'ini kullanarak daha önce tanımladığınız değişkeni ağ arabirimi ekleyin.
+### <a name="add-the-network-interface-to-the-virtual-machine"></a>Ağ arabirimini sanal makineye Ekle
+Ardından, daha önce tanımladığınız değişkeni kullanarak ağ arabirimini eklemek için [Add-Azvmnetworkınterface](https://docs.microsoft.com/powershell/module/az.compute/add-azvmnetworkinterface) cmdlet 'ini kullanın.
 
-Sanal makinenizin ağ arabirimine ayarlama için bu cmdlet'i çalıştırın.
+Sanal makinenizin ağ arabirimini ayarlamak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 $VirtualMachine = Add-AzVMNetworkInterface -VM $VirtualMachine -Id $Interface.Id
 ```
 
-### <a name="set-the-blob-storage-location-for-the-disk-to-be-used-by-the-virtual-machine"></a>Sanal makine tarafından kullanılacak disk için blob depolama konumunu ayarla
-Ardından, daha önce tanımlanan değişkenleri kullanarak sanal makinenin diski blob depolama konumunu ayarlayın.
+### <a name="set-the-blob-storage-location-for-the-disk-to-be-used-by-the-virtual-machine"></a>Sanal makine tarafından kullanılacak diskin BLOB depolama konumunu ayarla
+Ardından, daha önce tanımladığınız değişkenleri kullanarak VM 'nin diskinin BLOB depolama konumunu ayarlayın.
 
-Blob depolama konumunu ayarlamak için bu cmdlet'i çalıştırın.
+BLOB depolama konumunu ayarlamak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 $OSDiskUri = $StorageAccount.PrimaryEndpoints.Blob.ToString() + "vhds/" + $OSDiskName + ".vhd"
 ```
 
-### <a name="set-the-operating-system-disk-properties-for-the-virtual-machine"></a>İşletim sistemi sanal makine disk özelliklerini ayarlama
-Ardından, işletim sistemi disk özellikleri kullanarak sanal makine için ayarlanmış [kümesi AzVMOSDisk](https://docs.microsoft.com/powershell/module/az.compute/set-azvmosdisk) cmdlet'i. 
+### <a name="set-the-operating-system-disk-properties-for-the-virtual-machine"></a>Sanal makine için işletim sistemi diski özelliklerini ayarla
+Sonra, [set-AzVMOSDisk](https://docs.microsoft.com/powershell/module/az.compute/set-azvmosdisk) cmdlet 'ini kullanarak sanal makine için işletim sistemi disk özelliklerini ayarlayın. 
 
-- İşletim sistemi için sanal makineyi bir görüntüden gelir belirtin.
-- Yalnızca (SQL Server aynı disk üzerinde yüklü olduğundan) okumak için önbelleğe alma ayarlayın.
-- VM adını ve işletim sistemi diski için daha önce başlatılmış değişkenleri belirtin.
+- Sanal makinenin işletim sisteminin bir görüntüden gelmesini belirtin.
+- Önbelleğe almayı salt okunurdur (SQL Server aynı diske yüklenmekte olduğundan) ayarlayın.
+- VM adı ve işletim sistemi diski için daha önce oluşturduğunuz değişkenleri belirtin.
 
-İşletim sistemi, sanal makine disk özelliklerini ayarlamak için bu cmdlet'i çalıştırın.
+Sanal makineniz için işletim sistemi diski özelliklerini ayarlamak üzere bu cmdlet 'i çalıştırın.
 
 ```powershell
 $VirtualMachine = Set-AzVMOSDisk -VM $VirtualMachine -Name `
    $OSDiskName -VhdUri $OSDiskUri -Caching ReadOnly -CreateOption FromImage
 ```
 
-### <a name="specify-the-platform-image-for-the-virtual-machine"></a>Sanal makine için platform görüntüsü belirtin
-Son yapılandırma adımı, sanal makineniz için platform görüntüsü belirtmektir. Bu öğreticide, en son SQL Server 2016 CTP görüntüyü kullanın. Kullanma [kümesi AzVMSourceImage](https://docs.microsoft.com/powershell/module/az.compute/set-azvmsourceimage) bu görüntü daha önce tanımlanan değişkenleri ile kullanmak için cmdlet.
+### <a name="specify-the-platform-image-for-the-virtual-machine"></a>Sanal makine için platform görüntüsünü belirtin
+Son yapılandırma adımı, sanal makineniz için platform görüntüsünü belirtmektir. Bu öğretici için en son SQL Server 2016 CTP görüntüsünü kullanın. Bu görüntüyü daha önce tanımladığınız değişkenlerle birlikte kullanmak için [set-Azvmsourceımage](https://docs.microsoft.com/powershell/module/az.compute/set-azvmsourceimage) cmdlet 'ini kullanın.
 
-Sanal makineniz için platform görüntüsü belirtmek için bu cmdlet'i çalıştırın.
+Sanal makinenizin platform görüntüsünü belirtmek için bu cmdlet 'i çalıştırın.
 
 ```powershell
 $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine `
@@ -321,12 +320,12 @@ $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine `
 ```
 
 ## <a name="create-the-sql-vm"></a>SQL VM'sini oluşturma
-Yapılandırma adımları bitirdikten sonra sanal makine oluşturmaya hazırsınız. Kullanım [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) tanımlanan değişkenleri kullanarak sanal makine oluşturmak için cmdlet'i.
+Yapılandırma adımlarını tamamladığınıza göre, sanal makineyi oluşturmaya hazırsınız demektir. Tanımladığınız değişkenleri kullanarak sanal makineyi oluşturmak için [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) cmdlet 'ini kullanın.
 
 > [!TIP]
-> VM oluşturma birkaç dakika sürebilir.
+> VM oluşturmak birkaç dakika sürebilir.
 
-Sanal makinenizi oluşturmak için bu cmdlet'i çalıştırın.
+Sanal makinenizi oluşturmak için bu cmdlet 'i çalıştırın.
 
 ```powershell
 New-AzVM -ResourceGroupName $ResourceGroupName -Location $Location -VM $VirtualMachine
@@ -335,28 +334,28 @@ New-AzVM -ResourceGroupName $ResourceGroupName -Location $Location -VM $VirtualM
 Sanal makine oluşturulur.
 
 > [!NOTE]
-> Önyükleme tanılaması hakkında bir hata alırsanız, onu yok sayabilirsiniz. Belirtilen depolama hesabı için sanal makinenin disk bir premium depolama hesabı olduğu için önyükleme tanılaması için standart depolama hesabı oluşturulur.
+> Önyükleme tanılamaları hakkında bir hata alırsanız, bunu yoksayabilirsiniz. Sanal makinenin diski için belirtilen depolama hesabı bir Premium depolama hesabı olduğundan, önyükleme tanılaması için standart bir depolama hesabı oluşturulur.
 
 ## <a name="install-the-sql-iaas-agent"></a>SQL Iaas Aracısı'nı yükleme
-SQL Server sanal makineleri ile otomatik yönetim özelliklerini destekleyen [SQL Server Iaas Aracısı uzantısı](virtual-machines-windows-sql-server-agent-extension.md). Aracıyı yeni VM'ye yüklemek için oluşturulduktan sonra aşağıdaki komutu çalıştırın.
+SQL Server sanal makineler, [SQL Server IaaS Aracısı uzantısı](virtual-machines-windows-sql-server-agent-extension.md)ile otomatikleştirilmiş yönetim özelliklerini destekler. Aracıyı yeni VM 'ye yüklemek için, oluşturulduktan sonra aşağıdaki komutu çalıştırın.
 
 
    ```powershell
    Set-AzVMSqlServerExtension -ResourceGroupName $ResourceGroupName -VMName $VMName -name "SQLIaasExtension" -version "1.2" -Location $Location
    ```
 
-## <a name="stop-or-remove-a-vm"></a>Durdurma veya bir VM Kaldır
+## <a name="stop-or-remove-a-vm"></a>VM 'yi durdurma veya kaldırma
 
-Sanal Makinenin sürekli olarak çalışmasını gerekmiyorsa, kullanımda olmadığında durdurarak gereksiz ödeme yapmaktan kaçının. Aşağıdaki komut VM'yi durdurur ancak özelliği daha sonra kullanılmak üzere muhafaza eder.
+VM 'nin sürekli olarak çalışmasına gerek yoksa, kullanımda olmadığında durdurarak gereksiz ücretlerden kaçınabilirsiniz. Aşağıdaki komut VM'yi durdurur ancak özelliği daha sonra kullanılmak üzere muhafaza eder.
 
 ```powershell
 Stop-AzVM -Name $VMName -ResourceGroupName $ResourceGroupName
 ```
 
-Sanal makine ile ilişkili tüm kaynakları da kalıcı olarak silebilirsiniz **Remove-AzResourceGroup** komutu. Sanal makineyi de kalıcı olarak bunu siler, bu komutu dikkatli kullanın.
+Ayrıca, **Remove-AzResourceGroup** komutuyla sanal makineyle ilişkili tüm kaynakları kalıcı olarak silebilirsiniz. Bunun yapılması sanal makineyi de kalıcı olarak siler, bu nedenle bu komutu dikkatli kullanın.
 
 ## <a name="example-script"></a>Örnek betik
-Aşağıdaki komut dosyası, Bu öğretici için tam PowerShell Betiği içerir. Bu, zaten Azure aboneliğiniz ile kullanılacak belirlediğinizi varsayar **Connect AzAccount** ve **seçin AzSubscription** komutları.
+Aşağıdaki betik, Bu öğreticinin tüm PowerShell betiğini içerir. **Connect-AzAccount** ve **Select-azsubscription** komutlarıyla birlikte kullanmak üzere Azure aboneliğini ayarlamış olduğunuzu varsayar.
 
 ```powershell
 # Variables
@@ -428,9 +427,9 @@ Set-AzVMSqlServerExtension -ResourceGroupName $ResourceGroupName -VMName $VMName
 Sanal makine oluşturulduktan sonra şunları yapabilirsiniz:
 
 - RDP kullanarak sanal makineye bağlanma
-- VM'niz için portalda SQL Server ayarlarını yapılandırma dahil olmak üzere:
+- VM 'niz için portalda SQL Server ayarlarını yapılandırın, örneğin:
    - [Depolama ayarları](virtual-machines-windows-sql-server-storage-configuration.md) 
-   - [Otomatik yönetim görevleri](virtual-machines-windows-sql-server-agent-extension.md)
-- [Bağlantı yapılandırma](virtual-machines-windows-sql-connect.md)
-- İstemciler ve uygulamalar için yeni SQL Server örneğine bağlanın
+   - [Otomatikleştirilmiş yönetim görevleri](virtual-machines-windows-sql-server-agent-extension.md)
+- [Bağlantıyı yapılandırma](virtual-machines-windows-sql-connect.md)
+- İstemcileri ve uygulamaları yeni SQL Server örneğine bağlama
 

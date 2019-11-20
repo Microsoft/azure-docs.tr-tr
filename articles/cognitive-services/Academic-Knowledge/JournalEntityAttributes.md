@@ -1,30 +1,33 @@
 ---
-title: Günlük varlık öznitelikleri - akademik bilgi API'si
+title: Günlük varlık öznitelikleri-Akademik Bilgi API
 titlesuffix: Azure Cognitive Services
-description: Akademik bilgi API'si, Bilişsel Hizmetler günlük varlıkta ile kullanabileceğiniz öznitelikleri hakkında bilgi edinin.
+description: Bilişsel hizmetler 'de Akademik Bilgi API 'sindeki Journal varlığıyla kullanabileceğiniz öznitelikleri öğrenin.
 services: cognitive-services
-author: alch-msft
-manager: nitinme
+author: darrine
+manager: kuansanw
 ms.service: cognitive-services
 ms.subservice: academic-knowledge
 ms.topic: conceptual
-ms.date: 03/23/2017
-ms.author: alch
-ms.openlocfilehash: ffb159dc684b4b6663dcb966706d4745ab88a403
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/14/2019
+ms.author: darrine
+ROBOTS: NOINDEX
+ms.openlocfilehash: 72c3cc0a86b3d79cef9d8e9af5846817566fe904
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61337814"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74143900"
 ---
-# <a name="journal-entity"></a>Günlük varlık
+# <a name="journal-entity"></a>Günlük varlığı
 
-<sub> * Şu öznitelikleri günlük varlığa özgüdür. (Ty = '2') </sub>
+> [!NOTE]
+> Aşağıdaki öznitelikler, günlük varlığına özgüdür. (Ty = ' 2 ')
 
-Ad    |Açıklama                            |Tür       | İşlemler
-------- | ------------------------------------- | --------- | ----------------------------
-Kimlik      |Varlık Kimliği                              |Int64      |Eşittir
-DJN     |Normalleştirilmiş günlük adı                |String     |Yok
-JN      |Günlük görünen adı                   |String     |Eşittir
-CC      |Günlük toplam alıntı sayısı           |Int32      |Yok  
-ECC     |Günlük toplam tahmini alıntı sayısı |Int32      |Yok
+Ad | Açıklama | Tür | İşlemler
+--- | --- | --- | ---
+BILGISI      |Günlük toplam alıntı sayısı           |Int32      |None  
+CIN     |Günlük görünen adı               |Dize     |None
+ECC     |Günlük toplam tahmini alıntı sayısı |Int32      |None
+JN      |Günlük normalleştirilmiş adı                    |Dize     |Eşittir
+Kimlik      |Varlık KIMLIĞI                              |Int64      |Eşittir
+PC    |Günlük toplam yayın sayısı | Int32 | None

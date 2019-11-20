@@ -1,80 +1,78 @@
 ---
-title: Öneriler ve otomatik tamamlama'ya - Azure Search arama kutusuna ekleyin.
-description: Azure Search'te sorgu Eylemler typeahead öneri araçları oluşturarak ve tamamlanan koşulları ya da tümcelere bir arama kutusu doldurun istekleri formulating etkinleştirin.
-manager: pablocas
+title: Arama kutusuna öneriler ve otomatik tamamlama ekleme
+titleSuffix: Azure Cognitive Search
+description: Azure Bilişsel Arama 'de typeahead sorgu eylemlerini, öneri araçları oluşturarak ve bir arama kutusunu tamamlanmış koşullarla veya tümceciklerle dolduran istekleri formülleyerek etkinleştirin.
+manager: nitinme
 author: mrcarter8
-services: search
-ms.service: search
-ms.devlang: NA
-ms.topic: conceptual
-ms.date: 05/02/2019
 ms.author: mcarter
-ms.custom: seodec2018
-ms.openlocfilehash: b881a645a42d92407aa39d0f4896629f799e6928
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.service: cognitive-search
+ms.topic: tutorial
+ms.date: 11/04/2019
+ms.openlocfilehash: 64c4e65ca7b69c7d61c706b48591ac19be3bfcf5
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66426931"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72792518"
 ---
-# <a name="add-suggestions-or-autocomplete-to-your-azure-search-application"></a>Önerileriniz veya otomatik tamamlama, Azure Search uygulamanıza ekleyin
+# <a name="add-suggestions-or-autocomplete-to-your-azure-cognitive-search-application"></a>Azure Bilişsel Arama uygulamanıza öneriler veya otomatik tamamlama ekleyin
 
-Bu makalede, kullanmayı öğrenin [önerileri](https://docs.microsoft.com/rest/api/searchservice/suggestions) ve [otomatik tamamlama](https://docs.microsoft.com/rest/api/searchservice/autocomplete) arama---yazarken Davranışları destekleyen güçlü bir arama kutusu oluşturmak için.
+Bu makalede, arama türü davranışlarını destekleyen güçlü bir arama kutusu oluşturmak için [öneriler](https://docs.microsoft.com/rest/api/searchservice/suggestions) ve [otomatik tamamlama özelliklerini](https://docs.microsoft.com/rest/api/searchservice/autocomplete) nasıl kullanacağınızı öğrenin.
 
-+ *Öneriler* önerilen sonuç her öneri şu ana kadar yazdığınız eşleşen dizinden tek bir sonuç olduğu türü olarak oluşturulur. 
++ *Öneriler* , siz yazarken oluşturulan önerilen sonuçlardır; burada her öneri, şimdiye kadar yazmış olduğunuz dizinden eşleşen tek bir sonucudur. 
 
-+ *Otomatik Tamamlama* "sözcük veya bir kullanıcı şu anda yazarak tümcecik tamamlandıktan". Sonuçları döndürmek yerine, bir sorgu sonuçları döndürmek için sonra yürütebilir tamamlar. Önerileriniz gibi bir tamamlanmış sözcük veya tümcecik sorguda bir eşleşen dizini içindeki predicated. Hizmet, dizin sıfır sonuçları döndüren sorgular sunmak olmaz.
++ *Otomatik tamamlama* kullanıcının şu anda yazmakta olduğu sözcüğü veya tümceciği "sonlandırır". Sonuçları döndürmek yerine, sonuçları döndürmek için yürütebilen bir sorgu tamamlar. Önerilerle birlikte, sorgudaki tamamlanmış bir sözcük veya tümcecik, dizindeki bir eşleşmeyle tahmin edilir. Hizmet, dizinde sıfır sonuç döndüren sorgular sunmaz.
 
-İndirme ve örnek kodu çalıştırma **DotNetHowToAutocomplete** bu özellikler değerlendirilemedi. Örnek kod ile doldurulmuş önceden oluşturulmuş bir dizin hedefleyen [NYCJobs tanıtım verileri](https://github.com/Azure-Samples/search-dotnet-asp-net-mvc-jobs). NYCJobs dizini içeren bir [öneri aracı yapısı](index-add-suggesters.md), öneri veya otomatik tamamlama kullanma gereksinimi olan. Bir korumalı alan hizmette barındırılan hazırlanmış dizini kullanabilir veya [kendi dizininizi doldurmak](#configure-app) NYCJobs örnek çözümde bir veri yükleyici kullanılarak. 
+Bu özellikleri değerlendirmek için, **Dotnethowtoautocomplete** içinde örnek kodu indirebilir ve çalıştırabilirsiniz. Örnek kod, [NYCJobs demo verileriyle](https://github.com/Azure-Samples/search-dotnet-asp-net-mvc-jobs)doldurulmuş önceden oluşturulmuş bir dizini hedefler. NYCJobs dizini, öneriler veya otomatik tamamlama kullanımı için bir gereksinim olan bir [öneri aracı yapısı](index-add-suggesters.md)içerir. Bir sandbox hizmetinde barındırılan hazırlanan dizini kullanabilir veya NYCJobs örnek çözümünde bir veri yükleyicisi kullanarak [kendi dizininizi doldurabilirsiniz](#configure-app) . 
 
-**DotNetHowToAutocomplete** örnek gösterir hem öneriler ve otomatik tamamlama, hem de C# ve JavaScript dil sürümleri. C#Geliştiriciler kullanan bir ASP.NET MVC tabanlı uygulama adım [Azure Search .NET SDK'sı](https://aka.ms/search-sdk). Otomatik Tamamlama ve önerilen sorgu çağrıları yapmak için mantıksal HomeController.cs dosyasında bulunabilir. JavaScript geliştiricileri, doğrudan çağrıları içeren IndexJavaScript.cshtml içinde eşdeğer sorgu mantığının bulacaksınız [Azure Search REST API'sine](https://docs.microsoft.com/rest/api/searchservice/). 
+**Dotnethowtoautocomplete** örneği hem hem de JavaScript dil sürümlerindeki önerileri ve otomatik C# tamamlamayı gösterir. C#Geliştiriciler, [Azure bilişsel arama .NET SDK 'sını](https://aka.ms/search-sdk)kullanan ASP.NET MVC tabanlı bir uygulama aracılığıyla ileredebilir. Otomatik tamamlama ve önerilen sorgu çağrılarını yapma mantığı HomeController.cs dosyasında bulunabilir. JavaScript geliştiricileri, [Azure Bilişsel Arama REST API](https://docs.microsoft.com/rest/api/searchservice/)doğrudan çağrılarını Içeren ındexjavascript. cshtml içinde eşdeğer sorgu mantığını bulacaktır. 
 
-Ön uç kullanıcı deneyimini dayanır her iki dil sürümleri için [jQuery kullanıcı Arabirimi](https://jqueryui.com/autocomplete/) ve [XDSoft](https://xdsoft.net/jqplugins/autocomplete/) kitaplıkları. Öneriler ve otomatik tamamlama'ya hem destekleyen arama kutusu oluşturmak için bu kitaplıkları kullanın. Arama kutusuna toplanan girişleri HomeController.cs veya IndexJavaScript.cshtml tanımlandığı şekilde, öneriler ve olanlar gibi otomatik tamamlama eylemleri ile eşlenirler.
+Her iki dil sürümünde de ön uç Kullanıcı deneyimi [jQuery kullanıcı arabirimi](https://jqueryui.com/autocomplete/) ve [xdsoft](https://xdsoft.net/jqplugins/autocomplete/) kitaplıklarını temel alır. Bu kitaplıkları, hem önerileri hem de otomatik tamamlamayı destekleyen arama kutusunu oluşturmak için kullanırız. Arama kutusunda toplanan girişler, HomeController.cs veya ındexjavascript. cshtml içinde tanımlananlar gibi öneriler ve AutoComplete eylemleri ile eşleştirilir.
 
-Bu alıştırmada, aşağıdaki görevleri size yardımcı olur:
+Bu alıştırma aşağıdaki görevlerde size kılavuzluk eder:
 
 > [!div class="checklist"]
-> * Arama giriş kutusunu eşleşmeler veya otomatik tamamlanan terimler için JavaScript ve sorunu isteklerinin uygulayın
-> * İçinde C#, öneriler ve otomatik tamamlama eylemleri HomeController.cs tanımlayın
-> * JavaScript'te, doğrudan aynı işlevselliği sağlamak için REST API'lerini çağırma
+> * JavaScript 'te bir arama giriş kutusu uygulayın ve önerilen eşleşmeler veya oto tamamlanmış şartlar için sorun istekleri yapın
+> * İçinde C#, HomeController.cs 'de öneriler ve otomatik tamamlama eylemleri tanımlayın
+> * JavaScript 'te, aynı işlevselliği sağlamak için REST API 'Lerini doğrudan çağırın
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Azure Search hizmeti, çözüm bir hazırlanmış NYCJobs tanıtım dizini barındıran bir dinamik sanal hizmet kullandığından bu alıştırma için isteğe bağlıdır. Bu örnekte, kendi Arama hizmeti üzerinde çalıştırmak istiyorsanız, bkz. [NYC işleri yapılandırma dizini](#configure-app) yönergeler için.
+Çözüm, Prepared NYCJobs demo dizinini barındıran canlı bir korumalı alan hizmeti kullandığından, bu alıştırma için bir Azure Bilişsel Arama hizmeti isteğe bağlıdır. Bu örneği kendi arama hizmetinizde çalıştırmak istiyorsanız, yönergeler için bkz. [NYC işleri dizinini yapılandırma](#configure-app) .
 
-* [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/), herhangi bir sürümü. Örnek kodu ve yönergeleri ücretsiz Community edition üzerinde test edilmiştir.
+* [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/), herhangi bir sürüm. Örnek kod ve yönergeler ücretsiz topluluk sürümünde sınanmıştır.
 
-* İndirme [DotNetHowToAutoComplete örnek](https://github.com/Azure-Samples/search-dotnet-getting-started/tree/master/DotNetHowToAutocomplete).
+* [Dotnethowtoautocomplete örneğini](https://github.com/Azure-Samples/search-dotnet-getting-started/tree/master/DotNetHowToAutocomplete)indirin.
 
-, Kapsamlı, kapsayan öneriler, otomatik tamamlama, çok yönlü gezinme ve istemci tarafı önbelleğe alma örnektir. Ne örnek sunan, tam açıklama için yorum ve Benioku dosyasını gözden geçirin.
+Örnek, öneriler, otomatik tamamlama, çok yönlü gezinme ve istemci tarafı önbelleğe alma işlemlerini kapsayan kapsamlı bir örnektir. Örnek tekliflerinin tam açıklaması için README ve Comments ' i gözden geçirin.
 
 ## <a name="run-the-sample"></a>Örneği çalıştırma
 
-1. Açık **AutocompleteTutorial.sln** Visual Studio'da. Çözüm NYC işleri demo dizin bağlantısı olan bir ASP.NET MVC projesi içeriyor.
+1. Visual Studio 'da **AutocompleteTutorial. sln** 'yi açın. Çözüm, NYC Işleri tanıtım dizini bağlantısı olan bir ASP.NET MVC projesi içerir.
 
 2. Projeyi çalıştırmak ve sayfayı istediğiniz tarayıcıda yüklemek için F5'e basın.
 
-En üstte C# ve JavaScript seçeneklerini göreceksiniz. C# Seçeneği tarayıcıdan HomeController çağırır ve sonuçları almak için Azure Search .NET SDK'sını kullanır. 
+En üstte C# ve JavaScript seçeneklerini göreceksiniz. C# Seçeneği, tarayıcıdan HomeController öğesine çağrı yapılır ve sonuçları almak için Azure bilişsel arama .NET SDK 'sını kullanır. 
 
-JavaScript seçeneği Azure Search REST API'sini doğrudan tarayıcıdan çağırır. Bu akışın dışında denetleyicisi gerektirdiğinden bu seçenek genellikle fark edilir derecede daha iyi performans sahip olacaktır. İhtiyaçlarınıza ve dil tercihlerinize uygun seçeneği tercih edebilirsiniz. Sayfasında her biri için bazı yönergeler ile birden fazla otomatik tamamlama örnekleri vardır. Her örnekte deneyebileceğiniz önerilen örnek metin vardır.  
+JavaScript seçeneği doğrudan tarayıcıdan Azure Bilişsel Arama REST API çağırır. Bu seçenek, denetleyiciyi akışın dışına çıkmasından bu yana önemli ölçüde daha iyi performansa sahip olur. İhtiyaçlarınıza ve dil tercihlerinize uygun seçeneği tercih edebilirsiniz. Sayfada, her biri için bazı kılavuzlarla birkaç AutoComplete örneği vardır. Her örnekte deneyebileceğiniz önerilen örnek metin vardır.  
 
 Gerçekleştirilen işlemleri görmek için her arama kutusuna birkaç harf yazmayı deneyin.
 
 ## <a name="search-box"></a>Arama kutusu
 
-Her ikisi için de C# ve JavaScript sürümleri, arama kutusuna uygulama tam olarak aynı. 
+Hem hem C# de JavaScript sürümleri için arama kutusu uygulamasının tamamen aynı olması gerekir. 
 
-Açık **Index.cshtml** altındaki kodu görmek için klasör \Views\Home dosyası:
+Kodu görüntülemek için \Views\Home klasörünün altındaki **Index. cshtml** dosyasını açın:
 
 ```html
 <input class="searchBox" type="text" id="example1a" placeholder="search">
 ```
 
-Bu stil, JavaScript ve yer tutucu metnini başvuru için bir kimlik için bir sınıf ile basit bir giriş metin kutusu örneğidir.  Magic katıştırılmış JavaScript'te ' dir.
+Bu örnek, stil, JavaScript ve yer tutucu metni için bir sınıf olan basit bir giriş metin kutusudur.  Magic, katıştırılmış JavaScript 'te.
 
-C# Dil örnek yararlanmak için Index.cshtml içinde JavaScript kullanan [jQuery kullanıcı Arabirimi otomatik tamamlama Kitaplığı](https://jqueryui.com/autocomplete/). Bu kitaplık, otomatik tamamlama deneyimi MVC denetleyicisi öneriler almak için zaman uyumsuz çağrıları yaparak arama kutusuna ekler. JavaScript dil IndexJavaScript.cshtml sürümüdür. Bu, Azure Search REST API çağrıları yanı sıra arama çubuğu için aşağıdaki betiği içerir.
+C# Dil örneği, [jQuery kullanıcı arabirimi otomatik tamamlama kitaplığından](https://jqueryui.com/autocomplete/)yararlanmak için Index. cshtml içindeki JavaScript 'i kullanır. Bu kitaplık, önerileri almak için MVC denetleyicisine zaman uyumsuz çağrılar yaparak otomatik tamamlama deneyimini arama kutusuna ekler. JavaScript dili sürümü ındexjavascript. cshtml içinde bulunur. Arama çubuğu için aşağıdaki betiği ve REST API Azure Bilişsel Arama çağrılarını içerir.
 
-JQuery kullanıcı Arabirimi Otomatik Tamamlama işlevi, bir istek için öneriler geçirme çağıran ilk örnek JavaScript kodunu göz atalım:
+Bir öneri isteği geçirerek jQuery UI AutoComplete işlevini çağıran ilk örnek için JavaScript koduna bakalım:
 
 ```javascript
 $(function () {
@@ -89,17 +87,17 @@ $(function () {
 });
 ```
 
-Yukarıdaki kodu tarayıcıda Otomatik Tamamla "example1a" giriş kutusuna jQuery kullanıcı Arabirimi yapılandırmak için sayfa yükleme çalışır.  `minLength: 3`, önerilerin yalnızca arama kutusuna en az üç karakter girildiğinde gösterilmesini sağlar.  Kaynak değeri önemlidir:
+Yukarıdaki kod, "example1a" giriş kutusu için jQuery kullanıcı arabirimi otomatik tamamlamayı yapılandırmak üzere sayfa yükünün tarayıcısında çalışır.  `minLength: 3`, önerilerin yalnızca arama kutusuna en az üç karakter girildiğinde gösterilmesini sağlar.  Kaynak değeri önemlidir:
 
 ```javascript
 source: "/home/suggest?highlights=false&fuzzy=false&",
 ```
 
-Yukarıdaki satırı jQuery kullanıcı Arabirimi Otomatik Tamamlama işlevi arama kutusu altında görüntülenen öğe listesini almak nereye bildirir. Bu proje bir MVC projesi olduğundan, Sorgu önerileri (hakkında daha fazla sonraki bölümde Öner) döndürmek için mantığı içeren HomeController.cs Öner işlevi çağırır. Bu işlev, ayrıca Denetim vurgular, benzer öğe eşleştirmesi ve terimi birkaç parametrelerini geçirir. JavaScript API'si otomatik tamamlama dönem parametresi ekler.
+Yukarıdaki çizgi, jQuery kullanıcı arabirimi otomatik tamamlama işlevine, arama kutusu altında gösterilecek öğelerin listesinin nereden alınacağını söyler. Bu proje bir MVC projesi olduğundan, sorgu önerilerini döndürmeyle ilgili mantığı içeren HomeController.cs 'de öner işlevini çağırır (sonraki bölümde öneri hakkında daha fazla bilgi). Bu işlev, vurguları, belirsiz eşleştirmeyi ve terimi denetlemek için birkaç parametreyi de geçirir. AutoComplete JavaScript API 'SI, term parametresini ekler.
 
 ### <a name="extending-the-sample-to-support-fuzzy-matching"></a>Örneği benzer öğe eşleştirmeyi destekleyecek şekilde genişletme
 
-Benzer öğe araması, kullanıcı bir kelimeyi arama kutusuna yanlış yazsa bile yakın eşleşmelere göre sonuçlara ulaşmanızı sağlar. Gerekli olmasa da, sağlamlık typeahead deneyiminin önemli ölçüde artırır. Şimdi kaynak satırını benzer öğe eşleştirmeyi etkinleştirecek şekilde değiştirerek bir deneme yapalım.
+Benzer öğe araması, kullanıcı bir kelimeyi arama kutusuna yanlış yazsa bile yakın eşleşmelere göre sonuçlara ulaşmanızı sağlar. Gerekli olmasa da, bir typeahead deneyiminin sağlamlığını önemli ölçüde artırır. Şimdi kaynak satırını benzer öğe eşleştirmeyi etkinleştirecek şekilde değiştirerek bir deneme yapalım.
 
 Aşağıdaki satırı değiştirin:
 
@@ -107,7 +105,7 @@ Aşağıdaki satırı değiştirin:
 source: "/home/suggest?highlights=false&fuzzy=false&",
 ```
 
-Şu şekilde:
+şu şekilde:
 
 ```javascript
 source: "/home/suggest?highlights=false&fuzzy=true&",
@@ -117,9 +115,9 @@ F5 tuşuna basarak uygulamayı başlatın.
 
 "execative" gibi bir terim yazmayı deneyin. Yazdığınız harflerle tam olarak eşleşmediği halde "executive" terimi sonuçlarının döndürüldüğünü göreceksiniz.
 
-### <a name="jquery-autocomplete--backed-by-azure-search-autocomplete"></a>jQuery Azure Search otomatik tamamlama tarafından desteklenen otomatik tamamlama
+### <a name="jquery-autocomplete--backed-by-azure-cognitive-search-autocomplete"></a>Azure Bilişsel Arama otomatik tamamlama tarafından desteklenen jQuery otomatik tamamlama
 
-Şu ana kadar UX kod arama önerileri ortalanmış. Azure Search otomatik tamamlama için bir istekte geçirme jQuery kullanıcı Arabirimi Otomatik Tamamlama işlevi (satır 91 içinde Index.cshtml), sonraki kod bloğu gösterir:
+Şimdiye kadar, arama UX kodu önerilere göre ortalandı. Sonraki kod bloğunda, jQuery UI AutoComplete işlevi (index. cshtml 'de satır 91), Azure Bilişsel Arama AutoComplete isteği için bir istek geçirerek gösterilmektedir:
 
 ```javascript
 $(function () {
@@ -156,15 +154,15 @@ $(function () {
 });
 ```
 
-## <a name="c-example"></a>C# örneği
+## <a name="c-example"></a>C#örneğinde
 
-Biz web sayfası için JavaScript kodunu gözden geçirdikten sonra göz atalım C# gerçekte Azure Search .NET SDK'sını kullanarak eşleşmeler alır denetleyicisi sunucu tarafı kodu.
+Web sayfası için JavaScript kodunu incelediğimiz için, Azure Bilişsel Arama .NET SDK kullanarak önerilen eşleşmeleri gerçekten alan C# sunucu tarafı denetleyici koduna bakalım.
 
-Açık **HomeController.cs** denetleyicileri dizin altında dosya. 
+**HomeController.cs** dosyasını denetleyiciler dizininde açın. 
 
-İlk şey yapabilirsiniz adlı sınıfı üst kısmındaki bir yöntemdir `InitSearch`. Bu yöntem, Azure Search hizmeti için kimliği doğrulanmış bir HTTP dizin istemcisi oluşturur. Daha fazla bilgi için [bir .NET uygulamasından Azure Search kullanma](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk).
+İlk şey, `InitSearch`adlı sınıfın en üstünde bir yöntemdir. Bu yöntem, Azure Bilişsel Arama hizmetine kimliği doğrulanmış bir HTTP Dizin istemcisi oluşturur. Daha fazla bilgi için bkz. [.NET uygulamasından Azure bilişsel arama kullanma](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk).
 
-41 satırında Öner işlevi dikkat edin. Dayanır [DocumentsOperationsExtensions.Suggest yöntemi](/dotnet/api/microsoft.azure.search.documentsoperationsextensions.suggest?view=azure-dotnet).
+41. satırda, önerme işlevine dikkat edin. [Documentsoperationsextensions. önerme metodunu](/dotnet/api/microsoft.azure.search.documentsoperationsextensions.suggest?view=azure-dotnet)temel alır.
 
 ```csharp
 public ActionResult Suggest(bool highlights, bool fuzzy, string term)
@@ -196,9 +194,9 @@ public ActionResult Suggest(bool highlights, bool fuzzy, string term)
 }
 ```
 
-Suggest işlevi, arama terimi girişine ek olarak isabet vurgularının veya benzer öğe eşleştirme özelliğinin kullanılıp kullanılmadığını belirleyen iki parametre alır. Yöntemi oluşturur bir [SuggestParameters nesne](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.suggestparameters?view=azure-dotnet), hangi sonra geçirilen Öner API için. Ardından alınan sonuç istemcide gösterilebilmesi için JSON biçimine dönüştürülür.
+Suggest işlevi, arama terimi girişine ek olarak isabet vurgularının veya benzer öğe eşleştirme özelliğinin kullanılıp kullanılmadığını belirleyen iki parametre alır. Yöntemi, daha sonra öneri API 'sine geçirilen bir [SuggestParameters nesnesi](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.suggestparameters?view=azure-dotnet)oluşturur. Ardından alınan sonuç istemcide gösterilebilmesi için JSON biçimine dönüştürülür.
 
-69\. satırda, Otomatik Tamamlama işlevi dikkat edin. Dayanır [DocumentsOperationsExtensions.Autocomplete yöntemi](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.documentsoperationsextensions.autocomplete?view=azure-dotnet).
+Satır 69 ' de AutoComplete işlevine dikkat edin. [Documentsoperationsextensions. AutoComplete metodunu](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.documentsoperationsextensions.autocomplete?view=azure-dotnet)temel alır.
 
 ```csharp
 public ActionResult AutoComplete(string term)
@@ -223,17 +221,17 @@ public ActionResult AutoComplete(string term)
 }
 ```
 
-Otomatik Tamamlama işlevi arama terimi girişleri alır. Yöntemi oluşturur bir [AutoCompleteParameters nesne](https://docs.microsoft.com/rest/api/searchservice/autocomplete). Ardından alınan sonuç istemcide gösterilebilmesi için JSON biçimine dönüştürülür.
+AutoComplete işlevi, arama terimi girişini alır. Yöntemi bir [AutoCompleteParameters nesnesi](https://docs.microsoft.com/rest/api/searchservice/autocomplete)oluşturur. Ardından alınan sonuç istemcide gösterilebilmesi için JSON biçimine dönüştürülür.
 
-(İsteğe bağlı) Suggest işlevinin başlangıcına bir kesme noktası ekleyin ve kodu adım adım inceleyin. SDK ve yönteminden döndürülen sonuç nasıl dönüştürülür tarafından döndürülen yanıt dikkat edin.
+(İsteğe bağlı) Suggest işlevinin başlangıcına bir kesme noktası ekleyin ve kodu adım adım inceleyin. SDK tarafından döndürülen yanıtı ve yöntemin döndürülen sonuca nasıl dönüştürüleceğini fark edin.
 
-Sayfadaki diğer örnekler, isabet vurgulama eklemek için aynı deseni ve istemci tarafı önbelleğe alma otomatik tamamlama sonuçlarını desteklemek için modelleri izleyin. Her birini gözden geçirerek nasıl çalıştıklarını ve arama deneyiminizde nasıl kullanabileceğinizi görebilirsiniz.
+Sayfadaki diğer örnekler, otomatik tamamlama sonuçlarının istemci tarafında önbelleğe alınmasını desteklemek üzere isabet vurgulama ve modeller eklemek için aynı kalıbı izler. Her birini gözden geçirerek nasıl çalıştıklarını ve arama deneyiminizde nasıl kullanabileceğinizi görebilirsiniz.
 
 ## <a name="javascript-example"></a>JavaScript örneği
 
-Bir Javascript uygulamasını otomatik tamamlama ve öneriler işlemi ve dizini belirtmek için kaynak olarak bir URI kullanarak REST API'sini çağırır. 
+Otomatik tamamlama ve önerilerle bir JavaScript uygulamasının, dizin ve işlemi belirtmek için kaynak olarak bir URI kullanarak REST API çağırır. 
 
-JavaScript uygulamasını gözden geçirmek için açık **IndexJavaScript.cshtml**. JQuery kullanıcı Arabirimi Otomatik Tamamlama işlevi ayrıca arama kutusuna arama terimi girişleri toplamak için kullanılır ve eşleşme önerilen veya koşulları tamamlandı almak için Azure Search için zaman uyumsuz çağrı yapmaya dikkat edin. 
+JavaScript uygulamasını gözden geçirmek için **ındexjavascript. cshtml**dosyasını açın. JQuery UI AutoComplete işlevinin arama kutusu için de kullanıldığını, arama terimi girişlerini toplamasını ve önerilen eşleşmeleri veya tamamlanmış koşulları almak için Azure Bilişsel Arama zaman uyumsuz çağrılar yapmayı unutmayın. 
 
 İlk örneğin JavaScript koduna bakalım:
 
@@ -271,50 +269,50 @@ $(function () {
 });
 ```
 
-Bu örnek giriş denetleyicisine çağırır yukarıdaki örneğe karşılaştırırsanız benzerlikler birkaç fark edeceksiniz.  Otomatik Tamamlama yapılandırmasını `minLength` ve `position` tam olarak aynıdır. 
+Bu örneği, ana denetleyiciyi çağıran Yukarıdaki örnekle karşılaştırırsanız birkaç benzerlikler fark edersiniz.  `minLength` ve `position` için otomatik tamamlama yapılandırması tamamen aynıdır. 
 
-Buradaki önemli değişiklik kaynaktır. Giriş denetleyicide Öner yöntemini çağırmak, yerine REST isteği içinde JavaScript işlevi oluşturulur ve Ajax kullanarak. Ardından gelen yanıt "success" parametresinde işlenir ve kaynak olarak kullanılır.
+Buradaki önemli değişiklik kaynaktır. Giriş denetleyicisinde öner metodunu çağırmak yerine bir JavaScript işlevinde bir REST isteği oluşturulur ve Ajax kullanılarak yürütülür. Ardından gelen yanıt "success" parametresinde işlenir ve kaynak olarak kullanılır.
 
-REST çağrılarını URI'leri belirtmek için kullanın olup olmadığını bir [otomatik tamamlama](https://docs.microsoft.com/rest/api/searchservice/autocomplete) veya [önerileri](https://docs.microsoft.com/rest/api/searchservice/suggestions) API Çağrının yapıldığı. Aşağıdaki bir URI'leri satırlarda 9 ve 10, sırasıyla şunlardır.
+REST çağrıları, bir [otomatik tamamlama](https://docs.microsoft.com/rest/api/searchservice/autocomplete) veya [öneriler](https://docs.microsoft.com/rest/api/searchservice/suggestions) API 'si çağrısının yapılıp yapılmadığını belirtmek için URI kullanır. Aşağıdaki URI 'Ler sırasıyla 9 ve 10 satırlarında bulunur.
 
 ```javascript
 var suggestUri = "https://" + searchServiceName + ".search.windows.net/indexes/" + indexName + "/docs/suggest?api-version=" + apiVersion;
 var autocompleteUri = "https://" + searchServiceName + ".search.windows.net/indexes/" + indexName + "/docs/autocomplete?api-version=" + apiVersion;
 ```
 
-148 satırında çağıran bir komut dosyası bulabilirsiniz `autocompleteUri`. İlk çağrıda `suggestUri` 39 satırdadır.
+Satır 148 ' de `autocompleteUri`çağıran bir komut dosyası bulabilirsiniz. `suggestUri` ilk çağrısı 39. satırda yer alır.
 
 > [!Note]
-> JavaScript'te hizmet REST çağrıları yapma sunulur burada REST API'sinin, kullanışlı bir örnek olarak, ancak en iyi yöntem veya öneri olarak yorumlanmamalıdır. Bir API anahtarını ve uç nokta bir betikte dahilini hizmetinizin hizmet reddi saldırılarını betik bu değerleri okuyabilirsiniz herkes kadar açılır. JavaScript öğrenme amacıyla kullanmak için kendi güvenli, belki de ücretsiz hizmette barındırılan dizinlerin Java kullanmanızı öneririz veya C# üretim kodunda dizin oluşturma ve sorgu işlemleri için. 
+> JavaScript 'te hizmete REST çağrıları yapmak, REST API kullanışlı bir gösterim olarak sunulur, ancak en iyi yöntem veya öneri olarak yorumlanmamalıdır olmamalıdır. Bir betikte bir API anahtarı ve uç nokta eklemek, hizmetinizi bu değerleri komut dosyası dışında okuyabilen herkese hizmet reddi saldırılarına karşı açar. Ücretsiz hizmette barındırılan dizinlerde, belki de öğrenme amacıyla JavaScript kullanımı güvenli olsa da, Java veya üretim kodundaki sorgu işlemleri için Java veya C# sorgulama işlemlerini kullanmanızı öneririz. 
 
 <a name="configure-app"></a>
 
-## <a name="configure-nycjobs-to-run-on-your-service"></a>Hizmetinizde çalıştırılacak NYCJobs yapılandırın
+## <a name="configure-nycjobs-to-run-on-your-service"></a>NYCJobs 'i hizmetinizde çalışacak şekilde yapılandırma
 
-Şimdiye kadar barındırılan NYCJobs tanıtım dizini kullandınız. Tüm dizin de dahil olmak üzere kodun tam görünürlük istiyorsanız oluşturmak ve kendi arama hizmetinizi dizin yüklemek için bu yönergeleri izleyin.
+Bu aşamada, barındırılan NYCJobs demo dizinini kullanıyorsunuz. Dizin dahil olmak üzere tüm kodun tam görünürlüğünü isterseniz, kendi arama hizmetinize dizin oluşturup yüklemek için bu yönergeleri izleyin.
 
-1. [Azure Search hizmeti oluşturma](search-create-service-portal.md) veya [mevcut bir hizmet bulma](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices) geçerli aboneliğinizdeki. Bu örnek için ücretsiz bir hizmet kullanabilirsiniz. 
+1. Geçerli aboneliğinizde [bir Azure bilişsel arama hizmeti oluşturun](search-create-service-portal.md) veya [var olan bir hizmeti bulun](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices) . Bu örnek için ücretsiz bir hizmet kullanabilirsiniz. 
 
    > [!Note]
-   > Ücretsiz Azure Search hizmetini kullanıyorsanız, üç dizin sınırlandırmanız vardır. NYCJobs veri yükleyici iki dizin oluşturur. Hizmetinizde yeni dizinleri kabul edecek kadar yer olduğundan emin olun.
+   > Ücretsiz Azure Bilişsel Arama hizmeti kullanıyorsanız, üç dizin ile sınırlı olursunuz. NYCJobs veri yükleyici iki dizin oluşturur. Hizmetinizde yeni dizinleri kabul edecek kadar yer olduğundan emin olun.
 
-1. İndirme [NYCJobs](https://github.com/Azure-Samples/search-dotnet-asp-net-mvc-jobs) örnek kodu.
+1. [NYCJobs](https://github.com/Azure-Samples/search-dotnet-asp-net-mvc-jobs) örnek kodunu indirin.
 
-1. NYCJobs örnek kodu DataLoader klasöründe açın **DataLoader.sln** Visual Studio'da.
+1. NYCJobs örnek kodunun DataLoader klasöründe, Visual Studio 'da **Dataloader. sln** ' yi açın.
 
-1. Azure Search hizmetiniz için bağlantı bilgilerini ekleyin. DataLoader projesindeki App.config dosyasını açın ve TargetSearchServiceName ile TargetSearchServiceApiKey appSettings değerlerini Azure Search hizmetiniz ve Azure Search Service API Anahtarı değeriyle değiştirin. Bu bilgiler, Azure portalında bulunabilir.
+1. Azure Bilişsel Arama hizmetinize yönelik bağlantı bilgilerini ekleyin. DataLoader projesi içinde App. config dosyasını açın ve TargetSearchServiceName ve TargetSearchServiceApiKey appSettings 'i Azure Bilişsel Arama hizmetinizi ve Azure Bilişsel Arama hizmeti API anahtarınızı yansıtacak şekilde değiştirin. Bu bilgiler Azure portal bulunabilir.
 
-1. İki dizin oluşturma ve NYCJob örnek verileri içeri aktarma uygulamayı başlatmak için F5 tuşuna basın.
+1. Uygulamayı başlatmak için F5 tuşuna basın, iki dizin oluşturun ve NYCJob örnek verilerini içeri aktarın.
 
-1. Açık **AutocompleteTutorial.sln** ve Web.config dosyasında Düzenle **AutocompleteTutorial** proje. SearchServiceName ve SearchServiceApiKey değerlerini arama hizmetiniz için geçerli olan değerlerle değiştirin.
+1. **AutocompleteTutorial. sln** dosyasını açın ve **AutocompleteTutorial** projesinde Web. config dosyasını düzenleyin. SearchServiceName ve SearchServiceApiKey değerlerini, arama hizmetiniz için geçerli olan değerlerle değiştirin.
 
-1. Uygulamayı çalıştırmak için F5'e basın. Örnek web uygulamasını varsayılan tarayıcınızda açılır. Deneyimi korumalı alan sürümü ile aynıdır, yalnızca dizin ve verileri hizmetinizde barındırılır.
+1. Uygulamayı çalıştırmak için F5'e basın. Örnek Web uygulaması varsayılan tarayıcıda açılır. Deneyim, korumalı alan sürümü ile aynıdır; yalnızca dizin ve veriler hizmetinizde barındırılır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu örnekte, bir arama kutusu otomatik tamamlama ve öneriler destekleyen oluşturmaya yönelik temel adımlar gösterilmektedir. Gördüğünüz bir ASP.NET MVC uygulaması oluşturma ve öneriler almak için Azure Search .NET SDK veya REST API'sini kullanın.
+Bu örnek, otomatik tamamlama ve önerileri destekleyen bir arama kutusu oluşturmaya yönelik temel adımları gösterir. ASP.NET MVC uygulamasını nasıl geliştirebileceğimiz ve önerileri almak için Azure Bilişsel Arama .NET SDK veya REST API nasıl kullanabileceğinizi gördünüz.
 
-Sonraki adım olarak, arama deneyiminizi tümleştirme öneriler ve otomatik tamamlama'ya çalışıyor. Aşağıdaki başvuru makalelerimize yardımcı olmalıdır.
+Bir sonraki adım olarak, önerileri tümleştirmeye ve arama deneyiminizle otomatik tamamlamayı deneyin. Aşağıdaki başvuru makaleleri yardımcı olmalıdır.
 
 > [!div class="nextstepaction"]
 > [Autocomplete REST API'si](https://docs.microsoft.com/rest/api/searchservice/autocomplete)

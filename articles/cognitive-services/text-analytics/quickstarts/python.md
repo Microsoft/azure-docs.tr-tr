@@ -1,38 +1,36 @@
 ---
-title: "Hızlı Başlangıç: Metin analizi API'sini çağırmak için Python kullanma"
+title: "Hızlı Başlangıç: Metin Analizi API'si çağırmak için Python kullanma"
 titleSuffix: Azure Cognitive Services
-description: Hızlı bir şekilde yardımcı olması için alma bilgileri ve kod örnekleri, Azure Bilişsel hizmetler metin analizi API'sini kullanarak başlayın.
+description: Azure bilişsel hizmetler 'de Metin Analizi API'si kullanmaya hızlı bir şekilde başlamanıza yardımcı olması için bilgi ve kod örnekleri alın.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: quickstart
-ms.date: 06/28/2019
+ms.date: 08/28/2019
 ms.author: aahi
-ms.openlocfilehash: 835dc8d25ad1d6a30020408636b556c3f247200d
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: e763c1a5bebddcb76647b4ecff02506fc41f6a47
+ms.sourcegitcommit: 88ae4396fec7ea56011f896a7c7c79af867c90a1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67478368"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70387383"
 ---
-# <a name="quickstart-using-the-python-rest-api-to-call-the-text-analytics-cognitive-service"></a>Hızlı Başlangıç: Metin analizi Bilişsel hizmetini çağırmak için Python REST API'si kullanma 
+# <a name="quickstart-using-the-python-rest-api-to-call-the-text-analytics-cognitive-service"></a>Hızlı Başlangıç: Metin Analizi bilişsel hizmeti çağırmak için Python REST API kullanma 
 <a name="HOLTop"></a>
 
-Metin analizi REST API ve Python ile dil incelemeye başlamak için bu Hızlı Başlangıç'ı kullanın. Bu makalede gösterilmektedir için [dili algılayın](#Detect), [düşüncelerini çözümleme](#SentimentAnalysis), [anahtar tümcecikleri ayıklayın](#KeyPhraseExtraction), ve [bağlı varlıkları tanımlama](#Entities).
+Metin Analizi REST API ve Python ile dili çözümlemeye başlamak için bu hızlı başlangıcı kullanın. Bu makalede, [Dili algılama](#Detect), yaklaşımı [Çözümleme](#SentimentAnalysis), [anahtar tümceleri ayıklama](#KeyPhraseExtraction)ve [bağlantılı varlıkları belirleme](#Entities)işlemlerinin nasıl yapılacağı gösterilir.
 
 API'lerle ilgili teknik bilgiler için [API tanımları](//go.microsoft.com/fwlink/?LinkID=759346) sayfasını inceleyin.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* [Python 3.x](https://python.org)
+* [Python 3. x](https://python.org)
 
-* [Uç noktası ve erişim anahtarı](../How-tos/text-analytics-how-to-access-key.md) oluşturulan, kayıt sırasında.
-
-* Python kitaplığı istekleri
+* Python istekleri kitaplığı
     
-    Bu komutla birlikte kitaplığı yükleyebilirsiniz:
+    Kitaplığı şu komutla yükleyebilirsiniz:
 
     ```console
     pip install --upgrade requests
@@ -43,7 +41,7 @@ API'lerle ilgili teknik bilgiler için [API tanımları](//go.microsoft.com/fwli
 
 ## <a name="create-a-new-python-application"></a>Yeni Python uygulaması oluşturma
 
-Tercih ettiğiniz düzenleyiciyi veya IDE içinde yeni bir Python uygulaması oluşturun. Aşağıdaki içeri aktarmaları dosyanıza ekleyin.
+En sevdiğiniz düzenleyicide veya IDE 'de yeni bir Python uygulaması oluşturun. Aşağıdaki içeri aktarmaları dosyanıza ekleyin.
 
 ```python
 import requests
@@ -51,40 +49,49 @@ import requests
 from pprint import pprint
 ```
 
-Değişkenler için abonelik anahtarınızı ve metin analizi REST API uç noktası oluşturun. Uç nokta bölgede, kaydolurken kullandığınız bir uyumlu olduğundan emin olun (örneğin `westcentralus`). Ücretsiz bir deneme sürümü anahtarı kullanıyorsanız, herhangi bir ayarı değiştirmek gerekmez.
+Kaynağınızın Azure uç noktası ve abonelik anahtarı için değişkenler oluşturun. Bu değerleri TEXT_ANALYTICS_SUBSCRIPTION_KEY ve TEXT_ANALYTICS_ENDPOINT ortam değişkenleriyle elde edin. Uygulamayı düzenleme başladıktan sonra bu ortam değişkenlerini oluşturduysanız, değişkenlere erişmek için kullandığınız düzenleyiciyi, IDE 'yi veya kabuğu kapatıp yeniden açmanız gerekir.
     
 ```python
-subscription_key = "<ADD YOUR KEY HERE>"
-text_analytics_base_url = "https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.1/"
+import os
+
+key_var_name = 'TEXT_ANALYTICS_SUBSCRIPTION_KEY'
+if not key_var_name in os.environ:
+    raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
+subscription_key = os.environ[key_var_name]
+
+endpoint_var_name = 'TEXT_ANALYTICS_ENDPOINT'
+if not endpoint_var_name in os.environ:
+    raise Exception('Please set/export the environment variable: {}'.format(endpoint_var_name))
+endpoint = os.environ[endpoint_var_name]
 ```
 
-Aşağıdaki bölümlerde API'nin özelliklerin her birini nasıl açıklanmaktadır.
+Aşağıdaki bölümlerde, API 'nin özelliklerinin her birinin nasıl çağrılacağını açıklamaktadır.
 
 <a name="Detect"></a>
 
 ## <a name="detect-languages"></a>Dilleri algılama
 
-Append `languages` dil algılama URL'yi oluşturmak için metin analizi temel uç. Örneğin, `https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.1/languages`
+Dil `/text/analytics/v2.1/languages` algılama URL 'sini oluşturmak için metin analizi temel uç noktaya ekleyin. Örneğin, `https://<your-custom-subdomain>.cognitiveservices.azure.com/text/analytics/v2.1/languages`
     
 ```python
-language_api_url = text_analytics_base_url + "languages"
+language_api_url = endpoint + "/text/analytics/v2.1/languages"
 ```
 
-API yükü bir listesinden oluşur `documents`, hangi olan tanımlama grubu içeren bir `id` ve `text` özniteliği. `text` Öznitelik depolarının Analiz edilecek metin ve `id` herhangi bir değer olabilir. 
+API 'nin yükü, `documents` `id` ve `text` özniteliğini içeren tanımlama grupları olan bir listesinden oluşur. Özniteliği çözümlenecek metni depolar `id` ve herhangi bir değer olabilir. `text` 
 
 ```python
-documents = { "documents": [
-    { "id": "1", "text": "This is a document written in English." },
-    { "id": "2", "text": "Este es un document escrito en Español." },
-    { "id": "3", "text": "这是一个用中文写的文件" }
+documents = {"documents": [
+    {"id": "1", "text": "This is a document written in English."},
+    {"id": "2", "text": "Este es un document escrito en Español."},
+    {"id": "3", "text": "这是一个用中文写的文件"}
 ]}
 ```
 
-Belgeleri, API için gönderme istekleri kitaplığını kullanın. Abonelik anahtarınızı ekleme `Ocp-Apim-Subscription-Key` üst bilgi, istekle gönderip `requests.post()`. 
+API 'ye belge göndermek için Istekler kitaplığını kullanın. Abonelik anahtarınızı `Ocp-Apim-Subscription-Key` üstbilgiye ekleyin ve isteği ile `requests.post()`gönderin. 
 
 ```python
-headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
-response  = requests.post(language_api_url, headers=headers, json=documents)
+headers = {"Ocp-Apim-Subscription-Key": subscription_key}
+response = requests.post(language_api_url, headers=headers, json=documents)
 languages = response.json()
 pprint(languages)
 ```
@@ -133,35 +140,39 @@ pprint(languages)
 
 ## <a name="analyze-sentiment"></a>Yaklaşımı analiz etme
 
-(Bu arasındaki pozitif veya negatif aralıkları) bir belge kümesi duyarlılığını algılamak için URL'ye `sentiment` dil algılama URL'yi oluşturmak için metin analizi temel uç. Örneğin, `https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.1/sentiment`
+Bir belge kümesinin yaklaşımını (pozitif veya negatif) algılamak için, dil algılama URL 'sini oluşturmak üzere metin analizi temel uç `/text/analytics/v2.1/sentiment` noktasına ekleyin. Örneğin, `https://<your-custom-subdomain>.cognitiveservices.azure.com/text/analytics/v2.1/sentiment`
     
 ```python
-sentiment_url = text_analytics_base_url + "sentiment"
+sentiment_url = endpoint + "/text/analytics/v2.1/sentiment"
 ```
 
-Dil algılama örneğiyle ile bir sözlük oluştururken bir `documents` belgelerin listesini içeren anahtar. Her belge, analiz edilecek `id` ve `text` ile metnin `language` öğesini içeren bir demettir. 
+Dil algılama örneğinde olduğu gibi, bir belge listesinden oluşan `documents` anahtarı içeren bir sözlük oluşturun. Her belge, analiz edilecek `id` ve `text` ile metnin `language` öğesini içeren bir demettir. 
 
 ```python
-documents = {"documents" : [
-  {"id": "1", "language": "en", "text": "I had a wonderful experience! The rooms were wonderful and the staff was helpful."},
-  {"id": "2", "language": "en", "text": "I had a terrible time at the hotel. The staff was rude and the food was awful."},  
-  {"id": "3", "language": "es", "text": "Los caminos que llevan hasta Monte Rainier son espectaculares y hermosos."},  
-  {"id": "4", "language": "es", "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."}
+documents = {"documents": [
+    {"id": "1", "language": "en",
+        "text": "I had a wonderful experience! The rooms were wonderful and the staff was helpful."},
+    {"id": "2", "language": "en",
+        "text": "I had a terrible time at the hotel. The staff was rude and the food was awful."},
+    {"id": "3", "language": "es",
+        "text": "Los caminos que llevan hasta Monte Rainier son espectaculares y hermosos."},
+    {"id": "4", "language": "es",
+     "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."}
 ]}
 ```
 
-Belgeleri, API için gönderme istekleri kitaplığını kullanın. Abonelik anahtarınızı ekleme `Ocp-Apim-Subscription-Key` üst bilgi, istekle gönderip `requests.post()`. 
+API 'ye belge göndermek için Istekler kitaplığını kullanın. Abonelik anahtarınızı `Ocp-Apim-Subscription-Key` üstbilgiye ekleyin ve isteği ile `requests.post()`gönderin. 
 
 ```python
-headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
-response  = requests.post(sentiment_url, headers=headers, json=documents)
+headers = {"Ocp-Apim-Subscription-Key": subscription_key}
+response = requests.post(sentiment_url, headers=headers, json=documents)
 sentiments = response.json()
 pprint(sentiments)
 ```
 
 ### <a name="output"></a>Output
 
-Bir belge için yaklaşım puanını 0.0 ile 1.0, daha pozitif yaklaşımı belirten için daha yüksek bir puan arasındadır.
+Bir belge için yaklaşım puanı, daha pozitif bir yaklaşım belirten daha yüksek bir puana sahip 0,0 ve 1,0 arasındadır.
 
 ```json
 {
@@ -183,38 +194,40 @@ Bir belge için yaklaşım puanını 0.0 ile 1.0, daha pozitif yaklaşımı beli
       "score":0.334433376789093
     }
   ],
-  "errors":[
-
-  ]
+  "errors":[]
 }
 ```
 
 <a name="KeyPhraseExtraction"></a>
 
-## <a name="extract-key-phrases"></a>Anahtar ifadeleri ayıklama
+## <a name="extract-key-phrases"></a>Başlıca sözcük gruplarını ayıkla
  
-Bir dizi belgeler anahtar ifadeleri ayıklamak için URL'ye `keyPhrases` dil algılama URL'yi oluşturmak için metin analizi temel uç. Örneğin, `https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.1/keyPhrases`
+Bir belge kümesinden anahtar tümceleri ayıklamak için, dil algılama URL 'sini `/text/analytics/v2.1/keyPhrases` oluşturmak üzere metin analizi temel uç noktaya ekleyin. Örneğin, `https://<your-custom-subdomain>.cognitiveservices.azure.com/text/analytics/v2.1/keyPhrases`
     
 ```python
-keyphrase_url = text_analytics_base_url + "keyPhrases"
+keyphrase_url = endpoint + "/text/analytics/v2.1/keyphrases"
 ```
 
-Bu belgeler yaklaşım analizi örnek için kullanılan aynı koleksiyonudur.
+Bu belge koleksiyonu, yaklaşım analizi örneği için aynı şekilde kullanılır.
 
 ```python
-documents = {"documents" : [
-  {"id": "1", "language": "en", "text": "I had a wonderful experience! The rooms were wonderful and the staff was helpful."},
-  {"id": "2", "language": "en", "text": "I had a terrible time at the hotel. The staff was rude and the food was awful."},  
-  {"id": "3", "language": "es", "text": "Los caminos que llevan hasta Monte Rainier son espectaculares y hermosos."},  
-  {"id": "4", "language": "es", "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."}
+documents = {"documents": [
+    {"id": "1", "language": "en",
+        "text": "I had a wonderful experience! The rooms were wonderful and the staff was helpful."},
+    {"id": "2", "language": "en",
+        "text": "I had a terrible time at the hotel. The staff was rude and the food was awful."},
+    {"id": "3", "language": "es",
+        "text": "Los caminos que llevan hasta Monte Rainier son espectaculares y hermosos."},
+    {"id": "4", "language": "es",
+     "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."}
 ]}
 ```
 
-Belgeleri, API için gönderme istekleri kitaplığını kullanın. Abonelik anahtarınızı ekleme `Ocp-Apim-Subscription-Key` üst bilgi, istekle gönderip `requests.post()`. 
+API 'ye belge göndermek için Istekler kitaplığını kullanın. Abonelik anahtarınızı `Ocp-Apim-Subscription-Key` üstbilgiye ekleyin ve isteği ile `requests.post()`gönderin. 
 
 ```python
-headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
-response  = requests.post(keyphrase_url, headers=headers, json=documents)
+headers = {"Ocp-Apim-Subscription-Key": subscription_key}
+response = requests.post(keyphrase_url, headers=headers, json=documents)
 key_phrases = response.json()
 pprint(key_phrases)
 ```
@@ -257,116 +270,190 @@ pprint(key_phrases)
       "id":"4"
     }
   ],
-  "errors":[
-
-  ]
+  "errors":[]
 }
 ```
 
 <a name="Entities"></a>
 
-## <a name="identify-entities"></a>Varlıkları tanımlama
+## <a name="identify-entities"></a>Varlıkları tanımla
 
-Belgelerde metin bilinen varlıklar (kişiler, yerler ve öğeleri) tanımlamak için URL'ye `entities` dil algılama URL'yi oluşturmak için metin analizi temel uç. Örneğin, `https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.1/entities`
+Metin belgelerindeki iyi bilinen varlıkları (kişiler, konumlar ve şeyler) belirlemek için, dil algılama URL 'sini `/text/analytics/v2.1/entities` oluşturmak üzere metin analizi temel uç noktaya ekleyin. Örneğin, `https://<your-custom-subdomain>.cognitiveservices.azure.com/text/analytics/v2.1/entities`
     
 ```python
-entities_url = text_analytics_base_url + "entities"
+entities_url = endpoint + "/text/analytics/v2.1/entities"
 ```
 
-Önceki örneklerde gibi bir belge, koleksiyonu oluşturun. 
+Önceki örneklerde olduğu gibi bir belge koleksiyonu oluşturun. 
 
 ```python
-documents = {"documents" : [
-  {"id": "1", "text": "Microsoft was founded by Bill Gates and Paul Allen on April 4, 1975, to develop and sell BASIC interpreters for the Altair 8800."}
+documents = {"documents": [
+    {"id": "1", "text": "Microsoft was founded by Bill Gates and Paul Allen on April 4, 1975, to develop and sell BASIC interpreters for the Altair 8800."}
 ]}
 ```
 
-Belgeleri, API için gönderme istekleri kitaplığını kullanın. Abonelik anahtarınızı ekleme `Ocp-Apim-Subscription-Key` üst bilgi, istekle gönderip `requests.post()`.
+API 'ye belge göndermek için Istekler kitaplığını kullanın. Abonelik anahtarınızı `Ocp-Apim-Subscription-Key` üstbilgiye ekleyin ve isteği ile `requests.post()`gönderin.
 
 ```python
-headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
-response  = requests.post(entities_url, headers=headers, json=documents)
+headers = {"Ocp-Apim-Subscription-Key": subscription_key}
+response = requests.post(entities_url, headers=headers, json=documents)
 entities = response.json()
+pprint(entities)
 ```
 
 ### <a name="output"></a>Output
 
 ```json
-{'documents': [{'id': '1',
-   'entities': [{'name': 'Microsoft',
-     'matches': [{'wikipediaScore': 0.502357972145024,
-       'entityTypeScore': 1.0,
-       'text': 'Microsoft',
-       'offset': 0,
-       'length': 9}],
-     'wikipediaLanguage': 'en',
-     'wikipediaId': 'Microsoft',
-     'wikipediaUrl': 'https://en.wikipedia.org/wiki/Microsoft',
-     'bingId': 'a093e9b9-90f5-a3d5-c4b8-5855e1b01f85',
-     'type': 'Organization'},
-    {'name': 'Bill Gates',
-     'matches': [{'wikipediaScore': 0.5849375085784292,
-       'entityTypeScore': 0.999847412109375,
-       'text': 'Bill Gates',
-       'offset': 25,
-       'length': 10}],
-     'wikipediaLanguage': 'en',
-     'wikipediaId': 'Bill Gates',
-     'wikipediaUrl': 'https://en.wikipedia.org/wiki/Bill_Gates',
-     'bingId': '0d47c987-0042-5576-15e8-97af601614fa',
-     'type': 'Person'},
-    {'name': 'Paul Allen',
-     'matches': [{'wikipediaScore': 0.5314163053043621,
-       'entityTypeScore': 0.9988409876823425,
-       'text': 'Paul Allen',
-       'offset': 40,
-       'length': 10}],
-     'wikipediaLanguage': 'en',
-     'wikipediaId': 'Paul Allen',
-     'wikipediaUrl': 'https://en.wikipedia.org/wiki/Paul_Allen',
-     'bingId': 'df2c4376-9923-6a54-893f-2ee5a5badbc7',
-     'type': 'Person'},
-    {'name': 'April 4',
-     'matches': [{'wikipediaScore': 0.37312706493069636,
-       'entityTypeScore': 0.8,
-       'text': 'April 4',
-       'offset': 54,
-       'length': 7}],
-     'wikipediaLanguage': 'en',
-     'wikipediaId': 'April 4',
-     'wikipediaUrl': 'https://en.wikipedia.org/wiki/April_4',
-     'bingId': '52535f87-235e-b513-54fe-c03e4233ac6e',
-     'type': 'Other'},
-    {'name': 'April 4, 1975',
-     'matches': [{'entityTypeScore': 0.8,
-       'text': 'April 4, 1975',
-       'offset': 54,
-       'length': 13}],
-     'type': 'DateTime',
-     'subType': 'Date'},
-    {'name': 'BASIC',
-     'matches': [{'wikipediaScore': 0.35916049097766867,
-       'entityTypeScore': 0.8,
-       'text': 'BASIC',
-       'offset': 89,
-       'length': 5}],
-     'wikipediaLanguage': 'en',
-     'wikipediaId': 'BASIC',
-     'wikipediaUrl': 'https://en.wikipedia.org/wiki/BASIC',
-     'bingId': '5b16443d-501c-58f3-352e-611bbe75aa6e',
-     'type': 'Other'},
-    {'name': 'Altair 8800',
-     'matches': [{'wikipediaScore': 0.8697256853652899,
-       'entityTypeScore': 0.8,
-       'text': 'Altair 8800',
-       'offset': 116,
-       'length': 11}],
-     'wikipediaLanguage': 'en',
-     'wikipediaId': 'Altair 8800',
-     'wikipediaUrl': 'https://en.wikipedia.org/wiki/Altair_8800',
-     'bingId': '7216c654-3779-68a2-c7b7-12ff3dad5606',
-     'type': 'Other'}]}],
- 'errors': []}
+{
+   "documents" : [
+      {
+         "id" : "1",
+         "entities" : [
+            {
+               "name" : "Microsoft",
+               "matches" : [
+                  {
+                     "wikipediaScore" : 0.49897989655674446,
+                     "entityTypeScore" : 1.0,
+                     "text" : "Microsoft",
+                     "offset" : 0,
+                     "length" : 9
+                  }
+               ],
+               "wikipediaLanguage" : "en",
+               "wikipediaId" : "Microsoft",
+               "wikipediaUrl" : "https://en.wikipedia.org/wiki/Microsoft",
+               "bingId" : "a093e9b9-90f5-a3d5-c4b8-5855e1b01f85",
+               "type" : "Organization"
+            },
+            {
+               "name" : "Bill Gates",
+               "matches" : [
+                  {
+                     "wikipediaScore" : 0.58357497243368983,
+                     "entityTypeScore" : 0.999847412109375,
+                     "text" : "Bill Gates",
+                     "offset" : 25,
+                     "length" : 10
+                  }
+               ],
+               "wikipediaLanguage" : "en",
+               "wikipediaId" : "Bill Gates",
+               "wikipediaUrl" : "https://en.wikipedia.org/wiki/Bill_Gates",
+               "bingId" : "0d47c987-0042-5576-15e8-97af601614fa",
+               "type" : "Person"
+            },
+            {
+               "name" : "Paul Allen",
+               "matches" : [
+                  {
+                     "wikipediaScore" : 0.52977533244176866,
+                     "entityTypeScore" : 0.99884098768234253,
+                     "text" : "Paul Allen",
+                     "offset" : 40,
+                     "length" : 10
+                  }
+               ],
+               "wikipediaLanguage" : "en",
+               "wikipediaId" : "Paul Allen",
+               "wikipediaUrl" : "https://en.wikipedia.org/wiki/Paul_Allen",
+               "bingId" : "df2c4376-9923-6a54-893f-2ee5a5badbc7",
+               "type" : "Person"
+            },
+            {
+               "name" : "April 4",
+               "matches" : [
+                  {
+                     "wikipediaScore" : 0.37220990924571939,
+                     "entityTypeScore" : 0.8,
+                     "text" : "April 4",
+                     "offset" : 54,
+                     "length" : 7
+                  }
+               ],
+               "wikipediaLanguage" : "en",
+               "wikipediaId" : "April 4",
+               "wikipediaUrl" : "https://en.wikipedia.org/wiki/April_4",
+               "bingId" : "52535f87-235e-b513-54fe-c03e4233ac6e",
+               "type" : "Other"
+            },
+            {
+               "name" : "April 4, 1975",
+               "matches" : [
+                  {
+                     "entityTypeScore" : 0.8,
+                     "text" : "April 4, 1975",
+                     "offset" : 54,
+                     "length" : 13
+                  }
+               ],
+               "type" : "DateTime",
+               "subType" : "Date"
+            },
+            {
+               "name" : "BASIC",
+               "matches" : [
+                  {
+                     "wikipediaScore" : 0.35686239324548041,
+                     "entityTypeScore" : 0.8,
+                     "text" : "BASIC",
+                     "offset" : 89,
+                     "length" : 5
+                  }
+               ],
+               "wikipediaLanguage" : "en",
+               "wikipediaId" : "BASIC",
+               "wikipediaUrl" : "https://en.wikipedia.org/wiki/BASIC",
+               "bingId" : "5b16443d-501c-58f3-352e-611bbe75aa6e",
+               "type" : "Other"
+            },
+            {
+               "name" : "Altair 8800",
+               "matches" : [
+                  {
+                     "wikipediaScore" : 0.868324676465041,
+                     "entityTypeScore" : 0.8,
+                     "text" : "Altair 8800",
+                     "offset" : 116,
+                     "length" : 11
+                  }
+               ],
+               "wikipediaLanguage" : "en",
+               "wikipediaId" : "Altair 8800",
+               "wikipediaUrl" : "https://en.wikipedia.org/wiki/Altair_8800",
+               "bingId" : "7216c654-3779-68a2-c7b7-12ff3dad5606",
+               "type" : "Other"
+            },
+            {
+               "name" : "Altair",
+               "matches" : [
+                  {
+                     "entityTypeScore" : 0.52505272626876831,
+                     "text" : "Altair",
+                     "offset" : 116,
+                     "length" : 6
+                  }
+               ],
+               "type" : "Organization"
+            },
+            {
+               "name" : "8800",
+               "matches" : [
+                  {
+                     "entityTypeScore" : 0.8,
+                     "text" : "8800",
+                     "offset" : 123,
+                     "length" : 4
+                  }
+               ],
+               "type" : "Quantity",
+               "subType" : "Number"
+            }
+         ]
+      }
+   ],
+   "errors" : []
+}
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar

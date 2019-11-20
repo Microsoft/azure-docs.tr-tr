@@ -1,68 +1,68 @@
 ---
-title: Azure Container ınstances'da SSL'i etkinleştirin
-description: Çalıştıran Azure Container Instances'da bir kapsayıcı grubu için bir SSL veya TLS uç noktası oluşturma
+title: Azure Container Instances SSL 'yi etkinleştirme
+description: Azure Container Instances çalıştıran bir kapsayıcı grubu için SSL veya TLS uç noktası oluşturma
 services: container-instances
 author: dlepow
-manager: jeconnoc
+manager: gwallace
 ms.service: container-instances
 ms.topic: article
 ms.date: 04/03/2019
 ms.author: danlep
 ms.custom: ''
-ms.openlocfilehash: 12de4ef31084d8ac8586c79ffe3d0a8e891727bf
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f11fb209f8d2ace51081fd81f453faf9505af27c
+ms.sourcegitcommit: 4b431e86e47b6feb8ac6b61487f910c17a55d121
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65411395"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68326078"
 ---
-# <a name="enable-an-ssl-endpoint-in-a-container-group"></a>Bir kapsayıcı grubundaki bir SSL uç noktayı etkinleştirme
+# <a name="enable-an-ssl-endpoint-in-a-container-group"></a>Bir kapsayıcı grubunda SSL uç noktasını etkinleştirme
 
-Bu makalede nasıl oluşturulacağını gösterir. bir [kapsayıcı grubu](container-instances-container-groups.md) bir uygulama kapsayıcısı ve bir SSL Sağlayıcısı'nı çalıştıran bir sepet kapsayıcısı. Bir kapsayıcı grubu ayrı bir SSL uç noktası ayarlayarak, SSL bağlantıları, uygulamanız için uygulamanın kodunu değiştirmeden sağlar.
+Bu makalede, bir uygulama kapsayıcısına ve bir SSL sağlayıcısı çalıştıran bir sepet kapsayıcısına sahip bir [kapsayıcı grubu](container-instances-container-groups.md) oluşturma gösterilmektedir. Ayrı bir SSL uç noktasıyla bir kapsayıcı grubu ayarlayarak, uygulama kodunuzu değiştirmeden uygulamanız için SSL bağlantılarını etkinleştirirsiniz.
 
-Size iki kapsayıcı içeren bir kapsayıcı grubu ayarlayın:
-* Genel Microsoft kullanarak basit bir web uygulaması çalıştıran bir uygulama kapsayıcısı [aci-helloworld](https://hub.docker.com/_/microsoft-azuredocs-aci-helloworld) görüntü. 
-* Ortak çalışan bir sepet kapsayıcısı [Ngınx](https://hub.docker.com/_/nginx) görüntü, SSL kullanacak şekilde yapılandırılmış. 
+İki kapsayıcıdan oluşan bir kapsayıcı grubu ayarlarsınız:
+* Genel Microsoft [aci-HelloWorld](https://hub.docker.com/_/microsoft-azuredocs-aci-helloworld) görüntüsünü kullanarak basit bir Web uygulaması çalıştıran bir uygulama kapsayıcısı. 
+* SSL kullanmak üzere yapılandırılmış genel [NGINX](https://hub.docker.com/_/nginx) görüntüsünü çalıştıran bir sepet kapsayıcısı. 
 
-Bu örnekte, kapsayıcı grubunun yalnızca bağlantı noktası 443 Nginx için genel IP adresiyle kullanıma sunar. Ngınx dahili olarak 80 numaralı bağlantı noktasında dinler Yardımcısı web uygulaması için HTTPS istekleri yönlendirir. Örnek kapsayıcı uygulamalar, diğer bağlantı noktalarında dinlemek için uyarlayabilirsiniz.
+Bu örnekte, kapsayıcı grubu yalnızca NGINX için 443 numaralı bağlantı noktasını genel IP adresiyle kullanıma sunar. NGINX, HTTPS isteklerini 80 numaralı bağlantı noktasında dinleme yaptığı yardımcı Web uygulamasına yönlendirir. Diğer bağlantı noktalarını dinleyen kapsayıcı uygulamalarına yönelik örneği uyarlayabilirsiniz.
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-Bu makaleyi tamamlamak için Azure Cloud Shell veya Azure CLI'ın yerel bir yüklemesi'ni kullanabilirsiniz. Yerel olarak 2.0.55 sürümü kullanmak istiyorsanız veya üzeri önerilir olur. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme](/cli/azure/install-azure-cli).
+Bu makaleyi tamamlayabilmeniz için Azure Cloud Shell veya yerel bir Azure CLı yüklemesi kullanabilirsiniz. Yerel olarak kullanmak isterseniz, sürüm 2.0.55 veya üzeri önerilir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme](/cli/azure/install-azure-cli).
 
 ## <a name="create-a-self-signed-certificate"></a>Otomatik olarak imzalanan sertifika oluşturma
 
-Ngınx SSL sağlayıcısı olarak ayarlamak için bir SSL sertifikası gerekir. Bu makale oluşturma ve otomatik olarak imzalanan SSL sertifika ayarlama. Üretim senaryoları için bir sertifika yetkilisinden bir sertifika edinmeleri gerekir.
+Bir SSL sağlayıcısı olarak NGINX ayarlamak için bir SSL sertifikasına sahip olmanız gerekir. Bu makalede, otomatik olarak imzalanan bir SSL sertifikası oluşturma ve ayarlama işlemlerinin nasıl yapılacağı gösterilir. Üretim senaryolarında, sertifika yetkilisinden bir sertifika edinmeniz gerekir.
 
-Otomatik olarak imzalanan bir SSL sertifikası oluşturmak için kullanın [OpenSSL](https://www.openssl.org/) Azure Cloud Shell ve birçok Linux dağıtımı kullanılabilir aracı veya işletim sisteminizde bir karşılaştırılabilir istemci aracı kullanın.
+Otomatik olarak imzalanan bir SSL sertifikası oluşturmak için Azure Cloud Shell ve birçok Linux dağıtımlarında bulunan [OpenSSL](https://www.openssl.org/) aracını kullanın veya işletim sisteminizde karşılaştırılabilir bir istemci aracı kullanın.
 
-İlk kez bir sertifika isteği (.csr dosyası) bir yerel çalışma dizininde oluşturun:
+Önce yerel çalışma dizininde bir sertifika isteği (. csr dosyası) oluşturun:
 
 ```console
 openssl req -new -newkey rsa:2048 -nodes -keyout ssl.key -out ssl.csr
 ```
 
-Kimlik bilgilerini eklemek için yönergeleri izleyin. Ortak ad için sertifikayla ilişkili ana bilgisayar adı girin. Bir parola istendiğinde parola atlamak için yazmadan Enter tuşuna basın.
+Kimlik bilgilerini eklemek için istemleri izleyin. Ortak ad için sertifikayla ilişkili ana bilgisayar adını girin. Parola istendiğinde, parola eklemeyi atlamak için yazmadan ENTER tuşuna basın.
 
-Sertifika isteğinden (.crt dosyası) otomatik olarak imzalanan sertifika oluşturmak için aşağıdaki komutu çalıştırın. Örneğin:
+Sertifika isteğinden otomatik olarak imzalanan sertifika (. CRT dosyası) oluşturmak için aşağıdaki komutu çalıştırın. Örneğin:
 
 ```console
 openssl x509 -req -days 365 -in ssl.csr -signkey ssl.key -out ssl.crt
 ```
 
-Artık üç dosyalarını şu dizinde görmeniz gerekir: sertifika isteğini (`ssl.csr`), özel anahtarı (`ssl.key`) ve kendinden imzalı bir sertifika (`ssl.crt`). Kullandığınız `ssl.key` ve `ssl.crt` sonraki adımlarda.
+Artık dizinde üç dosya görmeniz gerekir: sertifika isteği (`ssl.csr`), özel anahtar (`ssl.key`) ve otomatik olarak imzalanan sertifika (`ssl.crt`). `ssl.key` Ve`ssl.crt` sonraki adımlarda kullanırsınız.
 
-## <a name="configure-nginx-to-use-ssl"></a>SSL kullanacak şekilde Ngınx'i yapılandırın
+## <a name="configure-nginx-to-use-ssl"></a>NGINX 'i SSL kullanacak şekilde yapılandırma
 
-### <a name="create-nginx-configuration-file"></a>Ngınx yapılandırma dosyası oluşturma
+### <a name="create-nginx-configuration-file"></a>NGINX yapılandırma dosyası oluştur
 
-Bu bölümde, SSL kullanacak şekilde Ngınx'i için bir yapılandırma dosyası oluşturun. Başlangıç adlı yeni bir dosya aşağıdaki metni kopyalayarak`nginx.conf`. Azure Cloud Shell'de, çalışma dizininizde dosya oluşturma için Visual Studio Code kullanabilirsiniz:
+Bu bölümde, NGINX 'in SSL kullanması için bir yapılandırma dosyası oluşturacaksınız. Aşağıdaki metni adlı`nginx.conf`yeni bir dosyaya kopyalayarak başlayın. Azure Cloud Shell, çalışma dizininizde dosyayı oluşturmak için Visual Studio Code kullanabilirsiniz:
 
 ```console
 code nginx.conf
 ```
 
-İçinde `location`, ayarladığınızdan emin olun `proxy_pass` uygulaması için doğru bağlantı noktasına sahip. Bu örnekte, bağlantı noktası 80 için ayarladığımız `aci-helloworld` kapsayıcı.
+' `location`De, uygulama için doğru `proxy_pass` bağlantı noktasıyla ayarladığınızdan emin olun. Bu örnekte, `aci-helloworld` kapsayıcı için 80 numaralı bağlantı noktasını ayarlayacağız.
 
 ```console
 # nginx Configuration File
@@ -128,7 +128,7 @@ http {
 
 ### <a name="base64-encode-secrets-and-configuration-file"></a>Base64 kodlama gizli dizileri ve yapılandırma dosyası
 
-Base64 ile kodlamanız Ngınx yapılandırma dosyasını, SSL sertifikası ve SSL anahtarı. Sonraki bölümde, kapsayıcı grubu dağıtmak için kullanılan bir YAML dosyası kodlanmış içeriğini girin.
+Base64-NGINX yapılandırma dosyasını, SSL sertifikasını ve SSL anahtarını kodlayın. Sonraki bölümde, kodlanmış içeriği kapsayıcı grubunu dağıtmak için kullanılan bir YAML dosyasına girersiniz.
 
 ```console
 cat nginx.conf | base64 -w 0 > base64-nginx.conf
@@ -136,19 +136,19 @@ cat ssl.crt | base64 -w 0 > base64-ssl.crt
 cat ssl.key | base64 -w 0 > base64-ssl.key
 ```
 
-## <a name="deploy-container-group"></a>Kapsayıcı grubu dağıtma
+## <a name="deploy-container-group"></a>Kapsayıcı grubunu dağıt
 
-Artık kapsayıcı yapılandırmalarında belirterek kapsayıcı grubu dağıtma bir [YAML dosyası](container-instances-multi-container-yaml.md).
+Artık bir [YAML dosyasında](container-instances-multi-container-yaml.md)kapsayıcı yapılandırmasını belirterek kapsayıcı grubunu dağıtın.
 
-### <a name="create-yaml-file"></a>YAML dosyası oluşturma
+### <a name="create-yaml-file"></a>YAML dosyası oluştur
 
-Adlı yeni bir dosyaya aşağıdaki YAML'ye kopyalayın `deploy-aci.yaml`. Azure Cloud Shell'de, çalışma dizininizde dosya oluşturma için Visual Studio Code kullanabilirsiniz:
+Aşağıdaki YAML 'yi adlı `deploy-aci.yaml`yeni bir dosyaya kopyalayın. Azure Cloud Shell, çalışma dizininizde dosyayı oluşturmak için Visual Studio Code kullanabilirsiniz:
 
 ```console
 code deploy-aci.yaml
 ```
 
-Base64 ile kodlanmış içeriği girin altında belirtilen yerlerde dosyaları `secret`. Örneğin, `cat` içeriğini görmek için base64 kodlamalı dosyaların her biri. Bu dosyalar eklenir, dağıtım sırasında bir [gizli birimi](container-instances-volume-secret.md) kapsayıcı grubunda. Bu örnekte, gizli birimi için Nginx kapsayıcısını bağlanmıştır.
+' In altında `secret`gösterildiği Base64 kodlamalı dosyaların içeriğini girin. Örneğin, `cat` Base64 kodlamalı her bir dosya içeriğini görmek için. Dağıtım sırasında, bu dosyalar kapsayıcı grubundaki gizli bir [birime](container-instances-volume-secret.md) eklenir. Bu örnekte, gizli birim NGINX kapsayıcısına bağlanır.
 
 ```YAML
 api-version: 2018-10-01
@@ -195,29 +195,29 @@ tags: null
 type: Microsoft.ContainerInstance/containerGroups
 ```
 
-### <a name="deploy-the-container-group"></a>Kapsayıcı grubu dağıtma
+### <a name="deploy-the-container-group"></a>Kapsayıcı grubunu dağıtma
 
-Bir kaynak grubu oluşturun [az grubu oluşturma](/cli/azure/group#az-group-create) komutu:
+[Az Group Create](/cli/azure/group#az-group-create) komutuyla bir kaynak grubu oluşturun:
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location eastus
 ```
 
-Kapsayıcı grubu dağıtma [az kapsayıcı oluşturma](/cli/azure/container#az-container-create) YAML dosyası bağımsız değişken geçirme komutu.
+Bir bağımsız değişken olarak YAML dosyasını geçirerek, [az Container Create](/cli/azure/container#az-container-create) komutuyla kapsayıcı grubunu dağıtın.
 
 ```azurecli
 az container create --resource-group <myResourceGroup> --file deploy-aci.yaml
 ```
 
-### <a name="view-deployment-state"></a>Görünüm dağıtım durumu
+### <a name="view-deployment-state"></a>Dağıtım durumunu görüntüle
 
-Dağıtım durumunu görüntülemek için aşağıdakileri kullanın [az container show](/cli/azure/container#az-container-show) komutu:
+Dağıtımın durumunu görüntülemek için, aşağıdaki [az Container Show](/cli/azure/container#az-container-show) komutunu kullanın:
 
 ```azurecli
 az container show --resource-group <myResourceGroup> --name app-with-ssl --output table
 ```
 
-Başarılı bir dağıtım için çıktı aşağıdakine benzer.
+Başarılı bir dağıtım için çıkış aşağıdakine benzer:
 
 ```console
 Name          ResourceGroup    Status    Image                                                    IP:ports             Network    CPU/Memory       OsType    Location
@@ -225,20 +225,20 @@ Name          ResourceGroup    Status    Image                                  
 app-with-ssl  myresourcegroup  Running   mcr.microsoft.com/azuredocs/nginx, aci-helloworld        52.157.22.76:443     Public     1.0 core/1.5 gb  Linux     westus
 ```
 
-## <a name="verify-ssl-connection"></a>SSL bağlantısını doğrulama
+## <a name="verify-ssl-connection"></a>SSL bağlantısını doğrula
 
-Çalışan uygulamayı görüntülemek için tarayıcınızda IP adresine gidin. Örneğin, bu örnekte gösterilen IP adresidir `52.157.22.76`. Kullanmalısınız `https://<IP-ADDRESS>` Ngınx sunucu yapılandırması nedeniyle, çalışan uygulamayı görmek için. İle bağlantı kurmayı dener `http://<IP-ADDRESS>` başarısız.
+Çalışan uygulamayı görüntülemek için tarayıcınızda IP adresine gidin. Örneğin, bu örnekte `52.157.22.76`gösterilen IP adresi. NGINX `https://<IP-ADDRESS>` sunucu yapılandırması nedeniyle çalışan uygulamayı görmek için kullanmanız gerekir. Bağlanma `http://<IP-ADDRESS>` denemeleri başarısız olur.
 
 ![Bir Azure kapsayıcı örneğinde çalışan uygulamayı gösteren tarayıcı ekran görüntüsü](./media/container-instances-container-group-ssl/aci-app-ssl-browser.png)
 
 > [!NOTE]
-> Bu örnekte otomatik olarak imzalanan bir sertifika ve sertifika yetkilisinden bir kullandığından, tarayıcı siteye HTTPS üzerinden bağlanırken bir güvenlik uyarısı görüntüler. Bu davranış beklenmektedir.
+> Bu örnek, bir sertifika yetkilisinden değil, otomatik olarak imzalanan bir sertifika kullandığından, tarayıcıda HTTPS üzerinden bağlantı kurulurken bir güvenlik uyarısı görüntülenir. Bu davranış beklenmektedir.
 >
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede kapsayıcı grubu içinde çalışan bir web uygulaması için SSL bağlantılarını etkinleştirmeye yönelik Ngınx kapsayıcısı yapma gösterdi. Bu örnekte 80 numaralı bağlantı noktası dışındaki bağlantı noktaları üzerinde dinleme uygulamaları uyarlayabilirsiniz. Ngınx yapılandırma dosyasını otomatik olarak bağlantı noktası 80 (HTTP) HTTPS kullanmak üzere sunucu bağlantılarını yeniden yönlendirmek için de güncelleştirebilirsiniz.
+Bu makalede, kapsayıcı grubunda çalışan bir Web uygulamasına SSL bağlantılarını etkinleştirmek için bir NGINX kapsayıcısının nasıl ayarlanacağı gösterilmektedir. Bu örneği, 80 numaralı bağlantı noktasında dinleme yapan uygulamalar için uyarlayabilirsiniz. Ayrıca, NGINX yapılandırma dosyasını, bağlantı noktası 80 (HTTP) üzerindeki sunucu bağlantılarını HTTPS kullanacak şekilde otomatik olarak yeniden yönlendirmek üzere güncelleştirebilirsiniz.
 
-Bu makalede sepet Ngınx kullanırken, başka bir SSL sağlayıcısı gibi kullanabileceğiniz [Caddy](https://caddyserver.com/).
+Bu makalede dışarıdan yükleme sırasında NGINX kullanılıyorsa, [Caddy](https://caddyserver.com/)gibi başka bir SSL sağlayıcısı da kullanabilirsiniz.
 
-Grubunda dağıtmak için bir kapsayıcı grubunda SSL etkinleştirmek için başka bir yaklaşım olan bir [Azure sanal ağı](container-instances-vnet.md) ile bir [Azure uygulama ağ geçidi](../application-gateway/overview.md). Ağ geçidi SSL uç noktası ayarlanabilir. Bir örnek görmek [dağıtım şablonu](https://github.com/Azure/azure-quickstart-templates/tree/master/201-aci-wordpress-vnet) ağ geçidinde SSL sonlandırmayı etkinleştirme uyarlayabilirsiniz.
+Bir kapsayıcı grubunda SSL 'yi etkinleştirmeye yönelik başka bir yaklaşım, [Azure Application Gateway](../application-gateway/overview.md)Ile bir [Azure sanal ağında](container-instances-vnet.md) grubu dağıtmaktır. Ağ Geçidi, bir SSL uç noktası olarak ayarlanabilir. Ağ geçidinde SSL sonlandırmasını etkinleştirmek için uyarlayabileceğiniz bir örnek [dağıtım şablonu](https://github.com/Azure/azure-quickstart-templates/tree/master/201-aci-wordpress-vnet) görüntüleyin.

@@ -1,37 +1,36 @@
 ---
-title: Azure'da Windows sanal makineleri yeniden | Microsoft Docs
-description: RDP bağlantı sorunlarını gidermek için azure'da Windows sanal makineleri yeniden yapma.
+title: Azure 'da Windows sanal makinelerini yeniden dağıtma | Microsoft Docs
+description: Azure 'da Windows sanal makinelerini, RDP bağlantısı sorunlarını azaltmak için yeniden dağıtma.
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: genlin
-manager: jeconnoc
+manager: dcscontentpm
 tags: azure-resource-manager,top-support-issue
 ms.assetid: 0ee456ee-4595-4a14-8916-72c9110fc8bd
 ms.service: virtual-machines-windows
-ms.devlang: na
 ms.topic: troubleshooting
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 10/31/2018
 ms.author: genli
-ms.openlocfilehash: b71ca93ac3e3e6c77c5f87b4859a2e3e0e1040d9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 36af0eeb43fb209ed65f950576f2dc9e97ec3633
+ms.sourcegitcommit: ca359c0c2dd7a0229f73ba11a690e3384d198f40
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62104090"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71058635"
 ---
-# <a name="redeploy-windows-virtual-machine-to-new-azure-node"></a>Windows sanal makineyi yeni Azure düğümüne yeniden dağıtma
-Uzak Masaüstü (RDP) sorun giderme, sorunlarla karşılaştığı değilse sanal makine yeniden dağıtıldığında erişim bağlantısı veya uygulama Windows tabanlı Azure sanal makine (VM) için yardımcı olabilir. Bir VM'yi yeniden dağıtma, Azure sanal makineyi, VM Azure altyapısı içinde yeni bir düğüme taşıyın ve tüm yapılandırma seçenekleri ve ilişkili kaynakları yeniden koruma, güç. Bu makalede, Azure PowerShell veya Azure portalını kullanarak VM'yi yeniden dağıtma işlemini göstermektedir.
+# <a name="redeploy-windows-virtual-machine-to-new-azure-node"></a>Windows sanal makinesini yeni Azure düğümüne yeniden dağıtın
+Windows tabanlı Azure sanal makinesine (VM) yönelik uzak masaüstü (RDP) bağlantısı veya uygulama erişimi sorunlarını gidermeye yönelik zorluklarla karşılaşıyorsanız, VM 'nin yeniden dağıtılması yardımcı olabilir. Bir VM 'yi yeniden dağıttığınızda Azure, VM 'yi kapatır, VM 'yi Azure altyapısı içindeki yeni bir düğüme taşır ve ardından yeniden, tüm yapılandırma seçeneklerinizi ve ilişkili kaynaklarınızı korur. Bu makalede, Azure PowerShell veya Azure portal kullanarak bir VM 'yi yeniden dağıtma gösterilmektedir.
 
 > [!NOTE]
-> Bir VM'yi yeniden dağıtma sonra geçici disk kaybolur ve sanal ağ arabirimiyle ilişkilendirilmiş dinamik IP adresleri güncelleştirildi. 
+> Bir VM 'yi yeniden dağıttığdıktan sonra, geçici disk kaybedilir ve sanal ağ arabirimiyle ilişkili dinamik IP adresleri güncellenir. 
 
 
 ## <a name="using-azure-powershell"></a>Azure PowerShell’i kullanma
-En son Azure PowerShell sahip olduğunuzdan emin olun 1.x makinenizde yüklü. Daha fazla bilgi için bkz. [Azure PowerShell’i yükleme ve yapılandırma](/powershell/azure/overview).
+Makinenizde en son Azure PowerShell 1. x ' in yüklü olduğundan emin olun. Daha fazla bilgi için bkz. [Azure PowerShell’i yükleme ve yapılandırma](/powershell/azure/overview).
 
-Aşağıdaki örnekte adlı bir VM dağıtır `myVM` adlı kaynak grubunda `myResourceGroup`:
+Aşağıdaki örnek, adlı kaynak `myVM` `myResourceGroup`grubunda adlı VM 'yi dağıtır:
 
 ```powershell
 Set-AzVM -Redeploy -ResourceGroupName "myResourceGroup" -Name "myVM"
@@ -40,5 +39,5 @@ Set-AzVM -Redeploy -ResourceGroupName "myResourceGroup" -Name "myVM"
 [!INCLUDE [virtual-machines-common-redeploy-to-new-node](../../../includes/virtual-machines-common-redeploy-to-new-node.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Sanal makinenizde bağlanma sorunu yaşıyorsanız, üzerinde belirli Yardım bulabilirsiniz [RDP bağlantı sorunlarını giderme](troubleshoot-rdp-connection.md) veya [ayrıntılı sorun giderme adımları RDP](detailed-troubleshoot-rdp.md). Sanal makinenizde çalışan bir uygulama varsa erişilemiyor, ayrıca okuyabilirsiniz [uygulama sorunlarını giderme](../windows/troubleshoot-app-connection.md).
+Sanal makinenize bağlanmayla ilgili sorun yaşıyorsanız, [RDP bağlantılarında sorun gidermeye](troubleshoot-rdp-connection.md) veya [ayrıntılı RDP sorun giderme adımlarına](detailed-troubleshoot-rdp.md)yönelik belirli yardım bulabilirsiniz. VM 'niz üzerinde çalışan bir uygulamaya erişemiyorsanız, [uygulama sorunlarını giderme sorunlarını](../windows/troubleshoot-app-connection.md)da okuyabilirsiniz.
 

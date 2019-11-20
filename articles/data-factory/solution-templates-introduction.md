@@ -1,6 +1,6 @@
 ---
-title: Azure Data Factory için şablonlarına genel bakış | Microsoft Docs
-description: Azure Data factory'yi kullanmaya hızlıca başlamak için önceden tanımlanmış bir şablon kullanmayı öğrenin.
+title: Azure Data Factory şablonlarına genel bakış
+description: Azure Data Factory ile hızlı bir şekilde başlamak için önceden tanımlanmış bir şablon kullanmayı öğrenin.
 services: data-factory
 documentationcenter: ''
 ms.service: data-factory
@@ -8,83 +8,85 @@ ms.workload: data-services
 ms.tgt_pltfrm: na
 ms.topic: conceptual
 ms.date: 01/04/2019
-author: gauravmalhot
-ms.author: gamal
+author: djpmsft
+ms.author: daperlov
 manager: craigg
-ms.openlocfilehash: 4bd38991b2452bdda65a7647f844dcc17fdfb125
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7895fedd0f68ae1c8ea4808c54a18a4e73b57b2c
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60786993"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73684051"
 ---
 # <a name="templates"></a>Şablonlar
 
-Data Factory ile hızla çalışmaya başlamanızı sağlayan önceden tanımlanmış bir Azure Data Factory işlem hatlarını şablonlardır. Şablonları, Data Factory için yeni ve hızlı bir şekilde kullanmaya başlamak istediğinizde yararlıdır. Bu şablonlar, böylece iyileştirme Geliştirici üretkenliğini veri tümleştirme projeleri oluşturmak için geliştirme süresini azaltır.
+Şablonlar, Data Factory hızlı bir şekilde başlamanıza olanak sağlayan işlem hatları Azure Data Factory önceden tanımlanmıştır. Şablonlar, Data Factory yeni olduğunuzda ve hızlıca çalışmaya başlamak istediğinizde faydalıdır. Bu şablonlar, veri tümleştirme projelerini oluşturmaya yönelik geliştirme süresini azaltarak geliştirici üretkenliğini geliştirir.
 
-## <a name="create-data-factory-pipelines-from-templates"></a>Data Factory işlem hatlarını şablonlardan oluşturma
+## <a name="create-data-factory-pipelines-from-templates"></a>Şablonlardan Data Factory işlem hatları oluşturma
 
-Data Factory işlem hattı iki şekilde aşağıdaki şablonundan oluşturmaya başlayabilirsiniz:
+Aşağıdaki iki yolla bir şablondan Data Factory işlem hattı oluşturmaya başlamanızı sağlayabilirsiniz:
 
-1.  Seçin **şablondan işlem hattı Oluştur** Şablon Galerisi açmak için genel bakış sayfasında.
+1.  Şablon galerisini açmak için genel bakış sayfasında **şablondan işlem hattı oluştur ' u** seçin.
 
-    ![Genel Bakış sayfasından şablon galerisinde Aç](media/solution-templates-introduction/templates-intro-image1.png)
+    ![Genel Bakış sayfasından şablon galerisini açın](media/solution-templates-introduction/templates-intro-image1.png)
 
-1.  Yazar sekmesinde kaynak Gezgini'nde seçin **+** , ardından **şablon hattından** şablon galerisinde açın.
+1.  Kaynak Gezgini 'daki yazar sekmesinde **+** , sonra şablondan işlem **hattı** ' nı seçerek şablon galerisini açın.
 
-    ![Yazar sekmesinden şablon galerisinde Aç](media/solution-templates-introduction/templates-intro-image2.png)
+    ![Yazar sekmesinden şablon galerisini açın](media/solution-templates-introduction/templates-intro-image2.png)
 
 ## <a name="template-gallery"></a>Şablon Galerisi
 
 ![Şablon Galerisi](media/solution-templates-introduction/templates-intro-image3.png)
 
-### <a name="out-of-the-box-data-factory-templates"></a>Dışında kutusu Data Factory şablonları
+### <a name="out-of-the-box-data-factory-templates"></a>Kullanıma hazır Data Factory şablonları
 
-Veri fabrikası, veri fabrikası işlem hattı şablonları kaydetmek için Azure Resource Manager şablonları kullanır. İçin hazır Data Factory şablonlar dışında kullanılan bildirim dosyası ile birlikte tüm Resource Manager şablonları, gördüğünüz [resmi Azure Data Factory GitHub deposunda](https://github.com/Azure/Azure-DataFactory/tree/master/templates). Microsoft tarafından sağlanan önceden tanımlanmış şablonları içerir, ancak aşağıdaki öğeler için sınırlı değildir:
+Data Factory, Data Factory işlem hattı şablonlarını kaydetmek için Azure Resource Manager şablonları kullanır. Tüm Kaynak Yöneticisi şablonlarını, [resmi Azure Data Factory GitHub](https://github.com/Azure/Azure-DataFactory/tree/master/templates)deposunda kullanıma hazır Data Factory şablonları için kullanılan bildirim dosyası ile birlikte görebilirsiniz. Microsoft tarafından sunulan önceden tanımlanmış şablonlar, ancak aşağıdaki öğelerle sınırlı değildir:
 
--   Şablonları kopyalayın:
+-   Şablonları Kopyala:
 
-    -   [Toplu kopyalama veritabanından](solution-template-bulk-copy-with-control-table.md)
+    -   [Veritabanından toplu kopyalama](solution-template-bulk-copy-with-control-table.md)
     
-    -   [Yeni dosyaları LastModifiedDate tarafından Kopyala](solution-template-copy-new-files-lastmodifieddate.md)
+    -   [Yeni dosyaları LastModifiedDate göre Kopyala](solution-template-copy-new-files-lastmodifieddate.md)
 
-    -   [Birden çok dosya kapsayıcıları arasında dosya tabanlı depoları kopyalayın](solution-template-copy-files-multiple-containers.md)
+    -   [Dosya tabanlı mağazalar arasında birden çok dosya kapsayıcısı kopyalama](solution-template-copy-files-multiple-containers.md)
 
-    -   [Delta kopya veritabanından](solution-template-delta-copy-with-control-table.md)
+    -   [Dosyaları taşıma](solution-template-move-files.md)
 
-    -   Kopyalama \<kaynak\> için \<hedef\>
+    -   [Veritabanından Delta kopyası](solution-template-delta-copy-with-control-table.md)
 
-        -   Azure Data Lake Store için Amazon S3'den 2 kuşağı
+    -   \<kaynak\> \<hedefe Kopyala\>
 
-        -   Azure Data Lake Store için Google büyük sorgudan 2 kuşağı
+        -   [Amazon S3 'ten Azure Data Lake Store Gen 2 ' ye kadar](solution-template-migration-s3-azure.md)
 
-        -   Azure Data Lake Store Gen 2 için HDF
+        -   Google Big sorgusundan Azure Data Lake Store Gen 2 ' ye kadar
 
-        -   Azure Data Lake Store Gen 1 Netezza'dan
+        -   HDF 'den Azure Data Lake Store Gen 2 ' ye kadar
 
-        -   Şirket içi Azure SQL veritabanı için SQL Server'dan
+        -   Netezza 'den Azure Data Lake Store Gen 1 ' e kadar
 
-        -   Şirket içi Azure SQL veri ambarı SQL Server'dan
+        -   Şirket içinden Azure SQL veritabanı 'na SQL Server
 
-        -   Oracle'dan Azure SQL veri ambarı şirket
+        -   Şirket içinden Azure SQL veri ambarı 'na SQL Server
+
+        -   Şirket içi Oracle 'dan Azure SQL veri ambarı 'na
 
 -   SSIS şablonları
 
-    -   Azure-SSIS Integration Runtime'ı, SSIS paketlerini yürütmek için zamanlama
+    -   SSIS paketlerini yürütmek için Azure-SSIS Integration Runtime zamanlama
 
--   Şablonlarını Dönüştür
+-   Dönüştürme şablonları
 
     -   [Azure Databricks ile ETL](solution-template-databricks-notebook.md)
 
 ### <a name="my-templates"></a>Şablonlarım
 
-Seçerek bir şablon olarak bir işlem hattı kaydedebilirsiniz **şablon olarak Kaydet** işlem hattı sekmesinde.
+İşlem hattını, işlem hattı sekmesinde **şablon olarak kaydet** ' i seçerek de bir şablon olarak kaydedebilirsiniz.
 
-![Bir işlem hattı şablon olarak Kaydet](media/solution-templates-introduction/templates-intro-image4.png)
+![İşlem hattını şablon olarak kaydetme](media/solution-templates-introduction/templates-intro-image4.png)
 
-Şablon olarak kaydedilen işlem hatları görüntüleyebileceğiniz **Şablonlarım** Şablon Galerisi bölümü. Bunları da görebilirsiniz **şablonları** kaynak Gezgini'nde bölümü.
+Şablon olarak kaydedilmiş işlem hatlarını şablon galerinin **Şablonlarım** bölümünde görüntüleyebilirsiniz. Ayrıca, Kaynak Gezgini **Şablonlar** bölümünde de görebilirsiniz.
 
 ![Şablonlarım](media/solution-templates-introduction/templates-intro-image5.png)
 
 > [!NOTE]
-> Şablonlarım bu özelliği kullanmak için GIT tümleştirmesi etkinleştirmek zorunda. Azure DevOps GIT ve GitHub hem desteklenir.
+> Şablonlarım özelliğini kullanmak için GIT tümleştirmesini etkinleştirmeniz gerekir. Hem Azure DevOps GIT hem de GitHub desteklenir.

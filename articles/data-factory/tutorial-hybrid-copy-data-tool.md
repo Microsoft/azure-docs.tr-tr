@@ -1,5 +1,5 @@
 ---
-title: Azure Veri Kopyalama aracını kullanarak şirket içi verileri kopyalama | Microsoft Docs
+title: Azure Veri Kopyalama aracını kullanarak şirket içi verileri kopyalama
 description: Şirket içi bir SQL Server veritabanındaki verileri Azure Blob depolamaya kopyalamak için bir Azure veri fabrikası oluşturun ve Veri Kopyalama aracını kullanın.
 services: data-factory
 documentationcenter: ''
@@ -11,15 +11,15 @@ ms.workload: data-services
 ms.topic: tutorial
 ms.date: 04/09/2018
 ms.author: abnarain
-ms.openlocfilehash: 26bc6861602cae349c8ebaafefe070c119a93e87
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 3b9c9371d947b0193f93b8084fbaaf66e3253997
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60329419"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73683554"
 ---
 # <a name="copy-data-from-an-on-premises-sql-server-database-to-azure-blob-storage-by-using-the-copy-data-tool"></a>Veri Kopyalama aracını kullanarak şirket içi bir SQL Server veritabanındaki verileri Azure Blob depolamaya kopyalama
-> [!div class="op_single_selector" title1="Select the version of Data Factory service you are using:"]
+> [!div class="op_single_selector" title1="Kullandığınız Data Factory hizmeti sürümünü seçin:"]
 > * [Sürüm 1](v1/data-factory-copy-data-from-azure-blob-storage-to-sql-database.md)
 > * [Geçerli sürüm](tutorial-hybrid-copy-data-tool.md)
 
@@ -35,7 +35,7 @@ Bu öğreticide, aşağıdaki adımları gerçekleştireceksiniz:
 > * Veri Kopyalama aracını kullanarak bir işlem hattı oluşturun.
 > * İşlem hattı ve etkinlik çalıştırmalarını izleme.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 ### <a name="azure-subscription"></a>Azure aboneliği
 Başlamadan önce, mevcut bir Azure aboneliğiniz yoksa [ücretsiz hesap oluşturun](https://azure.microsoft.com/free/).
 
@@ -79,15 +79,14 @@ Bu öğreticide, depolama hesabınızın adını ve anahtarını kullanırsını
 
 1. Azure kullanıcı adı ve parolanızla [Azure portalında](https://portal.azure.com) oturum açın. 
 
-1. Sol bölmede **Diğer hizmetler**’i seçin. **Depolama** anahtar sözcüğünü kullanarak filtreleyin ve **Depolama hesapları**’nı seçin.
+1. Sol bölmede **tüm hizmetler**' i seçin. **Depolama** anahtar sözcüğünü kullanarak filtreleyin ve **Depolama hesapları**’nı seçin.
 
-    ![Depolama hesabı araması](media/tutorial-hybrid-copy-powershell/search-storage-account.png)
+    ![Depolama hesabı araması](media/doc-common-process/search-storage-account.png)
 
 1. Depolama hesapları listesinde, depolama hesabınız için filtre uygulayın (gerekirse). Sonra depolama hesabınızı seçin. 
 
 1. **Depolama hesabı** penceresinde **Erişim anahtarları**'nı seçin.
 
-    ![Erişim tuşları](media/tutorial-hybrid-copy-powershell/storage-account-name-key.png)
 
 1. **Depolama hesabı adı** ve **key1** kutularında değerleri kopyalayın ve ardından onları öğreticide daha sonra kullanmak için Not Defteri'ne veya başka bir düzenleyiciye yapıştırın. 
 
@@ -96,37 +95,27 @@ Bu bölümde, Blob depolama alanınızda **adftutorial** adlı bir blob kapsayı
 
 1. **Depolama hesabı** penceresinde **Genel Bakış**’a geçin ve sonra **Bloblar**’ı seçin. 
 
-    ![Bloblar seçeneğini belirleyin](media/tutorial-hybrid-copy-powershell/select-blobs.png)
+1. **BLOB 'lar** penceresinde **+ kapsayıcı**' yı seçin. 
 
-1. **Blob hizmeti** penceresinde **Kapsayıcı**’yı seçin. 
-
-    ![Kapsayıcı düğmesi](media/tutorial-hybrid-copy-powershell/add-container-button.png)
-
-1. **Yeni kapsayıcı** penceresinde, **Ad** kutusuna **adftutorial** girin ve ardından **Tamam**’ı seçin. 
-
-    ![Yeni kapsayıcıyı](media/tutorial-hybrid-copy-powershell/new-container-dialog.png)
+1. **Yeni kapsayıcı** penceresinde, **ad**' ın altına **Adföğreticisi**yazın ve ardından **Tamam**' ı seçin. 
 
 1. Kapsayıcılar listesinde **adftutorial**’ı seçin.
 
-    ![Kapsayıcı seçimi](media/tutorial-hybrid-copy-powershell/select-adftutorial-container.png)
 
-1. **adftutorial** öğesine ait **Kapsayıcı** penceresini açık tutun. Öğreticinin sonundaki çıktıyı doğrulamak için bu sayfayı kullanırsınız. Data Factory bu kapsayıcıda çıktı klasörünü otomatik olarak oluşturduğundan sizin oluşturmanız gerekmez.
-
-    ![Kapsayıcı penceresi](media/tutorial-hybrid-copy-powershell/container-page.png)
+1. **adftutorial** öğesine ait **Kapsayıcı** penceresini açık tutun. Öğreticinin sonundaki çıktıyı doğrulamak için bunu kullanırsınız. Data Factory bu kapsayıcıda çıktı klasörünü otomatik olarak oluşturduğundan sizin oluşturmanız gerekmez.
 
 
 ## <a name="create-a-data-factory"></a>Veri fabrikası oluşturma
 
-1. Soldaki menüden **Yeni** > **Veri ve Analiz** > **Data Factory**’yi seçin. 
+1. Soldaki menüden **+ kaynak oluştur** > **analiz** > **Data Factory**' yı seçin. 
   
-   ![Yeni veri fabrikası oluşturma](./media/tutorial-hybrid-copy-data-tool/new-azure-data-factory-menu.png)
+   ![Yeni veri fabrikası oluşturma](./media/doc-common-process/new-azure-data-factory-menu.png)
+
 1. **Yeni veri fabrikası** sayfasında **Ad** bölümüne **ADFTutorialDataFactory** girin. 
-   
-     ![Yeni veri fabrikası](./media/tutorial-hybrid-copy-data-tool/new-azure-data-factory.png)
 
    Veri fabrikasının adı *genel olarak benzersiz* olmalıdır. Ad alanı için aşağıdaki hata iletisini görürseniz veri fabrikasının adını değiştirin (örneğin, adınızADFTutorialDataFactory). Data Factory yapıtlarının adlandırma kuralları için bkz.[Data Factory adlandırma kuralları](naming-rules.md).
 
-   ![Yeni veri fabrikasının adı](./media/tutorial-hybrid-copy-data-tool/name-not-available-error.png)
+   ![Yeni veri fabrikasının adı](./media/doc-common-process/name-not-available-error.png)
 1. Veri fabrikasını oluşturmak istediğiniz Azure **aboneliğinizi** seçin. 
 1. **Kaynak Grubu** için aşağıdaki adımlardan birini uygulayın:
   
@@ -135,61 +124,46 @@ Bu bölümde, Blob depolama alanınızda **adftutorial** adlı bir blob kapsayı
    - **Yeni oluştur**’u seçin ve bir kaynak grubunun adını girin. 
         
      Kaynak grupları hakkında daha fazla bilgi için bkz. [Azure kaynaklarınızı yönetmek için kaynak gruplarını kullanma](../azure-resource-manager/resource-group-overview.md).
-1. **Sürüm** bölümünde **V2 **'yi seçin.
+1. **Sürüm** bölümünde **V2**'yi seçin.
 1. **Konum** bölümünde veri fabrikasının konumunu seçin. Açılan listede yalnızca desteklenen konumlar görüntülenir. Veri Fabrikası tarafından kullanılan veri depoları (örneğin, Azure Depolama ve SQL Veritabanı) ve işlemler (örneğin, Azure HDInsight) başka konumlarda/bölgelerde olabilir.
-1. **Panoya sabitle**’yi seçin. 
-1. **Oluştur**’u seçin.
-1. Panoda, **Data Factory Dağıtılıyor** durumuna sahip aşağıdaki kutucuğu görürsünüz:
+1. **Oluştur**'u seçin.
 
-    ![Veri fabrikası dağıtılıyor kutucuğu](media/tutorial-hybrid-copy-data-tool/deploying-data-factory.png)
 1. Oluşturma işlemi bittikten sonra, resimde gösterildiği gibi **Veri Fabrikası** sayfası görüntülenir.
   
-     ![Data factory giriş sayfası](./media/tutorial-hybrid-copy-data-tool/data-factory-home-page.png)
+     ![Data factory giriş sayfası](./media/doc-common-process/data-factory-home-page.png)
 1. Azure Data Factory kullanıcı arabirimini ayrı bir sekmede açmak için **Geliştir ve İzle**’yi seçin. 
 
 ## <a name="use-the-copy-data-tool-to-create-a-pipeline"></a>Veri Kopyalama aracını kullanarak işlem hattı oluşturma
 
 1. **Başlayalım** sayfasında, Veri Kopyalama aracını açmak için **Veri Kopyala**’yı seçin. 
 
-   ![Veri Kopyalama aracının kutucuğu](./media/tutorial-hybrid-copy-data-tool/copy-data-tool-tile.png)
+   ![Başlarken sayfası](./media/doc-common-process/get-started-page.png)
 
 1. Veri Kopyalama aracının **Özellikler** sayfasında, **Görev adı** bölümüne **CopyFromOnPremSqlToAzureBlobPipeline** adını girin. Sonra **İleri**’yi seçin. Veri Kopyalama aracı, bu alan için belirttiğiniz ada sahip bir işlem hattı oluşturur. 
-
-   ![Görev adı](./media/tutorial-hybrid-copy-data-tool/properties-page.png)
+  ![görev adı](./media/tutorial-hybrid-copy-data-tool/properties-page.png)
 
 1. **Kaynak veri deposu** sayfasında **Yeni bağlantı oluştur**'a tıklayın. 
 
-   ![Yeni bağlı hizmet oluşturma](./media/tutorial-hybrid-copy-data-tool/create-new-source-data-store.png)
 
-1. **Yeni Bağlı Hizmet** bölümünde **SQL Server** aratın ve **İleri**'yi seçin. 
+1. **Yeni bağlı hizmet**altında **SQL Server**arayın ve ardından **devam**' ı seçin. 
 
-   ![SQL Server seçimi](./media/tutorial-hybrid-copy-data-tool/select-source-data-store.png)
+1. **Yeni bağlı hizmet (SQL Server)** iletişim kutusunda, **ad**' ın altında **sqlserverlinkedservice**adını girin. **Tümleştirme çalışma zamanı aracılığıyla bağlan** için **+Yeni** seçeneğini belirleyin. Şirket içinde barındırılan bir tümleştirme çalışma zamanı oluşturup bunu makinenize indirmeniz ve Data Factory’ye kaydetmeniz gerekir. Şirket içinde barındırılan tümleştirme çalışma zamanı, şirket içi ortamınızla bulut arasında veri kopyalar.
 
-1. Yeni bağlı hizmet (SQL Server) altında **adı**, girin **SqlServerLinkedService**. **Tümleştirme çalışma zamanı aracılığıyla bağlan** için **+Yeni** seçeneğini belirleyin. Şirket içinde barındırılan bir tümleştirme çalışma zamanı oluşturup bunu makinenize indirmeniz ve Data Factory’ye kaydetmeniz gerekir. Şirket içinde barındırılan tümleştirme çalışma zamanı, şirket içi ortamınızla bulut arasında veri kopyalar.
 
-   ![Şirket içinde barındırılan tümleştirme çalışma zamanı oluşturma](./media/tutorial-hybrid-copy-data-tool/create-integration-runtime-link.png)
+1. **Integration Runtime kurulum** iletişim kutusunda, **Şirket içinde barındırılan**' ı seçin. Sonra **İleri**’yi seçin. 
 
-1. **Tümleştirme Çalışma Zamanı Kurulumu** iletişim kutusunda **Özel Ağ**’ı seçin. Sonra **İleri**’yi seçin. 
+   ![Tümleştirme çalışma zamanı oluşturma](./media/tutorial-hybrid-copy-data-tool/create-integration-runtime-dialog0.png)
 
-   ![](./media/tutorial-hybrid-copy-data-tool/create-integration-runtime-dialog0.png)
+1. **Integration Runtime kurulum** iletişim kutusunda, **ad**' ın altında, **TutorialIntegrationRuntime**girin. Sonra **İleri**’yi seçin. 
 
-1. **Tümleştirme Çalışma Zamanı Kurulumu** iletişim kutusunda, **Ad** bölümüne **TutorialIntegrationRuntime** yazın. Sonra **İleri**’yi seçin. 
 
-   ![Tümleştirme çalışma zamanı adı](./media/tutorial-hybrid-copy-data-tool/create-integration-runtime-dialog.png)
-
-1. **Bu bilgisayarda hızlı kurulumu başlatmak için buraya tıklayın** seçeneğini belirleyin. Bu işlem, tümleştirme çalışma zamanını makinenize yükler ve Data Factory’ye kaydeder. Alternatif olarak, el ile kurulum seçeneğini kullanarak yükleme dosyasını indirip çalıştırabilir ve anahtarı kullanarak tümleştirme çalışma zamanını kaydedebilirsiniz. 
-
-    ![Bu bilgisayarda hızlı kurulum başlat bağlantısı](./media/tutorial-hybrid-copy-data-tool/launch-express-setup-link.png)
+1. **Integration Runtime kurulum** iletişim kutusunda, **Bu bilgisayar için hızlı kurulumu başlatmak Için buraya tıklayın ' ı**seçin. Bu işlem, tümleştirme çalışma zamanını makinenize yükler ve Data Factory’ye kaydeder. Alternatif olarak, el ile kurulum seçeneğini kullanarak yükleme dosyasını indirip çalıştırabilir ve anahtarı kullanarak tümleştirme çalışma zamanını kaydedebilirsiniz. 
 
 1. İndirilen uygulamayı çalıştırın. Pencerede hızlı kurulum durumunu görürsünüz. 
 
     ![Hızlı kurulum durumu](./media/tutorial-hybrid-copy-data-tool/express-setup-status.png)
 
-1. **Integration Runtime** alanı için **TutorialIntegrationRuntime** seçeneğinin belirlendiğini onaylayın.
-
-      ![Tümleştirme çalışma zamanı seçildi](./media/tutorial-hybrid-copy-data-tool/integration-runtime-selected.png)
-
-1. **Şirket içi SQL Server veritabanını belirtin** bölümünde aşağıdaki adımları uygulayın: 
+1. **Yeni bağlı hizmet (SQL Server)** iletişim kutusunda, Integration Runtime alanı için **TutorialIntegrationRuntime** seçili olduğunu onaylayın. Ardından, aşağıdaki adımları uygulayın:
 
     a. **Ad** bölümüne **SqlServerLinkedService** adını girin.
 
@@ -201,71 +175,55 @@ Bu bölümde, Blob depolama alanınızda **adftutorial** adlı bir blob kapsayı
 
     e. **Kullanıcı adı** bölümüne şirket içi SQL Server’a erişimi olan kullanıcının adını girin.
 
-    f. Kullanıcının **parolasını** girin. **Son**’u seçin. 
+    f. Kullanıcının **parolasını** girin. 
 
-1. **İleri**’yi seçin.
+    g. Bağlantıyı test edin ve **son**' u seçin.
 
-   ![](./media/tutorial-hybrid-copy-data-tool/select-source-linked-service.png)
+      ![Tümleştirme çalışma zamanı seçildi](./media/tutorial-hybrid-copy-data-tool/integration-runtime-selected.png)
+
+1. **Kaynak veri deposu** sayfasında **İleri**' yi seçin.
 
 1. **Verilerin kopyalanacağı tabloları seçin veya özel sorgu kullanın** sayfasında, listeden **[dbo].[emp]** tablosunu seçip **İleri**’yi seçin. Veritabanınıza göre diğer tablolardan da seçim yapabilirsiniz.
 
-   ![Ürün tablosu seçimi](./media/tutorial-hybrid-copy-data-tool/select-emp-table.png)
-
 1. **Hedef veri deposu** sayfasında **Yeni bağlantı oluştur**'u seçin
 
-   ![Hedefe bağlı hizmet oluşturma](./media/tutorial-hybrid-copy-data-tool/create-new-sink-connection.png)
 
-1. **Yeni Bağlı Hizmet** bölümünde **Azure Blob** arayıp seçin ve **Devam**'a tıklayın. 
+1. **Yeni bağlı hizmet**' de **Azure Blob**' u arayıp seçin ve ardından **devam**' ı seçin. 
 
    ![Blob depolama seçimi](./media/tutorial-hybrid-copy-data-tool/select-destination-data-store.png)
 
 1. **Yeni Bağlı Hizmet (Azure Blob Depolama)** iletişim kutusunda aşağıdaki adımları uygulayın: 
 
-       a. Under **Name****, enter **AzureStorageLinkedService**.
+   a. **Ad** bölümüne **AzureStorageLinkedService** adını girin.
 
-       b. Under **Connect via integration runtime**, select **TutorialIntegrationRuntime**
+   b. **Tümleştirme çalışma zamanıyla bağlan** bölümünde **TutorialIntegrationRuntime** öğesini seçin
 
-       c. Under **Storage account name**, select your storage account from the drop-down list. 
+   c. **Depolama hesabı adı** bölümünde, açılan listeden depolama hesabınızı seçin. 
 
-       d. Select **Next**.
+   d. **Son**’u seçin.
 
-   ![Depolama hesabını belirtme](./media/tutorial-hybrid-copy-data-tool/specify-azure-blob-storage-account.png)
+1. **Hedef veri deposu** Iletişim kutusunda **Azure Blob Storage** ' ın seçili olduğundan emin olun. Sonra **İleri**’yi seçin. 
 
-1. **Hedef veri deposu** iletişim kutusunda **İleri**'yi seçin. **Bağlantı özellikleri** bölümünde **Azure Blob Depolama** olarak **Azure depolama hizmeti**'ni seçin. **İleri**’yi seçin. 
-
-   ![Bağlantı özellikleri](./media/tutorial-hybrid-copy-data-tool/select-connection-properties.png)
-
-1. **Çıkış dosyasını veya klasörünü seçin** iletişim kutusunda, **Klasör yolu** bölümüne **adftutorial/fromonprem** yolunu girin. Ön koşulların bir parçası olarak **adftutorial** kapsayıcısını oluşturdunuz. Çıkış klasörü yoksa (bu örnekte **fromonprem**), Data Factory tarafından otomatik olarak oluşturulur. Ayrıca, **Gözat** düğmesini kullanarak blob depolamaya ve bunun kapsayıcılarına/klasörlerine göz atabilirsiniz. **Dosya adı** bölümünde değer belirtmezseniz varsayılan olarak kaynaktaki ad (bu örnekte **dbo.emp**) kullanılır.
+1. **Çıkış dosyasını veya klasörünü seçin** iletişim kutusunda, **Klasör yolu** bölümüne **adftutorial/fromonprem** yolunu girin. Ön koşulların bir parçası olarak **adftutorial** kapsayıcısını oluşturdunuz. Çıkış klasörü yoksa (bu örnekte **fromonprem**), Data Factory tarafından otomatik olarak oluşturulur. Blob depolamaya ve onun kapsayıcılarına/klasörlerine gitmek için de **Araştır** düğmesini kullanabilirsiniz. **Dosya adı** bölümünde değer belirtmezseniz varsayılan olarak kaynaktaki ad (bu örnekte **dbo.emp**) kullanılır.
            
    ![Çıktı dosyasını veya klasörünü seçin](./media/tutorial-hybrid-copy-data-tool/choose-output-file-folder.png)
 
 1. **Dosya biçimi ayarları** iletişim kutusunda **İleri**’yi seçin. 
 
-   ![Dosya biçimi ayarları sayfası](./media/tutorial-hybrid-copy-data-tool/file-format-settings-page.png)
-
 1. **Ayarlar** iletişim kutusunda **İleri**’yi seçin. 
 
-   ![Ayarlar sayfası](./media/tutorial-hybrid-copy-data-tool/settings-page.png)
-
 1. **Özet** iletişim kutusunda tüm ayarların değerlerini gözden geçirin ve **İleri**’yi seçin. 
-
-   ![Özet sayfası](./media/tutorial-hybrid-copy-data-tool/summary-page.png)
 
 1. **Dağıtım** sayfasında, oluşturduğunuz işlem hattını veya görevi izlemek için **İzleyici**’yi seçin.
 
    ![Dağıtım sayfası](./media/tutorial-hybrid-copy-data-tool/deployment-page.png)
 
 1. **İzleyici** sekmesinde, oluşturduğunuz işlem hattının durumunu görüntüleyebilirsiniz. İşlem hattı çalıştırmasıyla ilişkili etkinlik çalıştırmalarını görüntülemek ve işlem hattını yeniden çalıştırmak için **Eylem** sütunundaki bağlantıları kullanabilirsiniz. 
-
-   ![İşlem hattı çalıştırmalarını izleme](./media/tutorial-hybrid-copy-data-tool/monitor-pipeline-runs.png)
-
-1. İşlem hattı çalıştırmalarıyla ilişkili etkinlik çalıştırmalarını görmek için **Eylemler** sütunundaki **Etkinlik Çalıştırmalarını Görüntüle** bağlantısını seçin. Kopyalama işlemiyle ilgili ayrıntıları görmek için **Eylemler** sütunundaki **Ayrıntılar** bağlantısını (gözlük simgesi) seçin. **İşlem Hattı Çalıştırmaları** görünümüne dönmek için üstteki **İşlem Hatları**'nı seçin.
-
-   ![Etkinlik çalıştırmalarını izleme](./media/tutorial-hybrid-copy-data-tool/monitor-activity-runs.png)
+   
+1. İşlem hattı çalıştırmalarıyla ilişkili etkinlik çalıştırmalarını görmek için **Eylemler** sütunundaki **Etkinlik Çalıştırmalarını Görüntüle** bağlantısını seçin. Kopyalama işlemiyle ilgili ayrıntıları görmek için **Eylemler** sütunundaki **Ayrıntılar** bağlantısını (gözlük simgesi) seçin. İşlem **hattı çalıştırmaları** görünümüne geri dönmek için en üstteki Işlem **hattı çalıştırmaları** ' nı seçin.
 
 1. Çıktı dosyasını **adftutorial** kapsayıcısının **fromonprem** klasöründe gördüğünüzü onaylayın. 
 
-   ![Çıktı blobu](./media/tutorial-hybrid-copy-data-tool/output-blob.png)
 
 1. Düzenleyici moduna geçmek için soldaki **Düzenle** sekmesini seçin. Düzenleyiciyi kullanarak araç tarafından oluşturulan bağlı hizmetleri, veri kümelerini ve işlem hatlarını güncelleştirebilirsiniz. Düzenleyicide açılan varlıkla ilişkili JSON kodunu görüntülemek için **Kod**’u seçin. Bu varlıklarım Data Factory kullanıcı arabiriminde nasıl düzenleneceği ile ilgili ayrıntılar için [bu öğreticinin Azure portalı sürümüne](tutorial-copy-data-portal.md) bakın.
 

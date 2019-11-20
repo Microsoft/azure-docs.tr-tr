@@ -1,6 +1,6 @@
 ---
-title: Okuma yakalanan verileri Python uygulaması - Azure Event Hubs | Microsoft Docs
-description: Event Hubs yakalama özelliğini kullanarak göstermek için Azure Python SDK'sını kullanan örnek.
+title: 'Hızlı başlangıç: Python uygulamasından yakalanan verileri okuma-Azure Event Hubs'
+description: "Hızlı başlangıç: Event Hubs yakalama özelliğini göstermek için Azure Python SDK 'sını kullanan betikler."
 services: event-hubs
 documentationcenter: ''
 author: ShubhaVijayasarathy
@@ -11,51 +11,74 @@ ms.service: event-hubs
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: quickstart
 ms.custom: seodec18
-ms.date: 12/06/2018
+ms.date: 11/05/2019
 ms.author: shvija
-ms.openlocfilehash: 639bc4ff9c69bca3d5f8bca6967bfc3e8e6a13d4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ade4aa79b2de005bfecd7a5882f06cb491ea4e6d
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60822404"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73717852"
 ---
-# <a name="event-hubs-capture-walkthrough-python"></a>Event Hubs yakalama izlenecek yol: Python
+# <a name="quickstart-event-hubs-capture-walkthrough-python"></a>Hızlı başlangıç: Event Hubs Capture izlenecek yol: Python
 
-Yakalama, Azure Event Hubs'ın bir özelliğidir. Bir Azure Blob Depolama hesabı, tercih ettiğiniz için olay hub'ınızdaki akış verilerini otomatik olarak teslim etmek için kullanabilirsiniz. Bu özellik, toplu üzerinde gerçek zamanlı akış verilerini işleme gerçekleştirmeyi kolaylaştırır. Bu makalede, Python ile Event Hubs yakalama özelliğini kullanmayı açıklar. Event Hubs yakalama hakkında daha fazla bilgi için bkz: [genel bakış makalesi](event-hubs-capture-overview.md).
+Capture, Azure Event Hubs 'ın bir özelliğidir. Olay Hub 'ınızdaki akış verilerini seçtiğiniz bir Azure Blob depolama hesabına otomatik olarak teslim etmek için yakalama ' yı kullanabilirsiniz. Bu özellik, gerçek zamanlı akış verilerinde toplu işleme yapmayı kolaylaştırır. Bu makalede, Python ile Event Hubs yakalama 'nın nasıl kullanılacağı açıklanır. Event Hubs yakalama hakkında daha fazla bilgi için bkz. [Azure Event Hubs aracılığıyla olayları yakalama][Overview of Event Hubs Capture].
 
-Bu örnekte [Azure Python SDK'sı](https://azure.microsoft.com/develop/python/) yakalama özelliği göstermek için. Sender.py programı, Event Hubs'a JSON biçiminde sanal ortam telemetri gönderir. Olay hub'ı, bu verileri Blob Depolama alanında toplu yazılacak yakalama özelliğini kullanmak için yapılandırılır. Capturereader.py uygulama, bu BLOB'ları okur ve cihaz başına bir ekleme dosyası oluşturur. Uygulama, ardından .csv dosyalarına veri yazar.
+Bu izlenecek yol, yakalama özelliğini göstermek için [Azure Python SDK 'sını](https://azure.microsoft.com/develop/python/) kullanır. *Sender.py* programı, sanal ortam TELEMETRISINI JSON biçiminde Event Hubs gönderir. Olay Hub 'ı, bu verileri toplu halde blob depolamaya yazmak için yakala özelliğini kullanır. *Capturereader.py* uygulaması bu Blobları okur, cihazlarınızın her biri için bir ekleme dosyası oluşturur ve verileri her bir cihaza *. csv* dosyalarına yazar.
 
-## <a name="what-youll-accomplish"></a>Gerçekleştirilmesi
+Bu izlenecek yolda şunları yapabilirsiniz: 
 
-1. Azure portalını kullanarak bir Azure Blob Depolama hesabı ve içinde bir blob kapsayıcı oluşturun.
-2. Azure portalını kullanarak bir Event Hubs ad alanı oluşturun.
-3. Yakalama özelliğinin etkin, Azure portalını kullanarak bir olay hub'ı oluşturun.
-4. Python betiğini kullanarak, verileri olay hub'ına gönderebilirsiniz.
-5. Capture dosyaları okumak ve bunları başka bir Python betiğini kullanarak işleyin.
+> [!div class="checklist"]
+> * Azure portal bir Azure Blob depolama hesabı ve kapsayıcısı oluşturun.
+> * Event Hubs yakalamayı etkinleştirin ve depolama hesabınıza yönlendirin.
+> * Bir Python betiği kullanarak Olay Hub 'ınıza veri gönderme.
+> * Başka bir Python betiği kullanarak Event Hubs yakalamadan dosyaları okuyun ve işleyin.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-- Python 2.7.x
+- `pip` yüklenip güncelleştirildiğinden Python 3,4 veya sonraki bir sürümü.
+  
 - Azure aboneliği. Aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap oluşturun](https://azure.microsoft.com/free/).
-- Etkin bir [Event Hubs ad alanı ve olay hub'ı](event-hubs-create.md). 
-- Etkinleştirme **yakalama** özelliği olay hub'ı yönergeleri izleyerek: [Azure portalını kullanarak Event Hubs yakalama özelliğini etkinleştirme](event-hubs-capture-enable-through-portal.md)
+  
+- [Hızlı başlangıç: Azure Portal kullanarak bir olay hub 'ı oluşturmak](event-hubs-create.md)için bir Active Event Hubs ad alanı ve Olay Hub 'ı oluşturulur. Bu kılavuzda daha sonra kullanmak üzere ad alanınızı ve Olay Hub 'ınızın adını bir yere unutmayın. 
+  
+  > [!NOTE]
+  > Kullanmak için bir depolama Kapsayıcınız zaten varsa, Olay Hub 'ını oluştururken yakalamayı etkinleştirebilir ve depolama kapsayıcısını seçebilirsiniz. 
+  > 
+  
+- Event Hubs paylaşılan erişim anahtarı adı ve birincil anahtar değeri. Event Hubs sayfanızda **paylaşılan erişim ilkeleri** altında bu değerleri bulun veya oluşturun. Varsayılan erişim anahtarı adı **RootManageSharedAccessKey**' dir. Bu izlenecek yolda daha sonra kullanmak için erişim anahtarı adını ve birincil anahtar değerini kopyalayın. 
 
-## <a name="create-an-azure-blob-storage-account"></a>Bir Azure Blob Depolama hesabı oluşturma
+## <a name="create-an-azure-blob-storage-account-and-container"></a>Azure Blob depolama hesabı ve kapsayıcısı oluşturma
+
+Yakalama için kullanılacak bir depolama hesabı ve kapsayıcı oluşturun. 
+
 1. [Azure portalında][Azure portal] oturum açın.
-2. Portalın sol bölmesinde seçin **yeni** > **depolama** > **depolama hesabı**.
-3. Seçimleri tamamladıktan **depolama hesabı oluşturma** bölmesinde tıklayın ve ardından **Oluştur**.
+2. Sol gezinti bölmesinde **depolama hesapları**' nı seçin ve **depolama hesapları** ekranında **Ekle**' yi seçin.
+3. Depolama hesabı oluşturma ekranında bir abonelik ve kaynak grubu seçin ve depolama hesabına bir ad verin. Diğer seçimleri varsayılan olarak bırakabilirsiniz. **Gözden geçir + oluştur**' u seçin, ayarları gözden geçirin ve ardından **Oluştur**' u seçin. 
    
-   !["Depolama hesabı oluştur" bölmesi][1]
-4. Gördükten sonra **dağıtımlar başarılı** iletisi, yeni depolama hesabı adını ve buna seçin **Essentials** bölmesinde tıklayın ve ardından **Blobları**. Zaman **Blob hizmeti** bölmesi açıldığında, seçin **+ kapsayıcı** en üstünde. Kapsayıcı adı **yakalama**ve ardından kapatın **Blob hizmeti** bölmesi.
-5. Seçin **erişim anahtarları** sol bölmesi ve depolama hesabı adını ve değerini Kopyala **key1**. Bu değerleri Not Defteri'ne veya başka bir geçici konuma kaydedin.
+   ![Depolama hesabı oluştur][1]
+   
+4. Dağıtım tamamlandığında **Kaynağa Git**' i seçin ve depolama hesabına **genel bakış** ekranında **kapsayıcılar**' ı seçin.
+5. **Kapsayıcılar** ekranında **+ kapsayıcı**' yı seçin. 
+6. **Yeni kapsayıcı** ekranında, kapsayıcıya bir ad verin ve ardından **Tamam**' ı seçin. Daha sonra izlenecek yolda kullanılacak kapsayıcı adını bir yere unutmayın. 
+7. **Kapsayıcılar** ekranının sol gezinti bölmesinde **erişim tuşları**' nı seçin. Daha sonra izlenecek yol içinde kullanmak için **depolama hesabı adını**ve **KEY1**altındaki **anahtar** değerini kopyalayın.
+ 
+## <a name="enable-event-hubs-capture"></a>Event Hubs yakalamayı etkinleştir
 
-## <a name="create-a-python-script-to-send-events-to-your-event-hub"></a>Olay hub'ınıza olayları göndermek için bir Python betiği oluşturma
-1. En sevdiğiniz Python düzenleyiciniz gibi açın [Visual Studio Code][Visual Studio Code].
-2. Adlı bir betik oluşturma **sender.py**. Bu betik, 200 olayları olay hub'ınıza gönderir. JSON'da gönderilen basit ortam okumalar değildirler.
-3. Sender.py aşağıdaki kodu yapıştırın:
+1. Azure portal, **tüm kaynaklardaki**Event Hubs ad alanını seçip sol gezinmede **Olay Hub 'larını** seçip Olay Hub 'ınızı seçerek Olay Hub 'ınıza gidin. 
+2. Olay Hub 'ına **genel bakış** ekranında **yakalama olayları**' nı seçin.
+3. **Yakalama** ekranında **Açık**' ı seçin. Ardından, **Azure depolama kapsayıcısı**altında **kapsayıcı Seç**' i seçin. 
+4. **Kapsayıcılar** ekranında, kullanmak istediğiniz depolama kapsayıcısını seçin ve ardından **Seç**' i seçin. 
+5. **Yakalama** ekranında **Değişiklikleri Kaydet**' i seçin. 
+
+## <a name="create-a-python-script-to-send-events-to-event-hub"></a>Olayları Olay Hub 'ına göndermek için bir Python betiği oluşturma
+Bu betik, 200 olaylarını Olay Hub 'ınıza gönderir. Olaylar JSON ile gönderilen basit çevresel okumalar.
+
+1. [Visual Studio Code][Visual Studio Code]gibi en sevdiğiniz Python düzenleyicisini açın.
+2. *Sender.py*adlı yeni bir dosya oluşturun. 
+3. Aşağıdaki kodu *Sender.py*' ye yapıştırın. Event Hubs \<ad alanı >, \<AccessKeyName >, \<birincil anahtar değeri > ve \<eventhub > için kendi değerlerinizi değiştirin.
    
    ```python
    import uuid
@@ -64,7 +87,7 @@ Bu örnekte [Azure Python SDK'sı](https://azure.microsoft.com/develop/python/) 
    import json
    from azure.servicebus.control_client import ServiceBusService
    
-   sbs = ServiceBusService(service_namespace='INSERT YOUR NAMESPACE NAME', shared_access_key_name='RootManageSharedAccessKey', shared_access_key_value='INSERT YOUR KEY')
+   sbs = ServiceBusService(service_namespace='<namespace>', shared_access_key_name='<AccessKeyName>', shared_access_key_value='<primary key value>')
    devices = []
    for x in range(0, 10):
        devices.append(str(uuid.uuid4()))
@@ -73,16 +96,17 @@ Bu örnekte [Azure Python SDK'sı](https://azure.microsoft.com/develop/python/) 
        for dev in devices:
            reading = {'id': dev, 'timestamp': str(datetime.datetime.utcnow()), 'uv': random.random(), 'temperature': random.randint(70, 100), 'humidity': random.randint(70, 100)}
            s = json.dumps(reading)
-           sbs.send_event('INSERT YOUR EVENT HUB NAME', s)
-       print y
+           sbs.send_event('<eventhub>', s)
+       print(y)
    ```
-4. Yukarıdaki kod, ad alanı adı, anahtar değeri ve Event Hubs ad alanını oluştururken elde ettiğiniz bir olay hub adı kullanacak şekilde güncelleştirin.
+4. Dosyayı kaydedin.
 
-## <a name="create-a-python-script-to-read-your-capture-files"></a>Yakalama dosyaları okumak için bir Python betiği oluşturma
+## <a name="create-a-python-script-to-read-capture-files"></a>Yakalama dosyalarını okumak için bir Python betiği oluşturma
 
-1. Bölmesi ve select doldurmak **Oluştur**.
-2. Adlı bir betik oluşturma **capturereader.py**. Bu betik, yakalanan dosyalarını okur ve bu cihaz için yalnızca veri yazmak için cihaz başına bir dosya oluşturur.
-3. Capturereader.py aşağıdaki kodu yapıştırın:
+Bu betik yakalanan dosyaları okur ve yalnızca bu cihaz için verileri yazmak üzere cihazlarınızın her biri için bir dosya oluşturur.
+
+1. Python Düzenleyicinizde *capturereader.py*adlı yeni bir dosya oluşturun. 
+2. Aşağıdaki kodu *capturereader.py*' ye yapıştırın. \<storageaccount >, \<depolama hesabı erişim anahtarı > ve \<storagecontainer > için kaydedilmiş değerlerinizi değiştirin.
    
    ```python
    import os
@@ -100,7 +124,7 @@ Bu örnekte [Azure Python SDK'sı](https://azure.microsoft.com/develop/python/) 
            parsed_json = json.loads(reading["Body"])
            if not 'id' in parsed_json:
                return
-           if not dict.has_key(parsed_json['id']):
+           if not parsed_json['id'] in dict:
                list = []
                dict[parsed_json['id']] = list
            else:
@@ -113,60 +137,62 @@ Bu örnekte [Azure Python SDK'sı](https://azure.microsoft.com/develop/python/) 
                deviceFile.write(", ".join([str(r[x]) for x in r.keys()])+'\n')
    
    def startProcessing(accountName, key, container):
-       print 'Processor started using path: ' + os.getcwd()
+       print('Processor started using path: ' + os.getcwd())
        block_blob_service = BlockBlobService(account_name=accountName, account_key=key)
        generator = block_blob_service.list_blobs(container)
        for blob in generator:
            #content_length == 508 is an empty file, so only process content_length > 508 (skip empty files)
            if blob.properties.content_length > 508:
                print('Downloaded a non empty blob: ' + blob.name)
-               cleanName = string.replace(blob.name, '/', '_')
+               cleanName = str.replace(blob.name, '/', '_')
                block_blob_service.get_blob_to_path(container, blob.name, cleanName)
                processBlob(cleanName)
                os.remove(cleanName)
            block_blob_service.delete_blob(container, blob.name)
-   startProcessing('YOUR STORAGE ACCOUNT NAME', 'YOUR KEY', 'capture')
+   startProcessing('<storageaccount>', '<storage account access key>', '<storagecontainer>')
    ```
-4. Depolama hesabı adı ve anahtarı için uygun değerleri çağrısında yapıştırın `startProcessing`.
 
-## <a name="run-the-scripts"></a>Betikleri çalıştırma
-1. Python alt yolu olan bir komut istemi açın ve sonra Python önkoşul paketleri yüklemek için şu komutları çalıştırın:
+## <a name="run-the-python-scripts"></a>Python betiklerini çalıştırma
+
+1. Yolunda Python içeren bir komut istemi açın ve Python önkoşul paketlerini yüklemek için şu komutları çalıştırın:
    
-   ```
+   ```cmd
    pip install azure-storage
    pip install azure-servicebus
-   pip install avro
+   pip install avro-python3
    ```
    
-   Ya da daha önceki bir sürümüne sahipseniz **azure depolama** veya **azure**, kullanmanız gerekebilir **--yükseltme** seçeneği.
+   `azure-storage` veya `azure`daha önceki bir sürümüne sahipseniz `--upgrade` seçeneğini kullanmanız gerekebilir.
    
-   (Çoğu sistemlerinde gerekli değildir) aşağıdaki komutu çalıştırın gerekebilir:
+   Ayrıca, aşağıdaki komutu çalıştırmanız gerekebilir. Bu komutun çalıştırılması çoğu sistemde gerekli değildir. 
    
-   ```
+   ```cmd
    pip install cryptography
    ```
-2. Yerde sender.py ve capturereader.py kaydettiğiniz için dizininize geçin ve şu komutu çalıştırın:
    
-   ```
+2. *Sender.py* ve *capturereader.py*kaydettiğiniz dizinden şu komutu çalıştırın:
+   
+   ```cmd
    start python sender.py
    ```
    
-   Bu komut, gönderen çalıştırmak için yeni bir Python işlemi başlatır.
-3. Yakalama çalıştırmak birkaç dakika bekleyin. Ardından, özgün komut penceresine aşağıdaki komutu yazın:
+   Komut, göndereni çalıştırmak için yeni bir Python işlemi başlatır.
    
-   ```
+3. Yakalama çalışmayı bitirdiğinde şu komutu çalıştırın:
+   
+   ```cmd
    python capturereader.py
    ```
 
-   Bu yakalama işlemci, depolama hesabı/kapsayıcısından tüm blobları indirmek için yerel bir dizin kullanır. Boş olmayan tüm işler ve sonuçları yerel bir dizine .csv dosyaları olarak yazar.
+   Yakalama işlemcisi, boş olmayan tüm Blobları depolama hesabı kapsayıcısından indirir ve sonuçları *. csv* dosyası olarak yerel dizine yazar. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Aşağıdaki bağlantıları kullanarak Event Hubs hakkında daha fazla bilgi edinebilirsiniz:
+Event Hubs hakkında daha fazla bilgi edinmek için bkz.: 
 
-* [Event Hubs'a genel bakış yakalama][Overview of Event Hubs Capture]
+* [Event Hubs yakalamaya genel bakış][Overview of Event Hubs Capture]
 * [Event Hubs kullanan örnek uygulamalar](https://github.com/Azure/azure-event-hubs/tree/master/samples)
-* [Event Hubs'a genel bakış][Event Hubs overview]
+* [Event Hubs’a genel bakış][Event Hubs overview]
 
 [Azure portal]: https://portal.azure.com/
 [Overview of Event Hubs Capture]: event-hubs-capture-overview.md

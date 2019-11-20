@@ -1,44 +1,43 @@
 ---
-title: PostgreSQL - tek bir sunucu için Azure veritabanı'nda desteklenen sürümler
-description: -Tek bir sunucu PostgreSQL için Azure veritabanı'nda desteklenen sürümleri açıklar.
+title: PostgreSQL için Azure veritabanı 'nda desteklenen sürümler-tek sunucu
+description: PostgreSQL için Azure veritabanı 'nda desteklenen sürümleri (tek sunucu) açıklar.
 author: rachel-msft
 ms.author: raagyema
 ms.service: postgresql
 ms.topic: conceptual
-ms.date: 06/11/2019
+ms.date: 10/25/2019
 ms.custom: fasttrack-edit
-ms.openlocfilehash: c328f0dc510c1b7d36b547e6560a292f98d72f6f
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 2a2b8b71e07e5dac74d73d3a81c150ac5d980ea2
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67448035"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72935346"
 ---
 # <a name="supported-postgresql-database-versions"></a>Desteklenen PostgreSQL veritabanı sürümleri
-PostgreSQL altyapısının n-2 sürümlerini - tek bir sunucu PostgreSQL için Azure veritabanı'nda desteklemek için Microsoft amaçlar. Sürümler, geçerli ana sürüme (n) azure'da ve iki önceki ana sürümü (-2) olacaktır.
+Microsoft amaçlar, PostgreSQL için Azure veritabanı 'nda PostgreSQL altyapısının n-2 sürümlerini desteklemeye yöneliktir-tek sunucu. Sürümler, Azure 'daki geçerli ana sürümdür (n) ve önceki iki ana sürüm (-2) olacaktır.
 
-PostgreSQL için Azure veritabanı şu anda aşağıdaki sürümlerini destekler:
+PostgreSQL için Azure veritabanı şu anda aşağıdaki ana sürümleri desteklemektedir:
 
-## <a name="postgresql-version-112"></a>PostgreSQL sürümü 11.2
-Başvurmak [PostgreSQL belgeleri](https://www.postgresql.org/docs/11/static/release-11-2.html) iyileştirmeler ve düzeltmeler alt bu sürüm hakkında daha fazla bilgi için.
+## <a name="postgresql-version-11"></a>PostgreSQL sürüm 11
+Geçerli ikincil sürüm 11,5 ' dir. Bu ikincil sürümdeki geliştirmeler ve düzeltmeler hakkında daha fazla bilgi edinmek için [PostgreSQL belgelerine](https://www.postgresql.org/docs/11/static/release-11-5.html) bakın.
 
->[!NOTE]
-> PostgreSQL sürümü 11 önizlemede kullanılabilir. Azure portalını kullanarak oluşturma desteği kullanıma sunulacaktır ve henüz bölgenizde kullanılamıyor olabilir. Kullanabileceğiniz [Azure CLI](quickstart-create-server-database-azure-cli.md) herhangi bir bölgede Postgres 11 sunucu oluşturmak için. Örneğin, `az postgres server create -g group -n server -u username -p password -l westeurope --sku-name GP_Gen5_2 --version 11`.
+## <a name="postgresql-version-10"></a>PostgreSQL sürüm 10
+Geçerli ikincil sürüm 10,10 ' dir. Bu ikincil sürümdeki geliştirmeler ve düzeltmeler hakkında daha fazla bilgi edinmek için [PostgreSQL belgelerine](https://www.postgresql.org/docs/10/static/release-10-10.html) bakın.
 
-## <a name="postgresql-version-107"></a>PostgreSQL sürümü 10.7
-Başvurmak [PostgreSQL belgeleri](https://www.postgresql.org/docs/10/static/release-10-7.html) iyileştirmeler ve düzeltmeler alt bu sürüm hakkında daha fazla bilgi için.
+## <a name="postgresql-version-96"></a>PostgreSQL sürüm 9,6
+Geçerli ikincil sürüm 9.6.15. Bu ikincil sürümdeki geliştirmeler ve düzeltmeler hakkında daha fazla bilgi edinmek için [PostgreSQL belgelerine](https://www.postgresql.org/docs/9.6/static/release-9-6-15.html) bakın.
 
-## <a name="postgresql-version-9612"></a>PostgreSQL sürümü 9.6.12
-Başvurmak [PostgreSQL belgeleri](https://www.postgresql.org/docs/9.6/static/release-9-6-12.html) iyileştirmeler ve düzeltmeler alt bu sürüm hakkında daha fazla bilgi için.
+## <a name="postgresql-version-95"></a>PostgreSQL sürüm 9,5
+Geçerli ikincil sürüm 9.5.19. Bu ikincil sürümdeki geliştirmeler ve düzeltmeler hakkında bilgi edinmek için [PostgreSQL belgelerine](https://www.postgresql.org/docs/9.5/static/release-9-5-19.html) başvurun.
 
-## <a name="postgresql-version-9516"></a>PostgreSQL sürümü 9.5.16
-Başvurmak [PostgreSQL belgeleri](https://www.postgresql.org/docs/9.5/static/release-9-5-16.html) iyileştirmeler ve düzeltmeler hakkında bilgi edinmek için bu ikincil sürüm.
+## <a name="managing-upgrades"></a>Yükseltmeleri yönetme
+PostgreSQL için Azure veritabanı, ikincil sürüm yükseltmelerini otomatik olarak yönetir. 
 
-## <a name="managing-updates-and-upgrades"></a>Yönetme güncelleştirmeler ve yükseltmeler
-PostgreSQL için Azure veritabanı, ikincil sürüm düzeltme eklerini otomatik olarak yönetir. Şu anda ana sürüm yükseltme desteklenmez. Örneğin, PostgreSQL 9.6 için PostgreSQL 9.5 ' yükseltme desteklenmiyor. Bir sonraki ana sürümüne yükseltmek istiyorsanız, bir veritabanı oluşturma [döküm ve geri yükleme](./howto-migrate-using-dump-and-restore.md) yeni altyapısı sürümü ile oluşturulmuş bir sunucu için.
+Otomatik ana sürüm yükseltmesi desteklenmez. Örneğin PostgreSQL 9.5’ten PostgreSQL 9.6’ya otomatik yükseltme yoktur. Sonraki ana sürüme yükseltmek için, yeni altyapı sürümünde oluşturulmuş bir sunucuya [veritabanı dökümü ve yedeklemesi](./howto-migrate-using-dump-and-restore.md) oluşturun.
 
-> Sürüm 10, PostgreSQL önce dikkat [PostgreSQL sürüm oluşturma ilkesine](https://www.postgresql.org/support/versioning/) kabul bir _ana sürüm_ ilk artışı olacak şekilde yükseltme _veya_ numarası (ikinci Örneğin, 9.5 için 9.6 kabul bir _ana_ sürüm yükseltmesi).
-> 10 sürümden itibaren bir ana sürüm yükseltmesi yalnızca ilk sayı bir değişiklik olarak kabul edilir (örneğin, 10.0 için 10.1 olan bir _küçük_ sürüm yükseltmesi ve 10-11 bir _ana_ sürüm yükseltmesi).
+### <a name="version-syntax"></a>Sürüm sözdizimi
+PostgreSQL sürüm 10 ' dan önce, [PostgreSQL sürüm oluşturma ilkesi](https://www.postgresql.org/support/versioning/) , _ana sürüm_ yükseltmesini birinci _veya_ ikinci sayıda artış olacak şekilde kabul ediyor. Örneğin, 9,5 9,6, _ana_ sürüm yükseltmesi olarak kabul edildi. Sürüm 10 itibariyle, yalnızca ilk sayıdaki değişiklik ana sürüm yükseltmesi olarak kabul edilir. Örneğin, 10,0 ile 10,1 arasında _küçük_ bir sürüm yükseltmesi vardır. Sürüm 10 ' dan 11 ' e _büyük_ bir sürüm yükseltirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-PostgreSQL Uzantıları desteği hakkında daha fazla bilgi için bkz. [PostgreSQL uzantıları](concepts-extensions.md).
+Desteklenen PostgreSQL uzantıları hakkında daha fazla bilgi için bkz. [Uzantılar belgesi](concepts-extensions.md).

@@ -1,91 +1,89 @@
 ---
-title: 'Azure yedekleme: uygulamayla tutarlı Linux VM yedekleri'
-description: Azure'da Linux sanal makinelerin uygulamayla tutarlı yedeklemeler oluşturun. Bu makalede, Azure tarafından dağıtılan Linux sanal makinelerini yedekleme için betik framework yapılandırma açıklanmaktadır. Bu makale, sorun giderme bilgileri de içerir.
-services: backup
-author: anuragmehrotra
-manager: shivamg
-keywords: uygulamayla tutarlı yedekleme; uygulamayla tutarlı Azure VM yedeklemesi; Linux VM yedekleme; Azure yedekleme
-ms.service: backup
+title: Linux VM 'lerinin uygulamayla tutarlı yedeklemeleri
+description: Linux sanal makinelerinizin Azure 'da uygulamayla tutarlı yedeklerini oluşturun. Bu makalede, betik çerçevesinin Azure tarafından dağıtılan Linux VM 'lerini yedeklemek için yapılandırılması açıklanmaktadır. Bu makalede, sorun giderme bilgileri de yer alır.
+ms.reviewer: anuragm
 ms.topic: conceptual
-ms.date: 1/12/2018
-ms.author: anuragm
-ms.openlocfilehash: a81c0b9c87db85771fcecab87c6b9ac88dcbd472
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 01/12/2018
+ms.openlocfilehash: 36eeb9f63c67a01bf37412101e23be035596de94
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60641135"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74173000"
 ---
-# <a name="application-consistent-backup-of-azure-linux-vms"></a>Azure Linux sanal makinelerinin uygulamayla tutarlı yedekleme
+# <a name="application-consistent-backup-of-azure-linux-vms"></a>Azure Linux VM 'lerinin uygulamayla tutarlı yedeklemesi
 
-Sanal makinelerinizi yedekleme anlık görüntülerini çekerken uygulama tutarlılığı, uygulamalarınızın geri sonra VM'lerin önyükleme başlattığınızda anlamına gelir. Uygulama tutarlılığı hayal edebileceğiniz gibi son derece önemlidir. Emin olmak için uygulamayla tutarlı Linux betik öncesi ve betik sonrası çerçeve uygulamayla tutarlı yedeklemeler almak için kullanabileceğiniz Linux Vm'lerinizi olan. Betik öncesi ve betik sonrası çerçeve Azure Resource Manager tarafından dağıtılan Linux sanal makineleri destekler. Uygulama tutarlılığı için betikler, Service Manager ile dağıtılan sanal makineleri veya Windows sanal makineleri desteklemez.
+Sanal makinelerinizin yedek anlık görüntülerini alırken, uygulama tutarlılığı, uygulamalar geri yüklendikten sonra önyükleme yapıldığında uygulamalarınızın başlaması anlamına gelir. Imagine de, uygulama tutarlılığı son derece önemlidir. Linux sanal makinelerinizin uygulamayla tutarlı olduğundan emin olmak için, uygulamayla tutarlı yedeklemeler almak üzere Linux ön betiğini ve betik sonrası Framework 'ü kullanabilirsiniz. Ön betik ve son betik çerçevesi Azure Resource Manager dağıtılan Linux sanal makinelerini destekler. Uygulama tutarlılığı için betikler, Service Manager dağıtılan sanal makineleri veya Windows sanal makinelerini desteklemez.
 
-## <a name="how-the-framework-works"></a>Framework nasıl çalışır?
+## <a name="how-the-framework-works"></a>Framework nasıl çalışacaktır?
 
-Framework özel öncesi komut dosyaları çalıştırmak için bir seçenek sağlar ve VM anlık görüntüleri alırken sonrası komut dosyaları. VM anlık görüntüsü ve VM anlık hemen sonra çalıştırılan sonrası betikler yapmadan önce ön betiklerini çalıştırın. Öncesi ve sonrası komut dosyalarını uygulamanız ve ortamınız, VM anlık görüntüleri alırken denetleme esnekliği sağlar.
+Framework, VM anlık görüntülerini alırken özel betik ve son betik çalıştırma seçeneği sunar. Ön betikler yalnızca VM anlık görüntüsünü almadan önce çalışır ve sanal makine anlık görüntüsünü aldıktan sonra betikleri anında çalışır. Ön betikler ve son betikler, VM anlık görüntülerini alırken uygulamanızı ve ortamınızı denetleme esnekliği sağlar.
 
-Ön betiklerini IOs yerel uygulama hangi sessiz moda alın API'leri çağırmak ve bellek içi içeriğini diske boşaltır. Bu Eylemler, uygulamayla tutarlı anlık görüntü olduğundan emin olun. Sonrası betikler, normal işlemleri VM anlık görüntü sonrası devam etmek uygulamayı etkinleştirir IOs çözme yerel uygulama API'leri kullanın.
+Ön betikler yerel uygulama API 'Lerini çağırır, bu da IOs 'u sessiz moda alın ve bellek içi içeriği diske boşaltır. Bu eylemler, anlık görüntünün uygulamayla tutarlı olduğundan emin olur. Betikleri, uygulamanın VM anlık görüntüsünden sonra normal işlemleri sürdürmesini sağlayan IOs 'u çözme için yerel uygulama API 'Lerini kullanır.
 
 ## <a name="steps-to-configure-pre-script-and-post-script"></a>Betik öncesi ve betik sonrası yapılandırma adımları
 
-1. Yedeklemek istediğiniz Linux VM için kök kullanıcı olarak oturum açın.
+1. Yedeklemek istediğiniz Linux sanal makinesinde kök kullanıcı olarak oturum açın.
 
-2. Gelen [GitHub](https://github.com/MicrosoftAzureBackup/VMSnapshotPluginConfig), indirme **VMSnapshotScriptPluginConfig.json** ve kopyalayıp **/etc/azure** yedeklemek istediğiniz tüm VM'lerin klasörü. Varsa **/etc/azure** klasörü mevcut değil, oluşturun.
+2. [GitHub](https://github.com/MicrosoftAzureBackup/VMSnapshotPluginConfig)'dan **VMSnapshotScriptPluginConfig. JSON** dosyasını indirip yedeklemek istediğiniz tüm VM 'ler için **makinelerdeki/etc/Azure** klasörüne kopyalayın. **Makinelerdeki/etc/Azure** klasörü yoksa, oluşturun.
 
-3. Betik öncesi ve sonrası betik uygulamanız yedeklemeyi planladığınız tüm sanal makineler için kopyalayın. Betikler, VM üzerinde herhangi bir konuma kopyalayabilirsiniz. Komut dosyalarında tam yolunu güncelleştirdiğinizden emin olun **VMSnapshotScriptPluginConfig.json** dosya.
+3. Yedeklemeyi planladığınız tüm VM 'lerde uygulamanız için ön betik ve son betik kopyalama. Betikleri VM 'deki herhangi bir konuma kopyalayabilirsiniz. **VMSnapshotScriptPluginConfig. JSON** dosyasındaki betik dosyalarının tam yolunu güncelleştirdiğinizden emin olun.
 
-4. Bu dosyalar için şu izinler olduğundan emin olun:
+4. Bu dosyalar için aşağıdaki izinlerin olduğundan emin olun:
 
-   - **VMSnapshotScriptPluginConfig.json**: "600" izni Örneğin, yalnızca "Kök" kullanıcısı, "Okuma" ve "yazma" izinleri bu dosyaya olmalıdır ve kullanıcı yok "Yürütme izinleri" sahip olmalıdır.
+   - **VMSnapshotScriptPluginConfig. JSON**: "600" izni Örneğin, bu dosyaya yalnızca "kök" kullanıcının "okuma" ve "yazma" izinlerinin olması gerekir ve hiçbir kullanıcının "yürütme" izinlerine sahip olması gerekir.
 
-   - **Ön betik dosyası**: "700" izni  Örneğin, yalnızca "Kök" kullanıcının olmalıdır "Okuma", "yazma" ve "Yürütme izinleri bu dosyaya".
+   - **Ön betik dosyası**: "700" izni  Örneğin, bu dosya için yalnızca "kök" kullanıcının "okuma", "yazma" ve "yürütme" izinlerine sahip olması gerekir.
 
-   - **Son betik** izni "700." Örneğin, yalnızca "Kök" kullanıcının olmalıdır "Okuma", "yazma" ve "Yürütme izinleri bu dosyaya".
+   - **Betik sonrası** "700" izni Örneğin, bu dosya için yalnızca "kök" kullanıcının "okuma", "yazma" ve "yürütme" izinlerine sahip olması gerekir.
 
-   > [!Important]
-   > Framework kullanıcılara çok güç sağlar. Framework güvenli ve yalnızca "Kök" kullanıcının kritik JSON ve komut dosyaları erişimi olduğundan emin olun.
-   > Gereksinimleri karşılanmadığı takdirde betik çalıştırılmadığından, bir dosya sistemi kilitlenme ve tutarsız yedekleme ile sonuçlanır.
+   > [!IMPORTANT]
+   > Framework kullanıcılara çok sayıda güç sunar. Framework 'ü güvenli hale getirin ve yalnızca "kök" kullanıcının kritik JSON ve betik dosyalarına erişimi olduğundan emin olun.
+   > Gereksinimler karşılanmazsa, komut dosyası çalıştırılmaz, bu durum dosya sistemi kilitlenmesiyle ve tutarsız yedeklemeye neden olur.
    >
 
-5. Yapılandırma **VMSnapshotScriptPluginConfig.json** burada açıklandığı gibi:
-    - **pluginName**: Bu alanı olduğu gibi bırakın ya da komut dosyalarınızı beklendiği gibi çalışmayabilir.
+5. **VMSnapshotScriptPluginConfig. JSON** ' i burada açıklandığı gibi yapılandırın:
+    - **PluginName**: bu alanı olduğu gibi bırakın veya betikleriniz beklendiği gibi çalışmayabilir.
 
-    - **preScriptLocation**: Yedeklenecek geçiyor VM'de öncesi komut dosyasının tam yolunu sağlayın.
+    - açık **Ptlocation**: yedeklenecek VM 'de ön betiğin tam yolunu belirtin.
 
-    - **postScriptLocation**: Yedeklenecek geçiyor VM'de sonrası komut dosyasının tam yolunu sağlayın.
+    - **Postscriptlocation**: yedeklenecek sanal makinede, son betiğin tam yolunu belirtin.
 
-    - **preScriptParams**: Öncesi betiğe geçirilmesi gereken isteğe bağlı parametreleri sağlamak. Tüm parametreler, tırnak işaretleri içinde olmalıdır. Birden çok parametre kullanırsanız, Parametreler virgül ile ayırın.
+    - **ıbptparams**: ön betikte geçirilmesi gereken isteğe bağlı parametreleri sağlayın. Tüm parametrelerin tırnak içinde olması gerekir. Birden çok parametre kullanıyorsanız, parametreleri virgülle ayırın.
 
-    - **postScriptParams**: Sonrası betiğe geçirilmesi gereken isteğe bağlı parametreleri sağlamak. Tüm parametreler, tırnak işaretleri içinde olmalıdır. Birden çok parametre kullanırsanız, Parametreler virgül ile ayırın.
+    - **Postscriptparams**: betiğe geçirilmesi gereken isteğe bağlı parametreleri sağlayın. Tüm parametrelerin tırnak içinde olması gerekir. Birden çok parametre kullanıyorsanız, parametreleri virgülle ayırın.
 
-    - **preScriptNoOfRetries**: Ön betik bir hata varsa sonlandırmadan önce denenmesini sayısını ayarlayın. Sıfır anlamına gelir tek deneyin ve bir hata olursa yeniden deneme yok.
+    - Tüm **denemeler**: sonlandırmadan önce herhangi bir hata oluşursa, ön betiğin yeniden denenme sayısını ayarlayın. Sıfır, bir hata varsa yalnızca bir try ve retry denemesi anlamına gelir.
 
-    - **postScriptNoOfRetries**:  Varsa herhangi bir hata sonlandırmadan önce sonrası betiği yeniden denenmesi gerektiğini sayısını ayarlayın. Sıfır anlamına gelir tek deneyin ve bir hata olursa yeniden deneme yok.
+    - **Postscriptnoofdenemeler**: sonlandırmadan önce herhangi bir hata oluşursa, post-SCRIPT ' ın yeniden denenme sayısını ayarlayın. Sıfır, bir hata varsa yalnızca bir try ve retry denemesi anlamına gelir.
 
-    - **Timeoutınseconds**: Betik öncesi ve sonrası komut dosyası (en yüksek değer 1800 olabilir) için tek bir zaman aşımı belirtin.
+    - **Timeoutınseconds**: ön betik ve son betik için zaman aşımlarını belirtin (maksimum değer 1800 olabilir).
 
-    - **continueBackupOnFailure**: Bu değer kümesine **true** bir dosya sistemi tutarlı/kilitlenme tutarlı yedekleme öncesi betik, geri dönüş veya başarısız sonrası komut dosyası için Azure Backup istiyorsanız. Bu ayar **false** (dışında bu ayardan bağımsız olarak kilitlenmeyle tutarlı yedek için geri kalan tek disk VM olduğunda) betiği başarısız olması durumunda yedekleme başarısız olur.
+    - **devam Backuponfailure**: ön betikte veya betik sonrası başarısız olursa, Azure Backup bir dosya sistemine tutarlı/kilitlenmeyle tutarlı bir yedeklemeye geri döneceğini istiyorsanız bu değeri **true** olarak ayarlayın. Bunu **yanlış** olarak ayarlamak, komut dosyası hatası durumunda yedekleme işlemi başarısız olur (bu ayardan bağımsız olarak, kilitlenmeyle tutarlı yedeklemeye geri kalan tek disk sanal makinenizin olması dışında).
 
-    - **fsFreezeEnabled**: VM anlık görüntüsü, dosya sistemi tutarlılığı güvence altına alırken, Linux fsfreeze adlı olup olmadığını belirtin. Tutma ayarlamak bu ayarı öneririz **true** uygulamanızı fsfreeze devre dışı bırakma bağımlılık sahip olmadığı sürece.
+    - **Fsfreezeenabled**: dosya sistemi tutarlılığını sağlamak için VM anlık görüntüsünü alırken Linux fsfreeze 'in çağrılması gerekip gerekmediğini belirtin. Uygulamanızda fsfreeze devre dışı bırakma bağımlılığı yoksa, bu ayarın **true** olarak tutulmasını öneririz.
 
-6. Betik framework artık yapılandırılmıştır. VM yedeklemesi zaten yapılandırılmışsa, sonraki yedekleme betiklerini çağırır ve uygulamayla tutarlı yedekleme tetikler. Sanal makine yedekleme yapılandırılmamışsa kullanarak yapılandırma [Azure sanal makinelerini kurtarma Hizmetleri kasalarına yedekleme.](https://docs.microsoft.com/azure/backup/backup-azure-vms-first-look-arm)
+    - **Scriptsexecutionpolltimeseconds**: uzantının betik yürütmesinde her yoklama arasında uyku moduna geçme süresini ayarlayın. Örneğin, değer 2 ise, uzantı ön/son betik yürütmenin her 2 saniyede bir tamamlanıp tamamlanmadığını denetler. En küçük ve en büyük değer sırasıyla 1 ve 5 ' tir. Değer kesin bir tamsayı olmalıdır.
+
+6. Betik çerçevesi artık yapılandırıldı. VM yedeklemesi zaten yapılandırıldıysa, sonraki yedekleme betikleri çağırır ve uygulamayla tutarlı yedeklemeyi tetikler. VM yedeklemesi yapılandırılmamışsa, [Azure sanal makinelerini kurtarma hizmetleri kasalarına yedekle](https://docs.microsoft.com/azure/backup/backup-azure-vms-first-look-arm) seçeneğini kullanarak yapılandırın.
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-Ön betik ve son betik yazarken uygun günlük kaydı ekleyin ve betik sorunları düzeltmek için betik günlüklerini gözden geçirme emin olun. Betikleri çalıştırma sorunları hala varsa, daha fazla bilgi için aşağıdaki tabloya bakın.
+Komut dosyası ve betik sonrası bilgilerinizi yazarken uygun günlük kaydını eklediğinizden emin olun ve betik oluşturma sorunlarını gidermek için betik günlüklerinizi gözden geçirin. Betikleri çalıştırırken sorun yaşamaya devam ediyorsanız daha fazla bilgi için aşağıdaki tabloya bakın.
 
 | Hata | Hata iletisi | Önerilen eylem |
 | ------------------------ | -------------- | ------------------ |
-| Öncesi ScriptExecutionFailed |Ön betik bir hata döndürdüğünden yedekleme, uygulamayla tutarlı olmayabilir.   | Sorunu düzeltmek betiğinizin hata günlüklerine bakın.|  
-|   POST ScriptExecutionFailed |    Son betik uygulama durumunu etkileyebilecek bir hata döndürdü. |    Uygulama durumunu denetleyin ve sorunu düzeltmek betiği için hata günlüklerine bakın. |
-| Öncesi ScriptNotFound |  Belirtilen konumda ön betik bulunamadı **VMSnapshotScriptPluginConfig.json** yapılandırma dosyası. |   Uygulamayla tutarlı yedekleme sağlamak için yapılandırma dosyasında belirtilen yolda mevcut olduğundan emin olun, ön betik olun.|
-| POST ScriptNotFound | Sonrası betiğin belirtilen konumda bulunamadı **VMSnapshotScriptPluginConfig.json** yapılandırma dosyası. |   Uygulamayla tutarlı yedekleme sağlamak için yapılandırma dosyasında belirtilen yolda mevcut olduğundan emin olun, son betik olun.|
-| IncorrectPluginhostFile | **Pluginhost** VmSnapshotLinux uzantısı ile birlikte gelen, dosya, bozuk, betik öncesi ve sonrası betik çalıştıramaz ve yedekleme, uygulamayla tutarlı olmayacaktır. | Kaldırma **VmSnapshotLinux** uzantısı ve otomatik olarak yeniden sorunu düzeltmek üzere sonraki yedeklemeyle birlikte. |
-| IncorrectJSONConfigFile | **VMSnapshotScriptPluginConfig.json** dosyasıdır yanlış, bu nedenle ön betik ve sonrası komut dosyası çalıştırılamaz ve yedekleme, uygulamayla tutarlı olmayacaktır. | Kopyadan indirme [GitHub](https://github.com/MicrosoftAzureBackup/VMSnapshotPluginConfig) ve yeniden yapılandırın. |
-| InsufficientPermissionforPre betiği | Komut dosyaları çalıştırmak için "Kök" kullanıcısı dosyanın sahibi olmalıdır ve dosya "700" izniniz olmalıdır (diğer bir deyişle, yalnızca "sahibi" olmalıdır "Okuma", "yazma" ve "Yürütme izinleri"). | "Kök" kullanıcısı betik dosyasının "sahibi" ve yalnızca "sahip" "Okuma", "yazma" ve "yürütme" izinleri olduğundan emin olun. |
-| InsufficientPermissionforPost betiği | Komut dosyaları çalıştırmak için kök kullanıcı dosyanın sahibi olmalıdır ve dosya "700" izniniz olmalıdır (diğer bir deyişle, yalnızca "sahibi" olmalıdır "Okuma", "yazma" ve "Yürütme izinleri"). | "Kök" kullanıcısı betik dosyasının "sahibi" ve yalnızca "sahip" "Okuma", "yazma" ve "yürütme" izinleri olduğundan emin olun. |
-| Öncesi ScriptTimeout | Zaman aşımına uğradı uygulamayla tutarlı yedekleme öncesi betik yürütme. | Betiği denetleyin ve zaman aşımı artırmak **VMSnapshotScriptPluginConfig.json** konumunda bulunan dosya **/etc/azure**. |
-| POST ScriptTimeout | Uygulamayla tutarlı yedekleme sonrası betik yürütme zaman aşımına uğradı. | Betiği denetleyin ve zaman aşımı artırmak **VMSnapshotScriptPluginConfig.json** konumunda bulunan dosya **/etc/azure**. |
+| Pre-ScriptExecutionFailed |Ön betik bir hata döndürdü, bu nedenle yedekleme uygulamayla tutarlı olmayabilir.| Sorunu çözmesi için betiğinizin hata günlüklerine bakın.|  
+|Scriptexecutionpost başarısız oldu |Betik sonrası uygulama durumunu etkileyebilecek bir hata döndürdü. |Sorunu düzeltemedi ve uygulama durumunu kontrol etmek için betikinizin hata günlüklerine bakın. |
+| ScriptNotFound |**VMSnapshotScriptPluginConfig. JSON** yapılandırma dosyasında belirtilen konumda ön betik bulunamadı. |Uygulamayla tutarlı yedekleme sağlamak için yapılandırma dosyasında belirtilen yolda ön betikte bulunduğundan emin olun.|
+| ScriptNotFound sonrası |Betik sonrası **VMSnapshotScriptPluginConfig. JSON** yapılandırma dosyasında belirtilen konumda bulunamadı. |Uygulamayla tutarlı yedekleme sağlamak için yapılandırma dosyasında belirtilen yolda komut dosyasının mevcut olduğundan emin olun.|
+| IncorrectPluginhostFile |VmSnapshotLinux uzantısıyla birlikte gelen **Pluginhost** dosyası bozuk, bu nedenle ön betik ve son betik çalıştırılamıyor ve yedekleme uygulamayla tutarlı olmayacak.| **VmSnapshotLinux** uzantısını kaldırın ve sorunu gidermek için otomatik olarak sonraki yedeklemeyle yeniden yüklenecektir. |
+| IncorrectJSONConfigFile | **VMSnapshotScriptPluginConfig. JSON** dosyası yanlış, bu nedenle ön betik ve son betik çalıştırılamıyor ve yedekleme uygulamayla tutarlı olmayacak. | Kopyayı [GitHub](https://github.com/MicrosoftAzureBackup/VMSnapshotPluginConfig) 'dan indirin ve yeniden yapılandırın. |
+| InsufficientPermissionforPre-betik | Betikleri çalıştırmak için, "kök" kullanıcının dosyanın sahibi olması ve dosyada "700" izinlerinin olması gerekir (yani yalnızca "Owner", "okuma", "yazma" ve "yürütme" izinlerine sahip olmalıdır). | "Kök" kullanıcının betik dosyasının "sahip" olduğundan ve yalnızca "Owner" öğesinin "okuma", "yazma" ve "yürütme" izinlerine sahip olduğundan emin olun. |
+| InsufficientPermissionforPost-betik | Betikleri çalıştırmak için, kök kullanıcı dosyanın sahibi olmalıdır ve dosya "700" izinlerine sahip olmalıdır (yani yalnızca "Owner", "okuma", "yazma" ve "yürütme" izinlerine sahip olmalıdır). | "Kök" kullanıcının betik dosyasının "sahip" olduğundan ve yalnızca "Owner" öğesinin "okuma", "yazma" ve "yürütme" izinlerine sahip olduğundan emin olun. |
+| ScriptTimeout öncesi | Uygulamayla tutarlı yedekleme ön betiğini yürütme zaman aşımına uğradı. | Komut dosyasını denetleyin ve **makinelerdeki/etc/Azure**'da bulunan **VMSnapshotScriptPluginConfig. JSON** dosyasındaki zaman aşımını artırın. |
+| ScriptTimeout sonrası | Uygulamayla tutarlı yedekleme sonrası komut dosyasının yürütülmesi zaman aşımına uğradı. | Komut dosyasını denetleyin ve **makinelerdeki/etc/Azure**'da bulunan **VMSnapshotScriptPluginConfig. JSON** dosyasındaki zaman aşımını artırın. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[Bir kurtarma Hizmetleri kasasına VM yedeklemeyi yapılandırma](https://docs.microsoft.com/azure/backup/backup-azure-arm-vms)
+
+[VM yedeklemesini bir kurtarma hizmetleri kasasına yapılandırma](https://docs.microsoft.com/azure/backup/backup-azure-arm-vms)

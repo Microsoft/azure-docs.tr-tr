@@ -1,35 +1,34 @@
 ---
-title: Bulma ve Azure eklenmemiş NIC'leri silme | Microsoft Docs
-description: Bulma ve Azure CLI ile VM ekli değil Azure NIC Sil
+title: Eklenmemiş Azure NIC 'Leri bulma ve silme
+description: Azure CLı ile sanal makinelere eklenmemiş Azure NIC 'leri bulma ve silme
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
-ms.devlang: na
 ms.topic: article
 ms.date: 04/10/2018
 ms.author: cynthn
-ms.openlocfilehash: d3fd807dcd920a951dcc5083022d4d264b5bdab7
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3d7a0e3405dd87d17c9d7aac2e989ab82531d9b0
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60649409"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74036139"
 ---
-# <a name="how-to-find-and-delete-unattached-network-interface-cards-nics-for-azure-vms"></a>Azure Vm'leri için nasıl bulup silmesine eklenmemiş ağ arabirimi kartları (NIC)
-Ağ arabirim kartı (NIC), Azure sanal makineler'de (VM) sildiğinizde, varsayılan olarak silinmez. Oluşturma ve birden çok VM'yi silin, kullanılmayan NIC iç IP adresi kiraları kullanmaya devam edin. Diğer VM NIC oluşturma gibi bir alt ağın adres alanındaki IP kira alınamıyor olabilir. Bu makalede bulup silmesine eklenmemiş NIC'leri gösterilmektedir.
+# <a name="how-to-find-and-delete-unattached-network-interface-cards-nics-for-azure-vms"></a>Azure VM 'Leri için eklenmemiş ağ arabirim kartlarını (NIC 'Ler) bulma ve silme
+Azure 'da bir sanal makineyi (VM) sildiğinizde, ağ arabirimi kartları (NIC 'ler) varsayılan olarak silinmez. Birden çok VM oluşturup silerseniz kullanılmayan NIC 'Ler iç IP adresi kiralamalarını kullanmaya devam eder. Diğer VM NIC 'Leri oluştururken, alt ağın adres alanında bir IP kirası edinemeyebilir. Bu makalede, eklenmemiş NIC 'Leri bulma ve silme işlemlerinin nasıl yapılacağı gösterilir.
 
 ## <a name="find-and-delete-unattached-nics"></a>Eklenmemiş NIC’leri bulma ve silme
 
-*VirtualMachine* özelliği için bir NIC kimliği ve kaynak grubu VM'nin NIC eklendiği depolar. Aşağıdaki betik, bir Abonelikteki tüm NIC'lerin döngü ve denetler *virtualMachine* özelliği null. Bu özellik null ise, NIC bir VM'ye bağlı değil.
+Bir NIC 'in *VirtualMachine* ÖZELLIĞI, NIC 'nin bağlı olduğu VM 'nin kimliğini ve kaynak grubunu depolar. Aşağıdaki betik, bir abonelikteki tüm NIC 'lerde döngü gerçekleştirir ve *VirtualMachine* özelliğinin null olup olmadığını denetler. Bu özellik null ise, NIC bir VM 'ye eklenmez.
 
-Eklenmemiş NIC'leri görüntülemek için olan yüksek oranda öneririz ilk çalışmaya betiğiyle *deleteUnattachedNics* değişkenini *0*. Liste çıkışı gözden geçirdikten sonra tüm eklenmemiş NIC'leri silmek için komut dosyasını Çalıştır *deleteUnattachedNics* için *1*.
+Eklenmemiş tüm NIC 'Leri görüntülemek için, önce betiği *Deleteunattachednic* değişkeniyle birlikte *0*olarak çalıştırmanız önerilir. Liste çıkışını gözden geçirdikten sonra, eklenmemiş tüm NIC 'Leri silmek için betiği *Deleteunattachednıc* 'ler ile *1*' e çalıştırın.
 
 ```azurecli
 # Set deleteUnattachedNics=1 if you want to delete unattached NICs
@@ -53,4 +52,4 @@ done
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Oluşturma ve Azure sanal ağlarını yönetme hakkında daha fazla bilgi için bkz. [oluşturmak ve VM ağlarını yönetmek](tutorial-virtual-network.md).
+Azure 'da sanal ağlar oluşturma ve yönetme hakkında daha fazla bilgi için bkz. [VM ağlarını oluşturma ve yönetme](tutorial-virtual-network.md).

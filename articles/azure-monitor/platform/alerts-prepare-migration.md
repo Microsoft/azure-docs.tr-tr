@@ -1,90 +1,90 @@
 ---
-title: Logic apps ve runbook'ları güncelleştirerek Azure İzleyici Klasik uyarılar geçiş için hazırlama
-description: Web kancaları, logic apps ve gönüllü geçişe hazırlamak için runbook'ları değiştirme hakkında bilgi edinin.
+title: Mantıksal uygulamalarınızı ve Runbook 'larınızı güncelleştirerek Azure Izleyici klasik uyarılar geçişine hazırlanma
+description: Web kancaları, Logic Apps ve Runbook 'larınızı gönüllü geçiş için hazırlamak üzere nasıl değiştireceğinizi öğrenin.
 author: snehithm
 ms.service: azure-monitor
 ms.topic: conceptual
 ms.date: 03/19/2018
 ms.author: snmuvva
 ms.subservice: alerts
-ms.openlocfilehash: bdbd45c2b10dec8f1c0a85110747a470e818dbf9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5235db5cab39be6e36bdf145d3edc7c73fe9da54
+ms.sourcegitcommit: 3073581d81253558f89ef560ffdf71db7e0b592b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66015603"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68827399"
 ---
-# <a name="prepare-your-logic-apps-and-runbooks-for-migration-of-classic-alert-rules"></a>Logic apps ve runbook'ları Klasik uyarı kuralları bir geçiş için hazırlama
+# <a name="prepare-your-logic-apps-and-runbooks-for-migration-of-classic-alert-rules"></a>Mantıksal uygulamalarınızı ve Runbook 'larınızı klasik uyarı kurallarının geçirilmesi için hazırlama
 
-Olarak [daha önce duyurulduğu gibi](monitoring-classic-retirement.md), Azure İzleyici'de klasik uyarılar, Eylül 2019 ' kullanımdan (başlangıçta Temmuz 2019 oluştu). Geçiş Aracı, Azure portalında Klasik uyarı kuralları kullanan ve kendilerini geçişini isteyen müşteriler için kullanılabilir.
+[Daha önce duyurulduğu](monitoring-classic-retirement.md)gibi, Azure izleyici 'deki klasik uyarılar Eylül 2019 ' de kullanımdan kaldırılıyor (ilk olarak 2019 Temmuz idi). Klasik uyarı kuralları kullanan ve geçiş yapmak isteyen müşterilere Azure portal bir geçiş aracı vardır.
 
 > [!NOTE]
-> Geçiş Aracı kullanımına gecikme nedeniyle, Klasik uyarılar geçiş için o tarihten 30 Haziran 2019 ilk duyurulan tarihinden 31 Ağustos 2019 için genişletilmiştir.
+> Geçiş Aracı 'nın çıkış gecikmesi nedeniyle, klasik uyarılar geçişinin devre dışı bırakılması tarihi 31 Haziran 2019 tarihinde ilk bildirilen tarihten itibaren 31 Ağustos 2019 tarihine kadar genişletilmiştir.
 
-Yeni uyarı kuralları için uyarı kurallarınızı Klasik gönüllü olarak geçirmeyi seçerseniz, iki sistem arasındaki bazı farklar olduğunu unutmayın. Bu makalede bu farklılıklar ve değişikliğe hazırlanmak nasıl açıklanmaktadır.
+Klasik uyarı kurallarınızı yeni uyarı kurallarına göre gönüllü olarak geçirmeyi tercih ederseniz, iki sistem arasında bazı farklılıklar olduğunu unutmayın. Bu makalede bu farklılıklar ve değişikliğe nasıl hazırlanacağı açıklanmaktadır.
 
 ## <a name="api-changes"></a>API değişiklikleri
 
-Oluşturma ve klasik uyarı kurallarını yönet API'leri (`microsoft.insights/alertrules`), yeni ölçüm uyarıları oluşturma ve yönetme API'lerinden farklı (`microsoft.insights/metricalerts`). Program aracılığıyla oluşturma ve bugün Klasik uyarı kuralları yönetin, dağıtım betiklerinizi yeni API'leri ile çalışacak şekilde güncelleştirin.
+Klasik uyarı kuralları (`microsoft.insights/alertrules`) oluşturan ve yöneten API 'ler, yeni ölçüm uyarıları (`microsoft.insights/metricalerts`) oluşturan ve yöneten API 'lerden farklıdır. Hemen klasik uyarı kuralları oluşturup yönetiyorsanız, dağıtım betiklerinizi yeni API 'lerle çalışacak şekilde güncelleştirin.
 
-Aşağıdaki tabloda, hem Klasik hem de yeni uyarılar için programlama arabirimleri başvurusu vardır:
+Aşağıdaki tabloda hem klasik hem de yeni uyarılar için programlı arabirimlerin bir başvurusu verilmiştir:
 
 |         |Klasik uyarılar  |Yeni ölçüm uyarıları |
 |---------|---------|---------|
-|REST API     | [microsoft.insights/alertrules](https://docs.microsoft.com/rest/api/monitor/alertrules)         | [microsoft.insights/metricalerts](https://docs.microsoft.com/rest/api/monitor/metricalerts)       |
-|Azure CLI     | [az İzleyici Uyarısı](https://docs.microsoft.com/cli/azure/monitor/alert?view=azure-cli-latest)        | [az İzleyici ölçümleri Uyarısı](https://docs.microsoft.com/cli/azure/monitor/metrics/alert?view=azure-cli-latest)        |
+|REST API     | [Microsoft. Insights/alertrules](https://docs.microsoft.com/rest/api/monitor/alertrules)         | [Microsoft. Insights/metricalerts](https://docs.microsoft.com/rest/api/monitor/metricalerts)       |
+|Azure CLI     | [az Monitor Alert](https://docs.microsoft.com/cli/azure/monitor/alert?view=azure-cli-latest)        | [az Monitor ölçümleri uyarısı](https://docs.microsoft.com/cli/azure/monitor/metrics/alert?view=azure-cli-latest)        |
 |PowerShell      | [Başvuru](https://docs.microsoft.com/powershell/module/az.monitor/add-azmetricalertrule)       |  [Başvuru](https://docs.microsoft.com/powershell/module/az.monitor/add-azmetricalertrulev2)    |
-| Azure Resource Manager şablonu | [Klasik uyarılar için](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-enable-template)|[Yeni ölçüm uyarıları](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-metric-create-templates)|
+| Azure Resource Manager şablonu | [Klasik uyarılar için](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-enable-template)|[Yeni ölçüm uyarıları için](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-metric-create-templates)|
 
 ## <a name="notification-payload-changes"></a>Bildirim yükü değişiklikleri
 
-Bildirim yükü biçimi arasında biraz daha farklı olmasına [Klasik uyarı kuralları](alerts-webhooks.md) ve [yeni ölçüm uyarıları](alerts-metric-near-real-time.md#payload-schema). Herhangi bir Web kancası, mantıksal uygulama veya Klasik uyarı kuralları tarafından tetiklenen runbook'u eylemler varsa, yeni ölçüm uyarıları yükü biçimini kabul etmek için bu bildirim uç noktalarını güncelleştirmeniz gerekir.
+Bildirim yükü biçimi, [Klasik uyarı kuralları](alerts-webhooks.md) ve [yeni ölçüm uyarıları](alerts-metric-near-real-time.md#payload-schema)arasında biraz farklıdır. Klasik uyarı kuralları tarafından tetiklenen bir Web kancası, mantıksal uygulama veya Runbook eylemleriniz varsa, bu bildirim uç noktalarını yeni ölçüm uyarılarının yük biçimini kabul edecek şekilde güncelleştirmeniz gerekir.
 
-Klasik biçimi Web kancası yükü alanları yeni biçime eşlemek için aşağıdaki tabloyu kullanın:
+Web kancası yük alanlarını klasik biçimden yeni biçime eşlemek için aşağıdaki tabloyu kullanın:
 
 |  |Klasik uyarılar  |Yeni ölçüm uyarıları |
 |---------|---------|---------|
-|Uyarının etkin veya çözümlenen?    | **status**       | **data.status** |
-|Uyarı hakkında bağlamsal bilgiler     | **Bağlam**        | **Data.Context**        |
-|Zaman damgası, uyarının etkin veya çözümlendi     | **Context.Timestamp**       | **Data.Context.Timestamp**        |
-| Uyarı kuralı kimliği | **Context.id** | **Data.Context.id** |
-| Uyarı kuralı adı | **Context.Name** | **Data.Context.Name** |
-| Uyarı kuralı açıklaması | **Context.Description** | **Data.Context.Description** |
-| Uyarı kuralı koşulu | **Context.condition** | **Data.Context.condition** |
-| Ölçüm adı | **context.condition.metricName** | **data.context.condition.allOf[0].metricName** |
-| Zaman toplama (nasıl ölçüm değerlendirme pencere üzerinde toplanır)| **data.context.condition.timeAggregation** | **data.context.condition.timeAggregation** |
-| Değerlendirme süresi | **context.condition.windowSize** | **data.context.condition.windowSize** |
-| (Nasıl toplanan bir ölçüm değeri eşik karşı karşılaştırılır) işleci | **Context.Condition.operator** | **Data.Context.Condition.operator** |
-| Eşik | **Context.Condition.Threshold** | **data.context.condition.allOf[0].threshold** |
-| Ölçüm değeri | **context.condition.metricValue** | **data.context.condition.allOf[0].metricValue** |
-| Abonelik Kimliği | **context.subscriptionId** | **data.context.subscriptionId** |
-| Etkilenen kaynak kaynak grubu | **context.resourceGroup** | **data.context.resourceGroup** |
-| Etkilenen kaynak adı | **context.resourceName** | **data.context.resourceName** |
-| Etkilenen kaynak türü | **context.resourceType** | **data.context.resourceType** |
-| Etkilenen kaynak kaynak kimliği | **context.resourceId** | **data.context.resourceId** |
-| Portal kaynak Özet sayfasında doğrudan bağlantı | **context.portalLink** | **data.context.portalLink** |
-| Web kancası veya mantıksal uygulamaya geçirilecek özel yük alanları | **Özellikleri** | **Data.Properties** |
+|Uyarı etkinleştirildi veya çözüldü mı?    | **status**       | **Data. Status** |
+|Uyarı hakkında bağlamsal bilgiler     | **bağlam**        | **Data. Context**        |
+|Uyarının etkinleştirildiği veya çözümlendiği zaman damgası     | **Context. Timestamp**       | **Data. Context. Timestamp**        |
+| Uyarı kuralı KIMLIĞI | **context.id** | **data.context.id** |
+| Uyarı kuralı adı | **context.name** | **data.context.name** |
+| Uyarı kuralının açıklaması | **Context. Description** | **Data. Context. Description** |
+| Uyarı kuralı koşulu | **Context. Condition** | **Data. Context. Condition** |
+| Ölçüm adı | **Context. Condition. metricName** | **Data. Context. Condition. allOf [0]. metricName** |
+| Zaman toplama (ölçüm değerlendirme penceresinde nasıl toplanır)| **Context. Condition. Timetoplamasını** | **Context. Condition. Timetoplamasını** |
+| Değerlendirme süresi | **Context. Condition. windowSize** | **Data. Context. Condition. windowSize** |
+| İşleç (toplanan ölçüm değeri eşiğe göre nasıl karşılaştırılır) | **Context. Condition. işleci** | **Data. Context. Condition. işleci** |
+| Eşik | **Context. Condition. Threshold** | **Data. Context. Condition. allOf [0]. eşik** |
+| Ölçüm değeri | **Context. Condition. metricValue** | **Data. Context. Condition. allOf [0]. metricValue** |
+| Abonelik Kimliği | **Context. SubscriptionID** | **Data. Context. SubscriptionID** |
+| Etkilenen kaynağın kaynak grubu | **Context. resourceGroup** | **Data. Context. resourceGroup** |
+| Etkilenen kaynağın adı | **Context. resourceName** | **Data. Context. resourceName** |
+| Etkilenen kaynağın türü | **Context. resourceType** | **Data. Context. resourceType** |
+| Etkilenen kaynağın kaynak KIMLIĞI | **Context. ResourceID** | **Data. Context. ResourceID** |
+| Portal kaynağı özet sayfasına doğrudan bağlantı | **Context. portalLink** | **Data. Context. portalLink** |
+| Web kancası veya mantıksal uygulamaya geçirilecek özel yük alanları | **Özellikleri** | **Data. Properties** |
 
-Gördüğünüz gibi yüklerini benzerdir. Aşağıdaki bölümde sunar:
+, Görebileceğiniz gibi yükleri benzerdir. Aşağıdaki bölümde şunlar sunulmaktadır:
 
-- Mantıksal uygulamalar'yeni biçime ile çalışacak şekilde değiştirme hakkında ayrıntılar.
-- Yeni uyarılar için bildirim yükü ayrıştırmak için bir runbook örneği.
+- Mantıksal uygulamaları yeni biçimle çalışacak şekilde değiştirme hakkında ayrıntılar.
+- Yeni uyarılar için bildirim yükünü çözümleyen bir runbook örneği.
 
-## <a name="modify-a-logic-app-to-receive-a-metric-alert-notification"></a>Bir ölçüm uyarı bildirim almak için bir mantıksal uygulama değiştirme
+## <a name="modify-a-logic-app-to-receive-a-metric-alert-notification"></a>Bir mantıksal uygulamayı ölçüm Uyarısı bildirimi alacak şekilde değiştirme
 
-Logic apps ile klasik uyarıları kullanıyorsanız, yeni ölçüm uyarıları yükü ayrıştırmak için mantıksal uygulama kodunuzu değiştirmeniz gerekir. Şu adımları uygulayın:
+Klasik uyarılarla Logic Apps kullanıyorsanız, yeni ölçüm uyarıları yükünü ayrıştırmak için mantıksal uygulama kodunuzu değiştirmeniz gerekir. Şu adımları uygulayın:
 
 1. Yeni bir mantıksal uygulama oluşturun.
 
-1. "Azure İzleyici – ölçümleri uyarı işleyicisi" şablonu kullanın. Bu şablonda bir **HTTP isteği** içindeki uygun şemayı tanımlanan tetikleyici.
+1. "Azure Izleyici-ölçüm uyarısı Işleyicisi" şablonunu kullanın. Bu şablonda uygun şema tanımlı bir **http isteği** tetikleyicisi vardır.
 
-    ![mantıksal uygulama şablonunu](media/alerts-migration/logic-app-template.png "ölçüm uyarı şablonu")
+    ![Logic-App-şablon](media/alerts-migration/logic-app-template.png "Ölçüm uyarısı şablonu")
 
-1. İşlem mantığınızı barındırmak için bir eylem ekleme.
+1. İşlem mantığınızı barındırmak için bir eylem ekleyin.
 
-## <a name="use-an-automation-runbook-that-receives-a-metric-alert-notification"></a>Ölçüm uyarı bildirim aldığı bir Otomasyon runbook'unu kullanın
+## <a name="use-an-automation-runbook-that-receives-a-metric-alert-notification"></a>Ölçüm uyarı bildirimi alan bir Otomasyon Runbook 'u kullanma
 
-Aşağıdaki örnek, bir runbook'ta kullanmak için PowerShell kodu sağlar. Bu kod yüklerini hem Klasik ölçüm uyarı kuralları hem de yeni ölçüm uyarı kuralları için ayrıştırabilirsiniz.
+Aşağıdaki örnek, runbook 'unuzla kullanmak için PowerShell kodu sağlar. Bu kod, hem klasik ölçüm uyarı kuralları hem de yeni ölçüm uyarısı kuralları için yükleri ayrıştırabilirler.
 
 ```PowerShell
 ## Example PowerShell code to use in a runbook to handle parsing of both classic and new metric alerts.
@@ -151,19 +151,19 @@ else {
 
 ```
 
-Bir sanal makine bir uyarı tetiklendiğinde durduran bir runbook'un tam bir örnek için bkz. [Azure Otomasyonu belgeleri](https://docs.microsoft.com/azure/automation/automation-create-alert-triggered-runbook).
+Bir uyarı tetiklendiğinde bir sanal makineyi durduran runbook 'un tam bir örneği için bkz. [Azure Otomasyonu belgeleri](https://docs.microsoft.com/azure/automation/automation-create-alert-triggered-runbook).
 
 ## <a name="partner-integration-via-webhooks"></a>Web kancaları aracılığıyla iş ortağı tümleştirmesi
 
-Çoğu [Klasik uyarılar ile Birleşen İş Ortaklarımızın](https://docs.microsoft.com/azure/azure-monitor/platform/partners) kendi tümleştirmeler aracılığıyla yeni ölçüm uyarılarının zaten desteklemektedir. Zaten yeni ölçüm uyarılarla çalışma bilinen tümleştirmeleri şunlardır:
+[Klasik uyarılarla tümleştirilen iş ortaklarımızın](https://docs.microsoft.com/azure/azure-monitor/platform/partners) çoğu, tümleştirmelerine göre zaten yeni ölçüm uyarılarını desteklemektedir. Yeni ölçüm uyarıları ile zaten çalışan bilinen tümleştirmeler şunlardır:
 
 - [PagerDuty](https://www.pagerduty.com/docs/guides/azure-integration-guide/)
 - [OpsGenie](https://docs.opsgenie.com/docs/microsoft-azure-integration)
 - [Sıgnl4](https://www.signl4.com/blog/mobile-alert-notifications-azure-monitor/)
 
-Burada listelenmeyen bir iş ortağı tümleştirmesi kullanıyorsanız, tümleştirme sağlayıcı ile Tümleştirmesi ile yeni ölçüm uyarıları çalışır durumda olduğunu doğrulayın.
+Burada listelenmeyen bir iş ortağı tümleştirmesi kullanıyorsanız, tümleştirme sağlayıcısı 'nın yeni ölçüm uyarıları ile çalıştığından emin olun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Geçiş aracını kullanma](alerts-using-migration-tool.md)
-- [Geçiş Aracı nasıl çalıştığını anlamak](alerts-understand-migration.md)
+- [Geçiş aracının nasıl çalıştığını anlama](alerts-understand-migration.md)

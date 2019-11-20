@@ -1,6 +1,6 @@
 ---
-title: Apache Storm - Azure Event Hubs kullanarak olay alma | Microsoft Docs
-description: Bu makalede Apache Storm kullanarak olayları Azure Event Hubs'dan olay alma konusunda bilgi sağlanır.
+title: 'Hızlı başlangıç: Apache Storm Azure Event Hubs kullanarak olay alma'
+description: 'Hızlı başlangıç: Bu makalede, Azure Event Hubs Apache Storm kullanarak nasıl olay alınacağı hakkında bilgi sağlanır.'
 services: event-hubs
 documentationcenter: ''
 author: ShubhaVijayasarathy
@@ -11,44 +11,44 @@ ms.service: event-hubs
 ms.workload: na
 ms.tgt_pltfrm: java
 ms.devlang: multiple
-ms.topic: article
+ms.topic: quickstart
 ms.custom: seodec18
-ms.date: 12/06/2018
+ms.date: 11/05/2019
 ms.author: shvija
-ms.openlocfilehash: 75a96127c48186befc48b2240f78e49cd5914239
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 90293da07d3a7ef1c32e5f82d35198d4ffa536b1
+ms.sourcegitcommit: bc7725874a1502aa4c069fc1804f1f249f4fa5f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60343430"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73717617"
 ---
-# <a name="receive-events-from-event-hubs-using-apache-storm"></a>Apache Storm kullanarak Event Hubs'dan olayları alma
+# <a name="quickstart-receive-events-from-event-hubs-using-apache-storm"></a>Hızlı başlangıç: Event Hubs Apache Storm kullanarak olay alma
 
-[Apache Storm](https://storm.incubator.apache.org) güvenilir işlenmesini sınırsız veri akışlarını basitleştiren bir dağıtılmış gerçek zamanlı bir hesaplama sistemidir. Bu bölümde, olayları Event Hubs'dan olay almak için bir Azure olay hub'ları Storm spout kullanmayı gösterir. Apache Storm kullanan, farklı düğümlerde barındırılan birden çok işlem arasında olayları bölebilirsiniz. Storm ile Event Hubs tümleştirme olay tüketiminin şeffaf bir şekilde denetim noktası tarafından Storm'ın Zookeeper yükleme, kalıcı denetim noktalarını yönetme, ilerleme durumunu basitleştirir ve paralel Event Hubs'dan alır.
+[Apache Storm](https://storm.incubator.apache.org) , sınırsız miktarda veri akışının güvenilir işlemesini kolaylaştıran dağıtılmış bir gerçek zamanlı hesaplama sistemidir. Bu bölümde, Event Hubs olayları almak için Azure Event Hubs fırtınası Spout kullanımı gösterilmektedir. Apache Storm kullanarak, olayları farklı düğümlerde barındırılan birden çok işlem arasında ayırabilirsiniz. Event Hubs tümleştirme, fırtınası Zookeeper yüklemesi kullanarak ilerleme durumunu saydam bir şekilde işaretleyerek, kalıcı denetim noktaları ve Event Hubs paralel alma işlemlerini yönetebilir.
 
-Event Hubs hakkında daha fazla bilgi için desenler almak için bkz: [Event Hubs'a genel bakış][Event Hubs overview].
+Event Hubs alma desenleri hakkında daha fazla bilgi için bkz. [Event Hubs genel bakış][Event Hubs overview].
 
-## <a name="prerequisites"></a>Önkoşullar
-Hızlı Başlangıç ile başlamadan önce **bir Event Hubs ad alanı ve bir olay hub'ı oluşturma**. Kullanım [Azure portalında](https://portal.azure.com) Event Hubs türünde bir ad alanı oluşturma, ardından uygulamanızın olay hub'ı ile iletişim kurmak için gereken yönetim kimlik bilgilerini edinin. Bir ad alanı ve olay hub'ı oluşturmak için verilen yordamı izleyin [bu makalede](event-hubs-create.md). 
+## <a name="prerequisites"></a>Ön koşullar
+Hızlı başlangıç ile başlamadan önce **bir Event Hubs ad alanı ve bir olay hub 'ı oluşturun**. Event Hubs türünde bir ad alanı oluşturmak ve uygulamanızın Olay Hub 'ı ile iletişim kurması için gereken yönetim kimlik bilgilerini almak için [Azure Portal](https://portal.azure.com) kullanın. Bir ad alanı ve Olay Hub 'ı oluşturmak için [Bu makaledeki](event-hubs-create.md)yordamı izleyin. 
 
 ## <a name="create-project-and-add-code"></a>Proje oluşturma ve kod ekleme
 
-Bu öğreticide bir [HDInsight Storm] [ HDInsight Storm] zaten kullanılabilir Event Hubs spout ile birlikte gelen yükleme.
+Bu öğretici, zaten kullanılabilir Event Hubs Spout ile birlikte gelen bir [HDInsight fırtınası][HDInsight Storm] yüklemesi kullanır.
 
-1. İzleyin [HDInsight Storm - Get Started](../hdinsight/storm/apache-storm-overview.md) yeni bir HDInsight kümesi oluşturma ve Uzak Masaüstü aracılığıyla bağlanmak için yordamı.
-2. Kopyalama `%STORM_HOME%\examples\eventhubspout\eventhubs-storm-spout-0.9-jar-with-dependencies.jar` yerel geliştirme ortamınıza dosya. Bu olayları storm spout içerir.
-3. Paketi yerel Maven deposuna yüklemek için aşağıdaki komutu kullanın. Bu, sonraki bir adımda Storm projedeki bir başvuruyu olarak eklemenize olanak sağlar.
+1. Yeni bir HDInsight kümesi oluşturmak ve Uzak Masaüstü aracılığıyla buna bağlanmak için [HDInsight fırtınası-başlangıç](../hdinsight/storm/apache-storm-overview.md) yordamını izleyin.
+2. `%STORM_HOME%\examples\eventhubspout\eventhubs-storm-spout-0.9-jar-with-dependencies.jar` dosyasını yerel geliştirme ortamınıza kopyalayın. Bu,-fırtınası-Spout olaylarını içerir.
+3. Paketi yerel Maven deposuna yüklemek için aşağıdaki komutu kullanın. Bu, daha sonraki bir adımda bunu, fırtınası projesine bir başvuru olarak eklemenize olanak sağlar.
 
     ```shell
     mvn install:install-file -Dfile=target\eventhubs-storm-spout-0.9-jar-with-dependencies.jar -DgroupId=com.microsoft.eventhubs -DartifactId=eventhubs-storm-spout -Dversion=0.9 -Dpackaging=jar
     ```
-4. Eclipse'te, yeni bir Maven projesi oluşturun (tıklayın **dosya**, ardından **yeni**, ardından **proje**).
+4. Çakışan Küreler, yeni bir Maven projesi oluşturun ( **Dosya**, sonra **Yeni**ve **Proje**).
    
-    ![Dosya -> Yeni Proje ->][12]
-5. Seçin **varsayılan çalışma alanı konumu kullanın**, ardından **İleri**
-6. Seçin **maven archetype hızlı** archetype, ardından **İleri**
-7. INSERT bir **GroupID** ve **Artifactıd**, ardından **son**
-8. İçinde **pom.xml**, aşağıdaki bağımlılıkları ekleyin `<dependency>` düğümü.
+    ![Dosya-> Yeni > projesi][12]
+5. **Varsayılan çalışma alanı konumunu kullan**öğesini seçin ve ardından **İleri** ' ye tıklayın
+6. **Maven-arşiv ETYPE-hızlı başlangıç** arşiv ETYPE ' ı seçin ve **İleri** ' ye tıklayın.
+7. Bir **GroupID** ve **ArtifactId**yerleştirip **son** ' a tıklayın.
+8. **Pod. xml**dosyasında, `<dependency>` düğümüne aşağıdaki bağımlılıkları ekleyin.
 
     ```xml  
     <dependency>
@@ -80,7 +80,7 @@ Bu öğreticide bir [HDInsight Storm] [ HDInsight Storm] zaten kullanılabilir E
     </dependency>
     ```
 
-9. İçinde **src** klasöründe adlı bir dosya oluşturun **Config.properties** ve aşağıdakini kopyalayın değiştirerek içerik `receive rule key` ve `event hub name` değerleri:
+9. **Src** klasöründe, **config. Properties** adlı bir dosya oluşturun ve `receive rule key` ve `event hub name` değerlerini değiştirerek aşağıdaki içeriği kopyalayın:
 
     ```java
     eventhubspout.username = ReceiveRule
@@ -95,8 +95,8 @@ Bu öğreticide bir [HDInsight Storm] [ HDInsight Storm] zaten kullanılabilir E
     eventhubspout.checkpoint.interval = 10
     eventhub.receiver.credits = 10
     ```
-    Değeri **eventhub.receiver.credits** Storm işlem hattına bırakmadan önce kaç tane olay toplu belirler. Basitleştirmek amacıyla, bu örnekte bu değer 10'a ayarlar. Üretim ortamında, bunu genellikle yüksek değerler için ayarlanmalıdır; Örneğin, 1024.
-10. Adlı yeni bir sınıf oluşturma **LoggerBolt** aşağıdaki kod ile:
+    **Eventhub. alıcının. kredilerin** değeri, bu nesneleri bir fırtınası işlem hattına serbest bırakmadan önce toplu olarak kaç olay için toplu olarak belirler. Basitlik sağlamak için bu örnek, bu değeri 10 olarak ayarlar. Üretimde, genellikle daha yüksek değerlere ayarlanmalıdır; Örneğin, 1024.
+10. Aşağıdaki kodla **Loggerrulname** adlı yeni bir sınıf oluşturun:
     
     ```java
     import java.util.Map;
@@ -135,8 +135,8 @@ Bu öğreticide bir [HDInsight Storm] [ HDInsight Storm] zaten kullanılabilir E
     }
     ```
     
-    Bu Storm bolt, alınan olayların içeriğini günlüğe kaydeder. Bu kolayca bir depolama hizmetine tanımlama grupları depolamak için genişletilebilir. [Olay hub'ı örneği ile HDInsight Storm] Azure depolama ve Power BI ile verileri depolamak için bu yaklaşımı kullanır.
-11. Adlı bir sınıf oluşturmak **LogTopology** aşağıdaki kod ile:
+    Bu fırtınası, alınan olayların içeriğini günlüğe kaydeder. Bu, tanımlama gruplarını bir depolama hizmetinde depolamak için kolayca genişletilebilir. [Olay Hub 'ı ile HDInsight fırtınası örneği] , verileri Azure depolama 'ya ve Power BI depolamak için aynı yaklaşımı kullanır.
+11. Aşağıdaki kodla **Logtopology** adlı bir sınıf oluşturun:
     
     ```java
     import java.io.FileReader;
@@ -240,19 +240,19 @@ Bu öğreticide bir [HDInsight Storm] [ HDInsight Storm] zaten kullanılabilir E
     }
     ```
 
-    Bu sınıfın örneğini başlatmak için yapılandırma dosyasında özelliklerini kullanarak yeni bir Event Hubs spout oluşturur. Bu örnek çok spout görevleri olarak olay hub'ındaki bölüm sayısı, olay hub'ı tarafından izin verilen en büyük paralellik kullanmak için oluşturduğu dikkat edin önemlidir.
+    Bu sınıf, yeni bir Event Hubs Spout oluşturur ve bu, yapılandırma dosyasındaki özellikleri kullanarak başlatır. Bu örnek, bu olay hub 'ında izin verilen en büyük paralelliği kullanmak için, Olay Hub 'ındaki bölüm sayısı olarak çok sayıda Spout görevi oluşturduğunu unutmayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Aşağıdaki bağlantıları inceleyerek Event Hubs hakkında daha fazla bilgi edinebilirsiniz:
 
-* [Event Hubs'a genel bakış][Event Hubs overview]
+* [Event Hubs’a genel bakış][Event Hubs overview]
 * [Olay Hub’ı oluşturma](event-hubs-create.md)
 * [Event Hubs ile ilgili SSS](event-hubs-faq.md)
 
 <!-- Links -->
 [Event Hubs overview]: event-hubs-what-is-event-hubs.md
 [HDInsight Storm]: ../hdinsight/storm/apache-storm-overview.md
-[Olay hub'ı örneği ile HDInsight Storm]: https://azure.microsoft.com/resources/samples/hdinsight-java-storm-eventhub/
+[Olay Hub 'ı ile HDInsight fırtınası örneği]: https://github.com/Azure-Samples/hdinsight-java-storm-eventhub
 
 <!-- Images -->
 

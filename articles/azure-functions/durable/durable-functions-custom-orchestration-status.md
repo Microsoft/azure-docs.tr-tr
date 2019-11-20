@@ -1,60 +1,62 @@
 ---
-title: Dayanıklı işlevler - Azure özel düzenleme durumu
-description: Yapılandırma ve dayanıklı işlevler için özel düzenleme durumu kullanma hakkında bilgi edinin.
+title: Dayanıklı İşlevler özel düzenleme durumu-Azure
+description: Dayanıklı İşlevler için özel düzenleme durumunu yapılandırmayı ve kullanmayı öğrenin.
 services: functions
 author: ggailey777
 manager: jeconnoc
 keywords: ''
 ms.service: azure-functions
-ms.devlang: multiple
 ms.topic: conceptual
-ms.date: 12/07/2018
+ms.date: 11/02/2019
 ms.author: azfuncdf
-ms.openlocfilehash: 8d36c797e80702302a1954d2f00e1e4daabcaa88
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d3b3ee1fabf59ae3b87185c4c9eb2f85aa8acd91
+ms.sourcegitcommit: b2fb32ae73b12cf2d180e6e4ffffa13a31aa4c6f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60710009"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73614918"
 ---
-# <a name="custom-orchestration-status-in-durable-functions-azure-functions"></a>Dayanıklı işlevler (Azure işlevleri) özel düzenleme durumu
+# <a name="custom-orchestration-status-in-durable-functions-azure-functions"></a>Dayanıklı İşlevler özel düzenleme durumu (Azure Işlevleri)
 
-Özel düzenleme durumu orchestrator işleviniz için bir özel durum değeri ayarlamanıza olanak tanır. Bu durum HTTP GetStatus API aracılığıyla sağlanan veya `DurableOrchestrationClient.GetStatusAsync` API.
+Özel düzenleme durumu, Orchestrator işleviniz için özel bir durum değeri ayarlamanıza olanak sağlar. Bu durum HTTP GetStatus API 'SI veya `DurableOrchestrationClient.GetStatusAsync` API 'SI aracılığıyla sağlanır.
 
-## <a name="sample-use-cases"></a>Örnek kullanım durumları
+## <a name="sample-use-cases"></a>Örnek kullanım örnekleri
 
-### <a name="visualize-progress"></a>İlerleme durumunu görselleştirin
+> [!NOTE]
+> Aşağıdaki örnekler, ve JavaScript içinde C# özel durum özelliğinin nasıl kullanılacağını göstermektedir. Örnekler C# , dayanıklı işlevler 2. x için yazılmıştır ve dayanıklı işlevler 1. x ile uyumlu değildir. Sürümler arasındaki farklılıklar hakkında daha fazla bilgi için [dayanıklı işlevler sürümler](durable-functions-versions.md) makalesine bakın.
 
-İstemciler, durum uç noktası yoklama ve ilerleme durumunu görselleştirir geçerli yürütme aşaması UI görüntüleme. Aşağıdaki örnek paylaşımı ilerleme durumunu gösterir:
+### <a name="visualize-progress"></a>İlerlemeyi görselleştirin
+
+İstemciler, durum bitiş noktasını yoklayabilirler ve geçerli yürütme aşamasını görselleştirtiren bir ilerleme Kullanıcı arabirimi görüntüleyebilir. Aşağıdaki örnek ilerleme paylaşımını gösterir:
 
 #### <a name="c"></a>C#
 
 ```csharp
 [FunctionName("E1_HelloSequence")]
 public static async Task<List<string>> Run(
-  [OrchestrationTrigger] DurableOrchestrationContextBase context)
+    [OrchestrationTrigger] IDurableOrchestrationContext context)
 {
-  var outputs = new List<string>();
+    var outputs = new List<string>();
 
-  outputs.Add(await context.CallActivityAsync<string>("E1_SayHello", "Tokyo"));
-  context.SetCustomStatus("Tokyo");
-  outputs.Add(await context.CallActivityAsync<string>("E1_SayHello", "Seattle"));
-  context.SetCustomStatus("Seattle");
-  outputs.Add(await context.CallActivityAsync<string>("E1_SayHello", "London"));
-  context.SetCustomStatus("London");
+    outputs.Add(await context.CallActivityAsync<string>("E1_SayHello", "Tokyo"));
+    context.SetCustomStatus("Tokyo");
+    outputs.Add(await context.CallActivityAsync<string>("E1_SayHello", "Seattle"));
+    context.SetCustomStatus("Seattle");
+    outputs.Add(await context.CallActivityAsync<string>("E1_SayHello", "London"));
+    context.SetCustomStatus("London");
 
-  // returns ["Hello Tokyo!", "Hello Seattle!", "Hello London!"]
-  return outputs;
+    // returns ["Hello Tokyo!", "Hello Seattle!", "Hello London!"]
+    return outputs;
 }
 
 [FunctionName("E1_SayHello")]
 public static string SayHello([ActivityTrigger] string name)
 {
-  return $"Hello {name}!";
+    return $"Hello {name}!";
 }
 ```
 
-#### <a name="javascript-functions-2x-only"></a>JavaScript (yalnızca 2.x işlevleri)
+#### <a name="javascript-functions-20-only"></a>JavaScript (yalnızca Işlevler 2,0)
 
 ```javascript
 const df = require("durable-functions");
@@ -80,17 +82,17 @@ module.exports = async function(context, name) {
 };
 ```
 
-Ve ardından istemci düzenleme çıktısını alır yalnızca `CustomStatus` alan "London" için ayarlanır:
+Daha sonra istemci, düzenleme çıktısını yalnızca `CustomStatus` alan "Londra" olarak ayarlandığında alır:
 
 #### <a name="c"></a>C#
 
 ```csharp
 [FunctionName("HttpStart")]
 public static async Task<HttpResponseMessage> Run(
-  [HttpTrigger(AuthorizationLevel.Function, methods: "post", Route = "orchestrators/{functionName}")] HttpRequestMessage req,
-  [OrchestrationClient] DurableOrchestrationClientBase starter,
-  string functionName,
-  ILogger log)
+    [HttpTrigger(AuthorizationLevel.Function, methods: "post", Route = "orchestrators/{functionName}")] HttpRequestMessage req,
+    [DurableClient] IDurableOrchestrationClient starter,
+    string functionName,
+    ILogger log)
 {
     // Function input comes from the request content.
     dynamic eventData = await req.Content.ReadAsAsync<object>();
@@ -101,13 +103,13 @@ public static async Task<HttpResponseMessage> Run(
     DurableOrchestrationStatus durableOrchestrationStatus = await starter.GetStatusAsync(instanceId);
     while (durableOrchestrationStatus.CustomStatus.ToString() != "London")
     {
-      await Task.Delay(200);
-      durableOrchestrationStatus = await starter.GetStatusAsync(instanceId);
+        await Task.Delay(200);
+        durableOrchestrationStatus = await starter.GetStatusAsync(instanceId);
     }
 
     HttpResponseMessage httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
     {
-      Content = new StringContent(JsonConvert.SerializeObject(durableOrchestrationStatus))
+        Content = new StringContent(JsonConvert.SerializeObject(durableOrchestrationStatus))
     };
 
     return httpResponseMessage;
@@ -115,7 +117,7 @@ public static async Task<HttpResponseMessage> Run(
 }
 ```
 
-#### <a name="javascript-functions-2x-only"></a>JavaScript (yalnızca 2.x işlevleri)
+#### <a name="javascript-functions-20-only"></a>JavaScript (yalnızca Işlevler 2,0)
 
 ```javascript
 const df = require("durable-functions");
@@ -145,21 +147,18 @@ module.exports = async function(context, req) {
 ```
 
 > [!NOTE]
-> JavaScript'te `customStatus` ne zaman alan ayarlanacak sonraki `yield` veya `return` eylem zamanlandı.
+> JavaScript 'te, `customStatus` alanı bir sonraki `yield` veya `return` eylemi zamanlandığında ayarlanır.
 
-> [!WARNING]
-> JavaScript içinde yerel olarak geliştirirken, ortam değişkenini ayarlamak gerekir `WEBSITE_HOSTNAME` için `localhost:<port>`, örn. `localhost:7071` yöntemleri kullanmak üzere `DurableOrchestrationClient`. Bu gereksinim hakkında daha fazla bilgi için bkz. [GitHub sorunu](https://github.com/Azure/azure-functions-durable-js/issues/28).
+### <a name="output-customization"></a>Çıkış özelleştirmesi
 
-### <a name="output-customization"></a>Çıkış özelleştirme
-
-Başka bir ilgi çekici senaryo kullanıcıları benzersiz özellikleri veya etkileşimler göre özelleştirilmiş çıkış döndürerek kesimlere. Özel düzenleme durumu yardımıyla, istemci tarafı kod genel olarak kalır. Aşağıdaki örnekte gösterildiği gibi tüm ana değişiklikleri sunucu tarafında gerçekleşir:
+Farklı bir ilginç senaryo, benzersiz özelliklere veya etkileşimlere göre özelleştirilmiş çıktı döndürerek kullanıcıları bölümleyerek. Özel düzenleme durumunun yardımıyla, istemci tarafı kodu genel kalır. Aşağıdaki örnekte gösterildiği gibi, tüm ana değişiklikler sunucu tarafında gerçekleşir:
 
 #### <a name="c"></a>C#
 
 ```csharp
 [FunctionName("CityRecommender")]
 public static void Run(
-  [OrchestrationTrigger] DurableOrchestrationContextBase context)
+  [OrchestrationTrigger] IDurableOrchestrationContext context)
 {
   int userChoice = context.GetInput<int>();
 
@@ -192,7 +191,7 @@ public static void Run(
 }
 ```
 
-#### <a name="javascript-functions-2x-only"></a>JavaScript (yalnızca 2.x işlevleri)
+#### <a name="javascript-functions-20-only"></a>JavaScript (yalnızca Işlevler 2,0)
 
 ```javascript
 const df = require("durable-functions");
@@ -225,16 +224,16 @@ module.exports = df.orchestrator(function*(context) {
 });
 ```
 
-### <a name="instruction-specification"></a>Yönergesi belirtimi
+### <a name="instruction-specification"></a>Yönerge belirtimi
 
-Orchestrator, özel bir durum aracılığıyla istemcilere benzersiz yönergeler sağlayabilir. Özel durum yönergeleri düzenleme kodunda adımlarla eşlenir:
+Orchestrator, istemcilere özel durum aracılığıyla benzersiz yönergeler verebilir. Özel durum yönergeleri Orchestration kodundaki adımlara eşlenir:
 
 #### <a name="c"></a>C#
 
 ```csharp
 [FunctionName("ReserveTicket")]
 public static async Task<bool> Run(
-  [OrchestrationTrigger] DurableOrchestrationContextBase context)
+  [OrchestrationTrigger] IDurableOrchestrationContext context)
 {
   string userId = context.GetInput<string>();
 
@@ -257,7 +256,7 @@ public static async Task<bool> Run(
 }
 ```
 
-#### <a name="javascript-functions-2x-only"></a>JavaScript (yalnızca 2.x işlevleri)
+#### <a name="javascript-functions-20-only"></a>JavaScript (yalnızca Işlevler 2,0)
 
 ```javascript
 const df = require("durable-functions");
@@ -286,12 +285,12 @@ module.exports = df.orchestrator(function*(context) {
 
 ## <a name="sample"></a>Örnek
 
-Aşağıdaki örnekte, özel durumu ilk olarak ayarlanır;
+Aşağıdaki örnekte, önce özel durum ayarlanır;
 
 ### <a name="c"></a>C#
 
 ```csharp
-public static async Task SetStatusTest([OrchestrationTrigger] DurableOrchestrationContext context)
+public static async Task SetStatusTest([OrchestrationTrigger] IDurableOrchestrationContext context)
 {
     // ...do work...
 
@@ -303,7 +302,7 @@ public static async Task SetStatusTest([OrchestrationTrigger] DurableOrchestrati
 }
 ```
 
-### <a name="javascript-functions-2x-only"></a>JavaScript (yalnızca 2.x işlevleri)
+### <a name="javascript-functions-20-only"></a>JavaScript (yalnızca Işlevler 2,0)
 
 ```javascript
 const df = require("durable-functions");
@@ -319,30 +318,29 @@ module.exports = df.orchestrator(function*(context) {
 });
 ```
 
-Düzenleme devam ederken, dış istemcilere bu özel durum getirebilirsiniz:
+Düzenleme çalışırken, dış istemciler şu özel durumu getirebilir:
 
 ```http
-GET /admin/extensions/DurableTaskExtension/instances/instance123
-
+GET /runtime/webhooks/durabletask/instances/instance123
 ```
 
-İstemcileri şu yanıtı alırsınız:
+İstemciler aşağıdaki yanıtı alır:
 
-```http
+```json
 {
   "runtimeStatus": "Running",
   "input": null,
   "customStatus": { "nextActions": ["A", "B", "C"], "foo": 2 },
   "output": null,
-  "createdTime": "2017-10-06T18:30:24Z",
-  "lastUpdatedTime": "2017-10-06T19:40:30Z"
+  "createdTime": "2019-10-06T18:30:24Z",
+  "lastUpdatedTime": "2019-10-06T19:40:30Z"
 }
 ```
 
 > [!WARNING]
-> Bir Azure tablo depolama sütuna sığamayacak kadar olması gerektiğinden, özel durum yükü 16 KB olarak UTF-16 JSON metnini sınırlıdır. Bunlar daha büyük yükü gerekirse geliştiriciler dış depolama kullanabilir.
+> Özel durum yükü, bir Azure Tablo depolama sütununa sığamayacak olması gerektiğinden, 16 KB 'lık UTF-16 JSON metniyle sınırlandırılmıştır. Daha büyük bir yük gerekiyorsa, dış depolama kullanmanızı öneririz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Dayanıklı işlevler HTTP API'leri hakkında bilgi edinin](durable-functions-http-api.md)
+> [Dayanıklı zamanlayıcılar hakkında bilgi edinin](durable-functions-timers.md)

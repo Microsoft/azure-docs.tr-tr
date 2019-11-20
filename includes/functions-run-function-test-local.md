@@ -9,24 +9,37 @@ ms.topic: include
 ms.date: 10/20/2018
 ms.author: glenga
 ms.custom: include file
-ms.openlocfilehash: 74e14e36b1ac0979da31203a2d16e2396ed821d0
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: dcfa65c655d1508510282fe66e90e4076278b29b
+ms.sourcegitcommit: 78ebf29ee6be84b415c558f43d34cbe1bcc0b38a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188145"
+ms.lasthandoff: 08/12/2019
+ms.locfileid: "68950004"
 ---
 ## <a name="run-the-function-locally"></a>İşlevi yerel olarak çalıştırma
 
-Aşağıdaki komut işlev uygulamasını başlatır. Uygulama, Azure’daki Azure İşlevleri çalışma zamanını kullanarak çalışır.
+Aşağıdaki komut işlev uygulamasını başlatır. Uygulama, Azure’daki Azure İşlevleri çalışma zamanını kullanarak çalışır. Başlat komutu, Proje dilinize bağlı olarak farklılık gösterir.
 
-```bash
-func host start --build
+### <a name="c"></a>C\#
+
+```command
+func start --build
 ```
 
-C# projeleri derlemek için `--build` seçeneği gereklidir. JavaScript projesi için bu seçeneğe ihtiyacınız yoktur.
+### <a name="javascript"></a>JavaScript
 
-İşlevler ana bilgisayarı başlatıldığında, kolay okunması için kırpılmış olan aşağıdaki çıktıya benzer bir şey yazar:
+```command
+func start
+```
+
+### <a name="typescript"></a>TypeScript
+
+```command
+npm install
+npm start     
+```
+
+Işlevlerin ana bilgisayarı başlatıldığında, okunabilirlik için kesilmiş olan aşağıdaki çıktıya benzer bir şey yazar:
 
 ```output
 

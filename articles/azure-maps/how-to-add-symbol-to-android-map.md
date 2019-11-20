@@ -1,6 +1,6 @@
 ---
-title: Android sembol katmana eşler Azure haritalar içinde ekleyin | Microsoft Docs
-description: Azure haritalar Android SDK'sını kullanarak bir harita için simgeler ekleme
+title: Azure haritalar 'da Android Maps 'a bir sembol katmanı ekleme | Microsoft Docs
+description: Azure haritalar kullanarak bir haritaya semboller ekleme Android SDK
 author: walsehgal
 ms.author: v-musehg
 ms.date: 04/26/2019
@@ -8,26 +8,26 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: add6e23d023753e217c102dc946837a71a64c781
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 0292c8a441589a01241fbef6923246b4bcafb5c8
+ms.sourcegitcommit: 62bd5acd62418518d5991b73a16dca61d7430634
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64871085"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68976254"
 ---
-# <a name="add-a-symbol-layer-to-a-map-using-azure-maps-android-sdk"></a>Azure haritalar Android SDK'sını kullanarak bir harita için bir simge katmanı Ekle
+# <a name="add-a-symbol-layer-to-a-map-using-azure-maps-android-sdk"></a>Azure haritalar 'ı kullanarak haritaya bir sembol katmanı ekleme Android SDK
 
-Bu makalede Azure haritalar Android SDK'sını kullanarak bir harita üzerinde bir sembol katmanı olarak bir veri kaynağından veri noktası nasıl oluşturulacağını gösterir.
+Bu makalede, Azure Maps Android SDK kullanarak bir harita üzerinde sembol katmanı olarak bir veri kaynağındaki nokta verilerinin nasıl işleneceğini gösterir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu makaledeki adımları tamamen uygulamaya yüklemeniz gerekir [Azure haritalar Android SDK'sı](https://docs.microsoft.com/azure/azure-maps/how-to-use-android-map-control-library) bir haritayı yükleyin.
+Bu makaledeki adımları tamamen izlemek için, bir harita yüklemek üzere [Azure Maps Android SDK](https://docs.microsoft.com/azure/azure-maps/how-to-use-android-map-control-library) yüklemeniz gerekir.
 
 ## <a name="add-a-symbol-layer"></a>Sembol katmanı ekleme
 
-Bir işaretçi simge katmanını kullanarak haritaya eklemek için aşağıdaki adımları izleyin:
+Sembol katmanını kullanarak haritada bir işaretleyici eklemek için aşağıdaki adımları izleyin:
 
-1. Düzen **res** > **Düzen** > **activity_main.xml** aşağıdaki XML gibi görünür:
+1. Şu XML gibi görünmesi için **res** > **düzeni** > **activity_main. xml** ' i düzenleyin:
     
     ```XML
     <?xml version="1.0" encoding="utf-8"?>
@@ -50,7 +50,7 @@ Bir işaretçi simge katmanını kullanarak haritaya eklemek için aşağıdaki 
     </FrameLayout>
     ```
 
-2. Aşağıdaki kod parçacığını kopyalayıp kopyalama **onCreate()** yöntemi, `MainActivity.java` sınıfı.
+2. Aşağıdaki kod parçacığını `MainActivity.java` sınıfınızın **OnCreate ()** yöntemine kopyalayın.
 
     ```Java
     mapControl.onReady(map -> {
@@ -72,9 +72,9 @@ Bir işaretçi simge katmanını kullanarak haritaya eklemek için aşağıdaki 
     
     ```
     
-    Yukarıdaki kod parçacığında, ilk Azure haritalar eşleme denetimi kullanarak bir örneği alır **onReady()** geri çağırma yöntemi. Ardından bir veri kaynağı nesnesi kullanılarak oluşturur **DataSource** sınıfı ve haritayı ekler. Ardından ekler bir **özellik** bir noktası geometriye içeren. Kırmızı işaret resmi ardından simge için simge olarak ayarlanır. A **sembol katman** metin veya simge harita üzerinde bir sembol olarak veri kaynağında sarmalanmış noktası tabanlı veri işleme için kullanır. Sembol katman sonra oluşturulur ve veri kaynağını oluşturmak için geçirilen ve sonra haritanın katmanlarını eklenir.
+    Yukarıdaki kod parçacığı ilk olarak, **Onready ()** geri çağırma yöntemini kullanarak bir Azure haritalar harita denetim örneği edinir. Daha sonra **DataSource** sınıfını kullanarak bir veri kaynağı nesnesi oluşturur ve bunu haritaya ekler. Ardından bir nokta geometrisi içeren bir **özellik** ekler. Kırmızı bir işaret resmi, ardından sembol için simge olarak ayarlanır. Bir **sembol katmanı** , veri kaynağında kaydırılan nokta tabanlı verileri haritada sembol olarak işlemek için metin veya simgeleri kullanır. Daha sonra bir sembol katmanı oluşturulur ve veri kaynağı işlemek için iletilir ve sonra haritanın katmanlarına eklenir.
     
-    Yukarıdaki kod parçacığı eklendikten sonra `MainActivity.java` bir aşağıdaki gibi görünmelidir:
+    Yukarıdaki `MainActivity.java` kod parçacığını ekledikten sonra aşağıdaki gibi görünmelidir:
     
     ```Java
     package com.example.myapplication;
@@ -166,16 +166,19 @@ Bir işaretçi simge katmanını kullanarak haritaya eklemek için aşağıdaki 
     }
     ```
     
-Uygulamanızı çalıştırırsanız bu noktada, bir işaretçi harita üzerinde burada gösterildiği gibi görmeniz gerekir:
+Bu noktada, uygulamanızı çalıştırırsanız burada gösterildiği gibi haritada bir işaret görmeniz gerekir:
 
 <center>
 
-![Android harita raptiyesini](./media/how-to-add-symbol-to-android-map/android-map-pin.png)</center>
+![Android eşleme PIN 'i](./media/how-to-add-symbol-to-android-map/android-map-pin.png)</center>
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla şey haritanıza eklemek için bkz:
+Haritanızda daha fazla bilgi eklemek için bkz.:
 
 > [!div class="nextstepaction"]
-> [Bir Android eşlemesine şekiller ekleme](https://docs.microsoft.com/azure/azure-maps/how-to-add-shapes-to-android-map)
+> [Android haritasına şekil ekleme](https://docs.microsoft.com/azure/azure-maps/how-to-add-shapes-to-android-map)
+
+> [!div class="nextstepaction"]
+> [Özellik bilgilerini görüntüle](display-feature-information-android.md)

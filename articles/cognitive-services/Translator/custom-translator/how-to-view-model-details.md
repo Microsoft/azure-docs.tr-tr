@@ -1,96 +1,96 @@
 ---
-title: Model - özel Translator ayrıntılarına bakın
+title: Model ayrıntılarını görüntüleme-özel çevirici
 titleSuffix: Azure Cognitive Services
-description: Modelleri sekmesinde herhangi bir projeyi altında model adı, model durumu, eğitim, ayarlama, test cümle sayısı BLEU puanı, her model ayrıntılarını gösterir.
+description: Herhangi bir proje altındaki modeller sekmesi model adı, model durumu, BLEU puanı, eğitim, ayarlama ve test tümcesi sayısı gibi her bir modelin ayrıntılarını gösterir.
 author: swmachan
-manager: christw
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.date: 02/21/2019
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: 92f5275b85b4a257e8841f43424d356db702cacd
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 64f446c3b331c1aa6ddaae9081b7f61943f74ab2
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67442463"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68595573"
 ---
 # <a name="view-model-details"></a>Model ayrıntılarını görüntüleme
 
-Proje modelleri sekmesinde tüm modelleri projede gösterir. Tüm modeller için proje bu sekmede listelenen eğitim.
+Proje altındaki modeller sekmesi, bu projedeki tüm modelleri gösterir. Bu proje için eğitilen tüm modeller bu sekmede listelenmiştir.
 
 Projedeki her model için bu ayrıntılar görüntülenir.
 
-1.  Model adı: Belirli bir model model adını gösterir.
+1.  Model adı: Belirli bir modelin model adını gösterir.
 
-2.  Durum: Belirli bir model durumunu gösterir. Kabul edilinceye kadar yeni eğitim gönderildi durumuna sahip. Belgelerinizi içeriğini hizmet tarafından değerlendirilir olsa veri işleme durumu değişir. Belgelerinizi değerlendirmesi tamamlandıktan sonra çalışan durumu değişir ve mümkün olacaktır, eğitim ve sınama ayarlama dahil, bir parçası olan cümleler sayısını ayarlar bakın sizin için otomatik olarak oluşturulur. Model durumunu açıklayan model durumu listesi aşağıdadır.
+2.  Durum: Belirli bir modelin durumunu gösterir. Yeni eğitiminizi kabul edilene kadar gönderildi durumuna sahip olur. Hizmet belgelerinizin içeriğini değerlendirirken durum veri işleme olarak değişir. Belgelerinizin değerlendirmesi tamamlandığında durum çalışır olarak değişir ve sizin için otomatik olarak oluşturulan ayarlama ve test kümeleri de dahil olmak üzere eğitimin parçası olan Tümcelerin sayısını görebilirsiniz. Modellerin durumunu açıklayan model durumunun listesi aşağıda verilmiştir.
 
-    -  Gönderilme tarihi: Arka uç bu modeli belgeleri işliyor belirtir.
+    -  Gönderme Arka ucun bu modelin belgelerini işleme olduğunu belirtir.
 
-    -  TrainingQueued: Eğitim MT sisteme bu model için sıraya alınıyor olduğunu belirtir.
+    -  Sıraya alındı: Eğitimin bu model için MT sistemine sıraya konmakta olduğunu belirtir.
 
-    -  Çalıştıran: MT sisteminde bu modeli için eğitim çalıştığını belirtir.
+    -  Çalışıyor: Eğitimin bu model için MT sisteminde çalıştığını belirtir.
 
-    -  Başarılı: MT sistemde eğitim başarılı ve bir modeli kullanılabilir olduğunu belirtir. Bu durumda, bu modeli BLEU puanı görüntülenir.
+    -  Baarı MT sisteminde ve bir modelde eğitimin başarılı olduğunu belirtir. Bu durumda, bu model için bir BLEU puanı görüntülenir.
 
-    -  Dağıtıldı: Başarılı eğitilen model MT sistemi dağıtımı için gönderildiği belirtir.
+    -  Dağıtılan Başarılı eğitilen modelin dağıtım için MT sistemine gönderildiğini belirtir.
 
-    -  Undeploying: Dağıtılmış bir modelinin undeploying olduğunu belirtir.
+    -  Dağıtım kaldırılıyor: Dağıtılan modelin dağıtmadığını belirtir.
 
-    -  Dağıtımı geri: Bir modelin undeployment işlemi başarıyla tamamlandığını belirtir.
+    -  Dağıtılmamış Bir modelin dağıtım kaldırma işleminin başarıyla tamamlandığını belirtir.
 
-    -  Eğitim başarısız oldu: Eğitim başarısız olduğunu belirtir. Bir eğitim hata oluşursa, eğitim işini yeniden deneyin. Hata devam ederse bizimle iletişime geçin. Başarısız modeli silmeyin.
+    -  Eğitim başarısız oldu: Eğitimin başarısız olduğunu belirtir. Bir eğitim hatası oluşursa, eğitim işini yeniden deneyin. Hata devam ederse bizimle iletişim kurun. Başarısız modeli silmeyin.
 
-    - DataProcessingFailed: Veri işleme modele ait bir veya daha fazla belge için başarısız olduğunu belirtir.
+    - DataProcessingFailed: Modele ait bir veya daha fazla belge için veri işlemenin başarısız olduğunu belirtir.
 
-    - DeploymentFailed: Model dağıtımı başarısız olduğunu belirtir.
+    - DeploymentFailed Model dağıtımının başarısız olduğunu belirtir.
 
-    - MigratedDraft: Modeli özel Translator Hub'ından geçişten sonra taslak durumunda olduğunu belirtir.
+    - MigratedDraft: Hub 'dan özel çevirmene geçişten sonra modelin taslak durumunda olduğunu belirtir.
 
-4.  BLEU puanı: Çeviri sisteminizi kalitesini belirten modelin BLEU (iki dilli değerlendirme Understudy) puan gösterilmektedir. Bu puan ne kadar yakın bu eğitimleri kaynaklanan çeviri sistemi tarafından gerçekleştirilen çevirileri sınama veri kümesi başvurusu cümleleri eşleşen söyler. Eğitim başarıyla tamamlandıysa BLEU puanı görünür. Eğitim değilse tam / başarısız herhangi BLEU puanı görmezsiniz.
+4.  BLEU puanı: çeviri sisteminizin kalitesini belirten, modelin BLEU (Iki dilli değerlendirme düşük Incelemesi) sayısını gösterir. Bu puan, bu eğitimin sonucu olan çeviri sistemi tarafından yapılan çevirilerin, test veri kümesindeki başvuru cümleleriyle ne kadar yakın olduğunu söyler. Eğitim başarıyla tamamlandıysanız BLEU puanı görüntülenir. Eğitim tamamlanmamış/başarısız olursa, herhangi bir BLEK puanı görmezsiniz.
 
-5.  Eğitim cümle sayısı: Eğitim kümesi olarak kullanılan cümle toplam sayısı gösterilmektedir.
+5.  Eğitim tümcesi sayısı: Eğitim kümesi olarak kullanılan Tümcelerin toplam sayısını gösterir.
 
-6.  Ayarlama cümle sayısı: Cümleleri kümesi ayarlama olarak kullanılan toplam sayısı gösterilmektedir.
+6.  Ayarlama tümce sayısı: Ayarlama kümesi olarak kullanılan Tümcelerin toplam sayısını gösterir.
 
-7.  Eğitim cümle sayısı: Test kümesi olarak kullanılan cümle toplam sayısı gösterilmektedir.
+7.  Eğitim tümcesi sayısı: Test kümesi olarak kullanılan Tümcelerin toplam sayısını gösterir.
 
-8.  Mono cümle sayısı: Mono kümesi olarak kullanılan cümle toplam sayısı gösterilmektedir.
+8.  Mono tümce sayısı: Mono kümesi olarak kullanılan Tümcelerin toplam sayısını gösterir.
 
-9.  Eylem düğmesi dağıtın: Başarıyla eğitilen bir modeli için "Dağıt" düğmesini gösteren yoksa dağıtılmış. Bir model dağıttıysanız, "Undeploy" düğmesi gösterilir.
+9.  Dağıtım eylemi düğmesi: Başarılı bir eğitilen modelde, dağıtılmamışsa "Dağıt" düğmesi görüntülenir. Bir model dağıtılmışsa, "dağıtım geri al" düğmesi gösterilir.
 
-10. Sil: Model silmek istiyorsanız bu düğmesini kullanabilirsiniz. Bir model siliniyor, bu modeli oluşturmak için kullanılan belgeler hiçbirini silinmez.
+10. Silmeli Modeli silmek istiyorsanız bu düğmeyi kullanabilirsiniz. Bir modelin silinmesi, bu modeli oluşturmak için kullanılan belgelerden hiçbirini silmez.
 
     ![Model ayrıntılarını görüntüleme](media/how-to/how-to-view-model-details.png)
 
 >[!Note]
->Aynı sistemler için ardışık eğitimleri karşılaştırmak için bu ayar ayarlanmış tutmak önemlidir ve test sabit ayarlayın.
+>Aynı sistemler için ardışık işlemleri karşılaştırmak için ayarlama kümesi ve test kümesi sabitinden haberdar olmanız önemlidir.
 
-## <a name="view-model-training-details"></a>Model eğitimi ayrıntılarını görüntüle
+## <a name="view-model-training-details"></a>Model eğitimi ayrıntılarını görüntüleme
 
-Eğitim tamamlandığında Eğitim ayrıntıları sayfasında ilgili ayrıntıları gözden geçirebilirsiniz. Bir proje seçin, bulun ve modelleri sekmesini seçin ve bir modeli seçin.
+Eğitim tamamlandığında, Ayrıntılar sayfasından eğitim hakkındaki ayrıntıları gözden geçirebilirsiniz. Bir proje seçin, modeller sekmesini bulun ve seçin ve bir model seçin.
 
-Modeli sayfasına iki sekme bulunur: Eğitim ayrıntıları ve Test.
+Model sayfası iki sekmeye sahiptir: Eğitim ayrıntıları ve test.
 
-1.  **Eğitim ayrıntıları:** Bu sekme, eğitim kullanılan belgelerin listesini gösterir:
+1.  **Eğitim ayrıntıları:** Bu sekme, eğitiminde kullanılan belge (ler) i listesini gösterir:
 
-    -  Belge adı: Bu alan belge adını gösterir.
+    -  Belge adı: Bu alan belgenin adını gösterir
 
-    -  Belge türü: Bu alan, bu belge, varsa paralel / mono olduğunu gösterir.
+    -  Belge türü: Bu alan, bu belgenin paralel/mono olduğunu gösterir.
 
-    -  Kaynak dili cümle sayısı: Bu alan sayısı gösterilmektedir cümleler var olan kaynak dili bir parçası olarak.
+    -  Kaynak dildeki tümce sayısı: Bu alan, kaynak dilin bir parçası olan Tümcelerin sayısını gösterir.
 
-    -  Hedef dilde cümle sayısı: Bu alan sayısı gösterilmektedir cümle hedef dil bir parçası olarak var olan.
+    -  Hedef dilde tümce sayısı: Bu alan, hedef dilin bir parçası olan Tümcelerin sayısını gösterir.
 
-    -  Hizalanmış cümleler: Bu alan cümleler sayısı gösterilmektedir sırasında özel Translator tarafından hizalı işlem hizalayın.
+    -  Hizalanmış cümleler: Bu alan, hizalama işlemi sırasında özel çevirmen tarafından hizalanan cümle sayısını gösterir.
 
-    -  Cümleleri kullanılır: Cümleleri sayısı gösterilmektedir kullanılmıştı özel Translator tarafından bu eğitim sırasında bu alan.
+    -  Kullanılan cümleler: Bu alan, bu eğitim sırasında özel çevirmen tarafından kullanılan Tümcelerin sayısını gösterir.
 
     ![Model eğitimi ayrıntıları](media/how-to/how-to-model-training-details.png)
 
-2.  **Test:** Bu sekme başarılı bir eğitim test ayrıntılarını gösterir.
+2.  **Sınamanız** Bu sekmede başarılı bir eğitimin test ayrıntıları gösterilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Gözden geçirme [test sonuçları](how-to-view-system-test-results.md) ve eğitim sonuçları analiz edin.
+- [Test sonuçlarını](how-to-view-system-test-results.md) gözden geçirin ve eğitim sonuçlarını çözümleyin.

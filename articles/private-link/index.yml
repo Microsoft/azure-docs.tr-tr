@@ -1,0 +1,55 @@
+### YamlMime:Landing
+title: Özel Bağlantı belgeleri
+summary: Azure Özel Bağlantı, Azure PaaS Hizmetlerine (örneğin, Azure Depolama ve SQL Veritabanı) ve Azure’da barındırılan, müşteriye ait/iş ortağı hizmetlerine sanal ağınızdaki bir Özel Uç Nokta üzerinden erişmenizi sağlar.  Sanal ağınız ve hizmet arasındaki trafik, Microsoft omurga ağı üzerinden geçer ve genel İnternet’ten etkilenme olasılığı ortadan kaldırılır. Ayrıca, sanal ağınızda kendi Özel Bağlantı Hizmetinizi oluşturup müşterilerinize özel olarak teslim edebilirsiniz.
+metadata:
+  title: Özel Bağlantı Belgeleri - Hızlı başlangıçlar, Nasıl yapılır kılavuzları ve API başvuruları
+  description: Azure Özel Bağlantı hizmetini kullanmayı öğrenin. Hızlı başlangıçlar ve öğreticiler Özel Bağlantı hizmetinin nasıl dağıtılacağını gösterir.
+  ms.service: private-link
+  ms.topic: landing-page
+  ms.collection: collection
+  author: KumudD
+  ms.author: kumud
+  ms.date: 09/16/2019
+  ms.openlocfilehash: 24b6d3ce2514ef25a015182e4a4fcd641ac76d50
+  ms.sourcegitcommit: 1c9858eef5557a864a769c0a386d3c36ffc93ce4
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/18/2019
+  ms.locfileid: "71104598"
+landingContent:
+- title: Azure Özel Bağlantı hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Özel Bağlantı nedir?
+      url: private-link-overview.md
+- title: Bir Azure hizmetine bağlanma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Özel Uç Nokta nedir?
+      url: private-endpoint-overview.md
+  - linkListType: quickstart
+    links:
+    - text: Özel Uç Nokta oluşturma
+      url: create-private-endpoint-portal.md
+- title: Kendi Özel Bağlantı hizmetinizi oluşturma
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Özel Bağlantı hizmeti nedir?
+      url: private-link-service-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Özel Bağlantı hizmeti oluşturma
+      url: create-private-link-service-powershell.md
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Azure CLI
+      url: /cli/azure/network
+    - text: Azure PowerShell
+      url: /powershell/module/az.network
+    - text: REST
+      url: /rest/api/virtualnetwork/privatelinkservices

@@ -1,7 +1,7 @@
 ---
-title: Uygulamanızı planlama
-titleSuffix: Language Understanding - Azure Cognitive Services
-description: İlgili uygulamayı amaç ve varlıkları anahat ve uygulama planlarınızı Language Understanding Intelligent Services (LUIS içinde) oluşturun.
+title: Uygulamanızı planlayın-LUSıS
+titleSuffix: Azure Cognitive Services
+description: İlgili uygulama amaçlarını ve varlıklarını ana hatlarıyla oluşturun ve ardından Language Understanding akıllı hizmetler (LUU) içinde uygulama planlarınızı oluşturun.
 services: cognitive-services
 author: diberry
 manager: nitinme
@@ -9,47 +9,52 @@ ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: conceptual
-ms.date: 01/02/2019
+ms.date: 10/25/2019
 ms.author: diberry
-ms.openlocfilehash: 9d54cff81f39f41b60800e9b33f3b4da1a735d85
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b5e5df111b81cb60b6d194be190421bdb5ce2683
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60196244"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73467704"
 ---
-# <a name="plan-your-luis-app-with-subject-domain-intents-and-entities"></a>Konu etki alanı, amaçlarını ve varlıkları LUIS uygulamanızı planlama
+# <a name="plan-your-luis-app-schema-with-subject-domain-and-data-extraction"></a>LUSıS uygulama şemanızı konu etki alanı ve veri ayıklama ile planlayın
 
-Uygulamanızı planlama önemlidir. Olası hedefleri ve uygulamanız için uygun olan varlıklar dahil olmak üzere, etki alanı tanımlayın.  
+Bir LUSıS uygulama şeması, konu etki alanınız ile ilgili amaçları ve varlıkları içerir. Amaç, Kullanıcı araslarını sınıflandırır ve varlıklar, Kullanıcı dıklarındaki verileri ayıklar. 
 
-## <a name="identify-your-domain"></a>Etki alanınızı tanımlayın
+## <a name="identify-your-domain"></a>Etki alanınızı tanımla
 
-Bir LUIS uygulaması bir etki alanına özgü konu ortalanır.  Örneğin, kayıt biletleri, uçuşlar, Oteller ve kiralama otomobiller gerçekleştiren bir seyahat uygulaması olabilir. Başka bir uygulama, uygulama, uygunluk çalışmalarını izlemeyi ve hedeflerini ayarlama ilgili içerik sağlayabilir. Etki alanını tanıtan sözcük ve tümcecikleri etki alanınız için önemli olan bulmanıza yardımcı olur.
+Bir LUSıS uygulaması, etki alanına özgü bir konunun etrafında ortalanır.  Örneğin, Bilet, fışıklar, otel ve Kiralama otomobillerini gerçekleştiren bir seyahat uygulamasına sahip olabilirsiniz. Başka bir uygulama uygulamayla ilgili içerik sunabilir, uygunluk çalışmalarını izleme ve amaçları ayarlama. Etki alanını tanımlamak, etki alanınız için önemli olan kelimeleri veya tümceleri bulmanıza yardımcı olur.
 
 > [!TIP]
-> LUIS sunar [önceden oluşturulmuş etki alanları](luis-how-to-use-prebuilt-domains.md) birçok yaygın senaryo için.
-> Önceden oluşturulmuş bir etki alanı bir başlangıç noktası olarak uygulamanız için kullanıp kullanamayacağını denetleyin.
+> LUSıS birçok yaygın senaryo için [önceden oluşturulmuş etki alanları](luis-how-to-use-prebuilt-domains.md) sunar.
+> Önceden oluşturulmuş bir etki alanını uygulamanız için başlangıç noktası olarak kullanıp kullananağınızın olup olmadığını kontrol edin.
 
-## <a name="identify-your-intents"></a>Hedefleri tanımlayın
+## <a name="identify-your-intents"></a>Amaçlarınızı tanımla
 
-Düşünün [hedefleri](luis-concept-intent.md) uygulamanızın görev için önemli. Bir kitap ve kullanıcının hedefteki hava durumunu denetlemek için işlevleri ile bir seyahat uygulaması örneği ele alalım. Bu eylemler için "BookFlight" ve "GetWeather" ıntents tanımlayabilirsiniz. Daha karmaşık bir daha fazla işlev uygulaması, daha fazla amacı sahiptir ve bunları özenle çok belirli olmaması için tanımlamanız gerekir. Örneğin, "BookFlight" ve "BookHotel" ayrı ıntents olması gerekebilir, ancak "BookInternationalFlight" ve "BookDomesticFlight" çok benzer olabilir.
+Uygulamanızın görevi için önemli olan [amaçları](luis-concept-intent.md) göz önünde bulundurun. 
+
+Bir uçuş ve Kullanıcı hedefindeki hava durumunu denetlemek için işlevlerle bir seyahat uygulaması örneğini ele alalım. Bu eylemler için `BookFlight` ve `GetWeather` amaçlarını tanımlayabilirsiniz. 
+
+Daha fazla işlev içeren daha karmaşık bir uygulamada, daha fazla amaç vardır ve bu amaçları dikkatle tanımlamanız gerekir, böylelikle amaçlar çok özgü değildir. Örneğin, `BookFlight` ve `BookHotel` ayrı amaçlar olması gerekebilir, ancak `BookInternationalFlight` ve `BookDomesticFlight` çok benzer olabilir.
 
 > [!NOTE]
-> Yalnızca kullanmak için en iyi bir uygulamadır uygulamanızın işlevleri gerçekleştirmek gerektiği kadar amacı. Çok fazla ıntents tanımlarsanız, konuşma doğru sınıflandırmak LUIS için daha zor hale gelir. Çok tanımlarsanız birkaç, bunlar olabilir çakıştığı için farklı şekilde genel.
+> Uygulamanızın işlevlerini gerçekleştirmek için ihtiyaç duyduğunuz kadar çok amaç kullanmak en iyi uygulamadır. Çok fazla amaç tanımlarsanız, YAĞıNLARı doğru şekilde sınıflandırılması zor olur. Çok az sayıda tanımlarsanız, bu durum örtüşeceğinden genel olabilir.
 
-## <a name="create-example-utterances-for-each-intent"></a>Her bir amaç için örnek konuşma oluşturma
+Genel Kullanıcı amacını belirlemeniz gerekmiyorsa, tüm örnek Kullanıcı araslarını hiçbiri amacına ekleyin. Uygulamanız daha fazla amaç gerektiren bir şekilde büyürse, daha sonra oluşturabilirsiniz. 
 
-Intents belirledikten sonra her amaç için 10 veya 15 örnek konuşma oluşturun. Başlangıç değil bu sayıdan daha az olması veya her amaç için birçok konuşma oluşturun. Her utterance önceki utterance farklı olmalıdır. Konuşma iyi çeşitli genel sözcük sayısı, sözcük seçimi, fiil şimdiki ve noktalama işaretleri içerir. 
+## <a name="create-example-utterances-for-each-intent"></a>Her amaç için örnek oluşturma
 
-## <a name="identify-your-entities"></a>Varlıklarınızı tanımlayın
+Hedefleri belirledikten sonra her bir amaç için 15 ila 30 örnek oluşturma oluşturun. Kullanmaya başlamak için bu sayıdan daha az sahip değildir veya her bir amaç için çok fazla sayıda utterme oluşturun. Her söylük, önceki söyleyden farklı olmalıdır. Söyleyenlerdeki her şey genel sözcük sayısı, kelime seçimi, fiil zaman hali ve noktalama işaretleri içerir. 
 
-Ayıklanan istediğiniz varlıkları örnek konuşma belirleyin. Bir kitap için hedef, tarih, havayolu, bilet kategorisi gibi bazı bilgiler gerekiyor ve seyahat sınıfı. Bu veri türleri için varlıklar oluşturun ve ardından işaretleyin [varlıkları](luis-concept-entity-types.md) örnek konuşma içinde bir işlemi gerçekleştirmek için önemli olduğundan. 
+Daha fazla [bilgi için,](luis-concept-utterance.md) bu bilgileri gözden geçirin.
 
-Uygulamanızda kullanmak için hangi varlıkları belirlerken, farklı nesne türleri arasındaki ilişkileri yakalamak için varlıkların olduğunu aklınızda bulundurun. [LUIS varlıklarda](luis-concept-entity-types.md) farklı türleri hakkında daha fazla ayrıntı sağlar.
+## <a name="identify-your-entities"></a>Varlıklarınızı tanımla
+
+Örnekte, ayıklanmak istediğiniz varlıkları belirler. Bir uçuş sağlamak için hedef, tarih, Airline, Bilet kategorisi ve seyahat sınıfı gibi bilgilere ihtiyacınız vardır. Bu veri türleri için varlıklar oluşturun ve ardından, bir amacı elde etmek için önemli olduklarından, örnek türlerdeki [varlıkları](luis-concept-entity-types.md) işaretleyin. 
+
+Uygulamanızda hangi varlıkların kullanılacağını belirlediğinizde, nesne türleri arasındaki ilişkileri yakalamak için farklı türde varlıkların olduğunu aklınızda bulundurun. [Luve Içindeki varlıklar](luis-concept-entity-types.md) , farklı türler hakkında daha fazla ayrıntı sağlar.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Uygulamanız, yayımlanan eğitildi ve konuşma uç noktası alır sonra tahmin geliştirmelerle uygulamak planlama [etkin olarak öğrenmeye](luis-how-to-review-endpoint-utterances.md), [tümcecik listeleri](luis-concept-feature.md), ve [desenleri](luis-concept-patterns.md). 
-
-
-* Bkz: [Language Understanding Intelligent Services (LUIS) ilk uygulamanızı oluşturma](luis-get-started-create-app.md) LUIS uygulaması oluşturma Hızlı Kılavuz.
+Tipik [geliştirme çevrimi](luis-concept-app-iteration.md)hakkında bilgi edinin.  

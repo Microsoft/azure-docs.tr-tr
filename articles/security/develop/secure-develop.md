@@ -1,156 +1,157 @@
 ---
-title: Microsoft Azure üzerinde güvenli uygulamalar geliştirin
-description: Bu makalede, web uygulaması projenize uygulama ve doğrulama aşamaları sırasında dikkate alınması gereken en iyi uygulamalar açıklanmaktadır.
+title: Microsoft Azure güvenli uygulamalar geliştirin
+description: Bu makalede, Web uygulaması projenizin uygulama ve doğrulama aşamaları sırasında göz önünde bulundurmanız gereken en iyi yöntemler açıklanmaktadır.
 author: TerryLanfear
 manager: barbkess
 ms.author: terrylan
 ms.date: 06/12/2019
 ms.topic: article
 ms.service: security
+ms.subservice: security-develop
 services: azure
 ms.assetid: 521180dc-2cc9-43f1-ae87-2701de7ca6b8
 ms.devlang: na
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.openlocfilehash: f68f6c366571b8f0f04f8507606c1a4008ab0405
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: c1c7dd0bd017852144139a841ff609dabf0f1a27
+ms.sourcegitcommit: 13a289ba57cfae728831e6d38b7f82dae165e59d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67443254"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68928064"
 ---
-# <a name="develop-secure-applications-on-azure"></a>Azure'da güvenli uygulamalar geliştirin
-Bu makalede güvenlik etkinliklerini ve bulut için uygulamalar geliştirirken dikkate alınması gereken denetimler sunar. Güvenlik sorularını ve Microsoft uygulama ve doğrulama aşamaları sırasında dikkate alınması gereken kavramlar [Security Development Lifecycle (SDL)](https://msdn.microsoft.com/library/windows/desktop/84aed186-1d75-4366-8e61-8d258746bopq.aspx) ele alınmaktadır. Etkinlikleri ve daha güvenli bir uygulama geliştirmek için kullanabileceğiniz Azure Hizmetleri tanımlamanıza yardımcı olmaktır.
+# <a name="develop-secure-applications-on-azure"></a>Azure 'da güvenli uygulamalar geliştirin
+Bu makalede, bulut için uygulama geliştirirken göz önünde bulundurmanız gereken güvenlik etkinlikleri ve denetimler sunuyoruz. Microsoft [güvenlik geliştirme yaşam döngüsü 'nin (SDL)](https://msdn.microsoft.com/library/windows/desktop/84aed186-1d75-4366-8e61-8d258746bopq.aspx) uygulama ve doğrulama aşamaları sırasında göz önünde bulundurmanız gereken güvenlik soruları ve kavramlar ele alınmıştır. Amaç, daha güvenli bir uygulama geliştirmek için kullanabileceğiniz etkinlikleri ve Azure hizmetlerini tanımlamanıza yardımcı olmaktır.
 
-Aşağıdaki SDL aşamaları, bu makalede ele alınmaktadır:
+Aşağıdaki SDL aşamaları bu makalede ele alınmıştır:
 
 - Uygulama
 - Doğrulama
 
 ## <a name="implementation"></a>Uygulama
-Odak noktası, uygulama aşamasından erken önleme için en iyi uygulamaları oluşturmak ve algılama ve güvenlik sorunlarını koddan kaldırma sağlamaktır.
-Uygulamanız, kullanılacak düşünmediğiniz yollarla kullanılan varsayılır. Bu, uygulamanızın yanlışlıkla veya kasıtlı kötüye karşı korumanıza yardımcı olur.
+Uygulama aşamasının odağı, erken önleme için en iyi yöntemleri oluşturmak ve koddan güvenlik sorunlarını algılayıp kaldırmasıdır.
+Uygulamanızın kullanılmasını amaçlamadığınız yollarla kullanılacağını varsayın. Bu, uygulamanızın yanlışlıkla veya kasıtlı olarak kötüye kullanılmasına karşı koruma sağlamanıza yardımcı olur.
 
-### <a name="perform-code-reviews"></a>Kod incelemeleri gerçekleştirin
+### <a name="perform-code-reviews"></a>Kod İncelemeleri gerçekleştirme
 
-Kodu iade etmeden önce gerçekleştir [kod incelemesi](https://docs.microsoft.com/azure/devops/learn/devops-at-microsoft/code-reviews-not-primarily-finding-bugs) genel kod kalitesini artırmak ve hata oluşturma riskini azaltmak için. Kullanabileceğiniz [Visual Studio](https://docs.microsoft.com/azure/devops/repos/tfvc/get-code-reviewed-vs?view=vsts) kod inceleme işlemini yönetmek için.
+Kodu iade etmeden önce, genel kod kalitesini artırmak ve hata oluşturma riskini azaltmak için [kod İncelemeleri](https://docs.microsoft.com/azure/devops/learn/devops-at-microsoft/code-reviews-not-primarily-finding-bugs) gerçekleştirin. Kod inceleme sürecini yönetmek için [Visual Studio 'yu](https://docs.microsoft.com/azure/devops/repos/tfvc/get-code-reviewed-vs?view=vsts) kullanabilirsiniz.
 
-### <a name="perform-static-code-analysis"></a>Statik kod analizini gerçekleştirin
+### <a name="perform-static-code-analysis"></a>Statik kod analizi gerçekleştir
 
-[Statik kod analizi](https://www.owasp.org/index.php/Static_Code_Analysis) (diğer adıyla *kaynak kod analizi*) genellikle bir kod incelemesi bir parçası olarak gerçekleştirilir. Statik kod analizi yaygın olarak başvuran statik kod çözümleme araçları gibi teknikler kullanılarak olası güvenlik açıklarını çalışan olmayan kodu bulmak için çalışan [denetimi taint](https://en.wikipedia.org/wiki/Taint_checking) ve [veri akışını analiz](https://en.wikipedia.org/wiki/Data-flow_analysis).
+[Statik kod analizi](https://www.owasp.org/index.php/Static_Code_Analysis) ( *kaynak kodu analizi*olarak da bilinir) genellikle kod incelemesinin bir parçası olarak gerçekleştirilir. Statik kod analizi, ortak olmayan kodda [taınt denetimi](https://en.wikipedia.org/wiki/Taint_checking) ve [veri akışı analizi](https://en.wikipedia.org/wiki/Data-flow_analysis)gibi teknikleri kullanarak olası güvenlik açıklarını bulmak için statik kod çözümleme araçları 'nı çalıştırmayı ifade eder.
 
-Azure Marketi tekliflerini [Geliştirici Araçları](https://azuremarketplace.microsoft.com/marketplace/apps/category/developer-tools?page=1&search=code%20review) statik kod analizini gerçekleştirin ve kod incelemeleriyle yardımcı olur.
+Azure Marketi, statik kod analizi gerçekleştiren ve kod incelemelerine yardımcı olan [Geliştirici Araçları](https://azuremarketplace.microsoft.com/marketplace/apps/category/developer-tools?page=1&search=code%20review) sunar.
 
-### <a name="validate-and-sanitize-every-input-for-your-application"></a>Doğrulama ve uygulamanız için her bir giriş temizleyin
+### <a name="validate-and-sanitize-every-input-for-your-application"></a>Uygulamanız için her girişi doğrulama ve Temizleme
 
-Tüm girişler, uygulamanızın en yaygın web uygulaması güvenlik açıklarına karşı korumak için güvenilmeyen olarak kabul eder. Güvenilir olmayan verileri ekleme saldırıları için kullanılan bir araçtır. URL'deki veritabanından veya bir API'den verileri kullanıcıdan giriş parametreleri uygulamanız için giriş içerir ve bir kullanıcı, geçirilen herhangi bir şey olabilecek işlemek. Bir uygulama gereken [doğrulama](https://www.owasp.org/index.php/OWASP_Proactive_Controls_2016#4:_Validate_All_Inputs) (kullanıcıya geri görüntüleme dahil) herhangi bir şekilde veri uygulamanın kullandığı önce veri sözdizimsel olarak ve anlamsal olarak geçerli olduğunu.
+Uygulamanızı en sık kullanılan Web uygulaması güvenlik açıklarına karşı korumak için tüm girişi güvenilmeyen olarak değerlendirin. Güvenilmeyen veriler, ekleme saldırılarına yönelik bir araç. Uygulamanızın girişinde URL 'deki parametreler, kullanıcıdan giriş, veritabanından veya bir API 'den gelen veriler ve bir kullanıcının potansiyel olarak işleyebildiği herhangi bir şey bulunur. Uygulama, uygulamanın verileri herhangi bir şekilde (kullanıcıya geri görüntüleme dahil) kullanmadan önce, verilerin sözdizimsel ve anlam açısından geçerli olduğunu [doğrulamalıdır](https://www.owasp.org/index.php/OWASP_Proactive_Controls_2016#4:_Validate_All_Inputs) .
 
-Erken yalnızca düzgün şekilde biçimlendirilmiş veri iş akışını girdiğinden emin olmak için veri akış girişi doğrulayın. Veritabanınızda kalıcı yapma veya bir aşağı akış bileşeni içinde bir arıza tetikleme hatalı oluşturulmuş veri istemezsiniz.
+Yalnızca düzgün biçimlendirilmiş verilerin iş akışına girdiğinden emin olmak için girişi veri akışında erken doğrulayın. Hatalı biçimlendirilmiş verilerin veritabanınızda kalıcı olmasını veya bir aşağı akış bileşeninde bir arızası tetiklemesini istemezsiniz.
 
-Blacklisting ve beyaz listeye ekleme giriş söz dizimi doğrulama gerçekleştirmek için iki genel yaklaşım vardır:
+Kara liste ve beyaz listeleme, giriş sözdizimi doğrulaması gerçekleştirmeye yönelik iki genel yaklaşımlar sağlar:
 
-  - Kara liste belirli kullanıcı girişi "bilinen kötü amaçlı olarak" içerik içermediğini denetlemek çalışır.
+  - Kara liste, belirli bir Kullanıcı girişinin "kötü amaçlı olarak bilinen" içerik içermediğini denetlemeye çalışır.
 
-  - Beyaz listeye ekleme, belirli kullanıcı girişi "bilinen iyi" girişleri kümesi eşleşip eşleşmediğini kontrol dener. Beyaz listeye ekleme karakter tabanlı bir beyaz listeye ekleme uygulamanın kullanıcı girişini yalnızca "bilinen iyi" bir karakter içeriyor ya da giriş, bilinen bir biçimde eşleştiğini nerede denetler biçimidir.
-    Örneğin, bu bir kullanıcı adı yalnızca alfasayısal karakterler içerdiğini veya tam olarak iki sayı içerdiği denetimi gerektirebilir.
+  - Beyaz listeleme, belirli bir Kullanıcı girişinin bir "bilinen iyi" girişler kümesiyle eşleşip eşleşmediğini denetlemeye çalışır. Karakter tabanlı beyaz liste, bir uygulamanın kullanıcı girişinin yalnızca "bilinen iyi" karakterler içerdiğini veya girişin bilinen bir biçimle eşleşip eşleşmediğini denetlediği bir beyaz listeleme biçimidir.
+    Örneğin, bu, Kullanıcı adının yalnızca alfasayısal karakter içerdiğini veya tam olarak iki sayı içerdiğini denetlemeyi gerektirebilir.
 
-Beyaz listeye ekleme, güvenli yazılımlar oluşturmak için tercih edilen bir yaklaşımdır.
-Potansiyel olarak hatalı giriş tam listesi düşünme mümkün olduğundan kara hataya olur.
+Beyaz liste, güvenli yazılım oluşturmak için tercih edilen yaklaşımdır.
+Büyük olasılıkla hatalı girişin tamamı listesini düşünmek imkansız olduğundan kara listeye hata açıktır.
 
-Bu iş sunucuda, istemci tarafındaki (veya sunucu ve istemci tarafında) yapın.
+Bu işi, istemci tarafında (veya sunucu ve istemci tarafında) değil, sunucuda yapın.
 
-### <a name="verify-your-applications-outputs"></a>Uygulamanızın çıkışları doğrulayın
+### <a name="verify-your-applications-outputs"></a>Uygulamanızın çıktılarını doğrulama
 
-Görsel olarak ya da belge içinde mevcut herhangi bir çıktı her zaman kodlanmış kaçış ve. [Kaçış](https://www.owasp.org/index.php/Injection_Theory#Escaping_.28aka_Output_Encoding.29)olarak da bilinen *çıktı kodlaması*, güvenilir olmayan verileri bir araç için bir ekleme saldırısına olmadığından emin olmak için kullanılır. , Veri doğrulama ile birlikte bir bütün olarak sistemin güvenliğini artırmak için katmanlı savunmaları sağlar.
+Görsel olarak veya bir belge içinde mevcut olan tüm çıktılar her zaman kodlanmış ve çıkış olmalıdır. *Çıkış kodlaması*olarak da bilinen [kaçış](https://www.owasp.org/index.php/Injection_Theory#Escaping_.28aka_Output_Encoding.29), güvenilmeyen verilerin ekleme saldırılarına karşı bir araç olmamasını sağlamaya yardımcı olmak için kullanılır. Kaçış, veri doğrulamayla birlikte, sistemin güvenliğini bir bütün olarak artırmak için katmanlı savunma sağlar.
 
-Yaptığı emin kaçış her şeyin olarak görüntülenen *çıktı.* Kaçış veri yürütülmek üzere tasarlanmamıştır ve bu saldırıları çalışmasını engeller yorumlayıcı sağlar. Bu adlı başka bir yaygın saldırı tekniktir *siteler arası betik* (XSS).
+Kaçış, her şeyin çıkış olarak görüntülendiğinden emin olur *.* Kaçış Ayrıca yorumlayıcı 'nın verilerin yürütülmesi amaçlandığını bilmesini sağlar ve bu da saldırıların çalışmasını önler. Bu, *siteler arası komut dosyası oluşturma* (XSS) adlı başka bir yaygın saldırı tekniğidir.
 
-Bir üçüncü taraf bir web çerçevesi kullanıyorsanız, seçeneklerinizi kullanarak Web sitelerinde çıkış kodlaması için doğrulayabilirsiniz [OWASP XSS önleme kağıdı](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.md).
+Üçüncü taraftan bir Web çerçevesi kullanıyorsanız, [OWASP XSS önleme sayfasını](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.md)kullanarak Web sitelerindeki çıkış kodlaması için seçeneklerinizi doğrulayabilirsiniz.
 
-### <a name="use-parameterized-queries-when-you-contact-the-database"></a>Veritabanı başvurduğunuzda parametreli sorgular kullanma
+### <a name="use-parameterized-queries-when-you-contact-the-database"></a>Veritabanıyla iletişim kurmak için parametreli sorguları kullanın
 
-Satır içi veritabanı sorgusu "hareket halindeyken" kodunuzda hiçbir zaman oluşturun ve doğrudan veritabanına göndermek. Uygulamanıza eklediğiniz kötü amaçlı kod çalınırsa, silinebilen veya değiştirilecek veritabanınızı olası neden olabilir. Uygulamanız, veritabanınızı barındıran işletim sisteminde kötü amaçlı işletim sistemi komutlarını çalıştırmak için de kullanılabilir.
+Kodunuzda "anında" bir satır içi veritabanı sorgusu oluşturun ve doğrudan veritabanına gönderin. Uygulamanıza yerleştirilen kötü amaçlı kod, veritabanınızın çalınmasına, silinmesine veya değiştirilmesine neden olabilir. Uygulamanız, veritabanınızı barındıran işletim sisteminde kötü amaçlı işletim sistemi komutlarını çalıştırmak için de kullanılabilir.
 
-Bunun yerine, parametreli sorgular veya saklı yordamları kullanın. Parametreli sorgular kullandığınızda, yordamı kodunuzdan güvenli bir şekilde çağırmak ve sorgu deyimi bir parçası olarak değerlendirilir endişelenmeden dize geçirin.
+Bunun yerine, parametreli sorguları veya saklı yordamları kullanın. Parametreli sorgular kullandığınızda, kodunuzda yöntemi güvenli bir şekilde çağırabilir ve sorgu ifadesinin bir parçası olarak değerlendirilmek zorunda kalmadan bir dize geçirebilirsiniz.
 
-### <a name="remove-standard-server-headers"></a>Standart sunucu üst bilgileri kaldırın
+### <a name="remove-standard-server-headers"></a>Standart sunucu üstbilgilerini kaldır
 
-Sunucu, X-desteklenen-tarafından üst bilgileri ister ve X-ASP.NET-Version açığa sunucusu ve temel teknolojileri hakkında bilgi. Uygulama izinden önlemek için bu üst bilgilerini gösterme öneririz.
-Bkz: [Azure Web siteleri standart sunucu başlıklarını kaldırma](https://azure.microsoft.com/blog/removing-standard-server-headers-on-windows-azure-web-sites/).
+Sunucu, X ile güçlendirilmiştir ve X-AspNet-Version gibi üstbilgiler, sunucu ve temel teknolojiler hakkında bilgi açığa çıkar. Uygulamanın parmak izi baskıdan kaçınmak için bu üst bilgileri bastırmanızı öneririz.
+Bkz. [Azure Web sitelerinde standart sunucu üstbilgilerini kaldırma](https://azure.microsoft.com/blog/removing-standard-server-headers-on-windows-azure-web-sites/).
 
-### <a name="segregate-your-production-data"></a>Üretim verilerinizi görevlerini birbirinden ayırın
+### <a name="segregate-your-production-data"></a>Üretim verilerinizi ayırt edin
 
-Üretim verisi veya "gerçek" veriler, geliştirme, test ya da iş amaçlanan değerinden başka bir amaç için kullanılmamalıdır. Bir maskelenmiş ([anonim hale getirilen](https://en.wikipedia.org/wiki/Data_anonymization)) kullanılan tüm geliştirme ve sınama veri kümesi olması gerekir.
+Üretim verileriniz veya "gerçek" verileriniz, geliştirme, test ya da işletmenin hedefinden farklı herhangi bir amaçla kullanılmamalıdır. Tüm geliştirme ve test için maskelenmiş ([anonimleştirilmiş](https://en.wikipedia.org/wiki/Data_anonymization)) veri kümesi kullanılmalıdır.
 
-Bu, daha az sayıda, saldırı yüzeyini azaltan gerçek veri erişimi anlamına gelir. Ayrıca, daha az çalışanları gizliliği olası bir güvenlik ihlaline ortadan kaldırır, kişisel verileri görmek anlamına gelir.
+Bu, gerçek verilerinize daha az sayıda kişinin erişimi olduğu anlamına gelir ve bu da saldırı yüzeyini azaltır. Ayrıca, gizlilik açısından olası bir ihlali ortadan kaldıran daha az çalışanın kişisel verileri görür.
 
-### <a name="implement-a-strong-password-policy"></a>Güçlü parola ilkesini uygulama
+### <a name="implement-a-strong-password-policy"></a>Güçlü parola ilkesi uygulama
 
-Deneme yanılma ve sözlük tabanlı tahmin karşı korumak için kullanıcılar (örneğin, en az 12 karakter uzunluğu ve alfasayısal ve özel karakterler gerektiren) karmaşık bir parola oluşturduğunuzdan emin olmak için güçlü bir parola ilkesi uygulamalıdır.
+Deneme yanılma ve sözlük tabanlı tahminlere karşı savunmak için, kullanıcıların karmaşık bir parola oluşturmasını sağlamak için güçlü bir parola ilkesi uygulamanız gerekir (örneğin, 12 karakter minimum uzunluğu ve alfasayısal ve özel karakterler gerektirir).
 
-Bir kimlik çerçevesi oluşturmak ve parola ilkelerini zorlamak için kullanabilirsiniz. Azure AD B2C yardımcı olur, parola yönetimi ile sağlayarak [yerleşik ilkeleri](https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-reference-policies#create-a-password-reset-policy), [Self Servis parola sıfırlama](https://docs.microsoft.com/azure/active-directory-b2c/active-directory-b2c-reference-sspr)ve daha fazlası.
+Parola ilkeleri oluşturmak ve zorlamak için bir kimlik çerçevesi kullanabilirsiniz. Azure AD B2C, [Yerleşik ilkeler](../../active-directory-b2c/tutorial-create-user-flows.md#create-a-password-reset-user-flow), [self servis parola sıfırlama](../../active-directory-b2c/active-directory-b2c-reference-sspr.md)ve daha fazlasını sağlayarak parola yönetimine yardımcı olur.
 
-Varsayılan hesapları saldırılarına karşı korumak için tüm anahtarları ve parolaları değiştirilebilir ve bunlar oluşturulan veya kaynakları yükledikten sonra değiştirilen olduğunu doğrulayın.
+Varsayılan hesapların saldırılarına karşı savunmak için tüm anahtarların ve parolaların değiştirilebilen ve kaynakları yükledikten sonra oluşturulduğunu veya değiştirildiğini doğrulayın.
 
-Uygulamayı otomatik olarak parolaları oluşturmak gerekir, oluşturulan parolaların rastgele olduğunu ve yüksek entropi olduğunu emin olun.
+Uygulamanın parolaları otomatik olarak oluşturması gerekiyorsa, oluşturulan parolaların rastgele olduğundan ve yüksek entrokdıklarından emin olun.
 
-### <a name="validate-file-uploads"></a>Dosya yüklemeleri doğrulama
+### <a name="validate-file-uploads"></a>Karşıya dosya yüklemelerini doğrula
 
-Uygulamanızı izin veriyorsa [dosya yüklemeleri](https://www.owasp.org/index.php/Unrestricted_File_Upload), bu riskli etkinlik için uygulayabileceğiniz önlemleri göz önünde bulundurun. İlk adımda sayıda saldırı Saldırıya uğramış bir sisteme bazı kötü amaçlı kod almaktır. Dosyayı karşıya yükleme kullanarak bunu saldırgan yardımcı olur. OWASP doğrulamak için bir dosya karşıya yüklemekte dosya güvenli olmasını sağlamak için çözümler sunar.
+Uygulamanız [dosya karşıya yüklemeye](https://www.owasp.org/index.php/Unrestricted_File_Upload)izin veriyorsa, bu riskli etkinlik için uygulayabileceğiniz önlemleri göz önünde bulundurun. Birçok saldırının ilk adımı, saldırı altında olan bir sisteme bazı kötü amaçlı kodlar almanızı sağlar. Bir dosya yükleme işleminin kullanılması, saldırganın bunu gerçekleştirmenize yardımcı olur. OWASP, karşıya yüklediğiniz dosyanın güvende olduğundan emin olmak için bir dosyayı doğrulamaya yönelik çözümler sunar.
 
-Kötü amaçlı yazılımdan korunma belirlenmesi ve virüslerin, casus yazılımların ve diğer kötü amaçlı yazılım kaldırılmasına yardımcı olur. Yükleyebileceğiniz [Microsoft Antimalware](https://docs.microsoft.com/azure/security/azure-security-antimalware) veya bir Microsoft iş ortağı uç nokta koruma çözümüne ([Trend Micro](https://www.trendmicro.com/azure/), [Symantec](https://www.symantec.com/products), [McAfee](https://www.mcafee.com/us/products.aspx), [Windows Defender](https://docs.microsoft.com/windows/security/threat-protection/windows-defender-antivirus/windows-defender-antivirus-in-windows-10), ve [System Center Endpoint Protection](https://docs.microsoft.com/sccm/protect/deploy-use/endpoint-protection)).
+Kötü amaçlı yazılımdan koruma, virüsler, casus yazılım ve diğer kötü amaçlı yazılımları belirleyip kaldırmanıza yardımcı olur. [Microsoft kötü amaçlı yazılımdan](../fundamentals/antimalware.md) koruma veya bir Microsoft iş ortağının Endpoint Protection çözümünü ([Trend Micro](https://www.trendmicro.com/azure/), [Symantec](https://www.symantec.com/products), [McAfee](https://www.mcafee.com/us/products.aspx), [Windows Defender](https://docs.microsoft.com/windows/security/threat-protection/windows-defender-antivirus/windows-defender-antivirus-in-windows-10)ve [System Center Endpoint Protection](https://docs.microsoft.com/sccm/protect/deploy-use/endpoint-protection)) yükleyebilirsiniz.
 
-[Microsoft Antimalware](https://docs.microsoft.com/azure/security/azure-security-antimalware) gerçek zamanlı koruma, zamanlanmış tarama, kötü amaçlı yazılım düzeltme, imza güncelleştirmeleri, altyapı güncelleştirmeleri, raporlama örnekleri ve dışlama olay koleksiyonu gibi özellikler içerir. Microsoft Antimalware ve iş ortağı çözümleriyle tümleştirilebilir [Azure Güvenlik Merkezi](https://docs.microsoft.com/azure/security-center/security-center-partner-integration) kolay dağıtım ve yerleşik algılamalar (Uyarılar ve olaylar).
+[Microsoft Antimalware](../fundamentals/antimalware.md) gerçek zamanlı koruma, zamanlanmış tarama, kötü amaçlı yazılım düzeltme, imza güncelleştirmeleri, altyapı güncelleştirmeleri, örnek raporlama ve dışlama olay toplama gibi özellikler içerir. Microsoft kötü amaçlı yazılımdan koruma ve iş ortağı çözümlerini, dağıtım kolaylığı ve yerleşik algılamalar (Uyarılar ve olaylar) için [Azure Güvenlik Merkezi](../../security-center/security-center-partner-integration.md) ile tümleştirebilirsiniz.
 
-### <a name="dont-cache-sensitive-content"></a>Hassas içerikleri önbelleğe almak yok
+### <a name="dont-cache-sensitive-content"></a>Hassas içeriği önbelleğe alma
 
-Tarayıcıda hassas içeriği önbelleğe yok. Tarayıcılar, önbelleğe alma ve geçmiş bilgilerini depolayabilirsiniz. Önbelleğe alınan dosyaları, Internet Explorer söz konusu olduğunda Temporary Internet Files klasörü gibi bir klasörde depolanır. Ne zaman bu sayfaları tarayıcının yeniden adlandırılır, önbellek sayfalarındaki görüntüler. (Adres, kredi kartı bilgileri, sosyal güvenlik numarası, kullanıcı adı), hassas bilgileri kullanıcıya gösterilirse, bilgileri tarayıcının önbellekte depolanabilir ve alınabilir, tarayıcının önbelleğini inceleme veya yalnızca tarayıcının tuşlarınabasarak **Geri** düğmesi.
+Gizli içeriği tarayıcıda önbelleğe alma. Tarayıcılar, önbelleğe alma ve geçmiş bilgilerini saklayabilir. Önbelleğe alınan dosyalar, Internet Explorer durumunda Temporary Internet Files klasörü gibi bir klasörde depolanır. Bu sayfalara yeniden başvurulur tarayıcı, sayfaları önbelleğinden görüntüler. Gizli bilgiler (adres, kredi kartı ayrıntıları, sosyal güvenlik numarası, Kullanıcı adı) kullanıcıya görüntüleniyorsa, bilgiler tarayıcının önbelleğinde depolanabilir ve tarayıcının önbelleğini inceleyerek ya da tarayıcının **önbelleğine basılarak alınabilir. Geri** düğmesi.
 
 ## <a name="verification"></a>Doğrulama
-Doğrulama aşaması, kod, önceki aşamada oluşturulan güvenlik ve gizlilik ilkesi karşıladığından emin olmak için kapsamlı bir çaba kapsar.
+Doğrulama aşaması, kodun önceki aşamalarda oluşturulan güvenlik ve gizlilik tenetlerini karşıladığından emin olmak için kapsamlı bir çaba içerir.
 
-### <a name="find-and-fix-vulnerabilities-in-your-application-dependencies"></a>Güvenlik açıklarını bulup uygulama bağımlılıklarınızı düzeltin
+### <a name="find-and-fix-vulnerabilities-in-your-application-dependencies"></a>Uygulamanızın bağımlılıklarındaki güvenlik açıklarını bulun ve onarın
 
-Uygulamanız ve onun bağımlı kitaplıkları bilinen tüm güvenlik açığı bileşenleri tanımlamak için tarama. Bu tarama gerçekleştirmek kullanılabilir olan ürünler içerir [OWASP bağımlılık denetleyin](https://www.owasp.org/index.php/OWASP_Dependency_Check),[Snyk](https://snyk.io/), ve [Black Duck](https://www.blackducksoftware.com/).
+Tüm bilinen bileşenleri belirlemek için uygulamanızı ve bağımlı kitaplıklarını taramanızı sağlar. Bu taramayı gerçekleştirmek için kullanılabilen ürünler [OWASP bağımlılık denetimi](https://www.owasp.org/index.php/OWASP_Dependency_Check),[Snrivk](https://snyk.io/)ve [Black Duck](https://www.blackducksoftware.com/)' i kapsar.
 
-Güvenlik Açığı taraması ile desteklenen [Tinfoil Security](https://www.tinfoilsecurity.com/) Azure App Service Web Apps için kullanılabilir. [Tinfoil güvenlik App Service ile tarama](https://azure.microsoft.com/blog/web-vulnerability-scanning-for-azure-app-service-powered-by-tinfoil-security/) geliştiriciler ve Yöneticiler, bulma ve kötü amaçlı bir aktör bunları yararlanabilir önce güvenlik açıklarını adresleme hızlı, tümleşik ve ekonomik bir yöntem sunar.
+[Tinfoil Security](https://www.tinfoilsecurity.com/) tarafından desteklenen güvenlik açığı taraması, Azure App Service Web Apps için kullanılabilir. [App Service Ile tinfoil Security scanning](https://azure.microsoft.com/blog/web-vulnerability-scanning-for-azure-app-service-powered-by-tinfoil-security/) , geliştiricilerin ve yöneticilerin kötü amaçlı bir aktör tarafından yararlanabilmeleri için hızlı, tümleşik ve ekonomik bir şekilde bulma ve adresleme olanakları sunmaktadır.
 
 > [!NOTE]
-> Ayrıca [Tinfoil Security Azure AD ile tümleştirme](https://docs.microsoft.com/azure/active-directory/saas-apps/tinfoil-security-tutorial). Tinfoil Security Azure AD ile tümleştirme ile aşağıdaki avantajları sağlar:
->  - Azure AD'de için Tinfoil Security kimlerin erişebildiğini denetleyebilirsiniz.
->  - Kullanıcılarınızı otomatik olarak (çoklu oturum açma) için Tinfoil Security, Azure AD hesaplarını kullanarak oturum açmanız.
->  - Hesaplarınızı tek, merkezi bir konumda, Azure portalında yönetebilir.
+> [Tinfoil Security 'Yi Azure AD ile de tümleştirebilirsiniz](../../active-directory/saas-apps/tinfoil-security-tutorial.md). Tinfoil Security 'yi Azure AD ile tümleştirmek aşağıdaki avantajları sağlar:
+>  - Azure AD 'de, tinfoil Security 'ye kimlerin erişebileceğini kontrol edebilirsiniz.
+>  - Kullanıcılarınız Azure AD hesapları kullanılarak tinfoil Security 'de (çoklu oturum açma) otomatik olarak oturum açabilir.
+>  - Hesaplarınızı tek bir merkezi konumda, Azure portal yönetebilirsiniz.
 
-### <a name="test-your-application-in-an-operating-state"></a>Bir işletim durumda uygulamanızı test edin
+### <a name="test-your-application-in-an-operating-state"></a>Uygulamanızı bir işletim durumunda test etme
 
-Dinamik uygulama (DAST) güvenlik testi bir uygulama güvenlik açıklarını bulmak için bir işletme durumda test bir işlemdir. Bellek Bozulması, güvenli olmayan sunucu yapılandırması, siteler arası betik, kullanıcı ayrıcalık sorunları, SQL ekleme ve diğer önemli güvenlik sorunları gibi güvenlik açıklarını bulmak için yürütme sırasında DAST Araçlar, programlar analiz edin.
+Dinamik uygulama güvenliği testi (DAVST), güvenlik açıklarını bulmak için bir uygulamayı bir işletim durumunda test etme işlemidir. DADST araçları, bellek bozulması, güvenli olmayan sunucu yapılandırması, siteler arası betik oluşturma, Kullanıcı ayrıcalık sorunları, SQL ekleme ve diğer kritik güvenlik sorunları gibi güvenlik açıklarını bulmak için yürütürken programları analiz eder.
 
-Test (SAST) statik uygulama güvenlikten DAST farklıdır. SAST araçları, kaynak kodu analiz edin veya güvenlik açıkları bulmak için kod çalışmıyorken kod sürümlerini derlenmiş.
+Bast, statik uygulama güvenliği testi 'nden (SAST) farklıdır. SAST araçları, kod yürütülemediği zaman güvenlik kusurunu bulmak için kaynak kodu veya derlenmiş kod sürümlerini analiz eder.
 
-DAST, tercihen güvenlik uzmanı yardıma gerçekleştirin (bir [sızma tester](https://docs.microsoft.com/azure/security/azure-security-pen-testing) veya güvenlik açığı denetçisi). Bir güvenlik uzmanı kullanılabilir durumda değilse, DAST kendiniz bir web proxy tarayıcı ve bazı eğitim ile gerçekleştirebilirsiniz. Erkenden kodunuza güvenliğe dayalı bariz sorunları açmadığınızdan emin olmak için DAST tarayıcı takın. Bkz: [OWASP](https://www.owasp.org/index.php/Category:Vulnerability_Scanning_Tools) site için bir web uygulaması güvenlik açığı tarayıcıları listesi.
+Bir güvenlik uzmanı (bir [sızma Sınayıcısı](../fundamentals/pen-testing.md) veya güvenlik açığı denetçisi) ile birlikte, tercihen Bir güvenlik uzmanı yoksa, bir Web proxy tarayıcısı ve bazı eğitimlerle kendiniz de gerçekleştirebilirsiniz. Kodunuzda açık güvenlik sorunları sunmatığınızdan emin olmak için bir VAST tarayıcıyı erken takın. Web uygulaması güvenlik açığı tarayıcıları listesi için [OWASP](https://www.owasp.org/index.php/Category:Vulnerability_Scanning_Tools) sitesine bakın.
 
-### <a name="perform-fuzz-testing"></a>Fuzz testi yapma
+### <a name="perform-fuzz-testing"></a>Belirsizlik testi gerçekleştir
 
-İçinde [rastgele test](https://cloudblogs.microsoft.com/microsoftsecure/2007/09/20/fuzz-testing-at-microsoft-and-the-triage-process/), program hatalarına kasıtlı olarak bir uygulama için hatalı biçimlendirilmiş ya da rastgele veri sunarak anlamına. Program hata inducing uygulama yayımlanmadan önce olası güvenlik sorunlarını ortaya yardımcı olur.
+[Belirsizlik testi](https://cloudblogs.microsoft.com/microsoftsecure/2007/09/20/fuzz-testing-at-microsoft-and-the-triage-process/)' nde, bir uygulamaya hatalı biçimlendirilmiş veya rastgele veri sunarak program hatası ile tanışın. Program hatası, uygulama oluşturulmadan önce olası güvenlik sorunlarının açığa çıkarılmaya yardımcı olur.
 
-[Güvenlik riski algılama](https://docs.microsoft.com/security-risk-detection/) olan test etme hizmetinin yazılım güvenlik açısından kritik hataları bulmaya yönelik Microsoft benzersiz fuzz.
+[Güvenlik riski algılama](https://docs.microsoft.com/security-risk-detection/) , yazılımdaki güvenlik açısından kritik hataları bulmak için Microsoft benzersiz belirsizlik test hizmetidir.
 
-### <a name="conduct-attack-surface-review"></a>Saldırı yüzeyi gözden geçirme
+### <a name="conduct-attack-surface-review"></a>Saldırı yüzeyi incelemesi gerçekleştir
 
-Herhangi bir tasarım veya uygulama bir uygulamaya değiştirir veya sistem kabul kod tamamlama yaşamanıza sonra saldırı yüzeyini gözden geçirme. Tehdit modelleri de dahil olmak üzere değişikliklerin bir sonucu olarak oluşturulan tüm yeni saldırı vektörlerinin gözden azaltılabilir emin olun ve yardımcı olur.
+Kod tamamlama sonrasında saldırı yüzeyini gözden geçirmek, bir uygulama veya sistem üzerinde yapılan tüm tasarım veya uygulama değişikliklerinin dikkate alınmasının sağlanmasına yardımcı olur. Tehdit modelleri de dahil olmak üzere değişikliklerin sonucu olarak oluşturulan tüm yeni saldırı vektörlerini gözden geçirdiğinden ve azaltıldığından emin olmanıza yardımcı olur.
 
-Uygulama tarayarak, saldırı yüzeyini resmini oluşturabilirsiniz. Microsoft'un sunduğu adında bir saldırı yüzeyi analizi araç [saldırı yüzeyi Çözümleyicisi](https://www.microsoft.com/download/details.aspx?id=24487). Birçok ticari dinamik test etme ve araçları veya Hizmetleri dahil olmak üzere, tarama güvenlik açığı seçebileceğiniz [OWASP Lleştirilen saldırı Proxy proje](https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project), [Arachni](http://arachni-scanner.com/), [Skipfish](https://code.google.com/p/skipfish/), ve [w3af](http://w3af.sourceforge.net/). Bu aracı, uygulamanızın gezinme ve web üzerinden erişilebilir olan uygulama bölümlerini eşleyin. Azure Marketi için arama da yapabilirsiniz benzer [Geliştirici Araçları](https://azuremarketplace.microsoft.com/marketplace/apps/category/developer-tools?page=1).
+Uygulamayı tarayarak saldırı yüzeyinin bir resmini oluşturabilirsiniz. Microsoft, [saldırı yüzeyi Çözümleyicisi](https://www.microsoft.com/download/details.aspx?id=24487)adlı bir saldırı yüzeyi çözümleme aracı sunar. [OWASP tabanlı saldırı proxy projesi](https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project), [arachnı](http://arachni-scanner.com/), [skipbalık](https://code.google.com/p/skipfish/)ve [w3af](http://w3af.sourceforge.net/)dahil birçok ticari dinamik test ve güvenlik açığı tarama araçları veya hizmetleri arasından seçim yapabilirsiniz. Bu tarama araçları, uygulamanızı gezin ve Web üzerinden erişilebilen uygulamanın bölümlerini eşler. Ayrıca, Azure Marketi 'Nde benzer [Geliştirici Araçları](https://azuremarketplace.microsoft.com/marketplace/apps/category/developer-tools?page=1)için arama yapabilirsiniz.
 
-### <a name="perform-security-penetration-testing"></a>Güvenlik sızma testi gerçekleştirme
+### <a name="perform-security-penetration-testing"></a>Güvenlik, sızma testi gerçekleştirme
 
-Uygulamanızın güvenli olmasını sağlamak, diğer tüm işlevlerden test olarak kadar önemlidir. Olun [sızma testi](https://docs.microsoft.com/azure/security/azure-security-pen-testing) derleme ve dağıtım işlemini standart bir parçası. Normal güvenlik testlerini ve güvenlik açığı taraması dağıtılan uygulamaları zamanlayın ve açık bağlantı noktalarını, uç noktaları ve saldırıları izleyin.
+Uygulamanızın güvenli olmasını sağlamak, diğer tüm işlevleri test etmek kadar önemlidir. Derleme ve dağıtım sürecinin standart bir parçasını, [sızma testi](../fundamentals/pen-testing.md) yapın. Dağıtılan uygulamalarda düzenli güvenlik testlerini ve güvenlik açığı taramasını zamanlayın ve açık bağlantı noktaları, uç noktalar ve saldırıları izleyin.
 
-### <a name="run-security-verification-tests"></a>Güvenlik doğrulama testleri çalıştırın
+### <a name="run-security-verification-tests"></a>Güvenlik doğrulama testlerini Çalıştır
 
-[Azure DevOps Seti'ni güvenli](https://azsk.azurewebsites.net/index.html) (AzSK) için birden çok Azure platformu Hizmetleri SVTs içerir. Düzenli aralıklarla Azure aboneliğinizi ve uygulamanızı oluşturan farklı kaynakları güvenli bir durumda olduğundan emin olmak için bu SVTs çalıştırın. Ayrıca, Visual Studio uzantısı SVTs kullanılabilmesini AzSK, sürekli tümleştirme/sürekli dağıtım (CI/CD) uzantıları özelliğini kullanarak bu testleri otomatik hale getirebilirsiniz.
+[Azure Için güvenli DevOps seti](https://azsk.azurewebsites.net/index.html) (AzSK) Azure platformunun birden çok hizmeti için SVTs içerir. Azure aboneliğinizin ve uygulamanızı oluşturan farklı kaynakların güvenli bir durumda olduğundan emin olmak için bu SVTs 'yi düzenli olarak çalıştırırsınız. Bu testleri, AzSK 'nin sürekli tümleştirme/sürekli dağıtım (CI/CD) uzantıları özelliğini kullanarak otomatikleştirin ve bu da SVTs 'nin bir Visual Studio uzantısı olarak kullanılabilmesini sağlar.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Aşağıdaki makalelerde, güvenlik denetimleri öneririz ve yardımcı olabilecek etkinlikleri tasarım ve güvenli uygulamalar dağıtın.
+Aşağıdaki makalelerde, güvenli uygulamaları tasarlamanıza ve dağıtmanıza yardımcı olabilecek güvenlik denetimleri ve etkinlikleri önerilir.
 
 - [Güvenli uygulamalar tasarlama](secure-design.md)
 - [Güvenli uygulamalar dağıtma](secure-deploy.md)

@@ -5,11 +5,11 @@ ms.topic: include
 ms.date: 10/16/2018
 ms.author: wolfma
 ms.openlocfilehash: e832470884d07ae1c9637559c51e14dd770aa24f
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.sourcegitcommit: 040abc24f031ac9d4d44dbdd832e5d99b34a8c61
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67202827"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69539236"
 ---
 > [!NOTE]
-> Platform ve tercih ettiğiniz geliştirme ortamını içinde bulunabilir bir geliştirme projesi ayarlama konusunda bilgi [hızlı Başlangıçlar](~/articles/cognitive-services/speech-service/quickstart-csharp-dotnet-windows.md) makalelerinde bu belgeleri. Bir abonelik anahtarı, bkz: her iki durumda da ihtiyacınız olacak [konuşma hizmeti ücretsiz olarak deneyin](~/articles/cognitive-services/speech-service/get-started.md).
+> Platformunuz için bir geliştirme projesi ayarlama ve tercih edilen geliştirme ortamı, bu belgelerde [hızlı başlangıç](~/articles/cognitive-services/speech-service/quickstart-csharp-dotnet-windows.md) makalelerinde bulunabilir. Herhangi bir durumda, bir abonelik anahtarına ihtiyacınız olacaktır, bkz. [konuşma hizmetini ücretsiz deneyin](~/articles/cognitive-services/speech-service/get-started.md).

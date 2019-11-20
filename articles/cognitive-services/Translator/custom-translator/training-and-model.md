@@ -1,56 +1,56 @@
 ---
-title: Eğitim ve modeli nedir? -Özel Translator
+title: Eğitim ve model nedir? -Özel Translator
 titleSuffix: Azure Cognitive Services
-description: Belirli bir dil çifti için çeviri sağlayan sistem modelidir. Başarılı bir eğitim sonucunu bir modeldir. Bir modeli eğitimindeki üç birbirini dışlayan veri kümeleri eğitim veri kümesi, veri kümesi ayarlama ve veri kümesi test gereklidir.
+description: Model, belirli bir dil çifti için çeviri sağlayan sistemidir. Başarılı bir eğitimin sonucu bir modeldir. Bir modeli eğitmek için, karşılıklı birbirini dışlayan üç veri kümesi, eğitim veri kümesi, ayarlama veri kümesi ve test veri kümesi gereklidir.
 author: swmachan
-manager: christw
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.topic: conceptual
 ms.date: 02/21/2019
 ms.author: swmachan
-ms.openlocfilehash: 5d82baf3e7458a42429df9dafc9c8d5e16744716
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: af3f795dc5036b23b82562e7af4582bd90b44f47
+ms.sourcegitcommit: fe6b91c5f287078e4b4c7356e0fa597e78361abe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67436127"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68595422"
 ---
-# <a name="what-are-trainings-and-models"></a>Gelişmeleri yakından izleyin ve modelleri nelerdir?
+# <a name="what-are-trainings-and-models"></a>Esinler ve modeller nelerdir?
 
-Belirli bir dil çifti için çeviri sağlayan sistem modelidir.
-Başarılı bir eğitim sonucunu bir modeldir. Bir modeli eğitimindeki üç birbirini dışlayan veri kümeleri gereklidir: eğitim veri kümesi, veri kümesi ayarlama ve sınama veri kümesi. Sözlük verileri de sağlanabilir.
+Model, belirli bir dil çifti için çeviri sağlayan sistemidir.
+Başarılı bir eğitimin sonucu bir modeldir. Bir modeli eğitmek için, birbirini dışlayan üç veri kümesi gereklidir: eğitim veri kümesi, ayarlama veri kümesi ve test veri kümesi. Sözlük verileri de belirtilebilir.
 
-Eğitim verileri, bir eğitim sıraya alırken sağlanır, yalnızca özel Translator otomatik olarak ayarlama ve test derleyin. Bu, eğitim verilerinizden 5.000 cümleler hariç ve 2.500 ayarlama bir araya getirmek için her ve test kümelerini kullanın.
+Bir eğitimin sıraya alınması sırasında yalnızca eğitim verileri sağlanmışsa, özel çevirici ayarlama ve test veri kümelerini otomatik olarak birleştirir. Eğitim verilerinizde 5.000 cümleleri dışarıda bırakır ve ayarlama ve test kümelerini birleştirmek için her bir 2.500 kullanın.
 
-## <a name="training-dataset-for-custom-translator"></a>Özel Translator için eğitim veri kümesi
+## <a name="training-dataset-for-custom-translator"></a>Özel çevirici için eğitim veri kümesi
 
-Eğitim kümesi dahil belgeleri, modelinizi oluşturmak için özel Translator tarafından temel olarak kullanılır. Eğitim yürütme sırasında bu belgelerde bulunan cümleler hizalı (eşleştirilmiş veya). Eğitim belgeleri kümenizi oluşturma içinde liberties alabilir. Ekleyebileceğiniz olduğuna inanıyorsanız belgelerdir tangential ilgi bir modeli. Yeniden etkileri görmek için başka bir dışlama [BLEU (iki dilli değerlendirme Understudy) puanı](what-is-bleu-score.md). Ayar kümesi ve test kümesi sabit tutmak sürece, oluşumunu Eğitim kümesi ile denemeler yapın çekinmeyin. Bu yaklaşım, çeviri sisteminizi kalitesini değiştirmek için etkili bir yoludur.
+Eğitim kümesine dahil edilen belgeler, modelinizin oluşturulması için temel olarak özel çevirici tarafından kullanılır. Eğitim yürütmesi sırasında, bu belgelerde bulunan cümleler hizalanır (veya eşleştirilmiş). Eğitim belgeleri kümesini oluştururken serbest bir şekilde yararlanabilirsiniz. Tangential ilgi olduğunu düşündüğünüz belgeleri bir modelde dahil edebilirsiniz. Ayrıca, Bleu 'daki etkiyi görmek için bunları başka bir kez hariç tutun [(Iki dilli değerlendirme düşük incelemesi) puanı](what-is-bleu-score.md). Ayarlama kümesi ve test kümesi sabitlerini tutan sürece eğitim kümesi kompozisyonunu deneymekten çekinmeyin. Bu yaklaşım, çeviri sisteminizin kalitesini değiştirmek için etkili bir yoldur.
 
-Bir projede birden çok eğitimleri çalıştırın ve karşılaştırma [BLEU puanları](what-is-bleu-score.md) tüm eğitim çalıştırmaları arasında. Karşılaştırma için birden çok eğitimleri çalıştırırken, aynı ayarlama sağlamak / test verileri her zaman belirtilir. Ayrıca ayrıca sonuçları el ile İnceleme emin ["Test"](how-to-view-system-test-results.md) sekmesi.
+Bir proje içinde birden fazla çalışma çalıştırabilir ve tüm eğitim çalıştırmaları genelinde [Bleu puanlarını](what-is-bleu-score.md) karşılaştırabilirsiniz. Karşılaştırma için birden çok seyahat çalıştırırken, her seferinde aynı ayarlama/test verilerinin belirtildiğinden emin olun. Ayrıca, ["test"](how-to-view-system-test-results.md) sekmesinde sonuçları el ile de denetlediğinizden emin olun.
 
-## <a name="tuning-dataset-for-custom-translator"></a>Veri kümesi için özel Translator ayarlama
+## <a name="tuning-dataset-for-custom-translator"></a>Özel çevirici için veri kümesini ayarlama
 
-Bu kümede yer paralel belgeler özel Translator tarafından en iyi sonuçlar için çeviri sistemi ayarlamak için kullanılır.
+Bu küme içine eklenen paralel belgeler, en iyi sonuçlar için çeviri sistemini ayarlamak üzere özel çevirici tarafından kullanılır.
 
-Ayar kümesi eğitim sırasında tüm parametreleri ve ağırlıklarını çeviri sistemin en uygun değerlere ayarlamak için kullanılır. Ayarlamayı kümesini dikkatle seçin: ayar kümesi gelecekte çevirmek için istediğinize belgelerin içeriğini olması gerekir. Ayar kümesi üretilen çevirilerin kalitesini üzerinde önemli bir etkisi vardır. Ayarlama örnekleri ayarlama kümesinde sağlamak için en yakın çevirileri sağlamak çeviri sistemi sağlar. Küme ayarlama olarak 2500'den fazla cümleler gerekmez. En uygun çeviri kalitesi için en iyi temsil seçimi tümcelerin seçerek ayarlama kümesi el ile seçmek için önerilir.
+Ayarlama kümesi, çeviri sisteminin tüm parametrelerini ve ağırlıklarını en uygun değerlere ayarlamak için eğitim sırasında kullanılır. Ayarlama kümesini dikkatle seçin: ayarlama kümesi, daha sonra çevirmek istediğiniz belgelerin içeriğinin temsili olmalıdır. Ayarlama kümesinin, üretilen çevirilerin kalitesi üzerinde önemli bir etkisi vardır. Ayarlama, çeviri sisteminin ayarlama veri kümesinde sağladığınız örneklere en yakın çevirileri sağlamasına olanak sağlar. Ayar kümesi olarak 2500 taneden fazla cümle gerekmez. En iyi çeviri kalitesi için, en çok temsili seçimi seçerek ayarlama ayarlamayı el ile seçmeniz önerilir.
 
-Çevrilecek beklediğiniz gelecekteki cümleleri anlamlı ve temsili bir uzunluğu cümleler ayarlama kümenizi oluştururken seçin. Ayrıca, sözcükleri ve gelecekteki çevirilerinizi beklediğiniz yaklaşık dağıtımında çevirmek için istediğinize tümcecikleri cümleler seçmeniz gerekir. Bu cümleleri dönüm Göster ve önemli, fazla karmaşık olmadan bir ifade uzunluğu sağlamak için yeterli bağlam içerdiğinden uygulamada, bir cümle uzunluğu 8 için 18 yaşında sözcük En iyi sonuçlar üretir.
+Ayarlama kümesini oluştururken, daha sonra çeviri yapmak istediğiniz Tümcelerin anlamlı ve temsili bir uzunluğu olan tümceler ' ı seçin. Ayrıca, gelecekteki çevirilerde bekleeceğiniz yaklaşık bir dağıtım içinde çevirmek istediğiniz sözcükler ve tümceciklere sahip cümleler seçmelisiniz. Pratikte, bu tümceler en iyi sonuçları üretir ve çok karmaşık olmayan bir tümcecik uzunluğu sağlamak için, 5 ila 18 ' e kadar sözcük uzunluğunda sözcüklerdir.
 
-Prose ayarlama kümesinde kullanmak için cümleleri türünü iyi bir açıklaması verilmektedir: Gerçek fluent cümleleri. Tablo hücrelerini, değil edersiniz, nesnelerin interneti, yalnızca noktalama listelerin veya değil bir cümle - normal dil numaraları.
+Ayarlama kümesinde kullanılacak tümceler türünün iyi bir açıklaması şunlardır: gerçek akıcı cümleler. Tablo hücreleri değil, POEMS değil, hiçbir şey listesi değil, yalnızca noktalama işareti değil, tümce için normal bir dilde sayı değil.
 
-Ayarlama Veri kümenizi el ile seçerseniz, eğitim ve test verilerinizi olarak aynı cümle hiçbirini olmamalıdır. Ayar kümesi çevirilerin kalitesini üzerinde önemli bir etkisi vardır - cümleleri dikkatle seçin.
+Ayarlama veri kümesini el ile seçerseniz, eğitim ve test verileriyle aynı cümlelerden herhangi birine sahip olmamalıdır. Ayarlama kümesi, çevirilerin kalitesi üzerinde önemli bir etkiye sahiptir-cümleleri dikkatle seçin.
 
-Neyi seçeceğinizi ayarlama kümeniz için emin değilseniz, yalnızca Eğitim kümesi seçin ve özel Translator'ın sizin için ayarlama kümenizi seçin olanak tanır. Özel ayar kümesi otomatik olarak seçmesine Translator izin verdiğinizde, iki dilli eğitim belgelerden cümleleri rastgele bir alt kümesi kullanın ve bu cümleleri eğitim malzemesi kendisi hariç.
+Ayarlama ayarlarınız için neleri seçdiğinizden emin değilseniz, yalnızca eğitim kümesini seçmeniz ve özel çevirmenlerin sizin için ayarladığınız ayarı seçmesini seçelim. Özel çeviricisinin ayarlama ayarlarını otomatik olarak seçmesini sağlamak için, iki dilli eğitim belgelerinden oluşan rastgele bir cümle alt kümesini kullanır ve bu cümleleri eğitim malzemelerinin kendisinden hariç tutar.
 
-## <a name="testing-dataset-for-custom-translator"></a>Özel Translator için sınama veri kümesi
+## <a name="testing-dataset-for-custom-translator"></a>Özel çevirici için veri kümesini test etme
 
-Sınama kümesine dahil paralel belgeleri BLEU (iki dilli değerlendirme Understudy) puanını hesaplamak için kullanılır. Bu puanı çeviri sisteminizi kalitesini gösterir. Bu puanı gerçekten size sunulan bu eğitimi kaynaklanan çeviri sistemi tarafından gerçekleştirilen çevirileri sınama veri kümesi başvurusu cümleleri ne kadar yakın eşleşen bildirir.
+Test kümesine dahil edilen paralel belgeler, BLEU (Iki dilli değerlendirme az çalışma) Puanını hesaplamak için kullanılır. Bu puan, çeviri sisteminizin kalitesini gösterir. Bu puan, bu eğitimin sonucu olan çeviri sistemi tarafından, test veri kümesindeki başvuru cümleleriyle eşleşen çevirilerin ne kadar yakın olduğunu size bildirir.
 
-BLEU puanı, otomatik çeviri ve başvuru çevirisi arasında delta ölçüsüdür. Kendi aralıklarını 0-100. Bir puan 0 başvuru değil tek bir sözcük çeviriyi görüntülendiğini belirtir. Bir otomatik çeviri başvuru tam olarak eşleşen bir puan 100 gösterir: aynı kelimenin tam aynı konumdadır. Aldığınız puan test kümesinin tüm cümleleri BLEU puanı ortalamadır.
+BLEU puanı, otomatik çeviri ve başvuru çevirisi arasındaki Delta ölçüdür. Değeri 0 ile 100 aralığındadır. 0 puanı, bir başvurunun tek bir sözcüğünün çeviri içinde göründüğünü gösterir. 100 puanı otomatik çevirinin başvurusuyla tam olarak eşleştiğini gösterir: aynı sözcük tam olarak aynı konumdadır. Aldığınız puan, test kümesinin tüm cümlelerine yönelik BLEU puanı ortasıdır.
 
-Sınama kümesi, hedef dil cümleleri çiftindeki karşılık gelen kaynak dili tümcelerin en çok istenen çevirileri nerede paralel belgeleri içermelidir. Ayar kümesi oluşturmak için kullanılan aynı kriteri kullanmak isteyebilirsiniz. Ancak, test kümesi çeviri sistem kalitesini üzerinde hiçbir etkisi yoktur. BLEU puanı, için ve başka hiçbir şey için özel olarak oluşturmak için kullanılır.
+Test kümesi, hedef dil cümlelerin çiftin karşılık gelen kaynak dil cümlelerini en çok tercih ettiği çevirilerin olduğu paralel belgeleri içermelidir. Ayarlama kümesini oluşturmak için kullandığınız ölçütleri kullanmak isteyebilirsiniz. Ancak, test kümesinin, çeviri sisteminin kalitesi üzerinde hiçbir etkisi yoktur. Yalnızca sizin için BLEU puanı oluşturmak için ve başka hiçbir şey için kullanılır.
 
-Test kümesi olarak 2.500 cümleler gerekmez. Sistem sınama kümesine otomatik olarak seçmesine izin verdiğinizde, bu, iki dilli eğitim belgelerden cümleleri rastgele bir alt kümesi kullanın ve bu cümleleri eğitim malzemesi kendisini dışarıda.
+Test kümesi olarak 2.500 taneden fazla cümle gerekmez. Sistemin test kümesini otomatik olarak seçmesini izin vermenizden sonra, iki dilli eğitim belgelerinden oluşan rastgele bir cümle alt kümesini kullanır ve bu cümleleri eğitim malzemelerinin kendisinden hariç tutar.
 
-Test kümesi özel çevirileri görüntüleyebilir ve bunları model içindeki test sekmesine giderek test kümenizdeki, sağlanan çevirileri karşılaştırın.
+Test kümesinin özel çevirilerini görüntüleyebilir ve bir model içindeki test sekmesine giderek onları test kümesinde sunulan çevirilerle karşılaştırabilirsiniz.

@@ -4,6 +4,9 @@
   items:
     - name: Media Services hakkında
       href: media-services-overview.md
+    - name: Media Services yenilikleri
+      displayName: release notes
+      href: release-notes.md
 - name: Öğreticiler
   expanded: true
   items:
@@ -32,25 +35,42 @@
     - name: DRM ile dinamik olarak şifreleme
       displayName: 'PlayReady, Widevine, FairPlay'
       href: protect-with-drm.md
+- name: Örnekler
+  items:
+    - name: Media Services örnekleri
+      displayName: '.NET, Java'
+      href: 'https://docs.microsoft.com/samples/browse/?products=azure-media-services'
+    - name: Media Services v3 REST örnekleri
+      href: 'https://github.com/Azure-Samples/media-services-v3-rest-postman'
 - name: Kavramlar
   items:
     - name: Genel Bakış
       href: concepts-overview.md
-    - name: Bulutta karşıya yükleme ve depolama
+    - name: Hesaplar
       items:
-        - name: Depolama
+        - name: Media Services hesabı
+          displayName: subscription
+          href: media-services-account-concept.md
+        - name: Depolama hesabı
           href: storage-account-concept.md
           displayName: Storage side encryption
+    - name: Karşıya yükleme
+      items:
         - name: Varlıklar
           href: assets-concept.md
-    - name: Encoding
+          displayName: 'name, naming, file name'
+    - name: Dosyaları işleme
+      items:
+        - name: Dönüşümler ve İşler
+          href: transforms-jobs-concept.md
+          displayName: 'preset, schema'
+        - name: Hata kodları
+          href: job-error-codes.md
+    - name: İçerik kodlama
       items:
         - name: Genel Bakış
           href: encoding-concept.md
           displayName: 'encoding, presets, jobs, adaptive, bitrate'
-        - name: Dönüşümler ve İşler
-          href: transforms-jobs-concept.md
-          displayName: 'preset, schema'
         - name: Standart Kodlayıcı biçimleri
           displayName: 'containers, codecs'
           href: media-encoder-standard-formats.md
@@ -58,9 +78,7 @@
           href: autogen-bitrate-ladder.md
         - name: İçeriğe duyarlı kodlama
           href: cae-experimental.md
-        - name: İş hata kodları
-          href: job-error-codes.md
-    - name: Medya analizi
+    - name: İçerik çözümleme (Video Indexer)
       items:
         - name: Genel Bakış
           href: analyzing-video-audio-files-concept.md
@@ -88,12 +106,13 @@
           href: streaming-policy-concept.md
         - name: Akış Uç Noktası hata kodları
           href: streaming-endpoint-error-codes.md
-    - name: Dinamik şifreleme ve anahtar teslimi
+    - name: İçerik koruma
       items:
-        - name: Akış protokolleri ve şifreleme türleri
-          displayName: 'dynamic, encryption, content protection, PlayReady, Widevine, FairPlay'
+        - name: Dinamik şifreleme ve anahtar teslimi
+          displayName: 'content protection, streaming protocols, encryption types, PlayReady, Widevine, FairPlay, custom'
           href: content-protection-overview.md
-        - name: Erişim denetimiyle çoklu DRM sistemi
+        - name: Çoklu DRM sisteminin tasarımı
+          displayName: 'drm, access control'
           href: design-multi-drm-system-with-access-control.md
         - name: DRM lisansları
           items:
@@ -116,9 +135,11 @@
           displayName: 'vanity, ingest'
         - name: Önerilen gerçek zamanlı kodlayıcılar
           href: recommended-on-premises-live-encoders.md
-        - name: Bulut DVR kullanma
-          displayName: archive
+        - name: Zaman kaydırma ve canlı VOD
+          displayName: 'archive, dvr'
           href: live-event-cloud-dvr.md
+        - name: Canlı iş transkripsiyonu
+          href: live-transcription.md
         - name: Özellik karşılaştırması
           href: live-event-types-comparison.md
         - name: Durumlar ve faturalandırma
@@ -143,7 +164,7 @@
       items:
         - name: Genel Bakış
           href: media-services-apis-overview.md
-          displayName: 'accessing, naming, long-running'
+          displayName: 'accessing, long-running, sdk, invalid character, name, naming, file name'
         - name: 'Sayfa, filtre, düzen varlıkları'
           href: entities-overview.md
         - name: RBAC
@@ -156,6 +177,7 @@
               href: job-error-codes.md
     - name: v2’den v3’e geçiş kılavuzu
       href: migrate-from-v2-to-v3.md
+      displayName: naming
 - name: Nasıl yapılır kılavuzları
   items:
     - name: Başlarken
@@ -171,6 +193,8 @@
           href: media-reserved-units-cli-how-to.md
         - name: Varlık oluşturma - CLI
           href: cli-create-asset.md
+    - name: Geliştirici kılavuzları
+      items:
         - name: REST ile geliştirme
           items:
             - name: Postman ile bağlama
@@ -237,6 +261,12 @@
           href: monitor-events-portal-how-to.md
         - name: Olayları izleme - CLI
           href: job-state-events-cli-how-to.md
+    - name: Azure İzleyici’yi kullanma
+      items:
+        - name: İzleyici ölçümleri
+          href: media-services-metrics-howto.md
+        - name: Tanılama günlüklerini izleme
+          href: media-services-diagnostic-logs-howto.md
     - name: İçerik koruma
       items:
         - name: İçerik anahtarı ilkesini edinme - .NET
@@ -262,6 +292,8 @@
       items:
         - name: Varlık yayımlama - CLI
           href: cli-publish-asset.md
+        - name: Sinyal açıklayıcı ses
+          href: signal-descriptive-audio-howto.md
 - name: Başvuru
   items:
     - name: OpenAPI Belirtimi (Swagger)
@@ -322,8 +354,6 @@
           href: 'https://aka.ms/ams-v3-ruby-sdk'
     - name: Azure Media Services Gezgini
       href: 'https://github.com/Azure/Azure-Media-Services-Explorer'
-    - name: Sürüm notları
-      href: release-notes.md
     - name: Kotalar ve sınırlamalar
       href: limits-quotas-constraints.md
     - name: SSS

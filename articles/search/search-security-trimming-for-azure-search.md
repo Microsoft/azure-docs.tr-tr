@@ -1,49 +1,48 @@
 ---
-title: Sonuçları - Azure Search kırpma için güvenlik filtreleri
-description: Güvenlik filtreleri ve kullanıcı kimlikleri kullanarak Azure Search içerik üzerinde erişim denetimi.
-ms.service: search
-ms.topic: conceptual
-services: search
-ms.date: 05/02/2019
+title: Sonuçları kırpma için güvenlik filtreleri
+titleSuffix: Azure Cognitive Search
+description: Azure Bilişsel Arama içerikte güvenlik filtrelerini ve Kullanıcı kimliklerini kullanarak erişim denetimi.
+manager: nitinme
 author: brjohnstmsft
 ms.author: brjohnst
-manager: jlembicz
-ms.custom: seodec2018
-ms.openlocfilehash: a222b9e506988929c25a560361611b8f78142053
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
+ms.openlocfilehash: 24f168f68a60ebb0408b7f1c367039ea5caea6d1
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65024360"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72794272"
 ---
-# <a name="security-filters-for-trimming-results-in-azure-search"></a>Azure Search sonuçlarında kırpma için güvenlik filtreleri
+# <a name="security-filters-for-trimming-results-in-azure-cognitive-search"></a>Azure Bilişsel Arama sonuçları kırpma için güvenlik filtreleri
 
-Kullanıcı kimliğine göre Azure Search'te arama sonuçlarını kırpmak için güvenlik filtre uygulayabilirsiniz. Bu arama deneyimi, genellikle yapabilmek aramayı belge izinleri ilkeleri içeren bir alanda karşı kimlik karşılaştırma gerektirir. Bir eşleşme bulunduğunda, kullanıcı veya sorumlusu (örneğin, bir grubu veya rolü) bu belgeye erişimi vardır.
+Arama sonuçlarını kullanıcı kimliğine göre Azure Bilişsel Arama kırpmak için güvenlik filtreleri uygulayabilirsiniz. Bu arama deneyimi genellikle, arama isteğini belge üzerinde izinlere sahip olan ilkeleri içeren bir alana karşı istek yapanın kimliğini karşılaştırmaya gerek duyar. Bir eşleşme bulunduğunda, kullanıcının veya sorumlunun (bir grup veya rol gibi) bu belgeye erişimi vardır.
 
-Güvenlik elde etmek için tek yönlü filtreleme karmaşık bir eşitlik ifadeleri ayrım olduğu: Örneğin, `Id eq 'id1' or Id eq 'id2'`, vb. Bu yaklaşım, hata yapmaya açık, Bakımı zordur ve burada listelenmiştir yüzlerce veya binlerce değerleri durumlarda, sorgu yanıt süresini saniye sayısını tarafından yavaşlatır. 
+Güvenlik filtrelemesi elde etmenin bir yolu, eşitlik ifadelerinin karmaşık bir ilişkisini kullanmaktır: Örneğin, `Id eq 'id1' or Id eq 'id2'`ve benzeri. Bu yaklaşım hataya açıktır, bakım zordur ve listenin yüzlerce veya binlerce değer içermesi durumunda sorgu yanıt süresini pek çok saniyeye yavaşlatır. 
 
-Daha kolay ve hızlı bir yaklaşım aracılığıyladır `search.in` işlevi. Kullanırsanız `search.in(Id, 'id1, id2, ...')` eşitlik ifade yerine, saniyenin altındaki yanıt bekleyebileceğiniz kez.
+Daha basit ve daha hızlı bir yaklaşım `search.in` işlevi kullanmaktır. Eşitlik ifadesi yerine `search.in(Id, 'id1, id2, ...')` kullanırsanız, alt saniyelik yanıt sürelerini bekleyebilir.
 
-Bu makalede, aşağıdaki adımları kullanarak güvenlik filtresi nasıl yapılacağını gösterir:
+Bu makalede, aşağıdaki adımları kullanarak güvenlik filtrelemeyi nasıl gerçekleştirebileceğiniz gösterilmektedir:
 > [!div class="checklist"]
 > * Asıl tanımlayıcıları içeren bir alan oluşturun 
-> * Anında iletme veya varolan belgeleri ile ilgili asıl tanımlayıcıları güncelleştir
-> * Bir arama isteği ile `search.in` `filter`
+> * Mevcut belgeleri ilgili asıl tanımlayıcılarla gönderin veya güncelleştirin
+> * `search.in` `filter` bir arama isteği verme
 
 >[!NOTE]
-> Asıl tanımlayıcıları alma işlemi bu belgede ele alınmamaktadır. Bunu, kimlik hizmet sağlayıcınızdan almanız gerekir.
+> Asıl tanımlayıcıları alma işlemi bu belgede kapsanmıyor. Bunu kimlik hizmeti sağlayıcınızdan almalısınız.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Bu makalede, sahip olduğunuz varsayılır bir [Azure aboneliği](https://azure.microsoft.com/pricing/free-trial/?WT.mc_id=A261C142F), [Azure Search Hizmeti](https://docs.microsoft.com/azure/search/search-create-service-portal), ve [Azure Search dizini](https://docs.microsoft.com/azure/search/search-create-index-portal).  
+Bu makalede bir [Azure aboneliğiniz](https://azure.microsoft.com/pricing/free-trial/?WT.mc_id=A261C142F), [Azure bilişsel arama hizmeti](https://docs.microsoft.com/azure/search/search-create-service-portal)ve [Azure bilişsel arama dizininiz](https://docs.microsoft.com/azure/search/search-create-index-portal)olduğunu varsaymaktadır.  
 
-## <a name="create-security-field"></a>Güvenlik alanı oluşturma
+## <a name="create-security-field"></a>Güvenlik alanı oluştur
 
-Belgelerinizi erişim grupları belirten bir alan içermelidir. Bu bilgiler filtre ölçütlerini karşı belgeleri seçilir veya yayınlayanla döndürülen sonuç kümesinde reddetti haline gelir.
-Güvenli dosyaların dizinini sunuyoruz ve her dosya farklı sayıda kullanıcı tarafından erişilebilir olduğunu varsayalım.
-1. Alan ekleme `group_ids` (burada herhangi bir ad seçebileceğiniz) olarak bir `Collection(Edm.String)`. Alan olduğundan emin olun bir `filterable` özniteliğini `true` arama sonuçları filtrelenmez, kullanıcının sahip olduğu erişimi bağlı. Örneğin, ayarlarsanız `group_ids` alanı `["group_id1, group_id2"]` belgeyle için `file_name` "secured_file_b", grup kimlikleri "group_id1" veya "group_id2" dosyasına erişimi okuma ait olan kullanıcıların.
-   Alanın emin `retrievable` özniteliği `false` böylece arama isteğin bir parçası döndürülmez.
-2. Ayrıca `file_id` ve `file_name` açısından bu örnek alanları.  
+Belgeleriniz hangi grupların erişimi olduğunu belirten bir alan içermelidir. Bu bilgiler, veren olarak döndürülen sonuç kümesinden belgelerin seçildiği veya reddedildiği bir filtre ölçütü olur.
+Güvenli dosyalar dizini olduğunu ve her dosyaya farklı bir kullanıcı kümesi tarafından erişilebilmesini varsayalım.
+1. Alan `group_ids` ekleyin (burada herhangi bir ad seçebilirsiniz) `Collection(Edm.String)`. Arama sonuçlarının kullanıcının sahip olduğu erişime göre filtrelenmesini sağlamak için alanın `true` ayarlanmış bir `filterable` özniteliği olduğundan emin olun. Örneğin, "secured_file_b" `file_name` sahip belge için `group_ids` alanını `["group_id1, group_id2"]` olarak ayarlarsanız, yalnızca "group_id1" veya "group_id2" grup kimliklerine ait olan kullanıcılar dosyaya okuma erişimine sahiptir.
+   Alanın `retrievable` özniteliğinin, arama isteğinin bir parçası olarak döndürülmemesi için `false` olarak ayarlandığından emin olun.
+2. Ayrıca, bu örneğin sake için `file_id` ve `file_name` alanları ekleyin.  
 
 ```JSON
 {
@@ -56,9 +55,9 @@ Güvenli dosyaların dizinini sunuyoruz ve her dosya farklı sayıda kullanıcı
 }
 ```
 
-## <a name="pushing-data-into-your-index-using-the-rest-api"></a>REST API kullanarak dizininize veri gönderme
+## <a name="pushing-data-into-your-index-using-the-rest-api"></a>REST API kullanarak dizininizdeki verileri iletme
   
-Dizininizin URL uç noktasına bir HTTP POST isteği göndermektir. HTTP isteğinin gövdesi eklenecek belgeleri içeren bir JSON nesnesidir:
+Dizininizin URL uç noktasına bir HTTP POST isteği gönderin. HTTP isteğinin gövdesi, eklenecek belgeleri içeren bir JSON nesnesidir:
 
 ```
 POST https://[search service].search.windows.net/indexes/securedfiles/docs/index?api-version=2019-05-06  
@@ -66,7 +65,7 @@ Content-Type: application/json
 api-key: [admin key]
 ```
 
-İstek gövdesinde belgelerinizi içeriğini belirtin:
+İstek gövdesinde, belgelerinizin içeriğini belirtin:
 
 ```JSON
 {
@@ -93,7 +92,7 @@ api-key: [admin key]
 }
 ```
 
-Var olan bir belgeyi gruplarının listesini güncelleştirmeniz gerekirse, kullanabileceğiniz `merge` veya `mergeOrUpload` eylem:
+Mevcut bir belgeyi Grup listesi ile güncelleştirmeniz gerekiyorsa `merge` veya `mergeOrUpload` eylemini kullanabilirsiniz:
 
 ```JSON
 {
@@ -107,16 +106,16 @@ Var olan bir belgeyi gruplarının listesini güncelleştirmeniz gerekirse, kull
 }
 ```
 
-Ekleme veya belgeleri güncelleştirme tüm ayrıntılar için edinebilirsiniz [Düzenle belgeleri](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents).
+Belge ekleme veya güncelleştirme hakkında ayrıntılı bilgi için [belgeleri düzenleme belgesini](https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents)okuyabilirsiniz.
    
-## <a name="apply-the-security-filter"></a>Güvenlik Filtresi Uygula
+## <a name="apply-the-security-filter"></a>Güvenlik filtresini uygulama
 
-Trim dayanan belgeler için `group_ids` erişim, bir arama sorgusuyla sorun bir `group_ids/any(g:search.in(g, 'group_id1, group_id2,...'))` filtre, burada 'group_id1 group_id2...' Arama isteği gönderene ait olduğu gruplarıdır.
-Bu filtre tüm belgeler için eşleşen `group_ids` alan belirli tanımlayıcılarından birini içerir.
-Kullanarak Azure Search belgeleri arama ile ilgili tam Ayrıntılar için edinebilirsiniz [arama belgeleri](https://docs.microsoft.com/rest/api/searchservice/search-documents).
-Bu örnek, bir POST isteği kullanarak belgelerde arama yapmak nasıl gösterdiğine dikkat edin.
+`group_ids` erişimi temel alan belgeleri kırpmak için, bir `group_ids/any(g:search.in(g, 'group_id1, group_id2,...'))` filtresiyle bir arama sorgusu oluşturmalısınız, burada ' group_id1, group_id2,... ' , arama isteği verenin ait olduğu gruplarıdır.
+Bu filtre, `group_ids` alanının verilen tanımlayıcılardan birini içerdiği tüm belgelerle eşleşir.
+Azure Bilişsel Arama kullanarak belge arama hakkında ayrıntılı bilgi için, [arama belgelerini](https://docs.microsoft.com/rest/api/searchservice/search-documents)okuyabilirsiniz.
+Bu örnekte, bir POST isteği kullanılarak belgelerin nasıl aranacağı gösterilmektedir.
 
-HTTP POST isteği yürütün:
+HTTP POST isteğini verme:
 
 ```
 POST https://[service name].search.windows.net/indexes/securedfiles/docs/search?api-version=2019-05-06
@@ -124,7 +123,7 @@ Content-Type: application/json
 api-key: [admin or query key]
 ```
 
-Filtre, istek gövdesinde belirtin:
+İstek gövdesinde filtreyi belirtin:
 
 ```JSON
 {
@@ -132,7 +131,7 @@ Filtre, istek gövdesinde belirtin:
 }
 ```
 
-Belgeleri almalısınız geri burada `group_ids` "group_id1" veya "group_id2" içeriyor. Diğer bir deyişle, isteği gönderene okuma erişimi olan belgeleri alın.
+`group_ids` "group_id1" veya "group_id2" içeren belgeleri geri almanız gerekir. Diğer bir deyişle, istek verenin okuma erişimine sahip olduğu belgeleri alırsınız.
 
 ```JSON
 {
@@ -152,10 +151,10 @@ Belgeleri almalısınız geri burada `group_ids` "group_id1" veya "group_id2" i�
 ```
 ## <a name="conclusion"></a>Sonuç
 
-Bu kullanıcı kimliği ve Azure Search göre sonuçları nasıl filtre, `search.in()` işlevi. Bu işlev, her hedef belgeyle ilişkili asıl tanımlayıcıları eşleştirilecek isteyen kullanıcı için İlke tanımlayıcıları olarak geçirmek için kullanabilirsiniz. Arama isteği işlendiğinde `search.in` işlevi filtreler arama sonuçları kullanıcının sorumluları hiçbiri olan okuma erişimi. Asıl tanımlayıcıları, güvenlik grupları, roller ya da kullanıcının kendi kimlik gibi şeyleri temsil edebilir.
+Bu, Kullanıcı kimliği ve Azure Bilişsel Arama `search.in()` işlevi temelinde sonuçları filtreleyebilmeniz için kullanabileceğiniz bir durum olabilir. Bu işlevi, istenen kullanıcının her bir hedef belge ile ilişkili asıl tanımlayıcılarla eşleşmesi için ilke tanımlayıcılarını geçirmek için kullanabilirsiniz. Bir arama isteği işlendiği zaman, `search.in` işlevi, Kullanıcı sorumlularının hiçbirinin okuma erişimine sahip olmadığı arama sonuçlarını filtreler. Asıl tanımlayıcılar güvenlik grupları, roller ve hatta kullanıcının kendi kimliği gibi şeyleri temsil edebilir.
  
 ## <a name="see-also"></a>Ayrıca bkz.
 
-+ [Azure arama filtreleri kullanarak active Directory kimlik tabanlı erişim denetimi](search-security-trimming-for-azure-search-with-aad.md)
-+ [Azure Search'te filtreler](search-filters.md)
-+ [Azure Search işlemlerinde veri güvenliği ve erişim denetimi](search-security-overview.md)
++ [Azure Bilişsel Arama filtrelerini kullanarak kimlik tabanlı erişim denetimi Active Directory](search-security-trimming-for-azure-search-with-aad.md)
++ [Azure Bilişsel Arama filtreler](search-filters.md)
++ [Azure Bilişsel Arama işlemlerinde veri güvenliği ve erişim denetimi](search-security-overview.md)

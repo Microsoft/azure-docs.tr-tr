@@ -7,19 +7,19 @@ author: mdgattuso
 manager: danielgi
 editor: ''
 ms.assetid: ''
-ms.service: cdn
+ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 05/01/2018
 ms.author: magattus
-ms.openlocfilehash: 9793348b47763e6de10992b9a8a4606fc532cc4d
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 4fe72985a799595908a0ff6bceb1a73dca823c8f
+ms.sourcegitcommit: ccb9a7b7da48473362266f20950af190ae88c09b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60636766"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67593777"
 ---
 # <a name="large-file-download-optimization-with-azure-cdn"></a>Azure CDN ile büyük dosya indirme iyileştirme
 
@@ -111,7 +111,7 @@ Büyük dosya iyileştirmesi, genel web teslimatı farklı varsayılan önbellek
 |    | Genel web | Büyük dosya iyileştirmesi 
 --- | --- | --- 
 Önbelleğe alma: Pozitif <br> HTTP 200 203, 300, <br> 301, 302 ve 410 | 7 gün |1 gün  
-Önbelleğe alma: Negatif <br> HTTP 204 305, 404, <br> ve 405 | None | 1 saniye 
+Önbelleğe alma: Negatif <br> HTTP 204 305, 404, <br> ve 405 | Yok. | 1 saniye 
 
 ### <a name="deal-with-origin-failure"></a>Kaynak hatası işlem
 

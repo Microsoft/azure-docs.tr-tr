@@ -1,99 +1,103 @@
 ---
-title: MySQL için Azure veritabanı'nda bir sunucuya geri yükleme
-description: Bu makalede Azure portalını kullanarak MySQL için Azure veritabanı'nda bir sunucuya geri yükleme.
+title: MySQL için Azure veritabanı 'nda bir sunucuyu geri yükleme
+description: Bu makalede, Azure portal kullanarak MySQL için Azure veritabanı 'nda bir sunucunun nasıl geri yükleneceği açıklanmaktadır.
 author: ajlam
 ms.author: andrela
 ms.service: mysql
 ms.topic: conceptual
-ms.date: 04/01/2018
-ms.openlocfilehash: d76a644de8cb55da5e743e482d14946d371c3dfe
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/25/2019
+ms.openlocfilehash: 2813567eeb9435ca5e1d29dc6a0a246f9cca3b05
+ms.sourcegitcommit: c4700ac4ddbb0ecc2f10a6119a4631b13c6f946a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61423311"
+ms.lasthandoff: 10/27/2019
+ms.locfileid: "72965960"
 ---
-# <a name="how-to-backup-and-restore-a-server-in-azure-database-for-mysql-using-the-azure-portal"></a>Nasıl yedeklenir ve Azure portalını kullanarak MySQL için Azure veritabanı'nda bir sunucuya geri yükleme
+# <a name="how-to-backup-and-restore-a-server-in-azure-database-for-mysql-using-the-azure-portal"></a>Azure portal kullanarak MySQL için Azure veritabanı 'nda sunucu yedekleme ve geri yükleme
 
 ## <a name="backup-happens-automatically"></a>Yedekleme otomatik olarak gerçekleşir
-Sunucuları düzenli aralıklarla geri yükleme özellikleri etkinleştirmek için yedeklenen MySQL için Azure veritabanı. Bu özelliği kullanarak, sunucuyu ve tüm veritabanlarında için bir önceki-belirli bir noktaya, yeni bir sunucuya geri yükleyebilirsiniz.
+MySQL için Azure veritabanı sunucuları, geri yükleme özelliklerini etkinleştirmek üzere düzenli aralıklarla yedeklenir. Bu özelliği kullanarak, sunucuyu ve tüm veritabanlarını yeni bir sunucuda daha önceki bir zaman noktasına geri yükleyebilirsiniz.
 
 ## <a name="prerequisites"></a>Önkoşullar
-Bu nasıl yapılır kılavuzunda tamamlanması gerekir:
-- Bir [MySQL sunucusu ve veritabanı için Azure veritabanı](quickstart-create-mysql-server-database-using-azure-portal.md)
+Bu nasıl yapılır kılavuzunu tamamlayabilmeniz için şunlar gerekir:
+- [MySQL Için Azure veritabanı sunucusu ve veritabanı](quickstart-create-mysql-server-database-using-azure-portal.md)
 
-## <a name="set-backup-configuration"></a>Yedekleme kümesi yapılandırması
+## <a name="set-backup-configuration"></a>Yedekleme yapılandırmasını ayarla
 
-Yerel olarak yedekli yedeklemeler veya sunucu oluşturma, saat coğrafi olarak yedekli yedekleme için sunucunuzu yapılandırma arasındaki tercihi yapabilmek **fiyatlandırma katmanı** penceresi.
+Sunucu oluşturma sırasında, **fiyatlandırma katmanı** penceresinde yerel olarak yedekli yedeklemeler veya coğrafi olarak yedekli yedeklemeler için sunucunuzu yapılandırma arasında seçim yaparsınız.
 
 > [!NOTE]
-> Sahip, yedeklilik türünü bir sunucu oluşturulduktan sonra yerel olarak yedekli, coğrafi olarak yedekli vs moduna geçiş yapılamaz.
+> Bir sunucu oluşturulduktan sonra, coğrafi olarak yedekli ve yerel olarak yedekli olan artıklık türü değiştirilemez.
 >
 
-Azure Portalı aracılığıyla bir sunucu oluşturulurken **fiyatlandırma katmanı** penceredir seçeneğini burada **yerel olarak yedekli** veya **coğrafi olarak yedekli** yedeklemeler için sunucunuz yok. Seçtiğiniz Ayrıca bu pencereyi olduğu **yedekleme Bekletme dönemi** - ne kadar süre (gün sayısı içinde) için depolanan sunucu yedeklemelerini istiyor.
+Azure portal aracılığıyla bir sunucu oluştururken, **fiyatlandırma katmanı** penceresi sunucunuz Için **yerel olarak yedekli** veya **coğrafi olarak yedekli** yedeklemeleri seçtiğiniz yerdir. Bu pencere Ayrıca, **yedekleme bekletme dönemini** (gün sayısı cinsinden) sunucu yedeklemelerinin ne kadar süreyle depolandığını seçtiğiniz yerdir.
 
-   ![Fiyatlandırma katmanı - fazladan yedek seçin](./media/howto-restore-server-portal/pricing-tier.png)
+   ![Fiyatlandırma Katmanı-yedek yedeklilik seçin](./media/howto-restore-server-portal/pricing-tier.png)
 
-Oluşturma sırasında bu değerleri ayarlama hakkında daha fazla bilgi için bkz. [MySQL server Hızlı Başlangıç için Azure veritabanı](quickstart-create-mysql-server-database-using-azure-portal.md).
+Oluşturma sırasında bu değerleri ayarlama hakkında daha fazla bilgi için bkz. [MySQL Için Azure veritabanı sunucusu hızlı başlangıç](quickstart-create-mysql-server-database-using-azure-portal.md).
 
-Yedekleme bekletme süresi, aşağıdaki adımlar bir sunucuda değiştirilebilir:
+Yedekleme saklama süresi bir sunucuda aşağıdaki adımlarla değiştirilebilir:
 1. [Azure portal](https://portal.azure.com/) oturum açın.
-2. MySQL sunucusu için Azure veritabanı'nı seçin. Bu eylem açar **genel bakış** sayfası.
-3. Seçin **fiyatlandırma katmanı** menüsünden altında **ayarları**. Değiştirebileceğiniz kaydırıcıyı kullanarak **yedekleme Bekletme dönemi** tercihinize 7 ila 35 gün arasında.
-Aşağıdaki ekran görüntüsünde 34 gün olarak artırıldı.
-![Yedekleme bekletme süresi artar](./media/howto-restore-server-portal/3-increase-backup-days.png)
+2. MySQL için Azure veritabanı sunucunuzu seçin. Bu eylem **genel bakış** sayfasını açar.
+3. Menüde, **Ayarlar**' ın altında **fiyatlandırma katmanı** ' nı seçin. Kaydırıcıyı kullanarak **yedekleme saklama süresini** 7 ila 35 gün süreyle tercihlerinize göre değiştirebilirsiniz.
+Aşağıdaki ekran görüntüsünde 34 güne yükselmiştir.
+![yedekleme bekletme süresi arttı](./media/howto-restore-server-portal/3-increase-backup-days.png)
 
-4. Tıklayın **Tamam** Değişikliği onaylamak için.
+4. Değişikliği onaylamak için **Tamam** ' ı tıklatın.
 
-Yedekleme bekletme süresi ne kadar geri mevcut yedekleme dayalı olduğundan zaman içinde nokta geri alınabilir zaman yönetir. Belirli bir noktaya geri yükleme aşağıdaki bölümde daha ayrıntılı açıklanmıştır. 
+Yedekleme bekletme süresi, kullanılabilir yedeklemeler temel aldığı için zaman içinde bir nokta geri yüklemesi alma süresinin ne kadar geri alınacağını yönetir. Bir noktadan sonra geri yükleme aşağıdaki bölümde daha ayrıntılı olarak açıklanmıştır. 
 
 ## <a name="point-in-time-restore"></a>Belirli bir noktaya geri yükleme
-MySQL için Azure veritabanı bir-belirli bir noktaya geri dönün ve halinde sunucuya geri yüklemenize olanak sağlayan yeni bir kopyasını sunucu için. Verilerinizi kurtarmak için bu yeni sunucu kullanın veya bu yeni sunucuya işaret edecek, istemci uygulamaları vardır.
+MySQL için Azure veritabanı, sunucuyu bir zaman noktasına geri yüklemenize ve sunucunun yeni bir kopyasına geri yüklemenize olanak tanır. Verilerinizi kurtarmak için bu yeni sunucuyu kullanabilir veya istemci uygulamalarınızın bu yeni sunucuyu işaret edebilir.
 
-Örneğin, bir tabloyu yanlışlıkla olduysa bugün öğlen bırakılan, yalnızca öğleden önce geçmesi gereken süreyi geri eksik tablo ve ve verileri bu yeni sunucu kopyasından alır. Belirli bir noktaya geri yükleme sunucuda veritabanı düzeyinde düzeyini değil.
+Örneğin, bir tablo bugün öğleden sonra yanlışlıkla bırakıldıysa, daha önce geçen saate geri yükleyebilir ve eksik tablo ve verileri sunucunun bu yeni kopyasından elde edebilirsiniz. Zaman içinde geri yükleme, veritabanı düzeyinde değil, sunucu düzeyindedir.
 
-Aşağıdaki adımlar bir-belirli bir noktaya için örnek sunucuyu geri yükle:
-1. Azure portalında MySQL için Azure veritabanı sunucunuza seçin. 
+Aşağıdaki adımlar örnek sunucuyu bir zaman noktasına geri yükler:
+1. Azure portal, MySQL için Azure veritabanı sunucunuzu seçin. 
 
-2. Sunucunun araç **genel bakış** sayfasında **geri**.
+2. Sunucunun **genel bakış** sayfasının araç çubuğunda **geri yükle**' yi seçin.
 
-   ![MySQL - genel bakış - geri düğmesi için Azure veritabanı](./media/howto-restore-server-portal/2-server.png)
+   ![MySQL için Azure veritabanı-genel bakış-geri yükleme düğmesi](./media/howto-restore-server-portal/2-server.png)
 
-3. Geri yükleme formunu gerekli bilgiler ile doldurun:
+3. Geri yükleme formunu gereken bilgilerle doldurun:
 
-   ![MySQL - geri yükleme bilgileri için Azure veritabanı](./media/howto-restore-server-portal/3-restore.png)
-   - **Geri yükleme noktası**: -Geri yüklemek istediğiniz belirli bir noktaya seçin.
-   - **Hedef sunucu**: Yeni sunucu için bir ad sağlayın.
-   - **Konum**: Bölgeyi seçemezsiniz. Varsayılan olarak, kaynak sunucuyla aynıdır.
-   - **Fiyatlandırma katmanı**: Belirli bir noktaya geri yükleme yaparken bu parametrelerin değiştiremezsiniz. Kaynak sunucuyla aynıdır. 
+   ![MySQL için Azure veritabanı-geri yükleme bilgileri](./media/howto-restore-server-portal/3-restore.png)
+   - **Geri yükleme noktası**: geri yüklemek istediğiniz zaman noktasını seçin.
+   - **Hedef sunucu**: yeni sunucu için bir ad sağlayın.
+   - **Konum**: bölgeyi seçemezsiniz. Varsayılan olarak, kaynak sunucu ile aynıdır.
+   - **Fiyatlandırma katmanı**: bir zaman içinde geri yükleme yaparken bu parametreleri değiştiremezsiniz. Kaynak sunucuyla aynıdır. 
 
-4. Tıklayın **Tamam** bir-belirli bir noktaya için geri yüklemek için sunucuyu geri yükleyin. 
+4. Sunucuyu bir zaman noktasına geri yüklemek üzere geri yüklemek için **Tamam** ' a tıklayın. 
 
-5. Geri yükleme işlemi tamamlandıktan sonra verilerin beklenen şekilde geri yüklendiğini doğrulamak için oluşturulan yeni sunucuyu bulun.
+5. Geri yükleme tamamlandıktan sonra, verilerin beklendiği gibi geri yüklendiğini doğrulamak için oluşturulan yeni sunucuyu bulun.
 
->[!Note]
->Belirli bir noktaya geri yükleme ile oluşturulan yeni sunucusunun aynı Sunucu Yöneticisi oturum açma adını ve zaman içinde nokta var olan sunucu için geçerli bir parola seçtiğiniz unutmayın. Yeni Sunucu parolayı değiştirebilirsiniz **genel bakış** sayfası.
+Noktadan noktaya geri yükleme tarafından oluşturulan yeni sunucu, mevcut sunucu için geçerli olan Sunucu Yöneticisi oturum açma adı ve parolası ile aynı zamanda, Parolayı yeni sunucunun **genel bakış** sayfasından değiştirebilirsiniz.
+
+Geri yükleme sırasında oluşturulan yeni sunucu, özgün sunucuda bulunan güvenlik duvarı kurallarına veya VNet hizmeti uç noktalarına sahip değildir. Bu kuralların bu yeni sunucu için ayrı olarak ayarlanması gerekir.
 
 ## <a name="geo-restore"></a>Coğrafi geri yükleme
-Coğrafi olarak yedekli yedekleme için sunucunuzu yapılandırdıysanız, bu var olan bir sunucuyu yedekten yeni bir sunucu oluşturulabilir. Bu yeni server, MySQL için Azure veritabanı kullanılabilir herhangi bir bölgede oluşturulabilir.  
+Sunucunuzu coğrafi olarak yedekli yedeklemeler için yapılandırdıysanız, var olan sunucunun yedeklemesinden yeni bir sunucu oluşturulabilir. Bu yeni sunucu, MySQL için Azure veritabanı 'nın kullanılabildiği herhangi bir bölgede oluşturulabilir.  
 
 1. Portalın sol üst köşesinde bulunan **Kaynak oluştur** düğmesini (+) seçin. **Veritabanları** > **MySQL için Azure Veritabanı**’nı seçin.
 
    !["MySQL için Azure veritabanı" seçeneği](./media/howto-restore-server-portal/2_navigate-to-mysql.png)
 
-2. Formun **Kaynağı Seç** açılır listesinde, seçin **yedekleme**. Bu eylem, etkin coğrafi olarak yedekli yedeklemelere sahip sunucularının bir listesini yükler. Yeni sunucunuzun bir kaynak olarak bu yedeklemeler birini seçin.
-   ![Kaynağı seçin: Yedekleme ve coğrafi olarak yedekli yedeklemeleri listesi](./media/howto-restore-server-portal/2-georestore.png)
+2. Formun **Kaynak Seç** açılan menüsünde **Yedekle**' yi seçin. Bu eylem, coğrafi olarak yedekli yedeklemelerin etkinleştirildiği sunucuların listesini yükler. Yeni sunucunuzun kaynağı olacak şekilde bu Yedeklerden birini seçin.
+   ![kaynak seçin: coğrafi olarak yedekli yedeklemelerin yedeklenmesi ve listesi](./media/howto-restore-server-portal/2-georestore.png)
 
    > [!NOTE]
-   > Bir sunucu ilk oluşturulduğunda coğrafi geri yükleme için hemen kullanılabilir olmayabilir. Bu doldurulması gerekli meta veriler için birkaç saat sürebilir.
+   > Sunucu ilk oluşturulduğunda coğrafi geri yükleme için hemen kullanılamayabilir. Gerekli meta verilerin doldurulması birkaç saat sürebilir.
    >
 
-3. Rest tercihlerinizi formun doldurun. Seçebilirsiniz **konumu**. Seçebileceğiniz konumu seçtikten sonra **fiyatlandırma katmanı**. Varsayılan olarak sunucusundansa mevcut sunucu parametrelerini görüntülenir. Tıklayabilirsiniz **Tamam** bu ayarları devralmak için herhangi bir değişiklik yapmadan. Veya değiştirebileceğiniz **işlem nesli** (bölgede kullanılabilir seçtiğiniz varsa) sayısı **sanal çekirdekler**, **yedekleme Bekletme dönemi**, ve **yedekleme Yedeklilik seçeneğine**. Değiştirme **fiyatlandırma katmanı** (temel, genel amaçlı ve bellek için iyileştirilmiş) veya **depolama** geri yükleme işlemi sırasında boyutu desteklenmiyor.
+3. Formun geri kalanını tercihlerinize göre doldurun. Herhangi bir **konum**seçebilirsiniz. Konumu seçtikten sonra **fiyatlandırma katmanını**seçebilirsiniz. Varsayılan olarak, geri yüklemekte olduğunuz mevcut sunucunun parametreleri görüntülenir. Bu ayarları devralması için herhangi bir değişiklik yapmadan **Tamam** ' a tıklayabilirsiniz. Ya da **Işlem üretimini** (seçtiğiniz bölgede varsa), **sanal çekirdek**sayısı, **yedekleme saklama süresi**ve **yedekleme artıklığı seçeneğinin**sayısını değiştirebilirsiniz. Geri yükleme sırasında **fiyatlandırma katmanını** (temel, genel amaçlı veya bellek için iyileştirilmiş) veya **depolama** boyutunu değiştirme desteklenmiyor.
 
->[!Note]
->Coğrafi geri yükleme ile oluşturulan yeni sunucunun aynı Sunucu Yöneticisi oturum açma adı ve geri yükleme başlatıldığı anda var olan sunucu için geçerli bir parola vardır. Yeni Sunucu parola değiştirilebilir **genel bakış** sayfası.
+Coğrafi geri yükleme tarafından oluşturulan yeni sunucu, geri yükleme başlatıldığı sırada mevcut sunucu için geçerli olan Sunucu Yöneticisi oturum açma adı ve parolaya sahiptir. Parola, yeni sunucunun **genel bakış** sayfasından değiştirilebilir.
+
+Geri yükleme sırasında oluşturulan yeni sunucu, özgün sunucuda bulunan güvenlik duvarı kurallarına veya VNet hizmeti uç noktalarına sahip değildir. Bu kuralların bu yeni sunucu için ayrı olarak ayarlanması gerekir.
+
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Hizmet hakkında daha fazla bilgi [yedeklemeleri](concepts-backup.md).
-- Daha fazla bilgi edinin [iş sürekliliği](concepts-business-continuity.md) seçenekleri.
+- Hizmetin [yedeklemeleri](concepts-backup.md) hakkında daha fazla bilgi edinin
+- [Çoğaltmalar](concepts-read-replicas.md) hakkında bilgi edinin
+- [İş sürekliliği](concepts-business-continuity.md) seçenekleri hakkında daha fazla bilgi edinin

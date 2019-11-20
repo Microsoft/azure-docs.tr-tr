@@ -5,7 +5,7 @@
   items:
     - name: Identity Governance nedir?
       href: identity-governance-overview.md
-    - name: Yetkilendirme yönetimi nedir? (Önizleme)
+    - name: Yetkilendirme yönetimi nedir?
       href: entitlement-management-overview.md
     - name: Erişim gözden geçirmeleri nedir?
       href: access-reviews-overview.md
@@ -19,6 +19,8 @@
   items:
     - name: Yetkilendirme yönetimi
       items:
+        - name: Temsil ve roller
+          href: entitlement-management-delegate.md
         - name: İstek işlemi ve e-postalar
           href: entitlement-management-process.md
     - name: Erişim gözden geçirmeleri
@@ -36,24 +38,60 @@
       items:
         - name: Genel senaryolar
           href: entitlement-management-scenarios.md
-        - name: Yeni erişim paketi oluşturma
-          href: entitlement-management-access-package-create.md
-        - name: Erişim paketini düzenleme
-          href: entitlement-management-access-package-edit.md
-        - name: Katalog oluşturma
-          href: entitlement-management-catalog-create.md
-        - name: Erişim izni isteme
-          href: entitlement-management-request-access.md
-        - name: İstekleri onaylama
-          href: entitlement-management-request-approve.md
-        - name: Görevler için temsilci seçme
-          href: entitlement-management-delegate.md
-        - name: Raporları ve günlükleri görüntüleme
-          href: entitlement-management-reports.md
-        - name: Sorun giderme
-          href: entitlement-management-troubleshoot.md
+        - name: Yöneticiler
+          items:
+            - name: Katalog oluşturucuları için temsilci seçme
+              href: entitlement-management-delegate-catalog.md
+            - name: Bağlı kuruluş ekleme
+              href: entitlement-management-organization.md
+            - name: Dış kullanıcılara yönelik idare erişimi
+              href: entitlement-management-external-users.md
+            - name: Raporları ve günlükleri görüntüleme
+              href: entitlement-management-reports.md
+            - name: Sorun giderme
+              href: entitlement-management-troubleshoot.md
+        - name: Katalog sahipleri
+          items:
+            - name: Kaynakların kataloğunu oluşturma
+              href: entitlement-management-catalog-create.md
+            - name: Erişim paketi yöneticileri için temsilci seçme
+              href: entitlement-management-delegate-managers.md
+        - name: Erişim paketi yöneticileri
+          items:
+            - name: Yeni erişim paketi oluşturma
+              href: entitlement-management-access-package-create.md
+            - name: Erişim paketi bağlantısını paylaşma
+              href: entitlement-management-access-package-settings.md
+            - name: Kaynak rollerini değiştirme
+              href: entitlement-management-access-package-resources.md
+            - name: Değişiklik isteği ve onay ayarları
+              href: entitlement-management-access-package-request-policy.md
+            - name: Yaşam döngüsü ayarlarını değiştirme
+              href: entitlement-management-access-package-lifecycle-policy.md
+            - name: İstekleri görüntüleme
+              href: entitlement-management-access-package-requests.md
+            - name: 'Atamaları görüntüleme, ekleme ve kaldırma'
+              href: entitlement-management-access-package-assignments.md
+            - name: Gizleme veya silme
+              href: entitlement-management-access-package-edit.md
+        - name: Onaylayanlar
+          items:
+            - name: İstekleri onaylama
+              href: entitlement-management-request-approve.md
+        - name: İstek sahipleri
+          items:
+            - name: Erişim izni isteme
+              href: entitlement-management-request-access.md
     - name: Erişim gözden geçirmeleri
       items:
+        - name: Erişim paketleri
+          items:
+            - name: Erişim gözden geçirmesi oluşturma
+              href: entitlement-management-access-reviews-create.md
+            - name: Erişimi gözden geçirme
+              href: entitlement-management-access-reviews-review-access.md
+            - name: Kendi erişiminizi gözden geçirme
+              href: entitlement-management-access-reviews-self-review.md
         - name: Gruplar ve uygulamalar
           items:
             - name: Erişim gözden geçirmesi oluşturma

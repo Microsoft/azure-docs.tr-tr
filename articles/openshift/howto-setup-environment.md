@@ -1,107 +1,96 @@
 ---
 title: Azure Red Hat OpenShift geliştirme ortamınızı ayarlama | Microsoft Docs
-description: Microsoft Azure Red Hat OpenShift ile çalışmak için Önkoşullar aşağıda verilmiştir.
+description: Microsoft Azure Red Hat OpenShift ile çalışmaya yönelik önkoşullar aşağıda verilmiştir.
 services: openshift
-keywords: Red hat openshift Kurulum ayarlama
+keywords: Red Hat OpenShift kurulumu kuruldu
 author: jimzim
 ms.author: jzim
-ms.date: 05/10/2019
+ms.date: 11/04/2019
 ms.topic: conceptual
-ms.service: openshift
+ms.service: container-service
 manager: jeconnoc
-ms.openlocfilehash: 21ccd7b2919714610dbd51c62701c4bb32d330d6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: fa09ed90258a62d37dafeea5f4760e1fabdc210b
+ms.sourcegitcommit: f4d8f4e48c49bd3bc15ee7e5a77bee3164a5ae1b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66808825"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73581606"
 ---
 # <a name="set-up-your-azure-red-hat-openshift-dev-environment"></a>Azure Red Hat OpenShift geliştirme ortamınızı ayarlama
 
-Microsoft Azure Red Hat OpenShift uygulamalar oluşturup çalıştırın, sizin için yapmanız gerekir:
+Microsoft Azure Red Hat OpenShift uygulamalarını derlemek ve çalıştırmak için şunları yapmanız gerekir:
 
-* Ayrılmış Azure sanal makine örnekleri satın alın.
-* Sürüm 2.0.65 yüklemek (veya üzeri) Azure CLI (veya Azure Cloud Shell kullanın).
-* Kaydolun `AROGA` özellik ve ilişkili kaynak sağlayıcıları.
+* Azure CLı 'nın sürüm 2.0.65 (veya üzeri) sürümünü (veya Azure Cloud Shell kullanın).
+* `AROGA` özelliğine ve ilişkili kaynak sağlayıcılarına kaydolun.
 * Azure Active Directory (Azure AD) kiracısı oluşturun.
-* Azure AD uygulama nesnesi oluşturun.
+* Bir Azure AD uygulama nesnesi oluşturun.
 * Bir Azure AD kullanıcısı oluşturun.
 
-Aşağıdaki yönergeler bu Önkoşullar tümünde size yol gösterir.
-
-## <a name="purchase-azure-red-hat-openshift-application-nodes-reserved-instances"></a>Azure Red Hat OpenShift uygulama düğümleri ayrılmış örnekler satın alma
-
-Azure Red Hat OpenShift kullanabilmeniz için önce en az 4 Azure Red Hat OpenShift ayrılmış uygulama düğümünden daha sonra küme sağlama için mümkün olacaktır, satın almanız gerekir.
-
-Bir Azure müşterisi olduğunuz [Azure Red Hat OpenShift ayrılmış örnekler satın alma](https://aka.ms/openshift/buy) Azure portalı üzerinden. Satın aldıktan sonra aboneliğinizi 24 saat içinde etkinleştirilecektir.
-
-Bir Azure müşterisi değilseniz [satış birimiyle iletişime geçin](https://aka.ms/openshift/contact-sales) ve işlemini başlatmak için sayfanın alt kısmındaki Satış formunu doldurun.
-
-Başvurmak [Azure Red Hat OpenShift fiyatlandırma sayfası](https://aka.ms/openshift/pricing) daha fazla bilgi için.
+Aşağıdaki yönergeler, bu önkoşulların tümünde size yol gösterecektir.
 
 ## <a name="install-the-azure-cli"></a>Azure CLI'yı yükleme
 
-Azure Red Hat OpenShift sürümünü 2.0.65 gerektirir veya Azure CLI'ın daha yüksek. Azure CLI'yı zaten yüklediyseniz, çalıştırarak olması hangi sürümünü kontrol edebilirsiniz:
+Azure Red Hat OpenShift, Azure CLı 'nin sürüm 2.0.65 veya üstünü gerektirir. Azure CLı 'yi zaten yüklediyseniz, şunu çalıştırarak hangi sürüme sahip olmanız gerektiğini kontrol edebilirsiniz:
 
 ```bash
 az --version
 ```
 
-Çıkış ilk satırını CLI sürümünü örneğin olur `azure-cli (2.0.65)`.
+Çıktının ilk satırı CLı sürümüne sahip olacaktır, örneğin `azure-cli (2.0.65)`.
 
-Yönergeler için şunlardır [Azure CLI yükleme](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) yeni bir yükleme veya yükseltme gerekiyorsa.
+Yeni bir yükleme veya yükseltme gerekiyorsa [Azure CLI yükleme](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) yönergeleri aşağıda verilmiştir.
 
-Alternatif olarak, kullanabileceğiniz [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview). Azure Cloud Shell'i kullanırken seçtiğinizden emin olun **Bash** birlikte ilerleyin planlıyorsanız, ortam [oluşturun ve bir Azure Red Hat OpenShift kümesini yönetme](tutorial-create-cluster.md) öğretici serisi.
+Alternatif olarak, [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview)de kullanabilirsiniz. Azure Cloud Shell kullanırken, [Azure Red Hat Openshıft kümesi oluşturma ve yönetme](tutorial-create-cluster.md) öğreticisiyle birlikte Izlemeyi planlıyorsanız **Bash** ortamını seçtiğinizden emin olun.
 
-## <a name="register-providers-and-features"></a>Sağlayıcılar ve özellikleri kaydetme
+## <a name="register-providers-and-features"></a>Sağlayıcıları ve özellikleri kaydetme
 
-`Microsoft.ContainerService AROGA` Özelliği `Microsoft.Solutions`, `Microsoft.Compute`, `Microsoft.Storage`, `Microsoft.KeyVault` ve `Microsoft.Network` sağlayıcıları, ilk Azure Red Hat OpenShift kümenizi dağıtmadan önce el ile aboneliğinize kaydedilmelidir.
+`Microsoft.ContainerService AROGA` özelliği, `Microsoft.Solutions`, `Microsoft.Compute`, `Microsoft.Storage`, `Microsoft.KeyVault` ve `Microsoft.Network` sağlayıcılarının ilk Azure Red Hat OpenShift kümenizi dağıtılmadan önce aboneliğinize el ile kaydedilmesi gerekir.
 
-Bu sağlayıcıları ve özellikleri el ile kaydetmek için aşağıdaki yönergeleri CLI'yı yüklediyseniz bir Bash kabuğundan veya Azure Cloud Shell'i (Bash) oturumunda, Azure portalında kullanın:
+Bu sağlayıcıları ve özellikleri el ile kaydetmek için, CLı 'yı yüklediyseniz veya Azure portal Azure Cloud Shell (Bash) oturumunda, bir bash kabuğundan aşağıdaki yönergeleri kullanın:
 
-1. Birden çok Azure aboneliğiniz varsa, ilgili abonelik Kimliğini belirtin:
+1. Birden çok Azure aboneliğiniz varsa ilgili abonelik KIMLIĞINI belirtin:
 
     ```bash
     az account set --subscription <SUBSCRIPTION ID>
     ```
 
-1. Microsoft.ContainerService AROGA özelliği Kaydet:
+1. Microsoft. ContainerService AROGA özelliğini kaydedin:
 
     ```bash
     az feature register --namespace Microsoft.ContainerService -n AROGA
     ```
 
-1. Microsoft.Storage sağlayıcısını kaydedin:
+1. Microsoft. Storage sağlayıcısını kaydedin:
 
     ```bash
     az provider register -n Microsoft.Storage --wait
     ```
     
-1. Microsoft.Compute sağlayıcısı kaydedin:
+1. Microsoft. COMPUTE sağlayıcısını kaydedin:
 
     ```bash
     az provider register -n Microsoft.Compute --wait
     ```
 
-1. Microsoft.Solutions sağlayıcısını kaydedin:
+1. Microsoft. Solutions sağlayıcısını kaydedin:
 
     ```bash
     az provider register -n Microsoft.Solutions --wait
     ```
 
-1. Microsoft.Network sağlayıcı kaydedin:
+1. Microsoft. Network sağlayıcısı 'nı kaydedin:
 
     ```bash
     az provider register -n Microsoft.Network --wait
     ```
 
-1. Microsoft.KeyVault sağlayıcısını kaydedin:
+1. Microsoft. Keykasası sağlayıcısını kaydedin:
 
     ```bash
     az provider register -n Microsoft.KeyVault --wait
     ```
 
-1. Microsoft.ContainerService kaynak sağlayıcısının kaydını Yenile:
+1. Microsoft. ContainerService kaynak sağlayıcısının kaydını yenileyin:
 
     ```bash
     az provider register -n Microsoft.ContainerService --wait
@@ -109,15 +98,15 @@ Bu sağlayıcıları ve özellikleri el ile kaydetmek için aşağıdaki yönerg
 
 ## <a name="create-an-azure-active-directory-azure-ad-tenant"></a>Azure Active Directory (Azure AD) kiracısı oluşturma
 
-Azure Red Hat OpenShift hizmet Microsoft'a kuruluşunuz ile ilişkisini temsil eden bir ilişkili Azure Active Directory (Azure AD) kiracısı gerektirir. Azure AD kiracınızı kaydetmek, yapı ve uygulamaları yönetme, hem de diğer Azure hizmetlerini kullanmak sağlar.
+Azure Red Hat OpenShift hizmeti, kuruluşunuzu ve Microsoft ile ilişkisini temsil eden ilişkili bir Azure Active Directory (Azure AD) kiracısı gerektirir. Azure AD kiracınız, uygulamaları kaydetmenizi, oluşturmanızı ve yönetmenizi, ayrıca diğer Azure hizmetlerini kullanmayı sağlar.
 
-Azure Red Hat OpenShift kümeniz için Kiracı olarak kullanılacak bir Azure AD yoksa veya test etmek için bir kiracı oluşturmak istiyorsanız, yönergeleri izleyin [Azure Red Hat OpenShift kümeniz için Azure AD kiracısı oluşturma](howto-create-tenant.md) önce Bu kılavuz ile devam ediliyor.
+Azure Red Hat OpenShift kümeniz için kiracı olarak kullanabileceğiniz bir Azure AD yoksa veya test için bir kiracı oluşturmak istiyorsanız, bu kılavuza devam etmeden önce [Azure Red Hat Openshıft kümeniz Için Azure AD kiracısı oluşturma](howto-create-tenant.md) bölümündeki yönergeleri izleyin .
 
-## <a name="create-an-azure-ad-user-security-group-and-application-object"></a>Bir Azure AD kullanıcı, güvenlik grubu ve uygulama oluşturma nesnesi
+## <a name="create-an-azure-ad-user-security-group-and-application-object"></a>Azure AD kullanıcısı, güvenlik grubu ve uygulama nesnesi oluşturma
 
-Azure Red Hat OpenShift depolama yapılandırma, kümenizde görevleri gerçekleştirmek için izinler gerektirir. Bu izinleri ile temsil edilen bir [hizmet sorumlusu](https://docs.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals#service-principal-object). Azure Red Hat OpenShift kümenizde çalışan uygulamaları test etmek için yeni bir Active Directory kullanıcısı oluşturmak isteyebilirsiniz.
+Azure Red Hat OpenShift, kümenizde depolama yapılandırma gibi görevleri gerçekleştirmek için izinler gerektirir. Bu izinler bir [hizmet sorumlusu](https://docs.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals#service-principal-object)ile temsil edilir. Ayrıca, Azure Red Hat OpenShift kümenizde çalışan uygulamaları test etmek için yeni bir Active Directory Kullanıcı oluşturmak isteyeceksiniz.
 
-Bölümündeki yönergeleri [bir Azure AD uygulama nesnesi ve kullanıcı oluşturma](howto-aad-app-configuration.md) bir hizmet sorumlusu oluşturmak için bir istemci gizli anahtarı ve kimlik doğrulama geri çağırma URL'si için uygulamanızı oluşturmak ve yeni bir Azure AD güvenlik grubu ve kullanıcı erişmek için Küme.
+Hizmet sorumlusu oluşturmak için [Azure AD uygulama nesnesi ve Kullanıcı oluşturma](howto-aad-app-configuration.md) bölümündeki yönergeleri izleyin, uygulamanız için bir istemci gizli anahtarı ve kimlik doğrulama geri çağırma URL 'si oluşturun ve kümeye erişmek için yeni BIR Azure AD güvenlik grubu ve kullanıcı oluşturun.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

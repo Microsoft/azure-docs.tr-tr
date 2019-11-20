@@ -6,25 +6,26 @@ author: alkohli
 ms.service: databox
 ms.subservice: disk
 ms.topic: quickstart
-ms.date: 02/26/2019
+ms.date: 09/03/2019
 ms.author: alkohli
+ms.localizationpriority: high
 Customer intent: As an IT admin, I need to quickly deploy Data Box Disk so as to import data into Azure.
-ms.openlocfilehash: 65bf4e973ce33b2898abf585fe306a8bc85c64a0
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
-ms.translationtype: MT
+ms.openlocfilehash: b07adc955b7904c6e6a3278480cec5a2be91ec35
+ms.sourcegitcommit: 49c4b9c797c09c92632d7cedfec0ac1cf783631b
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67477795"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70232899"
 ---
 ::: zone target="docs"
 
-# <a name="quickstart-deploy-azure-data-box-disk-using-the-azure-portal"></a>Hızlı Başlangıç: Azure portalını kullanarak Azure Data Box Disk dağıtma
+# <a name="quickstart-deploy-azure-data-box-disk-using-the-azure-portal"></a>Hızlı Başlangıç: Azure portalını kullanarak Azure Data Box Disk'i dağıtma
 
 ::: zone-end
 
 ::: zone target="chromeless"
 
-# <a name="get-started-with-azure-data-box-disk-using-azure-portal"></a>Azure Data Box Azure portalını kullanarak Disk ile çalışmaya başlama
+## <a name="get-started-with-azure-data-box-disk"></a>Azure Data Box Disk’i kullanmaya başlayın 
 
 ::: zone-end
 
@@ -32,7 +33,7 @@ ms.locfileid: "67477795"
 
 Bu hızlı başlangıçta Azure portalı kullanarak Azure Data Box Disk'i dağıtma adımları anlatılmaktadır. Bu adımlar sipariş oluşturma, diskleri alma, paketini açma, bağlama, disklere veri kopyalama ve Azure'a yükleme işlemlerini kapsamaktadır.
 
-Ayrıntılı adım adım dağıtım ve izleme yönergeleri için Git [Öğreticisi: Azure Data Box Disk sipariş](data-box-disk-deploy-ordered.md). 
+Ayrıntılı adım adım dağıtım ve izleme yönergeleri için, [Öğretici: Azure Data Box Disk sipariş etme](data-box-disk-deploy-ordered.md) bölümüne gidin. 
 
 Azure aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
@@ -40,13 +41,13 @@ Azure aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free
 
 ::: zone target="chromeless"
 
-Bu hızlı başlangıçta Azure portalı kullanarak Azure Data Box Disk'i dağıtma adımları anlatılmaktadır. Adımları gözden geçirme Önkoşullar dahil etme, diskleri kilidini, bağlanın ve Azure'a yükler, böylece verileri disklere kopyalayın.
+Bu kılavuz, Azure portalında Azure Data Box Disk’i kullanma adımlarında size yol gösterir. Bu kılavuz, aşağıdaki soruların yanıtlarını bulmanıza yardımcı olacaktır.
 
 ::: zone-end
 
 ::: zone target="docs"
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Başlamadan önce:
 
@@ -60,16 +61,16 @@ Başlamadan önce:
 
 ::: zone target="chromeless"
 
-## <a name="prerequisites"></a>Önkoşullar
-
-- Kullanma Data Box Disk Siparişiniz yerleştirdiğiniz [Öğreticisi: Azure Data Box Disk sipariş](data-box-disk-deploy-ordered.md).
-- Disklerinizi aldınız ve portaldaki iş durumu **Teslim Edildi** olarak güncelleştirildi.
-- Kullanılabilir bir istemci bilgisayar, verileri kopyalamak sahip. İstemci bilgisayarınızda:
-
-    - Çalıştıran bir [işletim sistemi desteklenen](data-box-disk-system-requirements.md#supported-operating-systems-for-clients).
-    - Sahip [diğer gerekli yazılımı](data-box-disk-system-requirements.md#other-required-software-for-windows-clients) Windows istemci ise yüklü.
+> [!div class="checklist"]
+>
+> - **Önkoşulları inceleme**: Disk ve kabloların sayısını, işletim sistemini ve diğer yazılımları denetleyin.
+> - **Bağlama ve kilidini açma**: Cihazı bağlayın ve verileri kopyalamak için diskin kilidini açın.
+> - **Diske veri kopyalama ve doğrulama**: Verileri disklerin içinde önceden oluşturulmuş klasörlerin içine kopyalayın.
+> - **Diskleri iade etme**: Diskleri, verilerin depolama hesabınıza yüklendiği Azure veri merkezine iade edin.
+> - **Azure’da verileri doğrulama**: Verilerinizi kaynak veri sunucusundan silmeden önce depolama hesabınıza yüklendiğini doğrulayın.
 
 ::: zone-end
+
 
 ::: zone target="docs"
 
@@ -103,25 +104,25 @@ Bu adım yaklaşık 5 dakika sürer.
 
     1. Azure portalında **Genel > Cihaz Ayrıntıları**'na gidin ve destek anahtarını alın.
     2. İşletim sistemine özgü Data Box Disk kilit açma aracını disklere veri kopyalamak için kullanılacak bilgisayara indirin ve ayıklayın. 
-    3. Data Box Disk kilit açma aracını çalıştırın ve destek anahtarını sağlayın. Yeniden takılan tüm diskler için kilit açma aracını tekrar çalıştırın ve destek anahtarını sağlayın. **Disk kilidini açmak için BitLocker iletişim kutusunu veya BitLocker anahtarını kullanmayın.** Diskleri kilidini açma hakkında daha fazla bilgi için Git [Windows istemci disklerde kilidini](data-box-disk-deploy-set-up.md#unlock-disks-on-windows-client) veya [Linux istemci disklerde kilidini](data-box-disk-deploy-set-up.md#unlock-disks-on-linux-client).
+    3. Data Box Disk kilit açma aracını çalıştırın ve destek anahtarını sağlayın. Yeniden takılan tüm diskler için kilit açma aracını tekrar çalıştırın ve destek anahtarını sağlayın. **Disk kilidini açmak için BitLocker iletişim kutusunu veya BitLocker anahtarını kullanmayın.** Disk kilitlerinin açılması hakkında daha fazla bilgi için, [Windows istemcisinde disk kilidi açma](data-box-disk-deploy-set-up.md#unlock-disks-on-windows-client)'ya veya [Linux istemcisinde disk kilidi açma](data-box-disk-deploy-set-up.md#unlock-disks-on-linux-client)'ya gidin.
     4. Diske araç tarafından atanan sürücü harfi görüntülenir. Disk sürücü harfini not edin. Bu harf sonraki adımlarda kullanılacaktır.
 
 ## <a name="copy-data-and-validate"></a>Verileri kopyalama ve doğrulama
 
 Bu işlemi tamamlamak için gereken süre verilerinizin boyutuna göre değişir.
 
-1. Sürücüsünde yer *PageBlob*, *BlockBlob*, *AzureFile*, *ManagedDisk*, ve *DataBoxDiskImport* klasörleri. Blok blobu olarak içeri aktarılması gereken verileri sürükleyip *BlockBlob* klasörüne bırakın. Benzer şekilde, sürükle ve bırak VHD/VHDX gibi verileri *PageBlob* klasörü ve uygun verilerin *AzureFile*. Yönetilen disklere altında bir klasör olarak karşıya yüklemek istediğiniz VHD kopyalama *ManagedDisk*.
+1. Sürücüde *PageBlob*, *BlockBlob*, *AzureFile*, *ManagedDisk* ve *DataBoxDiskImport* klasörleri bulunur. Blok blobu olarak içeri aktarılması gereken verileri sürükleyip *BlockBlob* klasörüne bırakın. Benzer şekilde VHD/VHDX gibi verileri sürükleyip *PageBlob* klasörüne, uygun verileri ise *AzureFile* klasörüne bırakın. Yönetilen disk olarak karşıya yüklemek istediğiniz VHD’leri *ManagedDisk* altındaki bir klasöre kopyalayın.
 
-    *BlockBlob* ve *PageBlob* klasörlerinin altındaki her klasör için Azure depolama hesabında bir kapsayıcı oluşturulur. Bir dosya paylaşımı için bir alt klasörü altında oluşturulur *AzureFile*.
+    *BlockBlob* ve *PageBlob* klasörlerinin altındaki her klasör için Azure depolama hesabında bir kapsayıcı oluşturulur. *AzureFile* altındaki bir alt klasör için dosya paylaşımı oluşturulur.
 
-    *BlockBlob* ve *PageBlob* klasörlerinin altındaki tüm dosyalar Azure Depolama hesabındaki varsayılan `$root` kapsayıcısına kopyalanır. Bir klasördeki dosyaları kopyalayın *AzureFile*. Doğrudan kopyaladığınız dosyalarla *AzureFile* klasör başarısız olur ve bu blok blobları olarak karşıya yüklendi.
+    *BlockBlob* ve *PageBlob* klasörlerinin altındaki tüm dosyalar Azure Depolama hesabındaki varsayılan `$root` kapsayıcısına kopyalanır. Dosyaları *AzureFile* içindeki bir klasöre kopyalayın. Doğrudan *AzureFile* klasörüne kopyalanan tüm dosyalar başarısız olur ve blok blobu olarak yüklenir.
 
     > [!NOTE]
-    > - Tüm kapsayıcıları, blobları ve dosyaları uyması gereken [Azure adlandırma kurallarına](data-box-disk-limits.md#azure-block-blob-page-blob-and-file-naming-conventions). Bu kurallara uyulmaması halinde veriler Azure'a yüklenemez.
-    > - Dosyaları ~4.75 TiB blok blobları, sayfa blobları için ~ 8 TiB ve Azure dosyaları için yaklaşık 1 TiB aşmamasını sağlayın.
+    > - Tüm kapsayıcılar, bloblar ve dosyaların [Azure adlandırma kurallarına](data-box-disk-limits.md#azure-block-blob-page-blob-and-file-naming-conventions) uygun olması gerekir. Bu kurallara uyulmaması halinde veriler Azure'a yüklenemez.
+    > - Dosya boyutlarının blok blobları için en fazla ~4,75 TiB, sayfa blobları için ~8 TiB ve Azure Dosyalar için ~1 TiB olduğundan emin olun.
 
-2. **(İsteğe bağlı ancak önerilir)**  Kopyalama tamamlandıktan sonra en azından, çalıştırmanızı öneririz `DataBoxDiskValidation.cmd` sağlanan *DataBoxDiskImport* klasörü ve select seçenek vstemplate dosyalarını doğrulamak için 1. Ayrıca, zaman sorgulamasına öneririz 2. seçenek de sağlama toplamı doğrulama için oluşturmak için kullandığınız (sürebilir veri boyutuna bağlı olarak). Bu adımları verileri Azure'a karşıya yüklenirken hataları olasılığını en aza indirin.
-3. Güvenli bir şekilde sürücüsünü kaldır.
+2. **(İsteğe bağlı ancak önerilir)** Kopyalama tamamlandıktan sonra dosyaları doğrulamak için en azından *DataBoxDiskImport* klasöründe belirtilen `DataBoxDiskValidation.cmd` dosyasını çalıştırmanız ve 1. seçeneği belirlemeniz önerilir. Ayrıca, sürenin izin verdiği ölçüde, doğrulama için sağlama toplamları da oluşturmak üzere 2. seçeneği kullanmanız önerilir (veri boyutuna bağlı olarak zaman alabilir). Bu adımlar, verileri Azure'a yüklerken oluşan hataların olasılığını en aza indirir.
+3. Sürücüyü güvenle kaldırın.
 
 ## <a name="ship-to-azure"></a>Azure'a gönderme
 

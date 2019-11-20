@@ -1,129 +1,130 @@
 ---
-title: Market teklifleri güncelleştir | Azure Market
-description: Güncelleştirme Azure ve bulut iş ortağı portalını kullanarak AppSource Marketlerden sunar.
+title: Market tekliflerini güncelleştir | Azure Marketi
+description: Bulut İş Ortağı Portalı kullanarak Azure ve AppSource marketlerindeki teklifleri güncelleştirme
 services: Azure, AppSource, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 01/11/2019
 ms.author: pabutler
-ms.openlocfilehash: 73e2812c678dca7e21089ee9cc091db756d7e25a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: b3f579dbdc943b2380c9de3dde6b2ebf4754d4d1
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64942399"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826720"
 ---
-# <a name="update-azure-marketplace-and-appsource-offers"></a>Azure Market ve AppSource teklifler güncelleştir
+# <a name="update-azure-marketplace-and-appsource-offers"></a>Azure Marketi ve AppSource tekliflerini güncelleştirme
 
-Güncelleştirmeleri yayımlandıktan sonra teklifiniz için uygulayabileceğiniz çeşitli tür vardır.  [Bulut iş ortağı portalı](https://cloudpartner.azure.com/) bir teklif özniteliklerini değiştirme düzgün bir şekilde yönetmenize yardımcı olan dahil olmak üzere:
+Yayımlandıktan sonra teklifiniz için uygulayabileceğiniz çeşitli türlerde güncelleştirmeler vardır.  [Bulut iş ortağı portalı](https://cloudpartner.azure.com/) , aşağıdakiler de dahil olmak üzere bir teklifin özniteliklerini düzgün şekilde değiştirmenizi sağlar:
 
--  Yeni sanal makine (VM) bir görüntüyü veya paketi sürümü için mevcut bir SKU ekleme
--  Bir SKU içinde kullanılabilir bölgeleri değiştirme
--  Yeni SKU'ları ekleme
--  Öneriler veya SKU'ları için Market meta verilerini güncelleştirme 
--  Kullandıkça Öde aboneliğine güncelleştirme fiyatlandırma sunar
+-  Mevcut bir SKU 'ya yeni sanal makine (VM) görüntüsü veya paket sürümü ekleniyor
+-  SKU 'nun kullanılabildiği bölgeleri değiştirme
+-  Yeni SKU 'Lar ekleme
+-  Teklifler veya SKU 'Lar için Market meta verilerini güncelleştirme 
+-  Kullandıkça Öde tekliflarında fiyatlandırmayı güncelleştirme
 
-Portal özelliklerini karşılaştırın ve değişiklikler yönetmeye yardımcı özellikleri bir teklif için bir geçmişini görüntüleme olanağı gibi özellikleri de vardır.  Bir teklif veya SKU değiştirdikten sonra değişiklikleri "canlı" geçmeden önce yayımlanmalıdır.  Bu makalede, Market teklifi güncelleştiriliyor farklı yönlerini gösterilmektedir.
+Portalda Ayrıca özellikleri karşılaştırma ve bir teklifin özelliklerinin geçmişini görüntüleme gibi özellikler de bulunur ve bu da değişiklikleri yönetmenize yardımcı olur.  Bir teklif veya SKU 'yu değiştirdikten sonra değişiklikler "canlı" olmadan önce yeniden yayımlanması gerekir.  Bu makalede Market teklifinizi güncelleştirmenin farklı yönleri açıklanmaktadır.
 
-## <a name="unpermitted-changes-to-an-offersku"></a>Bir teklif/SKU unpermitted değişiklikler
+## <a name="unpermitted-changes-to-an-offersku"></a>Teklif/SKU 'ya izin verilmeyen değişiklikler
 
-Bir teklif ya da Market'te yayımlandıktan sonra değiştirilemez SKU'sunu bazı öznitelikleri vardır.  Karşılık gelen alanlara devre dışı **Düzenleyicisi** portal, örnek için sekmesinde:  
+Bir teklifin veya SKU 'nun Market 'te yayımlandıktan sonra değiştirilemeyen bazı öznitelikleri vardır.  İlgili alanlar portalın **Düzenleyici** sekmesinde devre dışıdır, örneğin:  
 
-- Kimliği ve yayımcı kimliği sunar
-- SKU KİMLİĞİ 
-- Veri diski sayısı mevcut SKU'ları
-- Faturalama/lisans modeli değişiklikler mevcut SKU'ları
-- Sürüm, örneğin etiketler: `1.0.1`
-
-
-## <a name="common-update-operations"></a>Genel güncelleştirme işlemleri
-
-Aşağıdaki bölümlerde bazı çoğu güncelleştirme işlemleri gerçekleştirmek nasıl açıklanmaktadır.  Bu işlemler, tüm teklif türleri için kullanılamaz.  Bu işlemlerden birini başlatmak için bulut iş ortağı portalına oturum açmanız gerekir.
+- Teklif KIMLIĞI ve yayımcı KIMLIĞI
+- SKU KIMLIĞI 
+- Mevcut SKU 'ların veri diski sayısı
+- Mevcut SKU 'ların faturalandırma/lisans modeli değişiklikleri
+- Sürüm etiketleri, örneğin: `1.0.1`
 
 
-### <a name="update-offer-contacts"></a>Teklif kişilerini güncelleştirme
+## <a name="common-update-operations"></a>Ortak güncelleştirme işlemleri
 
-Teklifiniz için destek kişileri güncelleştirmek için aşağıdaki adımları kullanın.
-1. İçinde **tüm sunar** sayfasında, bir teklif seçin.
-2. Seçin **kişiler** sekmesi. Kişilerinizi güncelleştirin.
+Aşağıdaki bölümlerde, en çok güncelleştirme işlemlerinin nasıl gerçekleştirileceği açıklanmaktadır.  Bu işlemler tüm teklif türleri için kullanılamaz.  Bu işlemlerden herhangi birini başlatmak için Bulut İş Ortağı Portalı oturum açmalısınız.
+
+
+### <a name="update-offer-contacts"></a>Teklif kişilerini Güncelleştir
+
+Teklifinizin destek kişilerini güncelleştirmek için aşağıdaki adımları kullanın.
+1. **Tüm teklifler** sayfasında teklifi seçin.
+2. **Kişiler** sekmesini seçin. kişilerinizi güncelleştirin.
 3. **Kaydet** düğmesini seçin.
-4. Seçin **Yayımla** yayımlama işlemini başlatmak için.
+4. Yayımlama işlemini başlatmak için **Yayımla** ' yı seçin.
 
 
-### <a name="change-regions-an-offer-or-sku-is-available-in"></a>Bir teklif veya SKU kullanılabilir bölgeleri değiştirme
+### <a name="change-regions-an-offer-or-sku-is-available-in"></a>Bir teklifin veya SKU 'nun kullanılabildiği bölgeleri değiştirme
 
-Zaman içinde daha fazla bölgede teklifini/SKU'yu kullanılabilir hale getirmek isteyebilirsiniz.
-Alternatif olarak, belirli bir bölgede teklifini/SKU'yu desteğini durduracak isteyebilirsiniz.
+Zaman içinde teklifinizin/SKU 'nuzu daha fazla bölgede kullanılabilir hale getirmek isteyebilirsiniz.
+Alternatif olarak, belirli bir bölgedeki teklif/SKU 'YU desteklemeyi durdurmak isteyebilirsiniz.
 Bu değişiklikleri uygulamak için aşağıdaki adımları izleyin.
 
-1. İçinde **tüm teklifleri** sayfasında, güncelleştirmek istediğiniz teklif bulun.
+1. **Tüm teklifler** sayfasında, güncelleştirmek istediğiniz teklifi bulun.
 
-Azure Marketi teklifleri için:
+Azure Market için şunları sunar:
 
-1. Seçin **SKU'ları** sekmesi.  SKU'ları değiştirmek için seçin.
-1. Tıklayın **ülkeleri seçin** düğmesini **ülke/bölge kullanılabilirliği** alan.
-1. Bölge kullanılabilirliği iletişim kutusunda, bölge ekleme veya bu SKU için kaldırma.
+1. **SKU 'lar** sekmesini seçin.  Değiştirilecek SKU 'YU seçin.
+1. **Ülke/bölge kullanılabilirliği** alanının altındaki **ülkeleri Seç** düğmesine tıklayın.
+1. Bölge kullanılabilirliği iletişim kutusunda, bu SKU 'nun bölgelerini ekleyin veya kaldırın.
 
 AppSource teklifleri için:
 
-1. Seçin **mağaza ayrıntıları** sekmesi.
-1. Yanındaki **desteklenen ülkeler/bölgeler** etiket, tıklayın **desteklenen ülkeler/bölgeler**. 
-1. Desteklenen ülkeler/bölgeler iletişim kutusunda, bölge ekleme veya bu teklif için kaldırma.
+1. **Storefront details** sekmesini seçin.
+1. **Desteklenen ülkeler/bölgeler** etiketinin yanındaki **Desteklenen ülkeler/bölgeler**' e tıklayın. 
+1. Desteklenen ülkeler/bölgeler iletişim kutusunda bu teklifin bölgelerini ekleyin veya kaldırın.
 
-Ya da Market'te:
+Her iki Market için:
 
-1. Tıklayın **Yayımla** yayımlama işlemini başlatmak için. 
+1. Yayımlama işlemini başlatmak için **Yayımla** ' ya tıklayın. 
 
-Bir SKU yeni bölgede kullanılabilir yapıldığı belirli bu bölge için fiyatlandırma belirtme olanağı varsa **fiyatlandırma verilerini dışarı aktar** işlevselliği. Önceden kullanılabilen bir bölge geri ekliyorsanız, fiyatlandırma değişiklikleri verilmeyen olduğundan fiyatlandırma güncelleştirilemiyor.
-
-
-### <a name="add-a-new-sku"></a>Yeni bir SKU ekleyin 
-
-Yeni bir SKU'ya var olan bir teklif için kullanılabilir hale getirmek için aşağıdaki adımları kullanın:
-
-1. İçinde **tüm teklifleri** sayfasında, teklif bulun.
-3. Altında **SKU'ları** formunda, tıklayın **yeni bir SKU ekleyin** ve sağlayan bir **SKU kimliği** pencerede.
-4. Ayrıntılı adımları izlemeden [bir sanal makine teklifi yayımlama](../virtual-machine/cpp-publish-offer.md).
-5. Tıklayın **Yayımla** yayımlama işlemini başlatmak için.
+Bir SKU yeni bir bölgede kullanılabilir duruma getiriliyorsa, **fiyatlandırma verilerini dışarı aktar** işlevini kullanarak söz konusu bölge için fiyatlandırma belirtebilirsiniz. Daha önce kullanılabilir olan bir bölgeyi geri ekliyorsanız fiyatlandırma değişikliklerine izin verilmediğinden fiyatlandırmayı güncelleştiremezsiniz.
 
 
-### <a name="update-offer-marketplace-assets"></a>Teklif Market varlıklarını güncelleştirme
+### <a name="add-a-new-sku"></a>Yeni bir SKU Ekle 
 
-Burada, metin tabanlı Market güncelleştirmeniz gerekir ve görüntü varlıkları, bu tür, şirket logoları, açıklama, vb. sunmak senaryolar sahip olabilir. Bu varlıklar güncelleştirmek için aşağıdaki adımları kullanın.
+Yeni bir SKU 'YU mevcut bir teklif için kullanılabilir hale getirmek için aşağıdaki adımları kullanın:
 
-1. İçinde **tüm teklifleri** sayfasında, teklifinizi bulun. 
-2. Seçin **Market** sekmesini ve teklife ilişkin yönergeleri *Marketi sekmesinden* konu.
-3. Tıklayın **Yayımla** yayımlama işlemini başlatmak için.
-
-
-### <a name="update-pricing-on-published-offers"></a>Yayımlanan teklifler fiyatlandırmasını güncelleştir
-
-Kullandıkça Öde teklifinizi yayımlandıktan sonra mevcut bir SKU fiyatı artıramıyor.  Bunun yerine, aynı teklifi kapsamındaki bir SKU oluşturma, eski SKU silin ve sonra teklifinizi yeniden yayımlayın. Fiyata göre önceden yayımlanan teklifler düşürebilir. Teklif fiyatınızın azaltmak için:
-
-1. SKU'ları fiyatlandırma azaltmak istiyorsanız seçin.
-2. İlk olarak kullanılan aynı mekanizması tarafından daha düşük bir fiyatla ayarlamanız gerekir: doğrudan portal kullanıcı arabirimini veya içeri/dışarı aktarma elektronik ile.
-3. **Kaydet**’e tıklayın.
-4. Tıklayın **Yayımla** yayımlama işlemini başlatmak için.
-
-Fiyatlandırma Market'te canlıdır ve tüm yeni müşteriler sonra yeni azalan fiyatını ödersiniz sonra yeni müşteriler için görünür durumdadır.  Var olan müşterileri için fiyat düşüşü fiyat düşüşü etkili dönüştü fatura döngüsü başlangıcına kadar geriye dönük olarak yansıtılır.  Bir fiyat düşüşü sırasında oluşan döngüsü için önceden faturalandırılmış, bunlar düşük fiyat kapsayacak şekilde kendi sonraki fatura döneminde para iadesi alacaksınız.
+1. **Tüm teklifler** sayfasında, teklifi bulun.
+3. **SKU 'lar** formu altında **Yeni SKU Ekle** ' ye tıklayın ve açılır pencerede bir **SKU kimliği** sağlayın.
+4. [Bir sanal makineyi yayımlama teklifi](../virtual-machine/cpp-publish-offer.md)ile ayrıntılandırılan adımların geri kalanını izleyin.
+5. Yayımlama işlemini başlatmak için **Yayımla** ' ya tıklayın.
 
 
-## <a name="compare-feature"></a>Özellik karşılaştırması
+### <a name="update-offer-marketplace-assets"></a>Teklif marketi varlıklarını Güncelleştir
 
-Yayımlanan bir teklifi üzerinde değişiklik yaptığınızda kullanabilirsiniz *karşılaştırma* değişiklikleri denetleme özelliği. Bu özelliği kullanmak için:
+Şirket logolarınız, teklif açıklaması vb. gibi Market metin tabanlı ve görüntü varlıklarını güncelleştirmeniz gereken senaryolara sahip olabilirsiniz. Bu varlıkları güncelleştirmek için aşağıdaki adımları kullanın.
 
-1. Düzenleme işlemi içinde herhangi bir noktada tıklayabilirsiniz **karşılaştırma** düğmesine **Düzenleyicisi** teklifiniz için sekmesinde.
-2. Bir karşılaştırma pencere Market teklifi karşılaştırıldığında Bu teklif için kaydedilen değişiklikleri sürümlerini yan yana görüntüler. 
+1. **Tüm teklifler** sayfasında teklifinizi bulun. 
+2. **Market** sekmesini seçin ve teklifinizin *Market sekmesi* konusundaki yönergeleri izleyin.
+3. Yayımlama işlemini başlatmak için **Yayımla** ' ya tıklayın.
 
-![Teklif düğmesi Düzenleyici sekmesinde karşılaştırın](./media/offer-compare-button.png)
+
+### <a name="update-pricing-on-published-offers"></a>Yayımlanmış tekliflerle ilgili fiyatlandırmayı güncelleştirme
+
+Kullandıkça Öde teklifiniz yayımlandıktan sonra, mevcut SKU 'nun fiyatını artıramazsınız.  Bunun yerine, aynı teklif altında bir SKU oluşturun, eski SKU 'yu silin ve sonra teklifinizi yeniden yayımlayın. Daha önce yayımlanmış tekliflerle ilgili fiyatı azaltabilirsiniz. Teklif fiyatlarınızı azaltmak için:
+
+1. Fiyatlandırmasını azaltmak istediğiniz SKU 'YU seçin.
+2. Daha düşük fiyatı, ilk kullandığınız mekanizmaya göre ayarlamanız gerekir: doğrudan Portal Kullanıcı arabiriminde veya içeri/dışarı aktarma elektronik tablosu ile.
+3. **Kaydet** düğmesine tıklayın.
+4. Yayımlama işlemini başlatmak için **Yayımla** ' ya tıklayın.
+
+Fiyatlandırma, Market 'te canlı olduktan sonra yeni müşterilere görünür hale gelir ve tüm yeni müşteriler daha sonra yeni azaltılan fiyata ödeme yapar.  Mevcut müşteriler için fiyat azalmasıyla, Fiyat azalmasıyla ilgili faturalandırma döngüsünün başlangıcına geriye dönük olarak yansıtılmıştır.  Bir fiyat azalmasıyla ilgili bir dönem için zaten faturalandırılmışsa, daha düşük bir fiyat elde etmek üzere bir sonraki faturalandırma sürecinde bir para iadesi alırlar.
 
 
-## <a name="history-of-publishing-actions"></a>Eylemleri yayımlama geçmişi
+## <a name="compare-feature"></a>Karşılaştırma özelliği
 
-Geçmiş yayımlama etkinlikleri görüntülemek için seçin **geçmişi** bulut iş ortağı portalının Sol dikey menü sekmesindedir.  Geçmişi sayfası esnek çeşitli özelliklere göre filtreleme sağlar ve sütun sırasını destekler.  Zaman damgalı her yayımlama etkinliğidir.  Daha fazla bilgi için [denetim geçmişi sayfası](../portal-tour/cpp-history-page.md).
+Yayımlanmış bir teklifte değişiklik yaptığınızda, değişiklikleri denetlemek için *Karşılaştır* özelliğini kullanabilirsiniz. Bu özelliği kullanmak için:
+
+1. Düzenleme işleminin herhangi bir noktasında teklifiniz için **Düzenleyici** sekmesinde **Karşılaştır** düğmesine tıklayabilirsiniz.
+2. Bir karşılaştırma penceresi, Market teklifiyle karşılaştırıldığında, bu teklif için kaydedilen değişikliklerin yan yana sürümlerini görüntüler. 
+
+![Düzenleyici sekmesindeki teklifi Karşılaştır düğmesi](./media/offer-compare-button.png)
+
+
+## <a name="history-of-publishing-actions"></a>Yayımlama eylemlerinin geçmişi
+
+Geçmiş yayımlama etkinliğini görüntülemek için Bulut İş Ortağı Portalı sol dikey menü çubuğundan **Geçmiş** sekmesini seçin.  Geçmiş sayfası, birkaç özelliğe göre esnek filtreleme sağlar ve sütun sıralamasını destekler.  Her yayımlama olayı zaman damgalanır.  Daha fazla bilgi için bkz. [Denetim geçmişi sayfası](../portal-tour/cpp-history-page.md).
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bulut iş ortağı portalını da kullanabilirsiniz [yayımlanan bir SKU silin veya teklif](./cpp-delete-offer.md).
+[Yayınlanmış BIR SKU veya teklifi silmek](./cpp-delete-offer.md)için bulut iş ortağı portalı de kullanabilirsiniz.

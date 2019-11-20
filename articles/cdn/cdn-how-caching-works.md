@@ -7,19 +7,19 @@ author: mdgattuso
 manager: danielgi
 editor: ''
 ms.assetid: ''
-ms.service: cdn
+ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: magattus
-ms.openlocfilehash: f82675f1e93a5471f98c1778e9394f9eaec1a07b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 92d93fbf9fa2f8df15acb62802d7ac53db836dc1
+ms.sourcegitcommit: ccb9a7b7da48473362266f20950af190ae88c09b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60636818"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67593853"
 ---
 # <a name="how-caching-works"></a>Önbelleğe alma nasıl işler?
 
@@ -76,7 +76,7 @@ Azure CDN önbelleğe alma süresi ve önbellek paylaşımı tanımlamak aşağ�
 - CDN POP istemciden bir HTTP yanıtına kullanıldığında:
      - **Verizon'dan Azure CDN standart/Premium** ve **Azure CDN standart Microsoft gelen** tüm destek `Cache-Control` yönergeleri.
      - **Azure CDN standart Akamai** yalnızca şunları desteklemektedir `Cache-Control` yönergeleri; tüm diğer göz ardı edilir:
-         - `max-age`: Bir önbellek içeriği için belirtilen saniye sayısı depolayabilirsiniz. Örneğin, `Cache-Control: max-age=5`. Bu yönerge, içeriği yeni olarak kabul edilir en uzun süreyi belirtir.
+         - `max-age`: Bir önbellek içeriği için belirtilen saniye sayısı depolayabilirsiniz. Örneğin: `Cache-Control: max-age=5`. Bu yönerge, içeriği yeni olarak kabul edilir en uzun süreyi belirtir.
          - `no-cache`: İçeriği önbelleğe ancak içeriği önbellekten önce teslim etme her zaman doğrulayın. Eşdeğer `Cache-Control: max-age=0`.
          - `no-store`: Hiçbir zaman içeriği önbelleğe alın. Daha önce depolanmışsa içeriği kaldırın.
 
@@ -98,14 +98,14 @@ Azure CDN önbelleğe alma süresi ve önbellek paylaşımı tanımlamak aşağ�
 
 **ETag:**
 - **Verizon'dan Azure CDN standart/Premium** destekler `ETag` varsayılan olarak, ancak **Azure CDN standart Microsoft** ve **akamai'den Azure CDN standart** değildir.
-- `ETag` her dosya ve dosya sürümü için benzersiz bir dize tanımlar. Örneğin, `ETag: "17f0ddd99ed5bbe4edffdd6496d7131f"`.
+- `ETag` her dosya ve dosya sürümü için benzersiz bir dize tanımlar. Örneğin: `ETag: "17f0ddd99ed5bbe4edffdd6496d7131f"`.
 - HTTP 1.1 içinde tanıtılan ve daha güncel `Last-Modified`. Son değişiklik tarihini saptamak zor olduğunda yararlıdır.
 - Güçlü doğrulama hem zayıf doğrulama destekler. Ancak, Azure CDN, yalnızca sağlam doğrulaması destekler. Güçlü doğrulama için iki kaynak gösterimleri bayt için olmalıdır aynı. 
-- Bir önbellek kullanan bir dosya doğrular `ETag` göndererek bir `If-None-Match` bir veya daha fazla üst bilgi `ETag` istekteki doğrulayıcıları. Örneğin, `If-None-Match: "17f0ddd99ed5bbe4edffdd6496d7131f"`. Sunucu sürümü eşleşmesi durumunda bir `ETag` yanıtına 304 (değiştirilmedi) durum kodu gönderdiği Doğrulayıcı listesinde. Sürüm farklı ise, sunucu durum kodu ile 200 (Tamam) ve güncelleştirilmiş kaynak yanıt verir.
+- Bir önbellek kullanan bir dosya doğrular `ETag` göndererek bir `If-None-Match` bir veya daha fazla üst bilgi `ETag` istekteki doğrulayıcıları. Örneğin: `If-None-Match: "17f0ddd99ed5bbe4edffdd6496d7131f"`. Sunucu sürümü eşleşmesi durumunda bir `ETag` yanıtına 304 (değiştirilmedi) durum kodu gönderdiği Doğrulayıcı listesinde. Sürüm farklı ise, sunucu durum kodu ile 200 (Tamam) ve güncelleştirilmiş kaynak yanıt verir.
 
 **Son değiştiren:**
 - İçin **Azure CDN standart/Premium verizon'dan** yalnızca `Last-Modified` kullanılır `ETag` HTTP yanıtını bir parçası değil. 
-- Kaynağın son değiştirildiği kaynak sunucu belirledi saat ve tarihi belirtir. Örneğin, `Last-Modified: Thu, 19 Oct 2017 09:28:00 GMT`.
+- Kaynağın son değiştirildiği kaynak sunucu belirledi saat ve tarihi belirtir. Örneğin: `Last-Modified: Thu, 19 Oct 2017 09:28:00 GMT`.
 - Bir önbellek kullanarak bir dosyayı doğrular `Last-Modified` göndererek bir `If-Modified-Since` sahip bir tarih ve saat istekteki üstbilgi. Kaynak sunucu o tarihle karşılaştırır `Last-Modified` en son kaynak üstbilgisi. Kaynağın belirtilen zamanından bu yana değiştirilmedi, sunucunun yanıt olarak 304 (değiştirilmedi) durum kodu döndürür. Kaynak değiştirilirse sunucu durumu döndürür. kod 200 (Tamam) ve güncelleştirilmiş kaynak.
 
 ## <a name="determining-which-files-can-be-cached"></a>Hangi dosyaların önbelleğe alınabilir belirleme

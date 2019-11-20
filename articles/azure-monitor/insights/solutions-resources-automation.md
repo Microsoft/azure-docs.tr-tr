@@ -1,56 +1,50 @@
 ---
-title: Yönetim çözümleri, Azure Automation kaynaklarını | Microsoft Docs
-description: Yönetim çözümleri, toplama ve izleme verilerini işleme gibi işlemleri otomatik hale getirmek için Azure Otomasyonu'nda runbook'ları genellikle dahil edilir.  Bu makalede, bir çözümde runbook'ları ve bunlarla ilişkili kaynakları içerecek şekilde açıklar.
-services: monitoring
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: tysonn
-ms.assetid: 5281462e-f480-4e5e-9c19-022f36dce76d
+title: Yönetim çözümlerinde Azure Otomasyonu kaynakları | Microsoft Docs
+description: Yönetim çözümleri genellikle, izleme verilerini toplama ve işleme gibi işlemleri otomatikleştirmek için Azure Otomasyonu 'ndaki runbook 'ları içerir.  Bu makalede runbook 'ların ve ilgili kaynaklarının bir çözüme eklenmesi açıklanmaktadır.
 ms.service: azure-monitor
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 05/24/2017
+ms.subservice: ''
+ms.topic: conceptual
+author: bwren
 ms.author: bwren
+ms.date: 05/24/2017
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 1c9b13f44dae068597cb82a0aa803283ad5e67bc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 63e09bacd1ce70f05f04798f092d3eb4b3e36ab5
+ms.sourcegitcommit: ae461c90cada1231f496bf442ee0c4dcdb6396bc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62110370"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72555249"
 ---
-# <a name="adding-azure-automation-resources-to-a-management-solution-preview"></a>Bir yönetim çözümü (Önizleme) Azure Automation kaynaklarını ekleme
+# <a name="adding-azure-automation-resources-to-a-management-solution-preview"></a>Azure Otomasyonu kaynaklarını bir yönetim çözümüne ekleme (Önizleme)
 > [!NOTE]
-> Şu anda Önizleme aşamasında olan yönetim çözümleri oluşturmak için başlangıç belgeleri budur. Aşağıda açıklanan herhangi bir şema tabi bir değişikliktir.   
+> Bu, şu anda önizleme aşamasında olan yönetim çözümlerini oluşturmaya yönelik bir belgedir. Aşağıda açıklanan tüm şemalarla değişiklik yapılır.   
 
 
-[Yönetim çözümleri]( solutions.md) toplama ve izleme verilerini işleme gibi işlemleri otomatik hale getirmek için Azure Otomasyonu'nda runbook'ları genellikle içerecektir.  Otomasyon hesapları runbook'lara ek olarak, değişkenler ve çözümde kullanılan runbook'ları destekleyen zamanlamalar gibi varlıklar içerir.  Bu makalede, bir çözümde runbook'ları ve bunlarla ilişkili kaynakları içerecek şekilde açıklar.
+[Yönetim çözümleri]( solutions.md) genellikle, izleme verilerini toplama ve işleme gibi işlemleri otomatikleştirmek Için Azure Otomasyonu 'ndaki runbook 'ları içerir.  Runbook 'lara ek olarak, Otomasyon hesapları, çözümde kullanılan runbook 'ları destekleyen değişkenler ve zamanlamalar gibi varlıkları içerir.  Bu makalede runbook 'ların ve ilgili kaynaklarının bir çözüme eklenmesi açıklanmaktadır.
 
 > [!NOTE]
-> Bu makaledeki örnekleri parametreler ve değişkenler gerekli olduğunu veya yönetim çözümleri için yaygın olduğunu ve açıklanan kullanmak [tasarım ve derleme Azure Yönetimi çözümünde]( solutions-creating.md) 
+> Bu makaledeki örneklerde, yönetim çözümlerinde gerekli veya ortak olan ve [Azure 'da bir yönetim çözümü tasarlama ve derleme]( solutions-creating.md) konularında açıklanan parametreleri ve değişkenleri kullanır 
 
 
 ## <a name="prerequisites"></a>Önkoşullar
-Bu makale, zaten aşağıdaki bilgilerle ilgili bilgi sahibi olduğunuzu varsayar.
+Bu makalede, aşağıdaki bilgiler hakkında bilgi sahibi olduğunuz varsayılır.
 
-- Nasıl yapılır [yönetimi çözümü oluşturmak]( solutions-creating.md).
-- Yapısı bir [çözüm dosyası]( solutions-solution-file.md).
-- Nasıl yapılır [Resource Manager şablonları yazma](../../azure-resource-manager/resource-group-authoring-templates.md)
+- [Yönetim çözümü oluşturma]( solutions-creating.md).
+- Bir [çözüm dosyasının]( solutions-solution-file.md)yapısı.
+- [Kaynak Yöneticisi şablonlarını yazma](../../azure-resource-manager/resource-group-authoring-templates.md)
 
 ## <a name="automation-account"></a>Otomasyon hesabı
-Azure Otomasyonu'nda tüm kaynaklar içerdiği bir [Otomasyon hesabı](../../automation/automation-security-overview.md#automation-account-overview).  Bölümünde anlatıldığı gibi [Log Analytics çalışma alanını ve Otomasyon hesabı]( solutions.md#log-analytics-workspace-and-automation-account) Otomasyon hesabı Yönetimi çözümünde dahil değildir, ancak çözüm yüklenmeden önce mevcut olması gerekir.  Mevcut değilse, çözüm yükleme başarısız olur.
+Azure Otomasyonu 'ndaki tüm kaynaklar bir [Otomasyon hesabında](../../automation/automation-security-overview.md#automation-account-overview)yer alır.  [Log Analytics çalışma alanı ve Otomasyon hesabı]( solutions.md#log-analytics-workspace-and-automation-account) ' nda açıklandığı gibi, Otomasyon hesabı yönetim çözümüne dahil değildir ancak çözüm yüklenmeden önce var olmalıdır.  Kullanılabilir değilse, çözüm yüklemesi başarısız olur.
 
-Her Otomasyon kaynağın adını, Otomasyon hesabının adını içerir.  Bu çözüm ile gerçekleştirilir **accountName** runbook kaynağının aşağıdaki örnekteki gibi parametre.
+Her Otomasyon kaynağının adı, Otomasyon hesabının adını içerir.  Bu, runbook kaynağı aşağıdaki örneğinde olduğu gibi **AccountName** parametresi ile çözümde yapılır.
 
     "name": "[concat(parameters('accountName'), '/MyRunbook'))]"
 
 
 ## <a name="runbooks"></a>Runbook'lar
-Çözüm yüklendiğinde yük oluşturulan çözüm dosyasını çözüm tarafından kullanılan tüm runbook'ları içermelidir.  Burada çözümünüzü yükleme herhangi bir kullanıcı tarafından erişilebilen ortak bir konuma runbook'u yayımlamanız gerekir böylece Şablonu'nda runbook'un gövdesinin yine de içeremez.
+Çözüm yüklenirken çözüm tarafından kullanılan tüm runbook 'ları, çözüm yüklendiğinde oluşturulacak şekilde dahil etmelisiniz.  Runbook 'un gövdesini de ekleyemezsiniz, bu nedenle runbook 'u çözümünüzü yükleyen herhangi bir kullanıcı tarafından erişilebilen genel bir konuma yayımlamanız gerekir.
 
-[Azure Otomasyonu runbook'u](../../automation/automation-runbook-types.md) kaynaklara sahip bir tür **Microsoft.Automation/automationAccounts/runbooks** ve aşağıdaki yapıya sahiptir. Kopyalayabilir ve bu kod parçacığı, çözüm dosyasına yapıştırın ve parametre adlarını değiştirmek için bu genel değişkenler ve parametreler içerir. 
+[Azure Otomasyonu runbook](../../automation/automation-runbook-types.md) kaynakları, **Microsoft. Automation/automationaccounts/runbook** türlerine sahiptir ve aşağıdaki yapıya sahiptir. Bu kod parçacığını kopyalayıp çözüm dosyanıza yapıştırarak parametre adlarını değiştirebilmeniz için ortak değişkenleri ve parametreleri içerir. 
 
     {
         "name": "[concat(parameters('accountName'), '/', variables('Runbook').Name)]",
@@ -73,21 +67,21 @@ Her Otomasyon kaynağın adını, Otomasyon hesabının adını içerir.  Bu ç�
     }
 
 
-Runbook'ları için özellikler aşağıdaki tabloda açıklanmıştır.
+Runbook 'lar için özellikler aşağıdaki tabloda açıklanmıştır.
 
 | Özellik | Açıklama |
 |:--- |:--- |
-| runbookType |Runbook türlerini belirtir. <br><br> Betiği - PowerShell Betiği <br>PowerShell - PowerShell iş akışı <br> GraphPowerShell - grafik PowerShell Betiği runbook <br> GraphPowerShellWorkflow - grafik PowerShell iş akışı runbook'u |
-| logProgress |Belirtir olup olmadığını [ilerleme durumu kayıtlarını](../../automation/automation-runbook-output-and-messages.md) runbook için oluşturulması gerekir. |
-| logVerbose |Belirtir olup olmadığını [ayrıntılı kayıtları](../../automation/automation-runbook-output-and-messages.md) runbook için oluşturulması gerekir. |
-| description |Runbook için isteğe bağlı bir açıklama. |
-| publishContentLink |Runbook'un içeriğini belirtir. <br><br>Uri - runbook içeriğinin URI'si.  Bu, PowerShell ve komut dosyası runbook'ları için bir .ps1 dosyası ve bir graf runbook için dışarı aktarılan grafik runbook dosyası olacaktır.  <br> Sürüm - runbook kendi izleme için sürümü. |
+| runbookType |Runbook 'un türlerini belirtir. <br><br> Betik-PowerShell betiği <br>PowerShell-PowerShell iş akışı <br> GraphPowerShell-grafik PowerShell betiği runbook 'u <br> GraphPowerShellWorkflow-grafik PowerShell iş akışı runbook 'u |
+| logProgress |Runbook için [ilerleme kayıtlarının](../../automation/automation-runbook-output-and-messages.md) oluşturulup oluşturulmayacağını belirtir. |
+| logVerbose |Runbook için [ayrıntılı kayıtların](../../automation/automation-runbook-output-and-messages.md) oluşturulup oluşturulmayacağını belirtir. |
+| açıklama |Runbook için isteğe bağlı açıklama. |
+| publishContentLink |Runbook 'un içeriğini belirtir. <br><br>Runbook 'un içeriğine URI URI 'si.  Bu, PowerShell ve betik runbook 'ları için bir. ps1 dosyası ve bir grafik runbook 'u için aktarılmış bir grafik runbook dosyası olacaktır.  <br> kendi izleme için Runbook 'un sürüm sürümü. |
 
 
 ## <a name="automation-jobs"></a>Otomasyon işleri
-Azure Automation'da bir runbook başlattığınızda bir Otomasyon işi oluşturur.  Yönetim çözümü yüklendiğinde otomatik olarak bir runbook başlatmak için çözümünüze bir Otomasyon iş kaynağı ekleyebilirsiniz.  Bu yöntem, genellikle çözümün ilk yapılandırma için kullanılan runbook'ları başlatmak için kullanılır.  Düzenli aralıklarla bir runbook başlatmak için oluşturun bir [zamanlama](#schedules) ve [iş zamanlaması](#job-schedules)
+Azure Otomasyonu 'nda bir runbook başlattığınızda bir Otomasyon işi oluşturulur.  Yönetim çözümü yüklenirken bir runbook 'u otomatik olarak başlatmak için çözümünüze bir Otomasyon işi kaynağı ekleyebilirsiniz.  Bu yöntem genellikle çözümün ilk yapılandırması için kullanılan runbook 'ları başlatmak için kullanılır.  Düzenli aralıklarla bir runbook başlatmak için bir [zamanlama](#schedules) ve [iş zamanlaması](#job-schedules) oluşturun
 
-İş kaynaklarına sahip bir tür **Microsoft.Automation/automationAccounts/jobs** ve aşağıdaki yapıya sahiptir.  Kopyalayabilir ve bu kod parçacığı, çözüm dosyasına yapıştırın ve parametre adlarını değiştirmek için bu genel değişkenler ve parametreler içerir. 
+İş kaynakları bir **Microsoft. Automation/automationAccounts/Jobs** türüne sahiptir ve aşağıdaki yapıya sahiptir.  Bu kod parçacığını kopyalayıp çözüm dosyanıza yapıştırarak parametre adlarını değiştirebilmeniz için ortak değişkenleri ve parametreleri içerir. 
 
     {
       "name": "[concat(parameters('accountName'), '/', parameters('Runbook').JobGuid)]",
@@ -109,20 +103,20 @@ Azure Automation'da bir runbook başlattığınızda bir Otomasyon işi oluştur
       }
     }
 
-Otomasyon işleri için özellikler aşağıdaki tabloda açıklanmıştır.
+Otomasyon işlerinin özellikleri aşağıdaki tabloda açıklanmıştır.
 
 | Özellik | Açıklama |
 |:--- |:--- |
-| runbook |Tek ad varlık başlatmak için runbook'un adına sahip. |
-| parameters |Varlık için runbook tarafından gerekli her parametre değeri. |
+| 'unu |Başlatılacak runbook 'un adına sahip tek bir ad varlığı. |
+| parametreler |Runbook 'un gerektirdiği her parametre değeri için varlık. |
 
-İş, runbook adı ve runbook'a gönderilecek tüm parametre değerlerini içerir.  İş gereken [bağımlı]( solutions-solution-file.md#resources) beri runbook başlatılıyor runbook işinden önce oluşturulması gerekir.  Başlatılacak birden çok runbook varsa, ilk çalıştırılması gereken diğer işleri üzerinde bağımlı bir işlem sağlayarak sıralarına tanımlayabilirsiniz.
+İş Runbook adı ve Runbook 'a gönderilecek parametre değerlerini içerir.  İş, runbook 'un işten önce oluşturulması gerektiğinden runbook 'un başladığı runbook ['a bağlı]( solutions-solution-file.md#resources) olmalıdır.  Başlatılması gereken birden çok runbook 'unuz varsa, bir işi, önce çalıştırılması gereken diğer işlere bağımlı olacak şekilde tanımlayabilirsiniz.
 
-İş kaynağı adı genellikle parametre tarafından atanan bir GUID içermelidir.  Daha fazla GUID parametrelerinde hakkında [yönetim çözüm dosyası, Azure'da]( solutions-solution-file.md#parameters).  
+Bir iş kaynağının adı, genellikle bir parametre tarafından atanan GUID içermelidir.  [Azure 'da bir yönetim çözümü dosyası oluşturma]( solutions-solution-file.md#parameters)bölümünde GUID parametreleri hakkında daha fazla bilgi edinebilirsiniz.  
 
 
 ## <a name="certificates"></a>Sertifikalar
-[Azure Otomasyonu sertifika](../../automation/automation-certificates.md) bir türüne sahip **Microsoft.Automation/automationAccounts/certificates** ve aşağıdaki yapıya sahiptir. Kopyalayabilir ve bu kod parçacığı, çözüm dosyasına yapıştırın ve parametre adlarını değiştirmek için bu genel değişkenler ve parametreler içerir. 
+[Azure Otomasyonu sertifikalarında](../../automation/automation-certificates.md) bir **Microsoft. Automation/automationaccounts/Certificates** türü vardır ve aşağıdaki yapıya sahiptir. Bu kod parçacığını kopyalayıp çözüm dosyanıza yapıştırarak parametre adlarını değiştirebilmeniz için ortak değişkenleri ve parametreleri içerir. 
 
     {
       "name": "[concat(parameters('accountName'), '/', variables('Certificate').Name)]",
@@ -140,17 +134,17 @@ Otomasyon işleri için özellikler aşağıdaki tabloda açıklanmıştır.
 
 
 
-Sertifikaları kaynakların özellikleri aşağıdaki tabloda açıklanmıştır.
+Sertifika kaynaklarının özellikleri aşağıdaki tabloda açıklanmıştır.
 
 | Özellik | Açıklama |
 |:--- |:--- |
-| base64Value |Sertifikayı Base 64 değeri. |
-| thumbprint |Sertifikanın parmak izi. |
+| Base64value değeri |Sertifika için temel 64 değeri. |
+| #c0 |Sertifika için parmak izi. |
 
 
 
-## <a name="credentials"></a>Kimlik Bilgileri
-[Azure Otomasyonu kimlik](../../automation/automation-credentials.md) bir türüne sahip **Microsoft.Automation/automationAccounts/credentials** ve aşağıdaki yapıya sahiptir.  Kopyalayabilir ve bu kod parçacığı, çözüm dosyasına yapıştırın ve parametre adlarını değiştirmek için bu genel değişkenler ve parametreler içerir. 
+## <a name="credentials"></a>Kimlik bilgileri
+[Azure Otomasyonu kimlik bilgileri](../../automation/automation-credentials.md) bir tür **Microsoft. Automation/automationaccounts/Credentials** ve aşağıdaki yapıya sahiptir.  Bu kod parçacığını kopyalayıp çözüm dosyanıza yapıştırarak parametre adlarını değiştirebilmeniz için ortak değişkenleri ve parametreleri içerir. 
 
 
     {
@@ -167,16 +161,16 @@ Sertifikaları kaynakların özellikleri aşağıdaki tabloda açıklanmıştır
       }
     }
 
-Kimlik bilgisi kaynakların özellikleri aşağıdaki tabloda açıklanmıştır.
+Kimlik bilgileri kaynaklarının özellikleri aşağıdaki tabloda açıklanmıştır.
 
 | Özellik | Açıklama |
 |:--- |:--- |
-| userName |Kimlik bilgisi için kullanıcı adı. |
-| password |Parola kimlik bilgisi için. |
+| Nitelen |Kimlik bilgisinin Kullanıcı adı. |
+| password |Kimlik bilgileri için parola. |
 
 
 ## <a name="schedules"></a>Zamanlamalar
-[Azure Otomasyon zamanlamaları](../../automation/automation-schedules.md) bir türüne sahip **Microsoft.Automation/automationAccounts/schedules** ve aşağıdaki yapıya sahiptir. Kopyalayabilir ve bu kod parçacığı, çözüm dosyasına yapıştırın ve parametre adlarını değiştirmek için bu genel değişkenler ve parametreler içerir. 
+[Azure Otomasyonu zamanlamalarının](../../automation/automation-schedules.md) türü **Microsoft. Automation/automationaccounts/zamanlamaları** vardır ve aşağıdaki yapıya sahiptir. Bu kod parçacığını kopyalayıp çözüm dosyanıza yapıştırarak parametre adlarını değiştirebilmeniz için ortak değişkenleri ve parametreleri içerir. 
 
     {
       "name": "[concat(parameters('accountName'), '/', variables('Schedule').Name)]",
@@ -195,26 +189,26 @@ Kimlik bilgisi kaynakların özellikleri aşağıdaki tabloda açıklanmıştır
       }
     }
 
-Zamanlama kaynakların özellikleri aşağıdaki tabloda açıklanmıştır.
+Zamanlama kaynaklarının özellikleri aşağıdaki tabloda açıklanmıştır.
 
 | Özellik | Açıklama |
 |:--- |:--- |
-| description |Zamanlama için isteğe bağlı bir açıklama. |
-| startTime |Başlangıç zamanı, zamanlamanın bir DateTime nesnesi olarak belirtir. Geçerli bir DateTime türüne dönüştürülebilir ise bir dize sağlanabilir. |
-| isEnabled |Zamanlama etkin olup olmadığını belirtir. |
-| interval |Zamanlama için aralık türü.<br><br>gün<br>saat |
-| frequency |Zamanlama gün veya saat cinsinden yangın sıklığı. |
+| açıklama |Zamanlama için isteğe bağlı açıklama. |
+| startTime |Bir zamanlamanın başlangıç saatini DateTime nesnesi olarak belirtir. Geçerli bir tarih saat değerine dönüştürülebiliyorsanız bir dize belirtilebilir. |
+| IsEnabled |Zamanlamanın etkinleştirilip etkinleştirilmeyeceğini belirtir. |
+| interval |Zamanlama için Aralık türü.<br><br>günündeki<br>saat |
+| frequency |Zamanlamanın gün veya saat sayısında tetiklenmesi gereken sıklık. |
 
-Zamanlamaları bir başlangıç saati geçerli saatten büyük bir değere sahip olması gerekir.  Olacağından, ne zaman yüklenmesini geçiyor olduğunu bilmesinin imkanı bu değere sahip bir değişken sağlayamaz.
+Zamanlamalar, geçerli zamandan daha büyük bir değere sahip bir başlangıç saatine sahip olmalıdır.  Ne zaman yükleneceğini bilmenin bir yolu olmadığından, bu değeri bir değişkenle birlikte belirtemezsiniz.
 
-Bir çözümde zamanlama kaynaklar kullanırken aşağıdaki iki stratejileri kullanın.
+Bir çözümde kaynakları zamanlamayı kullanırken aşağıdaki iki stratejiden birini kullanın.
 
-- Başlangıç zamanı zamanlama için bir parametre kullanın.  Bu çözümü yükledikleri sırada bir değer girmesini ister.  Birden çok zamanlama varsa, tek bir parametre birden fazlası için kullanabilirsiniz.
-- Çözüm yüklendiğinde başlayan bir runbook kullanarak zamanlamaları oluşturun.  Bu bir saat belirtmenin kullanıcının gereksinimini ortadan kaldırır, ancak çözüm kaldırıldığında kaldırılacak çözümünüzde zamanlama içeremez.
+- Zamanlamanın başlangıç saati için bir parametre kullanın.  Bu işlem, kullanıcıdan çözümü yüklediklerinde bir değer sağlamasını ister.  Birden çok zamanlamalarınız varsa, birden fazla tane için tek bir parametre değeri kullanabilirsiniz.
+- Çözüm yüklendiğinde başlayan bir runbook 'u kullanarak zamanlamalar oluşturun.  Bu, kullanıcının gereksinimini bir süre belirtmektir, ancak çözümünüzde zamanlamayı, çözüm kaldırıldığında kaldırılacak şekilde bulunduramıyoruz.
 
 
 ### <a name="job-schedules"></a>İş zamanlamaları
-İş zamanlaması kaynakları bir runbook zamanlama ile bağlayın.  Bir türü sahip oldukları **Microsoft.Automation/automationAccounts/jobSchedules** ve aşağıdaki yapıya sahiptir.  Kopyalayabilir ve bu kod parçacığı, çözüm dosyasına yapıştırın ve parametre adlarını değiştirmek için bu genel değişkenler ve parametreler içerir. 
+İş zamanlaması kaynakları bir runbook 'u zamanlamaya göre bağlar.  Bunlar **Microsoft. Automation/automationAccounts/Jobzamanlamalar** türüne sahiptir ve aşağıdaki yapıya sahiptir.  Bu kod parçacığını kopyalayıp çözüm dosyanıza yapıştırarak parametre adlarını değiştirebilmeniz için ortak değişkenleri ve parametreleri içerir. 
 
     {
       "name": "[concat(parameters('accountName'), '/', variables('Schedule').LinkGuid)]",
@@ -238,17 +232,17 @@ Bir çözümde zamanlama kaynaklar kullanırken aşağıdaki iki stratejileri ku
     }
 
 
-İş zamanlamaları için özellikler aşağıdaki tabloda açıklanmıştır.
+İş zamanlamalarının özellikleri aşağıdaki tabloda açıklanmıştır.
 
 | Özellik | Açıklama |
 |:--- |:--- |
-| schedule name |Tek **adı** planının adı olan varlık. |
-| runbook name  |Tek **adı** runbook'un adı olan varlık.  |
+| Zamanlama adı |Zamanlamanın adına sahip tek bir **ad** varlığı. |
+| Runbook adı  |Runbook 'un adına sahip tek bir **ad** varlığı.  |
 
 
 
 ## <a name="variables"></a>Değişkenler
-[Azure Otomasyonu değişken](../../automation/automation-variables.md) bir türüne sahip **Microsoft.Automation/automationAccounts/variables** ve aşağıdaki yapıya sahiptir.  Kopyalayabilir ve bu kod parçacığı, çözüm dosyasına yapıştırın ve parametre adlarını değiştirmek için bu genel değişkenler ve parametreler içerir.
+[Azure Otomasyonu değişkenlerinde](../../automation/automation-variables.md) bir tür **Microsoft. Automation/automationaccounts/Variable** vardır ve aşağıdaki yapıya sahiptir.  Bu kod parçacığını kopyalayıp çözüm dosyanıza yapıştırarak parametre adlarını değiştirebilmeniz için ortak değişkenleri ve parametreleri içerir.
 
     {
       "name": "[concat(parameters('accountName'), '/', variables('Variable').Name)]",
@@ -269,27 +263,27 @@ Değişken kaynakların özellikleri aşağıdaki tabloda açıklanmıştır.
 
 | Özellik | Açıklama |
 |:--- |:--- |
-| description | Değişken için isteğe bağlı bir açıklama. |
-| isEncrypted | Değişken şifrelenmesi gerekip gerekmediğini belirtir. |
-| type | Bu özellik şu anda hiçbir etkisi olmaz.  Değişkenin veri türü ilk değere göre belirlenir. |
-| value | Değişken için değeri. |
+| açıklama | Değişken için isteğe bağlı açıklama. |
+| IsEncrypted | Değişkenin şifrelenmesi gerekip gerekmediğini belirtir. |
+| type | Bu özelliğin şu anda hiçbir etkisi yoktur.  Değişkenin veri türü başlangıçtaki değere göre belirlenir. |
+| değer | Değişkenin değeri. |
 
 > [!NOTE]
-> **Türü** özelliği şu anda oluşturulan değişken üzerinde hiçbir etkisi yok.  Değişken için veri türü değeri tarafından belirlenir.  
+> **Type** özelliğinin Şu anda oluşturulmakta olan değişken üzerinde hiçbir etkisi yoktur.  Değişken için veri türü değere göre belirlenir.  
 
-Değişken için ilk değeri ayarlarsanız, doğru veri türü olarak yapılandırılmalıdır.  Aşağıdaki tabloda, izin verilen farklı veri türleri ve kendi sözdizimi sağlar.  JSON değerleri her zaman tırnak içindeki herhangi bir özel karakter tırnak işaretleri içine beklenir unutmayın.  Örneğin, bir dize değeri tırnak işaretlerini dize tarafından belirtilecek (çıkış karakterini kullanma (\\)) tırnak işareti bir dizi sayısal bir değer belirtilebilir ancak.
+Değişken için ilk değeri ayarlarsanız, doğru veri türü olarak yapılandırılmalıdır.  Aşağıdaki tabloda, izin verilen farklı veri türleri ve bunların sözdizimi verilmiştir.  JSON 'daki değerlerin tekliflerin içindeki özel karakterlerle her zaman tırnak içine alınması beklendiğini unutmayın.  Örneğin, bir dize değeri, dize etrafında tırnak işareti (kaçış karakteri (\\) kullanılarak), bir sayısal değer tek tırnak kümesiyle belirtiken belirtilir.
 
 | Veri türü | Açıklama | Örnek | Çözümler |
 |:--|:--|:--|:--|
-| string   | Değer, çift tırnak içine alın.  | "\"Merhaba Dünya\"" | "Hello world" |
-| numeric  | Tek tırnak işaretleri ile sayısal değer.| "64" | 64 |
-| boolean  | **doğru** veya **false** tırnak içinde.  Bu değer küçük harfli olması gerektiğini unutmayın. | "true" | true |
-| datetime | Seri hale getirilmiş bir tarih değeri.<br>Bu değer için belirli bir tarih oluşturmak için PowerShell'de ConvertTo-Json cmdlet'ini kullanabilirsiniz.<br>Örnek: get-date "5/24/2017 13:14:57" \| ConvertTo-Json | "\\/Date(1495656897378)\\/" | 2017-05-24 13:14:57 |
+| string   | Değeri çift tırnak içine alın.  | "\"Hello dünya \"" | "Merhaba Dünya" |
+| rakamlardan  | Tek tırnak ile sayısal değer.| "64" | 64 |
+| boole  | tırnak içinde **true** veya **false** .  Bu değerin küçük harf olması gerektiğini unutmayın. | değeri | doğru |
+| datetime | Serileştirilmiş tarih değeri.<br>Bu değeri belirli bir tarih için oluşturmak üzere PowerShell 'de ConvertTo-JSON cmdlet 'ini kullanabilirsiniz.<br>Örnek: Get-Date "5/24/2017 13:14:57" \| ConvertTo-JSON | "\\/Date (1495656897378) \\/" | 2017-05-24 13:14:57 |
 
 ## <a name="modules"></a>Modüller
-Yönetim çözümünüzü tanımlamak gerekmez [genel modüller](../../automation/automation-integration-modules.md) bunlar her zaman Otomasyon hesabınızda kullanılabilir olacağı için runbook'larınız tarafından kullanılır.  Runbook'larınız tarafından kullanılan başka bir modül için kaynak eklemeniz gerekir.
+Yönetim çözümünüzün, her zaman Otomasyon hesabınızda kullanılabilir olacağı için Runbook 'larınız tarafından kullanılan [genel modülleri](../../automation/automation-integration-modules.md) tanımlamasına gerek yoktur.  Runbook 'larınız tarafından kullanılan başka bir modül için bir kaynak eklemeniz gerekir.
 
-[Tümleştirme modülleri](../../automation/automation-integration-modules.md) bir türüne sahip **Microsoft.Automation/automationAccounts/modules** ve aşağıdaki yapıya sahiptir.  Kopyalayabilir ve bu kod parçacığı, çözüm dosyasına yapıştırın ve parametre adlarını değiştirmek için bu genel değişkenler ve parametreler içerir.
+[Tümleştirme modüllerinin](../../automation/automation-integration-modules.md) bir tür **Microsoft. Automation/automationaccounts/modülleri** vardır ve aşağıdaki yapıya sahiptir.  Bu kod parçacığını kopyalayıp çözüm dosyanıza yapıştırarak parametre adlarını değiştirebilmeniz için ortak değişkenleri ve parametreleri içerir.
 
     {
       "name": "[concat(parameters('accountName'), '/', variables('Module').Name)]",
@@ -305,35 +299,35 @@ Yönetim çözümünüzü tanımlamak gerekmez [genel modüller](../../automatio
     }
 
 
-Modül kaynakların özellikleri aşağıdaki tabloda açıklanmıştır.
+Modül kaynaklarının özellikleri aşağıdaki tabloda açıklanmıştır.
 
 | Özellik | Açıklama |
 |:--- |:--- |
-| contentLink |Modül içeriğini belirtir. <br><br>Uri - modülün içeriğinin URI'si.  Bu, PowerShell ve komut dosyası runbook'ları için bir .ps1 dosyası ve bir graf runbook için dışarı aktarılan grafik runbook dosyası olacaktır.  <br> Sürüm - kendi izleme için Modül sürümü. |
+| contentLink |Modülün içeriğini belirtir. <br><br>modülün içeriğine URI URI 'si.  Bu, PowerShell ve betik runbook 'ları için bir. ps1 dosyası ve bir grafik runbook 'u için aktarılmış bir grafik runbook dosyası olacaktır.  <br> kendi izleme için modülün sürüm sürümü. |
 
-Runbook için önce runbook'u oluşturduğunuzdan emin olun modülü kaynağı bağlı olmalıdır.
+Runbook 'un, runbook 'tan önce oluşturulduğundan emin olmak için modül kaynağına bağlı olması gerekir.
 
-### <a name="updating-modules"></a>Modülleri güncelleştirme
-Ardından bir zamanlama kullanan bir runbook'u içeren bir yönetim çözümü güncelleştirmek ve bu runbook tarafından kullanılan yeni bir modül çözümünüzün yeni sürüme sahip, runbook modülünün eski sürümünü kullanabilirsiniz.  Aşağıdaki runbook'lar çözümünüze ekleyin ve diğer runbook'ların önce çalıştırılacak bir iş oluşturmak gerekir.  Bunun herhangi bir modül olarak güncelleştirildiğinden emin olmanızı sağlar runbook'lar yüklenmeden önce gerekli.
+### <a name="updating-modules"></a>Modüller güncelleştiriliyor
+Bir zamanlama kullanan bir runbook içeren bir yönetim çözümünü güncelleştirirseniz ve çözümünüzün yeni sürümü bu runbook tarafından kullanılan yeni bir modüle sahipse, runbook modülün eski sürümünü kullanabilir.  Çözümünüze aşağıdaki runbook 'ları eklemeniz ve diğer runbook 'lardan önce çalıştırmak için bir iş oluşturmanız gerekir.  Bu, runbook 'ları yüklemeden önce tüm modüllerin gerekli olarak güncelleştirilmesini sağlayacaktır.
 
-* [Güncelleştirme ModulesinAutomationToLatestVersion](https://www.powershellgallery.com/packages/Update-ModulesInAutomationToLatestVersion/1.03/) tüm çözümünüzdeki runbook'lar tarafından kullanılan modüller en son sürüm olduğundan emin olun.  
-* [ReRegisterAutomationSchedule-MS-Mgmt](https://www.powershellgallery.com/packages/ReRegisterAutomationSchedule-MS-Mgmt/1.0/) tüm runbook'ları bunlara ile kullanmak üzere en son modülleri bağlı emin olmak için zamanlama kaynakları yeniden kaydettirin.
+* [Update-ModulesinAutomationToLatestVersion](https://www.powershellgallery.com/packages/Update-ModulesInAutomationToLatestVersion/1.03/) , çözümünüzde runbook 'lar tarafından kullanılan tüm modüllerin en son sürümü olmasını sağlayacaktır.  
+* [ReRegisterAutomationSchedule-MS-MGMT](https://www.powershellgallery.com/packages/ReRegisterAutomationSchedule-MS-Mgmt/1.0/) , bunlarla bağlantılı runbook 'ların en son modülleri kullandığından emin olmak için tüm zamanlama kaynaklarını yeniden kaydettirirsiniz.
 
 
 
 
 ## <a name="sample"></a>Örnek
-Aşağıdaki kaynakları içeren bir içeren bir çözümü bir örnek aşağıda verilmiştir:
+Aşağıdaki kaynakları içeren bir çözümün örneği aşağıda verilmiştir:
 
-- Runbook.  Bir ortak GitHub deposu içinde depolanan bir örnek runbook budur.
-- Çözüm yüklendiğinde runbook'u başlatan Otomasyon işi.
-- Zamanlama ve iş zamanlaması, düzenli aralıklarla runbook'u başlatın.
+- 'Unu.  Bu, genel bir GitHub deposunda depolanan örnek bir runbook örneğidir.
+- Çözüm yüklendiğinde runbook 'u Başlatan Otomasyon işi.
+- Düzenli aralıklarla runbook 'u başlatmak için zamanlama ve iş zamanlaması.
 - Sertifika.
-- Kimlik bilgisi.
-- değişken.
-- Modül.  Bu [OMSIngestionAPI Modülü](https://www.powershellgallery.com/packages/OMSIngestionAPI/1.5) Log Analytics'e veri yazmak için. 
+- Credential.
+- Değişken.
+- Birimi.  Bu, Log Analytics veri yazmak için [Omsingestionapı modülüdür](https://www.powershellgallery.com/packages/OMSIngestionAPI/1.5) . 
 
-Örnek kullanır [standart çözüm parametreleri]( solutions-solution-file.md#parameters) yaygın olarak kaynak tanımlarında runbook'a kod değerleri aksine bir çözümde kullanılan değişkenler.
+Örnek, kaynak tanımlarındaki değerlerin kodlanması aksine yaygın olarak bir çözümde kullanılan [standart çözüm parametreleri]( solutions-solution-file.md#parameters) değişkenlerini kullanır.
 
 
     {
@@ -650,4 +644,4 @@ Aşağıdaki kaynakları içeren bir içeren bir çözümü bir örnek aşağıd
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Çözümünüze bir görünüm ekleyin]( solutions-resources-views.md) toplanan verileri görselleştirmek için.
+* Toplanan verileri görselleştirmek için [çözümünüze bir görünüm ekleyin]( solutions-resources-views.md) .

@@ -1,5 +1,5 @@
 ---
-title: 'Öğretici: Azure Stream Analytics JavaScript kullanıcı tanımlı işlevleri | Microsoft Docs '
+title: JavaScript Kullanıcı tanımlı işlevleri Azure Stream Analytics
 description: Bu öğreticide JavaScript kullanıcı tanımlı işlevleri ile gelişmiş sorgu mekanizmalarını uygulayacaksınız
 services: stream-analytics
 author: rodrigoamicrosoft
@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.reviewer: mamccrea
 ms.custom: mvc
 ms.date: 04/01/2018
-ms.openlocfilehash: c7414ee159303465d6698ce9c47d04ba37c0c46e
-ms.sourcegitcommit: 08138eab740c12bf68c787062b101a4333292075
+ms.openlocfilehash: 9ddf8a2a11cb863a0016726074c5279bfde96959
+ms.sourcegitcommit: 92d42c04e0585a353668067910b1a6afaf07c709
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/22/2019
-ms.locfileid: "67329373"
+ms.lasthandoff: 10/28/2019
+ms.locfileid: "72990233"
 ---
 # <a name="tutorial-azure-stream-analytics-javascript-user-defined-functions"></a>Öğretici: Azure Stream Analytics JavaScript kullanıcı tanımlı işlevleri
  
@@ -46,16 +46,16 @@ Stream Analytics’te bir JavaScript kullanıcı tanımlı işlevi ile yapamayac
 **Date.GetDate()** veya **Math.random()** gibi işlevler işlev tanımında engellenmese de bunları kullanmaktan kaçınmanız gerekir. Bu işlevler her çağırdığınızda aynı sonucu **vermezler** ve Azure Stream Analytics hizmeti, işlev çağrılarının ve döndürülen sonuçların kaydını tutmaz. Bir işlev aynı olaylar üzerinde farklı sonuçlar döndürürse, siz veya Stream Analytics hizmeti tarafından bir iş yeniden başlatıldığında tekrarlanabilirlik garanti edilmez.
 
 ## <a name="add-a-javascript-user-defined-function-in-the-azure-portal"></a>Azure portalına JavaScript kullanıcı tanımlı işlevi ekleme
-Basit bir JavaScript kullanıcı tanımlı işlevi altında var olan bir Stream Analytics işi oluşturmak için bu adımları izleyin:
+Mevcut bir Stream Analytics işi altında basit bir JavaScript Kullanıcı tanımlı işlevi oluşturmak için aşağıdaki adımları izleyin:
 
 > [!NOTE]
-> Bu adımlar, bulutta çalışacak şekilde yapılandırılmış Stream Analytics işlerinde geçerlidir. Stream Analytics işinizi Azure IOT Edge üzerinde çalıştırmak için yapılandırılmışsa, bunun yerine Visual Studio kullanın ve [kullanarak kullanıcı tanımlı işlev yazma C# ](stream-analytics-edge-csharp-udf.md).
+> Bu adımlar, bulutta çalışmak üzere yapılandırılmış Stream Analytics işleri üzerinde çalışır. Stream Analytics işiniz Azure IoT Edge çalışacak şekilde yapılandırıldıysa, Visual Studio 'Yu kullanın ve [kullanarak C#Kullanıcı tanımlı işlevi yazın ](stream-analytics-edge-csharp-udf.md).
 
 1.  Azure portalında Stream Analytics işinizi bulun.
 
-2. Altında **iş topolojisi** başlığı seçin **işlevleri**. Boş bir işlevler listesi görüntülenir.
+2. **İş topolojisi** başlığı altında **işlevler**' i seçin. Boş bir işlevler listesi görüntülenir.
 
-3.  Yeni bir kullanıcı tanımlı işlev oluşturmak için Seç **+ Ekle**.
+3.  Kullanıcı tanımlı yeni bir işlev oluşturmak için **+ Ekle**' yi seçin.
 
 4.  **Yeni İşlev** dikey penceresinde **İşlev Türü** olarak **JavaScript**’i seçin. Düzenleyicide varsayılan bir işlev şablonu görüntülenir.
 
@@ -71,9 +71,12 @@ Basit bir JavaScript kullanıcı tanımlı işlevi altında var olan bir Stream 
 6.  **Kaydet**’i seçin. İşleviniz işlevler listesinde görüntülenir.
 7.  Yeni **hex2Int** işlevini seçin ve işlev tanımını denetleyin. Tüm işlevlerde işlev diğer adına bir **UDF** ön eki getirilmelidir. İşlevi Stream Analytics sorgunuzda çağırdığınızda *ön eki getirmeniz* gerekir. Bu durumda **UDF.hex2Int** adını çağırırsınız.
 
+## <a name="testing-javascript-udfs"></a>JavaScript UDF 'Leri test etme 
+JavaScript UDF mantığınızı herhangi bir tarayıcıda test edebilir ve hatalarını ayıklayabilirsiniz. Kullanıcı tanımlı bu işlevlerin mantığını hata ayıklama ve test etme işlemi şu anda Stream Analytics portalında desteklenmiyor. İşlev beklenen şekilde çalışırsa, yukarıda bahsedilen Stream Analytics işe ekleyebilirsiniz ve ardından doğrudan Sorgunuzla çağırabilirsiniz.
+
 ## <a name="call-a-javascript-user-defined-function-in-a-query"></a>Bir sorguda JavaScript kullanıcı tanımlı işlevi çağırma
 
-1. Sorgu Düzenleyicisi'nde altında **iş topolojisi** başlığı seçin **sorgu**.
+1. Sorgu Düzenleyicisi 'nde, **iş topolojisi** başlığı altında **sorgu**' yı seçin.
 2.  Sorgunuzu düzenleyin ve sonra aşağıdaki gibi kullanıcı tanımlı işlevi çağırın:
 
     ```SQL
@@ -97,10 +100,10 @@ Azure Stream Analytics JavaScript kullanıcı tanımlı işlevleri standart, yer
 
 Stream Analytics sorgu dili ile JavaScript’in desteklediği türler arasında farklılıklar vardır. Bu tabloda ikisi arasındaki dönüştürme eşlemeleri listelenmektedir:
 
-Stream Analytics | JavaScript
+Akış Analizi | JavaScript
 --- | ---
 bigint | Sayı (JavaScript yalnızca tam olarak 2^53’e kadar tamsayıları temsil edebilir)
-DateTime | Tarih (JavaScript yalnızca milisaniye birimini destekler)
+Tarih Saat | Tarih (JavaScript yalnızca milisaniye birimini destekler)
 double | Sayı
 nvarchar(MAX) | Dize
 Kayıt | Nesne
@@ -111,21 +114,20 @@ NULL | Null
 JavaScript’ten Stream Analytics’e dönüşümler aşağıda verilmiştir:
 
 
-JavaScript | Stream Analytics
+JavaScript | Akış Analizi
 --- | ---
 Sayı | Bigint (sayı yuvarlak ve long.MinValue ile long.MaxValue arasındaysa; aksi takdirde iki katıdır)
-Tarih | DateTime
+Tarih | Tarih Saat
 Dize | nvarchar(MAX)
 Nesne | Kayıt
 Dizi | Dizi
 Null, Tanımsız | NULL
 Başka bir tür (örneğin, bir işlev veya hata) | Desteklenmiyor (çalışma zamanı hatası ile sonuçlanır)
 
-JavaScript dil büyük/küçük harfe duyarlıdır ve JavaScript kodu nesne alanları büyük küçük harfleri büyük/küçük harf gelen veri alanlarının eşleşmesi gerekir. Uyumluluk düzeyi 1.0 ile işleri küçük harfli olması için SQL SELECT deyiminden alanlarını dönüştürmek unutmayın. Uyumluluk düzeyi altında 1.1 ve üzeri, aynı büyük küçük harfleri SQL sorgusunda belirtilen SELECT deyimi alanları olacaktır.
+JavaScript dili, büyük/küçük harfe duyarlıdır ve JavaScript kodundaki nesne alanlarının büyük küçük harfe eşit olması gerekir. Uyumluluk düzeyi 1,0 olan işlerin, SQL SELECT deyimindeki alanları küçük harfe dönüştürdüğüne lütfen unutmayın. Uyumluluk düzeyi 1,1 ve üzeri sürümlerde, SELECT deyimindeki alanlar SQL sorgusunda belirtilen büyük küçük harflere sahip olacaktır.
 
 ## <a name="troubleshooting"></a>Sorun giderme
 JavaScript çalışma zamanı hataları önemli kabul edilir ve Etkinlik günlüğünde öne çıkarılır. Günlüğü almak için Azure portalında işinize gidin ve **Etkinlik günlüğü**’nü seçin.
-
 
 ## <a name="other-javascript-user-defined-function-patterns"></a>Diğer JavaScript kullanıcı tanımlı işlev desenleri
 

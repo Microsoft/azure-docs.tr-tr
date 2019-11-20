@@ -1,6 +1,6 @@
 ---
-title: TechnicalProfiles | Microsoft Docs
-description: Azure Active Directory B2C'de özel bir ilke TechnicalProfiles öğesi belirtin.
+title: Teknisyen | Microsoft Docs
+description: Azure Active Directory B2C bir özel ilkenin teknisyen öğesini belirtin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 09/10/2018
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: f712634c83fa290ab24d5e8437a82d5f93af0b7f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e1192c8d0057d77306a1ffb06dd9bae12b7634ca
+ms.sourcegitcommit: e97a0b4ffcb529691942fc75e7de919bc02b06ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66512291"
+ms.lasthandoff: 09/15/2019
+ms.locfileid: "70998736"
 ---
 # <a name="technicalprofiles"></a>TechnicalProfiles
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-A **TechnicalProfiles** Talep sağlayıcı tarafından desteklenen teknik profiller bir dizi öğesi içeriyor. Her talep sağlayıcısı uç noktaları ve Talep sağlayıcı ile iletişim kurmak için gerekli Protokolü belirleyen bir veya daha fazla teknik profiller olması gerekir. Bir talep sağlayıcısı, birden fazla teknik profili olabilir.
+Bir **teknisyen** öğesi, talep sağlayıcısı tarafından desteklenen bir teknik profiller kümesi içerir. Her talep sağlayıcının, uç noktaları ve talep sağlayıcısıyla iletişim kurmak için gereken protokolleri tespit eden bir veya daha fazla teknik profili olmalıdır. Bir talep sağlayıcısının birden çok teknik profili olabilir.
 
 ```XML
 <ClaimsProvider>
@@ -72,217 +72,217 @@ A **TechnicalProfiles** Talep sağlayıcı tarafından desteklenen teknik profil
 </ClaimsProvider>
 ```
 
-**TechnicalProfile** öğesi aşağıdaki öznitelik içeriyor:
+**Teknisyen** öğesi aşağıdaki özniteliği içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 |---------|---------|---------|
-| Kimlik | Evet | Teknik profil benzersiz tanımlayıcısı. Teknik profili, bu diğer öğeleri tanımlayıcıdan ilke dosyasını kullanarak başvurulabilir. Örneğin, **OrchestrationSteps** ve **ValidationTechnicalProfile**. |
+| Id | Evet | Teknik profilin benzersiz tanıtıcısı. Teknik profile bu tanımlayıcı kullanılarak ilke dosyasındaki diğer öğelerden başvurulabilir. Örneğin, **Orchestrationsteps** ve **Validationteknisyen alprofile**. |
 
-**TechnicalProfile** aşağıdaki öğeleri içerir:
+**Teknisyen** aşağıdaki öğeleri içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| Etki Alanı | 0:1 | Teknik profil için etki alanı adı. Facebook kimlik sağlayıcısı teknik profilinizi belirtir, örneğin, etki alanı Facebook.com adıdır. |
-| displayName | 0:1 | Kullanıcılara görüntülenen teknik profil adı. |
-| Açıklama | 0:1 | Kullanıcılara görüntülenen teknik Profil açıklaması. |
-| Protocol | 0:1 | Diğer taraf iletişimi için kullanılan protokol. |
-| Meta Veriler | 0:1 | Bir işlem sırasında uç noktasıyla iletişim protokolü tarafından kullanılan anahtar/değer çiftleri koleksiyonu. |
-| InputTokenFormat | 0:1 | Giriş belirteci biçimi. Olası değerler: `JSON`, `JWT`, `SAML11`, veya `SAML2`. `JWT` Değeri temsil eden bir JSON Web belirteci IETF belirtimi uyarınca. `SAML11` Değeri OASIS belirtimi uyarınca bir SAML 1.1 güvenlik belirteci temsil eder.  `SAML2` Değeri OASIS belirtimi uyarınca bir SAML 2.0 güvenlik belirteci temsil eder. |
-| OutputTokenFormat | 0:1 | Çıkış belirteci biçimi. Olası değerler: `JSON`, `JWT`, `SAML11`, veya `SAML2`. |
-| CryptographicKeys | 0:1 | Teknik profili içinde kullanılan şifreleme anahtarları listesi. |
-| InputClaimsTransformations | 0:1 | Herhangi bir talep, Talep sağlayıcı veya bağlı olan taraf için gönderilmeden önce yürütülmesi gereken talep dönüştürmeleri önceden tanımlı başvuru listesi. |
-| InputClaims | 0:1 | Önceden tanımlanmış başvuruları talep olarak geçen türleri listesini teknik profili içinde giriş. |
-| PersistedClaims | 0:1 | Önceden tanımlanmış başvuruları talep teknik profiline ilgili talep sağlayıcısı tarafından kalıcı türleri listesi. |
-| OutputClaims | 0:1 | Önceden tanımlanmış başvuruları talep teknik profilde çıktı olarak geçen türleri listesi. |
-| OutputClaimsTransformations | 0:1 | Talep sağlayıcısından gelen talepleri alındıktan sonra yürütülmesi gereken talep dönüştürmeleri önceden tanımlı başvuru listesi. |
-| ValidationTechnicalProfiles | 0: n | Doğrulama amacıyla teknik profili kullanan diğer teknik profiline başvuru listesi. Daha fazla bilgi için [doğrulama teknik profili](validation-technical-profile.md)|
-| SubjectNamingInfo | 0:1 | Konu adı gelen talepleri ayrı olarak burada belirtilen belirteçleri konu adına üretimini denetler. Örneğin, OAuth veya SAML.  |
-| IncludeClaimsFromTechnicalProfile | 0:1 | Tüm bu teknik profile eklenecek giriş ve çıkış talep istediğiniz bir teknik profili tanımlayıcısı. Başvurulan teknik profili aynı ilke dosyasında tanımlanmış olması gerekir. |
-| IncludeTechnicalProfile |0:1 | Bu teknik profile eklenecek tüm verileri istediğiniz bir teknik profili tanımlayıcısı. Başvurulan teknik profili, aynı ilke dosyasında mevcut olmalıdır. |
-| UseTechnicalProfileForSessionManagement | 0:1 | Oturum yönetimi için kullanılacak farklı bir teknik profili. |
-|EnabledForUserJourneys| 0:1 |Teknik profili bir kullanıcı yolculuğunda yürütülürse denetler.  |
+| Etki Alanı | 0:1 | Teknik profilin etki alanı adı. Örneğin, teknik profiliniz Facebook kimlik sağlayıcısını belirtiyorsa, etki alanı adı Facebook.com olur. |
+| DisplayName | 0:1 | Kullanıcılara görüntülenebilecek teknik profilin adı. |
+| Açıklama | 0:1 | Kullanıcılara görüntülenebilecek teknik profilin açıklaması. |
+| Protocol | 0:1 | Diğer tarafla iletişim için kullanılan protokol. |
+| Meta Veriler | 0:1 | Bir işlem sırasında uç noktayla iletişim kurmak için protokol tarafından kullanılan anahtar/değer çiftleri koleksiyonu. |
+| Inputtokenformat | 0:1 | Giriş belirtecinin biçimi. Olası değerler: `JSON`, `JWT`, `SAML11`veya. `SAML2` Değer `JWT` , IETF belirtimine göre JSON Web Token temsil eder. Değer `SAML11` , oassıs belirtimine göre SAML 1,1 güvenlik belirtecini temsil eder.  Değer `SAML2` , oassıs belirtimine göre SAML 2,0 güvenlik belirtecini temsil eder. |
+| OutputTokenFormat | 0:1 | Çıkış belirtecinin biçimi. Olası değerler: `JSON`, `JWT`, `SAML11`veya. `SAML2` |
+| CryptographicKeys | 0:1 | Teknik profilde kullanılan şifreleme anahtarlarının bir listesi. |
+| Inputclaimstransformations | 0:1 | Talep dönüşümlerine veya bağlı olan tarafa herhangi bir talep gönderilmeden önce yürütülmesi gereken talep dönüştürmelerinin önceden tanımlanmış başvuruları listesi. |
+| Inputclaims | 0:1 | Teknik profilde girdi olarak alınan talep türlerine daha önceden tanımlanmış başvuruların listesi. |
+| PersistedClaims | 0:1 | Teknik profille ilgili talep sağlayıcısı tarafından kalıcı olan talep türlerine yönelik önceden tanımlanmış başvuruların listesi. |
+| Outputclaim | 0:1 | Teknik profilde çıkış olarak alınan talep türlerine daha önceden tanımlanmış başvuruların listesi. |
+| OutputClaimsTransformations | 0:1 | Talep dönüşümlerinden talepler alındıktan sonra yürütülmesi gereken talep dönüştürmelerine yönelik önceden tanımlanmış başvuruların listesi. |
+| Validationcealprofiles | 0: n | Teknik profilin doğrulama amacıyla kullandığı diğer teknik profillerin başvurularını içeren bir liste. Daha fazla bilgi için bkz. [doğrulama teknik profili](validation-technical-profile.md)|
+| Subjectnamingınfo | 0:1 | Konu adının taleplerden ayrı olarak belirtildiği belirteçlerde konu adının üretimini denetler. Örneğin, OAuth veya SAML.  |
+| IncludeClaimsFromTechnicalProfile | 0:1 | Tüm giriş ve çıkış taleplerinin bu teknik profile eklenmesini istediğiniz teknik profilin bir tanımlayıcısı. Başvurulan teknik profil aynı ilke dosyasında tanımlanmalıdır. |
+| Includetekchnicalprofile |0:1 | Bu teknik profile tüm verilerin eklenmesini istediğiniz teknik profilin bir tanımlayıcısı. Başvurulan teknik profil aynı ilke dosyasında bulunmalıdır. |
+| Useteknisyen Alprofileforsessionmanagement | 0:1 | Oturum yönetimi için kullanılacak farklı bir teknik profil. |
+|Enabledforuser, neys| 0:1 |Teknik profilin bir Kullanıcı yolculuğunda yürütülüp yürütülmeyeceğini denetler.  |
 
 ### <a name="protocol"></a>Protocol
 
-**Protokolü** öğesi aşağıdaki öznitelikler içerir:
+**Protokol** öğesi aşağıdaki öznitelikleri içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| Name | Evet | Teknik profilinin bir parçası kullanılan bir Azure AD B2C tarafından desteklenen geçerli bir protokol adı. Olası değerler: `OAuth1`, `OAuth2`, `SAML2`, `OpenIdConnect`, `WsFed`, `WsTrust`, `Proprietary`, `session management`, `self-asserted`, veya `None`. |
-| İşleyici | Hayır | Protokol adı ayarlandığında `Proprietary`, Azure AD B2C tarafından kullanılan protokol işleyicisi belirlemek için bütünleştirilmiş kodun tam adı belirtin. |
+| Name | Evet | Teknik profilin bir parçası olarak kullanılan Azure AD B2C tarafından desteklenen geçerli bir protokol adı. Olası değerler: `OAuth1` `OAuth2` ,`OpenIdConnect`,,, ,`Proprietary` ,`self-asserted`veya. `session management` `SAML2` `None` |
+| Iy | Hayır | Protokol adı olarak `Proprietary`ayarlandığında, protokol işleyicisini belirlemek için Azure AD B2C tarafından kullanılan derlemenin tam nitelikli adını belirtin. |
 
 ### <a name="metadata"></a>Meta Veriler
 
-A **meta verileri** öğesi aşağıdaki öğeleri içerir:
+**Meta veri** öğesi aşağıdaki öğeleri içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| Öğe | 0: n | Teknik profiline ilişkili meta verileri. Her teknik profili türü farklı bir meta veri öğeleri kümesi vardır. Daha fazla bilgi için teknik profil türleri bölümüne bakın. |
+| Öğe | 0: n | Teknik profille ilgili meta veriler. Her bir teknik profil türünün farklı bir meta veri öğesi kümesi vardır. Daha fazla bilgi için teknik profil türleri bölümüne bakın. |
 
 #### <a name="item"></a>Öğe
 
-**Öğesi** öğesinin **meta verileri** öğesi aşağıdaki öznitelikler içerir:
+**Meta veri** öğesinin **Item** öğesi aşağıdaki öznitelikleri içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| Anahtar | Evet | Meta veri anahtarı. Her teknik profil türü, meta veri öğeleri listesi için bkz. |
+| Anahtar | Evet | Meta veri anahtarı. Meta veri öğelerinin listesi için her teknik profil türüne bakın. |
 
 ### <a name="cryptographickeys"></a>CryptographicKeys
 
-**CryptographicKeys** öğesi aşağıdaki öğeyi içerir:
+**Cryptographickeys** öğesi aşağıdaki öğeyi içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| Anahtar | 1:n | Bu teknik profili içinde kullanılan bir şifreleme anahtarı. |
+| Anahtar | 1: n | Bu teknik profilde kullanılan bir şifreleme anahtarı. |
 
 #### <a name="key"></a>Anahtar
 
-**Anahtar** öğesi aşağıdaki öznitelik içeriyor:
+**Anahtar** öğesi aşağıdaki özniteliği içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| Kimlik | Hayır | Belirli bir anahtar çifti diğer öğelerden ilkesi dosyasında başvurulan bir benzersiz tanımlayıcısı. |
-| StorageReferenceId | Evet | Bir tanımlayıcıyla diğer öğelerden ilkesi dosyasında başvurulan bir depolama anahtar kapsayıcısı. |
+| Id | Hayır | İlke dosyasındaki diğer öğelerden başvurulan belirli bir anahtar çiftinin benzersiz tanıtıcısı. |
+| Storagereferenceıd değerine | Evet | İlke dosyasındaki diğer öğelerden başvurulan bir depolama anahtarı kapsayıcısının tanımlayıcı değeri. |
 
-### <a name="inputclaimstransformations"></a>InputClaimsTransformations
+### <a name="inputclaimstransformations"></a>Inputclaimstransformations
 
-**InputClaimsTransformations** öğesi aşağıdaki öğeyi içerir:
+**Inputclaimstransformations** öğesi aşağıdaki öğeyi içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| InputClaimsTransformation | 1:n | Herhangi bir talep, Talep sağlayıcı veya bağlı olan taraf için gönderilmeden önce yürütülmesi gereken bir talep dönüştürme tanımlayıcısı. Talep dönüştürme mevcut ClaimsSchema talep değiştirmek veya yenilerini oluşturmak için kullanılabilir. |
+| Inputclaimstranssize | 1: n | Talep sağlayıcısına veya bağlı olan tarafa herhangi bir talep gönderilmeden önce yürütülmesi gereken bir talep dönüştürmesi tanımlayıcısı. Bir talep dönüştürmesi, var olan ClaimsSchema taleplerini değiştirmek veya yenilerini oluşturmak için kullanılabilir. |
 
-#### <a name="inputclaimstransformation"></a>InputClaimsTransformation
+#### <a name="inputclaimstransformation"></a>Inputclaimstranssize
 
-**InputClaimsTransformation** öğesi aşağıdaki öznitelik içeriyor:
+**Inputclaimstransbir** öğesi aşağıdaki özniteliği içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| ReferenceId | Evet | İlke dosya ya da üst ilke dosyası zaten tanımlanmış bir talep dönüştürme tanımlayıcısı. |
+| ReferenceId | Evet | İlke dosyasında veya üst ilke dosyasında zaten tanımlanmış olan bir talep dönüşümünün tanımlayıcısı. |
 
-### <a name="inputclaims"></a>InputClaims
+### <a name="inputclaims"></a>Inputclaims
 
-**InputClaims** öğesi aşağıdaki öğeyi içerir:
+**Inputclaim** öğesi aşağıdaki öğeyi içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| Inputclaim | 1:n | Beklenen bir giriş talep türü. |
+| Inputclaim | 1: n | Beklenen giriş talep türü. |
 
 #### <a name="inputclaim"></a>Inputclaim
 
-**Inputclaim** öğesi aşağıdaki öznitelikler içerir:
+**Inputclaim** öğesi aşağıdaki öznitelikleri içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| ClaimTypeReferenceId | Evet | İlke dosyası veya üst ilke dosyası ClaimsSchema bölümünde önceden tanımlanmış bir talep türü tanımlayıcısı. |
-| defaultValue | Hayır | Sonuçta elde edilen talep bir Inputclaim teknik profili tarafından kullanılabilir. böylece, talep tarafından ClaimTypeReferenceId belirtilmişse bir talep oluşturmak için kullanılacak bir varsayılan değer yok. |
-| PartnerClaimType | Hayır | Belirtilen ilke talep türü dış ortak talep türünü tanımlayıcısını eşlenir. Daha sonra PartnerClaimType özniteliği belirtilmezse, belirtilen ilke talep türü adın aynısını iş ortağı talebi türü eşleştirilir. Talep türü adınız diğer taraftan farklı olduğunda bu özelliği kullanın. Örneğin, iş ortağı 'first_name' adlı bir talep kullanırken ilk talep adı 'givenName', ' dir. |
+| ClaimTypeReferenceId | Evet | İlke dosyası veya üst ilke dosyasında ClaimsSchema bölümünde zaten tanımlanmış olan bir talep türünün tanımlayıcısı. |
+| Değerinin | Hayır | ClaimTypeReferenceId tarafından belirtilen talep yoksa, sonuçta elde edilen talebin teknik profille bir ınputclaim olarak kullanılabilmesi için bir talep oluşturmak için kullanılacak varsayılan değer. |
+| PartnerClaimType | Hayır | Belirtilen ilke talep türünün eşlendiği dış iş ortağının talep türünün tanımlayıcısı. PartnerClaimType özniteliği belirtilmemişse, belirtilen ilke talep türü aynı ada sahip iş ortağı talep türüne eşlenir. Talep türü adınız diğer taraftan farklıysa bu özelliği kullanın. Örneğin, ilk talep adı ' bir ' ise, iş ortağı ' First_name ' adlı bir talep kullanır. |
 
 ### <a name="persistedclaims"></a>PersistedClaims
 
 **PersistedClaims** öğesi aşağıdaki öğeleri içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| PersistedClaim | 1:n | Kalıcı hale getirmek için talep türü. |
+| PersistedClaim | 1: n | Kalıcı yapılacak talep türü. |
 
 #### <a name="persistedclaim"></a>PersistedClaim
 
-**PersistedClaim** öğesi aşağıdaki öznitelikler içerir:
+**PersistedClaim** öğesi aşağıdaki öznitelikleri içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| ClaimTypeReferenceId | Evet | İlke dosyası veya üst ilke dosyası ClaimsSchema bölümünde önceden tanımlanmış bir talep türü tanımlayıcısı. |
-| defaultValue | Hayır | Sonuçta elde edilen talep bir Inputclaim teknik profili tarafından kullanılabilir. böylece, talep tarafından ClaimTypeReferenceId belirtilmişse bir talep oluşturmak için kullanılacak bir varsayılan değer yok. |
-| PartnerClaimType | Hayır | Belirtilen ilke talep türü dış ortak talep türünü tanımlayıcısını eşlenir. Daha sonra PartnerClaimType özniteliği belirtilmezse, belirtilen ilke talep türü adın aynısını iş ortağı talebi türü eşleştirilir. Talep türü adınız diğer taraftan farklı olduğunda bu özelliği kullanın. Örneğin, iş ortağı 'first_name' adlı bir talep kullanırken ilk talep adı 'givenName', ' dir. |
+| ClaimTypeReferenceId | Evet | İlke dosyası veya üst ilke dosyasında ClaimsSchema bölümünde zaten tanımlanmış olan bir talep türünün tanımlayıcısı. |
+| Değerinin | Hayır | ClaimTypeReferenceId tarafından belirtilen talep yoksa, sonuçta elde edilen talebin teknik profille bir ınputclaim olarak kullanılabilmesi için bir talep oluşturmak için kullanılacak varsayılan değer. |
+| PartnerClaimType | Hayır | Belirtilen ilke talep türünün eşlendiği dış iş ortağının talep türünün tanımlayıcısı. PartnerClaimType özniteliği belirtilmemişse, belirtilen ilke talep türü aynı ada sahip iş ortağı talep türüne eşlenir. Talep türü adınız diğer taraftan farklıysa bu özelliği kullanın. Örneğin, ilk talep adı ' bir ' ise, iş ortağı ' First_name ' adlı bir talep kullanır. |
 
-### <a name="outputclaims"></a>OutputClaims
+### <a name="outputclaims"></a>Outputclaim
 
-**OutputClaims** öğesi aşağıdaki öğeyi içerir:
+**Outputclaim** öğesi aşağıdaki öğeyi içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| outputClaim | 1:n | Beklenen bir çıkış talep türü. |
+| outputClaim | 1: n | Beklenen çıkış talep türü. |
 
 #### <a name="outputclaim"></a>outputClaim
 
-**OutputClaim** öğesi aşağıdaki öznitelikler içerir:
+**Outputclaim** öğesi aşağıdaki öznitelikleri içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| ClaimTypeReferenceId | Evet | İlke dosyası veya üst ilke dosyası ClaimsSchema bölümünde önceden tanımlanmış bir talep türü tanımlayıcısı. |
-| defaultValue | Hayır | Sonuçta elde edilen talep bir Inputclaim teknik profili tarafından kullanılabilir. böylece, talep tarafından ClaimTypeReferenceId belirtilmişse bir talep oluşturmak için kullanılacak bir varsayılan değer yok. |
-|AlwaysUseDefaultValue |Hayır |Varsayılan değer kullanımını zorlar.  |
-| PartnerClaimType | Hayır | Belirtilen ilke talep türü dış ortak talep türünü tanımlayıcısını eşlenir. Daha sonra PartnerClaimType özniteliği belirtilmezse, belirtilen ilke talep türü adın aynısını iş ortağı talebi türü eşleştirilir. Talep türü adınız diğer taraftan farklı olduğunda bu özelliği kullanın. Örneğin, iş ortağı 'first_name' adlı bir talep kullanırken ilk talep adı 'givenName', ' dir. |
+| ClaimTypeReferenceId | Evet | İlke dosyası veya üst ilke dosyasında ClaimsSchema bölümünde zaten tanımlanmış olan bir talep türünün tanımlayıcısı. |
+| Değerinin | Hayır | ClaimTypeReferenceId tarafından belirtilen talep yoksa, sonuçta elde edilen talebin teknik profille bir ınputclaim olarak kullanılabilmesi için bir talep oluşturmak için kullanılacak varsayılan değer. |
+|AlwaysUseDefaultValue |Hayır |Varsayılan değerin kullanımını zorunlu kılın.  |
+| PartnerClaimType | Hayır | Belirtilen ilke talep türünün eşlendiği dış iş ortağının talep türünün tanımlayıcısı. PartnerClaimType özniteliği belirtilmemişse, belirtilen ilke talep türü aynı ada sahip iş ortağı talep türüne eşlenir. Talep türü adınız diğer taraftan farklıysa bu özelliği kullanın. Örneğin, ilk talep adı ' bir ' ise, iş ortağı ' First_name ' adlı bir talep kullanır. |
 
 ### <a name="outputclaimstransformations"></a>OutputClaimsTransformations
 
-**OutputClaimsTransformations** öğesi aşağıdaki öğeyi içerir:
+**Outputclaimstransformations** öğesi aşağıdaki öğeyi içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| OutputClaimsTransformation | 1:n | Herhangi bir talep, Talep sağlayıcı veya bağlı olan taraf için gönderilmeden önce yürütülmesi gereken talep dönüştürmeleri tanımlayıcıları. Talep dönüştürme mevcut ClaimsSchema talep değiştirmek veya yenilerini oluşturmak için kullanılabilir. |
+| Outputclaimstranssize | 1: n | Talepler, talep sağlayıcısına veya bağlı olan tarafa gönderilmeden önce yürütülmesi gereken talep dönüştürmelerinin tanımlayıcıları. Bir talep dönüştürmesi, var olan ClaimsSchema taleplerini değiştirmek veya yenilerini oluşturmak için kullanılabilir. |
 
-#### <a name="outputclaimstransformation"></a>OutputClaimsTransformation
+#### <a name="outputclaimstransformation"></a>Outputclaimstranssize
 
-**OutputClaimsTransformation** öğesi aşağıdaki öznitelik içeriyor:
+**Outputclaimstransbir** öğesi aşağıdaki özniteliği içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| ReferenceId | Evet | İlke dosya ya da üst ilke dosyası zaten tanımlanmış bir talep dönüştürme tanımlayıcısı. |
+| ReferenceId | Evet | İlke dosyasında veya üst ilke dosyasında zaten tanımlanmış olan bir talep dönüşümünün tanımlayıcısı. |
 
-### <a name="validationtechnicalprofiles"></a>ValidationTechnicalProfiles
+### <a name="validationtechnicalprofiles"></a>Validationcealprofiles
 
-**ValidationTechnicalProfiles** öğesi aşağıdaki öğeyi içerir:
+**Validation, Alprofiles** öğesi aşağıdaki öğeyi içerir:
 
-| Öğe | Örnekleri | Açıklama |
+| Öğe | Oluşumlar | Açıklama |
 | ------- | ----------- | ----------- |
-| ValidationTechnicalProfile | 1:n | Kullanılan teknik profiller tanımlayıcıların bazılarını veya tümünü başvuru teknik profili, çıkış talep doğrulayın. Tüm giriş talepleri başvurulan teknik profili, başvuru teknik profili çıkış Taleplerde yer almalıdır. |
+| Validationteknisyen Alprofıle | 1: n | Kullanılan teknik profillerin tanımlayıcıları, başvuru yapan teknik profilin bazı veya tüm çıktı taleplerini doğrular. Başvurulan teknik profilin tüm giriş talepleri, başvuru yapan teknik profilin çıkış taleplerinden gelmelidir. |
 
-#### <a name="validationtechnicalprofile"></a>ValidationTechnicalProfile
+#### <a name="validationtechnicalprofile"></a>Validationteknisyen Alprofıle
 
-**ValidationTechnicalProfile** öğesi aşağıdaki öznitelik içeriyor:
-
-| Öznitelik | Gerekli | Açıklama |
-| --------- | -------- | ----------- |
-| ReferenceId | Evet | İlke dosya ya da üst ilke dosyası zaten tanımlanmış bir teknik profili tanımlayıcısı. |
-
-###  <a name="subjectnaminginfo"></a>SubjectNamingInfo
-
-**SubjectNamingInfo** aşağıdaki öznitelik içeriyor:
+**Validation, Alprofile** öğesi aşağıdaki özniteliği içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| ClaimType | Evet | İlke dosyası ClaimsSchema bölümünde önceden tanımlanmış bir talep türü tanımlayıcısı. |
+| ReferenceId | Evet | İlke dosyasında veya üst ilke dosyasında zaten tanımlanmış olan bir teknik profilin tanımlayıcısı. |
 
-### <a name="includetechnicalprofile"></a>IncludeTechnicalProfile
+###  <a name="subjectnaminginfo"></a>Subjectnamingınfo
 
-**IncludeTechnicalProfile** öğesi aşağıdaki öznitelik içeriyor:
-
-| Öznitelik | Gerekli | Açıklama |
-| --------- | -------- | ----------- |
-| ReferenceId | Evet | İlke dosya ya da üst ilke dosyası zaten tanımlanmış bir teknik profili tanımlayıcısı. |
-
-### <a name="usetechnicalprofileforsessionmanagement"></a>UseTechnicalProfileForSessionManagement
-
-**UseTechnicalProfileForSessionManagement** öğesi aşağıdaki öznitelik içeriyor:
+**Subjectnamingınfo** aşağıdaki özniteliği içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| ReferenceId | Evet | İlke dosya ya da üst ilke dosyası zaten tanımlanmış bir teknik profili tanımlayıcısı. |
+| ClaimType | Evet | İlke dosyasında ClaimsSchema bölümünde zaten tanımlanmış olan bir talep türünün tanımlayıcısı. |
 
-### <a name="enabledforuserjourneys"></a>EnabledForUserJourneys
-**ClaimsProviderSelections** bir kullanıcı yolculuğunun talep sağlayıcısı seçme seçenekleri ve bunların sırası listesini tanımlar. İle **EnabledForUserJourneys** kullanıcıya hangi Talep sağlayıcı kullanılabilir filtrelemenize, öğe. **EnabledForUserJourneys** öğesi aşağıdaki değerlerden birini içerir:
+### <a name="includetechnicalprofile"></a>Includetekchnicalprofile
 
-- **Her zaman**, teknik profil yürütün.
-- **Hiçbir zaman**, teknik profil atlayın.
-- **OnClaimsExistence** teknik profilde belirtilen belirli talep, yalnızca mevcut olduğunda yürütün.
-- **OnItemExistenceInStringCollectionClaim**, yalnızca bir öğe bir dize koleksiyonu talebi zaman var. yürütün.
-- **OnItemAbsenceInStringCollectionClaim** yalnızca, bir öğe bir dize koleksiyonu talebi yok yürütün.
+**Includetekchnicalprofile** öğesi aşağıdaki özniteliği içerir:
 
-Kullanarak **OnClaimsExistence**, **OnItemExistenceInStringCollectionClaim** veya **OnItemAbsenceInStringCollectionClaim**, aşağıdaki vermenizi gerektirir meta veri: **ClaimTypeOnWhichToEnable** uyumluluğunun değerlendirilebilmesi için bir talebin türü belirtiyor. **ClaimValueOnWhichToEnable** Karşılaştırılacak değer belirtir.
+| Öznitelik | Gerekli | Açıklama |
+| --------- | -------- | ----------- |
+| ReferenceId | Evet | İlke dosyasında veya üst ilke dosyasında zaten tanımlanmış olan bir teknik profilin tanımlayıcısı. |
 
-Aşağıdaki teknik profili, yalnızca yürütülen **identityProviders** dize koleksiyonu içeren değerini `facebook.com`:
+### <a name="usetechnicalprofileforsessionmanagement"></a>Useteknisyen Alprofileforsessionmanagement
+
+**Useteknisyen Alprofileforsessionmanagement** öğesi aşağıdaki özniteliği içerir:
+
+| Öznitelik | Gerekli | Açıklama |
+| --------- | -------- | ----------- |
+| ReferenceId | Evet | İlke dosyasında veya üst ilke dosyasında zaten tanımlanmış olan bir teknik profilin tanımlayıcısı. |
+
+### <a name="enabledforuserjourneys"></a>Enabledforuser, neys
+Kullanıcı yolculuğunda bulunan **Claimsproviderselection** , talep sağlayıcı seçim seçeneklerinin listesini ve bunların sıralarını tanımlar. Kullanıcı tarafından kullanılabilir olan **Enabledforuser, neys** öğesiyle filtrelemeniz gerekir. **Enabledforuser, neys** öğesi aşağıdaki değerlerden birini içerir:
+
+- **Her zaman**teknik profili yürütün.
+- **Hiçbir**şekilde teknik profili atlayın.
+- **OnClaimsExistence** yalnızca teknik profilde belirtilen belirli bir talep varsa yürütülür.
+- **OnItemExistenceInStringCollectionClaim**, yalnızca bir dize koleksiyonu talebinde bir öğe varsa yürütülür.
+- **Onitemabsenceınstringcollectionclaim** yalnızca bir öğe dize koleksiyonu talebinde yoksa yürütülür.
+
+**OnClaimsExistence**, **OnItemExistenceInStringCollectionClaim** veya **Onitemabsenceınstringcollectionclaim**kullanarak, aşağıdaki meta verileri sağlamanızı gerektirir: **Claimtypeonbir Htoenable** , değerlendirilecek olan değerin değerlendirilme türünü belirtir, **Claimvalueondenhtoenable** karşılaştırılacak değeri belirtir.
+
+Aşağıdaki teknik profil yalnızca **IdentityProviders** dize koleksiyonu şu değeri `facebook.com`içeriyorsa yürütülür:
 
 ```XML
 <TechnicalProfile Id="UnLink-Facebook-OAUTH">

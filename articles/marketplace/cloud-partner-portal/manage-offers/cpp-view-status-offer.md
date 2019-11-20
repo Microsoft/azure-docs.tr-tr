@@ -1,49 +1,50 @@
 ---
-title: Market teklifleri durumunu görüntüleme | Azure Market
-description: Azure ve AppSource bulut iş ortağı portalını kullanarak Marketlerden teklifler durumunu görüntüleyin
+title: Market tekliflerinin durumunu görüntüleyin | Azure Marketi
+description: Bulut İş Ortağı Portalı kullanarak Azure ve AppSource marketlerine yönelik tekliflerin durumunu görüntüleyin
 services: Azure, AppSource, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 01/11/2019
 ms.author: pabutler
-ms.openlocfilehash: fff89dd8a17aaf6d45462edeaa22f1d2efc8d02b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e58670d37e01bb6e453b73e42a87e42e890d10d8
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67064312"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826695"
 ---
-# <a name="view-the-publishing-status-of-azure-marketplace-and-appsource-offers"></a>Azure Market ve AppSource teklifleri Yayımlama durumunu görüntüleyin
+# <a name="view-the-publishing-status-of-azure-marketplace-and-appsource-offers"></a>Azure Marketi ve AppSource tekliflerinin yayımlama durumunu görüntüleyin
 
-Sonra teklif oluşturma ve yayımlama işlemi sırasında özellikle bulut iş ortağı Portalı'nda teklifinizi durumunu görüntüleyebilirsiniz.  Yayımlama durumu genel kullanıma sunulmuştur [ **tüm sunar** ](../portal-tour/cpp-all-offers-page.md) ve [ **onaylar** ](../portal-tour/cpp-approvals-page.md) Portal sayfaları.  Aşağıdaki durum göstergeleri biri, her bir teklifin görüntülenmelidir.  
+Bir teklif oluşturduktan ve özellikle yayımlama sürecinde, Bulut İş Ortağı Portalı teklifinizin durumunu görüntüleyebilirsiniz.  Genel yayımlama durumu, portalın [**tüm teklifleri**](../portal-tour/cpp-all-offers-page.md) ve [**onay**](../portal-tour/cpp-approvals-page.md) sayfalarında kullanılabilir.  Her teklif için aşağıdaki durum göstergelerden biri görüntülenmelidir.  
 
 |            Durum              |   Açıklama                                                           |
 |            ------              |   -----------                                                           |
-| **-**                          | Teklif oluşturuldu ancak değil yayımlama işlemi başladı.            |
-| **Yayımlama devam ediyor**        | Teklif, yayımlama işleminin adımlarını yolu çalışmaktadır.   |
-| **Yayımlama başarısız oldu**             | Kritik bir sorunu doğrulama veya gözden geçirme sırasında Microsoft tarafından bulundu. |
-| **Yayımlama iptal edildi**           | Yayımcı, teklif yayımlama işlemi iptal etti.  Bu durum, mevcut bir teklifi Market'te delist değil. | 
-| **Bekleniyor yayımcı Oturumu Kapat** | Teklif, Microsoft tarafından gözden geçirildi ve artık yayımcı tarafından son bir doğrulama bekler. |
-| **Delisted**                   | Daha önce yayımlanan bir teklifi Market'te kaldırıldı.      | 
+| **-**                          | Teklif oluşturuldu ancak yayımlama işlemi başlatılmamış.            |
+| **Yayımlama devam ediyor**        | Teklif, yayımlama sürecinin adımları aracılığıyla kendi yolunda çalışmaktadır.   |
+| **Yayımlama başarısız oldu**             | Microsoft tarafından doğrulama veya İnceleme sırasında kritik bir sorun bulundu. |
+| **Yayımlama iptal edildi**           | Yayımcı, teklif yayımlama işlemini iptal etti.  Bu durum Market 'te mevcut bir teklifi listelemez. | 
+| **Yayımcının oturumu kapatma bekleniyor** | Teklif Microsoft tarafından incelendi ve şimdi yayımcı tarafından nihai bir doğrulamayı bekler. |
+| **Listede kaldırma**                   | Market 'te daha önce yayınlanmış bir teklif kaldırılmıştır.      | 
 |  |  |
 
 
 ## <a name="publishing-status-details"></a>Yayımlama durumu ayrıntıları 
 
-Teklif durumu hakkında daha fazla ayrıntı yayımlama sürecinde geçebileceği bulunan **durumu** sekmesinde **yeni teklif** sayfası.  Bu sayfada Teklif türü için tüm yayımlama adımları listelenir.  *Sayısını ve belirli adımları genellikle teklif türleri arasında farklı olduğunu unutmayın.*  Bu sayfa ayrıca Microsoft doğrulama ve yayımlama işlemine devam etmeden önce genellikle yayımcı tarafından eylem gerektiren gözden geçirme adımları tarafından oluşturulan tüm bekleyen sorunları gösterir.  Örneğin, aşağıdaki gösterir görüntüde **durumu** yeni bir sanal makine teklifi için sekmesinde. 
+**Yeni teklif** sayfasının **durum** sekmesinde yayımlama sürecinde geçen bir teklifin durumu hakkında daha fazla ayrıntı bulunur.  Bu sayfada, bu teklif türü için tüm yayımlama adımları listelenir.  *Numara ve belirli adımların, teklif türleri arasında genellikle farklı olduğunu unutmayın.*  Bu sayfada, Microsoft doğrulama ve gözden geçirme adımları tarafından oluşturulan tüm bekleyen sorunlar da belirtilir ve bu, yayımlama işleminin devam edebilmesi için genellikle yayımcı tarafından eylem gerektirir.  Örneğin, aşağıdaki görüntüde yeni bir sanal makine teklifinin **durum** sekmesi gösterilmektedir. 
 
-![VM teklifi için sekmesinde durumu](./media/vm-offer-pub-steps1.png)
+![VM teklifinin durum sekmesi](./media/vm-offer-pub-steps1.png)
 
-Sonraki örnekte **durumu** sağlama yönetimlerini raporlanan bir hata gösteren bir danışmanlık hizmeti için sekmesinde.  Yayımlama devam etmeden önce sağlama Yönetimi danışmanlık hizmetleri için gerekli olduğundan, bu hata düzeltilmelidir.
+Danışmanlık hizmeti için bir sonraki örnek **durum** sekmesi, müşteri adayı yönetimi ayarlarında bildirilen bir hatayı gösterir.  Danışmanlık Hizmetleri için lider yönetimi gerekli olduğundan, yayımlamadan önce bu hata düzeltilmelidir.
 
-![Danışmanlık hizmeti gösteren hata durumu sekmesi](./media/consulting-service-error.png)
+![Danışmanlık hizmeti 'nin hata gösteren durum sekmesi](./media/consulting-service-error.png)
 
-Azure uygulaması son örnek durumu kritik bir Microsoft gözden geçirme sorunu gösterir.  Bu gözden geçirme sorun hakkında ayrıntılı bilgi içeren Azure DevOps öğeyi etkin bağlantı var.  Daha fazla bilgi için [Azure yayımlama uygulaması teklif](cpp-publish-offer.md).
+Bir Azure uygulamasının son örnek durumu kritik bir Microsoft gözden geçirme sorunu gösterir.  Bu İnceleme sorunu hakkında ayrıntılı bilgi içeren Azure DevOps öğesinin etkin bir bağlantısını içerir.  Daha fazla bilgi için bkz. [Azure Uygulama teklifini yayımlama](cpp-publish-offer.md).
 
-![Gözden geçirme sorunu gösteren bir Azure uygulamasına yönelik durumu sekmesi](../azure-applications/media/status-tab-ms-review.png)
+![İnceleme sorununu gösteren Azure uygulaması durum sekmesi](../azure-applications/media/status-tab-ms-review.png)
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bekleyen sorunları düzeltin veya teklif ayarlarını güncelleştirmek için şunları yapmanız gerekir [bir teklifi güncelleştirme](./cpp-update-offer.md). 
+Bekleyen sorunları düzeltmek veya teklif ayarlarını güncelleştirmek için [bir teklifi güncelleştirmeniz](./cpp-update-offer.md)gerekir. 

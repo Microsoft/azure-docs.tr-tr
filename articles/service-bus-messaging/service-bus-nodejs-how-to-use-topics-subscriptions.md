@@ -1,6 +1,6 @@
 ---
-title: Node.js ile Azure Service Bus konu başlıklarını ve aboneliklerini kullanma | Microsoft Docs
-description: Service Bus konuları ve Abonelikleri, Azure'da bir Node.js uygulamasından kullanmayı öğrenin.
+title: 'Hızlı başlangıç: node. js ile Azure Service Bus konuları ve abonelikleri kullanma'
+description: "Hızlı başlangıç: bir Node. js uygulamasından Azure 'da Service Bus konuları ve abonelikleri nasıl kullanacağınızı öğrenin."
 services: service-bus-messaging
 documentationcenter: nodejs
 author: axisc
@@ -11,52 +11,52 @@ ms.service: service-bus-messaging
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
-ms.topic: article
-ms.date: 04/15/2019
+ms.topic: quickstart
+ms.date: 11/05/2019
 ms.author: aschhab
-ms.openlocfilehash: 3dbec81237edd7cbf51e4812e83da068b9a366e0
-ms.sourcegitcommit: 5bdd50e769a4d50ccb89e135cfd38b788ade594d
+ms.openlocfilehash: c82edde98242ffe130c2022c428c86de80e3b034
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67541005"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74111767"
 ---
-# <a name="how-to-use-service-bus-topics-and-subscriptions-with-nodejs-and-the-azure-sb-package"></a>Nasıl yapılır kullanım Service Bus konuları ve abonelikleri ile Node.js ve azure-sb paketi
-> [!div class="op_multi_selector" title1="Programlama dili" title2="Node.js paketi"]
-> - [(Node.js | azure sb)](service-bus-nodejs-how-to-use-topics-subscriptions.md)
-> - [(Node.js | @azure/service-bus)](service-bus-nodejs-how-to-use-topics-subscriptions-new-package.md)
+# <a name="quickstart-how-to-use-service-bus-topics-and-subscriptions-with-nodejs-and-the-azure-sb-package"></a>Hızlı başlangıç: node. js ve Azure-SB paketiyle Service Bus konuları ve abonelikleri kullanma
+> [!div class="op_multi_selector" title1="Programlama dili" title2="Node. js 'a paketi ekleyin"]
+> - [(Node. js | Azure-SB)](service-bus-nodejs-how-to-use-topics-subscriptions.md)
+> - [(Node. js | @azure/service-bus)](service-bus-nodejs-how-to-use-topics-subscriptions-new-package.md)
 
-Bu öğreticide, bir Service Bus konusuna iletiler gönderir ve kullanarak bir Service Bus aboneliği iletileri almak için Node.js uygulamalarının nasıl oluşturulacağını öğrenin [azure sb](https://www.npmjs.com/package/azure-sb) paket. Örnekler JavaScript dilinde yazılmıştır ve Node.js kullanma [Azure Modülü](https://www.npmjs.com/package/azure) , dahili olarak kullandığı `azure-sb` paket.
+Bu öğreticide, [Azure-SB](https://www.npmjs.com/package/azure-sb) paketini kullanarak bir Service Bus konusuna ileti göndermek ve Service Bus aboneliğinden ileti almak için Node. js uygulamaları oluşturmayı öğreneceksiniz. Örnekler JavaScript 'te yazılır ve dahili olarak `azure-sb` paketini kullanan Node. js [Azure modülünü](https://www.npmjs.com/package/azure) kullanır.
 
-[Azure sb](https://www.npmjs.com/package/azure-sb) paketini kullanan [hizmet veri yolu REST çalışma zamanı API'ları](/rest/api/servicebus/service-bus-runtime-rest). Yeni kullanarak daha hızlı deneyimi elde edebilirsiniz [ @azure/service-bus ](https://www.npmjs.com/package/@azure/service-bus) daha hızlı kullanan paket [AMQP 1.0 protokol](service-bus-amqp-overview.md). Yeni paketi hakkında daha fazla bilgi için bkz: [Node.js ile Service Bus konu başlıklarını ve aboneliklerini kullanma ve @azure/service-bus paket](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-nodejs-how-to-use-topics-subscriptions-new-package), aksi takdirde nasıl kullanacağınızı görmek için okumaya devam [azure](https://www.npmjs.com/package/azure) paket.
+[Azure-SB](https://www.npmjs.com/package/azure-sb) PAKETI [Service Bus Rest çalışma zamanı API 'lerini](/rest/api/servicebus/service-bus-runtime-rest)kullanır. Daha hızlı [AMQP 1,0 protokolünü](service-bus-amqp-overview.md)kullanan yeni [@azure/service-bus](https://www.npmjs.com/package/@azure/service-bus) paketini kullanarak daha hızlı bir deneyim edinebilirsiniz. Yeni paket hakkında daha fazla bilgi edinmek için bkz. [Node. js ve @azure/service-bus paketiyle Service Bus konuları ve abonelikleri kullanma](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-nodejs-how-to-use-topics-subscriptions-new-package), aksi takdirde okumaya devam etme, [Azure](https://www.npmjs.com/package/azure) paketini nasıl kullanacağınızı öğrenmek için.
 
-Burada kapsamdaki senaryolar şunlardır:
+Burada ele alınan senaryolar şunlardır:
 
-- Konuları ve abonelikleri oluşturma 
+- Konular ve abonelikler oluşturma 
 - Abonelik filtreleri oluşturma 
-- Bir konu başlığına ileti gönderme 
-- Abonelikten ileti alma
+- Konuya ileti gönderme 
+- Bir abonelikten ileti alma
 - Konuları ve abonelikleri silme 
 
-Konuları ve abonelikleri hakkında daha fazla bilgi için bkz: [sonraki adımlar](#next-steps) bölümü.
+Konular ve abonelikler hakkında daha fazla bilgi için, [sonraki adımlar](#next-steps) bölümüne bakın.
 
 ## <a name="prerequisites"></a>Önkoşullar
-- Azure aboneliği. Bu öğreticiyi tamamlamak için bir Azure hesabınızın olması gerekir. Etkinleştirebilir, [Visual Studio veya MSDN abone Avantajlarınızı](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/?WT.mc_id=A85619ABF) veya kaydolun bir [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A85619ABF).
-- İzleyeceğiniz adımlar [hızlı başlangıç: Bir Service Bus konusu ve konu için Abonelik oluşturmak için Azure portal'ı kullanmanızı](service-bus-quickstart-topics-subscriptions-portal.md) bir Service Bus'ı oluşturmak için **ad alanı** ve **bağlantı dizesi**.
+- Azure aboneliği. Bu öğreticiyi tamamlamak için bir Azure hesabınızın olması gerekir. [Visual Studio veya MSDN abonesi avantajlarınızı](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/?WT.mc_id=A85619ABF) etkinleştirebilir veya [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A85619ABF)için kaydolabilirsiniz.
+- Hızlı başlangıç içindeki adımları izleyin: bir Service Bus **ad alanı** oluşturmak ve **bağlantı dizesini**almak için [Azure Portal Service Bus konu başlığı ve abonelikleri oluşturmak üzere kullanın](service-bus-quickstart-topics-subscriptions-portal.md) .
 
     > [!NOTE]
-    > Oluşturacağınız bir **konu** ve **abonelik** kullanarak konuya **Node.js** Bu hızlı başlangıçta. 
+    > Bu hızlı başlangıçta **Node. js** kullanarak konuya bir **Konu** ve bir **abonelik** oluşturacaksınız. 
 
 ## <a name="create-a-nodejs-application"></a>Node.js uygulaması oluşturma
-Boş bir Node.js uygulaması oluşturun. Bir Node.js uygulaması oluşturma ile ilgili yönergeler için bkz: [Azure Web sitesine bir Node.js uygulaması oluşturma ve dağıtma], [Node.js bulut hizmeti][Node.js Cloud Service] WebMatrix ile Windows PowerShell veya Web sitesini kullanarak.
+Boş bir Node. js uygulaması oluşturun. Node. js uygulaması oluşturma hakkında yönergeler için bkz. [Bir Node. js uygulamasını bir Azure Web sitesinde oluşturma ve dağıtma], [Node. js bulut hizmetini][Node.js Cloud Service] Windows PowerShell kullanarak veya WebMatrix ile Web sitesi oluşturma ve dağıtma.
 
-## <a name="configure-your-application-to-use-service-bus"></a>Service Bus hizmetini kullanmak için uygulamanızı yapılandırma
-Service Bus hizmetini kullanmak için Node.js Azure paketini indirin. Bu paket, hizmet veri yolu REST Hizmetleri ile iletişim kuran bir dizi içerir.
+## <a name="configure-your-application-to-use-service-bus"></a>Uygulamanızı kullanmak için yapılandırma Service Bus
+Service Bus kullanmak için Node. js Azure paketini indirin. Bu paket, Service Bus REST hizmetleriyle iletişim kuran bir kitaplıklar kümesi içerir.
 
-### <a name="use-node-package-manager-npm-to-obtain-the-package"></a>Bir paketi almasını düğüm paketi Yöneticisi'ni (NPM) kullanın
-1. Bir komut satırı arabirimi gibi açın **PowerShell** (Windows) **Terminal** (Mac) veya **Bash** (Unix).
+### <a name="use-node-package-manager-npm-to-obtain-the-package"></a>Paketi edinmek için düğüm Paket Yöneticisi 'Ni (NPM) kullanın
+1. **PowerShell** (Windows), **Terminal** (Mac) veya **Bash** (Unix) gibi bir komut satırı arabirimi açın.
 2. Örnek uygulamanızı oluşturduğunuz klasöre gidin.
-3. Tür **npm yükleme azure** komut penceresinde, sonuç aşağıdaki çıktı:
+3. Komut penceresine **NPM Azure Install** yazın ve bu, aşağıdaki çıkışa neden olmalıdır:
 
    ```
        azure@0.7.5 node_modules\azure
@@ -71,30 +71,30 @@ Service Bus hizmetini kullanmak için Node.js Azure paketini indirin. Bu paket, 
    ├── xml2js@0.2.7 (sax@0.5.2)
    └── request@2.21.0 (json-stringify-safe@4.0.0, forever-agent@0.5.0, aws-sign@0.3.0, tunnel-agent@0.3.0, oauth-sign@0.3.0, qs@0.6.5, cookie-jar@0.3.0, node-uuid@1.4.0, http-signature@0.9.11, form-data@0.0.8, hawk@0.13.1)
    ```
-3. El ile çalıştırabileceğiniz **ls** doğrulamak için komutu bir **düğüm\_modülleri** klasörü oluşturuldu. Bu klasörün içinde Bul **azure** Service Bus konu başlıklarını erişmek için ihtiyacınız olan kitaplıkları içeren paket.
+3. Bir **düğüm\_modülleri** klasörünün oluşturulduğunu doğrulamak için **ls** komutunu el ile çalıştırabilirsiniz. Bu klasörün içinde, Service Bus konularına erişmeniz gereken kitaplıkları içeren **Azure** paketini bulun.
 
-### <a name="import-the-module"></a>Modülü içeri aktarın
-Not Defteri veya başka bir metin düzenleyicisi kullanarak, aşağıdaki üst kısmına ekleyin **server.js** uygulamanın dosya:
+### <a name="import-the-module"></a>Modülü içeri aktar
+Not defteri veya başka bir metin düzenleyicisi kullanarak, uygulamanın **Server. js** dosyasının en üstüne aşağıdakileri ekleyin:
 
 ```javascript
 var azure = require('azure');
 ```
 
-### <a name="set-up-a-service-bus-connection"></a>Service Bus bağlantı kurma
-Azure modülünü ortam değişkenini okur `AZURE_SERVICEBUS_CONNECTION_STRING` önceki adımda elde ettiğiniz bağlantı dizesi için "kimlik bilgilerini edinin." Bu ortam değişkeni ayarlanmazsa çağırırken hesap bilgilerini belirtmelisiniz `createServiceBusService`.
+### <a name="set-up-a-service-bus-connection"></a>Service Bus bağlantısını ayarlama
+Azure modülü, önceki adımda elde ettiğiniz bağlantı dizesi için `AZURE_SERVICEBUS_CONNECTION_STRING` ortam değişkenini okur, "kimlik bilgilerini alın." Bu ortam değişkeni ayarlanmamışsa, `createServiceBusService`çağırırken hesap bilgilerini belirtmeniz gerekir.
 
-Azure bulut hizmeti için ortam değişkenlerini ayarlama örneği için bkz: [ortam değişkenlerini ayarlama](../container-instances/container-instances-environment-variables.md#azure-cli-example).
+Bir Azure bulut hizmeti için ortam değişkenlerini ayarlamayla ilgili bir örnek için bkz. [ortam değişkenlerini ayarlama](../container-instances/container-instances-environment-variables.md#azure-cli-example).
 
 
 
 ## <a name="create-a-topic"></a>Konu başlığı oluşturma
-**ServiceBusService** nesnesi konuları ile çalışmanıza olanak sağlar. Aşağıdaki kod oluşturur bir **ServiceBusService** nesne. En ekleme **server.js** dosya, azure modülü içeri aktarmak için deyim sonra:
+**Servicebusservice** nesnesi konularda çalışmanıza olanak sağlar. Aşağıdaki kod bir **Servicebusservice** nesnesi oluşturur. Azure modülünü içeri aktarma ifadesinden sonra, **Server. js** dosyasının en üstüne yakın bir şekilde ekleyin:
 
 ```javascript
 var serviceBusService = azure.createServiceBusService();
 ```
 
-Eğer `createTopicIfNotExists` üzerinde **ServiceBusService** nesne, belirtilen konu (varsa) döndürülen veya belirtilen ada sahip yeni bir konu oluşturulur. Aşağıdaki kod `createTopicIfNotExists` oluşturmak veya adlı konuya bağlanmak `MyTopic`:
+**Servicebusservice** nesnesinde `createTopicIfNotExists` çağırırsanız, belirtilen konu döndürülür (varsa) veya belirtilen ada sahip yeni bir konu oluşturulur. Aşağıdaki kod, `MyTopic`adlı konuyu oluşturmak veya bu konuyla bağlantı kurmak için `createTopicIfNotExists` kullanır:
 
 ```javascript
 serviceBusService.createTopicIfNotExists('MyTopic',function(error){
@@ -105,9 +105,9 @@ serviceBusService.createTopicIfNotExists('MyTopic',function(error){
 });
 ```
 
-`createTopicIfNotExists` Yöntemi, varsayılan ileti yaşam süresi veya en büyük konu boyutu gibi konu başlığı ayarlarını geçersiz kılmak etkinleştirdiğiniz ek seçenekler de destekler. 
+`createTopicIfNotExists` yöntemi, ileti Süresi canlı veya en büyük konu boyutu gibi varsayılan konu ayarlarını geçersiz kılmanızı sağlayan ek seçenekleri de destekler. 
 
-Aşağıdaki örnekte, bir dakikalık bir süresi ile en büyük konu boyutu 5 GB ila ayarlar:
+Aşağıdaki örnek, en büyük konu boyutunu bir dakikadan kısa bir süre içinde 5 GB 'a ayarlar:
 
 ```javascript
 var topicOptions = {
@@ -123,21 +123,21 @@ serviceBusService.createTopicIfNotExists('MyTopic', topicOptions, function(error
 ```
 
 ### <a name="filters"></a>Filtreler
-İsteğe bağlı filtreleme işlemleri kullanılarak gerçekleştirilen işlemler için uygulanabilir **ServiceBusService**. Filtreleme işlemleri içerebilir günlüğe kaydetme, otomatik olarak yeniden deneniyor, vs. Filtreler, imza ile bir yöntem uygulayan nesnelerdir:
+İsteğe bağlı filtreleme işlemleri, **Servicebusservice**kullanılarak gerçekleştirilen işlemlere uygulanabilir. Filtreleme işlemleri, günlüğe kaydetme, otomatik yeniden deneme vb. içerebilir. Filtreler imzaya sahip bir yöntemi uygulayan nesnelerdir:
 
 ```javascript
 function handle (requestOptions, next)
 ```
 
-İstek seçenekleri ön işleme gerçekleştirdikten sonra yöntemi çağıran `next`ve bir geri çağırma imzayla geçirir:
+İstek seçeneklerinde ön işleme gerçekleştirildikten sonra, yöntemi `next`çağırır ve aşağıdaki imzayla bir geri çağırma işlemi geçirir:
 
 ```javascript
 function (returnObject, finalCallback, next)
 ```
 
-İşleme sonra bu geri çağırma `returnObject` (istek sunucuya yanıt), geri çağırma gerekir ya da diğer filtrelerle işleme devam etmek için (varsa)'ın yanındaki çağırma veya çağırma `finalCallback` hizmet çağırma sonlandırmak için.
+Bu geri çağırmada ve `returnObject` (istekten sunucuya olan yanıt) işlendikten sonra geri çağırma işlemi, diğer filtreleri işlemeye devam etmek için sonraki (varsa) veya hizmet çağrısını sonlandırmak için `finalCallback` çağırmalıdır.
 
-Yeniden deneme mantığı uygulayan iki filtre (**ExponentialRetryPolicyFilter** ve **LinearRetryPolicyFilter**), Node.js için Azure SDK’sına dahil edilir. Aşağıdaki kod oluşturur bir **ServiceBusService** kullanan nesne **ExponentialRetryPolicyFilter**:
+Yeniden deneme mantığı uygulayan iki filtre (**ExponentialRetryPolicyFilter** ve **LinearRetryPolicyFilter**), Node.js için Azure SDK’sına dahil edilir. Aşağıdaki kod, **üs Alretrypolicyfilter**kullanan bir **servicebusservice** nesnesi oluşturur:
 
 ```javascript
 var retryOperations = new azure.ExponentialRetryPolicyFilter();
@@ -145,15 +145,15 @@ var serviceBusService = azure.createServiceBusService().withFilter(retryOperatio
 ```
 
 ## <a name="create-subscriptions"></a>Abonelik oluşturma
-Konu abonelikleri ile de oluşturulur **ServiceBusService** nesne. Abonelikler adlandırılır ve aboneliğin sanal kuyruğuna teslim ileti kümesini sınırlayan isteğe bağlı bir filtre içerebilir.
+Konu abonelikleri **Servicebusservice** nesnesiyle de oluşturulur. Abonelikler adlandırılır ve aboneliğin sanal kuyruğuna teslim edilen ileti kümesini kısıtlayan isteğe bağlı bir filtreye sahip olabilir.
 
 > [!NOTE]
-> Varsayılan olarak, abonelikleri ya da bunlar kadar kalıcı veya ilişkili konu ile silindi. Uygulamanız mantıksal bir abonelik oluşturmak için içeriyorsa, ilk abonelik kullanarak mevcut olup olmadığını denetleyin `getSubscription` yöntemi.
+> Varsayılan olarak, abonelikler ya da ilişkili oldukları konu tamamlanana kadar kalıcıdır. Uygulamanız bir abonelik oluşturmak için mantık içeriyorsa, öncelikle `getSubscription` yöntemi kullanılarak aboneliğin mevcut olup olmadığını denetlemelidir.
 >
-> Otomatik olarak ayarlayarak silinmiş abonelikleri olabilir [AutoDeleteOnIdle özelliği](https://docs.microsoft.com/javascript/api/azure-arm-sb/sbsubscription?view=azure-node-latest#autodeleteonidle).
+> Otomatik [Deleteonıdle özelliği](https://docs.microsoft.com/javascript/api/@azure/arm-servicebus/sbsubscription?view=azure-node-latest#autodeleteonidle)ayarlanarak aboneliklerin otomatik olarak silinmesini sağlayabilirsiniz.
 
 ### <a name="create-a-subscription-with-the-default-matchall-filter"></a>Varsayılan (MatchAll) filtreyle abonelik oluşturma
-**MatchAll** bir abonelik oluşturulurken kullanılan varsayılan filtresini filtredir. **MatchAll** filtresini kullandığınızda konu başlığında yayımlanan tüm iletiler aboneliğin sanal kuyruğuna yerleştirilir. Aşağıdaki örnek AllMessages adlı bir abonelik oluşturulur ve varsayılan **MatchAll** filtre.
+**Matchall** filtresi, bir abonelik oluşturulduğunda kullanılan varsayılan filtredir. **MatchAll** filtresini kullandığınızda konu başlığında yayımlanan tüm iletiler aboneliğin sanal kuyruğuna yerleştirilir. Aşağıdaki örnek AllMessages adlı bir abonelik oluşturur ve varsayılan **Matchall** filtresini kullanır.
 
 ```javascript
 serviceBusService.createSubscription('MyTopic','AllMessages',function(error){
@@ -164,18 +164,18 @@ serviceBusService.createSubscription('MyTopic','AllMessages',function(error){
 ```
 
 ### <a name="create-subscriptions-with-filters"></a>Filtre içeren abonelik oluşturma
-İletiler konu başlığına gönderilen kapsamı için bir özel konu aboneliği içinde gösterilmesi gerekir sağlayan filtreler de oluşturabilirsiniz.
+Ayrıca, bir konuya gönderilen iletilerin, belirli bir konu aboneliği içinde gösterilmesi gerektiğini kapsamlarına izin veren filtreler de oluşturabilirsiniz.
 
-En esnek filtre türü, abonelikler tarafından desteklenen **SqlFilter**, SQL92 kümesini uygular. SQL filtreleri, konu başlığında yayımlanan iletilerin özelliklerinde çalışır. SQL Filtresi ile kullanılabilen ifadeler hakkında daha fazla ayrıntı için gözden [SqlFilter.SqlExpression][SqlFilter.SqlExpression] söz dizimi.
+Abonelikler tarafından desteklenen en esnek filtre türü, SQL92 alt kümesini uygulayan **Sqlfilter**' dir. SQL filtreleri, konu başlığında yayımlanan iletilerin özelliklerinde çalışır. Bir SQL filtresiyle kullanılabilecek ifadeler hakkında daha fazla ayrıntı için [sqlfilter. SqlExpression][SqlFilter.SqlExpression] söz dizimini gözden geçirin.
 
-Filtre eklenebilir aboneliği kullanarak `createRule` yöntemi **ServiceBusService** nesne. Bu yöntem, mevcut bir aboneliğe yeni filtreler eklemenize olanak tanır.
+Bir aboneliğe, **Servicebusservice** nesnesinin `createRule` yöntemi kullanılarak Filtreler eklenebilir. Bu yöntem, mevcut bir aboneliğe yeni filtreler eklemenize olanak tanır.
 
 > [!NOTE]
-> Varsayılan filtre tüm yeni abonelikler için otomatik olarak uygulandığından, önce varsayılan filtreyi kaldırmalısınız veya **MatchAll** , belirttiğiniz diğer filtreleri geçersiz kılar. Varsayılan kural kullanarak kaldırabilirsiniz `deleteRule` yöntemi **ServiceBusService** nesne.
+> Varsayılan filtre tüm yeni aboneliklere otomatik olarak uygulandığından, ilk olarak varsayılan filtreyi kaldırmanız gerekir veya **Matchall** , belirtebileceğiniz diğer filtreleri geçersiz kılar. **Servicebusservice** nesnesinin `deleteRule` yöntemini kullanarak varsayılan kuralı kaldırabilirsiniz.
 >
 >
 
-Aşağıdaki örnekte adlı bir abonelik oluşturur `HighMessages` ile bir **SqlFilter** , yalnızca özel bir bulunduran iletileri seçen `messagenumber` özelliği 3'ten büyük:
+Aşağıdaki örnekte, yalnızca 3 ' ten büyük özel bir `messagenumber` özelliğine sahip iletileri seçen **Sqlfilter** ile `HighMessages` adlı bir abonelik oluşturulur:
 
 ```javascript
 serviceBusService.createSubscription('MyTopic', 'HighMessages', function (error){
@@ -210,7 +210,7 @@ var rule={
 }
 ```
 
-Benzer şekilde, aşağıdaki örnekte adlı bir abonelik oluşturur `LowMessages` ile bir **SqlFilter** , yalnızca bulunduran iletileri seçen bir `messagenumber` özelliğini daha az veya eşit 3:
+Benzer şekilde, aşağıdaki örnekte, yalnızca 3 ' ten küçük veya buna eşit bir `messagenumber` özelliğine sahip iletileri seçen **Sqlfilter** ile `LowMessages` adlı bir abonelik oluşturulur:
 
 ```javascript
 serviceBusService.createSubscription('MyTopic', 'LowMessages', function (error){
@@ -245,14 +245,14 @@ var rule={
 }
 ```
 
-Ne zaman bir ileti hemen gönderilir `MyTopic`, abone alıcıya teslim `AllMessages` konu aboneliği ve seçmeli olarak teslim edilen alıcılar abone için `HighMessages` ve `LowMessages` konu abonelikleri (bağlı ileti içeriği).
+`MyTopic`bir ileti gönderildiğinde, bu, `AllMessages` konu aboneliğine abone olan alıcılarından dağıtılır ve `HighMessages` ve `LowMessages` konu aboneliklerine abone olan alıcılar için seçmeli olarak dağıtılır (ileti içeriğine bağlı olarak).
 
-## <a name="how-to-send-messages-to-a-topic"></a>Bir konuya ileti göndermek nasıl
-Bir Service Bus konusuna bir ileti göndermek için uygulamanızı kullanmalısınız `sendTopicMessage` yöntemi **ServiceBusService** nesne.
-Service Bus konu başlıklarına gönderilen iletiler **BrokeredMessage** nesneleri.
-**BrokeredMessage** nesneleri olan bir standart özellikler kümesi (gibi `Label` ve `TimeToLive`), bir uygulamaya özgü özel özellikleri tutmak için kullanılan sözlüğü ve dize verileri gövdesi içerir. Bir uygulama iletisinin gövdesini dize değeri geçirerek ayarlayabilirsiniz `sendTopicMessage` ve gerekli standart özellikleri varsayılan değerlerle doldurulur.
+## <a name="how-to-send-messages-to-a-topic"></a>Konuya ileti gönderme
+Service Bus bir konuya ileti göndermek için uygulamanızın **Servicebusservice** nesnesinin `sendTopicMessage` yöntemini kullanması gerekir.
+Service Bus konularına gönderilen iletiler **aracılı Edmessage** nesneleridir.
+**Brokeredmessage** nesneleri, bir dizi standart özellik (`Label` ve `TimeToLive`gibi), uygulamaya özgü özel özellikleri tutmak için kullanılan bir sözlüğü ve dize verilerinin gövdesini kullanır. Bir uygulama, `sendTopicMessage` bir dize değeri geçirerek ileti gövdesini ayarlayabilir ve gerekli standart özellikler varsayılan değerlere göre doldurulur.
 
-Aşağıdaki örnek nasıl beş test iletisi göndereceğinizi gösterir `MyTopic`. `messagenumber` Her ileti özelliği değerinin değişen döngü yinelemeyi (Bu özellik, alacak abonelikleri belirler):
+Aşağıdaki örnek, `MyTopic`beş test iletisinin nasıl gönderileceğini gösterir. Her iletinin `messagenumber` Özellik değeri, döngünün yinelemesinde farklılık gösterir (Bu özellik hangi aboneliklerin bu uygulamayı alacağını belirler):
 
 ```javascript
 var message = {
@@ -273,17 +273,17 @@ for (i = 0;i < 5;i++) {
 }
 ```
 
-Service Bus konu başlıkları, [Standart katmanda](service-bus-premium-messaging.md) maksimum 256 KB ve [Premium katmanda](service-bus-premium-messaging.md) maksimum 1 MB ileti boyutunu destekler. Standart ve özel uygulama özelliklerini içeren üst bilginin maksimum dosya boyutu 64 KB olabilir. Bir konu başlığında tutulan ileti sayısına bir sınır yoktur ancak konu başlığı tarafından tutulan iletilerin toplam boyutu sınırı yoktur. Bu konu başlığı boyutu, üst sınır 5 GB olacak şekilde oluşturulma zamanında belirlenir.
+Service Bus konu başlıkları, [Standart katmanda](service-bus-premium-messaging.md) maksimum 256 KB ve [Premium katmanda](service-bus-premium-messaging.md) maksimum 1 MB ileti boyutunu destekler. Standart ve özel uygulama özelliklerini içeren üst bilginin maksimum dosya boyutu 64 KB olabilir. Bir konuda tutulan ileti sayısında bir sınır yoktur, ancak bir konu tarafından tutulan iletilerin toplam boyutu için bir sınır vardır. Bu konu başlığı boyutu, üst sınır 5 GB olacak şekilde oluşturulma zamanında belirlenir.
 
-## <a name="receive-messages-from-a-subscription"></a>Abonelikten ileti alma
-Kullanarak bir abonelik iletilerin alındığı `receiveSubscriptionMessage` metodunda **ServiceBusService** nesne. Varsayılan olarak, bunlar okurken iletileri abonelikten silinir. Ancak, isteğe bağlı parametre ayarlayabilirsiniz `isPeekLock` için **true** (Özet) okuyun ve iletiyi abonelikten silmeden kilitlemek için.
+## <a name="receive-messages-from-a-subscription"></a>Bir abonelikten ileti alma
+İleti, **Servicebusservice** nesnesindeki `receiveSubscriptionMessage` yöntemi kullanılarak bir abonelikten alınır. Varsayılan olarak, iletiler okunduklarında abonelikten silinir. Ancak, isteğe bağlı parametre `isPeekLock` okumak (Peek) için **true** olarak ayarlayabilir ve iletiyi abonelikten silmeden kilitleyemezsiniz.
 
-Okuma ve ileti alma işleminin bir parçası olarak silmeye varsayılan davranışı en basit modeldir ve bir uygulama başarısız olduğunda bir iletiyi işlememeye izin dayanabilir senaryolar için en iyi şekilde çalışır. Bu davranışı anlamak için hangi tüketici alma isteği bildirdiğini ve ardından işlenmeden önce kilitleniyor bir senaryo düşünün. Service Bus iletiyi kullanılıyor olarak işaretlediğinden, uygulama yeniden başlatılıp iletileri tekrar kullanmaya başladığında ardından onu çökmenin öncesinde kullanılan iletiyi eksik.
+İletiyi alma işleminin bir parçası olarak okuma ve silmenin varsayılan davranışı en basit modeldir ve bir hata olduğunda bir uygulamanın bir iletiyi işlememesinin kabul edebildiği senaryolar için en iyi sonucu verir. Bu davranışı anlamak için, tüketicinin alma isteğini yaptığı ve işlemeden önce çöktüğü bir senaryo düşünün. Service Bus ileti tüketildiği gibi işaretlendiğinden, uygulama yeniden başlatıldığında ve iletileri yeniden kullanmaya başladığında, kilitlenme öncesinde tüketilen iletiyi kaçırmıştır.
 
-Varsa `isPeekLock` parametrenin ayarlanmış **true**, alma, kaçırılan iletilere veremeyen uygulamaları desteklemenin mümkün kılar bir iki aşamalı işlemi haline gelir. Service Bus bir istek aldığında kullanmak için sonraki iletiyi bulur, diğer tüketicilerin iletiyi almasını engellemek için kilitler ve uygulamaya döndürür.
-Uygulama iletiyi işler (veya güvenilir bir şekilde işlemek üzere depolar sonra) çağırarak alma işleminin ikinci aşamasını tamamlar **deleteMessage** yöntemi ve bir parametre olarak silmek için ileti geçirir. **DeleteMessage** yöntemi iletiyi kullanılmış olarak işaretler ve abonelikten kaldırır.
+`isPeekLock` parametresi **true**olarak ayarlanırsa, alma işlemi iki aşamalı bir işlem haline gelir ve bu, kaçırılmış iletilere izin verilmeyen uygulamaları desteklemeyi olanaklı kılar. Service Bus bir istek aldığında, kullanmak üzere bir sonraki iletiyi bulur, diğer tüketicilerin bunu almasını engellemek için onu kilitler ve uygulamaya döndürür.
+Uygulama iletiyi işledikten sonra (veya gelecekteki işleme için güvenilir bir şekilde saklarsa), **deleteMessage** yöntemini çağırarak alma işleminin ikinci aşamasını tamamlar ve bir parametre olarak silinecek iletiyi geçirir. **DeleteMessage** yöntemi iletiyi tüketilen şekilde işaretler ve abonelikten kaldırır.
 
-Aşağıdaki örnek nasıl ileti alındı ve işlenen kullanarak gösterir `receiveSubscriptionMessage`. Örnek ilk alır ve bir ileti 'MessageNumber' abonelikten siler ve ardından gelen 'HighMessages' aboneliğinden bir ileti alır `isPeekLock` true olarak ayarlanmış. Ardından iletiyi kullanarak siler `deleteMessage`:
+Aşağıdaki örnek, iletilerin `receiveSubscriptionMessage`kullanılarak nasıl alınacağını ve işlenebileceğinizi gösterir. Örnek ilk olarak ' LowMessages ' aboneliğinden bir ileti alır ve siler ve sonra `isPeekLock` ' i kullanarak ' HighMessages ' aboneliğinden bir ileti alır. Ardından `deleteMessage`kullanarak iletiyi siler:
 
 ```javascript
 serviceBusService.receiveSubscriptionMessage('MyTopic', 'LowMessages', function(error, receivedMessage){
@@ -307,15 +307,15 @@ serviceBusService.receiveSubscriptionMessage('MyTopic', 'HighMessages', { isPeek
 ```
 
 ## <a name="how-to-handle-application-crashes-and-unreadable-messages"></a>Uygulama çökmelerini ve okunmayan iletileri giderme
-Service Bus, uygulamanızda gerçekleşen hataları veya ileti işlenirken oluşan zorlukları rahat bir şekilde ortadan kaldırmanıza yardımcı olmak için işlevsellik sağlar. Alıcı uygulamanın iletiyi işlemek için herhangi bir nedenle silemiyor sonra çağırabilirsiniz `unlockMessage` metodunda **ServiceBusService** nesne. Bu yöntem Bus hizmetinin Abonelikteki iletinin kilidini açmasına ve tekrar alınabilir hale neden olur. Bu örnekte aynı kullanıcı uygulama veya başka bir kullanıcı uygulama.
+Service Bus, uygulamanızda gerçekleşen hataları veya ileti işlenirken oluşan zorlukları rahat bir şekilde ortadan kaldırmanıza yardımcı olmak için işlevsellik sağlar. Bir alıcı uygulaması iletiyi bir nedenden dolayı işleyebilirse, **Servicebusservice** nesnesinde `unlockMessage` yöntemi çağırabilir. Bu yöntem Service Bus, aboneliğin içindeki iletinin kilidini açıp yeniden alınmasını sağlar. Bu örnekte, aynı uygulama ya da başka bir uygulama tarafından kullanılıyor.
 
-Ayrıca abonelikte kilitlenen iletiye ilişkin bir zaman aşımı vardır. (Örneğin, uygulama çökerse), kilit zaman aşımı süresi dolmadan önce iletiyi işlemek uygulama başarısız olursa, Service Bus otomatik olarak iletinin kilidini açar ve tekrar alınabilir hale getirir.
+Ayrıca, abonelik içinde kilitlenen bir iletiyle ilişkili bir zaman aşımı da vardır. Uygulama, kilit zaman aşımı dolmadan önce iletiyi işleyemezse (örneğin, uygulama kilitlenirse), Service Bus otomatik olarak iletinin kilidini açar ve yeniden alınmak üzere kullanılabilir hale gelir.
 
-Uygulama iletiyi ancak önce çökmesi durumunda `deleteMessage` yöntemi çağrıldığında, yeniden başlatıldığında ileti uygulamaya yeniden teslim. Bu davranışı genellikle adlandırılır *en az bir kez işlenmesini*. Diğer bir deyişle, her ileti en az bir kez işlenir ancak belirli durumlarda aynı ileti yeniden teslim edilebilir. Senaryo yinelenen işlemeyi kabul etmiyorsa yinelenen ileti teslimine izin vermek için uygulamanızı mantık eklemeniz gerekir. Kullanabileceğiniz **MessageID** özelliğini iletinin teslim denemeleri arasında sabit kalır.
+İleti işlendikten sonra, ancak `deleteMessage` yöntemi çağrılmadan önce uygulamanın çöktüğü durumunda ileti yeniden başlatıldığında uygulamaya yeniden teslim edilir. Bu davranış genellikle *en az bir kez işleme*olarak adlandırılır. Diğer bir deyişle, her ileti en az bir kez işlenir, ancak bazı durumlarda aynı ileti yeniden teslim edilebilir. Senaryo yinelenen işleme kabul edemeyebilir, yinelenen ileti teslimini işlemek için uygulamanıza mantık eklemeniz gerekir. İletinin **MessageID** özelliğini kullanabilirsiniz. Bu, teslim girişimleri arasında sabitde kalır.
 
 ## <a name="delete-topics-and-subscriptions"></a>Konu başlıklarını ve abonelikleri silme
-Konuları ve abonelikleri kalıcı sürece [autoDeleteOnIdle özelliği](https://docs.microsoft.com/javascript/api/azure-arm-sb/sbsubscription?view=azure-node-latest#autodeleteonidle) ayarlanır ve açıkça olmalıdır aracılığıyla silindi [Azure portalında][Azure portal] veya programlama yoluyla.
-Aşağıdaki örnekte adlı konu nasıl silineceği `MyTopic`:
+[Oto Deleteonıdle özelliği](https://docs.microsoft.com/javascript/api/@azure/arm-servicebus/sbsubscription?view=azure-node-latest#autodeleteonidle) ayarlanmadıkça konular ve abonelikler kalıcıdır ve [Azure Portal][Azure portal] veya program aracılığıyla açıkça silinmemelidir.
+Aşağıdaki örnek, `MyTopic`adlı konunun nasıl silineceğini göstermektedir:
 
 ```javascript
 serviceBusService.deleteTopic('MyTopic', function (error) {
@@ -325,7 +325,7 @@ serviceBusService.deleteTopic('MyTopic', function (error) {
 });
 ```
 
-Bir konu başlığı silindiğinde bu konu başlığıyla kaydedilen tüm abonelikler de silinir. Ayrıca, abonelikler bağımsız olarak da silinebilir. Aşağıdaki örnek adlı bir abonelik silme gösterir `HighMessages` gelen `MyTopic` konu:
+Bir konu başlığı silindiğinde bu konu başlığıyla kaydedilen tüm abonelikler de silinir. Ayrıca, abonelikler bağımsız olarak da silinebilir. Aşağıdaki örnek, `MyTopic` konusunun `HighMessages` adlı bir aboneliğin nasıl silineceğini gösterir:
 
 ```javascript
 serviceBusService.deleteSubscription('MyTopic', 'HighMessages', function (error) {
@@ -336,14 +336,14 @@ serviceBusService.deleteSubscription('MyTopic', 'HighMessages', function (error)
 ```
 
 > [!NOTE]
-> Service Bus kaynakları ile yönetebileceğiniz [hizmet veri yolu Gezgini](https://github.com/paolosalvatori/ServiceBusExplorer/). Hizmet veri yolu Gezgini, bir Service Bus ad alanınıza bağlanın ve mesajlaşma varlıkları kolay bir şekilde yönetmek kullanıcıların sağlar. Araç, içeri/dışarı aktarma işlevleri veya konu, kuyruklar, abonelikler, geçiş hizmetleri, bildirim hub'ları ve olay hub'ları test etme olanağı gibi gelişmiş özellikler sağlar. 
+> Service Bus kaynaklarını [Service Bus Explorer](https://github.com/paolosalvatori/ServiceBusExplorer/)ile yönetebilirsiniz. Service Bus gezgin, kullanıcıların bir Service Bus ad alanına bağlanmasına ve mesajlaşma varlıklarını kolay bir şekilde yönetmesine olanak tanır. Araç içeri/dışarı aktarma işlevselliği gibi gelişmiş özellikler ya da konu, kuyruk, abonelik, geçiş Hizmetleri, Bildirim Hub 'ları ve Olay Hub 'larını test etme yeteneği sağlar. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Hizmet veri yolu konuları hakkındaki temel bilgileri öğrendiniz, daha fazla bilgi için bu bağlantıları izleyin.
+Service Bus konuların temellerini öğrendiğinize göre, daha fazla bilgi edinmek için bu bağlantıları izleyin.
 
-* Bkz: [kuyruklar, konular ve abonelikler][Queues, topics, and subscriptions].
+* Bkz. [Kuyruklar, konular ve abonelikler][Queues, topics, and subscriptions].
 * [SqlFilter][SqlFilter] için API başvurusu
-* Ziyaret [düğüm için Azure SDK'sı][Azure SDK for Node] github deposu.
+* GitHub 'daki [düğüm deposu Için Azure SDK 'sını][Azure SDK for Node] ziyaret edin.
 
 [Azure SDK for Node]: https://github.com/Azure/azure-sdk-for-node
 [Azure portal]: https://portal.azure.com
@@ -351,6 +351,6 @@ Hizmet veri yolu konuları hakkındaki temel bilgileri öğrendiniz, daha fazla 
 [Queues, topics, and subscriptions]: service-bus-queues-topics-subscriptions.md
 [SqlFilter]: /dotnet/api/microsoft.servicebus.messaging.sqlfilter
 [Node.js Cloud Service]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
-[Azure Web sitesine bir Node.js uygulaması oluşturma ve dağıtma]: ../app-service/app-service-web-get-started-nodejs.md
+[Bir Node. js uygulamasını bir Azure Web sitesinde oluşturma ve dağıtma]: ../app-service/app-service-web-get-started-nodejs.md
 [Node.js Cloud Service with Storage]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
 

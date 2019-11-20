@@ -1,11 +1,11 @@
 ---
-title: 'Öğretici: CyberArk SAML kimlik doğrulaması ile Azure Active Directory Tümleştirme | Microsoft Docs'
-description: CyberArk SAML kimlik doğrulaması ile Azure Active Directory arasında çoklu oturum açmayı yapılandırmayı öğrenin.
+title: 'Öğretici Azure Active Directory: Siark SAML kimlik doğrulamasıyla çoklu oturum açma (SSO) Tümleştirmesi | Microsoft Docs'
+description: Azure Active Directory ile Siark SAML kimlik doğrulaması arasında çoklu oturum açmayı nasıl yapılandıracağınızı öğrenin.
 services: active-directory
 documentationCenter: na
 author: jeevansd
 manager: mtillman
-ms.reviewer: celested
+ms.reviewer: barbkess
 ms.assetid: 58d8a0be-5f1b-4680-bbcb-2975e5c57014
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
@@ -13,136 +13,142 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 06/10/2019
+ms.date: 10/03/2019
 ms.author: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 612de66bfdc2778a87685e0157ba8ef013ac51b1
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 206ab8931e80628c2d92404198240b074fa4c849
+ms.sourcegitcommit: 824e3d971490b0272e06f2b8b3fe98bbf7bfcb7f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67108346"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72240839"
 ---
-# <a name="tutorial-integrate-cyberark-saml-authentication-with-azure-active-directory"></a>Öğretici: CyberArk SAML kimlik doğrulaması Azure Active Directory ile tümleştirme
+# <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-cyberark-saml-authentication"></a>Öğretici: Siark SAML kimlik doğrulamasıyla çoklu oturum açma (SSO) Tümleştirmesi Azure Active Directory
 
-Bu öğreticide, CyberArk SAML kimlik doğrulaması Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. CyberArk SAML kimlik doğrulaması, Azure AD ile tümleştirdiğinizde, şunları yapabilirsiniz:
+Bu öğreticide, Siark SAML kimlik doğrulamasını Azure Active Directory (Azure AD) ile tümleştirmeyi öğreneceksiniz. Siark SAML kimlik doğrulamasını Azure AD ile tümleştirdiğinizde şunları yapabilirsiniz:
 
-* Kimlerin erişebildiğini CyberArk SAML kimlik doğrulaması için Azure AD'de denetler.
-* Otomatik olarak CyberArk SAML kimlik doğrulaması için kendi Azure AD hesapları ile oturum açmış olmasını sağlayın.
-* Bir merkezi konumda - Azure portalı hesaplarınızı yönetin.
+* Azure AD 'de, Siark SAML kimlik doğrulamasına erişimi olan denetim.
+* Kullanıcılarınızın Azure AD hesaplarıyla Siark SAML kimlik doğrulaması için otomatik olarak oturum açmalarına olanak sağlayın.
+* Hesaplarınızı tek bir merkezi konumda yönetin-Azure portal.
 
-Azure AD SaaS uygulama tümleştirmesi hakkında daha fazla bilgi için bkz. [uygulama erişimi ve Azure Active Directory ile çoklu oturum açma nedir](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Azure AD ile SaaS uygulaması tümleştirmesi hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Prerequisites
 
-Başlamak için aşağıdaki öğeler gerekir:
+Başlamak için aşağıdaki öğeler gereklidir:
 
-* Azure AD aboneliğiniz. Bir aboneliğiniz yoksa, alabileceğiniz bir [ücretsiz bir hesap](https://azure.microsoft.com/free/).
-* CyberArk SAML kimlik doğrulaması çoklu oturum açma (SSO) abonelik etkin.
+* Bir Azure AD aboneliği. Aboneliğiniz yoksa [ücretsiz bir hesap](https://azure.microsoft.com/free/)alabilirsiniz.
+* Siark SAML kimlik doğrulaması çoklu oturum açma (SSO) etkin abonelik.
 
 ## <a name="scenario-description"></a>Senaryo açıklaması
 
-Bu öğreticide, yapılandırma ve Azure AD SSO bir test ortamında test edin. CyberArk SAML kimlik doğrulamasını destekleyen **SP ve IDP** SSO başlattı.
+Bu öğreticide, Azure AD SSO 'yu bir test ortamında yapılandırıp test edersiniz.
 
-## <a name="adding-cyberark-saml-authentication-from-the-gallery"></a>Galeriden CyberArk SAML kimlik doğrulaması ekleme
+* Siark SAML kimlik doğrulaması **SP ve ıDP** tarafından başlatılan SSO 'yu destekler
 
-Azure AD'de CyberArk SAML kimlik doğrulaması tümleştirmesini yapılandırmak için CyberArk SAML kimlik doğrulaması Galeriden yönetilen SaaS uygulamaları listesine eklemeniz gerekir.
+## <a name="adding-cyberark-saml-authentication-from-the-gallery"></a>Galeriden Siark SAML kimlik doğrulaması ekleme
 
-1. Bir iş veya okul hesabını ya da kişisel bir Microsoft hesabını kullanarak [Azure portalda](https://portal.azure.com) oturum açın.
-1. Sol gezinti bölmesinde seçin **Azure Active Directory** hizmeti.
-1. Gidin **kurumsal uygulamalar** seçip **tüm uygulamaları**.
-1. Yeni bir uygulama eklemek için seçin **yeni uygulama**.
-1. İçinde **Galeriden Ekle** bölümüne şunu yazın **CyberArk SAML kimlik doğrulaması** arama kutusuna.
-1. Seçin **CyberArk SAML kimlik doğrulaması** gelen sonuçlar panelinde ve uygulama ekleyin. Uygulama, kiracınıza eklendiği sırada birkaç saniye bekleyin.
+Siark SAML kimlik doğrulamasının Azure AD 'ye tümleştirilmesini yapılandırmak için, Galeriden yönetilen SaaS uygulamaları listenize Siark SAML kimlik doğrulaması eklemeniz gerekir.
 
-## <a name="configure-and-test-azure-ad-single-sign-on"></a>Yapılandırma ve Azure AD çoklu oturum açmayı test etme
+1. [Azure Portal](https://portal.azure.com) iş veya okul hesabı ya da kişisel Microsoft hesabı kullanarak oturum açın.
+1. Sol gezinti bölmesinde **Azure Active Directory** hizmeti ' ni seçin.
+1. **Kurumsal uygulamalar** ' a gidin ve **tüm uygulamalar**' ı seçin.
+1. Yeni uygulama eklemek için **Yeni uygulama**' yı seçin.
+1. **Galeriden Ekle** bölümünde, arama kutusuna **Siark SAML kimlik doğrulaması** yazın.
+1. Sonuçlar panelinden **Siark SAML kimlik doğrulaması** ' nı seçin ve ardından uygulamayı ekleyin. Uygulama kiracınıza eklenirken birkaç saniye bekleyin.
 
-Yapılandırma ve test etme CyberArk SAML adlı bir test kullanıcı kullanarak kimlik doğrulaması ile Azure AD SSO **b Simon**. Çalışmak SSO için bir Azure AD kullanıcısı ile ilgili kullanıcı arasında bir bağlantı ilişki CyberArk SAML kimlik doğrulamasını kurmanız gerekir.
+## <a name="configure-and-test-azure-ad-single-sign-on-for-cyberark-saml-authentication"></a>Siark SAML kimlik doğrulaması için Azure AD çoklu oturum açmayı yapılandırma ve test etme
 
-Yapılandırma ve Azure AD SSO CyberArk SAML kimlik doğrulaması ile test etmek için aşağıdaki yapı taşlarını tamamlayın:
+**B. Simon**adlı bir test kullanıcısı kullanarak SIARK SAML kimlik DOĞRULAMASıYLA Azure AD SSO 'yu yapılandırın ve test edin. SSO 'nun çalışması için, bir Azure AD kullanıcısı ile ilgili Kullanıcı ile Siark SAML kimlik doğrulaması arasında bir bağlantı ilişkisi oluşturmanız gerekir.
 
-1. **[Azure AD SSO'yu yapılandırma](#configure-azure-ad-sso)**  kullanıcılarınız bu özelliği kullanmak etkinleştirmek için.
-2. **[CyberArk SAML kimlik doğrulaması yapılandırma](#configure-cyberark-saml-authentication)**  uygulama tarafında SSO ayarlarını yapılandırmak için.
-3. **[Bir Azure AD test kullanıcısı oluşturma](#create-an-azure-ad-test-user)**  Azure AD çoklu oturum açma b Simon ile test etmek için.
-4. **[Azure AD test kullanıcı atama](#assign-the-azure-ad-test-user)**  Azure AD çoklu oturum açmayı kullanmak b Simon etkinleştirmek için.
-5. **[CyberArk SAML kimlik doğrulaması test kullanıcısı oluşturma](#create-cyberark-saml-authentication-test-user)**  b Simon bir karşılığı CyberArk SAML kullanıcı Azure AD gösterimini bağlı kimlik doğrulaması sağlamak için.
-6. **[Test SSO](#test-sso)**  yapılandırma çalışıp çalışmadığını doğrulayın.
+Azure AD SSO 'yu Siark SAML kimlik doğrulamasıyla yapılandırmak ve test etmek için aşağıdaki yapı taşlarını doldurun:
 
-### <a name="configure-azure-ad-sso"></a>Azure AD SSO'yu yapılandırma
+1. **[Azure AD SSO 'Yu yapılandırın](#configure-azure-ad-sso)** -kullanıcılarınızın bu özelliği kullanmasını sağlamak için.
+    * Azure AD **[test kullanıcısı oluşturun](#create-an-azure-ad-test-user)** -B. Simon Ile Azure AD çoklu oturum açma sınamasını test edin.
+    * Azure AD **[Test kullanıcısına atama](#assign-the-azure-ad-test-user)** -Azure AD çoklu oturum açma özelliğini kullanmak için B. Simon 'u etkinleştirmek için.
+1. Uygulama tarafında çoklu oturum açma ayarlarını yapılandırmak için **[Siark SAML kimlik doğrulama SSO 'Yu yapılandırın](#configure-cyberark-saml-authentication-sso)** .
+    * User 'ın Azure AD gösterimine bağlı olan Siark SAML kimlik doğrulamasında B. Simon 'ya sahip olmak için, **[Siark SAML kimlik doğrulaması test kullanıcısı oluşturun](#create-cyberark-saml-authentication-test-user)** .
+1. **[Test SSO](#test-sso)** -yapılandırmanın çalışıp çalışmadığını doğrulamak için.
 
-Azure portalında Azure AD SSO'yu etkinleştirmek üzere aşağıdaki adımları izleyin.
+## <a name="configure-azure-ad-sso"></a>Azure AD SSO 'yu yapılandırma
 
-1. İçinde [Azure portalında](https://portal.azure.com/), **CyberArk SAML kimlik doğrulaması** uygulama tümleştirme sayfası, bulma **Yönet** bölümünde ve seçin **çoklu oturum açma** .
-1. Üzerinde **tek bir oturum açma yönteminizi seçmeniz** sayfasında **SAML**.
-1. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlayın** sayfasında, düzenleme/kalem simgesine tıklayıp **temel SAML yapılandırma** ayarlarını düzenlemek için.
+Azure portal Azure AD SSO 'yu etkinleştirmek için bu adımları izleyin.
+
+1. [Azure Portal](https://portal.azure.com/), **Cyberark SAML kimlik doğrulaması** uygulama tümleştirmesi sayfasında, **Yönet** bölümünü bulun ve **Çoklu oturum açma**' yı seçin.
+1. **Çoklu oturum açma yöntemi seçin** sayfasında **SAML**' yi seçin.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, ayarları düzenlemek IÇIN **temel SAML yapılandırması** için Düzenle/kalem simgesine tıklayın.
 
    ![Temel SAML yapılandırmasını düzenle](common/edit-urls.png)
 
-1. Üzerinde **temel SAML yapılandırma** uygulamada yapılandırmak isterseniz, bölümü **IDP** modunda başlatılan aşağıdaki adımı uygulayın:
+1. **Temel SAML yapılandırması** bölümünde, **IDP** tarafından başlatılan modda uygulamayı yapılandırmak istiyorsanız aşağıdaki alanlar için değerleri girin:
 
-    İçinde **yanıt URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın:  `https://<PVWA DNS or IP>/passwordvault/api/auth/saml/logon`
+    **Yanıt URL 'si** metin kutusuna şu kalıbı kullanarak bir URL yazın: `https://<PVWA DNS or IP>/passwordvault/api/auth/saml/logon`
 
-1. Tıklayın **ek URL'lerini ayarlayın** ve uygulamada yapılandırmak istiyorsanız, aşağıdaki adımı uygulayın **SP** başlatılan modu:
+1. Uygulamayı **SP** tarafından başlatılan modda yapılandırmak Istiyorsanız **ek URL 'ler ayarla** ' ya tıklayın ve aşağıdaki adımı gerçekleştirin:
 
-    İçinde **oturum açma URL'si** metin kutusuna şu biçimi kullanarak bir URL yazın:  `https://<PVWA DNS or IP>/PasswordVault/v10/logon/saml`
+    **Oturum açma URL 'si** metin kutusunda, aşağıdaki kalıbı kullanarak bir URL yazın: `https://<PVWA DNS or IP>/PasswordVault/v10/logon/saml`
 
     > [!NOTE]
-    > Bu değerler gerçek değildir. Bu değerler gerçek yanıt URL'si ve oturum açma URL'si ile güncelleştirin. İlgili kişi [CyberArk SAML kimlik doğrulaması istemci Destek ekibine](mailto:bizdevtech@cyberark.com) bu değerleri almak için. Gösterilen desenleri de başvurabilirsiniz **temel SAML yapılandırma** bölümünde Azure portalında.
+    > Bu değerler gerçek değildir. Bu değerleri gerçek yanıt URL 'SI ve oturum açma URL 'SI ile güncelleştirin. Bu değerleri almak için [Siark SAML kimlik doğrulama istemci destek ekibine](mailto:bizdevtech@cyberark.com) başvurun. Ayrıca, Azure portal **temel SAML yapılandırması** bölümünde gösterilen desenlere de başvurabilirsiniz.
 
-1. Üzerinde **yukarı çoklu oturum açma SAML ile ayarlayın** sayfasında **SAML imzalama sertifikası** bölümünde, bulma **sertifika (ham)** seçip **indirme**sertifikayı indirin ve bilgisayarınıza kaydedin.
+1. **SAML ile çoklu oturum açmayı ayarlama** sayfasında, **SAML Imzalama sertifikası** bölümünde **sertifika bulun (base64)** ve sertifikayı indirip bilgisayarınıza kaydetmek için **İndir** ' i seçin.
 
-   ![Sertifika indirme bağlantısı](common/certificateraw.png)
+    ![Sertifika indirme bağlantısı](common/certificatebase64.png)
 
-1. Üzerinde **CyberArk SAML kimlik doğrulamasını ayarlama** bölümünde, ihtiyacınıza göre uygun URL'lerini kopyalayın.
+1. **CyberArk SAML kimlik doğrulamasını ayarla** bölümünde, gereksiniminize göre uygun URL 'leri kopyalayın.
 
-   ![Yapılandırma URL'leri kopyalayın](common/copy-configuration-urls.png)
+    ![Yapılandırma URL 'Lerini Kopyala](common/copy-configuration-urls.png)
 
-### <a name="configure-cyberark-saml-authentication"></a>CyberArk SAML kimlik doğrulamasını yapılandırma
+### <a name="create-an-azure-ad-test-user"></a>Azure AD test kullanıcısı oluşturma
 
-Çoklu oturum açmayı yapılandırma **CyberArk SAML kimlik doğrulaması** tarafı, indirilen göndermek için ihtiyacınız **sertifika (ham)** ve uygun Azure portalına kopyalanan URL'lerden [CyberArk SAML Kimlik doğrulaması Destek ekibine](mailto:bizdevtech@cyberark.com). Bunlar her iki kenarı da düzgün ayarlandığından SAML SSO bağlantı sağlamak için bu ayarı ayarlayın
+Bu bölümde, B. Simon adlı Azure portal bir test kullanıcısı oluşturacaksınız.
 
-### <a name="create-an-azure-ad-test-user"></a>Bir Azure AD test kullanıcısı oluşturma
+1. Azure portal sol bölmeden **Azure Active Directory**' i seçin, **Kullanıcılar**' ı seçin ve ardından **tüm kullanıcılar**' ı seçin.
+1. Ekranın üst kısmındaki **Yeni Kullanıcı** ' yı seçin.
+1. **Kullanıcı** özellikleri ' nde şu adımları izleyin:
+   1. **Ad** alanına `B.Simon` girin.  
+   1. **Kullanıcı adı** alanına username@companydomain.extension girin. Örneğin, `B.Simon@contoso.com`.
+   1. **Parolayı göster** onay kutusunu seçin ve ardından **parola** kutusunda görüntülenen değeri yazın.
+   1. **Oluştur**'u tıklatın.
 
-Bu bölümde, bir test kullanıcısı b Simon adlı Azure portalında oluşturacaksınız.
+### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısını atama
 
-1. Azure Portalı'ndaki sol bölmeden seçin **Azure Active Directory**seçin **kullanıcılar**ve ardından **tüm kullanıcılar**.
-1. Seçin **yeni kullanıcı** ekranın üstünde.
-1. İçinde **kullanıcı** özellikleri, aşağıdaki adımları izleyin:
-   1. **Ad** alanına `B. Simon` girin.  
-   1. İçinde **kullanıcı adı** alanına username@companydomain.extension. Örneğin, `B. Simon@contoso.com`.
-   1. Seçin **Show parola** onay kutusunu işaretleyin ve ardından görüntülenen değeri yazın **parola** kutusu.
-   1. **Oluştur**’a tıklayın.
+Bu bölümde, Azure çoklu oturum açma özelliğini kullanarak Siark SAML kimlik doğrulamasına erişim vererek B. Simon 'u etkinleştireceksiniz.
 
-### <a name="assign-the-azure-ad-test-user"></a>Azure AD test kullanıcısı atayın
+1. Azure portal **Kurumsal uygulamalar**' ı seçin ve ardından **tüm uygulamalar**' ı seçin.
+1. Uygulamalar listesinde, **Cyberark SAML kimlik doğrulaması**' nı seçin.
+1. Uygulamanın genel bakış sayfasında **Yönet** bölümünü bulun ve **Kullanıcılar ve gruplar**' ı seçin.
 
-Bu bölümde, B. CyberArk SAML kimlik doğrulaması için erişim izni verdiğinizde, Azure çoklu oturum açma kullanılacak Simon tıklatmalarını sağlarsınız.
+   !["Kullanıcılar ve gruplar" bağlantısı](common/users-groups-blade.png)
 
-1. Azure portalında **kurumsal uygulamalar**ve ardından **tüm uygulamaları**.
-1. Uygulamalar listesinde **CyberArk SAML kimlik doğrulaması**.
-1. Uygulamanın genel bakış sayfasında bulma **Yönet** seçin ve bölüm **kullanıcılar ve gruplar**.
+1. **Kullanıcı Ekle**' yi seçin, sonra **atama Ekle** iletişim kutusunda **Kullanıcılar ve gruplar** ' ı seçin.
 
-   !["Kullanıcılar ve Gruplar" bağlantısı](common/users-groups-blade.png)
+    ![Kullanıcı Ekle bağlantısı](common/add-assign-user.png)
 
-1. Seçin **Kullanıcı Ekle**, ardından **kullanıcılar ve gruplar** içinde **atama Ekle** iletişim.
+1. **Kullanıcılar ve gruplar** iletişim kutusunda, kullanıcılar listesinden **B. Simon** ' ı seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. SAML assertion 'da herhangi bir rol değeri bekliyorsanız, **Rol Seç** iletişim kutusunda, Kullanıcı için listeden uygun rolü seçin ve ardından ekranın alt kısmındaki **Seç** düğmesine tıklayın.
+1. **Atama Ekle** Iletişim kutusunda **ata** düğmesine tıklayın.
 
-    ![Kullanıcı ekleme bağlantısı](common/add-assign-user.png)
+## <a name="configure-cyberark-saml-authentication-sso"></a>Siark SAML kimlik doğrulama SSO 'SU yapılandırma
 
-1. İçinde **kullanıcılar ve gruplar** iletişim kutusunda **b Simon** kullanıcılar listesinden ardından **seçin** ekranın alt kısmındaki düğmesi.
-1. SAML onaylama işlemi herhangi bir rolü değer de beklediğiniz varsa **rolü Seç** iletişim kutusunda, listeden bir kullanıcı için uygun rolü seçin ve ardından **seçin** ekranın alt kısmındaki düğmesi.
-1. İçinde **atama Ekle** iletişim kutusunda, tıklayın **atama** düğmesi.
+**Siark SAML kimlik doğrulama** tarafında çoklu oturum açmayı yapılandırmak için, indirilen **sertifikayı (Base64)** ve Azure Portal ' den [siark SAML kimlik doğrulama desteği ekibine](mailto:bizdevtech@cyberark.com)uygun şekilde kopyalanmış URL 'leri göndermeniz gerekir. Bu ayar, SAML SSO bağlantısının her iki tarafında da düzgün bir şekilde ayarlanmasını sağlamak üzere ayarlanmıştır.
 
-### <a name="create-cyberark-saml-authentication-test-user"></a>CyberArk SAML kimlik doğrulaması test kullanıcısı oluşturma
+### <a name="create-cyberark-saml-authentication-test-user"></a>Siark SAML kimlik doğrulaması test kullanıcısı oluştur
 
-Bu bölümde, Britta Simon CyberArk SAML kimlik doğrulaması adlı bir kullanıcı oluşturun. Çalışmak [CyberArk SAML kimlik doğrulaması Destek ekibine](mailto:bizdevtech@cyberark.com) CyberArk SAML kimlik doğrulaması platform kullanıcıları eklemek için. Kullanıcı oluşturulmalı ve çoklu oturum açma kullanmadan önce etkinleştirildi.
+Bu bölümde, Siark SAML kimlik doğrulamasında B. Simon adlı bir Kullanıcı oluşturacaksınız. CyberArk SAML kimlik doğrulama platformunda kullanıcıları eklemek için [SIARK SAML kimlik doğrulaması destek ekibi](mailto:bizdevtech@cyberark.com) ile çalışın. Çoklu oturum açma kullanılmadan önce kullanıcıların oluşturulması ve etkinleştirilmesi gerekir.
 
-### <a name="test-sso"></a>Test SSO
+## <a name="test-sso"></a>Test SSO 'SU
 
-Erişim Paneli'nde CyberArk SAML kimlik doğrulaması kutucuğu seçtiğinizde, otomatik olarak SSO'yu ayarlama CyberArk SAML kimlik doğrulaması için oturum açmanız. Erişim paneli hakkında daha fazla bilgi için bkz: [erişim Paneli'ne giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Bu bölümde, erişim panelini kullanarak Azure AD çoklu oturum açma yapılandırmanızı test edersiniz.
 
-## <a name="additional-resources"></a>Ek Kaynaklar
+Erişim panelinde CyberArk SAML kimlik doğrulaması kutucuğuna tıkladığınızda, SSO 'yu ayarladığınız Siark SAML kimlik doğrulamasında otomatik olarak oturum açmış olmanız gerekir. Erişim paneli hakkında daha fazla bilgi için bkz. [erişim paneline giriş](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
 
-- [SaaS uygulamaları Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+## <a name="additional-resources"></a>Ek kaynaklar
 
-- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma özellikleri nelerdir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [SaaS uygulamalarını Azure Active Directory ile tümleştirme hakkında öğreticiler listesi](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
 
-- [Azure Active Directory'de koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Azure Active Directory ile uygulama erişimi ve çoklu oturum açma nedir?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+
+- [Azure Active Directory Koşullu erişim nedir?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+
+- [Azure AD ile Siark SAML kimlik doğrulamasını deneyin](https://aad.portal.azure.com/)

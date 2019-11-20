@@ -44,6 +44,8 @@
               href: ./appsource-offer-publishing-guide.md
             - name: Azure Active Directory kullanarak AppSource ve Market listesini etkinleştirme
               href: ./enable-appsource-marketplace-using-azure-ad.md
+            - name: Tümleşik Çözümler
+              href: ./integrated-solutions-for-publishers.md
         - name: En iyi pazarlama deneyimleri
           href: ./gtm-marketing-best-practices.md
           items:
@@ -58,6 +60,8 @@
         - name: Market avantajlarınız
           href: ./gtm-your-marketplace-benefits.md
           items:
+            - name: Ortak satış iş ortağı etkileşimi
+              href: ./marketplace-co-sell.md
             - name: Tercih edilen çözümler
               href: ./preferred-solutions.md
             - name: Tümleşik çözümler
@@ -439,19 +443,62 @@
           href: ./partner-center-portal/account-migration-from-cpp-to-pc.md
     - name: Yeni teklif oluşturma
       items:
-        - name: Teklif oluşturma denetim listesi
-          href: ./partner-center-portal/offer-creation-checklist.md
-        - name: SaaS teklifi oluşturma
-          href: ./partner-center-portal/create-new-saas-offer.md
-        - name: SaaS gerçekleştirme API'leri
-          href: ./partner-center-portal/pc-saas-fulfillment-apis.md
+        - name: Dynamics 365 teklifleri
           items:
-            - name: SaaS uygulaması kaydetme
-              href: ./partner-center-portal/pc-saas-registration.md
-            - name: SaaS Gerçekleştirme API’leri v2
-              href: ./partner-center-portal/pc-saas-fulfillment-api-v2.md
-            - name: SaaS Gerçekleştirme API’leri v1 (kullanım dışı)
-              href: ./partner-center-portal/pc-saas-fulfillment-api-v1.md
+            - name: Dynamics 365 for Customer Engagement ve PowerApps teklifi oluşturma
+              href: ./partner-center-portal/create-new-customer-engagement-offer.md
+            - name: Dynamics 365 for Operations teklifi oluşturma
+              href: ./partner-center-portal/create-new-operations-offer.md
+            - name: Dynamics 365 Business Central teklifi oluşturma
+              href: ./partner-center-portal/create-new-business-central-offer.md
+        - name: SaaS teklifleri
+          items:
+            - name: SaaS teklifi oluşturma denetim listesi
+              href: ./partner-center-portal/offer-creation-checklist.md
+            - name: SaaS teklifi oluşturma
+              href: ./partner-center-portal/create-new-saas-offer.md
+            - name: SaaS ölçülen faturalaması
+              href: ./partner-center-portal/saas-metered-billing.md
+              items:
+                - name: Market ölçüm hizmeti API’leri - SSS
+                  href: ./partner-center-portal/marketplace-metering-service-apis-faq.md
+                - name: Market ölçüm hizmeti API’leri
+                  href: ./partner-center-portal/marketplace-metering-service-apis.md
+            - name: SaaS gerçekleştirme API'leri
+              href: ./partner-center-portal/pc-saas-fulfillment-apis.md
+              items:
+                - name: SaaS uygulaması kaydetme
+                  href: ./partner-center-portal/pc-saas-registration.md
+                - name: SaaS Gerçekleştirme API’leri v2
+                  href: ./partner-center-portal/pc-saas-fulfillment-api-v2.md
+                - name: SaaS Gerçekleştirme API’leri v1 (kullanım dışı)
+                  href: ./partner-center-portal/pc-saas-fulfillment-api-v1.md
+                - name: SaaS gerçekleştirme API’leri - SSS
+                  href: ./partner-center-portal/saas-fulfillment-apis-faq.md
+        - name: Müşteri Adayına Genel Bakış
+          href: ./partner-center-portal/commercial-marketplace-get-customer-leads.md
+          items:
+            - name: Azure Blob
+              href: ./partner-center-portal/commercial-marketplace-lead-management-instructions-azure-blob.md
+            - name: Azure Tablosu
+              href: ./partner-center-portal/commercial-marketplace-lead-management-instructions-azure-table.md
+            - name: Müşteri Etkileşimi için Dynamics 365
+              href: ./partner-center-portal/commercial-marketplace-lead-management-instructions-dynamics.md
+            - name: Https Uç Noktası
+              href: ./partner-center-portal/commercial-marketplace-lead-management-instructions-https.md
+            - name: Marketo
+              href: ./partner-center-portal/commercial-marketplace-lead-management-instructions-marketo.md
+            - name: Salesforce
+              href: ./partner-center-portal/commercial-marketplace-lead-management-instructions-salesforce.md
+        - name: Teklifinizin test sürüşünü yapın
+          href: ./partner-center-portal/test-drive.md
+        - name: Ortak satış seçeneği
+          href: ./partner-center-portal/commercial-marketplace-co-sell.md
+          items:
+            - name: Ülke ve bölge kodları
+              href: ./partner-center-portal/commercial-marketplace-co-sell-countries.md
+            - name: Eyalet kodları
+              href: ./partner-center-portal/commercial-marketplace-co-sell-states.md
     - name: Yayın durumu
       href: ./partner-center-portal/publishing-status.md
     - name: Mevcut teklifleri güncelleştirme

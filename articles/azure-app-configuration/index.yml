@@ -56,9 +56,9 @@ sections:
             values:
               - href: /azure/azure-app-configuration/quickstart-feature-flag-aspnet-core
               - href: null
+              - href: /azure/azure-app-configuration/quickstart-feature-flag-dotnet
               - href: null
-              - href: null
-              - href: null
+              - href: /azure/azure-app-configuration/quickstart-feature-flag-spring-boot
   - title: Adım adım öğreticiler
     items:
       - type: paragraph
@@ -67,6 +67,7 @@ sections:
         style: unordered
         items:
           - html: <a href="/azure/azure-app-configuration/enable-dynamic-configuration-aspnet-core">ASP.NET Core'da dinamik yapılandırmayı etkinleştirme</a>
+          - html: <a href="/azure/azure-app-configuration/enable-dynamic-configuration-dotnet-core">Bir .NET Core uygulamasında dinamik yapılandırmayı etkinleştirme</a>
           - html: <a href="/azure/azure-app-configuration/use-feature-flags-dotnet-core">.NET Core uygulamasında özellik bayraklarını kullanma</a>
           - html: <a href="/azure/azure-app-configuration/manage-feature-flags">Özellik bayraklarını yönetme</a>
           - html: <a href="/azure/azure-app-configuration/integrate-ci-cd-pipeline">CI/CD işlem hattıyla tümleştirme</a>

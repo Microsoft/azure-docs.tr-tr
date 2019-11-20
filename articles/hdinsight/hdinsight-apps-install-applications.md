@@ -1,6 +1,6 @@
 ---
 title: Azure HDInsight üzerinde üçüncü taraf uygulamaları yükleme
-description: Azure HDInsight'a üçüncü taraf Hadoop uygulamaları yükleme hakkında bilgi alın.
+description: Azure HDInsight 'a üçüncü taraf Apache Hadoop uygulamaları yüklemeyi öğrenin.
 author: hrasheed-msft
 ms.reviewer: jasonh
 ms.service: hdinsight
@@ -8,12 +8,12 @@ ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 06/17/2019
 ms.author: hrasheed
-ms.openlocfilehash: 3e1f64aa00ea0d78eca8a994814a91600b91239f
-ms.sourcegitcommit: 156b313eec59ad1b5a820fabb4d0f16b602737fc
+ms.openlocfilehash: 68bbe22a4a6f7697c2bfab291412aae85efc32e9
+ms.sourcegitcommit: 083aa7cc8fc958fc75365462aed542f1b5409623
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67190703"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "70916990"
 ---
 # <a name="install-third-party-apache-hadoop-applications-on-azure-hdinsight"></a>Azure HDInsight üzerinde üçüncü taraf Apache Hadoop uygulamaları yükleme
 
@@ -25,22 +25,21 @@ Aşağıdaki liste, yayımlanan uygulamalara gösterir:
 
 |Uygulama |Küme türleri | Açıklama |
 |---|---|---|
-|[AtScale zeka platformu](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/atscale.atscale) |Hadoop |AtScale sorgu milyarlarca satır etkileşimli olarak zaten biliyorsanız, sahibi ve QlikView için Microsoft Excel, Power BI, Tableau Software – sevdiğiniz BI araçlarını kullanarak veri izin vererek, HDInsight kümenizle genişleme OLAP sunucusunun kapatır. |
-|[HDInsight için CDAP](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/cask.cdap-for-hdinsight) |HBase |CDAP, saat değeri için Self Servis veri sağlamak Hadoop ve BT'nin hızlandırır büyük veriler için ilk Birleşik tümleştirme platformudur. Açık kaynaklı ve Genişletilebilir CDAP yenilik teknolojik avantajların önündeki engelleri kaldırır. Gereksinimler: 4 bölge düğüm, en düşük D3 v2. |
-|[Datameer](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/datameer.datameer) |Hadoop |Hazırlama Datameer'ın Self-Servis ölçeklenebilir platformu, karmaşık çok kaynaklı veri değerli çalışma ortamına hazır bilgi, daha hızlı ve daha akıllı içgörüler sunan bir kurumsal ölçekte oturum kapatma keşfetmeye ve analiz için verilerinizi düzenleyen hızlandırır. |
-|[HDInsight üzerinde Dataiku DSS](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/dataiku.dss-on-hdi) |Hadoop, Spark |Dataiku DSS, veri uzmanları ve veri analistleri sağlayan bir kurumsal veri bilimi platformu işbirliği tasarlamak ve yeni veri ürünleri ve Hizmetleri daha verimli bir şekilde çalıştırmak için ham verileri etkili tahminlerine kapatma. |
-|[WANdisco Fusion HDI uygulama](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/wandisco.fusion-hdi-app) |Hadoop, Spark, HBase, Storm, Kafka |Dağıtılmış bir ortamda tutarlı verileri tutmak çok büyük veri işlemleri zordur. WANdisco Fusion, kurumsal düzeyde yazılım platformu, yapılandırılmamış veriler tutarlılık arasında herhangi bir ortam sağlayarak bu sorunu çözer. |
-|[HDInsight için H2O SparklingWater](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/h2o-ai.h2o-sparklingwater) |Spark |H2O Sparkling Water aşağıdaki dağıtılmış algoritmaları destekler: GLM, Naïve Bayes, dağıtılmış rasgele orman, gradyan geliştirme makinesi, derin öğrenme, K-ortalamaları, PCA, genelleştirilmiş düşük sıra modelleri, Anomali algılama, Autoencoders derin sinir ağları. |
-|[HDInsight için gerçek zamanlı veri tümleştirmesi Striim](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/striim.hdinsightintegration) |Hadoop,HBase,Storm,Spark,Kafka |Bir-akış veri tümleştirmesi + zeka platformu, sürekli alımı, işleme ve analizi farklı veri akışları etkinleştirme uca Striim (okunur "stream") olur. |
-|[Jumbune Kurumsal hızlandırma BigData, Analytics](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/impetus-infotech-india-pvt-ltd.impetus_jumbune) |Hadoop, Spark |Yüksek bir düzeyde Jumbune 1, kuruluşlara yardımcı olur. Tez hızlandırma, MapReduce ve Spark altyapısı yığın, Java, Scala iş yükü performansı temel. 2. İzleme, 3 proaktif Hadoop kümesi. Dağıtılmış dosya sistemi veri kalitesi yönetimini kurma. |
-|[Kyligence Enterprise](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/kyligence.kyligence) |Hadoop,HBase,Spark |Apache Kylin tarafından desteklenen, Kyligence Kurumsal BI büyük verileri sağlar. Hadoop üzerinde bir kurumsal OLAP altyapısı Kyligence Kurumsal BI metodolojisini ve endüstri standardı veri ambarı ile hadoop'ta BI mimari için iş analisti düşürüyor. |
-|[Spark iş sunucusu KNIME Spark Yürütücü için](https://azuremarketplace.microsoft.com/marketplace/apps/knime.spark-job-server-for-knime-spark-executor) |Spark |Spark iş sunucusu KNIME Spark Yürütücü için KNIME analiz platformu HDInsight kümelerine bağlanmak için kullanılır. |
-|[Azure HDInsight için Presto Yıldız Yağmuru](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/starburst.starburst-presto) |Hadoop |Bir hızlı ve ölçeklenebilir dağıtılmış SQL sorgu presto altyapısıdır. Depolama ve işlem ayrımı için tasarlanmış, Presto Azure Data Lake Storage, Azure Blob Depolama, SQL ve NoSQL veritabanları ve diğer veri kaynaklarından veri sorgulamak için idealdir. |
-|[HDInsight bulut için StreamSets Data Collector](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/streamsets.streamsets-data-collector-hdinsight) |Hadoop,HBase,Spark,Kafka |StreamSets Data Collector, gerçek zamanlı veri akışları basit, güçlü bir altyapısıdır. Veri Toplayıcı, veri akışlarını rota ve işlem verileri için kullanın. Bu, 30 günlük deneme sürümü lisansı ile birlikte gelir. |
-|[Trifacta Wrangler Enterprise](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/trifacta.tr01) |Hadoop, Spark, HBase |HDInsight için Trifacta Wrangler kurumsal verilerin herhangi bir ölçekte denetimi Kurumsal çapta veri destekler. Trifacta Azure'da çalıştırmanın maliyeti, Trifacta abonelik maliyetleri ve sanal makineler için Azure altyapı maliyetleri birleşimidir. |
-|[Unifi veri platformu](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/unifi-software.unifi-data-platform) |Hadoop,HBase,Storm,Spark |Unifi veri platformu sorunsuz bir şekilde tümleşik bir veri sorunlarını gidermek için iş kullanıcısı bu sürücü gelirlerinizi güç katın, maliyetler veya işletim karmaşıklığını azaltmak üzere tasarlanan bir Self Servis veri araçları paketidir. |
-|[Unraveldata APM](https://azuremarketplace.microsoft.com/marketplace/apps/unravel-data.unravel-app) |Spark |HDInsight Spark kümesi için uygulama verileri aydınlatmak. |
-|[Waterline yapay ZEKA tabanlı veri Kataloğu](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/waterline_data.waterline_data) |Spark |Waterline kataloglar, düzenler ve veri iş terimlerini otomatik etiketi verilerle yapay ZEKA kullanarak yönetir. Waterline'nın iş literate Kataloğu, Self Servis analizler, uyumluluk ve idare ve BT yönetimi girişimleri için önemli bir başarı bileşenidir. |
+|[AtScale zeka platformu](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/atscale.atscale) |Hadoop |AtScale, HDInsight kümenizi genişleme bir OLAP sunucusuna dönüştürür ve Microsoft Excel, Power BI, Tableau Software to QlikView ' den daha önce bildiğiniz, sahip olduğunuz ve sevdiğiniz BI araçlarını kullanarak milyarlarca verileri etkileşimli olarak sorgulamanızı sağlar. |
+|[HDInsight için CDAP](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/cask.cdap-for-hdinsight) |HBase |CDAP, Hadoop için zaman değerini hızlandıran ve self servis verileri sağlamasına olanak tanıyan büyük verilere yönelik ilk Birleşik tümleştirme platformudur. Açık kaynak ve genişletilebilir, CDAP yeniliklere yönelik engelleri kaldırır. Gereksinimler: 4 bölge düğümü, min D3 v2. |
+|[Datameer](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/datameer.datameer) |Hadoop |Analiz için verilerinizi hazırlamaya, keşfetmeye ve yapılandırmaya yönelik self servis ölçeklenebilir platformu, karmaşık çok kaynaklı verileri, kurumsal ölçekte daha hızlı ve daha akıllı Öngörüler sunarak değerli iş için hazır bilgilere açmayı hızlandırır. |
+|[HDInsight üzerinde dataıku DSS](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/dataiku.dss-on-hdi) |Hadoop, Spark |Veri bilimcilerinin ve veri analistlerinin yeni veri ürünlerini ve hizmetlerini daha verimli bir şekilde tasarlamak ve çalıştırmak ve ham verileri kesin tahmine dayalı tahmine dayalı olarak yürütmek üzere işbirliği yapmasına imkan tanıyan bir kurumsal veri bilimi platformunda dataiku DSS. |
+|[WANdisco Fusion HDI uygulaması](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/wandisco.fusion-hdi-app) |Hadoop, Spark, HBase, fırtınası, Kafka |Verilerin dağıtılmış bir ortamda tutarlı tutulması çok büyük bir veri işlemleri sınamadır. Kurumsal sınıf yazılım platformu olan WANdisco Fusion, hiçbir ortamda yapılandırılmamış veri tutarlılığını etkinleştirerek bu sorunu çözer. |
+|[HDInsight için H2O mini Susu](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/h2o-ai.h2o-sparklingwater) |Spark |H2O Suze su aşağıdaki dağıtılmış algoritmaları destekler: GLM, Naïve Bayes, dağıtılmış rastgele orman, gradyan artırma makinesi, derin sinir ağlar, derin öğrenme, K-anlamı, PCA, genelleştirilmiş düşük sıra modelleri, anomali algılama, oto kodlayıcılar. |
+|[HDInsight ile gerçek zamanlı veri tümleştirmesi için anlık ileti çabam](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/striim.hdinsightintegration) |Hadoop, HBase, fırtınası, Spark, Kafka |Anlık ileti ("Stream"), uçtan uca bir akış veri tümleştirmesi + zekası platformudur ve farklı veri akışlarının sürekli alımı, işlenmesi ve analizine olanak sağlar. |
+|[Jumbune kurumsal-hızlandırma BigData Analytics](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/impetus-infotech-india-pvt-ltd.impetus_jumbune) |Hadoop, Spark |Yüksek düzeyde, Jumbe, kuruluşlara, 1 ' e yardımcı olur. Tez, MapReduce & Spark Engine tabanlı Hive, Java, Scala iş yükü performansı hızlandırıcı. 2. Proaktif Hadoop kümesi Izleme, 3. Dağıtılmış dosya sisteminde veri kalitesi yönetimi oluşturma. |
+|[Kyya gösterimi kurumsal](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/kyligence.kyligence) |Hadoop, HBase, Spark |Apache Kylin tarafından desteklenen Kırgızca kurumsal, büyük veriler için bı sağlar. Hadoop 'ta kurumsal bir OLAP altyapısı olarak, Kırgızca kurumsal analistleri, sektör standardı veri ambarı ve bı metodolojisi ile Hadoop üzerinde bı 'ı mimariye kadar işletmelerini sağlar. |
+|[Yıldız yağmuru Azure HDInsight için](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/starburst.starburst-presto) |Hadoop |Presto, hızlı ve ölçeklenebilir bir dağıtılmış SQL sorgu altyapısıdır. Depolama ve işlem ayrımı için tasarlanmış, Presto Azure Data Lake Storage, Azure Blob Depolama, SQL ve NoSQL veritabanları ve diğer veri kaynaklarından veri sorgulamak için idealdir. |
+|[HDInsight bulutu için StreamSets veri toplayıcısı](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/streamsets.streamsets-data-collector-hdinsight) |Hadoop, HBase, Spark, Kafka |StreamSets veri toplayıcısı, verileri gerçek zamanlı olarak akıp basit ve güçlü bir altyapıdır. Veri akışlarındaki verileri yönlendirmek ve işlemek için veri toplayıcıyı kullanın. 30 günlük deneme lisansı ile birlikte gelir. |
+|[Trifacta Wrangler kurumsal](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/trifacta.tr01) |Hadoop, Spark, HBase |HDInsight için trifacta Wrangler Enterprise, herhangi bir veri ölçeği için kurumsal çapta veri wrangini destekler. Azure üzerinde Trifacta çalıştırmanın maliyeti, üç aylık abonelik maliyetlerinin yanı sıra sanal makineler için Azure altyapı maliyetlerinin bir birleşimidir. |
+|[Sınıfı olmayan veri platformu](https://unifisoftware.com/platform/) |Hadoop, HBase, fırtınası, Spark |Sınıfı olmayan veri platformu, iş kullanıcısına artımlı gelir sağlayan veri zorluklarını ortadan kaldırmak, maliyetleri azaltmak veya işlemsel karmaşıklığı düşürmek için tasarlanan, sorunsuz bir şekilde tümleştirilmiş self servis veri araçları paketidir. |
+|[Unkıveldata APM](https://azuremarketplace.microsoft.com/marketplace/apps/unravel-data.unravel-app) |Spark |HDInsight Spark kümesi için veri uygulamasını kaldırma. |
+|[Filigran AI temelli veri kataloğu](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/waterline_data.waterline_data) |Spark |İş terimleriyle verileri otomatik olarak etiketlemek için AI kullanarak verileri düzenler, düzenler ve yönetir. Waterline'nın iş literate Kataloğu, Self Servis analizler, uyumluluk ve idare ve BT yönetimi girişimleri için önemli bir başarı bileşenidir. |
 
 Bu makalede verilen yönergeler Azure portalı kullanmaktadır. Ayrıca portaldan Azure Resource Manager şablonunu dışarı aktarabilir veya satıcılardan Resource Manager şablonunun bir kopyasını edinmek ve şablonu dağıtmak için Azure PowerShell ve klasik Azure CLI'yı kullanın.  Bkz: [Apache Hadoop kümeleri oluşturma Resource Manager şablonlarını kullanarak HDInsight üzerinde](hdinsight-hadoop-create-linux-clusters-arm-templates.md).
 
@@ -53,20 +52,20 @@ Aşağıdaki yordamda var olan bir HDInsight kümesine HDInsight uygulamaların�
 **Bir HDInsight uygulaması yükleme**
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Sol menüden gidin **tüm hizmetleri** > **Analytics** > **HDInsight kümeleri**.
-3. Bir HDInsight kümesi listeden seçin.  Henüz yoksa öncelikle bir tane oluşturmanız gerekir.  bkz. [Küme oluşturma](hadoop/apache-hadoop-linux-tutorial-get-started.md#create-cluster).
-4. Altında **ayarları** kategorisi, select **uygulamaları**. Ana penceresinde yüklü uygulamaların bir listesini görebilirsiniz. 
+2. Sol menüden **Tüm Service** > **Analytics** > **HDInsight kümelerine**gidin.
+3. Listeden bir HDInsight kümesi seçin.  Henüz yoksa öncelikle bir tane oluşturmanız gerekir.  bkz. [Küme oluşturma](hadoop/apache-hadoop-linux-tutorial-get-started.md#create-cluster).
+4. **Ayarlar** kategorisi altında **uygulamalar**' ı seçin. Ana pencerede yüklü uygulamaların bir listesini görebilirsiniz. 
    
     ![HDInsight uygulamaları portal menüsü](./media/hdinsight-apps-install-applications/hdinsight-apps-portal-menu.png)
-5. Seçin **+ Ekle** menüsünde. Kullanılabilir uygulamaların listesini görebilirsiniz.  Varsa **+ Ekle** griyse, HDInsight kümesinin bu sürümü için uygulama olduğu anlamına gelir vardır.
+5. Menüden **+ Ekle** ' yi seçin. Kullanılabilir uygulamaların bir listesini görebilirsiniz.  **+ Ekle** gri ise bu, HDInsight kümesinin bu sürümü için bir uygulama olmadığı anlamına gelir.
    
-    ![HDInsight uygulamaları kullanılabilir uygulamalar](./media/hdinsight-apps-install-applications/hdinsight-apps-list.png)
-6. Kullanılabilir uygulamaları birini seçin ve ardından yasal koşulları kabul etmek için yönergeleri izleyin.
+    ![HDInsight uygulamaları kullanılabilir uygulamalar](./media/hdinsight-apps-install-applications/hdinsight-apps-list1.png)
+6. Kullanılabilir uygulamalardan birini seçin ve ardından geçerli koşulları kabul etmek için yönergeleri izleyin.
 
-Yükleme durumunu portal bildirimlerinden (portalın üst kısmındaki zil simgesini seçin) görebilirsiniz. Uygulama yüklendikten sonra uygulama yüklü uygulamalar listesinde görüntülenir.
+Yükleme durumunu Portal bildirimlerinden görebilirsiniz (portalın üst kısmındaki zil simgesini seçin). Uygulama yüklendikten sonra uygulama yüklü uygulamalar listesinde görüntülenir.
 
 ## <a name="install-applications-during-cluster-creation"></a>Küme oluşturma sırasında uygulama yükleme
-Bir küme oluştururken HDInsight uygulamaları yükleme seçeneğine sahipsiniz. İşlem sırasında, küme oluşturulup çalışır duruma geldikten sonra HDInsight uygulamaları yüklenir. Azure portalını kullanarak küme oluşturma sırasında uygulamaları yüklemek için kullandığınız **özel** seçeneği varsayılan yerine **hızlı oluşturma** seçeneği.
+Bir küme oluştururken HDInsight uygulamaları yükleme seçeneğine sahipsiniz. İşlem sırasında, küme oluşturulup çalışır duruma geldikten sonra HDInsight uygulamaları yüklenir. Azure portal kullanarak küme oluşturma sırasında uygulamaları yüklemek için varsayılan **hızlı oluştur** seçeneği yerine **özel** seçeneğini kullanın.
 
 ## <a name="list-installed-hdinsight-apps-and-properties"></a>Yüklü HDInsight uygulamalarını ve özelliklerini listeleme
 Portal bir küme için yüklü HDInsight uygulamalarının listesini ve yüklü olan her bir uygulamanın özelliklerini gösterir.
@@ -74,18 +73,18 @@ Portal bir küme için yüklü HDInsight uygulamalarının listesini ve yüklü 
 **HDInsight uygulamasını listelemek ve özellikleri görüntülemek**
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Sol menüden gidin **tüm hizmetleri** > **Analytics** > **HDInsight kümeleri**.
-3. Bir HDInsight kümesi listeden seçin.
-4. Altında **ayarları** kategorisi, select **uygulamaları**. Ana penceresinde yüklü uygulamaların bir listesini görebilirsiniz. 
+2. Sol menüden **Tüm Service** > **Analytics** > **HDInsight kümelerine**gidin.
+3. Listeden bir HDInsight kümesi seçin.
+4. **Ayarlar** kategorisi altında **uygulamalar**' ı seçin. Ana pencerede yüklü uygulamaların bir listesini görebilirsiniz. 
    
     ![HDInsight uygulamaları yüklü uygulamalar](./media/hdinsight-apps-install-applications/hdinsight-apps-installed-apps-with-apps.png)
-5. Özelliği görüntülemek için yüklü uygulamalardan birini seçin. Özellik listeleri:
+5. Özelliği göstermek için yüklü uygulamalardan birini seçin. Özellik listeleri:
 
     |Özellik | Açıklama |
     |---|---|
     |Uygulama adı |Uygulama adı. |
     |Durum |Uygulama durumu. |
-    |Web sayfası |Kenar düğümüne dağıttığınız web uygulamasının URL'si. Kimlik bilgisi, küme için yapılandırdığınız HTTP kullanıcısı kimlik bilgileri ile aynıdır. |
+    |Web sayfası |Kenar düğümüne dağıttığınız Web uygulamasının URL 'SI. Kimlik bilgisi, küme için yapılandırdığınız HTTP kullanıcısı kimlik bilgileri ile aynıdır. |
     |SSH uç noktası |Kenar düğümüne bağlanmak için SSH kullanabilirsiniz. SSH kimlik bilgileri, küme için yapılandırdığınız SSH kullanıcısı kimlik bilgileriyle aynıdır. Bilgi için bkz. [HDInsight ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md). |
     |Açıklama | Uygulama açıklaması. |
 
@@ -101,8 +100,8 @@ Bkz. [Yükleme sorunlarını giderme](hdinsight-apps-install-custom-applications
 
 ## <a name="next-steps"></a>Sonraki adımlar
 * [Özel HDInsight uygulamaları yükleme](hdinsight-apps-install-custom-applications.md): HDInsight için yayımlanmamış bir HDInsight uygulamasının nasıl dağıtılacağını öğrenin.
-* [HDInsight uygulamaları yayımlama](hdinsight-apps-publish-applications.md): Özel HDInsight uygulamalarınızı Azure Marketi'nde yayımlama konusunda bilgi edinin.
-* [MSDN: Bir HDInsight uygulaması yükleme](https://msdn.microsoft.com/library/mt706515.aspx): HDInsight uygulamalarını nasıl tanımlayacağınızı öğrenin.
+* [HDInsight uygulamalarını yayımlama](hdinsight-apps-publish-applications.md): Özel HDInsight uygulamalarınızı Azure Market 'Te yayımlamayı öğrenin.
+* [MSDN HDInsight uygulaması](https://msdn.microsoft.com/library/mt706515.aspx)yüklemesi: HDInsight uygulamalarını nasıl tanımlayacağınızı öğrenin.
 * [Betik Eylemi kullanarak Linux tabanlı HDInsight kümelerini özelleştirme](hdinsight-hadoop-customize-cluster-linux.md): ek uygulamalar yüklemek için Betik Eyleminin nasıl kullanılacağını öğrenin.
 * [Linux tabanlı Apache Hadoop kümelerini Resource Manager şablonlarını kullanarak HDInsight oluşturma](hdinsight-hadoop-create-linux-clusters-arm-templates.md): HDInsight kümeleri oluşturmak için Resource Manager şablonlarının nasıl çağrılacağını öğrenin.
 * [HDInsight’ta boş kenar düğümleri kullanma](hdinsight-apps-use-edge-node.md): HDInsight kümesine erişmek, HDInsight uygulamalarını test etmek ve HDInsight uygulamalarını barındırmak için boş bir kenar düğümünü kullanmayı öğrenin.

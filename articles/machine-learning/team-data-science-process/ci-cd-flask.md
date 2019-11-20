@@ -1,6 +1,6 @@
 ---
-title: Team Data Science Process için sürekli tümleştirme - Azure işlem hattı oluşturma
-description: "DevOps yapay zeka (AI) uygulamaları için: Azure'da Docker ve Kubernetes kullanarak sürekli tümleştirme işlem hattı oluşturma"
+title: Azure Pipelines Team Data Science Işlemiyle bir CI/CD Işlem hattı oluşturma
+description: Docker ve Kubernetes kullanarak yapay zeka (AI) uygulamaları için sürekli tümleştirme ve sürekli teslim işlem hattı oluşturun.
 services: machine-learning
 author: marktab
 manager: cgronlun
@@ -8,63 +8,61 @@ editor: cgronlun
 ms.service: machine-learning
 ms.subservice: team-data-science-process
 ms.topic: article
-ms.date: 05/22/2018
+ms.date: 09/06/2019
 ms.author: tdsp
 ms.custom: seodec18, previous-author=jainr, previous-ms.author=jainr
-ms.openlocfilehash: d99149f8112c19a07208523a1ee26ba1c36e5362
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f07ce8e8834a2804b6a5b7668718c8e6bff00fa6
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62103585"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71260661"
 ---
-# <a name="creating-continuous-integration-pipeline-on-azure-using-docker-kubernetes-and-python-flask-application"></a>Docker, Kubernetes ve Python Flask uygulaması kullanarak Azure üzerinde sürekli tümleştirme işlem hattı oluşturma
-Yapay ZEKA uygulaması için iş, veri Bilimcileri makine öğrenimi modelleri ve bir uygulama oluşturmak ve kullanmak için son kullanıcılara gösterme uygulama geliştiriciler genellikle iki akışlarını vardır. Bu makalede, biz nasıl sürekli tümleştirme (CI) uygulanacağını gösteren / sürekli teslim (CD) işlem hattı için yapay ZEKA uygulama. Yapay ZEKA uygulaması, uygulama kodu kullanan machine learning (ML) bir modelle katıştırılmış birleşimidir. Bu makalede, biz pretrained modeli özel Azure blob depolama hesabından getiriliyor, AWS S3 hesabı da olabilir. Makale için bir basit bir python flask web uygulaması kullanacağız.
+# <a name="create-cicd-pipelines-for-ai-apps-using-azure-pipelines-docker-and-kubernetes"></a>Azure Pipelines, Docker ve Kubernetes kullanarak AI uygulamaları için CI/CD işlem hatları oluşturma
+
+Yapay zeka (AI) uygulaması, önceden eğitilen makine öğrenimi (ML) modeliyle eklenmiş uygulama kodudur. Bir AI uygulaması için her zaman iki iş akışı vardır: Veri bilimcileri, ML modelini oluşturur ve uygulama geliştiricileri uygulamayı oluşturup son kullanıcılara kullanması için kullanıma sunar. Bu makalede, ML modelini uygulama kaynak koduna katıştıran bir AI uygulaması için sürekli tümleştirme ve sürekli teslim (CI/CD) işlem hattının nasıl uygulanacağı açıklanır. Örnek kod ve öğretici basit bir Python Flask Web uygulaması kullanır ve özel bir Azure Blob depolama hesabından önceden eğitilen bir model getirir. AWS S3 depolama hesabı da kullanabilirsiniz.
 
 > [!NOTE]
-> Bu, CI/CD gerçekleştirilebilir yollarından biridir. Araçlar ve diğer Önkoşullar aşağıda belirtilen alternatifleri vardır. Ek İçerik ekibiyiz gibi bu yayımlarız.
->
->
+> Aşağıdaki işlem, CI/CD yapmak için çeşitli yollarla biridir. Bu araç ve önkoşulların alternatifleri vardır.
 
-## <a name="github-repository-with-document-and-code"></a>Belge ve kod ile GitHub deposu
-Kaynak kodundan indirebileceğiniz [GitHub](https://github.com/Azure/DevOps-For-AI-Apps). A [ayrıntılı öğretici](https://github.com/Azure/DevOps-For-AI-Apps/blob/master/Tutorial.md) de kullanılabilir.
+## <a name="source-code-tutorial-and-prerequisites"></a>Kaynak kodu, öğretici ve Önkoşullar
 
-## <a name="pre-requisites"></a>Ön koşullar
-Aşağıda açıklanan CI/CD işlem hattı izleyen için ön koşullar şunlardır:
-* [Azure DevOps kuruluş](https://docs.microsoft.com/azure/devops/organizations/accounts/create-organization-msa-or-work-student)
-* [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest)
-* [Kubernetes çalıştıran azure Container Service (AKS) kümesi](https://docs.microsoft.com/azure/container-service/kubernetes/container-service-tutorial-kubernetes-deploy-cluster)
-* [Azure Container Registry (ACR) hesabı](https://docs.microsoft.com/azure/container-registry/container-registry-get-started-portal)
-* [Kubernetes kümesine göre komutları çalıştırmak için Kubectl yükleyin.](https://kubernetes.io/docs/tasks/tools/install-kubectl/) Biz bu ACS kümeden yapılandırma getirmek gerekir. 
-* GitHub hesabınıza depo çatalı oluşturma.
+GitHub 'dan [kaynak kodu](https://github.com/Azure/DevOps-For-AI-Apps) ve ayrıntılı bir [öğretici](https://github.com/Azure/DevOps-For-AI-Apps/blob/master/Tutorial.md) indirebilirsiniz. Kendi uygulamanız için bir CI/CD işlem hattı uygulamak için öğretici adımlarını izleyin.
 
-## <a name="description-of-the-cicd-pipeline"></a>CI/CD işlem hattı açıklaması
-İşlem hattı kicks kapatmak için test geçişleri en son sürüme sürerse test paketi çalıştırmak, her yeni işleme bir Docker kapsayıcısında paketler. Azure Container Service (ACS) kullanarak kapsayıcı dağıtılır ve görüntüler Azure Container Registry (ACR) güvenli bir şekilde depolanır. ACS Kubernetes kapsayıcı kümesini yönetmek için çalışıyor, ancak Docker Swarm veya Mesos seçebilirsiniz.
+İndirilen kaynak kodu ve öğreticiyi kullanmak için aşağıdaki önkoşullara sahip olmanız gerekir: 
 
-Uygulamayı bir Azure depolama hesabı ve paketlerin en son modelden, uygulamanın bir parçası olarak güvenli bir şekilde çeker. Dağıtılan bir uygulama, uygulama kodu ve tek kapsayıcı olarak paketlenmiş ML model vardır. Bu, en son ML model ile en son kodu, üretim uygulamalarının her zaman çalıştığından emin olmak için uygulama geliştiriciler ve veri uzmanları, birbirinden ayırır.
+- GitHub hesabınıza yönelik [kaynak kodu deposu](https://github.com/Azure/DevOps-For-AI-Apps)
+- [Azure DevOps organizasyonu](/azure/devops/organizations/accounts/create-organization-msa-or-work-student)
+- [Azure CLI](/cli/azure/install-azure-cli)
+- [Kubernetes (AKS) kümesi için bir Azure Container Service](/azure/container-service/kubernetes/container-service-tutorial-kubernetes-deploy-cluster)
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) komutları çalıştırmak ve aks kümesinden yapılandırma getirmek için 
+- [Azure Container Registry (ACR) hesabı](/azure/container-registry/container-registry-get-started-portal)
 
-İşlem hattı mimari aşağıda verilmiştir. 
+## <a name="cicd-pipeline-summary"></a>CI/CD işlem hattı Özeti
 
-![Mimari](./media/ci-cd-flask/Architecture.PNG?raw=true)
+Her yeni git işleme, derleme işlem hattının dışına çıkarılan. Derleme, en son ML modelini bir BLOB depolama hesabından güvenli bir şekilde çeker ve uygulama kodu ile tek bir kapsayıcıda paketler. Uygulama geliştirme ve veri bilimi iş akışlarının bu şekilde ayrılması, üretim uygulamasının her zaman en son ML modeliyle en son kodu çalıştırıyor olmasını sağlar. Uygulama testi geçerse, işlem hattı, yapı görüntüsünü ACR 'teki bir Docker kapsayıcısında güvenli bir şekilde depolar. Yayın ardışık düzeni daha sonra AKS kullanarak kapsayıcıyı dağıtır. 
 
-## <a name="steps-of-the-cicd-pipeline"></a>CI/CD işlem hattının adımları
-1. Geliştirici uygulama kodu kendi tercih ettiğiniz IDE'de çalışın.
-2. Bunlar kaynak denetimine (Azure DevOps çeşitli kaynak denetimleri iyi desteği olan) kendi seçtikleri kod işle
-3. Ayrıca, veri uzmanı iş modellerindeki geliştirmeye.
-4. Bu durumda mutlu sonra bunlar için bir model deposu modeli yayımlayın, blob depolama hesabı kullanıyoruz. 
-5. Azure DevOps github'da işleme dayalı olarak bir yapı başlatılır.
-6. Azure DevOps derleme işlem hattı, en son modele Blob kapsayıcısından çeker ve bir kapsayıcı oluşturur.
-7. Azure DevOps, Azure Container Registry'de özel görüntü deposu için görüntüyü gönderir.
-8. Belirlenmiş bir zamanlamaya göre (gecelik), yayın işlem hattı başlatılır.
-9. ACR son görüntüden çekilen ve ACS Kubernetes kümesinde arasında dağıtılır.
-10. Uygulama için kullanıcıların isteği, DNS sunucusu üzerinden gider.
-11. DNS sunucusu, yük dengeleyici isteği geçirir ve kullanıcı geri yanıt gönderir.
+## <a name="cicd-pipeline-steps"></a>CI/CD işlem hattı adımları
 
-## <a name="next-steps"></a>Sonraki adımlar
-* Başvurmak [öğretici](https://github.com/Azure/DevOps-For-AI-Apps/blob/master/Tutorial.md) ayrıntılarını izleyin ve kendi uygulamanız için CI/CD ardışık uygulamak için.
+Aşağıdaki diyagram ve adımlar, CI/CD ardışık düzen mimarisini anlatmaktadır:
 
-## <a name="references"></a>Başvurular
-* [Team Data Science Process (TDSP)](https://aka.ms/tdsp)
-* [Azure Machine Learning (AML)](https://docs.microsoft.com/azure/machine-learning/service/)
-* [Azure DevOps](https://www.visualstudio.com/vso/)
-* [Azure Kubernetes hizmeti (AKS)](https://docs.microsoft.com/azure/aks/intro-kubernetes)
+![CI/CD işlem hattı mimarisi](./media/ci-cd-flask/architecture.png)
+
+1. Geliştiriciler, kendi tercih ettikleri IDE 'de uygulama kodu üzerinde çalışır.
+2. Geliştiriciler kodu Azure Repos, GitHub veya başka bir git kaynak denetimi sağlayıcısına teslim. 
+3. Ayrıca, veri bilimcileri, ML modellerini geliştirmeye çalışır.
+4. Veri bilimcileri, tamamlanmış modeli bir model deposuna yayımlayıp bu durumda bir BLOB depolama hesabı. 
+5. Git işlemesini temel alan bir derlemeyi Azure Pipelines.
+6. Derleme işlem hattı, blob depolamadan en son ML modelini çeker ve bir kapsayıcı oluşturur.
+7. İşlem hattı, yapı görüntüsünü ACR 'teki özel görüntü deposuna iter.
+8. Yayın ardışık düzeni, başarılı yapıya göre devre dışı bırakır.
+9. İşlem hattı, ACR 'den en son görüntüyü çeker ve AKS 'deki Kubernetes kümesi arasında dağıtır.
+10. Uygulama için Kullanıcı istekleri, DNS sunucusundan geçer.
+11. DNS sunucusu istekleri bir yük dengeleyiciye geçirir ve yanıtları kullanıcılara geri gönderir.
+
+## <a name="see-also"></a>Ayrıca bkz.
+
+- [Team Data Science Process (TDSP)](/azure/machine-learning/team-data-science-process/)
+- [Azure Machine Learning (AML)](/azure/machine-learning/)
+- [Azure DevOps](https://azure.microsoft.com/services/devops/)
+- [Azure Kubernetes hizmeti (AKS)](/azure/aks/intro-kubernetes)

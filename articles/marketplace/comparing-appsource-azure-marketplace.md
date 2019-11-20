@@ -1,40 +1,41 @@
 ---
-title: AppSource ve Azure Market karşılaştırma | Azure
-description: Bu makalede, Microsoft AppSource ve Azure Marketi'nde vitrinler açıklanır.
+title: AppSource 'u ve Azure Marketi 'ni karşılaştırma | Mavisi
+description: Bu makalede Microsoft AppSource ve Azure Marketi 'ndeki storeronts açıklanmaktadır.
 services: Azure, Marketplace, Compute, Storage, Networking, Blockchain, Security
 author: jm-aditi-ms
 manager: pabutler
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 06/05/2018
 ms.author: ellacroi
-ms.openlocfilehash: 0de536f687272283b816e6724e41eb61e3a22cd0
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 1e1ce36fa29000b5d8dd82a31278f390144384e2
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67442327"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73825989"
 ---
-# <a name="comparing-appsource-and-the-azure-marketplace"></a>AppSource ve Azure Market karşılaştırma
-İçinde vitrinler [Azure Marketi](https://azuremarketplace.microsoft.com) ve [Microsoft AppSource](https://appsource.microsoft.com) benzersiz müşteri gereksinimleri hizmet. Hedef müşterilere vitrinler, rol için kullanın. Hizmet, müşteriye göre ve doğru çözümü sunabilir.
+# <a name="comparing-appsource-and-the-azure-marketplace"></a>AppSource 'u ve Azure Marketi 'ni karşılaştırma
+[Azure Market](https://azuremarketplace.microsoft.com) 'te storeronts ve [Microsoft AppSource](https://appsource.microsoft.com) benzersiz müşteri gereksinimlerine yönelik olarak. Kullanıcıları role göre hedeflemek için vitrinler kullanın. Müşterinizin temelinde doğru çözümü veya hizmeti sunabilirsiniz.
 
-## <a name="understanding-the-differences-between-storefronts"></a>Vitrinler arasındaki farklar anlama
-Bir mağaza seçmek için teklifinizi hedef kitlesi belirleyerek başlayın. Birden çok vitrinler, hedef kitlelere hedefliyorsanız, bir kez içinde birden çok vitrinler satmak için yayımlayabilirsiniz.
+## <a name="understanding-the-differences-between-storefronts"></a>Vitrinler arasındaki farkları anlama
+Bir storefront seçmek için teklifiniz için hedef kitleyi tanımlayarak başlayın. Birden çok storem 'de izleyicileri hedefliyorsanız, birden fazla stotiye satış yapmak için bir kez yayımlayabilirsiniz.
 
 | Azure Market | AppSource |
 |:--- |:--- |
-| BT uzmanları ve geliştiriciler | İş kullanıcılarına ve iş karar mekanizmalarına |
+| BT uzmanları ve geliştiriciler | İş kullanıcıları ve Iş karar mekanizmaları |
  
-Aşağıdaki tabloda bir mağaza kullanmanın avantajları açıklanmaktadır:
+Aşağıdaki tabloda, storefront kullanmanın avantajları açıklanmaktadır:
 
-| Avantajlar | AppSource | Azure Market |
+| Avantajlar | Azure Market | AppSource | 
 |:--- |:--- | :--- |
-| **Faturalandırma esneklik** | Ücretsiz ve deneme AppSource destekler, KLG ve transactable teklif türleri. Transactable teklifleri aylık veya yıllık üzerinde faturalama abonelik tabanlı SaaS ürünlerinde olan bir lisans veya düz oranı başına.| Azure Market destekleyen ücretsiz ve deneme KLG ve transactable teklif türleri. Tüketim tabanlı veya abonelik tabanlı transactable sunar. Tüketim tabanlı teklifleri saatlik kullanım faturalandırılır ve bir başlangıç ücretsiz süresi sağlayabilir. Abonelik tabanlı Hizmetleri, aylık veya yıllık bir bilgisayar başına veya sabit ücretle faturalandırılır.|
-|**Diğer iş ortaklarıyla bağlantı** | Bağlantılar bağımsız yazılım satıcıları, sistem tümleştiricileri ve belirli uygulama senaryoları için Yönetilen hizmet sağlayıcıları. İşbirliği içinde yeni müşterilere satabilirsiniz. | Şu anda, teklifinizin bir hizmet sağlayıcısı veya teslim iş ortakları bağlanamıyor. | 
-| **Otomasyon** | Bağlantılar bağımsız yazılım satıcıları, sistem tümleştiricileri ve belirli uygulama senaryoları için Yönetilen hizmet sağlayıcıları. İşbirliği içinde yeni müşterilere satabilirsiniz. | Şu anda, teklifinizin bir hizmet sağlayıcısı veya teslim iş ortakları bağlanamıyor. Otomatik yazılım eklenti sağlama ile hizmet (SaaS) olarak yararlanın. Azure uygulamaları kullanın: Çözüm şablonu seçeneği SaaS tabanlı veri koleksiyonu ve dağıtım senaryoları otomatik hale getirmek için yayımlama. |
-| **Birden çok bulut türleri** | Şu anda, Azure Stack, Azure kamu veya bölgesel bulut desteklememektedir. | Aşağıdaki türleri kullanarak hem bulutta hem de şirket içi çözümleri yayımlayın:<ul> <li>Azure Stack</li> <li>Azure Kamu</li> <li>Çin ve Almanya dahil olmak üzere bölgesel Bulutlar</li></ul> |
-| **Müşteriler bağlamında sunumu** | Dynamics 365, Power BI ve Office 365 gibi Microsoft ürünleri için uygulama içi deneyim aracılığıyla daha fazla müşteriye ulaşın. | Çözümünüzü, bağlamsal arama Azure portal deneyimi içinde erişilebilir. Sanal makine ve Azure uygulamalarını kullanın: Çözüm şablonu Yayımlama seçenekleri. |
+| **Faturalandırma esnekliği** | Azure Marketi, ücretsiz, deneme, KLG ve transactable teklif türlerini destekler. Transactable teklifler, tüketim tabanlı ya da abonelik tabanlıdır. Tüketim tabanlı teklifler saatlik kullanım ile faturalandırılır ve ilk ücretsiz dönemi sağlayabilir. Abonelik tabanlı hizmetler aylık veya yıllık olarak bilgisayar başına veya sabit fiyat üzerinden faturalandırılır.| AppSource, ücretsiz, deneme, KLG ve transactable teklif türlerini destekler. Transactable teklifler, her bilgisayar veya sabit fiyat için aylık veya yıllık olarak faturalandırılması gereken abonelik tabanlı SaaS ürünlerdir. |
+|**Diğer iş ortaklarıyla bağlantılar**  | Şu anda teklifinizle bir hizmet sağlayıcı veya teslim iş ortakları bağlayamazsınız. | Bağımsız yazılım satıcıları, sistem tümleştiricileri ve yönetilen hizmet sağlayıcılarını belirli uygulama senaryolarına bağlar. Yeni müşterilere işbirliği yapabilirsiniz. |
+| **Otomasyon** | Şu anda teklifinizle bir hizmet sağlayıcı veya teslim iş ortakları bağlayamazsınız. Eklenti sağlama ile otomatik hizmet olarak yazılım (SaaS) avantajlarından yararlanın. SaaS tabanlı veri toplamayı ve dağıtım senaryolarını otomatikleştirmek için Azure Apps: çözüm şablonu yayımlama seçeneğini kullanın. | Bağımsız yazılım satıcıları, sistem tümleştiricileri ve yönetilen hizmet sağlayıcılarını belirli uygulama senaryolarına bağlar. Yeni müşterilere işbirliği yapabilirsiniz. |
+| **Birden çok bulut türü** | Aşağıdaki türleri kullanarak hem genel bulut hem de şirket için çözümler yayımlayın:<ul> <li>Azure Stack</li> <li>Azure Kamu</li> <li>Çin ve Almanya dahil bölgesel bulutlar</li></ul> | Şu anda Azure Stack, Azure Kamu veya bölgesel bulutları desteklemez. |
+| **Müşterilere bağlam içi sunum** | Çözümünüzü, bağlamsal arama için Azure Portal içi deneyime göre kullanılabilir hale getirin. Sanal makineyi ve Azure uygulamalarını kullanın: çözüm şablonu yayımlama seçenekleri. | Dynamics 365, Power BI ve Office 365 gibi Microsoft ürünlerine yönelik uygulama içi deneyimle daha fazla müşteriye ulaşın. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
-*   Gözden geçirme [Azure Market'te ve Appsource'ta yayımlama Kılavuzu](./marketplace-publishers-guide.md).
+*   [Azure Marketi ve AppSource yayımlama kılavuzunu](./marketplace-publishers-guide.md)gözden geçirin.
 

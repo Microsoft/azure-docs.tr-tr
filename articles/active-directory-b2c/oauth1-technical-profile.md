@@ -1,6 +1,6 @@
 ---
-title: Azure Active Directory B2C, özel bir ilkede OAuth1 teknik profili tanımlama | Microsoft Docs
-description: Azure Active Directory B2C, özel bir ilkede OAuth1 teknik profili tanımlayın.
+title: Azure Active Directory B2C bir özel ilkede bir OAuth1 Technical profile tanımlayın | Microsoft Docs
+description: Azure Active Directory B2C bir özel ilkede OAuth1 Technical profile tanımlayın.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
@@ -10,50 +10,50 @@ ms.topic: reference
 ms.date: 09/10/2018
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 993fc8b2e318b59775f61de391ac75fa765485f0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 97fa5757f8b77e29545f6d6f6b885334c7b526f1
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66513111"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71064000"
 ---
-# <a name="define-an-oauth1-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>OAuth1 teknik profili, bir Azure Active Directory B2C özel ilke tanımlayın
+# <a name="define-an-oauth1-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Azure Active Directory B2C özel ilkesinde bir OAuth1 teknik profili tanımlama
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-Azure Active Directory (Azure AD) B2C için destek sağlar [OAuth 1.0 protokolünü](https://tools.ietf.org/html/rfc5849) kimlik sağlayıcısı. Bu makalede, standartlaştırılmış bu protokolü destekleyen bir talep sağlayıcı ile etkileşim kurmak için bir teknik profil ayrıntılarını açıklar. OAuth1 teknik profili ile Twitter gibi bir OAuth1 tabanlı kimlik sağlayıcısı ile ad'sini birleştirebilir. Kimlik sağlayıcısı ile Federasyon, kullanıcıların oturum sosyal var olan oturum veya Kurumsal kimlikleri sağlar.
+Azure Active Directory B2C (Azure AD B2C), [OAuth 1,0 protokol](https://tools.ietf.org/html/rfc5849) kimlik sağlayıcısı için destek sağlar. Bu makalede, bu standartlaştırılmış protokolü destekleyen bir talep sağlayıcısıyla etkileşim kurmaya yönelik teknik bir profilin ayrıntıları açıklanmaktadır. OAuth1 teknik profiliyle, Twitter gibi bir OAuth1 tabanlı kimlik sağlayıcısıyla federasyona bağlayabilirsiniz. Kimlik sağlayıcısı ile birleştirme, kullanıcıların var olan sosyal veya kurumsal kimliklerinde oturum açmasına olanak tanır.
 
 ## <a name="protocol"></a>Protocol
 
-**Adı** özniteliği **Protokolü** öğesi ayarlanması gerekiyor `OAuth1`. Örneğin, protokol için **Twitter OAUTH1** teknik profil `OAuth1`.
+**Protokol** öğesinin `OAuth1` **Name** özniteliğinin olarak ayarlanması gerekir. Örneğin, **Twitter-OAUTH1** Technical profile `OAuth1`için protokol.
 
 ```XML
 <TechnicalProfile Id="Twitter-OAUTH1">
   <DisplayName>Twitter</DisplayName>
   <Protocol Name="OAuth1" />
-  ...    
+  ...
 ```
 
 ## <a name="input-claims"></a>Giriş talepleri
 
-**InputClaims** ve **InputClaimsTransformations** öğe boş olmamalıdır.
+**Inputclaim** ve **ınputclaimstransformations** öğeleri boş veya yok.
 
-## <a name="output-claims"></a>Çıkış talep
+## <a name="output-claims"></a>Çıkış talepleri
 
-**OutputClaims** öğesi talep OAuth1 kimlik sağlayıcısı tarafından döndürülen bir listesini içerir. İlkeniz için tanımlanan kimlik sağlayıcısı adını tanımlanan talep eşleştirmek gerekebilir. Ayarladığınız sürece kimlik sağlayıcısı tarafından döndürülen olmayan talepleri de içerebilir **DefaultValue** özniteliği.
+**Outputclaim** öğesi, OAuth1 Identity provider tarafından döndürülen taleplerin bir listesini içerir. İlkenizde tanımlanan talebin adını kimlik sağlayıcısında tanımlanan adla eşlemeniz gerekebilir. Ayrıca, **DefaultValue** özniteliğini ayarladığınız sürece kimlik sağlayıcısı tarafından döndürülmeyen talepleri de ekleyebilirsiniz.
 
-**OutputClaimsTransformations** öğe koleksiyonu içerebilir **OutputClaimsTransformation** çıkış talep değiştirmek veya yenilerini oluşturmak için kullanılan öğeleri.
+**Outputclaimstransformations** öğesi, çıkış taleplerini değiştirmek veya yenilerini oluşturmak için kullanılan bir **outputclaimstransreference** öğeleri koleksiyonu içerebilir.
 
-Aşağıdaki örnek, Twitter kimlik sağlayıcısı tarafından döndürülen talepleri gösterir:
+Aşağıdaki örnekte, Twitter kimlik sağlayıcısı tarafından döndürülen talepler gösterilmektedir:
 
-- **USER_ID** eşleşen talep **issuerUserId** talep.
-- **Screen_name** eşleşen talep **displayName** talep.
-- **E-posta** Adı Eşleme olmadan talep.
+- **Issueruserıd** talebine eşlenen **user_id** talebi.
+- **DisplayName** talebine eşlenen **screen_name** talebi.
+- Ad eşleştirmesi olmayan **e-posta** talebi.
 
-Teknik profil de kimlik sağlayıcısı tarafından döndürülen olmayan talepleri döndürür: 
+Teknik profil, kimlik sağlayıcısı tarafından döndürülmeyen talepleri de döndürür:
 
-- **Identityprovider** kimlik sağlayıcısının adını içeren talep.
-- **AuthenticationSource** varsayılan değeri olan talep `socialIdpAuthentication`.
+- Kimlik sağlayıcısının adını içeren **IdentityProvider** talebi.
+- Varsayılan değeri `socialIdpAuthentication`olan **authenticationsource** talebi.
 
 ```xml
 <OutputClaims>
@@ -69,31 +69,31 @@ Teknik profil de kimlik sağlayıcısı tarafından döndürülen olmayan talepl
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| client_id | Evet | Kimlik sağlayıcısı uygulama tanımlayıcısı. |
-| ProviderName | Hayır | Kimlik sağlayıcısının adı. |
-| request_token_endpoint | Evet | İstek, RFC 5849 göre belirteç uç noktası URL'si. |
-| authorization_endpoint | Evet | RFC 5849 göre yetkilendirme uç noktasının URL'si. |
-| access_token_endpoint | Evet | RFC 5849 göre belirteç uç noktası URL'si. |
-| ClaimsEndpoint | Hayır | Kullanıcı bilgileri uç noktasının URL'si. | 
-| ClaimsResponseFormat | Hayır | Talep yanıt biçimi.|
+| client_id | Evet | Kimlik sağlayıcısının uygulama tanımlayıcısı. |
+| Adı | Hayır | Kimlik sağlayıcısının adı. |
+| request_token_endpoint | Evet | RFC 5849 başına istek belirteci uç noktasının URL 'SI. |
+| authorization_endpoint | Evet | RFC 5849 başına yetkilendirme uç noktasının URL 'SI. |
+| access_token_endpoint | Evet | RFC 5849 başına belirteç uç noktasının URL 'SI. |
+| ClaimsEndpoint | Hayır | Kullanıcı bilgisi uç noktasının URL 'SI. |
+| ClaimsResponseFormat | Hayır | Talep yanıtı biçimi.|
 
 ## <a name="cryptographic-keys"></a>Şifreleme anahtarları
 
-**CryptographicKeys** öğesi aşağıdaki öznitelik içeriyor:
+**Cryptographickeys** öğesi aşağıdaki özniteliği içerir:
 
 | Öznitelik | Gerekli | Açıklama |
 | --------- | -------- | ----------- |
-| client_secret | Evet | Kimlik sağlayıcısı uygulama istemci gizli bilgisi.   | 
+| client_secret | Evet | Kimlik sağlayıcısı uygulamasının istemci gizli anahtarı.   |
 
-## <a name="redirect-uri"></a>Yeniden yönlendirme URI'si
+## <a name="redirect-uri"></a>Yönlendirme URI'si
 
-Kimlik sağlayıcınızın yeniden yönlendirme URL'sini yapılandırırken girin `https://login.microsoftonline.com/te/tenant/policyId/oauth1/authresp`. Değiştirdiğinizden emin olun **Kiracı** Kiracı adınız (örneğin, contosob2c.onmicrosoft.com) ile ve **Policyıd** ilkenizin (örneğin, b2c_1a_policy) tanımlayıcısına sahip. Yeniden yönlendirme URI'si, tüm küçük harflerle olması gerekiyor. Kimlik sağlayıcısı oturum açma kullanan tüm ilkeleri için bir yönlendirme URL'si ekleyin. 
+Kimlik sağlayıcınızın yeniden yönlendirme URL 'sini yapılandırdığınızda, girin `https://login.microsoftonline.com/te/tenant/policyId/oauth1/authresp`. **Kiracınızı** kiracı adınızla (örneğin, contosob2c.onmicrosoft.com) ve **PolicyId** ile ilkenizin tanıtıcısına (örneğin, b2c_1a_policy) değiştirdiğinizden emin olun. Yeniden yönlendirme URI 'sinin tamamen küçük harfle olması gerekir. Kimlik sağlayıcısı oturum açma bilgilerini kullanan tüm ilkeler için yeniden yönlendirme URL 'SI ekleyin.
 
-Kullanıyorsanız **b2clogin.com** etki alanı yerine **login.microsoftonline.com** b2clogin.com login.microsoftonline.com yerine kullandığınızdan emin olun.
+**Login.microsoftonline.com** yerine **b2clogin.com** etki alanını kullanıyorsanız Login.microsoftonline.com yerine b2clogin.com kullandığınızdan emin olun.
 
 Örnekler:
 
-- [Özel ilkeler kullanarak OAuth1 kimlik sağlayıcısı olarak twitter Ekle](active-directory-b2c-custom-setup-twitter-idp.md)
+- [Özel ilkeler kullanarak Twitter 'ı OAuth1 Identity sağlayıcısı olarak ekleme](active-directory-b2c-custom-setup-twitter-idp.md)
 
 
 

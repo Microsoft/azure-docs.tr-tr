@@ -1,35 +1,35 @@
 ---
-title: Depolama ve Azure Service Fabric kullanarak uygulama gizli dizilerini Mesh | Microsoft Docs
-description: Depolama ve Service Fabric Mesh gizli dizileri kullanma.
+title: Azure Service Fabric ağı uygulama gizli dizilerini depolama ve kullanma | Microsoft Docs
+description: Service Fabric ağ, Azure kaynakları olarak gizli dizileri destekler. Service Fabric kafes uygulamalarınızla gizli dizileri depolamak ve yönetmek için aşağıdaki adımları uygulayın.
 services: service-fabric-mesh
-keywords: Gizli dizileri
+keywords: kaynaklanır
 author: v-steg
-ms.author: v-steg
+ms.author: jeconnoc
 ms.date: 10/25/2018
 ms.topic: conceptual
 ms.service: service-fabric-mesh
-manager: jeanpaul.connock
-ms.openlocfilehash: 4268356db5f46e92862e19d6391cfe5a94511270
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+manager: jeconnoc
+ms.openlocfilehash: 72188517c237b170b709c48f16d3c131985f95d1
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60810629"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73686227"
 ---
-# <a name="service-fabric-mesh-application-secrets"></a>Service Fabric Mesh uygulama gizli dizilerini
-Service Fabric Mesh gizli Azure kaynaklarını destekler. Service Fabric Mesh gizli dizi herhangi bir depolama bağlantı dizeleri, parolalar veya güvenli şekilde iletilmesini ve depolanan gereken diğer değerleri gibi hassas metin bilgi olabilir.
+# <a name="service-fabric-mesh-application-secrets"></a>Service Fabric kafes uygulama gizli dizileri
+Service Fabric ağ, Azure kaynakları olarak gizli dizileri destekler. Service Fabric bir ağ parolası, depolama bağlantı dizeleri, parolalar veya güvenli bir şekilde depolanması ve aktarılması gereken diğer değerler gibi herhangi bir hassas metin bilgisi olabilir.
 
-![Kafes gizli dizileri genel bakış][sf-mesh-secrets-overview]
+![Ağ gizlilikleri genel bakış][sf-mesh-secrets-overview]
 
-## <a name="mesh-secrets-resources"></a>Gizli dizileri kaynakları mesh
-Mesh uygulaması gizli oluşur:
-* A **gizli dizileri** kaynağı metin gizli dizileri depolayan bir kapsayıcıdır. İçindeki gizli dizileri **gizli dizileri** kaynak depolanır ve güvenli bir şekilde iletilen.
-* Bir veya daha fazla **gizli anahtarları/değerleri** depolanan kaynakları **gizli dizileri** kaynak kapsayıcısı. Her **gizli anahtarları/değerleri** bir sürüm numarası tarafından kaynak ayırt edici.
+## <a name="mesh-secrets-resources"></a>Ağ parolaları kaynakları
+Bir kafes uygulama gizli dizisi aşağıdakilerden oluşur:
+* Metin gizli dizileri depolayan bir kapsayıcı olan **gizlilikler** kaynağı. **Gizli** dizileri kaynağı içinde bulunan gizli dizileri, güvenli bir şekilde depolanır ve iletilir.
+* **Gizlilikler** kaynak kapsayıcısında depolanan bir veya daha fazla **gizli dizi/değer** kaynağı. Her **gizli dizi/değer** kaynağı bir sürüm numarasıyla ayırt edilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar 
-Service Fabric Mesh gizli dizileri hakkında daha fazla bilgi için bkz:
-- [Service Fabric Mesh uygulama parolalarını yönetme](service-fabric-mesh-howto-manage-secrets.md)
-- [Service Fabric kaynak modeli giriş](service-fabric-mesh-service-fabric-resources.md)
+Service Fabric ağ parolaları hakkında daha fazla bilgi edinmek için bkz.:
+- [Service Fabric kafes uygulama gizli dizilerini yönetme](service-fabric-mesh-howto-manage-secrets.md)
+- [Service Fabric kaynak modeline giriş](service-fabric-mesh-service-fabric-resources.md)
 
 <!-- pics -->
 [sf-mesh-secrets-overview]: ./media/service-fabric-mesh-secrets-overview/MeshAppSecretsOverview.png

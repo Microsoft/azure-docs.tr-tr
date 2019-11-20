@@ -5,21 +5,21 @@ services: virtual-wan
 author: cherylmc
 ms.service: virtual-wan
 ms.topic: include
-ms.date: 03/27/2019
+ms.date: 10/07/2019
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: b2549abd3a4f87de99efa9a916e39b99c6fc8747
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: c1f83303c3f186b37c1c5c06e61c2263420c0cfa
+ms.sourcegitcommit: 11265f4ff9f8e727a0cbf2af20a8057f5923ccda
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188274"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72028025"
 ---
-1. Sanal WAN sayfasına gidin. Sayfaya gitmek için bir yoludur gitmek için **tüm hizmetleri**ve sonra sanal WAN'için arama yapın.
-1. **+Ekle**'ye tıklayarak **WAN Oluştur** sayfasını açın.
-1. Üzerinde **oluşturma WAN** sayfasında, aşağıdaki alanları doldurun:
+1. Sanal WAN sayfasına gidin. Portalda **+Kaynak oluştur**’a tıklayın. Arama kutusuna **sanal WAN** yazın ve ENTER ' u seçin.
+1. Sonuçlardan **sanal WAN** ' ı seçin. Sanal WAN sayfasında **Oluştur**' a tıklayın.
+1. **WAN oluştur** sayfasında, aşağıdaki alanları girin:
 
-   * **Ad**: WAN'ınıza vermek istediğiniz adı girin.
+   * **Ad** -WAN 'nizi çağırmak istediğiniz adı yazın.
    * **Abonelik**: Kullanmak istediğiniz aboneliği seçin.
    * **Kaynak Grubu**: Yeni oluşturun veya var olanı kullanın.
    * **Kaynak Konumu**: Açılan menüden kaynak konumu seçin. WAN, global bir kaynaktır ve belirli bir bölgeyle sınırlı değildir. Ancak oluşturduğunuz WAN kaynağını daha kolay yönetmek ve bulmak için bir bölge seçmeniz gerekir.

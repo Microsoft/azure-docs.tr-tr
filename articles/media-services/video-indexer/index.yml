@@ -16,7 +16,7 @@ metadata:
   ms.date: 03/11/2019
   ms.author: juliako
 abstract:
-  description: 'Azure Media Services Video Indexer ürünü Azure Media Analytics, Azure Search, Bilişsel Hizmetler (Yüz Tanıma API''si, Microsoft Translator, Görüntü İşleme API''si ve Özel Konuşma Tanıma Hizmeti gibi) temel alınarak oluşturulmuş bir bulut uygulamasıdır. Video Indexer’ın görüntülü ve sesli modellerini kullanarak videolarınızdan içgörü ayıklamanıza olanak sağlar.<br/>Video Indexer’ı ve Media Services çözümleyicisinin önceden belirlenmiş ayarlarını hangi durumlarda kullanacağınızı anlamak için <a href="/azure/media-services/video-indexer/compare-video-indexer-with-media-services-presets">karşılaştırma belgesine</a> bakın.'
+  description: 'Azure Media Services Video Indexer ürünü Azure Media Analytics, Azure Bilişsel Arama, Bilişsel Hizmetler (Yüz Tanıma API''si, Microsoft Translator, Görüntü İşleme API''si ve Özel Konuşma Tanıma Hizmeti gibi) temel alınarak oluşturulmuş bir bulut uygulamasıdır. Video Indexer’ın görüntülü ve sesli modellerini kullanarak videolarınızdan içgörü ayıklamanıza olanak sağlar.<br/>Video Indexer’ı ve Media Services çözümleyicisinin önceden belirlenmiş ayarlarını hangi durumlarda kullanacağınızı anlamak için <a href="/azure/media-services/video-indexer/compare-video-indexer-with-media-services-presets">karşılaştırma belgesine</a> bakın.'
 sections:
   - items:
       - type: list

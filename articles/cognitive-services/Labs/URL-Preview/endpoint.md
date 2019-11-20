@@ -1,7 +1,7 @@
 ---
-title: Proje URL'si Önizleme uç noktası
+title: Proje URL 'SI önizleme uç noktası
 titlesuffix: Azure Cognitive Services
-description: URL önizlemesi uç nokta özeti.
+description: URL önizleme uç noktasının Özeti.
 services: cognitive-services
 author: mikedodaro
 manager: nitinme
@@ -9,20 +9,21 @@ ms.service: cognitive-services
 ms.subservice: url-preview
 ms.topic: reference
 ms.date: 03/29/2018
-ms.author: rosh, v-gedod
-ms.openlocfilehash: 7cc52493ec0e2b9c81d52da4bb22102c2c7e5e5c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: rosh
+ROBOTS: NOINDEX
+ms.openlocfilehash: 3ef5ebd4ec88deac8c49430f36956d3711c8c535
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60712504"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68706946"
 ---
-# <a name="project-url-preview-endpoint"></a>Proje URL'si Önizleme uç noktası
+# <a name="project-url-preview-endpoint"></a>Proje URL 'SI önizleme uç noktası
 
-Bir uç nokta URL'si Önizleme API içerir.
+URL önizleme API 'SI bir uç nokta içerir.
 
 ## <a name="endpoint"></a>Uç Nokta
-URL önizlemesi almak için aşağıdaki uç noktaya bir istek gönderin. Diğer belirtimleri için başlık ve URL parametrelerini kullanın.
+URL önizlemesi almak için aşağıdaki uç noktaya bir istek gönderin. Diğer belirtimlerin üst bilgilerini ve URL parametrelerini kullanın.
 
 AL:
 ```
@@ -31,14 +32,14 @@ https://api.labs.cognitive.microsoft.com/urlpreview/v7.0/search?q=https://swiftk
 ```
 
 ### <a name="query-parameters"></a>Sorgu parametreleri
-|Ad|Değer|Tür|Gerekli|  
+|Ad|Value|Type|Gerekli|  
 |----------|-----------|----------|--------------|  
-|q|URL önizlemesi|String |Evet|
-|safeSearch|Geçersiz yetişkinlere yönelik içeriği veya korsan içeriği, 400 ' hata koduyla engellendi ve *isFamilyFriendly* bayrağı alınmadı. <p>Yetişkinlere yönelik içeriği için yasal, aşağıda davranıştır. Durum kodu 200 döndürür ve *isFamilyFriendly* bayrağı false olarak ayarlanır.<ul><li>safeSearch strict =: Başlık, açıklama, URL ve görüntü döndürülmez.</li><li>safeSearch Orta; = Başlık, URL ve açıklama ancak açıklayıcı görüntü alın.</li><li>safeSearch; = Tüm yanıt nesneleri/öğeleri – başlık, URL, açıklama ve resim alın.</li></ul> |String|Gerekli değildir. </br> Varsayılan olarak safeSearch için strict =.| 
+|q|Önizlenecek URL|Dize |Evet|
+|Güvenli Arama|Hatalı yetişkin içeriği veya korsan içerik 400 hata koduyla engelleniyor ve *isFamilyFriendly* bayrağı döndürülmüyor. <p>Yasal yetişkin içeriği için aşağıdaki davranış vardır. Durum kodu 200 döndürür ve *isFamilyFriendly* bayrağı false olarak ayarlanır.<ul><li>Güvenli Arama = katı: Başlık, açıklama, URL ve görüntü döndürülmeyecektir.</li><li>Güvenli Arama = orta; Açıklayıcı görüntüyü değil başlık, URL ve açıklama alın.</li><li>Güvenli Arama = kapalı; Tüm Yanıt nesneleri/öğeleri – başlık, URL, açıklama ve görüntü al.</li></ul> |Dize|Gerekli değildir. </br> Varsayılan olarak safeSearch = Strict olur.| 
 
 ## <a name="response-object"></a>Yanıt nesnesi
 
-Aşağıdaki örnekte gösterildiği gibi yanıt HTTP üst bilgileri ve öznitelikleri ile Web sayfası nesnesi içeriyor: `name`, `url`, `description`, `isFamilyFriendly`, ve `primaryImageOfPage`.
+Yanıt, aşağıdaki örnekte gösterildiği gibi öznitelikleri olan http üst bilgilerini ve Web sayfası nesnesini içerir: `name`, `url`, `description` `isFamilyFriendly`, ve `primaryImageOfPage`.
 
 ```
 BingAPIs-TraceId: 15AFE52A97AA422F960433A94803F6CE

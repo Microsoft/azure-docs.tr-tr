@@ -1,76 +1,77 @@
 ---
-title: Oturum açmak için bir Azure Active Directory kuruluş - Azure Active Directory B2C ayarlama | Microsoft Docs
-description: Oturum açma için Azure Active Directory B2C, belirli bir Azure Active Directory kuruluşunu ayarlayın.
+title: Azure Active Directory kuruluş için oturum açma ayarlama-Azure Active Directory B2C
+description: Azure Active Directory B2C belirli bir Azure Active Directory organizasyonu için oturum açma ayarlayın.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 05/14/2018
+ms.date: 08/08/2019
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 28dbf0382ac151857e72d4bb59e207f07c8ad3f3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: fasttrack-edit
+ms.openlocfilehash: 0c2e368b9c12d8ab673e5b8808632501de448b9a
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66508431"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72755761"
 ---
-# <a name="set-up-sign-in-for-a-specific-azure-active-directory-organization-in-azure-active-directory-b2c"></a>Azure Active Directory B2C, belirli bir Azure Active Directory kuruluş için oturum açma ayarlama
+# <a name="set-up-sign-in-for-a-specific-azure-active-directory-organization-in-azure-active-directory-b2c"></a>Azure Active Directory B2C içinde belirli bir Azure Active Directory kuruluş için oturum açma ayarlayın
 
->[!NOTE]
-> Bu özellik genel önizleme aşamasındadır. Bu özellik, üretim ortamında kullanmayın.
+Azure AD B2C bir [kimlik sağlayıcısı](active-directory-b2c-reference-oauth-code.md) olarak Azure Active Directory (Azure AD) kullanmak için, onu temsil eden bir uygulama oluşturmanız gerekir. Bu makalede, Azure AD B2C bir Kullanıcı akışı kullanarak belirli bir Azure AD kuruluştan kullanıcılar için oturum açmayı etkinleştirme konusu gösterilmektedir.
 
-Bir Azure Active Directory (Azure AD) olarak kullanılacak bir [kimlik sağlayıcısı](active-directory-b2c-reference-oauth-code.md) Azure AD B2C'de, temsil ettiği bir uygulama oluşturmanız gerekir. Belirli bir Azure AD kullanıcıları için oturum açma olanağı tanıma bu makale Azure AD B2C'de bir kullanıcı kullanarak kuruluş akış.
+## <a name="create-an-azure-ad-app"></a>Azure AD uygulaması oluşturma
 
-## <a name="create-an-azure-ad-app"></a>Bir Azure AD uygulamanızı oluşturma
+Kullanıcıların belirli bir Azure AD kuruluştan oturum açmasını etkinleştirmek için, Azure AD B2C kiracınızla aynı olmayan kurumsal Azure AD kiracısında bir uygulamayı kaydetmeniz gerekir.
 
-Belirli kullanıcılar için oturum açma etkinleştirmek için Azure AD kuruluş ihtiyacınız kuruluş içinde bir uygulamayı kaydetme Azure AD kiracısı, Azure AD B2C kiracınızı ile aynı değil.
-
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Azure AD kiracınıza içeren dizine kullandığınızdan emin olun. Seçin **dizin ve abonelik filtresi** üst menüdeki ve Azure AD kiracınıza içeren dizini seçin. Azure AD B2C kiracınızı olarak aynı kiracıda değil.
-3. Seçin **tüm hizmetleri** Azure portalı ve ardından arayın ve seçin, sol üst köşedeki **uygulama kayıtları**.
-4. Seçin **yeni kayıt**.
+1. [Azure Portal](https://portal.azure.com)’ında oturum açın.
+2. Azure AD kiracınızı içeren dizini kullandığınızdan emin olun. Üstteki menüden **Dizin + abonelik** filtresini seçin ve Azure AD kiracınızı içeren dizini seçin. Bu, Azure AD B2C kiracınız ile aynı kiracı değildir.
+3. Azure portal sol üst köşesindeki **tüm hizmetler** ' i seçin ve ardından **uygulama kayıtları**' i arayıp seçin.
+4. **Yeni kayıt**seçeneğini belirleyin.
 5. Uygulamanız için bir ad girin. Örneğin, `Azure AD B2C App`.
-6. Seçimi kabul **hesapları yalnızca kuruluş bu dizinde** bu uygulama için.
-7. İçin **yeniden yönlendirme URI'si**, değerini kabul **Web**, tüm küçük harfleri, aşağıdaki URL'yi girin burada `your-B2C-tenant-name` Azure AD B2C kiracınızın adı ile değiştirilir. Örneğin, `https://fabrikam.b2clogin.com/fabrikam.onmicrosoft.com/oauth2/authresp`:
+6. Bu **kuruluş dizinindeki hesapların seçimini yalnızca** bu uygulama için kabul edin.
+7. **Yeniden yönlendirme URI 'si**Için, **Web**'in değerini kabul edin ve aşağıdaki URL 'yi tüm küçük harflerle girin; burada `your-B2C-tenant-name` Azure AD B2C kiracınızın adı ile değiştirilmiştir. Örneğin, `https://fabrikam.b2clogin.com/fabrikam.onmicrosoft.com/oauth2/authresp`:
 
     ```
-    https://your--B2C-tenant-name.b2clogin.com/your-B2C-tenant-name.onmicrosoft.com/oauth2/authresp
+    https://your-B2C-tenant-name.b2clogin.com/your-B2C-tenant-name.onmicrosoft.com/oauth2/authresp
     ```
 
-    Tüm URL'leri artık kullanması gereken [b2clogin.com](b2clogin.md).
+    Tüm URL 'Ler artık [b2clogin.com](b2clogin.md)kullanıyor olmalıdır.
 
-8. Tıklayın **kaydetme**. Kopyalama **uygulama (istemci) kimliği** daha sonra kullanılacak.
-9. Seçin **sertifikaları ve parolaları** uygulama menüsünü ve ardından **yeni gizli**.
-10. İstemci gizli anahtarı için bir ad girin. Örneğin, `Azure AD B2C App Secret`.
-11. Süre sonu dönemi seçin. Bu uygulama için seçimi kabul **1 yıl**.
-12. Seçin **Ekle** ve daha sonra kullanılmak üzere görüntülenen yeni gizli anahtar değerini kopyalayın.
+8. **Kaydol**' a tıklayın. Daha sonra kullanılacak **uygulama (istemci) kimliğini** kopyalayın.
+9. Uygulama menüsünde **sertifikalar & gizlilikler** ' ı seçin ve ardından **yeni istemci parolası**' nı seçin.
+10. İstemci parolası için bir ad girin. Örneğin, `Azure AD B2C App Secret`.
+11. Süre sonu dönemini seçin. Bu uygulama için, **1 yıl içinde**seçimini kabul edin.
+12. **Ekle** ' yi seçin ve daha sonra kullanılmak üzere görüntülenen yeni istemci parolasının değerini kopyalayın.
 
-## <a name="configure-azure-ad-as-an-identity-provider"></a>Kimlik sağlayıcısı olarak Azure AD'yi yapılandırma
+## <a name="configure-azure-ad-as-an-identity-provider"></a>Azure AD 'yi kimlik sağlayıcısı olarak yapılandırma
 
-1. Azure AD B2C kiracısı içeren dizine kullandığınızdan emin olun. Seçin **dizin ve abonelik filtresi** üst menüdeki ve Azure AD B2C kiracınızı içeren dizini seçin.
-2. Seçin **tüm hizmetleri** Azure portalı ve ardından arayın ve seçin, sol üst köşedeki **Azure AD B2C**.
-3. Seçin **kimlik sağlayıcıları**ve ardından **Ekle**.
-4. Girin bir **adı**. Örneğin, `Contoso Azure AD` girin.
-5. Seçin **kimlik sağlayıcısı türü**seçin **Open ID Connect (Önizleme)** ve ardından **Tamam**.
-6. Seçin **bu kimlik sağlayıcısını ayarlama**
-7. İçin **meta veri URL'si**, değiştirerek aşağıdaki URL'yi girin `your-AD-tenant-domain` Azure AD kiracınızın etki alanı adına sahip. Örneğin `https://login.microsoftonline.com/contoso.onmicrosoft.com/.well-known/openid-configuration`:
+1. Azure AD B2C kiracı içeren dizini kullandığınızdan emin olun. Üstteki menüden **Dizin + abonelik** filtresini seçin ve Azure AD B2C kiracınızı içeren dizini seçin.
+1. Azure portal sol üst köşesindeki **tüm hizmetler** ' i seçin ve ardından **Azure AD B2C**' i arayıp seçin.
+1. **Kimlik sağlayıcıları**' nı seçin ve ardından **Yeni OpenID Connect sağlayıcısı**' nı seçin.
+1. Bir **ad**girin. Örneğin, *contoso Azure AD*yazın.
+1. **Meta veri URL 'si**Için `your-AD-tenant-domain` Azure AD kiracınızın etki alanı adıyla değiştirerek aşağıdaki URL 'yi girin:
 
     ```
     https://login.microsoftonline.com/your-AD-tenant-domain/.well-known/openid-configuration
     ```
 
-8. İçin **istemci kimliği**, daha önce kaydettiğiniz uygulama Kimliğini girin ve **gizli**, daha önce kaydettiğiniz istemci gizli anahtarını girin.
-9. İsteğe bağlı olarak, bir değer girin **Domain_hint**. Örneğin, `ContosoAD`. Bu değeri kullanarak bu kimlik sağlayıcısını söz konusu olduğunda kullanılacak olan *domain_hint* istek. 
-10. **Tamam** düğmesine tıklayın.
-11. Seçin **bu kimlik sağlayıcısının taleplerini Eşle** ve aşağıdaki talep ayarlayın:
-    
-    - İçin **kullanıcı kimliği**, girin `oid`.
-    - İçin **görünen ad**, girin `name`.
-    - İçin **verilen ad**, girin `given_name`.
-    - İçin **Soyadı**, girin `family_name`.
-    - İçin **e-posta**, girin `unique_name`.
+    Örneğin, `https://login.microsoftonline.com/contoso.onmicrosoft.com/.well-known/openid-configuration`.
 
-12. Tıklayın **Tamam**ve ardından **Oluştur** yapılandırmanızı kaydetmek için.
+    Azure AD v 2.0 meta veri uç **noktasını kullanmayın,** örneğin `https://login.microsoftonline.com/contoso.onmicrosoft.com/v2.0/.well-known/openid-configuration`. Bunun yapılması, oturum açmaya çalışırken `AADB2C: A claim with id 'UserId' was not found, which is required by ClaimsTransformation 'CreateAlternativeSecurityId' with id 'CreateAlternativeSecurityId' in policy 'B2C_1_SignUpOrIn' of tenant 'contoso.onmicrosoft.com'` benzer bir hataya neden olur.
+
+1. **ISTEMCI kimliği**için, daha önce KAYDETTIĞINIZ uygulama kimliğini girin.
+1. **İstemci parolası**için, daha önce kaydettiğiniz istemci gizli anahtarını girin.
+1. **Kapsam**, **yanıt türü**ve **Yanıt modu**için varsayılan değerleri bırakın.
+1. Seçim **Domain_hint**için bir değer girin. Örneğin, *Contosoad*. Bu, istekte *domain_hint* kullanarak bu kimlik sağlayıcısına başvururken kullanılacak değerdir.
+1. **Kimlik sağlayıcısı talep eşlemesi**altında, aşağıdaki talep eşleme değerlerini girin:
+
+    * **Kullanıcı kimliği**: *OID*
+    * **Görünen ad**: *ad*
+    * **Verilen ad**: *given_name*
+    * **Soyadı**: *family_name*
+    * **E-posta**: *unique_name*
+
+1. **Kaydet**’i seçin.

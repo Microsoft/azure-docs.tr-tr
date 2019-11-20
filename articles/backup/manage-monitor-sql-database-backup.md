@@ -1,152 +1,171 @@
 ---
-title: Yönetme ve izleme Azure Backup tarafından yedeklenen bir Azure VM'de SQL Server veritabanlarını | Microsoft Docs
-description: Bu makalede, bir Azure sanal makinesinde çalışan SQL Server veritabanlarını izleme ve yönetme açıklar.
-services: backup
-author: rayne-wiselman
-manager: carmonm
-ms.service: backup
+title: Azure VM 'de SQL Server veritabanlarını yönetme ve izleme
+description: Bu makalede, bir Azure VM üzerinde çalışan SQL Server veritabanlarının nasıl yönetileceği ve izleneceği açıklanır.
 ms.topic: conceptual
-ms.date: 03/14/2018
-ms.author: raynew
-ms.openlocfilehash: d850cb222b0028f862cdba302140ce12af8576db
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 09/11/2019
+ms.openlocfilehash: 4daf068e97a08d1a611ef64cb64569cacd5d7420
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66492735"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74172151"
 ---
-# <a name="manage-and-monitor-backed-up-sql-server-databases"></a>Yönetme ve İzleme SQL Server veritabanlarını desteklenir
+# <a name="manage-and-monitor-backed-up-sql-server-databases"></a>Yedeklenen SQL Server veritabanlarını yönetme ve izleme
 
-Tarafından kasası yönetme ve izleme, yedeklenir bir Azure Backup kurtarma Hizmetleri ve bir Azure sanal makine (VM) üzerinde çalışan SQL Server veritabanları için bu makalede, ortak görevler açıklanmaktadır. [Azure Backup](backup-overview.md) hizmeti. İşlerini ve Uyarıları izleme, durdurun ve veritabanını korumayı sürdürmek, yedekleme işlerinin çalıştırılması ve bir sanal makine yedeklemelerinden kaydını öğreneceksiniz.
+Bu makalede, bir Azure sanal makinesinde (VM) çalışan ve [Azure Backup](backup-overview.md) hizmeti tarafından Azure Backup kurtarma hizmetleri kasasına yedeklenen SQL Server veritabanlarını yönetmek ve izlemek için kullanılan ortak görevler açıklanmaktadır. İşlerin ve uyarıların nasıl izleneceğini, veritabanı korumasını durdurmayı ve sürdürmeyi, yedekleme işlerini çalıştırmayı ve bir VM 'nin yedeklerden kaydını nasıl sileceğinizi öğreneceksiniz.
 
-SQL Server veritabanlarınız için yedeklemeler henüz yapılandırmadıysanız, bkz. [Azure vm'lerde SQL Server veritabanlarını yedekleme](backup-azure-sql-database.md)
+SQL Server veritabanınız için henüz yedeklemeleri yapılandırmadıysanız bkz. [Azure VM 'lerinde SQL Server veritabanlarını yedekleme](backup-azure-sql-database.md)
 
-## <a name="monitor-manual-backup-jobs-in-the-portal"></a>Portalında el ile yedekleme işlerini izleme
+## <a name="monitor-manual-backup-jobs-in-the-portal"></a>Portalda el ile yedekleme işlerini izleme
 
-Azure yedekleme el ile tetiklenen tüm işleri gösteren **yedekleme işleri** portalı. Bkz. Bu portal INCLUDE veritabanı bulma ve kaydetme ve yedekleme ve geri yükleme işlemlerini işler.
+Azure Backup, **yedekleme işleri** portalındaki tüm el ile tetiklenen işleri gösterir. Bu portalda gördüğünüz işler veritabanı bulma ve kaydetme, yedekleme ve geri yükleme işlemlerini içerir.
 
 ![Yedekleme işleri portalı](./media/backup-azure-sql-database/jobs-list.png)
 
 > [!NOTE]
-> **Yedekleme işleri** portalı zamanlanan yedekleme işlerinin Göster değil. Sonraki bölümde açıklandığı gibi zamanlanmış yedekleme işleri izlemek için SQL Server Management Studio'yu kullanın.
+> **Yedekleme işleri** portalında zamanlanmış yedekleme işleri gösterilmez. Sonraki bölümde açıklandığı gibi zamanlanmış yedekleme işlerini izlemek için SQL Server Management Studio kullanın.
 >
 
-İzleme senaryoları hakkında daha fazla bilgi için Git [Azure portalında izleme](backup-azure-monitoring-built-in-monitor.md) ve [Azure İzleyicisi'ni kullanarak izleme](backup-azure-monitoring-use-azuremonitor.md).  
+Izleme senaryoları hakkında daha fazla bilgi için [Azure izleyici kullanarak](backup-azure-monitoring-use-azuremonitor.md)Azure Portal ve izleme ' [de izleme](backup-azure-monitoring-built-in-monitor.md) ' ye gidin.  
 
+## <a name="view-backup-alerts"></a>Yedekleme uyarılarını görüntüle
 
-## <a name="view-backup-alerts"></a>Yedekleme Uyarıları görüntüle
+Günlük yedeklemeleri her 15 dakikada bir gerçekleştiğinden, izleme yedekleme işleri sıkıcı olabilir. Azure Backup, e-posta uyarıları göndererek izlemeyi kolaylaştırır. E-posta uyarıları şunlardır:
 
-15 dakikada bir günlüğü yedeklerini meydana geldiği için yedekleme işlerini izleme can sıkıcı olabilir. Azure Backup e-posta uyarıları göndererek izleme kolaylaştırır. E-posta uyarıları şunlardır:
-
-- Tüm yedekleme hataları için tetiklenir.
-- Veritabanı düzeyinde hata koduna göre birleştirilir.
+- Tüm yedekleme hatalarıyla ilgili olarak tetiklendi.
+- Veritabanı düzeyinde hata koduna göre birleştirildi.
 - Yalnızca bir veritabanının ilk yedekleme hatası için gönderilir.
 
-Veritabanı yedekleme uyarıları izlemek için:
+Veritabanı yedekleme uyarılarını izlemek için:
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
 
-2. Kasa panosunda seçin **uyarıları ve olayları**.
+2. Kasa panosunda **Uyarılar ve olaylar**' ı seçin.
 
    ![Uyarıları ve olayları seçin](./media/backup-azure-sql-database/vault-menu-alerts-events.png)
 
-3. İçinde **uyarıları ve olayları**seçin **yedekleme uyarıları**.
+3. **Uyarılar ve olaylar**' da **yedekleme uyarıları**' nı seçin.
 
-   ![Yedekleme uyarıları seçin](./media/backup-azure-sql-database/backup-alerts-dashboard.png)
+   ![Yedekleme uyarılarını seçin](./media/backup-azure-sql-database/backup-alerts-dashboard.png)
 
-## <a name="stop-protection-for-a-sql-server-database"></a>SQL Server veritabanı için korumayı Durdur
+## <a name="stop-protection-for-a-sql-server-database"></a>SQL Server veritabanı korumasını durdurma
 
-Çeşitli şekillerde SQL Server veritabanında yedekleme durdurabilirsiniz:
+SQL Server veritabanını yedeklemeyi birkaç yolla durdurabilirsiniz:
 
-* Gelecek tarihli tüm yedekleme işlerini durdurma ve tüm kurtarma noktalarını silin.
-* Gelecek tarihli tüm yedekleme işlerini durdurma ve kurtarma noktalarını olduğu gibi bırakır.
+- Gelecekteki tüm yedekleme işlerini durdurun ve tüm kurtarma noktalarını silin.
+- Gelecekteki tüm yedekleme işlerini durdurun ve kurtarma noktalarını dokunulmadan bırakın.
 
-Kurtarma noktalarını bırakmak isterseniz bu ayrıntıları göz önünde bulundurun:
+Kurtarma noktalarından ayrıldığınızda bu ayrıntıları göz önünde bulundurun:
 
-* Tüm kurtarma noktalarını sonsuza kadar değişmeden kalır, tüm ayıklama durağında durdurma verileri bekleterek korumayı.
-* Korumalı örnek ve tüketilen depolama alanı için ücretlendirilirsiniz. Daha fazla bilgi için [Azure Backup fiyatlandırma](https://azure.microsoft.com/pricing/details/backup/).
-* Yedeklemeleri durdurmadan bir veri kaynağını silerseniz, yeni yedeklemeler başarısız olur.
+- Tüm kurtarma noktaları süresiz olarak kalır, tüm ayıklama, verileri sakla ile korumayı durdurma sırasında durdurulur.
+- Korumalı örnek ve tüketilen depolama alanı için ücretlendirilirsiniz. Daha fazla bilgi için bkz. [Azure Backup fiyatlandırması](https://azure.microsoft.com/pricing/details/backup/).
+- Yedeklemeleri durdurmadan bir veri kaynağını silerseniz, yeni yedeklemeler başarısız olur.
 
-Bir veritabanı için korumayı durdurmak için:
+Bir veritabanının korumasını durdurmak için:
 
-1. Kasa panosunda seçin **yedekleme öğeleri**.
+1. Kasa panosunda **yedekleme öğeleri**' ni seçin.
 
-2. Altında **Yedekleme Yönetimi türü**seçin **Azure VM'deki SQL**.
+2. **Yedekleme yönetimi türü**altında **Azure VM 'de SQL**' i seçin.
 
-    ![Azure VM'de SQL seçin](./media/backup-azure-sql-database/sql-restore-backup-items.png)
+    ![Azure VM 'de SQL seçin](./media/backup-azure-sql-database/sql-restore-backup-items.png)
 
-3. Korumayı durdurmak istediğiniz veritabanını seçin.
+3. Korumasını durdurmak istediğiniz veritabanını seçin.
 
-    ![Korumayı durdurmak için veritabanını seçin](./media/backup-azure-sql-database/sql-restore-sql-in-vm.png)
+    ![Korumayı durdurulacak veritabanını seçin](./media/backup-azure-sql-database/sql-restore-sql-in-vm.png)
 
-4. Veritabanı menüsünde **yedeklemeyi Durdur**.
+4. Veritabanı menüsünde **Yedeklemeyi Durdur**' u seçin.
 
-    ![Yedeklemeyi Durdur seçin](./media/backup-azure-sql-database/stop-db-button.png)
+    ![Yedeklemeyi Durdur ' u seçin](./media/backup-azure-sql-database/stop-db-button.png)
 
+5. **Yedeklemeyi Durdur** menüsünde, verileri tutmayı veya silmeyi seçin. İsterseniz, bir neden ve açıklama belirtin.
 
-5. Üzerinde **yedeklemeyi Durdur** menüsünde korumak veya veri silmeyi seçin. İsterseniz, nedeni ve açıklama sağlayın.
+    ![Yedeklemeyi Durdur menüsünde verileri tutma veya silme](./media/backup-azure-sql-database/stop-backup-button.png)
 
-    ![Tutmak mı yedeklemeyi Durdur menüsünde verilerini sil](./media/backup-azure-sql-database/stop-backup-button.png)
+6. **Yedeklemeyi Durdur**' u seçin.
 
-6. Seçin **yedeklemeyi Durdur**.
-
->
 > [!NOTE]
-Başvuru aşağıda silme veri seçeneği hakkında daha fazla bilgi için SSS: <br/>
-* [Bir veritabanı bir autoprotected örneğinden silerseniz, yedekleri gerçekleştirilecek?](faq-backup-sql-server.md#if-i-delete-a-database-from-an-autoprotected-instance-what-will-happen-to-the-backups)<br/>
-* [Yedekleme işlemi autoprotected veritabanı durdurursanız ne davranışını olacaktır?](faq-backup-sql-server.md#if-i-change-the-name-of-the-database-after-it-has-been-protected-what-will-be-the-behavior)
+>
+>Verileri Sil seçeneği hakkında daha fazla bilgi için aşağıdaki SSS bölümüne bakın:
+>
+>- [Bir veritabanını bir yeniden korunan örnekten silersem, yedeklemelere ne olur?](faq-backup-sql-server.md#if-i-delete-a-database-from-an-autoprotected-instance-what-will-happen-to-the-backups)
+>- [Otomatik korumalı bir veritabanının yedekleme işlemini durdurdum, davranışı ne olur?](faq-backup-sql-server.md#if-i-change-the-name-of-the-database-after-it-has-been-protected-what-will-be-the-behavior)
 >
 >
 
+## <a name="resume-protection-for-a-sql-database"></a>Bir SQL veritabanı için korumayı sürdürür
 
-## <a name="resume-protection-for-a-sql-database"></a>SQL veritabanı korumasını sürdürme
+SQL veritabanı için korumayı durdurduğunuzda, **yedekleme verilerini sakla** seçeneğini belirlerseniz, daha sonra korumayı devam ettirebilirsiniz. Yedekleme verilerini korumazsanız korumaya devam edebilirsiniz.
 
-Ne zaman durdurmanız SQL veritabanı için korumayı seçerseniz **yedekleme verilerini koru** seçeneği, daha sonra korumayı devam edebilirsiniz. Yedekleme verileri korumaz, koruma sürdüremezsiniz.
+Bir SQL veritabanı için korumayı sürdürmesini sağlamak için:
 
-Bir SQL veritabanı için korumayı sürdürmek için:
+1. Yedekleme öğesini açın ve yedeklemeyi yeniden **başlatma**' yı seçin.
 
-1. Yedekleme öğesi açın ve seçin **yedeklemeyi Sürdür**.
+    ![Veritabanı korumasını sürdürmesini sağlamak için yedeklemeyi sürdürür ' ı seçin](./media/backup-azure-sql-database/resume-backup-button.png)
 
-    ![Veritabanı korumayı sürdürmek için yedeklemeyi Sürdür eylemi seçin](./media/backup-azure-sql-database/resume-backup-button.png)
+2. **Yedekleme ilkesi** menüsünde bir ilke seçin ve ardından **Kaydet**' i seçin.
 
-2. Üzerinde **yedekleme İlkesi** menüsünde, bir ilkeyi seçin ve ardından **Kaydet**.
+## <a name="run-an-on-demand-backup"></a>İsteğe bağlı yedekleme çalıştırma
 
-## <a name="run-an-on-demand-backup"></a>Bir talep üzerine yedekleme gerçekleştirin
+İsteğe bağlı yedeklemelerin farklı türlerini çalıştırabilirsiniz:
 
-Farklı türde isteğe bağlı yedeklemeler çalıştırabilirsiniz:
+- Tam yedekleme
+- Salt kopya tam yedekleme
+- Değişiklik yedeği
+- Günlük yedekleme
 
-* Tam yedekleme
-* Yalnızca kopya tam yedekleme
-* Değişiklik yedeği
-* Günlük yedekleme
+Yalnızca kopya tam yedekleme için saklama süresini belirtmeniz gerektiğinde, isteğe bağlı tam yedekleme için bekletme aralığı otomatik olarak geçerli zamandan 45 gün olarak ayarlanır.
 
-Yalnızca kopya tam yedekleme bekletme süresini belirtmek düzeltmeniz gerekirken, diğer yedekleme türleri için bekletme aralığı geçerli saatten 30 gün için otomatik olarak ayarlanır. <br/>
-Daha fazla bilgi için [SQL Server Yedekleme türleri](backup-architecture.md#sql-server-backup-types).
+Daha fazla bilgi için bkz. [SQL Server yedekleme türleri](backup-architecture.md#sql-server-backup-types).
 
-## <a name="unregister-a-sql-server-instance"></a>SQL Server örneği kaydı
+## <a name="unregister-a-sql-server-instance"></a>SQL Server örneğinin kaydını silme
 
-Bir SQL Server örneği koruma devre dışı bıraktıktan sonra ancak kasayı silmeden önce kaydı:
+Korumayı devre dışı bıraktıktan sonra ancak kasayı silmeden önce bir SQL Server örneğinin kaydını kaldırın:
 
-1. Kasa panosunda altında **Yönet**seçin **Yedekleme Altyapısı**.  
+1. Kasa panosunda, **Yönet**altında, **Yedekleme altyapısı**' nı seçin.  
 
-   ![Yedekleme Altyapısı'nı seçin](./media/backup-azure-sql-database/backup-infrastructure-button.png)
+   ![Yedekleme altyapısını seçin](./media/backup-azure-sql-database/backup-infrastructure-button.png)
 
-2. Altında **yönetim sunucuları**seçin **korumalı sunucuların**.
+2. **Yönetim sunucuları**altında **korumalı sunucular**' ı seçin.
 
    ![Korumalı sunucuları seçin](./media/backup-azure-sql-database/protected-servers.png)
 
-3. İçinde **korumalı sunucuların**, kaydını kaldırmak için sunucuyu seçin. Kasayı silmek için tüm sunucuların kaydını silmeniz gerekir.
+3. **Korumalı sunucular**' da, kaydı kaldırmak istediğiniz sunucuyu seçin. Kasayı silmek için tüm sunucuların kaydını kaldırmanız gerekir.
 
-4. Korumalı sunucuya sağ tıklayın ve seçin **Unregister**.
+4. Korumalı sunucuya sağ tıklayın ve **kayıt kaldır**' ı seçin.
 
-   ![Sil'i seçin](./media/backup-azure-sql-database/delete-protected-server.jpg)
+   ![Sil ' i seçin](./media/backup-azure-sql-database/delete-protected-server.jpg)
 
-## <a name="re-register-extension-on-the-sql-server-vm"></a>SQL Server VM uzantısını yeniden kaydedin
+## <a name="modify-policy"></a>İlkeyi Değiştir
 
-Bazı durumlarda, iş yükü uzantısı VM'de nedenlerinden biri veya diğeri için etkilenen. Bu gibi durumlarda, sanal makinede tetikleyen tüm işlemler başarısız başlar. Ardından, VM uzantısını yeniden kaydetmeniz gerekebilir. **Yeniden kaydolmak** işlemi devam etmek işlemleri için VM üzerinde iş yükü yedekleme uzantısını yükler.  <br>
+Yedekleme sıklığını veya bekletme aralığını değiştirmek için ilkeyi değiştirin.
 
-Bu seçeneği dikkatli önerilir; bir VM'de zaten sağlıklı bir uzantı ile tetiklendiğinde, bu işlem yeniden uzantı neden olur. Bu, başarısız tüm devam eden işler neden olabilir. Lütfen onay için bir veya daha fazla [belirtileri](backup-sql-server-azure-troubleshoot.md#symptoms) yeniden kayıt işlemini tetiklemeden önce.
+> [!NOTE]
+> Saklama döneminde yapılan herhangi bir değişiklik, yeni olanlar da içinde olmak üzere daha eski kurtarma noktalarına daha geriye dönük olarak uygulanır.
+
+Kasa panosunda > **yedekleme Ilkelerini** **Yönet** ' e gidin ve düzenlemek istediğiniz ilkeyi seçin.
+
+  ![Yedekleme ilkesini Yönet](./media/backup-azure-sql-database/modify-backup-policy.png)
+
+  ![Yedekleme ilkesini değiştirme](./media/backup-azure-sql-database/modify-backup-policy-impact.png)
+
+İlke değişikliği, ilişkili tüm yedekleme öğelerini etkiler ve ilgili **yapılandırma koruma** işlerini tetikler.
+
+### <a name="inconsistent-policy"></a>Tutarsız ilke
+
+Bazen bir ilke değiştirme işlemi bazı yedekleme öğeleri için **tutarsız** bir ilke sürümüne yol açabilir. Bu durum, bir ilkeyi değiştir işlemi tetiklendikten sonra ilgili **yapılandırma koruma** işi yedekleme öğesi için başarısız olduğunda gerçekleşir. Yedekleme öğesi görünümünde şu şekilde görünür:
+
+  ![Tutarsız ilke](./media/backup-azure-sql-database/inconsistent-policy.png)
+
+Etkilenen tüm öğelerin ilke sürümünü tek tıklamayla çözebilirsiniz:
+
+  ![Tutarsız ilkeyi çözme](./media/backup-azure-sql-database/fix-inconsistent-policy.png)
+
+## <a name="re-register-extension-on-the-sql-server-vm"></a>SQL Server VM uzantıyı yeniden Kaydet
+
+Bazen, VM 'deki iş yükü uzantısı bir neden veya diğer bir nedenden dolayı etkilenebilir. Bu gibi durumlarda, VM 'de tetiklenen tüm işlemler başarısız olur. Ardından, uzantıyı VM 'de yeniden kaydetmeniz gerekebilir. **Yeniden kaydetme** işlemi devam etmek için VM 'de iş yükü yedekleme uzantısını yeniden yükler.
+
+Bu seçeneği dikkatli bir şekilde kullanın; zaten sağlıklı bir uzantıya sahip bir VM 'de tetiklendiğinde, bu işlem uzantının yeniden başlatılmasına neden olur. Bu, tüm sürmekte olan işlerin başarısız olmasına neden olabilir. Yeniden kaydetme işlemini tetiklemeden önce bir veya daha fazla [belirtiyle](backup-sql-server-azure-troubleshoot.md#re-registration-failures) ilgili bir veya daha fazla belirti olup olmadığını denetleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla bilgi için [bir SQL Server veritabanında yedekleme sorunlarını giderme](backup-sql-server-azure-troubleshoot.md).
+Daha fazla bilgi için bkz. [SQL Server veritabanı üzerindeki yedeklemelerin sorunlarını giderme](backup-sql-server-azure-troubleshoot.md).

@@ -1,77 +1,86 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Form Tanıma Belgeleri
+### YamlMime:Landing
+title: Form Tanıma belgeleri
+summary: Azure Form Tanıma, form belgelerinden anahtar-değer çiftlerini ve tablo verilerini tanımlamak ve ayıklamak için makine öğrenimi teknolojisini kullanan bir bilişsel hizmettir. Ardından, asıl dosyadaki ilişkileri de içeren yapılandırılmış verinin çıktısını verir. Denetimsiz öğrenme, el ile veri etiketleme veya yoğun kodlama ve bakım olmadan, modelin alanlar ve girdiler arasındaki düzen ve ilişkileri anlamasına izin verir.
 metadata:
-  title: API Belgeleri - Form Tanıma - Azure Bilişsel Hizmetler | Microsoft Docs
-  description: Form belgelerinizden akıllıca anahtar değeri ayıklamak için Form Tanıma kullanmayı öğrenin.
+  title: Form Tanıma belgeleri - Hızlı Başlangıçlar, Öğreticiler, API Başvuruları - Azure Bilişsel Hizmetler | Microsoft Docs
+  description: Azure Form Tanıma, form belgelerinden anahtar-değer çiftlerini ve tablo verilerini tanımlamak ve ayıklamak için makine öğrenimi teknolojisini kullanan bir bilişsel hizmettir. Ardından, asıl dosyadaki ilişkileri de içeren yapılandırılmış verinin çıktısını verir. Denetimsiz öğrenme, el ile veri etiketleme veya yoğun kodlama ve bakım olmadan, modelin alanlar ve girdiler arasındaki düzen ve ilişkileri anlamasına izin verir.
   services: cognitive-services
-  author: PatrickFarley
-  manager: cgronlun
   ms.service: cognitive-services
   ms.subservice: form-recognizer
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 04/16/2019
+  author: PatrickFarley
   ms.author: pafarley
-ms.custom: seodec18
-abstract:
-  description: 'Azure Form Tanıma, form belgelerinden anahtar-değer çiftlerini ve tablo verilerini tanımlamak ve ayıklamak için makine öğrenimi teknolojisini kullanan bir bilişsel hizmettir. Ardından, asıl dosyadaki ilişkileri de içeren yapılandırılmış verinin çıktısını verir. Denetimsiz öğrenme, el ile veri etiketleme veya yoğun kodlama ve bakım olmadan, modelin alanlar ve girdiler arasındaki düzen ve ilişkileri anlamasına izin verir.'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: ../media/index/form-recognizer-landing-page-video.png
-      width: 250
-    title: 'Form Tanıma ile yapay zeka destekli işlem otomasyonu (2:15)'
-    href: 'https://channel9.msdn.com/Shows/AI-Show/Learn-about-AI-powered-robotic-process-automation-with-Form-Recognizer'
-    width: 250
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/cognitive-services/form-recognizer/overview
-            html: <p>Form Tanıma hakkında bilgi edinin.</p>
-            image:
-              src: ../media/index/i_overview.svg
-            title: Form Tanıma nedir?
-          - href: /azure/cognitive-services/form-recognizer/form-recognizer-container-howto
-            html: <p>Form ve tablo verisini ayrıştırmak için Form Tanıma kapsayıcısını kullanmayı öğrenin.</p>
-            image:
-              src: ../media/index/i_get-started.svg
-            title: Kapsayıcıları yükleme ve çalıştırma
-          - href: /azure/cognitive-services/form-recognizer/build-training-data-set
-            html: <p>Özel bir modeli eğitmek için iyileştirilmiş bir veri kümesi oluşturun.</p>
-            image:
-              src: ../media/index/i_overview.svg
-            title: Eğitim verileri kümesi oluşturma
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Aşağıdakileri kullanarak bir Form Tanıma modeli eğitin ve veri ayıklayın:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: ./media/logos/logo-curl.svg
-            text: cURL
-            href: quickstarts/curl-train-extract.md
-          - image:
-              src: ./media/logos/logo-python.svg
-            text: Python
-            href: quickstarts/python-train-extract.md
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: API'ler
-            html: '<p><a href="https://aka.ms/form-recognizer/api">Form Tanıma API’si</a></p>'
-          - title: PowerShell
-            html: '<p><a href="https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services">Azure PowerShell</a></p>'
-          - title: CLI
-            html: '<p><a href="https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest#az-cognitiveservices-list">Azure CLI</a></p>'
+  ms.date: 09/05/2019
+  ms.openlocfilehash: 3a3146c6a918916792a331c0dab74683db82a02d
+  ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/25/2019
+  ms.locfileid: "72931296"
+landingContent:
+- title: Form Tanıma hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Form Tanıma nedir?
+      url: overview.md
+  - linkListType: video
+    links:
+    - text: Form Tanıma ile yapay zeka destekli işlem otomasyonu
+      url: https://channel9.msdn.com/Shows/AI-Show/Learn-about-AI-powered-robotic-process-automation-with-Form-Recognizer
+- title: Özel modeli eğitme ve verileri ayıklama
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: .NET SDK’sini kullanma
+      url: quickstarts/dotnet-sdk.md
+    - text: REST API kullanma (Python)
+      url: quickstarts/python-train-extract.md
+    - text: REST API kullanma (cURL)
+      url: quickstarts/curl-train-extract.md
+- title: Makbuzlardan verileri ayıklama
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: .NET SDK’sini kullanma
+      url: quickstarts/dotnet-sdk.md
+- title: Eğitim verileri kümesi oluşturma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Eğitim verileri kümesi oluşturma
+      url: build-training-data-set.md
+- title: Kapsayıcıları kullanma
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Kapsayıcıları yükleme ve çalıştırma
+      url: form-recognizer-container-howto.md
+  - linkListType: how-to-guide
+    links:
+    - text: Kapsayıcıları yapılandırma
+      url: form-recognizer-container-configuration.md
+  - linkListType: deploy
+    links:
+    - text: Kapsayıcı örnekleri kullanma
+      url: deploy-form-recognizer-on-container-instances.md
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Form Tanıma API’si
+      url: https://aka.ms/form-recognizer/api
+    - text: .NET SDK
+      url: https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/formrecognizer?view=azure-dotnet-preview
+    - text: Azure PowerShell
+      url: https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services
+    - text: Azure Komut Satırı Arabirimi (CLI)
+      url: https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest#az-cognitiveservices-list
+- title: Yardım ve geri bildirim
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: UserVoice
+      url: https://go.microsoft.com/fwlink/?linkid=2090535
+    - text: Stack Overflow
+      url: https://go.microsoft.com/fwlink/?linkid=2087186

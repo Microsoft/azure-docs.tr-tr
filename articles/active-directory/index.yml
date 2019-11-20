@@ -3,252 +3,252 @@ title: Azure Active Directory Belgeleri
 summary: Azure Active Directory (Azure AD) çok kiracılı ve bulut tabanlı bir kimlik ve erişim yönetimi hizmetidir.
 brand: azure
 metadata:
-  title: Azure Active Directory Belgeleri - Öğreticiler, API Başvurusu
+  title: Azure Active Directory Belgeleri
   description: Azure Active Directory (Azure AD), Microsoft'un çekirdek dizin hizmetleri, uygulama erişim yönetimi ve kimlik korumasını tek bir çözüm altında birleştiren çok kiracılı, bulut tabanlı dizin ve kimlik yönetimi hizmetidir.
-  author: mtillman
-  manager: daveba
   ms.service: active-directory
   ms.topic: hub-page
-  ms.date: 04/25/2019
-  ms.author: mtillman
   ms.collection: M365-identity-device-management
-  ms.openlocfilehash: 1a019b58d4c2f1e5569cc4e8dd9109e08f313d6c
-  ms.sourcegitcommit: f9448a4d87226362a02b14d88290ad6b1aea9d82
+  author: mtillman
+  ms.author: mtillman
+  manager: daveba
+  ms.date: 07/27/2019
+  ms.openlocfilehash: f3e8495671b56eda804e33b78667cf75cc2f8e70
+  ms.sourcegitcommit: 6cff17b02b65388ac90ef3757bf04c6d8ed3db03
   ms.translationtype: HT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 06/07/2019
-  ms.locfileid: "66481874"
+  ms.lasthandoff: 07/29/2019
+  ms.locfileid: "68607637"
 highlightedContent:
   items:
   - title: Azure AD nedir?
     itemType: overview
-    url: /azure/active-directory/fundamentals/active-directory-whatis
+    url: ./fundamentals/active-directory-whatis.md
   - title: Azure AD'deki yenilikler
     itemType: whats-new
-    url: /azure/active-directory/fundamentals/whats-new
+    url: ./fundamentals/whats-new.md
   - title: Kullanıcılara rol atama
     itemType: how-to-guide
-    url: /azure/active-directory/fundamentals/active-directory-users-assign-role-azure-portal
+    url: ./fundamentals/active-directory-users-assign-role-azure-portal.md
   - title: Grup oluşturma ve üye ekleme
     itemType: how-to-guide
-    url: /azure/active-directory/fundamentals/add-users-azure-active-directory
+    url: ./fundamentals/add-users-azure-active-directory.md
   - title: Azure AD dağıtımı denetim listesi
     itemType: concept
-    url: /azure/active-directory/fundamentals/active-directory-deployment-checklist-p2
+    url: ./fundamentals/active-directory-deployment-checklist-p2.md
   - title: Kiracınıza abonelik ekleme
     itemType: how-to-guide
-    url: /azure/active-directory/fundamentals/active-directory-how-subscriptions-associated-directory
+    url: ./fundamentals/active-directory-how-subscriptions-associated-directory.md
 conceptualContent:
   items:
   - title: Uygulama yönetimi
     links:
-    - url: /azure/active-directory/manage-apps/what-is-single-sign-on
+    - url: ./manage-apps/what-is-single-sign-on.md
       itemType: concept
       text: Çoklu oturum açma (SSO) nedir?
-    - url: /azure/active-directory/manage-apps/user-provisioning
+    - url: ./manage-apps/user-provisioning.md
       itemType: tutorial
       text: Otomatik kullanıcı sağlama
-    - url: /azure/active-directory/manage-apps/application-proxy
+    - url: ./manage-apps/application-proxy.md
       itemType: concept
       text: Şirket içi uygulamalar için Uygulama Ara Sunucusu
     footerLink:
-      url: /azure/active-directory/manage-apps/index
-      text: Daha Fazla Göster
+      url: ./manage-apps/index.yml
+      text: Daha fazla göster
   - title: Kimlik Doğrulaması
     links:
-    - url: /azure/active-directory/authentication/concept-mfa-howitworks
+    - url: ./authentication/concept-mfa-howitworks.md
       itemType: concept
       text: Nasıl çalışır? Azure MFA
-    - url: /azure/active-directory/authentication/concept-sspr-howitworks
+    - url: ./authentication/concept-sspr-howitworks.md
       itemType: concept
       text: Azure AD self servis parola sıfırlama
-    - url: /azure/active-directory/authentication/concept-password-ban-bad
+    - url: ./authentication/concept-password-ban-bad.md
       itemType: concept
       text: Azure AD parola koruması
     footerLink:
-      url: /azure/active-directory/authentication/index
-      text: Daha Fazla Göster
+      url: ./authentication/index.yml
+      text: Daha fazla göster
   - title: İşletmeden İşletmeye (B2B)
     links:
-    - url: /azure/active-directory/b2b/what-is-b2b
+    - url: ./b2b/what-is-b2b.md
       itemType: overview
       text: Azure AD B2B nedir?
-    - url: /azure/active-directory/b2b/add-users-administrator
+    - url: ./b2b/add-users-administrator.md
       itemType: how-to-guide
       text: Portala konuk kullanıcılar ekleme
-    - url: /azure/active-directory/b2b/o365-external-user
+    - url: ./b2b/o365-external-user.md
       itemType: concept
       text: B2B ve Office 365 paylaşımı
     footerLink:
-      url: /azure/active-directory/b2b/index
-      text: Daha Fazla Göster
+      url: ./b2b/index.yml
+      text: Daha fazla göster
   - title: İşletmeden Müşteriye (B2C)
     links:
-    - url: /azure/active-directory-b2c/active-directory-b2c-overview
+    - url: ../active-directory-b2c/active-directory-b2c-overview.md
       itemType: overview
       text: Azure AD B2C nedir?
-    - url: /azure/active-directory-b2c/tutorial-create-tenant
+    - url: ../active-directory-b2c/tutorial-create-tenant.md
       itemType: tutorial
       text: Azure AD B2C kiracısı oluşturma
-    - url: /azure/active-directory-b2c/active-directory-b2c-get-started-custom
+    - url: ../active-directory-b2c/active-directory-b2c-get-started-custom.md
       itemType: how-to-guide
       text: Azure AD B2C'deki özel ilkeler
     footerLink:
-      url: /azure/active-directory-b2c/index
+      url: ../active-directory-b2c/index.yml
       text: Daha fazla göster
   - title: Koşullu Erişim
     links:
-    - url: /azure/active-directory/conditional-access/overview
+    - url: ./conditional-access/overview.md
       itemType: overview
       text: Koşullu Erişim nedir?
-    - url: /azure/active-directory/conditional-access/app-based-mfa
+    - url: ./conditional-access/app-based-mfa.md
       itemType: quickstart
       text: Belirli uygulamalar için MFA gerektirme
-    - url: /azure/active-directory/conditional-access/location-condition
+    - url: ./conditional-access/location-condition.md
       itemType: concept
       text: Konuma göre koşullar
     footerLink:
-      url: /azure/active-directory/conditional-access/index
+      url: ./conditional-access/index.yml
       text: Daha fazla göster
   - title: Geliştiriciler
     links:
-    - url: /azure/active-directory/develop/about-microsoft-identity-platform
+    - url: ./develop/about-microsoft-identity-platform.md
       itemType: overview
       text: Microsoft kimlik platformu hakkında
-    - url: /azure/active-directory/develop/v2-oauth2-auth-code-flow
+    - url: ./develop/v2-oauth2-auth-code-flow.md
       itemType: concept
       text: OAuth 2.0 kod akışı verme
-    - url: /azure/active-directory/develop/quickstart-register-app
+    - url: ./develop/quickstart-register-app.md
       itemType: quickstart
       text: Microsoft kimlik platformu ile uygulama kaydetme
     footerLink:
-      url: /azure/active-directory/develop/index
+      url: ./develop/index.yml
       text: Daha fazla göster
   - title: Cihaz yönetimi
     links:
-    - url: /azure/active-directory/devices/overview
+    - url: ./devices/overview.md
       itemType: overview
       text: Cihaz yönetimi nedir?
-    - url: /azure/active-directory/devices/hybrid-azuread-join-plan
+    - url: ./devices/hybrid-azuread-join-plan.md
       itemType: how-to-guide
       text: Karma Azure AD katılımını planlama
-    - url: /azure/active-directory/devices/azureadjoin-plan
+    - url: ./devices/azureadjoin-plan.md
       itemType: how-to-guide
       text: Azure AD katılımını planlama
     footerLink:
-      url: /azure/active-directory/devices/index
+      url: ./devices/index.yml
       text: Daha fazla göster
   - title: Etki alanı hizmetleri
     links:
-    - url: /azure/active-directory-domain-services/active-directory-ds-overview
+    - url: ../active-directory-domain-services/active-directory-ds-overview.md
       itemType: overview
       text: Azure AD Etki Alanı Hizmetleri nedir?
-    - url: /azure/active-directory-domain-services/active-directory-ds-getting-started
+    - url: ../active-directory-domain-services/active-directory-ds-getting-started.md
       itemType: quickstart
       text: Azure AD Etki Alanı Hizmetleri'ni etkinleştirme
-    - url: /azure/active-directory-domain-services/active-directory-ds-admin-guide-administer-group-policy
+    - url: ../active-directory-domain-services/active-directory-ds-admin-guide-administer-group-policy.md
       itemType: how-to-guide
       text: Grup ilkesini yönetme
     footerLink:
-      url: /azure/active-directory-domain-services/index
+      url: ../active-directory-domain-services/index.yml
       text: Daha fazla göster
   - title: Kurumsal kullanıcılar
     links:
-    - url: /azure/active-directory/users-groups-roles/groups-create-rule
+    - url: ./users-groups-roles/groups-create-rule.md
       itemType: how-to-guide
       text: Dinamik grup oluşturma
-    - url: /azure/active-directory/users-groups-roles/groups-settings-v2-cmdlets
+    - url: ./users-groups-roles/groups-settings-v2-cmdlets.md
       itemType: how-to-guide
       text: Azure AD grupları için PowerShell
-    - url: /azure/active-directory/users-groups-roles/directory-service-limits-restrictions
+    - url: ./users-groups-roles/directory-service-limits-restrictions.md
       itemType: reference
       text: Azure AD hizmet sınırlamaları ve kısıtlamaları
     footerLink:
-      url: /azure/active-directory/users-groups-roles/index
+      url: ./users-groups-roles/index.yml
       text: Daha fazla göster
   - title: Karma kimlik
     links:
-    - url: /azure/active-directory/hybrid/whatis-hybrid-identity
+    - url: ./hybrid/whatis-hybrid-identity.md
       itemType: overview
       text: Hibrit kimlik nedir?
-    - url: /azure/active-directory/hybrid/how-to-connect-sso
+    - url: ./hybrid/how-to-connect-sso.md
       itemType: how-to-guide
       text: Azure AD Connect ile çoklu oturum açma
-    - url: /azure/active-directory/hybrid/how-to-connect-install-custom
+    - url: ./hybrid/how-to-connect-install-custom.md
       itemType: how-to-guide
       text: Azure AD Connect özel yüklemesi
     footerLink:
-      url: /azure/active-directory/hybrid/index
+      url: ./hybrid/index.yml
       text: Daha fazla göster
   - title: Kimlik idaresi
     links:
-    - url: /azure/active-directory/governance/create-access-review
+    - url: ./governance/create-access-review.md
       itemType: how-to-guide
       text: Erişim gözden geçirmesi oluşturma
-    - url: /azure/active-directory/governance/perform-access-review
+    - url: ./governance/perform-access-review.md
       itemType: how-to-guide
       text: Erişim gözden geçirmesi başlatma
-    - url: /azure/active-directory/conditional-access/terms-of-use
+    - url: ./conditional-access/terms-of-use.md
       itemType: how-to-guide
       text: Kullanım koşullarını gerekli kılma
     footerLink:
-      url: /azure/active-directory/governance/index
+      url: ./governance/index.yml
       text: Daha fazla göster
   - title: Kimlik koruması
     links:
-    - url: /azure/active-directory/identity-protection/overview
+    - url: ./identity-protection/overview.md
       itemType: overview
       text: Kimlik koruması nedir?
-    - url: /azure/active-directory/identity-protection/quickstart-sign-in-risk-policy
+    - url: ./identity-protection/quickstart-sign-in-risk-policy.md
       itemType: quickstart
       text: Oturum riski algılandığında erişimi engelleme
-    - url: /azure/active-directory/identity-protection/howto-unblock-user
+    - url: ./identity-protection/howto-unblock-user.md
       itemType: how-to-guide
       text: Kullanıcıların engelini kaldırma
     footerLink:
-      url: /azure/active-directory/identity-protection/index
+      url: ./identity-protection/index.yml
       text: Daha fazla göster
   - title: Azure kaynakları için yönetilen kimlikler
     links:
-    - url: /azure/active-directory/managed-identities-azure-resources/tutorial-windows-vm-access-sql
+    - url: ./managed-identities-azure-resources/tutorial-windows-vm-access-sql.md
       itemType: tutorial
       text: Azure SQL'e erişmek için Windows VM kullanma
-    - url: /azure/active-directory/managed-identities-azure-resources/how-to-use-vm-token
+    - url: ./managed-identities-azure-resources/how-to-use-vm-token.md
       itemType: how-to-guide
       text: Belirteç alımı için Azure VM'yi kullanma
-    - url: /azure/active-directory/managed-identities-azure-resources/services-support-managed-identities
+    - url: ./managed-identities-azure-resources/services-support-managed-identities.md
       itemType: concept
       text: Yönetilen kimliği destekleyen hizmetler
     footerLink:
-      url: /azure/active-directory/managed-identities-azure-resources/index
+      url: ./managed-identities-azure-resources/index.yml
       text: Daha fazla göster
   - title: Privileged identity management (PIM)
     links:
-    - url: /azure/active-directory/privileged-identity-management/pim-getting-started
+    - url: ./privileged-identity-management/pim-getting-started.md
       itemType: how-to-guide
       text: PIM kullanmaya başlama
-    - url: /azure/active-directory/privileged-identity-management/pim-how-to-activate-role
+    - url: ./privileged-identity-management/pim-how-to-activate-role.md
       itemType: how-to-guide
       text: Dizin rollerimi etkinleştirme
-    - url: /azure/active-directory/privileged-identity-management/pim-how-to-add-role-to-user
+    - url: ./privileged-identity-management/pim-how-to-add-role-to-user.md
       itemType: how-to-guide
       text: Dizin rolleri atama
     footerLink:
-      url: /azure/active-directory/privileged-identity-management/index
+      url: ./privileged-identity-management/index.yml
       text: Daha fazla göster
   - title: Raporlar ve izleme
     links:
-    - url: /azure/active-directory/reports-monitoring/concept-audit-logs
+    - url: ./reports-monitoring/concept-audit-logs.md
       itemType: concept
       text: Denetim günlükleri
-    - url: /azure/active-directory/reports-monitoring/concept-sign-ins
+    - url: ./reports-monitoring/concept-sign-ins.md
       itemType: concept
       text: Oturum açma günlükleri
-    - url: /azure/active-directory/reports-monitoring/reference-sign-ins-error-codes
+    - url: ./reports-monitoring/reference-sign-ins-error-codes.md
       itemType: reference
       text: Oturum açma hata kodları başvurusu
     footerLink:
-      url: /azure/active-directory/reports-monitoring/index
+      url: ./reports-monitoring/index.yml
       text: Daha fazla göster
 additionalContent:
   sections:

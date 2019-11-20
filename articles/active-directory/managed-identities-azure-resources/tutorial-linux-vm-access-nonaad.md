@@ -15,12 +15,12 @@ ms.workload: identity
 ms.date: 11/20/2017
 ms.author: markvi
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e7a4ce0419e3a5615cc5a6d57fe2f1cfecad2f09
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 26d434069870fbfa52687a3abc7913fd121687a1
+ms.sourcegitcommit: e97a0b4ffcb529691942fc75e7de919bc02b06ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66228569"
+ms.lasthandoff: 09/15/2019
+ms.locfileid: "71000069"
 ---
 # <a name="tutorial-use-a-linux-vm-system-assigned-managed-identity-to-access-azure-key-vault"></a>Öğretici: Azure Key Vault'a erişmek için Linux VM sistem tarafından atanan yönetilen kimliği kullanma 
 
@@ -70,7 +70,7 @@ Bu adımları tamamlamak bir SSH istemciniz olmalıdır.  Windows kullanıyorsa
  
 1. Portalda Linux VM’nize gidin ve **Genel Bakış**’ta **Bağlan**’a tıklayın. 
 2. Tercih ettiğiniz SSH istemcisiyle VM’ye bağlanmak için **Bağlan**’ı seçin. 
-3. Terminal penceresinde CURL, kullanarak Azure Key Vault için erişim belirteci almak Azure kaynaklarını uç noktası için yönetilen yerel kimlikler için bir istek olun.  
+3. Terminal penceresinde, KıVRıMLı ' ı kullanarak, Azure Key Vault için bir erişim belirteci almak üzere Azure kaynakları uç noktası için yerel yönetilen kimliklere bir istek oluşturun.  
  
     Erişim belirteci için CURL isteği aşağıda yer alır.  
     
@@ -110,7 +110,7 @@ Key Vault'tan gizli diziyi aldıktan sonra, bunu kullanarak ad ve parola gerekti
 Bu öğreticide, Azure Key Vault'a erişmek için Linux VM sistem tarafından atanan yönetilen kimlik kullanmayı öğrendiniz.  Azure Key Vault hakkında daha fazla bilgi edinmek için bkz:
 
 > [!div class="nextstepaction"]
->[Azure Anahtar Kasası.](/azure/key-vault/key-vault-whatis)
+>[Azure Anahtar Kasası.](/azure/key-vault/key-vault-overview)
 
 
 

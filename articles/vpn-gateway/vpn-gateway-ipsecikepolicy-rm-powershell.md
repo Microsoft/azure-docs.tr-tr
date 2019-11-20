@@ -1,6 +1,7 @@
 ---
-title: 'S2S VPN veya VNet-VNet bağlantıları için IPSec/IKE ilkesi yapılandırın: Azure Resource Manager: PowerShell | Microsoft Docs'
-description: S2S veya VNet-VNet bağlantıları için IPSec/IKE İlkesi, Azure Resource Manager ve PowerShell kullanarak Azure VPN Gateways ile yapılandırın.
+title: Sanal ağdan sanal ağa bağlantılar & S2S VPN için IPSec/ıKE ilkesi
+titleSuffix: Azure VPN Gateway
+description: Azure Resource Manager ve PowerShell kullanarak Azure VPN ağ geçitleriyle S2S veya VNet-VNet bağlantıları için IPSec/ıKE ilkesi yapılandırın.
 services: vpn-gateway
 documentationcenter: na
 author: yushwang
@@ -15,93 +16,93 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/14/2018
 ms.author: yushwang
-ms.openlocfilehash: d04d62d66b4ba22437e6d854566f8bbf5536a6fc
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b0dabf0ee3370abab3d0f9d6f1bf26dd622862cf
+ms.sourcegitcommit: 5cfe977783f02cd045023a1645ac42b8d82223bd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66121102"
+ms.lasthandoff: 11/17/2019
+ms.locfileid: "74151790"
 ---
-# <a name="configure-ipsecike-policy-for-s2s-vpn-or-vnet-to-vnet-connections"></a>S2S VPN veya VNet-VNet bağlantıları için IPSec/IKE ilkesi yapılandırma
+# <a name="configure-ipsecike-policy-for-s2s-vpn-or-vnet-to-vnet-connections"></a>S2S VPN veya VNet-VNet bağlantıları için IPSec/ıKE ilkesini yapılandırma
 
-Bu makalede Resource Manager dağıtım modeli ve PowerShell kullanarak siteden siteye VPN veya VNet-VNet bağlantıları için IPSec/IKE ilke yapılandırma adımlarında size kılavuzluk eder.
+Bu makale, Kaynak Yöneticisi dağıtım modelini ve PowerShell 'i kullanarak siteden siteye VPN veya VNet-VNet bağlantıları için IPSec/ıKE ilkesini yapılandırma adımlarında size yol gösterir.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-## <a name="about"></a>IPSec ve IKE ilke parametreleri hakkında Azure VPN ağ geçitleri
-IPSec ve IKE protokolü standart çeşitli birleşimler çok çeşitli şifreleme algoritmalarını destekler. Başvurmak [şifreleme gereksinimleri ve Azure VPN ağ geçitleri hakkında](vpn-gateway-about-compliance-crypto.md) nasıl bu sağlamaya yardımcı olabileceğini görmek için şirketler arası ve VNet-VNet bağlantısı, uyumluluk veya güvenlik gereksinimleri karşılar.
+## <a name="about"></a>Azure VPN ağ geçitleri için IPSec ve ıKE ilke parametreleri hakkında
+IPSec ve ıKE protokol standardı çeşitli birleşimlerde çok sayıda şifreleme algoritmasını destekler. Bunun şirket içi ve VNet 'ten VNet 'e bağlantısının uyumluluk veya güvenlik gereksinimlerinizi karşılamasını sağlamaya nasıl yardımcı olduğunu görmek için [Şifreleme gereksinimleri ve Azure VPN ağ geçitleri hakkında](vpn-gateway-about-compliance-crypto.md) bölümüne bakın.
 
-Bu makale, oluşturup bir IPSec/IKE ilkesi yapılandırma ve yeni veya var olan bağlantı uygulamak için yönergeler sağlar:
+Bu makalede bir IPSec/ıKE İlkesi oluşturup yapılandırma ve yeni veya mevcut bir bağlantı için geçerli olan yönergeler sağlanmaktadır:
 
-* [Bölüm 1 - oluşturun ve IPSec/IKE İlkesi ayarlamak için iş akışı](#workflow)
-* [Bölüm 2 - desteklenen şifreleme algoritmaları ve anahtar güçleriyle](#params)
-* [3. Kısım - yeni bir S2S VPN bağlantısı IPSec/IKE ilke oluşturun](#crossprem)
-* [Bölüm 4 - yeni bir VNet-VNet bağlantı IPSec/IKE İlkesi ile oluşturma](#vnet2vnet)
-* [Bölüm 5 - yönetme (oluşturma, ekleme, kaldırma) için bir bağlantı IPSec/IKE İlkesi](#managepolicy)
+* [Bölüm 1-IPSec/ıKE ilkesi oluşturmak ve ayarlamak için Iş akışı](#workflow)
+* [Bölüm 2-desteklenen şifreleme algoritmaları ve anahtar güçleri](#params)
+* [3. kısım-IPSec/ıKE ilkesiyle yeni bir S2S VPN bağlantısı oluşturma](#crossprem)
+* [Bölüm 4-IPSec/ıKE ilkesiyle yeni VNet-VNet bağlantısı oluşturma](#vnet2vnet)
+* [5. bölüm-bir bağlantı için IPSec/ıKE İlkesi yönetme (oluşturma, ekleme, kaldırma)](#managepolicy)
 
 > [!IMPORTANT]
-> 1. IPSec/IKE ilkesi yalnızca aşağıdaki ağ geçidi SKU'ları üzerinde çalıştığını unutmayın:
+> 1. IPSec/ıKE ilkesinin yalnızca aşağıdaki ağ geçidi SKU 'Larında çalışmadığını unutmayın:
 >    * ***VpnGw1, VpnGw2, VpnGw3*** (rota tabanlı)
 >    * ***Standart*** ve ***HighPerformance*** (rota tabanlı)
 > 2. Belirli bir bağlantı için yalnızca ***bir*** ilke birleşimi belirtebilirsiniz.
-> 3. Hem IKE (ana mod) hem de IPSec (hızlı mod) için tüm algoritmaları ve parametreleri belirtmeniz gerekir. Kısmi ilke belirtimine izin verilmez.
-> 4. İlke, şirket içi VPN cihazlarınızda desteklenen emin olmak için VPN cihaz satıcısı belirtimlerine başvurun. S2S veya VNet-VNet bağlantılarında ilkelerine uyumlu olup olmadığını kurulamıyor.
+> 3. IKE (ana mod) ve IPSec (hızlı mod) için tüm algoritmaları ve parametreleri belirtmeniz gerekir. Kısmi ilke belirtimine izin verilmez.
+> 4. İlkenin şirket içi VPN cihazlarınızda desteklendiğinden emin olmak için, VPN cihazınızın satıcı belirtimlerinize başvurun. İlkeler uyumsuz ise, S2S veya VNet-VNet bağlantıları kurulamaz.
 
-## <a name ="workflow"></a>Bölüm 1 - oluşturun ve IPSec/IKE İlkesi ayarlamak için iş akışı
-Bu bölümde, iş akışı oluşturma ve S2S VPN veya VNet-VNet bağlantı IPSec/IKE ilkesini güncelleştirme özetlenmektedir:
+## <a name ="workflow"></a>Bölüm 1-IPSec/ıKE ilkesi oluşturmak ve ayarlamak için Iş akışı
+Bu bölümde, bir S2S VPN veya VNet-VNet bağlantısında IPSec/ıKE ilkesi oluşturma ve güncelleştirme için iş akışı özetlenmektedir:
 1. Sanal ağ ve VPN ağ geçidi oluşturma
-2. Bir yerel ağ geçidi arası şirket içi bağlantı veya başka bir sanal ağ ve VNet-VNet bağlantısı için ağ geçidi oluşturma
-3. Seçili algoritmaları ve parametrelerle IPSec/IKE ilkesi oluşturma
-4. IPSec/IKE ilke (IPSec veya VNet2VNet) bir bağlantı oluşturun
-5. Ekleme/güncelleştirme/kaldırma için mevcut bir bağlantıyı bir IPSec/IKE İlkesi
+2. Şirket içi bağlantı için bir yerel ağ geçidi veya VNet-VNet bağlantısı için başka bir sanal ağ ve Ağ Geçidi oluşturun
+3. Seçili algoritmalara ve parametrelere sahip bir IPSec/ıKE ilkesi oluşturma
+4. IPSec/ıKE ilkesiyle bağlantı (IPSec veya VNet2VNet) oluşturma
+5. Mevcut bir bağlantı için IPSec/ıKE ilkesi ekleme/güncelleştirme/kaldırma
 
-Bu makaledeki yönergeleri ayarlamak ve diyagramda gösterildiği gibi IPSec/IKE ilkelerini yapılandırmanıza yardımcı olur:
+Bu makaledeki yönergeler, diyagramda gösterildiği gibi IPSec/ıKE ilkelerini ayarlamanıza ve yapılandırmanıza yardımcı olur:
 
-![IPSec IKE İlkesi](./media/vpn-gateway-ipsecikepolicy-rm-powershell/ipsecikepolicy.png)
+![IPSec-IKE-Policy](./media/vpn-gateway-ipsecikepolicy-rm-powershell/ipsecikepolicy.png)
 
-## <a name ="params"></a>Bölüm 2 - desteklenen şifreleme algoritmaları ve anahtar güçleriyle
+## <a name ="params"></a>2. Bölüm-desteklenen şifreleme algoritmaları & anahtar güçlerinin
 
-Aşağıdaki tabloda, şifreleme algoritmaları ve anahtar güçleri müşteriler tarafından listelenmektedir:
+Aşağıdaki tabloda, müşteriler tarafından yapılandırılabilen desteklenen şifreleme algoritmaları ve anahtar güçleri listelenmektedir:
 
 | **IPsec/IKEv2**  | **Seçenekler**    |
 | ---  | --- 
 | IKEv2 Şifrelemesi | AES256, AES192, AES128, DES3, DES  
 | IKEv2 Bütünlüğü  | SHA384, SHA256, SHA1, MD5  |
-| DH Grubu         | DHGroup24, ECP384, ECP256, DHGroup14, DHGroup2048, DHGroup2, DHGroup1, hiçbiri |
+| DH Grubu         | DHGroup24, ECP384, ECP256, DHGroup14, DHGroup2048, DHGroup2, DHGroup1, None |
 | IPsec Şifrelemesi | GCMAES256, GCMAES192, GCMAES128, AES256, AES192, AES128, DES3, DES, None    |
 | IPsec Bütünlüğü  | GCMASE256, GCMAES192, GCMAES128, SHA256, SHA1, MD5 |
 | PFS Grubu        | PFS24, ECP384, ECP256, PFS2048, PFS2, PFS1, Hiçbiri 
-| QM SA Yaşam Süresi   | (**İsteğe bağlı**: varsayılan değerleri kullanılan belirtilmediğinde)<br>Saniye (tamsayı; **en az 300**/varsayılan 27000 saniye)<br>Kilobayt (tamsayı; **en az 1024**/varsayılan 102400000 kilobayt)   |
-| Trafik Seçicisi | UsePolicyBasedTrafficSelectors ** ($True/$False; **İsteğe bağlı**, varsayılan $False belirtilmediğinde)    |
+| QM SA Yaşam Süresi   | (**Isteğe bağlı**: belirtilmemişse varsayılan değerler kullanılır)<br>Saniye (tamsayı; **en az 300**/varsayılan 27000 saniye)<br>Kilobayt (tamsayı; **en az 1024**/varsayılan 102400000 kilobayt)   |
+| Trafik Seçicisi | UsePolicyBasedTrafficSelectors * * ($True/$False; **Isteğe bağlı**, varsayılan $false belirtilmemişse)    |
 |  |  |
 
 > [!IMPORTANT]
-> 1. **Şirket içi VPN cihazınızın yapılandırması ile aynı veya aşağıdaki algoritmaları ve Azure IPSec/IKE ilkesinde belirttiğiniz parametreleri içerir:**
->    * IKE şifreleme algoritması (ana mod / 1. Aşama)
->    * IKE bütünlük algoritması (ana mod / 1. Aşama)
->    * DH grubu (ana mod / Aşama 1)
->    * IPSec şifreleme algoritması (hızlı mod / 2. Aşama)
->    * IPSec bütünlük algoritması (hızlı mod / 2. Aşama)
->    * PFS grubu (hızlı mod / Aşama 2)
->    * Seçici (UsePolicyBasedTrafficSelectors kullanılıyorsa) trafiği
+> 1. **Şirket içi VPN cihaz yapılandırmanızın Azure IPSec/ıKE ilkesinde belirttiğiniz aşağıdaki algoritmaların ve parametrelerin eşleşmesi veya içermesi gerekir:**
+>    * IKE şifreleme algoritması (ana mod/Aşama 1)
+>    * IKE bütünlük algoritması (ana mod/Aşama 1)
+>    * DH grubu (ana mod/Aşama 1)
+>    * IPSec şifreleme algoritması (hızlı mod/aşama 2)
+>    * IPSec bütünlük algoritması (hızlı mod/aşama 2)
+>    * PFS Grubu (hızlı mod/aşama 2)
+>    * Trafik seçicisi (UsePolicyBasedTrafficSelectors kullanılıyorsa)
 >    * SA yaşam süreleri yalnızca yerel belirtimlerdir ve bunların eşleşmesi gerekmez.
 >
-> 2. **GCMAES IPSec şifreleme algoritması için kullanılırsa, IPSec bütünlüğü için aynı GCMAES algoritmasını ve anahtar uzunluğu seçmeniz gerekir; Örneğin, her ikisi için GCMAES128 kullanma**
+> 2. **IPSec şifreleme algoritması için GCMAES kullanılıyorsa, IPSec bütünlüğü için aynı GCMAES algoritmasını ve anahtar uzunluğunu seçmeniz gerekir; Örneğin, her ikisi için GCMAES128 kullanma**
 > 3. Yukarıdaki tabloda:
->    * Ikev2 ana modu veya 1. Aşama karşılık gelir.
->    * IPSec hızlı mod veya Aşama 2'ye karşılık gelir.
->    * DH grubu, Diffie-Hellmen ana mod veya 1. Aşama kullanılan grubun belirtir
->    * PFS grubu, Diffie-Hellmen hızlı mod veya 2. Aşama kullanılan grubun belirtilen
+>    * Ikev2 ana moda veya 1 aşamasına karşılık gelir
+>    * IPSec, hızlı moda veya Aşama 2 ' ye karşılık gelir
+>    * DH grubu ana modda veya 1. aşamada kullanılan Diffie-Hellmence grubunu belirtir
+>    * PFS Grubu, Hızlı modda veya Aşama 2 ' de kullanılan Diffie-Hellmence grubunu belirtti
 > 4. Azure VPN ağ geçitlerinde IKEv2 Ana Modu SA yaşam süresi 28.800 saniye olarak sabitlenmiştir
-> 5. "UsePolicyBasedTrafficSelectors" bir bağlantıda $True olarak ayarlanması, Azure VPN ağ geçidi, şirket içi VPN Güvenlik Duvarı ilke tabanlı bağlanmak için yapılandırın. PolicyBasedTrafficSelectors etkinleştirirseniz, VPN cihazınız yerine (yerel ağ geçidi) ön ekleri için/Azure sanal ağ ön ekleri, ağ, şirket içi tüm birleşimlerle tanımlanmış eşleşen trafik seçicileri sahip olduğundan emin olmak gerekir herhangi bir ağdan herhangi. Örneğin, şirket içi ağınızın ön ekleri 10.1.0.0/16 ve 10.2.0.0/16; sanal ağınızın ön ekleriyse 192.168.0.0/16 ve 172.16.0.0/16 şeklindeyse, aşağıdaki trafik seçicileri belirtmeniz gerekir:
+> 5. "UsePolicyBasedTrafficSelectors" bağlantısının bir bağlantıda $True olarak ayarlanması, Azure VPN ağ geçidini şirket içi ilke tabanlı VPN güvenlik duvarına bağlanacak şekilde yapılandırır. PolicyBasedTrafficSelectors ' ı etkinleştirirseniz, VPN cihazınızın, şirket içi ağ (yerel ağ geçidi) öneklerinizin tüm birleşimleri ile, Azure sanal ağ öneklerinden herhangi birine ve bunlardan herhangi birine kadar tanımlanmış olan eşleşen trafik seçicileri olduğundan emin olmanız gerekir. Örneğin, şirket içi ağınızın ön ekleri 10.1.0.0/16 ve 10.2.0.0/16; sanal ağınızın ön ekleriyse 192.168.0.0/16 ve 172.16.0.0/16 şeklindeyse, aşağıdaki trafik seçicileri belirtmeniz gerekir:
 >    * 10.1.0.0/16 <====> 192.168.0.0/16
 >    * 10.1.0.0/16 <====> 172.16.0.0/16
 >    * 10.2.0.0/16 <====> 192.168.0.0/16
 >    * 10.2.0.0/16 <====> 172.16.0.0/16
 
-İlke tabanlı trafik seçicileri hakkında daha fazla bilgi için bkz. [birden çok şirket içi ilke tabanlı VPN cihazını bağlama](vpn-gateway-connect-multiple-policybased-rm-ps.md).
+İlke tabanlı trafik seçicileri hakkında daha fazla bilgi için bkz. [birden çok şirket içi ilke tabanlı VPN cihazlarını bağlama](vpn-gateway-connect-multiple-policybased-rm-ps.md).
 
-Aşağıdaki tabloda özel ilke tarafından desteklenen karşılık gelen Diffie-Hellman grupları listelenmiştir:
+Aşağıdaki tabloda özel ilke tarafından desteklenen karşılık gelen Diffie-Hellman grupları listelenmektedir:
 
 | **Diffie-Hellman Grubu**  | **DHGroup**              | **PFSGroup** | **Anahtar uzunluğu** |
 | --- | --- | --- | --- |
@@ -109,29 +110,29 @@ Aşağıdaki tabloda özel ilke tarafından desteklenen karşılık gelen Diffie
 | 2                         | DHGroup2                 | PFS2         | 1024 bit MODP  |
 | 14                        | DHGroup14<br>DHGroup2048 | PFS2048      | 2048 bit MODP  |
 | 19                        | ECP256                   | ECP256       | 256 bit ECP    |
-| 20                        | ECP384                   | ECP284       | 384 bit ECP    |
+| 20                        | ECP384                   | ECP384       | 384 bit ECP    |
 | 24                        | DHGroup24                | PFS24        | 2048 bit MODP  |
 
 Diğer ayrıntılar için [RFC3526](https://tools.ietf.org/html/rfc3526)ve [RFC5114](https://tools.ietf.org/html/rfc5114)’e bakın.
 
-## <a name ="crossprem"></a>3. Kısım - yeni bir S2S VPN bağlantısı IPSec/IKE ilke oluşturun
+## <a name ="crossprem"></a>3. kısım-IPSec/ıKE ilkesiyle yeni bir S2S VPN bağlantısı oluşturma
 
-Bu bölümde bir IPSec/IKE İlkesi ile bir S2S VPN bağlantısı oluşturma adımlarında size kılavuzluk eder. Aşağıdaki adımlar, diyagramda da görüldüğü gibi bağlantıyı oluşturun:
+Bu bölüm, IPSec/ıKE ilkesiyle bir S2S VPN bağlantısı oluşturma adımlarında size yol gösterir. Aşağıdaki adımlar diyagramda gösterilen bağlantıyı oluşturur:
 
-![s2s-policy](./media/vpn-gateway-ipsecikepolicy-rm-powershell/s2spolicy.png)
+![S2S-ilke](./media/vpn-gateway-ipsecikepolicy-rm-powershell/s2spolicy.png)
 
-Bkz: [S2S VPN bağlantısı oluşturma](vpn-gateway-create-site-to-site-rm-powershell.md) daha ayrıntılı bir S2S VPN bağlantısı oluşturmak için adım adım yönergeler için.
+S2S VPN bağlantısı oluşturmaya yönelik daha ayrıntılı adım adım yönergeler için bkz. [S2S VPN bağlantısı oluşturma](vpn-gateway-create-site-to-site-rm-powershell.md) .
 
 ### <a name="before"></a>Başlamadan önce
 
 * Azure aboneliğiniz olduğunu doğrulayın. Henüz Azure aboneliğiniz yoksa [MSDN abonelik avantajlarınızı](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/) etkinleştirebilir veya [ücretsiz bir hesap](https://azure.microsoft.com/pricing/free-trial/) için kaydolabilirsiniz.
-* Azure Resource Manager PowerShell cmdlet'lerini yükleyin. Bkz: [genel bakış, Azure PowerShell](/powershell/azure/overview) PowerShell cmdlet'lerini yükleme hakkında daha fazla bilgi.
+* Azure Resource Manager PowerShell cmdlet 'lerini yükler. PowerShell cmdlet 'lerini yükleme hakkında daha fazla bilgi için bkz. [Azure PowerShell genel bakış](/powershell/azure/overview) .
 
-### <a name="createvnet1"></a>1. adım - sanal ağ VPN ağ geçidi ve yerel ağ geçidi oluşturma
+### <a name="createvnet1"></a>1. adım-sanal ağ, VPN Gateway ve yerel ağ geçidi oluşturma
 
-#### <a name="1-declare-your-variables"></a>1. Değişkenlerinizi bildirme
+#### <a name="1-declare-your-variables"></a>1. değişkenlerinizi bildirin
 
-Bu alıştırmada değişkenlerimizi bildirerek başlayın. Üretim için yapılandırma sırasında bu değerleri kendi değerlerinizle değiştirdiğinizden emin olun.
+Bu alıştırma için değişkenlerimizi bildirerek başlayacağız. Üretim için yapılandırma sırasında bu değerleri kendi değerlerinizle değiştirdiğinizden emin olun.
 
 ```powershell
 $Sub1          = "<YourSubscriptionName>"
@@ -158,7 +159,7 @@ $LNGPrefix62   = "10.62.0.0/16"
 $LNGIP6        = "131.107.72.22"
 ```
 
-#### <a name="2-connect-to-your-subscription-and-create-a-new-resource-group"></a>2. Aboneliğinize bağlanın ve yeni bir kaynak grubu oluşturun
+#### <a name="2-connect-to-your-subscription-and-create-a-new-resource-group"></a>2. aboneliğinize bağlanın ve yeni bir kaynak grubu oluşturun
 
 Resource Manager cmdlet’lerini kullanmak için PowerShell moduna geçtiğinizden emin olun. Daha fazla bilgi için [Windows PowerShell’i Resource Manager ile kullanma](../powershell-azure-resource-manager.md) konusuna bakın.
 
@@ -170,9 +171,9 @@ Select-AzSubscription -SubscriptionName $Sub1
 New-AzResourceGroup -Name $RG1 -Location $Location1
 ```
 
-#### <a name="3-create-the-virtual-network-vpn-gateway-and-local-network-gateway"></a>3. Sanal ağ VPN ağ geçidi ve yerel ağ geçidi oluşturma
+#### <a name="3-create-the-virtual-network-vpn-gateway-and-local-network-gateway"></a>3. sanal ağı, VPN ağ geçidini ve yerel ağ geçidini oluşturun
 
-Aşağıdaki örnek, sanal ağı, üç alt ağ ile testvnet1'i ve VPN ağ geçidi oluşturur. Kendi değerlerinizi yerleştirirken ağ geçidi alt ağınızı özellikle GatewaySubnet olarak adlandırmanız önem taşır. Başka bir ad kullanırsanız ağ geçidi oluşturma işleminiz başarısız olur.
+Aşağıdaki örnek, TestVNet1, üç alt ağ ve VPN ağ geçidi ile sanal ağ oluşturur. Kendi değerlerinizi yerleştirirken ağ geçidi alt ağınızı özellikle GatewaySubnet olarak adlandırmanız önem taşır. Başka bir ad kullanırsanız ağ geçidi oluşturma işleminiz başarısız olur.
 
 ```powershell
 $fesub1 = New-AzVirtualNetworkSubnetConfig -Name $FESubName1 -AddressPrefix $FESubPrefix1
@@ -191,24 +192,24 @@ New-AzVirtualNetworkGateway -Name $GWName1 -ResourceGroupName $RG1 -Location $Lo
 New-AzLocalNetworkGateway -Name $LNGName6 -ResourceGroupName $RG1 -Location $Location1 -GatewayIpAddress $LNGIP6 -AddressPrefix $LNGPrefix61,$LNGPrefix62
 ```
 
-### <a name="s2sconnection"></a>2. adım - bir IPSec/IKE İlkesi ile bir S2S VPN bağlantısı oluşturma
+### <a name="s2sconnection"></a>2. adım-IPSec/ıKE ilkesiyle bir S2S VPN bağlantısı oluşturma
 
-#### <a name="1-create-an-ipsecike-policy"></a>1. Bir IPSec/IKE ilkesi oluşturma
+#### <a name="1-create-an-ipsecike-policy"></a>1. IPSec/ıKE ilkesi oluşturma
 
-Aşağıdaki örnek betik, aşağıdaki algoritmaları ve parametrelerle bir IPSec/IKE ilkesi oluşturur:
+Aşağıdaki örnek betik, aşağıdaki algoritmalara ve parametrelere sahip bir IPSec/ıKE ilkesi oluşturur:
 
-* Ikev2: AES256, SHA384 DHGroup24
-* IPSec: AES256, SHA256, PFS hiçbiri, SA yaşam süresi 14400 saniye ve değeri 102400000 KB'dir
+* Ikev2: AES256, SHA384, DHGroup24
+* IPSec: AES256, SHA256, PFS yok, SA yaşam süresi 14400 saniye & 102400000KB
 
 ```powershell
 $ipsecpolicy6 = New-AzIpsecPolicy -IkeEncryption AES256 -IkeIntegrity SHA384 -DhGroup DHGroup24 -IpsecEncryption AES256 -IpsecIntegrity SHA256 -PfsGroup None -SALifeTimeSeconds 14400 -SADataSizeKilobytes 102400000
 ```
 
-IPSec için GCMAES kullanırsanız, hem IPSec şifrelemesi hem de bütünlüğü için aynı GCMAES algoritmasını ve anahtar uzunluğu kullanmalısınız. Örneğin yukarıdaki karşılık gelen parametre olacak "-IpsecEncryption GCMAES256 - IpsecIntegrity GCMAES256" GCMAES256 kullanırken.
+IPSec için GCMAES kullanıyorsanız, hem IPSec şifrelemesi hem de bütünlüğü için aynı GCMAES algoritmasını ve anahtar uzunluğunu kullanmanız gerekir. Örneğin, yukarıdaki parametreler, GCMAES256 kullanılırken "-ıpsecencryption GCMAES256-ıpsecıntegrity GCMAES256" olacaktır.
 
-#### <a name="2-create-the-s2s-vpn-connection-with-the-ipsecike-policy"></a>2. S2S VPN bağlantısı IPSec/IKE ilke oluşturun
+#### <a name="2-create-the-s2s-vpn-connection-with-the-ipsecike-policy"></a>2. IPSec/ıKE ilkesiyle S2S VPN bağlantısını oluşturma
 
-Bir S2S VPN bağlantısı oluşturma ve daha önce oluşturduğunuz IPsec/IKE ilke uygulayın.
+Bir S2S VPN bağlantısı oluşturun ve daha önce oluşturulan IPSec/ıKE ilkesini uygulayın.
 
 ```powershell
 $vnet1gw = Get-AzVirtualNetworkGateway -Name $GWName1  -ResourceGroupName $RG1
@@ -217,23 +218,23 @@ $lng6 = Get-AzLocalNetworkGateway  -Name $LNGName6 -ResourceGroupName $RG1
 New-AzVirtualNetworkGatewayConnection -Name $Connection16 -ResourceGroupName $RG1 -VirtualNetworkGateway1 $vnet1gw -LocalNetworkGateway2 $lng6 -Location $Location1 -ConnectionType IPsec -IpsecPolicies $ipsecpolicy6 -SharedKey 'AzureA1b2C3'
 ```
 
-İsteğe bağlı olarak Ekle "-UsePolicyBasedTrafficSelectors $True" Azure VPN ağ geçidi, şirket içi, ilke tabanlı VPN cihazına bağlanmak, yukarıda açıklanan şekilde etkinleştirmek için Oluştur bağlantısını cmdlet'e.
+İsteğe bağlı olarak, yukarıda açıklandığı gibi, Azure VPN ağ geçidinin şirket içi ilke tabanlı VPN cihazlarına bağlanmasını sağlamak için bağlantı oluştur cmdlet 'ine "-UsePolicyBasedTrafficSelectors $True" ekleyebilirsiniz.
 
 > [!IMPORTANT]
-> Bir IPSec/IKE İlkesi, bir bağlantıda belirlendikten sonra Azure VPN ağ geçidi yalnızca göndermek veya belirtilen şifreleme algoritmaları ve anahtar güçleriyle o belirli bağlantı IPSec/IKE teklifi kabul edin. Bağlantı için şirket içi VPN cihazınızın kullandığı veya tam ilke birleşimi, aksi takdirde S2S VPN tüneli değil kuracak kabul emin olun.
+> Bir bağlantı üzerinde IPSec/ıKE ilkesi belirtilmişse, Azure VPN ağ geçidi yalnızca belirtilen şifreleme algoritmalarıyla IPSec/ıKE teklifini ve söz konusu bağlantıda anahtar güçlerini gönderir veya kabul eder. Bağlantı için şirket içi VPN cihazınızın, tam ilke birleşimini kullandığından veya kabul ettiğinden emin olun, aksi takdirde S2S VPN tüneli kurmaz.
 
 
-## <a name ="vnet2vnet"></a>Bölüm 4 - yeni bir VNet-VNet bağlantı IPSec/IKE İlkesi ile oluşturma
+## <a name ="vnet2vnet"></a>Bölüm 4-IPSec/ıKE ilkesiyle yeni VNet-VNet bağlantısı oluşturma
 
-Bir IPSec/IKE İlkesi ile VNet-VNet bağlantısı oluşturmaya yönelik adımlar, S2S VPN bağlantısının benzerdir. Aşağıdaki örnek komut, diyagramda da görüldüğü gibi bağlantıyı oluşturun:
+IPSec/ıKE ilkesiyle VNet-VNet bağlantısı oluşturma adımları S2S VPN bağlantısıyla benzerdir. Aşağıdaki örnek betikler, diyagramda gösterildiği gibi bağlantıyı oluşturur:
 
-![v2v-policy](./media/vpn-gateway-ipsecikepolicy-rm-powershell/v2vpolicy.png)
+![V2V-ilke](./media/vpn-gateway-ipsecikepolicy-rm-powershell/v2vpolicy.png)
 
-Bkz: [bir VNet-VNet bağlantısı oluşturma](vpn-gateway-vnet-vnet-rm-ps.md) daha ayrıntılı bir VNet-VNet bağlantısı oluşturma adımları için. Tamamlamanız gereken [3. Kısım](#crossprem) oluşturma ve TestVNet1 ve VPN ağ geçidi yapılandırma.
+VNET-VNet bağlantısı oluşturmaya yönelik daha ayrıntılı adımlar için bkz. VNET- [VNet bağlantısı oluşturma](vpn-gateway-vnet-vnet-rm-ps.md) . TestVNet1 ve VPN Gateway oluşturmak ve yapılandırmak için [Bölüm 3 ' ü](#crossprem) tamamlamalısınız.
 
-### <a name="createvnet2"></a>1. adım: ikinci sanal ağ ve VPN ağ geçidi oluşturma
+### <a name="createvnet2"></a>1. adım-ikinci sanal ağı ve VPN ağ geçidini oluşturma
 
-#### <a name="1-declare-your-variables"></a>1. Değişkenlerinizi bildirme
+#### <a name="1-declare-your-variables"></a>1. değişkenlerinizi bildirin
 
 Değerleri, yapılandırma için kullanmak istediğiniz değerlerle değiştirdiğinizden emin olun.
 
@@ -257,7 +258,7 @@ $Connection21 = "VNet2toVNet1"
 $Connection12 = "VNet1toVNet2"
 ```
 
-#### <a name="2-create-the-second-virtual-network-and-vpn-gateway-in-the-new-resource-group"></a>2. Yeni kaynak grubunu ikinci sanal ağ ve VPN ağ geçidi oluşturma
+#### <a name="2-create-the-second-virtual-network-and-vpn-gateway-in-the-new-resource-group"></a>2. yeni kaynak grubunda ikinci sanal ağı ve VPN ağ geçidini oluşturun
 
 ```powershell
 New-AzResourceGroup -Name $RG2 -Location $Location2
@@ -276,23 +277,23 @@ $gw2ipconf1 = New-AzVirtualNetworkGatewayIpConfig -Name $GW2IPconf1 -Subnet $sub
 New-AzVirtualNetworkGateway -Name $GWName2 -ResourceGroupName $RG2 -Location $Location2 -IpConfigurations $gw2ipconf1 -GatewayType Vpn -VpnType RouteBased -GatewaySku HighPerformance
 ```
 
-### <a name="step-2---create-a-vnet-tovnet-connection-with-the-ipsecike-policy"></a>2\. adım - bir VNet toVNet bağlantı IPSec/IKE İlkesi ile oluşturma
+### <a name="step-2---create-a-vnet-tovnet-connection-with-the-ipsecike-policy"></a>2\. adım-IPSec/ıKE ilkesiyle VNet-toVNet bağlantısı oluşturma
 
-S2S VPN bağlantısı için benzer bir IPSec/IKE ilkesi oluşturma, ardından yeni bir bağlantı ilkesi uygulamak.
+S2S VPN bağlantısına benzer şekilde, bir IPSec/ıKE ilkesi oluşturun ve ardından yeni bağlantı için ilkeye uygulayın.
 
-#### <a name="1-create-an-ipsecike-policy"></a>1. Bir IPSec/IKE ilkesi oluşturma
+#### <a name="1-create-an-ipsecike-policy"></a>1. IPSec/ıKE ilkesi oluşturma
 
 Aşağıdaki örnek betik, şu algoritmalar ve parametreler ile farklı bir IPsec/IKE ilkesi oluşturur:
-* Ikev2: Aes128, SHA1, DHGroup14
-* IPSec: GCMAES128, GCMAES128, PFS14, SA yaşam süresi 14400 saniye & değeri 102400000 KB'dir
+* Ikev2: AES128, SHA1, DHGroup14
+* IPSec: GCMAES128, GCMAES128, PFS14, SA yaşam 14400 saniye & 102400000KB
 
 ```powershell
 $ipsecpolicy2 = New-AzIpsecPolicy -IkeEncryption AES128 -IkeIntegrity SHA1 -DhGroup DHGroup14 -IpsecEncryption GCMAES128 -IpsecIntegrity GCMAES128 -PfsGroup PFS14 -SALifeTimeSeconds 14400 -SADataSizeKilobytes 102400000
 ```
 
-#### <a name="2-create-vnet-to-vnet-connections-with-the-ipsecike-policy"></a>2. VNet-VNet bağlantıları ile IPSec/IKE ilkesi oluşturma
+#### <a name="2-create-vnet-to-vnet-connections-with-the-ipsecike-policy"></a>2. IPSec/ıKE ilkesiyle VNet-VNet bağlantıları oluşturma
 
-Bir VNet-VNet bağlantısı oluşturabilir ve oluşturduğunuz IPsec/IKE ilkesini uygulayın. Bu örnekte, iki ağ geçidi için aynı abonelikte ' dir. Bu nedenle oluşturmak ve her iki bağlantı aynı PowerShell oturumunda aynı bir IPSec/IKE İlkesi ile yapılandırmak mümkündür.
+VNet-VNet bağlantısı oluşturun ve oluşturduğunuz IPSec/ıKE ilkesini uygulayın. Bu örnekte her iki ağ geçidi de aynı abonelikte bulunur. Bu nedenle, her iki bağlantıyı aynı PowerShell oturumunda aynı IPSec/ıKE ilkesiyle oluşturmak ve yapılandırmak mümkündür.
 
 ```powershell
 $vnet1gw = Get-AzVirtualNetworkGateway -Name $GWName1  -ResourceGroupName $RG1
@@ -304,29 +305,29 @@ New-AzVirtualNetworkGatewayConnection -Name $Connection21 -ResourceGroupName $RG
 ```
 
 > [!IMPORTANT]
-> Bir IPSec/IKE İlkesi, bir bağlantıda belirlendikten sonra Azure VPN ağ geçidi yalnızca göndermek veya belirtilen şifreleme algoritmaları ve anahtar güçleriyle o belirli bağlantı IPSec/IKE teklifi kabul edin. Her iki bağlantı için IPSec ilkeleri Aksi takdirde VNet-VNet bağlantısı değil kuracak aynı olduğundan emin olun.
+> Bir bağlantı üzerinde IPSec/ıKE ilkesi belirtilmişse, Azure VPN ağ geçidi yalnızca belirtilen şifreleme algoritmalarıyla IPSec/ıKE teklifini ve söz konusu bağlantıda anahtar güçlerini gönderir veya kabul eder. Her iki bağlantı için de IPSec ilkelerinin aynı olduğundan emin olun, aksi takdirde VNET-VNet bağlantısı kurmayacak.
 
-Bu adımları tamamladıktan sonra birkaç dakika sonra bağlantı kurulur ve başlangıçta gösterildiği gibi aşağıdaki ağ topolojisini gerekir:
+Bu adımları tamamladıktan sonra, bağlantı birkaç dakika içinde oluşturulur ve başlangıcında gösterildiği gibi aşağıdaki ağ topolojisine sahip olursunuz:
 
-![IPSec IKE İlkesi](./media/vpn-gateway-ipsecikepolicy-rm-powershell/ipsecikepolicy.png)
+![IPSec-IKE-Policy](./media/vpn-gateway-ipsecikepolicy-rm-powershell/ipsecikepolicy.png)
 
 
-## <a name ="managepolicy"></a>Bölüm 5 - bir bağlantı için güncelleştirme IPSec/IKE İlkesi
+## <a name ="managepolicy"></a>5. kısım-bağlantı için IPSec/ıKE ilkesini güncelleştirme
 
-Son bölümde var olan bir S2S veya VNet-VNet bağlantı IPSec/IKE ilkesini yönetmek nasıl gösterir. Aşağıdaki alıştırmada bir bağlantı üzerinde aşağıdaki işlemleri anlatılmaktadır:
+Son bölümde, mevcut bir S2S veya VNet-VNet bağlantısı için IPSec/ıKE ilkesini nasıl yöneteceğiniz gösterilmektedir. Aşağıdaki alıştırmada bir bağlantıda aşağıdaki işlemler gösterilmektedir:
 
-1. Bir bağlantı IPSec/IKE İlkesi Göster
-2. Ekleme veya bağlantı IPSec/IKE ilkesini güncelleştirme
-3. Bağlantı IPSec/IKE İlkesi Kaldır
+1. Bir bağlantının IPSec/ıKE ilkesini göster
+2. IPSec/ıKE ilkesini bir bağlantıya ekleme veya güncelleştirme
+3. IPSec/ıKE ilkesini bir bağlantıdan kaldırma
 
-Aynı adımlar S2S hem de VNet-VNet bağlantıları için geçerlidir.
+Aynı adımlar hem S2S hem de VNet-VNet bağlantıları için geçerlidir.
 
 > [!IMPORTANT]
-> IPSec/IKE İlkesi desteklenir *standart* ve *HighPerformance* rota tabanlı VPN ağ geçitleri yalnızca. Temel ağ geçidi SKU'su ya da ilke tabanlı VPN ağ geçidi çalışmaz.
+> IPSec/ıKE ilkesi yalnızca *Standart* ve *HIGHPERFORMANCE* rota tabanlı VPN ağ geçitlerinde desteklenir. Temel ağ geçidi SKU 'sunda veya ilke tabanlı VPN Gateway 'de çalışmaz.
 
-#### <a name="1-show-the-ipsecike-policy-of-a-connection"></a>1. Bir bağlantı IPSec/IKE İlkesi Göster
+#### <a name="1-show-the-ipsecike-policy-of-a-connection"></a>1. bir bağlantının IPSec/ıKE ilkesini göster
 
-Aşağıdaki örnek, bir bağlantı üzerinde yapılandırılmış IPSec/IKE İlkesi almak gösterilmektedir. Komut dosyalarını da yukarıdaki alıştırmaları devam edin.
+Aşağıdaki örnek, bir bağlantıda yapılandırılan IPSec/ıKE ilkesinin nasıl alınacağını gösterir. Betikler Ayrıca yukarıdaki alýþtýrmalara de devam eder.
 
 ```powershell
 $RG1          = "TestPolicyRG1"
@@ -335,7 +336,7 @@ $connection6  = Get-AzVirtualNetworkGatewayConnection -Name $Connection16 -Resou
 $connection6.IpsecPolicies
 ```
 
-Son komut, varsa bağlantısında yapılandırılmış geçerli bir IPSec/IKE İlkesi listeler. Bağlantı için örnek çıktı aşağıda verilmiştir:
+Son komut, varsa, bağlantıda yapılandırılan geçerli IPSec/ıKE ilkesini listeler. Bağlantı için örnek bir çıktı aşağıda verilmiştir:
 
 ```powershell
 SALifeTimeSeconds   : 14400
@@ -348,11 +349,11 @@ DhGroup             : DHGroup24
 PfsGroup            : PFS24
 ```
 
-Yoksa hiçbir IPSec/IKE İlkesi yapılandırılmış, komut (PS > $connection6.policy) boş bir dönüş alır. IPSec/IKE bağlantısında yapılandırılmamış, ancak hiçbir özel IPSec/IKE İlkesi olduğu anlamına gelmez. Gerçek bağlantı Azure VPN ağ geçidi ile şirket içi VPN cihazınız arasında anlaşılan varsayılan ilkeyi kullanır.
+Yapılandırılmış bir IPSec/ıKE ilkesi yoksa, (PS > $connection 6. ilke) komutu boş bir dönüş alır. IPSec/ıKE 'nin bağlantıda yapılandırılmadığı, ancak özel IPSec/ıKE ilkesi olmadığı anlamına gelir. Gerçek bağlantı, şirket içi VPN cihazınız ile Azure VPN ağ geçidi arasında anlaştığınız varsayılan ilkeyi kullanır.
 
-#### <a name="2-add-or-update-an-ipsecike-policy-for-a-connection"></a>2. Ekleme veya bir bağlantı için bir IPSec/IKE İlkesi güncelleştirme
+#### <a name="2-add-or-update-an-ipsecike-policy-for-a-connection"></a>2. bağlantı için IPSec/ıKE ilkesi ekleme veya güncelleştirme
 
-Yeni bir ilke ekleyin veya mevcut bir ilkenin bir bağlantıda güncelleştirmek için adımlar aynıdır: daha sonra yeni ilkeyi uygulamak için bağlantı yeni bir ilke oluşturun.
+Yeni bir ilke ekleme veya bir bağlantıda var olan bir ilkeyi güncelleştirme adımları aynıdır: yeni bir ilke oluşturun ve sonra yeni ilkeyi bağlantıya uygulayın.
 
 ```powershell
 $RG1          = "TestPolicyRG1"
@@ -364,20 +365,20 @@ $newpolicy6   = New-AzIpsecPolicy -IkeEncryption AES128 -IkeIntegrity SHA1 -DhGr
 Set-AzVirtualNetworkGatewayConnection -VirtualNetworkGatewayConnection $connection6 -IpsecPolicies $newpolicy6
 ```
 
-Bir şirket içi ilke tabanlı VPN cihazına bağlanırken "UsePolicyBasedTrafficSelectors" etkinleştirmek için Ekle "-UsePolicyBaseTrafficSelectors" cmdlet'e parametre veya seçenek devre dışı bırakmak için $False olarak ayarlayın:
+Şirket içi ilke tabanlı bir VPN cihazına bağlanırken "UsePolicyBasedTrafficSelectors" özelliğini etkinleştirmek için cmdlet 'e "-UsePolicyBaseTrafficSelectors" parametresini ekleyin veya seçeneği devre dışı bırakmak için $False ayarlayın:
 
 ```powershell
 Set-AzVirtualNetworkGatewayConnection -VirtualNetworkGatewayConnection $connection6 -IpsecPolicies $newpolicy6 -UsePolicyBasedTrafficSelectors $True
 ```
 
-İlke güncelleştirildiğini yeniden denetlemek için bağlantı elde edebilirsiniz.
+İlkenin güncelleştirilip güncelleştirilmediğini denetlemek için bağlantıyı yeniden alabilirsiniz.
 
 ```powershell
 $connection6  = Get-AzVirtualNetworkGatewayConnection -Name $Connection16 -ResourceGroupName $RG1
 $connection6.IpsecPolicies
 ```
 
-Aşağıdaki örnekte gösterildiği gibi son satırında, bir çıktı görmeniz gerekir:
+Aşağıdaki örnekte gösterildiği gibi son satırdan çıktıyı görmeniz gerekir:
 
 ```powershell
 SALifeTimeSeconds   : 14400
@@ -390,9 +391,9 @@ DhGroup             : DHGroup14
 PfsGroup            : None
 ```
 
-#### <a name="3-remove-an-ipsecike-policy-from-a-connection"></a>3. Bir bağlantıdan bir IPSec/IKE ilkesini Kaldır
+#### <a name="3-remove-an-ipsecike-policy-from-a-connection"></a>3. bir IPSec/ıKE ilkesini bir bağlantıdan kaldırma
 
-Bir bağlantıdan özel bir ilkeyi kaldırdığınızda, Azure VPN ağ geçidi döner [varsayılan IPSec/IKE teklifleri listesine](vpn-gateway-about-vpn-devices.md) ve yeniden şirket içi VPN cihazınız ile yeniden anlaşmaya varılır.
+Özel ilkeyi bir bağlantıdan kaldırdığınızda, Azure VPN ağ geçidi [varsayılan IPSec/IKE teklifleri listesine](vpn-gateway-about-vpn-devices.md) geri döner ve ŞIRKET içi VPN cihazınızdan yeniden anlaşmaya varılır.
 
 ```powershell
 $RG1           = "TestPolicyRG1"
@@ -405,10 +406,10 @@ $connection6.IpsecPolicies.Remove($currentpolicy)
 Set-AzVirtualNetworkGatewayConnection -VirtualNetworkGatewayConnection $connection6
 ```
 
-Bağlantı kaldırıldı ilkeyi denetlemek için aynı betiği kullanabilirsiniz.
+İlkenin bağlantıdan kaldırılıp kaldırılmadığını denetlemek için aynı betiği kullanabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bkz: [birden çok şirket içi ilke tabanlı VPN cihazını bağlama](vpn-gateway-connect-multiple-policybased-rm-ps.md) ilke tabanlı trafik seçicileri ile ilgili daha fazla ayrıntı için.
+İlke tabanlı trafik seçicileri hakkında daha fazla bilgi için bkz. [birden çok şirket içi ilke tabanlı VPN cihazını bağlama](vpn-gateway-connect-multiple-policybased-rm-ps.md) .
 
 Bağlantınız tamamlandıktan sonra sanal ağlarınıza sanal makineler ekleyebilirsiniz. Adımlar için bkz. [Sanal Makine Oluşturma](../virtual-machines/virtual-machines-windows-hero-tutorial.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).

@@ -1,6 +1,6 @@
 ---
-title: "Öğretici: Şifreleme ve şifre çözme Azure anahtar Kasası'nı kullanarak Azure Depolama'daki blobları | Microsoft Docs"
-description: Şifreleme ve şifre çözme için Azure Key Vault ile Microsoft Azure depolama istemci tarafı şifreleme kullanarak blob nasıl.
+title: "Öğretici: Azure Key Vault kullanarak Azure depolama 'daki Blobları şifreleme ve şifre çözme | Microsoft Docs"
+description: Azure Key Vault Microsoft Azure Depolama için istemci tarafı şifrelemeyi kullanarak bir blobu şifreleme ve şifresini çözme.
 services: storage
 author: tamram
 ms.service: storage
@@ -9,23 +9,23 @@ ms.date: 05/14/2019
 ms.author: tamram
 ms.reviewer: cbrooks
 ms.subservice: blobs
-ms.openlocfilehash: d7c740133911689c6d3f8e29c2cb20aa8873f0c7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 34dbcaeedb544a8a8808aab3e8e3315f1790dd9a
+ms.sourcegitcommit: e97a0b4ffcb529691942fc75e7de919bc02b06ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65788005"
+ms.lasthandoff: 09/15/2019
+ms.locfileid: "71003443"
 ---
-# <a name="tutorial-encrypt-and-decrypt-blobs-in-microsoft-azure-storage-using-azure-key-vault"></a>Öğretici: Şifreleme ve şifre çözme Azure anahtar Kasası'nı kullanarak Microsoft Azure depolama BLOB'ları
+# <a name="tutorial-encrypt-and-decrypt-blobs-in-microsoft-azure-storage-using-azure-key-vault"></a>Öğretici: Azure Key Vault kullanarak Microsoft Azure Depolama Blobları şifreleme ve şifre çözme
 
 ## <a name="introduction"></a>Giriş
-Bu öğreticide nasıl yapılacağını kapsayan, Azure Key Vault ile istemci tarafı depolama şifrelemesi kullanın. Bu, şifreleme ve şifre çözme teknolojiler kullanarak bir konsol uygulamasında bir blob konusunda yol göstermektedir.
+Bu öğreticide, Azure Key Vault ile istemci tarafı depolama şifrelemesi kullanımı ele alınmaktadır. Bu teknolojileri kullanarak bir konsol uygulamasında bir Blobun şifrelenmesi ve şifresinin çözülmesi konusunda size kılavuzluk eder.
 
 **Tahmini tamamlanma süresi:** 20 dakika
 
-Azure Key Vault hakkında genel bilgi için bkz. [Azure anahtar kasası nedir?](../../key-vault/key-vault-whatis.md).
+Azure Key Vault hakkında genel bilgi için bkz. [Azure Key Vault nedir?](../../key-vault/key-vault-overview.md).
 
-Azure depolama için istemci tarafı şifreleme hakkında genel bilgi için bkz. [istemci tarafı şifreleme ve Microsoft Azure depolama için Azure anahtar kasası](../common/storage-client-side-encryption.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json).
+Azure depolama için istemci tarafı şifreleme hakkında genel bilgi için bkz. [Istemci tarafı şifreleme ve Microsoft Azure depolama için Azure Key Vault](../common/storage-client-side-encryption.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
@@ -35,35 +35,35 @@ Bu öğreticiyi tamamlamak için aşağıdakilere sahip olmanız gerekir:
 * Visual Studio 2013 veya üzeri
 * Azure PowerShell
 
-## <a name="overview-of-client-side-encryption"></a>İstemci Tarafı Şifrelemesi'ne genel bakış
+## <a name="overview-of-client-side-encryption"></a>İstemci tarafı şifrelemeye genel bakış
 
-Azure depolama için istemci tarafı şifrelemesi genel bakış için bkz. [istemci tarafı şifreleme ve Microsoft Azure depolama için Azure anahtar kasası](../common/storage-client-side-encryption.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
+Azure depolama için istemci tarafı şifrelemeye genel bakış için bkz. [Istemci tarafı şifreleme ve Azure Key Vault Microsoft Azure depolama](../common/storage-client-side-encryption.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
 
-Aşağıda, istemci tarafı şifreleme nasıl çalışır hakkında kısa bir açıklaması verilmiştir:
+İstemci tarafı şifrelemesinin nasıl çalıştığı hakkında kısa bir açıklama aşağıda verilmiştir:
 
-1. Azure depolama istemci SDK'sı, bir kerelik kullanım simetrik anahtarı olan bir içerik şifreleme anahtarı (CEK) oluşturur.
-2. Müşteri verileri, bu CEK kullanılarak şifrelenir.
-3. CEK (anahtar şifreleme anahtarı (KEK) kullanılarak şifrelenir) paketlenir. KEK anahtar bir tanımlayıcıyla tanımlanır ve asimetrik anahtar çifti veya bir simetrik anahtar ve yerel olarak yönetilebilir veya Azure anahtar Kasası'nda depolanır. Depolama istemcisi KEK hiçbir zaman erişebilir. Yeni Key Vault tarafından sağlanan anahtar sarmalama algoritması da çağırır. Müşteriler, özel sağlayıcılar için kaydırma/istediğinde çözülme anahtarı kullanmayı da tercih edebilirsiniz.
-4. Şifrelenmiş veriler, ardından Azure depolama hizmetine yüklenir.
+1. Azure depolama istemci SDK 'Sı, tek seferlik kullanılan simetrik anahtar olan bir içerik şifreleme anahtarı (CEK) oluşturur.
+2. Müşteri verileri bu CEK kullanılarak şifrelenir.
+3. CEK daha sonra anahtar şifreleme anahtarı (KEK) kullanılarak sarmalanır (şifrelenir). KEK bir anahtar tanımlayıcısı tarafından tanımlanır ve asimetrik bir anahtar çifti veya simetrik anahtar olabilir ve yerel olarak yönetilebilir veya Azure Key Vault depolanabilir. Depolama istemcisinin, KEK hiç erişimi yoktur. Yalnızca Key Vault tarafından sağlanmış olan anahtar sarmalama algoritmasını çağırır. Müşteriler, isterseniz anahtar sarmalama/sarmalama için özel sağlayıcılar kullanmayı seçebilir.
+4. Şifrelenmiş veriler daha sonra Azure Storage Service 'e yüklenir.
 
-## <a name="set-up-your-azure-key-vault"></a>Azure anahtar kasası ayarlama
+## <a name="set-up-your-azure-key-vault"></a>Azure Key Vault ayarlama
 
-Öğreticide gösterilen aşağıdaki adımları gerçekleştirmeniz gereken bu öğreticiyle devam edebilmek için [hızlı başlangıç: .NET web uygulaması kullanarak Azure Key Vault'tan bir gizli dizi almak ve ayarlamak](../../key-vault/quick-create-net.md):
+Bu öğreticiye devam etmek için aşağıdaki adımları izlemeniz gerekir ve bu, öğretici [hızlı başlangıç bölümünde özetlenmiştir: .NET Web uygulaması](../../key-vault/quick-create-net.md)kullanarak Azure Key Vault bir gizli dizi ayarlama ve alma:
 
 * Bir anahtar kasası oluşturma.
-* Bir anahtar veya gizli anahtar Kasası'na ekleyin.
-* Bir uygulamayı Azure Active Directory ile kaydedin.
-* Anahtar veya gizli anahtarı kullanması için uygulamayı yetkilendirme.
+* Anahtar kasasına bir anahtar veya gizli dizi ekleyin.
+* Azure Active Directory olan bir uygulamayı kaydedin.
+* Anahtar veya gizli anahtarı kullanmak için uygulamayı yetkilendirin.
 
-Azure Active Directory ile bir uygulama kaydı sırasında oluşturulan ClientSecret ve ClientID not edin.
+Azure Active Directory bir uygulama kaydedilirken oluşturulan ClientID ve ClientSecret ' i unutmayın.
 
-Her iki anahtar, anahtar Kasası'nda oluşturun. Biz, bu öğreticinin geri kalanını için şu adı kullandığınızı varsayar: ContosoKeyVault ve TestRSAKey1.
+Anahtar kasasında her iki anahtarı da oluşturun. Aşağıdaki adları kullandığınız öğreticinin geri kalanı için varsayılmaktadır: Contosokeykasası ve TestRSAKey1.
 
-## <a name="create-a-console-application-with-packages-and-appsettings"></a>Paketler ve AppSettings ile bir konsol uygulaması oluşturun
+## <a name="create-a-console-application-with-packages-and-appsettings"></a>Paketler ve AppSettings ile bir konsol uygulaması oluşturma
 
-Visual Studio'da yeni bir konsol uygulaması oluşturun.
+Visual Studio 'da yeni bir konsol uygulaması oluşturun.
 
-Paket Yöneticisi Konsolu'nda gerekli nuget paketlerini ekleyin.
+Gerekli NuGet paketlerini Paket Yöneticisi konsoluna ekleyin.
 
 ```powershell
 Install-Package Microsoft.Azure.ConfigurationManager
@@ -75,7 +75,7 @@ Install-Package Microsoft.Azure.KeyVault
 Install-Package Microsoft.Azure.KeyVault.Extensions
 ```
 
-AppSettings için App.Config ekleyin.
+App. config öğesine AppSettings ekleyin.
 
 ```xml
 <appSettings>
@@ -87,7 +87,7 @@ AppSettings için App.Config ekleyin.
 </appSettings>
 ```
 
-Aşağıdaki `using` yönergeleri ve projeye bir başvuru System.Configuration ekleyin emin olun.
+Aşağıdaki `using` yönergeleri ekleyin ve projeye System. Configuration başvurusu eklediğinizden emin olun.
 
 ```csharp
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
@@ -101,9 +101,9 @@ using System.Threading;
 using System.IO;
 ```
 
-## <a name="add-a-method-to-get-a-token-to-your-console-application"></a>Konsol uygulamanıza bir belirteç almak için yöntem ekleme
+## <a name="add-a-method-to-get-a-token-to-your-console-application"></a>Konsol uygulamanıza belirteç almak için bir yöntem ekleyin
 
-Aşağıdaki yöntem, anahtar kasanıza erişim için kimlik doğrulaması gerekli Key Vault sınıflar tarafından kullanılır.
+Aşağıdaki yöntem, anahtar kasanıza erişim için kimlik doğrulaması yapması gereken Key Vault sınıfları tarafından kullanılır.
 
 ```csharp
 private async static Task<string> GetToken(string authority, string resource, string scope)
@@ -121,9 +121,9 @@ private async static Task<string> GetToken(string authority, string resource, st
 }
 ```
 
-## <a name="access-storage-and-key-vault-in-your-program"></a>Programınızda, depolama ve anahtar kasası erişim
+## <a name="access-storage-and-key-vault-in-your-program"></a>Programınızdaki depolama ve Key Vault erişin
 
-Ana() yönteminde aşağıdaki kodu ekleyin.
+Main () yönteminde aşağıdaki kodu ekleyin.
 
 ```csharp
 // This is standard code to interact with Blob storage.
@@ -141,19 +141,19 @@ KeyVaultKeyResolver cloudResolver = new KeyVaultKeyResolver(GetToken);
 ```
 
 > [!NOTE]
-> Anahtar kasası nesne modelleri
+> Nesne modellerini Key Vault
 > 
-> Dikkat edilmesi gereken aslında iki anahtar kasası nesne modeli olduğunu anlamak önemlidir: bir REST API (KeyVault ad alanı) dayalıdır ve diğer istemci tarafı şifreleme bir uzantısıdır.
+> Gerçekten iki Key Vault nesne modeli olduğunu anlamak önemlidir: biri REST API (Keykasası ad alanı) ve diğeri ise istemci tarafı şifreleme için bir uzantıdır.
 > 
-> Anahtar kasası istemci REST API ile etkileşime geçer ve JSON Web anahtarları ve gizli anahtarları için anahtar Kasası'nda bulunan nesnelerin iki tür anlar.
+> Key Vault Istemcisi, REST API etkileşimde bulunur ve Key Vault bulunan iki tür şey için JSON Web anahtarlarını ve gizli dizileri anlamıştır.
 > 
-> Anahtar kasası uzantıları Azure depolama istemci tarafı şifreleme için özel olarak oluşturulmuş gibi görünüyor sınıflardır. Anahtarları (IKey) ve anahtar çözümleyici kavramını temel sınıflar için bir arabirim içerirler. Bilmeniz gereken, IKey'nün iki uygulamasından vardır: RSAKey ve SymmetricKey. Artık bir anahtar Kasası'nda bulunan öğeleri ile çakıştığı için meydana, ancak bu noktada (anahtar ve gizli anahtar kasası istemci tarafından alınan IKey uygulamak için) bağımsız sınıfları olur.
+> Key Vault uzantıları, Azure depolama 'da istemci tarafı şifreleme için özel olarak oluşturulan sınıflardır. Anahtar çözümleyici kavramını temel alan anahtarlar (Ikey) ve sınıflar için bir arabirim içerirler. Bilmeniz gereken iki Ikey uygulaması vardır: RSAKey ve SymmetricKey. Artık bir Key Vault yer alan şeyler ile, ancak bu noktada bağımsız sınıflardır (Bu nedenle, Key Vault Istemcisi tarafından alınan anahtar ve gizli dizi Ikey uygulamaz).
 > 
 > 
 
-## <a name="encrypt-blob-and-upload"></a>BLOB şifreleme ve karşıya yükleme
+## <a name="encrypt-blob-and-upload"></a>Blobu şifreleyin ve karşıya yükleyin
 
-Bir blobu şifreleme ve Azure depolama hesabınıza yüklemek için aşağıdaki kodu ekleyin. **ResolveKeyAsync** yöntemi bir ikey değerini döndürür.
+Bir blobu şifrelemek ve Azure depolama hesabınıza yüklemek için aşağıdaki kodu ekleyin. Kullanılan **ResolveKeyAsync** yöntemi bir Ikey döndürür.
 
 ```csharp
 // Retrieve the key that you created previously.
@@ -175,15 +175,15 @@ using (var stream = System.IO.File.OpenRead(@"C:\Temp\MyFile.txt"))
 ```
 
 > [!NOTE]
-> BlobEncryptionPolicy Oluşturucusu bakarsanız, bir anahtar ve/veya bir çözümleyici kabul edebilirsiniz olduğunu görürsünüz. Şu anda mevcut sağa bir çözümleyici şifreleme için kullanamazsınız, çünkü şimdi varsayılan anahtar destekleyen dikkat edin.
+> BlobEncryptionPolicy oluşturucusuna bakarsanız, bir anahtarı ve/veya bir çözümleyiciyi kabul edebiliyorsanız görürsünüz. Şu anda varsayılan bir anahtarı desteklemediği için şifreleme için bir çözümleyici kullandığımıza dikkat edin.
 
-## <a name="decrypt-blob-and-download"></a>Blob şifresini çözmek ve indirin
+## <a name="decrypt-blob-and-download"></a>Blob şifresini çözün ve indirin
 
-Şifre çözme gerçekten ne zaman çözümleyici sınıflarını kullanarak mantıklı olur. Sebep anahtarı almak ve blob ile anahtar arasındaki ilişkiyi unutmayın. Bu nedenle şifreleme için kullanılan anahtarı kimliği blob meta ile ilişkilidir. Yalnızca anahtar, anahtar Kasası'nda kalmasından emin olmak gerekir.   
+Şifre çözme işlemi, çözümleyici sınıflarını kullanmanın anlamlı olduğu durumlarda kullanılır. Şifreleme için kullanılan anahtarın KIMLIĞI, meta verilerinde blob ile ilişkilendirilir, bu nedenle anahtarı alıp anahtar ile blob arasındaki ilişkilendirmeyi hatırlamanız için bir neden yoktur. Anahtarın Key Vault devam ettiğinden emin olmanız yeterlidir.   
 
-Özel anahtarı bir RSA anahtarı anahtar Kasası'nda kalır. böylece gerçekleşmesi şifre çözme için blob meta verilerini içeren CEK şifrelenmiş anahtarı şifre çözme için anahtar Kasası'na gönderilir.
+Bir RSA anahtarının özel anahtarı Key Vault kalır, bu nedenle şifre çözme işleminin gerçekleşmesi için, CEK içeren blob meta verilerinden şifrelenmiş anahtar şifre çözme için Key Vault gönderilir.
 
-Yüklediğiniz blob şifresini çözmek için aşağıdakileri ekleyin.
+Karşıya yüklediğiniz Blobun şifresini çözmek için aşağıdakileri ekleyin.
 
 ```csharp
 // In this case, we will not pass a key and only pass the resolver because
@@ -196,18 +196,18 @@ using (var np = File.Open(@"C:\data\MyFileDecrypted.txt", FileMode.Create))
 ```
 
 > [!NOTE]
-> Birkaç anahtar yönetimi dahil olmak üzere kolaylaştırmak için Çözümleyicileri diğer tür vardır: AggregateKeyResolver ve CachingKeyResolver.
+> Önemli yönetimi daha kolay hale getirmek için birkaç farklı tür çözümleyiciler vardır; örneğin: AggregateKeyResolver ve CachingKeyResolver.
 
-## <a name="use-key-vault-secrets"></a>Key Vault gizli dizileri kullanma
+## <a name="use-key-vault-secrets"></a>Key Vault gizli dizileri kullanın
 
-Gizli dizi aslında bir simetrik anahtar olduğundan bir gizli dizi istemci tarafı şifreleme ile kullanılacak şekilde SymmetricKey sınıftır. Ancak, yukarıda belirtildiği gibi bir gizli anahtar Kasası'nda tam olarak bir SymmetricKey eşleşmiyor. Anlamanız gereken bazı noktalar vardır:
+Gizli bir simetrik anahtar olduğu için, istemci tarafı şifreleme ile gizli dizi kullanma yöntemi SymmetricKey sınıfı aracılığıyla yapılır. Ancak, yukarıda belirtildiği gibi Key Vault bir gizli anahtar, bir SymmetricKey öğesine tam olarak eşlenmez. Anlamanız gereken birkaç nokta vardır:
 
-* Bir SymmetricKey anahtarı sabit uzunlukta olması gerekir: 128, 192, 256, 384 veya 512 bit.
-* Bir SymmetricKey anahtarında, Base64 olarak kodlanmış olmalıdır.
-* Bir SymmetricKey kullanılacak bir Key Vault gizli anahtar Kasası'nda bir içerik türü "application/octet-stream" olmalıdır.
+* Bir SymmetricKey içindeki anahtar sabit bir uzunluk olmalıdır: 128, 192, 256, 384 veya 512 bit.
+* Bir SymmetricKey içindeki anahtar Base64 kodlamalı olmalıdır.
+* SymmetricKey olarak kullanılacak Key Vault gizli anahtar, Key Vault içinde "Application/sekizli-Stream" Içerik türüne sahip olmalıdır.
 
-PowerShell'de Key vault'ta bir SymmetricKey kullanılabilir bir gizli dizi oluşturma örneği aşağıdadır.
-Lütfen $key, sabit kodlanmış değeri yalnızca Tanıtım amaçlı olduğuna dikkat edin. Kendi kodunuzda bu anahtarı oluşturmak isteyebilirsiniz.
+Burada, simetrik olarak kullanılabilecek Key Vault bir gizli dizi oluşturma PowerShell 'de bir örnek verilmiştir.
+$Key sabit kodlanmış değerin yalnızca tanıtım amaçlı olduğunu lütfen unutmayın. Kendi kodunuzda bu anahtarı oluşturmak isteyeceksiniz.
 
 ```csharp
 // Here we are making a 128-bit key so we have 16 characters.
@@ -222,7 +222,7 @@ $secretvalue = ConvertTo-SecureString $enc -AsPlainText -Force
 $secret = Set-AzureKeyVaultSecret -VaultName 'ContosoKeyVault' -Name 'TestSecret2' -SecretValue $secretvalue -ContentType "application/octet-stream"
 ```
 
-Konsol uygulamanızı olarak aynı çağrısından önce bu gizli bir SymmetricKey olarak almak için kullanabilirsiniz.
+Konsol uygulamanızda, bu parolayı bir SymmetricKey olarak almak için aynı çağrıyı kullanabilirsiniz.
 
 ```csharp
 SymmetricKey sec = (SymmetricKey) cloudResolver.ResolveKeyAsync(
@@ -233,8 +233,8 @@ SymmetricKey sec = (SymmetricKey) cloudResolver.ResolveKeyAsync(
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Microsoft Azure depolama C# ile kullanma hakkında daha fazla bilgi için bkz. [.NET için Microsoft Azure depolama istemci Kitaplığı](https://msdn.microsoft.com/library/azure/dn261237.aspx).
+İle C#Microsoft Azure depolama kullanma hakkında daha fazla bilgi için bkz. [.net Için Microsoft Azure depolama istemci kitaplığı](https://msdn.microsoft.com/library/azure/dn261237.aspx).
 
-Blob REST API'si hakkında daha fazla bilgi için bkz. [Blob hizmeti REST API'si](https://msdn.microsoft.com/library/azure/dd135733.aspx).
+Blob REST API hakkında daha fazla bilgi için bkz. [BLOB hizmeti REST API](https://msdn.microsoft.com/library/azure/dd135733.aspx).
 
-Microsoft Azure depolama üzerinde en son bilgiler için Git [Microsoft Azure depolama ekibi blogu](https://blogs.msdn.com/b/windowsazurestorage/).
+Microsoft Azure Depolama hakkında en son bilgiler için [Microsoft Azure depolama ekibi bloguna](https://blogs.msdn.com/b/windowsazurestorage/)gidin.

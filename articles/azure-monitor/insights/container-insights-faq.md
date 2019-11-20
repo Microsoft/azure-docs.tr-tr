@@ -1,55 +1,60 @@
 ---
-title: Sık sorulan sorular kapsayıcılar için Azure İzleyici | Microsoft Docs
-description: Kapsayıcılar için Azure İzleyici, Azure Container Instances'da ve AKS küme durumunu izleyen bir çözümdür. Bu makalede, sık sorulan soruları yanıtlar.
-services: azure-monitor
-author: mgoedtel
-manager: carmonm
-editor: tysonn
+title: Kapsayıcılar için Azure Izleyici sık sorulan sorular | Microsoft Docs
+description: Kapsayıcılar için Azure Izleyici, AKS kümelerinizin ve Azure 'daki Container Instances sistem durumunu izleyen bir çözümdür. Bu makalede yaygın soruların yanıtları vardır.
 ms.service: azure-monitor
-ms.topic: article
-ms.workload: infrastructure-services
-ms.date: 04/17/2019
+ms.subservice: ''
+ms.topic: conceptual
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: afa332b40884a79b5114b3b8093cd27108c39984
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/15/2019
+ms.openlocfilehash: d3779a2d48db82bfccdc0f047119a36ef56c3bdf
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65780000"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73477411"
 ---
-# <a name="azure-monitor-for-containers-frequently-asked-questions"></a>Azure İzleyici kapsayıcılar hakkında sık sorulan sorular için
+# <a name="azure-monitor-for-containers-frequently-asked-questions"></a>Kapsayıcılar için Azure Izleyici sık sorulan sorular
 
-Bu Microsoft FAQ, kapsayıcılar için Azure İzleyici hakkında sık sorulan soruların listesini içerir. Çözümü hakkında ek sorularınız varsa, Git [tartışma forumuna](https://feedback.azure.com/forums/34192--general-feedback) ve sorularınızı gönderin. Sık sorulan bir soru, böylece hızla ve kolayca bulunabilir, bu makaleye ekleriz.
+Bu Microsoft SSS, kapsayıcılar için Azure Izleyici hakkında sık sorulan sorulardan oluşan bir listesidir. Çözümle ilgili başka sorularınız varsa, [tartışma forumuna](https://feedback.azure.com/forums/34192--general-feedback) gidin ve sorularınızı gönderin. Bir soru sıkça sorulduğunda, hızlı ve kolay bir şekilde bulunabilmesi için bu makaleye ekleyeceğiz.
 
-## <a name="why-dont-i-see-data-in-my-log-analytics-workspace"></a>Log Analytics çalışma Alanım içinde veri neden göremiyorum?
+## <a name="can-i-view-metrics-collected-in-grafana"></a>Grafana ' de toplanan ölçümleri görüntüleyebilir miyim?
 
-Log Analytics çalışma alanı bir, belirli bir zaman her gün içinde herhangi bir veri bulamıyorsanız, varsayılan 500 MB sınırı veya belirtilen günlük toplanacak veri miktarını denetlemek için günlük üst sınır ulaşmış olabilirsiniz. Sınırı gün için karşılandığında, veri toplamayı durdurur ve yalnızca sonraki günü sürdürür. Veri kullanımınızı gözden geçirmek ve, beklenen kullanım düzenlerini esas alarak farklı bir fiyatlandırma katmanına güncelleştirmek için bkz: [günlük veri kullanım ve maliyet](../platform/manage-cost-storage.md). 
+Kapsayıcılar için Azure Izleyici, Grafana panolar içinde Log Analytics çalışma alanınızda depolanan ölçümlerin görüntülenmesini destekler. Grafana 'in [Pano deposundan](https://grafana.com/grafana/dashboards?dataSource=grafana-azure-monitor-datasource&category=docker) indirebileceğiniz bir şablon sağladık. bu şekilde, izlenen kümelerinizdeki ek verileri nasıl sorgulacağınızı ve özel Grafana kesik baords 'de görselleştirmeyi öğreneceksiniz. 
 
-## <a name="what-are-the-container-states-specified-in-the-containerinventory-table"></a>ContainerInventory tabloda belirtilen kapsayıcı durumları nelerdir?
+## <a name="can-i-monitor-my-aks-engine-cluster-with-azure-monitor-for-containers"></a>AKS-Engine kümenizi kapsayıcılar için Azure Izleyici ile izleyebilir miyim?
 
-ContainerInventory tablo durduruldu ve çalışan kapsayıcılar hakkında bilgi içerir. Tablo, bir iş akışı içinde (çalıştıran ve durduruldu) tüm kapsayıcılar için docker sorgulayan ve verileri Log Analytics çalışma alanı iletir aracı tarafından doldurulur.
+Kapsayıcılar için Azure Izleyici, Azure 'da barındırılan AKS-Engine (eski adıyla ACS-Engine) kümeleri için dağıtılan kapsayıcı iş yüklerini izlemeyi destekler. Bu senaryoya yönelik izlemeyi etkinleştirmek için gereken adımlara ilişkin daha fazla bilgi ve bir genel bakış için bkz. [AKS-Engine için kapsayıcılar Için Azure Izleyicisini kullanma](https://github.com/microsoft/OMS-docker/tree/aks-engine).
+
+## <a name="why-dont-i-see-data-in-my-log-analytics-workspace"></a>Neden Log Analytics çalışma alanım 'da veri görmüyorum?
+
+Log Analytics çalışma alanında belirli bir zamanda herhangi bir veri göremiyorsanız, günlük toplanacak veri miktarını denetlemek için varsayılan 500 MB sınırına veya belirtilen günlük ucuna ulaşmış olabilirsiniz. Gün için sınır karşılandığında, veri toplama işlemi yalnızca bir sonraki günde duraklar ve sürdürülür. Veri kullanımınızı gözden geçirmek ve tahmin edilen kullanım desenlerinize göre farklı bir fiyatlandırma katmanına güncelleştirmek için bkz. [günlük verisi kullanımı ve maliyeti](../platform/manage-cost-storage.md). 
+
+## <a name="what-are-the-container-states-specified-in-the-containerinventory-table"></a>Containerınventory tablosunda belirtilen kapsayıcı durumları nelerdir?
+
+Containerınventory tablosu, hem durdurulan hem de çalışan kapsayıcılar hakkında bilgiler içerir. Tablo, tüm kapsayıcılar için Docker 'ı sorgulayan (çalışıyor ve durdurulmuş) ve bu verileri Log Analytics çalışma alanına ileten aracının içindeki bir iş akışı tarafından doldurulur.
  
-## <a name="how-do-i-resolve-missing-subscription-registration-error"></a>Ne giderebilirim **eksik abonelik kaydı** hata?
+## <a name="how-do-i-resolve-missing-subscription-registration-error"></a>Nasıl yaparım? *eksik abonelik kayıt* hatası.
 
-Hatasını alırsanız **Microsoft.OperationsManagement için eksik abonelik kaydı**, kaynak Sağlayıcısı'na kaydederek çözebilirsiniz **Microsoft.OperationsManagement** içinde Çalışma alanı tanımlandığı abonelik. Bunu yapmak oluşturmaya ilişkin belgeler bulunabilir [burada](../../azure-resource-manager/resource-manager-register-provider-errors.md).
+**Microsoft. operationsmanagement Için eksik abonelik kaydı**hatası alırsanız, çalışma alanının tanımlandığı abonelikte **Microsoft. operationsmanagement** kaynak sağlayıcısını kaydederek bu sorunu çözebilirsiniz. Bunun nasıl yapılacağını gösteren belgeler [burada](../../azure-resource-manager/resource-manager-register-provider-errors.md)bulunabilir.
 
 ## <a name="is-there-support-for-rbac-enabled-aks-clusters"></a>RBAC etkin AKS kümeleri için destek var mı?
 
-Kapsayıcı izleme çözümü RBAC desteklemez, ancak kapsayıcılar için Azure İzleyici ile desteklenir. Çözüm Ayrıntıları sayfasında doğru bilgileri bu kümeleri için verileri gösteren dikey pencereleri gösterilmeyebilir.
+Kapsayıcı Izleme çözümü RBAC 'yi desteklemez, ancak kapsayıcılar için Azure Izleyici ile desteklenir. Çözüm ayrıntıları sayfası, bu kümelerin verilerini gösteren dikey pencerelerde doğru bilgileri göstermez.
 
-## <a name="how-do-i-enable-log-collection-for-containers-in-the-kube-system-namespace-through-helm"></a>Günlük toplama kube-system ad alanında Helm ile kapsayıcılar için nasıl etkinleştirebilirim?
+## <a name="how-do-i-enable-log-collection-for-containers-in-the-kube-system-namespace-through-helm"></a>Nasıl yaparım?, KUIN-System ad alanındaki kapsayıcılar için günlük toplamayı Held aracılığıyla etkinleştirmek istiyor musunuz?
 
-Günlük toplama kapsayıcılardan kube-system ad varsayılan olarak devre dışıdır. Günlük toplama omsagent bir ortam değişkenini ayarlayarak etkinleştirilebilir. Daha fazla bilgi için [kapsayıcılar için Azure İzleyici](https://github.com/helm/charts/tree/master/incubator/azuremonitor-containers) GitHub sayfası. 
+Kuto-System ad alanındaki kapsayıcılardan günlük koleksiyonu varsayılan olarak devre dışıdır. Omsagent üzerinde bir ortam değişkeni ayarlanarak günlük toplama etkinleştirilebilir. Daha fazla bilgi için bkz. [kapsayıcılar Için Azure izleyici](https://github.com/helm/charts/tree/master/incubator/azuremonitor-containers) GitHub sayfası. 
 
-## <a name="how-do-i-update-the-omsagent-to-the-latest-released-version"></a>En son yayımlanan hali omsagent nasıl güncelleştirebilirim?
+## <a name="how-do-i-update-the-omsagent-to-the-latest-released-version"></a>Omsagent 'ı yayınlanan en son sürüme güncelleştirmek Nasıl yaparım? mı?
 
-Aracı yükseltme öğrenmek için bkz. [aracı Yönetimi](container-insights-manage-agent.md).
+Aracıyı yükseltmeyi öğrenmek için bkz. [Aracı yönetimi](container-insights-manage-agent.md).
 
-## <a name="how-do-i-enable-multi-line-logging"></a>Çok satırlı günlüğünü nasıl etkinleştirebilirim?
+## <a name="how-do-i-enable-multi-line-logging"></a>Çok satırlı günlüğe kaydetme etkinleştirilsin mi Nasıl yaparım??
 
-Çok satırlı günlük kapsayıcılar için Azure İzleyici şu anda desteklememektedir ancak geçici çözümler vardır. JSON biçiminde yazmak için tüm hizmetleri yapılandırabilir ve ardından Docker/Moby bunları tek bir satır olarak yazar.
+Şu anda kapsayıcılar için Azure Izleyici çok satırlı günlüğe kaydetmeyi desteklemez, ancak kullanılabilir geçici çözümler vardır. Tüm hizmetleri JSON biçiminde yazacak şekilde yapılandırabilir ve ardından Docker/Moby, bunları tek bir satır olarak yazar.
 
-Örneğin, bir örnek node.js uygulaması için aşağıdaki örnekte gösterildiği gibi bir JSON nesnesi olarak günlüğünüzün kayabilir:
+Örneğin, bir örnek Node. js uygulaması için aşağıdaki örnekte gösterildiği gibi, günlüğünüz bir JSON nesnesi olarak sardırabilirsiniz:
 
 ```
 console.log(json.stringify({ 
@@ -60,29 +65,27 @@ console.log(json.stringify({
       }));
 ```
 
-İçin sorgularken bu veri günlükleri için Azure İzleyici'de aşağıdaki örnekteki gibi görünür:
+Bu veriler, sorgulama yaptığınızda Günlükler için Azure Izleyici 'de aşağıdaki örnekteki gibi görünür:
 
 ```
 LogEntry : ({“Hello": "This example has multiple lines:","Docker/Moby": "will not break this into multiple lines", "and you will receive":"all of them in log analytics", "as one": "log entry"}
 
 ```
 
-Sorunun ayrıntılı bilgi için aşağıdakileri gözden geçirin [github bağlantısı](https://github.com/moby/moby/issues/22920).
+Soruna ilişkin ayrıntılı bir bakış için aşağıdaki [GitHub bağlantısını](https://github.com/moby/moby/issues/22920)inceleyin.
 
-## <a name="how-do-i-resolve-azure-ad-errors-when-i-enable-live-logs"></a>Ben Canlı günlükler etkinleştirdiğinizde, Azure AD hataları nasıl giderebilirim? 
+## <a name="how-do-i-resolve-azure-ad-errors-when-i-enable-live-logs"></a>Canlı günlükleri etkinleştirdiğimde Azure AD hatalarını Nasıl yaparım? çözün misiniz? 
 
-Şu hatayı görebilirsiniz: **Yanıt URL'si istekte belirtilen uygulama için yapılandırılan yanıt URL'lerinden eşleşmiyor: ' < Uygulama Kimliği\>'** . Bunu çözmek için çözüm makalesinde bulunabilir [kapsayıcılar için Azure İzleyici ile kapsayıcı günlükleri gerçek zamanlı görüntüleme](container-insights-live-logs.md#configure-aks-with-azure-active-directory). 
+Şu hatayı görebilirsiniz: **istekte belirtilen yanıt URL 'si, uygulama için yapılandırılan yanıt URL 'leriyle eşleşmiyor: ' < Uygulama kimliği\>'** . Çözümü çözecek çözüm, [kapsayıcılar Için Azure izleyici ile kapsayıcı verilerinin gerçek zamanlı olarak nasıl görüntüleneceği](container-insights-livedata-setup.md#configure-ad-integrated-authentication)makalesinde bulunabilir. 
 
-## <a name="why-cant-i-upgrade-cluster-after-onboarding"></a>Neden ı ekledikten sonra küme yükseltemiyorum?
+## <a name="why-cant-i-upgrade-cluster-after-onboarding"></a>Ekleme işleminden sonra kümeyi neden yükseltemiyorum?
 
-Bir AKS kümesi için kapsayıcılar için Azure İzleyici'ı etkinleştirdikten sonra Log Analytics çalışma alanını silerseniz Küme verilerini gönderme olduğu için kümeyi yükseltmeye çalışırken başarısız olur. Bu sorunu çözmek için izlemeyi devre dışı bırakın ve başka bir geçerli çalışma alanına aboneliğinizdeki başvuran yeniden etkinleştirmeniz gerekir. Küme yükseltme yeniden gerçekleştirmeye çalıştığınızda, işlem ve başarıyla tamamlanması gerekir.  
+Bir AKS kümesi için Azure Izleyicisini etkinleştirdikten sonra, kümenin verilerini gönderdiği Log Analytics çalışma alanını sildiğinizde, kümeyi yükseltmeye çalışırken başarısız olur. Bu sorunu geçici olarak çözmek için, izlemeyi devre dışı bırakmanız ve ardından aboneliğinizdeki farklı bir geçerli çalışma alanına başvuruda bulunan yeniden etkinleştirmeniz gerekir. Küme yükseltmesini yeniden gerçekleştirmeye çalıştığınızda, başarıyla işlemeli ve tamamlanmalıdır.  
 
-## <a name="which-ports-and-domains-do-i-need-to-openwhitelist-for-the-agent"></a>Hangi bağlantı noktaları ve etki alanları Aç/beyaz listeye aracı için ihtiyacım var?
-- *.ods.opinsights.azure.com   443
-- *.oms.opinsights.azure.com   443
-- *.blob.core.windows.net      443
-- dc.services.visualstudio.com 443
+## <a name="which-ports-and-domains-do-i-need-to-openwhitelist-for-the-agent"></a>Aracı için hangi bağlantı noktalarına ve etki alanlarına açık/beyaz listeye ihtiyacım var?
+
+Azure, Azure ABD kamu ve Azure Çin bulutları ile Kapsayıcılı aracı için gereken ara sunucu ve güvenlik duvarı yapılandırma bilgileri için [ağ güvenlik duvarı gereksinimlerine](container-insights-onboard.md#network-firewall-requirements) bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-AKS kümenizi izlemeye başlamak için gözden [nasıl eklenirim Azure izlemek için kapsayıcılar](container-insights-onboard.md) izlemeyi etkinleştirmek için gereksinimleri ve kullanılabilir yöntemlerin anlaşılması. 
+AKS kümenizi izlemeye başlamak için, izlemeyi etkinleştirmek üzere gereksinimleri ve kullanılabilir yöntemleri anlamak üzere [kapsayıcılar Için Azure izleyicisini](container-insights-onboard.md) ekleme konusunu gözden geçirin. 

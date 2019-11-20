@@ -1,106 +1,107 @@
 ---
-title: Bir beceri kümesi - Azure Search ile Bilişsel hizmetler kaynağı ekleme
-description: Azure Search'te bir bilişsel zenginleştirme ardışık düzenine bir Bilişsel hizmetler hepsi bir arada abonelik ekleme yönergeleri.
-manager: cgronlun
+title: Bilişsel Hizmetleri beceri 'e Ekle
+titleSuffix: Azure Cognitive Search
+description: Azure Bilişsel Arama 'de bir AI zenginleştirme ardışık düzenine bir bilişsel hizmetler ekleme yönergeleri.
+manager: nitinme
 author: LuisCabrer
-services: search
-ms.service: search
-ms.devlang: NA
-ms.topic: conceptual
-ms.date: 05/20/2019
 ms.author: luisca
-ms.custom: seodec2018
-ms.openlocfilehash: 44f16b3334b991e071fa85ca4cffbc0837f0a6ec
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
+ms.openlocfilehash: d65b9b60ce93656c9acdc76c77291114468d345a
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66244422"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74113932"
 ---
-# <a name="attach-a-cognitive-services-resource-with-a-skillset-in-azure-search"></a>Azure Search'te bir beceri kümesi ile bir Bilişsel hizmetler kaynağı ekleme 
+# <a name="attach-a-cognitive-services-resource-to-a-skillset-in-azure-cognitive-search"></a>Azure Bilişsel Arama bir beceri bilişsel hizmetler kaynağı iliştirme 
 
-Yapay ZEKA algoritmaları sürücü [bilişsel dizinleme işlem hatları](cognitive-search-concept-intro.md) Azure Search'te belge zenginleştirme için kullanılır. Bu algoritmalar dahil olmak üzere Azure Bilişsel hizmetler kaynakları dayalı [görüntü işleme](https://azure.microsoft.com/services/cognitive-services/computer-vision/) görüntü analizi ve optik karakter tanıma (OCR) ve [metin analizi](https://azure.microsoft.com/services/cognitive-services/text-analytics/) varlık tanıma anahtar ifade ayıklama ve diğer zenginleştirmelerinin. Belge zenginleştirme amacıyla Azure Search tarafından kullanılan algoritmalar içine sarmalanır ve bir *beceri*, yerleştirilmiş bir *beceri kümesi*ve başvurduğu bir *dizin oluşturucu* sırasında Dizin oluşturma.
+AI algoritmaları, Azure Bilişsel Arama 'da içerik dönüştürmesi için kullanılan [zenginleştirme işlem hatlarını](cognitive-search-concept-intro.md) kullanır. Bu algoritmalar, görüntü analizi için [görüntü işleme](https://azure.microsoft.com/services/cognitive-services/computer-vision/) , optik karakter tanıma (OCR) ve varlık tanıma, anahtar tümceciği ayıklama ve diğer zenginler için [metin analizi](https://azure.microsoft.com/services/cognitive-services/text-analytics/) dahil olmak üzere Azure bilişsel hizmetler kaynaklarını temel alır. Belge zenginleştirme amaçları için Azure Bilişsel Arama tarafından kullanıldığı gibi algoritmalar *, bir*yeteneğin içine yerleştirilmiş ve dizin oluşturma sırasında bir *Dizin Oluşturucu* tarafından başvurulan bir *yetenek*içine sarılır.
 
-Belgeler sınırlı sayıda ücretsiz zenginleştirebilirsiniz. Veya Faturalanabilir bir Bilişsel hizmetler kaynağa eklediğiniz bir *beceri kümesi* daha büyük ve daha sık iş yükleri için. Bu makalede, Azure arama sırasında belgeleri zenginleştirmek için Faturalanabilir bir Bilişsel hizmetler kaynağı ekleme öğreneceksiniz [dizin](search-what-is-an-index.md).
+Sınırlı sayıda belgeyi ücretsiz olarak zenginleştirebilirsiniz. Ya da, daha büyük ve daha sık sık iş yükleri için *beceri* 'e faturalanabilir bir bilişsel hizmetler kaynağı iliştirebilirsiniz. Bu makalede, Azure Bilişsel Arama [Dizin oluşturma](search-what-is-an-index.md)sırasında belgeleri zenginleştirmek üzere bir faturalanabilir bilişsel hizmetler kaynağını nasıl ekleyeceğinizi öğreneceksiniz.
 
 > [!NOTE]
-> Faturalanabilir olayların Azure Search'te belge çözme aşamasının bir parçası olarak, Bilişsel hizmetler API'leri ve görüntü ayıklama çağrılarını içerir. Bilişsel hizmetler çağırmayın becerileri veya metin ayıklama belgelerden için ücret alınmaz.
+> Faturalanabilir olaylar, Azure Bilişsel Arama belge çözme aşamasının bir parçası olarak Bilişsel Hizmetler API'si ve görüntü ayıklama için çağrılar içerir. Belgelerden veya bilişsel hizmetler 'i çağırmayan yetenekler için metin ayıklama ücreti alınmaz.
 >
-> Faturalanabilir becerilerinden yürütmesi, adresindeki [Bilişsel hizmetler ödeme-olarak-, Git fiyat](https://azure.microsoft.com/pricing/details/cognitive-services/). Görüntü ayıklama fiyatlandırma için bkz [Azure fiyatlandırma sayfasını arama](https://go.microsoft.com/fwlink/?linkid=2042400).
+> Faturalanabilir yeteneklerin yürütülmesi, bilişsel [Hizmetler Kullandıkça Öde fiyatındaki](https://azure.microsoft.com/pricing/details/cognitive-services/)ücretlendirilir. Görüntü ayıklama fiyatlandırması için bkz. [Azure bilişsel arama fiyatlandırma sayfası](https://go.microsoft.com/fwlink/?linkid=2042400).
 
-## <a name="same-region-requirement"></a>Aynı bölgede gereksinimi
+## <a name="same-region-requirement"></a>Aynı bölge gereksinimi
 
-Azure Search ve Azure Bilişsel hizmetler aynı bölge içinde mevcut zorunlu kılarız. Aksi takdirde, çalışma zamanında bu iletiyi alırsınız: `"Provided key is not a valid CognitiveServices type key for the region of your search service."` 
+Azure Bilişsel Arama ve Azure bilişsel hizmetler 'in aynı bölgede mevcut olması gerekir. Aksi takdirde, bu iletiyi çalışma zamanında alırsınız: `"Provided key is not a valid CognitiveServices type key for the region of your search service."` 
 
-Bir hizmet bölgeler arasında taşımak için hiçbir yolu yoktur. Bu hatayı alırsanız Azure Search ile aynı bölgede yeni bir Bilişsel hizmetler kaynağı oluşturmanız gerekir.
+Bir hizmeti bölgeler arasında taşımanın bir yolu yoktur. Bu hatayı alırsanız, Azure Bilişsel Arama ile aynı bölgede yeni bir bilişsel hizmetler kaynağı oluşturmanız gerekir.
 
-## <a name="use-free-resources"></a>Ücretsiz kaynakları kullan
+> [!NOTE]
+> Bazı yerleşik yetenekler, bölgesel olmayan bilişsel hizmetler 'e (örneğin, [metin çevirisi becerisi](cognitive-search-skill-text-translation.md)) dayanır. Bu becerilerden herhangi birini beceri ' e eklerseniz, verilerinizin Azure Bilişsel Arama veya bilişsel hizmetler kaynağı ile aynı bölgede kalmasını sağlamak için garanti olmadığını unutmayın. Daha fazla bilgi için bkz. [hizmet durumu sayfası](https://aka.ms/allinoneregioninfo) .
 
-Bilişsel arama öğretici ve hızlı başlangıç alıştırmalar tamamlamak için sınırlı, ücretsiz işleme seçeneği kullanabilirsiniz.
+## <a name="use-free-resources"></a>Ücretsiz kaynakları kullanma
 
-Ücretsiz (sınırlı zenginleştirmelerinin) kaynakları, abonelik başına günde 20 belgelere kısıtlanır.
+AI zenginleştirme öğreticisini ve hızlı başlangıç alıştırmaları ' nı tamamlayabilmeniz için sınırlı, ücretsiz bir işleme seçeneğini kullanabilirsiniz.
 
-1. Veri İçeri Aktarma sihirbazını açın:
+Ücretsiz (sınırlı enzenginler) kaynakları, her abonelik için günde 20 belge ile kısıtlıdır.
 
-   ![Veri İçeri Aktarma sihirbazını açın](media/search-get-started-portal/import-data-cmd2.png "veri içeri aktarma sihirbazını açın")
+1. Veri Içeri aktarma Sihirbazı 'nı açın:
 
-1. Veri kaynağı seçin ve devam **Ekle bilişsel arama (isteğe bağlı)** . Bu sihirbaz hakkında adım adım kılavuz için bkz: [içeri aktarma, dizin ve portal araçlarını kullanarak sorgu](search-get-started-portal.md).
+   ![Veri Içeri aktarma Sihirbazı 'nı açın](media/search-get-started-portal/import-data-cmd.png "Veri Içeri aktarma Sihirbazı 'nı açın")
 
-1. Genişletin **ekleme Bilişsel Hizmetler** seçip **serbest (sınırlı zenginleştirmelerinin)** :
+1. Bir veri kaynağı seçin ve **AI zenginleştirme (Isteğe bağlı) eklemeye**devam edin. Bu sihirbaza yönelik adım adım yönergeler için bkz. [Azure Portal dizin oluşturma](search-get-started-portal.md).
 
-   ![Genişletilmiş ekleme Bilişsel hizmetler bölümüne](./media/cognitive-search-attach-cognitive-services/attach1.png "genişletilmiş Bilişsel Hizmetleri ekleme bölümü")
+1. Bilişsel **Hizmetler Ekle** ' yi genişletin ve ücretsiz ' i **(sınırlı enzenginler)** seçin:
 
-1. Sonraki adıma devam **ekleme Zenginleştirmelerinin**. Portalda mevcut becerileri açıklaması için bkz [2. adım: Bilişsel yetenekler Ekle](cognitive-search-quickstart-blob.md#create-the-enrichment-pipeline) bilişsel arama hızlı başlangıç.
+   ![Genişletilmiş ek bilişsel Hizmetler bölümü](./media/cognitive-search-attach-cognitive-services/attach1.png "Genişletilmiş ek bilişsel Hizmetler bölümü")
 
-## <a name="use-billable-resources"></a>Faturalanabilir kaynaklarını kullanma
+1. Artık bilişsel **yetenekler ekleme**dahil olmak üzere sonraki adımlara devam edebilirsiniz.
 
-Gün başına 20'den fazla zenginleştirmelerinin oluşturmak, iş yükleri için Faturalanabilir bir Bilişsel hizmetler kaynağı eklemek emin olun. Bilişsel hizmetler API'leri çağırmak istiyorsanız bile her zaman Faturalanabilir bir Bilişsel hizmetler kaynağı eklediğiniz öneririz. Kaynak ekleme, günlük limiti geçersiz kılar.
+## <a name="use-billable-resources"></a>Faturalanabilir kaynakları kullanma
 
-Bilişsel hizmetler API'leri çağıran yetenekleri için ücret ödersiniz. İçin faturalandırılırsınız değil [özel becerileri](cognitive-search-create-custom-skill-example.md), becerileri gibi veya [metin birleştirme](cognitive-search-skill-textmerger.md), [metin ayırıcısı](cognitive-search-skill-textsplit.md), ve [shaper](cognitive-search-skill-shaper.md), API tabanlı değildir.
+Günde 20 ' den fazla zenginleştirme oluşturan iş yükleri için faturalandırılabilir bilişsel hizmetler kaynağı iliştirdiğinizden emin olun. Bilişsel Hizmetler API'si çağrısı yapmasanız bile, her zaman faturalanabilir bir bilişsel hizmetler kaynağı iliştirmenizi öneririz. Kaynak eklemek günlük sınırı geçersiz kılar.
 
-1. Veri Alma Sihirbazı'nı açın, bir veri kaynağı seçin ve devam **Ekle bilişsel arama (isteğe bağlı)** .
+Yalnızca Bilişsel Hizmetler API'si çağıran yetenekler için ücret ödersiniz. [Özel yetenekler](cognitive-search-create-custom-skill-example.md)veya [metin merkli](cognitive-search-skill-textmerger.md), [metin bölücü](cognitive-search-skill-textsplit.md)ve [mil](cognitive-search-skill-shaper.md)gibi yetenekler için, API tabanlı olmayan beceriler için faturalandırılırsınız.
 
-1. Genişletin **ekleme Bilişsel Hizmetler** seçip **yeni Bilişsel hizmetler kaynağı oluşturma**. Yeni bir sekme açar, böylece kaynak oluşturabilirsiniz:
+1. Veri alma Sihirbazı ' nı açın, bir veri kaynağı seçin ve **AI zenginleştirme (Isteğe bağlı) eklemeye**devam edin.
 
-   ![Bilişsel hizmetler kaynağı oluşturma](./media/cognitive-search-attach-cognitive-services/cog-services-create.png "Bilişsel hizmetler kaynağı oluşturma")
+1. Bilişsel **Hizmetler Ekle** ' yi genişletin ve yeni bilişsel **Hizmetler kaynağı oluştur**' u seçin Kaynağı oluşturabilmeniz için yeni bir sekme açılır:
 
-1. İçinde **konumu** listesinde, Azure Search hizmetinizin bulunduğu bölgeyi seçin. Performansla ilgili nedenlerden dolayı bu bölgeyi kullandığınızdan emin olun. Bu bölge kullanarak da bölgeler arasında giden bant genişliği ücretleri da hükümsüz kılar.
+   ![Bilişsel hizmetler kaynağı oluşturma](./media/cognitive-search-attach-cognitive-services/cog-services-create.png "Bilişsel Hizmetler kaynağı oluşturma")
 
-1. İçinde **fiyatlandırma katmanı** listesinden **S0** Azure Search tarafından kullanılan önceden tanımlanmış beceriler geri görme ve dil özellikleri dahil olmak üzere, Bilişsel hizmetler özelliklerinin hepsi bir arada koleksiyonu almak için.
+1. **Konum** listesinde Azure bilişsel arama hizmetinizin bulunduğu bölgeyi seçin. Performans nedenleriyle bu bölgeyi kullandığınızdan emin olun. Bu bölge kullanıldığında, bölgeler arasında giden bant genişliği ücretlerini de indirebilirsiniz.
 
-   S0 katmanı için hızları için belirli iş yükleri bulabileceğiniz [Cognitive Services fiyatlandırma sayfasına](https://azure.microsoft.com/pricing/details/cognitive-services/).
+1. **Fiyatlandırma katmanı** listesinde, Azure bilişsel arama tarafından sunulan yerleşik becerileri kapsayan adım adım Hizmetleri özellikleri dahil olmak üzere tüm bilişsel hizmetler özelliklerini almak için **S0** ' ı seçin.
+
+   S0 katmanı için, bilişsel [Hizmetler fiyatlandırma sayfasında](https://azure.microsoft.com/pricing/details/cognitive-services/)belirli iş yükleri için ücretleri bulabilirsiniz.
   
-   + İçinde **seçin teklif** listesinde, emin olun **Bilişsel Hizmetler** seçilir.
-   + Altında **dil** özelliklerini fiyatlar **metin analizi standart** AI dizin oluşturma için geçerlidir.
-   + Altında **işleme** özelliklerini fiyatlar **bilgisayar işleme S1** uygulayın.
+   + **Teklif Seç** listesinde bilişsel **Hizmetler** ' in seçildiğinden emin olun.
+   + **Dil** özellikleri ' nin altında, **metın ANALIZI Standard** ücretleri AI dizin oluşturma için geçerlidir.
+   + **Görme** özellikleri altında, **görüntü işleme S1** için ücretler geçerlidir.
 
-1. Seçin **Oluştur** yeni Bilişsel hizmetler kaynağı sağlamak.
+1. Yeni bilişsel hizmetler kaynağını sağlamak için **Oluştur** ' u seçin.
 
-1. Veri Alma Sihirbazı'nı içeren bir önceki sekmeye dönün. Seçin **Yenile** Bilişsel hizmetler kaynağı gösterecek ve ardından kaynağı seçin:
+1. Veri Içeri aktarma Sihirbazı 'nı içeren önceki sekmeye geri dönün. Bilişsel hizmetler kaynağını göstermek için **Yenile** ' yi seçin ve ardından kaynağı seçin:
 
-   ![Bilişsel hizmetler kaynağı seçin](./media/cognitive-search-attach-cognitive-services/attach2.png "Bilişsel hizmetler kaynağı seçin")
+   ![Bilişsel hizmetler kaynağını seçin](./media/cognitive-search-attach-cognitive-services/attach2.png "Bilişsel hizmetler kaynağını seçin")
 
-1. Genişletin **ekleme Zenginleştirmelerinin** bölümü verileriniz üzerinde çalıştırmak istediğiniz belirli bilişsel yetenekleri seçin. Sihirbazı tamamlayın. Portalda mevcut becerileri açıklaması için bkz [2. adım: Bilişsel yetenekler Ekle](cognitive-search-quickstart-blob.md#create-the-enrichment-pipeline) bilişsel arama hızlı başlangıç.
+1. Verilerinizde çalıştırmak istediğiniz belirli bilişsel becerileri seçmek için bilişsel **yetenekler Ekle** bölümünü genişletin. Sihirbazın geri kalanını tamamlayın.
 
-## <a name="attach-an-existing-skillset-to-a-cognitive-services-resource"></a>Bilişsel hizmetler kaynağı için mevcut bir beceri kümesi ekleme
+## <a name="attach-an-existing-skillset-to-a-cognitive-services-resource"></a>Bilişsel hizmetler kaynağına mevcut bir beceri iliştirme
 
-Mevcut bir beceri kümesi varsa, yeni veya farklı bir Bilişsel hizmetler kaynağı için ekleyebilirsiniz.
+Mevcut bir beceri varsa, bunu yeni veya farklı bir bilişsel hizmetler kaynağına ekleyebilirsiniz.
 
-1. Üzerinde **hizmetine genel bakış** sayfasında **uzmanlık becerileri**:
+1. **Hizmete genel bakış** sayfasında **becerileri**' yi seçin:
 
-   ![Uzmanlık becerileri sekmesini](./media/cognitive-search-attach-cognitive-services/attach-existing1.png "uzmanlık becerileri sekmesi")
+   ![Becerileri sekmesi](./media/cognitive-search-attach-cognitive-services/attach-existing1.png "Becerileri sekmesi")
 
-1. Beceri kümesi adını seçin ve sonra mevcut bir kaynağı seçin veya yeni bir tane oluşturun. Seçin **Tamam** değişikliklerinizi onaylamak için.
+1. Beceri adını seçin ve ardından var olan bir kaynağı seçin veya yeni bir kaynak oluşturun. Değişikliklerinizi onaylamak için **Tamam ' ı** seçin.
 
-   ![Beceri kümesi kaynak listesi](./media/cognitive-search-attach-cognitive-services/attach-existing2.png "beceri kümesi kaynak listesi")
+   ![Beceri kaynak listesi](./media/cognitive-search-attach-cognitive-services/attach-existing2.png "Beceri kaynak listesi")
 
-   Unutmayın **serbest (sınırlı zenginleştirmelerinin)** seçenek sınırlar, 20 belgelere günlük ve kullanabileceğiniz **yeni Bilişsel hizmetler kaynağı oluşturma** yeni Faturalanabilen kaynak sağlamak için. Yeni bir kaynak oluşturursanız seçin **Yenile** Bilişsel hizmetler kaynakları listesini yenileyin ve ardından kaynak'ı seçin.
+   **Ücretsiz (sınırlı enzenginler)** seçeneğinin her gün 20 belge olduğunu ve yeni bir faturalanabilir kaynak sağlamak için yeni bilişsel **Hizmetler kaynağı oluşturma** ' yı kullanacağınızı unutmayın. Yeni bir kaynak oluşturursanız, bilişsel hizmetler kaynakları listesini yenilemek için **Yenile** ' yi seçin ve ardından kaynağı seçin.
 
-## <a name="attach-cognitive-services-programmatically"></a>Bilişsel hizmetler program aracılığıyla ekleme
+## <a name="attach-cognitive-services-programmatically"></a>Bilişsel hizmetler 'i programlı olarak ekle
 
-Becerilerine program aracılığıyla tanımlarken ekleme bir `cognitiveServices` becerilerine bölümüne. Bu bölümde, Bilişsel hizmetler kaynağın beceri kümesi ile ilişkilendirmek istediğiniz anahtarı içerir. Kaynak Azure Search kaynağınız ile aynı bölgede olması gerektiğini unutmayın. De `@odata.type`ve `#Microsoft.Azure.Search.CognitiveServicesByKey`.
+Program aracılığıyla beceri tanımlarken, Beceri bölümüne bir `cognitiveServices` bölümü ekleyin. Bu bölümde, Beceri ilişkilendirmek istediğiniz bilişsel hizmetler kaynağının anahtarını ekleyin. Kaynağın Azure Bilişsel Arama kaynağınız ile aynı bölgede olması gerektiğini unutmayın. Ayrıca `@odata.type`ekleyin ve `#Microsoft.Azure.Search.CognitiveServicesByKey`olarak ayarlayın.
 
-Aşağıdaki örnek, bu deseni gösterir. Bildirim `cognitiveServices` tanımının sonunda bölüm.
+Aşağıdaki örnekte bu desenler gösterilmektedir. Tanımın sonundaki `cognitiveServices` bölümüne dikkat edin.
 
 ```http
 PUT https://[servicename].search.windows.net/skillsets/[skillset name]?api-version=2019-05-06
@@ -136,29 +137,29 @@ Content-Type: application/json
 }
 ```
 
-## <a name="example-estimate-costs"></a>Örnek: Maliyet tahmini yapın
+## <a name="example-estimate-costs"></a>Örnek: tahmini maliyetler
 
-Bilişsel arama dizinleme ile ilişkili maliyetleri tahmin etmek için bazı sayılar çalıştırabilmeniz için ortalama bir belge benzer bir fikir ile başlayın. Örneğin, yaklaşık:
+Bilişsel arama dizinlemesi ile ilişkili maliyetleri tahmin etmek için, ortalama bir belgenin nasıl göründüğünü bir fikir ile başlayın, böylece bazı sayılar çalıştırabilirsiniz. Örneğin, şunları yapabilirsiniz:
 
 + 1\.000 PDF.
-+ Altı her sayfa.
-+ Bir görüntü her sayfada (6000 görüntüleri için).
-+ Sayfa başına 3000 karakter.
++ Altı sayfa her.
++ Sayfa başına bir görüntü (6.000 resim).
++ sayfa başına 3.000 karakter.
 
-Her PDF, resim ve metin ayıklama optik karakter tanıma (OCR) görüntüleri, belge çözme ve varlık tanıma, kuruluşların oluşan bir işlem hattı varsayılır.
+Her PDF 'nin belge çözme, görüntü ve metin ayıklama, optik karakter tanıma (OCR) ve kuruluşların varlık tanıma özelliğini içeren bir işlem hattı varsayın.
 
-Bu makalede gösterilen Fiyatlar, varsayımsal içindir. Bunlar, tahmin işlemi göstermek için kullanılırlar. Maliyetlerinizi daha düşük olabilir. İşlemler için gerçek fiyat, bakın [Bilişsel hizmetler fiyatlandırması](https://azure.microsoft.com/pricing/details/cognitive-services).
+Bu makalede gösterilen fiyatlar kuramsal olarak gösterilmiştir. Tahmin işlemini göstermek için kullanılırlar. Maliyetleriniz daha düşük olabilir. İşlemlerin gerçek fiyatları için bkz. bilişsel [Hizmetler fiyatlandırması](https://azure.microsoft.com/pricing/details/cognitive-services).
 
-1. Metin ve resim içerikle çözme belge için metin ayıklama şu anda ücretsiz olarak kullanılabilir. 6000 görüntüler için ayıklanan her 1000 görüntü için 1 ABD Doları varsayılır. Bu adım için 6.00 $ maliyetini olmasıdır.
+1. Metin ve görüntü içeriğiyle belge çözme için metin ayıklama Şu anda ücretsizdir. 6\.000 görüntü için, ayıklanan her 1.000 görüntüsü için $1 ' i varsayın. Bu adım için $6,00 maliyeti vardır.
 
-2. İngilizce 6000 görüntülerin OCR için en iyi algoritmayı (DescribeText) OCR bilişsel beceri kullanır. Analiz edilecek 1000 görüntü başına 2,50 maliyetini varsayıldığında, bu adım için $15,00 ödersiniz.
+2. OCR Bilişsel Beceri, Ingilizce olan 6.000 görüntünün OCR için en iyi algoritmayı (DescribeText) kullanır. 1\.000 görüntü başına $2,50 maliyeti varsayarak, bu adım için $15,00 ödersiniz.
 
-3. Varlık ayıklama için üç metin kayıtları sayfa başına toplam gerekir. Her bir kaydın 1.000 karakterdir. 6000 sayfaları tarafından çarpılan sayfa başına üç metin kayıtları 18, 000 metin kayıtları eşittir. 2,00 başına 1.000 metin kayıtları varsayılarak bu adımı $36.00 maliyeti.
+3. Varlık ayıklama için, sayfa başına toplam üç metin kaydı vardır. Her kayıt 1.000 karakterdir. Sayfa başına 6.000 sayfa ile çarpılan üç metin kaydı 18.000 metin kayıtlarına eşittir. Her 1.000 metin kaydı için $2,00 varsayılıyor, bu adımda maliyet $36,00.
 
-Hepsi bir araya getirildiğinde, yaklaşık $ 1.000 PDF belgeleri açıklanan becerilerine olan bu tür alımı için 57.00 ödersiniz.
+Tümünü bir araya getirmek için, açıklanan beceri bu türdeki 1.000 PDF belgelerini almak üzere $57,00 ile ödeme yaparsınız.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-+ [Azure Search'ü fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/search/)
-+ [Bir beceri kümesi tanımlama](cognitive-search-defining-skillset.md)
-+ [Beceri kümesi (REST) oluşturma](https://docs.microsoft.com/rest/api/searchservice/create-skillset)
-+ [Zenginleştirilmiş alanlarını eşleme](cognitive-search-output-field-mapping.md)
++ [Azure Bilişsel Arama fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/search/)
++ [Beceri tanımlama](cognitive-search-defining-skillset.md)
++ [Beceri oluşturma (REST)](https://docs.microsoft.com/rest/api/searchservice/create-skillset)
++ [Zenginleştirilmiş alanları eşleme](cognitive-search-output-field-mapping.md)

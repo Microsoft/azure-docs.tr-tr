@@ -1,29 +1,29 @@
 ---
-title: Azure Application Gateway - PowerShell SSL ilkesini yapılandırma
-description: Bu makale Azure Application Gateway üzerinde SSL ilkesini yapılandırmak için yönergeler sağlar
+title: PowerShell kullanarak SSL ilkesini yapılandırma
+titleSuffix: Azure Application Gateway
+description: Bu makalede, Azure Application Gateway SSL Ilkesini yapılandırma yönergeleri sağlanır
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
 ms.topic: article
-ms.workload: infrastructure-services
-ms.date: 12/3/2018
+ms.date: 11/14/2019
 ms.author: victorh
-ms.openlocfilehash: e6ba429d3e94f43cf21e6b76b7ef3644ca28fb19
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 105b0b3e40e6e9433ee456914cd5babc1d17d036
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66136050"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74075242"
 ---
-# <a name="configure-ssl-policy-versions-and-cipher-suites-on-application-gateway"></a>SSL İlkesi sürümlerini yapılandırın ve şifre paketleri Application Gateway'de
+# <a name="configure-ssl-policy-versions-and-cipher-suites-on-application-gateway"></a>Application Gateway SSL ilkesi sürümlerini ve şifre paketlerini yapılandırma
 
-SSL İlkesi sürümlerini yapılandırmak ve şifre paketleri Application Gateway hakkında bilgi edinin. SSL ilkesi sürümlerinin ve etkin şifreleme paketlerinin farklı yapılandırmalarını içeren önceden tanımlanmış ilkelerin listesinden seçim yapabilirsiniz. Tanımlama yeteneği de bir [özel SSL İlkesi](#configure-a-custom-ssl-policy) gereksinimlerinize göre.
+Application Gateway üzerindeki SSL ilkesi sürümlerinin ve şifre paketlerinin nasıl yapılandırılacağını öğrenin. SSL ilkesi sürümlerinin ve etkin şifreleme paketlerinin farklı yapılandırmalarını içeren önceden tanımlanmış ilkelerin listesinden seçim yapabilirsiniz. Gereksinimlerinize göre [Özel BIR SSL ilkesi](#configure-a-custom-ssl-policy) tanımlama olanağınız da vardır.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-## <a name="get-available-ssl-options"></a>SSL seçeneklerini Al
+## <a name="get-available-ssl-options"></a>Kullanılabilir SSL seçeneklerini al
 
-`Get-AzApplicationGatewayAvailableSslOptions` Cmdlet kullanılabilir önceden tanımlanmış ilkeleri, kullanılabilir şifre paketleri ve yapılandırılabilir protokol sürümleri listesini sağlar. Aşağıdaki örnek cmdlet çalışan bir örnek çıktı gösterilmektedir.
+`Get-AzApplicationGatewayAvailableSslOptions` cmdlet 'i, yapılandırılabilen kullanılabilir önceden tanımlanmış ilkelerin, kullanılabilir şifre paketlerinin ve protokol sürümlerinin bir listesini sağlar. Aşağıdaki örnekte cmdlet 'ini çalıştırmanın örnek bir çıkışı gösterilmektedir.
 
 ```
 DefaultPolicy: AppGwSslPolicy20150501
@@ -71,11 +71,11 @@ AvailableProtocols:
     TLSv1_2
 ```
 
-## <a name="list-pre-defined-ssl-policies"></a>Önceden tanımlanmış SSL ilkeleri listesi
+## <a name="list-pre-defined-ssl-policies"></a>Önceden tanımlanmış SSL Ilkelerini listeleyin
 
-Uygulama ağ geçidi kullanılabilir üç önceden tanımlanmış ilkeleri ile birlikte gelir. `Get-AzApplicationGatewaySslPredefinedPolicy` Cmdlet'i bu ilkeleri alır. Her ilke, farklı bir protokol sürümleri ve etkin şifre paketleri vardır. Önceden tanımlanmış Bu ilkeler, hızlı bir şekilde, application gateway üzerinde SSL İlkesi yapılandırmak için kullanılabilir. Varsayılan olarak **AppGwSslPolicy20150501** belirli hiçbir SSL İlkesi tanımlanmazsa seçilir.
+Application Gateway, kullanılabilecek üç önceden tanımlı ilke ile gelir. `Get-AzApplicationGatewaySslPredefinedPolicy` cmdlet 'i bu ilkeleri alır. Her ilkenin farklı protokol sürümleri ve şifre paketleri etkinleştirilmiştir. Önceden tanımlanmış bu ilkeler, uygulama Ağ geçidinizde bir SSL ilkesini hızlıca yapılandırmak için kullanılabilir. Varsayılan olarak, belirli bir SSL ilkesi tanımlanmamışsa **AppGwSslPolicy20150501** seçilidir.
 
-Aşağıdaki çıktı bir örnektir çalıştırmanın `Get-AzApplicationGatewaySslPredefinedPolicy`.
+Aşağıdaki çıktı `Get-AzApplicationGatewaySslPredefinedPolicy`çalıştırmanın bir örneğidir.
 
 ```
 Name: AppGwSslPolicy20150501
@@ -106,24 +106,17 @@ CipherSuites:
 ...
 ```
 
-## <a name="configure-a-custom-ssl-policy"></a>Özel bir SSL ilkesini yapılandırma
+## <a name="configure-a-custom-ssl-policy"></a>Özel bir SSL ilkesi yapılandırma
 
-Özel bir SSL ilkesini yapılandırırken, aşağıdaki parametreleri geçirin: PolicyType, MinProtocolVersion, CipherSuite ve Applicationgateway'inin. Diğer parametreler geçirmeye çalışırsanız, oluştururken veya uygulama ağ geçidi güncelleştirirken hata alırsınız. 
+Özel bir SSL ilkesi yapılandırılırken şu parametreleri geçirirsiniz: PolicyType, MinProtocolVersion, CipherSuite ve ApplicationGateway. Diğer parametreleri geçirmeye çalışırsanız, Application Gateway oluştururken veya güncelleştirirken bir hata alırsınız. 
 
-Aşağıdaki örnek bir uygulama ağ geçidinde özel bir SSL ilkesini ayarlar. En düşük protokol sürümü ayarlar `TLSv1_1` ve aşağıdaki şifre paketleri sağlar:
+Aşağıdaki örnek, bir uygulama ağ geçidinde özel bir SSL ilkesi ayarlıyor. En düşük protokol sürümünü `TLSv1_1` olarak ayarlar ve aşağıdaki şifre paketlerini sağlar:
 
 * TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
 * TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
 
 > [!IMPORTANT]
-> Aşağıdaki listeden en az bir şifre paketi, özel bir SSL ilkesini yapılandırırken seçilmelidir. Application gateway, arka uç Yönetim için SHA256 RSA şifre paketleri kullanılmaktadır.
-> * TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
-> * TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-> * TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
-> * TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
-> * TLS_RSA_WITH_AES_128_GCM_SHA256
-> * TLS_RSA_WITH_AES_256_CBC_SHA256
-> * TLS_RSA_WITH_AES_128_CBC_SHA256
+> Özel bir SSL ilkesi yapılandırılırken TLS_RSA_WITH_AES_256_CBC_SHA256 seçilmelidir. Application Gateway, arka uç yönetimi için bu şifre paketini kullanır. Bunu diğer herhangi bir paket ile birlikte kullanabilirsiniz, ancak bunun de seçilmesi gerekir. 
 
 ```powershell
 # get an application gateway resource
@@ -139,11 +132,11 @@ Get-AzApplicationGatewaySslPolicy -ApplicationGateway $gw
 Set-AzApplicationGateway -ApplicationGateway $gw
 ```
 
-## <a name="create-an-application-gateway-with-a-pre-defined-ssl-policy"></a>Önceden tanımlanmış bir SSL İlkesi ile bir uygulama ağ geçidi oluşturma
+## <a name="create-an-application-gateway-with-a-pre-defined-ssl-policy"></a>Önceden tanımlanmış SSL ilkesiyle bir uygulama ağ geçidi oluşturma
 
-Önceden tanımlanmış SSL ilkesini yapılandırırken, aşağıdaki parametreleri geçirin: PolicyType, PolicyName ve Applicationgateway'inin. Diğer parametreler geçirmeye çalışırsanız, oluştururken veya uygulama ağ geçidi güncelleştirirken hata alırsınız.
+Önceden tanımlanmış bir SSL ilkesi yapılandırılırken şu parametreleri geçirirsiniz: PolicyType, PolicyName ve ApplicationGateway. Diğer parametreleri geçirmeye çalışırsanız, Application Gateway oluştururken veya güncelleştirirken bir hata alırsınız.
 
-Aşağıdaki örnek yeni bir uygulama ağ geçidi ile önceden tanımlanmış bir SSL ilkesi oluşturur.
+Aşağıdaki örnek, önceden tanımlanmış bir SSL ilkesiyle yeni bir uygulama ağ geçidi oluşturur.
 
 ```powershell
 # Create a resource group
@@ -196,11 +189,11 @@ $policy = New-AzApplicationGatewaySslPolicy -PolicyType Predefined -PolicyName A
 $appgw = New-AzApplicationGateway -Name appgwtest -ResourceGroupName $rg.ResourceGroupName -Location "East US" -BackendAddressPools $pool -BackendHttpSettingsCollection $poolSetting -FrontendIpConfigurations $fipconfig  -GatewayIpConfigurations $gipconfig -FrontendPorts $fp -HttpListeners $listener -RequestRoutingRules $rule -Sku $sku -SslCertificates $cert -SslPolicy $policy
 ```
 
-## <a name="update-an-existing-application-gateway-with-a-pre-defined-ssl-policy"></a>Güncelleştirme var olan bir uygulama ağ geçidi ile önceden tanımlanmış bir SSL İlkesi
+## <a name="update-an-existing-application-gateway-with-a-pre-defined-ssl-policy"></a>Mevcut bir uygulama ağ geçidini önceden tanımlanmış SSL ilkesiyle güncelleştirme
 
-Özel bir SSL ilkesini ayarlamak için aşağıdaki parametreleri geçirin: **PolicyType**, **MinProtocolVersion**, **CipherSuite**, ve **Applicationgateway'inin**. Önceden tanımlanmış SSL ilkesini ayarlamak için aşağıdaki parametreleri geçirin: **PolicyType**, **PolicyName**, ve **Applicationgateway'inin**. Diğer parametreler geçirmeye çalışırsanız, oluştururken veya uygulama ağ geçidi güncelleştirirken hata alırsınız.
+Özel bir SSL ilkesi ayarlamak için şu parametreleri geçirin: **PolicyType**, **MinProtocolVersion**, **ciphersuite**ve **applicationgateway**. Önceden tanımlanmış bir SSL ilkesi ayarlamak için şu parametreleri geçirin: **PolicyType**, **PolicyName**ve **applicationgateway**. Diğer parametreleri geçirmeye çalışırsanız, Application Gateway oluştururken veya güncelleştirirken bir hata alırsınız.
 
-Aşağıdaki örnekte hem önceden tanımlanmış ilke, hem de özel ilkesi için kod örnekleri vardır. Kullanmak istediğiniz ilkeyi açıklamasını kaldırın.
+Aşağıdaki örnekte, hem özel Ilke hem de önceden tanımlanmış Ilke için kod örnekleri mevcuttur. Kullanmak istediğiniz ilkenin açıklamasını kaldırın.
 
 ```powershell
 # You have to change these parameters to match your environment.
@@ -224,4 +217,4 @@ $SetGW = Set-AzApplicationGateway -ApplicationGateway $AppGW
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Ziyaret [Application Gateway yeniden yönlendirmeye genel bakış](application-gateway-redirect-overview.md) bir HTTPS uç noktasına HTTP trafiğini yönlendirme hakkında bilgi edinmek için.
+HTTP trafiğini bir HTTPS uç noktasına yeniden yönlendirmeyi öğrenmek için [Application Gateway yeniden yönlendirmeye genel bakış ' ı](application-gateway-redirect-overview.md) ziyaret edin.

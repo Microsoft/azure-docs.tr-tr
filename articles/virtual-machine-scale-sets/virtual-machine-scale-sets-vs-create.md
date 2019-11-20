@@ -1,6 +1,6 @@
 ---
-title: Visual Studio kullanarak sanal makine ölçek kümesi dağıtma | Microsoft Docs
-description: Visual Studio ve Resource Manager şablonu kullanarak sanal makine ölçek kümeleri dağıtma
+title: Visual Studio kullanarak sanal makine ölçek kümesini dağıtma | Microsoft Docs
+description: Visual Studio ve bir Kaynak Yöneticisi şablonu kullanarak sanal makine ölçek kümeleri dağıtma
 services: virtual-machine-scale-sets
 ms.custom: H1Hack27Feb2017
 ms.workload: na
@@ -14,96 +14,91 @@ ms.service: virtual-machine-scale-sets
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 03/13/2017
+ms.date: 09/09/2019
 ms.author: manayar
-ms.openlocfilehash: 3d472aeaae7e7f02eba58aadea1df042d6c0f27b
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: d397f81ce29e0ec738156b755948985a4edfc70b
+ms.sourcegitcommit: 4f3f502447ca8ea9b932b8b7402ce557f21ebe5a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67204712"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71802262"
 ---
-# <a name="how-to-create-a-virtual-machine-scale-set-with-visual-studio"></a>Visual Studio ile bir sanal makine ölçek kümesi oluşturma
-Bu makalede bir Azure sanal makine bir Visual Studio kaynak grubu dağıtımı kullanarak ölçek kümesi dağıtmayı gösterir.
+# <a name="how-to-create-a-virtual-machine-scale-set-with-visual-studio"></a>Visual Studio ile sanal makine ölçek kümesi oluşturma
 
-[Azure sanal makine ölçek kümeleri](https://azure.microsoft.com/blog/azure-vm-scale-sets-public-preview/) dağıtma ve otomatik ölçeklendirme ile benzer sanal makine koleksiyonunu yönetin ve Yük Dengeleme için bir Azure işlem kaynağıdır. Sağlama ve sanal makine ölçek kümeleri kullanarak dağıtın [Azure Resource Manager şablonları](https://github.com/Azure/azure-quickstart-templates). Azure Resource Manager şablonları kullanarak Azure CLI, PowerShell, REST dağıtılabilir ve ayrıca doğrudan Visual Studio'dan. Visual Studio, bir Azure kaynak grubu dağıtım projesi bir parçası olarak dağıtılabilir örnek şablonları, bir dizi sağlar.
+Bu makalede, bir Visual Studio kaynak grubu dağıtımı kullanarak bir Azure sanal makine ölçek kümesinin nasıl dağıtılacağı gösterilir.
 
-Azure kaynak grubu dağıtımlarında, Grup ve bir dizi ilgili Azure kaynaklarını tek bir dağıtım işleminde yayımlamak için bir yoludur. Bunlar hakkında daha fazla buradan bilgi edinebilirsiniz: [Oluşturma ve Visual Studio aracılığıyla Azure kaynak grupları dağıtma](../vs-azure-tools-resource-groups-deployment-projects-create-deploy.md).
+[Azure sanal makine ölçek kümeleri](https://azure.microsoft.com/blog/azure-vm-scale-sets-public-preview/) , benzer sanal makinelerin bir koleksiyonunu otomatik ölçeklendirme ve Yük Dengeleme ile dağıtmak ve yönetmek Için bir Azure işlem kaynağıdır. [Azure Resource Manager şablonları](https://github.com/Azure/azure-quickstart-templates)kullanarak sanal makine ölçek kümeleri temin edebilir ve dağıtabilirsiniz. Azure Resource Manager şablonları Azure CLı, PowerShell, REST ve ayrıca doğrudan Visual Studio 'dan dağıtılabilir. Visual Studio, bir Azure Kaynak grubu dağıtım projesinin parçası olarak dağıtabileceğiniz örnek şablonlar kümesi sağlar.
 
-## <a name="pre-requisites"></a>Ön koşullar
-Visual Studio'da sanal makine ölçek kümeleri dağıtımına başlamak için aşağıdakiler gerekir:
+Azure Kaynak grubu dağıtımları, bir dizi ilgili Azure kaynağını tek bir dağıtım işleminde gruplamak ve yayımlamak için bir yoldur. Daha fazla bilgi için bkz. [Visual Studio aracılığıyla Azure Kaynak grupları oluşturma ve dağıtma](../vs-azure-tools-resource-groups-deployment-projects-create-deploy.md).
+
+## <a name="prerequisites"></a>Önkoşullar
+
+Visual Studio 'da sanal makine ölçek kümelerini dağıtmaya başlamak için aşağıdaki önkoşullara sahip olmanız gerekir:
 
 * Visual Studio 2013 veya üzeri
-* Azure SDK 2.7, 2.8 veya 2.9
+* Azure SDK 2,7, 2,8 veya 2,9
 
 >[!NOTE]
->Bu yönergeler, kullanmakta olduğunuz Visual Studio ile varsayar [Azure SDK 2.8](https://azure.microsoft.com/blog/announcing-the-azure-sdk-2-8-for-net/).
+>Bu makalede, [Azure SDK 2,8](https://azure.microsoft.com/blog/announcing-the-azure-sdk-2-8-for-net/)Ile Visual Studio 2019 kullanılmaktadır.
 
-## <a name="creating-a-project"></a>Proje oluşturma
-1. Seçerek Visual Studio'da yeni proje oluşturma **dosya | Yeni | Proje**.
-   
-    ![Yeni dosya][file_new]
+## Proje oluşturma<a name="creating-a-project"></a> 
 
-2. Altında **Visual C# | Bulut**, seçin **Azure Resource Manager** bir Azure Resource Manager şablonu dağıtmak için bir proje oluşturmaktır.
-   
-    ![Proje oluşturma][create_project]
+1. Visual Studio 'Yu açın ve **Yeni proje oluştur**' u seçin.
 
-3. Şablonlar listesinden Linux veya Windows sanal makine ölçek kümesi şablonunu seçin.
-   
-   ![Şablonu seçin][select_Template]
+1. **Yeni proje oluştur**' da **Azure Kaynak grubu** ' nu seçin C# ve ardından **İleri**' yi seçin.
 
-4. Projeniz oluşturulduktan sonra PowerShell dağıtım betiklerini, bir Azure Resource Manager şablonu ve parametre dosyası için sanal makine ölçek kümesi görürsünüz.
-   
-    ![Çözüm Gezgini][solution_explorer]
+1. **Yeni projenizi Yapılandır**' da, bir ad girin ve **Oluştur**' u seçin.
+
+    ![Projeyi adlandırın ve oluşturun](media/virtual-machine-scale-sets-vs-create/configure-azure-resource-group.png)
+
+1. Şablon listesinden, **Windows sanal makine ölçek kümesi** veya **Linux sanal makine ölçek kümesi** şablonunu seçin. **Tamam**’ı seçin.
+
+   ![Bir sanal makine şablonu seçin](media/virtual-machine-scale-sets-vs-create/select-vm-template.png)
+
+Projenizi oluşturduktan sonra, **Çözüm Gezgini** bir PowerShell dağıtım betiği, bir Azure Resource Manager şablonu ve sanal makine ölçek kümesi için bir parametre dosyası içerir.
 
 ## <a name="customize-your-project"></a>Projenizi özelleştirme
-Artık VM uzantısı özellikleri ekleme veya Yük Dengeleme kuralları düzenleme gibi uygulamanızın ihtiyaçları için özelleştirmek için bir şablonu düzenleyebilirsiniz. Varsayılan olarak, otomatik ölçeklendirme kuralları eklemenizi kolaylaştırır AzureDiagnostics uzantısını dağıtmak için sanal makine ölçek kümesi şablonlarının yapılandırılır. Ayrıca, bir yük dengeleyici gelen NAT kuralları ile yapılandırılmış bir genel IP adresi ile dağıtır. 
 
-Yük Dengeleyici (Linux) SSH veya RDP (Windows) ile sanal makine örneklerine bağlanmanıza olanak sağlar. Ön uç bağlantı noktası aralığı 50000'den başlar. Linux için başka bir deyişle, varsa, SSH bağlantı noktası 50000, size yönlendirilir ilk VM ölçek kümesindeki bağlantı noktası 22. Bağlantı noktası 50001 bağlanan ikinci sanal makinenin 22 numaralı bağlantı noktasına ve benzeri yönlendirilir.
+Artık şablonu, uygulamanızın gereksinimlerine göre özelleştirmek üzere düzenleyebilirsiniz. Sanal makine uzantısı özellikleri ekleyebilir veya yük dengeleme kurallarını düzenleyebilirsiniz. Varsayılan olarak, sanal makine ölçek kümesi şablonları **AzureDiagnostics** uzantısını dağıtmak üzere yapılandırılmıştır, bu da otomatik ölçeklendirme kuralları eklemenizi kolaylaştırır. Şablonlar, gelen NAT kurallarıyla yapılandırılmış genel IP adresi olan bir yük dengeleyici de dağıtır.
 
- Visual Studio ile şablonlarınızı düzenlemek için en iyi yolu, parametreleri, değişkenler ve kaynakları düzenlemek için JSON ana hattını kullanmaktır. Dağıtmadan önce şemayı bir anlayış şablonunuzdaki hataları ortaya Visual Studio işaret edebilir.
+Yük dengeleyici, sanal makine örneklerine SSH (Linux) veya RDP (Windows) ile bağlanmanızı sağlar. Ön uç bağlantı noktası aralığı 50000 ' de başlar. Linux için, bağlantı noktası 50000 ' e SSH kullanıyorsanız, Yük Dengeleme sizi ölçek kümesindeki ilk sanal makinenin 22 numaralı bağlantı noktasına yönlendirir. 50001 numaralı bağlantı noktasına bağlantı, ikinci sanal makinenin 22 numaralı bağlantı noktasına yönlendirilir ve bu şekilde devam eder.
 
-![JSON Gezgini][json_explorer]
+ Visual Studio ile şablonlarınızı düzenlemenin iyi bir yolu, **JSON ana hattını**kullanmaktır. Parametreleri, değişkenleri ve kaynakları düzenleyebilirsiniz. Şemayı anlamak için, Visual Studio dağıtmadan önce şablonunuzda hataları işaret edebilir.
 
-## <a name="deploy-the-project"></a>Projeyi dağıtın
-1. Sanal makine ölçek kümesi kaynak oluşturmak için Azure Resource Manager şablonu dağıtın. Proje düğümünü sağ tıklatın ve seçin **dağıtma | Yeni dağıtım**.
-   
-    ![Şablon dağıtma][5deploy_Template]
-    
-2. "Dağıtmak için kaynak grubu" iletişim kutusunda aboneliğinizi seçin.
-   
-    ![Şablon dağıtma][6deploy_Template]
+![JSON Gezgini](media/virtual-machine-scale-sets-vs-create/json-explorer.png)
 
-3. Buradan, şablonunuzu dağıtmak için bir Azure kaynak grubu oluşturabilirsiniz.
-   
-    ![Yeni kaynak grubu][new_resource]
+## <a name="deploy-the-project"></a>Projeyi dağıtma
 
-4. Ardından, **parametreleri Düzenle** , şablona geçirilen parametrelerini girin. Dağıtımı oluşturmak için gerekli olan işletim sistemi için kullanıcı adı ve parola sağlayın. Yüklü Visual Studio için PowerShell araçları sahip değilseniz, kontrol etmek için önerilir **parolaları Kaydet** gizli bir PowerShell komut satırı istemi önlemek veya bunları kullanmanızı [keyvault Destek](https://azure.microsoft.com/blog/keyvault-support-for-arm-templates/).
-   
-    ![Parametreleri Düzenle][edit_parameters]
+Sanal makine ölçek kümesi kaynağını oluşturmak için Azure Resource Manager şablonunu dağıtın:
 
-5. Şimdi tıklayarak **Dağıt**. **Çıkış** penceresinde dağıtımın ilerleme durumunu gösterir. Eylemi yürütmenin Not **Dağıt AzureResourceGroup.ps1** betiği.
-   
-   ![Çıktı Penceresi][output_window]
+1. **Çözüm Gezgini**, projeye sağ tıklayın ve @no__t **Dağıt**-2**Yeni**' yi seçin.
 
-## <a name="exploring-your-virtual-machine-scale-set"></a>Sanal makine ölçek kümenizi keşfetme
-Dağıtım tamamlandığında, yeni sanal makine ölçek kümesi Visual Studio'da görüntüleyebilirsiniz **Cloud Explorer** (yenileme). Cloud Explorer uygulamalar geliştirmeye devam ederken Visual Studio'daki Azure kaynaklarını yönetmenizi sağlar. Ayrıca, sanal makine ölçek kümesi'nde görüntüleyebilirsiniz [Azure portalında](https://portal.azure.com) ve [Azure kaynak Gezgini](https://resources.azure.com/).
+    ![Projenizi dağıtın](media/virtual-machine-scale-sets-vs-create/deploy-new-project.png)
 
-![Cloud Explorer][cloud_explorer]
+1. **Kaynak grubuna dağıt**bölümünde kullanılacak aboneliği seçin ve bir kaynak grubu seçin. Gerekirse bir kaynak grubu oluşturabilirsiniz.
 
- Portal, Azure kaynak Gezgini, bir pencere "örneği görünümüne" ayırabilir ve aynı zamanda PowerShell komutlarını gösteren keşfedin ve Azure kaynakları, hata ayıklama için kolay bir yol sağlarken Azure altyapınıza bir web tarayıcısı ile görsel olarak yönetmek için en iyi yolu sağlar. kaynaklar için aradığınız.
+1. Sonra, şablonunuza geçirilen parametreleri girmek için **parametreleri Düzenle** ' yi seçin.
+
+   ![Abonelik ve kaynak grubu girin](media/virtual-machine-scale-sets-vs-create/deploy-to-resource-group.png)
+
+1. İşletim sistemi için Kullanıcı adını ve parolayı belirtin. Bu değerler, dağıtımı oluşturmak için gereklidir. Yüklü PowerShell Tools for Visual Studio yoksa gizli bir PowerShell komut isteminden kaçınmak için **parolaları kaydet** ' i seçin veya [Key Vault desteğini](https://azure.microsoft.com/blog/keyvault-support-for-arm-templates/)kullanın. Devam etmek için **Kaydet** ' i seçin.
+
+    ![Dağıtım parametrelerini Düzenle](media/virtual-machine-scale-sets-vs-create/edit-deployment-parameters.png)
+
+1. **Kaynak grubuna dağıt**bölümünde **Dağıt**' ı seçin. Eylem **Deploy-AzureResourceGroup. ps1** betiğini çalıştırır. **Çıkış** penceresinde dağıtım ilerleme durumu gösterilir.
+
+   ![Çıktı sonuçları gösterir](media/virtual-machine-scale-sets-vs-create/deployment-output.png)
+
+## Sanal makine ölçek kümesini keşfet<a name="exploring-your-virtual-machine-scale-set"></a>
+
+Yeni sanal makine ölçek kümesini görüntülemek için  > **bulut Gezginini** **görüntüle**' yi seçin. Gerekirse **Tümünü Yenile**seçeneğini kullanın.
+
+![Cloud Explorer](media/virtual-machine-scale-sets-vs-create/cloud-explorer.png)
+
+**Cloud Explorer** , uygulamaları geliştirirken Visual Studio 'da Azure kaynaklarını yönetmenizi sağlar. Ayrıca, [Azure Portal](https://portal.azure.com) ve [Azure Kaynak Gezgini](https://resources.azure.com/)sanal makine ölçek kümesini görüntüleyebilirsiniz.
+
+ Portal, Azure altyapınızı bir Web tarayıcısı ile yönetmenin en iyi yolunu sağlar. Azure Kaynak Gezgini, Azure kaynaklarını keşfetmeye ve hata ayıklamanıza yönelik kolay bir yol sağlar. Azure Kaynak Gezgini, örnek görünümünü sunar ve ayrıca, aradığınız kaynaklar için PowerShell komutlarını gösterir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Visual Studio aracılığıyla sanal makine ölçek kümeleri, başarıyla dağıtıldıktan sonra daha fazla projeniz uygulama gereksinimlerinize uyacak şekilde özelleştirebilirsiniz. Örneğin, ekleyerek otomatik ölçeklendirmeyi yapılandırma bir **Insights** şablonunuzu (tek başına VM gibi) altyapı ekleme ya da özel betik uzantısı kullanarak dağıtmaya kaynak. Örnek şablonları bulunabilir [Azure hızlı başlangıç şablonları](https://github.com/Azure/azure-quickstart-templates) GitHub deposu ("vmss" aratın).
 
-[file_new]: ./media/virtual-machine-scale-sets-vs-create/1-FileNew.png
-[create_project]: ./media/virtual-machine-scale-sets-vs-create/2-CreateProject.png
-[select_Template]: ./media/virtual-machine-scale-sets-vs-create/3b-SelectTemplateLin.png
-[solution_explorer]: ./media/virtual-machine-scale-sets-vs-create/4-SolutionExplorer.png
-[json_explorer]: ./media/virtual-machine-scale-sets-vs-create/10-JsonExplorer.png
-[5deploy_Template]: ./media/virtual-machine-scale-sets-vs-create/5-DeployTemplate.png
-[6deploy_Template]: ./media/virtual-machine-scale-sets-vs-create/6-DeployTemplate.png
-[new_resource]: ./media/virtual-machine-scale-sets-vs-create/7-NewResourceGroup.png
-[edit_parameters]: ./media/virtual-machine-scale-sets-vs-create/8-EditParameter.png
-[output_window]: ./media/virtual-machine-scale-sets-vs-create/9-Output.png
-[cloud_explorer]: ./media/virtual-machine-scale-sets-vs-create/12-CloudExplorer.png
+Sanal makine ölçek kümelerini Visual Studio aracılığıyla başarıyla dağıttıktan sonra, projenizi uygulama gereksinimlerinize uyacak şekilde daha da özelleştirebilirsiniz. Örneğin, bir **Öngörüler** kaynağı ekleyerek otomatik ölçeklendirmeyi yapılandırın. Şablonunuza tek başına sanal makineler gibi altyapı ekleyebilir veya özel Betik uzantısı kullanarak uygulamalar dağıtabilirsiniz. İyi örnek şablonlar, [Azure hızlı başlangıç şablonları](https://github.com/Azure/azure-quickstart-templates) GitHub deposunda bulunabilir. `vmss` arayın.

@@ -1,49 +1,63 @@
 ---
-title: Azure veri fabrikası veri akışı arama dönüştürme eşlemesi
-description: Azure veri fabrikası veri akışı arama dönüştürme eşlemesi
+title: Azure Data Factory eşleme veri akışı arama dönüşümü
+description: Azure Data Factory eşleme veri akışı arama dönüşümü
 author: kromerm
 ms.author: makromer
-ms.reviewer: douglasl
 ms.service: data-factory
 ms.topic: conceptual
-ms.date: 02/03/2019
-ms.openlocfilehash: 197f5ba9d6921f4a9921b7074b9e05162d3e37b8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 10/03/2019
+ms.openlocfilehash: 01a1dba18e21a38695146560bbf85cf1a042ba02
+ms.sourcegitcommit: b4f201a633775fee96c7e13e176946f6e0e5dd85
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64868118"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72596560"
 ---
-# <a name="azure-data-factory-mapping-data-flow-lookup-transformation"></a>Azure veri fabrikası veri akışı arama dönüştürme eşlemesi
+# <a name="azure-data-factory-mapping-data-flow-lookup-transformation"></a>Azure Data Factory eşleme veri akışı arama dönüşümü
 
-[!INCLUDE [notes](../../includes/data-factory-data-flow-preview.md)]
+Veri akışınıza başka bir kaynaktan başvuru verileri eklemek için arama ' yı kullanın. Arama dönüşümü, başvuru tablonuzu işaret eden ve anahtar alanları ile eşleşen tanımlı bir kaynak gerektirir.
 
-Arama, veri akışı için başka bir kaynaktan başvuru verilerini eklemek için kullanın. Arama dönüştürme eden başvuru tablonuza ve anahtar alanları üzerinde eşleşen bir tanımlı kaynak gerektirir.
+![Arama dönüşümü](media/data-flow/lookup1.png "Arama")
 
-![Arama dönüşümü](media/data-flow/lookup1.png "arama")
+Gelen akış alanları ve başvuru kaynağındaki alanlar arasında eşleştirmek istediğiniz anahtar alanları seçin. İlk olarak, arama için sağ taraf olarak kullanmak üzere veri akışı tasarım tuvalinde yeni bir kaynak oluşturmuş olmanız gerekir.
 
-Gelen akış alanları ve başvuru kaynağı alanlar arasında eşleştirmek istediğiniz anahtar alanları seçin. Önce yeni bir kaynak sağ taraftaki arama için kullanılacak veri akışı tasarım Tuvali üzerindeki oluşturmuş olmanız gerekir.
+Eşleşmeler bulunduğunda, başvuru kaynağından elde edilen satırlar ve sütunlar veri akışınıza eklenecektir. Veri akışınız sonunda, havuzunuzu eklemek istediğiniz ilgilendiğiniz alanları seçebilirsiniz. Alternatif olarak, yalnızca saklamak istediğiniz her iki akıştaki alanları tutmak üzere alan listesini ayıklamak için aramalarınızdan sonra bir seçme dönüşümü kullanın.
 
-Eşleşme bulunduğunda, elde edilen satırları ve sütunları başvuru kaynaktan veri akışınıza eklenir. Havuz veri akışı sonuna dahil etmek istediğiniz ilgi alanları seçebilirsiniz.
+Arama dönüştürmesi, bir sol dış birleştirmenin eşdeğerini uygular. Bu nedenle, sol kaynak birleştirmenize ait tüm satırları sağ taraftaki eşleşmeler ile görürsünüz. Aramaınızda birden fazla eşleşen değer varsa veya arama ifadesini özelleştirmek isterseniz, bir JOIN dönüşümüne geçiş yapmak ve çapraz bir birleşimin kullanılması tercih edilir. Bu, yürütmeyle ilgili olası Kartezyen ürün Hatalarını ortadan kaldırmak için kullanılır.
 
-## <a name="match--no-match"></a>Eşleşen / eşleşme yok
+## <a name="match--no-match"></a>Eşleşme/eşleşme yok
 
-Arama dönüşümünüzü sonra sonraki dönüşümlerini ifade işlevini kullanarak her bir eşleşen satır sonuçlarını incelemek için kullanabilirsiniz `isMatch()` mantığınızı olup olmadığını arama satır eşleşmeyi veya sonuçlandı üzerinde temel seçenekler bir daha ayrıntılı yapmak.
+Arama dönüşümünüzü tamamladıktan sonra, aramanın bir satır eşleşmesi ile sonuçlanıp sonuçlanmadığını temel alarak mantığınızdaki diğer seçimleri yapmak için `isMatch()` ifade işlevini kullanarak her bir eşleşme satırının sonuçlarını incelemek üzere sonraki dönüşümleri kullanabilirsiniz.
 
-## <a name="optimizations"></a>En iyi duruma getirme
+![Arama kalıbı](media/data-flow/lookup111.png "Arama kalıbı")
 
-Data Factory'de veri akışları, ölçeği genişletilen Spark ortamlarda yürütün. Veri kümenizde çalışan düğümü bellek alanına sığıyorsa biz arama performansınızı en iyi duruma getirebilirsiniz.
+Arama dönüşümünü kullandıktan sonra, ```isMatch()``` işlevine koşullu bölünmüş dönüştürme bölme ekleyebilirsiniz. Yukarıdaki örnekte, eşleşen satırlar, ```NoMatch``` akışı aracılığıyla üst akış ve eşleşmesiz satırları akışa geçer.
 
-![Birleştirme yayını](media/data-flow/broadcast.png "yayın birleştirme")
+## <a name="first-or-last-value"></a>İlk veya son değer
 
-### <a name="broadcast-join"></a>Yayın birleştirme
+Aramaınızdan birden fazla eşleşme olduğunda, ilk veya son eşleşmeyi seçerek eşleşen birden fazla satırı azaltmak isteyebilirsiniz. Bunu, aramalarınızın ardından bir toplama dönüştürmesi kullanarak yapabilirsiniz.
 
-Sol seçin ve/veya veri kümesinin tamamının belleğe arama ilişkisi her iki taraftan göndermek için ADF istemek için birleştirme sağ tarafındaki yayın.
+Bu durumda, arama eşleştirmelerinin ilk değerini seçmek için ```PickFirst``` adlı bir toplama dönüştürmesi kullanılır.
+
+![Arama toplamı](media/data-flow/lookup333.png "Arama toplamı")
+
+![İlk arama](media/data-flow/lookup444.png "İlk arama")
+
+## <a name="optimizations"></a>İyileştirmeler
+
+Data Factory, veri akışları ölçekli Spark ortamlarında yürütülür. Veri kümeniz çalışan düğümü bellek alanına uyabiliyorsanız, arama performansınızı iyileştirebiliriz.
+
+![Yayın katılımı](media/data-flow/broadcast.png "Yayın katılımı")
+
+### <a name="broadcast-join"></a>Yayın katılımı
+
+Tüm veri kümesini arama ilişkisinin herhangi bir tarafından belleğe göndermek için, ADF isteği için sol ve/veya sağ taraf yayın katılımı ' nı seçin. Daha küçük veri kümeleri için bu, arama performansınızı büyük ölçüde iyileştirebilir.
 
 ### <a name="data-partitioning"></a>Veri bölümleme
 
-"Ayarlamak daha iyi çalışan her belleğe sığması veri kümelerini oluşturmak için bölümleme" iyileştirme sekmesinde arama dönüşümü seçerek verilerinizi bölümlemeyi de belirtebilirsiniz.
+Ayrıca, bir çalışan başına belleğe daha iyi uyum sağlayan veri kümeleri oluşturmak için arama dönüşümünün En Iyi sekmesinde "bölümlendirme ayarla" ' yı seçerek verilerinizin bölümlenmesini belirtebilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Birleştirme](data-flow-join.md) ve [EXISTS](data-flow-exists.md) dönüştürmeleri ADF eşleme veri akışları'nda benzer görevleri gerçekleştirebilirsiniz. Bu dönüştürme işlemleri bir sonraki göz atın.
+* [JOIN](data-flow-join.md) ve [Exists](data-flow-exists.md) dönüştürmeleri ADF eşleme veri akışlarında benzer görevleri gerçekleştirir. Sonraki Dönüştürmelere göz atın.
+* Eşleşen ve eşleşmeyen değerler üzerinde satırları ayırmak için ```isMatch()``` ile [koşullu bölme](data-flow-conditional-split.md) kullanın

@@ -1,58 +1,59 @@
 ---
-title: Özel teklifler | Azure Market
-description: Azure Marketi'nde uygulama ve hizmet yayımcılar için özel teklifler.
+title: Özel teklifler | Azure Marketi
+description: Uygulama ve hizmet yayımcıları için Azure Market 'te özel teklifler.
 services: Azure, Marketplace, Compute
 author: qianw211
 manager: pabutler
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 11/1/2018
-ms.author: qianw211
-ms.openlocfilehash: 179775076382022b9a97e7d76bc1e0dc4fbf69db
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: pabutler
+ms.openlocfilehash: 16903d4f9b1bad8a588b1a234ac84bc9c0150c4a
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64937565"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73827838"
 ---
 # <a name="private-offers"></a>Özel teklifler
 
-Özel sunduğuna [Microsoft Azure Marketi](https://azuremarketplace.microsoft.com/) yayımcılar yalnızca hedeflenen müşterilerin görebildiği SKU'ları oluşturmak etkinleştirin.
+Özel teklifler [Microsoft Azure Market](https://azuremarketplace.microsoft.com/) , yayımcıları yalnızca hedeflenen müşterilere görünen SKU 'lar oluşturmak üzere etkinleştirir.
 
-## <a name="unlock-enterprise-deals-with-private-offers"></a>Kurumsal anlaşmalar özel teklifler ile kilidini aç
+## <a name="unlock-enterprise-deals-with-private-offers"></a>Özel tekliflerle kurumsal anlaşmalar üzerinde yararlanın
 
-Kurumsal müşteriler, çevrimiçi marketlerden giderek bulmak, deneyin ve bulut çözümleri satın almak için kullanın. Artık özel olarak hedeflenen müşterilerle kuruluşlar gerektir özellikleri özelleştirilmiş çözümler paylaşmak için özel teklifler sayesinde, yayımcıların Market kullanabilirsiniz:
+Kurumsal müşteriler, bulut çözümlerini bulmak, denemek ve satın almak için çevrimiçi pazar yerleri giderek daha fazla kullanır. Artık özel tekliflerle, yayımcılar, kuruluşların ihtiyaç duyduğu özellikleri karşılayan hedeflenen müşterilerle özelleştirilmiş çözümleri özel olarak paylaşmak için Market kullanabilir:
 
-- *Fiyatlandırma anlaşılan* indirimleri genişletmek ve liste dışı genel kullanıma sunduğu fiyatlandırma yayımcılar olanak tanır.
-- *Özel hüküm ve koşullar* hüküm ve koşulları belirli bir müşteri için uygun hale getirmek yayımcılar etkinleştirin.
-- *Özel yapılandırmalar* sanal makineler, Azure uygulamaları ve SaaS uygulamaları teklifini tek bir müşterinin gereksinimlerine uyarlamak yayımcılar olanak tanır. Bu seçenek, tüm müşteriler için daha geniş kapsamda başlatmadan önce yeni ürün özellikleri için Önizleme erişimi sağlamak da sağlar.
+- *Anlaşmalı fiyatlandırma* , yayımcıların genel kullanıma sunulan tekliflerden indirimleri ve liste fiyatlarını genişletmesini sağlar.
+- *Özel hüküm ve koşullar,* yayımcıların hüküm ve koşulları belirli bir müşteriye uyarlayabilmenizi sağlar.
+- *Özelleştirilmiş konfigürasyonlar* , yayımcıların sanal makinelerini, Azure uygulamalarını ve SaaS uygulamalarını tek bir müşterinin ihtiyaçlarına uyarlamasına olanak sağlar. Bu seçenek, yayımcıların tüm müşterilere daha geniş bir şekilde başlatılmadan önce yeni ürün özelliklerine önizleme erişimi sağlamasına de olanak sağlar.
 
-Özel teklifler avantajı ölçek ve genel bir Market genel kullanılabilirliğini anlaşma ve özel fırsatlar ve yapılandırmaları sağlamak için gereken denetim ve esneklik ile olması yayımcıların izin verir. Birlikte, bu özellikleri güçlü Kurumsal benimseme bulut marketlerimiz, kapının kilidini açın.  Kuruluşlar, şimdi satın alın ve bekledikleri yolları ve isteğe bağlı satın.
+Özel teklifler, yayımcıların genel bir market 'in ölçek ve küresel kullanılabilirliğinden yararlanmasını sağlar ve özel anlaşmalar ve Konfigürasyonlar sağlamak için gereken esnekliği ve denetimi sağlar. Bu özellikler birlikte, bulut Pazar yerlerinin sağlam kurumsal benimseme kapağına yönelik kapıyı açar.  Kuruluşlar artık bekledikleri ve talep ettikleri yollarla satın alabilir ve satılarlar.
 
-Özel teklifler (Çözüm şablonları uygulanan veya yönetilen uygulamalar) uygulama Azure sanal makine için kullanılabilir ve SaaS uygulamaları sunar. Genel teklifler gibi özel teklifler oluşturulabilir ve aracılığıyla yönetilen [bulut iş ortağı portalı](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-azure-private-skus).  Müşteriler verilebilir veya dakikalar içinde özel teklifler erişimi iptal edildi.
+Özel teklifler artık sanal makine, Azure uygulaması (çözüm şablonları veya yönetilen uygulamalar olarak uygulanır) ve SaaS uygulamaları tarafından sunulmaktadır. Genel tekliflere benzer şekilde, özel teklifler [bulut iş ortağı portalı](./cloud-partner-portal-orig/cloud-partner-portal-azure-private-skus.md)aracılığıyla oluşturulup yönetilebilir.  Müşteriler, dakikalar içinde özel tekliflere erişim izni verebilir veya iptal edilebilir.
 
-## <a name="creating-private-offers-using-skus-and-plans"></a>SKU'ları ve planları kullanarak teklifleri özel oluşturma
+## <a name="creating-private-offers-using-skus-and-plans"></a>SKU 'Ları ve planları kullanarak özel teklifler oluşturma
 
-İçin *genel SKU'ları veya planları ile yeni veya mevcut teklifler*, yayımcılar kolayca oluşturabilir yeni, özel çeşitlemeleri yeni SKU'ları veya planlar oluşturup bunları özel olarak işaretleniyor.  [Özel SKU'ları](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-azure-private-skus) ve planları bir teklif bileşenleri ve yalnızca görünür ve hedeflenen müşteriler tarafından satın alınabilir. Özel SKU'ları ve planları temel görüntüleri yeniden ve/veya bir ortak SKU veya planı için zaten yayımlanan meta verileri sunar. Yayımcılar aynı temel görüntüyü birden fazla sürümünü yayımlama ve meta verileri sunmak zorunda kalmadan birden çok özel çeşitleri genel teklif oluşturmak bu seçeneği sağlar. Sanal makine ve Azure uygulama teklifleri için yalnızca özel bir SKU genel bir SKU ile temel bir görüntü paylaştığında teklife ilişkin temel görüntü herhangi bir değişiklik, temel görüntüyü kullanarak tüm genel ve özel SKU'ları arasında yayılır.
+*Kamu SKU 'ları veya planlarıyla yeni veya mevcut teklifler*için, yayımcılar yeni SKU 'lar veya planlar oluşturarak ve bunları özel olarak işaretleyerek kolayca yeni, özel Çeşitlemeler oluşturabilir.  [Özel SKU 'lar](./cloud-partner-portal-orig/cloud-partner-portal-azure-private-skus.md) ve planlar bir teklifin bileşenleridir ve hedeflenen müşteriler tarafından yalnızca görünür ve satın alınabilir alınırken. Özel SKU 'Lar ve planlar, temel görüntüleri ve/veya zaten ortak bir SKU veya plan için yayımlanmış meta verileri kullanabilir. Bu seçenek, yayımcıların aynı temel görüntünün birden çok sürümünü yayınlamak ve meta verileri sunmak zorunda kalmadan ortak bir teklifin birden çok özel çeşitlemelerini oluşturmalarına olanak tanır. Yalnızca sanal makine ve Azure uygulaması için özel bir SKU ortak SKU 'SU olan bir temel görüntüyü paylaşıyorsa, teklifin temel görüntüsündeki tüm değişiklikler, bu temel görüntüyü kullanarak tüm ortak ve özel SKU 'Lara yayılır.
 
-İçin *yalnızca özel SKU'ları veya planları içeren yeni teklifler*, yayımcılar sundukları teklifleri herhangi bir teklif olarak oluşturabilir ve sonra SKU'ları veya planları özel olarak işaretleyebilirsiniz. Yalnızca özel SKU'ları veya planları sahip teklifler bulunabilir veya aracılığıyla erişilebilir olmayacak [Azure Marketi](https://azuremarketplace.microsoft.com) veya [Azure portalında](https://azure.microsoft.com/features/azure-portal/) Teklifle ilişkili olmayan müşteriler tarafından.
+*Yalnızca özel SKU 'ları veya planları içeren yeni teklifler*için yayımcılar, tekliflerini başka bir teklif olarak oluşturabilir ve ardından SKU 'ları veya planları özel olarak işaretleyebilir. Yalnızca özel SKU 'Ların veya planların bulunduğu teklifler, [Azure Marketi](https://azuremarketplace.microsoft.com) veya teklifle ilişkilendirilmemiş müşteriler tarafından [Azure Portal](https://azure.microsoft.com/features/azure-portal/) bulunabilir veya erişilebilir olmayacaktır.
 
-## <a name="targeting-customers-with-private-offers"></a>Özel teklifler müşterilerle hedefleme
-Yeni ve mevcut özel teklifleri için yayımcıların abonelik tanımlayıcıları kullanan müşteriler hedefleyebilirsiniz. Yayımcılar bir sanal makine ya da Azure uygulama teklifini kullanarak, bir bireysel Azure aboneliği kimliği bir özel SKU kullanılabilirliğini sınırlamak veya 20000 Azure abonelik kimlikleri bir CSV'yi karşıya yükle. SaaS uygulama özel teklifini kullanırken, yayımcılar Azure abonelik kimliği veya Kiracı kimliği özel bir plan kullanılabilirliğini sınırlamak için el ile veya CSV karşıya yükleme yaklaşımı kullanarak ilişkilendirebilirsiniz.
+## <a name="targeting-customers-with-private-offers"></a>Özel tekliflerle müşterileri hedefleme
+Yayımcılar, hem yeni hem de mevcut özel teklifleriniz için abonelik tanımlayıcılarını kullanarak müşterileri hedefleyebilir. Bir sanal makine veya Azure Uygulama teklifi kullanan yayımcılar, özel SKU 'nun kullanılabilirliğini tek bir Azure abonelik kimliğiyle kısıtlayabilir veya en fazla 20.000 Azure abonelik kimliği olan bir CSV 'yi karşıya yükleyebilir. SaaS uygulaması özel teklifi kullanılırken, yayımcılar, el ile veya CSV yükleme yaklaşımını kullanarak bir özel planın kullanılabilirliğini kısıtlamak için bir Azure abonelik KIMLIĞI veya kiracı KIMLIĞI ilişkilendirebilir.
 
-Teklif sertifikalı ve yayımlanan sonra müşteriler güncelleştirildi veya eşitleme özel abonelikler özelliğini kullanarak SKU veya dakikalar içinde planı kaldırılmış. Bu özellik için özel SKU veya planı recertifying veya teklif yeniden yayımlanması sunulan müşterilerin listesini hızla ve kolayca güncelleştirmek yayımcılar sağlar.
+Bir teklif sertifikalandırıldıktan ve yayımlandıktan sonra, müşteriler özel abonelikleri Eşitle özelliği kullanılarak SKU 'dan veya dakikalar içinde planlayabilir. Bu özellik, yayımcıların özel SKU veya planın sunulduğu müşterilerin listesini, teklifi yeniden belirlemeden veya yeniden yayınlamadan, kolayca ve kolayca güncelleştirmesine olanak sağlar.
 
-## <a name="deploying-private-offers"></a>Özel dağıtımı sunar.
+## <a name="deploying-private-offers"></a>Özel teklifleri dağıtma
 
-Özel teklifler aracılığıyla bulunabilir yalnızca [Azure portalında](https://azure.microsoft.com/features/azure-portal/) ve aracılığıyla sunulmayan [Azure Marketi](https://azuremarketplace.microsoft.com). Azure portalında oturum açtıktan sonra müşteriler kendi özel teklifler erişmek için Market Gezinti öğesi seçebilirsiniz. Özel teklifler de arama sonuçlarında görünecek ve komut satırı ve Azure Resource Manager şablonları herhangi bir teklif yoluyla dağıtılabilir.
+Özel Teklifler yalnızca [Azure Portal](https://azure.microsoft.com/features/azure-portal/) aracılığıyla bulunabilir ve [Azure Marketi](https://azuremarketplace.microsoft.com)aracılığıyla sunulmaz. Müşteriler, Azure portal oturum açtıktan sonra özel tekliflerinden erişmek için Market gezinti öğesini seçebilir. Özel teklifler de arama sonuçlarında görünür ve diğer teklifler gibi komut satırı ve Azure Resource Manager şablonları aracılığıyla dağıtılabilir.
 
 ![[Özel teklifler]](./media/marketplace-publishers-guide/private-offer.png)
 
-Özel teklifler de arama sonuçlarında görünecek. Yalnızca "Özel" rozet için dikkat edin.
+Özel teklifler, arama sonuçlarında da görünür. Yalnızca "özel" rozet için göz atın.
 
-> [!Note]
-> Bir bulut çözümü sağlayıcısı programı (CSP) satıcınız aracılığıyla kurulan abonelikleriyle özel teklifleri desteklenmez.
+>[!Note]
+>Özel teklifler, bulut çözümü sağlayıcısı programı (CSP) satıcısı aracılığıyla oluşturulan aboneliklerle desteklenmez.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu yeni özelliklerden yararlanmak isterseniz, üzerinde satış oluşturabileceğinize dair [Azure Marketi](https://azuremarketplace.microsoft.com/sell).
+Özel teklifleri kullanmaya başlamak için [özel SKU 'lar ve planlar](./cloud-partner-portal-orig/cloud-partner-portal-azure-private-skus.md) kılavuzundaki adımları izleyin.

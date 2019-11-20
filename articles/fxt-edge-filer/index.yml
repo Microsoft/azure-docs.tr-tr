@@ -7,8 +7,8 @@ metadata:
   author: ekpgh
   ms.service: fxt-edge-filer
   ms.topic: landing-page
-  ms.date: 06/20/2019
-  ms.author: v-erkell
+  ms.date: 07/10/2019
+  ms.author: rohogue
 abstract:
   description: 'Azure FXT Edge Filer hibrit depolama önbelleği dosya tabanı, yoğun okuma işlemleri içeren yüksek performanslı (HPC) iş akışları için veri erişimini hızlandıran bir donanım/yazılım hibrit sistemdir. Üç veya daha fazla Azure FXT Edge Filer cihazından oluşan bir küme şirket için NAS sistemleri (NetApp veya Dell EMC Isilon), bulut depolama veya çözümlerin bir birleşimi için depolama performansını hızlandırabilir.'
 sections:
@@ -39,3 +39,4 @@ sections:
         items:
           - html: <a href="fxt-specs">Donanım belirtimleri</a>
           - html: <a href="fxt-additional-doc">Diğer belgeler</a>
+          - html: <a href="fxt-support-ticket">Destek bileti açma</a>

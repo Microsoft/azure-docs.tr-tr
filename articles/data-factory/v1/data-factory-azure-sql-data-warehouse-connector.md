@@ -1,6 +1,6 @@
 ---
-title: Veri kopyalama/Azure SQL veri ambarı | Microsoft Docs
-description: Azure Data Factory kullanarak Azure SQL veri ambarı/deposundan veri kopyalamayı öğreneceksiniz
+title: Azure SQL veri ambarı 'ndan/içinden veri kopyalama
+description: Azure Data Factory kullanarak Azure SQL veri ambarı 'na/verilerine veri kopyalamayı öğrenin
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -13,101 +13,101 @@ ms.topic: conceptual
 ms.date: 01/10/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: dfd0443dafbc4fcc221937f248bf6d2f292b528f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: d0306d891b327422383120ef322ece407829f7ed
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60335411"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73683053"
 ---
-# <a name="copy-data-to-and-from-azure-sql-data-warehouse-using-azure-data-factory"></a>Azure Data Factory kullanarak Azure SQL veri ambarı gelen ve giden veri kopyalama
-> [!div class="op_single_selector" title1="Data Factory hizmetinin kullandığınız sürümü seçin:"]
+# <a name="copy-data-to-and-from-azure-sql-data-warehouse-using-azure-data-factory"></a>Azure Data Factory kullanarak Azure SQL veri ambarı 'na veri kopyalama
+> [!div class="op_single_selector" title1="Kullandığınız Data Factory hizmeti sürümünü seçin:"]
 > * [Sürüm 1](data-factory-azure-sql-data-warehouse-connector.md)
 > * [Sürüm 2 (geçerli sürüm)](../connector-azure-sql-data-warehouse.md)
 
 > [!NOTE]
-> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız bkz [V2'de Azure SQL veri ambarı Bağlayıcısı](../connector-azure-sql-data-warehouse.md).
+> Bu makale, Data Factory’nin 1. sürümü için geçerlidir. Data Factory hizmetinin geçerli sürümünü kullanıyorsanız, bkz. [v2 'de Azure SQL veri ambarı Bağlayıcısı](../connector-azure-sql-data-warehouse.md).
 
-Bu makalede, Azure SQL veri ambarı gönderip buralardan veri taşımak için Azure Data Factory kopyalama etkinliği kullanmayı açıklar. Yapılar [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesi, kopyalama etkinliği ile verileri taşıma genel bir bakış sunar.
+Bu makalede, Azure SQL veri ambarı 'na/kaynağından veri taşımak için Azure Data Factory kopyalama etkinliğinin nasıl kullanılacağı açıklanmaktadır. Kopyalama etkinliğiyle veri hareketine genel bir bakış sunan [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesinde oluşturulur.
 
 > [!TIP]
-> En iyi performansı elde etmek için Azure SQL veri ambarı'na veri yüklemek için PolyBase kullanın. [Azure SQL veri ambarı'na veri yüklemek için PolyBase kullanma](data-factory-azure-sql-data-warehouse-connector.md#use-polybase-to-load-data-into-azure-sql-data-warehouse) Ayrıntılar bölümünde bulunur. Kullanım örneği ile bir kılavuz için bkz. [1 TB 15 dakikadan daha kısa Azure Data Factory ile Azure SQL Data Warehouse'a veri yükleme](data-factory-load-sql-data-warehouse.md).
+> En iyi performansı elde etmek için PolyBase 'i kullanarak Azure SQL veri ambarı 'na veri yükleyin. [Verileri Azure SQL veri ambarı 'na yüklemek Için PolyBase kullanma](data-factory-azure-sql-data-warehouse-connector.md#use-polybase-to-load-data-into-azure-sql-data-warehouse) bölümünde ayrıntılar bulunur. Kullanım örneği ile ilgili bir anlatım için, [Azure Data Factory ile 15 dakika altında 1 TB 'Yi Azure SQL veri ambarı 'Na yükleme](data-factory-load-sql-data-warehouse.md)bölümüne bakın.
 
 ## <a name="supported-scenarios"></a>Desteklenen senaryolar
-Veri kopyalayabilirsiniz **Azure SQL veri ambarı'ndan** aşağıdaki verilere depolar:
+**Azure SQL veri ambarı 'ndan** aşağıdaki veri depolarına veri kopyalayabilirsiniz:
 
 [!INCLUDE [data-factory-supported-sinks](../../../includes/data-factory-supported-sinks.md)]
 
-Aşağıdaki veri depolarından veri kopyalayabilirsiniz **Azure SQL veri ambarı**:
+Aşağıdaki veri depolarından verileri **Azure SQL veri ambarı 'na**kopyalayabilirsiniz:
 
 [!INCLUDE [data-factory-supported-sources](../../../includes/data-factory-supported-sources.md)]
 
 > [!TIP]
-> Tablo hedef depoda mevcut değilse data SQL Server veya Azure SQL veritabanından Azure SQL veri ambarı'na kopyalama yapılırken, Data Factory otomatik olarak tabloyu SQL veri ambarı'nda kaynak veri deposunda tablonun şeması kullanarak oluşturabilirsiniz. Bkz: [Otomatik Tablo oluşturma](#auto-table-creation) Ayrıntılar için.
+> SQL Server veya Azure SQL veritabanından Azure SQL veri ambarı 'na veri kopyalarken, tablo hedef depoda yoksa, Data Factory tabloyu kaynak veri deposundaki tablonun şemasını kullanarak SQL Data Warehouse 'da otomatik olarak oluşturabilir. Ayrıntılar için bkz. [Otomatik tablo oluşturma](#auto-table-creation) .
 
 ## <a name="supported-authentication-type"></a>Desteklenen kimlik doğrulama türü
-Azure SQL veri ambarı Bağlayıcısı desteğini temel kimlik doğrulaması.
+Azure SQL veri ambarı Bağlayıcısı, temel kimlik doğrulamasını destekler.
 
 ## <a name="getting-started"></a>Başlarken
-Farklı araçlar/API'lerini kullanarak bir Azure SQL veri ambarı gönderip buralardan veri taşıyan kopyalama etkinliği ile işlem hattı oluşturabilirsiniz.
+Farklı araçlar/API 'Ler kullanarak bir Azure SQL veri ambarına veri taşıyan kopyalama etkinliği ile bir işlem hattı oluşturabilirsiniz.
 
-Azure SQL veri ambarı/deposundan kopyalayan bir işlem hattı oluşturmak için en kolay yolu, veri kopyalama Sihirbazı'nı kullanmaktır. Bkz: [Öğreticisi: Data Factory ile SQL veri ambarı'na veri yükleme](../../sql-data-warehouse/sql-data-warehouse-load-with-data-factory.md) veri kopyalama Sihirbazı'nı kullanarak bir işlem hattı oluşturma hızlı bir kılavuz.
+Azure SQL veri ambarı 'na/verilerine veri kopyalayan bir işlem hattı oluşturmanın en kolay yolu, veri kopyalama Sihirbazı 'nı kullanmaktır. Veri kopyalama Sihirbazı 'nı kullanarak bir işlem hattı oluşturma hakkında hızlı bir yol için [Data Factory Ile SQL veri ambarı 'na veri yükleme](../../sql-data-warehouse/sql-data-warehouse-load-with-data-factory.md) makalesine bakın.
 
-Ayrıca, bir işlem hattı oluşturmak için aşağıdaki araçları kullanabilirsiniz: **Azure portalında**, **Visual Studio**, **Azure PowerShell**, **Azure Resource Manager şablonu**, **.NET API**ve  **REST API**. Bkz: [kopyalama etkinliği Öğreticisi](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md) kopyalama etkinliği ile işlem hattı oluşturmak adım adım yönergeler için.
+İşlem hattı oluşturmak için aşağıdaki araçları da kullanabilirsiniz: **Visual Studio**, **Azure PowerShell**, **Azure Resource Manager şablonu**, **.NET API**ve **REST API**. Kopyalama etkinliğine sahip bir işlem hattı oluşturmak için adım adım yönergeler için bkz. [kopyalama etkinliği öğreticisi](data-factory-copy-data-from-azure-blob-storage-to-sql-database.md) .
 
-API'ler ve Araçlar kullanmanıza bakılmaksızın, bir havuz veri deposu için bir kaynak veri deposundan veri taşıyan bir işlem hattı oluşturmak için aşağıdaki adımları gerçekleştirin:
+Araçları veya API 'Leri kullanıp kullanmayacağınızı bir kaynak veri deposundan havuz veri deposuna veri taşınan bir işlem hattı oluşturmak için aşağıdaki adımları gerçekleştirirsiniz:
 
-1. Oluşturma bir **veri fabrikası**. Veri fabrikası, bir veya daha fazla işlem hattı içerebilir. 
-2. Oluşturma **bağlı hizmetler** girdi ve çıktı verilerini bağlamak için veri fabrikanıza depolar. Örneğin, verileri bir Azure blob depolama alanından Azure SQL veri ambarı'na kopyalıyorsanız Azure depolama hesabınızı ve Azure SQL veri ambarı veri fabrikanıza bağlamak için iki bağlı hizmet oluşturursunuz. Azure SQL veri ambarı'na özgü bağlı hizmeti özellikleri için bkz: [bağlı hizmeti özellikleri](#linked-service-properties) bölümü. 
-3. Oluşturma **veri kümeleri** kopyalama işleminin girdi ve çıktı verilerini göstermek için. Son adımda bahsedilen örnekte, bir veri kümesi blob kapsayıcıyı ve girdi verilerini içeren klasörü belirtin oluşturun. Ayrıca, blob depolama alanından kopyalanan verileri tutan Azure SQL data warehouse'da tablo belirtmek için başka bir veri kümesi oluşturursunuz. Azure SQL veri ambarı'na özgü veri kümesi özellikleri için bkz: [veri kümesi özellikleri](#dataset-properties) bölümü.
-4. Oluşturma bir **işlem hattı** bir veri kümesini girdi ve çıktı olarak bir veri kümesini alan kopyalama etkinliği ile. Daha önce bahsedilen örnekte BlobSource bir kaynak ve SqlDWSink havuz olarak kopyalama etkinliği için kullanırsınız. Azure SQL veri ambarı ' Azure Blob depolama alanına kopyalanıyorsa, benzer şekilde, SqlDWSource ve BlobSink kopyalama etkinliği kullanırsınız. Azure SQL veri ambarı'na özel kopyalama etkinliği özellikleri için bkz: [kopyalama etkinliği özellikleri](#copy-activity-properties) bölümü. Bir kaynak veya havuz bir veri deposunu kullanma hakkında daha fazla ayrıntı için önceki bölümde veri deponuz için bağlantıya tıklayın.
+1. Bir **Veri Fabrikası**oluşturun. Bir veri fabrikası bir veya daha fazla işlem hattı içerebilir. 
+2. Giriş ve çıkış veri depolarını veri fabrikanıza bağlamak için **bağlı hizmetler** oluşturun. Örneğin, bir Azure Blob depolama alanından Azure SQL veri ambarı 'na veri kopyalıyorsanız, Azure depolama hesabınızı ve Azure SQL veri Ambarınızı veri fabrikanıza bağlamak için iki bağlı hizmet oluşturursunuz. Azure SQL veri ambarı 'na özgü bağlantılı hizmet özellikleri için bkz. [bağlı hizmet özellikleri](#linked-service-properties) bölümü. 
+3. Kopyalama işlemi için girdi ve çıktı verilerini temsil edecek **veri kümeleri** oluşturun. Son adımda bahsedilen örnekte, blob kapsayıcısını ve girdi verilerini içeren klasörü belirtmek için bir veri kümesi oluşturursunuz. Ve, blob depolamadan kopyalanmış verileri tutan Azure SQL veri ambarı 'nda tabloyu belirtmek için başka bir veri kümesi oluşturursunuz. Azure SQL veri ambarı 'na özgü veri kümesi özellikleri için bkz. [veri kümesi özellikleri](#dataset-properties) bölümü.
+4. Bir veri kümesini girdi olarak ve bir veri kümesini çıkış olarak alan kopyalama etkinliği ile bir işlem **hattı** oluşturun. Daha önce bahsedilen örnekte, BlobSource değerini kaynak ve SqlDWSink olarak kopyalama etkinliği için havuz olarak kullanırsınız. Benzer şekilde, Azure SQL veri ambarı 'ndan Azure Blob depolama alanına kopyalama yapıyorsanız kopyalama etkinliğinde SqlDWSource ve BlobSink kullanın. Azure SQL veri ambarı 'na özgü kopyalama etkinliği özellikleri için bkz. [kopyalama etkinliği özellikleri](#copy-activity-properties) bölümü. Bir veri deposunu kaynak veya havuz olarak kullanma hakkında ayrıntılı bilgi için, veri deponuzdaki önceki bölümde yer alan bağlantıya tıklayın.
 
-Sihirbazı'nı kullandığınızda, bu Data Factory varlıklarını (bağlı hizmetler, veri kümeleri ve işlem hattı) için JSON tanımları sizin için otomatik olarak oluşturulur. Araçlar/API'leri (dışında .NET API'si) kullandığınızda, bu Data Factory varlıkları JSON biçimini kullanarak tanımlayın. Veri gönderip buralardan bir Azure SQL veri ambarı kopyalamak için kullanılan Data Factory varlıkları için JSON tanımları ile örnekleri için bkz [JSON örnekler](#json-examples-for-copying-data-to-and-from-sql-data-warehouse) bu makalenin.
+Sihirbazı kullandığınızda, bu Data Factory varlıkların JSON tanımları (bağlı hizmetler, veri kümeleri ve işlem hattı) sizin için otomatik olarak oluşturulur. Araçlar/API 'Leri (.NET API hariç) kullandığınızda, bu Data Factory varlıkları JSON biçimini kullanarak tanımlarsınız. Bir Azure SQL veri ambarına veri kopyalamak için kullanılan Data Factory varlıkları için JSON tanımları içeren örnekler için, bu makalenin [JSON örnekleri](#json-examples-for-copying-data-to-and-from-sql-data-warehouse) bölümüne bakın.
 
-Aşağıdaki bölümler, Azure SQL veri ambarı'na Data Factory varlıklarını belirli tanımlamak için kullanılan JSON özellikleri hakkında ayrıntılı bilgi sağlar:
+Aşağıdaki bölümler, Azure SQL veri ambarı 'na özgü Data Factory varlıkları tanımlamak için kullanılan JSON özellikleri hakkında ayrıntılı bilgi sağlar:
 
-## <a name="linked-service-properties"></a>Bağlı hizmeti özellikleri
-Aşağıdaki tabloda, Azure SQL veri ambarı bağlı hizmete özgü JSON öğeleri için açıklama sağlar.
+## <a name="linked-service-properties"></a>Bağlı hizmet özellikleri
+Aşağıdaki tabloda, Azure SQL veri ambarı bağlı hizmetine özgü JSON öğeleri için açıklama verilmiştir.
 
 | Özellik | Açıklama | Gerekli |
 | --- | --- | --- |
-| type |Type özelliği ayarlanmalıdır: **AzureSqlDW** |Evet |
-| connectionString |ConnectionString özelliği için Azure SQL veri ambarı örneğine bağlanmak için gereken bilgileri belirtin. Temel kimlik doğrulaması desteklenir. |Evet |
+| type |Type özelliği: **Azuresqldw** olarak ayarlanmalıdır |Evet |
+| connectionString |ConnectionString özelliği için Azure SQL veri ambarı örneğine bağlanmak için gereken bilgileri belirtin. Yalnızca temel kimlik doğrulaması desteklenir. |Evet |
 
 > [!IMPORTANT]
-> Yapılandırma [Azure SQL veritabanı Güvenlik Duvarı](https://msdn.microsoft.com/library/azure/ee621782.aspx#ConnectingFromAzure) ve veritabanı sunucusuna [Azure hizmetlerinin sunucuya erişmesine izin](https://msdn.microsoft.com/library/azure/ee621782.aspx#ConnectingFromAzure). Dış Azure data factory ağ geçidi ile şirket içi veri kaynaklarından dahil olmak üzere Azure SQL veri ambarı'na veri kopyalıyorsanız, ayrıca, Azure SQL veri ambarı'na veri gönderiyor makine için uygun IP adresi aralığı yapılandırın.
+> Azure [hizmetlerinin sunucuya erişmesine izin](https://msdn.microsoft.com/library/azure/ee621782.aspx#ConnectingFromAzure)vermek IÇIN [Azure SQL veritabanı güvenlik duvarını](https://msdn.microsoft.com/library/azure/ee621782.aspx#ConnectingFromAzure) ve veritabanı sunucusunu yapılandırın. Ayrıca, Data Factory ağ geçidine sahip şirket içi veri kaynakları dahil Azure dışından Azure SQL veri ambarı 'na veri kopyalıyorsanız, Azure SQL veri ambarı 'na veri gönderen makine için uygun IP adresi aralığını yapılandırın.
 
 ## <a name="dataset-properties"></a>Veri kümesi özellikleri
-Bölümleri ve veri kümeleri tanımlamak için kullanılabilir özellikleri tam listesi için bkz [veri kümeleri oluşturma](data-factory-create-datasets.md) makalesi. Bölümler bir veri kümesi JSON İlkesi yapısı ve kullanılabilirlik gibi tüm veri kümesi türleri (Azure SQL, Azure blob, Azure tablo, vs.) için benzer.
+Veri kümelerini tanımlamaya yönelik özellikler & bölümlerin tam listesi için bkz. [veri kümeleri oluşturma](data-factory-create-datasets.md) makalesi. Bir veri kümesinin yapısı, kullanılabilirliği ve İlkesi gibi bölümler, tüm veri kümesi türleri (Azure SQL, Azure blob, Azure tablosu vb.) için benzerdir.
 
-TypeProperties bölümünün her tür veri kümesi için farklıdır ve verilerin veri deposundaki konumu hakkında bilgi sağlar. **TypeProperties** türü için veri kümesi bölümünü **AzureSqlDWTable** aşağıdaki özelliklere sahiptir:
+TypeProperties bölümü her bir veri kümesi türü için farklıdır ve veri deposundaki verilerin konumu hakkında bilgi sağlar. **Azuresqldwtable** türündeki veri kümesinin **typeproperties** bölümü aşağıdaki özelliklere sahiptir:
 
 | Özellik | Açıklama | Gerekli |
 | --- | --- | --- |
-| tableName |Tablo veya Görünüm başvuran bağlı hizmetin Azure SQL veri ambarı veritabanı adı. |Evet |
+| tableName |Bağlı hizmetin başvurduğu Azure SQL veri ambarı veritabanında tablonun veya görünümün adı. |Evet |
 
 ## <a name="copy-activity-properties"></a>Kopyalama etkinliğinin özellikleri
-Bölümleri & etkinlikleri tanımlamak için mevcut özelliklerin tam listesi için bkz: [işlem hatları oluşturma](data-factory-create-pipelines.md) makalesi. İlke adı ve açıklaması, girdi ve çıktı tabloları gibi özellikler, tüm etkinlik türleri için kullanılabilir.
+Etkinlikleri tanımlamaya yönelik bölüm & özelliklerinin tam listesi için, işlem [hatları oluşturma](data-factory-create-pipelines.md) makalesine bakın. Ad, açıklama, giriş ve çıkış tabloları ve ilke gibi özellikler, tüm etkinlik türleri için kullanılabilir.
 
 > [!NOTE]
-> Kopyalama etkinliği, tek bir girdi alır ve tek bir çıktı üretir.
+> Kopyalama etkinliği yalnızca bir girdi alır ve yalnızca bir çıktı üretir.
 
-Oysa etkinliğin typeProperties bölümündeki özellikler her etkinlik türü ile farklılık gösterir. Kopyalama etkinliği için kaynaklar ve havuzlar türlerine bağlı olarak farklılık gösterir.
+Ancak, etkinliğin typeProperties bölümünde kullanılabilen özellikler her etkinlik türüyle farklılık gösterir. Kopyalama etkinliği için, kaynak ve havuz türlerine göre farklılık gösterir.
 
 ### <a name="sqldwsource"></a>SqlDWSource
-Kaynak türü olduğunda **SqlDWSource**, aşağıdaki özellikler kullanılabilir **typeProperties** bölümü:
+Kaynak **Sqldwsource**türünde olduğunda, **typeproperties** bölümünde aşağıdaki özellikler mevcuttur:
 
 | Özellik | Açıklama | İzin verilen değerler | Gerekli |
 | --- | --- | --- | --- |
-| sqlReaderQuery |Verileri okumak için özel sorgu kullanın. |SQL sorgu dizesi. Örneğin: seçin * MyTable öğesinden. |Hayır |
-| sqlReaderStoredProcedureName |Kaynak tablo verilerini okuyan saklı yordamın adı. |Saklı yordamın adı. Son SQL deyim bir SELECT deyimi saklı yordam içinde olmalıdır. |Hayır |
-| storedProcedureParameters |Saklı yordamın parametreleri. |Ad/değer çiftleri. Adları ve parametreleri büyük küçük harfleri, adları ve saklı yordam parametreleri büyük küçük harfleri eşleşmelidir. |Hayır |
+| sqlReaderQuery |Verileri okumak için özel sorguyu kullanın. |SQL sorgu dizesi. Örneğin: select * from MyTable. |Hayır |
+| sqlReaderStoredProcedureName |Kaynak tablodaki verileri okuyan saklı yordamın adı. |Saklı yordamın adı. Son SQL ifadesinin saklı yordamda bir SELECT ifadesinin olması gerekir. |Hayır |
+| storedProcedureParameters |Saklı yordamın parametreleri. |Ad/değer çiftleri. Parametrelerin adları ve büyük harfleri, saklı yordam parametrelerinin adlarıyla ve büyük küçük harfleriyle aynı olmalıdır. |Hayır |
 
-Varsa **sqlReaderQuery** belirtilen SqlDWSource için kopyalama etkinliği, verileri almak için Azure SQL veri ambarı kaynağına bu sorgu çalıştırır.
+SqlDWSource için **Sqlreaderquery** belirtilmişse, kopyalama etkinliği verileri almak için bu SORGUYU Azure SQL veri ambarı kaynağında çalıştırır.
 
-Alternatif olarak, bir saklı yordam belirterek belirtebileceğiniz **sqlReaderStoredProcedureName** ve **storedProcedureParameters** (saklı yordamın parametreleri sürerse).
+Alternatif olarak, **sqlReaderStoredProcedureName** ve **storedProcedureParameters** (saklı yordam parametreler alırsa) belirterek bir saklı yordam belirtebilirsiniz.
 
-SqlReaderQuery ya da sqlReaderStoredProcedureName belirtmezseniz JSON veri kümesi yapısı bölümünde tanımlanan sütunları Azure SQL veri ambarına karşı çalıştırmak için bir sorgu oluşturmak için kullanılır. Örnek: `select column1, column2 from mytable`. Veri kümesi tanımı yapısına sahip değilse, tüm sütunları tablodan seçilir.
+SqlReaderQuery veya sqlReaderStoredProcedureName belirtmezseniz, Azure SQL veri ambarı 'nda çalıştırılacak bir sorgu oluşturmak için JSON veri kümesinin yapı bölümünde tanımlanan sütunlar kullanılır. Örnek: `select column1, column2 from mytable`. Veri kümesi tanımında yapı yoksa, tablodaki tüm sütunlar seçilir.
 
 #### <a name="sqldwsource-example"></a>SqlDWSource örneği
 
@@ -141,19 +141,19 @@ GO
 ```
 
 ### <a name="sqldwsink"></a>SqlDWSink
-**SqlDWSink** aşağıdaki özellikleri destekler:
+**Sqldwsink** aşağıdaki özellikleri destekler:
 
 | Özellik | Açıklama | İzin verilen değerler | Gerekli |
 | --- | --- | --- | --- |
-| sqlWriterCleanupScript |Belirli bir dilimin veri Temizlenen şekilde yürütmek kopyalama etkinliği için bir sorgu belirtin. Ayrıntılar için bkz [yinelenebilirliği bölümü](#repeatability-during-copy). |Bir sorgu deyimi. |Hayır |
-| Bulunan'allowpolybase |PolyBase, (uygunsa) yerine BULKINSERT mekanizması kullanılıp kullanılmayacağını belirtir. <br/><br/> **PolyBase kullanarak SQL Data Warehouse'a veri yükleme için önerilen yoldur.** Bkz: [Azure SQL veri ambarı'na veri yüklemek için PolyBase kullanma](#use-polybase-to-load-data-into-azure-sql-data-warehouse) kısıtlamaları ve ayrıntıları bölümü. |Doğru <br/>False (varsayılan) |Hayır |
-| polyBaseSettings |Bir grup olabilir özellik belirtilen **Bulunan'allowpolybase** özelliği **true**. |&nbsp; |Hayır |
-| rejectValue |Sayı veya sorgu başarısız olmadan önce reddedilemiyor satırları yüzdesini belirtir. <br/><br/>PolyBase'nın içinde reddetme seçeneklerini hakkında daha fazla bilgi **bağımsız değişkenleri** bölümünü [CREATE EXTERNAL TABLE (Transact-SQL)](https://msdn.microsoft.com/library/dn935021.aspx) konu. |0 (varsayılan), 1, 2... |Hayır |
-| rejectType |RejectValue seçeneği değişmez değer veya bir yüzdesi olarak belirtilen belirtir. |Değer (varsayılan), yüzde |Hayır |
-| rejectSampleValue |Reddedilen satırların yüzdesi PolyBase yeniden hesaplar önce almak için satır sayısını belirler. |1, 2, … |Evet, varsa **rejectType** olduğu **yüzdesi** |
-| useTypeDefault |PolyBase metin dosyasından veri aldığında sınırlandırılmış metin dosyaları eksik değerleri nasıl ele alınacağını belirtir.<br/><br/>Bağımsız değişkenler bölümünden bu özellik hakkında daha fazla bilgi [oluşturma EXTERNAL FILE FORMAT (Transact-SQL)](https://msdn.microsoft.com/library/dn935026.aspx). |TRUE, False (varsayılan) |Hayır |
-| writeBatchSize |Arabellek boyutu writeBatchSize ulaştığında veri SQL tablosuna ekler. |Tamsayı (satır sayısı) |Hayır (varsayılan: 10000) |
-| writeBatchTimeout |Toplu ekleme işlemi zaman aşımına uğramadan önce tamamlanması için bir süre bekleyin. |TimeSpan<br/><br/> Örnek: "00: 30:00" (30 dakika). |Hayır |
+| sqlWriterCleanupScript |Bir kopyalama etkinliğinin yürütülmesi için belirli bir dilim verilerinin temizlenmesi için bir sorgu belirtin. Ayrıntılar için bkz. [yinelenebilirlik bölümü](#repeatability-during-copy). |Sorgu ekstresi. |Hayır |
+| allowPolyBase |BULKıNSERT mekanizması yerine PolyBase 'in (uygun olduğunda) kullanılıp kullanılmayacağını belirtir. <br/><br/> **PolyBase 'in kullanılması, verileri SQL veri ambarı 'na yüklemek için önerilen yoldur.** Kısıtlamalar ve Ayrıntılar için bkz. [PolyBase 'ı kullanarak Azure SQL veri ambarı 'na veri yükleme](#use-polybase-to-load-data-into-azure-sql-data-warehouse) bölümüne bakın. |True <br/>False (varsayılan) |Hayır |
+| polyBaseSettings |**Allowpolybase** özelliği **true**olarak ayarlandığında belirtilenebilir bir özellik grubu. |&nbsp; |Hayır |
+| rejectValue |Sorgu başarısız olmadan önce reddedilecek satırların sayısını veya yüzdesini belirtir. <br/><br/>[Dış tablo oluşturma (Transact-SQL)](https://msdn.microsoft.com/library/dn935021.aspx) konusunun **bağımsız değişkenler** bölümünde PolyBase 'in reddetme seçenekleri hakkında daha fazla bilgi edinin. |0 (varsayılan), 1, 2,... |Hayır |
+| rejectType |RejectValue seçeneğinin sabit değer değeri mi yoksa yüzde olarak mı belirtilmediğini belirtir. |Değer (varsayılan), yüzde |Hayır |
+| rejectSampleValue |PolyBase reddedilen satırların yüzdesini yeniden hesaplamadan önce alınacak satır sayısını belirler. |1, 2,... |Evet, **rejectType** **ise** |
+| useTypeDefault |PolyBase metin dosyasından verileri aldığında, sınırlandırılmış metin dosyalarında eksik değerlerin nasıl işleneceğini belirtir.<br/><br/>[Dış dosya biçimi oluşturma (Transact-SQL)](https://msdn.microsoft.com/library/dn935026.aspx)Içindeki bağımsız değişkenler bölümünden bu özellik hakkında daha fazla bilgi edinin. |True, false (varsayılan) |Hayır |
+| writeBatchSize |Arabellek boyutu writeBatchSize ulaştığında verileri SQL tablosuna ekler |Tamsayı (satır sayısı) |Hayır (varsayılan: 10000) |
+| writeBatchTimeout |Toplu ekleme işleminin, zaman aşımına uğramadan önce tamamlaması için bekleme süresi. |TimeSpan<br/><br/> Örnek: "00:30:00" (30 dakika). |Hayır |
 
 #### <a name="sqldwsink-example"></a>SqlDWSink örneği
 
@@ -164,13 +164,13 @@ GO
 }
 ```
 
-## <a name="use-polybase-to-load-data-into-azure-sql-data-warehouse"></a>Azure SQL veri ambarı'na veri yüklemek için PolyBase kullanma
-Kullanarak **[PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide)** büyük miktarda veri, yüksek aktarım hızı ile Azure SQL Data Warehouse'a veri yükleme etkili bir yoludur. Yerine varsayılan BULKINSERT mekanizmasını PolyBase kullanarak büyük bir kazanç aktarım hızının görebilirsiniz. Bkz: [kopyalama performans başvuru numarası](data-factory-copy-activity-performance.md#performance-reference) ile ayrıntılı bir karşılaştırması. Kullanım örneği ile bir kılavuz için bkz. [1 TB 15 dakikadan daha kısa Azure Data Factory ile Azure SQL Data Warehouse'a veri yükleme](data-factory-load-sql-data-warehouse.md).
+## <a name="use-polybase-to-load-data-into-azure-sql-data-warehouse"></a>Azure SQL veri ambarı 'na veri yüklemek için PolyBase kullanma
+**[PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide)** 'in kullanılması, yüksek aktarım hızı Ile Azure SQL veri ambarı 'na büyük miktarda veri yüklemenin etkili bir yoludur. Varsayılan BULKıNSERT mekanizması yerine PolyBase kullanarak üretilen iş için büyük bir kazanç görebilirsiniz. Bkz. ayrıntılı karşılaştırma ile [kopyalama performansı başvuru numarası](data-factory-copy-activity-performance.md#performance-reference) . Kullanım örneği ile ilgili bir anlatım için, [Azure Data Factory ile 15 dakika altında 1 TB 'Yi Azure SQL veri ambarı 'Na yükleme](data-factory-load-sql-data-warehouse.md)bölümüne bakın.
 
-* Veri kaynağınızı ise **Azure Blob veya Azure Data Lake Store**ve PolyBase ile uyumlu bir biçimi, Azure SQL PolyBase kullanarak veri ambarı için doğrudan kopyalayabilirsiniz. Bkz: **[PolyBase kullanarak doğrudan kopyalama](#direct-copy-using-polybase)** ayrıntılarla.
-* Kaynak veri deposu ve biçim başlangıçta desteklenmiyor, PolyBase ile kullanabileceğiniz **[PolyBase kullanarak kopyalama aşamalı](#staged-copy-using-polybase)** bunun yerine özellik. Ayrıca, daha iyi aktarım hızı tarafından otomatik olarak verileri PolyBase ile uyumlu biçimine dönüştürmek için kullanılan ve Azure Blob Depolama alanında veri depolama sağlar. Ardından verileri SQL veri ambarı'na yükler.
+* Kaynak verileriniz **Azure Blobu veya Azure Data Lake Store**ise ve biçim PolyBase ile uyumluysa, PolyBase kullanarak doğrudan Azure SQL veri ambarı 'na kopyalayabilirsiniz. Bkz. **[PolyBase 'i kullanarak doğrudan kopyalama](#direct-copy-using-polybase)** ayrıntıları.
+* Kaynak veri deponuzu ve formatı İlk olarak PolyBase tarafından desteklenmiyorsa, bunun yerine **[PolyBase özelliğini kullanarak hazırlanan kopyayı](#staged-copy-using-polybase)** kullanabilirsiniz. Ayrıca, verileri otomatik olarak PolyBase uyumlu biçime dönüştürerek ve verileri Azure Blob depolamada depolayarak daha iyi bir aktarım hızı sağlar. Daha sonra verileri SQL veri ambarı 'na yükler.
 
-Ayarlama `allowPolyBase` özelliğini **true** Azure Data Factory, PolyBase, Azure SQL veri ambarı'na veri kopyalamak için kullanmak için aşağıdaki örnekte gösterildiği gibi. Bulunan'allowpolybase true olarak ayarlandığında, PolyBase kullanarak belirli özelliklerini belirtebilirsiniz `polyBaseSettings` özellik grubu. bkz: [SqlDWSink](#sqldwsink) polyBaseSettings ile kullanabileceğiniz özellikleri hakkında ayrıntılar için bölüm.
+Azure SQL veri ambarı 'na veri kopyalamak için PolyBase 'i kullanmak üzere Azure Data Factory için aşağıdaki örnekte gösterildiği gibi `allowPolyBase` özelliğini **true** olarak ayarlayın. AllowPolyBase 'i true olarak belirlediğinizde, `polyBaseSettings` Özellik grubunu kullanarak PolyBase 'e özgü özellikleri belirtebilirsiniz. polyBaseSettings ile kullanabileceğiniz özellikler hakkında ayrıntılı bilgi edinmek için [Sqldwsink](#sqldwsink) bölümüne bakın.
 
 ```JSON
 "sink": {
@@ -187,21 +187,21 @@ Ayarlama `allowPolyBase` özelliğini **true** Azure Data Factory, PolyBase, Azu
 ```
 
 ### <a name="direct-copy-using-polybase"></a>PolyBase kullanarak doğrudan kopyalama
-SQL veri ambarı PolyBase doğrudan destekleyen Azure Blob ve Azure Data Lake Store (hizmet sorumlusu kullanarak) kaynak olarak ve belirli dosya biçimi gereksinimlerine sahip. Veri kaynağınızı Bu bölümde açıklanan ölçütlere uyuyorsa, kaynak veri deposundan Azure SQL PolyBase kullanarak veri ambarı için doğrudan kopyalayabilirsiniz. Aksi takdirde, kullanabileceğiniz [PolyBase kullanarak kopyalama aşamalı](#staged-copy-using-polybase).
+SQL veri ambarı PolyBase, kaynak olarak ve belirli dosya biçimi gereksinimleriyle Azure Blob ve Azure Data Lake Store (hizmet sorumlusu kullanarak) doğrudan destek. Kaynak verileriniz bu bölümde açıklanan ölçütleri karşılıyorsa, PolyBase kullanarak kaynak veri deposundan doğrudan Azure SQL veri ambarı 'na kopyalayabilirsiniz. Aksi halde, [PolyBase kullanarak hazırlanmış kopyayı](#staged-copy-using-polybase)kullanabilirsiniz.
 
 > [!TIP]
-> SQL veri ambarı'na Data Lake Store ' verileri verimli bir şekilde kopyalamak için daha fazla bilgi [Azure Data Factory sağlar, bu, hatta daha kolay ve verileri SQL veri ambarı ile Data Lake Store kullanırken açığa çıkarmak kullanışlı](https://blogs.msdn.microsoft.com/azuredatalake/2017/04/08/azure-data-factory-makes-it-even-easier-and-convenient-to-uncover-insights-from-data-when-using-data-lake-store-with-sql-data-warehouse/).
+> Data Lake Store verileri SQL veri ambarı 'na verimli bir şekilde kopyalamak için, Azure Data Factory daha fazla bilgi edinin, [SQL veri ambarı ile Data Lake Store kullanırken verilerin öngörülerini daha kolay ve](https://blogs.msdn.microsoft.com/azuredatalake/2017/04/08/azure-data-factory-makes-it-even-easier-and-convenient-to-uncover-insights-from-data-when-using-data-lake-store-with-sql-data-warehouse/)kolay bir şekilde açığa çıkarabilir.
 
-Gereksinimler karşılanmazsa, Azure Data Factory ayarları denetler ve veri taşıma BULKINSERT mekanizması için otomatik olarak geri döner.
+Gereksinimler karşılanmazsa, Azure Data Factory ayarları denetler ve veri taşıma için otomatik olarak BULKıNSERT mekanizmasına geri döner.
 
-1. **Kaynak bağlı hizmet** türü: **AzureStorage** veya **hizmet sorumlusu kimlik doğrulaması ile birlikte AzureDataLakeStore**.
-2. **Girdi veri kümesi** türü: **AzureBlob** veya **birlikte AzureDataLakeStore**ve altında türü biçimi `type` özellikleri **OrcFormat**, **ParquetFormat**, veya **TextFormat** aşağıdaki yapılandırmalarla:
+1. **Kaynak bağlı hizmet** , **hizmet sorumlusu kimlik doğrulamasıyla**: **azurestorage** veya AzureDataLakeStore türünde.
+2. **Giriş veri kümesi** şunlardır: **AzureBlob** veya **AzureDataLakeStore**ve `type` Properties altındaki Biçim türü, aşağıdaki yapılandırmalarda **orcformat**, **parquetformat**veya **TextFormat** ' dir:
 
-   1. `rowDelimiter` olmalıdır **\n**.
-   2. `nullValue` ayarlanır **boş dize** (""), veya `treatEmptyAsNull` ayarlanır **true**.
-   3. `encodingName` ayarlanır **utf-8**, olduğu **varsayılan** değeri.
-   4. `escapeChar`, `quoteChar`, `firstRowAsHeader`, ve `skipLineCount` belirtilmedi.
-   5. `compression` olabilir **sıkıştırma**, **GZip**, veya **Deflate**.
+   1. `rowDelimiter` **\n**olmalıdır.
+   2. `nullValue`, **boş dize** ("") olarak ayarlanır veya `treatEmptyAsNull` **true**olarak ayarlanır.
+   3. `encodingName`, **varsayılan** değer olan **UTF-8**olarak ayarlanır.
+   4. `escapeChar`, `quoteChar`, `firstRowAsHeader`ve `skipLineCount` belirtilmemiş.
+   5. `compression` **sıkıştırma**, **gzip**veya **söndür**olamaz.
 
       ```JSON
       "typeProperties": {
@@ -220,18 +220,18 @@ Gereksinimler karşılanmazsa, Azure Data Factory ayarları denetler ve veri ta�
       },
       ```
 
-3. Var olan hiçbir `skipHeaderLineCount` altında ayarlama **BlobSource** veya **birlikte AzureDataLakeStore** işlem hattındaki kopyalama etkinliği için.
-4. Var olan hiçbir `sliceIdentifierColumnName` bölümündeki **SqlDWSink** işlem hattındaki kopyalama etkinliği için. (Tüm veriler güncelleştirildiğinde veya hiçbir şey tek bir çalıştırmada güncelleştirildiğinde PolyBase garanti eder. Elde etmek için **yinelenebilirliği**, kullanabileceğinizi `sqlWriterCleanupScript`).
-5. Var olan hiçbir `columnMapping` ilişkili kopyalama kullanılan etkinlik.
+3. İşlem hattındaki kopyalama etkinliği için **Blobsource** veya **AzureDataLakeStore** altında `skipHeaderLineCount` ayarı yoktur.
+4. İşlem hattındaki kopyalama etkinliği için **Sqldwsink** altında `sliceIdentifierColumnName` ayarı yok. (PolyBase, tüm verilerin güncelleştirildiğini veya tek bir çalıştırmada hiçbir şey güncelleştirilmediğini garanti eder. **Yinelenebilirlik**ulaşmak için `sqlWriterCleanupScript`) kullanabilirsiniz.
+5. İlişkili kopyalama etkinliğinde kullanılan `columnMapping` yok.
 
 ### <a name="staged-copy-using-polybase"></a>PolyBase kullanarak hazırlanmış kopya
-Veri kaynağınızı önceki bölümde sunulan ölçütlere uymuyor, geçici hazırlama Azure Blob (Premium depolama olamaz) depolama aracılığıyla veri kopyalamayı etkinleştirebilirsiniz. Bu durumda, Azure Data Factory otomatik olarak dönüştürmeler verileri PolyBase veri biçim gereksinimlerini ve ardından son temizleme ve SQL veri ambarı'na veri yüklemek için PolyBase kullanın, geçici veriler Blob depolama alanından gerçekleştirir. Bkz: [hazırlanmış kopya](data-factory-copy-activity-performance.md#staged-copy) nasıl aracılığıyla hazırlama bir Azure Blob veri kopyalama genel birlikte çalıştığı hakkında bilgi.
+Kaynak verileriniz önceki bölümde tanıtılan ölçütlere uymazsa, verileri geçici hazırlama Azure Blob depolama (Premium Depolama olamaz) aracılığıyla kopyalamayı etkinleştirebilirsiniz. Bu durumda Azure Data Factory, PolyBase 'in veri biçimi gereksinimlerini karşılamak üzere verilerde otomatik olarak dönüştürmeler gerçekleştirir, sonra SQL veri ambarı 'na veri yüklemek için PolyBase 'i kullanır ve BLOB depolama alanındaki geçici verilerinizi en son temizleme. Hazırlama Azure blobu aracılığıyla verilerin nasıl kopyalandığı hakkında ayrıntılı bilgi için bkz. [aşamalı kopya](data-factory-copy-activity-performance.md#staged-copy) , genel olarak çalışma.
 
 > [!NOTE]
-> Ne zaman üzerinde bir şirket içi verileri kopyalama verileri Azure SQL Data PolyBase kullanarak Warehouse'a veri depolamak ve hazırlama, veri yönetimi ağ geçidi sürümü 2.4 ise, kaynağınızı dönüştürmek için kullanılan, ağ geçidi makinesinde JRE (Java Çalışma zamanı ortamı) gereklidir doğru biçim verileri. Bu bağımlılık önlemek için en son ağ geçidinize yükseltmeniz önerilir.
+> PolyBase ve hazırlama kullanarak şirket içi veri deposundaki verileri Azure SQL veri ambarı 'na kopyalarken, Veri Yönetimi ağ geçidi sürümünüz 2,4 altındaysa, kaynağınızı dönüştürmek için kullanılan ağ geçidi makinenizde JRE (Java Runtime Environment) gerekir veriler doğru biçime sahip. Böyle bir bağımlılığı önlemek için ağ geçidinizi en son sürümüne yükseltmenizi önerin.
 >
 
-Bu özelliği kullanmak için oluşturun bir [Azure depolama bağlı hizmeti](data-factory-azure-blob-connector.md#azure-storage-linked-service) geçici blob depolama alanına sahip Azure depolama hesabına gösterir, ardından belirtin `enableStaging` ve `stagingSettings` gösterildiği gibi kopyalama etkinliği için özellikleri Aşağıdaki kodu:
+Bu özelliği kullanmak için, ara BLOB depolama alanına sahip Azure depolama hesabına başvuran bir [Azure depolama bağlı hizmeti](data-factory-azure-blob-connector.md#azure-storage-linked-service) oluşturun, ardından aşağıdaki kodda gösterildiği gibi kopyalama etkinliğinin `enableStaging` ve `stagingSettings` özelliklerini belirtin:
 
 ```json
 "activities":[
@@ -257,142 +257,142 @@ Bu özelliği kullanmak için oluşturun bir [Azure depolama bağlı hizmeti](da
 ]
 ```
 
-## <a name="best-practices-when-using-polybase"></a>PolyBase kullanırken en iyi yöntemler
-Aşağıdaki bölümlerde belirtilmiştir olanlara ilave en iyi uygulamalar [en iyi uygulamalar için Azure SQL veri ambarı](../../sql-data-warehouse/sql-data-warehouse-best-practices.md).
+## <a name="best-practices-when-using-polybase"></a>PolyBase kullanırken en iyi uygulamalar
+Aşağıdaki bölümlerde, [Azure SQL veri ambarı Için en iyi yöntemler](../../sql-data-warehouse/sql-data-warehouse-best-practices.md)bölümünde bahsedilen diğer en iyi yöntemler sağlanmaktadır.
 
-### <a name="required-database-permission"></a>Gerekli database izni
-PolyBase kullanmak için SQL Data Warehouse'a veri yükleme için kullanılan kullanıcı gerektiriyor ["CONTROL" izni](https://msdn.microsoft.com/library/ms191291.aspx) hedef veritabanında. Kullanıcı "db_owner" rolünün bir üyesi eklemek için elde etmenin bir yolu var. Bunu izleyerek öğrenin [Bu bölümde](../../sql-data-warehouse/sql-data-warehouse-overview-manage-security.md#authorization).
+### <a name="required-database-permission"></a>Gerekli veritabanı izni
+PolyBase 'i kullanmak için, SQL veri ambarı 'na veri yüklemek için kullanılan kullanıcının hedef veritabanında ["Control" iznine](https://msdn.microsoft.com/library/ms191291.aspx) sahip olması gerekir. Bunu yapmanın bir yolu, bu kullanıcıyı "db_owner" rolünün bir üyesi olarak eklemektir. [Bu bölümü](../../sql-data-warehouse/sql-data-warehouse-overview-manage-security.md#authorization)izleyerek bunu nasıl yapacağınızı öğrenin.
 
-### <a name="row-size-and-data-type-limitation"></a>Satır boyutu ve verileri sınırlama yazın
-Polybase yükleri sınırlı yükleme satırları hem küçük **1 MB** ve VARCHR(MAX), NVARCHAR(MAX) veya VARBINARY(MAX) yüklenemiyor. Başvurmak [burada](../../sql-data-warehouse/sql-data-warehouse-service-capacity-limits.md#loads).
+### <a name="row-size-and-data-type-limitation"></a>Satır boyutu ve veri türü sınırlaması
+PolyBase yükleri **1 MB** 'tan küçük satırları yüklemek ve VARCHR (max), nvarchar (max) veya VARBINARY (max) öğesine yüklenemez. [Buraya](../../sql-data-warehouse/sql-data-warehouse-service-capacity-limits.md#loads)bakın.
 
-Kaynak satır boyutu 1 MB'den büyük verilerle varsa, kaynak tabloları burada her biri en büyük satır boyutu sınırı aşmadığından birkaç küçük parçalara dikey olarak Böl isteyebilirsiniz. Daha küçük tablolar daha sonra PolyBase kullanarak yüklenebilir ve birlikte Azure SQL veri ambarı'nda birleştirildi.
+Boyutu 1 MB 'tan büyük olan kaynak verileriniz varsa, kaynak tabloları her birinin en büyük satır boyutunun sınırı aşmadığı birkaç küçük yere bölmek isteyebilirsiniz. Daha sonra PolyBase kullanılarak yüklenebilir ve Azure SQL veri ambarı 'nda birlikte birleştirilir.
 
 ### <a name="sql-data-warehouse-resource-class"></a>SQL veri ambarı kaynak sınıfı
-Mümkün olan en iyi performans sağlamak için PolyBase aracılığıyla SQL veri ambarı'na veri yüklemek için kullanılan kullanıcı daha büyük kaynak sınıfı atamak için göz önünde bulundurun. Bunu izleyerek öğrenin [kullanıcı kaynak sınıfı örneğini değiştirmek](../../sql-data-warehouse/sql-data-warehouse-develop-concurrency.md).
+Mümkün olan en iyi verimi elde etmek için, PolyBase aracılığıyla SQL veri ambarı 'na veri yüklemek için kullanılan kullanıcıya daha büyük kaynak sınıfı atamayı göz önünde bulundurun. Bunun nasıl yapılacağını, [bir Kullanıcı kaynak sınıfı örneğini değiştirme](../../sql-data-warehouse/sql-data-warehouse-develop-concurrency.md)hakkında bilgi edinin.
 
-### <a name="tablename-in-azure-sql-data-warehouse"></a>Azure SQL veri ambarı'nda tableName
-Aşağıdaki tabloda belirleme konusunda örnekler **tableName** veri kümesi JSON çeşitli birleşimlerini şema ve tablo adı için bir özellik.
+### <a name="tablename-in-azure-sql-data-warehouse"></a>Azure SQL veri ambarı 'nda tableName
+Aşağıdaki tabloda, şema ve tablo adının çeşitli birleşimleri için veri kümesi JSON içinde **TableName** özelliğinin nasıl belirtilme hakkında örnekler verilmektedir.
 
-| DB şema | Tablo adı | tableName JSON özelliği |
+| DB şeması | Tablo adı | tableName JSON özelliği |
 | --- | --- | --- |
-| dbo |MyTable |MyTable ya da dbo. MyTable veya [dbo].[MyTable] |
-| dbo1 |MyTable |dbo1. MyTable veya [dbo1].[MyTable] |
-| dbo |My.Table |[My.Table] veya [dbo].[My.Table] |
-| dbo1 |My.Table |[dbo1].[My.Table] |
+| dbo |MyTable |MyTable veya dbo. MyTable veya [dbo]. MyTable |
+| dbo1 |MyTable |dbo1. MyTable veya [dbo1]. MyTable |
+| dbo |My. Table |[My. Table] veya [dbo]. [My. Table] |
+| dbo1 |My. Table |[dbo1]. [My. Table] |
 
-Aşağıdaki hatayı görürseniz, tableName özelliği için belirtilen değer ile ilgili bir sorun olabilir. TableName JSON özellik değerlerini belirtmek doğru şekilde tabloya bakın.
+Aşağıdaki hatayı görürseniz, tableName özelliği için belirttiğiniz değerle ilgili bir sorun olabilir. TableName JSON özelliği için değerleri belirtmenin doğru yolu için tabloya bakın.
 
 ```
 Type=System.Data.SqlClient.SqlException,Message=Invalid object name 'stg.Account_test'.,Source=.Net SqlClient Data Provider
 ```
 
-### <a name="columns-with-default-values"></a>Varsayılan değeri olan sütunları
-Şu anda, Data Factory, PolyBase özelliği yalnızca aynı sayıda sütun hedef tabloda olduğu gibi kabul eder. Söyleyin, dört sütunlarını içeren bir tablo varsa ve bunlardan birini varsayılan değer ile tanımlanır. Giriş verilerini hala dört sütun içermelidir. 3 Sütunlu giriş veri kümesi sağlayan aşağıdaki iletiye benzer bir hata verir:
+### <a name="columns-with-default-values"></a>Varsayılan değerlere sahip sütunlar
+Şu anda Data Factory PolyBase özelliği, hedef tablodaki aynı sayıda sütunu kabul eder. Dört sütunlu bir tablonuz olduğunu ve bunlardan birinin varsayılan bir değerle tanımlandığını varsayalım. Giriş verileri hala dört sütun içermelidir. 3 sütunlu bir giriş veri kümesi sağlamak aşağıdaki iletiye benzer bir hata verir:
 
 ```
 All columns of the table must be specified in the INSERT BULK statement.
 ```
-NULL değeri, varsayılan değer özel bir biçimidir. Sütun null ise girdi verilerini (blob) söz konusu sütun için boş olabilir (giriş veri kümesinden eksik olamaz). PolyBase, Azure SQL veri ambarı'nda bunlar için NULL ekler.
+NULL değer, varsayılan değer olan özel bir formdur. Sütun null atanabilir ise, bu sütun için giriş verileri (blob 'ta) boş olabilir (girdi veri kümesinde eksik olamaz). PolyBase, Azure SQL veri ambarı 'nda bunlar için NULL değeri ekler.
 
-## <a name="auto-table-creation"></a>Otomatik Tablo oluşturma
-SQL Server veya Azure SQL veritabanından Azure SQL veri ambarı'na veri kopyalamak için kopyalama Sihirbazı'nı kullanıyorsanız ve kaynak tabloya karşılık gelen tablosu hedef depoda yok, Data Factory otomatik olarak tablo veri ambarı'nda u tarafından oluşturabilirsiniz Kaynak tablo şemasını güvenebilirler.
+## <a name="auto-table-creation"></a>Otomatik tablo oluşturma
+SQL Server veya Azure SQL veritabanından Azure SQL veri ambarı 'na veri kopyalamak için kopyalama Sihirbazı 'Nı kullanıyorsanız ve kaynak tabloya karşılık gelen tablo hedef depoda yoksa, Data Factory tabloyu u tarafından veri ambarında otomatik olarak oluşturabilir kaynak tablo şeması atılıyor.
 
-Data Factory, kaynak veri deposundaki aynı tablo adı ile hedef depolama tablosu oluşturur. Sütunların veri türleri, aşağıdaki tür eşlemesine göre seçilir. Gerekli olursa, kaynak ve hedef depoları arasında uyumsuzlukları düzeltmek için tür dönüştürmeleri gerçekleştirir. Ayrıca, hepsini bir kez deneme Tablo dağıtımı kullanır.
+Data Factory, kaynak veri deposunda aynı tablo adına sahip hedef depoda tablo oluşturur. Sütunların veri türleri aşağıdaki tür eşlemesine göre seçilir. Gerekirse, kaynak ve hedef depolarla ilgili uyumsuzlukları onarmak için tür dönüştürmeleri gerçekleştirir. Ayrıca hepsini bir kez deneme tablo dağıtımı kullanır.
 
 | Kaynak SQL veritabanı sütun türü | Hedef SQL DW sütun türü (boyut sınırlaması) |
 | --- | --- |
-| Int | Int |
+| 'Tir | 'Tir |
 | BigInt | BigInt |
-| Integer | Integer |
-| Mini tamsayı | Mini tamsayı |
-| bit | bit |
-| Decimal | Decimal |
-| Numeric | Decimal |
+| Small | Small |
+| Iç | Iç |
+| sürümleri | sürümleri |
+| Kategori | Kategori |
+| rakamlardan | Kategori |
 | Float | Float |
-| money | money |
-| real | real |
+| etmenize | etmenize |
+| Real | Real |
 | Küçük para | Küçük para |
-| binary | binary |
-| Varbinary | Varbinary (en fazla 8000) |
+| ý | ý |
+| ikili | Varbinary (8000 'e kadar) |
 | Tarih | Tarih |
 | DateTime | DateTime |
 | DateTime2 | DateTime2 |
 | Zaman | Zaman |
-| DateTimeOffset | DateTimeOffset |
-| SmallDateTime | SmallDateTime |
-| Text | Varchar (en fazla 8000) |
-| NText | NVarChar (en fazla 4000) |
-| Image | VarBinary (en fazla 8000) |
+| Türünde | Türünde |
+| Girişin | Girişin |
+| Metin | Varchar (8000 'e kadar) |
+| N | NVarChar (4000 'e kadar) |
+| Görüntü | VarBinary (8000 'e kadar) |
 | Benzersiz tanımlayıcı | Benzersiz tanımlayıcı |
-| char | char |
-| nChar | nChar |
-| VarChar | VarChar (en fazla 8000) |
-| NVarChar | NVarChar (en fazla 4000) |
-| Xml | Varchar (en fazla 8000) |
+| Char | Char |
+| NChar | NChar |
+| VarChar | VarChar (8000 'e kadar) |
+| NVarChar | NVarChar (4000 'e kadar) |
+| 'Sini | Varchar (8000 'e kadar) |
 
 [!INCLUDE [data-factory-type-repeatability-for-sql-sources](../../../includes/data-factory-type-repeatability-for-sql-sources.md)]
 
-## <a name="type-mapping-for-azure-sql-data-warehouse"></a>Azure SQL veri ambarı için tür eşlemesi
-Belirtildiği gibi [veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesi, kopyalama etkinliği, aşağıdaki 2 adımlı yaklaşım türleriyle havuz için kaynak türünden otomatik tür dönüştürmeleri gerçekleştirir:
+## <a name="type-mapping-for-azure-sql-data-warehouse"></a>Azure SQL veri ambarı için tür eşleme
+[Veri taşıma etkinlikleri](data-factory-data-movement-activities.md) makalesinde belirtildiği gibi kopyalama etkinliği, aşağıdaki 2 adımlı yaklaşımla kaynak türlerindeki otomatik tür dönüştürmeleri, havuz türlerine uygular:
 
-1. Yerel kaynak türlerinden .NET türüne dönüştürün
-2. .NET türünden yerel havuz türüne dönüştürün
+1. Yerel kaynak türlerinden .NET türüne Dönüştür
+2. .NET türünden yerel havuz türüne Dönüştür
 
-Veri depolamadan Azure SQL veri ambarı taşırken, aşağıdaki eşlemeler SQL türü .NET türü ve bunun tersi de kullanılır.
+Verileri Azure SQL veri ambarı 'ndan & taşırken, SQL türünden .NET türüne ve tam tersi bir şekilde aşağıdaki eşlemeler kullanılır.
 
-Eşleme aynı bir [ADO.NET için SQL Server veri türü eşlemesi](https://msdn.microsoft.com/library/cc716729.aspx).
+Eşleme, [ADO.NET için SQL Server veri türü eşlemesi](https://msdn.microsoft.com/library/cc716729.aspx)ile aynıdır.
 
-| SQL Server veritabanı altyapısı türü | .NET framework türü |
+| SQL Server veritabanı altyapısı türü | .NET Framework türü |
 | --- | --- |
 | bigint |Int64 |
-| binary |Byte[] |
-| bit |Boolean |
-| char |String, Char[] |
+| ý |Byte [] |
+| sürümleri |Boole |
+| Char |Dize, Char [] |
 | date |DateTime |
-| Datetime |DateTime |
+| Hem |DateTime |
 | datetime2 |DateTime |
-| Datetimeoffset |DateTimeOffset |
-| Decimal |Decimal |
-| FILESTREAM attribute (varbinary(max)) |Byte[] |
-| Float |Double |
-| image |Byte[] |
+| Türünde |Türünde |
+| Kategori |Kategori |
+| FıLESTREAM özniteliği (varbinary (max)) |Byte [] |
+| Float |Çift |
+| image |Byte [] |
 | int |Int32 |
-| money |Decimal |
-| nchar |String, Char[] |
-| ntext |String, Char[] |
-| numeric |Decimal |
-| nvarchar |String, Char[] |
-| real |Single |
-| rowversion |Byte[] |
-| smalldatetime |DateTime |
+| etmenize |Kategori |
+| nchar |Dize, Char [] |
+| n |Dize, Char [] |
+| rakamlardan |Kategori |
+| nvarchar |Dize, Char [] |
+| gerçek |Tek |
+| rowversion |Byte [] |
+| girişin |DateTime |
 | smallint |Int16 |
-| smallmoney |Decimal |
-| sql_variant |Object * |
-| metin |String, Char[] |
+| küçük para |Kategori |
+| sql_variant |Nesne |
+| metin |Dize, Char [] |
 | time |TimeSpan |
-| timestamp |Byte[] |
-| tinyint |Byte |
-| uniqueidentifier |Guid |
-| varbinary |Byte[] |
-| varchar |String, Char[] |
-| xml |Xml |
+| timestamp |Byte [] |
+| tinyint |Bayt |
+| benzersiz tanımlayıcı |Guid |
+| ikili |Byte [] |
+| varchar |Dize, Char [] |
+| xml |'Sini |
 
-Ayrıca, kaynak veri kümesi sütunları havuz veri kümesi kopyalama etkinliği tanımındaki sütunlarından yerine eşleyebilirsiniz. Ayrıntılar için bkz [Azure Data factory'de veri kümesi sütunlarını eşleme](data-factory-map-columns.md).
+Ayrıca, kaynak veri kümesindeki sütunları, kopyalama etkinliği tanımındaki havuz veri kümesinden sütunlara eşleyebilirsiniz. Ayrıntılar için bkz. [Azure Data Factory veri kümesi sütunlarını eşleme](data-factory-map-columns.md).
 
-## <a name="json-examples-for-copying-data-to-and-from-sql-data-warehouse"></a>JSON örnekler ve SQL veri ambarı veri kopyalamak için
-Aşağıdaki örnekler kullanarak bir işlem hattı oluşturmak için kullanabileceğiniz örnek JSON tanımları sağlamak [Azure portalında](data-factory-copy-activity-tutorial-using-azure-portal.md) veya [Visual Studio](data-factory-copy-activity-tutorial-using-visual-studio.md) veya [Azure PowerShell](data-factory-copy-activity-tutorial-using-powershell.md). Bunlar, Azure SQL veri ambarı ve Azure Blob Depolama ve veri kopyalamak nasıl gösterir. Ancak, veriler kopyalanabilir **doğrudan** herhangi birinden herhangi birine belirtilen havuzlarını kaynakları [burada](data-factory-data-movement-activities.md#supported-data-stores-and-formats) kopyalama etkinliğini kullanarak Azure Data Factory'de.
+## <a name="json-examples-for-copying-data-to-and-from-sql-data-warehouse"></a>SQL veri ambarı 'na veri kopyalamak için JSON örnekleri
+Aşağıdaki örnekler, [Visual Studio](data-factory-copy-activity-tutorial-using-visual-studio.md) veya [Azure PowerShell](data-factory-copy-activity-tutorial-using-powershell.md)kullanarak bir işlem hattı oluşturmak için kullanabileceğiniz örnek JSON tanımlarını sağlar. Azure SQL veri ambarı ve Azure Blob depolama 'ya veri kopyalamayı gösterir. Ancak, veriler, Azure Data Factory ' deki kopyalama etkinliği kullanılarak, [burada](data-factory-data-movement-activities.md#supported-data-stores-and-formats) belirtilen herhangi bir kaynaktan herhangi bir kaynağa **doğrudan** kopyalanabilir.
 
-### <a name="example-copy-data-from-azure-sql-data-warehouse-to-azure-blob"></a>Örnek: Verileri Azure SQL veri ambarı ' Azure Blob kopyalama
-Örnek, aşağıdaki Data Factory varlıkları tanımlar:
+### <a name="example-copy-data-from-azure-sql-data-warehouse-to-azure-blob"></a>Örnek: Azure SQL veri ambarı 'ndan Azure Blob 'a veri kopyalama
+Örnek, aşağıdaki Data Factory varlıklarını tanımlar:
 
-1. Bağlı hizmet türü [AzureSqlDW](#linked-service-properties).
-2. Bağlı hizmet türü [AzureStorage](data-factory-azure-blob-connector.md#linked-service-properties).
-3. Girdi [veri kümesi](data-factory-create-datasets.md) türü [AzureSqlDWTable](#dataset-properties).
-4. Bir çıkış [veri kümesi](data-factory-create-datasets.md) türü [AzureBlob](data-factory-azure-blob-connector.md#dataset-properties).
-5. A [işlem hattı](data-factory-create-pipelines.md) kullanan bir kopyalama etkinliği ile [SqlDWSource](#copy-activity-properties) ve [BlobSink](data-factory-azure-blob-connector.md#copy-activity-properties).
+1. [Azuresqldw](#linked-service-properties)türünde bağlı bir hizmet.
+2. [Azurestorage](data-factory-azure-blob-connector.md#linked-service-properties)türünde bağlı bir hizmet.
+3. [Azuresqldwtable](#dataset-properties)türünde bir giriş [veri kümesi](data-factory-create-datasets.md) .
+4. [AzureBlob](data-factory-azure-blob-connector.md#dataset-properties)türünde bir çıkış [veri kümesi](data-factory-create-datasets.md) .
+5. [Sqldwsource](#copy-activity-properties) ve [Blobsink](data-factory-azure-blob-connector.md#copy-activity-properties)kullanan kopyalama etkinliğine sahip bir işlem [hattı](data-factory-create-pipelines.md) .
 
-Örnek zaman serisi (saatlik, günlük, vb.) verileri Azure SQL veri ambarı veritabanındaki bir tabloda bir bloba saatte kopyalar. Bu örneklerde kullanılan JSON özellikleri örnekleri aşağıdaki bölümlerde açıklanmıştır.
+Örnek, Azure SQL veri ambarı veritabanındaki bir tablodan saat serisi (saatlik, günlük, vb.) verilerini her saat bir bloba kopyalar. Bu örneklerde kullanılan JSON özellikleri, örnekleri takip eden bölümlerde açıklanmıştır.
 
 **Azure SQL veri ambarı bağlı hizmeti:**
 
@@ -407,7 +407,7 @@ Aşağıdaki örnekler kullanarak bir işlem hattı oluşturmak için kullanabil
   }
 }
 ```
-**Azure Blob Depolama bağlı hizmeti:**
+**Azure Blob depolama bağlı hizmeti:**
 
 ```JSON
 {
@@ -420,11 +420,11 @@ Aşağıdaki örnekler kullanarak bir işlem hattı oluşturmak için kullanabil
   }
 }
 ```
-**Azure SQL veri ambarı veri kümesi girişi:**
+**Azure SQL veri ambarı giriş veri kümesi:**
 
-Örnek, "MyTable" Azure SQL Data Warehouse'da bir tablo oluşturdunuz ve zaman serisi verileri için "timestampcolumn" adlı bir sütun içerdiği varsayılır.
+Örnek, Azure SQL veri ambarı 'nda bir "MyTable" tablosu oluşturduğunuzu ve zaman serisi verileri için "timestampcolumn" adlı bir sütun içerdiğini varsayar.
 
-"Dış" ayarını: "true" bildirir Data Factory hizmetinin veri kümesi dış veri fabrikasına ve veri fabrikasında bir etkinliği tarafından üretilen değil.
+"External": "true" ayarı, veri kümesinin veri fabrikasında dış olduğunu ve veri fabrikasındaki bir etkinlik tarafından üretilmediğini Data Factory hizmetine bildirir.
 
 ```JSON
 {
@@ -452,7 +452,7 @@ Aşağıdaki örnekler kullanarak bir işlem hattı oluşturmak için kullanabil
 ```
 **Azure Blob çıktı veri kümesi:**
 
-Veriler her saat yeni bir bloba yazılır (Sıklık: saat, interval: 1). Blob için klasör yolu işlenmekte olan dilimin başlangıç zamanı temel alınarak dinamik olarak değerlendirilir. Yıl, ay, gün ve saat bölümlerini başlangıç zamanı klasör yolu kullanır.
+Veriler her saat yeni bir bloba yazılır (sıklık: saat, Aralık: 1). Blob 'un klasör yolu, işlenmekte olan dilimin başlangıç zamanına göre dinamik olarak değerlendirilir. Klasör yolu başlangıç zamanının yıl, ay, gün ve saat kısımlarını kullanır.
 
 ```JSON
 {
@@ -510,9 +510,9 @@ Veriler her saat yeni bir bloba yazılır (Sıklık: saat, interval: 1). Blob i�
 }
 ```
 
-**SqlDWSource ve BlobSink ile bir işlem hattındaki kopyalama etkinliği:**
+**SqlDWSource ve BlobSink ile işlem hattındaki etkinliği kopyalama:**
 
-İşlem hattının giriş ve çıkış veri kümelerini kullanmak için yapılandırıldığı ve saatte bir çalışacak şekilde zamanlanmış bir kopyalama etkinliği içeriyor. JSON tanımı, işlem hattındaki **kaynak** türü ayarlandığında **SqlDWSource** ve **havuz** türü ayarlandığında **BlobSink**. SQL sorgusu için belirtilen **SqlReaderQuery** özelliği veri kopyalamak için son bir saat içinde seçer.
+İşlem hattı, giriş ve çıkış veri kümelerini kullanmak üzere yapılandırılmış bir kopyalama etkinliği içerir ve her saat çalışacak şekilde zamanlanır. Ardışık düzen JSON tanımında **kaynak** türü **sqldwsource** olarak ayarlanır ve **Havuz** türü **blobsink**olarak ayarlanır. **Sqlreaderquery** özelliği IÇIN belirtilen SQL sorgusu, kopyalamanın Son saatteki verilerini seçer.
 
 ```JSON
 {
@@ -561,24 +561,24 @@ Veriler her saat yeni bir bloba yazılır (Sıklık: saat, interval: 1). Blob i�
 }
 ```
 > [!NOTE]
-> Örnekte, **sqlReaderQuery** SqlDWSource için belirtilir. Kopyalama etkinliği, verileri almak için Azure SQL veri ambarı kaynağına karşı bu sorguyu çalıştırır.
+> Örnekte, SqlDWSource için **Sqlreaderquery** belirtilir. Kopyalama etkinliği, verileri almak için Azure SQL veri ambarı kaynağına karşı bu sorguyu çalıştırır.
 >
-> Alternatif olarak, bir saklı yordam belirterek belirtebileceğiniz **sqlReaderStoredProcedureName** ve **storedProcedureParameters** (saklı yordamın parametreleri sürerse).
+> Alternatif olarak, **sqlReaderStoredProcedureName** ve **storedProcedureParameters** (saklı yordam parametreler alırsa) belirterek bir saklı yordam belirtebilirsiniz.
 >
-> SqlReaderQuery ya da sqlReaderStoredProcedureName belirtmezseniz JSON veri kümesi yapısı bölümünde tanımlanan sütunları Azure SQL veri ambarına karşı çalıştırmak için bir sorgu (select Sütun1, Sütun2 mytable gelen) oluşturmak için kullanılır. Veri kümesi tanımı yapısına sahip değilse, tüm sütunları tablodan seçilir.
+> SqlReaderQuery veya sqlReaderStoredProcedureName belirtmezseniz, JSON veri kümesinin yapı bölümünde tanımlanan sütunlar, Azure SQL veri ambarı 'na karşı çalıştırmak için bir sorgu oluşturmak (myTable 'den Sütun1 'den Sütun2 'yi seçin) için kullanılır. Veri kümesi tanımında yapı yoksa, tablodaki tüm sütunlar seçilir.
 >
 >
 
-### <a name="example-copy-data-from-azure-blob-to-azure-sql-data-warehouse"></a>Örnek: Verileri Azure Blobundan Azure SQL veri ambarı'na kopyalayın.
-Örnek, aşağıdaki Data Factory varlıkları tanımlar:
+### <a name="example-copy-data-from-azure-blob-to-azure-sql-data-warehouse"></a>Örnek: Azure Blobundan Azure SQL veri ambarı 'na veri kopyalama
+Örnek, aşağıdaki Data Factory varlıklarını tanımlar:
 
-1. Bağlı hizmet türü [AzureSqlDW](#linked-service-properties).
-2. Bağlı hizmet türü [AzureStorage](data-factory-azure-blob-connector.md#linked-service-properties).
-3. Girdi [veri kümesi](data-factory-create-datasets.md) türü [AzureBlob](data-factory-azure-blob-connector.md#dataset-properties).
-4. Bir çıkış [veri kümesi](data-factory-create-datasets.md) türü [AzureSqlDWTable](#dataset-properties).
-5. A [işlem hattı](data-factory-create-pipelines.md) kullanan kopyalama etkinlikli [BlobSource](data-factory-azure-blob-connector.md#copy-activity-properties) ve [SqlDWSink](#copy-activity-properties).
+1. [Azuresqldw](#linked-service-properties)türünde bağlı bir hizmet.
+2. [Azurestorage](data-factory-azure-blob-connector.md#linked-service-properties)türünde bağlı bir hizmet.
+3. [AzureBlob](data-factory-azure-blob-connector.md#dataset-properties)türünde bir giriş [veri kümesi](data-factory-create-datasets.md) .
+4. [Azuresqldwtable](#dataset-properties)türünde bir çıkış [veri kümesi](data-factory-create-datasets.md) .
+5. [Blobsource](data-factory-azure-blob-connector.md#copy-activity-properties) ve [Sqldwsink](#copy-activity-properties)kullanan kopyalama etkinliğine sahip bir işlem [hattı](data-factory-create-pipelines.md) .
 
-Zaman serisi, Azure SQL veri ambarı tablosuna verileri (saatlik, günlük, vb.) Azure blob örnek kopya saatte veritabanı. Bu örneklerde kullanılan JSON özellikleri örnekleri aşağıdaki bölümlerde açıklanmıştır.
+Örnek, zaman serisi verilerini (saatlik, günlük, vb.) Azure blobundan her saat Azure SQL veri ambarı veritabanındaki bir tabloya kopyalar. Bu örneklerde kullanılan JSON özellikleri, örnekleri takip eden bölümlerde açıklanmıştır.
 
 **Azure SQL veri ambarı bağlı hizmeti:**
 
@@ -593,7 +593,7 @@ Zaman serisi, Azure SQL veri ambarı tablosuna verileri (saatlik, günlük, vb.)
   }
 }
 ```
-**Azure Blob Depolama bağlı hizmeti:**
+**Azure Blob depolama bağlı hizmeti:**
 
 ```JSON
 {
@@ -606,9 +606,9 @@ Zaman serisi, Azure SQL veri ambarı tablosuna verileri (saatlik, günlük, vb.)
   }
 }
 ```
-**Azure Blob girdi veri kümesi:**
+**Azure Blob giriş veri kümesi:**
 
-Veri alındığından yeni blobundan her saat (Sıklık: saat, interval: 1). Blob klasörü yolu ve dosya adı dinamik olarak değerlendirilir işlenmekte olan dilimin başlangıç zamanı temel alınarak. Klasör yolu yıl, ay ve gün kısmını başlangıç saati ve dosya adı başlangıç zamanı saat bölümünü kullanır. "dış": "true" ayarı, bu tablo harici veri fabrikasına ve veri fabrikasında bir etkinliği tarafından üretilen değil Data Factory hizmetinin bildirir.
+Veriler her saat yeni bir bloba alınır (sıklık: saat, Aralık: 1). Blob için klasör yolu ve dosya adı, işlenmekte olan dilimin başlangıç zamanına göre dinamik olarak değerlendirilir. Klasör yolu başlangıç zamanının yıl, ay ve gün bölümünü ve dosya adını kullanır başlangıç zamanının saat kısmını kullanır. "External": "true" ayarı, bu tablonun veri fabrikasında dış olduğunu ve veri fabrikasında bir etkinlik tarafından üretilmediğini Data Factory hizmetine bildirir.
 
 ```JSON
 {
@@ -674,9 +674,9 @@ Veri alındığından yeni blobundan her saat (Sıklık: saat, interval: 1). Blo
   }
 }
 ```
-**Azure SQL veri ambarı veri kümesi çıktı:**
+**Azure SQL veri ambarı çıkış veri kümesi:**
 
-Örnek verileri Azure SQL veri ambarı'nda "MyTable" adlı bir tabloya kopyalar. Blob CSV dosyasını içerecek şekilde beklediğiniz gibi aynı sayıda sütun ile Azure SQL veri ambarı tablosu oluşturun. Yeni satırlar saatte tablosuna eklenir.
+Örnek, verileri Azure SQL veri ambarı 'nda "MyTable" adlı bir tabloya kopyalar. Blob CSV dosyasının içermesini istediğiniz sayıda sütun içeren Azure SQL veri ambarı 'nda tablo oluşturun. Yeni satırlar tabloya her saat eklenir.
 
 ```JSON
 {
@@ -694,9 +694,9 @@ Veri alındığından yeni blobundan her saat (Sıklık: saat, interval: 1). Blo
   }
 }
 ```
-**BlobSource ve SqlDWSink ile bir işlem hattındaki kopyalama etkinliği:**
+**BlobSource ve SqlDWSink ile işlem hattındaki etkinliği kopyalama:**
 
-İşlem hattının giriş ve çıkış veri kümelerini kullanmak için yapılandırıldığı ve saatte bir çalışacak şekilde zamanlanmış bir kopyalama etkinliği içeriyor. JSON tanımı, işlem hattındaki **kaynak** türü ayarlandığında **BlobSource** ve **havuz** türü ayarlandığında **SqlDWSink**.
+İşlem hattı, giriş ve çıkış veri kümelerini kullanmak üzere yapılandırılmış bir kopyalama etkinliği içerir ve her saat çalışacak şekilde zamanlanır. Ardışık düzen JSON tanımında **kaynak** türü **blobsource** olarak ayarlanır ve **Havuz** türü **sqldwsink**olarak ayarlanır.
 
 ```JSON
 {
@@ -745,7 +745,7 @@ Veri alındığından yeni blobundan her saat (Sıklık: saat, interval: 1). Blo
   }
 }
 ```
-Bir kılavuz için bkz [1 TB 15 dakikadan daha kısa Azure Data Factory ile Azure SQL Data Warehouse'a veri yükleme](data-factory-load-sql-data-warehouse.md) ve [Azure Data Factory ile veri yükleme](../../sql-data-warehouse/sql-data-warehouse-get-started-load-with-azure-data-factory.md) makale Azure SQL veri ambarı belgelerinde.
+İzlenecek yol için, Azure SQL veri ambarı belgelerindeki Azure Data Factory ve [Azure Data Factory ile verileri yükleme](../../sql-data-warehouse/sql-data-warehouse-get-started-load-with-azure-data-factory.md) makalesine bkz. [1 TB 'Yi Azure SQL veri ambarı 'nda yükleme](data-factory-load-sql-data-warehouse.md) .
 
 ## <a name="performance-and-tuning"></a>Performans ve ayarlama
-Bkz: [kopyalama etkinliği performansı ve ayarlama Kılavuzu](data-factory-copy-activity-performance.md) veri taşıma (kopyalama etkinliği) Azure Data Factory ve bunu en iyi duruma getirmek için çeşitli yollar, performansı etkileyebilir anahtar Etkenler hakkında bilgi edinmek için.
+Veri taşıma (kopyalama etkinliği) performansını Azure Data Factory ve en iyileştirmek için çeşitli yollarla etkileyen temel faktörlerle ilgili bilgi edinmek için bkz. [etkinlik performansını kopyalama & ayarlama Kılavuzu](data-factory-copy-activity-performance.md) .

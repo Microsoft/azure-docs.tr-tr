@@ -1,6 +1,6 @@
 ---
-title: Azure nesnelerin interneti (IOT) dağıtımınızın güvenliğini sağlama | Microsoft Docs
-description: Bu makalede, Azure IOT dağıtımınızın güvenliğini sağlama işlemi açıklanmaktadır
+title: Azure Nesnelerin İnterneti (IoT) dağıtımınızın güvenliğini sağlama | Microsoft Docs
+description: Bu makalede, Azure IoT dağıtımınızın güvenliğini sağlama hakkında ayrıntılı bilgi alın. Her bileşeni yapılandırmak ve dağıtmak için uygulama düzeyi ayrıntılarına bağlantı sağlar.
 author: dominicbetts
 manager: timlt
 ms.service: iot-accelerators
@@ -8,15 +8,17 @@ services: iot-accelerators
 ms.topic: conceptual
 ms.date: 03/08/2019
 ms.author: dobett
-ms.openlocfilehash: 13ed08cee53ac9aa0d22506ba63e1365784a2205
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f0fbb1214015c088e7e1585840213faba06b59f3
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66023454"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73820528"
 ---
+# <a name="secure-your-internet-of-things-iot-deployment"></a>Nesnelerin İnterneti (IoT) dağıtımınızın güvenliğini sağlama
+
 [!INCLUDE [iot-secure-your-deployment](../../includes/iot-secure-your-deployment.md)]
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-IOT Hub güvenlik hakkında bilgi edinin [IOT hub'a erişimi denetleme](../iot-hub/iot-hub-devguide-security.md) IOT Hub Geliştirici Kılavuzu'nda. 
+IoT Hub geliştirici kılavuzundaki [IoT Hub denetim erişimi denetimindeki](../iot-hub/iot-hub-devguide-security.md) IoT Hub güvenliği hakkında bilgi edinin. 

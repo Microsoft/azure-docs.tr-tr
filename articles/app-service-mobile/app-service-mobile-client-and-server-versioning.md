@@ -1,6 +1,6 @@
 ---
-title: Mobile Apps ve Mobile Services istemci ve sunucu SDK'sı sürüm | Microsoft Docs
-description: İstemci SDK'ları listesi ve mobil hizmetler ve Azure Mobile Apps için sunucu SDK'sı sürümlerle uyumluluk
+title: Mobile Apps ve Mobile Services 'de istemci ve sunucu SDK sürümü oluşturma | Microsoft Docs
+description: Mobile Services ve Azure Mobile Apps için sunucu SDK sürümleri ile istemci SDK 'larının listesi
 services: app-service\mobile
 documentationcenter: ''
 author: conceptdev
@@ -14,66 +14,69 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 10/01/2016
 ms.author: crdun
-ms.openlocfilehash: cfa6a363725c35083b32d6de1dd1371777f91907
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5be72a4125b276d85174a7a056cbbc2c23053e89
+ms.sourcegitcommit: bb65043d5e49b8af94bba0e96c36796987f5a2be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66240297"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72388876"
 ---
 # <a name="client-and-server-versioning-in-mobile-apps-and-mobile-services"></a>Mobile Apps ve Mobile Services istemci ve sunucu sürümü oluşturma
-Azure Mobile Services'ın en son sürüm **Mobile Apps** Azure App Service özelliğidir.
+> [!NOTE]
+> Visual Studio App Center mobil uygulama dağıtımında merkezi konumdaki uçtan uca ve tümleşik hizmetleri destekler. Geliştiriciler Sürekli Tümleştirme ve Teslim işlem hattını ayarlamak için **Oluşturma**, **Test** ve **Dağıtım** hizmetlerini kullanabilir. Uygulama dağıtıldıktan sonra, geliştiriciler **Analiz** ve **Tanılama** hizmetlerini kullanarak uygulamanın durumunu ve kullanımını izleyebilir, **Gönderme** hizmetini kullanarak kullanıcılarla etkileşim kurabilir. Geliştiriciler ayrıca kullanıcıların kimliğini doğrulamak için **Kimlik Doğrulaması**'ndan ve uygulama verilerini bulutta kalıcı hale getirmek ve eşitlemek için **Veri** hizmetinden yararlanabilir.
+>
+> Mobil uygulamanızda bulut hizmetlerini tümleştirmek istiyorsanız bugün [App Center](https://appcenter.ms/?utm_source=zumo&utm_medium=Azure&utm_campaign=zumo%20doc) kaydolun.
 
-Mobile Apps istemci ve sunucu SDK'ları başlangıçta mobil hizmetler de bağlıdır, ancak bunlar *değil* birbiriyle uyumlu.
-Diğer bir deyişle, kullanmalısınız bir *Mobile Apps* istemci SDK'sı ile bir *Mobile Apps* sunucu SDK'sı ve benzer şekilde *mobil Hizmetler*. Bu sözleşme, istemci ve sunucu SDK'ları, tarafından kullanılan özel üst bilgi değeri aracılığıyla zorlanır `ZUMO-API-VERSION`.
+Azure Mobile Services 'nin en son sürümü, Azure App Service **Mobile Apps** özelliğidir.
 
-Not: herhangi bir zamanda bu belgenin başvurduğu bir *mobil Hizmetler* arka uç, onu gerekmeyen gerekmez mobil hizmetler üzerinde barındırılması. App Service üzerinde herhangi bir kod değişikliği çalıştırmak için bir mobil hizmet geçirmek artık mümkündür, ancak hizmeti kullanmaya devam *mobil Hizmetler* SDK sürümleri.
+Mobile Apps istemci ve sunucu SDK 'Ları, başlangıçta Mobile Services bunlara dayalıdır, ancak birbirleriyle uyumlu *değildir* .
+Diğer bir deyişle, *Mobile Apps* sunucusu sdk ile *Mobile Apps* istemci SDK 'sını ve benzer şekilde *Mobile Services*kullanmanız gerekir. Bu sözleşme, istemci ve sunucu SDK 'Ları tarafından kullanılan özel bir üst bilgi değeri üzerinden zorlanır `ZUMO-API-VERSION`.
 
-Herhangi bir kod değişikliği App Service'e geçirme hakkında daha fazla bilgi için [bir Azure App Service mobil hizmete geçiş] makale bakın.
+Not: Bu belge *Mobile Services* arka uca başvurduğunda, Mobile Services üzerinde barındırılması gerekmez. Artık bir mobil hizmetin herhangi bir kod değişikliği yapılmadan App Service çalışmak üzere geçirilmesi mümkündür, ancak hizmet yine de *Mobile Services* SDK sürümlerini kullanıyor olabilir.
 
 ## <a name="header-specification"></a>Üst bilgi belirtimi
-Anahtar `ZUMO-API-VERSION` HTTP üst bilgisi veya sorgu dizesi belirtilebilir. Bir sürüm dizesi biçiminde değerdir **x.y.z**.
+@No__t-0 anahtarı, HTTP üstbilgisinde ya da sorgu dizesinde belirtilebilir. Değer, **x. y. z**biçimindeki bir sürüm dizesidir.
 
-Örneğin:
+Örnek:
 
-AL https://service.azurewebsites.net/tables/TodoItem
+@No__t al-0
 
-ÜST BİLGİLER: ZUMO-API-VERSION: 2.0.0
+ÜSTBILGILER: ZUMO-API-VERSION: 2.0.0
 
-YAYINLA https://service.azurewebsites.net/tables/TodoItem?ZUMO-API-VERSION=2.0.0
+GÖNDERI https://service.azurewebsites.net/tables/TodoItem?ZUMO-API-VERSION=2.0.0
 
-## <a name="opting-out-of-version-checking"></a>Sürüm denetimi dışında seçim yapma
-Sürüm denetimini değerini ayarlayarak dışında iyileştirilmiş **true** uygulama ayarı için **MS_SkipVersionCheck**. Bu, web.config dosyasında ya da Azure portal'ın uygulama ayarları bölümündeki belirtin.
+## <a name="opting-out-of-version-checking"></a>Sürüm denetimi kullanıma alınıyor
+**MS_SkipVersionCheck**uygulama ayarı için **true** değerini ayarlayarak sürüm denetimini devre dışı bırakabilirsiniz. Bunu Web. config dosyasında veya Azure portal uygulama ayarları bölümünde belirtin.
 
 > [!NOTE]
-> Mobile Services ve Mobile Apps, özellikle çevrimdışı eşitleme, kimlik doğrulaması ve anında iletme bildirimleri alanları arasındaki davranış değişiklikleri vardır. Yalnızca sürüm denetimini Bu davranış değişiklikleri uygulamanızın işlevleri kesmediğinden emin olmak için testi Tamamla sonra dışında iyileştirilmiş.
+> Mobile Services ve Mobile Apps arasında, özellikle çevrimdışı eşitleme, kimlik doğrulama ve anında iletme bildirimlerinin alanlarında birçok davranış değişikliği vardır. Bu davranış değişikliklerinin uygulamanızın işlevlerini bozmadığından emin olmak için, yalnızca bir testi tamamladıktan sonra sürüm denetimini kabul etmelisiniz.
 
-## <a name="2.0.0"></a>Azure Mobile Apps istemci ve sunucu
-### <a name="MobileAppsClients"></a> Mobil *uygulamaları* istemci SDK'ları
-Sürüm denetimi tanıtılmıştır istemci SDK'sı aşağıdaki sürümleri ile başlatma için **Azure Mobile Apps**:
+## <a name="2.0.0"></a>Azure Mobile Apps istemcisi ve sunucusu
+### <a name="MobileAppsClients"></a>Mobile *Apps* Istemci SDK 'ları
+Sürüm denetimi, Azure için istemci SDK **Mobile Apps**aşağıdaki sürümleriyle başlayarak sunulmuştur:
 
-| İstemci Platformu | Version | Sürüm üst bilgisi değeri |
+| İstemci platformu | Sürüm | Sürüm üst bilgisi değeri |
 | --- | --- | --- |
 | Yönetilen istemci (Windows, Xamarin) |[2.0.0](https://www.nuget.org/packages/Microsoft.Azure.Mobile.Client/2.0.0) |2.0.0 |
 | iOS |[3.0.0](https://go.microsoft.com/fwlink/?LinkID=529823) |2.0.0 |
 | Android |[3.0.0](https://go.microsoft.com/fwlink/?LinkID=717033&clcid=0x409) |3.0.0 |
 
-### <a name="mobile-apps-server-sdks"></a>Mobil *uygulamaları* sunucu SDK'ları
-Sürüm denetimi sunucusu SDK sürümleri aşağıdaki yer almaktadır:
+### <a name="mobile-apps-server-sdks"></a>Mobile *Apps* Server SDK 'ları
+Sürüm denetimi aşağıdaki sunucu SDK sürümlerine dahildir:
 
 | Sunucu platformu | SDK | Kabul edilen sürüm üst bilgisi |
 | --- | --- | --- |
-| .NET |[Microsoft.Azure.Mobile.Server](https://www.nuget.org/packages/Microsoft.Azure.Mobile.Server/) |2.0.0 |
-| Node.js |[azure-mobile-apps)](https://www.npmjs.com/package/azure-mobile-apps) |2.0.0 |
+| .NET |[Microsoft. Azure. Mobile. Server](https://www.nuget.org/packages/Microsoft.Azure.Mobile.Server/) |2.0.0 |
+| Node.js |[Azure-mobil-uygulamalar)](https://www.npmjs.com/package/azure-mobile-apps) |2.0.0 |
 
-### <a name="behavior-of-mobile-apps-backends"></a>Mobile Apps arka uçları davranışı
-| ZUMO-API-VERSION | MS_SkipVersionCheck değeri | Yanıt |
+### <a name="behavior-of-mobile-apps-backends"></a>Arka uçların Mobile Apps davranışı
+| ZUMO-API-SÜRÜMÜ | MS_SkipVersionCheck değeri | Yanıt |
 | --- | --- | --- |
-| x.y.z veya Null |True |200 - TAMAM |
-| Null |Belirtilen false/değil |400 - bozuk istek |
-| 1.x.y |Belirtilen false/değil |400 - bozuk istek |
-| 2.0.0-2.x.y |Belirtilen false/değil |200 - TAMAM |
-| 3.0.0-3.x.y |Belirtilen false/değil |400 - bozuk istek |
+| x. y. z veya null |True |200-TAMAM |
+| Null |False/belirtilmemiş |400 - Hatalı İstek |
+| 1. x. y |False/belirtilmemiş |400 - Hatalı İstek |
+| 2.0.0-2. x. y |False/belirtilmemiş |200-TAMAM |
+| 3.0.0-3. x. y |False/belirtilmemiş |400 - Hatalı İstek |
 
 [Mobile Services clients]: #MobileServicesClients
 [Mobile Apps clients]: #MobileAppsClients

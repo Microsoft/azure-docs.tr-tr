@@ -1,6 +1,6 @@
 ---
-title: Azure işlevleri'nde IP adresleri
-description: İşlev uygulamaları için gelen ve giden IP adresleri bulmayı öğrenin ve hangi değiştirmek neden olur.
+title: Azure Işlevlerinde IP adresleri
+description: İşlev uygulamaları için gelen ve giden IP adreslerini bulmayı ve bunların değişmesine neden olduğunu öğrenin.
 services: functions
 documentationcenter: ''
 author: ggailey777
@@ -9,60 +9,60 @@ ms.service: azure-functions
 ms.topic: conceptual
 ms.date: 12/03/2018
 ms.author: glenga
-ms.openlocfilehash: 83e5a15d8a7f9c01f6a180ebceb715600b8a39db
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d8b6a342dd32d430f7a40a1e0a0a17a482a0816d
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61035873"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73469059"
 ---
-# <a name="ip-addresses-in-azure-functions"></a>Azure işlevleri'nde IP adresleri
+# <a name="ip-addresses-in-azure-functions"></a>Azure Işlevlerinde IP adresleri
 
-Bu makalede, işlev uygulamaları için IP adreslerini ilgili aşağıdaki konular açıklanmaktadır:
+Bu makalede, işlev uygulamalarının IP adresleriyle ilgili aşağıdaki konular açıklanmaktadır:
 
-* IP adreslerini şu anda kullanımda bir işlev uygulaması için nasıl bulacağınızı.
-* Hangi uygulamanın IP adreslerinin değiştirilmesi bir işlev neden olur.
-* Bir işlev uygulaması erişebilmeniz için IP adreslerini kısıtlamak nasıl.
-* Ayrılmış IP adresleri için bir işlev uygulaması edinme.
+* Bir işlev uygulaması tarafından kullanılmakta olan IP adreslerini bulma.
+* İşlev uygulamasının IP adreslerinin değiştirilmesine neden olan durum.
+* Bir işlev uygulamasına erişebilen IP adreslerini kısıtlama.
+* İşlev uygulaması için ayrılmış IP adresleri alma.
 
-İşlev uygulamaları, bireysel işlevleri ile değil IP adresleri ilişkilendirilir. Gelen HTTP isteklerinin tek tek işlevleri çağırmak için gelen bir IP adresi kullanamazsınız; Bunlar, varsayılan etki alanı adı (functionappname.azurewebsites.net) veya özel etki alanı adı kullanmanız gerekir.
+IP adresleri, bağımsız işlevlerle değil işlev uygulamalarıyla ilişkilendirilir. Gelen HTTP istekleri bağımsız işlevleri çağırmak için gelen IP adresini kullanamaz; Varsayılan etki alanı adını (functionappname.azurewebsites.net) veya özel bir etki alanı adını kullanmaları gerekir.
 
 ## <a name="function-app-inbound-ip-address"></a>İşlev uygulaması gelen IP adresi
 
-Her işlev uygulaması, tek bir gelen IP adresi vardır. Bu IP adresini bulmak için:
+Her işlev uygulamasının tek bir gelen IP adresi vardır. Bu IP adresini bulmak için:
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
 2. İşlev uygulamasına gidin.
-3. Seçin **Platform özellikleri**.
-4. Seçin **özellikleri**, gelen IP adresi altında görünür **sanal IP adresi**.
+3. **Platform özellikleri**' ni seçin.
+4. **Özellikler**' i seçin ve **sanal IP adresı**altında gelen IP adresi görüntülenir.
 
 ## <a name="find-outbound-ip-addresses"></a>İşlev uygulaması giden IP adresleri
 
-Her işlev uygulaması, kullanılabilir giden IP adresleri kümesi vardır. Herhangi bir giden bağlantı bir işlevden gibi bir arka uç veritabanı kaynak IP adresi kullanılabilir giden IP adreslerinden birini kullanır. Hangi IP adresini belirli bir bağlantı önceden kullanacak bilemezsiniz. Bu nedenle, arka uç hizmetinize tüm işlevi uygulamanın giden IP adresleri için güvenlik duvarı açmanız gerekir.
+Her işlev uygulamasının kullanılabilir bir giden IP adresleri kümesi vardır. Bir arka uç veritabanı gibi bir işlevden gelen giden bağlantılar, kaynak IP adresi olarak kullanılabilir giden IP adreslerinden birini kullanır. Belirli bir bağlantının kullanacağı IP adresini önceden kullanacağınızı bilemezsiniz. Bu nedenle, arka uç hizmetinizin güvenlik duvarını tüm işlev uygulamasının giden IP adreslerine açması gerekir.
 
-Bir işlev uygulaması için kullanılabilen giden IP adresleri bulmak için:
+Bir işlev uygulaması için kullanılabilir giden IP adreslerini bulmak için:
 
-1. Oturum [Azure kaynak Gezgini](https://resources.azure.com).
-2. Seçin **abonelikler > {subscription} > sağlayıcılar > Microsoft.Web > siteleri**.
-3. JSON panelinde site Bul bir `id` bitiren işlev uygulamanızın adını özelliği.
-4. Bkz: `outboundIpAddresses` ve `possibleOutboundIpAddresses`. 
+1. [Azure Kaynak Gezgini](https://resources.azure.com)oturum açın.
+2. **Microsoft. Web > siteleri > > {aboneliğiniz} > sağlayıcıları**' nı seçin.
+3. JSON panelinde, işlev uygulamanızın adında sonlanan bir `id` özelliğine sahip siteyi bulun.
+4. Bkz. `outboundIpAddresses` ve `possibleOutboundIpAddresses`. 
 
-Dizi `outboundIpAddresses` işlev uygulaması için şu anda kullanılabilir. Dizi `possibleOutboundIpAddresses` kullanılabilir IP adreslerini içeren yalnızca işlev uygulaması [ölçekler için diğer fiyatlandırma katmanlarından](#outbound-ip-address-changes).
+`outboundIpAddresses` kümesi, işlev uygulaması tarafından şu anda kullanılabilir. `possibleOutboundIpAddresses` kümesi, yalnızca işlev uygulaması [diğer fiyatlandırma katmanlarına ölçeklenirken](#outbound-ip-address-changes)KULLANILABILIR olacak IP adreslerini içerir.
 
-Kullanılabilir giden IP adreslerini bulmak için alternatif bir yolu kullanmaktır [Cloud Shell](../cloud-shell/quickstart.md):
+Kullanılabilir giden IP adreslerini bulmanın alternatif bir yolu [Cloud Shell](../cloud-shell/quickstart.md)kullanmaktır:
 
 ```azurecli-interactive
 az webapp show --resource-group <group_name> --name <app_name> --query outboundIpAddresses --output tsv
 az webapp show --resource-group <group_name> --name <app_name> --query possibleOutboundIpAddresses --output tsv
 ```
 > [!NOTE]
-> Üzerinde çalıştığı bir işlev uygulaması, [tüketim planı](functions-scale.md#consumption-plan) olan ölçeği, yeni giden IP adresleri aralığı atanabilir. Tüketim planı üzerinde çalışırken, tüm veri merkezinin beyaz listeye gerekebilir.
+> [Tüketim planında](functions-scale.md#consumption-plan) çalışan bir işlev uygulaması ölçeklendirilirse, yeni BIR giden IP adresi aralığı atanabilir. Tüketim planında çalışırken, tüm veri merkezini beyaz listeye almanız gerekebilir.
 
-## <a name="data-center-outbound-ip-addresses"></a>Giden IP adreslerini veri merkezi
+## <a name="data-center-outbound-ip-addresses"></a>Veri merkezi giden IP adresleri
 
-Gerekirse beyaz liste giden IP adresleri, işlev uygulamaları tarafından kullanılan, başka bir seçenek beyaz liste ile işlev uygulamaları veri merkezi (Azure bölgesi). Yapabilecekleriniz [tüm Azure veri merkezleri için IP adreslerini listeler bir JSON dosyası indirmeniz](https://www.microsoft.com/en-us/download/details.aspx?id=56519). Ardından işlev uygulamanızı çalışan bölge için geçerli JSON parça bulun.
+İşlev uygulamalarınız tarafından kullanılan giden IP adreslerini beyaz listeye almanız gerekiyorsa, uygulamanın veri merkezi (Azure bölgesi) işlevini beyaz bir şekilde listeleyerek başka bir seçenek vardır. [Tüm Azure veri MERKEZLERININ IP adreslerini listeleyen BIR JSON dosyası indirebilirsiniz](https://www.microsoft.com/en-us/download/details.aspx?id=56519). Ardından, işlev uygulamanızın çalıştırıldığı bölge için geçerli olan JSON parçasını bulun.
 
-Örneğin, bu Batı Avrupa'da JSON parçası aşağıdaki gibi görünmelidir.
+Örneğin, Batı Avrupa JSON parçası şöyle görünebilir:
 
 ```
 {
@@ -84,56 +84,56 @@ Gerekirse beyaz liste giden IP adresleri, işlev uygulamaları tarafından kulla
 }
 ```
 
- Bu dosya güncelleştirildiğinde ve ne zaman IP adresleri hakkında daha fazla bilgi için genişletme **ayrıntıları** bölümünü [Download Center sayfası](https://www.microsoft.com/en-us/download/details.aspx?id=56519).
+ Bu dosyanın ne zaman güncelleştirildiği ve IP adreslerinin ne zaman değiştirileceği hakkında bilgi için [Indirme Merkezi sayfasının](https://www.microsoft.com/en-us/download/details.aspx?id=56519) **Ayrıntılar** bölümünü genişletin.
 
 ## <a name="inbound-ip-address-changes"></a>Gelen IP adresi değişiklikleri
 
-Gelen IP adresi **olabilir** ne zaman değiştirmek:
+Şu durumlarda gelen IP **adresi değişebilir** :
 
-- Bir işlev uygulaması silin ve farklı bir kaynak grubunda yeniden oluşturun.
-- Bir kaynak grubunda ve bölgede birlikte son işlev uygulamasını silin ve yeniden oluşturun.
-- Sırasında olduğu gibi bir SSL bağlaması Sil [sertifika yenileme](../app-service/app-service-web-tutorial-custom-ssl.md#renew-certificates)).
+- Bir işlev uygulamasını silip farklı bir kaynak grubunda yeniden oluşturun.
+- Bir kaynak grubu ve bölge birleşiminde son işlev uygulamasını silin ve yeniden oluşturun.
+- [Sertifika yenileme](../app-service/configure-ssl-certificate.md#renew-certificate)sırasında olduğu gıbı bir SSL bağlamasını silin.
 
-İşlev uygulamanız çalıştığında bir [tüketim planı](functions-scale.md#consumption-plan), olanları listelenen gibi tüm eylemler kazanmadı olduğunda gelen IP adresi değişebilir.
+İşlev uygulamanız bir [Tüketim planında](functions-scale.md#consumption-plan)çalıştığında, listede listelenenler gibi herhangi bir eylem gerçekleştirmemeniz durumunda gelen IP adresi de değişebilir.
 
 ## <a name="outbound-ip-address-changes"></a>Giden IP adresi değişiklikleri
 
-Bir işlev uygulaması olduğunda değişebilir kümesi kullanılabilir giden IP adresleri:
+Bir işlev uygulaması için kullanılabilir giden IP adresleri kümesi şunları yaptığınızda değişebilir:
 
-* Gelen IP adresi değişebilir tüm eylemleri.
-* App Service planınızın fiyatlandırma katmanını değiştirin. Uygulamanızı kullanabilir, tüm fiyatlandırma katmanları için tüm olası giden IP adresleri listesi yer `possibleOutboundIPAddresses` özelliği. Bkz: [Bul giden IP'ler](#find-outbound-ip-addresses).
+* Gelen IP adresini değiştirecek herhangi bir işlem yapın.
+* App Service planı fiyatlandırma katmanınızı değiştirin. Uygulamanızın kullanabileceği tüm olası giden IP adreslerinin listesi, tüm fiyatlandırma katmanları için `possibleOutboundIPAddresses` özellikte. Bkz. [giden IP 'Leri bulma](#find-outbound-ip-addresses).
 
-İşlev uygulamanız çalıştığında bir [tüketim planı](functions-scale.md#consumption-plan), olanları listelenen gibi tüm eylemler kazanmadı olduğunda giden IP adresi değişebilir.
+İşlev uygulamanız bir [Tüketim planında](functions-scale.md#consumption-plan)çalıştığında, listede listelenenler gibi herhangi bir eylem gerçekleştirmediyse giden IP adresi de değişebilir.
 
-Giden IP adresi değişikliği kasıtlı olarak zorlamak için:
+Giden IP adresi değişikliğini kasıtlı olarak zorlamak için:
 
-1. App Service planınızın standart ve Premium v2 fiyatlandırma katmanları arasında yukarı veya aşağı ölçeklendirin.
+1. Standart ve Premium v2 fiyatlandırma katmanları arasında App Service planınızı yukarı veya aşağı ölçeklendirin.
 2. 10 dakika bekleyin.
-3. Geri başladığınız ölçeklendirin.
+3. Başlattığınız yere doğru ölçeklendirin.
 
-## <a name="ip-address-restrictions"></a>IP adresi sınırlamaları
+## <a name="ip-address-restrictions"></a>IP adresi kısıtlamaları
 
-İzin vermek veya bir işlev uygulaması için erişimi reddetmek istediğiniz IP adreslerinden oluşan bir liste yapılandırabilirsiniz. Daha fazla bilgi için [Azure uygulama hizmeti statik IP kısıtlamaları](../app-service/app-service-ip-restrictions.md).
+Bir işlev uygulamasına izin vermek veya erişimi reddetmek istediğiniz IP adreslerinin bir listesini yapılandırabilirsiniz. Daha fazla bilgi için bkz. [Azure App Service STATIK IP kısıtlamaları](../app-service/app-service-ip-restrictions.md).
 
 ## <a name="dedicated-ip-addresses"></a>Ayrılmış IP adresleri
 
-Statik ve ayrılmış IP adresleri ihtiyacınız varsa bunu öneririz [App Service ortamları](../app-service/environment/intro.md) ( [yalıtılmış katmanı](https://azure.microsoft.com/pricing/details/app-service/) App Service planı). Daha fazla bilgi için [App Service ortamı IP adresleri](../app-service/environment/network-info.md#ase-ip-addresses) ve [bir App Service ortamına gelen trafiği denetleme](../app-service/environment/app-service-app-service-environment-control-inbound-traffic.md).
+Statik, ayrılmış IP adreslerine ihtiyacınız varsa [App Service ortamlar](../app-service/environment/intro.md) (App Service planlarının [yalıtılmış katmanı](https://azure.microsoft.com/pricing/details/app-service/) ) önerilir. Daha fazla bilgi için bkz. [App SERVICE ORTAMı IP adresleri](../app-service/environment/network-info.md#ase-ip-addresses) ve [gelen trafiği bir App Service ortamı denetleme](../app-service/environment/app-service-app-service-environment-control-inbound-traffic.md).
 
-İşlev uygulamanızı bir App Service Ortamı'nda çalışıp çalışmadığını öğrenmek için:
+İşlev uygulamanızın bir App Service Ortamı çalışıp çalışmamasından daha fazla bilgi edinmek için:
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
+1. [Azure portalında](https://portal.azure.com) oturum açın.
 2. İşlev uygulamasına gidin.
-3. Seçin **genel bakış** sekmesi.
-4. App Service planı katmanı altında görünür **App Service planı/fiyatlandırma katmanı**. Fiyatlandırma katmanı App Service ortamı olan **yalıtılmış**.
+3. **Genel bakış** sekmesini seçin.
+4. App Service planı katmanı **App Service plan/fiyatlandırma katmanı**altında görünür. App Service Ortamı fiyatlandırma katmanı **yalıtılmıştır**.
  
-Alternatif olarak, kullandığınız [Cloud Shell](../cloud-shell/quickstart.md):
+Alternatif olarak, [Cloud Shell](../cloud-shell/quickstart.md)kullanabilirsiniz:
 
 ```azurecli-interactive
 az webapp show --resource-group <group_name> --name <app_name> --query sku --output tsv
 ```
 
-App Service ortamı `sku` olduğu `Isolated`.
+App Service Ortamı `sku` `Isolated`.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Yaygın bir nedeni, IP değişiklikleri işlevi uygulama ölçeklendirme değişiklikleri var. [İşlev uygulamasını ölçeklendirme hakkında daha fazla bilgi](functions-scale.md).
+IP değişikliklerinin yaygın bir nedeni, işlev uygulama ölçeği değişikdir. [İşlev uygulaması Ölçeklendirmesi hakkında daha fazla bilgi edinin](functions-scale.md).

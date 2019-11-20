@@ -1,50 +1,51 @@
 ---
-title: Azure Market ve AppSource yayımcı profilini yönetme
-description: Azure Market ve AppSource yayımcı profilini yönetme
+title: Azure Marketi ve AppSource yayımcı profilini yönetme
+description: Azure Marketi ve AppSource yayımcı profilini yönetme
 services: Azure, Marketplace, Cloud Partner Portal,
 author: qianw211
 manager: pbutlerm
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 11/15/2018
 ms.author: pabutler
-ms.openlocfilehash: a72259e1deb97ca0256de5bfd3b2f6c78d92e3c8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c9e8e73d18ec0c2a7334fbb5521e89ead4334cc7
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64935355"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826360"
 ---
-# <a name="manage-azure-marketplace-and-appsource-publisher-profile"></a>'Azure Marketi' ve 'AppSource' yayımcı profilini yönetme
+# <a name="manage-azure-marketplace-and-appsource-publisher-profile"></a>' Azure Marketi ' ve ' AppSource ' yayımcı profilini yönetin
 
-Bu belge görüntüleme ve yönetme kayıtlı yayımcı profilinizi kullanıcılara bir gözden geçirme değil.
+Bu belge, kayıtlı yayımcı profilinizde kullanıcıları görüntüleme ve yönetme konusunda bir adım adım yol gösterir.
 
-Bu zamana kadar bir Azure Market ve AppSource yayımcı haline adımlarını tamamladınız. Yayımcı profil kayıtlı **[bulut iş ortağı portalı](https://cloudpartner.azure.com/)** onay iş ortağı isteğinizin izleyerek. Yayımcı profilinizi tüm teklifleri için geçerli olur ve iş ortağı kayıt sırasında kullanılan hesaptan SKU'ları yayımladınız.
+Bu kez, Azure Marketi ve AppSource yayımcısı olma adımlarını tamamladınız. Yayımcı profili, iş ortağı isteğinizin onayını izleyen **[bulut iş ortağı portalı](https://cloudpartner.azure.com/)** kaydedilir. Yayımcı profiliniz, iş ortağı kaydı sırasında kullanılan hesaptan yayımlanan tüm tekliflere ve SKU 'Lara uygulanacaktır.
 
-Bir bulut iş ortağı olarak, şirketinizin kaydolmadıysanız bkz [bulut iş ortağı portalını kullanmaya başlama](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-getting-started-with-the-cloud-partner-portal).
+Şirketinizin bir bulut iş ortağı olarak kaydolmadıysanız, bkz. [bulut iş ortağı portalı ile çalışmaya başlama](https://docs.microsoft.com/azure/marketplace/cloud-partner-portal-orig/cloud-partner-portal-getting-started-with-the-cloud-partner-portal).
 
-**Yayımcı profil**: Şirketiniz Azure Market ve AppSource yayımcı profilinizi ayırır. Bu, yayımcı kimliği, görünen ad ve sahibi email(s) oluşur. İyi yönetilen profil görünürlüğünüzü artırın ve Yardım Market kullanıcılarının kolayca belirlemenize ve uygun bir teklif seçin.
+**Yayımcı profili**: Yayımcı profiliniz, şirketinizin Azure Marketi ve appsource 'ta ayırt edilmesini sağlar. Yayımcı KIMLIĞINIZ, görünen ad ve sahip e-postalardan oluşur. İyi yönetilen bir profil, görünürlüğünüzü artıracak ve Market kullanıcılarının uygun bir teklifi kolayca belirlemesine ve seçmesini sağlamanıza yardımcı olur.
 
 > [!NOTE]
-> Yayımcı kimliği ve kayıtlı sahip ilk teklifinizi yayımlayın sonra e-posta düzenlenebilir değil. Ancak profilinizi görüntüleyin ve bulut iş ortağı Portalı'ndan yayımcı görünen adı Düzenle.
+> İlk teklifinizi yayımladığınızda yayımcı KIMLIĞINIZ ve kayıtlı sahip e-postanız düzenlenebilir değildir. Bununla birlikte, profilinizi görüntüleyebilir ve Bulut İş Ortağı Portalı yayımcı görünen adını düzenleyebilirsiniz.
 
 <!-- Dummy comment added to suppress MD linter warning -->
 
 > [!NOTE]
-> Kullanıcılar (Katkıda bulunanların ve sahipleri) yayımlama profiliniz için kullanıcılar bölümünde bulut iş ortağı portalının sol gezinti bölmesinde kullanıcılar bölümünden ekleyin. '
+> Sol gezinti bölmesindeki kullanıcılar bölümünden, bulut iş ortağı Portalı ' nın kullanıcılar bölümünden kullanıcıları (katkıda bulunanlar ve sahipler) yayımlama profilinize ekleyin
 
-**Yayımcı profilinizi yönetin ve görüntülemek için**, sağ üst menü çubuğundaki **yayımcı Profil sekmesi**.
+**Yayımcı profilinizi görüntülemek ve yönetmek için**, sağ üst menü çubuğundan **Yayımcı profili sekmesine**tıklayın.
 
-![Yayımcı Profil sekmesi - yayımcı profili](./media/cloud-partner-portal-how-to-manage-publisher-profile/publisherprofilenew.png)
+![Yayımcı profili sekmesi-yayımcı profili](./media/cloud-partner-portal-how-to-manage-publisher-profile/publisherprofilenew.png)
 
-![Yayımcı profil ayrıntıları - yayımcı profil ayrıntıları](./media/cloud-partner-portal-how-to-manage-publisher-profile/publisherprofiledetails.png)
+![Yayımcı profili ayrıntıları-yayımcı profili ayrıntıları](./media/cloud-partner-portal-how-to-manage-publisher-profile/publisherprofiledetails.png)
 
-**Geliştirici Merkezi hesabınızda bağlantı**: Yayımcı profilinizi bulut iş ortağı portalı ile mevcut Geliştirici Merkezi hesabınızda da bağlayabilirsiniz.
-Portala Geliştirici Merkezi hesabınızda kaydetmek için kullanılan e-posta adresiyle ilk oturum açın. Ardından, Geliştirme Merkezi hesabı durumu, Geliştirme Merkezi hesabı sahibinin e-posta ve Geliştirme Merkezi hesabı adı, yayımcı profil sayfanızı görüntüler.
+**Geliştirme Merkezi hesabınızı bağlayın**: var olan geliştirme merkezi hesabınızı bulut iş ortağı portalı yayımcı profilinizle da bağlayabilirsiniz.
+Öncelikle, Geliştirici Merkezi hesabınızı kaydetmek için kullanılan e-posta adresiyle portalda oturum açın. Ardından, yayımcı profili sayfanız geliştirme merkezi hesap durumunuzu, Dev Center hesabı sahibi e-postanızı ve Dev Center hesap adını görüntüler.
 
 >[!NOTE]
->Geliştirme Merkezi hesabı kayıt Marketi SKU'ları Ücretli yayımlama için zorunludur.
+>Geliştirme merkezi hesap kaydı, ücretli pazar yeri SKU 'Larını yayımlamak için zorunludur.
 
-Yoksa bir [Geliştirici Merkezi hesabına](./cloud-partner-portal-dev-center-accounts-registration.md), hesap oluşturabilirsiniz. Ardından, bulut iş ortağı portalı teklifiniz için bir sahip olarak kayıtlı e-posta adresi ekleyin. Sahibi yalnızca yayımlama profiliniz için kayıtlı e-posta adresi ekleyebilirsiniz **kullanıcı** bölümü. Ardından, aynı e-posta adresini kullanarak portalda oturum açın ve Geliştirme Merkezi hesabınıza bağlayın.
+Bir [Geliştirici Merkezi hesabınız](./cloud-partner-portal-dev-center-accounts-registration.md)yoksa bir hesap oluşturabilirsiniz. Ardından, kayıtlı e-posta adresini teklifiniz için Bulut İş Ortağı Portalı sahip olarak ekleyin. Bir sahip, yalnızca **Kullanıcı** bölümündeki yayımlama profilinize kayıtlı e-posta adresini ekleyebilir. Sonra, portalda aynı e-posta adresini kullanarak oturum açın ve geliştirme merkezi hesabınızı bağlayın.
 
-![Yayımcı profil ayrıntıları - yayımcı Profil açıklaması](./media/cloud-partner-portal-how-to-manage-publisher-profile/publisherprofiledescription.png)
+![Yayımcı profili ayrıntıları-yayımcı profili açıklaması](./media/cloud-partner-portal-how-to-manage-publisher-profile/publisherprofiledescription.png)

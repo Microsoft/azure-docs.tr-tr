@@ -1,6 +1,6 @@
 ---
-title: Bir Azure AD galeri uygulamasına kullanıcı hazırlamayı yapılandırırken yönetici kimlik bilgilerini kaydetme sorunu | Microsoft Docs
-description: Azure AD uygulama galerisinde bulunan yapılandırma kullanıcı uygulamaya zaten sağlama listelenen genişlettiklerinde karşılaştığı yaygın sorunları giderme
+title: Yönetici kimlik bilgilerini kaydetme sorunu Azure AD Galeri uygulamasını yapılandırma | Microsoft Docs
+description: Azure AD uygulama galerisinde zaten listelenen bir uygulamaya Kullanıcı sağlamayı yapılandırırken karşılaştığı yaygın sorunları giderme
 services: active-directory
 documentationcenter: ''
 author: msmimart
@@ -16,34 +16,34 @@ ms.date: 02/21/2018
 ms.author: mimart
 ms.reviewer: arvinh
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7e4af70ae8628f612b8858b99c0d5ae57e78ace4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 152b704ca597fb473a820124ee6147d6d9bc7845
+ms.sourcegitcommit: 04ec7b5fa7a92a4eb72fca6c6cb617be35d30d0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65963610"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68381470"
 ---
-# <a name="problem-saving-administrator-credentials-while-configuring-user-provisioning-to-an-azure-active-directory-gallery-application"></a>Azure Active Directory Galerisi uygulamaya kullanıcı hazırlamayı yapılandırırken yönetici kimlik bilgilerini kaydetme sorunu 
+# <a name="problem-saving-administrator-credentials-while-configuring-user-provisioning-to-an-azure-active-directory-gallery-application"></a>Azure Active Directory Galeri uygulamasına kullanıcı sağlamayı yapılandırırken yönetici kimlik bilgileri kaydedilirken sorun oluştu 
 
-Yapılandırmak için Azure portalını kullanarak zaman [otomatik kullanıcı hazırlama](user-provisioning.md) bir kurumsal uygulama için bir durumla karşılaşabilirsiniz. Burada:
+Bir kurumsal uygulama için [Otomatik Kullanıcı sağlamayı](user-provisioning.md) yapılandırmak üzere Azure Portal kullanırken şu koşullarda karşılaşabilirsiniz:
 
-* **Yönetici kimlik bilgileri** geçerli uygulama için girilen ve **Test Bağlantısı** düğmesini çalışır. Ancak, kimlik bilgileri kaydedilemiyor ve Azure portalında genel bir hata iletisi döndürür.
+* Uygulama için girilen **yönetici kimlik bilgileri** geçerlidir ve **Bağlantıyı Sına** düğmesi kullanılır. Ancak, kimlik bilgileri kaydedilemez ve Azure portal genel bir hata iletisi döndürür.
 
-SAML tabanlı çoklu oturum açma de aynı uygulama için yapılandırılmışsa, hatanın en olası nedeni, Azure AD'nin, uygulama başına iç depolama sınır sertifikalar ve kimlik bilgilerini aşıldı.
+Aynı uygulama için SAML tabanlı çoklu oturum açma da yapılandırılırsa, hatanın en olası nedeni, Azure AD 'nin iç, sertifikalar ve kimlik bilgileri için uygulama başına depolama sınırının aşılmasından kaynaklanıyor olabilir.
 
-Azure AD şu anda tüm sertifikalar, gizli belirteçleri, kimlik bilgileri ve ilgili yapılandırma verilerini (olarak da bilinen hizmet sorumlusu kaydını Azure AD'de) uygulamanın tek bir örneği ile ilişkili için 1024 bayt bir en büyük depolama kapasitesine sahiptir.
+Azure AD 'nin şu anda tüm sertifikalar, gizli belirteçler, kimlik bilgileri ve bir uygulamanın tek bir örneğiyle ilişkili yapılandırma verileri (Azure AD 'de hizmet sorumlusu kaydı olarak da bilinir) için en fazla 1024 bayt depolama kapasitesi vardır.
 
-SAML tabanlı çoklu oturum açma yapılandırıldığında, SAML belirteçlerini imzalamak için kullanılan sertifikanın burada depolanır ve genellikle alanının yüzde 50 %'den kullanır.
+SAML tabanlı çoklu oturum açma yapılandırıldığında, SAML belirteçlerini imzalamak için kullanılan sertifika burada depolanır ve genellikle alanın yüzde 50 ' ünü kullanır.
 
-Herhangi gizli belirteçleri, URI'ler, bildirim e-posta adresleri, kullanıcı adları ve kullanıcı hazırlama, Kurulum sırasında girdiğiniz parolaları depolama sınırı olması neden olabilir.
+Kullanıcı hazırlama kurulumu sırasında girilen gizli belirteçler, URI 'Ler, bildirim e-posta adresleri, Kullanıcı adları ve parolalar, depolama sınırının aşılmasına neden olabilir.
 
-## <a name="how-to-work-around-this-issue"></a>Bu sorunu çözmek nasıl 
+## <a name="how-to-work-around-this-issue"></a>Bu sorunu geçici olarak çözmek 
 
-Bu sorunun geçici çözümü bugün için olası iki yolu vardır:
+Bu sorunu çözmek için iki olası yol vardır:
 
-1. **İki galeri uygulama örnekleri, çoklu oturum açma için diğeri için kullanıcı sağlamayı kullanın** -galeri uygulama alma [LinkedIn yükseltmesine](../saas-apps/linkedinelevate-tutorial.md) örnek olarak, LinkedIn yükseltmesine galeri ekleme ve yapılandırma Bunun için çoklu oturum açma. Sağlama, LinkedIn yükseltmesine başka bir örneği Azure AD uygulama Galerisi ekleyin ve "LinkedIn yükseltme (hazırlama)." olarak adlandırın Bu ikinci örneği için yapılandırma [sağlama](../saas-apps/linkedinelevate-provisioning-tutorial.md), ancak çoklu oturum açmayı değil. Bu geçici çözüm kullanırken, aynı kullanıcıları ve grupları olmasına gerek [atanan](assign-user-or-group-access-portal.md) hem uygulamalar için. 
+1. **Bir diğeri çoklu oturum açma için bir tane olmak üzere bir tane olmak üzere iki Galeri uygulaması örneğini kullanın** , Galeri uygulaması [LinkedIn](../saas-apps/linkedinelevate-tutorial.md) 'i örnek olarak almak için Galeri 'den LinkedIn 'i ekleyebilir ve çoklu oturum açma için yapılandırabilirsiniz. Sağlama için Azure AD uygulama galerisinden LinkedIn 'in başka bir örneğini ekleyin ve "LinkedIn yükselt (sağlama)" olarak adlandırın. Bu ikinci örnek için [sağlamayı](../saas-apps/linkedinelevate-provisioning-tutorial.md)yapılandırın, ancak çoklu oturum açmayı yapılandırın. Bu geçici çözüm kullanılırken, her iki uygulamaya de aynı kullanıcı ve grupların [atanması](assign-user-or-group-access-portal.md) gerekir. 
 
-2. **Depolanan yapılandırma veri miktarını azaltmak** -girilen tüm verileri [yönetici kimlik bilgileri](user-provisioning.md#how-do-i-set-up-automatic-provisioning-to-an-application) sağlama sekmesinde bölümünü aynı yerde SAML sertifikası olarak depolanır. Tüm bu verileri kısaltın mümkün olmayabilir ancak bazı isteğe bağlı yapılandırma alanları ister **bildirim e-posta** kaldırılabilir.
+2. **Depolanan yapılandırma veri miktarını azaltın** -sağlama sekmesinin [yönetici kimlik bilgileri](user-provisioning.md#how-do-i-set-up-automatic-provisioning-to-an-application) bölümünde girilen tüm veriler SAML sertifikasıyla aynı yerde saklanır. Bu verilerin tümünün uzunluğunu azaltmak mümkün olmasa da, **bildirim e-postası** gibi bazı isteğe bağlı yapılandırma alanları kaldırılabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-[Kullanıcı hazırlama ve sağlamayı SaaS uygulamaları için yapılandırma](user-provisioning.md)
+[SaaS uygulamalarına Kullanıcı hazırlama ve sağlamayı kaldırma işlemlerini yapılandırma](user-provisioning.md)

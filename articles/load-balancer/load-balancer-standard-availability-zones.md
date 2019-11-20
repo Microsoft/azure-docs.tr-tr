@@ -1,66 +1,55 @@
 ---
-title: Azure standart Load Balancer ve kullanılabilirlik bölgeleri
-titlesuffix: Azure Load Balancer
-description: Standard Load Balancer ve Kullanılabilirlik Bölgeleri
+title: Azure Standart Load Balancer ve Kullanılabilirlik Alanları
+titleSuffix: Azure Load Balancer
+description: Bu öğrenme yoluyla Azure Standart Load Balancer ve Kullanılabilirlik Alanları ile çalışmaya başlayın.
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 ms.custom: seodec18
 ms.service: load-balancer
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 03/27/2018
-ms.author: kumud
-ms.openlocfilehash: 0820285555110e8e85bff814f4774d6da6443f69
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
+ms.date: 08/07/2019
+ms.author: allensu
+ms.openlocfilehash: 63a7db6e7078df978f47a6d53ea82df83c22c800
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67491980"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74076978"
 ---
 # <a name="standard-load-balancer-and-availability-zones"></a>Standard Load Balancer ve Kullanılabilirlik Bölgeleri
 
-Azure Load Balancer'ın standart SKU destekler [kullanılabilirlik](../availability-zones/az-overview.md) senaryoları. Bazı yeni kavramlar, uçtan uca senaryo kullanılabilirlik alanları ile kaynakları hizalama ve dilimlerinde dağıtmadan iyileştirmenize izin Standard Load Balancer ile kullanılabilir.  Gözden geçirme [kullanılabilirlik](../availability-zones/az-overview.md) kullanılabilirlik alanları nedir ile ilgili yönergeler için hangi bölgeler şu anda kullanılabilirlik alanları ve diğer destek kavramları ve ürünleri ilgili. Standard Load Balancer ile kullanılabilirlik alanına birlikte birçok farklı senaryo oluşturabileceğiniz bir korunmalarını ve esnek bir özellik kümesidir.  Bunlar anlamak için bu belgeyi gözden [kavramları](#concepts) ve temel senaryo [tasarım kılavuzunu](#design).
+Azure Standart Load Balancer, [kullanılabilirlik alanları](../availability-zones/az-overview.md) senaryolarını destekler. Kaynakları bölgelere ayırarak ve bölgeler arasında dağıtarak uçtan uca senaryonuzun kullanılabilirliği iyileştirmek için Standart Load Balancer kullanabilirsiniz.  Kullanılabilirlik [alanlarını,](../availability-zones/az-overview.md) hangi bölgelerin kullanılabilirlik alanlarını desteklediğini ve diğer ilgili kavramları ve ürünleri hakkında rehberlik için gözden geçirin. Standart Load Balancer ile birlikte kullanılabilirlik alanları, birçok farklı senaryo oluşturabileceğiniz bir expantik ve esnek özellik kümesidir.  Bu [kavramları](#concepts) ve temel senaryo [tasarım kılavuzunu](#design)anlamak için bu belgeyi gözden geçirin.
 
 >[!IMPORTANT]
->Gözden geçirme [kullanılabilirlik](../availability-zones/az-overview.md) ilgili konular için bölge belirli bilgilere dahil.
+>Bölgeye özgü bilgiler de dahil olmak üzere ilgili konular için [kullanılabilirlik alanları](../availability-zones/az-overview.md) gözden geçirin.
 
-## <a name="concepts"></a> Yük Dengeleyici için uygulanan kullanılabilirlik kavramları
+## <a name="concepts"></a>Load Balancer uygulanan Kullanılabilirlik Alanları kavramları
 
-Yük Dengeleyici kaynakları ve gerçek altyapınız arasında doğrudan bir ilişki yoktur; bir yük dengeleyici oluşturmaya örneğini oluşturmaz. Yük Dengeleyici kaynaklarının içinde Azure oluşturmak istediğiniz senaryoyu ulaşmak için önceden oluşturulmuş çok kiracılı altyapısını nasıl program ifade edebilirsiniz nesneleridir.  Bölgesel olarak yedekli bir hizmet, bir müşteri açısından bakıldığında bir kaynak olarak görünür ancak tek bir yük dengeleyici kaynağı programlama birden çok kullanılabilirlik bölgelerinde altyapının denetleyebildiğinden kullanılabilirlik bağlamında önemli budur.
+Load Balancer kaynakları ile gerçek altyapı arasında doğrudan ilişki yoktur; Load Balancer oluşturmak bir örnek oluşturmaz. Load Balancer kaynaklar, Azure 'un, oluşturmak istediğiniz senaryoya ulaşmak için önceden oluşturulmuş çok kiracılı altyapısını nasıl programtabileceği hakkında ifade ettiğiniz nesnelerdir.  Tek bir Load Balancer kaynağı birden çok kullanılabilirlik bölgesindeki altyapının programlamayı denetleyebileceğinden, bu, kullanılabilirlik alanları bağlamında önemli bir deyişle, bölgesel olarak yedekli bir hizmet bir müşteri bakış noktasından bir kaynak olarak görünür.  
 
-Bir yük dengeleyici kaynağın işlevleri, bir ön uç, bir kural, bir durum araştırması ve arka uç havuzu tanımı ifade edilir.
+Load Balancer kaynağın kendisi bölge ve hiçbir şekilde hiç olamaz.  Hem VNet hem de alt ağ her zaman bölgesel ve hiçbir zaman. Yapılandırabileceğiniz ayarların ayrıntı düzeyi, ön uç, kural ve arka uç havuzu tanımının her bir yapılandırması tarafından sınırlandırılır.
 
-Kullanılabilirlik bağlamında, bir yük dengeleyici kaynak özelliklerini ve davranışını bölgesel olarak yedekli ya da bölgesel olarak açıklanmıştır.  Bölgesel olarak yedekli ve bölgesel bir özelliğin zonality açıklanmaktadır.  Yük Dengeleyici bağlamında, her zaman bölgesel olarak yedekli anlamına gelir *birden çok bölge* ve hizmetle yalıtma bölgesel bir *tek bölge*.
+Kullanılabilirlik alanları bağlamında, bir Load Balancer kuralın davranışı ve özellikleri, bölgesel olarak yedekli veya zonal olarak açıklanmaktadır.  Bölgesel olarak yedekli ve bölgesel bir özelliğin bölge düzeyini betimleyen.  Load Balancer bağlamında, bölgesel olarak yedekli her zaman *birden çok bölge* ve ZGen, hizmeti *tek bir bölgeye*ayırma anlamına gelir.
 
-Hem genel hem de iç Load Balancer, bölgesel olarak yedekli ve bölgesel senaryoları desteklemek ve her ikisi de trafiği dilimlerinde gerektiği şekilde yönlendirebilir (*bölgeler arası Yük Dengeleme*).
+Hem genel hem de dahili Load Balancer, bölgesel olarak yedekli ve zGenel senaryoları destekler ve her ikisi de gerektiğinde trafiği bölgelere (*çapraz bölge yük dengelemesi*) yönlendirebilir. 
 
-Bir yük dengeleyici kaynağı, Bölgesel ve hiçbir zaman bölgesel ' dir.  Ve Bölgesel ve hiçbir zaman bölgesel bir sanal ağ ve alt ağ her zaman.
+### <a name="frontend"></a>Uçta
 
-### <a name="frontend"></a>Ön uç
+Load Balancer ön ucu, bir genel IP adresi kaynağına veya bir sanal ağ kaynağının alt ağı içindeki özel bir IP adresine başvuran bir ön uç IP yapılandırması.  Hizmetinizin açığa çıkarılabileceği yük dengeli uç noktayı oluşturur.
 
-Bir yük dengeleyici ön ucuna veya bir genel IP adresi kaynağı, hem de bir sanal ağ kaynağı alt ağ içinde özel bir IP adresi başvuran bir ön uç IP yapılandırması var.  Yük dengeli uç nokta, hizmetinizin Burada sunulan oluşturur.
+Bir Load Balancer kaynak, aynı anda bölgesel ve bölgesel olarak yedekli ön uçları içeren kurallar içerebilir. 
 
-Bir yük dengeleyici kaynağıyla aynı anda Bölgesel ve bölgesel olarak yedekli ön uçlar içerebilir. 
+Bir bölge için genel bir IP kaynağı veya özel bir IP adresi garanti edildiğinde, bölgenin bölgesi (veya eksikliği) değişebilir olmaz.  Genel IP veya özel IP adresi ön ucu 'nın bölge düzeyini değiştirmek veya atlamak istiyorsanız, genel IP 'yi uygun bölgede yeniden oluşturmanız gerekir.  Kullanılabilirlik alanları birden çok ön uç için kısıtlamaları değiştirmez, bu beceriyle ilgili ayrıntılar için [Load Balancer için birden fazla](load-balancer-multivip-overview.md) ön uç gözden geçirin.
 
-Bir genel IP kaynağı bölgeye garanti edilen zaman zonality (veya yapanın olmaması) değişebilir değildir.  Değiştirmek veya bir genel IP ön ucu, zonality atlamak istiyorsanız, uygun bölgesinde genel IP yeniden oluşturmanız gerekir.  
+#### <a name="zone-redundant-by-default"></a>Varsayılan olarak bölge yedekli
 
-Bir iç Load Balancer'ın bir ön uç, zonality kaldırma ve ön uç yeniden oluşturma, değiştirme veya zonality atlama değiştirebilirsiniz.
+Kullanılabilirlik alanları olan bir bölgede, Standart Load Balancer ön uç varsayılan olarak bölgesel olarak yedekli olur.  Bölgesel olarak yedekli tüm gelen veya giden akışların, tek bir IP adresi kullanılarak aynı anda bir bölgedeki birden çok kullanılabilirlik bölgesi tarafından sunulduğunu belirtir. DNS artıklık şemaları gerekli değildir. Tek bir ön uç IP adresi, bölge başarısızlığından sonra bölge hatasından bağımsız olarak tüm (etkilenmeyen) arka uç havuzu üyelerine ulaşmak için kullanılabilir. Bir veya daha fazla kullanılabilirlik bölgesi başarısız olabilir ve bölgedeki bir bölge sağlıklı kaldığı sürece veri yolu daha uzundur. Ön uç 'nin tek IP adresi birden çok kullanılabilirlik bölgesinde birden çok bağımsız altyapı dağıtımı tarafından aynı anda sunulur.  Bu, daha az veri yolu değildir, ancak yeniden denemeler veya yeniden oluşturma, bölge hatasından etkilenmeyen diğer bölgelerde başarılı olur.   
 
-Birden çok ön uç kullanırken gözden [Load Balancer için birden çok ön uç](load-balancer-multivip-overview.md) önemli noktalar için.
-
-#### <a name="zone-redundant-by-default"></a>Bölge varsayılan olarak yedekli
-
->[!IMPORTANT]
->Gözden geçirme [kullanılabilirlik](../availability-zones/az-overview.md) ilgili konular için bölge belirli bilgilere dahil.
-
-Kullanılabilirlik alanları ile bir bölgede standart yük dengeleyici ön uç, bölgesel olarak yedekli varsayılan olarak.  Tek bir ön uç IP adresi bölge hatası hayatta kalamaz ve bölge ne olursa olsun tüm arka uç havuzu üyelerine erişmek için kullanılabilir. Bu hitless veri yolu gelmez, ancak herhangi bir yeniden deneme veya reestablishment başarılı olur. DNS yedeklilik düzenleri gerekli değildir. Ön uç'ın tek bir IP adresi, aynı anda birden fazla kullanılabilirlik alanına birden çok bağımsız altyapı dağıtımı tarafından sunulur.  Bölgesel olarak yedekli tüm gelen veya giden akışlar aynı anda tek bir IP adresi kullanarak bir bölgede birden fazla kullanılabilirlik tarafından sunulan anlamına gelir.
-
-Bir veya daha fazla kullanılabilirlik başarısız olabilir ve veri yolu olduğu sürece bir bölgede bölge kalır sağlıklı devam eder. Bölgesel olarak yedekli yapılandırma varsayılandır ve hiçbir ek eylem gerektirir.  
-
-İç standart Load Balancer'ınız için bir bölgesel olarak yedekli genel IP adresi oluşturmak için aşağıdaki betiği kullanın. Yapılandırmanızda mevcut Resource Manager şablonları kullanıyorsanız, ekleyin **sku** bölümüne bu şablonları.
+Aşağıdaki alıntı, genel IP 'nin genel bir IP adresi için ortak Standart Load Balancer kullanılacak genel IP adresini nasıl tanımlayacağınızı gösteren bir örnekdir. Yapılandırmanızda mevcut Kaynak Yöneticisi şablonları kullanıyorsanız, bu şablonlara **SKU** bölümünü ekleyin.
 
 ```json
             "apiVersion": "2017-08-01",
@@ -73,7 +62,7 @@ Bir veya daha fazla kullanılabilirlik başarısız olabilir ve veri yolu olduğ
             },
 ```
 
-İç standart Load Balancer'ınız için bir bölgesel olarak yedekli ön uç IP adresi oluşturmak için aşağıdaki betiği kullanın. Yapılandırmanızda mevcut Resource Manager şablonları kullanıyorsanız, ekleyin **sku** bölümüne bu şablonları.
+Aşağıdaki alıntı, iç Standart Load Balancer için bölgesel olarak yedekli bir ön uç IP adresinin nasıl tanımlanacağını gösteren bir örnekdir. Yapılandırmanızda mevcut Kaynak Yöneticisi şablonları kullanıyorsanız, bu şablonlara **SKU** bölümünü ekleyin.
 
 ```json
             "apiVersion": "2017-08-01",
@@ -99,15 +88,21 @@ Bir veya daha fazla kullanılabilirlik başarısız olabilir ve veri yolu olduğ
                 ],
 ```
 
-#### <a name="optional-zone-isolation"></a>İsteğe bağlı bölge yalıtım
+Önceki alıntıları 'ler tamamlanmamış şablonlar değildir ancak kullanılabilirlik alanları özelliklerinin nasıl gösterileceğini göstermek için tasarlanmıştır.  Bu deyimleri şablonlarınıza eklemeniz gerekir.
 
-Tek bir bölge için garantili bir ön ucu olarak da bilinen sahip olmadığınıza bir *bölgesel ön uç*.  Bu, bir bölgedeki tek bir bölge tarafından sunulan herhangi bir gelen veya giden akış anlamına gelir.  Ön uç sunucularınızın kader bölge durumunu paylaşır.  Veri yolu, burada garanti dışındaki bölgelerde hataları tarafından etkilenmez. Bölgesel ön uçlar, bir IP adresi kullanılabilirlik alanı başına kullanıma sunmak için kullanabilirsiniz.  Ayrıca, bölgesel ön uçlar doğrudan kullanmak veya kullanabilirsiniz, ön uç genel IP adreslerini oluşuyorsa bunları gibi yük dengeleyici DNS ürün tümleştirin [Traffic Manager](../traffic-manager/traffic-manager-overview.md) ve bir istemci için çözümler tek bir DNS adı kullanın birden çok bölgesel IP adresi.  Ayrıca bu tek tek her bölge izlemek için bölge yükü dengelenmiş Uç noktalara kullanıma sunmak için kullanabilirsiniz.  Bu kavramlar (Bölgesel olarak yedekli ve aynı arka uç için bölgesel) blend isterseniz, gözden [Azure Load Balancer için birden çok ön uç](load-balancer-multivip-overview.md).
+#### <a name="optional-zone-isolation"></a>İsteğe bağlı bölge yalıtımı
 
-Bir genel yük dengeleyiciye ön uç için eklediğiniz bir *bölgeleri* parametre ön uç IP yapılandırması tarafından başvurulan genel IP için.  
+Tek bir bölge için bir ön uç garantisini seçebilirsiniz ve bu da *Bölgesel ön*ucu olarak bilinir.  Bu, gelen veya giden akışın bir bölgedeki tek bir bölge tarafından hizmet verdiği anlamına gelir.  Ön uç paylaşımlarınız, bölgenin sistem durumuyla birlikte fada.  Veri yolu, garantide olduğu yerde yer alan bölgelerde hatalara göre etkilenmemiştir. Kullanılabilirlik alanı başına bir IP adresi göstermek için, bölgesel ön uçları kullanabilirsiniz.  
 
-Bir iç yük dengeleyici ön uç için ekleme bir *bölgeleri* iç yük dengeleyici ön uç IP yapılandırması için parametre. Bölgesel ön uç, belirli bir bölge için bir alt ağdaki bir IP adresi sağlamak yük dengeleyici neden olur.
+Ayrıca, her bir bölgedeki yük dengeli uç noktalar için de, ZGen ön uçlarını doğrudan kullanabilirsiniz. Ayrıca, her bölgeyi tek tek izlemek için her bölge yük dengeli uç nokta için de kullanabilirsiniz.  Ya da genel uç noktalar için, bunları [Traffic Manager](../traffic-manager/traffic-manager-overview.md) gıbı bir DNS yük dengelemesi ürünüyle tümleştirebilir ve tek bir DNS adı kullanabilirsiniz. Daha sonra istemci daha sonra bu DNS adına birden çok IP adresine çözümlenir.  
 
-Kullanılabilirlik bölge 1'de bölgesel bir standart genel IP adresi oluşturmak için aşağıdaki betiği kullanın. Yapılandırmanızda mevcut Resource Manager şablonları kullanıyorsanız, ekleyin **sku** bölümüne bu şablonları.
+Bu kavramları karıştırmak istiyorsanız (aynı arka uç için bölgesel olarak yedekli ve bölgesel), [Azure Load Balancer için birden fazla](load-balancer-multivip-overview.md)ön eki gözden geçirin.
+
+Genel Load Balancer ön ucu için, ilgili kural tarafından kullanılan ön uç IP yapılandırması tarafından başvurulan genel IP kaynağına bir *bölgeler* parametresi eklersiniz.
+
+İç Load Balancer ön uç için, iç Load Balancer ön uç IP yapılandırmasına bir *bölgeler* parametresi ekleyin. Bölgesel ön ucu, Load Balancer alt ağdaki bir IP adresinin belirli bir bölgeye karşı sağlanmasına neden olur.
+
+Aşağıdaki alıntı, kullanılabilirlik bölge 1 bir bölgesel standart genel IP adresi tanımlamaya yönelik bir örnekdir. Yapılandırmanızda mevcut Kaynak Yöneticisi şablonları kullanıyorsanız, bu şablonlara **SKU** bölümünü ekleyin.
 
 ```json
             "apiVersion": "2017-08-01",
@@ -121,9 +116,7 @@ Kullanılabilirlik bölge 1'de bölgesel bir standart genel IP adresi oluşturma
             },
 ```
 
-Kullanılabilirlik bölge 1'de bir iç standart yük dengeleyici ön ucu oluşturmak için aşağıdaki betiği kullanın.
-
-Yapılandırmanızda mevcut Resource Manager şablonları kullanıyorsanız, ekleyin **sku** bölümüne bu şablonları. Ayrıca tanımlayan **bölgeleri** ön uç IP yapılandırması alt kaynak için bir özellik.
+Aşağıdaki alıntı, kullanılabilirlik Bölge 1 dahili Standart Load Balancer ön ucunun nasıl tanımlanacağını gösteren bir örnekdir. Yapılandırmanızda mevcut Kaynak Yöneticisi şablonları kullanıyorsanız, bu şablonlara **SKU** bölümünü ekleyin. Ayrıca, alt kaynak için ön uç IP yapılandırmasında **bölgeler** özelliğini tanımlayın.
 
 ```json
             "apiVersion": "2017-08-01",
@@ -150,80 +143,80 @@ Yapılandırmanızda mevcut Resource Manager şablonları kullanıyorsanız, ekl
                 ],
 ```
 
-### <a name="cross-zone-load-balancing"></a>Bölgeler arası Yük Dengeleme
+Precelılar, tüm şablonlar değildir ancak kullanılabilirlik alanları özelliklerinin nasıl gösterileceğini göstermek için tasarlanmıştır.  Bu deyimleri şablonlarınıza eklemeniz gerekir.
 
-Bölgeler arası Yük Dengeleme, Load Balancer'ın herhangi bir bölgedeki bir arka uç noktaya ulaşabilmelidir olanağı ve ön uç ve kendi zonality bağımsızdır.
+### <a name="cross-zone-load-balancing"></a>Bölgeler arası yük dengeleme
 
-Hizalama ve dağıtımınız tek bir bölge içinde garanti istiyorsanız, bölgesel ön uç ve aynı bölge bölgesel bir arka uç kaynaklarına hizalayın. Başka bir eylem gerekli değildir.
+Bölgeler arası yük dengeleme, Load Balancer herhangi bir bölgedeki arka uç uç noktasına ulaşma ve ön uç ve bölge özelliklerinden bağımsız olma olanağıdır.  Herhangi bir yük dengeleme kuralı, tüm kullanılabilirlik bölgelerinde veya bölgesel örneklerde arka uç örneğini hedefleyebilir.
 
-### <a name="backend"></a>Arka uç
+Senaryonuzu, bir kullanılabilirlik bölgesi kavramını ifade eden bir şekilde oluşturmak için dikkatli olmanız gerekir. Örneğin, sanal makine dağıtımınızın tek bir bölgede veya birden çok bölgede garanti etmeniz ve zeli ön uç ve bölgesel arka uç kaynaklarını aynı bölgeye hizalamanız gerekir.  Kullanılabilirlik bölgelerini yalnızca bölgesel kaynaklarıyla karşılıklı olarak kullanıyorsanız, senaryo çalışır, ancak kullanılabilirlik alanları açısından açık bir hata moduna sahip olmayabilir. 
 
-Yük Dengeleyici sanal makineleri ile çalışır.  Tek bir sanal ağ içindeki herhangi bir VM olup olmadığı bir bölgeye garanti veya hangi bölge için garanti edilen bağımsız olarak arka uç havuzunun parçası olabilir.
+### <a name="backend"></a>Sunucusundan
 
-Yalnızca hizalama ve ön uç ve arka uç ile tek bir bölge garanti istiyorsanız, sanal makineleri kendi arka uç havuzuna aynı bölge içinde yerleştirin.
+Load Balancer sanal makine örnekleriyle birlikte kullanılabilir.  Bunlar tek başına, kullanılabilirlik kümelerine veya sanal makine ölçek kümelerine sahip olabilir.  Tek bir sanal ağdaki herhangi bir sanal makine örneği, bir bölgede veya hangi bölgenin garantide garanti edilip edilmediklerine bakılmaksızın arka uç havuzunun bir parçası olabilir.
 
-Yalnızca birden çok bölge arasında sanal makineleri adresi istiyorsanız, VM'ler aynı arka uç havuzuna birden çok bölgelerinden yerleştirin.  Sanal makine ölçek kümeleri kullanırken, bir veya daha fazla sanal makine ölçek kümeleri aynı arka uç havuzuna yerleştirebilirsiniz.  Ve her bu sanal makine ölçek kümeleri, tek bir veya birden çok bölge olabilir.
+Ön uç ve arka ucunuzu tek bir bölge ile hizalamak ve güvence altına almak istiyorsanız, yalnızca aynı bölgedeki sanal makineleri ilgili arka uç havuzuna yerleştirebilirsiniz.
+
+Birden çok bölge genelinde sanal makinelere adres eklemek istiyorsanız, sanal makineleri birden fazla bölgeye aynı arka uç havuzuna yerleştirebilirsiniz.  Sanal Makine Ölçek Kümeleri kullanırken, bir veya daha fazla sanal makine ölçek kümesini aynı arka uç havuzuna yerleştirebilirsiniz.  Bu sanal makine ölçek kümelerinin her biri, tek veya birden çok bölgede olabilir.
 
 ### <a name="outbound-connections"></a>Giden bağlantılar
 
-[Giden bağlantılar](load-balancer-outbound-connections.md) tüm alanlar tarafından sunulan ve bir sanal makine bölgesel olarak yedekli bir ön uç ile genel Load Balancer ile ilişkili olduğunda kullanılabilirlik alanları ile bir bölgede otomatik olarak bölgesel olarak yedekli.  Giden bağlantı SNAT bağlantı noktası ayırmalar bölge hatalara karşı koruma sağlayacak.  
+Aynı bölge yedekli ve bölgesel özellikleri [giden bağlantılar](load-balancer-outbound-connections.md)için geçerlidir.  Giden bağlantılar için kullanılan bölge yedekli genel IP adresi tüm bölgeler tarafından sunulur. Bir genel IP adresi, yalnızca bunun garanti ettiği bölge tarafından sunulur.  Giden bağlantı SNAT bağlantı noktası ayırmaları kalan bölge hataları ve senaryonuz, bölge hatasından etkilenmemesi durumunda giden SNAT bağlantısı sağlamaya devam edecektir.  Bu, bir akış etkilenen bir bölge tarafından sunulduysa, bu işlem için veya bağlantıların, bölgesel olarak yedekli senaryolar için yeniden kurulması gerekebilir.  Etkilenen bölgeler dışındaki bölgelerde yer alan akışlar etkilenmez.
 
-Buna karşılık, VM bölgesel bir ön uç ile genel Load Balancer ile ilişkili ise, tek bir bölge tarafından sunulacak giden bağlantılar sağlanır.  Giden bağlantılar kader ilgili bölgenin durumu ile paylaşır.
-
-Algoritma ve SNAT bağlantı noktası ön tahsis aynıdır içeren veya içermeyen bölgeleri.
+SNAT bağlantı noktası ön ayırma algoritması, kullanılabilirlik alanları olmadan veya bunlarla aynı değildir.
 
 ### <a name="health-probes"></a>Sistem durumu araştırmaları
 
-Kullanılabilirlik alanları oldukları gibi mevcut sistem durumu araştırması tanımlarınızı kalır.  Ancak biz altyapı düzeyinde bir sistem durumu modeli genişletilmiş. 
+Mevcut durum araştırma tanımlarınız, kullanılabilirlik alanları olmayan gibi kalır.  Ancak sistem durumu modelini bir altyapı düzeyinde genişlettik. 
 
-Bölgesel olarak yedekli kullanırken ön uçlar, yük dengeleyici bağımsız olarak her kullanılabilirlik alanı bir VM'den erişilebilirliğini araştırma ve müşteri müdahalesi olmadan başarısız olan alanları genelinde yolları'ni kapatmak için kendi iç sistem durumu modeli genişletir.  Belirli bir yol başka bir bölgedeki bir VM için kullanılabilir bir bölgeye yük dengeleyici altyapıdan değilse, yük dengeleyici algılayabilir ve bu hatadan kaçınmak. Bu VM ulaşabileceği diğer bölgeler, kendi ilgili ön uçlar VM'den hizmet devam edebilirsiniz.  Sonuç olarak, hata olayları sırasında her bölge uçtan uca hizmetinizin genel sistem durumu korurken biraz farklı akış dağıtımları olabilir mümkündür.
+Bölgesel olarak yedekli ön uçları kullanırken Load Balancer, iç sistem durumu modelini her bir kullanılabilirlik bölgesinden bir sanal makinenin ulaşılabilirliğini bağımsız olarak araştırmasını ve müşteri müdahalesi olmadan başarısız olabilecek bölgelerde yolları kapatmayı sağlar.  Belirli bir yol, bir bölgenin Load Balancer altyapısından başka bir bölgedeki bir sanal makineye yoksa, Load Balancer bu hatayı algılayabilir ve önleyebilir. Bu sanal makineye erişebilen diğer bölgeler, sanal makineyi ilgili ön uçlarından sunmaya devam edebilir.  Sonuç olarak, hata olayları sırasında her bölge, uçtan uca hizmetinizin genel sistem durumunu korurken her bir bölgenin yeni akışların biraz farklı dağılımlarına sahip olabilir.
 
-## <a name="design"></a> Tasarım konuları
+## <a name="design"></a>Tasarım konuları
 
-Yük Dengeleyiciyi kullanılabilirlik bağlamında bilerek esnektir. Bölgesel olarak yedekli olmasını seçebilirsiniz veya bölgelere hizalamak seçebilirsiniz.  Yüksek kullanılabilirlik artan karmaşıklık fiyattan gelebilir ve kullanılabilirlik için en iyi performans için tasarlamanız gerekir.  Bazı önemli tasarım konuları bir göz atalım.
+Load Balancer, kullanılabilirlik alanları bağlamında özellikle esnektir. Bölgelere hizalamayı seçebilirsiniz veya her kural için bölge yedekli olarak seçebilirsiniz.  Daha yüksek kullanılabilirlik, artan karmaşıklık fiyatına gelebilir ve en iyi performans için kullanılabilirliği tasarlayabilmeniz gerekir.  Bazı önemli tasarım konularına göz atalım.
 
-### <a name="automatic-zone-redundancy"></a>Otomatik bölge artıklığı
+### <a name="automatic-zone-redundancy"></a>Otomatik bölge-artıklık
 
-Yük Dengeleyici bölgesel olarak yedekli bir ön ucu olarak tek bir IP basitleştirir. Bölgesel olarak yedekli bir IP adresi herhangi bir bölgedeki bölgesel bir kaynak güvenli bir şekilde görebilir ve bir bölgeyi bölge içinde sağlıklı kaldığı sürece bir veya daha fazla bölge hataları hayatta kalamaz. Buna karşılık, bölgesel bir ön uç hizmetinin tek bir bölge ve paylaşımları kader ilgili bölge ile azaltma ' dir.
+Load Balancer, bölge yedekli ön uç olarak tek bir IP 'nin olmasını kolaylaştırır. Bölgesel olarak yedekli bir IP adresi herhangi bir bölgede güvenli bir şekilde bir bölgesel kaynağı sunabilir ve bir bölgenin bölgede sağlıklı kaldığı sürece bir veya daha fazla bölge başarısızlığının üzerinde kalabilirler. Buna karşılık, bir bölgesel ön ucu hizmetin tek bir bölgeye bir azalmasıyla birlikte Fate 'yı ilgili bölge ile paylaşır.
 
-Bölge artıklığı hitless datapath ya da Denetim düzlemi anlamına gelmez;  Bu, veri düzlemi açıkça olur. Bölgesel olarak yedekli akışlar hiçbir bölge kullanabilirsiniz ve bir müşterinin akışlar bir bölgede tüm sağlıklı bölgeleri kullanır. Bölge hatası durumunda, o noktasında sağlıklı bölgeleri kullanarak trafik akışları etkilenmez.  Bir bölgeyi bölge hata sırasındaki kullanarak trafik akışları etkilenmiş olabilir, ancak uygulamalar kurtarabilirsiniz. Azure bölgesi hata etrafında hiper yakınsama sonra bu akışlar aktarım veya reestablishment, bölge içinde kalan sağlıklı bölgelerinde devam edebilir.
+Bölge yedekliliği, itless DataPath veya denetim düzlemi göstermez;  açıkça veri düzledir. Bölgesel olarak yedekli akışlar herhangi bir bölgeyi kullanabilir ve bir müşterinin akışları bir bölgedeki tüm iyi alanları kullanır. Bölge hatası durumunda, zaman içinde sağlıklı bölgeleri kullanan trafik akışları etkilenmez.  Bölge hatası sırasında bölge kullanan trafik akışları etkilenebilir, ancak uygulamalar kurtarabilir. Bu akışlar, Azure 'un bölge hatası etrafında yakınsadıktan sonra yeniden aktarım veya yeniden oluşturma sırasında bölge içindeki kalan sağlıklı bölgelerde devam edebilir.
 
-### <a name="xzonedesign"></a> Çapraz bölge sınırları
+### <a name="xzonedesign"></a>Çapraz bölge sınırları
 
-Herhangi bir zamanda bir uçtan uca hizmet bölgeleri aştığında, kader olmayan bir dilimi ancak potansiyel olarak birden fazla bölge ile paylaşma anlamak önemlidir.  Sonuç olarak, uçtan uca hizmetinizi herhangi bir kullanılabilirlik bölgesel olmayan dağıtımlar elde etmiştir değil.
+Uçtan uca bir hizmetin bölgeleri nasıl kesiştiği hakkında daha fazla bilgi için, Fate 'yi tek bir bölge değil, muhtemelen birden çok bölge ile paylaşacağınızı anlamanız önemlidir.  Sonuç olarak, uçtan uca hizmetiniz, hiç türlü dağıtım dışı dağıtımlar üzerinde kullanılabilirlik kazanmayabilir.
 
-Kullanılabilirlik kazançlar kullanılabilirlik alanları kullanılırken silinmez istenmeyen bölgeler arası bağımlılıklar oluşturmaktan kaçının.  Uygulamanızı birden çok bileşenden oluşur ve bölge hatalarına karşı dayanıklı olmasını istediğiniz zaman, yeterli kritik bileşenleri acil ihtiyaç bölge başarısız olması durumunda emin olmak için ilgileniriz gerekir.  Örneğin, uygulamanız için tek bir kritik bileşeni yalnızca kalan bölgeleri dışındaki bir bölgedeki varsa tüm uygulamanızın etkileyebilir.  Ayrıca, bölge geri yükleme ve uygulamanızın nasıl yakınsanır ayrıca düşünün. Şimdi bazı önemli noktaları inceleyin ve kendi senaryonuza düşündüğünüz gibi sorular için ilham kullanabilirsiniz.
+Kullanılabilirlik alanları kullanılırken kullanılabilirlik kazançlarını null olarak belirleyen, istenmeyen bölgeler arası bağımlılıklardan kaçının.  Uygulamanız birden çok bileşenden oluşur ve bölge hatasına dayanıklı olmak istediğinizde, bir bölgenin başarısız olması durumunda yeterli kritik bileşen olup olmadığından emin olmak için dikkatli olmanız gerekir.  Örneğin, uygulamanız için tek bir kritik bileşen yalnızca, kalan bölge (ler) in dışında bir bölgede mevcutsa uygulamanızın tamamını etkileyebilir.  Ayrıca, bölge geri yüklemesini ve uygulamanızın nasıl yakınsama olacağını da göz önünde bulundurun. Uygulamanızın bölümlerinin arızalarıyla ilgili neden olma nedenlerinizi anlamanız gerekir. Daha sonra bazı önemli noktaları incelim ve belirli senaryonuza göz önünde bulundurabileceğiniz sorulara soru-yanıt olarak kullanalım.
 
-- Uygulamanızı bir IP adresi ve yönetilen disk ile VM gibi iki bileşenden oluşur ve bölge 2, bölge 1, uçtan uca hizmetinize başarısız olduğunda değil titanik'ten bölge 1 garanti bölge 1 başarısız olduğunda.  Potansiyel olarak tehlikeli hata modu oluşturmakta olduğunuz tam olarak anlamak sürece bölgeler arası yok.
+- Uygulamanızın bir IP adresi ve yönetilen diske sahip bir sanal makine gibi iki bileşeni varsa ve bölge 1 ve bölge 2 ' de garanti edildiğinde bölge 1 başarısız olduğunda, bölge 1 başarısız olduğunda uçtan uca hizmetiniz devam etmez.  Potansiyel olarak tehlikeli bir hata modu oluşturmadığınızı tam olarak anlamadığınız müddetçe, Dilimsiz senaryolarla çapraz bölgeler oluşturmayın.  Bu senaryonun esneklik sağlamasına izin verilir.
 
-- İki bileşenden uygulamanız varsa, bir IP adresi ve bir sanal disk, yönetilen ve bölgesel olarak yedekli ve sırasıyla 1 bölge garanti, uçtan uca hizmetinizi bölge 2, bölge hatası titanik'ten gibi bölge 1 başarısız oldu sürece 3 veya her ikisini de bölge.  Ancak, tüm görüyorsanız ise ön uç erişilebilirliğini nedeni, hizmet durumu hakkında bazı özelliğini kaybedersiniz.  Daha kapsamlı bir sistem durumu ve kapasite modeli geliştirmeyi düşünün.  İçgörü ve yönetilebilirlik genişletmek için bölgesel olarak yedekli ve bölgesel kavramları birlikte kullanabilirsiniz.
+- Uygulamanızın bir IP adresi ve yönetilen diske sahip bir sanal makine gibi iki bileşeni varsa ve bunlar sırasıyla bölge yedekli ve bölge 1 olarak garanti altına alıyorsa, uçtan uca hizmetiniz bölge 2, bölge 3 veya her ikisi de bölge 1 başarısız olmadığı takdirde bölge arızasından kaçınacaktır.  Ancak, tüm gözlerinizin ön ucu için ulaşılabilirlik durumunda hizmetinizin sistem durumu hakkında bir neden özelliği kaybedersiniz.  Daha kapsamlı bir sistem durumu ve kapasite modeli geliştirmeyi düşünün.  İçgörüler ve yönetilebilirlik ' i genişletmek için, bölgesel olarak yedekli ve bölgesel kavramlarını birlikte kullanabilirsiniz.
 
-- Uygulamanızın üç bölgelerinde bölgesel olarak yedekli bir yük dengeleyici ön uç ve bölgeler arası sanal makine ölçek kümesi gibi iki bileşenleri varsa, kaynaklarınızı hatasından etkilenmeyenler bölgelerinde kullanıma sunulacaktır ancak uçtan uca hizmet kapasitenizi düzeyi düşürülmüş olabilir Bölge sırasında hata oluştu. Bir altyapı açısından dağıtımınızı bir veya daha fazla bölge hatalara ve bu aşağıdaki soruları başlatır:
-  - Uygulamanız bu tür hataları ve azaltılmış kapasitesi hakkında nasıl neden biliyor musunuz?
-  - Bir bölge çiftine gerekirse bir yük devretmeye zorlamak için hizmetinizde tedbirler gerekiyor mu?
-  - Nasıl, izlemek, algılamak ve böyle bir senaryo azaltmak? Standard Load Balancer Tanılama, izleme, uçtan uca hizmet performansını artırmak için kullanmanız mümkün olabilir. Kullanılabilir nedir ve ne için eksiksiz bir resim güçlendirme gerekebilir göz önünde bulundurun.
+- Uygulamanızda, bölgesel olarak yedekli Load Balancer ön ucu ve üç bölgede bir çapraz bölge sanal makine ölçek kümesi gibi iki bileşen varsa, bölgelerdeki kaynaklarınız hatadan etkilenmeyen kaynaklarınız kullanılabilir olacaktır, ancak uçtan uca hizmet kapasiteniz azaltılabilir bölge hatası sırasında. Bir altyapı perspektifinden, dağıtımınız bir veya daha fazla bölge hatasından devam edebilir ve bu, aşağıdaki soruları oluşturur:
+  - Uygulamanızın bu hatalara ve düşürülmüş kapasiteye ilişkin nasıl neden olduğunu anlamış musunuz?
+  - Gerekirse bir bölge çiftine yük devretmeyi zorlamak için hizmetinize korumalar olması gerekiyor mu?
+  - Böyle bir senaryoyu nasıl izleyebilir, algılayabilir ve azaltabilirsiniz? Uçtan uca hizmet performanlarınızın izlenmesini artırmak için Standart Load Balancer tanılamayı kullanabilirsiniz. Nelerin kullanılabilir olduğunu ve tüm resim için genişletmede nelerin gerekli olabileceğini düşünün.
 
-- Bölgeler, daha kolay anlaşılan ve bulunan hataları yapabilirsiniz.  Ancak, zaman aşımı, yeniden denemeler ve geri alma algoritmaları gibi kavramları söz konusu olduğunda bölge hatası diğer hatalarından farklı değildir. Azure Load Balancer bölgesel olarak yedekli yollar sağlar ve gerçek zamanlı bir paket düzeyinde hızlı bir şekilde, kurtarılır çalışır halde yeniden iletimleri üst sınırı veya reestablishments başladıkları sırasında bir hata ortaya çıkabilir ve nasıl ile uygulamanızı copes anlaşılması önemlidir hataları. Yük Dengeleme düzeninizi kalmaya devam eder, ancak aşağıdakiler için planlama yapmanız:
-  - Bir bölge başarısız olduğunda, uçtan uca hizmetiniz bu anlıyor mu ve durumu kaybolursa, nasıl, kurtarılır?
-  - Bir bölge geri döndüğünde, uygulamanızın nasıl güvenli biçimde anlıyor mu?
+- Bölgeler, hataların daha kolay anlaşılır ve dahil olmasını sağlayabilir.  Ancak, bölge hatası, zaman aşımları, denemeler ve geri alma algoritmaları gibi kavramlara geldiğinde diğer hatalardan farklı değildir. Azure Load Balancer, bölgesel olarak yedekli yollar sağlar ve hızlı bir şekilde kurtarmaya çalışır, ancak bir paket düzeyinde gerçek zamanlı olarak yeniden aktarımlar veya reestablishments, bir hatanın onın ve kesil. Yük Dengeleme şemanızın devam edecek, ancak şunları planlamanız gerekir:
+  - Bir bölge başarısız olduğunda, uçtan uca hizmetiniz bunu anlamış olur ve durum kaybolduysa nasıl kurtarılır?
+  - Bir bölge döndürüldüğünde, uygulamanız güvenle nasıl yakınsama yapılacağını anlasın mı?
 
-### <a name="zonalityguidance"></a> Bölgesel olarak yedekli bölgesel karşılaştırması
+Uygulamanızın hata senaryolarıyla olan dayanıklılığını artırmak için [Azure bulut tasarım modellerini](https://docs.microsoft.com/azure/architecture/patterns/) gözden geçirin.
 
->[!IMPORTANT]
->Gözden geçirme [kullanılabilirlik](../availability-zones/az-overview.md) ilgili konular için bölge belirli bilgilere dahil.
+### <a name="zonalityguidance"></a>Bölgesel olarak yedekli ve ZGen karşılaştırması
 
-Bölgesel olarak yedekli bir bölge belirsiz sağlayabilir veya hizmet için aynı zaman dayanıklı seçeneğinde tek bir IP adresi.  Sırayla Bu karmaşıklığı azaltabilir.  Bölgesel olarak yedekli ayrıca mobility dilimlerinde vardır ve herhangi bir bölge içinde kaynaklara güvenli bir şekilde kullanılabilir.  Ayrıca, bir bölge kullanılabilirlik elde edin sonra gerekli değişiklikleri sınırlayabilirsiniz kullanılabilirlik alanları olmayan bölgelerde geleceğe vardır.  Kullanılabilirlik alanları olmadan dahil olmak üzere herhangi bir bölgedeki bir bölgesel olarak yedekli IP adresi veya ön uç yapılandırması sözdizimi başarılı.
+Bölgesel olarak yedekli bir seçenek ve hizmet için tek bir IP adresi ile aynı zamanda esnek seçeneğinde, bölgesel olarak yedekli bir seçeneğe sahip bir kolaylık sağlayabilir.  Bu, karmaşıklığı azaltabilir.  Bölgesel olarak yedekli bölgeler arasında taşınabilirliği de vardır ve herhangi bir bölgedeki kaynaklarda güvenli bir şekilde kullanılabilir.  Ayrıca, kullanılabilirlik alanları olmayan bölgelerde daha ileride prova olur. Bu, bir bölge kullanılabilirlik alanları kazandıktan sonra gerekli değişiklikleri sınırlayabilir.  Bölgesel olarak yedekli bir IP adresi veya ön uç için yapılandırma sözdizimi, kullanılabilirlik alanları olmadan de dahil olmak üzere tüm bölgelerde başarılı olur: bölgenin bölgeler: özelliği içinde bir bölge belirtilmedi.
 
-Bölgesel kader bölge durumunu paylaşımı açık bir garanti, bir bölgeye sağlayabilir. Özellikle, ekli olan kaynak aynı bölgedeki bölgesel bir sanal makine ise ilişkilendirme bir bölgesel IP adresi veya bölgesel yük dengeleyici ön ucuna arzu ya da makul bir öznitelik olabilir.  Veya belki de kaynak bulunur hangi bölge açık bilgisine uygulamanızın gerektirdiği ve farklı bölgelerde kullanılabilirliği hakkında açıkça neden istiyor.  Birden fazla bölgesel ön uçlar için alanları genelinde dağıtılmış bir uçtan uca hizmeti kullanıma sunmak seçebilirsiniz (diğer bir deyişle, her bölge için birden fazla bölgesel sanal makine ölçek bölgesel ön uçlar ayarlar).  Bölgesel, ön uçlar genel IP adresleri, bu Bölgesel birden çok ön uç hizmetinizle açığa çıkarmak için kullanabileceğiniz [Traffic Manager](../traffic-manager/traffic-manager-overview.md).  Veya bölgesel birden çok ön uç, üçüncü taraf izleme çözümleri aracılığıyla bölge durum ve performans öngörüleri başına kazanmak ve genel hizmeti bölgesel olarak yedekli bir ön uç ile göstermek için kullanabilirsiniz. Yalnızca aynı bölgeye hizalı bölgesel ön uçlar ile bölgesel kaynaklar hizmet ve bölgesel kaynaklar için zararlı bölgeler arası senaryoları kaçınmak gerekir.  Bölgesel kaynaklar yalnızca kullanılabilirlik bulunduğu bölgede mevcut.
+Zonal, bölge için açık bir garanti sağlayabilir ve bu da bölgenin sistem durumuyla birlikte açık bir şekilde paylaşım yapabilir. Bir IP adresi ön ucu veya bölgesel iç Load Balancer ön ucu ile Load Balancer kuralı oluşturmak, özellikle iliştirilen kaynağınız aynı bölgedeki bir zeli sanal makinedir.  Ya da uygulamanız, bir kaynağın bir süre önce bulunduğu bölge hakkında açık bilgi gerektiriyor ve ayrı bölgelerde açık bir şekilde kullanılabilirlik hakkında bir neden olmak istiyorsunuz.  Bölgeler arasında dağıtılmış uçtan uca bir hizmet için birden çok zikzak ön eki kullanıma sunabilirsiniz (yani, birden fazla sanal makine ölçek kümesi için bölge başına düşen ön uçlar).  Ve, genel IP adresleri ise, bu birden fazla bölgesel ön uçlarınızın [Traffic Manager](../traffic-manager/traffic-manager-overview.md)hizmetinizi kullanıma sunmak için kullanabilirsiniz.  Ya da, üçüncü taraf izleme çözümleri aracılığıyla bölge sistem durumu ve Performans öngörüleri elde etmek ve genel hizmeti bölgesel olarak yedekli bir ön uç ile kullanıma sunmak için birden fazla bölgesel ön ucu kullanabilirsiniz. Yalnızca aynı bölgeye hizalanmış ve büyük olasılıkla olası olabilecek çapraz bölge senaryolarına karşı, yalnızca Zine ön uçlar içeren bölgesel kaynaklarına sahip olmanız gerekir.  Tek tek kaynaklar yalnızca kullanılabilirlik bölgelerinin mevcut olduğu bölgelerde bulunur.
 
-Diğer hizmet mimarisi bilerek olmadan daha iyi bir seçim biridir genel bir yönerge yoktur.
+Hizmetin, hizmet mimarisini bilmeden daha iyi bir seçim olduğu konusunda genel bir rehberlik yoktur.  Uygulamanızın hata senaryolarıyla olan dayanıklılığını artırmak için [Azure bulut tasarım modellerini](https://docs.microsoft.com/azure/architecture/patterns/) gözden geçirin.
 
 ## <a name="limitations"></a>Sınırlamalar
 
-- While veri düzlemi tamamen bölgesel olarak yedekli (Bölgesel garantisi belirtilmediyse), Denetim düzlemi işlemleri tam olarak bölgesel olarak yedekli değildir.
+- Veri düzlemi tamamen bölge yedekli olsa da (ZGen garantisi belirtilmediği sürece), denetim düzlemi işlemleri tam olarak bölgesel olarak yedekli değildir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Daha fazla bilgi edinin [kullanılabilirlik alanları](../availability-zones/az-overview.md)
+- [Kullanılabilirlik alanları](../availability-zones/az-overview.md) hakkında daha fazla bilgi edinin
 - [Standart Yük Dengeleyici](load-balancer-standard-overview.md) hakkında daha fazla bilgi edinin
-- Bilgi edinmek için nasıl [Yük Dengelemesi Vm'leri bölgesel bir ön uç ile standart yük dengeleyici kullanarak bir bölge içerisindeki](load-balancer-standard-public-zonal-cli.md)
-- Bilgi edinmek için nasıl [bölgesel olarak yedekli bir ön uç ile standart yük dengeleyici kullanarak bölgeler arasında Yük Dengelemesi Vm'leri](load-balancer-standard-public-zone-redundant-cli.md)
+- Bir [bölge Içinde VM 'lerin yükünü bir standart Load Balancer kullanarak bir bölgede yük ön uç ile yükleme](load-balancer-standard-public-zonal-cli.md) hakkında bilgi edinin
+- Bölgesel olarak [yedekli bir ön uç ile standart Load Balancer kullanarak sanal makinelerin bölge üzerinden yük dengelenmesi](load-balancer-standard-public-zone-redundant-cli.md) hakkında bilgi edinin
+- Uygulamanızın hata senaryolarıyla olan dayanıklılığını artırmak için [Azure bulut tasarım desenleri](https://docs.microsoft.com/azure/architecture/patterns/) hakkında bilgi edinin.

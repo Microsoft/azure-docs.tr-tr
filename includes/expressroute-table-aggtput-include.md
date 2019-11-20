@@ -8,17 +8,17 @@ ms.topic: include
 ms.date: 11/09/2018
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: 6af83e22308d696a3be40761a167a63c64e30d6c
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: a2ebaf6ae95a1c250ef28e6ff2176f6ae5bd6b3f
+ms.sourcegitcommit: 0c906f8624ff1434eb3d3a8c5e9e358fcbc1d13b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188908"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69564434"
 ---
-|  | **Saniye başına megabit** | **Saniye başına paket** | **Saniye başına bağlantı** | **VPN Gateway ve ExpressRoute bir arada** |
+|  | **Megabit/saniye** | **Paket/saniye** | **Saniyedeki bağlantı sayısı** | **VPN Gateway ve ExpressRoute bir arada** |
 | --- | --- | --- | --- | --- |
 | **Temel SKU (kullanım dışı)** |500 | Bilinmiyor | Bilinmiyor |Hayır |
-| **Standart SKU** |1000 | 100,000 | 7,000 | Evet |
-| **Yüksek performanslı SKU** |2,000 | 250,000 | 14,000 | Evet |
-| **Ultra yüksek performanslı SKU** |10,000 | 1\.000.000 | 28,000 | Evet |
+| **Standart SKU/ErGw1AZ** |1000 | 100,000 | 7,000 | Evet |
+| **Yüksek performanslı SKU/ErGw2AZ** |2,000 | 250.000 | 14.000 | Evet |
+| **Ultra performans SKU 'SU/ErGw3AZ** |10,000 | 1\.000.000 | 28.000 | Evet |
 

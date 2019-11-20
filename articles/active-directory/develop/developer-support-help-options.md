@@ -1,6 +1,6 @@
 ---
-title: Azure AD uygulama geliştiricileri için destek ve Yardım seçenekleri | Microsoft Docs
-description: Yardım ve geliştirme ile ilgili sorular ve sorunlar için destek Microsoft kimlikleri (Azure Active Directory ve Microsoft hesabı) ile tümleştirme uygulaması oluştururken elde etme bildirin
+title: Azure AD uygulama geliştiricileri için destek ve yardım seçenekleri | Microsoft Docs
+description: Microsoft kimlikleri ile tümleştirilen uygulama oluştururken geliştirmeyle ilgili sorular ve sorunlar için nasıl yardım ve destek edineceğimizi öğrenin (Azure Active Directory ve Microsoft hesabı)
 services: active-directory
 documentationcenter: dev-center-name
 author: rwike77
@@ -17,87 +17,81 @@ ms.author: ryanwi
 ms.reviewer: jmprieur, saeeda
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: efa14e88eeb8ab43f998a32aaa0c14220acab03a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a160f78f69ed559c576147e9758c837d5ae9b77e
+ms.sourcegitcommit: 77bfc067c8cdc856f0ee4bfde9f84437c73a6141
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66235331"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72429972"
 ---
-# <a name="support-and-help-options-for-developers"></a>Geliştiriciler için destek ve Yardım seçenekleri
+# <a name="support-and-help-options-for-developers"></a>Geliştiriciler için destek ve yardım seçenekleri
 
-Yalnızca Azure Active Directory (Azure AD), Microsoft kimlikleri veya Microsoft Graph API ile tümleştirmek başlatılıyor veya uygulamanız için yeni bir özellik uygulama, topluluktan Yardım almak veya anlamak için gerektiğinde zamanlar vardır bir geliştirici olarak sahip olduğunuz seçeneklerini destekler. Bu makalede de dahil olmak üzere, bu seçenekleri anlamanıza yardımcı olur:
+Azure Active Directory (Azure AD), Microsoft kimlikleri veya Microsoft Graph API 'SI ile tümleştirmeye başladıysanız veya uygulamanıza yeni bir özellik uyguladığınızda, topluluktan yardım almanız veya bunu anlamanız gereken durumlar vardır. geliştirici olarak sahip olduğunuz destek seçenekleri. Bu makale, aşağıdakiler dahil olmak üzere bu seçenekleri anlamanıza yardımcı olur:
 
 > [!div class="checklist"]
-> * Sorunuzu topluluk tarafından yanıtlanmamış olup olmadığını veya mevcut bir belge özelliği için zaten uygulamak çalıştığınız arama yapma var.
-> * Bazı durumlarda yalnızca destek araçlarımızı belirli bir sorunu çözmeye yardımcı olması için kullanmak istediğiniz
-> * Gereksinim duyduğunuz yanıt bulamazsanız, soru sorabilirsiniz isteyebilirsiniz *Stack Overflow*
-> * Kimlik doğrulama kitaplıklarımızı biri ile ilgili bir sorun bulursanız, yükseltmek bir *GitHub* sorunu
-> * Son olarak, birine konuşmak gerekirse, bir destek isteği açmak isteyebilirsiniz
+> * Sorunuzun topluluk tarafından yanıtlanmadığı veya uygulamaya çalıştığınız özelliğe yönelik mevcut bir belge zaten var olup olmadığını nasıl arayıyoruz
+> * Bazı durumlarda, belirli bir sorunu ayıklamanıza yardımcı olması için yalnızca destek araçlarımızı kullanmak isteyeceksiniz
+> * İhtiyaç duyduğunuz yanıtı bulamazsanız, *Stack Overflow* bir soru sormak isteyebilirsiniz
+> * Kimlik doğrulama kitaplıklarımızdan biriyle ilgili bir sorun bulursanız, bir *GitHub* sorunu oluştur
+> * Son olarak, birisiyle konuşmanız gerekiyorsa, bir destek isteği açmak isteyebilirsiniz
 
-## <a name="search"></a>Ara
+## <a name="search"></a>Arama
 
-Geliştirme ile ilgili sorularınız varsa belgelerinde yanıt bulmak mümkün olabilir [GitHub örneklerine](https://github.com/azure-samples), veya yanıtlarını [Stack Overflow](https://www.stackoverflow.com) sorular.
+Geliştirmeyle ilgili bir sorunuz varsa, yanıtı belgeler, [GitHub örnekleri](https://github.com/azure-samples)veya [Stack Overflow](https://www.stackoverflow.com) sorulara yanıtlar halinde bulabilirsiniz.
 
 ### <a name="scoped-search"></a>Kapsamlı arama
 
-Daha hızlı sonuçlar için sık kullanılan arama motorunuz içinde aşağıdaki sorguyu kullanarak Stack Overflow, belgelere ve kod örneklerini aramanızın kapsamını:
+Daha hızlı sonuçlar için aramanızın kapsamını Stack Overflow, belgeleri ve kod örneklerini kullanarak en sevdiğiniz arama motorunda aşağıdaki sorguyu kullanın:
 
 ```
 {Your Search Terms} (site:stackoverflow.com OR site:docs.microsoft.com OR site:github.com/azure-samples OR site:cloudidentity.com OR site:developer.microsoft.com/graph)
 ```
 
-Burada *{Your arama terimlerini}* arama sözcüklerinizi karşılık gelir.
+*{Arama koşullarınız}* arama anahtar kelimelerinizle aynıdır.
 
-## <a name="use-the-development-support-tools"></a>Geliştirme Destek Araçları'nı kullanın
+## <a name="use-the-development-support-tools"></a>Geliştirme destek araçları 'nı kullanma
 
-| Aracı  | Açıklama  |
+| Araç  | Açıklama  |
 |---------|---------|
-| [jwt.ms](https://jwt.ms) | Yapıştırma kimliği veya talep adlarını ve değerlerini kodunu çözmek için erişim belirteci. |
-| [Microsoft Graph Gezgini](https://developer.microsoft.com/graph/graph-explorer)| Aracı istekleri ve yanıtları Microsoft Graph API karşı görmeniz olanak tanır. |
+| [jwt.ms](https://jwt.ms) | Talep adlarını ve değerlerini çözmek için bir KIMLIK veya erişim belirteci yapıştırın. |
+| [Microsoft Graph Gezgini](https://developer.microsoft.com/graph/graph-explorer)| Microsoft Graph API 'sine karşı istek yapmanızı ve yanıtları görmenizi sağlayan araç. |
 
-## <a name="post-a-question-to-stack-overflow"></a>Stack Overflow için bir soru gönderin
+## <a name="post-a-question-to-stack-overflow"></a>Stack Overflow bir soru gönderin
 
-Yığın taşması geliştirme ile ilgili sorular için tercih edilen bir kanaldır. Burada, topluluk üyeleri ve Microsoft Takım üyeleri doğrudan sorunlarınızı çözmenize yardımcı faydalanırsınız.
+Stack Overflow, geliştirmeyle ilgili sorular için tercih edilen kanaldır. Burada, geliştirici topluluğu ve Microsoft takım üyelerinin üyeleri, sorunlarınızı çözmenize yardımcı olmak için doğrudan ilgilidir.
 
-Bir arama aracılığıyla sorunuzun yanıtını bulamazsanız, yeni Stack Overflow soru gönderin. Aşağıdaki etiketlerin birine tanımlamak ve daha hızlı bir şekilde sorusunu denetlemesi yönelik sorular sorma kullanın:
+Arama ile sorunuz için bir yanıt bulamazsanız, Stack Overflow için yeni bir soru gönderin. Topluluğun sorunuzu daha hızlı belirlemesine ve yanıt vermesi için soru sorarken aşağıdaki etiketlerden birini kullanın:
 
-|Bileşen/alan  | Tags |
+|Bileşen/alan  | Etiketler |
 |---------|---------|
-| ADAL kitaplığı | [[adal]](https://stackoverflow.com/questions/tagged/adal) |
-| MSAL kitaplığı     | [[msal]](https://stackoverflow.com/questions/tagged/msal) |
-| OWIN ara yazılımı  | [[azure-active-directory]](https://stackoverflow.com/questions/tagged/azure-active-directory) |
-| [Azure B2B](https://docs.microsoft.com/azure/active-directory/active-directory-b2b-what-is-azure-ad-b2b)  | [[azure ad b2b]](https://stackoverflow.com/questions/tagged/azure-ad-b2b) |
-| [Azure B2C](https://azure.microsoft.com/services/active-directory-b2c/)  | [[azure-ad-b2c]](https://stackoverflow.com/questions/tagged/azure-ad-b2c) |
-| [Microsoft Graph API'si](https://developer.microsoft.com/graph/) | [[microsoft graph]](https://stackoverflow.com/questions/tagged/microsoft-graph) |
-| Herhangi bir alan için kimlik doğrulama veya yetkilendirme ilgili konular | [[azure-active-directory]](https://stackoverflow.com/questions/tagged/azure-active-directory) |
+| ADAL kitaplığı | [adal](https://stackoverflow.com/questions/tagged/adal) |
+| MSAL kitaplığı     | [msal](https://stackoverflow.com/questions/tagged/msal) |
+| OWıN ara yazılımı  | [[Azure-Active-Directory]](https://stackoverflow.com/questions/tagged/azure-active-directory) |
+| [Azure B2B](https://docs.microsoft.com/azure/active-directory/active-directory-b2b-what-is-azure-ad-b2b)  | [[Azure-AD-B2B]](https://stackoverflow.com/questions/tagged/azure-ad-b2b) |
+| [Azure B2C](https://azure.microsoft.com/services/active-directory-b2c/)  | [[Azure-AD-B2C]](https://stackoverflow.com/questions/tagged/azure-ad-b2c) |
+| [Microsoft Graph API'si](https://developer.microsoft.com/graph/) | [[Microsoft-Graph]](https://stackoverflow.com/questions/tagged/microsoft-graph) |
+| Kimlik doğrulama veya yetkilendirme konularıyla ilgili başka bir alan | [[Azure-Active-Directory]](https://stackoverflow.com/questions/tagged/azure-active-directory) |
 
-Stack Overflow aşağıdaki gönderilerinden soru sorma ve kaynak kodu ekleme ipuçları içerir. Topluluk üyelerinin değerlendirmek ve sorularınıza hızla yanıt olasılığını artırmak için aşağıdaki yönergeleri izleyin:
+Stack Overflow 'den aşağıdaki gönderiler, soru sorma ve kaynak kodu ekleme hakkında ipuçları içermektedir. Topluluk üyelerinin sorunuzu hızlı bir şekilde değerlendirmesine ve yanıt verebilmesini artırmak için bu yönergeleri izleyin:
 
-* [İyi bir soru nasıl miyim](https://stackoverflow.com/help/how-to-ask)
-* [En az, tam ve doğrulanabilir bir örnek oluşturma](https://stackoverflow.com/help/mcve)
+* [Nasıl yaparım? iyi bir soru sorun](https://stackoverflow.com/help/how-to-ask)
+* [En az, tamamlanmış ve doğrulanabilir örnek oluşturma](https://stackoverflow.com/help/mcve)
 
-## <a name="create-a-github-issue"></a>Bir GitHub sorunu oluşturun
+## <a name="create-a-github-issue"></a>GitHub sorunu oluştur
 
-Bir hata veya bizim kitaplıklara ilgili bir sorun bulursanız, bir sorun GitHub depolarımızdaki yükseltin. Bizim kitaplıkları açık kaynak olduğundan, ayrıca bir çekme isteği gönderebilirsiniz.
+Kitaplıklarımızla ilgili bir hata veya sorun bulursanız, GitHub depolarımızda bir sorun oluşturabilir. Kitaplıklarımız açık kaynak olduğundan, çekme isteği de gönderebilirsiniz.
 
-Kitaplıklar ve kendi GitHub depoları listesi için aşağıdakilere bakın:
+Kitaplıkların ve GitHub depolarının listesi için aşağıdakilere bakın:
 
-* [ADAL](active-directory-authentication-libraries.md) kitaplıkları ve GitHub depoları
-* [MSAL.NET](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet) [MSAL.js](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angularjs/README.md), [MSAL. Android](https://github.com/AzureAD/microsoft-authentication-library-for-android), ve [MSAL.obj_c](https://github.com/AzureAD/microsoft-authentication-library-for-objc) kitaplıkları ve GitHub depoları
+* [Adal](active-directory-authentication-libraries.md) kitaplıkları ve GitHub depoları
+* [Msal.net](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet) [msal. js](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angularjs/README.md), [msal. Android](https://github.com/AzureAD/microsoft-authentication-library-for-android)ve [msal. obj _C](https://github.com/AzureAD/microsoft-authentication-library-for-objc) kitaplıkları ve GitHub depoları
 
 ## <a name="open-a-support-request"></a>Bir destek isteği açın
 
-Birine konuşmak gerekirse, bir destek isteği açabilirsiniz. Bir Azure müşterisiyseniz, kullanılabilir çeşitli destek seçenekleri. Planları karşılaştırmak için bkz [bu sayfayı](https://azure.microsoft.com/support/plans/). Geliştirici Desteği, Azure müşterileri için de kullanılabilir. Geliştirici destek planlarını satın alma hakkında daha fazla bilgi için bkz: [bu sayfayı](https://azure.microsoft.com/support/plans/developer/).
+Birisiyle konuşmanız gerekiyorsa, bir destek isteği açabilirsiniz. Bir Azure müşterisiyseniz, çeşitli destek seçenekleri mevcuttur. Planları karşılaştırmak için [Bu sayfaya](https://azure.microsoft.com/support/plans/)bakın. Azure müşterileri için de Geliştirici desteği sunulmaktadır. Geliştirici destek planlarını satın alma hakkında daha fazla bilgi için [Bu sayfaya](https://azure.microsoft.com/support/plans/developer/)bakın.
 
-* Bir Azure destek planı, zaten varsa [bir destek isteği açın](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest)
+* Zaten bir Azure Destek planınız varsa, [burada bir destek isteği açın](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest)
 
-* Bir Azure müşterisi değilseniz, ayrıca bir destek isteği Microsoft ile açabilirsiniz [ticari desteğimiz](https://support.microsoft.com/en-us/gp/contactus81?Audience=Commercial).
+* Bir Azure müşterisiyseniz, [ticari destek](https://support.microsoft.com/en-us/gp/contactus81?Audience=Commercial)aracılığıyla Microsoft ile bir destek isteği de açabilirsiniz.
 
-Ayrıca deneyebileceğiniz bir [sanal aracı](https://support.microsoft.com/contactus/?ws=support) destek almak veya soru sormak için.
-
-### <a name="free-chat-support-for-a-limited-time"></a>Sınırlı bir süreliğine ücretsiz sohbet desteği
-
-Sınırlı bir süre için ücretsiz Microsoft Partners için Sohbet desteğimiz de kullanabilirsiniz. Şirketiniz Microsoft Partner değilse, ücretsiz kaydedebilir ve giderek diğer avantajları elde [burada](https://partners.microsoft.com/PartnerProgram/simplifiedenrollment.aspx).
-
-Şirketiniz kaydettikten sonra sohbet istek başlayabilirsiniz [burada](https://aka.ms/devchat).
+Ayrıca, destek almak veya soru sormak için bir [sanal aracıyı](https://support.microsoft.com/contactus/?ws=support) deneyebilirsiniz.

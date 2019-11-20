@@ -1,25 +1,25 @@
 ---
-title: "Hızlı Başlangıç: PHP ve Bing otomatik öneri REST API'si ile arama sorguları önerin"
-titlesuffix: Azure Cognitive Services
-description: Hızlı arama terimlerini önerme başlatmayı öğrenin Bing otomatik öneri API'si ile gerçek zamanlı.
+title: 'Hızlı Başlangıç: Bing Otomatik Öneri REST API ve PHP ile arama sorguları önerin'
+titleSuffix: Azure Cognitive Services
+description: Bing Otomatik Öneri API'si ile gerçek zamanlı olarak arama terimleri önerme hakkında hızlı bir başlangıç yapmayı öğrenin.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-autosuggest
 ms.topic: quickstart
-ms.date: 02/20/2019
+ms.date: 07/26/2019
 ms.author: aahi
-ms.openlocfilehash: 9b93714883ca4558925ac64c360db7bc395ff8f4
-ms.sourcegitcommit: 3d4121badd265e99d1177a7c78edfa55ed7a9626
+ms.openlocfilehash: 7c9c12cd1097ab4a2b7138efd169e4e7a7f03720
+ms.sourcegitcommit: 7c4de3e22b8e9d71c579f31cbfcea9f22d43721a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66390390"
+ms.lasthandoff: 07/26/2019
+ms.locfileid: "68565809"
 ---
-# <a name="quickstart-suggest-search-queries-with-the-bing-autosuggest-rest-api-and-php"></a>Hızlı Başlangıç: PHP ve Bing otomatik öneri REST API'si ile arama sorguları önerin
+# <a name="quickstart-suggest-search-queries-with-the-bing-autosuggest-rest-api-and-php"></a>Hızlı Başlangıç: Bing Otomatik Öneri REST API ve PHP ile arama sorguları önerin
 
-Bing otomatik öneri API'si ve JSON yanıtını alma yapmaya başlamak için bu Hızlı Başlangıç'ı çağırır kullanın. Bu basit bir PHP uygulaması, API için bir kısmi arama sorgusu gönderir ve aramalar için öneriler döndürür. Bu uygulama, PHP'de yazılmış olsa da çoğu programlama dilleri ile uyumlu bir RESTful Web hizmeti API'dir.
+Bing Otomatik Öneri API'si çağrı yapmaya başlamak ve JSON yanıtını almak için bu hızlı başlangıcı kullanın. Bu basit PHP uygulaması, API 'ye kısmi bir arama sorgusu gönderir ve aramalar için öneriler döndürür. Bu uygulama PHP 'de yazıldığı sırada API, çoğu programlama dili ile uyumlu olan bir yeniden sorun Web hizmetidir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 

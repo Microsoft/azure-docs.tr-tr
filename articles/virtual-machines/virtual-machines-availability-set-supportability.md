@@ -1,10 +1,10 @@
 ---
-title: Azure Vm'leri mevcut bir kullanılabilirlik kümesine ekleme desteklenebilirliği | Microsoft Docs
-description: Azure Vm'leri mevcut bir kullanılabilirlik kümesine ekleme desteklenebilirliği ayarlayın.
+title: Mevcut bir kullanılabilirlik kümesine Azure VM 'lerinin eklenmesinin desteklenebilirliği | Microsoft Docs
+description: Mevcut bir kullanılabilirlik kümesine Azure VM 'lerinin eklenmesinin desteklenebilirliği.
 services: virtual-machines-linux
 documentationcenter: ''
 author: Deland-Han
-manager: cshepard
+manager: dcscontentpm
 editor: ''
 ms.assetid: ''
 ms.service: virtual-machines
@@ -14,20 +14,20 @@ ms.devlang: na
 ms.topic: troubleshooting
 ms.date: 06/15/2018
 ms.author: delhan
-ms.openlocfilehash: 7a5e97b66fec040b4ec32caa8d58cf9b50169a33
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 3954df389516aa7199022d713dc63d62dda961ae
+ms.sourcegitcommit: 116bc6a75e501b7bba85e750b336f2af4ad29f5a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60443713"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71155452"
 ---
-# <a name="supportability-of-adding-azure-vms-to-an-existing-availability-set"></a>Azure Vm'leri, var olan bir kullanılabilirlik kümesine ekleme desteklenebilirliği
+# <a name="supportability-of-adding-azure-vms-to-an-existing-availability-set"></a>Mevcut bir kullanılabilirlik kümesine Azure VM 'lerinin eklenmesinin desteklenebilirliği
 
-Yeni sanal makineler (VM'ler) eklediğiniz zaman zaman zaman var olan bir kullanılabilirlik kümesine kısıtlamalarla karşılaşabilirsiniz. Aşağıdaki grafikte, aynı kullanılabilirlik kümesinde karıştırabilirsiniz hangi VM serisi ayrıntıları.
+Mevcut bir kullanılabilirlik kümesine yeni sanal makineler (VM 'Ler) eklerken zaman zaman sınırlamalar yaşayabilirsiniz. Aşağıdaki grafikte, aynı Kullanılabilirlik kümesinde karıştırabilmeniz gereken VM Serisi ayrıntıları verilmiştir.
 
-Farklı türlerdeki Vm'leri karıştırmak için desteklenebilirlik matris şu şekildedir:
+Farklı türlerde VM 'leri karıştırmak için desteklenebilirlik matrisi aşağıda verilmiştir:
 
-Seriler ve kullanılabilirlik kümesi|İkinci VM|A|Av2|D|Dv2|Dv3|
+Dizi & kullanılabilirlik kümesi|İkinci VM|A|Av2|D|Dv2|Dv3|
 |---|---|---|---|---|---|---|
 |İlk VM|||||||
 |A||Tamam|Tamam|Tamam|Tamam|Tamam|
@@ -36,6 +36,6 @@ Seriler ve kullanılabilirlik kümesi|İkinci VM|A|Av2|D|Dv2|Dv3|
 |Dv2||Tamam|Tamam|Tamam|Tamam|Tamam|
 |Dv3||Tamam|Tamam|Tamam|Tamam|Tamam|
 
-Diğer tüm serisi aynı kullanılabilirlik bunlar belirli bir donanım gerektirdiğinden kümesinde bulunamadı.
+Tüm diğer seriler, belirli bir donanım gerektirdiğinden aynı Kullanılabilirlik kümesinde yer alamadı.
 
-A8/A9 VM boyutu, adanmış RDMA arka uç ağı üzerinde gereksinimi nedeniyle karıştırılamaz.
+Adanmış RDMA arka uç ağı gereksinimi nedeniyle A8/A9 VM boyutu karıştırılamaz.

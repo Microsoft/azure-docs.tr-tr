@@ -2,49 +2,73 @@
 author: wolfma61
 ms.service: cognitive-services
 ms.topic: include
-ms.date: 09/13/2018
+ms.date: 08/30/2019
 ms.author: wolfma
-ms.openlocfilehash: afe6f1493c7fa8272c67f23d6708ad6e4eea9381
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: c7332177795a45331749225e0f3dc3856e28a6a2
+ms.sourcegitcommit: e9936171586b8d04b67457789ae7d530ec8deebe
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188664"
+ms.lasthandoff: 09/27/2019
+ms.locfileid: "71327039"
 ---
-1. Visual Studio 2017'yi başlatın.
+Windows geliştirme için bir Visual Studio projesi oluşturmak için, projeyi oluşturmanız, .NET masaüstü geliştirme için Visual Studio 'yu ayarlamanız, konuşma SDK 'sını yüklemeniz ve hedef mimariyi seçmeniz gerekir.
 
-1. Visual Studio'da menü çubuğundan seçin **Araçlar > Araçları edinme** emin olun **.NET Masaüstü geliştirmesinden** iş yükü kullanılabilir. İş yükü yüklü olmadığından, onay kutusunu işaretleyin ve ardından tıklayın **Değiştir** yüklemeyi başlatmak için. Bu, indirmek ve yüklemek için birkaç dakika sürebilir.
+### <a name="create-the-project-and-add-the-workload"></a>Projeyi oluşturma ve iş yükünü ekleme
 
-   Varsa yanındaki onay kutusunu **.NET Masaüstü geliştirmesinden** olduğu belirlenirse, iletişim kutusu artık kapatabilirsiniz.
+Başlamak için Visual Studio 'da projeyi oluşturun ve Visual Studio 'Nun .NET masaüstü geliştirme için ayarlandığından emin olun:
 
-   ![.NET masaüstü geliştirmesini etkinleştirme](~/articles/cognitive-services/speech-service/media/sdk/vs-enable-net-desktop-workload.png)
+1. Visual Studio 2019 ' i açın.
 
-1. Ardından, bir proje oluşturalım. Menü çubuğundan seçin **Dosya > Yeni > Proje**. İletişim kutusu göründüğünde, bu bölümler sol panelden genişletin **yüklü > Visual C# > Windows Masaüstü** seçip **konsol uygulaması (.NET Framework)** . Bu projenin adı *helloworld*.
+1. Başlangıç penceresinde **Yeni proje oluştur**' u seçin. 
 
-    ![Visual C# Konsol Uygulaması (.NET Framework) oluşturma](~/articles/cognitive-services/speech-service/media/sdk/qs-csharp-dotnet-windows-01-new-console-app.png "Visual C# Konsol Uygulaması (.NET Framework) oluşturma")
+1. **Yeni proje oluştur** penceresinde **konsol uygulaması (.NET Framework)** öğesini seçin ve ardından **İleri**' yi seçin.
 
-1. Proje ayarlama, yüklememiz gerekir [konuşma SDK'sı NuGet paketi](https://aka.ms/csspeech/nuget) ve bizim kodda başvuru. Çözüm Gezgini'nde bulun ve helloworld üzerinde sağ tıklayın. Menüden **NuGet paketlerini Yönet...** .
+1. **Yeni projenizi yapılandırın** penceresinde, **Proje adı**alanına *HelloWorld* girin, **konum**bölümünde dizin yolunu seçin veya oluşturun ve ardından **Oluştur**' u seçin.
 
-   ![Çözüm için NuGet Paketlerini Yönet](~/articles/cognitive-services/speech-service/media/sdk/qs-csharp-dotnet-windows-02-manage-nuget-packages.png "Çözüm için NuGet Paketlerini Yönet")'e sağ tıklayın
+1. Visual Studio menü çubuğunda **araçlar** >  ' i seçin ve Visual Studio yükleyicisi açan ve **değiştirme** iletişim kutusunu görüntüleyen**araçları ve özellikleri alın**.
 
-1. NuGet Paket Yöneticisi'nin sağ üst köşedeki bulun **paket kaynağı** açılan emin olun **nuget.org** seçilir. Ardından seçin **Gözat** araması `Microsoft.CognitiveServices.Speech` paketini ve en son kararlı sürümünü yükleyin.
+1. **.Net masaüstü geliştirme** iş yükünün kullanılabilir olup olmadığını denetleyin. İş yükü yüklenmemişse, yanındaki onay kutusunu işaretleyin ve ardından yüklemeyi başlatmak için **Değiştir** ' i seçin. İndirmesi ve yüklenmesi birkaç dakika sürebilir.
 
-   ![Microsoft.CognitiveServices.Speech NuGet Paketini yükleyin](~/articles/cognitive-services/speech-service/media/sdk/qs-csharp-dotnet-windows-03-nuget-install-1.0.0.png "NuGet Paketini yükleyin")
+   **.Net masaüstü geliştirme** 'nın yanındaki onay kutusu zaten seçiliyse, iletişim kutusundan çıkmak için **Kapat** ' ı seçin.
 
-1. Tüm anlaşmalar ve lisansları yüklemeyi başlatmak için kabul edin.
+   ![.NET masaüstü geliştirmesini etkinleştirme](../articles/cognitive-services/speech-service/media/sdk/vs-enable-net-desktop-workload.png)
 
-   ![Lisansı kabul edin](~/articles/cognitive-services/speech-service/media/sdk/qs-csharp-dotnet-windows-04-nuget-license.png "Lisansı kabul edin")
+1. Visual Studio Yükleyicisi kapatın.
 
-    Paket yüklendikten sonra Paket Yöneticisi konsolunda bir onay görünür.
+### <a name="install-the-speech-sdk"></a>Konuşma SDK 'sını yükler
 
-1. Sonraki adım, konsol uygulaması derleme ve çalıştırma için kullanmakta olduğunuz bilgisayarın mimarisiyle eşleşen bir platform yapılandırmasını oluşturmaktır. Menü çubuğundan seçin **derleme** > **Configuration Manager...** .
+Bir sonraki adım, [konuşma SDK 'Sı NuGet paketini](https://aka.ms/csspeech/nuget)yüklerken kodda başvurabilirsiniz.
 
-    ![Yapılandırma yöneticisini başlatma](~/articles/cognitive-services/speech-service/media/sdk/qs-csharp-dotnet-windows-05-cfg-manager-click.png "Yapılandırma yöneticisini başlatma")
+1. Çözüm Gezgini, **HelloWorld** projesine sağ tıklayın ve ardından NuGet Paket Yöneticisi ' ni görüntülemek Için **NuGet Paketlerini Yönet** ' i seçin.
 
-1. İçinde **Configuration Manager** iletişim kutusunda, bulun **etkin çözüm platformu** seçin ve açılır listede **yeni**.
+   ![NuGet Paket Yöneticisi](../articles/cognitive-services/speech-service/media/sdk/vs-nuget-package-manager.png)
 
-    ![Configuration Manager penceresinin altından yeni bir platform ekleyin](~/articles/cognitive-services/speech-service/media/sdk/qs-csharp-dotnet-windows-06-cfg-manager-new.png "Configuration Manager penceresinin altından yeni bir platform ekleyin")
+1. Sağ üst köşede, **paket kaynağı** açılan kutusunu bulun ve **NuGet.org** ' nin seçili olduğundan emin olun.
 
-1. 64 bit Windows, sorulduğunda çalıştırıyorsanız **yazın veya seçin yeni platformu**, `x64`. 32 bit Windows çalıştırıyorsanız seçin `x86`. İşlemi tamamladığınızda, tıklayın **Tamam**.
+1. Sol üst köşede, **Araştır**' ı seçin.
 
-    ![64 bit Windows üzerinde "x64" adlı yeni bir platform ekleyin](~/articles/cognitive-services/speech-service/media/sdk/qs-csharp-dotnet-windows-07-cfg-manager-add-x64.png "x64 platformunu ekleyin")
+1. Arama kutusuna *Microsoft. Biliveservices. Speech* yazın ve **ENTER**' u seçin.
+
+1. Arama sonuçlarından, **Microsoft. Biliveservices. Speech** paketini seçin ve ardından en son kararlı sürümü yüklemek için **yüklenir** ' i seçin.
+
+   ![Microsoft. Biliveservices. Speech NuGet paketini yükler](../articles/cognitive-services/speech-service/media/sdk/qs-csharp-dotnet-windows-03-nuget-install-1.0.0.png)
+
+1. Yüklemeyi başlatmak için tüm anlaşmaları ve lisansları kabul edin.
+
+   Paket yüklendikten sonra, **Paket Yöneticisi konsol** penceresinde bir onay görüntülenir.
+
+### <a name="choose-the-target-architecture"></a>Hedef mimariyi seçin
+
+Şimdi, konsol uygulamasını derlemek ve çalıştırmak için bilgisayarınızın mimarisiyle eşleşen bir platform yapılandırması oluşturun.
+
+1. Menü çubuğundan **derleme** > **Configuration Manager**' yi seçin. **Configuration Manager** iletişim kutusu görüntülenir.
+
+   ![Configuration Manager iletişim kutusu](../articles/cognitive-services/speech-service/media/sdk/vs-configuration-manager-dialog-box.png)
+
+1. **Etkin çözüm platformu** açılan kutusunda **Yeni**' yi seçin. **Yeni çözüm platformu** iletişim kutusu görüntülenir.
+
+1. **Yazın veya yeni platform** açılan kutusunu seçin:
+   - 64 bit Windows çalıştırıyorsanız **x64**' ü seçin.
+   - 32 bit Windows çalıştırıyorsanız, **x86**' yı seçin.
+
+1. **Tamam** ' ı ve ardından **Kapat**' ı seçin.

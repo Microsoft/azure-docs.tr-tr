@@ -1,6 +1,6 @@
 ---
-title: X12 iletileri B2B Kurumsal tümleştirme - Azure Logic Apps | Microsoft Docs
-description: Enterprise Integration Pack ile Azure Logic apps'teki B2B Kurumsal tümleştirme için EDI biçiminde Exchange X12 iletileri
+title: B2B tümleştirmesi için x12 iletileri-Azure Logic Apps
+description: Enterprise Integration Pack ile Azure Logic Apps B2B kurumsal tümleştirme için EDI biçiminde Exchange x12 iletileri
 services: logic-apps
 ms.service: logic-apps
 ms.suite: integration
@@ -8,228 +8,227 @@ author: divyaswarnkar
 ms.author: divswa
 ms.reviewer: jonfan, estfan, LADocs
 ms.topic: article
-ms.assetid: 7422d2d5-b1c7-4a11-8c9b-0d8cfa463164
 ms.date: 01/31/2017
-ms.openlocfilehash: f06e213dbae31c9d7c4e212d605cc962aba71d2d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 8bc5c458240925af1fdd74ebc9b2d4c3db71fb05
+ms.sourcegitcommit: d37991ce965b3ee3c4c7f685871f8bae5b56adfa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64728750"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72679992"
 ---
-# <a name="exchange-x12-messages-for-b2b-enterprise-integration-in-azure-logic-apps-with-enterprise-integration-pack"></a>Enterprise Integration Pack ile Azure Logic apps'teki B2B Kurumsal tümleştirme için Exchange X12 iletileri
+# <a name="exchange-x12-messages-for-b2b-enterprise-integration-in-azure-logic-apps-with-enterprise-integration-pack"></a>Enterprise Integration Pack ile Azure Logic Apps B2B kurumsal tümleştirme için Exchange x12 iletileri
 
-X12 değiştirebilir önce iletileri Azure Logic Apps için x X12 oluşturmalısınız sözleşmesi ve bu anlaşma tümleştirme hesabınızda depolayın. X X12 oluşturmak için adımlar şunlardır sözleşme.
+Azure Logic Apps için x12 iletileri alışverişi yapabilmeniz için önce bir x12 sözleşmesi oluşturmanız ve bu sözleşmeyi tümleştirme hesabınızda depolamanız gerekir. X12 sözleşmesinin nasıl oluşturulacağı hakkında adımlar aşağıda verilmiştir.
 
 > [!NOTE]
-> Azure Logic Apps bu sayfa kapsar X12 özellikleri. Daha fazla bilgi için [EDIFACT](logic-apps-enterprise-integration-edifact.md).
+> Bu sayfa Azure Logic Apps için x12 özelliklerini içerir. Daha fazla bilgi için bkz. [Ediolgu](logic-apps-enterprise-integration-edifact.md).
 
 ## <a name="before-you-start"></a>Başlamadan önce
 
-Gereksinim duyduğunuz öğeleri şu şekildedir:
+İhtiyacınız olan öğeler aşağıda verilmiştir:
 
-* Bir [tümleştirme hesabı](logic-apps-enterprise-integration-create-integration-account.md) zaten tanımlanmış ve Azure aboneliğinizle ilişkili
-* En az iki [iş ortakları](../logic-apps/logic-apps-enterprise-integration-partners.md) , tümleştirme hesabınızdaki tanımlanır ve X12 ile yapılandırılmış altında tanımlayıcı **iş kimlikleri**    
-* Gerekli bir [şema](../logic-apps/logic-apps-enterprise-integration-schemas.md) , tümleştirme hesabınıza yükleyebilirsiniz.
+* Zaten tanımlanmış ve Azure aboneliğinizle ilişkilendirilen bir [tümleştirme hesabı](logic-apps-enterprise-integration-create-integration-account.md)
+* Tümleştirme hesabınızda tanımlanan ve **Iş kimlikleri** altında x12 tanımlayıcısı ile yapılandırılmış en az iki [iş ortağı](../logic-apps/logic-apps-enterprise-integration-partners.md)    
+* Tümleştirme hesabınıza yükleyebileceğiniz gerekli bir [şema](../logic-apps/logic-apps-enterprise-integration-schemas.md)
 
-Çalıştırdıktan sonra [tümleştirme hesabı oluşturma](../logic-apps/logic-apps-enterprise-integration-create-integration-account.md), [iş ortakları ekleme](logic-apps-enterprise-integration-partners.md)ve bir [şema](../logic-apps/logic-apps-enterprise-integration-schemas.md) kullanmak istiyorsanız, x X12 oluşturabilmeniz için aşağıdaki adımları izleyerek sözleşme.
+[Tümleştirme hesabı oluşturup](../logic-apps/logic-apps-enterprise-integration-create-integration-account.md) [iş ortakları ekleyin](logic-apps-enterprise-integration-partners.md)ve kullanmak istediğiniz bir [şemaya](../logic-apps/logic-apps-enterprise-integration-schemas.md) sahip olduktan sonra, bu adımları izleyerek bir x12 sözleşmesi oluşturabilirsiniz.
 
-## <a name="create-an-x12-agreement"></a>X X12 oluşturma Sözleşmesi
+## <a name="create-an-x12-agreement"></a>X12 sözleşmesi oluşturma
 
-1. [Azure portalı](https://portal.azure.com "Azure portalı") oturumunu açın. 
+1. [Azure Portal](https://portal.azure.com "Azure portalı")’ında oturum açın. 
 
-2. Azure ana menüsünden seçin **tüm hizmetleri**. 
-   Arama kutusuna "tümleştirme" girin ve ardından **tümleştirme hesapları**.  
+2. Ana Azure menüsünde **tüm hizmetler**' i seçin. 
+   Arama kutusuna "tümleştirme" yazın ve ardından **tümleştirme hesapları**' nı seçin.  
 
-   ![Tümleştirme hesabı bulunamadı](./media/logic-apps-enterprise-integration-x12/account-1.png)
+   ![Tümleştirme hesabınızı bulun](./media/logic-apps-enterprise-integration-x12/account-1.png)
 
    > [!TIP]
-   > Varsa **tüm hizmetleri** görünmüyorsa, menü öğesine sahip olabilir. Daraltılmış menüsünün üstünde, seçin **Göster menüsü**.
+   > **Tüm hizmetler** görünmezse, önce menüyü genişletmeniz gerekebilir. Daraltılan menünün en üstünde **menüyü göster**' i seçin.
 
-3. Altında **tümleştirme hesapları**, anlaşmayı eklemek istediğiniz tümleştirme hesabı'nı seçin.
+3. **Tümleştirme hesapları**altında, sözleşmeyi eklemek istediğiniz tümleştirme hesabını seçin.
 
-   ![Tümleştirme hesabı sözleşmesi oluşturulacağı konumu seçin](./media/logic-apps-enterprise-integration-x12/account-3.png)
+   ![Anlaşmanın oluşturulacağı tümleştirme hesabını seçin](./media/logic-apps-enterprise-integration-x12/account-3.png)
 
-4. Seçin **genel bakış**, ardından **sözleşmeleri** Döşe. 
-   Anlaşmaları kutucuk yoksa kutucuk önce ekleyin. 
+4. **Genel bakış**' ı seçin, sonra **anlaşmalar** kutucuğunu seçin. 
+   Anlaşma kutucuğuna sahipseniz, önce kutucuğu ekleyin. 
 
-   !["Anlaşmaları" kutucuğunu seçin](./media/logic-apps-enterprise-integration-x12/agreement-1.png)
+   !["Anlaşmalar" kutucuğunu seçin](./media/logic-apps-enterprise-integration-x12/agreement-1.png)
 
-5. Altında **sözleşmeleri**, seçin **Ekle**.
+5. **Sözleşmeler**altında **Ekle**' yi seçin.
 
-   !["Ekle" öğesini seçin](./media/logic-apps-enterprise-integration-x12/agreement-2.png)     
+   !["Ekle" yi seçin](./media/logic-apps-enterprise-integration-x12/agreement-2.png)     
 
-6. Altında **Ekle**, girin bir **adı** sözleşmenize için. 
-   Sözleşme türü için **X12**. 
-   Seçin **konak iş ortağı**, **konak kimliği**, **Konuk iş ortağı**, ve **Konuk kimlik** sözleşmenize için. 
-   Daha fazla özellik Ayrıntılar için bu adımda tabloya bakın.
+6. **Ekle**' nin altına sözleşmeniz Için bir **ad** girin. 
+   Anlaşma türü için **x12**öğesini seçin. 
+   Sözleşmeniz için **konak ortağını**, **ana bilgisayar kimliğini**, **Konuk iş ortağını**ve **Konuk kimliğini** seçin. 
+   Daha fazla özellik ayrıntısı için bu adımdaki tabloya bakın.
 
-    ![Anlaşma ayrıntılarını sağlayın](./media/logic-apps-enterprise-integration-x12/x12-1.png)  
+    ![Anlaşma ayrıntılarını sağlama](./media/logic-apps-enterprise-integration-x12/x12-1.png)  
 
     | Özellik | Açıklama |
     | --- | --- |
-    | Ad |Anlaşma adı |
-    | Sözleşme türü | X12 olmalıdır |
-    | Konak iş ortağı |Bir anlaşma hem konak hem de Konuk iş ortağı gerekir. Konak iş ortağı sözleşmesi yapılandıran kuruluşu temsil eder. |
-    | Konak kimliği |Konak iş ortağı için bir tanımlayıcı |
-    | Konuk iş ortağı |Bir anlaşma hem konak hem de Konuk iş ortağı gerekir. Konuk iş ortağı, konak iş ortağı iş yapmakta kuruluşu temsil eder. |
+    | Adı |Sözleşmenin adı |
+    | Anlaşma türü | X12 olmalıdır |
+    | Ana bilgisayar ortağı |Bir anlaşmanın hem ana bilgisayar hem de Konuk iş ortağı olması gerekir. Ana bilgisayar ortağı, sözleşmeyi yapılandıran kuruluşu temsil eder. |
+    | Ana bilgisayar kimliği |Ana bilgisayar ortağı için bir tanımlayıcı |
+    | Konuk Iş ortağı |Bir anlaşmanın hem ana bilgisayar hem de Konuk iş ortağı olması gerekir. Konuk iş ortağı, ana bilgisayar ortağıyla iş yapan kuruluşu temsil eder. |
     | Konuk kimliği |Konuk iş ortağı için bir tanımlayıcı |
-    | Ayarları Al |Bu özellikler, bir anlaşma tarafından alınan tüm iletileri için geçerlidir. |
-    | Gönderme ayarları |Bu özellikler, bir anlaşma tarafından gönderilen tüm iletiler için geçerlidir. |  
+    | Ayarları al |Bu özellikler, bir sözleşme tarafından alınan tüm iletiler için geçerlidir. |
+    | Ayarları gönder |Bu özellikler, bir anlaşma tarafından gönderilen tüm iletiler için geçerlidir. |  
 
    > [!NOTE]
-   > Gönderen niteleyicisi tanımlayıcısı ve alıcı niteleyicisi ve iş ortağı ve gelen ileti tanımlanmış tanımlayıcısı eşleşen anlaşma bağlıdır X12 çözünürlüğü. Bu değerler, iş ortağı değiştirirseniz, anlaşma güncelleştirirsiniz.
+   > X12 sözleşmesinin çözümlenmesi, gönderici niteleyicisi ve tanımlayıcı ile, iş ortağında ve gelen iletide tanımlanan alıcı niteleyicisi ve tanımlayıcı ile eşleşmesine bağlıdır. Bu değerler iş ortağınız için değişiklik içeriyorsa sözleşmeyi de güncelleştirin.
 
-## <a name="configure-how-your-agreement-handles-received-messages"></a>Nasıl iletileri, anlaşma tanıtıcıları alınan yapılandırma
+## <a name="configure-how-your-agreement-handles-received-messages"></a>Anlaşmanızın alınan iletileri nasıl işleyeceğini yapılandırın
 
-Sözleşme özelliklerini ayarladıysanız, işbu sözleşme nasıl tanımlar ve işbu sözleşme aracılığıyla iş ortağınız alınan gelen iletileri işleyen yapılandırabilirsiniz.
+Anlaşma özelliklerini ayarlamış olduğunuza göre, bu sözleşmenin bu sözleşme aracılığıyla iş ortağınızdan alınan gelen iletileri nasıl tanımladığını ve işleyeceğini yapılandırabilirsiniz.
 
-1.  Altında **Ekle**seçin **alma ayarı**.
-Sizinle iletiler birbiriyle değiştirir iş ortaklarıyla sözleşmenize göre bu özelliklerini yapılandırın. Bu bölümdeki tablolarda, özellik açıklamalarına bakın.
+1.  **Ekle**' nin altında, **alma ayarları**' nı seçin.
+Sizinle ileti alışverişi yapan iş ortağıyla anlaşmanıza bağlı olarak bu özellikleri yapılandırın. Özellik açıklamaları için bu bölümdeki tablolara bakın.
 
-    **Alma ayarlarını** bu bölümler halinde düzenlenmiştir: Tanımlayıcılar, bildirim, şemalar, zarflar, denetim numaraları, doğrulama ve iç ayarlar.
+    **Alma ayarları** şu bölümler halinde düzenlenmiştir: tanımlayıcılar, bildirim, şemalar, zarflar, denetim numaraları, doğrulamalar ve iç ayarlar.
 
-2. Bitirdikten sonra seçerek ayarlarınızı kaydettiğinizden emin olun **Tamam**.
+2. İşiniz bittiğinde, **Tamam**' ı seçerek ayarlarınızı kaydettiğinizden emin olun.
 
-Artık, anlaşmanız seçili ayarlarınıza uygun gelen iletileri işlemek hazırdır.
+Artık sözleşmeniz, seçili ayarlarınıza uygun gelen iletileri işlemeye hazır.
 
-### <a name="identifiers"></a>Tanımlayıcıları
+### <a name="identifiers"></a>Lara
 
 ![Tanımlayıcı özelliklerini ayarlama](./media/logic-apps-enterprise-integration-x12/x12-2.png)  
 
 | Özellik | Açıklama |
 | --- | --- |
-| Isa1 (yetkilendirme niteleyicisi) |Yetkilendirme niteleyicisi değeri, açılır listeden seçin. |
-| ISA2 |İsteğe bağlı. Yetkilendirme bilgileri değeri girin. Isa1 için girdiğiniz değer 00 dışında ise, en az bir alfasayısal karakter ve en fazla 10 girin. |
-| Isa3 (Güvenlik niteleyicisi) |Güvenlik niteleyicisi değeri, açılır listeden seçin. |
-| ISA4 |İsteğe bağlı. Güvenlik bilgileri değeri girin. Isa3 için girdiğiniz değer 00 dışında ise, en az bir alfasayısal karakter ve en fazla 10 girin. |
+| ISA1 (yetkilendirme niteleyicisi) |Açılan listeden yetkilendirme niteleyicisi değerini seçin. |
+| ISA2 |İsteğe bağlı. Yetkilendirme bilgileri değerini girin. ISA1 için girdiğiniz değer 00 ' dan büyükse, en az bir alfasayısal karakter ve en fazla 10 değeri girin. |
+| ISA3 (güvenlik niteleyicisi) |Açılan listeden güvenlik niteleyicisi değerini seçin. |
+| ISA4 |İsteğe bağlı. Güvenlik bilgileri değerini girin. ISA3 için girdiğiniz değer 00 ' dan büyükse, en az bir alfasayısal karakter ve en fazla 10 değeri girin. |
 
-### <a name="acknowledgment"></a>Bildirim
+### <a name="acknowledgment"></a>Olumlu
 
-![Bildirim özelliklerini ayarlama](./media/logic-apps-enterprise-integration-x12/x12-3.png) 
+![Onaylama özelliklerini ayarla](./media/logic-apps-enterprise-integration-x12/x12-3.png) 
 
 | Özellik | Açıklama |
 | --- | --- |
-| Beklenen TA1 |Teknik bir bildirim değişim gönderene döndürür |
-| Beklenen FA |İşlev bildirim değişim gönderene döndürür. Ardından şema sürümüne dayanan 997 veya 999 bildirimler isteyip istemediğinizi seçin |
-| AK2/ık2 döngüsünü dahil |Kabul edilen işlem kümeleri için işlev bildirimleri AK2 döngüler oluşturulmasını sağlar |
+| TA1 bekleniyor |Değiş tokuş göndericisine teknik bildirim döndürür |
+| SK bekleniyor |Değişim göndericisine işlevsel bir bildirim döndürür. Ardından, şema sürümüne göre 997 veya 999 ile ilgili bildirimleri isteyip istemediğinizi seçin |
+| Include AK2/IK2 döngüsü |Kabul edilen işlem kümeleri için işlevsel AK2 döngülerinin oluşturulmasına izin vermez |
 
 ### <a name="schemas"></a>Şemalar
 
-Her bir işlem türüne (ST1) ve gönderen uygulamaya (GS2) için bir şema seçin. Alma işlem hattı, burada ayarladığınız içeren gelen ileti Burada ayarlanan değerleri ve şema gelen ileti şemasıyla değerlerini ST1 ve GS2 eşleştirerek gelen ileti ayrıştırır.
+Her işlem türü (ST1) ve gönderici uygulaması (GS2) için bir şema seçin. Alma işlem hattı, gelen iletideki ST1 ve GS2 değerlerini, burada ayarladığınız değerlerle ve gelen iletinin şemasını burada ayarladığınız şemayla eşleştirerek gelen iletiyi ayrıştırır.
 
 ![Şema seçin](./media/logic-apps-enterprise-integration-x12/x12-33.png) 
 
 | Özellik | Açıklama |
 | --- | --- |
-| Version |Sürümünü X12 seçin |
-| İşlem türü (ST01) |İşlem türü seçin |
-| Gönderen uygulama (GS02) |Gönderen uygulamayı seçin |
-| Şema |Kullanmak istediğiniz şema dosyası seçin. Şemaları tümleştirme hesabınıza eklenir. |
+| Sürüm |X12 sürümünü seçin |
+| İşlem türü (ST01) |İşlem türünü seçin |
+| Gönderen uygulaması (GS02) |Gönderen uygulamasını seçin |
+| Şema |Kullanmak istediğiniz şema dosyasını seçin. Şemalar tümleştirme hesabınıza eklenir. |
 
 > [!NOTE]
-> Gerekli yapılandırma [şema](../logic-apps/logic-apps-enterprise-integration-schemas.md) için karşıya, [tümleştirme hesabı](../logic-apps/logic-apps-enterprise-integration-accounts.md).
+> [Tümleştirme hesabınıza](../logic-apps/logic-apps-enterprise-integration-accounts.md)yüklenen gerekli [Şemayı](../logic-apps/logic-apps-enterprise-integration-schemas.md) yapılandırın.
 
-### <a name="envelopes"></a>Zarflar
+### <a name="envelopes"></a>Larla
 
-![Bir işlem kümesinde ayırıcı belirtin: Standart tanımlayıcı veya yineleme ayırıcısı seçin](./media/logic-apps-enterprise-integration-x12/x12-34.png)
+![Bir işlem kümesinde ayırıcıyı belirtin: standart tanımlayıcı veya yineleme ayırıcısı seçin](./media/logic-apps-enterprise-integration-x12/x12-34.png)
 
 | Özellik | Açıklama |
 | --- | --- |
-| Isa11 kullanımı |İşlem kümesi içinde kullanılacak ayırıcı belirtir: <p>Seçin **standart tanımlayıcı** için ondalık gösterim bir nokta (.) kullanmak için EDI gelen belgenin ondalık gösterim yerine işlem hattını alırsınız. <p>Seçin **yineleme ayırıcısı** basit veri öğesi veya bir yinelenen veri yapısı yinelenen örnekleri için ayırıcı belirtmek için. Örneğin, genellikle simgeyi seçtiğinizde (^) yineleme ayırıcısı olarak kullanılır. HIPAA şemaları için simgeyi seçtiğinizde yalnızca kullanabilirsiniz. |
+| ISA11 kullanımı |Bir işlem kümesinde kullanılacak ayırıcıyı belirtir: <p>**Standart tanımlayıcıyı** , EDI alma işlem hattındaki gelen belgenin ondalık gösterimi yerine ondalık Gösterim için bir nokta (.) kullanmak üzere seçin. <p>Basit bir veri öğesinin yinelenen tekrarlarının veya yinelenen bir veri yapısının ayırıcısını belirtmek için **yineleme ayırıcısı** ' nı seçin. Örneğin, genellikle simgeyi seçtiğinizde (^), yineleme ayırıcısı olarak kullanılır. HIPAA şemaları için, yalnızca Carat 'yı kullanabilirsiniz. |
 
 ### <a name="control-numbers"></a>Denetim numaraları
 
-![Denetim numaralarına ne yapılacağını seçin](./media/logic-apps-enterprise-integration-x12/x12-35.png) 
+![Denetim numarası yinelemelerini nasıl işleyeceğinizi seçin](./media/logic-apps-enterprise-integration-x12/x12-35.png) 
 
 | Özellik | Açıklama |
 | --- | --- |
-| Değişim denetim numarası yinelenmesine izin verme |Yinelenen değişim engelleyin. Değişim denetim numarası (ısa13) alınan değişim denetim numarası için denetler. Alma işlem hattı, bir eşleşme algılanırsa, değişim işlemiyor. Onay için bir değer vererek gerçekleştirmek için gün sayısı belirtebilirsiniz *yinelenen ısa13 denetleme sıklığı (gün)* . |
-| Grup denetim numaralarına izin verme |Yinelenen grup denetim numaraları ile blok değişimlerinin. |
-| İşlem kümesi denetim numaralarına izin verme |Yinelenen işlem kümesi denetim numaraları ile blok değişimlerinin. |
+| Değişim denetim numarası çoğaltmasına izin verme |Yinelenen değişiklikleri engelleyin. Alınan değişim denetim numarası için değişim denetim numarasını (ISA13) denetler. Bir eşleşme algılanırsa, alma işlem hattı değişimi işlemez. *Her (gün) YINELENEN ISA13 için bir denetim*değeri vererek denetim gerçekleştirmek için gereken gün sayısını belirtebilirsiniz. |
+| Grup denetim numarası yinelenmesine izin verme |Yinelenen grup denetim numaralarıyla karşılıklı değişiklikleri engelleyin. |
+| Işlem kümesi denetim numarası yinelenmesine izin verme |Yinelenen işlem kümesi denetim numaralarıyla karşılıklı değişiklikleri engelleyin. |
 
-### <a name="validations"></a>Doğrulamaları
+### <a name="validations"></a>Ların
 
 ![Alınan iletiler için doğrulama özelliklerini ayarlama](./media/logic-apps-enterprise-integration-x12/x12-36.png) 
 
-Her doğrulama satır tamamladığınızda, başka bir otomatik olarak eklenir. Herhangi bir kural belirtmezseniz, doğrulama "Varsayılan" satır kullanır.
+Her doğrulama satırını tamamladığınızda, başka bir otomatik olarak eklenir. Herhangi bir kural belirtmezseniz, doğrulama "varsayılan" satırını kullanır.
 
 | Özellik | Açıklama |
 | --- | --- |
-| İleti türü |EDI ileti türü seçin. |
-| EDI doğrulaması |EDI doğrulaması şema EDI özellikleri, uzunluk kısıtlamaları, boş veri öğeleri ve sondaki ayırıcılara tarafından tanımlanan veri türleri üzerinde gerçekleştirin. |
-| Genişletilmiş Doğrulama |Veri türü değilse EDI, doğrulama veri öğesi gereksinimdir ve yineleme, numaralandırmalar ve veri öğesi uzunluğu doğrulama (min/maks) izin verilir. |
-| Başta/sonda sıfırlara izin ver |Başta veya sonda sıfır ek korumak ve boşluk karakterleri. Bu karakterleri kaldırın. |
-| Baştaki/Sondaki sıfırları Kırp |Baştaki veya sondaki ve boşluk karakterleri kaldırın. |
-| Sonda ayırıcı İlkesi |Sondaki ayırıcılara oluşturur. <p>Seçin **izin** sonundaki sınırlayıcılar ve alınan değişim ayırıcılar önlemek için. Değişim, değişim sonundaki sınırlayıcılar ve ayırıcılar varsa, geçerli bildirilmedi. <p>Seçin **isteğe bağlı** değişim ile veya sonundaki sınırlayıcılar ve ayırıcılar olmadan kabul etmek için. <p>Seçin **zorunlu** zaman değişim olmalıdır sonundaki sınırlayıcılar ve ayırıcı. |
+| İleti türü |EDI ileti türünü seçin. |
+| EDI doğrulaması |Şema EDI özellikleri, uzunluk kısıtlamaları, boş veri öğeleri ve sondaki ayırıcılar tarafından tanımlanan veri türlerinde EDI doğrulaması gerçekleştirin. |
+| Genişletilmiş Doğrulama |Veri türü EDI değilse, doğrulama veri öğesi gereksinimidir ve izin verilen yineleme, numaralandırmalar ve veri öğesi uzunluğu doğrulaması (min/max). |
+| Baştaki/sondaki sıfırları izin ver |Tüm ek öndeki veya sondaki sıfır ve boşluk karakterlerini koruyun. Bu karakterleri kaldırmayın. |
+| Baştaki/sondaki sıfırları Kırp |Baştaki veya sondaki sıfır ve boşluk karakterlerini kaldırın. |
+| Sondaki ayırıcı Ilkesi |Sondaki ayırıcılar oluştur. <p>Alınan değişim içindeki sonda sınırlayıcılar ve ayırıcılara **Izin verilmeyeceğine Izin verilmiyor** ' ı seçin. Değişim, sonda sınırlayıcılar ve ayırıcılar içeriyorsa, değişim geçerli değil olarak bildirilmiştir. <p>Sondaki sınırlayıcılarla veya Ayırıcısız değişiklikler kabul etmek için **Isteğe bağlı** ' i seçin. <p>Değişim, sonda sınırlayıcılar ve ayırıcılara sahip olması gerektiğinde **zorunlu** ' ı seçin. |
 
 ### <a name="internal-settings"></a>İç ayarlar
 
-![İç ayarlarını seçin](./media/logic-apps-enterprise-integration-x12/x12-37.png) 
+![İç ayarları seçin](./media/logic-apps-enterprise-integration-x12/x12-37.png) 
 
 | Özellik | Açıklama |
 | --- | --- |
-| Varsayılan ondalık biçimdeki "Nn" taban 10 sayısal bir değere Dönüştür |10 tabanında sayısal bir değer biçimine "Nn" ile belirtilen bir EDI sayı dönüştürür |
-| Sondaki ayırıcılara izin veriliyorsa boş XML etiketleri oluştur |Sondaki ayırıcılara boş XML etiketleri dahil değişim gönderen sağlamak için bu onay kutusunu seçin. |
-| Bölünmüş değişimi işlem kümeleri - olarak işlem kümelerini Askıya Al hatası|Her işlem işlem kümesine uygun Zarf uygulayarak bir değişimin ayrı bir XML belgesine kümesi ayrıştırır. Yalnızca, burada doğrulama başarısız askıya alır. |
-| Bölünmüş değişimi işlem kümeleri - olarak hata durumunda değişimi Askıya Al|Uygun Zarf uygulayarak bir değişim ayrı bir XML belgesine kümesindeki her bir işlem ayrıştırır. Bir veya daha fazla işlem kümeleri değişim doğrulama başarısız olduğunda tüm değişimi askıya alır. | 
-| Değişimi Koru - hata işlem kümelerini Askıya Al |Değişim dokunmaz, tüm toplu değişim için bir XML belgesi oluşturur. Diğer tüm işlem kümeleri işlenmeye devam ederken doğrulama, başarısız olan işlem kümelerini askıya alır. |
-| Değişimi Koru - hata oluştuğunda değişimi Askıya Al |Değişim dokunmaz, tüm toplu değişim için bir XML belgesi oluşturur. Bir veya daha fazla işlem kümeleri değişim doğrulama başarısız olduğunda tüm değişim askıya alır. |
+| Kapsanan "nn" ondalık biçimini 10 tabanında sayısal değere Dönüştür |"Nn" biçimiyle belirtilen EDI numarasını Base-10 sayısal değerine dönüştürür |
+| Sondaki ayırıcılara izin veriliyorsa boş XML etiketleri oluştur |Bu onay kutusunu, değişim göndericisinin sondaki ayırıcılar için boş XML etiketleri içermesini sağlamak için seçin. |
+| Değişimi işlem kümeleri olarak Böl-hata durumunda işlem kümelerini askıya al|Bir değişim içindeki her işlem kümesini, işlem kümesine uygun zarfı uygulayarak ayrı bir XML belgesi olarak ayrıştırır. Yalnızca doğrulamanın başarısız olduğu işlemleri askıya alır. |
+| Değişimi işlem kümeleri olarak Böl-hata durumunda değişimi askıya al|Bir değiş tokuş içindeki her işlem kümesini, uygun zarfı uygulayarak ayrı bir XML belgesi olarak ayrıştırır. Değişim başarısız doğrulamasında bir veya daha fazla işlem kümesi olduğunda tüm değişimi askıya alır. | 
+| Değişimi koru-hata durumunda işlem kümelerini askıya al |Değişimi dokunulmadan bırakır, tüm toplu değişim için bir XML belgesi oluşturur. Yalnızca doğrulamanın başarısız olduğu işlem kümelerini askıya alırken, diğer tüm işlem kümelerini işlemeye devam eder. |
+| Değişimi koru-hata durumunda değişimi askıya al |Değişimi dokunulmadan bırakır, tüm toplu değişim için bir XML belgesi oluşturur. Değişim başarısız doğrulamasında bir veya daha fazla işlem kümesi olduğunda tüm değişimi askıya alır. |
 
-## <a name="configure-how-your-agreement-sends-messages"></a>Sözleşmenize iletileri nasıl göndereceğini yapılandırın
+## <a name="configure-how-your-agreement-sends-messages"></a>Sözleşmenizin iletileri nasıl göndereceğini yapılandırın
 
-İşbu sözleşme nasıl tanımlar ve iş ortağınız aracılığıyla bu anlaşma Gönder giden iletileri işleyen yapılandırabilirsiniz.
+Bu sözleşmenin, bu anlaşma aracılığıyla iş ortağınıza göndereceğiniz giden iletileri nasıl tanımladığını ve işleyeceğini yapılandırabilirsiniz.
 
-1.  Altında **Ekle**seçin **gönderme ayarları**.
-Sizinle iletiler değiştirir ortağınızla birlikte sözleşmenize göre bu özelliklerini yapılandırın. Bu bölümdeki tablolarda, özellik açıklamalarına bakın.
+1.  **Ekle**' nin altında, **ayarları gönder**' i seçin.
+Sizinle ileti alışverişi yapan iş ortağınız ile anlaşmanıza bağlı olarak bu özellikleri yapılandırın. Özellik açıklamaları için bu bölümdeki tablolara bakın.
 
-    **Gönderme ayarları** bu bölümler halinde düzenlenmiştir: Tanımlayıcılar, bildirim, şemalar, zarflar, karakter kümeleri ve ayırıcılar, denetim numaraları ve doğrulama.
+    **Gönderme ayarları** şu bölümler halinde düzenlenmiştir: tanımlayıcılar, bildirim, şemalar, zarflar, karakter kümeleri ve ayırıcılar, denetim numaraları ve doğrulama.
 
-2. Bitirdikten sonra seçerek ayarlarınızı kaydettiğinizden emin olun **Tamam**.
+2. İşiniz bittiğinde, **Tamam**' ı seçerek ayarlarınızı kaydettiğinizden emin olun.
 
-Artık, anlaşmanız seçili ayarlarınıza uygun giden iletileri işlemek hazırdır.
+Artık sözleşmeniz, seçili ayarlarınıza uygun olan giden iletileri işlemeye hazır.
 
-### <a name="identifiers"></a>Tanımlayıcıları
+### <a name="identifiers"></a>Lara
 
 ![Tanımlayıcı özelliklerini ayarlama](./media/logic-apps-enterprise-integration-x12/x12-4.png)  
 
 | Özellik | Açıklama |
 | --- | --- |
-| Yetkilendirme niteleyicisi (ısa1) |Yetkilendirme niteleyicisi değeri, açılır listeden seçin. |
-| ISA2 |Yetkilendirme bilgileri değeri girin. Bu değer, 00 dışında ise, en az bir alfasayısal karakter ve en fazla 10 girin. |
-| Güvenlik niteleyicisi (ısa3) |Güvenlik niteleyicisi değeri, açılır listeden seçin. |
-| ISA4 |Güvenlik bilgileri değeri girin. Bu değer, değer (ISA4) metin kutusuna, 00 dışında ise alfasayısal bir değer en az ve en fazla 10 girin. |
+| Yetkilendirme niteleyicisi (ISA1) |Açılan listeden yetkilendirme niteleyicisi değerini seçin. |
+| ISA2 |Yetkilendirme bilgileri değerini girin. Bu değer 00 ' dan büyükse, en az bir alfasayısal karakter ve en fazla 10 girin. |
+| Güvenlik niteleyicisi (ISA3) |Açılan listeden güvenlik niteleyicisi değerini seçin. |
+| ISA4 |Güvenlik bilgileri değerini girin. Bu değer 00 ' dan başka bir değer (ISA4) metin kutusu için en az bir alfasayısal değer ve en fazla 10 girin. |
 
-### <a name="acknowledgment"></a>Bildirim
+### <a name="acknowledgment"></a>Olumlu
 
-![Bildirim özelliklerini ayarlama](./media/logic-apps-enterprise-integration-x12/x12-5.png)  
+![Onaylama özelliklerini ayarla](./media/logic-apps-enterprise-integration-x12/x12-5.png)  
 
 | Özellik | Açıklama |
 | --- | --- |
-| Beklenen TA1 |Teknik bir bildirim (TA1) değişim göndericiye. Bu ayar, kimin ileti gönderilirken konak iş ortağı Konuk iş ortağı Sözleşmesi'nden bir bildirim istekleri belirtir. Bu bildirimler, sözleşmenin alma ayarlara göre konak iş ortağı tarafından beklenir. |
-| Beklenen FA |Bir işlev bildirimi (FA) değişim göndericiye. Çalıştığınız şema sürümlerine göre 997 veya 999 onayları isteyip istemediğinizi seçin. Bu bildirimler, sözleşmenin alma ayarlara göre konak iş ortağı tarafından beklenir. |
-| FA sürümü |FA sürümü seçin |
+| TA1 bekleniyor |Değiş tokuş göndericisine teknik onay (TA1) döndürün. Bu ayar, iletiyi gönderen ana bilgisayar ortağının anlaşmada Konuk ortağından bir bildirim istemesi gerektiğini belirtir. Bu bildirimler, sözleşmenin alma ayarlarına bağlı olarak ana bilgisayar ortağı tarafından beklenir. |
+| SK bekleniyor |Değişim göndericisine bir işlevsel bildirim (SK) döndürün. Üzerinde çalıştığınız şema sürümlerine göre 997 veya 999 ' nin ne olduğunu belirlemek istediğinizi seçin. Bu bildirimler, sözleşmenin alma ayarlarına bağlı olarak ana bilgisayar ortağı tarafından beklenir. |
+| SK sürümü |SK sürümünü seçin |
 
 ### <a name="schemas"></a>Şemalar
 
-![Kullanılacak şeması seçin](./media/logic-apps-enterprise-integration-x12/x12-5.png)  
+![Kullanılacak şemayı seçin](./media/logic-apps-enterprise-integration-x12/x12-5.png)  
 
 | Özellik | Açıklama |
 | --- | --- |
-| Version |Sürümünü X12 seçin |
-| İşlem türü (ST01) |İşlem türü seçin |
-| ŞEMA |Kullanılacak şemayı seçin. Şemaları tümleştirme hesabınızdaki yer alır. Şema ilk seçerseniz, otomatik olarak sürüm ve işlem yapılandırır türü  |
+| Sürüm |X12 sürümünü seçin |
+| İşlem türü (ST01) |İşlem türünü seçin |
+| MANıZı |Kullanılacak şemayı seçin. Şemalar tümleştirme hesabınızda bulunur. Önce şemayı seçerseniz, sürümü ve işlem türünü otomatik olarak yapılandırır  |
 
 > [!NOTE]
-> Gerekli yapılandırma [şema](../logic-apps/logic-apps-enterprise-integration-schemas.md) için karşıya, [tümleştirme hesabı](../logic-apps/logic-apps-enterprise-integration-accounts.md).
+> [Tümleştirme hesabınıza](../logic-apps/logic-apps-enterprise-integration-accounts.md)yüklenen gerekli [Şemayı](../logic-apps/logic-apps-enterprise-integration-schemas.md) yapılandırın.
 
-### <a name="envelopes"></a>Zarflar
+### <a name="envelopes"></a>Larla
 
-![Bir işlem kümesinde ayırıcı belirtin: Standart tanımlayıcı veya yineleme ayırıcısı seçin](./media/logic-apps-enterprise-integration-x12/x12-6.png) 
+![Bir işlem kümesinde ayırıcıyı belirtin: standart tanımlayıcı veya yineleme ayırıcısı seçin](./media/logic-apps-enterprise-integration-x12/x12-6.png) 
 
 | Özellik | Açıklama |
 | --- | --- |
-| Isa11 kullanımı |İşlem kümesi içinde kullanılacak ayırıcı belirtir: <p>Seçin **standart tanımlayıcı** için ondalık gösterim bir nokta (.) kullanmak için EDI gelen belgenin ondalık gösterim yerine işlem hattını alırsınız. <p>Seçin **yineleme ayırıcısı** basit veri öğesi veya bir yinelenen veri yapısı yinelenen örnekleri için ayırıcı belirtmek için. Örneğin, genellikle simgeyi seçtiğinizde (^) yineleme ayırıcısı olarak kullanılır. HIPAA şemaları için simgeyi seçtiğinizde yalnızca kullanabilirsiniz. |
+| ISA11 kullanımı |Bir işlem kümesinde kullanılacak ayırıcıyı belirtir: <p>**Standart tanımlayıcıyı** , EDI alma işlem hattındaki gelen belgenin ondalık gösterimi yerine ondalık Gösterim için bir nokta (.) kullanmak üzere seçin. <p>Basit bir veri öğesinin yinelenen tekrarlarının veya yinelenen bir veri yapısının ayırıcısını belirtmek için **yineleme ayırıcısı** ' nı seçin. Örneğin, genellikle simgeyi seçtiğinizde (^), yineleme ayırıcısı olarak kullanılır. HIPAA şemaları için, yalnızca Carat 'yı kullanabilirsiniz. |
 
 ### <a name="control-numbers"></a>Denetim numaraları
 
@@ -237,70 +236,70 @@ Artık, anlaşmanız seçili ayarlarınıza uygun giden iletileri işlemek hazı
 
 | Özellik | Açıklama |
 | --- | --- |
-| Denetim sürüm numarası (ısa12) |Standart X12 sürümünü seçin |
-| Kullanım göstergesi (ısa15) |Bir değişim bağlamını seçin.  Değerleri bilgileri, üretim verisi veya test verileri |
-| Şema |Gönderme işlem hattına gönderir X12 kodlu bir değişim için GS ve ST kesimleri oluşturur |
-| GS1 |İsteğe bağlı, aşağı açılan listeden işlev kodu için bir değer seçin |
-| GS2 |İsteğe bağlı, uygulama gönderen |
-| GS3 |İsteğe bağlı, uygulama alıcı |
-| GS4 |İsteğe bağlı, select CCYYMMDD veya YYAAGG |
-| GS5 |İsteğe bağlı, select HHMM, SSDDSS veya HHMMSSdd |
-| GS7 |İsteğe bağlı, aşağı açılan listeden sorumlu aracısı için bir değer seçin |
-| GS8 |İsteğe bağlı, belgenin sürümü |
-| Değişim denetim numarası (ısa13) |Gerekli, değişim denetim numarası için değer aralığını girin. En az 1 ve en fazla 999999999 sayısal bir değer girin |
-| Grup denetim numarası (GS06) |Gerekli bir dizi numarası için Grup denetim numarası girin. En az 1 ve en fazla 999999999 sayısal bir değer girin |
-| İşlem kümesi denetim numarası (ST02) |Gerekli işlem kümesi denetim numarası için bir dizi numarası girin. En az 1 ve en fazla 999999999 sayısal değer aralığını girin |
-| Alan kodu |İsteğe bağlı, kullanılan bildirim içinde işlem kümesi denetim numaraları aralığını atanmış. Alfasayısal bir değer ve bir sayısal değer iki Orta alanlar için önek ve sonek alanlar için (istenirse) girin. Orta alanlar gereklidir ve denetim numarası için minimum ve maksimum değerler içeriyor |
-| Son eki |İsteğe bağlı, atanmış bir bildirim kullanılan işlem kümesi denetim numaraları aralığını. Alfasayısal bir değer ve bir sayısal değer iki Orta alanlar için önek ve sonek alanlar için (istenirse) girin. Orta alanlar gereklidir ve denetim numarası için minimum ve maksimum değerler içeriyor |
+| Denetim sürüm numarası (ıSA12) |X12 Standard sürümünü seçin |
+| Kullanım göstergesi (ISA15) |Bir değişim bağlamını seçin.  Değerler bilgi, üretim verileri veya test verileri |
+| Şema |Send işlem hattına gönderdiği x12 kodlu bir değişim için GS ve ST segmentlerini üretir |
+| GS1 |İsteğe bağlı, açılan listeden işlevsel kod için bir değer seçin |
+| GS2 |İsteğe bağlı, uygulama gönderici |
+| GS3 |İsteğe bağlı, uygulama alıcısı |
+| GS4 |İsteğe bağlı, CCYYMMDD veya YYAAGG seçin |
+| GS5 |İsteğe bağlı, SSMM, HHMMSS veya HHMMSSdd seçin |
+| GS7 |İsteğe bağlı, açılan listeden sorumlu ajanı için bir değer seçin |
+| GS8 |İsteğe bağlı, belge sürümü |
+| Değişim denetim numarası (ISA13) |Gerekli, değişim denetim numarası için bir değer aralığı girin. En az 1 ve en fazla 999999999 olan sayısal bir değer girin |
+| Grup denetim numarası (GS06) |Gerekli, Grup denetim numarası için bir sayı aralığı girin. En az 1 ve en fazla 999999999 olan sayısal bir değer girin |
+| İşlem kümesi denetim numarası (ST02) |Gerekli, Işlem kümesi denetim numarası için bir sayı aralığı girin. En az 1 ve en fazla 999999999 olan bir sayısal değer aralığı girin |
+| Alan kodu |Bildirim içinde kullanılan işlem kümesi denetim numaraları aralığı için belirlenmiş isteğe bağlı. İkinci iki alan için sayısal bir değer ve önek ve sonek alanları için alfasayısal bir değer (isteniyorsa) girin. Orta alanlar gereklidir ve denetim numarası için en düşük ve en yüksek değerleri içermelidir |
+| Önekini |Bir bildirim içinde kullanılan işlem kümesi denetim numaraları aralığı için belirlenmiş isteğe bağlı. İkinci iki alan için sayısal bir değer ve önek ve sonek alanları için alfasayısal bir değer (isteniyorsa) girin. Orta alanlar gereklidir ve denetim numarası için en düşük ve en yüksek değerleri içermelidir |
 
 ### <a name="character-sets-and-separators"></a>Karakter kümeleri ve ayırıcılar
 
-Karakter kümesi dışında her ileti türü için farklı bir sınırlayıcı kümesi girebilirsiniz. Ardından, bir karakter kümesi için belirli bir ileti şema belirtilmezse, varsayılan karakter kümesi kullanılır.
+Karakter kümesi dışında, her ileti türü için farklı bir sınırlayıcı kümesi girebilirsiniz. Belirli bir ileti şeması için bir karakter kümesi belirtilmemişse, varsayılan karakter kümesi kullanılır.
 
-![Sınırlayıcılar için ileti türlerini belirtin](./media/logic-apps-enterprise-integration-x12/x12-9.png) 
+![İleti türleri için sınırlandırıcıları belirt](./media/logic-apps-enterprise-integration-x12/x12-9.png) 
 
 | Özellik | Açıklama |
 | --- | --- |
-| Kullanılacak karakter |Özellikleri Seç X12 karakter kümesini doğrulamak için. Temel ve genişletilmiş UTF8 seçeneklerdir. |
-| Şema |Bir şema, aşağı açılan listeden seçin. Her satır tamamladıktan sonra yeni bir satır otomatik olarak eklenir. Seçili şemayı için aşağıdaki ayırıcı açıklamalarına göre kullanmak istediğiniz ayırıcılar kümesi seçin. |
-| Giriş türü |Bir giriş türü açılan listesinden seçin. |
-| Bileşen ayırıcısı |Bileşik veri öğeleri ayırmak için tek bir karakter girin. |
-| Veri öğesi ayırıcısı |Bileşik veri öğeleri içinde basit veri öğeleri ayırmak için tek bir karakter girin. |
-| Değiştirme karakteri |Giden X12 oluştururken tüm ayırıcı karakterlerler yükünün verilerindeki değiştirerek için kullanılan bir değiştirme karakteri girin ileti. |
-| Segment Sonlandırıcı |EDI segment sonunu belirtmek için tek bir karakter girin. |
-| Son eki |Segment tanımlayıcısıyla kullanılan karakter seçin. Bir sonek belirlerseniz, segment Sonlandırıcı veri öğesi boş olabilir. Segment sonlandırıcı boş bırakılırsa, sonek atamanız gerekir. |
+| Kullanılacak karakter kümesi |Özellikleri doğrulamak için x12 karakter kümesini seçin. Temel, genişletilmiş ve UTF8 seçenekleri vardır. |
+| Şema |Açılan listeden bir şema seçin. Her satırı tamamladıktan sonra, yeni bir satır otomatik olarak eklenir. Seçili şema için, aşağıdaki ayırıcı açıklamalara göre kullanmak istediğiniz ayırıcılar kümesini seçin. |
+| Giriş türü |Açılan listeden bir giriş türü seçin. |
+| Bileşen ayırıcısı |Bileşik veri öğelerini ayırmak için tek bir karakter girin. |
+| Veri öğesi ayırıcısı |Bileşik veri öğeleri içindeki basit veri öğelerini ayırmak için tek bir karakter girin. |
+| Değiştirme karakteri |Giden x12 iletisini oluştururken yük verilerinde tüm ayırıcı karakterleri değiştirmek için kullanılan bir değiştirme karakteri girin. |
+| Segment Sonlandırıcı |EDI segmentinin sonunu belirtmek için tek bir karakter girin. |
+| Önekini |Kesim tanımlayıcısıyla birlikte kullanılan karakteri seçin. Bir sonek belirlerseniz, segment Sonlandırıcı veri öğesi boş olabilir. Segment Sonlandırıcı boş bırakılırsa, bir sonek atamanız gerekir. |
 
 > [!TIP]
-> Özel karakter değerlerini sağlamak için anlaşmayı JSON olarak Düzenle ve özel karakter için ASCII değeri sağlayın.
+> Özel karakter değerleri sağlamak için, sözleşmeyi JSON olarak düzenleyin ve özel karakter için ASCII değeri sağlayın.
 
 ### <a name="validation"></a>Doğrulama
 
 ![İleti göndermek için doğrulama özelliklerini ayarlama](./media/logic-apps-enterprise-integration-x12/x12-10.png) 
 
-Her doğrulama satır tamamladığınızda, başka bir otomatik olarak eklenir. Herhangi bir kural belirtmezseniz, doğrulama "Varsayılan" satır kullanır.
+Her doğrulama satırını tamamladığınızda, başka bir otomatik olarak eklenir. Herhangi bir kural belirtmezseniz, doğrulama "varsayılan" satırını kullanır.
 
 | Özellik | Açıklama |
 | --- | --- |
-| İleti türü |EDI ileti türü seçin. |
-| EDI doğrulaması |EDI doğrulaması şema EDI özellikleri, uzunluk kısıtlamaları, boş veri öğeleri ve sondaki ayırıcılara tarafından tanımlanan veri türleri üzerinde gerçekleştirin. |
-| Genişletilmiş Doğrulama |Veri türü değilse EDI, doğrulama veri öğesi gereksinimdir ve yineleme, numaralandırmalar ve veri öğesi uzunluğu doğrulama (min/maks) izin verilir. |
-| Başta/sonda sıfırlara izin ver |Başta veya sonda sıfır ek korumak ve boşluk karakterleri. Bu karakterleri kaldırın. |
-| Baştaki/Sondaki sıfırları Kırp |Başta veya sonda sıfır karakter kaldırın. |
-| Sonda ayırıcı İlkesi |Sondaki ayırıcılara oluşturur. <p>Seçin **izin** sonundaki sınırlayıcılar ve gönderilen değişim ayırıcılar önlemek için. Değişim, değişim sonundaki sınırlayıcılar ve ayırıcılar varsa, geçerli bildirilmedi. <p>Seçin **isteğe bağlı** değişim ile veya sonundaki sınırlayıcılar ve ayırıcılar olmadan göndermek için. <p>Seçin **zorunlu** gönderilen değişim sonundaki sınırlayıcılar ve ayırıcılar olması gerekiyorsa. |
+| İleti türü |EDI ileti türünü seçin. |
+| EDI doğrulaması |Şema EDI özellikleri, uzunluk kısıtlamaları, boş veri öğeleri ve sondaki ayırıcılar tarafından tanımlanan veri türlerinde EDI doğrulaması gerçekleştirin. |
+| Genişletilmiş Doğrulama |Veri türü EDI değilse, doğrulama veri öğesi gereksinimidir ve izin verilen yineleme, numaralandırmalar ve veri öğesi uzunluğu doğrulaması (min/max). |
+| Baştaki/sondaki sıfırları izin ver |Tüm ek öndeki veya sondaki sıfır ve boşluk karakterlerini koruyun. Bu karakterleri kaldırmayın. |
+| Baştaki/sondaki sıfırları Kırp |Baştaki veya sondaki sıfır karakterleri kaldırın. |
+| Sondaki ayırıcı Ilkesi |Sondaki ayırıcılar oluştur. <p>Gönderilen değişim içindeki sonda ayırıcıları ve ayırıcıları yasakla ' ya **Izin verilmiyor** ' ı seçin. Değişim, sonda sınırlayıcılar ve ayırıcılar içeriyorsa, değişim geçerli değil olarak bildirilmiştir. <p>Sondaki sınırlayıcılar ve ayırıcılar olmadan veya bunlarla karşılıklı değişiklikler göndermek için **Isteğe bağlı** ' yı seçin. <p>Gönderilen değişim için sonda sınırlayıcılar ve ayırıcılar olması gerekiyorsa **zorunlu** ' ı seçin. |
 
-## <a name="find-your-created-agreement"></a>Oluşturulan sözleşmenize Bul
+## <a name="find-your-created-agreement"></a>Oluşturulan sözleşmeyi bulun
 
-1.  Üzerinde anlaşma özelliklerinizi ayarlama işlemini tamamladıktan sonra **Ekle** sayfasında **Tamam** sözleşmenize oluşturma işlemini tamamladıktan ve tümleştirme hesabınıza döndürmek için.
+1.  Tüm anlaşma özelliklerinizi ayarlamayı bitirdikten sonra, **Ekle** sayfasında, sözleşmenizi oluşturmayı tamamladıktan sonra tümleştirme hesabınıza geri dönmek için **Tamam** ' ı seçin.
 
-    Yeni eklenen sözleşmenize artık görünür, **sözleşmeleri** listesi.
+    Yeni eklenen sözleşmeniz artık **anlaşmalar** listenizde görünür.
 
-2.  Tümleştirme hesabı genel bakış sözleşmelerinizi da görüntüleyebilirsiniz. Tümleştirme hesabı menüsünde **genel bakış**, ardından **sözleşmeleri** Döşe.
+2.  Ayrıca, tümleştirme hesabınıza genel bakış konusunda anlaşmalar da görüntüleyebilirsiniz. Tümleştirme hesabı menüsünde **genel bakış**' ı seçin, sonra **anlaşmalar** kutucuğunu seçin.
 
-    !["Anlaşmaları" kutucuğunu seçin](./media/logic-apps-enterprise-integration-x12/x12-1-5.png)   
+    !["Anlaşmalar" kutucuğunu seçin](./media/logic-apps-enterprise-integration-x12/x12-1-5.png)   
 
-## <a name="view-the-swagger"></a>Swagger görüntüleyin
-Bkz: [ayrıntıları swagger](/connectors/x12/). 
+## <a name="view-the-swagger"></a>Swagger 'yi görüntüleme
+[Swagger ayrıntılarına](/connectors/x12/)bakın. 
 
-## <a name="learn-more"></a>Daha fazla bilgi edinin
-* [Enterprise Integration Pack hakkında daha fazla bilgi](../logic-apps/logic-apps-enterprise-integration-overview.md "Enterprise Integration Pack hakkında bilgi edinin")  
+## <a name="learn-more"></a>Daha fazla bilgi
+* [Enterprise Integration Pack hakkında daha fazla bilgi edinin](../logic-apps/logic-apps-enterprise-integration-overview.md "Enterprise Integration Pack hakkında bilgi edinin")  
 

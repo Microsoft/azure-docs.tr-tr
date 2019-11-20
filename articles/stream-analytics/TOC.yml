@@ -7,6 +7,7 @@
     - name: Uçtan uca çözüm desenleri
       href: stream-analytics-solution-patterns.md
 - name: Hızlı Başlangıçlar
+  expanded: true
   items:
     - name: İş oluşturma - Azure portalı
       href: stream-analytics-quick-create-portal.md
@@ -26,8 +27,10 @@
       href: stream-analytics-javascript-user-defined-functions.md
     - name: 4 - Azure Pipelines’ta CI/CD ile dağıtma
       href: stream-analytics-tools-visual-studio-cicd-vsts.md
-    - name: '5 - IoT Edge üzerinde C# UDF çalıştırma'
+    - name: '5 - C# UDF çalıştırma'
       href: stream-analytics-edge-csharp-udf.md
+    - name: 6 - Özel .NET seri durumdan çıkarıcı oluşturma
+      href: custom-deserializer.md
 - name: Örnekler
   items:
     - name: Kod örnekleri
@@ -46,6 +49,8 @@
           href: stream-analytics-define-inputs.md
         - name: Başvuru verisi girişleri
           href: stream-analytics-use-reference-data.md
+        - name: .NET özel seri durumdan çıkarıcıları yazma
+          href: custom-deserializer-examples.md
     - name: Bir iş için çıktı türleri
       items:
         - name: Çıkışlara genel bakış
@@ -92,12 +97,18 @@
           href: stream-analytics-power-bi-dashboard.md
         - name: İşi durdurma veya silme
           href: stream-analytics-clean-up-your-job.md
+        - name: İşi kopyalama veya yedekleme
+          href: copy-job.md
         - name: Güvenilirlik için işleri eşleştirme
           href: stream-analytics-job-reliability.md
-        - name: Yönetilen kimlikle kimlik doğrulaması
+        - name: Yönetilen kimlikle kimlik doğrulaması - ADLS 1. Nesil çıkışı
           href: stream-analytics-managed-identities-adls.md
         - name: SQL başvuru verisi kullanma
           href: sql-reference-data.md
+        - name: Yönetilen kimlikle kimlik doğrulaması - Blob çıkışı
+          href: blob-output-managed-identity.md
+        - name: Yönetilen kimlikle kimlik doğrulaması - Power BI
+          href: powerbi-output-managed-identity.md
     - name: Çözüm oluşturma
       items:
         - name: Twitter yaklaşım analizi
@@ -118,6 +129,9 @@
           href: stream-analytics-threshold-based-rules.md
         - name: Kafka olaylarını işleme
           href: ../event-hubs/event-hubs-kafka-stream-analytics.md
+          maintainContext: true
+        - name: Event Hubs verilerini işleme
+          href: ../event-hubs/process-data-azure-stream-analytics.md
           maintainContext: true
         - name: Jeo-uzamsal senaryolar
           href: geospatial-scenarios.md
@@ -143,6 +157,8 @@
               href: stream-analytics-scale-jobs.md
         - name: ML işlevleriyle ölçeklendirme
           href: stream-analytics-scale-with-machine-learning-functions.md
+        - name: Yeniden bölümleme ile ölçeklendirme
+          href: repartition.md
     - name: Otomatikleştirme
       items:
         - name: .NET SDK’sını kullanma
@@ -165,7 +181,7 @@
           href: stream-analytics-tools-for-visual-studio-edge-jobs.md
         - name: CI/CD işlem hattı ayarlama
           href: stream-analytics-tools-for-visual-studio-cicd.md
-        - name: Edge için .NET UDF yazma
+        - name: .NET UDF yazma
           href: stream-analytics-edge-csharp-udf-methods.md
     - name: Visual Studio Code
       items:
@@ -498,7 +514,7 @@
           href: /stream-analytics-query/join-azure-stream-analytics
           maintainContext: true
         - name: MATCH_RECOGNIZE
-          href: /stream-analytics-query/match-recognize-stream-analytics.md
+          href: /stream-analytics-query/match-recognize-stream-analytics
           maintainContext: true
         - name: JOIN Başvuru Verileri
           href: /stream-analytics-query/reference-data-join-azure-stream-analytics

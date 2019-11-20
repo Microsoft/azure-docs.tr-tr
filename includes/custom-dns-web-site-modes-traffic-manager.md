@@ -4,14 +4,14 @@ ms.service: app-service-web
 ms.topic: include
 ms.date: 11/09/2018
 ms.author: cephalin
-ms.openlocfilehash: 1432db2651ad08a9d261592f6b48fa875a5f1d5f
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 2c21b4e05b2cb5d9560286785205f0dd3613be9b
+ms.sourcegitcommit: 36e9cbd767b3f12d3524fadc2b50b281458122dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188944"
+ms.lasthandoff: 08/20/2019
+ms.locfileid: "69657886"
 ---
-Özel etki alanı adını Traffic Manager ile tümleştirilmiş bir web uygulaması ayarını, yalnızca kullanılabilir **standart** fiyatlandırma katmanı.  
+Traffic Manager ile tümleştirilmiş bir Web uygulamasında özel bir etki alanı adı ayarlamak yalnızca **Standart** fiyatlandırma katmanında kullanılabilir.  
 
-App Service fiyatlandırma katmanları hakkında daha fazla bilgi için uygulamanızı değiştirme dahil olmak üzere fiyatlandırma katmanı kullanıcının bkz [azure'da uygulamanın ölçeğini](../articles/app-service/web-sites-scale.md).
+Uygulamanızın fiyatlandırma katmanını değiştirme da dahil olmak üzere App Service fiyatlandırma katmanları hakkında daha fazla bilgi için bkz. [Azure 'da bir uygulamayı ölçeklendirme](../articles/app-service/manage-scale-up.md).
 

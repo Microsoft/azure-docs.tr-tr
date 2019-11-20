@@ -1,6 +1,6 @@
 ---
-title: Kesintisiz akış Windows Store uygulaması Öğreticisi | Microsoft Docs
-description: Oluşturmak için Azure Media Services'ı kullanmayı öğrenin bir C# kayıttan yürütme düzgün Stream içeriği için bir XML MediaElement denetimi ile Windows Store uygulaması.
+title: Windows Mağazası uygulaması öğreticisini Kesintisiz Akış | Microsoft Docs
+description: Kesintisiz akış içeriğini kayıttan yürütmek için XML MediaElement C# denetimiyle bir Windows Mağazası uygulaması oluşturmak üzere Azure Media Services nasıl kullanacağınızı öğrenin.
 services: media-services
 documentationcenter: ''
 author: juliako
@@ -14,87 +14,87 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/14/2019
 ms.author: juliako
-ms.openlocfilehash: b8c1513838fb848388946e18698a0410aa7a0332
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 9ff961638aa170948d51793a21e86d18dd7e1d80
+ms.sourcegitcommit: 5b76581fa8b5eaebcb06d7604a40672e7b557348
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65949618"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "69016785"
 ---
-# <a name="how-to-build-a-smooth-streaming-windows-store-application"></a>Sorunsuz bir akış Windows Store uygulaması oluşturma  
+# <a name="how-to-build-a-smooth-streaming-windows-store-application"></a>Kesintisiz Akış Windows Mağazası uygulaması oluşturma  
 
-Kesintisiz akış istemci SDK'sı Windows 8 için isteğe bağlı ve canlı kesintisiz akış içeriği oynatabilirsiniz Windows Store uygulamalar oluşturmalarını sağlar. Kesintisiz akış içeriği temel çalınmasını ek olarak, SDK'sı Microsoft PlayReady koruması, kalite düzeyi kısıtlama, DVR, geçiş, durum güncelleştirmeleri (örneğin, kalite düzeyi değişiklikler) için dinleme ses akışı Live gibi zengin özellikler de sağlar ve hata olayları ve benzeri. Desteklenen özellikler daha fazla bilgi için bkz. [sürüm notları](https://www.iis.net/learn/media/smooth-streaming/smooth-streaming-client-sdk-for-windows-8-release-notes). Daha fazla bilgi için [Windows 8 için Player Framework](https://playerframework.codeplex.com/). 
+Windows 8 için Kesintisiz Akış Istemci SDK 'Sı, geliştiricilerin talep üzerine ve canlı Kesintisiz Akış içeriği oynatacak Windows Mağazası uygulamaları oluşturmalarına olanak sağlar. SDK, Kesintisiz Akış içeriğin temel oynatımına ek olarak Microsoft PlayReady koruması, kalite düzeyi kısıtlaması, canlı DVR, ses akışı değiştirme, durum güncelleştirmelerini dinleme, (kalite düzeyi değişiklikler gibi) gibi zengin özellikler de sağlar ve hata olayları vb. Desteklenen özellikler hakkında daha fazla bilgi için [sürüm notlarına](https://www.iis.net/learn/media/smooth-streaming/smooth-streaming-client-sdk-for-windows-8-release-notes)bakın. Daha fazla bilgi için bkz. [Windows 8 Için oynatıcı çerçeve](https://playerframework.codeplex.com/). 
 
-Bu öğreticide, dört ders içerir:
+Bu öğretici dört ders içerir:
 
-1. Bir temel kesintisiz akış Store uygulaması oluşturma
-2. Medya ilerleme durumunu denetlemek için bir kaydırıcı çubuğu Ekle
-3. Kesintisiz akış akışları seçin
-4. Kesintisiz akış parçaları seçin
+1. Temel bir Kesintisiz Akış Mağazası uygulaması oluşturma
+2. Medya Ilerlemesini denetlemek için kaydırıcı çubuğu ekleme
+3. Kesintisiz Akış akışları seçin
+4. Kesintisiz Akış Izleri seçin
 
 ## <a name="prerequisites"></a>Önkoşullar
 > [!NOTE]
-> Windows Store projeleri sürüm 8.1 ve önceki sürümler, Visual Studio 2017'de desteklenmez.  Daha fazla bilgi için bkz. [Visual Studio 2017 Platform Desteği ve Uyumluluk](https://www.visualstudio.com/en-us/productinfo/vs2017-compatibility-vs).
+> Windows Mağazası projeleri sürüm 8,1 ve önceki sürümleri Visual Studio 2017 ' de desteklenmez.  Daha fazla bilgi için bkz. [Visual Studio 2017 Platform Desteği ve Uyumluluk](https://www.visualstudio.com/en-us/productinfo/vs2017-compatibility-vs).
 
-* Windows 8, 32 bit veya 64-bit.
-* Visual Studio 2012 ile bir 2015 sürümleri.
-* [Microsoft kesintisiz akış istemci SDK'sı Windows 8 için tasarım](https://visualstudiogallery.msdn.microsoft.com/04423d13-3b3e-4741-a01c-1ae29e84fea6?SRC=Home https://visualstudiogallery.msdn.microsoft.com/04423d13-3b3e-4741-a01c-1ae29e84fea6?SRC=Home).
+* Windows 8 32-bit veya 64 bit.
+* Visual Studio 2012 ile 2015 arası sürümler.
+* [Windows 8 Için Microsoft kesintisiz akış CLIENT SDK](https://visualstudiogallery.msdn.microsoft.com/04423d13-3b3e-4741-a01c-1ae29e84fea6?SRC=Home).
 
-Tamamlanan çözümü her ders için MSDN geliştirici kodu örnekleri (kod Galerisi) ' indirilebilir: 
+Her ders için tamamlanmış çözüm, MSDN Geliştirici kod örneklerinden (kod Galerisi) indirilebilir: 
 
-* [Ders 1](https://code.msdn.microsoft.com/Smooth-Streaming-Client-0bb1471f) - basit bir Windows 8 sorunsuz bir akış medya oynatıcı 
-* [Ders 2](https://code.msdn.microsoft.com/A-simple-Windows-8-Smooth-ee98f63a) - basit bir Windows 8 sorunsuz bir kaydırıcı çubuğun Media Player akış denetimi 
-* [Ders 3](https://code.msdn.microsoft.com/A-Windows-8-Smooth-883c3b44) - Windows 8 sorunsuz bir akış Media Player ile Stream seçimi  
-* [Ders 4](https://code.msdn.microsoft.com/A-Windows-8-Smooth-aa9e4907) - Windows 8 sorunsuz bir parça seçimi Media Player akış.
+* [1. ders](https://code.msdn.microsoft.com/Smooth-Streaming-Client-0bb1471f) -basit bir Windows 8 kesintisiz akış Media Player, 
+* [2. ders](https://code.msdn.microsoft.com/A-simple-Windows-8-Smooth-ee98f63a) -kaydırıcı çubuğu denetimiyle basit bir Windows 8 kesintisiz akış Media Player 
+* [Ders 3](https://code.msdn.microsoft.com/A-Windows-8-Smooth-883c3b44) -akış seçimi Ile bir Windows 8 kesintisiz akış Media Player,  
+* [4. ders](https://code.msdn.microsoft.com/A-Windows-8-Smooth-aa9e4907) -kesintisiz akış bir Windows 8 Media Player izleme seçimi.
 
-## <a name="lesson-1-create-a-basic-smooth-streaming-store-application"></a>1\. Ders: Bir temel kesintisiz akış Store uygulaması oluşturma
+## <a name="lesson-1-create-a-basic-smooth-streaming-store-application"></a>Ders 1: Temel bir Kesintisiz Akış Mağazası uygulaması oluşturma
 
-Bu derste, bir Windows Store uygulaması kesintisiz Stream yürütülecek MediaElement denetimi içerik oluşturacaksınız.  Çalışan uygulamayı şu şekilde görünür:
+Bu derste, sorunsuz akış içeriğini oynatmak için MediaElement denetimiyle bir Windows Mağazası uygulaması oluşturacaksınız.  Çalışan uygulama şöyle görünür:
 
-![Kesintisiz akış Windows Store uygulaması örneği][PlayerApplication]
+![Kesintisiz Akış Windows Mağazası uygulaması örneği][PlayerApplication]
 
-Windows Store uygulaması geliştirme hakkında daha fazla bilgi için bkz. [geliştirme harika uygulamalar için Windows 8](https://msdn.microsoft.com/windows/apps/br229512.aspx). Bu ders, aşağıdaki yordamları içerir:
+Windows Mağazası uygulaması geliştirme hakkında daha fazla bilgi için bkz. [Windows 8 Için harika uygulamalar geliştirme](https://msdn.microsoft.com/windows/apps/br229512.aspx). Bu ders aşağıdaki yordamları içerir:
 
-1. Windows Store projesi oluşturma
-2. Tasarım kullanıcı arabirimi (XAML)
-3. Dosyanın arkasındaki kodu değiştirin
-4. Derleme ve uygulamayı test etme
+1. Windows Mağazası projesi oluşturma
+2. Kullanıcı arabirimini tasarlama (XAML)
+3. Arka plan kodu dosyasını değiştirme
+4. Uygulamayı derleyin ve test edin
 
-### <a name="to-create-a-windows-store-project"></a>Windows Store projesi oluşturmak için
+### <a name="to-create-a-windows-store-project"></a>Windows Mağazası projesi oluşturmak için
 
-1. Visual Studio'yu çalıştırın; 2012 2015 sürümleri desteklenir.
+1. Visual Studio 'Yu çalıştırma; 2012 ile 2015 arasındaki sürümler desteklenir.
 1. **DOSYA** menüsünde **Yeni**’ye ve sonra **Proje**’ye tıklayın.
-1. Yeni Proje iletişim kutusunda aşağıdaki değerleri seçin veya yazın:
+1. Yeni proje iletişim kutusunda, aşağıdaki değerleri yazın veya seçin:
 
-    | Ad | Değer |
+    | Ad | Value |
     | --- | --- |
-    | Şablon grubu |Yüklü/Şablonlar/Visual C#Windows Store |
+    | Şablon grubu |Yüklü/şablonlar/Visual C#/Windows Mağazası |
     | Şablon |Boş uygulama (XAML) |
     | Ad |SSPlayer |
     | Location |C:\SSTutorials |
     | Çözüm adı |SSPlayer |
-    | Çözüm için dizin oluştur |(Seçili) |
+    | Çözüm için dizin oluştur |seçildiğinde |
 
-1. **Tamam**'ı tıklatın.
+1.           **Tamam**'ı tıklatın.
 
-### <a name="to-add-a-reference-to-the-smooth-streaming-client-sdk"></a>Kesintisiz akış istemci SDK'sına bir başvuru eklemek için
+### <a name="to-add-a-reference-to-the-smooth-streaming-client-sdk"></a>Kesintisiz Akış Istemci SDK 'sına bir başvuru eklemek için
 
-1. Çözüm Gezgini'nden sağ **SSPlayer**ve ardından **Başvuru Ekle**.
+1. Çözüm Gezgini, **Ssplayer**öğesine sağ tıklayın ve ardından **Başvuru Ekle**' ye tıklayın.
 1. Aşağıdaki değerleri yazın veya seçin:
 
-    | Ad | Değer |
+    | Ad | Value |
     | --- | --- |
-    | Başvuru grubu |Windows ve uzantıları |
-    | Başvuru |Microsoft kesintisiz akış istemci SDK'sı Windows 8 ve Microsoft Visual C++ çalışma zamanı paketi için seçin |
+    | Başvuru grubu |Pencereler/uzantılar |
+    | Başvuru |Windows 8 ve Microsoft Visual C++ Runtime paketi için Microsoft kesintisiz akış istemci SDK 'sını seçin |
 
-1. **Tamam** düğmesine tıklayın. 
+1.           **Tamam**'ı tıklatın. 
 
-Başvuru ekledikten sonra hedef Platformu (x64 veya x86) seçmeniz gerekir, ekleyerek başvuruları için herhangi bir CPU platform yapılandırması çalışmaz.  Çözüm Gezgini'nde, sarı bir uyarı işareti şu başvuru eklendi görürsünüz.
+Başvuruları ekledikten sonra, hedeflenen platformu (x64 veya x86) seçmeniz gerekir. başvuruları eklemek herhangi bir CPU platformu yapılandırması için çalışmaz.  Çözüm Gezgini 'nde, bu eklenen başvurular için sarı bir uyarı işareti görürsünüz.
 
-### <a name="to-design-the-player-user-interface"></a>Oynatıcı kullanıcı arabirimini tasarlamak için
+### <a name="to-design-the-player-user-interface"></a>Oynatıcı Kullanıcı arabirimini tasarlamak için
 
-1. Çözüm Gezgini'nde çift tıklayarak **MainPage.xaml** Tasarım Görünümü'nde açın.
-2. Bulun **&lt;kılavuz&gt;** ve **&lt;/Grid&gt;** XAML dosya etiketleri ve iki etiketleri arasına aşağıdaki kodu yapıştırın:
+1. Çözüm Gezgini ' den, **MainPage. xaml** ' ye çift tıklayarak Tasarım görünümünde açın.
+2. Grid ve **/Gridetiketlerini&gt; xaml dosyasında bulun ve aşağıdaki kodu iki etiket arasına yapıştırın: &lt;** **&lt;&gt;**
 
    ```xml
          <Grid.RowDefinitions>
@@ -140,27 +140,27 @@ Başvuru ekledikten sonra hedef Platformu (x64 veya x86) seçmeniz gerekir, ekle
             <TextBox x:Name="txtStatus" FontSize="10" Width="700" VerticalAlignment="Center"/>
          </StackPanel>
    ```
-   MediaElement denetimi medya kayıttan yürütme için kullanılır. Kaydırıcı denetimi sliderProgress adlı bir sonraki derste medya ilerleme durumunu denetlemek için kullanılır.
-3. Tuşuna **CTRL + S** dosyayı kaydetmek için.
+   MediaElement denetimi medyayı kayıttan yürütmek için kullanılır. SliderProgress adlı kaydırıcı denetimi, sonraki derste medya ilerlemesini denetlemek için kullanılacaktır.
+3. Dosyayı kaydetmek için **CTRL + S** tuşlarına basın.
 
-MediaElement denetimi, kesintisiz akış içeriği kullanıma hazır desteklemez. Kesintisiz akış desteğini etkinleştirmek için kesintisiz akış bayt akışı işleyici dosya adı uzantısı ve MIME türü tarafından kaydetmeniz gerekir.  Kaydetmek için Windows.Media ad alanının MediaExtensionManager.RegisterByteStreamHandler yöntemi kullanın.
+MediaElement denetimi Kesintisiz Akış içeriği kullanıma hazır olarak desteklemiyor. Kesintisiz Akış desteğini etkinleştirmek için, Kesintisiz Akış Byte-Stream işleyicisini dosya adı uzantısına ve MIME türüne göre kaydetmeniz gerekir.  Kaydolmak için, Windows. Media ad alanının MediaExtensionManager. RegisterByteStreamHandler yöntemini kullanırsınız.
 
-Bu XAML dosyasında bazı olay işleyicileri denetimleri ile ilişkilendirilir.  Bu olay işleyicileri tanımlamanız gerekir.
+Bu XAML dosyasında, bazı olay işleyicileri denetimlerle ilişkilendirilir.  Bu olay işleyicilerini tanımlamanız gerekir.
 
-### <a name="to-modify-the-code-behind-file"></a>Arka plan kod dosyasında değiştirmek için
+### <a name="to-modify-the-code-behind-file"></a>Arka plan kodu dosyasını değiştirmek için
 
-1. Çözüm Gezgini'nden sağ **MainPage.xaml**ve ardından **kodu görüntüle**.
-2. Dosyasının en üstüne aşağıdakileri ekleyin using deyimi:
+1. Çözüm Gezgini, **MainPage. xaml**öğesine sağ tıklayın ve ardından **kodu görüntüle**' ye tıklayın.
+2. Dosyasının en üstüne aşağıdaki using ifadesini ekleyin:
    
         using Windows.Media;
-3. Başında **MainPage** sınıfında, aşağıdaki veri üyesi ekleyin:
+3. **MainPage** sınıfının başlangıcında aşağıdaki veri üyesini ekleyin:
    
          private MediaExtensionManager extensions = new MediaExtensionManager();
-4. Sonunda **MainPage** oluşturucusu, aşağıdaki iki satırı ekleyin:
+4. **MainPage** oluşturucusunun sonunda aşağıdaki iki satırı ekleyin:
    
         extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "text/xml");
         extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "application/vnd.ms-sstr+xml");
-5. Sonunda **MainPage** sınıfında, aşağıdaki kodu yapıştırın:
+5. **MainPage** sınıfının sonunda, aşağıdaki kodu yapıştırın:
    ```csharp
          # region UI Button Click Events
          private void btnPlay_Click(object sender, RoutedEventArgs e)
@@ -204,56 +204,56 @@ Bu XAML dosyasında bazı olay işleyicileri denetimleri ile ilişkilendirilir. 
          }
          # endregion
    ```
-   SliderProgress_PointerPressed olay işleyicisi burada tanımlanır.  Bu öğreticinin bir sonraki derste ele bunu çalıştırmak, için daha fazla works vardır.
-6. Tuşuna **CTRL + S** dosyayı kaydetmek için.
+   SliderProgress_PointerPressed olay işleyicisi burada tanımlanmıştır.  Bu öğreticinin bir sonraki dersinde ele alınacak olan çalışmaya yönelik daha fazla çalışma vardır.
+6. Dosyayı kaydetmek için **CTRL + S** tuşlarına basın.
 
-Tamamlanmış arka plan kod dosyasında şöyle:
+Arka plan kodu dosyasının bitmesi şuna benzer:
 
-![Visual Studio, kesintisiz akış Windows Store uygulamasında Codeview][CodeViewPic]
+![Windows Mağazası uygulaması Kesintisiz Akış Visual Studio 'da CodeView][CodeViewPic]
 
-### <a name="to-compile-and-test-the-application"></a>Derleme ve uygulamayı test etme
+### <a name="to-compile-and-test-the-application"></a>Uygulamayı derlemek ve test etmek için
 
-1. Gelen **derleme** menüsünde tıklatın **Configuration Manager**.
-2. Değişiklik **etkin çözüm platformu** geliştirme platformunuz eşleştirilecek.
-3. Tuşuna **F6** Projeyi derlemek için. 
+1. **BUILD** menüsünden **Configuration Manager**' ye tıklayın.
+2. **Etkin çözüm platformunu** geliştirme Platformunuzla eşleşecek şekilde değiştirin.
+3. Projeyi derlemek için **F6** tuşuna basın. 
 4. Uygulamayı çalıştırmak için **F5**'e basın.
-5. Uygulamanın üstünde, varsayılan kesintisiz akış URL'sini kullanın veya farklı bir tane girin. 
-6. Tıklayın **kümesi kaynak**. Çünkü **otomatik yürütme** etkin varsayılan olarak, ortamı otomatik olarak çalıştırma.  Medya kullanarak denetleyebilirsiniz **Play**, **duraklatma** ve **Durdur** düğmeleri.  Dikey kaydırıcıyı kullanarak medya birimi denetleyebilirsiniz.  Ancak medya ilerleme durumunu denetleme için kaydırıcıyı yatay tamamen henüz uygulanmadı. 
+5. Uygulamanın üst kısmında, varsayılan Kesintisiz Akış URL 'sini kullanabilir ya da farklı bir tane girebilirsiniz. 
+6. **Kaynağı ayarla**' ya tıklayın. **Otomatik yürütme** varsayılan olarak etkinleştirildiğinden, medya otomatik olarak oynatılır.  **Oynat**, **Duraklat** ve **Durdur** düğmelerini kullanarak medyayı kontrol edebilirsiniz.  Dikey kaydırıcıyı kullanarak medya birimini kontrol edebilirsiniz.  Ancak medya ilerlemesini denetlemeye yönelik yatay kaydırıcı henüz tam olarak uygulanmamıştır. 
 
-Lesson1 tamamladınız.  Bu derste, kesintisiz akış içeriği kayıttan MediaElement denetimi kullanın.  Sonraki derste, kesintisiz akış içeriği, ilerleme durumunu denetlemek için bir kaydırıcı ekleyeceksiniz.
+Lesson1 tamamladınız.  Bu derste, Kesintisiz Akış içeriğini oynatmak için bir MediaElement denetimi kullanırsınız.  Sonraki derste, Kesintisiz Akış içeriğin ilerlemesini denetlemek için bir kaydırıcı ekleyeceksiniz.
 
-## <a name="lesson-2-add-a-slider-bar-to-control-the-media-progress"></a>2\. Ders: Medya ilerleme durumunu denetlemek için bir kaydırıcı çubuğu Ekle
+## <a name="lesson-2-add-a-slider-bar-to-control-the-media-progress"></a>2\. ders: Medya Ilerlemesini denetlemek için kaydırıcı çubuğu ekleme
 
-Ders 1'de, kayıttan yürütme kesintisiz akış medya içeriği için bir MediaElement XAML denetimi ile bir Windows Store uygulaması oluşturdunuz.  Bu, başlatma, durdurma ve duraklatma gibi bazı temel medya işlevleri birlikte gelir.  Bu derste, uygulamayı bir kaydırıcı çubuğu denetimi ekleyeceksiniz.
+1\. derste, Kesintisiz Akış medya içeriğini kayıttan yürütmek için MediaElement XAML denetimiyle bir Windows Mağazası uygulaması oluşturdunuz.  Başlat, durdur ve Duraklat gibi bazı temel medya işlevlerini sunar.  Bu derste, uygulamaya bir kaydırıcı çubuğu denetimi ekleyeceksiniz.
 
-Bu öğreticide, MediaElement denetimi geçerli konumuna bağlı kaydırıcı konumu güncelleştirmek için bir zamanlayıcı kullanacağız.  Ayrıca kaydırıcı başlangıç ve bitiş durumunda Canlı içerik güncelleştirilmesi gerekiyor zaman.  Bu, daha iyi Uyarlamalı kaynak güncelleştirme olayda işlenebilir.
+Bu öğreticide, MediaElement denetiminin geçerli konumuna göre kaydırıcı konumunu güncelleştirmek için bir Zamanlayıcı kullanacağız.  Kaydırıcı başlangıç ve bitiş saatinin de canlı içerik olması durumunda güncelleştirilmeleri gerekir.  Bu, uyarlamalı kaynak güncelleştirme olayında daha iyi işlenebilir.
 
-Medya kaynakları medya verileri üreten nesneleridir.  Kaynak Çözümleyici bir URL veya bayt akışı alır ve bu içerik için uygun bir medya kaynağı oluşturur.  Kaynak çözümleyici medya kaynakları oluşturmak uygulamalar standart yoludur. 
+Medya kaynakları, medya verileri oluşturan nesnelerdir.  Kaynak çözümleyici bir URL veya bayt akışı alır ve bu içerik için uygun medya kaynağını oluşturur.  Kaynak çözümleyici, uygulamaların medya kaynakları oluşturması için standart bir yoldur. 
 
-Bu ders, aşağıdaki yordamları içerir:
+Bu ders aşağıdaki yordamları içerir:
 
-1. Kesintisiz akış işleyicisini kaydetmek 
-2. Uyarlamalı kaynak yöneticisi düzeyinde olay işleyicileri ekleme
-3. Uyarlamalı kaynak düzeyi olay işleyicileri ekleme
+1. Kesintisiz Akış işleyicisini kaydetme 
+2. Uyarlamalı Kaynak Yöneticisi düzeyi olay işleyicilerini ekleme
+3. Uyarlamalı kaynak düzeyi olay işleyicilerini ekleme
 4. MediaElement olay işleyicileri ekleme
-5. Kaydırıcı çubuğu ilgili kod ekleme
-6. Derleme ve uygulamayı test etme
+5. Kaydırıcı çubukla ilgili kodu ekle
+6. Uygulamayı derleyin ve test edin
 
-### <a name="to-register-the-smooth-streaming-byte-stream-handler-and-pass-the-propertyset"></a>Kesintisiz akış bayt akışı işleyicisi kaydetmek ve propertyset geçirmek için
+### <a name="to-register-the-smooth-streaming-byte-stream-handler-and-pass-the-propertyset"></a>Kesintisiz Akış Byte-Stream işleyicisini kaydetmek ve PropertySet 'i geçirmek için
 
-1. Çözüm Gezgini'nden sağ tıklayın **MainPage.xaml**ve ardından **kodu görüntüle**.
-2. Dosyasının başında, aşağıdaki ekleyin using deyimi:
+1. Çözüm Gezgini, **MainPage. xaml**öğesine sağ tıklayın ve ardından **kodu görüntüle**' ye tıklayın.
+2. Dosyanın başlangıcında, aşağıdaki using ifadesini ekleyin:
 
    ```csharp
         using Microsoft.Media.AdaptiveStreaming;
    ```
-3. MainPage sınıfının başına aşağıdaki veri üyelerini ekleyin:
+3. MainPage sınıfının başlangıcında aşağıdaki veri üyelerini ekleyin:
 
    ```csharp
          private Windows.Foundation.Collections.PropertySet propertySet = new Windows.Foundation.Collections.PropertySet();             
          private IAdaptiveSourceManager adaptiveSourceManager;
    ```
-4. İçinde **MainPage** oluşturucusu, sonra aşağıdaki kodu ekleyin **bu. Components() başlatılamıyor;**  satır ve kayıt kodu bir önceki derste yazılan satır:
+4. **MainPage** oluşturucusunun içinde, bundan sonra aşağıdaki kodu ekleyin **. Bileşenleri başlatın ();** önceki derste yazılan satır ve kayıt kodu satırları:
 
    ```csharp
         // Gets the default instance of AdaptiveSourceManager which manages Smooth 
@@ -263,7 +263,7 @@ Bu ders, aşağıdaki yordamları içerir:
         // {A5CE1DE8-1D00-427B-ACEF-FB9A3C93DE2D}" must be hardcoded.
         propertySet["{A5CE1DE8-1D00-427B-ACEF-FB9A3C93DE2D}"] = adaptiveSourceManager;
    ```
-5. İçinde **MainPage** oluşturucusunu eklemek için iki RegisterByteStreamHandler yöntemleri değiştirme İleri parametreleri:
+5. **MainPage** oluşturucusunun içinde, Iki RegisterByteStreamHandler yöntemini değiştirerek ileri parametrelerini ekleyin:
 
    ```csharp
          // Registers Smooth Streaming byte-stream handler for ".ism" extension and, 
@@ -282,17 +282,17 @@ Bu ders, aşağıdaki yordamları içerir:
             "application/vnd.ms-sstr+xml", 
          propertySet);
    ```
-6. Tuşuna **CTRL + S** dosyayı kaydetmek için.
+6. Dosyayı kaydetmek için **CTRL + S** tuşlarına basın.
 
-### <a name="to-add-the-adaptive-source-manager-level-event-handler"></a>Uyarlamalı kaynak yöneticisi düzeyinde olay işleyicisi eklemek için
+### <a name="to-add-the-adaptive-source-manager-level-event-handler"></a>Uyarlamalı Kaynak Yöneticisi düzeyi olay işleyicisini eklemek için
 
-1. Çözüm Gezgini'nden sağ tıklayın **MainPage.xaml**ve ardından **kodu görüntüle**.
-2. İçinde **MainPage** sınıfında, aşağıdaki veri üyesi ekleyin:
+1. Çözüm Gezgini, **MainPage. xaml**öğesine sağ tıklayın ve ardından **kodu görüntüle**' ye tıklayın.
+2. **MainPage** sınıfının içinde aşağıdaki veri üyesini ekleyin:
 
    ```csharp
      private AdaptiveSource adaptiveSource = null;
    ```
-3. Sonunda **MainPage** sınıfında, aşağıdaki olay işleyicisini ekleyin:
+3. **MainPage** sınıfının sonunda aşağıdaki olay işleyicisini ekleyin:
 
    ```csharp
          # region Adaptive Source Manager Level Events
@@ -304,24 +304,24 @@ Bu ders, aşağıdaki yordamları içerir:
 
          # endregion Adaptive Source Manager Level Events
    ```
-4. Sonunda **MainPage** oluşturucusu, Uyarlamalı kaynak açık olaya abone olmak için aşağıdaki satırı ekleyin:
+4. **Ana sayfa** oluşturucusunun sonunda, uyarlamalı kaynak aç olayına abone olmak için aşağıdaki satırı ekleyin:
 
    ```csharp
          adaptiveSourceManager.AdaptiveSourceOpenedEvent += 
            new AdaptiveSourceOpenedEventHandler(mediaElement_AdaptiveSourceOpened);
    ```
-5. Tuşuna **CTRL + S** dosyayı kaydetmek için.
+5. Dosyayı kaydetmek için **CTRL + S** tuşlarına basın.
 
 ### <a name="to-add-adaptive-source-level-event-handlers"></a>Uyarlamalı kaynak düzeyi olay işleyicileri eklemek için
 
-1. Çözüm Gezgini'nden sağ tıklayın **MainPage.xaml**ve ardından **kodu görüntüle**.
-2. İçinde **MainPage** sınıfında, aşağıdaki veri üyesi ekleyin:
+1. Çözüm Gezgini, **MainPage. xaml**öğesine sağ tıklayın ve ardından **kodu görüntüle**' ye tıklayın.
+2. **MainPage** sınıfının içinde aşağıdaki veri üyesini ekleyin:
 
    ```csharp
      private AdaptiveSourceStatusUpdatedEventArgs adaptiveSourceStatusUpdate; 
      private Manifest manifestObject;
    ```
-3. Sonunda **MainPage** sınıfında, aşağıdaki olay işleyicisini ekleyin:
+3. **MainPage** sınıfının sonunda aşağıdaki olay işleyicilerini ekleyin:
 
    ```csharp
          # region Adaptive Source Level Events
@@ -346,7 +346,7 @@ Bu ders, aşağıdaki yordamları içerir:
 
          # endregion Adaptive Source Level Events
    ```
-4. Sonunda **mediaElement AdaptiveSourceOpened** yöntemi, olaylara abone olmak için aşağıdaki kodu ekleyin:
+4. **MediaElement AdaptiveSourceOpened** yönteminin sonunda olaylara abone olmak için aşağıdaki kodu ekleyin:
 
    ```csharp
          adaptiveSource.ManifestReadyEvent +=
@@ -359,14 +359,14 @@ Bu ders, aşağıdaki yordamları içerir:
 
             mediaElement_AdaptiveSourceFailed;
    ```
-5. Tuşuna **CTRL + S** dosyayı kaydetmek için.
+5. Dosyayı kaydetmek için **CTRL + S** tuşlarına basın.
 
-Aynı olayları, uygulamadaki tüm ortam öğeleri için ortak işlevselliği işlemek için kullanılan Uyarlamalı kaynak yöneticisi düzeyinde de kullanılabilir. Her AdaptiveSource kendi olaylarını içerir ve tüm AdaptiveSource olayları altında AdaptiveSourceManager basamaklı.
+Aynı olaylar, uyarlamalı Kaynak Yöneticisi düzeyinde de mevcuttur ve bu, uygulamadaki tüm medya öğelerinde ortak işlevselliği işlemek için kullanılabilir. Her AdaptiveSource kendi olaylarını içerir ve tüm AdaptiveSource olayları AdaptiveSourceManager altında basamaklandıralınacaktır.
 
 ### <a name="to-add-media-element-event-handlers"></a>Medya öğesi olay işleyicileri eklemek için
 
-1. Çözüm Gezgini'nden sağ tıklayın **MainPage.xaml**ve ardından **kodu görüntüle**.
-2. Sonunda **MainPage** sınıfında, aşağıdaki olay işleyicisini ekleyin:
+1. Çözüm Gezgini, **MainPage. xaml**öğesine sağ tıklayın ve ardından **kodu görüntüle**' ye tıklayın.
+2. **MainPage** sınıfının sonunda aşağıdaki olay işleyicilerini ekleyin:
 
    ```csharp
          # region Media Element Event Handlers
@@ -390,37 +390,37 @@ Aynı olayları, uygulamadaki tüm ortam öğeleri için ortak işlevselliği i�
 
          # endregion Media Element Event Handlers
    ```
-3. Sonunda **MainPage** oluşturucusu, alt simge olaylar için aşağıdaki kodu ekleyin:
+3. **MainPage** oluşturucusunun sonunda, olaylara alt indis eklemek için aşağıdaki kodu ekleyin:
 
    ```csharp
          mediaElement.MediaOpened += MediaOpened;
          mediaElement.MediaEnded += MediaEnded;
          mediaElement.MediaFailed += MediaFailed;
    ```
-4. Tuşuna **CTRL + S** dosyayı kaydetmek için.
+4. Dosyayı kaydetmek için **CTRL + S** tuşlarına basın.
 
-### <a name="to-add-slider-bar-related-code"></a>İlgili kod kaydırıcı çubuğu Ekle
+### <a name="to-add-slider-bar-related-code"></a>Kaydırıcı çubukla ilgili kodu eklemek için
 
-1. Çözüm Gezgini'nden sağ tıklayın **MainPage.xaml**ve ardından **kodu görüntüle**.
-2. Dosyasının başında, aşağıdaki ekleyin using deyimi:
+1. Çözüm Gezgini, **MainPage. xaml**öğesine sağ tıklayın ve ardından **kodu görüntüle**' ye tıklayın.
+2. Dosyanın başlangıcında, aşağıdaki using ifadesini ekleyin:
 
    ```csharp
         using Windows.UI.Core;
    ```
-3. İçinde **MainPage** sınıfında, aşağıdaki veri üyelerini ekleyin:
+3. **MainPage** sınıfının içinde aşağıdaki veri üyelerini ekleyin:
 
    ```csharp
          public static CoreDispatcher _dispatcher;
          private DispatcherTimer sliderPositionUpdateDispatcher;
    ```
-4. Sonunda **MainPage** Oluşturucu aşağıdaki kodu ekleyin:
+4. **MainPage** oluşturucusunun sonunda aşağıdaki kodu ekleyin:
 
    ```csharp
          _dispatcher = Window.Current.Dispatcher;
          PointerEventHandler pointerpressedhandler = new PointerEventHandler(sliderProgress_PointerPressed);
          sliderProgress.AddHandler(Control.PointerPressedEvent, pointerpressedhandler, true);    
    ```
-5. Sonunda **MainPage** sınıfında, aşağıdaki kodu ekleyin:
+5. **MainPage** sınıfının sonunda aşağıdaki kodu ekleyin:
 
    ```csharp
          # region sliderMediaPlayer
@@ -507,7 +507,7 @@ Aynı olayları, uygulamadaki tüm ortam öğeleri için ortak işlevselliği i�
    ```
 
    > [!NOTE]
-   > CoreDispatcher olmayan UI iş parçacığından UI iş parçacığı için değişiklik yapmak için kullanılır. Dağıtıcı iş parçacığı üzerinde performans sorunu durumunda Geliştirici UI-güncelleştirmek istediğiniz öğe tarafından sağlanan dağıtıcı kullanmayı seçebilirsiniz.  Örneğin:
+   > CoreDispatcher, UI olmayan Iş parçacığından kullanıcı arabirimi iş parçacığında değişiklik yapmak için kullanılır. Bir dağıtıcı iş parçacığı üzerinde performans sorunu olması durumunda, geliştirici, güncelleştirmek istedikleri Kullanıcı arabirimi öğesi tarafından sunulan Dispatcher 'ı kullanmayı seçebilir.  Örneğin:
 
    ```csharp
          await sliderProgress.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { TimeSpan 
@@ -517,42 +517,42 @@ Aynı olayları, uygulamadaki tüm ortam öğeleri için ortak işlevselliği i�
 
          sliderProgress.Maximum = absvalue; }); 
    ```
-6. Sonunda **mediaElement_AdaptiveSourceStatusUpdated** yöntemine aşağıdaki kodu ekleyin:
+6. **MediaElement_AdaptiveSourceStatusUpdated** yönteminin sonuna aşağıdaki kodu ekleyin:
 
    ```csharp
          setSliderStartTime(args.StartTime);
          setSliderEndTime(args.EndTime);
    ```
-7. Sonunda **MediaOpened** yöntemine aşağıdaki kodu ekleyin:
+7. **Mediaaçıldı** yönteminin sonunda aşağıdaki kodu ekleyin:
 
    ```csharp
          sliderProgress.StepFrequency = SliderFrequency(mediaElement.NaturalDuration.TimeSpan);
          sliderProgress.Width = mediaElement.Width;
          setupTimer();
    ```
-8. Tuşuna **CTRL + S** dosyayı kaydetmek için.
+8. Dosyayı kaydetmek için **CTRL + S** tuşlarına basın.
 
-### <a name="to-compile-and-test-the-application"></a>Derleme ve uygulamayı test etme
+### <a name="to-compile-and-test-the-application"></a>Uygulamayı derlemek ve test etmek için
 
-1. Tuşuna **F6** Projeyi derlemek için. 
+1. Projeyi derlemek için **F6** tuşuna basın. 
 2. Uygulamayı çalıştırmak için **F5**'e basın.
-3. Uygulamanın üstünde, varsayılan kesintisiz akış URL'sini kullanın veya farklı bir tane girin. 
-4. Tıklayın **kümesi kaynak**. 
+3. Uygulamanın üst kısmında, varsayılan Kesintisiz Akış URL 'sini kullanabilir ya da farklı bir tane girebilirsiniz. 
+4. **Kaynağı ayarla**' ya tıklayın. 
 5. Kaydırıcı çubuğunu test edin.
 
-Ders 2 tamamladınız.  Bu derste bir kaydırıcı uygulamaya eklenir. 
+2\. ders tamamladınız.  Bu derste, uygulamaya bir kaydırıcı eklediniz. 
 
-## <a name="lesson-3-select-smooth-streaming-streams"></a>3\. Ders: Kesintisiz akış akışları seçin
-Kesintisiz akış, içerik akışı görüntüleyicileri tarafından seçilebilir birden çok dil ses izleri ile yeteneğine sahiptir.  Bu derste, akışları seçilecek görüntüleyiciler olanak tanır. Bu ders, aşağıdaki yordamları içerir:
+## <a name="lesson-3-select-smooth-streaming-streams"></a>Ders 3: Kesintisiz Akış akışları seçin
+Kesintisiz Akış, görüntüleyiciler tarafından seçilebilen birden çok dil ses parçalarıyla içerik akışına olanak sağlar.  Bu derste, görüntüleyicilerin akış seçmesini sağlayacak şekilde etkinleştirecektir. Bu ders aşağıdaki yordamları içerir:
 
 1. XAML dosyasını değiştirme
-2. Dosyanın arkasındaki kodu değiştirin
-3. Derleme ve uygulamayı test etme
+2. Arka plan kodu dosyasını değiştirme
+3. Uygulamayı derleyin ve test edin
 
 ### <a name="to-modify-the-xaml-file"></a>XAML dosyasını değiştirmek için
 
-1. Çözüm Gezgini'nden sağ **MainPage.xaml**ve ardından **Görünüm Tasarımcısı**.
-2. Bulun &lt;Grid.RowDefinitions&gt;ve RowDefinitions görünür gibi değiştirin:
+1. Çözüm Gezgini, **MainPage. xaml**öğesine sağ tıklayın ve ardından **tasarımcıyı görüntüle**' ye tıklayın.
+2. Grid &lt;. RowDefinitions&gt;' ı bulun ve RowDefinitions gibi görünen satır tanımlarını değiştirin:
 
    ```xml
          <Grid.RowDefinitions>            
@@ -563,7 +563,7 @@ Kesintisiz akış, içerik akışı görüntüleyicileri tarafından seçilebili
             <RowDefinition Height="50"/>
          </Grid.RowDefinitions>
    ```
-3. İçinde &lt;kılavuz&gt;&lt;/Grid&gt; etiketler, böylece kullanıcılar kullanılabilir akışları listesini görmek ve akış'ı seçin, bir listbox denetimi tanımlamak için aşağıdaki kodu ekleyin:
+3. &lt;Kılavuz&gt;/Grid&gt; etiketleri içinde, bir ListBox denetimini tanımlamak için aşağıdaki kodu ekleyin, böylece kullanıcılar kullanılabilir akışlar listesini görebilir ve akışlar ' ı seçin:&lt;
 
    ```xml
          <Grid Name="gridStreamAndBitrateSelection" Grid.Row="3">
@@ -590,11 +590,11 @@ Kesintisiz akış, içerik akışı görüntüleyicileri tarafından seçilebili
             </StackPanel>
          </Grid>
    ```
-4. Tuşuna **CTRL + S** değişiklikleri kaydedin.
+4. Değişiklikleri kaydetmek için **CTRL + S** tuşlarına basın.
 
-### <a name="to-modify-the-code-behind-file"></a>Arka plan kod dosyasında değiştirmek için
+### <a name="to-modify-the-code-behind-file"></a>Arka plan kodu dosyasını değiştirmek için
 
-1. Çözüm Gezgini'nden sağ **MainPage.xaml**ve ardından **kodu görüntüle**.
+1. Çözüm Gezgini, **MainPage. xaml**öğesine sağ tıklayın ve ardından **kodu görüntüle**' ye tıklayın.
 2. SSPlayer ad alanı içinde yeni bir sınıf ekleyin:
 
    ```csharp
@@ -643,7 +643,7 @@ Kesintisiz akış, içerik akışı görüntüleyicileri tarafından seçilebili
         }
         #endregion class Stream
    ```
-3. MainPage sınıfının başına aşağıdaki değişken tanımları ekleyin:
+3. MainPage sınıfının başlangıcında aşağıdaki değişken tanımlarını ekleyin:
 
    ```csharp
          private List<Stream> availableStreams;
@@ -651,7 +651,7 @@ Kesintisiz akış, içerik akışı görüntüleyicileri tarafından seçilebili
          private List<Stream> availableTextStreams;
          private List<Stream> availableVideoStreams;
    ```
-4. MainPage sınıfının içinde şu bölge ekleyin:
+4. MainPage sınıfının içinde aşağıdaki bölgeyi ekleyin:
    ```csharp
         #region stream selection
         ///<summary>
@@ -789,13 +789,13 @@ Kesintisiz akış, içerik akışı görüntüleyicileri tarafından seçilebili
         }
         #endregion stream selection
    ```
-5. MediaElement_ManifestReady yöntemini bulun, işlevin sonuna aşağıdaki kodu ekleyin:
+5. MediaElement_ManifestReady metodunu bulun, işlevin sonuna aşağıdaki kodu ekleyin:
    ```csharp
         getStreams(manifestObject);
         refreshAvailableStreamsListBoxItemSource();
    ```
-    Bu nedenle MediaElement bildirimi hazır olduğunda, kod kullanılabilir akışlarının listesini alır ve UI liste kutusu listesi ile doldurur.
-6. MainPage sınıfının içinde kullanıcı Arabirimi bulun düğmeler olayları bölge'ye tıklayın ve ardından aşağıdaki işlevi ekleyin:
+    Bu nedenle, MediaElement bildirimi hazır olduğunda, kod kullanılabilir akışlarının bir listesini alır ve UI liste kutusunu listeyle doldurur.
+6. MainPage sınıfının içinde, UI düğmeleri ' ni tıklatın olaylar Bölgesi ' ni bulun ve aşağıdaki işlev tanımını ekleyin:
    ```csharp
         private void btnChangeStream_Click(object sender, RoutedEventArgs e)
         {
@@ -809,28 +809,28 @@ Kesintisiz akış, içerik akışı görüntüleyicileri tarafından seçilebili
         }
    ```
 
-### <a name="to-compile-and-test-the-application"></a>Derleme ve uygulamayı test etme
+### <a name="to-compile-and-test-the-application"></a>Uygulamayı derlemek ve test etmek için
 
-1. Tuşuna **F6** Projeyi derlemek için. 
+1. Projeyi derlemek için **F6** tuşuna basın. 
 2. Uygulamayı çalıştırmak için **F5**'e basın.
-3. Uygulamanın üstünde, varsayılan kesintisiz akış URL'sini kullanın veya farklı bir tane girin. 
-4. Tıklayın **kümesi kaynak**. 
-5. Audio_eng varsayılan dildir. Audio_es audio_eng arasında geçiş yapmak bu seçeneği deneyin. Yeni bir akışı seçtiğiniz her durumda, Gönder düğmesine tıklamanız gerekir.
+3. Uygulamanın üst kısmında, varsayılan Kesintisiz Akış URL 'sini kullanabilir ya da farklı bir tane girebilirsiniz. 
+4. **Kaynağı ayarla**' ya tıklayın. 
+5. Varsayılan dil audio_eng ' dir. Audio_eng ve audio_es arasında geçiş yapmayı deneyin. Her seferinde yeni bir akış seçersiniz, Gönder düğmesine tıklamanız gerekir.
 
-Ders 3 tamamladınız.  Bu derste, akışları seçmek için işlevselliği ekleyin.
+3\. ders tamamladınız.  Bu derste, akışları seçmek için işlevselliği eklersiniz.
 
-## <a name="lesson-4-select-smooth-streaming-tracks"></a>4\. Ders: Kesintisiz akış parçaları seçin
+## <a name="lesson-4-select-smooth-streaming-tracks"></a>Ders 4: Kesintisiz Akış izleri seçin
 
-Birden fazla video dosyaları farklı kalite düzeylerine (bit hızlarında) ve çözümleri ile kodlanmış kesintisiz akış sunu içerebilir. Bu derste, parçalar seçmek kullanıcıların olanak sağlar. Bu ders, aşağıdaki yordamları içerir:
+Kesintisiz Akış sunusu, farklı kalite düzeyleri (bit hızları) ve çözünürlüklerle kodlanmış birden çok video dosyası içerebilir. Bu derste, kullanıcıların izleri seçmesini sağlayacak. Bu ders aşağıdaki yordamları içerir:
 
 1. XAML dosyasını değiştirme
-2. Dosyanın arkasındaki kodu değiştirin
-3. Derleme ve uygulamayı test etme
+2. Arka plan kodu dosyasını değiştirme
+3. Uygulamayı derleyin ve test edin
 
 ### <a name="to-modify-the-xaml-file"></a>XAML dosyasını değiştirmek için
 
-1. Çözüm Gezgini'nden sağ **MainPage.xaml**ve ardından **Görünüm Tasarımcısı**.
-2. Bulun &lt;kılavuz&gt; etiket adıyla **gridStreamAndBitrateSelection**, etiket sonuna aşağıdaki kodu ekleyin:
+1. Çözüm Gezgini, **MainPage. xaml**öğesine sağ tıklayın ve ardından **tasarımcıyı görüntüle**' ye tıklayın.
+2. **Gridstreadikbitrateselection**adlı&gt; Gridetiketinibulun,etiketinsonunaaşağıdakikoduekleyin:&lt;
    ```xml
          <StackPanel Name="spBitRateSelection" Grid.Row="1" Grid.Column="1">
          <StackPanel Orientation="Horizontal">
@@ -847,11 +847,11 @@ Birden fazla video dosyaları farklı kalite düzeylerine (bit hızlarında) ve 
          </ListBox>
          </StackPanel>
    ```
-3. Tuşuna **CTRL + S** değişiklikleri kaydetmek için
+3. Değişiklikleri kaydetmek için **CTRL + S** tuşlarına basın
 
-### <a name="to-modify-the-code-behind-file"></a>Arka plan kod dosyasında değiştirmek için
+### <a name="to-modify-the-code-behind-file"></a>Arka plan kodu dosyasını değiştirmek için
 
-1. Çözüm Gezgini'nden sağ **MainPage.xaml**ve ardından **kodu görüntüle**.
+1. Çözüm Gezgini, **MainPage. xaml**öğesine sağ tıklayın ve ardından **kodu görüntüle**' ye tıklayın.
 2. SSPlayer ad alanı içinde yeni bir sınıf ekleyin:
    ```csharp
         #region class Track
@@ -891,11 +891,11 @@ Birden fazla video dosyaları farklı kalite düzeylerine (bit hızlarında) ve 
         }
         #endregion class Track
    ```
-3. MainPage sınıfının başına aşağıdaki değişken tanımları ekleyin:
+3. MainPage sınıfının başlangıcında aşağıdaki değişken tanımlarını ekleyin:
    ```csharp
         private List<Track> availableTracks;
    ```
-4. MainPage sınıfının içinde şu bölge ekleyin:
+4. MainPage sınıfının içinde aşağıdaki bölgeyi ekleyin:
    ```csharp
         #region track selection
         /// <summary>
@@ -994,12 +994,12 @@ Birden fazla video dosyaları farklı kalite düzeylerine (bit hızlarında) ve 
         }
         #endregion track selection
    ```
-5. MediaElement_ManifestReady yöntemini bulun, işlevin sonuna aşağıdaki kodu ekleyin:
+5. MediaElement_ManifestReady metodunu bulun, işlevin sonuna aşağıdaki kodu ekleyin:
    ```csharp
          getTracks(manifestObject);
          refreshAvailableTracksListBoxItemSource();
    ```
-6. MainPage sınıfının içinde kullanıcı Arabirimi bulun düğmeler olayları bölge'ye tıklayın ve ardından aşağıdaki işlevi ekleyin:
+6. MainPage sınıfının içinde, UI düğmeleri ' ni tıklatın olaylar Bölgesi ' ni bulun ve aşağıdaki işlev tanımını ekleyin:
    ```csharp
          private void btnChangeStream_Click(object sender, RoutedEventArgs e)
          {
@@ -1013,15 +1013,15 @@ Birden fazla video dosyaları farklı kalite düzeylerine (bit hızlarında) ve 
          }
    ```
    
-### <a name="to-compile-and-test-the-application"></a>Derleme ve uygulamayı test etme
+### <a name="to-compile-and-test-the-application"></a>Uygulamayı derlemek ve test etmek için
 
-1. Tuşuna **F6** Projeyi derlemek için. 
+1. Projeyi derlemek için **F6** tuşuna basın. 
 2. Uygulamayı çalıştırmak için **F5**'e basın.
-3. Uygulamanın üstünde, varsayılan kesintisiz akış URL'sini kullanın veya farklı bir tane girin. 
-4. Tıklayın **kümesi kaynak**. 
-5. Varsayılan olarak, tüm video akışı aşamalardan seçilir. Bit hızı değişiklikleri denemeler yapmak için en düşük bit hızını seçin ve ardından yüksek bit hızı seçin. Her bir değişiklikten sonra Gönder'i gerekir.  Video kalitesi değişiklikleri görebilirsiniz.
+3. Uygulamanın üst kısmında, varsayılan Kesintisiz Akış URL 'sini kullanabilir ya da farklı bir tane girebilirsiniz. 
+4. **Kaynağı ayarla**' ya tıklayın. 
+5. Varsayılan olarak, video akışının tüm parçaları seçilidir. Bit hızı değişikliklerini denemek için kullanılabilir en düşük bit hızını seçip kullanılabilir en yüksek bit oranını seçebilirsiniz. Her değişiklikten sonra Gönder ' e tıklamanız gerekir.  Video kalitesi değişikliklerini görebilirsiniz.
 
-Ders 4 tamamladınız.  Bu derste, parçaları seçmek için işlevselliği ekleyin.
+4\. ders tamamladınız.  Bu derste, parçaları seçmek için işlevselliği eklersiniz.
 
 ## <a name="media-services-learning-paths"></a>Media Services’i öğrenme yolları
 
@@ -1031,8 +1031,8 @@ Ders 4 tamamladınız.  Bu derste, parçaları seçmek için işlevselliği ekle
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
 
 ## <a name="other-resources"></a>Diğer kaynaklar:
-* [Gelişmiş Özellikler ile bir kesintisiz akış Windows 8 JavaScript uygulaması oluşturmayı öğrenin](https://blogs.iis.net/cenkd/archive/2012/08/10/how-to-build-a-smooth-streaming-windows-8-javascript-application-with-advanced-features.aspx)
-* [Kesintisiz akış teknik genel bakış](https://www.iis.net/learn/media/on-demand-smooth-streaming/smooth-streaming-technical-overview)
+* [Gelişmiş özelliklerle Kesintisiz Akış Windows 8 JavaScript uygulaması oluşturma](https://blogs.iis.net/cenkd/archive/2012/08/10/how-to-build-a-smooth-streaming-windows-8-javascript-application-with-advanced-features.aspx)
+* [Kesintisiz Akış teknik genel bakış](https://www.iis.net/learn/media/on-demand-smooth-streaming/smooth-streaming-technical-overview)
 
 [PlayerApplication]: ./media/media-services-build-smooth-streaming-apps/SSClientWin8-1.png
 [CodeViewPic]: ./media/media-services-build-smooth-streaming-apps/SSClientWin8-2.png

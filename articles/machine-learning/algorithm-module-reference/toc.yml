@@ -1,0 +1,142 @@
+- name: Tasarımcı algoritmaları ve modülleri
+  href: module-reference.md
+- name: Veri girişi ve çıkışı
+  items:
+    - name: Verileri İçeri Aktarma
+      href: import-data.md
+    - name: Verileri El ile Girme
+      href: enter-data-manually.md
+    - name: Verileri Dışarı Aktarma
+      href: export-data.md
+- name: Veri dönüştürme
+  items:
+    - name: Sütun Ekleme
+      href: add-columns.md
+    - name: Satır Ekleme
+      href: add-rows.md
+    - name: SQL Dönüşümü Uygulama
+      href: apply-sql-transformation.md
+    - name: CSV’ye dönüştürme
+      href: convert-to-csv.md
+    - name: Veri kümesine dönüştürme
+      href: convert-to-dataset.md
+    - name: Eksik Verileri Temizleme
+      href: clean-missing-data.md
+    - name: Meta Verileri Düzenleme
+      href: edit-metadata.md
+    - name: Verileri birleştirme
+      href: join-data.md
+    - name: Verileri Normalleştirme
+      href: normalize-data.md
+    - name: Yinelenen Satırları Kaldırma
+      href: remove-duplicate-rows.md
+    - name: Sütun Dönüştürmeyi Seçme
+      href: select-columns-transform.md
+    - name: Veri kümesindeki Sütunları seçme
+      href: select-columns-in-dataset.md
+- name: Örnekleme
+  items:
+    - name: Modeli Çapraz Doğrulama
+      href: cross-validate-model.md
+    - name: Bölüm ve Örnek
+      href: partition-and-sample.md
+    - name: SMOTE
+      href: smote.md
+    - name: Verileri Bölme
+      href: split-data.md
+- name: Özellik seçimi
+  items:
+    - name: Filtre Tabanlı Özellik Seçimi
+      href: filter-based-feature-selection.md
+    - name: Permütasyon Özelliği Önem Derecesi
+      href: permutation-feature-importance.md
+- name: Python ve R
+  items:
+    - name: Python Modeli Oluşturma
+      href: create-python-model.md
+    - name: Python Betiği Yürütme
+      href: execute-python-script.md
+    - name: R Betiği yürütme
+      href: execute-r-script.md
+- name: Metin analizi
+  items:
+    - name: Metinden N-Gram Özelliklerini Ayıklama
+      href: extract-n-gram-features-from-text.md
+    - name: Özellik Karma
+      href: feature-hashing.md
+    - name: Metni Ön İşleme
+      href: preprocess-text.md
+- name: Makine öğrenmesi algoritmaları
+  items:
+    - name: Sınıflandırma
+      items:
+        - name: Çok Sınıflı Karar Ormanı
+          href: multiclass-decision-forest.md
+        - name: Çok Sınıflı Artırmalı Karar Ağacı
+          href: multiclass-boosted-decision-tree.md
+        - name: Çok Sınıflı Lojistik Regresyon
+          href: multiclass-logistic-regression.md
+        - name: Çok Sınıflı Sinir Ağı
+          href: multiclass-neural-network.md
+        - name: Bir - Tüm Çok Sınıflılık Karşılaştırması
+          href: one-vs-all-multiclass.md
+        - name: Çift Sınıflı Lojistik Regresyon
+          href: two-class-logistic-regression.md
+        - name: İki Sınıflı Ortalaması Alınmış Perceptron
+          href: two-class-averaged-perceptron.md
+        - name: İki Sınıflı Artırmalı Karar Ağacı
+          href: two-class-boosted-decision-tree.md
+        - name: İki Sınıflı Karar Ormanı
+          href: two-class-decision-forest.md
+        - name: İki Sınıflı Sinir Ağı
+          href: two-class-neural-network.md
+        - name: İki Sınıflı Destek Vektör Makinesi
+          href: two-class-support-vector-machine.md
+    - name: Kümeleme
+      items:
+        - name: K Ortalamaları Kümeleme
+          href: k-means-clustering.md
+    - name: Regresyon
+      items:
+        - name: Artırmalı Karar Ağacı Regresyonu
+          href: boosted-decision-tree-regression.md
+        - name: Karar Ormanı Regresyonu
+          href: decision-forest-regression.md
+        - name: Çizgisel Regresyon
+          href: linear-regression.md
+        - name: Sinir Ağı Regresyonu
+          href: neural-network-regression.md
+    - name: Öneren
+      items:
+        - name: SVD Önerenini Eğitme
+          href: train-svd-recommender.md
+- name: Modeli eğitme
+  items:
+    - name: Model Eğitme
+      href: train-model.md
+    - name: Kümeleme Modeli Eğitme
+      href: train-clustering-model.md
+    - name: Model Hiper Parametrelerini Ayarlama
+      href: tune-model-hyperparameters.md
+- name: Modeli değerlendirme
+  items:
+    - name: Modeli Değerlendirme
+      href: evaluate-model.md
+    - name: Önereni Değerlendirme
+      href: evaluate-recommender.md
+- name: Modeli puanlama
+  items:
+    - name: Dönüşüm Uygulama
+      href: apply-transformation.md
+    - name: Kümelere Veri Atama
+      href: assign-data-to-clusters.md
+    - name: Modeli Puanlama
+      href: score-model.md
+    - name: SVD Önerenini Puanlama
+      href: score-svd-recommender.md
+- name: İstatistiksel işlevler
+  items:
+    - name: Matematik İşlemi Uygulama
+      href: apply-math-operation.md
+    - name: Verileri Özetleme
+      href: summarize-data.md

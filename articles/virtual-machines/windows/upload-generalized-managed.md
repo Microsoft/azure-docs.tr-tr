@@ -1,133 +1,79 @@
 ---
-title: Şirket genelleştirilmiş VHD'den yönetilen bir Azure VM oluşturma | Microsoft Docs
-description: Azure'da genelleştirilmiş VHD yükleme ve yeni sanal makineler Resource Manager dağıtım modelinde oluşturmak için bunu kullanın.
+title: Genelleştirilmiş şirket içi bir VHD 'den yönetilen bir Azure VM oluşturma
+description: Genelleştirilmiş bir VHD 'yi Azure 'a yükleyin ve Kaynak Yöneticisi dağıtım modelinde yeni VM 'Ler oluşturmak için kullanın.
 services: virtual-machines-windows
 documentationcenter: ''
 author: cynthn
-manager: jeconnoc
+manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
-ms.devlang: na
 ms.topic: article
 ms.date: 09/25/2018
 ms.author: cynthn
-ms.openlocfilehash: ee2fe91d915faf7e09dee004891edfc6bef38d6f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: d0995fed61d169cc173ca01767c2e48f4f798b0d
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64685411"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74067429"
 ---
-# <a name="upload-a-generalized-vhd-and-use-it-to-create-new-vms-in-azure"></a>Genelleştirilmiş VHD yükleme ve Azure'da yeni VM'ler oluşturmak için bunu kullanın
+# <a name="upload-a-generalized-vhd-and-use-it-to-create-new-vms-in-azure"></a>Genelleştirilmiş bir VHD 'YI karşıya yükleyin ve Azure 'da yeni VM 'Ler oluşturmak için kullanın
 
-Bu makalede, Azure'da bir genelleştirilmiş VM'nin VHD yükleme, bir VHD'den görüntü oluştur ve bu görüntüden yeni bir VM oluşturmak için PowerShell kullanarak adımları gösterilmektedir. Başka bir bulut veya şirket içi sanallaştırma aracından dışarı aktardığınız bir VHD yükleyebilirsiniz. Kullanarak [yönetilen diskler](managed-disks-overview.md) yeni VM VM yönetimini basitleştirir ve sanal Makineyi bir kullanılabilirlik kümesine yerleştirildiğinde daha iyi kullanılabilirlik sunar. 
+Bu makalede, PowerShell kullanarak genelleştirilmiş bir sanal makinenin VHD 'sini Azure 'a yükleme, VHD 'den bir görüntü oluşturma ve bu görüntüden yeni bir VM oluşturma işlemleri gösterilmektedir. Şirket içi bir sanallaştırma aracından veya başka bir buluttan aktarılmış bir VHD 'yi karşıya yükleyebilirsiniz. Yeni VM için [yönetilen disklerin](managed-disks-overview.md) kullanılması VM yönetimini BASITLEŞTIRIR ve VM bir kullanılabilirlik kümesine yerleştirildiğinde daha iyi kullanılabilirlik sağlar. 
 
-Örnek betik için bkz: [örnek Azure'a VHD yükleme ve yeni bir VM oluşturmak için komut dosyası](../scripts/virtual-machines-windows-powershell-upload-generalized-script.md).
+Örnek betik için bkz. [Azure 'a BIR VHD yüklemek ve yeni BIR VM oluşturmak Için örnek betik](../scripts/virtual-machines-windows-powershell-upload-generalized-script.md).
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-- Azure'a herhangi bir VHD'yi karşıya yüklemeden önce uygulamanız gereken [Windows VHD veya VHDX yüklemek için hazırlama](prepare-for-upload-vhd-image.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
-- Gözden geçirme [yönetilen Diskler'e geçiş planı](on-prem-to-azure.md#plan-for-the-migration-to-managed-disks) için geçişiniz başlamadan önce [yönetilen diskler](managed-disks-overview.md).
+- Herhangi bir VHD 'yi Azure 'a yüklemeden önce, [Azure 'a yüklemek için bir WINDOWS VHD veya vhdx hazırlamanızı](prepare-for-upload-vhd-image.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)izlemelisiniz.
+- [Yönetilen disklere](managed-disks-overview.md)geçişinizi başlatmadan önce [yönetilen disklere geçiş planını](on-prem-to-azure.md#plan-for-the-migration-to-managed-disks) gözden geçirin.
 
-[!INCLUDE [updated-for-az.md](../../../includes/updated-for-az.md)]
+ 
 
 
-## <a name="generalize-the-source-vm-by-using-sysprep"></a>Sysprep kullanarak kaynak VM generalize
+## <a name="generalize-the-source-vm-by-using-sysprep"></a>Sysprep kullanarak kaynak VM 'yi Genelleştirme
 
-Sysprep diğer öğelerin yanı sıra tüm kişisel hesap bilgilerinizi kaldırır ve makineyi bir görüntü olarak kullanılacak şekilde hazırlar. Sysprep hakkında daha fazla ayrıntı için bkz: [Sysprep genel bakış](https://docs.microsoft.com/windows-hardware/manufacture/desktop/sysprep--system-preparation--overview).
+Sysprep diğer öğelerin yanı sıra tüm kişisel hesap bilgilerinizi kaldırır ve makineyi bir görüntü olarak kullanılacak şekilde hazırlar. Sysprep hakkında daha fazla bilgi için bkz. [Sysprep genel bakış](https://docs.microsoft.com/windows-hardware/manufacture/desktop/sysprep--system-preparation--overview).
 
-Makinede çalışan sunucu rollerini Sysprep tarafından desteklendiğinden emin olun. Daha fazla bilgi için [sunucu rolleri için Sysprep Destek](https://msdn.microsoft.com/windows/hardware/commercialize/manufacture/desktop/sysprep-support-for-server-roles).
+Makinede çalışan sunucu rollerinin Sysprep tarafından desteklendiğinden emin olun. Daha fazla bilgi için bkz. [sunucu rolleri Için Sysprep desteği](https://msdn.microsoft.com/windows/hardware/commercialize/manufacture/desktop/sysprep-support-for-server-roles).
 
 > [!IMPORTANT]
-> VHD'nizi Azure'a ilk kez yüklemeden önce Sysprep çalıştırmayı planlıyorsanız, olduğundan emin olun [sanal makinenizin hazır](prepare-for-upload-vhd-image.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). 
+> VHD 'nizi Azure 'a ilk kez yüklemeden önce Sysprep 'i çalıştırmayı planlıyorsanız, [VM 'nizi hazırladığınızdan](prepare-for-upload-vhd-image.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)emin olun. 
 > 
 > 
 
-1. Windows sanal makinede oturum açın.
-2. Yönetici olarak Komut İstemi penceresini açın. % Windir%\system32\sysprep için dizini değiştirin ve ardından çalıştırın `sysprep.exe`.
-3. İçinde **sistem hazırlığı aracı** iletişim kutusunda **girin sistem kullanıma hazır deneyimi (OOBE)** , emin olun **Generalize** onay kutusunu etkin.
-4. İçin **kapatma seçenekleri**seçin **kapatma**.
+1. Windows sanal makinesinde oturum açın.
+2. Yönetici olarak Komut İstemi penceresini açın. Dizini%windir%\system32\sysprep olarak değiştirip `sysprep.exe`çalıştırın.
+3. **Sistem Hazırlama Aracı** iletişim kutusunda, **sistem kutudan çıkar deneyimi (OOBE)** seçeneğini belirleyin ve **Genelleştir** onay kutusunun etkinleştirildiğinden emin olun.
+4. **Kapalı seçenekleri**Için, **kapanıyor**' ı seçin.
 5. **Tamam**’ı seçin.
    
-    ![Sysprep Başlat](./media/upload-generalized-managed/sysprepgeneral.png)
-6. Sysprep sona erdiğinde, sanal makineyi kapatır. VM yeniden başlatmayın.
+    ![Sysprep 'ı Başlat](./media/upload-generalized-managed/sysprepgeneral.png)
+6. Sysprep tamamlandığında, sanal makineyi kapatır. VM 'yi yeniden başlatmayın.
 
 
-## <a name="get-a-storage-account"></a>Bir depolama hesabı edinin
+## <a name="upload-the-vhd-to-your-storage-account"></a>VHD 'YI depolama hesabınıza yükleyin
 
-Karşıya yüklenen VM görüntüsü depolamak için Azure depolama hesabı gerekir. Mevcut bir depolama hesabı kullanabilir veya yeni bir tane oluşturun. 
-
-VHD bir sanal makine için yönetilen disk oluşturmak için kullanacaksanız, depolama hesabı konumu burada VM oluşturmayı aynı konumda olmalıdır.
-
-Kullanılabilir depolama hesapları gösterecek şekilde girin:
-
-```azurepowershell
-Get-AzStorageAccount | Format-Table
-```
-
-## <a name="upload-the-vhd-to-your-storage-account"></a>VHD, depolama hesabınıza yükleme
-
-Kullanım [Ekle AzVhd](https://docs.microsoft.com/powershell/module/az.compute/add-azvhd) VHD'nin depolama hesabınızdaki bir kapsayıcıya yüklemek için cmdlet'i. Bu örnek dosyayı yükler *myVHD.vhd* gelen *C:\Users\Public\Documents\Virtual sabit diskleri\\*  adlı bir depolama hesabına *mystorageaccount* içinde *myResourceGroup* kaynak grubu. Dosya adlı bir kapsayıcının içine yerleştirilecek *mycontainer* ve yeni dosya adı *myUploadedVHD.vhd*.
-
-```powershell
-$rgName = "myResourceGroup"
-$urlOfUploadedImageVhd = "https://mystorageaccount.blob.core.windows.net/mycontainer/myUploadedVHD.vhd"
-Add-AzVhd -ResourceGroupName $rgName -Destination $urlOfUploadedImageVhd `
-    -LocalFilePath "C:\Users\Public\Documents\Virtual hard disks\myVHD.vhd"
-```
+Artık bir VHD 'YI bir yönetilen diske doğrudan yükleyebilirsiniz. Yönergeler için bkz. [Azure PowerShell kullanarak BIR VHD 'Yi Azure 'A yükleme](disks-upload-vhd-to-managed-disk-powershell.md).
 
 
-Başarılı olursa, şuna benzer bir yanıt alın:
+## <a name="create-a-managed-image-from-the-uploaded-vhd"></a>Karşıya yüklenen VHD 'den yönetilen bir görüntü oluşturma 
 
-```powershell
-MD5 hash is being calculated for the file C:\Users\Public\Documents\Virtual hard disks\myVHD.vhd.
-MD5 hash calculation is completed.
-Elapsed time for the operation: 00:03:35
-Creating new page blob of size 53687091712...
-Elapsed time for upload: 01:12:49
-
-LocalFilePath           DestinationUri
--------------           --------------
-C:\Users\Public\Doc...  https://mystorageaccount.blob.core.windows.net/mycontainer/myUploadedVHD.vhd
-```
-
-Ağ bağlantınızı ve VHD dosyasının boyutuna bağlı olarak, bu komutun tamamlanması biraz sürebilir.
-
-### <a name="other-options-for-uploading-a-vhd"></a>Bir VHD'yi karşıya yüklemek için diğer seçenekler
- 
-Depolama hesabınızı aşağıdaki birini kullanarak bir VHD da karşıya yükleyebilirsiniz:
-
-- [AzCopy](https://aka.ms/downloadazcopy)
-- [Azure depolama kopyalama Blob API](https://msdn.microsoft.com/library/azure/dd894037.aspx)
-- [Azure Depolama Gezgini Blobları karşıya yükleme](https://azurestorageexplorer.codeplex.com/)
-- [Depolama içeri/dışarı aktarma hizmeti REST API Başvurusu](https://msdn.microsoft.com/library/dn529096.aspx)
--   İçeri/dışarı aktarma hizmeti yedi günden uzun süre karşıya tahmin kullanmanızı öneririz. Kullanabileceğiniz [DataTransferSpeedCalculator](https://github.com/Azure-Samples/storage-dotnet-import-export-job-management/blob/master/DataTransferSpeedCalculator.html) veri boyutu ve aktarım birimi saati tahmin etmek için. 
-    İçeri/dışarı aktarma, bir standart depolama hesabına kopyalamak için kullanılabilir. AzCopy gibi bir araç kullanarak standart depolamadan premium depolama hesabına kopyalamak gerekir.
-
-> [!IMPORTANT]
-> VHD'nizi yüklemek için AzCopy kullanıyorsanız ayarladığınızdan emin olun [ **/BlobType:page** ](https://docs.microsoft.com/azure/storage/common/storage-use-azcopy#blobtypeblock--page--append) karşıya yükleme betiğinizi çalıştırmadan önce. Hedef blob ise ve bu seçenek belirtilmezse, varsayılan olarak, bir blok blobu AzCopy oluşturur.
-> 
-> 
+Genelleştirilmiş işletim sistemi tarafından yönetilen diskinizden yönetilen bir görüntü oluşturun. Aşağıdaki değerleri kendi bilgileriniz ile değiştirin.
 
 
-
-## <a name="create-a-managed-image-from-the-uploaded-vhd"></a>Karşıya yüklenen VHD'den yönetilen görüntüsünü oluşturma 
-
-Genelleştirilmiş işletim sistemi VHD'den yönetilen bir görüntü oluşturun. Aşağıdaki değerleri kendi bilgilerinizle değiştirin.
-
-
-İlk olarak, bazı parametrelerini ayarla:
+İlk olarak, bazı parametreleri ayarlayın:
 
 ```powershell
 $location = "East US" 
 $imageName = "myImage"
 ```
 
-İşletim sistemi VHD'niz genelleştirilmiş kullanarak görüntüsünü oluşturun.
+Genelleştirilmiş işletim sistemi VHD 'nizi kullanarak görüntü oluşturun.
 
 ```powershell
 $imageConfig = New-AzImageConfig `
@@ -147,7 +93,7 @@ New-AzImage `
 
 ## <a name="create-the-vm"></a>Sanal makine oluşturma
 
-Artık bir görüntünüz olduğuna göre, görüntüden bir veya daha fazla yeni VM oluşturabilirsiniz. Bu örnek adlı bir VM oluşturur *myVM* gelen *Myımage*, *myResourceGroup*.
+Artık bir görüntünüz olduğuna göre, görüntüden bir veya daha fazla yeni VM oluşturabilirsiniz. Bu örnek *Myresourcegroup*Içindeki *myvm* adlı birVM oluşturur.
 
 
 ```powershell
@@ -166,5 +112,5 @@ New-AzVm `
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Yeni sanal makinenize oturum açın. Daha fazla bilgi için [bağlanma ve bir Azure Windows çalıştıran sanal makine için oturum açma nasıl](connect-logon.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). 
+Yeni sanal makinenizde oturum açın. Daha fazla bilgi için bkz. [Windows çalıştıran bir Azure sanal makinesine bağlanma ve oturum](connect-logon.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)açma. 
 

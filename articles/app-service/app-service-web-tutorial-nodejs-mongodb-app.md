@@ -1,6 +1,6 @@
 ---
-title: MongoDB - Azure App Service ile node.js (MEAN.js) | Microsoft Docs
-description: Azure’da MongoDB bağlantı dizesine sahip Cosmos DB veritabanı bağlantısıyla bir Node.js uygulamasının nasıl çalıştırılacağı hakkında bilgi edinin. MEAN.js öğreticide kullanılır.
+title: MongoDB ile Node. js (ortalama. js)-Azure App Service | Microsoft Docs
+description: Azure’da MongoDB bağlantı dizesine sahip Cosmos DB veritabanı bağlantısıyla bir Node.js uygulamasının nasıl çalıştırılacağı hakkında bilgi edinin. Ortalama. js öğreticide kullanılır.
 services: app-service\web
 documentationcenter: nodejs
 author: cephalin
@@ -15,20 +15,20 @@ ms.topic: tutorial
 ms.date: 05/04/2017
 ms.author: cephalin
 ms.custom: seodec18
-ms.openlocfilehash: 361e921af65b33ac0a7a8d12e28db1cb305b0fa1
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 0b9b10542b861b49e83ff9704912a569cdca7616
+ms.sourcegitcommit: 11265f4ff9f8e727a0cbf2af20a8057f5923ccda
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66138879"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72024923"
 ---
-# <a name="tutorial-build-a-nodejs-and-mongodb-app-in-azure"></a>Öğretici: Node.js ve azure'da MongoDB uygulaması oluşturma
+# <a name="tutorial-build-a-nodejs-and-mongodb-app-in-azure"></a>Öğretici: Azure 'da bir Node. js ve MongoDB uygulaması derleme
 
 > [!NOTE]
-> Bu makalede bir uygulamanın Windows üzerinde App Service'e dağıtımı yapılır. App Service dağıtmak için _Linux_, bkz: [Linux üzerinde Azure App Service'te bir Node.js ve MongoDB uygulaması oluşturma](./containers/tutorial-nodejs-mongodb-app.md).
+> Bu makalede bir uygulamanın Windows üzerinde App Service'e dağıtımı yapılır. _Linux_üzerinde App Service dağıtım yapmak için bkz. [Linux üzerinde Azure App Service bir Node. js ve MongoDB uygulaması oluşturma](./containers/tutorial-nodejs-mongodb-app.md).
 >
 
-Azure App Service, yüksek oranda ölçeklenebilen, kendi kendine düzeltme eki uygulayan web barındırma hizmeti sağlar. Bu öğreticide, App Service'te bir Node.js uygulaması oluşturma ve bir MongoDB veritabanına bağlanmak gösterilir. İşiniz bittiğinde, [Azure App Service](overview.md)’te çalışan bir MEAN uygulamanız (MongoDB, Express, AngularJS ve Node.js) olacaktır. Kolaylık olması için örnek uygulama [MEAN.js web çerçevesi](https://meanjs.org/)’ni kullanır.
+Azure App Service, yüksek düzeyde ölçeklenebilir, kendini yayama bir Web barındırma hizmeti sağlar. Bu öğreticide, App Service bir Node. js uygulamasının nasıl oluşturulacağı ve bir MongoDB veritabanına nasıl bağlanacağı gösterilmektedir. İşiniz bittiğinde, [Azure App Service](overview.md)’te çalışan bir MEAN uygulamanız (MongoDB, Express, AngularJS ve Node.js) olacaktır. Kolaylık olması için örnek uygulama [MEAN.js web çerçevesi](https://meanjs.org/)’ni kullanır.
 
 ![Azure App Service’te çalışan MEAN.js uygulaması](./media/app-service-web-tutorial-nodejs-mongodb-app/meanjs-in-azure.png)
 
@@ -37,7 +37,7 @@ Azure App Service, yüksek oranda ölçeklenebilen, kendi kendine düzeltme eki 
 > [!div class="checklist"]
 > * Azure’da MongoDB veritabanı oluşturma
 > * Node.js uygulamasını MongoDB’ye bağlama
-> * Uygulamayı Azure'a dağıtma
+> * Uygulamayı Azure’da dağıtma
 > * Veri modelini güncelleştirme ve uygulamayı yeniden dağıtma
 > * Azure’daki tanılama günlüklerinin akışını sağlama
 > * Uygulamayı Azure portalında yönetme
@@ -51,7 +51,7 @@ Bu öğreticiyi tamamlamak için:
 1. [Git'i yükleyin](https://git-scm.com/)
 2. [Node.js ve NPM'yi yükleyin](https://nodejs.org/)
 3. [Bower yükleme](https://bower.io/) ([MEAN.js](https://meanjs.org/docs/0.5.x/#getting-started) için gerekli)
-4. [Gulp.js yükleme](https://gulpjs.com/) ([MEAN.js](https://meanjs.org/docs/0.5.x/#getting-started) için gerekli)
+4. [Gulp.js'yi yükleyin](https://gulpjs.com/) ([MEAN.js](https://meanjs.org/docs/0.5.x/#getting-started) için gerekir)
 5. [MongoDB Community Edition’ı yükleyin ve çalıştırın](https://docs.mongodb.com/manual/administration/install-community/) 
 
 ## <a name="test-local-mongodb"></a>Yerel MongoDB’yi test etme
@@ -114,7 +114,7 @@ MEAN.js örnek uygulaması, kullanıcı verilerini veritabanında depolar. Kulla
 
 ![MEAN.js, MongoDB’ye başarıyla bağlanır](./media/app-service-web-tutorial-nodejs-mongodb-app/mongodb-connect-success.png)
 
-Birkaç makale eklemek için **Yönetici > Makaleleri Yönet**’i seçin.
+Bazı makaleler eklemek için **Yönetici > Makaleleri Yönet**'i seçin.
 
 Node.js’yi dilediğiniz zaman durdurmak için, terminalde `Ctrl+C` tuşlarına basın. 
 
@@ -129,7 +129,7 @@ Bu adımda, Azure’da bir MongoDB veritabanı oluşturursunuz. Uygulamanız Azu
 
 MongoDB için bu öğreticide [Azure Cosmos DB](/azure/documentdb/) kullanılır. Cosmos DB, MongoDB istemci bağlantılarını destekler.
 
-### <a name="create-a-resource-group"></a>Kaynak grubu oluşturun
+### <a name="create-a-resource-group"></a>Kaynak grubu oluşturma
 
 [!INCLUDE [Create resource group](../../includes/app-service-web-create-resource-group-no-h.md)] 
 
@@ -197,7 +197,7 @@ Azure CLI aşağıdaki örneğe benzer bilgiler görüntüler:
 
 Yerel MEAN.js deponuzda, _config/env/_ klasöründe _local-production.js_ adlı bir dosya oluşturun. Varsayılan olarak, _.gitignore_ bu dosyayı deponun dışında tutmak için yapılandırılmıştır. 
 
-Şu kodu içine kopyalayın. İki *\<cosmosdb_name>* yer tutucusunu Cosmos DB veritabanı adınız ile, *\<primary_master_key>* yer tutucusunu da önceki adımda kopyaladığınız anahtar ile değiştirdiğinizden emin olun.
+Aşağıdaki kodu dosyanın içine kopyalayın. İki *\<cosmosdb_name>* yer tutucusunu Cosmos DB veritabanı adınız ile, *\<primary_master_key>* yer tutucusunu da önceki adımda kopyaladığınız anahtar ile değiştirdiğinizden emin olun.
 
 ```javascript
 module.exports = {
@@ -262,17 +262,17 @@ Bu adımda, MongoDB’ye bağlı Node.js uygulamanızı Azure App Service’e da
 [!INCLUDE [Create app service plan no h](../../includes/app-service-web-create-app-service-plan-no-h.md)]
 
 <a name="create"></a>
-### <a name="create-a-web-app"></a>Web uygulaması oluşturun
+### <a name="create-a-web-app"></a>Web uygulaması oluşturma
 
 [!INCLUDE [Create web app](../../includes/app-service-web-create-web-app-nodejs-no-h.md)] 
 
 ### <a name="configure-an-environment-variable"></a>Ortam değişkeni yapılandırma
 
-Varsayılan olarak, MEAN.js projesi _config/env/local-production.js_ öğesini Git deposu dışında tutar. Bu nedenle Azure uygulamanız için uygulama ayarlarını kullanarak MongoDB bağlantı dizenizi tanımlamak için kullanın.
+Varsayılan olarak, MEAN.js projesi _config/env/local-production.js_ öğesini Git deposu dışında tutar. Bu nedenle, Azure uygulamanız için MongoDB Bağlantı dizenizi tanımlamak üzere uygulama ayarlarını kullanırsınız.
 
 Uygulama ayarlarını belirlemek için Cloud Shell'de [`az webapp config appsettings set`](/cli/azure/webapp/config/appsettings?view=azure-cli-latest#az-webapp-config-appsettings-set) komutunu kullanın. 
 
-Aşağıdaki örnek yapılandırır bir `MONGODB_URI` Azure uygulamanızda uygulama ayarı. *\<app_name>*, *\<cosmosdb_name>* ve *\<primary_master_key>* yer tutucularını değiştirin.
+Aşağıdaki örnek, Azure uygulamanızda bir `MONGODB_URI` uygulama ayarı yapılandırır. *\<app_name>* , *\<cosmosdb_name>* ve *\<primary_master_key>* yer tutucularını değiştirin.
 
 ```azurecli-interactive
 az webapp config appsettings set --name <app_name> --resource-group myResourceGroup --settings MONGODB_URI="mongodb://<cosmosdb_name>:<primary_master_key>@<cosmosdb_name>.documents.azure.com:10250/mean?ssl=true"
@@ -310,7 +310,7 @@ remote: Handling node.js deployment.
 .
 remote: Deployment successful.
 To https://<app_name>.scm.azurewebsites.net/<app_name>.git
- * [new branch]      master -> master
+ * [new branch]      master -> master
 ``` 
 
 Dağıtım işleminin `npm install` komutundan sonra [Gulp](https://gulpjs.com/)’ı çalıştırdığını fark etmişsinizdir. App Service, dağıtım sırasında Gulp veya Grunt görevlerini çalıştırmadığı için bu örnek depoyu etkinleştirmek üzere kök dizinde iki ek dosya bulunur: 
@@ -318,9 +318,9 @@ Dağıtım işleminin `npm install` komutundan sonra [Gulp](https://gulpjs.com/)
 - _.deployment_ - Bu dosya, App Service’ten özel dağıtım betiği olarak `bash deploy.sh` komutunu çalıştırmasını ister.
 - _deploy.sh_ - Özel dağıtım betiği. Dosyayı gözden geçirirseniz, `npm install` ve `bower install` komutundan sonra `gulp prod` çalıştırdığını görürsünüz. 
 
-Git tabanlı dağıtımınıza herhangi bir adım eklemek için bu yaklaşımı kullanabilirsiniz. Azure uygulamanızı herhangi bir noktada yeniden başlatırsanız, App Service bu Otomasyon görevlerini yeniden çalıştırmaz.
+Git tabanlı dağıtımınıza herhangi bir adım eklemek için bu yaklaşımı kullanabilirsiniz. Azure uygulamanızı herhangi bir noktada yeniden başlatırsanız App Service Bu Otomasyon görevlerini yeniden çalıştırmaz.
 
-### <a name="browse-to-the-azure-app"></a>Azure uygulamasına göz atma 
+### <a name="browse-to-the-azure-app"></a>Azure uygulamasına gidin 
 
 Web tarayıcınızı kullanarak dağıtılan uygulamaya gidin. 
 
@@ -334,7 +334,7 @@ Başarılı olursanız ve uygulama otomatik olarak oluşturulan kullanıcıda ot
 
 ![Azure App Service’te çalışan MEAN.js uygulaması](./media/app-service-web-tutorial-nodejs-mongodb-app/meanjs-in-azure.png)
 
-Birkaç makale eklemek için **Yönetici > Makaleleri Yönet**’i seçin. 
+Bazı makaleler eklemek için **Yönetici > Makaleleri Yönet**'i seçin. 
 
 **Tebrikler!** Azure App Service’te veri temelli bir Node.js uygulaması çalıştırıyorsunuz.
 
@@ -346,7 +346,7 @@ Bu adımda, `article` veri modelini değiştiriyorsunuz ve değişikliklerinizi 
 
 _modules/articles/server/models/article.server.model.js_ öğesini açın.
 
-`ArticleSchema` içinde, bir `String` type called `comment` ekleyin. İşiniz bittiğinde, şema kodunuz şu şekilde görünür:
+`ArticleSchema` içinde, `comment` adlı bir `String` türü ekleyin. İşiniz bittiğinde, şema kodunuz şu şekilde görünür:
 
 ```javascript
 const ArticleSchema = new Schema({
@@ -464,7 +464,7 @@ git commit -am "added article comment"
 git push azure master
 ```
 
-Bir kez `git push` tamamlandığında, Azure uygulamanıza gidin ve yeni işlevleri deneyin.
+@No__t-0 ' ı tamamladıktan sonra, Azure uygulamanıza gidin ve yeni işlevleri deneyin.
 
 ![Azure’da yayımlanan model ve veritabanı değişiklikleri](media/app-service-web-tutorial-nodejs-mongodb-app/added-comment-field-published.png)
 
@@ -480,19 +480,19 @@ Günlük akışını başlatmak için Cloud Shell’de [`az webapp log tail`](/c
 az webapp log tail --name <app_name> --resource-group myResourceGroup
 ``` 
 
-Günlük akışı başlatıldıktan sonra biraz web trafiği almak için tarayıcıda Azure uygulamanızı yenileyin. Artık konsol günlüklerinin terminalinize yönlendirildiğini görebilirsiniz.
+Günlük akışı başladıktan sonra, Web trafiği almak için tarayıcıda Azure uygulamanızı yenileyin. Artık konsol günlüklerinin terminalinize yönlendirildiğini görebilirsiniz.
 
 `Ctrl+C` yazarak günlük akışını istediğiniz zaman durdurabilirsiniz. 
 
 ## <a name="manage-your-azure-app"></a>Azure uygulamanızı yönetme
 
-Git [Azure portalında](https://portal.azure.com) oluşturduğunuz uygulamayı görmek için.
+Oluşturduğunuz uygulamayı görmek için [Azure Portal](https://portal.azure.com) gidin.
 
-Sol menüden **uygulama hizmetleri**, ardından Azure uygulamanızın adına tıklayın.
+Sol menüden **uygulama hizmetleri**' ne ve ardından Azure uygulamanızın adına tıklayın.
 
 ![Azure uygulamasına portal gezintisi](./media/app-service-web-tutorial-nodejs-mongodb-app/access-portal.png)
 
-Varsayılan olarak, uygulamanızın portal gösterir **genel bakış** sayfası. Bu sayfa, uygulamanızın nasıl çalıştığını gösterir. Buradan ayrıca göz atma, durdurma, başlatma, yeniden başlatma ve silme gibi temel yönetim görevlerini gerçekleştirebilirsiniz. Sayfanın sol tarafındaki sekmeler, açabileceğiniz farklı yapılandırma sayfalarını gösterir.
+Varsayılan olarak, Portal uygulamanızın **genel bakış** sayfasını gösterir. Bu sayfa, uygulamanızın nasıl çalıştığını gösterir. Buradan ayrıca göz atma, durdurma, başlatma, yeniden başlatma ve silme gibi temel yönetim görevlerini gerçekleştirebilirsiniz. Sayfanın sol tarafındaki sekmeler, açabileceğiniz farklı yapılandırma sayfalarını gösterir.
 
 ![Azure portalında App Service sayfası](./media/app-service-web-tutorial-nodejs-mongodb-app/web-app-blade.png)
 
@@ -506,7 +506,7 @@ Varsayılan olarak, uygulamanızın portal gösterir **genel bakış** sayfası.
 > [!div class="checklist"]
 > * Azure’da MongoDB veritabanı oluşturma
 > * Node.js uygulamasını MongoDB’ye bağlama
-> * Uygulamayı Azure'a dağıtma
+> * Uygulamayı Azure’da dağıtma
 > * Veri modelini güncelleştirme ve uygulamayı yeniden dağıtma
 > * Azure’daki günlüklerin terminalinize akışını sağlama
 > * Uygulamayı Azure portalında yönetme
@@ -514,4 +514,4 @@ Varsayılan olarak, uygulamanızın portal gösterir **genel bakış** sayfası.
 Uygulamaya özel bir DNS adı eşlemeyle ilgili bilgi edinmek için sonraki öğreticiye geçin.
 
 > [!div class="nextstepaction"] 
-> [Mevcut bir özel DNS adını Azure App Service'e eşlemek](app-service-web-tutorial-custom-domain.md)
+> [Mevcut bir özel DNS adını Azure App Service eşleme](app-service-web-tutorial-custom-domain.md)

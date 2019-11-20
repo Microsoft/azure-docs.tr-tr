@@ -1,5 +1,5 @@
 - name: Dayanıklı İşlevler Belgeleri
-  href: durable-functions-overview.md
+  href: index.yml
 - name: Genel Bakış
   items:
     - name: Azure İşlevleri hakkında
@@ -8,8 +8,8 @@
       href: durable-functions-overview.md
     - name: Sunucusuz karşılaştırma
       href: ../functions-compare-logic-apps-ms-flow-webjobs.md?toc=%2fazure%2fazure-functions%2fdurable%2ftoc.json
-    - name: Önizleme özellikleri
-      href: durable-functions-preview.md
+    - name: Dayanıklı İşlevler sürümleri
+      href: durable-functions-versions.md
 - name: Hızlı Başlangıçlar
   expanded: true
   items:
@@ -21,6 +21,8 @@
       href: quickstart-js-vscode.md
 - name: Öğreticiler
   items:
+    - name: İşlev zinciri oluşturma
+      href: durable-functions-sequence.md
     - name: Giriş/çıkış
       href: durable-functions-cloud-backup.md
     - name: İzleyiciler
@@ -32,55 +34,69 @@
 - name: Örnekler
   items:
     - name: Kod örnekleri
-      href: 'https://azure.microsoft.com/en-us/resources/samples/?service=functions&sort=0&term=durable+'
+      href: /samples/browse/?products=azure-functions&term=durable
     - name: Azure CLI
       href: ../functions-cli-samples.md
 - name: Kavramlar
   items:
-    - name: Desenler ve kavramlar
-      href: durable-functions-concepts.md
-    - name: İşlev türleri ve özellikleri
+    - name: İşlev türleri
       href: durable-functions-types-features-overview.md
-    - name: Bağlamalar
-      href: durable-functions-bindings.md
+    - name: Düzenlemeler
+      href: durable-functions-orchestrations.md
+    - name: Düzenleyici kodu kısıtlamaları
+      href: durable-functions-code-constraints.md
+    - name: Alt düzenlemeler
+      href: durable-functions-sub-orchestrations.md
+    - name: Özel düzenleme durumu
+      href: durable-functions-custom-orchestration-status.md
     - name: Zamanlayıcılar
       href: durable-functions-timers.md
     - name: Dış olaylar
       href: durable-functions-external-events.md
-    - name: Alt düzenlemeler
-      href: durable-functions-sub-orchestrations.md
+    - name: Hata işleme
+      href: durable-functions-error-handling.md
+    - name: Dış düzenlemeler
+      href: durable-functions-eternal-orchestrations.md
+    - name: Tekil düzenlemeler
+      href: durable-functions-singletons.md
+    - name: HTTP özellikleri
+      href: durable-functions-http-features.md
+    - name: Durum bilgisi olan varlıklar
+      href: durable-functions-entities.md
     - name: Görev merkezleri
       href: durable-functions-task-hubs.md
-    - name: Güvenilir yürütme
-      href: durable-functions-checkpointing-and-replay.md
+    - name: Örnek yönetimi
+      href: durable-functions-instance-management.md
     - name: Sürüm oluşturma
       href: durable-functions-versioning.md
+    - name: Performans ve ölçeklendirme
+      href: durable-functions-perf-and-scale.md
+    - name: Yüksek kullanılabilirlik
+      href: durable-functions-disaster-recovery-geo-distribution.md
+- name: Başvuru
+  items:
+    - name: Host.json ayarları
+      href: 'durable-functions-bindings.md#host-json'
+    - name: Bağlamalar
+      href: durable-functions-bindings.md
+    - name: HTTP API
+      href: durable-functions-http-api.md
+    - name: .NET API’si
+      href: /dotnet/api/microsoft.azure.webjobs.extensions.durabletask?view=azure-dotnet
 - name: Nasıl yapılır kılavuzları
   items:
-    - name: Planlama ve tasarım
-      items:
-        - name: İşlev zinciri oluşturma
-          href: durable-functions-sequence.md
-        - name: Dış düzenlemeler
-          href: durable-functions-eternal-orchestrations.md
-        - name: Tekil düzenlemeler
-          href: durable-functions-singletons.md
-        - name: Performans ve ölçeklendirme
-          href: durable-functions-perf-and-scale.md
-        - name: Yüksek kullanılabilirlik
-          href: durable-functions-disaster-recovery-geo-distribution.md
     - name: Geliştirme
       items:
         - name: Azure portalda oluşturma
           href: durable-functions-create-portal.md
         - name: Bağlantıları yönetme
           href: ../manage-connections.md?toc=%2fazure%2fazure-functions%2fdurable%2ftoc.json
-        - name: Hata işleme
-          href: durable-functions-error-handling.md
         - name: Birim testi
           href: durable-functions-unit-testing.md
         - name: Web İşleri olarak oluşturma
           href: durable-functions-webjobs-sdk.md
+        - name: .NET'teki dayanıklı varlıklar
+          href: durable-functions-dotnet-entities.md
     - name: Dağıtma
       items:
         - name: Sürekli dağıtım
@@ -89,24 +105,16 @@
           href: ../deployment-zip-push.md?toc=%2fazure%2fazure-functions%2fdurable%2ftoc.json
         - name: Paketten çalıştırma
           href: ../run-functions-from-deployment-package.md?toc=%2fazure%2fazure-functions%2fdurable%2ftoc.json
-    - name: Yönetme
-      items:
-        - name: Örnek yönetimi
-          href: durable-functions-instance-management.md
+        - name: Sıfır kesinti süresi dağıtımı
+          href: durable-functions-zero-downtime-deployment.md
     - name: İzleme
-      items:
-        - name: İzleme işlevleri
-          href: ../functions-monitoring.md?toc=%2fazure%2fazure-functions%2fdurable%2ftoc.json
-        - name: Özel düzenleme durumu
-          href: durable-functions-custom-orchestration-status.md
-    - name: Sorun giderme
       items:
         - name: Tanılama
           href: durable-functions-diagnostics.md
-- name: Başvuru
-  items:
-    - name: HTTP API
-      href: durable-functions-http-api.md
+        - name: İzleme
+          href: ../functions-monitoring.md?toc=%2fazure%2fazure-functions%2fdurable%2ftoc.json
+        - name: Fiyatlandırma
+          href: durable-functions-billing.md
 - name: Kaynaklar
   items:
     - name: Microsoft Learn ile becerilerinizi geliştirin

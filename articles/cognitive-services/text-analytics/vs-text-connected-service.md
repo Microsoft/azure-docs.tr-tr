@@ -1,38 +1,38 @@
 ---
-title: "Öğretici: Visual Studio'da bağlı hizmetler ile metin analizi hizmetine bağlanma"
+title: "Öğretici: Visual Studio 'da bağlı hizmetlerle Metin Analizi hizmetine bağlanma"
 titleSuffix: Azure Cognitive Services
-description: Metin analizi için bir ASP.NET Core web uygulamasından bağlanmayı öğreneceksiniz.
+description: Bu makalede ve beraberindeki makalelerde, Metin Analizi Hizmeti için Visual Studio Bağlı Hizmet özelliğinin kullanımına ilişkin ayrıntılar sağlanmaktadır.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: text-analytics
 ms.topic: tutorial
-ms.date: 02/13/2019
+ms.date: 07/24/2019
 ms.author: aahi
-ms.openlocfilehash: 75228b8c939cb5b8dd04471662ba86b46cfc808c
-ms.sourcegitcommit: 4c2b9bc9cc704652cc77f33a870c4ec2d0579451
+ms.openlocfilehash: b094a6917892dfff58c49435de4dc42551be19df
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/17/2019
-ms.locfileid: "65860469"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73837201"
 ---
-# <a name="tutorial-connect-to-the-text-analytics-service-with-connected-services-in-visual-studio"></a>Öğretici: Visual Studio'da bağlı hizmetler ile metin analizi hizmetine bağlanma
+# <a name="tutorial-connect-to-the-text-analytics-service-with-connected-services-in-visual-studio"></a>Öğretici: Visual Studio 'da bağlı hizmetlerle Metin Analizi hizmetine bağlanma
 
 Metin Analizi Hizmeti’ni kullanarak görsel verileri kategorilere ayırıp işlemenin yanı sıra hizmetlerinizi oluşturmanıza yardımcı olan makine yardımlı görüntü denetimi gerçekleştirmek için zengin bilgileri ayıklayabilirsiniz.
 
-Bu makalede ve beraberindeki makalelerde, Metin Analizi Hizmeti için Visual Studio Bağlı Hizmet özelliğinin kullanımına ilişkin ayrıntılar sağlanmaktadır. Özellik, her iki Visual Studio 2019 veya sonraki sürümlerinde, Bilişsel hizmetler uzantısı yüklü yöneliktir.
+Bu makalede ve beraberindeki makalelerde, Metin Analizi Hizmeti için Visual Studio Bağlı Hizmet özelliğinin kullanımına ilişkin ayrıntılar sağlanmaktadır. Özelliği, bilişsel hizmetler uzantısı yüklü olan Visual Studio 2019 veya üzeri sürümlerde kullanılabilir.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 - Azure aboneliği. Bir aboneliğiniz yoksa [ücretsiz hesap](https://azure.microsoft.com/pricing/free-trial/) için kaydolabilirsiniz.
-- Web geliştirme iş yükü yüklenmiş olan Visual Studio 2019. [Şimdi indir](https://aka.ms/vsdownload?utm_source=mscom&utm_campaign=msdocs).
+- Web geliştirme iş yükü yüklü olan Visual Studio 2019. [Şimdi indir](https://aka.ms/vsdownload?utm_source=mscom&utm_campaign=msdocs).
 
 [!INCLUDE [vs-install-cognitive-services-vsix](../../../includes/vs-install-cognitive-services-vsix.md)]
 
 ## <a name="add-support-to-your-project-for-the-text-analytics-service"></a>Metin Analizi Hizmeti için projenize destek ekleme
 
-1. TextAnalyticsDemo adlı yeni bir ASP.NET Core web projesi oluşturun. Tüm varsayılan ayarlarla birlikte Web Uygulaması (Model-Görünüm-Denetleyici) proje şablonunu kullanın. Projeye MyWebApplication adını vermek önemlidir; bu nedenle kodu projeye kopyaladığınızda ad alanı eşleştirilir.  Bu makalelerdeki örnekte MVC kullanılmaktadır, ancak Metin Analizi Bağlı Hizmeti’ni herhangi bir ASP.NET proje türüyle kullanabilirsiniz.
+1. TextAnalyticsDemo adlı yeni bir ASP.NET Core web projesi oluşturun. Tüm varsayılan ayarlarla birlikte Web Uygulaması (Model-Görünüm-Denetleyici) proje şablonunu kullanın. Projeye MyWebApplication adını vermek önemlidir; bu nedenle kodu projeye kopyaladığınızda ad alanı eşleştirilir.  Bu makaledeki örnek, MVC kullanır, ancak Metin Analizi bağlı hizmetini herhangi bir ASP.NET proje türüyle kullanabilirsiniz.
 
 1. **Çözüm Gezgini**’nde **Bağlı Hizmet** öğesine çift tıklayın.
    Projenize ekleyebileceğiniz hizmetlerle birlikte Bağlı Hizmet sayfası görüntülenir.
@@ -54,7 +54,7 @@ Bu makalede ve beraberindeki makalelerde, Metin Analizi Hizmeti için Visual Stu
    Fiyatlandırma katmanları ile ilgili ayrıntılar için bağlantıyı izleyin.
 
 1. **Ekle**’yi seçerek, Bağlı Hizmet için destek ekleyin.
-   Visual Studio; Metin Analizi Hizmeti bağlantısını desteklemek üzere NuGet paketlerini, yapılandırma dosyası girdilerini ve diğer değişiklikleri eklemek için projenizi değiştirir. **Çıkış Penceresi**’nde projenizde olup bitenlerin günlüğü gösterilir. Aşağıdakine benzer bir şey görmeniz gerekir:
+   Visual Studio; Metin Analizi Hizmeti bağlantısını desteklemek üzere NuGet paketlerini, yapılandırma dosyası girdilerini ve diğer değişiklikleri eklemek için projenizi değiştirir. **Çıkış Penceresi**’nde projenizde olup bitenlerin günlüğü gösterilir. Çıktın aşağıdaki gibi görünmesi gerekir:
 
    ```output
     [6/1/2018 3:04:02.347 PM] Adding Text Analytics to the project.
@@ -69,7 +69,7 @@ Bu makalede ve beraberindeki makalelerde, Metin Analizi Hizmeti için Visual Stu
  
 ## <a name="use-the-text-analytics-service-to-detect-the-language-for-a-text-sample"></a>Metin örneğinin dilini algılamak için Metin Analizi Hizmeti’ni kullanın.
 
-1. Startup.cs’de deyimleri kullanarak aşağıdakileri ekleyin:
+1. Startup.cs’de deyimleri kullanarak aşağıdakileri ekleyin.
  
    ```csharp
    using System.IO;
@@ -90,7 +90,7 @@ Bu makalede ve beraberindeki makalelerde, Metin Analizi Hizmeti için Visual Stu
       }
    ```
 
-1. Denetleyiciler klasörüne DemoTextAnalyzeController adlı bir sınıf dosyası ekleyin ve içeriklerini aşağıdaki kodla değiştirin:
+1. `DemoTextAnalyzeController` adlı *denetleyiciler* klasörüne bir sınıf dosyası ekleyin ve içeriğini aşağıdaki kodla değiştirin:
 
     ```csharp
     using System;
@@ -153,7 +153,7 @@ Bu makalede ve beraberindeki makalelerde, Metin Analizi Hizmeti için Visual Stu
     }
     ```
     
-    Kod, Metin Analizi API’sini çağırmak için kullanabileceğiniz istemci nesnesini ve belirli bir metinde DetectLanguage çağrısı yapan bir istek işleyicisini almak için GetTextAnalyzeClient öğesini içerir.
+    Kod, Metin Analizi API'si çağrıları yapmak için istemci nesnesini ve belirli bir metinde DetectLanguage öğesini çağıran bir istek işleyicisini almak için `GetTextAnalyzeClient` içerir.
 
 1. Önceki kod tarafından kullanılan MyHandler yardımcı sınıfını ekleyin.
 
@@ -171,7 +171,7 @@ Bu makalede ve beraberindeki makalelerde, Metin Analizi Hizmeti için Visual Stu
         }
     ```
 
-1. Modeller klasörüne yöntem için bir sınıf ekleyin.
+1. *Modeller* klasöründe, model için bir sınıf ekleyin.
 
     ```csharp
     using System;
@@ -193,7 +193,7 @@ Bu makalede ve beraberindeki makalelerde, Metin Analizi Hizmeti için Visual Stu
     }
     ```
 
-1. Çözümlenmiş metni, belirlenen dili ve analizdeki güvenirlik düzeyini temsil eden puanı göstermek için bir Görünüm ekleyin. Bunu yapmak için **Görünümler** klasörüne sağ tıklayın, **Ekle**’yi ve sonra **Görüntüle**’yi seçin. Görüntülenen iletişim kutusunda _TextAnalyzeResult_ adını sağlayın, **Görünümler** klasörüne _TextAnalyzeResult.cshtml_ adlı yeni bir dosya eklemek için varsayılanları kabul edin ve buna aşağıdaki içerikleri kopyalayın:
+1. Çözümlenmiş metni, belirlenen dili ve analizdeki güvenirlik düzeyini temsil eden puanı göstermek için bir Görünüm ekleyin. Bunu yapmak için **Görünümler** klasörüne sağ tıklayın, **Ekle**’yi ve sonra **Görüntüle**’yi seçin. Görüntülenen iletişim kutusunda _TextAnalyzeResult_ adını sağlayın, _Görünümler_ klasörüne **TextAnalyzeResult.cshtml** adlı yeni bir dosya eklemek için varsayılanları kabul edin ve buna aşağıdaki içerikleri kopyalayın:
     
     ```cshtml
     @using System

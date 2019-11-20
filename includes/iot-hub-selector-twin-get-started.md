@@ -3,52 +3,56 @@ author: wesmc7777
 ms.author: wesmc
 ms.service: iot-hub
 ms.topic: include
-ms.date: 10/26/2018
-ms.openlocfilehash: 72ccad94301e053d8103ca949d41202e58d9f5bb
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.date: 08/20/2019
+ms.openlocfilehash: c412f7f3e20e4d04083e457bfb245b850b65e126
+ms.sourcegitcommit: bba811bd615077dc0610c7435e4513b184fbed19
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188478"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70050445"
 ---
 > [!div class="op_single_selector"]
 > * [Node.js](../articles/iot-hub/iot-hub-node-node-twin-getstarted.md)
-> * [C#](../articles/iot-hub/iot-hub-csharp-csharp-twin-getstarted.md)
+> * [.NET](../articles/iot-hub/iot-hub-csharp-csharp-twin-getstarted.md)
 > * [Java](../articles/iot-hub/iot-hub-java-java-twin-getstarted.md)
 > * [Python](../articles/iot-hub/iot-hub-python-twin-getstarted.md)
 
-Cihaz çiftleri, cihaz durumu bilgilerini (meta veriler, yapılandırmalar ve koşullar) depolayan JSON belgelerdir. IOT hub'ı ona bağlanan her cihaz için cihaz ikizi'ni kalıcıdır.
+Cihaz TWINS, meta veriler, konfigürasyonlar ve koşullar dahil olmak üzere cihaz durum bilgilerini depolayan JSON belgelerdir. IoT Hub, kendisine bağlanan her cihaz için bir cihaz ikizi devam ettirir.
 
 [!INCLUDE [iot-hub-basic](iot-hub-basic-whole.md)]
 
-Cihaz ikizlerini kullanın:
+Cihaz ikizlerini şu şekilde kullan:
 
-* Çözüm arka ucunuz cihaz meta verilerini Store.
+* Çözüm arka ucundan cihaz meta verilerini depolayın.
 
-* Geçerli durum bilgilerini kullanılabilir yetenekler ve koşullar (örneğin, kullanılan bağlantı yöntemi) gibi cihaz uygulamanızdan bildirin.
+* Kullanılabilir yetenekler ve koşullar gibi geçerli durum bilgilerini (örneğin, kullanılan bağlantı yöntemi) cihaz uygulamanızdan bildirin.
 
-* Bir cihaz uygulaması ve arka uç uygulaması arasında uzun süre çalışan iş akışları (örneğin, üretici yazılımı ve yapılandırma güncelleştirmelerini) durumunu eşitleyin.
+* Üretici yazılımı ve yapılandırma güncelleştirmeleri gibi uzun süre çalışan iş akışlarının durumunu bir cihaz uygulaması ile arka uç uygulaması arasında eşitler.
 
-* Cihaz meta verilerini, yapılandırma ya da durum sorgulayın.
+* Cihazınızın meta verilerini, yapılandırmasını veya durumunu sorgulayın.
 
-Cihaz çiftleri, cihaz yapılandırmaları ve Koşulları'nı sorgulamak için ve eşitleme için tasarlanmıştır. Cihaz ikizlerini kullanma zamanı hakkında daha fazla bilgi bulunabilir [cihaz ikizlerini anlama](../articles/iot-hub/iot-hub-devguide-device-twins.md).
+Cihaz TWINS, eşitleme için ve cihaz yapılandırmalarının ve koşullarının sorgulanması için tasarlanmıştır. Cihaz TWINS 'in ne zaman kullanılacağı hakkında daha fazla bilgi için bkz. cihaz ikizlerini [anlama](../articles/iot-hub/iot-hub-devguide-device-twins.md).
 
-Cihaz çiftleri, IOT hub'ı depolanır ve içerir:
+Cihaz ikizleri bir IoT Hub 'ında depolanır ve aşağıdaki öğeleri içerir:
 
-* *etiketleri*, cihaz meta verilerini yalnızca çözüm arka ucu tarafından; erişilebilir
+* **Etiketler**. Cihaz meta verileri yalnızca çözüm arka ucu tarafından erişilebilir.
 
-* *İstenen özellikleri*, JSON nesneleri çözüm tarafından değiştirilebilir, cihaza uygulama tarafından son ve observable geri ve
+* **İstenen özellikler**. Çözüm arka ucu tarafından değiştirilebilen JSON nesneleri ve cihaz uygulaması tarafından Observable.
 
-* *bildirilen özellikler*, JSON nesneleri cihaz uygulaması tarafından değiştirilebilir ve çözüm arka ucu tarafından okunabilir. Etiketler ve Özellikler diziler içeremez, ancak nesneler yuvalanabilir.
+* **Bildirilen özellikler**. Cihaz uygulaması tarafından değiştirilebilen ve çözüm arka ucu tarafından okunabilen JSON nesneleri.
 
-![Cihaz ikizi görüntü gösterme işlevi](./media/iot-hub-selector-twin-get-started/twin.png)
+Etiketler ve Özellikler diziler içeremez, ancak nesneler iç içe olabilir.
 
-Ayrıca, çözüm arka ucu, cihaz çiftleri yukarıdaki tüm verilere dayalı sorgulayabilirsiniz.
-Başvurmak [cihaz ikizlerini anlama](../articles/iot-hub/iot-hub-devguide-device-twins.md) ve cihaz ikizleri hakkında daha fazla bilgi için [IOT Hub sorgu dili](../articles/iot-hub/iot-hub-devguide-query-language.md) sorgulama için başvuru.
+Aşağıdaki çizimde Device ikizi organizasyonu gösterilmektedir:
+
+![İşlevselliği gösteren cihaz ikizi resmi](./media/iot-hub-selector-twin-get-started/twin.png)
+
+Ayrıca, çözüm arka ucu, yukarıdaki tüm verileri temel alan cihaz TWINS 'i sorgulayabilir.
+Cihaz TWINS hakkında daha fazla bilgi için bkz. cihaz ikizlerini [anlama](../articles/iot-hub/iot-hub-devguide-device-twins.md). Sorgulama hakkında daha fazla bilgi için [IoT Hub sorgu dili](../articles/iot-hub/iot-hub-devguide-query-language.md)' ne bakın.
 
 
 Bu öğretici şunların nasıl yapıldığını gösterir:
 
-* Ekleyen bir arka uç uygulaması oluşturma *etiketleri* bir cihaz çifti ve kendi bağlantı kanalı olarak raporlar bir sanal cihaz uygulaması için bir *özelliği bildirilen* cihaz ikizinde üzerinde.
+* Bir cihaz ikizi 'e Etiketler ekleyen bir arka uç uygulaması oluşturun ve bağlantı kanalını cihazda bildirilen bir özellik olarak raporlayan bir sanal cihaz uygulamasına ikizi.
 
-* Etiketleri ve daha önce oluşturduğunuz özellikleri filtreleri kullanarak arka uç uygulamanızın cihazlardan sorgulayın.
+* Daha önce oluşturulan Etiketler ve özelliklerde filtreler kullanarak arka uç uygulamanızdaki cihazları sorgulayın.

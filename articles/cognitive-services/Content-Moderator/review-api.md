@@ -1,45 +1,45 @@
 ---
-title: İncelemeleri, iş akışları ve işleri kavramlar - Content Moderator
-titlesuffix: Azure Cognitive Services
-description: İncelemeleri, iş akışları ve işleri hakkında bilgi edinin
+title: İncelemeler, Iş akışları ve Işler kavramları-Content Moderator
+titleSuffix: Azure Cognitive Services
+description: Bu makalede Inceleme aracının temel kavramları hakkında bilgi edineceksiniz. İncelemeler, iş akışları ve işler.
 services: cognitive-services
-author: sanjeev3
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 03/14/2019
-ms.author: sajagtap
-ms.openlocfilehash: c1d4ef640e2ae072dacba7a665b6689e3224c55c
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: pafarley
+ms.openlocfilehash: 1aba86efb9ea76fbf060e80b47f9f2f6cdf8ee71
+ms.sourcegitcommit: 827248fa609243839aac3ff01ff40200c8c46966
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60607282"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73744417"
 ---
 # <a name="content-moderation-reviews-workflows-and-jobs"></a>İçerik denetleme incelemeleri, iş akışları ve işler
 
-Content Moderator makine Yardımlı resim denetimi gerçek dünya senaryoları için bir en iyi denetleme işlemi oluşturmak için İnsan-de--döngü özellikleriyle birleştirir. Bunu bulut tabanlı yapar [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com). Bu kılavuzda, gözden geçirme Aracı'nın temel kavramlar hakkında bilgi edineceksiniz: incelemeleri, iş akışları ve işler.
+Content Moderator, gerçek dünyada senaryolar için en iyi denetleme sürecini oluşturmak üzere, bir bilgisayar yardımlı denetimi döngü içi yetenekler ile birleştirir. Bunu, bulut tabanlı [İnceleme aracı](https://contentmoderator.cognitive.microsoft.com)aracılığıyla yapar. Bu kılavuzda Inceleme aracının temel kavramları hakkında bilgi edineceksiniz: incelemeler, iş akışları ve işler.
 
 ## <a name="reviews"></a>İncelemeler
 
-Bir gözden geçirme, içerik için gözden geçirme aracı yüklenir ve altında görünür **gözden** sekmesi. Buradan, kullanıcılar uygulanan etiketler alter ve uygun şekilde kendi özel etiketler. Bir kullanıcı bir gözden geçirme gönderdiğinde, sonuçlar belirtilen geri çağırma uç noktasına gönderilir ve içeriği siteden kaldırılır.
+İnceleme içinde içerik gözden geçirme aracına yüklenir ve **Gözden geçirme** sekmesi altında görüntülenir. Buradan, kullanıcılar uygulanan etiketleri değiştirebilir ve kendi özel etiketlerini uygun şekilde uygulayabilir. Bir Kullanıcı bir gözden geçirme gönderdiğinde, sonuçlar belirtilen geri çağırma uç noktasına gönderilir ve içerik siteden kaldırılır.
 
-![Gözden geçirme sekmesinde bir tarayıcı gözden geçirme Aracı Web sitesi Aç](./Review-Tool-user-Guide/images/image-workflow-review.png)
+![Inceleme sekmesinde bir tarayıcıda açık olan araç Web sitesini gözden geçirme](./Review-Tool-user-Guide/images/image-workflow-review.png)
 
-Bkz: [gözden geçirme aracı Kılavuzu](./review-tool-user-guide/review-moderated-images.md) değerlendirmeleri oluşturmaya başlayın veya görmek için [REST API Kılavuzu](./try-review-api-review.md) programlamayla Bunun hakkında bilgi edinmek için.
+İncelemeleri oluşturmaya başlamak için [İnceleme aracı kılavuzuna](./review-tool-user-guide/review-moderated-images.md) bakın veya bunu programlı olarak nasıl yapacağınızı öğrenmek için [REST API kılavuzuna](./try-review-api-review.md) bakın.
 
-## <a name="workflows"></a>İş Akışları
+## <a name="workflows"></a>İş akışları
 
-Bir iş akışı içeriği için bulut tabanlı özelleştirilmiş filtre kullanılıyor. İş akışları çeşitli içerik farklı yollarla filtreleyebilir ve ardından uygun eylemi gerçekleştirin için hizmetler için bağlanabilirsiniz. Content Moderator Bağlayıcısı ile bir iş akışı otomatik olarak denetleme etiketler ve gözden geçirmeleri ile gönderilen içerik oluşturun.
+Bir iş akışı, içerik için bulut tabanlı özelleştirilmiş bir filtredir. İş akışları, farklı yollarla içerik filtrelemek için çeşitli hizmetlere bağlanabilir ve ardından uygun eylemi gerçekleştirebilir. Content Moderator Bağlayıcısı ile, bir iş akışı otomatik olarak denetleme etiketleri uygulayabilir ve gönderilen içerikle ilgili incelemeler oluşturabilir.
 
-### <a name="view-workflows"></a>Görünüm iş akışları
+### <a name="view-workflows"></a>İş akışlarını görüntüle
 
-Mevcut iş görüntülemek için Git [gözden geçirme aracı](https://contentmoderator.cognitive.microsoft.com/) seçip **ayarları** > **iş akışları**.
+Mevcut iş akışlarınızı görüntülemek için [İnceleme aracına](https://contentmoderator.cognitive.microsoft.com/) gidin ve **Ayarlar** > **iş akışları**' nı seçin.
 
 ![Varsayılan iş akışı](images/default-workflow-listed.PNG)
 
-İş akışları tamamen bunları programlı olarak erişilebilir olmasını sağlayan JSON dizeler olarak açıklanabilir. Seçerseniz **Düzenle** akışınız için seçeneğini ve ardından **JSON** sekmesinde, aşağıdaki gibi bir JSON ifadesini görürsünüz:
+İş akışları tamamen JSON dizeleri olarak açıklanabilir, bu da programlı bir şekilde erişilebilir hale gelir. İş akışınız için **Düzenle** seçeneğini belirleyip **JSON** sekmesini seçerseniz, aşağıdaki gibi bir JSON ifadesi görürsünüz:
 
 ```json
 {
@@ -64,16 +64,16 @@ Mevcut iş görüntülemek için Git [gözden geçirme aracı](https://contentmo
 }
 ```
 
-Bkz: [gözden geçirme aracı Kılavuzu](./review-tool-user-guide/workflows.md) oluşturmaya ve iş akışlarını kullanarak başlayın veya görmek için [REST API Kılavuzu](./try-review-api-workflow.md) programlamayla Bunun hakkında bilgi edinmek için.
+İş akışlarını oluşturmaya ve kullanmaya başlamak için [Gözden geçirme aracı kılavuzuna](./review-tool-user-guide/workflows.md) bakın veya bunu programlı olarak nasıl yapacağınızı öğrenmek için [REST API kılavuzuna](./try-review-api-workflow.md) bakın.
 
 ## <a name="jobs"></a>İşler
 
-İçerik denetleme, iş akışları ve incelemeleri işlevsellik için sarmalayıcı türü bir denetimi iş görür. İş API veya metin denetim API'si Content Moderator görüntü denetimi kullanarak içeriğinizi tarar ve ardından, belirtilen iş akışı karşı denetler. İş akışının sonuçlarına göre bunu olabilir veya içeriği için bir gözden geçirme oluşturamaz [gözden geçirme aracı](./review-tool-user-guide/human-in-the-loop.md). İncelemeler hem de iş akışları oluşturulabilir ve bunların ilgili API'leri ile yapılandırılmış olsa da iş API (hangi belirtilen geri çağırma uç noktasına gönderilebilir) tüm işleminin ayrıntılı bir rapor almak sağlar.
+Bir denetleme işi, içerik denetleme, iş akışları ve İncelemeler işlevleri için bir sarmalayıcı türü görevi görür. İş, Content Moderator görüntü denetleme API 'SI veya metin denetleme API 'sini kullanarak içeriğinizi tarar ve ardından belirlenen iş akışına karşı denetler. İş akışı sonuçlarına bağlı olarak, [Gözden geçirme aracında](./review-tool-user-guide/human-in-the-loop.md)içerik için bir gözden geçirme oluşturmayabilir veya olmayabilir. Her iki İnceleme ve iş akışı kendi API 'Leriyle oluşturulup yapılandırılabileceği sürece, iş API 'SI işlemin tamamına (belirtilen geri çağırma uç noktasına gönderilebilir) ilişkin ayrıntılı bir rapor elde etmenizi sağlar.
 
-Bkz: [REST API Kılavuzu](./try-review-api-job.md) işleri ile çalışmaya başlamak için.
+İşleri kullanmaya başlamak için [REST API kılavuzuna](./try-review-api-job.md) bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Sürücü test [iş API Konsolu](try-review-api-job.md)ve REST API kod örnekleri kullanın. Visual Studio ve C# ile ilgili bilgi sahibi değilseniz, ayrıca kullanıma [işleri .NET Hızlı Başlangıç](moderation-jobs-quickstart-dotnet.md). 
-* İncelemeleri için kullanmaya başlama [gözden geçirme API Konsolu](try-review-api-review.md)ve REST API kod örnekleri kullanın. Daha sonra bkz [incelemeleri .NET Hızlı Başlangıç](moderation-reviews-quickstart-dotnet.md).
-* Görüntü incelemeleri kullanın [Video gözden geçirme Hızlı Başlangıç](video-reviews-quickstart-dotnet.md)ve öğrenin nasıl [dökümleri video gözden geçirici ekleyin](video-transcript-reviews-quickstart-dotnet.md).
+* [Iş API konsolunun](try-review-api-job.md)sürücüsünü test edin ve REST API kod örneklerini kullanın. Visual Studio ve C#hakkında bilgi sahibiyseniz, [işler .net hızlı başlangıç](moderation-jobs-quickstart-dotnet.md)' i de gözden geçirin. 
+* İncelemeler için, [API konsolunu gözden geçir](try-review-api-review.md)' i kullanmaya başlayın ve REST API kod örneklerini kullanın. Ardından [.net hızlı başlangıç](dotnet-sdk-quickstart.md)konusunun incelemeler bölümüne bakın.
+* Video incelemeleri için, [video incelemesi hızlı](video-reviews-quickstart-dotnet.md)başlangıcı ' nı kullanın ve [video incelemesine yorum ekleme](video-transcript-reviews-quickstart-dotnet.md)hakkında bilgi edinin.

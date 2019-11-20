@@ -1,70 +1,70 @@
 ---
-title: Azure portalını kullanarak Azure blok zinciri hizmeti oluşturma
-description: Consortium üye oluşturmak için Azure blok zinciri hizmetini kullanın.
+title: Azure portal kullanarak bir Azure blok zinciri hizmeti üyesi oluşturma
+description: Bir blok zinciri üyesi oluşturmak için Azure blok zinciri hizmetini kullanın.
 services: azure-blockchain
 keywords: ''
 author: PatAltimore
 ms.author: patricka
-ms.date: 05/29/2019
+ms.date: 10/14/2019
 ms.topic: quickstart
 ms.service: azure-blockchain
 ms.reviewer: janders
 manager: femila
-ms.openlocfilehash: 5cb236dc38ae41b202004b7e4806d8129378cfdb
-ms.sourcegitcommit: c05618a257787af6f9a2751c549c9a3634832c90
+ms.openlocfilehash: c87f9a044d6655b2062f2c2657d3b465699e0dd2
+ms.sourcegitcommit: 1d0b37e2e32aad35cc012ba36200389e65b75c21
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66417501"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72329252"
 ---
-# <a name="quickstart-create-an-azure-blockchain-service-using-the-azure-portal"></a>Hızlı Başlangıç: Azure portalını kullanarak Azure blok zinciri hizmeti oluşturma
+# <a name="quickstart-create-an-azure-blockchain-service-blockchain-member-using-the-azure-portal"></a>Hızlı başlangıç: Azure portal kullanarak bir Azure blok zinciri hizmeti blok zinciri üyesi oluşturma
 
-Azure Blockchain hizmeti, İş mantığınızın bir akıllı sözleşme yürütebilir blok zinciri bir platformdur. Bu hızlı başlangıçta Azure portalını kullanarak yönetilen bir kayıt defteri oluşturmaya başlama gösterilmektedir.
+Azure blok zinciri hizmeti, iş mantığınızı akıllı bir sözleşme içinde yürütebilmeniz için bir blok zinciri platformudur. Bu hızlı başlangıçta, Azure portal kullanarak bir blok zinciri üyesi oluşturarak nasıl başlacağınız gösterilmektedir.
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-## <a name="create-a-managed-ledger"></a>Yönetilen bir kayıt defteri oluşturma
+## <a name="create-a-blockchain-member"></a>Blok zinciri üyesi oluşturma
 
-Azure Blockchain hizmeti, bir dizi işlem ve depolama kaynakları oluşturulur.
+Yeni veya mevcut bir konsorsiyda çekirdek defter protokolünü çalıştıran bir blok zinciri üyesi oluşturun.
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
+1. [Azure Portal](https://portal.azure.com)’ında oturum açın.
 1. Azure portalının sol üst köşesinde bulunan **Kaynak oluştur** öğesini seçin.
-1. Seçin **blok zinciri** > **Azure blok zinciri hizmet**.
-1. Şablon tamamlayın.
+1. **Blok zinciri** > **Azure blok zinciri hizmeti**' ni seçin.
+1. Şablonu doldurun.
 
-    ![Hizmet oluşturma](./media/create-member/create-member.png)
+    ![Hizmet oluştur](./media/create-member/create-member.png)
 
     Ayar | Açıklama
     --------|------------
-    Blok zinciri üyesi | Azure Blockchain Service üyelik tanımlayan benzersiz bir ad seçin. Blok zinciri üye adı yalnızca küçük harf ve rakam içerebilir. İlk karakter bir harf olmalıdır. Değeri 2 ile 20 karakter uzunluğunda olmalıdır.
+    Blok zinciri üyesi | Azure blok zinciri hizmeti blok zinciri üyesini tanımlayan benzersiz bir ad seçin. Blok zinciri üye adı yalnızca küçük harf ve sayı içerebilir. İlk karakter bir harf olmalıdır. Değer 2 ila 20 karakter uzunluğunda olmalıdır.
     Abonelik | Hizmetiniz için kullanmak istediğiniz Azure aboneliğini seçin. Birden fazla aboneliğiniz varsa kaynağın faturalandığı aboneliği seçin.
     Kaynak grubu | Yeni bir kaynak grubu adı veya aboneliğinizde var olan bir kaynak grubu.
-    Bölge | Konum consortium tüm üyeleri için aynı olması gerekir.
-    Üye hesabı parolası | Üye hesabı parolası, bu üye için oluşturulan Ethereum hesabı için özel anahtarını şifrelemek için kullanılır. Üye hesabı ve üyesi hesap parolası consortium yönetimi için kullanın.
-    Consortium adı | Yeni bir Konsorsiyumu için benzersiz bir ad girin. Davet aracılığıyla Konsorsiyumu birleştirilecekse, katıldığınız consortium değerdir.
-    Açıklama | Consortium açıklaması.
-    Protocol |  Önizleme çekirdek protokolünü destekler.
-    Fiyatlandırma | Düğüm yapılandırması yeni hizmetiniz için. Seçin **standart**. Varsayılan ayarlar, 2 Doğrulayıcı düğümleri ve 1 işlem düğüm gösterir.
-    İşlem düğümü parola | Üyenin varsayılan işlem düğümü için parola. Parola, blok zinciri üyenin varsayılan işlem düğümü genel uç bağlanırken için temel kimlik doğrulaması kullanın.
+    Bölge | Bu, konsorsiyumun tüm üyeleri için aynı olmalıdır.
+    Üye hesabı parolası | Üye hesabı parolası, üyelik için oluşturulan Ethereum hesabının özel anahtarını şifrelemek için kullanılır. Konsorsiyum yönetimi için üye hesabı ve üye hesabı parolasını kullanırsınız.
+    Konsorsiyum adı | Yeni bir konsorsiyum için benzersiz bir ad girin. Bir toplantıya bir davet aracılığıyla katılırken, bu değer katıldığınız konsorsiyumun değeridir.
+    Açıklama | Konsorsiyumun açıklaması.
+    Protokol |  Önizleme, çekirdek protokolünü destekler.
+    Fiyatlandırma | Yeni hizmetinizin düğüm yapılandırması. **Standart**' ı seçin. 2 Doğrulayıcı düğümleri ve 1 işlem düğümü varsayılan ayarlardır.
+    İşlem düğümü parolası | Üyenin varsayılan işlem düğümü için parola. Blok zinciri üyesinin varsayılan işlem düğümü genel uç noktasına bağlanırken temel kimlik doğrulaması için parolayı kullanın.
 
-1. Seçin **Oluştur** hizmeti sağlanamadı. Sağlama yaklaşık 10 dakika sürer.
-1. Seçin **bildirimleri** dağıtım işlemini izlemek için araç çubuğunda.
-1. Dağıtımdan sonra blok zinciri üyesine gidin.
+1. Hizmeti sağlamak için **Oluştur** ' u seçin. Sağlama yaklaşık 10 dakika sürer.
+1. Dağıtım işlemini izlemek için araç çubuğunda **Bildirimler** ' i seçin.
+1. Dağıtımdan sonra, blok zinciri üyesine gidin.
 
-Seçin **genel bakış**, hizmetinizi RootContract adresi ve üye hesapları dahil olmak üzere hakkında temel bilgileri görüntüleyebilirsiniz.
+**Genel bakış**' ı seçtiğinizde, hizmetinize ilişkin temel bilgileri rootcontract adresi ve üye hesabı da dahil olmak üzere görüntüleyebilirsiniz.
 
-![Blok zinciri üyelerine genel bakış](./media/create-member/overview.png)
+![Blok zinciri üyesine genel bakış](./media/create-member/overview.png)
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme
 
-Sonraki hızlı veya öğretici için oluşturduğunuz üye kullanabilirsiniz. Artık gerekli olmadığında silerek kaynakları silebilirsiniz `myResourceGroup` oluşturduğunuz kaynak grubunu Azure Blockchain hizmeti tarafından.
+Sonraki hızlı başlangıç veya öğretici için oluşturduğunuz üyeyi kullanabilirsiniz. Artık gerekli değilse, Azure blok zinciri hizmeti tarafından oluşturduğunuz `myResourceGroup` kaynak grubunu silerek kaynakları silebilirsiniz.
 
 Kaynak grubunu silmek için:
 
-1. Azure portalında gidin **kaynak grubu** sol gezinti bölmesi ve silmek istediğiniz kaynak grubunu seçin.
-2. **Kaynak grubunu sil**'i seçin. Kaynak grubu adı girerek silme doğrulamak **Sil**.
+1. Azure portal sol gezinti bölmesindeki **kaynak grubu** ' na gidin ve silmek istediğiniz kaynak grubunu seçin.
+2. **Kaynak grubunu sil**'i seçin. Kaynak grubu adını girip **Sil**' i seçerek silmeyi doğrulayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [MetaMask kullanarak bağlanmak ve akıllı bir sözleşme dağıtma](connect-metamask.md)
+> [MetaMask kullanarak akıllı bir sözleşmeyi bağlama ve dağıtma](connect-metamask.md)

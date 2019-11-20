@@ -1,129 +1,134 @@
 ---
-title: Hive ambarı Bağlayıcısı ile Apache Hive ve Apache Spark'ı tümleştirme
-description: Apache Spark ve Apache Hive, Azure HDInsight Hive ambarı bağlayıcı ile tümleştirmeyi öğrenin.
-ms.service: hdinsight
+title: Apache Spark & Hive-Hive ambar Bağlayıcısı-Azure HDInsight
+description: Apache Spark ve Apache Hive Azure HDInsight 'ta Hive ambarı Bağlayıcısı ile tümleştirmeyi öğrenin.
 author: nakhanha
 ms.author: nakhanha
 ms.reviewer: hrasheed
+ms.service: hdinsight
 ms.topic: conceptual
-ms.date: 04/29/2019
-ms.openlocfilehash: b245661ab8f26c1f529a049d326d2c72838c7a17
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 10/08/2019
+ms.openlocfilehash: 2448550cf35f92bc8d91bc6ad9d5b22cc90b5ae0
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67056733"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73494300"
 ---
-# <a name="integrate-apache-spark-and-apache-hive-with-the-hive-warehouse-connector"></a>Hive ambarı Bağlayıcısı ile Apache Hive ve Apache Spark'ı tümleştirme
+# <a name="integrate-apache-spark-and-apache-hive-with-the-hive-warehouse-connector"></a>Hive ambarı Bağlayıcısı ile Apache Spark ve Apache Hive tümleştirme
 
-Apache Hive ambarı Bağlayıcısı (HWC), Apache Hive ve Apache Spark ile DataFrames Spark ve Hive tabloları arasında veri taşıma ve ayrıca Hive tablolarına akış verileri Spark yönlendiren gibi görevleri destekleyerek daha kolayca çalışmanıza olanak sağlayan bir kitaplıktır. Spark ve Hive arasında bir köprü gibi Hive ambarı Bağlayıcısı çalışır. Scala, Java ve Python için geliştirmeyi destekler.
+Apache Hive ambar Bağlayıcısı (HWC), verileri Spark veri çerçeveleri ve Hive tabloları arasında taşıma ve ayrıca Spark akış verilerini Hive tablolarına yönlendirme gibi görevleri destekleyerek Apache Spark ve Apache Hive ile daha kolay çalışmanıza olanak tanıyan bir kitaplıktır. Hive ambar Bağlayıcısı Spark ve Hive arasında bir köprü gibi çalışmaktadır. Geliştirme için Scala, Java ve Python 'u destekler.
 
-Hive ambarı Bağlayıcısı güçlü büyük veri uygulamaları oluşturmak için Hive'ı ve Spark'ın benzersiz özelliklerinden yararlanmanıza olanak sağlar. Apache Hive veritabanı işlemler atomik, Consistent, Isolated ve dayanıklı (ACID) için destek sunar. ACID hakkında daha fazla bilgi ve Hive işlemleri için bkz: [Hive işlemleri](https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions). Hive, Apache Ranger ve düşük gecikme süresi analitik işleme Apache Spark, kullanılabilir değil aracılığıyla ayrıntılı güvenlik denetimleri de sunar.
+Hive ambarı Bağlayıcısı, güçlü büyük veri uygulamaları oluşturmak için Hive ve Spark 'ın benzersiz özelliklerinden yararlanmanıza olanak tanır. Apache Hive atomik, tutarlı, yalıtılmış ve dayanıklı (ACID) veritabanı işlemleri için destek sunar. Hive içindeki ACID ve işlemler hakkında daha fazla bilgi için bkz. [Hive işlemleri](https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions). Hive Ayrıca Apache Ranger aracılığıyla ayrıntılı güvenlik denetimleri ve düşük gecikme süreli analitik Işlem Apache Spark kullanılamaz.
 
-Apache Spark bir yapılandırılmış Akış akış özellikleri kullanılabilir değil, Apache Hive veren API vardır. HDInsight 4.0 ile başlayarak, 2.3.1 Apache Spark ve Apache Hive 3.1.0 birlikte çalışabilirlik zorlaştırabilir ayrı meta depolar vardır. Hive ambarı Bağlayıcısı, Spark ve Hive birlikte kullanmayı kolaylaştırır. HWC kitaplığı paralel olarak daha etkili ve ölçeklenebilir bir standart Hive JDBC bağlantı spark'tan kullanmaktan yapmadan Spark Yürütücü için LLAP Daemon'ları verileri yükler.
+Apache Spark, Apache Hive içinde kullanılamayan akış özellikleri sağlayan yapılandırılmış bir akış API 'SI vardır. HDInsight 4,0 ' den başlayarak, Apache Spark 2.3.1 ve Apache Hive 3.1.0, birlikte çalışabilirliğin zor olmasına yönelik ayrı metastores 'e sahiptir. Hive ambarı Bağlayıcısı Spark ve Hive 'yi birlikte kullanmayı kolaylaştırır. HWC kitaplığı, LLAP Daemon 'ları 'ten Spark yürüticilerine verileri paralel olarak yükler ve Spark 'tan Hive 'e standart bir JDBC bağlantısı kullanmaktan daha verimli ve ölçeklenebilir hale getirir.
 
-![Mimari](./media/apache-hive-warehouse-connector/hive-warehouse-connector-architecture.png)
+![Hive ambarı bağlayıcı mimarisi](./media/apache-hive-warehouse-connector/hive-warehouse-connector-architecture.png)
 
-Hive ambarı Bağlayıcısı tarafından desteklenen operations bazıları şunlardır:
+Hive ambarı Bağlayıcısı tarafından desteklenen işlemlerden bazıları şunlardır:
 
-* Açıklayan bir tablo
-* ORC biçimlendirilmiş veriler için tablo oluşturma
-* Hive veri seçme ve bir DataFrame alınıyor
-* Bir veri çerçevesi için Hive toplu işlemde yazma
-* Bir Hive update deyimi yürütülüyor
-* Tablo verilerini kovanından okuma, Spark, dönüştürme ve yeni bir Hive tablosuna yazma
-* Bir DataFrame veya Spark akışı HiveStreaming kullanarak Hive için yazma
+* Bir tabloyu açıklama
+* ORC biçimli veriler için tablo oluşturma
+* Hive verilerini seçme ve bir veri çerçevesini alma
+* Toplu işteki bir veri çerçevesini Hive 'e yazma
+* Hive güncelleştirme ekstresi yürütülüyor
+* Hive 'den tablo verilerini okuma, Spark 'ta dönüştürme ve yeni bir Hive tablosuna yazma
+* HiveStreaming kullanarak Hive 'e veri çerçevesi veya Spark akışı yazma
 
-## <a name="hive-warehouse-connector-setup"></a>Hive ambarı bağlayıcı Kurulumu
+## <a name="hive-warehouse-connector-setup"></a>Hive ambar Bağlayıcısı kurulumu
 
-Bir Azure HDInsight Spark ve etkileşimli sorgu kümesi arasında Hive ambarı bağlayıcısını ayarlamak için aşağıdaki adımları izleyin:
+Azure HDInsight 'ta Spark ve etkileşimli sorgu kümesi arasında Hive ambarı bağlayıcısını ayarlamak için aşağıdaki adımları izleyin:
 
-1. Bir depolama hesabı ve özel bir Azure sanal ağ ile Azure portalını kullanarak bir HDInsight Spark 4.0 kümesi oluşturun. Bir Azure sanal ağında bir küme oluşturma hakkında daha fazla bilgi için bkz: [var olan bir sanal ağa ekleme HDInsight](../../hdinsight/hdinsight-extend-hadoop-virtual-network.md#existingvnet).
-1. Spark kümesi olarak aynı depolama hesabını ve Azure sanal ağ ile Azure portalını kullanarak bir HDInsight etkileşimli sorgu (LLAP) 4.0 kümesi oluşturun.
-1. İçeriğini kopyalayın `/etc/hosts` için etkileşimli sorgu kümenizin headnode0 dosyada `/etc/hosts` Spark kümenizin headnode0 dosyası. Bu adım, etkileşimli sorgu kümesi düğümlerin IP adreslerini çözümlemeye Spark kümenizin izin verir. Güncelleştirilmiş dosyanın içeriğini görüntülemek `cat /etc/hosts`. Çıktı aşağıdaki ekran görüntüsünde gösterilen gibi görünmelidir.
+### <a name="create-clusters"></a>Küme oluşturma
 
-    ![hosts dosyasını görüntüleme](./media/apache-hive-warehouse-connector/hive-warehouse-connector-hosts-file.png)
+1. Depolama hesabı ve özel bir Azure sanal ağı ile bir HDInsight Spark **4,0** kümesi oluşturun. Azure sanal ağında bir küme oluşturma hakkında daha fazla bilgi için bkz. [mevcut bir sanal ağa HDInsight ekleme](../../hdinsight/hdinsight-plan-virtual-network-deployment.md#existingvnet).
 
-1. Aşağıdaki adımları uygulayarak Spark küme ayarları yapılandırın: 
-    1. Azure portalına gidin, HDInsight kümeleri seçin ve ardından, küme adına tıklayın.
-    1. Sağ taraftaki altında **küme panoları**seçin **Ambari giriş**.
-    1. Ambari web kullanıcı Arabirimi, tıklayın **SPARK2** > **YAPILANDIRMALARI** > **özel spark2-varsayılanları**.
+1. Spark kümesi ile aynı depolama hesabı ve Azure sanal ağı ile bir HDInsight etkileşimli sorgu (LLAP) **4,0** kümesi oluşturun.
 
-        ![Spark2 Ambari yapılandırma](./media/apache-hive-warehouse-connector/hive-warehouse-connector-spark2-ambari.png)
+### <a name="modify-hosts-file"></a>Hosts dosyasını Değiştir
 
-    1. Ayarlama `spark.hadoop.hive.llap.daemon.service.hosts` özelliği aynı değere **LLAP uygulama adı** altında **hive etkileşimli-env Gelişmiş**. Örneğin, `@llap0`
+Etkileşimli sorgu kümenizin headnode0 üzerindeki `/etc/hosts` dosyasındaki düğüm bilgilerini kopyalayın ve bilgileri Spark kümenizin headnode0 üzerindeki `/etc/hosts` dosyasına birleştirin. Bu adım, Spark kümenizin etkileşimli sorgu kümesindeki düğümlerin IP adreslerini çözümlemesine izin verir. Güncelleştirilmiş dosyanın içeriğini `cat /etc/hosts`görüntüleyin. Son çıktı aşağıdaki ekran görüntüsünde gösterilen gibi görünmelidir.
 
-    1. Ayarlama `spark.sql.hive.hiveserver2.jdbc.url` üzerinde etkileşimli sorgu kümesi Hiveserver2 ile bağlanan JDBC bağlantı dizesi. Kümeniz için bağlantı dizesi, URI aşağıdaki gibi görünür. `CLUSTERNAME` Spark kümenizin adıdır ve `user` ve `password` parametreleri, kümeniz için doğru değerlere ayarlanır.
+![Hive ambar Bağlayıcısı dosyayı barındırır](./media/apache-hive-warehouse-connector/hive-warehouse-connector-hosts-file.png)
 
-        ```
-        jdbc:hive2://LLAPCLUSTERNAME.azurehdinsight.net:443/;user=admin;password=PWD;ssl=true;transportMode=http;httpPath=/hive2
-        ```
+### <a name="gather-preliminary-information"></a>Ön bilgileri toplayın
 
-        >[!Note] 
-        > JDBC URL Hiveserver2 ile bağlanmak için kimlik bilgilerini içermesi gereken bir kullanıcı adı ve parola da dahil olmak üzere.
+#### <a name="from-your-interactive-query-cluster"></a>Etkileşimli sorgu kümeinizden
 
-    1. Ayarlama `spark.datasource.hive.warehouse.load.staging.dir` uygun HDFS uyumlu hazırlama dizinine. İki farklı küme varsa HiveServer2 erişimi olduğunu hazırlama dizini LLAP kümenin depolama hesabının hazırlama dizinindeki bir klasör olmalıdır. Örneğin, `wasb://STORAGE_CONTAINER_NAME@STORAGE_ACCOUNT_NAME.blob.core.windows.net/tmp` burada `STORAGE_ACCOUNT_NAME` küme tarafından kullanılan depolama hesabı adı ve `STORAGE_CONTAINER_NAME` depolama kapsayıcısının adı.
+1. `https://LLAPCLUSTERNAME.azurehdinsight.net` kullanarak kümenin Apache ambarı giriş sayfasına gidin; burada `LLAPCLUSTERNAME` etkileşimli sorgu kümenizin adıdır.
 
-    1. Ayarlama `spark.datasource.hive.warehouse.metastoreUri` meta veri deposu URI'sini etkileşimli sorgu kümesi değerine sahip. LLAP kümeniz için metastoreUri bulmak için Ara **hive.metastore.uris** Ambari UI, LLAP için bir özellik kümesi altında **Hive** > **Gelişmiş**  >  **Genel**. Değer, aşağıdaki URI aşağıdakine benzer:
+1. Gelişmiş Hive ** > gelişmiş** > Hive **-site** > **hive. Zookeeper. Quorum** > , **Hive** **configs** ' a gidin ve değeri aklınızda edin. Değer şuna benzer olabilir: `zk0-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:2181,zk1-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:2181,zk4-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:2181`.
 
-        ```
-        thrift://hn0-hwclla.0iv2nyrmse1uvp2caa4e34jkmf.cx.internal.cloudapp.net:9083,
-        thrift://hn1-hwclla.0iv2nyrmse1uvp2caa4e34jkmf.cx.internal.cloudapp.net:9083
-        ```
+1. Gelişmiş > **genel** > **Hive. metasileri. Uri 'leri** > **Hive** > **configs** ' a gidin ve değeri aklınızda edin. Değer şuna benzer olabilir: `thrift://hn0-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:9083,thrift://hn1-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:9083`.
 
-    1. Ayarlama `spark.security.credentials.hiveserver2.enabled` için `false` modu için YARN istemci dağıtma.
-    1. Ayarlama `spark.hadoop.hive.zookeeper.quorum` LLAP kümenizin Zookeeper çekirdek için. Zookeeper çekirdek LLAP kümeniz için bulmak için Ara **hive.zookeeper.quorum** Ambari UI, LLAP için bir özellik kümesi altında **Hive** > **Gelişmiş**  >  **Hive site Gelişmiş**. Değer, aşağıdaki dize aşağıdakine benzer:
+#### <a name="from-your-apache-spark-cluster"></a>Apache Spark kümenizdeki
 
-        ```
-        zk1-nkhvne.0iv2nyrmse1uvp2caa4e34jkmf.cx.internal.cloudapp.net:2181,
-        zk4-nkhvne.0iv2nyrmse1uvp2caa4e34jkmf.cx.internal.cloudapp.net:2181,
-        zk6-nkhvne.0iv2nyrmse1uvp2caa4e34jkmf.cx.internal.cloudapp.net:2181
-        ```
+1. Apache Spark Kümenizin adı `SPARKCLUSTERNAME` `https://SPARKCLUSTERNAME.azurehdinsight.net` kullanarak kümenin Apache ambarı giriş sayfasına gidin.
 
-Hive ambarı Bağlayıcınızı yapılandırmasını test etmek için bu bölümdeki adımları [bağlanan ve çalışan sorguların](#connecting-and-running-queries).
+1. Gelişmiş Hive ** > ** **configs** > **Gelişmiş** > **Gelişmiş Hive-Interactive-site** > **Hive. LLAP. Daemon. Service. konaklarına** gidin ve değeri aklınızda yapın. Değer şuna benzer olabilir: `@llap0`.
 
-## <a name="using-the-hive-warehouse-connector"></a>Hive ambarı Bağlayıcısı'nı kullanma
+### <a name="configure-spark-cluster-settings"></a>Spark kümesi ayarlarını yapılandırma
 
-### <a name="connecting-and-running-queries"></a>Bağlanma ve sorgu çalıştırma
+Spark ambarı Web Kullanıcı arabiriminizden **Spark2** > **configs** > **özel Spark2-varsayılanlar**' a gidin.
 
-Etkileşimli sorgu kümenize bağlanmak ve Hive ambarı Bağlayıcısı'nı kullanarak sorguları yürütmek için birkaç farklı yöntemleri arasında seçim yapabilirsiniz. Desteklenen yöntemler aşağıdaki araçlar şunlardır:
+![Apache ambarı Spark2 yapılandırması](./media/apache-hive-warehouse-connector/hive-warehouse-connector-spark2-ambari.png)
 
-* [Spark-shell](../spark/apache-spark-shell.md)
+Aşağıdakileri eklemek/güncelleştirmek için gereken **özelliği Ekle...** öğesini seçin:
+
+| Anahtar | Değer |
+|----|----|
+|`spark.hadoop.hive.llap.daemon.service.hosts`|Daha önce **Hive. LLAP. Daemon. Service. konaklarından**edindiğiniz değer.|
+|`spark.sql.hive.hiveserver2.jdbc.url`|`jdbc:hive2://LLAPCLUSTERNAME.azurehdinsight.net:443/;user=admin;password=PWD;ssl=true;transportMode=http;httpPath=/hive2`. Etkileşimli sorgu kümesinde Hiveserver2 'e bağlanan JDBC bağlantı dizesine ayarlayın. `LLAPCLUSTERNAME`, etkileşimli sorgu kümenizin adıyla DEĞIŞTIRIN. `PWD` gerçek parolayla değiştirin.|
+|`spark.datasource.hive.warehouse.load.staging.dir`|`wasbs://STORAGE_CONTAINER_NAME@STORAGE_ACCOUNT_NAME.blob.core.windows.net/tmp`. Uygun bir ile uyumlu hazırlama dizinine ayarlayın. İki farklı kümeniz varsa, HiveServer2 erişimi olması için, hazırlama dizini LLAP kümesinin depolama hesabının hazırlama dizininde bir klasör olmalıdır.  `STORAGE_ACCOUNT_NAME`, küme tarafından kullanılan depolama hesabının adıyla ve `STORAGE_CONTAINER_NAME` depolama kapsayıcısının adıyla değiştirin.|
+|`spark.datasource.hive.warehouse.metastoreUri`|Daha önce **Hive. metaser. Uri**'lerden edindiğiniz değer.|
+|`spark.security.credentials.hiveserver2.enabled`|YARN istemci dağıtım modu için `false`.|
+|`spark.hadoop.hive.zookeeper.quorum`|Daha önce **Hive. Zookeeper. Quorum**öğesinden edindiğiniz değer.|
+
+Değişiklikleri kaydedin ve gerektiğinde bileşenleri yeniden başlatın.
+
+## <a name="using-the-hive-warehouse-connector"></a>Hive ambarı bağlayıcısını kullanma
+
+### <a name="connecting-and-running-queries"></a>Sorguları bağlama ve çalıştırma
+
+Etkileşimli sorgu kümenize bağlanmak ve Hive ambarı bağlayıcısını kullanarak sorguları yürütmek için birkaç farklı yöntem arasından seçim yapabilirsiniz. Desteklenen yöntemler aşağıdaki araçları içerir:
+
+* [Spark-Shell](../spark/apache-spark-shell.md)
 * PySpark
-* Spark-submit
+* Spark-gönder
 * [Zeppelin](../spark/apache-spark-zeppelin-notebook.md)
 * [Livy](../spark/apache-spark-livy-rest-interface.md)
 
-Bu makaledeki tüm örnekleri spark-shell üzerinden yürütülür.
+Bu makalede sunulan tüm örnekler Spark-Shell aracılığıyla yürütülür.
 
-Spark-shell oturumu başlatmak için aşağıdaki adımları uygulayın:
+Spark-Shell oturumu başlatmak için aşağıdaki adımları uygulayın:
 
-1. SSH kümenizin baş düğümüne uygulayın. Kümenize SSH ile bağlanma hakkında daha fazla bilgi için bkz. [SSH kullanarak HDInsight (Apache Hadoop) bağlanma](../../hdinsight/hdinsight-hadoop-linux-use-ssh-unix.md).
-1. Doğru dizinde oturum yazarak değiştirme `cd /usr/hdp/current/hive_warehouse_connector` veya spark-shell komutu parametre olarak kullanılan tüm jar dosyalarının tam yolunu sağlayın.
-1. Spark Kabuğu'nu başlatmak için aşağıdaki komutu girin:
+1. Apache Spark kümeniz için baş düğümüne 'a SSH. SSH ile kümenize bağlanma hakkında daha fazla bilgi için bkz. [SSH kullanarak HDInsight 'A bağlanma (Apache Hadoop)](../../hdinsight/hdinsight-hadoop-linux-use-ssh-unix.md).
+
+1. Spark kabuğunu başlatmak için aşağıdaki komutu girin:
 
     ```bash
     spark-shell --master yarn \
-    --jars /usr/hdp/3.0.1.0-183/hive_warehouse_connector/hive-warehouse-connector-assembly-1.0.0.3.0.1.0-183.jar \
+    --jars /usr/hdp/current/hive_warehouse_connector/hive-warehouse-connector-assembly-1.0.0.3.0.2.1-8.jar \
     --conf spark.security.credentials.hiveserver2.enabled=false
     ```
 
-1. Bir karşılama iletisi görürsünüz ve `scala>` komutları girebildiğiniz istemi.
+    Komut girebileceğiniz bir hoş geldiniz iletisi ve `scala>` istemi görürsünüz.
 
-1. Spark-shell başlattıktan sonra bir Hive ambarı bağlayıcı örneği aşağıdaki komutları kullanarak başlatılabilir:
+1. Spark-Shell ' i başlattıktan sonra, aşağıdaki komutları kullanarak bir Hive ambar Bağlayıcısı örneği başlatılabilir:
 
     ```scala
     import com.hortonworks.hwc.HiveWarehouseSession
     val hive = HiveWarehouseSession.session(spark).build()
     ```
 
-### <a name="connecting-and-running-queries-on-enterprise-security-package-esp-clusters"></a>Bağlanarak ve sorgular kümelerine Kurumsal güvenlik paketi (ESP)
+### <a name="connecting-and-running-queries-on-enterprise-security-package-esp-clusters"></a>Kurumsal Güvenlik Paketi (ESP) kümelerinde sorguları bağlama ve çalıştırma
 
-Kurumsal güvenlik paketi (ESP), Active Directory tabanlı kimlik doğrulaması, birden çok kullanıcı desteği ve Azure HDInsight, Apache Hadoop kümeleri için rol tabanlı erişim denetimi gibi kurumsal sınıf özellikler sağlar. ESP hakkında daha fazla bilgi için bkz. [Kurumsal güvenlik paketi ile Apache Hadoop güvenliğine giriş](../domain-joined/apache-domain-joined-introduction.md).
+Kurumsal Güvenlik Paketi (ESP), Azure HDInsight 'ta Apache Hadoop kümelerine yönelik Active Directory tabanlı kimlik doğrulaması, çoklu Kullanıcı desteği ve rol tabanlı erişim denetimi gibi kurumsal düzeyde yetenekler sağlar. ESP hakkında daha fazla bilgi için bkz. [HDInsight 'ta kurumsal güvenlik paketi kullanma](../domain-joined/apache-domain-joined-architecture.md).
 
-1. İlk 1 ve 2 altında adımları [bağlanan ve çalışan sorguların](#connecting-and-running-queries).
-1. Tür `kinit` ve bir etki alanı kullanıcısı ile oturum açın.
-1. Başlangıç spark-shell ile tam listesini aşağıda gösterildiği gibi yapılandırma parametreleri. Tüm değerleri açılı ayraçlar arasındaki tüm büyük harfleri, kümenizde tabanlı belirtilmelidir. Herhangi bir parametre aşağıdaki giriş değerleri bulmanız gerekiyorsa, bölümüne bakın [Hive ambarı bağlayıcı Kurulumu](#hive-warehouse-connector-setup).:
+1. Apache Spark kümeniz için baş düğümüne 'a SSH. SSH ile kümenize bağlanma hakkında daha fazla bilgi için bkz. [SSH kullanarak HDInsight 'A bağlanma (Apache Hadoop)](../../hdinsight/hdinsight-hadoop-linux-use-ssh-unix.md).
+
+1. `kinit` yazın ve bir etki alanı kullanıcısı ile oturum açın.
+
+1. Spark-Shell ' i aşağıda gösterildiği gibi yapılandırma parametrelerinin tam listesiyle başlatın. Açılı ayraçlar arasındaki tüm büyük harflerde bulunan tüm değerler kümenize göre belirtilmelidir. Aşağıdaki parametrelerden herhangi birine giriş yapmak için değerleri bulmanız gerekiyorsa, [Hive ambarı bağlayıcı kurulumu](#hive-warehouse-connector-setup)'ndaki bölümüne bakın.:
 
     ```bash
     spark-shell --master yarn \
@@ -136,9 +141,9 @@ Kurumsal güvenlik paketi (ESP), Active Directory tabanlı kimlik doğrulaması,
     --conf spark.hadoop.hive.zookeeper.quorum='<ZOOKEEPER_QUORUM>'
    ```
 
-### <a name="creating-spark-dataframes-from-hive-queries"></a>Spark veri çerçevelerini Hive sorguları oluşturma
+### <a name="creating-spark-dataframes-from-hive-queries"></a>Hive sorgularından Spark veri çerçeveleri oluşturma
 
-HWC kitaplığını kullanarak tüm sorguların sonuçlarını bir veri çerçevesi döndürülür. Aşağıdaki örnekler temel sorgu oluşturma işlemini göstermektedir.
+HWC kitaplığını kullanan tüm sorguların sonuçları bir veri çerçevesi olarak döndürülür. Aşağıdaki örneklerde, temel bir sorgunun nasıl oluşturulacağı gösterilmektedir.
 
 ```scala
 hive.setDatabase("default")
@@ -146,70 +151,84 @@ val df = hive.executeQuery("select * from hivesampletable")
 df.filter("state = 'Colorado'").show()
 ```
 
-Sorgu sonuçlarını Spark kitaplıklar MLIB ve SparkSQL gibi kullanılabilir Spark DataFrames ' dir.
+Sorgunun sonuçları, MLIB ve mini-SQL gibi Spark kitaplıklarıyla kullanılabilen Spark veri çerçevelerinden oluşur.
 
-### <a name="writing-out-spark-dataframes-to-hive-tables"></a>Hive tablolarını Spark veri çerçevelerini çıkış yazma
+### <a name="writing-out-spark-dataframes-to-hive-tables"></a>Spark veri çerçevelerini Hive tablolarına yazma
 
-Spark, Hive'nın yönetilen ACID tablolarını yazmak yerel olarak desteklemiyor. HWC kullanarak, ancak herhangi bir veri çerçevesi bir Hive tablosuna dışarı yazabileceğiniz. Bu işlev aşağıdaki örnekte iş görebilirsiniz:
+Spark, Hive 'un yönetilen ACID tablolarına yazmayı yerel olarak desteklemez. Ancak, HWC 'yi kullanarak herhangi bir veri çerçevesini Hive tablosuna yazabilirsiniz. Aşağıdaki örnekte, bu işlevselliği çalışır durumda görebilirsiniz:
 
-1. Adlı bir tablo oluşturmak `sampletable_colorado` ve aşağıdaki komutu kullanarak sütunlarını belirtin:
+1. `sampletable_colorado` adlı bir tablo oluşturun ve aşağıdaki komutu kullanarak sütunlarını belirtin:
 
     ```scala
     hive.createTable("sampletable_colorado").column("clientid","string").column("querytime","string").column("market","string").column("deviceplatform","string").column("devicemake","string").column("devicemodel","string").column("state","string").column("country","string").column("querydwelltime","double").column("sessionid","bigint").column("sessionpagevieworder","bigint").create()
     ```
 
-2. Tabloyu filtreleyip `hivesampletable` nerede sütunu `state` eşittir `Colorado`. Hive tablo bu sorgu, bir Spark DataFrame döndürülür. Hive tablosunda veri çerçevesi kaydedildikten sonra `sampletable_colorado` kullanarak `write` işlevi.
-    
+1. Sütunun `state` `Colorado`eşit olduğu `hivesampletable` tablo filtreleyin. Hive tablosunun bu sorgusu Spark veri çerçevesi olarak döndürülür. Sonra DataFrame, `write` işlevi kullanılarak `sampletable_colorado` Hive tablosuna kaydedilir.
+
     ```scala
     hive.table("hivesampletable").filter("state = 'Colorado'").write.format(HiveWarehouseSession.HIVE_WAREHOUSE_CONNECTOR).option("table","sampletable_colorado").save()
     ```
 
-Sonuçta elde edilen tabloda aşağıdaki ekran görüntüsünde görebilirsiniz.
-
-![Sonuçta elde edilen Tablo Göster](./media/apache-hive-warehouse-connector/hive-warehouse-connector-show-hive-table.png)
-
-### <a name="structured-streaming-writes"></a>Yapılandırılmış akış yazma
-
-Hive ambarı Bağlayıcısı'nı kullanarak, Spark, Hive tablolarına veri yazmak için akış kullanabilirsiniz.
-
-Verilerini bir Hive tablosuna 9999 localhost bağlantı noktası üzerinde bir Spark akışı'ndan alır bir Hive ambarı bağlayıcısı örneği oluşturmak için aşağıdaki adımları izleyin.
-
-1. Spark kümenizde bir terminal açın.
-1. Aşağıdaki komutla spark akışı başlayın:
+1. Aşağıdaki komutla sonuçları görüntüleyin:
 
     ```scala
-    val lines = spark.readStream.format("socket").option("host", "localhost").option("port",9988).load()
+    hive.table("sampletable_colorado").show()
+    ```
+    
+    ![Hive ambar Bağlayıcısı Hive tablosunu göster](./media/apache-hive-warehouse-connector/hive-warehouse-connector-show-hive-table.png)
+
+### <a name="structured-streaming-writes"></a>Yapılandırılmış akış yazmaları
+
+Hive ambarı bağlayıcısını kullanarak, verileri Hive tablolarına yazmak için Spark akışını kullanabilirsiniz.
+
+Localhost bağlantı noktası 9999 üzerindeki bir Spark akışından Hive tablosuna veri döndüren bir Hive ambarı bağlayıcı örneği oluşturmak için aşağıdaki adımları izleyin.
+
+1. [Sorguları bağlama ve çalıştırma](#connecting-and-running-queries)altındaki adımları izleyin.
+
+1. Spark akışını aşağıdaki komutla başlatın:
+
+    ```scala
+    val lines = spark.readStream.format("socket").option("host", "localhost").option("port",9999).load()
     ```
 
-1. Veriler için aşağıdaki adımları uygulayarak, oluşturduğunuz Spark akışı oluştur:
-    1. Başka aynı Spark kümesinde terminal açın.
-    1. Komut isteminde `nc -lk 9999`. Bu komut, komut satırından belirtilen bağlantı noktasına veri göndermesini netcat yardımcı programını kullanır.
-    1. Başı tarafından izlenen Spark akış alımı için istediğiniz sözcükleri yazın.
-        ![Giriş verileri için spark akışı](./media/apache-hive-warehouse-connector/hive-warehouse-connector-spark-stream-data-input.png)
-1. Akış verileri tutmak için yeni bir Hive tablosu oluşturur. Spark-shell aşağıdaki komutları yazın:
+1. Aşağıdaki adımları uygulayarak oluşturduğunuz Spark akışı için veri oluşturun:
+    1. Aynı Spark kümesinde ikinci bir SSH oturumu açın.
+    1. Komut isteminde `nc -lk 9999`yazın. Bu komut, komut satırından belirtilen bağlantı noktasına veri göndermek için netcat yardımcı programını kullanır.
+
+1. İlk SSH oturumuna dönün ve akış verilerini tutmak için yeni bir Hive tablosu oluşturun. Spark-Shell ' de aşağıdaki komutu girin:
 
     ```scala
     hive.createTable("stream_table").column("value","string").create()
     ```
 
-1. Veri akışı aşağıdaki komutu kullanarak yeni oluşturduğunuz tabloya yazma:
+1. Ardından aşağıdaki komutu kullanarak akış verilerini yeni oluşturulan tabloya yazın:
 
     ```scala
     lines.filter("value = 'HiveSpark'").writeStream.format(HiveWarehouseSession.STREAM_TO_STREAM).option("database", "default").option("table","stream_table").option("metastoreUri",spark.conf.get("spark.datasource.hive.warehouse.metastoreUri")).option("checkpointLocation","/tmp/checkpoint1").start()
     ```
 
     >[!Important]
-    > `metastoreUri` Ve `database` seçenekleri şu anda ayarlanmalıdır el ile Apache Spark için bilinen bir sorun nedeniyle. Bu sorun hakkında daha fazla bilgi için bkz. [SPARK 25460](https://issues.apache.org/jira/browse/SPARK-25460).
+    > `metastoreUri` ve `database` seçeneklerinin Şu anda Apache Spark bilinen bir sorundan dolayı el ile ayarlanması gerekir. Bu sorun hakkında daha fazla bilgi için bkz. [Spark-25460](https://issues.apache.org/jira/browse/SPARK-25460).
 
-1. Aşağıdaki komutla tabloya eklenen verilere görüntüleyebilirsiniz:
+1. İkinci SSH oturumuna dönün ve aşağıdaki değerleri girin:
+
+    ```bash
+    foo
+    HiveSpark
+    bar
+    ```
+
+1. İlk SSH oturumuna dönün ve kısa etkinliği göz önünde edin. Verileri görüntülemek için aşağıdaki komutu kullanın:
 
     ```scala
     hive.table("stream_table").show()
     ```
 
-### <a name="securing-data-on-spark-esp-clusters"></a>ESP Spark kümelerinde verilerin güvenliğini sağlama
+İkinci SSH oturumunda netcat 'i durdurmak için **CTRL + C** tuşlarını kullanın. İlk SSH oturumunda Spark-Shell ' i çıkmak için `:q` kullanın.
 
-1. Tablo oluşturma `demo` aşağıdaki komutları girerek bazı örnek verilerle:
+### <a name="securing-data-on-spark-esp-clusters"></a>Spark ESP kümelerinde verilerin güvenliğini sağlama
+
+1. Aşağıdaki komutları girerek bazı örnek verilerle `demo` tablo oluşturun:
 
     ```scala
     create table demo (name string);
@@ -218,26 +237,29 @@ Verilerini bir Hive tablosuna 9999 localhost bağlantı noktası üzerinde bir S
     INSERT INTO demo VALUES ('InteractiveQuery');
     ```
 
-1. Aşağıdaki komutla tablonun içeriğini görüntüleyin. İlke, uygulamadan önce `demo` tablo tam sütun gösterir.
+1. Aşağıdaki komutla tablonun içeriğini görüntüleyin. İlkeyi uygulamadan önce, `demo` tablosu tam sütunu gösterir.
 
     ```scala
     hive.executeQuery("SELECT * FROM demo").show()
     ```
 
-    ![ranger İlkesi uygulanmadan önce tanıtım tablo](./media/apache-hive-warehouse-connector/hive-warehouse-connector-table-before-ranger-policy.png)
+    ![Ranger ilkesini uygulamadan önce demo tablosu](./media/apache-hive-warehouse-connector/hive-warehouse-connector-table-before-ranger-policy.png)
 
-1. Bir sütuna maskeleme yalnızca son dört karakterini sütunun gösteren ilke uygulayın.  
-    1. Ranger yönetici Arabirimine Git `https://CLUSTERNAME.azurehdinsight.net/ranger/`.
-    1. Hive hizmet kümenizin tıklayın **Hive**.
-        ![ranger İlkesi uygulanmadan önce tanıtım tablo](./media/apache-hive-warehouse-connector/hive-warehouse-connector-ranger-service-manager.png)
-    1. Tıklayarak **maskeleme** sekmesini ve ardından **Add New Policy** ![ilke listesi](./media/apache-hive-warehouse-connector/hive-warehouse-connector-ranger-hive-policy-list.png)
-    1. İstenen ilke adı belirtin. Veritabanı seçin: **Varsayılan**, Hive tablosu: **tanıtım**, Hive sütun: **adı**, kullanıcı: **rsadmin2**, erişim türleri: **seçin**ve **Kısmi maskesi: son 4 Göster** gelen **maskeleme seçenek** menüsü. **Ekle**'yi tıklatın.
-                ![ilke listesi](./media/apache-hive-warehouse-connector/hive-warehouse-connector-ranger-create-policy.png)
-1. Tablonun içeriğini yeniden görüntüleyin. Ranger İlkesi uygulandıktan sonra yalnızca son dört karakterini sütunun görebiliriz.
+1. Sütunun yalnızca son dört karakterini gösteren bir sütun maskeleme ilkesi uygulayın.  
+    1. `https://CLUSTERNAME.azurehdinsight.net/ranger/`adresindeki Ranger Yönetici Kullanıcı arabirimine gidin.
+    1. **Hive**altındaki kümeniz için Hive hizmetine tıklayın.
+        ![Ranger Service Manager](./media/apache-hive-warehouse-connector/hive-warehouse-connector-ranger-service-manager.png)
+    1. **Maskeleme** sekmesine tıklayın ve ardından **Yeni ilke ekleyin**
 
-    ![ranger İlkesi uygulandıktan sonra tanıtım tablo](./media/apache-hive-warehouse-connector/hive-warehouse-connector-table-after-ranger-policy.png)
+        ![Hive ambar Bağlayıcısı Ranger Hive ilke listesi](./media/apache-hive-warehouse-connector/hive-warehouse-connector-ranger-hive-policy-list.png)
+
+    a. İstenen bir ilke adı belirtin. Veritabanı seçin: **varsayılan**, Hive tablosu: **demo**, Hive sütunu: **ad**, Kullanıcı: **Rsadmin2**, erişim türleri: **Select**ve **kısmi maske:** **maskeleme seç seçenek** menüsünden son 4 ' ü göster. **Ekle**'ye tıklayın.
+                ilke oluşturma ![](./media/apache-hive-warehouse-connector/hive-warehouse-connector-ranger-create-policy.png)
+1. Tablonun içeriğini yeniden görüntüleyin. Ranger ilkesini uyguladıktan sonra sütunun yalnızca son dört karakterini görebiliriz.
+
+    ![Ranger ilkesini uyguladıktan sonra demo tablosu](./media/apache-hive-warehouse-connector/hive-warehouse-connector-table-after-ranger-policy.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * [Etkileşimli Sorguyu HDInsight ile Kullanma](https://docs.microsoft.com/azure/hdinsight/interactive-query/apache-interactive-query-get-started)
-* [Zeppelin, Livy, kullanarak Hive ambarı bağlayıcısıyla etkileşim örnekleri spark-submit ve pyspark](https://community.hortonworks.com/articles/223626/integrating-apache-hive-with-apache-spark-hive-war.html)
+* [Zeppelin, Livy, Spark-gönder ve pyspark kullanılarak Hive ambar Bağlayıcısı ile etkileşim örnekleri](https://community.hortonworks.com/articles/223626/integrating-apache-hive-with-apache-spark-hive-war.html)

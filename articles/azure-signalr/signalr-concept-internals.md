@@ -1,71 +1,71 @@
 ---
 title: Azure SignalR Service iç işlevleri
-description: Azure SignalR hizmeti dahili bileşenleri genel bakış.
+description: Azure SignalR hizmeti iç işlevleri, mimari, bağlantılar ve verilerin nasıl aktarıldığı hakkında bilgi edinin.
 author: sffamily
 ms.service: signalr
 ms.topic: conceptual
-ms.date: 03/01/2019
+ms.date: 11/13/2019
 ms.author: zhshang
-ms.openlocfilehash: cbcdfccfdca1dbed3b766b3f50295b1d355b3478
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 62afa5ee6993aa1bb3c7b5926e5320ab1fa510a2
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61401765"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74157605"
 ---
 # <a name="azure-signalr-service-internals"></a>Azure SignalR Service iç işlevleri
 
-Azure SignalR hizmeti, ASP.NET Core SignalR çerçevesi üzerine oluşturulmuştur. Ayrıca bir önizleme özelliği olarak ASP.NET SignalR destekler.
+Azure SignalR hizmeti ASP.NET Core SignalR çerçevesinin üzerine kurulmuştur. Ayrıca, önizleme özelliği olarak ASP.NET SignalR 'yi destekler.
 
-> Azure SignalR hizmeti ASP.NET Core framework üzerinde ASP.NET SignalR Veri Protokolü in ASP.NET Signalr'yi destekleyen için
+> Azure SignalR hizmeti, ASP.NET SignalR 'yi desteklemek için ASP.NET Core Framework 'ün en üstünde ASP.NET SignalR 'nin veri protokolünü yeniden uygular
 
-Birkaç kod satırıyla SignalR hizmet ile çalışması için yerel bir ASP.NET Core SignalR uygulama kolayca geçirebilirsiniz.
+Bir yerel ASP.NET Core SignalR uygulamasını, birkaç satır kod değişikliğine sahip SignalR hizmeti ile çalışmak üzere kolayca geçirebilirsiniz.
 
-SignalR Service, uygulama sunucusu ile kullandığınızda, aşağıdaki diyagramda tipik mimarisini açıklar.
+Aşağıdaki diyagramda, SignalR hizmetini uygulama sunucunuz ile kullandığınızda tipik mimari açıklanmaktadır.
 
-Şirket içinde barındırılan bir ASP.NET Core SignalR uygulamadan farklar de ele alınmıştır.
+Şirket içinde barındırılan ASP.NET Core SignalR uygulamasının farklılıkları da ele alınmıştır.
 
 ![Mimari](./media/signalr-concept-internals/arch.png)
 
 ## <a name="server-connections"></a>Sunucu bağlantıları
 
-Şirket içinde barındırılan ASP.NET Core SignalR uygulama sunucusu dinleyen ve istemcileri doğrudan bağlanır.
+Şirket içinde barındırılan ASP.NET Core SignalR uygulama sunucusu, istemcileri doğrudan dinler ve istemcilere bağlar.
 
-SignalR hizmeti ile uygulama sunucusu artık kalıcı istemci bağlantıları, bunun yerine kabul ediyor:
+SignalR hizmeti ile uygulama sunucusu artık kalıcı istemci bağlantılarını kabul etmiyor, bunun yerine:
 
-1. A `negotiate` uç noktası için her hub'ı Azure SignalR hizmeti SDK'sı tarafından gösterilir.
-1. Bu uç nokta, istemcinin anlaşma isteklerine yanıt ve istemciler için SignalR hizmeti yeniden yönlendirme.
+1. `negotiate` uç noktası her Hub için Azure SignalR hizmeti SDK 'Sı tarafından sunulur.
+1. Bu uç nokta, istemcinin anlaşma isteklerine yanıt verir ve istemcileri SignalR hizmetine yönlendirir.
 1. Sonuç olarak, istemciler SignalR hizmetine bağlanır.
 
-Daha fazla bilgi için [istemci bağlantıları](#client-connections).
+Daha fazla bilgi için bkz. [istemci bağlantıları](#client-connections).
 
-Uygulama sunucusu başlatıldıktan sonra 
-- Azure SignalR hizmeti SDK'sı, ASP.NET Core SignalR için SignalR hizmeti için hub başına 5 WebSocket bağlantılarını açılır. 
-- Azure SignalR hizmeti SDK'sı, ASP.NET SignalR için SignalR hizmeti için hub başına 5 WebSocket bağlantı ve uygulama WebSocket bağlantısı başına açılır.
+Uygulama sunucusu başlatıldıktan sonra, 
+- ASP.NET Core SignalR için Azure SignalR hizmeti SDK 'Sı, SignalR hizmetine hub başına 5 WebSocket bağlantısı açar. 
+- ASP.NET SignalR için Azure SignalR hizmeti SDK 'Sı, SignalR hizmetine hub başına 5 WebSocket bağlantısı ve uygulama WebSocket bağlantısı başına bir tane açar.
 
-5 WebSocket bağlantılarını içinde değiştirilebilen varsayılan değer olan [yapılandırma](https://github.com/Azure/azure-signalr/blob/dev/docs/use-signalr-service.md#connectioncount).
+5 WebSocket bağlantısı, [yapılandırmada](https://github.com/Azure/azure-signalr/blob/dev/docs/use-signalr-service.md#connectioncount)değiştirilebilen varsayılan değerdir.
 
-Ve istemcilerden gelen ileti, bu bağlantılar arttıkça.
+İstemcilere gelen ve bu bağlantılara yönelik iletiler bu bağlantılar için çoğullanmış olacaktır.
 
-Bu bağlantıların her zaman SignalR hizmete bağlı olarak kalır. Ağ sorun için bir sunucu bağlantısı kesilirse,
-- Bu sunucu bağlantısını kes tarafından sunulan tüm istemciler (ilgili daha fazla bilgi için bkz. [istemci ile sunucu arasında veri aktarmak](#data-transmit-between-client-and-server));
-- Sunucu bağlantısı, otomatik olarak yeniden bağlanmayı denediğinde.
+Bu bağlantılar, her zaman SignalR hizmetine bağlı olmaya devam edecektir. Ağ sorunu için bir sunucu bağlantısı kesilirse,
+- Bu sunucu bağlantısı bağlantı kesildiğinde sunulan tüm istemciler (hakkında daha fazla bilgi için, bkz. [istemci ve sunucu arasında veri aktarımı](#data-transmit-between-client-and-server));
+- sunucu bağlantısı otomatik olarak yeniden bağlanmaya başlar.
 
 ## <a name="client-connections"></a>İstemci bağlantıları
 
-SignalR hizmeti kullandığınızda, istemcilerin uygulama sunucusu yerine SignalR hizmetine bağlanın.
-SignalR hizmet ve istemci arasında kalıcı bağlantılar kurmak için iki adım vardır.
+SignalR hizmetini kullandığınızda istemciler, uygulama sunucusu yerine SignalR hizmetine bağlanır.
+İstemci ile SignalR hizmeti arasında kalıcı bağlantılar kurmak için iki adım vardır.
 
-1. İstemci uygulama sunucusuna bir anlaşma isteği gönderir. Azure SignalR Service SDK'sı ile uygulama sunucusu SignalR hizmet URL'si ve erişim belirteci ile bir yeniden yönlendirme yanıtı döndürür.
+1. İstemci, uygulama sunucusuna bir anlaşma isteği gönderir. Azure SignalR hizmeti SDK 'Sı ile, Application Server, SignalR hizmetinin URL 'SI ve erişim belirteci ile bir yeniden yönlendirme yanıtı döndürür.
 
-- ASP.NET Core SignalR için tipik bir yeniden yönlendirme yanıtı şuna benzer:
+- ASP.NET Core SignalR için tipik bir yeniden yönlendirme yanıtı şöyle görünür:
     ```
     {
         "url":"https://test.service.signalr.net/client/?hub=chat&...",
         "accessToken":"<a typical JWT token>"
     }
     ```
-- ASP.NET SignalR için tipik bir yeniden yönlendirme yanıtı şuna benzer:
+- ASP.NET SignalR için tipik bir yeniden yönlendirme yanıtı şöyle görünür:
     ```
     {
         "ProtocolVersion":"2.0",
@@ -74,19 +74,19 @@ SignalR hizmet ve istemci arasında kalıcı bağlantılar kurmak için iki adı
     }
     ```
 
-1. Yeniden yönlendirme yanıtı aldıktan sonra istemci SignalR hizmetine bağlanmak için normal işlemini başlatmak için yeni URL'si ve erişim belirtecini kullanır.
+1. İstemci, yeniden yönlendirme yanıtını aldıktan sonra, SignalR hizmetine bağlanmak için normal işlemi başlatmak üzere yeni URL ve erişim belirtecini kullanır.
 
-ASP.NET Core SignalR hakkında daha fazla bilgi [aktarım protokolleri](https://github.com/aspnet/SignalR/blob/release/2.2/specs/TransportProtocols.md).
+ASP.NET Core SignalR 'nin [taşıma protokolleri](https://github.com/aspnet/SignalR/blob/release/2.2/specs/TransportProtocols.md)hakkında daha fazla bilgi edinin.
 
-## <a name="data-transmit-between-client-and-server"></a>İstemci ile sunucu arasında veri aktarmak
+## <a name="data-transmit-between-client-and-server"></a>İstemci ve sunucu arasında veri aktarımı
 
-Bir istemci SignalR hizmete bağlandığında, hizmet çalışma zamanı bu istemci görev yapacak bir sunucu bağlantısı bulacaksınız
-- Bu adım yalnızca bir kez gerçekleşir ve istemci ve sunucu bağlantıları arasında bire bir eşleme.
-- Eşleme kadar istemci SignalR hizmetinde korunmadığından veya sunucu bağlantısını keser.
+İstemci, SignalR hizmetine bağlandığında, hizmet çalışma zamanı bu istemciye hizmet edecek bir sunucu bağlantısı bulur
+- Bu adım yalnızca bir kez gerçekleşir ve istemci ile sunucu bağlantıları arasında bire bir eşleme olur.
+- Eşleme, istemci veya sunucu bağlantısı kesilene kadar SignalR hizmetinde tutulur.
 
-Bu noktada, uygulama sunucusu yeni istemci tarafından bir olay bilgileriyle alır. Mantıksal bir bağlantı, uygulama sunucusunda oluşturulur. Veri kanalı için SignalR hizmeti aracılığıyla uygulama sunucusu istemciden kurulur.
+Bu noktada, uygulama sunucusu yeni istemciden bilgi içeren bir olay alır. Uygulama sunucusunda istemciye bir mantıksal bağlantı oluşturulur. Veri kanalı, SignalR hizmeti aracılığıyla istemciden uygulama sunucusuna oluşturulur.
 
-SignalR hizmeti, verileri istemciden eşleştirme uygulama sunucusuna iletir. Ve veri uygulama sunucusundan eşlenen istemcilere gönderilir.
+SignalR hizmeti, verileri istemciden eşleştirme uygulama sunucusuna iletir. Ve uygulama sunucusundaki veriler eşlenen istemcilere gönderilir.
 
-Gördüğünüz gibi Azure SignalR hizmeti aslında bir mantıksal Aktarım katmanı uygulama sunucusu ve istemcileri arasında ' dir. Tüm kalıcı bağlantılar için SignalR hizmeti Boşaltılan.
-Uygulama sunucusu, yalnızca istemci bağlantıları hakkında endişelenmeden hub sınıfında, iş mantığı işlemek gerekir.
+Gördüğünüz gibi, Azure SignalR hizmeti temelde uygulama sunucusu ve istemciler arasındaki mantıksal bir aktarım katmanıdır. Tüm kalıcı bağlantılar SignalR hizmetine boşaltılır.
+Uygulama sunucusunun, istemci bağlantıları hakkında endişelenmeden yalnızca Hub sınıfında iş mantığını işlemesi gerekir.

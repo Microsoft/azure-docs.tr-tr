@@ -5,85 +5,85 @@ ms.topic: include
 ms.date: 11/09/2018
 ms.author: nitinme
 ms.openlocfilehash: f96c3a693ce8fc099374c998b35ce2fa90f4bb3f
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.sourcegitcommit: 0e59368513a495af0a93a5b8855fd65ef1c44aac
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188652"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "67868987"
 ---
-Bing tarafından sunulan küçük resimler için URL'leri bazı Bing yanıtlarını içerir. Yeniden boyutlandırma ve küçük resim görüntüleri kırpma. 
+Bazı Bing yanıtları, Bing tarafından sunulan küçük resim görüntülerinin URL 'Lerini içerir. Küçük resim görüntülerini yeniden boyutlandırabilir ve kırpabilir. 
 
 > [!NOTE]
-> Boyutu emin olun ve küçük resmini kırpma arama senaryosu sağlayın ve Bing arama API'si kullanılarak gerektiği gibi üçüncü taraf haklarına saygı ve gereksinimlerini görüntüleyin.
+> Bing Arama API kullanımı ve görüntüleme gereksinimlerinin gerektirdiği şekilde, küçük resmin boyutunun ve kırpılması için bir arama senaryosu ve üçüncü taraf haklarının dikkate aldığından emin olun.
 
 
-Bir görüntüyü yeniden boyutlandırmak için w (genişlik) sorgu içeren sorgu parametresi ya da hem küçük 's URL parametresi, h (yükseklik). Genişlik ve yükseklik piksel cinsinden belirtin. Örneğin:  
+Bir görüntüyü yeniden boyutlandırmak için, w (Width) sorgu parametresini, h (Height) sorgu parametresini veya her ikisini de küçük resmin URL 'sini ekleyin. Genişliği ve yüksekliği piksel cinsinden belirtin. Örneğin:  
   
 `https://<host>/th?id=JN.5l3yzwy%2f%2fHj59U6XhssIQ&pid=Api&w=200&h=200`  
   
-Yalnızca genişliğini veya yüksekliğini sorgu parametresi yalnızca belirtirseniz, Bing görüntünün en boy oranını korur. Genişlik ve yükseklik belirtin ve görüntünün özgün en boy oranını koru yoksa, Bing kenarlık görüntüsünün beyaz doldurma ekler. Örneğin, kırpma olmadan 200 x 200 480 x 359 görüntüye yeniden boyutlandırırsanız, görüntü tam genişlik içeriyor ancak üst ve alt görüntüsünün doldurma beyaz 25 piksel yüksekliği içerir. Aynı oluştuysa görüntü 359 x 480 dışında sol ve sağ kenarlık beyaz doldurma içerecektir true olur. Görüntü kırpma, beyaz dolgu eklenmez.  
+Yalnızca Width veya Height sorgu parametresini belirtirseniz Bing görüntünün en boy oranını korur. Hem genişlik hem de yükseklik belirtirseniz ve görüntünün özgün en boy oranını korumazsanız, Bing görüntünün kenarlığına beyaz doldurma ekler. Örneğin, bir 480x359 görüntüsünü kırpmadan 200x200 ' e yeniden boyutlandırırsanız, tam genişlik görüntüyü içerir, ancak yükseklik görüntünün üst ve alt kısmında 25 piksel beyaz doldurma içerir. Görüntü 359x480 ise, sol ve sağ kenarlıkların beyaz doldurma içermesi durumunda aynı değer true olur. Görüntüyü kırpmanız halinde beyaz doldurma eklenmez.  
 
  
-Aşağıdaki resimde, bir küçük resim (480 x 300) özgün boyutunu gösterir.  
+Aşağıdaki resimde, küçük resim görüntüsünün orijinal boyutu gösterilmektedir (480x300).  
   
-![Özgün yatay görüntü](./media/cognitive-services-bing-resize-crop/bing-resize-crop-landscape.PNG)  
+![Orijinal yatay görüntü](./media/cognitive-services-bing-resize-crop/bing-resize-crop-landscape.PNG)  
   
-Aşağıdaki resimde, 200 x 200'e yeniden boyutlandırılmış görüntüyü gösterir. En boy oranı korunur ve üst ve alt kenarlıklarına beyaz (siyah kenarlığa doldurmayı göstermek için dahil edilmiştir) ile doldurulur.  
+Aşağıdaki resimde, 200x200 olarak yeniden boyutlandırılmış görüntü gösterilmektedir. En boy oranı korunur ve üst ve alt kenarlıklar beyaz ile doldurulur (dolguyu göstermek için siyah kenarlık dahil edilir).  
   
-![Yeniden boyutlandırılan yatay görüntü](./media/cognitive-services-bing-resize-crop/bing-resize-crop-landscape-resized.PNG)  
+![Yatay görüntü yeniden boyutlandırılmış](./media/cognitive-services-bing-resize-crop/bing-resize-crop-landscape-resized.PNG)  
 
 
 
-Görüntünün özgün genişliği ve yüksekliği büyük boyutlar belirtirseniz, resmin sol ve üst kenarlıklar üzerinde beyaz sıfır eklenir.  
+Görüntünün orijinal genişlik ve yüksekliğinden daha büyük boyutlar belirtirseniz, görüntü sol ve üst kenarlarda beyaz ile doldurulur.  
   
-Görüntü kırpma için ' % s'c (kırpma) içerir. sorgu parametresi. Belirttiğiniz olası değerler şunlardır:  
+Bir görüntüyü kırpmak için c (Kırp) sorgu parametresini ekleyin. Belirtebileceğiniz olası değerler aşağıda verilmiştir.  
   
-- 4&mdash;görme oranı  
-- 7&mdash;akıllı oranı  
+- 4&mdash;gizli oran  
+- 7&mdash;akıllı oran  
   
-Akıllı oranı kırpma istemesi durumunda (c = 7), görüntü görüntünün ilgi bölgesi Merkezi'nden görüntünün en boy oranını koruyarak dışa doğru kırpılır. İlgi bölgesi çoğu alma kısımları içeren Bing belirleyen görüntü alanıdır. Aşağıda bir örnek ilgi bölgesi gösterilmektedir.  
+Akıllı oran kırpma (c = 7) isteğinde bulunursa, görüntü, görüntünün en boy oranını koruyarak görüntünün, dışarı doğru ilgi alanının merkezinden kırpılır. İlgilendiğiniz bölge, görüntünün en fazla içeri aktarma bölümünü içerdiğini belirleyen görüntüdür. Aşağıda, ilgilendiğiniz örnek bir bölge gösterilmektedir.  
   
-![İlgi bölgesi](./media/cognitive-services-bing-resize-crop/bing-resize-crop-regionofinterest.PNG)
+![İlgilendiğiniz bölge](./media/cognitive-services-bing-resize-crop/bing-resize-crop-regionofinterest.PNG)
 
-Görüntüyü yeniden boyutlandırma ve akıllı oranı kırpma isteği, görüntünün en boy oranını koruyarak istenen boyuta azaltılır. Görüntüyü yeniden boyutlandırılan boyutlarına göre kırpılır. Örneğin, yeniden boyutlandırılan genişliği veya yüksekliği eşit azsa, görüntü sola ve sağa ilgi bölgesi merkezi kırpılır. Aksi takdirde, görüntünün üst ve alt bölgeyi merkezinin kırpılır.  
+Bir görüntüyü yeniden boyutlandırırsanız ve akıllı oran kırpma isteğinde bulunursa, en boy oranını koruyarak görüntü istenen boyuta düşürülür. Daha sonra resim yeniden boyutlandırılmış boyutlara göre kırpılır. Örneğin, yeniden boyutlandırılan genişlik yükseklikten küçükse veya yükseklikle eşitse, görüntü, ilgilendiğiniz bölgenin merkezinin soluna ve sağına kırpılır. Aksi halde, görüntü, ilgilendiğiniz bölgenin merkezine ve sonuna kırpılır.  
   
  
-200 x oranı akıllı kırpma kullanarak 200'e azalır görüntüyü gösterir.  
+Aşağıda, akıllı oran kırpma kullanılarak 200x200 ' e küçültülmüş olan görüntü gösterilmektedir.  
   
-![200 x 200 kırpılmış yatay görüntü](./media/cognitive-services-bing-resize-crop/bing-resize-crop-landscape200x200c7.PNG)
+![200 X200 ' e kırpılan yatay görüntü](./media/cognitive-services-bing-resize-crop/bing-resize-crop-landscape200x200c7.PNG)
   
-200 x oranı akıllı kırpma kullanarak 100 azaltılmış görüntüyü gösterir.  
+Aşağıda, akıllı oran kırpılması kullanılarak 200x100 ' e küçültülmüş olan görüntü gösterilmektedir.  
    
-![200 x 100 kırpılmış yatay görüntü](./media/cognitive-services-bing-resize-crop/bing-resize-crop-landscape200x100c7.PNG)
+![200 x100 ' e kırpılan yatay görüntü](./media/cognitive-services-bing-resize-crop/bing-resize-crop-landscape200x100c7.PNG)
   
-100 x oranı akıllı kırpma kullanarak 200'e azalır görüntüyü gösterir.  
+Aşağıda, akıllı oran kırpılması kullanılarak 100x200 ' e küçültülmüş görüntü gösterilmektedir.  
   
-![100 x 200 kırpılmış yatay görüntü](./media/cognitive-services-bing-resize-crop/bing-resize-crop-landscape100x200c7.PNG)
+![100x200 ' e kırpılan yatay resim](./media/cognitive-services-bing-resize-crop/bing-resize-crop-landscape100x200c7.PNG)
 
 
 
-Bing görüntü ilgi bölgesi belirleyemiyorsa, Bing, görme oranı kırpma kullanır.  
+Bing görüntünün ilgilendiğiniz bölgesini belirleyeleyemiyorsa, Bing görünmeyen oran kırpmadan yararlanır.  
   
-Görme engelli oranı kırpma istemesi durumunda (c = 4), Bing, görüntü kırpma için aşağıdaki kuralları kullanır.  
+Görünmeyen oran kırpma (c = 4) isteğinde bulunursa, Bing Görüntüyü kırpmak için aşağıdaki kuralları kullanır.  
   
-- Varsa (özgün görüntü genişliğini / özgün resim yüksekliği) < (görüntü genişliğini istenen / resim yüksekliği istenen), görüntü üstten sol köşe ve alt kısmında kırpılmış ölçülür.  
-- Varsa (özgün görüntü genişliğini / özgün resim yüksekliği) > (görüntü genişliğini istenen / resim yüksekliği istenen), görüntünün merkezden ölçülür ve sağa ve sola kırpılmış.  
+- (Orijinal görüntü genişliği/özgün resim yüksekliği) < (Istenen görüntü genişliği/Istenen görüntü yüksekliği) varsa, görüntü sol üst köşeden ölçülür ve en altta kırpılacak.  
+- (Orijinal görüntü genişliği/özgün resim yüksekliği) > (Istenen görüntü genişliği/Istenen görüntü yüksekliği) varsa, görüntü merkezden ölçülür ve sola ve sağa kırpılır.  
 
 
 
-225 x 300 bir dikey görüntü gösterir.  
+Aşağıda, 225x300 olan dikey bir görüntü gösterilmektedir.  
   
-![Özgün Ay Çiçeği görüntüsü](./media/cognitive-services-bing-resize-crop/bing-resize-crop-sunflower.PNG)
+![Orijinal güneş çiçeği resmi](./media/cognitive-services-bing-resize-crop/bing-resize-crop-sunflower.PNG)
   
-200 x görme oranı kırpma kullanarak 200'e azalır görüntüyü gösterir. Resim kırpılmış görüntünün alt kısmında kaynaklanan sol üst köşedeki zamandan ölçülür.  
+Aşağıda, görüntü, görme oranından sonra 200x200 ' e indirgenecek şekilde gösterilmiştir. Resim, kırpılmakta olan görüntünün alt kısmına neden olan sol üst köşesinden ölçülür.  
   
-![200 x 200 kırpılmış Ay Çiçeği görüntüsü](./media/cognitive-services-bing-resize-crop/bing-resize-crop-sunflower200x200c4.PNG)
+![200 X200 ' e kırpılan güneş çiçeği resmi](./media/cognitive-services-bing-resize-crop/bing-resize-crop-sunflower200x200c4.PNG)
   
-200 x görme oranı kırpma kullanarak 100 azaltılmış görüntüyü gösterir. Resim kırpılmış görüntünün alt kısmında kaynaklanan sol üst köşedeki zamandan ölçülür.  
+Aşağıda, görme oranının kırpılması kullanılarak 200x100 ' e küçültülmüş olan görüntü gösterilmektedir. Resim, kırpılmakta olan görüntünün alt kısmına neden olan sol üst köşesinden ölçülür.  
   
-![200 x 100 kırpılmış Ay Çiçeği görüntüsü](./media/cognitive-services-bing-resize-crop/bing-resize-crop-sunflower200x100c4.PNG)
+![200 x100 ' e kırpılmış sunçiçeği resmi](./media/cognitive-services-bing-resize-crop/bing-resize-crop-sunflower200x100c4.PNG)
   
-100 x görme oranı kırpma kullanarak 200'e azalır görüntüyü gösterir. Resim kırpılmış resmin sol ve sağ bölümlerinde kaynaklanan Merkezi'nden ölçülür.  
+Aşağıda, görme oranının kırpılması kullanılarak 100x200 ' e küçültülmüş görüntü gösterilmektedir. Görüntü, kırpılmakta olan görüntünün sol ve sağ bölümlerine neden olan merkezden ölçülür.  
   
-![100 x 200 kırpılmış Ay Çiçeği görüntüsü](./media/cognitive-services-bing-resize-crop/bing-resize-crop-sunflower100x200c4.PNG)
+![100 X200 ' e kırpılan güneş çiçeği resmi](./media/cognitive-services-bing-resize-crop/bing-resize-crop-sunflower100x200c4.PNG)
 

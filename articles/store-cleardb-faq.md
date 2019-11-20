@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 10/27/2016
 ms.author: sumuth
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 1838dbb627a6dec46f817101fc1d0cca0961ef77
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7b6d38f7755ebd97791959a5a414b09fe4ac769b
+ms.sourcegitcommit: dad277fbcfe0ed532b555298c9d6bc01fcaa94e2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64574184"
+ms.lasthandoff: 07/10/2019
+ms.locfileid: "67718006"
 ---
 # <a name="faq-for-cleardb-mysql-databases-with-azure-app-service"></a>Azure Uygulama Hizmeti ile ClearDB MySQL veritabanları hakkında SSS
 Bu SSS ClearDB MySQL veritabanları, Azure Web Apps için satın alma ve kullanma hakkında sık sorulan soruları yanıtlar.
@@ -80,7 +80,7 @@ Hayır. Ek kullanıcılar oluşturamazsınız ancak ClearDB veritabanı kümeniz
 Evet, temel serisi veritabanları olabilir, yerinde (temel 500 aracılığıyla temel 60) yükseltildi. Pro serisi olabilir yerinde (Pro 125-Pro 1000) Pro 60 dışında yükseltildi. Pro 60 veritabanı şu anda yükseltiliyor desteklemez. 
 
 ## <a name="when-i-migrate-my-resources-from-one-subscription-to-another-does-my-cleardb-mysql-database-get-migrated-as-well"></a>Ben Kaynaklarım bir abonelikten diğerine geçiş yaptığınızda, ClearDB MySQL veritabanı de geçişi mu?
-Gerçekleştirirken kaynak geçişi abonelikler arasında bazı [sınırlamaları](azure-resource-manager/resource-group-move-resources.md#app-service-limitations) uygulayın. ClearDB MySQL veritabanı, bir üçüncü taraf hizmetidir ve bu nedenle Azure abonelik geçişi sırasında geçirilmedi. MySQL veritabanınızı Azure kaynakları geçirme önce geçişini yönetmeyin, ClearDB MySQL veritabanlarınızın devre dışı bırakılabilir. Veritabanlarınızı el ile ilk geçirin ve ardından web uygulamanız için Azure aboneliğine geçiş gerçekleştirin. 
+Gerçekleştirirken kaynak geçişi abonelikler arasında bazı [sınırlamaları](azure-resource-manager/move-support-resources.md) uygulayın. ClearDB MySQL veritabanı, bir üçüncü taraf hizmetidir ve bu nedenle Azure abonelik geçişi sırasında geçirilmedi. MySQL veritabanınızı Azure kaynakları geçirme önce geçişini yönetmeyin, ClearDB MySQL veritabanlarınızın devre dışı bırakılabilir. Veritabanlarınızı el ile ilk geçirin ve ardından web uygulamanız için Azure aboneliğine geçiş gerçekleştirin. 
 
 ## <a name="i-hit-the-spending-limit-on-my-subscription-i-removed-the-limit-and-my-app-service-is-online-however-the-database-is-not-accessible-how-do-i-re-enable-the-cleardb-database"></a>Miyim aboneliğime harcama sınırına ulaştı. Sınırı kaldırdım ve veritabanı erişilebilir değil ancak my App Service çevrimiçidir. ClearDB veritabanını yeniden nasıl etkinleştirebilirim?
 İlgili kişi [ClearDB Destek](https://www.cleardb.com/developers/help/support) veritabanı yeniden etkinleştirmek için. Bunları Azure abonelik bilgilerini ve veritabanı adı ile sağlar.

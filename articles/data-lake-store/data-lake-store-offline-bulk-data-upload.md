@@ -1,43 +1,39 @@
 ---
-title: Çevrimdışı yöntemleri kullanarak Azure Data Lake depolama Gen1 büyük miktarlarda veri yükleme | Microsoft Docs
-description: Azure Data Lake depolama Gen1 için Azure depolama bloblarından veri kopyalamak için AdlCopy aracını kullanın
-services: data-lake-store
-documentationcenter: ''
+title: Azure Data Lake Storage 1. çevrimdışı yöntemlere büyük veri kümesi yükleme
+description: Içeri/dışarı aktarma hizmetini kullanarak Azure Blob depolamadan veri kopyalama Azure Data Lake Storage 1.
 author: twooley
-manager: mtillman
-editor: cgronlun
-ms.assetid: 45321f6a-179f-4ee4-b8aa-efa7745b8eb6
 ms.service: data-lake-store
-ms.devlang: na
 ms.topic: conceptual
 ms.date: 05/29/2018
 ms.author: twooley
-ms.openlocfilehash: 4a8126d658f227d9eed372cd51cf06f8f12c99f9
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: aa3eb0bcd9ddd2a094563efe326f7af7e9e8708a
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60194986"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73839302"
 ---
-# <a name="use-the-azure-importexport-service-for-offline-copy-of-data-to-azure-data-lake-storage-gen1"></a>Azure Data Lake depolama Gen1 veri çevrimdışı kopyalama için Azure içeri/dışarı aktarma hizmetini kullanma
-Bu makalede, büyük veri kümelerini kopyalama hakkında bilgi edineceksiniz (> 200 GB) gibi çevrimdışı kopya yöntemleri kullanarak Azure Data Lake depolama Gen1 içine [Azure içeri/dışarı aktarma hizmeti](../storage/common/storage-import-export-service.md). Özellikle, bu makaledeki örnek olarak kullanılan 339,420,860,416 bayt veya yaklaşık 319 GB disk üzerinde dosyasıdır. Bu dosya 319GB.tsv adlandıralım.
+# <a name="use-the-azure-importexport-service-for-offline-copy-of-data-to-data-lake-storage-gen1"></a>Azure Içeri/dışarı aktarma hizmetini kullanarak verilerin çevrimdışı kopyası Data Lake Storage 1.
 
-Azure içeri/dışarı aktarma hizmeti, daha güvenli bir şekilde büyük miktarlarda verinin bir Azure veri merkezine sabit disk sürücüleri sevkiyat tarafından Azure Blob depolama alanına aktarmak için yardımcı olur.
+Bu makalede, [Azure içeri/dışarı aktarma hizmeti](../storage/common/storage-import-export-service.md)gibi çevrimdışı kopyalama yöntemlerini kullanarak çok büyük veri kümelerini (> 200 GB) Data Lake Storage 1. nasıl kopyalayacağınızı öğreneceksiniz. Özellikle, bu makalede örnek olarak kullanılan dosya 339.420.860.416 bayttır veya diskte 319 GB olur. Bu dosyayı 319GB. tsv dosyasına arayalım.
 
-## <a name="prerequisites"></a>Önkoşullar
+Azure Içeri/dışarı aktarma hizmeti, sabit disk sürücülerinizi bir Azure veri merkezine aktararak Azure Blob depolama alanına büyük miktarlarda veri aktarmanıza yardımcı olur.
+
+## <a name="prerequisites"></a>Ön koşullar
+
 Başlamadan önce aşağıdakilere sahip olmanız gerekir:
 
 * **Bir Azure aboneliği**. Bkz. [Azure ücretsiz deneme sürümü alma](https://azure.microsoft.com/pricing/free-trial/).
-* **Azure depolama hesabınız**.
-* **Bir Azure Data Lake depolama Gen1 hesap**. Bir oluşturma hakkında yönergeler için bkz: [Azure Data Lake depolama Gen1 ile çalışmaya başlama](data-lake-store-get-started-portal.md)
+* **Bir Azure depolama hesabı**.
+* **Azure Data Lake Storage 1. hesabı**. Bir oluşturma hakkında yönergeler için bkz. Azure Data Lake Storage 1. kullanmaya [başlama](data-lake-store-get-started-portal.md).
 
-## <a name="preparing-the-data"></a>Verileri hazırlama
+## <a name="prepare-the-data"></a>Verileri hazırlama
 
-İçeri/dışarı aktarma hizmetini kullanmadan önce aktarılacak veri dosya sonu **en az 200 GB olan kopya halinde** boyutu. İçeri aktarma aracı 200 GB'tan büyük dosyalarla çalışmaz. Bu öğreticide, biz dosya 100 GB'lık parçalara bölün. Kullanarak bunu yapabilirsiniz [Cygwin](https://cygwin.com/install.html). Cygwin Linux komutlarını destekler. Bu durumda, aşağıdaki komutu kullanın:
+Içeri/dışarı aktarma hizmetini kullanmadan önce, boyutu **200 GB 'tan az olan kopyalara** aktarılacak veri dosyasını kesin. İçeri aktarma aracı 200 GB 'tan büyük dosyalarla çalışmaz. Bu makalede, dosyayı her biri 100 GB öbeklere böleceğiz. Bunu, [Cygwin](https://cygwin.com/install.html)kullanarak yapabilirsiniz. Cygwin, Linux komutlarını destekler. Bu durumda, aşağıdaki komutu kullanın:
 
     split -b 100m 319GB.tsv
 
-Bölme işlemi aşağıdaki adlarla dosyaları oluşturur.
+Bölünen işlem, aşağıdaki adlara sahip dosyaları oluşturur.
 
     319GB.tsv-part-aa
 
@@ -47,32 +43,37 @@ Bölme işlemi aşağıdaki adlarla dosyaları oluşturur.
 
     319GB.tsv-part-ad
 
-## <a name="get-disks-ready-with-data"></a>Veri diskleri hazırlanın
-Bölümündeki yönergeleri [Azure içeri/dışarı aktarma hizmetini kullanarak](../storage/common/storage-import-export-service.md) (altında **sürücülerinizin hazırlama** bölümü) sabit sürücülerinizi hazırlamak için. Genel sırası şöyledir:
+## <a name="get-disks-ready-with-data"></a>Verilerle çalışmaya yönelik diskleri Al
 
-1. Azure içeri/dışarı aktarma hizmeti için kullanılacak gereksinimini karşılayan bir sabit disk edinin.
-2. Verileri Azure veri merkezi IP'sine sevk edildikten sonra kopyalanacağı bir Azure depolama hesabını belirleyin.
-3. Kullanım [Azure içeri/dışarı aktarma aracı](https://go.microsoft.com/fwlink/?LinkID=301900&clcid=0x409), bir komut satırı yardımcı programı. Aracının nasıl kullanılacağını gösteren bir örnek kod parçacığı aşağıda verilmiştir.
+Sabit sürücülerinizi hazırlamak için [Azure içeri/dışarı aktarma hizmetini](../storage/common/storage-import-export-service.md) ( **sürücülerinizi hazırlama** bölümünde) kullanma bölümündeki yönergeleri izleyin. Genel sıra:
+
+1. Azure Içeri/dışarı aktarma hizmeti için kullanılacak gereksinimi karşılayan bir sabit disk temin edin.
+2. Verilerin Azure veri merkezine gönderildikten sonra kopyalanacağı bir Azure depolama hesabı belirler.
+3. Komut satırı yardımcı programı olan [Azure içeri/dışarı aktarma aracını](https://go.microsoft.com/fwlink/?LinkID=301900&clcid=0x409)kullanın. Aracın nasıl kullanılacağını gösteren örnek bir kod parçacığı aşağıda verilmiştir.
 
     ```
     WAImportExport PrepImport /sk:<StorageAccountKey> /t: <TargetDriveLetter> /format /encrypt /logdir:e:\myexportimportjob\logdir /j:e:\myexportimportjob\journal1.jrn /id:myexportimportjob /srcdir:F:\demo\ExImContainer /dstdir:importcontainer/vf1/
     ```
-    Bkz: [Azure içeri/dışarı aktarma hizmetini kullanarak](../storage/common/storage-import-export-service.md) daha fazla örnek kod parçacıkları için.
-4. Yukarıdaki komut, belirtilen konumda bir günlük dosyası oluşturur. Öğesinden içeri aktarma işi oluşturmak için bu günlük dosyası kullanmak [Azure portalında](https://portal.azure.com).
+    Daha fazla örnek kod parçacığı için bkz. [Azure içeri/dışarı aktarma hizmetini kullanma](../storage/common/storage-import-export-service.md) .
+4. Yukarıdaki komut, belirtilen konumda bir günlük dosyası oluşturur. [Azure Portal](https://portal.azure.com)bir içeri aktarma işi oluşturmak için bu günlük dosyasını kullanın.
 
 ## <a name="create-an-import-job"></a>İçeri aktarma işi oluşturma
-İçindeki yönergeleri kullanarak içeri aktarma işi artık oluşturabilirsiniz [Azure içeri/dışarı aktarma hizmetini kullanarak](../storage/common/storage-import-export-service.md) (altında **içeri aktarma işi oluşturma** bölümü). Diğer ayrıntıları ile bu içeri aktarma işi için disk sürücülerini hazırlanırken oluşturulan günlük dosyasını da sağlar.
 
-## <a name="physically-ship-the-disks"></a>Diski fiziksel olarak gönderin
-Diskleri Azure veri merkezi artık fiziksel olarak gönderebilirsiniz. Burada, veriler üzerinden Azure depolama BLOB'ları içeri aktarma işi oluşturma sırasında sağladığınız kopyalanır. Ayrıca, proje oluştururken, daha sonra izleme bilgisi sağlamak üzere seçtiyseniz artık geri alma işinize gidin ve takip numarasını güncelleştirin.
+Artık [Azure içeri/dışarı aktarma hizmetini](../storage/common/storage-import-export-service.md) ( **Içeri aktarma işi oluşturma** bölümünde) kullanarak bir içeri aktarma işi oluşturabilirsiniz. Bu içeri aktarma işi için, diğer ayrıntılarla birlikte disk sürücüleri hazırlanırken oluşturulan günlük dosyasını da belirtin.
 
-## <a name="copy-data-from-azure-storage-blobs-to-azure-data-lake-storage-gen1"></a>Azure Data Lake depolama Gen1 için Azure depolama bloblarından veri kopyalama
-İçeri aktarma işinin durumu tamamlandı olduğunu gösterir. sonra veriler, belirttiğiniz Azure depolama BLOB'ları kullanılabilir olup olmadığını doğrulayabilirsiniz. Ardından, verileri Azure Data Lake depolama Gen1 bloblarından taşımak için çeşitli yöntemler kullanabilirsiniz. Karşıya veri yükleme için tüm kullanılabilir seçenekleri için bkz: [Data Lake depolama Gen1 veri alma](data-lake-store-data-scenarios.md#ingest-data-into-data-lake-storage-gen1).
+## <a name="physically-ship-the-disks"></a>Diskleri fiziksel olarak teslim edin
 
-Bu bölümde, veri kopyalamak için bir Azure Data Factory işlem hattı oluşturmak için kullanabileceğiniz JSON tanımları ile sunuyoruz. Bu JSON tanımları kullanabileceğiniz [Azure portalında](../data-factory/tutorial-copy-data-portal.md) veya [Visual Studio](../data-factory/tutorial-copy-data-dot-net.md).
+Artık diskleri bir Azure veri merkezine fiziksel olarak gönderebilirsiniz. Burada, veriler içeri aktarma işini oluştururken belirttiğiniz Azure depolama bloblarına kopyalanır. Ayrıca, işi oluştururken izleme bilgilerini daha sonra sağlamayı tercih ettiyseniz artık içeri aktarma işinize geri dönüp izleme numarasını güncelleştirebilirsiniz.
 
-### <a name="source-linked-service-azure-storage-blob"></a>Bağlı kaynağı hizmeti (Azure depolama blobu)
-```
+## <a name="copy-data-from-blobs-to-data-lake-storage-gen1"></a>Bloblardan veri kopyalama Data Lake Storage 1.
+
+İçeri aktarma işinin durumu tamamlandıysa, verilerin belirttiğiniz Azure Storage Bloblarında kullanılabilir olup olmadığını doğrulayabilirsiniz. Daha sonra, bu verileri bloblardan Azure Data Lake Storage 1. taşımak için çeşitli yöntemler kullanabilirsiniz. Veri yüklemeye yönelik tüm kullanılabilir seçenekler için bkz. [verileri Data Lake Storage 1. içine almak](data-lake-store-data-scenarios.md#ingest-data-into-data-lake-storage-gen1).
+
+Bu bölümde, verileri kopyalamak için bir Azure Data Factory işlem hattı oluşturmak üzere kullanabileceğiniz JSON tanımlarını sunuyoruz. Bu JSON tanımlarını [Azure Portal](../data-factory/tutorial-copy-data-portal.md) veya [Visual Studio](../data-factory/tutorial-copy-data-dot-net.md)'dan kullanabilirsiniz.
+
+### <a name="source-linked-service-azure-storage-blob"></a>Kaynak bağlı hizmeti (Azure Depolama Blobu)
+
+```JSON
 {
     "name": "AzureStorageLinkedService",
     "properties": {
@@ -85,8 +86,9 @@ Bu bölümde, veri kopyalamak için bir Azure Data Factory işlem hattı oluştu
 }
 ```
 
-### <a name="target-linked-service-azure-data-lake-storage-gen1"></a>Bağlı hizmeti (Azure Data Lake depolama Gen1) hedef
-```
+### <a name="target-linked-service-data-lake-storage-gen1"></a>Hedef bağlı hizmet (Data Lake Storage 1.)
+
+```JSON
 {
     "name": "AzureDataLakeStorageGen1LinkedService",
     "properties": {
@@ -100,8 +102,10 @@ Bu bölümde, veri kopyalamak için bir Azure Data Factory işlem hattı oluştu
     }
 }
 ```
+
 ### <a name="input-data-set"></a>Giriş veri kümesi
-```
+
+```JSON
 {
     "name": "InputDataSet",
     "properties": {
@@ -120,8 +124,10 @@ Bu bölümde, veri kopyalamak için bir Azure Data Factory işlem hattı oluştu
     }
 }
 ```
+
 ### <a name="output-data-set"></a>Çıkış veri kümesi
-```
+
+```JSON
 {
 "name": "OutputDataSet",
 "properties": {
@@ -138,8 +144,10 @@ Bu bölümde, veri kopyalamak için bir Azure Data Factory işlem hattı oluştu
   }
 }
 ```
+
 ### <a name="pipeline-copy-activity"></a>İşlem hattı (kopyalama etkinliği)
-```
+
+```JSON
 {
     "name": "CopyImportedData",
     "properties": {
@@ -187,15 +195,16 @@ Bu bölümde, veri kopyalamak için bir Azure Data Factory işlem hattı oluştu
     }
 }
 ```
-Daha fazla bilgi için [Azure Data Factory kullanarak Azure depolama blobu'ndan Azure Data Lake depolama Gen1 için veri taşıma](../data-factory/connector-azure-data-lake-store.md).
 
-## <a name="reconstruct-the-data-files-in-azure-data-lake-storage-gen1"></a>Azure Data Lake depolama Gen1 veri dosyaları yeniden yapılandırma
+Daha fazla bilgi için bkz. [Azure Storage blob 'dan Azure Data Lake Storage 1. Azure Data Factory kullanarak verileri taşıma](../data-factory/connector-azure-data-lake-store.md).
+
+## <a name="reconstruct-the-data-files-in-data-lake-storage-gen1"></a>Data Lake Storage 1. veri dosyalarını yeniden yapılandırma
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Bir dosyayla 319 GB ve böylece Azure içeri/dışarı aktarma hizmetini kullanarak aktarılabilir, aşağı daha küçük boyut dosyalarına kesildi Başladık. Verileri Azure Data Lake depolama Gen1 olduğuna göre biz dosyanın özgün boyutuna yeniden oluşturabilir. Bunu yapmak için aşağıdaki Azure PowerShell cmdlet'lerini kullanabilirsiniz.
+319 GB olan bir dosyayla başlıyoruz ve Azure Içeri/dışarı aktarma hizmeti kullanılarak aktarılabilmesi için daha küçük boyuttaki dosyalara kadar bir dosya haline gelir. Artık veriler Azure Data Lake Storage 1. olduğundan, dosyayı özgün boyutuna yeniden yapılandırabilirsiniz. Bunu yapmak için aşağıdaki Azure PowerShell cmdlet 'lerini kullanabilirsiniz.
 
-```
+```PowerShell
 # Login to our account
 Connect-AzAccount
 
@@ -211,6 +220,7 @@ Join-AzDataLakeStoreItem -AccountName "<adlsg1_account_name" -Paths "/importedda
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
+
 * [Data Lake Storage Gen1'de verilerin güvenliğini sağlama](data-lake-store-secure-data.md)
-* [Azure Data Lake Analytics'i Data Lake depolama Gen1 ile kullanma](../data-lake-analytics/data-lake-analytics-get-started-portal.md)
-* [Azure HDInsight ile Data Lake depolama Gen1 kullanın](data-lake-store-hdinsight-hadoop-use-portal.md)
+* [Data Lake Storage 1. ile Azure Data Lake Analytics kullanma](../data-lake-analytics/data-lake-analytics-get-started-portal.md)
+* [Azure HDInsight 'ı Data Lake Storage 1. ile kullanma](data-lake-store-hdinsight-hadoop-use-portal.md)

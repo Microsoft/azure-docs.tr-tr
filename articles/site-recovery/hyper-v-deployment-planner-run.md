@@ -1,23 +1,23 @@
 ---
-title: Azure'a Hyper-V olağanüstü durum kurtarma için Azure Site Recovery dağıtım Planlayıcısı çalıştırma | Microsoft Docs
-description: Bu makalede Hyper-V azure'a olağanüstü durum kurtarma için Azure Site Recovery dağıtım Planlayıcısı çalıştırmayı öğrenin.
+title: Hyper-V Dağıtım Planlayıcısı Azure Site Recovery içinde çalıştırma
+description: Bu makalede, Azure 'da Hyper-V olağanüstü durum kurtarma için Azure Site Recovery Dağıtım Planlayıcısı nasıl çalıştırılacağı açıklanır.
 author: mayurigupta13
 manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
-ms.date: 4/9/2019
+ms.date: 04/09/2019
 ms.author: mayg
-ms.openlocfilehash: 6528b683ec9464c2b1982d631455718e6fe6f3b7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ba1979c940d4a92b3d1a7a52a4f356b2896ece55
+ms.sourcegitcommit: a22cb7e641c6187315f0c6de9eb3734895d31b9d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60748977"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74082616"
 ---
-# <a name="run-the-azure-site-recovery-deployment-planner-for-hyper-v-disaster-recovery-to-azure"></a>Azure'a Hyper-V olağanüstü durum kurtarma için Azure Site Recovery dağıtım Planlayıcısını çalıştırın
+# <a name="run-the-azure-site-recovery-deployment-planner-for-hyper-v-disaster-recovery-to-azure"></a>Azure 'da Hyper-V olağanüstü durum kurtarma için Azure Site Recovery dağıtım planlayıcısı 'nı çalıştırın
 
-Çalıştırabileceğiniz Site Recovery dağıtım Planlayıcısı komut satırı aracını (ASRDeploymentPlanner.exe) aşağıdaki dört modun herhangi birinde içinde: 
--   Sanal makine (VM) listesini alma
+Aşağıdaki dört moddan birinde Site Recovery dağıtım planlayıcısı komut satırı aracını (ASRDeploymentPlanner. exe) çalıştırabilirsiniz: 
+-   Sanal makine (VM) listesini al
 -   [Profil](#profile-hyper-v-vms)
 -   Rapor oluşturma
 -   [Aktarım hızı alma](#get-throughput)
@@ -41,13 +41,13 @@ ASRDeploymentPlanner.exe -Operation GetVMList /?
 | -User | Hyper-V konağı veya Hyper-V kümesine bağlanmak için gereken kullanıcı adı. Kullanıcının yönetici erişimi olmalıdır.|
 | -ServerListFile | Profili oluşturulacak VM’leri içeren sunucuların listesinin bulunduğu dosya. Dosya yolu mutlak veya göreli olabilir. Bu dosya her satırda aşağıdakilerden birini içermelidir:<ul><li>Hyper-V konak adı veya IP adresi</li><li>Hyper-V küme adı veya IP adresi</li></ul><br>**Örnek:** ServerList.txt dosyası aşağıdaki sunucuları içerir:<ul><li>Host_1</li><li>10.8.59.27</li><li>Cluster_1</li><li>Host_2</li>|
 | -Directory|(İsteğe bağlı) Bu işlem sırasında oluşturulan verileri depolamak için evrensel adlandırma kuralı (UNC) veya yerel dizin yolu. Bir ad belirtilmemişse, varsayılan dizin olarak geçerli yolun altındaki “ProfiledData” adlı dizin kullanılır.|
-|-OutputFile| (İsteğe bağlı) Hyper-V sunucularından alınan VM'lerin listesini içeren dosya kaydedilmiş kalır. Bir ad belirtilmezse, ayrıntılar VMList.txt dosyasında depolanır.  Profili gerekmeyen VM'ler kaldırdıktan sonra profil oluşturmayı başlatmak için bu dosyayı kullanın.|
+|-OutputFile| Seçim Hyper-V sunucularından alınan VM 'lerin listesini içeren dosya kaydedilir. Bir ad belirtilmezse, ayrıntılar VMList.txt dosyasında depolanır.  Profili gerekmeyen VM'ler kaldırdıktan sonra profil oluşturmayı başlatmak için bu dosyayı kullanın.|
 |-Password|(İsteğe bağlı) Hyper-V konağına bağlanmak için gereken parola. Bunu bir parametre olarak belirtmezseniz komutu çalıştırdığında belirtmeniz istenir.|
 
 ### <a name="getvmlist-discovery"></a>GetVMList bulma
 
-- **Hyper-V kümesi**: Sunucunun liste dosyasında Hyper-V küme adı belirtildiğinde, araç kümenin tüm Hyper-V düğümlerinin bulur ve her Hyper-V konakları üzerinde mevcut olan Vm'leri alır.
-**Hyper-V konağı**: Hyper-V ana bilgisayar adı verildiğinde, araç önce bir kümeye ait olup olmadığını denetler. Değerin evet olması durumunda araç kümeye ait düğümleri getirir. Ardından sanal makineleri her Hyper-V ana bilgisayarından alır. 
+- **Hyper-V kümesi**: Sunucunun liste dosyasında Hyper-V küme adı belirtildiğinde, araç kümenin tüm Hyper-V düğümlerinin bulur ve her Hyper-V konağında mevcut olan VM'leri alır.
+**Hyper-V konağı**: Hyper-V konak adı verildiğinde, araç öncelikle bu adın bir kümeye ait olup olmadığını denetler. Değerin evet olması durumunda araç kümeye ait düğümleri getirir. Ardından sanal makineleri her Hyper-V ana bilgisayarından alır. 
 
 Dilerseniz profilini el ile oluşturmak istediğiniz sanal makinelerin kolay adlarını veya IP adreslerini bir dosyada listeleyebilirsiniz.
 
@@ -75,7 +75,7 @@ Araç, oluşturulan profilin doğru olmasını sağlamak için Hyper-V konağın
 Araç, kümedeki bir düğümden başka bir düğüme VM geçişini ve bir konak içindeki depolama geçişini sorunsuz bir şekilde işler.
 
 ### <a name="getting-the-vm-list-to-profile"></a>Profili oluşturulacak VM listesini alma
-Bir profili VM'lerin listesini oluşturmak için GetVMList işleminin bakın.
+Profili oluşturulacak VM 'lerin listesini oluşturmak için GetVMList işlemine bakın.
 
 Profili oluşturulacak sanal makinelerin listesini oluşturduktan sonra, aracı profil oluşturma modunda çalıştırabilirsiniz. 
 
@@ -89,7 +89,7 @@ ASRDeploymentPlanner.exe -Operation StartProfiling /?
 |---|---|
 | -Operation | StartProfiling |
 | -User | Hyper-V konağı veya Hyper-V kümesine bağlanmak için gereken kullanıcı adı. Kullanıcının yönetici erişimi olmalıdır.|
-| -VMListFile | Profili oluşturulacak VM’lerin listesini içeren dosya. Dosya yolu mutlak veya göreli olabilir. Hyper-V için, GetVMList işleminin çıkış dosyası bu dosyadır. El ile hazırlıyorsanız, dosyada bir sunucu adı ya da IP adresi ve sonra VM adı (her satırı \ ile ayrılan) bulunmalıdır. Dosyada belirtilen VM adı, Hyper-V konağındaki VM adıyla aynı olmalıdır.<br><br>**Örnek:** VMList.txt aşağıdaki sanal makineleri içerir:<ul><li>Host_1\VM_A</li><li>10.8.59.27\VM_B</li><li>Host_2\VM_C</li><ul>|
+| -VMListFile | Profili oluşturulacak VM’lerin listesini içeren dosya. Dosya yolu mutlak veya göreli olabilir. Hyper-V için, GetVMList işleminin çıkış dosyası bu dosyadır. El ile hazırlıyorsanız, dosyada bir sunucu adı ya da IP adresi ve sonra VM adı (her satırı \ ile ayrılan) bulunmalıdır. Dosyada belirtilen VM adı, Hyper-V konağındaki VM adıyla aynı olmalıdır.<br><br>**Örnek:** VMList.txt dosyası aşağıdaki sanal makineleri içerir:<ul><li>Host_1\VM_A</li><li>10.8.59.27\VM_B</li><li>Host_2\VM_C</li><ul>|
 |-NoOfMinutesToProfile|Profil oluşturmanın çalıştırılacağı dakika sayısı. En az 30 dakika olmalıdır.|
 |-NoOfHoursToProfile|Profil oluşturmanın çalıştırılacağı saat sayısı.|
 |-NoOfDaysToProfile |Profil oluşturmanın çalıştırılacağı gün sayısı. Profil oluşturmayı 7 günden uzun bir süre çalıştırmanız önerilir. Bu, ortamınızda belirtilen dönem içindeki iş yükü deseninin doğru bir öneri sağlayacak şekilde gözlemlenip kullanılmasını sağlamanıza yardımcı olur.|
@@ -98,7 +98,7 @@ ASRDeploymentPlanner.exe -Operation StartProfiling /?
 |-Password|(İsteğe bağlı) Hyper-V konağına bağlanmak için gereken parola. Bunu bir parametre olarak belirtmezseniz komutu çalıştırdığında belirtmeniz istenir.|
 |-StorageAccountName|(İsteğe bağlı) Şirket içinden Azure’a veri çoğaltma için ulaşılabilir aktarım hızını bulmak için depolama hesabı adı. Araç, aktarım hızını hesaplamak için test verilerini bu depolama hesabına yükler. Depolama hesabı Genel amaçlı v1 (GPv1) türünde olmalıdır.|
 |-StorageAccountKey|(İsteğe bağlı) Depolama hesabına erişmek için kullanılan anahtar. Azure portalı > **Depolama hesapları** > *Depolama hesabı adı* > **Ayarlar** > **Erişim Anahtarları** > **Anahtar1** (veya klasik depolama hesabı için birincil erişim anahtarı) seçeneğine gidin.|
-|-Ortam|(İsteğe bağlı) Azure depolama hesabı için hedef ortamınız. Üç değerlerden biri olabilir: AzureCloud, AzureUSGovernment veya AzureChinaCloud. Varsayılan seçenek AzureCloud değeridir. Hedef bölgeniz Azure US Government veya Azure Çin 21Vianet olduğunda ilgili parametreyi kullanın.|
+|-Ortam|(İsteğe bağlı) Azure depolama hesabı için hedef ortamınız. Şu üç değerden herhangi birini alabilir: AzureCloud, AzureUSGovernment veya AzureChinaCloud. Varsayılan seçenek AzureCloud değeridir. Hedef bölgeniz Azure ABD kamu veya Azure Çin 21Vianet olduğunda bu parametreyi kullanın.|
 
 VM’lerinizin en az 7 günlük profilinin oluşturulması önerilir. Değişim sıklığı bir ay içinde değişiklik gösteriyorsa, bu sıklığın en yüksek seviyeye ulaştığı hafta sırasında profil oluşturmanız önerilir. En iyi yöntem, daha iyi bir öneri almak için 31 günlük profil oluşturmaktır. 
 
@@ -154,7 +154,7 @@ Aracın çalıştığı sunucu yeniden başlatılırsa veya kilitlenmişse ya da
 
 Depolama hesabı adı ve anahtarı geçirildiğinde, araç profil oluşturma işleminin son adımında aktarım hızını ölçer. Profil oluşturma tamamlanmadan önce araç kapatılırsa, aktarım hızı hesaplanmaz. Raporu oluşturmadan önce aktarım hızını bulmak için, komut satırı konsolundan GetThroughput işlemini çalıştırabilirsiniz. Aksi takdirde, oluşturulan rapor aktarım hızı bilgilerini içermez.
 
-Azure Site Recovery, iSCSI ve geçiş disklerine sahip VM'lerin desteklememektedir. Araç, algılamak ve Vm'lere eklenmiş iSCSI ve geçiş disklerine profil.
+Azure Site Recovery, Iscsı ve geçiş diskleri olan VM 'Leri desteklemez. Araç, VM 'lere eklenmiş Iscsı ve geçiş disklerini algılayamaz ve profil ekleyemez.
 
 ## <a name="generate-a-report"></a>Rapor oluşturma
 Araç, rapor çıktısı olarak makro özellikli bir Microsoft Excel dosyası (XLSM dosyası) oluşturur. Bu dosya tüm dağıtım önerilerini özetler. Rapor, DeploymentPlannerReport_*benzersiz sayısal tanımlayıcı*.xlsm olarak adlandırılıp belirtilen dizine yerleştirilir.
@@ -170,7 +170,7 @@ ASRDeploymentPlanner.exe -Operation GenerateReport /?
 | Parametre adı | Açıklama |
 |---|---|
 | -Operation | GenerateReport |
-|-VMListFile | Raporun oluşturulacağı profili oluşturulmuş sanal makinelerin listesini içeren dosya. Dosya yolu mutlak veya göreli olabilir. Hyper-V için, GetVMList işleminin çıkış dosyası bu dosyadır. El ile hazırlıyorsanız, dosyada bir sunucu adı ya da IP adresi ve sonra VM adı (her satırı \ ile ayrılan) bulunmalıdır. Dosyada belirtilen VM adı, Hyper-V konağındaki VM adıyla aynı olmalıdır.<br><br>**Örnek:** VMList.txt aşağıdaki sanal makineleri içerir:<ul><li>Host_1\VM_A</li><li>10.8.59.27\VM_B</li><li>Host_2\VM_C</li><ul>|
+|-VMListFile | Raporun oluşturulacağı profili oluşturulmuş sanal makinelerin listesini içeren dosya. Dosya yolu mutlak veya göreli olabilir. Hyper-V için, GetVMList işleminin çıkış dosyası bu dosyadır. El ile hazırlıyorsanız, dosyada bir sunucu adı ya da IP adresi ve sonra VM adı (her satırı \ ile ayrılan) bulunmalıdır. Dosyada belirtilen VM adı, Hyper-V konağındaki VM adıyla aynı olmalıdır.<br><br>**Örnek:** VMList.txt dosyası aşağıdaki sanal makineleri içerir:<ul><li>Host_1\VM_A</li><li>10.8.59.27\VM_B</li><li>Host_2\VM_C</li><ul>|
 |-Sanallaştırma|Sanallaştırma türü (VMware veya Hyper-V).|
 |-Directory|(İsteğe bağlı) Profili oluşturulan verilerin (profil oluşturma sırasında oluşturulan dosyalar) depolandığı UNC veya yerel dizin yolu. Bu veriler, rapor oluşturmak için gereklidir. Bir ad belirtilmemişse, geçerli yol altındaki ProfiledData adlı dizin varsayılan dizin olarak kullanılır.|
 | -User | (İsteğe Bağlı) Hyper-V konağı veya Hyper-V kümesine bağlanmak için gereken kullanıcı adı. Kullanıcının yönetici erişimi olmalıdır. Kullanıcı ve parola, raporda kullanılacak en son yapılandırma bilgilerini (VM’lerin disk sayısı, çekirdek sayısı ve NIC sayısı gibi) getirmek için kullanılır. Bu değer belirtilmezse, profil oluşturma sırasında toplanan yapılandırma bilgileri kullanılır.|
@@ -180,7 +180,7 @@ ASRDeploymentPlanner.exe -Operation GenerateReport /?
 | -StartDate | (İsteğe bağlı) AA-GG-YYYY:SS:DD (24 saat) biçiminde başlangıç tarihi ve saati. EndDate ile birlikte StartDate değeri belirtilmelidir. StartDate belirtildiğinde, StartDate ile EndDate arasında toplanan profili oluşturulmuş veriler için rapor oluşturulur. |
 | -EndDate | (İsteğe bağlı) AA-GG-YYYY:SS:DD (24 saat) biçiminde bitiş tarihi ve saati. StartDate ile birlikte EndDate değeri belirtilmelidir. EndDate belirtildiğinde, StartDate ile EndDate arasında toplanan profili oluşturulmuş veriler için rapor oluşturulur. |
 | -GrowthFactor | (İsteğe bağlı) Yüzde olarak ifade edilen büyüme faktörü. Varsayılan değer yüzde 30'dur. |
-| -UseManagedDisks | (İsteğe bağlı) UseManagedDisks: Evet/Hayır Varsayılan değer Evet’tir. Tek bir depolama hesabında bulunabilecek sanal makine sayısı, sanal makinelerin yük devretme işleminin/yük devretme testinin yönetilmeyen disk yerine yönetilen disk üzerinde yapılıp yapılmadığına bağlı olarak hesaplanır. |
+| -UseManagedDisks | (İsteğe bağlı) UseManagedDisks: Evet/Hayır. Varsayılan değer Evet’tir. Tek bir depolama hesabında bulunabilecek sanal makine sayısı, sanal makinelerin yük devretme işleminin/yük devretme testinin yönetilmeyen disk yerine yönetilen disk üzerinde yapılıp yapılmadığına bağlı olarak hesaplanır. |
 |-SubscriptionId |(İsteğe bağlı) Abonelik GUID’si. Aboneliğinizin son fiyatına, aboneliğinizle ilişkili teklife ve hedef Azure bölgenize dayalı olarak ve belirli bir para birimini kullanarak maliyet tahmini oluşturmak için bu parametreyi kullanın.|
 |-TargetRegion|(İsteğe bağlı) Çoğaltmanın hedeflendiği Azure bölgesi. Azure maliyetleri bölgelere göre değiştiğinden, belirli bir Azure bölgesini hedef alan bir rapor oluşturmak için bu parametreyi kullanın. Varsayılan olarak WestUS2 veya en son kullanılan hedef bölge kullanılır. [Desteklenen hedef bölgeler](hyper-v-deployment-planner-cost-estimation.md#supported-target-regions) listesine başvurun.|
 |-OfferId|(İsteğe bağlı) Abonelikle ilişkili teklif. Varsayılan olarak MS-AZR-0003P (Kullandıkça Öde) kullanılır.|
@@ -282,8 +282,8 @@ ASRDeploymentPlanner.exe -Operation GetThroughput /?
 |-Directory|(İsteğe bağlı) Profili oluşturulan verilerin (profil oluşturma sırasında oluşturulan dosyalar) depolandığı UNC veya yerel dizin yolu. Bu veriler, rapor oluşturmak için gereklidir. Bir ad belirtilmemişse, geçerli yol altındaki ProfiledData adlı dizin varsayılan dizin olarak kullanılır.|
 | -StorageAccountName | Şirket içinden Azure’a veri çoğaltma için kullanılan bant genişliğini bulmak için depolama hesabı adı. Araç, kullanılan bant genişliğini bulmak için test verilerini bu depolama hesabına yükler. Depolama hesabı Genel amaçlı v1 (GPv1) türünde olmalıdır.|
 | -StorageAccountKey | Depolama hesabına erişmek için kullanılan depolama hesabı anahtarı. Azure portalı > **Depolama hesapları** > *depolama hesabı adı* > **Ayarlar** > **Erişim Anahtarları** > **Anahtar1** seçeneğine gidin.|
-| -VMListFile | Kullanılan bant genişliğini hesaplamak için profili oluşturulacak sanal makinelerin listesini içeren dosya. Dosya yolu mutlak veya göreli olabilir. Hyper-V için, GetVMList işleminin çıkış dosyası bu dosyadır. El ile hazırlıyorsanız, dosyada bir sunucu adı ya da IP adresi ve sonra VM adı (her satırı \ ile ayrılan) bulunmalıdır. Dosyada belirtilen VM adı, Hyper-V konağındaki VM adıyla aynı olmalıdır.<br><br>**Örnek:** VMList.txt aşağıdaki sanal makineleri içerir:<ul><li>Host_1\VM_A</li><li>10.8.59.27\VM_B</li><li>Host_2\VM_C</li><ul>|
-|-Ortam|(İsteğe bağlı) Azure depolama hesabı için hedef ortamınız. Üç değerlerden biri olabilir: AzureCloud, AzureUSGovernment veya AzureChinaCloud. Varsayılan seçenek AzureCloud değeridir. Hedef Azure bölgeniz Azure US Government veya Azure Çin 21Vianet olduğunda ilgili parametreyi kullanın.|
+| -VMListFile | Kullanılan bant genişliğini hesaplamak için profili oluşturulacak sanal makinelerin listesini içeren dosya. Dosya yolu mutlak veya göreli olabilir. Hyper-V için, GetVMList işleminin çıkış dosyası bu dosyadır. El ile hazırlıyorsanız, dosyada bir sunucu adı ya da IP adresi ve sonra VM adı (her satırı \ ile ayrılan) bulunmalıdır. Dosyada belirtilen VM adı, Hyper-V konağındaki VM adıyla aynı olmalıdır.<br><br>**Örnek:** VMList.txt dosyası aşağıdaki sanal makineleri içerir:<ul><li>Host_1\VM_A</li><li>10.8.59.27\VM_B</li><li>Host_2\VM_C</li><ul>|
+|-Ortam|(İsteğe bağlı) Azure depolama hesabı için hedef ortamınız. Şu üç değerden herhangi birini alabilir: AzureCloud, AzureUSGovernment veya AzureChinaCloud. Varsayılan seçenek AzureCloud değeridir. Hedef Azure bölgeniz Azure ABD kamu veya Azure Çin 21Vianet olduğunda bu parametreyi kullanın.|
 
 ### <a name="example"></a>Örnek
 ```

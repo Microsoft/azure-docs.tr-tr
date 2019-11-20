@@ -1,7 +1,7 @@
 ---
-title: "Hızlı Başlangıç: Bing yazım denetimi REST API'si ve Java ile yazım denetimi"
-titlesuffix: Azure Cognitive Services
-description: Bing yazım denetimi REST API'si yazım ve dilbilgisi denetimini kullanmaya başlayın.
+title: 'Hızlı Başlangıç: Bing Yazım Denetimi REST API ve Java ile yazımı denetleme'
+titleSuffix: Azure Cognitive Services
+description: Yazım ve dilbilgisini denetlemek için Bing Yazım Denetimi REST API kullanmaya başlayın.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,28 +10,28 @@ ms.subservice: bing-spell-check
 ms.topic: quickstart
 ms.date: 04/11/2019
 ms.author: aahi
-ms.openlocfilehash: eeec278a1c9e4888aa4a63af3d9c86e7a8c1615c
-ms.sourcegitcommit: 837dfd2c84a810c75b009d5813ecb67237aaf6b8
+ms.openlocfilehash: 47b47a91b0cd223a17d6779d7f0db7cdb7c88a0b
+ms.sourcegitcommit: 07700392dd52071f31f0571ec847925e467d6795
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67502917"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70123290"
 ---
-# <a name="quickstart-check-spelling-with-the-bing-spell-check-rest-api-and-java"></a>Hızlı Başlangıç: Bing yazım denetimi REST API'si ve Java ile yazım denetimi
+# <a name="quickstart-check-spelling-with-the-bing-spell-check-rest-api-and-java"></a>Hızlı Başlangıç: Bing Yazım Denetimi REST API ve Java ile yazımı denetleme
 
-Bu hızlı başlangıçta, Bing yazım denetimi REST API'si, ilk çağrı yapmak için kullanın. Bu basit bir Java uygulaması API'sine bir istek gönderir ve önerilen düzeltmeler listesini döndürür. Bu uygulama, Java dilinde yazılır, ancak çoğu programlama dilleri ile uyumlu bir RESTful web hizmeti API'dir. Bu uygulama için kaynak kodu kullanılabilir [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/java/Search/BingSpellCheckv7.java).
+Bing Yazım Denetimi REST API ilk çağrlarınızı yapmak için bu hızlı başlangıcı kullanın. Bu basit Java uygulaması, API 'ye bir istek gönderir ve önerilen düzeltmelerin bir listesini döndürür. Bu uygulama Java 'da yazıldığı sırada, API birçok programlama dili ile uyumlu olan bir yeniden sorun Web hizmetidir. Bu uygulamanın kaynak kodu [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/java/Search/BingSpellCheckv7.java)' da kullanılabilir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Java geliştirme Kit(JDK) 7 veya üzeri.
+* Java Development Kit (JDK) 7 veya üzeri.
 
-* İçeri aktarma [gson 2.8.5.jar](https://libraries.io/maven/com.google.code.gson%3Agson) veya en güncel [Gson](https://github.com/google/gson) sürümü. Komut satırı yürütme için ekleme `.jar` ana sınıfı içeren Java klasörünüze.
+* [Gson-2.8.5. jar](https://libraries.io/maven/com.google.code.gson%3Agson) veya en güncel [gson](https://github.com/google/gson) sürümünü içeri aktarın. Komut satırı yürütmesi için, `.jar` ana sınıfla Java klasörünüze ekleyin.
 
 [!INCLUDE [cognitive-services-bing-spell-check-signup-requirements](../../../../includes/cognitive-services-bing-spell-check-signup-requirements.md)]
 
-## <a name="create-and-initialize-an-application"></a>Oluşturma ve bir uygulama başlatma
+## <a name="create-and-initialize-an-application"></a>Uygulama oluşturma ve başlatma
 
-1. Sık kullandığınız IDE veya düzenleyici, seçtiğiniz bir sınıf adı ile yeni bir Java projesi oluşturun ve ardından aşağıdaki paketler aktarın.
+1. Seçtiğiniz bir sınıf adı ile en sevdiğiniz IDE veya düzenleyicide yeni bir Java projesi oluşturun ve ardından aşağıdaki paketleri içeri aktarın.
 
     ```java
     import java.io.*;
@@ -40,7 +40,7 @@ Bu hızlı başlangıçta, Bing yazım denetimi REST API'si, ilk çağrı yapmak
     import javax.net.ssl.HttpsURLConnection;
     ```
 
-2. API uç noktanın ana bilgisayar, yol ve abonelik anahtarınız için değişkenler oluşturun. Ardından yazım denetimi yapmak istediğiniz metin pazarınızın değişkenleri ve yazım denetimi modu için bir dize oluşturur.
+2. API uç noktasının ana bilgisayar, yol ve abonelik anahtarınız için değişkenler oluşturun. Daha sonra Pazar için değişkenler, yazım denetimi yapmak istediğiniz metin ve yazım denetimi modu için bir dize oluşturun.
 
     ```java
     static String host = "https://api.cognitive.microsoft.com";
@@ -53,9 +53,9 @@ Bu hızlı başlangıçta, Bing yazım denetimi REST API'si, ilk çağrı yapmak
     static String text = "Hollo, wrld!";
     ```
 
-## <a name="create-and-send-an-api-request"></a>Oluşturma ve bir API isteği gönder
+## <a name="create-and-send-an-api-request"></a>API isteği oluşturma ve gönderme
 
-1. Çağrılan bir işlev oluşturma `check()` oluşturmak ve API isteği göndermek için. İçine aşağıdaki adımları izleyin. İstek parametreleri için bir dize oluşturun. Append `?mkt=` Pazar dizenizi parametresi ve `&mode=` yazım denetimi modunuzu parametresi.  
+1. API isteği oluşturmak ve `check()` göndermek için adlı bir işlev oluşturun. Bunun içinde, aşağıdaki adımları izleyin. İstek parametreleri için bir dize oluşturun. parametreyi Pazar dizeniz `&mode=` ve parametresini yazım denetimi moduna ekleyin. `?mkt=`  
 
    ```java
    public static void check () throws Exception {
@@ -64,14 +64,14 @@ Bu hızlı başlangıçta, Bing yazım denetimi REST API'si, ilk çağrı yapmak
    }
    ```
 
-2. Uç nokta konak ve yol parametreleri dize birleştirerek bir URL oluşturun. Yeni bir `HttpsURLConnection` nesne.
+2. Uç nokta konağını, yolunu ve Parameters dizesini birleştirerek bir URL oluşturun. Yeni `HttpsURLConnection` bir nesne oluşturun.
 
     ```java
     URL url = new URL(host + path + params);
     HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
     ```
 
-3. URL bağlantısı açın. İstek yöntemini ayarla `POST`. İstek parametrelerinizi ekleyin. Abonelik anahtarınızı eklediğinizden emin olun `Ocp-Apim-Subscription-Key` başlığı.
+3. URL 'ye bir bağlantı açın. İstek yöntemini olarak `POST`ayarlayın. İstek parametrelerinizi ekleyin. Abonelik anahtarınızı `Ocp-Apim-Subscription-Key` üstbilgiye eklediğinizden emin olun.
 
     ```java
     connection.setRequestMethod("POST");
@@ -80,7 +80,7 @@ Bu hızlı başlangıçta, Bing yazım denetimi REST API'si, ilk çağrı yapmak
     connection.setDoOutput(true);
     ```
 
-4. Yeni bir `DataOutputStream` nesne ve API için istek gönderin.
+4. Yeni `DataOutputStream` bir nesne oluşturun ve isteği API 'ye gönderin.
 
     ```java
         DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
@@ -89,9 +89,9 @@ Bu hızlı başlangıçta, Bing yazım denetimi REST API'si, ilk çağrı yapmak
         wr.close();
     ```
 
-## <a name="format-and-read-the-api-response"></a>Biçimlendirme ve API yanıtı okuyun
+## <a name="format-and-read-the-api-response"></a>API yanıtını biçimlendirme ve okuma
 
-1. Bu yöntem sınıfınıza ekleyin. Bu, daha okunabilir bir çıkış için JSON biçimlendirir.
+1. Bu yöntemi sınıfınıza ekleyin. Daha okunabilir bir çıkış için JSON 'ı biçimlendirir.
 
     ``` java
     // This function prettifies the json response.
@@ -103,45 +103,44 @@ Bu hızlı başlangıçta, Bing yazım denetimi REST API'si, ilk çağrı yapmak
     }
     ```
 
-1. Oluşturma bir `BufferedReader` ve API'den yanıtı okuyun. Bu, konsola yazdırır.
+1. Bir `BufferedReader` oluşturun ve API 'den yanıtı okuyun. Bunu konsola yazdır.
     
     ```java
     BufferedReader in = new BufferedReader(
     new InputStreamReader(connection.getInputStream()));
     String line;
     while ((line = in.readLine()) != null) {
-        System.out.println(prettify(line);
+        System.out.println(prettify(line));
     }
     in.close();
     ```
 
 ## <a name="call-the-api"></a>API çağırma
 
-Yukarıda oluşturulan check() yönteminizi uygulamanızın ana işlevi çağırın.
-
-    ```java
-    public static void main(String[] args) {
-        try {
-            check();
+Uygulamanızın ana işlevinde, yukarıda oluşturulan Check () yöntemini çağırın.
+```java
+        public static void main(String[] args) {
+            try {
+                check();
+            }
+            catch (Exception e) {
+                System.out.println (e);
+            }
         }
-        catch (Exception e) {
-            System.out.println (e);
-        }
-    }
-    ```
+```
 
 ## <a name="run-the-application"></a>Uygulamayı çalıştırma
 
-Derleme ve projeyi çalıştırın.
+Projenizi derleyin ve çalıştırın.
 
-Komut satırı kullanıyorsanız, oluşturmak ve uygulamayı çalıştırmak için aşağıdaki komutları kullanın.
+Komut satırını kullanıyorsanız, uygulamayı derlemek ve çalıştırmak için aşağıdaki komutları kullanın.
 
-**Derleme:**
+**Derlemeyi**
 ```bash
 javac -classpath .;gson-2.2.2.jar\* <CLASS_NAME>.java
 ```
 
-**Çalıştırın:**
+**Çalışmaz**
 ```bash
 java -cp .;gson-2.2.2.jar\* <CLASS_NAME>
 ```
@@ -193,5 +192,5 @@ Başarılı yanıt, aşağıdaki örnekte gösterildiği gibi JSON biçiminde d�
 > [!div class="nextstepaction"]
 > [Tek sayfalı web uygulaması oluşturma](../tutorials/spellcheck.md)
 
-- [Bing yazım denetimi API'si nedir?](../overview.md)
+- [Bing Yazım Denetimi API'si nedir?](../overview.md)
 - [Bing Yazım Denetimi API’si v7 Başvurusu](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-spell-check-api-v7-reference)

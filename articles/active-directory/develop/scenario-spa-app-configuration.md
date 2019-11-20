@@ -1,6 +1,6 @@
 ---
-title: Tek sayfalı uygulama (uygulama kodu yapılandırma) - Microsoft kimlik platformu
-description: Tek sayfalı uygulama (uygulama kodu yapılandırma) oluşturmayı öğrenin
+title: Tek sayfalı uygulama (uygulamanın kod yapılandırması)-Microsoft Identity platform
+description: Tek sayfalı bir uygulama (uygulamanın kod yapılandırması) oluşturmayı öğrenin
 services: active-directory
 documentationcenter: dev-center-name
 author: navyasric
@@ -15,31 +15,31 @@ ms.date: 05/07/2019
 ms.author: nacanuma
 ms.custom: aaddev
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: b71454fc553a0f81c26426a6a9588f15d5311e38
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a7b4fba03f9edf8a3f4e42b23c6a1b5e06518863
+ms.sourcegitcommit: a3a40ad60b8ecd8dbaf7f756091a419b1fe3208e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65406429"
+ms.lasthandoff: 08/21/2019
+ms.locfileid: "69891524"
 ---
-# <a name="single-page-application---code-configuration"></a>Tek sayfalı uygulama - kod yapılandırma
+# <a name="single-page-application---code-configuration"></a>Tek sayfalı uygulama kodu yapılandırması
 
-Tek sayfalı uygulama (SPA) kodunu yapılandırmayı öğrenin.
+Tek sayfalı uygulamanız (SPA) için kodu yapılandırmayı öğrenin.
 
-## <a name="msal-libraries-supporting-implicit-flow"></a>Örtük akış destekleyen MSAL kitaplıkları
+## <a name="msal-libraries-supporting-implicit-flow"></a>Örtük akışı destekleyen MSAL kitaplıkları
 
-Microsoft kimlik platformu, MSAL.js kitaplığı sektör kullanarak örtük akış desteklemek için önerilen güvenli uygulamalar sağlar.  
+Microsoft Identity platformu, sektörde önerilen güvenli uygulamaları kullanarak örtük akışı desteklemek için MSAL. js kitaplığı sağlar.  
 
-Örtük akış destekleyen kitaplıkları şunlardır:
+Örtük akışı destekleyen kitaplıklar şunlardır:
 
 | MSAL kitaplığı | Açıklama |
 |--------------|--------------|
-| ![MSAL.js](media/sample-v2-code/logo_js.png) <br/> [MSAL.js](https://github.com/AzureAD/microsoft-authentication-library-for-js)  | Angular, Vue.js, React.js vb. gibi JavaScript veya SPA çerçeveler kullanılarak oluşturulan tüm istemci tarafı web uygulamaları kullanmak için düz JavaScript kitaplığı. |
-| ![MSAL Angular](media/sample-v2-code/logo_angular.png) <br/> [MSAL Angular](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/README.md) | Angular framework ile oluşturulan tek sayfa uygulamaları kullanımda basitleştirmek için çekirdek MSAL.js kitaplığı sarmalayıcı. Bu kitaplık Önizleme aşamasındadır ve sahip [bilinen sorunlar](https://github.com/AzureAD/microsoft-authentication-library-for-js/issues?q=is%3Aopen+is%3Aissue+label%3Aangular) belirli Angular sürümleri ve tarayıcılar ile. |
+| ![MSAL. js](media/sample-v2-code/logo_js.png) <br/> [MSAL. js](https://github.com/AzureAD/microsoft-authentication-library-for-js)  | JavaScript veya SPA çerçeveleri kullanılarak oluşturulan, angular, Vue. js, yanıt verme. js vb. gibi tüm istemci tarafı Web uygulamaları için kullanılmak üzere düz JavaScript kitaplığı. |
+| ![MSAL angular](media/sample-v2-code/logo_angular.png) <br/> [MSAL angular](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/README.md) | Angular çerçevesiyle oluşturulan tek sayfalı uygulamalarda kullanımı basitleştirmek için Core MSAL. js kitaplığı sarmalayıcısı. Bu kitaplık önizlemededir ve belirli angular sürümlerinde ve tarayıcılarında [bilinen sorunlar](https://github.com/AzureAD/microsoft-authentication-library-for-js/issues?q=is%3Aopen+is%3Aissue+label%3Aangular) vardır. |
 
-## <a name="application-code-configuration"></a>Uygulama kodu yapılandırma
+## <a name="application-code-configuration"></a>Uygulama kodu yapılandırması
 
-MSAL Kitaplığı'nda uygulama kayıt bilgileri Yapılandırma kitaplığı başlatma sırasında geçirilir.
+MSAL kitaplığı 'nda, uygulama kayıt bilgileri kitaplık başlatma sırasında yapılandırma olarak geçirilir.
 
 ### <a name="javascript"></a>JavaScript
 
@@ -55,15 +55,17 @@ const config = {
 // create UserAgentApplication instance
 const userAgentApplication = new UserAgentApplication(config);
 ```
-Yapılandırılabilir seçenekleri hakkında daha fazla bilgi için bkz. [MSAL.js uygulamayla başlatma](msal-js-initializing-client-applications.md).
+Kullanılabilir yapılandırılabilir seçenekler hakkında daha fazla bilgi için bkz. [msal. js ile uygulamayı başlatma](msal-js-initializing-client-applications.md).
 
 ### <a name="angular"></a>Angular
 
 ```javascript
 //In app.module.ts
+import { MsalModule } from '@azure/msal-angular';
+
 @NgModule({
   imports: [ MsalModule.forRoot({
-                clientId: 'your_app_id'
+                clientID: 'your_app_id'
             })]
          })
 

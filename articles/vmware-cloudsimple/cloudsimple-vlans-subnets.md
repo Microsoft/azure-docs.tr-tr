@@ -1,85 +1,85 @@
 ---
-title: VLAN ve alt ağları CloudSimple - Azure ile VMware çözümde
-description: VLAN ve alt ağları CloudSimple özel bir bulutta hakkında bilgi edinin
+title: CloudSimple tarafından Azure VMware çözümünde VLAN ve alt ağlar
+description: CloudSimple özel bulutu 'nda VLAN 'Lar ve alt ağlar hakkında bilgi edinin
 author: sharaths-cs
 ms.author: dikamath
-ms.date: 04/10/2019
+ms.date: 08/15/2019
 ms.topic: article
-ms.service: vmware
+ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 9d29445054848d798476fed8184b89f9b6c1210f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 7af191893d6b3cf1c38e5ff44a7a8a04509347a8
+ms.sourcegitcommit: 0c906f8624ff1434eb3d3a8c5e9e358fcbc1d13b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66497565"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69543791"
 ---
-# <a name="vlans-and-subnets-overview"></a>VLAN ve alt ağları genel bakış
+# <a name="vlans-and-subnets-overview"></a>VLAN 'Lara ve alt ağlara genel bakış
 
-CloudSimple CloudSimple hizmetinizin dağıtıldığı bölge başına bir ağ sağlar.  Varsayılan olarak etkin yönlendirme ile tek bir TCP Katman 3 adres alanı ağdır.  Tüm özel Bulutlar ve alt ağlar bu bölgede oluşturulan herhangi bir ek yapılandırma birbiriyle iletişim kurabilir.  VLAN'ları kullanarak vCenter dağıtılmış bağlantı noktası grupları oluşturabilirsiniz.
+CloudSimple, CloudSimple hizmetinizin dağıtıldığı bölge başına bir ağ sağlar.  Ağ, yönlendirme özelliği varsayılan olarak etkin olan tek bir TCP katman 3 adres alanıdır.  Bu bölgede oluşturulan tüm özel bulutlar ve alt ağlar, ek bir yapılandırma olmadan birbirleriyle iletişim kurabilir.  VLAN 'Lar kullanarak vCenter üzerinde dağıtılmış bağlantı noktası grupları oluşturabilirsiniz.
 
 ![CloudSimple ağ topolojisi](media/cloudsimple-network-topology.png)
 
-## <a name="vlans"></a>VLAN'ları
+## <a name="vlans"></a>VLAN
 
-VLAN'ları (Katman 2 ağ) özel bir bulut oluşturulur.  Katman 2 trafik, özel bulut yerel trafiği yalıtmak olanak tanıyan bir özel bulutun sınırları içinde kalır.  Özel bulutta oluşturulan bir VLAN, yalnızca o özel buluta dağıtılmış bağlantı noktası grupları oluşturmak için kullanılabilir.  Bir özel bulutta oluşturulan bir VLAN, bir özel bulutun Konaklara bağlı tüm anahtarlar üzerinde otomatik olarak yapılandırılır.
+Her özel bulut için bir VLAN (katman 2 ağ) oluşturulur.  Katman 2 trafiği özel bulutun sınırında kalır ve özel buluttaki yerel trafiği yalıtmanızı sağlar.  Özel bulutta oluşturulan bir VLAN, yalnızca o özel bulutta dağıtılmış bağlantı noktası grupları oluşturmak için kullanılabilir.  Özel bir bulutta oluşturulan bir VLAN, özel bulutun konaklarına bağlı tüm anahtarlarda otomatik olarak yapılandırılır.
 
 ## <a name="subnets"></a>Alt ağlar
 
-Bir VLAN alt ağın adres alanı tanımlayarak oluşturduğunuzda, bir alt ağ oluşturabilirsiniz. Adres alanından bir IP adresi alt ağı ağ geçidi olarak atanır. Müşteri ve bölge tek bir özel Katman 3 adres alanı atanır. Ağ bölgenizde herhangi RFC 1918 çakışmayan adres alanı, şirket içi ağınızla veya Azure sanal ağı ile yapılandırabilirsiniz.
+Alt ağın adres alanını tanımlayarak bir VLAN oluşturduğunuzda bir alt ağ oluşturabilirsiniz. Adres alanından bir IP adresi, alt ağ geçidi olarak atanır. Her müşteri ve bölge için tek bir özel katman 3 adres alanı atanır. Ağ bölgenizde, şirket içi ağınız veya Azure sanal ağınız ile herhangi bir RFC 1918 çakışmayan adres alanı yapılandırabilirsiniz.
 
-Tüm alt ağlar, varsayılan olarak yapılandırma özel Bulutlar arasında yönlendirme için ek yükü azaltarak birbiriyle iletişim kurabilir. Doğu-Batı veriler aynı bölgede bulunan bilgisayarlar arasında aynı katman 3 ağında kalır ve bölge içindeki yerel ağ altyapı üzerinden aktarılır. Hiçbir çıkış bir bölgeye özel Bulutlar arasındaki iletişim için gereklidir. Bu yaklaşım, farklı iş yüklerini farklı özel bulutlarda dağıtma konusunda WAN/çıkış performans cezaları ortadan kaldırır.
+Tüm alt ağlar varsayılan olarak birbirleriyle iletişim kurabilir ve özel bulutlar arasında yönlendirme için yapılandırma yükünü azaltır. Aynı bölgedeki bilgisayarlar arasında Doğu Batı verileri aynı katman 3 ağında kalır ve bölge içindeki yerel ağ altyapısına aktarır. Bir bölgedeki özel bulutlar arasındaki iletişim için çıkış gerekmez. Bu yaklaşım farklı özel bulutlarda farklı iş yüklerini dağıtmanın tüm WAN/çıkış performans cezalarını ortadan kaldırır.
 
-## <a name="vspherevsan-subnets-cidr-range"></a>vSphere/vSAN alt ağ CIDR aralığı
+## <a name="vspherevsan-subnets-cidr-range"></a>vSphere/vSAN alt ağları CıDR aralığı
 
-Bir yalıtılmış VMware yığınınızın (ESXi konaklarını ve vCenter, Vsan'a ve NSX) oluşturulan bir özel bulut ortamı bir vCenter sunucusu tarafından yönetilen.  Yönetim bileşenleri için seçilen ağ dağıtıldığı **vSphere/vSAN alt ağ CIDR**.  Ağ CIDR aralığı, dağıtım sırasında farklı alt ağlara bölünmüştür.
+Özel bulut, bir vCenter sunucusu tarafından yönetilen yalıtılmış bir VMware yığını (ESXi Konakları, vCenter, vSAN ve NSX) ortamı olarak oluşturulur.  Yönetim bileşenleri, vSphere/vSAN alt ağları CıDR için seçilen ağda dağıtılır.  Ağ CıDR aralığı, dağıtım sırasında farklı alt ağlara bölünmüştür.
 
-En düşük vSphere/vSAN alt ağ CIDR aralığı ön eki: **/24** en fazla vSphere/vSAN alt ağ CIDR aralığı ön eki:   **/21**
+* Minimum vSphere/vSAN alt ağları CıDR aralığı ön eki: **/24**
+* Maksimum vSphere/vSAN alt ağları CıDR aralığı ön eki: **/21**
 
-> [!CAUTION]
-> VSphere/vSAN CIDR aralığında IP adresi, özel bulut altyapısı tarafından kullanım için ayrılmıştır. Herhangi bir sanal makinede bu aralıktaki bir IP adresini kullanmayın.
+> [!IMPORTANT]
+> VSphere/vSAN CıDR aralığındaki IP adresleri özel bulut altyapısı tarafından kullanılmak üzere ayrılmıştır.  Bu aralıkta IP adresini herhangi bir sanal makinede kullanmayın.
 
+### <a name="vspherevsan-subnets-cidr-range-limits"></a>vSphere/vSAN alt ağları CıDR Aralık sınırları
 
-### <a name="vspherevsan-subnets-cidr-range-limits"></a>vSphere/vSAN alt ağ CIDR aralığı sınırları
+VSphere/vSAN alt ağlarının CıDR Aralık boyutunun seçilmesi, özel bulutunuzun boyutunu etkiler.  Aşağıdaki tabloda, vSphere/vSAN alt ağlarının CıDR boyutunu temel alan en fazla düğüm sayısı gösterilmektedir.
 
-VSphere/vSAN alt ağ CIDR aralığı boyutunu seçme, özel bulut boyutuna göre bir etkisi yoktur.  Aşağıdaki tabloda, en fazla vSphere/vSAN alt ağ CIDR boyutuna göre düğüm sayısını gösterir.
-
-| Belirtilen vSphere/vSAN alt ağ CIDR ön ek uzunluğu | Maksimum düğüm sayısı |
+| Belirtilen vSphere/vSAN alt ağları CıDR ön eki uzunluğu | En fazla düğüm sayısı |
 |---------------------------------------------------|-------------------------|
 | /24 | 26 |
 | /23 | 58 |
 | /22 | 118 |
 | /21 | 220 |
 
-### <a name="management-subnets-created-on-a-private-cloud"></a>Bir özel bulutta oluşturulan yönetim alt ağlar
+### <a name="management-subnets-created-on-a-private-cloud"></a>Özel bir bulutta oluşturulan yönetim alt ağları
 
-Aşağıdaki yönetim alt ağlar, bir özel bulut oluşturduğunuzda oluşturulur. 
+Özel bir bulut oluşturduğunuzda aşağıdaki yönetim alt ağları oluşturulur.
 
-* **Sistem Yönetimi** -VLAN ve alt ağ ESXi ana bilgisayarlarının yönetimi için ağ, DNS sunucusu, vCenter sunucusu.
-* **VMotion** -VLAN ve alt ağ için ESXi konakları vMotion ağ.
-* **VSAN** -VLAN ve alt ağ için ESXi konakları vSAN ağ.
-* **NsxtEdgeUplink1** -VLAN ve alt ağ VLAN dış ağ yukarı bağlantılar için.
-* **NsxtEdgeUplink2** -VLAN ve alt ağ VLAN dış ağ yukarı bağlantılar için.
-* **NsxtEdgeTransport** -VLAN ve alt ağ aktarımı bölgeleri için Denetim NSX-t Katman 2 ağların ulaşma
-* **NsxtHostTransport** -VLAN ve alt ağ için ana bölge aktarım.
+* **Sistem yönetimi**. ESXi ' Management Network, DNS Server, vCenter Server konakları için VLAN ve subnet.
+* **VMotion**. ESXi konakları için VLAN ve subnet, ' vMotion Network.
+* **VSAN**. ESXi konakları için VLAN ve subnet ' vSAN ağı.
+* **NsxtEdgeUplink1**. Bir dış ağa VLAN bağlantıları için VLAN ve subnet.
+* **NsxtEdgeUplink2**. Bir dış ağa VLAN bağlantıları için VLAN ve subnet.
+* **Nsxtedgetransport**. Taşıma bölgeleri için VLAN ve subnet, NSX-T içindeki katman 2 ağlarının erişimini denetler.
+* **Nsxthosttransport**. Konak aktarım bölgesi için VLAN ve subnet.
 
-### <a name="management-network-cidr-range-breakdown"></a>Yönetim ağ CIDR aralığı dökümü
+### <a name="management-network-cidr-range-breakdown"></a>Yönetim ağı CıDR aralığı dökümü
 
-Belirtilen vSphere/vSAN alt ağ CIDR aralığı birden çok alt ağına bölünür.  Aşağıdaki tabloda, izin verilen ön ekler için dökümü örneği gösterilmektedir.  Örnekte **192.168.0.0** CIDR aralığı.
+Belirtilen vSphere/vSAN alt ağları CıDR aralığı birden çok alt ağa bölünmüştür.  Aşağıdaki tabloda, izin verilen ön ekler için döküm örneği gösterilmektedir.  Örnek, CıDR aralığı olarak 192.168.0.0 kullanır.
 
 Örnek:
 
-| Belirtilen vSphere/vSAN alt ağ CIDR/öneki | 192.168.0.0/21 | 192.168.0.0/22 | 192.168.0.0/23 | 192.168.0.0/24 |
+| Belirtilen vSphere/vSAN alt ağları CıDR/ön eki | 192.168.0.0/21 | 192.168.0.0/22 | 192.168.0.0/23 | 192.168.0.0/24 |
 |---------------------------------|----------------|----------------|----------------|----------------|
 | Sistem Yönetimi | 192.168.0.0/24 | 192.168.0.0/24 | 192.168.0.0/25 | 192.168.0.0/26 |
-| VMotion'ı | 192.168.1.0/24 | 192.168.1.0/25 | 192.168.0.128/26 | 192.168.0.64/27 |
+| vMotion | 192.168.1.0/24 | 192.168.1.0/25 | 192.168.0.128/26 | 192.168.0.64/27 |
 | vSAN | 192.168.2.0/24 | 192.168.1.128/25 | 192.168.0.192/26 | 192.168.0.96/27 |
-| NSX-T konak taşıma | 192.168.4.0/23 | 192.168.2.0/24 | 192.168.1.0/25 | 192.168.0.128/26 |
-| NSX-T Edge taşıma | 192.168.7.208/28 | 192.168.3.208/28 | 192.168.1.208/28 | 192.168.0.208/28 |
-| Edge Uplink1 NSX-T | 192.168.7.224/28 | 192.168.3.224/28 | 192.168.1.224/28 | 192.168.0.224/28 |
-| Edge uplink2 NSX-T | 192.168.7.240/28 | 192.168.3.240/28 | 192.168.1.240/28 | 192.168.0.240/28 |
+| NSX-T ana bilgisayar taşıması | 192.168.4.0/23 | 192.168.2.0/24 | 192.168.1.0/25 | 192.168.0.128/26 |
+| NSX-T Edge taşıması | 192.168.7.208/28 | 192.168.3.208/28 | 192.168.1.208/28 | 192.168.0.208/28 |
+| NSX-T Edge Uplink1 | 192.168.7.224/28 | 192.168.3.224/28 | 192.168.1.224/28 | 192.168.0.224/28 |
+| NSX-T Edge uplink2 | 192.168.7.240/28 | 192.168.3.240/28 | 192.168.1.240/28 | 192.168.0.240/28 |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [VLAN ve alt ağlar oluşturun ve yönetin](https://docs.azure.cloudsimple.com/create-vlan-subnet/)
+* [VLAN 'Ları ve alt ağları oluşturma ve yönetme](create-vlan-subnet.md)

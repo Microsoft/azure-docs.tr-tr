@@ -1,23 +1,22 @@
 ---
-title: Azure PowerShell betik örneği - Blob depolama hesabına abone olma | Microsoft Docs
-description: Azure PowerShell betik örneği - Blob depolama hesabına abone olma
+title: Azure PowerShell-BLOB depolama hesabına abone olma
+description: Azure Event Grid & Azure PowerShell betik örneği-BLOB depolama hesabına abone olma
 services: event-grid
 documentationcenter: na
-author: tfitzmac
-manager: timlt
+author: spelluru
 ms.service: event-grid
 ms.devlang: powershell
 ms.topic: sample
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 12/10/2018
-ms.author: tomfitz
-ms.openlocfilehash: d236bcbf71915576ee31587e9abfff92c99250c1
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.date: 10/22/2019
+ms.author: spelluru
+ms.openlocfilehash: 1e394b27818456b96118f80f17cf459ac08f45a9
+ms.sourcegitcommit: b050c7e5133badd131e46cab144dd5860ae8a98e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66117204"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72790511"
 ---
 # <a name="subscribe-to-events-for-a-blob-storage-account-with-powershell"></a>PowerShell ile bir Blob depolama hesabı için olaylara abone olma
 
@@ -37,7 +36,7 @@ Bu betik, olay aboneliğini oluşturmak için aşağıdaki komutu kullanır. Tab
 
 | Komut | Notlar |
 |---|---|
-| [Yeni AzEventGridSubscription](https://docs.microsoft.com/powershell/module/az.eventgrid/new-azeventgridsubscription) | Event Grid aboneliği oluşturun. |
+| [New-AzEventGridSubscription](https://docs.microsoft.com/powershell/module/az.eventgrid/new-azeventgridsubscription) | Event Grid aboneliği oluşturun. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

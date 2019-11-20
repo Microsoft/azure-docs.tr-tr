@@ -1,6 +1,6 @@
 ---
-title: Azure Data Factory kullanarak verileri dönüştürme | Microsoft Docs
-description: Veri veya Hadoop, Machine Learning ve Azure Data Lake Analytics'i kullanarak Azure Data factory'de işlem verileri dönüştürme hakkında bilgi edinin.
+title: 'Azure Data Factory kullanarak verileri dönüştürme '
+description: Hadoop, Machine Learning veya Azure Data Lake Analytics kullanarak Azure Data Factory veri dönüştürmeyi veya verileri işlemeyi öğrenin.
 services: data-factory
 documentationcenter: ''
 ms.service: data-factory
@@ -11,85 +11,100 @@ ms.date: 07/31/2018
 author: nabhishek
 ms.author: abnarain
 manager: craigg
-ms.openlocfilehash: 2c674f77ef0f779c9764771e2e0ae7a4aea47548
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 268c1e66010720d1da052183165ce1cea50a1095
+ms.sourcegitcommit: a170b69b592e6e7e5cc816dabc0246f97897cb0c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60622116"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74092005"
 ---
-# <a name="transform-data-in-azure-data-factory"></a>Azure Data factory'de veri dönüştürme
+# <a name="transform-data-in-azure-data-factory"></a>Azure Data Factory verileri dönüştürme
 > [!div class="op_single_selector"]
+> * [Veri akışını eşleme](data-flow-create.md)
 > * [Hive](transform-data-using-hadoop-hive.md)  
 > * [Pig](transform-data-using-hadoop-pig.md)  
 > * [MapReduce](transform-data-using-hadoop-map-reduce.md)  
-> * [HDInsight akış](transform-data-using-hadoop-streaming.md)
+> * [HDInsight akışı](transform-data-using-hadoop-streaming.md)
 > * [HDInsight Spark](transform-data-using-spark.md)
 > * [Machine Learning](transform-data-using-machine-learning.md) 
 > * [Saklı Yordam](transform-data-using-stored-procedure.md)
 > * [Data Lake Analytics U-SQL](transform-data-using-data-lake-analytics.md)
-> * [Databricks not defteri](transform-data-databricks-notebook.md)
-> * [Databricks Jar](transform-data-databricks-jar.md)
+> * [Databricks Not defteri](transform-data-databricks-notebook.md)
+> * [Databricks jar](transform-data-databricks-jar.md)
 > * [Databricks Python](transform-data-databricks-python.md)
 > * [.NET özel](transform-data-using-dotnet-custom-activity.md)
 
 ## <a name="overview"></a>Genel Bakış
-Bu makalede Azure Data factory'de dönüştürmek için kullanabilir ve Öngörüler ve öngörüleri ham verilerinizi işleyen veri dönüştürme etkinlikleri açıklar. Azure HDInsight kümesi veya bir Azure Batch gibi bilgi işlem ortamında bir dönüştürme etkinliği yürütür. Her dönüştürme etkinliğine ilişkin ayrıntılı bilgiler içeren makalelerin bağlantıları sağlar.
+Bu makalede, ham verilerinizi ölçek ve Öngörüler halinde dönüştürmek ve işlemek için kullanabileceğiniz Azure Data Factory veri dönüştürme etkinlikleri açıklanır. Bir dönüştürme etkinliği Azure Databricks veya Azure HDInsight gibi bir bilgi işlem ortamında yürütülür. Her bir dönüştürme etkinliği hakkında ayrıntılı bilgi içeren makalelere bağlantılar sağlar.
 
-Data Factory için eklenen aşağıdaki veri dönüştürme etkinliklerini destekler [işlem hatları](concepts-pipelines-activities.md) ya da tek tek veya başka bir etkinlikle zincirleme.
+Data Factory, işlem hatlarına tek tek veya başka bir etkinlikle zincirleme [olarak eklenebilen](concepts-pipelines-activities.md) aşağıdaki veri dönüştürme etkinliklerini destekler.
 
-## <a name="hdinsight-hive-activity"></a>HDInsight Hive etkinliği
-Hive sorguları kendi sunucunuzda veya isteğe bağlı Windows/Linux tabanlı HDInsight kümesi Data Factory işlem hattındaki HDInsight Hive etkinliği yürütür. Bkz: [Hive etkinliği](transform-data-using-hadoop-hive.md) makalede bu etkinliği hakkında ayrıntılı bilgi için. 
+## <a name="transform-natively-in-azure-data-factory-with-data-flows"></a>Veri akışları ile Azure Data Factory yerel olarak dönüştürme
 
-## <a name="hdinsight-pig-activity"></a>HDInsight Pig etkinliği
-HDInsight Pig etkinliği bir Data Factory işlem hattında, Pig sorgu kendiniz veya isteğe bağlı Windows/Linux tabanlı HDInsight kümesi yürütür. Bkz: [Pig etkinliği](transform-data-using-hadoop-pig.md) makalede bu etkinliği hakkında ayrıntılı bilgi için. 
+### <a name="mapping-data-flows"></a>Veri akışlarını eşleme
 
-## <a name="hdinsight-mapreduce-activity"></a>HDInsight MapReduce etkinliği
-MapReduce programlarını kendi sunucunuzda veya isteğe bağlı Windows/Linux tabanlı HDInsight kümesi Data Factory işlem hattındaki HDInsight MapReduce etkinliği yürütür. Bkz: [MapReduce etkinliği](transform-data-using-hadoop-map-reduce.md) makalede bu etkinliği hakkında ayrıntılı bilgi için.
+Veri akışlarını eşleme, Azure Data Factory ' de görsel olarak tasarlanan veri dönüştürmelerdir. Veri akışları, veri mühendislerinin kod yazmadan grafik veri dönüştürme mantığı geliştirmesini sağlar. Elde edilen veri akışları, ölçeklendirilen Spark kümelerini kullanan Azure Data Factory işlem hatları içinde etkinlik olarak yürütülür. Veri akışı etkinlikleri mevcut Data Factory zamanlama, denetim, akış ve izleme özellikleri aracılığıyla çalıştırılabilir. Daha fazla bilgi için bkz. [veri akışlarını eşleme](concepts-data-flow-overview.md).
 
-## <a name="hdinsight-streaming-activity"></a>HDInsight akış etkinliği
-HDInsight akış etkinliği bir Data Factory işlem hattında, Hadoop akış programları kendi sunucunuzda veya isteğe bağlı Windows/Linux tabanlı HDInsight kümesi yürütür. Bkz: [HDInsight akış etkinliği](transform-data-using-hadoop-streaming.md) bu etkinliği hakkında ayrıntılı bilgi için.
+### <a name="wrangling-data-flows"></a>Wrangling veri akışları
 
-## <a name="hdinsight-spark-activity"></a>HDInsight Spark etkinliği
-HDInsight Spark etkinliği bir Data Factory işlem hattı, Spark programlarını kendi HDInsight kümesinde yürütür. Ayrıntılar için bkz [Factory'den Spark programlarını Azure Data Factory](transform-data-using-spark.md). 
+Azure Data Factory ' deki wrangling veri akışları, bulut ölçeğinde kod içermeyen veri hazırlığı yapmanıza olanak sağlar. Denetimi veri akışları, [çevrimiçi Power Query](https://docs.microsoft.com/power-query/) ile tümleşir ve Spark yürütmesi aracılığıyla bulut ölçeğinde veriler için Power Query M işlevlerini kullanılabilir hale getirir. Daha fazla bilgi için bkz. [denetimi veri akışları](wrangling-data-flow-overview.md).
 
-## <a name="machine-learning-activities"></a>Machine Learning etkinlikleri
-Azure Data Factory, kolayca Tahmine dayalı analiz için yayımlanan bir Azure Machine Learning web hizmetini kullanan işlem hatları oluşturmanıza olanak sağlar. Kullanarak [Batch yürütme etkinliği](transform-data-using-machine-learning.md) bir Azure Data Factory işlem hattı, verileri toplu tahminlerde bulunmak üzere Machine Learning web hizmetini çağırabilirsiniz.
+## <a name="external-transformations"></a>Dış dönüşümler
 
-Zaman içinde yeni bir giriş veri kümeleri kullanarak eğitilebileceği denemeleri Puanlama Machine learning'de Tahmine dayalı modelleri gerekir. Yeniden eğitme ile işiniz bittiğinde, Puanlama web hizmeti ile retrained Machine Learning modeli güncelleştirmek istiyorsunuz. Kullanabileceğiniz [kaynak güncelleştirme etkinliği](update-machine-learning-models.md) web hizmeti ile yeni eğitilen modeli güncelleştirmek için.  
+İsteğe bağlı olarak, dönüştürmeleri kodlayabilirsiniz ve dış işlem ortamını kendiniz yönetebilirsiniz.
 
-Bkz: [kullanım Machine Learning etkinlikleri](transform-data-using-machine-learning.md) bu Machine Learning etkinlikleri hakkında ayrıntılı bilgi için. 
+### <a name="hdinsight-hive-activity"></a>HDInsight Hive etkinliği
+Bir Data Factory işlem hattının HDInsight Hive etkinliği, kendi kendinize veya isteğe bağlı Windows/Linux tabanlı HDInsight kümenizde Hive sorguları yürütür. Bu etkinlik hakkındaki ayrıntılar için bkz. [Hive etkinliği](transform-data-using-hadoop-hive.md) makalesi. 
 
-## <a name="stored-procedure-activity"></a>Saklı yordam etkinliği
-Aşağıdaki veri depolarını birinde bir saklı yordam çağırmak için bir Data Factory işlem hattı, SQL Server saklı yordam etkinliğine kullanabilirsiniz: Azure SQL veritabanı, Azure SQL veri ambarı, SQL Server veritabanı kuruluşunuza veya bir Azure VM. Bkz: [saklı yordam etkinliği](transform-data-using-stored-procedure.md) makale Ayrıntılar için.  
+### <a name="hdinsight-pig-activity"></a>HDInsight Pig etkinliği
+Bir Data Factory işlem hattındaki HDInsight Pig etkinliği, kendi veya isteğe bağlı Windows/Linux tabanlı HDInsight kümenizdeki Pig sorgularını yürütür. Bu etkinlik hakkındaki ayrıntılar için bkz. [Pig etkinlik](transform-data-using-hadoop-pig.md) makalesi. 
 
-## <a name="data-lake-analytics-u-sql-activity"></a>Data Lake Analytics U-SQL etkinliği
-Data Lake Analytics U-SQL etkinliği, bir Azure Data Lake Analytics kümesinde bir U-SQL betiği çalıştırır. Bkz: [Data Analytics U-SQL etkinliği](transform-data-using-data-lake-analytics.md) makale Ayrıntılar için. 
+### <a name="hdinsight-mapreduce-activity"></a>HDInsight MapReduce etkinliği
+Bir Data Factory işlem hattındaki HDInsight MapReduce etkinliği, MapReduce programlarını kendi kendinize veya isteğe bağlı Windows/Linux tabanlı HDInsight kümenizde yürütür. Bu etkinlik hakkındaki ayrıntılar için bkz. [MapReduce etkinliği](transform-data-using-hadoop-map-reduce.md) makalesi.
 
-## <a name="databricks-notebook-activity"></a>Databricks not defteri etkinliği
+### <a name="hdinsight-streaming-activity"></a>HDInsight akış etkinliği
+Bir Data Factory işlem hattının HDInsight akış etkinliği, kendi kendinize veya isteğe bağlı Windows/Linux tabanlı HDInsight kümenizde Hadoop akış programlarını yürütür. Bu etkinlik hakkındaki ayrıntılar için bkz. [HDInsight akış etkinliği](transform-data-using-hadoop-streaming.md) .
 
-Azure Databricks not defteri etkinliği bir Data Factory işlem hattı, Azure Databricks çalışma alanınızda bir Databricks not defteri çalıştırır. Azure Databricks, Apache Spark'ı çalıştırmaya yönelik bir yönetilen bir platformdur. Bkz: [bir Databricks not defteri çalıştırarak verileri dönüştürme](transform-data-databricks-notebook.md).
+### <a name="hdinsight-spark-activity"></a>HDInsight Spark etkinliği
+Bir Data Factory işlem hattının HDInsight Spark etkinliği kendi HDInsight kümenizdeki Spark programlarını yürütür. Ayrıntılar için bkz. [Azure Data Factory Spark programlarını çağırma](transform-data-using-spark.md). 
 
-## <a name="databricks-jar-activity"></a>Databricks Jar etkinliği
+### <a name="machine-learning-activities"></a>Machine Learning etkinlikleri
+Azure Data Factory, tahmine dayalı analiz için yayımlanmış bir Azure Machine Learning Web hizmeti kullanan işlem hatlarını kolayca oluşturmanızı sağlar. [Toplu yürütme etkinliğini](transform-data-using-machine-learning.md) bir Azure Data Factory işlem hattında kullanarak, toplu işteki verilerde tahmine dayalı hale getirmek için bir Machine Learning Web hizmeti çağırabilirsiniz.
 
-Azure Databricks Jar etkinliği bir Data Factory işlem hattı, Azure Databricks kümesinde bir Spark Jar çalıştırır. Azure Databricks, Apache Spark'ı çalıştırmaya yönelik bir yönetilen bir platformdur. Bkz: [Azure Databricks'te bir Jar etkinliği çalıştırarak verileri dönüştürme](transform-data-databricks-jar.md).
+Zaman içinde, Machine Learning Puanlama denemeleri 'un tahmine dayalı modellerinin yeni giriş veri kümeleri kullanılarak geri çekilmesi gerekir. Yeniden eğitim ile işiniz bittiğinde, Puanlama Web hizmetini geri çekme Machine Learning modeliyle güncelleştirmek istersiniz. Web hizmetini yeni eğitilen modelle güncelleştirmek için [kaynak güncelleştirme etkinliğini](update-machine-learning-models.md) kullanabilirsiniz.  
 
-## <a name="databricks-python-activity"></a>Databricks Python etkinliği
+Bu Machine Learning etkinlikleri hakkında daha fazla bilgi için bkz. [Machine Learning etkinlikleri kullanma](transform-data-using-machine-learning.md) . 
 
-Data Factory işlem hattı Azure Databricks Python etkinliğinde bir Python dosyası, Azure Databricks kümesinde çalışır. Azure Databricks, Apache Spark'ı çalıştırmaya yönelik bir yönetilen bir platformdur. Bkz: [Azure Databricks'te bir Python etkinliği çalıştırarak verileri dönüştürme](transform-data-databricks-python.md).
+### <a name="stored-procedure-activity"></a>Saklı yordam etkinliği
+Aşağıdaki veri depolarından birinde saklı bir yordam çağırmak için bir Data Factory Işlem hattındaki SQL Server saklı yordam etkinliğini kullanabilirsiniz: Azure SQL veritabanı, Azure SQL veri ambarı, kuruluşunuzda SQL Server veritabanı veya bir Azure VM. Ayrıntılar için bkz. [saklı yordam etkinliği](transform-data-using-stored-procedure.md) makalesi.  
 
-## <a name="custom-activity"></a>Özel etkinlik
-Verileri Data Factory tarafından desteklenmeyen bir şekilde dönüştürmek isterseniz, kendi veri işleme mantığı ile özel bir etkinlik oluşturma ve işlem hattı etkinliğini kullanın. Bir Azure Batch hizmeti ya da bir Azure HDInsight kümesi kullanarak çalıştırmak için özel bir .NET etkinliği yapılandırabilirsiniz. Bkz: [özel etkinlikler kullanma](transform-data-using-dotnet-custom-activity.md) makale Ayrıntılar için. 
+### <a name="data-lake-analytics-u-sql-activity"></a>Data Lake Analytics U-SQL etkinliği
+Data Lake Analytics U-SQL etkinliği Azure Data Lake Analytics kümesinde bir U-SQL betiği çalıştırır. Ayrıntılar için bkz. [Data Analytics U-SQL etkinliği](transform-data-using-data-lake-analytics.md) makalesi. 
+
+### <a name="databricks-notebook-activity"></a>Databricks Not defteri etkinliği
+
+Bir Data Factory işlem hattındaki Azure Databricks Not defteri etkinliği Azure Databricks çalışma alanınızda bir Databricks Not defteri çalıştırır. Azure Databricks, Apache Spark çalıştırmak için yönetilen bir platformdur. Bkz. [Databricks Not defteri çalıştırarak verileri dönüştürme](transform-data-databricks-notebook.md).
+
+### <a name="databricks-jar-activity"></a>Databricks jar etkinliği
+
+Bir Data Factory işlem hattındaki Azure Databricks jar etkinliği Azure Databricks kümenizde Spark jar 'i çalıştırır. Azure Databricks, Apache Spark çalıştırmak için yönetilen bir platformdur. Bkz. [Azure Databricks bir jar etkinliği çalıştırarak verileri dönüştürme](transform-data-databricks-jar.md).
+
+### <a name="databricks-python-activity"></a>Databricks Python etkinliği
+
+Bir Data Factory işlem hattının Azure Databricks Python etkinliği Azure Databricks kümenizdeki bir Python dosyası çalıştırır. Azure Databricks, Apache Spark çalıştırmak için yönetilen bir platformdur. Bkz. [Azure Databricks bir Python etkinliği çalıştırarak verileri dönüştürme](transform-data-databricks-python.md).
+
+### <a name="custom-activity"></a>Özel etkinlik
+Data Factory tarafından desteklenmeyen bir şekilde veri dönüştürmeniz gerekiyorsa, kendi veri işleme mantığınızla özel bir etkinlik oluşturabilir ve etkinliği ardışık düzende kullanabilirsiniz. Özel .NET etkinliğini bir Azure Batch hizmeti veya Azure HDInsight kümesi kullanarak çalışacak şekilde yapılandırabilirsiniz. Ayrıntılar için bkz. [özel etkinlikleri kullanma](transform-data-using-dotnet-custom-activity.md) makalesi. 
 
 R yüklü HDInsight kümenizde R betiklerini çalıştırmak için özel bir etkinlik oluşturabilirsiniz. Bkz. [Azure Data Factory kullanarak R Betiği çalıştırma](https://github.com/Azure/Azure-DataFactory/tree/master/Samples/RunRScriptUsingADFSample). 
 
-## <a name="compute-environments"></a>Ortam işlem
-İşlem ortamı için bağlı hizmet oluşturup ardından bağlı hizmet bir dönüştürme etkinliği tanımlarken kullanılır. Data Factory tarafından desteklenen işlem ortamlarının iki türü vardır. 
+### <a name="compute-environments"></a>İşlem ortamları
+İşlem ortamı için bağlı bir hizmet oluşturun ve ardından bir dönüştürme etkinliği tanımlarken bağlı hizmeti kullanın. Data Factory tarafından desteklenen iki tür işlem ortamı vardır. 
 
-- **İsteğe bağlı**:  Bu durumda, bilgi işlem ortamınız, Data Factory tarafından tamamen yönetilir. Bir iş verileri işlemek için gönderilen ve iş tamamlandığında kaldırıldı önce Data Factory hizmeti tarafından otomatik olarak oluşturulur. Yapılandırma ve iş yürütme, küme yönetimi ve önyükleme eylemleri için isteğe bağlı işlem ortamının ayrıntılı ayarları denetler. 
-- **Kendi işleyicinizi getirin**: Bu durumda, Data Factory öğesinde bağlantılı hizmet olarak kendi bilgi işlem ortamı (örneğin, HDInsight kümesi) kaydedebilirsiniz. Bilgi işlem ortamınız sizin tarafınızdan yönetilen ve Data Factory hizmetinin etkinlikleri yürütmek için kullanır. 
+- **İsteğe**bağlı: Bu durumda, bilgi işlem ortamı Data Factory tarafından tam olarak yönetilir. Bir iş, verileri işlemek ve iş tamamlandığında kaldırılmadan önce Data Factory hizmeti tarafından otomatik olarak oluşturulur. İş yürütme, küme yönetimi ve önyükleme eylemleri için isteğe bağlı işlem ortamının ayrıntılı ayarlarını yapılandırabilir ve kontrol edebilirsiniz. 
+- **Kendinizinkini getir**: Bu durumda, kendi bilgi işlem ortamınızı (örneğin HDInsight kümesi) Data Factory bağlı bir hizmet olarak kaydedebilirsiniz. Bilgi işlem ortamı sizin tarafınızdan yönetilir ve Data Factory hizmeti tarafından etkinlikleri yürütmek için kullanılır. 
 
-Bkz: [işlem bağlı Hizmetleri](compute-linked-services.md) makale, Data Factory tarafından desteklenen işlem hizmetlerinin hakkında bilgi edinmek için. 
+Data Factory tarafından desteklenen işlem hizmetleri hakkında bilgi edinmek için bkz. [Işlem bağlantılı hizmetleri](compute-linked-services.md) makalesi. 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bir dönüştürme etkinliği kullanma örneği için aşağıdaki öğreticiye bakın: [Öğretici: Spark kullanarak verileri dönüştürme](tutorial-transform-data-spark-powershell.md)
+Dönüştürme etkinliği kullanma örneği için aşağıdaki öğreticiye bakın: [öğretici: Spark kullanarak veri dönüştürme](tutorial-transform-data-spark-powershell.md)

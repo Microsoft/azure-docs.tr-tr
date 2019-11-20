@@ -1,135 +1,133 @@
 ---
-title: Azure Active Directory B2C nedir? | Microsoft Docs
-description: Nasıl oluşturabileceğinizi ve Azure Active Directory B2C kullanarak uygulamanızda kayıt oturum açma ve profil yönetimi gibi kimlik deneyimi yönetme hakkında bilgi edinin.
+title: Azure Active Directory B2C nedir?
+description: Facebook, Google ve diğer kimlik sağlayıcılarıyla sosyal oturum açma da dahil olmak üzere, uygulamalarınızda dış kimlikleri desteklemek için Azure Active Directory B2C nasıl kullanabileceğinizi öğrenin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: overview
-ms.date: 02/20/2019
+ms.date: 09/19/2019
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 5cceac260979b4322d41843038eab0998c8e8ba4
-ms.sourcegitcommit: adb6c981eba06f3b258b697251d7f87489a5da33
+ms.openlocfilehash: 007b23f07afec6163c2158feb3f17ba71e44bdb5
+ms.sourcegitcommit: fad368d47a83dadc85523d86126941c1250b14e2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/04/2019
-ms.locfileid: "66509759"
+ms.lasthandoff: 09/19/2019
+ms.locfileid: "71120587"
 ---
 # <a name="what-is-azure-active-directory-b2c"></a>Azure Active Directory B2C nedir?
 
-Azure Active Directory (Azure AD) B2C, işletmeden tüketiciye Kimlik Yönetimi hizmetidir. Bu hizmetin özelleştirmek ve denetlemek nasıl kullanıcıların güvenli bir şekilde, web ve Masaüstü, mobil veya tek sayfa uygulamaları etkileşim sağlar. Azure AD B2C kullanarak, kullanıcılar kaydolabilir, oturum açın, parolaları sıfırlama ve profilleri düzenleme. Azure AD B2C, bir form Openıd Connect ve OAuth 2.0 protokolünü uygular. Bu protokollerin uygulanması önemli anahtarı güvenlik belirteçleri ve kaynaklarına güvenli erişim sağlamaya olanak tanıyan, talepleri ' dir.
+Azure Active Directory B2C, hizmet olarak işletmeler arası kimlik sağlar. Müşterileriniz, uygulamalarınıza ve API 'lerinize çoklu oturum açma erişimi sağlamak için tercih edilen sosyal, kurumsal veya yerel hesap kimliklerini kullanır.
 
-A *kullanıcı yolculuğu* kullanıcı ve uygulamanızı Azure AD B2C ile nasıl etkileşime davranışını denetleyen bir ilke belirten isteğidir. Azure AD B2C'de kullanıcı yolculuklarından tanımlamak için kullanabileceğiniz iki yolu. 
+![Azure AD B2C kimlik sağlayıcılarının ve aşağı akış uygulamalarının bilgi grafiği](media/active-directory-b2c-overview/azureadb2c-overview.png)
 
-Siz ile veya kimlik uzmanlığı gerektirmeden bir uygulama geliştiricisi gibiyseniz, Azure portalını kullanarak genel kimlik kullanıcı akışları tanımlamak isteyebilirsiniz. Olan bir kimlik professional, sistem entegratörü, Danışman, veya bir şirket içi kimlik takımda Openıd Connect akışlarıyla deneyimliyseniz ve kimlik sağlayıcısı ve talep tabanlı kimlik doğrulaması anlamak, XML tabanlı özel ilkeleri seçebilirsiniz.
+Azure Active Directory B2C (Azure AD B2C), günde milyonlarca kullanıcıyı ve milyarlarca kimlik doğrulamasını destekleyebilen bir müşteri kimlik erişim yönetimi (CıHAR) çözümüdür. Kimlik doğrulama platformunun ölçeklendirilmesi ve güvenliği, hizmet reddi, parola spreyi veya deneme yanılma saldırıları gibi tehditleri otomatik olarak işleme işlemlerini gerçekleştirir.
 
-Kullanıcı yolculuğu tanımlama başlamadan önce bir Azure AD B2C kiracısı oluşturma ve uygulama ve API kiracıda kaydetmeniz gerekir. Bu görevleri tamamladıktan sonra bir kullanıcı yolculuğu kullanıcı akışları ya da özel ilkeler tanımlayarak başlayabilirsiniz. Ayrıca isteğe bağlı olarak ekleyin veya kimlik sağlayıcıları değiştirin veya kullanıcı yolculuğu düştüğünü şekilde özelleştirebilirsiniz.
+## <a name="custom-branded-identity-solution"></a>Özel markalı kimlik çözümü
 
-## <a name="protocols-and-tokens"></a>Protokoller ve belirteçler
+Azure AD B2C, beyaz etiketli bir kimlik doğrulama çözümüdür. Web ve mobil uygulamalarınız ile sorunsuz bir şekilde karışabilmesi için kullanıcı deneyiminin tamamını markanızla özelleştirebilirsiniz.
 
-Azure AD B2C'yi destekleyen [protokolleri, Openıd Connect ve OAuth 2.0](active-directory-b2c-reference-protocols.md) kullanıcı yolculuklarından için. OpenID Connect'in Azure AD B2C gerçekleştirmesinde uygulamanız kullanıcı yolculuğunu Azure AD B2C'ye kimlik doğrulama istekleri göndererek başlatır. 
+Kullanıcılarınız kaydolurken Azure AD B2C tarafından görünen her sayfayı özelleştirin, oturum açın ve profil bilgilerini değiştirin. Azure AD B2C deneyiminin uygulamanızın yerel bir parçası olduğundan ve Fede olması için Kullanıcı yolculukları içindeki HTML, CSS ve JavaScript 'i özelleştirin.
 
-Azure AD B2C'ye bir isteğin sonucu gibi bir güvenlik belirteci olan bir [kimlik belirteci veya erişim belirteci](active-directory-b2c-reference-tokens.md). Bu güvenlik belirtecinin kullanıcı kimliğini tanımlar. Belirteçleri alınan Azure AD B2C uç noktalarından gibi bir `/token` veya `/authorize` uç noktası. Bu belirteçleri, kimlik doğrulama ve kaynakları güvenli hale getirmek erişim izni vermek için kullanılabilir talep erişebilirsiniz.
+![Özelleştirilmiş kaydolma ve oturum açma sayfaları ve arka plan resmi](media/active-directory-b2c-overview/sign-in-small.png)
 
-## <a name="tenants-and-applications"></a>Kiracılar ve uygulamalar
+## <a name="single-sign-on-access-with-a-user-provided-identity"></a>Kullanıcı tarafından belirtilen kimlikle çoklu oturum açma erişimi
 
-Azure AD B2C'de bir *Kiracı* kuruluşunuzu temsil eden ve kullanıcıların dizinidir. Her Azure AD B2C kiracısı benzersizdir ve diğer Azure AD B2C kiracılarından ayrıdır. Bir Azure Active Directory kiracısına zaten sahip olabilir, farklı bir kiracıya Azure AD B2C kiracısı olur. Bir kiracı uygulamanızı kullanmak için kaydolan kullanıcılar hakkında bilgiler içerir. Buna parolalar, profil verileri ve izinler dahil olabilir. Daha fazla bilgi için [Öğreticisi: Bir Azure Active Directory B2C kiracısı oluşturmayı](tutorial-create-tenant.md).
+Azure AD B2C, OpenID Connect, OAuth 2,0 ve SAML dahil standartlara dayalı kimlik doğrulama protokolleri kullanır. En modern uygulamalar ve ticari raf dışı yazılım ile tümleşir.
 
-Uygulamanızı Azure AD B2C'yi kullanacak şekilde yapılandırmadan önce öncelikle Azure portalını kullanarak kiracıda kaydetmeniz gerekir. Kayıt işlemi değerler toplar ve bunları uygulamanıza atar. Bu değerler, uygulama ve bir yeniden yönlendirme yanıtlarını uygulamaya yeniden yönlendirmek için kullanılan URI benzersiz olarak tanımlayan bir uygulama kimliği içerir.
+![Azure AD B2C üçüncü taraf kimliklerinin diyagramı](media/active-directory-b2c-overview/scenario-singlesignon.png)
 
-Her uygulamanın etkileşimini benzer bir üst düzey deseni izler:
+Web uygulamalarınız, mobil uygulamalarınız ve API 'leriniz için merkezi kimlik doğrulama yetkilisi görevi gören Azure AD B2C, hepsi için çoklu oturum açma (SSO) çözümü oluşturmanızı sağlar. Kullanıcı profili ve tercih bilgileri koleksiyonunu merkezileştirin, oturum açma davranışı ve kaydolma dönüştürmesi hakkında ayrıntılı analizi yakalayın.
 
-1. Uygulama, kullanıcı bir ilke çalıştırmak için yönlendirir.
-2. Kullanıcı, ilkeyi ilke tanımına göre tamamlar.
-3. Uygulama bir belirteç alır.
-4. Uygulama belirteci bir kaynağa erişmek için kullanır.
-5. Kaynak sunucuda erişim izni verilebileceğini doğrulamak için belirteci doğrular.
-6. Uygulama belirteci düzenli aralıklarla yeniler.
+## <a name="integrate-with-external-user-stores"></a>Dış Kullanıcı depolarıyla tümleştirme
 
-Bir web uygulaması kaydetmek için adımları tamamlamanız [Öğreticisi: Kaydolma ve oturum açma Azure AD B2C kullanarak etkinleştirmek için bir uygulamayı kaydetme](tutorial-register-applications.md). Ayrıca [bir web API uygulaması Azure Active Directory B2C kiracınıza ekleme](add-web-application.md) veya [yerel istemci uygulaması Azure Active Directory B2C kiracınıza ekleyin](add-native-application.md).
+Azure AD B2C, Kullanıcı başına 100 özel öznitelik tutan bir dizin sağlar. Bununla birlikte, dış sistemlerle de tümleştirilebilir. Örneğin, kimlik doğrulaması için Azure AD B2C kullanın, ancak müşteri verileri için gerçeği kaynağı olarak bir dış müşteri ilişkisi yönetimi (CRM) veya müşteri bağlılık programı veritabanına temsilci seçin.
 
-## <a name="user-journeys"></a>Kullanıcı yolculuklarından
+Başka bir dış kullanıcı deposu senaryosu, uygulamanız için kimlik doğrulamasını Azure AD B2C ve kullanıcı profilini veya kişisel verileri depolayan bir dış sistemle tümleştirin. Örneğin, bölgesel veya şirket içi veri depolama ilkeleri gibi veri fazlalığını karşılamak için.
 
-Kullanıcı yolculuğu ilkesinde olarak tanımlanabilir bir [kullanıcı akışı](active-directory-b2c-reference-policies.md) veya [özel ilke](active-directory-b2c-overview-custom.md). Yaygın kimlik görevler için kullanıcı akışları gibi önceden tanımlanmış kaydolma, oturum açma ve profil düzenleme, Azure portalında kullanılabilir.
+![Dış Kullanıcı deposuyla iletişim kuran Azure AD B2C mantıksal diyagramı](media/active-directory-b2c-overview/scenario-remoteprofile.png)
 
-Kullanıcı yolculuklardan, aşağıdaki ayarları yapılandırarak davranışları denetlemenize olanak sağlar:
+Azure AD B2C, kayıt veya profil düzenlemesi sırasında kullanıcıdan bilgileri toplamayı kolaylaştırabilir ve bu verileri dış sisteme kapamaktır. Daha sonra, gelecekteki kimlik doğrulamaları sırasında, Azure AD B2C dış sistemden verileri alabilir ve gerekirse, bunu uygulamanıza gönderdiği kimlik doğrulama belirtecinin bir parçası olarak dahil edebilirsiniz.
 
-- Uygulama için kaydolmak için kullanıcının kullandığı sosyal hesaplar
-- Kullanıcı adı veya posta kodu gibi toplanan verileri
-- Multi-factor authentication
-- Sayfa görünümü ve deneyimini
-- Uygulamaya döndürülen bilgiler
+## <a name="progressive-profiling"></a>Aşamalı profil oluşturma
 
-Özel ilkelerdir davranışını tanımlayan yapılandırma dosyalarını [kimlik deneyimi çerçevesi](trustframeworkpolicy.md) Azure AD B2C kiracınızdaki. Kimlik deneyimi çerçevesi çok taraflı güven oluşturur ve bir kullanıcı yolculuğu'ndaki adımları tamamlandıktan temel alınan bir platformdur. 
+Başka bir Kullanıcı yolculuğu seçeneği, aşamalı profil oluşturma işlemini içerir. Aşamalı profil oluşturma, müşterilerinizin en az miktarda bilgi toplayarak ilk işlemini hızla tamamlamalarını sağlar. Daha sonra, gelecekteki oturum açma işlemleri sırasında müşteriden daha fazla profil verisi toplayın.
 
-Özel ilkeler, birçok görevi yapacak şekilde değiştirilebilir. Özel ilke, bir hiyerarşi zincirinde birbirine başvuran bir veya daha fazla XML biçimli dosyadır. A [başlangıç paketi](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/archive/master.zip) ortak kimlik görevlerini etkinleştirmek özel ilkeler kullanılabilir. 
+![Aşamalı profil oluşturma görsel gösterimi](media/active-directory-b2c-overview/scenario-progressive.png)
 
-Özel ilkeleri veya kullanıcı akışları farklı türlerde gerektiğinde Azure AD B2C kiracınızda kullanılan ve uygulamalar arasında yeniden kullanılabilir. Bu esneklik, tanımlamak ve kullanıcı kimlik deneyimi değişikliğiyle veya hiç değişiklik kodunuzda değişiklik sağlar. İlkeler HTTP kimlik doğrulaması isteklerine özel bir sorgu parametresi eklenerek kullanılır. Kendi özel bir ilke oluşturmak için bkz: [özel ilkeleri Azure Active Directory B2C kullanmaya başlama](active-directory-b2c-get-started-custom.md).
+## <a name="third-party-identity-verification-and-proofing"></a>Üçüncü taraf kimlik doğrulama ve sağlama
 
-## <a name="identity-providers"></a>Kimlik sağlayıcıları 
+Kimlik doğrulama ve sağlama işlemlerini, Kullanıcı verilerini toplayarak ve sonra doğrulama, güven Puanlama ve Kullanıcı hesabı oluşturma onayı gerçekleştirmek için üçüncü taraf bir sisteme geçirerek kimlik doğrulama ve sağlama işlemlerini kolaylaştırmak için Azure AD B2C kullanın.
 
-Uygulamalarınızda farklı kimlik sağlayıcıları ile oturum açmasını sağlamak isteyebilirsiniz. Bir *kimlik sağlayıcısı* oluşturur, korur ve uygulamalar için kimlik doğrulama hizmetleri sağlarken kimlik bilgilerini yönetir. Azure AD B2C tarafından desteklenen kimlik sağlayıcıları ekleyebileceğiniz Azure portalını kullanarak. 
+![Üçüncü taraf kimlik doğrulama için kullanıcı akışını gösteren diyagram](media/active-directory-b2c-overview/scenario-idproofing.png)
 
-Uygulamanızda genellikle yalnızca bir kimlik sağlayıcısı kullanın, ancak daha fazla ekleme seçeneğine sahipsiniz. Azure AD B2C kiracınızda bir kimlik sağlayıcısı yapılandırmak için önce bir uygulama kimlik sağlayıcısının Geliştirici sitesinde oluşturmanız ve ardından uygulama tanımlayıcısı veya istemci tanımlayıcısı ve parola veya kimlik sağlayıcısından gizli bir istemci kaydı Oluşturduğunuz uygulama. Bu tanımlayıcı ve parola daha sonra uygulamanızı yapılandırmak için kullanılır. 
+Bunlar, işletmeden müşteriye kimlik platformunuz olarak Azure AD B2C yapabileceğiniz işlemlerden bazılarıdır. Bu genel bakışın aşağıdaki bölümleri, Azure AD B2C kullanan bir demo uygulaması boyunca size yol gösterir. Ayrıca, Azure AD B2C daha ayrıntılı bir [teknik genel bakışa](technical-overview.md)doğrudan taşımaya de hoş geldiniz.
 
-Aşağıdaki makaleler, bazı yaygın kimlik sağlayıcıları için kullanıcı akışları ekleme adımlarını açıklar:
+## <a name="example-woodgrove-groceries"></a>Örnek: WoodGrove Market
 
-- [Amazon](active-directory-b2c-setup-amzn-app.md)
-- [Facebook](active-directory-b2c-setup-fb-app.md)
-- [Microsoft hesabı](active-directory-b2c-setup-msa-app.md)
+[Woodgrove Market][woodgrove] , birkaç Azure AD B2C özelliği göstermek üzere Microsoft tarafından oluşturulan canlı bir Web uygulamasıdır. Sonraki birkaç bölüm, WoodGrove Web sitesine Azure AD B2C tarafından sunulan bazı kimlik doğrulama seçeneklerini gözden geçirir.
 
-Aşağıdaki makaleler, bazı yaygın kimlik sağlayıcıları için özel ilkeler ekleme adımlarını açıklar:
-- [Amazon](setup-amazon-custom.md)
-- [Google](active-directory-b2c-custom-setup-goog-idp.md)
-- [Microsoft hesabı](active-directory-b2c-custom-setup-msa-idp.md)
+### <a name="business-overview"></a>İşe genel bakış
 
-Daha fazla bilgi için [Öğreticisi: Azure Active Directory B2C, uygulamalarınızda kimlik sağlayıcıları eklemek](tutorial-add-identity-providers.md).
+WoodGrove, bireysel tüketicilere ve iş müşterilerine Market satan bir çevrimiçi Market deposudur. İş müşterileri, şirketlerinin veya yönettikleri işletmelerin adına Market satın alır.
 
+### <a name="sign-in-options"></a>Oturum açma seçenekleri
 
-## <a name="page-customization"></a>Sayfa özelleştirmesi
+WoodGrove Market, müşterilerinin mağaza ile sahip olduğu ilişkiye göre çeşitli oturum açma seçenekleri sunar:
 
-Çoğu kullanıcı yolculuğu müşterilere sunulan HTML ve CSS içeriği denetlenebilir. Sayfayı özelleştirme kullanarak, herhangi özel bir ilke veya kullanıcı Akış görünümünü özelleştirebilirsiniz. Uygulamanız ve Azure AD B2C arasında marka ve görsellik tutarlılığını bu özelleştirme işlevini kullanarak korursunuz. 
+* **Bireysel** müşteriler, bir sosyal kimlik sağlayıcısı ya da bir e-posta adresi ve parola gibi bireysel hesaplarla kaydolabilir veya oturum açabilir.
+* **İş** müşterileri, kurumsal kimlik bilgileriyle kaydolabilir veya oturum açabilir.
+* **Iş ortakları** ve satıcılar, satış için ürünlerle Market 'e sahip Market 'i sağlayan bireylerdir. İş ortağı kimliği [Azure ACTIVE DIRECTORY B2B](../active-directory/b2b/what-is-b2b.md)tarafından sağlanır.
 
-Azure AD B2C, kullanıcının tarayıcısında kodu çalıştırır ve çıkış noktaları arası kaynak paylaşımı (CORS) olarak adlandırılan modern bir yaklaşımı kullanır. İlk olarak özelleştirilmiş HTML içeriğine sahip ilkede bir URL belirtmeniz gerekir. Azure AD B2C kullanıcı arabirimi öğeleri, URL'den yüklenir ve ardından sayfanın kullanıcıya görüntüleyen bir HTML içeriği ile birleştirir.
+![Bireysel (B2C), iş (B2C) ve iş ortağı (B2B) oturum açma sayfaları](media/active-directory-b2c-overview/woodgrove-overview.png)
 
-Bir sorgu dizesi kullanarak Azure AD B2C'ye parametre gönderirsiniz. Parametre HTML uç noktanıza iletilerek sayfa içeriği dinamik olarak değiştirilir. Örneğin, arka plan resminin kaydolma veya oturum açma sayfasında, web veya mobil uygulamanıza geçirdiğiniz parametre göre değiştirin.
+### <a name="authenticate-individual-customers"></a>Bireysel müşterilerin kimliklerini doğrulama
 
-Kullanıcı akışı sayfalarında özelleştirmek için bkz [Öğreticisi: Azure Active Directory B2C kullanıcı deneyimleri özelleştirebilir](tutorial-customize-ui.md). Özel bir ilkede sayfalarını özelleştirme için bkz: [özel bir ilke kullanarak Azure Active Directory B2C'de, uygulamanızın kullanıcı arabirimini özelleştirme](active-directory-b2c-ui-customization-custom.md) veya [kullanıcı arabirimini dinamik içerik ile Azure'da özel ilkeler kullanarak yapılandırma Active Directory B2C](active-directory-b2c-ui-customization-custom-dynamic.md).
+Bir müşteri **Kişisel hesabınızla oturum açma**seçtiğinde, Azure AD B2C tarafından barındırılan özelleştirilmiş bir oturum açma sayfasına yönlendirilir. Aşağıdaki görüntüde, WoodGrove Market Web sitesini görüntülemek için Kullanıcı arabirimini (UI) özelleştirdik. WoodGrove müşterilerinin, kimlik doğrulama deneyiminin Azure AD B2C tarafından barındırılıp güvenliği farkında olmalıdır.
 
-## <a name="developer-resources"></a>Geliştirici Kaynakları
+![Azure AD B2C tarafından barındırılan özel WoodGrove oturum açma sayfası](media/active-directory-b2c-overview/sign-in.png)
 
-### <a name="client-applications"></a>İstemci uygulamaları
+WoodGrove, müşterilerinin kimlik sağlayıcısı olarak Google, Facebook veya Microsoft hesaplarını kullanarak kaydolmalarına ve oturum açmasına olanak tanır. Ya da, *yerel hesap*olarak adlandırılan öğeleri oluşturmak için e-posta adresini ve parolasını kullanarak kaydolabilir.
 
-Uygulamalar için seçeneğiniz [iOS](active-directory-b2c-devquickstarts-ios.md), [Android](active-directory-b2c-devquickstarts-android.md)ve .NET, diğerlerinin yanı sıra. Azure AD B2C, aynı zamanda, kullanıcı kimliklerini korurken bu eylemleri sağlar.
+Bir müşteri **Kişisel hesabınızla kaydolun** ve **Şimdi kaydolun**, özel bir kaydolma sayfası sunulur.
 
-Siz bir ASP.NET web uygulama geliştiricisi gibiyseniz, hesapları içindeki adımları kullanarak kimlik doğrulaması için uygulamanızı ayarlayın [Öğreticisi: Azure AD B2C kullanarak hesaplarla kimlik doğrulaması için bir web uygulamasına etkinleştirme](active-directory-b2c-tutorials-web-app.md).
+![Azure AD B2C tarafından barındırılan özel WoodGrove kaydolma sayfası](media/active-directory-b2c-overview/sign-up.png)
 
-İçindeki adımları kullanarak hesaplarının kimliğini doğrulamak için uygulamanıza bir masaüstü uygulaması geliştiricisiyseniz ayarlama [Öğreticisi: Azure AD B2C kullanarak hesaplarla kimlik doğrulaması bir masaüstü uygulaması etkinleştirme](active-directory-b2c-tutorials-desktop-app.md).
+Bir e-posta adresi girdikten ve **doğrulama kodu gönder**' i seçtikten sonra, Azure AD B2C kodu gönderir. Kodu girdikten sonra **kodu doğrula**' yı seçin ve ardından formdaki diğer bilgileri girin, ayrıca hizmet koşullarını kabul etmelidir.
 
-İçindeki adımları kullanarak hesaplarının kimliğini doğrulamak için uygulamanıza, Node.js kullanarak bir tek sayfalı uygulama geliştiricisiyseniz ayarlama [Öğreticisi: Azure AD B2C kullanarak hesaplarla kimlik doğrulaması için bir tek sayfalı uygulamayı etkinleştir](active-directory-b2c-tutorials-spa.md).
+**Oluştur** düğmesine tıkladığınızda, kullanıcının WoodGrove Market Web sitesine geri yönlendirmesi Azure AD B2C neden olur. Yeniden yönlendirirse Azure AD B2C, WoodGrove Web uygulamasına bir OpenID Connect kimlik doğrulama belirteci geçirir. Kullanıcı oturum açmıştır ve oturum açmış olduklarını belirtmek için sağ üst köşede görüntülenen görünen adlarını görüntüler.
 
-### <a name="apis"></a>API'ler
-API'leri çağırmak, istemci veya web uygulamalarınızın ihtiyacınız varsa, Azure AD B2C'de bu kaynaklara güvenli erişim için ayarlayabilirsiniz.
+![Kullanıcının oturum açmış olduğu WoodGrove Market web sitesi üstbilgisi](media/active-directory-b2c-overview/signed-in-individual.png)
 
-Uygulamanızın içindeki adımları kullanarak korumalı bir API çağrısı, bir ASP.NET web uygulama geliştiricisiyseniz ayarlama [Öğreticisi: Bir ASP.NET web Azure Active Directory B2C kullanarak API erişimi verme](active-directory-b2c-tutorials-web-api.md).
+### <a name="authenticate-business-customers"></a>İş müşterilerinin kimliklerini doğrulama
 
-Masaüstü uygulaması geliştiricisiyseniz içindeki adımları kullanarak korumalı bir API'yi çağırmak için uygulamanızı ayarlayın [Öğreticisi: Erişim ver Node.js web API'si için Azure Active Directory B2C kullanarak bir masaüstü uygulamasından](active-directory-b2c-tutorials-desktop-app-webapi.md).
+Bir müşteri, **iş müşterileri**altındaki seçeneklerden birini seçtiğinde, WoodGrove Market web sitesi bireysel müşteriler için olduğundan farklı bir Azure AD B2C ilkesi çağırır.
 
-Node.js kullanarak bir tek sayfalı uygulama geliştiricisi olarak, içindeki adımları kullanarak hesapları kimlik doğrulaması için uygulamanızı ayarlayın [Öğreticisi: Erişim ver bir ASP.NET Core web API'si için Azure Active Directory B2C kullanarak tek sayfalı uygulamasından](active-directory-b2c-tutorials-spa-webapi.md).
+Bu ilke, kullanıcıya kaydolma ve oturum açma için kurumsal kimlik bilgilerini kullanma seçeneği sunar. WoodGrove örneğinde, kullanıcılardan herhangi bir Office 365 veya Azure AD hesabıyla oturum açması istenir. Bu ilke, dünyanın her yerindeki Office 365 müşteriyle Azure AD B2C federasyona `/common` eklemek için [çok kiracılı bir Azure AD uygulaması](../active-directory/develop/howto-convert-app-to-be-multi-tenant.md) ve Azure AD uç noktasını kullanır.
 
-### <a name="javascript"></a>JavaScript
+### <a name="authenticate-partners"></a>Kimlik doğrulama iş ortakları
 
-Azure AD B2C uygulamalarınızda kendi JavaScript istemci tarafı kod ekleyebilirsiniz. JavaScript ' uygulamanızda ayarlamak için tanımladığınız bir [sayfa sözleşme](page-contract.md) ve etkinleştirme [JavaScript](javascript-samples.md) kullanıcı akışları veya özel ilkeler.
+**Tedarikçi hesabınız Ile oturum açma** , Azure Active Directory B2B's işbirliği işlevlerini kullanır. Azure AD B2B, iş ortağı kimliklerini yönetmek için Azure Active Directory bir özellik ailesidir. Bu kimlikler, Azure AD B2C korunan uygulamalara erişim için Azure Active Directory federe olabilir.
 
-### <a name="user-accounts"></a>Kullanıcı hesapları
+[Azure ACTIVE DIRECTORY B2B 'de Konuk Kullanıcı erişimi olan](../active-directory/b2b/what-is-b2b.md)Azure AD B2B hakkında daha fazla bilgi edinin.
 
-Birçok genel kiracı yönetim görevlerini programlı bir şekilde gerçekleştirilmesi gerekir. Kullanıcı Yönetimi birincil örnektir. Azure AD B2C kiracısı için mevcut bir kullanıcı deposu geçirmeniz gerekebilir. Kullanıcı kayıt sayfasında, kendi ana bilgisayar ve kullanıcı hesaplarını arka planda, Azure AD B2C dizini oluşturmak isteyebilirsiniz. Bu tür görevleri oluşturabilir, okuyabilir, güncelleştirebilir olanağına sahip olmalıdır ve kullanıcı hesapları silebilirsiniz. Bu görevleri kullanarak yapabileceğiniz [Azure AD Graph API'si](active-directory-b2c-devquickstarts-graph-dotnet.md).
+<!-- UNCOMMENT WHEN REPO IS UPDATED WITH LATEST DEMO CODE
+### Sample code
+
+If you'd like to jump right into the code to see how the WoodGrove Groceries application is built, you can find the repository on GitHub:
+
+[Azure-Samples/active-directory-external-identities-woodgrove-demo][woodgrove-repo] (GitHub)
+-->
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Öğreticiye devam ederek uygulamanızın kaydolma ve oturum açma deneyimini yapılandırmaya başlayın.
+Artık Azure AD B2C ne olduğunu ve bu senaryonun bazı senaryolarına ilişkin bir fikriniz olduğuna göre, özellikleri ve teknik yönlerini biraz daha ayrıntılı olarak inceleyin.
 
 > [!div class="nextstepaction"]
-> [Öğretici: Azure Active Directory B2C kiracısı oluşturma](tutorial-create-tenant.md)
+> [Azure AD B2C Teknik Genel Bakış >](technical-overview.md)
+
+<!-- LINKS - External -->
+[woodgrove]: https://aka.ms/ciamdemo
+[woodgrove-repo]: https://github.com/Azure-Samples/active-directory-external-identities-woodgrove-demo

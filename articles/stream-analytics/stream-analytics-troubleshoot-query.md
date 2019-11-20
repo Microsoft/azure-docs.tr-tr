@@ -9,12 +9,12 @@ ms.service: stream-analytics
 ms.topic: conceptual
 ms.date: 12/07/2018
 ms.custom: seodec18
-ms.openlocfilehash: 7a1e440a8dc8f518e272df9e126771df54390ed5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 586ddb237144daddf0cbfd19785fcba7658469a0
+ms.sourcegitcommit: 6a42dd4b746f3e6de69f7ad0107cc7ad654e39ae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60762489"
+ms.lasthandoff: 07/07/2019
+ms.locfileid: "67621468"
 ---
 # <a name="troubleshoot-azure-stream-analytics-queries"></a>Azure Stream Analytics sorguları sorunlarını giderme
 
@@ -25,11 +25,11 @@ Bu makalede, Stream Analytics sorgularını ve bunları nasıl giderebileceğini
     - Üzerinde **sorgu** sekmesinde **Test**. İçin indirilen örnek verileri kullanarak [sorguyu test](stream-analytics-test-query.md). Hataları inceleyin ve bunları düzeltmeye çalışın.   
     - Ayrıca [sorgunuzda doğrudan Canlı giriş test](stream-analytics-live-data-local-testing.md) Visual Studio için Stream Analytics araçları kullanarak.
 
-2.  Kullanırsanız [ **TIMESTAMP By**](https://msdn.microsoft.com/library/azure/mt573293.aspx), olayları zaman damgaları büyüktür sahip olduğunuzu doğrulayın [iş başlangıç zamanı](stream-analytics-out-of-order-and-late-events.md).
+2.  Kullanırsanız [ **TIMESTAMP By**](https://docs.microsoft.com/stream-analytics-query/timestamp-by-azure-stream-analytics), olayları zaman damgaları büyüktür sahip olduğunuzu doğrulayın [iş başlangıç zamanı](stream-analytics-out-of-order-and-late-events.md).
 
 3.  Yaygın görülen tehlikeleri gibi kaldırın:
-    - A [ **burada** ](https://msdn.microsoft.com/library/azure/dn835048.aspx) yan tümcesinin sorgudaki tüm olayları, herhangi bir çıktı oluşturulmasını önleme filtrelendi.
-    - A [ **ATAMA** ](https://msdn.microsoft.com/azure/stream-analytics/reference/cast-azure-stream-analytics) işlevi başarısız, işinin başarısız olmasına neden olur. Tür atama hataları önlemek için [ **TRY_CAST** ](https://msdn.microsoft.com/azure/stream-analytics/reference/try-cast-azure-stream-analytics) yerine.
+    - A [ **burada** ](https://docs.microsoft.com/stream-analytics-query/where-azure-stream-analytics) yan tümcesinin sorgudaki tüm olayları, herhangi bir çıktı oluşturulmasını önleme filtrelendi.
+    - A [ **ATAMA** ](https://docs.microsoft.com/stream-analytics-query/cast-azure-stream-analytics) işlevi başarısız, işinin başarısız olmasına neden olur. Tür atama hataları önlemek için [ **TRY_CAST** ](https://docs.microsoft.com/stream-analytics-query/try-cast-azure-stream-analytics) yerine.
     - Pencere işlevleri kullandığınızda, tüm pencere süresi sorgudan bir sonuç görmek bekleyin.
     - Zaman damgası olayları için iş başlangıç zamanından önce gelir ve bu nedenle, olayların bırakılma.
 
@@ -99,5 +99,5 @@ Daha fazla yardım için deneyin bizim [Azure Stream Analytics forumumuzu](https
 * [Azure Stream analytics'e giriş](stream-analytics-introduction.md)
 * [Azure Akış Analizi'ni kullanmaya başlama](stream-analytics-real-time-fraud-detection.md)
 * [Azure Akış Analizi işlerini ölçeklendirme](stream-analytics-scale-jobs.md)
-* [Azure Akış Analizi Sorgu Dili Başvurusu](https://msdn.microsoft.com/library/azure/dn834998.aspx)
+* [Azure Akış Analizi Sorgu Dili Başvurusu](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
 * [Azure Akış Analizi Yönetimi REST API'si Başvurusu](https://msdn.microsoft.com/library/azure/dn835031.aspx)

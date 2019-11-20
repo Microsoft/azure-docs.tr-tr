@@ -1,7 +1,7 @@
 ---
-title: "Hızlı Başlangıç: Bing Video arama REST API'si ve Java kullanarak video arayın"
-titlesuffix: Azure Cognitive Services
-description: Bu hızlı başlangıçta, Bing Video arama REST kullanarak Java API'si için video arama istekleri göndermek için kullanın.
+title: 'Hızlı Başlangıç: Bing Video Arama REST API ve Java kullanarak video arayın'
+titleSuffix: Azure Cognitive Services
+description: Java kullanarak Bing Video Arama REST API video arama istekleri göndermek için bu hızlı başlangıcı kullanın.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,20 +10,20 @@ ms.subservice: bing-video-search
 ms.topic: quickstart
 ms.date: 06/19/2019
 ms.author: aahi
-ms.openlocfilehash: bb132aeee97da590f4e2bb7c3f96606c8c70aeaf
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: 0823c115f47bb6bff0396cd154164183cf46d8e4
+ms.sourcegitcommit: a0b37e18b8823025e64427c26fae9fb7a3fe355a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67275904"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68500693"
 ---
-# <a name="quickstart-search-for-videos-using-the-bing-video-search-rest-api-and-java"></a>Hızlı Başlangıç: Bing Video arama REST API'si ve Java kullanarak video arayın
+# <a name="quickstart-search-for-videos-using-the-bing-video-search-rest-api-and-java"></a>Hızlı Başlangıç: Bing Video Arama REST API ve Java kullanarak video arayın
 
-Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir JSON yanıtı Arama sonuçlarından görüntülemek için kullanın. Bu basit bir Java uygulaması API'sine HTTP video arama sorgusu gönderir ve yanıtını görüntüler. Bu uygulama Java ile yazılmış olmakla birlikte API, çoğu programlama diliyle uyumlu bir RESTful Web hizmetidir. Bu örnek için kaynak kodu kullanılabilir [github'da](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/java/Search/BingVideoSearchv7.java) ek hata işleme, özellik ve kod ek açıklamaları.
+Bing Video Arama API'si ilk çağrısını yapmak ve JSON yanıtından bir arama sonucu görüntülemek için bu hızlı başlangıcı kullanın. Bu basit Java uygulaması, API 'ye bir HTTP video arama sorgusu gönderir ve yanıtı görüntüler. Bu uygulama Java ile yazılmış olmakla birlikte API, çoğu programlama diliyle uyumlu bir RESTful Web hizmetidir. Bu örneğe ilişkin kaynak kodu, [GitHub 'da](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/java/Search/BingVideoSearchv7.java) ek hata işleme, Özellikler ve kod ek açıklamalarıyla kullanılabilir.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* [Java geliştirme Kit(JDK)](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
+* [Java Development Kit (JDK)](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
 
 * [Gson kitaplığı](https://github.com/google/gson)
 
@@ -45,7 +45,7 @@ Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir J
     import com.google.gson.JsonParser;
     ```
 
-2. Adlı yeni bir sınıf oluşturun `SearchResults` API yanıtından JSON ve üst bilgileri depolamak için.
+2. Üst bilgileri ve JSON yanıtını `SearchResults` API 'den depolamak için adlı yeni bir sınıf oluşturun.
 
     ```java
     // Container class for search results encapsulates relevant headers and JSON data
@@ -59,7 +59,7 @@ Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir J
     }
     ```
 
-3. Adlı yeni bir yöntem oluşturma `SearchVideos()` , API uç nokta konak ve yol, abonelik anahtarınız ve bir arama terimi için değişkenleri ile. Döndürür bir `SearchResults` nesne. 
+3. API uç noktası ana bilgisayarınız `SearchVideos()` ve yolunuz, abonelik anahtarınız ve arama teriminiz için değişkenlerle adlı yeni bir yöntem oluşturun. Bir `SearchResults` nesne döndürür. 
 
     ```java
     public static SearchResults SearchVideos (String searchQuery) throws Exception {
@@ -70,11 +70,11 @@ Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir J
     }
     ```
 
-## <a name="construct-and-send-the-search-request"></a>Oluşturun ve arama isteği gönder
+## <a name="construct-and-send-the-search-request"></a>Arama isteğini oluşturun ve gönderin
 
 1. İçinde `SearchVideos()`, aşağıdaki adımları gerçekleştirin:
 
-    1. İsteğiniz URL'sini, API'nizi birleştirerek oluşturmak konak, yol ve arama sorgunuz kodlama. Ardından `openConnection()` bağlantı oluşturun ve abonelik anahtarınızı eklemek için `Ocp-Apim-Subscription-Key` başlığı.
+    1. API konağını, yolunuzu birleştirerek ve arama sorgunuzu kodlayıp kodlayarak isteğiniz için URL 'YI oluşturun. Ardından bağlantı `openConnection()` oluşturmak için öğesini kullanın ve abonelik anahtarınızı `Ocp-Apim-Subscription-Key` üstbilgiye ekleyin.
 
         ```java
         URL url = new URL(host + path + "?q=" +  URLEncoder.encode(searchQuery, "UTF-8"));
@@ -82,14 +82,14 @@ Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir J
         connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey);
         ```
 
-    2. API yanıt almak ve JSON dizesi depolar.
+    2. API 'den yanıtı alın ve JSON dizesini depolayın.
 
         ```java
         InputStream stream = connection.getInputStream();
         String response = new Scanner(stream).useDelimiter("\\A").next();
         ```
 
-    3. Kullanım `getHeaderFields();` HTTP üstbilgileri yanıttan ayıklayın ve Bing ilgili dışındaki depolamak için `results` nesne. Ardından akış kapatın ve sonucu döndürür.
+    3. Yanıttan `getHeaderFields();` HTTP üstbilgilerini ayıklamak ve Bing ile ilgili olanları `results` nesne içinde depolamak için kullanın. Sonra akışı kapatın ve sonucu döndürün.
 
         ```java
         // extract Bing-related HTTP headers
@@ -106,7 +106,7 @@ Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir J
 
 ## <a name="format-the-response"></a>Yanıtı biçimlendirme
 
-1. Adlı bir yöntem oluşturma `prettify()` Bing Video API'den döndürülen yanıtı biçimlendirmek için. Gson kitaplığın kullanın `JsonParser` bir JSON dizesinde alıp bir nesnesine dönüştürmek için. Ardından `GsonBuilder()` ve `toJson()` biçimlendirilmiş dize oluşturmak için. 
+1. Bing video API 'sinden `prettify()` döndürülen yanıtı biçimlendirmek için adlı bir yöntem oluşturun. Bir JSON dizesini alıp nesneye dönüştürmek `JsonParser` için gson Kitaplığı ' nı kullanın. Ardından, `GsonBuilder()` biçimli `toJson()` dizeyi oluşturmak için ve kullanın. 
 
     ```java
     // pretty-printer for JSON; uses GSON parser to parse and re-serialize
@@ -118,9 +118,9 @@ Bu hızlı başlangıçta, Bing Video arama API'si, ilk çağrı yapmak ve bir J
     }
     ```
 
-## <a name="send-the-request-and-print-the-response"></a>İstek göndermek ve yanıtın yazdırma
+## <a name="send-the-request-and-print-the-response"></a>İsteği gönder ve yanıtı Yazdır
 
-1. Uygulamanızın ana yöntemi çağırın `SearchVideos` ile arama terimi. Ardından, HTTP üstbilgilerini yanıta depolanan yanı sıra API tarafından döndürülen JSON dizesi yazdırabilir.
+1. Uygulamanızın ana yönteminde, arama teriminizle çağırın `SearchVideos` . ardından, yanıtta depolanan HTTP üstbilgilerini ve API tarafından döndürülen JSON dizesini yazdırabilirsiniz.
 
     ```java
     public static void main (String[] args) {
@@ -246,8 +246,8 @@ Başarılı yanıt, aşağıdaki örnekte gösterildiği gibi JSON biçiminde d�
 ## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="nextstepaction"]
-> [Tek sayfa uygulaması oluşturma](../tutorial-bing-video-search-single-page-app.md)
+> [Tek sayfalı Web uygulaması oluşturma](../tutorial-bing-video-search-single-page-app.md)
 
 ## <a name="see-also"></a>Ayrıca bkz. 
 
- [Bing Video arama API'si nedir?](../overview.md)
+ [Bing Video Arama API'si nedir?](../overview.md)

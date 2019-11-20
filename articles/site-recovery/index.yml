@@ -1,78 +1,109 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Site Recovery Belgeleri
+### YamlMime:Landing
+title: Azure Site Recovery belgeleri
+summary: Şirket içi makineleri ve iş yükleri için Azure'a ve Azure VM'leri için ikincil Azure bölgesine olağanüstü durum kurtarma işleminde Azure Site Recovery'yi kullanın. Azure'a yerinde çoğaltma özelliğiyle, kesintiler oluştuğunda yük devretmeyi düzenleyebilir ve Azure'da iş yükleriyle uygulamalarına erişmeye devam edebilirsiniz. Birincil konum tekrar kullanılabilir duruma geldiğinde gerektiği gibi yeniden çalıştırabilirsiniz.
 metadata:
-  title: 'Azure Site Recovery Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
-  meta.description: Learn how to set up cloud disaster recovery and business continuity for physical servers and virtual machines by deploying and managing replication.
-  services: site-recovery
-  author: czeumault
-  manager: carolz
+  title: Azure Site Recovery belgeleri
+  description: Şirket içi makineleri ve iş yükleri için Azure'a ve Azure VM'leri için ikincil Azure bölgesine olağanüstü durum kurtarma işleminde Azure Site Recovery'yi kullanın. Azure'a yerinde çoğaltma özelliğiyle, kesintiler oluştuğunda yük devretmeyi düzenleyebilir ve Azure'da iş yükleriyle uygulamalarına erişmeye devam edebilirsiniz. Birincil konum tekrar kullanılabilir duruma geldiğinde gerektiği gibi yeniden çalıştırabilirsiniz.
   ms.service: site-recovery
-  ms.tgt_pltfrm: na
   ms.topic: landing-page
-  ms.date: 11/27/2018
-  ms.author: carolz
-abstract:
-  description: 'Azure Site Recovery, Azure VM’leri, şirket içi VM’ler ve fiziksel sunucular için olağanüstü durum kurtarma hizmetini düzenler ve yönetir. Hızlı başlangıç yönergelerimiz ve öğreticilerimizden yararlanarak çoğaltma, yük devretme ve ilk duruma döndürme işlemlerini nasıl yapacağınızı öğrenin.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Azure VM için olağanüstü durum kurtarma işlemini hızla ayarlama
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: /azure/site-recovery/media/index/portal.svg
-            text: Azure portal
-            href: /azure/site-recovery/azure-to-azure-quickstart
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: VM’ler ve fiziksel sunucular için olağanüstü durum kurtarma işlemini nasıl ayarlayacağınızı öğrenin.
-      - type: text
-        html: <h3>Azure-Azure arası</h3>
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="azure-to-azure-tutorial-enable-replication">Olağanüstü durum kurtarmayı ayarlama</a>
-          - html: <a href="azure-to-azure-tutorial-dr-drill">Olağanüstü durum kurtarma tatbikatı çalıştırma</a>
-          - html: <a href="azure-to-azure-tutorial-failover-failback">Yük devretme ve yeniden çalışma işlemlerini çalıştırma</a>
-      - type: text
-        html: <h3>VMware</h3>
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="tutorial-prepare-azure">Azure’u hazırlama</a>
-          - html: <a href="tutorial-prepare-on-premises-vmware">Şirket içi VMware’leri hazırlama</a>
-          - html: <a href="tutorial-vmware-to-azure">Olağanüstü durum kurtarmayı ayarlama</a>
-          - html: <a href="tutorial-dr-drill-azure">Olağanüstü durum kurtarma tatbikatı çalıştırma</a>
-          - html: <a href="vmware-azure-tutorial-failover-failback">Yük devretme ve yeniden çalışma işlemi çalıştırma</a>
-      - type: text
-        html: <h3>Hyper-V</h3>
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="tutorial-prepare-azure">Azure’u hazırlama</a>
-          - html: <a href="tutorial-prepare-on-premises-hyper-v">Şirket içi Hyper-V’leri hazırlama</a>
-          - html: <a href="tutorial-hyper-v-to-azure">Hyper-V VM’leri için olağanüstü durum kurtarmayı ayarlama</a>
-          - html: <a href="tutorial-hyper-v-vmm-to-azure">System Center VMM tarafından yönetilen Hyper-V VM'leri için olağanüstü durum kurtarmayı ayarlama</a>
-          - html: <a href="tutorial-dr-drill-azure">Olağanüstü durum kurtarma tatbikatı çalıştırma</a>
-          - html: <a href="tutorial-hyper-v-to-azure-failover-failback">Yük devretme ve yeniden çalışma işlemi çalıştırma</a>
-      - type: text
-        html: <h3>Azure’a geçiş</h3>
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="tutorial-prepare-azure">Azure’u hazırlama</a>
-          - html: <a href="tutorial-migrate-on-premises-to-azure">Şirket içi makineleri</a> veya <a href="tutorial-migrate-aws-to-azure">AWS Örneklerini Azure’a geçirme</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: <p><a href="/powershell/module/az.recoveryservices/">Azure PowerShell</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/site-recovery/">REST API başvurusu</a></p>
+  ms.collection: collection
+  author: rayne-wiselman
+  ms.author: raynew
+  ms.date: 10/07/2019
+  ms.openlocfilehash: 0d4405e447c7624e4d6cc714209ffc86451a74bd
+  ms.sourcegitcommit: be344deef6b37661e2c496f75a6cf14f805d7381
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/07/2019
+  ms.locfileid: "72001098"
+landingContent:
+- title: Site Recovery Hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Site Recovery nedir?
+      url: ./site-recovery-overview.md
+    - text: Site Recovery'deki yenilikler
+      url: ./site-recovery-whats-new.md
+- title: Azure VM’leri için olağanüstü durum kurtarma
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure VM’si için olağanüstü durum kurtarmayı deneme
+      url: ./azure-to-azure-quickstart.md
+  - linkListType: tutorial
+    links:
+    - text: Azure VM’leri için olağanüstü durum kurtarma
+      url: ./azure-to-azure-tutorial-enable-replication.md
+    - text: Azure VM’lerini başka bir bölgeye taşıma
+      url: ./azure-to-azure-tutorial-migrate.md
+  - linkListType: learn
+    links:
+    - text: Azure VM'si olağanüstü durum kurtarma mimarisi
+      url: ./azure-to-azure-architecture.md
+    - text: Azure’dan Azure’a çoğaltma için destek matrisi
+      url: ./azure-to-azure-support-matrix.md
+    - text: Sık sorulan sorular
+      url: ./azure-to-azure-common-questions.md
+    - text: Azure Sanal Makineleri taşıma hakkında
+      url: ./azure-to-azure-move-overview.md
+  - linkListType: how-to-guide
+    links:
+    - text: Azure VM’lerinde olağanüstü durum kurtarma için ağ oluşturma
+      url: ./azure-to-azure-about-networking.md
+    - text: Azure'a geçişten sonra olağanüstü durum kurtarma
+      url: ./azure-to-azure-replicate-after-migration.md
+- title: Şirket içi makineleri için olağanüstü durum kurtarma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: VMware VM'leri için olağanüstü durum kurtarma
+      url: ./tutorial-prepare-azure.md
+    - text: Hyper-V VM’leri için olağanüstü durum kurtarma
+      url: ./tutorial-prepare-azure-for-hyperv.md
+    - text: Fiziksel sunucular için olağanüstü durum kurtarma
+      url: ./physical-azure-disaster-recovery.md
+  - linkListType: deploy
+    links:
+    - text: VMware destek matrisi
+      url: ./vmware-physical-azure-support-matrix.md
+    - text: Hyper-V destek matrisi
+      url: ./hyper-v-azure-support-matrix.md
+  - linkListType: learn
+    links:
+    - text: VMware olağanüstü durum kurtarma mimari
+      url: ./vmware-azure-architecture.md
+    - text: VMware olağanüstü durum kurtarmaya genel bakış
+      url: ./vmware-azure-about-disaster-recovery.md
+    - text: VMware olağanüstü durum kurtarmayla ilgili yaygın sorular
+      url: ./vmware-azure-common-questions.md
+    - text: Hyper-V olağanüstü durum kurtarma mimarisi
+      url: ./hyper-v-azure-architecture.md
+  - linkListType: how-to-guide
+    links:
+    - text: Ölçeğe uygun VMware olağanüstü durum kurtarma
+      url: ./vmware-physical-large-deployment.md
+    - text: VMware kapasitesi planlama
+      url: ./site-recovery-plan-capacity-vmware.md
+    - text: Hyper-V kapasitesi planlama
+      url: ./hyper-v-deployment-planner-overview.md
+- title: Yönetme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Site Recovery güncelleştirmelerini yönetme
+      url: service-updates-how-to.md
+    - text: Site Recovery’yi izleme
+      url: site-recovery-monitor-and-troubleshoot.md
+    - text: Azure İzleyici günlükleriyle Site Recovery’yi izleme
+      url: monitor-log-analytics.md
+- title: Dahil olun
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Hizmet özelliği isteyin
+      url: https://feedback.azure.com/forums/256299-site-recovery
+    - text: Forum sorusu sorun
+      url: https://social.msdn.microsoft.com/forums/azure/home?forum=hypervrecovmgr
+    - text: Azure Tech Community
+      url: https://techcommunity.microsoft.com/t5/Azure/ct-p/Azure

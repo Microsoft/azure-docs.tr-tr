@@ -1,6 +1,6 @@
 ---
-title: Azure AD'de yerel Yöneticiler grubuna yönetme alanına katılmış cihazları | Microsoft Docs
-description: Azure rolleri Windows cihaz için yerel Yöneticiler grubuna atama konusunda bilgi edinin.
+title: Azure AD 'ye katılmış cihazlarda yerel Yöneticiler grubunu yönetme | Microsoft Docs
+description: Azure rollerini bir Windows cihazının yerel Yöneticiler grubuna atamayı öğrenin.
 services: active-directory
 ms.service: active-directory
 ms.subservice: devices
@@ -11,86 +11,86 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: ravenn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 11b71b4656181da328cf630cefa4d25cb4f4efda
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.openlocfilehash: 5372bf853092ea55952b45a1300d0f979f1b086c
+ms.sourcegitcommit: f7f70c9bd6c2253860e346245d6e2d8a85e8a91b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67482107"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73062269"
 ---
-# <a name="how-to-manage-the-local-administrators-group-on-azure-ad-joined-devices"></a>Azure AD'de yerel Yöneticiler grubuna yönetme alanına katılmış cihazları
+# <a name="how-to-manage-the-local-administrators-group-on-azure-ad-joined-devices"></a>Azure AD 'ye katılmış cihazlarda yerel Yöneticiler grubunu yönetme
 
-Bir Windows cihazı yönetmek için yerel Yöneticiler grubunun bir üyesi olmanız gerekir. Azure Active Directory (Azure AD) birleştirme işleminin bir parçası olarak, Azure AD, bir cihazda, bu grubun üyeliğini güncelleştirir. Üyelik Güncelleştirme iş gereksinimlerinizi karşılamak için özelleştirebilirsiniz. Üyelik Güncelleştirme, örneğin, bir cihaz üzerinde yönetici haklarına gerek duyulmadan görevleri yapmak Yardım Masası personelinizin etkinleştirmek istiyorsanız yararlıdır.
+Bir Windows cihazını yönetmek için yerel Yöneticiler grubunun bir üyesi olmanız gerekir. Azure Active Directory (Azure AD) JOIN işleminin bir parçası olarak, Azure AD bu grubun üyeliğini bir cihazda güncelleştirir. Üyelik güncelleştirmesini, iş gereksinimlerinizi karşılayacak şekilde özelleştirebilirsiniz. Bir üyelik güncelleştirmesi, örneğin, yardım masası personelinizin bir cihazda yönetici hakları gerektiren görevler kullanmasını sağlamak istiyorsanız yararlıdır.
 
-Bu makalede, üyeliği güncelleştirilmesinin nasıl çalıştığını ve nasıl bir Azure AD katılımı sırasında özelleştirebilirsiniz açıklanmaktadır. Bu makalenin içeriğini uygulanmaz bir **karma** Azure AD'ye katılım.
+Bu makalede, üyelik güncelleştirmesinin nasıl çalıştığı ve bir Azure AD birleşimi sırasında nasıl özelleştirileceği açıklanır. Bu makalenin içeriği, **karma** BIR Azure AD katılımı için geçerlidir.
 
-## <a name="how-it-works"></a>Nasıl çalışır?
+## <a name="how-it-works"></a>Nasıl çalışır
 
-Bir Azure AD'ye katılım'ı kullanarak Azure AD ile bir Windows cihazı bağladığınızda, Azure AD aşağıdaki güvenlik ilkelerinin cihazda yerel Yöneticiler grubuna ekler:
+Azure AD JOIN kullanarak bir Windows cihazını Azure AD 'ye bağladığınızda, Azure AD, cihazdaki yerel Yöneticiler grubuna aşağıdaki güvenlik ilkelerini ekler:
 
-- Azure AD genel yönetici rolü
-- Azure AD cihaz yöneticisi rolü 
-- Azure AD'ye katılım gerçekleştiren kullanıcı   
+- Azure AD Genel Yöneticisi rolü
+- Azure AD Cihaz Yöneticisi rolü 
+- Azure AD JOIN 'i gerçekleştiren Kullanıcı   
 
-Azure AD rolleri yerel administrators grubuna ekleyerek, bir cihaz, cihaz başına hiçbir şey değiştirmeden dilediğiniz zaman Azure AD'de yönetebileceği kullanıcılar güncelleştirebilirsiniz. Şu anda gruplar bir yönetici rolü atama yapılamıyor.
-Azure AD, Azure AD cihaz yöneticisi rolü de (PoLP) en az ayrıcalık ilkesini desteklemek için yerel Yöneticiler grubuna ekler. Ek olarak genel Yöneticiler, olan kullanıcılar da etkinleştirebilirsiniz *yalnızca* bir cihazı yönetmek için cihaz yöneticisi rolü atanır. 
+Yerel Yöneticiler grubuna Azure AD rolleri ekleyerek, cihazdaki herhangi bir şeyi değiştirmeden bir cihazı Azure AD 'de yönetebileceğini kullanıcıları güncelleştirebilirsiniz. Şu anda, bir yönetici rolüne gruplar atayamazsınız.
+Azure AD, en az ayrıcalık (PoLP) ilkesini desteklemek için Azure AD cihaz yöneticisi rolünü yerel Yöneticiler grubuna da ekler. Genel yöneticilere ek olarak, bir cihazı yönetmek için *yalnızca* cihaz yöneticisi rolüne atanan kullanıcılara da izin verebilirsiniz. 
 
 ## <a name="manage-the-global-administrators-role"></a>Genel Yöneticiler rolünü yönetme
 
-Görüntüleme ve genel Yönetici rolüne üyelik güncelleştirmek için bkz:
+Genel yönetici rolünün üyeliğini görüntülemek ve güncelleştirmek için bkz.:
 
-- [Azure Active Directory'de Yönetici rolü tüm üyeleri görüntüleyin](../users-groups-roles/directory-manage-roles-portal.md)
-- [Bir kullanıcı Azure Active Directory'de yönetici rolleri atama](../fundamentals/active-directory-users-assign-role-azure-portal.md)
+- [Azure Active Directory bir yönetici rolünün tüm üyelerini görüntüleme](../users-groups-roles/directory-manage-roles-portal.md)
+- [Azure Active Directory 'da yönetici rollerine Kullanıcı atama](../fundamentals/active-directory-users-assign-role-azure-portal.md)
 
 
-## <a name="manage-the-device-administrator-role"></a>Cihaz yöneticisi rolü yönetme 
+## <a name="manage-the-device-administrator-role"></a>Cihaz Yöneticisi rolünü yönetme 
 
-Azure portalında, üzerinde cihaz Yönetici rolü yönetebilirsiniz **cihazları** sayfası. Açmak için **cihazları** sayfası:
+Azure portal, **cihazlar** sayfasında cihaz yöneticisi rolünü yönetebilirsiniz. **Cihazlar** sayfasını açmak için:
 
-1. Oturum açın, [Azure portalında](https://portal.azure.com) bir genel yönetici veya cihaz Yöneticisi olarak.
-1. Sol gezinti tıklatın **Azure Active Directory**. 
-1. İçinde **Yönet** bölümünde **cihazları**.
-1. Üzerinde **cihazları** sayfasında **cihaz ayarları**.
+1. [Azure Portal](https://portal.azure.com) genel yönetici veya cihaz yöneticisi olarak oturum açın.
+1. Sol gezinti çubuğunda **Azure Active Directory**' ye tıklayın. 
+1. **Yönet** bölümünde, **cihazlar**' a tıklayın.
+1. **Cihazlar** sayfasında, **cihaz ayarları**' na tıklayın.
 
-Cihaz yöneticisi rolü değiştirilecek yapılandırma **ek yerel Yöneticiler Azure AD alanına katılmış cihazlar**.  
+Cihaz Yöneticisi rolünü değiştirmek için, **Azure AD 'ye katılmış cihazlarda ek yerel Yöneticiler**yapılandırın.  
 
 ![Ek yerel Yöneticiler](./media/assign-local-admin/10.png)
 
 >[!NOTE]
-> Bu seçenek, bir Azure AD Premium kiracınız gerektirir. 
+> Bu seçenek Azure AD Premium kiracı gerektirir. 
 
-Cihaz yöneticileri, tüm Azure AD'ye katılmış cihazlara atanır. Belirli bir dizi cihazda cihaz yöneticilerine kapsamı oluşturulamıyor. Cihaz yöneticisi rolü güncelleştirme mutlaka anında etkili etkilenen kullanıcılar üzerinde yok. Cihazlar için bir kullanıcı zaten oturum açmış, ayrıcalık güncelleştirme gerçekleşir:
+Cihaz yöneticileri tüm Azure AD 'ye katılmış cihazlara atanır. Cihaz yöneticilerini belirli bir cihaz kümesiyle kapsamyükleyemezsiniz. Cihaz Yöneticisi rolünü güncelleştirme, etkilenen kullanıcılar üzerinde bir etkisi olması gerekmez. Bir kullanıcının zaten oturum açmış olduğu cihazlarda, aşağıdaki *iki* eylem gerçekleştiğinde ayrıcalık güncelleştirmesi gerçekleşir:
 
-- Ne zaman bir kullanıcı oturumu kapatır.
-- 4 saat sonra yeni bir yenileme birincil belirteç verilir. 
+- Azure AD 'nin uygun ayrıcalıklara sahip yeni bir birincil yenileme belirteci vermesi için 4 saat geçti. 
+- Kullanıcı oturumu kapatır ve kendi profilini yenilemek için kilitleme/kilit açma değil, oturum kapatır.
 
 ## <a name="manage-regular-users"></a>Normal kullanıcıları yönetme
 
-Varsayılan olarak, Azure AD Yönetici grubu Azure AD'ye katılmasını sağlamaya cihazda gerçekleştiren kullanıcı ekler. Normal kullanıcıların yerel Yöneticiler eskimesini engellemek istiyorsanız, aşağıdaki seçenekleriniz:
+Azure AD, varsayılan olarak, Azure AD JOIN 'in cihazdaki yönetici grubuna eklediği kullanıcıyı ekler. Normal kullanıcıların yerel yönetici haline gelmesini engellemek istiyorsanız aşağıdaki seçeneklere sahipsiniz:
 
-- [Windows Autopilot](https://docs.microsoft.com/windows/deployment/windows-autopilot/windows-10-autopilot) -Windows Autopilot birincil kullanıcı bir yerel yönetici olmaktan birleşim gerçekleştirme önlemek için bir seçenek ile sağlar. Bunu başarmak [Autopilot profili oluşturuluyor](https://docs.microsoft.com/intune/enrollment-autopilot#create-an-autopilot-deployment-profile).
-- [Toplu kayıt](https://docs.microsoft.com/intune/windows-bulk-enroll) -otomatik olarak oluşturulmuş bir kullanıcı bağlamında bir toplu kayıt bağlamında gerçekleştirilen bir Azure AD katılma olur. Bir cihazı alanına sonra oturum açan kullanıcılar, Yöneticiler grubuna eklenmez.   
+- [Windows Autopilot](https://docs.microsoft.com/windows/deployment/windows-autopilot/windows-10-autopilot) -Windows Autopilot, birincil kullanıcının bir yerel yönetici haline gelmesini önleyen bir seçenek sunar. Bunu, [bir Autopilot profili oluşturarak](https://docs.microsoft.com/intune/enrollment-autopilot#create-an-autopilot-deployment-profile)gerçekleştirebilirsiniz.
+- [Toplu kayıt](https://docs.microsoft.com/intune/windows-bulk-enroll) -bir toplu kayıt bağlamında gerçekleştirilen BIR Azure AD JOIN, otomatik olarak oluşturulan bir kullanıcı bağlamında gerçekleşir. Bir cihaz birleştirildikten sonra oturum açan kullanıcılar Yöneticiler grubuna eklenmez.   
 
-## <a name="manually-elevate-a-user-on-a-device"></a>Bir kullanıcı bir cihazda el ile Yükselt 
+## <a name="manually-elevate-a-user-on-a-device"></a>Bir cihazdaki kullanıcıyı el ile yükseltme 
 
-Azure AD katılma işlemi kullanmaya ek olarak, normal bir kullanıcı belirli bir cihaz üzerinde yerel yönetici olmasını el ile yükseltebilirsiniz. Bu adım zaten yerel Yöneticiler grubunun bir üyesi olmasını gerektirir. 
+Azure AD JOIN işlemini kullanmanın yanı sıra, düzenli bir kullanıcıyı belirli bir cihazda yerel yönetici olacak şekilde el ile de indirebilirsiniz. Bu adım, yerel Yöneticiler grubunun zaten bir üyesi olmanızı gerektirir. 
 
-İle başlayarak **Windows 10 1709** sürüm, gerçekleştirebileceğiniz bu görevden **ayarlar -> hesapları -> diğer kullanıcıların**. Seçin **iş veya Okul kullanıcı ekleme**, altında kullanıcının UPN'sini girin **kullanıcı hesabı** seçip *yönetici* altında **hesap türü**  
+**Windows 10 1709** sürümünden başlayarak bu görevi **Ayarlar-> hesaplarından (diğer kullanıcılar >** gerçekleştirebilirsiniz. **İş veya okul kullanıcısı ekle**' yi seçin, kullanıcının **Kullanıcı HESABı** bölümüne ait UPN 'sini girin ve **Hesap türü** altında *yönetici* ' yi seçin.  
  
-Ayrıca, komut istemini kullanarak kullanıcıları ekleyebilirsiniz:
+Ayrıca, komut istemi kullanarak da kullanıcı ekleyebilirsiniz:
 
-- Kiracı kullanıcılarınız şirket içi Active Directory'den eşitlenen kullanırsanız `net localgroup administrators /add "Contoso\username"`.
-- Kiracı kullanıcıların Azure AD'de oluşturduysanız kullanın `net localgroup administrators /add "AzureAD\UserUpn"`
+- Kiracı kullanıcılarınız şirket içi Active Directory eşitlendiğinde, `net localgroup administrators /add "Contoso\username"`kullanın.
+- Kiracı kullanıcılarınız Azure AD 'de oluşturulduysa, `net localgroup administrators /add "AzureAD\UserUpn"` kullanın
 
 ## <a name="considerations"></a>Dikkat edilmesi gerekenler 
 
-Grupları için cihaz yöneticisi rolü atayamazsınız, yalnızca bireysel kullanıcılar izin verilir.
+Cihaz Yöneticisi rolüne Grup atayamazsınız, yalnızca bireysel kullanıcılara izin verilir.
 
-Cihaz yöneticileri, tüm Azure AD katıldı cihazlara atanır. Bunlar, belirli bir cihaz kümesi için kapsama alınamaz.
+Cihaz yöneticileri tüm Azure AD 'ye katılmış cihazlara atanır. Bunlar, belirli bir cihaz kümesinin kapsamına alınamaz.
 
-Kullanıcıların cihaz yönetici rolünden kaldırdığınızda, bunlar için oturum açmış olduğu sürece hala bir cihaz üzerinde yerel yönetici ayrıcalığı sahiptirler. Ayrıcalığı, sonraki oturum açma sırasında veya yeni bir birincil yenileme belirteci zaman verilen 4 saat sonra iptal edilir.
+Kullanıcıları Cihaz Yöneticisi rolünden kaldırdığınızda, sunucuda oturum açtıkları sürece bir cihazda yerel yönetici ayrıcalığına sahip olmaya devam eder. Bu ayrıcalık bir sonraki oturum açma işlemi sırasında veya yeni bir birincil yenileme belirteci verildiğinde 4 saat sonra iptal edilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - Azure portal'da cihaz yönetimine ilişkin genel bir bakış edinmek için bkz. [Azure portal'ı kullanarak cihazları yönetme](device-management-azure-portal.md)
-- Cihaz tabanlı koşullu erişim hakkında daha fazla bilgi için bkz: [Azure Active Directory cihaz tabanlı koşullu erişim ilkelerini yapılandırma](../conditional-access/require-managed-devices.md).
+- Cihaz tabanlı koşullu erişim hakkında daha fazla bilgi edinmek için bkz. [Azure Active Directory cihaz tabanlı koşullu erişim ilkelerini yapılandırma](../conditional-access/require-managed-devices.md).

@@ -4,21 +4,21 @@ ms.author: crdun
 ms.service: app-service-mobile
 ms.topic: include
 ms.date: 08/23/2018
-ms.openlocfilehash: c664b089f316255fabc4c8dc36b291d7d63e6280
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.openlocfilehash: 675ad278cb8bdc0ced4eff3bd77572f44c9808fc
+ms.sourcegitcommit: 670c38d85ef97bf236b45850fd4750e3b98c8899
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67188872"
+ms.lasthandoff: 08/08/2019
+ms.locfileid: "68857522"
 ---
-Bu bölümde, yeni bir öğe eklendiğinde bir anında iletme bildirimi göndermek için mevcut Mobile Apps arka uç projesi içinde kod güncelleştirin. Bu işlem tarafından desteklenen [şablon](../articles/notification-hubs/notification-hubs-templates-cross-platform-push-messages.md) platformlar arası sağlayan Azure Notification Hubs'ın özellik gönderir. Çeşitli istemcilere şablonlarını kullanarak anında iletme bildirimleri için kaydedilir ve tüm istemci platformları için tek bir evrensel anında iletme alabilirsiniz.
+Bu bölümde, yeni bir öğe eklendiğinde anında iletme bildirimi göndermek için mevcut Mobile Apps arka uç projenizdeki kodu güncelleştirdiniz. Bu işlem, platformlar arası gönderim sağlayan Azure Notification Hubs [şablon](../articles/notification-hubs/notification-hubs-templates-cross-platform-push-messages.md) özelliği tarafından desteklenir. Çeşitli istemciler şablonlar kullanılarak anında iletme bildirimleri için kaydedilir ve tek bir evrensel gönderim tüm istemci platformlarına alabilir.
 
-Arka uç proje türünüzü eşleşen aşağıdaki yordamlardan birini&mdash;ya da [.NET arka ucu](#dotnet) veya [Node.js arka ucu](#nodejs).
+Arka uç proje türü&mdash; [.net Back end](#dotnet) veya [Node. js arka ucu](#nodejs)ile eşleşen aşağıdaki yordamlardan birini seçin.
 
 ### <a name="dotnet"></a>.NET arka uç projesi
 
-1. Visual Studio'da sunucu projeye sağ tıklayın. Ardından **NuGet paketlerini Yönet**. Arama `Microsoft.Azure.NotificationHubs`ve ardından **yükleme**. Bu işlem arka ucundan bildirim göndermek için Notification Hubs kitaplığına yükler.
-2. Sunucu projeyi **denetleyicileri** > **TodoItemController.cs**. Ardından aşağıdakileri ekleyin using deyimlerini:
+1. Visual Studio 'da sunucu projesine sağ tıklayın. Ardından **NuGet Paketlerini Yönet**' i seçin. Arama yapın ve ardından yüklemeyi seçin. `Microsoft.Azure.NotificationHubs` Bu işlem arka uçta bildirim göndermek için Notification Hubs kitaplığını kurar.
+2. Sunucu projesinde, **Controllers** > **TodoItemController.cs**öğesini açın. Ardından aşağıdaki using deyimlerini ekleyin:
 
     ```csharp
     using System.Collections.Generic;
@@ -26,7 +26,7 @@ Arka uç proje türünüzü eşleşen aşağıdaki yordamlardan birini&mdash;ya 
     using Microsoft.Azure.Mobile.Server.Config;
     ```
 
-3. İçinde **PostTodoItem** yöntem çağrısından sonra aşağıdaki kodu ekleyin **InsertAsync**:  
+3. **PostTodoItem** yönteminde, **ınsertasync**çağrısından sonra aşağıdaki kodu ekleyin:  
 
     ```csharp
     // Get the settings for the server project.
@@ -64,14 +64,14 @@ Arka uç proje türünüzü eşleşen aşağıdaki yordamlardan birini&mdash;ya 
     }
     ```
 
-    Bu işlem öğeyi içeren bir şablon bildirim gönderir. Yeni bir öğe eklendiğinde, metin.
+    Bu işlem, öğeyi içeren bir şablon bildirimi gönderir. Yeni bir öğe eklendiğinde metin.
 
 4. Sunucu projesini yeniden yayımlayın.
 
-### <a name="nodejs"></a>Node.js arka uç projesi
+### <a name="nodejs"></a>Node. js arka uç projesi
 
-1. Bunu zaten bunu yapmadıysanız [hızlı başlangıç arka uç projesi indirme](../articles/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#download-quickstart), veya başka kullanım [Azure portalında çevrimiçi düzenleyicisini](../articles/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#online-editor).
-2. Todoitem.js mevcut kodu şu kodla değiştirin:
+1. Arka uç projenizi ayarlayın.
+2. TodoItem. js içindeki mevcut kodu şu kodla değiştirin:
 
     ```javascript
     var azureMobileApps = require('azure-mobile-apps'),
@@ -114,6 +114,6 @@ Arka uç proje türünüzü eşleşen aşağıdaki yordamlardan birini&mdash;ya 
     module.exports = table;  
     ```
 
-    Bu işlem, yeni bir öğe eklendiğinde item.text içeren bir şablon bildirim gönderir.
+    Bu işlem, yeni bir öğe eklendiğinde Item. Text içeren bir şablon bildirimi gönderir.
 
-3. Yerel bilgisayarınızda bir dosyayı düzenlerken, sunucu projesi yeniden yayımlayın.
+3. Yerel bilgisayarınızda dosyayı düzenlediğinizde, sunucu projesini yeniden yayımlayın.

@@ -1,88 +1,82 @@
 ---
-title: Surface hub'ları Azure İzleyici ile izleme | Microsoft Docs
-description: Surface Hub çözümü, Surface hub durumunu izleyin ve bunların nasıl kullanıldığını anlamak için kullanın.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: 8b4e56bc-2d4f-4648-a236-16e9e732ebef
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici ile Surface Hub 'Larını izleme | Microsoft Docs
+description: Surface Hub 'larınızın durumunu izlemek ve bunların nasıl kullanıldığını anlamak için Surface Hub çözümünü kullanın.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 01/16/2018
+author: mgoedtel
 ms.author: magoedte
-ms.openlocfilehash: 7e0dbb4c3cd8ae4bb552e7b7f0748f1bde2f51de
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 01/16/2018
+ms.openlocfilehash: 7ced5f678b9f8b2d4aa073a984276f41b8b7c4b9
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65232790"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72900632"
 ---
-# <a name="monitor-surface-hubs-with-azure-monitor-to-track-their-health"></a>Surface hub'lar durumlarını izlemek için Azure İzleyici ile izleme
+# <a name="monitor-surface-hubs-with-azure-monitor-to-track-their-health"></a>Azure Izleyici ile Surface Hub 'larını izleyerek sistem durumlarını izleyin
 
 ![Surface Hub simgesi](./media/surface-hubs/surface-hub-symbol.png)
 
-Bu makalede, Surface Hub çözümü Azure İzleyici'de Microsoft Surface Hub cihazları izlemek için nasıl kullanabileceğinizi açıklar. Çözüm yanı sıra bunların nasıl kullanıldığını anlamanıza, Surface hub'larınız durumunu izlemenize yardımcı olur.
+Bu makalede, Microsoft Surface Hub cihazlarını izlemek için Azure Izleyici 'de Surface Hub çözümünü nasıl kullanabileceğiniz açıklanır. Çözüm, Surface Hub 'larınızın durumunu izlemenize ve bunların nasıl kullanıldığını anlamanıza yardımcı olur.
 
-Microsoft Monitoring Agent yüklüyse her Surface Hub sahiptir. Kendi, veri, Surface Hub'ından Azure İzleyici'de bir Log Analytics çalışma alanına gönderebildiğini Aracısı aracılığıyla. Günlük dosyaları, Surface hub'ları ve olan okuma sonra Azure İzleyicisi'ne gönderilir. Çevrimdışı olan sunucuları eşitlemiyor, takvim gibi özellikler veya cihaz hesabının oturum kaydedemediği Skype gösterilen Surface Hub panosunda bulunan Azure İzleyici. Pano verileri kullanarak, çalışmıyorsa veya başka sorunlar yaşıyorsanız ve potansiyel olarak algılanan sorunlar için düzeltmeler uygulama cihazları tanımlayabilir.
+Her Surface Hub Microsoft Monitoring Agent yüklüdür. Aracı aracılığıyla Surface Hub verileri Azure Izleyici 'deki bir Log Analytics çalışma alanına gönderebilirsiniz. Günlük dosyaları, Surface Hub 'larından okundum ve Azure Izleyici 'ye gönderilir. Azure Izleyici 'de Surface Hub panosunda, sunucular çevrimdışıyken, takvim eşitlenmiyor veya cihaz hesabı Skype Kurumsal oturum açamıyor gibi sorunlar görüntülenir. Panodaki verileri kullanarak, çalıştırmayan veya başka sorunlar yaşayan cihazları tanımlayabilir ve algılanan sorunlar için olası düzeltmeleri uygulayabilirsiniz.
 
-## <a name="install-and-configure-the-solution"></a>Yükleme ve çözüm yapılandırma
-Çözümü yüklemek ve yapılandırmak için aşağıdaki bilgileri kullanın. Azure İzleyici'de, Surface hub'ı yönetmek için şunlar gerekir:
+## <a name="install-and-configure-the-solution"></a>Çözümü yükleyip yapılandırma
+Çözümü yüklemek ve yapılandırmak için aşağıdaki bilgileri kullanın. Surface Hub 'larınızı Azure Izleyici 'de yönetmek için şunlar gerekir:
 
-* A [Log Analytics aboneliği](https://azure.microsoft.com/pricing/details/log-analytics/) izlemek istediğiniz cihaz sayısını destekleyen düzeyi. Log Analytics fiyatlandırma kaç cihazın kayıtlı ve elinizdeki verilere bağlı olarak bu işlemleri değişir. Bu, Surface Hub sunum planlarken dikkate almasını istersiniz.
+* İzlemek istediğiniz cihaz sayısını destekleyecek [Log Analytics abonelik](https://azure.microsoft.com/pricing/details/log-analytics/) düzeyi. Log Analytics fiyatlandırma, kaç cihazın kayıtlı olduğuna ve ne kadar veri işleme olduğuna bağlı olarak değişir. Surface Hub dağıtımı planlarken bunu dikkate almak isteyeceksiniz.
 
-Ardından, mevcut bir Log Analytics çalışma alanı ekleyin veya yeni bir tane oluşturun. Ayrıntılı yönergeler için her iki yöntemi kullanarak altındadır [Azure portalında Log Analytics çalışma alanı oluşturma](../learn/quick-create-workspace.md). Log Analytics çalışma alanı yapılandırıldıktan sonra Surface Hub cihazları kaydetmek için iki yolu vardır:
+Sonra, var olan bir Log Analytics çalışma alanını ekleyecek veya yeni bir tane oluşturacaksınız. Her iki yöntemi kullanmaya yönelik ayrıntılı yönergeler [Azure portal Log Analytics çalışma alanı oluşturur](../learn/quick-create-workspace.md). Log Analytics çalışma alanı yapılandırıldıktan sonra, Surface Hub cihazlarınızı kaydetmek için iki yol vardır:
 
-* Otomatik olarak Intune aracılığıyla
-* El ile **ayarları** Surface Hub Cihazınızda.
+* Intune üzerinden otomatik olarak
+* Surface Hub cihazınızdaki **Ayarlar** aracılığıyla el ile.
 
 ## <a name="set-up-monitoring"></a>İzlemeyi ayarlama
-Azure İzleyicisi'ni kullanarak, Surface Hub, etkinlik ve sistem durumu izleyebilirsiniz. Surface hub'ı kullanarak yerel olarak veya Intune kullanarak kaydedebilirsiniz **ayarları** Surface hub'da.
+Azure Izleyici 'yi kullanarak Surface Hub sistem durumunu ve etkinliğini izleyebilirsiniz. Surface Hub, Intune kullanarak veya Surface Hub **ayarları** kullanarak yerel olarak kaydedebilirsiniz.
 
-## <a name="connect-surface-hubs-to-azure-monitor-through-intune"></a>Surface hub'ları Azure İzleyici Intune aracılığıyla bağlanma
-Surface hub'ları yönetecek Log Analytics çalışma alanı için çalışma alanı Kimliğiniz ve çalışma alanı anahtarı gerekir. Bu çalışma alanı ayarları Azure portalından alabilirsiniz.
+## <a name="connect-surface-hubs-to-azure-monitor-through-intune"></a>Surface Hub 'Larını Intune aracılığıyla Azure Izleyici 'ye bağlama
+Surface Hub 'larınızı yönetecek Log Analytics çalışma alanı için çalışma alanı KIMLIĞI ve çalışma alanı anahtarına ihtiyacınız olacak. Azure portal çalışma alanı ayarlarından alabilirsiniz.
 
-Intune, bir veya daha fazla cihazlarınızı uygulanan Log Analytics çalışma alanı yapılandırma ayarlarını merkezi olarak yönetmenize olanak tanıyan bir Microsoft ürünüdür. Cihazlarınızı Intune ile yapılandırmak için aşağıdaki adımları izleyin:
+Intune, cihazlarınızdan bir veya daha fazlasına uygulanan Log Analytics çalışma alanı yapılandırma ayarlarını merkezi olarak yönetmenize olanak tanıyan bir Microsoft ürünüdür. Cihazlarınızı Intune ile yapılandırmak için aşağıdaki adımları izleyin:
 
-1. Intune'da oturum açın.
-2. Gidin **ayarları** > **bağlı kaynakları**.
-3. Oluşturabilir ve Surface Hub şablonu temel alan bir ilkeyi düzenleyebilirsiniz.
-4. İlkeyi Azure operasyonel İçgörüler bölümüne gidin ve Log Analytics ekleme *çalışma alanı kimliği* ve *çalışma alanı anahtarı* ilkesi.
+1. Intune 'da oturum açın.
+2. **Bağlı kaynaklara** > **Ayarlar** ' a gidin.
+3. Surface Hub şablonunu temel alan bir ilke oluşturun veya düzenleyin.
+4. İlkenin Azure Operasyonel Öngörüler bölümüne gidin ve ilkeye Log Analytics *çalışma alanı kimliği* ve *çalışma alanı anahtarını* ekleyin.
 5. İlkeyi kaydedin.
-6. İlkeyi cihazların uygun grubu ile ilişkilendirin.
+6. İlkeyi uygun cihaz grubuyla ilişkilendirin.
 
-   ![Intune İlkesi](./media/surface-hubs/intune.png)
+   ![Intune ilkesi](./media/surface-hubs/intune.png)
 
-Intune, Log Analytics ayarlarını daha sonra bunları Log Analytics çalışma alanınızda kaydetme, hedef gruptaki cihazlar ile eşitler.
+Daha sonra Intune, Log Analytics ayarlarını hedef gruptaki cihazlarla eşitler ve bunları Log Analytics çalışma alanınıza kaydetmektir.
 
-## <a name="connect-surface-hubs-to-azure-monitor-using-the-settings-app"></a>Surface hub'ları ayarlar uygulamasını kullanarak Azure İzleyici için Bağlan
-Surface hub'ları yönetecek Log Analytics çalışma alanı için çalışma alanı Kimliğiniz ve çalışma alanı anahtarı gerekir. Azure portalında Log Analytics çalışma alanı ayarlarını olanlardan alabilirsiniz.
+## <a name="connect-surface-hubs-to-azure-monitor-using-the-settings-app"></a>Ayarlar uygulamasını kullanarak Surface Hub 'Larını Azure Izleyici 'ye bağlama
+Surface Hub 'larınızı yönetecek Log Analytics çalışma alanı için çalışma alanı KIMLIĞI ve çalışma alanı anahtarına ihtiyacınız olacak. Azure portal Log Analytics çalışma alanı ayarlarından alabilirsiniz.
 
-Ortamınızı yönetmek için Intune kullanmıyorsanız, cihazları el ile kaydedebilirsiniz **ayarları** her Surface hub'da:
+Ortamınızı yönetmek için Intune kullanmıyorsanız, her bir Surface Hub **ayarları** aracılığıyla cihazları el ile kaydedebilirsiniz:
 
-1. Surface hub'ınızdan, açık **ayarları**.
-2. İstendiğinde cihaz Yöneticisi kimlik bilgilerini girin.
-3. Tıklayın **bu cihaz**ve altında **izleme**, tıklayın **günlük analizi ayarları yapılandırma**.
-4. Seçin **izlemeyi etkinleştir**.
-5. Log Analytics günlük analizi Ayarları iletişim kutusuna **çalışma alanı kimliği** yazın **çalışma alanı anahtarı**.  
-   ![Ayarlar](./media/surface-hubs/settings.png)
-6. Tıklayın **Tamam** yapılandırmasını tamamlamak için.
+1. Surface Hub, **Ayarlar**' ı açın.
+2. İstendiğinde Cihaz Yöneticisi kimlik bilgilerini girin.
+3. **Bu cihaza**ve **izleme**' ye tıklayın **Log Analytics Ayarları Yapılandır**' a tıklayın.
+4. **Izlemeyi etkinleştir**' i seçin.
+5. Log Analytics Ayarları iletişim kutusunda, Log Analytics **çalışma alanı kimliğini** yazın ve **çalışma alanı anahtarını**yazın.  
+   ![ayarları](./media/surface-hubs/settings.png)
+6. Yapılandırmayı gerçekleştirmek için **Tamam** ' ı tıklatın.
 
-Olup olmadığını yapılandırma cihaza başarıyla uygulandı bildiren bir onay görünür. Bu durumda, aracıyı Azure İzleyici'ı başarıyla bağlandı belirten bir ileti görüntülenir. Cihaz daha sonra bir Azure burada görüntülemek ve üzerinde işlem İzleyici için veri gönderen başlatır.
+Yapılandırmanın cihaza başarıyla uygulanıp uygulanmadığını belirten bir onay görüntülenir. Bu ise, aracının Azure Izleyici 'ye başarıyla bağlandığını belirten bir ileti görünür. Daha sonra cihaz, verileri görüntüleyebileceğiniz ve üzerinde davranabileceğiniz Azure Izleyici 'ye veri göndermeye başlar.
 
-## <a name="monitor-surface-hubs"></a>İzleyici Surface hub'lar
-Surface hub'ları izlenmesi Azure İzleyicisi'ni kullanarak diğer kaydedilen cihazların izleme gibi büyük önem taşır.
+## <a name="monitor-surface-hubs"></a>Surface Hub 'Ları izleme
+Azure Izleyici 'yi kullanarak Surface Hub 'larınızı izlemek, diğer kayıtlı cihazları izlemeye çok benzer.
 
 [!INCLUDE [azure-monitor-solutions-overview-page](../../../includes/azure-monitor-solutions-overview-page.md)]
 
-Surface Hub kutucuğuna tıkladığınızda, cihazınızın durumu görüntülenir.
+Surface Hub kutucuğuna tıkladığınızda cihazınızın sistem durumu görüntülenir.
 
-   ![Surface Hub Panosu](./media/surface-hubs/surface-hub-dashboard.png)
+   ![Surface Hub panosu](./media/surface-hubs/surface-hub-dashboard.png)
 
-Oluşturabileceğiniz [uyarılar](../platform/alerts-overview.md) mevcut veya özel günlük aramaları göre. Azure İzleyici, Surface hub'larından topladığı veriler kullanarak, sorunlar ve cihazlarınız için tanımladığınız koşulların uyarısında için arama yapabilirsiniz.
+Mevcut veya özel günlük aramalarına göre [Uyarılar](../platform/alerts-overview.md) oluşturabilirsiniz. Azure Izleyici, Surface Hub 'larınızdan toplanan verileri kullanarak, cihazlarınız için tanımladığınız koşullarda sorun ve uyarı araması yapabilirsiniz.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Kullanım [sorgular Azure İzleyici'de oturum](../log-query/log-query-overview.md) ayrıntılı Surface Hub verilerini görüntülemek için.
-* Oluşturma [uyarılar](../platform/alerts-overview.md) Surface hub'larıyla sorunları ortaya çıktığında bunu size bildirecek.
+* Ayrıntılı Surface Hub verilerini görüntülemek için [Azure izleyici 'de günlük sorgularını](../log-query/log-query-overview.md) kullanın.
+* Surface Hub 'larınız ile ilgili sorunlar oluştuğunda size bildirimde bulunan [Uyarılar](../platform/alerts-overview.md) oluşturun.

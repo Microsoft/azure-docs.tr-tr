@@ -16,14 +16,14 @@ ms.topic: tutorial
 ms.date: 03/27/2018
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 7a592a7d0d8c9d32de83c92b258c4678dc3f8166
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 2d743b53f5ca74299c865d381f0832729fc956f4
+ms.sourcegitcommit: 13d5eb9657adf1c69cc8df12486470e66361224e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60188299"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68677587"
 ---
-# <a name="tutorial-automatically-scale-a-virtual-machine-scale-set-with-azure-powershell"></a>Öğretici: Azure PowerShell ile bir sanal makine ölçek kümesi otomatik olarak ölçeklendirme
+# <a name="tutorial-automatically-scale-a-virtual-machine-scale-set-with-azure-powershell"></a>Öğretici: Azure PowerShell ile sanal makine ölçek kümesini otomatik olarak ölçeklendirme
 
 [!INCLUDE [requires-azurerm](../../includes/requires-azurerm.md)]
 
@@ -72,7 +72,7 @@ Uygulamanızın talebi artarsa, ölçek kümenizdeki sanal makine örneklerinde 
 
 Bu kural için aşağıdaki parametreler kullanılır:
 
-| Parametre               | Açıklama                                                                                                         | Value          |
+| Parametre               | Açıklama                                                                                                         | Değer          |
 |-------------------------|---------------------------------------------------------------------------------------------------------------------|----------------|
 | *-MetricName*           | İzlenecek ve ölçek kümesi eylemlerinin uygulanmasında temel alınacak performans ölçümü.                                                   | CPU yüzdesi |
 | *-TimeGrain*            | Analiz için ölçümlerin toplanma sıklığı.                                                                   | 1 dakika       |
@@ -137,7 +137,7 @@ $myScaleProfile = New-AzureRmAutoscaleProfile `
 ```
 
 
-## <a name="apply-autoscale-rules-to-a-scale-set"></a>Otomatik ölçeklendirme kurallarını ölçek kümesine uygulama
+## <a name="apply-autoscale-profile-to-a-scale-set"></a>Ölçek kümesine otomatik ölçeklendirme profili uygulama
 Son adım, otomatik ölçeklendirme profilini ölçek kümenize uygulamaktır. Bundan sonra ölçek kümenizin ölçeği, uygulamanın talebine bağlı olarak daraltılabilir veya genişletilebilir. Otomatik ölçek profilini aşağıdaki gösterildiği gibi [Add-AzureRmAutoscaleSetting](/powershell/module/AzureRM.Insights/Add-AzureRmAutoscaleSetting) kullanarak uygulayın:
 
 ```azurepowershell-interactive
@@ -188,7 +188,7 @@ IpAddress
 52.168.121.216
 ```
 
-İlk sanal makine örneğinize bir uzak bağlantı oluşturun. Önceki komutlarda gösterildiği gibi, gerekli sanal makine örneği için kendi genel IP adresinizi ve bağlantı noktası numaranızı belirtin. İstendiğinde ölçek kümesini oluşturduğunuzda kullandığınız kimlik bilgilerini girin (örnek komutlarda varsayılan olarak, oldukları *azureuser* ve *P\@ssw0rd!*). Azure Cloud Shell kullanıyorsanız, bu adımı yerel PowerShell isteminden veya Uzak Masaüstü İstemcisinden gerçekleştirin. Aşağıdaki örnek sanal makine örneği *0*'a bağlanır:
+İlk sanal makine örneğinize bir uzak bağlantı oluşturun. Önceki komutlarda gösterildiği gibi, gerekli sanal makine örneği için kendi genel IP adresinizi ve bağlantı noktası numaranızı belirtin. İstendiğinde, ölçek kümesini oluştururken kullanılan kimlik bilgilerini girin (örnek komutlarda varsayılan olarak *azureuser* ve *\@P ssw0rd!* ). Azure Cloud Shell kullanıyorsanız, bu adımı yerel PowerShell isteminden veya Uzak Masaüstü İstemcisinden gerçekleştirin. Aşağıdaki örnek sanal makine örneği *0*'a bağlanır:
 
 ```powershell
 mstsc /v 52.168.121.216:50001

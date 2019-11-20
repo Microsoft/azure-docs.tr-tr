@@ -1,6 +1,6 @@
 ---
-title: Azure SQL veritabanı performans ayarlama Kılavuzu | Microsoft Docs
-description: El ile Azure SQL veritabanı sorgu performansı ayarlamak için öneriler kullanma hakkında bilgi edinin.
+title: Performans ayarlama kılavuzu
+description: Azure SQL veritabanı sorgu performansınızı el ile ayarlama önerilerini kullanma hakkında bilgi edinin.
 services: sql-database
 ms.service: sql-database
 ms.subservice: performance
@@ -10,57 +10,56 @@ ms.topic: conceptual
 author: juliemsft
 ms.author: jrasnick
 ms.reviewer: carlrab
-manager: craigg
 ms.date: 01/25/2019
-ms.openlocfilehash: a49d30d3058a6cf3ce82d56076f348861ad631ff
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 0dc3a121b30f33d533b1079d9c81501130487017
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60585143"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74009095"
 ---
-# <a name="manual-tune-query-performance-in-azure-sql-database"></a>El ile Azure SQL veritabanında sorgu performansını ayarlama
+# <a name="manual-tune-query-performance-in-azure-sql-database"></a>Azure SQL veritabanı 'nda el ile ayarlama sorgusu performansı
 
-SQL veritabanı ile karşılaştığınız bir performans sorunu belirledikten sonra bu makale yardımcı olmak için tasarlanmıştır:
+SQL veritabanı ile ilgili bir performans sorunu tanımladıktan sonra, bu makale size yardımcı olmak için tasarlanmıştır:
 
-- Uygulamanızı ayarlamak ve performansı artırmak bazı en iyi yöntemler uygulayın.
-- Dizinleri değiştirerek veritabanını ayarlama ve sorguları daha verimli bir şekilde verileri ile çalışma.
+- Uygulamanızı ayarlayın ve performansı iyileştirebilecek bazı en iyi yöntemleri uygulayın.
+- Dizinleri ve sorguları verilerle daha verimli çalışacak şekilde değiştirerek veritabanını ayarlayın.
 
-Bu makalede, Azure SQL veritabanı ile zaten çalıştıktan varsayılır [veritabanı Danışmanı önerilerini](sql-database-advisor.md) ve Azure SQL veritabanı [otomatik ayarlama önerileri](sql-database-automatic-tuning.md). Ayrıca geçirdiğinizden emin varsayar [genel bakış izleme ve ayarlama](sql-database-monitor-tune-overview.md) ve bununla ilgili makalelerde ilgili performans sorunlarını gidermek için. Ayrıca, bu makalede bir CPU kaynaklarının, işlem boyutunu artırarak çözülebilir ya da hizmet katmanını veritabanınıza daha fazla kaynak sağlamak için çalıştırma ile ilgili performans sorunu olmadığını varsayar.
+Bu makalede, Azure SQL veritabanı [veritabanı Danışmanı önerileri](sql-database-advisor.md) ve Azure SQL veritabanı [otomatik ayarlama önerileri](sql-database-automatic-tuning.md)aracılığıyla zaten çalıştık varsayılmaktadır. Ayrıca, [izleme ve ayarlamaya Ilişkin bir genel bakış](sql-database-monitor-tune-overview.md) ve performans sorunlarını giderme ile ilgili makalelere göz atın. Ayrıca, bu makalede, veritabanınıza daha fazla kaynak sağlamak üzere işlem boyutu veya hizmet katmanını artırarak çözülebildiğiniz bir CPU kaynaklarınız, çalıştırmaya ilişkin bir performans sorunu olmadığı varsayılır.
 
-## <a name="tune-your-application"></a>Uygulamanızı ayarlamak
+## <a name="tune-your-application"></a>Uygulamanızı ayarlama
 
-Geleneksel şirket içi SQL Server ilk kapasite planlama işlemi, üretim ortamında bir uygulama çalışan işlemi genellikle ayrılır. Donanım ve ürün lisansları ilk satın alınır ve performans ayarı daha sonra gerçekleştirilir. Azure SQL veritabanı kullandığınızda, uygulama çalıştırma ve bu ayarlama işleminin interweave iyi bir fikirdir. İsteğe bağlı kapasite için ödeme modeliyle, uygulamanızı genellikle hatalı bir uygulama için gelecekteki büyüme planlarını, tahmin üzerinde temel donanım üzerinde fazladan sağlama yerine artık, gerekli en düşük kaynak kullanacak şekilde ayarlayabilirsiniz. Bazı müşteriler olmayan bir uygulama ayarlamak seçin ve bunun yerine donanım kaynakları fazladan sağlama tercih. Meşgul bir dönem için bir anahtar uygulamasını değiştirmek istemiyorsanız, bu yaklaşım bir fikir olabilir. Ancak, Azure SQL veritabanı'nda hizmet katmanlarını kullandığınızda bir uygulama ayarlamayı kaynak gereksinimlerini ve daha düşük bir aylık fatura en aza indirebilirsiniz.
+Geleneksel şirket içi SQL Server, ilk kapasite planlaması süreci genellikle üretimde bir uygulama çalıştırma süreciyle ayrılır. İlk olarak donanım ve ürün lisansları satın alınır ve performans ayarlaması daha sonra yapılır. Azure SQL veritabanı 'nı kullandığınızda, uygulamayı çalıştırma ve ayarlama sürecini interweave iyi bir fikir olabilir. İsteğe bağlı kapasite için ödeme modeliyle, uygulamanızı, genellikle yanlış olan bir uygulama için gelecekteki büyüme planlarının tahminlerini temel alarak donanım üzerinde sağlama yerine, şimdi gereken minimum kaynakları kullanacak şekilde ayarlayabilirsiniz. Bazı müşteriler bir uygulamayı ayarlamayı tercih edebilir, bunun yerine donanım kaynakları sağlamayı tercih edebilir. Bu yaklaşım, yoğun bir dönemde anahtar uygulamayı değiştirmek istemediğiniz durumlarda iyi bir fikir olabilir. Ancak, bir uygulamanın ayarlanması, Azure SQL veritabanı 'nda hizmet katmanlarını kullandığınızda kaynak gereksinimlerini en aza indirebilir ve aylık faturaları azaltır.
 
 ### <a name="application-characteristics"></a>Uygulama özellikleri
 
-Azure SQL veritabanı hizmet katmanları, performans, kararlılık ve öngörülebilirlik için uygulama geliştirmek için tasarlanmış olmasına rağmen bazı en iyi uygulamaları daha iyi kaynakları bir işlem boyutta yararlanmak için uygulamanızı ayarlamak yardımcı olabilir. Birçok uygulama önemli olsa yüksek bir geçiş powershell'inizi yazarak performans kazancı elde edildi işlem boyutu veya hizmet katmanını, bazı uygulamalar daha yüksek bir düzeyde hizmet yararlanmak için ek ayar gerekir. Performansı artırmak için bu özelliklere sahip uygulamalar için ek bir uygulama ayarlamayı göz önünde bulundurun:
+Azure SQL veritabanı hizmet katmanları bir uygulama için performans kararlılığını ve öngörülebilirlik sağlamak üzere tasarlansa da, bazı en iyi yöntemler, bir işlem boyutundaki kaynaklardan daha iyi faydalanmak için uygulamanızı ayarlamanıza yardımcı olabilir. Birçok uygulamanın daha yüksek bir işlem boyutuna veya hizmet katmanına geçerek önemli performans kazançları olsa da, bazı uygulamalara daha yüksek bir hizmet düzeyinden yararlanmak için ek ayarlamalar yapmanız gerekir. Daha yüksek performans için, bu özelliklere sahip uygulamalar için ek uygulama ayarlamayı düşünün:
 
-- **"Geveze" davranışı nedeniyle yavaş performans sorunu olan uygulamalar**
+- **"Geveze" davranışı nedeniyle performansının yavaşlamasına neden olan uygulamalar**
 
-  Sık iletişim kuran uygulamaları için ağ gecikmesini duyarlıdır aşırı veri erişim işlemleri yapın. Bu tür bir SQL veritabanına veri erişim işlemlerinin sayısını azaltmak için uygulamaları değiştirmeniz gerekebilir. Örneğin, toplu işleme geçici sorgular veya saklı yordamlar için sorgular taşıma gibi teknikler kullanılarak uygulama performansını iyileştirebilir. Daha fazla bilgi için [toplu iş sorguları](#batch-queries).
+  Geveze uygulamaları, ağ gecikmesinden duyarlı aşırı veri erişimi işlemleri yapar. SQL veritabanına veri erişim işlemlerinin sayısını azaltmak için bu tür uygulamaları değiştirmeniz gerekebilir. Örneğin, geçici sorguları toplu olarak oluşturma veya sorguları saklı yordamlara taşıma gibi teknikleri kullanarak uygulama performansını artırabilirsiniz. Daha fazla bilgi için bkz. [Batch sorguları](#batch-queries).
 
-- **Tüm tek bir makine tarafından desteklenen bir kullanımı yoğun iş yükü ile veritabanları**
+- **Tek bir makine tarafından desteklenmeyen yoğun iş yüküne sahip veritabanları**
 
-   Aşan en yüksek Premium kaynaklarını veritabanları bilgi işlem boyutu iş yükünü ölçeklendirme alanından yararlanabilir. Daha fazla bilgi için [veritabanları arası parçalama](#cross-database-sharding) ve [işlevsel bölümleme](#functional-partitioning).
+   En yüksek Premium işlem boyutu kaynaklarını aşan veritabanları iş yükünü ölçeklendirmeden faydalanabilir. Daha fazla bilgi için bkz. [veritabanları arası](#cross-database-sharding) parçalar ve [işlevsel bölümlendirme](#functional-partitioning).
 
-- **En iyi olmayan sorguları sahip uygulamalar**
+- **En iyi alt sorguları olan uygulamalar**
 
-  Uygulamalar, özellikle de kötü performans gösteren sorguları düzenlediniz veri erişim katmanında, daha yüksek bir işlem boyutundan avantajlı olmayabilir. Bu, WHERE yan tümcesi eksik, dizinlerin eksik olması veya istatistikleri eski sorguları içerir. Bu uygulamalar, standart sorgu performansını ayarlama teknikleri yarar. Daha fazla bilgi için [eksik dizinleri](#identifying-and-adding-missing-indexes) ve [sorgu ayarlama ve ipucu](#query-tuning-and-hinting).
+  Özellikle, veri erişim katmanındaki, kötü ayarlı sorgulara sahip olan uygulamalar daha yüksek bir işlem boyutundan faydalanmayabilir. Bu, WHERE yan tümcesinin olmadığı, dizinleri eksik olan veya güncel olmayan istatistiklerdeki sorguları içerir. Bu uygulamalar standart sorgu performansı ayarlama tekniklerinden yararlanır. Daha fazla bilgi için bkz. [eksik dizinler](#identifying-and-adding-missing-indexes) ve [sorgu ayarlama ve ipucu](#query-tuning-and-hinting).
 
-- **Optimum veri erişim tasarımı sahip uygulamalar**
+- **En uygun alt veri erişimi tasarımına sahip uygulamalar**
 
-   Örneğin kilitlenmenin, iç veri erişim eşzamanlılık sorunları olan uygulamalar daha yüksek bir işlem boyutundan avantajlı olmayabilir. Azure önbellek hizmeti veya başka bir önbelleğe alma teknolojisini istemci tarafında önbelleğe alma verilerinizi Azure SQL veritabanında gidiş dönüş azaltmayı göz önünde bulundurun. Bkz: [uygulama katmanı önbelleğe alma](#application-tier-caching).
+   Devralınan veri erişimi eşzamanlılık sorunlarına sahip uygulamalar, örneğin, kilitlenmeme, daha yüksek bir işlem boyutundan faydalanabilir. Azure önbellek hizmeti veya başka bir önbelleğe alma teknolojisiyle istemci tarafında verileri önbelleğe alarak Azure SQL veritabanı ile gidiş dönüş işlemlerini azaltmayı göz önünde bulundurun. Bkz. [uygulama katmanı önbelleğe alma](#application-tier-caching).
 
-## <a name="tune-your-database"></a>Veritabanınızı ayarlayın
+## <a name="tune-your-database"></a>Veritabanınızı ayarlama
 
-Bu bölümde, uygulamanız için en iyi performans elde edin ve en düşük olası işlem boyutu çalıştırmak için Azure SQL veritabanı ayarlamak için kullanabileceğiniz bazı teknikleri atacağız. Aşağıdaki tekniklerden bazılarını geleneksel SQL Server en iyi ayarlama eşleşen, ancak diğerleri Azure SQL veritabanı'na özgüdür. Bazı durumlarda, tüketilen kaynaklar için ayarlama ve Azure SQL veritabanı'nda çalışmak için geleneksel SQL Server teknikleri genişletmek için alanlar bulmak bir veritabanı inceleyebilirsiniz.
+Bu bölümde, Azure SQL veritabanı 'nı, uygulamanız için en iyi performansı elde etmek ve mümkün olan en düşük işlem boyutunda çalıştırmak üzere ayarlamak için kullanabileceğiniz bazı tekniklerin göz atalım. Bu tekniklerin bazıları geleneksel SQL Server ayarlama en iyi uygulamaları ile eşleşir, ancak diğerleri Azure SQL veritabanı 'na özgüdür. Bazı durumlarda, Azure SQL veritabanı 'nda çalışmak üzere geleneksel SQL Server tekniklerini daha fazla ayarlamak ve genişletmek için bir veritabanının tüketilen kaynaklarını inceleyebilirsiniz.
 
-### <a name="identifying-and-adding-missing-indexes"></a>Tanımlama ve eksik dizinleri ekleme
+### <a name="identifying-and-adding-missing-indexes"></a>Eksik dizinleri tanımlama ve ekleme
 
-Ortak bir sorunu OLTP veritabanı performans için fiziksel veritabanı tasarımı ilişkilendirir. Genellikle veritabanı şemalarını tasarlanmış ve uygun ölçekte (veya yük veri hacmindeki) sınamadan birlikte gönderilir. Ne yazık ki, bir sorgu planı performansını bir küçük ölçekte kabul edilebilir ancak üretim düzeyinde veri birimlerini önemli ölçüde düşürebilir. En yaygın bu sorunu filtreleri ya da diğer kısıtlamalar sorguda karşılamak için uygun dizinleri eksikliği kaynağıdır. Genellikle, bir dizin arama yeterli, tablo olarak eksik dizinleri bildirimleri tarayın.
+OLTP veritabanı performansında yaygın bir sorun, fiziksel veritabanı tasarımıyla ilgilidir. Genellikle veritabanı şemaları, ölçeğe göre test etmeden tasarlanır ve gönderilir (yükleme ya da veri biriminde). Ne yazık ki, bir sorgu planının performansı küçük ölçekte kabul edilebilir, ancak üretim düzeyi veri birimlerinde önemli ölçüde düşebilir. Bu sorunun en yaygın kaynağı, bir sorgudaki filtreleri veya diğer kısıtlamaları karşılamak için uygun dizinlerin olmamasıdır. Genellikle, Dizin arama yeterli olduğunda tablo tarama olarak dizinler bildirimleri eksik olur.
 
-Bir arama yeterli, bu örnekte, seçilen sorgu planı tarama kullanır:
+Bu örnekte, seçili sorgu planı bir arama yeterli olduğunda bir tarama kullanır:
 
 ```sql
 DROP TABLE dbo.missingindex;
@@ -80,11 +79,11 @@ SELECT m1.col1
     WHERE m1.col2 = 4;
 ```
 
-![Eksik dizinleri içeren bir sorgu planı](./media/sql-database-performance-guidance/query_plan_missing_indexes.png)
+![Dizinleri eksik olan bir sorgu planı](./media/sql-database-performance-guidance/query_plan_missing_indexes.png)
 
-Azure SQL veritabanı, bulma ve düzeltme genel koşullar dizin eksik yardımcı olabilir. Azure SQL veritabanı'na yerleşik Dmv'leri içinde dizin bir sorguyu çalıştırmak için tahmini maliyetini önemli ölçüde azaltır sorgu derlemesi sırasında arayın. Sorgu yürütme işlemi sırasında SQL veritabanı, ne sıklıkta her bir sorgu planı yürütülür ve burada bu dizinin var tahmini boşluk imagined bir yürütme sorgu planı arasında izler izler. Bu Dmv'leri fiziksel veritabanı tasarımınız için hangi değişikliklerin bir veritabanı ve onun gerçek iş yükü için Genel İş Yükü Maliyeti iyileştirebilir hızlı bir şekilde tahmin etmek için kullanabilirsiniz.
+Azure SQL veritabanı, yaygın eksik dizin koşullarını bulmanıza ve düzeltmenize yardımcı olabilir. Azure SQL veritabanı 'nda bulunan DMVs 'ler, bir dizinin bir sorgu çalıştırmak için tahmin edilen maliyeti önemli ölçüde azaltacağından sorgu derlemelerinin ayrıntılarına bakın. Sorgu yürütme sırasında, SQL veritabanı her bir sorgu planının ne sıklıkta yürütüleceğini izler ve yürütülen sorgu planı arasındaki tahmini boşluğu ve bu dizinin bulunduğu yerde bir tane olduğunu izler. Bu DMVs 'yi, fiziksel veritabanı tasarımınızda hangi değişikliklerin bir veritabanının ve gerçek iş yükünün genel iş yükü maliyetini iyileştirebileceğini hızlı bir şekilde tahmin etmek için kullanabilirsiniz.
 
-Olası eksik dizinleri değerlendirmek için bu sorguyu kullanabilirsiniz:
+Bu sorguyu, olası eksik dizinleri değerlendirmek için kullanabilirsiniz:
 
 ```sql
 SELECT
@@ -111,25 +110,25 @@ FROM sys.dm_db_missing_index_groups AS mig
  ORDER BY migs.avg_total_user_cost * migs.avg_user_impact * (migs.user_seeks + migs.user_scans) DESC
 ```
 
-Bu örnekte sorgu, bu önerisine sonuçlandı:
+Bu örnekte, sorgu şu öneriye neden oldu:
 
 ```sql
 CREATE INDEX missing_index_5006_5005 ON [dbo].[missingindex] ([col2])  
 ```
 
-Oluşturulduktan sonra aynı SELECT deyimi bir arama yerine bir tarama kullanır ve ardından plan daha verimli bir şekilde yürütür başka bir plana seçer:
+Oluşturulduktan sonra, aynı SELECT açıklaması tarama yerine bir arama kullanan farklı bir plan seçer ve daha sonra planı daha verimli bir şekilde yürütür:
 
-![Düzeltilmiş dizinleri içeren bir sorgu planı](./media/sql-database-performance-guidance/query_plan_corrected_indexes.png)
+![Düzeltilen dizinler içeren bir sorgu planı](./media/sql-database-performance-guidance/query_plan_corrected_indexes.png)
 
-Önemli bir içgörü paylaşılan, bir ticari sistem GÇ kapasitesini daha, adanmış bir sunucunuz sınırlıdır. Azure SQL veritabanı hizmet katmanları her işlem boyutunun DTU, sistemin en fazla yararlanmak için gereksiz g/ç en aza indirme premium yoktur. Uygun fiziksel veritabanı tasarımı seçimleri her sorgu, gecikme sürelerini önemli ölçüde artırabilir eş zamanlı isteklerin ölçek birimi işlenen verimini artırmak ve sorgu karşılamak adına gerekli maliyetleri en aza indirmek. Eksik dizini Dmv'leri hakkında daha fazla bilgi için bkz. [sys.dm_db_missing_index_details](https://msdn.microsoft.com/library/ms345434.aspx).
+Temel Öngörüler, paylaşılan bir emtia sisteminin GÇ kapasitesinin, ayrılmış bir sunucu makinesinden daha fazla sınırlı olması. Azure SQL veritabanı hizmet katmanlarının her işlem boyutunu DTU 'da sistemin en yüksek avantajlarından yararlanmak için gereksiz GÇ 'yi en aza indirme konusunda bir Premium vardır. Uygun fiziksel veritabanı tasarım seçimleri, bireysel sorguların gecikmesini önemli ölçüde iyileştirebilir, ölçek birimi başına işlenen eşzamanlı isteklerin verimini artırır ve sorguyu karşılamak için gereken maliyetleri en aza indirir. Eksik dizin DMVs hakkında daha fazla bilgi için bkz. [sys. dm_db_missing_index_details](https://msdn.microsoft.com/library/ms345434.aspx).
 
-### <a name="query-tuning-and-hinting"></a>Sorguyu ayarlamayı ve ipuçları
+### <a name="query-tuning-and-hinting"></a>Sorgu ayarlama ve ipuçcu
 
-Azure SQL veritabanında sorgu iyileştiricisi, geleneksel SQL Server sorgu iyileştiricisi için benzerdir. Sorguları ayarlama ve mantık anlamak için en iyi yöntemlerin çoğu sorgu iyileştiricisi modeli sınırlamaları Azure SQL veritabanı için de geçerlidir. Azure SQL veritabanı sorgularında ayarlamak, toplam kaynak taleplerini azaltmak ek bir avantaja alabilirsiniz. Uygulamanızı beklemediğiniz ayarlanmış eşdeğer daha düşük bir maliyetle daha düşük bir işlem boyutta çalıştırılabildiği çalıştırılacak mümkün olabilir.
+Azure SQL veritabanı 'nda sorgu iyileştiricisi geleneksel SQL Server sorgu iyileştiriciye benzerdir. Sorgu iyileştiricilerini ayarlama ve sorgu iyileştiricilerini anlamak için en iyi yöntemler, Azure SQL veritabanı için de geçerlidir. Azure SQL veritabanı 'nda sorguları ayarlarsanız, toplu kaynak taleplerini azaltmanın ek avantajını elde edebilirsiniz. Uygulamanız, daha düşük bir işlem boyutunda çalıştırılabildiğinden, daha düşük bir maliyetle çalıştırılabilir.
 
-SQL Server'da ortak ve Azure SQL veritabanı'na da geçerli bir örnek nasıl sorgu iyileştiricisi "olduğunu gösteriyorsa" parametreleri. Derleme sırasında daha iyi bir sorgu planı oluşturmak olup olmadığını belirlemek için bir parametrenin geçerli değeri sorgu iyileştiricisi değerlendirir. Bu strateji genellikle bilinen parametre değerleri derlenmiş bir plan kıyasla önemli ölçüde daha hızlı bir sorgu planı açabilir ancak şu anda imperfectly hem çalıştığını SQL Server ve Azure SQL veritabanı'nda. Bazen parametresi sızılmasını değil ve parametre bazen sızılmasını ancak oluşturulan bir iş yükü içinde parametre değerlerinin tüm için optimum plandır. Microsoft hedefi daha bilinçli olarak belirtin ve parametre algılaması varsayılan davranışını geçersiz sorgu ipuçları (yönergeleri) içerir. Genellikle, ipuçları kullanırsanız, varsayılan SQL Server veya Azure SQL veritabanı davranışı için belirli bir müşteri iş yükü kusurlu olduğu durumlarda düzeltebilirsiniz.
+SQL Server ' de yaygın olan ve Azure SQL veritabanı için de geçerli olan bir örnek, sorgu iyileştiricinin "en iyi duruma getirme" parametreleridir. Derleme sırasında sorgu iyileştiricisi, daha iyi bir sorgu planı oluşturulup oluşturulmayacağını anlamak için bir parametrenin geçerli değerini değerlendirir. Bu strateji genellikle bilinen parametre değerleri olmadan derlenen bir plandan önemli ölçüde daha hızlı bir sorgu planına yol açabilse de şu anda SQL Server ve Azure SQL veritabanı 'nda sorunsuz bir şekilde çalışır. Bazen parametre bir ön plana uygulanmaz ve bazen parametre bir yük dengelenir ancak oluşturulan plan, bir iş yükünde bulunan parametre değerlerinin tam kümesi için en uygun alt düzeyde olur. Microsoft, sorgu ipuçları (yönergeler) içerir, böylece amacı daha bilinçli olarak belirtebilir ve parametre algılaması varsayılan davranışını geçersiz kılabilirsiniz. İpuçları kullanıyorsanız, genellikle varsayılan SQL Server veya Azure SQL veritabanı davranışının belirli bir müşteri iş yükü için kusurda olduğu durumları giderebilirsiniz.
 
-Sonraki örnek, Sorgu işlemcisi, hem performans ve kaynak gereksinimleri için optimum bir plana nasıl oluşturabileceğiniz gösterilmektedir. Bu örnek ayrıca sorgu ipucu kullanıyorsanız, SQL veritabanınızın sorgu çalıştırma zaman ve kaynak gereksinimlerini azaltmak gösterir:
+Sonraki örnekte, sorgu işlemcisinin performans ve kaynak gereksinimleri için her ikisi de en uygun olan bir planı nasıl oluşturabileceği gösterilmektedir. Bu örnek ayrıca bir sorgu ipucu kullanıyorsanız, SQL veritabanınızın sorgu çalışma süresini ve kaynak gereksinimlerini azaltabilirsiniz.
 
 ```sql
 DROP TABLE psptest1;
@@ -169,7 +168,7 @@ CREATE TABLE t1 (col1 int primary key, col2 int, col3 binary(200));
 GO
 ```
 
-Kurulum kodu, veri dağıtımı dengesiz bir tablo oluşturur. En iyi sorgu planı hangi parametre seçili göre farklılık gösterir. Ne yazık ki, önbelleğe alma davranışını planı her zaman en yaygın parametre değerine göre sorgu derlemeniz değil. Bu nedenle, önbelleğe alınmasını ve hatta farklı bir plan daha iyi bir plan seçenek ortalama olabilir, birçok değer için kullanılan en iyi olmayan bir plan için mümkündür. Ardından sorgu planı, bir özel sorgu ipucu varsa hariç, aynıdır, iki saklı yordam oluşturur.
+Kurulum kodu, asimetrik veri dağıtımına sahip bir tablo oluşturur. En iyi sorgu planı, hangi parametrenin seçildiğinden farklıdır. Ne yazık ki, plan önbelleği davranışı en sık kullanılan parametre değerine göre sorguyu her zaman yeniden deretmez. Bu nedenle, bir alt en iyi planın önbelleğe alınması ve çok sayıda değer için kullanılması, farklı bir plan ortalama üzerinde daha iyi bir plan seçeneği olabileceğinden bile mümkündür. Ardından sorgu planı aynı olan iki saklı yordam oluşturur, bunun dışında özel bir sorgu ipucu vardır.
 
 ```sql
 -- Prime Procedure Cache with scan plan
@@ -186,7 +185,7 @@ WHILE @i < 1000
     END
 ```
 
-Sonuçları elde edilen telemetri verileri farklı olacak şekilde, örneğin, bölüm 2 başlamadan önce en az 10 dakika bekleyin öneririz.
+Sonucun 2. bölümüne başlamadan önce en az 10 dakika beklemeniz önerilir, böylece sonuçlar elde edilen telemetri verilerinde ayrı olur.
 
 ```sql
 EXEC psp2 @param2=1;
@@ -201,21 +200,21 @@ DECLARE @i int = 0;
     END
 ```
 
-Bu örnekte her parçası (sınama veri kümesi olarak kullanmak için yeterli yük oluşturmak için) bir parametreli INSERT deyimini 1.000 kez çalıştırmak çalışır. Saklı yordamlar yürütüldüğünde, Sorgu işlemcisi (parametre "algılaması"), derleme sırasında yordamına geçirilen parametre değeri inceler. İşlemci, sonuçta elde edilen planı önbelleğe alır ve parametre değeri farklı olsa bile sonraki çağrılar için kullanır. Her durumda en iyi planı kullanılabilir değil. Bazen iyileştirici olduğunda sorguyu önce derlenen gelen özel durumu yerine ortalama çalışması için daha iyi bir plan seçmek için kılavuz gerekir. Bu örnekte, ilk planı parametreyle eşleşen her bir değeri bulmak için tüm satırları okuyan bir "tarama" planı oluşturur:
+Bu örneğin her bir bölümü parametreli INSERT ifadesini 1.000 kez çalıştırmayı dener (test veri kümesi olarak kullanmak için yeterli yük oluşturmak için). Saklı yordamları yürüttüğünde sorgu işlemcisi, ilk derlemesi sırasında yordama geçirilen parametre değerini inceler (parametre "algılaması"). İşlemci sonuç planını önbelleğe alır ve parametre değeri farklı olsa bile daha sonra çağırmaları için kullanır. En iyi plan, her durumda kullanılmamış olabilir. Bazen, sorgunun ilk derlenmesi sırasında belirli bir durum yerine ortalama durum için daha iyi bir plan seçmek üzere iyileştiriciye kılavuzluk etmeniz gerekir. Bu örnekte, ilk plan, parametresiyle eşleşen her değeri bulmak için tüm satırları okuyan bir "tarama" planı oluşturur:
 
-![Ayarı taraması planı kullanarak sorgulama](./media/sql-database-performance-guidance/query_tuning_1.png)
+![Tarama planı kullanarak sorgu ayarlama](./media/sql-database-performance-guidance/query_tuning_1.png)
 
-Biz yordamı ' % s'değeri 1'i kullanarak yürütülen olduğundan, sonuçta elde edilen plan 1 değeri için en iyi ancak tablosundaki diğer tüm değerler için optimum. Plan daha yavaş çalışır ve daha fazla kaynak kullandığı için her plan rastgele olarak çekmek için olsaydı istiyor büyük olasılıkla sonucu değildir.
+Yordamı 1 değerini kullanarak yürütüyoruz, sonuçta elde edilen plan 1 değeri için idealdir, ancak tablodaki diğer tüm değerler için en uygun alt değerdir. Sonuç büyük olasılıkla, her bir planı daha yavaş gerçekleştirdiğinden ve daha fazla kaynak kullandığından, her planı rastgele olarak seçmeniz durumunda istediğiniz şeydir.
 
-Test çalıştırmasıyla çalıştırırsanız `SET STATISTICS IO` kümesine `ON`, mantıksal tarama işi bu örnekte, arka planda gerçekleştirilir. (Bu yalnızca bir satır döndürülecek ortalama durum söz konusuysa verimsiz bir durumdur) planına göre yapılır 1,148 okuma olduğunu görebilirsiniz:
+`SET STATISTICS IO` `ON`olarak ayarlanan testi çalıştırırsanız, bu örnekteki mantıksal tarama çalışması arka planda yapılır. Plan tarafından gerçekleştirilen 1.148 okuma olduğunu (ortalama durum yalnızca bir satır döndürmek ise verimsiz olduğunu) görebilirsiniz:
 
-![Sorgu mantıksal bir tarama kullanarak ayarlama](./media/sql-database-performance-guidance/query_tuning_2.png)
+![Mantıksal tarama kullanarak sorgu ayarlama](./media/sql-database-performance-guidance/query_tuning_2.png)
 
-Örnek ikinci bölümü, belirli bir değer derleme işlemi sırasında kullanılacak iyileştirici bildirmek için bir sorgu ipucu kullanır. Bu durumda, parametre olarak geçirilen değer yok saymak için Sorgu işlemcisi zorlar ve bunun yerine varsaymak `UNKNOWN`. Bu, ortalama sıklığını (eğriltme yoksayar) tablosunda olan bir değere başvurur. Sonuçta elde edilen planı, daha hızlı ve daha az kaynak bölümü bu örnek 1 ortalama olarak daha planı kullanılıyorsa bir arama tabanlı bir plandır:
+Örneğin ikinci bölümü, derleme işlemi sırasında iyileştiricinin belirli bir değeri kullanmasını söylemek için bir sorgu ipucu kullanır. Bu durumda, sorgu işlemcisini parametre olarak geçirilen değeri yok saymaya zorlar ve bunun yerine `UNKNOWN`varsay. Bu, tabloda ortalama sıklık değeri olan bir değere başvurur (eğriliği yok sayar). Elde edilen plan, bu örnekte daha hızlı olan ve ortalama olarak daha az kaynak kullanan bir arama tabanlı plandır:
 
-![Bir sorgu ipucunu kullanarak sorguyu ayarlama](./media/sql-database-performance-guidance/query_tuning_3.png)
+![Sorgu ipucu kullanarak sorgu ayarlama](./media/sql-database-performance-guidance/query_tuning_3.png)
 
-Aslında gördüğünüz **sys.resource_stats** tablo (test ve ne zaman veri tablosunu dolduran yürütme zamanından bir gecikme olur). Bu örnek, 22:25: 00'zaman penceresi sırasında yürütülen bölüm 1 ve 2. Bölüm 22:35: 00'da yürütülür. Önceki bir zaman penceresi (nedeniyle, verimlilik geliştirmelerini planı) daha yeni bir pencere daha fazla kaynak kullanılır.
+Bu etkiyi **sys. resource_stats** tablosunda görebilirsiniz (testi yürüttüğünüzde ve veriler tabloyu doldurışınızda bir gecikme vardır). Bu örnekte, 1. Bölüm 22:25:00 zaman penceresi sırasında yürütülür ve Bölüm 2 22:35:00 ' de yürütülür. Önceki zaman penceresi, daha sonraki bir zaman penceresinde daha fazla kaynak kullandı (plan verimlilik geliştirmeleri nedeniyle).
 
 ```sql
 SELECT TOP 1000 *
@@ -224,45 +223,45 @@ WHERE database_name = 'resource1'
 ORDER BY start_time DESC
 ```
 
-![Sorgu örnek sonuçlar ayarlama](./media/sql-database-performance-guidance/query_tuning_4.png)
+![Sorgu ayarlama örnek sonuçları](./media/sql-database-performance-guidance/query_tuning_4.png)
 
 > [!NOTE]
-> Bu örnekte birim kasıtlı olarak küçük olsa da, alt en uygun parametreleri etkisini daha büyük veritabanları üzerinde özellikle önemli olabilir. Aşırı durumlarda fark hızlı çalışmaları saniye ile yavaş çalışmalarının saat arasında olabilir.
+> Bu örnekteki birim bilinçli olarak küçük olsa da, alt optimum parametrelerin etkisi özellikle daha büyük veritabanlarında çok önemli olabilir. Büyük durumlarda farklılık, yavaş durumlar için hızlı durumlar ve saatler için saniyeler arasında olabilir.
 
-İnceleyebilirsiniz **sys.resource_stats** kaynak bir test için başka bir test daha az veya daha fazla kaynak kullanıp kullanmadığını belirlemek için. Veri karşılaştırdığınızda, bunlar aynı 5 dakikalık penceresinde böylece test zamanlama ayrı **sys.resource_stats** görünümü. Kullanılan kaynakları toplam miktarı en aza indirmek ve yoğun kaynak değil en aza indirmek alıştırmalar hedefidir. Genellikle, gecikme süresi için kod parçasını en iyi duruma getirme Ayrıca kaynak tüketimini azaltır. Bir uygulamaya yaptığınız değişiklikler gereklidir ve değişiklikleri sorgu ipuçları uygulamada kullanıyor olabilecek birisi için müşteri deneyimini olumsuz yönde etkilemediğinden emin olun.
+Bir testin kaynağının başka bir testten daha fazla veya daha az kaynak kullanıp kullanmadığını anlamak için, **sys. resource_stats** ' i inceleyebilirsiniz. Verileri karşılaştırdığınızda, test zamanlamasını, **sys. resource_stats** görünümündeki 5 dakikalık bir pencerede kalmayacak şekilde ayırın. Alıştırma hedefi, en yoğun kaynakları en aza indirmek için kullanılan toplam kaynak miktarını en aza indirmektir. Genellikle, gecikme için kod parçasını iyileştirmek kaynak tüketimini de azaltır. Bir uygulamada yaptığınız değişikliklerin gerekli olduğundan ve değişikliklerin uygulamada sorgu ipuçları kullanıyor olabilecek bir kişiye ait müşteri deneyimini olumsuz şekilde etkilemediğinden emin olun.
 
-Bir iş yükü sorguları yinelenen bir dizi varsa, genellikle yakalamak ve veritabanını barındırmak için gereken en düşük kaynak boyutu birim sürücüleri için en iyi hale getirme planı Seçimlerinizden doğrulamak için mantıklıdır. Bazen, doğruladıktan sonra bunlar değil düşürülmüş olduğunu emin olmanıza yardımcı olmak için planlar yeniden gözden geçirin. Daha fazla bilgi edinebilirsiniz [sorgu ipuçları (Transact-SQL)](https://msdn.microsoft.com/library/ms181714.aspx).
+Bir iş yükünün yinelenen sorgular kümesi varsa, genellikle, veritabanını barındırmak için gereken en düşük kaynak boyutu birimini barındıracağından plan seçimlerinizin optimizasyonu ve doğrulanması mantıklı olur. Bunu doğruladıktan sonra, bunların düşürülmediğinden emin olmanıza yardımcı olacak planları bazen yeniden inceleyin. [Sorgu ipuçları (Transact-SQL)](https://msdn.microsoft.com/library/ms181714.aspx)hakkında daha fazla bilgi edinebilirsiniz.
 
-### <a name="cross-database-sharding"></a>Çapraz veritabanı parçalama
+### <a name="cross-database-sharding"></a>Veritabanları arası parçalama
 
-Azure SQL veritabanı ticari donanımlarda çalıştığından, tek bir veritabanı için kapasite sınırları geleneksel şirket içi SQL Server yüklemesi için daha düşük. Bazı müşteriler işlemleri tek bir veritabanının Azure SQL veritabanı'nda sınırları içinde uygun olmayan zaman birden çok veritabanı üzerinde veritabanı işlemleri yaymak için parçalama tekniklerini kullanın. Azure SQL veritabanı'nda parçalama teknikleri kullanan çoğu müşteri verilerine tek bir boyutta birden fazla veritabanında bölün. Bu yaklaşım için OLTP uygulamalar genellikle yalnızca bir satır veya satır şema küçük bir gruba uygulanan işlemler gerçekleştirmek bilmeniz gerekir.
+Azure SQL veritabanı, emtia donanımında çalıştığından, tek bir veritabanı için kapasite sınırları geleneksel bir şirket içi SQL Server yüklemesi için daha düşüktür. Bazı müşteriler, Azure SQL veritabanı 'ndaki tek bir veritabanının sınırlarına uygun olmayan işlemler, veritabanı işlemlerini birden çok veritabanı üzerinden yaymak için parçalara ayırma tekniklerini kullanır. Azure SQL veritabanı 'nda parçalama tekniklerini kullanan çoğu müşteri, verilerini birden çok veritabanı arasında tek bir boyutta böler. Bu yaklaşım için, OLTP uygulamalarının genelde yalnızca bir satıra veya şemadaki küçük bir satır grubuna uygulanan işlemler yaptığını anlamanız gerekir.
 
 > [!NOTE]
-> SQL veritabanı artık ile parçalama yardımcı olmak için bir kitaplık sağlar. Daha fazla bilgi için [elastik veritabanı istemci kitaplığına genel bakış](sql-database-elastic-database-client-library.md).
+> SQL veritabanı artık, parçalı oluşturmaya yardımcı olacak bir kitaplık sağlıyor. Daha fazla bilgi için bkz. [elastik veritabanı istemci kitaplığına genel bakış](sql-database-elastic-database-client-library.md).
 
-Bir veritabanı, müşteri adına, sırası ve sipariş ayrıntıları (örneğin, SQL Server ile birlikte gelen geleneksel örnek Northwind veritabanı) varsa, örneğin, bu verileri birden çok veritabanlarına bir müşteri sipariş ayrıntısı ve ilgili sipariş ile gruplayarak bölebilir bilgiler. Müşteri verileri tek bir veritabanında kalır garanti edebilir. Uygulama, farklı müşteriler, etkili bir şekilde yük birden fazla veritabanında yayılmasını veritabanlarında ayırırsınız. Parçalama, müşterilerin yalnızca en fazla veritabanı boyutu sınırı kaçınabilirsiniz, ancak Azure SQL veritabanı, DTU tek tek her veritabanında uygun olduğu sürece farklı bilgi işlem boyutlarına sınırlardan önemli ölçüde daha büyük olan iş yükleri de işleyebilirsiniz.
+Örneğin, bir veritabanında müşteri adı, sipariş ve sipariş ayrıntıları varsa (SQL Server ile birlikte gelen geleneksel örnek Northwind veritabanı gibi), bir müşteriyi ilgili sipariş ve sipariş ayrıntısı ile gruplayarak, bu verileri birden çok veritabanına bölebilirsiniz bilgi. Müşterinin verilerinin tek bir veritabanında kalmasını garanti edebilirsiniz. Uygulama, farklı müşterileri veritabanları genelinde bölerek yük yükünü etkin bir şekilde birden çok veritabanı arasında bölüşyordu. Parçalama sayesinde, müşteriler yalnızca en fazla veritabanı boyutu sınırını önlemez, ancak Azure SQL veritabanı, her bir veritabanı DTU 'ya sığdığı sürece, farklı işlem boyutlarının limitlerinden önemli ölçüde daha büyük olan iş yüklerini de işleyebilir.
 
-Veritabanı parçalama bir çözüm için toplam kaynak kapasitesini azaltmaz ancak birden çok veritabanı yayılan çok büyük çözümlerde destekleyen en son derece etkilidir. Her veritabanı, çok büyük desteklemek için farklı işlem boyutta yüksek kaynak gereksinimlerine "etkin" veritabanlarıyla çalıştırabilirsiniz.
+Veritabanı parçaları bir çözüm için toplam kaynak kapasitesini azaltmasa da, birden fazla veritabanına yayılan çok büyük çözümlerin desteklenmesi oldukça etkilidir. Her veritabanı, yüksek kaynak gereksinimleriyle çok büyük, "etkili" veritabanlarını desteklemek için farklı bir işlem boyutuyla çalıştırılabilir.
 
 ### <a name="functional-partitioning"></a>İşlevsel bölümleme
 
-SQL Server kullanıcıları tek tek bir veritabanında çok sayıda işlevleri genellikle birleştirin. Örneğin, bir uygulamanın mantıksal deposunun envanterini yönetmek için varsa, veritabanı satınalma siparişleri, saklı yordamlar ve ayın son raporlamayı yönetme dizinli ya da gerçekleştirilmiş görünümler izleme envanteri ile ilişkili mantıksal olabilir. Bu teknik veritabanı için yedekleme gibi işlemleri yönetmenizi kolaylaştırır, ancak bir uygulamanın tüm işlevlerinin yükü işlemek için donanım boyutlandırmak de gerektirir.
+SQL Server kullanıcılar genellikle tek bir veritabanında birçok işlevi birleştirir. Örneğin, bir uygulamanın bir mağaza için envanteri yönetme mantığı varsa, bu veritabanı envanterle ilişkili mantığa sahip olabilir, satın alma siparişleri, saklı yordamlar ve aylık son raporlamayı yöneten dizinli veya gerçekleştirilmiş görünümler olabilir. Bu teknik, yedekleme gibi işlemler için veritabanını yönetmeyi kolaylaştırır, ancak aynı zamanda bir uygulamanın tüm işlevlerinde en yüksek yükü işlemek için donanımı boyutlandırmanıza da gerek duyar.
 
-Azure SQL veritabanı'nda bir ölçek genişletmeli mimarisinden kullanırsanız, uygulamanın farklı veritabanlarındaki farklı işlevlere bölmek için iyi bir fikirdir. Bu tekniği kullanarak, her uygulamayı bağımsız şekilde ölçeklendirir. Uygulama meşgul duruma (ve veritabanı üzerindeki yükü artırır gibi), yönetici uygulamada her işlev için bağımsız işlem boyutları seçebilirsiniz. Bu mimari ile sınır, uygulamanın yük, birden çok makineye yayılmış çünkü tek ticari makine işleyebileceğinden daha büyük olabilir.
+Azure SQL veritabanında bir genişleme mimarisi kullanıyorsanız, bir uygulamanın farklı işlevlerini farklı veritabanlarına bölmek iyi bir fikirdir. Bu tekniği kullanarak her bir uygulama bağımsız olarak ölçeklendirilir. Bir uygulama, busier olur (ve veritabanındaki Yük arttıkça), yönetici uygulamadaki her bir işlev için bağımsız işlem boyutları seçebilir. Bu mimaride, bu mimariye sahip bir uygulama, yük birden çok makineye yayıldığı için tek bir emtia makinesinden daha büyük olabilir.
 
-### <a name="batch-queries"></a>Toplu işlem sorguları
+### <a name="batch-queries"></a>Toplu iş sorguları
 
-Yüksek hacimli kullanarak verilere erişen uygulamalar için sık, geçici sorgulama, yanıt süresi önemli miktarda uygulama katmanı ve Azure SQL veritabanı katmanı arasında ağ iletişimi harcanır. Hem uygulama hem de Azure SQL veritabanı aynı veri merkezinde olsa bile, ikisi arasındaki ağ gecikme süresi çok sayıda veri tarafından erişim işlemleri büyütülmüş. Ağ azaltmak için veri erişim işlemleri için hepsini Geçiren, geçici sorgular ya da toplu veya olarak saklı yordamlar derlemeye seçeneğini kullanmayı düşünün. Geçici sorgular toplu varsa, birden çok sorgu tek bir seyahat büyük bir toplu olarak Azure SQL veritabanı'na gönderebilirsiniz. Geçici sorgular bir saklı yordamda derlerseniz, bunları toplu olarak, aynı sonucu elde. Ayrıca bir saklı yordamı kullanarak saklı yordamı yeniden kullanabilmeniz için Azure SQL veritabanında sorgu planlarına önbelleğe alma şansını artırmak avantajı sağlar.
+Yüksek hacimli, sık sık, geçici sorgulama kullanarak verilere erişen uygulamalar için, uygulama katmanı ve Azure SQL veritabanı katmanı arasındaki ağ iletişiminde önemli miktarda yanıt süresi harcanmıştır. Hem uygulama hem de Azure SQL veritabanı aynı veri merkezinde olsa bile, ikisi arasındaki ağ gecikmesi çok sayıda veri erişim işlemi ile büyütülebilir. Veri erişimi işlemlerine yönelik ağ gidiş dönüşlerini azaltmak için, geçici sorguları toplu olarak toplu olarak veya saklı yordamlar olarak derlemek için seçeneğini kullanmayı düşünün. Geçici sorguları toplu olarak oluşturursanız, Azure SQL veritabanı 'na tek bir yolculuğa çok büyük bir toplu iş olarak birden fazla sorgu gönderebilirsiniz. Saklı yordamda geçici sorgular derlerseniz, bu sonuçları toplu olarak elde edebilirsiniz. Saklı yordamın kullanılması, Azure SQL veritabanı 'nda sorgu planlarını önbelleğe alma olasılığını arttırmaya yönelik olarak, saklı yordamı yeniden kullanabilmeniz için de size yararlanır.
 
-Bazı uygulamalar yazma yoğunluklu olan. Bazen yazma birlikte batch nasıl dikkate alarak, bir veritabanındaki toplam GÇ yükü azaltabilir. Genellikle, bu saklı yordamlar ve geçici toplu otomatik tamamlama işlemleri yerine açık işlemleri kullanmanız yeterlidir. Kullanabileceğiniz farklı teknik değerlendirme için bkz: [teknikleri Azure SQL veritabanı uygulamaları için toplu işleme](https://msdn.microsoft.com/library/windowsazure/dn132615.aspx). Toplu işlem için doğru model bulmak için kendi iş yükü ile denemeler yapın. Bir model biraz farklı işlemsel tutarlılık garantisi olabileceğini anlamak emin olun. Kaynak kullanımını en aza indiren doğru iş yükü bulma, tutarlılık ve performans dengelemeler doğru birleşimini bulma gerektirir.
+Bazı uygulamalar yazma yoğunluğu vardır. Bazen bir veritabanındaki toplam GÇ yükünü, toplu olarak nasıl bir araya yazabileceğini göz önünde bulundurarak azaltabilirsiniz. Genellikle bu, saklı yordamlarda ve geçici toplu işlemlerde işlemleri otomatik olarak yürütmek yerine açık işlemler kullanmanın en kolay bir işlemdir. Kullanabileceğiniz farklı tekniklerin değerlendirmesi için bkz. [Azure 'DA SQL veritabanı uygulamaları Için toplu işlem teknikleri](sql-database-use-batching-to-improve-performance.md). Toplu işleme yönelik doğru modeli bulmak için kendi iş yükünüzü deneyin. Bir modelin biraz farklı işlem tutarlılığı garantisi olabileceğini anladığınızdan emin olun. Kaynak kullanımını en aza indiren doğru iş yükünü bulmak için tutarlılık ve performans dengelerinin doğru birleşimini bulmanız gerekir.
 
 ### <a name="application-tier-caching"></a>Uygulama katmanı önbelleğe alma
 
-Bazı veritabanı uygulamalarının okuma yoğunluklu iş yükleri vardır. Katmanlar önbelleğe alma, veritabanı üzerindeki yükü azaltabilir ve potansiyel olarak Azure SQL veritabanı'nı kullanarak bir veritabanını desteklemek için gereken işlem boyutunu azaltabilir. İle [Azure önbelleği için Redis](https://azure.microsoft.com/services/cache/), okuma yoğun iş yükü varsa, bir kez veri okuma (ya da belki nasıl yapılandırıldığına bağlı olarak bir kez uygulama katmanlı makine başına) ve SQL veritabanınızı dışında veri depolayın. (CPU ve okuma GÇ) veritabanı yükünü azaltmak için bir yol budur ancak önbellekten okunan verilerin eşitlenmemiş veritabanındaki verilerle olabileceğinden işlem tutarlılığı üzerinde bir etkisi olan. Birçok uygulamada tutarsızlık belirli bir düzeyde kabul edilebilir olsa da, tüm iş yükleri için geçerli değildir. Bir uygulama katmanı önbelleğe alma stratejisi uygulamadan önce herhangi bir uygulama gereksinimi tam olarak anlamanız gerekir.
+Bazı veritabanı uygulamalarında okuma ağır iş yükleri vardır. Önbelleğe alma katmanları, veritabanının yükünü azaltabilir ve Azure SQL veritabanı 'nı kullanarak bir veritabanını desteklemek için gereken işlem boyutunu azaltabilir. [Redin Için Azure Cache](https://azure.microsoft.com/services/cache/)ile, okuma ağır bir iş yükünüz varsa, verileri bir kez (veya belki de her bir uygulama katmanı makinesi için bir kez) okuyabilir ve sonra bu verileri SQL veritabanınızın dışına kaydedebilirsiniz. Bu, veritabanı yükünü (CPU ve Okuma GÇ) azaltmanın bir yoludur, ancak önbellekten okunan veriler veritabanındaki verilerle eşitlenmemiş olabileceğinden işlem tutarlılığı üzerinde bir etkisi vardır. Birçok uygulamada, bazı tutarsızlık düzeyi kabul edilebilir, ancak bu değer tüm iş yükleri için geçerli değildir. Uygulama katmanı önbelleğe alma stratejisini uygulamadan önce herhangi bir uygulama gereksinimini tam olarak anlamanız gerekir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - DTU tabanlı hizmet katmanları hakkında daha fazla bilgi için bkz. [DTU tabanlı satın alma modeli](sql-database-service-tiers-dtu.md).
 - Sanal çekirdek tabanlı hizmet katmanları hakkında daha fazla bilgi için bkz. [sanal çekirdek tabanlı satın alma modeli](sql-database-service-tiers-vcore.md).
-- Elastik havuzlar hakkında daha fazla bilgi için bkz: [Azure elastik havuzu nedir?](sql-database-elastic-pool.md)
-- Performans ve elastik havuzlar hakkında daha fazla bilgi için bkz: [ne zaman elastik havuz göz önünde bulundurun.](sql-database-elastic-pool-guidance.md)
+- Elastik havuzlar hakkında daha fazla bilgi için bkz. [Azure elastik havuzu nedir?](sql-database-elastic-pool.md)
+- Performans ve elastik havuzlar hakkında daha fazla bilgi için bkz. [elastik havuzun ne zaman dikkate alınması](sql-database-elastic-pool-guidance.md)

@@ -1,6 +1,6 @@
 ---
-title: SQL veritabanı durumunu izlemek için Azure kaynak durumu kullanın | Microsoft Docs
-description: Azure kaynak durumu, SQL veritabanı sistem durumu, tanılamanıza ve bir Azure sorunu SQL kaynaklarınızı etkilediğinde, destek almanıza yardımcı izlemek için kullanın.
+title: Veritabanı sistem durumunu izlemek için Azure Kaynak Durumu kullanma
+description: SQL veritabanı sistem durumunu izlemek için Azure Kaynak Durumu kullanın, bir Azure sorunu SQL kaynaklarınızı etkilediğinde desteği tanılamanıza ve destek almanıza yardımcı olur.
 services: sql-database
 ms.service: sql-database
 ms.subservice: monitor
@@ -10,73 +10,72 @@ ms.topic: conceptual
 author: aamalvea
 ms.author: aamalvea
 ms.reviewer: jrasnik, carlrab
-manager: craigg
 ms.date: 02/26/2019
-ms.openlocfilehash: c3b9fecd3ad404385732e55a9cf3aa65a6e388b8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1cf14c9e133b7e6e3e0b5219eb9e16bd3a0178dc
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61483063"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73821166"
 ---
-# <a name="use-resource-health-to-troubleshoot-connectivity-for-azure-sql-database"></a>Azure SQL veritabanı için bağlantı sorunlarını gidermek için kaynak durumu kullanın
+# <a name="use-resource-health-to-troubleshoot-connectivity-for-azure-sql-database"></a>Azure SQL veritabanı ile ilgili bağlantı sorunlarını gidermek için Kaynak Durumu kullanma
 
 ## <a name="overview"></a>Genel Bakış
 
-[Kaynak durumu](../service-health/resource-health-overview.md#getting-started) için SQL veritabanı, tanılamanıza ve bir Azure sorunu SQL kaynaklarınızı etkilediğinde destek almanıza yardımcı olur. Kaynaklarınızın güncel ve geçmiş durumu hakkında bilgiler sağlar ve sorunları azaltmaya yardımcı olur. Kaynak Durumu, Azure hizmet sorunları ile ilgili yardıma ihtiyacınız olduğunda teknik destek sağlar.
+SQL veritabanı için [kaynak durumu](../service-health/resource-health-overview.md#get-started) , SQL kaynaklarınızı etkileyen bir Azure sorunu hakkında tanılamanıza ve destek almanıza yardımcı olur. Kaynaklarınızın güncel ve geçmiş durumu hakkında bilgiler sağlar ve sorunları azaltmaya yardımcı olur. Kaynak Durumu, Azure hizmet sorunları ile ilgili yardıma ihtiyacınız olduğunda teknik destek sağlar.
 
 ![Genel Bakış](./media/sql-database-resource-health/sql-resource-health-overview.jpg)
 
 ## <a name="health-checks"></a>Sistem durumu denetimleri
 
-Kaynak durumu, SQL kaynak durumu, başarı ve başarısızlık kaynağa oturumlarının inceleyerek belirler. Şu anda, SQL veritabanı kaynağınızın kaynak durumu, yalnızca sistem hatası ve kullanıcı hatası nedeniyle oturum açma hataları inceler. Kaynak sistem durumu, 1-2 dakikada bir güncelleştirilir.
+Kaynak Durumu, kaynak üzerinde oturum açma işlemlerini ve başarısız olduğunu inceleyerek SQL kaynağınızın sistem durumunu belirler. Şu anda, SQL DB kaynağınız için Kaynak Durumu yalnızca sistem hatası nedeniyle oturum açma başarısızlıklarını inceler ve Kullanıcı hatası değildir. Kaynak Durumu durumu her 1-2 dakikada bir güncelleştirilir.
 
-## <a name="health-states"></a>Sistem sağlığı durumları
+## <a name="health-states"></a>Sağlık durumları
 
 ### <a name="available"></a>Kullanılabilir
 
-Durumu **kullanılabilir** kaynak durumu SQL kaynağınıza sistem hataları nedeniyle oturum açma hataları algılamadı anlamına gelir.
+**Mevcut** durumu, SQL kaynağınızın sistem hataları nedeniyle kaynak durumu oturum açma hatalarının algılanmadığı anlamına gelir.
 
 ![Kullanılabilir](./media/sql-database-resource-health/sql-resource-health-available.jpg)
 
-### <a name="degraded"></a>Düşürüldü
+### <a name="degraded"></a>Düzeyi düşürüldü
 
-Durumun **Düşürüldü** olması, Kaynak Durumu'nun oturum açma işlemlerinin çoğunun başarılı olduğunu ancak arada başarısız girişler de olduğunu gösterir. Bunlar büyük olasılıkla geçici bir oturum açma hatalardır. Geçici oturum açma hataları nedeniyle bağlantı sorunları etkisini azaltmak için lütfen uygulama [yeniden deneme mantığı](./sql-database-connectivity-issues.md#retry-logic-for-transient-errors) kodunuzda.
+Durumun **Düşürüldü** olması, Kaynak Durumu'nun oturum açma işlemlerinin çoğunun başarılı olduğunu ancak arada başarısız girişler de olduğunu gösterir. Bunlar, büyük olasılıkla geçici oturum açma hatalardır. Geçici oturum açma hatalarından kaynaklanan bağlantı sorunlarının etkisini azaltmak için lütfen kodunuzda [yeniden deneme mantığını](./sql-database-connectivity-issues.md#retry-logic-for-transient-errors) uygulayın.
 
-![Düşürüldü](./media/sql-database-resource-health/sql-resource-health-degraded.jpg)
+![Düzeyi düşürüldü](./media/sql-database-resource-health/sql-resource-health-degraded.jpg)
 
 ### <a name="unavailable"></a>Kullanılamaz
 
-Durumu **kullanılamıyor** kaynak durumu, tutarlı bir oturum açma hataları SQL kaynağınıza algıladı anlamına gelir. Kaynağınızı uzun bir süre bu durumda kalırsa, lütfen desteğe başvurun.
+**Kullanım dışı** durumu kaynak durumu, SQL kaynağınız için tutarlı oturum açma hatalarının algılandığı anlamına gelir. Kaynağınız uzun bir süre boyunca bu durumda kalırsa lütfen desteğe başvurun.
 
 ![Kullanılamaz](./media/sql-database-resource-health/sql-resource-health-unavailable.jpg)
 
-### <a name="unknown"></a>Bilinmeyen
+### <a name="unknown"></a>Bilinmiyor
 
-Sistem durumunu **bilinmeyen** bu kaynak hakkında bilgi için 10 dakikadan daha fazla kaynak durumu henüz aldığını gösterir. Bu durum kaynak durumunun eksiksiz bir gösterimi olmasa da, bir sorun giderme işlemi önemli veri noktası var. Kaynak beklenen şekilde çalışıyorsa, kaynak durumu için kullanılabilen birkaç dakika sonra değiştirin. Kaynağı ile ilgili sorunlar yaşıyorsanız, bilinmeyen durumunu platform içindeki bir olay kaynağı etkilediğini önerebilir.
+**Bilinmeyen** sistem durumu, kaynak durumu 10 dakikadan uzun süre boyunca bu kaynakla ilgili bilgi almadığını gösterir. Bu durum kaynağın durumunun kesin bir göstergesi olmamasına karşın, sorun giderme sürecinde önemli bir veri noktasıdır. Kaynak beklendiği gibi çalışıyorsa, kaynağın durumu birkaç dakika sonra kullanılabilir olarak değişir. Kaynakla ilgili sorun yaşıyorsanız, bilinmeyen sistem durumu, platformda bir olayın kaynağı etkilemesini önerebilir.
 
 ![Bilinmiyor](./media/sql-database-resource-health/sql-resource-health-unknown.jpg)
 
 ## <a name="historical-information"></a>Geçmiş bilgileri
 
-Kaynak durumu sistem durumu geçmişi bölümünde sistem durumu geçmiş 14 güne kadar erişebilirsiniz. Bölüm için kaynak durumu tarafından bildirilen kapalı kalma süreleri (varsa) kapalı kalma süresi nedeni de içerecektir. Şu anda Azure SQL veritabanı kaynağınızın kalma süresini iki dakikalık ayrıntı düzeyinde göstermektedir. Gerçek kapalı kalma süresi bir dakikadan az olasıdır-8s ortalama.
+Kaynak Durumu sistem durumu geçmişi bölümünde 14 güne kadar sistem durumu geçmişine erişebilirsiniz. Bu bölümde, Kaynak Durumu tarafından bildirilen aşağı sürelerle ilgili kapalı kalma süresi (varsa) de bulunur. Şu anda Azure, SQL veritabanı kaynağınız için iki dakikalık ayrıntı düzeyiyle kapalı kalma süresini gösteriyor. Gerçek kapalı kalma süresi büyük olasılıkla bir dakikadan kısadır (ortalama 8 sn).
 
-### <a name="downtime-reasons"></a>Kapalı kalma nedenleri
+### <a name="downtime-reasons"></a>Kesinti süresi nedenleri
 
-SQL veritabanınız kesinti yaşandığında analiz bir nedenini belirlemek için gerçekleştirilir. Kullanılabilir olduğunda, kapalı kalma süresi nedeni kaynak durumu sistem durumu geçmişi bölümünde raporlanır. Kapalı kalma süresinin nedenleri genellikle bir olaydan 30 dakika sonra yayımlanır.
+SQL veritabanınız kapalı kalma yaşdığında, bir neden belirlenmesi için analiz gerçekleştirilir. Kullanılabilir olduğunda, Kaynak Durumu sistem durumu geçmişi bölümünde kesinti süresi nedeni raporlanır. Kapalı kalma süresinin nedenleri genellikle bir olaydan 30 dakika sonra yayımlanır.
 
 #### <a name="planned-maintenance"></a>Planlı bakım
 
-Azure altyapısı, düzenli olarak planlanan bakım – veri merkezindeki donanım veya yazılım bileşenlerini yükseltme yapar. Bakım veritabanı uygulanır, ancak SQL var olan bazı bağlantılar sonlandırmak ve yenilerini reddet. Planlanan bakım sırasında karşılaşılan oturum açma hataları genellikle geçicidir ve [yeniden deneme mantığı](./sql-database-connectivity-issues.md#retry-logic-for-transient-errors) yardımcı etkisini azaltır. Oturum açma hataları yaşamaya devam ederseniz Lütfen desteğe başvurun.
+Azure altyapısı, veri merkezindeki donanım veya yazılım bileşenlerinin planlı bakımını düzenli olarak gerçekleştirir. Veritabanı bakım sırasında kaldığında SQL, bazı mevcut bağlantıları sonlandırabilir ve yenilerini reddedebilir. Planlı bakım sırasında karşılaşılan oturum açma hatalarıyla genellikle geçici ve [yeniden deneme mantığı](./sql-database-connectivity-issues.md#retry-logic-for-transient-errors) etkisini azaltmaya yardımcı olur. Oturum açma hatalarıyla karşılaşmaya devam ederseniz lütfen desteğe başvurun.
 
 #### <a name="reconfiguration"></a>Yeniden yapılandırma
 
-Yeniden yapılandırmalar, geçici koşullar kabul edilir ve zaman zaman beklenir. Bu olaylar, Yük Dengeleme veya yazılım/donanım arızaları tetiklenebilir. Bir bulut veritabanına bağlanan herhangi bir istemci üretim uygulama, sağlam bir bağlantı uygulamalıdır [yeniden deneme mantığı](./sql-database-connectivity-issues.md#retry-logic-for-transient-errors), bu gibi durumlarda azaltılmasına yardımcı olur ve genellikle hatalarını saydam son kullanıcıya olmanız gerekir.
+Yeniden yapılandırma geçici koşullar olarak değerlendirilir ve zaman zaman beklenir. Bu olaylar, Yük Dengeleme veya yazılım/donanım hatalarıyla tetiklenebilir. Bulut veritabanına bağlanan tüm istemci üretim uygulamaları, bu durumların azaltılmasına yardımcı olacağından ve genellikle hataları son kullanıcıya saydam hale getirmek için sağlam bir bağlantı [yeniden deneme mantığı](./sql-database-connectivity-issues.md#retry-logic-for-transient-errors)uygulamalıdır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla bilgi edinin [geçici hatalar için yeniden deneme mantığı](./sql-database-connectivity-issues.md#retry-logic-for-transient-errors)
+- [Geçici hatalar için yeniden deneme mantığı](./sql-database-connectivity-issues.md#retry-logic-for-transient-errors) hakkında daha fazla bilgi edinin
 - [SQL bağlantı hatalarını giderme, tanılama ve önleme](./sql-database-connectivity-issues.md)
-- Daha fazla bilgi edinin [kaynak sistem durumu uyarılarını yapılandırma](../service-health/resource-health-alert-arm-template-guide.md)
-- Genel Bakış [kaynak durumu](../service-health/resource-health-overview.md)
-- [Kaynak durumu hakkında SSS](../service-health/resource-health-faq.md)
+- [Kaynak durumu uyarılarını yapılandırma](../service-health/resource-health-alert-arm-template-guide.md) hakkında daha fazla bilgi edinin
+- [Kaynak durumu](../service-health/resource-health-overview.md) bir genel bakış alın
+- [Kaynak Durumu SSS](../service-health/resource-health-faq.md)

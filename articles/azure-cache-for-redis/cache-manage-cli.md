@@ -1,69 +1,61 @@
 ---
-title: Azure Cache için Redis Klasik Azure CLI kullanarak yönetme | Microsoft Docs
-description: Herhangi bir platformda Klasik Azure CLI yükleme, Azure hesabınıza bağlanmak için kullanma ve oluşturmak ve bir Azure önbelleği için Redis Klasik clı'dan yönetmek nasıl öğrenin.
-services: cache
-documentationcenter: ''
+title: Azure klasik CLı kullanarak Redsıs için Azure önbelleğini yönetme
+description: Azure klasik CLı 'yı dilediğiniz platforma yüklemeyi, Azure hesabınıza bağlanmak için nasıl kullanacağınızı ve klasik CLı 'dan Reda için Azure önbelleği oluşturma ve yönetme hakkında bilgi edinin.
 author: yegu-ms
-manager: jhubbard
-editor: ''
-ms.assetid: 964ff245-859d-4bc1-bccf-62e4b3c1169f
 ms.service: cache
-ms.workload: tbd
-ms.tgt_pltfrm: cache
-ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 01/23/2017
 ms.author: yegu
-ms.openlocfilehash: 1d7a18f3f46cec73d70389b82eed5a85e440d340
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e2b1ed693ea57e3414d465a57a5ba2b1203f67c5
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62119087"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74121890"
 ---
-# <a name="how-to-create-and-manage-azure-cache-for-redis-using-the-azure-classic-cli"></a>Oluşturma ve Azure Cache için Redis Klasik Azure CLI kullanarak yönetme
+# <a name="how-to-create-and-manage-azure-cache-for-redis-using-the-azure-classic-cli"></a>Azure klasik CLı kullanılarak Redsıs için Azure önbelleği oluşturma ve yönetme
 > [!div class="op_single_selector"]
-> * [PowerShell](cache-howto-manage-redis-cache-powershell.md)
+> * [PowerShell](cache-how-to-manage-redis-cache-powershell.md)
 > * [Azure klasik CLI](cache-manage-cli.md)
 >
 
-Klasik Azure CLI, Azure altyapınıza herhangi bir platformdan yönetmek için harika bir yoludur. Bu makalede Klasik Azure CLI kullanarak Redis örneği için Azure önbelleğinizi oluşturmak ve yönetmek nasıl gösterir.
+Azure klasik CLı, Azure altyapınızı herhangi bir platformdan yönetmenin harika bir yoludur. Bu makalede, Azure klasik CLı kullanarak Redsıs örnekleri için Azure önbelleğinizi oluşturma ve yönetme işlemi gösterilmektedir.
 
 [!INCLUDE [outdated-cli-content](../../includes/contains-classic-cli-content.md)]
 > [!NOTE]
-> En son Azure CLI örnek betikler için bkz: [Azure CLI Azure önbelleği için Redis örnekleri](cli-samples.md).
+> En son Azure CLı örnek betikleri için bkz. [redsıs örnekleri Için Azure CLI Azure önbelleği](cli-samples.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
-Önbelleğinizi oluşturmak ve Azure Klasik Azure CLI kullanarak Redis örneği için yönetmek için aşağıdaki adımları tamamlamanız gerekir.
+Azure klasik CLı kullanarak Redsıs örnekleri için Azure önbelleği oluşturup yönetmek için aşağıdaki adımları gerçekleştirmeniz gerekir.
 
-* Azure hesabınız olmalıdır. Yoksa, oluşturabileceğiniz bir [ücretsiz bir hesap](https://azure.microsoft.com/pricing/free-trial/) yalnızca birkaç dakika sonra.
-* [Klasik Azure CLI yükleme](../cli-install-nodejs.md).
-* Bir iş veya kişisel bir Azure hesabı ile Azure CLI yüklemenizi bağlanmak veya Azure hesabı Okul ve oturum Klasik kullanarak CLI `azure login` komutu.
-* Aşağıdaki komutlardan herhangi birini çalıştırmadan önce Klasik CLI'yı Resource Manager moduna çalıştırarak geçiş `azure config mode arm` komutu. Daha fazla bilgi için [Azure kaynaklarını ve kaynak gruplarını yönetmek için Azure Klasik CLI kullanma](../xplat-cli-azure-resource-manager.md).
+* Azure hesabınız olmalıdır. Bir hesabınız yoksa, yalnızca birkaç dakika içinde ücretsiz bir [Hesap](https://azure.microsoft.com/pricing/free-trial/) oluşturabilirsiniz.
+* [Azure klasık CLI 'Yı yükler](../cli-install-nodejs.md).
+* Azure CLı yüklemenizi bir kişisel Azure hesabıyla veya bir iş ya da okul Azure hesabıyla bağlayın ve `azure login` komutunu kullanarak klasik CLı 'dan oturum açın.
+* Aşağıdaki komutlardan herhangi birini çalıştırmadan önce, `azure config mode arm` komutunu çalıştırarak klasik CLı 'yı Kaynak Yöneticisi moduna geçirin. Daha fazla bilgi için bkz. Azure [klasık CLI kullanarak Azure kaynaklarını ve kaynak gruplarını yönetme](../xplat-cli-azure-resource-manager.md).
 
 ## <a name="azure-cache-for-redis-properties"></a>Azure önbelleği için Redis özellikleri
-Aşağıdaki özellikler, oluşturma ve Azure Cache, Redis örneği için güncelleştirme olduğunda kullanılır.
+Aşağıdaki özellikler, Redsıs örnekleri için Azure önbelleği oluşturma ve güncelleştirme sırasında kullanılır.
 
 | Özellik | Anahtar | Açıklama |
 | --- | --- | --- |
-| name |-n, --name |Adı Azure önbelleği için Redis. |
-| kaynak grubu |g-,--resource-group |Kaynak grubunun adı. |
-| location |m-,--konum |Önbellek oluşturmak için konum. |
-| size |-z, --size |Azure önbelleği için boyutunu Redis. Geçerli değerler: [C0, C1, C2, C3, C4, C5, C6, P1, P2, P3, P4] |
-| SKU |-x, --sku |Redis SKU. Şunlardan biri olmalıdır: [temel, standart, Premium] |
-| EnableNonSslPort |-e, --enable-non-ssl-port |Azure önbelleği için Redis EnableNonSslPort özelliği. Bu bayrağı olmayan SSL bağlantı noktası önbellek hesabınız için etkinleştirmek istiyorsanız ekleyin |
-| Redis yapılandırması |-c, --redis-configuration |Redis yapılandırması. Yapılandırma anahtarları ve değerleri burada içeren bir JSON biçimli dizeyi girin. Biçim: "{" ":""," ":" "}" |
-| Redis yapılandırması |f-,--redis yapılandırma dosyası |Redis yapılandırması. Yapılandırma anahtarları ve değerleri burada içeren bir dosyanın yolunu girin. Dosya giriş biçimi: {"": "","": ""} |
-| Parça sayısı |r-,--parça sayısı |Kümeleme ile Premium küme önbelleği oluşturmak için parça sayısı. |
-| Sanal Ağ |-v, --virtual-network |Azure Cache için dağıtmak için tam ARM kaynak kimliği sanal ağın belirtir bir VNET önbelleğinize barındırırken, Redis. Örnek Biçim: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.ClassicNetwork/VirtualNetworks/vnet1 |
-| Anahtar türü |t-,--anahtar türü |Yenilemek için anahtar türü. Geçerli değerler: [birincil, ikincil] |
-| StaticIP |-p, --static-ip \<static-ip\> |Bir vnet'teki önbelleğinizi barındırırken, benzersiz bir IP adresi alt ağ için önbellek belirtir. Sağlanmazsa, bir, alt ağdan seçilir. |
-| Alt ağ |t,--alt \<alt ağ\> |Bir vnet'teki önbelleğinizi barındırırken, önbellek dağıtacağınız bir alt ağ adını belirtir. |
-| VirtualNetwork |v-,--sanal ağ \<sanal ağ\> |Azure Cache için dağıtmak için tam ARM kaynak kimliği sanal ağın belirtir bir VNET önbelleğinize barındırırken, Redis. Örnek Biçim: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.ClassicNetwork/VirtualNetworks/vnet1 |
-| Abonelik |s-,--abonelik |Abonelik tanımlayıcısı. |
+| ad |-n,--ad |Redsıs için Azure önbelleğinin adı. |
+| kaynak grubu |-g,--Resource-Group |Kaynak grubunun adı. |
+| location |-l,--konum |Önbellek oluşturma konumu. |
+| size |-z,--boyut |Redsıs için Azure önbelleğinin boyutu. Geçerli değerler: [C0, C1, C2, C3, C4, C5, C6, P1, P2, P3, P4] |
+| isteyin |-x, --sku |Redis SKU. Şunlardan biri olmalıdır: [temel, standart, Premium] |
+| EnableNonSslPort |-e,--etkinleştir-SSL olmayan-bağlantı noktası |Redin için Azure önbelleğinin EnableNonSslPort özelliği. Önbelleğiniz için SSL olmayan bağlantı noktasını etkinleştirmek istiyorsanız bu bayrağı ekleyin |
+| Redsıs yapılandırması |-c,--redsıs-yapılandırma |Redsıs yapılandırması. Yapılandırma anahtarları ve değerleri için JSON biçimli bir dize girin. Biçim: "{" ":" "," ":" "}" |
+| Redsıs yapılandırması |-f,--redsıs-yapılandırma-dosya |Redsıs yapılandırması. Yapılandırma anahtarlarını ve değerlerini içeren bir dosyanın yolunu buraya girin. Dosya girişi için biçim: {"": "", "": ""} |
+| Parça sayısı |-r,--parça-sayısı |Kümeleme ile Premium küme önbelleğinde oluşturulacak parça sayısı. |
+| Sanal Ağ |-v,--sanal-ağ |Önbelleğinizi VNET 'te barındırırken, redin için Azure önbelleğini dağıtmak üzere sanal ağın tam ARM kaynak KIMLIĞINI belirtir. Örnek biçim:/subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.ClassicNetwork/VirtualNetworks/vnet1 |
+| anahtar türü |-t,--anahtar-tür |Yenilenecek anahtar türü. Geçerli değerler: [birincil, Ikincil] |
+| Staticıp |-p,--statik-IP \<statik-IP\> |Önbelleğinizi VNET 'te barındırırken, önbelleğin alt ağında benzersiz bir IP adresi belirtir. Sağlanmazsa, alt ağdan bir tane seçilir. |
+| Alt ağ |t,--alt ağ \<alt ağ\> |Önbelleğinizi VNET 'te barındırırken, önbelleğin dağıtılacağı alt ağın adını belirtir. |
+| VirtualNetwork |-v,--sanal ağ \<sanal ağ\> |Önbelleğinizi VNET 'te barındırırken, redin için Azure önbelleğini dağıtmak üzere sanal ağın tam ARM kaynak KIMLIĞINI belirtir. Örnek biçim:/subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.ClassicNetwork/VirtualNetworks/vnet1 |
+| Abonelik |-s,--abonelik |Abonelik tanımlayıcısı. |
 
-## <a name="see-all-azure-cache-for-redis-commands"></a>Bkz: tüm Azure önbelleği için Redis komutları
-Tüm Azure önbelleği için Redis komutları ve parametreleri görmek için `azure rediscache -h` komutu.
+## <a name="see-all-azure-cache-for-redis-commands"></a>Redsıs komutları için tüm Azure önbelleğine bakın
+Redsıs komutları ve parametreleri için tüm Azure önbelleğini görmek üzere `azure rediscache -h` komutunu kullanın.
 
     C:\>azure rediscache -h
     help:    Commands to manage your Azure Cache for Redis(s)
@@ -95,11 +87,11 @@ Tüm Azure önbelleği için Redis komutları ve parametreleri görmek için `az
     help:    Current Mode: arm (Azure Resource Management)
 
 ## <a name="create-an-azure-cache-for-redis"></a>Bir Azure önbelleği için Redis oluşturma
-Bir Azure önbelleği için Redis oluşturmak için aşağıdaki komutu kullanın:
+Redsıs için bir Azure önbelleği oluşturmak üzere aşağıdaki komutu kullanın:
 
     azure rediscache create [--name <name> --resource-group <resource-group> --location <location> [options]]
 
-Bu komut hakkında daha fazla bilgi için `azure rediscache create -h` komutu.
+Bu komut hakkında daha fazla bilgi için `azure rediscache create -h` komutunu çalıştırın.
 
     C:\>azure rediscache create -h
     help:    Create an Azure Cache for Redis
@@ -127,12 +119,12 @@ Bu komut hakkında daha fazla bilgi için `azure rediscache create -h` komutu.
     help:
     help:    Current Mode: arm (Azure Resource Management)
 
-## <a name="delete-an-existing-azure-cache-for-redis"></a>Mevcut bir Azure önbelleği için Redis Sil
-Bir Azure önbelleği için Redis silmek için aşağıdaki komutu kullanın:
+## <a name="delete-an-existing-azure-cache-for-redis"></a>Redsıs için mevcut bir Azure önbelleğini silme
+Redsıs için bir Azure önbelleğini silmek üzere aşağıdaki komutu kullanın:
 
     azure rediscache delete [--name <name> --resource-group <resource-group> ]
 
-Bu komut hakkında daha fazla bilgi için `azure rediscache delete -h` komutu.
+Bu komut hakkında daha fazla bilgi için `azure rediscache delete -h` komutunu çalıştırın.
 
     C:\>azure rediscache delete -h
     help:    Delete an existing Azure Cache for Redis
@@ -150,12 +142,12 @@ Bu komut hakkında daha fazla bilgi için `azure rediscache delete -h` komutu.
     help:
     help:    Current Mode: arm (Azure Resource Management)
 
-## <a name="list-all-azure-cache-for-redis-within-your-subscription-or-resource-group"></a>Tüm Azure Cache, Redis abonelik veya kaynak grubu için liste
-Tüm Azure Cache, Redis abonelik veya kaynak grubu için listelemek için aşağıdaki komutu kullanın:
+## <a name="list-all-azure-cache-for-redis-within-your-subscription-or-resource-group"></a>Tüm redin Azure önbelleğini aboneliğiniz veya kaynak grubunuz dahilinde listeleyin
+Tüm redin Azure önbelleğini aboneliğiniz veya kaynak grubunuz dahilinde listelemek için aşağıdaki komutu kullanın:
 
     azure rediscache list [options]
 
-Bu komut hakkında daha fazla bilgi için `azure rediscache list -h` komutu.
+Bu komut hakkında daha fazla bilgi için `azure rediscache list -h` komutunu çalıştırın.
 
     C:\>azure rediscache list -h
     help:    List all Azure Cache for Redis within your Subscription or Resource Group
@@ -172,12 +164,12 @@ Bu komut hakkında daha fazla bilgi için `azure rediscache list -h` komutu.
     help:
     help:    Current Mode: arm (Azure Resource Management)
 
-## <a name="show-properties-of-an-existing-azure-cache-for-redis"></a>Özellikler var olan bir Azure önbelleği için Redis Göster
-Özellikler var olan bir Azure önbelleği için Redis göstermek için aşağıdaki komutu kullanın:
+## <a name="show-properties-of-an-existing-azure-cache-for-redis"></a>Redsıs için mevcut bir Azure önbelleğinin özelliklerini göster
+Redsıs için mevcut bir Azure önbelleğinin özelliklerini göstermek üzere aşağıdaki komutu kullanın:
 
     azure rediscache show [--name <name> --resource-group <resource-group>]
 
-Bu komut hakkında daha fazla bilgi için `azure rediscache show -h` komutu.
+Bu komut hakkında daha fazla bilgi için `azure rediscache show -h` komutunu çalıştırın.
 
     C:\>azure rediscache show -h
     help:    Show properties of an existing Azure Cache for Redis
@@ -197,12 +189,12 @@ Bu komut hakkında daha fazla bilgi için `azure rediscache show -h` komutu.
 
 <a name="scale"></a>
 
-## <a name="change-settings-of-an-existing-azure-cache-for-redis"></a>Mevcut bir Azure önbelleği için Redis ayarlarını değiştirme
-Mevcut bir Azure önbelleği için Redis ayarlarını değiştirmek için aşağıdaki komutu kullanın:
+## <a name="change-settings-of-an-existing-azure-cache-for-redis"></a>Redsıs için mevcut bir Azure önbelleğinin ayarlarını değiştirin
+Redu için mevcut bir Azure önbelleğinin ayarlarını değiştirmek için aşağıdaki komutu kullanın:
 
     azure rediscache set [--name <name> --resource-group <resource-group> --redis-configuration <redis-configuration>/--redis-configuration-file <redisConfigurationFile>]
 
-Bu komut hakkında daha fazla bilgi için `azure rediscache set -h` komutu.
+Bu komut hakkında daha fazla bilgi için `azure rediscache set -h` komutunu çalıştırın.
 
     C:\>azure rediscache set -h
     help:    Change settings of an existing Azure Cache for Redis
@@ -222,14 +214,14 @@ Bu komut hakkında daha fazla bilgi için `azure rediscache set -h` komutu.
     help:
     help:    Current Mode: arm (Azure Resource Management)
 
-## <a name="renew-the-authentication-key-for-an-existing-azure-cache-for-redis"></a>Kimlik doğrulama anahtarı, mevcut bir Azure önbelleği için Redis için yenileyin.
-Kimlik doğrulama anahtarı için mevcut bir Azure önbelleği için Redis yenilemek için aşağıdaki komutu kullanın:
+## <a name="renew-the-authentication-key-for-an-existing-azure-cache-for-redis"></a>Redsıs için mevcut bir Azure önbelleğinin kimlik doğrulama anahtarını yenileyin
+Redin için mevcut bir Azure önbelleğinin kimlik doğrulama anahtarını yenilemek için aşağıdaki komutu kullanın:
 
     azure rediscache renew-key [--name <name> --resource-group <resource-group> --key-type <key-type>]
 
-Belirtin `Primary` veya `Secondary` için `key-type`.
+`key-type`için `Primary` veya `Secondary` belirtin.
 
-Bu komut hakkında daha fazla bilgi için `azure rediscache renew-key -h` komutu.
+Bu komut hakkında daha fazla bilgi için `azure rediscache renew-key -h` komutunu çalıştırın.
 
     C:\>azure rediscache renew-key -h
     help:    Renew the authentication key for an existing Azure Cache for Redis
@@ -248,12 +240,12 @@ Bu komut hakkında daha fazla bilgi için `azure rediscache renew-key -h` komutu
     help:
     help:    Current Mode: arm (Azure Resource Management)
 
-## <a name="list-primary-and-secondary-keys-of-an-existing-azure-cache-for-redis"></a>Redis için mevcut bir Azure önbelleği listesi birincil ve ikincil anahtarları
-Birincil ve ikincil anahtarlarını Listele var olan bir Azure önbelleği için Redis için aşağıdaki komutu kullanın:
+## <a name="list-primary-and-secondary-keys-of-an-existing-azure-cache-for-redis"></a>Redsıs için mevcut bir Azure önbelleğinin birincil ve Ikincil anahtarlarını listeleyin
+Redu için mevcut bir Azure önbelleğinin birincil ve Ikincil anahtarlarını listelemek için aşağıdaki komutu kullanın:
 
     azure rediscache list-keys [--name <name> --resource-group <resource-group>]
 
-Bu komut hakkında daha fazla bilgi için `azure rediscache list-keys -h` komutu.
+Bu komut hakkında daha fazla bilgi için `azure rediscache list-keys -h` komutunu çalıştırın.
 
     C:\>azure rediscache list-keys -h
     help:    Lists Primary and Secondary key of an existing Azure Cache for Redis

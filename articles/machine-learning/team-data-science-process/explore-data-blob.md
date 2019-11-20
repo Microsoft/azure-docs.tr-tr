@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 11/09/2017
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 3c399491f0a2048fe924e9ed9600dd5ce3899ca2
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 23fef994d01917f5f120c7fcb80871f6f2c82ab2
+ms.sourcegitcommit: 4b647be06d677151eb9db7dccc2bd7a8379e5871
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60344657"
+ms.lasthandoff: 07/19/2019
+ms.locfileid: "68358594"
 ---
 # <a name="explore-data-in-azure-blob-storage-with-pandas"></a>Panda ile Azure blob depolamadaki verileri keşfedin
 
@@ -56,7 +56,7 @@ print(("It takes %s seconds to download "+blobname) % (t2 - t1))
 1. İçine bir pandas DataFrame indirilen dosyasından verileri okur.
 
 ```python
-#LOCALFILE is the file path
+# LOCALFILE is the file path
 dataframe_blobdata = pd.read_csv(LOCALFILE)
 ```
 
@@ -115,7 +115,8 @@ dataframe_blobdata_noNA.shape
 Eksik değerleri değiştirmek için başka bir yol ile modu işlevdir:
 
 ```python
-dataframe_blobdata_mode = dataframe_blobdata.fillna({'<column_name>':dataframe_blobdata['<column_name>'].mode()[0]})
+dataframe_blobdata_mode = dataframe_blobdata.fillna(
+    {'<column_name>': dataframe_blobdata['<column_name>'].mode()[0]})
 ```
 
 1. Oluşturma bir **histogram** bir değişkenin dağıtım çizmek için değişken sayıda depo kullanarak Çiz
@@ -129,9 +130,9 @@ np.log(dataframe_blobdata['<column_name>']+1).hist(bins=50)
 1. Bakmak **bağıntılar** arasında bir dağılım grafiği veya yerleşik bağıntı işlevi kullanarak değişkenleri
 
 ```python
-#relationship between column_a and column_b using scatter plot
+# relationship between column_a and column_b using scatter plot
 plt.scatter(dataframe_blobdata['<column_a>'], dataframe_blobdata['<column_b>'])
 
-#correlation between column_a and column_b
+# correlation between column_a and column_b
 dataframe_blobdata[['<column_a>', '<column_b>']].corr()
 ```

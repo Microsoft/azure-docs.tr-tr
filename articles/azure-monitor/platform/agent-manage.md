@@ -1,113 +1,107 @@
 ---
-title: Azure Log Analytics Aracısı'nı yönetme | Microsoft Docs
-description: Bu makalede, Log Analytics Windows veya Linux aracı makine üzerinde dağıtılan yaşam döngüsü boyunca genellikle gerçekleştirecek farklı yönetim görevleri açıklanır.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: ''
-ms.assetid: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Log Analytics aracısını yönetme | Microsoft Docs
+description: Bu makalede, bir makineye dağıtılan Log Analytics Windows veya Linux aracısının yaşam döngüsü boyunca genellikle gerçekleştirdiğiniz farklı yönetim görevleri açıklanır.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 06/14/2019
+author: MGoedtel
 ms.author: magoedte
-ms.openlocfilehash: 0c128aaf8102b3072b6a63c80ea860ceefbf5124
-ms.sourcegitcommit: 72f1d1210980d2f75e490f879521bc73d76a17e1
+ms.date: 06/14/2019
+ms.openlocfilehash: 8dec91a3987aed978bb088d1aeab48a6fd0f9fb4
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/14/2019
-ms.locfileid: "67146301"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72932795"
 ---
-# <a name="managing-and-maintaining-the-log-analytics-agent-for-windows-and-linux"></a>Windows ve Linux için Log Analytics aracısını korumak ve yönetme
+# <a name="managing-and-maintaining-the-log-analytics-agent-for-windows-and-linux"></a>Windows ve Linux için Log Analytics aracısını yönetme ve sürdürme
 
-Log Analytics Windows veya Linux Aracısı Azure İzleyici'de, ilk dağıtımdan sonra aracıyı yeniden yapılandırmak, yükseltmek veya yaşam döngüsü emeklilik aşamasında ulaştıysa bilgisayardan kaldırmanız gerekebilir. Bu bakım görevleri el ile veya işlem hatası hem giderlerini azaltan ve Otomasyon aracılığıyla kolayca yönetebilirsiniz.
+Azure Izleyici 'de Log Analytics Windows veya Linux aracısının ilk dağıtımından sonra, aracıyı yeniden yapılandırmanız, yükseltmeniz veya yaşam döngüsünün kullanımdan kaldırılması aşamasına ulaştıysa bilgisayardan kaldırmanız gerekebilir. Bu rutin bakım görevlerini el ile veya Otomasyon aracılığıyla kolayca yönetebilirsiniz, bu da hem işlemsel hata hem de giderleri azaltır.
 
-## <a name="upgrading-agent"></a>Aracı yükseltme
+## <a name="upgrading-agent"></a>Aracı yükseltiliyor
 
-Windows ve Linux için Log Analytics aracısını en son sürüme otomatik olarak veya el ile VM'nin çalışır durumda ortam ve dağıtım senaryosuna bağlı olarak yükseltilebilir. Bir aracıyı yükseltmek için aşağıdaki yöntemleri kullanılabilir.
+Windows ve Linux için Log Analytics Aracısı en son sürüme el ile veya VM 'nin çalıştığı dağıtım senaryosuna ve ortamına bağlı olarak otomatik olarak yükseltilebilir. Aşağıdaki yöntemler aracıyı yükseltmek için kullanılabilir.
 
-| Ortam | Yükleme yöntemi | Yükseltme yöntemi |
+| Ortam | Yükleme yöntemi | Upgrade Yöntemi |
 |--------|----------|-------------|
-| Azure VM | Analiz aracı VM uzantısı Windows/Linux için oturum açın. | Azure Resource Manager şablonunuzu özelliğini ayarlayarak geri çevirmek için yapılandırdığınız sürece Aracısı varsayılan olarak otomatik olarak yükseltme *autoUpgradeMinorVersion* için **false**. |
-| Özel Azure VM görüntüleri | Windows/Linux için Log Analytics aracısını el ile yükleme | VM Aracısı'nın en yeni sürüme güncelleştirme komut satırından Windows Yükleyici paketin veya Linux kendiliğinden ve yüklenebilir Kabuk betiği çalıştıran gerçekleştirilmesi gerekir.|
-| Azure dışı VM'ler | Windows/Linux için Log Analytics aracısını el ile yükleme | VM Aracısı'nın en yeni sürüme güncelleştirme komut satırından Windows Yükleyici paketin veya Linux kendiliğinden ve yüklenebilir Kabuk betiği çalıştıran gerçekleştirilmesi gerekir. |
+| Azure VM | Windows/Linux için Log Analytics Aracısı VM Uzantısı | *Otomatik* olarak, Azure Resource Manager şablonunuzu otomatik olarak varsayılan olarak yükseltilir. bu özelliği otomatik yükseltme özelliğini **yanlış**olarak ayarlayarak geri çevirebilirsiniz. |
+| Özel Azure VM görüntüleri | Windows/Linux için Log Analytics aracısının el ile yüklenmesi | VM 'Lerin aracının en yeni sürümüne güncelleştirilmesi için Windows Installer paketi veya Linux kendiliğinden ayıklanan ve yüklenebilir kabuk betik paketi çalıştıran komut satırından gerçekleştirilmesi gerekir.|
+| Azure dışı VM 'Ler | Windows/Linux için Log Analytics aracısının el ile yüklenmesi | VM 'Lerin aracının en yeni sürümüne güncelleştirilmesi için Windows Installer paketi veya Linux kendiliğinden ayıklanan ve yüklenebilir kabuk betik paketi çalıştıran komut satırından gerçekleştirilmesi gerekir. |
 
-### <a name="upgrade-windows-agent"></a>Windows aracısını yükseltin 
+### <a name="upgrade-windows-agent"></a>Windows aracısını yükselt 
 
-Bir Windows VM aracısını kullanarak Log Analytics VM uzantısı yüklü değil en son sürüme güncelleştirmek için çalıştırın ya da komut isteminden, betik ya da başka bir Otomasyon çözümü veya MMASetup - kullanarak\<platform\>Kurulum .msi Sihirbaz.  
+Bir Windows sanal makinesi üzerindeki aracıyı Log Analytics VM uzantısı kullanılarak yüklenmeyen en son sürüme güncelleştirmek için, komut Istemi, komut dosyası veya diğer otomasyon çözümünden veya MMASetup-\<platform\>. msi kurulum sihirbazını kullanarak komutunu çalıştırın.  
 
-Aşağıdaki adımları uygulayarak, Log Analytics çalışma alanınızda Windows Aracısı'nı en son sürümünü indirebilirsiniz.
+Aşağıdaki adımları gerçekleştirerek Log Analytics çalışma alanınızdan Windows aracısının en son sürümünü indirebilirsiniz.
 
-1. [Azure Portal](https://portal.azure.com) oturum açın.
+1. [Azure Portal](https://portal.azure.com)’ında oturum açın.
 
-2. Azure portalında **Tüm hizmetler**’e tıklayın. Kaynak listesinde **Log Analytics** yazın. Yazmaya başladığınızda liste, girişinize göre filtrelenir. Seçin **Log Analytics çalışma alanları**.
+2. Azure portalında **Tüm hizmetler**’e tıklayın. Kaynak listesinde **Log Analytics** yazın. Yazmaya başladığınızda liste, girişinize göre filtrelenir. **Log Analytics çalışma alanlarını**seçin.
 
-3. Log Analytics çalışma alanlarınızın listesinde çalışma alanını seçin.
+3. Log Analytics çalışma alanları listenizde, çalışma alanını seçin.
 
-4. Log Analytics çalışma alanınızı seçin **Gelişmiş ayarlar**, ardından **bağlı kaynaklar**ve son olarak **Windows sunucuları**.
+4. Log Analytics çalışma alanınızda **Gelişmiş ayarlar**' ı ve ardından **bağlı kaynaklar**' ı ve son olarak **Windows Server**' ı seçin.
 
-5. Gelen **Windows sunucuları** sayfasında, uygun **Windows Agent'ı indir** bağlı olarak Windows işletim sisteminin İşlemci mimarisi indirmek için sürümü.
+5. Windows **sunucuları** sayfasında, Windows işletim sisteminin işlemci mimarisine bağlı olarak indirmek Için uygun **Windows aracısını indir** sürümünü seçin.
 
 >[!NOTE]
->Windows için Log Analytics aracısını yükseltme sırasında yapılandırma veya rapor için bir çalışma alanı yeniden desteklemiyor. Aracıyı yapılandırmak için altında listelenen desteklenen yöntemlerden birini izleyin gerekir [ekleme veya bir çalışma alanı kaldırılıyor](#adding-or-removing-a-workspace).
+>Windows için Log Analytics aracısının yükseltilmesi sırasında, raporlama yapılacak bir çalışma alanını yapılandırmayı veya yeniden yapılandırmayı desteklemez. Aracıyı yapılandırmak için, [bir çalışma alanı ekleme veya kaldırma](#adding-or-removing-a-workspace)altında listelenen desteklenen yöntemlerden birini izlemeniz gerekir.
 >
 
-#### <a name="to-upgrade-using-the-setup-wizard"></a>Kurulum Sihirbazı'nı kullanarak yükseltmek için
+#### <a name="to-upgrade-using-the-setup-wizard"></a>Kurulum Sihirbazı 'Nı kullanarak yükseltmek için
 
 1. Yönetici haklarına sahip bir hesapla bilgisayarda oturum açın.
 
-2. Yürütme **MMASetup -\<platform\>.exe** Kurulum Sihirbazı'nı başlatın.
+2. Kurulum sihirbazını başlatmak için **MMASetup-\<platform\>. exe** ' yi yürütün.
 
-3. Kurulum sihirbazının ilk sayfasında, tıklayın **sonraki**.
+3. Kurulum sihirbazının ilk sayfasında, **İleri**' ye tıklayın.
 
-4. İçinde **Microsoft Monitoring Agent Kurulumu** iletişim kutusu, tıklayın **kabul ediyorum** lisans sözleşmesini kabul etmek için.
+4. **Microsoft Monitoring Agent kurulum** iletişim kutusunda lisans sözleşmesini kabul etmek için **kabul ediyorum ' a tıklayın.**
 
-5. İçinde **Microsoft Monitoring Agent Kurulumu** iletişim kutusu, tıklayın **yükseltme**. Durum Sayfası yükseltmenin ilerleyişini görüntüler.
+5. **Microsoft Monitoring Agent kurulum** Iletişim kutusunda **Yükselt**' e tıklayın. Durum sayfası yükseltmenin ilerlemesini görüntüler.
 
-6. Zaman **Microsoft Monitoring Agent yapılandırması başarıyla tamamlandı.** sayfası görüntülendikten sonra **son**.
+6. **Microsoft Monitoring Agent yapılandırması başarıyla tamamlandığında.** sayfası göründüğünde **son**' a tıklayın.
 
 #### <a name="to-upgrade-from-the-command-line"></a>Komut satırından yükseltmek için
 
 1. Yönetici haklarına sahip bir hesapla bilgisayarda oturum açın.
 
-2. Çalıştırma yükseltilmiş komut isteminden aracı yükleme dosyalarını ayıklamak için `MMASetup-<platform>.exe /c` ve bu dosyaları ayıklamak yol, ister. Alternatif olarak, bağımsız değişkenleri geçirme olan yolu belirtebilirsiniz `MMASetup-<platform>.exe /c /t:<Full Path>`.
+2. Aracı yükleme dosyalarını ayıklamak için, yükseltilmiş bir komut isteminden `MMASetup-<platform>.exe /c` ' ı çalıştırın ve dosyaları ayıklama yolunu sorar. Alternatif olarak, `MMASetup-<platform>.exe /c /t:<Full Path>` bağımsız değişkenlerini geçirerek yolu belirtebilirsiniz.
 
-3. Burada D:\ yükseltme günlük dosyasının konumudur aşağıdaki komutu çalıştırın.
+3. Şu komutu çalıştırın, burada D:\ , yükseltme günlük dosyasının konumudur.
 
     ```dos
     setup.exe /qn /l*v D:\logs\AgentUpgrade.log AcceptEndUserLicenseAgreement=1
     ```
 
-### <a name="upgrade-linux-agent"></a>Linux Aracısı yükseltme 
+### <a name="upgrade-linux-agent"></a>Linux aracısını yükselt 
 
-Önceki sürümlerinden yükseltme (> 1.0.0-47) desteklenir. İle yükleme gerçekleştirme `--upgrade` komutu tüm bileşenleri Aracısı'nın en son sürümüne yükseltecek.
+Önceki sürümlerden yükseltme (> 1.0.0-47) desteklenir. `--upgrade` komutuyla yüklemeyi gerçekleştirmek aracının tüm bileşenlerini en son sürüme yükseltir.
 
-Bir aracıyı yükseltmek için aşağıdaki komutu çalıştırın.
+Aracıyı yükseltmek için aşağıdaki komutu çalıştırın.
 
 `sudo sh ./omsagent-*.universal.x64.sh --upgrade`
 
-## <a name="adding-or-removing-a-workspace"></a>Ekleyerek veya kaldırarak bir çalışma alanı
+## <a name="adding-or-removing-a-workspace"></a>Çalışma alanı ekleme veya kaldırma
 
 ### <a name="windows-agent"></a>Windows Aracısı
-Yalnızca Windows Aracısı farklı bir çalışma alanına raporlama yapacak veya bir çalışma alanı yapılandırmasını kaldırmak için yeniden yapılandırmak istediğiniz zaman, aynı zamanda (genellikle birden fazla çalışma alanına raporlama yapacak aracıyı yapılandırmak istediğiniz zaman bu bölümdeki adımlar gereklidir birden çok giriş adlandırılır). Birden çok çalışma alanına raporlama yapacak Windows aracısını yapılandırma yalnızca aracısının ve aşağıda açıklanan yöntemlerle ilk Kurulumdan sonra gerçekleştirilebilir.    
+Bu bölümdeki adımlar, yalnızca Windows aracısını farklı bir çalışma alanına rapor verecek şekilde yeniden yapılandırmak ya da bir çalışma alanını yapılandırmadan kaldırmak istediğinizde gereklidir, ancak aracıyı birden fazla çalışma alanına raporlama için yapılandırmak istediğinizde (genellikle Çoklu barındırma olarak adlandırılır). Windows aracısının birden çok çalışma alanına rapor verecek şekilde yapılandırılması, yalnızca aracının ilk kurulumundan sonra ve aşağıda açıklanan yöntemler kullanılarak gerçekleştirilebilir.    
 
-#### <a name="update-settings-from-control-panel"></a>Denetim Masası'ndan ayarlarını güncelleştirme
+#### <a name="update-settings-from-control-panel"></a>Ayarları denetim masası 'ndan Güncelleştir
 
 1. Yönetici haklarına sahip bir hesapla bilgisayarda oturum açın.
 
 2. **Denetim Masası**'nı açın.
 
-3. Seçin **Microsoft Monitoring Agent** ve ardından **Azure Log Analytics** sekmesi.
+3. **Microsoft Monitoring Agent** öğesini seçin ve ardından **Azure Log Analytics** sekmesine tıklayın.
 
-4. Bir çalışma alanı kaldırılıyor, onu seçin ve ardından **Kaldır**. Aracı için raporlamayı sonlandırmak istediğiniz herhangi bir çalışma için bu adımı yineleyin.
+4. Bir çalışma alanını kaldırdıysanız, seçin ve ardından **Kaldır**' a tıklayın. Aracının raporlamayı durdurmasını istediğiniz başka bir çalışma alanı için bu adımı tekrarlayın.
 
-5. Bir çalışma alanı ekleme, tıklayın **Ekle** ve **bir Log Analytics çalışma alanı Ekle** iletişim kutusu, yapıştırma çalışma alanı kimliği ve çalışma alanı anahtarı (birincil anahtar). Bilgisayarın Azure kamu bulutundaki bir Log Analytics çalışma alanına raporlaması gerekiyorsa, Azure ABD devlet kurumları Azure bulut aşağı açılan listeden seçin.
+5. Çalışma alanı eklenirse, **Ekle** ' ye tıklayın ve **Log Analytics çalışma alanı Ekle** iletişim kutusunda, çalışma alanı kimliğini ve çalışma alanı anahtarını (birincil anahtar) yapıştırın. Bilgisayarın Azure Kamu bulutundaki bir Log Analytics çalışma alanına rapor etmesi gerekiyorsa Azure Cloud açılır listesinden Azure ABD kamu ' u seçin.
 
 6. Değişikliklerinizi kaydetmek için **Tamam**’a tıklayın.
 
-#### <a name="remove-a-workspace-using-powershell"></a>PowerShell kullanarak bir çalışma alanını Kaldır
+#### <a name="remove-a-workspace-using-powershell"></a>PowerShell kullanarak çalışma alanını kaldırma
 
 ```powershell
 $workspaceId = "<Your workspace Id>"
@@ -116,7 +110,7 @@ $mma.RemoveCloudWorkspace($workspaceId)
 $mma.ReloadConfiguration()
 ```
 
-#### <a name="add-a-workspace-in-azure-commercial-using-powershell"></a>Azure PowerShell kullanarak ticari bir çalışma alanı Ekle
+#### <a name="add-a-workspace-in-azure-commercial-using-powershell"></a>PowerShell kullanarak Azure Commercial 'e çalışma alanı ekleme
 
 ```powershell
 $workspaceId = "<Your workspace Id>"
@@ -126,7 +120,7 @@ $mma.AddCloudWorkspace($workspaceId, $workspaceKey)
 $mma.ReloadConfiguration()
 ```
 
-#### <a name="add-a-workspace-in-azure-for-us-government-using-powershell"></a>PowerShell kullanarak ABD için Azure'a bir çalışma alanı ekleyin
+#### <a name="add-a-workspace-in-azure-for-us-government-using-powershell"></a>PowerShell kullanarak ABD kamu için Azure 'da bir çalışma alanı ekleme
 
 ```powershell
 $workspaceId = "<Your workspace Id>"
@@ -137,58 +131,58 @@ $mma.ReloadConfiguration()
 ```
 
 >[!NOTE]
->Komut satırından veya betik önceden yükleyin veya aracıyı yapılandırmak için kullandığınız, `EnableAzureOperationalInsights` tarafından değiştirildi `AddCloudWorkspace` ve `RemoveCloudWorkspace`.
+>Aracıyı yüklemek veya yapılandırmak için daha önce komut satırını veya betiği kullandıysanız `EnableAzureOperationalInsights` `AddCloudWorkspace` ve `RemoveCloudWorkspace`ile değiştirilmiştir.
 >
 
 ### <a name="linux-agent"></a>Linux Aracısı
-Aşağıdaki adımları, farklı bir çalışma alanı ile kaydetmek için veya bir çalışma yapılandırmasını kaldırmak isterseniz Linux aracısını yeniden yapılandırmak nasıl ekleyebileceğiniz gösterilmektedir.
+Aşağıdaki adımlarda, farklı bir çalışma alanına kaydolmaya veya bir çalışma alanını yapılandırmadan kaldırmaya karar verirseniz Linux aracısının nasıl yeniden yapılandırılacağı gösterilmektedir.
 
-1. Bir çalışma alanına kaydedilir doğrulamak için aşağıdaki komutu çalıştırın:
+1. Bir çalışma alanına kayıtlı olduğunu doğrulamak için şu komutu çalıştırın:
 
     `/opt/microsoft/omsagent/bin/omsadmin.sh -l`
 
-    Bir durum aşağıdaki örneğe benzer döndürmesi gerekir:
+    Aşağıdaki örneğe benzer bir durum döndürmelidir:
 
     `Primary Workspace: <workspaceId>   Status: Onboarded(OMSAgent Running)`
 
-    Durumu da gösterilir, aracıyı çalıştıran, aksi takdirde aracıyı yeniden yapılandırmak için aşağıdaki adımları başarıyla tamamlanmayacaktır önemlidir.
+    Durumun aynı zamanda aracının çalıştığını da gösterdiği, aksi takdirde aracıyı yeniden yapılandırmak için aşağıdaki adımlar başarıyla tamamlanmayacak.
 
-2. Bir çalışma alanıyla zaten kayıtlı değilse, aşağıdaki komutu çalıştırarak kayıtlı çalışma alanını kaldırın. Aksi takdirde, kayıtlı değilse, sonraki adıma geçin.
+2. Zaten bir çalışma alanıyla kaydedilmişse, aşağıdaki komutu çalıştırarak kayıtlı çalışma alanını kaldırın. Aksi takdirde, bir sonraki adımla devam edin.
 
     `/opt/microsoft/omsagent/bin/omsadmin.sh -X`
 
-3. Farklı bir çalışma alanı ile kaydetmek için aşağıdaki komutu çalıştırın:
+3. Farklı bir çalışma alanıyla kaydolmak için aşağıdaki komutu çalıştırın:
 
     `/opt/microsoft/omsagent/bin/omsadmin.sh -w <workspace id> -s <shared key> [-d <top level domain>]`
     
-4. Değişikliklerinizi etkisi sürdü doğrulamak için aşağıdaki komutu çalıştırın:
+4. Değişikliklerinizin geçerli olduğunu doğrulamak için şu komutu çalıştırın:
 
     `/opt/microsoft/omsagent/bin/omsadmin.sh -l`
 
-    Bir durum aşağıdaki örneğe benzer döndürmesi gerekir:
+    Aşağıdaki örneğe benzer bir durum döndürmelidir:
 
     `Primary Workspace: <workspaceId>   Status: Onboarded(OMSAgent Running)`
 
-Aracı hizmeti değişikliklerin etkili olması yeniden başlatılması gerekmez.
+Değişikliklerin etkili olabilmesi için Aracı hizmetinin yeniden başlatılması gerekmez.
 
-## <a name="update-proxy-settings"></a>Proxy ayarlarını güncelleştirme
-Hizmet bir ara sunucu üzerinden iletişim kurmak için aracıyı yapılandırmak için veya [Log Analytics gateway](gateway.md) dağıtımdan sonra aşağıdaki yöntemlerden birini bu görevi tamamlamak için kullanın.
+## <a name="update-proxy-settings"></a>Ara sunucu ayarlarını Güncelleştir
+Aracıyı, dağıtımdan sonra bir ara sunucu veya [ağ geçidi Log Analytics](gateway.md) aracılığıyla hizmetle iletişim kuracak şekilde yapılandırmak için, bu görevi gerçekleştirmek için aşağıdaki yöntemlerden birini kullanın.
 
 ### <a name="windows-agent"></a>Windows Aracısı
 
-#### <a name="update-settings-using-control-panel"></a>Denetim Masası'nı kullanarak ayarlarını güncelleştirme
+#### <a name="update-settings-using-control-panel"></a>Denetim Masası 'nı kullanarak ayarları güncelleştirme
 
 1. Yönetici haklarına sahip bir hesapla bilgisayarda oturum açın.
 
 2. **Denetim Masası**'nı açın.
 
-3. Seçin **Microsoft Monitoring Agent** ve ardından **Proxy ayarlarını** sekmesi.
+3. **Microsoft Monitoring Agent** öğesini seçin ve ardından **proxy ayarları** sekmesine tıklayın.
 
 4. **Ara sunucu kullan**'a tıklayıp ara sunucunun veya ağ geçidinin URL'sini ve bağlantı noktası numarasını girin. Ara sunucunuz veya Log Analytics ağ geçidiniz kimlik doğrulaması gerektiriyorsa, kimlik doğrulaması yapmak için kullanıcı adını ve parolayı yazın, ardından **Tamam**'a tıklayın.
 
-#### <a name="update-settings-using-powershell"></a>PowerShell kullanarak ayarlarını güncelleştirme
+#### <a name="update-settings-using-powershell"></a>PowerShell kullanarak ayarları güncelleştirme
 
-Aşağıdaki örnek PowerShell kodu kopyalayın, ortamınıza özgü bilgilerle güncelleştirin ve bir PS1 dosya adı uzantısıyla kaydedin. Log Analytics çalışma alanını Azure İzleyici'de doğrudan bağlanan her bilgisayarda betiği çalıştırın.
+Aşağıdaki örnek PowerShell kodunu kopyalayın, ortamınıza özgü bilgilerle güncelleştirin ve bir PS1 dosya adı uzantısıyla kaydedin. Betiği Azure Izleyici 'de Log Analytics çalışma alanına doğrudan bağlanan her bilgisayarda çalıştırın.
 
 ```powershell
 param($ProxyDomainName="https://proxy.contoso.com:30443", $cred=(Get-Credential))
@@ -215,7 +209,7 @@ $healthServiceSettings.SetProxyInfo($ProxyDomainName, $ProxyUserName, $cred.GetN
 ```
 
 ### <a name="linux-agent"></a>Linux Aracısı
-Azure'da Linux bilgisayarlarını bir proxy sunucusu veya Log Analytics ağ geçidi iletişim kurması gerekiyorsa aşağıdaki adımları gerçekleştirin. Proxy yapılandırması değeri `[protocol://][user:password@]proxyhost[:port]` sözdizimine sahiptir. *proxyhost* özelliği, ara sunucunun tam etki adı alanı veya IP adresini kabul eder.
+Linux bilgisayarlarınızın bir ara sunucu veya Log Analytics ağ geçidi üzerinden iletişim kurması gerekiyorsa aşağıdaki adımları gerçekleştirin. Proxy yapılandırması değeri `[protocol://][user:password@]proxyhost[:port]` sözdizimine sahiptir. *proxyhost* özelliği, ara sunucunun tam etki adı alanı veya IP adresini kabul eder.
 
 1. Aşağıdaki komutları çalıştırıp değerleri kendi ayarlarınıza göre değiştirerek `/etc/opt/microsoft/omsagent/proxy.conf` dosyasını düzenleyin.
 
@@ -232,38 +226,38 @@ Azure'da Linux bilgisayarlarını bir proxy sunucusu veya Log Analytics ağ geç
     ```
 
 ## <a name="uninstall-agent"></a>Aracıyı kaldır
-Komut satırı veya Kurulum Sihirbazı'nı kullanarak Windows veya Linux aracısını kaldırmak için aşağıdaki prosedürlerden birini kullanın.
+Komut satırı veya Kurulum Sihirbazı 'nı kullanarak Windows veya Linux Aracısı 'nı kaldırmak için aşağıdaki yordamlardan birini kullanın.
 
 ### <a name="windows-agent"></a>Windows Aracısı
 
-#### <a name="uninstall-from-control-panel"></a>Denetim Masası'ndan kaldırma
+#### <a name="uninstall-from-control-panel"></a>Denetim masasından kaldır
 1. Yönetici haklarına sahip bir hesapla bilgisayarda oturum açın.
 
-2. İçinde **Denetim Masası**, tıklayın **programlar ve Özellikler**.
+2. **Denetim Masası**'nda **Programlar ve Özellikler**' e tıklayın.
 
-3. İçinde **programlar ve Özellikler**, tıklayın **Microsoft Monitoring Agent**, tıklayın **kaldırma**ve ardından **Evet**.
+3. **Programlar ve Özellikler**' de **Microsoft Monitoring Agent**' a, **Kaldır**' a ve ardından **Evet**' e tıklayın.
 
 >[!NOTE]
->Aracı Kurulum Sihirbazı'nı çift tıklatılarak da çalıştırılabilir **MMASetup -\<platform\>.exe**, Azure portalında bir çalışma alanından indirilebilir olduğu.
+>Aracı Kurulum Sihirbazı ayrıca, Azure portal bir çalışma alanından indirileceği **MMASetup-\<platform\>. exe**' ye çift tıklayarak da çalıştırılabilir.
 
-#### <a name="uninstall-from-the-command-line"></a>Komut satırından kaldırın
-Aracı için indirilen dosyayı, IExpress ile oluşturulan kendi içinde yükleme paketidir. Destekleyici dosyaları ve aracı için Kurulum programı, pakette yer alan ve doğru bir şekilde aşağıdaki örnekte gösterilen komut satırını kullanarak kaldırmak için ayıklanacak gerekir.
+#### <a name="uninstall-from-the-command-line"></a>Komut satırından kaldır
+Aracının indirilen dosyası, IExpress ile oluşturulan, kendi içinde bulunan bir yükleme paketidir. Aracının ve destekleyici dosyaların kurulum programı pakette bulunur ve aşağıdaki örnekte gösterilen komut satırı kullanılarak düzgün bir şekilde kaldırılması için ayıklanmalıdır.
 
 1. Yönetici haklarına sahip bir hesapla bilgisayarda oturum açın.
 
-2. Çalıştırma yükseltilmiş komut isteminden aracı yükleme dosyalarını ayıklamak için `extract MMASetup-<platform>.exe` ve bu dosyaları ayıklamak yol, ister. Alternatif olarak, bağımsız değişkenleri geçirme olan yolu belirtebilirsiniz `extract MMASetup-<platform>.exe /c:<Path> /t:<Path>`. IExpress tarafından desteklenen komut satırı anahtarları hakkında daha fazla bilgi için bkz. [IExpress için komut satırı anahtarları](https://support.microsoft.com/help/197147/command-line-switches-for-iexpress-software-update-packages) ve sonra örneği gereksinimlerinize uyacak şekilde güncelleştirin.
+2. Aracı yükleme dosyalarını ayıklamak için, yükseltilmiş bir komut isteminden `extract MMASetup-<platform>.exe` çalıştırın ve dosyaları ayıklama yolunu sorar. Alternatif olarak, `extract MMASetup-<platform>.exe /c:<Path> /t:<Path>`bağımsız değişkenleri geçirerek de yolu belirtebilirsiniz. IExpress tarafından desteklenen komut satırı anahtarları hakkında daha fazla bilgi için bkz. [IExpress Için komut satırı anahtarları](https://support.microsoft.com/help/197147/command-line-switches-for-iexpress-software-update-packages) ve bu örneği gereksinimlerinize uyacak şekilde güncelleştirin.
 
-3. İsteminde `%WinDir%\System32\msiexec.exe /x <Path>:\MOMAgent.msi /qb`.
+3. İsteminde `%WinDir%\System32\msiexec.exe /x <Path>:\MOMAgent.msi /qb`yazın.
 
 ### <a name="linux-agent"></a>Linux Aracısı
 Aracıyı kaldırmak için Linux bilgisayarında aşağıdaki komutu çalıştırın. *--temizleme* bağımsız değişkeni, aracıyı ve yapılandırmasını tamamen kaldırır.
 
    `wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh && sh onboard_agent.sh --purge`
 
-## <a name="configure-agent-to-report-to-an-operations-manager-management-group"></a>Bir aracıyı Operations Manager yönetim grubuna raporlama yapacak yapılandırın
+## <a name="configure-agent-to-report-to-an-operations-manager-management-group"></a>Aracıyı bir Operations Manager yönetim grubuna bildirilecek şekilde yapılandırma
 
 ### <a name="windows-agent"></a>Windows Aracısı
-Bir System Center Operations Manager yönetim grubuna rapor Windows için Log Analytics aracısını yapılandırmak için aşağıdaki adımları gerçekleştirin.
+Windows için Log Analytics aracısını bir System Center Operations Manager yönetim grubuna bildirilecek şekilde yapılandırmak için aşağıdaki adımları gerçekleştirin.
 
 [!INCLUDE [log-analytics-agent-note](../../../includes/log-analytics-agent-note.md)]
 
@@ -271,35 +265,35 @@ Bir System Center Operations Manager yönetim grubuna rapor Windows için Log An
 
 2. **Denetim Masası**'nı açın.
 
-3. Tıklayın **Microsoft Monitoring Agent** ve ardından **Operations Manager** sekmesi.
+3. **Microsoft Monitoring Agent** ' a ve ardından **Operations Manager** sekmesine tıklayın.
 
-4. Active Directory ile tümleştirme Operations Manager sunucularınız varsa tıklayın **yönetim grubu atamalarını AD DS'den otomatik olarak güncelleştir**.
+4. Operations Manager sunucularınızın Active Directory Tümleştirmesi varsa, **Yönetim grubu atamalarını AD DS otomatik olarak güncelleştir**' e tıklayın.
 
-5. Tıklayın **Ekle** açmak için **Yönetim Grubu Ekle** iletişim kutusu.
+5. **Yönetim grubu Ekle** iletişim kutusunu açmak için **Ekle** ' ye tıklayın.
 
-6. İçinde **yönetim grubu adı** alanında, yönetim grubunuzun adını yazın.
+6. **Yönetim grubu adı** alanında, yönetim grubunuzun adını yazın.
 
-7. İçinde **birincil yönetim sunucusu** alanında, birincil yönetim sunucusunun bilgisayar adını yazın.
+7. **Birincil yönetim sunucusu** alanına birincil yönetim sunucusunun bilgisayar adını yazın.
 
-8. İçinde **yönetim sunucusu bağlantı noktası** alanında, TCP bağlantı noktası numarasını yazın.
+8. **Yönetim sunucusu bağlantı noktası** ALANıNA, TCP bağlantı noktası numarasını yazın.
 
-9. Altında **aracı eylem hesabı**, yerel sistem hesabını veya bir yerel etki alanı hesabı seçin.
+9. **Aracı eylem hesabı**altında, yerel sistem hesabını veya bir yerel etki alanı hesabını seçin.
 
-10. Tıklayın **Tamam** kapatmak için **Yönetim Grubu Ekle** iletişim kutusunu ve ardından **Tamam** kapatmak için **Microsoft Monitoring Agent özellikleri** iletişim kutusu.
+10. **Tamam** ' **a tıklayarak yönetim grubu Ekle** iletişim kutusunu kapatın ve ardından **Tamam** ' a tıklayarak **Microsoft Monitoring Agent Özellikler** iletişim kutusunu kapatın.
 
 ### <a name="linux-agent"></a>Linux Aracısı
-Bir System Center Operations Manager yönetim grubuna rapor için Linux için Log Analytics aracısını yapılandırmak için aşağıdaki adımları gerçekleştirin.
+Linux için Log Analytics aracısını bir System Center Operations Manager yönetim grubuna bildirilecek şekilde yapılandırmak için aşağıdaki adımları gerçekleştirin.
 
 [!INCLUDE [log-analytics-agent-note](../../../includes/log-analytics-agent-note.md)]
 
-1. Dosyayı Düzenle `/etc/opt/omi/conf/omiserver.conf`
+1. Dosyayı düzenleme `/etc/opt/omi/conf/omiserver.conf`
 
-2. İle satır başına emin `httpsport=` bağlantı noktası 1270 tanımlar. Örneğin: `httpsport=1270`
+2. `httpsport=` ile başlayan satırın 1270 numaralı bağlantı noktasını tanımladığından emin olun. Örneğin: `httpsport=1270`
 
-3. OMI sunucuyu yeniden başlatın: `sudo /opt/omi/bin/service_control restart`
+3. OMı sunucusunu yeniden başlatın: `sudo /opt/omi/bin/service_control restart`
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Gözden geçirme [Linux Aracısı sorunlarını giderme](agent-linux-troubleshoot.md) Linux aracısını yönetmek veya yükleme sırasında sorunlarla karşılaşırsanız.
+- Linux aracısını yüklerken veya yönetirken sorunlarla karşılaşırsanız [, Linux aracısının sorunlarını giderme](agent-linux-troubleshoot.md) konusunu gözden geçirin.
 
-- Gözden geçirme [Windows Aracısı sorunlarını giderme](agent-windows-troubleshoot.md) Windows Aracısı'nı yönetme veya yükleme sırasında sorunlarla karşılaşırsanız.
+- Windows Agent 'ı yüklerken veya yönetirken sorunlarla karşılaşırsanız [Windows Agent sorunlarını giderme](agent-windows-troubleshoot.md) konusunu gözden geçirin.

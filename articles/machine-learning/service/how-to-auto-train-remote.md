@@ -1,111 +1,128 @@
 ---
-title: Otomatik ML uzak işlem hedefleri
-titleSuffix: Azure Machine Learning service
-description: Azure Machine Learning hizmeti ile bir Azure Machine Learning uzak işlem hedefi üzerinde otomatik makine öğrenimini kullanarak model oluşturmayı öğrenin
+title: Otomatik ML uzaktan işlem hedefleri
+titleSuffix: Azure Machine Learning
+description: Azure Machine Learning ile Azure Machine Learning uzaktan işlem hedefi üzerinde otomatik makine öğrenimi kullanarak modeller oluşturmayı öğrenin
 services: machine-learning
-author: nacharya1
-ms.author: nilesha
+author: cartacioS
+ms.author: sacartac
 ms.reviewer: sgilley
 ms.service: machine-learning
 ms.subservice: core
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 12/04/2018
-ms.custom: seodec18
-ms.openlocfilehash: 6a18bdf3a2a1ccd60ff20d21ebd99f4f6e15e38f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 11/04/2019
+ms.openlocfilehash: 5104e6e037341c41a032f80287c6d56d17361d4c
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65551346"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73932191"
 ---
-# <a name="train-models-with-automated-machine-learning-in-the-cloud"></a>Bulutta otomatik machine learning ile modellerini eğitin
+# <a name="train-models-with-automated-machine-learning-in-the-cloud"></a>Bulutta otomatik makine öğrenimi ile modelleri eğitme
 
-Azure Machine Learning'de yönettiğiniz işlem kaynaklarının farklı türlerde modelinizi eğitin. İşlem hedefi, yerel bir bilgisayar veya bulutta bir bilgisayar olabilir.
+[!INCLUDE [aml-applies-to-basic-enterprise-sku](../../../includes/aml-applies-to-basic-enterprise-sku.md)]
 
-Kolayca artırın veya Azure Machine Learning işlem (AmlCompute) gibi ek işlem hedefleri ekleyerek machine learning denemenizi ölçeklendirin. AmlCompute tek veya çok düğümlü bir işlem kolayca oluşturmanıza olanak sağlayan bir yönetilen işlem altyapısıdır.
+Azure Machine Learning, modelinizi yönettiğiniz farklı türlerde işlem kaynakları üzerinde eğitebilirsiniz. İşlem hedefi, bulutta yerel bir bilgisayar veya bir kaynak olabilir.
 
-Bu makalede, otomatik ML ile AmlCompute kullanarak model oluşturma konusunda bilgi edinin.
+Azure Machine Learning Işlem (AmlCompute) gibi ek bilgi işlem hedefleri ekleyerek makine öğrenimi denemenizin kolayca ölçeğini değiştirebilir veya ölçeklendirebilirsiniz. AmlCompute, kolayca tek veya çok düğümlü bir işlem oluşturmanıza olanak sağlayan bir yönetilen işlem altyapısıdır.
 
-## <a name="how-does-remote-differ-from-local"></a>Uzaktan yerel bilgisayardan farkı nedir?
+Bu makalede, AmlCompute ile otomatikleştirilmiş ML kullanarak bir model oluşturmayı öğreneceksiniz.
 
-Öğreticiyi "[otomatik machine learning ile bir sınıflandırma modeli eğitme](tutorial-auto-train-models.md)" yerel bilgisayarda otomatik ML ile modeli eğitmek için nasıl kullanılacağını size öğretir.  Yerel olarak da eğitimindeki iş akışı uzak hedefleri için de geçerlidir. Ancak, uzak işlem ile otomatik ML deneme yinelemelerini zaman uyumsuz olarak yürütülür. Bu işlevsellik, belirli bir yinelemeye iptal etme, yürütme durumunu izlemek veya diğer Jupyter not defteri hücrelerde üzerinde çalışmaya devam sağlar. Uzaktan eğitmek için önce uzak işlem hedefi AmlCompute gibi oluşturun. Ardından uzak kaynak yapılandırın ve kodunuzu var. gönderin.
+## <a name="how-does-remote-differ-from-local"></a>Uzaktan yerel nasıl farklıdır?
 
-Bu makalede, bir uzak AmlCompute hedefte otomatik ML deneme çalıştırmak için gereken ek adımlar gösterilmektedir. Çalışma alanı nesnesi `ws`, öğreticinin buraya kod kullanılır.
+"[Otomatik makine öğrenimi ile sınıflandırma modelini eğitme](tutorial-auto-train-models.md)" öğreticisi, bir MODELI otomatik ml ile eğitme konusunda yerel bir bilgisayar kullanmayı öğretir. Eğitim yerel olarak uzak hedefler de için de geçerli olduğunda iş akışı. Ancak, uzaktan işlem ile otomatikleştirilmiş ML denemesi yinelemeleri zaman uyumsuz olarak yürütülür. Bu işlevsellik, belirli bir yinelemeyi iptal etmenizi, yürütmenin durumunu izlemenize veya Jupyter not defterindeki diğer hücrelerde çalışmaya devam etmenize olanak tanır. Uzaktan eğitebilmeniz için öncelikle AmlCompute gibi bir uzak işlem hedefi oluşturursunuz. Ardından, uzak kaynağı yapılandırıp kodunuzu buraya gönderebilirsiniz.
+
+Bu makalede, uzak bir AmlCompute hedefinde otomatik ML denemesi çalıştırmak için gereken ek adımlar gösterilmektedir. Öğreticiden `ws`çalışma alanı nesnesi, burada kod boyunca kullanılır.
 
 ```python
 ws = Workspace.from_config()
 ```
 
-## <a name="create-resource"></a>Kaynak Oluştur
+## <a name="create-resource"></a>Kaynak oluştur
 
-AmlCompute hedef çalışma alanınızda oluşturun (`ws`) zaten mevcut değilse.  
+Zaten mevcut değilse, çalışma alanınızda AmlCompute hedefini oluşturun (`ws`).
 
-**Tahmini Süre**: AmlCompute hedefinin oluşturulması yaklaşık 5 dakika sürer.
+**Tahmin süresi**: AmlCompute hedefinin oluşturulması yaklaşık 5 dakika sürer.
 
 ```python
 from azureml.core.compute import AmlCompute
 from azureml.core.compute import ComputeTarget
 
-amlcompute_cluster_name = "automlcl" #Name your cluster
-provisioning_config = AmlCompute.provisioning_configuration(vm_size = "STANDARD_D2_V2", 
+amlcompute_cluster_name = "automlcl"  # Name your cluster
+provisioning_config = AmlCompute.provisioning_configuration(vm_size="STANDARD_D2_V2",
                                                             # for GPU, use "STANDARD_NC6"
-                                                            #vm_priority = 'lowpriority', # optional
-                                                            max_nodes = 6)
+                                                            # vm_priority = 'lowpriority', # optional
+                                                            max_nodes=6)
+compute_target = ComputeTarget.create(
+    ws, amlcompute_cluster_name, provisioning_config)
 
-compute_target = ComputeTarget.create(ws, amlcompute_cluster_name, provisioning_config)
-    
 # Can poll for a minimum number of nodes and for a specific timeout.
 # If no min_node_count is provided, it will use the scale settings for the cluster.
-compute_target.wait_for_completion(show_output = True, min_node_count = None, timeout_in_minutes = 20)
+compute_target.wait_for_completion(
+    show_output=True, min_node_count=None, timeout_in_minutes=20)
 ```
 
-Artık `compute_target` uzak işlem hedefi olarak nesnesi.
+Artık `compute_target` nesnesini uzak işlem hedefi olarak kullanabilirsiniz.
 
-Küme adı kısıtlamaları şunlardır:
-+ 64 karakterden kısa olmalıdır.  
-+ Aşağıdaki karakterlerden herhangi birini içeremez: `\` ~! @ # $ % ^ & * () = + _ [] {} \\ \\ |;: \' \\", < > /?. `
+Küme adı kısıtlamaları şunları içerir:
++ 64 karakterden kısa olmalıdır.
++ Şu karakterlerden herhangi birini içeremez: `\` ~! @ # $% ^ & * () = + _ [] {} \\\\ |; : \' \\"< >/?. `
 
-## <a name="access-data-using-getdata-file"></a>Verilere get_data dosyası kullanma
+## <a name="access-data-using-tabulardataset-function"></a>TabularDataset işlevini kullanarak verilere erişme
 
-Eğitim verilerinizi uzak bir kaynağa erişim sağlar. Uzak işlem üzerinde çalışan otomatik makine öğrenimi denemeleri için verilerin kullanarak getirilmesi gerekir. bir `get_data()` işlevi.  
+Otomatikmlconfig içindeki otomatik ML 'ye geçirilen `TabularDataset`s olarak X ve y tanımlandı. Varsayılan olarak `from_delimited_files`, `infer_column_types` doğru olarak ayarlar, bu da sütun türünü otomatik olarak çıkaracaktır. 
 
-Erişim sağlamak için yapmanız gerekir:
-+ Get_data.py içeren dosyayı oluşturma bir `get_data()` işlevi 
-+ Bu dosyanın mutlak bir yol olarak erişilebilir bir dizine yerleştirin 
-
-Bir blob depolama veya yerel disk get_data.py dosyasındaki verileri okumak için kod yalıtabilirsiniz. Aşağıdaki kod örneğinde, veriler sklearn öğesini paketten gelir.
-
->[!Warning]
->Uzak işlem kullandığınız sonra kullanmalısınız `get_data()` veri Bağlantılarınızdaki gerçekleştirildiği. Veri Dönüşümleri için ek kitaplıklar get_data() bir parçası olarak yüklemeniz gerekiyorsa, izlenmesi için ek adımlar vardır. Başvurmak [otomatik ml dataprep örnek not defteri](https://aka.ms/aml-auto-ml-data-prep ) Ayrıntılar için.
-
+Sütun türlerini el ile ayarlamak isterseniz, her bir sütunun türünü el ile ayarlamak için `set_column_types` bağımsız değişkenini ayarlayabilirsiniz. Aşağıdaki kod örneğinde, veriler sköğren paketinden gelir.
 
 ```python
 # Create a project_folder if it doesn't exist
+if not os.path.isdir('data'):
+    os.mkdir('data')
+    
 if not os.path.exists(project_folder):
     os.makedirs(project_folder)
 
-#Write the get_data file.
-%%writefile $project_folder/get_data.py
-
 from sklearn import datasets
+from azureml.core.dataset import Dataset
 from scipy import sparse
 import numpy as np
+import pandas as pd
 
-def get_data():
-    
-    digits = datasets.load_digits()
-    X_digits = digits.data[10:,:]
-    y_digits = digits.target[10:]
+data_train = datasets.load_digits()
 
-    return { "X" : X_digits, "y" : y_digits }
+pd.DataFrame(data_train.data[100:,:]).to_csv("data/X_train.csv", index=False)
+pd.DataFrame(data_train.target[100:]).to_csv("data/y_train.csv", index=False)
+
+ds = ws.get_default_datastore()
+ds.upload(src_dir='./data', target_path='digitsdata', overwrite=True, show_progress=True)
+
+X = Dataset.Tabular.from_delimited_files(path=ds.path('digitsdata/X_train.csv'))
+y = Dataset.Tabular.from_delimited_files(path=ds.path('digitsdata/y_train.csv'))
+
 ```
 
+## <a name="create-run-configuration"></a>Çalıştırma yapılandırması oluştur
+
+Bağımlılıkları get_data. Kopyala betiği için kullanılabilir hale getirmek için, tanımlı `CondaDependencies`sahip bir `RunConfiguration` nesnesi tanımlayın. Bu nesneyi `AutoMLConfig``run_configuration` parametresi için kullanın.
+
+```python
+from azureml.core.runconfig import RunConfiguration
+from azureml.core.conda_dependencies import CondaDependencies
+
+run_config = RunConfiguration(framework="python")
+run_config.target = compute_target
+run_config.environment.docker.enabled = True
+run_config.environment.docker.base_image = azureml.core.runconfig.DEFAULT_CPU_IMAGE
+
+dependencies = CondaDependencies.create(
+    pip_packages=["scikit-learn", "scipy", "numpy"])
+run_config.environment.python.conda_dependencies = dependencies
+```
+
+Bu tasarım deseninin ek bir örneği için bu [örnek not defterine](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/automated-machine-learning/remote-amlcompute/auto-ml-remote-amlcompute.ipynb) bakın.
+
 ## <a name="configure-experiment"></a>Deneme yapılandırma
-
-Ayarlarını belirtin `AutoMLConfig`.  (Bkz: bir [parametrelerin tam listesi](how-to-configure-auto-train.md#configure-experiment) ve olası değerleri.)
-
-Ayarlarında `run_configuration` ayarlanır `run_config` DSVM yapılandırması ve ayarları içeren bir nesne.  
+`AutoMLConfig`için ayarları belirtin.  ( [Parametrelerin tam listesini](how-to-configure-auto-train.md#configure-experiment) ve olası değerlerini görün.)
 
 ```python
 from azureml.train.automl import AutoMLConfig
@@ -126,35 +143,21 @@ automl_settings = {
 automl_config = AutoMLConfig(task='classification',
                              debug_log='automl_errors.log',
                              path=project_folder,
-                             compute_target = compute_target,
-                             data_script=project_folder + "/get_data.py",
+                             compute_target=compute_target,
+                             run_configuration=run_config,
+                             X = X,
+                             y = y,
                              **automl_settings,
-                            )
+                             )
 ```
 
-### <a name="enable-model-explanations"></a>Model açıklamalarını etkinleştir
+## <a name="submit-training-experiment"></a>Eğitim deneme deneyimini gönder
 
-İsteğe bağlı `model_explainability` parametresinde `AutoMLConfig` Oluşturucusu. Ayrıca, bir doğrulama dataframe nesnesi bir parametre olarak geçirilmelidir `X_valid` modeli explainability özelliği kullanmak için.
-
-```python
-automl_config = AutoMLConfig(task='classification',
-                             debug_log='automl_errors.log',
-                             path=project_folder,
-                             compute_target = compute_target,
-                             data_script=project_folder + "/get_data.py",
-                             **automl_settings,
-                             model_explainability=True,
-                             X_valid = X_test
-                            )
-```
-
-## <a name="submit-training-experiment"></a>Eğitim denemesini gönderin
-
-Algoritma, Hiper parametre otomatik olarak seçmek için yapılandırma şimdi gönderin ve modeli eğitme.
+Şimdi, algoritmayı otomatik olarak seçmek için yapılandırmayı, hiper parametreleri ve modeli eğiteye gönderebilirsiniz.
 
 ```python
 from azureml.core.experiment import Experiment
-experiment=Experiment(ws, 'automl_remote')
+experiment = Experiment(ws, 'automl_remote')
 remote_run = experiment.submit(automl_config, show_output=True)
 ```
 
@@ -168,7 +171,7 @@ Aşağıdaki örneğe benzer bir çıktı görürsünüz:
     METRIC: The result of computing score on the fitted pipeline.
     BEST: The best observed score thus far.
     ***********************************************************************************************
-    
+
      ITERATION     PIPELINE                               DURATION                METRIC      BEST
              2      Standardize SGD classifier            0:02:36                  0.954     0.954
              7      Normalizer DT                         0:02:22                  0.161     0.954
@@ -192,74 +195,37 @@ Aşağıdaki örneğe benzer bir çıktı görürsünüz:
             19      Robust Scaler kNN                     0:02:32                  0.983     0.989
 
 
-## <a name="explore-results"></a>Sonuçları keşfedin
+## <a name="explore-results"></a>Sonuçları keşfet
 
-Aynı Jupyter pencere öğesi bir olarak kullanabileceğiniz [öğreticisini](tutorial-auto-train-models.md#explore-the-results) bir grafik ve tablo sonuçları görmek için.
+Bir grafik ve sonuç tablosu görmek için [eğitim öğreticisinde](tutorial-auto-train-models.md#explore-the-results) gösterildiği gibi aynı [jupi pencere öğesini](https://docs.microsoft.com/python/api/azureml-widgets/azureml.widgets?view=azure-ml-py) kullanabilirsiniz.
 
 ```python
 from azureml.widgets import RunDetails
 RunDetails(remote_run).show()
 ```
-Burada pencere öğesinin statik bir görüntüsü yer alır.  Not Defteri çalıştırma özellikleri görmek ve günlükleri çalıştırılan için çıkış tablodaki herhangi bir satırdaki tıklayabilirsiniz.   Grafiğin üstünde açılan, her yineleme için her ölçüm grafiğini görüntülemek için de kullanabilirsiniz.
+
+Burada pencere öğesinin statik bir görüntüsü yer alır.  Not defterinde, söz konusu çalıştırmaya yönelik çalıştırma özelliklerini ve çıkış günlüklerini görmek için tablodaki herhangi bir satıra tıklayabilirsiniz.   Her yineleme için kullanılabilir her ölçümün grafiğini görüntülemek için grafiğin üzerindeki açılan menüyü de kullanabilirsiniz.
 
 ![pencere öğesi tablosu](./media/how-to-auto-train-remote/table.png)
 ![pencere öğesi çizimi](./media/how-to-auto-train-remote/plot.png)
 
-Pencere öğesi görebilir ve çalıştırma ayrıntıları tek keşfetmek için kullanabileceğiniz bir URL görüntülenir.
- 
-### <a name="view-logs"></a>Günlükleri görüntüleme
+Pencere öğesi, bireysel çalıştırma ayrıntılarını görmek ve araştırmak için kullanabileceğiniz bir URL görüntüler.  
 
-Günlükleri altında DSVM bulmak `/tmp/azureml_run/{iterationid}/azureml-logs`.
+Jupyter not defterinde değilseniz, bu URL 'YI çalıştırmanın içinden görüntüleyebilirsiniz:
 
-## <a name="best-model-explanation"></a>En iyi modeli açıklaması
-
-Model açıklaması verileri alınırken arka ucunda çalışan ne, konusunda saydamlık artırmak için modelleri hakkında ayrıntılı bilgi sağlar. Bu örnekte yalnızca en iyi uygun model için model açıklamaları çalıştırın. İşlem hattındaki tüm modeller için çalıştırırsanız, önemli çalışma zamanında neden olur. Model açıklaması bilgileri içerir:
-
-* shap_values: Şekil lib tarafından oluşturulan açıklama bilgiler.
-* expected_values: Beklenen değer X_train verilerin ayarlamak için uygulanan modeli.
-* overall_summary: Azalan düzende sıralanmış model düzeyi özelliği önem değerleri.
-* overall: Özellik adları overall_summary olduğu gibi aynı sırada sıralanır.
-* per_class_summary: Azalan düzende sıralanmış sınıf düzeyi özelliği önem değerleri. Yalnızca sınıflandırma çalışması için kullanılabilir.
-* per_class: Özellik adları per_class_summary olduğu gibi aynı sırada sıralanır. Yalnızca sınıflandırma çalışması için kullanılabilir.
-
-En iyi işlem hattı yinelemelerinizi seçmek için aşağıdaki kodu kullanın. `get_output` Yöntemi, en iyi çalıştırmanın ve ekrana sığdırılmış modeli son çağırma sığdırmak için döndürür.
-
-```python
-best_run, fitted_model = remote_run.get_output()
+```
+remote_run.get_portal_url()
 ```
 
-İçeri aktarma `retrieve_model_explanation` işlevini ve en iyi modeli üzerinde çalıştırın.
-
-```python
-from azureml.train.automl.automlexplainer import retrieve_model_explanation
-
-shap_values, expected_values, overall_summary, overall_imp, per_class_summary, per_class_imp = \
-    retrieve_model_explanation(best_run)
-```
-
-Sonuçları yazdırma `best_run` görüntülemek istediğiniz açıklama değişkenleri.
-
-```python
-print(overall_summary)
-print(overall_imp)
-print(per_class_summary)
-print(per_class_imp)
-```
-
-Yazdırma `best_run` açıklama Özet değişkenleri sonuçları aşağıdaki çıktıda.
-
-![Model explainability konsol çıktısı](./media/how-to-auto-train-remote/expl-print.png)
-
-Çalışma alanınız içinde özellik önem UI pencere öğesi ve bunun yanı sıra Azure Portal'da web UI aracılığıyla da görselleştirebilirsiniz.
-
-![Model explainability kullanıcı Arabirimi](./media/how-to-auto-train-remote/model-exp.png)
+Çalışma alanınızda aynı bilgiler bulunur.  Bu sonuçlar hakkında daha fazla bilgi edinmek için bkz. [otomatik makine öğrenimi sonuçlarını anlama](how-to-understand-automated-ml.md).
 
 ## <a name="example"></a>Örnek
 
-[How-to-use-azureml/automated-machine-learning/remote-amlcompute/auto-ml-remote-amlcompute.ipynb](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/automated-machine-learning/remote-amlcompute/auto-ml-remote-amlcompute.ipynb) Not Defteri, bu makaledeki kavramları göstermektedir. 
+Aşağıdaki [Not defteri](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/automated-machine-learning/regression/auto-ml-regression.ipynb) , bu makaledeki kavramları göstermektedir.
 
 [!INCLUDE [aml-clone-in-azure-notebook](../../../includes/aml-clone-for-examples.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bilgi [otomatik eğitim ayarlarını yapılandırma](how-to-configure-auto-train.md).
+* [Otomatik eğitime yönelik ayarları yapılandırmayı](how-to-configure-auto-train.md)öğrenin.
+* Otomatik ML denemeleri ' de model yorumlu özelliklerinin [nasıl](how-to-machine-learning-interpretability-automl.md) etkinleştirilebilirliği bölümüne bakın.

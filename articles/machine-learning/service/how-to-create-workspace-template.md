@@ -1,84 +1,225 @@
 ---
-title: Bir çalışma alanı oluşturmak için bir Azure Resource Manager şablonu kullanma
-titleSuffix: Azure Machine Learning service
-description: Yeni bir Azure Machine Learning hizmeti çalışma alanı oluşturmak için bir Azure Resource Manager şablonu kullanmayı öğrenin.
+title: Azure Resource Manager şablonuyla çalışma alanı oluşturma
+titleSuffix: Azure Machine Learning
+description: Yeni bir Azure Machine Learning çalışma alanı oluşturmak için Azure Resource Manager şablonu kullanmayı öğrenin.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: conceptual
 ms.author: larryfr
 author: Blackmist
-ms.date: 04/16/2019
+ms.date: 11/04/2019
 ms.custom: seoapril2019
-ms.openlocfilehash: 4e0af3b395ec640fd037a1e76365408c10613340
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 8bcfb80d42e7cd1fad6ff4c04415bd8627a3293e
+ms.sourcegitcommit: a10074461cf112a00fec7e14ba700435173cd3ef
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67477007"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73932137"
 ---
-# <a name="use-an-azure-resource-manager-template-to-create-a-workspace-for-azure-machine-learning-service"></a>Azure Machine Learning hizmeti için bir çalışma alanı oluşturmak için bir Azure Resource Manager şablonu kullanma
+[!INCLUDE [aml-applies-to-basic-enterprise-sku](../../../includes/aml-applies-to-basic-enterprise-sku.md)]
 
-Bu makalede, Azure Resource Manager şablonlarını kullanarak bir Azure Machine Learning hizmeti çalışma alanı oluşturmak için birkaç yol öğreneceksiniz. Resource Manager şablonu tek ve eşgüdümlü bir işlemle kaynaklarını oluşturmayı kolaylaştırır. Bir dağıtımı için gerekli kaynakları tanımlayan bir JSON belgesi şablonudur. Ayrıca, dağıtım parametreleri de belirtebilirsiniz. Parametreler, şablon kullanırken Giriş değerlerini sağlamak için kullanılır.
+# <a name="use-an-azure-resource-manager-template-to-create-a-workspace-for-azure-machine-learning"></a>Azure Machine Learning için bir çalışma alanı oluşturmak üzere Azure Resource Manager şablonu kullanma
 
-Daha fazla bilgi için [Azure Resource Manager şablonu ile uygulama dağıtma](../../azure-resource-manager/resource-group-template-deploy.md).
+Bu makalede, Azure Resource Manager şablonları kullanarak Azure Machine Learning çalışma alanı oluşturmanın birkaç yolunu öğreneceksiniz. Kaynak Yöneticisi şablonu, kaynakları tek ve eşgüdümlü bir işlem olarak oluşturmayı kolaylaştırır. Şablon, bir dağıtım için gereken kaynakları tanımlayan bir JSON belgesidir. Ayrıca, dağıtım parametrelerini de belirtebilir. Parametreler, şablon kullanılırken giriş değerleri sağlamak için kullanılır.
+
+Daha fazla bilgi için bkz. [Azure Resource Manager şablonuyla uygulama dağıtma](../../azure-resource-manager/resource-group-template-deploy.md).
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-* Bir **Azure aboneliği**. Biri yoksa deneyin [Azure Machine Learning hizmetinin ücretsiz veya Ücretli sürümüne](https://aka.ms/AMLFree).
+* Bir **Azure aboneliği**. Bir tane yoksa, [Azure Machine Learning ücretsiz veya ücretli sürümünü](https://aka.ms/AMLFree)deneyin.
 
-* Bir şablondan bir CLI kullanmak için ya da ihtiyacınız [Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview?view=azps-1.2.0) veya [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
+* CLı 'dan bir şablon kullanmak için [Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview?view=azps-1.2.0) ya da [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest)gerekir.
 
 ## <a name="resource-manager-template"></a>Resource Manager şablonu
 
-Aşağıdaki Resource Manager şablonu, bir Azure Machine Learning hizmeti çalışma alanında ve ilişkili Azure kaynaklarını oluşturmak için kullanılabilir:
+Aşağıdaki Kaynak Yöneticisi şablonu, bir Azure Machine Learning çalışma alanı ve ilişkili Azure kaynakları oluşturmak için kullanılabilir:
 
-[!code-json[create-azure-machine-learning-service-workspace](~/quickstart-templates/101-machine-learning-create/azuredeploy.json)]
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "workspaceName": {
+      "type": "string",
+      "metadata": {
+        "description": "Specifies the name of the Azure Machine Learning workspace."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "southcentralus",
+      "allowedValues": [
+        "eastus",
+        "eastus2",
+        "southcentralus",
+        "southeastasia",
+        "westcentralus",
+        "westeurope",
+        "westus2"
+      ],
+      "metadata": {
+        "description": "Specifies the location for all resources."
+      }
+    },
+    "sku":{
+      "type": "string",
+      "defaultValue": "basic",
+        "allowedValues": [
+          "basic",
+          "enterprise"
+        ],
+        "metadata": {
+          "description": "Specifies the sku, also referred as 'edition' of the Azure Machine Learning workspace."
+        }
+    }
+  },
+  "variables": {
+    "storageAccountName": "[concat('sa',uniqueString(resourceGroup().id))]",
+    "storageAccountType": "Standard_LRS",
+    "keyVaultName": "[concat('kv',uniqueString(resourceGroup().id))]",
+    "tenantId": "[subscription().tenantId]",
+    "applicationInsightsName": "[concat('ai',uniqueString(resourceGroup().id))]",
+    "containerRegistryName": "[concat('cr',uniqueString(resourceGroup().id))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2018-07-01",
+      "name": "[variables('storageAccountName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "[variables('storageAccountType')]"
+      },
+      "kind": "StorageV2",
+      "properties": {
+        "encryption": {
+          "services": {
+            "blob": {
+              "enabled": true
+            },
+            "file": {
+              "enabled": true
+            }
+          },
+          "keySource": "Microsoft.Storage"
+        },
+        "supportsHttpsTrafficOnly": true
+      }
+    },
+    {
+      "type": "Microsoft.KeyVault/vaults",
+      "apiVersion": "2018-02-14",
+      "name": "[variables('keyVaultName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "tenantId": "[variables('tenantId')]",
+        "sku": {
+          "name": "standard",
+          "family": "A"
+        },
+        "accessPolicies": []
+      }
+    },
+    {
+      "type": "Microsoft.Insights/components",
+      "apiVersion": "2015-05-01",
+      "name": "[variables('applicationInsightsName')]",
+      "location": "[if(or(equals(parameters('location'),'eastus2'),equals(parameters('location'),'westcentralus')),'southcentralus',parameters('location'))]",
+      "kind": "web",
+      "properties": {
+        "Application_Type": "web"
+      }
+    },
+    {
+      "type": "Microsoft.ContainerRegistry/registries",
+      "apiVersion": "2017-10-01",
+      "name": "[variables('containerRegistryName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "adminUserEnabled": true
+      }
+    },
+    {
+      "type": "Microsoft.MachineLearningServices/workspaces",
+      "apiVersion": "2019-11-01",
+      "name": "[parameters('workspaceName')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
+        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
+        "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]",
+        "[resourceId('Microsoft.ContainerRegistry/registries', variables('containerRegistryName'))]"
+      ],
+      "identity": {
+        "type": "systemAssigned"
+      },
+      "sku": {
+        "tier": "[parameters('sku')]",
+        "name": "[parameters('sku')]"
+      },
+      "properties": {
+        "friendlyName": "[parameters('workspaceName')]",
+        "keyVault": "[resourceId('Microsoft.KeyVault/vaults',variables('keyVaultName'))]",
+        "applicationInsights": "[resourceId('Microsoft.Insights/components',variables('applicationInsightsName'))]",
+        "containerRegistry": "[resourceId('Microsoft.ContainerRegistry/registries',variables('containerRegistryName'))]",
+        "storageAccount": "[resourceId('Microsoft.Storage/storageAccounts/',variables('storageAccountName'))]"
+      }
+    }
+  ]
+}
+```
 
-Bu şablon, aşağıdaki Azure Hizmetleri oluşturur:
+Bu şablon aşağıdaki Azure hizmetlerini oluşturur:
 
-* Azure kaynak grubu
+* Azure Kaynak Grubu
 * Azure Depolama Hesabı
 * Azure Key Vault
 * Azure Application Insights
-* Azure Container Registry
+* Azure Container Kayıt Defteri
 * Azure Machine Learning çalışma alanı
 
-Kaynak grubu Hizmetleri tutan kapsayıcıdır. Çeşitli hizmetler, Azure Machine Learning çalışma alanı tarafından gereklidir.
+Kaynak grubu, Hizmetleri tutan kapsayıcıdır. Azure Machine Learning çalışma alanı için çeşitli hizmetler gereklidir.
 
-Örnek şablon iki parametreye sahiptir:
+Örnek şablonda iki parametre vardır:
 
-* **Konumu** Hizmetleri ve kaynak grubunun oluşturulacağı.
+* Kaynak grubunun ve hizmetlerin oluşturulacağı **konum** .
 
-    Şablon, seçtiğiniz konum için en fazla kaynak kullanır. Özel durum tüm diğer hizmetler konumlar kullanılamıyor Application Insights hizmetidir. Hizmet, nerede kullanılabilir değil bir konum seçin, Orta Güney ABD konumunda oluşturulur.
+    Şablon, çoğu kaynak için seçtiğiniz konumu kullanacaktır. Özel durum, diğer hizmetlerin bulunduğu tüm konumlarda kullanılamayan Application Insights hizmetidir. Kullanılabilir olmayan bir konum seçerseniz, hizmet Orta Güney ABD konumunda oluşturulur.
 
-* **Çalışma alanı adı**, Azure Machine Learning çalışma alanının kolay adı.
+* Azure Machine Learning çalışma alanının kolay adı olan **çalışma alanı adı**.
 
-    Diğer hizmetlerinin adları rastgele oluşturulur.
+    Diğer hizmetlerin adları rastgele oluşturulur.
+
+> [!TIP]
+> Bu belgeyle ilişkili şablon yeni bir Azure Container Registry oluştururken, kapsayıcı kayıt defteri oluşturmadan de yeni bir çalışma alanı oluşturabilirsiniz. Çalışma alanında kapsayıcı kayıt defteri varsa, bir kapsayıcı kayıt defteri gerektiren bir işlem gerçekleştirdiğinizde bir tane oluşturulacaktır. Örneğin, bir modeli eğitme veya dağıtma.
+>
+> Ayrıca, yeni bir tane oluşturmak yerine Azure Resource Manager şablonundaki mevcut bir kapsayıcı kayıt defterine veya depolama hesabına başvurabilirsiniz.
 
 Şablonlar hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
 
-* [Azure Resource Manager şablonları yazma](../../azure-resource-manager/resource-group-authoring-templates.md)
-* [Azure Resource Manager şablonları ile uygulama dağıtma](../../azure-resource-manager/resource-group-template-deploy.md)
-* [Microsoft.MachineLearningServices kaynak türleri](https://docs.microsoft.com/azure/templates/microsoft.machinelearningservices/allversions)
+* [Azure Resource Manager şablonları yaz](../../azure-resource-manager/resource-group-authoring-templates.md)
+* [Azure Resource Manager şablonlarıyla uygulama dağıtma](../../azure-resource-manager/resource-group-template-deploy.md)
+* [Microsoft. MachineLearningServices kaynak türleri](https://docs.microsoft.com/azure/templates/microsoft.machinelearningservices/allversions)
 
 ## <a name="use-the-azure-portal"></a>Azure portalı kullanma
 
-1. Bağlantısındaki [özel şablondan kaynakları dağıtma](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-template-deploy-portal#deploy-resources-from-custom-template). Adresindeki geldiğinde __şablonu Düzen__ ekranında, bu belge şablonundan yapıştırın.
-1. Seçin __Kaydet__ şablonu kullanmak için. Aşağıdaki bilgileri sağlayın ve listelenen hüküm ve koşulları kabul ediyorum:
+1. [Özel şablondan kaynak dağıtma](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-template-deploy-portal#deploy-resources-from-custom-template)bölümündeki adımları izleyin. __Şablonu Düzenle__ ekranına geldiğinizde, şablonu bu belgeden yapıştırın.
+1. Şablonu kullanmak için __Kaydet__ ' i seçin. Aşağıdaki bilgileri sağlayın ve listelenen hüküm ve koşulları kabul edin:
 
    * Abonelik: Bu kaynaklar için kullanılacak Azure aboneliğini seçin.
-   * Kaynak grubu: Hizmetleri içerecek bir kaynak grubu oluşturun veya seçin.
-   * Çalışma alanı adı: Oluşturulacak Azure Machine Learning çalışma alanı için kullanılacak ad. Çalışma alanı adı 3-33 karakter arasında olmalıdır. Yalnızca alfasayısal karakterler içerebilir ve '-'.
-   * Konum: Kaynakları oluşturulacağı konumu seçin.
+   * Kaynak grubu: hizmetleri içeren bir kaynak grubu seçin veya oluşturun.
+   * Çalışma alanı adı: oluşturulacak Azure Machine Learning çalışma alanı için kullanılacak ad. Çalışma alanı adı 3 ile 33 karakter arasında olmalıdır. Yalnızca alfasayısal karakterler ve '-' içerebilir.
+   * Konum: kaynakların oluşturulacağı konumu seçin.
 
-     ![Azure portalında şablon parametreleri](media/how-to-create-workspace-template/template-parameters.png)
-
-Daha fazla bilgi için [özel şablondan kaynakları dağıtma](../../azure-resource-manager/resource-group-template-deploy-portal.md#deploy-resources-from-custom-template).
+Daha fazla bilgi için bkz. [özel şablondan kaynak dağıtma](../../azure-resource-manager/resource-group-template-deploy-portal.md#deploy-resources-from-custom-template).
 
 ## <a name="use-azure-powershell"></a>Azure PowerShell kullanma
 
-Bu örnek adlı bir dosyaya kaydedilir şablonu varsayar `azuredeploy.json` geçerli dizin:
+Bu örnekte, şablonu geçerli dizinde `azuredeploy.json` adlı bir dosyaya kaydettiğiniz varsayılır:
 
 ```powershell
 New-AzResourceGroup -Name examplegroup -Location "East US"
@@ -87,11 +228,11 @@ new-azresourcegroupdeployment -name exampledeployment `
   -templatefile .\azuredeploy.json -workspaceName "exampleworkspace"
 ```
 
-Daha fazla bilgi için [kaynakları Resource Manager şablonları ve Azure PowerShell ile dağıtma](../../azure-resource-manager/resource-group-template-deploy.md) ve [SAS belirteci ve Azure PowerShell ile özel Resource Manager şablonu dağıtma](../../azure-resource-manager/resource-manager-powershell-sas-token.md).
+Daha fazla bilgi için bkz. [Kaynak Yöneticisi şablonları ile kaynak dağıtma ve Azure POWERSHELL](../../azure-resource-manager/resource-group-template-deploy.md) [SAS belirteci ve Azure PowerShell ile özel kaynak yöneticisi şablonu dağıtma](../../azure-resource-manager/resource-manager-powershell-sas-token.md).
 
 ## <a name="use-azure-cli"></a>Azure CLI kullanma
 
-Bu örnek adlı bir dosyaya kaydedilir şablonu varsayar `azuredeploy.json` geçerli dizin:
+Bu örnekte, şablonu geçerli dizinde `azuredeploy.json` adlı bir dosyaya kaydettiğiniz varsayılır:
 
 ```azurecli-interactive
 az group create --name examplegroup --location "East US"
@@ -102,22 +243,22 @@ az group deployment create \
   --parameters workspaceName=exampleworkspace location=eastus
 ```
 
-Daha fazla bilgi için [kaynakları Resource Manager şablonları ve Azure CLI ile dağıtma](../../azure-resource-manager/resource-group-template-deploy-cli.md) ve [SAS belirteci ve Azure CLI ile özel Resource Manager şablonu dağıtma](../../azure-resource-manager/resource-manager-cli-sas-token.md).
+Daha fazla bilgi için bkz. [Kaynak Yöneticisi şablonları ve Azure CLI ile kaynakları dağıtma](../../azure-resource-manager/resource-group-template-deploy-cli.md) ve [SAS BELIRTECI ve Azure clı ile özel kaynak yöneticisi şablonu dağıtma](../../azure-resource-manager/resource-manager-cli-sas-token.md).
 
-## <a name="azure-key-vault-access-policy-and-azure-resource-manager-templates"></a>Azure anahtar kasası erişim ilkesi ve Azure Resource Manager şablonları
+## <a name="azure-key-vault-access-policy-and-azure-resource-manager-templates"></a>Azure Key Vault erişim ilkesi ve Azure Resource Manager şablonları
 
-Çalışma alanı ve ilişkili kaynakları (Azure anahtar kasası dahil), birden çok kez oluşturmak için bir Azure Resource Manager şablonu kullandığınızda. Örneğin, şablon bir sürekli tümleştirme ve dağıtım işlem hattı bir parçası olarak aynı parametrelere sahip birden çok kez kullanma.
+Çalışma alanını ve ilişkili kaynakları (Azure Key Vault dahil) oluşturmak için bir Azure Resource Manager şablonu kullandığınızda, birden çok kez. Örneğin, şablonu bir sürekli tümleştirme ve dağıtım işlem hattının bir parçası ile aynı parametrelerle birden çok kez kullanmak.
 
-Şablonlar aracılığıyla çoğu kaynak oluşturma işlemleri bir kere etkili olur, ancak anahtar kasası erişim ilkeleri şablon kullanılan her zaman temizler. Key Vault kullandığı tüm mevcut bir çalışma alanı için erişim ilkeleri sonları erişimi temizleniyor. Örneğin, Azure not defterleri VM Stop/Create işlevlerini başarısız olabilir.  
+Şablonlar aracılığıyla kaynak oluşturma işlemlerinin çoğu ıdempotent, ancak Key Vault şablon her kullanıldığında erişim ilkelerini temizler. Erişim ilkelerinin temizlenmesi, onu kullanan var olan bir çalışma alanının Key Vault erişimini keser. Örneğin, Azure Notebooks VM 'yi durdur/oluştur işlevleri başarısız olabilir.  
 
-Bu sorunu önlemek için aşağıdaki yaklaşımlardan birini önerilir:
+Bu sorundan kaçınmak için aşağıdaki yaklaşımlardan birini öneririz:
 
-*  Şablon, birden çok kez aynı parametreleri dağıtılmaz. Veya bunları yeniden oluşturmak için bu şablonu kullanmadan önce var olan kaynakları silin.
+* Aynı parametreler için şablonu birden çok kez dağıtmayın. Ya da yeniden oluşturmak için şablonu kullanmadan önce mevcut kaynakları silin.
   
-* Anahtar kasası erişim ilkelerini inceleyin ve sonra da şablonun accessPolicies özelliğini ayarlamak için bu ilkeleri kullanın.
-* Key Vault kaynağı zaten mevcut olup olmadığını denetleyin. Varsa, şablonu aracılığıyla yeniden oluşturmayın. Örneğin, zaten varsa, anahtar kasası kaynak oluşturma devre dışı bırakmanıza olanak tanıyan bir parametre ekleyin.
+* Key Vault erişim ilkelerini inceleyin ve sonra şablonun accessPolicies özelliğini ayarlamak için bu ilkeleri kullanın.
+* Key Vault kaynağının zaten var olup olmadığını denetleyin. Varsa, şablon aracılığıyla yeniden oluşturmayın. Örneğin, zaten varsa Key Vault kaynağı oluşturmayı devre dışı bırakmanızı sağlayan bir parametre ekleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Kaynakları Resource Manager şablonları ve Resource Manager REST API'si ile dağıtma](../../azure-resource-manager/resource-group-template-deploy-rest.md).
-* [Oluşturma ve Visual Studio aracılığıyla Azure kaynak grupları dağıtma](../../azure-resource-manager/vs-azure-tools-resource-groups-deployment-projects-create-deploy.md).
+* [Kaynak Yöneticisi şablonları ve Kaynak Yöneticisi REST API ile kaynakları dağıtın](../../azure-resource-manager/resource-group-template-deploy-rest.md).
+* [Visual Studio aracılığıyla Azure Kaynak grupları oluşturma ve dağıtma](../../azure-resource-manager/vs-azure-tools-resource-groups-deployment-projects-create-deploy.md).

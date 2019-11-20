@@ -15,19 +15,19 @@ ms.author: mimart
 ms.reviewer: harshja
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 039f8c9f114dfd3542fefa7b1a1eea8656cbb9c4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ebb2a38e520c988ee7ca9a234aadd6ae2de4f0cb
+ms.sourcegitcommit: 47ce9ac1eb1561810b8e4242c45127f7b4a4aa1a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65782962"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67807746"
 ---
-# <a name="remove-personal-data-for-azure-active-directory-application-proxy"></a>Azure Active Directory Uygulama proxy'si için kişisel verilerini kaldırma  
+# <a name="remove-personal-data-for-azure-active-directory-application-proxy"></a>Azure Active Directory Uygulama proxy'si için kişisel verilerini kaldırma
 
-Azure Active Directory Uygulama Proxy bağlayıcıları cihazlarınızda kişisel verileri olabileceğini anlamına gelir, cihazlarınıza yükleyebilir gerektirir. Bu makalede gizlilik geliştirmek için bu kişisel verileri silmek adımlar sağlar. 
-
+Azure Active Directory Uygulama Proxy bağlayıcıları cihazlarınızda kişisel verileri olabileceğini anlamına gelir, cihazlarınıza yükleyebilir gerektirir. Bu makalede gizlilik geliştirmek için bu kişisel verileri silmek adımlar sağlar.
 
 ## <a name="where-is-the-personal-data"></a>Kişisel verileri nerede?
+
 Aşağıdaki günlük türlerine kişisel veri yazmak uygulama proxy'si mümkündür:
 
 - Bağlayıcısı olay günlükleri
@@ -52,36 +52,33 @@ Bağlayıcısı olay günlüklerinden kişisel verileri kaldırmak için aşağ�
 
 ### <a name="view-or-export-specific-data"></a>Görüntülemek veya belirli verileri dışarı aktarma
 
-Görüntülemek veya belirli verileri dışarı aktarma için her bağlayıcı günlüklerinin ilgili girişlere arayın. Günlükleri şu adreste bulunabilir `C:\ProgramData\Microsoft\Microsoft AAD Application Proxy Connector\Trace`. 
+Görüntülemek veya belirli verileri dışarı aktarma için her bağlayıcı günlüklerinin ilgili girişlere arayın. Günlükleri şu adreste bulunabilir `C:\ProgramData\Microsoft\Microsoft AAD Application Proxy Connector\Trace`.
 
 Günlükleri metin dosyaları olduğundan, kullanabileceğiniz [findstr](https://docs.microsoft.com/windows-server/administration/windows-commands/findstr) bir kullanıcıyla ilişkili metin girişleri aranacak.  
 
-Kişisel verileri bulmak için kullanıcı kimliği için günlük dosyalarını arayın. 
+Kişisel verileri bulmak için kullanıcı kimliği için günlük dosyalarını arayın.
 
 Kerberos kısıtlanmış temsil, kullanıcı adı türü bu bileşenler için arama kullanan bir uygulama tarafından günlüğe kaydedilen kişisel verileri bulmak için:
 
 - Şirket içi kullanıcı asıl adı
 - Kullanıcı adı, kullanıcı asıl adının parçası
 - Kullanıcı adı, şirket içi kullanıcı asıl adının parçası
-- Şirket içi Güvenlik Hesapları Yöneticisi (SAM) hesap adı 
-
+- Şirket içi Güvenlik Hesapları Yöneticisi (SAM) hesap adı
 
 ### <a name="delete-specific-data"></a>Özel verileri Sil
 
 Belirli veri silmek için:
 
 1. Yeni bir günlük dosyası oluşturmak için Microsoft Azure AD uygulama ara sunucusu Bağlayıcısı hizmeti yeniden başlatın. Yeni bir günlük dosyası, eski günlük dosyaları değiştirmek veya silmek sağlar. 
-2. İzleyin [görünümü veya dışarı aktarma belirli veri](#view-or-export-specific-data) işlem açıklanan daha önce silinmesi gereken bilgi bulunamıyor. Tüm bağlayıcı günlüklerini arayın.
-3. Ya da ilgili günlük dosyalarını veya kişisel verileri içeren alanları seçerek silebilirsiniz. Artık ihtiyacınız yoksa tüm eski günlük dosyaları silebilirsiniz.
+1. İzleyin [görünümü veya dışarı aktarma belirli veri](#view-or-export-specific-data) işlem açıklanan daha önce silinmesi gereken bilgi bulunamıyor. Tüm bağlayıcı günlüklerini arayın.
+1. Ya da ilgili günlük dosyalarını veya kişisel verileri içeren alanları seçerek silebilirsiniz. Artık ihtiyacınız yoksa tüm eski günlük dosyaları silebilirsiniz.
 
 ### <a name="turn-off-connector-logs"></a>Bağlayıcı oturumunu kapatıp açın
 
-Connector günlükleri kişisel verilerini içermediğinden emin olmak için bir oturum oluşturmayı devre dışı bırak seçenektir. Bağlayıcı günlükleri oluşturmaya durdurmak için aşağıdaki vurgulanmış satırından kaldırmak `C:\Program Files\Microsoft AAD App Proxy Connector\ApplicationProxyConnectorService.exe.config`. 
+Connector günlükleri kişisel verilerini içermediğinden emin olmak için bir oturum oluşturmayı devre dışı bırak seçenektir. Bağlayıcı günlükleri oluşturmaya durdurmak için aşağıdaki vurgulanmış satırından kaldırmak `C:\Program Files\Microsoft AAD App Proxy Connector\ApplicationProxyConnectorService.exe.config`.
 
-![Yapılandırma](./media/application-proxy-remove-personal-data/01.png)
-
+![Vurgulanmış kodu kaldırmak için bir kod parçacığı gösterir](./media/application-proxy-remove-personal-data/01.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Uygulama proxy'si genel bakış için bkz. [güvenli uzaktan erişim sağlamak şirket içi uygulamalara](application-proxy.md).
-

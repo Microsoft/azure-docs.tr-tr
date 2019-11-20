@@ -1,24 +1,24 @@
 ---
-title: 'Hızlı Başlangıç: Görüntüleri - Java için Bing resim arama SDK arayın'
-description: Bu öğreticiyi API için bir sarmalayıcı olan ve aynı özellikleri içeren Bing Resim Arama SDK'sını kullanarak ilk görüntü aramanızı yapmak için kullanın. Bu basit Java uygulaması bir görüntü arama sorgusu gönderir, JSON yanıtını ayrıştırır ve döndürülen ilk görüntünün URL’sini görüntüler.
+title: 'Hızlı Başlangıç: Görüntü arama-Java için Bing Resim Arama SDK'
 titleSuffix: Azure Cognitive Services
+description: Bu öğreticiyi API için bir sarmalayıcı olan ve aynı özellikleri içeren Bing Resim Arama SDK'sını kullanarak ilk görüntü aramanızı yapmak için kullanın. Bu basit Java uygulaması bir görüntü arama sorgusu gönderir, JSON yanıtını ayrıştırır ve döndürülen ilk görüntünün URL’sini görüntüler.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-image-search
 ms.topic: quickstart
-ms.date: 02/12/2019
+ms.date: 08/26/2019
 ms.author: aahi
 ms.custom: seodec2018
-ms.openlocfilehash: 991eae9a83325118caaea5c7e3fdb64c6caa1f16
-ms.sourcegitcommit: 3d4121badd265e99d1177a7c78edfa55ed7a9626
+ms.openlocfilehash: 0a9e9a4ee42d36e0ae6da3e92e12ae4144f7b670
+ms.sourcegitcommit: 94ee81a728f1d55d71827ea356ed9847943f7397
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66386605"
+ms.lasthandoff: 08/26/2019
+ms.locfileid: "70034454"
 ---
-# <a name="quickstart-search-for-images-with-the-bing-image-search-sdk-for-java"></a>Hızlı Başlangıç: Bing resim arama için SDK'sı Java görüntüleri için arama yapın
+# <a name="quickstart-search-for-images-with-the-bing-image-search-sdk-for-java"></a>Hızlı Başlangıç: Java için Bing Resim Arama SDK ile görüntü arama
 
 Bu öğreticiyi API için bir sarmalayıcı olan ve aynı özellikleri içeren Bing Resim Arama SDK'sını kullanarak ilk görüntü aramanızı yapmak için kullanın. Bu basit Java uygulaması bir görüntü arama sorgusu gönderir, JSON yanıtını ayrıştırır ve döndürülen ilk görüntünün URL’sini görüntüler.
 
@@ -45,7 +45,7 @@ Maven, Gradle veya başka bir bağımlılık dosyası yönetim sistemini kullana
 
 ## <a name="create-and-initialize-the-application"></a>Uygulamayı oluşturma ve başlatma
 
-1. Sık kullandığınız IDE veya düzenleyici yeni bir Java projesi oluşturun ve sınıf uygulamanız aşağıdaki içeri aktarmaları ekleyin:
+1. En sevdiğiniz IDE veya düzenleyicide yeni bir Java projesi oluşturun ve sınıf uygulamanıza aşağıdaki içeri aktarmaları ekleyin:
 
     ```java
     import com.microsoft.azure.cognitiveservices.search.imagesearch.BingImageSearchAPI;
@@ -63,7 +63,7 @@ Maven, Gradle veya başka bir bağımlılık dosyası yönetim sistemini kullana
     BingImageSearchAPI client = BingImageSearchManager.authenticate(subscriptionKey);
     ```
 
-## <a name="send-a-search-request-to-the-api"></a>API için bir arama isteği gönder
+## <a name="send-a-search-request-to-the-api"></a>API 'ye bir arama isteği gönder
 
 1. `bingImages().search()` kullanarak, arama sorgusunu içeren HTTP isteğini gönderin. Yanıtı `ImagesModel` olarak kaydedin.
 
@@ -77,7 +77,7 @@ Maven, Gradle veya başka bir bağımlılık dosyası yönetim sistemini kullana
 ## <a name="parse-and-view-the-result"></a>Sonucu ayrıştırma ve görüntüleme
 
 Yanıtta döndürülen resim sonuçlarını ayrıştırın.
-Yanıt arama sonuçları içeriyorsa, ilk sonucu depolar ve bir küçük resim gibi ayrıntılarını yazdırmak URL, toplam sayısını özgün URL'yi döndürülen görüntüler.  
+Yanıt, arama sonuçları içeriyorsa, ilk sonucu depolayın ve küçük resim URL 'SI, özgün URL gibi ayrıntılarını, döndürülen görüntülerin toplam sayısıyla birlikte yazdırın.  
 
 ```java
 if (imageResults != null && imageResults.value().size() > 0) {

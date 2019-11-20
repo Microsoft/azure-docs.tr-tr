@@ -1,5 +1,5 @@
 ---
-title: 'Bir sanal ağı ExpressRoute devresine bağlama: PowerShell: Azure | Microsoft Docs'
+title: 'ExpressRoute: sanal ağı bir devreye bağlama: Azure PowerShell'
 description: Bu belge, PowerShell ve Resource Manager dağıtım modeli kullanarak ExpressRoute devresine bağlama sanal ağları (Vnet) genel bakış sağlar.
 services: expressroute
 author: ganesr
@@ -8,16 +8,16 @@ ms.topic: article
 ms.date: 05/20/2018
 ms.author: ganesr
 ms.custom: seodec18
-ms.openlocfilehash: 620eff5468d7d3b4bf8ddeea62fa67b39609fce6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 22e235b16f834198f5edc2f9365d2b13e1e9c49f
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65950377"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74031725"
 ---
 # <a name="connect-a-virtual-network-to-an-expressroute-circuit"></a>Bir sanal ağı ExpressRoute devresine bağlama
 > [!div class="op_single_selector"]
-> * [Azure portal](expressroute-howto-linkvnet-portal-resource-manager.md)
+> * [Azure Portal](expressroute-howto-linkvnet-portal-resource-manager.md)
 > * [PowerShell](expressroute-howto-linkvnet-arm.md)
 > * [Azure CLI](howto-linkvnet-cli.md)
 > * [Video - Azure portalı](https://azure.microsoft.com/documentation/videos/azure-expressroute-how-to-create-a-connection-between-your-vpn-gateway-and-expressroute-circuit)
@@ -45,7 +45,7 @@ Bu makale, Resource Manager dağıtım modeli ve PowerShell kullanarak, sanal a�
 
 ### <a name="working-with-azure-powershell"></a>Azure PowerShell ile çalışma
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](../../includes/hybrid-az-ps.md)]
 
 [!INCLUDE [expressroute-cloudshell](../../includes/expressroute-cloudshell-powershell-about.md)]
 
@@ -176,11 +176,11 @@ Set-AzVirtualNetworkGatewayConnection -VirtualNetworkGatewayConnection $connecti
 
 Aralığı *RoutingWeight* 0-32000. Varsayılan değer 0’dır.
 
-## <a name="configure-expressroute-fastpath"></a>ExpressRoute FastPath yapılandırın 
-Etkinleştirebilirsiniz [ExpressRoute FastPath](expressroute-about-virtual-network-gateways.md) ExpressRoute devreniz açıksa [ExpressRoute doğrudan](expressroute-erdirect-about.md) ve sanal newtork Ultra yüksek performans veya ErGw3AZ noktanızdır. Veri yolu preformance Saniyedeki ve sanal ağınız ile şirket içi ağınız arasında saniye başına bağlantılar gibi FastPath artırır. 
+## <a name="configure-expressroute-fastpath"></a>ExpressRoute FastPath yapılandırma 
+ExpressRoute bağlantı hattınızı [ExpressRoute Direct](expressroute-erdirect-about.md) üzerinde ise ve sanal ağ geçidiniz Ultra Performance veya ErGw3AZ Ise [ExpressRoute FastPath](expressroute-about-virtual-network-gateways.md) 'i etkinleştirebilirsiniz. FastPath, şirket içi ağınız ve sanal ağınız arasında saniye başına paket ve bağlantı gibi veri yolu performansını geliştirir. 
 
 > [!NOTE] 
-> Zaten bir sanal ağ bağlantısına sahip ancak FastPath etkinleştirmediniz sanal ağ bağlantısını silin ve yeni bir tane oluşturmanız gerekir. 
+> Zaten bir sanal ağ bağlantınız varsa ancak FastPath 'i etkinleştirmediyseniz, sanal ağ bağlantısını silmeniz ve yeni bir bağlantı oluşturmanız gerekir. 
 > 
 >  
 

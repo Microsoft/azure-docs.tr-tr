@@ -1,75 +1,73 @@
 ---
-title: Web kancası kullanarak mevcut sorun yönetim sistemleri için Azure hizmet durumu bildirimlerini yapılandırma
-description: Hizmet durumu olayları için mevcut sorun yönetim sisteminizde hakkında Kişiselleştirilmiş bildirimler alın.
+title: Web kancası kullanarak mevcut sorun yönetimi sistemleri için Azure hizmet durumu bildirimlerini yapılandırma
+description: Mevcut sorun yönetimi sisteminize hizmet durumu olayları hakkında kişiselleştirilmiş bildirimler gönderin.
 author: stephbaron
 ms.author: stbaron
 ms.topic: conceptual
 ms.service: service-health
 ms.workload: Supportability
 ms.date: 3/27/2018
-ms.openlocfilehash: 3e9a564310d750e63c9cf81d19f698e75712d09a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: 8f84b43519c197797b39397cfd15c4f90444177c
+ms.sourcegitcommit: 470041c681719df2d4ee9b81c9be6104befffcea
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67067186"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67854376"
 ---
-# <a name="configure-health-notifications-for-existing-problem-management-systems-using-a-webhook"></a>Web kancası kullanarak mevcut sorun yönetim sistemleri için sistem durumu bildirimlerini yapılandırma
+# <a name="use-a-webhook-to-configure-health-notifications-for-problem-management-systems"></a>Sorun yönetim sistemleri için sistem durumu bildirimlerini yapılandırmak için Web kancası kullanın
 
-Bu makalede mevcut bildirim sistemi için Web kancaları aracılığıyla veri göndermek için hizmet sistem durumu uyarılarının nasıl yapılandırılacağı gösterilmektedir.
+Bu makalede, Azure hizmet durumu uyarılarının mevcut bildirim sisteminize Web kancaları aracılığıyla veri göndermek üzere nasıl yapılandırılacağı gösterilmektedir.
 
-Bugün, böylece bir Azure hizmeti olay sizi etkiliyorsa, kısa mesaj veya e-posta bildirim alın, hizmet sistem durumu uyarılarını yapılandırabilirsiniz.
-Ancak, kullanmak istediğiniz bir yerde zaten var olan harici bildirim sistemi olabilir.
-Bu belge, en önemli bölümleri Web kancası yükü ve hizmet sorunlardan etkilendiğiniz durumlar bildirim almak için özel uyarıları nasıl oluşturabileceğinizi gösterir.
+Hizmet durumu uyarılarını, bir Azure hizmeti olayı sizi etkilediği kısa mesaj veya e-posta ile bildirecek şekilde yapılandırabilirsiniz.
 
-Önceden yapılandırılmış bir tümleştirme kullanmak istiyorsanız, bkz: nasıl yapılır:
+Ancak, kullanmayı tercih ettiğiniz bir dış bildirim sisteminiz zaten var olabilir. Bu makale, Web kancası yükünün en önemli bölümlerini tanımlar. Ayrıca, ilgili hizmet sorunları oluştuğunda size bildirimde bulunan özel uyarıların nasıl oluşturulacağını açıklar.
+
+Önceden yapılandırılmış bir tümleştirme kullanmak istiyorsanız, bkz:
 * [ServiceNow ile uyarıları yapılandırma](service-health-alert-webhook-servicenow.md)
-* [PagerDuty ile uyarıları yapılandırma](service-health-alert-webhook-pagerduty.md)
+* [Pagerharcı ile uyarıları yapılandırma](service-health-alert-webhook-pagerduty.md)
 * [OpsGenie ile uyarıları yapılandırma](service-health-alert-webhook-opsgenie.md)
 
-### <a name="watch-an-introductory-video"></a>Tanıtım videosunu izleyin
+**Tanıtım videosunu izleyin:**
 
 >[!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE2OtUV]
 
-## <a name="configuring-a-custom-notification-using-the-service-health-webhook-payload"></a>Hizmet durumu Web kancası yükü kullanarak özel bir bildirim yapılandırma
-Kendi özel Web kancası tümleştirmesini ayarlamak istiyorsanız, hizmet durumu bildirimlerine sırasında gönderilen JSON yükü ayrıştırılamıyor gerekir.
+## <a name="configure-a-custom-notification-by-using-the-service-health-webhook-payload"></a>Hizmet durumu Web kancası yükünü kullanarak özel bir bildirim yapılandırma
+Kendi özel Web kancası tümleştirmenizi ayarlamak için, hizmet durumu bildirimi aracılığıyla gönderilen JSON yükünü ayrıştırmaya ihtiyacınız vardır.
 
-Konum [bir örnek görmek için buraya](../azure-monitor/platform/activity-log-alerts-webhook.md) ne `ServiceHealth` gibi görünen Web kancası yükü.
+[](../azure-monitor/platform/activity-log-alerts-webhook.md) Örnek`ServiceHealth` bir Web kancası yüküne bakın.
 
-Bu, hizmet durumu uyarısı bakarak algılayabilir `context.eventSource == "ServiceHealth"`. Burada, alımı en uygun olan özellikleri şunlardır:
- * `data.context.activityLog.status`
- * `data.context.activityLog.level`
- * `data.context.activityLog.subscriptionId`
- * `data.context.activityLog.properties.title`
- * `data.context.activityLog.properties.impactStartTime`
- * `data.context.activityLog.properties.communication`
- * `data.context.activityLog.properties.impactedServices`
- * `data.context.activityLog.properties.trackingId`
+' A bakarak `context.eventSource == "ServiceHealth"`bir hizmet durumu uyarısı olduğunu doğrulayabilirsiniz. Aşağıdaki özellikler en ilgili özelliklerdir:
+- **Data. Context. activityLog. Status**
+- **Data. Context. activityLog. Level**
+- **Data. Context. activityLog. SubscriptionID**
+- **Data. Context. activityLog. Properties. title**
+- **Data. Context. activityLog. Properties. ımpactstarttime**
+- **Data. Context. activityLog. Properties. Communication**
+- **Data. Context. activityLog. Properties. ımpactedservices**
+- **Data. Context. activityLog. Properties. Trackingıd**
 
-## <a name="creating-a-direct-link-to-the-service-health-dashboard-for-an-incident"></a>Hizmet durumu Panosu bir olay için doğrudan bir bağlantı oluşturma
-Özel bir URL üretmek için bir hizmet durumu Panosu Masaüstü veya mobil doğrudan bir bağlantı oluşturabilirsiniz. Kullanım `trackingId`, ilk ve son üç hanesi yanı sıra, `subscriptionId`oluşturmak için:
-```
-https://app.azure.com/h/<trackingId>/<first and last three digits of subscriptionId>
-```
+## <a name="create-a-link-to-the-service-health-dashboard-for-an-incident"></a>Bir olay için hizmet durumu panosu bağlantısı oluşturma
+Özel bir URL oluşturarak masaüstü veya mobil cihazda hizmet sistem durumu panonuz için doğrudan bir bağlantı oluşturabilirsiniz. Aşağıdaki biçimde *SubscriptionID* 'Nizin *trackingıd* ve ilk üç ve son üç basamağını kullanın:
 
-Örneğin, varsa, `subscriptionId` olduğu `bba14129-e895-429b-8809-278e836ecdb3` ve `trackingId` olduğu `0DET-URB`, sistem durumu hizmeti URL'NİZİN ise:
+https<i></i>://App.Azure.com/h/ *&lt;trackingıd&gt;* /*ilk üç ve en son üç sayı SubscriptionID&gt; &lt;*
 
-```
-https://app.azure.com/h/0DET-URB/bbadb3
-```
+Örneğin, *SubscriptionID* 'niz Bba14129-e895-429b-8809-278e836ecdb3 ve *TRACKINGıD* 0DET-URB Ise, hizmet durumu URL 'niz şu şekilde olur:
 
-## <a name="using-the-level-to-detect-the-severity-of-the-issue"></a>Sorunun önem derecesine algılamak için düzeyi kullanma
-En düşük önem derecesi en yüksek önem derecesi, gelen `level` özelliği yükünde aşağıdakilerden biri olabilir `Informational`, `Warning`, `Error`, ve `Critical`.
+https<i></i>://App.Azure.com/h/0DET-URB/bbadb3
 
-## <a name="parsing-the-impacted-services-to-understand-the-full-scope-of-the-incident"></a>Tam olay anlamak için etkilenen hizmetler ayrıştırma
-Hizmet sistem durumu uyarılarını birden çok bölgede ve hizmetlerinizde sorunları hakkında bildirebilirsiniz. Tam bilgi almak için değeri ayrıştırılamıyor ihtiyacınız `impactedServices`.
-İçerik içinde bir [JSON kaçan](https://json.org/) dize, atlanmamış, düzenli olarak ayrıştırılabilir başka bir JSON nesnesi içerir.
+## <a name="use-the-level-to-detect-the-severity-of-the-issue"></a>Sorunun önem derecesini algılamak için düzeyi kullanın
+En düşük ve en yüksek öneme sahip olan yükteki **Level** özelliği *bilgilendirme*, *Uyarı*, *hata*veya *kritik*olabilir.
+
+## <a name="parse-the-impacted-services-to-determine-the-incident-scope"></a>Etkilenen Hizmetleri, olay kapsamını tespit etmek için ayrıştırın
+Hizmet durumu uyarıları, birden çok bölgedeki ve hizmetlerde sorunlar hakkında bilgi verebilir. Tüm ayrıntıları almak için değerini `impactedServices`ayrıştırmalıdır.
+
+İçinde olan içerik, atlamadığınızda, düzenli olarak ayrıştırılabilecek başka bir JSON nesnesi içeren kaçış [JSON](https://json.org/) dizesidir. Örneğin:
 
 ```json
 {"data.context.activityLog.properties.impactedServices": "[{\"ImpactedRegions\":[{\"RegionName\":\"Australia East\"},{\"RegionName\":\"Australia Southeast\"}],\"ServiceName\":\"Alerts & Metrics\"},{\"ImpactedRegions\":[{\"RegionName\":\"Australia Southeast\"}],\"ServiceName\":\"App Service\"}]"}
 ```
 
-olur:
+geldiğinde
 
 ```json
 [
@@ -95,13 +93,17 @@ olur:
 ]
 ```
 
-Bu, Avustralya Güneydoğu "App Service" sorun yanı sıra Avustralya Doğu ve Güneydoğu "Uyarılar ve ölçümler" bir sorun olduğunu gösterir.
+Bu örnekte, için sorunlar gösterilmektedir:
+- Avustralya Doğu ve Avustralya Güneydoğu ' teki uyarılar & ölçümleri.
+- Avustralya Güneydoğu içinde "App Service".
 
+## <a name="test-your-webhook-integration-via-an-http-post-request"></a>HTTP POST isteği aracılığıyla Web kancası tümleştirmenizi test etme
 
-## <a name="testing-your-webhook-integration-via-an-http-post-request"></a>Bir HTTP POST isteği üzerinden, Web kancası tümleştirme testi
-1. Göndermek istediğiniz hizmet sistem durumu yükü oluşturun. Bir örnek hizmet sistem durumu Web kancası yükü konumunda bulabilirsiniz [günlük uyarıları Azure etkinlik için Web kancaları](../azure-monitor/platform/activity-log-alerts-webhook.md).
+Şu adımları uygulayın:
 
-2. Bir HTTP POST isteği şu şekilde oluşturun:
+1. Göndermek istediğiniz hizmet durumu yükünü oluşturun. [Azure etkinlik günlüğü uyarıları Için Web kancalarında](../azure-monitor/platform/activity-log-alerts-webhook.md)örnek bir hizmet durumu Web kancası yüküne bakın.
+
+1. Aşağıdaki gibi bir HTTP POST isteği oluşturun:
 
     ```
     POST        https://your.webhook.endpoint
@@ -110,11 +112,11 @@ Bu, Avustralya Güneydoğu "App Service" sorun yanı sıra Avustralya Doğu ve G
 
     BODY        <service health payload>
     ```
-3. Alması gereken bir `2XX - Successful` yanıt.
+   "2XX-başarılı" yanıt almanız gerekir.
 
-4. Git [PagerDuty](https://www.pagerduty.com/) tümleştirmenizi başarılı bir şekilde ayarlandığını doğrulamak için.
+1. Tümleştirmenin başarıyla ayarlandığını onaylamak için [Pagerharcı](https://www.pagerduty.com/) 'e gidin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-- Gözden geçirme [etkinlik günlüğü uyarısı Web kancası şeması](../azure-monitor/platform/activity-log-alerts-webhook.md). 
-- Hakkında bilgi edinin [hizmet durumu bildirimlerini](../azure-monitor/platform/service-notifications.md).
-- Daha fazla bilgi edinin [Eylem grupları](../azure-monitor/platform/action-groups.md).
+- [Etkinlik günlüğü uyarısı Web kancası şemasını](../azure-monitor/platform/activity-log-alerts-webhook.md)gözden geçirin. 
+- [Hizmet durumu bildirimleri](../azure-monitor/platform/service-notifications.md)hakkında bilgi edinin.
+- [Eylem grupları](../azure-monitor/platform/action-groups.md)hakkında daha fazla bilgi edinin.

@@ -1,6 +1,6 @@
 ---
-title: Azure Databricks için bölgesel bir olağanüstü durum kurtarma
-description: Bu makalede, Azure databricks'te olağanüstü durum kurtarma yapmaya bir yaklaşım açıklanmaktadır.
+title: Azure Databricks için bölgesel olağanüstü durum kurtarma
+description: Bu makalede Azure Databricks ' de olağanüstü durum kurtarma yapmaya yönelik bir yaklaşım açıklanmaktadır.
 services: azure-databricks
 author: mamccrea
 ms.author: mamccrea
@@ -8,89 +8,89 @@ ms.service: azure-databricks
 ms.workload: big-data
 ms.topic: conceptual
 ms.date: 03/13/2019
-ms.openlocfilehash: 3718b79562ec05383b9881a1a97cc5bcc5e04258
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b9a5dbd8e24659493bbbefd50c3e234dca3dbdd9
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67075447"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74129331"
 ---
-# <a name="regional-disaster-recovery-for-azure-databricks-clusters"></a>Azure Databricks kümeleri için bölgesel bir olağanüstü durum kurtarma
+# <a name="regional-disaster-recovery-for-azure-databricks-clusters"></a>Azure Databricks kümeleri için bölgesel olağanüstü durum kurtarma
 
-Bu makalede, Azure Databricks kümeleri için kullanışlı bir olağanüstü durum kurtarma mimarisi ve bu tasarımı gerçekleştirmek için gereken adımları açıklar.
+Bu makalede, Azure Databricks kümeleri ve bu tasarımı gerçekleştirmek için gereken adımlar için yararlı bir olağanüstü durum kurtarma mimarisi açıklanmaktadır.
 
 ## <a name="azure-databricks-architecture"></a>Azure Databricks mimarisi
 
-Azure portalından, bir Azure Databricks çalışma alanı oluşturduğunuzda bir yüksek düzeyde bir [yönetilen Gereci](../managed-applications/overview.md) seçtiğiniz Azure bölgesinde (örneğin, Batı ABD) Aboneliğinize bir Azure kaynağı olarak dağıtılır. Bu gereç dağıtıldığı bir [Azure sanal ağı](../virtual-network/virtual-networks-overview.md) ile bir [ağ güvenlik grubu](../virtual-network/manage-network-security-group.md) ve aboneliğinizde kullanılabilen bir Azure depolama hesabı. Sanal ağ, Databricks çalışma alanına çevre düzey güvenlik sağlar ve ağ güvenlik grubu korunur. Çalışma alanı içinde çalışan ve sürücü VM türü ve Databricks çalışma zamanı sürümü sağlayarak Databricks kümeler oluşturabilirsiniz. Kalıcı verileri Azure Blob Depolama veya Azure Data Lake Store, depolama hesabınızdaki kullanılabilir. Küme oluşturulduktan sonra belirli bir kümeye ekleyerek dizüstü bilgisayarlar, REST API'ler, ODBC/JDBC uç noktaları aracılığıyla işleri çalıştırabilirsiniz.
+Yüksek düzeyde, Azure portal bir Azure Databricks çalışma alanı oluşturduğunuzda, seçili Azure bölgesinde (örneğin, Batı ABD), aboneliğinizde bir Azure kaynağı olarak bir [yönetilen gereç](../managed-applications/overview.md) dağıtılır. Bu gereç, aboneliğinizde bulunan bir [ağ güvenlik grubu](../virtual-network/manage-network-security-group.md) ve bir Azure depolama hesabı Ile bir [Azure sanal ağında](../virtual-network/virtual-networks-overview.md) dağıtılır. Sanal ağ, Databricks çalışma alanına çevre düzeyi güvenliği sağlar ve ağ güvenlik grubu üzerinden korunur. Çalışma alanı içinde, çalışan ve sürücü VM 'si türü ve Databricks çalışma zamanı sürümünü sağlayarak Databricks kümeleri oluşturabilirsiniz. Kalıcı veriler, Azure Blob depolama veya Azure Data Lake Storage olabilen depolama hesabınızda kullanılabilir. Küme oluşturulduktan sonra, işleri Belirli bir kümeye ekleyerek Not defterleri, REST API 'Leri, ODBC/JDBC uç noktaları aracılığıyla çalıştırabilirsiniz.
 
-Databricks denetim düzlemi yönetir ve Databricks çalışma ortamı izler. Herhangi bir yönetim işlem kümesi oluşturma gibi denetim düzlemi başlatılacak. Zamanlanmış işleri gibi tüm meta veriler, hataya dayanıklılık için coğrafi çoğaltma ile bir Azure veritabanı'nda depolanır.
+Databricks denetim düzlemi, Databricks çalışma alanı ortamını yönetir ve izler. Küme oluşturma gibi herhangi bir yönetim işlemi denetim düzleden başlatılacak. Zamanlanan işler gibi tüm meta veriler, hata toleransı için coğrafi çoğaltma ile bir Azure veritabanında depolanır.
 
 ![Databricks mimarisi](media/howto-regional-disaster-recovery/databricks-architecture.png)
 
-Bu mimarinin avantajı kullanıcılar Azure Databricks hesabında herhangi bir depolama kaynağına bağlanabildiğinizi biridir. Önemli bir avantajı, her ikisi de (Azure Databricks) işlem ve depolama birbirinden bağımsız olarak ölçeklendirilebilir ' dir.
+Bu mimarinin avantajlarından biri, kullanıcıların hesabındaki herhangi bir depolama kaynağına Azure Databricks bağlanamadır. Önemli bir avantaj, hem işlem (Azure Databricks) hem de depolamanın birbirinden bağımsız olarak ölçeklendirilebileceğiyle ilgili bir avantajdır.
 
-## <a name="how-to-create-a-regional-disaster-recovery-topology"></a>Bölgesel bir olağanüstü durum kurtarma topolojisi oluşturma
+## <a name="how-to-create-a-regional-disaster-recovery-topology"></a>Bölgesel olağanüstü durum kurtarma topolojisi oluşturma
 
-Önceki mimari açıklamasında fark gibi çeşitli Azure Databricks ile büyük veri işlem hattı için kullanılan bileşenler vardır:  Azure depolama, Azure veritabanı ve diğer veri kaynakları. Azure Databricks olduğu *işlem* için büyük veri işlem hattı. Bu *kısa ömürlü* verilerinizi Azure Depolama'da hala kullanılabilir olsa da doğası gereği, yani *işlem* (Azure Databricks kümesiyle) sonlandırıldı ödeme yapmak zorunda kalmazsınız ne zaman işlem, gerekmez. *İşlem* (Azure Databricks) ve depolama kaynakları, aynı bölgede olmalıdır, böylece işleri yüksek gecikme deneyimi yok.  
+Yukarıdaki mimari açıklamasında fark etmeksizin, Azure Databricks ile büyük bir veri işlem hattı için kullanılan birçok bileşen vardır: Azure depolama, Azure veritabanı ve diğer veri kaynakları. Azure Databricks, büyük veri ardışık düzeni için *işlem* olur. Daha *kısa* bir süre içinde, verileriniz Azure Storage 'da kullanılmaya devam ederken, *işlem* (Azure Databricks kümesi), ihtiyacınız olmadığında işlem için ödeme yapmak zorunda kalmayacak şekilde sonlandırılabilir. İşlerin yüksek gecikme süresi yaşamaması için *işlem* (Azure Databricks) ve depolama kaynaklarının aynı bölgede olması gerekir.  
 
-Kendi bölgesel bir olağanüstü durum kurtarma topolojisi oluşturmak için bu gereksinimleri izleyin:
+Kendi bölgesel olağanüstü durum kurtarma topolojinizi oluşturmak için aşağıdaki gereksinimleri izleyin:
 
-   1. Farklı Azure bölgelerindeki birden çok Azure Databricks çalışma alanı sağlayın. Örneğin, Doğu ABD 2 Birincil Azure Databricks çalışma alanı oluşturun. Batı ABD gibi ayrı bir bölgede ikincil olağanüstü durum kurtarma Azure Databricks çalışma alanı oluşturun.
+   1. Ayrı Azure bölgelerinde birden çok Azure Databricks çalışma alanı sağlayın. Örneğin, Doğu ABD2 içinde birincil Azure Databricks çalışma alanını oluşturun. İkincil olağanüstü durum kurtarma Azure Databricks çalışma alanını Batı ABD gibi ayrı bir bölgede oluşturun.
 
-   2. Kullanım [coğrafi olarak yedekli depolama](../storage/common/storage-redundancy-grs.md#read-access-geo-redundant-storage). İlişkili Azure Databricks varsayılan olarak Azure Depolama'da depolanan veriler. İşlenen verileri, dayanıklı ve küme sonlandırıldıktan sonra yüksek oranda kullanılabilir kalır. böylece, Databricks işleri sonuçlardan de Azure Blob Depolama alanında saklanır. Depolama ve Databricks küme olarak birlikte bulunan, böylece birincil bölgeye artık erişilebilir değilse, ikincil bölgede verilere erişilebilir, coğrafi olarak yedekli depolama kullanmanız gerekir.
+   2. [Coğrafi olarak yedekli depolama](../storage/common/storage-redundancy-grs.md#read-access-geo-redundant-storage)kullanın. Azure Databricks ilişkili veriler, Azure depolama 'da varsayılan olarak depolanır. Databricks işlerinin sonuçları da Azure Blob depolama alanında depolanır, böylece işlenen veriler dayanıklı olur ve küme sonlandırıldıktan sonra yüksek oranda kullanılabilir kalır. Depolama ve Databricks kümesi birlikte bulunduğundan, birincil bölge artık erişilebilir değilse, verilerin ikincil bölgede erişilebilir olması için coğrafi olarak yedekli depolamayı kullanmanız gerekir.
 
-   3. İkincil bölgeye oluşturulduktan sonra kullanıcılar, kullanıcı klasörleri, dizüstü bilgisayarlar, küme yapılandırması, işleri yapılandırma, kitaplıkları, depolama, init betikleri geçirme ve erişim denetimi yeniden yapılandırmanız gerekir. Ek Ayrıntılar aşağıdaki bölümde açıklanmıştır.
+   3. İkincil bölge oluşturulduktan sonra, kullanıcılar, Kullanıcı klasörleri, Not defterleri, küme yapılandırması, iş yapılandırması, kitaplıklar, depolama, init betikleri ve erişim denetimini yeniden yapılandırmanız gerekir. Ek ayrıntılar aşağıdaki bölümde açıklanmıştır.
 
 ## <a name="detailed-migration-steps"></a>Ayrıntılı geçiş adımları
 
-1. **Bilgisayarınızda Databricks komut satırı arabirimi ayarlama**
+1. **Bilgisayarınızda Databricks komut satırı arabirimini ayarlama**
 
-   Bu makale, Azure Databricks REST API'si bir kolayca kullanıcı sarmalayıcı olduğundan otomatik adımlar, çoğu için komut satırı arabirimi kullanan kod örnekleri sayısı.
+   Bu makalede, Azure Databricks REST API üzerinde kolay bir Kullanıcı sarmalayıcısı olduğundan, otomatik adımların çoğu için komut satırı arabirimini kullanan bir dizi kod örneği gösterilmektedir.
 
-   Tüm geçiş adımları gerçekleştirmeden önce databricks CLI, masaüstü bilgisayarınızda veya kitaplıklarımızı planladığınız bir sanal makineye yükleyin. Daha fazla bilgi için [Databricks CLI yükleme](https://docs.azuredatabricks.net/user-guide/dev-tools/databricks-cli.html)
+   Herhangi bir geçiş adımını gerçekleştirmeden önce, masaüstü bilgisayarınıza veya işi planladığınız bir sanal makineye databricks-CLI ' yı yükleyebilirsiniz. Daha fazla bilgi için bkz. [Databricks CLI 'Yi Install](/azure/databricks/dev-tools/databricks-cli)
 
    ```bash
    pip install databricks-cli
    ```
 
    > [!NOTE]
-   > Bu makalede verilen herhangi bir python komut dosyası ile Python 2.7 + çalışması beklenir < 3.x.
+   > Bu makalede sunulan Python betikleri, Python 2.7 + < 3. x ile birlikte çalışmak için beklenmektedir.
 
-2. **İki profillerini yapılandırın.**
+2. **İki profil yapılandırın.**
 
-   Birincil çalışma alanı için bir tane ve başka bir ikincil çalışma alanı için yapılandırın:
+   Birincil çalışma alanı için bir tane ve ikincil çalışma alanı için bir tane yapılandırın:
 
    ```bash
    databricks configure --profile primary
    databricks configure --profile secondary
    ```
 
-   Bu makalede anahtardaki karşılık gelen çalışma komutunu kullanarak her bir sonraki adımda profilleri arasında kod engeller. Oluşturduğunuz profillerinin adlarını her kod bloğu içine başvurulduğunda emin olun.
+   Bu makaledeki kod blokları, ilgili çalışma alanı komutunu kullanarak sonraki her adımdaki profiller arasında geçiş yapar. Oluşturduğunuz profillerin adlarının her kod bloğu için yerine geldiğinden emin olun.
 
    ```python
    EXPORT_PROFILE = "primary"
    IMPORT_PROFILE = "secondary"
    ```
 
-   Gerekirse komut satırında el ile geçiş yapabilirsiniz:
+   Gerekirse komut satırına el ile geçiş yapabilirsiniz:
 
    ```bash
    databricks workspace ls --profile primary
    databricks workspace ls --profile secondary
    ```
 
-3. **Azure Active Directory Kullanıcıları geçirme**
+3. **Azure Active Directory kullanıcıları geçirme**
 
-   El ile aynı Azure Active Directory Kullanıcıları için birincil çalışma alanında mevcut ikincil çalışma alanına ekleyin.
+   Aynı Azure Active Directory kullanıcılarını birincil çalışma alanında var olan ikincil çalışma alanına el ile ekleyin.
 
-4. **Dizüstü bilgisayarlar ve kullanıcı klasörleri geçirme**
+4. **Kullanıcı klasörlerini ve not defterlerini geçirme**
 
-   İç içe bir klasör yapısını ve kullanıcı başına not defterleri dahil korumalı kullanıcı ortamları geçirmek için aşağıdaki python kodu kullanın.
+   Kullanıcı başına iç içe geçmiş klasör yapısını ve not defterlerini içeren korumalı Kullanıcı ortamlarını geçirmek için aşağıdaki python kodunu kullanın.
 
    > [!NOTE]
-   > Bu temel alınan API desteklemediğinden kitaplıkları üzerinden bu adımda, kopyalanmaz.
+   > Bu adımda, temeldeki API tarafından desteklenmeyen kitaplıklar bu şekilde kopyalanmaz.
 
-   Kopyalayın ve aşağıdaki python betiğini bir dosyaya kaydedin ve Databricks komut satırında çalıştırın. Örneğin, `python scriptname.py`.
+   Aşağıdaki Python betiğini kopyalayıp bir dosyaya kaydedin ve Databricks komut satırımsonra çalıştırın. Örneğin, `python scriptname.py`.
 
    ```python
    from subprocess import call, check_output
@@ -124,16 +124,16 @@ Kendi bölgesel bir olağanüstü durum kurtarma topolojisi oluşturmak için bu
    print "All done"
    ```
 
-5. **Küme yapılandırmalarını geçirme**
+5. **Küme yapılandırmasını geçirme**
 
-   Not defterlerini geçirildikten sonra isteğe bağlı olarak yeni bir çalışma alanı için küme yapılandırmaları geçirebilirsiniz. Seçmeli küme yapılandırma geçişi yapmak istediğiniz sürece, databricks-cli kullanarak neredeyse bir tam otomatik adımdır yerine tüm.
+   Not defterleri geçirildikten sonra, küme yapılandırmalarının isteğe bağlı olarak yeni çalışma alanına geçişini sağlayabilirsiniz. Her şey yerine seçmeli küme yapılandırma geçişi yapmak istemediğiniz müddetçe, databricks-CLI kullanan neredeyse tamamen otomatikleştirilmiş bir adımdır.
 
    > [!NOTE]
-   > Ne yazık ki oluşturma küme yapılandırma uç nokta yoktur ve bu betiği her küme hemen oluşturmaya çalışır. Aboneliğinizde kullanılabilen yeterli çekirdek yoksa, küme oluşturma işlemi başarısız olabilir. Yapılandırma başarılı bir şekilde aktarılır sürece hata yoksayılabilir.
+   > Ne yazık ki, küme yapılandırma uç noktası oluşturma işlemi yapılmaz ve bu komut dosyası her bir kümeyi hemen oluşturmaya çalışır. Aboneliğinizde yeterli kullanılabilir çekirdek yoksa, küme oluşturma başarısız olabilir. Yapılandırma başarıyla aktarıldığı sürece hata yoksayılabilir.
 
-   Sağlanan aşağıdaki betiği bir eşleme (için daha sonra var olan kümeleri kullanmak üzere yapılandırılmış iş) geçiş işi için kullanılabilecek kimlikleri, yeni küme için eski yazdırır.
+   Aşağıdaki komut dosyası, daha sonra iş geçişi için kullanılabilecek (var olan kümeleri kullanacak şekilde yapılandırılmış işler için) eskileri yeni küme kimliklerine bir eşleme yazdırır.
 
-   Kopyalayın ve aşağıdaki python betiğini bir dosyaya kaydedin ve Databricks komut satırında çalıştırın. Örneğin, `python scriptname.py`.
+   Aşağıdaki Python betiğini kopyalayıp bir dosyaya kaydedin ve Databricks komut satırımsonra çalıştırın. Örneğin, `python scriptname.py`.
 
    ```python
    from subprocess import call, check_output
@@ -216,16 +216,16 @@ Kendi bölgesel bir olağanüstü durum kurtarma topolojisi oluşturmak için bu
    print ("       If you won't use those new clusters at the moment, please don't forget terminating your new clusters to avoid charges")
    ```
 
-6. **Geçiş işleri yapılandırma**
+6. **İş yapılandırmasını geçirme**
 
-   Önceki adımda küme yapılandırmalarını geçirdiyseniz, iş yapılandırmalarını yeni bir çalışma alanına geçirmek için seçebilirsiniz. Bu pencere için tüm işleri yapmak yerine seçmeli iş yapılandırma geçişi yapmak istediğiniz sürece databricks-cli kullanarak tam otomatik bir adımdır.
+   Önceki adımda küme yapılandırmalarının geçişini yaptıysanız, iş yapılandırmalarının yeni çalışma alanına geçirilmesini tercih edebilirsiniz. Tüm işler için yapmak yerine seçmeli iş yapılandırma geçişini yapmak istemediğiniz müddetçe, databricks-CLI kullanılarak tamamen otomatikleştirilmiş bir adımdır.
 
    > [!NOTE]
-   > Varsayılan olarak, geçiş yaptı hemen sonra göre yapılandırılmış zamanlama çalışmaya başlar bu nedenle yapılandırmayı zamanlanmış bir iş için "zamanlama" bilgileri de içerir. Bu nedenle, aşağıdaki kod bloğu (eski ve yeni çalışma alanları arasında yinelenen çalıştırmalarını önlemek için) geçiş sırasında herhangi bir zamanlama bilgilerini kaldırır. Hazır olduğunuzda bu tür işlerinin zamanlamalarını yapılandırın tam geçişi.
+   > Zamanlanan bir iş için yapılandırma, "zamanlama" bilgilerini de içerir. bu sayede, varsayılan olarak, her bir yapılandırılmış zamanlamaya göre, geçirilir almaz çalışmaya başlar. Bu nedenle, aşağıdaki kod bloğu geçiş sırasında tüm zamanlama bilgilerini kaldırır (eski ve yeni çalışma alanları genelinde yinelenen çalıştırmaları önlemek için). Cutover için hazırsanız bu işlerin zamanlamalarını yapılandırın.
 
-   Proje yapılandırma ayarları için yeni veya mevcut bir kümeye gerektirir. Mevcut küme kullanıyorsanız, yeni küme kimliğiyle eski küme kimliği değiştirmek aşağıdaki betiği /code dener
+   İş yapılandırması, yeni veya var olan bir küme için ayarları gerektirir. Mevcut küme kullanılıyorsa, aşağıdaki komut dosyası/Code, eski küme KIMLIĞINI yeni küme KIMLIĞIYLE değiştirmeye çalışır.
 
-   Kopyalayın ve aşağıdaki python betiğini bir dosyaya kaydedin. Değeri Değiştir `old_cluster_id` ve `new_cluster_id`, önceki adımda gerçekleştirilen küme geçişi çıktısı ile. Databricks CLI komut satırınızda, örneğin, çalıştırma `python scriptname.py`.
+   Aşağıdaki Python betiğini kopyalayın ve bir dosyaya kaydedin. `old_cluster_id` ve `new_cluster_id`değerini, önceki adımda yapılan küme geçişinin çıktısı ile değiştirin. Bunu databricks-CLI komut satırında çalıştırın, örneğin `python scriptname.py`.
 
    ```python
    from subprocess import call, check_output
@@ -280,17 +280,17 @@ Kendi bölgesel bir olağanüstü durum kurtarma topolojisi oluşturmak için bu
    print "All done"
    ```
 
-7. **Kitaplıklarının geçişini yapın**
+7. **Kitaplıkları geçirme**
 
-   Şu anda kitaplıkları bir çalışma alanından diğerine geçirmek için kolay bir yolu yoktur. Bunun yerine, bu kitaplıkları yeni çalışma alanına el ile yeniden yükleyin. Bir bileşimini kullanarak otomatik hale getirmek mümkündür [DBFS CLI](https://github.com/databricks/databricks-cli#dbfs-cli-examples) çalışma alanına özel kitaplıklarına yüklenecek ve [kitaplıkları CLI](https://github.com/databricks/databricks-cli#libraries-cli).
+   Şu anda kitaplıkları bir çalışma alanından diğerine geçirmeye yönelik basit bir yol yoktur. Bunun yerine, bu kitaplıkları yeni çalışma alanına el ile yeniden yükleyin. Çalışma alanına ve [KITAPLıKLARA CLI](https://github.com/databricks/databricks-cli#libraries-cli)'ye özel kitaplıkları yüklemek Için [dBFS CLI](https://github.com/databricks/databricks-cli#dbfs-cli-examples) 'nın birleşimini kullanarak otomatikleştirebilmek mümkündür.
 
-8. **Azure blob depolama ve Azure Data Lake Store takar geçirme**
+8. **Azure Blob depolamayı geçirme ve Azure Data Lake Storage bağlama**
 
-   Tüm el ile yeniden bağlamak [Azure Blob Depolama](https://docs.azuredatabricks.net/spark/latest/data-sources/azure/azure-storage.html) ve [Azure Data Lake Store (Gen 2)](https://docs.azuredatabricks.net/spark/latest/data-sources/azure/azure-datalake-gen2.html) bağlama noktalarını not defteri tabanlı bir çözüm kullanarak. Depolama kaynaklarını birincil çalışma alanında bağlanmış ve bu ikincil çalışma alanında yinelenmesi gerekir. Hiçbir dış API başlatmalar için yoktur.
+   Tüm [Azure Blob depolama](/azure/databricks/data/data-sources/azure/azure-storage) ve [Azure Data Lake Storage (Gen 2)](/azure/databricks/data/data-sources/azure/azure-datalake-gen2) bağlama noktalarını Not defteri tabanlı bir çözüm kullanarak el ile yeniden bağlayın. Depolama kaynakları birincil çalışma alanına bağlanmış ve ikincil çalışma alanında tekrarlanmalıdır. Bağlama için dış API yok.
 
-9. **Küme init betikleri geçirme**
+9. **Küme başlangıç betiklerini geçir**
 
-   Küme başlatma komut dosyalarını kullanarak yeni çalışma alanı eski geçirilebilir [DBFS CLI](https://github.com/databricks/databricks-cli#dbfs-cli-examples). İlk olarak, gerekli komut dosyalarından kopyalamak `dbfs:/dat abricks/init/..` yerel Masaüstü veya sanal makine. Ardından, bu komut yeni bir çalışma alanı aynı yola kopyalayın.
+   Tüm küme başlatma betikleri, [dBFS CLI](https://github.com/databricks/databricks-cli#dbfs-cli-examples)kullanılarak eskileri yeni çalışma alanına geçirilebilir. İlk olarak, gerekli betikleri `dbfs:/dat abricks/init/..` yerel masaüstünüze veya sanal makinenize kopyalayın. Sonra, bu betikleri aynı yoldaki yeni çalışma alanına kopyalayın.
 
    ```bash
    // Primary to local
@@ -300,16 +300,16 @@ Kendi bölgesel bir olağanüstü durum kurtarma topolojisi oluşturmak için bu
    dbfs cp -r old-ws-init-scripts dbfs:/databricks/init --profile secondary
    ```
 
-10. **El ile yeniden yapılandırın ve erişim denetimi uygulayın.**
+10. **Erişim denetimini el ile yeniden yapılandırın ve yeniden uygulayın.**
 
-    Var olan, birincil çalışma alanı Premium Katmanı (SKU) kullanmak için yapılandırılmışsa, ayrıca kullandığınız olma olasılığı yüksektir [erişim denetimi özelliği](https://docs.azuredatabricks.net/administration-guide/admin-settings/index.html#manage-access-control).
+    Mevcut birincil çalışma alanınız Premium katmanını (SKU) kullanacak şekilde yapılandırıldıysa, büyük olasılıkla [Access Control özelliğini](/azure/databricks/administration-guide/access-control/index)de kullanıyor olabilirsiniz.
 
-    El ile erişim denetimi özelliğini kullanırsanız, erişim denetimi (not defterleri, kümeler, işler, tabloları) kaynaklarına yeniden uygulayın.
+    Access Control özelliğini kullanıyorsanız, erişim denetimini kaynaklara (Not defterleri, kümeler, Işler, tablolar) el ile yeniden uygulayın.
 
-## <a name="disaster-recovery-for-your-azure-ecosystem"></a>Olağanüstü durum kurtarma için Azure ekosistemi
+## <a name="disaster-recovery-for-your-azure-ecosystem"></a>Azure Ekosisteminiz için olağanüstü durum kurtarma
 
-Diğer Azure Hizmetleri kullanılıyorsa, olağanüstü durum kurtarma için en iyi hizmetlerin çok uygulandığından emin olun. Örneğin, bir dış Hive meta veri deposu örneği kullanmayı seçerseniz, olağanüstü durum kurtarma için dikkate almanız gereken [Azure SQL Server](../sql-database/sql-database-disaster-recovery.md), [Azure HDInsight](../hdinsight/hdinsight-high-availability-linux.md), ve/veya [MySQL için Azure veritabanı ](../mysql/concepts-business-continuity.md). Olağanüstü durum kurtarma hakkında genel bilgi için bkz: [Azure uygulamaları için olağanüstü durum kurtarma](https://docs.microsoft.com/azure/architecture/resiliency/disaster-recovery-azure-applications).
+Diğer Azure hizmetlerini kullanıyorsanız, bu hizmetler için olağanüstü durum kurtarma en iyi uygulamalarını da uyguladığınızdan emin olun. Örneğin, bir dış Hive meta veri deposu örneği kullanmayı seçerseniz, [azure SQL Server](../sql-database/sql-database-disaster-recovery.md), [Azure HDInsight](../hdinsight/hdinsight-high-availability-linux.md)ve/veya [MySQL için Azure veritabanı](../mysql/concepts-business-continuity.md)için olağanüstü durum kurtarmayı göz önünde bulundurmanız gerekir. Olağanüstü durum kurtarma hakkında genel bilgi için bkz. [Azure uygulamaları Için olağanüstü durum kurtarma](https://docs.microsoft.com/azure/architecture/resiliency/disaster-recovery-azure-applications).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Daha fazla bilgi için [Azure Databricks belgeleri](https://docs.azuredatabricks.net/user-guide/index.html).
+Daha fazla bilgi için bkz. [Azure Databricks belgeleri](index.yml).

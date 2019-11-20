@@ -1,88 +1,94 @@
 ---
-title: Azure Marketi için bulut iş ortağı Portalı'nda sanal makine SKU'ları sekmesi
-description: Azure Marketi'nde sanal makine teklifi oluşturmak için kullanılan SKU'ları sekmesi açıklanır.
+title: Azure Marketi için Bulut İş Ortağı Portalı sanal makine SKU 'Ları sekmesi
+description: Azure Marketi 'nde bir sanal makine teklifi oluşturmak için kullanılan SKU 'Ların sekmesini açıklar.
 services: Azure, Marketplace, Cloud Partner Portal, virtual machine
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: article
 ms.date: 04/25/2019
 ms.author: pabutler
-ms.openlocfilehash: e1a110abf8e057034043da34455bf678277c6cb4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 101f928e296d0b48b4e077676393772829aa76ab
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65799941"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73808978"
 ---
-# <a name="virtual-machine-skus-tab"></a>Sanal makine SKU'ları sekmesi
+# <a name="virtual-machine-skus-tab"></a>Sanal makine SKU 'Ları sekmesi
 
-**SKU'ları** sekmesinde **yeni teklif** sayfası, bir veya daha fazla SKU'ları oluşturma ve bunları yeni teklifinizi ilişkilendirme olanak tanır.  Farklı SKU'ları, bir çözüm özellik kümeleri, VM görüntü türleri, aktarım hızı veya ölçeklenebilirliği, faturalandırma modelleri veya başka bir özellik tarafından ayırt edebilirsiniz.
+**Yeni teklif** sayfasının **SKU 'ları** sekmesi bir veya daha fazla SKU oluşturmanıza ve bunları yeni teklifinizle ilişkilendirmenize olanak sağlar.  Farklı SKU 'Lar bir çözümü Özellik kümelerine, VM görüntü türlerine, aktarım hızına veya ölçeklenebilirlik, faturalandırma modellerine veya başka bir özelliğe göre ayırt edebilir.
 
 
-## <a name="create-a-sku"></a>Bir SKU oluşturma
+## <a name="create-a-sku"></a>SKU oluşturma
 
-Tıklayarak oluşturacak şekilde başlangıçta, yeni bir teklif ilişkili tüm SKU'lar olmaz **yeni SKU**.
+Başlangıçta, yeni bir teklifin ilişkili SKU 'Ları yoktur, bu nedenle **yenı SKU**' ya tıklayarak bir tane oluşturacaksınız.
 
-![Sanal makineler için sekmesinde yeni teklif yeni SKU düğmesi](./media/publishvm_005.png)
+![Sanal makineler için yeni teklif sekmesindeki yeni SKU düğmesi](./media/publishvm_005.png)
 
 <br/>
 
-**Yeni SKU** iletişim kutusu görüntülenir.  Yeni SKU için tanımlayıcı girin ardından tıklayın **Tamam**. (Aşağıda tanımlayıcı adlandırma kuralları için bkz.)  **SKU'ları** sekmesinde artık düzenleme için kullanılabilir alanları görüntüler.    Alan adı eklenmiş bir yıldız (*) gerekli olduğunu gösterir.
+**Yenı SKU** iletişim kutusu görüntülenir.  Yeni SKU için tanımlayıcıyı girip **Tamam**' a tıklayın. (Tanımlayıcı adlandırma kuralları için aşağıya bakın.)  **SKU 'lar** sekmesinde artık düzenlenecek alanlar görüntülenir.    Alan adı üzerinde eklenen bir yıldız işareti (*) gerekli olduğunu gösterir.
 
 <!-- TD: This tab has been updated, now has "Old Pricing" and "Simplified Currency Pricing" sections"! -->
 
-![Sanal makineler için yeni teklifi formdaki SKU sekmesi](./media/publishvm_006.png)
+![Sanal makineler için yeni teklif formundaki SKU sekmesi](./media/publishvm_006.png)
 
-Amaç, içeriği, aşağıdaki tabloda açıklanmıştır ve bu alanlar biçimlendirme.  Gerekli alanlar yıldız (*) indicted.
+Aşağıdaki tabloda bu alanların amacı, içeriği ve biçimlendirmesi açıklanmaktadır.  Gerekli alanlar bir yıldız işareti (*) ile tanımlanır.
 
 <!-- TD: I took a new screenshot, and the fields differ somewhat from description in the VM Pub Guide.  Needs review. -->
 
 |  **Alan**       |     **Açıklama**                                                          |
 |  ---------       |     ---------------                                                          |
 |  *SKU ayarları*   |    |
-| **SKU KİMLİĞİ\***       | Bu SKU için tanımlayıcı.  Bu ada sahip en fazla 50 karakterden oluşan, küçük harf alfasayısal karakterler veya tire (-), ancak bir kısa çizgi ile bitemez.  Teklif yayımlandıktan sonra değiştirilemez.  |
+| **SKU KIMLIĞI\***       | Bu SKU için tanımlayıcı.  Bu ad, küçük harfli alfasayısal karakterler veya tireler (-) içeren en fazla 50 karakter içerir, ancak kısa çizgi ile bitemez.  Teklif yayımlandıktan sonra değiştirilemez.  |
 |  *SKU ayrıntıları*   |  |
-| **Başlık\***        | Teklif için görüntü marketi'ndeki için kolay ad. En fazla 50 karakter uzunluğunda. |
-| **Özeti\***      | Teklif için görüntü marketi'ndeki Sözün açıklaması. En fazla 100 karakter uzunluğunda. |
-| **Açıklaması\***  | Açıklama metni teklif daha ayrıntılı bir açıklama sağlar.  <!-- TD: max len/guidance? 3k characters -->  |
-| **Bu SKU Gizle\*** | SKU Market'te müşterilere görünür olup olmayacağını belirtir.  Yalnızca çözüm şablonları aracılığıyla yalnızca ve satın alma için kullanılabilen tek tek istiyorsanız SKU gizlemek isteyebilirsiniz.  Ayrıca ilk test etmek veya geçici veya dönemsel teklifler için yararlı olabilir. |
-| **Bulut kullanılabilirlik\*** | SKU hangi bulutlarda kullanılabilir olması gerektiğini belirler.  Varsayılan Azure genel sürümüdür.  Microsoft Azure kamu, ABD Federal, durumu, yerel veya Kabile kamu kuruluşları ve bunların sertifikalı iş ortakları için denetimli erişim ile bir devlet kurumu-topluluk bulutudur.  Kamu Bulutu hakkında daha fazla bilgi için bkz: [Hoş Geldiniz Azure kamu](https://docs.microsoft.com/azure/azure-government/documentation-government-welcome). |
-| **Bu, bir özel SKU mi?\*** | SKU özel veya genel olup olmadığını belirtir. Varsayılan değer **Hayır** (Genel).  Daha fazla bilgi için [genel ve özel'SKU ' ları](../../cloud-partner-portal-orig/cloud-partner-portal-azure-private-skus.md). |
-| **Ülke/bölge kullanılabilirliği\*** | Hangi ülkelerde veya dünya bölgeleri, SKU satın alınabilir olacak belirler. En az bir bölgeyi/ülkeyi seçin. <!-- TD: Is this parameter an AMP visibility control or a contractual one, or both? --> |  
+| **Başlık\***        | Market 'te görüntülenmek üzere teklif için kolay ad. En fazla 50 karakter uzunluğunda. |
+| **Özet\***      | Market 'te görüntüleme teklifinin kısa açıklaması. En fazla 100 karakter uzunluğunda. |
+| **Açıklama\***  | Teklifin daha ayrıntılı bir açıklamasını sağlayan açıklama metni.  <!-- TD: max len/guidance? 3k characters -->  |
+| **Bu SKU 'YU Gizle\*** | SKU 'nun Market 'te müşterilere görünür olup olmayacağını gösterir.  Yalnızca çözüm şablonları aracılığıyla kullanılabilir olmasını istiyorsanız SKU 'YU gizlemek isteyebilirsiniz.  Bu, ilk test veya geçici ya da mevsimsel teklifler için de yararlı olabilir. |
+| **Bulut kullanılabilirliği\*** | SKU 'nun hangi bulutta kullanılabilir olacağını belirler.  Varsayılan değer Azure 'un genel sürümüdür.  Microsoft Azure Kamu, ABD Federal, eyalet, yerel veya kaş kamu kurumları ve bunların sertifikalı iş ortakları için denetimli erişime sahip bir Devlet kurumunun bulutuna sahiptir.  Kamu Bulutu hakkında daha fazla bilgi için bkz. [Azure Kamu 'Ya hoş geldiniz](https://docs.microsoft.com/azure/azure-government/documentation-government-welcome). |
+| **Bu özel bir SKU mı?\*** | SKU 'nun özel mi yoksa genel mi olduğunu gösterir. Varsayılan **değer (genel) değildir.**  Daha fazla bilgi için bkz. [ortak ve özel SKU 'lar](../../cloud-partner-portal-orig/cloud-partner-portal-azure-private-skus.md). |
+| **Ülke/bölge kullanılabilirliği\*** | SKU 'nuzun satın alma için hangi ülkelerin veya dünya bölgelerinin kullanılabilir olacağını belirler. En az bir bölge/ülke seçin. <!-- TD: Is this parameter an AMP visibility control or a contractual one, or both? --> |  
 |  *Fiyatlandırma*   |  |
-| **Lisans modeli\***| Kullanmak için standart faturalandırma modeli.  Seçerseniz **aylık kullanım tabanlı fatura SKU**, çekirdek başına fiyatlandırma ayrıntılarını belirtmek sağlamak için bir accordion bölümü açılır ve istediğinizi ücretsiz deneme süresi sunuyor.  Bu bölümde Ayrıca, bu fiyatlandırma zamanlamasına Excel'e içeri ve dışarı aktarmak sağlar. Daha fazla bilgi için [faturalandırma seçenekleri Azure Marketi'nde](../../billing-options-azure-marketplace.md). | 
+| **Lisans modeli\***| Kullanılacak standart faturalandırma modeli.  **Kullanım tabanlı aylık FATURALANDıRıLAN SKU**' yı seçerseniz, çekirdek başına fiyatlandırma ayrıntılarını ve ücretsiz deneme süresi sunmak isteyip istemediğinizi belirtmenizi sağlayan bir Accordion bölümü açılır.  Bu bölüm ayrıca, bu fiyatlandırma zamanlamasını Excel 'e aktarıp içeri aktarmanızı sağlar. Daha fazla bilgi için bkz. [Azure Marketi 'Ndeki faturalandırma seçenekleri](../../billing-options-azure-marketplace.md). | 
 |  *VM görüntüleri*   |  |
-| **İşletim sistemi ailesi\*** | Windows veya Linux tabanlı VM çözümü olup olmadığını gösterir. |
-| **İşletim sistemi türünü seçin** | Belirli bir satıcı veya belirtilen işletim sistemi sürümü. |
-| **İşletim sistemi kolay adı\*** | Müşterilere görüntülenecek işletim sistemi adı.  |
-| **Önerilen VM boyutları\*** | Önerilen VM boyutları en fazla altı standartlaştırılmış bir listeden seçim sağlar.  Bu liste, boyunca Azure portalı ve Microsoft marketleri geçirilir.  (Bu müşteri abonelik, bölge, bölge, vb. için) geçerli olduğundan, bu listedeki ilk VM boyutu, potansiyel müşteriye ait varsayılan olarak ayarlanır.  Kullanıcı, tüm uyumlu çözüm görüntü için bu boyutunu değiştirebilirsiniz. | 
-| **Bağlantı noktalarını Aç**| Açın ve SKU için desteklemek için protokolü için bağlantı noktaları.  Bu yapılandırmalar, ' % s'çözüm VM ağı için yapılandırdığınız sanal ağ ile eşleşmesi gerekir. Bu ayarlar, sanal makine dağıtımı sırasında etkin hale gelir. Ancak, bağlantı noktası ayarlarını, bir SKU yayımladıktan sonra değiştirilebilir. Daha fazla bilgi için [Azure portalıyla bir sanal makineye bağlantı noktaları açma](https://docs.microsoft.com/azure/virtual-machines/windows/nsg-quickstart-portal). <br/>Aşağıdaki varsayılan ağ eşlemeleri, tüm sanal makinelere eklenir. &emsp; Windows: 3389 -> 3389 TCP, 5986 -> 5986 TCP; &emsp; Linux: 22, 22, TCP (SSH) -&GT;. |
-| **Disk sürümü**  | Disk URL'si ve disk sürüm numarası ile belirtilen ilişkili bir çözüm VM. Disk sürümü olmalıdır [semantik sürüm](https://semver.org/) biçimi: `<major>.<minor>.<patch>`.  Paylaşılan erişim imzası URI'si işletim sistemi VHD'si için oluşturulan URL'dir.  Yalnızca en yüksek disk sürüm numarasını bir SKU için SKU başına en fazla sekiz disk sürümleri ekleyebilirsiniz, ancak, Azure Market'te görünür. Diğer sürümler yalnızca API görünür olur.  <!--TD: Add more specific link to API --> <br/> **Yeni veri diski** accordion bölümü, VM'ye veri diskleri en fazla 15 olanak sağlar.  Belirli bir sanal makine sürümünü ve ilişkili veri diskleri ile bir SKU yayımladıktan sonra bu yapılandırma değiştirilemez.  Ek VM sürümlerini için SKU eklenin, ayrıca veri diskleri aynı sayıda desteklemesi gerekir. <br/> Uygulamanızın Azure tabanlı VM görüntülerini oluşturmadıysanız ekleyebileceğiniz daha sonra bu alanı güncelleştirin.  İlişkili VM kaynak oluşturma hakkında daha fazla bilgi için konudaki [VM Oluştur teknik varlıkları](./cpp-create-technical-assets.md).  
+| **İşletim sistemi ailesi\*** | Çözüm VM 'sinin Windows veya Linux tabanlı olup olmadığını gösterir. |
+| **Işletim sistemi türünü seçin** | Belirtilen işletim sisteminin belirli bir satıcısı veya sürümü. |
+| **OS kolay adı\*** | Müşterilere görüntülenecek işletim sistemi adı.  |
+| **Önerilen VM boyutları\*** | Standartlaştırılmış bir listeden en fazla altı adet önerilen VM boyutu seçimini sağlar.  Bu liste Azure portal ve Microsoft marketlerine iletilir.  Bu listedeki geçerli olan ilk sanal makine boyutu (söz konusu müşteri aboneliği, bölge, bölge vb.), bu potansiyel müşteri için varsayılan olarak ayarlanır.  Kullanıcı bu boyutu çözüm görüntüsüyle uyumlu olacak şekilde değiştirebilir. | 
+| **Açık bağlantı noktaları**| Açık bağlantı noktaları ve SKU için destekedilecek protokol.  Bu yapılandırmaların, çözüm VM ağı için yapılandırdığınız sanal ağla eşleşmesi gerekir. Bu ayarlar VM dağıtımı sırasında devreye girer. Ancak, bir SKU yayımladıktan sonra bağlantı noktası ayarları değiştirilebilir. Daha fazla bilgi için bkz. [Azure Portal ile bağlantı noktalarını bir sanal makineye açma](https://docs.microsoft.com/azure/virtual-machines/windows/nsg-quickstart-portal). <br/>Aşağıdaki varsayılan ağ eşlemeleri tüm VM 'lere eklenir. &emsp; Windows: 3389-> 3389 TCP, 5986-> 5986 TCP; Linux &emsp;: 22-> 22, TCP (SSH). |
+| **Disk sürümü**  | Disk sürüm numarası ve disk URL 'SI tarafından belirtilen ilişkili çözüm sanal makinesi. Disk sürümü [anlam sürümü](https://semver.org/) biçiminde olmalıdır: `<major>.<minor>.<patch>`.  URL, işletim sistemi VHD 'si için oluşturulan paylaşılan erişim imzası URI 'sidir.  SKU başına en fazla sekiz disk sürümü ekleyebilirsiniz, ancak Azure Marketi 'nde yalnızca bir SKU için en yüksek disk sürüm numarası görünür. Diğer sürümler yalnızca API 'Ler aracılığıyla görünür olur.  <!--TD: Add more specific link to API --> <br/> **Yeni Data Disk** Accordion bölümü, sanal makinenize en fazla 15 veri diski eklemenize olanak sağlar.  Belirli bir VM sürümü ve ilişkili veri disklerine sahip bir SKU yayımladığınızda, bu yapılandırma değiştirilemez.  SKU 'ya ek VM sürümleri eklenirse, aynı zamanda aynı sayıda veri diski de desteklemesi gerekir. <br/> Azure tabanlı VM görüntünüzü oluşturmadıysanız, daha sonra bu alanı Güncelleştir ekleyebilirsiniz.  İlişkili VM kaynağı oluşturma hakkında daha fazla bilgi için bkz. [VM teknik varlıkları oluşturma](./cpp-create-technical-assets.md)bölümü.  
 |  |  |
 
 <!-- TD: The CPP UX warning msg indicates that underscores are also supported in these SKU IDs. I suspect this might be true for other identifiers. --> 
 
-<br/> Tıklayın **Kaydet** ilerlemenizi kaydetmek için. Sonraki sekmede teklifinizi destekleyip desteklemediğini belirteceği [Test Sürüşü](./cpp-test-drive-tab.md).
+<br/> İlerlemenizi kaydetmek için **Kaydet** ' e tıklayın. Bir sonraki sekmede, teklifinizin [Test sürücüsünü](./cpp-test-drive-tab.md)destekleyip desteklemediğini belirtirsiniz.
 
 
-## <a name="additional-pricing-considerations"></a>Ek fiyatlandırma dikkat edilmesi gerekenler
+## <a name="additional-pricing-considerations"></a>Ek fiyatlandırma konuları
 
-Yukarıda belirtilen fiyatlandırma modeline temel bir açıklamasıdır.  Bu değişiklikler yapılıyor ve yerel ve bölgesel vergileri düzenlemelere ve ilkeleri fiyatlandırma Microsoft tarafından etkilenebilir. 
+Yukarıda açıklanan fiyatlandırma modeli temel bir açıklamadır.  Değişiklikler yaşıyor ve yerel ya da bölgesel vergi yönetmelikleri ve Microsoft fiyatlandırma ilkeleri bundan etkilenebilir. 
 
-### <a name="simplified-currency-pricing"></a>Basitleştirilmiş bir para birimi fiyatlandırması
+### <a name="new-core-sizes-added-on-722019"></a>7/2/2019 üzerine yeni temel boyutlar eklendi
 
-1 Eylül 2018'den başlayarak, yeni bir bölüm adı verilen **Basitleştirilmiş para birimi fiyatlandırma** portalına eklenmesi. Microsoft Azure Marketi iş daha öngörülebilir fiyatlandırma ve müşterilerinizin koleksiyonları dünya genelindeki etkinleştirerek hızlandırma. Bu hızlandırma biz müşterilerinizin Fatura para birimi sayısını azaltmayı içerir.  Daha fazla bilgi için [varolan bir VM'yi Azure Marketi'nde teklif güncelleştirme](./cpp-update-existing-offer.md).
+VM yayımcılarının, yeni Azure sanal makine boyutlarına (çekirdek sayısına göre) yeni fiyatlara ek olarak, 2 Temmuz 2019 tarihinde bilgilendirildi.  Yeni fiyatlar, 10, 44, 48, 60, 120, 208 ve 416 temel boyutlarına yöneliktir.  Mevcut VM için, bu çekirdek boyutları için yeni fiyatlar, geçerli fiyatlara göre otomatik olarak hesaplanır.  Yayımcılar, ek fiyatları gözden geçirmek ve istediğiniz değişiklikleri yapmak için 1 Ağustos 2019 ' e kadar.  Bu tarihten sonra, yayımcı tarafından zaten yeniden yayımlanmamışsa, bu yeni çekirdek boyutları için otomatik olarak hesaplanan fiyatlar geçerli olur.
 
 
-### <a name="additional-information-on-taxes-and-prices"></a>Vergi ve fiyatlar konusunda ek bilgi
+### <a name="simplified-currency-pricing"></a>Basitleştirilmiş para birimi fiyatlandırması
 
-* Microsoft, bazı ülkeler/bölgeler olarak sınıflandırır *vergi havale ülkeleri*.  Bu ülkeler/bölgeler, Microsoft vergileri müşterilerden toplar ardından devlet kurumuna (remits) vergileri öder.  Diğer ülkeler/bölgeler iş ortakları, müşterilerin vergileri toplamak ve devlet kurumuna vergileri ödeme genellikle yükümlü olursunuz. İkinci ülkelerde/bölgelerde satmak seçerseniz, hesaplama ve bu vergileri yerel Öde yeteneği olmalıdır.  <!-- TD: Find a good reference on taxing policies. The best I found was in the UWP section: https://docs.microsoft.com/windows/uwp/publish/tax-details-for-paid-apps -->
-* Bir teklif etkin hale gelir sonra fiyatları takımdaki herhangi biri değildir. Ancak, yine de ekleyebilir veya desteklenen bölgelerin kaldırın. 
-* Microsoft ücretlerinden bağımsız müşteri standart Azure VM kullanım ücretleri, zamanlanmış bir SKU ücretlerine ek olarak.
-* Fiyatlar tüm bölgeler için kullanılabilen para birimi tarifeleri üzerinden yerel para biriminde fiyatları sırasında ayarlanır.  <!-- TD: Meaning? - Offer created, published, other? -->
-* Tek tek her bölgenin fiyat ayarlamak için lütfen fiyatlandırma elektronik tabloya dışarı aktarma, özel fiyatlandırma için geçerlidir ve ardından içeri aktarın. 
+1 2018 Eylül 'den itibaren, portala **Basitleştirilmiş para birimi fiyatlandırması** adlı yeni bir bölüm eklenecektir. Microsoft, müşterilerinizden dünya genelindeki daha öngörülebilir fiyatlandırma ve koleksiyonlar sağlayarak Azure Market işletmesini kolaylaştırıyor. Bu hızlandırma, müşterilerinize faturadığımız para birimi sayısını azaltmayı içerir.  Daha fazla bilgi için bkz. [Azure Marketi 'nde mevcut VM teklifini güncelleştirme](./cpp-update-existing-offer.md).
+
+
+### <a name="additional-information-on-taxes-and-prices"></a>Vergiler ve fiyatlar hakkında ek bilgiler
+
+* Microsoft bazı ülkeleri/bölgeleri *vergi havalesi yapılmış ülkeler*olarak sınıflandırır.  Bu ülkelerde/bölgelerde Microsoft, müşterilerden gelen vergileri toplar ve kamu vergilerini ödeyen (remits).  Diğer ülkelerde/bölgelerde iş ortakları genellikle müşterilerinden vergiler toplamaktan ve kamu vergilerini kamu ödemesinden sorumludur. İkinci ülkelerde/bölgelerde satışı yapmayı seçerseniz, yerel vergileri hesaplama ve ödeme yeteneğinin olması gerekir.  <!-- TD: Find a good reference on taxing policies. The best I found was in the UWP section: https://docs.microsoft.com/windows/uwp/publish/tax-details-for-paid-apps -->
+* Bir teklif canlı olduktan sonra fiyatlar değiştirilemez. Ancak, hala desteklenen bölgeler ekleyebilir veya kaldırabilirsiniz. 
+* Microsoft, müşteri standart Azure VM kullanım ücretlerini planlı SKU ücretlerine ek olarak ücretlendirir.
+* Fiyatlar, fiyat ayarlama sırasında kullanılabilir para birimi fiyatları üzerinden yerel para birimi cinsinden tüm bölgeler için ayarlanır.  <!-- TD: Meaning? - Offer created, published, other? -->
+* Her bölgenin fiyatını ayrı ayrı ayarlamak için lütfen fiyatlandırma elektronik tablosunu dışa aktarın, özel fiyatlandırma uygulayın ve içeri aktarın. 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-İsteğe bağlı olarak belirteceği [Test Sürüşü](./cpp-test-drive-tab.md) bilgileri, bu özellik; destekleniyorsa Aksi takdirde, sağladığınız [Market](./cpp-marketplace-tab.md) teklifiniz için verileri.
+İsteğe bağlı olarak, bu özelliği destekliyorsanız [test sürücüsü](./cpp-test-drive-tab.md) bilgilerini belirtirsiniz; Aksi takdirde, teklifiniz için [Market](./cpp-marketplace-tab.md) verileri sağlarsınız.

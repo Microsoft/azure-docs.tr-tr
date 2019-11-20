@@ -1,36 +1,36 @@
 ---
-title: Azure Media Clipper'a varlık yükleme | Microsoft Docs
-description: Azure Media Clipper'a varlık yükleme adımları
+title: Varlıkları Azure Media Clipper 'a yükleme | Microsoft Docs
+description: Azure Media Clipper 'a varlık yükleme adımları
 services: media-services
-keywords: clip;subclip;encoding;media
-author: dbgeorge
-manager: jasonsue
-ms.author: dwgeo
+keywords: klip; alt klip; kodlama; medya
+author: Juliako
+manager: femila
+ms.author: juliako
 ms.date: 03/14/2019
 ms.topic: article
 ms.service: media-services
-ms.openlocfilehash: ec8cd06be78bbd8df0bca390696e736c3a6ee075
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 66b4ca5b2859dd306f6eb1c669a07840189f53d5
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61465890"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73685048"
 ---
-# <a name="loading-assets-into-azure-media-clipper"></a>Azure Media Clipper'a varlık yükleme  
+# <a name="loading-assets-into-azure-media-clipper"></a>Varlıkları Azure Media Clipper 'a yükleme  
 
-Varlıklar Azure Media Clipper'a iki yöntemle yüklenebilir:
-1. Varlıkların kitaplığa statik olarak geçirme
-2. Dinamik olarak bir API aracılığıyla varlıkların listesi oluşturma
+Varlıklar, Azure Media Clipper 'a iki yöntemle yüklenebilir:
+1. Bir varlık kitaplığında statik olarak geçirme
+2. API aracılığıyla bir varlık listesini dinamik olarak oluşturma
 
-## <a name="statically-load-videos-into-clipper"></a>Statik olarak videoları Clipper'a varlık yükleme
-Statik olarak video klipleri varlık seçimi panelinden videoları seçmeden oluşturmak son kullanıcıların olanak Clipper'ı yükleyin.
+## <a name="statically-load-videos-into-clipper"></a>Videoları Clipper 'a statik olarak yükleme
+Son kullanıcıların, varlık seçim panelinden video seçmeden küçük resimleri oluşturmasını sağlamak için videoları Clipper 'a statik olarak yükleyin.
 
-Bu durumda, Clipper için statik varlıklar kümesi içinde geçirin. Her varlık, bir AMS varlığı/filtre kimliği, adı, yayımlanan akış URL'sini içerir. Uygunsa, içerik koruma kimlik doğrulama belirteci veya küçük bir dizi URL'leri de geçirilebilir. Geçirilen, küçük resimleri arabirimine doldurulur. Varlık kitaplığa statik ve küçük olduğu senaryolarda, kitaplıktaki her varlık için varlık sözleşmede geçirebilirsiniz.
+Bu durumda, bir statik varlık kümesini Clipper 'a geçitirsiniz. Her varlık bir AMS varlık/filtre KIMLIĞI, ad, yayımlanan akış URL 'SI içerir. Uygulanabiliyorsa, bir içerik koruma kimlik doğrulama belirteci veya küçük resim URL 'si dizisi iletilebilir. Geçirilirse, küçük resimler arabirime doldurulur. Varlık kitaplığının statik ve küçük olduğu senaryolarda, kütüphanedeki her bir varlık için varlık sözleşmesini geçirebilirsiniz.
 
 > [!NOTE]
-> Statik olarak Clipper'a varlık yükleme, varlıkları eklenir **doğrudan zaman çizelgesine** ve **varlık bölmesinde değil işlenen**. İlk varlık zaman çizelgesine eklenir ve varlıkları geri kalanı zaman çizelgesi sağ tarafında Yığılmış).
+> Varlıkları Clipper 'a statik olarak yüklerken, varlıklar **doğrudan zaman çizelgesine** eklenir ve **varlık bölmesi işlenmez**. İlk varlık zaman çizelgesine eklenir ve varlıkların geri kalanı zaman çizelgesinin sağ tarafında yığılır.
 
-Bir statik varlık kitaplığını yüklemek için kullanmak **yük** her varlık bir JSON temsili geçirmek için yöntemi. Aşağıdaki kod örneği bir varlık için JSON gösterimi gösterilmektedir.
+Statik bir varlık kitaplığını yüklemek için, her bir varlığın JSON gösterimini geçirmek üzere **Load** metodunu kullanın. Aşağıdaki kod örneği, bir varlığın JSON temsilini gösterir.
 
 ```javascript
 var assets = [
@@ -99,10 +99,10 @@ subclipper.ready(function () {
 ```
 
 > [!NOTE]
-> Load() yöntemini çağırmak yukarıdaki örnekte gösterildiği gibi ready(handler) yöntemiyle zinciri önerilir. Yukarıdaki örnekte, varlıkları yüklemeden önce pencere öğesi hazır olduğunu garanti eder.
+> Load () yöntemi çağrısını, önceki örnekte gösterildiği gibi Ready (handler) yöntemiyle zincirlemesi önerilir. Önceki örnek, varlıkların yüklenmeden önce pencere öğesinin önceden hazırlandığına güvence sağlar.
 
 > [!NOTE]
-> Küçük resim URL'leri, bunlar eşit olarak dağıtılması gerekir (süresine göre) video arasında Clipper zaman çizelgesindeki beklendiği gibi çalıştığını ve dizi içinde kronolojik sırada. 'Medya Kodlayıcısı standart' işlemci ile görüntüleri oluşturmak için aşağıdaki JSON önceden oluşturulmuş kod parçacığını bir örnek başvuru olarak kullanabilirsiniz:
+> Küçük resim URL 'Lerinin, Clipper zaman çizelgesinde beklendiği gibi çalışması için, video üzerinde eşit olarak dağıtılmaları gerekir (süreye göre) ve dizi içinde kronolojik sırada. Aşağıdaki JSON önceden ayarlanmış kod parçacığını, ' Media Encoder Standard ' işlemcisine sahip görüntüler oluşturmak için örnek başvuru olarak kullanabilirsiniz:
 
 ```json
 {
@@ -120,13 +120,13 @@ subclipper.ready(function () {
 }
 ```
 
-## <a name="dynamically-load-videos-in-clipper"></a>Dinamik olarak Clipper videoları yükleme
-Dinamik olarak videoları videoları karşı kırpmak için varlık seçim paneli seçmek son kullanıcıların olanak Clipper'ı yükleyin.
+## <a name="dynamically-load-videos-in-clipper"></a>Clipper 'da videoları dinamik olarak yükleme
+Son kullanıcıların, varlık seçimi panelinden video seçmesini ve küçük resim olarak ölçeklendirmesini sağlamak için videoları Clipper 'a dinamik olarak yükleyin.
 
-Alternatif olarak, bir geri çağırma aracılığıyla dinamik olarak varlıkları yükleyebilirsiniz. Burada varlıklarını dinamik olarak oluşturulan ya da büyük bir kitaplıktır senaryolarda geri yüklemeniz gerekir. Varlık dinamik olarak yüklemek için isteğe bağlı onLoadAssets geri çağırma işlevi uygulamalıdır. Bu işlev, başlatma sırasında Clipper uygulamasına geçirilir. Çözümlenen varlıklar, statik olarak yüklenen varlıklar olarak aynı sözleşmeye uymalıdır. Aşağıdaki kod örneği, yöntem imzası, beklenen giriş ve beklenen çıktıyı gösterir.
+Alternatif olarak, bir geri çağırma yoluyla varlıkları dinamik olarak yükleyebilirsiniz. Varlıkların dinamik olarak oluşturulduğu veya kitaplığın büyük olduğu senaryolarda, geri çağırma aracılığıyla yüklemeniz gerekir. Varlığı dinamik olarak yüklemek için isteğe bağlı onLoadAssets geri arama işlevini uygulamanız gerekir. Bu işlev, başlatma sırasında Clipper 'a geçirilir. Çözümlenen varlıkların statik olarak yüklenen varlıklarla aynı sözleşmeye bağlı olması gerekir. Aşağıdaki kod örneği, yöntem imzasını, beklenen girişi ve beklenen çıktıyı gösterir.
 
 > [!NOTE]
-> Dinamik olarak Clipper'a varlık yükleme olduğunda, varlıklar olarak işlenir **varlık seçim paneli**.
+> Varlıkları Clipper 'a dinamik olarak yüklerken, varlıklar **varlık seçimi panelinde**işlenir.
 
 ```javascript
 // Video Assets Pane Callback

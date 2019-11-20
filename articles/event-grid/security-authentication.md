@@ -8,12 +8,12 @@ ms.service: event-grid
 ms.topic: conceptual
 ms.date: 05/22/2019
 ms.author: babanisa
-ms.openlocfilehash: 87cfce6045ce84f83ca651472635227547c26ee9
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: dfa53acaf392e225873a40b05b8517de2f9780dc
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66117017"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74169572"
 ---
 # <a name="event-grid-security-and-authentication"></a>Event Grid güvenliğini ve kimlik doğrulaması 
 
@@ -29,24 +29,24 @@ Web kancaları olayları Azure Event Grid'den almak için birçok yöntemlerinde
 
 Web kancalarını destekleyen birçok diğer hizmetleri gibi Event Grid, olayları için bu endpoint göndermeye başlamadan sahipliğini Web kancası uç noktanızın kanıtlamak gerektirir. Bu gereksinim, uç noktanızı olaylarla taşmasını gelen kötü niyetli bir kullanıcı önler. Aşağıda listelenen üç Azure hizmetlerinden herhangi birinin kullandığınızda, Azure altyapısının bu doğrulama otomatik olarak işler:
 
-* Azure Logic Apps ile [Event Grid Bağlayıcısı](https://docs.microsoft.com/connectors/azureeventgrid/)
-* Azure Otomasyonu ile [Web kancası](../event-grid/ensure-tags-exists-on-new-virtual-machines.md)
-* Azure işlevleri ile [olay Kılavuzu tetikleyicisi](../azure-functions/functions-bindings-event-grid.md)
+* [Event Grid Bağlayıcısı](https://docs.microsoft.com/connectors/azureeventgrid/) ile Azure Logic Apps
+* [Web kancası](../event-grid/ensure-tags-exists-on-new-virtual-machines.md) aracılığıyla Azure Otomasyonu
+* [Event Grid tetikleyicisiyle](../azure-functions/functions-bindings-event-grid.md) Azure işlevleri
 
 HTTP tetikleyicisi tabanlı Azure işlevi gibi başka türde bir uç noktasını kullanıyorsanız, Event Grid ile bir doğrulama anlaşması'na katılmak uç nokta kodunuzun gerekir. Event Grid aboneliği doğrulama iki şekilde destekler.
 
-1. **ValidationCode el sıkışması (programlı)** : Uç noktanız için kaynak kodu denetimi, bu yöntem tavsiye edilir. Olay aboneliği oluşturma sırasında Event Grid aboneliği doğrulama olayı uç noktanıza gönderir. Bu olayın şeması için başka bir Event Grid olayı benzerdir. Bu olay veri bölümünü içeren bir `validationCode` özelliği. Uygulamanızı doğrulama isteği için beklenen olay aboneliği ve doğrulama kodu Event grid'e yankılayan olduğunu doğrular. Bu anlaşma mekanizması tüm Event Grid sürümlerinde desteklenir.
+1. **ValidationCode el sıkışması (programlı)** : uç noktanız için kaynak kodu denetimi, bu yöntem tavsiye edilir. Olay aboneliği oluşturma sırasında Event Grid aboneliği doğrulama olayı uç noktanıza gönderir. Bu olayın şeması için başka bir Event Grid olayı benzerdir. Bu olay veri bölümünü içeren bir `validationCode` özelliği. Uygulamanızı doğrulama isteği için beklenen olay aboneliği ve doğrulama kodu Event grid'e yankılayan olduğunu doğrular. Bu anlaşma mekanizması tüm Event Grid sürümlerinde desteklenir.
 
 2. **ValidationURL el sıkışması (el ile)** : Bazı durumlarda, kaynak kodu ValidationCode el sıkışması uygulamak için uç nokta erişemez. Örneğin, bir üçüncü taraf hizmet kullanın (gibi [Zapier](https://zapier.com) veya [IFTTT](https://ifttt.com/)), program aracılığıyla doğrulama kodu ile yanıt veremez.
 
    Event Grid, sürümü 2018-05-01-preview ile başlayarak, el ile doğrulama el sıkışması destekler. Bir olay aboneliği bir SDK veya API sürümü 2018-05-01-preview'ı kullanan aracıyla oluştururken ya da daha sonra Event Grid gönderir, bir `validationUrl` abonelik doğrulama olayı veri bölümünü özelliği. Anlaşma tamamlamak için bulma olay verileri ve el ile bu URL'yi bir GET isteği gönder. Bir REST istemcisi ya da web tarayıcınızı kullanabilirsiniz.
 
-   Sağlanan URL'de 5 dakika için geçerlidir. Bu süre boyunca, olay aboneliğinin sağlama durumu: `AwaitingManualAction`. 5 dakika içinde el ile doğrulama tamamlamazsanız, sağlama durumu kümesine `Failed`. Olay aboneliği el ile doğrulama başlatmadan önce yeniden oluşturmanız gerekir.
+   Belirtilen URL 5 dakika için geçerlidir. Bu süre boyunca, olay aboneliğinin sağlama durumu: `AwaitingManualAction`. El ile doğrulamayı 5 dakika içinde tamamlamazsanız, sağlama durumu `Failed`olarak ayarlanır. Olay aboneliği el ile doğrulama başlatmadan önce yeniden oluşturmanız gerekir.
 
-    Bu kimlik doğrulama mekanizması ayrıca el ile doğrulama modunda almadan önce doğrulama olayı için POST kabul edildi bildiği bir HTTP durum kodu 200 döndürülecek Web kancası uç noktası gerektirir. Diğer bir deyişle, uç nokta 200 döndürür, ancak doğrulama yanıt program aracılığıyla geri dönmez modunu el ile doğrulama moduna geçirilir. Doğrulama URL'si GET 5 dakika içinde varsa, doğrulama anlaşma başarılı olması için değerlendirilir.
+    Bu kimlik doğrulama mekanizması Ayrıca, el ile doğrulama moduna alınmadan önce doğrulama olayının GÖNDERISINI kabul ettiğini bilmesi için Web kancası uç noktasının 200 HTTP durum kodunu döndürmesini gerektirir. Diğer bir deyişle, uç nokta 200 döndürürse ancak programlı olarak bir doğrulama yanıtı geri dönmezse, mod el ile doğrulama moduna geçirilir. Doğrulama URL 'sinde 5 dakika içinde bir GET varsa, doğrulama el sıkışması başarılı olarak kabul edilir.
 
 > [!NOTE]
-> Doğrulama için otomatik olarak imzalanan sertifikaların kullanılması desteklenmiyor. İmzalı bir sertifika bir sertifika yetkilisinden (CA) kullanın.
+> Doğrulama için otomatik olarak imzalanan sertifikalar kullanılması desteklenmez. Bunun yerine bir sertifika yetkilisinden (CA) imzalı bir sertifika kullanın.
 
 ### <a name="validation-details"></a>Doğrulama ayrıntıları
 
@@ -55,7 +55,7 @@ HTTP tetikleyicisi tabanlı Azure işlevi gibi başka türde bir uç noktasını
 * Olay gövdesinde diğer Event Grid olaylarına aynı şemaya sahip.
 * Olayın eventType özelliği `Microsoft.EventGrid.SubscriptionValidationEvent`.
 * Olayın veri özelliği içeren bir `validationCode` özelliği ile rastgele oluşturulmuş bir dize. Örneğin, "validationCode: acb13...".
-* Olay verileri de içeren bir `validationUrl` abonelik el ile doğrulamak için bir URL ile özelliği.
+* Olay verileri, aboneliği el ile doğrulamak için URL ile birlikte bir `validationUrl` özelliği de içerir.
 * Dizi doğrulama olay içeriyor. Doğrulama kodu geri echo sonra gelen diğer olayları ayrı bir istek gönderilir.
 * EventGrid veri düzlemi SDK'ları abonelik doğrulama olay verileri ve abonelik doğrulama yanıt karşılık gelen sınıfları içerir.
 
@@ -67,8 +67,8 @@ Bir örnek SubscriptionValidationEvent aşağıdaki örnekte gösterilmiştir:
   "topic": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "subject": "",
   "data": {
-    "validationCode": "0000000000-0000-0000-0000-00000000000000",
-    "validationUrl": "https://rp-eastus2.eventgrid.azure.net:553/eventsubscriptions/estest/validate?id=0000000000-0000-0000-0000-0000000000000&t=2018-04-26T20:30:54.4538837Z&apiVersion=2018-05-01-preview&token=1A1A1A1A"
+    "validationCode": "512d38b6-c7b8-40c8-89fe-f46f9e9622b6",
+    "validationUrl": "https://rp-eastus2.eventgrid.azure.net:553/eventsubscriptions/estest/validate?id=512d38b6-c7b8-40c8-89fe-f46f9e9622b6&t=2018-04-26T20:30:54.4538837Z&apiVersion=2018-05-01-preview&token=1A1A1A1A"
   },
   "eventType": "Microsoft.EventGrid.SubscriptionValidationEvent",
   "eventTime": "2018-01-25T22:12:19.4556811Z",
@@ -85,15 +85,15 @@ Uç nokta sahipliği kanıtlamak için geri validationResponse özelliğinde do�
 }
 ```
 
-Bir HTTP 200 OK yanıtı durum kodu döndürmelidir. HTTP 202 kabul edildi geçerli bir Event Grid aboneliği doğrulama yanıt tanınmıyor.
+Bir HTTP 200 Tamam yanıt durum kodu döndürmelidir. Kabul edilen HTTP 202, geçerli bir Event Grid Abonelik doğrulama yanıtı olarak tanınmıyor. Http isteğinin 30 saniye içinde tamamlaması gerekir. İşlem 30 saniye içinde tamamlanmazsa, işlem iptal edilir ve 5 saniye sonra yeniden denenecektir. Tüm denemeler başarısız olursa, doğrulama el sıkışma hatası olarak kabul edilir.
 
-Veya doğrulama URL'si için bir GET isteği göndererek abonelik el ile doğrulayabilirsiniz. Olay aboneliği doğrulandı kadar bir bekleme durumunda kalır.
+Veya doğrulama URL'si için bir GET isteği göndererek abonelik el ile doğrulayabilirsiniz. Olay aboneliği, onaylanana kadar bekleyen bir durumda kalır. Doğrulama URL 'Si 553 numaralı bağlantı noktasını kullanır. Güvenlik Duvarı kurallarınız bağlantı noktası 553 ' i engellerseniz, başarılı el ile el sıkışma için kuralların güncellenmesi gerekebilir.
 
 Abonelik doğrulama anlaşma işleme ilişkin bir örnek için bkz. bir [ C# örnek](https://github.com/Azure-Samples/event-grid-dotnet-publish-consume-events/blob/master/EventGridConsumer/EventGridConsumer/Function1.cs).
 
-### <a name="checklist"></a>Denetim listesi
+### <a name="checklist"></a>Denetim Listesi
 
-Olay aboneliği oluşturma gibi bir hata iletisini görüyorsanız sırasında "belirtilen uç nokta https doğrulama girişimi:\//your-endpoint-here başarısız oldu. Daha fazla bilgi için https ziyaret edin:\//aka.ms/esvalidation ", içinde doğrulama el sıkışması başarısız olduğunu gösterir. Bu hatayı gidermek için aşağıdaki durumlara doğrulayın:
+Olay aboneliği oluşturma sırasında, "belirtilen uç nokta https 'yi doğrulama denemesi:\//Your-Endpoint-Here hatasıyla birlikte bir hata mesajı görüyorsanız. Daha fazla ayrıntı için https:\//aka.ms/esvalidation "adresini ziyaret edin. Bu, doğrulama el sıkışmasının bir hata olduğunu gösterir. Bu hatayı gidermek için aşağıdaki durumlara doğrulayın:
 
 * Hedef uç noktasında denetim uygulama kodu var mı? Örneğin, Azure işlevi bir HTTP tetikleyici tabanlı yazıyorsanız, değişiklik yapmak için uygulama koduna erişmeniz gerekiyor?
 * Uygulama koduna erişiminiz varsa, yukarıdaki örnekte gösterildiği gibi temel ValidationCode el sıkışması mekanizması uygulayın.
@@ -102,6 +102,11 @@ Olay aboneliği oluşturma gibi bir hata iletisini görüyorsanız sırasında "
 
 ### <a name="event-delivery-security"></a>Olay teslimi güvenliği
 
+#### <a name="azure-ad"></a>Azure AD
+
+Azure Active Directory kullanarak Web kancası uç noktanızı güvenli hale getirerek olayları, uç noktalarınıza yayımlamak üzere Event Grid kimlik doğrulaması ve yetkilendirmek için kullanabilirsiniz. Bir Azure Active Directory uygulaması oluşturmanız, Event Grid uygulamanızda bir rol ve hizmet ilkesi oluşturmanız ve olay aboneliğini Azure AD uygulamasını kullanacak şekilde yapılandırmanız gerekecektir. [AAD 'yi Event Grid ile yapılandırmayı öğrenin](secure-webhook-delivery.md).
+
+#### <a name="query-parameters"></a>Sorgu parametreleri
 Bir olay aboneliği oluştururken, Web kancası URL'si sorgu parametreleri ekleyerek, Web kancası uç noktası güvenli hale getirebilirsiniz. Ayarlanmış bir gizli dizi gibi olması için bu sorgu parametreleri bir [erişim belirteci](https://en.wikipedia.org/wiki/Access_token). Web kancası olay geçerli izinleriyle Event Grid'den gelen tanımak için gizli anahtarı kullanabilirsiniz. Olay Kılavuzu her Web kancası olay teslimi bu sorgu parametreleri içerir.
 
 Olay aboneliği düzenlerken, sorgu parametreleri görüntülenmiyor veya sürece döndürülen [--dahil tam-endpoint-url](https://docs.microsoft.com/cli/azure/eventgrid/event-subscription?view=azure-cli-latest#az-eventgrid-event-subscription-show) parametresi Azure'da kullanılan [CLI](https://docs.microsoft.com/cli/azure?view=azure-cli-latest).
@@ -204,7 +209,7 @@ Event Grid Olay Aboneliklerini yönetmek için iki yerleşik rol sağlar. Uygula
 
 Yapabilecekleriniz [bir kullanıcı veya grup bu rolleri Ata](../role-based-access-control/quickstart-assign-role-user-portal.md).
 
-**EventGrid EventSubscription katkıda bulunan (Önizleme)** : Event Grid aboneliği işlemleri yönetme
+**Eventgrid EventSubscription katılımcısı**: Event Grid abonelik işlemlerini yönetme
 
 ```json
 [
@@ -212,7 +217,7 @@ Yapabilecekleriniz [bir kullanıcı veya grup bu rolleri Ata](../role-based-acce
     "Description": "Lets you manage EventGrid event subscription operations.",
     "IsBuiltIn": true,
     "Id": "428e0ff05e574d9ca2212c70d0e0a443",
-    "Name": "EventGrid EventSubscription Contributor (Preview)",
+    "Name": "EventGrid EventSubscription Contributor",
     "IsServiceRole": false,
     "Permissions": [
       {
@@ -240,7 +245,7 @@ Yapabilecekleriniz [bir kullanıcı veya grup bu rolleri Ata](../role-based-acce
 ]
 ```
 
-**EventGrid EventSubscription Okuyucu (Önizleme)** : Event Grid aboneliği edinin
+**Eventgrid EventSubscription okuyucusu**: Event Grid abonelikleri okuma
 
 ```json
 [
@@ -248,7 +253,7 @@ Yapabilecekleriniz [bir kullanıcı veya grup bu rolleri Ata](../role-based-acce
     "Description": "Lets you read EventGrid event subscriptions.",
     "IsBuiltIn": true,
     "Id": "2414bbcf64974faf8c65045460748405",
-    "Name": "EventGrid EventSubscription Reader (Preview)",
+    "Name": "EventGrid EventSubscription Reader",
     "IsServiceRole": false,
     "Permissions": [
       {
@@ -278,7 +283,7 @@ Yerleşik roller farklı olan izinleri belirtmeniz gerekiyorsa, özel roller olu
 
 Farklı eylemlerde bulunmak kullanıcıların örnek Event Grid rol tanımları aşağıda verilmiştir. Bunlar yalnızca olay abonelikleri daha geniş erişim vermek için bu özel roller yerleşik rollerden farklıdır.
 
-**EventGridReadOnlyRole.json**: Yalnızca salt okunur işlemlere izin verir.
+**EventGridReadOnlyRole.json**: yalnızca salt okunur işlemlere izin verin.
 
 ```json
 {
@@ -297,7 +302,7 @@ Farklı eylemlerde bulunmak kullanıcıların örnek Event Grid rol tanımları 
 }
 ```
 
-**EventGridNoDeleteListKeysRole.json**: Kısıtlı sonrası eylemler izin ancak Sil eylemlerinin izin vermeyin.
+**EventGridNoDeleteListKeysRole.json**: izin kısıtlı sonrası eylemler ancak Sil eylemlerinin izin vermeyin.
 
 ```json
 {
@@ -320,7 +325,7 @@ Farklı eylemlerde bulunmak kullanıcıların örnek Event Grid rol tanımları 
 }
 ```
 
-**EventGridContributorRole.json**: Tüm event grid Eylemler sağlar.
+**EventGridContributorRole.json**: tüm event grid Eylemler sağlar.
 
 ```json
 {

@@ -1,121 +1,140 @@
 ---
 title: Azure Backup Sunucusu sorunlarını giderme
-description: Azure Backup sunucusu yedekleme ve kayıt ve uygulama iş yükleri, geri yükleme sorunlarını giderin.
-services: backup
-author: kasinh
-manager: vvithal
-ms.service: backup
+description: Yükleme, Azure Backup Sunucusu kaydı ve uygulama iş yüklerinin yedeklenmesi ve geri yüklenmesi sorunlarını giderin.
+ms.reviewer: srinathv
 ms.topic: conceptual
-ms.date: 05/21/2019
-ms.author: kasinh
-ms.openlocfilehash: 06faed8ceca77edc20b67f73a76d885839aa7dbc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 07/05/2019
+ms.openlocfilehash: eed90cd6b684891efe1996e22bbdd7c3ead2a83f
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66304330"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74172961"
 ---
 # <a name="troubleshoot-azure-backup-server"></a>Azure Backup Sunucusu sorunlarını giderme
 
-Bilgileri aşağıdaki tablolarda Azure Backup sunucusu kullanırken karşılaştığınız hataları gidermek için kullanın.
+Azure Backup Sunucusu kullanırken karşılaştığınız hataların sorunlarını gidermek için aşağıdaki tablolardaki bilgileri kullanın.
 
 ## <a name="basic-troubleshooting"></a>Temel sorun giderme
 
-Gerçekleştirmenizi öneririz doğrulama başlamadan önce Microsoft Azure Backup sunucusu (MABS) sorunlarını giderme:
+Microsoft Azure Backup Server (MABS) sorun gidermeye başlamadan önce aşağıdaki doğrulamayı gerçekleştirmenizi öneririz:
 
-- [Microsoft Azure kurtarma Hizmetleri (MARS) Aracısı'nın güncel olduğundan emin olun.](https://go.microsoft.com/fwlink/?linkid=229525&clcid=0x409)
+- [Microsoft Azure Kurtarma Hizmetleri (MARS) aracısının güncel olduğundan emin olun](https://go.microsoft.com/fwlink/?linkid=229525&clcid=0x409)
 - [MARS aracısı ile Azure arasında ağ bağlantısı sağlandığından emin olun](https://aka.ms/AB-A4dp50)
-- Microsoft Azure Kurtarma Hizmetleri'nin çalıştığından emin olun (Hizmet konsolunda). Gerekirse, yeniden başlatın ve işlemi yeniden deneyin
+- Microsoft Azure Kurtarma Hizmetleri'nin çalıştığından emin olun (Hizmet konsolunda). Gerekirse yeniden başlatın ve işlemi yeniden deneyin
 - [Boş klasör konumunda %5-10 oranında kullanılabilir alan olduğundan emin olun](https://aka.ms/AB-AA4dwtt)
-- Kayıt başarısız olursa, ardından Azure Backup Sunucusu'nu yüklemeye çalıştığınız sunucu zaten başka bir kasa ile kayıtlı değil olun
+- Kayıt başarısız olursa, yüklemeye çalıştığınız sunucunun Azure Backup Sunucusu başka bir kasada zaten kayıtlı olmadığından emin olun
 - Göndermeli yükleme başarısız olursa DPM aracısının zaten mevcut olup olmadığını kontrol edin. Varsa aracıyı kaldırıp tekrar yüklemeyi deneyin
 - [Azure Backup ile çakışan başka bir işlem veya virüsten koruma yazılımı olmadığından emin olun](https://aka.ms/AA4nyr4)<br>
 - MAB sunucusunda SQL Aracısı hizmetinin çalıştığından ve otomatik olarak ayarlandığından emin olun<br>
 
+## <a name="invalid-vault-credentials-provided"></a>Belirtilen kasa kimlik bilgileri geçersiz
 
-## <a name="invalid-vault-credentials-provided"></a>Sağlanan kasa kimlik bilgileri geçersiz
-
-| İşlem | Hata Ayrıntıları | Geçici Çözüm |
+| İşlem | Hata Ayrıntıları | Geçici çözüm |
 | --- | --- | --- |
-| Bir kasaya kaydetme | Sağlanan kasa kimlik bilgileri geçersiz. Dosya bozuk veya mu değil sahip en son kimlik bilgilerini kurtarma hizmeti ile ilişkili. | Önerilen eylem: <br> <ul><li> Kasadan yeni kimlik bilgileri dosyası indirin ve yeniden deneyin. <br>(VEYA)</li> <li> Önceki eylemi işe yaramadı, farklı bir yerel dizin için kimlik bilgilerini indirme deneyin veya yeni bir kasa oluşturun. <br>(VEYA)</li> <li> Tarih güncelleştirmeyi deneyin ve saat ayarlarını anlatıldığı gibi [bu blog](https://azure.microsoft.com/blog/troubleshooting-common-configuration-issues-with-azure-backup/). <br>(VEYA)</li> <li> C:\windows\temp birden fazla 65000 dosyaları olup olmadığını denetleyin. Eski dosyaları başka bir konuma taşıyın veya öğeleri Temp klasörü silin. <br>(VEYA)</li> <li> Sertifikaların durumunu denetleyin. <br> a. Açık **bilgisayar sertifikalarını yönetme** (Denetim Masasında). <br> b. Genişletin **kişisel** düğümü ile onun alt düğümü **sertifikaları**.<br> c.  Sertifikayı kaldırın **Windows Azure Araçları**. <br> d. Azure Backup istemci kaydını yeniden deneyin. <br> (VEYA) </li> <li> Her Grup İlkesi yerinde olup olmadığını denetleyin. </li></ul> |
+| Kasaya kaydolma | Sağlanan kasa kimlik bilgileri geçersiz. Dosya bozuk veya kurtarma hizmetiyle ilişkili en son kimlik bilgilerine sahip değil. | Önerilen eylem: <br> <ul><li> Kasadan en son kimlik bilgileri dosyasını indirin ve yeniden deneyin. <br>VEYA</li> <li> Önceki eylem işe yaramazsa, kimlik bilgilerini farklı bir yerel dizine indirmeyi veya yeni bir kasa oluşturmayı deneyin. <br>VEYA</li> <li> Tarih ve saat ayarlarını [Bu blogda](https://azure.microsoft.com/blog/troubleshooting-common-configuration-issues-with-azure-backup/)anlatıldığı şekilde güncelleştirmeyi deneyin. <br>VEYA</li> <li> C:\Windows\Temp 'in 65000 'den fazla dosya olup olmadığını denetleyin. Eski dosyaları başka bir konuma taşıyın veya Temp klasöründeki öğeleri silin. <br>VEYA</li> <li> Sertifikaların durumunu denetleyin. <br> a. **Bilgisayar sertifikalarını Yönet** ' i açın (Denetim Masası 'nda). <br> b. **Kişisel** düğümünü ve onun alt düğüm **sertifikalarını**genişletin.<br> c.  Sertifikayı kaldırın **Windows Azure Araçları**. <br> d. Azure Backup istemcisinde kaydı yeniden deneyin. <br> VEYA </li> <li> Herhangi bir grup ilkesinin yerinde olup olmadığını kontrol edin. </li></ul> |
 
 ## <a name="replica-is-inconsistent"></a>Çoğaltma tutarsız
 
-| İşlem | Hata Ayrıntıları | Geçici Çözüm |
+| İşlem | Hata Ayrıntıları | Geçici çözüm |
 | --- | --- | --- |
-| Backup | Çoğaltma tutarsız | Koruma grubu Sihirbazı'nda Otomatik tutarlılık denetimi seçeneği açık olduğunu doğrulayın. Çoğaltma tutarsızlık ilgili öneriler ve nedenler hakkında daha fazla bilgi için bkz [çoğaltma tutarsız](https://technet.microsoft.com/library/cc161593.aspx).<br> <ol><li> Sistem durumu/BMR yedekleme olması durumunda, Windows Server Yedekleme korunan sunucuda yüklü olduğunu doğrulayın.</li><li> DPM/Microsoft Azure Backup sunucusu DPM depolama havuzunda yer ile ilgili sorunları olup olmadığını denetleyin ve depolamayı gerektiği gibi ayırır.</li><li> Korumalı sunucu üzerindeki birim gölge kopyası hizmeti durumunu denetleyin. Devre dışı durumda ise, el ile başlayacak şekilde ayarlayın. Sunucusunda hizmeti başlatın. Ardından DPM/Microsoft Azure Backup sunucusu konsola geri dönün ve tutarlılık denetimiyle birlikte bir eşitleme başlatın.</li></ol>|
+| Backup | Çoğaltma tutarsız | Koruma Grubu Sihirbazı 'ndaki otomatik tutarlılık denetimi seçeneğinin açık olduğunu doğrulayın. Çoğaltma tutarsızlığına ve ilgili önerilere yönelik nedenler hakkında daha fazla bilgi için bkz. [çoğaltma tutarsız](https://technet.microsoft.com/library/cc161593.aspx).<br> <ol><li> Sistem durumu/BMR yedeklemesi durumunda, Windows Server Yedekleme korunan sunucuda yüklü olduğunu doğrulayın.</li><li> DPM/Microsoft Azure Backup sunucusundaki DPM depolama havuzunda yer alan sorunları denetleyin ve gerekli olduğu gibi depolama alanını ayırın.</li><li> Korunan sunucudaki Birim Gölge Kopyası Hizmeti durumunu denetleyin. Devre dışı durumdaysa, el ile başlayacak şekilde ayarlayın. Hizmeti sunucuda başlatın. Ardından DPM/Microsoft Azure Backup sunucu konsoluna geri dönün ve tutarlılık denetimi işiyle eşitlemeyi başlatın.</li></ol>|
 
 ## <a name="online-recovery-point-creation-failed"></a>Çevrimiçi kurtarma noktası oluşturma başarısız oldu
 
-| İşlem | Hata Ayrıntıları | Geçici Çözüm |
+| İşlem | Hata Ayrıntıları | Geçici çözüm |
 | --- | --- | --- |
-| Backup | Çevrimiçi kurtarma noktası oluşturma başarısız oldu | **Hata iletisi**: Windows Azure Yedekleme aracısı Seçili birimin anlık görüntüsünü oluşturamadı. <br> **Geçici çözüm**: Çoğaltma ve kurtarma noktası birim alanı artırmayı deneyin.<br> <br> **Hata iletisi**: Windows Azure Backup Aracısı OBEngine hizmetine bağlanamıyor <br> **Geçici çözüm**: Hizmetleri çalıştıran bilgisayarda listesini OBEngine var olduğundan emin olun. OBEngine hizmetine çalışmıyorsa, OBEngine hizmetini başlatmak için "OBEngine net start" komutunu kullanın. <br> <br> **Hata iletisi**: Bu sunucunun şifreleme parolası ayarlanmamış. Lütfen bir şifreleme parolası yapılandırın. <br> **Geçici çözüm**: Bir şifreleme parolası'ı yapılandırmayı deneyin. Başarısız olursa, aşağıdaki adımları uygulayın: <br> <ol><li>Karalama konumu bulunduğunu doğrulayın. Bu kayıt defterinde belirtilen konumdur **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Azure Backup\Config**, adıyla **ScratchLocation** mevcut olmalıdır.</li><li> Karalama konumu varsa, eski parolayı kullanarak yeniden deneyin. *Bir şifreleme parolası yapılandırdığınız zaman, güvenli bir konuma kaydedin.*</li><ol>|
+| Backup | Çevrimiçi kurtarma noktası oluşturma başarısız oldu | **Hata iletisi**: Windows Azure Backup Aracısı seçili birimin anlık görüntüsünü oluşturamadı. <br> **Geçici çözüm**: çoğaltma ve kurtarma noktası birimindeki alanı artırmayı deneyin.<br> <br> **Hata iletisi**: Windows Azure Backup Aracısı obengine hizmetine bağlanamıyor <br> **Geçici çözüm**: obengine 'in bilgisayardaki çalışan hizmetler listesinde var olduğunu doğrulayın. OBEngine hizmeti çalışmıyorsa, OBEngine hizmetini başlatmak için "net start OBEngine" komutunu kullanın. <br> <br> **Hata iletisi**: Bu sunucunun şifreleme parolası ayarlanmadı. Lütfen bir şifreleme parolası yapılandırın. <br> **Geçici çözüm**: bir şifreleme parolası yapılandırmayı deneyin. Başarısız olursa, aşağıdaki adımları uygulayın: <br> <ol><li>Karalama konumunun mevcut olduğunu doğrulayın. Bu, **HKEY_LOCAL_MACHINE \Software\Microsoft\Windows Azure Backup\Config**kayıt defterinde belirtilen konumdur ve bu ad, **scratchlocation** adında olmalıdır.</li><li> Karalama konumu varsa, eski parolayı kullanarak yeniden kaydetmeyi deneyin. *Şifreleme parolasını yapılandırdığınızda, güvenli bir konuma kaydedin.*</li><ol>|
 
-## <a name="the-vault-credentials-provided-are-different-from-the-vault-the-server-is-registered"></a>Sağlanan kasa kimlik bilgileri, sunucunun kayıtlı olduğu kasadan farklı
+## <a name="the-vault-credentials-provided-are-different-from-the-vault-the-server-is-registered"></a>Belirtilen kasa kimlik bilgileri, sunucunun kayıtlı olduğu kasadan farklı
 
-| İşlem | Hata Ayrıntıları | Geçici Çözüm |
+| İşlem | Hata Ayrıntıları | Geçici çözüm |
 | --- | --- | --- |
-| Geri Yükleme | **Hata kodu**: CBPServerRegisteredVaultDontMatchWithCurrent/kasa kimlik bilgileri hatası: 100110 <br/> <br/>**Hata iletisi**: Sağlanan kasa kimlik bilgileri, sunucunun kayıtlı olduğu kasadan farklı | **Neden**: Dosyaları alternatif sunucuda, dış DPM kurtarma seçeneğini kullanarak özgün sunucudan geri yüklemek çalışırken ve kurtarılmakta olan sunucu ve yedeklenen verilerin bulunduğu özgün sunucunun aynı ile ilişkili olmamaları durumunda bu sorun oluşur. Kurtarma Hizmetleri kasası.<br/> <br/>**Geçici çözüm** çözmek hem de bu sorun emin olmak için özgün ve diğer sunucu aynı kasaya kayıtlı.|
+| Geri Yükleme | **Hata kodu**: CBPServerRegisteredVaultDontMatchWithCurrent/kasa kimlik bilgileri hatası: 100110 <br/> <br/>**Hata iletisi**: belirtilen kasa kimlik bilgileri, sunucunun kayıtlı olduğu kasadan farklı | **Neden**: Bu sorun, dış DPM kurtarma seçeneğini kullanarak dosyaları özgün sunucudan alternatif sunucuya geri yüklemeye çalışırken ve Kurtarılmakta olan sunucu ve verilerin yedeklendiği orijinal sunucu aynı kurtarma hizmeti kasasıyla ilişkilendirilmediğinde oluşur.<br/> <br/>**Geçici çözüm** Bu sorunu çözmek için hem özgün hem de alternatif sunucunun aynı kasaya kayıtlı olduğundan emin olun.|
 
-## <a name="online-recovery-point-creation-jobs-for-vmware-vm-fail"></a>VMware sanal makinesi için çevrimiçi kurtarma noktası oluşturma işleri başarısız
+## <a name="online-recovery-point-creation-jobs-for-vmware-vm-fail"></a>VMware VM için çevrimiçi kurtarma noktası oluşturma işleri başarısız oluyor
 
-| İşlem | Hata Ayrıntıları | Geçici Çözüm |
+| İşlem | Hata Ayrıntıları | Geçici çözüm |
 | --- | --- | --- |
-| Backup | VMware sanal makinesi için çevrimiçi kurtarma noktası oluşturma işleri başarısız. DPM, ChangeTracking bilgilerini almaya çalışırken vmware'den bir hatayla karşılaştı. Hata kodu - FileFaultFault (kimliği 33621) |  <ol><li> Etkilenen VM'ler için VMware üzerinde CTK sıfırlayın.</li> <li>Bu bağımsız disk yerinde VMware olmadığını denetleyin.</li> <li>Etkilenen VM'ler için korumayı durdurun ve yeniden koruma **Yenile** düğmesi. </li><li>Etkilenen VM'ler için bir bilgi çalıştırın.</li></ol>|
+| Backup | VMware VM için çevrimiçi kurtarma noktası oluşturma işleri başarısız oluyor. DPM, şifre izleme bilgilerini almaya çalışırken VMware 'den bir hatayla karşılaştı. HataKodu-FileFaultFault (KIMLIK 33621) |  <ol><li> Etkilenen VM 'Ler için VMware üzerinde CTK 'yi sıfırlayın.</li> <li>Bağımsız diskin VMware üzerinde yerinde olmadığından emin olun.</li> <li>Etkilenen VM 'Ler için korumayı durdurun ve **Yenile** düğmesini kullanarak yeniden koruyun. </li><li>Etkilenen VM 'Ler için bir CC çalıştırın.</li></ol>|
 
+## <a name="the-agent-operation-failed-because-of-a-communication-error-with-the-dpm-agent-coordinator-service-on-the-server"></a>Sunucuda DPM aracı Düzenleyicisi hizmetindeki bir iletişim hatası nedeniyle Aracı işlemi başarısız oldu
 
-## <a name="the-agent-operation-failed-because-of-a-communication-error-with-the-dpm-agent-coordinator-service-on-the-server"></a>Sunucusundaki DPM aracı Düzenleyicisi hizmeti ile iletişim hatası nedeniyle aracı işlemi başarısız oldu
-
-| İşlem | Hata Ayrıntıları | Geçici Çözüm |
+| İşlem | Hata Ayrıntıları | Geçici çözüm |
 | --- | --- | --- |
-| Aracı korunan sunucuya gönderme | Aracı işlemi başarısız oldu DPM Agent Coordinator hizmeti ile iletişim hatası nedeniyle \<ServerName >. | **Üründe gösterilen önerilen eylemi işe yaramazsa, ardından aşağıdaki adımları gerçekleştirin**: <ul><li> Güvenilmeyen etki alanındaki bir bilgisayarı bağlıyorsanız izleyin [adımları](https://technet.microsoft.com/library/hh757801(v=sc.12).aspx). <br> (VEYA) </li><li> Güvenilen bir etki alanındaki bir bilgisayardan bağlıyorsanız, özetlenen adımları kullanarak sorun giderme [bu blog](https://blogs.technet.microsoft.com/dpm/2012/02/06/data-protection-manager-agent-network-troubleshooting/). <br>(VEYA)</li><li> Sorun giderme adımı virüsten koruma devre dışı bırakmayı deneyin. Sorunu çözmesi önerildiği virüsten koruma ayarlarını değiştirmek [bu makalede](https://technet.microsoft.com/library/hh757911.aspx).</li></ul> |
+| Aracıları korumalı sunuculara iletme | Aracı işlemi, \<ServerName > DPM Aracı Düzenleyicisi hizmetindeki bir iletişim hatası nedeniyle başarısız oldu. | **Üründe gösterilen önerilen eylem işe yaramazsa aşağıdaki adımları gerçekleştirin**: <ul><li> Güvenilmeyen bir etki alanından bilgisayar iliştirirken, [Bu adımları](https://technet.microsoft.com/library/hh757801(v=sc.12).aspx)izleyin. <br> VEYA </li><li> Güvenilen bir etki alanından bir bilgisayar iliştiriyorsanız, [Bu blogda](https://blogs.technet.microsoft.com/dpm/2012/02/06/data-protection-manager-agent-network-troubleshooting/)özetlenen adımları kullanarak sorun giderin. <br>VEYA</li><li> Sorun giderme adımı olarak virüsten koruma 'yı devre dışı bırakmayı deneyin. Sorunu giderirse, virüsten koruma ayarlarını [Bu makalede](https://technet.microsoft.com/library/hh757911.aspx)önerildiği şekilde değiştirin.</li></ul> |
 
 ## <a name="setup-could-not-update-registry-metadata"></a>Kurulum, kayıt defteri meta verilerini güncelleştiremedi
 
-| İşlem | Hata Ayrıntıları | Geçici Çözüm |
+| İşlem | Hata Ayrıntıları | Geçici çözüm |
 |-----------|---------------|------------|
-|Yükleme | Kurulum, kayıt defteri meta verilerini güncelleştiremedi. Bu güncelleştirme hatası, depolama alanı tüketiminin overusage için neden olabilir. Bunu önlemek için ReFS Trimming kayıt defteri girdisini güncelleştirin. | Kayıt defteri anahtarı ayarlamak **SYSTEM\CurrentControlSet\Control\FileSystem\RefsEnableInlineTrim**. Dword değerini 1 olarak ayarlayın. |
-|Yükleme | Kurulum, kayıt defteri meta verilerini güncelleştiremedi. Bu güncelleştirme hatası, depolama alanı tüketiminin overusage için neden olabilir. Bunu önlemek için Volume SnapOptimization kayıt defteri girdisini güncelleştirin. | Kayıt defteri anahtarı oluşturma **SOFTWARE\Microsoft veri koruma Manager\Configuration\VolSnapOptimization\WriteIds** boş bir dize değerine sahip. |
+|Yükleme | Kurulum, kayıt defteri meta verilerini güncelleştiremedi. Bu güncelleştirme hatası, depolama tüketiminin aşırı kullanılmasına yol açabilir. Bu güncelleştirmeyi önlemek için ReFS kırpma kayıt defteri girişini güncelleştirin. | **System\currentcontrolset\control\filesystem\refsenableınlinetrım**kayıt defteri anahtarını ayarlayın. DWORD değerini 1 olarak ayarlayın. |
+|Yükleme | Kurulum, kayıt defteri meta verilerini güncelleştiremedi. Bu güncelleştirme hatası, depolama tüketiminin aşırı kullanılmasına yol açabilir. Bunu önlemek için, birim Snapoptımleştirme kayıt defteri girişini güncelleştirin. | **Software\microsoft Data Protection Manager\configuration\volsnapoptimization\writeıds** kayıt defteri anahtarını boş bir dize değeri ile oluşturun. |
 
-## <a name="registration-and-agent-related-issues"></a>Kayıt ve aracı ile ilgili sorunlar
+## <a name="registration-and-agent-related-issues"></a>Kayıt ve aracıyla ilgili sorunlar
 
-| İşlem | Hata Ayrıntıları | Geçici Çözüm |
+| İşlem | Hata Ayrıntıları | Geçici çözüm |
 | --- | --- | --- |
-| Aracı korunan sunucuya gönderme | Sunucu için belirtilen kimlik bilgileri geçersiz. | **Ürününde görüntülenen önerilen eylemi işe yaramazsa, aşağıdaki adımları uygulayın**: <br> Koruma aracısını, belirtilen üretim sunucusu üzerinde el ile yüklemeyi deneyin [bu makalede](https://technet.microsoft.com/library/hh758186(v=sc.12).aspx#BKMK_Manual).|
-| Azure Backup Aracısı Azure Backup hizmetine bağlanamıyor (Kimliği: 100050) | Azure Backup Aracısı Azure Backup hizmetine bağlanamadı. | **Ürününde görüntülenen önerilen eylemi işe yaramazsa, aşağıdaki adımları uygulayın**: <br>1. Yükseltilmiş isteminden aşağıdaki komutu çalıştırın: **psexec -i -s "c:\Program Files\Internet Explorer\iexplore.exe**. Bu, Internet Explorer penceresi açılır. <br/> 2. Git **Araçları** > **Internet Seçenekleri** > **bağlantıları** > **LAN Ayarları**. <br/> 3. Bir proxy sunucusu kullanmak için ayarları değiştirin. Ardından proxy sunucusu ayrıntıları sağlayın.<br/> 4. Makinenizde sınırlı internet erişimi, güvenlik duvarı ayarlarını makinede veya proxy bu izin verdiğinden emin olun [URL'leri](backup-configure-vault.md#verify-internet-access) ve [IP adresi](backup-configure-vault.md#verify-internet-access).|
-| Azure Backup Aracısı yüklemesi başarısız oldu | Microsoft Azure kurtarma Hizmetleri yüklemesi başarısız oldu. Microsoft Azure kurtarma Hizmetleri yüklemesi tarafından sisteme yapılan tüm değişiklikler geri alındı. (Kimlik: 4024) | Azure aracısını el ile yükleyin.
+| Aracıları korumalı sunuculara iletme | Sunucu için belirtilen kimlik bilgileri geçersiz. | **Üründe gösterilen önerilen eylem işe yaramazsa aşağıdaki adımları uygulayın**: <br> Koruma aracısını üretim sunucusuna [Bu makalede](https://technet.microsoft.com/library/hh758186(v=sc.12).aspx#BKMK_Manual)belirtilen şekilde el ile yüklemeyi deneyin.|
+| Azure Backup Aracısı Azure Backup hizmetine bağlanamadı (KIMLIK: 100050) | Azure Backup Aracısı Azure Backup hizmetine bağlanamadı. | **Üründe gösterilen önerilen eylem işe yaramazsa aşağıdaki adımları uygulayın**: <br>1. yükseltilmiş bir komut isteminde şu komutu çalıştırın: **PsExec-i-s "C:\Program Files\Explorer\iexplore.exe**. Bu, Internet Explorer penceresini açar. <br/> 2. **araçlar** > **Internet seçenekleri** > **bağlantı** > **LAN ayarları**' na gidin. <br/> 3. bir proxy sunucu kullanacak şekilde ayarları değiştirin. Ardından proxy sunucusu ayrıntılarını sağlayın.<br/> 4. makinenizin internet erişimi sınırlı ise, makinedeki veya proxy 'deki güvenlik duvarı ayarlarının bu [URL 'ler](backup-configure-vault.md#verify-internet-access) ve [IP adreslerine](backup-configure-vault.md#verify-internet-access)izin verildiğinden emin olun.|
+| Aracı yüklemesi Azure Backup başarısız oldu | Microsoft Azure Kurtarma Hizmetleri yüklemesi başarısız oldu. Microsoft Azure Kurtarma Hizmetleri yüklemesi tarafından sisteme yapılan tüm değişiklikler geri alındı. (KIMLIK: 4024) | Azure aracısını el ile yükleyebilirsiniz.
 
+## <a name="configuring-protection-group"></a>Koruma grubu yapılandırılıyor
 
-## <a name="configuring-protection-group"></a>Koruma grubunu yapılandırma
-
-| İşlem | Hata Ayrıntıları | Geçici Çözüm |
+| İşlem | Hata Ayrıntıları | Geçici çözüm |
 | --- | --- | --- |
-| Koruma gruplarını yapılandırma | DPM, korumalı uygulama bileşenini oluşturamadı bilgisayar (korunan bilgisayar adı). | Seçin **Yenile** yapılandırma koruma grubu kullanıcı Arabirimi ekranında ilgili veri kaynağı/bileşen düzeyinde. |
-| Koruma gruplarını yapılandırma | Koruma yapılandırılamıyor | Korumalı sunucu bir SQL server ise, sysadmin rolü izinleri korumalı bilgisayar üzerindeki sistem hesabına (ntauthority\system adlı) açıklanan şekilde sağlandığını doğrulamak [bu makalede](https://technet.microsoft.com/library/hh757977(v=sc.12).aspx).
-| Koruma gruplarını yapılandırma | Bu koruma grubu için depolama havuzunda yeterli boş alan yok. | Depolama havuzuna eklenen disklerden [bir bölüm içermemelidir](https://technet.microsoft.com/library/hh758075(v=sc.12).aspx). Disk üzerinde mevcut olan birimleri silin. Daha sonra bunları depolama havuzuna ekleyin.|
-| İlke değişikliği |Yedekleme İlkesi değiştirilemedi. Hata: Geçerli işlem bir [0x29834] iç hizmet hatası nedeniyle başarısız oldu. Lütfen bir süre geçtikten sonra işlemi yeniden deneyin. Sorun devam ederse Microsoft desteğine başvurun. | **Neden:**<br/>Bu hata koşulları altında üç oluşur: güvenlik ayarları etkinleştirildiğinde, önceden belirtilen minimum değerleri aşağıda bekletme aralığını azaltabilir çalıştığınızda ve desteklenmeyen bir sürümünde olduğunda. (Microsoft Azure Backup sunucusu sürümü olarak 2.0.9052 ve Azure Backup sunucusu güncelleştirmesi 1 altındaki desteklenmeyen sürümleri vardır.) <br/>**Önerilen eylem:**<br/> İlke ile ilgili güncelleştirmeler ile devam etmek için yukarıda belirtilen en düşük bekletme saklama süresi ayarlayın. (En düşük bekletme süresi yedi günlük, haftalık, üç hafta için dört hafta için aylık veya bir yıl için yıllık gündür.) <br><br>İsteğe bağlı olarak, başka bir yedekleme aracısı ve Azure Backup sunucusu tüm güvenlik güncelleştirmelerini yararlanmak için güncelleştirilecek bir yaklaşımdır tercih edilir. |
+| Koruma gruplarını yapılandırma | DPM, korumalı bilgisayardaki (korunan bilgisayar adı) uygulama bileşenini numaralandıramadı. | İlgili veri kaynağı/bileşen düzeyindeki koruma grubunu yapılandırma kullanıcı arabirimi ekranında **Yenile** ' yi seçin. |
+| Koruma gruplarını yapılandırma | Koruma yapılandırılamıyor | Korumalı sunucu bir SQL Server ise, [Bu makalede](https://technet.microsoft.com/library/hh757977(v=sc.12).aspx)açıklandığı gibi korunan bilgisayardaki sistem hesabına (NTAuthority\System adlı) sysadmin rolü izinlerinin sağlandığını doğrulayın.
+| Koruma gruplarını yapılandırma | Bu koruma grubu için depolama havuzunda yeterli boş alan yok. | Depolama havuzuna eklenen diskler [bir bölüm içermemelidir](https://technet.microsoft.com/library/hh758075(v=sc.12).aspx). Disklerde var olan tüm birimleri silin. Ardından bunları depolama havuzuna ekleyin.|
+| İlke değişikliği |Yedekleme ilkesi değiştirilemedi. Hata: geçerli işlem, [0x29834] iç hizmet hatası nedeniyle başarısız oldu. Lütfen bir süre geçtikten sonra işlemi yeniden deneyin. Sorun devam ederse, Microsoft desteği 'ne başvurun. | **Sağlamak**<br/>Bu hata üç koşulda oluşur: güvenlik ayarları etkinleştirildiğinde, daha önce belirtilen minimum değerlerin altındaki saklama aralığını azaltmaya çalıştığınızda ve desteklenmeyen bir sürümdayken. (Desteklenmeyen sürümler Microsoft Azure Backup Server Version 2.0.9052 ve Azure Backup Sunucusu Update 1 ' dir.) <br/>**Önerilen eylem:**<br/> İlkeyle ilgili güncelleştirmelerle devam etmek için, belirtilen en düşük bekletme döneminin üzerindeki saklama süresini ayarlayın. (En düşük saklama süresi günlük için yedi gün, haftalık dört hafta, aylık veya yıllık yılda bir yıl için üç hafta) <br><br>İsteğe bağlı olarak, başka bir tercih edilen yaklaşım yedekleme aracısını güncelleştirmek ve tüm güvenlik güncelleştirmelerinden yararlanmak için Azure Backup Sunucusu. |
 
 ## <a name="backup"></a>Backup
 
-| İşlem | Hata Ayrıntıları | Geçici Çözüm |
+| İşlem | Hata Ayrıntıları | Geçici çözüm |
 | --- | --- | --- |
-| Backup | İş çalışırken beklenmeyen bir hata oluştu. Cihaz hazır değil. | **Ürününde görüntülenen önerilen eylemi işe yaramazsa, aşağıdaki adımları uygulayın:** <br> <ul><li>Gölge kopya depolama alanı koruma grubundaki öğeleri üzerinde sınırsız ayarlayın ve ardından tutarlılık denetimi çalıştırın.<br></li> (VEYA) <li>Mevcut koruma silmeyi deneyin grubu ve birden çok yeni grup oluşturma. Her yeni koruma grubu içinde ayrı bir öğe olmalıdır.</li></ul> |
-| Backup | Yalnızca sistem durumu yedekleme yapıyorsanız, korunan bilgisayarda Sistem Durumu yedeğini depolamak için yeterli boş alan olduğundan emin olun. | <ol><li>Windows Server Yedekleme korunan makinede yüklü olduğunu doğrulayın.</li><li>Yeterli alan olduğunu sistem durumu için korumalı bilgisayardaki doğrulayın. Bu korunan bilgisayara gidin ait doğrulamak için en kolay yolu Windows Server Yedekleme'yi açın, Seçimlerinizde tıklayın ve BMR'ı seçin. Kullanıcı arabirimini daha sonra ne kadar alan gereklidir bildirir. Açık **WSB** > **yerel yedekleme** > **yedekleme zamanlaması** > **yedekleme yapılandırması seçin**  >  **Tam sunucu** (boyutu görüntülenir). Bu boyut, doğrulama için kullanın.</li></ol>
-| Backup | Hatası için BMR yedekleme | BMR boyutu büyükse, bazı uygulama dosyalarını işletim sistemi sürücüye taşıyın ve yeniden deneyin. |
-| Backup | Yeni bir Microsoft Azure Backup sunucusu bir VMware VM yeniden koruma seçeneğini eklemek kullanılabilir olarak göstermez. | VMware özellikleri, eski, devre dışı bırakılan örneğini Microsoft Azure Backup sunucusu işaret ettiği. Bu sorunu çözmek için:<br><ol><li>VCenter (SC-VMM eşdeğeri), Git **özeti** sekmesini ve sonra **özel öznitelikler**.</li>  <li>Eski Microsoft Azure Backup sunucusu adından Sil **DPMServer** değeri.</li>  <li>Yeni Microsoft Azure Backup sunucusu geri dönün ve Syf değiştirme  Seçtikten sonra **Yenile** düğme VM koruma eklemek kullanılabilir olarak onay kutusu belirir.</li></ol> |
-| Backup | Dosyaları ve paylaşılan klasörleri erişirken hata oluştu | TechNet makalesinde önerildiği virüsten koruma ayarlarını değiştirmeyi deneyin [DPM sunucusunda virüsten koruma yazılımı çalıştırma](https://technet.microsoft.com/library/hh757911.aspx).|
+| Backup | İş çalışırken beklenmeyen bir hata oluştu. Cihaz kullanılamıyor. | **Üründe gösterilen önerilen eylem işe yaramazsa aşağıdaki adımları uygulayın:** <br> <ul><li>Koruma grubundaki öğelerde gölge kopya depolama alanını sınırsız olarak ayarlayın ve ardından tutarlılık denetimini çalıştırın.<br></li> VEYA <li>Mevcut koruma grubunu silip birden çok yeni grup oluşturmayı deneyin. Her yeni koruma grubunun içinde ayrı bir öğesi olmalıdır.</li></ul> |
+| Backup | Yalnızca sistem durumunu yedekliyorsanız, korunan bilgisayarda sistem durumu yedeklemesini depolamak için yeterli boş alan olduğunu doğrulayın. | <ol><li>Windows Server Yedekleme korunan makinede yüklü olduğunu doğrulayın.</li><li>Korunan bilgisayarda sistem durumu için yeterli alan olduğunu doğrulayın. Bunu doğrulamak için en kolay yol, korunan bilgisayara gidip Windows Server Yedekleme açın, seçimlere tıklayarak, sonra BMR 'yi seçer. Kullanıcı arabirimi daha sonra ne kadar alan gerektiğini söyler. **WSB** > **yerel yedekleme** > yedekleme **zamanlaması** ' nı açın > **yedekleme yapılandırması** > **tam sunucu** ' yı seçin (boyut görüntülenir). Doğrulama için bu boyutu kullanın.</li></ol>
+| Backup | BMR için yedekleme hatası | BMR boyutu büyükse, bazı uygulama dosyalarını işletim sistemi sürücüsüne taşıyın ve yeniden deneyin. |
+| Backup | Yeni bir Microsoft Azure Backup sunucusundaki bir VMware VM 'yi yeniden koruma seçeneği, eklemek için kullanılabilir olarak gösterilmez. | VMware özellikleri, Microsoft Azure Backup sunucusunun eski, Kullanımdan kaldırılmış bir örneğine işaret edilir. Bu sorunu çözmek için:<br><ol><li>VCenter 'da (SC-VMM eşdeğeri), **Özet** sekmesine ve ardından **özel özniteliklere**gidin.</li>  <li>**DPMServer** değerinden eski Microsoft Azure Backup sunucu adını silin.</li>  <li>Yeni Microsoft Azure Backup sunucusuna dönün ve PG 'ı değiştirin.  **Yenile** düğmesini seçtikten sonra, sanal makine, korumaya eklemek için kullanılabilir bir onay kutusuyla birlikte görüntülenir.</li></ol> |
+| Backup | Dosyalara/paylaşılan klasörlere erişirken hata oluştu | Virüsten koruma ayarlarını, [DPM sunucusunda virüsten koruma yazılımı çalıştırma](https://technet.microsoft.com/library/hh757911.aspx)başlıklı TechNet makalesinde önerildiği şekilde değiştirmeyi deneyin.|
 
+## <a name="change-passphrase"></a>Parolayı Değiştir
 
-## <a name="change-passphrase"></a>Parola Değiştir
-
-| İşlem | Hata Ayrıntıları | Geçici Çözüm |
+| İşlem | Hata Ayrıntıları | Geçici çözüm |
 | --- | --- | --- |
-| Parola Değiştir |Güvenlik girildiği PIN yanlış. Bu işlemi tamamlamak için PIN doğru güvenliğini sağlayın. |**Neden:**<br/> Bu hata meydana gelir geçersiz girin veya (örneğin, bir parola değiştirme) kritik bir işlem gerçekleştirirken güvenlik PIN'i süresi dolmuş. <br/>**Önerilen eylem:**<br/> İşlemi tamamlamak için geçerli bir güvenlik PIN'i girmeniz gerekir. PIN almak için Azure portalında oturum açın ve kurtarma Hizmetleri Kasası'na gidin. Ardından **ayarları** > **özellikleri** > **güvenlik PIN'i Oluştur**. Bu PIN, parolayı değiştirmek için kullanın. |
-| Parola Değiştir |İşlem başarısız oldu. KİMLİĞİ: 120002 |**Neden:**<br/>Güvenlik ayarları etkinleştirildiğinde veya desteklenmeyen bir sürümünü kullanırken, parola değiştirmeye çalıştığınızda bu hata oluşur.<br/>**Önerilen eylem:**<br/> Parolayı değiştirmek için Yedekleme aracısı 2.0.9052 olan en düşük sürüme güncelleştirmeniz gerekir. Ayrıca Azure Backup sunucusu en düşük güncelleştirme 1 için güncelleştirme ve geçerli bir güvenlik PIN'i girmeniz gerekir. PIN almak için Azure portalında oturum açıp kurtarma Hizmetleri Kasası'na gidin. Ardından **ayarları** > **özellikleri** > **güvenlik PIN'i Oluştur**. Bu PIN, parolayı değiştirmek için kullanın. |
-
+| Parolayı Değiştir |Girilen güvenlik PIN 'ı hatalı. Bu işlemi gerçekleştirmek için doğru güvenlik PIN 'ini girin. |**Sağlamak**<br/> Bu hata, kritik bir işlem gerçekleştirirken (örneğin, bir parolayı değiştirme gibi) geçersiz veya süre dolduktan sonra bir güvenlik PIN kodu girdiğinizde oluşur. <br/>**Önerilen eylem:**<br/> İşlemi gerçekleştirmek için geçerli bir güvenlik PIN kodu girmelisiniz. PIN 'i almak için Azure portal oturum açın ve kurtarma hizmetleri kasasına gidin. Ardından **ayarlar** > **Özellikler** ' e gıdın ve **güvenlik PIN 'i oluşturun** > . Parolayı değiştirmek için bu PIN 'ı kullanın. |
+| Parolayı Değiştir |İşlem başarısız oldu. KIMLIK: 120002 |**Sağlamak**<br/>Bu hata, güvenlik ayarları etkinleştirildiğinde veya desteklenmeyen bir sürüm kullanırken parolayı değiştirmeye çalıştığınızda oluşur.<br/>**Önerilen eylem:**<br/> Parolayı değiştirmek için, önce yedekleme aracısını 2.0.9052 olan en düşük sürüme güncelleştirmeniz gerekir. Ayrıca, güncelleştirme 1 ' in en düşük Azure Backup Sunucusu güncelleştirmeniz ve ardından geçerli bir güvenlik PIN 'i girmeniz gerekir. PIN 'i almak için Azure portal oturum açın ve kurtarma hizmetleri kasasına gidin. Ardından **ayarlar** > **Özellikler** ' e gıdın ve **güvenlik PIN 'i oluşturun** > . Parolayı değiştirmek için bu PIN 'ı kullanın. |
 
 ## <a name="configure-email-notifications"></a>E-posta bildirimlerini yapılandırma
 
-| İşlem | Hata Ayrıntıları | Geçici Çözüm |
+| İşlem | Hata Ayrıntıları | Geçici çözüm |
 | --- | --- | --- |
-| Bir Office 365 hesabınızı kullanarak e-posta bildirimlerini ayarlama |Hata Kimliği: 2013| **Neden:**<br> Office 365 hesabınız kullanılmaya çalışılıyor <br>**Önerilen eylem:**<ol><li> Emin olmak için ilk şey, Exchange'de "İzin ver anonim geçişi üzerinde bir alma bağlayıcısında" DPM sunucunuz için ayarlandığını ' dir. Bu yapılandırma hakkında daha fazla bilgi için bkz. [izin anonim geçişi üzerinde bir alma bağlayıcısında](https://technet.microsoft.com/library/bb232021.aspx) TechNet'teki.</li> <li> Bir iç SMTP geçiş kullanın ve Office 365 sunucunuzu kullanarak ayarlamanız gerekir, bir geçiş olması için IIS ayarlayabilirsiniz. DPM sunucusuna yapılandırma [IIS kullanarak SMTP o365'e geçiş](https://technet.microsoft.com/library/aa995718(v=exchg.65).aspx).<br><br> **ÖNEMLİ:** Kullanıcı kullandığınızdan emin olun\@etkialanı.com biçimi ve *değil* etki alanı\kullanıcı.<br><br><li>SMTP sunucusu olarak yerel sunucu adını kullanacak şekilde noktası DPM bağlantı noktası 587. Bu e-postaları alınması gereken kullanıcı e-posta gelin.<li> Kullanıcı adı ve parola DPM SMTP Kurulumu sayfasında DPM açıktır etki alanındaki bir etki alanı hesabı olmalıdır. </li><br> **NOT**: SMTP sunucu adresini değiştirirken, yeni ayarlarında değişiklik yapmak, ayarlar kutusunu kapatın ve yeni değeri yansıtır emin olmak için yeniden açın.  Her zaman bu şekilde test en iyi uygulama, bu nedenle, yeni ayarların etkili, yalnızca değiştirme ve test neden.<br><br>Bu işlem sırasında herhangi bir zamanda DPM Konsolu kapatmak ve aşağıdaki kayıt defteri anahtarlarını düzenleyerek bu ayarları silebilirsiniz: **HKLM\SOFTWARE\Microsoft\Microsoft Data Protection Manager\Notification\ <br/> SMTPPassword silin ve SMTPUserName anahtarları**. Yeniden başlattıktan sonra kullanıcı Arabirimine geri ekleyebilirsiniz.
+| Office 365 hesabı kullanarak e-posta bildirimleri ayarlama |Hata KIMLIĞI: 2013| **Sağlamak**<br> Office 365 hesabı kullanılmaya çalışılıyor <br>**Önerilen eylem:**<ol><li> Emin olunması gereken ilk şey, DPM sunucunuz için "alma bağlayıcısında anonim geçişe Izin ver" ayarı Exchange 'de ayarlanmıştır. Bunun nasıl yapılandırılacağı hakkında daha fazla bilgi için bkz. TechNet 'teki [alma bağlayıcısında anonim geçişe Izin verme](https://technet.microsoft.com/library/bb232021.aspx) .</li> <li> İç SMTP geçişi kullanamaz ve Office 365 sunucunuzu kullanarak ayarlamanız gerekiyorsa, IIS 'yi geçiş olarak ayarlayabilirsiniz. DPM sunucusunu, [IIS kullanarak, SMTP 'Yi O365 'e geçirecek](https://technet.microsoft.com/library/aa995718(v=exchg.65).aspx)şekilde yapılandırın.<br><br> **Önemli:** *Etkialanı \* kullanıcı\@Domain.com biçimini kullandığınızdan emin olun.<br><br><li>DPM 'yi yerel sunucu adını SMTP sunucusu, bağlantı noktası 587 olarak kullanmak için işaretleyin. Sonra, e-postaların gelmesi gereken kullanıcı e-postasına işaret edin.<li> DPM SMTP kurulumu sayfasındaki Kullanıcı adı ve parola, DPM 'nin açık olduğu etki alanındaki bir etki alanı hesabı için olmalıdır. </li><br> **Note**: SMTP sunucu adresini değiştirirken, yeni ayarlarda değişiklik yapın, ayarlar kutusunu kapatın ve yeni değeri yansıttığından emin olmak için yeniden açın.  Yalnızca değiştirme ve test etme her zaman yeni ayarların etkili olmasına neden olabilir, bu nedenle bu şekilde test etmek en iyi uygulamadır.<br><br>Bu işlem sırasında dilediğiniz zaman DPM konsolunu kapatarak ve aşağıdaki kayıt defteri anahtarlarını düzenleyerek bu ayarları temizleyebilirsiniz: **Hklm\software\microsoft\microsoft Data Protection Manager\Notification\ <br/> SMTPPassword ve SMTPUserName anahtarlarını silin**. Yeniden başlattığınızda onları Kullanıcı arabirimine geri ekleyebilirsiniz.
+
+## <a name="common-issues"></a>Genel sorunlar
+
+Bu bölümde Azure Backup Sunucusu kullanırken karşılaşabileceğiniz yaygın hatalar ele alınmaktadır.
+
+### <a name="cbpsourcesnapshotfailedreplicamissingorinvalid"></a>CBPSourceSnapshotFailedReplicaMissingOrInvalid
+
+Hata iletisi | Önerilen eylem |
+-- | --
+Disk yedekleme kopyası geçersiz ya da eksik olduğundan yedekleme başarısız oldu. | Bu sorunu çözmek için aşağıdaki adımları doğrulayın ve işlemi yeniden deneyin: <br/> 1. bir disk kurtarma noktası oluşturun<br/> 2. veri kaynağı üzerinde tutarlılık denetimi Çalıştır <br/> 3. DataSource 'un korumasını durdurun ve ardından bu veri kaynağının korumasını yeniden yapılandırın
+
+### <a name="cbpsourcesnapshotfailedreplicametadatainvalid"></a>CBPSourceSnapshotFailedReplicaMetadataInvalid
+
+Hata iletisi | Önerilen eylem |
+-- | --
+Çoğaltmadaki meta veriler geçersiz olduğundan kaynak birim anlık görüntüsü başarısız oldu. | Bu veri kaynağı için bir disk kurtarma noktası oluşturun ve çevrimiçi yedeklemeyi yeniden deneyin
+
+### <a name="cbpsourcesnapshotfailedreplicainconsistent"></a>CBPSourceSnapshotFailedReplicaInconsistent
+
+Hata iletisi | Önerilen eylem |
+-- | --
+Kaynak birim anlık görüntüsü, tutarsız veri kaynağı çoğaltması nedeniyle başarısız oldu. | Bu veri kaynağı üzerinde bir tutarlılık denetimi çalıştırın ve yeniden deneyin
+
+### <a name="cbpsourcesnapshotfailedreplicacloningissue"></a>CBPSourceSnapshotFailedReplicaCloningIssue
+
+Hata iletisi | Önerilen eylem |
+-- | --
+Disk yedekleme çoğaltması kopyalanamadığı için yedekleme başarısız oldu.| Önceki tüm disk yedekleme çoğaltma dosyalarının (. vhdx) çıkarıldığından ve çevrimiçi yedeklemeler sırasında devam eden disk yedeklemesi olmadığından emin olun

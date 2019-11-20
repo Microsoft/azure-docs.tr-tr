@@ -1,42 +1,43 @@
 ---
-title: Market teklifleri yayımlama | Azure Market
-description: AppSource bulut iş ortağı portalını kullanarak Marketlerden ve Azure teklifleri yayımlama
+title: Market tekliflerini Yayımla | Azure Marketi
+description: Bulut İş Ortağı Portalı kullanarak Azure ve AppSource marketlerine yönelik teklifler yayımlayın
 services: Azure, AppSource, Marketplace, Cloud Partner Portal,
 author: v-miclar
 ms.service: marketplace
+ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
 ms.date: 01/12/2019
 ms.author: pabutler
-ms.openlocfilehash: b0121be4aecffe46c9440e62372e17ac7993163c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: e77f0994f604f3a7365f1ed1ddb9191a2510883a
+ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64943503"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73826735"
 ---
-# <a name="publish-azure-marketplace-and-appsource-offers"></a>Azure Market ve AppSource teklifleri yayımlama
+# <a name="publish-azure-marketplace-and-appsource-offers"></a>Azure Marketi ve AppSource tekliflerini yayımlama
 
-Teklif Ayrıntıları doldurduktan sonra teklifinizi yayımlayın ve "Azure Marketi'nde canlı" almak için zaman var. Teklif geçtiği birkaç aşaması vardır. Pazarlama içeriğinizi hem Azure sertifikası ve Web sitesinde kullanılabilmesi için kalite gereksinimleri karşılaması teknik varlıklarınızı emin olun.  Aşağıdaki diyagramda, genel teklifi yayımlama işlemi gösterilmektedir.  Bu işlem, çeşitli teklif türleri arasında biraz farklılık gösterir.
+Tüm teklif ayrıntılarını doldurduktan sonra teklifinizin yayımlanması ve Azure Marketi 'nde "canlı" olması zaman alır. Teklifin gidebileceği birkaç aşama vardır. Hem pazarlama içeriğinizin hem de teknik varlıklarınızın, Azure Sertifikalı olması ve Web sitesinde canlı olması için kalite gereksinimlerini karşıladığından emin olun.  Aşağıdaki diyagramda genel teklif yayımlama süreci gösterilmektedir.  Bu işlem, çeşitli teklif türleri arasında biraz farklılık gösterir.
 
-![Genel akış teklif yayımlamak için](./media/publish-flow.png)
+![teklif yayımlama için genel akış](./media/publish-flow.png)
 
 
-## <a name="publishing-process"></a>Yayımlama işlemi
+## <a name="publishing-process"></a>Yayımlama Işlemi
 
 Teklifinizi yayımlamak için aşağıdaki adımları kullanın.
 
-1. Tıklayın **Yayımla** altında **Düzenleyicisi** yayımlama işlemini başlatmak için sekmesinde.
-2. Altında **durumu** sekmesinde, gördüğünüz **yayımlama adımları** akış biçimde.  Bu formu ayrıca teklifinizi geçerli durumu belirtir ve bildirilen sorunları.
-3. Her şeyi doğru bakar ve Önizleme'de düzgün şekilde çalıştığını doğruladıktan sonra çalışmaya hazırsınız. Tıklayın **Go Live** altında **durumu** sekmesi ve Microsoft alacağınız teklifinizi üretime ve uygun Market'te. Genellikle, dinamik işlem birkaç saat sürer gidin.
+1. Yayımlama işlemini başlatmak için **Düzenleyici** sekmesinde **Yayımla** ' ya tıklayın.
+2. **Durum** sekmesinde, **yayımlama adımlarını** akış çizelgesi formunda görürsünüz.  Bu form Ayrıca teklifinizin geçerli durumunu ve bildirilen sorunları da belirtir.
+3. Her şeyin doğru şekilde göründüğünü doğruladıktan sonra önizlemede düzgün şekilde çalışmaya devam edersiniz. **Durum** sekmesi altında **canlı git** ' e tıklayın ve Microsoft teklifinizi üretime ve ilgili Market 'te ele alır. Genellikle, canlı git birkaç saat sürer.
 
-Yayımlama işleminde herhangi bir noktada, ayrıca oturum açın ve tıklayın **tüm sunar** tekliflerinizi hiçbiri için en son durumu görüntülemek için sekmesinde. Teklifiniz için doğrudan duruma tıklayın ve teklifinizi yayımlama işleminin neresinde olduğunu görebilir.
+Yayımlama sürecinin herhangi bir noktasında, her türlü tekliflerinizin en son durumunu görüntülemek için oturum açıp **Tüm teklifler** sekmesine tıklayabilirsiniz. Teklifiniz için doğrudan durum ' a tıklayabilir ve teklifinizin yayımlama sürecinde nerede olduğunu görmek için ayrıntılara bakabilirsiniz.
 
 
-## <a name="canceling-the-publishing-request"></a>Yayımlama istek iptal ediliyor
+## <a name="canceling-the-publishing-request"></a>Yayımlama isteği iptal ediliyor
 
-Yayımlama sürecini başlatmak ve isteğiniz iptal gerekmesi. Yayımlama istek ulaştığında, yalnızca bir yayımlama isteği iptal edebilirsiniz *yayımcı oturumunuzu* adım. İptal etmek için **yayımlamayı iptal et**. Adım 1'e Yayımlama durumunu sıfırlar ve yeniden yayımlamak için tıklatmalısınız **Yayımla** ve adımları izleyerek **durumu** sekmesi.
+Yayımlama sürecini başlatabilir ve isteğinizi iptal etmek zorunda kalabilirsiniz. Yayımlama isteği *Yayımcı oturumu* kapatma adımına ulaştığında yalnızca bir yayımlama isteğini iptal edebilirsiniz. İptal etmek için, **yayımlamayı Iptal et**' e tıklayın. Yayımlama durumu 1. adıma sıfırlanır ve yeniden yayımlanacak, **Yayımla** ' ya tıkladıktan sonra **durum** sekmesindeki adımları izlemeniz gerekir.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Yayımlama işlemi sırasında izleme için kullanışlı [durumu teklif](./cpp-view-status-offer.md) teklif Canlı ölçeklendirilinceye kadar. 
+Yayımlama işlemi sırasında, teklif canlı olana kadar [teklif durumunu](./cpp-view-status-offer.md) izlemek yararlı olur. 

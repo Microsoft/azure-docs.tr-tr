@@ -1,6 +1,6 @@
 ---
-title: Azure API Management'ta API şablonları | Microsoft Docs
-description: Azure API Management'ta Geliştirici portalındaki API sayfaların içeriğini özelleştirmeyi öğrenin.
+title: Azure API Management API şablonları | Microsoft Docs
+description: Azure API Management 'de Geliştirici Portalında API sayfalarının içeriğini özelleştirmeyi öğrenin.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -10,44 +10,45 @@ ms.assetid: 3642fd09-ba98-4358-93a6-c48ab0500431
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/09/2017
+ms.date: 11/04/2019
 ms.author: apimpm
-ms.openlocfilehash: e8519bf436e1af19a22a840f48bf1bfccdae99b2
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: eee95a2b6acde3ad3b7d94cf5cdd0f74f9f09fd9
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67341263"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73176877"
 ---
-# <a name="api-templates-in-azure-api-management"></a>Azure API Management'ta API şablonları
+# <a name="api-templates-in-azure-api-management"></a>Azure API Management API şablonları
 
-Azure API Management içeriklerini yapılandıran bir dizi kullanarak Geliştirici portal sayfalarının içeriğini özelleştirme becerisi sunuyor. Kullanarak [DotLiquid](http://dotliquidmarkup.org/) söz dizimi ve tercih ettiğiniz düzenleyiciyi gibi [tasarımcılarına yönelik DotLiquid](https://github.com/dotliquid/dotliquid/wiki/DotLiquid-for-Designers), ve sağlanan bir dizi yerelleştirilmiş [dize kaynakları](api-management-template-resources.md#strings), [karakter Kaynakları](api-management-template-resources.md#glyphs), ve [sayfasında denetimleri](api-management-page-controls.md), sayfaların içeriğini bu şablonları kullanarak dilediğiniz şekilde yapılandırmak için harika esnekliğine sahip olursunuz.  
-  
-Bu bölümdeki şablonları, geliştirici portalında API'yi sayfaların içeriğini özelleştirmenize olanak sağlar.  
+Azure API Management, içeriğini yapılandıran bir dizi şablon kullanarak geliştirici portalı sayfalarının içeriğini özelleştirmenizi sağlar. [Dotsıvı](http://dotliquidmarkup.org/) Syntax ve seçtiğiniz düzenleyiciyi ( [Örneğin, tasarımcılar için dotlikit](https://github.com/dotliquid/dotliquid/wiki/DotLiquid-for-Designers)) ve sağlanan bir yerelleştirilmiş [dize kaynakları](api-management-template-resources.md#strings), [glif kaynakları](api-management-template-resources.md#glyphs)ve [sayfa denetimleri](api-management-page-controls.md)kümesini kullanarak, yapılandırmak için harika bir esneklik vardır Gördüğünüz sayfaların içeriği bu şablonları kullanarak sığdırar.  
+
+Bu bölümdeki şablonlar, geliştirici portalındaki API sayfalarının içeriğini özelleştirmenizi sağlar.  
   
 -   [API listesi](#APIList)  
 -   [İşlem](#Product)  
 -   [Kod örnekleri](#CodeSamples)  
-    -   [Curl](#Curl)  
+    -   [Kıvr](#Curl)  
     -   [C#](#CSharp)  
     -   [Java](#Stub)  
     -   [JavaScript](#JavaScript)  
-    -   [Objective C](#ObjectiveC)  
+    -   [Amaç C](#ObjectiveC)  
     -   [PHP](#PHP)  
     -   [Python](#Python)  
     -   [Ruby](#Ruby)  
 
 > [!NOTE]
->  Örnek varsayılan şablonları aşağıdaki belgelerde bulunan, ancak sürekli geliştirmeler nedeniyle değiştirilebilir. İstenen bireysel şablonlara giderek Canlı varsayılan şablonları Geliştirici Portalı'nda görüntüleyebilirsiniz. Şablonlar ile çalışma hakkında daha fazla bilgi için bkz. [şablonlarını kullanarak API Management Geliştirici portalını özelleştirmek nasıl](https://azure.microsoft.com/documentation/articles/api-management-developer-portal-templates/).  
+>  Örnek varsayılan şablonlar aşağıdaki belgelere dahil edilmiştir, ancak sürekli iyileştirmeler nedeniyle değişikliğe tabidir. Canlı varsayılan şablonları, istenen ayrı şablonlara giderek Geliştirici Portalında görüntüleyebilirsiniz. Şablonlarla çalışma hakkında daha fazla bilgi için bkz. [şablonları kullanarak API Management Geliştirici Portalını Özelleştirme](https://azure.microsoft.com/documentation/articles/api-management-developer-portal-templates/).  
+
+[!INCLUDE [api-management-portal-legacy.md](../../includes/api-management-portal-legacy.md)]
 
 [!INCLUDE [premium-dev-standard-basic.md](../../includes/api-management-availability-premium-dev-standard-basic.md)]
   
-## <a name="APIList"></a> API listesi  
- **API listesi** şablon Geliştirici Portalı API listesi sayfasının gövdesi özelleştirmenize olanak sağlar.  
+## <a name="APIList"></a>API listesi  
+ **API listesi** şablonu, GELIŞTIRICI portalındaki API listesi sayfasının gövdesini özelleştirmenizi sağlar.  
   
- ![Geliştirici Portal API listesi](./media/api-management-api-templates/APIM-Developer-Portal-Templates-API-List.png "APIM Geliştirici Portal şablonları API listesi")  
+ ![Geliştirici portalı API listesi](./media/api-management-api-templates/APIM-Developer-Portal-Templates-API-List.png "APıM geliştirici portalı şablonları API listesi")  
   
 ### <a name="default-template"></a>Varsayılan şablon  
   
@@ -80,7 +81,7 @@ Bu bölümdeki şablonları, geliştirici portalında API'yi sayfaların içeri�
 ```  
   
 ### <a name="controls"></a>Denetimler  
- `API list` Şablon aşağıdaki kullanabilir [sayfasında denetimleri](api-management-page-controls.md).  
+ `API list` şablonunda aşağıdaki [sayfa denetimleri](api-management-page-controls.md)kullanılabilir.  
   
 -   [sayfalama denetimi](api-management-page-controls.md#paging-control)  
   
@@ -90,7 +91,7 @@ Bu bölümdeki şablonları, geliştirici portalında API'yi sayfaların içeri�
   
 |Özellik|Tür|Açıklama|  
 |--------------|----------|-----------------|  
-|`apis`|Koleksiyonu [API özeti](api-management-template-data-model-reference.md#APISummary) varlıklar.|Geçerli kullanıcıya görünür API'ler.|  
+|`apis`|[API Özet](api-management-template-data-model-reference.md#APISummary) varlıklarının koleksiyonu.|Geçerli kullanıcıya görünür olan API 'Ler.|  
   
 ### <a name="sample-template-data"></a>Örnek şablon verileri  
   
@@ -112,10 +113,10 @@ Bu bölümdeki şablonları, geliştirici portalında API'yi sayfaların içeri�
 }  
 ```  
   
-## <a name="Product"></a> İşlemi  
- **İşlemi** şablon Geliştirici Portalı'nda işlemi sayfasının gövdesi özelleştirmenize olanak sağlar.  
+## <a name="Product"></a>Çalışmasını  
+ **İşlem** şablonu, geliştirici portalındaki işlem sayfasının gövdesini özelleştirmenizi sağlar.  
   
- ![Geliştirici Portalı işlemi sayfa](./media/api-management-api-templates/APIM-Developer-Portal-templates-Operation-page.png "APIM Geliştirici Portal şablonları işlemi sayfası")  
+ ![Geliştirici portalı Işlem sayfası](./media/api-management-api-templates/APIM-Developer-Portal-templates-Operation-page.png "APıM Geliştirici Portalı şablon Işlemi sayfası")  
   
 ### <a name="default-template"></a>Varsayılan şablon  
   
@@ -339,21 +340,21 @@ Bu bölümdeki şablonları, geliştirici portalında API'yi sayfaların içeri�
 ```  
   
 ### <a name="controls"></a>Denetimler  
- `Operation` Şablon kullanımı, izin vermiyor [sayfasında denetimleri](api-management-page-controls.md).  
+ `Operation` şablonu herhangi bir [sayfa denetiminin](api-management-page-controls.md)kullanılmasına izin vermez.  
   
 ### <a name="data-model"></a>Veri modeli  
   
 |Özellik|Tür|Açıklama|  
 |--------------|----------|-----------------|  
-|`apiId`|string|Geçerli API kimliği.|  
-|`apiName`|string|API adı.|  
-|`apiDescription`|string|API tanımı.|  
-|`api`|[API özeti](api-management-template-data-model-reference.md#APISummary) varlık.|Geçerli API.|  
-|`operation`|[İşlem](api-management-template-data-model-reference.md#Operation)|Şu anda görüntülenen işlemi.|  
-|`sampleUrl`|string|Geçerli işlem için URL.|  
-|`operationMenu`|[İşlem menüsü](api-management-template-data-model-reference.md#Menu)|Bu API için işlemlerinin bir menü.|  
-|`consoleUrl`|URI|URI'sini **deneyin** düğmesi.|  
-|`samples`|Koleksiyonu [kod örneği](api-management-template-data-model-reference.md#Sample) varlıklar.|Geçerli işlem için kod örnekleri...|  
+|`apiId`|string|Geçerli API 'nin KIMLIĞI.|  
+|`apiName`|string|API 'nin adı.|  
+|`apiDescription`|string|API 'nin açıklaması.|  
+|`api`|[API Özet](api-management-template-data-model-reference.md#APISummary) varlığı.|Geçerli API.|  
+|`operation`|[İşlem](api-management-template-data-model-reference.md#Operation)|Görüntülenmekte olan işlem.|  
+|`sampleUrl`|string|Geçerli işlemin URL 'SI.|  
+|`operationMenu`|[İşlem menüsü](api-management-template-data-model-reference.md#Menu)|Bu API için bir işlem menüsü.|  
+|`consoleUrl`|KULLANıLMAMıŞSA|**TRY It** düğmesinin URI 'si.|  
+|`samples`|[Kod örneği](api-management-template-data-model-reference.md#Sample) varlıklarının koleksiyonu.|Geçerli işlem için kod örnekleri..|  
   
 ### <a name="sample-template-data"></a>Örnek şablon verileri  
   
@@ -642,12 +643,12 @@ Bu bölümdeki şablonları, geliştirici portalında API'yi sayfaların içeri�
 }  
 ```  
   
-## <a name="CodeSamples"></a> Kod örnekleri  
- Aşağıdaki şablonlar gövdesi işlemi sayfasında ayrı ayrı kod örnekleri, özelleştirmenizi sağlar.  
+## <a name="CodeSamples"></a>Kod örnekleri  
+ Aşağıdaki şablonlar, işlem sayfasında bireysel kod örneklerinin gövdesini özelleştirmenizi sağlar.  
   
- ![Geliştirici Portal şablonları kod örnekleri](./media/api-management-api-templates/APIM-Developer-Portal-Templates-Code-samples.png "APIM Geliştirici Portal şablonları kod örnekleri")  
+ ![Geliştirici Portalı şablon kodu örnekleri](./media/api-management-api-templates/APIM-Developer-Portal-Templates-Code-samples.png "APıM Geliştirici Portalı şablon kodu örnekleri")  
   
--   [Curl](#Curl)  
+-   [Kıvr](#Curl)  
   
 -   [C#](#CSharp)  
   
@@ -655,7 +656,7 @@ Bu bölümdeki şablonları, geliştirici portalında API'yi sayfaların içeri�
   
 -   [JavaScript](#JavaScript)  
   
--   [Objective C](#ObjectiveC)  
+-   [Amaç C](#ObjectiveC)  
   
 -   [PHP](#PHP)  
   
@@ -663,8 +664,8 @@ Bu bölümdeki şablonları, geliştirici portalında API'yi sayfaların içeri�
   
 -   [Ruby](#Ruby)  
   
-### <a name="Curl"></a> Curl  
- **DocumentationSamplesCurl** şablon, bu kod örneği işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
+### <a name="Curl"></a>Kıvr  
+ **Belgetaörneklesme** şablonu, bu kod örneğini, işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
   
 #### <a name="default-template"></a>Varsayılan şablon  
   
@@ -682,10 +683,10 @@ curl -v -X {{method}} "{{scheme}}://{{host}}{{path}}{{query | escape }}"
 ```  
   
 #### <a name="controls"></a>Denetimler  
- Kod örnek şablonları herhangi bir kullanıma izin vermeyen [sayfasında denetimleri](api-management-page-controls.md).  
+ Kod örnek şablonları herhangi bir [sayfa denetiminin](api-management-page-controls.md)kullanılmasına izin vermez.  
   
 #### <a name="data-model"></a>Veri modeli  
- [Kod örneği](api-management-template-data-model-reference.md#Sample) varlık.  
+ [Kod örneği](api-management-template-data-model-reference.md#Sample) varlığı.  
   
 #### <a name="sample-template-data"></a>Örnek şablon verileri  
   
@@ -716,8 +717,8 @@ curl -v -X {{method}} "{{scheme}}://{{host}}{{path}}{{query | escape }}"
 }  
 ```  
   
-### <a name="CSharp"></a> C#  
- **DocumentationSamplesCsharp** şablon, bu kod örneği işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
+### <a name="CSharp"></a>C#  
+ **Belgetasamplescsharp** şablonu, bu kod örneğini, işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
   
 #### <a name="default-template"></a>Varsayılan şablon  
   
@@ -861,10 +862,10 @@ namespace CSHttpClientSample
 ```  
   
 #### <a name="controls"></a>Denetimler  
- Kod örnek şablonları herhangi bir kullanıma izin vermeyen [sayfasında denetimleri](api-management-page-controls.md).  
+ Kod örnek şablonları herhangi bir [sayfa denetiminin](api-management-page-controls.md)kullanılmasına izin vermez.  
   
 #### <a name="data-model"></a>Veri modeli  
- [Kod örneği](api-management-template-data-model-reference.md#Sample) varlık.  
+ [Kod örneği](api-management-template-data-model-reference.md#Sample) varlığı.  
   
 #### <a name="sample-template-data"></a>Örnek şablon verileri  
   
@@ -895,8 +896,8 @@ namespace CSHttpClientSample
 }  
 ```  
   
-### <a name="Stub"></a> Java  
- **DocumentationSamplesJava** şablon, bu kod örneği işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
+### <a name="Stub"></a>Java  
+ **Belgetaörneklesjava** şablonu, bu kod örneğini, işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
   
 #### <a name="default-template"></a>Varsayılan şablon  
   
@@ -957,10 +958,10 @@ public class JavaSample
 ```  
   
 #### <a name="controls"></a>Denetimler  
- Kod örnek şablonları herhangi bir kullanıma izin vermeyen [sayfasında denetimleri](api-management-page-controls.md).  
+ Kod örnek şablonları herhangi bir [sayfa denetiminin](api-management-page-controls.md)kullanılmasına izin vermez.  
   
 #### <a name="data-model"></a>Veri modeli  
- [Kod örneği](api-management-template-data-model-reference.md#Sample) varlık.  
+ [Kod örneği](api-management-template-data-model-reference.md#Sample) varlığı.  
   
 #### <a name="sample-template-data"></a>Örnek şablon verileri  
   
@@ -991,8 +992,8 @@ public class JavaSample
 }  
 ```  
   
-### <a name="JavaScript"></a> JavaScript  
- **DocumentationSamplesJs** şablon, bu kod örneği işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
+### <a name="JavaScript"></a>JavaScript  
+ **Belgetasamplesjs** şablonu, bu kod örneğini, işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
   
 #### <a name="default-template"></a>Varsayılan şablon  
   
@@ -1046,10 +1047,10 @@ public class JavaSample
 ```  
   
 #### <a name="controls"></a>Denetimler  
- Kod örnek şablonları herhangi bir kullanıma izin vermeyen [sayfasında denetimleri](api-management-page-controls.md).  
+ Kod örnek şablonları herhangi bir [sayfa denetiminin](api-management-page-controls.md)kullanılmasına izin vermez.  
   
 #### <a name="data-model"></a>Veri modeli  
- [Kod örneği](api-management-template-data-model-reference.md#Sample) varlık.  
+ [Kod örneği](api-management-template-data-model-reference.md#Sample) varlığı.  
   
 #### <a name="sample-template-data"></a>Örnek şablon verileri  
   
@@ -1080,8 +1081,8 @@ public class JavaSample
 }  
 ```  
   
-### <a name="ObjectiveC"></a> Objective C  
- **DocumentationSamplesObjc** şablon, bu kod örneği işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
+### <a name="ObjectiveC"></a>Amaç C  
+ **Belgetasamplesobjc** şablonu, bu kod örneğini işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
   
 #### <a name="default-template"></a>Varsayılan şablon  
   
@@ -1158,10 +1159,10 @@ int main(int argc, const char * argv[])
 ```  
   
 #### <a name="controls"></a>Denetimler  
- Kod örnek şablonları herhangi bir kullanıma izin vermeyen [sayfasında denetimleri](api-management-page-controls.md).  
+ Kod örnek şablonları herhangi bir [sayfa denetiminin](api-management-page-controls.md)kullanılmasına izin vermez.  
   
 #### <a name="data-model"></a>Veri modeli  
- [Kod örneği](api-management-template-data-model-reference.md#Sample) varlık.  
+ [Kod örneği](api-management-template-data-model-reference.md#Sample) varlığı.  
   
 #### <a name="sample-template-data"></a>Örnek şablon verileri  
   
@@ -1192,8 +1193,8 @@ int main(int argc, const char * argv[])
 }  
 ```  
   
-### <a name="PHP"></a> PHP  
- **DocumentationSamplesPhp** şablon, bu kod örneği işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
+### <a name="PHP"></a>PHP  
+ **Belgetasamplesphp** şablonu, bu kod örneğini, işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
   
 #### <a name="default-template"></a>Varsayılan şablon  
   
@@ -1248,10 +1249,10 @@ catch (HttpException $ex)
 ```  
   
 #### <a name="controls"></a>Denetimler  
- Kod örnek şablonları herhangi bir kullanıma izin vermeyen [sayfasında denetimleri](api-management-page-controls.md).  
+ Kod örnek şablonları herhangi bir [sayfa denetiminin](api-management-page-controls.md)kullanılmasına izin vermez.  
   
 #### <a name="data-model"></a>Veri modeli  
- [Kod örneği](api-management-template-data-model-reference.md#Sample) varlık.  
+ [Kod örneği](api-management-template-data-model-reference.md#Sample) varlığı.  
   
 #### <a name="sample-template-data"></a>Örnek şablon verileri  
   
@@ -1282,8 +1283,8 @@ catch (HttpException $ex)
 }  
 ```  
   
-### <a name="Python"></a> Python  
- **DocumentationSamplesPython** şablon, bu kod örneği işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
+### <a name="Python"></a>Python  
+ **DocumentationSamplesPython** şablonu, işlem sayfasının kod örnekleri bölümünde bu kod örneğini özelleştirmenizi sağlar.  
   
 #### <a name="default-template"></a>Varsayılan şablon  
   
@@ -1366,10 +1367,10 @@ except Exception as e:
 ```
   
 #### <a name="controls"></a>Denetimler  
- Kod örnek şablonları herhangi bir kullanıma izin vermeyen [sayfasında denetimleri](api-management-page-controls.md).  
+ Kod örnek şablonları herhangi bir [sayfa denetiminin](api-management-page-controls.md)kullanılmasına izin vermez.  
   
 #### <a name="data-model"></a>Veri modeli  
- [Kod örneği](api-management-template-data-model-reference.md#Sample) varlık.  
+ [Kod örneği](api-management-template-data-model-reference.md#Sample) varlığı.  
   
 #### <a name="sample-template-data"></a>Örnek şablon verileri  
   
@@ -1400,8 +1401,8 @@ except Exception as e:
 }  
 ```  
   
-### <a name="Ruby"></a> Ruby  
- **DocumentationSamplesRuby** şablon, bu kod örneği işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
+### <a name="Ruby"></a>Söyleniş  
+ **Belgeley,** Bu kod örneğini, işlem sayfasının kod örnekleri bölümünde özelleştirmenize olanak sağlar.  
   
 #### <a name="default-template"></a>Varsayılan şablon  
   
@@ -1437,10 +1438,10 @@ puts response.body
 ```  
   
 #### <a name="controls"></a>Denetimler  
- Kod örnek şablonları herhangi bir kullanıma izin vermeyen [sayfasında denetimleri](api-management-page-controls.md).  
+ Kod örnek şablonları herhangi bir [sayfa denetiminin](api-management-page-controls.md)kullanılmasına izin vermez.  
   
 #### <a name="data-model"></a>Veri modeli  
- [Kod örneği](api-management-template-data-model-reference.md#Sample) varlık.  
+ [Kod örneği](api-management-template-data-model-reference.md#Sample) varlığı.  
   
 #### <a name="sample-template-data"></a>Örnek şablon verileri  
   
@@ -1472,4 +1473,4 @@ puts response.body
 ```
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Şablonlar ile çalışma hakkında daha fazla bilgi için bkz. [şablonlarını kullanarak API Management Geliştirici portalını özelleştirmek nasıl](api-management-developer-portal-templates.md).
+Şablonlarla çalışma hakkında daha fazla bilgi için bkz. [şablonları kullanarak API Management Geliştirici Portalını Özelleştirme](api-management-developer-portal-templates.md).

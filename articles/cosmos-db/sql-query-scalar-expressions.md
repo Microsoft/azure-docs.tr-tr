@@ -1,21 +1,21 @@
 ---
-title: Azure Cosmos DB SQL sorgularında skaler ifade
-description: Azure Cosmos DB için skaler ifade SQL söz dizimi hakkında bilgi edinin.
+title: Azure Cosmos DB SQL sorgularında skaler ifadeler
+description: Azure Cosmos DB için skalar ifade SQL sözdizimi hakkında bilgi edinin.
 author: markjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
 ms.date: 05/17/2019
 ms.author: mjbrown
-ms.openlocfilehash: 4464c39a45c47c680a13f3ebc34841b47ee0d7c6
-ms.sourcegitcommit: a12b2c2599134e32a910921861d4805e21320159
+ms.openlocfilehash: c35ad65a584f8ee95142e9bc85a58b5b6cd99744
+ms.sourcegitcommit: e97a0b4ffcb529691942fc75e7de919bc02b06ff
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2019
-ms.locfileid: "67342746"
+ms.lasthandoff: 09/15/2019
+ms.locfileid: "71003540"
 ---
-# <a name="scalar-expressions-in-azure-cosmos-db-sql-queries"></a>Azure Cosmos DB SQL sorgularında skaler ifade
+# <a name="scalar-expressions-in-azure-cosmos-db-sql-queries"></a>Azure Cosmos DB SQL sorgularında skaler ifadeler
 
-[SELECT yan tümcesi](sql-query-select.md) skaler ifadeleri destekler. Skaler bir ifade, semboller ve işleçleri tek bir değer almak için değerlendirilen bir birleşimidir. Skaler ifade örnekleri: sabitleri, özellik başvuru, dizi öğesi başvuruları, diğer başvurular veya işlev çağrıları. Skaler ifadelerin işleçleri kullanarak karmaşık ifadelere birleştirilebilir.
+[Select yan tümcesi](sql-query-select.md) skaler ifadeleri destekler. Skaler bir ifade, semboller ve işleçleri tek bir değer almak için değerlendirilen bir birleşimidir. Skalar ifade örnekleri şunlardır: sabitler, özellik başvuruları, dizi öğesi başvuruları, diğer ad başvuruları veya işlev çağrıları. Skalar ifadeler, işleçler kullanılarak karmaşık ifadelerle birleştirilebilir.
 
 ## <a name="syntax"></a>Sözdizimi
   
@@ -59,11 +59,11 @@ ms.locfileid: "67342746"
   
 - `<scalar_expression>.property_name`  
   
-   Bir nesnenin özellik değerini temsil eder. Özellik mevcut değil veya özelliği bir nesne değil, bir değer üzerinde başvurulan ardından ifadenin değerlendirdiği **tanımlanmamış** değeri.  
+   Bir nesnenin özellik değerini temsil eder. Özellik yok veya özelliğe bir nesne olmayan bir değer üzerinde başvuruluyorsa, ifade **tanımsız** değer olarak değerlendirilir.  
   
 - `<scalar_expression>'['"property_name"|array_index']'`  
   
-   Bir ada sahip özelliğin değerini temsil eden `property_name` veya dizi öğesi `array_index` dizi. Özelliği/dizi dizini mevcut değil veya özellik/dizi dizininden başvurulan bir değeri bir nesne/dizisi olmayan ve ardından ifadeyi tanımlanmamış değerini hesaplar.  
+   Bir dizinin diziniyle `property_name` `array_index` birlikte Name veya Array öğesi olan bir özelliğin değerini temsil eder. Özelliği/dizi dizini mevcut değil veya özellik/dizi dizininden başvurulan bir değeri bir nesne/dizisi olmayan ve ardından ifadeyi tanımlanmamış değerini hesaplar.  
   
 - `unary_operator <scalar_expression>`  
   
@@ -99,7 +99,7 @@ ms.locfileid: "67342746"
   
 ## <a name="remarks"></a>Açıklamalar
   
-  Tüm bağımsız değişkenleri, yerleşik veya kullanıcı tanımlı skaler bir işlev çağrılırken tanımlanmalıdır. Bağımsız değişken tanımlanmamış, işlev çağrılmaz ve sonuç tanımsız olur.  
+  Yerleşik veya Kullanıcı tanımlı skaler bir işlev çağrılırken, tüm bağımsız değişkenlerin tanımlanması gerekir. Bağımsız değişken tanımlanmamış, işlev çağrılmaz ve sonuç tanımsız olur.  
   
   Bir nesne oluştururken, tanımlanmamış değeri atanır. herhangi bir özelliği atlandı ve oluşturulan nesneyi dahil değildir.  
   
@@ -111,7 +111,7 @@ ms.locfileid: "67342746"
     SELECT ((2 + 11 % 7)-2)/3
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
     [{
@@ -119,14 +119,14 @@ Sonuçlar şu şekildedir:
     }]
 ```
 
-Aşağıdaki sorguda, skaler ifade sonucu bir Boolean verilmiştir:
+Aşağıdaki sorguda, skaler ifadenin sonucu bir Boolean değer:
 
 ```sql
     SELECT f.address.city = f.address.state AS AreFromSameCityState
     FROM Families f
 ```
 
-Sonuçlar şu şekildedir:
+Sonuçlar şunlardır:
 
 ```json
     [
@@ -141,6 +141,6 @@ Sonuçlar şu şekildedir:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Azure Cosmos DB'ye giriş](introduction.md)
-- [Azure Cosmos DB .NET örnekleri](https://github.com/Azure/azure-cosmosdb-dotnet)
-- [Alt sorgular](sql-query-subquery.md)
+- [Azure Cosmos DB giriş](introduction.md)
+- [Azure Cosmos DB .NET örnekleri](https://github.com/Azure/azure-cosmos-dotnet-v3)
+- [Alt](sql-query-subquery.md)

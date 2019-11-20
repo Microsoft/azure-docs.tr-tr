@@ -1,6 +1,6 @@
 ---
-title: Azure Otomasyonu'nu kullanarak Azure API Management'ı yönetme
-description: Nasıl Azure Otomasyonu Azure API Management'ı yönetmek için kullanılabilir hakkında bilgi edinin.
+title: Azure Otomasyonu 'Nu kullanarak Azure API Management yönetme
+description: Azure Otomasyonu hizmetinin Azure API Management 'yi yönetmek için nasıl kullanılabileceği hakkında bilgi edinin.
 services: api-management, automation
 documentationcenter: ''
 author: vladvino
@@ -10,36 +10,35 @@ ms.assetid: 2e53c9af-f738-47f8-b1b6-593050a7c51b
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 02/13/2018
 ms.author: apimpm
-ms.openlocfilehash: 642353218960e2e995d717260ae82b6dbd7c2612
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a472e00f9ecab8a5ffa6b19e4fe9a5f8b5ee5b95
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60880120"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70072053"
 ---
-# <a name="managing-azure-api-management-using-azure-automation"></a>Azure Otomasyonu'nu kullanarak Azure API Management'ı yönetme
-Bu kılavuz size Azure Otomasyonu ve nasıl Azure API Management yönetimini basitleştirmek için kullanılabilmesi için tanıtır.
+# <a name="managing-azure-api-management-using-azure-automation"></a>Azure Otomasyonu 'Nu kullanarak Azure API Management yönetme
+Bu kılavuz sizi Azure Otomasyonu hizmetini ve Azure API Management yönetimini basitleştirmek için nasıl kullanılabileceğini tanıtır.
 
 ## <a name="what-is-azure-automation"></a>Azure Otomasyonu Nedir?
-[Azure Otomasyonu](https://azure.microsoft.com/services/automation/) bulut yönetimini işlem Otomasyonu ile basitleştirmeyi için bir Azure hizmetidir. Azure Otomasyonu, el ile kullanarak tekrarlanan, uzun süre çalışan ve hata yapmaya açık görevleri güvenilirlik, verimlilik ve kuruluşunuz için değer süresini artırmak için otomatik olarak yapılabilir.
+[Azure Otomasyonu](https://azure.microsoft.com/services/automation/) , işlem otomasyonu aracılığıyla bulut yönetimini basitleştirecek bir Azure hizmetidir. Azure Otomasyonu, el ile, yinelenen, uzun süreli ve hataya açık görevleri kullanarak kuruluşunuz için güvenilirliği, verimliliği ve değerin süresini artırmak için otomatikleştirilebilir.
 
-Azure Otomasyonu ihtiyaçlarınızı karşılayacak şekilde ölçeklendirilen bir yüksek oranda güvenilir, yüksek oranda kullanılabilir iş akışı yürütme altyapısı sağlar. Görevleri tam olarak gerekli olduğunda gerçekleşir. böylece Azure Automation'da işlemleri el ile 3. taraf sistemleri tarafından veya zamanlanan aralıklarla çalıştırmasının.
+Azure Otomasyonu, gereksinimlerinizi karşılayacak şekilde ölçeklendirilebilen, yüksek oranda güvenilir, yüksek oranda kullanılabilir bir iş akışı yürütme altyapısı sağlar. Azure Otomasyonu 'nda, süreçler el ile, 3. taraf sistemleri tarafından ya da görevlerin gerektiği zaman tam olarak gerçekleşmesi için zamanlanmış aralıklarla kapatılabilir.
 
-İşlemsel yükünü azaltır ve boş BT ve DevOps personelinin Azure Otomasyonu tarafından otomatik olarak çalıştırılmak için bulut Yönetimi görevlerinizi taşıyarak iş değer kazandıran işlere odaklanın.
+İşlem yükünü azaltın ve BT ve DevOps personelini, bulut yönetim görevlerinizi Azure Otomasyonu tarafından otomatik olarak çalışacak şekilde taşıyarak iş değeri ekleyen çalışmaya odaklanmak üzere boşaltın.
 
-## <a name="how-can-azure-automation-help-manage-azure-api-management"></a>Azure Otomasyonu Azure API Management yönetmenize nasıl yardımcı olabilir?
-API Yönetimi yönetilen Azure Automation'da kullanarak [Azure API Management API için Windows PowerShell cmdlet'leri](https://docs.microsoft.com/powershell/module/az.apimanagement). Azure Otomasyonu içinde cmdlet'lerini kullanarak, API Management görevlerin çoğunu gerçekleştirmek için PowerShell iş akışı komut dosyaları yazabilirsiniz. Ayrıca, Azure automation'da bu cmdlet'ler Azure Hizmetleri ve 3. taraf sistemleri arasında karmaşık görevleri otomatikleştirmek için diğer Azure Hizmetleri için cmdlet'leri eşleşebileceğini denetleyebilmesi.
+## <a name="how-can-azure-automation-help-manage-azure-api-management"></a>Azure Otomasyonu Azure API Management yönetimine nasıl yardımcı olabilir?
+Azure [API Management API Için Windows PowerShell cmdlet 'leri](https://docs.microsoft.com/powershell/module/az.apimanagement)kullanılarak Azure otomasyonu 'nda API Management yönetilebilir. Azure Otomasyonu 'nda cmdlet 'lerini kullanarak API Management görevlerinin çoğunu gerçekleştirmek için PowerShell iş akışı betikleri yazabilirsiniz. Ayrıca, Azure hizmetleri ve üçüncü taraf sistemler genelinde karmaşık görevleri otomatikleştirmek için bu cmdlet 'leri diğer Azure hizmetleri cmdlet 'leriyle da eşleştirin.
 
-API Management'ı Powershell ile kullanmanın bazı örnekleri aşağıda verilmiştir:
+PowerShell ile API Management kullanmaya ilişkin bazı örnekler aşağıda verilmiştir:
 
 * [API Management için Azure PowerShell örnekleri](https://docs.microsoft.com/azure/api-management/powershell-samples)
 
 ## <a name="next-steps"></a>Sonraki Adımlar
-Azure Otomasyonu ve nasıl Azure API Management'ı yönetmek için kullanılmadan ilişkin temel bilgileri öğrendiniz, daha fazla bilgi için bu bağlantıları izleyin.
+Azure Otomasyonu 'nun temel bilgilerini ve Azure API Management 'yi yönetmek için nasıl kullanılabileceğini öğrendiğinize göre, daha fazla bilgi edinmek için bu bağlantıları izleyin.
 
-* Azure Otomasyonu bkz [çalışmaya başlama Öğreticisi](../automation/automation-first-runbook-graphical.md).
+* Bkz. Azure Otomasyonu [Başlangıç Öğreticisi](../automation/automation-first-runbook-graphical.md).
 

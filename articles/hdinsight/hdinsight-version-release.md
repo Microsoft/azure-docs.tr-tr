@@ -1,28 +1,28 @@
 ---
-title: HDInsight 4.0 genel bakış - Azure
+title: HDInsight 4,0 genel bakış-Azure
 description: HDInsight 3.6 ile HDInsight 4.0 özelliklerinin karşılaştırılması, sınırlamalar ve yükseltme önerileri.
-ms.service: hdinsight
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: hrasheed
+ms.service: hdinsight
 ms.topic: conceptual
-ms.date: 04/15/2019
-ms.openlocfilehash: 77260eaa2e19135586e438576397b4647afe7ece
-ms.sourcegitcommit: 9b80d1e560b02f74d2237489fa1c6eb7eca5ee10
+ms.date: 10/22/2019
+ms.openlocfilehash: 0463e3297bbb2fda50adfeefaa89f0a7a3ef8b0a
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67483968"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72901522"
 ---
-# <a name="hdinsight-40-overview"></a>HDInsight 4.0 genel bakış
+# <a name="azure-hdinsight-40-overview"></a>Azure HDInsight 4,0 genel bakış
 
-Azure HDInsight, Azure üzerinde açık kaynaklı Apache Hadoop ve Apache Spark analiz için en popüler hizmetler Kurumsal müşteriler arasında biridir. HDInsight 4.0 bir Apache Hadoop bileşenlerinin bulut dağıtımıdır. Bu makalede en güncel Azure HDInsight sürümü hakkında bilgiler verilmekte ve yükseltme yöntemleri anlatılmaktadır.
+Azure HDInsight, Azure üzerinde açık kaynaklı Apache Hadoop ve Apache Spark analizlere yönelik kurumsal müşteriler arasındaki en popüler hizmetlerden biridir. HDInsight 4,0, Apache Hadoop bileşenlerinden oluşan bir bulut dağıtımıdır. Bu makalede en güncel Azure HDInsight sürümü hakkında bilgiler verilmekte ve yükseltme yöntemleri anlatılmaktadır.
 
-## <a name="whats-new-in-hdinsight-40"></a>HDInsight 4. 0'yenilikler nelerdir?
+## <a name="whats-new-in-hdinsight-40"></a>HDInsight 4,0 ' deki yenilikler nelerdir?
 
-### <a name="apache-hive-30-and-llap"></a>3\.0 Apache Hive ve LLAP
+### <a name="apache-hive-30-and-llap"></a>Apache Hive 3,0 ve LLAP
 
-Apache Hive düşük gecikme süreli analitik işlem (LLAP) kalıcı sorgu sonuçları uzak bulut depolama alanında veriler üzerinde sorgu sunucuları ve bellek içi önbelleğe alma hızlı SQL sunmak için kullanır. Hive LLAP, Hive sorgularını parçalar halinde yürüten bir dizi kalıcı daemon'lardan faydalanır. LLAP üzerinde sorgu yürütme LLAP kullanılmayan Hive ile benzerdir ve çalışan görevleri kapsayıcıların değil LLAP daemon'larının içinde çalışır.
+Apache Hive düşük gecikme süreli analitik işleme (LLAP), uzak bulut depolamadaki verilere hızlı SQL sorgu sonuçları sunmak için kalıcı sorgu sunucuları ve bellek içi önbelleğe alma kullanır. Hive LLAP, Hive sorgularını parçalar halinde yürüten bir dizi kalıcı daemon'lardan faydalanır. LLAP üzerinde sorgu yürütme LLAP kullanılmayan Hive ile benzerdir ve çalışan görevleri kapsayıcıların değil LLAP daemon'larının içinde çalışır.
 
 Hive LLAP hizmetinin avantajları şunlardır:
 
@@ -40,7 +40,7 @@ Hive artık veri ambarlarında sorgu işleme süreçlerini hızlandırmak için 
 
 HDI 4.0, Hive ambarında bulunan işlem tabloları için bölünmezlik, tutarlılık, bağımsızlık ve kalıcılık (ACID) uyumluluğu gerektiren Apache Hive 3 bileşenine sahiptir. ACID uyumluluğuna sahip tablolar ve tablo verileri için erişim ve yönetim Hive tarafından gerçekleştirilir. Oluşturma, alma, güncelleştirme ve silme (CRUD) tablolarındaki verilerin İyileştirilmiş Satır Sütunu (ORC) dosya biçiminde olması gerekir ancak yalnızca ekleme yapılabilen tablolar tüm dosya biçimlerini destekler.
 
-* ACID v2 hem depolama biçimi hem de yürütme altyapısı alanında performans geliştirmelerine sahiptir. 
+* ACID v2 hem depolama biçimi hem de yürütme altyapısı alanında performans geliştirmelerine sahiptir.
 
 * ACID, veri güncelleştirmelerine tam destek sunmak için varsayılan olarak etkinleştirilir.
 
@@ -67,10 +67,9 @@ HDInsight 4.0'da Apache Spark şu senaryoları destekler:
 * Hive akış tablosundaki değişiklik akışında bir Spark akış işi çalıştırma.
 * Doğrudan bir Spark Yapılandırılmış Akış işinden ORC dosyası oluşturma.
 
-Artık Hive işlem tablolarına yanlışlıkla doğrudan Spark'tan erişmeye çalışma ve bunun sonucunda tutarsız sonuçlar, yinelenen veriler veya veri bozulmasıyla karşı karşıya kalma konusunda endişelenmenize gerek yok. HDInsight 4. 0'da, ayrı meta depolar tabloları Spark ve Hive tabloları tutulur. Hive Data Warehouse Connector ile Hive işlem tablolarını açıkça Spark dış tabloları olarak kaydedebilirsiniz.
+Artık Hive işlem tablolarına yanlışlıkla doğrudan Spark'tan erişmeye çalışma ve bunun sonucunda tutarsız sonuçlar, yinelenen veriler veya veri bozulmasıyla karşı karşıya kalma konusunda endişelenmenize gerek yok. HDInsight 4,0 ' de Spark tabloları ve Hive tabloları ayrı bir meta Tasteres içinde tutulur. Hive Data Warehouse Connector ile Hive işlem tablolarını açıkça Spark dış tabloları olarak kaydedebilirsiniz.
 
 [Apache Spark](https://docs.hortonworks.com/HDPDocuments/HDP3/HDP-3.0.0/spark-overview/content/analyzing_data_with_apache_spark.html) hakkında daha fazla bilgi edinin.
-
 
 ### <a name="apache-oozie"></a>Apache Oozie
 
@@ -82,18 +81,18 @@ HDI 4.0 sürümünde bulunan Apache Oozie 4.3.1'de aşağıdaki değişiklikler 
 
 [Apache Oozie](https://docs.hortonworks.com/HDPDocuments/HDP3/HDP-3.0.0/release-notes/content/patch_oozie.html) hakkında daha fazla bilgi edinin.
 
-## <a name="how-to-upgrade-to-hdinsight-40"></a>HDInsight 4. 0'ı yükseltme
+## <a name="how-to-upgrade-to-hdinsight-40"></a>HDInsight 4,0 sürümüne nasıl yükseltilir?
 
-Tüm ana sürümlerde olduğu gibi son sürümü üretim ortamına uygulamadan önce bileşenlerinizi ayrıntılı bir testten geçirmeniz önemlidir. HDInsight 4.0 yükseltme işlemini başlatmak için kullanılabilir, ancak HDInsight 3.6 yanlışlıkla götürerek önlemek için varsayılan seçenektir.
+Tüm ana sürümlerde olduğu gibi son sürümü üretim ortamına uygulamadan önce bileşenlerinizi ayrıntılı bir testten geçirmeniz önemlidir. HDInsight 4,0, yükseltme işlemini başlatmak için kullanılabilir, ancak HDInsight 3,6, yanlışlıkla mishaps engellemek için varsayılan seçenektir.
 
-HDInsight 4.0 için HDInsight'ın önceki sürümlerinden desteklenen yükseltme yolu yoktur. Meta veri deposu ve blob veri biçimleri değiştirilmiş olduğundan, HDInsight 4.0 önceki sürümleriyle uyumlu değil. Yeni HDInsight 4.0 ortamınızın geçerli üretim ortamınızdan ayrı tutmak önemlidir. Geçerli ortamınızı 4.0 HDInsight dağıtırsanız, meta veri deposu yükseltilir ve geri alınamaz.  
+HDInsight 'ın önceki sürümlerinden HDInsight 4,0 sürümüne desteklenen bir yükseltme yolu yoktur. Metassıve blob veri biçimleri değiştiğinden, HDInsight 4,0 önceki sürümlerle uyumlu değildir. Yeni HDInsight 4,0 ortamınızı geçerli üretim ortamınızdan ayrı tutmanız önemlidir. HDInsight 4,0 ' i geçerli ortamınıza dağıtırsanız, meta veri deposu yükseltilir ve geri alınamaz.  
 
 ## <a name="limitations"></a>Sınırlamalar
 
-* HDInsight 4.0, Apache Hive için MapReduce desteklemez. Apache Tez kullanın. [Apache Tez](https://tez.apache.org/) hakkında daha fazla bilgi edinin.
-* Apache Storm, HDInsight 4.0 desteklemez. 
-* Hive görünümünü HDInsight 4.0 artık kullanılamıyor. 
-* Apache Zeppelin içindeki kabuk yorumlayıcı, Spark ve Etkileşimli Sorgu kümelerinde desteklenmez.
+* HDInsight 4,0, Apache Hive için MapReduce 'yi desteklemez. Bunun yerine Apache Tez kullanın. [Apache Tez](https://tez.apache.org/) hakkında daha fazla bilgi edinin.
+* HDInsight 4,0 Apache Storm desteklemez.
+* Hive görünümü artık HDInsight 4,0 ' de kullanılamaz.
+* Apache Zeppelin içindeki kabuk yorumlayıcısı Spark ve etkileşimli sorgu kümelerinde desteklenmez.
 * Spark-LLAP kümesinde LLAP özelliğini *devre dışı* bırakamazsınız. LLAP özelliğini yalnızca kapatabilirsiniz.
 * Azure Data Lake Storage Gen2, Juypter notebook'larını Spark kümesine kaydedemez.
 

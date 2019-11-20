@@ -1,276 +1,272 @@
 ---
-title: Yapılandırma SSS - Azure uygulama hizmeti | Microsoft Docs
-description: Azure App Service'in Web Apps özelliği için yapılandırma ve yönetim sorunları hakkında sık sorulan soruların yanıtlarını alın.
+title: Yapılandırma SSS-Azure App Service | Microsoft Docs
+description: Azure App Service Web Apps özelliği için yapılandırma ve yönetim sorunları hakkında sık sorulan soruların yanıtlarını alın.
 services: app-service\web
 documentationcenter: ''
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: ''
 tags: top-support-issue
 ms.assetid: 2fa5ee6b-51a6-4237-805f-518e6c57d11b
 ms.service: app-service-web
 ms.workload: web
 ms.tgt_pltfrm: ibiza
-ms.devlang: na
 ms.topic: article
 ms.date: 10/30/2018
 ms.author: genli
-ms.openlocfilehash: 88051c45f21bdf11807ffcc63d8248cba81ae70b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 111ee6cda46677b3b0fc39f5a84268e6ac192da9
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66137065"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73470537"
 ---
-# <a name="configuration-and-management-faqs-for-web-apps-in-azure"></a>Azure'daki Web uygulamaları için yapılandırma ve yönetim hakkında SSS
+# <a name="configuration-and-management-faqs-for-web-apps-in-azure"></a>Azure 'da Web Apps için yapılandırma ve yönetim SSS
 
-Bu makale için yapılandırma ve yönetim sorunları hakkında sık sorulan sorular (SSS) yanıtlarını sahip [Azure App Service'in Web Apps özelliği](https://azure.microsoft.com/services/app-service/web/).
+Bu makalede, [Azure App Service Web Apps özelliğinin](https://azure.microsoft.com/services/app-service/web/)yapılandırma ve yönetim sorunları hakkında sık sorulan soruların (SSS) yanıtları bulunur.
 
 [!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
 
-## <a name="are-there-limitations-i-should-be-aware-of-if-i-want-to-move-app-service-resources"></a>App Service kaynaklarını taşımak isterseniz dikkat etmem sınırlaması var mı?
+## <a name="are-there-limitations-i-should-be-aware-of-if-i-want-to-move-app-service-resources"></a>App Service kaynaklarını taşımak istersem dikkat etmeniz gereken sınırlamalar var mı?
 
-App Service kaynakları yeni kaynak grubuna veya aboneliğe taşımayı planlıyorsanız, dikkat edilmesi gereken bazı sınırlamalar vardır. Daha fazla bilgi için [App Service sınırlamalarını](../azure-resource-manager/resource-group-move-resources.md#app-service-limitations).
+App Service kaynaklarını yeni bir kaynak grubuna veya aboneliğe taşımayı planlıyorsanız, bilmeniz için bazı sınırlamalar vardır. Daha fazla bilgi için bkz. [App Service sınırlamaları](../azure-resource-manager/move-limitations/app-service-move-limitations.md).
 
-## <a name="how-do-i-use-a-custom-domain-name-for-my-web-app"></a>Özel etki alanı için web uygulamamı nasıl kullanabilirim?
+## <a name="how-do-i-use-a-custom-domain-name-for-my-web-app"></a>Nasıl yaparım? Web uygulamam için özel bir etki alanı adı mı kullanıyorsunuz?
 
-Özel etki alanı adını Azure web uygulamanız ile kullanma hakkında sık sorulan soruların yanıtlarını görmek için yedi dakikalık videomuza [bir özel etki alanı adı ekleme](https://channel9.msdn.com/blogs/Azure-App-Service-Self-Help/Add-a-Custom-Domain-Name). Video, bir özel etki alanı adı ekleme hakkında kılavuz sunar. Bunun yerine kendi URL kullanmayı açıklar *. App Service web uygulamanızı azurewebsites.net URL'SİYLE. Ayrıntılı bilgileri de görebilirsiniz [özel etki alanı adı eşlemeyle ilgili bilgi](app-service-web-tutorial-custom-domain.md).
-
-
-## <a name="how-do-i-purchase-a-new-custom-domain-for-my-web-app"></a>Web uygulamamı nasıl yeni bir özel etki alanı satın?
-
-Satın alma ve App Service web uygulamanıza özel bir etki alanı ayarlama hakkında bilgi edinmek için [satın alma ve App Service'te özel etki alanı adı yapılandırma](manage-custom-dns-buy-domain.md).
+Azure Web uygulamanızla özel bir etki alanı adı kullanmayla ilgili yaygın soruların yanıtları için bkz. yedi dakikalık videomız [özel etki alanı adı ekleme](https://channel9.msdn.com/blogs/Azure-App-Service-Self-Help/Add-a-Custom-Domain-Name). Video, özel bir etki alanı adının nasıl ekleneceğini gösteren bir yol sunar. App Service Web uygulamanız ile *. azurewebsites.net URL 'SI yerine kendi URL 'nizin nasıl kullanılacağını açıklar. Ayrıca, [özel bir etki alanı adının nasıl eşlendiğini](app-service-web-tutorial-custom-domain.md)gösteren ayrıntılı bir anlatım de görebilirsiniz.
 
 
-## <a name="how-do-i-upload-and-configure-an-existing-ssl-certificate-for-my-web-app"></a>Nasıl karşıya yükleme ve web Uygulamam için mevcut bir SSL sertifikasını yapılandırma?
+## <a name="how-do-i-purchase-a-new-custom-domain-for-my-web-app"></a>Web uygulamam için yeni bir özel etki alanı satın Nasıl yaparım? mı?
 
-Karşıya yükleyin ve var olan bir özel SSL sertifika ayarlama hakkında bilgi edinmek için [mevcut bir özel SSL sertifikasını bir Azure web uygulamasına bağlama](app-service-web-tutorial-custom-ssl.md#upload).
-
-
-## <a name="how-do-i-purchase-and-configure-a-new-ssl-certificate-in-azure-for-my-web-app"></a>Nasıl satın alın ve yeni bir SSL sertifikası Azure'da web uygulamamı yapılandırma?
-
-Satın alma ve App Service web uygulamanız için SSL sertifikası ayarlama hakkında bilgi edinmek için [App Service uygulamanız için bir SSL sertifikası ekleme](web-sites-purchase-ssl-web-site.md).
+App Service Web uygulamanız için özel bir etki alanı satın alma ve ayarlama hakkında bilgi edinmek için, bkz. [App Service için özel etki alanı adı satın alma ve yapılandırma](manage-custom-dns-buy-domain.md).
 
 
-## <a name="how-do-i-move-application-insights-resources"></a>Application Insights kaynaklarını nasıl taşırım?
+## <a name="how-do-i-upload-and-configure-an-existing-ssl-certificate-for-my-web-app"></a>Web uygulamam için var olan bir SSL sertifikasını karşıya yüklemek ve yapılandırmak Nasıl yaparım? mı?
 
-Azure Application Insights, taşıma işlemi şu anda desteklemiyor. Özgün kaynak grubunuz bir Application Insights kaynağı içeriyorsa, bu kaynak taşınamıyor. Bir App Service uygulaması taşımaya çalıştığınızda Application Insights kaynak içeriyorsa, tüm işlemi başarısız taşıyın. Ancak, Application Insights ve App Service planı düzgün çalışması için aynı kaynak grubunda uygulama için uygulama olması gerekmez.
+Var olan bir özel SSL sertifikasını karşıya yükleme ve ayarlama hakkında bilgi edinmek için bkz. [App Service UYGULAMANıZA SSL sertifikası ekleme](configure-ssl-certificate.md).
 
-Daha fazla bilgi için [App Service sınırlamalarını](../azure-resource-manager/resource-group-move-resources.md#app-service-limitations).
 
-## <a name="where-can-i-find-a-guidance-checklist-and-learn-more-about-resource-move-operations"></a>Burada kılavuz denetim bulmak ve miyim öğrenin kaynak hakkında daha fazla taşıma işlemlerini?
+## <a name="how-do-i-purchase-and-configure-a-new-ssl-certificate-in-azure-for-my-web-app"></a>Nasıl yaparım? Web uygulamam için Azure 'da yeni bir SSL sertifikası satın alıp yapılandırın mi?
 
-[App Service sınırlamalarını](../azure-resource-manager/resource-group-move-resources.md#app-service-limitations) kaynakları aynı abonelikte yeni bir kaynak grubu veya yeni bir aboneliğe taşıma işlemi gösterilmektedir. Kaynak taşıma denetim listesi hakkında bilgi edinin, hangi hizmetlerin taşıma işlemi destekler ve App Service kısıtlamaları ve diğer konular hakkında daha fazla bilgi edinin.
+App Service Web uygulamanız için bir SSL sertifikası satın alma ve ayarlama hakkında bilgi edinmek için, bkz. [App Service UYGULAMANıZA SSL sertifikası ekleme](configure-ssl-certificate.md).
 
-## <a name="how-do-i-set-the-server-time-zone-for-my-web-app"></a>Sunucu saat dilimi web uygulamamı nasıl ayarlayabilirim?
 
-Web uygulamanız için sunucusunun saat dilimini ayarlamak için:
+## <a name="how-do-i-move-application-insights-resources"></a>Application Insights kaynakları Nasıl yaparım? mi?
 
-1. Azure portalında, App Service aboneliğinizdeki Git **uygulama ayarları** menüsü.
-2. Altında **uygulama ayarları**, bu ayarı ekleyin:
-    * Anahtar WEBSITE_TIME_ZONE =
+Azure Application Insights Şu anda taşıma işlemini desteklemiyor. Özgün kaynak grubunuz bir Application Insights kaynağı içeriyorsa, bu kaynağı taşıyamazsınız. Bir App Service uygulamasını taşımaya çalıştığınızda Application Insights kaynağını eklerseniz, tüm taşıma işlemi başarısız olur. Ancak, Application Insights ve App Service planının, uygulamanın düzgün çalışması için uygulamayla aynı kaynak grubunda olması gerekmez.
+
+Daha fazla bilgi için bkz. [App Service sınırlamaları](../azure-resource-manager/move-limitations/app-service-move-limitations.md).
+
+## <a name="where-can-i-find-a-guidance-checklist-and-learn-more-about-resource-move-operations"></a>Bir kılavuz denetim listesini nerede bulabilirim ve kaynak taşıma işlemleri hakkında daha fazla bilgi edinebilirsiniz?
+
+[App Service sınırlamalar](../azure-resource-manager/move-limitations/app-service-move-limitations.md) , kaynakları yeni bir aboneliğe veya aynı abonelikte yeni bir kaynak grubuna nasıl taşıyabileceğinizi gösterir. Kaynak taşıma denetim listesi hakkında bilgi alabilir, hangi hizmetlerin taşıma işlemini desteklediğini öğrenin ve App Service sınırlamalar ve diğer konular hakkında daha fazla bilgi edinebilirsiniz.
+
+## <a name="how-do-i-set-the-server-time-zone-for-my-web-app"></a>Web uygulamamın sunucu saat dilimini Nasıl yaparım? mı?
+
+Web uygulamanız için sunucu saat dilimini ayarlamak için:
+
+1. Azure portal, App Service aboneliğinizdeki **uygulama ayarları** menüsüne gidin.
+2. **Uygulama ayarları**' nın altında şu ayarı ekleyin:
+    * Anahtar = WEBSITE_TIME_ZONE
     * Değer = *istediğiniz saat dilimi*
 3. **Kaydet**’i seçin.
 
-Bkz **saat dilimi** sütununda [varsayılan saat dilimlerini](https://docs.microsoft.com/windows-hardware/manufacture/desktop/default-time-zones) makale için kabul edilen değerler.
+Windows üzerinde çalışan uygulama hizmetleri için, kabul edilen değerler için [varsayılan saat dilimleri](https://docs.microsoft.com/windows-hardware/manufacture/desktop/default-time-zones) makalesindeki **saat dilimi** sütununa bakın. Linux üzerinde çalışan uygulama hizmetleri için, [TZ veritabanı adını](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) saat dilimi değeri olarak ayarlayın. Aşağıda, TZ veritabanı adı örneği verilmiştir: Amerika/adak.
 
-## <a name="why-do-my-continuous-webjobs-sometimes-fail"></a>Neden benim sürekli WebJobs bazen hata veriyor?
+## <a name="why-do-my-continuous-webjobs-sometimes-fail"></a>Sürekli Web Işleriniz neden bazen başarısız oluyor?
 
-Belirli bir süre için boşta olmaları durumunda varsayılan olarak, web uygulamaları kaldırılır. Bu kaynak tasarrufu yapmak sistemi sağlar. Temel ve standart planlarında etkinleştirebilirsiniz **Always On** her zaman yüklü web uygulamasını tutmak ayarlama. Web uygulamanız sürekli WebJobs çalışıyorsa açmanız **Always On**, veya WebJobs güvenilir bir şekilde çalışmayabilir. Daha fazla bilgi için [sürekli olarak çalışan bir WebJob oluşturmak](webjobs-create.md#CreateContinuous).
+Varsayılan olarak, Web Apps, belirlenen süre boyunca boşta kalırsa kaldırılır. Bu, sistemin kaynakları tasarruf etmenizi sağlar. Temel ve standart planlarda, Web uygulamasının her zaman yüklenmesini sağlamak için **her zaman açık** ayarını açabilirsiniz. Web uygulamanız sürekli Web Işleri çalıştırıyorsa, **her zaman açık**' i açmanız gerekir, aksi takdirde Web işleri güvenilir bir şekilde çalışmayabilir. Daha fazla bilgi için bkz. [sürekli çalışan bir WebJob oluşturma](webjobs-create.md#CreateContinuous).
 
-## <a name="how-do-i-get-the-outbound-ip-address-for-my-web-app"></a>Giden IP adresi için web uygulamamı nasıl alabilirim?
+## <a name="how-do-i-get-the-outbound-ip-address-for-my-web-app"></a>Web uygulamamın giden IP adresini almak Nasıl yaparım? mı?
 
-Web uygulamanız için giden IP adreslerinin listesini almak için:
+Web uygulamanıza giden IP adreslerinin listesini almak için:
 
-1. Azure portalında, web uygulaması dikey penceresine gidin **özellikleri** menüsü.
-2. Arama **giden IP adresleri**.
+1. Azure portal, Web uygulaması dikey penceresinde, **Özellikler** menüsüne gidin.
+2. **Giden IP adreslerini**arayın.
 
 Giden IP adresleri listesi görüntülenir.
 
-Bir App Service ortamında Web sitenizi barındırılıyorsa giden IP adresini alma hakkında bilgi için bkz: [giden ağ adresleri](environment/app-service-app-service-environment-network-architecture-overview.md#outbound-network-addresses).
+Web siteniz bir App Service Ortamı barındırılıyorsa giden IP adresini alma hakkında bilgi edinmek için bkz. [giden ağ adresleri](environment/app-service-app-service-environment-network-architecture-overview.md#outbound-network-addresses).
 
-## <a name="how-do-i-get-a-reserved-or-dedicated-inbound-ip-address-for-my-web-app"></a>Web Uygulamam için nasıl bir ayrılmış veya özel gelen IP adresi alabilirim?
+## <a name="how-do-i-get-a-reserved-or-dedicated-inbound-ip-address-for-my-web-app"></a>Web uygulamam için ayrılmış veya özel bir gelen IP adresi mi Nasıl yaparım??
 
-Azure uygulaması Web sitesine yapılan gelen çağrılar için ayrılmış veya ayrılmış bir IP adresi ayarlamak için yükleme ve IP tabanlı SSL sertifikası yapılandırma.
+Azure uygulama Web sitenize yapılan gelen çağrılar için adanmış veya ayrılmış bir IP adresi ayarlamak için, IP tabanlı bir SSL sertifikası yükleyip yapılandırın.
 
-Gelen çağrılar için ayrılmış veya ayrılmış bir IP adresi kullanmak için App Service planınız temel veya daha yüksek hizmet planında olması gerektiğini unutmayın.
+Gelen çağrılar için adanmış veya ayrılmış bir IP adresi kullanmak için App Service planınızın temel veya daha yüksek bir hizmet planında olması gerektiğini unutmayın.
 
-## <a name="can-i-export-my-app-service-certificate-to-use-outside-azure-such-as-for-a-website-hosted-elsewhere"></a>Azure gibi başka bir yerde barındırılan bir Web sitesi için kullanılacak my App Service sertifikası dışarı aktarabilir miyim? 
+## <a name="can-i-export-my-app-service-certificate-to-use-outside-azure-such-as-for-a-website-hosted-elsewhere"></a>App Service sertifikamı, başka bir yerde barındırılan bir Web sitesi gibi Azure dışında kullanmak üzere dışarı aktarabilir miyim? 
 
-App Service sertifikaları, Azure kaynaklarını olarak kabul edilir. Azure hizmetlerinizi dışında kullanmak için amaçlanmamıştır. Azure'un dışında kullanmak için bunları dışarı aktaramazsınız. Daha fazla bilgi için [App Service sertifikaları ve özel etki alanları hakkında SSS](https://social.msdn.microsoft.com/Forums/azure/f3e6faeb-5ed4-435a-adaa-987d5db43b80/faq-on-app-service-certificates-and-custom-domains?forum=windowsazurewebsitespreview).
+Evet, bunları Azure dışında kullanmak üzere dışarı aktarabilirsiniz. Daha fazla bilgi için bkz. [App Service sertifikaları ve özel etki alanları Için SSS](https://social.msdn.microsoft.com/Forums/azure/f3e6faeb-5ed4-435a-adaa-987d5db43b80/faq-on-app-service-certificates-and-custom-domains?forum=windowsazurewebsitespreview).
 
-## <a name="can-i-export-my-app-service-certificate-to-use-with-other-azure-cloud-services"></a>Diğer Azure bulut Hizmetleri ile kullanmak için my App Service sertifikası dışarı aktarabilir miyim?
+## <a name="can-i-export-my-app-service-certificate-to-use-with-other-azure-cloud-services"></a>App Service sertifikamı diğer Azure bulut hizmetleriyle kullanmak üzere dışarı aktarabilir miyim?
 
-Portal, bir App Service sertifikasını Azure Key Vault aracılığıyla uygulama hizmeti uygulamalarına dağıtmak için birinci sınıf bir deneyim sunar. Ancak biz istekleri bu sertifikalar, App Service platformu dışında Azure sanal makineler ile kullanmak için müşterilerin alıyor olabilir. Diğer Azure kaynakları ile bir sertifika kullanabilmeniz için App Service sertifikasının yerel PFX kopyasını oluşturmayı öğrenmek için bkz: [bir App Service sertifikasının yerel PFX kopyasını oluşturma](https://blogs.msdn.microsoft.com/appserviceteam/2017/02/24/creating-a-local-pfx-copy-of-app-service-certificate/).
+Portal, App Service uygulamalara Azure Key Vault aracılığıyla bir App Service sertifikası dağıtmaya yönelik birinci sınıf bir deneyim sağlar. Ancak, bu sertifikaları Azure sanal makineler gibi App Service platformun dışında kullanmak için müşterilerden gelen istekleri alıyoruz. Sertifikayı diğer Azure kaynaklarıyla kullanabilmeniz için App Service sertifikanızın yerel bir PFX kopyasını oluşturma hakkında bilgi edinmek için, bkz. [bir App Service sertifikasının yerel PFX kopyası oluşturma](https://blogs.msdn.microsoft.com/appserviceteam/2017/02/24/creating-a-local-pfx-copy-of-app-service-certificate/).
 
-Daha fazla bilgi için [App Service sertifikaları ve özel etki alanları hakkında SSS](https://social.msdn.microsoft.com/Forums/azure/f3e6faeb-5ed4-435a-adaa-987d5db43b80/faq-on-app-service-certificates-and-custom-domains?forum=windowsazurewebsitespreview).
+Daha fazla bilgi için bkz. [App Service sertifikaları ve özel etki alanları Için SSS](https://social.msdn.microsoft.com/Forums/azure/f3e6faeb-5ed4-435a-adaa-987d5db43b80/faq-on-app-service-certificates-and-custom-domains?forum=windowsazurewebsitespreview).
 
 
-## <a name="why-do-i-see-the-message-partially-succeeded-when-i-try-to-back-up-my-web-app"></a>Web Uygulamam geri yüklemeye çalıştığımda neden "Kısmen başarılı oldu" iletisini görüyorum?
+## <a name="why-do-i-see-the-message-partially-succeeded-when-i-try-to-back-up-my-web-app"></a>Web uygulamamı yedeklemeye çalıştığımda neden "kısmen başarılı oldu" iletisini görüyorum?
 
-Yaygın bir nedeni, yedekleme hatası bazı dosyalar uygulama tarafından olmasıdır. Yedekleme gerçekleştirirken kullanımda olan dosyalar kilitli olmadığı. Bu, bu dosyalar yedeklenen engeller ve bir "Kısmen başarılı" durumu neden olabilir. Büyük olasılıkla bu yedekleme işleminden gelen dosyaları hariç tutarak oluşmasını engelleyebilir. Yalnızca gerekli öğeleri oluşturan geri seçebilirsiniz. Daha fazla bilgi için [sitenizi Azure web apps ile yalnızca önemli bölümleri yedekleme](https://zainrizvi.io/blog/creating-partial-backups-of-your-site-with-azure-web-apps/).
+Yedekleme hatasının yaygın bir nedeni, bazı dosyaların uygulama tarafından kullanımda olmasına neden olur. Yedekleme gerçekleştirirken kullanımda olan dosyalar kilitlenir. Bu, bu dosyaların yedeklenmesini ve "kısmen başarılı" durumuna neden olabileceğini önler. Dosyaları yedekleme işleminden dışlayarak bunun oluşmasını önleyebilirsiniz. Yalnızca gerekli olanları yedeklemeyi seçebilirsiniz. Daha fazla bilgi için bkz. [Azure Web Apps ile yalnızca sitenizin önemli kısımlarını yedekleme](https://zainrizvi.io/blog/creating-partial-backups-of-your-site-with-azure-web-apps/).
 
-## <a name="how-do-i-remove-a-header-from-the-http-response"></a>Gelen HTTP yanıt üstbilgi nasıl kaldırabilirim?
+## <a name="how-do-i-remove-a-header-from-the-http-response"></a>Nasıl yaparım? HTTP yanıtından bir üst bilgi kaldırılsın mı?
 
-Gelen HTTP yanıt üst bilgilerini kaldırmak için sitenizin web.config dosyasını güncelleştirin. Daha fazla bilgi için [kaldırın, Azure Web siteleri standart sunucu üstbilgilerinde](https://azure.microsoft.com/blog/removing-standard-server-headers-on-windows-azure-web-sites/).
+HTTP yanıtından üstbilgileri kaldırmak için sitenizin Web. config dosyasını güncelleştirin. Daha fazla bilgi için bkz. [Azure Web sitelerindeki standart sunucu üstbilgilerini kaldırma](https://azure.microsoft.com/blog/removing-standard-server-headers-on-windows-azure-web-sites/).
 
-## <a name="is-app-service-compliant-with-pci-standard-30-and-31"></a>App Service PCI standart 3.0 ve 3.1 ile uyumlu mu?
+## <a name="is-app-service-compliant-with-pci-standard-30-and-31"></a>App Service, PCI standardı 3,0 ve 3,1 ile uyumludur mi?
 
-Şu anda, Azure App Service'in Web Apps özelliği uyduğunuzu PCI veri güvenliği standardı (DSS) sürüm 3.0 düzey 1 ' dir. PCI DSS 3.1 sürümünü yol haritamızda ' dir. Planlama zaten devam ettiği en son standart benimseme nasıl devam için var.
+Şu anda Azure App Service Web Apps özelliği, PCI veri güvenliği standardı (DSS) sürüm 3,0 düzey 1 ile uyumlu. PCI DSS sürüm 3,1, yol haritamız üzerinde. En son standardın nasıl kullanılacağına ilişkin planlama zaten devam edecektir.
 
-Aktarım Katmanı Güvenliği (TLS) 1.0 devre dışı bırakma, PCI DSS 3.1 sürümünü gerektirir. Şu anda, TLS 1.0 devre dışı bırakma çoğu App Service planları için bir seçenek değildir. Ancak, App Service Ortamı'nı kullanın ya da iş yükünüz için App Service ortamı geçirmek istiyorsanız, ortamınızın daha fazla denetim elde edebilirsiniz. Bu, Azure Destek birimine başvurarak TLS 1.0 devre dışı bırakma içerir. Yakın gelecekte, bu ayarlar kullanıcılar tarafından erişilebilir kılın planlıyoruz.
+PCI DSS sürüm 3,1 sertifikası, Aktarım Katmanı Güvenliği 'nin (TLS) 1,0 devre dışı bırakılmasını gerektirir. Şu anda, TLS 1,0 devre dışı bırakılması çoğu App Service planı için bir seçenek değildir. Ancak App Service Ortamı kullanıyorsanız veya iş yükünüzü App Service Ortamı geçirmek istiyorsanız ortamınızda daha fazla denetim sağlayabilirsiniz. Bu, Azure desteği ile iletişim kurarak TLS 1,0 devre dışı bırakılmasını içerir. Yakın gelecekte bu ayarları kullanıcılar için erişilebilir hale getirmek için planlıyoruz.
 
-Daha fazla bilgi için [PCI standart 3.0 ve 3.1 Microsoft Azure App Service web app uyumluluğa](https://support.microsoft.com/help/3124528).
+Daha fazla bilgi için bkz. [PCI Standard 3,0 ve 3,1 ile Microsoft Azure App Service Web uygulaması uyumluluğu](https://support.microsoft.com/help/3124528).
 
-## <a name="how-do-i-use-the-staging-environment-and-deployment-slots"></a>Hazırlama ortamını ve dağıtım yuvaları nasıl kullanabilirim?
+## <a name="how-do-i-use-the-staging-environment-and-deployment-slots"></a>Hazırlama ortamı ve dağıtım yuvaları Nasıl yaparım? mı kullanıyorsunuz?
 
-Web uygulamanızı App Service'e dağıttığınızda standart ve Premium App Service planlarında yerine ayrı bir dağıtım yuvası varsayılan üretim yuvasına dağıtım yapabilirsiniz. Dağıtım yuvaları kendi ana bilgisayar adları olan canlı web uygulamalardır. Web app içerik ve yapılandırma öğeleri, üretim yuvası dahil iki dağıtım yuvası arasında değişiklik yapılabilir.
+Standart ve Premium App Service planlarında, Web uygulamanızı App Service dağıtırken, varsayılan üretim yuvası yerine ayrı bir dağıtım yuvasına dağıtım yapabilirsiniz. Dağıtım yuvaları, kendi ana bilgisayar adlarına sahip Canlı Web uygulamalardır. Web uygulaması içeriği ve yapılandırma öğeleri, üretim yuvası dahil olmak üzere iki dağıtım yuvası arasında değiştirilebilir.
 
-Dağıtım yuvaları kullanma hakkında daha fazla bilgi için bkz. [App Service'te hazırlık ortamı ayarlama](deploy-staging-slots.md).
+Dağıtım yuvalarını kullanma hakkında daha fazla bilgi için bkz. [App Service hazırlama ortamı ayarlama](deploy-staging-slots.md).
 
-## <a name="how-do-i-access-and-review-webjob-logs"></a>Nasıl erişim ve WebJob günlükleri gözden?
+## <a name="how-do-i-access-and-review-webjob-logs"></a>Nasıl yaparım? Access ve WebJob günlüklerine bakın
 
-WebJob günlükleri gözden geçirmek için:
+WebJob günlüklerini gözden geçirmek için:
 
-1. Oturum açın, [Kudu Web sitesi](https://*yourwebsitename*.scm.azurewebsites.net).
-2. Webjob'ı seçin.
-3. Seçin **çıkışı Aç/Kapat** düğmesi.
-4. Çıktı dosyasını indirmek için seçin **indirme** bağlantı.
-5. Tek tek çalıştırmaları için seçin **tek çağırma**.
-6. Seçin **çıkışı Aç/Kapat** düğmesi.
-7. İndirme bağlantısı seçin.
+1. [Kudu Web sitenizde](https://*yourwebsitename*.scm.azurewebsites.net)oturum açın.
+2. WebJob 'u seçin.
+3. **Çıkışı geç** düğmesini seçin.
+4. Çıkış dosyasını indirmek için **indirme** bağlantısını seçin.
+5. Bireysel çalıştırmalar için **tek tek Invoke**' ı seçin.
+6. **Çıkışı geç** düğmesini seçin.
+7. İndirme bağlantısını seçin.
 
-## <a name="im-trying-to-use-hybrid-connections-with-sql-server-why-do-i-see-the-message-systemoverflowexception-arithmetic-operation-resulted-in-an-overflow"></a>SQL Server ile karma bağlantılar kullanabilmesi hale getirmeye çalışıyorum. İletiyi neden görüyorum "System.OverflowException: Aritmetik işlem taşma ile sonuçlandı"?
+## <a name="im-trying-to-use-hybrid-connections-with-sql-server-why-do-i-see-the-message-systemoverflowexception-arithmetic-operation-resulted-in-an-overflow"></a>SQL Server Karma Bağlantılar kullanmaya çalışıyorum. "System. OverflowException: aritmetik işlemi bir taşma ile sonuçlandı" iletisini neden görüyorum?
 
-SQL Server'a erişmek için karma bağlantılar'ı kullanırsanız, bir Microsoft .NET güncelleştirme 10 Mayıs 2016, bağlantıların başarısız olmasına neden. Bu iletiyi görebilirsiniz:
+SQL Server erişmek için Karma Bağlantılar kullanırsanız, 10 Mayıs 2016 ' de bir Microsoft .NET güncelleştirme, bağlantıların başarısız olmasına neden olabilir. Şu iletiyi görebilirsiniz:
 
 ```
 Exception: System.Data.Entity.Core.EntityException: The underlying provider failed on Open. —> System.OverflowException: Arithmetic operation resulted in an overflow. or (64 bit Web app) System.OverflowException: Array dimensions exceeded supported range, at System.Data.SqlClient.TdsParser.ConsumePreLoginHandshake
 ```
 
-### <a name="resolution"></a>Çözüm
+### <a name="resolution"></a>Çözünürlük
 
-Özel durum, karma bağlantı beri düzeltildiğini Yöneticisi ile bir sorun nedeniyle oluştu. Mutlaka [karma bağlantı yöneticinizi güncelleştirin](https://go.microsoft.com/fwlink/?LinkID=841308) bu sorunu çözmek için.
+Bu durum, bu yana Karma Bağlantı Yöneticisi düzeltilen bir sorun nedeniyle oluştu. Bu sorunu çözmek için [karma bağlantı Yöneticisi güncelleştirdiğinizden](https://go.microsoft.com/fwlink/?LinkID=841308) emin olun.
 
-## <a name="how-do-i-add-or-edit-a-url-rewrite-rule"></a>Nasıl eklerim veya bir URL yeniden yazma kuralı Düzenle?
+## <a name="how-do-i-add-a-url-rewrite-rule"></a>Nasıl yaparım? URL yeniden yazma kuralı eklensin mi?
 
-URL yeniden yazma kuralı ekleme veya düzenleme için:
+URL yeniden yazma kuralı eklemek için, **Wwwroot** klasöründe ilgili yapılandırma girişleriyle bir Web. config dosyası oluşturun. Daha fazla bilgi için bkz. [Azure Uygulama Hizmetleri: URL yeniden yazmayı anlama](https://blogs.msdn.microsoft.com/madhurabharadwaj/2018/06/01/azure-app-services-understanding-url-re-write/).
 
-1. App Service web uygulamanıza bağlanır, böylece Internet Information Services (IIS) Yöneticisi'ni ayarlayın. App Service için IIS Yöneticisi'ni bağlanma hakkında bilgi almak için bkz: [IIS Yöneticisi'ni kullanarak Azure Web Siteleri'nde uzaktan yönetimi](https://azure.microsoft.com/blog/remote-administration-of-windows-azure-websites-using-iis-manager/).
-2. IIS Yöneticisi'nde, eklemek veya bir URL yeniden yazma kuralı düzenleyin. URL yeniden yazma kuralı ekleme veya düzenleme konusunda bilgi almak için bkz: [URL yeniden yazma kuralları oluşturma, yeniden yazma Modülü](https://www.iis.net/learn/extensions/url-rewrite-module/creating-rewrite-rules-for-the-url-rewrite-module).
+## <a name="how-do-i-control-inbound-traffic-to-app-service"></a>App Service gelen trafiği denetlemek Nasıl yaparım??
 
-## <a name="how-do-i-control-inbound-traffic-to-app-service"></a>App Service için gelen trafiği nasıl kontrol edebilirim?
+Site düzeyinde, App Service gelen trafiği denetlemeye yönelik iki seçeneğiniz vardır:
 
-Site düzeyinde App Service için gelen trafiği denetlemek için iki seçeneğiniz vardır:
+* Dinamik IP kısıtlamalarını açın. Dinamik IP kısıtlamalarını nasıl kullanacağınızı öğrenmek için bkz. [Azure Web siteleri Için IP ve etki alanı kısıtlamaları](https://azure.microsoft.com/blog/ip-and-domain-restrictions-for-windows-azure-web-sites/).
+* Modül güvenliğini açın. Modül güvenliğini açma hakkında bilgi edinmek için bkz. [Azure Web siteleri 'Nde ModSecurity Web uygulaması güvenlik duvarı](https://azure.microsoft.com/blog/modsecurity-for-azure-websites/).
 
-* Dinamik IP kısıtlamaları etkinleştirin. Dinamik IP kısıtlamaları devre dışı bırakma bilgi edinmek için [Azure Web siteleri için IP ve etki alanı kısıtlamaları](https://azure.microsoft.com/blog/ip-and-domain-restrictions-for-windows-azure-web-sites/).
-* Modül güvenliği'ni açın. Modül güvenliği öğrenmek için bkz. [ModSecurity web uygulaması güvenlik duvarı Azure Web Siteleri'nde](https://azure.microsoft.com/blog/modsecurity-for-azure-websites/).
+App Service Ortamı kullanıyorsanız [Barbcuda güvenlik duvarını](https://azure.microsoft.com/blog/configuring-barracuda-web-application-firewall-for-azure-app-service-environment/)kullanabilirsiniz.
 
-App Service ortamı kullanıyorsanız, kullanabileceğiniz [Barracuda Güvenlik Duvarı](https://azure.microsoft.com/blog/configuring-barracuda-web-application-firewall-for-azure-app-service-environment/).
+## <a name="how-do-i-block-ports-in-an-app-service-web-app"></a>App Service bir Web uygulamasındaki bağlantı noktaları Nasıl yaparım? engellensin mi?
 
-## <a name="how-do-i-block-ports-in-an-app-service-web-app"></a>Bir App Service web uygulamasında bağlantı noktalarını nasıl engelleyebilir?
+App Service paylaşılan kiracı ortamında, altyapının doğası nedeniyle belirli bağlantı noktalarını engellemek mümkün değildir. 4020, 4022 ve 4024 TCP bağlantı noktaları, Visual Studio uzaktan hata ayıklama için de açık olabilir.
 
-Paylaşılan çok kiracılı App Service Ortamı'nda altyapısının yapısı nedeniyle belirli bağlantı noktalarını engellemek mümkün değildir. 4016 4018 ve 4020 TCP bağlantı noktaları ayrıca Visual Studio uzaktan hata ayıklama için açık olabilir.
+App Service Ortamı, gelen ve giden trafik üzerinde tam denetime sahip olursunuz. Belirli bağlantı noktalarını kısıtlamak veya engellemek için ağ güvenlik gruplarını kullanabilirsiniz. App Service Ortamı hakkında daha fazla bilgi için bkz. [App Service ortamı tanıtımı](https://azure.microsoft.com/blog/introducing-app-service-environment/).
 
-App Service Ortamı'nda, gelen ve giden trafiği üzerinde tam denetime sahiptir. Erişimi kısıtlamak veya belirli bağlantı noktalarını engellemek için ağ güvenlik grupları'nı kullanabilirsiniz. App Service ortamı hakkında daha fazla bilgi için bkz: [App Service ortamı ile tanışın](https://azure.microsoft.com/blog/introducing-app-service-environment/).
+## <a name="how-do-i-capture-an-f12-trace"></a>Nasıl yaparım? bir F12 izlemesi mi yakala?
 
-## <a name="how-do-i-capture-an-f12-trace"></a>F12 izleme nasıl yakalama?
+Bir F12 izlemeyi yakalamak için iki seçeneğiniz vardır:
 
-F12 izleme dosyası yakalama işleminde için iki seçeneğiniz vardır:
+* F12 HTTP izlemesi
+* F12 konsol çıkışı
 
-* F12 HTTP izleme
-* F12 konsol çıktısı
+### <a name="f12-http-trace"></a>F12 HTTP izlemesi
 
-### <a name="f12-http-trace"></a>F12 HTTP izleme
-
-1. Internet Explorer'da, Web sitenize gidin. Sonraki adımları uygulamadan önce oturum açmanız önemlidir. Aksi takdirde, F12 izleme oturum hassas verileri yakalar.
+1. Internet Explorer 'da Web sitenize gidin. Sonraki adımları gerçekleştirmeden önce oturum açmanız önemlidir. Aksi halde, F12 izlemesi hassas oturum açma verilerini yakalar.
 2. F12 tuşuna basın.
-3. Doğrulayın **ağ** sekmesi seçili olduğundan ve yeşil seçip **Play** düğmesi.
-4. Sorunu yeniden oluşturma adımları uygulayın.
-5. Kırmızı seçin **Durdur** düğmesi.
-6. Seçin **Kaydet** düğmesine (disk simgesi) ve (Internet Explorer ve Microsoft Edge) HAR dosyasını kaydedin *veya* HAR dosyasını sağ tıklayın ve ardından **içerikleHARolarakKaydet**(chrome'da).
+3. **Ağ** sekmesinin seçili olduğunu doğrulayın ve ardından yeşil **yürütme** düğmesini seçin.
+4. Sorunu yeniden oluşturmak için gereken adımları uygulayın.
+5. Kırmızı **Durdur** düğmesini seçin.
+6. **Kaydet** düğmesini (disk simgesi) SEÇIN ve har dosyasını (Internet Explorer ve Microsoft Edge 'de) KAYDEDIN *veya* har dosyasına sağ tıklayın ve ardından **içeriğe sahip har olarak kaydet** (Chrome 'da) seçeneğini belirleyin.
 
-### <a name="f12-console-output"></a>F12 konsol çıktısı
+### <a name="f12-console-output"></a>F12 konsol çıkışı
 
-1. Seçin **konsol** sekmesi.
-2. Sıfırdan fazla öğeleri içeren her sekme için sekmeyi seçin (**hata**, **uyarı**, veya **bilgi**). Sekmesi seçili değilse, imleç aldığı tab simgesi gri siyah olduğunda.
-3. Bölmenin ileti alanına sağ tıklayın ve ardından **Tümünü Kopyala**.
-4. Bir dosyada kopyalanan metni yapıştırın ve dosyayı kaydedin.
+1. **Konsol** sekmesini seçin.
+2. Sıfırdan fazla öğe içeren her sekme için sekmeyi (**hata**, **Uyarı**veya **bilgi**) seçin. Sekme seçili değilse, imleci konumundan uzağa taşıdığınızda sekme simgesi gri veya siyah olur.
+3. Bölmenin ileti alanına sağ tıklayın ve ardından **Tümünü Kopyala**' yı seçin.
+4. Kopyalanmış metni bir dosyaya yapıştırın ve dosyayı kaydedin.
 
-Bir HAR dosyasını görüntülemek için kullanabileceğiniz [HAR Görüntüleyicisi](https://www.softwareishard.com/har/viewer/).
+Bir HAR dosyasını görüntülemek için, [har görüntüleyicisini](https://www.softwareishard.com/har/viewer/)kullanabilirsiniz.
 
-## <a name="why-do-i-get-an-error-when-i-try-to-connect-an-app-service-web-app-to-a-virtual-network-that-is-connected-to-expressroute"></a>Bir App Service bağlanmaya çalışırken neden bir hata Expressroute'a bağlı bir sanal ağ web uygulamasına alırım?
+## <a name="why-do-i-get-an-error-when-i-try-to-connect-an-app-service-web-app-to-a-virtual-network-that-is-connected-to-expressroute"></a>App Service Web uygulamasını ExpressRoute 'a bağlı bir sanal ağa bağlamayı denediğimde neden hata alıyorum?
 
-Bir Azure web uygulaması için Azure ExpressRoute bağlı olduğu bir sanal ağa bağlanmaya çalışırsanız, başarısız olur. Aşağıdaki ileti görünür: "Ağ geçidi bir VPN ağ geçidi değil."
+Bir Azure Web uygulamasını Azure ExpressRoute 'a bağlı bir sanal ağa bağlamayı denerseniz, başarısız olur. Şu ileti görüntülenir: "ağ geçidi bir VPN ağ geçidi değil."
 
-Expressroute'a bağlanan bir sanal ağa noktadan siteye VPN bağlantıları şu anda sahip olamaz. Bir noktadan siteye VPN ve ExpressRoute aynı sanal ağ için bir arada bulunamaz. Daha fazla bilgi için [ExpressRoute ve siteden siteye VPN bağlantıları sınırlar ve sınırlamalar](../expressroute/expressroute-howto-coexist-classic.md#limits-and-limitations).
+Şu anda ExpressRoute 'a bağlı bir sanal ağa Noktadan siteye VPN bağlantılarına sahip olabilirsiniz. Aynı sanal ağ için Noktadan siteye VPN ve ExpressRoute birlikte bulunamaz. Daha fazla bilgi için bkz. [ExpressRoute ve siteden sıteye VPN bağlantıları sınırları ve sınırlamaları](../expressroute/expressroute-howto-coexist-classic.md#limits-and-limitations).
 
-## <a name="how-do-i-connect-an-app-service-web-app-to-a-virtual-network-that-has-a-static-routing-policy-based-gateway"></a>Bir App Service web uygulaması statik yönlendirme (ilke tabanlı) ağ geçidi olan bir sanal ağa nasıl bağlanabilirim?
+## <a name="how-do-i-connect-an-app-service-web-app-to-a-virtual-network-that-has-a-static-routing-policy-based-gateway"></a>App Service bir Web uygulamasını statik yönlendirme (ilke tabanlı) ağ geçidine sahip bir sanal ağa bağlama Nasıl yaparım?.
 
-Şu anda, App Service web uygulaması statik yönlendirme (ilke tabanlı) ağ geçidi olan bir sanal ağa bağlanması desteklenmiyor. Hedef sanal ağınız zaten varsa, noktadan siteye VPN, dinamik yönlendirme ağ geçidi ile bir uygulamaya bağlı önce etkinleştirilmiş olması gerekir. Statik yönlendirme ağ geçidi olarak ayarlanırsa, noktadan siteye VPN etkinleştiremezsiniz. 
+Şu anda, bir App Service Web uygulamasını statik yönlendirme (ilke tabanlı) ağ geçidi olan bir sanal ağa bağlama desteklenmez. Hedef sanal ağınız zaten varsa, bir uygulamaya bağlanmadan önce, dinamik yönlendirme ağ geçidi ile noktadan siteye VPN 'nin etkin olması gerekir. Ağ geçidinizin statik yönlendirme olarak ayarlandıysa, Noktadan siteye VPN 'yi etkinleştiremezsiniz. 
 
-Daha fazla bilgi için [bir Azure sanal ağı ile bir uygulamayı tümleştirin](web-sites-integrate-with-vnet.md#getting-started).
+Daha fazla bilgi için bkz. bir [uygulamayı Azure sanal ağı Ile tümleştirme](web-sites-integrate-with-vnet.md#getting-started).
 
-## <a name="in-my-app-service-environment-why-can-i-create-only-one-app-service-plan-even-though-i-have-two-workers-available"></a>Ben iki çalışan kullanılabilir olsa bile my App Service Ortamı'nda neden yalnızca bir App Service planı oluşturabilir miyim?
+## <a name="in-my-app-service-environment-why-can-i-create-only-one-app-service-plan-even-though-i-have-two-workers-available"></a>App Service Ortamı, iki çalışanımız olmasına rağmen neden yalnızca bir App Service planı oluşturabilirim?
 
-Hataya dayanıklılık sağlamak için App Service ortamı, her çalışan havuzu en az bir ek işlem kaynağı gereken gerektirir. Ek bilgi işlem iş yükü atanamaz.
+App Service Ortamı, hata toleransı sağlamak için her çalışan havuzunun en az bir ek işlem kaynağına ihtiyacı olmasını gerektirir. Ek işlem kaynağına bir iş yükü atanamaz.
 
-Daha fazla bilgi için [bir App Service ortamı oluşturma](environment/app-service-web-how-to-create-an-app-service-environment.md).
+Daha fazla bilgi için bkz. [App Service ortamı oluşturma](environment/app-service-web-how-to-create-an-app-service-environment.md).
 
-## <a name="why-do-i-see-timeouts-when-i-try-to-create-an-app-service-environment"></a>Bir App Service ortamı oluşturma çalıştığınızda zaman aşımları neden görüyorum?
+## <a name="why-do-i-see-timeouts-when-i-try-to-create-an-app-service-environment"></a>App Service Ortamı oluşturmaya çalıştığımda neden zaman aşımları görüyorum?
 
-Bazı durumlarda bir App Service ortamı oluşturma başarısız olur. Bu durumda, etkinlik günlükleri aşağıdaki hatayı görürsünüz:
+Bazen App Service Ortamı oluşturma işlemi başarısız olur. Bu durumda, etkinlik günlüklerinde aşağıdaki hatayı görürsünüz:
 ```
 ResourceID: /subscriptions/{SubscriptionID}/resourceGroups/Default-Networking/providers/Microsoft.Web/hostingEnvironments/{ASEname}
 Error:{"error":{"code":"ResourceDeploymentFailure","message":"The resource provision operation did not complete within the allowed timeout period.”}}
 ```
 
-Bu sorunu çözmek için aşağıdaki koşulların hiçbiri doğru olduğundan emin olun:
-* Alt ağ çok küçükse.
+Bu sorunu çözmek için aşağıdaki koşullardan hiçbirinin doğru olmadığından emin olun:
+* Alt ağ çok küçük.
 * Alt ağ boş değil.
-* ExpressRoute, App Service ortamı ağ bağlantısı gereksinimlerine engeller.
-* Hatalı ağ güvenlik grubu, App Service ortamı ağ bağlantısı gereksinimlerine engeller.
-* Zorlamalı tünel açıktır.
+* ExpressRoute bir App Service Ortamı ağ bağlantısı gereksinimlerini engeller.
+* Hatalı bir ağ güvenlik grubu, bir App Service Ortamı ağ bağlantısı gereksinimlerini engeller.
+* Zorlamalı tünel açık.
 
-Daha fazla bilgi için [sık karşılaşılan sorunlar (oluşturma) dağıtırken yeni bir Azure App Service ortamı](https://blogs.msdn.microsoft.com/waws/2016/05/13/most-frequent-issues-when-deploying-creating-a-new-azure-app-service-environment-ase/).
+Daha fazla bilgi için bkz. [Yeni bir Azure App Service ortamı dağıtma (oluşturma) hakkında sık karşılaşılan sorunlar](https://blogs.msdn.microsoft.com/waws/2016/05/13/most-frequent-issues-when-deploying-creating-a-new-azure-app-service-environment-ase/).
 
-## <a name="why-cant-i-delete-my-app-service-plan"></a>App Service planımı neden silemiyorum?
+## <a name="why-cant-i-delete-my-app-service-plan"></a>App Service planımı Neden silemiyorum?
 
-Herhangi bir App Service uygulamaları App Service planı ile ilişkili olan bir App Service planı silemezsiniz. Bir App Service planı silmeden önce ilişkili tüm App Service uygulamaları App Service planından kaldırın.
+App Service planıyla ilişkili App Service uygulamalar varsa App Service planı silemezsiniz. Bir App Service planını silmeden önce, tüm ilişkili App Service uygulamalarını App Service planından kaldırın.
 
-## <a name="how-do-i-schedule-a-webjob"></a>Nasıl bir Web işi zamanlama?
+## <a name="how-do-i-schedule-a-webjob"></a>WebJob Nasıl yaparım? zamanlamak istiyor musunuz?
 
-Zamanlanan Webjob'lar Cron ifadeleri kullanarak oluşturabilirsiniz:
+Cron ifadelerini kullanarak zamanlanmış bir WebJob oluşturabilirsiniz:
 
-1. Bir settings.job dosyası oluşturun.
-2. Bu JSON dosyasında bir Cron ifadesi kullanarak bir zamanlama özellik içerir: 
+1. Bir Settings. job dosyası oluşturun.
+2. Bu JSON dosyasında bir cron ifadesi kullanarak bir zamanlama özelliği ekleyin: 
     ```json
     { "schedule": "{second}
     {minute} {hour} {day}
     {month} {day of the week}" }
     ```
 
-Zamanlanan Webjob'lar hakkında daha fazla bilgi için bkz: [bir Cron ifadesi kullanarak bir zamanlanmış Web işi oluşturma](webjobs-create.md#CreateScheduledCRON).
+Zamanlanmış Web Işleri hakkında daha fazla bilgi için bkz. [cron ifadesi kullanarak zamanlanmış WebJob oluşturma](webjobs-create.md#CreateScheduledCRON).
 
-## <a name="how-do-i-perform-penetration-testing-for-my-app-service-app"></a>App Service Uygulamam için sızma nasıl yaparım?
+## <a name="how-do-i-perform-penetration-testing-for-my-app-service-app"></a>App Service uygulamam için Nasıl yaparım? sızma testi gerçekleştir mi?
 
-Sızma testi, gerçekleştirilecek [talebinizi](https://portal.msrc.microsoft.com/en-us/engage/pentest).
+Sızma testi gerçekleştirmek için [bir istek gönderebilirsiniz](https://portal.msrc.microsoft.com/engage/pentest).
 
-## <a name="how-do-i-configure-a-custom-domain-name-for-an-app-service-web-app-that-uses-traffic-manager"></a>Özel etki alanı adını Traffic Manager'ı kullanan bir App Service web uygulaması için nasıl yapılandırabilirim?
+## <a name="how-do-i-configure-a-custom-domain-name-for-an-app-service-web-app-that-uses-traffic-manager"></a>Traffic Manager kullanan bir App Service Web uygulaması için özel etki alanı adı Nasıl yaparım? yapılandırmak.
 
-Azure Traffic Manager Yük Dengeleme için kullandığı bir App Service uygulaması ile bir özel etki alanı adını kullanmayı öğrenmek için bkz: [Traffic Manager ile bir Azure web uygulaması için bir özel etki alanı adı yapılandırma](web-sites-traffic-manager-custom-domain-name.md).
+Yük Dengeleme için Azure Traffic Manager kullanan App Service bir uygulamayla özel bir etki alanı adı kullanmayı öğrenmek için bkz. [Traffic Manager ile bir Azure Web uygulaması için özel etki alanı adı yapılandırma](web-sites-traffic-manager-custom-domain-name.md).
 
-## <a name="my-app-service-certificate-is-flagged-for-fraud-how-do-i-resolve-this"></a>My App Service sertifikası dolandırıcılık için işaretlenir. Bu nasıl giderebilirim?
+## <a name="my-app-service-certificate-is-flagged-for-fraud-how-do-i-resolve-this"></a>App Service sertifikam sahtekarlık için işaretlendi. Nasıl yaparım? bunu çözmek mi istiyorsunuz?
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Bir App Service sertifikası satın alma sırasında etki alanı doğrulaması, şu iletiyi görebilirsiniz:
+Bir App Service sertifikası satın alma sırasında etki alanı doğrulaması sırasında aşağıdaki iletiyi görebilirsiniz:
 
-"Sertifikanız olası dolandırıcılık için işaretlendi. İstek şu anda incelenmektedir. Sertifika 24 saat içinde kullanılabilir hale gelmezse, lütfen Azure desteğine başvurun."
+"Sertifikanız olası sahtekarlık için işaretlendi. İstek şu anda gözden geçirme aşamasındadır. Sertifika 24 saat içinde kullanılabilir duruma gelmezse lütfen Azure desteğine başvurun. "
 
-Mesajın gösterdiği gibi bu sahtekarlık doğrulama işleminin tamamlanması 24 saat sürebilir. Bu süre boyunca, iletiyi görmeye devam.
+İletinin gösterdiği gibi, bu sahtekarlık doğrulama işleminin tamamlanması 24 saate kadar sürebilir. Bu süre boyunca iletiyi görmeye devam edersiniz.
 
-App Service sertifikanızı 24 saat sonra bu mesajını göstermeye devam ederse, lütfen aşağıdaki PowerShell betiğini çalıştırın. Betik kişiler [sertifika sağlayıcısı](https://www.godaddy.com/) doğrudan bu sorunu çözmek için.
+App Service sertifikanız bu iletiyi 24 saat sonra göstermeye devam ederse, lütfen aşağıdaki PowerShell betiğini çalıştırın. Betik, sorunu çözmek için doğrudan [sertifika sağlayıcısıyla](https://www.godaddy.com/) iletişim kurar.
 
 ```powershell
 Connect-AzAccount
@@ -281,38 +277,38 @@ $actionProperties = @{
 Invoke-AzResourceAction -ResourceGroupName "<App Service Certificate Resource Group Name>" -ResourceType Microsoft.CertificateRegistration/certificateOrders -ResourceName "<App Service Certificate Resource Name>" -Action resendRequestEmails -Parameters $actionProperties -ApiVersion 2015-08-01 -Force   
 ```
 
-## <a name="how-do-authentication-and-authorization-work-in-app-service"></a>Nasıl kimlik doğrulaması ve yetkilendirme App Service'te çalışır?
+## <a name="how-do-authentication-and-authorization-work-in-app-service"></a>App Service kimlik doğrulaması ve yetkilendirme nasıl çalışır?
 
-Docs sağlayıcısı oturum açma işlemleri tanımlamak için çeşitli kimlik doğrulama ve yetkilendirme App Service için ayrıntılı belgelere bakın:
+App Service kimlik doğrulaması ve yetkilendirmeyle ilgili ayrıntılı belgeler için bkz. çeşitli sağlayıcı oturum açma işlemleri için docs:
 * [Azure Active Directory](configure-authentication-provider-aad.md)
 * [Facebook](configure-authentication-provider-facebook.md)
 * [Google](configure-authentication-provider-google.md)
 * [Microsoft Hesabı](configure-authentication-provider-microsoft.md)
 * [Twitter](configure-authentication-provider-twitter.md)
 
-## <a name="how-do-i-redirect-the-default-azurewebsitesnet-domain-to-my-azure-web-apps-custom-domain"></a>Ne miyim yeniden yönlendirme varsayılan *. azurewebsites.net etki alanında my Azure web uygulamanızın özel etki alanı için mi?
+## <a name="how-do-i-redirect-the-default-azurewebsitesnet-domain-to-my-azure-web-apps-custom-domain"></a>Nasıl yaparım? varsayılan *. azurewebsites.net etki alanını Azure Web uygulamamın özel etki alanına yeniden yönlendir mi?
 
-Azure, varsayılan Web Apps kullanarak yeni bir Web sitesi oluşturduğunuzda *sitename*. azurewebsites.net etki alanında, sitenize atanır. Bir özel konak adı sitenize ekleyin ve varsayılan erişebilmesi için kullanıcıların istemediğiniz *. azurewebsites.net etki alanında, varsayılan URL yeniden yönlendirebilirsiniz. Özel etki alanınızda Web sitesinin varsayılan etki alanından tüm trafik yönlendirme hakkında bilgi edinmek için [varsayılan etki alanı, Azure web apps'te özel etki alanınızı yeniden yönlendirme](https://zainrizvi.io/blog/block-default-azure-websites-domain/).
+Azure 'da Web Apps kullanarak yeni bir Web sitesi oluşturduğunuzda, sitenize varsayılan bir *SiteName*. azurewebsites.net etki alanı atanır. Sitenize özel bir ana bilgisayar adı ekler ve kullanıcıların varsayılan *. azurewebsites.net etki alanına erişmesini istemiyorsanız varsayılan URL 'YI yeniden yönlendirebilirsiniz. Web sitenizin varsayılan etki alanındaki tüm trafiği özel etki alanına yeniden yönlendirmeyi öğrenmek için bkz. [varsayılan etki alanını Azure Web Apps 'te özel etki alanına yönlendirme](https://zainrizvi.io/blog/block-default-azure-websites-domain/).
 
-## <a name="how-do-i-determine-which-version-of-net-version-is-installed-in-app-service"></a>Hangi sürümün nasıl belirleyebilirim .NET App Service'te sürümü yüklenir?
+## <a name="how-do-i-determine-which-version-of-net-version-is-installed-in-app-service"></a>App Service hangi .NET sürümü sürümünün yüklendiğini Nasıl yaparım?.
 
-Microsoft .NET, App Service'te yüklü sürümü bulmak için en hızlı yolu, Kudu konsolunu kullanmaktır. Kudu konsolunu portalından veya App Service uygulamanızın URL'sini kullanarak erişebilirsiniz. Ayrıntılı yönergeler için bkz. [yüklü olan .NET sürümünü App Service'te](https://blogs.msdn.microsoft.com/waws/2016/11/02/how-to-determine-the-installed-net-version-in-azure-app-services/).
+App Service yüklenen Microsoft .NET sürümünü bulmanın en hızlı yolu, kudu konsolunu kullanmaktır. Kudu konsoluna portaldan veya App Service uygulamanızın URL 'sini kullanarak erişebilirsiniz. Ayrıntılı yönergeler için bkz. [App Service yüklü .NET sürümünü belirleme](https://blogs.msdn.microsoft.com/waws/2016/11/02/how-to-determine-the-installed-net-version-in-azure-app-services/).
 
-## <a name="why-isnt-autoscale-working-as-expected"></a>Neden otomatik ölçeklendirme beklendiği gibi çalışmıyor?
+## <a name="why-isnt-autoscale-working-as-expected"></a>Otomatik ölçeklendirme beklenen şekilde çalışmıyor mu?
 
-Azure otomatik ölçeklendirme edilmemiş veya ölçeği, beklendiği gibi web app örneğini ölçeği, size bir senaryo, kasıtlı olarak "dalgalanma." nedeniyle sonsuz bir döngüye önlemek için ölçeklendirme değil Seçtiğimiz içine çalışıyor olabilir Bu durum, genellikle genişletmek ve ölçeğini eşiklerin arasında yeterli bir kenar boşluğu olmadığında gerçekleşir. "Dalgalanma" önlemek için ve diğer otomatik ölçeklendirme en iyi yöntemler hakkında okunacak öğrenmek için bkz: [otomatik ölçeklendirme en iyi](../azure-monitor/platform/autoscale-best-practices.md#autoscale-best-practices).
+Azure otomatik ölçeklendirme, Web uygulaması örneğinin içinde ölçeklendirilmemiş veya ölçeklendirildiği şekilde ölçeklendirmemişse, "Flama" nedeniyle sonsuz bir döngüden kaçınmak üzere kasıtlı olarak ölçeklendirmemek üzere seçtiğimiz bir senaryoya çalışıyor olabilirsiniz. Bu genellikle, ölçek genişletme ve ölçek genişletme eşikleri arasında yeterli bir kenar boşluğu olmadığında gerçekleşir. "Flatma" ve diğer otomatik ölçeklendirme en iyi uygulamaları hakkında bilgi edinmek için bkz. [Otomatik ölçeklendirme en iyi yöntemleri](../azure-monitor/platform/autoscale-best-practices.md#autoscale-best-practices).
 
-## <a name="why-does-autoscale-sometimes-scale-only-partially"></a>Neden otomatik bazen yalnızca kısmen ölçeklendirme?
+## <a name="why-does-autoscale-sometimes-scale-only-partially"></a>Otomatik ölçeklendirme neden bazen kısmen ölçeklenmelidir?
 
-Otomatik ölçeklendirme, ölçüm önceden yapılandırılmış sınırları aşan tetiklenir. Bazı durumlarda, kapasite yalnızca kısmen beklediğiniz karşılaştırıldığında doldurulduğunu fark edebilirsiniz. İstediğiniz örnek sayısını olmadığında bu durum oluşabilir. Bu senaryoda, otomatik ölçeklendirme, kısmen kullanılabilir örneklerin sayısı ile doldurur. Otomatik ölçeklendirme, daha sonra daha fazla kapasite almak için yeniden Dengeleme mantığı çalıştırır. Bu, kalan örnekleri ayırır. Bu işlem birkaç dakika sürebileceğini unutmayın.
+Ölçümler önceden yapılandırılmış sınırları aştığında otomatik ölçeklendirme tetiklenir. Bazen kapasitenin yalnızca beklendiklerinize kıyasla kısmen doldurulduğunu fark edebilirsiniz. Bu durum, istediğiniz örnek sayısı kullanılabilir olmadığında ortaya çıkabilir. Bu senaryoda, otomatik ölçeklendirme, kullanılabilir örnek sayısı ile kısmen doldurulur. Daha sonra daha fazla kapasite sağlamak için otomatik ölçeklendirme mantığını çalıştırır. Kalan örnekleri ayırır. Bu işlem birkaç dakika sürebilir.
 
-Birkaç dakika sonra örnekleri beklenen sayıda görmüyorsanız, kısmi Dolum sınırları içinde ölçümleri getirmek için yeterli olduğundan olabilir. Ya da daha düşük ölçümleri sınırına ulaştığınız için otomatik ölçeklendirme ölçeği.
+Birkaç dakika sonra beklenen sayıda örnek görmüyorsanız, bu durum, ölçümleri sınırlar içinde getirmek için kısmi dolum için yeterince olması olabilir. Ya da, daha düşük ölçüm sınırına ulaştığından otomatik ölçeklendirme ölçeği ölçeklenmeyebilir.
 
-Bu koşulların hiçbiri geçerli ve sorun devam ederse, bir destek isteği gönderin.
+Bu koşulların hiçbiri geçerli değilse ve sorun devam ederse, bir destek isteği gönderebilirsiniz.
 
-## <a name="how-do-i-turn-on-http-compression-for-my-content"></a>HTTP sıkıştırmayı İçeriğim için nasıl kapatırım?
+## <a name="how-do-i-turn-on-http-compression-for-my-content"></a>İçeriğimde HTTP sıkıştırmasını açmak Nasıl yaparım? mı?
 
-Sıkıştırma hem statik ve dinamik içerik türleri için açmak için uygulama düzeyi web.config dosyasına aşağıdaki kodu ekleyin:
+Hem statik hem de dinamik içerik türleri için sıkıştırmayı açmak üzere, uygulama düzeyi Web. config dosyasına aşağıdaki kodu ekleyin:
 
 ```xml
 <system.webServer>
@@ -320,8 +316,8 @@ Sıkıştırma hem statik ve dinamik içerik türleri için açmak için uygulam
 </system.webServer>
 ```
 
-Sıkıştırılacak istediğiniz belirli dinamik ve statik MIME türleri de belirtebilirsiniz. Forum soru için yanıt sürelerimiz daha fazla bilgi için bkz. [httpCompression ayarları basit bir Azure Web sitesinde](https://social.msdn.microsoft.com/Forums/azure/890b6d25-f7dd-4272-8970-da7798bcf25d/httpcompression-settings-on-a-simple-azure-website?forum=windowsazurewebsitespreview).
+Sıkıştırmak istediğiniz belirli dinamik ve statik MIME türlerini de belirtebilirsiniz. Daha fazla bilgi için bkz. [basit bir Azure Web sitesinde httpCompression ayarlarındaki](https://social.msdn.microsoft.com/Forums/azure/890b6d25-f7dd-4272-8970-da7798bcf25d/httpcompression-settings-on-a-simple-azure-website?forum=windowsazurewebsitespreview)bir forum sorusuna yanıt verme.
 
-## <a name="how-do-i-migrate-from-an-on-premises-environment-to-app-service"></a>Bir şirket içi ortamdan App Service'e nasıl geçirebilirim?
+## <a name="how-do-i-migrate-from-an-on-premises-environment-to-app-service"></a>Şirket içi ortamdan App Service geçiş Nasıl yaparım? istiyor musunuz?
 
-Siteler, Windows ve Linux web sunucularından App Service'e geçirmek için Azure App Service Migration Yardımcısı'nı kullanabilirsiniz. Geçiş Aracı gerektiği gibi Azure'da web uygulamalarını ve veritabanlarını oluşturur ve ardından içeriği yayımlar. Daha fazla bilgi için [Azure App Service Migration Yardımcısı](https://www.migratetoazure.net/).
+Siteleri Windows ve Linux Web sunucularından App Service geçirmek için, Azure App Service Geçiş Yardımcısı ' nı kullanabilirsiniz. Geçiş Aracı gerektiğinde Azure 'da Web uygulamaları ve veritabanları oluşturur ve sonra içeriği yayımlar. Daha fazla bilgi için bkz. [Azure App Service Geçiş Yardımcısı](https://www.migratetoazure.net/).

@@ -1,7 +1,7 @@
 ---
-title: Öneriler - Bing özel arama özel otomatik öneri tanımlayın
-titlesuffix: Azure Cognitive Services
-description: Özel otomatik öneri özel öneriler yapılandırılması açıklanmaktadır
+title: Özel otomatik öneri önerileri tanımlayın-Bing Özel Arama
+titleSuffix: Azure Cognitive Services
+description: Özel otomatik öneri, arama deneyiminiz ile ilgili önerilen arama sorgu dizelerinin bir listesini döndürür.
 services: cognitive-services
 author: aahill
 manager: nitinme
@@ -10,68 +10,68 @@ ms.subservice: bing-custom-search
 ms.topic: conceptual
 ms.date: 02/12/2019
 ms.author: maheshb
-ms.openlocfilehash: bbad72b41a177bdbafd6cf98bfd2025190d98b16
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5b2b8871d868e827532f23c7ef4f14fb00afb5bc
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62128966"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74072796"
 ---
 # <a name="configure-your-custom-autosuggest-experience"></a>Özel otomatik öneri deneyiminizi yapılandırın
 
-Özel otomatik öneri özelliği, arama deneyiminizle ilgili önerilen arama sorgu dizelerinin listesini döndürür. Önerilen sorgu dizeleri arama kutusuna kullanıcının sağladığı bir kısmi sorgu dizesi temel alır. Listenin en fazla 10 öneriler içerir. 
+Özel otomatik öneri, arama deneyiminiz ile ilgili önerilen arama sorgu dizelerinin bir listesini döndürür. Önerilen sorgu dizeleri, kullanıcının arama kutusunda sağladığı kısmi bir sorgu dizesini temel alır. Listede en fazla 10 öneri yer alacak. 
 
-Yalnızca özel öneriler döndürmek mi, yoksa Bing önerileri de içerecek şekilde belirtin. Bing önerileri eklerseniz, özel öneriler Bing öneriler önce görünür. Yeterli ilgili öneriler sağlarsanız, öneriler, döndürülen liste Bing önerileri içermez mümkündür. Bing her zaman özel arama örneğinizin bağlamında önerilerdir. 
+Yalnızca özel önerilerin döndürülüp döndürülmeyeceğini veya Bing önerilerini de dahil etmek istediğinizi belirtirsiniz. Bing önerilerini eklerseniz, Bing önerilerinde önce özel öneriler görüntülenir. Yeterli sayıda ilgili öneri sağlarsanız, döndürülen öneri listesi Bing önerilerini içermez. Bing önerileri her zaman özel arama örneğinizin bağlamındadır. 
 
-Örneğiniz için arama Sorgu önerileri yapılandırmak için tıklayın **otomatik öneri** sekmesi.  
+Örneğiniz için arama sorgusu önerilerini yapılandırmak için **otomatik öneri** sekmesine tıklayın.  
 
 > [!NOTE]
-> Bu özelliği kullanmak için uygun düzeyde özel arama abone gerekir (bkz [fiyatlandırma](https://azure.microsoft.com/pricing/details/cognitive-services/bing-custom-search/)).
+> Bu özelliği kullanmak için, özel aramaya uygun düzeyde abone olmanız gerekir (bkz. [fiyatlandırma](https://azure.microsoft.com/pricing/details/cognitive-services/bing-custom-search/)).
 
-Bu önerileri (API veya UI barındırılan) Hizmeti uç yansıtılması 24 saate kadar sürebilir.
+Önerilerin, hizmet uç noktasında (API veya barındırılan Kullanıcı arabirimi) yansıtılması 24 saate kadar sürebilir.
 
-## <a name="enable-bing-suggestions"></a>Bing önerilerini etkinleştirmek
+## <a name="enable-bing-suggestions"></a>Bing önerilerini etkinleştir
 
-Bing önerilerini etkinleştirmek için geçiş **Bing otomatik öneri** kaydırıcısını açık konuma. Kaydırıcı mavi haline gelir.
+Bing önerilerini etkinleştirmek için **Otomatik Bing öneriler** kaydırıcısını açık konuma değiştirin. Kaydırıcı mavi hale gelir.
 
-## <a name="add-your-own-suggestions"></a>Önerilerinizi Ekle
+## <a name="add-your-own-suggestions"></a>Kendi önerilerinizi ekleyin
 
-Kendi sorgu dizesi önerileri eklemek için bunları altındaki listeye ekleyin **öneriler kullanıcı tanımlı**. Bir öneri listesinde ekledikten sonra enter tuşuna basın veya **+** simgesi. Herhangi bir dilde öneri belirtebilirsiniz. En fazla 5000 sorgu dizesi önerileri ekleyebilirsiniz.
+Kendi sorgu dizesi önerilerinizi eklemek için onları **Kullanıcı tanımlı öneriler**altında listeye ekleyin. Listeye bir öneri ekledikten sonra ENTER tuşuna basın veya **+** simgesine tıklayın. Öneriyi dilediğiniz dilde belirtebilirsiniz. En fazla 5.000 sorgu dizesi önerisi ekleyebilirsiniz.
 
-## <a name="upload-suggestions"></a>Öneriler karşıya yükleme
+## <a name="upload-suggestions"></a>Yükleme önerileri
 
-Bir seçenek olarak, bir dosyadan öneriler listesi karşıya yükleyebilirsiniz. Dosya her satırda bir arama sorgu dizesi içermelidir. Dosyayı karşıya yüklemek için karşıya yükleme simgesine tıklayın ve karşıya yüklenecek dosyayı seçin. Hizmet önerileri dosyasından ayıklar ve bunları listeye ekler.
+Bir seçenek olarak, bir dosyadaki öneri listesini karşıya yükleyebilirsiniz. Dosya, satır başına bir arama sorgu dizesi içermelidir. Dosyayı karşıya yüklemek için karşıya yükle simgesine tıklayın ve karşıya yüklenecek dosyayı seçin. Hizmet, dosyadaki önerileri ayıklar ve listeye ekler.
 
-## <a name="remove-suggestions"></a>Öneriler Kaldır
+## <a name="remove-suggestions"></a>Önerileri kaldır
 
-Bir sorgu dizesi öneriyi kaldırmak için kaldırmak istediğiniz öneri yanındaki Kaldır simgesine tıklayın.
+Bir sorgu dizesi önerisini kaldırmak için kaldırmak istediğiniz önerinin yanındaki Kaldır simgesine tıklayın.
 
-## <a name="block-suggestions"></a>Önerilerini engelle
+## <a name="block-suggestions"></a>Engelleme önerileri
 
-Bing önerileri içeriyorsa, döndürülecek Bing istemediğiniz arama sorgu dizelerinin listesini ekleyebilirsiniz. Engellenen sorgu dizeleri eklemek için tıklatın **önerileri göster engellenen**. Sorgu dizesi listeye ekleyin ve enter tuşuna basın veya **+** simgesi. En fazla 50 engellenen sorgu dizeleri ekleyebilirsiniz.
+Bing önerilerini eklerseniz, Bing 'in döndürmesini istemediğiniz bir arama sorgu dizeleri listesi ekleyebilirsiniz. Engellenen sorgu dizeleri eklemek için **Engellenen önerileri göster**' e tıklayın. Sorgu dizesini listeye ekleyin ve ENTER tuşuna basın veya **+** simgesine tıklayın. En fazla 50 engellenen sorgu dizesi ekleyebilirsiniz.
 
 
 
 [!INCLUDE [publish or revert](./includes/publish-revert.md)]
 
 >[!NOTE]  
->Bu özel otomatik öneri yapılandırma değişikliklerinin etkinleşmesi 24 saate kadar sürebilir.
+>Özel otomatik öneri yapılandırma değişikliklerinin etkili olması 24 saate kadar sürebilir.
 
 
-## <a name="enabling-autosuggest-in-hosted-ui"></a>Otomatik öneri barındırılan kullanıcı Arabiriminde etkinleştirme
+## <a name="enabling-autosuggest-in-hosted-ui"></a>Barındırılan Kullanıcı arabiriminde otomatik öneri etkinleştiriliyor
 
-Barındırılan kullanıcı Arabirimi için sorgu dizesi önerilerini etkinleştirmek için tıklayın **barındırılan UI**. Ekranı aşağı kaydırarak **ek yapılandırma** bölümü. Altında **Web araması**seçin **üzerinde** için **etkinleştir otomatik öneri**. Otomatik öneri etkinleştirmek için bir arama kutusu içeren bir düzen seçmelisiniz.
+Barındırılan Kullanıcı arabiriminiz için sorgu dizesi önerilerini etkinleştirmek üzere **barındırılan Kullanıcı arabirimi**' ne tıklayın. **Ek yapılandırma** bölümüne gidin. **Web araması**altında **otomatik öneri**' i etkinleştirmek için **Açık** ' ı seçin. Otomatik öneri özelliğini etkinleştirmek için, arama kutusu içeren bir düzen seçmeniz gerekir.
 
 
-## <a name="calling-the-autosuggest-api"></a>Çağırma otomatik öneri API'si
+## <a name="calling-the-autosuggest-api"></a>Otomatik öneri API 'sini çağırma
 
-Bing özel arama API'si kullanarak önerilen sorgu dizelerini almak için gönderin bir `GET` aşağıdaki uç noktayı isteği.
+Bing Özel Arama API'si kullanarak önerilen Sorgu dizelerini almak için aşağıdaki uç noktaya `GET` bir istek gönderin.
 
 ```
 GET https://api.cognitive.microsoft.com/bingcustomsearch/v7.0/Suggestions 
 ```
 
-Yanıta bir listesini içeren `SearchAction` önerilen sorgu dizesi içeren bir nesne.
+Yanıt, önerilen Sorgu dizelerini içeren `SearchAction` nesnelerinin bir listesini içerir.
 
 ```
         {  
@@ -81,13 +81,13 @@ Yanıta bir listesini içeren `SearchAction` önerilen sorgu dizesi içeren bir 
         },  
 ```
 
-Her öneri içeren bir `displayText` ve `query` alan. `displayText` Alan, arama kutusuna kişinin açılan listeyi doldurmak için kullandığınız önerilen sorgu dizesi içerir.
+Her öneri bir `displayText` ve `query` alanı içerir. `displayText` alanı, arama kutusunun açılan listesini doldurmak için kullandığınız önerilen sorgu dizesini içerir.
 
-Kullanıcı açılır listeden bir önerilen sorgu dizesi seçerse, sorgu dizesinde kullanmak `query` alan çağrılırken [Bing özel arama API'si](overview.md).
+Kullanıcı açılan listeden önerilen bir sorgu dizesi seçerse, [Bing özel arama API'si](overview.md)çağrılırken `query` alanındaki sorgu dizesini kullanın.
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 - [Özel öneriler alın](./get-custom-suggestions.md)
-- [Özel Örneğinize arama](./search-your-custom-view.md)
-- [Yapılandırma ve barındırılan özel kullanıcı Arabirimi kullanma](./hosted-ui.md)
+- [Özel örneğinize arama](./search-your-custom-view.md)
+- [Özel barındırılan Kullanıcı arabirimini yapılandırma ve kullanma](./hosted-ui.md)

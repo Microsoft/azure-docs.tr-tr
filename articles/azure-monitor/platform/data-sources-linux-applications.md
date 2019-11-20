@@ -1,144 +1,138 @@
 ---
-title: Azure İzleyici'de Linux uygulama performansı toplamak | Microsoft Docs
-description: Bu makalede, MySQL ve Apache HTTP Server için performans sayaçları toplamak Linux için Log Analytics aracısını yapılandırmak için ayrıntıları sağlar.
-services: log-analytics
-documentationcenter: ''
-author: mgoedtel
-manager: carmonm
-editor: tysonn
-ms.assetid: f1d5bde4-6b86-4b8e-b5c1-3ecbaba76198
-ms.service: log-analytics
+title: Azure Izleyici 'de Linux uygulama performansını toplayın | Microsoft Docs
+description: Bu makalede, MySQL ve Apache HTTP sunucusu için performans sayaçlarını toplamak üzere Linux için Log Analytics aracısının yapılandırılmasına ilişkin ayrıntılar sağlanmaktadır.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 05/04/2017
+author: MGoedtel
 ms.author: magoedte
-ms.openlocfilehash: ea74440a5c8a9a2584e742ec72ccf888b6bb5ad9
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 05/04/2017
+ms.openlocfilehash: 60f09035f4aabcbd6348fb5608b812ca4b001b45
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60628923"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72932462"
 ---
-# <a name="collect-performance-counters-for-linux-applications-in-azure-monitor"></a>Azure İzleyici'de Linux uygulamaları için performans sayaçlarını Topla 
+# <a name="collect-performance-counters-for-linux-applications-in-azure-monitor"></a>Azure Izleyici 'de Linux uygulamaları için performans sayaçlarını toplama 
 [!INCLUDE [log-analytics-agent-note](../../../includes/log-analytics-agent-note.md)]
-Yapılandırma ayrıntıları bu makalede sağlar [Linux için Log Analytics aracısını](https://github.com/Microsoft/OMS-Agent-for-Linux) Azure İzleyici ile belirli uygulamalar için performans sayaçları toplamak için.  Bu makalede bulunan uygulamalar şunlardır:  
+Bu makalede, Azure Izleyici 'de belirli uygulamalar için performans sayaçlarını toplamak üzere [Linux için Log Analytics aracısını](https://github.com/Microsoft/OMS-Agent-for-Linux) yapılandırmaya yönelik ayrıntılar sağlanmaktadır.  Bu makaleye dahil edilen uygulamalar şunlardır:  
 
 - [MySQL](#mysql)
-- [Apache HTTP Server](#apache-http-server)
+- [Apache HTTP sunucusu](#apache-http-server)
 
 ## <a name="mysql"></a>MySQL
-Log Analytics aracısını yüklendiğinde sunucu MySQL veya MariaDB sunucu bilgisayarda algılanırsa, bir performans izleme sağlayıcısı MySQL sunucusu için otomatik olarak yüklenir. Bu sağlayıcı performans istatistiklerini kullanıma sunmak için yerel MySQL/MariaDB sunucusuna bağlanır. Sağlayıcı MySQL sunucusuna erişebilmesi için MySQL kullanıcı kimlik bilgilerinin yapılandırılması gerekir.
+Log Analytics Aracısı yüklendiğinde bilgisayar üzerinde MySQL Server veya MariaDB sunucusu algılanırsa, MySQL sunucusu için bir performans izleme sağlayıcısı otomatik olarak yüklenir. Bu sağlayıcı, performans istatistiklerini açığa çıkarmak için yerel MySQL/MariaDB sunucusuna bağlanır. Sağlayıcının MySQL sunucusuna erişebilmesi için MySQL Kullanıcı kimlik bilgilerinin yapılandırılması gerekir.
 
 ### <a name="configure-mysql-credentials"></a>MySQL kimlik bilgilerini yapılandırma
-MySQL OMI sağlayıcısı, önceden yapılandırılmış bir MySQL kullanıcısı gerektirir ve sorgu performansı ve sistem durumu bilgilerinden MySQL örneği için MySQL istemci kitaplıkları yüklü.  Bu kimlik bilgileri, Linux aracısı üzerinde depolanan bir kimlik doğrulama dosyasında depolanır.  Kimlik doğrulama dosyasını hangi bağlama adresi ve bağlantı noktası MySQL örneği dinleyen ve hangi ölçümleri toplamak için kullanılacak kimlik bilgilerini belirtir.  
+MySQL OMı sağlayıcısı, MySQL örneğinden performans ve sistem durumu bilgilerini sorgulamak için önceden yapılandırılmış bir MySQL kullanıcısı ve yüklü MySQL istemci kitaplıklarını gerektirir.  Bu kimlik bilgileri, Linux aracısında depolanan bir kimlik doğrulama dosyasında depolanır.  Kimlik doğrulama dosyası, MySQL örneğinin dinlediği bağlama adresini ve bağlantı noktasını ve ölçümleri toplamak için kullanılacak kimlik bilgilerini belirtir.  
 
-MySQL OMI Linux için Log Analytics aracısını yüklenmesi sırasında sağlayıcısı MySQL my.cnf yapılandırma dosyalarını (varsayılan konumlar) bağlama adresi ve bağlantı noktası tarama ve MySQL OMI kimlik doğrulama dosyasını kısmen ayarlayın.
+Linux için Log Analytics aracısının yüklenmesi sırasında MySQL OMı sağlayıcısı, bağlama adresi ve bağlantı noktası için MySQL My. cnf yapılandırma dosyalarını (varsayılan konumlar) tarar ve MySQL OMı kimlik doğrulama dosyasını kısmen ayarlar.
 
-MySQL kimlik doğrulaması dosya konumunda depolanır `/var/opt/microsoft/mysql-cimprov/auth/omsagent/mysql-auth`.
+MySQL kimlik doğrulama dosyası `/var/opt/microsoft/mysql-cimprov/auth/omsagent/mysql-auth`depolanır.
 
 
-### <a name="authentication-file-format"></a>Kimlik doğrulaması dosya biçimi
-Aşağıdaki MySQL OMI kimlik doğrulaması dosya biçimi
+### <a name="authentication-file-format"></a>Kimlik doğrulama dosyası biçimi
+Aşağıda MySQL OMı kimlik doğrulama dosyasının biçimi verilmiştir
 
     [Port]=[Bind-Address], [username], [Base64 encoded Password]
     (Port)=(Bind-Address), (username), (Base64 encoded Password)
     (Port)=(Bind-Address), (username), (Base64 encoded Password)
     AutoUpdate=[true|false]
 
-Kimlik doğrulaması dosyasındaki girişler aşağıdaki tabloda açıklanmıştır.
+Kimlik doğrulama dosyasındaki girişler aşağıdaki tabloda açıklanmıştır.
 
 | Özellik | Açıklama |
 |:--|:--|
-| Port | MySQL örneğinin dinlediği geçerli bağlantı noktasını temsil eder. Bağlantı noktası 0, aşağıdaki özellikler varsayılan örneği için kullanıldığını belirtir. |
-| Bağlama adresi| Geçerli MySQL bağlama-adresi. |
-| username| MySQL kullanıcı MySQL sunucu örneğinde izlemek üzere kullanmak için kullanılır. |
-| Parola Base64 ile kodlanmış| Base64 ile kodlanmış MySQL izleme kullanıcının parolası. |
-| Otomatik güncelleştirme| My.cnf dosyasındaki değişiklikleri için yeniden tarayın ve MySQL OMI sağlayıcısı yükseltildiğinde MySQL OMI kimlik doğrulaması dosyanın üzerine belirtir. |
+| Bağlantı noktası | MySQL örneğinin dinlediği geçerli bağlantı noktasını temsil eder. Bağlantı noktası 0, aşağıdaki özelliklerin varsayılan örnek için kullanıldığını belirtir. |
+| Bağlama adresi| Geçerli MySQL bağlama adresi. |
+| kullanıcı adı| MySQL Server örneğini izlemek için kullanılan MySQL kullanıcısı. |
+| Base64 kodlamalı parola| Base64 Ile kodlanmış MySQL izleme kullanıcısının parolası. |
+| Otomatik| MySQL OMı sağlayıcısı yükseltildiğinde, My. cnf dosyasındaki değişiklikler için yeniden tarama yapılıp yapılmayacağını ve MySQL OMı kimlik doğrulama dosyasının üzerine yazılmasına izin verilip verilmeyeceğini belirtir. |
 
 ### <a name="default-instance"></a>Varsayılan örnek
-MySQL OMI kimlik doğrulaması dosyası yapmak daha kolay bir Linux ana bilgisayarda birden çok MySQL örneklerini yönetmek için bir varsayılan örneği ve bağlantı noktası numarası tanımlayabilirsiniz.  Varsayılan örneği, örnek bağlantı noktası 0 ile belirtilir. Tüm ek örnekleri, bunlar farklı değerler belirtmediğiniz sürece varsayılan örnekten kümesi özellikleri devralır. MySQL örneği '3308' bağlantı noktası üzerinde dinleme eklenirse, örneğin, varsayılan örneği bağlama adresi, kullanıcı adı ve Base64 kodlu parola deneyin ve 3308 üzerinde dinleme örneği izlemek için kullanılır. 3308 örneğinde için başka bir adresi ve kullanıcı adı ve parola aynı MySQL çiftini kullanan yalnızca bağlama adresi gereklidir ve diğer özellikleri devralınır.
+MySQL OMı kimlik doğrulama dosyası, bir Linux ana bilgisayarında birden çok MySQL örneğinin yönetilmesini kolaylaştırmak için varsayılan bir örnek ve bağlantı noktası numarası tanımlayabilir.  Varsayılan örnek, bağlantı noktası 0 olan bir örnek tarafından gösterilir. Tüm ek örnekler, farklı değerler belirtmedikleri takdirde varsayılan örnekten ayarlanan özellikleri devralacak. Örneğin, ' 3308 ' bağlantı noktasını dinleyen MySQL örneği eklendiyse, 3308 tarihinde dinleme yapan örneği denemek ve izlemek için varsayılan örnek için bağlama adresi, Kullanıcı adı ve Base64 kodlamalı parola kullanılacaktır. 3308 üzerindeki örnek başka bir adrese bağlıysa ve aynı MySQL Kullanıcı adını ve parola çiftini kullanıyorsa yalnızca bağlama adresi gereklidir ve diğer özellikler devralınır.
 
-Aşağıdaki tabloda örnek örneği ayarları vardır. 
+Aşağıdaki tabloda örnek örnek ayarları vardır 
 
 | Açıklama | Dosya |
 |:--|:--|
-| Varsayılan örneği ve bağlantı noktası 3308 örneği. | `0=127.0.0.1, myuser, cnBwdA==`<br>`3308=, ,`<br>`AutoUpdate=true` |
-| Varsayılan örneği ve bağlantı noktası 3308 ve farklı bir kullanıcı adı ve parola ile örneği. | `0=127.0.0.1, myuser, cnBwdA==`<br>`3308=127.0.1.1, myuser2,cGluaGVhZA==`<br>`AutoUpdate=true` |
+| 3308 numaralı bağlantı noktasına sahip varsayılan örnek ve örnek. | `0=127.0.0.1, myuser, cnBwdA==`<br>`3308=, ,`<br>`AutoUpdate=true` |
+| 3308 bağlantı noktası ve farklı Kullanıcı adı ve parolasıyla varsayılan örnek ve örnek. | `0=127.0.0.1, myuser, cnBwdA==`<br>`3308=127.0.1.1, myuser2,cGluaGVhZA==`<br>`AutoUpdate=true` |
 
 
-### <a name="mysql-omi-authentication-file-program"></a>MySQL OMI kimlik doğrulaması dosya programı
-MySQL OMI sağlayıcı yüklemesi ile MySQL OMI kimlik doğrulama dosyasını düzenlemek için kullanılabilecek bir MySQL OMI kimlik doğrulaması dosya programı içerir. Kimlik doğrulaması dosya programı şu konumda bulunabilir.
+### <a name="mysql-omi-authentication-file-program"></a>MySQL OMı kimlik doğrulama dosyası programı
+MySQL OMı sağlayıcısı 'nın yüklenmesiyle birlikte, MySQL OMI kimlik doğrulama dosyasını düzenlemek için kullanılabilen bir MySQL OMı kimlik doğrulama dosyası programıdır. Kimlik doğrulama dosyası programı aşağıdaki konumda bulunabilir.
 
     /opt/microsoft/mysql-cimprov/bin/mycimprovauth
 
 > [!NOTE]
-> Kimlik bilgileri dosyası omsagent hesap tarafından okunabilir olması gerekir. Omsgent mycimprovauth komutunun çalıştırılması önerilir.
+> Kimlik bilgileri dosyası omsagent hesabı tarafından okunabilir olmalıdır. Mycimprovauth komutunu omsgent olarak çalıştırmak önerilir.
 
-Aşağıdaki tabloda, mycimprovauth kullanmak için söz dizimi hakkında ayrıntılar sağlar.
+Aşağıdaki tabloda, mycimprovauth kullanımı için sözdizimi hakkında ayrıntılı bilgi verilmektedir.
 
 | İşlem | Örnek | Açıklama
 |:--|:--|:--|
-| Otomatik güncelleştirme *yanlış veya doğru* | mycimprovauth autoupdate false | Olup olmadığı kimlik doğrulama dosyasını otomatik olarak güncelleştirilir kümeleri üzerinde yeniden başlatın veya güncelleştirin. |
-| Varsayılan *bağlama adresi kullanıcı adı parola* | mycimprovauth 127.0.0.1 varsayılan kök pwd | Varsayılan örnek MySQL OMI kimlik doğrulama dosyasını ayarlar.<br>Parola alanı düz metin biçiminde girilmesi gerekir - MySQL OMI kimlik doğrulaması dosyasındaki parola Base 64 kodlamalı olur. |
-| silme *varsayılan veya port_num* | mycimprovauth 3308 | Belirtilen örnek ya da varsayılan olarak veya bağlantı noktası numarasına göre siler. |
-| Yardım | mycimprov Yardım | Kullanılacak komutların listesini yazdırır. |
-| Yazdırma | mycimprov yazdırma | Yazdırır bir kolayca MySQL OMI kimlik doğrulaması dosyası okunamıyor. |
-| port_num güncelleştirme *bağlama adresi kullanıcı adı parola* | mycimprov güncelleştirme 3307 127.0.0.1 kök pwd | Belirtilen örnek güncelleştirir veya henüz yoksa örneği ekler. |
+| *yanlış veya doğru* otomatik güncelleştirme | mycimprovauth otomatik güncelleştirme yanlış | Kimlik doğrulama dosyasının yeniden başlatma veya güncelleştirme sırasında otomatik olarak güncelleştirilip güncelleştirimeyeceğini ayarlar. |
+| Varsayılan *bağlama adresi Kullanıcı adı parolası* | mycimprovauth varsayılan 127.0.0.1 kök PWD | MySQL OMı kimlik doğrulama dosyasındaki varsayılan örneği ayarlar.<br>Parola alanı düz metin olarak girilmelidir-MySQL OMı kimlik doğrulama dosyasındaki parola temel 64 olarak kodlanır. |
+| *varsayılan veya port_num* Sil | mycimprovauth 3308 | Belirtilen örneği varsayılan ya da bağlantı noktası numarasıyla siler. |
+| Yardım | mycimprov yardımı | Kullanılacak komutların listesini yazdırır. |
+| yazdırdığımda | mycimprov Yazdır | Okunması kolay bir MySQL OMı kimlik doğrulama dosyası yazdırır. |
+| port_num *BIND-adres Kullanıcı adı parolasını* Güncelleştir | mycimprov güncelleştirmesi 3307 127.0.0.1 kök PWD | Belirtilen örneği güncelleştirir veya yoksa örneği ekler. |
 
-Aşağıdaki örnek komutlar, komut localhost üzerinde MySQL sunucusu için bir varsayılan kullanıcı hesabı tanımlayın.  Parola alanı düz metin biçiminde girilmesi gerekir - MySQL OMI kimlik doğrulaması dosyasındaki parola Base 64 kodlamalı olur
+Aşağıdaki örnek komutlar, localhost üzerinde MySQL sunucusu için varsayılan bir kullanıcı hesabı tanımlar.  Parola alanı düz metin olarak girilmelidir-MySQL OMı kimlik doğrulama dosyasındaki parola temel 64 kodlanacak
 
     sudo su omsagent -c '/opt/microsoft/mysql-cimprov/bin/mycimprovauth default 127.0.0.1 <username> <password>'
     sudo /opt/omi/bin/service_control restart
 
-### <a name="database-permissions-required-for-mysql-performance-counters"></a>MySQL performans sayaçları için gereken veritabanı izinleri
-MySQL kullanıcı MySQL sunucusu performans verilerini toplamak için aşağıdaki sorguları erişim gerektirir. 
+### <a name="database-permissions-required-for-mysql-performance-counters"></a>MySQL performans sayaçları için gereken veritabanı Izinleri
+MySQL kullanıcısının MySQL Server performans verilerini toplamak için aşağıdaki sorgulara erişmesi gerekir. 
 
     SHOW GLOBAL STATUS;
     SHOW GLOBAL VARIABLES:
 
 
-MySQL kullanıcı ayrıca aşağıdaki varsayılan tablolar için seçme erişimi gerektirir.
+MySQL kullanıcısı aynı zamanda aşağıdaki varsayılan tablolara erişim ' i de gerektirir.
 
-- INFORMATION_SCHEMA
-- mysql. 
+- information_schema
+- MySQL. 
 
-Bu ayrıcalıkları verme aşağıdaki komutları çalıştırarak verilebilir.
+Aşağıdaki verme komutları çalıştırılarak bu ayrıcalıklar verilebilir.
 
     GRANT SELECT ON information_schema.* TO ‘monuser’@’localhost’;
     GRANT SELECT ON mysql.* TO ‘monuser’@’localhost’;
 
 
 > [!NOTE]
-> Bir MySQL için izinleri vermek için izleme kullanıcı ekibi tarafından verilmesinin verilmeden ayrıcalık yanı sıra, 'GRANT option' ayrıcalığı olmalıdır.
+> MySQL izleme kullanıcısına izin vermek için, veren kullanıcının ' ızın verme ' ayrıcalığının yanı sıra verilen ayrıcalığa sahip olması gerekir.
 
-### <a name="define-performance-counters"></a>Performans sayaçları tanımlayın
+### <a name="define-performance-counters"></a>Performans sayaçlarını tanımlama
 
-Azure İzleyici için veri göndermek Linux için Log Analytics aracısını yapılandırdıktan sonra Toplanacak performans sayaçlarını yapılandırmanız gerekir.  Yordamı kullanın [Azure İzleyici'de Windows ve Linux performans veri kaynakları](data-sources-performance-counters.md) aşağıdaki tabloda sayaçlarla.
+Linux için Log Analytics Aracısı 'nı Azure Izleyici 'ye veri gönderecek şekilde yapılandırdıktan sonra, toplanacak performans sayaçlarını yapılandırmanız gerekir.  Aşağıdaki tablodaki sayaçlarla birlikte [Azure izleyici 'de Windows ve Linux performans verileri kaynakları](data-sources-performance-counters.md) yordamını kullanın.
 
 | Nesne adı | Sayaç adı |
 |:--|:--|
-| MySQL Veritabanı | Disk alanı bayt |
+| MySQL Veritabanı | Bayt cinsinden disk alanı |
 | MySQL Veritabanı | Tablolar |
-| MySQL sunucusu | Bağlantı durduruldu Pct |
-| MySQL sunucusu | Bağlantısı kullanım yüzdesi |
-| MySQL sunucusu | Disk alanı kullanımını bayt |
-| MySQL sunucusu | Tam tablo tarama Pct |
-| MySQL sunucusu | Innodb arabellek havuzu Pct isabet |
-| MySQL sunucusu | Innodb arabellek havuzu kullanımı yüzdesi |
-| MySQL sunucusu | Innodb arabellek havuzu kullanımı yüzdesi |
-| MySQL sunucusu | Pct anahtar önbellek isabet |
-| MySQL sunucusu | Anahtar önbellek kullanımı yüzdesi |
-| MySQL sunucusu | Anahtar önbellek yazma Pct |
-| MySQL sunucusu | Sorgu önbelleği isabet yüzdesi |
-| MySQL sunucusu | Sorgu önbelleği ayıklar Pct |
-| MySQL sunucusu | Sorgu önbelleği kullanımı yüzdesi |
-| MySQL sunucusu | Tablo önbelleği isabet yüzdesi |
-| MySQL sunucusu | Tablo önbellek kullanımı yüzdesi |
-| MySQL sunucusu | Tablo kilit Çekişme yüzdesi |
+| MySQL sunucusu | Kesilen bağlantı yüzdesi |
+| MySQL sunucusu | Bağlantı kullanım yüzdesi |
+| MySQL sunucusu | Bayt cinsinden disk alanı kullanımı |
+| MySQL sunucusu | Tam tablo taraması yüzdesi |
+| MySQL sunucusu | InnoDB arabellek havuzu Isabet yüzdesi |
+| MySQL sunucusu | InnoDB arabellek havuzu kullanım yüzdesi |
+| MySQL sunucusu | InnoDB arabellek havuzu kullanım yüzdesi |
+| MySQL sunucusu | Anahtar Isabetli önbellek okuması yüzdesi |
+| MySQL sunucusu | Anahtar önbelleği kullanım yüzdesi |
+| MySQL sunucusu | Anahtar önbelleği yazma yüzdesi |
+| MySQL sunucusu | Sorgu önbelleği Isabet yüzdesi |
+| MySQL sunucusu | Sorgu önbelleği, PCT 'yi ayıklar |
+| MySQL sunucusu | Sorgu önbelleği kullanım yüzdesi |
+| MySQL sunucusu | Tablo önbelleği Isabet yüzdesi |
+| MySQL sunucusu | Tablo önbelleği kullanım yüzdesi |
+| MySQL sunucusu | Tablo kilit çakışması yüzdesi |
 
-## <a name="apache-http-server"></a>Apache HTTP Server 
-Apache HTTP Server omsagent paket yüklü olduğunda bilgisayarda algılanırsa, bir performans izleme için Apache HTTP Server sağlayıcısı otomatik olarak yüklenir. Bu sağlayıcı performans verilerine erişmek için Apache HTTP Server içinde yüklenmesi gereken bir Apache modülü kullanır. Şu komutla modülü yüklenebilir:
+## <a name="apache-http-server"></a>Apache HTTP sunucusu 
+Omsagent paketi yüklendiğinde bilgisayarda Apache HTTP sunucusu algılanırsa, Apache HTTP sunucusu için bir performans izleme sağlayıcısı otomatik olarak yüklenir. Bu sağlayıcı, performans verilerine erişmek için Apache HTTP sunucusuna yüklenmesi gereken bir Apache modülünü kullanır. Modül aşağıdaki komutla yüklenebilir:
 ```
 sudo /opt/microsoft/apache-cimprov/bin/apache_config.sh -c
 ```
@@ -148,24 +142,24 @@ Apache izleme modülünü kaldırmak için aşağıdaki komutu çalıştırın:
 sudo /opt/microsoft/apache-cimprov/bin/apache_config.sh -u
 ```
 
-### <a name="define-performance-counters"></a>Performans sayaçları tanımlayın
+### <a name="define-performance-counters"></a>Performans sayaçlarını tanımlama
 
-Azure İzleyici için veri göndermek Linux için Log Analytics aracısını yapılandırdıktan sonra Toplanacak performans sayaçlarını yapılandırmanız gerekir.  Yordamı kullanın [Azure İzleyici'de Windows ve Linux performans veri kaynakları](data-sources-performance-counters.md) aşağıdaki tabloda sayaçlarla.
+Linux için Log Analytics Aracısı 'nı Azure Izleyici 'ye veri gönderecek şekilde yapılandırdıktan sonra, toplanacak performans sayaçlarını yapılandırmanız gerekir.  Aşağıdaki tablodaki sayaçlarla birlikte [Azure izleyici 'de Windows ve Linux performans verileri kaynakları](data-sources-performance-counters.md) yordamını kullanın.
 
 | Nesne adı | Sayaç adı |
 |:--|:--|
-| Apache HTTP Server | Meşgul çalışanların |
-| Apache HTTP Server | Boşta çalışan |
-| Apache HTTP Server | Meşgul çalışanların PCT |
-| Apache HTTP Server | Toplam CPU yüzdesi |
-| Apache sanal ana bilgisayar | Dakikada - istemci hataları |
-| Apache sanal ana bilgisayar | Dakikada - sunucu hataları |
-| Apache sanal ana bilgisayar | İstek başına KB |
-| Apache sanal ana bilgisayar | Saniye başına istek KB |
-| Apache sanal ana bilgisayar | Saniye başına istek sayısı |
+| Apache HTTP sunucusu | Meşgul çalışanlar |
+| Apache HTTP sunucusu | Boştaki çalışanlar |
+| Apache HTTP sunucusu | Meşgul çalışanlar |
+| Apache HTTP sunucusu | Toplam PCT CPU 'SU |
+| Apache sanal ana bilgisayar | Dakika başına hata-Istemci |
+| Apache sanal ana bilgisayar | Dakika başına hata-sunucu |
+| Apache sanal ana bilgisayar | Istek başına KB |
+| Apache sanal ana bilgisayar | Saniye başına istek KB sayısı |
+| Apache sanal ana bilgisayar | İstek/saniye |
 
 
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [Performans sayaçlarını Topla](data-sources-performance-counters.md) Linux aracılardan.
-* Hakkında bilgi edinin [oturum sorguları](../log-query/log-query-overview.md) veri kaynakları ve çözümlerinden toplanan verileri analiz etmek için. 
+* Linux aracılarından [performans sayaçlarını toplayın](data-sources-performance-counters.md) .
+* Veri kaynaklarından ve çözümlerinden toplanan verileri analiz etmek için [günlük sorguları](../log-query/log-query-overview.md) hakkında bilgi edinin. 

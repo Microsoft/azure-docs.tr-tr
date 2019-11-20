@@ -1,7 +1,7 @@
 ---
-title: Nasıl iletişim kutuları log bir konuşma Öğrenici modeli - Microsoft Bilişsel hizmetler | Microsoft Docs
+title: Conversation Learner modelinde iletişim kutularını günlüğe kaydetme-Microsoft bilişsel hizmetler | Microsoft Docs
 titleSuffix: Azure
-description: İletişim kutuları bir konuşma Öğrenici modelde günlüğe kaydetme hakkında bilgi edinin.
+description: Conversation Learner modelinde iletişim kutularını günlüğe kaydetme hakkında bilgi edinin.
 services: cognitive-services
 author: nitinme
 manager: nolachar
@@ -10,55 +10,56 @@ ms.subservice: conversation-learner
 ms.topic: article
 ms.date: 04/30/2018
 ms.author: nitinme
-ms.openlocfilehash: f1e161fa05a77682d0b5eb1c6c21975ac87028a3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX
+ms.openlocfilehash: 388942e8195048d7528a54e5a290f1724c8e876b
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66387658"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68703966"
 ---
-# <a name="how-to-log-dialogs-in-a-conversation-learner-model"></a>İletişim kutuları bir konuşma Öğrenici modelde günlüğe kaydetme hakkında
+# <a name="how-to-log-dialogs-in-a-conversation-learner-model"></a>Conversation Learner modelinde iletişim kutularını günlüğe kaydetme
 
-Bu öğreticide nasıl günlük iletişim kutuları daha iyi gerçek dünyada kullanıcıların kayıtlı etkileşim konuşma Öğrenici modelleri eğitmek için çalışan gösterilmektedir.
+Bu öğreticide, gerçek dünya kullanıcıları ile kayıtlı etkileşimlerden Conversation Learner modellerini daha iyi eğitebilmeniz için günlük Iletişim kutularının nasıl çalıştığı gösterilmektedir.
 
 ## <a name="video"></a>Video
 
-[![Günlük iletişim kutuları öğretici Önizleme](https://aka.ms/cl_Tutorial_v3_LogDialogs_Preview)](https://aka.ms/cl_Tutorial_v3_LogDialogs)
+[![Günlük Iletişimleri öğretici Önizleme](https://aka.ms/cl_Tutorial_v3_LogDialogs_Preview)](https://aka.ms/cl_Tutorial_v3_LogDialogs)
 
 ## <a name="requirements"></a>Gereksinimler
-Bu öğreticide, genel öğretici bot çalışıyor olması gerekir
+Bu öğreticide, genel öğretici bot 'ın çalışıyor olması gerekir
 
     npm run tutorial-general
 
-ve önceki öğreticilerdeki oluşturulan hava durumu modeli.
+ve daha önceki öğreticilerde oluşturulan hava durumu modeli.
 
 ## <a name="details"></a>Ayrıntılar
-Günlük, son kullanıcılar, botun etkileşime kaydedilen günlükleri kutularıdır. Bu günlük iletişim kutuları yararlanılarak varlık etiketleri ve modelin performans ve genel sistem performansını geliştirmek için eylem seçimleri düzeltebilirsiniz.
+Günlük Iletişimleri, son kullanıcılarla botunuzun etkileşiminizi kaydeder. Bu günlük Iletişim kutularını, modelin performansını ve genel sistem performansını geliştirmek için varlık etiketlerini ve eylem seçimlerini düzeltirecek şekilde çözebilirsiniz.
 
 ## <a name="steps"></a>Adımlar
 
-Web kullanıcı Arabirimi "İçeri aktarma eğitimler" tıklayın ve "Öğreticisi-11-LogDialogs" adlı modelini seçin.
+Web Kullanıcı arabiriminde "öğreticileri Içeri aktar" düğmesine tıklayın ve "öğretici-11-Logiletişimler" adlı modeli seçin.
 
-Eylemler vazgeçilmez hava durumu, şehirde hakkında yanıt vermek için tasarlanmış ve bu modeli "Şehir" adlı bir varlık içeriyor. Eğitim iki iletişim kutuları, performans beklentilerini biraz düşük olacak şekilde modeli eğitmek için kullanıldı. Ek eğitim ve gerçek hayatta Kullanıcı etkileşimlerine maruz kalma riskinizi modeli geliştirmek.
+Bu modelde "City" adlı bir varlık ve bu şehirdeki hava durumu hakkında yanıt vermek için tasarlanan eylemler bulunur. Performansı beklentileri biraz düşük olacak şekilde modeli eğitmek için iki eğitim Iletişim kutusu kullanıldı. Model, ek eğitim ve gerçek dünya kullanıcı etkileşimlerine maruz kalmayı geliştirir.
 
-### <a name="create-a-new-conversation"></a>Yeni bir konuşma oluşturma
+### <a name="create-a-new-conversation"></a>Yeni bir konuşma oluşturun
 
-1. Sol panelde, "Günlük iletişim kutuları" sonra "Yeni günlük iletişim kutusu" düğmesine tıklayın.
-2. Sohbet panelinde nerede yazacaktır "Yazın, iletinizi...", "Austin hava durumu tahminini" yazın
-3. "Test Bitti" düğmesine tıklayın.
-4. Listeden "Austin hava durumu tahminini" günlük iletişim tıklayın.
-5. Sohbet panelinde "Austin hava durumu tahminini" utterance tıklayın.
-6. "Austin" ı "city" varlık listesinden tıklatın.
+1. Sol bölmede "günlük Iletişimleri" ve ardından "yeni günlük Iletişim" düğmesine tıklayın.
+2. Sohbet panelinde "iletinizi yazın..." ifadesini yazıp "Austin Hava durumu tahmini" yazın
+3. "Test bitti" düğmesine tıklayın.
+4. Listeden "Austin Hava durumu tahmini" günlük iletişim kutusuna tıklayın.
+5. Sohbet panelinde "Austin Hava durumu tahmini" deterine tıklayın.
+6. "Austin" ye ve ardından varlık listesinden "şehir" e tıklayın.
 7. "Değişiklikleri Gönder" düğmesine tıklayın.
-    - Biz yeni varlık değerlerini belleğe sahip olduğundan varlık değeri bu değişikliğe neden konuşma aşağı akış değişiklikler. Sonraki eylemler büyük olasılıkla geçersiz hale özellikle olanları "city" varlığı içeren.
-8. Tıklayın "City hangi?" Sohbet panelinde utterance.
-9. Yanıtı seçin, "Austin, hava durumu, büyük olasılıkla güneşli sağlıyor."
-10. "Kaydet olarak Train iletişim" düğmesine tıklayın.
-    - Eğitim hemen başlatılır
+    - Bu varlık değerindeki değişiklik, bellekte yeni varlık değerleri bulunduğundan, aşağı akış değişikliklerine neden olur. Daha sonraki eylemler büyük olasılıkla "şehir" varlığını içeren özellikle geçersiz hale geldi.
+8. "Hangi şehir?" e tıklayın sohbet panelinde söylenişi.
+9. Yanıt ' ı seçin, "Austin 'deki Hava durumu büyük olasılıkla sunank ' dır.
+10. "Tren olarak kaydet Iletişim kutusu" düğmesine tıklayın.
+    - Eğitim hemen açılır
 
 ![](../media/T11_logdialog.png)
 
-Son unutmayın. İş gereksinimlerinize bağlı olarak konuşma günlüğe kaydetme özelliğinin ayarlarını ve seçimini kaldırarak "günlük konuşmaları." giderek kapatılabilir
+Son bir notunuz. İş ihtiyaçlarına bağlı olarak, görüşme günlüğü özelliği ayarlar ' a giderek ve "günlük konuşmaları" olarak denetlenerek kapatılabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

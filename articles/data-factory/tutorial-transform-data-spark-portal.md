@@ -1,5 +1,5 @@
 ---
-title: Azure Data Factory’de Spark kullanarak verileri dönüştürme | Microsoft Docs
+title: 'Azure Data Factory Spark kullanarak verileri dönüştürme '
 description: Bu öğretici, Azure Data Factory'de bir Spark etkinliği kullanarak verileri dönüştürmeye ilişkin adım adım yönergeler sağlar.
 services: data-factory
 documentationcenter: ''
@@ -11,12 +11,12 @@ ms.date: 01/10/2018
 author: nabhishek
 ms.author: abnarain
 manager: craigg
-ms.openlocfilehash: 34c8c49166ea13d67c1f3d51805671c63dbb352b
-ms.sourcegitcommit: 5cb0b6645bd5dff9c1a4324793df3fdd776225e4
+ms.openlocfilehash: b0df6264eb38cbbacd5f624b634eea5f742adbc7
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67312470"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73683334"
 ---
 # <a name="transform-data-in-the-cloud-by-using-a-spark-activity-in-azure-data-factory"></a>Azure Data Factory'de bir Spark etkinliği kullanarak verileri bulutta dönüştürme
 Bu öğreticide, Azure portalını kullanarak bir Azure Data Factory işlem hattı oluşturursunuz. Bu işlem hattı bir Spark etkinliği ve isteğe bağlı bir Azure HDInsight bağlı hizmetini kullanarak verileri dönüştürür. 
@@ -31,7 +31,7 @@ Bu öğreticide aşağıdaki adımları gerçekleştireceksiniz:
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/) oluşturun.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
@@ -104,9 +104,9 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 1. **Sürüm** bölümünde **V2**'yi seçin.
 1. **Konum** için, veri fabrikasının konumunu seçin. 
 
-   Data Factory kullanılabildiği şu anda Azure bölgelerinin listesi için aşağıdaki sayfada faiz ve ardından genişletin bölgeleri seçin **Analytics** bulunacak **Data Factory**: [Bölgelere göre kullanılabilir ürünler](https://azure.microsoft.com/global-infrastructure/services/). Data Factory tarafından kullanılan veri depoları (Azure Depolama ve Azure SQL Veritabanı) ve işlemler (HDInsight gibi) başka bölgelerde olabilir.
+   Data Factory'nin kullanılabileceği Azure bölgelerinin bir listesi için bir sonraki sayfada ilgilendiğiniz bölgeleri seçin ve **Analytics**'i genişleterek **Data Factory**: [Products available by region](https://azure.microsoft.com/global-infrastructure/services/) (Bölgeye göre kullanılabilir durumdaki ürünler) bölümünü bulun. Data Factory tarafından kullanılan veri depoları (Azure Depolama ve Azure SQL Veritabanı) ve işlemler (HDInsight gibi) başka bölgelerde olabilir.
 
-1. **Oluştur**’u seçin.
+1. **Oluştur**'u seçin.
 
 1. Oluşturma işlemi tamamlandıktan sonra, **Veri fabrikası** sayfasını görürsünüz. Data Factory kullanıcı arabirimi uygulamasını ayrı bir sekmede başlatmak için **Yazar ve İzleyici** kutucuğunu seçin.
 
@@ -147,13 +147,13 @@ Bu bölümde iki bağlı hizmet oluşturacaksınız:
    
    b. **Tür için** **İsteğe Bağlı HDInsight**’ın seçili olduğunu onaylayın.
    
-   c. İçin **Azure depolama bağlı hizmeti**seçin **AzureBlobStorage1**. Bu bağlı hizmeti daha önce oluşturmuştunuz. Farklı bir ad kullandıysanız, doğru adı burada belirtin. 
+   c. **Azure depolama bağlı hizmeti**için **AzureBlobStorage1**' yi seçin. Bu bağlı hizmeti daha önce oluşturmuştunuz. Farklı bir ad kullandıysanız, doğru adı burada belirtin. 
    
    d. **Küme türü** için **spark**’ı seçin.
    
    e. **Hizmet sorumlusu kimliği** için, HDInsight kümesi oluşturma iznine sahip hizmet sorumlusunun kimliğini girin. 
    
-      Bu hizmet sorumlusu, abonelikte ya da kümenin oluşturulduğu kaynak grubunda Katkıda Bulunan rolünün bir üyesi olmalıdır. Daha fazla bilgi için bkz. [Azure Active Directory uygulaması ve hizmet sorumlusu oluşturma](../active-directory/develop/howto-create-service-principal-portal.md).
+      Bu hizmet sorumlusu, abonelikte ya da kümenin oluşturulduğu kaynak grubunda Katkıda Bulunan rolünün bir üyesi olmalıdır. Daha fazla bilgi için bkz. [Azure Active Directory uygulaması ve hizmet sorumlusu oluşturma](../active-directory/develop/howto-create-service-principal-portal.md). **Hizmet sorumlusu kimliği** , *uygulama kimliğiyle*eşdeğerdir ve bir **hizmet sorumlusu anahtarı** , bir *istemci parolasının*değeri ile eşdeğerdir.
    
    f. **Hizmet sorumlusu anahtarı** için anahtarı girin. 
    
@@ -189,7 +189,7 @@ Bu bölümde iki bağlı hizmet oluşturacaksınız:
    ![HDInsight bağlı hizmetini belirtme](./media/tutorial-transform-data-spark-portal/select-hdinsight-linked-service.png)
 1. **Betik/Jar** sekmesine geçin ve aşağıdaki adımları tamamlayın: 
 
-   a. İçin **iş bağlı hizmeti**seçin **AzureBlobStorage1**.
+   a. **Iş bağlı hizmeti**için **AzureBlobStorage1**' yi seçin.
    
    b. **Depolamaya Gözat**’ı seçin.
 
@@ -205,24 +205,24 @@ Bu bölümde iki bağlı hizmet oluşturacaksınız:
    !["Tümünü Yayımla" düğmesi](./media/tutorial-transform-data-spark-portal/publish-button.png)
 
 
-## <a name="trigger-a-pipeline-run"></a>İşlem hattı çalıştırmasını tetikleme
-Seçin **tetikleyici ekleme** seçin ve araç **şimdi Tetikle**. 
+## <a name="trigger-a-pipeline-run"></a>İşlem hattı çalıştırması tetikleme
+Araç çubuğunda **tetikleyici Ekle** ' yi seçin ve sonra **Şimdi Tetikle**' yi seçin. 
 
 !["Tetikleyici" ve "Şimdi Tetikle" düğmeleri](./media/tutorial-transform-data-spark-portal/trigger-now-menu.png)
 
 ## <a name="monitor-the-pipeline-run"></a>İşlem hattı çalıştırmasını izleme
 
-1. **İzleyici** sekmesine geçin. Bir işlem hattı çalıştırması gördüğünüzü onaylayın. Spark kümesi oluşturma işlemi yaklaşık 20 dakika sürer. 
+1. **İzleyici** sekmesine geçin. bir işlem hattı çalıştırması Görtığınızdan emin olun. Spark kümesi oluşturma işlemi yaklaşık 20 dakika sürer. 
    
 1. Düzenli aralıklarla **Yenile**’yi seçerek işlem hattı çalıştırmasının durumunu denetleyin. 
 
-   ![“Yenile” düğmesini içeren, işlem hattı çalıştırmalarını izleme sekmesi](./media/tutorial-transform-data-spark-portal/monitor-tab.png)
+   ![“Yenile” düğmeli işlem hattı çalıştırmalarını izleme sekmesi](./media/tutorial-transform-data-spark-portal/monitor-tab.png)
 
 1. İşlem hattı çalıştırmasıyla ilişkili etkinlik çalıştırmalarını görmek için **Eylemler** sütunundaki **Etkinlik Çalıştırmalarını Göster**’i seçin.
 
    ![İşlem hattı çalıştırma durumu](./media/tutorial-transform-data-spark-portal/pipeline-run-succeeded.png) 
 
-   Seçerek işlem hattı çalıştırmaları görünümüne dönebilirsiniz **tüm işlem hattı çalıştırmalarını** üstündeki bağlantısı.
+   En üstteki **Tüm Işlem hattı çalıştırmaları** bağlantısını seçerek işlem hattı çalıştırmaları görünümüne dönebilirsiniz.
 
    !["Etkinlik Çalıştırmaları" görünümü](./media/tutorial-transform-data-spark-portal/activity-runs.png)
 
@@ -253,7 +253,7 @@ Bu örnekteki işlem hattı, Spark etkinliğini ve isteğe bağlı bir HDInsight
 Sanal ağdaki bir Azure HDInsight kümesinde Hive betiği çalıştırarak verileri dönüştürme hakkında bilgi almak için sonraki öğreticiye ilerleyin: 
 
 > [!div class="nextstepaction"]
-> [Öğretici: Azure sanal ağ'da Hive kullanarak verileri dönüştürme](tutorial-transform-data-hive-virtual-network-portal.md).
+> [Öğretici: Azure Sanal Ağ’da Hive kullanarak verileri dönüştürme](tutorial-transform-data-hive-virtual-network-portal.md).
 
 
 

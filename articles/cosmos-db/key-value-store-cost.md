@@ -4,29 +4,29 @@ description: Bir anahtar/değer deposu olarak kullanıldığında, okuma işleml
 author: SnehaGunda
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 05/23/2019
+ms.date: 08/23/2019
 ms.author: sngun
 ms.custom: seodec18
-ms.openlocfilehash: 757366f1d1f94d11438be4df0772ce1155f71cee
-ms.sourcegitcommit: 5cb0b6645bd5dff9c1a4324793df3fdd776225e4
+ms.openlocfilehash: 3a79db11ff05bcc9d18619c7f508a9864c17c3b8
+ms.sourcegitcommit: dcf3e03ef228fcbdaf0c83ae1ec2ba996a4b1892
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67310582"
+ms.lasthandoff: 08/23/2019
+ms.locfileid: "70012804"
 ---
-# <a name="azure-cosmos-db-as-a-key-value-store--cost-overview"></a>Azure Cosmos DB anahtar değeri deposu – maliyeti genel bakış
+# <a name="azure-cosmos-db-as-a-key-value-store--cost-overview"></a>Anahtar değer deposu olarak Azure Cosmos DB-maliyete genel bakış
 
-Azure Cosmos DB, yüksek oranda kullanılabilir ve büyük ölçekli uygulamaları kolayca oluşturmak için bir Global olarak dağıtılmış çok modelli veritabanı hizmetidir. Varsayılan olarak, Azure Cosmos DB otomatik olarak bu, verimli bir şekilde alan tüm verilerin dizinini oluşturur. Bu hızlı ve tutarlı sağlar [SQL](how-to-sql-query.md) (ve [JavaScript](stored-procedures-triggers-udfs.md)) her türlü veri çubuğunda sorgular. 
+Azure Cosmos DB, yüksek oranda kullanılabilir ve büyük ölçekli uygulamaları kolayca oluşturmak için bir Global olarak dağıtılmış çok modelli veritabanı hizmetidir. Varsayılan olarak, Azure Cosmos DB tüm verileri otomatik olarak ve etkin şekilde dizine alır. Bu, verilerde hızlı ve tutarlı [SQL](how-to-sql-query.md) (ve [JavaScript](stored-procedures-triggers-udfs.md)) sorguları sunar. 
 
-Bu makalede, Azure Cosmos DB maliyetini basit yazmak için açıklar ve bir anahtar/değer deposu olarak kullanıldığında, okuma işlemleri. Yazma ekler, değiştirir, siler ve belgelerin upsert eder işlemler içerir. % 99,99 oranında garanti etme yanı sıra tek bölgeli tüm hesaplar ve çok bölgeli tüm hesaplar tutarlılıkla ve % 99,999 kullanılabilirlik SLA'sı tüm çoklu bölge veritabanı hesapları Azure Cosmos DB teklif garanti okunabilirlik < 10 MS'den az gecikme okur ve (dizinlenmiş için) sırasıyla 99. yüzdebirlik dilimde yazar. 
+Bu makalede, Azure Cosmos DB maliyetini basit yazmak için açıklar ve bir anahtar/değer deposu olarak kullanıldığında, okuma işlemleri. Yazma işlemleri, veri öğelerinin eklemeleri, yerini alır, siler ve üst öğeleri içerir. Tüm çok bölgeli hesaplar için% 99,999 kullanılabilirlik SLA 'Sı < garantisi sağlamanın yanı sıra, Azure Cosmos DB, okumalar için 10 ms gecikme süresi ve (Dizinli) yazma işlemleri için 99. yüzdebirlik değeri sağlar. 
 
 ## <a name="why-we-use-request-units-rus"></a>İstek birimi (RU) neden kullanıyoruz
 
-Azure Cosmos DB performans miktarına bağlı sağlanan [istek birimi](request-units.md) (RU) bölümü için. İkinci bir ayrıntı düzeyinde olduğu ve RU/sn satın sağlama ([saatlik faturalandırma ile karıştırılmamalıdır](https://azure.microsoft.com/pricing/details/cosmos-db/)). RU, uygulama için gerekli aktarım hızı sağlama basitleştiren bir para birimi olarak düşünülmelidir. Müşterilerimizin kapasite birimleri yazma ve okuma arasında ayrım yapma düşünme gerekmez. Tek bir para birimi model RU, sağlanan kapasiteyi okuma ve yazma işlemleri arasında paylaşmak için verimliliği oluşturur. Bu sağlanan kapasite modeli, düşük gecikme süresi ve yüksek kullanılabilirlik garantisi öngörülebilir ve tutarlı bir performans sağlamak için hizmeti sağlar. Son olarak, model üretilen RU kullanıyoruz, ancak her sağlanan RU kaynakları (bellek, çekirdek) tanımlanmış bir miktarı da vardır. RU/sn yalnızca IOPS değil.
+Azure Cosmos DB performans, [Istek birimleri](request-units.md) (ru/s) ile ifade edilen sağlanan aktarım hızı miktarına bağlıdır. Sağlama ikinci bir ayrıntı düzeyine sahiptir ve RU/s 'de satın alınır ([saatlik faturalandırma ile karıştırılmamalıdır](https://azure.microsoft.com/pricing/details/cosmos-db/)). Ru, uygulama için gerekli aktarım hızı sağlamayı kolaylaştıran bir mantıksal soyutlama (bir para birimi) olarak düşünülmelidir. Kullanıcıların okuma ve yazma verimlilik arasında ayrım yapması gerekmez. Tek bir para birimi model RU, sağlanan kapasiteyi okuma ve yazma işlemleri arasında paylaşmak için verimliliği oluşturur. Bu sağlanan kapasite modeli **, hizmetin öngörülebilir ve tutarlı bir işleme, garantili düşük gecikme süresi ve yüksek kullanılabilirlik**sağlamasına olanak sağlar. Son olarak, her sağlanan RU, üretilen iş miktarını belirleyen bir miktar kaynak (örn. bellek, çekirdek/CPU ve ıOPS) miktarına de sahiptir.
 
-Bir Global olarak dağıtılmış bir veritabanı sistemi olarak Cosmos DB, gecikme süresi, aktarım hızı ve tutarlılık yüksek kullanılabilirlik yanı sıra SLA sağlar. yalnızca bir Azure hizmetidir. Sağladığınız aktarım hızı, her biri, Cosmos DB veritabanı hesabıyla ilişkili bölge için uygulanır. Okumalar, Cosmos DB, birden çok, iyi tanımlanmış sağlar [tutarlılık düzeyleri](consistency-levels.md) aralarından seçim yapabileceğiniz. 
+Küresel olarak dağıtılmış bir veritabanı sistemi olarak, Cosmos DB gecikme süresi, aktarım hızı, tutarlılık ve yüksek kullanılabilirliği kapsayan kapsamlı SLA 'Lar sağlayan tek Azure hizmetidir. Sağladığınız üretilen iş, Cosmos hesabınızla ilişkilendirilen her bölgeye uygulanır. Okumalar, Cosmos DB, birden çok, iyi tanımlanmış sağlar [tutarlılık düzeyleri](consistency-levels.md) aralarından seçim yapabileceğiniz. 
 
-Aşağıdaki tabloda, okuma ve yazma işlemleri, 1 KB ve 100 KB belge boyutuna göre gereken RU sayısı gösterilmektedir.
+Aşağıdaki tabloda, 1 KB ve 100 KBs boyutundaki bir veri öğesine göre okuma ve yazma işlemleri gerçekleştirmek için gereken ru sayısı gösterilmektedir.
 
 |Öğe boyutu|1 okuma|1 yazma|
 |-------------|------|-------|
@@ -35,17 +35,17 @@ Aşağıdaki tabloda, okuma ve yazma işlemleri, 1 KB ve 100 KB belge boyutuna g
 
 ## <a name="cost-of-reads-and-writes"></a>Okuma ve yazma işlemleri maliyeti
 
-1\.000 sağlarsanız RU/sn, bu miktarları 3.6 milyon RU/saat ve $0.08 saat (ABD ve Avrupa içinde) maliyeti. 1 KB'lık boyut belge bu 3.6-m okuma kullanabilir veya 0,72-m Yazar anlamına gelir (3.6 milyon RU / 5) kullanarak, sağlanan aktarım hızı. Milyon okuma ve yazma işlemleri için normalleştirilmiş, maliyeti $0.022 /m okuma olur ($0.08 / 3.6) ve $0.111/ dk yazar ($0.08 / 0,72). Başına maliyet milyon aşağıdaki tabloda gösterildiği gibi en az olur.
+1\.000 RU/s sağlarsanız, bu miktar 3.600.000 RU/saat olarak değişir ve saat (ABD ve Avrupa) için maliyet $0,08. 1 KB boyutlu bir veri öğesi için bu, sağlanan aktarım hızını kullanarak 3.600.000 okuma veya 720.000 yazma (3.600.000 RU/5) kullanabileceğiniz anlamına gelir. Milyon okuma ve yazma işlemleri için, maliyet $0,022/milyon okuma ($0,08/3,6) ve $0.111/milyon yazma ($0,08/0,72) olacaktır. Başına maliyet milyon aşağıdaki tabloda gösterildiği gibi en az olur.
 
-|Öğe boyutu|1-m okuma|1 milyon yazma|
+|Öğe boyutu|1\.000.000 okuma maliyeti|1\.000.000 yazma maliyeti|
 |-------------|-------|--------|
 |1 KB|$0.022|$0.111|
 |100 KB|$0.222|$1.111|
 
 
-En temel blob veya okuma işlemi ve yazma milyon işlem başına 5 milyon başına nesne depoları hizmetler ücreti $0.40. En uygun şekilde kullandıysanız, Cosmos DB %98 kadar bu diğer çözümleri (1 KB'lık işlemlerinde) daha ucuz olabilir.
+En temel blob veya okuma işlemi ve yazma milyon işlem başına 5 milyon başına nesne depoları hizmetler ücreti $0.40. En iyi şekilde kullanılırsa Cosmos DB, bu diğer çözümlerden (1 KB işlem için)% 98 'e kadar olabilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Yeni makaleler, Azure Cosmos DB kaynak sağlama en iyi duruma getirmek için Takipte kalın. Bu arada, araştırmalarında bizim [RU hesaplayıcı](https://www.documentdb.com/capacityplanner).
+* İş yükleriniz için üretilen işi tahmin etmek üzere [ru Hesaplayıcı](https://cosmos.azure.com/capacitycalculator/) kullanın.
 

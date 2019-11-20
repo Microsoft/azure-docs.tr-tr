@@ -1,93 +1,130 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Soru-Cevap Oluşturma Belgeleri
+### YamlMime:Landing
+title: Soru-Cevap Oluşturma belgeleri
+summary: Soru-Cevap Oluşturma hizmeti hakkında bilgi edinin ve bu hizmetin bilgi tabanlarının soru ve yanıtlarınızla nasıl çalıştığını öğrenin.
 metadata:
-  title: Soru-Cevap Oluşturma Belgeleri - Microsoft Bilişsel Hizmetler | Microsoft Docs
-  description: Soru-Cevap Oluşturma hizmeti hakkında bilgi edinin ve bu hizmetin bilgi tabanlarının soru ve yanıtlarınızla nasıl çalıştığını öğrenin.
-  services: cognitive-services
-  author: diberry
-  manager: nitinme
+  ms.topic: landing-page
+  ms.date: 09/18/2019
+  ms.author: nitinme
+  author: nitinme
   ms.service: cognitive-services
   ms.subservice: qna-maker
-  ms.tgt_pltfrm: na
-  ms.devlang: na
-  ms.topic: landing-page
-  ms.date: 12/18/2018
-  ms.author: diberry
-abstract:
-  description: 'Soru-Cevap Oluşturma, verilerinizi temel alan bir sohbet ve soru-cevap katmanı oluşturan bulut tabanlı bir API hizmetidir. Soru-Cevap Oluşturma, SSS belgeleri, URL''ler ve ürün kılavuzları gibi yarı yapılandırılmış içeriklerinizden bir soru cevap hizmeti oluşturmanızı sağlar. Soru-Cevap Oluşturma hizmeti, kullanıcılarınızın doğal dil sorularını bilgi bankanızda bulunan en iyi cevapla eşleştirerek cevap verir.'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: ../media/index/qnamaker-landing-page-video.png
-      width: 250
-    title: 'Soru-Cevap Oluşturma ile Dakikalar İçinde Bot Oluşturma (8:54)'
-    href: 'https://channel9.msdn.com/Shows/AI-Show/Build-a-Bot-in-Minutes-with-QnA-Maker'
-    width: 250
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/cognitive-services/qnamaker/overview/overview
-            html: <p>Soru-Cevap Oluşturma hakkında bilgi edinin.</p>
-            image:
-              src: ../media/index/i_overview.svg
-            title: Soru-Cevap Oluşturma nedir?
-          - href: /azure/cognitive-services/qnamaker/quickstarts/create-publish-knowledge-base
-            html: '<p>Bilgi bankasını oluşturmayı, eğitmeyi ve yayımlamayı öğrenin.</p>'
-            image:
-              src: ../media/index/i_tasks.svg
-            title: 'Bilgi bankasını oluşturma, eğitme ve yayımlama'
-          - href: /azure/cognitive-services/qnamaker/concepts/data-sources-supported
-            html: <p>Bilgi bankasını yayımlamayı öğrenin.</p>
-            image:
-              src: ../media/index/i_tasks.svg
-            title: Veri kaynaklarını anlama
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: 'Soru ve cevap içeriğiniz hakkında bir bilgi bankası oluşturun:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: media/index/logo_Csharp.svg
-            text: 'C&#35;'
-            href: Quickstarts/create-new-kb-csharp
-          - image:
-              src: media/index/Go-Logo_Blue.svg
-            text: Başlayın
-            href: Quickstarts/create-new-kb-go
-          - image:
-              src: media/index/logo_java.svg
-            text: Java
-            href: Quickstarts/create-new-kb-java
-          - image:
-              src: media/index/logo_nodejs.svg
-            text: Node.js
-            href: Quickstarts/create-new-kb-nodejs
-          - image:
-              src: media/index/logo_python.svg
-            text: Python
-            href: Quickstarts/create-new-kb-python
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Soru-Cevap Oluşturma hizmetini kullanarak uygulama geliştirmeyi öğrenin:'
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/cognitive-services/qnamaker/tutorials/create-publish-query-in-portal">Bilgi bankası oluşturma ve soruları yanıtlama</a></li>
-          - html: <a href="/azure/cognitive-services/qnamaker/tutorials/create-qna-bot">Soru-Cevap Oluşturma botu oluşturma</a></li>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: API
-            html: '<p><a href="https://go.microsoft.com/fwlink/?linkid=2092179">Soru-Cevap Oluşturma API’si</a></p>'
+  services: cognitive-services
+  title: Soru-Cevap Oluşturma Belgeleri
+  description: Soru-Cevap Oluşturma, verilerinizi temel alan bir sohbet ve soru-cevap katmanı oluşturan bulut tabanlı bir API hizmetidir. Soru-Cevap Oluşturma, SSS belgeleri, URL'ler ve ürün kılavuzları gibi yarı yapılandırılmış içeriklerinizden bir soru cevap hizmeti oluşturmanızı sağlar. Soru-Cevap Oluşturma hizmeti, kullanıcılarınızın doğal dil sorularını Bilgi Bankanızda bulunan en iyi cevapla eşleştirerek cevap verir.
+  ms.openlocfilehash: 091d2007d115c5e08904af6081d0f67b2eb60071
+  ms.sourcegitcommit: c2e7595a2966e84dc10afb9a22b74400c4b500ed
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/05/2019
+  ms.locfileid: "71971463"
+landingContent:
+- title: Soru-Cevap Oluşturma hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Soru-Cevap Oluşturma nedir?
+      url: overview/overview.md
+    - text: Soru-Cevap Oluşturma portalı
+      url: https://www.qnamaker.ai
+  - linkListType: whats-new
+    links:
+    - text: Yenilikler
+      url: whats-new.md
+  - linkListType: concept
+    links:
+    - text: Geliştirme yaşam döngüsü
+      url: concepts/development-lifecycle-knowledge-base.md
+    - text: Veri kaynakları
+      url: concepts/data-sources-supported.md
+  - linkListType: video
+    links:
+    - text: Dakikalar içinde bot oluşturma
+      url: https://channel9.msdn.com/Shows/AI-Show/Build-a-Bot-in-Minutes-with-QnA-Maker
+- title: Bilgi bankasını oluşturma ve düzenleme
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Bilgi bankası nedir?
+      url: concepts/knowledge-base.md
+  - linkListType: get-started
+    links:
+    - text: 'Hızlı Başlangıç: Yeni bilgi bankası oluşturma'
+      url: quickstarts/create-publish-knowledge-base.md
+    - text: 'Hızlı Başlangıç: Soru ve cevap ekleme'
+      url: quickstarts/add-question-metadata-portal.md
+  - linkListType: how-to-guide
+    links:
+    - text: Birden çok konuşma geçişi oluşturmak için takip istemlerini kullanma
+      url: how-to/multiturn-conversation.md
+    - text: Konuşma ekleme
+      url: how-to/chit-chat-knowledge-base.md
+    - text: Güvenli bir SharePoint veri kaynağı ekleme
+      url: how-to/add-sharepoint-datasources.md
+- title: Bilgi bankasından yanıt alın
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: "Hızlı Başlangıç: Postman'i kullanma"
+      url: quickstarts/get-answer-from-kb-using-postman.md
+    - text: "Hızlı Başlangıç: cURL'yi kullanma"
+      url: quickstarts/get-answer-from-kb-using-curl.md
+    - text: 'Hızlı Başlangıç: REST ve C# kullanma'
+      url: quickstarts/get-answer-from-knowledge-base-csharp.md
+    - text: 'Hızlı Başlangıç: NuGet ve C# kullanma'
+      url: quickstarts/create-publish-kb-csharp-sdk.md#generate-an-answer-from-the-knowledge-base
+  - linkListType: how-to-guide
+    links:
+    - text: Meta verilerle yanıt alma
+      url: how-to/metadata-generateanswer-usage.md
+- title: Test etme ve yayımlama
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Bilgi bankanızı etkileşimli olarak test etme
+      url: how-to/test-knowledge-base.md
+    - text: Bilgi bankası yayımlama
+      url: quickstarts/create-publish-knowledge-base.md#publish-the-knowledge-base
+- title: Bilgi bankası geliştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Bilgi bankanızı geliştirmek için etkin öğrenmeyi kullanma
+      url: how-to/improve-knowledge-base.md
+    - text: Bilgi bankanız hakkında analizler alma
+      url: how-to/get-analytics-knowledge-base.md
+- title: Soru-Cevap Oluşturma botları
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: 'Portal: Soru-Cevap Botu oluşturma'
+      url: tutorials/create-qna-bot.md
+    - text: '.Net: Soru-Cevap Oluşturma ve Language Understanding ile bot oluşturma'
+      url: tutorials/integrate-qnamaker-luis.md
+    - text: Diğer bot örnekleri
+      url: https://github.com/Microsoft/BotBuilder-Samples/blob/master/README.md
+- title: Başvuru
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Bilgi bankasının sınırları
+      url: limits.md
+    - text: Yazma API’leri
+      url: https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase
+    - text: Yanıt API'leri oluşturma
+      url: https://docs.microsoft.com/rest/api/cognitiveservices/qnamakerruntime/runtime
+    - text: .Net SDK başvuru belgeleri
+      url: https://docs.microsoft.com/dotnet/api/microsoft.azure.cognitiveservices.knowledge.qnamaker?view=azure-dotnet
+    - text: Azure PowerShell
+      url: https://docs.microsoft.com/powershell/module/az.cognitiveservices/?view=azps-2.6.0#cognitive_services
+    - text: Azure Komut Satırı Arabirimi (CLI)
+      url: https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest#az-cognitiveservices-list
+- title: Yardım ve geri bildirim
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Sorun giderme
+      url: troubleshooting.md
+    - text: Stack Overflow ile ilgili soru sorun
+      url: https://stackoverflow.com/questions/tagged/QnAMaker
+    - text: UserVoice ile hizmeti etkileme
+      url: https://cognitive.uservoice.com/forums/578689-qna-maker-api

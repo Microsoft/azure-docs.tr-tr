@@ -1,26 +1,20 @@
 ---
 title: Visual Studio Eğilimlerini Çözümleme | Microsoft Docs
 description: Visual Studio Application Insights telemetri eğilimlerini çözümleyin, görselleştirin ve keşfedin.
-services: application-insights
-documentationcenter: .net
-author: NumberByColors
-manager: carmonm
-ms.assetid: 3150c6fc-2691-44f6-a290-fc5cd68e692a
-ms.service: application-insights
-ms.custom: vs-azure
-ms.workload: azure-vs
-ms.tgt_pltfrm: ibiza
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
+author: NumberByColors
+ms.author: daviste
 ms.date: 03/17/2017
 ms.reviewer: mbullwin
-ms.pm_owner: daviste;NumberByColors
-ms.author: daviste
-ms.openlocfilehash: 2b08dfd87910cbb9f23f6b108a970d160612e1a7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.custom: vs-azure
+ms.openlocfilehash: da1cd3ed9d07b1eb1304f6b26999af92d2704537
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66255897"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899309"
 ---
 # <a name="analyzing-trends-in-visual-studio"></a>Visual Studio Eğilimlerini Çözümleme
 Application Insights Eğilimleri aracı, web uygulamanızın önemli telemetri olaylarının zaman içinde nasıl değiştiğini gösterir ve sorunları ve anormallikleri hızlıca belirlemenize yardımcı olur. Sizi daha ayrıntılı tanılama bilgilerine bağlayan Eğilimler, uygulamanızın performansını geliştirmenize, özel durumların nedenlerini izlemenize ve özel olaylarınıza ilişkin bilgileri açığa çıkarmanıza yardımcı olabilir.
@@ -69,7 +63,7 @@ Ardından, sorguyu çalıştırmak için **Telemetriyi Çözümle**’ye tıklay
 Görseldeki baloncuklar arasında gezinmek için:
 
 * Bir baloncuğa tıklayarak seçtiğinizde pencerenin altındaki filtreler güncelleştirilir ve yalnızca belirli bir süre içinde oluşan olaylar özetlenir
-* Arama aracında gezinmek ve ilgili süre içinde gerçekleşen telemetri olaylarını tek tek görmek için bir baloncuğa çift tıklayın
+* Arama aracına gitmek ve bu süre içinde gerçekleşen tüm telemetri olaylarını görüntülemek için kabarcığa çift tıklayın
 * Baloncuğun görseldeki seçimini kaldırmak için Ctrl tuşuna basıp tıklayın.
 
 > [!TIP]
@@ -77,8 +71,8 @@ Görseldeki baloncuklar arasında gezinmek için:
 > 
 > 
 
-## <a name="filter"></a>Filtre
-Pencerenin altındaki filtre denetimleri ile daha özel eğilimleri bulun. Bir filtre uygulamak için adına tıklayın. Telemetrinizin belirli bir yönünde gizlenmiş olabilecek eğilimleri bulmak için farklı filtreler arasında hızlıca geçiş yapabilirsiniz. Bir yönde Özel Durum Türü gibi bir filtre uygularsanız, diğer yönlerdeki filtreler grileştirilmiş görünse bile tıklanabilir durumda kalır. Bir filtrenin uygulamasını kaldırmak için filtreye yeniden tıklayın. Aynı yönde birden fazla filtreyi seçmek için Ctrl tuşuna basıp tıklayın.
+## <a name="filter"></a>Filtrele
+Pencerenin altındaki filtre denetimleri ile daha özel eğilimleri bulun. Bir filtre uygulamak için adına tıklayın. Telemetrinizin belirli bir yönünde gizlenmiş olabilecek eğilimleri bulmak için farklı filtreler arasında hızlıca geçiş yapabilirsiniz. Özel durum türü gibi bir boyutta filtre uygularsanız, diğer boyutlardaki filtreler gri renkte görünmesine rağmen tıklatılabilir kalır. Bir filtrenin uygulanmasını kaldırmak için, tekrar tıklayın. Aynı yönde birden fazla filtreyi seçmek için Ctrl tuşuna basıp tıklayın.
 
 ![Eğilim filtreleri](./media/visual-studio-trends/TrendsFiltering-750.png)
 
@@ -94,7 +88,7 @@ Bu filtrelerden birini kaldırmak için yöne ilişkin **Seçili filtreleri kald
 ![Birden fazla filtre](./media/visual-studio-trends/TrendsFiltering2-750.png)
 
 ## <a name="find-anomalies"></a>Anormallikleri bulma
-Eğilimler aracı, aynı zaman dizisindeki diğer baloncuklara kıyasla anormal olan olayların baloncuklarını vurgulayabilir. Görünüm Türü açılır listesinde **Zaman aralığındaki sayımlar (anomalileri vurgula)** veya **Zaman aralığındaki yüzdeler (anomalileri vurgula)** seçeneğini belirleyin. Kırmızı baloncuklar anormaldir. Anomaliler sayıları/yüzdeleri geçmişte oluşan sayıları/yüzdeleri, standart sapmasının 2.1 katını aşan baloncuklar olarak tanımlanır iki zaman dilimi boyunca (48 görüntülediğiniz, son 24 saatte bir vb. saat).
+Eğilimler aracı, aynı zaman dizisindeki diğer baloncuklara kıyasla anormal olan olayların baloncuklarını vurgulayabilir. Görünüm Türü açılır listesinde **Zaman aralığındaki sayımlar (anomalileri vurgula)** veya **Zaman aralığındaki yüzdeler (anomalileri vurgula)** seçeneğini belirleyin. Kırmızı baloncuklar anormaldir. Bozukluklar, geçmiş iki dönemde gerçekleşen sayımlar/yüzdeler için 2,1 kez (son 24 saati görüntülerken, 48 saat, vb.) standart sapmadan, sayısı/yüzdeleri aşan kabarcıklar olarak tanımlanır.
 
 ![Renkli noktalar anomalileri gösterir](./media/visual-studio-trends/TrendsAnomalies-750.png)
 

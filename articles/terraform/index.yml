@@ -1,63 +1,84 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+### YamlMime:Landing
 title: Azure üzerinde Terraform belgeleri
+summary: Azure üzerinde güvenilir bir şekilde sanal makine ve diğer altyapıları sağlamak için Terraform’u kullanmayı öğrenin.
 metadata:
-  title: 'Azure üzerinde Terraform belgeleri - Öğreticiler, örnekler, başvuru ve kaynaklar'
+  title: Azure üzerinde Terraform belgeleri - Öğreticiler, örnekler, başvuru ve kaynaklar
   description: Azure üzerinde güvenilir bir şekilde sanal makine ve diğer altyapıları sağlamak için Terraform’u kullanmayı öğrenin.
-  services: terraform
-  ms.service: azure
-  keywords: 'terraform, azure, devops, öğreticiler, örnekler, başvuru'
-  author: tomarchermsft
-  manager: jeconnoc
+  ms.service: terraform
+  author: TomArcherMsft
   ms.author: tarcher
   ms.topic: landing-page
-  ms.date: 08/31/2018
-abstract:
-  description: 'Azure’da güvenilir bir şekilde sürüm ve altyapı oluşturmak için Terraform’u kullanın. Hızlı başlangıçlarımızdan ve öğreticilerimizden yararlanarak kaynak oluşturmayı, Azure Terraform modüllerini kullanmayı ve kod ile altyapınızı yönetmeyi öğrenin.'
-sections:
-  - title: Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: Terraform’u yapılandırın ve Azure’da bir Linux VM oluşturmak için kullanın.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/azure/media/index/azure_dev-9.svg'
-            text: Terraform’u yükleme ve yapılandırma
-            href: 'https://docs.microsoft.com/azure/virtual-machines/linux/terraform-install-configure'
-          - image:
-              src: 'https://docs.microsoft.com/azure/media/index/VirtualMachine.svg'
-            text: Linux VM oluşturma
-            href: 'https://docs.microsoft.com/azure/virtual-machines/linux/terraform-create-complete-vm'
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Terraform ile koddan Azure işlem ve ağ altyapısı oluşturmayı öğrenin.
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/terraform/terraform-create-k8s-cluster-with-tf-and-aks">AKS ile Kubernetes kümesi oluşturun</a>.
-          - html: <a href="/azure/terraform/terraform-create-k8s-cluster-with-aks-applicationgateway-ingress">AKS ile giriş denetleyicisi olarak Application Gateway kullanıp Kubernetes kümesi oluşturun</a>.
-          - html: <a href="/azure/terraform/terraform-vm-msi">Azure Market görüntüsü kullanarak MSI kimlik doğrulaması etkin bir Terraform VM’si oluşturun</a>.
-          - html: <a href="/azure/terraform/terraform-create-vm-cluster-module">Azure Terraform modüllerini kullanarak yük dengeli bir VM kümesi oluşturun</a>.
-          - html: <a href="/azure/terraform/terraform-create-vm-cluster-with-infrastructure">Azure Cloud Shell’de yük dengeli bir VM kümesi oluşturun</a>.
-          - html: <a href="/azure/terraform/terraform-create-vm-scaleset-network-disks-hcl">Ağ ve depolama ile bir VM ölçek kümesi yapılandırın</a>
-          - html: <a href="/azure/terraform/terraform-create-vm-scaleset-network-disks-using-packer-hcl">Packer özel görüntüsünden sanal makine ölçek kümesi sağlayın</a>
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: Genel dağıtım görevleri için örnek yapılandırma şablonları.
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: '<a href="https://github.com/terraform-providers/terraform-provider-azurerm/tree/master/examples">GitHub</a>'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Azure Terraform modülleri
-            html: '<p><a href="https://registry.terraform.io/modules/Azure/database/azurerm">Veritabanı için Azure RM</a></p><p><a href="https://registry.terraform.io/modules/Azure/loadbalancer">Load Balancer için Azure RM</a></p><p><a href="https://registry.terraform.io/modules/Azure/computegroup">Azure RM İşlem Grubu</a></p><p><a href="https://registry.terraform.io/modules/Azure/network">Azure RM Ağ</a></p><p><a href="https://registry.terraform.io/modules/Azure/compute">Azure RM İşlem</a></p>'
+  ms.date: 10/26/2019
+  ms.openlocfilehash: dbc4ed58b32312023b3248662357777d8567fff9
+  ms.sourcegitcommit: b1c94635078a53eb558d0eb276a5faca1020f835
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/27/2019
+  ms.locfileid: "72969512"
+landingContent:
+- title: Azure üzerinde Terraform hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure üzerinde Terraform hakkında
+      url: terraform-overview.md
+  - linkListType: architecture
+    links:
+    - text: Terraform Azure Sağlayıcısı
+      url: https://aka.ms/terraform
+- title: Terraform’u yükleme ve yapılandırma
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Terraform’u yükleme ve yapılandırma
+      url: /azure/virtual-machines/linux/terraform-install-configure?/azure/terraform/toc.json&bc=/azure/bread/toc.json
+    - text: Azure için Terraform yapılandırması oluşturma
+      url: terraform-create-configuration.md
+    - text: Terraform Visual Studio Code uzantısını yükleme
+      url: terraform-vscode-extension.md
+    - text: Yeoman kullanarak Terraform temelli şablon oluşturma
+      url: terraform-vscode-module-generator.md
+    - text: Terratest kullanarak Terraform modüllerini test etme
+      url: terratest-in-terraform-modules.md
+- title: AKS'yi yönetme
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: AKS ile bir Kubernetes kümesi oluşturma
+      url: terraform-create-k8s-cluster-with-tf-and-aks.md
+    - text: Application Gateway ile Kubernetes kümesi oluşturma
+      url: terraform-create-k8s-cluster-with-aks-applicationgateway-ingress.md
+- title: Altyapıyı yönetme
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Linux VM oluşturma
+      url: /azure/virtual-machines/linux/terraform-create-complete-vm?/azure/terraform/toc.json&bc=/azure/bread/toc.json
+  - linkListType: tutorial
+    links:
+    - text: MSI etkin bir Terraform VM’si oluşturma
+      url: terraform-vm-managed-identities-for-azure-resources.md
+    - text: Terraform modülleri ile VM kümesi oluşturma
+      url: terraform-create-vm-cluster-module.md
+    - text: Terraform ve HCL ile VM kümesi oluşturma
+      url: terraform-create-vm-cluster-with-infrastructure.md
+    - text: Altyapı ile VM ölçek kümesini sağlama
+      url: terraform-create-vm-scaleset-network-disks-hcl.md
+    - text: Packer özel görüntüsünden sanal makine ölçek kümesi sağlama
+      url: terraform-create-vm-scaleset-network-disks-using-packer-hcl.md
+- title: Ağları yönetme
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: 1. Hub ve bağlı bileşen topolojisi oluşturma
+      url: terraform-hub-spoke-introduction.md
+    - text: 2. Şirket içi sanal ağ oluşturma
+      url: terraform-hub-spoke-on-prem.md
+    - text: 3. Hub sanal ağı oluşturma
+      url: terraform-hub-spoke-hub-network.md
+    - text: 4. Hub sanal ağ gereci oluşturma
+      url: terraform-hub-spoke-hub-nva.md
+    - text: 5. Bağlı bileşen ağı oluşturma
+      url: terraform-hub-spoke-spoke-network.md
+    - text: 6. Ağ topolojisi bağlantısını doğrulama
+      url: terraform-hub-spoke-validation.md

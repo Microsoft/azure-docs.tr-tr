@@ -1,21 +1,20 @@
 ---
 title: Azure portal ile Azure dosya paylaşımlarını yönetme hızlı başlangıcı
 description: Azure portaldan Azure Dosyaları'nı yönetmeyi öğrenmek için bu hızlı başlangıcı kullanın.
-services: storage
 author: roygara
 ms.service: storage
 ms.topic: quickstart
 ms.date: 10/18/2018
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 69e7dba06fce14c2411a82dfade344ba1b14a6d3
-ms.sourcegitcommit: 44a85a2ed288f484cc3cdf71d9b51bc0be64cc33
+ms.openlocfilehash: fef3daf6e9e535736002e309e3d27491364dc553
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2019
-ms.locfileid: "64698741"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71260298"
 ---
-# <a name="quickstart-create-and-manage-azure-file-shares-with-the-azure-portal"></a>Hızlı Başlangıç: Oluşturma ve Azure portalıyla Azure dosya paylaşımlarını yönetme 
+# <a name="quickstart-create-and-manage-azure-file-shares-with-the-azure-portal"></a>Hızlı Başlangıç: Azure dosya paylaşımlarını Azure portal oluşturma ve yönetme 
 [Azure Dosyaları](storage-files-introduction.md), Microsoft’un kullanımı kolay bulut dosya sistemidir. Azure dosya paylaşımları, Windows, Linux ve macOS platformlarına bağlanabilir. Bu kılavuzda, [Azure portalını](https://portal.azure.com/) kullanarak Azure dosya paylaşımlarıyla çalışmanın temel bilgileri gösterilmektedir.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
@@ -30,7 +29,7 @@ Azure dosya paylaşımı oluşturmak için:
 2. Depolama hesabı sayfasında, **Hizmetler** bölümünden **Dosyalar**’ı seçin.
     ![Depolama hesabının hizmetler bölümünün anlık görüntüsü; Dosyalar hizmetini seçin](media/storage-how-to-use-files-portal/create-file-share-1.png)
 
-3. **Dosya hizmeti** sayfasının üst kısmındaki menüden **+ Dosya paylaşımı**’na tıklayın. **Yeni dosya paylaşımı** sayfası aşağı doğru açılır.
+3. **Dosya hizmeti** sayfasının en üstündeki menüde **dosya paylaşma**' ya tıklayın. **Yeni dosya paylaşımı** sayfası aşağı doğru açılır.
 4. **Ad** alanına *myshare* yazın.
 5. **Tamam**’a tıklayarak Azure dosya paylaşımını oluşturun.
 
@@ -45,9 +44,9 @@ Bir dosya paylaşımını SMB ile bağlayabilmeniz için işletim sisteminize g�
 - [macOS](storage-how-to-use-files-mac.md)
 
 ### <a name="using-an-azure-file-share-from-the-azure-portal"></a>Azure portalda Azure dosya paylaşımını kullanma
-Azure portalı üzerinde gelen tüm istekler Dosya REST API ile yapılır; böylelikle SMB erişimi olmadan istemcilerdeki dosyaları ve dizinleri oluşturabilir, değiştirebilir ve silebilirsiniz. Doğrudan dosya REST protokolü ile olası çalışma doğrudan olduğu (yani REST HTTP handcrafting kendiniz çağrıları), ancak en yaygın yolu (ötesinde, Azure portalını kullanarak) dosya REST protokolü kullanmak için kullanmaktır [Azure PowerShell Modülü](storage-how-to-use-files-powershell.md), [Azure CLI](storage-how-to-use-files-cli.md), veya dosya REST protokolü, tercih ettiğiniz betik programlama dilinde geçici güzel bir sarmalayıcı tümü sağlamak bir Azure depolama SDK. 
+Azure portalı üzerinde gelen tüm istekler Dosya REST API ile yapılır; böylelikle SMB erişimi olmadan istemcilerdeki dosyaları ve dizinleri oluşturabilir, değiştirebilir ve silebilirsiniz. Dosya REST protokolüyle (yani, el ile REST HTTP çağrıları) doğrudan çalışmak mümkündür, ancak dosya REST protokolünü kullanmak için en yaygın yol (Azure portal kullanmanın ötesinde) [Azure PowerShell modülünü](storage-how-to-use-files-powershell.md), [Azure CLI](storage-how-to-use-files-cli.md)'yi kullanmak için kullanılır. ya da hepsi, seçtiğiniz komut dosyası/programlama dilinde Dosya REST Protokolü etrafında iyi bir sarmalayıcı sağlayan bir Azure depolama SDK 'sı. 
 
-Kullanabilmeyi umdukları mevcut uygulama ve araçlarını kullanmalarına izin vereceği için Azure Dosyaları kullanıcılarının çoğunluğunun Azure dosya paylaşımları ile SMP protokolü üzerinden çalışmasını bekliyoruz, ancak SMB yerine Dosya REST API'si kullanmanın aşağıdaki gibi bazı avantajları bulunmaktadır:
+Azure dosyalarının çoğu kullanıcının SMB protokolü üzerinden Azure dosya paylaşımlarıyla birlikte çalışmak istediğini umuz, bu sayede bunların kullanabilmesi beklenen mevcut uygulamaları ve araçları kullanmasına izin veriyor, ancak dosya REST AP 'yi kullanmak için avantajlı olmasının birkaç nedeni vardır. Ben, SMB yerine:
 
 - SMB erişiminizin olmadığı bir dizüstü bilgisayar, tablet veya mobil cihaz vb. ile hareket halindeyken Azure dosya paylaşımınızda hızlı bir değişiklik yapmanız gerekir.
 - SMB paylaşımını bağlayamayan istemcilerden; örneğin 445 numaralı bağlantı noktası engeli kaldırılmamış şirket içi bir istemciden bir betik veya uygulama yürütmeniz gerekiyorsa.
@@ -64,7 +63,7 @@ Azure dosya paylaşımınızın kökünde *myDirectory* adlı yeni bir dizin olu
 2. Sayfanın en üstündeki menüden **+ Dizin ekle**’yi seçin. **Yeni dizin** sayfası aşağı doğru açılır.
 3. *myDirectory* yazın ve **Tamam**’a tıklayın.
 
-#### <a name="upload-a-file"></a>Dosyayı karşıya yükleme 
+#### <a name="upload-a-file"></a>Karşıya dosya yükle 
 Bir dosyayı karşıya yüklemeyi göstermek için önce karşıya yüklenecek bir dosya oluşturmanız veya seçmeniz gerekir. Uygun gördüğünüz herhangi bir yolla bunu yapabilirsiniz. Karşıya yüklemek istediğiniz dosyayı seçtikten sonra:
 
 1. **myDirectory** dizinine tıklayın. **myDirectory** paneli açılır.
@@ -76,7 +75,7 @@ Bir dosyayı karşıya yüklemeyi göstermek için önce karşıya yüklenecek b
 5. **Dosyaları karşıya yükleme** sayfasında, dosya adını doğrulayın ve **Karşıya Yükle**’ye tıklayın.
 6. Tamamlandığında, dosyanın **myDirectory** sayfasındaki listede gösterilmesi gerekir.
 
-#### <a name="download-a-file"></a>Dosya indirme
+#### <a name="download-a-file"></a>Dosya indir
 Dosyaya sağ tıklayarak, karşıya yüklediğiniz dosyanın bir kopyasını indirebilirsiniz. İndir düğmesine tıklandıktan sonra olacak işlemler, kullandığınız işletim sistemine ve tarayıcıya bağlıdır.
 
 ## <a name="clean-up-resources"></a>Kaynakları temizleme

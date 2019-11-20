@@ -1,10 +1,10 @@
 ---
-title: Bir Azure AD hak yönetimi (Önizleme) - Azure Active Directory erişim paketinde erişim isteği
-description: My erişim portalı bir Azure Active Directory hak yönetimi (Önizleme) erişim paketinde erişim istemek için kullanmayı öğrenin.
+title: Azure AD Yetkilendirme Yönetimi 'nde bir erişim paketine erişim isteme-Azure Active Directory
+description: Azure Active Directory yetkilendirme yönetimi 'nde bir erişim paketine erişim istemek için erişim portalını nasıl kullanacağınızı öğrenin.
 services: active-directory
 documentationCenter: ''
-author: rolyon
-manager: mtillman
+author: msaburnley
+manager: daveba
 editor: mamtakumar
 ms.service: active-directory
 ms.workload: identity
@@ -12,89 +12,92 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.subservice: compliance
-ms.date: 04/19/2019
-ms.author: rolyon
+ms.date: 10/26/2019
+ms.author: ajburnle
 ms.reviewer: mamkumar
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 39a50240b4360c5b4adcd6020c2b80b0f06315f7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ddc0a3788075701fb4633895e7b22fff2c15f60b
+ms.sourcegitcommit: 98ce5583e376943aaa9773bf8efe0b324a55e58c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64541563"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73173691"
 ---
-# <a name="request-access-to-an-access-package-in-azure-ad-entitlement-management-preview"></a>Bir Azure AD hak yönetimi (Önizleme) erişim paketinde erişim isteği
+# <a name="request-access-to-an-access-package-in-azure-ad-entitlement-management"></a>Azure AD Yetkilendirme Yönetimi 'nde bir erişim paketine erişim isteme
 
-> [!IMPORTANT]
-> Azure Active Directory (Azure AD) Yetkilendirme Yönetimi, şu anda genel Önizleme aşamasındadır.
-> Önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanır ve üretim iş yüklerinde kullanılması önerilmez. Bazı özellikler desteklenmiyor olabileceği gibi özellikleri sınırlandırılmış da olabilir.
-> Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+Azure AD yetkilendirme yönetimi sayesinde bir erişim paketi, erişim paketinin ömrü boyunca erişimi otomatik olarak yöneten kaynak ve ilkelerin bir kerelik kurulumunu mümkün bir şekilde sunar. 
 
-## <a name="sign-in-to-the-my-access-portal"></a>My erişim portalında oturum açın
+Erişim paketi Yöneticisi, kullanıcıların paketlere erişim sahibi olması için ilkeleri bir onay gerektirecek şekilde yapılandırabilir. Erişim paketine erişmesi gereken bir Kullanıcı, erişim sağlamak için bir istek gönderebilir. Bu makalede bir erişim isteğinin nasıl gönderileceği açıklanır.
 
-Burada bir erişim paketine erişim isteğinde bulunabileceği My erişim portalı oturum açmak için ilk adımdır bakın.
+## <a name="sign-in-to-the-my-access-portal"></a>Erişim Portalı 'nda oturum açın
 
-**Önkoşul rolü:** İstek sahibi
+İlk adım, erişim paketine erişim isteyebileceğiniz erişim portalı 'nda oturum açmak için kullanılır.
 
-1. E-posta veya çalıştığınız proje ya da İş Yöneticisi'nden bir ileti arayın. E-posta erişimi ihtiyacınız olacak erişim paket bağlantısı içermelidir. Bağlantı ile başlar:
+**Önkoşul rolü:** Sahibinin
 
-    `https://myaccess.microsoft.com`
+1. Çalıştığınız proje veya iş Yöneticisi için bir e-posta veya bir ileti arayın. E-posta, erişmeniz gereken erişim paketine bir bağlantı içermelidir. Bağlantı `myaccess` ile başlar, bir dizin ipucu içerir ve bir erişim paketi KIMLIĞIYLE biter.
+ 
+    `https://myaccess.microsoft.com/@<directory_hint>#/access-packages/<access_package_id>`
 
 1. Bağlantıyı açın.
 
-1. My erişim portalında oturum açın.
+1. Erişim Portalı ' nda oturum açın.
 
-    Kuruluş hesabınızı kullandığınızdan emin olun. Emin değilseniz, kontrol, proje ya da İş Yöneticisi ile.
+    Kuruluş (iş veya okul) hesabınızı kullandığınızdan emin olun. Emin değilseniz, projeniz veya Business Manager ile görüşün.
 
-## <a name="request-an-access-package"></a>İstek bir erişim paketi
+## <a name="request-an-access-package"></a>Erişim paketi isteme
 
-My erişim Portalı'nda erişim paket bulduktan sonra bir istek gönderebilirsiniz.
+Access Portal 'da erişim paketini bulduktan sonra bir istek gönderebilirsiniz.
 
-**Önkoşul rolü:** İstek sahibi
+**Önkoşul rolü:** Sahibinin
 
-1. Erişim paketi seçmek için onay işaretine tıklayın.
+1. Listede erişim paketini bulun.  Gerekirse, arama dizesi yazarak ve ardından **ad**, **Katalog**veya **kaynaklar** filtresini seçerek arama yapabilirsiniz.
 
-    ![My erişim portalı - erişim paketleri](./media/entitlement-management-shared/my-access-access-packages.png)
+    ![Erişim Portalı-kaynak arama](./media/entitlement-management-request-access/my-access-resource-search.png)
 
-1. Tıklayın **erişim isteği** isteği erişim bölmesini açmak için.
+1. Erişim paketini seçmek için onay işaretine tıklayın.
 
-1. Varsa **İş Gerekçesi** kutusu görüntülenir, erişmesi için bir gerekçe yazın.
+1. Istek erişimi bölmesini açmak için **erişim iste** ' ye tıklayın.
 
-1. Varsa **belirli bir süre için istek?** etkinleştirilmişse, select **Evet** veya **Hayır**.
+    ![Erişim Portalı-erişim paketlerim](./media/entitlement-management-request-access/my-access-request-access-button.png)
 
-1. Gerekirse, başlangıç tarihi belirtin ve bitiş tarihi.
+1. **İş gerekçe** kutusu görüntüleniyorsa, erişim gereksinimi için bir gerekçe yazın.
 
-    ![My erişim portalı - erişim isteği](./media/entitlement-management-shared/my-access-request-access.png)
+1. **Belirli bir döneme yönelik istek** etkinleştirilirse, **Evet** veya **Hayır**' ı seçin.
 
-1. İşiniz bittiğinde tıklayın **Gönder** isteğinizi gönderebilirsiniz.
+1. Gerekirse, başlangıç tarihini ve bitiş tarihini belirtin.
 
-1. Tıklayın **istek geçmişi** isteklerinizi ve durumunu bir listesini görmek için.
+    ![Erişim Portalı-erişim ISTEME](./media/entitlement-management-shared/my-access-request-access.png)
 
-    Erişim paket onay gerektiriyorsa, isteği onay bekliyor durumda sunulmuştur.
+1. İşiniz bittiğinde, isteğinizi göndermek için **Gönder** ' e tıklayın.
 
-## <a name="cancel-a-request"></a>Bir isteği iptal et
+1. İsteklerinizin ve durumun listesini görmek için **istek geçmişi** ' ne tıklayın.
 
-Erişim isteği gönderme ve istek yine **onay bekleyen** durum istek iptal edebilirsiniz.
+    Erişim paketi onay gerektiriyorsa, istek artık bekleyen bir onay durumundadır.
 
-**Önkoşul rolü:** İstek sahibi
+### <a name="select-a-policy"></a>İlke seçme
 
-1. My erişim portalında sol tıklayın **istek geçmişi** isteklerinizi ve durumunu bir listesini görmek için.
+Uygulanan birden çok ilkeye sahip bir erişim paketine erişim isteğinde karşılaşırsanız, bir ilke seçmeniz istenebilir. Örneğin, bir erişim paketi Yöneticisi iki dahili çalışan grubu için iki ilkeye sahip bir erişim paketi yapılandırabilir. İlk ilke 60 gün boyunca erişime izin verebilir ve onay gerektirebilir. İkinci ilke 2 gün boyunca erişime izin verebilir ve onay gerektirmez. Bu senaryoyla karşılaşırsanız, kullanmak istediğiniz ilkeyi seçmeniz gerekir.
 
-1. Tıklayın **görünümü** bağlantı isteği iptal etmek istiyor.
+![Erişim Portalı-erişim ıste-birden çok ilke](./media/entitlement-management-request-access/my-access-multiple-policies.png)
 
-1. İstek yine ise **onay bekleyen** durum tıklayabilirsiniz **iptal isteği** isteği iptal etmek için.
+## <a name="cancel-a-request"></a>İsteği iptal et
 
-    ![My erişim portalı - isteği iptal et](./media/entitlement-management-request-access/my-access-cancel-request.png)
+Bir erişim isteği gönderirseniz ve istek hala **Bekleyen onay** durumundaysa, isteği iptal edebilirsiniz.
 
-1. Tıklayın **istek geçmişi** isteği iptal edildi onaylamak için.
+**Önkoşul rolü:** Sahibinin
 
-## <a name="select-a-policy"></a>İlke seçme
+1. İsteklerinizin ve durumun listesini görmek için, sol taraftaki erişim Portalı ' nda, **istek geçmişi** ' ne tıklayın.
 
-Uygulama birden çok ilkelerine sahip bir erişim paketine erişim isteğinde bulunan bir ilke seçin istenebilir. Örneğin, bir erişim Paket Yöneticisi erişim paket sahip iki ilke çalışanları iki grupları için yapılandırabilirsiniz. İlk 60 gün boyunca erişime izin vermek ve onayı iste. İkinci ilkeyi erişime izin vermek için 2 gün ve onay gerekli değil. Bu senaryo karşılaşırsanız, kullanmak istediğiniz ilke seçmeniz gerekir.
+1. İptal etmek istediğiniz isteğin **Görünüm** bağlantısına tıklayın.
 
-**Önkoşul rolü:** İstek sahibi
+1. İstek hala **Bekleyen onay** durumundaysa, isteği iptal etmek Için Isteği **iptal et** ' e tıklayabilirsiniz.
+
+    ![Erişim Portalı-isteği Iptal et](./media/entitlement-management-request-access/my-access-cancel-request.png)
+
+1. İsteğin iptal edildiğini onaylamak için **istek geçmişi** ' ne tıklayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Onaylayın veya reddedin erişim istekleri](entitlement-management-request-approve.md)
-- [İstek işlemini ve e-posta bildirimleri](entitlement-management-process.md)
+- [Erişim isteklerini onaylama veya reddetme](entitlement-management-request-approve.md)
+- [İşlem ve e-posta bildirimleri iste](entitlement-management-process.md)

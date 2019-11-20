@@ -1,6 +1,6 @@
 ---
-title: Phoenix sorgu sunucusu REST SDK - Azure HDInsight
-description: Yükleme ve Azure HDInsight, Phoenix sorgu sunucusu REST SDK'yı kullanın.
+title: Phoenix Query Server REST SDK-Azure HDInsight
+description: Azure HDInsight 'ta Phoenix Query Server için REST SDK 'Yı yükleyip kullanın.
 ms.service: hdinsight
 author: ashishthaps
 ms.author: ashishth
@@ -8,51 +8,51 @@ ms.reviewer: jasonh
 ms.custom: hdinsightactive
 ms.topic: conceptual
 ms.date: 12/04/2017
-ms.openlocfilehash: 1f468cac29579d8748f61a47b548a67d36ff8279
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: c9e9258fb7ace93d0866463563d328456cbd1daa
+ms.sourcegitcommit: 9dec0358e5da3ceb0d0e9e234615456c850550f6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64695962"
+ms.lasthandoff: 10/14/2019
+ms.locfileid: "72311685"
 ---
-# <a name="apache-phoenix-query-server-rest-sdk"></a>Apache Phoenix sorgu sunucusu REST SDK'sı
+# <a name="apache-phoenix-query-server-rest-sdk"></a>Apache Phoenix sorgu sunucusu REST SDK 'Sı
 
-[Apache Phoenix](https://phoenix.apache.org/) açık kaynaklı, yüksek düzeyde paralel ilişkisel veritabanı katmanı üst kısmındaki [Apache HBase](apache-hbase-overview.md). Phoenix gibi SSH Araçlar üzerinden SQL benzeri sorguları ile HBase kullanan olanak tanır [SQLLine](apache-hbase-phoenix-squirrel-linux.md). Phoenix, istemci iletişimi için iki aktarım mekanizması destekleyen bir ince istemciyi Phoenix sorgu sunucusu (PQS) adlı bir HTTP sunucusu da sağlar: JSON ve protokol arabellekleri. Protokol arabellekleri varsayılan mekanizmasıdır ve JSON daha verimli bir iletişim sunar.
+[Apache Phoenix](https://phoenix.apache.org/) , [Apache HBase](apache-hbase-overview.md)üzerinde açık kaynaklı, yüksek düzeyde paralel ilişkisel veritabanı katmanıdır. Phoenix, SQL benzeri sorguları [Sqlline](apache-hbase-query-with-phoenix.md)gibi SSH araçları aracılığıyla HBase ile birlikte kullanmanıza olanak sağlar. Phoenix Ayrıca, istemci iletişimi için iki taşıma mekanizmasını destekleyen bir ince istemci olan Phoenix Query Server (PQS) adlı bir HTTP sunucusu da sağlar: JSON ve protokol arabellekleri. Protokol arabellekleri varsayılan mekanizmadır ve JSON 'dan daha verimli bir iletişim sağlar.
 
-Bu makalede, ayrı ayrı ve toplu tablolar, upsert satır oluşturma ve SQL deyimlerini kullanarak verileri seçme PQS REST SDK'sını kullanmayı açıklar. Örneklerde [Apache Phoenix sorgu sunucusu için Microsoft .NET sürücüsü](https://www.nuget.org/packages/Microsoft.Phoenix.Client). Bu SDK'sı oluşturulan [Apache Calcite'nın Avatica](https://calcite.apache.org/avatica/) API'ler, protokol arabellekleri için serileştirme biçimi kullanımda.
+Bu makalede, PQS REST SDK 'sının tablo oluşturmak, tek tek ve toplu olarak satırlar oluşturmak ve SQL deyimlerini kullanarak veri seçmek için nasıl kullanılacağı açıklanır. Örnekler, [Apache Phoenix sorgu sunucusu için Microsoft .net sürücüsünü](https://www.nuget.org/packages/Microsoft.Phoenix.Client)kullanır. Bu SDK, bir serileştirme biçimi için özel olarak protokol arabellekleri kullanan [Apache calalaltik](https://calcite.apache.org/avatica/) API 'lerinde oluşturulmuştur.
 
-Daha fazla bilgi için [Apache Calcite Avatica protokol arabellekleri başvuru](https://calcite.apache.org/avatica/docs/protobuf_reference.html).
+Daha fazla bilgi için bkz. [Apache Cal, Avatika protokol arabellekleri başvurusu](https://calcite.apache.org/avatica/docs/protobuf_reference.html).
 
 ## <a name="install-the-sdk"></a>SDK yükle
 
-Apache Phoenix sorgu sunucusu için Microsoft .NET sürücüsü Visual Studio'dan yüklenebilir bir NuGet paketi olarak sağlanan **NuGet Paket Yöneticisi Konsolu** aşağıdaki komutla:
+Apache Phoenix sorgu sunucusu için Microsoft .NET sürücüsü, Visual Studio **NuGet paket yöneticisi konsolundan** aşağıdaki komutla yüklenebilen bir NuGet paketi olarak sunulmaktadır:
 
     Install-Package Microsoft.Phoenix.Client
 
-## <a name="instantiate-new-phoenixclient-object"></a>Yeni PhoenixClient nesnesinin örneğini oluşturma
+## <a name="instantiate-new-phoenixclient-object"></a>Yeni PhoenixClient nesnesi örneği oluştur
 
-Kitaplık'ı kullanmaya başlamak için yeni bir örneğini `PhoenixClient` tümleştirilmesidir nesnesi `ClusterCredentials` içeren `Uri` kümesi ve kümenin Apache Hadoop kullanıcı adı ve parola.
+Kitaplığı kullanmaya başlamak için yeni bir `PhoenixClient` nesnesi örneği oluşturun, `ClusterCredentials` ' in `Uri` ' yi kümenize ve kümenin Apache Hadoop Kullanıcı adı ve parolasına koyun.
 
 ```csharp
 var credentials = new ClusterCredentials(new Uri("https://CLUSTERNAME.azurehdinsight.net/"), "USERNAME", "PASSWORD");
 client = new PhoenixClient(credentials);
 ```
 
-CLUSTERNAME küme oluşturma üzerinde Hadoop kimlik bilgilerinin HDInsight HBase küme adı ve kullanıcı adı ve parola ile değiştirin. Varsayılan Hadoop kullanıcı adı **yönetici**.
+CLUSTERNAME değerini HDInsight HBase küme adınızla ve Kullanıcı adı ve parola ile küme oluşturma sırasında belirtilen Hadoop kimlik bilgileriyle değiştirin. Varsayılan Hadoop Kullanıcı adı **admin**' dir.
 
-## <a name="generate-unique-connection-identifier"></a>Benzersiz bağlantı kimliği oluştur
+## <a name="generate-unique-connection-identifier"></a>Benzersiz bağlantı tanımlayıcısı oluştur
 
-PQS için bir veya daha fazla isteği göndermek için istekleri bağlantı ile ilişkilendirmek için bir benzersiz bağlantı kimliği eklemeniz gerekir.
+PQS 'ye bir veya daha fazla istek göndermek için, istek (ler) i bağlantıyla ilişkilendirmek üzere benzersiz bir bağlantı tanımlayıcısı eklemeniz gerekir.
 
 ```csharp
 string connId = Guid.NewGuid().ToString();
 ```
 
-Her örneğin ilk çağrıda `OpenConnectionRequestAsync` yöntemini içinde benzersiz bağlantı kimliği. Ardından, tanımlama `ConnectionProperties` ve `RequestOptions`, nesneleri ve üretilen bağlantı kimliği için geçirme `ConnectionSyncRequestAsync` yöntemi. PQS'ın `ConnectionSyncRequest` nesne yardımcı olur istemci ve sunucu veritabanı özellikleri tutarlı bir görünüm olduğundan emin olun.
+Her örnek öncelikle `OpenConnectionRequestAsync` yöntemine bir çağrı yapar ve benzersiz bağlantı tanımlayıcısını geçer. Sonra, `ConnectionProperties` ve `RequestOptions` tanımlayın, bu nesneleri ve oluşturulan bağlantı tanımlayıcısını `ConnectionSyncRequestAsync` yöntemine geçirerek. PQS 'nin `ConnectionSyncRequest` nesnesi, hem istemci hem de sunucunun veritabanı özelliklerinin tutarlı bir görünümüne sahip olmasını sağlamaya yardımcı olur.
 
-## <a name="connectionsyncrequest-and-its-connectionproperties"></a>ConnectionSyncRequest ve kendi ConnectionProperties
+## <a name="connectionsyncrequest-and-its-connectionproperties"></a>ConnectionSyncRequest ve ConnectionProperties
 
-Çağrılacak `ConnectionSyncRequestAsync`, geçirin bir `ConnectionProperties` nesne.
+@No__t-0 ' ı çağırmak için bir `ConnectionProperties` nesnesi geçirin.
 
 ```csharp
 ConnectionProperties connProperties = new ConnectionProperties
@@ -73,28 +73,28 @@ await client.ConnectionSyncRequestAsync(connId, connProperties, options);
 
 | Özellik | Açıklama |
 | -- | -- |
-| Otomatik yürütme | Bir boolean belirten olmadığını `autoCommit` Phoenix işlemleri için etkinleştirilir. |
-| ReadOnly | Bağlantı salt okunur olup olmadığını belirten bir Boole değeri. |
-| TransactionIsolation | Düzeyini belirten bir tamsayı JDBC belirtimi - başına işlem yalıtım aşağıdaki tabloya bakın.|
-| Katalog | Bağlantı özellikleri alınırken kullanılacak kataloğu adı. |
-| Şema | Bağlantı özellikleri alınırken kullanılacak şemasının adı. |
-| IsDirty | Özellikleri değiştirilmiş olup olmadığını belirten bir Boole değeri. |
+| Otomatik yürütme | Phoenix işlemleri için `autoCommit` ' ın etkinleştirilip etkinleştirilmeyeceğini belirten bir Boole değeri. |
+| ReadOnly | Bağlantının salt okunurdur olduğunu belirten bir Boole değeri. |
+| Işlem yalıtımı | JDBC belirtimine göre işlem yalıtımı düzeyini belirten bir tamsayı-aşağıdaki tabloya bakın.|
+| Katalog | Bağlantı özellikleri getirilirken kullanılacak kataloğun adı. |
+| Şema | Bağlantı özellikleri getirilirken kullanılacak şemanın adı. |
+| IsDirty ayarlanamıyor | Özelliklerin değiştirilip değiştirilmediğini belirten bir Boole değeri. |
 
-İşte `TransactionIsolation` değerleri:
+@No__t-0 değerleri aşağıda verilmiştir:
 
 | Yalıtım değeri | Açıklama |
 | -- | -- |
-| 0 | İşlemler desteklenmez. |
-| 1 | Kirli okuma, tekrarlanabilir olmayan okuma ve hayali okuma ortaya çıkabilir. |
-| 2 | Kirli okuma engellenir ve tekrarlanabilir olmayan okuma ve hayali okumaları oluşabilir. |
-| 4 | Kirli okuma ve tekrarlanabilir olmayan okuma engellenir ancak hayali okumaları oluşabilir. |
-| 8 | Kirli okuma, tekrarlanabilir olmayan okuma ve hayali okuma tüm engellenir. |
+| 0 | İşlemler desteklenmiyor. |
+| 1 | Kirli okumalar, tekrarlanabilir olmayan okumalar ve hayalet okuma gerçekleşmeyebilir. |
+| 2 | Kirli okumalar engellenir, ancak yinelenemeyen okuma ve hayalet okuma gerçekleşmeyebilir. |
+| 4 | Kirli okumalar ve yinelenebilir olmayan okumalar engellenir, ancak hayalet okuma gerçekleşmeyebilir. |
+| 8 | Kirli okuma, yinelenebilir olmayan okuma ve hayalet okuma engellenir. |
 
-## <a name="create-a-new-table"></a>Yeni bir tablo oluşturma
+## <a name="create-a-new-table"></a>Yeni tablo oluştur
 
-HBase, diğer RDBMS gibi tablolardaki verileri depolar. Phoenix, birincil anahtar ve sütun türleri tanımlarken yeni tablolar oluşturmak için standart SQL sorgularını kullanır.
+Diğer RDBMS gibi HBase, verileri tablolar halinde depolar. Phoenix, birincil anahtar ve sütun türlerini tanımlarken yeni tablolar oluşturmak için standart SQL sorguları kullanır.
 
-Bu örnek ve tüm sonraki örneklerde, örneklenen kullanın `PhoenixClient` nesne sınıfında tanımlandığı gibi [yeni bir PhoenixClient nesnesinin örneğini oluşturma](#instantiate-new-phoenixclient-object).
+Bu örnek ve sonraki tüm örnekler, [Yeni bir PhoenixClient nesnesi örneği oluşturma](#instantiate-new-phoenixclient-object)bölümünde tanımlandığı gibi örneklenmiş `PhoenixClient` nesnesini kullanır.
 
 ```csharp
 string connId = Guid.NewGuid().ToString();
@@ -160,17 +160,17 @@ finally
 }
 ```
 
-Yukarıdaki örnekte adlı yeni bir tablo oluşturur `Customers` kullanarak `IF NOT EXISTS` seçeneği. `CreateStatementRequestAsync` Çağrı Avitica (PQS) sunucuda yeni bir bildirimi oluşturur. `finally` Blok kapatır döndürülen `CreateStatementResponse` ve `OpenConnectionResponse` nesneleri.
+Yukarıdaki örnek, `IF NOT EXISTS` seçeneğini kullanarak `Customers` adlı yeni bir tablo oluşturur. @No__t-0 çağrısı, Avitika (PQS) sunucusunda yeni bir ifade oluşturur. @No__t-0 bloğu döndürülen `CreateStatementResponse` ve `OpenConnectionResponse` nesnelerini kapatır.
 
-## <a name="insert-data-individually"></a>Tek tek veri ekleme
+## <a name="insert-data-individually"></a>Verileri ayrı olarak ekle
 
-Bu örnek, tek bir veri gösterir. INSERT, başvuran bir `List<string>` Amerikan eyalet ve bölge kısaltmalar koleksiyonu:
+Bu örnekte, Amerikan devleti ve bölge kısaltmalarının `List<string>` koleksiyonuna başvuran tek bir veri ekleme gösterilmektedir:
 
 ```csharp
 var states = new List<string> { "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY" };
 ```
 
-Tablonun `StateProvince` bir sonraki select işlemi sütun değeri kullanılır.
+Tablonun `StateProvince` sütun değeri, sonraki bir SELECT işleminde kullanılacaktır.
 
 ```csharp
 string connId = Guid.NewGuid().ToString();
@@ -277,11 +277,11 @@ finally
 }
 ```
 
-INSERT deyimi yürütmek yapısı, yeni bir tablo oluşturma işlemiyle benzerdir. Sonunda unutmayın `try` blok, işlem açıkça kaydedilmiş. Bu örnekte bir INSERT işlem 300 kez yineler. Aşağıdaki örnek, daha verimli bir toplu ekleme işlemi gösterilmektedir.
+INSERT ifadesinin yürütülmesi için yapı, yeni bir tablo oluşturmaya benzer. @No__t-0 bloğunun sonunda, işlemin açıkça yürütüldüğü unutulmamalıdır. Bu örnek, bir INSERT TRANSACTION 300 kez yinelenir. Aşağıdaki örnekte, daha verimli bir toplu iş ekleme işlemi gösterilmektedir.
 
-## <a name="batch-insert-data"></a>Toplu ekleme verileri
+## <a name="batch-insert-data"></a>Toplu veri ekleme
 
-Aşağıdaki kod, veri tek tek ekleme kodu hemen hemen aynıdır. Bu örnekte `UpdateBatch` nesne bir çağrıda `ExecuteBatchRequestAsync`, tekrar tekrar çağırmak yerine `ExecuteRequestAsync` hazırlanmış bir deyim ile.
+Aşağıdaki kod, verileri ayrı olarak eklemeye yönelik kodla neredeyse aynıdır. Bu örnek, Prepared ifadesiyle `ExecuteRequestAsync` ' yi tekrar tekrar çağırmak yerine `ExecuteBatchRequestAsync` ' e yapılan çağrıda `UpdateBatch` nesnesini kullanır.
 
 ```csharp
 string connId = Guid.NewGuid().ToString();
@@ -391,15 +391,15 @@ finally
 }
 ```
 
-Bir test ortamında, tek başına 300 yeni kayıtlar ekleme neredeyse 2 dakika sürdü. Buna karşılık, 300 kayıtları toplu olarak ekleme yalnızca 6 (sn) gereklidir.
+Tek bir test ortamında, tek tek 300 yeni kayıt eklemek neredeyse 2 dakika sürdü. Buna karşılık, toplu işlem olarak 300 kayıt eklemek yalnızca 6 saniye gerektirir.
 
 ## <a name="select-data"></a>Verileri seçme
 
-Bu örnek, birden çok sorgu yürütmek için bir bağlantı yeniden gösterilmektedir:
+Bu örnekte, birden çok sorguyu yürütmek için bir bağlantının nasıl yeniden kullanılacağı gösterilmektedir:
 
-1. Tüm kayıtları seçmek ve varsayılan en fazla 100 döndürülür sonra kalan kayıtlar ardından getirilemedi.
-2. Toplam satır sayısı select deyimiyle tek skaler sonuç almak için kullanın.
-3. Müşteriler eyalet veya bölge başına toplam sayısını döndüren bir select deyimi yürütün.
+1. Tüm kayıtlar ' ı seçin ve ardından varsayılan en fazla 100 ' dan sonra kalan kayıtları getirin.
+2. Tek skalar sonucu almak için bir toplam Row Count SELECT ifadesini kullanın.
+3. Durum veya bölge başına toplam müşteri sayısını döndüren bir SELECT ifadesini yürütün.
 
 ```csharp
 string connId = Guid.NewGuid().ToString();
@@ -492,7 +492,7 @@ finally
 }
 ```
 
-Çıkışı `select` ifadeleri, aşağıdaki sonucu olmalıdır:
+@No__t-0 deyimlerinin çıktısı aşağıdaki sonuç olmalıdır:
 
 ```
 id0 first0
@@ -539,5 +539,5 @@ FM: 5
 
 ## <a name="next-steps"></a>Sonraki adımlar 
 
-* [HDInsight üzerinde Apache Phoenix](../hdinsight-phoenix-in-hdinsight.md)
-* [Apache HBase REST SDK'sını kullanma](apache-hbase-rest-sdk.md)
+* [HDInsight 'ta Apache Phoenix](../hdinsight-phoenix-in-hdinsight.md)
+* [Apache HBase REST SDK 'sını kullanma](apache-hbase-rest-sdk.md)

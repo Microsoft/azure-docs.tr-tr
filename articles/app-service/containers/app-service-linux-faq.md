@@ -1,7 +1,7 @@
 ---
-title: SSS - Azure Linux'ta App Service | Microsoft Docs
-description: SSS Linux'ta Azure App Service.
-keywords: Azure app service, web uygulaması, SSS, linux, oss, kapsayıcılar, çok kapsayıcılı multicontainer için web app
+title: Linux üzerinde App Service SSS-Azure | Microsoft Docs
+description: Linux SSS üzerinde Azure App Service.
+keywords: Azure App Service, Web uygulaması, SSS, Linux, Oss, kapsayıcılar için Web App, çok Kapsayıcılı, çok kapsayıcı
 services: app-service
 documentationCenter: ''
 author: msangapu-msft
@@ -11,95 +11,94 @@ ms.assetid: ''
 ms.service: app-service
 ms.workload: na
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 10/30/2018
-ms.author: msangapu-msft
+ms.author: msangapu
 ms.custom: seodec18
-ms.openlocfilehash: d465a93a23b7f0098471e0074240dfcbe9658736
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: fa7b6a02ba287c7f51284a28ce41b2291317f99c
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67448431"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70066897"
 ---
-# <a name="azure-app-service-on-linux-faq"></a>Azure App Service Linux SSS hakkında
+# <a name="azure-app-service-on-linux-faq"></a>Linux 'ta Azure App Service SSS
 
-Linux'ta App Service'nın yayınlanmasıyla birlikte, özellik ekleme ve platformumuz için geliştirmeler yapmayı üzerinde çalışıyoruz. Bu makalede, müşterilerimizin bize son istediği, soruların yanıtlarını sağlar.
+Linux üzerinde App Service yayınlanmasıyla birlikte özellik ekleme ve platformumuza geliştirmeler yapma konusunda çalışıyoruz. Bu makalede, müşterilerimizin son zamanlarda sorduğu sorulara yanıtlar verilmektedir.
 
-Herhangi bir sorunuz varsa, bu makalede yorum.
+Sorunuz varsa, bu makaleye yorum yapın.
 
-## <a name="built-in-images"></a>Yerleşik görüntüleri
+## <a name="built-in-images"></a>Yerleşik görüntüler
 
-**Platformu sağlayan yerleşik Docker kapsayıcılarını çatal istiyorsunuz. Bu dosyaların nerede bulabilirim?**
+**Platformun sağladığı yerleşik Docker kapsayıcılarını çatala eklemek istiyorum. Bu dosyaları nerede bulabilirim?**
 
-Tüm Docker dosyaları bulabilirsiniz [GitHub](https://github.com/azure-app-service). Tüm Docker kapsayıcılarını bulabilirsiniz [Docker Hub](https://hub.docker.com/u/appsvc/).
+Tüm Docker dosyalarını [GitHub](https://github.com/azure-app-service)üzerinde bulabilirsiniz. [Docker Hub](https://hub.docker.com/u/appsvc/)'Daki tüm Docker kapsayıcılarını bulabilirsiniz.
 
 <a id="#startup-file"></a>
 
-**Çalışma zamanı yığını yapılandırabilirim, başlangıç dosyasını bölümü için beklenen değerler nelerdir?**
+**Çalışma zamanı yığınını yapılandırdığımda, başlangıç dosyası bölümü için beklenen değerler nelerdir?**
 
 | Yığın           | Beklenen değer                                                                         |
 |-----------------|----------------------------------------------------------------------------------------|
-| Java SE         | JAR uygulamanızı başlatmak için komutu (örneğin, `java -jar my-app.jar --server.port=80`) |
-| Tomcat, Wildfly | Tüm gerekli yapılandırmaları gerçekleştirmek için bir komut dosyasının konumunu (örneğin, `/home/site/deployments/tools/startup_script.sh`)          |
-| Node.js         | PM2 yapılandırma dosyasının veya komut dosyanızı                                |
-| .Net Core       | olarak derlenen DLL'nin adıdır `dotnet <myapp>.dll`                                 |
-| Ruby            | uygulamanızı başlatmak istediğiniz Ruby betiğini                     |
+| Java &AMP;         | JAR uygulamanızı başlatma komutu (örneğin, `java -jar my-app.jar --server.port=80`) |
+| Tomcat, Yavaya | gerekli yapılandırmaların gerçekleştirileceği bir betiğin konumu (örneğin, `/home/site/deployments/tools/startup_script.sh`)          |
+| Node.js         | PM2 yapılandırma dosyası veya betik dosyanız                                |
+| .Net Core       | derlenmiş DLL adı olarak`dotnet <myapp>.dll`                                 |
+| Ruby            | uygulamanızı başlatmak istediğiniz Ruby betiği                     |
 
-Bu komutları veya betikleri yerleşik Docker kapsayıcısında başlatıldı, ancak önce uygulamanızın kod başlatıldığında sonra yürütülür.
+Bu komutlar veya betikler, yerleşik Docker kapsayıcısı başlatıldıktan sonra, ancak uygulama kodunuz başlatılmadan önce yürütülür.
 
 ## <a name="management"></a>Yönetim
 
-**Yeniden Başlat düğmesi Azure portalında bastığınızda ne olur?**
+**Azure portal yeniden Başlat düğmesine bastığımda ne olur?**
 
-Bu eylem, Docker yeniden başlatma ile aynıdır.
+Bu eylem bir Docker yeniden başlatması ile aynıdır.
 
-**Uygulama kapsayıcı sanal makineye (VM) bağlamak için güvenli Kabuk (SSH) kullanabilir miyim?**
+**Uygulama kapsayıcısı sanal makinesine (VM) bağlanmak için Secure Shell (SSH) kullanabilir miyim?**
 
-Evet, kaynak denetim Yönetimi (SCM) sitesi üzerinden bunu yapabilirsiniz.
+Evet, bunu kaynak denetimi yönetimi (SCM) sitesi aracılığıyla yapabilirsiniz.
 
 > [!NOTE]
-> SSH, SFTP veya Visual Studio Code (Node.js apps canlı hata ayıklaması için) kullanarak doğrudan yerel geliştirme makinenizden de uygulama kapsayıcısına bağlanabilirsiniz. Daha fazla bilgi için bkz. [Linux üzerinde App Service’te uzaktan hata ayıklama ve SSH](https://aka.ms/linux-debug).
+> SSH, SFTP veya Visual Studio Code (Node.js apps canlı hata ayıklaması için) kullanarak doğrudan yerel geliştirme makinenizden de uygulama kapsayıcısına bağlanabilirsiniz. Daha fazla bilgi için bkz. [Linux üzerinde App Service’te uzaktan hata ayıklama ve SSH](https://azure.github.io/AppService/2018/05/07/New-SSH-Experience-and-Remote-Debugging-for-Linux-Web-Apps.html).
 >
 
-**Bir Linux App Service planında bir SDK veya Azure Resource Manager şablonu aracılığıyla nasıl oluşturabilirim?**
+**Bir SDK veya Azure Resource Manager şablonuyla bir Linux App Service planı nasıl oluşturabilirim?**
 
-Ayarlamalısınız **ayrılmış** alanını adlı app service ile *true*.
+App Service 'in **ayrılmış** alanını *doğru*olarak ayarlamanız gerekir.
 
 ## <a name="continuous-integration-and-deployment"></a>Sürekli tümleştirme ve dağıtım
 
-**Ben görüntü Docker Hub üzerinde güncelleştirdikten sonra web uygulamamı hala eski bir Docker kapsayıcı görüntüsü kullanır. Sürekli tümleştirme ve dağıtım özel kapsayıcılar destekliyorsunuz?**
+**Docker Hub 'ında görüntüyü güncelleştirdikten sonra Web Uygulamam hala eski bir Docker kapsayıcı görüntüsü kullanıyor. Özel kapsayıcıların sürekli tümleştirmesini ve dağıtımını destekliyor musunuz?**
 
-Evet, sürekli tümleştirme/dağıtım için Azure Container Registry veya DockerHub, aşağıdaki ayarlanacak [kapsayıcılar için Web App ile sürekli dağıtım](./app-service-linux-ci-cd.md). Özel kayıt defterleri için kapsayıcıyı durdurmak ve ardından web uygulamanızı başlatma yenileyebilirsiniz. Değiştirme veya kapsayıcınızı yenilemeye zorlamak için bir işlevsiz uygulama ayarı ekleyin.
+Evet, [kapsayıcılar için Web App sürekli dağıtımı](./app-service-linux-ci-cd.md)izleyerek Azure Container Registry veya DockerHub için sürekli tümleştirme/dağıtım ayarlamak için. Özel kayıt defterleri için, Web uygulamanızı durdurup başlatarak kapsayıcıyı yenileyebilirsiniz. İsterseniz, Kapsayıcınızın yenilenmesini zorlamak için bir kukla uygulama ayarı değiştirebilir veya ekleyebilirsiniz.
 
-**Hazırlama ortamları destekliyorsunuz?**
+**Hazırlama ortamlarını destekliyor musunuz?**
 
 Evet.
 
-**Kullanabileceğim *WebDeploy/MSDeploy* web uygulamamı dağıtmak için?**
+**Web uygulamamı dağıtmak için *WebDeploy/MSDeploy* kullanabilir miyim?**
 
-Evet, çağrılan ayarlama uygulama ayarlamanız gerekir `WEBSITE_WEBDEPLOY_USE_SCM` için *false*.
+Evet, `WEBSITE_WEBDEPLOY_USE_SCM` *yanlış*olarak çağrılan bir uygulama ayarı ayarlamanız gerekir.
 
-**Git dağıtımı uygulamamın Linux web uygulaması kullanırken başarısız olur. Sorunun geçici çözümü nasıl çalışabilir mi?**
+**Linux Web uygulaması kullanılırken uygulamamın git dağıtımı başarısız oluyor. Sorunu geçici olarak nasıl çözebilirim?**
 
-Linux web uygulamanızı Git dağıtımı başarısız olursa uygulama kodunuzu dağıtmak için aşağıdaki seçeneklerden birini seçin:
+Git dağıtımı Linux Web uygulamanıza başarısız olursa, uygulama kodunuzu dağıtmak için aşağıdaki seçeneklerden birini belirleyin:
 
-- Sürekli teslim (Önizleme) özelliğini kullanın: Uygulamanızın kaynak kodu bir Azure DevOps Git deposu veya Azure sürekli teslim için GitHub deposunu depolayabilirsiniz. Daha fazla bilgi için [Linux web uygulaması için sürekli teslimi yapılandırmak nasıl](https://blogs.msdn.microsoft.com/devops/2017/05/10/use-azure-portal-to-setup-continuous-delivery-for-web-app-on-linux/).
+- Sürekli teslim (Önizleme) özelliğini kullanın: Azure sürekli teslimi kullanabilmeniz için, uygulamanızın kaynak kodunu bir Azure DevOps git deposunda veya GitHub deposunda saklayabilirsiniz. Daha fazla bilgi için bkz. [Linux Web uygulaması Için sürekli teslimi yapılandırma](https://blogs.msdn.microsoft.com/devops/2017/05/10/use-azure-portal-to-setup-continuous-delivery-for-web-app-on-linux/).
 
-- Kullanım [ZIP dağıtma API](https://github.com/projectkudu/kudu/wiki/Deploying-from-a-zip-file): Bu API kullanmak üzere [SSH web uygulamanıza](https://docs.microsoft.com/azure/app-service/containers/app-service-linux-ssh-support) ve kodunuzu dağıtmak istediğiniz klasöre gidin. Aşağıdaki kodu çalıştırın:
+- [ZIP DAĞıTıM API](https://github.com/projectkudu/kudu/wiki/Deploying-from-a-zip-file)'sini kullanın: Bu API 'yi kullanarak [Web uygulamanıza SSH ekleyin](https://docs.microsoft.com/azure/app-service/containers/app-service-linux-ssh-support) ve kodunuzu dağıtmak istediğiniz klasöre gidin. Aşağıdaki kodu çalıştırın:
 
    ```bash
    curl -X POST -u <user> --data-binary @<zipfile> https://{your-sitename}.scm.azurewebsites.net/api/zipdeploy
    ```
 
-   Bir hata alırsanız `curl` komutu bulunamazsa, kullanarak curl yüklediğinizden emin olun `apt-get install curl` önceki çalıştırmadan önce `curl` komutu.
+   `curl` Komutun bulunamadığını belirten bir hata alırsanız, önceki `curl` komutu çalıştırmadan önce kullanarak `apt-get install curl` kıvrımlı yüklediğinizden emin olun.
 
 ## <a name="language-support"></a>Dil desteği
 
-**Web yuvaları Node.js Uygulamam, tüm özel ayarlarını veya yapılandırmaları ayarlamak için kullanmak istiyorsunuz?**
+**Node. js uygulamamda Web yuvalarını, tüm özel ayarları veya ayarlanacak konfigürasyonları kullanmak istiyorum?**
 
-Evet, devre dışı `perMessageDeflate` sunucu tarafı Node.js kod. Örneğin, socket.io kullanıyorsanız, aşağıdaki kodu kullanın:
+Evet, sunucu `perMessageDeflate` tarafı Node. js kodunuzda devre dışı bırakın. Örneğin, socket.io kullanıyorsanız aşağıdaki kodu kullanın:
 
 ```nodejs
 const io = require('socket.io')(server,{
@@ -107,96 +106,96 @@ const io = require('socket.io')(server,{
 });
 ```
 
-**.NET Core uygulamaları derlenmemiş destekliyorsunuz?**
+**Derlenmemiş .NET Core uygulamalarını destekliyor musunuz?**
 
 Evet.
 
-**PHP uygulamaları için bir bağımlılık Yöneticisi olarak Oluşturucusu destekliyorsunuz?**
+**Oluşturucu, PHP uygulamaları için bir bağımlılık Yöneticisi olarak destekliyoruz mi?**
 
-Evet, Git dağıtımı sırasında bir PHP uygulaması (sayesinde composer.lock dosyasının varlığını) dağıtıyorsanız ve Kudu ardından Oluşturucusu yükleme tetikleyecek Kudu algılanmalıdır.
+Evet, bir git dağıtımı sırasında kudu, bir PHP uygulaması dağıttığınızı algılamamalıdır (bir Oluşturucu. Lock dosyası için teşekkürler) ve kudu daha sonra bir besteci yüklemesi tetikleyecektir.
 
 ## <a name="custom-containers"></a>Özel kapsayıcılar
 
-**Kendi özel kapsayıcınızı kullanıyorum. Platform için bir SMB paylaşımını bağlaması istiyorum `/home/` dizin.**
+**Kendi özel kapsayıcınızı kullanıyorum. Platformun bir SMB `/home/` dizinini dizine bağlamak istiyorum.**
 
-Varsa `WEBSITES_ENABLE_APP_SERVICE_STORAGE` ayardır **belirtilmeyen** veya kümesine *true*, `/home/` dizin **paylaşılır** ölçek örneğini ve yazılmışdosyalar**korunur** yeniden başlatmaları arasında. Açık olarak ayarlama `WEBSITES_ENABLE_APP_SERVICE_STORAGE` için *false* bağlama devre dışı bırakır.
+`/home/` Ayar belirtilmemişse veya true olarak ayarlanırsa, Dizin ölçek örnekleri arasında paylaşılır ve yazılan dosyalar yeniden başlatmalar arasında kalır. `WEBSITES_ENABLE_APP_SERVICE_STORAGE` Açıkça `WEBSITES_ENABLE_APP_SERVICE_STORAGE` *false* olarak ayarlandığında bağlama devre dışı bırakılır.
 
-**My özel kapsayıcı başlatmak uzun sürüyor ve platform, başlatma tamamlanmadan önce kapsayıcıyı yeniden başlatır.**
+**Özel kapsayıcımın başlaması uzun sürer ve platformun başlaması bitmeden önce kapsayıcıyı yeniden başlatır.**
 
-Platform kapsayıcınızı başlatılmadan önce bekleyeceği süreyi yapılandırabilirsiniz. Bunu yapmak için ayarlanmış `WEBSITES_CONTAINER_START_TIME_LIMIT` uygulama ayarı için değer. Varsayılan değer 230 saniyedir ve 1800 saniye en yüksek değerdir.
+Platformun kapsayıcınızı yeniden başlatmadan önce bekleyeceği süreyi yapılandırabilirsiniz. Bunu yapmak için, `WEBSITES_CONTAINER_START_TIME_LIMIT` uygulama ayarını istediğiniz değere ayarlayın. Varsayılan değer 230 saniyedir ve en yüksek değer 1800 saniyedir.
 
-**Özel kayıt defteri sunucusu URL'si biçimi nedir?**
+**Özel kayıt defteri sunucu URL 'sinin biçimi nedir?**
 
-Tam kayıt defteri URL'si sağlamak da dahil olmak üzere `http://` veya `https://`.
+`http://` Veya`https://`dahil olmak üzere tam kayıt defteri URL 'sini sağlayın.
 
-**Özel kayıt defteri seçeneği görüntü adı için biçimi nedir?**
+**Özel kayıt defteri seçeneğinde görüntü adının biçimi nedir?**
 
-Özel kayıt defteri URL'si (örneğin, myacr.azurecr.io/dotnet:latest) dahil olmak üzere tam görüntü adını ekleyin. Görüntü özel bir bağlantı noktası adları [portal üzerinden girilemez](https://feedback.azure.com/forums/169385-web-apps/suggestions/31304650). Ayarlanacak `docker-custom-image-name`, kullanın [ `az` komut satırı aracı](https://docs.microsoft.com/cli/azure/webapp/config/container?view=azure-cli-latest#az-webapp-config-container-set).
+Özel kayıt defteri URL 'SI de dahil olmak üzere tam görüntü adını ekleyin (örneğin, myacr.azurecr.io/dotnet:latest). Özel bir bağlantı noktası kullanan görüntü adları [Portal üzerinden girilemez](https://feedback.azure.com/forums/169385-web-apps/suggestions/31304650). Ayarlamak `docker-custom-image-name` [için `az` komut satırı aracını](https://docs.microsoft.com/cli/azure/webapp/config/container?view=azure-cli-latest#az-webapp-config-container-set)kullanın.
 
-**Birden fazla bağlantı noktası özel kapsayıcı Görüntümü kullanıma sunabilirsiniz?**
+**Özel kapsayıcı Görüntümdeki birden fazla bağlantı noktasını kullanıma alabilir miyim?**
 
-Birden fazla bağlantı noktası gösterme desteklemiyoruz.
+Birden fazla bağlantı noktasının sunulmasını desteklemiyoruz.
 
-**Ben, kendi depolama getirebilir miyim?**
+**Kendi depolama alanım 'ı getirebilir miyim?**
 
-Evet, [kendi depolamanı Getir](https://docs.microsoft.com/azure/app-service/containers/how-to-serve-content-from-azure-storage) Önizleme aşamasındadır.
+Evet, [kendi depolama alanınızı getir](https://docs.microsoft.com/azure/app-service/containers/how-to-serve-content-from-azure-storage) önizleme aşamasındadır.
 
-**My özel kapsayıcının dosya sistemi veya çalışan işlemlerden SCM sitesine neden öğesine göz atamıyor?**
+**Özel kapsayıcımın dosya sistemine ya da SCM sitesinden çalışan işlemlerine neden gözatamıyorum?**
 
-SCM sitesine ayrı bir kapsayıcıda çalışır. Dosya sistemi veya çalışan işlemlerinin uygulama kapsayıcısı da denetleyemiyor.
+SCM sitesi ayrı bir kapsayıcıda çalışır. Dosya sistemini veya uygulama kapsayıcısının çalışan süreçlerini kontrol edebilirsiniz.
 
-**My özel kapsayıcı 80 numaralı bağlantı noktasını farklı bir bağlantı noktası dinler. İstekleri bu bağlantı noktasına yönlendirmek için uygulamamı nasıl yapılandırabilirim?**
+**Özel kapsayıcım bağlantı noktası 80 dışında bir bağlantı noktasını dinler. Uygulamamı istekleri bu bağlantı noktasına yönlendirmek için nasıl yapılandırabilirim?**
 
-Otomatik olarak bağlantı noktası algılama sahibiz. Çağrılan ayarı bir uygulama belirtebilirsiniz *WEBSITES_PORT* ve beklenen bağlantı noktası değerini verin. Daha önce kullanılan platform *bağlantı noktası* uygulama ayarı. Biz bu uygulama ayarının kullanımdan ve kullanmak için planlama *WEBSITES_PORT* özel kullanımda.
+Otomatik bağlantı noktası algılıyoruz. Ayrıca, *WEBSITES_PORT* adlı bir uygulama ayarı da belirtebilir ve bu değere beklenen bağlantı noktası numarasının değerini verebilirsiniz. Daha önce, Platform, *bağlantı noktası* uygulama ayarını kullandı. Bu uygulama ayarını kullanımdan kaldırmayı ve özel olarak *WEBSITES_PORT* kullanmayı planlıyoruz.
 
-**HTTPS özel my kapsayıcısında uygulama gerekiyor mu?**
+**Özel kapsayıcımda HTTPS uygulamam gerekiyor mu?**
 
-Hayır, platform paylaşılan ön uçlar, HTTPS sonlandırma işler.
+Hayır, platform paylaşılan ön uçlarında HTTPS sonlandırmasını işler.
 
-## <a name="multi-container-with-docker-compose"></a>Çok kapsayıcılı Docker ile oluşturma
+## <a name="multi-container-with-docker-compose"></a>Docker Compose ile çok Kapsayıcılı
 
-**Azure Container Registry (ACR), çok kapsayıcılı ile kullanmak için nasıl yapılandırabilirim?**
+**Nasıl yaparım? Azure Container Registry (ACR), çok Kapsayıcılı ile kullanılacak şekilde yapılandırma**
 
-ACR çok kapsayıcılı ile kullanmak için **tüm kapsayıcı görüntülerini** aynı ACR kayıt defteri sunucu üzerinde barındırılması gerekir. Aynı kayıt defteri sunucuda oldukları sonra uygulama ayarları oluşturma ve ardından ACR görüntü adını içerecek şekilde Docker Compose yapılandırma dosyasını güncelleştirmek gerekir.
+ACR 'yi çok Kapsayıcılı kullanmak için, **tüm kapsayıcı görüntülerinin** aynı ACR kayıt defteri sunucusunda barındırılması gerekir. Aynı kayıt defteri sunucusunda olduktan sonra, uygulama ayarları oluşturmanız ve ardından Docker Compose yapılandırma dosyasını ACR görüntü adını içerecek şekilde güncelleştirmeniz gerekecektir.
 
-Aşağıdaki uygulama ayarları oluşturma:
+Aşağıdaki uygulama ayarlarını oluşturun:
 
 - DOCKER_REGISTRY_SERVER_USERNAME
-- DOCKER_REGISTRY_SERVER_URL (tam URL'si, ör: `https://<server-name>.azurecr.io`)
-- DOCKER_REGISTRY_SERVER_PASSWORD (ACR Ayarları'nda yönetici erişimi etkinleştir)
+- DOCKER_REGISTRY_SERVER_URL (tam URL, Ex: `https://<server-name>.azurecr.io`)
+- DOCKER_REGISTRY_SERVER_PASSWORD (ACR ayarlarında yönetici erişimini etkinleştir)
 
-Yapılandırma dosyasının içinde aşağıdaki örnekte olduğu gibi ACR görüntü başvurusu:
+Yapılandırma dosyası içinde, ACR yansımanıza aşağıdaki örnekte olduğu gibi başvurun:
 
 ```yaml
 image: <server-name>.azurecr.io/<image-name>:<tag>
 ```
 
-**Nasıl İnternet'ten erişilemediği kapsayıcıdır biliyor musunuz?**
+**Nasıl yaparım? internet 'e hangi kapsayıcının erişilebilir olduğunu biliyor musunuz?**
 
-- Yalnızca bir kapsayıcı için erişimi açık olabilir.
-- Yalnızca bağlantı noktası 80 ve 8080 olan erişilebilir (kullanıma sunulan bağlantı noktası)
+- Erişim için yalnızca bir kapsayıcı açılabilir
+- Yalnızca bağlantı noktası 80 ve 8080 erişilebilir (açığa çıkarılan bağlantı noktaları)
 
-Hangi kapsayıcı öncelik sırasına göre erişilebilir - belirlemek için kurallar şunlardır:
+Öncelik sırasına göre hangi kapsayıcının erişilebilir olduğunu belirlemek için kurallar aşağıda verilmiştir:
 
-- Uygulama ayarı `WEBSITES_WEB_CONTAINER_NAME` kapsayıcının adına ayarlayın
-- İlk kapsayıcı 80 veya 8080 bağlantı noktası tanımlamak için
-- Yukarıdakilerin hiçbiri true ise, dosyasında tanımlanan ilk kapsayıcı erişilebilir olması (açık)
+- Kapsayıcı adına `WEBSITES_WEB_CONTAINER_NAME` ayarlanan uygulama ayarı
+- 80 veya 8080 numaralı bağlantı noktasını tanımlamak için ilk kapsayıcı
+- Yukarıdakilerin hiçbiri true ise, dosyada tanımlanan ilk kapsayıcı erişilebilir olur (gösterilir)
 
 ## <a name="pricing-and-sla"></a>Fiyatlandırma ve SLA
 
-**Hizmet genel kullanıma açık olduğuna göre, fiyatlandırma nedir?**
+**Artık hizmet genel kullanıma sunulduğunda fiyatlandırma nedir?**
 
-Uygulamanız çalışırken saat sayısı için normal Azure App Service fiyatlandırma ücretlendirilir.
+Uygulamanızın çalıştırıldığı saat sayısı için normal Azure App Service fiyatlandırmaya ücretlendirilirsiniz.
 
 ## <a name="other-questions"></a>Diğer sorular
 
-**Uygulama ayarları adlarının desteklenen karakterler nelerdir?**
+**Uygulama ayarları adlarında desteklenen karakterler nelerdir?**
 
-İçin uygulama ayarları, yalnızca harfler (A-Z, a-z), sayılar (0-9) ve alt çizgi karakteri (_) kullanabilirsiniz.
+Uygulama ayarları için yalnızca harfler (A-Z, a-z), rakamlar (0-9) ve alt çizgi karakterini (_) kullanabilirsiniz.
 
-**Burada yeni özellikler talep edebilir?**
+**Yeni özellikleri nereden isteyebilirim?**
 
-Fikrinizi, gönderdiğiniz [Web Apps geri bildirim Forumu](https://aka.ms/webapps-uservoice). "[Linux]" fikrinizi başlığı ekleyin.
+[Web Apps geri bildirim forumundan](https://aka.ms/webapps-uservoice)fikir gönderebilirsiniz. Fikriniz başlığına "[Linux]" ekleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

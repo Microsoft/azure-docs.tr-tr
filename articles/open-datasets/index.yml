@@ -1,30 +1,43 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Açık Veri Kümeleri Önizleme Belgeleri
+### YamlMime:Landing
+title: Azure Açık Veri Kümeleri Belgeleri
+summary: Azure Açık Veri Kümeleri, ML modellerini zenginleştirmek için hava durumu, nüfus sayımı ve tatiller gibi alanlarda çok az hazırlık ile kullanabileceğiniz, seçkin ve temizlenmiş veriler sunar.
 metadata:
-  title: 'Azure Açık Veri Kümeleri Önizleme Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
-  description: 'Çok az hazırlık ile kullanabileceğiniz düzenlenmiş ve temizlenmiş veriler olan Azure Açık Veri Kümelerini kullanmayı öğrenin. Açık Veri Kümeleri, makine öğrenimi modellerini zenginleştiren, hava durumu, sayımlar ve tatiller gibi genel verilerdir. Öğreticiler, örneklerve API başvuru belgeleri yapmanız gerekenleri gösterir.'
-  ms.service: open-datasets
+  title: Açık Veri Kümeleri Belgeleri - Öğreticiler, API başvurusu - Azure
+  description: Azure Açık Veri Kümeleri, ML modellerini zenginleştirmek için hava durumu, nüfus sayımı ve tatiller gibi alanlarda çok az hazırlık ile kullanabileceğiniz, seçkin ve temizlenmiş veriler sunar.
+  services: machine-learning
+  ms.service: machine-learning
+  ms.subservice: data-science-vm
   ms.topic: landing-page
+  ms.collection: collection
   author: cjgronlund
   ms.author: cgronlun
-  ms.date: 05/02/2019
-  ms.tgt_pltfrm: na
-  ms.devlang: na
-abstract:
-  description: 'Çok az hazırlık ile kullanabileceğiniz düzenlenmiş ve temizlenmiş veriler olan Azure Açık Veri Kümelerini kullanmayı öğrenin. Açık Veri Kümeleri, makine öğrenimi modellerini zenginleştiren, hava durumu, sayımlar ve tatiller gibi genel verilerdir. Öğreticiler, örneklerve API başvuru belgeleri yapmanız gerekenleri gösterir.'
-sections:
-  - title: Adım Adım Öğretici
-    items:
-      - type: paragraph
-        text: <a href="tutorial-opendatasets-automl">Otomatik makine öğrenimi ile bir regresyon modeli oluşturma</a>
-  - title: Örnekler
-    items:
-      - type: paragraph
-        text: <a href="samples">Veri kümelerini zenginleştirmek için Not Defterleri</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: unordered
-        items:
-          - html: '<a href="https://aka.ms/open-datasets-api">API başvurusu</a>'
+  ms.date: 11/04/2019
+  ms.openlocfilehash: 76baa1362eb1eaa4c062fccd4eea84815cb08c50
+  ms.sourcegitcommit: c62a68ed80289d0daada860b837c31625b0fa0f0
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/05/2019
+  ms.locfileid: "73603650"
+landingContent:
+- title: Açık Veri Kümeleri hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Açık Veri Kümeleri nelerdir?
+      url: overview-what-are-open-datasets.md
+    - text: Örnekler
+      url: samples.md
+- title: Başlarken
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Otomatik makine öğrenimi ile bir regresyon modeli oluşturma
+      url: /azure/machine-learning/service/tutorial-auto-train-models?context=azure/open-datasets/context/open-datasets-context
+    - text: Azure Machine Learning'de resim sınıflandırma modelini eğitme
+      url: /azure/machine-learning/service/tutorial-train-models-with-aml?context=azure/open-datasets/context/open-datasets-context
+- title: Başvuru içeriğini keşfetme
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Python API
+      url: https://docs.microsoft.com/python/api/azureml-opendatasets/?view=azure-ml-py

@@ -1,6 +1,6 @@
 ---
-title: Azure Otomasyonu'nda az modüllerini kullanma
-description: Bu makale Azure Automation'da Az modüllerini kullanarak bilgi sağlar
+title: Azure Otomasyonu 'nda az modüller kullanma
+description: Bu makalede, Azure Otomasyonu 'nda az modüller kullanılarak bilgiler sağlanmaktadır
 services: automation
 ms.service: automation
 ms.subservice: shared-capabilities
@@ -9,68 +9,68 @@ ms.author: robreed
 ms.date: 02/08/2019
 ms.topic: conceptual
 manager: carmonm
-ms.openlocfilehash: c722dc6af2b98adb60045d530bb38de7762027d5
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: 2f81c0affb78d5944b8ba910cccfa0be655f1a6f
+ms.sourcegitcommit: cd70273f0845cd39b435bd5978ca0df4ac4d7b2c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67477902"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71097945"
 ---
-# <a name="az-module-support-in-azure-automation"></a>Azure automation'da az Modülü Desteği
+# <a name="az-module-support-in-azure-automation"></a>Azure Otomasyonu 'nda az Module desteği
 
-Azure Otomasyonu kullanma yeteneğini destekleyen [Az Azure Powershell Modülü](/powershell/azure/new-azureps-module-az?view=azps-1.1.0) larınızdaki. Az modül tüm yeni veya var olan Otomasyon hesaplarını otomatik olarak alınmaz. Bu makalede, Azure Otomasyonu ile Az modülleri kullanma açıklanmaktadır.
+Azure Otomasyonu, runbook 'larınızda [Azure PowerShell az modülünü](/powershell/azure/new-azureps-module-az?view=azps-1.1.0) kullanma yeteneğini destekler. Az Module, yeni veya mevcut Otomasyon hesaplarında otomatik olarak içeri aktarılmaz. Bu makalede, az modüllerin Azure Otomasyonu ile nasıl kullanılacağı açıklanır.
 
 ## <a name="considerations"></a>Dikkat edilmesi gerekenler
 
-Az modül Azure Automation'da kullanırken dikkate gereken birçok şey vardır. Runbook'ları ve modüller Otomasyon hesabınızdaki daha yüksek düzeyli çözüm tarafından kullanılabilir. Olası sorunları runbook'ları düzenleme veya modülleri yükseltme ile runbook'larınızı neden olabilir. Tüm runbook'ları ve çözümler dikkatle ayrı bir Otomasyon hesabında yeni almadan önce test etmelisiniz `Az` modüller. Modüller için herhangi bir değişiklik, güncelleştirme yönetimi ve mesai saatleri dışında başlatma/durdurma Vm'leri gibi daha üst düzey çözüm olumsuz yönde etkileyebilir. Modüllerini ve runbook'ları içeren herhangi bir çözüm Automation hesaplarında değişiklik önerilir. Bu davranış Az modüllerine özgü değildir. Bu davranış, Otomasyon hesabınıza herhangi bir değişiklik uygulandığında dikkate edilmelidir.
+Azure Otomasyonu 'nda az Module kullanırken dikkate alınması gereken pek çok şey vardır. Runbook 'lar ve modüller, Otomasyon hesabınızdaki daha üst düzey çözümler tarafından kullanılabilir. Runbook 'ları veya modülleri yükseltmek, runbook 'larınızla ilgili sorunlara neden olabilir. Yeni `Az` modülleri içeri aktarmadan önce, tüm runbook 'ları ve çözümleri ayrı bir Otomasyon hesabında dikkatle sınamanız gerekir. Modüllerle ilgili değişiklikler, [Başlat/Durdur](automation-solution-vm-management.md) çözümünü olumsuz yönde alabilir. Herhangi bir çözüm içeren Otomasyon hesaplarında modüller ve Runbook 'ların değiştirmemeleri önerilir. Bu davranış az modüllere özgü değildir. Otomasyon hesabınızda herhangi bir değişikliğe giriş yaparken bu davranış göz önünde bulundurulmalıdır.
 
-İçeri aktarma bir `Az` modülü Otomasyon hesabınızdaki değil otomatik olarak içeri aktarma modülü PowerShell oturumunda runbook'ları kullanın. Modüller aşağıdaki durumlarda PowerShell oturumuna içeri aktarılır:
+Bir `Az` modülün Otomasyon hesabınıza aktarılması runbook 'ların kullandığı PowerShell oturumunda modülü otomatik olarak içeri aktarmaz. Modüller aşağıdaki durumlarda PowerShell oturumuna aktarılır:
 
-* Bir runbook'tan bir modülden bir cmdlet olduğunda çağrılır
-* Ne zaman bir runbook'u içeri aktarır açıkça ile `Import-Module` cmdlet'i
-* Başka bir modül modülü bağlı olarak bir PowerShell oturumuna aktarıldığında
+* Bir modülden bir cmdlet bir runbook 'tan çağrıldığında
+* Bir runbook onu `Import-Module` cmdlet ile açıkça içeri aktardığında
+* Modüle bağlı başka bir modül bir PowerShell oturumuna içeri aktarılmışsa
 
 > [!IMPORTANT]
-> Bu runbook'ları bir Otomasyon hesabı ya da yalnızca içeri emin olmak önemli olan `Az` veya `AzureRM` modüllerine runbook'ları ve ikisini tarafından kullanılan PowerShell oturumları. Varsa `Az` önce içeri aktarılan `AzureRM` bir runbook'ta, runbook tamamlanır, ancak bir [get_SerializationSettings yöntemi başvuran hata](troubleshoot/runbooks.md#get-serializationsettings) cmdlet'leri değil kaybolmuş düzgün ve iş akışlarını gösterir yürütülür. İçe aktarıyorsanız, `AzureRM` ve ardından `Az` , runbook devam eder tamamlandı, ancak iş akışlarında belirten bir hata göreceğiniz hem `Az` ve `AzureRM` aynı oturumda alınamıyor veya aynı runbook'ta kullanılan.
+> Bir Otomasyon hesabındaki runbook 'ların yalnızca runbook 'lar tarafından kullanılan PowerShell oturumlarına içeri aktarıldığından `Az` veya `AzureRM` modüllerden her ikisi de olmadığından emin olmak önemlidir. Bir runbook 'tan önce `AzureRM` içeri aktarıldıysa runbook tamamlanır, ancak [get_SerializationSettings yöntemine başvuruda](troubleshoot/runbooks.md#get-serializationsettings) bulunan bir hata iş akışlarında görünür ve cmdlet 'ler düzgün şekilde yürütülmeyebilir. `Az` İçeri aktarırsanız `AzureRM` ve sonra `Az` runbook hala tamamlanacaktır, ancak iş akışlarında her ikisini de `Az` belirten ve `AzureRM` aynı oturumda veya aynı runbook 'ta kullanılan bir hata görürsünüz.
 
-## <a name="migrating-to-az-modules"></a>Az modüllerine geçirme
+## <a name="migrating-to-az-modules"></a>Az modüllere geçme
 
-Otomasyon hesabı testinde AzureRM modülleri yerine Az modüllerini kullanarak geçişin test önerilir. Bu Otomasyon hesabı oluşturulduktan sonra geçişinizin sorunsuz gider emin olmak için aşağıdaki adımları kullanabilirsiniz:
+Bir test Otomasyonu hesabındaki Azurerd modülleri yerine az modüller kullanarak geçişi test etmeniz önerilir. Otomasyon hesabı oluşturulduktan sonra geçişinizin sorunsuz şekilde çalışmasını sağlamak için aşağıdaki adımları kullanabilirsiniz:
 
-### <a name="stop-and-unschedule-all-runbook-that-uses-azurerm-modules"></a>Durdur ve AzureRM modülleri kullanan tüm runbook'u zamanlamasını Kaldır
+### <a name="stop-and-unschedule-all-runbook-that-uses-azurerm-modules"></a>Azurerd modülleri kullanan tüm runbook 'u durdurma ve zamanlamayı kaldırma
 
-Kullanan mevcut runbook'ların çalıştırmayın emin olmak için `AzureRM` cmdlet'leri, durdurmak ve gerekir kullanan tüm runbook'ları zamanlamasını `AzureRM` modüller. Hangi zamanlamaları var ve hangi zamanlamaları, aşağıdaki örnekte çalıştırarak kaldırılmalıdır görebilirsiniz:
+`AzureRM` Cmdlet 'leri kullanan mevcut runbook 'ları çalıştırmazsanız emin olmak için, `AzureRM` modüller kullanan tüm runbook 'ları durdurup zamanlamayı durdurmanız gerekir. Hangi zamanlamaların mevcut olduğunu ve hangi zamanlamaların kaldırılması gerektiğini aşağıdaki örnek çalıştırılarak görebilirsiniz:
 
   ```powershell-interactive
   Get-AzureRmAutomationSchedule -AutomationAccountName "<AutomationAccountName>" -ResourceGroupName "<ResourceGroupName>" | Remove-AzureRmAutomationSchedule -WhatIf
   ```
 
-Ayrıca, gelecekte bu runbook'larınızı gerekirse zamanlayabilirsiniz emin olmak için her zamanlamayı gözden geçirmek önemlidir.
+Gerekirse runbook 'larınız için bu planı ileride yeniden zamanlayamazsınız emin olmak için her bir zamanlamayı ayrı olarak gözden geçirmeniz önemlidir.
 
-### <a name="import-the-az-modules"></a>Az modüllerini içeri aktarma
+### <a name="import-the-az-modules"></a>Az modülleri içeri aktar
 
-Yalnızca runbook'larınızı için gerekli olan Az modülleri içeri aktarın. Paketi içeri aktarmayın `Az` haliyle modülü içeren tüm `Az.*` modülleri içeri aktarılacak. Bu kılavuz, tüm modüller için aynıdır.
+Yalnızca runbook 'larınız için gereken az modülleri içeri aktarın. İçeri aktarılacak tüm `Az.*` modülleri `Az` içerdiğinden, toplama modülünü içeri aktarmayın. Bu kılavuz tüm modüller için aynıdır.
 
-[Az.Accounts](https://www.powershellgallery.com/packages/Az.Accounts/1.1.0) modüldür diğer bir bağımlılık `Az.*` modüller. Bu nedenle, bu modül diğer modüllerin içeri aktarmadan önce Otomasyon hesabınıza aktarılması gerekir.
+[Az. Accounts](https://www.powershellgallery.com/packages/Az.Accounts/1.1.0) modülü, diğer `Az.*` modüller için bir bağımlılıkdır. Bu nedenle, diğer modülleri içeri aktarmadan önce Bu modülün Otomasyon hesabınıza aktarılması gerekir.
 
-Otomasyon hesabınızdan seçin **modülleri** altında **paylaşılan kaynakları**. Tıklayın **Galeriye Gözat** açmak için **Galeriye Gözat** sayfası.  Arama çubuğunda, modül adı girin (örneğin `Az.Accounts`). PowerShell modülü sayfasında tıklayın **alma** modülü Otomasyon hesabınızda içeri aktarın.
+Otomasyon hesabınızdan, **paylaşılan kaynaklar**altında **modüller** ' i seçin. **Galeriye gözatamıyorum** sayfasını açmak Için **gözatamıyorum** ' ı tıklatın.  Arama çubuğuna modül adını (örneğin `Az.Accounts`,) girin. PowerShell modülü sayfasında, modülü Otomasyon hesabınıza aktarmak için **Içeri aktar** ' a tıklayın.
 
-![Otomasyon hesabından modülleri Al](media/az-modules/import-module.png)
+![Otomasyon hesabından modülleri içeri aktar](media/az-modules/import-module.png)
 
-Bu içeri aktarma işlemi üzerinden de yapılabilir [PowerShell Galerisi](https://www.powershellgallery.com) modülü için arama yapın. Modül bulduktan sonra seçin ve altındaki **Azure Otomasyonu** sekmesini tıklatın, **Azure Otomasyonu Dağıt**.
+Bu içeri aktarma işlemi, modül aranarak [PowerShell Galerisi](https://www.powershellgallery.com) aracılığıyla da yapılabilir. Modülü bulduktan sonra seçin ve **Azure Otomasyonu** sekmesinde **Azure Otomasyonu 'na dağıt**' a tıklayın.
 
-![Modülleri doğrudan Galeriden İçeri Aktar](media/az-modules/import-gallery.png)
+![Modülleri doğrudan Galeriden içeri aktar](media/az-modules/import-gallery.png)
 
-## <a name="test-your-runbooks"></a>Runbook'larınızı test edin
+## <a name="test-your-runbooks"></a>Runbook 'larınızı test edin
 
-Bir kez `Az` Otomasyon hesabınızda modülünü içeri aktarmadınız, runbook'larınızı Az modül kullanmayı düzenleme şimdi başlayabilirsiniz. Cmdlet'lerin çoğu dışında aynı ada sahip `AzureRM` değiştirildi `Az`. Bu işlem izlemeyin modüller listesi için bkz. [özel durumların listesi](/powershell/azure/migrate-from-azurerm-to-az#update-cmdlets-modules-and-parameters).
+`Az` Modüller Otomasyon hesabınıza alındıktan sonra, artık runbook 'larınızı daha az modülünü kullanacak şekilde düzenleyebilirsiniz. Cmdlet 'lerinin çoğu, `AzureRM` öğesinin `Az`dışında aynı ada sahiptir. Bu işlemi takip eden modüllerin bir listesi için bkz. [özel durumlar listesi](/powershell/azure/migrate-from-azurerm-to-az#update-cmdlets-modules-and-parameters).
 
-Yeni cmdlet'lerle kullanmak için runbook değiştirme kullanarak önce runbook'larınızı test etmek için tek yönlü `Enable-AzureRMAlias -Scope Process` runbook başına. Runbook'unuzda bu runbook'a eklediğinizde, değişikliğe gerek kalmadan çalıştırılabilir.
+Runbook 'unuzu yeni cmdlet 'leri `Enable-AzureRMAlias -Scope Process` kullanacak şekilde değiştirmeden önce runbook 'larınızı test etmenin bir yolu, bir runbook 'un başlangıcında kullanmaktır. Bunu runbook 'a ekleyerek, runbook 'niz değişiklik yapılmadan çalıştırılabilir.
 
-## <a name="after-migration-details"></a>Sonra geçiş ayrıntıları
+## <a name="after-migration-details"></a>Geçiş ayrıntılarından sonra
 
-Geçiş tamamlandıktan sonra runbook'ları kullanarak başlatma `AzureRM` hesabında artık modüller. Ayrıca önerilir alma veya güncelleştirme `AzureRM` Bu hesapta modüller. Bu andan itibaren başlamayı düşünün bu hesabı geçirildiği için `Az`ve `Az` yalnızca modüller. Yeni bir Otomasyon hesabı oluşturulduğunda mevcut `AzureRM` modülleri hala yüklenir ve öğretici runbook'ları hala ile yazılmış olarak görünür `AzureRM` cmdlet'leri. Bu runbook'ları çalıştırılmamalıdır.
+Geçiş tamamlandıktan sonra, hesapta daha fazla modül kullanarak `AzureRM` runbook 'ları başlatmayın. Bu hesapta `AzureRM` modülleri içeri veya dışarı aktarmayın de önerilir. Bu andan itibaren, bu hesabı ' a geçirilmiş ve `Az`yalnızca modüllerle `Az` çalışacak şekilde değerlendirin. Yeni bir Otomasyon hesabı oluşturulduğunda mevcut `AzureRM` modüller yine de yüklenir ve öğretici runbook 'lar yine de cmdlet 'ler ile `AzureRM` yazılacaktır. Bu runbook 'lar çalıştırılmamalıdır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Az modüllerini kullanma hakkında daha fazla bilgi için bkz. [Az modül ile çalışmaya başlama](/powershell/azure/get-started-azureps?view=azps-1.1.0).
+Az modüller kullanma hakkında daha fazla bilgi edinmek için bkz. [az Module ile çalışmaya](/powershell/azure/get-started-azureps?view=azps-1.1.0)başlama.

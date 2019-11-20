@@ -1,10 +1,10 @@
 ---
-title: REST API kullanarak Azure Load Balancer oluşturma
-titlesuffix: Azure Load Balancer
-description: REST API kullanarak bir Azure yük dengeleyici oluşturmayı öğrenin.
+title: REST API kullanarak yük dengeleyici oluşturma
+titleSuffix: Azure Load Balancer
+description: Bu makalede REST API kullanarak Azure Load Balancer oluşturma hakkında bilgi edinin.
 services: load-balancer
 documentationcenter: na
-author: KumudD
+author: asudbring
 ms.service: load-balancer
 ms.devlang: na
 ms.topic: article
@@ -12,21 +12,21 @@ ms.custom: seodec18
 ms.tgt_pltfrm: na
 ms.workload: load-balancer
 ms.date: 06/06/2018
-ms.author: kumud
-ms.openlocfilehash: 159fe9d6a891858d8d2cc2315e9544b79eb44cff
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: allensu
+ms.openlocfilehash: b8acf1faff17f657999769216f71cfb5fa6e3181
+ms.sourcegitcommit: a107430549622028fcd7730db84f61b0064bf52f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60884988"
+ms.lasthandoff: 11/14/2019
+ms.locfileid: "74077088"
 ---
 # <a name="create-an-azure-basic-load-balancer-using-rest-api"></a>Bir Azure temel REST API kullanarak yük dengeleyici oluşturma
 
-Azure Load Balancer arka uç havuzu örneklerine, kurallar ve sistem durumu araştırmaları göre load balancer'ın ön uç üzerinde geldiğinde yeni gelen akışlar dağıtır. Load Balancer iki Sku'da kullanılabilir: Temel ve Standart. İki SKU sürümü arasındaki farkı anlamak için [yük dengeleyici SKU karşılaştırmalar](load-balancer-overview.md#skus).
+Azure Load Balancer arka uç havuzu örneklerine, kurallar ve sistem durumu araştırmaları göre load balancer'ın ön uç üzerinde geldiğinde yeni gelen akışlar dağıtır. Load Balancer iki SKU olarak sunulur: temel ve standart. İki SKU sürümü arasındaki farkı anlamak için [yük dengeleyici SKU karşılaştırmalar](load-balancer-overview.md#skus).
  
 Bu nasıl yapılır kullanarak bir temel Azure Load Balancer oluşturulacağı gösterilmektedir [Azure REST API'si](/rest/api/azure/) bir Azure sanal ağ içindeki birden çok VM arasında dengeleme gelen istek yükünü dengeleyebilmek için. Eksiksiz başvuru belgeleri ve ek örnekleri kullanılabilir [Azure yük dengeleyici REST başvurusu](/rest/api/load-balancer/).
  
-## <a name="build-the-request"></a>Derleme isteği
+## <a name="build-the-request"></a>İsteği oluşturma
 Yeni Azure temel yük dengeleyici oluşturmak için aşağıdaki HTTP PUT İsteği'ni kullanın.
  ```HTTP
   PUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}?api-version=2018-02-01
@@ -35,10 +35,10 @@ Yeni Azure temel yük dengeleyici oluşturmak için aşağıdaki HTTP PUT İste�
 
 |Ad  |İçinde  |Gerekli |Tür |Açıklama |
 |---------|---------|---------|---------|--------|
-|subscriptionId   |  yol       |  True       |   string      |  Microsoft Azure aboneliği benzersiz olarak tanımlanabilmesi abonelik kimlik bilgileri. Abonelik kimliği, her hizmet çağrısı için URI parçası oluşturur.      |
-|resourceGroupName     |     yol    | True        |  string       |   Kaynak grubunun adı.     |
-|loadBalancerName     |  yol       |      True   |    string     |    Yük dengeleyicinin adı.    |
-|API sürümü    |   sorgu     |  True       |     string    |  İstemci API sürümü.      |
+|subscriptionId   |  path       |  True       |   string      |  Microsoft Azure aboneliği benzersiz olarak tanımlanabilmesi abonelik kimlik bilgileri. Abonelik kimliği, her hizmet çağrısı için URI parçası oluşturur.      |
+|resourceGroupName     |     path    | True        |  string       |   Kaynak grubunun adı.     |
+|loadBalancerName     |  path       |      True   |    string     |    Yük dengeleyicinin adı.    |
+|api-version    |   sorgu     |  True       |     string    |  İstemci API sürümü.      |
 
 
 
@@ -51,7 +51,7 @@ Tek gerekli parametresi `location`. Değil tanımlarsanız *SKU* sürümü, bir 
 | location | string | Kaynak konumu. Konumları kullanarak geçerli bir listesini alın [List Locations](https://docs.microsoft.com/rest/api/resources/subscriptions/listlocations) işlemi. |
 
 
-## <a name="example-create-and-update-a-basic-load-balancer"></a>Örnek: Oluşturma ve bir temel yük dengeleyici güncelleştirme
+## <a name="example-create-and-update-a-basic-load-balancer"></a>Örnek: Oluşturma ve bir temel Yük Dengeleyiciyi güncelleştirin
 
 Bu örnekte, ilk kaynaklarıyla birlikte bir temel yük dengeleyici oluşturun. Ardından, bir ön uç IP yapılandırması, bir arka uç adres havuzu, bir Yük Dengeleme kuralı, bir durum araştırması ve gelen NAT kuralı içeren yük dengeleyici kaynaklarının yapılandırın.
 

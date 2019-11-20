@@ -1,30 +1,30 @@
 ---
-title: Azure Cosmos DB kapsayıcıları bölümlenmemiş bölümlenmiş kapsayıcılara geçirme
-description: Bölümlenmiş kapsayıcılarına bölümlenmemiş tüm mevcut kapsayıcıları geçirmeyi öğrenin.
+title: Bölümlenmemiş Azure Cosmos kapsayıcılarını bölümlenmiş kapsayıcılara geçirme
+description: Var olan tüm bölümlenmemiş kapsayıcıları bölümlenmiş kapsayıcılara geçirmeyi öğrenin.
 author: markjbrown
 ms.service: cosmos-db
 ms.topic: conceptual
-ms.date: 05/23/2019
+ms.date: 09/25/2019
 ms.author: mjbrown
-ms.openlocfilehash: 8ba9489496a8f9e3703702e344684b4028a002cc
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 3a13f8928ba243195c30200dae0525e72c1c161b
+ms.sourcegitcommit: 15e3bfbde9d0d7ad00b5d186867ec933c60cebe6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66241934"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71844401"
 ---
-# <a name="migrate-non-partitioned-containers-to-partitioned-containers"></a>Bölümlenmemiş kapsayıcıları bölümlenmiş kapsayıcılara geçirme
+# <a name="migrate-non-partitioned-containers-to-partitioned-containers"></a>Bölümlendirilmemiş kapsayıcıları bölümlenmiş kapsayıcılara geçirme
 
-Azure Cosmos DB bölüm anahtarı olmayan oluşturma kapsayıcıları destekler. Şu anda Azure CLI ve Azure Cosmos DB sahip bir sürüme daha az veya eşit 2.x SDK'ları (.Net, Java, NodeJs) kullanarak kapsayıcıları bölümlenmemiş oluşturabilirsiniz. Bölümlenmemiş kapsayıcılar Azure portalını kullanarak oluşturamazsınız. Ancak, böyle bölümlenmemiş kapsayıcılar esnek değildir ve 10 GB ve aktarım hızı sınırı 10 K RU/sn depolama kapasitesini düzelttik.
+Azure Cosmos DB, bölüm anahtarı olmayan kapsayıcılar oluşturmayı destekler. Şu anda, 2. x sürümüne eşit veya daha küçük bir sürüme sahip olan Azure CLı ve Azure Cosmos DB SDK 'Ları (.net, Java, NodeJs) kullanarak bölümlenmemiş kapsayıcılar oluşturabilirsiniz. Azure portal kullanarak bölümlenmemiş kapsayıcılar oluşturamazsınız. Ancak, bu tür bölümlenmemiş kapsayıcılar elastik değildir ve 10.000 RU/sn 'lik depolama kapasitesi olan 10 GB ve verimlilik limiti vardır.
 
-Bölümlenmemiş kapsayıcıları eski ve bölümlenmiş kapsayıcılarına depolamayı ve aktarım hızı için mevcut bölümlenmemiş kapsayıcılarınızı geçirmeniz gerekir. Azure Cosmos DB bölümlenmemiş kapsayıcılarınızı bölümlenmiş kapsayıcılara geçirmek için sistem tarafından tanımlanan mekanizması sağlar. Bu belgede açıklanmaktadır bölümlenmemiş tüm mevcut kapsayıcıları bölümlenmiş kapsayıcılarına otomatik geçişi nasıl. Yalnızca tüm dillerde SDK'lar V3 sürümünü kullanıyorsanız otomatik geçiş özelliğinin yararlanabilirsiniz.
+Bölümlenmemiş kapsayıcılar eski ve depolama ve aktarım hızını ölçeklendirmek için mevcut bölümlenmemiş Kapsayıcılarınızı bölümlenmiş kapsayıcılara geçirmeniz gerekir. Azure Cosmos DB, bölümlenmemiş Kapsayıcılarınızı bölümlenmiş kapsayıcılara geçirmek için sistem tarafından tanımlanan bir mekanizma sağlar. Bu belgede, var olan tüm bölümlenmemiş kapsayıcıların bölümlenmiş kapsayıcılara otomatik olarak geçirilmesi açıklanmaktadır. Yalnızca tüm dillerde SDK 'ların v3 sürümünü kullanıyorsanız otomatik geçiş özelliğinden yararlanabilirsiniz.
 
-> [!NOTE] 
-> Şu anda, bu belgede açıklanan adımları kullanarak Azure Cosmos DB MongoDB ve Gremlin API hesapları geçiremezsiniz. 
+> [!NOTE]
+> Şu anda, bu belgede açıklanan adımları kullanarak MongoDB ve Gremlin API hesaplarını Azure Cosmos DB geçiremezsiniz.
 
-## <a name="migrate-container-using-the-system-defined-partition-key"></a>Sistem tarafından tanımlanan bölüm anahtarı kullanarak kapsayıcı geçirme
+## <a name="migrate-container-using-the-system-defined-partition-key"></a>Sistem tanımlı bölüm anahtarını kullanarak kapsayıcıyı geçirme
 
-Geçişi desteklemek için Azure Cosmos DB adlı bir sistem tarafından tanımlanan bölüm anahtarı tanımlar `/_partitionkey` bir bölüm anahtarı olmayan tüm kapsayıcıları üzerinde. Bölüm anahtar tanımı, kapsayıcıları geçirildikten sonra değiştiremezsiniz. Örneğin, bölümlenmiş bir kapsayıcıya geçirilen kapsayıcı tanımı aşağıdaki gibi olur: 
+Azure Cosmos DB geçişi desteklemek için, bölüm anahtarı olmayan tüm kapsayıcılar üzerinde `/_partitionkey` adlı sistem tanımlı bir bölüm anahtarı sağlar. Kapsayıcılar geçirildikten sonra bölüm anahtarı tanımını değiştiremezsiniz. Örneğin, bölümlenmiş bir kapsayıcıya geçirilmiş bir kapsayıcının tanımı aşağıdaki gibi olacaktır:
 
 ```json
 {
@@ -37,17 +37,17 @@ Geçişi desteklemek için Azure Cosmos DB adlı bir sistem tarafından tanımla
   },
 }
 ```
- 
-Kapsayıcı geçirildikten sonra doldurarak belgeler oluşturabilirsiniz `_partitionKey` bir belge özelliklerinin yanı sıra özelliği. `_partitionKey` Özelliğini kullanarak, belgeleriniz bölüm anahtarı temsil eder. 
 
-Doğru bölüm anahtarının seçilmesi, sağlanan aktarım hızını en iyi şekilde yararlanmak önemlidir. Daha fazla bilgi için [bir bölüm anahtarı seçme](partitioning-overview.md) makalesi. 
+Kapsayıcı geçirildikten sonra, `_partitionKey` özelliğini belgenin diğer özellikleriyle birlikte doldurarak belgeler oluşturabilirsiniz. @No__t-0 özelliği, belgelerinizin bölüm anahtarını temsil eder.
+
+Doğru bölüm anahtarının seçilmesi, sağlanan aktarım hızını en iyi şekilde kullanmak için önemlidir. Daha fazla bilgi için bkz. [bölüm anahtarını seçme](partitioning-overview.md) makalesi.
 
 > [!NOTE]
-> Yalnızca SDK'ları en son/V3 sürümünü tüm dillerde kullanıyorsanız sistem tanımlı bölüm anahtarına yararlanabilir.
+> Yalnızca tüm dillerde SDK 'ların en son/v3 sürümünü kullanıyorsanız sistem tanımlı bölüm anahtarından yararlanabilirsiniz.
 
-Aşağıdaki örnek, sistem tanımlı bölüm anahtarına bir belge oluşturun ve bu belgeyi okumak için bir örnek kod gösterir:
+Aşağıdaki örnek, sistem tanımlı bölüm anahtarı ile bir belge oluşturmak için örnek bir kod gösterir ve belgeyi okur:
 
-**Belge JSON temsili**
+**Belgenin JSON temsili**
 
 ```csharp
 DeviceInformationItem = new DeviceInformationItem
@@ -65,62 +65,62 @@ public class DeviceInformationItem
     [JsonProperty(PropertyName = "deviceId")]
     public string DeviceId { get; set; }
 
-    [JsonProperty(PropertyName = "_partitionKey")]
+    [JsonProperty(PropertyName = "_partitionKey", NullValueHandling = NullValueHandling.Ignore)]
     public string PartitionKey {get {return this.DeviceId; set; }
 }
 
 CosmosContainer migratedContainer = database.Containers["testContainer"];
 
 DeviceInformationItem deviceItem = new DeviceInformationItem() {
-  Id = "1234", 
+  Id = "1234",
   DeviceId = "3cf4c52d-cc67-4bb8-b02f-f6185007a808"
-} 
+}
 
-CosmosItemResponse<DeviceInformationItem > response = 
-  await migratedContainer.Items.CreateItemAsync(
+ItemResponse<DeviceInformationItem > response = 
+  await migratedContainer.CreateItemAsync<DeviceInformationItem>(
     deviceItem.PartitionKey, 
     deviceItem
   );
 
 // Read back the document providing the same partition key
-CosmosItemResponse<DeviceInformationItem> readResponse = 
-  await migratedContainer.Items.ReadItemAsync<DeviceInformationItem>( 
+ItemResponse<DeviceInformationItem> readResponse = 
+  await migratedContainer.ReadItemAsync<DeviceInformationItem>( 
     partitionKey:deviceItem.PartitionKey, 
     id: device.Id
-  ); 
+  );
 
 ```
 
-Tam bir örnek için bkz. [.Net örnekleri](https://github.com/Azure/azure-cosmos-dotnet-v3/tree/master/Microsoft.Azure.Cosmos.Samples/CodeSamples) GitHub deposu. 
+Tüm örnek için bkz. [.NET örnekleri](https://github.com/Azure/azure-cosmos-dotnet-v3/tree/master/Microsoft.Azure.Cosmos.Samples/CodeSamples) GitHub deposu.
                       
-## <a name="migrate-the-documents"></a>Geçirme belgeleri
+## <a name="migrate-the-documents"></a>Belgeleri geçirme
 
-Kapsayıcı tanımı bir bölüm anahtarı özelliğiyle geliştirilmiştir, ancak kapsayıcı içindeki belgeler otomatik olmayan geçiş. Sistem bölümü anahtar özelliği anlamına gelir `/_partitionKey` yolu varolan belgeleri için otomatik olarak eklenmez. Bir bölüm anahtarı oluşturulan belgeleri okuyarak varolan belgeleri bölümlemek ve bunları geri ile yeniden yazma için ihtiyaç duyduğunuz `_partitionKey` belgelerde özelliği. 
+Kapsayıcı tanımı bir bölüm anahtarı özelliği ile geliştirirken, kapsayıcıdaki belgeler otomatik olarak geçirilmez. Yani, sistem bölümü anahtar özelliği `/_partitionKey` yolu varolan belgelere otomatik olarak eklenmez. Bölüm anahtarı olmadan oluşturulan belgeleri okuyarak mevcut belgeleri yeniden bölümlemeniz ve belgelerde `_partitionKey` özelliği ile geri yazmanız gerekir.
 
-## <a name="access-documents-that-dont-have-a-partition-key"></a>Bir bölüm anahtarı olmayan erişim belgeleri
+## <a name="access-documents-that-dont-have-a-partition-key"></a>Bölüm anahtarı olmayan belgelere erişin
 
-Uygulamaları "CosmosContainerSettings.NonePartitionKeyValue" adlı özel bir sistem özelliği'ni kullanarak bölüm anahtarına sahip olmayan var olan belgelere erişebilir, geçirilmeyen belgeleri değerini budur. Bu özellik tüm CRUD ve sorgu işlemleri kullanabilirsiniz. Aşağıdaki örnek, tek bir belge NonePartitionKey okumak için bir örneği gösterilmektedir. 
+Uygulamalar, "PartitionKey. None" adlı özel sistem özelliğini kullanarak bölüm anahtarı olmayan mevcut belgelere erişebilir, bu, geçirilmeyen belgelerin değeridir. Tüm CRUD ve sorgu işlemlerinde bu özelliği kullanabilirsiniz. Aşağıdaki örnek, NonePartitionKey öğesinden tek bir belgeyi okumak için bir örnek gösterir. 
 
 ```csharp
 CosmosItemResponse<DeviceInformationItem> readResponse = 
 await migratedContainer.Items.ReadItemAsync<DeviceInformationItem>( 
-  partitionKey: CosmosContainerSettings.NonePartitionKeyValue, 
+  partitionKey: PartitionKey.None, 
   id: device.Id
 ); 
 
 ```
 
-Belgeleri bölümlemek konusunda tam örnek için bkz [.Net örnekleri](https://github.com/Azure/azure-cosmos-dotnet-v3/tree/master/Microsoft.Azure.Cosmos.Samples/CodeSamples) GitHub deposu. 
+Belgeleri yeniden bölümleme hakkında tüm örnek için bkz. [.net Samples](https://github.com/Azure/azure-cosmos-dotnet-v3/tree/master/Microsoft.Azure.Cosmos.Samples/CodeSamples) GitHub deposu. 
 
-## <a name="compatibility-with-sdks"></a>SDK'ları ile uyumluluk
+## <a name="compatibility-with-sdks"></a>SDK 'lar ile uyumluluk
 
-Azure Cosmos DB SDK'ları V2.x.x ve V1.x.x gibi eski sürümü sistem tarafından tanımlanan bölüm anahtarı özelliği desteklemez. Bu nedenle, kapsayıcı tanımı daha eski bir SDK'sından okuma, herhangi bir bölüm anahtarı tanımı içermiyor ve bu kapsayıcıların tam olarak eskisi gibi davranır. SDK'ları eski sürümü ile oluşturulan uygulamalar herhangi bir değişiklik olduğundan bölümlenmemiş çalışmaya devam edin. 
+V2. x. x ve v1. x. x gibi Azure Cosmos DB SDK 'ların daha eski sürümleri sistem tarafından tanımlanan bölüm anahtarı özelliğini desteklemez. Bu nedenle, eski bir SDK 'dan kapsayıcı tanımını okuduğunuzda, hiçbir bölüm anahtarı tanımı içermez ve bu kapsayıcılar tamamen daha önce olduğu gibi davranır. SDK 'ların eski sürümüyle oluşturulan uygulamalar hiçbir değişiklik yapılmadan bölümlenmemiş olarak çalışmaya devam eder. 
 
-Geçirilen kapsayıcı SDK'sının en son/V3 sürümüne göre tüketilir ve sistem tarafından tanımlanan bölüm anahtarı yeni belgelerde doldurma Başlat, erişemiyor (okuma, güncelleştirme, silme, sorgu) gibi daha eski SDK'larından artık belgeler.
+Geçirilen bir kapsayıcı SDK 'nın en son/v3 sürümü tarafından tüketilediyse ve sistem tanımlı bölüm anahtarını yeni belgeler içinde doldurmaya başlatırsanız, artık daha eski SDK 'lardan bu belgelere erişemezsiniz (okuma, güncelleştirme, silme, sorgulama).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* [Azure Cosmos DB'de bölümleme](partitioning-overview.md)
-* [İstek birimleri Azure cosmos DB](request-units.md)
-* [Kapsayıcılar ve veritabanları sağlama aktarım hızı](set-throughput.md)
+* [Azure Cosmos DB bölümleniyor](partitioning-overview.md)
+* [Azure Cosmos DB istek birimleri](request-units.md)
+* [Kapsayıcılar ve veritabanları üzerinde üretilen iş sağlama](set-throughput.md)
 * [Azure Cosmos hesabıyla çalışma](account-overview.md)

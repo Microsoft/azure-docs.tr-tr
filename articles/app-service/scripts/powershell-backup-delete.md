@@ -10,19 +10,18 @@ tags: azure-service-management
 ms.assetid: ebcadb49-755d-4202-a5eb-f211827a9168
 ms.service: app-service-web
 ms.workload: web
-ms.devlang: na
 ms.topic: sample
 ms.date: 10/30/2017
 ms.author: msangapu
 ms.custom: seodec18
-ms.openlocfilehash: dbe8417e8a26cb222fe52ac7c0284b3956ed65fb
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 9b9a6ecc93489c6690e0128ef9129c480f506b31
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66136623"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70098421"
 ---
-# <a name="delete-a-backup-for-a-web-using-azure-powershell"></a>Azure PowerShell kullanarak bir web için bir yedek silme
+# <a name="delete-a-backup-for-a-web-using-azure-powershell"></a>Azure PowerShell kullanarak bir Web yedeklemesi silme
 
 Bu örnek betik, App Service’te ilgili kaynaklarıyla birlikte bir web uygulaması oluşturur ve sonra bu web uygulaması için tek seferlik bir yedekleme oluşturur. 
 

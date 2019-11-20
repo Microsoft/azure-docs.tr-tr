@@ -1,13 +1,13 @@
 ---
-title: OData koleksiyon filtreleri - Azure Search sorunlarını giderme
-description: Azure arama sorguları OData koleksiyon filtresi hatalarında sorun giderme.
-ms.date: 06/13/2019
-services: search
-ms.service: search
-ms.topic: conceptual
+title: OData koleksiyon filtreleri sorunlarını giderme
+titleSuffix: Azure Cognitive Search
+description: Azure Bilişsel Arama sorgularında OData koleksiyon filtresi hatalarını çözümlemek için yaklaşımlar öğrenin.
+manager: nitinme
 author: brjohnstmsft
 ms.author: brjohnst
-ms.manager: cgronlun
+ms.service: cognitive-search
+ms.topic: conceptual
+ms.date: 11/04/2019
 translation.priority.mt:
 - de-de
 - es-es
@@ -19,58 +19,58 @@ translation.priority.mt:
 - ru-ru
 - zh-cn
 - zh-tw
-ms.openlocfilehash: c7fa00c82eea03a50bae22fcb1ad16e230aa5bcb
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: e82fa00226c964d5ba774cdf06f5b0f3898bdc55
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67079632"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74113086"
 ---
-# <a name="troubleshooting-odata-collection-filters-in-azure-search"></a>Azure Search'te OData toplama filtreleri sorunlarını giderme
+# <a name="troubleshooting-odata-collection-filters-in-azure-cognitive-search"></a>Azure Bilişsel Arama OData koleksiyon filtreleri sorunlarını giderme
 
-İçin [filtre](query-odata-filter-orderby-syntax.md) Azure Search'te toplama alanlar üzerinde kullanabileceğiniz [ `any` ve `all` işleçleri](search-query-odata-collection-operators.md) ile birlikte **lambda ifadeleri**. Bir koleksiyonun her öğesine uygulanan bir alt filtre bir lambda ifadesidir.
+Azure Bilişsel Arama 'de koleksiyon alanlarını [filtrelemek](query-odata-filter-orderby-syntax.md) için [`any` ve `all` işleçlerini](search-query-odata-collection-operators.md) **lambda ifadeleriyle**birlikte kullanabilirsiniz. Lambda ifadesi, bir koleksiyonun her öğesine uygulanan bir alt filtredir.
 
-Filtre ifadeleri her özellik, bir lambda ifadesinde kullanılabilir. Hangi özelliklerin kullanılabilir olduğunu filtre uygulamak istediğiniz koleksiyon alanın veri türüne bağlı olarak farklılık gösterir. Bu bağlamda desteklenmiyor bir lambda ifadesinde bir özellik kullanmayı denerseniz bu hataya neden. Bu makalede, karmaşık filtre koleksiyon alanları yazmaya çalışırken bunun gibi hataları istemcilerinizle, sorunu gidermenize yardımcı olur.
+Filtre ifadelerinin her özelliği bir lambda ifadesi içinde kullanılamaz. Kullanılabilir özellikler, filtrelemek istediğiniz koleksiyon alanının veri türüne göre farklılık gösterir. Bu, bu bağlamda desteklenmeyen bir lambda ifadesinde bir özelliği kullanmayı denerseniz hata oluşmasına neden olabilir. Koleksiyon alanları üzerinde karmaşık bir filtre yazmaya çalışırken bu tür hatalarla karşılaşdıysanız, bu makale sorunu gidermenize yardımcı olur.
 
-## <a name="common-collection-filter-errors"></a>Genel koleksiyon filtre hataları
+## <a name="common-collection-filter-errors"></a>Ortak koleksiyon filtre hataları
 
-Aşağıdaki tabloda, bir koleksiyon filtresi yürütmeye çalışırken karşılaşabileceğiniz hatalar listelenmektedir. Bir lambda ifadesi içinde desteklenmeyen bir özellik filtre ifadeleri kullanın Bu hataları meydana gelir. Her hata hatayı önlemek için filtre nasıl yeniden bazı yönergeler verir. Tablo, bu hatadan kaçınmak daha fazla bilgi sağlar. Bu makalenin ilgili bölüm için bağlantıyı da içerir.
+Aşağıdaki tabloda, bir koleksiyon filtresini yürütmeye çalışırken karşılaşabileceğiniz hatalar listelenmektedir. Bu hatalar, bir lambda ifadesinin içinde desteklenmeyen bir filtre ifadeleri özelliği kullandığınızda meydana gelir. Her hata, hata oluşmasını önlemek için filtrenizi nasıl yeniden yazabileceğiniz hakkında rehberlik sağlar. Bu tabloda, bu hatanın nasıl önleneceğini hakkında daha fazla bilgi sağlayan bu makalenin ilgili bölümüne yönelik bir bağlantı da bulunur.
 
-| Hata iletisi | Durum | Daha fazla bilgi için bkz. |
+| Hata iletisi | Olanını | Daha fazla bilgi için bkz. |
 | --- | --- | --- |
-| ' % S'işlevi 'IsMatch' aralık değişkeni için kullanıcının bağlı parametresi yok '. Yalnızca alan başvuruları ('any' veya 'all') lambda ifadelerinin içinde desteklenen bağlı. Lütfen filtrenizi 'IsMatch' işlev dışında lambda ifadesi, böylece değiştirin ve yeniden deneyin. | Kullanarak `search.ismatch` veya `search.ismatchscoring` bir lambda ifadesi içinde | [Karmaşık koleksiyonları filtrelemek için kurallar](#bkmk_complex) |
-| Geçersiz bir lambda ifadesi. Bunun tersi Collection(Edm.String) türünde bir alan üzerinde yinelenen bir lambda ifadesinde burada bekleniyordu eşitlik ve eşitsizlik için test bulundu. ' İçin ', lütfen form 'x eq y' veya 'search.in(...)' ifadeleri kullanın. İçin 'all', lütfen kullanın deyimler form 'x ne y', 'olmayan (x eq y)' veya 'olmayan search.in(...)'. | Türünde bir alan üzerinde filtreleme `Collection(Edm.String)` | [Dize koleksiyonlarını filtreleme kuralları](#bkmk_strings) |
-| Geçersiz bir lambda ifadesi. Karmaşık bir Boole ifadesi desteklenmeyen bir tür bulunamadı. ' İçin ', lütfen 'ORs, Equal', olarak da bilinen ayırt edici Normal Form ifadeler kullanın. Örneğin: '(a and b) veya (c ve d)' burada a, b, c ve d karşılaştırma veya eşitlik alt ifadeleri kullanabilirsiniz. İçin 'all', lütfen kullanın 'Equal'ın ORs', olarak da bilinen Conjunctive Normal Form ifadeler. Örneğin: '(a or b) ve (c) veya d' burada a, b, c ve d karşılaştırma ya da eşitsizlik alt ifadeler olan. Karşılaştırma ifadeleri örnekleri: ' x gt 5', ' le 2 x. Eşitlik ifadesi örneği: ' x eq 5'. Bir eşitsizlik ifade örneği: ' x ne 5'. | Türünde alanlar üzerinde filtreleme `Collection(Edm.DateTimeOffset)`, `Collection(Edm.Double)`, `Collection(Edm.Int32)`, veya `Collection(Edm.Int64)` | [Karşılaştırılabilir koleksiyonları filtrelemek için kurallar](#bkmk_comparables) |
-| Geçersiz bir lambda ifadesi. Desteklenmeyen bir kullanım geo.distance() veya geo.intersects() Collection(Edm.GeographyPoint) türünde bir alan üzerinde yinelenen bir lambda ifadesi bulundu. 'Herhangi biri için', 'lt' veya 'le' işleçleri kullanarak geo.distance() karşılaştırın ve geo.intersects() kullanımı değil değilleme uygulandığını emin olun sağlayın. İçin 'all', 'gt' veya 'ge' işleçleri kullanarak geo.distance() karşılaştırın ve geo.intersects() kullanımı değilleme uygulandığını emin emin olun. | Türünde bir alan üzerinde filtreleme `Collection(Edm.GeographyPoint)` | [GeographyPoint koleksiyonları filtrelemek için kurallar](#bkmk_geopoints) |
-| Geçersiz bir lambda ifadesi. Karmaşık mantıksal ifadeleri Collection(Edm.GeographyPoint) türünde alanlar üzerinde yineleme lambda ifadeleri desteklenmez. Lütfen katılın 'herhangi için' ile alt ifadeler 'veya'; 've' desteklenmiyor. İçin 'all', lütfen JOIN ile alt ifadeler 've'; 'veya' desteklenmiyor. | Türünde alanlar üzerinde filtreleme `Collection(Edm.String)` veya `Collection(Edm.GeographyPoint)` | [Dize koleksiyonlarını filtreleme kuralları](#bkmk_strings) <br/><br/> [GeographyPoint koleksiyonları filtrelemek için kurallar](#bkmk_geopoints) |
-| Geçersiz bir lambda ifadesi. Bir karşılaştırma işleci (bir 'lt', 'le', 'gt' veya 'ge') bulunamadı. Eşitlik işleçleri, lambda ifadelerinde Collection(Edm.String) türünde alanlar üzerinde yineleme izin verilir. ' İçin ', lütfen ' % s'form 'x eq y' ifadeleri kullanın. İçin 'all', lütfen kullanın x ne form 'y' veya 'olmayan (x eq y)' ifadeleri. | Türünde bir alan üzerinde filtreleme `Collection(Edm.String)` | [Dize koleksiyonlarını filtreleme kuralları](#bkmk_strings) |
+| ' IsMatch ' işlevinin, Aralık değişkeninin ' ' öğesine göre hiçbir parametresi yok. Lambda ifadelerinde yalnızca ilişkili alan başvuruları desteklenir (' any ' veya ' All '). Lütfen filtrenizi ' IsMatch ' işlevinin lambda ifadesinin dışında olması için değiştirin ve yeniden deneyin. | Lambda ifadesinin içinde `search.ismatch` veya `search.ismatchscoring` kullanma | [Karmaşık koleksiyonları filtrelemeye yönelik kurallar](#bkmk_complex) |
+| Geçersiz lambda ifadesi. Koleksiyon türü (EDM. String) alanı üzerinde yinelenen bir lambda ifadesinde ters beklenildiği eşitlik veya eşitsizlik için bir test bulundu. ' Any ' için lütfen ' x EQ y ' veya ' search.in (...) ' biçimindeki ifadeleri kullanın. ' All ' için lütfen ' x ne y ', ' Not (x EQ y) ' ya da ' Not search.in (...) ' biçimindeki ifadeleri kullanın. | `Collection(Edm.String)` türünde bir alanda filtreleme | [Dize koleksiyonlarını filtreleme kuralları](#bkmk_strings) |
+| Geçersiz lambda ifadesi. Desteklenmeyen bir karmaşık Boole ifadesi formu bulundu. ' Any ' için lütfen, ayırt edici normal form olarak da bilinen ' and lerin ' ORs ' ifadesi kullanın. Örneğin: a, b, c ve d ' nin karşılaştırma ya da eşitlik alt ifadeleri olduğu ' (a ve b) veya (c ve d) '. ' All ' için lütfen ' and of ORs ' olan ifadeleri kullanın, Ayrıca, ayırt edici normal form olarak da bilinir. Örneğin: a, b, c ve d, burada a, b, c ve d, karşılaştırma veya eşitsizlik alt ifadeleridir. Karşılaştırma ifadesi örnekleri: ' x gt 5 ', ' x Le 2 '. Eşitlik ifadesi örneği: ' x EQ 5 '. Eşitsizlik ifadesi örneği: ' x ne 5 '. | `Collection(Edm.DateTimeOffset)`, `Collection(Edm.Double)`, `Collection(Edm.Int32)`veya `Collection(Edm.Int64)` alanları üzerinde filtreleme | [Karşılaştırılabilir koleksiyonları filtrelemeye yönelik kurallar](#bkmk_comparables) |
+| Geçersiz lambda ifadesi. Koleksiyon türünde (EDM. Geographyıpoint) bir alan üzerinde yinelenen bir lambda ifadesinde, desteklenmeyen coğrafi. uzaklık () veya coğrafi. kesişme () kullanımı bulundu. ' Any ' için, ' lt ' veya ' le ' işleçlerini kullanarak coğrafi. distance () öğesini karşılaştırdığınızdan emin olun ve coğrafi. kesişme () kullanımının herhangi bir kullanımında olmadığından emin olun. ' All ' için, ' gt ' veya ' ge ' işleçlerini kullanarak coğrafi. distance () ' i karşılaştırdığınızdan emin olun ve coğrafi. kesişme () kullanımının tüm kullanımlarda olduğundan emin olun. | `Collection(Edm.GeographyPoint)` türünde bir alanda filtreleme | [Geographyıpoint koleksiyonlarını filtreleme kuralları](#bkmk_geopoints) |
+| Geçersiz lambda ifadesi. Koleksiyon türü (EDM. Geographi Point) alanları üzerinde yinelen Lambda ifadelerinde karmaşık Boole ifadeleri desteklenmez. ' Any ' için lütfen ' or ' ile alt ifadeleri birleştirin; ' ve ' desteklenmez. ' All ' için lütfen ' ve ' ile alt ifadelere katın; ' veya ' desteklenmez. | `Collection(Edm.String)` veya `Collection(Edm.GeographyPoint)` türündeki alanlar üzerinde filtreleme | [Dize koleksiyonlarını filtreleme kuralları](#bkmk_strings) <br/><br/> [Geographyıpoint koleksiyonlarını filtreleme kuralları](#bkmk_geopoints) |
+| Geçersiz lambda ifadesi. Bir karşılaştırma işleci bulundu (' lt ', ' le ', ' gt ' veya ' ge '). Yalnızca eşitlik işleçlerinde, koleksiyon türü (EDM. String) alanları üzerinde yineleme yapan Lambda ifadelerinde izin verilir. ' Any ' için lütfen ' x EQ y ' biçiminde ifadeler kullanın. ' All ' için lütfen ' x ne y ' veya ' Not (x EQ y) ' biçimindeki ifadeleri kullanın. | `Collection(Edm.String)` türünde bir alanda filtreleme | [Dize koleksiyonlarını filtreleme kuralları](#bkmk_strings) |
 
 <a name="bkmk_examples"></a>
 
-## <a name="how-to-write-valid-collection-filters"></a>Geçerli koleksiyon yazma filtreleri
+## <a name="how-to-write-valid-collection-filters"></a>Geçerli koleksiyon filtreleri yazma
 
-Geçerli koleksiyon filtreleri yazmak için kuralları, her veri türü için farklıdır. Aşağıdaki bölümlerde, filtre özelliklerin desteklendiği ve hangi olmayan örnekler göstererek kurallar açıklanmaktadır:
+Geçerli koleksiyon filtreleri yazma kuralları her veri türü için farklıdır. Aşağıdaki bölümlerde, hangi filtre özelliklerinin desteklendiğini ve hangilerinin desteklenmediğini gösteren örnekler gösterilmektedir:
 
 - [Dize koleksiyonlarını filtreleme kuralları](#bkmk_strings)
-- [Boole koleksiyonları filtrelemek için kurallar](#bkmk_bools)
-- [GeographyPoint koleksiyonları filtrelemek için kurallar](#bkmk_geopoints)
-- [Karşılaştırılabilir koleksiyonları filtrelemek için kurallar](#bkmk_comparables)
-- [Karmaşık koleksiyonları filtrelemek için kurallar](#bkmk_complex)
+- [Boole koleksiyonlarını filtreleme kuralları](#bkmk_bools)
+- [Geographyıpoint koleksiyonlarını filtreleme kuralları](#bkmk_geopoints)
+- [Karşılaştırılabilir koleksiyonları filtrelemeye yönelik kurallar](#bkmk_comparables)
+- [Karmaşık koleksiyonları filtrelemeye yönelik kurallar](#bkmk_complex)
 
 <a name="bkmk_strings"></a>
 
 ## <a name="rules-for-filtering-string-collections"></a>Dize koleksiyonlarını filtreleme kuralları
 
-Dize koleksiyonları için lambda ifadelerinin içinde kullanılabilecek tek bir Karşılaştırma işleçleri olan `eq` ve `ne`.
+Dize koleksiyonları için Lambda ifadelerinde, kullanılabilecek tek karşılaştırma işleçleri `eq` ve `ne`.
 
 > [!NOTE]
-> Azure Search'ü desteklemez `lt` / `le` / `gt` / `ge` dizeleri işleçleri içinde veya dışında bir lambda ifadesi.
+> Azure Bilişsel Arama, bir lambda ifadesinin içinde veya dışında dizeler için `lt`/`le`/`gt`/işleçlerini desteklemez.`ge`
 
-Gövdesi bir `any` yalnızca gövdesi sırasında eşitlik için test edebilirsiniz bir `all` yalnızca eşitsizlik için test edebilirsiniz.
+`any` gövdesi yalnızca eşitlik için test edebilir, ancak bir `all` gövdesi yalnızca eşitsizlik için test edebilir.
 
-Birden fazla ifade aracılığıyla birleştirmek mümkündür `or` gövdesinde bir `any`, aracılığıyla `and` gövdesinde bir `all`. Bu yana `search.in` eşitlik denetimleri ile birleştirmek için işlev eşdeğerdir `or`, gövdesinde ayrıca izin verilen bir `any`. Buna karşılık, `not search.in` gövdesinde izin verilen bir `all`.
+Ayrıca, bir `any`gövdesinde ve bir `all`gövdesinde `and` aracılığıyla birden çok `or` ifadeyi birleştirmek de mümkündür. `search.in` işlevi, eşitlik denetimlerini `or`birleştiren bir değer olduğundan, bir `any`gövdesinde de izin verilir. Buna karşılık, `not search.in` `all`gövdesinde izin verilir.
 
-Örneğin, bu deyimler izin verilir:
+Örneğin, bu ifadelere izin verilir:
 
 - `tags/any(t: t eq 'books')`
 - `tags/any(t: search.in(t, 'books, games, toys'))`
@@ -80,7 +80,7 @@ Birden fazla ifade aracılığıyla birleştirmek mümkündür `or` gövdesinde 
 - `tags/any(t: t eq 'books' or t eq 'games')`
 - `tags/all(t: t ne 'books' and not (t eq 'games'))`
 
-Bu ifadeler izin verilmeyen sırada:
+Bu ifadelere izin verilmiyor:
 
 - `tags/any(t: t ne 'books')`
 - `tags/any(t: not search.in(t, 'books, games, toys'))`
@@ -91,11 +91,11 @@ Bu ifadeler izin verilmeyen sırada:
 
 <a name="bkmk_bools"></a>
 
-## <a name="rules-for-filtering-boolean-collections"></a>Boole koleksiyonları filtrelemek için kurallar
+## <a name="rules-for-filtering-boolean-collections"></a>Boole koleksiyonlarını filtreleme kuralları
 
-Türü `Edm.Boolean` yalnızca destekler `eq` ve `ne` işleçleri. Bu nedenle, aynı aralık değişkeniyle denetlemek gibi yan tümceleri birleştirmeye olanak tanıyan çok mantıklı değildir `and` / `or` olduğundan, her zaman tautologies veya contradictions sunulmasını sağlar.
+Tür `Edm.Boolean` yalnızca `eq` ve `ne` işleçlerini destekler. Bu nedenle, bu tür yan tümceleri birleştirmek için `and`/`or` ile aynı Aralık değişkenini, her zaman tautolotions veya Çelişmeler ' e yol açacağından çok anlamlı hale getirir.
 
-İzin verilen Boole koleksiyonları filtreleriyle bazı örnekleri aşağıda verilmiştir:
+Aşağıda, Boole koleksiyonlarında izin verilen filtrelerin bazı örnekleri verilmiştir:
 
 - `flags/any(f: f)`
 - `flags/all(f: f)`
@@ -104,9 +104,9 @@ Türü `Edm.Boolean` yalnızca destekler `eq` ve `ne` işleçleri. Bu nedenle, a
 - `flags/all(f: not f)`
 - `flags/all(f: not (f eq true))`
 
-Dize koleksiyonlarından farklı olarak, tür lambda ifadesinin sınırsız işleci kullanılabilir Boolean koleksiyonları sahiptir. Her ikisi de `eq` ve `ne` gövdesinde kullanılan `any` veya `all`.
+Dize koleksiyonlarının aksine, Boole koleksiyonlarının, hangi tür lambda ifadesinde kullanılabilecek bir sınırı yoktur. `eq` ve `ne`, `any` veya `all`gövdesinde kullanılabilir.
 
-Aşağıdaki gibi ifadeler Boole koleksiyonlar için izin verilmez:
+Boole koleksiyonları için aşağıdakiler gibi ifadelere izin verilmez:
 
 - `flags/any(f: f or not f)`
 - `flags/any(f: f or f)`
@@ -115,25 +115,25 @@ Aşağıdaki gibi ifadeler Boole koleksiyonlar için izin verilmez:
 
 <a name="bkmk_geopoints"></a>
 
-## <a name="rules-for-filtering-geographypoint-collections"></a>GeographyPoint koleksiyonları filtrelemek için kurallar
+## <a name="rules-for-filtering-geographypoint-collections"></a>Geographyıpoint koleksiyonlarını filtreleme kuralları
 
-Türü değerlerinin `Edm.GeographyPoint` birbirine doğrudan bir koleksiyonda karşılaştırılamaz. Bunun yerine, bunlar için parametre olarak kullanılması gereken `geo.distance` ve `geo.intersects` işlevleri. `geo.distance` İşlevi sırayla gerekir karşılaştırılabilir karşılaştırma işleçlerinden birini kullanarak bir uzaklık değeri `lt`, `le`, `gt`, veya `ge`. Bu kurallar, koleksiyon dışı Edm.GeographyPoint alanlar için de geçerlidir.
+Bir koleksiyondaki `Edm.GeographyPoint` türündeki değerler birbirleriyle doğrudan karşılaştırılamıyor. Bunun yerine, `geo.distance` ve `geo.intersects` işlevlerine parametre olarak kullanılması gerekir. `geo.distance` işlevi, karşılaştırma işleçlerinden biri `lt`, `le`, `gt`veya `ge`kullanarak bir uzaklık değeriyle karşılaştırılmalıdır. Bu kurallar, koleksiyon olmayan Edm. Geographyıpoint alanları için de geçerlidir.
 
-Gibi dize koleksiyonlarını `Edm.GeographyPoint` koleksiyonları nasıl Jeo-uzamsal işlevleri kullanılır ve birleştirilmiş farklı türlerdeki lambda ifadeleri için bazı kurallara sahiptir:
+Dize koleksiyonları gibi `Edm.GeographyPoint` koleksiyonlarında, coğrafi uzamsal işlevlerin nasıl kullanılabileceği ve farklı türlerde Lambda ifadelerinde nasıl birleştirileceği ile ilgili bazı kurallar vardır:
 
-- Hangi Karşılaştırma işleçleri ile birlikte kullanabileceğiniz `geo.distance` işlevi lambda ifadesi türüne bağlıdır. İçin `any`, yalnızca kullanabilirsiniz `lt` veya `le`. İçin `all`, yalnızca kullanabilirsiniz `gt` veya `ge`. İfadeler içeren negate `geo.distance`, ancak karşılaştırma işleci değişikliği yapmanız (`geo.distance(...) lt x` olur `not (geo.distance(...) ge x)` ve `geo.distance(...) le x` olur `not (geo.distance(...) gt x)`).
-- Gövdesinde bir `all`, `geo.intersects` işlevi negatif. Buna karşılık, gövdesinde bir `any`, `geo.intersects` işlevi gerekir değil tasarruflarını.
-- Gövdesinde bir `any`, Jeo-uzamsal ifadeleri kullanarak birleştirilebilir `or`. Gövdesinde bir `all`, bu tür ifadeleri kullanılarak birleştirilebilir `and`.
+- `geo.distance` işleviyle kullanabileceğiniz karşılaştırma işleçleri lambda ifadesinin türüne bağlıdır. `any`için yalnızca `lt` veya `le`kullanabilirsiniz. `all`için yalnızca `gt` veya `ge`kullanabilirsiniz. `geo.distance`içeren ifadeleri iç içe bırakabilirsiniz, ancak karşılaştırma işlecini değiştirmeniz gerekir (`geo.distance(...) lt x` `not (geo.distance(...) ge x)` ve `geo.distance(...) le x` `not (geo.distance(...) gt x)`olur).
+- Bir `all`gövdesinde, `geo.intersects` işlevi de iç içe olmalıdır. Buna karşılık, bir `any`gövdesinde, `geo.intersects` işlevi değilde olmamalıdır.
+- `any`gövdesinde, coğrafi uzamsal ifadeler `or`kullanılarak birleştirilebilir. `all`gövdesinde, bu tür ifadeler `and`kullanılarak birleştirilebilir.
 
-Yukarıdaki sınırlamalara benzer nedenlerle dize koleksiyonlarını eşitlik/eşitsizlik sınırlamasını olarak mevcut. Bkz: [Azure Search'te toplama filtreleri anlama OData](search-query-understand-collection-filters.md) bu nedenle, daha ayrıntılı bir bakış.
+Yukarıdaki sınırlamalar, dize koleksiyonlarında eşitlik/eşitsizlik sınırlaması gibi benzer nedenlerle mevcuttur. Bu nedenlerden daha ayrıntılı bir bakış için bkz. [Azure bilişsel arama OData koleksiyon filtrelerini anlama](search-query-understand-collection-filters.md) .
 
-Üzerinde filtre bazı örnekler şunlardır `Edm.GeographyPoint` izin verilen koleksiyonlar:
+`Edm.GeographyPoint` koleksiyonlara izin verilen filtrelerin bazı örnekleri aşağıda verilmiştir:
 
 - `locations/any(l: geo.distance(l, geography'POINT(-122 49)') lt 10)`
 - `locations/any(l: not (geo.distance(l, geography'POINT(-122 49)') ge 10) or geo.intersects(l, geography'POLYGON((-122.031577 47.578581, -122.031577 47.678581, -122.131577 47.678581, -122.031577 47.578581))'))`
 - `locations/all(l: geo.distance(l, geography'POINT(-122 49)') ge 10 and not geo.intersects(l, geography'POLYGON((-122.031577 47.578581, -122.031577 47.678581, -122.131577 47.678581, -122.031577 47.578581))'))`
 
-Aşağıdaki gibi ifadeler için izin verilmez `Edm.GeographyPoint` koleksiyonlar:
+`Edm.GeographyPoint` koleksiyonları için aşağıdakiler gibi ifadelere izin verilmez:
 
 - `locations/any(l: l eq geography'POINT(-122 49)')`
 - `locations/any(l: not geo.intersects(l, geography'POLYGON((-122.031577 47.578581, -122.031577 47.678581, -122.131577 47.678581, -122.031577 47.578581))'))`
@@ -145,88 +145,88 @@ Aşağıdaki gibi ifadeler için izin verilmez `Edm.GeographyPoint` koleksiyonla
 
 <a name="bkmk_comparables"></a>
 
-## <a name="rules-for-filtering-comparable-collections"></a>Karşılaştırılabilir koleksiyonları filtrelemek için kurallar
+## <a name="rules-for-filtering-comparable-collections"></a>Karşılaştırılabilir koleksiyonları filtrelemeye yönelik kurallar
 
-Bu bölüm, aşağıdaki tüm veri türleri için geçerlidir:
+Bu bölüm aşağıdaki tüm veri türleri için geçerlidir:
 
 - `Collection(Edm.DateTimeOffset)`
 - `Collection(Edm.Double)`
 - `Collection(Edm.Int32)`
 - `Collection(Edm.Int64)`
 
-Gibi türleri `Edm.Int32` ve `Edm.DateTimeOffset` altısı da Karşılaştırma işleçleri destekler: `eq`, `ne`, `lt`, `le`, `gt`, ve `ge`. Bu türler üzerinde lambda ifadeleri, bu işleçler birini kullanarak basit bir ifade içerebilir. Bu, her ikisi için de geçerlidir `any` ve `all`. Örneğin, bu filtrelere izin verilir:
+`Edm.Int32` ve `Edm.DateTimeOffset` gibi türler, karşılaştırma işleçlerinin tüm altılarnı destekler: `eq`, `ne`, `lt`, `le`, `gt`ve `ge`. Bu tür koleksiyonlar üzerinde lambda ifadeleri, bu işleçlerden herhangi birini kullanan basit ifadeler içerebilir. Bu hem `any` hem de `all`için geçerlidir. Örneğin, bu filtrelere izin verilir:
 
 - `ratings/any(r: r ne 5)`
 - `dates/any(d: d gt 2017-08-24T00:00:00Z)`
 - `not margins/all(m: m eq 3.5)`
 
-Ancak, lambda ifadesi içinde daha karmaşık ifadeler gibi karşılaştırma ifadeleri nasıl birleştirilebilir sınırlamalar vardır:
+Ancak, bu tür karşılaştırma ifadelerinin lambda ifadesinin içinde daha karmaşık ifadelerle nasıl birleştirilebilme konusunda sınırlamalar vardır:
 
-- İçin kuralları `any`:
-  - Basit eşitsizlik ifadeleri usefully diğer ifadelerle birleştirilemez. Örneğin, bu ifade izin verilir:
+- `any`kuralları:
+  - Basit eşitsizlik ifadeleri diğer ifadelerle tamamen birleştirilemez. Örneğin, bu ifadeye izin verilir:
     - `ratings/any(r: r ne 5)`
 
-    Ancak bu ifade değildir:
+    Ancak bu ifade şu değildir:
     - `ratings/any(r: r ne 5 and r gt 2)`
 
-    ve bu ifade izin verilse de koşulları çakışıyor çünkü bu kullanışlı değildir:
+    Bu ifadeye izin verildiğinde, koşullar örtüştiğinden yararlı değildir:
     - `ratings/any(r: r ne 5 or r gt 7)`
-  - Basit karşılaştırma ifadeleri içeren `eq`, `lt`, `le`, `gt`, veya `ge` birleştirilebilir `and` / `or`. Örneğin:
+  - `eq`, `lt`, `le`, `gt`veya `ge` içeren basit karşılaştırma ifadeleri `and`/`or`ile birleştirilebilir. Örneğin:
     - `ratings/any(r: r gt 2 and r le 5)`
     - `ratings/any(r: r le 5 or r gt 7)`
-  - Karşılaştırma ifadeleri Sunucusu'yla birlikte `and` (bağlaçlar) daha fazla birleştirilebilir kullanarak `or`. Bu form, Boolean mantıksal bilinen "[ayırt edici Normal Form](https://en.wikipedia.org/wiki/Disjunctive_normal_form)" (DNF). Örneğin:
+  - `and` (yarışma) ile birleştirilmiş karşılaştırma ifadeleri `or`kullanılarak daha da birleştirilebilir. Bu form, "ayırt edici[normal form](https://en.wikipedia.org/wiki/Disjunctive_normal_form)" (DNF) olarak Boole mantığındaki bilinmektedir. Örneğin:
     - `ratings/any(r: (r gt 2 and r le 5) or (r gt 7 and r lt 10))`
-- İçin kuralları `all`:
-  - Basit eşitlik ifadeleridir usefully diğer ifadelerle birleştirilemez. Örneğin, bu ifade izin verilir:
+- `all`kuralları:
+  - Basit eşitlik ifadeleri diğer ifadelerle tamamen birleştirilemez. Örneğin, bu ifadeye izin verilir:
     - `ratings/all(r: r eq 5)`
 
-    Ancak bu ifade değildir:
+    Ancak bu ifade şu değildir:
     - `ratings/all(r: r eq 5 or r le 2)`
 
-    ve bu ifade izin verilse de koşulları çakışıyor çünkü bu kullanışlı değildir:
+    Bu ifadeye izin verildiğinde, koşullar örtüştiğinden yararlı değildir:
     - `ratings/all(r: r eq 5 and r le 7)`
-  - Basit karşılaştırma ifadeleri içeren `ne`, `lt`, `le`, `gt`, veya `ge` birleştirilebilir `and` / `or`. Örneğin:
+  - `ne`, `lt`, `le`, `gt`veya `ge` içeren basit karşılaştırma ifadeleri `and`/`or`ile birleştirilebilir. Örneğin:
     - `ratings/all(r: r gt 2 and r le 5)`
     - `ratings/all(r: r le 5 or r gt 7)`
-  - Karşılaştırma ifadeleri Sunucusu'yla birlikte `or` (disjunctions) daha fazla birleştirilebilir kullanarak `and`. Bu form, Boolean mantıksal bilinen "[Conjunctive Normal Form](https://en.wikipedia.org/wiki/Conjunctive_normal_form)" (CNF). Örneğin:
+  - `or` (ayırt edici) ile birleştirilmiş karşılaştırma ifadeleri `and`kullanılarak daha da birleştirilebilir. Bu form, Boole mantığındaki "[Conjunnormal form](https://en.wikipedia.org/wiki/Conjunctive_normal_form)" (CNF) olarak bilinir. Örneğin:
     - `ratings/all(r: (r le 2 or gt 5) and (r lt 7 or r ge 10))`
 
 <a name="bkmk_complex"></a>
 
-## <a name="rules-for-filtering-complex-collections"></a>Karmaşık koleksiyonları filtrelemek için kurallar
+## <a name="rules-for-filtering-complex-collections"></a>Karmaşık koleksiyonları filtrelemeye yönelik kurallar
 
-Lambda ifadeleri karmaşık koleksiyonlar üzerinden çok daha esnek bir söz dizimi lambda ifadeleri daha ilkel türler koleksiyonlarının destekler. Herhangi bir filtre yapısı yalnızca iki özel durumu dışında bir kullanabileceğiniz gibi bir lambda ifadesi içinde kullanabilirsiniz.
+Karmaşık koleksiyonlar üzerinde lambda ifadeleri, ilkel türler koleksiyonları üzerinde lambda ifadelerinden çok daha esnek bir sözdizimi destekler. Bu tür bir lambda ifadesinin içinde, yalnızca iki özel durum ile kullanabileceğiniz herhangi bir filtre yapısını kullanabilirsiniz.
 
-İlk olarak işlevleri `search.ismatch` ve `search.ismatchscoring` lambda ifadelerinin içinde desteklenmez. Daha fazla bilgi için [Azure Search'te toplama filtreleri anlama OData](search-query-understand-collection-filters.md).
+İlk olarak, `search.ismatch` ve `search.ismatchscoring` işlevleri lambda ifadeleri içinde desteklenmez. Daha fazla bilgi için bkz. [Azure bilişsel arama OData koleksiyon filtrelerini anlama](search-query-understand-collection-filters.md).
 
-İkinci olarak, olmayan alanlara başvuran *bağlı* aralık değişkeni için (sözde *ücretsiz değişkenleri*) izin verilmiyor. Örneğin, aşağıdaki iki eşdeğer OData filtre ifadeleri göz önünde bulundurun:
+İkinci olarak, Aralık değişkenine (yani, bilinen *ücretsiz değişkenler*) *bağlanmamış* alanlara başvurmak için izin verilmez. Örneğin, aşağıdaki iki denk OData filtre ifadesini göz önünde bulundurun:
 
 1. `stores/any(s: s/amenities/any(a: a eq 'parking')) and details/margin gt 0.5`
 1. `stores/any(s: s/amenities/any(a: a eq 'parking' and details/margin gt 0.5))`
 
-İlk ifade izin verilir, çünkü form ikinci reddedilir `details/margin` aralık değişkenine bağlı olmayan `s`.
+İkinci form `details/margin` Aralık `s`değişkenine bağlanmadığından, ilk ifadeye izin verilir.
 
-Bu kural, ayrıca dış kapsamda bağlı değişkenleriniz ifadelerini genişletir. Bu değişkenleri göründükleri kapsamında yer ücretsizdir. İkinci eşdeğer ifade için izin verilmiyor sırasında Örneğin, ilk ifade izin `s/name` Aralık değişkeninin kapsamında yer ücretsizdir `a`:
+Bu kural ayrıca bir dış kapsamda değişken bağlanan ifadelere da genişletilir. Bu tür değişkenler göründükleri kapsama göre ücretsizdir. Örneğin, ilk ifadeye izin verilir, çünkü `s/name` Aralık değişkeninin kapsamına göre boş olduğundan, ikinci denk ifadeye izin verilmez `a`:
 
 1. `stores/any(s: s/amenities/any(a: a eq 'parking') and s/name ne 'Flagship')`
 1. `stores/any(s: s/amenities/any(a: a eq 'parking' and s/name ne 'Flagship'))`
 
-Her zaman lambda ifadeleri yalnızca bağımlı değişkenler içeren şekilde filtreleri oluşturmak mümkün olduğundan bu sınırlama, uygulamada bir sorun olmamalıdır.
+Lambda ifadeleri yalnızca ilgili değişkenleri içermesi gibi filtrelerin oluşturulması her zaman mümkün olduğundan, bu sınırlama uygulamada bir sorun olması gerekmez.
 
-## <a name="cheat-sheet-for-collection-filter-rules"></a>Koleksiyon filtre kurallarına yönelik kopya kağıdı
+## <a name="cheat-sheet-for-collection-filter-rules"></a>Koleksiyon filtresi kuralları için bir sayfa sayfası
 
-Aşağıdaki tabloda her bir koleksiyon veri türü için geçerli bir filtre oluşturmak için kurallar özetlenmiştir.
+Aşağıdaki tabloda, her koleksiyon veri türü için geçerli Filtreler oluşturma kuralları özetlenmektedir.
 
-[!INCLUDE [Limitations on OData lambda expressions in Azure Search](../../includes/search-query-odata-lambda-limitations.md)]
+[!INCLUDE [Limitations on OData lambda expressions in Azure Cognitive Search](../../includes/search-query-odata-lambda-limitations.md)]
 
-Her durum için geçerli bir filtre oluşturmak nasıl bir örnekleri için bkz: [geçerli koleksiyon filtreleri yazmak nasıl](#bkmk_examples).
+Her durum için geçerli filtrelerin nasıl oluşturulacağı hakkında örnekler için bkz. [geçerli koleksiyon filtreleri yazma](#bkmk_examples).
 
-Genellikle yazma filtreleri ve kuralları ilk ilkeler anlama yardımcı bunları memorizing birden fazla bkz [Azure Search'te toplama filtreleri anlama OData](search-query-understand-collection-filters.md).
+Filtreleri sıklıkla yazarsanız ve ilk ilkeden kuralları anlamak, bunları daha fazla görmenin daha fazla yardımcı olacağını öğrenmek için bkz. [Azure bilişsel arama OData koleksiyon filtrelerini anlama](search-query-understand-collection-filters.md).
 
 ## <a name="next-steps"></a>Sonraki adımlar  
 
-- [Azure Search'te OData toplama filtreleri anlama](search-query-understand-collection-filters.md)
-- [Azure Search'te filtreler](search-filters.md)
-- [Azure Search için OData ifade dili genel bakış](query-odata-filter-orderby-syntax.md)
-- [Azure Search için OData ifadesi söz dizimi başvurusu](search-query-odata-syntax-reference.md)
-- [Search belgeleri &#40;Azure arama hizmeti REST API'si&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)
+- [Azure Bilişsel Arama OData koleksiyon filtrelerini anlama](search-query-understand-collection-filters.md)
+- [Azure Bilişsel Arama filtreler](search-filters.md)
+- [Azure Bilişsel Arama için OData ifade diline genel bakış](query-odata-filter-orderby-syntax.md)
+- [Azure Bilişsel Arama için OData ifadesi söz dizimi başvurusu](search-query-odata-syntax-reference.md)
+- [Belgeleri &#40;Azure Bilişsel Arama ara REST API&#41;](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)

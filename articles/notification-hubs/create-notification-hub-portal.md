@@ -1,57 +1,59 @@
 ---
-title: Azure portalını kullanarak bir Azure bildirim hub'ı Oluştur | Microsoft Docs
-description: Bu öğreticide, Azure portalını kullanarak bir Azure bildirim hub'ı oluşturma konusunda bilgi edinin.
+title: Azure portal kullanarak bir Azure Notification Hub 'ı oluşturun | Microsoft Docs
+description: Bu öğreticide, Azure portal kullanarak bir Azure Notification Hub 'ı oluşturmayı öğreneceksiniz.
 services: notification-hubs
-author: jwargo
-manager: patniko
-editor: spelluru
+author: sethmanheim
+manager: femila
+editor: jwargo
 ms.service: notification-hubs
 ms.workload: mobile
 ms.topic: quickstart
 ms.date: 02/14/2019
-ms.author: jowargo
-ms.openlocfilehash: 62e72f27e48f7bf220901f4eb36090f926724a2a
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.author: sethm
+ms.reviewer: jowargo
+ms.lastreviewed: 02/14/2019
+ms.openlocfilehash: 53abc28a6923c2d55b3bb39defb08778485a9744
+ms.sourcegitcommit: 7df70220062f1f09738f113f860fad7ab5736e88
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60682038"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71212446"
 ---
-# <a name="create-an-azure-notification-hub-in-the-azure-portal"></a>Azure portalında bir Azure bildirim hub'ı oluşturma 
-Azure Notification Hubs, herhangi bir arka uçtan (bulut ya da şirket içi) herhangi bir platforma (iOS, Android, Windows, Kindle, Baidu vb.) bildirim göndermenize olanak tanıyan, kullanımı kolay ve ölçeği artırılmış bir gönderme altyapısı sağlar. Hizmeti hakkında daha fazla bilgi için bkz. [Azure Notification Hubs nedir?](notification-hubs-push-notification-overview.md).
+# <a name="create-an-azure-notification-hub-in-the-azure-portal"></a>Azure portal bir Azure Notification Hub 'ı oluşturma 
+Azure Notification Hubs, herhangi bir arka uçtan (bulut ya da şirket içi) herhangi bir platforma (iOS, Android, Windows, Kindle, Baidu vb.) bildirim göndermenize olanak tanıyan, kullanımı kolay ve ölçeği artırılmış bir gönderme altyapısı sağlar. Hizmet hakkında daha fazla bilgi için bkz. [Azure Notification Hubs nedir?](notification-hubs-push-notification-overview.md).
 
-Bu hızlı başlangıçta, Azure portalında bir bildirim hub'ı oluşturun. İlk bölüm, o ad alanında bir bildirim hub'ları ad alanı ve bir hub oluşturmak için adımları sağlar. İkinci bölümü, varolan bir Notification Hubs ad alanında bir bildirim hub'ı oluşturmak için adımları sağlar. 
+Bu hızlı başlangıçta Azure portal bir Bildirim Hub 'ı oluşturacaksınız. İlk bölüm, bu ad alanında bir Notification Hubs ad alanı ve hub oluşturma adımları sağlar. İkinci bölüm, mevcut bir Notification Hubs ad alanında bir Bildirim Hub 'ı oluşturma adımları sağlar. 
 
-## <a name="create-a-namespace-and-a-notification-hub"></a>Bir ad alanı ve bildirim hub'ı oluşturma
-Bu bölümde, bir ad alanı ve ad alanındaki bir hub'ı oluşturun. 
+## <a name="create-a-namespace-and-a-notification-hub"></a>Ad alanı ve Bildirim Hub 'ı oluşturma
+Bu bölümde ad alanında bir ad alanı ve bir hub oluşturursunuz. 
 
 [!INCLUDE [notification-hubs-portal-create-new-hub](../../includes/notification-hubs-portal-create-new-hub.md)]
 
-## <a name="create-a-notification-hub-in-an-existing-namespace"></a>Mevcut bir ad alanında bir bildirim hub'ı oluşturma
-Bu bölümde, var olan bir ad alanında bir bildirim hub'ı oluşturun. 
+## <a name="create-a-notification-hub-in-an-existing-namespace"></a>Mevcut bir ad alanında Bildirim Hub 'ı oluşturma
+Bu bölümde, mevcut bir ad alanında bir Bildirim Hub 'ı oluşturursunuz. 
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Seçin **tüm hizmetleri** sol taraftaki menüde arama **bildirim hub'ı**seçin **yıldız** (`*`) yanındaki **bildirimhub'ıadalanları** eklemek üzere **Sık Kullanılanlar** sol menüde bölümü. Seçin **bildirim hub'ı ad alanları**. 
+2. Sol menüdeki **tüm hizmetler** ' i seçin, **Bildirim Hub**'ı ara ' yı seçin,`*` **Bildirim Hub 'ı ad alanları** ' nın yanındaki **yıldız** () ' i seçerek Sol menüdeki **Sık Kullanılanlar** bölümüne ekleyin. **Bildirim Hub 'ı ad alanları**' nı seçin. 
 
-      ![Azure portalı - bildirim hub'ı ad seçin](./media/create-notification-hub-portal/select-notification-hub-namespaces-all-services.png)
-3. Üzerinde **bildirim hub'ı ad alanları** sayfasında, listeden ad seçin. 
+      ![Azure portal-Bildirim Hub 'ı ad alanlarını seçin](./media/create-notification-hub-portal/select-notification-hub-namespaces-all-services.png)
+3. **Bildirim Hub 'ı ad alanları** sayfasında, listeden ad alanınızı seçin. 
 
-      ![Listeden ad seçin](./media/create-notification-hub-portal/select-namespace.png)
-1. Üzerinde **bildirim hub'ı Namespace** sayfasında **ekleme Hub** araç. 
+      ![Listeden ad alanınızı seçin](./media/create-notification-hub-portal/select-namespace.png)
+1. **Bildirim Hub 'ı ad alanı** sayfasında, araç çubuğunda **hub Ekle** ' yi seçin. 
 
-      ![Bildirim hub'ı ad alanları - ekleme Hub düğmesi](./media/create-notification-hub-portal/add-hub-button.png)
-4. Üzerinde **yeni bildirim hub'ı** sayfasında, bildirim hub'ı için bir ad girin ve seçin **Tamam**.
+      ![Bildirim Hub 'ı ad alanları-hub Ekle düğmesi](./media/create-notification-hub-portal/add-hub-button.png)
+4. **Yeni Bildirim Hub** 'ı sayfasında, Bildirim Hub 'ı için bir ad girin ve **Tamam**' ı seçin.
 
-      ![Sayfa -> Yeni bir Notification Hub, hub'ınız için bir ad girin](./media/create-notification-hub-portal/new-notification-hub-page.png)
-4. Seçin **bildirimleri** (zil simgesi) yeni hub'ın dağıtım durumunu görmek için üst. Seçin **X** bildirim penceresini kapatmak için sağ köşesindeki. 
+      ![Yeni Bildirim Hub 'ı sayfası-> Hub 'ınız için bir ad girin](./media/create-notification-hub-portal/new-notification-hub-page.png)
+4. Yeni hub 'ın dağıtımının durumunu görmek için üst kısımdaki **bildirimleri** (zil simgesi) seçin. Bildirim penceresini kapatmak için sağ köşedeki **X** seçeneğini belirleyin. 
 
       ![Dağıtım bildirimi](./media/create-notification-hub-portal/deployment-notification.png)
-5. Yenileme **bildirim hub'ı ad alanları** listesinde yeni hub'ınıza görmek için web sayfası. 
+5. Yeni hub 'ınızı listede görmek için **Bildirim Hub 'ı ad alanları** Web sayfasını yenileyin. 
 
       ![Azure portalı - bildirimler -> Kaynağa git](./media/create-notification-hub-portal/new-hub-in-list.png)
-6. Seçin, **bildirim hub'ı** bildirim hub'ınıza giriş sayfasını görmek için. 
+6. Bildirim Hub 'ınızı giriş sayfasını görmek için **Bildirim Hub** 'ınızı seçin. 
 
       ![Azure portalı - bildirimler -> Kaynağa git](./media/create-notification-hub-portal/hub-home-page.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu hızlı başlangıçta, bir bildirim hub'ı oluşturuldu. Hub'ı ile platform bildirim sistemi (PNS) ayarları yapılandırma konusunda bilgi için bkz: [bir bildirim hub'ı PNS ayarlarla yapılandırın](configure-notification-hub-portal-pns-settings.md). 
+Bu hızlı başlangıçta bir Bildirim Hub 'ı oluşturdunuz. Hub 'ı platform bildirim sistemi (PNS) ayarlarıyla yapılandırma hakkında bilgi edinmek için bkz. [PNS ayarları ile bir Bildirim Hub 'ı yapılandırma](configure-notification-hub-portal-pns-settings.md). 

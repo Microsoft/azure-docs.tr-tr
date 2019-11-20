@@ -11,13 +11,14 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
 ms.date: 03/21/2019
-ms.author: kumud;tyao
-ms.openlocfilehash: da56c9664ce533709676ded677add4a2391dce03
-ms.sourcegitcommit: e7d4881105ef17e6f10e8e11043a31262cfcf3b7
+ms.author: kumud
+ms.reviewer: tyao
+ms.openlocfilehash: 7ad2d181b6343644205c58ab1d5fe83dc25542d4
+ms.sourcegitcommit: fa45c2bcd1b32bc8dd54a5dc8bc206d2fe23d5fb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/29/2019
-ms.locfileid: "64865859"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67846421"
 ---
 # <a name="what-is-geo-filtering-on-a-domain-for-azure-front-door"></a>Bir etki alanındaki Azure ön kapı için coğrafi filtreleme nedir?
 
@@ -65,7 +66,7 @@ Ya da bir coğrafi filtreleme İlkesi, ön kapısı yapılandırabilirsiniz [Azu
 | CD | Kongo Demokratik Cumhuriyeti|
 | CF | Orta Afrika Cumhuriyeti|
 | CH | İsviçre|
-| CI | Fildişi Kıyısı|
+| CI | Fildişi Sahili (Côte d’Ivoire)|
 | CL | Şili|
 | CM | Kamerun|
 | CN | Çin|
@@ -97,12 +98,12 @@ Ya da bir coğrafi filtreleme İlkesi, ön kapısı yapılandırabilirsiniz [Azu
 | GR | Yunanistan|
 | GT | Guatemala|
 | GY | Guyana|
-| HK | Hong Kong Çin ÖİB|
+| HK | Hong Kong SAR|
 | HN | Honduras|
 | HR | Hırvatistan|
 | HT | Haiti|
 | HU | Macaristan|
-| Kimlik | Endonezya|
+| id | Endonezya|
 | IE | İrlanda|
 | IL | İsrail|
 | IN | Hindistan|

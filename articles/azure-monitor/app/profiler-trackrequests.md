@@ -1,33 +1,29 @@
 ---
-title: Azure Application Insights ile istekleri izlemek için kod yazma | Microsoft Docs
-description: İsteklerinizi için profilleri alabilmeniz için Application Insights ile istekleri izlemek için kod yazın.
-services: application-insights
-documentationcenter: ''
-author: cweining
-manager: carmonm
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: İstekleri Azure Application Insights izlemek için kod yazma | Microsoft Docs
+description: İsteklerinize yönelik profilleri alabilmeniz için Application Insights olan istekleri izlemek için kod yazın.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.reviewer: mbullwin
-ms.date: 08/06/2018
+author: cweining
 ms.author: cweining
-ms.openlocfilehash: 4782e560b580b7f565724dbb35ed9876bffdc256
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/06/2018
+ms.reviewer: mbullwin
+ms.openlocfilehash: 3f449c98ed44f13fb6b3849ef2457cd8fbd916de
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60730863"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72900006"
 ---
 # <a name="write-code-to-track-requests-with-application-insights"></a>Application Insights ile istekleri izlemek için kod yazma
 
-Profilleri uygulamanız için performans sayfada görüntülemek için uygulamanız için istekleri izlemek Azure Application Insights gerekir. Application Insights isteği zaten izlenen çerçeveleri üzerinde oluşturulan uygulamalar için otomatik olarak izleyebilirsiniz. ASP.NET ve ASP.NET Core iki örnek verilmiştir. 
+Performans sayfasında uygulamanızın profillerini görüntülemek için, Azure Application Insights uygulamanızın isteklerini izlemesi gerekir. Application Insights, zaten işaretlenmiş çerçeveler üzerinde oluşturulmuş uygulamalar için istekleri otomatik olarak izleyebilir. İki örnek ASP.NET ve ASP.NET Core. 
 
-Azure Cloud Services çalışan rolleri ve Service Fabric durum bilgisi olmayan API'leri gibi diğer uygulamalar için Application ınsights'ı isteklerinizi burada başlar ve son bildirmek için kod yazmanız gerekir. Bu kodu yazdıktan sonra istekleri telemetriyi Application Insights'a gönderilir. Performans sayfada telemetriyi görüntüleyebilir ve profilleri için bu istekleri toplanır. 
+Azure Cloud Services çalışan rolleri ve durum bilgisiz API 'Leri Service Fabric gibi diğer uygulamalar için, isteklerinizin başlayacağı ve sona erdirmek Application Insights bildirmek için kod yazmanız gerekir. Bu kodu yazdıktan sonra, Application Insights telemetri gönderilir. Telemetri ' i performans sayfasında görüntüleyebilirsiniz ve bu istekler için profiller toplanır. 
 
-El ile istekleri izlemek için aşağıdakileri yapın:
+İstekleri el ile izlemek için aşağıdakileri yapın:
 
-  1. Uygulama ömrü erken, aşağıdaki kodu ekleyin:  
+  1. Uygulama ömrünün başlarında, aşağıdaki kodu ekleyin:  
 
         ```csharp
         using Microsoft.ApplicationInsights.Extensibility;
@@ -35,9 +31,9 @@ El ile istekleri izlemek için aşağıdakileri yapın:
         // Replace with your own Application Insights instrumentation key.
         TelemetryConfiguration.Active.InstrumentationKey = "00000000-0000-0000-0000-000000000000";
         ```
-      Bu genel bir izleme anahtarı yapılandırma hakkında daha fazla bilgi için bkz. [Application Insights ile kullanım Service Fabric](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started/blob/dev/appinsights/ApplicationInsights.md).  
+      Bu genel izleme anahtarı yapılandırması hakkında daha fazla bilgi için bkz. [Application Insights ile Service Fabric kullanma](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started/blob/dev/appinsights/ApplicationInsights.md).  
 
-  1. İzleme, eklemek istediğiniz kodu herhangi bir parçası için bir `StartOperation<RequestTelemetry>` **kullanarak** çevresinde, aşağıdaki örnekte gösterildiği gibi deyimi:
+  1. İşaretlemek istediğiniz herhangi bir kod parçası için, aşağıdaki örnekte gösterildiği gibi, etrafında bir using ifadesini **kullanarak** bir `StartOperation<RequestTelemetry>` ekleyin:
 
         ```csharp
         using Microsoft.ApplicationInsights;
@@ -51,7 +47,7 @@ El ile istekleri izlemek için aşağıdakileri yapın:
         }
         ```
 
-        Çağırma `StartOperation<RequestTelemetry>` içindeki başka `StartOperation<RequestTelemetry>` kapsamı desteklenmiyor. Kullanabileceğiniz `StartOperation<DependencyTelemetry>` iç içe kapsam yerine. Örneğin:  
+        Başka bir `StartOperation<RequestTelemetry>` kapsamı içinde `StartOperation<RequestTelemetry>` çağrılması desteklenmez. Bunun yerine iç içe kapsamdaki `StartOperation<DependencyTelemetry>` kullanabilirsiniz. Örnek:  
         
         ```csharp
         using (var getDetailsOperation = client.StartOperation<RequestTelemetry>("GetProductDetails"))

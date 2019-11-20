@@ -1,7 +1,6 @@
 ---
-title: Azure Data Lake depolama Gen2'ye erişim denetimine genel bakış | Microsoft Docs
-description: Azure Data Lake depolama Gen2 erişim denetiminin nasıl çalıştığını anlama
-services: storage
+title: Azure Data Lake Storage 2. | erişim denetimine genel bakış | Microsoft Docs
+description: Erişim denetiminin Azure Data Lake Storage 2. nasıl çalıştığını anlama
 author: normesta
 ms.subservice: data-lake-storage-gen2
 ms.service: storage
@@ -9,89 +8,89 @@ ms.topic: conceptual
 ms.date: 04/23/2019
 ms.author: normesta
 ms.reviewer: jamesbak
-ms.openlocfilehash: 72a72e385217178cb6afee237cc3a3e5c5d1248b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: a35cf935d990dbb61f440d2592d59d21f33a2ae8
+ms.sourcegitcommit: 49cf9786d3134517727ff1e656c4d8531bbbd332
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66751643"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74037236"
 ---
-# <a name="access-control-in-azure-data-lake-storage-gen2"></a>Azure Data Lake depolama Gen2'ye erişim denetimi
+# <a name="access-control-in-azure-data-lake-storage-gen2"></a>Azure Data Lake Storage 2. erişim denetimi
 
-Azure Data Lake depolama 2. nesil hem Azure rol tabanlı erişim denetimi (RBAC) hem de benzer POSIX erişim denetim listeleri (ACL'ler) destekleyen bir erişim denetimi modeli kullanır. Bu makalede Data Lake depolama 2. nesil için erişim denetimi modelinin temel bilgileri özetlenmektedir.
+Azure Data Lake Storage 2. hem Azure rol tabanlı erişim denetimi (RBAC) hem de POSIX benzeri erişim denetim listelerini (ACL 'Ler) destekleyen bir erişim denetimi modeli uygular. Bu makalede Data Lake Storage 2. için erişim denetimi modelinin temelleri özetlenmektedir.
 
 <a id="azure-role-based-access-control-rbac" />
 
 ## <a name="role-based-access-control"></a>Rol tabanlı erişim denetimi
 
-RBAC, izin kümelerini etkili bir şekilde uygulamak için rol atamalarını kullanan *güvenlik sorumluları*. A *güvenlik sorumlusu* bir kullanıcı, Grup, hizmet sorumlusu veya Azure Active Directory (Azure kaynaklarına erişimi isteyen AD) tanımlanan yönetilen kimlik temsil eden bir nesnedir.
+RBAC, *güvenlik sorumlularına*izin kümelerini etkili bir şekilde uygulamak için rol atamaları kullanır. *Güvenlik sorumlusu* , Azure kaynaklarına erişim isteyen Azure ACTIVE DIRECTORY (ad) ' de tanımlanan bir Kullanıcı, Grup, hizmet sorumlusu veya yönetilen kimliği temsil eden bir nesnedir.
 
-Bu Azure kaynakları için en üst düzey kaynaklar genellikle, sınırlıdır (örneğin: Azure depolama hesapları için). Azure depolama ve Azure Data Lake depolama Gen2 söz konusu olduğunda sonuç olarak, bu mekanizma kapsayıcı (dosya sistemi) kaynağa genişletilmiştir.
+Genellikle, bu Azure kaynakları en üst düzey kaynaklarla sınırlıdır (örneğin, Azure depolama hesapları). Azure depolama söz konusu olduğunda ve sonuç olarak Azure Data Lake Storage 2., bu mekanizma kapsayıcı (dosya sistemi) kaynağına genişletilir.
 
-Depolama hesabınız kapsamında güvenlik sorumlularının rollerini atama bilgi edinmek için [verilere Azure blob ve kuyruk RBAC ile Azure portalında erişim ver](https://docs.microsoft.com/azure/storage/common/storage-auth-aad-rbac-portal?toc=%2fazure%2fstorage%2fblobs%2ftoc.json).
+Depolama hesabınızın kapsamındaki güvenlik sorumlularına roller atamayı öğrenmek için bkz. [Azure Portal Azure Blob 'a erişim verme ve VERILERI RBAC ile sıraya](https://docs.microsoft.com/azure/storage/common/storage-auth-aad-rbac-portal?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)alma.
 
-### <a name="the-impact-of-role-assignments-on-file-and-directory-level-access-control-lists"></a>Dosya ve dizin düzeyinde erişim denetim listeleri rol atamalarında etkisini
+### <a name="the-impact-of-role-assignments-on-file-and-directory-level-access-control-lists"></a>Rol atamalarının dosya ve dizin düzeyinde erişim denetim listelerindeki etkileri
 
-RBAC rolü atamalarını kullanarak erişim izinlerini denetlemek için güçlü bir mekanizma olsa da, bunu bir çok kaba ayrıntılı ACL'ler göre mekanizmadır. Dosya sistemi düzeyinde RBAC için en küçük ayrıntı düzeyi ise ve bu ACL daha yüksek bir önceliğe adresindeki değerlendirilir. Bu nedenle, bir dosya sistemi kapsam içinde bir güvenlik sorumlusu için bir rol atamanız durumunda güvenlik sorumlusunu ACL atamaları bağımsız olarak, dosya sistemindeki tüm dizinler ve dosyalar için bu rol ile ilişkili yetki düzeyi vardır.
+RBAC rol atamalarının kullanılması, erişim izinlerini denetlemek için güçlü bir mekanizmadır. Bu, ACL 'Lerle ilgili oldukça ayrıntılı bir mekanizmadır. RBAC için en küçük ayrıntı düzeyi kapsayıcı düzeyindedir ve bu, ACL 'Lere göre daha yüksek bir önceliğe göre değerlendirilir. Bu nedenle, bir kapsayıcı kapsamındaki bir güvenlik sorumlusuna bir rol atarsanız, bu güvenlik sorumlusu ACL atamalarından bağımsız olarak o kapsayıcıdaki tüm dizinler ve dosyalar için bu rolle ilişkili yetkilendirme düzeyine sahiptir.
 
-Bir güvenlik sorumlusu RBAC aracılığıyla veri izinleri verildi ne zaman bir [yerleşik rol](https://docs.microsoft.com/azure/storage/common/storage-auth-aad?toc=%2fazure%2fstorage%2fblobs%2ftoc.json#built-in-rbac-roles-for-blobs-and-queues), ya da özel bir rol bu izinleri önce yetkilendirme isteği değerlendirilir. Yetkilendirme hemen çözümlenmiş ve hiç ise güvenlik sorumlusunun RBAC atamaları tarafından istenen işlem yetkiliyse ACL denetimleri yapılır. Alternatif olarak, güvenlik sorumlusu RBAC atama yok ya da istenen işlem atanan izni eşleşmiyor, ardından ACL denetimlerini güvenlik sorumlusu istenen işlemi gerçekleştirmek için yetkili olup olmadığını belirlemek için gerçekleştirilir.
+Bir güvenlik sorumlusu [yerleşik bir rol](https://docs.microsoft.com/azure/storage/common/storage-auth-aad?toc=%2fazure%2fstorage%2fblobs%2ftoc.json#built-in-rbac-roles-for-blobs-and-queues)aracılığıyla veya özel bir rol aracılığıyla RBAC veri izinleri verildiğinde, bu izinler bir isteğin yetkilendirilmesine göre önce değerlendirilir. İstenen işlem güvenlik sorumlusunun RBAC atamaları tarafından yetkilendirildiyse, yetkilendirme anında çözülür ve ek ACL denetimleri gerçekleştirilmez. Alternatif olarak, güvenlik sorumlusunun bir RBAC ataması yoksa veya isteğin işlemi atanan izinle eşleşmezse, güvenlik sorumlusunun istenen işlemi gerçekleştirme yetkisine sahip olup olmadığını belirlemesi için ACL denetimleri gerçekleştirilir.
 
 > [!NOTE]
-> Depolama Blob verileri sahip yerleşik rol ataması güvenlik sorumlusu atanmış sonra güvenlik sorumlusu olarak kabul edilir bir *süper kullanıcı* ve ayarı dahil olmak üzere tüm mutating işlemleri için tam erişim izni dizinleri ve sahibi oldukları olmayan dosyaları için ACL'leri yanı sıra bir dizin veya dosya sahibini. Süper kullanıcı, bir kaynağın sahibini değiştirmek için yalnızca yetkili şekilde erişimdir.
+> Güvenlik sorumlusu, Depolama Blobu veri sahibi yerleşik rol ataması ' na atanmışsa, güvenlik sorumlusu bir *Süper Kullanıcı* olarak değerlendirilir ve bir dizin ya da dosyanın sahibini ayarlamanın yanı sıra, sahip olmadıkları dizinler ve dosyalar Için ACL 'ler dahil olmak üzere tüm değiştirici işlemlere tam erişim verilir. Süper Kullanıcı erişimi, bir kaynağın sahibini değiştirmek için tek yetkilendirilmiştir.
 
-## <a name="shared-key-and-shared-access-signature-sas-authentication"></a>Paylaşılan anahtar ve paylaşılan erişim imzası (SAS) kimlik doğrulaması
+## <a name="shared-key-and-shared-access-signature-sas-authentication"></a>Paylaşılan anahtar ve paylaşılan erişim Imzası (SAS) kimlik doğrulaması
 
-Azure Data Lake depolama Gen2'ye kimlik doğrulaması için paylaşılan anahtar ve SAS yöntemleri destekler. Bu kimlik doğrulama yöntemlerinin bir karakteristik kimliksiz arayanla ilişkili ise ve bu nedenle güvenlik sorumlusu izin tabanlı yetkilendirme gerçekleştirilemiyor ' dir.
+Azure Data Lake Storage 2., kimlik doğrulaması için paylaşılan anahtar ve SAS yöntemlerini destekler. Bu kimlik doğrulama yöntemlerinin bir özelliği, çağıran ile hiçbir kimliğin ilişkilendirilmediği ve bu nedenle güvenlik sorumlusu izin tabanlı yetkilendirmenin gerçekleştirilemesinden oluşur.
 
-Paylaşılan anahtar söz konusu olduğunda, çağırana etkili bir şekilde 'süper kullanıcı' erişim sahibi ayarlama ve ACL'ler değiştirme dahil olmak üzere tüm kaynaklar üzerindeki tüm işlemler için tam erişim anlamı kazanır.
+Paylaşılan anahtar söz konusu olduğunda, çağıran ' Süper Kullanıcı ' erişimini etkin bir şekilde, yani tüm kaynaklardaki tüm işlemlere tam erişim sağlar ve bu da sahip ve ACL 'Leri değiştirme de dahil olmak üzere tüm kaynaklardaki tüm işlemlere
 
-SAS belirteçleri belirtecinin bir parçası izin verilen izinleri içerir. SAS belirteci dahil izinleri tüm yetkilendirme kararları için etkili bir şekilde uygulanır, ancak hiçbir ek ACL denetimler gerçekleştirilir.
+SAS belirteçleri, belirtecin bir parçası olarak izin verilen izinleri içerir. SAS belirtecine dahil edilen izinler, tüm yetkilendirme kararlarında etkili bir şekilde uygulanır, ancak başka bir ACL denetimi gerçekleştirilmez.
 
-## <a name="access-control-lists-on-files-and-directories"></a>Erişim denetim listelerini dosyalar ve dizinler
+## <a name="access-control-lists-on-files-and-directories"></a>Dosya ve dizinlerdeki erişim denetim listeleri
 
-Dosyalar ve dizinler için erişim düzeyine sahip bir güvenlik sorumlusu ilişkilendirebilirsiniz. Bu ilişkilendirmeleri, yakalanan bir *erişim denetim listesi (ACL)* . Her dosya ve dizin depolama hesabınızda bir erişim denetim listesi vardır.
+Güvenlik sorumlusunu, dosyalar ve dizinler için bir erişim düzeyiyle ilişkilendirebilirsiniz. Bu ilişkilendirmeler bir *erişim denetim listesi (ACL)* içinde yakalanır. Depolama hesabınızdaki her dosya ve dizinin bir erişim denetim listesi vardır.
 
-Depolama hesabı düzeyinde bir güvenlik sorumlusu bir rolü atandı, güvenlik sorumlusunu belirli dosyalara ve dizinlere erişim yükseltilmiş erişim denetim listelerini kullanın.
+Depolama hesabı düzeyinde bir güvenlik sorumlusuna rol atadıysanız, bu güvenlik sorumlusunu belirli dosyalara ve dizinlere yükseltilmiş olarak sağlamak için erişim denetimi listelerini kullanabilirsiniz.
 
-Erişim denetim listeleri, bir rol ataması tarafından verilen bir düzeyi daha düşük erişim düzeyini sağlamak için kullanamazsınız. Örneğin, atadığınız [depolama Blob verileri katkıda bulunan](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) güvenlik sorumlusunu bir dizine yazmasını önlemek için erişim denetimi kullanamazsınız sonra asıl güvenlik rolüne listeler.
+Rol ataması tarafından verilen düzeyinden daha düşük bir erişim düzeyi sağlamak için erişim denetimi listelerini kullanamazsınız. Örneğin, [Depolama Blobu veri katılımcısı](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) rolünü bir güvenlik sorumlusuna atarsanız, bu güvenlik sorumlusunun bir dizine yazmasını engellemek için erişim denetimi listelerini kullanamazsınız.
 
-### <a name="set-file-and-directory-level-permissions-by-using-access-control-lists"></a>Erişim denetim listeleri kullanarak dosya ve dizin düzeyi izinleri ayarlama
+### <a name="set-file-and-directory-level-permissions-by-using-access-control-lists"></a>Erişim denetim listelerini kullanarak dosya ve Dizin düzeyi izinleri ayarlama
 
-Dosya ve dizin düzeyinde izinleri ayarlamak için aşağıdaki makalelerden herhangi birine bakın:
+Dosya ve dizin düzeyindeki izinleri ayarlamak için aşağıdaki makalelerden birine bakın:
 
-|Bu aracı kullanmak istiyorsanız:    |Bu makaleye bakın:    |
+|Bu aracı kullanmak istiyorsanız:    |Şu makaleye bakın:    |
 |--------|-----------|
-|Azure Depolama Gezgini    |[Azure Data Lake depolama 2. nesil ile Azure Depolama Gezgini'ni kullanarak dosya ve dizin düzeyi izinleri ayarlayın](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-how-to-set-permissions-storage-explorer)|
-|REST API    |[Yol - güncelleştirme](https://docs.microsoft.com/rest/api/storageservices/datalakestoragegen2/path/update)|
+|Azure Storage Gezgini    |[Azure Data Lake Storage 2. ile Azure Depolama Gezgini kullanarak dosya ve Dizin düzeyi izinleri ayarlama](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-how-to-set-permissions-storage-explorer)|
+|REST API    |[Yol-Güncelleştir](https://docs.microsoft.com/rest/api/storageservices/datalakestoragegen2/path/update)|
 
 > [!IMPORTANT]
-> Güvenlik sorumlusu ise bir *hizmet* asıl, hizmet sorumlusu nesne kimliği ve nesne kimliği değil ilgili uygulama kaydını kullanmak önemlidir. Azure CLI açık hizmet sorumlusu nesne Kimliğini alın ve ardından bu komutu kullanın: `az ad sp show --id <Your App ID> --query objectId`. değiştirdiğinizden emin olun `<Your App ID>` yer tutucu uygulaması kaydınızı uygulama kimliği.
+> Güvenlik sorumlusu bir *hizmet* sorumlusu ise, ilgili uygulama KAYDıNıN nesne kimliğini değil, hizmet sorumlusunun nesne kimliğini kullanmak önemlidir. Hizmet sorumlusunun nesne KIMLIĞINI almak için Azure CLı 'yı açın ve ardından şu komutu kullanın: `az ad sp show --id <Your App ID> --query objectId`. `<Your App ID>` yer tutucusunu, uygulama kaydlarınızın uygulama KIMLIĞIYLE değiştirdiğinizden emin olun.
 
-### <a name="types-of-access-control-lists"></a>Erişim denetimi listesi türleri
+### <a name="types-of-access-control-lists"></a>Erişim denetim listelerinin türleri
 
-İki tür erişim denetim listeleri vardır: *ACL'leri erişim* ve *ACL'leri varsayılan*.
+İki tür erişim denetim listesi vardır: *erişim ACL 'leri* ve *varsayılan ACL 'ler*.
 
-Erişim ACL'leri bir nesneye erişimi denetler. Dosyalar ve dizinler erişim ACL'leri vardır.
+ACL denetim erişimi bir nesneye erişin. Dosya ve dizinlerin her ikisi de erişim ACL 'Lerine sahiptir.
 
-Varsayılan ACL'ler, bu dizin altında oluşturulan tüm alt öğelere ilişkin erişim ACL'lerini belirleyen bir dizinle ilişkili ACL'leri şablonlardır. Dosyaları varsayılan ACL'ye sahip değildir.
+Varsayılan ACL 'ler, bu dizin altında oluşturulan tüm alt öğeler için erişim ACL 'Lerini tanımlayan bir dizinle ilişkili ACL 'lerin şablonlarıdır. Dosyaların varsayılan ACL 'Leri yok.
 
-Hem erişim ACL'leri hem de varsayılan ACL'ler aynı yapıdadır.
+Erişim ACL 'Leri ve varsayılan ACL 'Ler aynı yapıya sahiptir.
 
 > [!NOTE]
-> Varsayılan değiştirme üst ACL erişim ACL'sini etkilemez veya varsayılan ACL'si alt öğelerinin zaten mevcut.
+> Bir üst öğenin varsayılan ACL 'sini değiştirmek, erişim ACL 'sini veya zaten var olan alt öğelerin ACL 'sini etkilemez.
 
 ### <a name="levels-of-permission"></a>İzin düzeyleri
 
-Bir dosya sistemi nesnesi üzerinde izinler **okuma**, **yazma**, ve **yürütme**, ve bunlar üzerinde dosya ve dizinleri aşağıdaki tabloda gösterildiği gibi kullanılabilir:
+Bir kapsayıcı nesnesindeki izinler **okuma**, **yazma**ve **yürütme**, aşağıdaki tabloda gösterildiği gibi dosyalar ve dizinler üzerinde de kullanılabilir:
 
 |            |    Dosya     |   Dizin |
 |------------|-------------|----------|
-| **Okuma (R)** | Bir dosyanın içeriğini okuyabilir | Gerektirir **okuma** ve **yürütme** dizinin içeriğini listelemek için |
-| **Yazma (W)** | Bir dosyaya yazabilir veya ekleyebilir | Gerektirir **yazma** ve **yürütme** alt öğeler bir dizin oluşturmak için |
-| **Yürütme (X)** | Data Lake depolama Gen2 bağlamında herhangi bir şey gelmez | Bir dizinin alt öğelerini geçirmek için gereklidir |
+| **Okuma (R)** | Bir dosyanın içeriğini okuyabilir | Dizinin içeriğini listelemek için **okuma** ve **yürütme** gerektirir |
+| **Yazma (W)** | Bir dosyaya yazabilir veya ekleyebilir | Bir dizinde alt öğeler oluşturmak için **yazma** ve **yürütme** gerektirir |
+| **Yürütme (X)** | Data Lake Storage 2. bağlamında hiçbir şey anlamına gelmez | Bir dizinin alt öğelerinin çapraz geçişini yapmak için gereklidir |
 
 > [!NOTE]
-> Yalnızca ACL'leri (hiçbir RBAC) kullanarak izinleri verdiğiniz sonra bir hizmet sorumlusu okuma veya yazma erişimi bir dosyaya vermek için hizmet sorumlusu vermek gerekecektir **yürütme** dosya sistemi ve her bir klasörü izinleri dosyayı neden klasör hiyerarşisi.
+> Yalnızca ACL 'Leri kullanarak (RBAC olmadan) izin veriyorsanız, bir güvenlik sorumlusu için bir dosyaya okuma veya yazma erişimi vermek istiyorsanız, kapsayıcıya güvenlik sorumlusu **yürütme** izinleri vermeniz ve dosyaya yol açabilecek klasörler hiyerarşisindeki her bir klasöre sahip olmanız gerekir.
 
 #### <a name="short-forms-for-permissions"></a>İzinlerin kısaltmaları
 
@@ -104,40 +103,40 @@ Bir dosya sistemi nesnesi üzerinde izinler **okuma**, **yazma**, ve **yürütme
 | 4            | `R--`        | Okuma                   |
 | 0            | `---`        | İzin yok         |
 
-#### <a name="permissions-inheritance"></a>İzinleri devralmayı
+#### <a name="permissions-inheritance"></a>İzin devralma
 
-Data Lake depolama Gen2 tarafından kullanılan POSIX stili modelinde bir öğenin izinleri öğenin kendisine depolanır. Diğer bir deyişle, alt öğesi zaten oluşturulduktan sonra izinleri ayarlandıysa bir öğenin izinleri üst öğelerinden devralınamaz. Üst öğeler alt öğelerini oluşturmadan önce varsayılan izinleri atanmışsa, izinler yalnızca devralınır.
+Data Lake Storage 2. tarafından kullanılan POSIX stili modelde bir öğe için izinler öğenin kendisinde depolanır. Diğer bir deyişle, izinler alt öğe oluşturulduktan sonra ayarlandıysa, öğenin izinleri üst öğeden devralınamaz. İzinler yalnızca, alt öğeler oluşturulmadan önce üst öğelerde varsayılan izinler ayarlandıysa devralınır.
 
 ### <a name="common-scenarios-related-to-permissions"></a>İzinlerle ilgili yaygın senaryolar
 
-Aşağıdaki tabloda, bir depolama hesabı üzerinde belirli işlemlerin gerçekleştirilmesi için gereken izinleri anlamanıza yardımcı olacak bazı yaygın senaryolar listelenmektedir.
+Aşağıdaki tabloda, bir depolama hesabında belirli işlemleri gerçekleştirmek için hangi izinlerin gerekli olduğunu anlamanıza yardımcı olacak bazı yaygın senaryolar listelenmektedir.
 
-|    İşlem             |    /    | Oregon / | Portland / | Data.txt     |
+|    İşlem             |    /    | 'Daki | Portland / | Data.txt     |
 |--------------------------|---------|----------|-----------|--------------|
-| Data.txt okuyun            |   `--X`   |   `--X`    |  `--X`      | `R--`          |
-| Data.txt için ekleme       |   `--X`   |   `--X`    |  `--X`      | `RW-`          |
-| Data.txt Sil          |   `--X`   |   `--X`    |  `-WX`      | `---`          |
-| Data.txt oluşturma          |   `--X`   |   `--X`    |  `-WX`      | `---`          |
-| Liste /                   |   `R-X`   |   `---`    |  `---`      | `---`          |
-| Liste /Oregon/           |   `--X`   |   `R-X`    |  `---`      | `---`          |
-| Liste /Oregon/Portland /  |   `--X`   |   `--X`    |  `R-X`      | `---`          |
+| Data. txt dosyasını oku            |   `--X`   |   `--X`    |  `--X`      | `R--`          |
+| Data. txt dosyasına Ekle       |   `--X`   |   `--X`    |  `--X`      | `RW-`          |
+| Data. txt dosyasını Sil          |   `--X`   |   `--X`    |  `-WX`      | `---`          |
+| Data. txt oluşturma          |   `--X`   |   `--X`    |  `-WX`      | `---`          |
+| Listele                   |   `R-X`   |   `---`    |  `---`      | `---`          |
+| Liste/Oregon/           |   `--X`   |   `R-X`    |  `---`      | `---`          |
+| Liste/Oregon/Portland/  |   `--X`   |   `--X`    |  `R-X`      | `---`          |
 
 > [!NOTE]
-> Yazma önceki iki koşul true olduğu sürece dosyasındaki izinleri, silmek için gerekli değildir.
+> Önceki iki koşul doğru olduğu sürece, dosyanın üzerine yazma izinleri bunu silmek için gerekli değildir.
 
 ### <a name="users-and-identities"></a>Kullanıcılar ve kimlikler
 
-Her dosya ve dizin bu kimlikler için farklı izinlere sahiptir:
+Her dosya ve dizin, bu kimlikler için farklı izinlere sahiptir:
 
 - Sahip olan kullanıcı
 - Sahip olan grup
 - Adlandırılmış kullanıcılar
 - Adlandırılmış gruplar
 - Adlandırılmış hizmet sorumluları
-- Adlandırılmış bir yönetilen kimlik
+- Adlandırılmış Yönetilen kimlikler
 - Diğer tüm kullanıcılar
 
-Kullanıcıların ve grupların kimlikleri, Azure Active Directory (Azure AD) kimlikleridir. Aksi belirtilmediği sürece, böyle bir *kullanıcı*, Data Lake depolama Gen2 bağlamında başvurmak için bir Azure AD kullanıcısı, hizmet sorumlusu, yönetilen bir kimlik veya güvenlik grubu.
+Kullanıcıların ve grupların kimlikleri, Azure Active Directory (Azure AD) kimlikleridir. Bu nedenle, aksi belirtilmediği takdirde, Data Lake Storage 2. bağlamında bir *Kullanıcı*Azure AD kullanıcısına, hizmet sorumlusuna, yönetilen kimliğe veya güvenlik grubuna başvurabilir.
 
 #### <a name="the-owning-user"></a>Sahip olan kullanıcı
 
@@ -147,29 +146,29 @@ Kullanıcıların ve grupların kimlikleri, Azure Active Directory (Azure AD) ki
 * Sahip olan kullanıcı aynı zamanda hedef grubun bir üyesi oldukça, sahip olunan bir dosyanın sahibi olan grubunu değiştirme.
 
 > [!NOTE]
-> Sahip olan kullanıcı *olamaz* sahibi olan kullanıcıyı bir dosya veya dizin değiştirin. Bir dosya veya dizin sahibi olan kullanıcıyı yalnızca süper kullanıcılar değiştirebilirsiniz.
+> Sahip olan Kullanıcı, bir dosyanın veya dizinin sahibi olan *kullanıcısını değiştiremiyor.* Yalnızca süper kullanıcılar bir dosyanın veya dizinin sahibi olan kullanıcısını değiştirebilir.
 
 #### <a name="the-owning-group"></a>Sahip olan grup
 
-POSIX ACL'lerinde her kullanıcı ile ilişkili bir *birincil grup*. Örneğin, "Gamze adlı" kullanıcı "Finans" grubuna ait olabilir. Gamze ayrıca birden fazla gruba ait, ancak bir grup her zaman kendi birincil grubu olarak atanır. POSIX’te Gamze bir dosya oluşturduğunda o dosyanın sahibi olan grup birincil grubu olarak ayarlanır (bu örnekte "finans" grubudur). Aksi takdirde sahip olan grup, diğer kullanıcılar/gruplar için atanan izinlere benzer şekilde davranır.
+POSIX ACL 'lerinde, her Kullanıcı bir *birincil grupla*ilişkilendirilir. Örneğin, "Gamze" kullanıcısı "Finans" grubuna ait gelebilir. Gamze birden çok gruba ait olabilir, ancak bir grup her zaman birincil grubu olarak atanır. POSIX’te Gamze bir dosya oluşturduğunda o dosyanın sahibi olan grup birincil grubu olarak ayarlanır (bu örnekte "finans" grubudur). Aksi takdirde sahip olan grup, diğer kullanıcılar/gruplar için atanan izinlere benzer şekilde davranır.
 
-##### <a name="assigning-the-owning-group-for-a-new-file-or-directory"></a>Yeni dosya veya dizin sahip olan grup atama
+##### <a name="assigning-the-owning-group-for-a-new-file-or-directory"></a>Yeni bir dosya veya dizin için sahip olan grup atanıyor
 
-* **Case 1**: Kök dizin "/". Bu dizin, bir Data Lake depolama 2. nesil dosya sistemini oluşturduğunuzda oluşturulur. Bu durumda sahip olan Grup bitti dedik, dosya sistemi oluşturan kullanıcıya ayarlanır OAuth kullanarak. Paylaşılan anahtar, bir hesap SAS veya bir hizmet SAS'ı kullanarak dosya sistemine oluşturulduktan sonra sahibi ve sahip olan Grup ayarlanır **$superuser**.
-* **2. durum** (diğer her olay): Yeni bir öğe oluşturulduğunda sahip olan Grup üst dizininden kopyalanır.
+* **Durum 1**: kök dizin "/". Bu dizin Data Lake Storage 2. bir kapsayıcı oluşturulduğunda oluşturulur. Bu durumda sahip olan Grup, OAuth kullanılarak yapıldıysa kapsayıcıyı oluşturan kullanıcıya ayarlanır. Kapsayıcı paylaşılan anahtar, bir hesap SAS veya hizmet SAS kullanılarak oluşturulduysa, sahip ve sahip grubu **$superuser**olarak ayarlanır.
+* **Durum 2** (diğer her durum): yeni bir öğe oluşturulduğunda, sahip olan grup üst dizinden kopyalanır.
 
-##### <a name="changing-the-owning-group"></a>Sahip olan Grup değiştirme
+##### <a name="changing-the-owning-group"></a>Sahip olan grubu değiştirme
 
 Sahip olan grup aşağıdakiler tarafından değiştirilebilir:
 * Herhangi bir süper kullanıcı.
 * Sahip olan kullanıcı aynı zamanda hedef grubun üyesi ise sahip olan kullanıcı.
 
 > [!NOTE]
-> Sahip olan Grup, bir dosya veya dizin ACL'leri değiştiremezsiniz.  Kök dizin, söz konusu olduğunda hesabı oluşturan kullanıcıya sahip olan Grup ayarlanırken **vaka 1** yukarıda tek bir kullanıcı hesabı sahip grup üzerinden izin sağlamak için geçerli değildir. Uygunsa bu izni geçerli bir kullanıcı hesabına atayabilirsiniz.
+> Sahip olan Grup, bir dosyanın veya dizinin ACL 'Lerini değiştiremiyor.  Sahip olan Grup, yukarıdaki **durum 1** olan kök dizin durumunda hesabı oluşturan kullanıcıya ayarlandığı sürece, sahip olan grup aracılığıyla izin sağlamak için tek bir kullanıcı hesabı geçerli değildir. Uygunsa bu izni geçerli bir kullanıcı hesabına atayabilirsiniz.
 
 ### <a name="access-check-algorithm"></a>Erişim denetimi algoritması
 
-Aşağıdaki sözde kod depolama hesapları için erişim denetimi algoritması temsil eder.
+Aşağıdaki sözde kod, depolama hesapları için erişim denetimi algoritmasını temsil eder.
 
 ```
 def access_check( user, desired_perms, path ) : 
@@ -214,39 +213,39 @@ return ( (desired_perms & perms & mask ) == desired_perms)
 
 #### <a name="the-mask"></a>Maskesi
 
-Maske, erişim denetimi algoritması'içinde gösterildiği gibi adlandırılmış kullanıcı, sahip olan Grup ve adlandırılmış gruplara erişim sınırlar.  
+Erişim denetimi algoritmasında gösterildiği gibi, maske adlandırılmış kullanıcılar, sahip olan grup ve adlandırılmış gruplar için erişimi sınırlandırır.  
 
 > [!NOTE]
-> İçin yeni bir Data Lake depolama Gen2'ye dosya sistemi, 750 dizinler ve dosyalar için 640 erişim ("/") kök dizin ACL için maske varsayılan olarak. Yalnızca depolama sisteminde dosyaları alakasız olduğu gibi dosyaları X bit almazsınız.
+> Yeni bir Data Lake Storage 2. kapsayıcısı için, kök dizinin ("/") erişim ACL 'SI için maske, dizinler için 750, dosyalar için 640 olarak varsayılan olarak. Dosyalar yalnızca mağaza sistemindeki dosyalara ait olduğundan, X bitini almaz.
 >
-> Maske, çağrı başına temelinde belirtilebilir. Bu kümeler, kendi dosya işlemleri için farklı etkili maskeleri olması gibi farklı alıcı sistemleri sağlar. Tamamen maske belirli bir istek üzerinde belirtilmezse, varsayılan maskesi geçersiz kılar.
+> Maske, arama başına temelinde belirtilebilir. Bu, kümeler gibi farklı tüketim sistemlerinin dosya işlemleri için farklı etkin maskelerle çalışmasına izin verir. Belirli bir istekte bir maske belirtilmişse, varsayılan maskeyi tamamen geçersiz kılar.
 
 #### <a name="the-sticky-bit"></a>Yapışkan bit
 
-Yapışkan bit POSIX dosya sisteminin daha gelişmiş bir özelliktir. Data Lake depolama Gen2 bağlamında Yapışkan bitin gerekli olması düşüktür. Özet olarak, bir dizin, Yapışkan bitin etkinse, bir alt öğesi yalnızca silinebilir veya alt öğenin sahip olan kullanıcı tarafından yeniden adlandırıldı.
+Yapışkan bit, POSIX kapsayıcısının daha gelişmiş bir özelliğidir. Data Lake Storage 2. bağlamında, yapışkan bitin gerekli olacağı pek olası bir olasılıktır. Özet ' te, bir dizinde yapışkan bit etkinse, alt öğe yalnızca alt öğenin sahibi olan kullanıcı tarafından silinebilir veya yeniden adlandırılabilir.
 
-Yapışkan bit Azure portalında gösterilmiyor.
+Yapışkan bit Azure portal gösterilmez.
 
-### <a name="default-permissions-on-new-files-and-directories"></a>Varsayılan izinler yeni dosyalar ve dizinler
+### <a name="default-permissions-on-new-files-and-directories"></a>Yeni dosya ve dizinlerde varsayılan izinler
 
-Mevcut bir dizini altında yeni bir dosya veya dizin oluşturulduğunda varsayılan üst dizininde ACL belirler:
+Mevcut bir dizin altında yeni bir dosya veya dizin oluşturulduğunda, üst dizindeki varsayılan ACL şunları belirler:
 
-- Bir alt dizinin varsayılan ACL'si ve erişim ACL'si.
-- Bir alt dosyanın erişim ACL'si (dosyaları varsayılan ACL'nin gerekmez).
+- Alt dizinin varsayılan ACL 'si ve erişim ACL 'SI.
+- Alt dosyanın erişim ACL 'SI (dosyaları varsayılan ACL 'ye sahip değildir).
 
 #### <a name="umask"></a>umask
 
-Bir dosya veya dizin oluştururken umask varsayılan ACL'ler alt öğede nasıl ayarlanacağını değiştirmek için kullanılır. umask olan 9 bitlik bir değer içeren bir RWX değeri için üst dizinlerde **sahip olan kullanıcı**, **sahip olan grup**, ve **diğer**.
+Bir dosya veya dizin oluştururken, varsayılan ACL 'Lerin alt öğede nasıl ayarlandığını değiştirmek için umask kullanılır. umask, **sahip olan Kullanıcı**, **sahip olan grup**ve **diğer**için bir RWX değeri içeren üst dizinlerdeki 9 bitlik bir değerdir.
 
-Azure Data Lake depolama Gen2'ye bir sabit değeri için umask 007 için ayarlayın. İçin bu değeri çevirir:
+Umask, 007 olarak ayarlanan sabit bir değer Azure Data Lake Storage 2. Bu değer şunu yapar:
 
 | umask bileşeni     | Sayısal biçim | Kısa biçim | Anlamı |
 |---------------------|--------------|------------|---------|
-| umask.owning_user   |    0         |   `---`      | Sahip olan kullanıcı için üst öğenin varsayılan ACL'si alt öğenin erişim ACL'si kopyalayın | 
-| umask.owning_group  |    0         |   `---`      | Sahip olan Grup üst öğenin varsayılan ACL'si alt öğenin erişim ACL'si kopyalayın | 
-| umask.Other         |    7         |   `RWX`      | Diğer için alt öğenin erişim ACL'si üzerindeki tüm izinleri Kaldır |
+| umask.owning_user   |    0         |   `---`      | Sahip olan kullanıcı için, üst öğenin varsayılan ACL 'sini alt öğenin erişim ACL 'sine kopyalayın | 
+| umask.owning_group  |    0         |   `---`      | Sahip olan grup için üst öğenin varsayılan ACL 'sini alt öğenin erişim ACL 'sine kopyalayın | 
+| umask.Other         |    7         |   `RWX`      | Diğer bir deyişle, alt öğenin erişim ACL 'sindeki tüm izinleri kaldırın |
 
-Umask değerin etkili bir şekilde Azure Data Lake depolama Gen2 tarafından kullanılan değeri anlamına **diğer** varsayılan ACL belirten varsayılan bağımsız olarak yeni alt öğe olarak hiçbir zaman iletilmez. 
+Azure Data Lake Storage 2. tarafından kullanılan umask değeri, varsayılan ACL 'nin gösterdiği ne olursa olsun, **diğer** için varsayılan olarak yeni alt klasörlerde hiçbir şekilde iletilmediği anlamına gelir. 
 
 Aşağıdaki sözde kod umask bir alt öğesi ACL'leri oluştururken nasıl uygulanacağını gösterir.
 
@@ -266,62 +265,64 @@ def set_default_acls_for_new_child(parent, child):
         child_acls.add( new_entry )
 ```
 
-## <a name="common-questions-about-acls-in-data-lake-storage-gen2"></a>Data Lake depolama Gen2 ACL'ler hakkında sık sorulan sorular
+## <a name="common-questions-about-acls-in-data-lake-storage-gen2"></a>Data Lake Storage 2. ACL 'Lerle ilgili genel sorular
 
 ### <a name="do-i-have-to-enable-support-for-acls"></a>ACL desteğini etkinleştirmem gerekiyor mu?
 
-Hayır. ACL'ler üzerinden erişim denetimi, hiyerarşik Namespace (özellik HNS) üzerinde etkin olduğu sürece bir depolama hesabı için etkinleştirilir.
+Hayır. Hiyerarşik ad alanı (HNS) özelliği açık olduğu sürece bir depolama hesabı için ACL 'Ler aracılığıyla erişim denetimi etkinleştirilir.
 
-HNS kapalı, Azure RBAC yetkilendirme kuralları hala açıksa uygulayın.
+HNS kapalıysa, Azure RBAC yetkilendirme kuralları yine de geçerlidir.
 
-### <a name="what-is-the-best-way-to-apply-acls"></a>ACL uygulamak için en iyi yolu nedir?
+### <a name="what-is-the-best-way-to-apply-acls"></a>ACL 'Leri uygulamak için en iyi yol nedir?
 
-ACL'ler atanan sorumlu olarak her zaman Azure AD güvenlik grupları kullanın. Doğrudan bireysel kullanıcıları veya hizmet sorumlusu atamak için bir fırsat kaçının. Bu yapıyı kullanarak, kullanıcı veya hizmet sorumluları için tüm dizin yapısının ACL'leri yeniden gerek kalmadan ekleyip olanak tanıyacaktır. ) Bunun yerine, yalnızca eklemek veya bunları uygun kaldırmak ihtiyacınız Azure AD güvenlik grubu. ACL'ler devralınmaz ve her dosya ve alt noktasındaki ACL güncelleniyor gerekir böylece ACL'leri yeniden uygulama aklınızda bulundurun. 
+Her zaman ACL 'lerdeki atanan sorumlu olarak Azure AD güvenlik gruplarını kullanın. Bireysel kullanıcıları veya hizmet sorumlularını doğrudan atamaya yönelik fırsatı yeniden ölçeklendirin. Bu yapının kullanılması, ACL 'Leri tüm dizin yapısına yeniden uygulama gereksinimi olmadan Kullanıcı veya hizmet sorumluları eklemenize ve kaldırmanıza olanak tanır. ) Bunun yerine, yalnızca uygun Azure AD güvenlik grubundan eklemeniz veya kaldırmanız gerekir. ACL 'Lerin devralındığını aklınızda bulundurun ve bu nedenle, ACL 'Leri yeniden uygulamak için her dosya ve alt dizinde ACL 'nin güncelleştirilmesi gerekir. 
 
-### <a name="which-permissions-are-required-to-recursively-delete-a-directory-and-its-contents"></a>Ve içindekileri yinelemeli olarak silmek bir dizin için hangi izinler gereklidir?
+### <a name="which-permissions-are-required-to-recursively-delete-a-directory-and-its-contents"></a>Bir dizini ve içeriğini yinelemeli olarak silmek için hangi izinler gereklidir?
 
-- Çağıranın 'süper kullanıcı' izinlerine sahip,
+- Çağıranın ' Süper Kullanıcı ' izinleri vardır,
 
-Or
+Veya
 
-- Üst dizine yazma + yürütme izinleri gerekir.
-- Silinecek dizin ve her bir dizininde okuma + yazma + yürütme izinleri gerektirir.
+- Üst dizinin yazma + yürütme izinlerine sahip olması gerekir.
+- Silinecek dizin ve içindeki her dizin, okuma + yazma + yürütme izinlerini gerektirir.
 
 > [!NOTE]
-> Dizinlerde dosyaları silmek için yazma izni yok. Ayrıca, kök dizin "/" hiçbir zaman silinebilir.
+> Dizinlerdeki dosyaları silmek için yazma izinlerine sahip olmanız gerekmez. Ayrıca, "/" kök dizini hiçbir şekilde silinemez.
 
-### <a name="who-is-the-owner-of-a-file-or-directory"></a>Bir dosya veya dizin sahibi kimdir?
+### <a name="who-is-the-owner-of-a-file-or-directory"></a>Bir dosya veya dizinin sahibi kim?
 
-Bir dosya veya dizin oluşturucusu sahibi olur. Kök dizin söz konusu olduğunda, bu dosya sistemi oluşturan kullanıcı kimliğidir.
+Bir dosya veya dizinin Oluşturucusu sahip olur. Kök dizin söz konusu olduğunda, bu kapsayıcıyı oluşturan kullanıcının kimliğidir.
 
-### <a name="which-group-is-set-as-the-owning-group-of-a-file-or-directory-at-creation"></a>Hangi Grup bir dosya veya dizine sahip olan grup oluşturma sırasında ayarlanır?
+### <a name="which-group-is-set-as-the-owning-group-of-a-file-or-directory-at-creation"></a>Oluşturma sırasında bir dosyanın veya dizinin sahip olan grubu olarak hangi Grup ayarlandı?
 
-Sahip olan Grup, yeni bir dosya veya dizin oluşturulduğu üst dizine sahip olan gruptan kopyalanır.
+Sahip olan Grup, yeni dosyanın veya dizinin oluşturulduğu üst dizinin sahip olduğu gruptan kopyalanır.
 
 ### <a name="i-am-the-owning-user-of-a-file-but-i-dont-have-the-rwx-permissions-i-need-what-do-i-do"></a>Bir dosyanın sahibiyim, ancak gereken RWX izinlerine sahip değilim. Ne yapmalıyım?
 
 Sahip olan kullanıcı kendisine gerekli olan her türlü RWX iznini vermek için dosyanın izinlerini değiştirebilir.
 
-### <a name="why-do-i-sometimes-see-guids-in-acls"></a>Neden bazen ACL'lerinde GUID'leri görüyorum?
+### <a name="why-do-i-sometimes-see-guids-in-acls"></a>Neden bazen ACL 'lerde GUID 'Leri görüyorum?
 
-Giriş bir kullanıcıyı temsil eder ve bu kullanıcı artık Azure AD'de mevcut değilse bir GUID gösterilir. Bu genellikle, kullanıcı şirketten ayrıldığında veya Azure AD’de kullanıcının hesabı silindiğinde gerçekleşir. Ayrıca, hizmet sorumluları ve güvenlik grupları bir kullanıcı asıl adı (bunları tanımlamak için UPN) sahip değildir ve bu nedenle bunlar OID özniteliği (GUID) tarafından temsil edilir.
+Giriş bir kullanıcıyı temsil ediyorsa ve bu kullanıcı artık Azure AD 'de mevcut değilse bir GUID gösterilir. Bu genellikle, kullanıcı şirketten ayrıldığında veya Azure AD’de kullanıcının hesabı silindiğinde gerçekleşir. Ayrıca, hizmet sorumluları ve güvenlik grupları bunları tanımlamak için bir Kullanıcı asıl adına (UPN) sahip değildir ve bu nedenle OID özniteliği (bir GUID) tarafından temsil edilir.
 
-### <a name="how-do-i-set-acls-correctly-for-a-service-principal"></a>Nasıl ACL'leri doğru için bir hizmet sorumlusu ayarlayabilirim?
+### <a name="how-do-i-set-acls-correctly-for-a-service-principal"></a>Nasıl yaparım? bir hizmet sorumlusu için ACL 'Leri doğru şekilde ayarladı musunuz?
 
-Hizmet sorumluları için ACL'leri tanımladığınızda, nesne kimliği (OID) kullanın önemli olduğu *hizmet sorumlusu* oluşturduğunuz uygulama kaydı için. Kayıtlı uygulama içinde belirli bir ayrı bir hizmet sorumlusu olduğunu unutmamak önemlidir Azure AD kiracısı. Kayıtlı uygulamalar Azure portalda bir OID sahiptir ancak *hizmet sorumlusu* başka bir (farklı) OID sahiptir.
+Hizmet sorumluları için ACL 'Leri tanımladığınızda, oluşturduğunuz uygulama kaydı için *hizmet sorumlusunun* nesne KIMLIĞI (OID) kullanılması önemlidir. Kayıtlı uygulamaların, belirli Azure AD kiracısında ayrı bir hizmet sorumlusu olduğunu unutmayın. Kayıtlı uygulamalar Azure portal görünen bir OID 'ye sahiptir, ancak *hizmet sorumlusu* başka bir (farklı) OID 'ye sahiptir.
 
-Bir uygulama kaydı için karşılık gelen hizmet sorumlusu OID almak için kullanabileceğiniz `az ad sp show` komutu. Uygulama kimliği, parametre olarak belirtin. İşte bir örnek uygulama kimliği ile bir uygulama kaydı karşılık gelen hizmet sorumlusu için OID edinme 18218b12-1895-43e9-ad80-6e8fc1ea88ce =. Azure CLI içinde aşağıdaki komutu çalıştırın:
+Uygulama kaydına karşılık gelen hizmet sorumlusu için OID 'yi almak üzere `az ad sp show` komutunu kullanabilirsiniz. Uygulama KIMLIĞINI parametre olarak belirtin. İşte uygulama KIMLIĞI = 18218b12-1895-43e9-ad80-6e8fc1ea88ce olan uygulama kaydına karşılık gelen hizmet sorumlusu için OID 'yi edinme örneği. Azure CLı 'de aşağıdaki komutu çalıştırın:
 
-`az ad sp show --id 18218b12-1895-43e9-ad80-6e8fc1ea88ce --query objectId
-<<OID will be displayed>>`
+```
+$ az ad sp show --id 18218b12-1895-43e9-ad80-6e8fc1ea88ce --query objectId
+<<OID will be displayed>>
+```
 
-Hizmet sorumlusu için doğru OID varsa, depolama Gezgini'ne gidin **erişimini yönetme** sayfasına OID ekleyin ve OID için uygun izinleri atayın. Seçtiğinizden emin olun **Kaydet**.
+Hizmet sorumlusu için doğru OID 'ye sahip olduğunuzda, OID 'yi eklemek ve OID için uygun izinleri atamak için Depolama Gezgini **erişimi yönet** sayfasına gidin. **Kaydet**' i seçtiğinizden emin olun.
 
-### <a name="does-data-lake-storage-gen2-support-inheritance-of-acls"></a>Data Lake depolama Gen2 ACL'lerin devralınmasını destekler mi?
+### <a name="does-data-lake-storage-gen2-support-inheritance-of-acls"></a>Data Lake Storage 2. ACL 'Leri devralmayı destekliyor mu?
 
-Azure RBAC atamaları devralır. Abonelik, kaynak grubu ve depolama hesabı kaynaklarına dosya sistemi kaynak aşağı akış atamaları.
+Azure RBAC atamaları devralınır. Atamalar abonelik, kaynak grubu ve depolama hesabı kaynaklarından, kapsayıcı kaynağına doğru akar.
 
-ACL'ler devralmaz. Ancak, alt alt ve üst dizini altında oluşturulan dosyaları için ACL'leri ayarlamak için varsayılan ACL'ler kullanılabilir. 
+ACL 'Ler aktarılmaz. Ancak, alt dizinler ve üst dizin altında oluşturulan dosyalar için ACL 'Ler ayarlamak üzere varsayılan ACL 'Ler kullanılabilir. 
 
 ### <a name="where-can-i-learn-more-about-posix-access-control-model"></a>POSIX erişim denetimi modeli hakkında daha fazla bilgiyi nereden bulabilirim?
 
@@ -336,4 +337,4 @@ ACL'ler devralmaz. Ancak, alt alt ve üst dizini altında oluşturulan dosyalar�
 
 ## <a name="see-also"></a>Ayrıca bkz.
 
-* [Azure Data Lake depolama Gen2'ye genel bakış](../blobs/data-lake-storage-introduction.md)
+* [Azure Data Lake Storage 2. genel bakış](../blobs/data-lake-storage-introduction.md)

@@ -1,52 +1,46 @@
 ---
 title: Azure Application Gateway için yeniden yönlendirmeye genel bakış
-description: Azure Application Gateway'de yeniden yönlendirme özelliği hakkında bilgi edinin
+description: Bir dinleyicide alınan trafiği başka bir dinleyiciye veya bir dış siteye yeniden yönlendirmek için Azure Application Gateway yeniden yönlendirme özelliği hakkında bilgi edinin.
 services: application-gateway
-documentationcenter: na
 author: amsriva
-manager: jpconnock
-tags: azure-resource-manager
 ms.service: application-gateway
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 3/19/2018
+ms.date: 11/16/2019
 ms.author: amsriva
-ms.openlocfilehash: 8e88e0e11b3ccab7cc2c68b2617df2d588680780
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5943d8aad4d5dd0d981fae9b2325dd3fc75b31e8
+ms.sourcegitcommit: 2d3740e2670ff193f3e031c1e22dcd9e072d3ad9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60715811"
+ms.lasthandoff: 11/16/2019
+ms.locfileid: "74129876"
 ---
 # <a name="application-gateway-redirect-overview"></a>Application Gateway yeniden yönlendirmeye genel bakış
 
-Uygulama ağ geçidi trafiği yönlendirmek için kullanabilirsiniz.  Bir dinleyiciden alınan trafiği başka bir dinleyiciye veya bir dış siteye yeniden yönlendirmeyi sağlayan genel bir yeniden yönlendirme mekanizmasına sahiptir. Bu uygulama yapılandırmasını basitleştiren, kaynak kullanımını en iyi duruma getirir ve genel ve yol tabanlı yeniden yönlendirme de dahil olmak üzere yeni yeniden yönlendirme senaryoları destekler.
+Trafiği yeniden yönlendirmek için uygulama ağ geçidi kullanabilirsiniz.  Bir dinleyiciden alınan trafiği başka bir dinleyiciye veya bir dış siteye yeniden yönlendirmeyi sağlayan genel bir yeniden yönlendirme mekanizmasına sahiptir. Bu, uygulama yapılandırmasını basitleştirir, kaynak kullanımını iyileştirir ve genel ve yol tabanlı yeniden yönlendirme dahil yeni yeniden yönlendirme senaryolarını destekler.
 
-HTTPS yeniden yönlendirmesi için otomatik HTTP şifrelenmiş bir yolu, kullanıcıların uygulama arasındaki tüm iletişimi sağlamak için birçok web uygulamaları için ortak bir yeniden yönlendirme senaryosu desteklemektir. Geçmişte, müşteriler, HTTP, HTTPS için aldığı isteklerini yeniden yönlendirmek için tek amacı olan bir adanmış arka uç havuzu oluşturma gibi teknikler kullandınız. Application Gateway'de yeniden yönlendirme desteği sayesinde, bunu powershell'inizi yazarak yeni bir yeniden yönlendirme yapılandırması için yönlendirme kuralı ekleme ve hedef dinleyici olarak HTTPS protokolüne sahip başka bir dinleyici belirterek gerçekleştirebilirsiniz.
+Birçok Web uygulaması için ortak bir yeniden yönlendirme senaryosu, uygulama ve kullanıcıları arasındaki iletişimin şifreli bir yol üzerinde gerçekleşmesini sağlamak için otomatik HTTP 'den HTTPS 'ye yeniden yönlendirmeyi destekliyoruz. Geçmişte, müşteriler, tek amacı HTTP üzerinde aldığı istekleri HTTPS 'ye yeniden yönlendirmek olan özel bir arka uç havuzu oluşturma gibi teknikler kullanmıştır. Application Gateway ' de yeniden yönlendirme desteği sayesinde, bir yönlendirme kuralına yeni bir yeniden yönlendirme yapılandırması ekleyerek ve hedef dinleyici olarak HTTPS protokolüne sahip başka bir dinleyici belirterek bunu yapabilirsiniz.
 
-Yeniden yönlendirme aşağıdaki türleri desteklenir:
+Aşağıdaki yeniden yönlendirme türleri desteklenir:
 
-- 301 kalıcı bir yeniden yönlendirme
+- 301 kalıcı yeniden yönlendirme
 - 302 bulundu
-- 303 diğerini gör
+- 303 diğer bkz.
 - 307 geçici yeniden yönlendirme
 
 Application Gateway yeniden yönlendirme desteği aşağıdaki özellikleri sunar:
 
--  **Genel Yönlendirme**
+-  **Küresel yeniden yönlendirme**
 
-   Tek bir dinleyici alanından başka bir ağ geçidi Dinleyicide yeniden yönlendirir. Bu özellik, bir sitede HTTP’den HTTPS’ye yeniden yönlendirmeyi sağlar.
+   Bir dinleyicisinden ağ geçidinde başka bir dinleyiciye yeniden yönlendirir. Bu özellik, bir sitede HTTP’den HTTPS’ye yeniden yönlendirmeyi sağlar.
 - **Yol tabanlı yeniden yönlendirme**
 
-   Bu tür bir yeniden yönlendirme HTTP yalnızca belirli bir site alanı üzerinde HTTPS yeniden yönlendirmesi/Sepeti/bir alışveriş sepeti alanı örneğin gösterilen sağlar *.
-- **Dış siteye yeniden yönlendirme**
+   Bu tür bir yeniden yönlendirme, yalnızca belirli bir site alanında HTTP-HTTPS yeniden yönlendirmesine, örneğin/cart/* ile belirtilen bir alışveriş sepeti alanı sağlar.
+- **Dış siteye yönlendir**
 
-![yeniden yönlendirme](./media/redirect-overview/redirect.png)
+![Meniz](./media/redirect-overview/redirect.png)
 
-Bu değişiklik, müşterilere bir hedef dinleyici belirten yeni yeniden yönlendirme yapılandırma nesnesi veya dış siteye yeniden yönlendirme istenildiği gibi oluşturmanız gerekir. Yapılandırma öğesi, URI yolu ve sorgu dizesini URL'ye yeniden yönlendirilen ekleyerek etkinleştirmek için seçeneklerini de destekler. Yeniden yönlendirme türünü de seçebilirsiniz. Oluşturulduktan sonra yeni bir kural aracılığıyla kaynak dinleyicisi bu yeniden yönlendirme yapılandırması eklenir. Temel kural kullanırken, yeniden yönlendirme yapılandırması kaynak dinleyici ile ilişkili ve genel bir yeniden yönlendirme. Yola dayalı kural kullanıldığında, yeniden yönlendirme yapılandırması URL yolu haritada tanımlanır. Bu nedenle yalnızca bir sitenin belirli bir yol alanı için geçerlidir.
+Bu değişiklik ile müşterilerin, yeniden yönlendirmenin istendiği hedef dinleyiciyi veya dış siteyi belirten yeni bir yeniden yönlendirme yapılandırma nesnesi oluşturması gerekir. Yapılandırma öğesi, URI yolunu ve sorgu dizesini yeniden yönlendirilen URL 'ye eklemeyi etkinleştirmek için seçenekleri de destekler. Yeniden yönlendirme türünü de seçebilirsiniz. Bu yeniden yönlendirme yapılandırması oluşturulduktan sonra, kaynak dinleyicisine yeni bir kural aracılığıyla eklenir. Temel bir kural kullanırken, yeniden yönlendirme yapılandırması bir kaynak dinleyicisi ile ilişkilendirilir ve küresel bir yeniden yönlendirmelidir. Yol tabanlı bir kural kullanıldığında, yeniden yönlendirme yapılandırması URL yol eşlemesinde tanımlanır. Bu nedenle, yalnızca bir sitenin belirli yol alanı için geçerlidir.
 
 ### <a name="next-steps"></a>Sonraki adımlar
 
-[Bir uygulama ağ geçidinde URL yeniden yönlendirmesini yapılandırma](tutorial-url-redirect-powershell.md)
+[Uygulama ağ geçidinde URL yeniden yönlendirmeyi yapılandırma](tutorial-url-redirect-powershell.md)

@@ -8,29 +8,30 @@ ms.topic: include
 ms.date: 05/22/2019
 ms.author: tomfitz
 ms.custom: include file
-ms.openlocfilehash: 3f94481e6a8550479788d92c744327e1dc3b58c4
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 890095718833c90a6764d0799d2081b393b1d0bd
+ms.sourcegitcommit: 7efb2a638153c22c93a5053c3c6db8b15d072949
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66376912"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72887854"
 ---
-Azure Event Grid sistem konuları ve özel konular için aşağıdaki sınırlar geçerlidir *değil* olay etki alanları.
+Aşağıdaki sınırlar, olay etki alanları *değil* Azure Event Grid sistem konuları ve özel konular için geçerlidir.
 
-| Resource | Sınır |
+| Kaynak | Sınır |
 | --- | --- |
-| Azure aboneliği başına özel konu sayısı | 100 |
-| Konu başına olay aboneliği sayısı | 500 |
-| Yayımlama hızı özel bir konu (giriş) | konu başına saniye başına 5.000 olayları |
-| İstekleri yayımlama | saniye başına 250 |
-| Olay boyutu | 64 KB için genel kullanılabilirlik (GA) destekler. 1 MB desteği şu anda Önizleme aşamasındadır. |
+| Azure aboneliği başına özel konular | 100 |
+| Konu başına olay abonelikleri | 500 |
+| Özel konu (giriş) için yayımlama oranı | Konu başına saniyede 5.000 olay |
+| İstekleri Yayımla | saniyede 250 |
+| Olay boyutu | Genel kullanılabilirlik (GA) için 64 KB desteği. 1 MB desteği şu anda önizleme aşamasındadır. |
 
 Aşağıdaki sınırlar yalnızca olay etki alanları için geçerlidir.
 
-| Resource | Sınır |
+| Kaynak | Sınır |
 | --- | --- |
-| Olay etki alanı başına konuları | Genel Önizleme sırasında 1000 |
-| Bir etki alanı içinde konu başına olay aboneliği sayısı | 50 genel Önizleme sırasında |
-| Etki alanı kapsamı olay abonelikleri | 50 genel Önizleme sırasında |
-| Bir olay etki alanı (giriş) oranı yayımlama | Genel Önizleme sırasında saniye başına 5.000 olayları |
-| İstekleri yayımlama | saniye başına 250 |
+| Olay etki alanı başına konu başlıkları | 100.000 |
+| Bir etki alanı içindeki Konu başına olay abonelikleri | 500 |
+| Etki alanı kapsamı olay abonelikleri | 50 |
+| Olay etki alanı (giriş) için yayımlama oranı | saniye başına 5.000 olay |
+| İstekleri Yayımla | saniyede 250 |
+| Azure aboneliği başına olay etki alanları | 100 |

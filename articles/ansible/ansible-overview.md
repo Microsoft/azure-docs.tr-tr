@@ -1,64 +1,60 @@
 ---
-title: Ansible ile Azure kullanarak | Microsoft Docs
-description: Bulut sağlama, yapılandırma yönetimi ve uygulama dağıtımlarını otomatikleştiren için Ansible'ı kullanarak giriş.
-keywords: ansible'ı, azure, devops, genel bakış, bulut sağlama, yapılandırma yönetimi, uygulama dağıtımı, ansible modülleri, ansible playbook'ları
+title: Azure ile anormal kullanma
+description: Bulut sağlamayı, yapılandırma yönetimini ve uygulama dağıtımlarını otomatik hale getiren kullanımı anlara giriş.
+keywords: anerişilebilir, Azure, DevOps, genel bakış, bulut sağlama, yapılandırma yönetimi, uygulama dağıtımı, anormal modüller, anerişilebilir PlayBook 'lar
 ms.topic: overview
-ms.service: ansible
-author: tomarchermsft
-manager: jeconnoc
-ms.author: tarcher
 ms.date: 04/30/2019
-ms.openlocfilehash: 4d7e9f8a0527587106985d8a6f0a95e19e640245
-ms.sourcegitcommit: 2ce4f275bc45ef1fb061932634ac0cf04183f181
+ms.openlocfilehash: eab2a44257c6769106124c4c9ab6711ba3be531e
+ms.sourcegitcommit: 28688c6ec606ddb7ae97f4d0ac0ec8e0cd622889
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/07/2019
-ms.locfileid: "65230128"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74155786"
 ---
-# <a name="using-ansible-with-azure"></a>Ansible'ı kullanarak Azure ile
+# <a name="using-ansible-with-azure"></a>Azure ile anormal kullanma
 
-[Ansible](https://www.ansible.com) bulut sağlama, yapılandırma yönetimi ve uygulama dağıtımlarını otomatikleştiren bir açık kaynaklı üründür. Ansible'ı kullanarak sanal makineler, kapsayıcılar ve ağ sağlama ve bulut altyapıları tamamlayın. Ayrıca, Ansible, dağıtımını ve yapılandırmasını, ortamınızdaki kaynakları otomatikleştirmenize olanak sağlar.
+[Anerişilebilir](https://www.ansible.com) , bulut sağlamayı, yapılandırma yönetimini ve uygulama dağıtımlarını otomatikleştiren açık kaynaklı bir üründür. Kullanılması, sanal makineler, kapsayıcılar ve ağ ve tüm bulut altyapılarını temin edebilir. Ayrıca, anormal, ortamınızdaki kaynakların dağıtımını ve yapılandırmasını otomatikleştirmenize imkan tanır.
 
-Bu makalede, Ansible ile Azure kullanmanın avantajlarından bazıları temel bir bakış sağlar.
+Bu makalede, Azure ile anormal kullanmanın avantajlarından bazılarına yönelik temel bir genel bakış sunulmaktadır.
 
-## <a name="ansible-playbooks"></a>Ansible playbook'ları
+## <a name="ansible-playbooks"></a>Anerişilebilir PlayBook 'lar
 
-[Ansible playbook'ları](https://docs.ansible.com/ansible/latest/playbooks.html) ortamınızı yapılandırmak için ansible'ı doğrudan olanak sağlar. Playbook'ları kullanarak okunabilir olması için YAML kodlanmıştır. Öğreticiler bölümü, yüklemek ve Azure kaynaklarını yapılandırmak için playbook'ları kullanarak birçok örnekleri sağlar. 
+[Anormal profesyonel kitaplar](https://docs.ansible.com/ansible/latest/playbooks.html) , ortamınızı yapılandırmak için size doğrudan izin verir. PlayBook 'lar, YAML kullanılarak okunabilir, böylece insanlar okunabilir olacaktır. Öğreticiler bölümü, Azure kaynaklarını yüklemek ve yapılandırmak için PlayBook 'ları kullanmanın birçok örneğini sağlar. 
 
-## <a name="ansible-modules"></a>Ansible modülleri
+## <a name="ansible-modules"></a>Anerişilebilir modüller
 
-Ansible'ı içeren bir paketi [Ansible modülleri](https://docs.ansible.com/ansible/latest/modules_by_category.html) uzak konaklar üzerinde doğrudan veya aracılığıyla çalıştırılan [playbook'ları](https://docs.ansible.com/ansible/latest/playbooks.html). Kullanıcılar kendi modülleri oluşturabilir. Modüller, hizmetleri, paketler veya dosyaları - gibi sistem kaynaklarının - denetlemek veya sistem komutlarını çalıştırmak için kullanılır.
+Anormal, doğrudan uzak konaklarda veya [PlayBook](https://docs.ansible.com/ansible/latest/playbooks.html)'lar aracılığıyla çalıştırılan bir dizi [Modül](https://docs.ansible.com/ansible/latest/modules_by_category.html) paketini içerir. Kullanıcılar kendi modüllerini oluşturabilir. Modüller, hizmetler, paketler veya dosyalar gibi sistem kaynaklarını denetlemek veya sistem komutları yürütmek için kullanılır.
 
-Azure Hizmetleri ile etkileşim kurmak için ansible'ı dizisi içeren [Ansible bulut modülleri](https://docs.ansible.com/ansible/list_of_cloud_modules.html#azure). Bu modüller, azure'daki altyapınız oluşturabilir ve etkinleştirin. 
+Azure hizmetleriyle etkileşim kurmak için, anormal bir [bulut modülleri](https://docs.ansible.com/ansible/list_of_cloud_modules.html#azure)paketini içerir. Bu modüller, Azure 'da altyapınızı oluşturmanızı ve düzenlemenizi sağlar. 
 
-## <a name="migrate-existing-workload-to-azure"></a>Mevcut iş yükünü Azure'a geçirme
+## <a name="migrate-existing-workload-to-azure"></a>Mevcut iş yükünü Azure 'a geçirin
 
-Ansible altyapınızı tanımlamak için kullandığınız bir kez otomatik olarak ölçeği gerektiği gibi ortamınızı Azure izin vererek, uygulamanızın playbook uygulayabilirsiniz. 
+Altyapınızı tanımlamak için kullanmanız gerekirse, Azure 'un ortamınızı gerektiği şekilde otomatik olarak ölçeklendirmesine izin vermek için uygulamanızın PlayBook 'unu uygulayabilirsiniz. 
 
-## <a name="automate-cloud-native-application-in-azure"></a>Azure'daki bulutta yerel uygulama otomatikleştirin
+## <a name="automate-cloud-native-application-in-azure"></a>Azure 'da bulutta yerel uygulamayı otomatikleştirin
 
-Ansible'ı bulutta yerel uygulamaları gibi Azure mikro hizmetler kullanılarak azure'da otomatikleştirmenizi sağlar [Azure işlevleri](https://azure.microsoft.com//services/functions/) ve [azure'da Kubernetes](https://azure.microsoft.com/services/container-service/kubernetes/).  
+Anormal, Azure 'da Azure [işlevleri](https://azure.microsoft.com//services/functions/) ve Azure 'Da [Kubernetes](https://azure.microsoft.com/services/container-service/kubernetes/)gibi Azure mikro hizmetlerini kullanarak bulutta yerel uygulamaları otomatikleştirmenizi sağlar.  
 
-## <a name="manage-deployments-with-dynamic-inventory"></a>Dinamik envanterle dağıtımları yönetin
+## <a name="manage-deployments-with-dynamic-inventory"></a>Dinamik envanter ile dağıtımları yönetme
 
-Aracılığıyla kendi [dinamik stok](https://docs.ansible.com/ansible/intro_dynamic_inventory.html) özelliği, Ansible sağlar özelliği çekme stok Azure kaynaklarından. Sonra mevcut Azure dağıtımlarınızı etiketleyin ve bu etiketli dağıtımların Ansible aracılığıyla yönetebilirsiniz.
+[Dinamik envanter](https://docs.ansible.com/ansible/intro_dynamic_inventory.html) özelliği aracılığıyla, Azure kaynaklarından envanter çekme yeteneği sağlar. Daha sonra mevcut Azure dağıtımlarınızı etiketleyebilir ve bu etiketli dağıtımları anormal bir şekilde yönetebilirsiniz.
 
 ## <a name="additional-azure-marketplace-options"></a>Ek Azure Marketi seçenekleri
 
-[Ansible Tower](https://azuremarketplace.microsoft.com/marketplace/apps/redhat.ansible-tower) Red Hat Azure Marketi'nde görüntüsüdür. 
+[Anerişilebilir kule](https://azuremarketplace.microsoft.com/marketplace/apps/redhat.ansible-tower) , Red Hat Ile bir Azure Marketi görüntüsüdür. 
 
-Ansible Tower, bir web tabanlı kullanıcı Arabirimi ve Pano için aşağıdaki özelliklere sahip Ansible verilmiştir:
+Anormal Tower, aşağıdaki özelliklere sahip olan bir Web tabanlı kullanıcı arabirimi ve panodur:
 
-* Rol tabanlı erişim denetimi, iş zamanlama ve grafik envanter yönetimi tanımlamanızı sağlar. 
-* Var olan araçlarınız ve süreçlerinizle Tower ekleyebilmek, bir REST API ve CLI'yı içerir. 
-* Playbook çalıştırmalarını gerçek zamanlı çıktısını destekler. 
-* Kimlik bilgileri açığa çıkarmadan görevleri devredebilirsiniz için kimlik bilgileri - anahtarları - Azure ve SSH gibi şifreler.
+* Rol tabanlı erişim denetimi, iş zamanlaması ve grafik envanteri yönetimi tanımlamanızı sağlar. 
+* , Var olan araçlara ve işlemlere Tower ekleyebileceğiniz bir REST API ve CLı içerir. 
+* PlayBook çalıştırmalarının gerçek zamanlı çıkışını destekler. 
+* Azure ve SSH anahtarları gibi kimlik bilgilerini şifreler. böylece, kimlik bilgilerini açığa çıkmadan görevleri atayabilirsiniz.
 
-## <a name="ansible-module-and-version-matrix-for-azure"></a>Azure için Ansible modülü ve sürüme Matrisi
+## <a name="ansible-module-and-version-matrix-for-azure"></a>Azure için anerişilebilir modül ve Sürüm matrisi
 
-Ansible, sağlama ve Azure kaynaklarını yapılandırma paketi kullanmak için modüller içerir. Bu kaynaklar, sanal makineleri dahil, Ölçek kümeleri, ağ hizmetleri ve kapsayıcı Hizmetleri. [Ansible matris](./ansible-matrix.md) Ansible modülleri Azure ve hangi sevk Ansible sürümlerini listeler.
+Anormal, Azure kaynaklarını sağlama ve yapılandırma konusunda kullanılacak bir modül paketini içerir. Bu kaynaklar sanal makineler, ölçek kümeleri, ağ hizmetleri ve kapsayıcı hizmetleri içerir. [Anormal matris](./ansible-matrix.md) , Azure için erişilebilir modülleri ve teslim ettikleri anormal sürümleri listeler.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [Hızlı Başlangıç: Azure'da CentOS for Ansible çözüm şablonu dağıtma](./ansible-deploy-solution-template.md)
-- [Hızlı Başlangıç: Ansible'ı kullanarak Azure'da Linux sanal makineleri yapılandırma](/azure/virtual-machines/linux/ansible-install-configure?toc=%2Fazure%2Fansible%2Ftoc.json&bc=%2Fazure%2Fbread%2Ftoc.json)
+- [Hızlı başlangıç: Azure 'da CentOS 'a yönelik anormal çözüm şablonu dağıtma](./ansible-deploy-solution-template.md)
+- [Hızlı başlangıç: Azure 'da Linux sanal makinelerini kullanarak yapılandırma](/azure/virtual-machines/linux/ansible-install-configure?toc=%2Fazure%2Fansible%2Ftoc.json&bc=%2Fazure%2Fbread%2Ftoc.json)

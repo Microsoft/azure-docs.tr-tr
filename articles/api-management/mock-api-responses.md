@@ -9,17 +9,16 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.devlang: na
 ms.custom: mvc
 ms.topic: tutorial
 ms.date: 06/15/2018
 ms.author: apimpm
-ms.openlocfilehash: 9b9a691cb2bce2357d184420912ab340aee534e8
-ms.sourcegitcommit: b7a44709a0f82974578126f25abee27399f0887f
+ms.openlocfilehash: 6841695cca5d3864e6823085520d8e9162e54043
+ms.sourcegitcommit: 82499878a3d2a33a02a751d6e6e3800adbfa8c13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67205314"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70067936"
 ---
 # <a name="mock-api-responses"></a>Sahne API yanıtları
 
@@ -42,7 +41,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 + [Azure API Management terminolojisini](api-management-terminology.md) öğrenin.
 + [Azure API Management'ta ilke kavramını](api-management-howto-policies.md) anlayın.
-+ Şu hızlı başlangıcı tamamlayın: [Azure API Management örneği oluşturma](get-started-create-service-instance.md).
++ Aşağıdaki hızlı başlangıcı doldurun: [Azure API Management örneği oluşturun](get-started-create-service-instance.md).
 
 ## <a name="create-a-test-api"></a>Test API’si oluşturma 
 
@@ -79,7 +78,7 @@ Bu bölümdeki adımlar arka uç olmadan boş bir API oluşturmayı gösterir. A
 5. Listeden **200 Tamam**’ı seçin.
 6. Sağ taraftaki **Gösterimler** başlığının altında **+ Gösterim ekle**’yi seçin.
 7. Arama kutusuna "*application/json*" yazın ve **application/json** içerik türünü seçin.
-8. **Örnek** metin kutusuna `{ 'sampleField' : 'test' }` girin.
+8. **Örnek** metin kutusuna `{ "sampleField" : "test" }` girin.
 9. **Oluştur**’u seçin.
 
 ## <a name="enable-response-mocking"></a>Sahte yanıt vermeyi etkinleştirme

@@ -1,99 +1,100 @@
 ---
-title: Azure Container Instances ile yönetilen bir kimlik kullanın
-description: Diğer Azure hizmetlerini Azure Container Instances ile kimlik doğrulaması için bir yönetilen kimlik kullanmayı öğrenin.
+title: Azure Container Instances ile yönetilen bir kimlik kullanma
+description: Azure Container Instances 'ten diğer Azure hizmetleriyle kimlik doğrulaması yapmak için yönetilen bir kimlik kullanmayı öğrenin.
 services: container-instances
 author: dlepow
+manager: gwallace
 ms.service: container-instances
 ms.topic: article
 ms.date: 10/22/2018
 ms.author: danlep
 ms.custom: ''
-ms.openlocfilehash: c14c3aaf2a5d648572fdc251540264e8057a00f9
-ms.sourcegitcommit: 22c97298aa0e8bd848ff949f2886c8ad538c1473
+ms.openlocfilehash: 773650e5e5e85d4a5fca0b3755f3730921cc5f2e
+ms.sourcegitcommit: 4b431e86e47b6feb8ac6b61487f910c17a55d121
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/14/2019
-ms.locfileid: "67144316"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68325936"
 ---
-# <a name="how-to-use-managed-identities-with-azure-container-instances"></a>Azure Container Instances ile yönetilen kimliklerini kullanma
+# <a name="how-to-use-managed-identities-with-azure-container-instances"></a>Azure Container Instances ile yönetilen kimlikler kullanma
 
-Kullanım [kimliklerini Azure kaynakları için yönetilen](../active-directory/managed-identities-azure-resources/overview.md) Azure Container Instances, herhangi bir gizli dizileri veya kimlik bilgilerini kodda korumadan diğer Azure hizmetleriyle - etkileşim içinde kodu çalıştırmak için. Bu özellik otomatik olarak yönetilen bir kimlikle Azure Active Directory'de bir Azure Container Instances'a dağıtımını sağlar.
+Kod içinde herhangi bir gizli dizi veya kimlik bilgisi olmadan diğer Azure hizmetleriyle etkileşim kuran Azure Container Instances kod çalıştırmak için [Azure kaynakları için Yönetilen kimlikler](../active-directory/managed-identities-azure-resources/overview.md) kullanın. Özelliği, Azure Active Directory otomatik olarak yönetilen bir kimlikle Azure Container Instances dağıtımı sağlar.
 
-Bu makalede, Azure Container ınstances'da yönetilen kimlikleri hakkında daha fazla bilgi edinin ve:
+Bu makalede, Azure Container Instances ve içindeki yönetilen kimlikler hakkında daha fazla bilgi edinebilirsiniz:
 
 > [!div class="checklist"]
-> * Bir kapsayıcı grubundaki bir kullanıcı tarafından atanan veya sistem tarafından atanan kimliği etkinleştirme
-> * Bir Azure anahtar Kasası'na kimlik erişim
-> * Çalışan bir kapsayıcıdan bir anahtar kasasına erişmek için yönetilen kimliği kullanma
+> * Kapsayıcı grubunda Kullanıcı tarafından atanan veya sistem tarafından atanan bir kimliği etkinleştirme
+> * Azure Key Vault kimlik erişimi verme
+> * Çalışan bir kapsayıcıdan bir Key Vault erişmek için yönetilen kimliği kullanma
 
-Etkinleştirin ve diğer Azure hizmetlerine erişmek için Azure Container Instances'da kimlikleri kullanmak için örnekleri uyarlayın. Bu örnekler etkileşimlidir. Ancak, uygulamada kapsayıcı görüntülerinizi Azure hizmetlerine erişmek için kodu çalıştırın.
+Diğer Azure hizmetlerine erişmek için Azure Container Instances kimlikleri etkinleştirmek ve kullanmak üzere örnekleri uyarlayın. Bu örnekler etkileşimlidir. Ancak, kapsayıcıda kapsayıcı görüntüleriniz Azure hizmetlerine erişmek için kodu çalıştırır.
 
 > [!NOTE]
-> Şu anda dağıtılan bir sanal ağ için bir kapsayıcı grubundaki bir yönetilen kimlik kullanamazsınız.
+> Şu anda bir sanal ağa dağıtılan bir kapsayıcı grubunda yönetilen bir kimlik kullanamazsınız.
 
-## <a name="why-use-a-managed-identity"></a>Yönetilen bir kimlik neden kullanmalısınız?
+## <a name="why-use-a-managed-identity"></a>Yönetilen kimlik neden kullanılmalıdır?
 
-Herhangi bir kimlik doğrulaması için çalışan bir kapsayıcı içinde yönetilen bir kimlik kullanın [Azure AD kimlik doğrulamasını destekleyen hizmet](../active-directory/managed-identities-azure-resources/services-support-managed-identities.md#azure-services-that-support-azure-ad-authentication) kapsayıcı kodunuzda kimlik bilgilerinin yönetimiyle olmadan. AD kimlik doğrulamayı desteklemeyen Hizmetleri için gizli dizileri Azure Key Vault'ta depolamak ve kimlik bilgilerini almak için anahtar kasasına erişmek için yönetilen bir kimlik kullanın. Bir yönetilen kimliği kullanma hakkında daha fazla bilgi için bkz. [Azure kaynakları için yönetilen kimlikleri nedir?](../active-directory/managed-identities-azure-resources/overview.md)
+Kapsayıcı kodunuzda kimlik bilgilerini yönetmeksizin [Azure AD kimlik doğrulamasını destekleyen](../active-directory/managed-identities-azure-resources/services-support-managed-identities.md#azure-services-that-support-azure-ad-authentication) herhangi bir hizmette kimlik doğrulaması yapmak için çalışan bir kapsayıcıda yönetilen bir kimlik kullanın. AD kimlik doğrulamasını desteklemeyen hizmetler için Azure Key Vault gizli dizileri saklayabilir ve kimlik bilgilerini almak için Key Vault erişmek üzere yönetilen kimliği kullanabilirsiniz. Yönetilen kimlik kullanma hakkında daha fazla bilgi için bkz. [Azure kaynakları için Yönetilen kimlikler nelerdir?](../active-directory/managed-identities-azure-resources/overview.md)
 
 > [!IMPORTANT]
-> Bu özellik şu anda önizleme sürümündedir. Önizlemeler, [ek kullanım koşullarını](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) kabul etmeniz şartıyla kullanımınıza sunulur. Bu özelliğin bazı yönleri genel kullanıma açılmadan önce değişebilir. Şu anda yönetilen kimlikleri yalnızca Linux kapsayıcı örneklerinde desteklenir.
+> Bu özellik şu anda önizleme sürümündedir. Önizlemeler, [ek kullanım koşullarını](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) kabul etmeniz şartıyla kullanımınıza sunulur. Bu özelliğin bazı yönleri genel kullanıma açılmadan önce değişebilir. Şu anda yönetilen kimlikler yalnızca Linux kapsayıcı örneklerinde desteklenir.
 >  
 
-### <a name="enable-a-managed-identity"></a>Yönetilen bir kimlik etkinleştir
+### <a name="enable-a-managed-identity"></a>Yönetilen bir kimliği etkinleştirme
 
- Azure Container Instances'da REST API sürümü 2018-10-01 ve karşılık gelen bir SDK'ları ve araçları itibarıyla Azure kaynakları için yönetilen kimlik desteklenir. Kapsayıcı grubu oluşturduğunuzda, bir veya daha fazla yönetilen kimlik ayarlayarak etkinleştirin bir [ContainerGroupIdentity](/rest/api/container-instances/containergroups/createorupdate#containergroupidentity) özelliği. Etkinleştirebilir veya bir kapsayıcı grubu çalışmaya başladıktan sonra yönetilen kimlikleri güncelleştirin; iki eylem yeniden başlatmak kapsayıcı grubunun neden olur. Yeni veya mevcut kapsayıcı grubunda kimlikleri ayarlamak için Azure CLI, Resource Manager şablonu veya bir YAML dosyası kullanın. 
+ Azure Container Instances, Azure kaynakları için Yönetilen kimlikler, REST API sürüm 2018-10-01 ve karşılık gelen SDK 'lar ve araçlar olarak desteklenmektedir. Bir kapsayıcı grubu oluşturduğunuzda bir [Containergroupıdentity](/rest/api/container-instances/containergroups/createorupdate#containergroupidentity) özelliği ayarlayarak bir veya daha fazla yönetilen kimliği etkinleştirin. Ayrıca, bir kapsayıcı grubu çalıştıktan sonra yönetilen kimlikleri etkinleştirebilir veya güncelleyebilirsiniz; Her iki eylem de kapsayıcı grubunun yeniden başlatılmasına neden olur. Yeni veya mevcut bir kapsayıcı grubundaki kimlikleri ayarlamak için Azure CLı, Kaynak Yöneticisi şablonu veya bir YAML dosyası kullanın. 
 
-Azure Container Instances, yönetilen Azure kimlikleri her iki tür destekler: kullanıcı tarafından atanan ve sistem tarafından atanan. Bir kapsayıcı grubu üzerinde bir sistem tarafından atanan kimliği, bir veya daha fazla kullanıcı tarafından atanan kimlikleri veya her iki tür kimlik etkinleştirebilirsiniz. 
+Azure Container Instances hem yönetilen Azure kimlik türlerini destekler: Kullanıcı tarafından atanan ve sistem tarafından atanan. Bir kapsayıcı grubunda, sistem tarafından atanan bir kimliği, bir veya daha fazla kullanıcı tarafından atanan kimliği veya her iki tür kimliği etkinleştirebilirsiniz. 
 
-* A **kullanıcı tarafından atanan** yönetilen kimlik olarak tek başına bir Azure kaynağında Kullanımdaki abonelik tarafından güvenilen bir Azure AD kiracısı oluşturulur. Kimlik oluşturduktan sonra kimlik (içinde Azure Container Instances veya diğer Azure Hizmetleri) bir veya daha fazla Azure kaynaklarına atanabilir. Bir kullanıcı tarafından atanan kimlik yaşam döngüsü, kapsayıcı gruplarını veya diğer hizmet kaynakları için atandığı döngüsü ayrı olarak yönetilir. Bu davranış, Azure Container Instances'da özellikle yararlıdır. Kimliği bir kapsayıcı grubunun ömründen uzun genişlettiğinden, kapsayıcı grubu dağıtımlarınızı yüksek oranda yinelenebilir hale getirmek için standart diğer ayarları ile birlikte yeniden kullanabilirsiniz.
+* **Kullanıcı tarafından atanan** yönetilen kimlik, Azure AD kiracısında kullanımda olan aboneliğin güvendiği tek başına bir Azure kaynağı olarak oluşturulur. Kimlik oluşturulduktan sonra, kimlik bir veya daha fazla Azure kaynağına atanabilir (Azure Container Instances veya diğer Azure hizmetlerinde). Kullanıcı tarafından atanan kimliğin yaşam döngüsü, kendisine atanan kapsayıcı gruplarının veya diğer hizmet kaynaklarının yaşam döngülerinden ayrı olarak yönetilir. Bu davranış, Azure Container Instances özellikle yararlıdır. Kimlik bir kapsayıcı grubunun ömrünü aşacak şekilde uzanıyor olduğundan, kapsayıcı grubu dağıtımlarınızın yüksek oranda yinelenebilir olmasını sağlamak için diğer standart ayarlarla birlikte yeniden kullanabilirsiniz.
 
-* A **sistem tarafından atanan** yönetilen kimlik, doğrudan Azure Container ınstances'da bir kapsayıcı grubu üzerinde etkindir. Etkinleştirildiğinde, Azure grubu için bir kimlik örneğinin abonelik tarafından güvenilen ve Azure AD kiracısı içinde oluşturur. Kimlik oluşturduktan sonra kimlik bilgilerini kapsayıcı grubundaki her bir kapsayıcıdaki sağlanır. Sistem tarafından atanan bir kimlik yaşam döngüsü üzerinde etkin kapsayıcı grubuna doğrudan bağlanır. Grup silindiğinde, Azure otomatik olarak kimlik ve kimlik Azure AD'de temizler.
+* **Sistem tarafından atanan** yönetilen kimlik Azure Container Instances doğrudan bir kapsayıcı grubunda etkinleştirilir. Azure, etkinleştirildiğinde Azure AD kiracısında örneğin aboneliği tarafından güvenilen grup için bir kimlik oluşturur. Kimlik oluşturulduktan sonra, kapsayıcı grubundaki her kapsayıcıda kimlik bilgileri sağlanır. Sistem tarafından atanan kimliğin yaşam döngüsü, etkinleştirilmiş olduğu kapsayıcı grubuna doğrudan bağlıdır. Grup silindiğinde Azure, kimlik bilgilerini ve kimlik bilgilerini Azure AD 'de otomatik olarak temizler.
 
 ### <a name="use-a-managed-identity"></a>Yönetilen kimlik kullanma
 
-Yönetilen bir kimlik kullanacak şekilde kimlik başlangıçta (örneğin, bir Web uygulaması, bir anahtar kasası veya bir depolama hesabı) bir veya daha fazla Azure hizmeti kaynaklarına erişimi abonelikte verilmesi gerekir. Çalışan bir kapsayıcıdan Azure kaynaklarına erişmek için kodunuzu almalıdır bir *erişim belirteci* bir Azure AD uç noktasından. Ardından, kodunuzu çağırması Azure AD kimlik doğrulamasını destekleyen bir hizmet erişim belirteci gönderir. 
+Yönetilen bir kimlik kullanmak için, kimliğin başlangıçta abonelikte bir veya daha fazla Azure hizmet kaynağına (Web uygulaması, bir Key Vault veya bir depolama hesabı gibi) erişim verilmesi gerekir. Azure kaynaklarına çalışan bir kapsayıcıdan erişmek için, kodunuzun bir Azure AD uç noktasından *erişim belirteci* edinmesi gerekir. Daha sonra kodunuz, erişim belirtecini Azure AD kimlik doğrulamasını destekleyen bir hizmete çağrı üzerine gönderir. 
 
-Çalışan bir kapsayıcıdaki bir yönetilen kimlik kullanarak aslında bir kimlik kullanarak bir Azure VM ile aynı olur. VM kılavuzu kullanarak bkz bir [belirteci](../active-directory/managed-identities-azure-resources/how-to-use-vm-token.md), [Azure PowerShell veya Azure CLI](../active-directory/managed-identities-azure-resources/how-to-use-vm-sign-in.md), veya [Azure SDK'ları](../active-directory/managed-identities-azure-resources/how-to-use-vm-sdk.md).
+Çalışan bir kapsayıcıda yönetilen bir kimlik kullanılması, aslında bir Azure VM 'de kimlik kullanmayla aynıdır. [Belirteç](../active-directory/managed-identities-azure-resources/how-to-use-vm-token.md), [Azure POWERSHELL veya Azure CLI](../active-directory/managed-identities-azure-resources/how-to-use-vm-sign-in.md)veya [Azure SDK](../active-directory/managed-identities-azure-resources/how-to-use-vm-sdk.md)'larını kullanma için VM yönergelerine bakın.
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-CLI'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu makale, Azure CLI Sürüm 2.0.49 çalıştırdığınız gerekir veya üzeri. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme](/cli/azure/install-azure-cli).
+CLı 'yi yerel olarak yükleyip kullanmayı tercih ederseniz bu makale, Azure CLı sürüm 2.0.49 veya üstünü çalıştırıyor olmanızı gerektirir. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme](/cli/azure/install-azure-cli).
 
 ## <a name="create-an-azure-key-vault"></a>Azure Key Vault oluşturma
 
-Bu makaledeki örneklerde, Azure Container Instances'da bir Azure Key Vault gizli erişmek için yönetilen bir kimlik kullanın. 
+Bu makaledeki örneklerde, Azure Key Vault bir gizli dizi erişmek için Azure Container Instances yönetilen bir kimlik kullanılır. 
 
-İlk olarak, adlı bir kaynak grubu oluşturma *myResourceGroup* içinde *eastus* aşağıdaki konum [az grubu oluşturma](/cli/azure/group?view=azure-cli-latest#az-group-create) komutu:
+İlk olarak, *eastus* konumunda *myresourcegroup* adlı bir kaynak grubu aşağıdaki [az Group Create](/cli/azure/group?view=azure-cli-latest#az-group-create) komutu ile oluşturun:
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location eastus
 ```
 
-Kullanım [az keyvault oluşturma](/cli/azure/keyvault?view=azure-cli-latest#az-keyvault-create) komutunu bir Key Vault oluşturun. Key Vault benzersiz bir ad belirttiğinizden emin olun. 
+Bir Key Vault oluşturmak için [az keykasa Create](/cli/azure/keyvault?view=azure-cli-latest#az-keyvault-create) komutunu kullanın. Benzersiz bir Key Vault adı belirttiğinizden emin olun. 
 
 ```azurecli-interactive
 az keyvault create --name mykeyvault --resource-group myResourceGroup --location eastus
 ```
 
-Bir örnek gizli dizi kullanarak anahtar kasası Store [az keyvault secret set](/cli/azure/keyvault/secret?view=azure-cli-latest#az-keyvault-secret-set) komutu:
+[Az keykasasecret set](/cli/azure/keyvault/secret?view=azure-cli-latest#az-keyvault-secret-set) komutunu kullanarak Key Vault örnek gizli dizi depolayın:
 
 ```azurecli-interactive
 az keyvault secret set --name SampleSecret --value "Hello Container Instances!" --description ACIsecret  --vault-name mykeyvault
 ```
 
-Azure Container ınstances'da bir kullanıcı tarafından atanan veya sistem tarafından atanan yönetilen kimlik kullanarak anahtar kasası erişim için aşağıdaki örnekleri ile devam edin.
+Azure Container Instances içinde Kullanıcı tarafından atanan veya sistem tarafından atanan bir yönetilen kimlik kullanarak Key Vault erişmek için aşağıdaki örneklerle devam edin.
 
-## <a name="example-1-use-a-user-assigned-identity-to-access-azure-key-vault"></a>Örnek 1: Azure Key Vault'a erişmesi için bir kullanıcı tarafından atanan kimliği kullanın.
+## <a name="example-1-use-a-user-assigned-identity-to-access-azure-key-vault"></a>Örnek 1: Azure Key Vault erişmek için Kullanıcı tarafından atanan bir kimlik kullanma
 
-### <a name="create-an-identity"></a>Bir kimlik oluşturun
+### <a name="create-an-identity"></a>Kimlik oluşturma
 
-Öncelikle bir kimlik kullanarak abonelik oluşturma [az kimliği oluşturma](/cli/azure/identity?view=azure-cli-latest#az-identity-create) komutu. Anahtar kasası oluşturmak için kullanılan aynı kaynak grubunu kullanın veya farklı bir tane kullanın.
+İlk olarak [az Identity Create](/cli/azure/identity?view=azure-cli-latest#az-identity-create) komutunu kullanarak aboneliğinizde bir kimlik oluşturun. Key Vault oluşturmak için kullanılan kaynak grubunu kullanabilir veya farklı bir tane kullanabilirsiniz.
 
 ```azurecli-interactive
 az identity create --resource-group myResourceGroup --name myACIId
 ```
 
-Aşağıdaki adımlarda kimlik kullanmak için [az kimlik show](/cli/azure/identity?view=azure-cli-latest#az-identity-show) kimliğin hizmet sorumlusu kimliği ve kaynak kimliği değişkenlerinde depolanacak komutu.
+Aşağıdaki adımlarda kimliği kullanmak için, kimliğin hizmet sorumlusu KIMLIĞINI ve kaynak KIMLIĞINI değişkenlerde depolamak üzere [az Identity Show](/cli/azure/identity?view=azure-cli-latest#az-identity-show) komutunu kullanın.
 
 ```azurecli-interactive
 # Get service principal ID of the user-assigned identity
@@ -103,21 +104,21 @@ spID=$(az identity show --resource-group myResourceGroup --name myACIId --query 
 resourceID=$(az identity show --resource-group myResourceGroup --name myACIId --query id --output tsv)
 ```
 
-### <a name="enable-a-user-assigned-identity-on-a-container-group"></a>Bir kullanıcı tarafından atanan kimliği bir kapsayıcı grubunda Etkinleştir
+### <a name="enable-a-user-assigned-identity-on-a-container-group"></a>Kapsayıcı grubunda Kullanıcı tarafından atanan kimliği etkinleştirme
 
-Aşağıdaki komutu çalıştırın [az kapsayıcı oluşturma](/cli/azure/container?view=azure-cli-latest#az-container-create) tabanlı Ubuntu Server bir kapsayıcı örneği oluşturmak için komutu. Bu örnek, etkileşimli olarak diğer Azure hizmetlerine erişmek için kullanabileceğiniz bir tek kapsayıcı grubu sağlar. `--assign-identity` Parametresi, kullanıcı tarafından atanan bir yönetilen kimlik gruba geçirir. Uzun süre çalışan komut kapsayıcıyı tutar. Bu örnek, anahtar kasası oluşturmak için kullanılan aynı kaynak grubunda kullanır, ancak farklı bir belirtebilirsiniz.
+Ubuntu sunucusunu temel alan bir kapsayıcı örneği oluşturmak için aşağıdaki [az Container Create](/cli/azure/container?view=azure-cli-latest#az-container-create) komutunu çalıştırın. Bu örnek, diğer Azure hizmetlerine etkileşimli olarak erişmek için kullanabileceğiniz tek bir kapsayıcı grubu sağlar. Parametresi `--assign-identity` , Kullanıcı tarafından atanan yönetilen kimliğinizi gruba geçirir. Uzun süre çalışan komut kapsayıcıyı çalışır durumda tutar. Bu örnek, Key Vault oluşturmak için kullanılan kaynak grubunu kullanır, ancak farklı bir tane belirtebilirsiniz.
 
 ```azurecli-interactive
 az container create --resource-group myResourceGroup --name mycontainer --image microsoft/azure-cli --assign-identity $resourceID --command-line "tail -f /dev/null"
 ```
 
-Birkaç saniye içinde Azure CLI'den dağıtımın tamamlandığını belirten bir yanıt almanız gerekir. İle durumunu denetleyin [az container show](/cli/azure/container?view=azure-cli-latest#az-container-show) komutu.
+Birkaç saniye içinde Azure CLI'den dağıtımın tamamlandığını belirten bir yanıt almanız gerekir. [Az Container Show](/cli/azure/container?view=azure-cli-latest#az-container-show) komutuyla durumunu kontrol edin.
 
 ```azurecli-interactive
 az container show --resource-group myResourceGroup --name mycontainer
 ```
 
-`identity` Çıkış bölümüne benzer şekilde görünür aşağıdaki kimlik gösteren kapsayıcı grubunda ayarlanır. `principalID` Altında `userAssignedIdentities` hizmet sorumlusu kimliğini Azure Active Directory'ye oluşturduğunuz:
+Çıktıda `identity` bulunan bölüm, kimliğin kapsayıcı grubunda ayarlandığını gösteren aşağıdakine benzer şekilde görünür. `principalID` Altında`userAssignedIdentities` , Azure Active Directory içinde oluşturduğunuz kimliğin hizmet sorumlusu bulunur:
 
 ```console
 ...
@@ -135,23 +136,23 @@ az container show --resource-group myResourceGroup --name mycontainer
 ...
 ```
 
-### <a name="grant-user-assigned-identity-access-to-the-key-vault"></a>Anahtar Kasası'na kullanıcı tarafından atanan kimlikle erişimi verme
+### <a name="grant-user-assigned-identity-access-to-the-key-vault"></a>Key Vault Kullanıcı tarafından atanan kimlik erişimi verme
 
-Aşağıdaki komutu çalıştırın [az keyvault set-policy](/cli/azure/keyvault?view=azure-cli-latest) Key Vault'a erişim ilkesi ayarlamak için komutu. Aşağıdaki örnekte, gizli dizileri anahtar Kasasından almak kullanıcı tarafından atanan kimlik sağlar:
+Key Vault bir erişim ilkesi ayarlamak için şu [az keykasası Set-Policy](/cli/azure/keyvault?view=azure-cli-latest) komutunu çalıştırın. Aşağıdaki örnek, Kullanıcı tarafından atanan kimliğin Key Vault gizli dizileri almasına izin verir:
 
 ```azurecli-interactive
  az keyvault set-policy --name mykeyvault --resource-group myResourceGroup --object-id $spID --secret-permissions get
 ```
 
-### <a name="use-user-assigned-identity-to-get-secret-from-key-vault"></a>Key Vault'tan gizli dizisini alma kullanıcı tarafından atanan kimliği kullan
+### <a name="use-user-assigned-identity-to-get-secret-from-key-vault"></a>Key Vault gizli dizi almak için Kullanıcı tarafından atanan kimlik kullan
 
-Artık çalışan bir kapsayıcı örneği içinde Key Vault'una erişmek için yönetilen kimlik kullanabilirsiniz. Bu örnekte, ilk kapsayıcı bir bash kabuğunu başlatın:
+Artık, çalışan kapsayıcı örneği içinde Key Vault erişmek için yönetilen kimliği kullanabilirsiniz. Bu örnek için, önce kapsayıcıda bir bash kabuğu başlatın:
 
 ```azurecli-interactive
 az container exec --resource-group myResourceGroup --name mycontainer --exec-command "/bin/bash"
 ```
 
-Kapsayıcı bash kabuğunda aşağıdaki komutları çalıştırın. Azure Active Directory için Key Vault kimlik doğrulaması için kullanılacak erişim belirteci almak için aşağıdaki komutu çalıştırın:
+Kapsayıcıda bash kabuğu 'nda aşağıdaki komutları çalıştırın. Key Vault kimlik doğrulaması yapmak için Azure Active Directory kullanmak üzere bir erişim belirteci almak için aşağıdaki komutu çalıştırın:
 
 ```bash
 curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fvault.azure.net' -H Metadata:true -s
@@ -163,42 +164,42 @@ curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-
 {"access_token":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Imk2bEdrM0ZaenhSY1ViMkMzbkVRN3N5SEpsWSIsImtpZCI6Imk2bEdrM0ZaenhSY1ViMkMzbkVRN3N5SEpsWSJ9......xxxxxxxxxxxxxxxxx","refresh_token":"","expires_in":"28799","expires_on":"1539927532","not_before":"1539898432","resource":"https://vault.azure.net/","token_type":"Bearer"}
 ```
 
-Erişim belirteci kimliğini doğrulamak için sonraki komutlarda kullanılacak bir değişkende depolamak için aşağıdaki komutu çalıştırın:
+Erişim belirtecini, kimlik doğrulaması için sonraki komutlarda kullanılacak bir değişkende depolamak için aşağıdaki komutu çalıştırın:
 
 ```bash
 token=$(curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fvault.azure.net' -H Metadata:true | jq -r '.access_token')
 
 ```
 
-Anahtar Kasası'na kimliğini doğrulamak ve gizli dizi okumak için artık erişim belirtecini kullanın. Anahtar kasanıza URL adı ile değiştirdiğinizden emin olun ( *https://mykeyvault.vault.azure.net/...* ):
+Şimdi Key Vault kimlik doğrulaması yapmak ve gizli dizi okumak için erişim belirtecini kullanın. Anahtar kasanızın adını URL ( *https://mykeyvault.vault.azure.net/...* ) ile değiştirdiğinizden emin olun:
 
 ```bash
 curl https://mykeyvault.vault.azure.net/secrets/SampleSecret/?api-version=2016-10-01 -H "Authorization: Bearer $token"
 ```
 
-Aşağıdakine benzer bir yanıt gizli dizi gösteriliyor. Kodunuzda, gizli diziyi almak için bu çıkış ayrıştırma. Ardından, gizli dizi, başka bir Azure kaynak erişmek için bir sonraki işlemi kullanın.
+Yanıt, gizliliği gösteren aşağıdakine benzer şekilde görünür. Kodunuzda, parolayı elde etmek için bu çıktıyı ayrıştırırdınız. Daha sonra, başka bir Azure kaynağına erişmek için sonraki bir işlemde gizli dizi kullanın.
 
 ```bash
 {"value":"Hello Container Instances!","contentType":"ACIsecret","id":"https://mykeyvault.vault.azure.net/secrets/SampleSecret/xxxxxxxxxxxxxxxxxxxx","attributes":{"enabled":true,"created":1539965967,"updated":1539965967,"recoveryLevel":"Purgeable"},"tags":{"file-encoding":"utf-8"}}
 ```
 
-## <a name="example-2-use-a-system-assigned-identity-to-access-azure-key-vault"></a>Örnek 2: Azure Key Vault'a erişmesi için sistem tarafından atanan bir kimlik kullanın.
+## <a name="example-2-use-a-system-assigned-identity-to-access-azure-key-vault"></a>Örnek 2: Azure Key Vault erişmek için sistem tarafından atanan bir kimlik kullanma
 
-### <a name="enable-a-system-assigned-identity-on-a-container-group"></a>Bir sistem tarafından atanan kimliği bir kapsayıcı grubunda Etkinleştir
+### <a name="enable-a-system-assigned-identity-on-a-container-group"></a>Kapsayıcı grubunda sistem tarafından atanan kimliği etkinleştirme
 
-Aşağıdaki komutu çalıştırın [az kapsayıcı oluşturma](/cli/azure/container?view=azure-cli-latest#az-container-create) tabanlı Ubuntu Server bir kapsayıcı örneği oluşturmak için komutu. Bu örnek, etkileşimli olarak diğer Azure hizmetlerine erişmek için kullanabileceğiniz bir tek kapsayıcı grubu sağlar. `--assign-identity` Parametresi ek değer içermeyen bir sistem tarafından atanan yönetilen kimlik grubundaki sağlar. Uzun süre çalışan komut kapsayıcıyı tutar. Bu örnek, anahtar kasası oluşturmak için kullanılan aynı kaynak grubunda kullanır, ancak farklı bir belirtebilirsiniz.
+Ubuntu sunucusunu temel alan bir kapsayıcı örneği oluşturmak için aşağıdaki [az Container Create](/cli/azure/container?view=azure-cli-latest#az-container-create) komutunu çalıştırın. Bu örnek, diğer Azure hizmetlerine etkileşimli olarak erişmek için kullanabileceğiniz tek bir kapsayıcı grubu sağlar. Ek değer içermeyen parametre, grupta sistem tarafından atanan yönetilen kimliği mümkün bir şekilde sunar. `--assign-identity` Uzun süre çalışan komut kapsayıcıyı çalışır durumda tutar. Bu örnek, Key Vault oluşturmak için kullanılan kaynak grubunu kullanır, ancak farklı bir tane belirtebilirsiniz.
 
 ```azurecli-interactive
 az container create --resource-group myResourceGroup --name mycontainer --image microsoft/azure-cli --assign-identity --command-line "tail -f /dev/null"
 ```
 
-Birkaç saniye içinde Azure CLI'den dağıtımın tamamlandığını belirten bir yanıt almanız gerekir. İle durumunu denetleyin [az container show](/cli/azure/container?view=azure-cli-latest#az-container-show) komutu.
+Birkaç saniye içinde Azure CLI'den dağıtımın tamamlandığını belirten bir yanıt almanız gerekir. [Az Container Show](/cli/azure/container?view=azure-cli-latest#az-container-show) komutuyla durumunu kontrol edin.
 
 ```azurecli-interactive
 az container show --resource-group myResourceGroup --name mycontainer
 ```
 
-`identity` Çıkış bölümünde görünür aşağıdakine benzer bir sistem tarafından atanan kimliği Azure Active Directory'ye oluşturduğunuz gösteriliyor:
+Çıktıda `identity` bulunan bölüm, Azure Active Directory ' de sistem tarafından atanan bir kimliğin oluşturulduğunu gösteren aşağıdakine benzer şekilde görünür:
 
 ```console
 ...
@@ -211,29 +212,29 @@ az container show --resource-group myResourceGroup --name mycontainer
 ...
 ```
 
-Bir değişken değerine ayarlanmasından `principalId` (hizmet sorumlusu kimliği) sonraki adımlarda kullanılacak kimlik.
+Sonraki adımlarda kullanmak için, kimliğin değerine `principalId` (hizmet asıl kimliği) bir değişken ayarlayın.
 
 ```azurecli-interactive
 spID=$(az container show --resource-group myResourceGroup --name mycontainer --query identity.principalId --out tsv)
 ```
 
-### <a name="grant-container-group-access-to-the-key-vault"></a>Kapsayıcı grubu erişimi vermek için Key Vault
+### <a name="grant-container-group-access-to-the-key-vault"></a>Key Vault kapsayıcı grubuna erişim izni verme
 
-Aşağıdaki komutu çalıştırın [az keyvault set-policy](/cli/azure/keyvault?view=azure-cli-latest) Key Vault'a erişim ilkesi ayarlamak için komutu. Aşağıdaki örnekte, gizli dizileri anahtar Kasasından almak sistem tarafından yönetilen kimlik sağlar:
+Key Vault bir erişim ilkesi ayarlamak için şu [az keykasası Set-Policy](/cli/azure/keyvault?view=azure-cli-latest) komutunu çalıştırın. Aşağıdaki örnek, sistem tarafından yönetilen kimliğin Key Vault gizli dizileri almasına izin verir:
 
 ```azurecli-interactive
  az keyvault set-policy --name mykeyvault --resource-group myResourceGroup --object-id $spID --secret-permissions get
 ```
 
-### <a name="use-container-group-identity-to-get-secret-from-key-vault"></a>Key Vault'tan gizli almak için kapsayıcı grubu kimliği'ni kullanın
+### <a name="use-container-group-identity-to-get-secret-from-key-vault"></a>Key Vault 'ten parola almak için kapsayıcı grubu kimliğini kullanın
 
-Artık çalışan bir kapsayıcı örneği içinde Key Vault'una erişmek için yönetilen kimlik kullanabilirsiniz. Bu örnekte, ilk kapsayıcı bir bash kabuğunu başlatın:
+Artık, çalışan kapsayıcı örneği içinde Key Vault erişmek için yönetilen kimliği kullanabilirsiniz. Bu örnek için, önce kapsayıcıda bir bash kabuğu başlatın:
 
 ```azurecli-interactive
 az container exec --resource-group myResourceGroup --name mycontainer --exec-command "/bin/bash"
 ```
 
-Kapsayıcı bash kabuğunda aşağıdaki komutları çalıştırın. Azure Active Directory için Key Vault kimlik doğrulaması için kullanılacak erişim belirteci almak için aşağıdaki komutu çalıştırın:
+Kapsayıcıda bash kabuğu 'nda aşağıdaki komutları çalıştırın. Key Vault kimlik doğrulaması yapmak için Azure Active Directory kullanmak üzere bir erişim belirteci almak için aşağıdaki komutu çalıştırın:
 
 ```bash
 curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fvault.azure.net%2F' -H Metadata:true -s
@@ -245,38 +246,38 @@ curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-
 {"access_token":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Imk2bEdrM0ZaenhSY1ViMkMzbkVRN3N5SEpsWSIsImtpZCI6Imk2bEdrM0ZaenhSY1ViMkMzbkVRN3N5SEpsWSJ9......xxxxxxxxxxxxxxxxx","refresh_token":"","expires_in":"28799","expires_on":"1539927532","not_before":"1539898432","resource":"https://vault.azure.net/","token_type":"Bearer"}
 ```
 
-Erişim belirteci kimliğini doğrulamak için sonraki komutlarda kullanılacak bir değişkende depolamak için aşağıdaki komutu çalıştırın:
+Erişim belirtecini, kimlik doğrulaması için sonraki komutlarda kullanılacak bir değişkende depolamak için aşağıdaki komutu çalıştırın:
 
 ```bash
 token=$(curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fvault.azure.net' -H Metadata:true | jq -r '.access_token')
 
 ```
 
-Anahtar Kasası'na kimliğini doğrulamak ve gizli dizi okumak için artık erişim belirtecini kullanın. Anahtar kasanıza URL adı ile değiştirdiğinizden emin olun (*https:\//mykeyvault.vault.azure.net/...* ):
+Şimdi Key Vault kimlik doğrulaması yapmak ve gizli dizi okumak için erişim belirtecini kullanın. Anahtar kasanızın adını URL 'de (*https:\//mykeyvault.Vault.Azure.net/..* .) değiştirdiğinizden emin olun:
 
 ```bash
 curl https://mykeyvault.vault.azure.net/secrets/SampleSecret/?api-version=2016-10-01 -H "Authorization: Bearer $token"
 ```
 
-Aşağıdakine benzer bir yanıt gizli dizi gösteriliyor. Kodunuzda, gizli diziyi almak için bu çıkış ayrıştırma. Ardından, gizli dizi, başka bir Azure kaynak erişmek için bir sonraki işlemi kullanın.
+Yanıt, gizliliği gösteren aşağıdakine benzer şekilde görünür. Kodunuzda, parolayı elde etmek için bu çıktıyı ayrıştırırdınız. Daha sonra, başka bir Azure kaynağına erişmek için sonraki bir işlemde gizli dizi kullanın.
 
 ```bash
 {"value":"Hello Container Instances!","contentType":"ACIsecret","id":"https://mykeyvault.vault.azure.net/secrets/SampleSecret/xxxxxxxxxxxxxxxxxxxx","attributes":{"enabled":true,"created":1539965967,"updated":1539965967,"recoveryLevel":"Purgeable"},"tags":{"file-encoding":"utf-8"}}
 ```
 
-## <a name="enable-managed-identity-using-resource-manager-template"></a>Resource Manager şablonu kullanarak bir yönetilen kimlik etkinleştir
+## <a name="enable-managed-identity-using-resource-manager-template"></a>Kaynak Yöneticisi şablonu kullanarak yönetilen kimliği etkinleştirme
 
-Bir yönetilen kimlik kullanarak bir kapsayıcı grubu etkinleştirmek için bir [Resource Manager şablonu](container-instances-multi-container-group.md)ayarlayın `identity` özelliği `Microsoft.ContainerInstance/containerGroups` nesnesi ile bir `ContainerGroupIdentity` nesne. Aşağıdaki kod parçacıkları Göster `identity` özelliği farklı senaryolar için yapılandırılmış. Bkz: [Resource Manager şablon başvurusu](/azure/templates/microsoft.containerinstance/containergroups). Belirtin bir `apiVersion` , `2018-10-01`.
+Bir [Kaynak Yöneticisi şablonu](container-instances-multi-container-group.md)kullanarak bir kapsayıcı grubundaki yönetilen bir kimliği etkinleştirmek için `identity` `Microsoft.ContainerInstance/containerGroups` nesnesinin özelliğini bir `ContainerGroupIdentity` nesne ile ayarlayın. Aşağıdaki kod parçacıkları farklı senaryolar `identity` için yapılandırılmış özelliği gösterir. [Kaynak Yöneticisi şablonu başvurusuna](/azure/templates/microsoft.containerinstance/containergroups)bakın. `apiVersion` Bir`2018-10-01`belirtin.
 
 ### <a name="user-assigned-identity"></a>Kullanıcı tarafından atanan kimlik
 
-Bir kullanıcı tarafından atanan kimliği formunun bir kaynak kimliği aşağıdaki gibidir:
+Kullanıcı tarafından atanan kimlik, formun bir kaynak KIMLIĞIDIR:
 
 ```
 "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}"
 ``` 
 
-Bir veya daha fazla kullanıcı tarafından atanan kimlikleri etkinleştirebilirsiniz.
+Kullanıcı tarafından atanan bir veya daha fazla kimliği etkinleştirebilirsiniz.
 
 ```json
 "identity": {
@@ -296,9 +297,9 @@ Bir veya daha fazla kullanıcı tarafından atanan kimlikleri etkinleştirebilir
     }
 ```
 
-### <a name="system--and-user-assigned-identities"></a>Sistem ve kullanıcı tarafından atanan kimlikleri
+### <a name="system--and-user-assigned-identities"></a>Sistem ve Kullanıcı tarafından atanan kimlikler
 
-Bir kapsayıcı grubu üzerinde bir sistem tarafından atanan kimliği hem de bir veya daha fazla kullanıcı tarafından atanan kimlikleri etkinleştirebilirsiniz.
+Bir kapsayıcı grubunda, hem sistem tarafından atanan hem de bir veya daha fazla kullanıcı tarafından atanan kimlik sağlayabilirsiniz.
 
 ```json
 "identity": {
@@ -311,20 +312,20 @@ Bir kapsayıcı grubu üzerinde bir sistem tarafından atanan kimliği hem de bi
 ...
 ```
 
-## <a name="enable-managed-identity-using-yaml-file"></a>YAML dosyası kullanılarak yönetilen kimlik etkinleştir
+## <a name="enable-managed-identity-using-yaml-file"></a>YAML dosyasını kullanarak yönetilen kimliği etkinleştirme
 
-Bir kapsayıcı grubundaki yönetilen bir kimlik etkinleştirmek için dağıtılan kullanarak bir [YAML dosyası](container-instances-multi-container-yaml.md), aşağıdaki YAML içerir.
-Belirtin bir `apiVersion` , `2018-10-01`.
+Bir [YAML dosyası](container-instances-multi-container-yaml.md)kullanılarak dağıtılan bir kapsayıcı grubundaki yönetilen bir kimliği etkinleştirmek için aşağıdaki YAML 'yi ekleyin.
+`apiVersion` Bir`2018-10-01`belirtin.
 
 ### <a name="user-assigned-identity"></a>Kullanıcı tarafından atanan kimlik
 
-Bir kaynak kimliği biçiminde bir kullanıcı tarafından atanan kimliği olan 
+Kullanıcı tarafından atanan kimlik, formun bir kaynak KIMLIĞIDIR 
 
 ```
 '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'
 ```
 
-Bir veya daha fazla kullanıcı tarafından atanan kimlikleri etkinleştirebilirsiniz.
+Kullanıcı tarafından atanan bir veya daha fazla kimliği etkinleştirebilirsiniz.
 
 ```YAML
 identity:
@@ -340,9 +341,9 @@ identity:
   type: SystemAssigned
 ```
 
-### <a name="system--and-user-assigned-identities"></a>Sistem ve kullanıcı tarafından atanan kimlikleri
+### <a name="system--and-user-assigned-identities"></a>Sistem ve Kullanıcı tarafından atanan kimlikler
 
-Bir kapsayıcı grubu üzerinde bir sistem tarafından atanan kimliği hem de bir veya daha fazla kullanıcı tarafından atanan kimlikleri etkinleştirebilirsiniz.
+Bir kapsayıcı grubunda, hem sistem tarafından atanan hem de bir veya daha fazla kullanıcı tarafından atanan kimlik sağlayabilirsiniz.
 
 ```YAML
 identity:
@@ -353,13 +354,13 @@ identity:
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu makalede, Azure Container ınstances'da yönetilen kimlikler hakkında öğrendiniz ve nasıl yapılır:
+Bu makalede, Azure Container Instances ' deki Yönetilen kimlikler hakkında bilgi edindiniz ve şunları yapabilirsiniz:
 
 > [!div class="checklist"]
-> * Bir kapsayıcı grubundaki bir kullanıcı tarafından atanan veya sistem tarafından atanan kimliği etkinleştirme
-> * Bir Azure anahtar Kasası'na kimlik erişim
-> * Çalışan bir kapsayıcıdan bir anahtar kasasına erişmek için yönetilen kimliği kullanma
+> * Kapsayıcı grubunda Kullanıcı tarafından atanan veya sistem tarafından atanan bir kimliği etkinleştirme
+> * Azure Key Vault kimlik erişimi verme
+> * Çalışan bir kapsayıcıdan bir Key Vault erişmek için yönetilen kimliği kullanma
 
-* Daha fazla bilgi edinin [kimliklerini Azure kaynakları için yönetilen](/azure/active-directory/managed-identities-azure-resources/).
+* [Azure kaynakları için Yönetilen kimlikler](/azure/active-directory/managed-identities-azure-resources/)hakkında daha fazla bilgi edinin.
 
-* Bkz: bir [Azure Go SDK örnek](https://medium.com/@samkreter/c98911206328) Azure Container Instances bir anahtar kasasına erişmek için bir yönetilen kimlik kullanarak.
+* Azure Container Instances bir Key Vault erişmek için yönetilen kimlik kullanma hakkında bir [Azure go SDK örneğine](https://medium.com/@samkreter/c98911206328) bakın.

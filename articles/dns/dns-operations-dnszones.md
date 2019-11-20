@@ -1,6 +1,6 @@
 ---
-title: Azure DNS'de - PowerShell DNS bölgelerini yönetme | Microsoft Docs
-description: Azure Powershell kullanarak DNS bölgelerini yönetebilirsiniz. Bu makalede, güncelleştirme, silme ve Azure DNS DNS bölgeleri oluşturma açıklanır
+title: Azure DNS-PowerShell 'de DNS bölgelerini yönetme | Microsoft Docs
+description: Azure PowerShell 'i kullanarak DNS bölgelerini yönetebilirsiniz. Bu makalede, Azure DNS üzerinde DNS bölgelerini güncelleştirme, silme ve oluşturma işlemlerinin nasıl yapılacağı açıklanmaktadır
 services: dns
 documentationcenter: na
 author: vhorne
@@ -13,24 +13,24 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/19/2018
 ms.author: victorh
-ms.openlocfilehash: 1ef44c16a8ae3b6254a6cea252501b72ddb24a5c
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: dd238be6dbfcd14480b2c0cf03236902ef39e722
+ms.sourcegitcommit: 4d177e6d273bba8af03a00e8bb9fe51a447196d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "61293631"
+ms.lasthandoff: 10/04/2019
+ms.locfileid: "71959419"
 ---
-# <a name="how-to-manage-dns-zones-using-powershell"></a>PowerShell kullanarak DNS bölgelerini yönetme
+# <a name="how-to-manage-dns-zones-using-powershell"></a>PowerShell kullanarak DNS Bölgeleri Yönetme
 
 > [!div class="op_single_selector"]
 > * [Portal](dns-operations-dnszones-portal.md)
 > * [PowerShell](dns-operations-dnszones.md)
-> * [Azure klasik CLI](dns-operations-dnszones-cli-nodejs.md)
-> * [Azure CLI](dns-operations-dnszones-cli.md)
+> * [Azure klasik CLı](dns-operations-dnszones-cli-nodejs.md)
+> * [Azure CLı](dns-operations-dnszones-cli.md)
 
-Bu makalede, Azure PowerShell kullanarak DNS bölgelerini yönetme işlemini göstermektedir. Platformlar arası kullanarak DNS bölgelerini de yönetebilirsiniz [Azure CLI](dns-operations-dnszones-cli.md) veya Azure portalında.
+Bu makalede, Azure PowerShell kullanarak DNS bölgelerinizi nasıl yöneteceğiniz gösterilmektedir. Ayrıca, platformlar arası [Azure CLI](dns-operations-dnszones-cli.md) veya Azure Portal kullanarak DNS bölgelerinizi yönetebilirsiniz.
 
-Bu kılavuz, özellikle Genel DNS bölgelerini ile ilgilidir. Azure PowerShell kullanarak Azure DNS özel bölgeleri yönetme hakkında daha fazla bilgi için bkz: [Azure PowerShell kullanarak Azure DNS özel bölgelerini kullanmaya başlama](private-dns-getstarted-powershell.md).
+Bu kılavuz özellikle ortak DNS bölgeleriyle ilgilidir. Azure DNS özel bölgeleri yönetmek için Azure PowerShell kullanma hakkında daha fazla bilgi için bkz. [Azure PowerShell kullanarak Azure DNS özel bölgeleri kullanmaya başlama](private-dns-getstarted-powershell.md).
 
 [!INCLUDE [dns-create-zone-about](../../includes/dns-create-zone-about-include.md)]
 
@@ -39,25 +39,25 @@ Bu kılavuz, özellikle Genel DNS bölgelerini ile ilgilidir. Azure PowerShell k
 
 ## <a name="create-a-dns-zone"></a>DNS bölgesi oluşturma
 
-DNS bölgesi, `New-AzureRmDnsZone` cmdlet’i kullanılarak oluşturulur.
+Bir DNS bölgesi `New-AzureRmDnsZone` cmdlet 'i kullanılarak oluşturulur.
 
-Aşağıdaki örnekte adlı bir DNS bölgesi oluşturur *contoso.com* adlı kaynak grubunda *MyResourceGroup*:
+Aşağıdaki örnek, *Myresourcegroup*adlı kaynak grubunda *contoso.com* adlı bir DNS bölgesi oluşturur:
 
 ```powershell
 New-AzureRmDnsZone -Name contoso.com -ResourceGroupName MyAzureResourceGroup
 ```
 
-Aşağıdaki örnek, iki DNS bölgesi oluşturma işlemi gösterilmektedir [Azure Resource Manager etiketleri](dns-zones-records.md#tags), *project = demo* ve *env = test*:
+Aşağıdaki örnek, *Proje = demo* ve *env = test*olmak üzere ıkı [Azure Resource Manager etiketleriyle](dns-zones-records.md#tags)bir DNS bölgesinin nasıl oluşturulacağını gösterir:
 
 ```powershell
 New-AzureRmDnsZone -Name contoso.com -ResourceGroupName MyAzureResourceGroup -Tag @{ project="demo"; env="test" }
 ```
 
-Azure DNS artık özel DNS bölgelerini de destekler (şu anda genel önizlemede).  Özel DNS bölgeleri hakkında daha fazla bilgi için bkz. [Özel etki alanları için Azure DNS'i kullanma](private-dns-overview.md). Özel bir DNS bölgesi oluşturma örneği için bkz. [PowerShell kullanarak Azure DNS özel bölgeleriyle çalışmaya başlama](./private-dns-getstarted-powershell.md).
+Ayrıca, özel DNS bölgelerini de destekler Azure DNS.  Özel DNS bölgeleri hakkında daha fazla bilgi için bkz. [özel etki alanları için Azure DNS kullanma](private-dns-overview.md). Özel bir DNS bölgesinin nasıl oluşturulacağı hakkında bir örnek için bkz. [PowerShell kullanarak Azure DNS özel bölgelerini kullanmaya başlama](./private-dns-getstarted-powershell.md).
 
-## <a name="get-a-dns-zone"></a>Bir DNS bölgesi alma
+## <a name="get-a-dns-zone"></a>DNS bölgesi al
 
-Bir DNS bölgesi almak için kullanın `Get-AzureRmDnsZone` cmdlet'i. Bu işlem, Azure DNS'de mevcut bir bölgeyi karşılık gelen bir DNS bölgesi nesnesi döndürür. Nesne için bölge (örneğin, kayıt kümelerinin sayısı) hakkında veri içerir, ancak bu kayıt kümeleri içermiyor (bkz `Get-AzureRmDnsRecordSet`).
+Bir DNS bölgesi almak için `Get-AzureRmDnsZone` cmdlet 'ini kullanın. Bu işlem, Azure DNS var olan bir bölgeye karşılık gelen bir DNS bölgesi nesnesi döndürür. Nesnesi, bölge hakkında (kayıt kümesi sayısı gibi) veriler içerir, ancak kayıt kümelerini içermez (bkz. `Get-AzureRmDnsRecordSet`).
 
 ```powershell
 Get-AzureRmDnsZone -Name contoso.com –ResourceGroupName MyAzureResourceGroup
@@ -74,13 +74,13 @@ MaxNumberOfRecordSets : 5000
 
 ## <a name="list-dns-zones"></a>DNS bölgelerini listeleme
 
-`Get-AzureRmDnsZone` içinden bölge adını atarak bir kaynak grubundaki tüm bölgeleri numaralandırabilirsiniz. Bu işlem, bölge nesnelerinin bir dizisini döndürür.
+@No__t-0 ' dan bölge adını atlayarak, bir kaynak grubundaki tüm bölgeleri sıralayabilirsiniz. Bu işlem, bölge nesnelerinin bir dizisini döndürür.
 
 ```powershell
 $zoneList = Get-AzureRmDnsZone -ResourceGroupName MyAzureResourceGroup
 ```
 
-`Get-AzureRmDnsZone` içinden hem bölge adını hem de kaynak grubunu atarak, Azure aboneliğindeki tüm bölgeleri numaralandırabilirsiniz.
+Hem bölge adını hem de kaynak grubu adını `Get-AzureRmDnsZone` ' dan atlayarak Azure aboneliğindeki tüm bölgeleri sıralayabilirsiniz.
 
 ```powershell
 $zoneList = Get-AzureRmDnsZone
@@ -88,21 +88,21 @@ $zoneList = Get-AzureRmDnsZone
 
 ## <a name="update-a-dns-zone"></a>DNS bölgesini güncelleştirme
 
-`Set-AzureRmDnsZone` kullanılarak bir DNS bölgesi kaynağı üzerinde değişiklikler yapılabilir. Bu cmdlet, bölge içindeki DNS kayıt kümelerinin herhangi birini güncelleştirmez (bkz. [DNS kayıtlarını yönetme](dns-operations-recordsets.md)). Yalnızca bölge kaynağının özelliklerini güncelleştirmek için kullanılır. Yazılabilir bölge özellikleri şu anda sınırlı [Azure Resource Manager 'etiketleri' bölge kaynağı için](dns-zones-records.md#tags).
+DNS bölgesi kaynağına yapılan değişiklikler `Set-AzureRmDnsZone` kullanılarak yapılabilir. Bu cmdlet bölge içindeki DNS kayıt kümelerinden hiçbirini güncelleştirmez (bkz. [DNS kayıtlarını yönetme](dns-operations-recordsets.md)). Yalnızca bölge kaynağının özelliklerini güncelleştirmek için kullanılır. Yazılabilir bölge özellikleri şu anda [bölge kaynağı için Azure Resource Manager ' Tags '](dns-zones-records.md#tags)ile sınırlıdır.
 
-Bir DNS bölgesi güncelleştirmek için aşağıdaki iki yoldan birini kullanın:
+DNS bölgesini güncelleştirmek için aşağıdaki iki yöntemi kullanın:
 
-### <a name="specify-the-zone-using-the-zone-name-and-resource-group"></a>Bölge adı ve kaynak grubunu kullanarak bölgeyi belirtin
+### <a name="specify-the-zone-using-the-zone-name-and-resource-group"></a>Bölge adını ve kaynak grubunu kullanarak bölgeyi belirtin
 
-Bu yaklaşım, varolan bölge etiketleri belirtilen değerlerle değiştirir.
+Bu yaklaşım, var olan bölge etiketlerinin yerine belirtilen değerleri koyar.
 
 ```powershell
 Set-AzureRmDnsZone -Name contoso.com -ResourceGroupName MyAzureResourceGroup -Tag @{ project="demo"; env="test" }
 ```
 
-### <a name="specify-the-zone-using-a-zone-object"></a>$zone nesnesini kullanarak bölgeyi belirtin
+### <a name="specify-the-zone-using-a-zone-object"></a>$zone nesnesi kullanarak bölgeyi belirtin
 
-Bu yaklaşım var olan bölge nesnesi alır, etiketleri değiştirir ve ardından değişiklikleri kaydeder. Bu şekilde, mevcut etiketleri korunabilir.
+Bu yaklaşım, var olan bölge nesnesini alır, etiketleri değiştirir ve ardından değişiklikleri kaydeder. Bu şekilde, varolan Etiketler korunabilir.
 
 ```powershell
 # Get the zone object
@@ -118,19 +118,19 @@ $zone.Tags.Add("status","approved")
 Set-AzureRmDnsZone -Zone $zone
 ```
 
-Kullanırken `Set-AzureRmDnsZone` $zone nesnesini ile [Etag denetler](dns-zones-records.md#etags) eşzamanlı değişiklikleri yazılmaz emin olmak için kullanılır. Kullanabileceğiniz isteğe bağlı `-Overwrite` bu denetimleri bastırmak için anahtar.
+@No__t-0 ' ı bir $zone nesnesiyle kullanırken, eş zamanlı değişikliklerin üzerine yazılmadığından emin olmak için [ETag denetimleri](dns-zones-records.md#etags) kullanılır. Bu denetimleri bastırmak için isteğe bağlı `-Overwrite` anahtarını kullanabilirsiniz.
 
 ## <a name="delete-a-dns-zone"></a>DNS bölgesini silme
 
-DNS bölgeleri kullanılarak silinebilir `Remove-AzureRmDnsZone` cmdlet'i.
+DNS bölgeleri `Remove-AzureRmDnsZone` cmdlet 'i kullanılarak silinebilir.
 
 > [!NOTE]
-> Bir DNS bölgesi silindiğinde, bölge içindeki tüm DNS kayıtları da silinir. Bu işlem geri alınamaz. DNS bölgesi kullanımdaysa, bölge silindiğinde bölgeyi kullanan hizmetler başarısız olur.
+> DNS bölgesini silme, bölge içindeki tüm DNS kayıtlarını da siler. Bu işlem geri alınamaz. DNS bölgesi kullanılıyorsa bölgeyi kullanan hizmetler, bölge silindiğinde başarısız olur.
 >
->Bölgenin yanlışlıkla silinmesine karşı koruma oluşturmak için bkz. [DNS bölgelerini ve kayıtlarını koruma](dns-protect-zones-recordsets.md).
+>Yanlışlıkla bölge silmeye karşı korumak için bkz. [DNS bölgelerini ve kayıtlarını koruma](dns-protect-zones-recordsets.md).
 
 
-DNS bölgesini silmek için aşağıdaki iki yöntemden birini uygulayın:
+DNS bölgesini silmek için aşağıdaki iki yöntemi kullanın:
 
 ### <a name="specify-the-zone-using-the-zone-name-and-resource-group-name"></a>Bölge adını ve kaynak grubu adını kullanarak bölgeyi belirtin
 
@@ -138,41 +138,41 @@ DNS bölgesini silmek için aşağıdaki iki yöntemden birini uygulayın:
 Remove-AzureRmDnsZone -Name contoso.com -ResourceGroupName MyAzureResourceGroup
 ```
 
-### <a name="specify-the-zone-using-a-zone-object"></a>$zone nesnesini kullanarak bölgeyi belirtin
+### <a name="specify-the-zone-using-a-zone-object"></a>$zone nesnesi kullanarak bölgeyi belirtin
 
-`Get-AzureRmDnsZone` tarafından döndürülen bir `$zone` nesnesini kullanarak silinecek bölgeyi belirtebilirsiniz.
+@No__t-1 tarafından döndürülen `$zone` nesnesi kullanılarak silinecek bölgeyi belirtebilirsiniz.
 
 ```powershell
 $zone = Get-AzureRmDnsZone -Name contoso.com -ResourceGroupName MyAzureResourceGroup
 Remove-AzureRmDnsZone -Zone $zone
 ```
 
-Bölge nesnesi, parametre olarak geçirilmek yerine yöneltilebilir:
+Bölge nesnesi de bir parametre olarak geçirilmesi yerine, bir de olabilir:
 
 ```powershell
 Get-AzureRmDnsZone -Name contoso.com -ResourceGroupName MyAzureResourceGroup | Remove-AzureRmDnsZone
 
 ```
 
-Olduğu gibi `Set-AzureRmDnsZone`, bölge kullanarak belirten bir `$zone` nesnesi eşzamanlı değişiklikleri silinmediğinden emin olmak Etag denetimleri sağlar. Kullanım `-Overwrite` bu denetimleri bastırmak için anahtar.
+@No__t-0 ' da olduğu gibi, bir `$zone` nesnesi kullanılarak bölge belirtildiğinde, eş zamanlı değişikliklerin silinmediğinden emin olmak için ETag denetimleri etkinleştirilir. Bu denetimleri bastırmak için `-Overwrite` anahtarını kullanın.
 
 ## <a name="confirmation-prompts"></a>Onay istemleri
 
-`New-AzureRmDnsZone`, `Set-AzureRmDnsZone` ve `Remove-AzureRmDnsZone` cmdlet’lerinin tamamı onay istemlerini destekler.
+@No__t-0, `Set-AzureRmDnsZone` ve `Remove-AzureRmDnsZone` cmdlet 'leri her türlü onay istemini destekler.
 
-`$ConfirmPreference` PowerShell tercih değişkeni, `Medium` veya daha küçük bir değere sahipse hem `New-AzureRmDnsZone` hem de `Set-AzureRmDnsZone` onay istemi görüntüler. DNS bölgesini silmenin olası kritik etkisi nedeniyle, `$ConfirmPreference` PowerShell değişkeninin `None` dışında bir değeri varsa `Remove-AzureRmDnsZone` cmdlet’i, onay istemi görüntüler.
+@No__t-0 ve `Set-AzureRmDnsZone` `$ConfirmPreference` PowerShell tercih değişkeni `Medium` veya daha düşük bir değere sahipse onay için istem. Bir DNS bölgesini silmenin olası yüksek etkisi nedeniyle, `$ConfirmPreference` PowerShell değişkeni `None` dışında bir değer içeriyorsa `Remove-AzureRmDnsZone` cmdlet 'i onay ister.
 
-`$ConfirmPreference` için varsayılan değer `High` olduğundan yalnızca `Remove-AzureRmDnsZone` varsayılan olarak onay istemi görüntüler.
+@No__t-0 ' a ait varsayılan değer `High` olduğundan, yalnızca `Remove-AzureRmDnsZone` varsayılan olarak onay ister.
 
-`-Confirm` parametresini kullanarak geçerli `$ConfirmPreference` ayarını geçersiz kılabilirsiniz. `-Confirm` veya `-Confirm:$True` belirtirseniz cmdlet, çalıştırılmadan önce size onay istemi görüntüler. `-Confirm:$False` belirtirseniz cmdlet size onay istemi görüntülemez.
+@No__t-1 parametresini kullanarak geçerli `$ConfirmPreference` ayarını geçersiz kılabilirsiniz. @No__t-0 veya `-Confirm:$True` belirtirseniz cmdlet 'i çalıştırmadan önce sizden onay ister. @No__t-0 ' ı belirtirseniz, cmdlet sizden onay istemez.
 
-`-Confirm` ve `$ConfirmPreference` hakkında daha fazla bilgi için bkz. [Tercih Değişkenleri Hakkında](/powershell/module/microsoft.powershell.core/about/about_preference_variables).
+@No__t-0 ve `$ConfirmPreference` hakkında daha fazla bilgi için bkz. [tercih değişkenleri hakkında](/powershell/module/microsoft.powershell.core/about/about_preference_variables).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bilgi edinmek için nasıl [kayıt kümeleri ve kayıtları yönetmek](dns-operations-recordsets.md) DNS bölgenizdeki.
+DNS bölgesindeki [kayıt kümelerini ve kayıtları yönetmeyi](dns-operations-recordsets.md) öğrenin.
 <br>
-Bilgi edinmek için nasıl [etki alanınızı Azure DNS'ye devretme](dns-domain-delegation.md).
+[Azure DNS için etki alanınızı nasıl atayacağınızı](dns-domain-delegation.md)öğrenin.
 <br>
-Gözden geçirme [Azure DNS PowerShell başvuru belgeleri](/powershell/module/azurerm.dns).
+[PowerShell başvuru belgelerini Azure DNS](/powershell/module/azurerm.dns)inceleyin.
 

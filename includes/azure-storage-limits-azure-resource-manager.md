@@ -9,17 +9,17 @@ ms.date: 09/18/2018
 ms.author: tamram
 ms.custom: include file
 ms.openlocfilehash: 092b5696b97b73344a01af8103b24a01010f7a55
-ms.sourcegitcommit: 3e98da33c41a7bbd724f644ce7dedee169eb5028
+ms.sourcegitcommit: cd70273f0845cd39b435bd5978ca0df4ac4d7b2c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/18/2019
+ms.lasthandoff: 09/18/2019
 ms.locfileid: "67188572"
 ---
-Azure depolama ile Azure Resource Manager'ı kullanarak yönetim işlemlerini gerçekleştireceğiniz zaman aşağıdaki sınırlar geçerlidir.
+Aşağıdaki sınırlar yalnızca Azure Storage ile Azure Resource Manager kullanarak yönetim işlemleri gerçekleştirdiğinizde geçerlidir.
 
 | Resource | Varsayılan limit |
 | --- | --- |
-| Depolama hesap yönetimi işlemleri (okuma) |800 5 dakika başına |
-| Depolama hesap yönetimi işlemleri (yazma) |saat başına 200 |
-| Depolama hesap yönetimi işlemleri (liste) |5 dakika başına 100 |
+| Depolama hesabı yönetim işlemleri (okuma) |5 dakikada 800 |
+| Depolama hesabı yönetim işlemleri (yazma) |200/saat |
+| Depolama hesabı yönetim işlemleri (liste) |5 dakikada 100 |
 

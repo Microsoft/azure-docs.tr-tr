@@ -1,53 +1,54 @@
 ---
-title: Öğretici - Azure Container Instances - YAML içinde çok kapsayıcılı bir grup dağıtma
-description: Bu öğreticide, Azure CLI ile bir YAML dosyası kullanarak birden çok kapsayıcı Azure Container ınstances'da bir kapsayıcı grubu dağıtmayı öğrenin.
+title: Öğretici-Azure Container Instances-YAML 'de çok kapsayıcılı bir grup dağıtma
+description: Bu öğreticide, Azure CLı ile bir YAML dosyası kullanarak Azure Container Instances birden çok kapsayıcılı bir kapsayıcı grubunu dağıtmayı öğreneceksiniz.
 services: container-instances
 author: dlepow
+manager: gwallace
 ms.service: container-instances
 ms.topic: article
 ms.date: 04/03/2019
 ms.author: danlep
-ms.openlocfilehash: a0a91ece4f219cf822673cd457c064c326b89478
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: a38b0cfe7072975e4bcaf61b65ab7733694f714c
+ms.sourcegitcommit: 83df2aed7cafb493b36d93b1699d24f36c1daa45
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66149087"
+ms.lasthandoff: 09/22/2019
+ms.locfileid: "71178558"
 ---
-# <a name="tutorial-deploy-a-multi-container-group-using-a-yaml-file"></a>Öğretici: Bir YAML dosyası kullanarak çok kapsayıcılı bir grup dağıtma
+# <a name="tutorial-deploy-a-multi-container-group-using-a-yaml-file"></a>Öğretici: YAML dosyası kullanarak çok kapsayıcılı bir grup dağıtma
 
 > [!div class="op_single_selector"]
 > * [YAML](container-instances-multi-container-yaml.md)
 > * [Resource Manager](container-instances-multi-container-group.md)
 >
 
-Azure Container Instances kullanarak tek bir konak üzerine birden çok kapsayıcı dağıtımını destekleyen bir [kapsayıcı grubu](container-instances-container-groups.md). Kapsayıcı grubu günlüğe kaydetme, izleme veya başka bir yapılandırma için bir uygulama sepet oluştururken hizmet ikinci bir bağlı işlem gereken yere yararlı olur.
+Azure Container Instances, [kapsayıcı grubu](container-instances-container-groups.md)kullanılarak tek bir konakta birden fazla kapsayıcının dağıtımını destekler. Bir kapsayıcı grubu, günlüğe kaydetme, izleme veya bir hizmetin ikinci bağlı bir işleme ihtiyacı olan başka herhangi bir yapılandırma için bir uygulama arabası oluşturulması durumunda faydalıdır.
 
-Bu öğreticide, Azure CLI kullanarak bir YAML dosyası dağıtarak basit iki kapsayıcı sepet yapılandırma çalıştırmak için adımları izleyin. Bir YAML dosyası örneği ayarlarını belirtmek için bir kısa biçimi sağlar. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
+Bu öğreticide, Azure CLı kullanarak bir [YAML dosyası](container-instances-reference-yaml.md) dağıtarak basit bir iki Kapsayıcılı sepet yapılandırması çalıştırmanın adımlarını takip edersiniz. YAML dosyası, örnek ayarlarını belirtmek için kısa bir biçim sağlar. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 
 > [!div class="checklist"]
-> * Bir YAML dosyası yapılandırma
-> * Kapsayıcı grubu dağıtma
-> * Kapsayıcı günlüklerini görüntüleme
+> * YAML dosyası yapılandırma
+> * Kapsayıcı grubunu dağıtma
+> * Kapsayıcıların günlüklerini görüntüleme
 
 > [!NOTE]
-> Birden çok kapsayıcı grubunun şu anda Linux kapsayıcılarıyla kısıtlıdır.
+> Çok Kapsayıcılı gruplar Şu anda Linux kapsayıcılarıyla kısıtlıdır.
 
 Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) oluşturun.
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-## <a name="configure-a-yaml-file"></a>Bir YAML dosyası yapılandırma
+## <a name="configure-a-yaml-file"></a>YAML dosyası yapılandırma
 
-Çok kapsayıcılı bir grup ile dağıtmak için [az kapsayıcı oluşturma] [ az-container-create] komutu Azure CLI'dan bir YAML dosyası içinde kapsayıcı grubu yapılandırmasını belirtmeniz gerekir. Ardından YAML dosyası komutuna parametre olarak geçirirsiniz.
+Azure CLı 'de [az Container Create][az-container-create] komutuyla çok kapsayıcılı bir grup dağıtmak için, BIR YAML dosyasında kapsayıcı grubu yapılandırmasını belirtmeniz gerekir. Ardından, YAML dosyasını komuta bir parametre olarak geçirin.
 
-Başlangıç adlı yeni bir dosyaya aşağıdaki YAML kopyalayarak **dağıtma aci.yaml**. Azure Cloud Shell'de, çalışma dizininizde dosya oluşturma için Visual Studio Code kullanabilirsiniz:
+Aşağıdaki YAML 'yi **Deploy-aci. YAML**adlı yeni bir dosyaya kopyalayarak başlayın. Azure Cloud Shell, çalışma dizininizde dosyayı oluşturmak için Visual Studio Code kullanabilirsiniz:
 
 ```
 code deploy-aci.yaml
 ```
 
-Bu YAML dosyası iki kapsayıcı "myContainerGroup", genel bir IP adresi ve iki kullanıma sunulan bağlantı noktası adlı bir kapsayıcı grubunu tanımlar. Kapsayıcıları, genel Microsoft görüntülerden dağıtılır. İlk kapsayıcı grubunda bir internet'e yönelik web uygulaması çalışır. İkinci kapsayıcıyı, sepet düzenli aralıklarla kapsayıcı grubun yerel ağ üzerinden ilk kapsayıcıda çalıştırılan web uygulaması için HTTP isteklerini gönderir.
+Bu YAML dosyası, iki kapsayıcı, genel IP adresi ve iki açığa çıkarılan bağlantı noktası içeren "myContainerGroup" adlı bir kapsayıcı grubunu tanımlar. Kapsayıcılar ortak Microsoft görüntülerinden dağıtılır. Gruptaki ilk kapsayıcı, internet 'e yönelik bir Web uygulaması çalıştırır. İkinci kapsayıcı olan sepet, düzenli aralıklarla, kapsayıcı grubunun yerel ağı aracılığıyla ilk kapsayıcıda çalışan Web uygulamasına HTTP istekleri sağlar.
 
 ```YAML
 apiVersion: 2018-10-01
@@ -84,7 +85,7 @@ tags: null
 type: Microsoft.ContainerInstance/containerGroups
 ```
 
-Özel kapsayıcı görüntüsünü kayıt defteri kullanmak için ekleme `imageRegistryCredentials` ortamınız için değiştirilmiş değerlere sahip kapsayıcı grubuna özelliği:
+Özel bir kapsayıcı görüntüsü kayıt defteri kullanmak için, `imageRegistryCredentials` özelliği, ortamınız için değiştirilen değerlerle birlikte kapsayıcı grubuna ekleyin:
 
 ```YAML
   imageRegistryCredentials:
@@ -93,15 +94,15 @@ type: Microsoft.ContainerInstance/containerGroups
     password: imageRegistryPassword
 ```
 
-## <a name="deploy-the-container-group"></a>Kapsayıcı grubu dağıtma
+## <a name="deploy-the-container-group"></a>Kapsayıcı grubunu dağıtma
 
-Bir kaynak grubu oluşturun [az grubu oluşturma] [ az-group-create] komutu:
+[Az Group Create][az-group-create] komutuyla bir kaynak grubu oluşturun:
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location eastus
 ```
 
-Kapsayıcı grubu dağıtma [az kapsayıcı oluşturma] [ az-container-create] komutu, YAML dosyası bağımsız değişken geçirme:
+Bir bağımsız değişken olarak YAML dosyasını geçirerek, [az Container Create][az-container-create] komutuyla kapsayıcı grubunu dağıtın:
 
 ```azurecli-interactive
 az container create --resource-group myResourceGroup --file deploy-aci.yaml
@@ -109,15 +110,15 @@ az container create --resource-group myResourceGroup --file deploy-aci.yaml
 
 Birkaç saniye içinde Azure’dan bir ilk yanıt almanız gerekir.
 
-## <a name="view-deployment-state"></a>Görünüm dağıtım durumu
+## <a name="view-deployment-state"></a>Dağıtım durumunu görüntüle
 
-Dağıtım durumunu görüntülemek için aşağıdakileri kullanın [az container show] [ az-container-show] komutu:
+Dağıtımın durumunu görüntülemek için, aşağıdaki [az Container Show][az-container-show] komutunu kullanın:
 
 ```azurecli-interactive
 az container show --resource-group myResourceGroup --name myContainerGroup --output table
 ```
 
-Çalışan uygulamayı görüntülemek istiyorsanız, tarayıcınızda IP adresine gidin. Örneğin, IP olduğundan `52.168.26.124` , bu örnek çıktı:
+Çalışan uygulamayı görüntülemek isterseniz, tarayıcınızda IP adresine gidin. Örneğin, IP Bu örnek çıktıdır `52.168.26.124` :
 
 ```bash
 Name              ResourceGroup    Status    Image                                                                                               IP:ports              Network    CPU/Memory       OsType    Location
@@ -125,9 +126,9 @@ Name              ResourceGroup    Status    Image                              
 myContainerGroup  danlep0318r      Running   mcr.microsoft.com/azuredocs/aci-tutorial-sidecar,mcr.microsoft.com/azuredocs/aci-helloworld:latest  20.42.26.114:80,8080  Public     1.0 core/1.5 gb  Linux     eastus
 ```
 
-## <a name="view-container-logs"></a>Kapsayıcı günlüklerini görüntüleme
+## <a name="view-container-logs"></a>Kapsayıcı günlüklerini görüntüle
 
-Kullanarak bir kapsayıcının günlük çıktısını görüntülemek [az kapsayıcı günlüklerini] [ az-container-logs] komutu. `--container-name` Kapsayıcı günlüklerini çekme yapılacağı bağımsız değişken belirtir. Bu örnekte, `aci-tutorial-app` kapsayıcısı belirtildi.
+[Az Container logs][az-container-logs] komutunu kullanarak bir kapsayıcının günlük çıktısını görüntüleyin. `--container-name` Bağımsız değişkeni, günlüklerin alınacağı kapsayıcıyı belirtir. Bu örnekte, `aci-tutorial-app` kapsayıcı belirtilir.
 
 ```azurecli-interactive
 az container logs --resource-group myResourceGroup --name myContainerGroup --container-name aci-tutorial-app
@@ -142,7 +143,7 @@ listening on port 80
 ::1 - - [21/Mar/2019:23:17:54 +0000] "HEAD / HTTP/1.1" 200 1663 "-" "curl/7.54.0"
 ```
 
-Sepet kapsayıcı için günlükleri görmek için belirten benzer bir komut çalıştırın `aci-tutorial-sidecar` kapsayıcı.
+Sepet kapsayıcısının günlüklerini görmek için `aci-tutorial-sidecar` kapsayıcıyı belirten benzer bir komut çalıştırın.
 
 ```azurecli-interactive
 az container logs --resource-group myResourceGroup --name myContainerGroup --container-name aci-tutorial-sidecar
@@ -168,18 +169,18 @@ Date: Thu, 21 Mar 2019 20:36:41 GMT
 Connection: keep-alive
 ```
 
-Gördüğünüz gibi sepet düzenli aralıklarla çalıştığından emin olmak için ana web uygulamasına grubun yerel ağ üzerinden bir HTTP istek yapıyor. Bir HTTP yanıt kodu dışında aldıysanız, uyarı tetiklemek için bu sepet örneği genişletilemiyor `200 OK`.
+Gördüğünüz gibi, sepet, çalıştığından emin olmak için grubun yerel ağı aracılığıyla ana Web uygulamasına bir HTTP isteği düzenli olarak yapar. Bu sepet örneği, dışında bir http yanıt kodu `200 OK`aldıysa bir uyarı tetiklemek için genişletilebilir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, Azure Container ınstances'da çok kapsayıcılı bir grup dağıtmak için bir YAML dosyası kullanılır. Şunları öğrendiniz:
+Bu öğreticide, Azure Container Instances içinde çok kapsayıcılı bir grubu dağıtmak için bir YAML dosyası kullandınız. Şunları öğrendiniz:
 
 > [!div class="checklist"]
-> * Bir YAML dosyası çok kapsayıcılı bir grup için yapılandırma
-> * Kapsayıcı grubu dağıtma
-> * Kapsayıcı günlüklerini görüntüleme
+> * Çok kapsayıcılı bir grup için bir YAML dosyası yapılandırma
+> * Kapsayıcı grubunu dağıtma
+> * Kapsayıcıların günlüklerini görüntüleme
 
-Kullanarak çok kapsayıcılı grup belirtebilirsiniz bir [Resource Manager şablonu](container-instances-multi-container-group.md). Kapsayıcı grubu ile ek Azure hizmet kaynaklarını dağıtmak için ihtiyacınız olduğunda Resource Manager şablonu kolayca senaryoları için uyarlanabilir.
+Ayrıca, [Kaynak Yöneticisi şablonu](container-instances-multi-container-group.md)kullanarak çok kapsayıcılı bir grup belirtebilirsiniz. Bir Kaynak Yöneticisi şablonu, kapsayıcı grubuyla ek Azure hizmet kaynakları dağıtmanız gerektiğinde senaryolar için kolay bir şekilde uyarlanmıştır.
 
 <!-- LINKS - External -->
 

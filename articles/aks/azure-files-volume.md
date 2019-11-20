@@ -1,34 +1,34 @@
 ---
-title: Azure Kubernetes Service (AKS) için birden çok podunuz statik bir birim oluşturun
-description: El ile birden çok eş zamanlı pod Azure Kubernetes Service (AKS) ile kullanmak için Azure dosyaları ile birim oluşturma hakkında bilgi edinin
+title: Azure Kubernetes hizmetinde (AKS) birden çok düğüm için statik birim oluşturma
+description: Azure Kubernetes hizmetinde (aks) birden çok eş zamanlı Pod ile kullanmak üzere Azure dosyaları ile bir birimi el ile oluşturmayı öğrenin
 services: container-service
-author: iainfoulds
+author: mlearned
 ms.service: container-service
 ms.topic: article
 ms.date: 03/01/2019
-ms.author: iainfou
-ms.openlocfilehash: 5f3c1331e2b005b136a015c537d0fc18406ca9d8
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: mlearned
+ms.openlocfilehash: 009da6c16d446f2b0d4d3f402c1c1ec63dde34d8
+ms.sourcegitcommit: 71db032bd5680c9287a7867b923bf6471ba8f6be
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65072077"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71018725"
 ---
-# <a name="manually-create-and-use-a-volume-with-azure-files-share-in-azure-kubernetes-service-aks"></a>El ile oluşturma ve Azure dosyaları paylaşımı Azure Kubernetes Service (AKS) ile bir birimi kullanın
+# <a name="manually-create-and-use-a-volume-with-azure-files-share-in-azure-kubernetes-service-aks"></a>Azure Kubernetes Service (AKS) içinde Azure dosya paylaşımıyla bir birimi el ile oluşturma ve kullanma
 
-Kapsayıcı tabanlı uygulamalar genellikle erişmek ve bir dış veri birimdeki veriler kalıcı hale getirmek gerekir. Birden çok pod'ların aynı depolama birimine eş zamanlı erişim gerekiyorsa, Azure dosyaları kullanarak bağlanmak için kullanabileceğiniz [sunucu ileti bloğu (SMB) Protokolü][smb-overview]. Bu makalede aks'deki bir pod ekleme ve el ile bir Azure dosya paylaşımı oluşturma gösterilmektedir.
+Kapsayıcı tabanlı uygulamalar genellikle dış veri hacminde verileri erişmesi ve kalıcı hale getirmeniz gerekir. Aynı depolama birimine eşzamanlı olarak birden çok Pod erişimi gerekiyorsa, [sunucu ileti bloğu (SMB) protokolünü][smb-overview]kullanarak bağlanmak için Azure dosyalarını kullanabilirsiniz. Bu makalede, bir Azure dosya paylaşımının el ile nasıl oluşturulacağı ve AKS 'teki Pod 'a nasıl ekleneceği gösterilmektedir.
 
-Kubernetes birimleri hakkında daha fazla bilgi için bkz. [AKS uygulamalar için Depolama Seçenekleri][concepts-storage].
+Kubernetes birimleri hakkında daha fazla bilgi için bkz. [AKS 'de uygulamalar Için depolama seçenekleri][concepts-storage].
 
 ## <a name="before-you-begin"></a>Başlamadan önce
 
-Bu makalede, var olan bir AKS kümesi olduğunu varsayar. AKS hızlı bir AKS kümesi gerekirse bkz [Azure CLI kullanarak] [ aks-quickstart-cli] veya [Azure portalını kullanarak][aks-quickstart-portal].
+Bu makalede, mevcut bir AKS kümeniz olduğunu varsaymaktadır. AKS kümesine ihtiyacınız varsa bkz. [Azure CLI kullanarak][aks-quickstart-cli] aks hızlı başlangıç veya [Azure Portal kullanımı][aks-quickstart-portal].
 
-Ayrıca Azure CLI Sürüm 2.0.59 gerekir veya daha sonra yüklü ve yapılandırılmış. Çalıştırma `az --version` sürümü bulmak için. Gerekirse yüklemek veya yükseltmek bkz [Azure CLI yükleme][install-azure-cli].
+Ayrıca Azure CLı sürüm 2.0.59 veya üzeri yüklü ve yapılandırılmış olmalıdır. Sürümü `az --version` bulmak için ' i çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse bkz. [Azure CLI 'Yı yüklemek][install-azure-cli].
 
 ## <a name="create-an-azure-file-share"></a>Azure dosya paylaşımı oluşturma
 
-Kubernetes birimi olarak Azure dosyaları'nı kullanmadan önce bir Azure depolama hesabı ve dosya paylaşımı oluşturmanız gerekir. Aşağıdaki komutları adlı bir kaynak grubu oluşturma *myAKSShare*, bir depolama hesabı ve adlı bir dosya paylaşımı *aksshare*:
+Azure dosyalarını bir Kubernetes birimi olarak kullanabilmeniz için önce bir Azure depolama hesabı ve dosya paylaşma oluşturmanız gerekir. Aşağıdaki komutlar *Myaksshare*adlı bir kaynak grubu, bir depolama hesabı ve *Aksshare*adlı bir dosya paylaşımıyla oluşturulur:
 
 ```azurecli-interactive
 # Change these four parameters as needed for your own environment
@@ -57,21 +57,21 @@ echo Storage account name: $AKS_PERS_STORAGE_ACCOUNT_NAME
 echo Storage account key: $STORAGE_KEY
 ```
 
-Depolama hesabı adını ve anahtarını betik çıktısı sonunda gösterilen bir not edin. Kubernetes hacmi aşağıdaki adımlardan birini oluşturduğunuzda bu değerlere gereklidir.
+Komut dosyası çıktısının sonunda gösterilen depolama hesabı adını ve anahtarını bir yere göz önüne alın. Bu değerler, aşağıdaki adımlardan birinde Kubernetes birimini oluştururken gereklidir.
 
-## <a name="create-a-kubernetes-secret"></a>Bir Kubernetes gizli dizisi oluşturma
+## <a name="create-a-kubernetes-secret"></a>Kubernetes gizli dizisi oluşturma
 
-Kubernetes önceki adımda oluşturduğunuz dosya paylaşımına erişmek için kimlik bilgileri gerekir. Bu kimlik bilgileri depolanan bir [Kubernetes gizli][kubernetes-secret], bir Kubernetes pod oluşturduğunuzda başvuruyor.
+Kubernetes, önceki adımda oluşturulan dosya paylaşımının erişimine yönelik kimlik bilgilerine ihtiyaç duyuyor. Bu kimlik bilgileri, bir Kubernetes Pod oluşturduğunuzda başvurulan bir [Kubernetes gizli][kubernetes-secret]dizisi içinde depolanır.
 
-Kullanım `kubectl create secret` gizli dizi oluşturmak için komutu. Aşağıdaki örnek, paylaşılan adlı oluşturur *azure-secret* ve dolduran *azurestorageaccountname* ve *azurestorageaccountkey* önceki adımdan. Mevcut bir Azure depolama hesabını kullanmak için hesap adını ve anahtarını belirtin.
+Gizli dizi oluşturmak için komutunukullanın.`kubectl create secret` Aşağıdaki örnekte paylaşılan bir adlandırılmış *Azure-Secret* oluşturulur ve önceki adımdan *azurestokıgeaccountname* ve *azurestorampaaccountkey* değeri doldurulur. Mevcut bir Azure Depolama hesabını kullanmak için hesap adı ve anahtarı sağlayın.
 
 ```console
 kubectl create secret generic azure-secret --from-literal=azurestorageaccountname=$AKS_PERS_STORAGE_ACCOUNT_NAME --from-literal=azurestorageaccountkey=$STORAGE_KEY
 ```
 
-## <a name="mount-the-file-share-as-a-volume"></a>Bir birim olarak dosya paylaşımını bağlama
+## <a name="mount-the-file-share-as-a-volume"></a>Dosya paylaşımından birim olarak bağlama
 
-Pod içinde Azure dosya paylaşımını bağlayabilmeniz için birim kapsayıcı spec içinde yapılandırın. Adlı yeni bir dosya oluşturun `azure-files-pod.yaml` aşağıdaki içeriğe sahip. Dosya Paylaşımı veya gizli dizi adı adını değiştirdiyseniz, güncelleştirme *shareName* ve *secretName*. İsterseniz, güncelleştirme `mountPath`, burada dosya paylaşma yolu olduğu pod bağlanmıştır. Kapsayıcılar (şu anda önizlemede AKS), Windows Server için belirtin bir *mountPath* gibi Windows yol kuralı kullanılarak *'D:'* .
+Azure dosya paylaşımının Pod 'nize bağlanması için, birimi kapsayıcı belirtiminde yapılandırın. Aşağıdaki içerikle adlı `azure-files-pod.yaml` yeni bir dosya oluşturun. Dosya paylaşımının veya gizli dosyanın adını değiştirdiyseniz, *PaylaşımAdı* ve *secretname*' i güncelleştirin. İsterseniz, dosya paylaşımının Pod `mountPath`'a bağlandığı yol olan öğesini güncelleştirin. Windows Server kapsayıcıları için (Şu anda AKS 'de önizlemededir), Windows yol kuralını kullanarak *":"* gibi bir *bağlamayolu* belirtin.
 
 ```yaml
 apiVersion: v1
@@ -100,13 +100,13 @@ spec:
       readOnly: false
 ```
 
-Kullanım `kubectl` pod oluşturmak için komutu.
+Pod 'u oluşturmak için komutunukullanın.`kubectl`
 
 ```console
 kubectl apply -f azure-files-pod.yaml
 ```
 
-Artık takılı olduğu Azure dosyaları paylaşımına sahip çalışan bir pod sahip */mnt/azure*. Kullanabileceğiniz `kubectl describe pod mypod` paylaşımı başarıyla oluşturulmuş doğrulayın. Aşağıdaki sıkıştırılmış örneğe çıktı kapsayıcıda takılı birim gösterir:
+Şimdi */mnt/Azure*konumunda bağlanmış bir Azure dosyaları paylaşımında çalışan bir pod var. Paylaşımın başarıyla takıldığını `kubectl describe pod mypod` doğrulamak için ' i kullanabilirsiniz. Aşağıdaki sıkıştırılmış örnek çıktı, kapsayıcıya takılan birimi gösterir:
 
 ```
 Containers:
@@ -133,19 +133,9 @@ Volumes:
 [...]
 ```
 
-## <a name="mount-options"></a>Bağlama Seçenekleri
+## <a name="mount-options"></a>Bağlama seçenekleri
 
-Varsayılan *fileMode* ve *dirMode* değerler aşağıdaki tabloda açıklandığı gibi Kubernetes sürümleri arasında farklılık gösterir.
-
-| version | value |
-| ---- | ---- |
-| v1.6.x, v1.7.x | 0777 |
-| v1.8.0-v1.8.5 | 0700 |
-| V1.8.6 veya üzeri | 0755 |
-| v1.9.0 | 0700 |
-| V1.9.1 veya üzeri | 0755 |
-
-Bir küme 1.8.5 sürümü kullanıyorsanız veya daha büyük ve statik olarak kalıcı hacim nesne oluşturma, bağlama seçeneklerini üzerinde belirtilmesine gerek *PersistentVolume* nesne.
+*FileMode* ve *dirmode* Için varsayılan değer, Kubernetes sürüm 1.9.1 ve üzeri için *0755* ' dir. Kuberetes sürüm 1.8.5 veya üzerini içeren bir küme kullanılıyorsa ve kalıcı birim nesnesini statik olarak oluşturduğunuzda, *Persistentvolume* nesnesinde bağlama seçeneklerinin belirtilmesi gerekir. Aşağıdaki örnek *0777*olarak ayarlanır:
 
 ```yaml
 apiVersion: v1
@@ -157,24 +147,95 @@ spec:
     storage: 5Gi
   accessModes:
     - ReadWriteMany
+  storageClassName: azurefile
   azureFile:
     secretName: azure-secret
-    shareName: azurefile
+    shareName: aksshare
     readOnly: false
   mountOptions:
   - dir_mode=0777
   - file_mode=0777
   - uid=1000
   - gid=1000
+  - mfsymlinks
+  - nobrl
 ```
 
-Sürüm 1.8.0 - 1.8.4, kümesi kullanılıyorsa bir güvenlik bağlamı ile belirtilebilir *farklıkullanıcı* değerine *0*. Pod güvenlik bağlamı hakkında daha fazla bilgi için bkz. [bir güvenlik bağlamı yapılandırma][kubernetes-security-context].
+1\.8.0-1.8.4 sürümünün bir kümesini kullanıyorsanız, *RunAsUser* değeri *0*olarak ayarlanmış bir güvenlik bağlamı belirtilebilir. Pod güvenlik bağlamı hakkında daha fazla bilgi için bkz. [güvenlik bağlamını yapılandırma][kubernetes-security-context].
+
+Bağlama seçeneklerinizi güncelleştirmek için, bir *azurefile-Mount-Options-BD. YAML* dosyasını *Persistentvolume*ile oluşturun. Örneğin:
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: azurefile
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile
+  azureFile:
+    secretName: azure-secret
+    shareName: aksshare
+    readOnly: false
+  mountOptions:
+  - dir_mode=0777
+  - file_mode=0777
+  - uid=1000
+  - gid=1000
+  - mfsymlinks
+  - nobrl
+```
+
+*Persistentvolume*kullanan bir *Persistentvolumeclaim* ile *azurefile-Mount-Options-PVC. YAML* dosyası oluşturun. Örneğin:
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: azurefile
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile
+  resources:
+    requests:
+      storage: 5Gi
+```
+
+*Persistentvolume* ve *persistentvolumeclaim*oluşturmak için komutlarıkullanın.`kubectl`
+
+```console
+kubectl apply -f azurefile-mount-options-pv.yaml
+kubectl apply -f azurefile-mount-options-pvc.yaml
+```
+
+*Persistentvolumeclaim* 'Nin oluşturulup *Persistentvolume*'e bağlandığını doğrulayın.
+
+```console
+$ kubectl get pvc azurefile
+
+NAME        STATUS   VOLUME      CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+azurefile   Bound    azurefile   5Gi        RWX            azurefile      5s
+```
+
+Kalıcı olarak, *Persistentvolumeclaim* 'nize başvuracak ve pod 'nizi güncelleştiren kapsayıcı belirtimini güncelleştirin. Örneğin:
+
+```yaml
+...
+  volumes:
+  - name: azure
+    persistentVolumeClaim:
+      claimName: azurefile
+```
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-İlişkili en iyi yöntemler için bkz: [en iyi uygulamalar için depolama ve yedekleme aks'deki][operator-best-practices-storage].
+İlişkili en iyi uygulamalar için bkz. [AKS 'de depolama ve yedeklemeler Için en iyi uygulamalar][operator-best-practices-storage].
 
-Azure dosyaları ile etkileşim AKS kümeleri hakkında daha fazla bilgi için bkz: [Azure dosyaları için Kubernetes eklentisi][kubernetes-files].
+AKS kümeleri hakkında daha fazla bilgi için Azure dosyaları [Için Kubernetes eklentisine][kubernetes-files]bakın.
 
 <!-- LINKS - external -->
 [kubectl-create]: https://kubernetes.io/docs/user-guide/kubectl/v1.8/#create

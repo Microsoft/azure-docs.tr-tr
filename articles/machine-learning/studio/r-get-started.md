@@ -1,7 +1,7 @@
 ---
-title: R kullanmaya başlama
-titleSuffix: Azure Machine Learning Studio
-description: Tahmin çözümünü oluşturmak için Azure Machine Learning Studio ile R dili ile çalışmaya başlamak için R programlama Bu öğreticiyi kullanın.
+title: R ile çalışmaya başlama
+titleSuffix: ML Studio (classic) - Azure
+description: Tahmin çözümü oluşturmak için Azure Machine Learning Studio (klasik) ile R dilini kullanmaya başlamak için bu R programlama öğreticisini kullanın.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: studio
@@ -10,99 +10,99 @@ author: xiaoharper
 ms.author: amlstudiodocs
 ms.custom: previous-author=heatherbshapiro, previous-ms.author=hshapiro
 ms.date: 03/01/2019
-ms.openlocfilehash: 5c4fa2260b00043e016748010528926b1b9d74a3
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: f55b6e743ff82d4192cbdd91ba54c92efef432bc
+ms.sourcegitcommit: 35715a7df8e476286e3fee954818ae1278cef1fc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64726553"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73838736"
 ---
-# <a name="getting-started-with-the-r-programming-language-in-azure-machine-learning-studio"></a>R programlama dili Azure Machine Learning Studio'da kullanmaya başlama
+# <a name="getting-started-with-the-r-programming-language-in-azure-machine-learning-studio-classic"></a>Azure Machine Learning Studio (klasik) R programlama diliyle çalışmaya başlama
 
 <!-- Stephen F Elston, Ph.D. -->
 
 ## <a name="introduction"></a>Giriş
 
-Bu öğreticide Azure Machine Learning Studio'da R programlama dilini kullanarak genişletme başlamanıza yardımcı olur. Oluşturun, test ve Studio içinde R kod yürütmek için bu R programlama öğreticiyi izleyin. Öğreticide çalışırken, Studio'da R dili kullanarak eksiksiz bir tahmin çözümü oluşturur.  
+Bu öğretici, R programlama dilini kullanarak Azure Machine Learning Studio (klasik) genişletmeye başlamanıza yardımcı olur. Studio (klasik) içinde R kodu oluşturmak, test etmek ve yürütmek için bu R programlama öğreticisini izleyin. Öğretici aracılığıyla çalışırken, Studio 'nun klasik sürümünde R dilini kullanarak komple bir tahmin çözümü oluşturacaksınız.  
 
-Microsoft Azure Machine Learning Studio, çok sayıda güçlü makine öğrenimi ve veri işleme modüller içerir. Güçlü R dili en yaygın kullanılan analytics'in açıklanan. Sonsuza dek, analiz ve veri işleme Studio'da r kullanarak uzatılabilir Esneklik ve ayrıntılı analizlerle r'ın bu birleşim Studio'nun dağıtım kolaylığı ve ölçeklenebilirlik sağlar
+Azure Machine Learning Studio klasik sürümü birçok güçlü makine öğrenimi ve veri işleme modülü içerir. Güçlü R dili, analiz Lingua frani CA 'sı olarak açıklanmaktadır. .Net Studio 'nun klasik sürümündeki analiz ve veri işleme, R kullanılarak genişletilebilir. Bu birleşim, R 'nin esneklik ve derin analizine sahip olan, klasik .NET sürümünün ölçeklenebilirliğini ve kolayca dağıtılmasını sağlar.
 
-### <a name="forecasting-and-the-dataset"></a>Tahmini ve veri kümesi
+### <a name="forecasting-and-the-dataset"></a>Tahmin ve veri kümesi
 
-Tahmini bir yaygın olarak çalıştırılan ve oldukça faydalı analitik yöntemidir. Ortak satış macroeconomic değişkenleri tahmin etmek için en iyi stok düzeylerini belirlemek dönemsel öğelerinin tahmin gelen aralığını kullanır. Tahmin, genellikle zaman serisi modelleri ile gerçekleştirilir.
+Tahmin, yaygın olarak kullanılan ve oldukça kullanışlı bir analitik yöntemdir. Ortak, dönemsel öğelerin satışlarından tahmine dayalı, makro ekonomik değişkenleri tahmin etmek için en iyi envanter düzeylerini belirleyen Aralık kullanır. Tahmin genellikle zaman serisi modelleriyle yapılır.
 
-Zaman serisi verileri, değerlerin bir zaman dizini olan verilerdir. Örneğin, her ay ya da her dakika süre dizininin normal, olabilir veya düzensiz. Zaman serisi modelindeki zaman serisi verileri temel alır. R programlama dili, bir esnek framework ve kapsamlı analizi için zaman serisi verilerini içerir.
+Zaman serisi verileri, değerlerinin zaman dizinine sahip olduğu bir veri. Saat dizini normal, örneğin her ay veya her dakika ya da düzensiz olabilir. Zaman serisi modeli, zaman serisi verilerine göre belirlenir. R programlama dili, esnek bir çerçeve ve zaman serisi verileri için kapsamlı analiz içerir.
 
-Bu kılavuzda biz California Süt üretim ile çalışma ve veri fiyatlandırma. Bu veriler, Süt birden çok ürünlerin üretim ve sütlü fat Kıyaslama ticari fiyatı aylık bilgi içerir.
+Bu kılavuzda, California süt üretimi ve fiyatlandırma verileriyle birlikte çalışıyoruz. Bu veriler, çeşitli süt ürünlerinin üretimi ile ilgili aylık bilgileri ve bir kıyaslama emtia, MILK FAT fiyatını içerir.
 
-Bu makalede, R betikleri ile birlikte kullanılan verileri indirilebileceğini [MachineLearningSamples-not defterlerini/studio-samples](https://github.com/Azure-Samples/MachineLearningSamples-Notebooks/tree/master/studio-samples). Veri dosyasındaki `cadairydata.csv` ilk olarak University Wisconsin gelen bilgilerden oluşturulan [ https://dairymarkets.com ](https://dairymarkets.com).
+R betikleriyle birlikte bu makalede kullanılan veriler, [Machinelearningsamples-Notebook/Studio-Samples](https://github.com/Azure-Samples/MachineLearningSamples-Notebooks/tree/master/studio-samples)adresinden indirilebilir. `cadairydata.csv` dosyadaki veriler, başlangıçta [https://dairymarkets.com](https://dairymarkets.com)Üniversitesi 'nin University of Wıconconsin tarafından sunulan bilgilerden sentezlenmiş.
 
 ### <a name="organization"></a>Kuruluş
 
-Oluşturma, test ve Azure Machine Learning Studio ortamında analiz ve veri işleme R kod yürütme öğrenirken size çeşitli adımlarda ilerleyeceğine.  
+Azure Machine Learning Studio ortamının klasik sürümünde analiz ve veri işleme R kodu oluşturma, test etme ve yürütme hakkında bilgi edinmek için çeşitli adımlarda ilerliyoruz.  
 
-* İlk biz Azure Machine Learning Studio ortamında R dilini kullanmanın temellerini inceleyeceksiniz.
-* Ardından verilerin, R kodunu ve Azure Machine Learning Studio ortamında grafikler için g/ç çeşitli yönlerini tartışmak için ilerleme.
-* Biz ardından tahmin Çözümümüzü ilk bölümünü verileri temizlemek ve dönüştürmek için kod oluşturarak oluşturmak.
-* Hazırlanmış verilerimizi ile biz birkaç veri kümemizdeki değişkenleri arasında bağıntılar analizini yapar.
-* Son olarak, Dönemsel zaman serisi tahmin modeli sütlü üretim için oluşturacağız.
+* İlk olarak, Azure Machine Learning Studio ortamının klasik sürümünde R dilinin kullanımıyla ilgili temel bilgileri keşfedeceğiz.
+* Daha sonra, Azure Machine Learning Studio ortamının klasik sürümündeki veriler, R kodu ve grafikler için g/ç 'nin çeşitli yönlerini tartışmak için ilerliyoruz.
+* Daha sonra, veri temizleme ve dönüştürme için kod oluşturarak tahmin çözümümüzün ilk bölümünü oluşturacağız.
+* Verilerimizin hazırlandığı veri kümenizdeki değişkenlerin bazıları arasında bağıntılar analizini gerçekleştiririz.
+* Son olarak, MILI üretimi için mevsimsel bir zaman serisi tahmin modeli oluşturacağız.
 
-## <a id="mlstudio"></a>Machine Learning Studio'da R dili ile etkileşim kurma
+## <a id="mlstudio"></a>Machine Learning Studio 'de R diliyle etkileşim kurma (klasik)
 
-Bu bölümde Machine Learning Studio ortamında olan R programlama dili ile etkileşim kurmanın bazı temel alır. R dili, özelleştirilmiş analytics ve Azure Machine Learning Studio ortamı içinde veri işleme modüller oluşturmak için güçlü bir araç sağlar.
+Bu bölümde, Machine Learning Studio (klasik) ortamındaki R programlama diliyle etkileşim kurma hakkında bazı temel bilgiler yer alır. R dili, Azure Machine Learning Studio ortamının klasik sürümü içinde özelleştirilmiş analiz ve veri işleme modülleri oluşturmak için güçlü bir araç sağlar.
 
-RStudio geliştirmek, test ve küçük ölçekli R kodu hata ayıklama için kullanır. Bu kodu ardından kesme ve yapıştırma içine bir [R betiği yürütme] [ execute-r-script] modülü Machine Learning Studio'da çalışmaya hazır.  
+R kodunu küçük bir ölçekte geliştirmek, test etmek ve hatalarını ayıklamak için RStudio 'yu kullanacaksınız. Bu kod daha sonra kesip Machine Learning Studio klasik sürümünde çalıştırılmaya HAZIRAN bir [Execute R betik][execute-r-script] modülüne yapıştırın.  
 
-### <a name="the-execute-r-script-module"></a>R betiği yürütme Modülü
+### <a name="the-execute-r-script-module"></a>R betiği Yürüt modülü
 
-Machine Learning Studio, R betikleri içinde çalıştırılan [R betiği yürütme] [ execute-r-script] modülü. Örneği [R betiği yürütme] [ execute-r-script] Machine Learning Studio'da bir modül, Şekil 1'de gösterilmiştir.
+Machine Learning Studio klasik sürümü içinde, R betikleri [Execute r betiği][execute-r-script] modülü içinde çalıştırılır. Şekil 1 ' de klasik Machine Learning Studio [R betiği yürütme][execute-r-script] modülüne bir örnek gösterilmiştir.
 
- ![R programlama dili: Machine Learning Studio'da seçili R betiği yürütme Modülü](./media/r-quickstart/fig1.png)
+ ![R programlama dili: Machine Learning Studio (klasik) ' de seçili R Betiği Çalıştır modülü](./media/r-quickstart/fig1.png)
 
-*Şekil 1. Machine Learning Studio ortam seçili R betiği yürütme modülü gösteriliyor.*
+*Şekil 1. R betiğini Yürüt modülünün seçili olduğunu gösteren Machine Learning Studio (klasik) ortam.*
 
-Şekil 1'e başvuran, bazı önemli noktalarından biri ile çalışmak için Machine Learning Studio ortam göz atalım [R betiği yürütme] [ execute-r-script] modülü.
+Şekil 1 ' e başvurarak Machine Learning Studio (klasik) ortamının [yürütme, R betik][execute-r-script] modülüyle çalışmaya yönelik bazı önemli bölümlerine bakalim.
 
-* Denemeyi modülleri, Orta bölmede gösterilir.
-* Sağ bölmenin üst kısmındaki görüntülemek ve R betikleriniz düzenlemek için bir pencere içerir.  
-* Sağ bölmede alt bölümünde bazı özelliklerini gösterir [R betiği yürütme][execute-r-script]. Bu bölme uygun spot seçerek hata ve çıkış günlükleri görüntüleyebilirsiniz.
+* Denemekte olan modüller Orta bölmede gösterilir.
+* Sağ bölmenin üst bölümü R betiklerinizi görüntülemek ve düzenlemek için bir pencere içerir.  
+* Sağ bölmenin alt bölümü, [yürütme R betiğinin][execute-r-script]bazı özelliklerini gösterir. Bu bölmenin uygun noktaları seçerek hata ve çıkış günlüklerini görüntüleyebilirsiniz.
 
-Biz, görüştükten olacak [R betiği yürütme] [ execute-r-script] daha ayrıntılı olarak bu makalenin geri kalanında.
+Tabii ki, bu makalenin geri kalanında [R betiğini Yürüt][execute-r-script] bölümünde daha ayrıntılı bir şekilde ele alınacaktır.
 
-Karmaşık R işlevleri ile çalışırken, ı, düzenleme, test ve RStudio içinde hata ayıklama öneririz. Herhangi bir yazılım geliştirme ile kodunuzu kademeli olarak genişletin ve küçük basit test çalışmalarında test ederken. Ardından kesip işlevlerinizi R betik penceresine yapıştırmanız [R betiği yürütme] [ execute-r-script] modülü. Bu yaklaşım, hem RStudio tümleşik geliştirme ortamı (IDE) hem de Azure Machine Learning Studio'nun gücünden yararlanın olanak tanır.  
+Karmaşık R işlevleriyle çalışırken, RStudio 'da düzenlemenizi, test etmenizi ve hata ayıklamanızı öneririz. Tüm yazılım geliştirmede olduğu gibi, kodunuzu artımlı olarak genişletin ve küçük basit test durumlarında test edin. Sonra işlevlerinizi kes ve [Çalıştır r betik][execute-r-script] modülünün r betiği penceresine yapıştırın. Bu yaklaşım, hem RStudio tümleşik geliştirme ortamını (IDE) hem de klasik Azure Machine Learning Studio 'ın gücünü kullanmanıza olanak sağlar.  
 
-#### <a name="execute-r-code"></a>R kodunu yürütün
+#### <a name="execute-r-code"></a>R kodu yürütme
 
-Herhangi bir R kodu [R betiği yürütme] [ execute-r-script] modülü seçerek denemeyi çalıştırdığınızda yürütülecek **çalıştırma** düğmesi. Yürütme tamamlandığında bir onay işareti görünür [R betiği yürütme] [ execute-r-script] simgesi.
+[Yürüt komut dosyası][execute-r-script] modülündeki herhangi bir r kodu, **Çalıştır** düğmesini seçerek denemeyi çalıştırdığınızda yürütülür. Yürütme tamamlandığında, [R betiği Yürüt][execute-r-script] simgesinde bir onay işareti görünür.
 
-#### <a name="defensive-r-coding-for-azure-machine-learning"></a>Azure Machine Learning için savunma R kodlama
+#### <a name="defensive-r-coding-for-azure-machine-learning"></a>Azure Machine Learning için savunma kodu kodlama
 
-Azure Machine Learning Studio'yu kullanarak, örneğin bir web hizmeti için R kodu geliştiriyorsanız, özel durumları ve beklenmeyen veri girişi ile kodunuzu nasıl ilgilenecektir kesinlikle planlamanız gerekir. Netlik sağlamak için ı çok denetimi veya özel durum işleme gösterilen kod örnekleri çoğu in the way of eklemediniz. Biz devam ederken ancak miyim size işlevleri çeşitli örneklerini kullanarak R'ın özel durum işleme yeteneği sunar.  
+Azure Machine Learning Studio klasik sürümünü kullanarak bir Web hizmeti için R kodu geliştiriyorsanız, kodunuzun beklenmedik bir veri girişi ve özel durumları ile nasıl ele alınacağını kesinlikle planlamanız gerekir. Netme sağlamak için, gösterilen kod örneklerinin çoğunda çok fazla denetim veya özel durum işleme yöntemi dahil değildir. Bununla birlikte, devam ettiğimiz için R 'nin özel durum işleme özelliğini kullanarak işlevlere birkaç örnek vereceğiz.  
 
-R özel durum işleme daha eksiksiz bir işlemden ihtiyacınız varsa, aşağıda listelenen Wickham kitabı geçerli bölümlerini okumak önerim [daha fazla okuma](#appendixb).
+R özel durum işlemesi için daha fazla işlem yapmanız gerekiyorsa, kitabın ilgili bölümlerini [daha fazla okuma](#appendixb)bölümünde listelenen Wickheham ile okumanızı öneririz.
 
-#### <a name="debug-and-test-r-in-machine-learning-studio"></a>Machine Learning Studio'da R test ve hata ayıklama
+#### <a name="debug-and-test-r-in-machine-learning-studio-classic"></a>Machine Learning Studio hata ayıklama ve test R (klasik)
 
-Yinelemek için ı test ve küçük bir ölçekte RStudio içinde R kodunuzdaki hataları ayıklamanıza öneririz. Ancak, burada ihtiyaç duyacağınız içinde R kod sorunların izlemek için durumlar vardır [R betiği yürütme] [ execute-r-script] kendisi. Ayrıca, Machine Learning Studio'da sonuçlarınızı denetleyin iyi bir uygulamadır.
+Yeniden yinelemek için, R kodunuzu RStudio 'daki küçük bir ölçekte test etmenizi ve hata ayıklamanızı öneririz. Bununla birlikte, r [betiği yürütme][execute-r-script] bölümünde r kod sorunlarını izlemeniz gereken durumlar vardır. Ayrıca, Machine Learning Studio klasik sürümünde sonuçlarınızı denetlemek iyi bir uygulamadır.
 
-R kodunuzun ve Azure Machine Learning Studio platformunda yürütme çıktısını içeren öncelikli olarak bulunur. Bazı ek bilgiler error.log görülür.  
+R kodunuzun yürütmeden ve Azure Machine Learning Studio platformunun klasik sürümünde oluşan çıkış, birincil olarak output. log ' da bulunur. Bazı ek bilgiler hata. log dosyasında görünür.  
 
-R kodunuzu çalıştırırken, Machine Learning Studio'da bir hata meydana gelirse, ilk kursunuzun eyleminin error.log aramak için olmalıdır. Bu dosya, hatayı düzeltmek ve anlamanıza yardımcı olması için kullanışlı hata iletileri içerebilir. Error.log görüntülemek için seçin **hata günlüğü görüntüle** üzerinde **Özellikler bölmesinde** için [R betiği yürütme] [ execute-r-script] hata içeren.
+R kodunuzu çalıştırırken Machine Learning Studio klasik sürümünde bir hata oluşursa, ilk işlem kurağınız hata. log dosyasına bakmak için olmalıdır. Bu dosya, hatayı anlamanıza ve düzeltmenize yardımcı olacak yararlı hata iletileri içerebilir. Hata. log dosyasını görüntülemek için, hata içeren bir [R betiği yürütme][execute-r-script] için **Özellikler bölmesinde** **hata günlüğünü görüntüle** ' yi seçin.
 
-Örneğin, aşağıdaki R kodu ile tanımlanmamış bir değişken y, buna çalıştırdım bir [R betiği yürütme] [ execute-r-script] Modülü:
+Örneğin, bir [yürütme r betik][execute-r-script] modülünde bir tanımsız değişken Ile aşağıdaki r kodunu çalıştırdım:
 
 ```R
 x <- 1.0
 z <- x + y
 ```
 
-Bu kod yürütmek bir hata durumuna neden başarısız oluyor. Seçme **hata günlüğü görüntüle** üzerinde **Özellikler bölmesinde** Şekil 2'de gösterilen görüntüler.
+Bu kod yürütülemezse bir hata koşuluna neden olur. **Özellikler bölmesinde** **hata günlüğünü görüntüle** ' nin seçilmesi Şekil 2 ' de gösterilen ekranı oluşturur.
 
-  ![Hata iletisi açılır penceresi](./media/r-quickstart/fig2.png)
+  ![Hata iletisi açılan kutusu](./media/r-quickstart/fig2.png)
 
-*Şekil 2. Hata iletisi açılır.*
+*Şekil 2. Hata iletisi açılır penceresi.*
 
-R hata iletisini görmek için içeren aramak ihtiyacımız gibi görünüyor. Seçin [R betiği yürütme] [ execute-r-script] seçip **içeren görüntülemek** üzerinde öğesi **Özellikler bölmesinde** sağ. Yeni bir tarayıcı penceresi açılır ve aşağıdaki görüyorum.
+R hata iletisini görmek için output. log dosyasına bakmamız gerekiyor gibi görünüyor. [R betiğini Yürüt][execute-r-script] ' ü seçin ve ardından sağdaki **Özellikler bölmesinde** **çıktıyı görüntüle. log** öğesini seçin. Yeni bir tarayıcı penceresi açılır ve aşağıdakiler görüntülenir.
 
     [Critical]     Error: Error 0063: The following error occurred during evaluation of R script:
     ---------- Start of error message from R ----------
@@ -112,111 +112,111 @@ R hata iletisini görmek için içeren aramak ihtiyacımız gibi görünüyor. S
     object 'y' not found
     ----------- End of error message from R -----------
 
-Bu hata iletisi artık sürprizle karşılaşmazsınız içerir ve sorun açıkça tanımlar.
+Bu hata iletisi, hiçbir sürme içermez ve sorunu açık bir şekilde tanımlar.
 
-R ile herhangi bir nesnenin değerini incelemek için bu değerleri içeren dosyayı yazdırabilir. Nesne değerlerini İnceleme için temel olarak R etkileşimli bir oturum ile aynı kurallardır. Örneğin, bir satıra bir değişken adı yazarsanız, nesnenin değerini içeren dosyaya yazdırılır.  
+R 'deki herhangi bir nesnenin değerini incelemek için, bu değerleri output. log dosyasına yazdırabilirsiniz. Nesne değerlerini inceleme kuralları, aslında etkileşimli bir R oturumundaki ile aynıdır. Örneğin, bir satıra bir değişken adı yazarsanız, nesnenin değeri output. log dosyasına yazdırılır.  
 
-#### <a name="packages-in-machine-learning-studio"></a>Machine Learning Studio'da paketleri
+#### <a name="packages-in-machine-learning-studio-classic"></a>Machine Learning Studio paketler (klasik)
 
-Studio ile önceden yüklenmiş 350'in üzerinde R dil paketleri gelir. Aşağıdaki kodda kullanabileceğiniz [R betiği yürütme] [ execute-r-script] önceden yüklenmiş paketler listesini almak için modülü.
+Studio 350 üzeri önceden yüklenmiş R dil paketi ile gelir. Önceden yüklenmiş paketlerin bir listesini almak için [R betiği Yürüt][execute-r-script] modülünde aşağıdaki kodu kullanabilirsiniz.
 
 ```R
 data.set <- data.frame(installed.packages())
 maml.mapOutputPort("data.set")
 ```
 
-Şu anda bu kodu son satırının anlamıyorsanız, okumaya devam edin. Bu makalenin geri kalanında kapsamlı olarak R Studio ortamı ele alınacaktır.
+Bu kodun son satırını şu anda anlamıyorsanız, okumaya devam edin. Bu makalenin geri kalanında, Studio (klasik) ortamında R kullanarak kapsamlı bir tartışacağız.
 
-### <a name="introduction-to-rstudio"></a>RStudio giriş
+### <a name="introduction-to-rstudio"></a>RStudio 'ya giriş
 
-RStudio r için yaygın olarak kullanılan bir ıde'dir RStudio düzenleme, test ve bu kılavuzda kullanılan R kodunu bazı hata ayıklama için kullanır. R kodu, test edilmiş ve hazır olduğunda, yalnızca Kes ve bir Machine Learning Studio'ya RStudio düzenleyiciye yapıştırın [R betiği yürütme] [ execute-r-script] modülü.  
+RStudio, R için yaygın olarak kullanılan bir IDE 'dir. RStudio 'Yu, bu kılavuzda kullanılan R kodundan bazılarını düzenlemekte, test etmeye ve hata ayıklamaya yönelik olarak kullanacaksınız. R kodu test edildikten ve hazırlanıyor, yalnızca RStudio düzenleyicisinden bir Machine Learning Studio (klasik) [yürütme R betik][execute-r-script] modülüne kesip yapıştırabilirsiniz.  
 
-Masaüstü makinenizde yüklü olan R programlama dili yoksa, artık bunu ben önerilir. Açık kaynak R diliyle ücretsiz olarak karşıdan en kapsamlı R arşiv ağ (CRAN) konumunda kullanılabilir [ https://www.r-project.org/ ](https://www.r-project.org/). Windows, Macos ve Linux/UNIX için kullanılabilen yüklemeleri vardır. Yakındaki bir yansıtma'ı seçip indirme yönergeleri izleyin. Ayrıca, çok sayıda kullanışlı analiz ve veri işleme paketleri CRAN içerir.
+Masaüstü makinenizde R programlama dili yüklü değilse, bunu şimdi yapmanızı öneririz. Açık kaynaklı R dilinin ücretsiz indirmeleri [https://www.r-project.org/](https://www.r-project.org/)adresindeki kapsamlı r arşiv ağı 'NDA (Cran) kullanılabilir. Windows, Mac OS ve Linux/UNIX için indirilebilir dosyalar var. Yakındaki bir yansıtma seçin ve indirme yönergelerini izleyin. Ayrıca, CRAN, çok sayıda kullanışlı analiz ve veri işleme paketi içerir.
 
-RStudio için yeni başladıysanız, indirme ve Masaüstü sürümünü yüklemeniz gerekir. RStudio yüklemeler için Windows, Mac OS ve Linux/UNIX bulabilirsiniz http://www.rstudio.com/products/RStudio/. Masaüstü makinenizde Rstudio'yu yükleme için sağlanan yönergeleri izleyin.  
+RStudio 'yu yeni kullanıyorsanız Masaüstü sürümünü indirip yüklemelisiniz. Windows, Mac OS ve Linux/UNIX için RStudio İndirmeleri http://www.rstudio.com/products/RStudio/adresinde bulabilirsiniz. Masaüstü makinenize RStudio 'Yu yüklemek için belirtilen yönergeleri izleyin.  
 
-RStudio öğretici bir giriş kullanılabilir [RStudio IDE kullanarak](https://support.rstudio.com/hc/sections/200107586-Using-RStudio).
+Rstudio [IDE 'Yi kullanarak](https://support.rstudio.com/hc/sections/200107586-Using-RStudio)rstudio 'ya bir öğreticiye giriş sunulmaktadır.
 
-Ben de RStudio kullanma ile ilgili bazı ek bilgiler sunar [RStudio belgeler için kılavuz](#appendixa) aşağıda.  
+RStudio ile ilgili ek bilgiler [için aşağıdaki rstudio belgelerine bakın](#appendixa) .  
 
-## <a id="scriptmodule"></a>R betiği yürütme modülün içine ve dışına veri alma
+## <a id="scriptmodule"></a>R betiği yürütme modülüne ve dışına veri alma
 
-Bu bölümde Küme içi ve dışı veri alma nasıl ele alınacaktır [R betiği yürütme] [ execute-r-script] modülü. Şimdi küme içi ve dışı okuma çeşitli veri türlerini işlemek nasıl gözden [R betiği yürütme] [ execute-r-script] modülü.
+Bu bölümde, [R betik modülünü yürütme][execute-r-script] ve dışarı aktarma hakkında bilgi edineceğiz. [R betik modülünü yürütme][execute-r-script] ve dışına okuma çeşitli veri türlerini nasıl işleyeceğinizi inceleyeceğiz.
 
-Bu bölüm için tam kodu [MachineLearningSamples-not defterlerini/studio-samples](https://github.com/Azure-Samples/MachineLearningSamples-Notebooks/tree/master/studio-samples).
+Bu bölümün tam kodu, [Machinelearningsamples-Notebook/Studio-Samples](https://github.com/Azure-Samples/MachineLearningSamples-Notebooks/tree/master/studio-samples)içinde bulunur.
 
-### <a name="load-and-check-data-in-machine-learning-studio"></a>Yük ve Machine Learning Studio'da data denetimi
+### <a name="load-and-check-data-in-machine-learning-studio-classic"></a>Machine Learning Studio verileri yükleme ve denetleme (klasik)
 
-#### <a id="loading"></a>Dataset yükleme
+#### <a id="loading"></a>Veri kümesini yükleme
 
-Yükleyerek başlayacağız **csdairydata.csv** Azure Machine Learning Studio'ya dosya.
+**Csdairydata. csv** dosyasını Azure Machine Learning Studio klasik sürümüne yükleyerek başlayacağız.
 
-1. Azure Machine Learning Studio ortamınızı başlatın.
-1. Seçin **+ yeni** seçin ve ekranın sol alt köşesindeki **veri kümesi**.
-1. Seçin **yerel dosyadan**, ardından **Gözat** dosyayı seçin.
-1. Seçtiğinizden emin olun **genel CSV dosyası (.csv) olan üstbilgiyle** veri kümesi türü.
+1. Azure Machine Learning Studio ortamı klasik sürümünüzü başlatın.
+1. Ekranınızın sol alt kısmındaki **+ Yeni** ' yi seçin ve **veri kümesi**' ni seçin.
+1. **Yerel dosya ' dan**seçim yapın ve ardından dosyayı seçmek için ' a **gidin** .
+1. Veri kümesinin türü olarak **üst bilgi (. csv) Ile genel CSV dosyası** seçtiğinizden emin olun.
 1. Onay işaretini seçin.
-1. Veri kümesi karşıya yüklendikten sonra seçerek yeni veri kümesi görürsünüz **veri kümeleri** sekmesi.  
+1. Veri kümesi karşıya yüklendikten sonra, veri **kümeleri** sekmesini seçerek yeni veri kümesini görmeniz gerekir.  
 
 #### <a name="create-an-experiment"></a>Deneme oluşturma
 
-Machine Learning Studio'da sahip olduğumuz bazı veriler, analiz yapmak için bir deneme oluşturmak gerekir.  
+Machine Learning Studio klasik sürümünde bazı verileriniz olduğuna göre, analiz yapmak için bir deneme oluşturmanız gerekir.  
 
-1. Seçin **+ yeni** en düşük seçeneğini ve **deneme**, ardından **boş deneme**.
-1. Seçme ve değiştirme, denemenizi adlandırabilirsiniz **deneme oluşturuldu...**  sayfanın üst kısmındaki başlık. Örneğin, kendisine değiştirme **CA günlük analizi**.
-1. Deneme sayfanın sol tarafında genişletmek **kaydedilmiş veri kümeleri**, ardından **My veri kümeleri**. Görmelisiniz **cadairydata.csv** daha önce yüklediğiniz.
-1. Sürükle ve bırak **csdairydata.csv dataset** denemeyi sürükleyin.
-1. İçinde **arama öğeleri deneme** kutusunun sol bölmesinde, türü en üstündeki [R betiği yürütme][execute-r-script]. Arama listede modülü görürsünüz.
-1. Sürükle ve bırak [R betiği yürütme] [ execute-r-script] modülü, modül paleti.  
-1. Çıkışını **csdairydata.csv dataset** en soldaki giriş (**Dataset1**), [R betiği yürütme][execute-r-script].
-1. **'Kaydet' seçilecek unutmayın!**  
+1. Sol alt köşedeki **+ Yeni** ' yi seçin ve **denemeler**' i ve **boş deneme**' yı seçin.
+1. Sayfanın üst kısmındaki... başlığı altında **oluşturulan** denemeyi seçerek ve değiştirerek denemenizin adını verebilirsiniz. Örneğin, bunu **CA süt analizine**değiştirme.
+1. Deneme sayfasının sol tarafında, **kaydedilen veri kümeleri**' ni ve ardından **veri kümelerim**' i genişletin. Daha önce karşıya yüklediğiniz **cadairydata. csv** ' i görmeniz gerekir.
+1. **Csdairydata. csv veri kümesini** , denemenize sürükleyin ve bırakın.
+1. Sol bölmenin üst kısmındaki **deneme öğelerini ara** kutusunda, [R betiği Yürüt][execute-r-script]yazın. Modülün arama listesinde göründüğünü görürsünüz.
+1. [Execute R betiği][execute-r-script] modülünü palete sürükleyin ve bırakın.  
+1. **Csdairydata. csv veri kümesinin** çıkışını, [Execute R betiğinin][execute-r-script]en soldaki giriş (**dataSet1**) öğesine bağlayın.
+1. **' Kaydet ' seçeneğini belirtmeyi unutmayın!**  
 
-Bu noktada denemenizi Şekil 3 gibi görünmelidir.
+Bu noktada, denemenizin şekil 3 gibi görünmesi gerekir.
 
-![CA günlük analizi veri kümesini ve R betiği yürütme modülü ile denemeler yapın](./media/r-quickstart/fig3.png)
+![Veri kümesi ile CA süt çözümleme denemesi ve R betik modülünü yürütme](./media/r-quickstart/fig3.png)
 
-*Şekil 3. CA günlük analizi veri kümesini ve R betiği yürütme modülü ile denemeler yapın.*
+*Şekil 3. Veri kümesi ile CA süt Analizi denemesi yapın ve R betik modülünü yürütün.*
 
-#### <a name="check-on-the-data"></a>Veriyi denetle
+#### <a name="check-on-the-data"></a>Verileri denetleyin
 
-Diyelim ki bizim denemenin yüklendik veri göz vardır. Deneme çıkışı seçin **cadairydata.csv dataset** seçip **görselleştirme**. Şekil 4 gibi bir şey görmeniz gerekir.  
+Deneyimize yüklediğimiz verilere göz atalım. Denemenin içinde **cadairydata. csv veri kümesinin** çıkışını seçin ve **Görselleştir**' i seçin. Şekil 4 gibi bir şey görmeniz gerekir.  
 
-![Veri kümesinin cadairydata.csv özeti](./media/r-quickstart/fig4.png)
+![Cadairydata. csv veri kümesinin Özeti](./media/r-quickstart/fig4.png)
 
-*Şekil 4. Cadairydata.csv dataset özeti.*
+*Şekil 4. Cadairydata. csv veri kümesinin Özeti.*
 
-Bu görünümde birçok yararlı bilgi görüyoruz. Bu veri kümesinin ilk birkaç satır görebiliriz. Bir sütun seçtiğinizde, istatistikleri bölüm sütunu hakkında daha fazla bilgi gösterir. Örneğin, özellik türü satır bize atanmış bir sütun için Azure Machine Learning Studio'da hangi veri türlerini gösterir. Herhangi bir önemli iş yapmak başlamadan önce bu gibi hızlı bir bakış sahip bir iyi sağlamlık olup olmadığını denetler.
+Bu görünümde çok sayıda faydalı bilgi görüyoruz. Bu veri kümesinin ilk birkaç satırını görebiliriz. Bir sütun seçmemiz halinde, Istatistik bölümünde sütun hakkında daha fazla bilgi gösterilir. Örneğin, özellik türü satırı, hangi veri türlerinin Azure Machine Learning Studio hangi klasik sürümünün sütuna atandığını gösterir. Önemli bir iş yapmadan önce bu, iyi bir göz atalım.
 
 ### <a name="first-r-script"></a>İlk R betiği
 
-Azure Machine Learning Studio'da deneme amaçlı ilk basit bir R betiği oluşturalım. Ben oluşturduktan ve aşağıdaki betiği RStudio içinde test edilmiş.  
+Azure Machine Learning Studio klasik sürümünde denemek için basit bir ilk R betiği oluşturalım. RStudio 'da aşağıdaki betiği oluşturup test ediyorum.  
 
 ```R
 ## Only one of the following two lines should be used
-## If running in Machine Learning Studio, use the first line with maml.mapInputPort()
+## If running in Machine Learning Studio (classic), use the first line with maml.mapInputPort()
 ## If in RStudio, use the second line with read.csv()
 cadairydata <- maml.mapInputPort(1)
 # cadairydata  <- read.csv("cadairydata.csv", header = TRUE, stringsAsFactors = FALSE)
 str(cadairydata)
 pairs(~ Cotagecheese.Prod + Icecream.Prod + Milk.Prod + N.CA.Fat.Price, data = cadairydata)
 ## The following line should be executed only when running in
-## Azure Machine Learning Studio
+## Azure Machine Learning Studio (classic)
 maml.mapOutputPort('cadairydata')
 ```
 
-Şimdi bu betiği Azure Machine Learning Studio'ya aktarma gerekecek. Yalnızca kesin ve yapıştırın. Ancak, bu durumda, miyim my R betiği bir zip dosyasına aktarın.
+Şimdi bu betiği Azure Machine Learning Studio klasik sürümüne aktarmalıyım. Yalnızca kesip yapıştırabilir. Ancak, bu durumda R betiğimi bir ZIP dosyası aracılığıyla aktaracağım.
 
 ### <a name="data-input-to-the-execute-r-script-module"></a>R betiği yürütme modülüne veri girişi
 
-Şimdi girişleri göz sahip [R betiği yürütme] [ execute-r-script] modülü. Bu örnekte biz California Süt verileri okuyacak [R betiği yürütme] [ execute-r-script] modülü.  
+Böylece, [R betiği yürütme][execute-r-script] modülüne yönelik girdilere göz atalım. Bu örnekte, California süt verilerini [Execute R betik][execute-r-script] modülüne okuyacağız.  
 
-İçin üç olası girişler vardır [R betiği yürütme] [ execute-r-script] modülü. Bağlı olarak uygulamanızı herhangi bir ya da bu girişlerin tümünü kullanabilir. Ayrıca, hiçbir giriş hiç aldığı bir R betiği kullanmak mükemmel bir şekilde uygun olur.  
+[R betiği Yürüt][execute-r-script] modülünün üç olası girişi vardır. Uygulamanıza bağlı olarak, bu girişlerin herhangi birini veya tümünü kullanabilirsiniz. Ayrıca, hiç giriş içermeyen bir R betiği kullanmak da mükemmel bir şekilde mantıklı.  
 
-Soldan sağa doğru giden, bu girişlerin her göz atalım. Girişlerin her biri adlarını giriş imleci yerleştirerek ve araç ipucu okuyarak görebilirsiniz.  
+Soldan sağa giderek bu girişlerin her birine bakalım. İmlecinizi girişin üzerine yerleştirerek ve araç ipucunu okuyarak girişlerin her birinin adını görebilirsiniz.  
 
 #### <a name="script-bundle"></a>Betik paketi
 
-Betik paketi girişi sağlayan bir zip dosyası olarak içeriği geçirmeniz [R betiği yürütme] [ execute-r-script] modülü. R kodunuza ZIP dosyasının içeriğini okumak için aşağıdaki komutlardan birini kullanabilirsiniz.
+Betik paketi girişi, bir ZIP dosyasının içeriğini [R betik][execute-r-script] modülüne geçirmenize olanak sağlar. ZIP dosyasının içeriğini R kodunuzda okumak için aşağıdaki komutlardan birini kullanabilirsiniz.
 
 ```R
 source("src/yourfile.R") # Reads a zipped R script
@@ -224,52 +224,52 @@ load("src/yourData.rdata") # Reads a zipped R data file
 ```
 
 > [!NOTE]
-> Azure Machine Learning Studio zip dosyaları src içine oldukları gibi davranır / dizin, bu nedenle, dosya adı bu dizin adı ön eki gerekir. Örneğin, zip dosyaları içeren `yourfile.R` ve `yourData.rdata` zip dosyasının kökünde, bu dosyaların başvuracağını `src/yourfile.R` ve `src/yourData.rdata` kullanırken `source` ve `load`.
+> Azure Machine Learning Studio klasik sürümü, zip içindeki dosyaları src/dizinde gibi davranır, bu nedenle dosya adlarınızı bu dizin adı ile önekle uygulamanız gerekir. Örneğin, ZIP dosyaları içeriyorsa `yourfile.R` ve ZIP köküne `yourData.rdata`, `source` ve `load`kullanırken bunları `src/yourfile.R` ve `src/yourData.rdata` olarak ele almanız gerekir.
 
-Yükleme veri kümelerinde zaten ele aldığımız [için veri kümesi](#loading). Oluşturulan ve önceki bölümde gösterilenle R betiği test sonra aşağıdakileri yapın:
+[Veri kümesini](#loading)yüklerken veri kümelerini yükleme konusunda zaten tartışıldık. Önceki bölümde gösterilen R betiğini oluşturup sınadıktan sonra şunları yapın:
 
-1. R betiği içine Kaydet bir. R dosyası. Betik dosyamı "simpleplot. çağrı "R". İçeriği aşağıda verilmiştir.
+1. R betiğini bir dosyasına kaydedin. R dosyası. Komut dosyası dosyamı "simpleçiz" olarak çağırdım. R ". İçeriği burada bulabilirsiniz.
 
    ```R
    ## Only one of the following two lines should be used
-   ## If running in Machine Learning Studio, use the first line with maml.mapInputPort()
+   ## If running in Machine Learning Studio (classic), use the first line with maml.mapInputPort()
    ## If in RStudio, use the second line with read.csv()
    cadairydata <- maml.mapInputPort(1)
    # cadairydata  <- read.csv("cadairydata.csv", header = TRUE, stringsAsFactors = FALSE)
    str(cadairydata)
    pairs(~ Cotagecheese.Prod + Icecream.Prod + Milk.Prod + N.CA.Fat.Price, data = cadairydata)
    ## The following line should be executed only when running in
-   ## Azure Machine Learning Studio
+   ## Azure Machine Learning Studio (classic)
    maml.mapOutputPort('cadairydata')
    ```
 
-1. Bir zip dosyası oluşturun ve betiğinizi Bu zip dosyasına kopyalayın. Windows üzerinde dosyaya sağ tıklayın ve seçin **göndermek**, ardından **sıkıştırılmış klasörü**. Bu "simpleplot. içeren yeni bir ZIP dosyası oluşturur R"dosyası.
+1. Bir ZIP dosyası oluşturun ve komut dosyanızı bu zip dosyasına kopyalayın. Windows 'da dosyaya sağ tıklayıp **Gönder**' i ve sonra **Sıkıştırılmış klasör**' i seçin. Bu, "simpleçiz" öğesini içeren yeni bir ZIP dosyası oluşturur. R "dosyası.
 
-1. Dosyanıza ekleyin **veri kümeleri** Machine Learning Studio'da türü olarak belirterek **zip**. Şimdi, veri kümeleri zip dosyası görmeniz gerekir.
+1. Dosyanızı **zip**olarak belirterek Machine Learning Studio klasik sürümündeki **veri kümelerine** ekleyin. Artık veri kümelerinizde ZIP dosyasını görmeniz gerekir.
 
-1. Zip dosyasından sürükleyip **veri kümeleri** üzerine **ML Studio tuval**.
+1. ZIP dosyasını **veri** kümelerinden **ml Studio (klasik) tuvaline**sürükleyin ve bırakın.
 
-1. Çıkışını **zip veri** simgesine **betik paketi** , giriş [R betiği yürütme] [ execute-r-script] modülü.
+1. **ZIP verileri** simgesinin çıkışını, [R betiği Yürüt][execute-r-script] modülünün **betik paketi** girişine bağlayın.
 
-1. Tür `source()` işlevi için kod penceresine zip dosyası adınızla [R betiği yürütme] [ execute-r-script] modülü. My durumda yazmış olduğum `source("src/simpleplot.R")`.  
+1. [R betik modülünün yürütülmesi][execute-r-script] için kod penceresine ZIP dosya adınızla birlikte `source()` işlevini yazın. Bu durumda `source("src/simpleplot.R")`yazdım.  
 
-1. Seçtiğinizden emin olun **Kaydet**.
+1. **Kaydet**' i seçtiğinizden emin olun.
 
-Bu adımlar tamamlandıktan sonra [R betiği yürütme] [ execute-r-script] modülü yürütülecek R betiğini zip dosyasında deneme çalıştırıldığında. Bu noktada denemenizi Şekil 5 gibi görünmelidir.
+Bu adımlar tamamlandıktan sonra, deneme çalıştırıldığında [r betiği Yürüt][execute-r-script] , ZIP dosyasındaki r betiğini yürütür. Bu noktada, denemenizin Şekil 5 ' i gibi görünmesi gerekir.
 
-![Sıkıştırılmış bir R betiği kullanarak denemeler yapın](./media/r-quickstart/fig6.png)
+![Daraltılmış R betiği kullanarak deneme](./media/r-quickstart/fig6.png)
 
-*Şekil 5. Sıkıştırılmış bir R betiği kullanarak denemeler yapın.*
+*Şekil 5. Daraltılmış R betiği kullanmayı deneyin.*
 
 #### <a name="dataset1"></a>DataSet1
 
-Dikdörtgen bir veri tablosu Dataset1 giriş kullanarak R kodunuzdaki geçirebilirsiniz. Basit betiğimizi içinde `maml.mapInputPort(1)` işlevi, 1 bağlantı noktasından verileri okur. Bu veriler daha sonra kodunuzda bir dataframe değişken adı atanır. Basit betiğimizi kodun ilk satırını atamayı gerçekleştirir.
+DataSet1 girişini kullanarak, dikdörtgen bir veri tablosunu R kodunuza geçirebilirsiniz. Basit betiğimizde `maml.mapInputPort(1)` işlevi, bağlantı noktası 1 ' den verileri okur. Bu veriler daha sonra kodunuzda bir dataframe değişken adına atanır. Basit betiğimizde ilk kod satırı atamayı gerçekleştirir.
 
 ```R
 cadairydata <- maml.mapInputPort(1)
 ```
 
-Denemenizi seçerek yürütme **çalıştırma** düğmesi. Yürütme sona erdiğinde seçin [R betiği yürütme] [ execute-r-script] modülü ve ardından **çıkış Günlüğü Görüntüle** özellikleri bölmesinde. Yeni bir sayfa içeren dosyanın içeriğini gösteren tarayıcınızda görüntülenmesi gerekir. Aşağı kaydırırsanız aşağıdaki gibi görmeniz gerekir.
+**Çalıştır** düğmesini seçerek denemenizi yürütün. Yürütme tamamlandığında, [R betiği Yürüt][execute-r-script] modülünü seçin ve ardından Özellikler bölmesinde **Çıkış günlüğünü görüntüle** ' yi seçin. Tarayıcınızda output. log dosyasının içeriğini gösteren yeni bir sayfa görüntülenmelidir. Aşağı kaydırdığınızda aşağıdakine benzer bir şey görmeniz gerekir.
 
     [ModuleOutput] InputDataStructure
     [ModuleOutput]
@@ -280,7 +280,7 @@ Denemenizi seçerek yürütme **çalıştırma** düğmesi. Yürütme sona erdi�
     [ModuleOutput]  "ColumnTypes":System.Int32,3,System.Double,5,System.String,1
     [ModuleOutput] }
 
-Sayfa aşağı küçüldükleri aşağıdaki gibi görünür sütunlar hakkında daha ayrıntılı bilgi olur.
+Sayfanın altında, sütunlar hakkında daha ayrıntılı bilgiler verilmiştir ve bu, aşağıdakine benzer şekilde görünür.
 
     [ModuleOutput] [1] "Loading variable port1..."
     [ModuleOutput]
@@ -304,81 +304,81 @@ Sayfa aşağı küçüldükleri aşağıdaki gibi görünür sütunlar hakkında
     [ModuleOutput]
     [ModuleOutput]  $ N.CA.Fat.Price   : num  0.98 0.892 0.892 0.897 0.897 ...
 
-Bu sonuçlar çoğunlukla 228 gözlemleri ve 9 sütunlarda veri çerçevesi ile beklendiği gibi olur. Sütun adları, R veri türü ve her bir sütunun bir örnek görebiliriz.
+Bu sonuçlar çoğunlukla, veri çerçevesinde 228 gözlemle ve 9 sütundan oluşan beklendiğinde. Sütun adlarını, R veri türünü ve her bir sütunun örneğini görebiliriz.
 
 > [!NOTE]
-> Bu aynı çıktılar R cihazında çıktısından rahatça kullanılabilir [R betiği yürütme] [ execute-r-script] modülü. Çıktıları ele alınacaktır [R betiği yürütme] [ execute-r-script] sonraki bölümde modülü.  
+> Bu aynı yazdırılmış çıktı, r [betiği yürütme][execute-r-script] modülünün r cihaz çıktısından kolayca kullanılabilir. Sonraki bölümde [R betiği yürütme][execute-r-script] modülünün çıkışları tartışılacağız.  
 
 #### <a name="dataset2"></a>Dataset2
 
-Aynı olan Dataset1 Dataset2 giriş, davranıştır. Bu giriş kullanarak R kodunuzdaki bir ikinci dikdörtgen bir veri tablosu geçirebilirsiniz. İşlev `maml.mapInputPort(2)`, 2 bağımsız değişkeniyle, bu veri iletmek için kullanılır.  
+DataSet2 girişinin davranışı DataSet1 ile aynıdır. Bu girişi kullanarak, ikinci bir dikdörtgen veri tablosunu R kodunuza geçirebilirsiniz. Bağımsız değişkeni 2 olan `maml.mapInputPort(2)`işlevi, bu verileri geçirmek için kullanılır.  
 
-### <a name="execute-r-script-outputs"></a>R betiği çıkışları yürütün
+### <a name="execute-r-script-outputs"></a>R betik çıkışlarını yürütme
 
-#### <a name="output-a-dataframe"></a>Bir dataframe çıktı
+#### <a name="output-a-dataframe"></a>Veri çerçevesinin çıktısını al
 
-Kullanarak sonucu Dataset1 bağlantı noktası üzerinden dikdörtgen tablo olarak R dataframe içeriğini çıkarabilirsiniz `maml.mapOutputPort()` işlevi. Basit R betiğimizi bu aşağıdaki satırı tarafından gerçekleştirilir.
+`maml.mapOutputPort()` işlevini kullanarak bir R veri çerçevesinin içeriğini, result DataSet1 bağlantı noktası aracılığıyla dikdörtgen tablo olarak çıktısını alabilirsiniz. Basit R betiğimizde bu, aşağıdaki satır tarafından gerçekleştirilir.
 
 ```
 maml.mapOutputPort('cadairydata')
 ```
 
-Denemeyi çalıştırdıktan sonra sonuç Dataset1 çıkış bağlantı noktasını seçin ve ardından **Görselleştir**. Şekil 6 gibi'bir şey görmeniz gerekir.
+Denemeyi çalıştırdıktan sonra, result DataSet1 çıkış bağlantı noktasını seçin ve ardından **Görselleştir**' i seçin. Şekil 6 ' ya benzer bir şey görmeniz gerekir.
 
-![Çıkış California Süt veri Görselleştirme](./media/r-quickstart/fig7.png)
+![California süt verilerinin çıktısının görselleştirmesi](./media/r-quickstart/fig7.png)
 
-*Şekil 6. Çıkış California Süt veri görselleştirme.*
+*Şekil 6. California süt verilerinin çıktısının görselleştirmesi.*
 
-Bu çıkış, tam olarak beklenen şekilde giriş, aynı arar.  
+Bu çıktı, tam olarak beklendiğimiz gibi girişle aynı şekilde görünür.  
 
-### <a name="r-device-output"></a>R cihaz çıktısı
+### <a name="r-device-output"></a>R cihaz çıkışı
 
-Cihaz çıktısı [R betiği yürütme] [ execute-r-script] modülü iletileri ve grafik çıkış içerir. Hem standart çıktı ve standart hata iletilerini gelen R R cihazında çıkış bağlantı noktasına gönderilir.  
+[Yürütme R betiği][execute-r-script] modülünün cihaz çıktısı iletileri ve grafik çıktısını içerir. R 'deki standart çıkış ve standart hata iletileri R cihaz çıkış bağlantı noktasına gönderilir.  
 
-R cihazında çıkışı görüntülemek için bağlantı noktasını seçin ve ardından **Görselleştir**. Standart çıktı ve standart hata Şekil 7'de R betikten görüyoruz.
+R cihaz çıkışını görüntülemek için, bağlantı noktasını seçin ve ardından **Görselleştir**' i seçin. Şekil 7 ' de R betiğindeki standart çıkış ve standart hata görüyoruz.
 
-![Standart çıktı ve standart hata R cihazında bağlantı noktasından](./media/r-quickstart/fig8.png)
+![R cihaz bağlantı noktasından standart çıkış ve standart hata](./media/r-quickstart/fig8.png)
 
-*Şekil 7. Standart çıktı ve standart hata R cihazında bağlantı noktasından.*
+*Şekil 7. R cihaz bağlantı noktasından standart çıkış ve standart hata.*
 
-Bkz: Şekil 8'de R betiğimizi grafik çıktısı biz kaydırma.  
+Aşağı kaydırarak R betiğimizden alınan grafik çıktısını Şekil 8 ' de görüyorsunuz.  
 
-![Grafik çıktısı R cihazında bağlantı noktası](./media/r-quickstart/fig9.png)
+![R cihaz bağlantı noktasından grafik çıkışı](./media/r-quickstart/fig9.png)
 
-*Şekil 8. Grafik R cihazında bağlantı noktasından çıktı.*  
+*Şekil 8. R cihaz bağlantı noktasından alınan grafik çıktısı.*  
 
-## <a id="filtering"></a>Verileri filtreleme ve dönüştürme
+## <a id="filtering"></a>Veri filtreleme ve dönüştürme
 
-Bu bölümde biz bazı temel veri filtreleme ve California Süt veriler üzerinde dönüşüm işlemleri gerçekleştirir. Bu bölümün sonunda biz verileri bir analitik model oluşturmak için uygun bir biçimde olacaktır.  
+Bu bölümde, California süt verilerinde bazı temel veri filtreleme ve dönüştürme işlemleri gerçekleştirilecektir. Bu bölümün sonuna kadar veri, analitik model oluşturmak için uygun bir biçimde olacaktır.  
 
-Daha açık belirtmek gerekirse, bu bölümde biz birkaç ortak veri temizleme ve dönüştürme görevleri gerçekleştireceksiniz: değer dönüştürmeleri ve tür dönüştürme, yeni hesaplanan sütunlar ekleyerek veri çerçevelerini üzerinde filtreleme. Bu arka plan birçok çeşitlemeleri gerçek sorunla başa çıkmanıza yardımcı olmalıdır.
+Daha belirgin bir şekilde, bu bölümde birkaç ortak veri temizleme ve dönüştürme görevi gerçekleştirmeleri gerekir: tür dönüşümü, veri çerçevelerine filtre uygulama, yeni hesaplanmış sütunlar ve değer dönüşümleri. Bu arka plan, gerçek dünyada sorunlarda karşılaşılan birçok çeşitle ilgilenmenize yardımcı olmalıdır.
 
-Bu bölüm için tam R kodu [MachineLearningSamples-not defterlerini/studio-samples](https://github.com/Azure-Samples/MachineLearningSamples-Notebooks/tree/master/studio-samples).
+Bu bölüm için tam R kodu, [Machinelearningsamples-Notebook/Studio-Samples](https://github.com/Azure-Samples/MachineLearningSamples-Notebooks/tree/master/studio-samples)içinde mevcuttur.
 
-### <a name="type-transformations"></a>Tür dönüştürmeleri
+### <a name="type-transformations"></a>Tür dönüşümleri
 
-Biz R kodun içine California Süt verileri okuyabilir göre [R betiği yürütme] [ execute-r-script] modülü, ihtiyacımız sütunlardaki verileri hedeflenen türünü ve biçimini olduğundan emin olmak.  
+Şimdi de California süt verilerini [yürütme r betik][execute-r-script] modülündeki r koduna okuyabilmemiz için sütunlardaki verilerin amaçlanan tür ve biçime sahip olduğundan emin olunması gerekir.  
 
-R gerektiği gibi başka bir veri türleri zorlanır anlamına gelir dinamik olarak yazılmış bir dildir. R atomik veri türü sayısal, mantıksal ve karakter içerir. Faktörü türü sütunları ise kategorik veriler sıkı bir şekilde depolamak için kullanılır. Başvuruları veri türleri hakkında daha fazla bilgi bulabilirsiniz [daha fazla okuma](#appendixb) aşağıda.
+R, dinamik olarak yazılmış bir dildir, bu da veri türlerinin gerektiği şekilde bir başkasına zorlanmasıdır. R 'deki atomik veri türleri sayısal, mantıksal ve karakter içerir. Faktör türü, kategorik verileri depolamak sıkı için kullanılır. [Daha fazla](#appendixb) bilgi için başvurularda veri türleriyle ilgili daha fazla bilgi bulabilirsiniz.
 
-Bir dış kaynaktan R içine tablo verisi okurken, her zaman sütunlardaki elde edilen türlerini denetlemek için iyi bir fikirdir. Bir sütun türü bir karakterin isteyebilirsiniz, ancak çoğu durumda bu ya da tam tersi öğe olarak görünür. Diğer durumlarda bir sütun olması düşündüğünüz sayısal karakter verileri tarafından örneğin gösterilir '1,23' yerine 1,23 olarak kayan nokta sayısı.  
+Tablo verileri bir dış kaynaktan R 'ye okundüğünde, sütunlardaki sonuç türlerini denetlemek her zaman iyi bir fikirdir. Karakter türünde bir sütun isteyebilirsiniz, ancak çoğu durumda bu, faktör olarak gösterilir veya tam tersi olur. Diğer durumlarda, düşündüğünüz bir sütun, bir kayan noktalı sayı olarak 1,23 yerine ' 1,23 ' gibi karakter verileriyle temsil edilmelidir.  
 
-Neyse ki, eşleme mümkün olduğu sürece bir türden diğerine dönüştürme kolaydır. Örneğin, bir sayısal değerde 'Nevada'ya' dönüştürülemiyor, ancak bir faktör (kategorik değişken) dönüştürebilirsiniz. Başka bir örnek olarak, bir karakter '1' ya da bir faktör, sayısal 1 dönüştürebilirsiniz.  
+Neyse ki, eşleme mümkün olduğu sürece bir türü diğerine dönüştürmek kolaydır. Örneğin, ' Nevada ' değerini sayısal bir değere dönüştüremezsiniz, ancak bunu bir faktöre dönüştürebilirsiniz (kategorik değişken). Başka bir örnek olarak, sayısal bir 1 ' i ' 1 ' karakterine veya bir faktöre dönüştürebilirsiniz.  
 
-Bu dönüştürmeleri hiçbiri için söz dizimi basittir: `as.datatype()`. Bu tür dönüştürme işlevleri arasında şunlar yer alır.
+Bu dönüşümlerden herhangi biri için sözdizimi basittir: `as.datatype()`. Bu tür dönüştürme işlevleri aşağıdakileri içerir.
 
 * `as.numeric()`
 * `as.character()`
 * `as.logical()`
 * `as.factor()`
 
-Biz önceki bölümde giriş sütunların veri türlerini bakarak: türü sayısal, türü karakter ' Month' etiketli bir sütun dışında tüm sütunları ilgilidir. Şimdi bu dönüştürme için bir faktör ve test sonuçları.  
+Önceki bölümde girdiğimiz sütunların veri türlerine bakıyor: tüm sütunlar, karakter türünde olan ' month ' etiketli sütun dışında, sayısal türündedir. Şimdi bunu bir etmene dönüştürüp sonuçları test edin.  
 
-Ben dağılım grafiği matris oluşturulan ve 'Month' sütunu için bir faktör dönüştürme bir satır eklenir satır sildiniz. My deneme miyim yalnızca Kes ve R kodu kod penceresine yapıştırın [R betiği yürütme] [ execute-r-script] modülü. Ayrıca zip dosyasını güncelleştirin ve Azure Machine Learning Studio'da karşıya, ancak bu adımları götürür.  
+Dağınık terçiz matrisini oluşturan satırı sildim ve ' month ' sütununu bir faktöre dönüştüren bir satır ekledi. Denemem sırasında r kodunu [Execute r betik][execute-r-script] modülünün Code penceresine kesip yapıştırırım. ZIP dosyasını da güncelleştirebilir ve Azure Machine Learning Studio klasik sürümüne yükleyebilirsiniz, ancak bu birkaç adım sürer.  
 
 ```R
 ## Only one of the following two lines should be used
-## If running in Machine Learning Studio, use the first line with maml.mapInputPort()
+## If running in Machine Learning Studio (classic), use the first line with maml.mapInputPort()
 ## If in RStudio, use the second line with read.csv()
 cadairydata <- maml.mapInputPort(1)
 # cadairydata  <- read.csv("cadairydata.csv", header = TRUE, stringsAsFactors = FALSE)
@@ -386,11 +386,11 @@ cadairydata <- maml.mapInputPort(1)
 cadairydata$Month <- as.factor(cadairydata$Month)
 str(cadairydata) # Check the result
 ## The following line should be executed only when running in
-## Azure Machine Learning Studio
+## Azure Machine Learning Studio (classic)
 maml.mapOutputPort('cadairydata')
 ```
 
-Şimdi bu kod yürütün ve R betiği için çıktı günlüğüne bakın. Şekil 9'da ilgili verileri günlüğünden gösterilir.
+Bu kodu yürütüm ve R betiği için çıkış günlüğüne bakalım. Günlükteki ilgili veriler Şekil 9 ' da gösterilmektedir.
 
     [ModuleOutput] [1] "Loading variable port1..."
     [ModuleOutput] 
@@ -418,18 +418,18 @@ maml.mapOutputPort('cadairydata')
     [ModuleOutput] 
     [ModuleOutput] [1] "Saving the following item(s):  .maml.oport1"
 
-*Şekil 9. Veri çerçevesi ile bir faktör değişken özeti.*
+*Şekil 9. Bir faktör değişkeni olan veri çerçevesinin Özeti.*
 
-Ay türü artık yazmalıdır '**14 düzey çakışabilmektedir faktörü**'. Yılın yalnızca 12 ay sonra bir sorun budur. Ayrıca, görmek için kontrol edebilirsiniz türünde **Görselleştir** sonuç kümesini bağlantı noktasıdır '**kategorik**'.
+Month için tür artık '**Factor w/14 seviye**' deyin. Bu, yılda yalnızca 12 ay olduğundan bir sorundur. Ayrıca, sonuç veri kümesi bağlantı noktasının **görselleştirilecek** türün '**kategorik**' olup olmadığını kontrol edebilirsiniz.
 
-'Month' sütunu sistematik olarak kodlanmış olmayan bir sorundur. Bazı durumlarda bir ay Nisan denir ve diğer Apr kısaltılır. 3 karakter dizesine kırpma tarafından Biz bu sorunu çözebilirsiniz. Kod satırı aşağıdaki gibi görünür:
+Sorun, ' month ' sütununun sistematik olarak kodlanmamalıdır. Bazı durumlarda, bir ay Nisan olarak adlandırılır ve başkaları da bir şekilde kısaltılabilir. Dizeyi 3 karaktere kırparak bu sorunu çözebiliriz. Kod satırı artık aşağıdakine benzer şekilde görünür:
 
 ```R
 ## Ensure the coding is consistent and convert column to a factor
 cadairydata$Month <- as.factor(substr(cadairydata$Month, 1, 3))
 ```
 
-Denemeyi yeniden çalıştırmanız ve çıkış günlüğü görüntüleyin. Şekil 10'da beklenen sonuçları gösterilmektedir.  
+Denemeyi yeniden çalıştırın ve çıkış günlüğünü görüntüleyin. Beklenen sonuçlar Şekil 10 ' da gösterilmiştir.  
 
     [ModuleOutput] [1] "Loading variable port1..."
     [ModuleOutput] 
@@ -457,27 +457,27 @@ Denemeyi yeniden çalıştırmanız ve çıkış günlüğü görüntüleyin. Ş
     [ModuleOutput] 
     [ModuleOutput] [1] "Saving the following item(s):  .maml.oport1"
 
-*Şekil 10. Veri çerçevesi ile faktörü düzeyleri doğru sayıda özeti.*
+*Şekil 10. Doğru sayıda faktör düzeyi olan veri çerçevesinin Özeti.*
 
-İstenen 12 düzeyleri faktörü değişkeni artık var.
+Factor değişkenimizin artık istenen 12 düzeyi vardır.
 
-### <a name="basic-data-frame-filtering"></a>Çerçeve temel verileri filtreleme
+### <a name="basic-data-frame-filtering"></a>Temel veri çerçevesi filtrelemesi
 
-Güçlü filtreleme yetenekleri R veri çerçevelerini destekler. Veri kümeleri, satırlar veya sütunlar üzerinde mantıksal filtrelerini kullanarak alt kümelenmiş olabilir. Çoğu durumda, karmaşık filtre ölçütlerini gerekli olacaktır. Başvuruları [daha fazla okuma](#appendixb) aşağıda dataframes filtreleme kapsamlı örnekler içerir.  
+R veri çerçeveleri güçlü filtreleme özelliklerini destekler. Veri kümeleri, satır ya da sütunlarda mantıksal filtreler kullanılarak alt ayarlanabilir. Birçok durumda, karmaşık filtre ölçütü gerekecektir. Aşağıda [daha fazla okumada](#appendixb) bulunan başvurular, veri çerçevelerini filtrelemeye yönelik kapsamlı örnekler içerir.  
 
-Bir bit olduğundan filtre kümemizi üzerinde yapmamız gerekir. Sütunları cadairydata dataframe bakarsanız, iki gereksiz sütunları görürsünüz. İlk sütun, yalnızca çok kullanışlı olmayan bir satır numarası tutar. İkinci sütunda, Year.Month, yedekli bilgiler içerir. Aşağıdaki R kodunu kullanarak Biz bu sütunların kolayca dışlayabilirsiniz.
+Veri kümeniz üzerinde yaptığımız bir filtre vardır. Cadairydata dataframe içindeki sütunlara baktığınızda, iki gereksiz sütun görürsünüz. İlk sütun, çok faydalı olmayan bir satır numarasını tutar. İkinci sütun, Year. month, gereksiz bilgiler içerir. Aşağıdaki R kodunu kullanarak bu sütunları kolayca dışarıda bırakabiliriz.
 
 > [!NOTE]
-> Artık bu bölümde, ı yalnızca, ı ekleme ek kod gösterir [R betiği yürütme] [ execute-r-script] modülü. Her yeni satır Ekle **önce** `str()` işlevi. Azure Machine Learning Studio'da sonuçlarımı doğrulamak için bu işlevi kullanıyorum.
+> Bu bölümde, şimdi [R betiği Yürüt][execute-r-script] modülüne eklemem gereken ek kodu göstereceğiz. `str()` işlevinden **önce** her yeni satırı ekleyebilirim. Azure Machine Learning Studio klasik sürümünde sonuçlarımı doğrulamak için bu işlevi kullanıyorum.
 
-R kodumu aşağıdaki satırı ekleyebilirim [R betiği yürütme] [ execute-r-script] modülü.
+[R komut dosyasını yürüt][execute-r-script] modülünde r kodum 'a aşağıdaki satırı ekle.
 
 ```R
 # Remove two columns we do not need
 cadairydata <- cadairydata[, c(-1, -2)]
 ```
 
-Denemenizde bu kodu çalıştırmak ve sonucu çıktı günlüğüne bakın. Şekil 11'de bu sonuçları gösterilmektedir.
+Bu kodu denemenize çalıştırın ve çıkış günlüğünden elde edilen sonucu denetleyin. Bu sonuçlar Şekil 11 ' de gösterilmiştir.
 
     [ModuleOutput] [1] "Loading variable port1..."
     [ModuleOutput] 
@@ -501,15 +501,15 @@ Denemenizde bu kodu çalıştırmak ve sonucu çıktı günlüğüne bakın. Şe
     [ModuleOutput] 
     [ModuleOutput] [1] "Saving the following item(s):  .maml.oport1"
 
-*Şekil 11. İki sütunlu bir veri çerçevesi özetini kaldırıldı.*
+*Şekil 11. İki sütunlu veri çerçevesinin Özeti kaldırıldı.*
 
-Güzel bir haberimiz var! Biz, beklenen sonuçları alın.
+İyi haber! Beklenen sonuçlar elde ediyoruz.
 
-### <a name="add-a-new-column"></a>Yeni bir sütun ekleme
+### <a name="add-a-new-column"></a>Yeni sütun Ekle
 
-Zaman serisi modelleri oluşturmak için zaman serisi başladığından bu yana ay içeren bir sütun kullanışlı olacaktır. 'Month.Count' yeni bir sütun oluşturacağız.
+Zaman serisi modelleri oluşturmak için, zaman dizisinin başlangıcından bu yana ayları içeren bir sütun olması uygun olacaktır. Yeni bir ' month. Count ' sütunu oluşturacağız.
 
-Size sunduğumuz ilk basit işlevi oluşturur kodu düzenlenmesine yardımcı olmak için `num.month()`. Biz, ardından veri çerçevesi içinde yeni bir sütun oluşturmak için bu işlevi uygulanır. Yeni kod aşağıdaki gibidir.
+Kodu düzenlemeye yardımcı olmak için ilk basit işlevimizi `num.month()`. Daha sonra bu işlevi, veri çerçevesinde yeni bir sütun oluşturmak için uygulayacağız. Yeni kod aşağıdaki gibidir.
 
 ```R
 ## Create a new column with the month count
@@ -527,7 +527,7 @@ num.month <- function(Year, Month) {
 cadairydata$Month.Count <- num.month(cadairydata$Year, cadairydata$Month.Number)
 ```
 
-Şimdi güncelleştirilmiş denemeyi çalıştırma ve sonuçları görmek için çıkış günlüğü kullanın. Şekil 12'deki bu sonuçları gösterilmektedir.
+Şimdi güncelleştirilmiş denemeyi çalıştırın ve sonuçları görüntülemek için çıkış günlüğünü kullanın. Bu sonuçlar Şekil 12 ' de gösterilmiştir.
 
     [ModuleOutput] [1] "Loading variable port1..."
     [ModuleOutput] 
@@ -553,19 +553,19 @@ cadairydata$Month.Count <- num.month(cadairydata$Year, cadairydata$Month.Number)
     [ModuleOutput] 
     [ModuleOutput] [1] "Saving the following item(s):  .maml.oport1"
 
-*Şekil 12. Veri çerçevesi ile ek sütun özeti.*
+*Şekil 12. Ek sütunuyla veri çerçevesinin Özeti.*
 
-Her şey çalışıyor gibi görünüyor. Bizim veri çerçevesi içinde beklenen değerlerle yeni bir sütun sahibiz.
+Her şey çalışıyor gibi görünüyor. Veri Çerçevemizdeki beklenen değerleri içeren yeni bir sütun var.
 
-### <a name="value-transformations"></a>Değer dönüştürmeleri
+### <a name="value-transformations"></a>Değer dönüşümleri
 
-Bu bölümde biz bazı bizim dataframe sütunlarını değerlere göre bazı basit dönüşümleri gerçekleştirir. R dili neredeyse rastgele değer dönüştürmeleri destekler. Başvuruları [daha fazla okuma](#appendixb) aşağıda kapsamlı örnekler içerir.
+Bu bölümde, veri Çerçevemizin sütunlarındaki bazı sütunlarımızda bazı basit dönüştürmeler gerçekleştireceğiz. R dili neredeyse rastgele değer dönüşümlerini destekler. Aşağıda [daha fazla okumada](#appendixb) başvurular kapsamlı örnekler içerir.
 
-Bizim dataframe özetlerini değerleri bakarsanız tek bir şey burada görmeniz gerekir. Daha fazla ICE cream sütlü daha California'da oluşturulur? Bu hiçbir mantıklı gibi Hayır, Elbette bazı kalanımız ICE cream lovers bu olgu üzücü olmayabilir. Birimleri farklıdır. Fiyat kalanımız birimlerinde pound, olan 1 M birimleriyle ABD pound, ICE cream 1.000 birimlerinde BİZE galon ve cottage peynirlerine ayırıyor 1.000 ABD pound birimlerinde sütlü olur. ICE cream galon başına yaklaşık 6.5 pound ağırlıklandıran varsayıldığında, biz bu değerleri tüm eşit birimleri 1.000 pound cinsinden şekilde dönüştürmek için çarpma kolayca yapabilirsiniz.
+Veri Çerçevemizin özetlerindeki değerlere baktığınızda, burada tek bir şey görmeniz gerekir. California 'da üretilmiş mılden daha fazla dondurma mı? Hayır, bu durum hiçbir şey olmadığı için değildir, bu olgu gibi üzgün bir ABD Birimler farklı. Fiyat ABD Sterlini ' de yer alıyor, Milk, 1 M ABD libre cinsindendir, dondurma 1.000 ABD galon birimlerinde ve cotsat Cheese, 1.000 ABD libre cinsindendir. Her galon 6,5 Sterlini yaklaşık olarak% libre ağırldığında, bu değerleri, hepsi de eşit birimlerde olan 1.000 libre olacak şekilde dönüştürmek için çarpmaları kolayca yapabiliriz.
 
-Tahmin modelimiz için çarpma modeli eğilim ve bu verileri dönemsel düzeltilmesi için kullanırız. Günlük dönüştürme bu sürecini kolaylaştırır bir Doğrusal model kullandık olanak sağlıyor. Biz çarpan uygulandığı aynı işlevde günlük dönüşümü uygulayabilirsiniz.
+Tahmin modelimiz için, bu verilerin eğilimi ve dönemsel olarak ayarlanması için bir çarpma modeli kullanıyoruz. Bir günlük dönüştürmesi, bu işlemi basitleştirecek doğrusal bir model kullanmamızı sağlar. Günlük dönüşümünü, çarpanın uygulandığı aynı işleve uygulayabiliriz.
 
-Aşağıdaki kodda, ı yeni bir işlev tanımla `log.transform()`ve sayısal değerler içeren satırları uygulayabilirsiniz. R `Map()` işlevi uygulamak için kullanılan `log.transform()` seçilen sütunlarda veri çerçevesini işlevi. `Map()` benzer `apply()` ancak birden fazla işlev bağımsız değişkenlerinin listesi için verir. Çarpanları listesini ikinci bağımsız değişkeni sağladığı Not `log.transform()` işlevi. `na.omit()` İşlevi değil sahibiz eksik veya tanımlanmamış değerler veri çerçevesi emin olmak için bir temizleme bit olarak kullanılır.
+Aşağıdaki kodda, yeni bir işlev tanımladım, `log.transform()`ve sayısal değerleri içeren satırlara uygularsınız. R `Map()` işlevi, `log.transform()` işlevini veri çerçevesinin seçili sütunlarına uygulamak için kullanılır. `Map()`, `apply()` benzerdir, ancak işleve birden fazla bağımsız değişken listesi sağlar. Çarpanların listesinin `log.transform()` işlevine ikinci bağımsız değişkeni sağladığı unutulmamalıdır. `na.omit()` işlevi, dataframe 'de eksik veya tanımsız değerlere sahip olmadığından emin olmak için temizlik biti olarak kullanılır.
 
 ```R
 log.transform <- function(invec, multiplier = 1) {
@@ -600,18 +600,18 @@ cadairydata[, 4:7] <- Map(log.transform, cadairydata[, 4:7], multipliers)
 cadairydata <- na.omit(cadairydata)  
 ```
 
-Tam anlamıyla bir bit gerçekleşmesini içinde yoktur `log.transform()` işlevi. Bu kod çoğunu bağımsız değişkenleriyle olası sorunları veya hala hesaplamalar sırasında oluşabilecek özel durumları uğraşmanızı denetleniyor. Bu kod yalnızca birkaç satır gerçekten hesaplamalar gerçekleştirin.
+`log.transform()` işlevinde oldukça bir bit vardır. Bu kodun çoğu, bağımsız değişkenlerle ilgili olası sorunları denetlemektir ya da hesaplamalar sırasında ortaya çıkabilecek özel durumlarla devam edebilir. Bu kodun yalnızca birkaç satırı, hesaplamaları aslında yapılır.
 
-Hata işleme devam etmesini engelleyen tek bir işlevin amacı, savunma programlama önlemektir. Uzun süre çalışan analiz ani bir hata, kullanıcılar için oldukça can sıkıcı olabilir. Bu durumu önlemek için varsayılan dönüş değerleri, aşağı akış işleme zarar sınırlar seçilmelidir. Bir ileti, bir sorun oluştu, kullanıcıları uyarmak üzere de oluşturulur.
+Savunma programlamanın hedefi, işlemin devam etmesini önleyen tek bir işlevin başarısızlığını önlemektir. Uzun süre çalışan bir çözümlemenin ani bir başarısızlığı, kullanıcılar için oldukça sinir bozucu olabilir. Bu durumdan kaçınmak için, varsayılan dönüş değerleri seçilmelidir ve bu da aşağı akış işleme hasarı sınırlayacaktır. Ayrıca, bir şeyin yanlış olduğunu bildiren kullanıcılara uyarı vermek için de bir ileti oluşturulur.
 
-R ile savunma programlama için kullanılmaz, bu kod biraz zor görünebilir. Ben temel adımlarda size yol gösterir:
+R 'de programlama konusunda savunma yapmak için kullanmıyorsanız, bu kodun hepsi biraz daha fazla görünebilir. Ana adımlarda size yol gösterecek:
 
-1. Dört iletileri oluşan bir vektörü tanımlanır. Bu iletiler, bazı olası hataları ve şu kodla oluşabilecek özel durumları hakkında bilgi iletişim kurmak için kullanılır.
-2. Ben, her örneği için ad değeri döndürür. Daha az yan etkileri olabilir diğer birçok olasılık vardır. Bir vektör sıfır ya da özgün giriş vektör, örneğin geri.
-3. Denetimler, işleve bağımsız değişkenler üzerinde çalıştırılır. Her durumda, bir hata algılandığında, varsayılan değeri döndürülür ve tarafından üretilen bir ileti `warning()` işlevi. Kullanmakta olduğum `warning()` yerine `stop()` gibi ikinci tam olarak ne önlemek çalışıyorum yürütme sona erer. Ben bu kod bu örnekte olduğu gibi bir yordam stili karmaşık ve belirsiz olduğu görülüyor işlevsel bir yaklaşım yazdığınızı unutmayın.
-4. Günlük hesaplamalar sarmalanır `tryCatch()` böylece özel durumları işleme ani bir durmasına neden olmaz. Olmadan `tryCatch()` yapan bir durdurma sinyali işlevleri sonucunda R tarafından gerçekleştirilen en hataları.
+1. Dört iletiden oluşan bir vektör tanımlanmıştır. Bu iletiler, bu kodla oluşabilecek olası hatalar ve özel durumlar hakkındaki bilgileri iletmek için kullanılır.
+2. Her durum için bir değeri döndürür. Daha az yan etkisi olabilecek birçok farklı olasılık vardır. Örneğin, sıfır veya orijinal giriş vektörünün bir vektörünü döndürebiliyorum.
+3. Denetimler, işlevin bağımsız değişkenlerinde çalıştırılır. Her durumda, bir hata algılanırsa, varsayılan bir değer döndürülür ve `warning()` işlevi tarafından bir ileti oluşturulur. İkincisi yürütmeyi sonlandıracak ve tamamen kaçınmaya çalıştığım için `stop()` yerine `warning()` kullanıyorum. Bu kodu yordamsal bir biçimde yazdım, bu durumda karmaşık ve belirsiz bir işlevsel yaklaşım olabilir.
+4. Günlük hesaplamaları `tryCatch()` sarmalanır, böylece özel durumlar, işlemin işlenmesine neden olmaz. R işlevleri tarafından oluşturulan çoğu hata `tryCatch()`, yalnızca bunu yapan bir durdurma sinyaliyle sonuçlanır.
 
-Denemenizde bu R kodunu yürütün ve çıktılar göz içeren dosyanız. Şekil 13'te gösterildiği gibi artık günlük dört sütun dönüştürülen değerler görürsünüz.
+Bu R kodunu denemenize yürütün ve çıktı. log dosyasında yazdırılan çıktıya göz atın. Şimdi şekil 13 ' te gösterildiği gibi, günlükteki dört sütunun dönüştürülmüş değerlerini görürsünüz.
 
     [ModuleOutput] [1] "Loading variable port1..."
     [ModuleOutput] 
@@ -637,33 +637,33 @@ Denemenizde bu R kodunu yürütün ve çıktılar göz içeren dosyanız. Şekil
     [ModuleOutput] 
     [ModuleOutput] [1] "Saving the following item(s):  .maml.oport1"
 
-*Şekil 13. Dönüştürülmüş veri çerçevesi değerleri özeti.*
+*Şekil 13. Veri çerçevesindeki dönüştürülmüş değerlerin Özeti.*
 
-Dönüştürülen değerler görürüz. Artık sütlü üretim size artık günlük ölçekli olarak aradığınız geri çağırma tüm diğer Süt ürün üretim, büyük ölçüde aşıyor.
+Değerlerin dönüştürüldüğünü görüyoruz. MILK üretimi artık diğer tüm süt ürün üretimini büyük ölçüde aşıyor ve artık bir günlük ölçeğine baktık.
 
-Bu noktada verilerimizi temizlenir ve bazı modelleme için hazırız. Sonuç veri kümesini çıktısı için Özet görselleştirme bakarak bizim [R betiği yürütme] [ execute-r-script] modülü, 'Month' sütunu olan 'Kategorik' 12 benzersiz değerlerle yeniden istediğimiz şekilde görürsünüz.
+Bu noktada verilerimiz temizlenir ve bazı modelleme için hazırız. [Execute R betik][execute-r-script] modülümüzün sonuç veri kümesi çıkışının görselleştirme özetine bakarak, tıpkı istediğiniz gibi, ' month ' sütununun, 12 benzersiz değer Içeren ' kategorik ' olduğunu görürsünüz.
 
-## <a id="timeseries"></a>Zaman serisi nesneleri ve bağıntı analizi
+## <a id="timeseries"></a>Zaman serisi nesneleri ve bağıntı Analizi
 
-Bu bölümde ediyoruz birkaç temel R zaman serisi nesneleri keşfedin ve bazı değişkenler arasındaki bağıntıları analiz edin. Hedefimiz, birkaç aksamalar ikili bağıntı bilgileri içeren bir dataframe çıkış sağlamaktır.
+Bu bölümde, birkaç temel R zaman serisi nesnesini keşfedecektir ve bazı değişkenler arasındaki bağıntıları analiz edeceğiz. Bizim amamız, birkaç lags 'de ikili bağıntı bilgilerini içeren bir veri çerçevesinin çıktısının çıkışını sağlamaktır.
 
-Bu bölüm için tam R kodu [MachineLearningSamples-not defterlerini/studio-samples](https://github.com/Azure-Samples/MachineLearningSamples-Notebooks/tree/master/studio-samples).
+Bu bölümün tam R kodu, [Machinelearningsamples-Not defterleri/Studio-Samples](https://github.com/Azure-Samples/MachineLearningSamples-Notebooks/tree/master/studio-samples)içinde bulunur.
 
-### <a name="time-series-objects-in-r"></a>R ile zaman serisi nesneleri
+### <a name="time-series-objects-in-r"></a>R 'deki zaman serisi nesneleri
 
-Önce de belirtildiği gibi zaman serileri zamanına göre dizine veri değerlerini bir dizi değildir. R zaman serisi nesneleri oluşturmak ve zaman dizini yönetmek için kullanılır. Zaman serisi nesneleri kullanarak çeşitli avantajları vardır. Zaman serisi nesneleri nesnesinde kapsüllenir zaman serisi dizin değerleri yönetme birçok ayrıntılarından boş. Ayrıca, zaman serisi nesneleri çizim için çoğu zaman serisi yöntemlerini kullanmayı yazdırma, modelleme, vb. sağlar.
+Daha önce belirtildiği gibi, zaman serisi zamana göre dizinlenen bir veri değerleri dizisidir. R zaman serisi nesneleri, zaman dizinini oluşturmak ve yönetmek için kullanılır. Zaman serisi nesnelerini kullanmanın çeşitli avantajları vardır. Zaman serisi nesneleri, nesne içinde kapsüllenmiş zaman serisi dizin değerlerini yönetme ayrıntılarından çok daha fazla ayrıntı için sizi boşaltın. Ayrıca, zaman serisi nesneleri çizim, yazdırma, modelleme vb. için çok sayıda zaman serisi yöntemi kullanmanıza imkan tanır.
 
-POSIXct zaman serisi sınıfı oldukça basittir ve yaygın olarak kullanılır. Bu zaman serisi ölçümler zaman dönem, 1 Ocak 1970 başlangıcından sınıfı. Bu örnekte POSIXct zaman serisi nesneleri kullanacağız. Diğer yaygın olarak kullanılan R zaman serisi nesne sınıfları şunlardır: zoo ve xts, Genişletilebilir zaman serisi.
+POSIXct zaman serisi sınıfı yaygın olarak kullanılır ve nispeten basittir. Bu zaman serisi sınıfı, dönem başından itibaren 1 Ocak 1970 arasındaki süreyi ölçer. Bu örnekte, POSIXct zaman serisi nesneleri kullanacağız. Yaygın olarak kullanılan diğer R zaman serisi nesne sınıfları, Zoo ve XTS, Genişletilebilir zaman serisini içerir.
 
 ### <a name="time-series-object-example"></a>Zaman serisi nesnesi örneği
 
-Bizim örneğimizde ile başlayalım. Sürükle ve bırak bir **yeni** [R betiği yürütme] [ execute-r-script] denemenizi modüle. Varolan sonucu Dataset1 çıkış bağlantı noktasına bağlanmak [R betiği yürütme] [ execute-r-script] Dataset1 modülüne giriş bağlantı noktasına yeni [R betiği yürütme] [ execute-r-script] modülü.
+Bizim örneğimizi kullanmaya başlayalım. **Yeni** bir [R Betiği Çalıştır][execute-r-script] modülünü sürükleyip denemenize bırakın. Mevcut [yürütme r betiği][execute-r-script] modülünün Result DataSet1 çıkış bağlantı noktasını yeni [Execute r betik][execute-r-script] modülünün DataSet1 giriş bağlantı noktasına bağlayın.
 
-Örnek ilerledikçe miyim ilk örnek için yaptığınız gibi bazı noktalarda miyim yalnızca artımlı ek R kod satırlarını her bir adımı gösterilir.  
+İlk örneklerde yaptığımız gibi, örneğin, bazı noktalarda her bir adımda yalnızca artımlı ek R kodu satırı gösterilecektir.  
 
-#### <a name="reading-the-dataframe"></a>Veri çerçevesi okuma
+#### <a name="reading-the-dataframe"></a>Veri çerçevesini okuma
 
-İlk adım olarak şimdi bir dataframe okuyun ve beklenen sonuçları aldığımız emin olun. Aşağıdaki kod, iş yapmanız gerekir.
+İlk adım olarak, bir veri çerçevesinde okuyup beklenen sonuçları aldığınızdan emin olun. Aşağıdaki kod işi yapmanız gerekir.
 
 ```R
 # Comment the following if using RStudio
@@ -671,7 +671,7 @@ cadairydata <- maml.mapInputPort(1)
 str(cadairydata) # Check the results
 ```
 
-Şimdi, denemeyi çalıştırın. Yeni bir R betiği yürütme şekil günlüğü Şekil 14 gibi görünmelidir.
+Şimdi, denemeyi çalıştırın. Yeni yürütme R betiği şeklinin günlüğü Şekil 14 gibi görünmelidir.
 
     [ModuleOutput] [1] "Loading variable port1..."
     [ModuleOutput] 
@@ -693,13 +693,13 @@ str(cadairydata) # Check the results
     [ModuleOutput] 
     [ModuleOutput]  $ Month.Count      : num  0 1 2 3 4 5 6 7 8 9 ...
 
-*Şekil 14. R betiği yürütme modülünde dataframe özeti.*
+*Şekil 14. R betiği yürütme modülündeki veri çerçevesinin Özeti.*
 
-Bu, beklenen türleri ve biçimi verilerdir. 'Month' sütun türü faktörü ve düzeyleri beklenen sayıda olduğundan unutmayın.
+Bu veriler beklenen tür ve biçimlerdir. ' Month ' sütununun faktör tür olduğunu ve beklenen düzey sayısına sahip olduğunu unutmayın.
 
 #### <a name="creating-a-time-series-object"></a>Zaman serisi nesnesi oluşturma
 
-Zaman serisi nesnesi için sunduğumuz dataframe eklemek ihtiyacımız var. Geçerli kod POSIXct sınıfının yeni bir sütun ekler aşağıdaki ile değiştirin.
+Veri çerçevemiz için bir zaman serisi nesnesi eklememiz gerekiyor. Geçerli kodu, POSIXct sınıfının yeni bir sütununu ekleyen aşağıdaki ile değiştirin.
 
 ```R
 # Comment the following if using RStudio
@@ -712,7 +712,7 @@ cadairydata$Time <- as.POSIXct(strptime(paste(as.character(cadairydata$Year), "-
 str(cadairydata) # Check the results
 ```
 
-Şimdi, günlüğünü denetleyin. Bu Şekil 15 gibi görünmelidir.
+Şimdi günlüğe bakın. Şekil 15 gibi görünmelidir.
 
     [ModuleOutput] [1] "Loading variable port1..."
     [ModuleOutput] 
@@ -736,31 +736,31 @@ str(cadairydata) # Check the results
     [ModuleOutput] 
     [ModuleOutput]  $ Time             : POSIXct, format: "1995-01-01" "1995-02-01" ...
 
-*Şekil 15. Veri çerçevesi ile zaman serisi nesnesi özeti.*
+*Şekil 15. Bir zaman serisi nesnesi ile veri çerçevesinin Özeti.*
 
-Yeni bir sütun aslında POSIXct sınıfıdır özeti görebiliriz.
+Özet 'den, yeni sütunun POSIXct sınıfının aslında olduğunu görebiliriz.
 
-### <a name="exploring-and-transforming-the-data"></a>Keşfetmek ve verileri dönüştürme
+### <a name="exploring-and-transforming-the-data"></a>Verileri keşfetme ve dönüştürme
 
-Bu veri kümesinde değişkenlerinin bazıları araştıralım. Bir dağılım grafiği matrisi, hızlı bir görünüm oluşturmak için iyi bir yoludur. Değiştirme `str()` aşağıdaki satırı önceki R koduyla işlevi.
+Bu veri kümesindeki bazı değişkenleri keşfedelim. Bir dağınık terçiz matrisi hızlı bir görünüm oluşturmak için iyi bir yoldur. Önceki R kodundaki `str()` işlevini aşağıdaki satırla değiştirdim.
 
 ```R
 pairs(~ Cotagecheese.Prod + Icecream.Prod + Milk.Prod + N.CA.Fat.Price, data = cadairydata, main = "Pairwise Scatterplots of dairy time series")
 ```
 
-Bu kodu çalıştırmak ve ne olacağına bakalım. R cihazında bağlantı noktalarından üretilen çizim Şekil 16 gibi görünmelidir.
+Bu kodu çalıştırın ve neler olduğunu görün. R cihaz bağlantı noktasında üretilen çizim, Şekil 16 gibi görünmelidir.
 
-![Seçilen değişkenleri dağılım grafiği Matrisi](./media/r-quickstart/fig17.png)
+![Seçili değişkenlerin dağınık terçiz matrisi](./media/r-quickstart/fig17.png)
 
-*Şekil 16. Seçilen değişkenleri matrisi dağılım grafiği.*
+*Şekil 16. Seçili değişkenlerin dağınık terçiz matrisi.*
 
-Bu değişkenler ilişkileri bazı garip görünüşlü yapısı vardır. Belki de bu veriler, eğilimleri ve biz değişkenleri standartlaşmış değil, olgu ortaya çıkar.
+Bu değişkenler arasındaki ilişkilerde bazı tek görünümlü yapı mevcuttur. Belki de bu, verilerdeki eğilimler ve değişkenleri standart olmayan olgudan ortaya çıkar.
 
-### <a name="correlation-analysis"></a>Bağıntı analizi
+### <a name="correlation-analysis"></a>Bağıntı Analizi
 
-Bağıntı analiz gerçekleştirmek için XML'deki eğilimi hem değişkenlerin standart hale getirmek ihtiyacımız var. R yalnızca kullanabiliriz `scale()` merkezleri hem değişkenleri ölçeklenen, işlev. Bu işlev de daha hızlı çalışabilir. Ancak, savunma ölçeklenebilirliğinden örneği r'de göstermek istiyorsunuz
+Bağıntı analizini gerçekleştirmek için, değişkenleri aynı şekilde ve standartlaştırmanız gerekir. Yalnızca değişkenleri ortalar ve ölçeklendirilen R `scale()` işlevini kullanabiliriz. Bu işlev iyi şekilde daha hızlı çalıştırılabilir. Bununla birlikte, R 'de savunma programı 'nın bir örneğini göstermek istiyorum.
 
-`ts.detrend()` Aşağıda gösterilen işlev bu işlemlerin her ikisi de gerçekleştirir. Aşağıdaki iki kod satırlarını XML'deki veri eğilimi ve değerlerin standart hale getirin.
+Aşağıda gösterilen `ts.detrend()` işlevi bu işlemlerin her ikisini de gerçekleştirir. Aşağıdaki iki kod satırı verileri de eğilim olarak belirleyip değerleri standartlaştırır.
 
 ```R
 ts.detrend <- function(ts, Time, min.length = 3){
@@ -807,23 +807,23 @@ df.detrend <- data.frame(lapply(cadairydata[, 4:7], ts.detrend, cadairydata$Time
 pairs(~ Cotagecheese.Prod + Icecream.Prod + Milk.Prod + N.CA.Fat.Price, data = df.detrend, main = "Pairwise Scatterplots of detrended standardized time series")
 ```
 
-Tam anlamıyla bir bit gerçekleşmesini içinde yoktur `ts.detrend()` işlevi. Bu kod çoğunu bağımsız değişkenleriyle olası sorunları veya hala hesaplamalar sırasında oluşabilecek özel durumları uğraşmanızı denetleniyor. Bu kod yalnızca birkaç satır gerçekten hesaplamalar gerçekleştirin.
+`ts.detrend()` işlevinde oldukça bir bit vardır. Bu kodun çoğu, bağımsız değişkenlerle ilgili olası sorunları denetlemektir ya da hesaplamalar sırasında ortaya çıkabilecek özel durumlarla devam edebilir. Bu kodun yalnızca birkaç satırı, hesaplamaları aslında yapılır.
 
-Zaten değer dönüştürmeleri savunma programlamada bir örneği ele almıştık. Her iki hesaplama bloğu içinde sarmalanmış `tryCatch()`. Bazı hatalar için özgün giriş vektör döndürülecek mantıklı ve diğer durumlarda, ı sıfır, bir vektör döndürür.  
+Değer dönüşümlerindeki savunma programlamanın bir örneğini zaten tartıştık. Her iki hesaplama bloğu da `tryCatch()`sarmalanır. Bazı hatalar için, özgün giriş vektörünü döndürmek mantıklı olur ve diğer durumlarda sıfırlardan oluşan bir vektör döndürür.  
 
-Kümenin doğrusal regresyonunu XML'deki eğilimleri belirleme için kullanılan bir zaman serisi gerileme olduğuna dikkat edin. Zaman serisi nesnesi tahmin unsuru değişkendir.  
+Serbest bırakma için kullanılan doğrusal gerileme bir zaman serisi gerilemesi olduğunu unutmayın. Öngörücüsü değişkeni bir zaman serisi nesnesidir.  
 
-Bir kez `ts.detrend()` tanımlanan değişkenler bizim dataframe gösterdiğiniz ilgi için biz bunu uygulayabilirsiniz. Biz tarafından oluşturulan sonuç listesini coerce gerekir `lapply()` kullanarak verileri veri çerçevesi için `as.data.frame()`. Savunma yönlerini nedeniyle `ts.detrend()`, işlem değişkenlerden biri başarısız olduğunda, diğerleri doğru işlenmesini engellemez.  
+`ts.detrend()` tanımlandıktan sonra, veri Çerçevemizdeki ilgilendiğiniz değişkenlere uygularsınız. `as.data.frame()`kullanılarak veri verisi çerçevesine `lapply()` tarafından oluşturulan sonuç listesini zorunlu etmemiz gerekir. `ts.detrend()`savunma konuları nedeniyle, değişkenlerden birini işleyememesi diğerlerinin doğru işlemesini engellemez.  
 
-Son kod satırının, ikili bir dağılım grafiği oluşturur. R kodunu çalıştırdıktan sonra dağılım grafiği sonuçlarını şekil 17'de gösterilmektedir.
+Kodun son satırı, ikili bir dağınık terçiz oluşturur. R kodunu çalıştırdıktan sonra, dağınık terçizimin sonuçları şekil 17 ' de gösterilir.
 
-![XML'deki koleksiyonunuzdaki ve standartlaştırılmış bir zaman serisinin ikili dağılım grafiği](./media/r-quickstart/fig18.png)
+![De iç içe ve standart zaman serisinin ikili dağılmış terçizimi](./media/r-quickstart/fig18.png)
 
-*Şekil 17. XML'deki koleksiyonunuzdaki ve standartlaştırılmış bir zaman serisinin ikili dağılım grafiği.*
+*Şekil 17. De iç içe ve standart zaman serisinin ikili dağılmış terçizimi.*
 
-Bu Şekil 16'da gösterilen bu sonuçları karşılaştırabilirsiniz. Kaldırılan eğilim ve standartlaştırılmış değişkenleri ile bu değişkenler arasındaki ilişkiler çok daha az yapısında görüyoruz.
+Bu sonuçları Şekil 16 ' da gösterilenler ile karşılaştırabilirsiniz. Eğilim kaldırılır ve değişkenler standartlaştırılmış olduğunda, bu değişkenler arasındaki ilişkilerdeki çok daha az bir yapı görüyoruz.
 
-Bağıntılar R ccf nesneler olarak hesaplamak için kod aşağıdaki gibidir.
+Eş ilişkilerini R CCF nesneleri olarak hesaplama kodu aşağıdaki gibidir.
 
 ```R
 ## A function to compute pairwise correlations from a
@@ -841,7 +841,7 @@ cadairycorrelations <- lapply(corpairs, pair.cor, df.detrend)
 cadairycorrelations
 ```
 
-Bu kodu çalıştırmadan Şekil 18'de gösterilen günlük üretir.
+Bu kodun çalıştırılması Şekil 18 ' de gösterilen günlüğü oluşturur.
 
     [ModuleOutput] Loading objects:
     [ModuleOutput]   port1
@@ -895,14 +895,14 @@ Bu kodu çalıştırmadan Şekil 18'de gösterilen günlük üretir.
     [ModuleOutput]     -1      0      1 
     [ModuleOutput] -0.002 -0.074 -0.124 
 
-*Şekil 18. Ccf listesini ikili bağıntı analiz nesneleri.*
+*Şekil 18. İkili bağıntı analizinden CCF nesnelerinin listesi.*
 
-Her gecikmesi için bir bağıntı değer yoktur. Bu bağıntı değerleri hiçbiri önemli kadar büyük değil. Biz size her bir değişken bağımsız olarak modelleyebilir, bu nedenle tamamlanabilmesi.
+Her gecikme için bir bağıntı değeri vardır. Bu bağıntı değerlerinin hiçbiri önemli olacak kadar büyük değildir. Bu nedenle, her bir değişkeni bağımsız olarak modelliyoruz.
 
-### <a name="output-a-dataframe"></a>Bir dataframe çıktı
-Biz, R ccf nesnelerin bir listesini ikili bağıntılar hesaplanan. Sonuç veri kümesinin çıkış bağlantı noktasına bir dataframe gerçekten gerektirir. Bu sorunun bir bit sunar. Daha fazla ccf nesnenin kendisi bir liste değildir ve yalnızca değerleri bu liste öğesinin ilk öğesinin çeşitli aksamalar, bağıntılar istiyoruz.
+### <a name="output-a-dataframe"></a>Veri çerçevesinin çıktısını al
+İkili bağıntıları R CCF nesnelerinin listesi olarak hesapladık. Bu, sonuç veri kümesi çıkış bağlantı noktası gerçekten bir veri çerçevesi gerektirdiğinden oluşan bir sorunu gösterir. Ayrıca, CCF nesnesi bir listesidir ve yalnızca bu listenin ilk öğesindeki değerleri, çeşitli lags içindeki bağıntıları tercih ediyoruz.
 
-Aşağıdaki kodu, kendilerini listeleridir ccf nesnelerin listeden gecikme değerleri ayıklar.
+Aşağıdaki kod, kendi listeleri olan CCF nesneleri listesinden öteleme değerlerini ayıklar.
 
 ```R
 df.correlations <- data.frame(do.call(rbind, lapply(cadairycorrelations, '[[', 1)))
@@ -923,45 +923,45 @@ outframe
 
 
 ## WARNING!
-## The following line works only in Azure Machine Learning Studio
+## The following line works only in Azure Machine Learning Studio (classic)
 ## When running in RStudio, this code will result in an error
 #maml.mapOutputPort('outframe')
 ```
 
-Kodun ilk satırını biraz zor ve bazı açıklaması, anlamanıza yardımcı olabilir. Inside out çalışma şunları sunuyoruz:
+İlk kod satırı biraz karmaşık değildir ve bazı açıklamalar bunu anlamanıza yardımcı olabilir. İçinden çalışırken şunlar vardır:
 
-1. ' **[[** 'Bağımsız değişkeni işlecini'**1**' aksamalar, bağıntılar vektörü ccf nesne listesinin ilk öğeyi seçer.
-2. `do.call()` İşlevi uygular `rbind()` işlevi listedeki öğeleri üzerinde döndürür tarafından `lapply()`.
-3. `data.frame()` İşlevi tarafından üretilen sonuç olacak şekilde zorlar `do.call()` bir veri çerçevesi için.
+1. '**1**' bağımsız değişkenine sahip ' **[[** ' işleci, CCF nesne listesinin ilk öğesinden gelen lags 'teki bağıntılar vektörünü seçer.
+2. `do.call()` işlevi, `rbind()` işlevini, liste `lapply()`tarafından döndürülen öğelerin üzerine uygular.
+3. `data.frame()` işlevi, `do.call()` tarafından oluşturulan sonucu bir veri çerçevesine zorlar.
 
-Satır adları bir veri çerçevesi sütunda olduğunu unutmayın. Elde edilen çıktı, adları bunu korur satır yapılması [R betiği yürütme][execute-r-script].
+Satır adlarının veri çerçevesinin bir sütununda olduğunu unutmayın. Bunun yapılması, [yürütme R betiğindeki][execute-r-script]çıktılar olduğunda satır adlarını korur.
 
-Şekil 19'gösterilen çıkışı üretir kodu çalıştıran, ı **Görselleştir** sonuç veri kümesi bağlantı noktasında çıktı. Satır ilk sütunda, beklendiği gibi adlarıdır.
+Kodu çalıştırmak, sonuç veri kümesi bağlantı noktasında çıktıyı **Görselleştirdiğimde** Şekil 19 ' da gösterilen çıktıyı üretir. Satır adları, hedeflenen şekilde ilk sütunlardır.
 
-![Sonuç çıktısı bağıntı analiz](./media/r-quickstart/fig20.png)
+![Bağıntı analizinden alınan sonuç çıktısı](./media/r-quickstart/fig20.png)
 
-*Şekil 19. Bağıntı analiz çıktı sonuçları.*
+*Şekil 19. Bağıntı analizinden alınan sonuç çıktısı.*
 
-## <a id="seasonalforecasting"></a>Zaman serisi örnek: dönemsel tahmin
+## <a id="seasonalforecasting"></a>Zaman serisi örneği: mevsimsel tahmin
 
-Verilerimizi artık analiz için uygun bir biçimde ve değişkenleri arasında önemli hiçbir bağıntılar vardır belirledik. Şimdi ilerleyelim ve bir zaman serisi tahmin modeli eğitir oluşturun. Bu modeli kullanarak biz California sütlü üretim 2013 12 ayı için tahmin.
+Verilerimiz artık analiz için uygun bir biçimde olduğundan, değişkenler arasında önemli bir ilişki bulunmadığını belirledik. Bir zaman serisi tahmin modeli taşıyıp oluşturalım. Bu modeli kullanarak, California mılmi üretimini 2013 aylık 12 ay boyunca tahmin edeceğiz.
 
-Tahmin modelimizi, iki bileşen, bir eğilim bileşeni ve dönemsel bileşen olacaktır. Tam tahmin bu iki bileşenin ürünüdür. Bu tür bir model çarpma model olarak bilinir. Alternatif eklenebilir bir modeldir. Günlük dönüştürme zaten bu analiz tractable getiren ilgi değişkenlere uyguladınız.
+Tahmin modelimizin iki bileşeni, bir eğilim bileşeni ve bir mevsimlik bileşeni olacaktır. Tüm tahmin, bu iki bileşenin ürünüdür. Bu tür bir model, bir çoğultıcı model olarak bilinir. Alternatif bir eklenebilir modeldir. İlgilendiğiniz değişkenlere zaten bir günlük dönüştürmesi uyguladık, bu da bu analiz tractable 'ı oluşturur.
 
-Bu bölüm için tam R kodu [MachineLearningSamples-not defterlerini/studio-samples](https://github.com/Azure-Samples/MachineLearningSamples-Notebooks/tree/master/studio-samples).
+Bu bölümün tam R kodu, [Machinelearningsamples-Not defterleri/Studio-Samples](https://github.com/Azure-Samples/MachineLearningSamples-Notebooks/tree/master/studio-samples)içinde bulunur.
 
-### <a name="creating-the-dataframe-for-analysis"></a>Analiz için veri çerçevesi oluşturma
+### <a name="creating-the-dataframe-for-analysis"></a>Analiz için veri çerçevesini oluşturma
 
-Başlangıç ekleyerek bir **yeni** [R betiği yürütme] [ execute-r-script] denemenizi modülü. Connect **sonuç veri kümesini** varolan çıkış [R betiği yürütme] [ execute-r-script] modülüne **Dataset1** yeni modülünün giriş. Sonuç Şekil 20 gibi görünmelidir.
+Denemeniz için yeni bir [R betiği çalıştırma][execute-r-script] modülü ekleyerek başlayın. Mevcut [Execute R betiği][execute-r-script] modülünün **sonuç veri kümesi** çıkışını yeni modülün **dataSet1** girişine bağlayın. Sonuç şekil 20 ' ye benzer bir şekilde görünmelidir.
 
-![Eklenen yeni R betiği yürütme modülü ile deneme](./media/r-quickstart/fig21.png)
+![Yeni Execute R betiği modülü eklendi](./media/r-quickstart/fig21.png)
 
-*Şekil 20. Eklenen yeni R betiği yürütme modülü ile deneme.*
+*Şekil 20. Yeni Execute R betiği modülü eklendi.*
 
-Olarak yeni tamamladığımız, bağıntı analiziyle POSIXct zaman serisi nesnesi içeren bir sütun eklemek ihtiyacımız var. Aşağıdaki kod, yalnızca bu yapar.
+Yalnızca tamamladığımız bağıntı analizinde olduğu gibi, POSIXct zaman serisi nesnesine sahip bir sütun eklememiz gerekiyor. Aşağıdaki kod yalnızca bunu kullanacaktır.
 
 ```R
-# If running in Machine Learning Studio, uncomment the first line with maml.mapInputPort()
+# If running in Machine Learning Studio (classic), uncomment the first line with maml.mapInputPort()
 cadairydata <- maml.mapInputPort(1)
 
 ## Create a new column as a POSIXct object
@@ -971,7 +971,7 @@ cadairydata$Time <- as.POSIXct(strptime(paste(as.character(cadairydata$Year), "-
 str(cadairydata)
 ```
 
-Bu kodu çalıştırmak ve günlüğüne bakın. Sonuç, Şekil 21 gibi görünmelidir.
+Bu kodu çalıştırın ve günlüğe bakın. Sonuç şekil 21 gibi görünmelidir.
 
     [ModuleOutput] [1] "Loading variable port1..."
     [ModuleOutput] 
@@ -995,13 +995,13 @@ Bu kodu çalıştırmak ve günlüğüne bakın. Sonuç, Şekil 21 gibi görünm
     [ModuleOutput] 
     [ModuleOutput]  $ Time             : POSIXct, format: "1995-01-01" "1995-02-01" ...
 
-*Şekil 21. Bir veri çerçevesi özeti.*
+*Şekil 21. Veri çerçevesinin Özeti.*
 
-Bu sonuç ile çözümlememiz başlatmak hazırız.
+Bu sonuçla Analize başlamaya hazırız.
 
-### <a name="create-a-training-dataset"></a>Bir eğitim veri kümesi oluşturma
+### <a name="create-a-training-dataset"></a>Eğitim veri kümesi oluşturma
 
-Oluşturulan veri çerçevesi ile size bir eğitim veri kümesi oluşturmanız gerekir. Bu veriler, 2013 yılının son 12 dışında gözlemleri tüm test kümemizi olduğu içerir. Aşağıdaki alt kümelerini dataframe kod ve çizimler Süt üretimini ve fiyat değişkenlerin oluşturur. Ben bu dört üretim çizimleri oluşturmak ve değişkenleri fiyatı. Anonim bir işlevdir bazı artırmaktadır çizim için tanımlayın ve diğer iki bağımsız değişkenlerle listesi boyunca yineleme yapmak için kullanılan `Map()`. Düşünmek, bir döngü ince burada hakkında deneyimli olduğunuzu için doğru. Ancak, R miyim işlevsel yaklaşım gösteren işlevsel bir dildir olduğundan.
+Oluşturulan veri çerçevesi ile bir eğitim veri kümesi oluşturmanız gerekir. Bu veriler, test veri kümizin olan 2013 yılının son 12. hariç tüm gözlemleri içerir. Aşağıdaki kod, veri çerçevesini alt kümeler ve süt üretim ve fiyat değişkenlerinin çizim kümelerini oluşturur. Ardından dört üretim ve fiyat değişkenlerinin çizimlerini oluşturdum. Bir anonim işlev, çizim için bazı genişletmelerin tanımlanması ve ardından `Map()`diğer iki bağımsız değişkenin listesini yinelemek için kullanılır. Bir for döngüsünün burada düzgün çalıştığını düşünüyorsanız, doğru olursunuz. Ancak, R bir işlevsel dil olduğundan işlevsel bir yaklaşım gösterdim.
 
 ```R
 cadairytrain <- cadairydata[1:216, ]
@@ -1014,32 +1014,32 @@ Ylabs  <- list("Log CA Cotage Cheese Production, 1000s lb",
 Map(function(y, Ylabs){plot(cadairytrain$Time, y, xlab = "Time", ylab = Ylabs, type = "l")}, cadairytrain[, 4:7], Ylabs)
 ```
 
-Kod çalıştırma, zaman serisi Şekil 22'de gösterilen R cihazında çıktısından çizer dizi üretir. Zaman ekseni tarihleri yöntemi seriyi çizmek zaman iyi bir yararı birimleri cinsinden olduğunu unutmayın.
+Kodu çalıştırmak, Şekil 22 ' de gösterilen R cihaz çıktısından zaman serisi çiztiğini üretir. Zaman ekseninin, zaman serisi çizim yönteminin iyi bir avantajı olan Tarih birimi cinsinden olduğunu unutmayın.
 
-![Zaman serisi çizimleri California Süt üretimini ve fiyat verilerin ilk](./media/r-quickstart/unnamed-chunk-161.png)
+![California süt üretimi ve fiyat verilerinin zaman serisi çizilerinde ilki](./media/r-quickstart/unnamed-chunk-161.png)
 
-![Zaman serisi çizimleri California Süt üretimini ve fiyat veri saniyesi](./media/r-quickstart/unnamed-chunk-162.png)
+![California süt üretimi ve fiyat verilerinin zaman serisi çizme saniyesi](./media/r-quickstart/unnamed-chunk-162.png)
 
-![Zaman serisi çizimleri California Süt üretimini ve fiyat verilerin bir kısmını](./media/r-quickstart/unnamed-chunk-163.png)
+![California süt üretimi ve fiyat verilerinin üçüncü zaman serisi çizimleri](./media/r-quickstart/unnamed-chunk-163.png)
 
-![Zaman serisi çizimleri California Süt üretimini ve fiyat veri, dördüncü](./media/r-quickstart/unnamed-chunk-164.png)
+![California süt üretimi ve fiyat verilerinin dördüncü zaman serisi çizimleri](./media/r-quickstart/unnamed-chunk-164.png)
 
-*Şekil 22. Zaman serisi çizimleri California Süt üretim ve fiyat verileri.*
+*Şekil 22. California süt üretimi ve fiyat verilerinin zaman serisi çizimleri.*
 
-### <a name="a-trend-model"></a>Eğilim modeli
+### <a name="a-trend-model"></a>Bir eğilim modeli
 
-Zaman serisi nesne ve verileri göz sahip oluşturulduktan sonra California sütlü üretim verileri için bir eğilim modeli oluşturmak başlayalım. Zaman serisi regresyonla biz bunu yapabilirsiniz. Ancak, size en fazla bir Eğim gerekir ve doğru bir şekilde gözlemlenen eğilimi eğitim verilerini modellemek için ıntercept çizim gelen temizleyin.
+Bir zaman serisi nesnesi oluşturdunuz ve verilere baktığımızda, California mılm üretim verileri için bir eğilim modeli oluşturmaya başalım. Bunu bir zaman serisi gerileme ile yapabiliriz. Ancak, eğitim verilerinde gözlemlenen eğilimi doğru şekilde modellemek için bir eğim ve kesme noktası olması gereken çizim çizitide bir araya gelir.
 
-Verilerin küçük ölçekli göz önünde bulundurulduğunda, ı RStudio eğilimi için model derleme Kes ve elde edilen modeli Azure Machine Learning Studio'ya yapıştırın. RStudio, bu tür bir etkileşimli analiz için etkileşimli bir ortam sağlar.
+Verilerin küçük ölçekli verileri verildiğinde, RStudio 'da eğilim için model oluşturacak ve sonra elde edilen modeli kesip Azure Machine Learning Studio klasik sürümüne yapıştıracağım. RStudio Bu etkileşimli analiz türü için etkileşimli bir ortam sağlar.
 
-Bir ilk deneme ben bir Polinom gerileme powers kadar 3 ile deneyin. Bu tür modelleri aşırı sığdırma gerçek olma tehlikesi yoktur. Bu nedenle, üst sıra koşulları kaçınmanız en iyisidir. `I()` İşlevi boşmuş içeriği yorumu ('olduğundan' içeriği yorumlar) ve tam anlamıyla yorumlanan bir işlev bir regresyon denklemde yazmanıza olanak sağlar.
+İlk denemede 3 ' e kadar üslerle bir polinom gerileme deneyeceğim. Bu tür modelleri aşırı sığdırma konusunda gerçek bir tehlike vardır. Bu nedenle, yüksek sıra terimlerinin önüne geçmek en iyisidir. `I()` işlevi, içeriğin (' olduğu gibi ') içeriğini (') olarak yorumlar ve bir gerileme denkleminde bir tam olarak yorumlanan bir işlev yazmanızı sağlar.
 
 ```R
 milk.lm <- lm(Milk.Prod ~ Time + I(Month.Count^2) + I(Month.Count^3), data = cadairytrain)
 summary(milk.lm)
 ```
 
-Bu, aşağıdaki oluşturur.
+Bu, aşağıdakileri oluşturur.
 
     ##
     ## Call:
@@ -1063,14 +1063,14 @@ Bu, aşağıdaki oluşturur.
     ## Multiple R-squared:  0.941,    Adjusted R-squared:  0.94
     ## F-statistic: 1.12e+03 on 3 and 212 DF,  p-value: <2e-16
 
-P değerlerden (`Pr(>|t|)`) bu çıkış, kare terim önemli olmayabilir görebiliriz. Kullanacağım `update()` kare terim bırakarak bu modeli değiştirmek için işlevi.
+Bu çıktıda P değerlerinden (`Pr(>|t|)`), kare içinde dönemin önemli olabileceğini görebiliriz. Kare içinde dönemi bırakarak bu modeli değiştirmek için `update()` işlevini kullanabilirim.
 
 ```R
 milk.lm <- update(milk.lm, . ~ . - I(Month.Count^2))
 summary(milk.lm)
 ```
 
-Bu, aşağıdaki oluşturur.
+Bu, aşağıdakileri oluşturur.
 
     ##
     ## Call:
@@ -1092,9 +1092,9 @@ Bu, aşağıdaki oluşturur.
     ## Multiple R-squared:  0.941,  Adjusted R-squared:  0.94
     ## F-statistic: 1.69e+03 on 2 and 213 DF,  p-value: <2e-16
 
-Bu, daha iyi görünüyor. Önemli olan tüm koşulları. Ancak, 2e-16 değer varsayılan değerdir ve aşırı ciddiye alınmamalıdır.  
+Bu daha iyi bir şekilde görünür. Tüm koşullar önemlidir. Ancak, 2E-16 değeri varsayılan bir değerdir ve çok önemli bir şekilde alınmamalıdır.  
 
-Sağlamlık test, bir zaman serisi çizim California Süt üretim veri gösterilen eğilim eğrinin ile olalım. Azure Machine Learning Studio'da aşağıdaki kodu eklediğiniz [R betiği yürütme] [ execute-r-script] model oluşturmak ve bir çizim yapmak için model (RStudio değil). Sonuç, Şekil 23'te gösterilir.
+Sağlamlık bir test olarak, California süt üretim verilerinin bir zaman serisi çizimi olarak gösterilen eğilim eğrisini oluşturalım. Aşağıdaki kodu, modeli oluşturmak ve bir çizim yapmak için Azure Machine Learning Studio [Execute R betik][execute-r-script] modelinin (rstudio değil) klasik sürümüne ekledik. Sonuç Şekil 23 ' te gösterilir.
 
 ```R
 milk.lm <- lm(Milk.Prod ~ Time + I(Month.Count^3), data = cadairytrain)
@@ -1103,24 +1103,24 @@ plot(cadairytrain$Time, cadairytrain$Milk.Prod, xlab = "Time", ylab = "Log CA Mi
 lines(cadairytrain$Time, predict(milk.lm, cadairytrain), lty = 2, col = 2)
 ```
 
-![California sütlü üretim verileri ile gösterilen eğilim modeli](./media/r-quickstart/unnamed-chunk-18.png)
+![Eğilim modeliyle birlikte California mıli üretim verileri gösterildi](./media/r-quickstart/unnamed-chunk-18.png)
 
-*Şekil 23. California sütlü üretim verileri ile gösterilen eğilim modeli.*
+*Şekil 23. Eğilim modeliyle birlikte California mıli üretim verileri gösteriliyor.*
 
-Veri eğilimi modeli oldukça iyi en uygun gibi görünüyor. Daha fazla değil gözükmüyor atlayarak sığdırma kanıtı olarak model eğrisindeki tek wiggles gibi.  
+Eğilim modeli verileri oldukça iyi bir şekilde sığdırır. Ayrıca, model eğrisindeki tek wggles gibi çok fazla ekleme konusunda kanıt yok gibi görünüyor.  
 
-### <a name="seasonal-model"></a>Dönemsel modeli
+### <a name="seasonal-model"></a>Mevsimlik modeli
 
-Elle içinde bir eğilim modeliyle push ve dönemsel etkileri eklemek ihtiyacımız var. Yılın ayını Doğrusal model işlevsiz bir değişken olarak aydan aya etkisi yakalamak için kullanacağız. Bir modele faktörü değişkenleri yapılırsa, kesme noktası'nin olmayan hesaplanan gerekir unutmayın. Bunu yaparsanız, formül aşırı belirtilir ve R için istenen faktör bırak ancak ıntercept terimi tutun.
+El ile bir eğilim modeliyle, tek yapmanız gereken ve mevsimsiz etkileri içermelidir. Aylık ay efektini yakalamak için yılın ayı doğrusal modelde bir kukla değişken olarak kullanacağız. Bir modele Factor değişkenleri tanıdığınızda, kesme noktası hesaplanmamalıdır. Bunu yapmazsanız, formül aşırı belirtilmiştir ve R istenen faktörlerden birini bırakacak ancak kesme terimini tutacaktır.
 
-Biz tatmin edici eğilim modeli olduğundan kullanabiliriz `update()` durumda yeni HÜKÜMLERİN mevcut modele eklemek için işlevi. -1 güncelleştirme formülde ıntercept terimi bırakır. RStudio içinde şu anda devam etmesini:
+Tatmin edici bir eğilim modeliniz olduğundan, yeni terimleri mevcut modele eklemek için `update()` işlevini kullanabiliriz. Güncelleştirme formülündeki-1, kesme terimini bırakır. RStudio 'da Şu anda devam ediliyor:
 
 ```R
 milk.lm2 <- update(milk.lm, . ~ . + Month - 1)
 summary(milk.lm2)
 ```
 
-Bu, aşağıdaki oluşturur.
+Bu, aşağıdakileri oluşturur.
 
     ##
     ## Call:
@@ -1154,9 +1154,9 @@ Bu, aşağıdaki oluşturur.
     ## Multiple R-squared:     1,    Adjusted R-squared:     1
     ## F-statistic: 1.42e+06 on 14 and 202 DF,  p-value: <2e-16
 
-Model artık ıntercept bir dönemi kapsar ve 12 ay önemli faktörler olan görüyoruz. Bu, tam olarak görmek istedik olur.
+Modelin artık bir kesme dönemi olmadığını ve 12 önemli ay faktörü olduğunu görüyoruz. Bu, tam olarak neyi görmek istiyorduk.
 
-Dönemsel modeli nasıl çalıştığını görmek için başka bir zaman serisi çizim California Süt üretim veri olalım. Azure Machine Learning Studio'da aşağıdaki kodu eklediğiniz [R betiği yürütme] [ execute-r-script] model oluşturmak ve bir çizim yapmak için.
+Ayrıca, mevsimlik modelinin ne kadar iyi çalıştığını görmek için California süt üretim verilerinin başka bir zaman serisi çizimi oluşturalım. Modeli oluşturmak ve bir çizim yapmak için, Azure Machine Learning Studio [Execute R betiğini][execute-r-script] klasik sürümünde aşağıdaki kodu ekledik.
 
 ```R
 milk.lm2 <- lm(Milk.Prod ~ Time + I(Month.Count^3) + Month - 1, data = cadairytrain)
@@ -1165,15 +1165,15 @@ plot(cadairytrain$Time, cadairytrain$Milk.Prod, xlab = "Time", ylab = "Log CA Mi
 lines(cadairytrain$Time, predict(milk.lm2, cadairytrain), lty = 2, col = 2)
 ```
 
-Azure Machine Learning Studio'da bu kodu çalıştırmadan şekil 24'teki çizim üretir.
+Bu kodun klasik Azure Machine Learning Studio sürümünde çalıştırılması Şekil 24 ' te gösterilen çizimi üretir.
 
-![Dönemsel etkileri de dahil olmak üzere modeliyle California sütlü üretim](./media/r-quickstart/unnamed-chunk-20.png)
+![Mevsim etkileri dahil olmak üzere modelmılk üretimi](./media/r-quickstart/unnamed-chunk-20.png)
 
-*Şekil 24. Dönemsel etkileri de dahil olmak üzere modeliyle California sütlü üretim.*
+*Şekil 24. California mılmi, mevsimsel etkiler dahil olmak üzere modeldir.*
 
-Şekil 24'de gösterilen veri Sığdır yerine encouraging. Hem eğilimi hem de mevsimsel etkisi (aylık değişim) makul arayın.
+Şekil 24 ' te gösterilen verilere Sığdır bunun yerine teşvik. Hem eğilim hem de mevsimsel efekt (aylık değişim) makul bir şekilde görünür.
 
-Modelimiz, başka bir onay, şimdi Kalanlar göz vardır. Aşağıdaki kodu bizim iki modeli tahmin edilen değerleri hesaplar, Dönemsel modelin Kalanlar hesaplar ve ardından bu Kalanlar eğitim verileri çizer.
+Modelinize başka bir denetim olarak göz atalım. Aşağıdaki kod, iki modelimizin tahmin edilen değerlerini hesaplar, mevsimlik modelinin kalan değerlerini hesaplar ve ardından eğitim verileri için bu fazlalıklar çizer.
 
 ```R
 ## Compute predictions from our models
@@ -1185,42 +1185,42 @@ residuals <- cadairydata$Milk.Prod - predict2
 plot(cadairytrain$Time, residuals[1:216], xlab = "Time", ylab ="Residuals of Seasonal Model")
 ```
 
-Kalan çizim şekil 25'gösterilir.
+Fazlalık çizimi Şekil 25 ' te gösterilir.
 
-![Eğitim verileri yönelik dönemsel modelin Kalanlar](./media/r-quickstart/unnamed-chunk-21.png)
+![Eğitim verileri için mevsimlik modelinin fazlalıklar](./media/r-quickstart/unnamed-chunk-21.png)
 
-*Şekil 25. Dönemsel modeli için eğitim verileri Kalanlar.*
+*Şekil 25. Eğitim verileri için mevsimlik modelinin fazlalıklar.*
 
-Bu Kalanlar makul arayın. Hiçbir modelimiz için hesaba katmaz 2008-2009 krizden etkisini dışında özel bir yapı yoktur özellikle iyi.
+Bu fazlalıklar makul bir şekilde görünür. 2008-2009 recesine, ancak modelimizin özellikle de hesaba dahil olmadığı durumlar dışında belirli bir yapı yoktur.
 
-Şekil 25'gösterilen çizimi, Kalanlar içinde herhangi bir bağımlı desenleri algılamak için faydalıdır. Açık bir yaklaşım, hesaplama ve kullandım çizme Kalanlar zaman sırada çizim yerleştirir. Öte yandan, ı çizilen, `milk.lm$residuals`, çizim zaman sırada bulunması gereken değil.
+Şekil 25 ' te gösterilen çizim, fazlalıklar içindeki zamana bağlı desenleri algılamak için yararlıdır. Kullandığım fazlalıklar için ve çizdiğim açık yaklaşım, çizim üzerinde zaman sırasına göre yer alır. Diğer taraftan, `milk.lm$residuals`çizdim, çizim zaman sıraya alınmıyor.
 
-Ayrıca `plot.lm()` tanılama çizimler bir dizi oluşturmak için.
+`plot.lm()` bir dizi tanılama grafiğini oluşturmak için de kullanabilirsiniz.
 
 ```R
 ## Show the diagnostic plots for the model
 plot(milk.lm2, ask = FALSE)
 ```
 
-Bu kod, Şekil 26 ' gösterilen tanılama çizimler bir dizi oluşturur.
+Bu kod Şekil 26 ' da gösterilen bir dizi tanılama grafiğini üretir.
 
-![İlk dönemsel modeli için tanılama çizimler](./media/r-quickstart/unnamed-chunk-221.png)
+![Dönemsel model için tanılama çizden ilki](./media/r-quickstart/unnamed-chunk-221.png)
 
-![Dönemsel modeli için tanılama çizimleri saniyesi](./media/r-quickstart/unnamed-chunk-222.png)
+![Dönemsel model için tanılama çizikinin saniyesi](./media/r-quickstart/unnamed-chunk-222.png)
 
-![Dönemsel modeli için tanılama çizimleri, üçüncü](./media/r-quickstart/unnamed-chunk-223.png)
+![Mevsimlik modeli için tanılama çizbir üçüncü](./media/r-quickstart/unnamed-chunk-223.png)
 
-![Dönemsel modeli için tanılama çizimleri, dördüncü](./media/r-quickstart/unnamed-chunk-224.png)
+![Mevsimlik modeli için dördüncü tanılama çizimleri](./media/r-quickstart/unnamed-chunk-224.png)
 
-*Şekil 26. Tanılama dönemsel modelini çizer.*
+*Şekil 26. Mevsimlik modeli için tanılama çizimleri.*
 
-Bu çizimler, ancak hiçbir şey harika sorunu neden tanımlanmış birkaç yüksek oranda etkili noktalar vardır. Normal Q-Q çizim Kalanlar normal için Doğrusal model için önemli bir varsayım Kapat daha da görebiliriz.
+Bu çizimler için çok sayıda etkili şekilde tanımlanmış bir işaret vardır, ancak harika bir sorun oluşmasına neden olmaz. Diğer bir deyişle, normal Q-Q çizinden kalan ve doğrusal modeller için önemli bir varsayım olan kalanlar
 
-### <a name="forecasting-and-model-evaluation"></a>Tahmin ve model değerlendirme
+### <a name="forecasting-and-model-evaluation"></a>Tahmin ve model değerlendirmesi
 
-Bizim örneğimizde tamamlamak için yalnızca bir şey daha vardır. Tahminlerini hesaplamak ve hataya karşı gerçek veriler ölçmek ihtiyacımız var. Bizim tahmin 2013 12 ay boyunca olacaktır. Biz bu tahmin eğitim veri kümemizdeki bir parçası değil gerçek veriler için bir hata ölçü hesaplayabilirsiniz. Ayrıca, biz performansı test verilerinin 12 ay eğitim veri 18 yıl karşılaştırabilirsiniz.  
+Örneğimizi tamamlamaya yönelik yalnızca bir şey daha vardır. Tahminleri hesapladık ve hatayı gerçek verilerle ölçmemiz gerekiyor. Tahminimiz 12 ay 2013 için olacaktır. Bu tahmine yönelik bir hata ölçüsünü eğitim veri kümizin kapsamında olmayan gerçek verilere göre hesaplamanız için işlem yapabilirsiniz. Ayrıca, 18 yıllık eğitim verileriyle ilgili performansı, test verilerinin 12 ayı ile karşılaştırabiliriz.  
 
-Birkaç ölçüm, zaman serisi modelleri performansını ölçmek için kullanılır. Örneğimizde kök Ortalama kare (RMS) hata kullanacağız. Aşağıdaki işlev iki seriler arasında RMS hata hesaplar.  
+Zaman serisi modellerinin performansını ölçmek için bir dizi ölçüm kullanılır. Bu durumda kök ortalama kare (RMS) hatasını kullanacağız. Aşağıdaki işlev, RMS hatasını iki seri arasında hesaplar.  
 
 ```R
 RMS.error <- function(series1, series2, is.log = TRUE, min.length = 2){
@@ -1268,9 +1268,9 @@ predict2  <- predict(milk.lm2, cadairydata)
 }
 ```
 
-Olduğu gibi `log.transform()` "değer dönüştürmeleri" bölümünde ele aldığımız işlevi birçok hata denetimi ve özel durum kurtarma kodu Bu işlevde yoktur. İşe ilkeleri aynıdır. İçinde sarmalanmış iki yerde çalışmanın `tryCatch()`. İlk olarak, zaman serisi exponentiated,, çünkü değerleri günlükleriyle çalışıyoruz. İkinci olarak, gerçek RMS hata hesaplanır.  
+"Değer dönüşümleri" bölümünde ele aldığımız `log.transform()` işlevinde olduğu gibi, bu işlevde çok sayıda hata denetimi ve özel durum kurtarma kodu vardır. Kullanılan ilkeler aynıdır. İş, `tryCatch()`Sarmalanan iki yerde yapılır. İlk olarak, değerlerin günlükleriyle çalıştık olduğundan, zaman serisi üs olarak dağıtılır. İkinci olarak, gerçek RMS hatası hesaplanır.  
 
-RMS hata ölçmek için bir işlev ile donatılmış, şimdi oluşturun ve RMS hataları içeren bir dataframe çıktı. Tek başına bir eğilim modeli için hüküm ve sezona yönelik faktörleri tam modelin dahil edilir. Aşağıdaki kod, oluşturulmuş iki Doğrusal Model kullanarak işi yapar.
+RMS hatasını ölçmek için bir işlev ile donatılmış, RMS hatalarını içeren bir veri çerçevesi oluşturup çıktısını verlim. Yalnızca eğilim modelinin koşullarını ve mevsimsel faktörlerle tüm modeli kapsayacaktır. Aşağıdaki kod, oluşturduğumuz iki doğrusal modeli kullanarak işi yapar.
 
 ```R
 ## Compute the RMS error in a dataframe
@@ -1288,51 +1288,51 @@ rowNames = c("Trend Model", "Seasonal Model"),
 RMS.df
 
 ## The following line should be executed only when running in
-## Azure Machine Learning Studio
+## Azure Machine Learning Studio (classic)
 maml.mapOutputPort('RMS.df')
 ```
 
-Bu kodu çalıştırmadan şekil 27 sonuç veri kümesinin çıkış bağlantı noktasında gösterilen bir çıktı üretir.
+Bu kodu çalıştırmak, sonuç veri kümesi çıkış bağlantı noktasında Şekil 27 ' de gösterilen çıktıyı üretir.
 
-![RMS hataları modellerine yönelik karşılaştırması](./media/r-quickstart/fig26.png)
+![Modeller için RMS hatalarının karşılaştırılması](./media/r-quickstart/fig26.png)
 
-*Şekil 27. RMS hataları modellerine yönelik karşılaştırması.*
+*Şekil 27. Modeller için RMS hatalarının karşılaştırması.*
 
-Bu sonuçlardan modele dönemsel Etkenler ekleme RMS hata önemli ölçüde azaltır olduğunu görüyoruz. Çok edilebileceği RMS eğitim verileri için bir bit'den az tahmin için bir hatadır.
+Bu sonuçlardan, modele mevsimsel faktörleri eklemenin, RMS hatasını önemli ölçüde azalttığını görüyoruz. Çok fazla değil, eğitim verileri için RMS hatası tahmine göre biraz daha küçüktür.
 
-## <a id="appendixa"></a>RStudio belgeler için kılavuz
+## <a id="appendixa"></a>RStudio belgelerine yönelik kılavuz
 
-RStudio oldukça iyi belgelenmiştir. Bazı önemli bölümleri başlamanıza yardımcı olmak için RStudio belgelerine bağlantılar aşağıda verilmiştir.
+RStudio oldukça iyi belgelenmiştir. İşte, başlamanızı sağlamak için RStudio belgelerinin önemli bölümlerine bazı bağlantılar verilmiştir.
 
-* **Proje oluşturma** -düzenleyebilir ve Rstudio'yu kullanarak R kodunuzdaki projelere yönetin. Bkz: [kullanarak projeleri](https://support.rstudio.com/hc/articles/200526207-Using-Projects) Ayrıntılar için. Ben, aşağıdaki yönergeleri izleyin ve bu makalede R kod örnekleri için bir proje oluşturun öneririz.  
-* **Düzenleme ve R kodu yürüten** -RStudio düzenleme ve R kodunu yürütmek için tümleşik bir ortam sağlar. Bkz: [düzenleme ve kod yürütülürken](https://support.rstudio.com/hc/articles/200484448-Editing-and-Executing-Code) Ayrıntılar için.
-* **Hata ayıklama** -RStudio güçlü hata ayıklama özellikleri içerir. Bkz: [RStudio ile hata ayıklama](https://support.rstudio.com/hc/articles/200713843-Debugging-with-RStudio) bu özellikler hakkında daha fazla bilgi için. Kesme noktası özellikleri sorun giderme hakkında daha fazla bilgi için bkz. [kesme noktası sorunlarını giderme](https://support.rstudio.com/hc/articles/200534337-Breakpoint-Troubleshooting).
+* **Projeler oluşturma** -R kodunuzu, rstudio kullanarak projeler halinde düzenleyebilir ve yönetebilirsiniz. Ayrıntılar için bkz. [projeleri kullanma](https://support.rstudio.com/hc/articles/200526207-Using-Projects) . Bu yönergeleri izlemenizi ve bu makaledeki R kodu örnekleri için bir proje oluşturmanızı tavsiye ederim.  
+* **R Code-rstudio ' un düzenlenebilmesi ve yürütülmesi** r kodunu düzenleyip yürütmek için tümleşik bir ortam sağlar. Ayrıntılar için bkz. [kod düzenleniyor ve yürütülüyor](https://support.rstudio.com/hc/articles/200484448-Editing-and-Executing-Code) .
+* **Hata ayıklama** -rstudio güçlü hata ayıklama özellikleri içerir. Bu özellikler hakkında daha fazla bilgi için bkz. [RStudio Ile hata ayıklama](https://support.rstudio.com/hc/articles/200713843-Debugging-with-RStudio) . Kesme noktası sorun giderme özellikleri hakkında bilgi için bkz. [kesme noktası sorun giderme](https://support.rstudio.com/hc/articles/200534337-Breakpoint-Troubleshooting).
 
-## <a id="appendixb"></a>Daha fazla bilgi
+## <a id="appendixb"></a>Daha fazla okuma
 
-R programlama Bu öğretici, Azure Machine Learning Studio ile R dili kullanmak ihtiyacınız olan temel kavramları kapsar. R ile ilgili bilgi sahibi değilseniz, iki tanıtımları CRAN'de kullanılabilir:
+Bu R programlama öğreticisi, Azure Machine Learning Studio klasik sürümü ile R dilini kullanmak için gerekenler hakkında temel bilgileri içerir. R hakkında bilginiz yoksa, CRAN üzerinde iki tanıtım mevcuttur:
 
-* [Yeni başlayanlar için R](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf) Emmanuel Paradis tarafından başlatmak için iyi bir yerdir.  
-* [R giriş](https://cran.r-project.org/doc/manuals/R-intro.html) W. n tarafından Venables et. Al. biraz daha derinlik geçer.
+* [Yeni başlayanlar Için R](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf) Ile Emmanuel paradne, başlamak için iyi bir yerdir.  
+* W ile [R 'ye giriş](https://cran.r-project.org/doc/manuals/R-intro.html) . N. Venables et. Eşkenar. Biraz daha derinliğe gider.
 
-Başlamanıza yardımcı olabilecek R bir çok kitap mevcuttur. Birkaç faydalı bulabilirim şunlardır:
+R üzerinde başlamanıza yardımcı olabilecek birçok kitap vardır. İşte yararlı buldum.
 
-* **R programlama resim: Bir tur, istatistiksel yazılım tasarımı** Norman Matloff tarafından r programlama mükemmel bir giriş niteliğindedir  
-* **R Kılavuzu** Paul Teetor tarafından r kullanarak bir sorun ve çözümü yaklaşım sağlar.  
-* **R uygulamada** Robert Kabacoff tarafından başka bir kullanışlı tanıtım defteridir. Yardımcısı [hızlı R Web sitesi](https://www.statmethods.net/) faydalı bir kaynaktır.
-* **R Inferno** Patrick Burns ile r'de programlamada karşılaşılan zor ve zor konular sayısı ile ilgilenen yayımladım yanıtlamaya yönelik esprili defteridir Ücretsiz kitap kullanılabilir [R Inferno](https://www.burns-stat.com/documents/books/the-r-inferno/).
-* R ile Gelişmiş konular hakkında ayrıntılı bir inceleme istediğiniz kitabın göz varsa **Gelişmiş R** Hadley Wickham tarafından. Bu kitap'ın çevrimiçi sürümünü ücretsiz kullanılabilir [ http://adv-r.had.co.nz/ ](http://adv-r.had.co.nz/).
+* **R programlamanın sanatı:** Norman Matloff tarafından sunulan Istatistiksel yazılım tasarımının turu, R 'de programlamaya harika bir giriş niteliğindedir.  
+* Paul Teetor tarafından yapılan **r tanımlama kitabı** , r kullanarak bir sorun ve çözüm yaklaşımı sağlar.  
+* Robert Kabacoff tarafından **yapılacak işlem** başka bir kullanışlı tanıtım defteridir. Yardımcı [hızlı R Web sitesi](https://www.statmethods.net/) yararlı bir kaynaktır.
+* **Kınns No** , can, r 'de programlarken karşılaşılabilecek çok sayıda karmaşık ve zor konuyla ilgilenen, büyük bir insanlık defteridir. Kitap, [R Inno](https://www.burns-stat.com/documents/books/the-r-inferno/)'da ücretsiz olarak kullanılabilir.
+* R **'deki gelişmiş konulara** ayrıntılı bir bakış istiyorsanız, bu kitapta Hadley Wickhemi 'a kadar bir görünüm bulabilirsiniz. Bu kitabın çevrimiçi sürümü [http://adv-r.had.co.nz/](http://adv-r.had.co.nz/)adresinden ücretsiz olarak kullanılabilir.
 
-R zaman serisi paketleri kataloğunu bulunabilir [CRAN görev görünümü: Zaman serisi analiz](https://cran.r-project.org/web/views/TimeSeries.html). Paketleri serisi nesnesi hakkında bilgi için belirli bir zaman, paketin belgelerine başvurmanız gerekir.
+R zaman serisi paketlerinin kataloğu, [Cran görev görünümü: zaman serisi analizi](https://cran.r-project.org/web/views/TimeSeries.html)içinde bulunabilir. Belirli zaman serisi nesne paketleri hakkında daha fazla bilgi için bu paketin belgelerine başvurmalısınız.
 
-Kitap **tanıtım zaman serisi** Paul Cowpertwait ve Andrew Metcalfe R R kullanarak zaman serisi analiz için giriş bilgileri sağlar. Çok fazla teorik metinleri R örnekleri sağlar.
+R ile Paul Cowpertwaıt ve Andrew Metcalfe ile kitap **giriş zaman serisi** , zaman serisi analizi için r kullanımına giriş sağlar. Daha çok sayıda teorik metin, R örnekleri sağlar.
 
-Bazı harika internet kaynaklar aşağıda verilmiştir:
+Harika internet kaynakları aşağıda verilmiştir:
 
-* DataCamp tarayıcınız video dersler ve kodlama alıştırmalar alışık olduğunuz, R öğretir. Etkileşimli öğreticileri son R teknikleri ve paketleri vardır. Ücretsiz katılın [R için etkileşimli öğretici](https://www.datacamp.com/courses/introduction-to-r).
-* [Eksiksiz bir kılavuz olan R programlama öğrenin](https://www.programiz.com/r-programming) Programiz öğesinden.
-* Hızlı [R öğretici](https://www.cyclismo.org/tutorial/R/) Clarkson University'den Kelly siyah olarak.
-* Vardır adresinde listelenmiş 60 R kaynakları üzerinden [veri becerilerinizi geliştirmek için üst R dil kaynakları](https://www.computerworld.com/article/2497464/business-intelligence-60-r-resources-to-improve-your-data-skills.html).
+* Veri kampı, video dersleri ve kodlama alıştırmaları ile tarayıcınızın rahatlığını R. En son R teknikleri ve paketleri hakkında etkileşimli öğreticiler vardır. Ücretsiz [etkileşimli R öğreticisini](https://www.datacamp.com/courses/introduction-to-r)alın.
+* Program aracılığıyla [kesin kılavuz olan R programlama hakkında bilgi edinin](https://www.programiz.com/r-programming) .
+* Clarkson University 'ten Kelly siyaha kadar hızlı bir [R öğreticisi](https://www.cyclismo.org/tutorial/R/) .
+* [Veri becerilerinizi geliştirmek Için en üstteki R dil kaynaklarında](https://www.computerworld.com/article/2497464/business-intelligence-60-r-resources-to-improve-your-data-skills.html)listelenen 60 R kaynağı vardır.
 
 <!-- Module References -->
 [execute-r-script]: /azure/machine-learning/studio-module-reference/execute-r-script

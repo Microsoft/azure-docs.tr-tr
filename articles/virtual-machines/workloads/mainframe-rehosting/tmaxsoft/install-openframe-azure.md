@@ -1,6 +1,6 @@
 ---
-title: Azure sanal makinelere TmaxSoft OpenFrame yükleyin
-description: Azure sanal makinelerinde (VM'ler) TmaxSoft OpenFrame ortamı kullanarak IBM z/OS ana iş yüklerinizi yeniden barındırın.
+title: Azure sanal makinelerine TmaxSoft OpenFrame 'i yükle
+description: Azure sanal makinelerinde (VM) TmaxSoft OpenFrame ortamını kullanarak IBM z/OS ana bilgisayar iş yüklerinizi yeniden barındırın.
 services: virtual-machines-linux
 documentationcenter: ''
 author: njray
@@ -8,58 +8,58 @@ ms.author: larryme
 ms.date: 04/02/2019
 ms.topic: article
 ms.service: virtual-machines-linux
-ms.openlocfilehash: b69ded2591478a477cd142decb39218841c9ac62
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 1ad6e52c421d9cfec4640d3a330b5507d6ed3e9b
+ms.sourcegitcommit: 77bfc067c8cdc856f0ee4bfde9f84437c73a6141
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65410119"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72436054"
 ---
-# <a name="install-tmaxsoft-openframe-on-azure"></a>TmaxSoft OpenFrame Azure'a yükleme
+# <a name="install-tmaxsoft-openframe-on-azure"></a>Azure 'da TmaxSoft OpenFrame 'i yükle
 
-Bir OpenFrame ortamı azure'da geliştirme, tanıtımlar, test veya üretim iş yükleri için uygun ayarlama konusunda bilgi edinin. Bu öğreticide, her adımda açıklanmaktadır.
+Azure 'da geliştirme, tanıtımlar, testler veya üretim iş yükleri için uygun bir OpenFrame ortamı ayarlamayı öğrenin. Bu öğretici, her adımda size kılavuzluk eder.
 
-OpenFrame Azure'da anabilgisayar öykünmesi ortam oluşturma, birden çok bileşeni içerir. Örneğin, anabilgisayar ara yazılım IBM müşteri bilgileri denetim sistemi (CICS) gibi çevrimiçi hizmetlere OpenFrame değiştirin ve OpenFrame Batch, kendi TJES bileşeni ile IBM anabilgisayar kişinin iş giriş alt sistem (JES) değiştirir.
+OpenFrame, Azure 'da ana bilgisayar öykünme ortamını oluşturan birden çok bileşen içerir. Örneğin, OpenFrame çevrimiçi hizmetler IBM müşteri bilgileri denetim sistemi (CICS) ve OpenFrame Batch gibi ana bilgisayar ara yazılımını değiştirerek, cjes bileşeniyle birlikte IBM ana hattının Iş girişi alt sistemi (JES) yerini almıştır.
 
-OpenFrame Oracle veritabanı, Microsoft SQL Server, IBM Db2 ve MySQL gibi bir ilişkisel veritabanı ile çalışır. Bu yüklemeyi OpenFrame TmaxSoft Tibero ilişkisel veritabanı kullanır. Bir Linux işletim sisteminde OpenFrame hem Tibero çalıştırın. Desteklenen diğer Linux dağıtımları kullanabilirsiniz, ancak bu öğretici, CentOS 7.3 yükler. Bir sanal makinede (VM) OpenFrame uygulama sunucusu ve Tibero veritabanı yüklenir.
+OpenFrame, Oracle Database, Microsoft SQL Server, IBM DB2 ve MySQL dahil olmak üzere tüm ilişkisel veritabanları ile birlikte çalışarak. OpenFrame 'in bu yüklemesi, TmaxSoft Tibero ilişkisel veritabanını kullanır. Hem OpenFrame hem de Tibero, Linux işletim sisteminde çalışır. Bu öğreticide, desteklenen diğer Linux dağıtımlarını kullanabilseniz de, CentOS 7,3 yüklenir. OpenFrame uygulama sunucusu ve Tibero veritabanı bir sanal makineye (VM) yüklenir.
 
-Öğreticiyi OpenFrame suite bileşenlerini yükleme adımları. Bazı ayrıca yüklenmelidir.
+Bu öğretici, OpenFrame Suite bileşenleri yüklemesinde size kılavuzluk eden bir adım. Bazıları ayrı yüklenmiş olmalıdır.
 
-Ana OpenFrame bileşenler:
+Ana OpenFrame bileşenleri:
 
 - Gerekli yükleme paketleri.
 - Tibero veritabanı.
-- Açık veritabanı bağlantısı (ODBC) OpenFrame uygulamaların Tibero veritabanıyla iletişim kurmak için kullanılır.
-- OpenFrame temeli, tüm sistemin yöneten bir ara yazılım.
-- OpenFrame toplu işlem, ana bilgisayar'ın toplu sistemler değiştirir çözüm.
-- TACF, sistemleri ve kaynaklara kullanıcı erişimini denetleyen bir hizmeti modülü.
-- ProSort, toplu işlem için bir sıralama Aracı'nı tıklatın.
-- OFCOBOL, ana bilgisayar'ın COBOL programlar yorumlar bir derleyici.
-- OFASM, ana bilgisayar'ın assembler programlar yorumlar bir derleyici.
-- OpenFrame sunucu türü C (OSC), ana bilgisayar'ın Ara yazılım ve IBM CICS değiştirir çözüm.
-- Java Enterprise kullanıcı çözümü (JEUS), bir web uygulaması sunucusunun Java Enterprise Edition 6 için sertifikalı.
-- OFGW, 3270 dinleyici sağlayan OpenFrame ağ geçidi bileşeni.
-- OFManager, web ortamında OpenFrame'nın işlem ve yönetim işlevleri sağlayan bir çözüm.
+- Açık veritabanı bağlantısı (ODBC), OpenFrame 'teki uygulamalar tarafından Tibero veritabanıyla iletişim kurmak için kullanılır.
+- Tüm sistemi yöneten ara yazılım olan OpenFrame tabanı.
+- Ana bilgisayarın Batch sistemlerini değiştiren çözüm olan OpenFrame Batch.
+- SITEF, sistem ve kaynaklara Kullanıcı erişimini denetleyen bir hizmet modülüdür.
+- Toplu işlemler için bir sıralama aracı olan Prosıralama.
+- Ana bilgisayarın COBOL programlarını yorumlayan bir derleyici.
+- Ana bilgisayarın assembler programlarını yorumlayan bir derleyici.
+- Ana bilgisayarın ara yazılım ve IBM CICS yerine geçen çözüm olan OpenFrame sunucu türü C (OSC).
+- Java Enterprise Edition 6 için sertifikalı bir Web uygulama sunucusu olan Java Enterprise User Solution (JEUS).
+- OFGW, bir 3270 dinleyicisi sağlayan OpenFrame Gateway bileşeni.
+- Web ortamında OpenFrame 'in işlem ve yönetim işlevlerini sağlayan bir çözüm olan OFManager.
 
-Diğer OpenFrame bileşenler gereklidir:
+Diğer gerekli OpenFrame bileşenleri:
 
-- OSI, ana bilgisayar ara yazılım ve IMS DC değiştirir çözüm.
-- TJES, ana bilgisayar'ın JES ortamı sağlayan çözümü.
-- OFTSAM, açık sistemde kullanılacak (V) SAM dosyaları sağlayan çözümü.
-- OFHiDB, ana bilgisayar değiştirir çözüm IMS DB güçlendirin.
-- OFPLI, PL anabilgisayar yorumlar bir derleyici kullanıcının / ı programları.
-- PROTRIEVE, CA-Easytrieve anabilgisayar dili yürüten bir çözüm.
-- OFMiner, bir çözüm anabilgisayar varlıkları analiz eder ve ardından bunları Azure'a geçirir.
+- OSı, ana bilgisayar ara yazılımı ve ıMS DC 'nin yerini alan bir çözümdür.
+- TJES, ana bilgisayarın JES ortamını sağlayan çözümdür.
+- Açık sistemde kullanılacak (V) SAM dosyalarını sağlayan çözüm.
+- Ana bilgisayarın ıMS DB 'nin yerini alan çözüm.
+- OFPLI, ana bilgisayarın PL/ı programlarını yorumlayan bir derleyicidir.
+- Ana bilgisayar dili CA-Easytrieve çalıştıran bir çözüm olan PROTRIEVE.
+- Ana bilgisayarlar varlıklarını çözümleyen ve sonra bunları Azure 'a geçirirken bir çözüm olan OFMiner.
 
 ## <a name="architecture"></a>Mimari
 
-Aşağıdaki şekil, bu öğreticide OpenFrame 7.0 mimari bileşenler genel bir bakış sağlar:
+Aşağıdaki şekilde, bu öğreticide yüklü OpenFrame 7,0 mimari bileşenlerine genel bir bakış sunulmaktadır:
 
 ![OpenFrame bileşenleri](media/openframe-02.png)
 
 ## <a name="azure-system-requirements"></a>Azure sistem gereksinimleri
 
-Aşağıdaki tabloda, Azure yükleme gereksinimleri listelenmektedir.
+Aşağıdaki tabloda, Azure üzerinde Yükleme gereksinimleri listelenmektedir.
 <!-- markdownlint-disable MD033 -->
 
 <table>
@@ -67,17 +67,17 @@ Aşağıdaki tabloda, Azure yükleme gereksinimleri listelenmektedir.
     <tr><th>Gereksinim</th><th>Açıklama</th></tr>
 </thead>
 <tbody>
-<tr><td>Azure'da desteklenen Linux dağıtımları
+<tr><td>Azure 'da desteklenen Linux dağıtımları
 </td>
 <td>
-Linux x86 2.6 (32-bit, 64-bit)<br/>
-Red Hat 7.x<br/>
-CentOS 7.x<br/>
+Linux x86 2,6 (32 bit, 64-bit)<br/>
+Red hat 7. x<br/>
+CentOS 7. x<br/>
 </td>
 </tr>
 <tr><td>Donanım
 </td>
-<td>Çekirdek: 2 (minimum)<br/>
+<td>Çekirdekler: 2 (minimum)<br/>
 Bellek: 4 GB (minimum)<br/>
 Değiştirme alanı: 1 GB (minimum)<br/>
 Sabit disk: 100 GB (minimum)<br/>
@@ -85,9 +85,9 @@ Sabit disk: 100 GB (minimum)<br/>
 </tr>
 <tr><td>Windows kullanıcıları için isteğe bağlı yazılım
 </td>
-<td>PuTTY: VM özelliklerini yapılandırmak için bu kılavuzda kullanılan<br/>
-WinSCP: Popüler SFTP istemci ve FTP istemcisi kullanabilirsiniz<br/>
-Windows için Eclipse: TmaxSoft tarafından desteklenen bir geliştirme platformu<br/>
+<td>PuTTY: VM özelliklerini yapılandırmak için bu kılavuzda kullanılır<br/>
+WinSCP: kullanabileceğiniz popüler bir SFTP istemcisi ve FTP istemcisi<br/>
+Windows için tutulma: TmaxSoft tarafından desteklenen bir geliştirme platformu<br/>
 (Microsoft Visual Studio şu anda desteklenmiyor)
 </td>
 </tr>
@@ -98,116 +98,116 @@ Windows için Eclipse: TmaxSoft tarafından desteklenen bir geliştirme platform
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-Gerekli olan tüm yazılımların bir araya getirin ve el ile gerçekleştirilen tüm işlemleri tamamlamak için birkaç gün harcamayı planlayın.
+Tüm gerekli yazılımları birleştirmek ve tüm el ile gerçekleştirilen işlemlerin tamamını gerçekleştirmek için birkaç gün harcamayı planlayın.
 
 Başlamadan önce aşağıdakileri yapın:
 
-- OpenFrame yükleme medyasını TmaxSoft alın. Varolan bir TmaxSoft müşteri varsa, lisanslı kopyasını TmaxSoft temsilcinize başvurun. Aksi takdirde, deneme sürümünden istek [TmaxSoft](https://www.tmaxsoft.com/contact/).
+- TmaxSoft 'den OpenFrame yükleme medyasını alın. Var olan bir TmaxSoft müşterisiyseniz, lisanslı bir kopya için TmaxSoft temsilcinizle iletişime geçin. Aksi takdirde, [Tmaxsoft](https://www.tmaxsoft.com/contact/)'ten bir deneme sürümü isteyin.
 
-- E-posta göndererek OpenFrame belgeleri istek <support@tmaxsoft.com>.
+- @No__t-0 ' a e-posta göndererek OpenFrame belgelerini isteyin.
 
-- Zaten yoksa, bir Azure aboneliği edinme. Ayrıca oluşturabileceğiniz bir [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) başlamadan önce.
+- Henüz yoksa bir Azure aboneliği alın. Başlamadan önce [ücretsiz bir hesap](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) da oluşturabilirsiniz.
 
-- İsteğe bağlı. Siteden siteye VPN tüneli veya izin verilen kullanıcılara, kuruluşunuzdaki Azure VM erişimi kısıtlayan bir Sıçrama kutusu ayarlayın. Bu adım gerekli değildir, ancak en iyi bir uygulamadır.
+- İsteğe bağlı. Azure VM 'ye erişimi kuruluşunuzdaki izin verilen kullanıcılarla sınırlayan bir sıçrama kutusu veya siteden siteye VPN tüneli ayarlayın. Bu adım gerekli değildir, ancak en iyi uygulamadır.
 
-## <a name="set-up-a-vm-on-azure-for-openframe-and-tibero"></a>Azure VM'de OpenFrame ve Tibero için ayarlayın
+## <a name="set-up-a-vm-on-azure-for-openframe-and-tibero"></a>OpenFrame ve Tibero için Azure 'da VM ayarlama
 
-Çeşitli dağıtım modelleri kullanarak OpenFrame ortamı ayarlayabilirsiniz, ancak aşağıdaki yordamı OpenFrame uygulama sunucusu ve bir VM üzerinde Tibero veritabanı dağıtma işlemi gösterilmektedir. Daha büyük ortamlarda ve büyük iş yükleri için en iyi yöntem daha iyi performans için kendi VM veritabanında ayrı olarak dağıtmaktır.
+OpenFrame ortamını çeşitli dağıtım düzenlerini kullanarak ayarlayabilirsiniz, ancak aşağıdaki yordamda OpenFrame uygulama sunucusunun ve Tibero veritabanının bir VM 'de nasıl dağıtılacağı gösterilmektedir. Daha büyük ortamlarda ve boyutlandırılabilir iş yükleri için, daha iyi performans sağlamak üzere veritabanını kendi sanal makinesine ayrı olarak dağıtmaktır.
 
-**Bir VM oluşturmak için**
+**VM oluşturmak için**
 
-1. Adresinden Azure portalında Git <https://portal.azure.com> ve hesabınızda oturum açın.
+1. Azure portal <https://portal.azure.com> ' a gidin ve hesabınızda oturum açın.
 
-2. Tıklayın **sanal makineler**.
+2. **Sanal makineler**' e tıklayın.
 
-    ![Azure portalında kaynak listesi](media/vm-01.png)
+    ![Azure portal kaynak listesi](media/vm-01.png)
 
-3. **Ekle**'yi tıklatın.
+3. **Ekle**'ye tıklayın.
 
-    ![Azure portalında seçeneği ekleme](media/vm-02.png)
+    ![Azure portal seçenek Ekle](media/vm-02.png)
 
-4. Sağındaki **işletim sistemleri**, tıklayın **daha fazla**.
+4. **Işletim sistemlerinin**sağında **daha fazla**' ya tıklayın.
 
-     ![Azure Portalı'nda daha fazla seçenek](media/vm-03.png)
+     ![Azure portal daha fazla seçenek](media/vm-03.png)
 
-5. Tıklayın **CentOS tabanlı 7.3** bu gözden geçirme tam olarak takip etmek veya başka bir desteklenen Linux dağıtımı seçebilirsiniz.
+5. Bu Kılavuzu tam olarak izlemek için **CentOS tabanlı 7,3** ' e tıklayın veya desteklenen başka bir Linux dağıtımını seçebilirsiniz.
 
-     ![Azure Portalı'nda işletim sistemi seçenekleri](media/vm-04.png)
+     ![Azure portal işletim sistemi seçenekleri](media/vm-04.png)
 
-6. İçinde **Temelleri** ayarlarını girin **adı**, **kullanıcı adı**, **kimlik doğrulama türü**, **abonelik** (Kullandıkça Öde değer ödeme AWS stilini) ve **kaynak grubu** (var olanı kullanın veya TmaxSoft grubu oluşturma).
+6. **Temel bilgiler** için **ad**, **Kullanıcı adı**, **kimlik doğrulama türü**, **abonelik** (Kullandıkça öde ' ın AWS) ve **kaynak grubunun** (var olan bir tane kullanın veya bir tmaxsoft grubu oluşturun) girin.
 
-7. Tamamlandığında (için ortak/özel anahtar çifti dahil olmak üzere **kimlik doğrulama türü**), tıklayın **Gönder**.
+7. Tamamlandığında ( **kimlik doğrulama türü**için ortak/özel anahtar çifti dahil), **Gönder**' e tıklayın.
 
 > [!NOTE]
-> SSH ortak anahtarı için kullanılıyorsa **kimlik doğrulama türü**, ortak/özel anahtar çifti oluşturmak için sonraki bölümde adımlara bakın, sonra da buradaki adımları devam.
+> **Kimlik doğrulama türü**için SSH ortak anahtarı kullanılıyorsa, ortak/özel anahtar çiftini oluşturmak için sonraki bölümdeki adımlara bakın ve ardından buradaki adımları sürdürebilirsiniz.
 
-### <a name="generate-a-publicprivate-key-pair"></a>Bir ortak/özel anahtar çifti oluşturma
+### <a name="generate-a-publicprivate-key-pair"></a>Ortak/özel anahtar çifti oluşturma
 
 Bir Windows işletim sistemi kullanıyorsanız, bir ortak/özel anahtar çifti oluşturmak için PuTTYgen gerekir.
 
-Ortak anahtar serbestçe paylaşılabilir, ancak özel anahtarı tamamen gizli tutulmalıdır ve hiçbir zaman başka bir tarafla paylaşılmaz. Anahtarları oluşturduktan sonra yapıştırmak zorunda **SSH ortak anahtarı** yapılandırmanın içine — Linux VM'ye aslında karşıya yükleniyor. Depolandığını iç yetkili\_içindeki anahtarları \~/.ssh dizini kullanıcı hesabınızın giriş dizini. Linux VM tanıması ve ilişkili sağladığınızda bağlantıyı doğrulama ise **SSH özel anahtarı** de SSH istemcisi (bizim durumumuzda, PuTTY).
+Ortak anahtar serbestçe paylaşılabilir, ancak özel anahtarın tamamen gizli tutulması ve asla başka bir tarafla paylaşılmaması gerekir. Anahtarları oluşturduktan sonra, **SSH ortak anahtarını** , etkin ve Linux sanal makinesine yükleyerek yapılandırmaya yapıştırmanız gerekir. Kullanıcı hesabının giriş dizininin \~/. SSH dizini içinde yetkilendirilmiş @ no__t-0keys içinde depolanır. Linux VM daha sonra, SSH istemcisinde ilişkili **SSH özel anahtarını** (bizim örneğimizde, Putty) sağladığınızda bağlantıyı algılayabilir ve doğrulayabilir.
 
-Yeni kişiler erişim VM yaparken: 
+Yeni kişilere VM 'ye erişim izni verirken: 
 
-- Her yeni puttygen araçlarını kullanarak kendi ortak/özel anahtarları oluşturur.
-- Kişiler, kendi özel anahtarları ayrı ayrı depolayın ve sanal makinenin yönetici için ortak anahtar bilgilerini gönder.
-- Yönetici için ortak anahtar içeriğini yapıştırır \~/.ssh/authorized\_anahtarları dosyası.
-- Yeni tek PuTTY üzerinden bağlanır.
+- Her yeni bireysel, PuTTYgen kullanarak kendi ortak/özel anahtarlarını oluşturur.
+- Bireyler kendi özel anahtarlarını ayrı olarak depolar ve ortak anahtar bilgilerini VM yöneticisine gönderir.
+- Yönetici, ortak anahtarın içeriğini \~/. SSH/yetkilendirilmiş @ no__t-1keys dosyasına yapıştırır.
+- Yeni bireysel, PuTTY aracılığıyla bağlanır.
 
-**Bir ortak/özel anahtar çifti oluşturmak için**
+**Ortak/özel anahtar çifti oluşturmak için**
 
-1.  PuTTYgen'nden indirin <https://www.putty.org/> ve tüm varsayılan ayarları kullanarak yükleyin.
+1.  PuTTYgen ' i <https://www.putty.org/> ' dan indirin ve tüm varsayılan ayarları kullanarak yükleyin.
 
-2.  PuTTYgen açmak için PuTTY yükleme dizini C: bulun\\Program dosyaları\\PuTTY.
+2.  PuTTYgen dosyasını açmak için, C: \\Program Files @ no__t-1PuTTY konumunda PuTTY yükleme dizinini bulun.
 
     ![PuTTY arabirimi](media/puttygen-01.png)
 
-3.  Tıklayın **oluşturmak**.
+3.  **Oluştur**' a tıklayın.
 
     ![PuTTY anahtar Oluşturucu iletişim kutusu](media/puttygen-02.png)
 
-4.  Oluşturduktan sonra ortak anahtar ve özel anahtarı Kaydet. Ortak anahtar içeriğini yapıştırın **SSH ortak anahtarı** bölümünü **sanal makine oluşturma \> Temelleri** bölmesinde (6 ve 7 önceki bölümdeki adımları gösterilen).
+4.  Kuşak olduktan sonra, ortak anahtarı ve özel anahtarı kaydedin. Ortak anahtarın içeriğini, **sanal makine oluştur \> temelleri** bölmesinin **SSH ortak anahtar** bölümüne yapıştırın (önceki bölümde 6. ve 7. adımlarda gösterilmektedir).
 
     ![PuTTY anahtar Oluşturucu iletişim kutusu](media/puttygen-03.png)
 
 ### <a name="configure-vm-features"></a>VM özelliklerini yapılandırma
 
-1. Azure portalında, **bir boyut seçin** dikey penceresinde istediğiniz Linux makine donanım ayarlarını seçin. *Minimum* Tibero hem OpenFrame yüklemeye ilişkin gereksinimleri, 2 CPU ve 4 GB RAM Bu örnek yükleme gösterildiği verilmiştir:
+1. Azure portal, **boyut seçin** dikey penceresinde istediğiniz Linux makine donanım ayarlarını seçin. Her iki Tibero ve OpenFrame 'i yüklemeye yönelik *Minimum* gereksinimler, bu örnek yüklemesinde gösterildiği gibi 2 CPU ve 4 GB RAM 'dir:
 
-    ![Temel bilgileri - sanal makine oluşturma](media/create-vm-01.png)
+    ![Sanal makine oluşturma-temel bilgiler](media/create-vm-01.png)
 
-2. Tıklayın **3 ayar** ve isteğe bağlı özellikleri yapılandırmak için varsayılan ayarları kullanın.
-3. Ödeme bilgilerinizi gözden geçirin.
+2. **3 ayarlar** ' a tıklayın ve isteğe bağlı özellikleri yapılandırmak için varsayılan ayarları kullanın.
+3. Ödeme ayrıntılarınızı gözden geçirin.
 
-    ![Satın alma - sanal makine oluşturma](media/create-vm-02.png)
+    ![Sanal makine oluşturma-satın alma](media/create-vm-02.png)
 
-4. Seçimlerinizi gönderin. Azure VM dağıtmaya başlar. Bu işlem genellikle birkaç dakika sürer.
+4. Seçimlerinizi iletin. Azure, VM 'yi dağıtmaya başlar. Bu işlem genellikle birkaç dakika sürer.
 
-5. VM dağıtıldıktan sonra yapılandırma sırasında seçilen tüm ayarları gösteren panosunu görüntülenir. Not **genel IP adresi**.
+5. VM dağıtıldığında, yapılandırma sırasında seçilen tüm ayarları gösteren Pano görüntülenir. **Genel IP adresini**bir yere getirin.
 
-    ![Azure panosunda tmax](media/create-vm-03.png)
+    ![Azure panosunda Tmax](media/create-vm-03.png)
 
 6. PuTTY’yi açın.
 
-7. İçin **ana bilgisayar adı**, kullanıcı adınızı yazın ve genel IP adresinin kopyalanır. Örneğin, **kullanıcıadı\@publicıp**.
+7. **Ana bilgisayar adı**için, Kullanıcı adınızı ve KOPYALADıĞıNıZ genel IP adresini yazın. Örneğin, **Kullanıcı adı @ no__t-1publicıp**.
 
     ![PuTTY yapılandırması iletişim kutusu](media/putty-01.png)
 
-8. İçinde **kategori** kutusunun **bağlantı \> SSH \> Auth**. Yolunu belirtin, **özel anahtarı** dosya.
+8. **Kategori** kutusunda **bağlantı \> SSH \> kimlik doğrulaması**' na tıklayın. **Özel anahtar** dosyanızın yolunu belirtin.
 
     ![PuTTY yapılandırması iletişim kutusu](media/putty-02.png)
 
-9. Tıklayın **açık** PuTTY penceresini açın. Başarılı olursa, Azure üzerinde çalışan yeni CentOS VM'nin bağlandığı.
+9. PuTTY penceresini başlatmak için **Aç** ' a tıklayın. Başarılı olursa, Azure 'da çalışan yeni CentOS sanal makinenize bağlanırsınız.
 
-10. Kök kullanıcı olarak oturum açmak için şunu yazın **sudo bash**.
+10. Kök kullanıcı olarak oturum açmak için **sudo Bash**yazın.
 
-    ![Kök kullanıcı oturum açma komut penceresi](media/putty-03.png)
+    ![Komut penceresinde kök kullanıcı oturumu açma](media/putty-03.png)
 
 ## <a name="set-up-the-environment-and-packages"></a>Ortamı ve paketleri ayarlama
 
-VM oluşturulduktan ve oturum açmış göre birkaç Kurulum adımı gerçekleştirmek ve önyükleme gerekli paketleri yükleyin.
+Artık VM oluşturulduğundan ve oturum açtığınız için, birkaç Kurulum adımı gerçekleştirmeniz ve gerekli önyükleme paketlerini kurmanız gerekir.
 
-1. Eşleştirmek **ofdemo** hosts dosyasını düzenlemek için olduğu gibi vi kullanarak yerel IP adresi (`vi /etc/hosts`). Örneğimizde IP varsayılarak olan 192.168.96.148 ofdemo, bu, değişiklikten önce:
+1. Ana bilgisayar dosyasını (`vi /etc/hosts`) düzenlemek için VI kullanarak **tanıtım** adı 'Nı yerel IP adresine eşleyin. IP 'nin 192.168.96.148 ofdemo olduğunu varsayarsak, bu, değişiklikten önce:
 
     ```vi
     127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 
@@ -215,7 +215,7 @@ VM oluşturulduktan ve oturum açmış göre birkaç Kurulum adımı gerçekleş
     <IP Address>    <your hostname>
     ```
 
-     Bu değişiklikten sonra.
+     Bu, değişiklikten sonra:
 
     ```vi
     127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 
@@ -223,14 +223,14 @@ VM oluşturulduktan ve oturum açmış göre birkaç Kurulum adımı gerçekleş
     192.168.96.148   ofdemo
     ```
 
-2. Kullanıcı ve gruplar oluşturun:
+2. Gruplar ve kullanıcılar oluşturun:
 
     ```vi
     [root@ofdemo ~]# adduser -d /home/oframe7 oframe7 
     [root@ofdemo ~]# passwd oframe7
     ```
 
-3. Kullanıcı oframe7 parolasını değiştirin:
+3. Kullanıcı oframe7 parolasını değiştirme:
 
     ```vi
     New password: 
@@ -238,7 +238,7 @@ VM oluşturulduktan ve oturum açmış göre birkaç Kurulum adımı gerçekleş
     passwd: all authentication tokens updated successfully.
     ```
 
-4. /Etc/sysctl.conf çekirdek parametrelerinde güncelleştirin:
+4. /Etc/sysctl.exe içindeki çekirdek parametrelerini güncelleştirin:
 
     ```vi
     [root@ofdemo ~]# vi /etc/sysctl.conf
@@ -246,35 +246,35 @@ VM oluşturulduktan ve oturum açmış göre birkaç Kurulum adımı gerçekleş
     kernel.sem = 10000 32000 10000 10000
     ```
 
-5. Yeniden başlatma olmadan dinamik olarak çekirdek parametreleri Yenile:
+5. Çekirdek parametrelerini, yeniden başlatma olmadan dinamik olarak yenileyin:
 
     ```vi
     [root@ofdemo ~]# /sbin/sysctl -p
     ```
 
-6. Gerekli paketleri alın: Sunucu Internet'e bağlı olduğundan emin olun, aşağıdaki paketleri indirin ve yükleyin:
+6. Gerekli paketleri al: sunucunun Internete bağlı olduğundan emin olun, aşağıdaki paketleri indirin ve ardından bunları yükleyin:
 
      - dos2unix
-     - Glibc
-     - glibc.i686 glibc.x86\_64
+     - GLIBC
+     - göz BC. i686, BC. x86 @ no__t-064
      - libaio
-     - ncurses
+     - ncurler
 
           > [!NOTE]
-          > Ncurses paket yüklendikten sonra aşağıdaki simgesel bağlantılar oluştur:
+          > Ncurses paketini yükledikten sonra aşağıdaki sembolik bağlantıları oluşturun:
          ```
          ln -s /usr/lib64/libncurses.so.5.9 /usr/lib/libtermcap.so
          ln -s /usr/lib64/libncurses.so.5.9 /usr/lib/libtermcap.so.2
          ```
 
-     - gcc
-     - gcc-c ++
-     - libaio devel.x86\_64
-     - strace
+     - GCC
+     - GCC-c + +
+     - libaio-delevel. x86 @ no__t-064
+     - STrace
      - ltrace
      - GDB
 
-7. Java RPM yükleme gerçekleştirildiğinde, aşağıdakileri yapın:
+7. Java RPM yüklemesi durumunda şunları yapın:
 
 ```
 root@ofdemo ~]# rpm -ivh jdk-7u79-linux-x64.rpm
@@ -295,27 +295,27 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.79-b02, mixed mode)
 [root@ofdemo ~]# echo $JAVA_HOME /usr/java/jdk1.7.0_79/
 ```
 
-## <a name="install-the-tibero-database"></a>Tibero veritabanını yükleme
+## <a name="install-the-tibero-database"></a>Tibero veritabanını yükler
 
-Tibero Azure'da OpenFrame ortamında birkaç temel işlevleri sağlar:
+Tibero, Azure 'daki OpenFrame ortamında birkaç temel işlev sağlar:
 
-- Tibero OpenFrame iç veri deposu olarak çeşitli sistem işlevleri için kullanılır.
-- KSDS RRDS ve ESDS, dahil VSAM dosyaları Tibero veritabanı veri depolama için dahili olarak kullanın.
-- TACF veri deposu Tibero içinde depolanır.
-- OpenFrame katalog bilgileri Tibero içinde depolanır.
-- Tibero veritabanı IBM Db2 bir ardılı olarak uygulama verilerini depolamak için kullanılabilir.
+- Tibero, çeşitli sistem işlevleri için OpenFrame iç veri deposu olarak kullanılır.
+- KSK 'ler, RRDS ve ESDS dahil VSAM dosyaları, veri depolama için dahili olarak Tibero veritabanını kullanır.
+- TACF veri deposu Tibero 'da depolanır.
+- OpenFrame Katalog bilgileri Tibero 'da depolanır.
+- Tibero veritabanı, uygulama verilerini depolamak için IBM DB2 yerine kullanılabilir.
 
-**Tibero yüklemek için**
+**Tibero 'ı yüklemek için**
 
-1. Tibero ikili yükleyici dosyanın var olduğundan emin olun ve sürüm numarasını gözden geçirin.
-2. Tibero yazılım Tibero kullanıcı hesabına (oframe) kopyalayın. Örneğin:
+1. Tibero ikili yükleyici dosyasının mevcut olduğunu doğrulayın ve sürüm numarasını gözden geçirin.
+2. Tibero yazılımını Tibero Kullanıcı hesabına (oframe) kopyalayın. Örnek:
 
     ```
     [oframe7@ofdemo ~]$ tar -xzvf tibero6-bin-6_rel_FS04-linux64-121793-opt-tested.tar.gz 
     [oframe7@ofdemo ~]$ mv license.xml /opt/tmaxdb/tibero6/license/
     ```
 
-3. .Bash açın\_VI profilinde (`vi .bash_profile`) aşağıdaki yapıştırın:
+3. Vi (`vi .bash_profile`) içinde. bash @ no__t-0profile dosyasını açın ve içine aşağıdaki yapıştırın:
 
     ```
     # Tibero6 ENV
@@ -325,20 +325,20 @@ Tibero Azure'da OpenFrame ortamında birkaç temel işlevleri sağlar:
     export PATH=$TB_HOME/bin:$TB_HOME/client/bin:$PATH
     ```
 
-4. Bash profili, komut isteminde çalıştırmak için:
+4. Bash profilini yürütmek için komut isteminde şunu yazın:
 
     ```
     source .bash_profile
     ```
 
-5. İpucu dosyası (Tibero için bir yapılandırma dosyası) oluşturur ve ardından içinde olduğu gibi vi açın. Örneğin:
+5. İpucu dosyasını (Tibero için bir yapılandırma dosyası) oluşturun, ardından bunu vi 'de açın. Örnek:
 
     ```
     [oframe7@ofdemo ~]$ sh $TB_HOME/config/gen_tip.sh
     [oframe7@ofdemo ~]$ vi $TB_HOME/config/$TB_SID.tip
     ```
 
-6. Değiştirme \$TB\_HOME/client/config/tbdsn.tbr ve 127.0.0.1 yerine put gösterildiği oflocalhost:
+6. @No__t-0TB @ no__t-1HOME/Client/config/tbdsn. TBR öğesini değiştirin ve gösterildiği gibi şu oflocalhost yerine 127.0.0.1 koyun:
 
     ```
     TVSAM=( 
@@ -349,7 +349,7 @@ Tibero Azure'da OpenFrame ortamında birkaç temel işlevleri sağlar:
      )
     ```
 
-7. Veritabanı oluşturun. Aşağıdaki çıktı görünür:
+7. Veritabanını oluşturun. Aşağıdaki çıktı görüntülenir:
 
     ```
     Change core dump dir to /opt/tmaxdb/tibero6/bin/prof.
@@ -386,14 +386,14 @@ Tibero Azure'da OpenFrame ortamında birkaç temel işlevleri sağlar:
      ******************************************************************************
     ```
 
-8. Tibero geri dönüştürmek için ilk kullanarak kapatabilirler `tbdown` komutu. Örneğin:
+8. Tibero 'yu geri dönüştürmek için ilk olarak `tbdown` komutunu kullanarak kapatın. Örnek:
 
     ```
     [oframe7@ofdemo ~]$$ tbdown 
     Tibero instance terminated (NORMAL mode).
     ```
 
-9. Artık Tibero kullanarak önyükleme `tbboot`. Örneğin:
+9. Şimdi `tbboot` kullanarak Tibero 'ı başlatın. Örnek:
 
     ```
     [oframe7@ofdemo ~]$ tbboot
@@ -404,7 +404,7 @@ Tibero Azure'da OpenFrame ortamında birkaç temel işlevleri sağlar:
     Tibero instance started up (NORMAL mode).
     ```
 
-10. Bir tablo oluşturmak için SYS kullanarak veritabanına erişim (sys/tmax) kullanıcı ardından TACF ve varsayılan birimi için gereken tablo oluşturun:
+10. Tablo alanı oluşturmak için SYS User (sys/Tmax) kullanarak veritabanına erişin, ardından varsayılan birim ve TACF için gerekli tablo alanını oluşturun:
 
     ```
     [oframe7@ofdemo ~]$ tbsql tibero/tmax
@@ -423,7 +423,7 @@ Tibero Azure'da OpenFrame ortamında birkaç temel işlevleri sağlar:
     SQL> SQL> Disconnected.
     ```
 
-12. Tibero önyükleme ve Tibero işlemlerin çalıştığını doğrulayın:
+12. Tibero 'yu önyükleyin ve Tibero işlemlerinin çalıştığını doğrulayın:
 
     ```
     [oframe7@ofdemo ~]$ tbboot 
@@ -432,43 +432,43 @@ Tibero Azure'da OpenFrame ortamında birkaç temel işlevleri sağlar:
 
 Çıktı:
 
-![Tibero çıkış](media/tibero-01.png)
+![Tibero çıkışı](media/tibero-01.png)
 
-## <a name="install-odbc"></a>ODBC yükleme
+## <a name="install-odbc"></a>ODBC 'yi yükler
 
-OpenFrame uygulamalarda, açık kaynaklı unixODBC proje tarafından sağlanan ODBC API kullanarak Tibero veritabanı ile iletişim kurar.
+OpenFrame 'teki uygulamalar, açık kaynak unixODBC projesi tarafından sunulan ODBC API 'sini kullanarak Tibero veritabanıyla iletişim kurar.
 
 ODBC yüklemek için:
 
-1. UnixODBC 2.3.4.tar.gz yükleyici dosyanın var olduğundan emin olun veya kullanın `wget unixODBC-2.3.4.tar.gz` komutu. Örneğin:
+1. UnixODBC-2.3.4. tar. gz yükleyici dosyasının mevcut olduğunu doğrulayın veya `wget unixODBC-2.3.4.tar.gz` komutunu kullanın. Örnek:
 
      ```
      [oframe7@ofdemo ~]$ wget ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-2.3.4.tar.gz
      ```
 
-2. İkili dosya sıkıştırmasını açın. Örneğin:
+2. İkiliyi sıkıştırmayı açın. Örnek:
 
      ```
      [oframe7@ofdemo ~]$ tar -zxvf unixODBC-2.3.4.tar.gz
      ```
 
-3. UnixODBC 2.3.4 dizine gidin ve denetimi makine bilgileri kullanarak derleme görevleri dosyası oluşturur. Örneğin:
+3. UnixODBC-2.3.4 dizinine gidin ve makine bilgilerini denetleme öğesini kullanarak derleme görevleri dosyasını oluşturun. Örnek:
 
      ```
      [oframe7@ofdemo unixODBC-2.3.4]$ ./configure --prefix=/opt/tmaxapp/unixODBC/ --sysconfdir=/opt/tmaxapp/unixODBC/etc
      ```
 
-     Varsayılan olarak, unixODBC / usr/local, böylece yüklü `--prefix` konumu değiştirmek için bir değer geçirir. Benzer şekilde, yapılandırma dosyalarını/etc içinde varsayılan olarak, bu nedenle yüklü `--sysconfdir` istenen konuma değerini geçirir.
+     Varsayılan olarak, unixODBC/usr/local dizinine yüklenir, bu nedenle `--prefix`, konumu değiştirmek için bir değer geçirir. Benzer şekilde, yapılandırma dosyaları varsayılan olarak/vb 'ye yüklenir, bu nedenle `--sysconfdir` istenen konumun değerini geçirir.
 
-4. Derleme görevleri dosyası yürütün: `[oframe7@ofdemo unixODBC-2.3.4]$ make`
+4. Derleme görevleri dosyasını yürütme: `[oframe7@ofdemo unixODBC-2.3.4]$ make`
 
-5. Yürütülebilir dosyayı derledikten sonra program dizinine kopyalayın. Örneğin:
+5. Derleme sonrasında yürütülebilir dosyayı program dizinine kopyalayın. Örnek:
 
      ```
      [oframe7@ofdemo unixODBC-2.3.4]$ make install
      ```
 
-6. Bash profili düzenlemek için olduğu gibi vi kullanın (`vi ~/.bash_profile`) ve aşağıdakileri ekleyin:
+6. Bash profilini düzenlemek için vi kullanın (`vi ~/.bash_profile`) ve aşağıdakileri ekleyin:
 
      ```
      # UNIX ODBC ENV 
@@ -479,7 +479,7 @@ ODBC yüklemek için:
      export ODBCSYSINI=$HOME
      ```
 
-7. ODBC için geçerlidir. Aşağıdaki dosyaları uygun şekilde düzenleyin. Örneğin:
+7. ODBC 'yi uygulayın. Aşağıdaki dosyaları uygun şekilde düzenleyin. Örnek:
 
      ```
      [oframe7@ofdemo unixODBC-2.3.4]$ source ~/.bash_profile
@@ -524,7 +524,7 @@ ODBC yüklemek için:
      password = tmax
      ```
 
-8. Sembolik bağlantı oluşturun ve Tibero veritabanı bağlantısını doğrulama:
+8. Sembolik bir bağlantı oluşturun ve Tibero veritabanı bağlantısını doğrulayın:
 
      ```
      [oframe7@ofdemo ~]$ ln $ODBC_HOME/lib/libodbc.so $ODBC_HOME/lib/libodbc.so.1 [oframe7@ofdemo ~]$ ln $ODBC_HOME/lib/libodbcinst.so 
@@ -535,17 +535,17 @@ ODBC yüklemek için:
 
 Aşağıdaki çıktı görüntülenir:
 
-![SQL için ODBC çıkış gösteren bağlı](media/odbc-01.png)
+![SQL 'e bağlı gösteren ODBC çıkışı](media/odbc-01.png)
 
-## <a name="install-openframe-base"></a>OpenFrame tabanı yükleme
+## <a name="install-openframe-base"></a>OpenFrame temelini yükler
 
-Temel uygulama sunucusu, önce OpenFrame işlem sunucusu süreçleri de dahil olmak üzere azure'da sistemini yönetmek için kullandığı ayrı ayrı hizmetlere yüklenir.
+Temel uygulama sunucusu, OpenFrame 'in, işlem işleme sunucusu işlemleri de dahil olmak üzere Azure 'da sistemi yönetmek için kullandığı bireysel hizmetlerden önce yüklenir.
 
-**OpenFrame temel yüklemek için**
+**OpenFrame temelini yüklemek için**
 
-1. Tibero yükleme başarılı olduğundan emin olun ve ardından doğrulayın aşağıdaki OpenFrame\_Base7\_0\_Linux\_x86\_64. bin yükleyici dosya ve base.properties yapılandırma dosyası yok.
+1. Tibero yüklemesinin başarılı olduğundan emin olun, sonra şu OpenFrame @ no__t-0Base7 @ no__t-10 @ no__t-2Linux @ no__t-3x86\_64.bin Installer File ve Base. Properties yapılandırma dosyasının mevcut olduğunu doğrulayın.
 
-2. Bash profili aşağıdaki Tibero özgü bilgilerle güncelleştirin:
+2. Bash profilini aşağıdaki Tibero 'a özgü bilgilerle güncelleştirin:
 
      ```bash
      alias ofhome='cd $OPENFRAME_HOME'
@@ -558,8 +558,8 @@ Temel uygulama sunucusu, önce OpenFrame işlem sunucusu süreçleri de dahil ol
      alias defvol='cd $OPENFRAME_HOME/volume_default'
      ```
 
-3. Bash profili yürütün:`[oframe7@ofdemo ~]$ . .bash_profile`
-4. Tibero işlemleri çalıştığından emin olun. Örneğin:
+3. Bash profilini yürütün: `[oframe7@ofdemo ~]$ . .bash_profile`
+4. Tibero işlemlerinin çalıştığından emin olun. Örnek:
 
      ```linux
      [oframe7@ofdemo ~]$ ps -ef|grep tbsvr
@@ -568,16 +568,16 @@ Temel uygulama sunucusu, önce OpenFrame işlem sunucusu süreçleri de dahil ol
     ![Taban](media/base-01.png)
 
      > [!IMPORTANT]
-     > Yüklemeden önce Tibero başlattığınız emin olun.
+     > Yüklemeden önce Tibero 'ı başlattığınızdan emin olun.
 
-5. Lisans oluşturmak [technet.tmaxsoft.com](https://technet.tmaxsoft.com/en/front/main/main.do) ve OSC lisansları OpenFrame Base, Batch, TACF yerleştirin, uygun bir klasörde:
+5. [TechNet.tmaxsoft.com](https://technet.tmaxsoft.com/en/front/main/main.do) adresinden lisans oluşturun ve OpenFrame Base, Batch, TACF, OSC lisanslarını uygun klasöre yerleştirin:
 
      ```
      [oframe7@ofdemo ~]$ cp license.dat /opt/tmaxapp/OpenFrame/core/license/
      [oframe7@ofdemo ~]$ cp lictjes.dat lictacf.dat licosc.dat $OPENFRAME_HOME/license/
      ```
 
-6. İkili ve base.properties OpenFrame temel dosyalarını indirin:
+6. OpenFrame temel ikili ve Base. Properties dosyalarını indirin:
 
      ```
      [oframe7@ofdemo ~]$ vi base.properties
@@ -602,16 +602,16 @@ Temel uygulama sunucusu, önce OpenFrame işlem sunucusu süreçleri de dahil ol
      OPENFRAME_LICENSE_PATH=/opt/tmaxapp/license/OPENFRAME TMAX_LICENSE_PATH=/opt/tmaxapp/license/TMAX
      ```
 
-7. Base.properties dosyası kullanan yükleyici yürütün. Örneğin:
+7. Base. Properties dosyasını kullanarak yükleyiciyi yürütün. Örnek:
 
     ```
     [oframe7@ofdemo ~]$ chmod a+x OpenFrame_Base7_0_Linux_x86_64.bin 
     [oframe7@ofdemo ~]$ ./OpenFrame_Base7_0_Linux_x86_64.bin -f base.properties
     ```
 
-    İşlem tamamlandığında yükleme tamamlandı iletisini etkinleştirirseniz ' dir.
+    Tamamlandığında, yükleme tamamlandıktan sonra ileti çalınır.
 
-8. OpenFrame temel dizin yapısını kullanarak doğrulama `ls -ltr` komutu. Örneğin:
+8. @No__t-0 komutunu kullanarak OpenFrame temel dizin yapısını doğrulayın. Örnek:
 
      ```
      [oframe7@ofdemo OpenFrame]$ ls -ltr
@@ -635,7 +635,7 @@ Temel uygulama sunucusu, önce OpenFrame işlem sunucusu süreçleri de dahil ol
      drwxrwxr-x. 2 oframe7 oframe7 25 Nov 30 16:58 volume_default
      ```
 
-9. Başlangıç OpenFrame tabanı:
+9. OpenFrame temelini Başlat:
 
      ```
      [oframe7@ofdemo ~]$ cp /usr/lib/libtermcap.so.2 $TMAXDIR/lib
@@ -643,13 +643,13 @@ Temel uygulama sunucusu, önce OpenFrame işlem sunucusu süreçleri de dahil ol
      [oframe7@ofdemo ~]$ tmboot
      ```
 
-     ![tmboot komut çıktısı](media/base-02.png)
+     ![tmboot komut çıkışı](media/base-02.png)
 
-10. İşlem durumunu sı tmadmin komutu kullanarak hazır olduğunu doğrulayın. RDY görüntülendiği **durumu** işlemlerin her biri için sütun:
+10. İşlem durumunun si içindeki tmadmin komutu kullanılarak hazırlanmaya çalıştığını doğrulayın. RDY, işlemlerin her biri için **durum** sütununda görüntülenir:
 
      ![tmadmin komut çıktısı](media/base-03.png)
 
-11. OpenFrame temel kapatın:
+11. OpenFrame temelini kapat:
 
      ```
      [oframe7@ofdemo ~]$ tmdown 
@@ -671,15 +671,15 @@ Temel uygulama sunucusu, önce OpenFrame işlem sunucusu süreçleri de dahil ol
      TMDOWN: TMAX is down
      ```
 
-## <a name="install-openframe-batch"></a>OpenFrame toplu yükleme
+## <a name="install-openframe-batch"></a>OpenFrame toplu Işlemini yükler
 
-OpenFrame Batch anabilgisayar batch ortamının benzetimini yapan birçok bileşenden oluşur ve toplu işlerini Azure'da çalıştırmak için kullanılır.
+OpenFrame toplu işi, anabilgisayar toplu ortamlarının benzetimini yapan ve Azure üzerinde toplu işleri çalıştırmak için kullanılan birkaç bileşenden oluşur.
 
-**Batch yüklemek için**
+**Toplu Işi yüklemek için**
 
-1. Temel yükleme başarılı olduğundan emin olun ve ardından doğrulayın OpenFrame\_Batch7\_0\_Fix2\_MVS\_Linux\_x86\_64. bin yükleyicisini ve Batch.Properties yapılandırma dosyası var:
+1. Temel yüklemenin başarılı olduğundan emin olun, ardından OpenFrame @ no__t-0Batch7 @ no__t-10 @ no__t-2Fix2 @ no__t-3MVS @ no__t-4Linux @ no__t-5x86\_64.bin Installer File ve Batch. Properties yapılandırma dosyasının mevcut olduğunu doğrulayın:
 
-2. Komut isteminde `vi batch.properties` VI kullanarak batch.properties dosyayı düzenlemek için.
+2. Komut isteminde, VI kullanarak Batch. Properties dosyasını düzenlemek için `vi batch.properties` yazın.
 
 3. Parametreleri aşağıdaki gibi değiştirin:
 
@@ -700,19 +700,19 @@ OpenFrame Batch anabilgisayar batch ortamının benzetimini yapan birçok bileş
      BATCH_TABLE_CREATE=YES
      ```
 
-4. Komut isteminde şunu yazın batch yükleyiciyi çalıştırmak için:
+4. Batch yükleyicisini yürütmek için komut isteminde şunu yazın:
 
      ```
      ./OpenFrame_Batch7_0_Fix2_MVS_Linux_x86_64.bin -f batch.properties
      ```
 
-5. Yükleme tamamlandığında, yüklenen OpenFrame paketlerini yazarak başlatın `tmboot` komut isteminde.
+5. Yükleme tamamlandığında, komut isteminde `tmboot` yazarak yüklü OpenFrame paketlerini başlatın.
 
-    ![tmboot çıkış](media/tmboot-01.png)
+    ![tmboot çıkışı](media/tmboot-01.png)
 
-6. Tür `tmadmin` OpenFrame işlemi denetlemek için komut isteminde.
+6. OpenFrame işlemini denetlemek için komut isteminde `tmadmin` yazın.
 
-    ![Tmax yönetici ekran](media/tmadmin-01.png)
+    ![Tmax yönetici ekranı](media/tmadmin-01.png)
 
 7. Aşağıdaki komutları yürütün:
 
@@ -721,7 +721,7 @@ OpenFrame Batch anabilgisayar batch ortamının benzetimini yapan birçok bileş
      ADM quit for node (NODE1)
      ```
 
-8. Kullanım `tmdown` başlangıç yukarı ve Batch kapatmak için komut:
+8. Batch 'i başlatmak ve kapatmak için `tmdown` komutunu kullanın:
 
      ```
      [oframe7@ofdemo ~]$tmdown
@@ -759,15 +759,15 @@ OpenFrame Batch anabilgisayar batch ortamının benzetimini yapan birçok bileş
      TMDOWN: TMAX is down
      ```
 
-## <a name="install-tacf"></a>TACF yükleyin
+## <a name="install-tacf"></a>TACF 'yi yükler
 
-TACF, sistemleri ve RACF güvenlik kaynaklarına kullanıcı erişimini denetleyen bir OpenFrame hizmeti modülü yöneticisidir.
+TACF Manager, RACF güvenliği aracılığıyla sistemlere ve kaynaklara Kullanıcı erişimini denetleyen bir OpenFrame hizmeti modülüdür.
 
-**TACF yüklemek için**
+**TACF 'yi yüklemek için**
 
-1. Doğrulayın OpenFrame\_Tacf7\_0\_Fix2\_Linux\_x86\_64. bin yükleyici dosya ve tacf.properties yapılandırma dosyası yok.
-2. Toplu yükleme başarılı olduğundan emin olun ve ardından tacf.properties dosyasını açmak için olduğu gibi vi kullanın (`vi tacf.properties`).
-3. TACF parametreleri değiştirin:
+1. OpenFrame @ no__t-0Tacf7 @ no__t-10 @ no__t-2Fix2 @ no__t-3Linux @ no__t-4x86\_64.bin Installer File ve TACF. Properties yapılandırma dosyasının mevcut olduğunu doğrulayın.
+2. Batch yüklemesinin başarılı olduğundan emin olun, sonra da TACF. Properties dosyasını (`vi tacf.properties`) açmak için VI kullanın.
+3. TACF parametrelerini değiştirin:
 
      ```
      OPENFRAME_HOME=/opt/tmaxapp/OpenFrame 
@@ -779,19 +779,19 @@ TACF, sistemleri ve RACF güvenlik kaynaklarına kullanıcı erişimini denetley
      TACF_TABLE_CREATE=YES
      ```
 
-4. TACF yükleyici tamamladıktan sonra TACF ortam değişkenleri uygulanır. Komut istemine şunları yazın:
+4. TACF yükleyicisini tamamladıktan sonra, TACF ortam değişkenlerini uygulayın. Komut istemine şunları yazın:
 
      ```
      source \~/.bash\_profile
      ```
 
-5. TACF yükleyici yürütün. Komut istemine şunları yazın:
+5. TACF yükleyicisini yürütün. Komut istemine şunları yazın:
 
      ```
      ./OpenFrame_Tacf7_0_Fix2_Linux_x86_64.bin -f tacf.properties
      ```
 
-     Çıktı aşağıdakine benzer olacaktır:
+     Çıktı şuna benzer:
 
      ```
      Wed Dec 07 17:36:42 EDT 2016
@@ -812,7 +812,7 @@ TACF, sistemleri ve RACF güvenlik kaynaklarına kullanıcı erişimini denetley
      /tmp/install.dir.41422/Linux/resource/jre/lib/resources.jar /tmp/install.dir.41422/Linux/resource/jre/lib/rt.jar /tmp/install.dir.41422/Linux/resource/jre/lib/sunrsasign.jar /tmp/install.dir.41422/Linux/resource/jre/lib/jsse.jar /tmp/install.dir.41422/Linux/resource/jre/lib/jce.jar /tmp/install.dir.41422/Linux/resource/jre/lib/charsets.jar /tmp/install.dir.41422/Linux/resource/jre/lib/jfr.jar /tmp/install.dir.41422/Linux/resource/jre/classes
      ```
 
-6. Komut isteminde `tmboot` OpenFrame yeniden başlatmak için. Çıktı aşağıdakine benzer olacaktır:
+6. Komut isteminde, OpenFrame 'i yeniden başlatmak için `tmboot` yazın. Çıktı şuna benzer:
 
      ```
      TMBOOT for node(NODE1) is starting: 
@@ -849,13 +849,13 @@ TACF, sistemleri ve RACF güvenlik kaynaklarına kullanıcı erişimini denetley
      TMBOOT: SVR(tmsvr) is starting: Wed Sep  7 17:48:53 2016
      ```
 
-7. İşlem durumunu kullanarak hazır olduğunu doğrulamak `tmadmin` içinde `si` komutu. Örneğin:
+7. @No__t-1 komutunda `tmadmin` kullanarak işlem durumunun hazırlandiğini doğrulayın. Örnek:
 
      ```
      [oframe7\@ofdemo \~]\$ tmadmin
      ```
 
-     İçinde **durumu** RDY sütununda görünür:
+     **Durum** sütununda, RDY görünür:
 
     ![Durum sütununda RDY](media/tmboot-02.png)
 
@@ -875,7 +875,7 @@ TACF, sistemleri ve RACF güvenlik kaynaklarına kullanıcı erişimini denetley
      [oframe7@ofdemo ~]$ tmdow
      ```
 
-9. Kullanarak sunucuyu kapatma `tmdown` komutu. Çıktı aşağıdakine benzer olacaktır:
+9. @No__t-0 komutunu kullanarak sunucuyu kapatın. Çıktı şuna benzer:
 
      ```
      [oframe7@ofdemo ~]$ tmdown 
@@ -903,27 +903,27 @@ TACF, sistemleri ve RACF güvenlik kaynaklarına kullanıcı erişimini denetley
      TMDOWN: TMAX is down
      ```
 
-## <a name="install-prosort"></a>ProSort yükleme
+## <a name="install-prosort"></a>ProSort 'ı yükler
 
-ProSort, toplu işlem veri sıralama için kullanılan bir yardımcı programdır.
+ProSort, verileri sıralamak için Batch işlemlerinde kullanılan bir yardımcı programdır.
 
-**ProSort yüklemek için**
+**ProSort 'ı yüklemek için**
 
-1. Batch yüklemenin başarılı olduğundan emin olun ve ardından doğrulayın **bin prosort prosort\_linux64 2123 opt.tar.gz 2sp3** yükleyici dosya mevcut.
+1. Toplu yükleme işleminin başarılı olduğundan emin olun ve **prosort-bin-prosort\_2sp3-linux64-2123-opt.tar.gz** Installer dosyasının mevcut olduğunu doğrulayın.
 
-2. Özellikler dosyası kullanan yükleyici yürütün. Komut istemine şunları yazın:
+2. Özellikler dosyasını kullanarak yükleyiciyi yürütün. Komut istemine şunları yazın:
 
      ```
      tar -zxvf prosort-bin-prosort\_2sp3-linux64-2123-opt.tar.gz
      ```
 
-3. Prosort dizin giriş konuma taşıyın. Komut istemine şunları yazın:
+3. Prosort dizinini ana konuma taşıyın. Komut istemine şunları yazın:
 
      ```
      mv prosort /opt/tmaxapp/prosort
      ```
 
-4. Bir lisans alt dizin oluşturma ve lisans dosyasını kopyalayın. Örneğin:
+4. Bir lisans alt dizini oluşturun ve lisans dosyasını buraya kopyalayın. Örnek:
 
      ```
      cd /opt/tmaxapp/prosort 
@@ -931,7 +931,7 @@ ProSort, toplu işlem veri sıralama için kullanılan bir yardımcı programdı
      cp /opt/tmaxsw/oflicense/prosort/license.xml /opt/tmaxapp/prosort/license
      ```
 
-5. İçinde olduğu gibi vi bash.Profile açın (`vi .bash_profile`) ve şu şekilde güncelleştirin:
+5. Bash. Profile dosyasını VIT (`vi .bash_profile`) içinde açın ve aşağıdaki gibi güncelleştirin:
 
      ```bash
      #       PROSORT
@@ -945,9 +945,9 @@ ProSort, toplu işlem veri sıralama için kullanılan bir yardımcı programdı
      export PATH
      ```
 
-6. Komut isteminde, bir bash profili yürütmek için aşağıdakileri yazın: `. .bash_profile`
+6. Bash profilini yürütmek için komut isteminde şunu yazın: `. .bash_profile`
 
-7. Yapılandırma dosyası oluşturun. Örneğin:
+7. Yapılandırma dosyasını oluşturun. Örnek:
 
      ```
      oframe@oframe7: cd /opt/tmaxapp/prosort/config 
@@ -956,14 +956,14 @@ ProSort, toplu işlem veri sıralama için kullanılan bir yardımcı programdı
       /home/oframe7/prosort/config/gbg.tip generated
      ```
 
-8. Sembolik bağlantısını oluşturun. Örneğin:
+8. Sembolik bağlantıyı oluşturun. Örnek:
 
      ```
      oframe@oframe7: cd /opt/tmaxapp/OpenFrame/util/ 
      oframe@oframe7home/oframe7/OpenFrame/util :  ln -s DFSORT SORT
      ```
 
-9. Yürüterek ProSort yüklemesini doğrulama `prosort -h` komutu. Örneğin:
+9. @No__t-0 komutunu yürüterek ProSort yüklemesini doğrulayın. Örnek:
 
      ```
      oframe@oframe7: prosort -h
@@ -977,23 +977,23 @@ ProSort, toplu işlem veri sıralama için kullanılan bir yardımcı programdı
      -x             Use SyncSort compatible mode
      ```
 
-## <a name="install-ofcobol"></a>OFCOBOL yükleyin
+## <a name="install-ofcobol"></a>OFCOBOL 'yi yükler
 
-OFCOBOL ana bilgisayar'ın COBOL programlar yorumlar OpenFrame derleyicisidir. 
+OFCOBOL, ana bilgisayarın COBOL programlarını yorumlayan OpenFrame derleyicisidir. 
 
-**OFCOBOL yüklemek için**
+**OFCOBOL 'yi yüklemek için**
 
-1. Toplu iş/çevrimiçi yükleme başarılı olduğundan emin olun ve ardından doğrulayın OpenFrame\_COBOL3\_0\_40\_Linux\_x86\_64. bin yükleyici dosya mevcut.
+1. Batch/online yüklemesinin başarılı olduğundan emin olun ve OpenFrame @ no__t-0COCıVA3 @ no__t-10 @ no__t-240 @ no__t-3Linux @ no__t-4x86\_64.bin Installer dosyasının mevcut olduğunu doğrulayın.
 
-2. Komut isteminde OFCOBOL yükleyiciyi çalıştırmak için aşağıdakileri yazın:
+2. OFCOBOL yükleyicisini yürütmek için komut isteminde şunu yazın:
 
      ```
       ./OpenFrame\_COBOL3\_0\_40\_Linux\_x86\_64.bin
      ```
 
-3. Lisans sözleşmesini okuyun ve devam etmek için Enter tuşuna basın.
+3. Lisanslama anlaşmasını okuyun ve devam etmek için ENTER tuşuna basın.
 
-4. Lisans sözleşmesini kabul edin. Yükleme tamamlandığında aşağıdakiler görünür:
+4. Lisans sözleşmesini kabul edin. Yükleme tamamlandığında aşağıdakiler görüntülenir:
 
      ```
      Choose Install Folder 
@@ -1017,33 +1017,33 @@ OFCOBOL ana bilgisayar'ın COBOL programlar yorumlar OpenFrame derleyicisidir.
      PRESS <ENTER> TO EXIT THE INSTALLER
      ```
 
-5. Bash profili içinde olduğu gibi vi açın (`vi .bash_profile`) ve OFCOBOL değişkenlerle güncelleştirilmiş doğrulayın.
-6. Bash profili yürütün. Komut istemine şunları yazın:
+5. Bash profilini VI (`vi .bash_profile`) içinde açın ve OFCOBOL değişkenleriyle güncelleştirildiğinden emin olun.
+6. Bash profilini yürütün. Komut istemine şunları yazın:
 
      ```
       source ~/.bash_profile
      ```
 
-7. OFCOBOL lisans yüklü klasöre kopyalayın. Örneğin:
+7. OFCOBOL lisansını yüklü klasöre kopyalayın. Örnek:
      ```
      mv licofcob.dat $OFCOB_HOME/license
      ```
-8. OpenFrame tjclrun.conf yapılandırma dosyasına gidin ve içinde olduğu gibi vi açın. Örneğin:
+8. OpenFrame tjclrun. conf yapılandırma dosyasına gidin ve vi 'de açın. Örnek:
      ```
      [oframe7@ofdemo ~]$ cd $OPENFRAME_HOME/config 
      [oframe7@ofdemo ~]$ vi tjclrun.conf
      ```
 
-   Değişiklik SYSLIB bölümü aşağıda verilmiştir:
+   Değişiklik öncesinde SYSLIB bölümü aşağıda verilmiştir:
      ```
      [SYSLIB] BIN_PATH=${OPENFRAME_HOME}/bin:${OPENFRAME_HOME}/util:${COBDIR}/bin:/usr/local/bin:/bin LIB_PATH=${OPENFRAME_HOME}/lib:${OPENFRAME_HOME}/core/lib:${TB_HOME}/client/lib:${COBDIR}/lib:/ usr/lib:/lib:/lib/i686:/usr/local/lib:${PROSORT_HOME}/lib:/opt/FSUNbsort/lib
      ```
-   Değişiklikten sonra SYSLIB bölüm şöyledir:
+   Değişiklik sonrasında SYSLIB bölümü aşağıda verilmiştir:
      ```
      [SYSLIB] BIN_PATH=${OPENFRAME_HOME}/bin:${OPENFRAME_HOME}/util:${COBDIR}/bin:/usr/local/bin:/bin LIB_PATH=${OPENFRAME_HOME}/lib:${OPENFRAME_HOME}/core/lib:${TB_HOME}/client/lib:${COBDIR}/lib:/ usr/lib:/lib:/lib/i686:/usr/local/lib:${PROSORT_HOME}/lib:/opt/FSUNbsort/lib :${ODBC_HOME}/lib 
      :${OFCOB_HOME}/lib
      ```
-9. OpenFrame gözden\_COBOL\_InstallLog.log dosya içinde olduğu gibi vi ve herhangi bir hata olmadığını doğrulayın. Örneğin:
+9. Vi içindeki OpenFrame @ no__t-0COBOL\_InstallLog.log dosyasını gözden geçirin ve hata olmadığından emin olun. Örnek:
      ```
      [oframe7@ofdemo ~]$ vi $OFCOB_HOME/UninstallerData/log/OpenFrame_COBOL_InstallLog.log 
      …….. 
@@ -1055,7 +1055,7 @@ OFCOBOL ana bilgisayar'ın COBOL programlar yorumlar OpenFrame derleyicisidir.
      0 NonFatalErrors 
      0 FatalError
      ```
-10. Kullanım `ofcob --version` komut ve yüklemeyi doğrulamak için sürüm numarasını gözden geçirin. Örneğin:
+10. @No__t-0 komutunu kullanın ve yüklemeyi doğrulamak için sürüm numarasını gözden geçirin. Örnek:
 
      ```
      [oframe7@ofdemo ~]$ ofcob --version 
@@ -1063,25 +1063,25 @@ OFCOBOL ana bilgisayar'ın COBOL programlar yorumlar OpenFrame derleyicisidir.
      CommitTag:: 645f3f6bf7fbe1c366a6557c55b96c48454f4bf
      ```
 
-11. OpenFrame kullanarak yeniden `tmdown/tmboot` komutu.
+11. @No__t-0 komutunu kullanarak OpenFrame 'i yeniden başlatın.
 
-## <a name="install-ofasm"></a>OFASM yükleyin
+## <a name="install-ofasm"></a>OFASM 'yi yükler
 
-OFASM ana bilgisayar'ın assembler programlar yorumlar OpenFrame derleyicisidir.
+OFASM, ana bilgisayarın assembler programlarını yorumlayan OpenFrame derleyicisidir.
 
-**OFASM yüklemek için**
+**OFASM 'yi yüklemek için**
 
-1. Toplu iş/çevrimiçi yükleme başarılı olduğundan emin olun ve ardından doğrulayın OpenFrame\_ASM3\_0\_Linux\_x86\_64. bin yükleyici dosya mevcut.
+1. Batch/online yüklemesinin başarılı olduğundan emin olun ve OpenFrame @ no__t-0ASM3 @ no__t-10 @ no__t-2Linux @ no__t-3x86\_64.bin yükleyici dosyasının mevcut olduğunu doğrulayın.
 
-2. Yükleyiciyi çalıştırın. Örneğin:
+2. Yükleyiciyi yürütün. Örnek:
 
      ```
      [oframe7@ofdemo ~]$ ./OpenFrame_ASM3_0_Linux_x86_64.bin
      ```
 
-3. Lisans sözleşmesini okuyun ve devam etmek için Enter tuşuna basın.
+3. Lisanslama anlaşmasını okuyun ve devam etmek için ENTER tuşuna basın.
 4. Lisans sözleşmesini kabul edin.
-5. Bash profili OFASM değişkenlerle güncellenir doğrulayın. Örneğin:
+5. Bash profilinin OFASM değişkenleriyle güncelleştirildiğinden emin olun. Örnek:
 
      ```
      [oframe7@ofdemo ~]$ source .bash_profile
@@ -1098,26 +1098,26 @@ OFASM ana bilgisayar'ın assembler programlar yorumlar OpenFrame derleyicisidir.
      export LD_LIBRARY_PATH="./:$OFASM_HOME/lib:$LD_LIBRARY_PATH"
      ```
 
-6. İçinde olduğu gibi vi OpenFrame tjclrun.conf yapılandırma dosyasını açın ve şu şekilde düzenleyin:
+6. Vi 'de OpenFrame tjclrun. conf yapılandırma dosyasını açın ve aşağıdaki gibi düzenleyin:
 
      ```
      [oframe7@ofdemo ~]$ cd $OPENFRAME_HOME/config 
      [oframe7@ofdemo ~]$ vi tjclrun.conf
      ```
 
-     [SYSLIB] bölümü işte *önce* Değiştir:
+     Değişiklikten *önceki* [SYSLIB] bölümü aşağıda verilmiştir:
 
      ```
      [SYSLIB] BIN_PATH=${OPENFRAME_HOME}/bin:${OPENFRAME_HOME}/util:${COBDIR}/bin:/usr/local/bin:/bi n:${OPENFRAME_HOME}/volume_default/SYS1.LOADLIB LIB_PATH=${OPENFRAME_HOME}/lib:${OPENFRAME_HOME}/core/lib:${TB_HOME}/client/lib:${CO BDIR}/lib:/usr/lib:/lib:/lib/i686:/usr/local/lib:${PROSORT_HOME}/lib:/opt/FSUNbsort/lib:${OFCOB_HOM E}/lib:${ODBC_HOME}/lib:${OFPLI_HOME}/lib
      ```
 
-     [SYSLIB] bölümü işte *sonra* Değiştir:
+     Değişiklik *sonrasında* [SYSLIB] bölümü aşağıda verilmiştir:
 
      ```
      [SYSLIB] BIN_PATH=${OPENFRAME_HOME}/bin:${OPENFRAME_HOME}/util:${COBDIR}/bin:/usr/local/bin:/bi n:${OPENFRAME_HOME}/volume_default/SYS1.LOADLIB LIB_PATH=${OPENFRAME_HOME}/lib:${OPENFRAME_HOME}/core/lib:${TB_HOME}/client/lib:${CO BDIR}/lib:/usr/lib:/lib:/lib/i686:/usr/local/lib:${PROSORT_HOME}/lib:/opt/FSUNbsort/lib:${OFCOB_HOM E}/lib:${ODBC_HOME}/lib:${OFPLI_HOME}/lib:${OFASM_HOME}/lib
      ```
 
-7. OpenFrame açın\_ASM\_InstallLog.log dosya içinde olduğu gibi vi ve herhangi bir hata olmadığını doğrulayın. Örneğin:
+7. OpenFrame @ no__t-0ASM\_InstallLog.log dosyasını vi 'de açın ve hata olmadığından emin olun. Örnek:
 
      ```
      [oframe7@ofdemo ~]$ vi 
@@ -1134,40 +1134,40 @@ OFASM ana bilgisayar'ın assembler programlar yorumlar OpenFrame derleyicisidir.
      0 FatalErrors
      ```
 
-8. Aşağıdaki komutlardan birini göndererek OpenFrame yeniden:
+8. Aşağıdaki komutlardan birini vererek OpenFrame 'i yeniden başlatın:
 
      ```
      tmdown / tmboot
      ```
 
-     — veya —
+     veya
 
      ```
      oscdown / oscboot
      ```
 
-## <a name="install-osc"></a>OSC yükleyin
+## <a name="install-osc"></a>OSC 'yi yükler
 
-OSC hızlı OLTP işlemleri ve diğer yönetim işlevlerini desteklediği IBM CICS benzer OpenFrame ortamıdır.
+OSC, yüksek hızlı OLTP işlemlerini ve diğer yönetim işlevlerini destekleyen IBM CICS benzer bir OpenFrame ortamıdır.
 
-**OSC yüklemek için**
+**OSC 'yi yüklemek için**
 
-1. Temel yükleme başarılı olduğundan emin olun ve ardından doğrulayın OpenFrame\_OSC7\_0\_Fix2\_Linux\_x86\_64. bin yükleyici dosya ve osc.properties yapılandırma dosyası mevcut.
-2. Aşağıdaki parametreleri osc.properties dosyasındaki düzenleyin:
+1. Temel yüklemenin başarılı olduğundan emin olun, ardından OpenFrame @ no__t-0S7 @ no__t-10 @ no__t-2Fix2 @ no__t-3Linux @ no__t-4x86\_64.bin Installer File ve OSC. Properties yapılandırma dosyasının mevcut olduğunu doğrulayın.
+2. Aşağıdaki parametreleri, OSC. Properties dosyasında düzenleyin:
      ```
      OPENFRAME_HOME=/opt/tmaxapp/OpenFrame OSC_SYS_OSC_NCS_PATH=/opt/tmaxapp/OpenFrame/temp/OSC_NCS OSC_APP_OSC_TC_PATH=/opt/tmaxapp/OpenFrame/temp/OSC_TC
      ```
 
-3. Gösterildiği gibi özellikler dosyası kullanan yükleyici yürütün:
+3. Aşağıda gösterildiği gibi özellikler dosyasını kullanarak yükleyiciyi yürütün:
 
      ```
      [oframe7@ofdemo ~]$ chmod a+x OpenFrame_OSC7_0_Fix2_Linux_x86_64.bin [oframe7@ofdemo ~]$ ./OpenFrame_OSC7_0_Fix2_Linux_x86_64.bin -f osc.properties
      ```
 
-     İşiniz bittiğinde "Kurulum Tamamlandı" iletisi görüntülenir.
+     İşiniz bittiğinde, "yükleme tamamlandı" iletisi görüntülenir.
 
-4. Bash profili OSC değişkenlerle güncelleştirildiğini doğrulayın.
-5. OpenFrame gözden\_OSC7\_0\_Fix2\_InstallLog.log dosya. Şuna benzer şekilde görünecektir:
+4. Bash profilinin, OSC değişkenleriyle güncelleştirildiğinden emin olun.
+5. OpenFrame @ no__t-0S7 @ no__t-10 @ no__t-2Fix2\_InstallLog.log dosyasını gözden geçirin. Şuna benzer şekilde görünecektir:
 
      ```
      Summary 
@@ -1180,13 +1180,13 @@ OSC hızlı OLTP işlemleri ve diğer yönetim işlevlerini desteklediği IBM CI
      0 FatalError
      ```
 
-6. VI ofsys.seq yapılandırma dosyası kullanın. Örneğin:
+6. ' I kullanarak ofsys. seq yapılandırma dosyasını açın. Örnek:
 
      ```
      vi $OPENFRAME_HOME/config/ofsys.seq
      ```
 
-7. İçinde \#temel ve \#toplu olarak bölümlerde, parametreleri gösterildiği gibi düzenleyin.
+7. @No__t-0BASE ve \#BATCH bölümlerinde, parametreleri gösterildiği gibi düzenleyin.
 
      ```
      Before changes
@@ -1224,7 +1224,7 @@ OSC hızlı OLTP işlemleri ve diğer yönetim işlevlerini desteklediği IBM CI
      TPFMAGENT      tmsvr
     ```
 
-8. Lisans dosyasını kopyalayın. Örneğin:
+8. Lisans dosyasını kopyalayın. Örnek:
 
      ```
      [oframe7@ofdemo ~]$ cp /home/oframe7/oflicense/ofonline/licosc.dat 
@@ -1238,9 +1238,9 @@ OSC hızlı OLTP işlemleri ve diğer yönetim işlevlerini desteklediği IBM CI
      -rwxrwxr-x. 1 oframe mqm 80 Sep  3 11:54 lictjes.da
      ```
 
-9. Başlangıç yukarı ve OSC kapatmak için CICS bölge paylaşılan bellek yazarak başlatın `osctdlinit OSCOIVP1` komut isteminde.
+9. OSC 'yi başlatmak ve kapatmak için, komut isteminde `osctdlinit OSCOIVP1` yazarak CICS Region paylaşılan belleğini başlatın.
 
-10. Çalıştırma `oscboot` OSC önyüklemesi için. Çıktı aşağıdakine benzer olacaktır:
+10. OSC 'yi önyüklemek için `oscboot` ' i çalıştırın. Çıktı şuna benzer:
 
      ```
      OSCBOOT : pre-processing       [ OK ]
@@ -1254,39 +1254,39 @@ OSC hızlı OLTP işlemleri ve diğer yönetim işlevlerini desteklediği IBM CI
           TMBOOT: TLM(tlm) is starting: Mon Sep 12 01:40:25 2016 
      ```
 
-11. İşlem durumunu hazır olduğunu doğrulamak için `tmadmin` sı komutunu. Tüm işlemler de RDY görüntülenmelidir **durumu** sütun.
+11. İşlem durumunun kullanılabilir olduğunu doğrulamak için, si içinde `tmadmin` komutunu kullanın. Tüm işlemlerin **durum** sütununda RDY görüntülemesi gerekir.
 
-    ![İşlemler RDY görüntüleme](media/tmadmin-02.png)
+    ![RDY 'yi görüntüleyen süreçler](media/tmadmin-02.png)
 
-12. Kullanarak OSC kapatma `oscdown` komutu.
+12. @No__t-0 komutunu kullanarak OSC 'yi kapatın.
 
-## <a name="install-jeus"></a>JEUS yükleyin
+## <a name="install-jeus"></a>JEABD 'yi yükler
 
-Sunu katmanı OpenFrame web uygulama sunucusunun JEUS (Java Enterprise kullanıcı çözümü) sağlar.
+JEUS (Java kurumsal Kullanıcı çözümü), OpenFrame Web uygulaması sunucusunun sunum katmanını sağlar.
 
-JEUS yüklemeden önce JEUS yüklemek için gereken komut satırı araçları ve kitaplıkları sunan Apache Ant paketi yükleyin.
+JEUS 'yi yüklemeden önce, JEABD 'yi yüklemek için gereken kitaplıkları ve komut satırı araçlarını sağlayan Apache Ant paketini yüklemeniz gerekir.
 
-**Apache Ant'ı yüklemek için**
+**Apache Ant yüklemek için**
 
-1. Ant yükleme ikili kullanarak `wget` komutu. Örneğin:
+1. @No__t-0 komutunu kullanarak ant ikilisini indirin. Örnek:
 
      ```
      wget http://apache.mirror.cdnetworks.com/ant/binaries/apacheant-1.9.7-bin.tar.gz
      ```
 
-2. Kullanım `tar` ikili dosyasını ayıklayın ve uygun bir konuma taşımak için yardımcı program. Örneğin:
+2. İkili dosyayı ayıklamak ve uygun bir konuma taşımak için `tar` yardımcı programını kullanın. Örnek:
 
      ```
      tar -xvzf apache-ant-1.9.7-bin.tar.gz
      ```
 
-3. Verimlilik için sembolik bağlantı oluşturun:
+3. Verimlilik için bir sembolik bağlantı oluşturun:
 
      ```
      ln -s apache-ant-1.9.7 ant
      ```
 
-4. Bash profili içinde olduğu gibi vi açın (`vi .bash_profile`) ve aşağıdaki değişkenleri ile güncelleştirin:
+4. Bash profilini VIT (`vi .bash_profile`) içinde açın ve aşağıdaki değişkenlerle güncelleştirin:
 
      ```
      # Ant ENV
@@ -1294,28 +1294,28 @@ JEUS yüklemeden önce JEUS yüklemek için gereken komut satırı araçları ve
      export PATH=$HOME/ant/bin:$PATH
      ```
 
-5.  Değiştirilmiş ortam değişkenini uygulayın. Örneğin:
+5.  Değiştirilen ortam değişkenini uygulayın. Örnek:
 
      ```
      [oframe7\@ofdemo \~]\$ source \~/.bash\_profile
      ```
 
-**JEUS yüklemek için**
+**JEABD 'yi yüklemek için**
 
-1. Kullanarak yükleyici genişletin `tar` yardımcı programı. Örneğin:
+1. @No__t-0 yardımcı programını kullanarak yükleyiciyi genişletin. Örnek:
 
      ```
      [oframe7@ofdemo ~]$ tar -zxvf jeus704.tar.gz
      ```
 
-2. Oluşturma bir **jeus** klasörü (`mkdir jeus7`) ve ikili sıkıştırmasını açın.
-3. Değiştirin **Kurulum** dizini (veya kendi ortamınıza JEUS parametresini kullanın). Örneğin:
+2. Bir **jeus** klasörü oluşturun (`mkdir jeus7`) ve ikiliyi ayıklayın.
+3. **Kurulum** dizinine geçin (veya kendi ortamınız için jeus parametresini kullanın). Örnek:
 
      ```
      [oframe7@ofdemo ~]$ cd jeus7/setup/
      ```
 
-4. Yürütme `ant clean-all` derleme gerçekleştirmeden önce. Çıktı aşağıdakine benzer olacaktır:
+4. Derlemeyi gerçekleştirmeden önce `ant clean-all` yürütün. Çıktı şuna benzer:
 
      ```
      Buildfile: /home/oframe7jeus7/setup/build.xml
@@ -1330,22 +1330,22 @@ JEUS yüklemeden önce JEUS yüklemek için gereken komut satırı araçları ve
      Total time: 0 seconds
      ```
 
-5.  Etki alanı yapılandırma template.properties dosyasının yedeğini alın. Örneğin:
+5.  Domain-config-Template. Properties dosyasının yedeklemesini yapın. Örnek:
 
      ```
      [oframe7@ofdemo ~]$ cp domain-config-template.properties domain-configtemplate.properties.bkp
      ```
 
-6. Etki alanı yapılandırma template.properties dosya içinde olduğu gibi vi açın:
+6. VI 'de Domain-config-Template. Properties dosyasını açın:
 
      ```
      [oframe7\@ofdemo setup]\$ vi domain-config-template.properties
      ```
 
-7. Değişiklik `jeus.password=jeusadmin nodename=Tmaxsoft` için `jeus.password=tmax1234 nodename=ofdemo`
+7. @No__t-0 ' i `jeus.password=tmax1234 nodename=ofdemo` olarak değiştir
 
-8. Yürütme `ant install` JEUS oluşturmak için komutu.
-9.  .bash güncelleştirme\_gösterildiği JEUS değişkenleriyle profili dosyası:
+8. JEUS oluşturmak için `ant install` komutunu yürütün.
+9.  . Bash @ no__t-0profile dosyasını aşağıda gösterildiği gibi JEUS değişkenleriyle güncelleştirin:
 
      ```
      # JEUS ENV 
@@ -1353,13 +1353,13 @@ JEUS yüklemeden önce JEUS yüklemek için gereken komut satırı araçları ve
      export PATH
      ```
 
-10. Bash profili yürütün. Örneğin:
+10. Bash profilini yürütün. Örnek:
 
      ```
      [oframe7@ofdemo setup]$ . .bash_profile
      ```
 
-11. *İsteğe bağlı*. Kolay kapatma ve JEUS bileşenlerin önyükleme için bir diğer adı oluşturun:
+11. *İsteğe bağlı*. JEUS bileşenlerinin kolay bir şekilde kapatılmasını ve önyüklemesi için bir diğer ad oluşturun:
 
      ```     
      # JEUS alias
@@ -1370,66 +1370,66 @@ JEUS yüklemeden önce JEUS yüklemek için gereken komut satırı araçları ve
      alias dsdown=‘jeusadmin -domain jeus_domain -u administrator -p tmax1234 "local-shutdown“’
      ```
 
-12. Yüklemeyi doğrulamak için etki alanı yönetim sunucusu gösterildiği gibi başlatın:
+12. Yüklemeyi doğrulamak için, etki alanı yöneticisi sunucusunu gösterildiği gibi başlatın:
 
      ```
      [oframe7@ofdemo ~]$ startDomainAdminServer -domain jeus_domain -u administrator -p jeusadmin
      ```
 
-13. Söz dizimini kullanarak web oturum açmasına göre doğrulayın:
+13. Sözdizimini kullanarak Web oturumu açmaya göre doğrulayın:
 
      ```
      http://<IP>:<port>/webadmin/login
      ```
 
-     Örneğin, <http://192.168.92.133:9736/webadmin/login.> oturum açma ekranı görüntülenir:
+     Örneğin, <http://192.168.92.133:9736/webadmin/login.>, oturum açma ekranı görünür:
     
      ![JEUS WebAdmin oturum açma ekranı](media/jeus-01.png)
 
      > [!NOTE]
-     > Bağlantı noktası güvenliği ile herhangi bir sorun yaşarsanız, bağlantı noktası 9736 açın veya Güvenlik Duvarı'nı devre dışı bırakın (`systemctl stop firewall`).
+     > Bağlantı noktası güvenliği ile ilgili herhangi bir sorunla karşılaşırsanız 9736 numaralı bağlantı noktasını açın veya güvenlik duvarını devre dışı bırakın (`systemctl stop firewall`).
 
-14. Sunucu1 için ana bilgisayar adını değiştirmek için tıklayın **kilitleme & Düzen**, ardından **Sunucu1**. Sunucu penceresinde, ana bilgisayar adı gibi değiştirin:
+14. Sunucu1 için ana bilgisayar adını değiştirmek için **kilitle & Düzenle**' ye tıklayın ve ardından **Sunucu1**' e tıklayın. Sunucu penceresinde, ana bilgisayar adını aşağıdaki gibi değiştirin:
 
-    1.  Değişiklik **Nodename** için **ofdemo**.
-    2.  Tıklayın **Tamam** penceresinin sağ tarafındaki.
-    3.  Tıklayın **Değişiklikleri Uygula** alt sol tarafında penceresinin ve açıklama girin *ana bilgisayar adı değişikliği*.
+    1.  **Düğdüğün** **ofdemo**'e geçin.
+    2.  Pencerenin sağ tarafındaki **Tamam** ' a tıklayın.
+    3.  Pencerenin sol alt tarafında bulunan **Değişiklikleri Uygula** ' ya tıklayın ve açıklama Için *ana bilgisayar adı değişikliğini*girin.
 
     ![JEUS WebAdmin ekranı](media/jeus-02.png)
 
-15. Yapılandırma onay ekranında başarılı olduğunu doğrulayın.
+15. Onay ekranında yapılandırmanın başarılı olduğunu doğrulayın.
 
-    ![jeus_domain sunucuyu ekranı](media/jeus-03.png)
+    ![jeus_domain sunucusu ekranı](media/jeus-03.png)
 
-16. Aşağıdaki komutu kullanarak yönetilen sunucu işlemi "SUNUCU1" başlatın:
+16. Aşağıdaki komutu kullanarak "Sunucu1" yönetilen sunucu işlemini başlatın:
 
      ```
      [oframe7@ofdemo ~]$ startManagedServer -domain jeus_domain -server server1 -u administrator -p jeusadmin
      ```
 
-## <a name="install-ofgw"></a>OFGW yükleyin
+## <a name="install-ofgw"></a>OFGW 'yi yükler
 
-OFGW 3270 terminal öykünücü OSI temel arasındaki iletişimi destekler ve terminal öykünücüsünü ve OSI arasındaki oturumları yöneten OpenFrame geçididir.
+OFGW, 3270 Terminal öykünücüsü ile OSı temel arasındaki iletişimi destekleyen OpenFrame ağ geçididir ve terminal öykünücüsü ile OSı arasındaki oturumları yönetir.
 
-**OFGW yüklemek için**
+**OFGW 'yi yüklemek için**
 
-1. JEUS başarıyla yüklendiğinden emin olun ve ardından doğrulayın OFGW7\_0\_1\_Generic.bin yükleyici dosya mevcut.
-2. Yükleyiciyi çalıştırın. Örneğin:
+1. JEUS 'nin başarılı bir şekilde yüklendiğinden emin olun, sonra OFGW7 @ no__t-00 @ no__t-11\_Generic.bin yükleyici dosyasının mevcut olduğunu doğrulayın.
+2. Yükleyiciyi yürütün. Örnek:
 
      ```
      [oframe7@ofdemo ~]$ ./OFGW7_0_1_Generic.bin
      ````
 
-3. Aşağıdaki konumlar için karşılık gelen yönergeleri kullanın:
+3. Karşılık gelen istemler için aşağıdaki konumları kullanın:
      -   JEUS giriş dizini
      -   JEUS etki alanı adı
      -   JEUS sunucu adı
-     -   Tibero sürücü
-     -   Ofdemo Tmax düğüm kimliği
+     -   Tibero sürücüsü
+     -   Tmax düğüm KIMLIĞI tanıtımı
 
-4. Varsayılan değerleri kabul edin ve ardından Yükleyiciden çıkmak için Enter tuşuna basın.
+4. Varsayılan değerleri kabul edin ve yükleyiciden çıkmak için ENTER tuşuna basın.
 
-5. OFGW URL'sini beklendiği gibi çalıştığını doğrulayın:
+5. OFGW URL 'sinin beklenen şekilde çalıştığını doğrulayın:
 
      ```
      Type URL 
@@ -1441,41 +1441,41 @@ OFGW 3270 terminal öykünücü OSI temel arasındaki iletişimi destekler ve te
 
     ![OpenFrame WebTerminal](media/ofgw-01.png)
 
-## <a name="install-ofmanager"></a>OFManager yükleyin
+## <a name="install-ofmanager"></a>OFManager 'ı yükler
 
-OFManager web ortamında OpenFrame için işlemi ve Yönetimi işlevleri sağlar.
+OFManager, Web ortamında OpenFrame için işlem ve yönetim işlevleri sağlar.
 
-**OFManager yüklemek için**
+**OFManager 'ı yüklemek için**
 
-1. Doğrulayın OFManager7\_Generic.bin yükleyici dosya mevcut.
-2. Yükleyiciyi çalıştırın. Örneğin:
+1. OFManager7\_Generic.bin yükleyici dosyasının mevcut olduğunu doğrulayın.
+2. Yükleyiciyi yürütün. Örnek:
 
      ```
      OFManager7_Generic.bin
      ```
 
-3.  Devam etmek ve lisans sözleşmesini kabul etmek için Enter tuşuna basın.
-4.  Yükleme klasörü seçin.
+3.  Devam etmek için ENTER tuşuna basın ve lisans sözleşmesini kabul edin.
+4.  Install klasörünü seçin.
 5.  Varsayılanları kabul edin.
-6.  Tibero veritabanını seçin.
-7.  Yükleyiciden çıkmak için Enter tuşuna basın.
-8.  OFManager URL'sini beklendiği gibi çalıştığını doğrulayın:
+6.  Veritabanı olarak Tibero 'yu seçin.
+7.  Yükleyiciden çıkmak için ENTER tuşuna basın.
+8.  OFManager URL 'sinin beklenen şekilde çalıştığını doğrulayın:
 
      ```
      Type URL http://192.168.92.133:8088/ofmanager and press enter <  IP >  : < PORT >  ofmanager Enter ID:   ROOT 
      Password: SYS1
      ```
 
-Başlangıç ekran görünür:
+Başlangıç ekranı görünür:
 
-![Tmax OpenFrame Yöneticisi oturum açma ekranı](media/ofmanager-01.png)
+![Tmax OpenFrame Manager oturum açma ekranı](media/ofmanager-01.png)
 
-OpenFrame bileşenlerin yüklenmesi tamamlanan.
+Bu işlem, OpenFrame bileşenlerinin yüklenmesini tamamlar.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bir ana bilgisayar geçişi düşünüyorsanız, genişleyen iş ortağı ekosistemimiz yardımcı olması kullanılabilir. Bir iş ortağı çözümü seçme hakkında ayrıntılı yönergeler için bkz [Platform Modernizasyonu Alliance](https://www.platformmodernization.org/pages/mainframe.aspx).
+Ana bilgisayar geçişini düşünüyorsanız, genişleyen iş ortağı ekosistemimiz size yardımcı olacak şekilde sunulmaktadır. Bir iş ortağı çözümü seçme hakkında ayrıntılı kılavuz için, [Platform modernleştirme Alliance](https://datamigration.microsoft.com/)' a bakın.
 
 -   [Azure’ı kullanmaya başlama](https://docs.microsoft.com/azure/)
--   [Host Integration Server (HIS) belgeleri](https://docs.microsoft.com/host-integration-server/)
--   [Azure sanal veri merkezi Lift-and-Shift ile Taşıma Kılavuzu](https://blogs.msdn.microsoft.com/azurecat/2018/03/12/new-whitepaper-azure-virtual-datacenter-lift-and-shift-guide/)
+-   [Host Integration Server () belgeleri](https://docs.microsoft.com/host-integration-server/)
+-   [Azure sanal veri merkezi yükseltme-ve-kaydırma Kılavuzu](https://blogs.msdn.microsoft.com/azurecat/2018/03/12/new-whitepaper-azure-virtual-datacenter-lift-and-shift-guide/)

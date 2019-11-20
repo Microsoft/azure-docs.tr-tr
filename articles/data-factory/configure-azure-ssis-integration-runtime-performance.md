@@ -1,6 +1,6 @@
 ---
-title: Azure-SSIS tümleştirme çalışma zamanının performansını yapılandırma | Microsoft Docs
-description: Azure-SSIS tümleştirme çalışma zamanı için yüksek performans özelliklerini yapılandırma hakkında bilgi edinin
+title: Azure-SSIS Integration Runtime için performansı yapılandırın
+description: Yüksek performans için Azure-SSIS Integration Runtime özelliklerinin nasıl yapılandırılacağını öğrenin
 services: data-factory
 ms.date: 01/10/2018
 ms.topic: conceptual
@@ -10,23 +10,23 @@ author: swinarko
 ms.author: sawinark
 ms.reviewer: ''
 manager: craigg
-ms.openlocfilehash: 42c69653a002446552da998320a43730dfdaadf5
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 518da092f690108111ca4456eaca66e4f3153c54
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65232510"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73681448"
 ---
-# <a name="configure-the-azure-ssis-integration-runtime-for-high-performance"></a>Yüksek performans için Azure-SSIS tümleştirme çalışma zamanı yapılandırma
+# <a name="configure-the-azure-ssis-integration-runtime-for-high-performance"></a>Yüksek performans için Azure-SSIS Integration Runtime yapılandırma
 
-Bu makalede, yüksek performanslı bir Azure-SSIS Integration Runtime (IR) yapılandırma açıklanır. Azure-SSIS IR, dağıtmak ve SQL Server Integration Services (SSIS) paketlerini Azure'da çalıştırmak sağlar. Azure-SSIS IR hakkında daha fazla bilgi için bkz: [Integration runtime](concepts-integration-runtime.md#azure-ssis-integration-runtime) makalesi. Dağıtımı ve SSIS paketlerini Azure'da çalıştırma hakkında daha fazla bilgi için bkz. [Lift and shift ile SQL Server Integration Services iş yüklerini buluta](/sql/integration-services/lift-shift/ssis-azure-lift-shift-ssis-packages-overview).
+Bu makalede, yüksek performans için bir Azure-SSIS Integration Runtime (IR) yapılandırma açıklanmaktadır. Azure-SSIS IR, Azure 'da SQL Server Integration Services (SSIS) paketlerini dağıtmanıza ve çalıştırmanıza olanak tanır. Azure-SSIS IR hakkında daha fazla bilgi için bkz. [Integration Runtime](concepts-integration-runtime.md#azure-ssis-integration-runtime) makalesi. Azure 'da SSIS paketlerini dağıtma ve çalıştırma hakkında daha fazla bilgi için bkz. [SQL Server Integration Services iş yüklerini buluta kaldırma ve kaydırma](/sql/integration-services/lift-shift/ssis-azure-lift-shift-ssis-packages-overview).
 
 > [!IMPORTANT]
-> Bu makalede, performans sonuçları ve test şirket içi SSIS geliştirme ekibi üyeleri tarafından yapılan gözlemler içerir. Sonuçlar farklılık gösterebilir. Hem maliyeti ve performansı etkileyen yapılandırma ayarlarınızı Sonlandır önce kendi testi gerçekleştirin.
+> Bu makale, SSIS geliştirme ekibinin üyeleri tarafından gerçekleştirilen şirket içi testlerin performans sonuçlarını ve gözlemlerini içerir. Sonuçlarınız farklılık gösterebilir. Hem maliyeti hem de performansı etkileyen yapılandırma ayarlarınızı sonuçlandırmak için kendi testinizi yapın.
 
-## <a name="properties-to-configure"></a>Özellikleri yapılandırmak için
+## <a name="properties-to-configure"></a>Yapılandırılacak Özellikler
 
-Bir yapılandırma betiği aşağıdaki bölümü, bir Azure-SSIS tümleştirme çalışma zamanını oluştururken yapılandırabileceğiniz özelliklerini gösterir. Tam PowerShell komut dosyası ve açıklaması için bkz. [dağıtma SQL Server Integration Services paketlerini azure'a](tutorial-deploy-ssis-packages-azure-powershell.md).
+Bir yapılandırma betiğinin aşağıdaki kısmı, bir Azure-SSIS Integration Runtime oluşturduğunuzda yapılandırabileceğiniz özellikleri gösterir. PowerShell betiği ve açıklaması hakkında daha fazla bilgi için bkz. [Azure 'a SQL Server Integration Services paketleri dağıtma](tutorial-deploy-ssis-packages-azure-powershell.md).
 
 ```powershell
 # If your input contains a PSH special character, e.g. "$", precede it with the escape character "`" like "`$"
@@ -66,19 +66,19 @@ $SSISDBPricingTier = "[Basic|S0|S1|S2|S3|S4|S6|S7|S9|S12|P1|P2|P4|P6|P11|P15|…
 ```
 
 ## <a name="azuressislocation"></a>AzureSSISLocation
-**AzureSSISLocation** Integration runtime çalışan düğümü konumudur. Çalışan düğümü, sabit bir bağlantı için bir Azure SQL veritabanı'nda SSIS Kataloğu veritabanını (SSISDB) tutar. Ayarlama **AzureSSISLocation** SSISDB barındıran SQL veritabanı sunucusuyla aynı konuma olanak tanıyan mümkün olduğunca verimli bir şekilde çalışması için tümleştirme çalışma zamanı.
+**Azuressislocation** , Integration Runtime çalışan düğümünün konumudur. Çalışan düğümü, bir Azure SQL veritabanında SSIS Katalog veritabanına (SSSıSDB) sabit bir bağlantı sağlar. **Azuressislocation** 'ı, SSıSDB barındıran SQL veritabanı sunucusuyla aynı konuma ayarlayın. Bu, tümleştirme çalışma zamanının mümkün olduğunca verimli bir şekilde çalışmasını sağlar.
 
 ## <a name="azuressisnodesize"></a>AzureSSISNodeSize
-Data Factory, Azure-SSIS IR dahil olmak üzere aşağıdaki seçeneklerden destekler:
--   Standart\_A4\_v2
--   Standard\_A8\_v2
+Azure-SSIS IR dahil Data Factory, aşağıdaki seçenekleri destekler:
+-   Standart\_a4\_v2
+-   Standart\_A8\_v2
 -   Standart\_D1\_v2
 -   Standart\_D2\_v2
 -   Standart\_D3\_v2
 -   Standart\_D4\_v2
 -   Standart\_D2\_v3
 -   Standart\_D4\_v3
--   Standard\_D8\_v3
+-   Standart\_D8\_v3
 -   Standart\_D16\_v3
 -   Standart\_D32\_v3
 -   Standart\_D64\_v3
@@ -87,78 +87,78 @@ Data Factory, Azure-SSIS IR dahil olmak üzere aşağıdaki seçeneklerden deste
 -   Standart\_E8\_v3
 -   Standart\_E16\_v3
 -   Standart\_E32\_v3
--   Standard\_E64\_v3
+-   Standart\_E64\_v3
 
-Terim ve kısaltmalarla şirket içi SSIS mühendislik ekibi tarafından testinde, D serisi A serisinden SSIS paketi yürütme için daha uygun gibi görünüyor.
+SSIS mühendislik ekibi tarafından resmi olmayan şirket içi sınamada, D serisi SSIS paketi yürütmesi için bir serinin daha uygun olduğu görülüyor.
 
--   D serisinin performansı/fiyat oranı A serisinden daha yüksektir ve v3 serisi performans/fiyat oranını dv2 serisi yüksektir.
--   D serisi için aktarım hızı A serisi ile aynı fiyattan daha yüksek ve aktarım hızı v3 serisinin dv2 serisi ile aynı fiyattan daha yüksek.
--   Azure-SSIS IR v2 serisi düğümler, özel kurulum için uygun değildir. Bu nedenle Lütfen v3 serisi düğümleri kullanın. V2 serisi düğümleri zaten kullanıyorsanız, lütfen mümkün olan en kısa sürede v3 serisi düğümleri kullanmaya geçin.
--   E serisi VM boyutları, diğer makinelere değerinden daha yüksek bellek CPU oranına sağlar bellek için iyileştirilmiş ' dir. Paketiniz çok miktarda bellek gerekiyorsa, E serisi VM seçme düşünebilirsiniz.
+-   D serisinin performans/fiyat oranı bir serinin yüksektir ve v3 serisinin performans/fiyat oranı v2 serisinden daha yüksektir.
+-   D serisi için üretilen işlem, aynı fiyata ait bir seriden daha yüksektir ve v3 serisi için üretilen iş, aynı fiyata v2 serisinden daha yüksektir.
+-   Azure-SSIS IR v2 serisi düğümleri özel kurulum için uygun değildir, bu nedenle lütfen bunun yerine v3 serisi düğümlerini kullanın. V2 serisi düğümlerini zaten kullanıyorsanız, lütfen v3 serisi düğümlerini mümkün olan en kısa sürede kullanmaya geçin.
+-   E serisi, diğer makinelerden daha yüksek bellekten CPU oranı sağlayan bellek için iyileştirilmiş VM boyutlarıdır. Paketiniz çok miktarda bellek gerektiriyorsa, E Serisi VM 'yi seçmeyi düşünebilirsiniz.
 
-### <a name="configure-for-execution-speed"></a>Yürütme hızını için yapılandırma
-Çalıştırmak için birçok paketi yok ve hızlı bir şekilde çalıştırmak için paketleri istiyorsanız bilgileri aşağıdaki tabloda senaryonuz için uygun bir sanal makine türünü seçmek için kullanın.
+### <a name="configure-for-execution-speed"></a>Yürütme hızı için yapılandırma
+Çalıştırmak için çok fazla paketleriniz yoksa ve paketlerin hızlı bir şekilde çalışmasını istiyorsanız, senaryonuza uygun bir sanal makine türü seçmek için aşağıdaki grafikteki bilgileri kullanın.
 
-Bu veriler, tek bir çalışan düğümü üzerindeki bir tek bir paket yürütme temsil eder. Paket, 3 milyon kaydı ad ve son ad sütunu ile Azure Blob depolama alanından yükler, bir tam ad sütunu oluşturur ve Azure Blob Depolama'ya 20 karakterden uzun tam ada sahip kayıtları yazar.
+Bu veriler tek bir çalışan düğümünde tek bir paket yürütmesini temsil eder. Paket, Azure Blob depolama alanından ad ve Soyadı sütunları olan 3.000.000 kaydı yükler, tam ad sütunu oluşturur ve tam adı olan kayıtları 20 karakterden uzun Azure Blob depolama alanına yazar.
 
-![SSIS tümleştirme çalışma zamanı paketi yürütme hızını](media/configure-azure-ssis-integration-runtime-performance/ssisir-execution-speedV2.png)
+![SSIS Integration Runtime paketi yürütme hızı](media/configure-azure-ssis-integration-runtime-performance/ssisir-execution-speedV2.png)
 
-### <a name="configure-for-overall-throughput"></a>Toplam aktarım hızı için yapılandırma
+### <a name="configure-for-overall-throughput"></a>Genel üretilen iş için yapılandırma
 
-Paketleri çalıştırmak için kullanabileceğiniz birçok seçenek mevcuttur ve genel üretilen işi hakkında en çok değer verdiğiniz bilgileri aşağıdaki tabloda senaryonuz için uygun bir sanal makine türünü seçmek için kullanın.
+Çalıştırmak için çok sayıda paketiniz varsa ve genel aktarım hızını en iyi şekilde düşünüyorsanız, senaryonuza uygun bir sanal makine türü seçmek için aşağıdaki grafikteki bilgileri kullanın.
 
-![SSIS tümleştirme çalışma zamanı en fazla toplam aktarım hızı](media/configure-azure-ssis-integration-runtime-performance/ssisir-overall-throughputV2.png)
+![SSIS Integration Runtime en fazla genel işleme](media/configure-azure-ssis-integration-runtime-performance/ssisir-overall-throughputV2.png)
 
 ## <a name="azuressisnodenumber"></a>AzureSSISNodeNumber
 
-**AzureSSISNodeNumber** Integration runtime'nın ölçeklenebilirlik ayarlar. Integration runtime'nın aktarım hızı orantılıdır **AzureSSISNodeNumber**. Ayarlama **AzureSSISNodeNumber** küçük bir değere ilk Integration runtime'nın aktarım hızını izleyin, sonra senaryonuz için değeri ayarlayın. Çalışan düğümü sayısı yapılandırmak için bkz: [bir Azure-SSIS tümleştirme çalışma zamanını yönetme](manage-azure-ssis-integration-runtime.md).
+**AzureSSISNodeNumber** , tümleştirme çalışma zamanının ölçeklenebilirliğini ayarlar. Tümleştirme çalışma zamanının üretilen işi **AzureSSISNodeNumber**ile orantılıdır. Önce **AzureSSISNodeNumber** değerini küçük bir değere ayarlayın, tümleştirme çalışma zamanının verimini izleyin ve sonra senaryonuz için değeri ayarlayın. Çalışan düğümü sayısını yeniden yapılandırmak için bkz. [Azure-SSIS tümleştirme çalışma zamanını yönetme](manage-azure-ssis-integration-runtime.md).
 
 ## <a name="azuressismaxparallelexecutionspernode"></a>AzureSSISMaxParallelExecutionsPerNode
 
-Paketleri çalıştırmak için zaten bir güçlü çalışan düğümü kullanırken, artan **AzureSSISMaxParallelExecutionsPerNode** Integration runtime'nın genel üretilen işi artırabilir. Standard_D1_v2 düğümlerde, düğüm başına 1-4 Paralel yürütme desteklenir. Tüm diğer türleri düğüm için düğüm başına 1-max(2 x number of cores, 8) paralel yürütme desteklenir. İsterseniz **AzureSSISMaxParallelExecutionsPerNode** biz desteklenen en büyük değer, bir destek bileti açabilirsiniz ve biz güncelleştirmek için Azure Powershell kullanma gereken en yüksek değer ve sonra artırabilir  **AzureSSISMaxParallelExecutionsPerNode**.
-Paketinizi ve çalışan düğümleri için aşağıdaki yapılandırmaları maliyeti temel alarak uygun değeri tahmin edebilirsiniz. Daha fazla bilgi için [genel amaçlı sanal makine boyutları](../virtual-machines/windows/sizes-general.md).
+Paketleri çalıştırmak için zaten güçlü bir çalışan düğümü kullanıyorsanız, **Azuressismaxparallelexecutionspernode** öğesinin artırılması, tümleştirme çalışma zamanının genel verimini artırabilir. Standard_D1_v2 düğümleri için, düğüm başına 1-4 paralel yürütmeler desteklenir. Diğer tüm düğüm türleri için 1-en fazla (2 x çekirdek sayısı, 8) düğüm başına paralel yürütmeler desteklenir. **Azuressımaxparallelexecutionspernode** ' u desteklediğimiz maksimum değerin ötesinde isterseniz, bir destek bileti açabilir ve sizin için en büyük değeri artırabilir ve Azure PowerShell 'ı kullanarak **Azuressismaxparallelexecutionspernode 'u güncelleştirmeniz gerekir** .
+Paketinizin maliyetine ve çalışan düğümlerine yönelik aşağıdaki yapılandırmalara göre uygun değeri tahmin edebilirsiniz. Daha fazla bilgi için bkz. [genel amaçlı sanal makine boyutları](../virtual-machines/windows/sizes-general.md).
 
-| Boyut             | Sanal işlemci | Bellek: GiB | Geçici depolama (SSD) GiB | Maksimum geçici depolama aktarım hızı: IOPS / okuma MB/sn / yazma MB/sn | Maksimum veri diski / aktarım hızı: IOPS | Maks NIC / Beklenen ağ performansı (Mbps) |
+| Boyut             | Sanal işlemci | Bellek: GiB | Geçici depolama (SSD) GiB | Maksimum geçici depolama aktarım hızı: IOPS / Okuma MB/sn / Yazma MB/sn | Maksimum veri diski/aktarım hızı: IOPS | Maks NIC / Beklenen ağ performansı (Mbps) |
 |------------------|------|-------------|------------------------|------------------------------------------------------------|-----------------------------------|------------------------------------------------|
 | Standart\_D1\_v2 | 1    | 3,5         | 50                     | 3000/46/23                                             | 2/2x500                         | 2 / 750                                        |
 | Standart\_D2\_v2 | 2    | 7           | 100                    | 6000/93/46                                             | 4/4x500                         | 2 / 1500                                       |
 | Standart\_D3\_v2 | 4    | 14          | 200                    | 12000/187/93                                           | 8/8x500                         | 4 / 3000                                       |
 | Standart\_D4\_v2 | 8    | 28          | 400                    | 24000/375/187                                          | 16/16x500                       | 8 / 6000                                       |
-| Standart\_A4\_v2 | 4    | 8           | 40                     | 4000/80/40                                             | 8/8x500                         | 4 / 1000                                       |
-| Standard\_A8\_v2 | 8    | 16          | 80                     | 8000/160/80                                            | 16/16x500                       | 8 / 2000                                       |
-| Standart\_D2\_v3 | 2    | 8           | 50                     | 3000/46/23                                             | 4 / 6 x 500                         | 2 / 1000                                       |
-| Standart\_D4\_v3 | 4    | 16          | 100                    | 6000/93/46                                             | 8 / 12 x 500                        | 2 / 2000                                       |
-| Standard\_D8\_v3 | 8    | 32          | 200                    | 12000/187/93                                           | 16 / 24 x 500                       | 4 / 4000                                       |
-| Standart\_D16\_v3| 16   | 64          | 400                    | 24000/375/187                                          | 32 / 48 x 500                        | 8 / 8000                                       |
-| Standart\_D32\_v3| 32   | 128         | 800                    | 48000/750/375                                          | 32 / 96 x 500                       | 8 / 16000                                      |
-| Standart\_D64\_v3| 64   | 256         | 1600                   | 96000 / 1000 / 500                                         | 32 / 192 x 500                      | 8 / 30000                                      |
-| Standart\_E2\_v3 | 2    | 16          | 50                     | 3000/46/23                                             | 4 / 6 x 500                         | 2 / 1000                                       |
-| Standart\_E4\_v3 | 4    | 32          | 100                    | 6000/93/46                                             | 8 / 12 x 500                        | 2 / 2000                                       |
-| Standart\_E8\_v3 | 8    | 64          | 200                    | 12000/187/93                                           | 16 / 24 x 500                       | 4 / 4000                                       |
-| Standart\_E16\_v3| 16   | 128         | 400                    | 24000/375/187                                          | 32 / 48 x 500                       | 8 / 8000                                       |
-| Standart\_E32\_v3| 32   | 256         | 800                    | 48000/750/375                                          | 32 / 96 x 500                       | 8 / 16000                                      |
-| Standard\_E64\_v3| 64   | 432         | 1600                   | 96000 / 1000 / 500                                         | 32 / 192 x 500                      | 8 / 30000                                      |
+| Standart\_a4\_v2 | 4    | 8           | 40                     | 4000/80/40                                             | 8/8x500                         | 4 / 1000                                       |
+| Standart\_A8\_v2 | 8    | 16          | 80                     | 8000/160/80                                            | 16/16x500                       | 8 / 2000                                       |
+| Standart\_D2\_v3 | 2    | 8           | 50                     | 3000/46/23                                             | 4/6x500                         | 2 / 1000                                       |
+| Standart\_D4\_v3 | 4    | 16          | 100                    | 6000/93/46                                             | 8/12x500                        | 2 / 2000                                       |
+| Standart\_D8\_v3 | 8    | 32          | 200                    | 12000/187/93                                           | 16/24x500                       | 4 / 4000                                       |
+| Standart\_D16\_v3| 16   | 64          | 400                    | 24000/375/187                                          | 32/48x500                        | 8 / 8000                                       |
+| Standart\_D32\_v3| 32   | 128         | 800                    | 48000/750/375                                          | 32/96x500                       | 8 / 16000                                      |
+| Standart\_D64\_v3| 64   | 256         | 1600                   | 96000/1000/500                                         | 32/192x500                      | 8 / 30000                                      |
+| Standart\_E2\_v3 | 2    | 16          | 50                     | 3000/46/23                                             | 4/6x500                         | 2 / 1000                                       |
+| Standart\_E4\_v3 | 4    | 32          | 100                    | 6000/93/46                                             | 8/12x500                        | 2 / 2000                                       |
+| Standart\_E8\_v3 | 8    | 64          | 200                    | 12000/187/93                                           | 16/24x500                       | 4 / 4000                                       |
+| Standart\_E16\_v3| 16   | 128         | 400                    | 24000/375/187                                          | 32/48x500                       | 8 / 8000                                       |
+| Standart\_E32\_v3| 32   | 256         | 800                    | 48000/750/375                                          | 32/96x500                       | 8 / 16000                                      |
+| Standart\_E64\_v3| 64   | 432         | 1600                   | 96000/1000/500                                         | 32/192x500                      | 8 / 30000                                      |
 
-Doğru değeri ayarlamak için yönergeler şunlardır **AzureSSISMaxParallelExecutionsPerNode** özelliği: 
+**Azuressismaxparallelexecutionspernode** özelliği için doğru değeri ayarlamaya yönelik yönergeler aşağıda verilmiştir: 
 
-1. Başta küçük bir değere ayarlayın.
-2. Bu hizmetin genel performansını geliştirilmiş olup olmadığını denetlemek için küçük bir miktarda artırır.
-3. Hizmetin genel performansını en büyük değere ulaştığında değeri artırmak durdurun.
+1. İlk olarak bunu küçük bir değere ayarlayın.
+2. Genel üretilen iş hızının iyileştirilip geliştirilmediğini denetlemek için bunu küçük bir miktarda artırın.
+3. Genel verimlilik en büyük değere ulaştığında değeri artırmayı durdurun.
 
 ## <a name="ssisdbpricingtier"></a>SSISDBPricingTier
 
-**SSISDBPricingTier** fiyatlandırma katmanı için bir Azure SQL veritabanı'nda SSIS Kataloğu veritabanını (SSISDB). Bu ayar, yürütme günlüğü yüklemek için çalışanların IR örneği, bir paket yürütme kuyruğuna hızını ve hızı maksimum sayısını etkiler.
+**Ssisdbpricingtier** , BIR Azure SQL veritabanında SSIS Katalog veritabanı 'NıN (sssısdb) fiyatlandırma katmandır. Bu ayar IR örneğindeki en fazla çalışan sayısını, bir paket yürütmesini sıraya alma hızını ve yürütme günlüğünü yükleme hızını etkiler.
 
--   Hakkında kuyruk paket yürütme ve yürütme günlüğü yüklemek için hızlı umursamaz, en düşük veritabanı fiyatlandırma katmanı seçebilirsiniz. Temel fiyatlandırma ile Azure SQL veritabanı 8 çalışan bir tümleştirme çalışma zamanı örneğini destekler.
+-   Paket yürütmeyi sıraya alma ve yürütme günlüğünü yükleme hızlarından endişelenmezseniz, en düşük veritabanı fiyatlandırma katmanını seçebilirsiniz. Temel fiyatlandırmayla Azure SQL veritabanı, bir tümleştirme çalışma zamanı örneğinde 8 çalışanı destekler.
 
--   8'den fazla çalışan sayısı veya çekirdek sayısı 50'den fazla olan temel değerinden daha güçlü bir veritabanı seçin. Aksi takdirde veritabanı tümleştirme çalışma zamanı örneğin performans sorunu haline gelir ve genel performansını olumsuz şekilde etkilenir.
+-   Çalışan sayısı 8 ' den büyükse, temel değerinden daha güçlü bir veritabanı seçin veya çekirdek sayısı 50 ' den fazla olur. Aksi halde veritabanı Integration Runtime örneğinin performans sorununa dönüşmiş olur ve genel performans olumsuz etkilenir.
 
--   Günlük düzeyi için ayrıntılı olarak ayarlanırsa, s3 gibi daha güçlü bir veritabanı seçin. Terim ve kısaltmalarla şirket içi test işlemlerimizi göre s3 fiyatlandırma katmanına SSIS paketi yürütme 2 düğüm, 128 paralel sayıları ve ayrıntılı günlük kaydı düzeyini destekler.
+-   Günlüğe kaydetme düzeyi Verbose olarak ayarlandıysa S3 gibi daha güçlü bir veritabanı seçin. S3 fiyatlandırma katmanı, resmi olmayan şirket içi testimize göre SSIS paketi yürütmeyi 2 düğüm, 128 paralel sayımlar ve ayrıntılı günlük düzeyi ile destekleyebilir.
 
-Veritabanı fiyatlandırma katmanı göre de ayarlayabilirsiniz [veritabanı işlem birimi](../sql-database/sql-database-what-is-a-dtu.md) (DTU) kullanım bilgilerini kullanılabilir Azure portalında.
+Ayrıca, veritabanı [işlem birimi](../sql-database/sql-database-what-is-a-dtu.md) (DTU) kullanım bilgilerine göre veritabanı fiyatlandırma katmanını Azure Portal de ayarlayabilirsiniz.
 
 ## <a name="design-for-high-performance"></a>Yüksek performans tasarımı
-Azure'da çalışan bir SSIS paketi tasarlama, şirket içi yürütme için bir paket tasarlama öğesinden farklıdır. Aynı paket içindeki birden fazla bağımsız görevi birleştirmek yerine, bunları Azure-SSIS IR'yi daha verimli yürütme için çeşitli paketler halinde ayırın Her paket için bir paket yürütme oluşturun, böylece bunlar birbirine için bitmesini beklemek zorunda değilsiniz. Bu yaklaşım, Azure-SSIS Integration runtime'nın ölçeklenebilirlik yararlanır ve hizmetin genel performansını artırır.
+Azure 'da çalışmak üzere bir SSIS paketi tasarlamak, şirket içi yürütmeye yönelik bir paket tasarlamaktan farklıdır. Aynı pakette birden fazla bağımsız görevi birleştirmek yerine, Azure-SSIS IR daha verimli yürütme için bunları birkaç pakete ayırın. Her paket için bir paket yürütmesi oluşturun, böylece birbirlerinin tamamlanmasını beklemek zorunda kalmaz. Bu yaklaşım, Azure-SSIS tümleştirme çalışma zamanının ölçeklenebilirliğinden faydalanır ve genel üretilen işi geliştirir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Azure-SSIS tümleştirme çalışma zamanı hakkında daha fazla bilgi edinin. Bkz: [Azure-SSIS tümleştirme çalışma zamanı](concepts-integration-runtime.md#azure-ssis-integration-runtime).
+Azure-SSIS Integration Runtime hakkında daha fazla bilgi edinin. Bkz. [Azure-SSIS Integration Runtime](concepts-integration-runtime.md#azure-ssis-integration-runtime).

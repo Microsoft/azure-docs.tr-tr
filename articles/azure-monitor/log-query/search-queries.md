@@ -1,56 +1,50 @@
 ---
-title: Azure İzleyici günlüklerine arama sorguları | Microsoft Docs
-description: Bu makalede almaya yönelik bir öğretici sağlar. Azure izleyici günlüğü sorgularda arama kullanmaya.
-services: log-analytics
-documentationcenter: ''
-author: bwren
-manager: carmonm
-editor: ''
-ms.assetid: ''
-ms.service: log-analytics
-ms.workload: na
-ms.tgt_pltfrm: na
+title: Azure Izleyici günlüklerinde sorgu arama | Microsoft Docs
+description: Bu makalede, Azure Izleyici günlük sorgularında arama ile çalışmaya başlama hakkında bir öğretici sunulmaktadır.
+ms.service: azure-monitor
+ms.subservice: logs
 ms.topic: conceptual
-ms.date: 08/06/2018
+author: bwren
 ms.author: bwren
-ms.openlocfilehash: b118740f3a57e168c5dfb071c199bcf424bd5113
-ms.sourcegitcommit: 2d3b1d7653c6c585e9423cf41658de0c68d883fa
+ms.date: 08/06/2018
+ms.openlocfilehash: d92cd42f0fceadee16035b605e8d25c6bc23bc67
+ms.sourcegitcommit: 4c3d6c2657ae714f4a042f2c078cf1b0ad20b3a4
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67295568"
+ms.lasthandoff: 10/25/2019
+ms.locfileid: "72932991"
 ---
-# <a name="search-queries-in-azure-monitor-logs"></a>Azure İzleyici günlüklerinde arama sorguları
-Azure İzleyici günlük sorguları bir tablo adı veya bir arama komutunu ile başlayabilirsiniz. Bu öğretici, arama tabanlı sorgular kapsar. Her yöntemin avantajları vardır.
+# <a name="search-queries-in-azure-monitor-logs"></a>Azure Izleyici günlüklerinde sorgu arama
+Azure Izleyici günlük sorguları, bir tablo adı ya da bir arama komutu ile başlayabilir. Bu öğretici, arama tabanlı sorguları ele alır. Her yöntemin avantajları vardır.
 
-Tablo tabanlı sorgular, sorgu kapsamı tarafından başlatın ve bu nedenle arama sorguları daha etkili olma eğilimindedir. Arama sorguları, küçük, daha iyi bir seçenek için belirli bir değer sütunları veya tabloları arasında ararken yaptığına yapılandırılmış ' dir. **Arama** tüm tablolar, belirtilen değere veya bir tablodaki tüm sütunları tarayabilirsiniz. İşlenen veri miktarı bu sorgular daha uzun sürebilir ve çok büyük sonuç kümelerini döndürme olasılığı neden olduğu devasa, olabilir.
+Tablo tabanlı sorgular sorgu kapsamı ile başlar ve bu nedenle arama sorgularından daha verimli olur. Arama sorguları, sütunlar veya tablolar arasında belirli bir değeri ararken daha iyi seçim yapan daha az yapılandırılmıştır. **arama** , belirli bir tablodaki veya tüm tablolardaki tüm sütunları, belirtilen değere göre tarayabilir. İşlenen veri miktarı çok büyük olabilir. Bu, bu sorguların daha uzun sürede tamamlanması ve çok büyük bir sonuç kümesi döndürebileceği anlamına gelir.
 
-## <a name="search-a-term"></a>Arama terimi
-**Arama** komutu genellikle belirli bir terim aramak için kullanılır. Aşağıdaki örnekte, tüm tabloların tüm sütunlarında "error" terimi için taranan:
+## <a name="search-a-term"></a>Terimi arayın
+**Arama** komutu genellikle belirli bir terimi aramak için kullanılır. Aşağıdaki örnekte, tüm tablolardaki tüm sütunlar "hata" teriminin tarandığı için:
 
 ```Kusto
 search "error"
 | take 100
 ```
 
-Kullanımı kolay oldukları karşın, yukarıda gösterilen bir gibi kapsamsız sorgular verimli değildir ve birçok ilgisiz sonuçları döndürmek büyük olasılıkla. İlgili tablo veya belirli bir sütuna aramak için daha iyi bir uygulama olacaktır.
+Kullanımı kolay olsa da, yukarıda gösterilen gibi kapsamlı olmayan sorgular verimli değildir ve çok sayıda ilgisiz sonuç döndürebilir. İlgili tabloda veya hatta belirli bir sütunda arama yapmak daha iyi bir uygulamadır.
 
 ### <a name="table-scoping"></a>Tablo kapsamı
-Belirli bir tabloda bir terim aramak için ekleme `in (table-name)` hemen sonrasına **arama** işleci:
+Belirli bir tablodaki bir terimi aramak için, **arama** işlecinden hemen sonra `in (table-name)` ekleyin:
 
 ```Kusto
 search in (Event) "error"
 | take 100
 ```
 
-veya birden çok tablo:
+veya birden çok tabloda:
 ```Kusto
 search in (Event, SecurityEvent) "error"
 | take 100
 ```
 
 ### <a name="table-and-column-scoping"></a>Tablo ve sütun kapsamı
-Varsayılan olarak, **arama** veri kümesindeki tüm sütunları değerlendirir. Yalnızca belirli bir sütuna aramak için bu sözdizimini kullanın:
+Varsayılan olarak, **arama** , veri kümesindeki tüm sütunları değerlendirir. Yalnızca belirli bir sütunda (örneğin, aşağıdaki örnekte adlandırılmış *kaynak* ) arama yapmak için şu sözdizimini kullanın:
 
 ```Kusto
 search in (Event) Source:"error"
@@ -58,75 +52,75 @@ search in (Event) Source:"error"
 ```
 
 > [!TIP]
-> Kullanırsanız `==` yerine `:`, sonuçları, kayıtları içerir *kaynak* tam değeri "error" sütununun tam bu durumda. Kullanarak ':' kayıtları içerecek burada *kaynak* "hata kodu 404" veya "Error" gibi değerler vardır.
+> `:`yerine `==` kullanırsanız sonuçlar, *kaynak* sütunun "Error" değerine sahip olduğu kayıtları ve bu tam durumu içerir. ': ' Kullanılması, *kaynağın* "hata kodu 404" veya "hata" gibi değerlere sahip olduğu kayıtları içerecektir.
 
-## <a name="case-sensitivity"></a>Büyük küçük harf duyarlılığı
-"Dns" arama "DNS", "dns" veya "Dns" gibi sonuçlar böylece varsayılan olarak, arama terimi, duyarlıdır. Büyük küçük harfe duyarlı arama yapmak için `kind` seçeneği:
+## <a name="case-sensitivity"></a>Büyük/küçük harf duyarlılığı
+Varsayılan olarak, terim arama büyük/küçük harfe duyarlıdır; bu nedenle "DNS" araması "DNS", "DNS" veya "DNS" gibi sonuçlar verebilir. Arama durumunu duyarlı hale getirmek için `kind` seçeneğini kullanın:
 
 ```Kusto
 search kind=case_sensitive in (Event) "DNS"
 | take 100
 ```
 
-## <a name="use-wild-cards"></a>Joker karakter kullanın
-**Arama** komutu başlangıcında, son veya döneminin ortasında joker destekler.
+## <a name="use-wild-cards"></a>Joker karakter kullan
+**Arama** komutu, bir terimin başlangıcında, sonunda veya ortasında joker karakterler destekler.
 
-"Win" ile başlayan koşulları aramak için:
+"Win" ile başlayan terimleri aramak için:
 ```Kusto
 search in (Event) "win*"
 | take 100
 ```
 
-Aranacak ".com" ile biten koşulları:
+". Com" ile biten terimleri aramak için:
 ```Kusto
 search in (Event) "*.com"
 | take 100
 ```
 
-"Www" içeren koşulları aramak için:
+"Www" içeren terimleri aramak için:
 ```Kusto
 search in (Event) "*www*"
 | take 100
 ```
 
-"Corp" ile başlayan ve biten ".com" "corp.mydomain.com" gibi arama terimlerini için"
+"Corp" ile başlayan ve ". com" ile biten, "corp.mydomain.com" gibi terimleri aramak için
 
 ```Kusto
 search in (Event) "corp*.com"
 | take 100
 ```
 
-Ayrıca her şeyi bir tabloda yalnızca bir joker kart kullanarak alabilirsiniz: `search in (Event) *`, ancak yalnızca yazma ile aynı olacaktır `Event`.
+Yalnızca bir joker karakter (`search in (Event) *`) kullanarak bir tablodaki her şeyi alabilir, ancak bu, yalnızca `Event` yazmak için de aynıdır.
 
 > [!TIP]
-> Kullanabilirsiniz ancak `search *` her tablonun her sütunu almak için her zaman belirli tablolar için sorgularınızın kapsamını önerilir. Kapsamsız sorgular tamamlanması biraz zaman alabilir ve çok fazla sonuç döndürebilir.
+> Her tablodaki her sütunu almak için `search *` ' ı kullanabilirsiniz, ancak sorgularınızın her zaman belirli tablolara kapsamını oluşturmanız önerilir. Kapsamlı olmayan sorguların tamamlanması biraz zaman alabilir ve çok fazla sonuç döndürebilir.
 
-## <a name="add-and--or-to-search-queries"></a>Ekleme *ve* / *veya* aramak için sorgular
-Kullanım **ve** birden çok kullanım koşulları içeren kayıtlar aramak için:
+## <a name="add-and--or-to-search-queries"></a>Sorgu ekleme *ve* / *veya* arama
+Birden çok terim içeren kayıtları aramak için **ve** kullanın:
 
 ```Kusto
 search in (Event) "error" and "register"
 | take 100
 ```
 
-Kullanım **veya** koşulları en az birini içeren kayıtları almak için:
+Koşulların en az birini içeren kayıtları almak için **veya** kullanın:
 
 ```Kusto
 search in (Event) "error" or "register"
 | take 100
 ```
 
-Birden çok arama koşulu varsa, aynı sorguyu parantez kullanarak birleştirebilirsiniz:
+Birden çok arama koşulunuz varsa, bunları parantez kullanarak aynı sorgu ile birleştirebilirsiniz:
 
 ```Kusto
 search in (Event) "error" and ("register" or "marshal*")
 | take 100
 ```
 
-Bu örneğin sonuçlarını "error" terimini içeren ve "Kaydet" veya "Hazırlama" ile başlayan bir şey de içeren kayıtlarının olacaktır.
+Bu örneğin sonuçları, "Error" terimini ve ayrıca "Register" ya da "Marshal" ile başlayan bir şeyi içeren kayıtlar olur.
 
 ## <a name="pipe-search-queries"></a>Kanal arama sorguları
-Tıpkı diğer herhangi bir komutu olduğu gibi **arama** arama sonuçlarını filtre, sıralar, toplu ve bu nedenle ayrıştırılabilir. Örneğin, sayısını almak için *olay* "win" içeren kayıtlar:
+Diğer tüm komutlardaki gibi, arama sonuçlarının filtrelenebilir, sıralanabilmesi ve toplanabilmesi için **arama** sırasında de erişilebilir. Örneğin, "Win" içeren *olay* kayıtlarının sayısını almak için:
 
 ```Kusto
 search in (Event) "win"
@@ -138,4 +132,4 @@ search in (Event) "win"
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Daha fazla ilgili öğreticiler bakın [Kusto sorgu dili site](/azure/kusto/query/).
+- [Kusto sorgu dili sitesinde](/azure/kusto/query/)diğer öğreticiler bölümüne bakın.

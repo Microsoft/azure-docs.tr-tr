@@ -94,7 +94,7 @@ sections:
         items:
           - html: '<a href="/azure/app-service/containers/tutorial-dotnetcore-sqldb-app">Azure SQL DB ile .NET Core</a>, <a href="/azure/app-service/containers/tutorial-java-enterprise-postgresql-app">PostgreSQL ile Java Enterprise</a> veya <a href="/azure/app-service/containers/tutorial-nodejs-mongodb-app">MongoDB ile Node.js</a> kullanarak uygulama oluşturma'
           - html: <a href="/azure/app-service/app-service-web-tutorial-custom-domain">Mevcut bir özel etki alanını uygulamanıza eşleme</a>
-          - html: <a href="/azure/app-service/app-service-web-tutorial-custom-SSL">Mevcut bir SSL sertifikasını uygulamanıza bağlama</a>
+          - html: <a href="/azure/app-service/configure-ssl-bindings">Azure App Service'de SSL bağlamasıyla özel DNS adının güvenliğini sağlama</a>
           - html: <a href="/azure/cdn/cdn-add-to-web-app">Uygulamanıza CDN ekleme</a>
   - title: Örnekler
     items:

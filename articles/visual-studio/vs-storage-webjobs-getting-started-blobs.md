@@ -1,9 +1,9 @@
 ---
-title: BLOB ile çalışmaya başlama depolama ve Visual Studio bağlı hizmetler (WebJob Proje) | Microsoft Docs
-description: Visual Studio kullanarak bir Azure depolama alanına bağlandıktan sonra bir Web işi projesi içinde BLOB Depolama ile çalışmaya başlamak nasıl bağlı hizmetler.
+title: Visual Studio (WebJob projeleri) kullanarak BLOB depolama ile çalışmaya başlama
+description: Visual Studio bağlı hizmetleri kullanarak bir Azure depolama 'ya bağlandıktan sonra bir WebJob projesinde blob depolamayı kullanmaya başlama.
 services: storage
 author: ghogen
-manager: douge
+manager: jillfra
 ms.assetid: 324c9376-0225-4092-9825-5d1bd5550058
 ms.prod: visual-studio-dev15
 ms.technology: vs-azure
@@ -12,26 +12,27 @@ ms.workload: azure-vs
 ms.topic: conceptual
 ms.date: 12/02/2016
 ms.author: ghogen
-ms.openlocfilehash: 5a7c16e6ac565d1660fee02cb7df178344b195e7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ROBOTS: NOINDEX,NOFOLLOW
+ms.openlocfilehash: 90aa824b7df575eb2783ece5bd88322f0b55f0a2
+ms.sourcegitcommit: 8b44498b922f7d7d34e4de7189b3ad5a9ba1488b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "62122933"
+ms.lasthandoff: 10/13/2019
+ms.locfileid: "72299968"
 ---
-# <a name="get-started-with-azure-blob-storage-and-visual-studio-connected-services-webjob-projects"></a>Azure Blob ile çalışmaya başlama depolama ve Visual Studio bağlı hizmetler (WebJob Proje)
+# <a name="get-started-with-azure-blob-storage-and-visual-studio-connected-services-webjob-projects"></a>Azure Blob depolama ve Visual Studio bağlı hizmetleri (WebJob projeleri) ile çalışmaya başlama
 [!INCLUDE [storage-try-azure-tools-blobs](../../includes/storage-try-azure-tools-blobs.md)]
 
 ## <a name="overview"></a>Genel Bakış
-Bu makalede, bir Azure blob'u oluşturulduğunda veya güncelleştirildiğinde bir işlemi nasıl tetikleyeceğinizi gösteren C# kod örneği sağlanmıştır. Kod örnekleri kullan [WebJobs SDK](https://github.com/Azure/azure-webjobs-sdk/wiki) sürüm 1.x. Eklediğinizde, bir depolama hesabı bir WebJob projesi için Visual Studio kullanarak **bağlı hizmet Ekle** iletişim kutusunda, uygun Azure depolama NuGet paketi yüklendi ve uygun .NET başvuruları projeye eklenir ve Depolama hesabı için bağlantı dizelerini App.config dosyasında güncelleştirilir.
+Bu makalede, C# bir Azure blobu oluşturulduğunda veya güncelleştirilirken bir işlemin nasıl tetikleneceğini gösteren kod örnekleri sağlanmaktadır. Kod örnekleri, [WebJobs SDK](https://github.com/Azure/azure-webjobs-sdk/wiki) sürüm 1. x ' i kullanır. Visual Studio **bağlı hizmetler Ekle** iletişim kutusunu kullanarak bir Web işi projesine bir depolama hesabı eklediğinizde, uygun Azure depolama NuGet paketi yüklüyse, projeye uygun .NET başvuruları eklenir ve bu için bağlantı dizeleri depolama hesabı App. config dosyasında güncelleştirilir.
 
-## <a name="how-to-trigger-a-function-when-a-blob-is-created-or-updated"></a>Bir blob oluşturulduğunda veya bir işlev tetiklemek nasıl
-Bu bölümde, nasıl kullanılacağını gösterir **BlobTrigger** özniteliği.
+## <a name="how-to-trigger-a-function-when-a-blob-is-created-or-updated"></a>Blob oluşturulduğunda veya güncelleştirilirken bir işlevi tetikleme
+Bu bölümde **Blobtrigger** özniteliğinin nasıl kullanılacağı gösterilmektedir.
 
- **Not:** WebJobs SDK, yeni veya değiştirilmiş bloblar için izlemek için günlük dosyaları tarar. Bu işlem, doğası gereği yavaş, blob oluşturulduktan sonra bir işleve kadar birkaç dakika veya daha uzun tetiklenir değil.  BLOB'ları hemen işlemek uygulamanız gerekiyorsa, blob oluşturma ve kullanma, bir kuyruk iletisi oluşturmak için önerilen yöntem olduğu **QueueTrigger** özniteliği yerine **BlobTrigger** blob işleyen işlev üzerindeki öznitelik.
+ **Note:** WebJobs SDK, yeni veya değiştirilmiş blob 'ları izlemek için günlük dosyalarını tarar. Bu işlem, doğal olarak yavaştır; bir işlev, blob oluşturulduktan sonra birkaç dakika veya daha uzun bir süre boyunca tetiklenmeyebilir.  Uygulamanızın blob 'ları hemen işlemesi gerekiyorsa, blobu oluştururken bir kuyruk iletisi oluşturmak ve blobu işleyen işlevde **Blobtrigger** özniteliği yerine **Queuetrigger** özniteliğini kullanmanız önerilir .
 
-### <a name="single-placeholder-for-blob-name-with-extension"></a>Blob adı uzantısı için tek bir yer tutucu
-Aşağıdaki kod örneği görünen metin BLOB'ları kopyalar *giriş* kapsayıcıya *çıkış* kapsayıcı:
+### <a name="single-placeholder-for-blob-name-with-extension"></a>Uzantıya sahip blob adı için tek yer tutucu
+Aşağıdaki kod örneği, *giriş* kapsayıcısında görünen metin bloblarını *Çıkış* kapsayıcısına kopyalar:
 
         public static void CopyBlob([BlobTrigger("input/{name}")] TextReader input,
             [Blob("output/{name}")] out string output)
@@ -39,9 +40,9 @@ Aşağıdaki kod örneği görünen metin BLOB'ları kopyalar *giriş* kapsayıc
             output = input.ReadToEnd();
         }
 
-Öznitelik oluşturucusunda kapsayıcı adı ve blob adı için yer tutucu belirten bir dize parametresi alır. Bu örnekte, bir blob adlı *Blob1.txt* oluşturulur *giriş* kapsayıcı, işlev adlı bir blob oluşturur *Blob1.txt* içinde *çıkış* kapsayıcı.
+Öznitelik Oluşturucusu, kapsayıcı adı ve BLOB adı için bir yer tutucu belirten bir String parametresi alır. Bu örnekte, *giriş* kapsayıcısında *Blob1. txt* adlı bir blob oluşturulduysa, işlev *Çıkış* kapsayıcısında *Blob1. txt* adlı bir blob oluşturur.
 
-Aşağıdaki kod örneğinde gösterildiği gibi blob adı yer tutucu ile adı deseni belirtebilirsiniz:
+Aşağıdaki kod örneğinde gösterildiği gibi BLOB adı yer tutucusu ile bir ad stili belirtebilirsiniz:
 
         public static void CopyBlob([BlobTrigger("input/original-{name}")] TextReader input,
             [Blob("output/copy-{name}")] out string output)
@@ -49,20 +50,20 @@ Aşağıdaki kod örneğinde gösterildiği gibi blob adı yer tutucu ile adı d
             output = input.ReadToEnd();
         }
 
-Bu kod, "orijinal-" ile başlayan adları yalnızca BLOB'ları kopyalar. Örneğin, *özgün Blob1.txt* içinde *giriş* kapsayıcı kopyalanır *kopyalama Blob1.txt* içinde *çıkış* kapsayıcı.
+Bu kod yalnızca adları "özgün-" ile başlayan Blobları kopyalar. Örneğin, *giriş* kapsayıcısında *Original-Blob1. txt* dosyası *Çıkış* kapsayıcısında *Copy-Blob1. txt* dosyasına kopyalanır.
 
-Bir küme ayraçlarının içinde ada sahip bir blob adları adı deseni belirtmeniz gerekiyorsa, küme ayracı çift. Örneğin, BLOB'ları bulmak istiyorsanız *görüntüleri* şöyle adlara sahip kapsayıcı:
+Adında küme ayraçları olan blob adları için bir ad stili belirtmeniz gerekiyorsa, küme ayraçları iki katına koyun. Örneğin, *görüntüler* kapsayıcısında aşağıdaki gibi adlara sahip Blobları bulmak istiyorsanız:
 
         {20140101}-soundfile.mp3
 
-Bu desen için kullanın:
+Bunu, örüntüiniz için kullanın:
 
         images/{{20140101}}-{name}
 
-Örnekte, *adı* yer tutucu değerini olacak *soundfile.mp3*.
+Örnekte, *ad* yer tutucu değeri *soundfile. mp3*olur.
 
-### <a name="separate-blob-name-and-extension-placeholders"></a>Ayrı blob adını ve uzantısını yer tutucuları
-Görünen blobları kopyalar aşağıdaki kod örneği dosya uzantısını değiştiren *giriş* kapsayıcıya *çıkış* kapsayıcı. Kod uzantısı günlükleri *giriş* blob ve Dahili hat numarasını ayarlar *çıkış* blob *.txt*.
+### <a name="separate-blob-name-and-extension-placeholders"></a>Blob adı ve uzantı yer tutucuları ayır
+Aşağıdaki kod örneği, *giriş* kapsayıcısında görüntülenen blob 'ları *Çıkış* kapsayıcısına kopyalayan dosya uzantısını değiştirir. Kod, *giriş* Blobun uzantısını günlüğe kaydeder ve *Çıkış* blobunun uzantısını *. txt*olarak ayarlar.
 
         public static void CopyBlobToTxtFile([BlobTrigger("input/{name}.{ext}")] TextReader input,
             [Blob("output/{name}.txt")] out string output,
@@ -75,21 +76,21 @@ Görünen blobları kopyalar aşağıdaki kod örneği dosya uzantısını deği
             output = input.ReadToEnd();
         }
 
-## <a name="types-that-you-can-bind-to-blobs"></a>Blob'lara bağlayabilirsiniz türleri
-Kullanabileceğiniz **BlobTrigger** aşağıdaki türlerde özniteliği:
+## <a name="types-that-you-can-bind-to-blobs"></a>Bloblara bağlayabileceğiniz türler
+**Blobtrigger** özniteliğini aşağıdaki türlerde kullanabilirsiniz:
 
-* **dize**
-* **TextReader**
-* **Stream**
-* **ICloudBlob**
+* **dizisinde**
+* **Değerine**
+* **Ka**
+* **Ihoparlör blobu**
 * **CloudBlockBlob**
 * **CloudPageBlob**
-* Diğer türleri tarafından seri durumdan [ICloudBlobStreamBinder](#getting-serialized-blob-content-by-using-icloudblobstreambinder)
+* [Ihoparlör Blobstreambınder](#getting-serialized-blob-content-by-using-icloudblobstreambinder) tarafından seri durumdan çıkarılan diğer türler
 
-De ekleyebilirsiniz Azure depolama hesabı ile doğrudan çalışmak istiyorsanız, bir **CloudStorageAccount** parametresi metodu imzası.
+Doğrudan Azure Storage hesabıyla çalışmak istiyorsanız, yöntem imzasına bir **Cloudstorageaccount** parametresi de ekleyebilirsiniz.
 
-## <a name="getting-text-blob-content-by-binding-to-string"></a>Dize bağlayarak metin blob içeriği alma
-Metin blobları bekleniyorsa, **BlobTrigger** uygulanabilir bir **dize** parametresi. Aşağıdaki kod örneği için bir metin blob bağlayan bir **dize** adlı parametre **logMessage**. İşlev bu parametre Web işleri SDK'sı panoya blobun içeriğini yazmak için kullanır.
+## <a name="getting-text-blob-content-by-binding-to-string"></a>Dizeye bağlayarak metin blobu içeriği alma
+Metin Blobları bekleniyorsa **Blobtrigger** bir **dize** parametresine uygulanabilir. Aşağıdaki kod örneği, bir metin blobunu **LogMessage**adlı bir **dize** parametresine bağlar. İşlevi, Web Işleri SDK panosuna Blobun içeriğini yazmak için bu parametreyi kullanır.
 
         public static void WriteLog([BlobTrigger("input/{name}")] string logMessage,
             string name,
@@ -100,8 +101,8 @@ Metin blobları bekleniyorsa, **BlobTrigger** uygulanabilir bir **dize** paramet
              logger.WriteLine(logMessage);
         }
 
-## <a name="getting-serialized-blob-content-by-using-icloudblobstreambinder"></a>Blob içeriği ICloudBlobStreamBinder kullanarak seri hale alma
-Aşağıdaki kod örneği, uygulayan bir sınıf kullanır **ICloudBlobStreamBinder** etkinleştirmek için **BlobTrigger** bir bloba bağlanacak öznitelik **WebImage** türü.
+## <a name="getting-serialized-blob-content-by-using-icloudblobstreambinder"></a>Ihoparlör Blobstreambınder kullanarak serileştirilmiş blob içeriği alma
+Aşağıdaki kod örneği, **Blobtrigger** özniteliğinin bir blobu **Web görüntüsü** türüne bağlamasını etkinleştirmek Için **ITIL blobstreambinder** uygulayan bir sınıf kullanır.
 
         public static void WaterMark(
             [BlobTrigger("images3/{name}")] WebImage input,
@@ -120,7 +121,7 @@ Aşağıdaki kod örneği, uygulayan bir sınıf kullanır **ICloudBlobStreamBin
             output = input.Resize(width, height);
         }
 
-**WebImage** bağlama kodunu sağlanır bir **WebImageBinder** türetilen sınıf **ICloudBlobStreamBinder**.
+**Webımage** bağlama kodu, **ICODE Blobstreambinder**öğesinden türetilen bir **webımageciltçi** sınıfında sağlanır.
 
         public class WebImageBinder : ICloudBlobStreamBinder<WebImage>
         {
@@ -137,20 +138,20 @@ Aşağıdaki kod örneği, uygulayan bir sınıf kullanır **ICloudBlobStreamBin
             }
         }
 
-## <a name="how-to-handle-poison-blobs"></a>Zehirli BLOB'ları işlemek nasıl
-Olduğunda bir **BlobTrigger** işlev başarısız olursa, SDK'sı çağırır, yeniden durumda tarafından geçici bir hata nedeniyle bir hata oluştu. Blob işlemeye çalıştığında her zaman blobun içeriğini tarafından hataya neden oluyorsa, işlev başarısız olur. Varsayılan olarak, SDK'sı bir işlev en fazla 5 kez belirli bir blob için çağırır. Beşinci başarısız çalışırsanız, SDK'sı adlı bir kuyruğa bir ileti ekler *webjobs blobtrigger poison*.
+## <a name="how-to-handle-poison-blobs"></a>Zarar bloblarını işleme
+Bir **Blobtrigger** işlevi başarısız olduğunda, hata geçici bir hatadan KAYNAKLANıRSA, SDK bunu yeniden çağırır. Hatanın nedeni blob 'un içeriği olursa, işlev blobu her işlemeye çalıştığında başarısız olur. Varsayılan olarak SDK, belirli bir blob için 5 kata kadar bir işlevi çağırır. Beşinci deneme başarısız olursa, SDK *WebJobs-blobtrigger-zeadlı*bir kuyruğa ileti ekler.
 
-Yeniden deneme sayısı yapılandırılabilir. Aynı **MaxDequeueCount** ayarı işleme zehirli blob ve kuyruk zehirli ileti işleme için kullanılır.
+En fazla yeniden deneme sayısı yapılandırılabilir. Aynı **Maxdequeuecount** ayarı, zarar blobu işleme ve zarar sırası ileti işleme için kullanılır.
 
-Kuyruk iletisi zehirli bloblar için aşağıdaki özellikleri içeren bir JSON nesnesidir:
+Zarar Blobları için kuyruk iletisi aşağıdaki özellikleri içeren bir JSON nesnesidir:
 
-* FunctionId (biçimde *{WebJob adı}* . İşlevler. *{İşlev adı}* , örneğin: WebJob1.Functions.CopyBlob)
+* FunctionID ( *{WebJob Name}* biçiminde). Lerdir. *{Function Name}* , örneğin: WebJob1. Functions. copyblob)
 * BlobType ("BlockBlob" veya "PageBlob")
 * ContainerName
 * BlobName
-* ETag (örneğin, bir blob sürüm tanımlayıcısı: "0x8D1DC6E70A277EF")
+* ETag (bir blob sürüm tanımlayıcısı, örneğin: "0x8D1DC6E70A277EF")
 
-Aşağıdaki kod örneğinde, **CopyBlob** işlev her çağrıldığında başarısız olmasına neden koduna sahip. Sonra en fazla yeniden deneme sayısı için çağırdığı SDK'sı, zehirli blob kuyrukta bir ileti oluşturulur ve bu iletiyi tarafından işlenen **LogPoisonBlob** işlevi.
+Aşağıdaki kod örneğinde, **Copyblob** işlevinin her çağrılışında başarısız olmasına neden olan kodu vardır. SDK, en fazla yeniden deneme sayısı için onu çağırdığında, zarar veren blob kuyruğunda bir ileti oluşturulur ve bu ileti **Logkirblob** işlevi tarafından işlenir.
 
         public static void CopyBlob([BlobTrigger("input/{name}")] TextReader input,
             [Blob("textblobs/output-{name}")] out string output)
@@ -170,7 +171,7 @@ Aşağıdaki kod örneğinde, **CopyBlob** işlev her çağrıldığında başar
             logger.WriteLine("ETag: {0}", message.ETag);
         }
 
-SDK otomatik olarak JSON iletisi seri durumdan çıkarır. İşte **PoisonBlobMessage** sınıfı:
+SDK, JSON iletisini otomatik olarak serileştirir. Bu, **Kirblobmessage** sınıfı şudur:
 
         public class PoisonBlobMessage
         {
@@ -181,41 +182,41 @@ SDK otomatik olarak JSON iletisi seri durumdan çıkarır. İşte **PoisonBlobMe
             public string ETag { get; set; }
         }
 
-### <a name="blob-polling-algorithm"></a>BLOB yoklama algoritması
-Web işleri SDK'sı tarafından belirtilen tüm kapsayıcıları tarar **BlobTrigger** uygulama başlangıcında öznitelikleri. Yeni BLOB'ları bulunan önce biraz kalmış olabilir bir büyük depolama hesabında Bu tarama biraz zaman alabilir ve **BlobTrigger** işlevleri yürütülür.
+### <a name="blob-polling-algorithm"></a>Blob yoklama algoritması
+Web Işleri SDK 'Sı, **Blobtrigger** öznitelikleriyle belirtilen tüm kapsayıcıları uygulama başlangıcında tarar. Büyük bir depolama hesabında, bu tarama biraz zaman alabilir, bu nedenle yeni blob 'ların bulunamaması ve **Blobtrigger** işlevleri yürütülmeden önce bir işlem olabilir.
 
-SDK'sı, uygulama başladıktan sonra yeni veya değiştirilmiş blobları algılamak için blob depolama günlüklerinden düzenli olarak okur. Blob günlükleri arabelleğe alınmış ve yalnızca fiziksel olarak 10 dakikada yazılan veya bu nedenle, bu nedenle önemli gecikme olabilir bir blob oluşturulur veya karşılık gelen önce güncelleştirilir sonra **BlobTrigger** işlevi yürütür.
+Uygulama başladıktan sonra yeni veya değiştirilmiş Blobları algılamak için, SDK düzenli aralıklarla BLOB depolama günlüklerinden okur. Blob günlükleri arabelleğe alınır ve her 10 dakikada bir fiziksel olarak yazılır, bu nedenle karşılık gelen **Blobtrigger** işlevi yürütülmeden önce bir blob oluşturulduktan veya güncelleştirildikten sonra önemli bir gecikme olabilir.
 
-Kullanarak oluşturduğunuz BLOB'ları için bir özel durum **Blob** özniteliği. WebJobs SDK, yeni bir blob oluşturduğunda, yeni blob hemen eşleşen tüm arabimini **BlobTrigger** işlevleri. Blob giriş ve çıkışları zinciri varsa, bu nedenle SDK verimli bir şekilde işleyebilir. Oluşturulan veya başka yollarla güncelleştirilmiş bloblar için işleme işlevleri blobunuza çalışan düşük gecikme süresi istiyorsanız kullanmanızı öneririz, ancak **QueueTrigger** yerine **BlobTrigger**.
+**BLOB** özniteliğini kullanarak oluşturduğunuz Bloblar için bir özel durum vardır. WebJobs SDK 'Sı yeni bir blob oluşturduğunda, yeni blobu tüm eşleşen **Blobtetikleyici** işlevlerine anında geçirir. Bu nedenle, bir blob giriş ve çıkış zincirinize sahipseniz, SDK bunları verimli bir şekilde işleyebilir. Ancak, blob işleme işlevlerinizi başka yollarla oluşturulan veya güncellenen blob 'lar için düşük gecikme süresi istiyorsanız, **Blobtrigger**yerine **Queuetrigger** kullanılması önerilir.
 
-### <a name="blob-receipts"></a>BLOB giriş
-Xenapp'i WebJobs SDK hiçbir **BlobTrigger** işlevi aynı yeni veya güncelleştirilmiş blob için birden çok kez çağrıldığından. Bunu tutarak yapar *blob giriş* belirtilen blob sürüm işlenen belirlemek için.
+### <a name="blob-receipts"></a>Blob alındıları
+WebJobs SDK 'Sı aynı yeni veya güncelleştirilmiş blob için hiçbir **Blobtrigger** işlevinin birden çok kez çağrılmasına neden olur. Bu, belirli bir blob sürümünün işlenip işlenmeyeceğini anlamak için *BLOB alındıları* tutarak bunu yapar.
 
-BLOB giriş adlı bir kapsayıcıda depolanan *azure webjobs konakları* AzureWebJobsStorage bağlantı dizesi tarafından belirtilen Azure depolama hesabında. Bir blob giriş bölümünde aşağıdaki bilgiler bulunur:
+Blob alındıları, AzureWebJobsStorage bağlantı dizesi tarafından belirtilen Azure depolama hesabındaki *Azure-WebJobs-Konakları* adlı bir kapsayıcıda depolanır. Blob alındı bilgisi aşağıdaki bilgilere sahiptir:
 
-* Blob için çağrılan işlev (" *{WebJob adı}* . İşlevler. *{İşlev adı}* ", örneğin: "WebJob1.Functions.CopyBlob")
+* Blob (" *{WebJob Name}* ) için çağrılan işlev. Lerdir. *{Function Name}* ", örneğin:" WebJob1. Functions. copyblob ")
 * Kapsayıcı adı
 * Blob türü ("BlockBlob" veya "PageBlob")
 * Blob adı
-* ETag (örneğin, bir blob sürüm tanımlayıcısı: "0x8D1DC6E70A277EF")
+* ETag (bir blob sürüm tanımlayıcısı, örneğin: "0x8D1DC6E70A277EF")
 
-Bir blobu yeniden işlemeyerek zorlamak istiyorsanız, o blobu için blob giriş el ile silebilirsiniz *azure webjobs konakları* kapsayıcı.
+Bir Blobun yeniden işlenmesine zorlamak isterseniz, *Azure-WebJobs-hosts* kapsayıcısından söz konusu Blobun blob alındığını el ile silebilirsiniz.
 
-## <a name="related-topics-covered-by-the-queues-article"></a>Kuyruklar makalenin konusu ilgili konular
-İşleme, blob değil belirli senaryoları WebJobs SDK veya bir kuyruk iletisi tarafından tetiklenen blob işlem hakkında bilgi için bkz [WebJobs SDK ile Azure kuyruk depolama kullanma](https://github.com/Azure/azure-webjobs-sdk/wiki).
+## <a name="related-topics-covered-by-the-queues-article"></a>Kuyruklar makalesinin kapsadığı ilgili konular
+Bir kuyruk iletisi tarafından tetiklenen blob işlemeyi işleme veya blob işlemeye özgü olmayan WebJobs SDK senaryoları için bkz. [WEBJOBS SDK Ile Azure kuyruk depolamayı kullanma](https://github.com/Azure/azure-webjobs-sdk/wiki).
 
-Bu makalede ele alınan ilgili konular şunlardır:
+Bu makalede ele alınan ilgili konular şunları içerir:
 
-* Zaman uyumsuz işlevleri
+* Zaman uyumsuz işlevler
 * Birden çok örnek
-* Normal şekilde kapatılmasını
-* WebJobs SDK öznitelikleri bir işlevin gövdesinde kullanın
-* SDK bağlantı dizeleri kod içinde ayarlayabilirsiniz.
-* Değerleri Oluşturucu parametresi için Web işleri SDK'sı, kod içinde ayarlayabilirsiniz.
-* Yapılandırma **MaxDequeueCount** zehirli blob işleme.
-* Bir işlev el ile tetikleme
-* Günlükler Yazar
+* Düzgün kapanma
+* Bir işlevin gövdesinde WebJobs SDK özniteliklerini kullanma
+* Koddaki SDK bağlantı dizelerini ayarlayın.
+* Koddaki WebJobs SDK Oluşturucu parametreleri için değerleri ayarla
+* Zarar blobu işleme için **Maxdequeuecount** ayarını yapılandırın.
+* Bir işlevi el ile tetikleme
+* Yazma günlükleri
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bu makalede, Azure BLOB'ları ile çalışmak için ortak senaryolar nasıl ele alınacağını gösteren kod örnekleri sağlamıştır. Azure WebJobs ve WebJobs SDK'sı kullanma hakkında daha fazla bilgi için bkz. [Azure WebJobs belgeleri kaynakları](https://go.microsoft.com/fwlink/?linkid=390226).
+Bu makalede, Azure bloblarıyla çalışmaya yönelik yaygın senaryoları nasıl işleyebileceğini gösteren kod örnekleri verilmiştir. Azure WebJobs ve WebJobs SDK 'sını kullanma hakkında daha fazla bilgi için bkz. [Azure WebJobs belge kaynakları](https://go.microsoft.com/fwlink/?linkid=390226).
 

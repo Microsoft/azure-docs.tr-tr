@@ -1,22 +1,22 @@
 ---
-title: PowerShell betikleri Az.Search modülü - Azure Search kullanma
-description: Oluşturun ve PowerShell ile Azure Search Hizmeti yapılandırın. Hizmet ölçeği artırın veya azaltın, yönetici ve sorgu api anahtarlarından ve sorgu sistem bilgilerini yönetin.
+title: Az. Search modülünü kullanan PowerShell betikleri
+titleSuffix: Azure Cognitive Search
+description: PowerShell ile bir Azure Bilişsel Arama hizmeti oluşturun ve yapılandırın. Bir hizmeti yukarı veya aşağı ölçeklendirebilir, yönetici ve sorgu api anahtarlarını yönetebilir ve sistem bilgileri için sorgu yapabilirsiniz.
+manager: nitinme
 author: HeidiSteen
-manager: cgronlun
-services: search
-ms.service: search
+ms.author: heidist
+ms.service: cognitive-search
 ms.devlang: powershell
 ms.topic: conceptual
-ms.date: 03/28/2019
-ms.author: heidist
-ms.openlocfilehash: 8f07468ccff4431e1afdf66aedc72599ddc0c25b
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.date: 11/04/2019
+ms.openlocfilehash: fdb558267d823657f6a735d8b96efde33cdb8383
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60194283"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73466526"
 ---
-# <a name="manage-your-azure-search-service-with-powershell"></a>PowerShell ile Azure Search hizmetinizi yönetme
+# <a name="manage-your-azure-cognitive-search-service-with-powershell"></a>Azure Bilişsel Arama hizmetinizi PowerShell ile yönetme
 > [!div class="op_single_selector"]
 > * [Portal](search-manage.md)
 > * [PowerShell](search-manage-powershell.md)
@@ -24,67 +24,67 @@ ms.locfileid: "60194283"
 > * [.NET SDK](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.search)
 > * [Python](https://pypi.python.org/pypi/azure-mgmt-search/0.1.0)> 
 
-Windows, Linux üzerinde veya PowerShell cmdlet'leri ve betikleri çalıştırılabilir [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview) oluşturmak ve Azure Search yapılandırmak için. **Az.Search** Azure PowerShell modülü genişletir] için tam eşlikli [Azure arama yönetimi REST API'lerini](https://docs.microsoft.com/rest/api/searchmanagement). Azure PowerShell ile ve **Az.Search**, aşağıdaki görevleri gerçekleştirebilirsiniz:
+Azure Bilişsel Arama oluşturmak ve yapılandırmak için Windows, Linux veya [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview) 'de PowerShell cmdlet 'leri ve betikleri çalıştırabilirsiniz. **Az. Search** modülü Azure PowerShell] öğesini [Azure bilişsel arama Management REST API 'lerine](https://docs.microsoft.com/rest/api/searchmanagement)tam eşlik ile genişletir. Azure PowerShell ve **az. Search**ile aşağıdaki görevleri gerçekleştirebilirsiniz:
 
 > [!div class="checklist"]
-> * [Aboneliğinizdeki tüm arama hizmetleri listeleyin](#list-search-services)
-> * [Belirli bir arama hizmeti hakkında bilgi edinin](#get-search-service-information)
-> * [Oluşturma veya hizmet silme](#create-or-delete-a-service)
+> * [Aboneliğinizdeki tüm arama hizmetlerini listeleyin](#list-search-services)
+> * [Belirli bir arama hizmeti hakkında bilgi alın](#get-search-service-information)
+> * [Hizmet oluşturma veya silme](#create-or-delete-a-service)
 > * [Yönetici API anahtarlarını yeniden oluştur](#regenerate-admin-keys)
-> * [Oluşturma veya sorgu api anahtarlarından silme](#create-or-delete-query-keys)
-> * [Bir hizmet ölçeğini artırmayı veya düşüren, çoğaltmalar ve bölümler](#scale-replicas-and-partitions)
+> * [Sorgu API 'si oluşturma veya silme](#create-or-delete-query-keys)
+> * [Çoğaltmaları ve bölümleri artırarak veya azaltarak bir hizmeti ölçeklendirin](#scale-replicas-and-partitions)
 
-PowerShell, ad, bölge veya hizmetinizin katmanını değiştirmek için kullanılamaz. Bir hizmet oluşturulduğunda ayrılmış kaynakları tahsis edilir. Temel alınan donanım (konumu veya düğüm tür) değiştirme, yeni bir hizmet gerektirir. Araçlar veya yoktur API'leri içeriğin bir hizmetten diğerine aktarılması için. Tüm içerik yönetimi aracılığıyladır [REST](https://docs.microsoft.com/rest/api/searchservice/) veya [.NET](https://docs.microsoft.com/dotnet/api/?term=microsoft.azure.search) API'leri ve dizinleri taşımak istiyorsanız, yeniden oluşturun ve bunları yeni bir hizmet üzerinde yeniden yüklemek gerçekleştirmeniz gerekir. 
+PowerShell, hizmetinizin adını, bölgesini veya katmanını değiştirmek için kullanılamaz. Adanmış kaynaklar bir hizmet oluşturulduğunda ayrılır. Temel alınan donanımın (konum veya düğüm türü) değiştirilmesi için yeni bir hizmet gerekir. Bir hizmetten diğerine içerik aktarmaya yönelik araç veya API yok. Tüm içerik yönetimi [rest](https://docs.microsoft.com/rest/api/searchservice/) veya [.net](https://docs.microsoft.com/dotnet/api/?term=microsoft.azure.search) API 'dedir ve dizinleri taşımak istiyorsanız, yeni bir hizmette yeniden oluşturmanız ve yeniden yüklemeniz gerekir. 
 
-İçerik Yönetimi için ayrılmış bir PowerShell komut yok olsa da, REST veya .NET oluşturmak ve dizinleri yüklemek için çağıran PowerShell Betiği yazabilirsiniz. **Az.Search** modülü kendisi tarafından bu işlemleri sağlamaz.
+İçerik yönetimi için adanmış PowerShell komutu bulunmadığından, dizin oluşturmak ve yüklemek için REST veya .NET çağıran PowerShell betiği yazabilirsiniz. **Az. Search** modülünün kendisi bu işlemleri sağlamaz.
 
-PowerShell veya herhangi başka bir API'yi (yalnızca portalı) ile desteklenmeyen diğer görevler aşağıdakileri içerir:
-+ [Bilişsel hizmetler kaynağı ekleme](cognitive-search-attach-cognitive-services.md) için [AI zenginleştirilmiş dizinleme](cognitive-search-concept-intro.md). Bir bilişsel hizmet bir beceri kümesi, olmayan bir abonelik veya hizmet eklenir.
-+ [Eklenti izleme çözümleri](search-monitor-usage.md#add-on-monitoring-solutions) veya [trafik analizi arama](search-traffic-analytics.md) Azure Search izlemesi için kullanılır.
+PowerShell veya başka bir API aracılığıyla desteklenmeyen diğer görevler (yalnızca portal) şunları içerir:
++ [AI zenginleştirilmiş dizin oluşturma](cognitive-search-concept-intro.md)için bilişsel [Hizmetler kaynağı ekleyin](cognitive-search-attach-cognitive-services.md) . Bilişsel hizmet bir abonelik veya hizmete değil, bir beceri bağlı.
++ Azure Bilişsel Arama izlemeye yönelik [eklenti izleme çözümleri](search-monitor-usage.md#add-on-monitoring-solutions) .
 
 <a name="check-versions-and-load"></a>
 
-## <a name="check-versions-and-load-modules"></a>Sürümleri denetleyin ve modülleri yükleme
+## <a name="check-versions-and-load-modules"></a>Sürümleri denetleme ve modülleri yükleme
 
-Bu makaledeki örneklerde, etkileşimli ve yükseltilmiş izinleri gerektirir. Azure PowerShell ( **Az** Modülü) yüklü olmalıdır. Daha fazla bilgi için [Azure PowerShell yükleme](/powershell/azure/overview).
+Bu makaledeki örnekler etkileşimlidir ve yükseltilmiş izinler gerektirir. Azure PowerShell ( **az** Module) yüklü olmalıdır. Daha fazla bilgi için bkz. [ınstall Azure PowerShell](/powershell/azure/overview).
 
-### <a name="powershell-version-check-51-or-later"></a>PowerShell sürüm denetimi (5.1 veya üzeri)
+### <a name="powershell-version-check-51-or-later"></a>PowerShell sürüm denetimi (5,1 veya üzeri)
 
-Yerel PowerShell 5.1 veya üstünde, tüm desteklenen işletim sistemlerinde olmalıdır.
+Yerel PowerShell, desteklenen herhangi bir işletim sisteminde 5,1 veya üzeri olmalıdır.
 
 ```azurepowershell-interactive
 $PSVersionTable.PSVersion
 ```
 
-### <a name="load-azure-powershell"></a>Azure PowerShell'i yükleme
+### <a name="load-azure-powershell"></a>Azure PowerShell yükle
 
-Emin değilseniz olup **Az** yüklü, doğrulama adımı olarak aşağıdaki komutu çalıştırın. 
+**Az** yüklü olup olmadığından emin değilseniz, doğrulama adımı olarak aşağıdaki komutu çalıştırın. 
 
 ```azurepowershell-interactive
 Get-InstalledModule -Name Az
 ```
 
-Bazı sistemler otomatik yükle modülleri değil yapın. Bir hata iletisi alırsanız önceki komutta, modül yüklemeyi deneyin ve bu başarısız olursa bir adımı atladıysanız, görmek için yükleme yönergeleri için geri dönün.
+Bazı sistemler modülleri otomatik olarak yüklemez. Önceki komutta bir hata alırsanız, modülü yüklemeyi deneyin ve başarısız olursa, bir adım kaçırdığınızı görmek için yükleme yönergelerine geri dönün.
 
 ```azurepowershell-interactive
 Import-Module -Name Az
 ```
 
-### <a name="connect-to-azure-with-a-browser-sign-in-token"></a>Oturum açma tarayıcı belirteciyle Azure'a bağlanma
+### <a name="connect-to-azure-with-a-browser-sign-in-token"></a>Tarayıcı oturum açma belirteciyle Azure 'a bağlanma
 
-Bir abonelikte PowerShell bağlanmak için portalı oturum açma kimlik bilgilerinizi kullanabilirsiniz. Alternatif olarak [etkileşimli olmayan hizmet sorumlusuyla kimlik doğrulaması](../active-directory/develop/howto-authenticate-service-principal-powershell.md).
+PowerShell 'deki bir aboneliğe bağlanmak için Portal oturum açma kimlik bilgilerinizi kullanabilirsiniz. Alternatif olarak, [hizmet sorumlusu ile etkileşimli olmayan kimlik doğrulaması](../active-directory/develop/howto-authenticate-service-principal-powershell.md)yapabilirsiniz.
 
 ```azurepowershell-interactive
 Connect-AzAccount
 ```
 
-Birden çok Azure aboneliği tutarsanız, Azure aboneliğinizi ayarlama. Geçerli aboneliklerinizin bir listesini görmek için şu komutu çalıştırın.
+Birden çok Azure aboneliği tutarsanız, Azure aboneliğinizi ayarlayın. Geçerli aboneliklerinizin listesini görmek için bu komutu çalıştırın.
 
 ```azurepowershell-interactive
 Get-AzSubscription | sort SubscriptionName | Select SubscriptionName
 ```
 
-Aboneliği belirtmek için aşağıdaki komutu çalıştırın. Aşağıdaki örnekte, abonelik addır `ContosoSubscription`.
+Aboneliği belirtmek için aşağıdaki komutu çalıştırın. Aşağıdaki örnekte, abonelik adı `ContosoSubscription`.
 
 ```azurepowershell-interactive
 Select-AzSubscription -SubscriptionName ContosoSubscription
@@ -92,23 +92,23 @@ Select-AzSubscription -SubscriptionName ContosoSubscription
 
 <a name="list-search-services"></a>
 
-## <a name="list-all-azure-search-services-in-your-subscription"></a>Aboneliğinizdeki tüm Azure Search hizmetlerini listelemek
+## <a name="list-all-azure-cognitive-search-services-in-your-subscription"></a>Aboneliğinizdeki tüm Azure Bilişsel Arama hizmetlerini listeleyin
 
-Aşağıdaki komutları arasındadır [ **Az.Resources**](https://docs.microsoft.com/powershell/module/az.resources/?view=azps-1.4.0#resources), mevcut kaynaklar ve zaten, aboneliğinizde sağlanan hizmetler hakkında bilgi döndüren. Kaç arama hizmetleri önceden oluşturulan bilmiyorsanız, bu komutları bir seyahat portala kaydetme, bu bilgileri döndürür.
+Aşağıdaki komutlar [**az. resources**](https://docs.microsoft.com/powershell/module/az.resources/?view=azps-1.4.0#resources), aboneliğinizde zaten sağlanmış olan mevcut kaynaklar ve hizmetler hakkında bilgi döndürüyor. Kaç tane arama hizmeti oluşturulduğunu bilmiyorsanız, bu komutlar bu bilgileri döndürür ve portala seyahat ister.
 
-İlk komut, tüm arama hizmetlerinin döndürür.
+İlk komut tüm arama hizmetlerini döndürür.
 
 ```azurepowershell-interactive
 Get-AzResource -ResourceType Microsoft.Search/searchServices | ft
 ```
 
-Hizmetler listesinden belirli bir kaynak hakkında bilgi döndürür.
+Hizmetler listesinden belirli bir kaynakla ilgili bilgileri döndürür.
 
 ```azurepowershell-interactive
 Get-AzResource -ResourceName <service-name>
 ```
 
-Sonuç aşağıdaki çıktıya benzer olmalıdır.
+Sonuçlar aşağıdaki çıktıya benzer görünmelidir.
 
 ```
 Name              : my-demo-searchapp
@@ -118,23 +118,23 @@ Location          : westus
 ResourceId        : /subscriptions/<alpha-numeric-subscription-ID>/resourceGroups/demo-westus/providers/Microsoft.Search/searchServices/my-demo-searchapp
 ```
 
-## <a name="import-azsearch"></a>İçeri aktarma Az.Search
+## <a name="import-azsearch"></a>Al az. Search
 
-Gelen komutları [ **Az.Search** ](https://docs.microsoft.com/powershell/module/az.search/?view=azps-1.4.0#search) modülü kadar kullanılamaz.
+[**Az. Search**](https://docs.microsoft.com/powershell/module/az.search/?view=azps-1.4.0#search) komutları, modülü yüklenene kadar kullanılamaz.
 
 ```azurepowershell-interactive
 Install-Module -Name Az.Search
 ```
 
-### <a name="list-all-azsearch-commands"></a>Tüm Az.Search komutları listesi
+### <a name="list-all-azsearch-commands"></a>Tüm az. Search komutlarını listeleyin
 
-Bir doğrulama adımı modülünde sağlanan komutların bir listesini döndürür.
+Doğrulama adımı olarak, modülde sunulan komutların bir listesini döndürün.
 
 ```azurepowershell-interactive
 Get-Command -Module Az.Search
 ```
 
-Sonuç aşağıdaki çıktıya benzer olmalıdır.
+Sonuçlar aşağıdaki çıktıya benzer görünmelidir.
 
 ```
 CommandType     Name                                Version    Source
@@ -150,15 +150,15 @@ Cmdlet          Remove-AzSearchService              0.7.1      Az.Search
 Cmdlet          Set-AzSearchService                 0.7.1      Az.Search
 ```
 
-## <a name="get-search-service-information"></a>Arama hizmeti bilgilerini alma
+## <a name="get-search-service-information"></a>Arama hizmeti bilgilerini al
 
-Sonra **Az.Search** aktarılır ve çalıştırma, arama hizmetinizin içeren kaynak grubunu biliyorsanız [Get-AzSearchService](https://docs.microsoft.com/powershell/module/az.search/get-azsearchservice?view=azps-1.4.0) ad, bölge, katman ve çoğaltma gibi hizmet tanımı döndürülecek ve bölüm sayısı.
+**Az. Search** içeri aktarıldıktan sonra ve arama hizmetinizi içeren kaynak grubunu öğrendikten sonra, ad, bölge, katman, çoğaltma ve bölüm sayıları dahil olmak üzere hizmet tanımını döndürmek için [Get-azsearchservice](https://docs.microsoft.com/powershell/module/az.search/get-azsearchservice?view=azps-1.4.0) komutunu çalıştırın.
 
 ```azurepowershell-interactive
 Get-AzSearchService -ResourceGroupName <resource-group-name>
 ```
 
-Sonuç aşağıdaki çıktıya benzer olmalıdır.
+Sonuçlar aşağıdaki çıktıya benzer görünmelidir.
 
 ```
 Name              : my-demo-searchapp
@@ -172,14 +172,14 @@ HostingMode       : Default
 ResourceId        : /subscriptions/<alphanumeric-subscription-ID>/resourceGroups/demo-westus/providers/Microsoft.Search/searchServices/my-demo-searchapp
 ```
 
-## <a name="create-or-delete-a-service"></a>Oluşturma veya hizmet silme
+## <a name="create-or-delete-a-service"></a>Hizmet oluşturma veya silme
 
-[**Yeni AzSearchService** ](https://docs.microsoft.com/powershell/module/az.search/new-azsearchadminkey?view=azps-1.4.0) için kullanılan [yeni arama hizmeti oluşturma](search-create-service-portal.md).
+New [ **-AzSearchService**](https://docs.microsoft.com/powershell/module/az.search/new-azsearchadminkey?view=azps-1.4.0) , [Yeni bir arama hizmeti oluşturmak](search-create-service-portal.md)için kullanılır.
 
 ```azurepowershell-interactive
 New-AzSearchService -ResourceGroupName "demo-westus" -Name "my-demo-searchapp" -Sku "Standard" -Location "West US" -PartitionCount 3 -ReplicaCount 3
 ``` 
-Sonuç aşağıdaki çıktıya benzer olmalıdır.
+Sonuçlar aşağıdaki çıktıya benzer görünmelidir.
 
 ```
 ResourceGroupName : demo-westus
@@ -193,21 +193,21 @@ HostingMode       : Default
 Tags
 ```     
 
-## <a name="regenerate-admin-keys"></a>Yönetici anahtarları yeniden oluştur
+## <a name="regenerate-admin-keys"></a>Yönetici anahtarlarını yeniden oluştur
 
-[**Yeni AzSearchAdminKey** ](https://docs.microsoft.com/powershell/module/az.search/new-azsearchadminkey?view=azps-1.4.0) yönetici geri almak için kullanılan [API anahtarları](search-security-api-keys.md). Her hizmet kimliği doğrulanmış erişim için iki yönetici anahtarı oluşturulur. Her istek anahtarları gereklidir. Her iki yönetici anahtarı bir arama hizmeti tam yazma erişimi herhangi bir bilgi almak veya oluşturma ve herhangi bir nesne silme olanağı vermek işlevsel olarak eşdeğerdir. Diğer değiştirme sırasında kullanabilirsiniz, böylece iki anahtar yok. 
+[**New-AzSearchAdminKey**](https://docs.microsoft.com/powershell/module/az.search/new-azsearchadminkey?view=azps-1.4.0) , yönetici [API anahtarlarını](search-security-api-keys.md)almak için kullanılır. Kimliği doğrulanmış erişim için her bir hizmetle iki yönetici anahtarı oluşturulur. Her istekte anahtarlar gereklidir. Her iki yönetici anahtarı da işlevsel olarak eşdeğerdir, bir arama hizmetine tüm bilgileri alma veya herhangi bir nesne oluşturma ve silme imkanına tam yazma erişimi veriliyor. Diğerini değiştirirken bir tane kullanabilmeniz için iki anahtar mevcuttur. 
 
-Yalnızca teker teker olarak belirtilen yeniden oluşturabilirsiniz `primary` veya `secondary` anahtarı. Kesintisiz hizmet için birincil anahtarı alınması sırasında ikincil bir anahtar kullanmak için tüm istemci kodu güncelleştirmeniz unutmayın. İşlemleri uçuş sırasında anahtarları değiştirmekten kaçının.
+`primary` veya `secondary` anahtarı olarak belirtilen her seferinde yalnızca bir tane oluşturabilirsiniz. Kesintisiz hizmet için, birincil anahtar üzerinde çalışırken tüm istemci kodlarını ikincil anahtar kullanacak şekilde güncelleştirmeyi unutmayın. İşlemler uçuşdayken anahtarları değiştirmekten kaçının.
 
-İstemci kodu güncelleştirmeden anahtarlarını yeniden oluşturma durumunda, bekleyebileceğiniz gibi eski anahtarı kullanan istekler başarısız olur. Tüm yeni anahtarlarını yeniden kalıcı olarak size, hizmet dışı kilitlemez ve hizmet portal üzerinden erişmeye devam edebilirsiniz. Birincil ve ikincil anahtarları yeniden oluşturduktan sonra istemci kodu yeni anahtarları kullanacak şekilde güncelleştirebilirsiniz ve işlemleri uygun şekilde devam eder.
+Beklenirken, istemci kodunu güncelleştirmeden anahtarları yeniden oluşturursanız, eski anahtarı kullanan istekler başarısız olur. Tüm yeni anahtarların yeniden oluşturulması, hizmetinizi kalıcı olarak kilitlemez ve Portal üzerinden hizmete erişmeye devam edebilirsiniz. Birincil ve ikincil anahtarları yeniden oluşturduktan sonra, yeni anahtarları kullanmak için istemci kodunu güncelleştirebilirsiniz ve işlemler buna uygun şekilde sürdürülür.
 
-API anahtarları için değerleri, hizmet tarafından oluşturulur. Azure Search'ı kullanmak için özel anahtar sağlayamıyor. Benzer şekilde, yönetici API anahtarlarından için kullanıcı tanımlı adı yoktur. Anahtar başvuruları sabit dizeler ya da `primary` veya `secondary`. 
+API anahtarlarının değerleri hizmet tarafından oluşturulur. Azure Bilişsel Arama kullanılmak üzere özel bir anahtar sağlayamezsiniz. Benzer şekilde, yönetici API anahtarları için Kullanıcı tanımlı ad yoktur. Anahtara yapılan başvurular, `primary` veya `secondary`sabit dizelerdir. 
 
 ```azurepowershell-interactive
 New-AzSearchAdminKey -ResourceGroupName <resource-group-name> -ServiceName <search-service-name> -KeyKind Primary
 ```
 
-Sonuç aşağıdaki çıktıya benzer olmalıdır. Bir kerede yalnızca değiştirme olsa bile her iki anahtarı döndürülür.
+Sonuçlar aşağıdaki çıktıya benzer görünmelidir. Her iki anahtar de tek seferde yalnızca birini değiştirdiğiniz halde döndürülür.
 
 ```
 Primary                    Secondary
@@ -215,31 +215,31 @@ Primary                    Secondary
 <alphanumeric-guid>        <alphanumeric-guid>  
 ```
 
-## <a name="create-or-delete-query-keys"></a>Oluşturma veya sorgu anahtarları silme
+## <a name="create-or-delete-query-keys"></a>Sorgu anahtarları oluşturma veya silme
 
-[**Yeni AzSearchQueryKey** ](https://docs.microsoft.com/powershell/module/az.search/new-azsearchquerykey?view=azps-1.4.0) sorgu oluşturmak için kullanılan [API anahtarları](search-security-api-keys.md) istemci uygulamalarından salt okunur erişim için Azure Search dizini. Sorgu anahtarları, arama sonuçlarını almak amacıyla belirli bir dizin için kimlik doğrulaması için kullanılır. Sorgu anahtarları, hizmette bir dizini, veri kaynağı ve dizin oluşturucu gibi diğer öğeleri salt okunur erişimi veremez.
+[**New-AzSearchQueryKey**](https://docs.microsoft.com/powershell/module/az.search/new-azsearchquerykey?view=azps-1.4.0) , istemci uygulamalarından bir Azure bilişsel arama dizinine salt okuma erişimi Için sorgu [API anahtarları](search-security-api-keys.md) oluşturmak üzere kullanılır. Sorgu anahtarları, arama sonuçlarının alınması amacıyla belirli bir dizin için kimlik doğrulaması yapmak üzere kullanılır. Sorgu anahtarları, hizmette, dizin, veri kaynağı veya Dizin Oluşturucu gibi diğer öğelere salt okuma erişimi vermez.
 
-Azure Search'ı kullanmak için bir anahtar sağlayamıyor. API anahtarları, hizmet tarafından oluşturulur.
+Azure Bilişsel Arama kullanılmak üzere bir anahtar sağlayamezsiniz. API anahtarları hizmet tarafından oluşturulur.
 
 ```azurepowershell-interactive
 New-AzSearchQueryKey -ResourceGroupName <resource-group-name> -ServiceName <search-service-name> -Name <query-key-name> 
 ```
 
-## <a name="scale-replicas-and-partitions"></a>Ölçek çoğaltmalar ve bölümler
+## <a name="scale-replicas-and-partitions"></a>Çoğaltmaları ve bölümleri ölçeklendirme
 
-[**Set-AzSearchService** ](https://docs.microsoft.com/powershell/module/az.search/set-azsearchservice?view=azps-1.4.0) için kullanılan [çoğaltmalar ve bölümler azaltmak veya artırmak](search-capacity-planning.md) hizmetinizin içinde Faturalanabilen kaynaklar yeniden ayarlama gereksinimini. Çoğaltmalar veya bölümler artırma hem de faturanız için ekler sabit ve değişken ücretler. Ek işlem gücü için geçici bir gereksinimi varsa, çoğaltmalar ve bölümler iş yükünü işlemek için artırabilirsiniz. İzleme alan genel bakış portal sayfasında, sorgu gecikme süresi, sorgu başına saniye ve azaltma, geçerli kapasite yeterli olup olmadığını gösteren kutucukları sahiptir.
+[**Set-AzSearchService**](https://docs.microsoft.com/powershell/module/az.search/set-azsearchservice?view=azps-1.4.0) , hizmet içinde yalnızca faturalanabilir kaynakları ayarlamak için [çoğaltmaları ve bölümleri artırmak veya azaltmak](search-capacity-planning.md) için kullanılır. Çoğaltmaları veya bölümleri, hem sabit hem de değişken ücretlerine sahip olan faturanızda artırır. Ek işlem gücü için geçici bir ihtiyacınız varsa, iş yükünü işlemek için çoğaltmaları ve bölümleri artırabilirsiniz. Genel Bakış portalı sayfasındaki izleme alanında sorgu gecikmesi üzerinde Kutucuklar, saniye başına sorgu ve kısıtlama, geçerli kapasitenin yeterli olup olmadığını gösterir.
 
-Uygulamanın kaynak ekleyip biraz sürebilir. Devam etmek var olan iş yükleri izin vermek için arka planda ayarlamalar kapasite oluşur. Ek kapasite, ek yapılandırma gerektirmeden hazır olduğunda hemen sonra gelen istekler için kullanılır. 
+Kaynak kaynağı ekleme veya kaldırma biraz zaman alabilir. Kapasite ayarlamaları arka planda gerçekleşir ve mevcut iş yüklerinin devam etmesine izin verir. Daha fazla yapılandırma gerekmeden, gelen istekler için ek kapasite kullanılır. 
 
-Kapasite kaldırma karışıklığa neden olabilir. Kapasite azaltma önce tüm dizin ve dizin oluşturucu işlerini durdurma bırakılan istekleri önlemek için önerilir. Bu uygun değilse, kademeli olarak kapasite azalır düşünebilirsiniz bir çoğaltma ve bölüm, yeni hedef düzeyleri ulaşıncaya kadar bir zaman.
+Kapasitenin kaldırılması kesintiye uğratan olabilir. Atlanan isteklerin olmaması için kapasiteyi azaltmadan önce tüm dizin oluşturma ve Dizin Oluşturucu işlerinin durdurulması önerilir. Bu uygun değilse, yeni hedef düzeyleriniz ulaşılana kadar kapasiteyi artımlı olarak, bir çoğaltma ve bölüm olarak azaltmayı düşünebilirsiniz.
 
-Komutu gönderildikten sonra bunu sonlandıramaz bir yolu yoktur midway aracılığıyla. Komut sayıları düzeltilmesi önce işlemi tamamlanana kadar beklemeniz gerekir.
+Komutu gönderdikten sonra, bu işlemi geçişli olarak sonlandırmak için bir yol yoktur. Sayıları yeniden ayarlamadan önce komutun bitmesini beklemeniz gerekir.
 
 ```azurepowershell-interactive
 Set-AzSearchService -ResourceGroupName <resource-group-name> -Name <search-service-name> -PartitionCount 6 -ReplicaCount 6
 ```
 
-Sonuç aşağıdaki çıktıya benzer olmalıdır.
+Sonuçlar aşağıdaki çıktıya benzer görünmelidir.
 
 ```
 ResourceGroupName : demo-westus
@@ -255,9 +255,9 @@ Id                : /subscriptions/65a1016d-0f67-45d2-b838-b8f373d6d52e/resource
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Derleme bir [dizin](search-what-is-an-index.md), [dizin sorgulama](search-query-overview.md) portalı, REST API'leri veya .NET SDK kullanarak.
+Bir [Dizin](search-what-is-an-index.md)oluşturun, PORTALı, REST API 'leri veya .NET SDK 'sını kullanarak [bir dizini sorgulayın](search-query-overview.md) .
 
-* [Azure portalında bir Azure Search dizini oluşturma](search-create-index-portal.md)
-* [Diğer hizmetlerden veri yüklemek için bir dizin oluşturucu ' ayarlayın](search-indexer-overview.md)
-* [Arama Gezgini'ni kullanarak Azure portalında bir Azure Search dizinini sorgulama](search-explorer.md)
-* [.NET’te Azure Search kullanma](search-howto-dotnet-sdk.md)
+* [Azure portal Azure Bilişsel Arama dizini oluşturma](search-create-index-portal.md)
+* [Diğer hizmetlerden veri yüklemek için Dizin Oluşturucu ayarlama](search-indexer-overview.md)
+* [Azure portal arama Gezgini 'ni kullanarak bir Azure Bilişsel Arama dizinini sorgulama](search-explorer.md)
+* [.NET Bilişsel Arama Azure 'da kullanma](search-howto-dotnet-sdk.md)

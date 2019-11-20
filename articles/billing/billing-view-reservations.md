@@ -1,6 +1,6 @@
 ---
-title: Azure kaynakları için ayırmaları görüntüleme | Microsoft Docs
-description: Azure portalında Azure rezervasyonların öğrenin.
+title: Azure kaynakları için rezervasyonları görüntüleme | Microsoft Docs
+description: Azure portalında Azure rezervasyonlarının nasıl görüntüleneceğini öğrenin.
 documentationcenter: ''
 author: yashesvi
 manager: yashar
@@ -10,81 +10,81 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 04/13/2019
+ms.date: 10/01/2019
 ms.author: banders
-ms.openlocfilehash: 21bf96866c14615009a17279ff2fdd04bf4116ad
-ms.sourcegitcommit: ac1cfe497341429cf62eb934e87f3b5f3c79948e
-ms.translationtype: MT
+ms.openlocfilehash: 3e379581440019a794388d3e01c4f230c9617a58
+ms.sourcegitcommit: a19f4b35a0123256e76f2789cd5083921ac73daf
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67490259"
+ms.lasthandoff: 10/02/2019
+ms.locfileid: "71718594"
 ---
-# <a name="view-azure-reservations-in-the-azure-portal"></a>Azure portalında Azure rezervasyonların
+# <a name="view-azure-reservations-in-the-azure-portal"></a>Azure portalında Azure rezervasyonlarını görüntüleme
 
-Abonelik türü ve izinlerine bağlı olarak çeşitli şekillerde Azure için ayırmaları görüntülemek için vardır.
+Abonelik türünüze ve izinlerinize bağlı olarak, Azure için rezervasyonları görüntülemenin birkaç yolu vardır.
 
-## <a name="view-purchased-reservations"></a>Satın alınan ayırmaları görüntüleme
+## <a name="view-purchased-reservations"></a>Satın alınan rezervasyonları görüntüleme
 
-Varsayılan olarak, bir ayırma satın aldığınızda ve Hesap Yöneticisi ayırma görüntüleyebilirsiniz. Rezervasyon siparişi ve ayırma sahip rolü ve Hesap Yöneticisi otomatik olarak Al Görüntülemek diğer kişilere izin vermek için bunları olarak eklemelisiniz bir **sahibi** veya **okuyucu** rezervasyon siparişi veya ayırma.
+Varsayılan olarak, bir rezervasyon satın aldığınızda siz ve hesap yöneticisi rezervasyonu görüntüleyebilirsiniz. Siz ve hesap yöneticisi, rezervasyon siparişinde ve rezervasyonda otomatik olarak Sahip rolünü alır. Diğer kişilerin rezervasyonu görüntülemesine izin vermek için bu kişileri, Rezervasyon siparişinde veya rezervasyonda **Sahip** veya **Okuyucu** olarak eklemeniz gerekir.
 
-Daha fazla bilgi için [rezervasyon yönetebilirsiniz ekleme veya değiştirme kullanıcılar](billing-manage-reserved-vm-instance.md#add-or-change-users-who-can-manage-a-reservation).
+Daha fazla bilgi için bkz. [Rezervasyonu yönetebilecek kullanıcıları ekleme veya değiştirme](billing-manage-reserved-vm-instance.md#add-or-change-users-who-can-manage-a-reservation).
 
-Bir sahibi veya okuyucu olarak görüntülemek için
-
-1. [Azure Portal](https://portal.azure.com) oturum açın.
-2. Arama **ayırmaları**.
-    ![Azure portalı arama gösteren ekran görüntüsü](./media/billing-view-reservation/portal-reservation-search.png)  
-3. Liste sahibi veya okuyucu rolüne sahip olduğunuz tüm ayırmaları gösterir. Her ayırma son bilinen kullanım yüzdesini gösterir.  
-    ![Rezervasyonlar listesini gösteren örnek](./media/billing-view-reservation/view-reservations.png)
-4. Rezervasyon seçin ve son beş gün boyunca kullanım eğilimi bakın.  
-    ![Örnek gösteren ayırma kullanım eğilimi](./media/billing-view-reservation/reservation-utilization.png)
-5. Ayrıca Al [ayırma kullanımı](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage) ayrılmış örnek kullanım API'si kullanarak ile [Microsoft Azure tüketim öngörüleri Power BI içerik paketi](/power-bi/service-connect-to-azure-consumption-insights).
-
-Rezervasyon kapsamı değiştirmeniz gerekiyorsa, bölünmüş bir ayırma veya bir ayırma yönetebilen değişiklik bkz [Azure ayırmalarını yönetme](billing-manage-reserved-vm-instance.md).
-
-## <a name="view-reservation-transactions-for-enterprise-enrollments"></a>Kurumsal kayıtları için ayırma işlemleri görüntüle
-
- Bir iş ortağı LED'i Kurumsal kayıt varsa, giderek rezervasyonların **raporları** EA portalında. Diğer Kurumsal kayıtları için ayırmaları EA portal ve Azure portalında görüntüleyebilirsiniz. Ayırma işlemleri görüntülemek için EA yönetici olmanız gerekir.
-
-Azure portalında ayırma işlemleri görüntülemek için
+Bir rezervasyonu Sahip veya Okuyucu olarak görüntülemek için,
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
-1. Arama **maliyet Yönetimi + faturalandırma**.
+2. **Rezervasyonlar** araması yapın.
+    ![Azure portalı aramasını gösteren ekran görüntüsü](./media/billing-view-reservation/portal-reservation-search.png)  
+3. Listede, Sahip veya Okuyucu rolüne sahip olduğunuz tüm rezervasyonlar gösterilir. Her rezervasyon, bilinen son kullanım yüzdesini gösterir.  
+    ![Rezervasyon listesini gösteren örnek](./media/billing-view-reservation/view-reservations.png)
+4. Bir rezervasyon seçin ve son beş güne ait kullanım eğilimini görüntüleyin.  
+    ![Rezervasyon kullanım eğilimini gösteren örnek](./media/billing-view-reservation/reservation-utilization.png)
+5. Ayrılmış Örnek kullanımı API’sini kullanarak ve [Microsoft Azure Consumption Insights Power BI içerik paketi](/power-bi/service-connect-to-azure-consumption-insights) ile de [rezervasyon kullanımını](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-usage) alabilirsiniz.
 
-    ![Azure portalı arama gösteren ekran görüntüsü](./media/billing-view-reservation/portal-cm-billing-search.png)
+Bir rezervasyonun kapsamını değiştirmeniz, rezervasyonu bölmeniz veya bir rezervasyonu kimin yönetebileceğini değiştirmeniz gerekirse bkz. [Azure Rezervasyonlarını Yönetme](billing-manage-reserved-vm-instance.md).
 
-1. Seçin **ayırma işlemleri**.
-1. Sonuçları filtrelemek için seçin **Timespan**, **türü**, veya **açıklama**.
+## <a name="view-reservation-transactions-for-enterprise-enrollments"></a>Kurumsal kayıtlar için rezervasyon işlemlerini görüntüleme
+
+ İş ortağı tarafından yönetilen bir Kurumsal kaydınız varsa, Kurumsal Anlaşma portalında **Raporlar**’a giderek rezervasyonları görüntüleyin. Diğer Kurumsal kayıtlar için Kurumsal Anlaşma portalında ve Azure portalında rezervasyonları görüntüleyebilirsiniz. Rezervasyon işlemlerini görüntülemek için bir Kurumsal Anlaşma yöneticisi olmanız gerekir.
+
+Azure portalında rezervasyon işlemlerini görüntülemek için,
+
+1. [Azure Portal](https://portal.azure.com) oturum açın.
+1. **Maliyet Yönetimi + Faturalama** araması yapın.
+
+    ![Azure portalı aramasını gösteren ekran görüntüsü](./media/billing-view-reservation/portal-cm-billing-search.png)
+
+1. **Rezervasyon işlemleri**’ni seçin.
+1. Sonuçları filtrelemek için **Zaman aralığı**, **Tür** veya **Açıklama** seçeneğini belirleyin.
 1. **Uygula**’yı seçin.
 
-    ![Ayırma işlemleri sonuçlarını gösteren ekran görüntüsü](./media/billing-view-reservation/portal-billing-reservation-transaction-results.png)
+    ![Rezervasyon işlemlerinin sonuçlarını gösteren ekran görüntüsü](./media/billing-view-reservation/portal-billing-reservation-transaction-results.png)
 
-Bir API kullanarak veri almak için bkz: [Kurumsal müşteriler için ayrılmış örnek alma işlem ücretleri](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-charges).
+Bir API kullanarak verileri almak için bkz. [Kurumsal müşteriler için Ayrılmış Örnek işlem ücretlerini alma](/rest/api/billing/enterprise/billing-enterprise-api-reserved-instance-charges).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure ayırmaları hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
+Azure rezervasyonları hakkında daha fazla bilgi edinmek için aşağıdaki makalelere bakın:
 
-- [Azure için ayırmaları nelerdir?](billing-save-compute-costs-reservations.md)
-- [Azure için ayırmaları yönetme](billing-manage-reserved-vm-instance.md)
+- [Azure rezervasyonları nedir?](billing-save-compute-costs-reservations.md)
+- [Azure rezervasyonlarını yönetme](billing-manage-reserved-vm-instance.md)
 
-Bir hizmet planı satın alın:
+Hizmet planı satın alma:
 
-- [Cosmos DB ayrılmış kapasite için ön ödeme](../cosmos-db/cosmos-db-reserved-capacity.md)
+- [Cosmos DB ayrılmış kapasitesi için ö ödeme yapma](../cosmos-db/cosmos-db-reserved-capacity.md)
 - [Azure SQL Veritabanı ayrılmış kapasitesi ile SQL Veritabanı işlem kaynakları için ön ödeme yapma](../sql-database/sql-database-reserved-capacity.md)
 - [Azure Ayrılmış VM Örnekleri ile Sanal Makinelere ön ödeme yapma](../virtual-machines/windows/prepay-reserved-vm-instances.md)
 
-Yazılım planı satın alın:
+Yazılım planı satın alma:
 
-- [Red Hat yazılımı planlarından Azure ayırmalar için ön ödeme](../virtual-machines/linux/prepay-rhel-software-charges.md)
+- [Azure Ayırmaları ile Red Hat yazılım planları için ön ödeme yapma](../virtual-machines/linux/prepay-rhel-software-charges.md)
 - [Azure Ayırmaları ile SUSE yazılım planları için ön ödeme yapma](../virtual-machines/linux/prepay-suse-software-charges.md)
 
-Kullanımını anlayın:
+Kullanımı anlama:
 
-- [Kullandıkça Öde aboneliğinizi için ayırma kullanımını anlama](billing-understand-reserved-instance-usage.md)
-- [Kurumsal kayıt için ayırma kullanımını anlama](billing-understand-reserved-instance-usage-ea.md)
-- [CSP abonelikleri için ayırma kullanımını anlama](https://docs.microsoft.com/partner-center/azure-reservations)
+- [Kullandıkça Öde aboneliğiniz için rezervasyon kullanımını anlama](billing-understand-reserved-instance-usage.md)
+- [Kurumsal kaydınız için rezervasyon kullanımını anlama](billing-understand-reserved-instance-usage-ea.md)
+- [CSP abonelikleri için rezervasyon kullanımını anlama](https://docs.microsoft.com/partner-center/azure-reservations)
 
-## <a name="need-help-contact-us"></a>Yardım mı gerekiyor? Bizimle iletişim kurun
+## <a name="need-help-contact-us"></a>Yardıma mı ihtiyacınız var? Bizimle iletişim kurun
 
-Sorularınız varsa veya yardıma ihtiyacınız [bir destek isteği oluşturma](https://go.microsoft.com/fwlink/?linkid=2083458).
+Sorularınız varsa ya da yardıma gereksinim duyuyorsanız [destek isteği oluşturun](https://go.microsoft.com/fwlink/?linkid=2083458).

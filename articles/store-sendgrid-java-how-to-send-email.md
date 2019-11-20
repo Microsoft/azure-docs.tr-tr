@@ -1,6 +1,6 @@
 ---
-title: SendGrid e-posta hizmeti (Java) kullanmaya nasıl | Microsoft Docs
-description: Bilgi e-posta SendGrid e-posta hizmeti ile Azure üzerinde nasıl gönderin. Java dilinde yazılan kod örneklerini.
+title: SendGrid e-posta hizmetini kullanma (Java) | Microsoft Docs
+description: Azure 'da SendGrid e-posta hizmeti ile e-posta gönderme hakkında bilgi edinin. Java 'da yazılan kod örnekleri.
 services: ''
 documentationcenter: java
 author: thinkingserious
@@ -13,25 +13,26 @@ ms.tgt_pltfrm: na
 ms.devlang: Java
 ms.topic: article
 ms.date: 10/30/2014
-ms.author: elmer.thomas@sendgrid.com; erika.berkland@sendgrid.com; vibhork
-ms.openlocfilehash: 0cb75c1acb731432ed524560698e3355699b2500
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: erikre
+ms.reviewer: elmer.thomas@sendgrid.com; erika.berkland@sendgrid.com; vibhork
+ms.openlocfilehash: 8ae948e9c79cff4cd0c896b250743fd9dc521752
+ms.sourcegitcommit: de47a27defce58b10ef998e8991a2294175d2098
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60931220"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "67876521"
 ---
-# <a name="how-to-send-email-using-sendgrid-from-java"></a>Java'dan SendGrid kullanarak e-posta gönderme
-Bu kılavuzda, Azure üzerinde SendGrid e-posta hizmeti ile genel programlama görevlerini gerçekleştirmek gösterilmiştir. Örnek Java dilinde yazılır. Senaryoları ele alınmaktadır **e-posta oluşturma**, **e-posta gönderme**, **ekler eklenirken**, **filtreleri kullanarak**ve **özelliklerini güncelleştirme**. SendGrid ve e-posta gönderme hakkında daha fazla bilgi için bkz. [sonraki adımlar](#next-steps) bölümü.
+# <a name="how-to-send-email-using-sendgrid-from-java"></a>Java 'dan SendGrid kullanarak e-posta gönderme
+Bu kılavuzda, Azure 'da SendGrid e-posta hizmetiyle ortak programlama görevlerinin nasıl gerçekleştirileceği gösterilmektedir. Örnekler Java dilinde yazılmıştır. Kapsanan senaryolar, **e-posta**oluşturma **, e-posta gönderme**, **ekleri ekleme**, **filtreleri kullanma**ve **Özellikleri güncelleştirme**içerir. SendGrid ve e-posta gönderme hakkında daha fazla bilgi için [sonraki adımlar](#next-steps) bölümüne bakın.
 
 ## <a name="what-is-the-sendgrid-email-service"></a>SendGrid e-posta hizmeti nedir?
-SendGrid olduğu bir [bulut tabanlı e-posta hizmeti] sağlayan güvenilir [İşlem tabanlı e-posta teslimi], ölçeklenebilirlik ve gerçek zamanlı analiz, özel tümleştirmeyi kolaylaştıran esnek API'ler ile birlikte. SendGrid kullanım senaryoları şunları içerir:
+SendGrid, özel tümleştirmeyi kolaylaştıran esnek API 'lerle birlikte güvenilir [işlem e-posta teslimi], ölçeklenebilirlik ve gerçek zamanlı çözümlemeler sağlayan [bulut tabanlı bir e-posta hizmetidir] . Ortak SendGrid kullanım senaryoları şunları içerir:
 
-* Otomatik olarak okundu bilgilerini müşterilere gönderme
-* Müşteriler aylık e-ilanlara ve özel teklifler göndermek için dağıtım yönetme listeler
-* Engellenen e-posta ve müşteri yanıt hızı gibi şeyler için gerçek zamanlı ölçümler toplama
-* Eğilimleri belirlemenize yardımcı olması için rapor oluşturma
-* İletme müşteri sorguları
+* Müşterilere alındıları otomatik olarak gönderme
+* Aylık e-Fliers ve özel teklifler göndermek için dağıtım listelerini yönetme
+* Engellenen e-posta ve müşteri yanıt verme gibi şeyler için gerçek zamanlı ölçümler toplama
+* Eğilimleri belirlemesine yardımcı olmak için raporlar oluşturma
+* Müşteri sorgularını iletme
 * Uygulamanızdan e-posta bildirimleri
 
 Daha fazla bilgi için bkz. <https://sendgrid.com>.
@@ -39,10 +40,10 @@ Daha fazla bilgi için bkz. <https://sendgrid.com>.
 ## <a name="create-a-sendgrid-account"></a>SendGrid hesabı oluşturma
 [!INCLUDE [sendgrid-sign-up](../includes/sendgrid-sign-up.md)]
 
-## <a name="how-to-use-the-javaxmail-libraries"></a>Nasıl yapılır: Javax.mail kitaplıklarını kullanma
-Javax.mail kitaplıkları, örneğin almak <https://www.oracle.com/technetwork/java/javamail> ve kodunuzun aktarın. Yüksek düzeyde, aşağıdakileri yapmak için kullanarak SMTP e-posta göndermek için javax.mail kitaplığı kullanma işlemini verilmiştir:
+## <a name="how-to-use-the-javaxmail-libraries"></a>Nasıl yapılır: Javax. Mail kitaplıklarını kullanma
+JavaScript gibi <https://www.oracle.com/technetwork/java/javamail> javax. Mail kitaplıklarını edinin ve kodunuza içeri aktarın. Yüksek düzeyde, JavaScript kullanarak e-posta göndermek için javax. Mail kitaplığını kullanmaya yönelik işlem şunları yapmanız gerekir:
 
-1. Dahil olan bı'in SendGrid smtp.sendgrid.net SMTP sunucusunun SMTP değerlerini belirtin.
+1. SendGrid için smtp.sendgrid.net olduğu SMTP sunucusu da dahil olmak üzere SMTP değerlerini belirtin.
 
 ```
         import java.util.Properties;
@@ -68,7 +69,7 @@ Javax.mail kitaplıkları, örneğin almak <https://www.oracle.com/technetwork/j
                  // …
 ```
 
-1. Genişletme *javax.mail.Authenticator* sınıfı ve uygulamanızda *getPasswordAuthentication* yöntemi, SendGrid kullanıcı adınızı ve parolanızı döndürür.  
+1. *Javax. mail. Authenticator* sınıfını genişletin ve *Getpasswordauthentication* yöntemi uygulamanızda, SendGrid Kullanıcı adınızı ve parolanızı döndürün.  
 
        private class SMTPAuthenticator extends javax.mail.Authenticator {
        public PasswordAuthentication getPasswordAuthentication() {
@@ -76,15 +77,15 @@ Javax.mail kitaplıkları, örneğin almak <https://www.oracle.com/technetwork/j
           String password = SMTP_AUTH_PWD;
           return new PasswordAuthentication(username, password);
        }
-2. Bir kimliği doğrulanmış bir e-posta oturumu aracılığıyla oluşturmak bir *javax.mail.Session* nesne.  
+2. Bir *javax. mail. Session* nesnesi aracılığıyla kimliği doğrulanmış bir e-posta oturumu oluşturun.  
 
        Authenticator auth = new SMTPAuthenticator();
        Session mailSession = Session.getDefaultInstance(properties, auth);
-3. İletinizi oluşturun ve atayın **için**, **gelen**, **konu** ve içerik değerleri. Bu gösterilen [nasıl yapılır: E-posta oluşturma](#how-to-create-an-email) bölümü.
-4. İletisi göndermesi bir *javax.mail.Transport* nesne. Bu gösterilen [nasıl yapılır: E-posta gönderme] [# nasıl yapılır-send-e-posta] bölümü.
+3. İletinizi oluşturun ve, **Kimden**, **Konu** ve içerik **değerlerini atayın.** Bu, [nasıl yapılır: E-posta](#how-to-create-an-email) bölümü oluşturun.
+4. İletiyi bir *javax. mail. Transport* nesnesi ile gönderin. Bu, [Nasıl yapılır: E-posta gönder] [#how-Gönder-e-posta] bölümü.
 
-## <a name="how-to-create-an-email"></a>Nasıl yapılır: E-posta oluşturma
-E-posta için değerlerin nasıl belirtileceğini gösterir.
+## <a name="how-to-create-an-email"></a>Nasıl yapılır: E-posta oluştur
+Aşağıda, bir e-posta için değerlerin nasıl ayarlanacağı gösterilmektedir.
 
     MimeMessage message = new MimeMessage(mailSession);
     Multipart multipart = new MimeMultipart("alternative");
@@ -104,8 +105,8 @@ E-posta için değerlerin nasıl belirtileceğini gösterir.
     message.setSubject("Your recent order");
     message.setContent(multipart);
 
-## <a name="how-to-send-an-email"></a>Nasıl yapılır: E-posta Gönder
-E-posta gönderme işlemini gösterir.
+## <a name="how-to-send-an-email"></a>Nasıl yapılır: E-posta gönder
+Aşağıda, bir e-postanın nasıl gönderileceği gösterilmektedir.
 
     Transport transport = mailSession.getTransport();
     // Connect the transport object.
@@ -115,8 +116,8 @@ E-posta gönderme işlemini gösterir.
     // Close the connection.
     transport.close();
 
-## <a name="how-to-add-an-attachment"></a>Nasıl yapılır: Bir ek ekleyin
-Aşağıdaki kod bir ek eklemek nasıl gösterir.
+## <a name="how-to-add-an-attachment"></a>Nasıl yapılır: Ek ekleme
+Aşağıdaki kod, bir ekin nasıl ekleneceğini gösterir.
 
     // Local file name and path.
     String attachmentName = "myfile.zip";
@@ -130,10 +131,10 @@ Aşağıdaki kod bir ek eklemek nasıl gösterir.
     attachmentPart.setFileName(attachmentName);
     multipart.addBodyPart(attachmentPart);
 
-## <a name="how-to-use-filters-to-enable-footers-tracking-and-analytics"></a>Nasıl yapılır: Altbilgi, izleme ve analiz etkinleştirmek için filtreleri kullanın
-SendGrid kullanarak ek e-posta işlevselliği sağlar *filtreleri*. Bu izleme'ye tıklayın, Google analytics, izleme aboneliği ve benzeri etkinleştirme gibi belirli işlevleri etkinleştirmek için bir e-posta iletisi eklenebilir ayarlarıdır. Filtreler tam bir listesi için bkz. [Filtresi Ayarları][Filter Settings].
+## <a name="how-to-use-filters-to-enable-footers-tracking-and-analytics"></a>Nasıl yapılır: Altbilgileri, izlemeyi ve analizlerini etkinleştirmek için filtreleri kullanın
+SendGrid, *filtrelerin*kullanımı aracılığıyla ek e-posta işlevselliği sağlar. Bunlar, tıklama izleme, Google Analytics, abonelik izleme gibi belirli işlevleri etkinleştirmek için bir e-posta iletisine eklenebilen ayarlardır. Filtrelerin tam listesi için bkz. [filtre ayarları][Filter Settings].
 
-* HTML metni gönderilen e-postanın en altında görünen sonuçlanır bir alt filtre nasıl ekleneceğini gösterir.
+* Aşağıda, gönderilen e-postanın altında görüntülenen HTML metni ile sonuçlanan bir altbilgi filtresinin nasıl ekleneceği gösterilmektedir.
 
       message.addHeader("X-SMTPAPI",
           "{\"filters\":
@@ -141,7 +142,7 @@ SendGrid kullanarak ek e-posta işlevselliği sağlar *filtreleri*. Bu izleme'ye
           {\"settings\":
           {\"enable\":1,\"text/html\":
           \"<html><b>Thank you</b> for your business.</html>\"}}}}");
-* Başka bir örneği bir filtre izleme tıklayın. Aşağıdaki gibi bir köprü e-posta metninizi içerir ve tıklatın hızı izlemek istediğinizi varsayalım:
+* Bir filtrenin başka bir örneği de izleme ' ye tıklayın. E-posta metninizin aşağıdakiler gibi bir köprü içerdiğini ve tıklama oranını izlemek istediğinizi varsayalım:
 
       messagePart.setContent(
           "Hello,
@@ -149,7 +150,7 @@ SendGrid kullanarak ek e-posta işlevselliği sağlar *filtreleri*. Bu izleme'ye
           <a href='http://www.contoso.com'>http://www.contoso.com</a>.</p>
           Thank you.",
           "text/html");
-* İzlemeyi etkinleştirmek için aşağıdaki kodu kullanın:
+* Tıklama izlemeyi etkinleştirmek için aşağıdaki kodu kullanın:
 
       message.addHeader("X-SMTPAPI",
           "{\"filters\":
@@ -158,9 +159,9 @@ SendGrid kullanarak ek e-posta işlevselliği sağlar *filtreleri*. Bu izleme'ye
           {\"enable\":1}}}}");
 
 ## <a name="how-to-update-email-properties"></a>Nasıl yapılır: E-posta özelliklerini güncelleştir
-Bazı e-posta özellikleri kullanılarak geçersiz kılınabilir **özelliğini** veya kullanılarak eklenen **özelliği Ekle**.
+**Set özelliği** kullanılarak bazı e-posta özelliklerinin üzerine yazılabilir veya **Ekle özelliği**kullanılarak eklenmiş olabilir.
 
-Örneğin, belirtmek için **ReplyTo** adresleri aşağıdakileri kullanır:
+Örneğin, **ReplyTo** adreslerini belirtmek için aşağıdakileri kullanın:
 
     InternetAddress addresses[] =
         { new InternetAddress("john@contoso.com"),
@@ -168,21 +169,21 @@ Bazı e-posta özellikleri kullanılarak geçersiz kılınabilir **özelliğini*
 
     message.setReplyTo(addresses);
 
-Eklemek için bir **Cc** alıcı aşağıdakileri kullanın:
+Bir **bilgi** alıcısı eklemek için aşağıdakileri kullanın:
 
     message.addRecipient(Message.RecipientType.CC, new
     InternetAddress("john@contoso.com"));
 
-## <a name="how-to-use-additional-sendgrid-services"></a>Nasıl yapılır: Ek SendGrid hizmetlerini kullanma
-SendGrid, Azure uygulamanızı ek SendGrid işlevinden yararlanmak için kullanabileceğiniz web tabanlı API'ler sunar. Tüm Ayrıntılar için bkz. [SendGrid API belgeleri][SendGrid API documentation].
+## <a name="how-to-use-additional-sendgrid-services"></a>Nasıl yapılır: Ek SendGrid Hizmetleri kullanma
+SendGrid, Azure uygulamanızdan ek SendGrid işlevlerinden yararlanmak için kullanabileceğiniz web tabanlı API 'Ler sunar. Tüm ayrıntılar için [SendGrid API belgelerine][SendGrid API documentation]bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-SendGrid e-posta hizmeti ile ilgili temel bilgileri öğrendiniz, daha fazla bilgi için bu bağlantıları izleyin.
+SendGrid e-posta hizmetinin temellerini öğrendiğinize göre, daha fazla bilgi edinmek için bu bağlantıları izleyin.
 
-* SendGrid kullanarak bir Azure dağıtımında gösteren örnek: [Bir Azure dağıtımında Java'dan SendGrid kullanarak e-posta gönderme](store-sendgrid-java-how-to-send-email-example.md)
-* SendGrid Java SDK: <https://sendgrid.com/docs/Code_Examples/java.html>
-* SendGrid API belgeleri: <https://sendgrid.com/docs/API_Reference/index.html>
-* Azure müşterileri için SendGrid özel tekliftir: <https://sendgrid.com/windowsazure.html>
+* Bir Azure dağıtımında SendGrid kullanmayı gösteren örnek: [Azure dağıtımında Java 'dan SendGrid kullanarak e-posta gönderme](store-sendgrid-java-how-to-send-email-example.md)
+* SendGrid Java SDK 'Sı:<https://sendgrid.com/docs/Code_Examples/java.html>
+* SendGrid API belgeleri:<https://sendgrid.com/docs/API_Reference/index.html>
+* Azure müşterileri için SendGrid özel teklifi:<https://sendgrid.com/windowsazure.html>
 
 [https://sendgrid.com]: https://sendgrid.com
 [https://sendgrid.com/pricing.html]: https://sendgrid.com/pricing.html
@@ -192,5 +193,5 @@ SendGrid e-posta hizmeti ile ilgili temel bilgileri öğrendiniz, daha fazla bil
 [Filter Settings]: https://sendgrid.com/docs/API_Reference/Web_API/filter_settings.html
 [SendGrid API documentation]: https://sendgrid.com/docs/API_Reference/index.html
 [https://sendgrid.com/azure.html]: https://sendgrid.com/windowsazure.html
-[bulut tabanlı e-posta hizmeti]: https://sendgrid.com/email-solutions
-[İşlem tabanlı e-posta teslimi]: https://sendgrid.com/transactional-email
+[bulut tabanlı bir e-posta hizmetidir]: https://sendgrid.com/email-solutions
+[işlem e-posta teslimi]: https://sendgrid.com/transactional-email

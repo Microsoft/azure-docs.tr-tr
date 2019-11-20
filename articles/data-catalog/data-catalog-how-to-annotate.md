@@ -1,64 +1,64 @@
 ---
-title: Azure veri Kataloğu'nda veri kaynaklarına açıklama ekleme
-description: Nasıl yapılır makalesi kolay adlar, etiketler, açıklamalar ve uzmanlar dahil olmak üzere, Azure veri Kataloğu'nda veri varlıklarına açıklama ekleme vurgulama.
-services: data-catalog
+title: Azure Veri Kataloğu 'nda veri kaynaklarına açıklama ekleme
+description: Kolay adlar, Etiketler, açıklamalar ve uzmanlar dahil olmak üzere Azure Veri Kataloğu 'nda veri varlıklarına nasıl açıklama ekleneceğini vurgulayan nasıl yapılır makalesi.
 author: JasonWHowell
 ms.author: jasonh
-ms.assetid: 5a7e6bb2-863c-4eca-b614-1c814920d9ed
 ms.service: data-catalog
 ms.topic: conceptual
-ms.date: 01/18/2018
-ms.openlocfilehash: 18dfd9eb66c1dc71ecb14bb748d9cdd6afeb00a7
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 08/01/2019
+ms.openlocfilehash: c1e022591ce1aee073330055744fbd78d97c0b1d
+ms.sourcegitcommit: 78ebf29ee6be84b415c558f43d34cbe1bcc0b38a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65953179"
+ms.lasthandoff: 08/12/2019
+ms.locfileid: "68950255"
 ---
-# <a name="how-to-annotate-data-sources"></a>Veri kaynaklarına açıklama ekleme
+# <a name="how-to-annotate-data-sources-in-azure-data-catalog"></a>Azure Veri Kataloğu 'nda veri kaynaklarına açıklama ekleme
+
 ## <a name="introduction"></a>Giriş
-**Microsoft Azure veri Kataloğu** kayıt ve kurumsal veri kaynakları için bulma sistemi olarak görev yapan tam yönetilen bir bulut hizmetidir. Diğer bir deyişle, tüm veri kaynakları ve yardımcı kuruluşların var olan verilerden daha fazla değer elde kullanacağınızı bulmak ve anlamak yardımcı hakkında veri Kataloğu. Bir veri kaynağı, veri Kataloğu'na kaydedildiğinde meta verilerini kopyalanır ve hizmet tarafından ancak bir hikayesi vardır sonlanmıyor. Veri Kataloğu, açıklamaları ve etiketleri – veri kaynağından ayıklanan meta verileri desteklemek ve veri kaynağı için daha fazla insana daha anlaşılır hale getirmek için gibi – kendi açıklayıcı meta verilerini sağlamak kullanıcıların sağlar.
 
-## <a name="annotation-and-crowdsourcing"></a>Ek açıklama ve kitle kaynak
-Herkesin bir fikrim vardır. Ve bu iyi bir şeydir.
-Veri Kataloğu, farklı kullanıcılar kurumsal veri kaynakları üzerinde farklı perspektiflerini sahip olduğunuzu ve her biri bu Perspektifleri yararlı olabileceğini tanır. Aşağıdaki senaryoyu göz önünde bulundurun:
+**Microsoft Azure Veri Kataloğu** , kurumsal veri kaynakları için bir kayıt sistemi ve bulma sistemi olarak hizmet veren tam olarak yönetilen bir bulut hizmetidir. Diğer bir deyişle, Veri Kataloğu, kullanıcıların veri kaynaklarını bulmasına, anlamasına ve kullanmasına yardımcı olur ve kuruluşların mevcut verilerinden daha fazla değer almasını sağlar. Veri kaynağı veri kataloğuna kaydedildiğinde, meta verileri hizmet tarafından kopyalanıp dizinlenir, ancak hikaye burada sonlanmaz. Veri Kataloğu, kullanıcıların, veri kaynağından ayıklanan meta verileri tamamlayacak ve veri kaynağını daha fazla kişiye daha anlaşılır hale getirmek için açıklamalar ve Etiketler gibi kendi açıklayıcı meta verilerini sağlamasına olanak tanır.
 
-* Sistem Yöneticisi, veri kaynağını barındıran sunucular veya hizmetleri için hizmet düzeyi sözleşmesi bilir.
-* Veritabanı Yöneticisi, her bir veritabanı ve ETL işlemi izin verilen windows yedekleme zamanlamasını bilir.
-* Sistem sahibinin, kullanıcılar veri kaynağına erişim isteme işlemini bilir.
-* Varlıklar ve veri kaynağındaki öznitelikleri ve kurumsal veri modelini nasıl eşleştiği veri Görevlisi bilir.
-* Analist, veri destekledikleri iş süreçlerini bağlamında nasıl kullanıldığını bilir.
+## <a name="annotation-and-crowdsourcing"></a>Ek açıklama ve crowdkaynağı
+Herkesin bir görüşi vardır. Bu iyi bir şeydir.
+Veri Kataloğu, farklı kullanıcıların kurumsal veri kaynaklarında farklı perspektiflere sahip olduğunu ve bu perspektiflerin her birinin değerli olduğunu algılar. Aşağıdaki senaryoyu göz önünde bulundurun:
 
-Bu perspektifler her değerlidir ve bir kitle kaynak yaklaşımı yakalanır ve kayıtlı veri kaynaklarına, eksiksiz bir görünümünü sağlamak için kullanılan her biri izin veren bir meta veri kataloğu kullanır. Her bir kullanıcı, veri Kataloğu portalını kullanarak ekleyebilir ve diğer kullanıcılar tarafından sağlanan ek açıklamaları görüntülemesi sırasında kendi ek açıklamalarını düzenleyebilirsiniz.
+* Sistem Yöneticisi, veri kaynağını barındıran sunucular veya hizmetler için hizmet düzeyi anlaşmasını bilir.
+* Veritabanı Yöneticisi, her bir veritabanı için Yedekleme zamanlamasını ve izin verilen ETL işleme pencerelerini bilir.
+* Sistem sahibi, kullanıcıların veri kaynağına erişim istemesi işlemini bilir.
+* Veriler veri kaynağındaki varlıkların ve özniteliklerin kurumsal veri modeliyle nasıl eşlendiğini bilir.
+* Analist, verilerin destekledikleri iş süreçlerinin bağlamında nasıl kullanıldığını bilir.
 
-## <a name="different-types-of-annotations"></a>Farklı tür ek açıklamaları
-Veri Kataloğu, ek açıklamaları aşağıdaki türlerini destekler:
+Bu perspektiflerin her biri değerli ve Veri Kataloğu, kayıtlı veri kaynaklarının tamamen bir resmini sağlamak için her birinin yakalanmasına ve kullanılmasına izin veren meta veriler için bir crowdsourbir yaklaşım kullanır. Veri Kataloğu portalını kullanarak her Kullanıcı kendi ek açıklamalarını ekleyip düzenleyebilir ve diğer kullanıcılar tarafından sunulan ek açıklamaları görüntüleyebiliyor.
 
-| Ek açıklama | Notlar |
+## <a name="different-types-of-annotations"></a>Farklı ek açıklama türleri
+Veri Kataloğu aşağıdaki ek açıklama türlerini destekler:
+
+| Ek Açıklama | Notlar |
 | --- | --- |
-| Kolay ad |Kolay adlar veri varlıkları daha kolay anlaşılmasını sağlamak için veri varlık düzeyinde sağlanabilir. Temel alınan nesne adının şifreli, kısaltılmış veya aksi halde anlamlı kullanıcılara olduğunda kolay adlar ekseriyetle faydalıdır. |
-| Açıklama |Veri varlığına ve öznitelik tanımlarını sağlanabilir / sütun düzeyi. Açıklamaları olan kullanıcının açıklayan kısa serbest biçimli metin ek açıklamalar perspektif veri varlığı veya kullanımı. |
-| Etiketler (kullanıcı etiketler) |Etiketler, veri varlığı ve öznitelik sağlanabilir / sütun düzeyi. Kullanıcı, kullanıcı tanımlı ve veri varlıklarını veya öznitelikleri kategorilere ayırmak için kullanılabilir etiketler etiketlerdir. |
-| Etiketleri (sözlüğü etiketler) |Etiketler, veri varlığı ve öznitelik sağlanabilir / sütun düzeyi. Veri varlıklarını ya da ortak bir iş sınıflandırması kullanarak özniteliklerini kategorilerine ayırmak için kullanılan merkezi olarak tanımlı terimler sözlüğü etiketlerdir. Daha fazla bilgi için bkz. [İş Sözlüğünü Yönetilen Etiketleme için ayarlama](data-catalog-how-to-business-glossary.md) |
-| Uzmanlar |Uzmanlar veri varlık düzeyinde sağlanabilir. Uzmanlar kullanıcılar veya gruplar Uzman perspektiflerine sahip verileri tanımlamak ve kullanıcılar, kayıtlı veri kaynaklarını bulmak için iletişim noktaları görür ve mevcut ek açıklamalar tarafından bulamadığınız sorularınız varsa. |
-| Erişim izni iste |Veri varlık düzeyinde erişim bilgi istek sağlanabilir. Bu bilgiler henüz erişim izni olmayan bir veri kaynağı için kullanıcılar içindir. Kullanıcılar, kullanıcı veya grubun erişim, kullanıcıların, erişim elde etmek için gereken araç ve işlem URL'sini verir e-posta adresini girin veya işlem bir metin girebilirsiniz. |
-| Belgeler |Belgeleri veri varlık düzeyinde sağlanabilir. Varlık belgelere bağlantılar ve resimler ekleyebilirsiniz ve etiketleri ve açıklamaları ile ilettiği değil herhangi bir bilgi sunan zengin metin bilgilerdir. |
+| Kolay ad |Veri varlıklarının daha kolay anlaşılır olması için veri varlık düzeyinde kolay adlar sağlanabilir. Kolay adlar en çok, temel alınan nesne adı şifreli olduğunda, kısaltılmıştır ve kullanıcılara anlamlı değildir. |
+| Açıklama |Açıklamalar veri varlığı ve öznitelik/sütun düzeylerinde sağlanabilir. Açıklamalar, kullanıcının veri varlığı veya kullanımı üzerinde perspektifi tanımlayan serbest biçimli kısa metin açıklamalarıdır. |
+| Etiketler (Kullanıcı etiketleri) |Etiketler veri varlığı ve öznitelik/sütun düzeylerinde sağlanabilir. Kullanıcı etiketleri, veri varlıklarını veya özniteliklerini sınıflandırmak için kullanılabilecek Kullanıcı tanımlı etiketlerdir. |
+| Etiketler (sözlük etiketleri) |Etiketler veri varlığı ve öznitelik/sütun düzeylerinde sağlanabilir. Sözlük etiketleri, genel bir iş sınıflandırması kullanarak veri varlıklarını veya özniteliklerini sınıflandırmak için kullanılabilen, merkezi olarak tanımlanmış sözlük koşullardır. Daha fazla bilgi için bkz. [İş Sözlüğünü Yönetilen Etiketleme için ayarlama](data-catalog-how-to-business-glossary.md) |
+| Uzmanı |Uzmanlar, veri varlık düzeyinde sağlanabilir. Uzmanlar, veri üzerinde uzman perspektifleri olan kullanıcıları veya grupları belirler ve kayıtlı veri kaynaklarını bulacak ve mevcut ek açıklamalar tarafından yanıtlanmayan soruların bulunduğu kullanıcılar için iletişim noktası olarak görev yapabilir. |
+| Erişim izni iste |Veri varlık düzeyinde istek erişim bilgileri sağlanabilir. Bu bilgiler, henüz erişim izinleri olmayan bir veri kaynağını bulacak kullanıcılar içindir. Kullanıcılar, erişim izni veren kullanıcı veya grubun e-posta adresini, kullanıcıların erişim kazanmak için ihtiyaç duyduğu işlemin veya aracın URL 'sini girebilir veya işlemin kendisini metin olarak girebilirler. |
+| Belgeler |Belgeler veri varlık düzeyinde sağlanabilir. Varlık belgeleri, bağlantılar ve görüntüler içerebilen ve açıklamalar ve Etiketler aracılığıyla hiçbir bilginin sağlayabileceği zengin metin bilgileri içerir. |
 
-## <a name="annotating-multiple-assets"></a>Birden çok varlıklarına
-Birden fazla veri varlığına veri Kataloğu Portalı'nda seçildiğinde, kullanıcılar tek bir işlemde tüm seçili varlıklar açıklama ekleyebilirsiniz. Ek açıklamalar kolay seçin ve ilgili veri varlıkları için etiketleri ve uzmanlar ve tutarlı bir açıklama sağlayın, tüm seçili varlıklar için geçerli olur.
+## <a name="annotating-multiple-assets"></a>Birden çok kıymete açıklama ekleme
+Veri Kataloğu portalında birden çok veri varlığı seçerken, kullanıcılar tüm seçili varlıklara tek bir işlemde açıklama ekleyebilir. Ek açıklamalar, tüm seçili varlıklar için geçerlidir. Bu, ilgili veri varlıkları için tutarlı bir açıklama ve etiket ve uzmanlar kümesi seçmenizi ve sağlanması kolaylaşır.
 
 > [!NOTE]
-> Etiketleri ve uzmanlar kayıt aracı kayıt veri varlıklarını kullanarak veri Kataloğu veri kaynağı olduğunda da sağlanabilir.
+> Veri Kataloğu veri kaynağı kayıt aracı kullanılarak veri varlıkları kaydettirilirken Etiketler ve uzmanlar de belirtilebilir.
 >
 >
 
-Ne zaman birden çok tablo ve sütunları yalnızca seçilen tüm varlıklar ortak olan veri görünümleri seçme veri Kataloğu Portalı'nda görüntülenir. Bu etiketleri ve açıklamaları tüm sütunlar için seçilen tüm varlıklar için aynı adla sağlamak üzere kullanıcıları sağlar.
+Birden çok tablo ve görünüm seçerken, veri kataloğu portalında yalnızca seçili olan tüm veri varlıklarının ortak bulunduğu sütunlar görüntülenir. Bu, kullanıcıların tüm seçili varlıklar için aynı ada sahip tüm sütunlar için Etiketler ve açıklamalar sağlamasına izin verir.
 
 ## <a name="annotations-and-discovery"></a>Ek açıklamalar ve bulma
-Kayıt sırasında veri kaynağından ayıklanan meta verileri için veri kataloğu arama dizini eklemiş gibi kullanıcı tarafından sağlanan meta veriler ayrıca dizine alınır. Bu yalnızca ek açıklamaları, bulma verileri anlamak kullanıcılar için kolaylaştıran, ek açıklamalar Ayrıca kullanıcıların bunlara mantıklı koşulları kullanarak arama açıklamalı veri varlıklarını bulmak kolaylaştırır olduğunu gösterir.
+Kayıt sırasında veri kaynağından ayıklanan meta veriler veri kataloğu arama dizinine eklendikçe, Kullanıcı tarafından sağlanan meta verilerin de dizini oluşturulur. Bu, yalnızca ek açıklamaların, bulduğu verileri daha kolay anlamasına olanak tanıyan, ek açıklamaların de kullanıcılara anlamlı olan koşullara göre arayarak açıklamalı veri varlıklarını bulmasını kolaylaştıran anlamına gelir.
 
 ## <a name="summary"></a>Özet
-Veri Kataloğu ile bir veri kaynağı kaydetme verileri bulunabilir veri kaynağından yapısal ve açıklayıcı meta veri Kataloğu hizmetine kopyalayarak yapar. Bir veri kaynağı kaydedildikten sonra kullanıcıların bulunmasını ve gelen veri Kataloğu portalını anlaşılmasını kolaylaştırmak için ek açıklamalar sağlar.
+Veri Kataloğu ile veri kaynağını kaydetme, veri kaynağından Katalog hizmetine yapısal ve açıklayıcı meta verileri kopyalayarak bu verilerin keşfedilmesini sağlar. Veri kaynağı kaydedildikten sonra kullanıcılar, veri kataloğu portalı içinden bulmayı ve anlamayı kolaylaştırmak için ek açıklamalar sağlayabilir.
 
 ## <a name="see-also"></a>Ayrıca bkz.
-* [Azure veri Kataloğu ile çalışmaya başlama](data-catalog-get-started.md) veri kaynaklarına açıklama nasıl hakkında bilgi için adım adım öğretici.
+* Veri kaynaklarına açıklama ekleme hakkında adım adım ayrıntılar için [Azure Veri Kataloğu](data-catalog-get-started.md) öğreticisini kullanmaya başlayın.

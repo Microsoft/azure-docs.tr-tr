@@ -1,51 +1,51 @@
 ---
-title: Değişimleri - Azure Active Directory B2C REST API talepleri
-description: Özel ilkeler, Active Directory B2C REST API talep değişimleri ekleyin.
+title: Talep değişimlerinin REST API Azure Active Directory B2C
+description: Active Directory B2C içindeki özel ilkelere REST API talep alışverişleri ekleyin.
 services: active-directory-b2c
 author: mmacy
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 05/20/2019
+ms.date: 08/21/2019
 ms.author: marsma
 ms.subservice: B2C
-ms.openlocfilehash: 0bdef508e12a3b11143149b330da73838b53f860
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 12ddbe9f43baf68f6c11c9b720a0f684316af46a
+ms.sourcegitcommit: f209d0dd13f533aadab8e15ac66389de802c581b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67439009"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71065326"
 ---
-# <a name="add-rest-api-claims-exchanges-to-custom-policies-in-azure-active-directory-b2c"></a>Özel ilkeleri Azure Active Directory B2C REST API talep değişimleri ekleyin
+# <a name="add-rest-api-claims-exchanges-to-custom-policies-in-azure-active-directory-b2c"></a>Azure Active Directory B2C içindeki özel ilkelere REST API talep alışverişleri ekleyin
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
-Bir RESTful API'sine etkileşim ekleyebilirsiniz, [özel ilkeler](active-directory-b2c-overview-custom.md) Azure Active Directory (Azure AD) B2C'de. Bu makalede, RESTful Hizmetleri ile etkileşime giren bir Azure AD B2C kullanıcı yolculuğu oluşturulacağını gösterir.
+Azure Active Directory B2C (Azure AD B2C) [özel ilkelerinize](active-directory-b2c-overview-custom.md) bir restısteki API ile etkileşim ekleyebilirsiniz. Bu makalede, daha fazla hizmet ile etkileşim kuran Azure AD B2C Kullanıcı yolculuğunun nasıl oluşturulacağı gösterilmektedir.
 
-Etkileşim, bir talep değişimi REST API talepler ve Azure AD B2C arasındaki bilgi içerir. Talep değişimleri, aşağıdaki özelliklere sahiptir:
+Etkileşim, REST API talepler ve Azure AD B2C arasında bilgi talebi alışverişi içerir. Talep değişimlerinin aşağıdaki özellikleri vardır:
 
-- Bir düzenleme adımı tasarlanmış olabilir.
-- Dış bir eylem tetikleyebilirsiniz. Örneğin, bir olay dış veritabanında oturum açabilirsiniz.
-- Bir değer getirir ve ardından kullanıcı veritabanında depolamak için kullanılabilir.
-- Yürütmenin akışını değiştirebilirsiniz.
+- , Düzenleme adımı olarak tasarlanabilir.
+- , Bir dış eylemi tetikleyebilir. Örneğin, bir olayı bir dış veritabanında günlüğe kaydedebilir.
+- , Bir değeri getirmek ve sonra Kullanıcı veritabanında depolamak için kullanılabilir.
+- Yürütme akışını değiştirebilir.
 
-Bu makalede gösterilen senaryo, aşağıdaki eylemleri içerir:
+Bu makalede temsil edilen senaryo aşağıdaki eylemleri içerir:
 
-1. Kullanıcı, bir dış sistemde arayın.
-2. Burada kullanıcının kayıtlı Şehir alın.
-3. Bu öznitelik, talep olarak uygulamaya döndürür.
+1. Kullanıcıya bir dış sistemde arama yapın.
+2. Kullanıcının kaydedildiği şehri alın.
+3. Bu özniteliği bir talep olarak uygulamaya döndürün.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
-- Bölümündeki adımları tamamlamanız [özel ilkeleri kullanmaya başlama](active-directory-b2c-get-started-custom.md).
-- İle etkileşim kurmak için bir REST API uç noktası. Bu makalede, basit bir Azure işlevini örnek olarak kullanır. Azure işlevi oluşturmak için bkz [Azure portalında ilk işlevinizi oluşturma](../azure-functions/functions-create-first-azure-function.md).
+- [Özel ilkelerle çalışmaya başlama](active-directory-b2c-get-started-custom.md)bölümündeki adımları uygulayın.
+- Etkileşimde bulunmak için bir REST API uç noktası. Bu makale örnek olarak basit bir Azure işlevi kullanır. Azure işlevi oluşturmak için, bkz. [Azure Portal ilk işlevinizi oluşturma](../azure-functions/functions-create-first-azure-function.md).
 
-## <a name="prepare-the-api"></a>API hazırlama
+## <a name="prepare-the-api"></a>API 'YI hazırlama
 
-Bu bölümde, Azure işlevi için bir değer almaya hazırlama `email`ve ardından için bir değer döndürmesi `city` kullanılabilen Azure AD B2C tarafından talep olarak.
+Bu bölümde, Azure işlevini için `email`bir değer alacak şekilde hazırlandınız ve sonra Azure AD B2C tarafından talep olarak kullanılabilecek `city` değeri döndürürler.
 
-Run.csx dosyasının aşağıdaki kodu kullanmak için oluşturduğunuz Azure işlevi için değiştirin:
+Aşağıdaki kodu kullanmak için oluşturduğunuz Azure işlevi için Run. CSX dosyasını değiştirin:
 
 ```csharp
 #r "Newtonsoft.Json"
@@ -82,11 +82,11 @@ public class ResponseContent
 }
 ```
 
-## <a name="configure-the-claims-exchange"></a>Talep değişimi yapılandırın
+## <a name="configure-the-claims-exchange"></a>Talep değişimini yapılandırma
 
-Teknik profili, talep exchange yapılandırmasını sağlar.
+Teknik bir profil, talep alışverişi için yapılandırma sağlar.
 
-Açık *TrustFrameworkExtensions.xml* dosyasını açıp aşağıdaki **ClaimsProvider** XML öğesi içindeki **ClaimsProviders** öğesi.
+*TrustFrameworkExtensions. xml* dosyasını açın ve aşağıdaki **ClaimsProvider** XML öğesini **claimsproviders** öğesine ekleyin.
 
 ```XML
 <ClaimsProvider>
@@ -97,8 +97,10 @@ Açık *TrustFrameworkExtensions.xml* dosyasını açıp aşağıdaki **ClaimsPr
       <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
       <Metadata>
         <Item Key="ServiceUrl">https://myfunction.azurewebsites.net/api/HttpTrigger1?code=bAZ4lLy//ZHZxmncM8rI7AgjQsrMKmVXBpP0vd9smOzdXDDUIaLljA==</Item>
-        <Item Key="AuthenticationType">None</Item>
         <Item Key="SendClaimsIn">Body</Item>
+        <!-- Set AuthenticationType to Basic or ClientCertificate in production environments -->
+        <Item Key="AuthenticationType">None</Item>
+        <!-- REMOVE the following line in production environments -->
         <Item Key="AllowInsecureAuthInProduction">true</Item>
       </Metadata>
       <InputClaims>
@@ -113,11 +115,13 @@ Açık *TrustFrameworkExtensions.xml* dosyasını açıp aşağıdaki **ClaimsPr
 </ClaimsProvider>
 ```
 
-**InputClaims** öğe REST hizmete gönderilen talepleri tanımlar. Bu örnekte, talep değerini `givenName` REST hizmeti talep olarak gönderilecek `email`. **OutputClaims** öğe REST hizmetinden beklenen talepleri tanımlar.
+**Inputclaim** öğesi Rest hizmetine gönderilen talepleri tanımlar. Bu örnekte, talebin `givenName` değeri, talep `email`olarak rest hizmetine gönderilir. **Outputclaim** Öğesı, Rest hizmetinden beklenen talepleri tanımlar.
+
+Yukarıdaki `AuthenticationType` açıklamalar ve `AllowInsecureAuthInProduction` bir üretim ortamına geçtiğinizde yapmanız gereken değişiklikleri belirtin. Yeniden yapılan API 'lerinizi üretime yönelik olarak güvenli hale getirme hakkında bilgi edinmek için bkz. [sertifika kimlik doğrulaması ile](active-directory-b2c-custom-rest-api-netfw-secure-cert.md) [temel kimlik doğrulama](active-directory-b2c-custom-rest-api-netfw-secure-basic.md) ve güvenilir API 'ler ile güvenli yeniden API 'ler sağlama.
 
 ## <a name="add-the-claim-definition"></a>Talep tanımını ekleyin
 
-İçin bir tanım ekleyin `city` içinde **BuildingBlocks** öğesi. Bu öğe TrustFrameworkExtensions.xml dosyasının başında bulabilirsiniz.
+**Buildingblocks** öğesinin `city` içine bir tanım ekleyin. Bu öğeyi TrustFrameworkExtensions. xml dosyasının başlangıcında bulabilirsiniz.
 
 ```XML
 <BuildingBlocks>
@@ -132,11 +136,11 @@ Açık *TrustFrameworkExtensions.xml* dosyasını açıp aşağıdaki **ClaimsPr
 </BuildingBlocks>
 ```
 
-## <a name="add-an-orchestration-step"></a>Düzenleme adımı ekleyin
+## <a name="add-an-orchestration-step"></a>Düzenleme adımı ekleme
 
-Burada REST API çağrısı bir düzenleme adımı kullanılan birçok kullanım örnekleri vardır. Bir düzenleme adımı, bir kullanıcı ilk kez kaydı gibi bir görevi başarıyla tamamlandıktan sonra bir dış sistem için bir güncelleştirme veya profil güncelleştirmesi olarak bilgilerin eşitlenmiş tutmak için kullanılabilir. Bu durumda, bu uygulamaya profil düzenledikten sonra sağlanan bilgileri genişletmek için kullanılır.
+REST API çağrısının düzenleme adımı olarak kullanılabileceği birçok kullanım durumu vardır. Düzenleme adımı olarak, bir Kullanıcı ilk kez kayıt gibi bir görevi başarıyla tamamladıktan sonra veya bilgileri eşitlenmiş halde tutmak için bir profil güncelleştirmesi olarak bir dış sisteme güncelleştirme olarak kullanılabilir. Bu durumda, profil düzenledikten sonra uygulamaya girilen bilgileri artırmak için kullanılır.
 
-Profil düzenleme kullanıcı yolculuğu için bir adım ekleyin. Kullanıcı olduktan sonra (1-4 Aşağıdaki XML'de düzenleme adımlarının) kimlik doğrulaması ve kullanıcının güncelleştirilmiş profil bilgilerini (5. adım) sağlamıştır. Kopya profili Düzenle kullanıcı yolculuğu XML kodundan *TrustFrameworkBase.xml* dosyasını, *TrustFrameworkExtensions.xml* içinde dosya **UserJourneys** öğesi. Daha sonra 6. adım olarak değişikliği yapmak.
+Profile bir adım ekleyin Kullanıcı yolculuğunu düzenleyin. Kullanıcının kimliği doğrulandıktan sonra (aşağıdaki XML 'de Orchestration adımları 1-4) ve Kullanıcı güncelleştirilmiş profil bilgilerini sağlamıştır (5. adım). *TrustFrameworkBase. xml* dosyasındaki profile düzenleme Kullanıcı yolculuğu XML kodunu, **User, neys** öğesinin içindeki *TrustFrameworkExtensions. xml* dosyasına kopyalayın. Ardından, değişikliği 6. adımda yapın.
 
 ```XML
 <OrchestrationStep Order="6" Type="ClaimsExchange">
@@ -204,11 +208,11 @@ Kullanıcı yolculuğu için son XML şu örnekteki gibi görünmelidir:
 </UserJourney>
 ```
 
-## <a name="add-the-claim"></a>Talep Ekle
+## <a name="add-the-claim"></a>Talebi ekleyin
 
-Düzen *ProfileEdit.xml* dosya ve ekleme `<OutputClaim ClaimTypeReferenceId="city" />` için **OutputClaims** öğesi.
+*Profileedit. xml* dosyasını düzenleyin ve `<OutputClaim ClaimTypeReferenceId="city" />` **outputclaim** öğesine ekleyin.
 
-Yeni Talep ekledikten sonra teknik profili, bu örnekteki gibi görünür:
+Yeni talebi ekledikten sonra teknik profil şu örneğe benzer şekilde görünür:
 
 ```XML
 <TechnicalProfile Id="PolicyProfile">
@@ -223,15 +227,15 @@ Yeni Talep ekledikten sonra teknik profili, bu örnekteki gibi görünür:
 </TechnicalProfile>
 ```
 
-## <a name="upload-your-changes-and-test"></a>Değişikliklerinizi karşıya yüklemek ve test
+## <a name="upload-your-changes-and-test"></a>Değişikliklerinizi ve testinizi karşıya yükleyin
 
-1. (İsteğe bağlı:) Devam etmeden önce mevcut sürümü (indirerek) dosyalarını kaydedin.
-2. Karşıya yükleme *TrustFrameworkExtensions.xml* ve *ProfileEdit.xml* ve var olan dosyanın üzerine yazmak için seçin.
-3. Seçin **B2C_1A_ProfileEdit**.
-4. İçin **uygulama seçin** özel ilke genel bakış sayfasında adlı web uygulamasını seçin *webapp1* daha önce kaydettiğiniz. Emin olun **yanıt URL'si** olduğu `https://jwt.ms`.
-4. Seçin **Şimdi Çalıştır**. Hesap kimlik bilgilerinizle oturum açın ve tıklayın **devam**.
+1. Seçim Devam etmeden önce dosyaların mevcut sürümünü (indirerek indirerek) kaydedin.
+2. *TrustFrameworkExtensions. xml* ve *profileedit. xml* dosyasını karşıya yükleyin ve var olan dosyanın üzerine yazmayı seçin.
+3. **B2C_1A_ProfileEdit**öğesini seçin.
+4. Özel ilkenin genel bakış sayfasında **Uygulama Seç** için, daha önce kaydettiğiniz *WebApp1* adlı Web uygulamasını seçin. **Yanıt URL 'sinin** `https://jwt.ms`olduğundan emin olun.
+4. **Şimdi Çalıştır**' ı seçin. Hesap kimlik bilgilerinizle oturum açın ve **devam**' a tıklayın.
 
-Her şeyin doğru şekilde ayarlanıp ayarlanmadığını, yeni bir talep belirteci içeren `city`, değerle `Redmond`.
+Her şey doğru şekilde ayarlandıysa, belirteç yeni talebi `city`değeri `Redmond`ile birlikte içerir.
 
 ```JSON
 {
@@ -251,5 +255,13 @@ Her şeyin doğru şekilde ayarlanıp ayarlanmadığını, yeni bir talep belirt
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- Ayrıca, bir doğrulama profili olarak etkileşim tasarlayabilirsiniz. Daha fazla bilgi için [izlenecek yol: Kullanıcı girişini doğrulama olarak, Azure AD B2C kullanıcı yolculuğunun talep alışverişlerine REST API tümleştirme](active-directory-b2c-rest-api-validation-custom.md).
-- [Kullanıcılarınızdan daha fazla bilgi toplamak için profil düzenleme değiştirme](active-directory-b2c-create-custom-attributes-profile-edit-custom.md)
+Etkileşimi bir doğrulama profili olarak da tasarlayabilirsiniz. Daha fazla bilgi için bkz [. İzlenecek yol: Kullanıcı girişinde](active-directory-b2c-rest-api-validation-custom.md)Azure AD B2C kullanıcı yolculuğunda REST API talep alışverişlerinde tümleştirme yapın.
+
+[Kullanıcılarınızın daha fazla bilgi toplamak için profil düzenlemeyi değiştirin](active-directory-b2c-create-custom-attributes-profile-edit-custom.md)
+
+[Başvurunun Yeniden teknik profil](restful-technical-profile.md)
+
+API 'lerinizi güvenli hale getirme hakkında bilgi edinmek için aşağıdaki makalelere bakın:
+
+* [Temel kimlik doğrulaması (Kullanıcı adı ve parola) ile yeniden takip eden API 'nizin güvenliğini sağlama](active-directory-b2c-custom-rest-api-netfw-secure-basic.md)
+* [İstemci sertifikalarıyla yeniden takip eden API 'nizin güvenliğini sağlama](active-directory-b2c-custom-rest-api-netfw-secure-cert.md)

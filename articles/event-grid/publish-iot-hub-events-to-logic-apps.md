@@ -1,6 +1,6 @@
 ---
-title: IoT Hub olaylarını kullanarak Azure Logic Apps'i tetikleme | Microsoft Docs
-description: Azure Event Grid'in olay yönlendirme hizmetini kullanarak, IoT Hub olayları temelinde Azure Logic Apps eylemleri gerçekleştiren otomatik işlemler oluşturun.
+title: 'Öğretici: tetiklenecek IoT Hub olaylarını kullanın Azure Logic Apps'
+description: 'Öğretici: Azure Event Grid olay yönlendirme hizmetini kullanarak IoT Hub olaylarına göre Azure Logic Apps eylemleri gerçekleştirmek için otomatikleştirilmiş işlemler oluşturun.'
 services: iot-hub
 documentationcenter: ''
 author: kgremban
@@ -10,16 +10,16 @@ ms.service: iot-hub
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 12/07/2018
+ms.date: 11/11/2019
 ms.author: kgremban
-ms.openlocfilehash: 9c84e1a62ad8b67e398c62074c390711f4b0be28
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: e003cb650b0589ab43c984850838c56cbbf1ff2f
+ms.sourcegitcommit: 598c5a280a002036b1a76aa6712f79d30110b98d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60823836"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74106784"
 ---
-# <a name="tutorial-send-email-notifications-about-azure-iot-hub-events-using-logic-apps"></a>Öğretici: Logic Apps kullanarak Azure IoT Hub olayları hakkında e-posta bildirimleri gönderme
+# <a name="tutorial-send-email-notifications-about-azure-iot-hub-events-using-logic-apps"></a>Öğretici: Mantıksal uygulamalar'ı kullanarak Azure IOT Hub olayları hakkında e-posta bildirimleri gönderme
 
 Azure Event Grid, aşağı akış iş uygulamalarınızda eylemler tetikleyerek IoT Hub'daki olaylara karşılık vermenize olanak tanır.
 
@@ -33,20 +33,20 @@ Bu makale IoT Hub ve Event Grid kullanan örnek bir yapılandırmada size yol g�
 
 ## <a name="create-a-logic-app"></a>Mantıksal uygulama oluşturma
 
-İlk olarak, bir mantıksal uygulama oluşturun ve sanal makineniz için kaynak grubunu izleyen bir Event Grid tetikleyicisi ekleyin. 
+İlk olarak, bir mantıksal uygulama oluşturun ve sanal makineniz için kaynak grubunu izleyen bir Olay kılavuzu tetikleyicisi ekleyin. 
 
 ### <a name="create-a-logic-app-resource"></a>Mantıksal uygulama kaynağı oluşturma
 
-1. İçinde [Azure portalında](https://portal.azure.com)seçin **kaynak Oluştur** > **tümleştirme** > **mantıksal uygulama**.
+1. [Azure portalında](https://portal.azure.com) **Kaynak oluştur** > **Tümleştirme** > **Mantıksal Uygulama**’yı seçin.
 
    ![Mantıksal uygulama oluşturma](./media/publish-iot-hub-events-to-logic-apps/select-logic-app.png)
 
 2. Mantıksal uygulamanıza aboneliğiniz içinde benzersiz olan bir ad verin, ardından IoT Hub'ınızla aynı aboneliği, kaynak grubunu ve konumu seçin. 
-3. **Oluştur**’u seçin.
+3. **Oluştur**'u seçin.
 
 4. Kaynak oluşturulduktan sonra mantıksal uygulamanıza gidin. 
 
-5. Logic Apps Tasarımcısı'nda, daha hızlı başlangıç yapmanıza yardımcı olacak ortak desen şablonları gösterilir. Mantıksal uygulamanızı sıfırdan oluşturabilmek için Logic App Tasarımcısı'nda **Şablonlar**'ın altından **Boş Mantıksal Uygulama**'yı seçin.
+5. Logic Apps tasarımcı, daha hızlı bir şekilde başlamak için ortak desenlere ilişkin şablonlar gösterir. Mantıksal uygulamanızı sıfırdan oluşturabilmek için Logic App Tasarımcısı'nda **Şablonlar**'ın altından **Boş Mantıksal Uygulama**'yı seçin.
 
 ### <a name="select-a-trigger"></a>Tetikleyici seçme
 
@@ -128,8 +128,8 @@ Eylemler, tetikleyici mantıksal uygulama iş yükünü başlattıktan sonra ger
 5. İstenirse, e-posta hesabınızda oturum açın. 
 
 6. E-posta şablonunuzu oluşturun. 
-   * **İçin**: Bildirim e-postaları almak için e-posta adresi girin. Bu öğreticide, test etmek için erişebileceğiniz bir e-posta hesabı kullanın. 
-   * **Konu** ve **gövdesi**: E-posta metni yazın. Olay verileri temelinde dinamik içerik eklemek için seçici aracından JSON özelliklerini seçin.  
+   * **Kime**: Bildirim e-postalarını alacak olan e-posta adresini girin. Bu öğreticide, test etmek için erişebileceğiniz bir e-posta hesabı kullanın. 
+   * **Konu** ve **Gövde**: E-postanızın metnini yazın. Olay verileri temelinde dinamik içerik eklemek için seçici aracından JSON özelliklerini seçin.  
 
    E-posta şablonunuz, aşağıdaki örneğe benzer görünebilir:
 
@@ -162,23 +162,23 @@ Bu bölümde, IoT Hub'ınızı gerçekleşen olayları yayımlamak için yapıla
    ![Yeni olay aboneliği oluşturma](./media/publish-iot-hub-events-to-logic-apps/event-subscription.png)
 
 4. Olay aboneliğini aşağıdaki değerlerle oluşturun: 
-   * **Olay türü**: Tüm olay türlerine abone ol seçeneğinin işaretini kaldırın ve seçin **cihaz oluşturulan** menüsünde.
-   * **Uç noktası ayrıntıları**: Uç nokta türü olarak seçin **Web kancası** ve select uç noktasına tıklayın ve mantıksal uygulamanızdan kopyaladığınız URL'yi yapıştırın ve seçimi onaylayın.
+   * **Olay Türü**: Tüm olay türlerine abone ol'un işaretini kaldırın ve menüde **Cihaz Oluşturuldu**'yu seçin.
+   * **Uç Nokta Ayrıntıları**: Uç Nokta Türü olarak **Web Kancası**'nı seçin, Uç nokta seçin'e tıklayın, mantıksal uygulamanızdan kopyaladığınız URL'yi yapıştırın ve seçimi onaylayın.
 
      ![uç nokta URL'si seçme](./media/publish-iot-hub-events-to-logic-apps/endpoint-url.png)
 
-   * **Olay aboneliği ayrıntıları**: Açıklayıcı bir ad girin ve seçin **olay ızgarası şeması**
+   * **Olay Aboneliği Ayrıntıları**: Açıklayıcı bir ad girin ve **Olay Kılavuz Şeması**'nı seçin
 
    İşiniz bittiğinde, form aşağıdaki örnekteki gibi görünmelidir: 
 
     ![Örnek olay aboneliği formu](./media/publish-iot-hub-events-to-logic-apps/subscription-form.png)
 
-5. Olay aboneliğini buraya kaydedebilir ve IoT Hub'ınızda oluşturulan her cihaz için bildirimler alabilirsiniz. Bu öğretici için isteğe bağlı alanları belirli cihazlar için filtre uygulamak için kullanalım. Seçin **ek özellikler** formun üstünde. 
+5. Olay aboneliğini buraya kaydedebilir ve IoT Hub'ınızda oluşturulan her cihaz için bildirimler alabilirsiniz. Bu öğreticide, belirli cihazları filtrelemek için isteğe bağlı alanları kullanalım. Formun üst kısmında **ek özellikler** ' i seçin. 
 
-6. Aşağıdaki filtreler oluşturun:
+6. Aşağıdaki filtreleri oluşturun:
 
-   * **Konu ile başlayan**: Girin `devices/Building1_` bina 1'deki cihaz etkinlikleri filtrelemek için.
-   * **Konu ile sona erer**: Girin `_Temperature` yeniden oluşturulan Sıcaklığa ilgili cihaz olayları filtrelemek için.
+   * **Konu Şununla Başlar**: Building1 içindeki cihaz olaylarını filtrelemek için `devices/Building1_` değerini girin.
+   * **Konu Şununla Biter**: Sıcaklıkla ilgili cihaz olaylarını filtrelemek için `_Temperature` değerini girin.
 
 5. Olay aboneliğini kaydetmek için **Oluştur**'u seçin.
 

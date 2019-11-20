@@ -2,17 +2,17 @@
 title: RBAC ve Azure AD'de Azure Kubernetes hizmeti ile denetim küme kaynakları
 description: Azure Kubernetes Service (AKS) rol tabanlı erişim denetimi (RBAC) kullanarak küme kaynaklarına erişimi kısıtlamak için Azure Active Directory grubu üyeliği kullanmayı öğrenin
 services: container-service
-author: iainfoulds
+author: mlearned
 ms.service: container-service
 ms.topic: article
 ms.date: 04/16/2019
-ms.author: iainfou
-ms.openlocfilehash: e974c47d1dfb04f66b622c64a7143d00de87c4cb
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: mlearned
+ms.openlocfilehash: fba54fd23fefbe0029b9a809b23568490f05b23e
+ms.sourcegitcommit: 6a42dd4b746f3e6de69f7ad0107cc7ad654e39ae
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60467553"
+ms.lasthandoff: 07/07/2019
+ms.locfileid: "67616159"
 ---
 # <a name="control-access-to-cluster-resources-using-role-based-access-control-and-azure-active-directory-identities-in-azure-kubernetes-service"></a>Azure Kubernetes hizmetinde rol tabanlı erişim denetimi ve Azure Active Directory kimlikleri kullanarak küme kaynaklarına erişimi denetleme
 
@@ -24,7 +24,7 @@ Bu makalede Azure AD grup üyeliği ad alanlarına erişimi denetlemek ve kaynak
 
 Bu makalede, Azure AD Tümleştirmesi ile etkin olarak mevcut bir AKS kümesi olduğunu varsayar. Bir AKS kümesi gerekirse bkz [Azure Active Directory Tümleştirme ile AKS][azure-ad-aks-cli].
 
-Azure CLI Sürüm 2.0.61 gerekir veya daha sonra yüklü ve yapılandırılmış. Sürümü bulmak için `az --version` komutunu çalıştırın. Yüklemeniz veya yükseltmeniz gerekirse, bkz. [Azure CLI yükleme][install-azure-cli].
+Azure CLI Sürüm 2.0.61 gerekir veya daha sonra yüklü ve yapılandırılmış. Sürümü bulmak için `az --version` komutunu çalıştırın. Yükleme veya yükseltme yapmanız gerekiyorsa bkz. [Azure CLI'yı yükleme][install-azure-cli].
 
 ## <a name="create-demo-groups-in-azure-ad"></a>Azure AD'de tanıtım grup oluşturma
 
@@ -37,7 +37,7 @@ Bu makalede, küme kaynaklarında erişim Kubernetes RBAC ve Azure AD'ye nasıl 
 
 Üretim ortamlarında, var olan kullanıcıları ve grupları Azure AD kiracısı içinde kullanabilirsiniz.
 
-İlk olarak, kaynak kimliği bölümünü kullanarak AKS kümenizin alın [az aks show] [ az-aks-show] komutu. Kaynak Kimliği adlı bir değişkene atayın *AKS_ID* böylece ek komutlar başvurulabilir.
+İlk olarak, kaynak kimliği bölümünü kullanarak AKS kümenizin alın [az aks show][az-aks-show] komutu. Kaynak Kimliği adlı bir değişkene atayın *AKS_ID* böylece ek komutlar başvurulabilir.
 
 ```azurecli-interactive
 AKS_ID=$(az aks show \
@@ -46,13 +46,13 @@ AKS_ID=$(az aks show \
     --query id -o tsv)
 ```
 
-İlk örnek grubu kullanarak uygulama geliştiricileri için Azure AD'de oluşturma [az ad grubu oluşturmak] [ az-ad-group-create] komutu. Aşağıdaki örnekte adlı bir grup oluşturur *appdev*:
+İlk örnek grubu kullanarak uygulama geliştiricileri için Azure AD'de oluşturma [az ad grubu oluşturmak][az-ad-group-create] komutu. Aşağıdaki örnekte adlı bir grup oluşturur *appdev*:
 
 ```azurecli-interactive
 APPDEV_ID=$(az ad group create --display-name appdev --mail-nickname appdev --query objectId -o tsv)
 ```
 
-Bir Azure rol ataması için şimdi oluşturun *appdev* kullanarak grup [az rol ataması oluşturma] [ az-role-assignment-create] komutu. Bu atama kullanmak grubunun bir üyesi sağlar `kubectl` bunları vererek bir AKS kümesi ile etkileşim kurmak için *Azure Kubernetes hizmeti küme kullanıcı rolünü*.
+Bir Azure rol ataması için şimdi oluşturun *appdev* kullanarak grup [az rol ataması oluşturma][az-role-assignment-create] komutu. Bu atama kullanmak grubunun bir üyesi sağlar `kubectl` bunları vererek bir AKS kümesi ile etkileşim kurmak için *Azure Kubernetes hizmeti küme kullanıcı rolünü*.
 
 ```azurecli-interactive
 az role assignment create \
@@ -83,7 +83,7 @@ az role assignment create \
 
 SREs ve belgelerimizin uygulama geliştiricileri için Azure AD'de oluşturulan iki örnek grupları ile artık iki örnek kullanıcı oluşturma olanak tanır. Makalenin sonunda RBAC tümleştirme test etmek için bu hesapları ile AKS kümesi için oturum açın.
 
-Azure AD kullanarak ilk kullanıcı hesabı oluşturma [az ad kullanıcısı oluşturun] [ az-ad-user-create] komutu.
+Azure AD kullanarak ilk kullanıcı hesabı oluşturma [az ad kullanıcısı oluşturun][az-ad-user-create] komutu.
 
 Aşağıdaki örnek, bir kullanıcı görünen adı oluşturur. *AKS geliştirme* ve kullanıcı asıl adı (UPN) `aksdev@contoso.com`. Azure AD kiracınız için doğrulanmış bir etki alanı eklemek için UPN güncelleştirin (değiştirin *contoso.com* kendi etki alanı ile) ve kendi güvenli `--password` kimlik bilgisi:
 
@@ -95,7 +95,7 @@ AKSDEV_ID=$(az ad user create \
   --query objectId -o tsv)
 ```
 
-Artık kullanıcı eklemek *appdev* önceki kullanarak bölümünde oluşturduğunuz grup [az ad grubuna üye ekleme] [ az-ad-group-member-add] komutu:
+Artık kullanıcı eklemek *appdev* önceki kullanarak bölümünde oluşturduğunuz grup [az ad grubuna üye ekleme][az-ad-group-member-add] komutu:
 
 ```azurecli-interactive
 az ad group member add --group appdev --member-id $AKSDEV_ID
@@ -119,13 +119,13 @@ az ad group member add --group opssre --member-id $AKSSRE_ID
 
 Azure AD grupları ve kullanıcılar artık oluşturulur. Azure rol atamaları, Grup üyelerinin bir AKS kümesi normal bir kullanıcı olarak bağlanmak için oluşturulmuştur. Şimdi, bu belirli kaynakları farklı gruplara erişim izni vermek için AKS kümesi yapılandıralım.
 
-İlk olarak, yönetici kimlik bilgilerini kullanarak küme alın [az aks get-credentials] [ az-aks-get-credentials] komutu. Aşağıdaki bölümlerde her birinde normal alma *kullanıcı* küme kimlik bilgilerini Azure AD kimlik doğrulaması görmek için akışı çalıştırılırken.
+İlk olarak, yönetici kimlik bilgilerini kullanarak küme alın [az aks get-credentials][az-aks-get-credentials] komutu. Aşağıdaki bölümlerde her birinde normal alma *kullanıcı* küme kimlik bilgilerini Azure AD kimlik doğrulaması görmek için akışı çalıştırılırken.
 
 ```azurecli-interactive
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster --admin
 ```
 
-Ad alanı kullanarak AKS kümesi oluşturma [kubectl ad alanı oluşturma] [ kubectl-create] komutu. Aşağıdaki örnek, bir ad alanı adı oluşturur *geliştirme*:
+Ad alanı kullanarak AKS kümesi oluşturma [kubectl ad alanı oluşturma][kubectl-create] komutu. Aşağıdaki örnek, bir ad alanı adı oluşturur *geliştirme*:
 
 ```console
 kubectl create namespace dev
@@ -154,13 +154,13 @@ rules:
   verbs: ["*"]
 ```
 
-Rolü kullanarak oluşturma [kubectl uygulamak] [ kubectl-apply] komut ve dosya YAML bildiriminizi adını belirtin:
+Rolü kullanarak oluşturma [kubectl uygulamak][kubectl-apply] komut ve dosya YAML bildiriminizi adını belirtin:
 
 ```console
 kubectl apply -f role-dev-namespace.yaml
 ```
 
-Ardından, kaynak Kimliğini alın *appdev* kullanarak grup [az ad Grup show] [ az-ad-group-show] komutu. Bu grup, sonraki adımda bir RoleBinding konu olarak ayarlanır.
+Ardından, kaynak Kimliğini alın *appdev* kullanarak grup [az ad Grup show][az-ad-group-show] komutu. Bu grup, sonraki adımda bir RoleBinding konu olarak ayarlanır.
 
 ```azurecli-interactive
 az ad group show --group appdev --query objectId -o tsv
@@ -184,7 +184,7 @@ subjects:
   name: groupObjectId
 ```
 
-RoleBinding kullanarak oluşturduğunuz [kubectl uygulamak] [ kubectl-apply] komut ve dosya YAML bildiriminizi adını belirtin:
+RoleBinding kullanarak oluşturduğunuz [kubectl uygulamak][kubectl-apply] komut ve dosya YAML bildiriminizi adını belirtin:
 
 ```console
 kubectl apply -f rolebinding-dev-namespace.yaml
@@ -194,7 +194,7 @@ kubectl apply -f rolebinding-dev-namespace.yaml
 
 Artık, bir ad alanı, rol ve RoleBinding SREs için oluşturmak için önceki adımları yineleyin.
 
-İlk olarak, bir ad alanı oluşturulur *sre* kullanarak [kubectl ad alanı oluşturma] [ kubectl-create] komutu:
+İlk olarak, bir ad alanı oluşturulur *sre* kullanarak [kubectl ad alanı oluşturma][kubectl-create] komutu:
 
 ```console
 kubectl create namespace sre
@@ -219,13 +219,13 @@ rules:
   verbs: ["*"]
 ```
 
-Rolü kullanarak oluşturma [kubectl uygulamak] [ kubectl-apply] komut ve dosya YAML bildiriminizi adını belirtin:
+Rolü kullanarak oluşturma [kubectl uygulamak][kubectl-apply] komut ve dosya YAML bildiriminizi adını belirtin:
 
 ```console
 kubectl apply -f role-sre-namespace.yaml
 ```
 
-İçin kaynak Kimliğini alın *opssre* kullanarak grup [az ad Grup show] [ az-ad-group-show] komutu:
+İçin kaynak Kimliğini alın *opssre* kullanarak grup [az ad Grup show][az-ad-group-show] komutu:
 
 ```azurecli-interactive
 az ad group show --group opssre --query objectId -o tsv
@@ -249,7 +249,7 @@ subjects:
   name: groupObjectId
 ```
 
-RoleBinding kullanarak oluşturduğunuz [kubectl uygulamak] [ kubectl-apply] komut ve dosya YAML bildiriminizi adını belirtin:
+RoleBinding kullanarak oluşturduğunuz [kubectl uygulamak][kubectl-apply] komut ve dosya YAML bildiriminizi adını belirtin:
 
 ```console
 kubectl apply -f rolebinding-sre-namespace.yaml
@@ -259,13 +259,13 @@ kubectl apply -f rolebinding-sre-namespace.yaml
 
 Şimdi, oluşturup bir AKS kümesindeki kaynaklarını yönetme şimdi beklenen izinleri test etme. Bu örneklerde, zamanlayabilir ve kullanıcının atanan ad alanında pod'ları görüntüleyin. Daha sonra zamanlama ve görünüm pod atanan ad alanı dışında deneyin.
 
-İlk olarak, sıfırlama *kubeconfig'i denetleyin* bağlamını kullanarak [az aks get-credentials] [ az-aks-get-credentials] komutu. Bir önceki bölümde Küme Yöneticisi kimlik bilgilerini kullanarak bağlamını ayarlayın. Yönetici kullanıcı, Azure AD oturum açma istemleri atlar. Olmadan `--admin` parametresi, kullanıcı bağlamı ile Azure AD kimlik doğrulamasından geçmesi için tüm istekleri gerektiren uygulanır.
+İlk olarak, sıfırlama *kubeconfig'i denetleyin* bağlamını kullanarak [az aks get-credentials][az-aks-get-credentials] komutu. Bir önceki bölümde Küme Yöneticisi kimlik bilgilerini kullanarak bağlamını ayarlayın. Yönetici kullanıcı, Azure AD oturum açma istemleri atlar. Olmadan `--admin` parametresi, kullanıcı bağlamı ile Azure AD kimlik doğrulamasından geçmesi için tüm istekleri gerektiren uygulanır.
 
 ```azurecli-interactive
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster --overwrite-existing
 ```
 
-Temel bir NGINX pod kullanarak zamanlama [çalıştırma kubectl] [ kubectl-run] komutunu *geliştirme* ad alanı:
+Temel bir NGINX pod kullanarak zamanlama [çalıştırma kubectl][kubectl-run] komutunu *geliştirme* ad alanı:
 
 ```console
 kubectl run --generator=run-pod/v1 nginx-dev --image=nginx --namespace dev
@@ -281,7 +281,7 @@ To sign in, use a web browser to open the page https://microsoft.com/devicelogin
 pod/nginx-dev created
 ```
 
-Artık [kubectl pod'ları alma] [ kubectl-get] pod'ların görüntülemek için komut *geliştirme* ad alanı.
+Artık [kubectl pod'ları alma][kubectl-get] pod'ların görüntülemek için komut *geliştirme* ad alanı.
 
 ```console
 kubectl get pods --namespace dev
@@ -298,7 +298,7 @@ nginx-dev   1/1     Running   0          4m
 
 ### <a name="create-and-view-cluster-resources-outside-of-the-assigned-namespace"></a>Oluşturun ve atanan ad alanı dışında küme kaynaklarını görüntüleyin
 
-Pod'ların dışında görüntülemek şimdi deneyin *geliştirme* ad alanı. Kullanım [kubectl pod'ları alma] [ kubectl-get] yeniden görmek için bu kez komut `--all-namespaces` gibi:
+Pod'ların dışında görüntülemek şimdi deneyin *geliştirme* ad alanı. Kullanım [kubectl pod'ları alma][kubectl-get] yeniden görmek için bu kez komut `--all-namespaces` gibi:
 
 ```console
 kubectl get pods --all-namespaces
@@ -324,7 +324,7 @@ Error from server (Forbidden): pods is forbidden: User "aksdev@contoso.com" cann
 
 Müşterilerimizin Azure AD grubu üyeliği ve Kubernetes RBAC farklı kullanıcılar ve gruplar arasında düzgün çalışmasını doğrulamak için önceki komutların olarak oturum açarken deneyin *opssre* kullanıcı.
 
-Sıfırlama *kubeconfig'i denetleyin* bağlamını kullanarak [az aks get-credentials] [ az-aks-get-credentials] için önceden önbelleğe alınan kimlik doğrulama belirteci temizler komut *aksdev*  kullanıcı:
+Sıfırlama *kubeconfig'i denetleyin* bağlamını kullanarak [az aks get-credentials][az-aks-get-credentials] için önceden önbelleğe alınan kimlik doğrulama belirteci temizler komut *aksdev* kullanıcı:
 
 ```azurecli-interactive
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster --overwrite-existing

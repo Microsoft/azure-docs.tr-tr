@@ -1,21 +1,21 @@
 ---
-title: Azure’da Cloudyn ile CSP İş Ortağı bilgilerini kullanarak kaydolma | Microsoft Docs
+title: Azure 'da Cloudyn ile CSP Iş ortağı bilgilerini kullanarak kaydolun
 description: Bu hızlı başlangıçta bir Cloudyn deneme aboneliği oluşturmak ve Cloudyn portalında oturum açmak için gereken kayıt işlemleri açıklanmaktadır.
 services: cost-management
 keywords: ''
 author: bandersmsft
 ms.author: banders
-ms.date: 05/20/2019
+ms.date: 11/18/2019
 ms.topic: quickstart
 ms.custom: seodec18
 ms.service: cost-management
 manager: benshy
-ms.openlocfilehash: 17f4069e38b4e4f0ee7a4ef4acc4535198b62b02
-ms.sourcegitcommit: e9a46b4d22113655181a3e219d16397367e8492d
+ms.openlocfilehash: 28bce759d6bfe3faa08581bc2bc3ee5441b19974
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65969187"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74173867"
 ---
 # <a name="register-with-the-csp-partner-program-and-view-cost-data"></a>CSP İş Ortağı programına kaydolun ve maliyetle ilgili verileri görüntüleyin
 
@@ -30,12 +30,14 @@ CSP iş ortağı olarak, Cloudyn’e kaydolabilirsiniz. Kaydınız Cloudyn porta
 > Daha fazla bilgi için bkz. [İş Ortağı Merkezi API’sine bağlanma](https://msdn.microsoft.com/library/partnercenter/mt709136.aspx).
 >
 > Cloudyn’e erişim izni, CSP Dolaylı Sağlayıcısı Cloudyn’e kaydolduktan sonra CSP Dolaylı Satıcılarına sağlanabilir. Daha sonra, CSP Dolaylı Satıcıları,Azure müşterileri ile aboneliklerine Cloudyn erişimi sunabilir.
+>
+>Cloudy, Microsoft güvenli uygulama modeliyle şikayet edilir. Daha fazla bilgi için bkz. [güvenli uygulama modeli çerçevesini etkinleştirme](/partner-center/develop/enable-secure-app-model).
 
 ## <a name="sign-in-to-azure"></a>Azure'da oturum açma
 
 - https://portal.azure.com adresinden Azure portalında oturum açın.
 
-## <a name="register-with-cloudyn"></a>Cloudyn’e kaydolma
+## <a name="register-with-cloudyn"></a>Cloudyn ile kaydetme
 
 1. Azure portalında, hizmetler listesinde **Maliyet Yönetimi + Faturalama**’ya tıklayın.
 2. **Genel Bakış** altında, **Cloudyn**’e tıklayın  
@@ -59,7 +61,7 @@ CSP iş ortağı olarak, Cloudyn’e kaydolabilirsiniz. Kaydınız Cloudyn porta
 
 İş Ortağı Merkezi API’sine, varsayılan olarak yalnızca CSP’ler erişebilir. Ancak, doğrudan bir CSP sağlayıcısı, Cloudyn’ndeki varlık gruplarını kullanarak dolaylı CSP müşterileri veya iş ortakları için erişim yapılandırabilir.
 
-Dolaylı CSP müşterileri veya iş ortakları için erişimi etkinleştirmek için adımları [kaydetme Cloudyn'e](#register-with-cloudyn) bir deneme kaydı oluşturun. Şimdi, aşağıdaki adımları izleyerek Cloudyn varlık gruplarını kullanarak dolaylı CSP verilerini gruplandıracağız. Sonra, varlık gruplarına uygun kullanıcı izinlerini atayacağız.
+Dolaylı CSP müşterileri veya iş ortakları için erişimi etkinleştirmek üzere, bir deneme kaydı kurmak için [Cloudyn 'e kaydolma](#register-with-cloudyn) bölümündeki adımları izleyin. Şimdi, aşağıdaki adımları izleyerek Cloudyn varlık gruplarını kullanarak dolaylı CSP verilerini gruplandıracağız. Sonra, varlık gruplarına uygun kullanıcı izinlerini atayacağız.
 
 1. [Varlık oluşturma ](tutorial-user-access.md#create-and-manage-entities) konusundaki bilgilerle varlık grubu oluşturun.
 2. [Maliyet Varlıklarına abonelik atama](https://www.youtube.com/watch?v=d9uTWSdoQYo) konusundaki adımları izleyin. Dolaylı CSP müşterisinin hesabını ve önceden oluşturduğunuz varlıkla ilgili Azure aboneliğini ilişkilendirin.

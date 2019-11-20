@@ -16,19 +16,19 @@ ms.workload: data-services
 ms.custom: seodec18
 ms.date: 12/06/2018
 ms.author: shvija
-ms.openlocfilehash: c8f2dba8ff30ceae4085d96640623a01b6784b1e
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ff6466ddc6b64dfe85ebfb190205859aeb39ad17
+ms.sourcegitcommit: 55f7fc8fe5f6d874d5e886cb014e2070f49f3b94
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60822317"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71260830"
 ---
 # <a name="set-up-diagnostic-logs-for-an-azure-event-hub"></a>Tanılama günlükleri için bir Azure olay hub'ı ayarlama
 
 Azure Event Hubs için iki tür günlüğü görüntüleyebilirsiniz:
 
-* **[Etkinlik günlükleri](../azure-monitor/platform/activity-logs-overview.md)** : Bu günlükler bir proje üzerinde gerçekleştirilen işlemler hakkında bilgi var. Günlükler her zaman etkindir.
-* **[Tanılama günlükleri](../azure-monitor/platform/diagnostic-logs-overview.md)** : Gerçekleşen daha zengin bir görünüm her şeyin için tanılama günlükleri ile bir işi yapılandırabilirsiniz. Tanılama günlüklerine yönelik güncelleştirmeleri ve iş çalışırken gerçekleşen etkinlikler dahil olmak üzere iş silinene kadar iş oluşturulur zamanından kapak etkinlikler.
+* **[Etkinlik günlükleri](../azure-monitor/platform/activity-logs-overview.md)** : Bu günlüklerde bir işte gerçekleştirilen işlemlerle ilgili bilgiler vardır. Günlükler her zaman etkindir.
+* **[Tanılama günlükleri](../azure-monitor/platform/resource-logs-overview.md)** : Tanılama günlüklerini, bir işle gerçekleşen her şeyin daha zengin bir görünümü için yapılandırabilirsiniz. Tanılama günlüklerine yönelik güncelleştirmeleri ve iş çalışırken gerçekleşen etkinlikler dahil olmak üzere iş silinene kadar iş oluşturulur zamanından kapak etkinlikler.
 
 ## <a name="enable-diagnostic-logs"></a>Tanılama günlüklerini etkinleştirme
 
@@ -48,13 +48,13 @@ Tanılama günlükleri, varsayılan olarak devre dışıdır. Tanılama günlük
 
     ![Tanılama günlükleri birinin durumunu değiştirin](./media/event-hubs-diagnostic-logs/image3.png)
 
-5.  İstediğiniz arşiv hedef ayarlayın; Örneğin, bir depolama hesabı, bir olay hub'ı veya Azure İzleyici günlüğe kaydeder.
+5.  İstediğiniz arşiv hedefini ayarlayın; Örneğin, bir depolama hesabı, Olay Hub 'ı veya Azure Izleyici günlükleri.
 
 6.  Yeni tanılama ayarları kaydedin.
 
 Yeni ayarları yaklaşık 10 dakika içinde etkinleşir. Bundan sonra günlüklerini arşivleme yapılandırılmış hedefte görünür **tanılama günlükleri** bölmesi.
 
-Tanılama yapılandırma hakkında daha fazla bilgi için bkz. [Azure tanılama günlükleri'ne genel bakış](../azure-monitor/platform/diagnostic-logs-overview.md).
+Tanılama yapılandırma hakkında daha fazla bilgi için bkz. [Azure tanılama günlükleri'ne genel bakış](../azure-monitor/platform/resource-logs-overview.md).
 
 ## <a name="diagnostic-logs-categories"></a>Tanılama günlükleri kategorileri
 

@@ -1,54 +1,53 @@
 ---
-title: Dizin oluşturucular - Azure Search kullanarak dizin oluşturma için alan eşlemelerini otomatik
-description: Alan adları ve veri gösterimleri farklılıkları dikkate almak için Azure Search dizin oluşturucu alan eşlemelerini yapılandırın.
-ms.date: 05/02/2019
+title: Dizin oluşturucularda alan eşlemeleri
+titleSuffix: Azure Cognitive Search
+description: Dizin oluşturucudaki alan eşlemelerini, alan adlarında ve veri gösterimlerinde farklılıklar için bir hesaba göre yapılandırın.
+manager: nitinme
 author: mgottein
-manager: cgronlun
 ms.author: magottei
-services: search
-ms.service: search
 ms.devlang: rest-api
+ms.service: cognitive-search
 ms.topic: conceptual
-ms.custom: seodec2018
-ms.openlocfilehash: 3546e342b535a122ea4ed3f844cd5e28a76d551a
-ms.sourcegitcommit: 72f1d1210980d2f75e490f879521bc73d76a17e1
+ms.date: 11/04/2019
+ms.openlocfilehash: 72623787cdb27c568fe2b4ec075010674a3996ef
+ms.sourcegitcommit: 5a8c65d7420daee9667660d560be9d77fa93e9c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/14/2019
-ms.locfileid: "67147803"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74124000"
 ---
-# <a name="field-mappings-and-transformations-using-azure-search-indexers"></a>Alan eşlemelerini ve Azure Search dizin oluşturucuyu kullanarak dönüştürmeler
+# <a name="field-mappings-and-transformations-using-azure-cognitive-search-indexers"></a>Azure Bilişsel Arama Dizinleyicileri kullanarak alan eşlemeleri ve dönüştürmeler
 
-Azure Search dizin oluşturucularında kullanılırken, giriş verilerinin şemasını hedef dizininizi oldukça eşleşmiyor bazen bulun. Bu gibi durumlarda, kullandığınız **alan eşlemeleri** dizin oluşturma işlemi sırasında verilerinizi şekillendirmek için.
+Azure Bilişsel Arama Dizinleyicileri kullanırken, bazen giriş verilerinin hedef dizininizin şemasıyla tam olarak eşleşmediğini fark edersiniz. Bu durumlarda, dizin oluşturma işlemi sırasında verilerinizi yeniden şekillendirmek için **alan eşlemelerini** kullanabilirsiniz.
 
-Alan eşlemelerini yararlı olduğu bazı durumlar:
+Alan eşlemelerinin yararlı olduğu bazı durumlar:
 
-* Adlı bir alan veri kaynağınızda bulunan `_id`, ancak Azure Search, bir alt çizgiyle başlayan alan adları izin vermez. Alan eşlemeyi etkili bir şekilde alanı yeniden adlandırma olanak sağlar.
-* Aynı veri kaynağına veri dizinden bazı alanları doldurmak istersiniz. Örneğin, bu alanlara farklı Çözümleyicileri uygulamak isteyebilirsiniz.
-* Bir dizin alanı birden fazla veri kaynağından alınan verilerle doldurmak için kullanmak istediğiniz ve veri kaynakları her farklı alan adları kullanın.
-* İhtiyaç Base64 kodlama veya kod çözme verilerinizi. Alan eşlemelerini desteği birkaç **işlevleri eşleme**, Base64 için kodlama ve kodunu çözme dahil olmak üzere işlevleri.
+* Veri kaynağınız `_id`adlı bir alana sahiptir, ancak Azure Bilişsel Arama alt çizgiyle başlayan alan adlarına izin vermez. Alan eşleme, bir alanı etkili bir şekilde yeniden adlandırmanızı sağlar.
+* Aynı veri kaynağı verilerinden dizindeki çeşitli alanları doldurmak istiyorsunuz. Örneğin, bu alanlara farklı çözümleyiciler uygulamak isteyebilirsiniz.
+* Bir dizin alanını birden fazla veri kaynağından alınan verilerle doldurmak istiyorsunuz ve veri kaynakları her biri farklı alan adları kullanır.
+* Verilerinizi Base64 olarak kodlamanız veya kodu çözmelisiniz. Alan eşlemeleri, Base64 kodlaması ve kod çözme işlevleri dahil olmak üzere çeşitli **eşleme işlevlerini**destekler.
 
 > [!NOTE]
-> Azure Search dizin oluşturucularında alan eşleme özelliği, veri dönüştürme için birkaç seçenek ile dizin alanları veri alanları eşleştirmek için basit bir yol sağlar. Daha karmaşık veri dizini için kolay bir forma şekillendirmek için ön işleme gerektirebilir.
+> Azure Bilişsel Arama dizin oluşturucularının alan eşleme özelliği, veri dönüştürme için birkaç seçenekten veri alanlarını dizin alanlarıyla eşlemek için basit bir yol sağlar. Daha karmaşık veriler, dizin oluşturmanın kolay bir biçimde yeniden şekillendirilmesi için önceden işleme gerektirebilir.
 >
-> Microsoft Azure Data Factory içeri aktarma ve veri dönüştürme için bir güçlü bulut tabanlı çözümüdür. Ayrıca, dizin oluşturma durdurulmadan önce kaynak verileri dönüştürmek için kod yazabilirsiniz. Kod örnekleri için bkz: [ilişkisel verileri modelleme](search-example-adventureworks-modeling.md) ve [çok düzeyli modeller Model](search-example-adventureworks-multilevel-faceting.md).
+> Microsoft Azure Data Factory, verileri içeri ve dönüştürme için güçlü bir bulut tabanlı çözümdür. Ayrıca, dizin oluşturmadan önce kaynak verileri dönüştürmek için kod yazabilirsiniz. Kod örnekleri için bkz. [model ilişkisel verileri modelleme](search-example-adventureworks-modeling.md) ve [çok düzeyli modelleri modelleyin](search-example-adventureworks-multilevel-faceting.md).
 >
 
-## <a name="set-up-field-mappings"></a>Alan eşlemelerini ayarlamak
+## <a name="set-up-field-mappings"></a>Alan eşlemelerini ayarlama
 
-Bir alan eşlemesi, üç bölümden oluşur:
+Bir alan eşlemesi üç bölümden oluşur:
 
-1. A `sourceFieldName`, veri kaynağınızdaki bir alanı temsil eder. Bu özellik gereklidir.
-2. İsteğe bağlı `targetFieldName`, arama dizininizdeki bir alanı temsil eder. Atlanırsa, veri kaynağına olduğu gibi aynı adı kullanılır.
-3. İsteğe bağlı `mappingFunction`, önceden tanımlanmış İşlevler, birkaç birini kullanarak verilerinizi dönüştürebilirsiniz. İşlevlerin tam listesi [aşağıda](#mappingFunctions).
+1. Veri kaynağınızdaki bir alanı temsil eden `sourceFieldName`. Bu özellik gereklidir.
+2. Arama dizininizdeki bir alanı temsil eden isteğe bağlı `targetFieldName`. Atlanırsa, veri kaynağıyla aynı ad kullanılır.
+3. Önceden tanımlanmış birkaç işlevden birini kullanarak verilerinizi dönüştürebilen isteğe bağlı bir `mappingFunction`. İşlevlerin tam listesi [aşağıda](#mappingFunctions)verilmiştir.
 
-Alan eşlemelerini eklenir `fieldMappings` dizin oluşturucu tanımı dizisi.
+Alan eşlemeleri, Dizin Oluşturucu tanımının `fieldMappings` dizisine eklenir.
 
-## <a name="map-fields-using-the-rest-api"></a>REST API kullanarak alanlarını eşleme
+## <a name="map-fields-using-the-rest-api"></a>REST API kullanarak alanları eşleme
 
-Alan eşlemelerini kullanarak yeni bir dizin oluşturucu oluştururken ekleyebilirsiniz [dizin oluşturucu oluşturma](https://docs.microsoft.com/rest/api/searchservice/create-Indexer) API isteği. Alan eşlemelerini kullanarak varolan bir dizin oluşturucu, yönettiğiniz [güncelleştirme dizin oluşturucu](https://docs.microsoft.com/rest/api/searchservice/update-indexer) API isteği.
+[Create Indexer](https://docs.microsoft.com/rest/api/searchservice/create-Indexer) API isteği kullanarak yeni bir Dizin Oluşturucu oluştururken alan eşlemeleri ekleyebilirsiniz. Var olan bir dizin oluşturucunun alan eşlemelerini [güncelleştirme Dizin Oluşturucu](https://docs.microsoft.com/rest/api/searchservice/update-indexer) API isteği kullanarak yönetebilirsiniz.
 
-Örneğin, bir hedef alana farklı bir ada sahip bir kaynak alan eşleme şöyledir:
+Örneğin, kaynak alanı farklı bir ada sahip bir hedef alanla eşleme aşağıda verilmiştir:
 
 ```JSON
 
@@ -62,7 +61,7 @@ api-key: [admin key]
 }
 ```
 
-Kaynak alan üzerinde birden çok alan eşlemeleri başvurulabilir. Aşağıdaki örnek, "aynı kaynak alanı iki farklı dizin alanlarına kopyalanıyor alana dizisinde çatallaştırmak" gösterilmektedir:
+Kaynak alana, birden çok alan eşlemesinde başvurulabilir. Aşağıdaki örnek, bir alanın nasıl "çatallı" olduğunu gösterir ve aynı kaynak alanı iki farklı Dizin alanına kopyalar:
 
 ```JSON
 
@@ -73,17 +72,17 @@ Kaynak alan üzerinde birden çok alan eşlemeleri başvurulabilir. Aşağıdaki
 ```
 
 > [!NOTE]
-> Azure arama, alan eşlemelerini alan ve işlev adları çözümlemek için büyük küçük harf duyarsız bir karşılaştırma kullanır. Bu (tüm büyük küçük harfleri doğru hale getirmek gerekmez) uygundur, ancak veri kaynağı ya da dizin küçük harfe göre farklılık alanları olamayacağı anlamına gelir.  
+> Azure Bilişsel Arama, alan eşlemelerinde alan ve işlev adlarını çözümlemek için büyük/küçük harfe duyarsız karşılaştırma kullanır. Bu kullanışlı bir durumdur (tüm büyük küçük harfe sahip olmanız gerekmez), ancak veri kaynağınız veya dizininizin yalnızca büyük/küçük harfe göre farklı alanlar olamayacağı anlamına gelir.  
 >
 >
 
-## <a name="map-fields-using-the-net-sdk"></a>.NET SDK kullanarak alanlarını eşleme
+## <a name="map-fields-using-the-net-sdk"></a>.NET SDK kullanarak alanları eşleme
 
-.NET SDK kullanarak alan eşlemelerini tanımlamak [FieldMapping](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.fieldmapping) özellikleri olan sınıf `SourceFieldName` ve `TargetFieldName`ve isteğe bağlı `MappingFunction` başvuru.
+.NET SDK 'da, özellikleri `SourceFieldName` ve `TargetFieldName`ve isteğe bağlı bir `MappingFunction` başvurusu olan [FieldMapping](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.fieldmapping) sınıfını kullanarak alan eşlemelerini tanımlarsınız.
 
-Alan eşlemelerini dizin oluşturucu oluştururken veya daha sonra doğrudan ayarlayarak belirtebilirsiniz `Indexer.FieldMappings` özelliği.
+Dizin oluşturucuyu oluştururken veya daha sonra `Indexer.FieldMappings` özelliğini ayarlayarak alan eşlemelerini belirtebilirsiniz.
 
-Aşağıdaki C# örnek, bir dizin oluşturucu oluştururken alan eşlemelerini ayarlar.
+Aşağıdaki C# örnek, bir Dizin Oluşturucu oluştururken alan eşlemelerini ayarlar.
 
 ```csharp
   List<FieldMapping> map = new List<FieldMapping> {
@@ -105,26 +104,28 @@ Aşağıdaki C# örnek, bir dizin oluşturucu oluştururken alan eşlemelerini a
 
 <a name="mappingFunctions"></a>
 
-## <a name="field-mapping-functions"></a>Alan eşlemesi işlevleri
+## <a name="field-mapping-functions"></a>Alan eşleme işlevleri
 
-Dizin içinde depolanmadan önce bir alanda eşleştirme işlevi, bir alanın içeriğini dönüştürür. Aşağıdaki eşleme işlevleri şu anda desteklenmektedir:
+Alan eşleme işlevi, bir alanın içeriğini dizinde depolanmadan önce dönüştürür. Şu eşleme işlevleri şu anda destekleniyor:
 
 * [base64Encode](#base64EncodeFunction)
 * [base64Decode](#base64DecodeFunction)
 * [extractTokenAtPosition](#extractTokenAtPositionFunction)
 * [jsonArrayToStringCollection](#jsonArrayToStringCollectionFunction)
+* [urlEncode](#urlEncodeFunction)
+* [URL kod çözme](#urlDecodeFunction)
 
 <a name="base64EncodeFunction"></a>
 
 ### <a name="base64encode-function"></a>base64Encode işlevi
 
-Gerçekleştirir *URL güvenli* giriş dizesi Base64 kodlaması. UTF-8 olarak kodlanmış giriş olduğunu varsayar.
+Giriş dizesinin *URL güvenli* Base64 kodlamasını gerçekleştirir. Girişin UTF-8 kodlamalı olduğunu varsayar.
 
-#### <a name="example---document-key-lookup"></a>Örnek - Belge anahtar arama
+#### <a name="example---document-key-lookup"></a>Örnek-belge anahtarı arama
 
-URL güvenli yalnızca karakter, bir Azure Search belge anahtarında görünebilir (Müşteriler kullanarak belgenin yönelik verebilmesi gerektiğinden [arama API'si](https://docs.microsoft.com/rest/api/searchservice/lookup-document) ). Kaynak alanı anahtarınız için URL güvenli olmayan karakterleri içeriyorsa, kullanabileceğiniz `base64Encode` zaman dizin oluşturma sırasında dönüştürmek için işlevi.
+Azure Bilişsel Arama belge anahtarında yalnızca URL güvenli karakterler görünebilir (çünkü müşterilerin [Arama API](https://docs.microsoft.com/rest/api/searchservice/lookup-document) 'sini kullanarak belgeyi ele alabilmesi gerekir). Anahtarınızın kaynak alanı URL-güvenli olmayan karakterler içeriyorsa, `base64Encode` işlevini dizin oluşturma sırasında dönüştürmek için kullanabilirsiniz.
 
-Arama zaman şifrelenmiş anahtar aldığınızda, ardından kullanabilirsiniz `base64Decode` özgün anahtar değerini almak için işlev ve, kaynak belge almak için kullanın.
+Arama zamanında kodlanmış anahtarı aldığınızda, özgün anahtar değerini almak için `base64Decode` işlevini kullanabilir ve bunu kaynak belgeyi almak için kullanabilirsiniz.
 
 ```JSON
 
@@ -139,19 +140,19 @@ Arama zaman şifrelenmiş anahtar aldığınızda, ardından kullanabilirsiniz `
   }]
  ```
 
-Eşleme işleviniz için bir parametre özelliği dahil etmezseniz, değeri varsayılan olarak `{"useHttpServerUtilityUrlTokenEncode" : true}`.
+Eşleme işleviniz için bir Parameters özelliği eklemezseniz, bu değer varsayılan olarak `{"useHttpServerUtilityUrlTokenEncode" : true}`.
 
-Azure arama, iki farklı Base64 kodlamaları destekler. Kodlama ve kod çözme aynı alanı aynı parametreleri kullanmanız gerekir. Daha fazla bilgi için [base64 kodlama seçenekleri](#base64details) hangi parametrelerin kullanılacağını karar vermek için.
+Azure Bilişsel Arama iki farklı Base64 kodlaması destekler. Aynı alanı kodlarken ve kodunu çözerken aynı parametreleri kullanmanız gerekir. Daha fazla bilgi için bkz. hangi parametrelerin kullanılacağına karar vermek için [Base64 kodlama seçenekleri](#base64details) .
 
 <a name="base64DecodeFunction"></a>
 
 ### <a name="base64decode-function"></a>base64Decode işlevi
 
-Base64 giriş dizesi çözer. Girdi olarak kabul edilir bir *URL güvenli* Base64 ile kodlanmış dize.
+Giriş dizesinin Base64 kodunu çözme işlemini gerçekleştirir. Girişin, *URL-güvenli* Base64 kodlamalı bir dize olduğu varsayılır.
 
-#### <a name="example---decode-blob-metadata-or-urls"></a>Örnek - blob meta verilerini veya URL'leri kodunu çözme
+#### <a name="example---decode-blob-metadata-or-urls"></a>Örnek-blob meta verileri veya URL kodunu çöz
 
-Veri kaynağınızı blob meta verileri dizeler veya düz metin olarak aranabilir yapmak istediğiniz web URL'leri gibi Base64 ile kodlanmış dizeleri içerebilir. Kullanabileceğiniz `base64Decode` kodlanmış verileri geri arama dizininizi doldurulurken normal dizelere etkinleştirmek için işlevi.
+Kaynak verileriniz, düz metin olarak aranabilir olmasını istediğiniz blob meta veri dizeleri veya Web URL 'Leri gibi Base64 kodlamalı dizeler içerebilir. Arama dizininizi doldururken, kodlanmış verileri normal dizelere geri döndürmek için `base64Decode` işlevini kullanabilirsiniz.
 
 ```JSON
 
@@ -166,45 +167,48 @@ Veri kaynağınızı blob meta verileri dizeler veya düz metin olarak aranabili
   }]
 ```
 
-Parametre özelliği dahil etmezseniz, değeri varsayılan olarak `{"useHttpServerUtilityUrlTokenEncode" : true}`.
+Bir Parameters özelliği eklemezseniz, `{"useHttpServerUtilityUrlTokenEncode" : true}`değeri varsayılan olarak belirlenmiştir.
 
-Azure arama, iki farklı Base64 kodlamaları destekler. Kodlama ve kod çözme aynı alanı aynı parametreleri kullanmanız gerekir. Daha fazla ayrıntı için [base64 kodlama seçenekleri](#base64details) hangi parametrelerin kullanılacağını karar vermek için.
+Azure Bilişsel Arama iki farklı Base64 kodlaması destekler. Aynı alanı kodlarken ve kodunu çözerken aynı parametreleri kullanmanız gerekir. Daha ayrıntılı bilgi için bkz. hangi parametrelerin kullanılacağına karar vermek için [Base64 kodlama seçenekleri](#base64details) .
 
 <a name="base64details"></a>
 
 #### <a name="base64-encoding-options"></a>Base64 kodlama seçenekleri
 
-Azure arama, iki farklı Base64 kodlamaları destekler: **HttpServerUtility URL belirteci**, ve **doldurma olmadan URL güvenli Base64 kodlaması**. Dizin oluşturma sırasında base64 ile kodlanmış bir dize daha sonra aynı kodlama seçeneklerle çözülmüş, aksi takdirde sonuç, özgün eşleşmeyecektir.
+Azure Bilişsel Arama, URL güvenli Base64 kodlamasını ve normal Base64 kodlamasını destekler. Dizin oluşturma sırasında Base64 kodlamalı bir dize, daha sonra aynı kodlama seçenekleriyle yeniden oluşturulmalıdır, aksi takdirde sonuç orijinalle eşleşmez.
 
-Varsa `useHttpServerUtilityUrlTokenEncode` veya `useHttpServerUtilityUrlTokenDecode` kodlama ve sırasıyla kod çözme için parametre ayarlanmış `true`, ardından `base64Encode` gibi davranan [HttpServerUtility.UrlTokenEncode](https://msdn.microsoft.com/library/system.web.httpserverutility.urltokenencode.aspx) ve `base64Decode` gibi davranır [HttpServerUtility.UrlTokenDecode](https://msdn.microsoft.com/library/system.web.httpserverutility.urltokendecode.aspx).
+Sırasıyla kodlama ve kod çözme için `useHttpServerUtilityUrlTokenEncode` veya `useHttpServerUtilityUrlTokenDecode` parametreleri `true`olarak ayarlanırsa, `base64Encode` [HttpServerUtility. Urltokenencoding](https://msdn.microsoft.com/library/system.web.httpserverutility.urltokenencode.aspx) gibi davranır ve `base64Decode` [HttpServerUtility. urltokençözmede](https://msdn.microsoft.com/library/system.web.httpserverutility.urltokendecode.aspx)gibi davranır.
 
-Tam .NET Framework kullanmıyorsanız (diğer bir deyişle, .NET Core veya başka bir framework kullanıyorsanız) Azure arama davranışını benzetmek için anahtar değerler üretmek için sonra ayarlamalısınız `useHttpServerUtilityUrlTokenEncode` ve `useHttpServerUtilityUrlTokenDecode` için `false`. Kullandığınız kitaplığı bağlı olarak, Azure Search tarafından kullanılan gördüğünüzden base64 kodlama ve kodunu çözme işlevler farklı olabilir.
+> [!WARNING]
+> Anahtar değerleri üretmek için `base64Encode` kullanılırsa, `useHttpServerUtilityUrlTokenEncode` true olarak ayarlanmalıdır. Anahtar değerleri için yalnızca URL-güvenli Base64 kodlaması kullanılabilir. Anahtar değerlerinde bulunan karakterlere ilişkin kısıtlamaların tam olarak ayarlanması için bkz. [adlandırma kuralları &#40;Azure bilişsel arama&#41; ](https://docs.microsoft.com/rest/api/searchservice/naming-rules) .
 
-Aşağıdaki tabloda farklı base64 Kodlamalar dizenin karşılaştırır `00>00?00`. Base64 işlevleriniz için gereken ek işlem (varsa) belirlemek için kitaplığınızın uygulamak işlevi dizesini kodlayın `00>00?00` ve beklenen çıktıyı çıkışıyla karşılaştırın `MDA-MDA_MDA`.
+Azure Bilişsel Arama .NET kitaplıkları, yerleşik kodlama sağlayan tam .NET Framework kabul eder. `useHttpServerUtilityUrlTokenEncode` ve `useHttpServerUtilityUrlTokenDecode` seçenekleri bu yerleşik işlev özelliğinden faydalanır. .NET Core veya başka bir çerçeve kullanıyorsanız, bu seçenekleri `false` ve Framework kodlama ve kod çözme işlevlerinin doğrudan çağrılması için ayarlamayı öneririz.
 
-| Encoding | Base64 kodlama çıkış | Ek Kitaplık kodladıktan sonra işleme | Ek Kitaplık kodunu çözme önce işleme |
+Aşağıdaki tabloda `00>00?00`dize için farklı Base64 kodlamaları karşılaştırılmaktadır. Base64 işlevleriniz için gerekli ek işlemeyi (varsa) öğrenmek için, kitaplık kodlama işlevinizi dize `00>00?00` uygulayın ve çıktıyı beklenen çıkış `MDA-MDA_MDA`ile karşılaştırın.
+
+| Encoding | Base64 kodlama çıkışı | Kitaplık kodlamasından sonra ek işleme | Kitaplık kod çözmede önce ek işleme |
 | --- | --- | --- | --- |
-| Base64 ile doldurma | `MDA+MDA/MDA=` | Güvenli URL karakterleri kullanın ve doldurma Kaldır | Standart base64 karakter kullanın ve doldurma ekleyin |
-| Base64 doldurma olmadan | `MDA+MDA/MDA` | URL güvenli karakter kullanın | Standart base64 karakter kullanın |
-| URL güvenli base64 ile doldurma | `MDA-MDA_MDA=` | Doldurma Kaldır | Doldurma Ekle |
-| URL güvenli base64 doldurma olmadan | `MDA-MDA_MDA` | None | None |
+| Doldurma ile Base64 | `MDA+MDA/MDA=` | URL-güvenli karakterler kullanın ve doldurmayı kaldırın | Standart Base64 karakterlerini kullanın ve doldurma ekleyin |
+| Doldurma olmadan Base64 | `MDA+MDA/MDA` | URL kullanımı güvenli karakterler | Standart Base64 karakterlerini kullan |
+| URL-doldurma ile güvenli Base64 | `MDA-MDA_MDA=` | Doldurmayı kaldır | Doldurma Ekle |
+| URL-doldurma olmadan güvenli Base64 | `MDA-MDA_MDA` | None | None |
 
 <a name="extractTokenAtPositionFunction"></a>
 
 ### <a name="extracttokenatposition-function"></a>extractTokenAtPosition işlevi
 
-Belirtilen sınırlayıcıyı kullanarak bir dize alanı ayırır ve belirteci, sonuç bölme belirtilen konumda seçer.
+Belirtilen sınırlayıcıyı kullanarak bir dize alanını böler ve ortaya çıkan bölme içinde belirtilen konumda belirteci seçer.
 
-Bu işlev, şu parametreleri kullanır:
+Bu işlev şu parametreleri kullanır:
 
-* `delimiter`: giriş dizesi bölünürken ayırıcı olarak kullanılacak bir dize.
-* `position`: giriş dizesi bölündükten sonra seçmek için belirteci bir tamsayı sıfır tabanlı konumu.
+* `delimiter`: giriş dizesini bölerken ayırıcı olarak kullanılacak bir dize.
+* `position`: giriş dizesi bölünmeden sonra seçmek üzere belirtecin tam sayı sıfır tabanlı konumu.
 
-Örneğin, giriş ise `Jane Doe`, `delimiter` olduğu `" "`(boşluk) ve `position` 0 ise, sonuç `Jane`if `position` 1 ' dir sonuç `Doe`. Mevcut olmayan bir belirteç konumuna başvuruyorsa, hata döndürülür.
+Örneğin, giriş `Jane Doe`, `delimiter` `" "`(boşluk) ve `position` 0 ' dır, sonuç `Jane`olur; `position` 1 ise sonuç `Doe`olur. Konum mevcut olmayan bir belirtece başvuruyorsa bir hata döndürülür.
 
-#### <a name="example---extract-a-name"></a>Örnek - adını Ayıkla
+#### <a name="example---extract-a-name"></a>Örnek-bir adı Ayıkla
 
-Veri kaynağı bir `PersonName` alan ve iki ayrı dizin istediğiniz `FirstName` ve `LastName` alanları. Boşluk karakteri sınırlayıcıyı kullanarak giriş bölmek için bu işlevi kullanabilirsiniz.
+Veri kaynağınız bir `PersonName` alanı içerir ve bunu iki ayrı `FirstName` ve `LastName` alanı olarak dizinlemek istiyorsunuz. Bu işlevi, boşluk karakteri ayırıcı olarak kullanarak girişi ayırmak için kullanabilirsiniz.
 
 ```JSON
 
@@ -225,13 +229,13 @@ Veri kaynağı bir `PersonName` alan ve iki ayrı dizin istediğiniz `FirstName`
 
 ### <a name="jsonarraytostringcollection-function"></a>jsonArrayToStringCollection işlevi
 
-Dizeleri bir JSON dizisi olarak doldurmak için kullanılan bir dize dizisi olarak biçimlendirilen dizeyi dönüştüren bir `Collection(Edm.String)` dizinindeki alan.
+Dize dizisi olarak biçimlendirilen bir dizeyi, dizindeki bir `Collection(Edm.String)` alanı doldurmak için kullanılabilen bir dize dizisine dönüştürür.
 
-Örneğin, giriş dizesi ise `["red", "white", "blue"]`, ardından hedef alan türü `Collection(Edm.String)` üç değerlerle doldurulur `red`, `white`, ve `blue`. JSON dizesi dizileri olarak ayrıştırılamıyor. giriş değerleri için hata döndürülür.
+Örneğin, giriş dizesi `["red", "white", "blue"]`ise, `Collection(Edm.String)` türü hedef alanı üç değer `red`, `white`ve `blue`ile doldurulur. JSON dize dizileri olarak ayrıştırılabilecek giriş değerleri için bir hata döndürülür.
 
-#### <a name="example---populate-collection-from-relational-data"></a>Örnek - ilişkisel veri koleksiyonundan Doldur
+#### <a name="example---populate-collection-from-relational-data"></a>Örnek-koleksiyonu ilişkisel verilerden doldur
 
-Azure SQL veritabanı, doğal olarak eşleşen yerleşik veri türü yok `Collection(Edm.String)` Azure Search'te alanları. Dize koleksiyonu alanları doldurmak için kaynak verileri JSON dize dizisi olarak önceden işleyebilir ve ardından `jsonArrayToStringCollection` işlev eşlemesi.
+Azure SQL veritabanı, Azure Bilişsel Arama `Collection(Edm.String)` alanları için doğal olarak eşleyen yerleşik bir veri türüne sahip değil. Dize koleksiyonu alanlarını doldurmak için, kaynak verilerinizi bir JSON dize dizisi olarak önceden işleyebilir ve sonra `jsonArrayToStringCollection` Mapping işlevini kullanabilirsiniz.
 
 ```JSON
 
@@ -242,4 +246,52 @@ Azure SQL veritabanı, doğal olarak eşleşen yerleşik veri türü yok `Collec
   }]
 ```
 
-Dizin koleksiyon alanlarına ilişkisel verileri dönüştüren ayrıntılı bir örnek için bkz. [ilişkisel verileri modelleme](search-example-adventureworks-modeling.md).
+İlişkisel verileri dizin toplama alanlarına dönüştüren ayrıntılı bir örnek için bkz. [model ilişkisel verileri](search-example-adventureworks-modeling.md).
+
+<a name="urlEncodeFunction"></a>
+
+### <a name="urlencode-function"></a>urlEncode işlevi
+
+Bu işlev, "URL Safe" olması için bir dizeyi kodlamak üzere kullanılabilir. URL 'de izin verilmeyen karakterler içeren bir dizeyle birlikte kullanıldığında, bu işlev "güvenli olmayan" karakterleri karakter varlığı eşdeğerlerine dönüştürür. Bu işlev UTF-8 kodlama biçimini kullanır.
+
+#### <a name="example---document-key-lookup"></a>Örnek-belge anahtarı arama
+
+`urlEncode` işlev, yalnızca URL güvenli olmayan karakterler dönüştürülebileceğinden, diğer karakterleri olduğu gibi tutarken `base64Encode` işlevine alternatif olarak kullanılabilir.
+
+Giriş dizesi `<hello>`, `(Edm.String)` türündeki hedef alan, değer ile doldurulur `%3chello%3e`
+
+Arama zamanında kodlanmış anahtarı aldığınızda, özgün anahtar değerini almak için `urlDecode` işlevini kullanabilir ve bunu kaynak belgeyi almak için kullanabilirsiniz.
+
+```JSON
+
+"fieldMappings" : [
+  {
+    "sourceFieldName" : "SourceKey",
+    "targetFieldName" : "IndexKey",
+    "mappingFunction" : {
+      "name" : "urlEncode"
+    }
+  }]
+ ```
+
+ <a name="urlDecodeFunction"></a>
+
+ ### <a name="urldecode-function"></a>Urlşifre kodu işlevi
+
+ Bu işlev, UTF-8 kodlama biçimini kullanarak bir URL kodlamalı dizeyi kodu çözülen dizeye dönüştürür.
+
+ ### <a name="example---decode-blob-metadata"></a>Örnek-blob meta verilerinin kodunu çöz
+
+ Bazı Azure Storage istemcileri ASCII olmayan karakterler içeriyorsa blob meta verilerini otomatik olarak URL 'yi kodlayın. Ancak, bu tür meta verileri aranabilir (düz metin olarak) yapmak istiyorsanız, arama dizininizi doldururken kodlanmış verileri normal dizelere geri döndürmek için `urlDecode` işlevini kullanabilirsiniz.
+
+ ```JSON
+
+"fieldMappings" : [
+  {
+    "sourceFieldName" : "UrlEncodedMetadata",
+    "targetFieldName" : "SearchableMetadata",
+    "mappingFunction" : {
+      "name" : "urlDecode"
+    }
+  }]
+ ```

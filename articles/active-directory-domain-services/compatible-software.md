@@ -1,6 +1,6 @@
 ---
-title: 'Azure Active Directory etki alanı Hizmetleri: Uyumlu üçüncü taraf yazılım | Microsoft Docs'
-description: Azure Active Directory Domain Services ile çalışan bir üçüncü taraf yazılım
+title: Azure AD Domain Services için uyumlu üçüncü taraf yazılımı | Microsoft Docs
+description: Azure Active Directory Domain Services ile birlikte çalışarak üçüncü taraf yazılımlar
 services: active-directory-ds
 documentationcenter: ''
 author: iainfoulds
@@ -15,30 +15,30 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 03/06/2017
 ms.author: iainfou
-ms.openlocfilehash: 7d0130c3489d29f4e6b0fbe42f184dd06f17bbd7
-ms.sourcegitcommit: f811238c0d732deb1f0892fe7a20a26c993bc4fc
+ms.openlocfilehash: f5a633a49a0f7b99da4eac08a527d17299aa34b9
+ms.sourcegitcommit: 8074f482fcd1f61442b3b8101f153adb52cf35c9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/29/2019
-ms.locfileid: "67473778"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72754447"
 ---
-# <a name="third-party-software-compatible-with-azure-ad-domain-services"></a>Azure AD Domain Services ile uyumlu üçüncü taraf yazılım
+# <a name="third-party-software-compatible-with-azure-ad-domain-services"></a>Azure AD Domain Services ile uyumlu üçüncü taraf yazılımlar
 
-## <a name="one-identity-authentication-services"></a>Tek bir kimlik kimlik doğrulama hizmetleri
+## <a name="one-identity-authentication-services"></a>Tek kimlik doğrulama hizmetleri
 
-![Tek bir kimlik](./media/compatible-software-icons/OneIdentity.png)
+![Bir kimlik](./media/compatible-software-icons/OneIdentity.png)
 
-Erişim, kimlik doğrulama ve yetkilendirme kuruluşun mevcut Active Directory (AD) altyapısının kullanılacağını UNIX, Linux ve Mac OS X sistemleri bir kimlik kimlik doğrulama hizmetleri sağlar. Kimlik doğrulama hizmetleri artık Azure Active Directory etki alanı Windows olmayan kaynakları etkinleştirme mevcut SaaS çözümlerinizi zaten kullandığınız aynı nesil platform kullanmaya Hizmetleri destekler.
+Tek kimlik doğrulama hizmetleri, UNIX, Linux ve Mac OS X sistemlerinin bir kuruluşun mevcut Active Directory (AD) altyapısının erişimini, kimlik doğrulamasını ve yetkilendirmesini kullanmasını sağlar. Kimlik doğrulama hizmetleri artık, mevcut SaaS çözümlerinizin zaten kullandığı yeni nesil platformu kullanacak şekilde Windows dışı kaynakları etkinleştirmek Azure Active Directory Domain Services desteklemektedir.
 
-[Tek bir kimlik kimlik doğrulama hizmetleri](https://www.quest.com/products/authentication-services/)
+[Tek kimlik doğrulama hizmetleri](https://www.quest.com/products/authentication-services/)
 
-[KB makalesi - Azure AD etki alanı Hizmetleri ile kimlik kimlik doğrulama hizmetlerini bir kullanma](https://support.quest.com/authentication-services/kb/208427)
+[KB makalesi-Azure AD Domain Services bir kimlik doğrulama hizmeti kullanın](https://support.quest.com/authentication-services/kb/208427)
 
 
 ## <a name="red-hat-enterprise-linux"></a>Red Hat Enterprise Linux
 
 ![Red Hat](./media/compatible-software-icons/RedHat.png)
 
-Red Hat Enterprise Linux günümüzün modern işletme ihtiyaçlarını karşılamak üzere tasarlanmış dünyanın önde gelen enterprise Linux platformudur. Red Hat Enterprise Linux, Microsoft Azure üzerindeki enterprise Linux sanal makine (VM) iş yükleri için tercih edilen seçenektir. Red Hat Enterprise Linux dağıtım esnekliği, iş açısından kritik iş yüklerini - veri merkezinden Azure bulutuna tarafından sıkı bir şekilde yedeklenen - isteyen müşteriler için tasarlanmış açık, güvenilir ve güvenli bir platform tümleşik, kurumsal düzeyde destek olduğunda Red Hat ve Microsoft.
+Red Hat Enterprise Linux, dünyanın en modern kurumsal kuruluşun ihtiyaçlarını karşılamak için tasarlanmış önde gelen Kurumsal Linux platformudur. Red Hat Enterprise Linux, Microsoft Azure üzerinde Enterprise Linux sanal makinesi (VM) iş yükleri için tercih edilen seçenektir. Red Hat Enterprise Linux, iş açısından kritik iş yükleri için tasarlanan açık, güvenilir ve güvenli bir platformdur. Bu, veri merkezinden Azure bulutuna, sıkı tümleşik, kurumsal düzeyde destek ile desteklenir Red Hat ve Microsoft.
 
-[Red Hat Enterprise Linux 7.2 katılmak için Azure AD Etki Alanı Hizmetleri'ne VM](active-directory-ds-admin-guide-join-rhel-linux-vm.md)
+[Red Hat Enterprise Linux 7,2 VM 'sini Azure AD Domain Services 'a ekleyin](active-directory-ds-admin-guide-join-rhel-linux-vm.md)

@@ -3,7 +3,7 @@ documentType: LandingData
 title: 'Azure SQL Veritabanı: Tek veritabanı'
 metadata:
   document_id: 36d89c48-3646-380e-34a0-ae3ac62e2641
-  title: 'Azure SQL veritabanı belgeleri - öğreticiler, API Başvurusu'
+  title: Belgeler - Tek veritabanı
   meta.description: Learn how to use Azure SQL databases.
   services: sql-database
   requires-business-manager-approval: false
@@ -16,14 +16,14 @@ metadata:
   manager: craigg
   ms.date: 04/26/2019
 abstract:
-  description: 'Azure SQL veritabanı, Microsoft SQL Server Veritabanı Altyapısı''nın en son kararlı sürüme göre hizmet (DBaaS) olarak ilişkisel bir veritabanı hizmetidir. SQL veritabanı, yüksek performanslı, -kullanımı kolay, güvenilir ve altyapıyı yönetmek zorunda kalmadan yeni uygulamalar, Web siteleri ve tercih ettiğiniz programlama dilinde mikro hizmetler oluşturmak için kullanabileceğiniz güvenli bir veritabanı hizmetidir. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle, SQL Veritabanı’nı kullanmayı öğrenin.'
+  description: 'Azure SQL Veritabanı, Microsoft SQL Server Veritabanı Altyapısı''nın en son kararlı sürümünü temel alan hizmet olarak ilişkisel veritabanı (DBaaS) ürünüdür. SQL Veritabanı, altyapı yönetimine gerek kalmadan kendi seçtiğiniz programlama dilinde yeni uygulamalar, web siteleri ve mikro hizmetler oluşturmak için kullanabileceğiniz yüksek performanslı, kullanımı kolay, güvenilir ve güvenli bir veritabanıdır. Hızlı başlangıç kılavuzlarımız, öğreticilerimiz ve örneklerimizle, SQL Veritabanı’nı kullanmayı öğrenin.'
   aside:
     image:
       alt: null
       height: 110
       src: 'https://docs.microsoft.com/azure/sql-database/media/index/create-sql-database-on-azure.png'
       width: 250
-    title: '(3:12) Azure üzerinde tek bir SQL veritabanı oluşturma'
+    title: 'Azure’da tek bir SQL veritabanı oluşturma (3:12)'
     href: 'https://azure.microsoft.com/resources/videos/create-sql-database-on-azure/'
     width: 250
 sections:
@@ -38,48 +38,35 @@ sections:
             html: '<p>SQL Veritabanı elastik havuzları, kullanım talepleri değişken olan ve öngörülmeyen birden çok veritabanını yönetmeye ve ölçeklendirmeye yönelik kolay ve ekonomik bir çözümdür.</p>'
             image:
               src: media/index/i_elasticpool.svg
-          - title: SQL veritabanı sunucusu
+          - title: SQL Veritabanı sunucusu
             href: /azure/sql-database/sql-database-servers
-            html: '<p>SQL veritabanı sunucusu, tek veya havuza alınmış veritabanları sunucu içinde bir dizi güvenlik, ayarlama, yedekleme İlkesi ve diğer yapılandırma özellikleri yapılandırmak için bir yönetim noktasıdır.</p>'
+            html: '<p>SQL Veritabanı sunucusu, sunucunun içindeki bir dizi tek veya havuza alınmış veritabanında güvenliği, ayarlamayı, yedekleme ilkesini ve diğer yapılandırma özelliklerini yapılandırmak için merkezi bir yönetim noktasıdır.</p>'
             image:
               src: media/index/i_mi.svg
           - title: Fiyat ve hizmet katmanları
             href: /azure/sql-database/sql-database-service-tiers
-            html: '<p>Fiyat/performans oranı 5''ten bir uygun maliyetli $ aylık güçlü 80 çekirdek veritabanlarına yayılan esnek hizmet katmanları, ihtiyaçlarınıza göre uyarlama.</p>'
+            html: <p>Aylık 5 ABD doları gibi makul ücretlerden 80 çekirdekli güçlü veritabanlarına varan esnek hizmet katmanlarıyla fiyat/performans oranını ihtiyaçlarınıza göre uyarlayın.</p>
             image:
               src: media/index/i_perftier.svg
           - title: Ölçeklenebilirlik
             href: /azure/sql-database/sql-database-scale-resources
-            html: '<p>Veritabanınızı, uygulamanızın performansını artırmak için kolayca ölçeklendirin.</p>'
+            html: <p>Uygulamanızın performansını geliştirmek için veritabanınızın ölçeğini kolayca artırın.</p>
             image:
               src: media/index/i_scale.svg
           - title: Hizmet olarak platform
             href: /azure/sql-database/sql-database-paas
-            html: '<p>Yerleşik yüksek kullanılabilirlik, otomatik yedeklemeler ve coğrafi çoğaltma, işletmenizi durdurması bakım işlemleri, altyapı hataları veya donanım hatalarını engellemeye yardımcı olur.</p>'
+            html: '<p>Yerleşik yüksek kullanılabilirlik, otomatik yedeklemeler ve coğrafi çoğaltma özellikleri, bakım işlemlerinin ve altyapı hatalarının veya donanım hatalarının işletmenizi durdurmasını önlemeye yardımcı olur.</p>'
             image:
               src: media/index/gear.svg
           - title: Gelişmiş güvenlik
             href: /azure/sql-database/sql-database-security-index
-            html: '<p>Azure AD kimlik doğrulaması, sanal ağlar, güvenlik duvarları ve her zaman şifreli bağlantıları kullanarak veritabanınızı güvenli hale getirin. Yerleşik güvenlik sayesinde tehditleri ve güvenlik açıklarını belirleyin.</p>'
+            html: '<p>Azure AD kimlik doğrulaması, sanal ağlar, güvenlik duvarları ve Always Encrypted bağlantılar ile veritabanınızın güvenliğini korumaya yardımcı olun. Yerleşik güvenlik sayesinde tehditleri ve güvenlik açıklarını belirleyin.</p>'
             image:
               src: media/index/i_security.svg
-  - title: Yeni ve önizleme özellikleri
-    items:
-      - type: paragraph
-        text: 'Sürekli olarak SQL veritabanı yeni özelliklerle geliştiriyoruz ve aşağıdaki yeni özellikler ile ilgili görüşlerinizi duymak isteriz:'
-      - type: list
-        style: unordered
-        items:
-          - html: (Önizleme) <a href="sql-database-service-tier-hyperscale">Hiper ölçekli</a> en fazla 100 TB veritabanları ve birden çok okunabilir çoğaltma destekler katmanı.
-          - html: '(Önizleme) Yeni SQL Server 2019 <a href="https://docs.microsoft.com/sql/relational-databases/performance/intelligent-query-processing?toc=%2Fazure%2Fsql-database%2Ftoc.json&view=sql-server-2017">akıllı sorgu işleme</a> gibi özellikleri <a href="https://docs.microsoft.com/sql/relational-databases/performance/intelligent-query-processing?toc=%2Fazure%2Fsql-database%2Ftoc.json&view=sql-server-2017#table-variable-deferred-compilation">tablo değişkeni derleme ertelenmiş</a>, <a href="https://docs.microsoft.com/sql/relational-databases/performance/intelligent-query-processing?toc=%2Fazure%2Fsql-database%2Ftoc.json&view=sql-server-2017#batch-mode-on-rowstore">rowstore tablolarda toplu iş modunda</a>, ve <a href="https://docs.microsoft.com/sql/relational-databases/user-defined-functions/scalar-udf-inlining?view=azuresqldb-current&toc=%2Fazure%2Fsql-database%2Ftoc.json"> Satır içi kullanım skaler UDF</a>.'
-          - html: '(Önizleme) Yeni Transact-SQL dil işlevler gibi <a href="https://docs.microsoft.com/sql/t-sql/functions/approx-count-distinct-transact-sql?toc=%2Fazure%2Fsql-database%2Ftoc.json&view=sql-server-2017">approx_count_dıstınct toplama</a> ve <a href="https://docs.microsoft.com/sql/relational-databases/import-export/examples-of-bulk-access-to-data-in-azure-blob-storage?toc=%2Fazure%2Fsql-database%2Ftoc.json&view=sql-server-2017">toplu içeri aktarma Azure Blob depolamadan</a>.'
-          - html: '(Önizleme) Yeni SQL Server 2019 çevrimiçi <a href="https://docs.microsoft.com/sql/t-sql/statements/create-columnstore-index-transact-sql?toc=%2Fazure%2Fsql-database%2Ftoc.json&view=sql-server-2017#online--on--off">derleme</a> ve kümelenmiş columnstore dizin işlemleri yeniden derleyin.'
-          - html: '(Önizleme) Yeni <a href="https://docs.microsoft.com/azure/sql-database/sql-database-machine-learning-services-overview">Azure SQL veritabanı Machine Learning Hizmetleri (R ile)</a>.'
-          - html: '(Önizleme) Yeni <a href="https://docs.microsoft.com/azure/sql-database/sql-database-serverless">sunucusuz bilgi işlem katmanı</a> işlem otomatik ölçeklendirme ve faturalar için kullanılan işlem saniyede sağlar.'
   - title: Beş dakikalık hızlı başlangıçlar
     items:
       - type: paragraph
-        text: 'Azure SQL veritabanı, Azure portalı, Azure CLI ve Azure PowerShell kullanarak temel yönetim görevlerini gerçekleştirmenize olanak sağlar. Aşağıdaki Hızlı Başlangıç örnekleri kullanarak temel yönetim görevlerini gerçekleştirmeyi öğreneceksiniz:'
+        text: 'Azure SQL Veritabanı sayesinde Azure portalı, Azure CLI ve Azure PowerShell’i kullanarak temel yönetim görevlerini gerçekleştirebilirsiniz. Aşağıdaki hızlı başlangıç örneklerini kullanarak temel yönetim görevlerini nasıl gerçekleştireceğinizi öğrenin:'
       - type: table
         style: dataMatrix
         columns:
@@ -102,13 +89,13 @@ sections:
               - href: /azure/sql-database/scripts/sql-database-create-and-configure-database-cli
               - href: /azure/sql-database/scripts/sql-database-create-and-configure-database-powershell
               - href: 'https://github.com/Azure/azure-quickstart-templates/tree/master/201-sql-database-transparent-encryption-create'
-          - title: Esnek havuz oluşturma
+          - title: Elastik havuz oluşturma
             values:
               - href: /azure/sql-database/sql-database-elastic-pool-manage
               - href: /azure/sql-database/scripts/sql-database-move-database-between-pools-cli
               - href: /azure/sql-database/scripts/sql-database-move-database-between-pools-powershell
               - href: 'https://github.com/Azure/azure-quickstart-templates/tree/master/101-sql-elastic-pool-create'
-          - title: Bir veritabanının ölçeğini
+          - title: Veritabanını ölçeklendirme
             values:
               - href: null
               - href: /azure/sql-database/scripts/sql-database-monitor-and-scale-database-cli
@@ -122,15 +109,15 @@ sections:
   - title: Adım adım öğreticiler
     items:
       - type: paragraph
-        text: 'Oluşturma, yönetme ve veritabanlarını Azure SQL veritabanı''nı kullanarak geçirme hakkında bilgi edinin.'
+        text: 'Azure SQL Veritabanı kullanarak veritabanlarını oluşturma, yönetme ve geçirme hakkında bilgi edinin.'
       - type: list
         style: ordered
         items:
-          - html: Kullanarak yeni bir SQL veritabanı için şema tasarlama ve oluşturma <a href="/azure/sql-database/sql-database-design-first-database">SSMS</a> veya <a href="/azure/sql-database/sql-database-design-first-database-csharp">.NET</a>.
-          - html: Varolan bir veritabanını kullanarak Azure'a geçirme <a href="/azure/sql-database/sql-database-migrate-your-sql-server-database">veritabanı geçiş Yardımcısı'nı</a> veya <a href="/azure/sql-database/sql-database-import">BACPAC içeri aktarma</a>.
-          - html: <a href="/azure/sql-database/sql-database-security-tutorial">SQL veritabanınızın güvenliğini sağlama</a>.
-          - html: Kullanarak verilerinizi genel olarak dağıtma bir <a href="/azure/sql-database/sql-database-implement-geo-distributed-database">coğrafi olarak dağıtılmış bir veritabanı</a>.
-          - html: 'Daha fazla bilgi edinin <a href="sql-database-howto-single-database.md">nasıl yapılır kılavuzlarından</a> olmanıza yardımcı olabilecek, veritabanını yapılandırın.'
+          - html: <a href="/azure/sql-database/sql-database-design-first-database">SSMS</a> veya <a href="/azure/sql-database/sql-database-design-first-database-csharp">.NET</a> kullanarak yeni SQL veritabanı için şema oluşturun ve tasarlayın.
+          - html: <a href="/azure/sql-database/sql-database-migrate-your-sql-server-database">Veritabanı Geçiş Yardımcısı</a> veya <a href="/azure/sql-database/sql-database-import">BACPAC İçeri Aktarma</a>’yı kullanarak mevcut veritabanını Azure’a aktarın.
+          - html: <a href="/azure/sql-database/sql-database-security-tutorial">SQL veritabanınızın güvenliğini sağlayın</a>.
+          - html: <a href="/azure/sql-database/sql-database-implement-geo-distributed-database">Coğrafi olarak dağıtılmış bir veritabanı</a> kullanarak verilerinizi küresel ölçekte dağıtın.
+          - html: Veritabanınızı yapılandırmanıza yardımcı olabilecek daha fazla <a href="sql-database-howto-single-database.md">nasıl yapılır kılavuzu</a> bulun.
   - title: Örnekler
     items:
       - type: paragraph

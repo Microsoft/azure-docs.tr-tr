@@ -1,40 +1,51 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure AD Kimlik Koruması
+### YamlMime:Landing
+title: Azure AD Kimlik Koruması belgeleri
+summary: Kuruluşunuzdaki kimlik risklerini tanımlayıp çözmek amacıyla Kimlik Koruması’nı nasıl kullanacağınızı öğrenin
 metadata:
-  document_id: null
-  title: 'Azure Active Directory Kimlik Koruması Belgeleri - Hızlı başlangıçlar, kavramlar, başvurular | Microsoft Docs'
-  description: Azure Active Directory Kimlik Koruması’nı yapılandırmayı ve test etmeyi öğrenin.
+  title: Azure AD Kimlik Koruması belgeleri
+  description: Kuruluşunuzdaki kimlik risklerini tanımlayıp çözmek amacıyla Kimlik Koruması’nı nasıl kullanacağınızı öğrenin
   services: active-directory
-  ms.subservice: identity-protection
-  author: MicrosoftGuyJFlo
-  manager: daveba
   ms.service: active-directory
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  ms.subservice: identity-protection
   ms.topic: landing-page
-  ms.date: 09/14/2018
+  author: MicrosoftGuyJFlo
   ms.author: joflore
-abstract:
-  description: 'Risk altında olabilecek kimlik algılamasının nasıl çalıştığını ve bunları ele almak için otomatik yanıtları nasıl uygulayacağınızı öğrenin. Azure Active Directory Kimlik Koruması, Azure AD Premium P2 sürümünün bir özelliğidir ve şunları yapmanıza olanak sağlar:<ul><li>Kuruluşunuzun kimliklerini etkileyen olası güvenlik açıklarını algılama</li><li>Kuruluşunuzun kimlikleriyle ilişkili şüpheli eylemlere otomatik olarak yanıt vermek üzere Koşullu Erişim ilkeleri yapılandırma</li><li>Şüpheli olayları araştırma ve bunları çözmek için uygun eylemi gerçekleştirme</li></ul><br> Aşağıdaki kaynaklar hızlı bir başlangıç yapmanıza yardımcı olur.'
-  aside:
-    image:
-      alt: null
-      height: 110
-      src: ./media/index/video.png
-      width: 246
-    title: Azure AD Kimlik Koruması’na giriş
-    href: 'https://www.youtube.com/watch?v=zI3jn_G0_Ns'
-    width: 246
-sections:
-  - title: 5 dakikalık hızlı başlangıçlar
-    items:
-      - type: paragraph
-        text: Yaygın erişim senaryolarında oturum açma riski Koşullu Erişim ilkelerini yapılandırmayı öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: ./media/index/i_security-management.png
-            text: Oturum riski algılandığında erişimi engelleme
-            href: quickstart-sign-in-risk-policy.md
+  ms.date: 08/20/2019
+  ms.collection: M365-identity-device-management
+  ms.openlocfilehash: aeaa23138fb7d0a6d73625fdf7c6507c7fd8152a
+  ms.sourcegitcommit: 7efb2a638153c22c93a5053c3c6db8b15d072949
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 10/24/2019
+  ms.locfileid: "72880686"
+landingContent:
+- title: Kimlik Koruması hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Kimlik Koruması nedir?
+      url: overview-identity-protection.md
+    - text: Güvenliğe genel bakış tanıtımı
+      url: concept-identity-protection-security-overview.md
+- title: Risk algılamalarını araştırma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Risk ilkelerini yapılandırma
+      url: howto-identity-protection-configure-risk-policies.md
+    - text: Riski araştırma
+      url: howto-identity-protection-investigate-risk.md
+  - linkListType: reference
+    links:
+    - text: Olay türleri
+      url: concept-identity-protection-risks.md
+- title: Kimlik Koruması deneyimi
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Oturum açma deneyimi
+      url: concept-identity-protection-user-experience.md
+  - linkListType: how-to-guide
+    links:
+    - text: Risk Algılamalarının Simülasyonunu Oluşturma
+      url: howto-identity-protection-simulate-risk.md

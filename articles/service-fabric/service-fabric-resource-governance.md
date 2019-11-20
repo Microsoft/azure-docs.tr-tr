@@ -1,9 +1,9 @@
 ---
 title: Kapsayıcılar ve hizmetler için Azure Service Fabric kaynak İdaresi | Microsoft Docs
-description: Azure Service Fabric, iç veya dış kapsayıcıları çalışan hizmetler için kaynak sınırları belirtmenizi sağlar.
+description: Azure Service Fabric, kapsayıcılar içinde veya dışında çalışan hizmetler için kaynak sınırları belirtmenize olanak tanır.
 services: service-fabric
 documentationcenter: .net
-author: aljo-microsoft
+author: athinanthny
 manager: chackdan
 editor: ''
 ms.assetid: ab49c4b9-74a8-4907-b75b-8d2ee84c6d90
@@ -13,60 +13,60 @@ ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 8/9/2017
-ms.author: aljo, subramar
-ms.openlocfilehash: e011554e61411fddca034f024c30c2270593e07b
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.author: atsenthi
+ms.openlocfilehash: 44abb297b9ce0eafadd3af9539d5b12751360319
+ms.sourcegitcommit: 3486e2d4eb02d06475f26fbdc321e8f5090a7fac
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60772544"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73242901"
 ---
 # <a name="resource-governance"></a>Kaynak idaresi
 
-Birden fazla hizmeti aynı düğümünün veya kümenin çalıştırırken bir hizmet işlemi diğer hizmetlerde Kaynaksız daha fazla kaynak tüketebilir mümkündür. Bu sorun, "gürültülü komşu" sorununu adlandırılır. Azure Service Fabric ayırmaları ve kaynakları garanti ve kaynak kullanımını sınırlamak için hizmet başına sınırlar belirtmek Geliştirici sağlar.
+Aynı düğüm veya küme üzerinde birden fazla hizmet çalıştırırken, bir hizmetin daha fazla kaynak tüketmesi ve bu da işlemdeki diğer hizmetlerden kaynaklanabilir. Bu sorun, "gürültülü komşu" sorunu olarak adlandırılır. Azure Service Fabric, geliştiricilerin kaynakları garanti etmek ve kaynak kullanımını sınırlamak için hizmet başına ayırmaları ve sınırları belirtmesini sağlar.
 
-> Bu makalede ile devam etmeden önce hakkında bilgi edinin öneririz [Service Fabric uygulama modelini](service-fabric-application-model.md) ve [Service Fabric barındırma modeli](service-fabric-hosting-model.md).
+> Bu makaleye devam etmeden önce [Service Fabric uygulama modeli](service-fabric-application-model.md) ve [Service Fabric barındırma modeli](service-fabric-hosting-model.md)hakkında bilgi sahibi olmanız önerilir.
 >
 
-## <a name="resource-governance-metrics"></a>Kaynak İdaresi ölçümleri
+## <a name="resource-governance-metrics"></a>Kaynak idare ölçümleri
 
-Kaynak İdaresi, Service Fabric ile uyumlu olarak içerisinde desteklendiği [hizmet paketi](service-fabric-application-model.md). Hizmet paketi atanan kaynaklarını daha fazla kod paketleri arasında bölünebilir. Belirtilen kaynak sınırları Ayrıca kaynak ayırma anlamına gelir. Service Fabric destekleyen CPU ve bellek hizmet paketi başına iki yerleşik ile belirtme [ölçümleri](service-fabric-cluster-resource-manager-metrics.md):
+Kaynak İdaresi, [hizmet paketine](service-fabric-application-model.md)uygun olarak Service Fabric desteklenir. Hizmet paketine atanan kaynaklar kod paketleri arasında daha da ayrılabilir. Belirtilen kaynak sınırları, kaynakların rezervasyonu da anlamına gelir. Service Fabric, iki yerleşik [ölçüm](service-fabric-cluster-resource-manager-metrics.md)ile hizmet PAKETI başına CPU ve bellek belirtmeyi destekler:
 
-* *CPU* (ölçüm adı `servicefabric:/_CpuCores`): Ana makinede kullanılabilir mantıksal çekirdek. Tüm düğümlerde tüm çekirdek ağırlıklı aynı.
+* *CPU* (ölçüm adı `servicefabric:/_CpuCores`): konak makinede bulunan mantıksal çekirdek. Tüm düğümlerdeki tüm çekirdekler aynı şekilde ağırlıklı olarak dağıtılır.
 
-* *Bellek* (ölçüm adı `servicefabric:/_MemoryInMB`): Bellek megabayt cinsinden ifade edilir ve makinede kullanılabilir fiziksel bellek eşlenir.
+* *Bellek* (ölçüm adı `servicefabric:/_MemoryInMB`): bellek megabayt cinsinden ifade edilir ve makinede bulunan fiziksel bellekle eşlenir.
 
-Bu iki ölçüm için [Küme Kaynak Yöneticisi](service-fabric-cluster-resource-manager-cluster-description.md) toplam küme kapasitesi, kümedeki her düğüme ve kümedeki kalan kaynaklar üzerindeki yükü izler. Bu iki ölçüm herhangi bir diğer kullanıcı veya özel ölçüm eşdeğerdir. Varolan tüm özellikler ile onları kullanılabilir:
+Bu iki ölçüm için [küme kaynak yöneticisi](service-fabric-cluster-resource-manager-cluster-description.md) toplam küme kapasitesini, kümedeki her düğümdeki yükü ve kümedeki kalan kaynakları izler. Bu iki ölçüm, diğer Kullanıcı veya özel ölçümle eşdeğerdir. Var olan tüm özellikler bunlarla birlikte kullanılabilir:
 
-* Küme olabilir [dengeli](service-fabric-cluster-resource-manager-balancing.md) göre bu iki ölçüm (varsayılan davranış).
-* Küme olabilir [birleştirilmiş](service-fabric-cluster-resource-manager-defragmentation-metrics.md) bu iki ölçüm göre.
-* Zaman [bir kümeyi açıklama](service-fabric-cluster-resource-manager-cluster-description.md), arabelleğe alınan kapasite bu iki ölçüm için ayarlanabilir.
+* Küme, bu iki ölçümlere (varsayılan davranış) göre [dengelenebilir](service-fabric-cluster-resource-manager-balancing.md) .
+* Küme, bu iki ölçümlere göre [birleştirilebilirler](service-fabric-cluster-resource-manager-defragmentation-metrics.md) .
+* [Bir kümeyi açıkladığında](service-fabric-cluster-resource-manager-cluster-description.md), bu iki ölçüm için arabelleğe alınan kapasite ayarlanabilir.
 
-[Dinamik yük raporlama](service-fabric-cluster-resource-manager-metrics.md) bu ölçümleri desteklenmiyor ve Bu ölçümler, oluşturma zamanında tanımlanır için yükler.
+[Dinamik yük raporlama](service-fabric-cluster-resource-manager-metrics.md) bu ölçümler için desteklenmez ve bu ölçümler için Yüklemeler oluşturma sırasında tanımlanmıştır.
 
-## <a name="resource-governance-mechanism"></a>Kaynak İdaresi mekanizması
+## <a name="resource-governance-mechanism"></a>Kaynak idare mekanizması
 
-Service Fabric çalışma zamanı şu anda kaynak için ayırma sağlamaz. Bir işlem veya bir kapsayıcı açıldığında, çalışma zamanı kaynak sınırları oluşturma zamanında tanımlanmış yükleri ayarlar. Ayrıca, çalışma zamanı kaynakları aşıldığında kullanılabilen yeni hizmet paketleri açılmasına reddeder. İşlemin nasıl çalıştığını daha iyi anlamak için CPU çekirdeği iki düğümle bir örneği ele alalım (bellek idare mekanizması eşdeğerdir):
+Service Fabric çalışma zamanı şu anda kaynaklar için ayırma sağlamıyor. Bir işlem veya kapsayıcı açıldığında, çalışma zamanı, kaynak sınırlarını oluşturulma zamanında tanımlanan yükler olarak ayarlar. Ayrıca, çalışma zamanı, kaynaklar aşıldığında kullanılabilir olan yeni hizmet paketlerinin açılmasını reddeder. İşlemin nasıl çalıştığını daha iyi anlamak için iki CPU çekirdeğine sahip bir düğüme örnek alalım (bellek İdaresi mekanizması eşdeğerdir):
 
-1. İlk olarak, bir kapsayıcıyı tek bir CPU çekirdeği isteyen düğümde yerleştirilir. Çalışma zamanı, kapsayıcı açılır ve bir çekirdek CPU sınırı ayarlar. Kapsayıcı birden fazla çekirdek kullanmanız mümkün olmayacaktır.
+1. İlk olarak, düğüme bir kapsayıcı yerleştirilir ve bir CPU çekirdeği ister. Çalışma zamanı kapsayıcıyı açar ve CPU sınırını bir çekirdekli olarak ayarlar. Kapsayıcı birden fazla çekirdek kullanamaz.
 
-2. Ardından, bir hizmetin bir çoğaltma düğümde yerleştirilir ve karşılık gelen hizmet paketi tek bir CPU çekirdeği sınırı belirtir. Çalışma zamanı, kod paketi açılır ve bir çekirdek CPU sınırına ayarlar.
+2. Daha sonra, bir hizmetin bir kopyası düğüme yerleştirilir ve karşılık gelen hizmet paketi bir CPU çekirdeği sınırı belirtir. Çalışma zamanı, kod paketini açar ve CPU sınırını bir çekirdekli olarak ayarlar.
 
-Bu noktada, sınırları toplamı kapasiteyi düğümünün eşittir. Bir işlem ve kapsayıcı tek çekirdek her çalışan ve birbiriyle engellemesini değil. CPU sınırı belirtirken Service Fabric artık kapsayıcıları veya çoğaltmaları yerleştirmez.
+Bu noktada, limitlerin toplamı, düğümün kapasitesine eşittir. Bir işlem ve kapsayıcı her biri çekirdekle çalışır ve birbirleriyle müdahale etmez. Service Fabric, CPU sınırını belirtirken daha fazla kapsayıcı veya çoğaltma yerleştirmez.
 
-Ancak, diğer işlemler CPU azaltması iki durum vardır. Bu gibi durumlarda, işlem ve Örneğimizdeki kapsayıcısından gürültülü komşu sorun karşılaşabilirsiniz:
+Ancak, diğer işlemlerin CPU için çekişme olabileceği iki durum vardır. Bu durumlarda, örneğimizde bir işlem ve bir kapsayıcı, gürültülü komşu sorunu yaşayabilirler:
 
-* *Yönetilen ve yönetilmeyen Hizmetleri ve kapsayıcıları karıştırma*: Bir kullanıcı belirtilen tüm kaynak İdaresi bir hizmet oluşturursa, çalışma zamanı kaynak tüketen olarak görür ve örneğimizde düğümde yerleştirebilirsiniz. Bu durumda, bu yeni işlemin etkin düğümde çalışmakta olan hizmetleri çoğaltamaz bazı CPU kullanır. Bu sorunun iki çözümü vardır. Yoksa aynı küme üzerindeki yönetilen ve yönetilmeyen Hizmetleri karışık veya kullanın [yerleştirme kısıtlamaları](service-fabric-cluster-resource-manager-advanced-placement-rules-placement-policies.md) düğümleri aynı dizi üzerinde bu iki tür hizmet bitirme böylece.
+* *Yönetilen ve yönetilmeyen Hizmetleri ve kapsayıcıları karıştırma*: bir Kullanıcı hiçbir kaynak İdaresi olmadan bir hizmet oluşturursa, çalışma zamanı bu dosyayı kaynak olmadan görür ve örneğimizdeki düğüme yerleştirebilir. Bu durumda, bu yeni işlem düğümde zaten çalışmakta olan hizmetlerin ücretine göre bazı CPU kullanımını etkili bir şekilde tüketir. Bu sorunun iki çözümü vardır. Aynı kümede yönetilen ve yönetilmeyen Hizmetleri karışmayın ya da bu iki hizmet türünün aynı düğüm kümesine bitmesi için [yerleştirme kısıtlamalarını](service-fabric-cluster-resource-manager-advanced-placement-rules-placement-policies.md) kullanın.
 
-* *Düğümde, Service Fabric (örneğin, bir işletim sistemi hizmet) dışında başka bir işlem başlatıldığında*: Bu durumda, Service Fabric dışında işlemi için CPU Ayrıca var olan Hizmetleri ile contends. Bu sorunun çözümü işletim sistemi yükü için düğüm kapasiteleri hesap doğru olarak ayarlamak için sonraki bölümde gösterildiği gibidir.
+* *Düğüm üzerinde başka bir işlem başlatıldığında Service Fabric dışında (örneğin, bir işletim sistemi hizmeti)* : Bu durumda, Service Fabric dışındaki işlem, var olan hizmetlerle CPU için de devam ediyor. Bu sorunun çözümü, sonraki bölümde gösterildiği gibi, işletim sistemi ek yükünü hesaba eklemek için düğüm kapasitelerinin doğru şekilde ayarlanmadır.
 
-## <a name="cluster-setup-for-enabling-resource-governance"></a>Kaynak İdaresi etkinleştirmek için Küme kurulumu
+## <a name="cluster-setup-for-enabling-resource-governance"></a>Kaynak yönetimini etkinleştirmek için küme kurulumu
 
-Bir düğüm başlar ve küme birleşimler, Service Fabric kullanılabilir bellek miktarı ve çekirdek sayısının algılar ve ardından bu iki kaynaklar için düğüm kapasiteleri ayarlar.
+Bir düğüm başlatıldığında ve kümeye katıldığında, Service Fabric kullanılabilir bellek miktarını ve kullanılabilir çekirdek sayısını algılar ve bu iki kaynak için düğüm kapagruplarını ayarlar.
 
-İşletim sistemi için ve diğer işlemler için arabellek alanı bırakmak için düğüm üzerinde çalışıyor olabilir, Service Fabric düğüm üzerinde yalnızca %80 kullanılabilir kaynakları kullanır. Bu yüzde yapılandırılabilir ve küme bildiriminde değiştirilebilir.
+İşletim sistemi için arabellek alanını bırakmak ve diğer işlemlerin düğümde çalışıyor olması için, Service Fabric düğümde kullanılabilir kaynakların yalnızca %80 ' unu kullanır. Bu yüzde yapılandırılabilir ve küme bildiriminde değiştirilebilir.
 
-Söyleyin kullanılabilir CPU yüzdesi 50 ve kullanılabilir bellek yüzdesi 70 kullanmak için Service Fabric ilişkin bir örnek aşağıda verilmiştir:
+Aşağıda, kullanılabilir CPU 'nun %50 ' i ve kullanılabilir belleğin %70 ' i kullanmak için Service Fabric nasıl talimat alınacağını gösteren bir örnek verilmiştir:
 
 ```xml
 <Section Name="PlacementAndLoadBalancing">
@@ -76,7 +76,7 @@ Söyleyin kullanılabilir CPU yüzdesi 50 ve kullanılabilir bellek yüzdesi 70 
 </Section>
 ```
 
-Düğüm kapasiteleri tam el ile Kurulumu gerekiyorsa, kümedeki düğümler açıklamak için normal bir mekanizma kullanabilirsiniz. 2 GB bellek ve dört çekirdek düğümle ayarlamak nasıl bir örneği aşağıda verilmiştir:
+Düğüm kapasitelerinin tam el ile kurulumunu yapmanız gerekiyorsa, kümedeki düğümleri tanımlamak için düzenli mekanizmayı kullanabilirsiniz. Düğümün dört çekirdekli ve 2 GB bellek ile nasıl ayarlanacağı hakkında bir örnek aşağıda verilmiştir:
 
 ```xml
     <NodeType Name="MyNodeType">
@@ -87,13 +87,13 @@ Düğüm kapasiteleri tam el ile Kurulumu gerekiyorsa, kümedeki düğümler aç
     </NodeType>
 ```
 
-Kullanılabilir kaynaklar otomatik algılama etkindir ve düğüm kapasiteleri el ile küme bildiriminde tanımlanan, Service Fabric düğümü kullanıcı tanımlı kapasite desteklemek için yeterli kaynaklara sahip olduğunu denetler:
+Kullanılabilir kaynakların otomatik algılanması etkin olduğunda ve düğüm kapasiteleri küme bildiriminde el ile tanımlandığında Service Fabric, düğümün kullanıcının tanımladığı kapasiteyi desteklemek için yeterli kaynağa sahip olup olmadığını denetler:
 
-* Küçük veya buna eşit kullanılabilir kaynaklara düğümde bildiriminde tanımlanan düğüm kapasitesi varsa, Service Fabric bildirimde belirtilen kapasiteler kullanır.
+* Bildirimde tanımlanan düğüm kapasiteleri, düğümdeki kullanılabilir kaynaklardan azsa veya buna eşitse, Service Fabric bildirimde belirtilen kapasiteleri kullanır.
 
-* Bildiriminde tanımlanan düğüm kapasiteleri kullanılabilir kaynakları büyükse, Service Fabric düğüm kapasiteleri kullanılabilir kaynakları kullanır.
+* Bildirimde tanımlanan düğüm kapasiteleri kullanılabilir kaynaklardan fazlaysa, Service Fabric kullanılabilir kaynakları düğüm kapasiteleri olarak kullanır.
 
-Gerekli değilse kullanılabilir kaynaklar otomatik algılama kapatılabilir. Devre dışı bırakmak için aşağıdaki ayarları değiştirin:
+Gerekli değilse, kullanılabilir kaynakların otomatik algılanması kapatılabilir. Devre dışı bırakmak için aşağıdaki ayarı değiştirin:
 
 ```xml
 <Section Name="PlacementAndLoadBalancing">
@@ -101,7 +101,7 @@ Gerekli değilse kullanılabilir kaynaklar otomatik algılama kapatılabilir. De
 </Section>
 ```
 
-En iyi performans için aşağıdaki ayar da küme bildiriminde açılması gerekir:
+En iyi performans için, küme bildiriminde aşağıdaki ayar de açılmalıdır:
 
 ```xml
 <Section Name="PlacementAndLoadBalancing">
@@ -110,9 +110,21 @@ En iyi performans için aşağıdaki ayar da küme bildiriminde açılması gere
 </Section>
 ```
 
-## <a name="specify-resource-governance"></a>Kaynak İdaresi belirtin
+> [!IMPORTANT]
+> Service Fabric sürüm 7,0 ' den başlayarak, düğüm kaynak kapasitelerinin Kullanıcı tarafından el ile değer sağladığı durumlarda düğüm kaynak kapasitelerinin nasıl hesaplandığını gösteren kuralı güncelleştirdik. Aşağıdaki senaryoyu ele alalım:
+>
+> * Düğümde 10 CPU çekirdeği toplamı vardır
+> * SF, düğüm üzerinde çalışan diğer hizmetler için %20 ' nin (System Services Service Fabric dahil) bir arabelleğini atan Kullanıcı Hizmetleri (varsayılan ayar) için toplam kaynakların %80 ' sini kullanacak şekilde yapılandırılmıştır.
+> * Kullanıcı, CPU çekirdeği ölçümü için düğüm kaynak kapasitesini el ile geçersiz kılmayı ve 5 çekirdeğe ayarlıyor
+>
+> Service Fabric Kullanıcı Hizmetleri için kullanılabilir kapasitenin aşağıdaki şekilde nasıl hesaplanacağını gösteren kuralı değiştirdik:
+>
+> * 7,0 Service Fabric önce, Kullanıcı Hizmetleri için kullanılabilir kapasite **5 çekirdeğe** hesaplanacak (kapasite arabelleği %20 ' si yoksayılır)
+> * Service Fabric 7,0 ' den başlayarak, Kullanıcı Hizmetleri için kullanılabilir kapasite **4 çekirdeğe** hesaplanacak (kapasite arabelleği %20 ' si yok sayılır)
 
-Kaynak İdaresi sınırları, aşağıdaki örnekte gösterildiği gibi uygulama bildiriminde (Servicemanifestımport bölümünde) belirtilir:
+## <a name="specify-resource-governance"></a>Kaynak yönetimini belirtin
+
+Kaynak idare limitleri, aşağıdaki örnekte gösterildiği gibi uygulama bildiriminde (Servicemanifestımport bölümünde) belirtilir:
 
 ```xml
 <?xml version='1.0' encoding='UTF-8'?>
@@ -133,15 +145,15 @@ Kaynak İdaresi sınırları, aşağıdaki örnekte gösterildiği gibi uygulama
   </ServiceManifestImport>
 ```
 
-Bu örnekte, hizmet paketi olarak adlandırılan **ServicePackageA** nereye yerleştirileceğini düğümlerinde bir çekirdek alır. Bu hizmet paketi içeren iki kod paketleri (**CodeA1** ve **CodeA2**), ve her ikisini birden belirtin `CpuShares` parametresi. CpuShares 512:256 oranını çekirdek iki kod paketleri arasında böler.
+Bu örnekte, **Servicepackagea** adlı hizmet paketi, yerleştirildiği düğümlerde bir çekirdek alır. Bu hizmet paketi iki kod paketi (**CodeA1** ve **CodeA2**) içerir ve her ikisi de `CpuShares` parametresini belirtir. CpuShares 512:256 oranı, çekirdeği iki kod paketine böler.
 
-Bu nedenle, bu örnekte, bir çekirdeği üçte iki CodeA1 alır ve CodeA2 üçte birinin bir çekirdek (ve aynı genel garantili ayırmayla rezervasyonu) alır. CpuShares kod paketleri belirtilmezse, Service Fabric çekirdek eşit arasında böler.
+Bu nedenle, bu örnekte, CodeA1 'in iki katı DS 'yi alır ve CodeA2 bir çekirdekli (ve aynı şekilde bir yazılım garantisi rezervasyonu) alır. Kod paketleri için CpuShares belirtilmemişse, Service Fabric çekirdekleri aralarında eşit olarak böler.
 
-Bellek sınırları mutlak olduğundan iki kod paketi 1024 MB bellek (ve rezervasyon aynı genel garantili ayırmayla) sınırlıdır. Kod paketleri (kapsayıcılar veya işlemler) bu sınırı ve bunu denediklerinde bir bellek yetersiz özel yapma girişimi daha fazla bellek tahsis edilemiyor. Kaynak sınırı zorlamasının çalışması için, hizmet paketi içindeki tüm kod paketlerinin bellek sınırlarının belirtilmiş olması gerekir.
+Bellek sınırları mutlak olduğundan, her iki kod paketi de 1024 MB bellekle (ve aynı şekilde bir yazılım garantisi rezervasyonu) sınırlıdır. Kod paketleri (kapsayıcılar veya süreçler) Bu sınırdan daha fazla bellek ayıramıyor ve bu işlemi gerçekleştirmeye çalışırken bellek yetersiz özel durumu oluşur. Kaynak sınırı zorlamasının çalışması için, hizmet paketi içindeki tüm kod paketlerinin bellek sınırlarının belirtilmiş olması gerekir.
 
-### <a name="using-application-parameters"></a>Uygulama parametreleri kullanma
+### <a name="using-application-parameters"></a>Uygulama parametrelerini kullanma
 
-Kaynak İdaresi belirtirken kullanmak mümkün mü [uygulama parametreleri](service-fabric-manage-multiple-environment-app-configuration.md) birden çok uygulama yapılandırmalarını yönetme. Aşağıdaki örnek, uygulama parametreleri kullanımını gösterir:
+Kaynak idare ayarlarını belirtirken, birden çok uygulama yapılandırmasını yönetmek için [Uygulama parametrelerini](service-fabric-manage-multiple-environment-app-configuration.md) kullanmak mümkündür. Aşağıdaki örnek, uygulama parametrelerinin kullanımını gösterir:
 
 ```xml
 <?xml version='1.0' encoding='UTF-8'?>
@@ -165,7 +177,7 @@ Kaynak İdaresi belirtirken kullanmak mümkün mü [uygulama parametreleri](serv
   </ServiceManifestImport>
 ```
 
-Bu örnekte, her bir hizmet paketi 4 çekirdek ve 2 GB bellek nereden üretim ortamı için varsayılan parametre değerlerini ayarlanır. Varsayılan değerleri uygulama parametre dosyaları ile değiştirmek mümkündür. Bu örnekte, bir parametre dosyası uygulamayı yerel olarak test etmek için üretim ortamında daha az kaynak nereden kullanılabilir:
+Bu örnekte, her bir hizmet paketinin 4 çekirdek ve 2 GB bellek aldığı, üretim ortamı için varsayılan parametre değerleri ayarlanır. Varsayılan değerleri uygulama parametre dosyalarıyla değiştirmek mümkündür. Bu örnekte, uygulamayı yerel olarak test etmek için bir parametre dosyası kullanılabilir; burada üretimden daha az kaynak alınır:
 
 ```xml
 <!-- ApplicationParameters\Local.xml -->
@@ -182,22 +194,43 @@ Bu örnekte, her bir hizmet paketi 4 çekirdek ve 2 GB bellek nereden üretim or
 ```
 
 > [!IMPORTANT]
-> Uygulama parametrelerle belirten kaynak İdaresi, Service Fabric 6.1 sürümünde'den itibaren kullanılabilmektedir.<br>
+> Uygulama parametreleriyle kaynak yönetimini belirtmek, Service Fabric sürüm 6,1 ' den başlayarak kullanılabilir.<br>
 >
-> Uygulama parametreleri kaynak İdaresi belirtmek için kullanıldığında, Service Fabric 6.1 sürümünden önceki bir sürüme düşürülemez.
+> Kaynak yönetimini belirtmek için uygulama parametreleri kullanıldığında, Service Fabric sürüm 6,1 ' den önceki bir sürüme düşürülemez.
+
+## <a name="enforcing-the-resource-limits-for-user-services"></a>Kullanıcı Hizmetleri için kaynak sınırlarını zorlama
+
+Kaynak İdaresi Service Fabric hizmetlerinize uygulanırken kaynak tarafından yönetilen hizmetlerin kaynak kotasını aşmayacağından emin olmaya devam ederken, pek çok kullanıcının bazı Service Fabric hizmetlerini yönetilmeyen modda çalıştırması gerekir. Yönetilmeyen Service Fabric Hizmetleri kullanılırken, "ard arda" yönetilmeyen hizmetlerin, Service Fabric düğümlerinde kullanılabilir tüm kaynakları tükettiği durumlarda, örneğin:
+
+* Düğümlerde çalışan diğer hizmetlerin kaynakları (Service Fabric sistem hizmetleri dahil)
+* Uygun olmayan bir durumda biten düğümler
+* Service Fabric küme yönetimi API 'Leri yanıt vermiyor
+
+Bu durumların oluşmasını önlemek için Service Fabric, *düğüm üzerinde çalışan tüm Service Fabric Kullanıcı Hizmetleri* (hem yönetilen hem de yönetilmeyen) için kaynak sınırlarını zorunlu kılabilir ve bu sayede Kullanıcı hizmetlerinin Belirtilen kaynak miktarı. Bu, ClusterManifest 'in Placementandloaddengeleme bölümündeki Enforceuserservicemetrickapasiteler yapılandırmasının değeri true olarak ayarlanarak elde edilir. Bu ayar varsayılan olarak kapalıdır.
+
+```xml
+<SectionName="PlacementAndLoadBalancing">
+    <ParameterName="EnforceUserServiceMetricCapacities" Value="false"/>
+</Section>
+```
+
+Ek açıklamalar:
+
+* Kaynak sınırı zorlaması yalnızca `servicefabric:/_CpuCores` ve `servicefabric:/_MemoryInMB` kaynak ölçümleri için geçerlidir
+* Kaynak sınırı zorlaması yalnızca, kaynak ölçümlerine ait düğüm kapasiteleri otomatik algılama mekanizmasıyla veya Kullanıcı aracılığıyla düğüm kapasitelerinin el ile belirtilerek ( [etkinleştirme Için küme kurulumunda açıklandığı gibi) Service Fabric kullanılabilir olduğunda geçerlidir. Kaynak idare](service-fabric-resource-governance.md#cluster-setup-for-enabling-resource-governance) bölümü). Düğüm kapasiteleri yapılandırılmamışsa, Kullanıcı Hizmetleri için ne kadar kaynak ayrılacağını bilemediğinden Service Fabric kaynak sınırı zorlama özelliği kullanılamaz. Service Fabric, "Enforceuserservicemetrickapasiteler" true ise ancak düğüm kapasiteleri yapılandırılmamışsa bir sistem durumu uyarısı verir.
 
 ## <a name="other-resources-for-containers"></a>Kapsayıcılar için diğer kaynaklar
 
-CPU ve bellek yanı sıra, kapsayıcılar için diğer kaynak sınırlarını belirtmek mümkündür. Bu sınırlar kod paketi düzeyinde belirtilir ve kapsayıcı başlatıldığında uygulanır. Farklı CPU ve bellek ile küme kaynak yöneticisi bu kaynakların, farkında değildir ve olmaz herhangi bir kapasite denetimleri yapmak veya bunları için Yük Dengeleme.
+CPU ve belleğin yanı sıra, kapsayıcılar için diğer kaynak sınırlarını belirtmek mümkündür. Bu sınırlar, kod paketi düzeyinde belirtilir ve kapsayıcı başlatıldığında uygulanır. CPU ve bellek ile farklı olarak, Cluster Kaynak Yöneticisi bu kaynakları bilmez ve hiçbir kapasite denetimi veya yük dengelemesi yapamayacaktır.
 
-* *MemorySwapInMB*: Bir kapsayıcı kullanabileceğiniz swap belleği miktarı.
-* *Memoryreservationınmb*: Yalnızca bellek Çekişme düğümde algılandığında zorlanan bellek idare yumuşak sınırını.
-* *CpuPercent*: Kapsayıcı kullanabileceğiniz CPU yüzdesi. Bu parametre, etkili bir şekilde hizmet paketini CPU sınırları belirtilmezse, yoksayılır.
-* *Maximumıops*: (Okuma ve yazma) bir kapsayıcı kullanabileceğiniz maksimum IOPS.
-* *MaximumIOBytesps*: (Okuma ve yazma) bir kapsayıcı kullanabileceğiniz maksimum g/ç (bayt / saniye).
-* *BlockIOWeight*: Blok için GÇ ağırlığı diğer kapsayıcılara göre.
+* *Memoryswapınmb*: bir kapsayıcının kullanabileceği takas belleği miktarı.
+* *Memoryrezervationınmb*: yalnızca düğümde bellek çakışması algılandığında uygulanan bellek yönetimi için geçici sınır.
+* *Cpupercent*: KAPSAYıCıNıN kullanabileceği CPU yüzdesi. Hizmet paketi için CPU sınırları belirtilmişse, bu parametre etkin bir şekilde yok sayılır.
+* *Maximumıops*: bir kapsayıcının KULLANABILECEĞI Maksimum IOPS (okuma ve yazma).
+* *Maximumiobytesps*: bir kapsayıcının kullanabileceği en yüksek GÇ (saniye başına bayt) (okuma ve yazma).
+* *Blockioweight*: diğer kapsayıcılara göreli olarak blok GÇ ağırlığı.
 
-Bu kaynaklar, CPU ve bellek ile birleştirilebilir. Kapsayıcılar için ek kaynaklar belirtmek nasıl bir örnek aşağıda verilmiştir:
+Bu kaynaklar, CPU ve bellekle birleştirilebilir. Kapsayıcılar için ek kaynakların nasıl belirtilbir örneği aşağıda verilmiştir:
 
 ```xml
     <ServiceManifestImport>
@@ -211,5 +244,5 @@ Bu kaynaklar, CPU ve bellek ile birleştirilebilir. Kapsayıcılar için ek kayn
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Küme Kaynak Yöneticisi hakkında daha fazla bilgi edinmek için [Service Fabric Küme Kaynak Yöneticisi ile tanışın](service-fabric-cluster-resource-manager-introduction.md).
-* Uygulama modeli, hizmet paketleri ve kod paketleri--hakkında daha fazla bilgi edinin ve yinelemeler için--eşleştirebilirsiniz nasıl okuma [bir Service Fabric uygulamasında Model](service-fabric-application-model.md).
+* Küme Kaynak Yöneticisi hakkında daha fazla bilgi edinmek için [Service Fabric Cluster Resource Manager 'A giriş](service-fabric-cluster-resource-manager-introduction.md)konusunu okuyun.
+* Uygulama modeli, hizmet paketleri ve kod paketleri hakkında daha fazla bilgi edinmek ve çoğaltmaların bunlara nasıl eşlendiğini öğrenin-- [Service Fabric bir uygulamanın modelini](service-fabric-application-model.md)okuyun.

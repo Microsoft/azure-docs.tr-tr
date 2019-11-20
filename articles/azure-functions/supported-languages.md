@@ -1,67 +1,57 @@
 ---
-title: Azure işlevleri'nde desteklenen diller
-description: Hangi dillerde desteklenir (GA) ve Deneysel veya Önizleme aşamasında olan öğrenin.
-services: functions
-documentationcenter: na
+title: Azure Işlevlerinde desteklenen diller
+description: Hangi dillerin desteklendiğini (GA) ve hangilerinin önizlemede olduğunu öğrenin.
 author: ggailey777
-manager: jeconnoc
+manager: gwallace
 ms.service: azure-functions
-ms.devlang: dotnet
-ms.topic: reference
+ms.topic: conceptual
 ms.date: 08/02/2018
 ms.author: glenga
-ms.openlocfilehash: 8839fc0fb9f19a1cfa95a4191213503dba7602c6
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: eac67c43915edb0aed273df40e7b08ca846062bf
+ms.sourcegitcommit: be8e2e0a3eb2ad49ed5b996461d4bff7cba8a837
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65148811"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72802463"
 ---
-# <a name="supported-languages-in-azure-functions"></a>Azure işlevleri'nde desteklenen diller
+# <a name="supported-languages-in-azure-functions"></a>Azure Işlevlerinde desteklenen diller
 
-Bu makalede, Azure işlevleri ile kullanabileceğiniz destek düzeyleri dilleri için sunulan açıklanmaktadır.
+Bu makalede, Azure Işlevleri ile kullanabileceğiniz diller için sunulan destek düzeyleri açıklanmaktadır.
 
 ## <a name="levels-of-support"></a>Destek düzeyleri
 
-Destek üç düzeyi vardır:
+Üç destek düzeyi vardır:
 
-* **Genel kullanıma (GA)** - tam olarak desteklenen ve üretim kullanımı için onaylandı.
-* **Önizleme** - henüz desteklenir, ancak genel kullanım durumu gelecekte kullanıma ulaşması bekleniyor.
-* **Deneysel** - desteklenmez ve durdurulmuş gelecekte; nihai Önizleme veya GA durum garantisi.
+* **Genel olarak kullanılabilir (GA)** -üretim kullanımı için tam olarak desteklenir ve onaylanır.
+* **Önizleme** -henüz desteklenmiyor, ancak gelecekte GA durumuna ulaşması bekleniyor.
+* **Deneysel** -desteklenmez ve gelecekte bırakılmış olabilir; Son önizleme veya GA durumu garantisi yoktur.
 
-## <a name="languages-in-runtime-1x-and-2x"></a>Çalışma zamanı dillerde 1.x ve 2.x'i
+## <a name="languages-by-runtime-version"></a>Çalışma zamanı sürümüne göre diller 
 
-[İki Azure işlevleri çalışma zamanı sürümünü](functions-versions.md) kullanılabilir. Aşağıdaki tabloda, her çalışma zamanı sürümünde desteklenen hangi diller gösterilmektedir.
+[Azure işlevleri çalışma zamanının iki sürümü](functions-versions.md) kullanılabilir. Aşağıdaki tabloda, her çalışma zamanı sürümünde hangi dillerin desteklendiği gösterilmektedir.
 
 [!INCLUDE [functions-supported-languages](../../includes/functions-supported-languages.md)]
 
-### <a name="experimental-languages"></a>Deneysel dil
+### <a name="experimental-languages"></a>Deneysel diller
 
-Deneysel dil sürümünde 1.x düzgün ölçeklendirilemediği ve tüm bağlamaları desteklemez.
+1\. x sürümündeki deneysel diller iyi ölçeklendirmez ve tüm bağlamaları desteklemez.
 
-Deneysel özellikler, bunları resmi desteği olduğundan, bağlı olduğunuz her şey için kullanmayın. Deneysel dil ile ilgili sorunlar için destek gerektiren durumlarda açılmamalıdır. 
+Sizin için herhangi bir resmi destek bulunmadığından, sizin kullandığınız her şey için deneysel özellikleri kullanmayın. Deneysel dillerle ilgili sorunlar için destek durumları açılmamalıdır. 
 
-Sürüm 2.x çalışma zamanı, Deneysel dilleri desteklemez. Yalnızca dil üretimde desteklenen yeni diller için destek eklenir. 
+Sürüm 2. x çalışma zamanı deneysel dilleri desteklemez. Yeni diller için destek yalnızca dilin üretimde desteklenme sırasında eklenir. 
 
 ### <a name="language-extensibility"></a>Dil genişletilebilirliği
 
-2\.x çalışma zamanı sunmak üzere tasarlanmıştır [dil genişletilebilirlik](https://github.com/Azure/azure-webjobs-sdk-script/wiki/Language-Extensibility). 2\.x çalışma zamanı JavaScript ve Java dillerinde bu genişletilebilirlik ile oluşturulur.
+Sürüm 2. x ile başlayarak, çalışma zamanı [dil genişletilebilirliği](https://github.com/Azure/azure-webjobs-sdk-script/wiki/Language-Extensibility)sunacak şekilde tasarlanmıştır. 2\. x çalışma zamanının JavaScript ve Java dilleri, bu genişletilebilirlik ile oluşturulmuştur.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure işlevleri'nde GA veya Önizleme dillerden birini kullanma hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
+Desteklenen dillerde işlevleri geliştirme hakkında daha fazla bilgi edinmek için aşağıdaki kaynaklara bakın:
 
-> [!div class="nextstepaction"]
-> [C#](functions-reference-csharp.md)
-
-> [!div class="nextstepaction"]
-> [F#](functions-reference-fsharp.md)
-
-> [!div class="nextstepaction"]
-> [JavaScript](functions-reference-node.md)
-
-> [!div class="nextstepaction"]
-> [Java](functions-reference-java.md)
-
-> [!div class="nextstepaction"]
-> [Python](functions-reference-python.md)
++ [C#sınıf kitaplığı Geliştirici Başvurusu](functions-dotnet-class-library.md)
++ [C#betik geliştirici başvurusu](functions-reference-csharp.md)
++ [Java geliştirici başvurusu](functions-reference-java.md)
++ [JavaScript geliştirici başvurusu](functions-reference-node.md)
++ [PowerShell geliştirici başvurusu](functions-reference-powershell.md)
++ [Python geliştirici başvurusu](functions-reference-python.md)
++ [TypeScript geliştirici başvurusu](functions-reference-node.md#typescript)

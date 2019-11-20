@@ -1,6 +1,6 @@
 ---
-title: Azure haritalar Android harita denetimi ile çalışmaya başlama | Microsoft Docs
-description: Azure haritalar Android harita denetimi.
+title: Azure haritalar 'da Android harita denetimini kullanmaya başlama | Microsoft Docs
+description: Azure haritalar 'daki Android harita denetimi.
 author: walsehgal
 ms.author: v-musehg
 ms.date: 04/26/2019
@@ -9,53 +9,53 @@ ms.service: azure-maps
 services: azure-maps
 manager: timlt
 ms.custom: mvc
-ms.openlocfilehash: 9df5eb9fa4493f82c6efd4a8e30eee324e4eac2a
-ms.sourcegitcommit: a52d48238d00161be5d1ed5d04132db4de43e076
+ms.openlocfilehash: 934fe2219ccca917999cf49cb9c9826276545e73
+ms.sourcegitcommit: 083aa7cc8fc958fc75365462aed542f1b5409623
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67273837"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "70915670"
 ---
-# <a name="getting-started-with-azure-maps-android-sdk"></a>Azure haritalar Android SDK'sı ile çalışmaya başlama
+# <a name="getting-started-with-azure-maps-android-sdk"></a>Azure haritalar 'ı kullanmaya başlama Android SDK
 
-Azure haritalar Android SDK'sı, Android için vektör harita kitaplığıdır. Bu makalede Azure haritalar Android SDK'sını yükleme ve bir harita yükleme işlemleri size yol gösterir.
+Azure Maps Android SDK, Android için bir vektör eşleme kitaplığıdır. Bu makale, Azure Maps Android SDK yükleme ve eşleme yükleme işlemlerinde size rehberlik eder.
 
 ## <a name="prerequisites"></a>Önkoşullar
 
 ### <a name="create-an-azure-maps-account"></a>Azure Haritalar hesabı oluşturma
 
-Bu makalede yer alan yordamları tamamlamak için önce yapmanız [bir Azure haritalar hesabı oluştur](how-to-manage-account-keys.md) S1 fiyatlandırma katmanını içinde.
+Bu makaledeki yordamları tamamlayabilmeniz için, önce S1 fiyatlandırma katmanında [bir Azure Maps hesabı oluşturmanız](https://docs.microsoft.com/azure/azure-maps/how-to-manage-account-keys#create-a-new-account) gerekir.
 
-### <a name="download-android-studio"></a>Android Studio’yu indirin
+### <a name="download-android-studio"></a>Android Studio'yu indir
 
-Android Studio'yu indirin ve Azure haritalar Android SDK'yı yüklemeden önce boş bir etkinliği ile bir proje oluşturmak için ihtiyacınız. Yapabilecekleriniz [Android Studio'yu indir](https://developer.android.com/studio/) Google ücretsiz olarak edinebilirsiniz. 
+Azure Haritalar Android SDK yüklemeden önce Android Studio indirin ve boş bir etkinliğe sahip bir proje oluşturun. Android Studio Google 'dan ücretsiz olarak [indirebilirsiniz](https://developer.android.com/studio/) . 
 
-## <a name="create-a-project-in-android-studio"></a>Android Studio'da bir proje oluşturma
+## <a name="create-a-project-in-android-studio"></a>Android Studio bir proje oluşturma
 
-İlk olarak boş bir etkinlik yeni bir proje oluşturmak gerekir. Bir Android Studio projesi oluşturmak için aşağıdaki adımları tamamlayın:
+İlk olarak, boş bir etkinliğe sahip yeni bir proje oluşturun. Android Studio projesi oluşturmak için aşağıdaki adımları uygulayın:
 
-1. Altında **projenizi seçin**seçin **telefon ve Tablet**. Uygulama bu form faktörüne üzerinde çalışır.
-2. Üzerinde **telefon ve Tablet** sekmesinde **boş etkinlik**ve ardından **sonraki**.
-3. Altında **Nakonfigurovat projekt**seçin `API 21: Android 5.0.0 (Lollipop)` en düşük SDK'sı olarak. Azure haritalar Android SDK tarafından desteklenen en erken sürüm budur.
-4. Varsayılan değerleri kabul `Activity Name` ve `Layout Name` seçip **son**.
+1. **Projenizi seçin**altında **telefon ve tablet**' yı seçin. Uygulamanız bu form faktörüyle çalışır.
+2. **Telefon ve tablet** sekmesinde **boş etkinlik**' i seçin ve ardından **İleri**' yi seçin.
+3. **Projenizi yapılandırın**altında, en düşük `API 21: Android 5.0.0 (Lollipop)` SDK olarak öğesini seçin. Bu, Azure Maps Android SDK tarafından desteklenen en eski sürümdür.
+4. Varsayılanı `Activity Name` **kabul edin ve son** 'useçin.`Layout Name`
 
-Bkz: [Android Studio belgeleri](https://developer.android.com/studio/intro/) yeni proje oluşturma ve yükleme Android Studio ile daha fazla bilgi için Yardım.
+Android Studio yükleme ve yeni bir proje oluşturma hakkında daha fazla yardım için [Android Studio belgelerine](https://developer.android.com/studio/intro/) bakın.
 
 ![Proje oluşturma](./media/how-to-use-android-map-control-library/form-factor-android.png)
 
-## <a name="set-up-a-virtual-device"></a>Sanal bir cihaz ayarlama
+## <a name="set-up-a-virtual-device"></a>Sanal cihaz ayarlama
 
-Android Studio bilgisayarınızı sanal bir Android cihazında ayarlamanıza olanak tanır. Bunun yapılması, uygulama geliştirme sırasında test etmenize yardımcı olabilir. Bir sanal cihazınızın kurulumunun yapılabilmesi için proje ekranınızın sağ üst köşesinde bulunan Android Virtual Device (AVD) Manager simgesini seçin ve ardından **sanal cihaz oluşturma**. İçin AVD Yöneticisi'ni seçerek de sahip olabilirsiniz **Araçları** > **Android** > **AVD Manager** araç çubuğundan. İçinde **telefonlar** kategorisi, select **Nexus 5 X**ve ardından **sonraki**.
+Android Studio, bilgisayarınızda bir sanal Android cihaz ayarlamanıza olanak sağlar. Bunun yapılması, geliştirme sırasında uygulamanızı test etmenize yardımcı olabilir. Bir sanal cihaz ayarlamak için, proje ekranınızın sağ üst köşesindeki Android sanal cihaz (AVD) Yöneticisi simgesini seçin ve ardından **sanal cihaz oluştur**' u seçin. Ayrıca, araç çubuğundan **Araçlar** > **Android** > **AVD Yöneticisi** ' ni seçerek AVD yöneticisine da ulaşabilirsiniz. **Telefonlar** kategorisinde, **Nexus 5x**' i seçin ve ardından **İleri**' yi seçin.
 
-İçinde bir AVD ayarlama hakkında daha fazla bilgi [Android Studio belgeleri](https://developer.android.com/studio/run/managing-avds).
+[Android Studio belgelerinde](https://developer.android.com/studio/run/managing-avds)bir AVD ayarlama hakkında daha fazla bilgi edinebilirsiniz.
 
-![Android öykünücüsü](./media/how-to-use-android-map-control-library/android-emulator.png)
+![Android Emulator](./media/how-to-use-android-map-control-library/android-emulator.png)
 
-## <a name="install-the-azure-maps-android-sdk"></a>Azure haritalar Android SDK'sını yükleyin
+## <a name="install-the-azure-maps-android-sdk"></a>Azure haritalar 'ı Android SDK
 
-Azure haritalar Android SDK'sı uygulamanızı oluşturduktan sonraki adım yüklemektir. SDK yüklemek için aşağıdaki adımları tamamlayın:
+Uygulamanızı oluşturmanın bir sonraki adımı Android SDK Azure haritalar 'ı yüklemektir. SDK 'Yı yüklemek için şu adımları uygulayın:
 
-1. En üst düzey açın **build.gradle** dosyasını açıp aşağıdaki kodu ekleyin **tüm projeleri**, **depoları** bölüm engelle:
+1. En üst düzey **Build. Gradle** dosyasını açın ve aşağıdaki kodu **tüm projeler**, **depolar** bloğu bölümüne ekleyin:
 
     ```
     maven {
@@ -63,11 +63,11 @@ Azure haritalar Android SDK'sı uygulamanızı oluşturduktan sonraki adım yük
     }
     ```
 
-2. Güncelleştirme, **app/build.gradle** ve aşağıdaki kodu ekleyin:
+2. **Uygulamanızı/Build. Gradle** öğesini güncelleştirin ve aşağıdaki kodu buna ekleyin:
     
-    1. Emin olun, projenizin **minSdkVersion** API 21 veya üzeri.
+    1. Projenizin **Minsdkversion** özelliğinin API 21 veya daha yüksek olduğundan emin olun.
 
-    2. Aşağıdaki kod Android bölümüne ekleyin:
+    2. Aşağıdaki kodu Android bölümüne ekleyin:
 
         ```
         compileOptions {
@@ -75,16 +75,16 @@ Azure haritalar Android SDK'sı uygulamanızı oluşturduktan sonraki adım yük
             targetCompatibility JavaVersion.VERSION_1_8
         }
         ```
-    3. Bağımlılıklar bloğuna güncelleştirmek ve en son Azure haritalar Android SDK için yeni bir uygulama bağımlılık satır ekleyin:
+    3. Bağımlılıklar engellemeyi güncelleştirin ve en son Azure Maps Android SDK yeni bir uygulama bağımlılığı satırı ekleyin:
 
         ```
         implementation "com.microsoft.azure.maps:mapcontrol:0.2"
         ```
 
     > [!Note]
-    > Azure haritalar Android SDK'sı düzenli olarak yüklenmekte olan gelişmiş ve yükseltildi. Gördüğünüz [Android harita denetimi ile çalışmaya başlama](https://docs.microsoft.com/azure/azure-maps/how-to-use-android-map-control-library) belgeleri, en son Azure haritalar uygulama sürüm numarasını almak için. Ayrıca, "0 her zaman en son sürüme işaret edecek şekilde +", "0,2-" sürüm numarasını ayarlayabilirsiniz.
+    > Azure Haritalar Android SDK düzenli olarak yükseltilmekte ve geliştirilir. En son Azure haritaları uygulama sürümü numarasını almak için [Android harita denetimi ile çalışmaya](https://docs.microsoft.com/azure/azure-maps/how-to-use-android-map-control-library) başlama belgelerini görebilirsiniz. Ayrıca, "0,2" olan sürüm numarasını "0 +" olarak ayarlarsanız her zaman en son sürümü işaret edebilir.
 
-3. Düzen **res** > **Düzen** > **activity_main.xml** aşağıdakiyle değiştirin:
+3. **Activity_main. xml** adlı **res** > **yerleşimini** > düzenleyin ve kodu kodla değiştirin:
     
     ```XML
     <?xml version="1.0" encoding="utf-8"?>
@@ -103,15 +103,26 @@ Azure haritalar Android SDK'sı uygulamanızı oluşturduktan sonraki adım yük
     </FrameLayout>
     ```
 
-4. İçinde **MainActivity.java** dosya gerekir:
+4. **MainActivity. Java** dosyasında şunları yapmanız gerekir:
     
-    * Azure haritalar SDK'sı için içeri aktarmaları ekleyin
-    * Azure haritalar kimlik bilgilerinizi ayarlayın
-    * Harita denetimi örneği alma **onCreate** yöntemi
+    * Azure Maps SDK için içeri aktarmalar ekleme
+    * Azure haritalar kimlik doğrulama bilgilerinizi ayarlama
+    * **OnCreate** yönteminde Map denetim örneğini al
 
-    Kimlik bilgilerinizi her görünüm eklemek zorunda kalmamanız için AzureMaps sınıfında genel setSubscriptionKey veya setAadProperties yöntemleri kullanarak kimlik doğrulama bilgilerini ayarlama, kolaylaştırır. Harita denetiminin doğrudan içeren etkinliğinden çağrılmalıdır Android OpenGL ömrü yönetmek için kendi yaşam döngüsü yöntemleri içerir. Uygulamanızın doğru bir şekilde harita denetimin yaşam döngüsü yöntemleri çağırmak sırada içeren harita denetiminin etkinliğinde aşağıdaki yaşam döngüsü yöntemleri geçersiz kılın ve ilgili Harita denetimi yöntemi çağırın. 
+    `setSubscriptionKey` `AzureMaps` Ya`setAadProperties` da yöntemlerini kullanarak sınıftaki kimlik doğrulama bilgilerini genel olarak ayarlamak, kimlik doğrulama bilgilerinizi her görünüme eklemeniz gerekmez. 
 
-    Düzen **MainActivity.java** aşağıdaki gibi:
+    Harita denetimi, Android 'in OpenGL yaşam döngüsünü yönetmeye yönelik kendi yaşam döngüsü yöntemlerini içerir. Bu, doğrudan içeren etkinlikten çağrılmalıdır. Uygulamanızın doğru şekilde doğru olması için harita denetiminin yaşam döngüsü yöntemlerini çağırın, eşleme denetimini içeren etkinliğin aşağıdaki yaşam döngüsü yöntemlerini geçersiz kılmanız ve ilgili harita denetim yöntemini çağırmanız gerekir. 
+
+    * onCreate (paket) 
+    * onStart () 
+    * Onözgeçmişi () 
+    * onPause () 
+    * onStop () 
+    * onDestroy () 
+    * Onsaveınstancestate (paket) 
+    * onLowMemory () 
+
+    **MainActivity. Java** dosyasını aşağıdaki gibi düzenleyin:
     
     ```java
     package com.example.myapplication;
@@ -140,13 +151,24 @@ Azure haritalar Android SDK'sı uygulamanızı oluşturduktan sonraki adım yük
             mapControl = findViewById(R.id.mapcontrol);
 
             mapControl.onCreate(savedInstanceState);
-
+    
+            //Wait until the map resources are ready.
+            mapControl.onReady(map -> {
+                //Add your post map load code here.
+    
+            });
         }
 
         @Override
         public void onResume() {
             super.onResume();
             mapControl.onResume();
+        }
+
+        @Override
+        protected void onStart(){
+            super.onStart();
+            mapControl.onStart();
         }
 
         @Override
@@ -178,36 +200,84 @@ Azure haritalar Android SDK'sı uygulamanızı oluşturduktan sonraki adım yük
             super.onSaveInstanceState(outState);
             mapControl.onSaveInstanceState(outState);
         }
-
     }
 
     ```
 
-## <a name="import-classes"></a>Sınıfları içeri aktarma
+## <a name="import-classes"></a>Sınıfları içeri aktar
 
-Yukarıdaki adımları tamamladıktan sonra büyük olasılıkla uyarıları Android Studio bazı kodları hakkında elde edersiniz. Bu uyarıları gidermek için başvurulan sınıflarını içeri aktarmak `MainActivity.java`.
+Yukarıdaki adımları tamamladıktan sonra, büyük olasılıkla bazı kod hakkında Android Studio uyarılar alırsınız. Bu uyarıları çözümlemek için, içinde `MainActivity.java`başvurulan sınıfları içeri aktarın.
 
-Otomatik olarak Alt + Enter (seçeneği + Return Mac'te) seçerek bu sınıflarını içeri aktarabilirsiniz.
+Alt + Enter (bir Mac 'te seçenek + Return) seçeneğini belirleyerek bu sınıfları otomatik olarak içeri aktarabilirsiniz.
 
-Aşağıdaki grafik (veya bir Mac üzerinde denetim + R tuşuna basın), uygulamanızı oluşturmak için gösterildiği gibi Çalıştır düğmesi seçin.
+Uygulamanızı derlemek için aşağıdaki grafikte gösterildiği gibi Çalıştır düğmesini seçin (veya Mac üzerinde Control + R tuşlarına basın).
 
-![Çalıştır'a tıklayın](./media/how-to-use-android-map-control-library/run-app.png)
+![Çalıştır 'a tıklayın](./media/how-to-use-android-map-control-library/run-app.png)
 
-Android Studio, uygulamayı oluşturmak için birkaç saniye sürer. Derleme tamamlandıktan sonra benzetilmiş Android cihazda uygulamanızı test edebilirsiniz. Bunun gibi bir eşleme görmeniz gerekir:
+Android Studio uygulamayı derlemek birkaç saniye sürer. Oluşturma işlemi tamamlandıktan sonra, uygulamanızı öykünülmüş Android cihazında test edebilirsiniz. Aşağıdakine benzer bir eşleme görmeniz gerekir:
 
 <center>
 
 ![Android eşleme](./media/how-to-use-android-map-control-library/android-map.png)</center>
 
+## <a name="localizing-the-map"></a>Haritayı yerelleştirme
+
+Azure Haritalar Android SDK haritanın dilini ve bölgesel görünümünü ayarlamanın üç farklı yolunu sağlar. Aşağıdaki kod, dilin Fransızca ("fr-FR") ve bölgesel görünümün "Auto" olarak nasıl ayarlanacağını gösterir. 
+
+İlk seçenek, statik `AzureMaps` `setLanguage` ve `setView` yöntemleri genel olarak kullanarak dili geçirmektir ve bölgesel bilgileri sınıfa görüntüler. Bu işlem, uygulamanızda yüklü olan tüm Azure haritalar denetimlerinde varsayılan dili ve bölgesel görünümü ayarlar.
+
+```Java
+static {
+    //Set your Azure Maps Key.
+    AzureMaps.setSubscriptionKey("<Your Azure Maps Key>");
+
+    //Set the language to be used by Azure Maps.
+    AzureMaps.setLanguage("fr-FR");
+
+    //Set the regional view to be used by Azure Maps.
+    AzureMaps.setView("auto");
+}
+```
+
+İkinci seçenek, dili geçirmektir ve harita denetim XML dosyasına bilgileri görüntüler.
+
+```XML
+<com.microsoft.azure.maps.mapcontrol.MapControl
+    android:id="@+id/myMap"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:mapcontrol_language="fr-FR"
+    app:mapcontrol_view="auto"
+    />
+```
+
+Üçüncü seçenek, haritalar `setStyle` yöntemi kullanılarak eşlemenin dil ve bölgesel görünümünü programlı bir şekilde ayarlamanıza olanak sağlar. Bu işlem, eşlemenin dil ve bölgesel görünümünü değiştirmek için herhangi bir zamanda yapılabilir.
+
+```Java
+mapControl.onReady(map -> {
+    map.setStyle(StyleOptions.language("fr-FR"));
+    map.setStyle(StyleOptions.view("auto"));
+});
+```
+
+Dil "fr-FR" olarak ayarlanmış ve bölgesel görünüm "Auto" olarak ayarlanmış bir Azure Maps örneği aşağıda verilmiştir.
+
+<center>
+
+![Fransızca 'da etiketleri gösteren harita resmi](./media/how-to-use-android-map-control-library/android-localization.png)
+</center>
+
+Desteklenen dillerin ve bölgesel görünümlerin tamamen listesi [burada](supported-languages.md)belgelenmiştir.
+
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Haritada yer paylaşımı veri eklemeyi öğrenin:
+Haritada kaplama verileri eklemeyi öğrenin:
 
 > [!div class="nextstepaction"]
-> [Bir Android eşlemesi için bir simge katmanı Ekle](https://review.docs.microsoft.com/azure/azure-maps/how-to-add-symbol-to-android-map)
+> [Android haritasına sembol katmanı ekleme](https://review.docs.microsoft.com/azure/azure-maps/how-to-add-symbol-to-android-map)
 
 > [!div class="nextstepaction"]
-> [Bir Android eşlemesine şekiller ekleme](https://docs.microsoft.com/azure/azure-maps/how-to-add-shapes-to-android-map)
+> [Android haritasına şekil ekleme](https://docs.microsoft.com/azure/azure-maps/how-to-add-shapes-to-android-map)
 
 > [!div class="nextstepaction"]
-> [Android Maps değişiklik eşleme stilleri](https://docs.microsoft.com/azure/azure-maps/set-android-map-styles)
+> [Android haritalar 'da harita stillerini değiştirme](https://docs.microsoft.com/azure/azure-maps/set-android-map-styles)

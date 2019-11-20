@@ -16,14 +16,14 @@ ms.tgt_pltfrm: virtual-network
 ms.workload: infrastructure
 ms.date: 08/23/2018
 ms.author: kumud
-ms.openlocfilehash: 4d3fd152782c65c7f63e459a1c35dee6ae764361
-ms.sourcegitcommit: 44a85a2ed288f484cc3cdf71d9b51bc0be64cc33
+ms.openlocfilehash: 34cb2b6c5a770aa9ec38ce02a97d976fe28251ac
+ms.sourcegitcommit: 36e9cbd767b3f12d3524fadc2b50b281458122dc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2019
-ms.locfileid: "64708849"
+ms.lasthandoff: 08/20/2019
+ms.locfileid: "69638748"
 ---
-# <a name="tutorial-restrict-network-access-to-paas-resources-with-virtual-network-service-endpoints-using-the-azure-portal"></a>Öğretici: Azure portalını kullanarak sanal ağ hizmet uç noktaları ile PaaS kaynaklarına ağ erişimini kısıtlama
+# <a name="tutorial-restrict-network-access-to-paas-resources-with-virtual-network-service-endpoints-using-the-azure-portal"></a>Öğretici: Azure portal kullanarak sanal ağ hizmet uç noktaları ile PaaS kaynaklarına ağ erişimini kısıtlama
 
 Sanal ağ hizmet uç noktaları bazı Azure hizmet uç noktalarına ağ erişimini bir sanal ağ alt ağı ile sınırlamanıza olanak tanır. Ayrıca, kaynaklara internet erişimini de kaldırabilirsiniz. Hizmet uç noktaları, sanal ağınızdan desteklenen Azure hizmetlerine doğrudan bağlantı sağlar, böylece Azure hizmetlerine erişmek için sanal ağınızın özel adres alanını kullanabilirsiniz. Hizmet uç noktaları aracılığıyla Azure kaynaklarına gönderilen trafik her zaman Microsoft Azure omurga ağı üzerinde kalır. Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
@@ -41,7 +41,7 @@ Azure aboneliğiniz yoksa başlamadan önce [ücretsiz bir hesap](https://azure.
 
 ## <a name="log-in-to-azure"></a>Azure'da oturum açma
 
-https://portal.azure.com adresinden Azure portalında oturum açın.
+[https://portal.azure.com](https://portal.azure.com ) adresinden Azure portalında oturum açın.
 
 ## <a name="create-a-virtual-network"></a>Sanal ağ oluşturma
 
@@ -49,16 +49,18 @@ https://portal.azure.com adresinden Azure portalında oturum açın.
 2. **Ağ**’ı ve sonra **Sanal ağ**’ı seçin.
 3. Aşağıdaki bilgileri girin veya seçin ve sonra **Oluştur**’u seçin:
 
-   |Ayar|Değer|
+   |Ayar|Value|
    |----|----|
-   |Ad| myVirtualNetwork |
+   |Name| myVirtualNetwork |
    |Adres alanı| 10.0.0.0/16|
-   |Abonelik| Aboneliğinizi seçme|
-   |Kaynak grubu | **Yeni oluştur**’u seçin ve *myResourceGroup* değerini girin.|
-   |Konum| **Doğu ABD**’yi seçin |
+   |Subscription| Aboneliğinizi seçme|
+   |Resource group | **Yeni oluştur**’u seçin ve *myResourceGroup* değerini girin.|
+   |Location| **Doğu ABD**’yi seçin |
    |Alt Ağ Adı| Genel|
    |Alt Ağ Adresi aralığı| 10.0.0.0/24|
+   |DDoS koruması| Temel|
    |Hizmet uç noktaları| Devre dışı|
+   |Güvenlik Duvarı| Devre dışı|
 
    ![Sanal ağınızla ilgili temel bilgileri girin](./media/tutorial-restrict-network-access-to-resources/create-virtual-network.png)
 
@@ -69,13 +71,13 @@ Hizmet uç noktaları her hizmet ve her alt ağ için etkinleştirilir. Alt ağ 
 1. Portalın üst kısmındaki **Kaynak, hizmet ve belgeleri arayın** kutusuna *myVirtualNetwork* yazın. Arama sonuçlarında **myVirtualNetwork** göründüğünde seçin.
 2. Sanal ağa bir alt ağ ekleyin. **AYARLAR** altında **Alt Ağlar**’ı ve sonra aşağıdaki resimde gösterildiği gibi **+ Alt Ağ**’ı seçin:
 
-    ![Alt ağ ekleme](./media/tutorial-restrict-network-access-to-resources/add-subnet.png) 
+    ![Alt ağ ekle](./media/tutorial-restrict-network-access-to-resources/add-subnet.png) 
 
 3. **Alt ağ ekle** altında aşağıdaki bilgileri seçin veya girin ve sonra **Tamam**’ı seçin:
 
-    |Ayar|Değer|
+    |Ayar|Value|
     |----|----|
-    |Ad| Özel |
+    |Name| Özel |
     |Adres aralığı| 10.0.1.0/24|
     |Hizmet uç noktaları| **Hizmetler** altında **Microsoft.Storage** öğesini seçin|
 
@@ -90,11 +92,11 @@ Varsayılan olarak, alt ağdaki tüm VM'ler tüm kaynaklarla iletişim kurabilir
 2. **Ağ**'ı ve sonra **Ağ güvenlik grubu**’nu seçin.
 3. **Ağ güvenlik grubu oluşturun** altında aşağıdaki bilgileri girin veya seçin ve sonra **Oluştur**’u seçin:
 
-    |Ayar|Değer|
+    |Ayar|Value|
     |----|----|
-    |Ad| myNsgPrivate |
-    |Abonelik| Aboneliğinizi seçme|
-    |Kaynak grubu | **Mevcut olanı kullan**’ı seçin ve *myResourceGroup* seçeneğini belirleyin.|
+    |Name| myNsgPrivate |
+    |Subscription| Aboneliğinizi seçme|
+    |Resource group | **Mevcut olanı kullan**’ı seçin ve *myResourceGroup* seçeneğini belirleyin.|
     |Location| **Doğu ABD**’yi seçin |
 
 4. Ağ güvenlik grubu oluşturulduktan sonra portalın üst kısmındaki **Kaynak, hizmet ve belgeleri arayın** kutusuna *myNsgPrivate* ifadesini girin. Arama sonuçlarında **myNsgPrivate** göründüğünde seçin.
@@ -102,46 +104,46 @@ Varsayılan olarak, alt ağdaki tüm VM'ler tüm kaynaklarla iletişim kurabilir
 6. **+ Ekle** öğesini seçin.
 7. Azure Depolama hizmetine giden iletişime izin veren bir kural oluşturun. Aşağıdaki bilgileri girin veya seçin ve ardından **Ekle** seçeneğini belirleyin:
 
-    |Ayar|Değer|
+    |Ayar|Value|
     |----|----|
-    |Kaynak| **VirtualNetwork** öğesini seçin |
-    |Kaynak bağlantı noktası aralıkları| * |
+    |Source| **VirtualNetwork** öğesini seçin |
+    |Source port ranges| * |
     |Hedef | **Hizmet Etiketi**’ni seçin|
     |Hedef hizmet etiketi | **Depolama**’yı seçin|
     |Hedef bağlantı noktası aralıkları| * |
-    |Protokol|Herhangi biri|
-    |Eylem|İzin Ver|
-    |Öncelik|100|
-    |Ad|İzin Ver-Depolama-Tümü|
+    |Protocol|Any|
+    |Action|Allow|
+    |Priority|100|
+    |Name|İzin Ver-Depolama-Tümü|
 
 8. İnternet bağlantısını reddeden başka bir giden güvenlik kuralı oluşturun. Bu kural, giden İnternet iletişimine izin veren tüm ağ güvenlik gruplarında varsayılan kuralı geçersiz kılar. Aşağıdaki değerleri kullanarak 5-7 arasındaki adımları tekrar tamamlayın:
 
-    |Ayar|Değer|
+    |Ayar|Value|
     |----|----|
-    |Kaynak| **VirtualNetwork** öğesini seçin |
-    |Kaynak bağlantı noktası aralıkları| * |
+    |Source| **VirtualNetwork** öğesini seçin |
+    |Source port ranges| * |
     |Hedef | **Hizmet Etiketi**’ni seçin|
     |Hedef hizmet etiketi| **İnternet**’i seçin|
     |Hedef bağlantı noktası aralıkları| * |
-    |Protokol|Herhangi biri|
-    |Eylem|Reddet|
-    |Öncelik|110|
-    |Ad|Deny-Internet-All|
+    |Protocol|Any|
+    |Action|Reddet|
+    |Priority|110|
+    |Name|Deny-Internet-All|
 
 9. **AYARLAR** altında **Gelen güvenlik kuralları**’nı seçin.
 10. **+ Ekle** öğesini seçin.
 11. Herhangi bir yerden alt ağa yönelik Uzak Masaüstü Protokolü (RDP) trafiğine izin veren bir gelen güvenlik kuralı oluşturun. Kural, internetten gelen tüm trafiği engelleyen bir varsayılan güvenlik kuralını geçersiz kılar. Daha sonraki bir adımda bağlantının test edilebilmesi için uzak masaüstü bağlantılarına izin verilir. **AYARLAR** bölümünde **Gelen güvenlik kuralları**'nı seçin, **+Ekle** seçeneğini belirleyip aşağıdaki değerleri girin ve ardından **Ekle**'yi seçin:
 
-    |Ayar|Değer|
+    |Ayar|Value|
     |----|----|
-    |Kaynak| Herhangi biri |
-    |Kaynak bağlantı noktası aralıkları| * |
+    |Source| Any |
+    |Source port ranges| * |
     |Hedef | **VirtualNetwork** öğesini seçin|
     |Hedef bağlantı noktası aralıkları| 3389 |
-    |Protokol|Herhangi biri|
-    |Eylem|İzin Ver|
-    |Öncelik|120|
-    |Ad|İzin Ver-RDP-Tümü|
+    |Protocol|Any|
+    |Action|Allow|
+    |Priority|120|
+    |Name|İzin Ver-RDP-Tümü|
 
 12. **AYARLAR** altında **Alt ağlar**’ı seçin.
 13. **+ İlişkilendir**’i seçin
@@ -158,14 +160,14 @@ Hizmet uç noktaları için etkinleştirilmiş Azure hizmetleri aracılığıyla
 2. **Depolama**’yı ve sonra **Depolama hesabı - blob, dosya, tablo, kuyruk** öğesini seçin.
 3. Aşağıdaki bilgileri girin veya seçin, kalan varsayılan değerleri kabul edin ve sonra **Oluştur**’u seçin:
 
-    |Ayar|Değer|
+    |Ayar|Value|
     |----|----|
-    |Ad| Yalnızca sayı ve küçük harfler kullanarak tüm Azure konumlarında benzersiz olan 3-24 karakter uzunluğunda bir ad girin.|
+    |Name| Yalnızca sayı ve küçük harfler kullanarak tüm Azure konumlarında benzersiz olan 3-24 karakter uzunluğunda bir ad girin.|
     |Hesap türü|StorageV2 (genel amaçlı v2)|
     |Location| **Doğu ABD**’yi seçin |
     |Çoğaltma| Yerel olarak yedekli depolama (LRS)|
-    |Abonelik| Aboneliğinizi seçme|
-    |Kaynak grubu | **Mevcut olanı kullan**’ı seçin ve *myResourceGroup* seçeneğini belirleyin.|
+    |Subscription| Aboneliğinizi seçme|
+    |Resource group | **Mevcut olanı kullan**’ı seçin ve *myResourceGroup* seçeneğini belirleyin.|
 
 ### <a name="create-a-file-share-in-the-storage-account"></a>Depolama hesabında dosya paylaşımı oluşturma
 
@@ -187,9 +189,9 @@ Varsayılan olarak, depolama hesapları İnternet de dahil olmak üzere herhangi
 3. **+Var olan sanal ağı ekle**'yi seçin.
 4. **Ağ ekle** altında aşağıdaki değerleri ve sonra **Ekle**’yi seçin:
 
-    |Ayar|Değer|
+    |Ayar|Value|
     |----|----|
-    |Abonelik| Aboneliğinizi seçin.|
+    |Subscription| Aboneliğinizi seçin.|
     |Sanal ağlar|**Sanal ağlar** altında **myVirtualNetwork** öğesini seçin|
     |Alt ağlar| **Alt ağlar** altında **Özel**’i seçin|
 
@@ -213,20 +215,20 @@ Bir depolama hesabına ağ erişimini test etmek için her alt ağa bir VM dağ�
 2. **İşlem**'i seçin ve sonra da **Windows Server 2016 Datacenter**'ı seçin.
 3. Aşağıdaki bilgileri girin veya seçin ve ardından **Tamam** seçeneğini belirleyin:
 
-   |Ayar|Değer|
+   |Ayar|Value|
    |----|----|
-   |Ad| myVmPublic|
+   |Name| myVmPublic|
    |Kullanıcı adı|Seçtiğiniz bir kullanıcı adını girin.|
-   |Parola| Seçtiğiniz bir parolayı girin. Parola en az 12 karakter uzunluğunda olmalı ve [tanımlanmış karmaşıklık gereksinimlerini](../virtual-machines/windows/faq.md?toc=%2fazure%2fvirtual-network%2ftoc.json#what-are-the-password-requirements-when-creating-a-vm) karşılamalıdır.|
-   |Abonelik| Aboneliğinizi seçin.|
-   |Kaynak grubu| **Mevcut olanı kullan**’ı seçin ve **myResourceGroup** seçeneğini belirleyin.|
+   |istemcisiyle yönetilen bir cihaz için)| Seçtiğiniz bir parolayı girin. Parola en az 12 karakter uzunluğunda olmalı ve [tanımlanmış karmaşıklık gereksinimlerini](../virtual-machines/windows/faq.md?toc=%2fazure%2fvirtual-network%2ftoc.json#what-are-the-password-requirements-when-creating-a-vm) karşılamalıdır.|
+   |Subscription| Aboneliğinizi seçin.|
+   |Resource group| **Mevcut olanı kullan**’ı seçin ve **myResourceGroup** seçeneğini belirleyin.|
    |Location| **Doğu ABD**’yi seçin.|
 
    ![Bir sanal makine hakkında temel bilgi girme](./media/tutorial-restrict-network-access-to-resources/virtual-machine-basics.png)
 4. Sanal makine için bir boyut seçin ve sonra **Seç** seçeneğini belirleyin.
 5. **Ayarlar** altında **Ağ**’ı ve sonra **myVirtualNetwork** öğesini seçin. Ardından, aşağıdaki resimde gösterildiği gibi **Alt Ağ** ve **Genel**’i seçin:
 
-   ![Sanal ağ seçme](./media/tutorial-restrict-network-access-to-resources/virtual-machine-settings.png)
+   ![Sanal ağ seçin](./media/tutorial-restrict-network-access-to-resources/virtual-machine-settings.png)
 
 6. **Ağ Güvenlik Grubu** bölümünde **Gelişmiş**'i seçin. Portal sizin için otomatik olarak, sonraki bir adımda sanal makineye bağlanmak için açmanız gereken 3389 numaralı bağlantı noktasına izin veren bir ağ güvenlik grubu oluşturur. **Ayarlar** sayfasında **Tamam**'ı seçin.
 7. **Özet** sayfasında **Oluştur**’a tıklayarak sanal makine dağıtımını başlatın. VM’nin dağıtılması birkaç dakika sürer ancak VM oluşturulurken sonraki adıma geçebilirsiniz.

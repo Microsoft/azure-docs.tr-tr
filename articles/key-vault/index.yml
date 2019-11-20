@@ -1,91 +1,96 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Anahtar Kasası Belgeleri
+### YamlMime:Landing
+title: Azure Key Vault belgeleri
+summary: Anahtar Kasası hesabınızı kullanarak bulut kaynaklarınıza, uygulamalarınıza ve çözümlerinize erişen ve bunları şifreleyen anahtarlar oluşturma ve bunları koruma hakkında bilgi edinin. Öğreticiler, API başvuruları ve daha fazlası.
 metadata:
-  title: 'Azure Key Vault Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
-  meta.description: 'Learn how to use Key Vault to create and maintain keys that access and encrypt your cloud resources, apps, and solutions. Tutorials, API references, and more.'
-  author: barclayn
-  manager: barbkess
-  layout: LandingPage
+  title: Azure Key Vault belgeleri
+  description: Anahtar Kasası hesabınızı kullanarak bulut kaynaklarınıza, uygulamalarınıza ve çözümlerinize erişen ve bunları şifreleyen anahtarlar oluşturma ve bunları koruma hakkında bilgi edinin. Öğreticiler, API başvuruları ve daha fazlası.
+  services: key-vault
   ms.service: key-vault
   ms.topic: landing-page
-  ms.date: 09/14/2018
-  ms.author: barclayn
-abstract:
-  description: 'Anahtar Kasası’nı kullanarak bulut uygulamaları ve hizmetleri tarafından kullanılan şifreleme anahtarlarını ve gizli anahtarları koruma ve yönetme hakkında bilgi edinin. Öğreticiler, API başvuruları ve diğer belgeler, bulut uygulamaları ve hizmetleri tarafından kullanılan şifreleme anahtarlarını ve gizli dizileri oluşturma ve koruma ile ilgili bilgiler içerir.'
-sections:
-  - items:
-      - type: list
-        style: cards
-        className: cardsM
-        columns: 3
-        items:
-          - href: /azure/key-vault/key-vault-whatis
-            html: <p>Azure Key Vault ile ilgili temel kavramları öğrenin.</p>
-            image:
-              src: 'https://docs.microsoft.com/media/common/i_article.svg'
-            title: Kavramlar
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: ''
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: media/index/cli.svg
-            text: Azure CLI
-            href: /azure/key-vault/quick-create-cli
-          - image:
-              src: media/index/logo_powershell.svg
-            text: PowerShell
-            href: /azure/key-vault/quick-create-powershell
-          - image:
-              src: media/index/portal.svg
-            text: Azure Portal
-            href: /azure/key-vault/quick-create-portal
-          - image:
-              src: media/index/logo_NET.svg
-            text: .NET
-            href: /azure/key-vault/quick-create-net
-          - image:
-              src: media/index/logo_nodejs.svg
-            text: Node.js
-            href: /azure/key-vault/quick-create-node
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: Çeşitli senaryolarda Key Vault'u kullanmayı öğrenme
-      - type: list
-        style: unordered
-        items:
-          - html: <a href="/azure/key-vault/tutorial-net-create-vault-azure-web-app">Web Uygulamasından Key Vault'u kullanmaya başlama</a>
-          - html: <a href="/azure/key-vault/tutorial-net-linux-virtual-machine">Azure Linux Sanal Makinesi ile Azure Key Vault'u kullanma</a></li>
-          - html: <a href="/azure/key-vault/tutorial-net-windows-virtual-machine">Azure Windows Sanal Makinesi ile Azure Key Vault'u kullanma</a>
-          - html: <a href="/azure/key-vault/tutorial-python-linux-virtual-machine">Azure Linux Sanal Makinesi ile Azure Key Vault'u kullanma</a>
-          - html: <a href="/azure/key-vault/tutorial-python-windows-virtual-machine">Azure Windows Sanal Makinesi ile Azure Key Vault'u kullanma</a>
-  - title: Microsoft Learn ile becerilerinizi geliştirin
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Azure Key Vault ile sunucu uygulamalarınızdaki gizli dizileri yönetme
-            href: /learn/modules/manage-secrets-with-azure-key-vault/
-            image:
-              src: /learn/achievements/manage-secrets-with-azure-key-vault.svg
-              href: /learn/modules/manage-secrets-with-azure-key-vault/
-      - type: paragraph
-        text: <a href="/learn/browse/?products=azure-key-vault">Daha fazla etkileşimli öğrenme içeriği...</a>
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Komut Satırı
-            html: '<p><a href="/powershell/module/az.keyvault/?view=azps-1.2.0#key_vault">PowerShell</a></p><p><a href="/cli/azure/keyvault">Azure CLI 2</a></p>'
-          - title: Diller
-            html: <p><a href="/dotnet/api/overview/azure/key-vault">.NET</a></p><p><a href="/java/api/overview/azure/keyvault">Java</a></p><p><a href="/python/api/overview/azure/key-vault">Python</a></p><p><a href="/javascript/api/overview/azure/key-vault">Node.js</a></p>
-          - title: REST
-            html: <p><a href="/rest/api/keyvault">REST API</a></p>
+  author: msmbaldwin
+  ms.author: mbaldwin
+  manager: rkarlin
+  ms.date: 09/19/2019
+  ms.openlocfilehash: cbd1ca9ead64bfda8401876ec54487f767363d3c
+  ms.sourcegitcommit: 29880cf2e4ba9e441f7334c67c7e6a994df21cfe
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 09/26/2019
+  ms.locfileid: "71299782"
+landingContent:
+- title: Azure Key Vault hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Azure Anahtar Kasası nedir?
+      url: key-vault-overview.md
+  - linkListType: concept
+    links:
+    - text: Temel kavramlar
+      url: basic-concepts.md
+    - text: Geçici silme
+      url: key-vault-ovw-soft-delete.md
+    - text: Azaltma
+      url: key-vault-ovw-throttling.md
+- title: Başlarken
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Azure CLI
+      url: quick-create-cli.md
+    - text: Azure PowerShell
+      url: quick-create-powershell.md
+    - text: Portal
+      url: quick-create-portal.md
+    - text: .NET
+      url: quick-create-net.md
+    - text: Node.js
+      url: quick-create-node.md
+- title: Öğreticiler
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Web uygulamasından anahtar kasasını
+      url: tutorial-net-create-vault-azure-web-app.md
+    - text: Azure Linux Sanal Makinesi ile Azure Key Vault
+      url: tutorial-net-linux-virtual-machine.md
+    - text: Azure Windows Sanal Makinesi ile Azure Key Vault
+      url: tutorial-net-windows-virtual-machine.md
+    - text: Python ile Key Vault - Linux
+      url: tutorial-python-linux-virtual-machine.md
+    - text: Python ile Key Vault - Windows
+      url: tutorial-python-windows-virtual-machine.md
+- title: Key Vault ve depolama anahtarları
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Depolama anahtarlarını Azure CLI ile yönetme
+      url: key-vault-ovw-storage-keys.md
+    - text: Depolama anahtarlarını Azure PowerShell ile yönetme
+      url: key-vault-overview-storage-keys-powershell.md
+    - text: Koddaki SAS belirteçlerini getirme
+      url: storage-keys-sas-tokens-code.md
+- title: Key Vault uygulama tümleştirmesi
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Geliştirici kılavuzu
+      url: key-vault-developers-guide.md
+    - text: Key Vault'a erişmek için yönetilen kimlik kullanma
+      url: managed-identity.md
+  - linkListType: tutorial
+    links:
+    - text: .NET Azure web uygulamasıyla Key Vault kullanma
+      url: tutorial-net-create-vault-azure-web-app.md
+  - linkListType: reference
+    links:
+    - text: Kimlik doğrulaması, istekler ve yanıtlar
+      url: authentication-requests-and-responses.md
+    - text: Key Vault REST API’si başvurusu
+      url: /rest/api/keyvault/
+- title: Microsoft Learn
+  linkLists:
+  - linkListType: learn
+    links:
+    - text: Azure Key Vault ile sunucu uygulamalarınızdaki gizli dizileri yönetme
+      url: /learn/modules/manage-secrets-with-azure-key-vault/

@@ -1,54 +1,54 @@
 ---
-title: HTTP uygulama yönlendirme eklenti Azure Kubernetes Service'teki (AKS)
-description: HTTP uygulama yönlendirme eklentisi, Azure Kubernetes Service (AKS) kullanın.
+title: Azure Kubernetes Service (AKS) üzerinde HTTP uygulama yönlendirmesi eklentisi
+description: Azure Kubernetes Service (AKS) üzerinde HTTP uygulama yönlendirme eklentisini kullanın.
 services: container-service
 author: lachie83
 manager: jeconnoc
 ms.service: container-service
 ms.topic: article
-ms.date: 04/25/2018
+ms.date: 08/06/2019
 ms.author: laevenso
-ms.openlocfilehash: d6e1cc033416c90e27b5caf4bba310400e55b3a5
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: f0975d0a60081b66d3d5a513954deb0c4fa1b978
+ms.sourcegitcommit: 670c38d85ef97bf236b45850fd4750e3b98c8899
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60466329"
+ms.lasthandoff: 08/08/2019
+ms.locfileid: "68851545"
 ---
-# <a name="http-application-routing"></a>HTTP uygulaması yönlendirme
+# <a name="http-application-routing"></a>HTTP uygulama yönlendirmesi
 
-HTTP uygulama yönlendirme çözümü, Azure Kubernetes Service (AKS) kümenize dağıtılan uygulamalara erişmek kolaylaştırır. Çözümün etkin olduğunda, bir giriş denetleyicisine AKS kümenizin yapılandırır. Çözüm, ayrıca dağıtılan uygulamalar gibi uygulama uç noktaları için ortak olarak erişilebilen DNS adları oluşturur.
+HTTP uygulama yönlendirme çözümü, Azure Kubernetes Service (AKS) kümenize dağıtılan uygulamalara erişimi kolaylaştırır. Çözüm etkinleştirildiğinde, AKS kümenizde bir giriş [denetleyicisi](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) yapılandırır. Uygulamalar dağıtıldığında, çözüm uygulama uç noktaları için genel olarak erişilebilen DNS adları da oluşturur.
 
-Eklenti etkinleştirildiğinde, aboneliğinizde bir DNS bölgesi oluşturur. DNS maliyet hakkında daha fazla bilgi için bkz: [DNS fiyatlandırma][dns-pricing].
+Eklenti etkinleştirildiğinde, aboneliğinizde bir DNS bölgesi oluşturur. DNS maliyeti hakkında daha fazla bilgi için bkz. [DNS fiyatlandırması][dns-pricing].
 
 > [!CAUTION]
-> HTTP uygulama yönlendirme eklenti giriş denetleyicisine hızla oluşturun ve uygulamalarınızın erişim sağlamak için tasarlanmıştır. Bu eklenti, üretim kullanımı için önerilmez. Birden çok çoğaltmalar ve TLS içeren üretime hazır giriş dağıtımlarını desteklemek için bkz: [bir HTTPS giriş denetleyicisine oluşturma](https://docs.microsoft.com/azure/aks/ingress-tls).
+> HTTP uygulama yönlendirme eklentisi, hızlı bir şekilde giriş denetleyicisi oluşturup uygulamalarınıza erişim sağlamak için tasarlanmıştır. Bu eklenti, üretim kullanımı için önerilmez. Birden çok çoğaltma ve TLS desteği içeren üretime yönelik giriş dağıtımları için bkz. HTTPS giriş [denetleyicisi oluşturma](https://docs.microsoft.com/azure/aks/ingress-tls).
 
-## <a name="http-routing-solution-overview"></a>HTTP yönlendirme çözümüne genel bakış
+## <a name="http-routing-solution-overview"></a>HTTP Yönlendirme çözümüne genel bakış
 
-Eklenti iki bileşenlerini dağıtır: bir [Kubernetes giriş denetleyicisine] [ ingress] ve [dış DNS] [ external-dns] denetleyicisi.
+Eklenti iki bileşeni dağıtır: bir [Kubernetes giriş denetleyicisi][ingress] ve BIR [dış DNS][external-dns] denetleyicisi.
 
-- **Giriş denetleyicisine**: Giriş denetleyicisine LoadBalancer türünde bir Kubernetes hizmetini kullanarak internet'e açıktır. Giriş denetleyicisine izler ve uygulayan [Kubernetes giriş kaynakları][ingress-resource], uygulama uç noktaları için rotalar oluşturur.
-- **Dış DNS denetleyicisi**: Kubernetes giriş kaynakları izler ve kümeye özgü DNS bölgesinde DNS A kayıtlarını da oluşturur.
+- Giriş **denetleyicisi**: Giriş denetleyicisi, yük dengeleyici türünde bir Kubernetes hizmeti kullanılarak internet 'e açıktır. Giriş denetleyicisi, uygulama uç noktalarına yollar oluşturan [Kubernetes giriş kaynaklarını][ingress-resource]izler ve uygular.
+- **Dış-DNS denetleyicisi**: Kubernetes giriş kaynaklarını izler ve kümeye özgü DNS bölgesinde DNS A kayıtları oluşturur.
 
-## <a name="deploy-http-routing-cli"></a>HTTP yönlendirme dağıtın: CLI
+## <a name="deploy-http-routing-cli"></a>HTTP yönlendirmeyi dağıtma: CLI
 
-HTTP uygulama yönlendirme eklentisi, Azure CLI ile bir AKS kümesi dağıtırken etkinleştirilebilir. Bunu yapmak için [az aks oluşturma] [ az-aks-create] komutunu `--enable-addons` bağımsız değişken.
+HTTP uygulama yönlendirme eklentisi, bir AKS kümesi dağıtımında Azure CLı ile etkinleştirilebilir. Bunu yapmak için, [az aks Create][az-aks-create] komutunu `--enable-addons` bağımsız değişkeniyle birlikte kullanın.
 
 ```azurecli
 az aks create --resource-group myResourceGroup --name myAKSCluster --enable-addons http_application_routing
 ```
 
 > [!TIP]
-> Birden çok eklenti etkinleştirmek istiyorsanız, bunları bir virgülle ayrılmış liste olarak belirtin. Örneğin, HTTP uygulama Yönlendirme ve izlemeyi etkinleştirmek için biçimini kullanın. `--enable-addons http_application_routing,monitoring`.
+> Çoklu eklentileri etkinleştirmek istiyorsanız, bunları virgülle ayrılmış bir liste olarak sağlayın. Örneğin, HTTP uygulama yönlendirmeyi ve izlemeyi etkinleştirmek için biçimini `--enable-addons http_application_routing,monitoring`kullanın.
 
-HTTP kullanarak varolan bir AKS kümesi üzerinde yönlendirme de etkinleştirebilirsiniz [az aks enable-addons] [ az-aks-enable-addons] komutu. Var olan bir kümede HTTP yönlendirme etkinleştirmek için eklemeniz `--addons` parametresi belirtin *http_application_routing* aşağıdaki örnekte gösterildiği gibi:
+[Az aks Enable-addons][az-aks-enable-addons] komutunu kullanarak var olan bir aks kümesinde http yönlendirmeyi de etkinleştirebilirsiniz. Mevcut bir kümede http yönlendirmeyi etkinleştirmek için `--addons` parametreyi ekleyin ve aşağıdaki örnekte gösterildiği gibi *http_application_routing* belirtin:
 
 ```azurecli
 az aks enable-addons --resource-group myResourceGroup --name myAKSCluster --addons http_application_routing
 ```
 
-Kümeye dağıtılan veya güncelleştirildikten sonra kullanın [az aks show] [ az-aks-show] DNS bölge adını almak için komutu. Bu ad, AKS kümesi uygulama dağıtmak için gereklidir.
+Küme dağıtıldıktan veya güncelleştirildikten sonra, DNS bölgesi adını almak için [az aks Show][az-aks-show] komutunu kullanın. Bu ad, uygulamaları AKS kümesine dağıtmak için gereklidir.
 
 ```azurecli
 $ az aks show --resource-group myResourceGroup --name myAKSCluster --query addonProfiles.httpApplicationRouting.config.HTTPApplicationRoutingZoneName -o table
@@ -58,26 +58,26 @@ Result
 9f9c1fe7-21a1-416d-99cd-3543bb92e4c3.eastus.aksapp.io
 ```
 
-## <a name="deploy-http-routing-portal"></a>HTTP yönlendirme dağıtın: Portal
+## <a name="deploy-http-routing-portal"></a>HTTP yönlendirmeyi dağıtma: Portal
 
-HTTP uygulama yönlendirme eklentisi, bir AKS kümesi dağıtırken Azure portalı üzerinden etkinleştirilebilir.
+HTTP uygulama yönlendirme eklentisi bir AKS kümesi dağıtıldığında Azure portal aracılığıyla etkinleştirilebilir.
 
-![HTTP yönlendirme özelliğini etkinleştir](media/http-routing/create.png)
+![HTTP yönlendirme özelliğini etkinleştirme](media/http-routing/create.png)
 
-Küme dağıtıldıktan sonra otomatik olarak oluşturulan bir AKS kaynak grubuna gidin ve DNS bölgesini seçin. DNS bölge adını not alın. Bu ad, AKS kümesi uygulama dağıtmak için gereklidir.
+Küme dağıtıldıktan sonra otomatik oluşturulan AKS kaynak grubuna gidin ve DNS bölgesini seçin. DNS bölgesi adı ' nı bir yere göz atın. Bu ad, uygulamaları AKS kümesine dağıtmak için gereklidir.
 
-![DNS bölge adını Al](media/http-routing/dns.png)
+![DNS bölgesi adını al](media/http-routing/dns.png)
 
-## <a name="use-http-routing"></a>HTTP yönlendirme kullanın
+## <a name="use-http-routing"></a>HTTP yönlendirmeyi kullanma
 
-HTTP uygulama yönlendirme çözümü gibi ek açıklamalı giriş kaynaklar üzerinde yalnızca tetiklenebilir:
+HTTP uygulama yönlendirme çözümü, yalnızca aşağıdaki şekilde ek olarak açıklanan giriş kaynaklarında tetiklenebilir:
 
 ```yaml
 annotations:
   kubernetes.io/ingress.class: addon-http-application-routing
 ```
 
-Adlı bir dosya oluşturun **örnekleri-http-uygulaması-routing.yaml** aşağıdaki YAML'ye kopyalayın. 43 satırında güncelleştirme `<CLUSTER_SPECIFIC_DNS_ZONE>` DNS bölge adı ile bu makalenin önceki adımda toplanan.
+**Samples-http-Application-Routing. YAML** adlı bir dosya oluşturun ve aşağıdaki YAML 'ye kopyalayın. Satır 43 ' de, `<CLUSTER_SPECIFIC_DNS_ZONE>` Bu makalenin önceki adımında toplanan DNS bölge adıyla güncelleştirin.
 
 
 ```yaml
@@ -136,7 +136,7 @@ spec:
         path: /
 ```
 
-Kullanım [kubectl uygulamak] [ kubectl-apply] kaynakları oluşturmak için komutu.
+Kaynakları oluşturmak için [kubectl Apply][kubectl-apply] komutunu kullanın.
 
 ```bash
 $ kubectl apply -f samples-http-application-routing.yaml
@@ -146,7 +146,7 @@ service "party-clippy" created
 ingress "party-clippy" created
 ```
 
-Http uygulama routing.yaml örnekleri dosyasının ana bölümünde belirtilen ana bilgisayar adı gitmek için cURL veya bir tarayıcı kullanın. Uygulama, internet üzerinden kullanılabilir olmadan önce en fazla bir dakika sürebilir.
+Samples-http-Application-Routing. YAML dosyasının ana bilgisayar bölümünde belirtilen ana bilgisayar adına gitmek için kıvrımlı veya tarayıcı kullanın. Uygulama, internet üzerinden kullanılabilir hale gelmeden önce bir dakika sürebilir.
 
 ```bash
 $ curl party-clippy.471756a6-e744-4aa0-aa01-89c4d162a7a7.canadaeast.aksapp.io
@@ -169,17 +169,17 @@ $ curl party-clippy.471756a6-e744-4aa0-aa01-89c4d162a7a7.canadaeast.aksapp.io
 
 ```
 
-## <a name="remove-http-routing"></a>HTTP yönlendirme Kaldır
+## <a name="remove-http-routing"></a>HTTP yönlendirmeyi kaldır
 
-HTTP yönlendirme çözümü Azure CLI kullanarak kaldırabilirsiniz. Bunu yapmak için aşağıdaki komutu çalıştırın, değiştirme, AKS kümesi ve kaynak grubu adı.
+HTTP yönlendirme çözümü, Azure CLı kullanılarak kaldırılabilir. Bunu yapmak için, AKS kümenizi ve kaynak grubu adını değiştirerek aşağıdaki komutu çalıştırın.
 
 ```azurecli
 az aks disable-addons --addons http_application_routing --name myAKSCluster --resource-group myResourceGroup --no-wait
 ```
 
-HTTP uygulama yönlendirme eklentiyi devre dışı bırakıldığında, kümedeki bazı Kubernetes kaynakları kalabilir. Bu kaynaklar içerir *configMaps* ve *gizli dizileri*ve oluşturulan *kube-system* ad alanı. Temiz bir küme korumak için bu kaynakları kaldırmak isteyebilirsiniz.
+HTTP uygulama yönlendirme eklentisi devre dışı bırakıldığında, bazı Kubernetes kaynakları kümede kalabilir. Bu kaynaklar *Configmaps* ve *gizli*dizileri içerir ve *Kuto-System* ad alanında oluşturulur. Temiz bir kümeyi sürdürmek için bu kaynakları kaldırmak isteyebilirsiniz.
 
-Aranan *eklentisi-http-uygulaması-yönlendirme* aşağıdakileri kullanarak kaynakları [kubectl alma] [ kubectl-get] komutları:
+Aşağıdaki [kubectl Get][kubectl-get] komutlarını kullanarak *addon-http-Application-Routing* kaynaklarını arayın:
 
 ```console
 kubectl get deployments --namespace kube-system
@@ -188,7 +188,7 @@ kubectl get configmaps --namespace kube-system
 kubectl get secrets --namespace kube-system
 ```
 
-Silinmesi gereken configMaps aşağıdaki örnek çıktı gösterilmektedir:
+Aşağıdaki örnek çıktıda silinmesi gereken configMaps gösterilmektedir:
 
 ```
 $ kubectl get configmaps --namespace kube-system
@@ -199,17 +199,17 @@ kube-system   addon-http-application-routing-tcp-services                0      
 kube-system   addon-http-application-routing-udp-services                0      9m7s
 ```
 
-Kaynakları silmek için kullanın [kubectl Sil] [ kubectl-delete] komutu. Kaynak türü, kaynak adı ve ad alanı belirtin. Aşağıdaki örnek, bir önceki configmaps siler:
+Kaynakları silmek için [kubectl Delete][kubectl-delete] komutunu kullanın. Kaynak türünü, kaynak adını ve ad alanını belirtin. Aşağıdaki örnek, önceki configmaps birini siler:
 
 ```console
 kubectl delete configmaps addon-http-application-routing-nginx-configuration --namespace kube-system
 ```
 
-Önceki yineleyin `kubectl delete` adım için tüm *eklentisi-http-uygulaması-yönlendirme* kümenizde kalan kaynaklar.
+Kümenizde kalan tüm `kubectl delete` *addon-http-Application-Routing* kaynakları için önceki adımı tekrarlayın.
 
 ## <a name="troubleshoot"></a>Sorun giderme
 
-Kullanım [kubectl günlükleri] [ kubectl-logs] dış DNS uygulama için uygulama günlüklerini görmek için komutu. Günlükler, bir A ve TXT DNS kaydı, başarıyla oluşturuldu onaylamalıdır.
+Dış DNS uygulamasının uygulama günlüklerini görüntülemek için [kubectl logs][kubectl-logs] komutunu kullanın. Günlükler bir ve TXT DNS kaydının başarıyla oluşturulduğunu onaylamasını sağlamalıdır.
 
 ```
 $ kubectl logs -f deploy/addon-http-application-routing-external-dns -n kube-system
@@ -218,11 +218,11 @@ time="2018-04-26T20:36:19Z" level=info msg="Updating A record named 'party-clipp
 time="2018-04-26T20:36:21Z" level=info msg="Updating TXT record named 'party-clippy' to '"heritage=external-dns,external-dns/owner=default"' for Azure DNS zone '471756a6-e744-4aa0-aa01-89c4d162a7a7.canadaeast.aksapp.io'."
 ```
 
-Bu kayıtlar, ayrıca Azure portalında DNS bölgesi kaynağı üzerinde görülebilir.
+Bu kayıtlar, Azure portal DNS bölge kaynağında de görülebilir.
 
-![DNS kayıtlarını alma](media/http-routing/clippy.png)
+![DNS kayıtlarını al](media/http-routing/clippy.png)
 
-Kullanım [kubectl günlükleri] [ kubectl-logs] Ngınx giriş denetleyicisine için uygulama günlüklerini görmek için komutu. Günlükleri onaylamalıdır `CREATE` bir giriş kaynağı ve denetleyicisinin yeniden yükle. Tüm HTTP etkinlik günlüğe kaydedilir.
+NGINX giriş denetleyicisinin uygulama günlüklerini görüntülemek için [kubectl logs][kubectl-logs] komutunu kullanın. Günlükler, bir giriş kaynağını `CREATE` ve denetleyicinin yeniden yüklenmesini doğrulayabilmelidir. Tüm HTTP etkinlikleri günlüğe kaydedilir.
 
 ```bash
 $ kubectl logs -f deploy/addon-http-application-routing-nginx-ingress-controller -n kube-system
@@ -275,7 +275,7 @@ ingress "party-clippy" deleted
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-AKS içinde bir HTTPS güvenli giriş denetleyicisine yükleme hakkında daha fazla bilgi için bkz: [HTTPS giriş Azure Kubernetes Service'teki (AKS)][ingress-https].
+AKS 'de HTTPS güvenli giriş denetleyicisi 'nin nasıl yükleneceği hakkında bilgi için bkz. [Azure Kubernetes Service (aks) üzerinde https][ingress-https]girişi.
 
 <!-- LINKS - internal -->
 [az-aks-create]: /cli/azure/aks?view=azure-cli-latest#az-aks-create

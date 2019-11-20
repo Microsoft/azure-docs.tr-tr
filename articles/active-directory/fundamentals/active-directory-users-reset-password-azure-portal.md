@@ -2,7 +2,7 @@
 title: Bir kullanıcının parola - Azure Active Directory sıfırlama | Microsoft Docs
 description: Azure Active Directory'yi kullanarak bir kullanıcının parolasını sıfırlama konusunda yönergeler.
 services: active-directory
-author: eross-msft
+author: msaburnley
 manager: daveba
 ms.assetid: fad5624b-2f13-4abc-b3d4-b347903a8f16
 ms.service: active-directory
@@ -10,16 +10,16 @@ ms.subservice: fundamentals
 ms.workload: identity
 ms.topic: conceptual
 ms.date: 09/05/2018
-ms.author: lizross
+ms.author: ajburnle
 ms.reviewer: jeffsta
 ms.custom: it-pro, seodec18
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4db6554e86cef61f2fc8e7a466919d2ce723f0e5
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b4fdbbd4d71a9c97259678413cd9e59ee8aeae6b
+ms.sourcegitcommit: 18061d0ea18ce2c2ac10652685323c6728fe8d5f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60248018"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69032667"
 ---
 # <a name="reset-a-users-password-using-azure-active-directory"></a>Azure Active Directory'yi kullanarak bir kullanıcının parolasını sıfırlama
 
@@ -33,7 +33,7 @@ Yönetici olarak, kullanıcı bir cihaz dışında kilitli, parolasını unuturs
 
 ## <a name="to-reset-a-password"></a>Parola sıfırlama
 
-1. Oturum [Azure portalında](https://portal.azure.com/) parola Yöneticisi veya Kullanıcı Yöneticisi. Kullanılabilir roller hakkında daha fazla bilgi için bkz: [Azure Active Directory'de yönetici rolleri atama](../users-groups-roles/directory-assign-admin-roles.md#available-roles)
+1. [Azure Portal](https://portal.azure.com/) Kullanıcı Yöneticisi veya parola Yöneticisi olarak oturum açın. Kullanılabilir roller hakkında daha fazla bilgi için bkz: [Azure Active Directory'de yönetici rolleri atama](../users-groups-roles/directory-assign-admin-roles.md#available-roles)
 
 2. Seçin **Azure Active Directory**seçin **kullanıcılar**arayın ve sıfırlama ihtiyacı olan kullanıcıyı seçin ve ardından **parola sıfırlama**.
 
@@ -43,7 +43,8 @@ Yönetici olarak, kullanıcı bir cihaz dışında kilitli, parolasını unuturs
 
 3. İçinde **parolayı Sıfırla** sayfasında **parolayı Sıfırla**.
 
-    Kullanıcı için otomatik olarak oluşturulan geçici bir parola.
+    > [!Note]
+    > Azure Active Directory kullanırken, Kullanıcı için geçici bir parola otomatik olarak oluşturulur. Şirket içi Active Directory kullanırken, kullanıcının parolasını oluşturursunuz.
 
 4. Parolayı kopyalayın ve kullanıcıya verin. Kullanıcı, sonraki oturum açma işlemi sırasında parolasını değiştirmeye gerekir.
 

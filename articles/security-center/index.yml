@@ -1,88 +1,78 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Azure Güvenlik Merkezi Belgeleri
+### YamlMime:Landing
+title: Azure Güvenlik Merkezi belgeleri
+summary: Azure Güvenlik Merkezi, hibrit bulut iş yükleri arasında birleşik güvenlik yönetimi ve gelişmiş tehdit koruması sağlar.
 metadata:
-  title: 'Azure Güvenlik Merkezi Belgeleri - Öğreticiler, API Başvurusu | Microsoft Docs'
-  meta.description: 'Azure Security Center provides unified security management and advanced threat protection across hybrid cloud workloads. Learn how to get started with Security Center, apply security policies across your workloads, limit your exposure to threats, and detect and respond to attacks with our quickstarts and tutorials..'
+  title: Azure Güvenlik Merkezi belgeleri
+  description: Hızlı başlangıç kılavuzlarımız ve öğreticilerimiz sayesinde Güvenlik Merkezi ile çalışmaya başlayın, iş yüklerinizin güvenliğini sağlamayı, riskleri sınırlamayı, saldırıları algılamayı ve yanıtlamayı öğrenin.
   services: security-center
-  author: cmcclister
-  manager: carolz
   ms.service: security-center
-  ms.tgt_pltfrm: na
-  ms.devlang: na
   ms.topic: landing-page
-  ms.date: 07/26/18
-  ms.author: cmcclister
-abstract:
-  description: 'Azure Güvenlik Merkezi, hibrit bulut iş yükleri arasında birleşik güvenlik yönetimi ve gelişmiş tehdit koruması sağlar. Hızlı başlangıç kılavuzlarımız ve öğreticilerimiz sayesinde Güvenlik Merkezi ile çalışmaya başlamayı, iş yüklerinize güvenlik ilkeleri uygulamayı, tehditlere maruz kalma riskinizi sınırlamayı ve saldırıları algılayıp onları yanıt vermeyi öğrenin.'
-sections:
-  - title: 5 Dakikalık Hızlı Başlangıçlar
-    items:
-      - type: paragraph
-        text: VM’lerinizi ve bilgisayarlarınızı Güvenlik Merkezi’ne eklemeyi ve güvenlik çözümlerinize bağlanmayı öğrenin.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: /media/common/i_subscription.svg
-            text: Azure abonelikleri ekleme
-            href: /azure/security-center/security-center-get-started
-          - image:
-              src: /media/logos/logo_Windows.svg
-            text: Windows bilgisayarları ekleme
-            href: /azure/security-center/quick-onboard-windows-computer
-          - image:
-              src: /media/logos/logo_linux.svg
-            text: Linux bilgisayarları ekleme
-            href: /azure/security-center/quick-onboard-linux-computer
-          - image:
-              src: /media/common/i_multi-connect.svg
-            text: Güvenlik çözümlerine bağlanma
-            href: /azure/security-center/quick-security-solutions
-  - title: Adım Adım Öğreticiler
-    items:
-      - type: paragraph
-        text: 'Güvenlik ilkelerini tanımlamayı, kötü amaçlı etkinliklere karşı kaynaklarınızı korumayı ve güvenlik uyarıları ile olaylara yanıt vermeyi öğrenin.'
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/security-center/tutorial-security-policy">Güvenlik ilkelerini tanımlama ve değerlendirme</a>
-          - html: <a href="/azure/security-center/tutorial-protect-resources">Kaynaklarınızı koruma</a>
-          - html: <a href="/azure/security-center/tutorial-security-incident">Güvenlik olaylarını yanıtlama</a>
-  - title: Microsoft Learn ile becerilerinizi geliştirin
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: "\_\_Azure'da güvenliğe giriş"
-            href: /learn/modules/intro-to-security-in-azure/
-            image:
-              src: /learn/achievements/intro-to-security-in-azure.svg
-              href: /learn/modules/intro-to-security-in-azure/
-      - type: paragraph
-        text: <a href="/learn/browse/?term=security">Daha fazla etkileşimli öğrenme içeriği...</a>
-  - title: Ücretsiz Eğitim Videosu
-    items:
-      - type: list
-        style: cards
-        className: cardsFTitle
-        items:
-          - title: Azure Güvenlik Merkezi ile bulut kaynaklarının korunmasını basitleştirme - Ignite 2018
-            href: 'https://youtu.be/0txX1Y0GXDc'
-            image:
-              src: 'https://docs.microsoft.com/media/logos/logo_azure.svg'
-              href: 'https://youtu.be/0txX1Y0GXDc'
-          - title: Azure Güvenlik Merkezi ile sunucu iş yüklerini koruma - Ignite 2018
-            href: 'https://youtu.be/Kb_xeIJVROo'
-            image:
-              src: 'https://docs.microsoft.com/media/logos/logo_azure.svg'
-              href: 'https://youtu.be/Kb_xeIJVROo'
-  - title: Başvuru
-    items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - html: '<a href="https://docs.microsoft.com/rest/api/securitycenter/">REST API başvurusu</a>'
-          - html: '<a href="https://azure.microsoft.com/updates/?product=security-center">Hizmet güncelleştirmeleri</a>'
+  ms.collection: collection
+  author: memildin
+  ms.author: memildin
+  ms.date: 11/04/2019
+  ms.openlocfilehash: 33c2d287219f8005063af746f0b6d6448b1a4ef7
+  ms.sourcegitcommit: ac56ef07d86328c40fed5b5792a6a02698926c2d
+  ms.translationtype: HT
+  ms.contentlocale: tr-TR
+  ms.lasthandoff: 11/08/2019
+  ms.locfileid: "73824797"
+landingContent:
+- title: Güvenlik Merkezi hakkında
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Güvenlik Merkezi'nin temel özellikleri nelerdir?
+      url: security-center-intro.md
+    - text: Windows Server ve Linux'ın hangi sürümleri desteklenir?
+      url: security-center-os-coverage.md
+- title: Güncel kalın
+  linkLists:
+  - linkListType: whats-new
+    links:
+    - text: Kapsayıcılarınızı koruma
+      url: container-security.md
+    - text: Dinamik uyumluluk paketleri ekleme
+      url: update-regulatory-compliance-packages.md
+    - text: Windows Admin Center ile tümleştirme
+      url: windows-admin-center-integration.md
+    - text: Uyarılara ve önerilere yanıtları otomatikleştirme
+      url: workflow-automation.md
+    - text: Güvenlik uyarılarını ve önerilerini dışarı aktarma
+      url: continuous-export.md
+    - text: Azure Key Vault için gelişmiş tehdit koruması ayarlama
+      url: advanced-threat-protection-key-vault.md
+- title: Başlarken
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Güvenlik ilkelerinizi yapılandırma
+      url: tutorial-security-policy.md
+    - text: Güvenlik duruşunuzu değerlendirme
+      url: security-center-secure-score.md
+    - text: Gelişmiş güvenliğe yükseltme
+      url: security-center-onboarding.md
+    - text: Diğer Azure güvenlik ürünleriyle tümleştirme
+      url: security-center-alerts-integration.md
+- title: Secure score’unuzu iyileştirme
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Güvenlik puanı nedir?
+      url: security-center-secure-score.md
+    - text: Güvenlik önerilerini iyileştirme
+      url: security-center-remediate-recommendations.md
+    - text: Güvenlik önerilerinizi özelleştirme
+      url: tutorial-security-policy.md
+    - text: Güvenliği artırmak için önerileri kullanın
+      url: security-center-using-recommendations.md
+- title: Tehditleri azaltma
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Tam zamanında erişimi yönetme
+      url: security-center-just-in-time.md
+    - text: Uyarlamalı uygulama denetimleri ayarlama
+      url: security-center-adaptive-application.md
+    - text: Uyarlamalı Ağ Sağlamlaştırma'yı uygulama
+      url: security-center-adaptive-network-hardening.md

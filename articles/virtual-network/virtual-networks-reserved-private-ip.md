@@ -1,10 +1,10 @@
 ---
-title: Statik iç özel IP - Azure VM - Klasik
-description: Statik iç IP (DIP) ve bunların nasıl yönetileceğinin anlama
+title: Statik iç özel IP-Azure VM-klasik
+description: Statik iç IP 'Leri (DIP 'Ler) ve bunların nasıl yönetileceğini anlama
 services: virtual-network
 documentationcenter: na
 author: genlin
-manager: cshepard
+manager: dcscontentpm
 editor: tysonn
 ms.assetid: 93444c6f-af1b-41f8-a035-77f5c0302bf0
 ms.service: virtual-network
@@ -14,27 +14,27 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/31/2018
 ms.author: genli
-ms.openlocfilehash: b83a6e2c81eac9993c481561e3cebbed681d2c4a
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: c37c49d8f7e09334014af290bf3a8c8e6d35f04b
+ms.sourcegitcommit: ca359c0c2dd7a0229f73ba11a690e3384d198f40
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60640336"
+ms.lasthandoff: 09/17/2019
+ms.locfileid: "71058361"
 ---
-# <a name="how-to-set-a-static-internal-private-ip-address-using-powershell-classic"></a>PowerShell (Klasik) kullanarak iç özel statik IP adresi ayarlama
-Çoğu durumda, sanal makineniz için statik iç IP adresi belirtmeniz gerekmez. Bir sanal ağdaki VM'ler otomatik olarak bir dahili IP adresine, belirttiğiniz aralıktan alır. Ancak bazı durumlarda, belirli bir sanal makine için statik bir IP adresi belirtme mantıklıdır. Örneğin, sanal makinenizin DNS çalıştıracağınız veya bir etki alanı denetleyicisi olacaktır. Statik iç IP adresi ile VM stop/sağlamayı kaldırma durumunda bile aracılığıyla kalır. 
+# <a name="how-to-set-a-static-internal-private-ip-address-using-powershell-classic"></a>PowerShell kullanarak statik bir iç özel IP adresi ayarlama (klasik)
+Çoğu durumda, sanal makineniz için statik bir iç IP adresi belirtmeniz gerekmez. Bir sanal ağdaki VM 'Ler, belirttiğiniz bir aralıktan otomatik olarak bir iç IP adresi alır. Ancak belirli durumlarda, belirli bir sanal makine için statik IP adresi belirtmek mantıklı olur. Örneğin, VM 'niz DNS çalıştıracaksanız veya bir etki alanı denetleyicisi olur. Statik bir iç IP adresi, bir durdurma/sağlamayı kaldırma durumunda bile VM ile kalır. 
 
 > [!IMPORTANT]
-> Azure'da oluşturmaya ve kaynaklarla çalışmaya yönelik iki farklı dağıtım modeli vardır:  [Resource Manager ve klasik](../azure-resource-manager/resource-manager-deployment-model.md). Bu makale klasik dağıtım modelini incelemektedir. Microsoft, yeni dağıtımların çoğunun kullanmanızı önerir [Resource Manager dağıtım modeli](virtual-networks-static-private-ip-arm-ps.md).
+> Azure 'da kaynak oluşturmak ve bunlarla çalışmak için iki farklı dağıtım modeli vardır:  [Kaynak Yöneticisi ve klasik](../azure-resource-manager/resource-manager-deployment-model.md). Bu makale klasik dağıtım modelini incelemektedir. Microsoft, en yeni dağıtımların [Kaynak Yöneticisi dağıtım modelini](virtual-networks-static-private-ip-arm-ps.md)kullanmasını önerir.
 > 
 > 
-> ## <a name="install-the-azure-powershell-service-management-module"></a>Azure PowerShell Service Management modülünü yükleme
+> ## <a name="install-the-azure-powershell-service-management-module"></a>Azure PowerShell Service Management modülünü yükler
 
-Aşağıdaki komutları çalıştırmadan önce emin [Azure PowerShell Service Management modülünü](https://docs.microsoft.com/powershell/azure/servicemanagement/install-azure-ps?view=azuresmps-4.0.0
-) makineye yüklenir. Azure PowerShell Service Management modülünü sürüm geçmişi için bkz: [Azure modülü PowerShell galerisinde](https://www.powershellgallery.com/packages/Azure/5.3.0).
+Aşağıdaki komutları çalıştırmadan önce, [Azure PowerShell hizmet yönetimi modülünün](https://docs.microsoft.com/powershell/azure/servicemanagement/install-azure-ps?view=azuresmps-4.0.0
+) makinede yüklü olduğundan emin olun. Azure PowerShell hizmet yönetimi modülünün sürüm geçmişi için [PowerShell Galerisi Azure modülü](https://www.powershellgallery.com/packages/Azure/5.3.0)' ne bakın.
 
-## <a name="how-to-verify-if-a-specific-ip-address-is-available"></a>Belirli bir IP adresi kullanılabilir olup olmadığını doğrulama
-Doğrulama IP adresi *10.0.0.7* adlı bir sanal ağda kullanılabilir *TestVnet*, aşağıdaki PowerShell komutunu çalıştırın ve değerini doğrulamak *IsAvailable*.
+## <a name="how-to-verify-if-a-specific-ip-address-is-available"></a>Belirli bir IP adresinin kullanılabilir olup olmadığını doğrulama
+*KıSMıNA 10.0.0.7* IP adresinin *testvnet*adlı bir VNET 'te kullanılabilir olup olmadığını doğrulamak için aşağıdaki PowerShell komutunu çalıştırın ve *IsAvailable*için değeri doğrulayın.
 
 
     Test-AzureStaticVNetIP –VNetName TestVNet –IPAddress 10.0.0.7 
@@ -46,12 +46,12 @@ Doğrulama IP adresi *10.0.0.7* adlı bir sanal ağda kullanılabilir *TestVnet*
     OperationStatus      : Succeeded
 
 > [!NOTE]
-> Yukarıdaki komut güvenli bir ortamda test etmek isterseniz bölümündeki yönergeleri uygulayın [sanal ağ (Klasik) oluşturmak](virtual-networks-create-vnet-classic-pportal.md) adlı bir vnet oluşturmak için *TestVnet* ve onu kullandığından emin olun *10.0.0.0/8*  adres alanı.
+> Yukarıdaki komutu güvenli bir ortamda test etmek isterseniz, *testvnet* adlı bir VNET oluşturmak ve *10.0.0.0/8* adres alanını kullandığından emin olmak için [sanal ağ oluşturma (klasik)](virtual-networks-create-vnet-classic-pportal.md) konusundaki yönergeleri izleyin.
 > 
 > 
 
-## <a name="how-to-specify-a-static-internal-ip-when-creating-a-vm"></a>Bir sanal makine oluştururken statik iç IP belirtme
-Adlı yeni bir bulut hizmeti aşağıdaki PowerShell Betiği oluşturur *TestService*, ardından görüntüyü Azure'dan alır, ardından adlı bir VM oluşturur *TestVM* alınan görüntü kullanarak yeni bulut hizmetinde ayarlar Adlı bir alt ağ içinde olacak şekilde VM *Subnet-1*ve ayarlar *10.0.0.7* sanal makine için statik iç IP olarak:
+## <a name="how-to-specify-a-static-internal-ip-when-creating-a-vm"></a>VM oluştururken statik bir iç IP belirtme
+Aşağıdaki PowerShell betiği *TestService*adlı yeni bir bulut hizmeti oluşturur, ardından Azure 'dan bir görüntü alır ve ardından alınan görüntüyü kullanarak yeni bulut hizmetinde *TESTVM* adlı BIR VM oluşturur, VM 'yi *alt ağ-1*adlı bir alt ağda olacak şekilde ayarlar, ve VM için *kısmına 10.0.0.7* bir STATIK iç IP olarak ayarlar:
 
     New-AzureService -ServiceName TestService -Location "Central US"
     $image = Get-AzureVMImage|?{$_.ImageName -like "*RightImage-Windows-2012R2-x64*"}
@@ -61,8 +61,8 @@ Adlı yeni bir bulut hizmeti aşağıdaki PowerShell Betiği oluşturur *TestSer
     | Set-AzureStaticVNetIP -IPAddress 10.0.0.7 `
     | New-AzureVM -ServiceName "TestService" –VNetName TestVnet
 
-## <a name="how-to-retrieve-static-internal-ip-information-for-a-vm"></a>Bir sanal makine için statik iç IP bilgilerini alma
-Komut dosyası yukarıdaki oluşturulan VM için statik iç IP bilgileri görüntülemek için aşağıdaki PowerShell komutunu çalıştırın ve değerlerini gözlemleyin *IPADDRESS*:
+## <a name="how-to-retrieve-static-internal-ip-information-for-a-vm"></a>VM için statik iç IP bilgilerini alma
+Yukarıdaki betikle oluşturulan VM 'nin statik iç IP bilgilerini görüntülemek için aşağıdaki PowerShell komutunu çalıştırın ve *IPAddress*değerlerini gözlemleyin:
 
     Get-AzureVM -Name TestVM -ServiceName TestService
 
@@ -93,15 +93,15 @@ Komut dosyası yukarıdaki oluşturulan VM için statik iç IP bilgileri görün
     OperationId                 : 34c1560a62f0901ab75cde4fed8e8bd1
     OperationStatus             : OK
 
-## <a name="how-to-remove-a-static-internal-ip-from-a-vm"></a>Bir sanal makineden bir statik iç IP kaldırma
-Yukarıdaki komut VM'ye eklenen statik iç IP kaldırmak için aşağıdaki PowerShell komutunu çalıştırın:
+## <a name="how-to-remove-a-static-internal-ip-from-a-vm"></a>Bir VM 'den statik bir iç IP 'yi kaldırma
+Yukarıdaki betikte bulunan VM 'ye eklenen statik iç IP 'yi kaldırmak için aşağıdaki PowerShell komutunu çalıştırın:
 
     Get-AzureVM -ServiceName TestService -Name TestVM `
     | Remove-AzureStaticVNetIP `
     | Update-AzureVM
 
-## <a name="how-to-add-a-static-internal-ip-to-an-existing-vm"></a>Mevcut bir VM'ye statik iç IP ekleme
-Yukarıdaki komut dosyası kullanılarak oluşturulan sanal makine için statik iç IP eklemek için aşağıdaki komutu çalıştırın:
+## <a name="how-to-add-a-static-internal-ip-to-an-existing-vm"></a>Var olan bir VM 'ye statik bir iç IP ekleme
+Yukarıdaki betiği kullanarak oluşturulan VM 'ye statik bir iç IP eklemek için aşağıdaki komutu çalıştırın:
 
     Get-AzureVM -ServiceName TestService000 -Name TestVM `
     | Set-AzureStaticVNetIP -IPAddress 10.10.0.7 `
@@ -110,7 +110,7 @@ Yukarıdaki komut dosyası kullanılarak oluşturulan sanal makine için statik 
 ## <a name="next-steps"></a>Sonraki adımlar
 [Ayrılmış IP](virtual-networks-reserved-public-ip.md)
 
-[Örnek düzeyi genel IP (ILPIP)](virtual-networks-instance-level-public-ip.md)
+[Örnek düzeyi genel IP (ıLPıP)](virtual-networks-instance-level-public-ip.md)
 
-[Ayrılmış IP REST API'leri](https://msdn.microsoft.com/library/azure/dn722420.aspx)
+[REST API 'Leri Ayrılmış IP](https://msdn.microsoft.com/library/azure/dn722420.aspx)
 

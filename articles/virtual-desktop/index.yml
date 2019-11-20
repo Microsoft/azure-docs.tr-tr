@@ -1,9 +1,9 @@
 ### YamlMime:YamlDocument
 documentType: LandingData
-title: Windows Sanal Masaüstü Önizleme Belgeleri
+title: Windows Sanal Masaüstü Belgeleri
 metadata:
-  title: 'Windows Sanal Masaüstü Önizleme Belgeleri - Öğreticiler, hızlı başlangıçlar, API başvuruları | Microsoft Docs'
-  description: Azure için Windows Sanal Masaüstü Önizleme bulutta sanallaştırılmış çok kullanıcılı bir Windows 10 Enterprise deneyimidir.
+  title: Windows Sanal Masaüstü Belgeleri | Microsoft Docs
+  description: Azure için Windows Sanal Masaüstü bulutta sanallaştırılmış çok kullanıcılı bir Windows 10 Enterprise deneyimidir.
   author: Heidilohr
   manager: daveba
   ms.service: virtual-desktop
@@ -17,11 +17,11 @@ sections:
   - title: Genel Bakış
     items:
       - type: paragraph
-        text: 'Windows Sanal Masaüstü Önizleme’yi ve nasıl kullanılacağını öğrenin. Öğreticiler, Nasıl yapılır makaleleri ve başvuru içeriği gibi daha birçok malzemeyle ana bilgisayar havuzlarıyla kiracıları nasıl ayarlayacağınız ve kullanıcılara Windows Sanal Masaüstü ortamınız için nasıl rol atayacağınız gösterilir.'
+        text: 'Windows Sanal Masaüstü''nü ve nasıl kullanılacağını öğrenin. Öğreticiler, Nasıl yapılır makaleleri ve başvuru içeriği gibi daha birçok malzemeyle ana bilgisayar havuzlarıyla kiracıları nasıl ayarlayacağınız ve kullanıcılara Windows Sanal Masaüstü ortamınız için nasıl rol atayacağınız gösterilir.'
       - type: list
         style: unordered
         items:
-          - html: <a href="/azure/virtual-desktop/overview">Windows Sanal Masaüstü Önizleme nedir?</a>
+          - html: <a href="/azure/virtual-desktop/overview">Windows Sanal Masaüstü nedir?</a>
   - title: Adım Adım Öğreticiler
     items:
       - type: paragraph

@@ -1,6 +1,6 @@
 ---
-title: Azure PowerShell betik örneği - web sunucusu günlükleri ile bir web uygulamasını izleme | Microsoft Docs
-description: Azure PowerShell betik örneği - web sunucusu günlükleri ile bir web uygulamasını izleme
+title: Azure PowerShell betik örneği-Web sunucusu günlükleri ile bir Web uygulamasını Izleme | Microsoft Docs
+description: Azure PowerShell betik örneği-Web sunucusu günlükleri ile bir Web uygulamasını Izleme
 services: app-service\web
 documentationcenter: ''
 author: syntaxc4
@@ -9,21 +9,20 @@ editor: ''
 tags: azure-service-management
 ms.assetid: 5805d7cd-9e56-4eba-bd85-75b013690ff5
 ms.service: app-service
-ms.devlang: multiple
 ms.topic: sample
 ms.tgt_pltfrm: na
 ms.workload: web
 ms.date: 03/20/2017
 ms.author: cfowler
 ms.custom: mvc
-ms.openlocfilehash: ac503c4408432da4e2c0c9281ee5cdd6e5d9e984
-ms.sourcegitcommit: 0568c7aefd67185fd8e1400aed84c5af4f1597f9
+ms.openlocfilehash: e9e376de3356a23df648f77738fd2c84cb26d97f
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65198598"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70098307"
 ---
-# <a name="monitor-a-web-appwith-web-server-logs"></a>Web sunucusu günlükleri ile bir web uygulamasını izleme
+# <a name="monitor-a-web-appwith-web-server-logs"></a>Web sunucusu günlükleri ile bir Web uygulamasını izleme
 
 Bu senaryoda bir kaynak grubu, app service planı ve web uygulaması oluşturacaksınız ve web uygulamasını web sunucusu günlüklerini etkinleştirecek şekilde yapılandıracaksınız. Ardından, gözden geçirmek üzere günlük dosyalarını indireceksiniz.
 
@@ -50,7 +49,7 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 | Komut | Notlar |
 |---|---|
 | [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup) | Tüm kaynakların depolandığı bir kaynak grubu oluşturur. |
-| [Yeni AzAppServicePlan](/powershell/module/az.websites/new-azappserviceplan) | App Service planı oluşturur. |
+| [New-AzAppServicePlan](/powershell/module/az.websites/new-azappserviceplan) | App Service planı oluşturur. |
 | [New-AzWebApp](/powershell/module/az.websites/new-azwebapp) | Bir web uygulaması oluşturur. |
 | [Set-AzWebApp](/powershell/module/az.websites/set-azwebapp) | Web uygulamasının yapılandırmasını değiştirir. |
 | [Get-AzWebAppMetric](/powershell/module/az.websites/get-azwebappmetric) | Web uygulamasının ölçümlerini alır. |

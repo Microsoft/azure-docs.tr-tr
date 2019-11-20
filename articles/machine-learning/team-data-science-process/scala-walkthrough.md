@@ -11,18 +11,18 @@ ms.topic: article
 ms.date: 11/13/2017
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: cdc37ace4687fe978030f528dcd5cbc87da596f0
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.openlocfilehash: b22d461d327e595908ea8cc18dd0d507fdc83ecd
+ms.sourcegitcommit: beb34addde46583b6d30c2872478872552af30a1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60589469"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69907706"
 ---
 # <a name="data-science-using-scala-and-spark-on-azure"></a>Azure üzerinde Scala ve Spark kullanan Veri Bilimi
 Bu makalede, Scala Spark ölçeklenebilir MLlib ve Spark ML paketleri ile bir Azure HDInsight Spark kümesi üzerinde denetimli makine öğrenimi görevlerini kullanmak nasıl gösterir. Oluşturan görevlerinde size yol gösterir [veri bilimi işlemi](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/): veri alımı ve keşfi, görselleştirme, özellik Mühendisliği, modelleme ve model tüketim. Makaleyi modellerinde Lojistik ve doğrusal regresyon, rastgele ormanları ve gradyan boosted ağaçları (GBTs) ek olarak iki ortak denetimli makine öğrenimi görevlerini içerir:
 
-* Regresyon problemi: Tahminini taksi seyahat ipucunu tutarındaki ($)
-* İkili sınıflandırma: Tahmin ipucu ya da taksi dönüş ipucu yok (1/0)
+* Gerileme sorunu: Bir TAXI yolculuğu için tip tutarının Tahmini ($)
+* İkili sınıflandırma: Bir taksi yolculuğu için tıp tahmini veya ipucu (1/0)
 
 Modelleme işlemi, eğitim ve değerlendirme sınama veri kümesi ve ilgili doğruluğu ölçümleri gerektirir. Bu makalede, bu modeller Azure Blob Depolama alanında depolayın ve puan ve Tahmine dayalı performanslarını değerlendirmek bilgi edinebilirsiniz. Bu makalede, çapraz doğrulama ve hiper parametreli Süpürme'ı kullanarak modelleri iyileştirmek nasıl daha gelişmiş konular da kapsar. Kullanılan veri kümesinin 2013 NYC taksi seyahat ve taksi verileri Github'da bulunan bir örnektir.
 
@@ -32,7 +32,7 @@ Modelleme işlemi, eğitim ve değerlendirme sınama veri kümesi ve ilgili doğ
 
 [HDInsight Spark](../../hdinsight/spark/apache-spark-overview.md) açık kaynaklı Spark'ın Azure'da barındırılan teklifidir. Ayrıca Spark kümesinde Jupyter Scala not defterleri için destek içerir ve dönüştürme, filtreleme ve Azure Blob depolamada depolanan verileri görselleştirmek için Spark SQL etkileşimli sorguları çalıştırabilirsiniz. Jupyter not defterlerini Spark kümelerinde yüklü çözümler sağlayın ve verileri görselleştirmek için ilgili çizimleri Göster Scala kod parçacıkları bu makaledeki çalıştırın. Bu konu başlıklarındaki modelleme adımları, eğitme, değerlendirmek, kaydetme ve her bir türü modelin kullanma işlemi gösterilmektedir koda sahip.
 
-Kurulum adımları ve kod bu makalede Azure HDInsight 3.4 Spark 1.6 için var. Ancak, bu makalede hem de kodu [Scala Jupyter not defteri](https://github.com/Azure/Azure-MachineLearning-DataScience/blob/master/Misc/Spark/Scala/Exploration%20Modeling%20and%20Scoring%20using%20Scala.ipynb) geneldir ve tüm Spark kümesinde çalışması gerekir. Küme Kurulum ve yönetim adımları HDInsight Spark kullanmıyorsanız ne bu makalede gösterilenden biraz farklı olabilir.
+Kurulum adımları ve kod bu makalede Azure HDInsight 3.4 Spark 1.6 için var. Ancak, bu makalede hem de kodu [Scala Jupyter not defteri](https://github.com/Azure-Samples/Azure-MachineLearning-DataScience/blob/master/Misc/Spark/Scala/Exploration-Modeling-and-Scoring-using-Scala.ipynb) geneldir ve tüm Spark kümesinde çalışması gerekir. Küme Kurulum ve yönetim adımları HDInsight Spark kullanmıyorsanız ne bu makalede gösterilenden biraz farklı olabilir.
 
 > [!NOTE]
 > Scala yerine Python uçtan uca veri bilimi işlemi için görevleri tamamlamak için nasıl kullanılacağını gösteren bir konu için bkz: [Azure HDInsight üzerinde Spark'ı kullanarak veri bilimi](spark-overview.md).
@@ -41,7 +41,7 @@ Kurulum adımları ve kod bu makalede Azure HDInsight 3.4 Spark 1.6 için var. A
 
 ## <a name="prerequisites"></a>Önkoşullar
 * Bir Azure aboneliğiniz olmalıdır. Zaten bir tamamlamadıysanız [Azure ücretsiz deneme sürümü edinin](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/).
-* Aşağıdaki yordamları tamamlamak için bir Azure HDInsight 3.4 Spark 1.6 kümesine ihtiyacınız vardır. Bir küme oluşturmak için deki yönergelere bakın [kullanmaya başlayın: Azure HDInsight üzerinde Apache Spark oluşturma](../../hdinsight/spark/apache-spark-jupyter-spark-sql.md). Küme türü ve sürümü ayarlamak **küme türü seçin** menüsü.
+* Aşağıdaki yordamları tamamlamak için bir Azure HDInsight 3.4 Spark 1.6 kümesine ihtiyacınız vardır. Bir küme oluşturmak için Başlarken ' deki [yönergelere bakın: Azure HDInsight](../../hdinsight/spark/apache-spark-jupyter-spark-sql.md)üzerinde Apache Spark oluşturun. Küme türü ve sürümü ayarlamak **küme türü seçin** menüsü.
 
 ![HDInsight küme türü yapılandırması](./media/scala-walkthrough/spark-cluster-on-portal.png)
 
@@ -66,7 +66,7 @@ Jupyter not defteri sunucusuna doğrudan github'dan bir Not Defteri kullanarak S
 
 [Exploration-Modeling-and-Scoring-using-Scala.ipynb](https://github.com/Azure/Azure-MachineLearning-DataScience/blob/master/Misc/Spark/Scala/Exploration-Modeling-and-Scoring-using-Scala.ipynb)
 
-## <a name="setup-preset-spark-and-hive-contexts-spark-magics-and-spark-libraries"></a>Kurulum: Spark ve Hive bağlamları, Spark işlevlerini ve Spark kitaplıklarını önceden
+## <a name="setup-preset-spark-and-hive-contexts-spark-magics-and-spark-libraries"></a>Yapısı Spark ve Hive bağlamlarını, Spark mıknatıc ve Spark kitaplıklarını önceden ayarlayın
 ### <a name="preset-spark-and-hive-contexts"></a>Önceden oluşturulmuş Spark ve Hive bağlamları
     # SET THE START TIME
     import java.util.Calendar
@@ -226,7 +226,7 @@ Aşağıdaki kod örneği, girdi verilerini okumak için ve yolun Spark kümesin
 
 **Çıkış:**
 
-Hücre çalıştırma süresi: 8 saniye.
+Hücrenin çalıştırılacağı süre: 8 saniye.
 
 ### <a name="query-the-table-and-import-results-in-a-data-frame"></a>Tablo sorgulama ve sonuçları bir veri çerçevesinde İçeri Aktar
 Ardından, taksi, yolcular ve ipucu verileri için bir tabloyu sorgulamak; bozuk ve harici verileri filtrelemek; ve birkaç satır yazdırın.
@@ -411,7 +411,7 @@ Dizin oluşturma için kullanmak `StringIndexer()`ve sık erişimli bir kodlama 
 
 **Çıkış:**
 
-Hücre çalıştırma süresi: 4 saniye.
+Hücrenin çalıştırılacağı süre: 4 saniye.
 
 ### <a name="sample-and-split-the-data-set-into-training-and-test-fractions"></a>Örnek ve bölme eğitim ve test parçalar halinde veri kümesi
 Bu kod, rastgele bir örnekleme verilerin (Bu örnekte, %25) oluşturur. Örnekleme, bu örnekte veri kümesinin boyutu nedeniyle gerekli olmamasına karşın, bu makalede, böylece gerektiğinde kendi sorunları kullanma bilirsiniz nasıl, örnek oluşturabilirsiniz gösterilir. Örnekleri büyük olduğunda, modelleri eğitme sırada bu önemli zamandan tasarruf edebilirsiniz. Ardından, örnek bir eğitim bölümü (Bu örnekte, %75) ve test bölümü (Bu örnekte, %25) sınıflandırma ve regresyon modelleme bölün.
@@ -450,7 +450,7 @@ Rastgele bir sayı (0 ve 1 arasında) çapraz doğrulama hatları eğitim sıras
 
 **Çıkış:**
 
-Hücre çalıştırma süresi: 2 saniye.
+Hücrenin çalıştırılacağı süre: 2 saniye.
 
 ### <a name="specify-training-variable-and-features-and-then-create-indexed-or-one-hot-encoded-training-and-testing-input-labeled-point-rdds-or-data-frames"></a>Eğitim değişkeni ve özellikleri belirtin ve ardından eğitim ve giriş noktası Rdd ya da veri çerçevelerini etiketli testi kodlanmış dizinli veya bir seyrek oluşturun
 Bu bölüm, kategorik metin veri noktası etiketli veri türü olarak dizin ve eğitme ve test MLlib Lojistik regresyon ve diğer sınıflandırma modellerini üzere kullanabilmeniz için kodlamak gösteren kod içerir. Etiketli noktası, girdi verisi olarak makine öğrenimi algoritması MLlib içinde çoğu için gerekli olan bir şekilde biçimlendirilmiş Rdd nesneleridir. A [noktası etiketli](https://spark.apache.org/docs/latest/mllib-data-types.html#labeled-point) yerel bir vektör, yoğun ya da seyrek, etiket/yanıt ile ilişkilidir.
@@ -493,7 +493,7 @@ Bu kodda, hedef (bağımlı) değişkeni ve modelleri eğitmek için kullanmak i
 
 **Çıkış:**
 
-Hücre çalıştırma süresi: 4 saniye.
+Hücrenin çalıştırılacağı süre: 4 saniye.
 
 ### <a name="automatically-categorize-and-vectorize-features-and-targets-to-use-as-inputs-for-machine-learning-models"></a>Otomatik olarak kategorilere ayırmak ve özellikler ve hedefler için makine öğrenimi modellerini girdi olarak kullanmak için vektör hale getirmeye
 Spark ML, ağaç tabanlı modelleme işlevleri kullanmak için özellikler ve hedef kategorilere ayırmak için kullanın. Kod, iki görevleri gerçekleştirir:
@@ -532,7 +532,7 @@ Burada, bu iki görevleri için kodu verilmiştir.
 
 
 
-## <a name="binary-classification-model-predict-whether-a-tip-should-be-paid"></a>İkili sınıflandırma modeli: İpucu Ücretli olup olmadığını tahmin edin
+## <a name="binary-classification-model-predict-whether-a-tip-should-be-paid"></a>İkili sınıflandırma modeli: Bir ipucunun ödenip ödenmeyeceğini tahmin etme
 Bu bölümde, üç türleri ipucu Ücretli olup olmadığını tahmin etmek için ikili sınıflandırma modellerini oluşturun:
 
 * A **Lojistik regresyon modelini** Spark ML kullanarak `LogisticRegression()` işlevi
@@ -723,9 +723,9 @@ Ardından, MLlib'ın kullanarak GBT sınıflandırma modeli oluşturma `Gradient
 
 **Çıkış:**
 
-Alanı ROC eğrisi altında: 0.9846895479241554
+ROC eğrisi altındaki alan: 0.9846895479241554
 
-## <a name="regression-model-predict-tip-amount"></a>Regresyon modeli: İpucu miktarını tahmin edin
+## <a name="regression-model-predict-tip-amount"></a>Regresyon modeli: İpucu tutarını tahmin etme
 Bu bölümde, iki türleri ipucu miktarı tahmin etmek için regresyon modeli oluşturun:
 
 * A **regularized doğrusal regresyon modeli** Spark ML kullanarak `LinearRegression()` işlevi. Modeli kaydedin ve modeli test veri çubuğunda değerlendirme.
@@ -775,7 +775,7 @@ Bu bölümde, iki türleri ipucu miktarı tahmin etmek için regresyon modeli ol
 
 **Çıkış:**
 
-Hücre çalıştırma süresi: 13 saniye.
+Hücrenin çalıştırılacağı süre: 13 saniye.
 
     # LOAD A SAVED LINEAR REGRESSION MODEL FROM BLOB STORAGE AND SCORE A TEST DATA SET
 
@@ -848,7 +848,7 @@ Kod bir yerel veri çerçevesine sorgu çıkışı oluşturur ve verileri çizer
 
 **Çıkış:**
 
-![İpucu tutar: Gerçek ve Öngörülen](./media/scala-walkthrough/plot-actual-vs-predicted-tip-amount.png)
+![İpucu miktarı: Gerçek ve tahmin edilen](./media/scala-walkthrough/plot-actual-vs-predicted-tip-amount.png)
 
 ### <a name="create-a-gbt-regression-model"></a>GBT regresyon modeli oluşturun
 Spark ML kullanarak bir GBT regresyon modeli oluşturun `GBTRegressor()` çalışması ve test veri modelinde değerlendirebilirsiniz.
@@ -881,7 +881,7 @@ Spark ML kullanarak bir GBT regresyon modeli oluşturun `GBTRegressor()` çalı�
 
 **Çıkış:**
 
-Test R-sqr aşağıdaki gibidir: 0.7655383534596654
+Test R-SQR: 0.7655383534596654
 
 ## <a name="advanced-modeling-utilities-for-optimization"></a>İyileştirme için Gelişmiş modelleme yardımcı programları
 Bu bölümde, geliştiricilerin model iyileştirme için sık kullandığınız machine learning yardımcı programlarını kullanın. Özellikle, parametre Süpürme ve çapraz doğrulama kullanarak makine öğrenimi modelleri üç farklı yolla iyileştirebilirsiniz:
@@ -938,7 +938,7 @@ Ardından, veri eğitme ve doğrulama kümeleri, kullanım hyper-model iyileşti
 
 **Çıkış:**
 
-Test R-sqr aşağıdaki gibidir: 0.6226484708501209
+Test R-SQR: 0.6226484708501209
 
 ### <a name="optimize-the-binary-classification-model-by-using-cross-validation-and-hyper-parameter-sweeping"></a>Çapraz doğrulama ve hiper parametreli Süpürme kullanarak ikili sınıflandırma modelinde en iyi duruma getirme
 Bu bölümde, çapraz doğrulama ve hiper parametreli Süpürme kullanarak ikili sınıflandırma modelinde en iyi duruma getirme gösterir. Bu, Spark ML kullanır `CrossValidator` işlevi.
@@ -982,7 +982,7 @@ Bu bölümde, çapraz doğrulama ve hiper parametreli Süpürme kullanarak ikili
 
 **Çıkış:**
 
-Hücre çalıştırma süresi: 33 saniye.
+Hücrenin çalıştırılacağı süre: 33 saniye.
 
 ### <a name="optimize-the-linear-regression-model-by-using-custom-cross-validation-and-parameter-sweeping-code"></a>Çapraz doğrulama ve parametre Süpürme özel kod kullanarak doğrusal regresyon modelinin en iyi duruma getirme
 Ardından, özel kod kullanarak model iyileştirin ve en yüksek doğruluğa ölçütünü kullanarak en iyi modeli parametreleri tanımlayın. Daha sonra son modelin oluşturma, modeli test veri çubuğunda değerlendirme ve Blob Depolama alanında modeli kaydedin. Son olarak, yük modeli, test verilerini puanlamak ve doğruluğu değerlendirin.
@@ -1097,7 +1097,7 @@ Ardından, özel kod kullanarak model iyileştirin ve en yüksek doğruluğa öl
 
 **Çıkış:**
 
-Hücre çalıştırma süresi: 61 saniye.
+Hücrenin çalıştırılacağı süre: 61 saniye.
 
 ## <a name="consume-spark-built-machine-learning-models-automatically-with-scala"></a>Spark'a yerleşik machine learning modellerini Scala ile otomatik olarak kullanma
 Azure veri bilimi işlemi oluşturan görevler rehberlik konuları genel bakış için bkz. [Team Data Science Process](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/).

@@ -1,133 +1,93 @@
 ---
-title: Para birimi önceden oluşturulmuş varlık
-titleSuffix: Azure
-description: Bu makalede, para birimi içeren önceden oluşturulmuş varlık bilgilerini Language Understanding (LUIS).
+title: Para birimi önceden oluşturulmuş varlık-LUSıS
+titleSuffix: Azure Cognitive Services
+description: Bu makale Language Understanding (LUSıS) içindeki para birimi önceden oluşturulmuş varlık bilgilerini içerir.
 services: cognitive-services
 author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: article
-ms.date: 05/07/2019
+ms.topic: conceptual
+ms.date: 10/14/2019
 ms.author: diberry
-ms.openlocfilehash: 7e882a66ae5a090e1fd3a0850ff35281dc4e692d
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 5b49dcc7e999757e119c399bdf01bed7cb312e02
+ms.sourcegitcommit: c22327552d62f88aeaa321189f9b9a631525027c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65072017"
+ms.lasthandoff: 11/04/2019
+ms.locfileid: "73465054"
 ---
-# <a name="currency-prebuilt-entity-for-a-luis-app"></a>Para birimi önceden oluşturulmuş bir varlık için bir LUIS uygulaması
-Önceden oluşturulmuş bir para birimi varlık birçok denominations ve LUIS uygulama kültürü ne olursa olsun ülkeler/bölgeler, para birimi algılar. Bu varlık zaten eğitildi çünkü uygulama hedefleri için para birimi içeren örnek Konuşma ekleme gerekmez. Para birimi varlık içerisinde desteklendiği [çok kültür](luis-reference-prebuilt-entities.md). 
+# <a name="currency-prebuilt-entity-for-a-luis-app"></a>Bir LUSıS uygulaması için para birimi önceden oluşturulmuş varlık
+Önceden oluşturulmuş para birimi varlığı, LUSıS uygulama kültürüne bakılmaksızın birçok paydaya ve ülkede/bölgede para birimini algılar. Bu varlık zaten eğitiltiğinden, uygulama amaçlarını para birimi içeren örnek bir değer eklemeniz gerekmez. Para birimi varlığı [birçok kültürde](luis-reference-prebuilt-entities.md)desteklenir. 
 
-## <a name="types-of-currency"></a>Para birimi türü
-Para birimi yönetilen engelle [tanıyıcıları metin](https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-NumbersWithUnit.yaml#L26) GitHub deposu
+## <a name="types-of-currency"></a>Para birimi türleri
+Para birimi [Tanıyıcılar-metin](https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-NumbersWithUnit.yaml#L26) GitHub deposundan yönetilir
 
-## <a name="resolution-for-currency-entity"></a>Para birimi varlık için çözümleme
+## <a name="resolution-for-currency-entity"></a>Para birimi varlığı için çözüm
 
-### <a name="api-version-2x"></a>API sürüm 2.x
+#### <a name="v3-responsetabv3"></a>[V3 yanıtı](#tab/V3)
 
-Aşağıdaki örnek, çözünürlüğünü gösterir **builtin.currency** varlık.
+Aşağıdaki JSON, `verbose` parametresi `false`olarak ayarlanmıştır:
 
 ```json
-{
-  "query": "search for items under $10.99",
-  "topScoringIntent": {
-    "intent": "SearchForItems",
-    "score": 0.926173568
-  },
-  "intents": [
-    {
-      "intent": "SearchForItems",
-      "score": 0.926173568
-    },
-    {
-      "intent": "None",
-      "score": 0.07376878
+"entities": {
+    "money": [
+        {
+            "number": 10.99,
+            "units": "Dollar"
+        }
+    ]
+}
+```
+#### <a name="v3-verbose-responsetabv3-verbose"></a>[V3 ayrıntılı yanıt](#tab/V3-verbose)
+Aşağıdaki JSON, `verbose` parametresi `true`olarak ayarlanmıştır:
+
+```json
+"entities": {
+    "money": [
+        {
+            "number": 10.99,
+            "unit": "Dollar"
+        }
+    ],
+    "$instance": {
+        "money": [
+            {
+                "type": "builtin.currency",
+                "text": "$10.99",
+                "startIndex": 23,
+                "length": 6,
+                "modelTypeId": 2,
+                "modelType": "Prebuilt Entity Extractor"
+            }
+        ]
     }
-  ],
-  "entities": [
+}
+```
+
+#### <a name="v2-responsetabv2"></a>[V2 yanıtı](#tab/V2)
+
+Aşağıdaki örnek, **yerleşik. Currency** varlığının çözünürlüğünü gösterir.
+
+```json
+"entities": [
     {
-      "entity": "$10.99",
-      "type": "builtin.currency",
-      "startIndex": 23,
-      "endIndex": 28,
-      "resolution": {
+        "entity": "$10.99",
+        "type": "builtin.currency",
+        "startIndex": 23,
+        "endIndex": 28,
+        "resolution": {
         "unit": "Dollar",
         "value": "10.99"
-      }
-    }
-  ]
-}
-```
-
-
-
-### <a name="preview-api-version-3x"></a>Önizleme API sürümü 3.x
-
-Aşağıdaki JSON ile olan `verbose` parametresini `false`:
-
-```json
-{
-    "query": "search for items under $10.99",
-    "prediction": {
-        "normalizedQuery": "search for items under $10.99",
-        "topIntent": "None",
-        "intents": {
-            "None": {
-                "score": 0.605889857
-            }
-        },
-        "entities": {
-            "money": [
-                {
-                    "number": 10.99,
-                    "unit": "Dollar"
-                }
-            ]
         }
     }
-}
+]
 ```
-
-Aşağıdaki JSON ile olan `verbose` parametresini `true`:
-
-```json
-{
-    "query": "search for items under $10.99",
-    "prediction": {
-        "normalizedQuery": "search for items under $10.99",
-        "topIntent": "None",
-        "intents": {
-            "None": {
-                "score": 0.605889857
-            }
-        },
-        "entities": {
-            "money": [
-                {
-                    "number": 10.99,
-                    "unit": "Dollar"
-                }
-            ],
-            "$instance": {
-                "money": [
-                    {
-                        "type": "builtin.currency",
-                        "text": "$10.99",
-                        "startIndex": 23,
-                        "length": 6,
-                        "modelTypeId": 2,
-                        "modelType": "Prebuilt Entity Extractor"
-                    }
-                ]
-            }
-        }
-    }
-}
-```
+* * * 
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Hakkında bilgi edinin [datetimeV2](luis-reference-prebuilt-datetimev2.md), [boyut](luis-reference-prebuilt-dimension.md), ve [e-posta](luis-reference-prebuilt-email.md) varlıklar. 
+[V3 tahmin uç noktası](luis-migration-api-v3.md)hakkında daha fazla bilgi edinin.
+
+[DatetimeV2](luis-reference-prebuilt-datetimev2.md), [Dimension](luis-reference-prebuilt-dimension.md)ve [email](luis-reference-prebuilt-email.md) varlıkları hakkında bilgi edinin. 

@@ -1,101 +1,107 @@
 ---
-title: "Azure yedekleme: İzleyici Azure Yedekleme'de korunan iş yükleri"
-description: Azure portalını kullanarak Azure Backup iş yüklerini izleme
-services: backup
-author: pvrk
-manager: shivamg
-keywords: Azure yedekleme; Uyarıları;
-ms.service: backup
+title: Korunan Azure Backup iş yüklerini izleme
+description: Bu makalede, Azure portal kullanarak Azure Backup iş yükleri için izleme ve bildirim özellikleri hakkında bilgi edinin.
 ms.topic: conceptual
 ms.date: 03/05/2019
-ms.author: pullabhk
 ms.assetid: 86ebeb03-f5fa-4794-8a5f-aa5cbbf68a81
-ms.openlocfilehash: ab7d2c0af4bc71733a7995b7e781f0facbfbb29f
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: ea5102a95a9bef17f25219e00dec4654bf7f06d6
+ms.sourcegitcommit: 4821b7b644d251593e211b150fcafa430c1accf0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "65236442"
+ms.lasthandoff: 11/19/2019
+ms.locfileid: "74172873"
 ---
 # <a name="monitoring-azure-backup-workloads"></a>Azure Backup iş yüklerini izleme
 
-Azure Backup, yedekleme gereksinimi ve altyapı topolojiye bağlı (şirket içinde veya Azure) birden çok yedekleme çözümleri sağlar. Herhangi bir yedekleme kullanıcı veya yönetici tüm çözümleri arasında neler olduğunu görmeniz gerekir ve önemli senaryolarda bildirilmesi bekleniyor. Bu makalede Azure Backup hizmeti tarafından sağlanan izleme ve uyarı özellikleri ayrıntılı olarak açıklanmaktadır.
+Azure Backup, yedekleme gereksinimine ve altyapı topolojisine (Şirket içi vs Azure) göre birden çok yedekleme çözümü sağlar. Herhangi bir yedekleme kullanıcısı veya Yöneticisi, tüm çözümlerde neler olduğunu ve önemli senaryolarda bildirilmesi bekleni görmelidir. Bu makalede, Azure Backup hizmeti tarafından sunulan izleme ve bildirim özellikleri ayrıntılı olarak açıklanır.
 
-## <a name="backup-jobs-in-recovery-services-vault"></a>Kurtarma Hizmetleri kasasında yedekleme işleri
+## <a name="backup-jobs-in-recovery-services-vault"></a>Kurtarma Hizmetleri kasasındaki yedekleme Işleri
 
-Azure Backup, yerleşik izleme ve uyarı Azure Backup tarafından korunan iş yükleri için özellikleri sağlar. Kurtarma Hizmetleri kasası ayarları **izleme** bölüm, yerleşik işler ve uyarılar sağlar.
+Azure Backup, Azure Backup tarafından korunan iş yükleri için yerleşik izleme ve uyarı özellikleri sağlar. Kurtarma Hizmetleri Kasası ayarlarında, **izleme** bölümü yerleşik işler ve uyarılar sağlar.
 
-![Yerleşik izleme RS kasası](media/backup-azure-monitoring-laworkspace/rs-vault-inbuiltmonitoring.png)
+![RS Kasası yerleşik izleme](media/backup-azure-monitoring-laworkspace/rs-vault-inbuiltmonitoring.png)
 
-İşler, yedekleme, yedekleme, geri yükleme, silme yedekleme ve benzeri yapılandırma gibi işlemleri gerçekleştirildiğinde oluşturulur.
+İşler, yedekleme, yedekleme, geri yükleme, yedeklemeyi silme gibi işlemler yapıldığında oluşturulur.
 
-Aşağıdaki Azure Backup çözümleri işlerden burada gösterilir:
+Aşağıdaki Azure Backup çözümlerinden gerçekleştirilen işler aşağıda gösterilmiştir:
 
-  - Azure VM yedeklemesi
-  - Azure dosya yedekleme
-  - SQL gibi Azure iş yükü yedekleme
-  - Azure Backup aracısı (MAB)
+- Azure VM yedeklemesi
+- Azure dosya yedeklemesi
+- SQL gibi Azure iş yükü yedeklemesi
+- Azure Backup aracısı (MAB)
 
-System Center veri koruma Yöneticisi'nden (SC-DPM), Microsoft Azure Backup sunucusu (MABS) işleri görüntülenmez.
+System Center Data Protection Manager (SC-DPM), Microsoft Azure Backup Server (MABS) işleri gösterilmez.
 
 > [!NOTE]
-> Azure vm'lerde SQL yedekleme gibi Azure iş yükleri, büyük yedekleme işlerinin sayısını vardır. Örneğin, günlük yedeklerinin her 15 dakikada bir çalıştırabilirsiniz. Bu nedenle, bu tür DB iş yükleri için tetiklenen yalnızca kullanıcı işlemlerini görüntülenir. Zamanlanmış yedekleme işlemleri görüntülenmez.
+> Azure VM 'Leri içindeki SQL yedeklemeleri gibi Azure iş yükleri çok fazla sayıda yedekleme işine sahiptir. Örneğin, günlük yedeklemeleri her 15 dakikada bir çalıştırılabilir. Bu nedenle, bu tür VERITABANı iş yükleri için yalnızca Kullanıcı tarafından tetiklenen işlemler görüntülenir. Zamanlanan yedekleme işlemleri görüntülenmiyor.
 
-## <a name="backup-alerts-in-recovery-services-vault"></a>Kurtarma Hizmetleri kasasında yedekleme uyarıları
+## <a name="backup-alerts-in-recovery-services-vault"></a>Kurtarma Hizmetleri kasasındaki yedekleme uyarıları
 
-Uyarılar, öncelikli olarak kullanıcılar, ilgili eylem yararlanabilmeniz burada bildirilir senaryolar verilmiştir. **Yedekleme uyarıları** bölümde, Azure Backup hizmeti tarafından oluşturulan uyarılar gösterilir. Bu uyarılar hizmet tarafından tanımlanan ve kullanıcı özel olamaz herhangi bir uyarı oluştur.
+Uyarılar, kullanıcıların ilgili eylemi yapabilmesi için bilgilendirildikleri senaryolara yöneliktir. **Yedekleme uyarıları** bölümü Azure Backup hizmeti tarafından oluşturulan uyarıları gösterir. Bu uyarılar hizmet tarafından tanımlanır ve Kullanıcı özel uyarı oluşturamaz.
 
 ### <a name="alert-scenarios"></a>Uyarı senaryoları
-Aşağıdaki senaryolarda alertable senaryoları hizmeti tarafından tanımlanır.
 
-  - Yedekleme/Geri Yükleme hataları
-  - Azure Backup Aracısı (MAB) için yedekleme uyarılarla başarılı oldu
-  - Veri/durdurmayı silinecek verileri bekleterek korumayı durdurun
+Aşağıdaki senaryolar, hizmet tarafından alertable senaryoları olarak tanımlanmıştır.
 
-### <a name="exceptions-when-an-alert-is-not-raised"></a>Bir uyarı olduğunda özel durumlar
-Bir hata durumunda bir uyarı ortaya değil, birkaç özel durum olan, bunlar:
+- Yedekleme/Geri Yükleme hataları
+- Azure Backup Aracısı (MAB) için yedekleme uyarılarla başarılı oldu
+- Verileri sakla/silme ile korumayı durdur
 
-  - Kullanıcı, açıkça çalışan işi iptal edildi
-  - Başka bir yedekleme işi (biz yalnızca önceki işin tamamlanmasını beklemek zorunda olduğundan burada yapacak hiçbir şey) sürüyor olduğundan iş başarısız
-  - Yedeklenen Azure VM artık mevcut olmadığından sanal makine yedekleme işi başarısız olur.
+### <a name="exceptions-when-an-alert-is-not-raised"></a>Uyarı oluşmayan özel durumlar
 
-Yukarıdaki özel durumları (öncelikle tetikleyen kullanıcı) bu işlemlerin sonucu hemen portal/PS/CLI istemcilerde gösterilir anlama gelen tasarlanmıştır. Bu nedenle, kullanıcı hemen farkındadır ve bildirim gerek yoktur.
+Bir hata üzerinde bir uyarı çıkarılmayan bazı özel durumlar vardır; bunlar:
 
-### <a name="alerts-from-the-following-azure-backup-solutions-are-shown-here"></a>Aşağıdaki Azure Backup çözümlerinden gelen uyarılar burada gösterilir:
+- Kullanıcı çalışan işi açıkça iptal etti
+- Devam eden başka bir yedekleme işi olduğu için iş başarısız oldu (bir önceki işin tamamlanmasını beklemek zorunda olduğumuz bu yana burada hiçbir şey yapması gerekmez)
+- Yedeklenen Azure VM artık mevcut olmadığından VM yedekleme işi başarısız oluyor
 
-  - Azure VM yedeklemeleri
-  - Azure Dosya yedeklemeleri
-  - Azure iş yükü yedeklemeleri, örneğin SQL
-  - Azure Backup aracısı (MAB)
+Yukarıdaki özel durumlar, bu işlemlerin sonucunun (öncelikli olarak kullanıcının tetiklendiği) Portal/PS/CLı istemcilerinde hemen gösterdiği olduğunu anlamak için tasarlanmıştır. Bu nedenle, Kullanıcı hemen haberdar edilir ve bir bildirime gerek kalmaz.
+
+### <a name="alerts-from-the-following-azure-backup-solutions-are-shown-here"></a>Aşağıdaki Azure Backup çözümlerinin uyarıları burada gösterilmektedir
+
+- Azure VM yedeklemeleri
+- Azure Dosya yedeklemeleri
+- Azure iş yükü yedeklemeleri, örneğin SQL
+- Azure Backup aracısı (MAB)
 
 > [!NOTE]
-> System Center veri koruma Yöneticisi'nden (SC-DPM), Microsoft Azure Backup sunucusu (MABS) uyarıları burada görüntülenmez.
+> System Center Data Protection Manager (SC-DPM) ve Microsoft Azure Backup sunucusu (MABS) uyarıları burada gösterilmez.
 
 ### <a name="alert-types"></a>Uyarı türleri
-Uyarı önem derecesine göre uyarılar üç tür tanımlanabilir:
 
-  - **Kritik**: İlke, yedekleme veya Kurtarma (zamanlanan veya tetiklenen kullanıcı) hatası için bir uyarı oluşturulmasını sunulmasını ve kritik uyarı ve silme gibi zararlı işlemler olarak yedekleme gösteriliyordu.
-  - **Uyarı**: Yedekleme işlemi başarılı olursa ancak birkaç uyarı bunlar uyarı bildirimleri listelenir.
-  - **Bilgilendirme**: Bugünden itibaren Azure Backup hizmeti tarafından hiçbir bilgilendirme uyarısı oluşturulur.
+Uyarı önem derecesine bağlı olarak, uyarılar üç tür halinde tanımlanabilir:
 
-## <a name="notification-for-backup-alerts"></a>Bildirim için yedekleme uyarıları
+- **Kritik**: prensibi, herhangi bir yedekleme veya Kurtarma hatası (zamanlanmış veya Kullanıcı tarafından tetiklenen), bir uyarının oluşturulmasına ve kritik bir uyarı olarak ve ayrıca yedekleme silme gibi bozucu işlemlere neden olarak gösterilmelidir.
+- **Uyarı**: yedekleme işlemi başarılı olur, ancak birkaç uyarı varsa uyarı uyarıları olarak listelenir.
+- **Bilgilendirici**: bugün itibariyle, Azure Backup hizmeti tarafından bir bilgilendirme uyarısı oluşturulmaz.
+
+## <a name="notification-for-backup-alerts"></a>Yedekleme uyarıları için bildirim
 
 > [!NOTE]
-> Bildirim yapılandırması yalnızca Azure portalı üzerinden yapılabilir. PS/CLI/REST API/Azure Resource Manager şablonu destek desteklenmiyor.
+> Bildirim yapılandırması yalnızca Azure Portal üzerinden yapılabilir. PS/CLı/REST API/Azure Resource Manager şablon desteği desteklenmez.
 
-Kullanıcılara bir uyarı ortaya bir kez bildirilir. Azure Backup e-posta yoluyla bir yerleşik bildirim mekanizması sağlar. Bireysel e-posta adresleri veya dağıtım listeleri, bir uyarı oluşturulduğunda bildirilmesi için belirtebilirsiniz. Ayrıca, tek tek her uyarı için bildirim almak için veya içinde bir saatlik Özet gruplandırın ve ardından bildirim alın de seçebilirsiniz.
+Bir uyarı ortaya çıktığında kullanıcılara bildirilir. Azure Backup, e-posta ile yerleşik bir bildirim mekanizması sağlar. Tek tek e-posta adreslerini veya bir uyarı oluşturulduğunda bildirilecek dağıtım listelerini belirtebilir. Ayrıca, her bir uyarı için bildirim almayı veya saatlik bir özette grupları seçip bildirim almayı seçebilirsiniz.
 
-![RS kasa yerleşik e-posta bildirimi](media/backup-azure-monitoring-laworkspace/rs-vault-inbuiltnotification.png)
+![RS Kasası yerleşik e-posta bildirimi](media/backup-azure-monitoring-laworkspace/rs-vault-inbuiltnotification.png)
 
-Bildirim yapılandırıldığında, Hoş Geldiniz veya tanıtım e-posta alırsınız. Bu, Azure Backup bir uyarı ortaya çıktığında bu adreslere e-postaları gönderebilir doğrular.<br>
+> [!NOTE]
+> SQL yedeklemeleriyle ilgili uyarılar birleştirilir ve e-posta yalnızca ilk oluşum için gönderilir. Ancak, uyarı Kullanıcı tarafından devre dışı bırakılırsa, bir sonraki oluşum başka bir e-posta tetikleyecektir.
 
-Bir uyarı oluşturulur ve bir saat içinde çözülen sıklığı için bir saatlik Özet ayarlandı ve yaklaşan saatlik Özet bir parçası olmayacaktır.
+Bildirim yapılandırıldığında, bir hoş geldiniz veya tanıtım e-postası alırsınız. Bu, bir uyarı ortaya çıktığında Azure Backup bu adreslere e-posta gönderebileceğinizi onaylar.<br>
+
+Sıklık bir saatlik Özet olarak ayarlandıysa ve bir süre içinde bir uyarı harekete geçirilir ve çözümlenirse, yaklaşan saatlik Özet 'in bir parçası olmayacaktır.
 
 > [!NOTE]
 >
-> * Zararlı gibi **silinecek verileri korumasını Durdur** olduğu gerçekleştirilirse, bir uyarı tetiklenir ve bildirimleri için kurtarma hizmeti yapılandırılmamış olsa bile abonelik sahipleri, yöneticileri ve ortak Yöneticiler bir e-posta gönderilir Kasa.
-> * Bildirim başarılı işler kullanmak için yapılandırmak üzere [Log Analytics](backup-azure-monitoring-use-azuremonitor.md#using-log-analytics-workspace).
+> - **Verileri silme ile korumayı durdur** gibi bir bozucu işlem gerçekleştirilirse, kurtarma hizmeti Kasası için bildirimler yapılandırılmadığı halde bir uyarı oluşturulur ve abonelik sahiplerine, yöneticilerine ve ortak yöneticilerine bir e-posta gönderilir.
+> - Başarılı işlerin bildirimini yapılandırmak için [Log Analytics](backup-azure-monitoring-use-azuremonitor.md#using-log-analytics-workspace)kullanın.
+
+## <a name="inactivating-alerts"></a>Uyarıları etkinleştirme
+
+Etkin bir uyarıyı devre dışı bırakmak/çözümlemek için, devre dışı bırakmak istediğiniz uyarıya karşılık gelen liste öğesine tıklayabilirsiniz. Bu, en üstteki ' devre dışı ' düğmesi ile uyarı hakkında ayrıntılı bilgi görüntüleyen bir ekran açar. Bu düğmeye tıkladığınızda, uyarının durumu ' etkin değil ' olarak değişir. Ayrıca, bu uyarıya karşılık gelen liste öğesine sağ tıklayıp ' devre dışı bırak ' seçeneğini belirleyerek bir uyarıyı devre dışı bırakabilirsiniz.
+
+![RS Kasası uyarısı intivasyonu](media/backup-azure-monitoring-laworkspace/vault-alert-inactivation.png)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-[Azure İzleyicisi'ni kullanarak Azure yedekleme iş yükleri izleme](backup-azure-monitoring-use-azuremonitor.md)
+[Azure Izleyici 'yi kullanarak Azure Backup iş yüklerini izleme](backup-azure-monitoring-use-azuremonitor.md)

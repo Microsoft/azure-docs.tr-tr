@@ -1,52 +1,52 @@
 ---
-title: Azure HDInsight üzerinde Apache Spark kümesi ile Zeppelin not defterlerini kullanma
-description: Azure HDInsight üzerinde Apache Spark kümeleri ile Zeppelin not defterlerini kullanma konusunda adım adım yönergeler.
+title: Zeppelin Not defterleri & Apache Spark kümesi-Azure HDInsight
+description: Azure HDInsight 'ta Apache Spark kümeleriyle Zeppelin not defterlerini kullanma hakkında adım adım yönergeler.
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.topic: conceptual
-ms.date: 03/04/2019
-ms.openlocfilehash: 219cdeea228ae3e334213a0f0654f904592cb09e
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.date: 11/05/2019
+ms.openlocfilehash: 75811382867b93c778641ece42971018eff39949
+ms.sourcegitcommit: 609d4bdb0467fd0af40e14a86eb40b9d03669ea1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67448734"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73664598"
 ---
-# <a name="use-apache-zeppelin-notebooks-with-apache-spark-cluster-on-azure-hdinsight"></a>Azure HDInsight üzerinde Apache Spark kümesi ile Apache Zeppelin not defterlerini kullanma
+# <a name="use-apache-zeppelin-notebooks-with-apache-spark-cluster-on-azure-hdinsight"></a>Azure HDInsight 'ta Apache Spark kümesiyle Apache Zeppelin not defterlerini kullanma
 
-HDInsight Spark kümeleri içerir [Apache Zeppelin](https://zeppelin.apache.org/) çalıştırmak için kullanabileceğiniz not defterlerini [Apache Spark](https://spark.apache.org/) işler. Bu makalede, bir HDInsight kümesinde Zeppelin not defteri kullanmayı öğrenin.
+HDInsight Spark kümeleri, [Apache Spark](https://spark.apache.org/) işleri çalıştırmak Için kullanabileceğiniz [Apache Zeppelin](https://zeppelin.apache.org/) not defterlerini içerir. Bu makalede, bir HDInsight kümesinde Zeppelin Not defterini kullanmayı öğreneceksiniz.
 
-**Ön koşullar:**
+## <a name="prerequisites"></a>Ön koşullar
 
 * Azure aboneliği. Bkz. [Azure ücretsiz deneme sürümü alma](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/).
 * HDInsight üzerinde bir Apache Spark kümesi. Yönergeler için bkz. [Azure HDInsight'ta Apache Spark kümeleri oluşturma](apache-spark-jupyter-spark-sql.md).
-* Birincil depolama alanınızı kümeleri için kullanılacak URI düzeni. Bu `wasb://` Azure Blob Depolama için `abfs://` için Azure Data Lake depolama Gen2'ye veya `adl://` Azure Data Lake depolama Gen1 için. Güvenli aktarım için Blob Depolama veya Data Lake depolama Gen2 etkinse, URI olacaktır `wasbs://` veya `abfss://`sırasıyla.  Ayrıca bkz [Azure depolamadaki güvenli aktarım gerektir](../../storage/common/storage-require-secure-transfer.md) daha fazla bilgi için.
+* Kümelerinizin birincil depolama alanı için URI şeması. Bu, Azure Blob depolama için `wasb://`, Azure Data Lake Storage 1. için Azure Data Lake Storage 2. veya `adl://` `abfs://`. BLOB depolama için güvenli aktarım etkinse, URI `wasbs://`olur.  Daha fazla bilgi için Ayrıca bkz. [Azure Storage 'da güvenli aktarım gerektir](../../storage/common/storage-require-secure-transfer.md) .
 
-## <a name="launch-an-apache-zeppelin-notebook"></a>Bir Apache Zeppelin not defteri başlatma
+## <a name="launch-an-apache-zeppelin-notebook"></a>Apache Zeppelin Not defteri başlatma
 
-1. Spark kümesinden **genel bakış**seçin **Zeppelin not defteri** gelen **küme panoları**. Küme için yönetici kimlik bilgilerini girin.  
+1. Spark kümesine **genel bakış**bölümünde, **küme panolarından** **Zeppelin Not defteri** ' ni seçin. Küme için yönetici kimlik bilgilerini girin.  
 
    > [!NOTE]  
-   > Zeppelin not defteri kümeniz için aşağıdaki URL'yi tarayıcınızda açarak da ulaşabilir. **CLUSTERNAME** değerini kümenizin adıyla değiştirin:
+   > Aşağıdaki URL 'YI tarayıcınızda açarak kümeniz için Zeppelin not defterine de ulaşabilirsiniz. **CLUSTERNAME** değerini kümenizin adıyla değiştirin:
    >
    > `https://CLUSTERNAME.azurehdinsight.net/zeppelin`
 
-2. Yeni bir not defteri oluşturun. Üstbilgi Bölmesi'nden gidin **not defteri** > **oluştur Yeni Not**.
+2. Yeni bir not defteri oluşturun. Üstbilgi bölmesinden **Not defteri** ' ne gidin > **Yeni Not oluştur**' u izleyin.
 
-    ![Yeni bir Zeppelin not defteri oluşturma](./media/apache-spark-zeppelin-notebook/hdinsight-create-zeppelin-notebook.png "yeni Zeppelin not defteri oluşturma")
+    ![Yeni bir Zeppelin Not defteri oluşturun](./media/apache-spark-zeppelin-notebook/hdinsight-create-zeppelin-notebook.png "Yeni bir Zeppelin Not defteri oluşturun")
 
-    Not defteri için bir ad girin ve ardından **oluşturma Not**.
+    Not defteri için bir ad girin ve **Not oluştur**' u seçin.
 
-3. Not Defteri Başlığı bağlı durumunun emin olun. Sağ üst köşedeki yeşil bir noktayı tarafından belirtilir.
+3. Not defteri üstbilgisinin bağlı bir durum belirttiğinden emin olun. Sağ üst köşedeki yeşil noktayla gösterilir.
 
-    ![Zeppelin not defteri durumu](./media/apache-spark-zeppelin-notebook/hdinsight-zeppelin-connected.png "Zeppelin not defteri durumu")
+    ![Zeppelin Not defteri durumu](./media/apache-spark-zeppelin-notebook/hdinsight-zeppelin-connected.png "Zeppelin Not defteri durumu")
 
-4. Örnek verilerini geçici bir tabloya yükleyin. HDInsight, örnek veri dosyasını bir Spark kümesi oluşturduğunuzda `hvac.csv`, altındaki ilişkili depolama hesabına kopyalanır `\HdiSamples\SensorSampleData\hvac`.
+4. Örnek verilerini geçici bir tabloya yükleyin. HDInsight 'ta bir Spark kümesi oluşturduğunuzda, örnek veri dosyası `hvac.csv`, `\HdiSamples\SensorSampleData\hvac`altındaki ilişkili depolama hesabına kopyalanır.
 
-    Yeni not defterinde varsayılan olarak oluşturulan boş paragraf içinde aşağıdaki kod parçacığını yapıştırın.
+    Yeni not defterinde varsayılan olarak oluşturulan boş paragrafta aşağıdaki kod parçacığını yapıştırın.
 
     ```scala
     %livy2.spark
@@ -57,10 +57,10 @@ HDInsight Spark kümeleri içerir [Apache Zeppelin](https://zeppelin.apache.org/
 
     // Define a schema
     case class Hvac(date: String, time: String, targettemp: Integer, actualtemp: Integer, buildingID: String)
-   
+
     // Map the values in the .csv file to the schema
     val hvac = hvacText.map(s => s.split(",")).filter(s => s(0) != "Date").map(
-        s => Hvac(s(0), 
+        s => Hvac(s(0),
                 s(1),
                 s(2).toInt,
                 s(3).toInt,
@@ -72,136 +72,127 @@ HDInsight Spark kümeleri içerir [Apache Zeppelin](https://zeppelin.apache.org/
     hvac.registerTempTable("hvac")
     ```
 
-    Tuşuna **SHIFT + ENTER** veya **Play** kod parçacığında çalıştırılacak paragraf düğmesi. Paragrafın sağ üst köşedeki durumu, hazır, BEKLİYOR, çalışıyor Tamamlandı'den ilerleme. Aynı paragraf alt kısmındaki çıkış gösterir. Ekran aşağıdaki gibi görünür:
+    Kod parçacığını çalıştırmak için **SHIFT + enter** tuşlarına basın veya paragrafın **oynat** düğmesini seçin. Paragrafın sağ köşesindeki durum, TAMAMLANDı, beklıyor, çalışıyor olarak çalışır hale gelmelidir. Çıktı, aynı paragrafın en altında görüntülenir. Ekran görüntüsü aşağıdakine benzer:
 
-    ![Ham verilerden geçici bir tablo oluşturma](./media/apache-spark-zeppelin-notebook/hdinsight-zeppelin-load-data.png "ham verilerden geçici bir tablo oluşturma")
+    ![Ham verilerden geçici bir tablo oluşturma](./media/apache-spark-zeppelin-notebook/hdinsight-zeppelin-load-data.png "Ham verilerden geçici bir tablo oluşturma")
 
-    Ayrıca, her bir paragrafına başlık sağlayabilir. Paragraf sağ Köşeden seçin **ayarları** (sprocket) simgesine ve ardından **başlığı göster**.  
+    Ayrıca her paragrafa bir başlık sağlayabilirsiniz. Paragrafın sağ köşesinden, **Ayarlar** simgesini (Sprocket) seçin ve ardından **Başlığı göster**' i seçin.  
 
     > [!NOTE]  
-    > % spark2 yorumlayıcı desteklenmiyor Zeppelin not defterlerinde tüm HDInsight sürümleri ve % arasında sh yorumlayıcı desteklenmeyecek HDInsight 4.0 ve üzeri.
+    > % spark2 yorumlayıcı tüm HDInsight sürümlerindeki Zeppelin not defterlerinde desteklenmez ve% sh yorumlayıcı HDInsight 4,0 ' den itibaren desteklenmeyecektir.
 
-5. Artık Spark SQL deyimleri çalıştırabilirsiniz `hvac` tablo. Yeni bir paragrafa aşağıdaki sorguyu yapıştırın. Sorgu, yapı kimliği ve her biri belirli bir tarihte oluşturmak için gerçek Sıcaklıkların ve hedef arasındaki farkı alır. Tuşuna **SHIFT + ENTER**.
+5. Artık `hvac` tabloda Spark SQL deyimlerini çalıştırabilirsiniz. Aşağıdaki sorguyu yeni bir paragrafa yapıştırın. Sorgu, belirli bir tarihteki her bir bina için hedef ve gerçek sıcaklıklar arasındaki bina KIMLIĞINI ve farkı alır. **SHIFT + enter**tuşlarına basın.
 
     ```sql
     %sql
-    select buildingID, (targettemp - actualtemp) as temp_diff, date from hvac where date = "6/1/13" 
+    select buildingID, (targettemp - actualtemp) as temp_diff, date from hvac where date = "6/1/13"
     ```  
 
-    **% Sql** deyimi başında Livy Scala yorumlayıcı kullanmak için Not defterini söyler.
+    Başındaki **% SQL** deyimleri, not defterine Livy Scala yorumlayıcısını kullanmasını söyler.
 
-6. Seçin **çubuk grafik** ekranı değiştirmek için simge.  **ayarları**, seçtikten sonra görünen **çubuk grafik**, seçmenizi sağlar **anahtarları**, ve **değerleri**.  Çıktı aşağıdaki ekran görüntüsünde gösterilmiştir.
+6. Ekranı değiştirmek için **çubuk grafik** simgesini seçin.  **çubuk grafiği**seçtikten sonra görüntülenen **Ayarlar**, **anahtarlar**ve **değerler**seçmenize olanak sağlar.  Aşağıdaki ekran görüntüsünde çıkış gösterilmektedir.
 
-    ![Not Defteri kullanarak Spark SQL deyimi çalıştırma](./media/apache-spark-zeppelin-notebook/hdinsight-zeppelin-spark-query-1.png "Not Defteri kullanarak Spark SQL deyimi çalıştırma")
+    ![Notebook1 kullanarak Spark SQL ifadesini çalıştırma](./media/apache-spark-zeppelin-notebook/hdinsight-zeppelin-spark-query-1.png "Notebook1 kullanarak Spark SQL ifadesini çalıştırma")
 
-7. Sorgu değişkenleri kullanarak Spark SQL deyimi de çalıştırabilirsiniz. Sonraki kod parçacığında, bir değişkeni tanımlamak gösterilmektedir `Temp`, olası değerler ile istediğiniz ile sorgulamak sorgu. Sorguyu ilk kez çalıştırdığınızda, bir açılan değişkeni için belirtilen değerleri otomatik olarak doldurulur.
+7. Spark SQL deyimlerini, sorgudaki değişkenleri kullanarak da çalıştırabilirsiniz. Sonraki kod parçacığında, sorgulamak istediğiniz olası değerlerle birlikte sorgusunda bir değişkenin `Temp`nasıl tanımlanacağı gösterilmektedir. Sorguyu ilk kez çalıştırdığınızda, bir açılan liste, değişken için belirttiğiniz değerlerle otomatik olarak doldurulur.
 
     ```sql
     %sql  
     select buildingID, date, targettemp, (targettemp - actualtemp) as temp_diff from hvac where targettemp > "${Temp = 65,65|75|85}"
     ```
 
-    Bu kod parçacığını yapıştırın bir yeni bir paragrafa ve ENTER tuşuna **SHIFT + ENTER**. Ardından **65** gelen **Temp** açılan listesi. 
+    Bu kod parçacığını yeni bir paragrafa yapıştırın ve **SHIFT + enter**tuşlarına basın. Ardından **geçici** açılan listeden **65** ' ı seçin.
 
-8. Seçin **çubuk grafik** ekranı değiştirmek için simge.  Ardından **ayarları** ve aşağıdaki değişiklikleri yapın:
+8. Ekranı değiştirmek için **çubuk grafik** simgesini seçin.  Ardından **Ayarlar** ' ı seçin ve aşağıdaki değişiklikleri yapın:
 
-   * **Grupları:**  Ekleme **targettemp**.  
-   * **Değerler:** 1. Kaldırma **tarih**.  2. Ekleme **temp_diff**.  3.  Toplayıcısı'ndan değiştirme **toplam** için **ortalama**.  
+   * **Gruplar:**  **Targettemp**ekleyin.  
+   * **Değerler:** 1. **Tarihi**kaldırın.  2. **Temp_diff**ekleyin.  3.  Toplayıcıyı **Sum** 'dan **Ortalama**olarak değiştirin.  
 
-     Çıktı aşağıdaki ekran görüntüsünde gösterilmiştir.
+     Aşağıdaki ekran görüntüsünde çıkış gösterilmektedir.
 
-     ![Not Defteri kullanarak Spark SQL deyimi çalıştırma](./media/apache-spark-zeppelin-notebook/hdinsight-zeppelin-spark-query-2.png "Not Defteri kullanarak Spark SQL deyimi çalıştırma")
+     ![Notebook2 kullanarak Spark SQL ifadesini çalıştırma](./media/apache-spark-zeppelin-notebook/hdinsight-zeppelin-spark-query-2.png "Notebook2 kullanarak Spark SQL ifadesini çalıştırma")
 
-9. Uygulamadan çıkmak için Livy yorumlayıcısını yeniden başlatın. Bunu yapmak için oturum açmış kullanıcı adına sağ üst köşedeki seçerek yorumlayıcı Ayarları'nı açın ve ardından **yorumlayıcı**.  
+## <a name="how-do-i-use-external-packages-with-the-notebook"></a>Nasıl yaparım? Not defteri ile harici paketler mi kullanıyorsunuz?
 
-    ![Yorumlayıcı başlatma](./media/apache-spark-zeppelin-notebook/zeppelin-launch-interpreter.png "Hive çıkış")
+HDInsight üzerinde Apache Spark kümesinde Zeppelin Not defterini, kümede bulunmayan harici, topluluk tarafından katkıda bulunulan paketleri kullanacak şekilde yapılandırabilirsiniz. [Maven deposunda](https://search.maven.org/) kullanılabilen paketlerin tüm listesini arayabilirsiniz. Ayrıca, diğer kaynaklardan kullanılabilir paketlerin bir listesini alabilirsiniz. Örneğin, topluluk tarafından katkıda bulunulan paketlerin tam bir listesi [Spark paketlerinde](https://spark-packages.org/)bulunabilir.
 
-10. Kaydırma **livy**ve ardından **yeniden**.  Seçin **Tamam** isteminde.
+Bu makalede, Jupyter Not defteri ile [Spark-CSV](https://search.maven.org/#artifactdetails%7Ccom.databricks%7Cspark-csv_2.10%7C1.4.0%7Cjar) paketini nasıl kullanacağınızı göreceksiniz.
 
-    ![Livy intepreter yeniden](./media/apache-spark-zeppelin-notebook/hdinsight-zeppelin-restart-interpreter.png "Zeppelin intepreter yeniden başlatın")
+1. Yorumlayıcı ayarlarını açın. Sağ üst köşeden oturum açmış kullanıcı adını seçip **yorumlayıcı**' yı seçin.
 
-## <a name="how-do-i-use-external-packages-with-the-notebook"></a>Not Defteri ile dış paketleri nasıl kullanabilirim?
-Dahil edilen çıkış,-hazır kümede olmayan harici, topluluk tarafından katkıda bulunulan paketlerini kullanmak için HDInsight üzerinde Apache Spark kümesinde Zeppelin not defteri yapılandırabilirsiniz. Arama yapabilirsiniz [Maven deposu](https://search.maven.org/) kullanılabilir paketler tam listesi için. Ayrıca, diğer kaynaklardan kullanılabilir paketler listesini alabilirsiniz. Örneğin, topluluk tarafından katkıda bulunulan paketlerin tam bir listesi kullanılabilir [Spark paketleri](https://spark-packages.org/).
+    ![Yorumlayıcı 'yı Başlat](./media/apache-spark-zeppelin-notebook/zeppelin-launch-interpreter.png "Hive çıkışı")
 
-Bu makalede, nasıl kullanılacağını görürsünüz [spark csv](https://search.maven.org/#artifactdetails%7Ccom.databricks%7Cspark-csv_2.10%7C1.4.0%7Cjar) Jupyter not defteri ile paket.
+2. **Livy2**' ye kaydırın ve **Düzenle**' yi seçin.
 
-1. Yorumlayıcı ayarlarını açın. Sağ üst köşedeki oturum açmış kullanıcı adını seçin ve ardından **yorumlayıcı**.
+    ![Yorumlayıcı Ayarları1 değiştirme](./media/apache-spark-zeppelin-notebook/zeppelin-use-external-package-1.png "Yorumlayıcı Ayarları1 değiştirme")
 
-    ![Yorumlayıcı başlatma](./media/apache-spark-zeppelin-notebook/zeppelin-launch-interpreter.png "Hive çıkış")
+3. Anahtar `livy.spark.jars.packages`gidin ve değerini `group:id:version`biçimde ayarlayın. Bu nedenle, [Spark-CSV](https://search.maven.org/#artifactdetails%7Ccom.databricks%7Cspark-csv_2.10%7C1.4.0%7Cjar) paketini kullanmak istiyorsanız, anahtarın değerini `com.databricks:spark-csv_2.10:1.4.0`olarak ayarlamanız gerekir.
 
-2. Kaydırma **livy**, ardından **Düzenle**.
+    ![Yorumlayıcı settings2 değiştirme](./media/apache-spark-zeppelin-notebook/zeppelin-use-external-package-2.png "Yorumlayıcı settings2 değiştirme")
 
-    ![Yorumlayıcı Ayarları Değiştir](./media/apache-spark-zeppelin-notebook/zeppelin-use-external-package-1.png "yorumlayıcı ayarlarını değiştir")
+    **Kaydet** ' i ve ardından **Tamam** ' ı seçerek Livy yorumlayıcısını yeniden başlatın.
 
-3. Adlı yeni bir anahtar ekleyin `livy.spark.jars.packages`ve değerini ayarlama biçiminde `group:id:version`. Bunu kullanmak isterseniz [spark csv](https://search.maven.org/#artifactdetails%7Ccom.databricks%7Cspark-csv_2.10%7C1.4.0%7Cjar) paketi anahtarının değerini ayarlamalısınız `com.databricks:spark-csv_2.10:1.4.0`.
+4. Yukarıda girilen anahtarın değerine nasıl ulaşılacağı hakkında bilgi edinmek istiyorsanız, aşağıdaki adımları uygulayın.
 
-    ![Yorumlayıcı Ayarları Değiştir](./media/apache-spark-zeppelin-notebook/zeppelin-use-external-package-2.png "yorumlayıcı ayarlarını değiştir")
+    a. Maven deposundaki paketi bulun. Bu makalede [Spark-CSV](https://search.maven.org/#artifactdetails%7Ccom.databricks%7Cspark-csv_2.10%7C1.4.0%7Cjar)kullandık.
 
-    Seçin **Kaydet** ve Livy yorumlayıcısını yeniden başlatın.
+    b. Deposundan **GroupID**, **ArtifactId**ve **Version**değerlerini toplayın.
 
-4. Ulaşırsınız nasıl anlamak istiyorsanız anahtarının değerini Yukarıda girilen, burada nasıl.
-   
-    a. Paket Maven depoda bulun. Bu makalede kullandığımız [spark csv](https://search.maven.org/#artifactdetails%7Ccom.databricks%7Cspark-csv_2.10%7C1.4.0%7Cjar).
-   
-    b. Depodan değerlerini toplamak **GroupID**, **Artifactıd**, ve **sürüm**.
-   
-    ![Jupyter not defteri ile dış paketleri kullanma](./media/apache-spark-zeppelin-notebook/use-external-packages-with-jupyter.png "Jupyter not defteri ile dış paketleri kullanma")
-   
-    c. Virgül ile ayrılmış üç değerleri birleştirebilir ( **:** ).
-   
+    ![Jupyter Not defteri ile dış paketleri kullanma](./media/apache-spark-zeppelin-notebook/use-external-packages-with-jupyter.png "Jupyter Not defteri ile dış paketleri kullanma")
+
+    c. İki nokta üst üste ( **:** ) ayırarak üç değeri birleştirir.
+
         com.databricks:spark-csv_2.10:1.4.0
 
-## <a name="where-are-the-zeppelin-notebooks-saved"></a>Zeppelin not defterlerini kaydedildiği?
-Zeppelin not defterlerini küme baş düğümüne kaydedilir. Bu nedenle, kümeyi silmeniz halinde, not defterlerini de silinir. Diğer kümelerinde daha sonra kullanmak için not defterlerinizi korumak istiyorsanız, işleri çalıştırma tamamladıktan sonra vermeniz gerekir. Bir not defteri vermek için seçin **dışarı** aşağıdaki resimde gösterildiği gibi simgesi.
+## <a name="where-are-the-zeppelin-notebooks-saved"></a>Zeppelin Not defterleri nerede kaydedilir?
 
-![Not Defteri indirme](./media/apache-spark-zeppelin-notebook/zeppelin-download-notebook.png "not defterini indirin")
+Zeppelin Not defterleri küme yayın düğümlerine kaydedilir. Bu nedenle, kümeyi silerseniz Not defterleri de silinir. Not defterlerinizi daha sonra diğer kümeler üzerinde kullanılmak üzere korumak istiyorsanız, işleri çalıştırmayı bitirdikten sonra bunları dışarı aktarmanız gerekir. Bir not defterini dışarı aktarmak için, aşağıdaki görüntüde gösterildiği gibi **dışa aktarma** simgesini seçin.
 
-Bu, Not Defteri, indirme konumuna bir JSON dosyası olarak kaydeder.
+![Not defteri indir](./media/apache-spark-zeppelin-notebook/zeppelin-download-notebook.png "Not defterini indir")
+
+Bu, Not defterini indirme konumunuza bir JSON dosyası olarak kaydeder.
 
 ## <a name="livy-session-management"></a>Livy oturum yönetimi
-Zeppelin not defterinin ilk kod paragraf çalıştırdığınızda, yeni bir Livy oturumu HDInsight Spark kümenizde oluşturulur. Bu oturumda, daha sonra oluşturduğunuz tüm Zeppelin not defterlerini arasında paylaşılır. Herhangi bir nedenden dolayı oturum Livy sonlandırılan varsa (küme yeniden başlatma, vb.), Zeppelin not defterinden işlerini çalıştırmak mümkün olmayacaktır.
 
-Böyle bir durumda Zeppelin not defterinden çalışan işler başlamadan önce aşağıdaki adımları gerçekleştirmeniz gerekir.  
+Zeppelin Not defterinizde ilk kod paragrafı çalıştırdığınızda, HDInsight Spark kümenizde yeni bir Livy oturumu oluşturulur. Bu oturum, daha sonra oluşturduğunuz tüm Zeppelin Not defterleri genelinde paylaşılır. Herhangi bir nedenle, Livy oturumunun sonlandırısı (küme yeniden başlatma vb.) varsa, Zeppelin Not defterinden iş çalıştıramazsınız.
 
-1. Zeppelin not defterindeki Livy yorumlayıcısını yeniden başlatın. Bunu yapmak için oturum açmış kullanıcı adına sağ üst köşedeki seçerek yorumlayıcı Ayarları'nı açın ve ardından **yorumlayıcı**.
+Böyle bir durumda, bir Zeppelin Not defterinden iş çalıştırmaya başlayabilmeniz için aşağıdaki adımları gerçekleştirmeniz gerekir.  
 
-    ![Yorumlayıcı başlatma](./media/apache-spark-zeppelin-notebook/zeppelin-launch-interpreter.png "Hive çıkış")
+1. Zeppelin Not defterinden Livy yorumlayıcısını yeniden başlatın. Bunu yapmak için sağ üst köşedeki oturum açmış kullanıcı adını **seçip yorumlayıcı ' yı seçin.**
 
-2. Kaydırma **livy**, ardından **yeniden**.
+    ![Yorumlayıcı 'yı Başlat](./media/apache-spark-zeppelin-notebook/zeppelin-launch-interpreter.png "Hive çıkışı")
 
-    ![Livy intepreter yeniden](./media/apache-spark-zeppelin-notebook/hdinsight-zeppelin-restart-interpreter.png "Zeppelin intepreter yeniden başlatın")
+2. **Livy2**' e gidin ve **Yeniden Başlat**' ı seçin.
 
-3. Mevcut bir Zeppelin not defterinden bir kod hücresi çalıştırın. Bu, HDInsight kümesinde yeni bir Livy oturumu oluşturur.
+    ![Livy yorumlayıcısını yeniden başlatın](./media/apache-spark-zeppelin-notebook/hdinsight-zeppelin-restart-interpreter.png "Zeppelin yorumlayıcı 'yı yeniden başlatma")
+
+3. Mevcut bir Zeppelin Not defterinden kod hücresi çalıştırın. Bu, HDInsight kümesinde yeni bir Livy oturumu oluşturur.
 
 ## <a name="seealso"></a>Ayrıca bkz.
-* [Genel Bakış: Azure HDInsight üzerinde Apache Spark](apache-spark-overview.md)
+
+* [Genel Bakış: Azure HDInsight’ta Apache Spark](apache-spark-overview.md)
 
 ### <a name="scenarios"></a>Senaryolar
-* [Apache Spark ile BI: BI araçları ile HDInsight Spark kullanarak etkileşimli veri çözümlemesi gerçekleştirme](apache-spark-use-bi-tools.md)
-* [Apache Spark Machine Learning ile: HVAC verilerini kullanarak bina sıcaklığını çözümlemek için HDInsight içindeki Spark kullanma](apache-spark-ipython-notebook-machine-learning.md)
-* [Apache Spark Machine Learning ile: Gıda denetimi sonuçlarını tahmin etmek için HDInsight içindeki Spark kullanma](apache-spark-machine-learning-mllib-ipython.md)
-* [HDInsight Apache Spark'ı kullanarak Web sitesi günlüğü çözümlemesi](apache-spark-custom-library-website-log-analysis.md)
+
+* [BI ile Apache Spark: bı araçlarıyla HDInsight 'ta Spark kullanarak etkileşimli veri çözümlemesi gerçekleştirme](apache-spark-use-bi-tools.md)
+* [Machine Learning ile Apache Spark: HVAC verilerini kullanarak oluşturma sıcaklığını çözümlemek için HDInsight 'ta Spark kullanma](apache-spark-ipython-notebook-machine-learning.md)
+* [Machine Learning Apache Spark: yemek İnceleme sonuçlarını tahmin etmek için HDInsight 'ta Spark kullanma](apache-spark-machine-learning-mllib-ipython.md)
+* [HDInsight 'ta Apache Spark kullanarak Web sitesi günlüğü Analizi](apache-spark-custom-library-website-log-analysis.md)
 
 ### <a name="create-and-run-applications"></a>Uygulamaları oluşturma ve çalıştırma
+
 * [Scala kullanarak tek başına uygulama oluşturma](apache-spark-create-standalone-application.md)
-* [Apache Livy kullanarak bir Apache Spark kümesinde işleri uzaktan çalıştırma](apache-spark-livy-rest-interface.md)
+* [Apache Livy kullanarak Apache Spark kümesinde işleri uzaktan çalıştırma](apache-spark-livy-rest-interface.md)
 
 ### <a name="tools-and-extensions"></a>Araçlar ve uzantılar
-* [Oluşturmak ve Apache Spark Scala uygulamaları göndermek amacıyla Intellij Idea için HDInsight araçları eklentisi kullanma](apache-spark-intellij-tool-plugin.md)
-* [Apache Spark uygulamalarında uzaktan hata ayıklamak amacıyla Intellij Idea için HDInsight araçları eklentisi kullanma](apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
-* [HDInsight için Apache Spark kümesinde Jupyter not defteri için kullanılabilir çekirdekler](apache-spark-jupyter-notebook-kernels.md)
+
+* [Apache Spark Scala uygulamaları oluşturmak ve göndermek için IntelliJ fıkır için HDInsight Araçları eklentisini kullanın](apache-spark-intellij-tool-plugin.md)
+* [Apache Spark uygulamalarında uzaktan hata ayıklama için IntelliJ fıkır için HDInsight Araçları eklentisini kullanın](apache-spark-intellij-tool-plugin-debug-jobs-remotely.md)
+* [HDInsight için Apache Spark kümesindeki Jupyter Not defteri için kullanılabilir kernels](apache-spark-jupyter-notebook-kernels.md)
 * [Jupyter not defterleri ile dış paketleri kullanma](apache-spark-jupyter-notebook-use-external-packages.md)
 * [Jupyter’i bilgisayarınıza yükleme ve bir HDInsight Spark kümesine bağlanma](apache-spark-jupyter-notebook-install-locally.md)
 
 ### <a name="manage-resources"></a>Kaynakları yönetme
+
 * [Azure HDInsight’ta Apache Spark kümesi kaynaklarını yönetme](apache-spark-resource-manager.md)
 * [HDInsight’ta bir Apache Spark kümesinde çalışan işleri izleme ve hata ayıklama](apache-spark-job-debugging.md)
-
-[hdinsight-versions]: hdinsight-component-versioning.md
-[hdinsight-upload-data]: hdinsight-upload-data.md
-[hdinsight-storage]: hdinsight-hadoop-use-blob-storage.md
-
-[azure-purchase-options]: https://azure.microsoft.com/pricing/purchase-options/
-[azure-member-offers]: https://azure.microsoft.com/pricing/member-offers/
-[azure-free-trial]: https://azure.microsoft.com/pricing/free-trial/
-[azure-create-storageaccount]:../../storage/common/storage-create-storage-account.md 

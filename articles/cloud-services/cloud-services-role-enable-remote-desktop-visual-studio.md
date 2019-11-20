@@ -1,9 +1,9 @@
 ---
-title: Azure Cloud Services'ta bir rol için Uzak Masaüstü bağlantısını etkinleştirme
-description: Azure bulut hizmeti uygulamanızı Uzak Masaüstü bağlantılarına izin verecek şekilde yapılandırma
+title: Visual Studio 'yu kullanarak bir rol için Uzak Masaüstü 'Nü etkinleştirme (Azure Cloud Services)
+description: Azure bulut hizmeti uygulamanızı uzak masaüstü bağlantılarına izin verecek şekilde yapılandırma
 services: cloud-services
 author: ghogen
-manager: douge
+manager: jillfra
 ms.assetid: f5727ebe-9f57-4d7d-aff1-58761e8de8c1
 ms.prod: visual-studio-dev15
 ms.technology: vs-azure
@@ -12,92 +12,92 @@ ms.topic: conceptual
 ms.workload: azure-vs
 ms.date: 03/06/2018
 ms.author: ghogen
-ms.openlocfilehash: 924719a8371f4d41cb9ead09252d8f3d3424326a
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.openlocfilehash: 96f71306c060a6a533a3ab1c0c54b49d74e5cd82
+ms.sourcegitcommit: 8b44498b922f7d7d34e4de7189b3ad5a9ba1488b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "64717744"
+ms.lasthandoff: 10/13/2019
+ms.locfileid: "72298394"
 ---
-# <a name="enable-remote-desktop-connection-for-a-role-in-azure-cloud-services-using-visual-studio"></a>Visual Studio kullanarak Azure Cloud Services'ta bir rol için Uzak Masaüstü Bağlantısı etkinleştirme
+# <a name="enable-remote-desktop-connection-for-a-role-in-azure-cloud-services-using-visual-studio"></a>Visual Studio 'Yu kullanarak Azure Cloud Services bir rol için Uzak Masaüstü Bağlantısı etkinleştirme
 
 > [!div class="op_single_selector"]
-> * [Azure portal](cloud-services-role-enable-remote-desktop-new-portal.md)
+> * [Azure portalda](cloud-services-role-enable-remote-desktop-new-portal.md)
 > * [PowerShell](cloud-services-role-enable-remote-desktop-powershell.md)
 > * [Visual Studio](cloud-services-role-enable-remote-desktop-visual-studio.md)
 
-Uzak Masaüstü, Azure'da çalışan rolünün erişmenizi sağlar. Sorun giderme ve çalışırken uygulamanızdaki sorunları tanılamak için Uzak Masaüstü Bağlantısı'nı kullanabilirsiniz.
+Uzak Masaüstü, Azure 'da çalışan bir rolün masaüstüne erişmenizi sağlar. Çalışırken uygulamanızdaki sorunları gidermek ve tanılamak için Uzak Masaüstü bağlantısı kullanabilirsiniz.
 
-Bulut Hizmetleri için Visual Studio sunan Yayımla Sihirbazı'nı, sağladığınız kimlik bilgilerini kullanarak yayımlama işlemi sırasında Uzak Masaüstü'nü etkinleştirmek için bir seçenek içerir. Bu seçeneği kullanarak Visual Studio 2017 sürüm 15.4 ve önceki kullanırken uygundur.
+Visual Studio 'nun bulut hizmetleri için sağladığı Yayımlama Sihirbazı, yayımlama işlemi sırasında, sağladığınız kimlik bilgilerini kullanarak uzak masaüstü 'Nü etkinleştirme seçeneği içerir. Bu seçeneğin kullanılması, Visual Studio 2017 sürüm 15,4 ve önceki sürümleri kullanılırken uygundur.
 
-Visual Studio 2017 sürüm 15.5 ve daha sonra Bununla birlikte, yalnızca tek bir geliştirici olarak çalıştığınız sürece, Uzak Masaüstü Yayımla Sihirbazı'nı etkinleştirme önlemek önerilir. Proje diğer geliştiriciler tarafından açılması herhangi bir durum için bunun yerine Uzak Masaüstü Azure portalı, PowerShell üzerinden veya bir sürekli dağıtım iş akışında bir yayın ardışık düzeni üzerinden olanak sağlar. Nasıl Visual Studio Uzak Masaüstü ile bulut hizmeti VM üzerinde bu makalede açıklandığı gibi iletişim kurduğu bir değişiklik nedeniyle bu önerilir.
+Ancak, Visual Studio 2017 sürüm 15,5 ve sonrası ile, yalnızca tek bir geliştirici olarak çalışmıyorsanız, Yayımlama Sihirbazı aracılığıyla uzak masaüstü 'Nü etkinleştirmenizi öneririz. Projenin başka geliştiriciler tarafından açılabileceği herhangi bir durum için Azure portal, PowerShell aracılığıyla veya sürekli bir dağıtım iş akışındaki bir yayın işlem hattından uzak masaüstü 'Nü etkinleştirin. Bu öneri, Visual Studio 'Nun, bu makalede açıklandığı gibi, bulut hizmeti sanal makinesinde uzak masaüstü ile iletişim kurduğu bir değişiklikten kaynaklanıyor.
 
-## <a name="configure-remote-desktop-through-visual-studio-2017-version-154-and-earlier"></a>Uzak Masaüstü aracılığıyla Visual Studio 2017 sürüm 15.4 ve önceki yapılandırma
+## <a name="configure-remote-desktop-through-visual-studio-2017-version-154-and-earlier"></a>Visual Studio 2017 sürüm 15,4 ve önceki sürümleri aracılığıyla uzak masaüstü 'Nü yapılandırma
 
-Visual Studio 2017 sürüm 15.4 ve önceki kullanırken kullanabileceğiniz **tüm roller için Uzak masaüstünü etkinleştir** Yayımla Sihirbazı'nda seçeneği. Sihirbaz Visual Studio 2017 sürüm 15.5 ve sonrasında kullanmaya devam edebilirsiniz, ancak Uzak Masaüstü seçeneği kullanmayın.
+Visual Studio 2017 sürüm 15,4 ve önceki sürümlerini kullanırken, Yayımla sihirbazında **uzak masaüstünü tüm roller Için etkinleştir** seçeneğini kullanabilirsiniz. Sihirbazı yine de Visual Studio 2017 sürüm 15,5 ve sonraki sürümleriyle kullanmaya devam edebilirsiniz, ancak uzak masaüstü seçeneğini kullanmayın.
 
-1. Bulut hizmeti projenizi Çözüm Gezgini'nde sağ tıklayıp seçerek Visual Studio'da Yayımlama Sihirbazını Başlat **Yayımla**.
+1. Visual Studio 'da, Çözüm Gezgini ' de bulut hizmeti projenize sağ tıklayıp **Yayımla**' yı seçerek Yayımlama Sihirbazı ' nı başlatın.
 
-2. Gerekirse Azure aboneliğinizde oturum açın ve seçin **sonraki**.
+2. Gerekirse Azure aboneliğinizde oturum açın ve **İleri ' yi**seçin.
 
-3. Üzerinde **ayarları** sayfasında **tüm roller için Uzak masaüstünü etkinleştir**, ardından **ayarları...**  açmak için bağlantıyı **uzak masaüstü yapılandırması** iletişim kutusu.
+3. **Ayarlar** sayfasında, **tüm roller Için uzak masaüstünü etkinleştir**' i seçin ve ardından **ayarlar...** bağlantısını seçerek **Uzak Masaüstü yapılandırması** iletişim kutusunu açın.
 
-4. İletişim kutusunun alt kısmında seçin **diğer seçenekler**. Bu komut, oluşturduğunuz veya Uzak Masaüstü aracılığıyla bağlanırken kimlik bilgileri şifrelemek için bir sertifika seçin açılan listesini görüntüler.
+4. İletişim kutusunun alt kısmındaki **diğer seçenekler**' i seçin. Bu komut, Uzak Masaüstü aracılığıyla bağlanırken kimlik bilgileri şifrelemek için bir sertifika oluşturduğunuz veya seçtiğiniz bir açılan listeyi görüntüler.
 
    > [!Note]
-   > Uzak Masaüstü bağlantısı için gereken sertifikaları, Azure diğer işlemleri için kullandığınız sertifikaların farklıdır. Uzaktan erişim sertifikasının özel anahtarı olmalıdır.
+   > Uzak Masaüstü bağlantısı için gereken sertifikalar, diğer Azure işlemleri için kullandığınız sertifikalardan farklıdır. Uzaktan erişim sertifikası özel bir anahtara sahip olmalıdır.
 
-5. Listeden bir sertifika seçin ya da seçin  **&lt;oluştur... &gt;** . Yeni bir sertifika oluşturuyorsanız, istendiğinde Yeni sertifika için bir kolay ad girin ve seçin **Tamam**. Yeni sertifika aşağı açılan liste kutusunda görüntülenir.
+5. Listeden bir sertifika seçin veya **&lt;Oluştur... &gt;** ' yi seçin. Yeni bir sertifika oluşturuyorsanız, istendiğinde yeni sertifika için bir kolay ad sağlayın ve **Tamam**' ı seçin. Yeni sertifika açılan liste kutusunda görünür.
 
-6. Bir kullanıcı adı ve parola sağlayın. Var olan bir hesap kullanamazsınız. "Yönetici", yeni hesap için kullanıcı adı olarak kullanmayın.
+6. Bir Kullanıcı adı ve parola belirtin. Mevcut bir hesabı kullanamazsınız. Yeni hesap için Kullanıcı adı olarak "Yönetici" kullanmayın.
 
-7. Hesap sona erer ve hangi Uzak Masaüstü bağlantılarında engellenir sonra bir tarih seçin.
+7. Hesabın sona ereceği ve sonrasında Uzak Masaüstü bağlantılarının engelleneceğini belirten bir tarih seçin.
 
-8. Tüm gerekli bilgileri sağladıktan sonra seçin **Tamam**. Visual Studio, projenizin uzak masaüstü ayarlarını ekler `.cscfg` ve `.csdef` seçilen sertifika kullanılarak şifrelenir parola dahil dosyaları.
+8. Gerekli tüm bilgileri sağladıktan sonra **Tamam**' ı seçin. Visual Studio, uzak masaüstü ayarlarını projenizin `.cscfg` ve `.csdef` dosyalarına, seçilen sertifika kullanılarak şifrelenmiş parola dahil olmak üzere ekler.
 
-9. Kullanarak tüm kalan adımları tamamlayın **sonraki** düğmesine ve ardından **Yayımla** bulut hizmetinizi yayımlamaya hazır olduğunuzda. Yayımlamaya hazır değilseniz seçin **iptal** ve yanıt **Evet** değişiklikleri kaydetmek isteyip istemediğiniz sorulduğunda. Bulut hizmetinizin daha sonra bu ayarlarla yayımlayabilirsiniz.
+9. **İleri** düğmesini kullanarak kalan adımları tamamladıktan sonra bulut hizmetinizi yayımlamaya hazırsanız **Yayımla** ' yı seçin. Yayımlamaya hazırsanız **iptal** ' i seçin ve değişiklikleri kaydetmek isteyip Istemediğiniz sorulduğunda **Evet** yanıtını verin. Bulut hizmetinizi daha sonra bu ayarlarla yayımlayabilirsiniz.
 
-## <a name="configure-remote-desktop-when-using-visual-studio-2017-version-155-and-later"></a>Visual Studio 2017 sürüm 15.5 ve üzeri kullanırken, Uzak Masaüstü'nü yapılandırma
+## <a name="configure-remote-desktop-when-using-visual-studio-2017-version-155-and-later"></a>Visual Studio 2017 sürüm 15,5 ve üstünü kullanırken uzak masaüstü 'Nü yapılandırma
 
-Visual Studio 2017 sürüm 15.5 ve daha sonra bir bulut hizmeti projesi ile Yayımlama Sihirbazı'nı kullanmaya devam edebilirsiniz. Ayrıca **tüm roller için Uzak masaüstünü etkinleştir** yalnızca tek bir geliştirici olarak çalışıyorsanız seçeneği.
+Visual Studio 2017 sürüm 15,5 ve sonrasında, bir bulut hizmeti projesiyle Yayımlama Sihirbazı 'nı kullanmaya devam edebilirsiniz. Yalnızca tek bir geliştirici olarak çalışıyorsanız, **tüm roller Için uzak masaüstünü etkinleştir** seçeneğini de kullanabilirsiniz.
 
-Bir ekibin bir parçası çalışıyorsanız, bunun yerine Azure bulut hizmetinde Uzak Masaüstü kullanarak etkinleştirmelisiniz [Azure portalında](cloud-services-role-enable-remote-desktop-new-portal.md) veya [PowerShell](cloud-services-role-enable-remote-desktop-powershell.md).
+Bir ekibin parçası olarak çalışıyorsanız, [Azure Portal](cloud-services-role-enable-remote-desktop-new-portal.md) veya [PowerShell](cloud-services-role-enable-remote-desktop-powershell.md)'i kullanarak Azure bulut hizmetinde uzak masaüstü 'nü etkinleştirmeniz gerekir.
 
-Visual Studio 2017 sürüm 15.5 ve daha sonra VM bulut hizmetiyle nasıl iletişim kurduğu bir değişiklik nedeniyle bu önerilir. Uzak Masaüstü Yayımla Sihirbazı'nı etkinleştirdiğinizde, Visual Studio'nun önceki sürümlerini ne "RDP eklentiyi." çağırdı aracılığıyla VM ile iletişim kurar Visual Studio 2017 sürüm 15.5 ve üzeri, bunun yerine "RDP uzantısının" kullanarak iletişim kurar daha güvenli ve daha esnektir. Bu değişiklik, ayrıca Azure portalı ve Uzak Masaüstü'nü etkinleştirmek için PowerShell yöntemlerini de RDP uzantısının kullanılması, olgu ile hizalar.
+Bu öneri, Visual Studio 2017 sürüm 15,5 ' deki ve daha sonra bulut hizmeti VM ile iletişim kuran bir değişiklikten kaynaklanır. Yayımla Sihirbazı aracılığıyla uzak masaüstü 'Nü etkinleştirirken, Visual Studio 'nun önceki sürümleri, "RDP eklentisi" olarak adlandırılan sanal makine ile iletişim kurar. Visual Studio 2017 sürüm 15,5 ve üzeri, daha güvenli ve daha esnek olan "RDP uzantısını" kullanmak yerine iletişim kurar. Bu değişiklik Ayrıca, uzak masaüstünü etkinleştirmek için Azure portal ve PowerShell yöntemlerinin de RDP uzantısını kullanmasını sağlayacak şekilde de hizalanır.
 
-Visual Studio RDP uzantısı ile iletişim kurduğunda, iletme bir düz metin parola SSL üzerinden. Ancak, hangi cihazı şifrelemek için kullanılan yerel sertifika ile düz metin şifresi yalnızca şifreli bir parola, projenin yapılandırma dosyalarını depolar.
+Visual Studio RDP uzantısıyla iletişim kurduğunda, SSL üzerinden düz metin parolası iletir. Ancak, projenin yapılandırma dosyaları yalnızca şifrelenmiş bir parolayı depolar ve bu, yalnızca ilk olarak şifrelemek için kullanılan yerel sertifikayla şifresi çözülür.
 
-Her zaman aynı Geliştirme bilgisayarınızdan bulut hizmeti projesi dağıtırsanız, bu yerel sertifika kullanılabilir. Bu durumda, kullanmaya devam edebilirsiniz **tüm roller için Uzak masaüstünü etkinleştir** Yayımla Sihirbazı'nda seçeneği.
+Bulut hizmeti projesini her seferinde aynı geliştirme bilgisayarından dağıtırsanız, bu yerel sertifika kullanılabilir. Bu durumda, Yayımla sihirbazında **uzak masaüstünü tüm roller Için etkinleştir** seçeneğini kullanmaya devam edebilirsiniz.
 
-Ancak, sizin veya diğer geliştiriciler bulut hizmeti projesi farklı bilgisayarlardan dağıtmak istiyorsanız, diğer bilgisayarlara parolasının şifresini çözmek için gerekli sertifika olmaz. Sonuç olarak, aşağıdaki hata iletisini görürsünüz:
+Siz veya başka geliştiriciler bulut hizmeti projesini farklı bilgisayarlardan dağıtmak istiyorsanız, bu diğer bilgisayarlar parolanın şifresini çözmek için gerekli sertifikaya sahip olmayacaktır. Sonuç olarak, aşağıdaki hata iletisini görürsünüz:
 
 ```output
 Applying remote desktop protocol (RDP) extension.
 Certificate with thumbprint [thumbprint] doesn't exist.
 ```
 
-Bulut hizmetini dağıtmak, ancak bu eylemi herkes için Uzak Masaüstü kullanmak zor her zaman parola değiştirebilirsiniz.
+Bulut hizmetini dağıttığınız her seferinde parolayı değiştirebilirsiniz, ancak bu eylem, uzak masaüstü kullanması gereken herkese karşı uygun hale gelir.
 
-Bir ekip projesi paylaşıyorsanız, daha sonra Yayımlama Sihirbazı'nda seçeneğini kaldırın ve bunun yerine Uzak Masaüstü aracılığıyla doğrudan etkinleştirmek en iyisidir [Azure portalında](cloud-services-role-enable-remote-desktop-new-portal.md) kullanarak veya [PowerShell](cloud-services-role-enable-remote-desktop-powershell.md).
+Projeyi bir takımla paylaşıyorsanız, bu seçeneği en iyi şekilde Yayımla sihirbazında kaldırmak ve bunun yerine uzak masaüstünü doğrudan [Azure Portal](cloud-services-role-enable-remote-desktop-new-portal.md) aracılığıyla veya [PowerShell](cloud-services-role-enable-remote-desktop-powershell.md)kullanarak etkinleştirmek için kullanabilirsiniz.
 
-### <a name="deploying-from-a-build-server-with-visual-studio-2017-version-155-and-later"></a>Visual Studio 2017 sürüm 15.5 ve üzeri ile derleme sunucusundan dağıtma
+### <a name="deploying-from-a-build-server-with-visual-studio-2017-version-155-and-later"></a>Visual Studio 2017 sürüm 15,5 ve üzeri bir yapı sunucusundan dağıtma
 
-Hangi Visual Studio 2017'de sürüm 15.5 veya üstünü yapı aracısının yüklü olduğu bir yapı sunucuda (örneğin, Azure hizmetleriyle DevOps) bulut hizmeti projesinden dağıtabilirsiniz. Bu düzenleme ile dağıtım şifreleme sertifikası kullanılabilir bilgisayardan'olmuyor.
+Derleme aracısında Visual Studio 2017 sürüm 15,5 veya sonraki bir sürümün yüklü olduğu bir yapı sunucusundan (örneğin, Azure DevOps Services) bir bulut hizmeti projesi dağıtabilirsiniz. Bu düzenleme ile, dağıtım, şifreleme sertifikasının kullanılabildiği aynı bilgisayardan gerçekleşir.
 
-Azure DevOps Services'dan RDP uzantısının kullanılması için derleme işlem hattı, şu ayrıntıları bildirin:
+Azure DevOps Services ' den RDP uzantısını kullanmak için, yapı ardışık düzenine aşağıdaki ayrıntıları ekleyin:
 
-1. Dahil `/p:ForceRDPExtensionOverPlugin=true` dağıtım RDP eklentisi yerine RDP uzantısının ile çalıştığından emin olmak için MSBuild bağımsız. Örneğin:
+1. Dağıtımın RDP eklentisi yerine RDP uzantısıyla çalıştığından emin olmak için MSBuild bağımsız değişkenlerine `/p:ForceRDPExtensionOverPlugin=true` ekleyin. Örnek:
 
     ```
     msbuild AzureCloudService5.ccproj /t:Publish /p:TargetProfile=Cloud /p:DebugType=None
         /p:SkipInvalidConfigurations=true /p:ForceRDPExtensionOverPlugin=true
     ```
 
-1. Derleme adımlarınızı sonra Ekle **Azure bulut hizmeti dağıtımı** adım ve özelliklerini ayarlayın.
+1. Derleme adımlarınızı tamamladıktan sonra, **Azure Cloud Service dağıtım** adımını ekleyin ve özelliklerini ayarlayın.
 
-1. Dağıtım adımından sonra ekleyin bir **Azure Powershell** adım olarak ayarlayın, **görünen ad** özelliğini "Azure dağıtım: RDP uzantısı etkinleştir"(veya başka bir uygun ad) ve uygun Azure aboneliğinizi seçin.
+1. Dağıtım adımından sonra, bir **Azure PowerShell** adımı ekleyin, **görünen ad** özelliğini "Azure dağıtımı: RDP uzantısını etkinleştir" (veya başka bir uygun ad) olarak ayarlayın ve uygun Azure aboneliğinizi seçin.
 
-1. Ayarlama **betik türü** "İçi" ve içine aşağıdaki kodu yapıştırın **satır içi betik** alan. (De oluşturabilirsiniz bir `.ps1` dosya projenizde bu betik, ayarlama **betik türü** "Betik dosyası yolu" ve küme **betik yolu** dosyasına işaret edecek şekilde.)
+1. **Komut dosyası türünü** "inline" olarak ayarlayın ve aşağıdaki kodu **satır içi betik** alanına yapıştırın. (Ayrıca bu komut dosyası ile projenizde bir `.ps1` dosyası oluşturabilir, **komut dosyası türünü** "betik dosyası yolu" olarak ayarlayabilir ve **betik yolunu** dosyayı işaret etmek üzere ayarlayabilirsiniz.)
 
     ```ps
     Param(
@@ -136,15 +136,15 @@ Azure DevOps Services'dan RDP uzantısının kullanılması için derleme işlem
     Set-AzureServiceRemoteDesktopExtension -ServiceName $servicename -Credential $credential -Expiration $expiry -Verbose
     ```
 
-## <a name="connect-to-an-azure-role-by-using-remote-desktop"></a>Uzak Masaüstü kullanarak bir Azure rolüne bağlayın
+## <a name="connect-to-an-azure-role-by-using-remote-desktop"></a>Uzak Masaüstü kullanarak bir Azure rolüne bağlanma
 
-Azure'da bulut hizmetinizi yayımlayın ve Uzak Masaüstü etkinleştirdikten sonra VM bulut hizmetinde oturum açmak için Visual Studio sunucu Gezgini'nde kullanabilirsiniz:
+Bulut hizmetinizi Azure 'da yayımladıktan ve uzak masaüstü 'nü etkinleştirdikten sonra, Cloud Service VM 'de oturum açmak için Visual Studio Sunucu Gezgini kullanabilirsiniz:
 
-1. Sunucu Gezgini'nde **Azure** düğümünü ve ardından bir bulut hizmeti ve örneklerinin listesini görüntülemek için rollerden biri için düğümünü genişletin.
+1. Sunucu Gezgini ' de, **Azure** düğümünü genişletin ve ardından bir bulut hizmeti ve rollerinin biri için düğümü genişleterek örnek listesini görüntüleyin.
 
-2. Bir örneği düğümüne sağ tıklayıp **Uzak Masaüstü kullanarak bağlanmak**.
+2. Bir örnek düğümüne sağ tıklayın ve **Uzak Masaüstü kullanarak bağlan**' ı seçin.
 
-3. Kullanıcı adı ve daha önce oluşturduğunuz parolayı girin. Şimdi uzak oturumunuz kaydedilir.
+3. Daha önce oluşturduğunuz Kullanıcı adını ve parolayı girin. Artık uzak oturumunuzda oturum açtınız.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

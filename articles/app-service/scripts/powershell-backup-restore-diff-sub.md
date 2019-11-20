@@ -1,6 +1,6 @@
 ---
-title: Azure PowerShell betik örneği - başka bir aboneliğe uygulama yedeğini geri yükleme | Microsoft Docs
-description: Azure PowerShell betik örneği - bir web uygulamasını başka bir abonelikte bir yedekten geri yükleme
+title: Azure PowerShell betik örneği-uygulama yedeklemesini başka bir aboneliğe geri yükleme | Microsoft Docs
+description: Azure PowerShell betik örneği-bir Web uygulamasını başka bir abonelikteki yedekten geri yükleme
 services: app-service\web
 documentationcenter: ''
 author: msangapu
@@ -10,21 +10,20 @@ tags: azure-service-management
 ms.assetid: a2a27d94-d378-4c17-a6a9-ae1e69dc4a72
 ms.service: app-service-web
 ms.workload: web
-ms.devlang: na
 ms.topic: sample
 ms.date: 11/21/2018
 ms.author: msangapu
 ms.custom: seodec18
-ms.openlocfilehash: a33df69a10dc803c60652c64a11a137f085e5c61
-ms.sourcegitcommit: 3102f886aa962842303c8753fe8fa5324a52834a
+ms.openlocfilehash: 5f293f290bd0c8b6c5546d37a43dde64a5af4f82
+ms.sourcegitcommit: 44e85b95baf7dfb9e92fb38f03c2a1bc31765415
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "66136547"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70098414"
 ---
-# <a name="restore-a-web-app-from-a-backup-in-another-subscription-using-powershell"></a>Bir web uygulamasını PowerShell kullanarak başka bir abonelikte bir yedekten geri yükleme
+# <a name="restore-a-web-app-from-a-backup-in-another-subscription-using-powershell"></a>PowerShell kullanarak bir Web uygulamasını başka bir abonelikteki yedekten geri yükleme
 
-Bu örnek betik, mevcut bir web uygulamasından önceden tamamlanmış bir yedekleme alır ve başka bir abonelikte bir web uygulamasına yükler. 
+Bu örnek betik, daha önce tamamlanmış bir yedeği var olan bir Web uygulamasından alır ve onu başka bir abonelikteki Web uygulamasına geri yükler. 
 
 Gerekirse, [Azure PowerShell kılavuzunda](/powershell/azure/overview) bulunan yönergeleri kullanarak Azure PowerShell’i yükleyin ve ardından Azure ile bağlantı oluşturmak için `Connect-AzAccount` komutunu çalıştırın. 
 
@@ -36,7 +35,7 @@ Gerekirse, [Azure PowerShell kılavuzunda](/powershell/azure/overview) bulunan y
 
 ## <a name="clean-up-deployment"></a>Dağıtımı temizleme 
 
-Web uygulaması düşünmüyorsanız, kaynak grubu, web uygulaması ve tüm ilgili kaynakları kaldırmak için aşağıdaki komutu kullanın.
+Artık Web uygulamasına ihtiyacınız yoksa, kaynak grubunu, Web uygulamasını ve tüm ilgili kaynakları kaldırmak için aşağıdaki komutu kullanın.
 
 ```powershell
 Remove-AzResourceGroup -Name $resourceGroupName -Force
@@ -48,10 +47,10 @@ Bu betik aşağıdaki komutları kullanır. Tablodaki her komut, komuta özgü b
 
 | Komut | Notlar |
 |---|---|
-| [AzAccount ekleyin](/powershell/module/az.accounts/connect-azaccount) | Azure Resource Manager cmdlet'i istekleri için kullanılacak bir kimliği doğrulanmış hesap ekler.  |
+| [Add-AzAccount](/powershell/module/az.accounts/connect-azaccount) | Azure Resource Manager cmdlet istekleri için kullanılmak üzere kimliği doğrulanmış bir hesap ekler.  |
 | [Get-AzWebAppBackupList](/powershell/module/az.websites/get-azwebappbackuplist) | Bir web uygulamasının yedekleme listesini alır. |
-| [New-AzWebApp](/powershell/module/az.websites/new-azwebapp) | Bir web uygulaması oluşturur |
-| [Geri yükleme-AzWebAppBackup](/powershell/module/az.websites/restore-azwebappbackup) | Bir web uygulaması önceden tamamlanmış bir yedekten geri yükler. |
+| [New-AzWebApp](/powershell/module/az.websites/new-azwebapp) | Bir Web uygulaması oluşturur |
+| [Restore-AzWebAppBackup](/powershell/module/az.websites/restore-azwebappbackup) | Bir Web uygulamasını daha önce tamamlanmış bir yedekten geri yükler. |
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

@@ -1,32 +1,32 @@
 ---
-title: Avere vFXT sahip olmayan geçici çözüm - Azure
-description: Geçici çözüm, kullanıcıların ilgili daha fazla bilgi için Azure Avere vFXT dağıtmak için abonelik sahibi izniniz olmadan
+title: Avere vFXT sahip olmayan geçici çözüm-Azure
+description: Abonelik sahibi olmayan kullanıcılara Azure için avere vFXT dağıtma izni veren geçici çözüm
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 10/31/2018
-ms.author: v-erkell
-ms.openlocfilehash: e72e6d969649de09389ee38b94e874fad98ee08f
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: rohogue
+ms.openlocfilehash: 77fc5a53c8bdc389c24cd1e6406415eefc3f167b
+ms.sourcegitcommit: 1c2659ab26619658799442a6e7604f3c66307a89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60409218"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72256190"
 ---
-# <a name="authorize-non-owners-to-deploy-avere-vfxt"></a>Sahip olmayanları Avere vFXT dağıtımı yapmak için yetkilendirme
+# <a name="authorize-non-owners-to-deploy-avere-vfxt"></a>Avere vFXT 'yi dağıtmak için sahip olmayan yetkilendirme
 
-Bu yönergeler, Azure sistem için bir Avere vFXT oluşturmak için sahip ayrıcalıkları aboneliği olmayan bir kullanıcı izin veren bir geçici çözüm içindir.
+Bu yönergeler, abonelik sahibi ayrıcalıkları olmayan bir kullanıcının Azure sistemi için avere vFXT oluşturmasına izin veren bir geçici çözümdür.
 
-(VFXT sistemidir oluşturma yapmak sahip ayrıcalıklarına sahip bir kullanıcı için Avere dağıtmak için önerilen yöntem adımları açıklandığı şekilde [Avere vFXT oluşturmak için hazırlık](avere-vfxt-prereqs.md).)  
+(Avere vFXT sistemini dağıtmanın önerilen yolu, [avere vFXT 'yi oluşturmaya hazırlanma](avere-vfxt-prereqs.md)bölümünde açıklandığı gibi, sahip ayrıcalıklarına sahip bir kullanıcının oluşturma adımlarını oluşturmaktır.)  
 
-Geçici çözüm, küme yüklemek için yeterli izinlere, kullanıcılara bir ek erişim rolü oluşturmayı içerir. Rol, abonelik sahibi tarafından oluşturulması gerekir ve sahibi uygun kullanıcılara atamanız gerekir. 
+Geçici çözüm, kullanıcılarına kümeyi yüklemek için yeterli izinleri veren ek bir erişim rolü oluşturmayı içerir. Rol, bir abonelik sahibi tarafından oluşturulmalıdır ve bir sahibin onu uygun kullanıcılara ataması gerekir. 
 
-Abonelik sahibi de gerekir [kullanım koşullarını kabul](avere-vfxt-prereqs.md) Avere vFXT Market görüntüsü için. 
+Abonelik sahibi ayrıca avere vFXT Market görüntüsü için [kullanım koşullarını kabul](avere-vfxt-prereqs.md) etmelidir. 
 
 > [!IMPORTANT] 
-> Bu adımların tümü, küme için kullanılacak olan abonelik sahibi ayrıcalıklarına sahip bir kullanıcı tarafından izlenmelidir.
+> Bu adımların tümü, küme için kullanılacak abonelikte sahip ayrıcalıklarına sahip bir kullanıcı tarafından alınmalıdır.
 
-1. Bu satırlar kopyalayın ve bunları bir dosyaya kaydedin (örneğin, `averecreatecluster.json`). Abonelik Kimliğinizi kullanın `AssignableScopes` deyimi.
+1. Bu satırları kopyalayın ve bir dosyaya kaydedin (örneğin, `averecreatecluster.json`). @No__t-0 ifadesinde abonelik KIMLIĞINIZI kullanın.
 
    ```json
    {
@@ -67,12 +67,12 @@ Abonelik sahibi de gerekir [kullanım koşullarını kabul](avere-vfxt-prereqs.m
     az role definition create --role-definition ./averecreatecluster.json
     ```
 
-1. Kümeyi oluşturacak kullanıcıya bu rolü atayın:
+1. Bu rolü, kümeyi oluşturacak olan kullanıcıya atayın:
 
    `az role assignment create --assignee <USERNAME> --scope /subscriptions/<SUBSCRIPTION_ID> --role 'avere-create-cluster'`
 
-Bu yordam sonrasında bu role atanmış herhangi bir kullanıcı abonelik için şu izinler vardır: 
+Bu yordamdan sonra, bu role atanan her kullanıcı abonelik için aşağıdaki izinlere sahiptir: 
 
-* Oluşturma ve ağ altyapısını yapılandırma
-* Küme denetleyiciyi oluşturun
-* Kümeyi oluşturmak için küme denetleyicisinden küme oluşturma betikleri çalıştırın
+* Ağ altyapısını oluşturma ve yapılandırma
+* Küme denetleyicisini oluşturma
+* Kümeyi oluşturmak için küme denetleyicisinden küme oluşturma betikleri çalıştırma

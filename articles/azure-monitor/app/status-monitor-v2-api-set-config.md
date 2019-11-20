@@ -1,59 +1,49 @@
 ---
-title: 'Azure Durum İzleyicisi v2 API Başvurusu: Config ayarlama | Microsoft Docs'
-description: Durum İzleyicisi'ni v2 API'si başvurusu. Set-ApplicationInsightsMonitoringConfig. Web sitesi yeniden dağıtmaya gerek kalmadan Web sitesi performansını izleyin. ASP.NET web uygulamaları ile çalışır, şirket içi Vm'leri içinde veya azure'da barındırılan.
-services: application-insights
-documentationcenter: .net
-author: MS-TimothyMothra
-manager: alexklim
-ms.assetid: 769a5ea4-a8c6-4c18-b46c-657e864e24de
-ms.service: application-insights
-ms.workload: tbd
-ms.tgt_pltfrm: ibiza
+title: Azure Application Insights Aracısı API başvurusu
+description: Aracı API başvurusunu Application Insights. Set-Applicationınsiısmonitoringconfig. Web sitesini yeniden dağıtmaya gerek kalmadan Web sitesi performansını izleyin. Şirket içinde, VM 'lerde veya Azure 'da barındırılan ASP.NET Web Apps ile birlikte kullanılır.
+ms.service: azure-monitor
+ms.subservice: application-insights
 ms.topic: conceptual
-ms.date: 04/23/2019
+author: TimothyMothra
 ms.author: tilee
-ms.openlocfilehash: 562ce8a4267370be9b049e3b56f213f82deb89c0
-ms.sourcegitcommit: d4dfbc34a1f03488e1b7bc5e711a11b72c717ada
+ms.date: 04/23/2019
+ms.openlocfilehash: d90739fbdc862d67dc2ce0f1dfdf5af5f4089a44
+ms.sourcegitcommit: 5acd8f33a5adce3f5ded20dff2a7a48a07be8672
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "66734998"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72899667"
 ---
-# <a name="status-monitor-v2-api-set-applicationinsightsmonitoringconfig-v021-alpha"></a>Durum İzleyicisi'ni v2 API'si: Set-ApplicationInsightsMonitoringConfig (v0.2.1-alpha)
+# <a name="application-insights-agent-api-set-applicationinsightsmonitoringconfig"></a>Application Insights aracı API 'SI: set-Applicationınsiısmonitoringconfig
 
-Bu belgede bir üyesi olan bir cmdlet açıklanmaktadır [Az.ApplicationMonitor PowerShell Modülü](https://www.powershellgallery.com/packages/Az.ApplicationMonitor/).
-
-> [!IMPORTANT]
-> Durum İzleyicisi'ni v2 şu anda genel Önizleme aşamasındadır.
-> Bu önizleme sürümü bir hizmet düzeyi sözleşmesi olmadan sağlanmaktadır ve üretim iş yükleri için önerilmez. Bazı özellikler desteklenmiyor ve bazıları kısıtlı yeteneklere sahip.
-> Daha fazla bilgi için bkz. [Microsoft Azure Önizlemeleri için Ek Kullanım Koşulları](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+Bu belgede, [az. ApplicationMonitor PowerShell modülünün](https://www.powershellgallery.com/packages/Az.ApplicationMonitor/)üyesi olan bir cmdlet açıklanmaktadır.
 
 ## <a name="description"></a>Açıklama
 
-Yapılandırma dosyası yeniden tam bir yükleme yapmadan ayarlar.
-Yaptığınız değişiklikleri etkili olması için IIS'yi yeniden başlatın.
+Tam yeniden yükleme yapmadan yapılandırma dosyasını ayarlar.
+Değişikliklerin etkili olması için IIS 'yi yeniden başlatın.
 
 > [!IMPORTANT] 
-> Bu cmdlet, yönetici izinlerine sahip bir PowerShell oturumu gerektirir.
+> Bu cmdlet yönetici izinlerine sahip bir PowerShell oturumu gerektirir.
 
 
 ## <a name="examples"></a>Örnekler
 
-### <a name="example-with-a-single-instrumentation-key"></a>Örnek bir tek bir izleme anahtarı ile
-Bu örnekte, geçerli bilgisayarda tüm uygulamalar, bir tek bir izleme anahtarı atanır.
+### <a name="example-with-a-single-instrumentation-key"></a>Tek bir izleme anahtarına sahip örnek
+Bu örnekte, geçerli bilgisayardaki tüm uygulamalara tek bir izleme anahtarı atanacaktır.
 
 ```powershell
 PS C:\> Enable-ApplicationInsightsMonitoring -InstrumentationKey xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
-### <a name="example-with-an-instrumentation-key-map"></a>Bir izleme anahtarı eşleme örneği
+### <a name="example-with-an-instrumentation-key-map"></a>İzleme anahtarı eşleme ile örnek
 Bu örnekte:
-- `MachineFilter` Geçerli bilgisayar kullanarak eşleşen `'.*'` joker karakter.
-- `AppFilter='WebAppExclude'` sağlar bir `null` izleme anahtarı. Belirtilen uygulama algılayıcılarla olmaz.
-- `AppFilter='WebAppOne'` Belirtilen uygulama benzersiz izleme anahtarını atar.
-- `AppFilter='WebAppTwo'` Belirtilen uygulama benzersiz izleme anahtarını atar.
-- Son olarak, `AppFilter` de kullanır `'.*'` önceki kurallar tarafından eşleşen olmayan ve varsayılan izleme anahtarı atama tüm web uygulamaları eşleştirmek için joker karakter.
-- Okunabilirlik için boşluk eklenir.
+- `MachineFilter` `'.*'` joker karakterini kullanarak geçerli bilgisayarla eşleşir.
+- `AppFilter='WebAppExclude'` `null` izleme anahtarı sağlar. Belirtilen uygulama gösterilmez.
+- `AppFilter='WebAppOne'`, belirtilen uygulamayı benzersiz bir izleme anahtarı olarak atar.
+- `AppFilter='WebAppTwo'`, belirtilen uygulamayı benzersiz bir izleme anahtarı olarak atar.
+- Son olarak, `AppFilter`, önceki kurallarla eşleşmeyen tüm Web uygulamalarını eşleştirmek ve varsayılan bir izleme anahtarı atamak için `'.*'` joker karakterini de kullanır.
+- Okunabilirlik için boşluklar eklenir.
 
 ```powershell
 PS C:\> Enable-ApplicationInsightsMonitoring -InstrumentationKeyMap 
@@ -68,37 +58,37 @@ PS C:\> Enable-ApplicationInsightsMonitoring -InstrumentationKeyMap
 ## <a name="parameters"></a>Parametreler
 
 ### <a name="-instrumentationkey"></a>-Instrumentationkey
-**Gerekli.** Hedef bilgisayarda tüm uygulamalar tarafından kullanım için bir tek bir izleme anahtarı sağlamak için bu parametreyi kullanın.
+**Gerekli.** Hedef bilgisayardaki tüm uygulamalar tarafından kullanılmak üzere tek bir izleme anahtarı sağlamak için bu parametreyi kullanın.
 
-### <a name="-instrumentationkeymap"></a>-InstrumentationKeyMap
-**Gerekli.** Birden çok izleme anahtarı ve her bir uygulama tarafından kullanılan izleme anahtarı ilişkin bir eşleme sağlamak için bu parametreyi kullanın.
-Birkaç bilgisayar için bir tek bir yükleme betiği ayarlayarak oluşturabileceğiniz `MachineFilter`.
+### <a name="-instrumentationkeymap"></a>-Instrumentationkeymap
+**Gerekli.** Birden çok izleme anahtarı ve her bir uygulama tarafından kullanılan izleme anahtarlarının bir eşlemesini sağlamak için bu parametreyi kullanın.
+`MachineFilter`ayarlayarak, birkaç bilgisayar için tek bir yükleme betiği oluşturabilirsiniz.
 
 > [!IMPORTANT]
-> Uygulama kuralları kuralları sağlanan sırayla karşı eşleşir. Bu nedenle en belirgin kurallar ilk belirtmeniz gerekir ve son en genel kurallar.
+> Uygulamalar kuralların sağlandığı sırada kurallarla eşleştirecektir. Bu nedenle, önce en özel kuralları ve en son genel kuralları belirtmeniz gerekir.
 
 #### <a name="schema"></a>Şema
 `@(@{MachineFilter='.*';AppFilter='.*';InstrumentationKey='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'})`
 
-- **MachineFilter** gerekli bir C# regex bilgisayar veya VM adı.
-    - '. *' tüm eşleşir
-    - Belirtilen ada sahip bilgisayarlarda 'ComputerName' eşleşir.
-- **AppFilter** gerekli bir C# regex bilgisayar veya VM adı.
-    - '. *' tüm eşleşir
-    - 'ApplicationName' yalnızca IIS uygulama belirtilen ad ile eşleşir.
-- **Instrumentationkey** önceki iki filtrelerle eşleşen uygulamaları izlemeyi etkinleştirmek için gereklidir.
-    - Bu değeri izleme hariç tutmak için kurallar tanımlamak istiyorsanız boş bırakın.
+- **Machinefilter** BILGISAYARıN veya VM C# adının gerekli bir Regex.
+    - '. * ' tümü eşleşecek
+    - ' ComputerName ' yalnızca belirtilen ada sahip bilgisayarlarla eşleştirecektir.
+- **Appfilter** BILGISAYARıN veya VM C# adının gerekli bir Regex.
+    - '. * ' tümü eşleşecek
+    - ' ApplicationName ' yalnızca belirtilen ada sahip IIS uygulamalarıyla eşleştirecektir.
+- Önceki iki filtrelerle eşleşen uygulamaların izlenmesini etkinleştirmek için **ınstrumentationkey** gereklidir.
+    - İzlemeyi hariç tutmak için kurallar tanımlamak istiyorsanız bu değeri boş bırakın.
 
 
-### <a name="-verbose"></a>-Verbose
-**Ortak parametresi.** Ayrıntılı günlükleri görüntülemek için bu anahtarı kullanın.
+### <a name="-verbose"></a>-Ayrıntılı
+**Ortak parametre.** Ayrıntılı günlükleri göstermek için bu anahtarı kullanın.
 
 
 ## <a name="output"></a>Çıktı
 
 Varsayılan olarak, çıkış yok.
 
-#### <a name="example-verbose-output-from-setting-the-config-file-via--instrumentationkey"></a>Ayrıntılı örnek yapılandırma dosyası aracılığıyla - Instrumentationkey ayarından çıkış
+#### <a name="example-verbose-output-from-setting-the-config-file-via--instrumentationkey"></a>-Instrumentationkey aracılığıyla yapılandırma dosyasını ayarlamadan ayrıntılı çıkış örneği
 
 ```
 VERBOSE: Operation: InstallWithIkey
@@ -110,7 +100,7 @@ VERBOSE: Config File Path:
 C:\Program Files\WindowsPowerShell\Modules\Az.ApplicationMonitor\content\applicationInsights.ikey.config
 ```
 
-#### <a name="example-verbose-output-from-setting-the-config-file-via--instrumentationkeymap"></a>Ayrıntılı örnek yapılandırma dosyası aracılığıyla - InstrumentationKeyMap ayarından çıkış
+#### <a name="example-verbose-output-from-setting-the-config-file-via--instrumentationkeymap"></a>-Instrumentationkeymap aracılığıyla yapılandırma dosyasını ayarlamadan ayrıntılı çıkış örneği
 
 ```
 VERBOSE: Operation: InstallWithIkeyMap
@@ -127,17 +117,17 @@ C:\Program Files\WindowsPowerShell\Modules\Az.ApplicationMonitor\content\applica
 ## <a name="next-steps"></a>Sonraki adımlar
 
   Telemetrinizi görüntüleyin:
- - [Ölçümleri keşfetme](../../azure-monitor/app/metrics-explorer.md) performans ve kullanımı izlemek için.
-- [Olayları ve günlükleri arayın](../../azure-monitor/app/diagnostic-search.md) sorunları tanılamak için.
-- [Analytics'i](../../azure-monitor/app/analytics.md) daha gelişmiş sorgular için.
-- [Panolar oluşturma](../../azure-monitor/app/overview-dashboard.md).
+ - Performansı ve kullanımı izlemek için [ölçümleri](../../azure-monitor/app/metrics-explorer.md) bulun.
+- Sorunları tanılamak için [olayları ve günlükleri arayın](../../azure-monitor/app/diagnostic-search.md) .
+- Daha gelişmiş sorgular için [analiz kullanın](../../azure-monitor/app/analytics.md) .
+- [Panolar oluşturun](../../azure-monitor/app/overview-dashboard.md).
  
  Daha fazla telemetri ekleyin:
- - [Web testleri oluşturun](monitor-web-app-availability.md) sitenizin Canlı kalması için.
-- [Web istemcisi telemetrisini ekleyin](../../azure-monitor/app/javascript.md) web sayfası koduna ait özel durumları görmek ve izleme çağrıları etkinleştirmek için.
-- [Kodunuza Application Insights SDK'sını ekleyin](../../azure-monitor/app/asp-net.md) izleme ve günlük çağrıları
+ - Sitenizin canlı kaldığından emin olmak için [Web testleri oluşturun](monitor-web-app-availability.md) .
+- Web sayfası kodundan özel durumları görmek ve izleme çağrılarını etkinleştirmek için [Web istemcisi telemetrisini ekleyin](../../azure-monitor/app/javascript.md) .
+- İzleme ve günlük çağrısı ekleyebilmeniz için [Application Insights SDK 'sını kodunuza ekleyin](../../azure-monitor/app/asp-net.md)
  
- Durum İzleyicisi v2 ile daha fazlasını yapın:
- - Kılavuzunu kullanın [sorun giderme](status-monitor-v2-troubleshoot.md) Durum İzleyicisi v2.
- - [Yapılandırmasını al](status-monitor-v2-api-get-config.md) ayarlarınızı doğru kaydedilmiş olduğunu onaylamak için.
- - [Durumu Al](status-monitor-v2-api-get-status.md) izleme incelemek için.
+ Application Insights aracısıyla daha fazlasını yapın:
+ - Application Insights Aracısı [sorunlarını gidermek](status-monitor-v2-troubleshoot.md) için kılavuzumuzu kullanın.
+ - Ayarlarınızın doğru kaydedildiğinden emin olmak için [yapılandırmayı alın](status-monitor-v2-api-get-config.md) .
+ - İzlemeyi İnceleme [durumunu alın](status-monitor-v2-api-get-status.md) .

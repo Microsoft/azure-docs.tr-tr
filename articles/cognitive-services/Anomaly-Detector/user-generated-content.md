@@ -1,35 +1,33 @@
 ---
-title: Anomali algılayıcısı API'si için özel kullanıcı tarafından oluşturulan içerikleri
+title: Anomali algılayıcı API 'SI için Kullanıcı tarafından oluşturulan içerik
 titleSuffix: Azure Cognitive Services
-description: Öne çıkan içerik bulun ve diğer kişiler hakkında düşünmek ve Anomali algılayıcısı API'sini kullanarak nasıl keşfedin.
+description: Öne çıkan içeriği bulun ve diğer kişilerin anomali algılayıcı API 'sini kullanma hakkında bilgi edinin.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: anomaly-detector
-ms.topic: overview
+ms.topic: conceptual
 ms.date: 06/17/2019
 ms.author: aahi
-ms.openlocfilehash: 3588527bf765c086e8b393485e2b8de6e7a16dff
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: 81a2cb7ece775bfaffaf1b1932feb12b2da5f08f
+ms.sourcegitcommit: ae8b23ab3488a2bbbf4c7ad49e285352f2d67a68
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67451055"
+ms.lasthandoff: 11/13/2019
+ms.locfileid: "74012018"
 ---
-# <a name="featured-user-generated-content-for-the-anomaly-detector-api"></a>Anomali algılayıcısı API'si için özel kullanıcı tarafından oluşturulan içerikleri
+# <a name="featured-user-generated-content-for-the-anomaly-detector-api"></a>Anomali algılayıcı API 'SI için Kullanıcı tarafından oluşturulan içerik
 
-Diğer müşteriler hakkında düşünmek ve Anomali algılayıcısı API'sini kullanarak nasıl keşfetmek için bu makaleyi kullanın. Aşağıdaki kaynaklar, Anomali algılayıcısı kullanıcıları topluluğu tarafından oluşturulmuştur. Teknik blogları, açık kaynaklı projelerin ve hem Microsoft hem de üçüncü taraf kullanıcılar tarafından oluşturulan diğer Katkıları içerirler. Aşağıdaki bağlantıların bazıları Microsoft harici Web Siteleri'nde barındırılan ve Microsoft içeriğini var. sorumlu değildir. Bu kaynakların başvurduğunuzda dikkatli olun.
+Diğer müşterilerin anomali algılayıcı API 'sini nasıl düşünmesini ve kullandığını öğrenmek için bu makaleyi kullanın. Aşağıdaki kaynaklar anomali algılayıcı kullanıcıları topluluğu tarafından oluşturulmuştur. Açık kaynaklı projeleri ve hem Microsoft hem de üçüncü taraf kullanıcıları tarafından oluşturulan diğer katkıları içerirler. Aşağıdaki bağlantılardan bazıları Microsoft 'un dışındaki web sitelerinde barındırılır ve Microsoft bu içeriklerden sorumlu değildir. Bu kaynaklara başvurduğunuzda dikkatli kullanın.
 
-## <a name="technical-blogs"></a>Teknik blogları
+## <a name="technical-blogs"></a>Teknik Bloglar
 
-* [Azure Anomali algılayıcısı API ile tanışın](https://techcommunity.microsoft.com/t5/AI-Customer-Engineering-Team/Introducing-Azure-Anomaly-Detector-API/ba-p/490162)
-* [Bilişsel hizmet çalışıyor: Anomali algılayıcısı API (Japonca içinde)](https://azure-recipe.kc-cloud.jp/2019/04/cognitive-service-anomaly-detector-api/)
+* [Bilişsel hizmet deneniyor: anomali algılayıcı API 'SI (Japonca)](https://azure-recipe.kc-cloud.jp/2019/04/cognitive-service-anomaly-detector-api/)
 
-## <a name="open-source-projects"></a>Açık kaynak projeleri
+## <a name="open-source-projects"></a>Açık kaynaklı projeler
 
-* [Anomali algılayıcısı API'si ve SDK'sı için resmi kod örnekleri](https://github.com/Azure-Samples/AnomalyDetector)
-* [Anomali algılama gösteren ve Power BI akış Jupyter not defteri](https://github.com/marvinbuss/MS-AnomalyFinder)
+* [Anomali algılama ve akışı Power BI gösteren Jupyter Not defteri](https://github.com/marvinbuss/MS-AnomalyFinder)
 
-Bir kaynak aday gösterin istiyorsanız dolgu [kısa biçim](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRxSkyhztUNZCtaivu8nmhd1UMENTMEJWTkRORkRGQUtGQzlWQ1dSV1JLTS4u).
-İlgili kişi AnomalyDetector@microsoft.com ya da bize içeriği kaldırmak istiyorsanız, github'da bir sorun Yükselt.
+Bir kaynağı aday yapmak istiyorsanız, [kısa bir form](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRxSkyhztUNZCtaivu8nmhd1UMENTMEJWTkRORkRGQUtGQzlWQ1dSV1JLTS4u)girin.
+İçeriği kaldırmamızı istiyorsanız AnomalyDetector@microsoft.com başvurun veya GitHub 'da sorun yükseltin.

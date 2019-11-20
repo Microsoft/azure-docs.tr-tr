@@ -1,45 +1,51 @@
 ---
-title: Yönetici desteği - Azure Batch işleme
-description: Azure Batch işleme manager tümleştirmesi kullanılarak işlemeye yönelik Azure kullanma
+title: Oluşturma yöneticisi desteği-Azure Batch
+description: Azure Batch render Manager tümleştirmesini kullanarak işleme için Azure kullanma
 services: batch
 ms.service: batch
 author: mscurrell
 ms.author: markscu
 ms.date: 08/02/2018
 ms.topic: conceptual
-ms.openlocfilehash: 6878d3b4fc8648db540d016389747eceb45d936a
-ms.sourcegitcommit: f56b267b11f23ac8f6284bb662b38c7a8336e99b
+ms.openlocfilehash: eb3ce47e5ffed697392065a1faacbbfaec19f4d1
+ms.sourcegitcommit: 909ca340773b7b6db87d3fb60d1978136d2a96b0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67436172"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70983680"
 ---
-# <a name="using-azure-batch-with-render-farm-managers"></a>Azure Batch işleme Çiftlik Yöneticileri ile kullanma
+# <a name="using-azure-batch-with-render-farm-managers"></a>İşleme grubu yöneticileriyle Azure Batch kullanma
 
-Mevcut bir kullanıyorsanız, şirket içi bir işleme Yöneticisi işleme grubu kapasite denetler ve işleme işleri büyük olasılıkla sonra Grup, işleyin.
+Var olan bir şirket içi işleme grubu kullanıyorsanız, işleme yöneticisinin işleme grubu kapasitesini ve işleme işlerini denetlemeleri oldukça olasıdır.
 
-Azure, popüler işleme yöneticileri için yerleşik destek ya da eklenti sağlar. Ardından, ekleme ve Azure Vm'leri Kullandıkça Öde uygulama lisansları ile Vm'leri ve düşük öncelikli VM'ler dahil olmak üzere, kaldırma.
+Azure, popüler oluşturma yöneticileri için yerleşik destek veya eklentiler sağlar. Daha sonra, kullanım için ödeme yapılacak uygulama lisanslama ve düşük öncelikli VM 'ler dahil olmak üzere Azure VM 'leri ekleyebilir ve kaldırabilirsiniz.
 
-Aşağıdaki işleme yöneticileri desteklenir:
+Aşağıdaki oluşturma yöneticileri desteklenir:
 
-* [PipelineFX Qube!](https://www.pipelinefx.com/)
-* [Kraliyet işleme](https://www.royalrender.de/)
-* [Thinkbox son tarihi](https://deadline.thinkboxsoftware.com/)
+* [PipelineFX QUP!](https://www.pipelinefx.com/)
+* [Royal oluşturma](https://www.royalrender.de/)
+* [Thinkbox son tarih](https://deadline.thinkboxsoftware.com/)
 
-## <a name="using-azure-with-pipelinefx-qube"></a>Azure ile PipelineFX Qube kullanma
+## <a name="azure-render-hub"></a>Azure Işleme Merkezi
 
-Betikleri ve Azure Batch etkinleştirme yönergeleri Qube çalışanları olduğu gibi kullanılacak VM havuzu [GitHub deposunu](https://github.com/Azure/azure-qube).
+Azure Işleme Merkezi, Azure oluşturma gruplarının oluşturulmasını ve yönetimini basitleştirir.  İşleme merkezinde, PipelineFx qum ve son tarih 10 için yerel destek bulunur.  Daha fazla bilgi ve ayrıntılı yönergeler için [GitHub deposuna](https://github.com/Azure/azure-render-hub)bakın.
 
-## <a name="using-azure-with-royal-render"></a>Azure ile Kraliyet işleme kullanma
+## <a name="using-azure-with-pipelinefx-qube"></a>Azure ile PipelineFX QUP kullanma
 
-Kraliyet oluşturma, VM'lerin Azure tabanlı bir işleme çiftliği genişletmenizi sağlayan yerleşik bir Azure ve Azure Batch tümleştirmeye sahiptir. Bir özeti için bkz: [Yardım dosyaları](https://www.royalrender.de/help8/index.html?Cloudrendering.html).
+Azure Işleme Merkezi, son tarih dahil popüler oluşturma yöneticilerini destekler.  Işleme hub 'ı dağıtma ve kullanma hakkında yönergeler için bkz. [GitHub deposu](https://github.com/Azure/azure-render-hub).
 
-Azure tümleştirmesi kullanılarak Kraliyet işleme bir müşteri örneği için bkz [Jellyfish resimleri müşteri hikayesi](https://customers.microsoft.com/story/jellyfishpictures).
+Azure Batch havuz VM 'lerinin [GitHub deposunda](https://github.com/Azure/azure-qube)da kullanılabilir olması için kullanılacak betikler ve yönergeler.
 
-## <a name="using-azure-with-thinkbox-deadline"></a>Azure ile Thinkbox son kullanma
+## <a name="using-azure-with-royal-render"></a>Azure kullanarak Royal oluşturma
 
-Betikleri ve Azure Batch etkinleştirme yönergeleri son kopyalanmış olduğu gibi kullanılacak VM havuzu [GitHub deposunu](https://github.com/Azure/azure-deadline).
+Royal oluşturma, Azure ve Azure Batch tümleştirme yerleşik olarak bulunur ve Azure tabanlı VM 'lerle bir işleme grubunu genişletmenize olanak tanır. Özet için [Yardım dosyalarına](https://www.royalrender.de/help8/index.html?Cloudrendering.html)bakın.
+
+Azure tümleştirmesini kullanarak bir Royal oluşturma müşterisi örneği için bkz. [Jellybalık resimleri müşteri hikayesi](https://customers.microsoft.com/story/jellyfishpictures).
+
+## <a name="using-azure-with-thinkbox-deadline"></a>Azure 'ı Thinkbox son tarihine kadar kullanma
+
+Azure Işleme Merkezi, son tarih dahil popüler oluşturma yöneticilerini destekler.  Işleme hub 'ı dağıtma ve kullanma hakkında yönergeler için bkz. [GitHub deposu](https://github.com/Azure/azure-render-hub).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Azure Batch tümleştirme için uygun kullanarak işleme yöneticinize denemek eklenti ve GitHub'ı yönergeler uygunsa.
+Uygun olan yerlerde GitHub ile ilgili eklenti ve yönergeleri kullanarak, işleme yöneticiniz için Azure Batch tümleştirmesini deneyin.

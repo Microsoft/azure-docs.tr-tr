@@ -1,59 +1,53 @@
 ---
-title: Azure Cloud Services nedir | Microsoft Docs
-description: Azure Cloud Services nedir hakkında bilgi edinin.
+title: Azure Cloud Services nedir? | Microsoft Docs
+description: Azure Cloud Services ne olduğunu öğrenin.
 services: cloud-services
-documentationcenter: ''
-author: jpconnock
-manager: timlt
-ms.assetid: ed7ad348-6018-41bb-a27d-523accd90305
+author: georgewallace
 ms.service: multiple
-ms.workload: multiple
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 04/19/2017
-ms.author: jeconnoc
-ms.openlocfilehash: ce88dcaedf32f293fc121cda2a088388c99badee
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ms.author: gwallace
+ms.openlocfilehash: 61369d51056607d8176d301afa945c7c77895b12
+ms.sourcegitcommit: 4b647be06d677151eb9db7dccc2bd7a8379e5871
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60337531"
+ms.lasthandoff: 07/19/2019
+ms.locfileid: "68359711"
 ---
-# <a name="overview-of-azure-cloud-services"></a>Azure bulut hizmetlerine genel bakış
-Azure Cloud Services, örneği bir [bir hizmet olarak platform](https://azure.microsoft.com/overview/what-is-paas/) (PaaS). Gibi [Azure App Service](../app-service/overview.md), bu teknoloji, ölçeklenebilir, güvenilir ve uygun maliyetli uygulamaları desteklemek için tasarlanmıştır. App Service sanal makinelerinde (VM'ler), bu nedenle barındırıldığını aynı şekilde Azure Cloud Services çok uzun. Ancak, sanal makineleri hakkında daha fazla denetime sahip. Azure Cloud Services kullanan Vm'lerde kendi yazılım yükleyebilirsiniz ve Uzaktan erişim.
+# <a name="overview-of-azure-cloud-services"></a>Azure Cloud Services 'ye Genel Bakış
+Azure Cloud Services bir [hizmet olarak platform](https://azure.microsoft.com/overview/what-is-paas/) (PaaS) örneğidir. [Azure App Service](../app-service/overview.md)gibi, bu teknoloji ölçeklenebilir, güvenilir ve çalışır maliyetli uygulamaları destekleyecek şekilde tasarlanmıştır. App Service sanal makinelerde (VM) barındırıldığından aynı şekilde Azure Cloud Services de aynı şekilde barındırılır. Ancak VM 'Lerde daha fazla denetiminiz vardır. Azure Cloud Services kullanan VM 'Lere kendi yazılımınızı yükleyebilir ve bunlara uzaktan erişebilirsiniz.
 
-![Azure bulut Hizmetleri diyagramı](./media/cloud-services-choose-me/diagram.png)
+![Azure Cloud Services diyagramı](./media/cloud-services-choose-me/diagram.png)
 
-Daha fazla denetim aynı zamanda daha az kullanım kolaylığı anlamına gelir. Ek denetimi seçenekleri gerekmedikçe, genellikle daha hızlı ve kolay bir web uygulamasını almak ve Web Apps çalıştıran özelliği App Service, Azure Cloud Services'a kıyasla.
+Daha fazla denetim de daha az kullanım kolaylığı anlamına gelir. Ek denetim seçeneklerine ihtiyacınız yoksa, Azure Cloud Services kıyasla App Service Web Apps özelliğinde bir Web uygulamasının çalışır duruma getirmek genellikle daha hızlı ve kolaydır.
 
-Azure Cloud Services rolleri iki tür vardır. İkisi arasındaki tek fark, rolünüzün Vm'lerinde barındırılan nasıl şöyledir:
+İki tür Azure Cloud Services rolü vardır. İkisi arasındaki tek fark, rolünüzün VM 'lerde barındırılmasından farklı olur:
 
-* **Web rolü**: Otomatik olarak dağıtır ve uygulamanızı IIS üzerinden barındırır.
+* **Web rolü**: Uygulamanızı IIS üzerinden otomatik olarak dağıtır ve barındırır.
 
-* **Çalışan rolü**: IIS kullanmaz ve, uygulama başına çalıştırır.
+* **Çalışan rolü**: IIS kullanmaz ve uygulamanızı tek başına çalıştırır.
 
-Örneğin, basit bir uygulama yalnızca bir tek bir web rolü, hizmet veren bir Web sitesi kullanabilirsiniz. Daha karmaşık bir uygulama kullanıcılardan gelen istekleri işlemek için bir web rolü kullanın ve ardından bu istekleri işlemek için bir çalışan rolü geçirin. (Bu iletişim kullanabilir [Azure Service Bus](../service-bus-messaging/service-bus-messaging-overview.md) veya [Azure kuyruk depolama](../storage/common/storage-introduction.md).)
+Örneğin, basit bir uygulama yalnızca tek bir Web rolü kullanabilir ve bir Web sitesine hizmet verebilir. Daha karmaşık bir uygulama, kullanıcılardan gelen istekleri işlemek için bir Web rolü kullanabilir ve sonra bu istekleri işlenmek üzere bir çalışan rolüne geçirebilir. (Bu iletişim [Azure Service Bus](../service-bus-messaging/service-bus-messaging-overview.md) veya [Azure kuyruk depolaması](../storage/common/storage-introduction.md)kullanabilir.)
 
-Önceki şekilde anlaşılacağı gibi tek bir uygulamanın tüm sanal makineler aynı bulut hizmetinde çalıştırın. Uygulamanın sanal makinelerde kullanıcılara erişim tek bir genel IP adresi, isteklerle üzerinden uygulama otomatik olarak yük dengeli. Platform [dağıtır ve ölçekler](cloud-services-how-to-scale-portal.md) Vm'leri bir Azure Cloud Services uygulamasında bir şekilde tek bir donanım hata noktası sorununu önler.
+Yukarıdaki şekilde önerirken, tek bir uygulamadaki tüm VM 'Ler aynı bulut hizmetinde çalışır. Kullanıcılar, uygulama VM 'lerine otomatik olarak yük dengelemesi yapılan istekler ile tek bir genel IP adresi aracılığıyla uygulamaya erişir. Platform, bir Azure Cloud Services uygulamasındaki VM 'Leri, tek bir donanım arızasını önleyen bir biçimde [ölçeklendirir ve dağıtır](cloud-services-how-to-scale-portal.md) .
 
-Sanal uygulamaları çalıştırmak olsa da, Azure Cloud Services, PaaS, altyapı (ıaas) olarak değil sağladığını anlamak önemlidir. Hakkında düşünmek yöntemlerinden biri aşağıda verilmiştir. Iaas, gibi Azure sanal makineler ile ilk oluşturur ve uygulamanızın çalıştığı ortamı yapılandırın. Bu ortama uygulamanızı dağıttıktan sonra. Bu dünyanın hemen her VM'deki işletim sistemi düzeltme eki uygulama yeni sürümlerini dağıtma gibi şeyler yaparak yönetmekten sorumlu. Paas'ta aksine, bu ortam zaten var gibi olur. Yapmanız gereken tek şey uygulamanızı dağıtın. Bu yeni sürümleri işletim sistemi dağıtımı dahil olmak üzere çalışan platform Yönetimi sizin yerinize gerçekleştirilir.
+Uygulamalar VM 'lerde çalıştırılsa da, Azure Cloud Services 'nin hizmet olarak altyapı (IaaS) değil PaaS sağladığını anlamak önemlidir. İşte bunu düşünmek için bir yol. Azure sanal makineler gibi IaaS ile öncelikle uygulamanızın çalıştırıldığı ortamı oluşturup yapılandırırsınız. Ardından, uygulamanızı bu ortama dağıtırsınız. Her VM 'de işletim sisteminin yeni düzeltme eki uygulanmış sürümlerini dağıtma gibi şeyler yaparak bu dünyanın büyük bir bölümünü yönetmekten siz sorumlusunuz. PaaS 'de, bunun aksine ortam zaten var. Yapmanız gerekir, uygulamanızı dağıtmaktır. İşletim sisteminin yeni sürümlerini dağıtma dahil, üzerinde çalıştığı platformun yönetimi sizin için işlenir.
 
 ## <a name="scaling-and-management"></a>Ölçeklendirme ve yönetim
-Azure Cloud Services, sanal makineler oluşturmayın. Bunun yerine, her ne kadar "üç web rolü örnekleri" ve "iki çalışan rolü örnekleri." gibi istediğiniz Azure söyleyen bir yapılandırma dosyası sağlayın Platforma daha sonra bunları sizin için oluşturur. Hala seçtiğiniz [boyutu](cloud-services-sizes-specs.md) bu Vm'leri yedekleme olmalıdır, ancak açıkça bunları kendiniz oluşturursunuz yok. Uygulamanızın büyük bir yükü işlemek gerekiyorsa daha fazla sanal makine için isteyebilir ve bu örneklere Azure oluşturur. Yükünü azaltır, bu örnekleri kapatacak ve bunlar için ödeme durdurun.
+Azure Cloud Services ile sanal makineler oluşturmazsınız. Bunun yerine, "üç web rolü örneği" ve "iki çalışan rolü örneği" gibi her bir kaç tane beğeneceğinin Azure 'a bildiren bir yapılandırma dosyası sağlarsınız. Ardından platform bunları sizin için oluşturur. Hala bu sanal makinelerin [hangi boyutta olduğunu](cloud-services-sizes-specs.md) seçmeniz gerekir, ancak bunları kendi kendinize kendiniz oluşturmazsınız. Uygulamanızın daha büyük bir yükü işlemesi gerekiyorsa, daha fazla VM isteyebilirsiniz ve Azure bu örnekleri oluşturur. Yük azaldıkça, bu örnekleri kapatabilir ve bunların ücretini ödeyerek durdurabilirsiniz.
 
-Bir Azure Cloud Services uygulamasına genellikle iki adımlı bir işlem ile kullanıcılar için kullanılabilir hale getirilir. Bir geliştiricinin ilk [uygulama yüklemeleri](cloud-services-how-to-create-deploy-portal.md) platformun hazırlama alanına. Geliştirici için hazır olduğunda yapma uygulama canlı, bunlar Azure portalını kullanarak üretime hazırlama. Bu [hazırlama ve üretim arasında geçiş](cloud-services-how-to-manage-portal.md#swap-deployments-to-promote-a-staged-deployment-to-production) kullanıcılarına bozmadan yeni sürüme yükseltilmesi çalışan bir uygulama sağlar kapalı kalma süresi ile yapılabilir.
+Azure Cloud Services uygulaması genellikle iki adımlı bir işlem aracılığıyla kullanıcılara sunulur. Bir geliştirici öncelikle [uygulamayı](cloud-services-how-to-create-deploy-portal.md) platformun hazırlama alanına yükler. Geliştirici uygulamayı canlı hale getirmek için kullanıma hazırsa, üretimi üretim ile değiştirmek için Azure portal kullanırlar. [Hazırlama ve üretim arasındaki bu anahtar](cloud-services-how-to-manage-portal.md#swap-deployments-to-promote-a-staged-deployment-to-production) , çalışan bir uygulamanın, kullanıcılarını bozmadan yeni bir sürüme yükseltilmesini sağlayan kapalı kalma süresi olmadan yapılabilir.
 
 ## <a name="monitoring"></a>İzleme
-Azure bulut Hizmetleri, izleme de sağlar. Sanal makineler gibi başarısız bir fiziksel sunucu algılar ve bu sunucuda yeni bir makine üzerinde çalışan Vm'leri yeniden başlatır. Ancak, Azure bulut Hizmetleri başarısız Vm'lerinizi ve uygulamalarınızı, yalnızca donanım hataları algılar. Sanal makineleri farklı bir aracı her web ve çalışan rolü içinde vardır ve böylece hatalar oluştuğunda yeni VM'ler ve uygulama örnekleri başlatabilirsiniz.
+Azure Cloud Services Ayrıca izleme sağlar. Sanal makineler gibi, başarısız bir fiziksel sunucu algılar ve yeni bir makinede o sunucuda çalışan VM 'Leri yeniden başlatır. Ancak Azure Cloud Services, yalnızca donanım arızalarını değil, başarısız VM 'Leri ve uygulamaları da algılar. Sanal makinelerden farklı olarak, her bir Web ve çalışan rolü içinde bir aracı vardır ve bu nedenle, başarısızlık oluştuğunda yeni VM 'Ler ve uygulama örnekleri başlatabilir.
 
-Azure Cloud Services PaaS yapısını çok diğer etkileri vardır. En önemli uygulamaları bu teknolojiyi tüm web veya çalışan rolü örneği başarısız olduğunda düzgün çalışması için mesajlarının biridir. Bunu başarmak için bir Azure Cloud Services uygulamasına kendi sanal dosya sisteminde durumunu korumak olmamalıdır. Sanal makineler ile oluşturulan Vm'lerden farklı olarak, Azure bulut Hizmetleri sanal makinelerine yapılan yazma işlemleri kalıcı değildir. Sanal makine veri diski gibi hiçbir şey yoktur. Bunun yerine, bir Azure Cloud Services uygulamasına açıkça tüm durumu Azure SQL veritabanı, BLOB'lar, tablolar veya başka bir dış depolama yazmanız gerekir. Bu şekilde uygulamaları oluşturmaya bunları ölçek kolaylaştırır ve hataya daha dayanıklı, Azure bulut hizmetlerinin her iki önemli hedefleri olan.
+Azure Cloud Services PaaS doğası diğer etkileri de vardır. En önemli bir deyişle, Web veya çalışan rolü örneği başarısız olduğunda bu teknolojide oluşturulan uygulamaların doğru şekilde yazılması gerekir. Bunu başarmak için, bir Azure Cloud Services uygulamasının kendi sanal makinelerinin dosya sisteminde durum koruması olmaması gerekir. Sanal makinelerle oluşturulan VM 'lerden farklı olarak, Azure Cloud Services VM 'lerine yapılan yazmaları kalıcı olmaz. Sanal makine veri diski gibi bir şey yoktur. Bunun yerine, bir Azure Cloud Services uygulamasının tüm durumu Azure SQL veritabanı, blob 'lar, tablolar veya başka bir dış depolamaya açık olarak yazması gerekir. Uygulamaların bu şekilde oluşturulması, hem önemli Azure Cloud Services amaçları olan hatanın ölçeklendirilmesini ve daha dayanıklı olmasını kolaylaştırır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* [. NET'te bir bulut hizmeti uygulaması oluşturma](cloud-services-dotnet-get-started.md) 
-* [Node.js'de bir bulut hizmeti uygulaması oluşturma](cloud-services-nodejs-develop-deploy-app.md) 
-* [PHP'de bir bulut hizmeti uygulaması oluşturma](../cloud-services-php-create-web-role.md) 
-* [Python'da bir bulut hizmeti uygulaması oluşturma](cloud-services-python-ptvs.md)
+* [.NET 'te bir bulut hizmeti uygulaması oluşturma](cloud-services-dotnet-get-started.md) 
+* [Node. js ' de bir bulut hizmeti uygulaması oluşturma](cloud-services-nodejs-develop-deploy-app.md) 
+* [PHP 'de bir bulut hizmeti uygulaması oluşturma](../cloud-services-php-create-web-role.md) 
+* [Python 'da bir bulut hizmeti uygulaması oluşturma](cloud-services-python-ptvs.md)
 
 
 

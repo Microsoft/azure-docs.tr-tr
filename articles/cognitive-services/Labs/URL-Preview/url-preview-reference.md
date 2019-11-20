@@ -1,7 +1,7 @@
 ---
-title: Proje URL'si Önizleme başvurusu
+title: Proje URL 'SI önizleme başvurusu
 titlesuffix: Azure Cognitive Services
-description: Proje URL'si Önizleme uç noktası için başvuru.
+description: Proje URL 'SI önizleme uç noktası için başvuru.
 services: cognitive-services
 author: mikedodaro
 manager: nitinme
@@ -10,137 +10,138 @@ ms.subservice: url-preview
 ms.topic: reference
 ms.date: 03/29/2018
 ms.author: rosh
-ms.openlocfilehash: 69db722295c9c81d45913bd078fe9cc5ab74c512
-ms.sourcegitcommit: 41ca82b5f95d2e07b0c7f9025b912daf0ab21909
+ROBOTS: NOINDEX
+ms.openlocfilehash: f92c0faaaa3aa0cd2af16a031f3bed4c6b41fc22
+ms.sourcegitcommit: ad9120a73d5072aac478f33b4dad47bf63aa1aaa
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "60462597"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68706841"
 ---
-# <a name="project-url-preview-v7-reference"></a>Proje URL'si Önizleme v7 başvurusu
+# <a name="project-url-preview-v7-reference"></a>Proje URL 'SI önizleme v7 başvurusu
 
-URL önizlemesi Web kaynaklarını kısa açıklamaları blog gönderileri, forum tartışmalarına, Önizleme sayfalarını, vb. için destekler. URL, Internet kaynağının herhangi bir türde olabilir: Web sayfası, haber, resim veya video. Sorgu, bir http veya https şemasına sahip bir mutlak URL olmalıdır; Göreli URL'ler veya diğer düzenleri gibi ftp: / / desteklenmez.
+URL önizlemesi, blog gönderileri, Forum tartışmaları, önizleme sayfaları vb. için web kaynaklarının kısa açıklamalarını destekler. URL herhangi bir Internet kaynağı türü olabilir: Web sayfası, Haberler, resim veya video. Sorgu, http veya https düzenine sahip mutlak bir URL olmalıdır; göreli URL 'Ler veya ftp://gibi diğer şemalar desteklenmez.
 
-URL önizlemesi kullanan uygulamalar, sorgu parametresi önizlemek için bir URL uç noktasına Web istekleri göndermek. İstek içermelidir *Ocp-Apim-Subscription-Key* başlığı.
+URL önizlemesi kullanan uygulamalar, bir sorgu parametresinde önizlemesi yapılacak bir URL ile uç noktaya Web istekleri gönderir. İstek, *OCP-apim-Subscription-Key* üst bilgisini içermelidir.
 
-JSON yanıtı Önizleme bilgilerini ayrıştırılabilir: ad, bir kaynağın açıklamasını *isFamilyFriendly*ve temsili bir görüntü ve tam kaynak çevrimiçi erişim sağlayan bağlantılar.
+JSON yanıtı, Önizleme bilgileri için ayrıştırılabilir: ad, kaynak, *isFamilyFriendly*ve temsili bir görüntüye ve tüm kaynağa çevrimiçi erişim sağlayan bağlantıların açıklaması.
 
-URL önizlemesi yalnızca verilerden Önizleme parçacıkları ve küçük resim görüntüleriyle köprülü sosyal medyada sohbet Robotu veya benzer teklifleri paylaşımı son kullanıcı tarafından başlatılan URL'deki kaynak sitelerini görüntülemek için kullanmanız gerekir. Değil kopyalayın, saklamak veya gerekir proje URL'si Önizlemesi'nden aldığınız herhangi bir veri önbelleği. Web sitesi ya da içerik sahipleri alabileceğiniz önizlemelerini devre dışı bırakmak için tüm istekleri sahip olmanız gerekir.
+Sosyal medya, sohbet bot veya benzer tekliflerde Son Kullanıcı tarafından başlatılan URL paylaşımında, kaynak sitelerine köprü uygulanmış önizleme kod parçacıklarını ve küçük resim görüntülerini görüntülemek için yalnızca URL önizlemesindeki verileri kullanmanız gerekir. Proje URL 'SI önizlemeden aldığınız herhangi bir veriyi kopyalamamanız, depolamanız veya önbelleğe almamanız gerekir. Web sitesi veya içerik sahiplerinden alabileceğiniz önizlemeleri devre dışı bırakmak için herhangi bir isteği dikkate almalısınız.
 
 ## <a name="endpoint"></a>Uç Nokta
-URL önizlemesi sonuçlarının istemek için aşağıdaki uç noktaya bir istek gönderin. Daha fazla özellikleri tanımlamak için başlık ve URL parametrelerini kullanın.
+URL önizleme sonuçları istemek için aşağıdaki uç noktaya bir istek gönderin. Daha fazla belirtim tanımlamak için üstbilgiler ve URL parametreleri kullanın.
 
-GET uç noktası:
+Uç nokta al:
 ```
 https://api.labs.cognitive.microsoft.com/urlpreview/v7.0/search?q=queryURL
 
 ```
 
-İstek, HTTPS protokolünü kullanmak ve ardından sorgu parametresi içerir:
+İsteğin HTTPS protokolünü kullanması ve aşağıdaki sorgu parametresini içermesi gerekir:
 
-q - Önizleme URL'si tanımlayan sorgu
+q-önizlemesi yapılacak URL 'YI tanımlayan sorgu
 
-Aşağıdaki bölümler yanıt nesneleri, sorgu parametreleri ve arama sonuçlarını etkileyecek üstbilgileri hakkında teknik ayrıntılar sağlar.
+Aşağıdaki bölümlerde, yanıt nesneleri, sorgu parametreleri ve arama sonuçlarını etkileyen üstbilgiler hakkında teknik ayrıntılar sağlanmaktadır.
 
-İstekleri içermelidir üstbilgileri hakkında daha fazla bilgi için bkz: [üstbilgileri](#headers).
+İsteklerin içermesi gereken üstbilgiler hakkında daha fazla bilgi için bkz. [üstbilgiler](#headers).
 
-İstekleri içermelidir sorgu parametreleri hakkında daha fazla bilgi için bkz: [sorgu parametreleri](#query-parameters).
+İsteklerin içermesi gereken sorgu parametreleri hakkında daha fazla bilgi için bkz. [Query Parameters](#query-parameters).
 
-JSON hakkında bilgi yanıt içerdiğini nesneleri için bkz. [yanıt nesneleri](#response-objects).
+Yanıtın içerdiği JSON nesneleri hakkında daha fazla bilgi için bkz. [Response Objects](#response-objects).
 
-Maksimum sorgu URL'SİNİN uzunluğu 2.048 karakterdir. URL uzunluğu sınırı aşmadığından emin olmak için sorgu parametrelerinizin uzunluğu en fazla 1500'den az karakter olmalıdır. URL 2.048 karakterden uzunsa sunucu 404 bulunamadı hatası döndürür.
+Sorgu URL 'SI uzunluğu üst sınırı 2.048 karakterdir. URL uzunluğunun sınırı aşmadığından emin olmak için, sorgu parametrelerinizin en fazla uzunluğu 1.500 karakterden az olmalıdır. URL 2.048 karakteri aşarsa, sunucu 404 ' i döndürür.
 
-İzin verilen kullanım ve sonuçları görüntüleme hakkında daha fazla bilgi için bkz. [kullanın ve gereksinimlerini görüntülemek](use-display-requirements.md).
+İzin verilen kullanım ve sonuçların görüntülenmesi hakkında daha fazla bilgi için bkz. [kullanımı ve görüntüleme gereksinimleri](use-display-requirements.md).
 
 > [!NOTE]
-> URL önizlemesi, diğer arama API'lerini için anlamlı olan bazı istek üst etkilemez
-> - Pragma – URL önizlemesi önbellek kullanıp kullanmadığını denetim çağırana sahip değil
-> - Kullanıcı Aracısı – şu an için Önizleme API URL'si farklı yanıtlar PC, dizüstü bilgisayar veya mobil yayılan çağrıları için sağlamaz.
+> Diğer arama API 'Leri için anlamlı olan bazı istek üstbilgileri URL önizlemeyi etkilemez
+> - Pragma – çağıran, URL önizlemesinin önbellek kullanıp kullanmadığını denetler
+> - Kullanıcı Aracısı – şimdilik, URL önizleme API 'Si bılgısayar, dizüstü bilgisayar veya mobil bilgisayarlardan gelen çağrılar için farklı yanıtlar sağlamaz.
 > 
-> Ayrıca, bazı parametreler için URL önizleme API'sı şu anda anlamlı değildir, ancak gelecekte geliştirilmiş Genelleştirme için kullanılabilir.
+> Ayrıca, bazı parametreler URL önizleme API 'si için şu anda anlamlı değildir, ancak gelecekte iyileştirilmiş Genelleştirme için kullanılabilir.
 
 ## <a name="headers"></a>Üst bilgiler
-İstek ve yanıt içerebilecek üst bilgiler verilmiştir.
+Bir istek ve yanıtın içerebilme üstbilgileri aşağıda verilmiştir.
 
 |Üstbilgi|Açıklama|
 |------------|-----------------|
 |<a name="market" />BingAPIs-Market|Yanıt üst bilgisi.<br /><br /> İstek tarafından kullanılan pazar. Biçimi şöyledir: \<languageCode\>-\<countryCode\>. Örneğin, tr-TR.|
 |<a name="traceid" />BingAPIs-TraceId|Yanıt üst bilgisi.<br /><br /> İsteğin ayrıntılarını içeren günlük girdisinin kimliği. Hata oluştuğunda, bu kimliği yakalayın. Sorunu belirleyemez ve çözemezseniz, Destek ekibine diğer bilgilerle birlikte bu kimliği de sağlayın.|
 |<a name="subscriptionkey" />Ocp-Apim-Subscription-Key|Gerekli istek üst bilgisi.<br /><br /> [Bilişsel Hizmetler](https://www.microsoft.com/cognitive-services/)'de bu hizmete kaydolduğunuzda aldığınız abonelik anahtarı.|
-|<a name="clientid" />X-MSEdge-ClientID|İsteğe bağlı istek ve yanıt üst bilgisi.<br /><br /> Bing, kullanıcılara tüm Bing API çağrılarında tutarlı bir davranış sağlamak için bu üst bilgiyi kullanır. Bing sık sık yeni özellikler ve geliştirmeler dağıtır ve farklı dağıtımlarda trafik ataması yapmak için anahtar olarak istemci kimliğini kullanır. Bir kullanıcı için birden çok istekte aynı istemci kimliğini kullanmazsanız, Bing kullanıcıyı birden çok çakışan dağıtıma atayabilir. Birden çok çakışan dağıtıma eklenmek, tutarsız bir kullanıcı deneyimine yol açabilir. Örneğin, ikinci isteğin dağıtım ataması ilkinden farklıysa, beklenmeyen bir deneyim yaşanabilir. Ayrıca, Bing istemci kimliğini kullanarak web sonuçlarını istemci kimliğinin arama geçmişine uyarlayabilir ve bu sayede kullanıcıya daha zengin bir deneyim sağlayabilir.<br /><br /> Bing, istemci kimliği tarafından oluşturulan etkinliği analiz ederek sonuç derecelendirmelerini geliştirmeye yardımcı olması için de bu üst bilgiyi kullanabilir. İlgi geliştirmeleri Bing API'lerinin daha kaliteli sonuçlar vermesine yardımcı olur ve böylelikle API tüketicisi için daha yüksek tıklama oranları getirir.<br /><br />Bu üst bilgi için geçerli olan temel kullanım kuralları şunlardır:<br /><ul><li>Cihazda uygulamanızı kullanan her kullanıcının Bing tarafından oluşturulan benzersiz bir istemci kimliği olmalıdır.<br /><br/>İsteğe bu üst bilgiyi eklemezseniz, Bing bir kimlik oluşturur ve bu kimliği X-MSEdge-ClientID yanıt üst bilgisinde döndürür. İsteğe bu üst bilgiyi EKLEMEMENİZ gereken tek durum, söz konusu cihazda kullanıcının uygulamanızı ilk kez kullanmasıdır.<br /><br/></li><li>Cihazda uygulamanızın bu kullanıcı için yaptığı her Bing API'si isteğinde istemci kimliğini kullanın.<br /><br/></li><li>**DİKKAT:** Bu istemci kimliği için herhangi bir authenticatable kullanıcı hesabı bilgisi değişkenlerinden değil emin olmanız gerekir.</li><br/><li>İstemci kimliğinin kalıcı olmasını sağlayın. Tarayıcı uygulamasında kimliği kalıcı hale getirmek için, tüm oturumlarda kimliğin kullanmasını sağlayacak bir kalıcı HTTP tanımlama bilgisi kullanın. Oturum tanımlama bilgisi kullanmayın. Mobil uygulamalar gibi diğer uygulamalarda, kimliği kalıcı hale getirmek için cihazın kalıcı depolamasını kullanın.<br /><br/>Kullanıcı o cihazda uygulamanızı yeniden kullandığında, kalıcı hale getirdiğiniz istemci kimliğini alın.</li></ul><br /> **NOT:** Bing yanıtlarını olabilir veya bu başlığı içermeyebilir. Yanıt bu üst bilgiyi içeriyorsa, istemci kimliğini yakalayın ve o cihazda kullanıcı için bunu izleyen tüm Bing isteklerinde onu kullanın.<br /><br /> **NOT:** X MSEdge ClientID eklerseniz, istekte tanımlama bilgisi içermemelidir.|
+|<a name="clientid" />X-MSEdge-ClientID|İsteğe bağlı istek ve yanıt üst bilgisi.<br /><br /> Bing, kullanıcılara tüm Bing API çağrılarında tutarlı bir davranış sağlamak için bu üst bilgiyi kullanır. Bing sık sık yeni özellikler ve geliştirmeler dağıtır ve farklı dağıtımlarda trafik ataması yapmak için anahtar olarak istemci kimliğini kullanır. Bir kullanıcı için birden çok istekte aynı istemci kimliğini kullanmazsanız, Bing kullanıcıyı birden çok çakışan dağıtıma atayabilir. Birden çok çakışan dağıtıma eklenmek, tutarsız bir kullanıcı deneyimine yol açabilir. Örneğin, ikinci isteğin dağıtım ataması ilkinden farklıysa, beklenmeyen bir deneyim yaşanabilir. Ayrıca, Bing istemci kimliğini kullanarak web sonuçlarını istemci kimliğinin arama geçmişine uyarlayabilir ve bu sayede kullanıcıya daha zengin bir deneyim sağlayabilir.<br /><br /> Bing, istemci kimliği tarafından oluşturulan etkinliği analiz ederek sonuç derecelendirmelerini geliştirmeye yardımcı olması için de bu üst bilgiyi kullanabilir. İlgi geliştirmeleri Bing API'lerinin daha kaliteli sonuçlar vermesine yardımcı olur ve böylelikle API tüketicisi için daha yüksek tıklama oranları getirir.<br /><br />Bu üst bilgi için geçerli olan temel kullanım kuralları şunlardır:<br /><ul><li>Cihazda uygulamanızı kullanan her kullanıcının Bing tarafından oluşturulan benzersiz bir istemci kimliği olmalıdır.<br /><br/>İsteğe bu üst bilgiyi eklemezseniz, Bing bir kimlik oluşturur ve bu kimliği X-MSEdge-ClientID yanıt üst bilgisinde döndürür. İsteğe bu üst bilgiyi EKLEMEMENİZ gereken tek durum, söz konusu cihazda kullanıcının uygulamanızı ilk kez kullanmasıdır.<br /><br/></li><li>Cihazda uygulamanızın bu kullanıcı için yaptığı her Bing API'si isteğinde istemci kimliğini kullanın.<br /><br/></li><li>**ÖZELLIKLE** Bu Istemci KIMLIĞININ, herhangi bir kimlik doğrulayan Kullanıcı hesabı bilgisine bağlanabilir olmadığından emin olmanız gerekir.</li><br/><li>İstemci kimliğinin kalıcı olmasını sağlayın. Tarayıcı uygulamasında kimliği kalıcı hale getirmek için, tüm oturumlarda kimliğin kullanmasını sağlayacak bir kalıcı HTTP tanımlama bilgisi kullanın. Oturum tanımlama bilgisi kullanmayın. Mobil uygulamalar gibi diğer uygulamalarda, kimliği kalıcı hale getirmek için cihazın kalıcı depolamasını kullanın.<br /><br/>Kullanıcı o cihazda uygulamanızı yeniden kullandığında, kalıcı hale getirdiğiniz istemci kimliğini alın.</li></ul><br /> **NOT:** Bing yanıtları bu üstbilgiyi içermeyebilir veya içermeyebilir. Yanıt bu üst bilgiyi içeriyorsa, istemci kimliğini yakalayın ve o cihazda kullanıcı için bunu izleyen tüm Bing isteklerinde onu kullanın.<br /><br /> **NOT:** X-MSEdge-ClientID ' yi eklerseniz, isteğe tanımlama bilgilerini dahil etmeniz gerekir.|
 |<a name="clientip" />X-MSEdge-ClientIP|İsteğe bağlı istek üst bilgisi.<br /><br /> İstemci cihazının IPv4 veya IPv6 adresi. IP adresi, kullanıcının konumunu bulmak için kullanılır. Bing konum bilgisini kullanarak güvenli arama davranışını saptar.<br /><br /> Adresi karartmayın (örneğin, son sekiz karakteri 0'la değiştirerek). Adresin karartılması, cihazın gerçek konumuna yakın olmayan bir konum sonucu verir ve bu da Bing'in hatalı sonuçlar sağlamasına yol açabilir.|
 
 ## <a name="query-parameters"></a>Sorgu parametreleri
-Aşağıdaki sorgu parametreleri istek içerebilir. Gerekli Parametreler için gerekli sütununa bakın. URL gereken sorgu parametrelerine kodlayın. Sorgu, bir http veya https şemasına sahip bir mutlak URL olmalıdır; Göreli URL'ler veya ftp gibi diğer düzenleri desteklemiyoruz: / /
+İstek aşağıdaki sorgu parametrelerini içerebilir. Gerekli parametreler için gereken sütuna bakın. Sorgu parametrelerini URL kodlamanız gerekir. Sorgu, http veya https düzenine sahip mutlak bir URL olmalıdır; göreli URL 'Leri veya ftp://gibi diğer düzenleri desteklemiyoruz
 
-|Ad|Değer|Tür|Gerekli|
+|Ad|Değer|Type|Gerekli|
 |----------|-----------|----------|--------------|
-|<a name="mkt" />mkt|Sonuçların geldiği pazar. <br /><br />Olası Pazar değerler listesi için Pazar kodları bölümüne bakın.<br /><br /> **NOT:** URL önizleme API'sı şu anda yalnızca ABD coğrafya ve İngilizce dilini desteklemektedir.<br /><br />|String|Evet|
-|<a name="query" />q|Önizleme URL'si|String|Evet|
-|<a name="responseformat" />responseFormat|Yanıt için kullanılacak medya türü. Büyük küçük harf duyarsız olası değerler şunlardır:<br /><ul><li>JSON</li><li>JSONLD</li></ul><br /> JSON varsayılandır. JSON hakkında bilgi yanıt içerdiğini nesneleri için bkz. [yanıt nesneleri](#response-objects).<br /><br />JsonLd belirtirseniz, yanıt gövdesi, arama sonuçlarını içeren JSON-LD nesneler içerir. JSON-LD hakkında daha fazla bilgi için bkz. [JSON-LD](https://json-ld.org/).|String|Hayır|
-|<a name="safesearch"/>safeSearch|Geçersiz yetişkinlere yönelik içeriği veya korsan içeriği, 400 ' hata koduyla engellendi ve *isFamilyFriendly* bayrağı alınmadı. <p>Yetişkinlere yönelik içeriği için yasal, aşağıda davranıştır. Durum kodu 200 döndürür ve *isFamilyFriendly* bayrağı false olarak ayarlanır.<ul><li>safeSearch strict =: Başlık, açıklama, URL ve görüntü döndürülmez.</li><li>safeSearch Orta; = Başlık, URL ve açıklama ancak açıklayıcı görüntü alın.</li><li>safeSearch; = Tüm yanıt nesneleri/öğeleri – başlık, URL, açıklama ve resim alın.</li></ul> |String|Gerekli değildir. </br> Varsayılan olarak safeSearch için strict =.|
+|<a name="mkt" />mkt|Sonuçların geldiği pazar. <br /><br />Olası Pazar değerlerinin listesi için bkz. Pazar kodları.<br /><br /> **NOT:** URL önizleme API 'SI Şu anda yalnızca bızı Coğrafya ve Ingilizce dilini destekliyor.<br /><br />|Dize|Evet|
+|<a name="query" />ç|Önizlenecek URL|Dize|Evet|
+|<a name="responseformat" />responseFormat|Yanıt için kullanılacak medya türü. Aşağıdakiler, büyük/küçük harf duyarsız değerlerdir.<br /><ul><li>JSON</li><li>JSONLD</li></ul><br /> Varsayılan değer JSON ' dır. Yanıtın içerdiği JSON nesneleri hakkında daha fazla bilgi için bkz. [Response Objects](#response-objects).<br /><br />JsonLd belirtirseniz, yanıt gövdesi, arama sonuçlarını içeren JSON-LD nesnelerini içerir. JSON-LD hakkında daha fazla bilgi için bkz. [JSON-ld](https://json-ld.org/).|Dize|Hayır|
+|<a name="safesearch"/>safeSearch|Hatalı yetişkin içeriği veya korsan içerik 400 hata koduyla engelleniyor ve *isFamilyFriendly* bayrağı döndürülmüyor. <p>Yasal yetişkin içeriği için aşağıdaki davranış vardır. Durum kodu 200 döndürür ve *isFamilyFriendly* bayrağı false olarak ayarlanır.<ul><li>Güvenli Arama = katı: Başlık, açıklama, URL ve görüntü döndürülmeyecektir.</li><li>Güvenli Arama = orta; Açıklayıcı görüntüyü değil başlık, URL ve açıklama alın.</li><li>Güvenli Arama = kapalı; Tüm Yanıt nesneleri/öğeleri – başlık, URL, açıklama ve görüntü al.</li></ul> |Dize|Gerekli değildir. </br> Varsayılan olarak safeSearch = Strict olur.|
 
 ## <a name="response-objects"></a>Yanıt nesneleri
-Yanıt şeması ya da bir [Web] sayfasıdır veya ErrorResponse, Web araması API'si olduğu gibi. İstek başarısız olursa, en üst düzey nesnedir [ErrorResponse](#errorresponse) nesne.
+Yanıt şeması, Web Araması API 'sinde olduğu gibi bir [Web sayfası] ya da ErrorResponse 'dır. İstek başarısız olursa, en üst düzey nesne [errorResponse](#errorresponse) nesnesidir.
 
 |Object|Açıklama|
 |------------|-----------------|
-|[Web sayfası](#webpage)|Önizleme özniteliklerini içeren üst düzey JSON nesnesi.|
+|[Web](#webpage)|Önizlemenin özniteliklerini içeren üst düzey JSON nesnesi.|
 
 ### <a name="error"></a>Hata
-Gerçekleşen hata tanımlar.
+Oluşan hatayı tanımlar.
 
-|Öğe|Açıklama|Tür|
+|Öğe|Açıklama|Type|
 |-------------|-----------------|----------|
-|<a name="error-code" />Kod|Hata kategorisi tanımlar hata kodu. Olası kodlarının listesi için bkz. [hata kodları](#error-codes).|String|
-|<a name="error-message" />İleti|Hatanın açıklaması.|String|
-|<a name="error-moredetails" />moreDetails|Hata hakkında ek bilgi sağlayan bir açıklama.|String|
-|<a name="error-parameter" />Parametre|Sorgu parametresi hataya neden olan istek.|String|
-|<a name="error-subcode" />Alt|Hatayı tanımlar hata kodu. Örneğin, varsa `code` InvalidRequest, olan `subCode` ParameterInvalid veya ParameterInvalidValue olabilir. |String|
-|<a name="error-value" />Değer|Geçerli değildi sorgu parametrenin değeri.|String|
+|<a name="error-code" />kodudur|Hata kategorisini tanımlayan hata kodu. Olası kodların listesi için bkz. [hata kodları](#error-codes).|Dize|
+|<a name="error-message" />İleti|Hatanın açıklaması.|Dize|
+|<a name="error-moredetails" />Ayrıntılı Ayrıntılar|Hata hakkında ek bilgi sağlayan bir açıklama.|Dize|
+|<a name="error-parameter" />parametresinin|İstekte hataya neden olan sorgu parametresi.|Dize|
+|<a name="error-subcode" />Alt|Hatayı tanımlayan hata kodu. Örneğin, `code` `subCode` ınvalidrequest ise parametergeçersiz veya parameterınvalidvalue olabilir. |Dize|
+|<a name="error-value" />deeri|Sorgu parametresinin değeri geçerli değil.|Dize|
 
 ### <a name="errorresponse"></a>ErrorResponse
-Başarısız istek olduğunda yanıt içeren üst düzey nesnesi.
+İstek başarısız olduğunda yanıtın içerdiği en üst düzey nesne.
 
-|Ad|Değer|Tür|
+|Ad|Value|Type|
 |----------|-----------|----------|
-|_type|Tür ipucu.|String|
-|<a name="errors" />Hataları|İsteğin neden başarısız olma nedenlerini tanımlayan hataların listesi.|[Hata](#error)]|
+|_tür|İpucu yazın.|Dize|
+|<a name="errors" />hatası|İsteğin başarısız olma nedenlerini betimleyen hataların listesi.|[Hata](#error) []|
 
-### <a name="webpage"></a>Web sayfası
-Hakkında bilgilerini tanımlayan bir önizleme Web sayfası.
+### <a name="webpage"></a>Web
+Önizleme aşamasında bir Web sayfası hakkındaki bilgileri tanımlar.
 
-|Ad|Değer|Tür|
+|Ad|Value|Type|
 |----------|-----------|----------|
-|name|Sayfa başlığı, mutlaka HTML Başlığı|String|
-|url|Aslında gezinilen URL'si (istek ve ardından yeniden yönlendirmeleri)|String|
-|description|Sayfa içeriği ve kısa açıklama|String|
-|isFamilyFriendly|Web dizindeki öğeler için en doğru; Bu algılama yöntemi yalnızca bir URL ve sayfa içeriği göre gerçek zamanlı öğesinden yapın|boole|
-|primaryImageOfPage/contentUrl|Önizlemede dahil etmek için temsili bir görüntü URL'si|String|
+|name|HTML başlığı değil, sayfa başlığı|Dize|
+|url|Gerçekten gezinmekte olan URL (istek yeniden yönlendirmeleri takip edebilir)|Dize|
+|description|Sayfanın ve içeriğin kısa açıklaması|Dize|
+|isFamilyFriendly|Web dizinindeki öğeler için en doğru; gerçek zamanlı getirme, bu algılamayı yalnızca URL 'ye göre değil, sayfa içeriğini değil|boolean|
+|Primaryımageofpage/contentUrl|Önizlemeye dahil edilecek temsili bir görüntünün URL 'SI|Dize|
 
-### <a name="identifiable"></a>Tanımlama
-|Ad|Değer|Tür|
+### <a name="identifiable"></a>Maya
+|Ad|Value|Type|
 |-------------|-----------------|----------|
-|id|Bir kaynak tanımlayıcısı|String|
+|id|Kaynak tanımlayıcısı|Dize|
 
 ## <a name="error-codes"></a>Hata kodları
 
-Bir isteği döndüren olası HTTP durum kodları şunlardır:
+Bir isteğin döndürdüğü olası HTTP durum kodları aşağıda verilmiştir.
 
-|Durum kodu|Açıklama|
+|Durum Kodu|Açıklama|
 |-----------------|-----------------|
 |200|Başarılı.|
-|400|Sorgu parametrelerden biri eksik veya geçerli değil.|
-|400|ServerError, ResourceError alt kod: İstenen URL erişilemedi|
-|400|ServerError, ResourceError alt kod: İstenen URL (HTTP 404 döndürdüyse dahil) bir başarı kodu döndürmedi|
-|400|InvalidRequest, engellenen alt kod: İstenen URL yetişkinlere yönelik içerik içerebilir ve engellendi|
-|401|Abonelik anahtarı eksik veya geçerli değil.|
-|403|Kullanıcının kimliği doğrulanır (örneğin, bunlar bir geçerli abonelik anahtarı kullanılır), ancak istenen kaynak için izniniz yok.<br /><br /> Çağıranın sorguları başına aylık kota aşılırsa Bing bu durumu döndürebilir.|
-|410|İstek HTTP yerine HTTPS protokolü kullanılır. Yalnızca desteklenen protokol https'dir.|
-|429|Çağıran ikinci kota başına sorguları aştı.|
+|400|Sorgu parametrelerinden biri eksik veya geçersiz.|
+|400|Sunucuhatası, alt kod ResourceError: İstenen URL 'ye ulaşılamıyor|
+|400|Sunucuhatası, alt kod ResourceError: İstenen URL, bir başarı kodu döndürmedi (HTTP 404 döndürüldüğünden dahil)|
+|400|Invalidrequest, alt kod engellendi: İstenen URL yetişkinlere yönelik içerik içerebilir ve engellendi|
+|401|Abonelik anahtarı eksik veya geçersiz.|
+|403|Kullanıcının kimliği doğrulanır (örneğin, geçerli bir abonelik anahtarı kullanmışsa), ancak istenen kaynak için izinleri yoktur.<br /><br /> Çağıran, her ay için sorguları aşarsa, bu durum da bu durumu döndürebilir.|
+|410|İstek HTTPS protokolü yerine HTTP kullandı. Yalnızca HTTPS desteklenen protokoldür.|
+|429|Çağıran, saniye başına sorgu sorgularını aştı.|
 |500|Beklenmeyen sunucu hatası.|
 
-İstek başarısız olursa, yanıtını içeren bir [ErrorResponse](#errorresponse) listesini içeren bir nesne [hata](#error) hata nedenini açıklayan bir nesne. Hata parametresi, ilgili olup olmadığını `parameter` alan sorun parametresi tanımlar. Ve hata için bir parametre değeri, ilişkili olup olmadığını `value` alan, geçerli olmayan bir değer tanımlar.
+İstek başarısız olursa, yanıt hatanın nedenini açıklayan [hata](#error) nesnelerinin bir listesini Içeren bir [errorResponse](#errorresponse) nesnesi içerir. Hata bir parametreyle ilişkiliyse, `parameter` alan, sorun olan parametreyi tanımlar. Hata bir parametre değeriyle ilişkiliyse, `value` alan geçerli olmayan değeri tanımlar.
 
 ```json
 {
@@ -168,15 +169,15 @@ Bir isteği döndüren olası HTTP durum kodları şunlardır:
 }
 ```
 
-Olası hata kodu ve alt hata kodu değerleri şunlardır.
+Olası hata kodu ve alt hata kodu değerleri aşağıda verilmiştir.
 
 |Kod|Alt|Açıklama
 |-|-|-
-|ServerError|UnexpectedError<br/>ResourceError<br/>NotImplemented|HTTP durum kodunu 500'dür.
-|InvalidRequest|ParameterMissing<br/>ParameterInvalidValue<br/>HttpNotAllowed<br/>Engellendi|Her isteğin herhangi bir bölümü geçerli değil Bing InvalidRequest döndürür. Örneğin, bir gerekli parametre eksik veya bir parametre değeri geçerli değil.<br/><br/>Hata ParameterMissing veya ParameterInvalidValue ise, HTTP durum kodu 400 ' dir.<br/><br/>HTTPS yerine HTTP protokolünü kullanıyorsanız, Bing HttpNotAllowed döndürür ve 410 HTTP durum kodudur.
-|RateLimitExceeded|Hiçbir alt kodları|/ Saniye (QPS) sorguları veya sorgu başına aylık (QPM) kota aştığında Bing RateLimitExceeded döndürür.<br/><br/>QPS aşarsanız, HTTP durum kodu 429 Bing döndürür ve QPM aşarsanız, Bing 403 döndürür.
-|InvalidAuthorization|AuthorizationMissing<br/>AuthorizationRedundancy|Bing çağıran doğrulandığında Bing InvalidAuthorization döndürür. Örneğin, `Ocp-Apim-Subscription-Key` üstbilgisi eksik veya abonelik anahtarı geçerli değil.<br/><br/>Birden fazla kimlik doğrulama yöntemi belirtmek, yedeklilik meydana gelir.<br/><br/>Hata InvalidAuthorization ise, HTTP durum kodunu 401 ' dir.
-|InsufficientAuthorization|AuthorizationDisabled<br/>AuthorizationExpired|Çağıran kaynağa erişmek için izinlere sahip olmadığı durumlarda Bing InsufficientAuthorization döndürür. Bu abonelik anahtarını devre dışı bırakıldı veya süresi ortaya çıkabilir. <br/><br/>Hata InsufficientAuthorization, HTTP durum kodu 403 ise.
+|ServerError|UnexpectedError<br/>ResourceError<br/>Uygulanmadı|HTTP durum kodu 500 ' dir.
+|Invalidrequest|ParameterMissing<br/>Parameterınvalidvalue<br/>HttpNotAllowed<br/>Engellendi|İsteğin herhangi bir bölümü geçerli değilse Bing, ınvalidrequest döndürüyor. Örneğin, gerekli bir parametre eksik veya bir parametre değeri geçerli değil.<br/><br/>Hata ParameterMissing veya Parameterınvalidvalue ise, HTTP durum kodu 400 ' dir.<br/><br/>HTTPS yerine HTTP protokolünü kullanırsanız, Bing HttpNotAllowed öğesini döndürür ve HTTP durum kodu 410 ' dir.
+|Ratelimitexcebaşında|Alt kod yok|Bing, sorgu/saniye (QPS) veya aylık sorgu (QPM) kotası her aşışınızda Ratelimitexceden başına döndürür.<br/><br/>QPS 'yi aşarsanız Bing, 429 HTTP durum kodunu döndürür ve QPM 'yi aşarsanız Bing, 403 döndürür.
+|Invalidauthorleştirme|AuthorizationMissing<br/>Authorizationartıklık|Bing çağıranın kimliğini doğrulayamayan Bing, ınvalidauthortıcıyla geri döndürür. Örneğin, `Ocp-Apim-Subscription-Key` üst bilgi eksik veya abonelik anahtarı geçerli değil.<br/><br/>Birden fazla kimlik doğrulama yöntemi belirtirseniz artıklık oluşur.<br/><br/>Hata eksik ise, HTTP durum kodu 401 ' dir.
+|InsufficientAuthorization|AuthorizationDisabled<br/>Authorization, zaman aşımına uğradı|Çağıranın kaynağa erişim izni olmadığında Bing, InsufficientAuthorization döndürür. Abonelik anahtarı devre dışı bırakılmışsa veya süresi dolmuşsa bu durum oluşabilir. <br/><br/>Hata InsufficientAuthorization ise, HTTP durum kodu 403 ' dir.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 - [C# hızlı başlangıcı](csharp.md)
