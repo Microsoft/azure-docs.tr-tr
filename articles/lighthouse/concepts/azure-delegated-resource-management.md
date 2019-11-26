@@ -12,7 +12,7 @@ ms.locfileid: "74133378"
 ---
 # <a name="azure-delegated-resource-management"></a>Azure tarafından atanan temsilcinin kaynak yönetimi
 
-Azure Temsilcili kaynak yönetimi, Azure Use 'ın temel bileşenlerinden biridir. Azure Temsilcili kaynak yönetimi sayesinde, hizmet sağlayıcıları müşteri katılımı ve ekleme deneyimlerini basitleştirecek şekilde, yetki verilen kaynakları çeviklik ve duyarlıkla yönetdirebilir.
+Azure Temsilcili kaynak yönetimi, Azure Lighthouse'un temel bileşenlerinden biridir. Azure Temsilcili kaynak yönetimi sayesinde, servis sağlayıcılar temsilci kaynaklarını çeviklik ve hassasiyetle büyük ölçekte yönetirken müşterilerin katılımını ve başlangıç deneyimlerini basitleştirebilir.
 
 ## <a name="what-is-azure-delegated-resource-management"></a>Azure Temsilcili kaynak yönetimi nedir?
 
